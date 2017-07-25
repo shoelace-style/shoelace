@@ -1,3 +1,5 @@
+/* eslint-env browser, jquery */
+/* eslint prefer-arrow-callback: "off" */
 //
 // Example tabs plugin for Shoelace
 //
