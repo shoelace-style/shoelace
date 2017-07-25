@@ -1,0 +1,219 @@
+/*! Shoelace variables */
+
+:root {
+  /* Fonts */
+  --font-family-sans-serif: sans-serif;
+  --font-family-serif: serif;
+  --font-family-system: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-family-monospace: Menlo, Consolas, "DejaVu Sans Mono", monospace;
+
+  /* Colors (most courtesy of http://clrs.cc/) */
+  --color-primary: tomato;
+  --color-white: white;
+  --color-navy: #001f3f;
+  --color-blue: #0074d9;
+  --color-aqua: #7fdbff;
+  --color-teal: #39cccc;
+  --color-olive: #3d9970;
+  --color-green: #2ecc40;
+  --color-lime: #01ff70;
+  --color-yellow: #ffdc00;
+  --color-orange: #ff851b;
+  --color-red: #ff4136;
+  --color-maroon: #85144b;
+  --color-fuchsia: #f012be;
+  --color-purple: #b10dc9;
+  --color-black: #111;
+  --color-gray: #aaa;
+  --color-silver: #ddd;
+
+  /* States */
+  --state-success: var(--color-green);
+  --state-info: var(--color-aqua);
+  --state-warning: var(--color-orange);
+  --state-danger: var(--color-red);
+  --state-inverse: var(--color-black);
+
+  /* Components */
+  --component-bg-color: #f2f2f2;
+  --component-border-color: #ddd;
+  --component-border-radius: .25rem;
+  --component-border-width: 1px;
+  --component-spacing: 1rem;
+  --component-spacing-big: 2rem;
+  --component-spacing-small: .5rem;
+
+  /* Content */
+  --body-bg-color: var(--color-white);
+  --body-color: var(--color-black);
+  --font-family: var(--font-family-system);
+  --font-size: 1rem; /* Most browsers use a default font size of 16px */
+  --font-size-big: 1.25rem;
+  --font-size-small: .875rem;
+  --font-weight-light: 300;
+  --font-weight: 400;
+  --font-weight-bold: 700;
+  --line-height: 1.5;
+  --text-muted: var(--color-gray);
+
+  --code-font-size: 90%;
+  --code-color: var(--color-olive);
+  --code-border-radius: var(--component-border-radius);
+  --code-bg-color: var(--component-bg-color);
+  --code-spacing-x: calc(var(--font-size) * .4);
+  --code-spacing-y: calc(var(--font-size) * .2);
+
+  --headings-font-family: var(--font-family-system);
+  --headings-font-weight: var(--font-weight-light);
+  --headings-line-height: 1.1;
+  --headings-margin-bottom: .5rem;
+  --headings-color: inherit;
+  --headings-font-size-h1: 2.5rem;
+  --headings-font-size-h2: 2rem;
+  --headings-font-size-h3: 1.75rem;
+  --headings-font-size-h4: 1.5rem;
+  --headings-font-size-h5: 1.25rem;
+  --headings-font-size-h6: 1rem;
+
+  --hr-width: 1px;
+
+  --kbd-font-size: 90%;
+  --kbd-color: var(--color-white);
+  --kbd-border-radius: var(--component-border-radius);
+  --kbd-bg-color: var(--color-black);
+  --kbd-spacing-x: calc(var(--font-size) * .4);
+  --kbd-spacing-y: calc(var(--font-size) * .2);
+
+  --link-color: var(--color-primary);
+  --link-text-decoration: none;
+  --link-color-hover: var(--link-color);
+  --link-text-decoration-hover: underline;
+
+  --mark-color: inherit;
+  --mark-bg-color: var(--color-yellow);
+  --mark-spacing-x: calc(var(--font-size) * .4);
+  --mark-spacing-y: calc(var(--font-size) * .2);
+
+  --placeholder-color: var(--text-muted);
+
+  --pre-color: var(--code-color);
+  --pre-border-radius: var(--component-border-radius);
+  --pre-bg-color: var(--code-bg-color);
+  --pre-max-height: none;
+
+  --selection-color: var(--color-white);
+  --selection-bg-color: var(--color-primary);
+
+  /* Alerts */
+  --alert-color: var(--color-white);
+  --alert-border-radius: var(--component-border-radius);
+  --alert-bg-color-primary: var(--color-primary);
+  --alert-bg-color-success: var(--state-success);
+  --alert-bg-color-info: var(--state-info);
+  --alert-bg-color-warning: var(--state-warning);
+  --alert-bg-color-danger: var(--state-danger);
+  --alert-bg-color-inverse: var(--state-inverse);
+  --alert-spacing-x: var(--component-spacing);
+  --alert-spacing-y: var(--component-spacing);
+
+  /* Badges */
+  --badge-font-size: .9rem;
+  --badge-color: var(--color-white);
+  --badge-border-radius: var(--component-border-radius);
+  --badge-bg-color-primary: var(--color-primary);
+  --badge-bg-color-success: var(--state-success);
+  --badge-bg-color-info: var(--state-info);
+  --badge-bg-color-warning: var(--state-warning);
+  --badge-bg-color-danger: var(--state-danger);
+  --badge-bg-color-inverse: var(--state-inverse);
+  --badge-spacing-x: calc(var(--component-spacing) * .4);
+  --badge-spacing-y: calc(var(--component-spacing) * .15);
+
+  /* Buttons */
+  --button-font-family: inherit;
+  --button-font-weight: inherit;
+  --button-font-size: var(--font-size);
+  --button-color: var(--color-white);
+  --button-border-radius: var(--component-border-radius);
+  --button-box-shadow: inset 0 2px 0 rgba(255, 255, 255, .1), inset 0 -2px 0 rgba(0, 0, 0, .1);
+  --button-box-shadow-hover: inset 0 2px 5rem rgba(0, 0, 0, .1), inset 0 -2px 0 rgba(0, 0, 0, .1);
+  --button-box-shadow-active: inset 0 2px 5rem rgba(0, 0, 0, .1), inset 0 2px 0 rgba(0, 0, 0, .1);
+  --button-bg-color-primary: var(--color-primary);
+  --button-bg-color-success: var(--state-success);
+  --button-bg-color-info: var(--state-info);
+  --button-bg-color-warning: var(--state-warning);
+  --button-bg-color-danger: var(--state-danger);
+  --button-bg-color-inverse: var(--state-inverse);
+
+  /* Forms */
+  --fieldset-border-color: var(--component-border-color);
+  --fieldset-border-width: var(--component-border-width);
+  --fieldset-border-radius: var(--component-border-radius);
+  --fieldset-spacing-x: var(--component-spacing);
+  --fieldset-spacing-y: var(--component-spacing);
+
+  --input-font-family: inherit;
+  --input-font-size: var(--font-size);
+  --input-font-weight: inherit;
+  --input-height: 2rem;
+  --input-height-big: 2.75rem;
+  --input-height-small: 1.25rem;
+  --input-color: var(--body-color);
+  --input-border-color: var(--component-border-color);
+  --input-border-focus-color: var(--color-primary);
+  --input-border-width: 1px;
+  --input-border-radius: var(--component-border-radius);
+  --input-bg-color: var(--color-white);
+  --input-box-shadow: inset 0 1px 0 rgba(0, 0, 0, .05);
+  --input-readonly-bg-color: var(--component-bg-color);
+  --input-range-track-color: var(--component-bg-color);
+  --input-range-track-box-shadow: inset 0 1px 0 rgba(0, 0, 0, .05);
+  --input-range-thumb-color: var(--color-primary);
+  --input-range-thumb-height: 2rem;
+
+  --input-invalid-color: var(--state-danger);
+  --input-invalid-border-color: var(--state-danger);
+  --input-valid-color: var(--state-success);
+  --input-valid-border-color: var(--state-success);
+
+  /* Loaders */
+  --loader-bg-color: var(--component-bg-color);
+  --loader-color: var(--color-primary);
+  --loader-size: 2rem;
+  --loader-width: .25rem;
+  --loader-speed: 750ms;
+  --loader-spacing-x: var(--component-spacing-small);
+  --loader-spacing-y: 0;
+
+  /* Spacing Utilties */
+  --spacing-small: var(--component-spacing);
+  --spacing-medium: calc(var(--component-spacing) * 2);
+  --spacing-big: calc(var(--component-spacing) * 4);
+
+  /* Tabs */
+  --tab-bg-color: var(--body-bg);
+  --tab-bg-color-hover: var(--body-bg);
+  --tab-bg-color-active: var(--link-color);
+  --tab-bg-color-disabled: var(--body-bg);
+  --tab-border-radius: var(--component-border-radius);
+  --tab-color: var(--link-color);
+  --tab-color-hover: var(--link-color-hover);
+  --tab-color-active: var(--color-white);
+  --tab-color-disabled: var(--text-muted);
+  --tab-spacing-x: var(--component-spacing);
+  --tab-spacing-y: calc(var(--component-spacing) / 2);
+
+  --tab-pane-border-color: var(--component-border-color);
+  --tab-pane-border-radius: var(--component-border-radius);
+  --tab-pane-border-width: var(--component-border-width);
+  --tab-pane-spacing-x: var(--component-spacing);
+  --tab-pane-spacing-y: var(--component-spacing);
+
+  /* Tables */
+  --table-border-color: var(--component-border-color);
+  --table-border-width: var(--component-border-width);
+  --table-header-bg-color: transparent;
+  --table-stripe-bg-color: var(--component-bg-color);
+  --table-spacing-x: calc(var(--component-spacing-small) * 1.5);
+  --table-spacing-y: var(--component-spacing-small);
+}

@@ -1,0 +1,24 @@
+/*!
+  Shoelace.css - 1.0.0-beta1
+  (c) A Beautiful Site, LLC
+
+  Released under the MIT license
+  Source: https://github.com/claviska/shoelace-css
+*/
+
+/* Reset */
+@import url('normalize.css');
+
+/* Shoelace variables and base styles */
+@import url('variables.css');
+@import url('content.css');
+
+/* Components */
+@import url('alerts.css');
+@import url('badges.css');
+@import url('buttons.css');
+@import url('forms.css');
+@import url('loaders.css');
+@import url('tabs.css');
+@import url('tables.css');
+@import url('utilities.css');

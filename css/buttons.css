@@ -1,0 +1,92 @@
+/*! Shoelace buttons */
+
+button,
+.button {
+  font-family: var(--button-font-family);
+  font-size: var(--button-font-size);
+  font-weight: var(--button-font-weight);
+  text-align: center;
+  text-decoration: none;
+  color: var(--button-color);
+  background-color: var(--button-bg-color-primary);
+  border-radius: var(--button-border-radius);
+  border: none;
+  height: var(--input-height);
+  line-height: 1;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  padding: calc(var(--component-spacing) * .5) calc(var(--component-spacing) * .75);
+  box-shadow: var(--button-box-shadow);
+  cursor: pointer;
+  display: inline-block;
+  transition: .1s box-shadow, .1s background-color, .1s color;
+}
+
+.button-small {
+  font-size: calc(var(--button-font-size) * .8);
+  height: var(--input-height-small);
+  padding: calc(var(--component-spacing) * .25) calc(var(--component-spacing) * .5);
+}
+
+.button-big {
+  font-size: calc(var(--button-font-size) * 1.2);
+  height: var(--input-height-big);
+  padding: calc(var(--component-spacing) * .75) calc(var(--component-spacing) * 1);
+}
+
+.button-block {
+  width: 100% !important;
+  display: block;
+}
+
+.button-block + .button-block {
+  margin-top: 1rem;
+}
+
+button:hover,
+.button:hover {
+  color: var(--button-color);
+  text-decoration: none;
+}
+
+button:hover:not(:disabled),
+.button:hover:not(.disabled) {
+  box-shadow: var(--button-box-shadow-hover);
+}
+
+button:active:not(:disabled),
+.button.active:not(.disabled) {
+  color: var(--button-color);
+  box-shadow: var(--button-box-shadow-active);
+}
+
+button:disabled,
+.button.disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+.button-success { background-color: var(--button-bg-color-success); }
+.button-info { background-color: var(--button-bg-color-info); }
+.button-warning { background-color: var(--button-bg-color-warning); }
+.button-danger { background-color: var(--button-bg-color-danger); }
+.button-inverse { background-color: var(--button-bg-color-inverse); }
+
+.button-link {
+  background-color: transparent;
+  color: var(--link-color);
+  text-decoration: var(--link-text-decoration);
+  box-shadow: none;
+}
+
+.button-link:hover:not(:disabled) {
+  background-color: transparent;
+  color: var(--link-color-hover);
+  text-decoration: var(--link-text-decoration-hover);
+  box-shadow: none;
+}
+
+label.button input[type="file"] {
+  display: none;
+}

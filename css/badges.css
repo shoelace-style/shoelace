@@ -1,0 +1,21 @@
+/*! Shoelace badges */
+
+.badge {
+  font-size: var(--badge-font-size);
+  color: var(--badge-color);
+  background-color: var(--badge-bg-color-primary);
+  border-radius: var(--badge-border-radius);
+  padding: var(--badge-spacing-y) var(--badge-spacing-x);
+  vertical-align: baseline;
+  display: inline-block;
+}
+
+.badge:empty {
+  display: none;
+}
+
+.badge-success { background-color: var(--badge-bg-color-success); }
+.badge-info { background-color: var(--badge-bg-color-info); }
+.badge-warning { background-color: var(--badge-bg-color-warning); }
+.badge-danger { background-color: var(--badge-bg-color-danger); }
+.badge-inverse { background-color: var(--badge-bg-color-inverse); }

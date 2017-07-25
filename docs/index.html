@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="For when you don’t need the entire boot.">
+  <link rel="stylesheet" href="../dist/shoelace.min.css">
+  <link rel="stylesheet" href="docs.css">
+  <title>Shoelace.css: a back to the basics CSS starter kit</title>
+</head>
+<body>
+
+  <div class="body-wrap">
+    <header>
+      <h1>👟 Shoelace.css</h1>
+      <p class="text-muted text-small">
+        A back to the basics CSS starter kit. For when you don’t need the whole boot.
+      </p>
+    </header>
+
+    <!--********************************************************************************************
+    * Overview
+    *********************************************************************************************-->
+
+    <p id="overview">
+      Shoelace is a starter kit, not a framework. Think of it as a CSS reset sprinkled with helpful
+      components. Bootstrap users will find it familiar, yet refreshing.
+    </p>
+    <p>
+      Shoelace is highly customizable through
+      <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_variables">
+      CSS variables</a>. It doesn’t require Less, Sass, or any preprocessing at all. The minified
+      version is only 31KB.
+    </p>
+
+    <p>
+      Just link to the stylesheet, add your <a href="#customizing">customizations</a>, and start
+      building stuff.
+    </p>
+<pre>
+&lt;link rel=&quot;stylesheet&quot; href=&quot;dist/shoelace.min.css&quot;>
+</pre>
+    <p>
+      The purpose of this project is to provide a modern, lightweight, customizable, and extensible
+      boilerplate for building websites and web applications.
+    </p>
+    <p>
+      Shoelace was created by <a href="https://twitter.com/claviska">@claviska</a> for
+      <a href="https://www.surrealcms.com/">Surreal CMS</a>. It is available under the MIT license.
+      Love it? Consider making <a href="https://paypal.me/claviska">a small donation</a>.
+      🙌
+    </p>
+
+    <!--********************************************************************************************
+    * Contents
+    *********************************************************************************************-->
+
+    <h2 id="contents">Contents</h2>
+    <ul>
+      <li><a href="#customizing">Customizing</a></li>
+      <li><a href="#content">Content</a></li>
+      <li><a href="#alerts">Alerts</a></li>
+      <li><a href="#badges">Badges</a></li>
+      <li><a href="#buttons">Buttons</a></li>
+      <li><a href="#forms">Forms</a></li>
+      <li><a href="#loaders">Loaders</a></li>
+      <li><a href="#tabs">Tabs</a></li>
+      <li><a href="#tables">Tables</a></li>
+      <li><a href="#utilities">Utilities</a></li>
+      <li><a href="#grid-system">Grid System</a></li>
+      <li><a href="#icons">Icons</a></li>
+      <li><a href="#browser-support">Browser Support</a></li>
+    </ul>
+
+    <h3 id="customizing">Customizing</h3>
+    <p>
+      You can customize Shoelace without editing core files. This makes it easier to update later
+      on. To add customizations, simply override one or more of the CSS variables found in
+      <code>variables.css</code> in your own stylesheet.
+    </p>
+    <p>
+      For example, you can customize the default text color and background like this:
+    </p>
+<pre>
+:root {
+  --body-color: white;
+  --body-bg-color: black;
+}
+</pre>
+    <p>
+      Refer to <code>variables.css</code> for a complete list of variables in Shoelace.
+    </p>
+
+    <h4 id="using-variables">Using Variables</h4>
+    <p>
+      You can use any of Shoelace’s variables in your own stylesheet. This makes it easy to reuse
+      colors, paddings, etc. without hardcoding them, and provides a foundation for building your
+      own components to extend Shoelace.
+    </p>
+<pre>
+  .your-selector {
+    color: var(--state-danger);
+  }
+</pre>
+
+    <!--********************************************************************************************
+    * Content
+    *********************************************************************************************-->
+
+    <h2 id="content">Content</h2>
+    <p>
+      Shoelace gives you an easy way to customize most HTML elements with variables. You don’t need
+      to apply any classes to achieve these styles — just use the appropriate elements.
+    </p>
+    <p>
+      For easier spacing, Shoelace removes top margins and applies a bottom margin to block
+      elements. By default, text sizing and spacing is measured in <code>rem</code> and
+      <code>em</code> units.
+    </p>
+
+    <h3 id="headings">Headings <code>&lt;h1&gt; – &lt;h6&gt;</code></h3>
+    <h1 style="margin-top: 0;">Heading 1</h1>
+    <h2 style="margin-top: 0;">Heading 2</h2>
+    <h3 style="margin-top: 0;">Heading 3</h3>
+    <h4 style="margin-top: 0;">Heading 4</h4>
+    <h5 style="margin-top: 0;">Heading 5</h5>
+    <h6 style="margin-top: 0;">Heading 6</h6>
+
+    <h3 id="paragraphs">Paragraphs <code>&lt;p&gt;</code></h3>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat excepturi repellendus
+      nostrum dolorum dignissimos quis non, minus debitis laborum vero cupiditate sequi neque,
+      magnam dolore nemo possimus, soluta ducimus eaque.
+    </p>
+    <p>
+      Blanditiis ea qui, veritatis animi recusandae praesentium magnam. Commodi placeat, laboriosam
+      accusamus laudantium quasi eveniet soluta illo ducimus quis doloremque mollitia, officia
+      pariatur deleniti reprehenderit, maxime, dicta libero vero cum.
+    </p>
+
+    <h3 id="ordered-lists">Ordered Lists <code>&lt;ol&gt;</code></h3>
+    <ol>
+      <li>List item 1</li>
+      <li>List item 2
+        <ol>
+          <li>Nested item 1</li>
+          <li>Nested item 2</li>
+          <li>Nested item 3</li>
+        </ol>
+      </li>
+      <li>List item 3</li>
+    </ol>
+
+    <h3 id="unordered-lists">Unordered Lists <code>&lt;ul&gt;</code></h3>
+    <ul>
+      <li>List item 1</li>
+      <li>List item 2
+        <ul>
+          <li>Nested item 1</li>
+          <li>Nested item 2</li>
+          <li>Nested item 3</li>
+        </ul>
+        <li>List item 3</li>
+      </li>
+    </ul>
+
+    <h3 id="definition-lists">Definition Lists <code>&lt;dl&gt;</code></h3>
+    <dl>
+      <dt>Term 1</dt>
+      <dd>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum autem perferendis
+        exercitationem asperiores fuga incidunt, nam dicta amet. Dolor eligendi nisi praesentium
+        placeat officiis esse corporis molestiae. Doloremque accusamus, vel!
+      </dd>
+      <dt>Term 2</dt>
+      <dd>
+        Veritatis repellendus porro ipsam beatae temporibus natus id adipisci nobis accusantium
+        quidem eum fugit cupiditate deleniti nisi nesciunt dicta officia, enim, atque corporis neque
+        error. Unde saepe molestiae hic voluptatibus?
+      </dd>
+    </dl>
+
+    <h3 id="blockquotes">Blockquotes <code>&lt;blockquote&gt;</code></h3>
+    <blockquote>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia ipsam enim reprehenderit
+      placeat ab voluptate totam suscipit voluptas, culpa pariatur eos quas, sequi unde perferendis
+      officiis! Officiis eligendi eaque facilis.
+    </blockquote>
+
+    <h3 id="preformatted-text">Preformatted Text <code>&lt;pre&gt;</code></h3>
+<pre>
+CLS
+SCREEN 13
+PRINT "SHOELACE IS AWESOME"
+</pre>
+
+    <h3 id="text-formats">Text Formats</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Element</th>
+          <th>Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>&lt;strong&gt;</code></td>
+          <td><strong>This is strong text</strong></td>
+        </tr>
+        <tr>
+          <td><code>&lt;em&gt;</code></td>
+          <td><em>This is emphasized text</em></td>
+        </tr>
+        <tr>
+          <td><code>&lt;u&gt;</code></td>
+          <td><u>This is underlined text</u></td>
+        </tr>
+        <tr>
+          <td><code>&lt;s&gt;</code></td>
+          <td><s>This is strikethrough text</s></td>
+        </tr>
+        <tr>
+          <td><code>&lt;a&gt;</code></td>
+          <td><a href="#">This is link text</a></td>
+        </tr>
+        <tr>
+          <td><code>&lt;small&gt;</code></td>
+          <td><small>This is small text</small></td>
+        </tr>
+        <tr>
+          <td><code>&lt;big&gt;</code></td>
+          <td><big>This is big text</big></td>
+        </tr>
+        <tr>
+          <td><code>&lt;sup&gt;</code></td>
+          <td><sup>This is superscript text</sup></td>
+        </tr>
+        <tr>
+          <td><code>&lt;sub&gt;</code></td>
+          <td><sub>This is subscript text</sub></td>
+        </tr>
+        <tr>
+          <td><code>&lt;code&gt;</code></td>
+          <td><code>This is code text</code></td>
+        </tr>
+        <tr>
+          <td><code>&lt;samp&gt;</code></td>
+          <td><samp>This is samp text</samp></td>
+        </tr>
+        <tr>
+          <td><code>&lt;var&gt;</code></td>
+          <td><var>This is var text</var></td>
+        </tr>
+        <tr>
+          <td><code>&lt;kbd&gt;</code></td>
+          <td><kbd>This is kbd text</kbd></td>
+        </tr>
+        <tr>
+          <td><code>&lt;abbr&gt;</code></td>
+          <td><abbr title="Abbreviation">This is abbr text</abbr></td>
+        </tr>
+        <tr>
+          <td><code>&lt;del&gt;</code></td>
+          <td><del>This is del text</del></td>
+        </tr>
+        <tr>
+          <td><code>&lt;ins&gt;</code></td>
+          <td><ins>This is ins text</ins></td>
+        </tr>
+        <tr>
+          <td><code>&lt;mark&gt;</code></td>
+          <td><mark>This is mark text</mark></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!--********************************************************************************************
+    * Alerts
+    *********************************************************************************************-->
+
+    <h2 id="alerts">Alerts</h2>
+    <p>
+      Create an alert by applying the <code>alert alert-[modifier]</code> class to an element such
+      as a <code>div</code>.
+    </p>
+<pre>
+  &lt;div class=&quot;alert&quot;&gt;Default&lt;/div&gt;
+  &lt;div class=&quot;alert alert-success&quot;&gt;Success&lt;/div&gt;
+  &lt;div class=&quot;alert alert-info&quot;&gt;Info&lt;/span&gt;
+  &lt;div class=&quot;alert alert-warning&quot;&gt;Warning&lt;/div&gt;
+  &lt;div class=&quot;alert alert-danger&quot;&gt;Danger&lt;/div&gt;
+  &lt;div class=&quot;alert alert-inverse&quot;&gt;Inverse&lt;/div&gt;
+</pre>
+    <div class="alert">This is a default alert <a href="#">with link</a></div>
+    <div class="alert alert-success">This is a success alert <a href="#">with link</a></div>
+    <div class="alert alert-info">This is an info alert <a href="#">with link</a></div>
+    <div class="alert alert-warning">This is a warning alert <a href="#">with link</a></div>
+    <div class="alert alert-danger">This is a danger alert <a href="#">with link</a></div>
+    <div class="alert alert-inverse">This is an inverse alert <a href="#">with link</a></div>
+
+    <!--********************************************************************************************
+    * Badges
+    *********************************************************************************************-->
+
+    <h2 id="badges">Badges</h2>
+    <p>
+      Create a badge by applying the <code>badge badge-[state]</code> class to an element such as a
+      <code>&lt;span&gt;</code>. Badges are sized relative to their parent element.
+    </p>
+<pre>
+  &lt;span class=&quot;badge&quot;&gt;Default&lt;/span&gt;
+  &lt;span class=&quot;badge badge-success&quot;&gt;Success&lt;/span&gt;
+  &lt;span class=&quot;badge badge-info&quot;&gt;Info&lt;/span&gt;
+  &lt;span class=&quot;badge badge-warning&quot;&gt;Warning&lt;/span&gt;
+  &lt;span class=&quot;badge badge-danger&quot;&gt;Danger&lt;/span&gt;
+  &lt;span class=&quot;badge badge-inverse&quot;&gt;Inverse&lt;/span&gt;
+</pre>
+    <p>
+      <span class="badge">Default</span>
+      <span class="badge badge-success">Success</span>
+      <span class="badge badge-info">Info</span>
+      <span class="badge badge-warning">Warning</span>
+      <span class="badge badge-danger">Danger</span>
+      <span class="badge badge-inverse">Inverse</span>
+    </p>
+
+    <!--********************************************************************************************
+    * Buttons
+    *********************************************************************************************-->
+
+    <h2 id="buttons">Buttons</h2>
+    <p>
+      To create a button, use the <code>&lt;button&gt;</code> element or apply the
+      <code>button</code> class to another element such as an <code>&lt;a&gt;</code>. You can change
+      a button’s appearance using the <code>button-[state]</code> modifier.
+    </p>
+<pre>
+&lt;button type="button"&gt;Default&lt;/button&gt;
+&lt;button type="button" class=&quot;button-success&quot;&gt;Success&lt;/button&gt;
+&lt;button type="button" class=&quot;button-info&quot;&gt;Info&lt;/button&gt;
+&lt;button type="button" class=&quot;button-warning&quot;&gt;Warning&lt;/button&gt;
+&lt;button type="button" class=&quot;button-danger&quot;&gt;Danger&lt;/button&gt;
+&lt;button type="button" class=&quot;button-inverse&quot;&gt;Inverse&lt;/button&gt;
+&lt;button type=&quot;button&quot; class=&quot;button button-link&quot;&gt;Link&lt;/button&gt;
+</pre>
+    <p>
+      <button type="button">Default</button>
+      <button type="button" class="button-success">Success</button>
+      <button type="button" class="button-info">Info</button>
+      <button type="button" class="button-warning">Warning</button>
+      <button type="button" class="button-danger">Danger</button>
+      <button type="button" class="button-inverse">Inverse</button>
+      <button type="button" class="button-link">Link</button>
+    </p>
+    <p>
+      Use the <code>button-small</code> and <code>button-big</code> modifiers to change the size of
+      a button.
+    </p>
+    <p>
+      <button type="button" class="button-small">Small Button</button>
+      <button type="button">Normal Button</button>
+      <button type="button" class="button-big">Big Button</button>
+    </p>
+    <p>
+      Use the <code>button-block</code> modifier to make the button span the entire width of its
+      parent element. You can also mix and match modifiers as needed.
+    </p>
+    <p>
+      <button type="button" class="button-block button-small">Small Block Button</button>
+      <button type="button" class="button-block">Normal Block Button</button>
+      <button type="button" class="button-block button-big">Big Block Button</button>
+    </p>
+    <p>
+      Disabled buttons look like this. Set the <code>disabled</code> property on
+      <code>&lt;button&gt;</code> elements to achieve this effect. For all other elements, apply
+      <code>class=&quot;disabled&quot;</code> instead.
+    </p>
+    <p>
+      <button type="button" disabled>Default</button>
+      <button type="button" class="button-success" disabled>Success</button>
+      <button type="button" class="button-info disabled">Info</button>
+      <button type="button" class="button-warning" disabled>Warning</button>
+      <button type="button" class="button-danger" disabled>Danger</button>
+      <button type="button" class="button-inverse" disabled>Inverse</button>
+    </p>
+    <p>
+      You can force buttons to have an active state by applying the <code>active</code> class.
+    </p>
+    <p>
+      <button type="button" class="active">Default</button>
+      <button type="button" class="button-success active">Success</button>
+      <button type="button" class="button-info disabled active">Info</button>
+      <button type="button" class="button-warning active">Warning</button>
+      <button type="button" class="button-danger active">Danger</button>
+      <button type="button" class="button-inverse active">Inverse</button>
+    </p>
+
+    <h3 id="file-buttons">File Buttons</h3>
+    <p>
+      File inputs are notoriously hard to style properly in every browser. Shoelace offers file
+      buttons as an alternative. These are much easier to style consistently, but come with the
+      caveat that the name (or number) of files selected will not be automatically shown to the
+      user. This aspect of a file button’s UX can be handled effectively with JavaScript, but this
+      is left as an <a href="https://stackoverflow.com/questions/2189615/how-to-get-file-name-when-user-select-a-file-via-input-type-file">excercise
+      for the user</a>.
+    </p>
+    <p>
+      File buttons are simply <code>label</code> elements with the <code>button</code> class and a
+      nested file input.
+    </p>
+<pre>
+&lt;label class=&quot;button&quot;&gt;&lt;input type=&quot;file&quot;&gt;&lt;/label&gt;
+</pre>
+    <p>
+      <label class="button">Select File <input type="file"></label>
+    </p>
+
+    <!--********************************************************************************************
+    * Forms
+    *********************************************************************************************-->
+
+    <h2 id="forms">Forms</h2>
+    <p>
+      Shoelace gives you beautiful forms without hassle. Most form controls don’t need a special
+      class for styling.
+    </p>
+
+    <h3 id="inputs">Form Controls</h3>
+    <p>
+      Form controls are styled at 100% of the width of their parent element.
+    </p>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Input Type</th>
+          <th>Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>checkbox</code></td>
+          <td>
+            <label><input type="checkbox" checked> Checkbox 1</label><br>
+            <label><input type="checkbox"> Checkbox 2</label>
+          </td>
+        </tr>
+        <tr>
+          <td><code>date</code></td>
+          <td><input type="date"></td>
+        </tr>
+        <tr>
+          <td><code>email</code></td>
+          <td><input type="email"></td>
+        </tr>
+        <tr>
+          <td>
+            <code>file</code>
+            <br>
+            <span class="text-small text-muted">
+              File inputs aren’t supported. Use a <a href="#file-buttons">file button</a> instead.
+            </span>
+          </td>
+          <td>
+            <label class="button button-block">Select a File <input type="file"></label>
+          </td>
+        </tr>
+        <tr>
+          <td><code>number</code></td>
+          <td><input type="number"></td>
+        </tr>
+        <tr>
+          <td><code>password</code></td>
+          <td><input type="password"></td>
+        </tr>
+        <tr>
+          <td><code>radio</code></td>
+          <td>
+            <label><input type="Radio" name="radio" checked> Radio 1</label><br>
+            <label><input type="Radio" name="radio"> Radio 2</label>
+          </td>
+        </tr>
+        <tr>
+          <td><code>range</code></td>
+          <td><input type="range"></td>
+        </tr>
+        <tr>
+          <td><code>search</code></td>
+          <td><input type="search"></td>
+        </tr>
+        <tr>
+          <td><code>select</code></td>
+          <td>
+            <select>
+              <option>Item 1</option>
+              <option>Item 2</option>
+              <option>Item 3</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td><code>text</code></td>
+          <td><input type="text"></td>
+        </tr>
+        <tr>
+          <td><code>textarea</code></td>
+          <td><textarea rows="4"></textarea></td>
+        </tr>
+        <tr>
+          <td><code>time</code></td>
+          <td><input type="time"></td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      You can change the size of most form controls with the <code>input-small</code> and
+      <code>input-big</code> modifiers.
+    </p>
+<pre>
+&lt;input type=&quot;text&quot; class=&quot;input-small&quot; placeholder=&quot;Small&quot;&gt;
+&lt;input type=&quot;text&quot; placeholder=&quot;Default&quot;&gt;
+&lt;input type=&quot;text&quot; class=&quot;input-big&quot; placeholder=&quot;Big&quot;&gt;
+
+&lt;select class=&quot;input-small&quot;&gt;&lt;option&gt;Item&lt;/option&gt;&lt;/select&gt;
+&lt;select&gt;&lt;option&gt;Item&lt;/option&gt;&lt;/select&gt;
+&lt;select class=&quot;input-big&quot;&gt;&lt;option&gt;Item&lt;/option&gt;&lt;/select&gt;
+</pre>
+
+    <div class="two-column">
+      <p><input type="text" class="input-small" placeholder="Small"></p>
+      <p><input type="text" placeholder="Default"></p>
+      <p><input type="text" class="input-big" placeholder="Big"></p>
+      <p><select class="input-small"><option>Item</option></select></p>
+      <p><select><option>Item</option></select></p>
+      <p><select class="input-big"><option>Item</option></select></p>
+    </div>
+    <p>
+      Disabled form controls look like this:
+    </p>
+    <div class="input-block">
+      <input type="text" placeholder="Input" disabled>
+    </div>
+    <div class="input-block">
+      <label><input type="checkbox" disabled> Checkbox</label>
+      <label><input type="radio" disabled> Radio</label>
+    </div>
+    <p>
+      Read-only form controls look like this:
+    </p>
+    <div class="input-block">
+      <input type="text" readonly value="This is read-only">
+    </div>
+
+    <h3 id="form-groups">Form Groups</h3>
+    <p>
+      Related form controls can be grouped in a <code>&lt;fieldset&gt;</code>. An optional
+      <code>legend</code> can be used to display a name for the group.
+    </p>
+<pre>
+&lt;fieldset&gt;
+  &lt;legend&gt;User&lt;/legend&gt;
+  ...
+&lt;/fieldset&gt;
+</pre>
+    <fieldset>
+      <legend>Login</legend>
+      <div class="input-block">
+        <label>Username</label>
+        <input type="text">
+      </div>
+      <div class="input-block">
+        <label>Password</label>
+        <input type="password">
+      </div>
+      <div class="input-block">
+        <label>
+          <input type="checkbox"> Remember me
+        </label>
+      </div>
+      <div class="input-block">
+        <button type="button">Login</button>
+      </div>
+    </fieldset>
+
+    <h3 id="input-blocks">Input Blocks</h3>
+    <p>
+      For proper spacing of individual form controls and labels, wrap them in
+      <code>input-block</code> elements.
+    </p>
+<pre>
+&lt;div class=&quot;input-block&quot;&gt;
+  &lt;label&gt;Name&lt;/label&gt;
+  &lt;input type=&quot;text&quot;&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;input-block&quot;&gt;
+  &lt;label&gt;Email&lt;/label&gt;
+  &lt;input type=&quot;email&quot;&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;input-block&quot;&gt;
+  &lt;label&gt;&lt;input type=&quot;checkbox&quot;&gt; Remember me&lt;/label&gt;
+&lt;/div&gt;
+</pre>
+    <div class="input-block">
+      <label>Name</label>
+      <input type="text">
+    </div>
+    <div class="input-block">
+      <label>Email</label>
+      <input type="email">
+    </div>
+    <div class="input-block">
+      <label><input type="checkbox"> Remember me</label>
+    </div>
+
+    <h3 id="input-groups">Input Groups</h3>
+    <p>
+      Form controls and buttons can be grouped by wrapping them in <code>input-group</code>
+      containers.
+    </p>
+<pre>
+&lt;div class=&quot;input-group&quot;&gt;
+  &lt;input type=&quot;text&quot;&gt;
+  &lt;button type=&quot;button&quot; class=&quot;button&quot;&gt;Submit&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;input-group&quot;&gt;
+  &lt;button type=&quot;button&quot; class=&quot;button&quot;&gt;Submit&lt;/button&gt;
+  &lt;input type=&quot;text&quot;&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;input-group&quot;&gt;
+  &lt;input type=&quot;text&quot; placeholder=&quot;First&quot;&gt;
+  &lt;input type=&quot;text&quot; placeholder=&quot;Middle&quot;&gt;
+  &lt;input type=&quot;text&quot; placeholder=&quot;Last&quot;&gt;
+  &lt;button type=&quot;button&quot; class=&quot;button&quot;&gt;Submit&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;input-group&quot;&gt;
+  &lt;button type=&quot;button&quot; class=&quot;button&quot;&gt;Option 1&lt;/button&gt;
+  &lt;button type=&quot;button&quot; class=&quot;button&quot;&gt;Option 2&lt;/button&gt;
+  &lt;button type=&quot;button&quot; class=&quot;button&quot;&gt;Option 3&lt;/button&gt;
+&lt;/div&gt;
+</pre>
+    <div class="input-block">
+      <div class="input-group">
+        <input type="text">
+        <button type="button">Submit</button>
+      </div>
+    </div>
+
+    <div class="input-block">
+      <div class="input-group">
+        <button type="button">Submit</button>
+        <input type="text">
+      </div>
+    </div>
+
+    <div class="input-block">
+      <div class="input-group">
+        <input type="text" placeholder="First">
+        <input type="text" placeholder="Middle">
+        <input type="text" placeholder="Last">
+        <button type="button">Submit</button>
+      </div>
+    </div>
+
+    <div class="input-block">
+      <div class="input-group">
+        <button type="button">Option 1</button>
+        <button type="button">Option 2</button>
+        <button type="button">Option 3</button>
+      </div>
+    </div>
+
+    <h3 id="input-addons">Input Addons</h3>
+    <p>
+      To create an input addon, use <code>&lt;span class=&quot;input-addon&quot;&gt;</code>. Addons
+      can appear anywhere inside an input group. Use the <code>input-addon-[size]</code>
+      modifier to change the size to match adjacent form controls.
+    </p>
+<pre>
+&lt;div class=&quot;input-group&quot;&gt;
+  &lt;span class=&quot;input-addon input-addon-small&quot;&gt;$&lt;/span&gt;
+  &lt;input type=&quot;text&quot; class=&quot;input-small&quot;&gt;
+  &lt;span class=&quot;input-addon input-addon-small&quot;&gt;.00&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;input-group&quot;&gt;
+  &lt;span class=&quot;input-addon&quot;&gt;$&lt;/span&gt;
+  &lt;input type=&quot;text&quot;&gt;
+  &lt;span class=&quot;input-addon&quot;&gt;.00&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;input-group&quot;&gt;
+  &lt;span class=&quot;input-addon input-addon-big&quot;&gt;$&lt;/span&gt;
+  &lt;input type=&quot;text&quot; class=&quot;input-big&quot;&gt;
+  &lt;span class=&quot;input-addon input-addon-big&quot;&gt;.00&lt;/span&gt;
+&lt;/div&gt;
+</pre>
+
+    <div class="input-block">
+      <div class="input-group">
+        <span class="input-addon input-addon-small">$</span>
+        <input type="text" class="input-small">
+        <span class="input-addon input-addon-small">.00</span>
+      </div>
+    </div>
+
+    <div class="input-block">
+      <div class="input-group">
+        <span class="input-addon">$</span>
+        <input type="text">
+        <span class="input-addon">.00</span>
+      </div>
+    </div>
+
+    <div class="input-block">
+      <div class="input-group">
+        <span class="input-addon input-addon-big">$</span>
+        <input type="text" class="input-big">
+        <span class="input-addon input-addon-big">.00</span>
+      </div>
+    </div>
+
+    <h3 id="validation">Validation</h3>
+    <p>
+      Form controls can be made valid or invalid using the <code>input-valid</code> and
+      <code>input-invalid</code> modifiers. It’s better to apply modifiers to the surrounding
+      <code>input-block</code> so labels will be styled as well, but modifiers can be applied
+      directly to form controls as needed.
+    </p>
+<pre>
+&lt;div class=&quot;input-block input-valid&quot;&gt;
+  &lt;label&gt;Valid&lt;/label&gt;
+  &lt;input type=&quot;text&quot;&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;input-block input-invalid&quot;&gt;
+  &lt;label&gt;Invalid&lt;/label&gt;
+  &lt;input type=&quot;text&quot;&gt;
+&lt;/div&gt;
+</pre>
+    <div class="two-column">
+      <div class="input-block input-valid">
+        <label>Valid</label>
+        <input type="text">
+      </div>
+
+      <div class="input-block input-invalid">
+        <label>Invalid</label>
+        <input type="text">
+      </div>
+    </div>
+
+    <!--********************************************************************************************
+    * Loaders
+    *********************************************************************************************-->
+
+    <h2 id="loaders">Loaders</h2>
+    <p>
+      Create a pure CSS loader by applying the <code>loader</code> class to an empty
+      <code>&lt;span&gt;</code> element. You can use the <code>loader-small</code> and
+      <code>loader-big</code> modifiers to change the size.
+    </p>
+<pre>
+&lt;span class=&quot;loader loader-small&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;loader&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;loader loader-big&quot;&gt;&lt;/span&gt;
+</pre>
+    <p>
+      <span class="loader loader-small"></span>
+      <span class="loader"></span>
+      <span class="loader loader-big"></span>
+    </p>
+
+    <p>
+      You can simulate a background loader using <code>loader-bg</code>. This is achieved using
+      <code>position: relative</code> on the container and the <code>::after</code> pseudo-element.
+      You can use the <code>loader-bg-small</code> and <code>loader-bg-big</code> modifiers to
+      change the size.
+    </p>
+<pre>
+&lt;div class=&quot;loader-bg loader-bg-small&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;loader-bg&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;loader-bg loader-bg-big&quot;&gt;&lt;/div&gt;
+</pre>
+    <div class="loader-example clearfix">
+      <div class="loader-bg loader-bg-small"></div>
+      <div class="loader-bg"></div>
+      <div class="loader-bg loader-bg-big"></div>
+    </div>
+
+    <!--********************************************************************************************
+    * Tabs
+    *********************************************************************************************-->
+
+    <h2 id="tabs">Tabs</h2>
+    <p>
+      Tab sets can be created using the markup below. By default, Shoelace renders tabs as pills
+      because they look better than traditional tabs when rendered on smaller screens.
+    </p>
+    <p>
+      Note the class names used for the main container, the tab navs, and the tab panes. Also note
+      that each tabs links to its respective tab pane’s <code>id</code>.
+    </p>
+    <p>
+      To disable a tab, add <code>disabled</code> to the appropriate tab nav.
+    </p>
+<pre>
+&lt;div class=&quot;tabs&quot;&gt;
+  &lt;nav class=&quot;tabs-nav&quot;&gt;
+    &lt;a href=&quot;#tab-1&quot; class=&quot;active&quot;&gt;Tab 1&lt;/a&gt;
+    &lt;a href=&quot;#tab-2&quot;&gt;Tab 2&lt;/a&gt;
+    &lt;a href=&quot;#tab-3&quot;&gt;Tab 3&lt;/a&gt;
+    &lt;a href=&quot;#&quot; class=&quot;disabled&quot;&gt;Disabled&lt;/a&gt;
+  &lt;/nav&gt;
+
+  &lt;div class=&quot;tabs-pane active&quot; id=&quot;tab-1&quot;&gt;
+    ...
+  &lt;/div&gt;
+
+  &lt;div class=&quot;tabs-pane&quot; id=&quot;tab-2&quot;&gt;
+    ...
+  &lt;/div&gt;
+
+  &lt;div class=&quot;tabs-pane&quot; id=&quot;tab-3&quot;&gt;
+    ...
+  &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+    <div class="tabs">
+      <nav class="tabs-nav">
+        <a href="#tab-1" class="active">Tab 1</a>
+        <a href="#tab-2">Tab 2</a>
+        <a href="#tab-3">Tab 3</a>
+        <a href="#" class="disabled">Disabled</a>
+      </nav>
+
+      <div class="tabs-pane active" id="tab-1">
+        <h3>Tab 1</h3>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui repellat ea magni magnam
+          assumenda voluptas accusantium nemo. Iusto beatae illum mollitia aut quasi odit facilis
+          officiis, laudantium debitis! Excepturi, quis!
+        </p>
+      </div>
+
+      <div class="tabs-pane" id="tab-2">
+        <h3>Tab 2</h3>
+        <p>
+          Atque eius voluptatibus ipsa ex totam odit, quidem illo distinctio sit! Quod quae minus,
+          aut itaque. Mollitia, dolore! Facere molestiae necessitatibus sint recusandae incidunt
+          pariatur labore iste vel, velit odit.
+        </p>
+      </div>
+
+      <div class="tabs-pane" id="tab-3">
+        <h3>Tab 3</h3>
+        <p>
+          Aperiam asperiores optio iusto qui nisi, perspiciatis, ipsum, tenetur explicabo earum et
+          laboriosam odit magni maxime quos molestias aspernatur laudantium harum placeat tempora
+          quae necessitatibus, aut dignissimos totam non! Quod.
+        </p>
+      </div>
+    </div>
+
+    <p>
+      <strong>Tabs are not interactive by default!</strong> Shoelace is a CSS starter kit, not a
+      framework. For convenience, a lightweight sample script is provided to demonstrate how to
+      make tabs interactive.
+    </p>
+<pre>
+&lt;script src=&quot;js/tabs.js&quot;&gt;&lt;/script&gt;
+</pre>
+
+    <h3 id="vertical-tabs">Vertical Tabs</h3>
+    <p></p>
+    <p>
+      Tabs can be made vertical by adding custom CSS rules. Shoelace doesn’t include these styles by
+      default because of the many ways tabs can be positioned, customized, and made responsive.
+    </p>
+    <p>
+      Here’s an example of vertical tabs that uses the CSS grid. The markup is exactly the same as
+      the previous example, except the tabs container has a custom class and the following custom
+      styles.
+    </p>
+<pre>
+.tabs-vertical-example {
+  display: grid;
+  grid-template-columns: 25% 75%;
+  grid-gap: 2rem;
+  padding-right: 2rem;
+}
+
+.tabs-vertical-example .tabs-nav a {
+  display: block;
+}
+</pre>
+    <div class="tabs tabs-vertical-example">
+      <nav class="tabs-nav tabs-nav-block">
+        <a href="#tab-1" class="active">Tab 1</a>
+        <a href="#tab-2">Tab 2</a>
+        <a href="#tab-3">Tab 3</a>
+        <a href="#" class="disabled">Disabled</a>
+      </nav>
+
+      <div class="tabs-pane active" id="tab-1">
+        <h3>Tab 1</h3>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui repellat ea magni magnam
+          assumenda voluptas accusantium nemo. Iusto beatae illum mollitia aut quasi odit facilis
+          officiis, laudantium debitis! Excepturi, quis!
+        </p>
+      </div>
+
+      <div class="tabs-pane" id="tab-2">
+        <h3>Tab 2</h3>
+        <p>
+          Atque eius voluptatibus ipsa ex totam odit, quidem illo distinctio sit! Quod quae minus,
+          aut itaque. Mollitia, dolore! Facere molestiae necessitatibus sint recusandae incidunt
+          pariatur labore iste vel, velit odit.
+        </p>
+      </div>
+
+      <div class="tabs-pane" id="tab-3">
+        <h3>Tab 3</h3>
+        <p>
+          Aperiam asperiores optio iusto qui nisi, perspiciatis, ipsum, tenetur explicabo earum et
+          laboriosam odit magni maxime quos molestias aspernatur laudantium harum placeat tempora
+          quae necessitatibus, aut dignissimos totam non! Quod.
+        </p>
+      </div>
+    </div>
+
+    <!--********************************************************************************************
+    * Tables
+    *********************************************************************************************-->
+
+    <h2 id="tables">Tables</h2>
+    <p>
+      By default, tables are plain and unstyled. To create a styled table, apply the
+      <code>table</code> class to a table element.
+    </p>
+<pre>
+&lt;table class=&quot;table&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;&lt;th&gt;Item&lt;/th&gt;&lt;th&gt;Price&lt;/th&gt;&lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;Shoe Freshener&lt;/td&gt;&lt;td&gt;$4.79&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Shoe Glue&lt;/td&gt;&lt;td&gt;$2.50&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Shoe Polish&lt;/td&gt;&lt;td&gt;$5.25&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Shoelaces&lt;/td&gt;&lt;td&gt;$3.99&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</pre>
+    <table class="table">
+      <thead>
+        <tr><th>Item</th><th>Price</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Shoe Freshener</td><td>$4.79</td></tr>
+        <tr><td>Shoe Glue</td><td>$2.50</td></tr>
+        <tr><td>Shoe Polish</td><td>$5.25</td></tr>
+        <tr><td>Shoelaces</td><td>$3.99</td></tr>
+      </tbody>
+    </table>
+
+    <h3 id="striped-tables">Striped Tables</h3>
+    <p>
+      Use the <code>table-striped</code> modifier to add stripes to alternating rows.
+    </p>
+<pre>
+&lt;table class=&quot;table table-striped&quot;&gt;
+  ...
+&lt;/table&gt;
+</pre>
+    <table class="table table-striped">
+      <thead>
+        <tr><th>Item</th><th>Price</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Shoe Freshener</td><td>$4.79</td></tr>
+        <tr><td>Shoe Glue</td><td>$2.50</td></tr>
+        <tr><td>Shoe Polish</td><td>$5.25</td></tr>
+        <tr><td>Shoelaces</td><td>$3.99</td></tr>
+      </tbody>
+    </table>
+
+    <h3 id="bordered-tables">Bordered Tables</h3>
+    <p>
+      Use the <code>table-bordered</code> modifier to add a border to the table.
+    </p>
+<pre>
+&lt;table class=&quot;table table-bordered&quot;&gt;
+  ...
+&lt;/table&gt;
+</pre>
+    <table class="table table-bordered">
+      <thead>
+        <tr><th>Item</th><th>Price</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Shoe Freshener</td><td>$4.79</td></tr>
+        <tr><td>Shoe Glue</td><td>$2.50</td></tr>
+        <tr><td>Shoe Polish</td><td>$5.25</td></tr>
+        <tr><td>Shoelaces</td><td>$3.99</td></tr>
+      </tbody>
+    </table>
+
+    <!--********************************************************************************************
+    * Utilities
+    *********************************************************************************************-->
+
+    <h2 id="utilities">Utilities</h2>
+    <p>
+      Shoelace provides a number of helpful utility classes that make prototyping easier.
+    </p>
+
+    <h3 id="text-utilities">Text Utilities</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Class</th>
+          <th>Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>text-success</code></td>
+          <td class="text-success">This is success text</td>
+        </tr>
+        <tr>
+          <td><code>text-info</code></td>
+          <td class="text-info">This is info text</td>
+        </tr>
+        <tr>
+          <td><code>text-warning</code></td>
+          <td class="text-warning">This is warning text</td>
+        </tr>
+        <tr>
+          <td><code>text-danger</code></td>
+          <td class="text-danger">This is danger text</td>
+        </tr>
+        <tr>
+          <td><code>text-muted</code></td>
+          <td class="text-muted">This is muted text</td>
+        </tr>
+        <tr>
+          <td><code>text-small</code></td>
+          <td class="text-small">This is small text</td>
+        </tr>
+        <tr>
+          <td><code>text-big</code></td>
+          <td class="text-big">This is big text</td>
+        </tr>
+        <tr>
+          <td><code>text-bold</code></td>
+          <td class="text-bold">This is bold text</td>
+        </tr>
+        <tr>
+          <td><code>text-italic</code></td>
+          <td class="text-italic">This is italic text</td>
+        </tr>
+        <tr>
+          <td><code>text-left</code></td>
+          <td class="text-left">This is left-aligned text</td>
+        </tr>
+        <tr>
+          <td><code>text-center</code></td>
+          <td class="text-center">This is centered text</td>
+        </tr>
+        <tr>
+          <td><code>text-right</code></td>
+          <td class="text-right">This is right-aligned text</td>
+        </tr>
+        <tr>
+          <td><code>text-justify</code></td>
+          <td class="text-justify">This is justified text</td>
+        </tr>
+        <tr>
+          <td><code>text-nowrap</code></td>
+          <td class="text-nowrap">This is text that won’t wrap</td>
+        </tr>
+        <tr>
+          <td><code>text-lowercase</code></td>
+          <td class="text-lowercase">This is lowercase text</td>
+        </tr>
+        <tr>
+          <td><code>text-uppercase</code></td>
+          <td class="text-uppercase">This is uppercase text</td>
+        </tr>
+        <tr>
+          <td><code>text-capitalize</code></td>
+          <td class="text-capitalize">This is capitalized text</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 id="float-utilities">Float Utilities</h3>
+    <p>
+      Float utilities are provided to easily float elements to the left or right. Just apply the
+      <code>float-left</code> or <code>float-right</code> class to an element to float it
+      left or right.
+    </p>
+    <p>
+      A clearfix utility is also available to clear floated elements. Just apply the
+      <code>clearfix</code> class to the appropriate element.
+    </p>
+
+    <h3 id="sizing-utilities">Sizing Utilities</h3>
+    <p>
+      Sizing utilities can be used to set a relative width or height on any element. Just apply
+      a <code>width-[%]</code> or <code>height-[%]</code> class and the appropriate element will be
+      sized accordingly. Sizes are available from 0 – 100 in multiples of five.
+    </p>
+<pre>
+&lt;div class=&quot;width-25&quot;&gt;25%&lt;/div&gt;
+&lt;div class=&quot;width-50&quot;&gt;50%&lt;/div&gt;
+&lt;div class=&quot;width-75&quot;&gt;75%&lt;/div&gt;
+&lt;div class=&quot;width-100&quot;&gt;100%&lt;/div&gt;
+
+&lt;div class=&quot;height-25&quot;&gt;25%&lt;/div&gt;
+&lt;div class=&quot;height-50&quot;&gt;50%&lt;/div&gt;
+&lt;div class=&quot;height-75&quot;&gt;75%&lt;/div&gt;
+&lt;div class=&quot;height-100&quot;&gt;100%&lt;/div&gt;
+</pre>
+    <div class="width-sizing-example">
+      <div class="width-25">25%</div>
+      <div class="width-50">50%</div>
+      <div class="width-75">75%</div>
+      <div class="width-100">100%</div>
+    </div>
+
+    <div class="height-sizing-example">
+      <div class="height-25">25%</div>
+      <div class="height-50">50%</div>
+      <div class="height-75">75%</div>
+      <div class="height-100">100%</div>
+    </div>
+
+    <h3 id="spacing-utilities">Spacing Utilities</h3>
+    <p>
+      Spacing utilties can be used to add or remove paddings and margins to any element. Just apply
+      the desired class and the appropriate element will receive the respective padding/margin.
+    </p>
+    <p>
+      Class names are prefixed with <code>m-</code> or <code>p-</code> for margin and padding,
+      respectively. To apply a padding/margin to all sides of an element, use the following
+      classes:
+    </p>
+<pre>
+p-[none|small|medium|big]
+m-[none|small|medium|big]
+
+Example: class="p-none m-big"
+</pre>
+    <p>
+      To apply a padding/margin to a specific side of an element, use one or more of the following
+      classes:
+    </p>
+<pre>
+p-[top|right|bottom|left|x|y]-[none|small|medium|big]
+m-[top|right|bottom|left|x|y]-[none|small|medium|big]
+
+Example: class="p-left-medium m-bottom-none"
+</pre>
+    <p>
+      You can also use <code>m-x-auto</code> to horizontally center a fixed width block.
+    </p>
+
+    <!--********************************************************************************************
+    * Grid System
+    *********************************************************************************************-->
+
+    <h2 id="grid-system">Grid System</h2>
+    <p>
+      Shoelace doesn’t ship with a grid system because
+      <a href="https://rachelandrew.co.uk/archives/2017/07/01/you-do-not-need-a-css-grid-based-grid-system/">
+      you don’t need one</a>. You should use the <a href="https://gridbyexample.com/">CSS Grid
+      Layout</a> instead.
+    </p>
+    <p>
+      If you have an obligation to support older browsers, consider using the Bootstrap grid
+      <a href="https://github.com/zirafa/bootstrap-grid-only">without any extras</a>.
+    </p>
+
+    <!--********************************************************************************************
+    * Icons
+    *********************************************************************************************-->
+
+    <h2 id="icons">Icons</h2>
+    <p>
+      Shoelace doesn’t bundle its own icons, but you can easily include your favorite library such
+      as <a href="http://fontawesome.io/">Font Awesome</a>. They work superbly together.
+    </p>
+    <p>
+      This decision was intentional. It keeps Shoelace light and makes it more customizable.
+    </p>
+
+    <!--********************************************************************************************
+    * Browser Support
+    *********************************************************************************************-->
+
+    <h2 id="browser-support">Browser Support</h2>
+    <p class="text-bold">
+      TL;DR — you can use Shoelace as-is if you don’t care about Internet Explorer and older
+      browsers (Edge is fine). If you need to support older browsers, just make sure to use a
+      <a href="#grid-system">grid system</a> and <a href="http://www.myth.io/">Myth</a> as a
+      polyfill.
+    </p>
+    <p>
+      Browser support for CSS variables is <a href="http://caniuse.com/#feat=css-variables">pretty
+      good</a>, but if you need to support Internet Explorer, consider using
+      <a href="http://www.myth.io/">Myth</a> as a polyfill. Myth lets you write standards-compliant
+      CSS and “fixes” it for unsupportive browsers.
+    </p>
+    <p>
+      Browser support for the CSS Grid is <a href="http://caniuse.com/#feat=css-grid">very good</a>,
+      but if you need to support older browsers you can use a <a href="#grid-system">grid system</a>
+      instead.
+    </p>
+    <p>
+      Browser support for <code>calc</code> is
+      <a href="http://caniuse.com/#feat=calc">excellent</a>. Shoelace uses this internally for
+      relative calculations. You can use it along with CSS variables too.
+    </p>
+    <p>
+      Browser support for color modifiers is non-existent.
+      <a href="https://drafts.csswg.org/css-color/#modifying-colors">There is a draft</a>, so
+      hopefully that will change soon. Shoelace doesn’t use this feature, but it will when support
+      improves.
+    </p>
+    <p>
+      Browser support for custom media queries is non-existent.
+      <a href="https://drafts.csswg.org/mediaqueries-5/#custom-mq">There is a draft</a>, so
+      hopefully that will change soon. Shoelace doesn’t use this feature, but it will when support
+      improves.
+    </p>
+
+    <footer>
+      <p class="text-small text-muted">
+        Shoelace 1.0.0 beta &middot;
+        &copy;2017 A Beautiful Site, LLC
+      </p>
+    </footer>
+
+  </div>
+
+  <script
+    src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+  <script src="../js/tabs.js"></script>
+</body>
+</html>

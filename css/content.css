@@ -1,0 +1,200 @@
+/*! Shoelace content */
+
+/* Box sizing reset */
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+/***************************************************************************************************
+* The basics
+***************************************************************************************************/
+
+body {
+  background: var(--body-bg-color);
+  font-family: var(--font-family);
+  font-weight: var(--font-weight);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight-normal);
+  color: var(--body-color);
+  line-height: var(--line-height);
+}
+
+a {
+  color: var(--link-color);
+  text-decoration: var(--link-text-decoration);
+}
+
+a:hover {
+  color: var(--link-color-hover);
+  text-decoration: var(--link-text-decoration-hover);
+}
+
+abbr[title] {
+  text-decoration: none;
+  border-bottom: dashed 2px currentcolor;
+}
+
+b, strong {
+  font-weight: var(--font-weight-bold);
+}
+
+big {
+  font-size: var(--font-size-big);
+}
+
+blockquote {
+  font-size: var(--font-size-big);
+  border-left: solid .4rem var(--component-border-color);
+  padding: .5rem .5rem .5rem 1rem;
+  margin-bottom: 1rem;
+  margin-left: 0;
+}
+
+code {
+  font-family: var(--font-family-monospace);
+  font-size: var(--code-font-size);
+  color: var(--code-color);
+  background-color: var(--code-bg-color);
+  border-radius: var(--code-border-radius);
+  padding: var(--code-spacing-y) var(--code-spacing-x);
+}
+
+del {
+  color: var(--color-red);
+}
+
+figure {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--headings-font-family);
+  font-weight: var(--headings-font-weight);
+  line-height: var(--headings-line-height);
+  color: var(--headings-color);
+  margin-top: 0;
+  margin-bottom: var(--headings-margin-bottom);
+}
+
+h1 { font-size: var(--headings-font-size-h1); }
+h2 { font-size: var(--headings-font-size-h2); }
+h3 { font-size: var(--headings-font-size-h3); }
+h4 { font-size: var(--headings-font-size-h4); }
+h5 { font-size: var(--headings-font-size-h5); }
+h6 { font-size: var(--headings-font-size-h6); }
+
+hr {
+  border: none;
+  border-top: solid var(--hr-width) var(--component-border-color);
+  margin-top: var(--component-spacing-big);
+  margin-bottom: var(--component-spacing-big);
+}
+
+img {
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+ins {
+  color: var(--color-green);
+}
+
+kbd {
+  font-family: var(--font-family-monospace);
+  font-size: var(--kbd-font-size);
+  color: var(--kbd-color);
+  background-color: var(--kbd-bg-color);
+  border-radius: var(--kbd-border-radius);
+  padding: var(--kbd-spacing-y) var(--kbd-spacing-x);
+}
+
+mark {
+  color: var(--mark-color);
+  background-color: var(--mark-bg-color);
+  padding: var(--mark-spacing-y) var(--mark-spacing-x);
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+pre {
+  max-height: var(--pre-max-height);
+  overflow-y: auto;
+  font-family: var(--font-family-monospace);
+  color: var(--pre-color);
+  background-color: var(--pre-bg-color);
+  border-radius: var(--pre-border-radius);
+  padding: 1rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+small {
+  font-size: var(--font-size-small);
+}
+
+/***************************************************************************************************
+* Lists
+***************************************************************************************************/
+
+dl,
+ol,
+ul {
+  line-height: var(--line-height);
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+dt {
+  font-weight: var(--font-weight-bold);
+}
+
+dd {
+  margin-left: 0;
+  margin-bottom: 1rem;
+}
+
+ol ol,
+ol ul,
+ul ol,
+ul ul {
+  margin-bottom: 0;
+}
+
+/***************************************************************************************************
+* Placeholders
+***************************************************************************************************/
+
+::-webkit-input-placeholder { color: var(--placeholder-color); }
+::-moz-placeholder { color: var(--placeholder-color); }
+:-ms-input-placeholder { color: var(--placeholder-color); }
+:-moz-placeholder { color: var(--placeholder-color); }
+
+/***************************************************************************************************
+* Selections
+***************************************************************************************************/
+
+::-moz-selection {
+  background-color: var(--selection-bg-color);
+  color: var(--selection-color);
+  text-shadow: none !important;
+}
+
+::selection {
+  background-color: var(--selection-bg-color);
+  color: var(--selection-color);
+  text-shadow: none !important;
+}

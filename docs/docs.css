@@ -1,0 +1,110 @@
+body {
+  border-top: solid .3rem var(--color-primary);
+}
+
+.body-wrap {
+  max-width: 44rem;
+  padding: 1rem;
+  margin: 2rem auto;
+}
+
+h1[id]:not(:first-child),
+h2[id]:not(:first-child),
+h3[id]:not(:first-child),
+h4[id]:not(:first-child) {
+  margin-top: 3rem;
+}
+
+h3[id],
+h4[id] {
+  color: var(--color-gray);
+}
+
+header {
+  border-bottom: solid var(--component-border-width) var(--component-border-color);
+  padding-bottom: var(--component-spacing);
+  margin-bottom: var(--component-spacing-big);
+}
+
+footer {
+  border-top: solid var(--component-border-width) var(--component-border-color);
+  text-align: center;
+  padding-top: var(--component-spacing-big);
+  margin-top: var(--component-spacing-big);
+}
+
+h2[id] {
+  border-bottom: solid var(--component-border-width) var(--component-border-color);
+  padding-bottom: .25rem;
+  margin-bottom: 1rem;
+}
+
+/* Column helpers */
+.two-column {
+  column-count: 2;
+  column-gap: 2rem;
+}
+
+@media (max-width: 50rem) {
+  .two-column {
+    column-count: 1;
+    column-gap: 0;
+  }
+}
+
+/* Sizing examples */
+.width-sizing-example {
+  border: solid 1px var(--component-border-color);
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.width-sizing-example div {
+  background: var(--color-primary);
+  color: white;
+  text-align: center;
+  padding: .25rem;
+  margin-bottom: 1rem;
+}
+
+.width-sizing-example div:last-child {
+  margin-bottom: 0;
+}
+
+.height-sizing-example {
+  border: solid 1px var(--component-border-color);
+  height: 15rem;
+  padding: 1rem .5rem;
+  margin-bottom: 1rem;
+}
+
+.height-sizing-example div {
+  width: calc(25% - 1rem);
+  float: left;
+  background: var(--color-primary);
+  color: white;
+  text-align: center;
+  padding: .25rem;
+  margin: 0 .5rem;
+}
+
+/* Loader example */
+.loader-example div {
+  float: left;
+  width: 6rem;
+  height: 6rem;
+  border: dashed 1px var(--component-border-color);
+  margin-right: .5rem;
+}
+
+/* Tabs example */
+.tabs-vertical-example {
+  display: grid;
+  grid-template-columns: 25% 75%;
+  grid-gap: 2rem;
+  padding-right: 2rem;
+}
+
+.tabs-vertical-example .tabs-nav a {
+  display: block;
+}

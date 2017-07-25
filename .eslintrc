@@ -1,0 +1,18 @@
+{
+  "rules": {
+    "comma-dangle": ["warn"],
+    "eqeqeq": ["warn"],
+    "no-console": ["off"],
+    "indent": ["error", 2],
+    "quotes": ["error", "single"],
+    "linebreak-style": ["error", "unix"],
+    "no-unused-vars": ["warn", { "vars": "all", "args": "after-used" }],
+    "prefer-arrow-callback": ["warn"],
+    "semi": ["error", "always"]
+  },
+  "env": {
+    "node": true,
+    "es6": true
+  },
+  "extends": "eslint:recommended"
+}

@@ -1,0 +1,52 @@
+/*! Shoelace tabs */
+
+.tabs {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.tabs-nav {
+  margin-bottom: 1rem;
+  user-select: none;
+}
+
+.tabs-nav a {
+  color: var(--tab-color);
+  text-decoration: none;
+  background-color: var(--tab-bg-color);
+  border-radius: var(--tab-border-radius);
+  padding: var(--tab-spacing-y) var(--tab-spacing-x);
+  display: inline-block;
+}
+
+.tabs-nav a:hover {
+  color: var(--tab-color-hover);
+  background-color: var(--tab-bg-color-hover);
+  text-decoration: none;
+}
+
+.tabs-nav a.active {
+  color: var(--tab-color-active);
+  background-color: var(--tab-bg-color-active);
+  cursor: default;
+}
+
+.tabs-nav a.disabled {
+  color: var(--tab-color-disabled);
+  background-color: var(--tab-bg-color-disabled);
+  cursor: not-allowed;
+}
+
+.tabs-pane {
+  border: solid var(--tab-pane-border-width) var(--tab-pane-border-color);
+  border-radius: .25rem;
+  padding: var(--tab-pane-spacing-y) var(--tab-pane-spacing-x);
+}
+
+.tabs-pane:not(.active) {
+  display: none;
+}
+
+.tabs-pane :last-child {
+  margin-bottom: 0;
+}

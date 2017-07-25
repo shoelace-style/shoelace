@@ -1,0 +1,29 @@
+/*! Shoelace alerts */
+
+.alert {
+  color: var(--alert-color);
+  background-color: var(--alert-bg-color-primary);
+  border-radius: var(--alert-border-radius);
+  padding: var(--alert-spacing-y) var(--alert-spacing-x);
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.alert:empty {
+  display: none;
+}
+
+.alert-success { background-color: var(--alert-bg-color-success); }
+.alert-info { background-color: var(--alert-bg-color-info); }
+.alert-warning { background-color: var(--alert-bg-color-warning); }
+.alert-danger { background-color: var(--alert-bg-color-danger); }
+.alert-inverse { background-color: var(--alert-bg-color-inverse); }
+
+.alert a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.alert :last-child {
+  margin-bottom: 0;
+}
