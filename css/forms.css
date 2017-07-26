@@ -228,6 +228,12 @@ input[type=range]:focus::-ms-fill-upper {
   background: var(--input-range-track-color);
 }
 
+/* Progress bars */
+progress {
+  width: 100%;
+  vertical-align: middle;
+}
+
 /* Input fields */
 .input-block {
   margin-bottom: 1rem;
