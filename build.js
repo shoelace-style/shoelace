@@ -40,9 +40,9 @@ clean.minify({
 
   // Update placeholders in CSS
   output.styles = output.styles
-    .replace('{version}', __version)
-    .replace('{originalSize}', originalSize)
-    .replace('{minifiedSize}', minifiedSize);
+    .replace(/\{version\}/g, __version)
+    .replace(/\{originalSize\}/, originalSize)
+    .replace(/\{minifiedSize\}/, minifiedSize);
 
   // Write output file
   FS.writeFile(outFile, output.styles, 'utf8', (err) => {
@@ -56,9 +56,9 @@ clean.minify({
   // Update placeholders in docs
   let content = FS.readFileSync(docsFile, 'utf8');
   content = content
-    .replace(/<span data-placeholder="version">(.*?)<\/span>/, '<span data-placeholder="version">' + __version + '</span>')
-    .replace(/<span data-placeholder="originalSize">(.*?)<\/span>/, '<span data-placeholder="originalSize">' + originalSize + '</span>')
-    .replace(/<span data-placeholder="minifiedSize">(.*?)<\/span>/, '<span data-placeholder="minifiedSize">' + minifiedSize + '</span>');
+    .replace(/<span data-placeholder="version">(.*?)<\/span>/g, '<span data-placeholder="version">' + __version + '</span>')
+    .replace(/<span data-placeholder="originalSize">(.*?)<\/span>/g, '<span data-placeholder="originalSize">' + originalSize + '</span>')
+    .replace(/<span data-placeholder="minifiedSize">(.*?)<\/span>/g, '<span data-placeholder="minifiedSize">' + minifiedSize + '</span>');
 
   // Write docs file
   FS.writeFile(docsFile, content, 'utf8', (err) => {
