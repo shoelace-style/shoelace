@@ -134,6 +134,8 @@ input[type=color],input[type=date],input[type=datetime-local],input[type=email],
 input[type=color]:focus,input[type=date]:focus,input[type=datetime-local]:focus,input[type=email]:focus,input[type=month]:focus,input[type=number]:focus,input[type=password]:focus,input[type=search]:focus,input[type=tel]:focus,input[type=text]:focus,input[type=time]:focus,input[type=url]:focus,input[type=week]:focus,select:focus,textarea:focus{outline:0;border-color:var(--input-border-focus-color)}
 select{position:relative;background-image:url('data:image/svg+xml;charset=utf8,%3C?xml version="1.0" encoding="utf-8"?%3E%3Csvg width="1792" height="1792" fill="#000" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M1408 704q0 26-19 45l-448 448q-19 19-45 19t-45-19l-448-448q-19-19-19-45t19-45 45-19h896q26 0 45 19t19 45z"/%3E%3C/svg%3E');background-position:right .4rem center;background-repeat:no-repeat;background-size:.8rem;padding-top:0;padding-bottom:0;padding-right:calc(var(--component-spacing) * .5 + 1rem)}
 textarea{height:auto;resize:vertical;line-height:var(--line-height)}
+input[type=color]::-webkit-color-swatch-wrapper{padding:0}
+input[type=color]::-webkit-color-swatch{border:none;border-radius:var(--input-border-radius)}
 input[type=checkbox],input[type=radio]{padding:0}
 input[disabled]{opacity:.5;cursor:not-allowed}
 input[readonly]{background-color:var(--input-readonly-bg-color)}
@@ -154,6 +156,7 @@ input[type=range]::-ms-fill-upper{background:var(--input-range-track-color);bord
 input[type=range]::-ms-thumb{border:none;height:.5rem;width:.5rem;border-radius:50%;background:var(--input-range-thumb-color);cursor:pointer}
 input[type=range]:focus::-ms-fill-lower{background:var(--input-range-track-color)}
 input[type=range]:focus::-ms-fill-upper{background:var(--input-range-track-color)}
+progress{width:100%;vertical-align:middle}
 .input-block{margin-bottom:1rem}
 .input-group{width:100%;display:flex;margin-bottom:1rem}
 .input-group>.button,.input-group>button,.input-group>input{border-radius:0}
