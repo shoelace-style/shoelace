@@ -100,8 +100,10 @@ h2[id] {
 /* Tabs example */
 .tabs-vertical-example {
   display: grid;
-  grid-template-columns: 25% 75%;
-  grid-gap: 2rem;
+  grid-template-columns: 30% 70%;
+}
+
+.tabs-vertical-example .tabs-nav {
   padding-right: 2rem;
 }
 
