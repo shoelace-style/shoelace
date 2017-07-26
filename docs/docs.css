@@ -43,6 +43,18 @@ h2[id] {
   margin-bottom: 1rem;
 }
 
+a.bookmark {
+  width: 1em;
+  text-align: right;
+  color: var(--color-silver);
+  margin-left: -1em;
+  display: inline-block;
+}
+
+a.bookmark:hover {
+  text-decoration: none;
+}
+
 /* Column helpers */
 .two-column {
   column-count: 2;
