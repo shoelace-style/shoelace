@@ -6,7 +6,6 @@ const CleanCSS = require('gulp-clean-css');
 const Del = require('del');
 const Path = require('path');
 const Rename = require('gulp-rename');
-const Watch = require('gulp-watch');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // Config
@@ -66,20 +65,6 @@ Gulp.task('clean:styles', 'Delete generated styles.', () => {
 Gulp.task('clean', 'Delete all generated files.', [
   'clean:styles'
 ]);
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-// Other tasks
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// Watch for changes
-Gulp.task('watch', 'Watch files and automatically build assets on change.', () => {
-  // Watch styles
-  Gulp.src(styles.source)
-    .pipe(Watch(styles.source))
-    .on('change', () => {
-      buildStyles(styles.source, styles.target);
-    });
-});
 
 // Default
 Gulp.task('default', 'Run the default task.', ['help']);
