@@ -154,8 +154,10 @@ dl,
 ol,
 ul {
   line-height: var(--line-height);
+  list-style-position: inside;
   margin-top: 0;
   margin-bottom: 1rem;
+  padding-left: 1rem;
 }
 
 dt {
