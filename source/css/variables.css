@@ -117,10 +117,10 @@
   --alert-spacing-y: var(--component-spacing);
 
   /* Badges */
-  --badge-font-size: calc(var(--font-size) * .8);
+  --badge-font-size: .8em; /* ems for relative sizing */
   --badge-font-weight: var(--font-weight-bold);
   --badge-color: var(--color-white);
-  --badge-border-radius: var(--badge-font-size);
+  --badge-border-radius: 1em;  /* ems for relative sizing */
   --badge-bg-color-primary: var(--color-primary);
   --badge-bg-color-success: var(--state-success);
   --badge-bg-color-info: var(--state-info);

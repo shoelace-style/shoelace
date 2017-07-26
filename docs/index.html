@@ -5,15 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="description" content="For when you don’t need the entire boot.">
-  <link rel="stylesheet" href="../css/shoelace.css">
+  <link rel="stylesheet" href="../source/css/shoelace.css">
   <link rel="stylesheet" href="docs.css">
   <title>Shoelace.css: a back to the basics CSS starter kit</title>
 </head>
 <body>
 
-  <div class="body-wrap">
+  <main>
     <header>
-      <h1>👟 Shoelace.css</h1>
+      <h1>👟 Shoelace.css – <span data-placeholder="version">1.0.0-beta2</span></h1>
       <p class="text-muted text-small">
         A back to the basics CSS starter kit. For when you don’t need the whole boot.
       </p>
@@ -24,43 +24,48 @@
     *********************************************************************************************-->
 
     <p id="overview">
-      Shoelace is a starter kit, not a framework. Think of it as a CSS reset sprinkled with helpful
-      components. Bootstrap users will find it familiar, yet refreshing.
+      Shoelace.css is a starter kit, not a framework. Think of it as a CSS reset sprinkled with
+      helpful components. Bootstrap users will find it familiar, yet refreshing.
     </p>
     <p>
-      Shoelace is highly customizable through
-      <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_variables">
-      CSS variables</a>. It doesn’t require Less, Sass, or any preprocessing at all. The minified
-      version is only 31KB (6KB gzipped).
+      Shoelace is highly customizable through CSS variables. It doesn’t require Less, Sass, or any
+      preprocessing at all. The minified version is only
+      <span data-placeholder="minifiedSize">31KB</span> and much smaller when gzipped.
     </p>
-
     <p>
-      Just link to the stylesheet, add your <a href="#customizing">customizations</a>, and start
-      building stuff.
+      Just link to <code>shoelace.css</code> and customize it in your own stylesheet.
     </p>
 <pre>
-&lt;link rel=&quot;stylesheet&quot; href=&quot;dist/shoelace.min.css&quot;>
+&lt;link rel=&quot;stylesheet&quot; href=&quot;shoelace.css&quot;&gt;
+
+&lt;style&gt;
+  :root {
+    --body-color: white;
+    --body-bg-color: black;
+    --color-primary: #09d;
+  }
+&lt;/style&gt;
 </pre>
     <p>
-      The purpose of this project is to provide a modern, lightweight, customizable, and extensible
-      boilerplate for building websites and web applications.
-    </p>
-    <p>
       Shoelace was created by <a href="https://twitter.com/claviska">@claviska</a> for
-      <a href="https://www.surrealcms.com/">Surreal CMS</a>. It is available under the MIT license.
+      <a href="https://www.surrealcms.com/">Surreal CMS</a>. It’s available under the MIT license.
     </p>
-    <p class="m-t-medium">
-      <a href="https://github.com/claviska/shoelace-css" class="button">Grab the Source</a>
-      <a href="https://github.com/claviska/shoelace-css/issues" class="button button-warning">Report a Bug</a>
-      <a href="https://paypal.me/claviska" class="button button-success">Donate</a>
+
+    <p class="m-t-medium text-center">
+      <a class="github-button" href="https://github.com/claviska/shoelace-css/fork" data-size="large" aria-label="Fork claviska/shoelace-css on GitHub">Fork</a>
+      <a class="github-button" href="https://github.com/claviska/shoelace-css/archive/master.zip" data-icon="octicon-cloud-download" data-size="large" aria-label="Download claviska/shoelace-css on GitHub">Download</a>
+      <a class="github-button" href="https://github.com/claviska/shoelace-css/issues" data-icon="octicon-issue-opened" data-size="large" aria-label="Issue claviska/shoelace-css on GitHub">Report a Bug</a>
+      <a class="github-button" href="https://github.com/claviska/shoelace-css" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star claviska/shoelace-css on GitHub">Star</a>
+      <a href="https://paypal.me/claviska" class="button button-success" style="margin-bottom: 1.2rem;">Donate</a>
     </p>
 
     <!--********************************************************************************************
-    * Contents
+    * Documentation
     *********************************************************************************************-->
 
-    <h2 id="contents">Contents</h2>
-    <ul>
+    <h2 id="documentation">Documentation</h2>
+    <ul class="two-column">
+      <li><a href="#installing">Installing</a></li>
       <li><a href="#customizing">Customizing</a></li>
       <li><a href="#content">Content</a></li>
       <li><a href="#alerts">Alerts</a></li>
@@ -76,11 +81,36 @@
       <li><a href="#browser-support">Browser Support</a></li>
     </ul>
 
-    <h3 id="customizing">Customizing</h3>
+    <!--********************************************************************************************
+    * Installing
+    *********************************************************************************************-->
+
+    <h2 id="installing">Installing</h2>
     <p>
-      You can customize Shoelace without editing core files. This makes it easier to update later
-      on. To add customizations, simply override one or more of the CSS variables found in
-      <code>variables.css</code> in your own stylesheet.
+      Shoelace is incredibly easy to use. Just link to <code>shoelace.css</code> in your project and
+      you’re ready to <a href="#customizing">start customizing things</a>.
+    </p>
+<pre>
+&lt;link rel=&quot;stylesheet&quot; href=&quot;dist/shoelace.css&quot;&gt;
+</pre>
+
+    <h3 id="npm">NPM</h3>
+    <p>
+      If you’re using NPM, you can install Shoelace by running:
+    </p>
+<pre>
+npm install --save-dev shoelace-css
+</pre>
+
+    <!--********************************************************************************************
+    * Customizing
+    *********************************************************************************************-->
+
+    <h2 id="customizing">Customizing</h2>
+    <p>
+      You can customize Shoelace without editing core files or using a preprocessor. To add
+      customizations, simply override one or more of the variables found in
+      <code><a href="../source/css/variables.css">variables.css</a></code> in your own stylesheet.
     </p>
     <p>
       For example, you can customize the default text color and background like this:
@@ -91,21 +121,27 @@
   --body-bg-color: black;
 }
 </pre>
-    <p>
-      Refer to <code>variables.css</code> for a complete list of variables in Shoelace.
-    </p>
 
     <h4 id="using-variables">Using Variables</h4>
     <p>
-      You can use any of Shoelace’s variables in your own stylesheet. This makes it easy to reuse
-      colors, paddings, etc. without hardcoding them, and provides a foundation for building your
-      own components to extend Shoelace.
+      You can use any of Shoelace’s variables in your stylesheet. This makes it easy to reuse
+      values without hardcoding them and provides the foundation to extend Shoelace with your own
+      components.
     </p>
 <pre>
   .your-selector {
     color: var(--state-danger);
   }
 </pre>
+    <p>
+      Refer to <code><a href="../source/css/variables.css">variables.css</a></code> for a complete
+      list of variables in Shoelace.
+    </p>
+    <p>
+      If you’re not familiar with CSS variables,
+      <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_variables">this article</a>
+      will bring you up to speed.
+    </p>
 
     <!--********************************************************************************************
     * Content
@@ -114,12 +150,11 @@
     <h2 id="content">Content</h2>
     <p>
       Shoelace gives you an easy way to customize most HTML elements with variables. You don’t need
-      to apply any classes to achieve these styles — just use the appropriate elements.
+      to apply any classes to achieve these styles — just use the appropriate tags.
     </p>
     <p>
-      For easier spacing, Shoelace removes top margins and applies a bottom margin to block
-      elements. By default, text sizing and spacing is measured in <code>rem</code> and
-      <code>em</code> units.
+      For easy spacing, Shoelace removes top margins and applies a bottom margin to block elements.
+      By default, text sizing and spacing is measured in <code>rem</code> and <code>em</code> units.
     </p>
 
     <h3 id="headings">Headings <code>&lt;h1&gt; – &lt;h6&gt;</code></h3>
@@ -164,8 +199,8 @@
           <li>Nested item 2</li>
           <li>Nested item 3</li>
         </ul>
-        <li>List item 3</li>
       </li>
+      <li>List item 3</li>
     </ul>
 
     <h3 id="definition-lists">Definition Lists <code>&lt;dl&gt;</code></h3>
@@ -305,7 +340,7 @@ PRINT "SHOELACE IS AWESOME"
     <h2 id="badges">Badges</h2>
     <p>
       Create a badge by applying the <code>badge badge-[state]</code> class to an element such as a
-      <code>&lt;span&gt;</code>. Badges are sized relative to their parent element.
+      <code>&lt;span&gt;</code>.
     </p>
 <pre>
   &lt;span class=&quot;badge&quot;&gt;Default&lt;/span&gt;
@@ -323,6 +358,20 @@ PRINT "SHOELACE IS AWESOME"
       <span class="badge badge-danger">Danger</span>
       <span class="badge badge-inverse">Inverse</span>
     </p>
+
+    <p>
+      Badges are sized relative to their parent element.
+    </p>
+<pre>
+&lt;h1&gt;Heading 1 &lt;span class=&quot;badge&quot;&gt;Badge&lt;/span&gt;&lt;/h1&gt;
+&lt;h2&gt;Heading 2 &lt;span class=&quot;badge&quot;&gt;Badge&lt;/span&gt;&lt;/h2&gt;
+&lt;h3&gt;Heading 3 &lt;span class=&quot;badge&quot;&gt;Badge&lt;/span&gt;&lt;/h3&gt;
+&lt;p&gt;Paragraph &lt;span class=&quot;badge&quot;&gt;Badge&lt;/span&gt;&lt;/p&gt;
+</pre>
+    <h1>Heading 1 <span class="badge">Badge</span></h1>
+    <h2>Heading 2 <span class="badge">Badge</span></h2>
+    <h3>Heading 3 <span class="badge">Badge</span></h3>
+    <p>Paragraph <span class="badge">Badge</span></p>
 
     <!--********************************************************************************************
     * Buttons
@@ -492,8 +541,16 @@ PRINT "SHOELACE IS AWESOME"
           <td><input type="search"></td>
         </tr>
         <tr>
+          <td><code>&lt;input type=&quot;text&quot;&gt;</code></td>
+          <td><input type="text"></td>
+        </tr>
+        <tr>
+          <td><code>&lt;input type=&quot;time&quot;&gt;</code></td>
+          <td><input type="time"></td>
+        </tr>
+        <tr>
           <td><code>&lt;progress&gt;&lt;/progress&gt;</code></td>
-          <td><progress min="0" max="100" value="50"></progress></td>
+          <td><progress max="100" value="50"></progress></td>
         </tr>
         <tr>
           <td><code>&lt;select&gt;</code></td>
@@ -506,16 +563,8 @@ PRINT "SHOELACE IS AWESOME"
           </td>
         </tr>
         <tr>
-          <td><code>&lt;input type=&quot;text&quot;&gt;</code></td>
-          <td><input type="text"></td>
-        </tr>
-        <tr>
           <td><code>&lt;textarea&gt;</code></td>
           <td><textarea rows="4"></textarea></td>
-        </tr>
-        <tr>
-          <td><code>&lt;input type=&quot;time&quot;&gt;</code></td>
-          <td><input type="time"></td>
         </tr>
       </tbody>
     </table>
@@ -544,80 +593,49 @@ PRINT "SHOELACE IS AWESOME"
     <p>
       Disabled form controls look like this:
     </p>
-    <div class="input-block">
+    <div class="input-single">
       <input type="text" placeholder="Input" disabled>
     </div>
-    <div class="input-block">
+    <div class="input-single">
       <label><input type="checkbox" disabled> Checkbox</label>
       <label><input type="radio" disabled> Radio</label>
     </div>
     <p>
       Read-only form controls look like this:
     </p>
-    <div class="input-block">
+    <div class="input-single">
       <input type="text" readonly value="This is read-only">
     </div>
 
-    <h3 id="form-groups">Form Groups</h3>
+    <h3 id="form-control-spacing">Form Control Spacing</h3>
     <p>
-      Related form controls can be grouped in a <code>&lt;fieldset&gt;</code>. An optional
-      <code>legend</code> can be used to display a name for the group.
+      For proper spacing of individual form controls, wrap them in <code>input-single</code>
+      containers.
     </p>
 <pre>
-&lt;fieldset&gt;
-  &lt;legend&gt;User&lt;/legend&gt;
-  ...
-&lt;/fieldset&gt;
-</pre>
-    <fieldset>
-      <legend>Login</legend>
-      <div class="input-block">
-        <label>Username</label>
-        <input type="text">
-      </div>
-      <div class="input-block">
-        <label>Password</label>
-        <input type="password">
-      </div>
-      <div class="input-block">
-        <label>
-          <input type="checkbox"> Remember me
-        </label>
-      </div>
-      <div class="input-block">
-        <button type="button">Login</button>
-      </div>
-    </fieldset>
-
-    <h3 id="input-blocks">Input Blocks</h3>
-    <p>
-      For proper spacing of individual form controls and labels, wrap them in
-      <code>input-block</code> elements.
-    </p>
-<pre>
-&lt;div class=&quot;input-block&quot;&gt;
+&lt;div class=&quot;input-single&quot;&gt;
   &lt;label&gt;Name&lt;/label&gt;
   &lt;input type=&quot;text&quot;&gt;
 &lt;/div&gt;
 
-&lt;div class=&quot;input-block&quot;&gt;
-  &lt;label&gt;Email&lt;/label&gt;
-  &lt;input type=&quot;email&quot;&gt;
+&lt;div class=&quot;input-single&quot;&gt;
+  &lt;label&gt;Password&lt;/label&gt;
+  &lt;input type=&quot;password&quot;&gt;
 &lt;/div&gt;
 
-&lt;div class=&quot;input-block&quot;&gt;
+&lt;div class=&quot;input-single&quot;&gt;
   &lt;label&gt;&lt;input type=&quot;checkbox&quot;&gt; Remember me&lt;/label&gt;
 &lt;/div&gt;
 </pre>
-    <div class="input-block">
-      <label>Name</label>
+    <div class="input-single">
+      <label>Username</label>
       <input type="text">
     </div>
-    <div class="input-block">
-      <label>Email</label>
-      <input type="email">
+    <div class="input-single">
+      <label>Password</label>
+      <input type="password">
     </div>
-    <div class="input-block">
+    <div class="input-single">
       <label><input type="checkbox"> Remember me</label>
     </div>
 
@@ -650,21 +668,21 @@ PRINT "SHOELACE IS AWESOME"
   &lt;button type=&quot;button&quot; class=&quot;button&quot;&gt;Option 3&lt;/button&gt;
 &lt;/div&gt;
 </pre>
-    <div class="input-block">
+    <div class="input-single">
       <div class="input-group">
         <input type="text">
         <button type="button">Submit</button>
       </div>
     </div>
 
-    <div class="input-block">
+    <div class="input-single">
       <div class="input-group">
         <button type="button">Submit</button>
         <input type="text">
       </div>
     </div>
 
-    <div class="input-block">
+    <div class="input-single">
       <div class="input-group">
         <input type="text" placeholder="First">
         <input type="text" placeholder="Middle">
@@ -673,7 +691,7 @@ PRINT "SHOELACE IS AWESOME"
       </div>
     </div>
 
-    <div class="input-block">
+    <div class="input-single">
       <div class="input-group">
         <button type="button">Option 1</button>
         <button type="button">Option 2</button>
@@ -707,7 +725,7 @@ PRINT "SHOELACE IS AWESOME"
 &lt;/div&gt;
 </pre>
 
-    <div class="input-block">
+    <div class="input-single">
       <div class="input-group">
         <span class="input-addon input-addon-small">$</span>
         <input type="text" class="input-small">
@@ -715,7 +733,7 @@ PRINT "SHOELACE IS AWESOME"
       </div>
     </div>
 
-    <div class="input-block">
+    <div class="input-single">
       <div class="input-group">
         <span class="input-addon">$</span>
         <input type="text">
@@ -723,7 +741,7 @@ PRINT "SHOELACE IS AWESOME"
       </div>
     </div>
 
-    <div class="input-block">
+    <div class="input-single">
       <div class="input-group">
         <span class="input-addon input-addon-big">$</span>
         <input type="text" class="input-big">
@@ -731,31 +749,62 @@ PRINT "SHOELACE IS AWESOME"
       </div>
     </div>
 
+    <h3 id="form-groups">Form Groups</h3>
+    <p>
+      Related form controls can be grouped in a <code>&lt;fieldset&gt;</code>. An optional
+      <code>&lt;legend&gt;</code> can be used to display a name for the group.
+    </p>
+<pre>
+&lt;fieldset&gt;
+  &lt;legend&gt;User&lt;/legend&gt;
+  ...
+&lt;/fieldset&gt;
+</pre>
+    <fieldset>
+      <legend>Login</legend>
+      <div class="input-single">
+        <label>Username</label>
+        <input type="text">
+      </div>
+      <div class="input-single">
+        <label>Password</label>
+        <input type="password">
+      </div>
+      <div class="input-single">
+        <label>
+          <input type="checkbox"> Remember me
+        </label>
+      </div>
+      <div class="input-single">
+        <button type="button">Login</button>
+      </div>
+    </fieldset>
+
     <h3 id="validation">Validation</h3>
     <p>
       Form controls can be made valid or invalid using the <code>input-valid</code> and
       <code>input-invalid</code> modifiers. It’s better to apply modifiers to the surrounding
-      <code>input-block</code> so labels will be styled as well, but modifiers can be applied
+      <code>input-single</code> so labels will be styled as well, but modifiers can be applied
       directly to form controls as needed.
     </p>
 <pre>
-&lt;div class=&quot;input-block input-valid&quot;&gt;
+&lt;div class=&quot;input-single input-valid&quot;&gt;
   &lt;label&gt;Valid&lt;/label&gt;
   &lt;input type=&quot;text&quot;&gt;
 &lt;/div&gt;
 
-&lt;div class=&quot;input-block input-invalid&quot;&gt;
+&lt;div class=&quot;input-single input-invalid&quot;&gt;
   &lt;label&gt;Invalid&lt;/label&gt;
   &lt;input type=&quot;text&quot;&gt;
 &lt;/div&gt;
 </pre>
     <div class="two-column">
-      <div class="input-block input-valid">
+      <div class="input-single input-valid">
         <label>Valid</label>
         <input type="text">
       </div>
 
-      <div class="input-block input-invalid">
+      <div class="input-single input-invalid">
         <label>Invalid</label>
         <input type="text">
       </div>
@@ -840,13 +889,13 @@ PRINT "SHOELACE IS AWESOME"
 
     <div class="tabs">
       <nav class="tabs-nav">
-        <a href="#tab-1" class="active">Tab 1</a>
-        <a href="#tab-2">Tab 2</a>
-        <a href="#tab-3">Tab 3</a>
+        <a href="#tab-1-example-1" class="active">Tab 1</a>
+        <a href="#tab-2-example-1">Tab 2</a>
+        <a href="#tab-3-example-1">Tab 3</a>
         <a href="#" class="disabled">Disabled</a>
       </nav>
 
-      <div class="tabs-pane active" id="tab-1">
+      <div class="tabs-pane active" id="tab-1-example-1">
         <h3>Tab 1</h3>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui repellat ea magni magnam
@@ -855,7 +904,7 @@ PRINT "SHOELACE IS AWESOME"
         </p>
       </div>
 
-      <div class="tabs-pane" id="tab-2">
+      <div class="tabs-pane" id="tab-2-example-1">
         <h3>Tab 2</h3>
         <p>
           Atque eius voluptatibus ipsa ex totam odit, quidem illo distinctio sit! Quod quae minus,
@@ -864,7 +913,7 @@ PRINT "SHOELACE IS AWESOME"
         </p>
       </div>
 
-      <div class="tabs-pane" id="tab-3">
+      <div class="tabs-pane" id="tab-3-example-1">
         <h3>Tab 3</h3>
         <p>
           Aperiam asperiores optio iusto qui nisi, perspiciatis, ipsum, tenetur explicabo earum et
@@ -910,13 +959,13 @@ PRINT "SHOELACE IS AWESOME"
 </pre>
     <div class="tabs tabs-vertical-example">
       <nav class="tabs-nav tabs-nav-block">
-        <a href="#tab-1" class="active">Tab 1</a>
-        <a href="#tab-2">Tab 2</a>
-        <a href="#tab-3">Tab 3</a>
+        <a href="#tab-1-example-2" class="active">Tab 1</a>
+        <a href="#tab-2-example-2">Tab 2</a>
+        <a href="#tab-3-example-2">Tab 3</a>
         <a href="#" class="disabled">Disabled</a>
       </nav>
 
-      <div class="tabs-pane active" id="tab-1">
+      <div class="tabs-pane active" id="tab-1-example-2">
         <h3>Tab 1</h3>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui repellat ea magni magnam
@@ -925,7 +974,7 @@ PRINT "SHOELACE IS AWESOME"
         </p>
       </div>
 
-      <div class="tabs-pane" id="tab-2">
+      <div class="tabs-pane" id="tab-2-example-2">
         <h3>Tab 2</h3>
         <p>
           Atque eius voluptatibus ipsa ex totam odit, quidem illo distinctio sit! Quod quae minus,
@@ -934,7 +983,7 @@ PRINT "SHOELACE IS AWESOME"
         </p>
       </div>
 
-      <div class="tabs-pane" id="tab-3">
+      <div class="tabs-pane" id="tab-3-example-2">
         <h3>Tab 3</h3>
         <p>
           Aperiam asperiores optio iusto qui nisi, perspiciatis, ipsum, tenetur explicabo earum et
@@ -1253,12 +1302,13 @@ Example: class="p-left-medium m-bottom-none"
       </p>
     </footer>
 
-  </div>
+  </main>
 
   <script
     src="https://code.jquery.com/jquery-3.2.1.min.js"
     integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
     crossorigin="anonymous"></script>
-  <script src="../js/tabs.js"></script>
+  <script src="../source/js/tabs.js"></script>
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
 </html>

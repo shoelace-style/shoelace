@@ -1,9 +1,13 @@
-body {
-  border-top: solid .3rem var(--color-primary);
+:root {
+  --border-top-width: .3rem;
 }
 
-.body-wrap {
-  max-width: 44rem;
+body {
+  border-top: solid var(--border-top-width) var(--color-primary);
+}
+
+main {
+  max-width: 45rem;
   padding: 1rem;
   margin: 2rem auto;
 }
@@ -42,7 +46,7 @@ h2[id] {
 /* Column helpers */
 .two-column {
   column-count: 2;
-  column-gap: 2rem;
+  column-gap: 1rem;
 }
 
 @media (max-width: 50rem) {
