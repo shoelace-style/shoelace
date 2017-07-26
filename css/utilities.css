@@ -151,11 +151,8 @@
 .text-danger { color: var(--state-danger) !important; }
 .text-muted { color: var(--text-muted) !important; }
 
-/* Text size */
-.text-small { font-size: var(--font-size-small) !important; }
-.text-big { font-size: var(--font-size-big) !important; }
-
 /* Text style */
+.text-small { font-size: var(--font-size-small) !important; }
 .text-bold { font-weight: var(--font-weight-bold) !important; }
 .text-italic { font-style: italic !important; }
 
