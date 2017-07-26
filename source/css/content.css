@@ -150,14 +150,8 @@ small {
 * Lists
 ***************************************************************************************************/
 
-dl,
-ol,
-ul {
-  line-height: var(--line-height);
-  list-style-position: inside;
-  margin-top: 0;
+dl {
   margin-bottom: 1rem;
-  padding-left: 1rem;
 }
 
 dt {
@@ -166,6 +160,15 @@ dt {
 
 dd {
   margin-left: 0;
+  margin-bottom: 1rem;
+}
+
+ol,
+ul {
+  line-height: var(--line-height);
+  list-style-position: inside;
+  padding-left: 1rem;
+  margin-top: 0;
   margin-bottom: 1rem;
 }
 
