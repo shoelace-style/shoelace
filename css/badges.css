@@ -2,6 +2,7 @@
 
 .badge {
   font-size: var(--badge-font-size);
+  font-weight: var(--badge-font-weight);
   color: var(--badge-color);
   background-color: var(--badge-bg-color-primary);
   border-radius: var(--badge-border-radius);

@@ -118,6 +118,7 @@
 
   /* Badges */
   --badge-font-size: calc(var(--font-size) * .8);
+  --badge-font-weight: var(--font-weight-bold);
   --badge-color: var(--color-white);
   --badge-border-radius: var(--badge-font-size);
   --badge-bg-color-primary: var(--color-primary);
