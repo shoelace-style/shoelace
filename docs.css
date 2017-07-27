@@ -1,9 +1,5 @@
-:root {
-  --border-top-width: .3rem;
-}
-
 body {
-  border-top: solid var(--border-top-width) var(--color-primary);
+  border-top: solid .3rem var(--color-primary);
 }
 
 main {
