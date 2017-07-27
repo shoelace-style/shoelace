@@ -10,6 +10,16 @@ A back to the basics CSS starter kit. For when you don’t need the whole boot.
 
 ---
 
+## Developers
+
+Shoelace ships with a CLI that can be used to build a dist and optionally publish it to an S3 bucket. To see all available flags, run:
+
+```
+node shoelace.js --help
+```
+
+---
+
 Developed by [@claviska](https://twitter.com/claviska) for [Surreal CMS](https://www.surrealcms.com/).
 
 &copy; A Beautiful Site, LLC
