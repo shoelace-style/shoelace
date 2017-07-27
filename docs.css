@@ -33,6 +33,7 @@ footer {
   margin-top: var(--component-spacing-big);
 }
 
+/* Main headings and bookmark links */
 h2[id] {
   border-bottom: solid var(--component-border-width) var(--component-border-color);
   padding-bottom: .25rem;
@@ -49,6 +50,13 @@ a.bookmark {
 
 a.bookmark:hover {
   text-decoration: none;
+}
+
+@media (max-width: 45rem) {
+  a.bookmark {
+    width: auto;
+    margin-left: 0;
+  }
 }
 
 /* Column helpers */

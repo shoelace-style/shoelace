@@ -13,7 +13,7 @@
 
   <main>
     <header>
-      <h1>👟 Shoelace.css – <span data-placeholder="version">1.0.0-beta2</span></h1>
+      <h1>👟 Shoelace.css</h1>
       <p class="text-muted text-small">
         A back to the basics CSS starter kit. For when you don’t need the whole boot.
       </p>
@@ -50,13 +50,15 @@
       Shoelace was created by <a href="https://twitter.com/claviska">@claviska</a> for
       <a href="https://www.surrealcms.com/">Surreal CMS</a>. It’s available under the MIT license.
     </p>
-
     <p class="m-t-medium text-center">
       <a class="github-button" href="https://github.com/claviska/shoelace-css/fork" data-size="large" aria-label="Fork claviska/shoelace-css on GitHub">Fork</a>
       <a class="github-button" href="https://github.com/claviska/shoelace-css/releases" data-icon="octicon-cloud-download" data-size="large" aria-label="Download claviska/shoelace-css on GitHub">Download</a>
       <a class="github-button" href="https://github.com/claviska/shoelace-css/issues" data-icon="octicon-issue-opened" data-size="large" aria-label="Issue claviska/shoelace-css on GitHub">Report a Bug</a>
       <a class="github-button" href="https://github.com/claviska/shoelace-css" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star claviska/shoelace-css on GitHub">Star</a>
       <a href="https://paypal.me/claviska" class="button button-success" style="margin-bottom: 1.2rem;">Donate</a>
+    </p>
+    <p class="text-small text-muted text-center">
+      Version <span data-placeholder="version">1.0.0-beta2</span>
     </p>
 
     <!--********************************************************************************************
@@ -154,9 +156,9 @@ npm install --save-dev shoelace-css
 
     <h3 id="using-variables">Using Variables</h3>
     <p>
-      You can use any of Shoelace’s variables in your stylesheet. This makes it easy to reuse
-      values without hardcoding them and provides the foundation to extend Shoelace with your own
-      components.
+      You can use any of Shoelace’s variables in your stylesheet. This makes it easy to reuse values
+      without hardcoding them. It also provides a foundation for extending Shoelace with your own
+      <a href="#custom-components">custom components</a>.
     </p>
 <pre>
   .your-selector {
@@ -171,6 +173,35 @@ npm install --save-dev shoelace-css
       If you’re not familiar with CSS variables,
       <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_variables">this article</a>
       will bring you up to speed.
+    </p>
+
+    <h3 id="custom-components">Custom Components</h3>
+    <p>
+      You can create custom components to extend Shoelace’s functionality. Here are some best
+      practices to keep things consistent and easy for others to understand.
+    </p>
+    <p>
+      <strong>Familiarize yourself with Shoelace’s naming conventions.</strong> A custom accordion
+      component, for example, would have a class name such as <code>accordion</code>, modifier
+      classes such as <code>accordion-open</code>, and variable names that look like
+      <code>--accordion-bg-color</code>. Try to follow similar patterns as much as possible.
+    </p>
+    <p>
+      <strong>Define new variables when it makes sense to.</strong> Take a look at
+      <code><a href="source/css/variables.css">variables.css</a></code> to see how existing
+      components are defined. Many use core variables instead of hardcoded values. This makes it
+      easy for users to customize Shoelace quickly, but also gives them the flexibility to style
+      individual components as needed.
+    </p>
+    <p>
+      <strong>Semantic markup is strongly encouraged.</strong> Custom components should use the most
+      appropriate elements and the minimal amount of markup required.
+    </p>
+    <p>
+      <strong>Keep everything together.</strong> During development, each component should be in its
+      own folder along with its stylesheets, scripts, and documentation. This makes it easy to add
+      or remove components from your app without affecting others. Of course, it’s perfectly fine to
+      bundle components for optimization purposes in production.
     </p>
 
     <!--********************************************************************************************
@@ -188,7 +219,7 @@ npm install --save-dev shoelace-css
     </p>
     <p>
       For easy spacing, Shoelace removes top margins and applies a bottom margin to block elements.
-      By default, text sizing and spacing is measured in <code>rem</code> and <code>em</code> units.
+      By default, text sizing and spacing is measured in <code>rem</code> units.
     </p>
 
     <h3 id="headings">Headings <code>&lt;h1&gt; – &lt;h6&gt;</code></h3>
@@ -314,31 +345,31 @@ PRINT "SHOELACE IS AWESOME"
         </tr>
         <tr>
           <td><code>&lt;samp&gt;</code></td>
-          <td><samp>This is samp text</samp></td>
+          <td><samp>This is sample text</samp></td>
         </tr>
         <tr>
           <td><code>&lt;var&gt;</code></td>
-          <td><var>This is var text</var></td>
+          <td><var>This is variable text</var></td>
         </tr>
         <tr>
           <td><code>&lt;kbd&gt;</code></td>
-          <td><kbd>This is kbd text</kbd></td>
+          <td><kbd>This is keyboard text</kbd></td>
         </tr>
         <tr>
           <td><code>&lt;abbr&gt;</code></td>
-          <td><abbr title="Abbreviation">This is abbr text</abbr></td>
+          <td><abbr title="Abbreviation">This is abbreviation text</abbr></td>
         </tr>
         <tr>
           <td><code>&lt;del&gt;</code></td>
-          <td><del>This is del text</del></td>
+          <td><del>This is deleted text</del></td>
         </tr>
         <tr>
           <td><code>&lt;ins&gt;</code></td>
-          <td><ins>This is ins text</ins></td>
+          <td><ins>This is inserted text</ins></td>
         </tr>
         <tr>
           <td><code>&lt;mark&gt;</code></td>
-          <td><mark>This is mark text</mark></td>
+          <td><mark>This is marked text</mark></td>
         </tr>
       </tbody>
     </table>
@@ -353,8 +384,9 @@ PRINT "SHOELACE IS AWESOME"
     </h2>
 
     <p>
-      Create an alert by applying the <code>alert alert-[modifier]</code> class to an element such
-      as a <code>&lt;div&gt;</code>.
+      Create an alert by applying the <code>alert</code> class to an element such as a
+      <code>&lt;div&gt;</code>. You can change an alert’s appearance using the
+      <code>alert-*</code> modifier.
     </p>
 <pre>
   &lt;div class=&quot;alert&quot;&gt;Default&lt;/div&gt;
@@ -381,8 +413,9 @@ PRINT "SHOELACE IS AWESOME"
     </h2>
 
     <p>
-      Create a badge by applying the <code>badge badge-[state]</code> class to an element such as a
-      <code>&lt;span&gt;</code>.
+      Create a badge by applying the <code>badge</code> class to an element such as a
+      <code>&lt;span&gt;</code>. You can change a badge’s appearance using the <code>badge-*</code>
+      modifier.
     </p>
 <pre>
   &lt;span class=&quot;badge&quot;&gt;Default&lt;/span&gt;
@@ -427,7 +460,7 @@ PRINT "SHOELACE IS AWESOME"
     <p>
       To create a button, use the <code>&lt;button&gt;</code> element or apply the
       <code>button</code> class to another element such as an <code>&lt;a&gt;</code>. You can change
-      a button’s appearance using the <code>button-[state]</code> modifier.
+      a button’s appearance using the <code>button-*</code> modifier.
     </p>
 <pre>
 &lt;button type="button"&gt;Default&lt;/button&gt;
@@ -752,8 +785,8 @@ PRINT "SHOELACE IS AWESOME"
     <h3 id="input-addons">Input Addons</h3>
     <p>
       To create an input addon, use <code>&lt;span class=&quot;input-addon&quot;&gt;</code>. Addons
-      can appear anywhere inside an input group. Use the <code>input-addon-[size]</code>
-      modifier to change the size to match adjacent form controls.
+      can appear anywhere inside an input group. Use the <code>input-addon-*</code> modifier to
+      change the size to match adjacent form controls.
     </p>
 <pre>
 &lt;div class=&quot;input-group&quot;&gt;
@@ -1234,8 +1267,8 @@ PRINT "SHOELACE IS AWESOME"
     <h3 id="sizing-utilities">Sizing Utilities</h3>
     <p>
       Sizing utilities can be used to set a relative width or height on any element. Just apply
-      a <code>width-[%]</code> or <code>height-[%]</code> class and the appropriate element will be
-      sized accordingly. Sizes are available from 0 – 100 in multiples of five.
+      a <code>width-*</code> or <code>height-*</code> class and the appropriate element will be
+      sized accordingly. Sizes are available as percentages from 0 – 100 in multiples of five.
     </p>
 <pre>
 &lt;div class=&quot;width-25&quot;&gt;25%&lt;/div&gt;
