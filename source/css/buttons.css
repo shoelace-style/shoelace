@@ -56,12 +56,14 @@ button:hover:not(:disabled),
 }
 
 button:active:not(:disabled),
+button.active:not(:disabled),
 .button.active:not(.disabled) {
   color: var(--button-color);
   box-shadow: var(--button-box-shadow-active);
 }
 
 button:disabled,
+button.disabled,
 .button.disabled {
   opacity: .5;
   cursor: not-allowed;
