@@ -950,7 +950,7 @@ PRINT "SHOELACE IS AWESOME"
     </p>
     <p>
       Note the class names used for the main container, the tab navs, and the tab panes. Also note
-      that each tabs links to its respective tab pane’s <code>id</code>.
+      that each tab links to its respective tab pane’s <code>id</code>.
     </p>
     <p>
       To disable a tab, add <code>disabled</code> to the appropriate tab nav.
@@ -1094,11 +1094,10 @@ PRINT "SHOELACE IS AWESOME"
     </h2>
 
     <p>
-      By default, tables are plain and unstyled. To create a styled table, apply the
-      <code>table</code> class to a table element.
+      Tables are styled for you automatically.
     </p>
 <pre>
-&lt;table class=&quot;table&quot;&gt;
+&lt;table&gt;
   &lt;thead&gt;
     &lt;tr&gt;&lt;th&gt;Item&lt;/th&gt;&lt;th&gt;Price&lt;/th&gt;&lt;/tr&gt;
   &lt;/thead&gt;
@@ -1110,7 +1109,7 @@ PRINT "SHOELACE IS AWESOME"
   &lt;/tbody&gt;
 &lt;/table&gt;
 </pre>
-    <table class="table">
+    <table>
       <thead>
         <tr><th>Item</th><th>Price</th></tr>
       </thead>
@@ -1127,11 +1126,11 @@ PRINT "SHOELACE IS AWESOME"
       Use the <code>table-striped</code> modifier to add stripes to alternating rows.
     </p>
 <pre>
-&lt;table class=&quot;table table-striped&quot;&gt;
+&lt;table class=&quot;table-striped&quot;&gt;
   ...
 &lt;/table&gt;
 </pre>
-    <table class="table table-striped">
+    <table class="table-striped">
       <thead>
         <tr><th>Item</th><th>Price</th></tr>
       </thead>
@@ -1148,11 +1147,11 @@ PRINT "SHOELACE IS AWESOME"
       Use the <code>table-bordered</code> modifier to add a border to the table.
     </p>
 <pre>
-&lt;table class=&quot;table table-bordered&quot;&gt;
+&lt;table class=&quot;table-bordered&quot;&gt;
   ...
 &lt;/table&gt;
 </pre>
-    <table class="table table-bordered">
+    <table class="table-bordered">
       <thead>
         <tr><th>Item</th><th>Price</th></tr>
       </thead>
