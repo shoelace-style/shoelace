@@ -38,6 +38,10 @@ footer {
   margin-top: var(--component-spacing-big);
 }
 
+footer img {
+  height: 2rem;
+}
+
 /* Main headings and bookmark links */
 h2[id] {
   border-bottom: solid var(--component-border-width) var(--component-border-color);
