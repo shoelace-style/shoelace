@@ -34,7 +34,6 @@ table.table-bordered {
   border: solid var(--table-border-width) var(--table-border-color);
 }
 
-table.table-bordered th,
 table.table-bordered td {
   border-style: solid;
   border-width: var(--table-border-width);
