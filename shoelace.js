@@ -21,7 +21,7 @@ let outFile = Path.join(dist, 'shoelace.css');
 Program
   .version(__version)
   .option('--clean', 'Removes the local dist directory')
-  .option('--dist', 'Builds a dist')
+  .option('--build', 'Builds a release')
   .option('--s3', 'Publish latest release to an S3 bucket (requires .env file)')
   .on('--help', () => {
     console.log(Chalk.cyan('\n  Version %s\n'), __version);
@@ -35,8 +35,8 @@ if(!process.argv.slice(2).length) {
   process.exit(1);
 }
 
-// Run dist task
-if(Program.dist) {
+// Run build task
+if(Program.build) {
   const clean = new CleanCSS({
     // format: 'beautify',
     inline: ['local'],
@@ -157,9 +157,9 @@ if(Program.dist) {
       process.exit(-1);
     });
 } else {
-  // Can't use the --s3 options without --dist
+  // Can't use the --s3 options without --build
   if(Program.s3) {
-    console.error(Chalk.yellow('The --s3 flag can only be used with --dist'));
+    console.error(Chalk.yellow('The --s3 flag can only be used with --build'));
     process.exit(-1);
   }
 }
