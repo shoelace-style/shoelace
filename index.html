@@ -56,6 +56,7 @@
       <a class="github-button" href="https://github.com/claviska/shoelace-css/releases" data-icon="octicon-cloud-download" data-size="large" aria-label="Download claviska/shoelace-css on GitHub">Download</a>
       <a class="github-button" href="https://github.com/claviska/shoelace-css/issues" data-icon="octicon-issue-opened" data-size="large" aria-label="Issue claviska/shoelace-css on GitHub">Report a Bug</a>
       <a class="github-button" href="https://github.com/claviska/shoelace-css" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star claviska/shoelace-css on GitHub">Star</a>
+      <a href="https://twitter.com/shoelacecss" class="button button-info" style="margin-bottom: 1.2rem;">Follow</a>
       <a href="https://paypal.me/claviska" class="button button-success" style="margin-bottom: 1.2rem;">Donate</a>
     </p>
     <p class="text-small text-muted text-center">
@@ -171,12 +172,11 @@ npm install --save-dev shoelace-css
 </pre>
     <p>
       Refer to <code><a href="source/css/variables.css">variables.css</a></code> for a complete
-      list of variables in Shoelace.
-    </p>
-    <p>
-      If you’re not familiar with CSS variables,
+      list of variables in Shoelace. If you’re not familiar with CSS variables,
       <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_variables">this article</a>
-      will bring you up to speed.
+      will bring you up to speed. There’s also an
+      <a href="https://codepen.io/claviska/pen/NvGVYM?editors=1100">interactive demo</a> if you want
+      to try it out.
     </p>
 
     <h3 id="custom-components">Custom Components</h3>
@@ -193,9 +193,9 @@ npm install --save-dev shoelace-css
     <p>
       <strong>Define new variables when it makes sense to.</strong> Take a look at
       <code><a href="source/css/variables.css">variables.css</a></code> to see how existing
-      components are defined. Many use core variables instead of hardcoded values. This makes it
-      easy for users to customize Shoelace quickly, but also gives them the flexibility to style
-      individual components as needed.
+      components are defined. Many use core variables instead of hardcoded properties as default
+      values. This makes it easy for users to customize things quickly, but still provides enough
+      flexibility to style individual components.
     </p>
     <p>
       <strong>Semantic markup is strongly encouraged.</strong> Custom components should use the most
@@ -203,9 +203,10 @@ npm install --save-dev shoelace-css
     </p>
     <p>
       <strong>Keep everything together.</strong> During development, each component should be in its
-      own folder along with its stylesheets, scripts, and documentation. This makes it easy to add
-      or remove components from your app without affecting others. Of course, it’s perfectly fine to
-      bundle components for optimization purposes in production.
+      own folder along with its stylesheets, scripts, and documentation. Components shouldn’t depend
+      on other components’ styles or scripts. This makes it easier to add or remove components from
+      your app without affecting others. Of course, it’s perfectly fine to bundle components for
+      optimization purposes in production.
     </p>
 
     <!--********************************************************************************************
@@ -1413,9 +1414,12 @@ Example: class="p-left-medium m-bottom-none"
     * Attribution
     *********************************************************************************************-->
 
-    <h2 id="attribution">Attribution</h2>
+    <h2 id="attribution">
+      <a class="bookmark" href="#attribution">#</a>
+      Attribution
+    </h2>
     <p>
-      Special thanks to the following organizations and individuals for their contributions to
+      Special thanks to the following individuals and organizations for their contributions to
       Shoelace.css. Listed in no particular order.
     </p>
     <ul>
