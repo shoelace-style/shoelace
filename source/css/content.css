@@ -94,9 +94,8 @@ h6 { font-size: var(--headings-font-size-h6); }
 
 hr {
   border: none;
-  border-top: solid var(--hr-width) var(--component-border-color);
-  margin-top: var(--component-spacing-big);
-  margin-bottom: var(--component-spacing-big);
+  border-top: solid var(--hr-border-width) var(--hr-border-color);
+  margin: var(--hr-spacing) 0;
 }
 
 img {

@@ -75,7 +75,9 @@
   --headings-font-size-h5: 1.25rem;
   --headings-font-size-h6: 1rem;
 
-  --hr-width: 1px;
+  --hr-border-width: 1px;
+  --hr-border-color: var(--component-border-color);
+  --hr-spacing: var(--component-spacing-big);
 
   --kbd-font-size: 90%;
   --kbd-color: var(--color-white);
