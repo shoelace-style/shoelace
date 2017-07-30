@@ -54,7 +54,7 @@ blockquote {
 }
 
 code {
-  font-family: var(--font-family-monospace);
+  font-family: var(--font-monospace);
   font-size: var(--code-font-size);
   color: var(--code-color);
   background-color: var(--code-bg-color);
@@ -109,7 +109,7 @@ ins {
 }
 
 kbd {
-  font-family: var(--font-family-monospace);
+  font-family: var(--font-monospace);
   font-size: var(--kbd-font-size);
   color: var(--kbd-color);
   background-color: var(--kbd-bg-color);
@@ -131,7 +131,7 @@ p {
 pre {
   max-height: var(--pre-max-height);
   overflow-y: auto;
-  font-family: var(--font-family-monospace);
+  font-family: var(--font-monospace);
   color: var(--pre-color);
   background-color: var(--pre-bg-color);
   border-radius: var(--pre-border-radius);

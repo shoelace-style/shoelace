@@ -2,10 +2,10 @@
 
 :root {
   /* Fonts */
-  --font-family-sans-serif: sans-serif;
-  --font-family-serif: serif;
-  --font-family-system: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-family-monospace: Menlo, Consolas, "DejaVu Sans Mono", monospace;
+  --font-sans-serif: sans-serif;
+  --font-serif: serif;
+  --font-system: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-monospace: Menlo, Consolas, "DejaVu Sans Mono", monospace;
 
   /* Colors (most courtesy of http://clrs.cc/) */
   --color-primary: tomato;
@@ -46,7 +46,7 @@
   /* Content */
   --body-bg-color: var(--color-white);
   --body-color: var(--color-black);
-  --font-family: var(--font-family-system);
+  --font-family: var(--font-system);
   --font-size: 1rem; /* Most browsers use a default font size of 16px */
   --font-size-big: 1.25rem;
   --font-size-small: .875rem;
@@ -63,7 +63,7 @@
   --code-spacing-x: calc(var(--font-size) * .4);
   --code-spacing-y: calc(var(--font-size) * .2);
 
-  --headings-font-family: var(--font-family-system);
+  --headings-font-family: var(--font-system);
   --headings-font-weight: var(--font-weight-light);
   --headings-line-height: 1.1;
   --headings-margin-bottom: .5rem;
