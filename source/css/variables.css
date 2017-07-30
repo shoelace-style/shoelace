@@ -57,7 +57,7 @@
   --text-muted: var(--color-gray);
 
   --code-font-size: 90%;
-  --code-color: var(--color-olive);
+  --code-color: var(--color-black);
   --code-border-radius: var(--component-border-radius);
   --code-bg-color: var(--component-bg-color);
   --code-spacing-x: calc(var(--font-size) * .4);

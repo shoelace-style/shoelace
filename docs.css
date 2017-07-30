@@ -1,5 +1,5 @@
 body {
-  border-top: solid .3rem var(--color-primary);
+  border-top: solid .3rem #7fdbff;
 }
 
 main {
@@ -21,7 +21,7 @@ h4[id] {
 }
 
 h1 img {
-  height: 1em;
+  width: 24rem;
   vertical-align: middle;
 }
 
@@ -39,7 +39,7 @@ footer {
 }
 
 footer img {
-  height: 2rem;
+  width: 16rem;
 }
 
 /* Main headings and bookmark links */
