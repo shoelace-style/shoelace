@@ -179,9 +179,9 @@
 
   /* Loaders */
   --loader-bg-color: var(--component-bg-color);
-  --loader-color: var(--color-primary);
+  --loader-border-color: var(--color-primary);
+  --loader-border-width: .25rem;
   --loader-size: 2rem;
-  --loader-width: .25rem;
   --loader-speed: 750ms;
   --loader-spacing-x: var(--component-spacing-small);
   --loader-spacing-y: 0;
