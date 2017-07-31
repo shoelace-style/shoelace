@@ -9,9 +9,9 @@ const FS = require('fs');
 const Path = require('path');
 const Program = require('commander');
 const S3 = require('s3');
-const postcss = require('postcss');
-const cssnano = require('cssnano');
-const atImport = require('postcss-import');
+const PostCSS = require('postcss');
+const CSSnano = require('cssnano');
+const AtImport = require('postcss-import');
 
 let source = Path.join(__dirname, 'source/css');
 let dist = Path.join(__dirname, 'dist');
@@ -47,9 +47,9 @@ if(Program.build) {
         stats: {
           originalSize: css.length
         }
-      }
+      };
 
-      postcss([atImport, cssnano({
+      PostCSS([AtImport, CSSnano({
         safe: true
       })]).process(css, {
         from: inFile
@@ -68,10 +68,6 @@ if(Program.build) {
         originalSize: (output.stats.originalSize / 1024).toFixed(1) + 'KB', // KB
         minifiedSize: (output.stats.minifiedSize / 1024).toFixed(1) + 'KB' // KB
       };
-
-      // Show output warnings and errors
-      // output.warnings.forEach((err) => console.log(Chalk.red(err)));
-      // output.errors.forEach((err) => console.log(Chalk.red(err)));
 
       // Update placeholders in CSS
       output.styles = output.styles
