@@ -193,6 +193,18 @@
   --spacing-medium: calc(var(--component-spacing) * 2);
   --spacing-big: calc(var(--component-spacing) * 4);
 
+  /* Switches */
+  --switch-bg-color: var(--component-border-color);
+  --switch-bg-color-checked: var(--color-primary);
+  --switch-border-radius: var(--switch-size);
+  --switch-size: 2rem;
+  --switch-size-small: 1rem;
+  --switch-size-big: 3rem;
+  --switch-thumb-bg-color: white;
+  --switch-thumb-border-radius: 50%;
+  --switch-thumb-spacing: 2px;
+  --switch-speed: .2s;
+
   /* Tabs */
   --tab-bg-color: var(--body-bg);
   --tab-bg-color-hover: var(--body-bg);
