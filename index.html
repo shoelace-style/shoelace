@@ -114,13 +114,18 @@
 &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.shoelace.style/<span data-version>1.0.0-beta5</span>/shoelace.css&quot;&gt;
 </pre>
     <p>
-      If you decide to use the CDN link, consider speeding up performance by adding a <code>preload</code> resource hint to give the browser a head start on loading the CSS. You can do this by adding this <code>Link</code> HTTP response header to your web server configuration for requests to pages:
+      If you decide to use the CDN link, consider speeding up performance by adding a
+      <code>preload</code> resource hint to give the browser a head start on loading the CSS. You
+      can do this by adding this <code>Link</code> HTTP response header to your web server
+      configuration for requests to pages:
     </p>
 <pre>
 Link: &lt;https://cdn.shoelace.style/<span data-version>1.0.0-beta5</span>/shoelace.css&gt;; rel=preload; as=style; crossorigin
 </pre>
     <p>
-      For more information on resource hints and how they work, <a href="https://www.w3.org/TR/resource-hints/" rel="noopener">check out the W3C specification</a>. You can also use <code>preload</code> even if you serve Shoelace from your own server.
+      For more information on resource hints and how they work,
+      <a href="https://www.w3.org/TR/resource-hints/" rel="noopener">check out the W3C specification</a>.
+      You can also use <code>preload</code> even if you serve Shoelace from your own server.
     </p>
 
     <h3 id="download">Download</h3>
