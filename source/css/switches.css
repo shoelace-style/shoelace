@@ -1,3 +1,5 @@
+/*! Switches */
+
 .switch-small {
   --switch-size: var(--switch-size-small);
 }
