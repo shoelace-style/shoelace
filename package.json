@@ -11,11 +11,13 @@
   },
   "devDependencies": {
     "chalk": "^2.0.1",
-    "clean-css": "^4.1.7",
     "commander": "^2.11.0",
+    "cssnano": "^3.10.0",
     "del": "^3.0.0",
     "dotenv": "^4.0.0",
     "fs": "0.0.1-security",
+    "postcss": "^6.0.8",
+    "postcss-import": "^10.0.0",
     "s3": "^4.4.0"
   }
 }

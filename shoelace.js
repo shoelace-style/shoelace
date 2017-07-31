@@ -3,13 +3,15 @@
 global.__version = require('./package.json').version;
 
 require('dotenv').config();
-const CleanCSS = require('clean-css');
 const Chalk = require('chalk');
 const Del = require('del');
 const FS = require('fs');
 const Path = require('path');
 const Program = require('commander');
 const S3 = require('s3');
+const PostCSS = require('postcss');
+const CSSnano = require('cssnano');
+const AtImport = require('postcss-import');
 
 let source = Path.join(__dirname, 'source/css');
 let dist = Path.join(__dirname, 'dist');
@@ -37,41 +39,35 @@ if(!process.argv.slice(2).length) {
 
 // Run build task
 if(Program.build) {
-  const clean = new CleanCSS({
-    // format: 'beautify',
-    inline: ['local'],
-    rebaseTo: Path.dirname(dist),
-    specialComments: 'all'
-  });
-
   Promise.resolve()
     // Generate minified version
-    .then(() => new Promise((resolve, reject) => {
-      clean.minify({
-        [inFile]: { styles: FS.readFileSync(inFile, 'utf8') }
-      }, (errors, output) => {
-        // Show errors
-        if(errors) {
-          errors.forEach((err) => console.log(Chalk.red(err)));
-          reject(new Error('Failed to minify styles.'));
-          return;
+    .then(() => new Promise((resolve, reject) =>{
+      let css = FS.readFileSync(inFile, 'utf8');
+      let output = {
+        stats: {
+          originalSize: css.length
         }
+      };
 
+      PostCSS([AtImport, CSSnano({
+        safe: true
+      })]).process(css, {
+        from: inFile
+      }).then((result) => {
+        output.styles = result.css;
+        output.stats.minifiedSize = output.styles.length;
         resolve(output);
+      }).catch((err) => {
+        reject(err);
       });
-
     }))
     // Write dist files
     .then((output) => new Promise((resolve, reject) => {
       // Get stats
       let stats = {
-        originalSize: parseInt(output.stats.originalSize / 1000) + 'KB', // KB
-        minifiedSize: parseInt(output.stats.minifiedSize / 1000) + 'KB' // KB
+        originalSize: (output.stats.originalSize / 1024).toFixed(1) + 'KB', // KB
+        minifiedSize: (output.stats.minifiedSize / 1024).toFixed(1) + 'KB' // KB
       };
-
-      // Show output warnings and errors
-      output.warnings.forEach((err) => console.log(Chalk.red(err)));
-      output.errors.forEach((err) => console.log(Chalk.red(err)));
 
       // Update placeholders in CSS
       output.styles = output.styles
