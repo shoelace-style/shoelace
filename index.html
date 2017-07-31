@@ -31,7 +31,7 @@
     <p>
       Shoelace is highly customizable through CSS variables. It doesn’t require Less, Sass, or any
       preprocessing at all. The minified version is only
-      <span data-minifiedSize>32KB</span> and much smaller when gzipped.
+      <span data-minifiedSize>31.4KB</span> and much smaller when gzipped.
     </p>
     <p>
       Just link to <code>shoelace.css</code> and add customizations to your stylesheet.
@@ -114,30 +114,13 @@
 &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.shoelace.style/<span data-version>1.0.0-beta5</span>/shoelace.css&quot;&gt;
 </pre>
     <p>
-      If you decide to use a CDN, consider speeding up performance by at least adding a <code>preconnect</code> resource hint to give the browser a head start on connecting to the CDN server. You can do this by adding a <code>&lt;link&gt;</code> HTML element in the head like so:
+      If you decide to use the CDN link, consider speeding up performance by adding a <code>preload</code> resource hint to give the browser a head start on loading the CSS. You can do this by adding this <code>Link</code> HTTP response header to your web server configuration for requests to pages:
     </p>
 <pre>
-&lt;link rel=&quot;preconnect&quot; href=&quot;https://cdn.shoelace.style&quot; crossorigin&gt;
+Link: &lt;https://cdn.shoelace.style/<span data-version>1.0.0-beta5</span>/shoelace.css&gt;; rel=preload; as=style; crossorigin
 </pre>
     <p>
-      Though if you really want to supercharge loading of Shoelace from a CDN, consider using a <code>preload</code> <a href="https://www.w3.org/TR/resource-hints/" rel="noopener">resource hint</a> instead:
-    </p>
-<pre>
-&lt;link rel=&quot;preload&quot; as=&quot;style&quot; href=&quot;https://cdn.shoelace.style/<span data-version>1.0.0-beta4</span>/shoelace.css&quot; crossorigin&gt;
-</pre>
-    <p>
-      These can also be expressed in HTTP headers, which may be slightly more performant since the hint will be discovered earlier in the HTTP response:
-    </p>
-<pre>
-Link: &lt;https://cdn.shoelace.style/<span data-version>1.0.0-beta4</span>/shoelace.css&gt;; rel=preload; as=style; crossorigin
-</pre>
-    <p>
-      Whether it's <code>preconnect</code> or <code>preload</code>, just make sure you pick <em>one</em>, because you don't need both.
-    </p>
-    <p class="text-right">
-      <a href="https://www.keycdn.com/">
-        <img src="https://logos.keycdn.com/keycdn-logo.svg" alt="KeyCDN logo" class="width-20">
-      </a>
+      For more information on resource hints and how they work, <a href="https://www.w3.org/TR/resource-hints/" rel="noopener">check out the W3C specification</a>. You can also use <code>preload</code> even if you serve Shoelace from your own server.
     </p>
 
     <h3 id="download">Download</h3>
