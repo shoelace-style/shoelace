@@ -65,8 +65,8 @@ if(Program.build) {
     .then((output) => new Promise((resolve, reject) => {
       // Get stats
       let stats = {
-        originalSize: parseInt(output.stats.originalSize / 1024) + 'KB', // KB
-        minifiedSize: parseInt(output.stats.minifiedSize / 1024) + 'KB' // KB
+        originalSize: (output.stats.originalSize / 1024).toFixed(1) + 'KB', // KB
+        minifiedSize: (output.stats.minifiedSize / 1024).toFixed(1) + 'KB' // KB
       };
 
       // Show output warnings and errors
