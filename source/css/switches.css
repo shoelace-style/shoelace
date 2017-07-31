@@ -1,0 +1,72 @@
+/*! Switches */
+
+.switch-small {
+  --switch-size: var(--switch-size-small);
+}
+
+.switch-big {
+  --switch-size: var(--switch-size-big);
+}
+
+.switch input {
+  display: none;
+}
+
+.switch input + label {
+  position: relative;
+  min-width: calc(var(--switch-size) * 2);
+  height: var(--switch-size);
+  line-height: var(--switch-size);
+  border-radius: var(--switch-thumb-border-radius);
+  display: inline-block;
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+  vertical-align: middle;
+  text-indent: calc(var(--switch-size) * 2 + .5rem);
+}
+
+.switch input + label::before,
+.switch input + label::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(var(--switch-size) * 2);
+  bottom: 0;
+  display: block;
+}
+
+.switch input + label::before {
+  right: 0;
+  background-color: var(--switch-bg-color);
+  border-radius: var(--switch-border-radius);
+  transition: background-color var(--switch-speed);
+}
+
+.switch input + label:after {
+  top: var(--switch-thumb-spacing);
+  left: var(--switch-thumb-spacing);
+  width: calc(var(--switch-size) - var(--switch-thumb-spacing) * 2);
+  height: calc(var(--switch-size) - var(--switch-thumb-spacing) * 2);
+  border-radius: var(--switch-thumb-border-radius);
+  background-color: var(--switch-thumb-bg-color);
+  transition: margin var(--switch-speed);
+}
+
+.switch input:checked + label::before {
+  background-color: var(--switch-bg-color-checked);
+}
+
+.switch input:checked + label::after {
+  margin-left: var(--switch-size);
+}
+
+.switch input:disabled + label {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+.switch + .switch {
+  margin-left: 1rem;
+}

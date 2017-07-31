@@ -31,7 +31,7 @@
     <p>
       Shoelace is highly customizable through CSS variables. It doesn’t require Less, Sass, or any
       preprocessing at all. The minified version is only
-      <span data-minifiedSize>29.8KB</span> and much smaller when gzipped.
+      <span data-minifiedSize>32KB</span> and much smaller when gzipped.
     </p>
     <p>
       Just link to <code>shoelace.css</code> and add customizations to your stylesheet.
@@ -60,7 +60,7 @@
       <a href="https://paypal.me/claviska" class="button button-success" style="margin-bottom: 1.2rem;">Donate</a>
     </p>
     <p class="text-small text-muted text-center">
-      Version <span data-version>1.0.0-beta4</span>
+      Version <span data-version>1.0.0-beta5</span>
     </p>
 
     <!--********************************************************************************************
@@ -81,6 +81,7 @@
       <li><a href="#buttons">Buttons</a></li>
       <li><a href="#forms">Forms</a></li>
       <li><a href="#loaders">Loaders</a></li>
+      <li><a href="#switches">Switches</a></li>
       <li><a href="#tabs">Tabs</a></li>
       <li><a href="#tables">Tables</a></li>
       <li><a href="#utilities">Utilities</a></li>
@@ -110,7 +111,7 @@
       at <a href="https://www.keycdn.com/">KeyCDN</a>.
     </p>
 <pre>
-&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.shoelace.style/<span data-version>1.0.0-beta4</span>/shoelace.css&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.shoelace.style/<span data-version>1.0.0-beta5</span>/shoelace.css&quot;&gt;
 </pre>
     <p>
       If you decide to use a CDN, consider speeding up performance by at least adding a <code>preconnect</code> resource hint to give the browser a head start on connecting to the CDN server. You can do this by adding a <code>&lt;link&gt;</code> HTML element in the head like so:
@@ -964,6 +965,92 @@ PRINT "SHOELACE IS AWESOME"
       <div class="loader-bg loader-bg-big"></div>
     </div>
 
+
+    <!--********************************************************************************************
+    * Switches
+    *********************************************************************************************-->
+
+    <h2 id="switches">
+      <a class="bookmark" href="#switches">#</a>
+      Switches
+    </h2>
+
+    <p>
+      Switches provide an alternative to standard checkboxes. Many people find them more intuitive
+      and easier to use, especially on mobile devices. Shoelace provides a way to create beautiful,
+      animated switches with pure CSS.
+    </p>
+    <p>
+      Because this is a pure CSS solution, there are a couple important things to remember:
+    </p>
+    <ul>
+      <li>
+        Each switch must have a unique <code>id</code>
+      </li>
+      <li>
+        The <code>&lt;label&gt;</code> must have a <code>for</code> attribute that references the switch <code>id</code>
+      </li>
+      <li>
+        The <code>&lt;label&gt;</code> must come <strong>after</strong> the checkbox, otherwise the
+        control won’t render
+      </li>
+    </ul>
+    <p>
+      The markup for a switch looks like this:
+    </p>
+<pre>
+&lt;span class=&quot;switch&quot;&gt;
+  &lt;input type=&quot;checkbox&quot; class=&quot;switch&quot; id=&quot;switch-1&quot;&gt;
+  &lt;label for=&quot;switch-1&quot;&gt;Option 1&lt;/label&gt;
+&lt;/span&gt;
+
+&lt;span class=&quot;switch&quot;&gt;
+  &lt;input type=&quot;checkbox&quot; class=&quot;switch&quot; id=&quot;switch-2&quot; checked&gt;
+  &lt;label for=&quot;switch-2&quot;&gt;Option 2&lt;/label&gt;
+&lt;/span&gt;
+</pre>
+    <div class="input-single">
+      <span class="switch">
+        <input type="checkbox" class="switch" id="switch-1">
+        <label for="switch-1">Option 1</label>
+      </span>
+
+      <span class="switch">
+        <input type="checkbox" class="switch" id="switch-2" checked>
+        <label for="switch-2">Option 2</label>
+      </span>
+    </div>
+    <p>
+      Use the <code>switch-small</code> and <code>switch-big</code> modifiers to change the size of
+      a switch.
+    </p>
+    <div class="input-single">
+      <span class="switch switch-small">
+        <input type="checkbox" class="switch" id="switch-3">
+        <label for="switch-3">Small</label>
+      </span>
+
+      <span class="switch">
+        <input type="checkbox" class="switch" id="switch-4">
+        <label for="switch-4">Normal</label>
+      </span>
+
+      <span class="switch switch-big">
+        <input type="checkbox" class="switch" id="switch-5">
+        <label for="switch-5">Big</label>
+      </span>
+    </div>
+    <p>
+      Disabled switches are dimmed out. To disable a switch, add the <code>disabled</code> attribute
+      to the checkbox (not the wrapper).
+    </p>
+    <div class="input-single">
+      <span class="switch">
+        <input type="checkbox" class="switch" disabled id="switch-6">
+        <label for="switch-6">Disabled</label>
+      </span>
+    </div>
+
     <!--********************************************************************************************
     * Tabs
     *********************************************************************************************-->
@@ -1472,7 +1559,7 @@ Example: class="p-left-medium m-bottom-none"
         <img src="source/img/wordmark.svg" alt="Shoelace logo">
       </p>
       <p class="text-small text-muted">
-        Shoelace.css <span data-version>1.0.0-beta4</span> &middot;
+        Shoelace.css <span data-version>1.0.0-beta5</span> &middot;
         &copy; A Beautiful Site, LLC
       </p>
       <p class="text-small text-muted">
