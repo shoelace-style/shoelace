@@ -49,7 +49,8 @@ textarea {
   line-height: 1;
   vertical-align: middle;
   display: block;
-  padding: calc(var(--component-spacing) * .5);
+  padding-left: calc(var(--component-spacing) * .5);
+  padding-right: calc(var(--component-spacing) * .5);
   margin: 0;
   transition: .1s border-color, .1s background-color, .1s color;
   white-space: nowrap;
@@ -92,6 +93,10 @@ textarea {
   resize: vertical;
   line-height: var(--line-height);
   white-space: normal;
+}
+
+input[type="color"] {
+  padding: calc(var(--component-spacing) * .5);
 }
 
 input[type="color"]::-webkit-color-swatch-wrapper {
