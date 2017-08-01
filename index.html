@@ -111,21 +111,13 @@
       at <a href="https://www.keycdn.com/">KeyCDN</a>.
     </p>
 <pre>
+&lt;link rel=&quot;preload&quot; href=&quot;https://cdn.shoelace.style/<span data-version>1.0.0-beta5</span>/shoelace.css&quot; as=&quot;style&quot; crossorigin&gt;
 &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.shoelace.style/<span data-version>1.0.0-beta5</span>/shoelace.css&quot;&gt;
 </pre>
     <p>
-      If you decide to use the CDN link, consider speeding up performance by adding a
-      <code>preload</code> resource hint to give the browser a head start on loading the CSS. You
-      can do this by adding this <code>Link</code> HTTP response header to your web server
-      configuration for requests to pages:
-    </p>
-<pre>
-Link: &lt;https://cdn.shoelace.style/<span data-version>1.0.0-beta5</span>/shoelace.css&gt;; rel=preload; as=style; crossorigin
-</pre>
-    <p>
-      For more information on resource hints and how they work,
-      <a href="https://www.w3.org/TR/resource-hints/" rel="noopener">check out the W3C specification</a>.
-      You can also use <code>preload</code> even if you serve Shoelace from your own server.
+      Note that the first <code>&lt;link&gt;</code> is optional but can improve performance in
+      supportive browsers.
+      <a href="https://www.w3.org/TR/preload/#x2.link-type-preload">Learn more about preloading.</a>
     </p>
 
     <h3 id="download">Download</h3>
