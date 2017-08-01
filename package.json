@@ -10,6 +10,7 @@
     "url": "https://github.com/claviska/shoelace-css"
   },
   "devDependencies": {
+    "autoprefixer": "^7.1.2",
     "chalk": "^2.0.1",
     "commander": "^2.11.0",
     "cssnano": "^3.10.0",
@@ -17,7 +18,9 @@
     "dotenv": "^4.0.0",
     "fs": "0.0.1-security",
     "postcss": "^6.0.8",
+    "postcss-css-variables": "^0.7.0",
     "postcss-import": "^10.0.0",
     "s3": "^4.4.0"
-  }
+  },
+  "dependencies": {}
 }
