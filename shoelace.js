@@ -12,7 +12,6 @@ const S3 = require('s3');
 const PostCSS = require('postcss');
 const Autoprefixer = require('autoprefixer');
 const AtImport = require('postcss-import');
-const CSSVariables = require('postcss-css-variables');
 const CSSnano = require('cssnano');
 
 let source = Path.join(__dirname, 'source/css');
@@ -53,7 +52,7 @@ if(Program.build) {
 
       PostCSS([Autoprefixer({
         browsers: ["last 2 versions", "> 5%", "ie >= 11", "iOS >= 8"]
-      }), AtImport, CSSVariables, CSSnano({
+      }), AtImport, CSSnano({
         safe: true
       })]).process(css, {
         from: inFile

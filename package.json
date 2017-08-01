@@ -18,7 +18,6 @@
     "dotenv": "^4.0.0",
     "fs": "0.0.1-security",
     "postcss": "^6.0.8",
-    "postcss-css-variables": "^0.7.0",
     "postcss-import": "^10.0.0",
     "s3": "^4.4.0"
   },
