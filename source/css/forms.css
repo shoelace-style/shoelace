@@ -143,17 +143,17 @@ textarea.input-big {
 }
 
 /* Range styles courtesy of http://danielstern.ca/range.css/ */
-input[type=range] {
+input[type="range"] {
   -webkit-appearance: none;
   width: 100%;
   margin: 1rem 0;
 }
 
-input[type=range]:focus {
+input[type="range"]:focus {
   outline: none;
 }
 
-input[type=range]::-webkit-slider-runnable-track {
+input[type="range"]::-webkit-slider-runnable-track {
   width: 100%;
   height: .5rem;
   cursor: pointer;
@@ -163,7 +163,7 @@ input[type=range]::-webkit-slider-runnable-track {
   box-shadow: var(--input-range-track-box-shadow);
 }
 
-input[type=range]::-webkit-slider-thumb {
+input[type="range"]::-webkit-slider-thumb {
   border: none;
   width: 1.5rem;
   height: 1.5rem;
@@ -174,11 +174,11 @@ input[type=range]::-webkit-slider-thumb {
   margin-top: -.5rem;
 }
 
-input[type=range]:focus::-webkit-slider-runnable-track {
+input[type="range"]:focus::-webkit-slider-runnable-track {
   background: var(--input-range-track-color);
 }
 
-input[type=range]::-moz-range-track {
+input[type="range"]::-moz-range-track {
   width: 100%;
   height: .5rem;
   cursor: pointer;
@@ -188,7 +188,7 @@ input[type=range]::-moz-range-track {
   box-shadow: var(--input-range-track-box-shadow);
 }
 
-input[type=range]::-moz-range-thumb {
+input[type="range"]::-moz-range-thumb {
   border: none;
   height: 1.5rem;
   width: 1.5rem;
@@ -197,7 +197,7 @@ input[type=range]::-moz-range-thumb {
   cursor: pointer;
 }
 
-input[type=range]::-ms-track {
+input[type="range"]::-ms-track {
   width: 100%;
   height: .5rem;
   cursor: pointer;
@@ -206,19 +206,19 @@ input[type=range]::-ms-track {
   color: transparent;
 }
 
-input[type=range]::-ms-fill-lower {
+input[type="range"]::-ms-fill-lower {
   background: #2f6ea5;
   border: none;
   border-radius: var(--input-border-radius);
 }
 
-input[type=range]::-ms-fill-upper {
+input[type="range"]::-ms-fill-upper {
   background: var(--input-range-track-color);
   border: none;
   border-radius: var(--input-border-radius);
 }
 
-input[type=range]::-ms-thumb {
+input[type="range"]::-ms-thumb {
   border: none;
   height: .5rem;
   width: .5rem;
@@ -227,11 +227,11 @@ input[type=range]::-ms-thumb {
   cursor: pointer;
 }
 
-input[type=range]:focus::-ms-fill-lower {
+input[type="range"]:focus::-ms-fill-lower {
   background: var(--input-range-track-color);
 }
 
-input[type=range]:focus::-ms-fill-upper {
+input[type="range"]:focus::-ms-fill-upper {
   background: var(--input-range-track-color);
 }
 
