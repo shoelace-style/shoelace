@@ -74,6 +74,10 @@
 * Spacing utilities
 ***************************************************************************************************/
 
+.flex { display: flex !important; }
+.flex-wrap { flex-wrap: wrap !important; }
+.flex-nowrap { flex-wrap: nowrap !important; }
+
 .m-none { margin: 0 !important; }
 .m-x-none { margin-left: 0 !important; margin-right: 0 !important; }
 .m-y-none { margin-top: 0 !important; margin-bottom: 0 !important; }
@@ -139,6 +143,8 @@
 .p-l-big { padding-left: var(--spacing-big) !important; }
 
 .m-x-auto { margin-left: auto !important; margin-right: auto !important; }
+.m-y-auto { margin-top: auto !important; margin-bottom: auto !important; }
+.m-xy-auto { margin: auto !important; }
 
 /***************************************************************************************************
 * Text utilities
