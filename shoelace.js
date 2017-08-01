@@ -51,7 +51,7 @@ if(Program.build) {
       };
 
       PostCSS([Autoprefixer({
-        browsers: ["last 2 versions", "> 5%", "ie >= 11", "iOS >= 8"]
+        browsers: ['last 2 versions', '> 5%', 'ie >= 11', 'iOS >= 8']
       }), AtImport, CSSnano({
         safe: true
       })]).process(css, {
