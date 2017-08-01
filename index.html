@@ -51,7 +51,7 @@
       Shoelace was created by <a href="https://twitter.com/claviska">@claviska</a> for
       <a href="https://www.surrealcms.com/">Surreal CMS</a>. It’s available under the MIT license.
     </p>
-    <p class="m-t-medium text-center">
+    <p class="margin-t-medium text-center">
       <a class="github-button" href="https://github.com/claviska/shoelace-css/fork" data-size="large" aria-label="Fork claviska/shoelace-css on GitHub">Fork</a>
       <a class="github-button" href="https://github.com/claviska/shoelace-css/releases" data-icon="octicon-cloud-download" data-size="large" aria-label="Download claviska/shoelace-css on GitHub">Download</a>
       <a class="github-button" href="https://github.com/claviska/shoelace-css/issues" data-icon="octicon-issue-opened" data-size="large" aria-label="Issue claviska/shoelace-css on GitHub">Report a Bug</a>
@@ -1401,28 +1401,27 @@ PRINT "SHOELACE IS AWESOME"
       the desired class and the appropriate element will receive the respective padding/margin.
     </p>
     <p>
-      Class names are prefixed with <code>m-</code> or <code>p-</code> for margin and padding,
-      respectively. To apply a padding/margin to all sides of an element, use the following
-      classes:
+      Class names are prefixed with <code>padding-</code> or <code>margin-</code> for padding and
+      margin, respectively. To apply spacing to all sides of an element, use the following classes:
     </p>
 <pre>
-p-[none|small|medium|big]
-m-[none|small|medium|big]
+padding-[none|small|medium|big]
+margin-[none|small|medium|big]
 
-Example: class="p-none m-big"
+Example: &lt;div class=&quot;padding-none margin-big&quot;&gt;
 </pre>
     <p>
-      To apply a padding/margin to a specific side of an element, use one or more of the following
-      classes:
+      To apply spacing to a specific side of an element, use one or more of the following classes:
     </p>
 <pre>
-p-[top|right|bottom|left|x|y]-[none|small|medium|big]
-m-[top|right|bottom|left|x|y]-[none|small|medium|big]
+padding-[top|right|bottom|left|x|y]-[none|small|medium|big]
+margin-[top|right|bottom|left|x|y]-[none|small|medium|big]
 
-Example: class="p-left-medium m-bottom-none"
+Example: &lt;div class=&quot;padding-left-medium margin-bottom-none&quot;&gt;
 </pre>
     <p>
-      You can also use <code>m-x-auto</code> to horizontally center a fixed width block.
+      You can also use <code>margin-[x|y|xy]-auto</code> to set automatic margins horizontally
+      and/or horizontally.
     </p>
 
     <!--********************************************************************************************
