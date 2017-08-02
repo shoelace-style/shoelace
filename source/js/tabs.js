@@ -27,27 +27,31 @@
 // To programmatically show or hide a tab, apply the "active" class to the appropriate tab nav and
 // tab pane. (Make sure to remove the "active" class from other active navs/panes first!)
 //
-$(function() {
-  'use strict';
+if(typeof jQuery === 'undefined') {
+  throw new Error('The Shoelace tabs script requires jQuery.');
+} else {
+  jQuery(function($) {
+    'use strict';
 
-  // Watch for clicks on tabs
-  $('.tabs-nav').on('click', 'a', function(event) {
-    var tabset = $(this).closest('.tabs');
-    var tab = this;
+    // Watch for clicks on tabs
+    $('.tabs-nav').on('click', 'a', function(event) {
+      var tabset = $(this).closest('.tabs');
+      var tab = this;
 
-    event.preventDefault();
+      event.preventDefault();
 
-    // Ignore tabs without an href or with the "disabled" class
-    if(!tab.hash || $(tab).is('.disabled')) return;
+      // Ignore tabs without an href or with the "disabled" class
+      if(!tab.hash || $(tab).is('.disabled')) return;
 
-    // Make the selected tab active
-    $(tab)
-      .siblings().removeClass('active').end()
-      .addClass('active');
+      // Make the selected tab active
+      $(tab)
+        .siblings().removeClass('active').end()
+        .addClass('active');
 
-    // Make the appropriate tab pane active
-    $(tabset)
-      .find('.tabs-pane').removeClass('active').end()
-      .find(tab.hash).addClass('active');
+      // Make the appropriate tab pane active
+      $(tabset)
+        .find('.tabs-pane').removeClass('active').end()
+        .find(tab.hash).addClass('active');
+    });
   });
-});
+}
