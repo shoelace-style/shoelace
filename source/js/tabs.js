@@ -34,7 +34,7 @@ if(typeof jQuery === 'undefined') {
     'use strict';
 
     // Watch for clicks on tabs
-    $('.tabs-nav').on('click', 'a', function(event) {
+    $(document).on('click', '.tabs-nav a', function(event) {
       var tabset = $(this).closest('.tabs');
       var tab = this;
 
