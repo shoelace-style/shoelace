@@ -17,7 +17,6 @@
   min-width: calc(var(--switch-size) * 2);
   height: var(--switch-size);
   line-height: var(--switch-size);
-  border-radius: var(--switch-thumb-border-radius);
   display: inline-block;
   cursor: pointer;
   outline: none;
