@@ -57,8 +57,8 @@ if(typeof jQuery === 'undefined') {
             .toggleClass('active')
             .trigger($(dropdown).is('.active') ? 'show' : 'hide');
         } else {
-          // Don't scroll the page when clicking on dropdown items
-          if($(event.target).is('.dropdown-menu a')) {
+          // Don't scroll the page when clicking on dropdown menu items
+          if($(event.target).parents().addBack().is('.dropdown-menu')) {
             event.preventDefault();
           }
 
