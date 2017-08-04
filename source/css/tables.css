@@ -39,3 +39,7 @@ table.table-bordered td {
   border-width: var(--table-border-width);
   border-color: var(--table-border-color);
 }
+
+table.table-hover tbody tr:hover {
+  background-color: var(--table-stripe-bg-color);
+}
