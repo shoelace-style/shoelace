@@ -1,10 +1,15 @@
 /*! Switches */
+.switch {
+  font-size: var(--switch-font-size);
+}
 
 .switch-small {
+  font-size: var(--switch-font-size-small);
   --switch-size: var(--switch-size-small);
 }
 
 .switch-big {
+  font-size: var(--switch-font-size-big);
   --switch-size: var(--switch-size-big);
 }
 

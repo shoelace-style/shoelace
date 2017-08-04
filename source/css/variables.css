@@ -216,6 +216,9 @@
   --spacing-big: calc(var(--component-spacing) * 4);
 
   /* Switches */
+  --switch-font-size: var(--input-font-size);
+  --switch-font-size-small: var(--input-font-size-small);
+  --switch-font-size-big: var(--input-font-size-big);
   --switch-bg-color: var(--component-border-color);
   --switch-bg-color-checked: var(--color-primary);
   --switch-border-radius: var(--switch-size);
