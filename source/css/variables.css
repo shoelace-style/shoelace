@@ -177,6 +177,8 @@
 
   --input-font-family: inherit;
   --input-font-size: var(--font-size);
+  --input-font-size-small: .8rem;
+  --input-font-size-big: 1.2rem;
   --input-font-weight: inherit;
   --input-height: 2rem;
   --input-height-big: 2.75rem;

@@ -124,22 +124,22 @@ input[readonly] {
 
 input.input-small,
 select.input-small {
-  font-size: calc(var(--input-font-size) * .8);
+  font-size: var(--input-font-size-small);
   height: var(--input-height-small);
 }
 
 textarea.input-small {
-  font-size: calc(var(--input-font-size) * .8);
+  font-size: var(--input-font-size-small);
 }
 
 input.input-big,
 select.input-big {
-  font-size: calc(var(--input-font-size) * 1.2);
+  font-size: var(--input-font-size-big);
   height: var(--input-height-big);
 }
 
 textarea.input-big {
-  font-size: calc(var(--input-font-size) * 1.2);
+  font-size: var(--input-font-size-big);
 }
 
 /* Range styles courtesy of http://danielstern.ca/range.css/ */
@@ -301,13 +301,13 @@ progress {
 }
 
 .input-addon-small {
-  font-size: calc(var(--input-font-size) * .8);
+  font-size: var(--input-font-size-small);
   height: var(--input-height-small);
   line-height: var(--input-height-small);
 }
 
 .input-addon-big {
-  font-size: calc(var(--input-font-size) * 1.2);
+  font-size: var(--input-font-size-big);
   height: var(--input-height-big);
   line-height: var(--input-height-big);
 }
