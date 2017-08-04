@@ -288,6 +288,11 @@ progress {
   margin-left: calc(var(--input-border-width) * -1);
 }
 
+.input-group :focus {
+  /* Force a new stacking context so focus rings don't get truncated by adjacent elements */
+  transform: translateZ(0);
+}
+
 /* Input addons */
 .input-addon {
   color: var(--text-muted);
