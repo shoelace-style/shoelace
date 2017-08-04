@@ -148,6 +148,26 @@
   --button-bg-color-danger: var(--state-danger);
   --button-bg-color-inverse: var(--state-inverse);
 
+  /* Dropdowns */
+  --dropdown-min-width: 10rem;
+  --dropdown-max-width: 25rem;
+  --dropdown-max-height: none;
+  --dropdown-offset-x: 0;
+  --dropdown-offset-y: 1px;
+  --dropdown-border-color: var(--component-border-color);
+  --dropdown-border-radius: var(--component-border-radius);
+  --dropdown-border-width: var(--component-border-width);
+  --dropdown-color: var(--body-color);
+  --dropdown-color-hover: var(--color-white);
+  --dropdown-bg-color: var(--color-white);
+  --dropdown-bg-color-hover: var(--color-primary);
+  --dropdown-box-shadow: 0 1px 0 rgba(0, 0, 0, .05);
+  --dropdown-divider-border-color: var(--component-border-color);
+  --dropdown-divider-border-width: var(--component-border-width);
+  --dropdown-spacing-x: var(--component-spacing);
+  --dropdown-spacing-y: calc(var(--dropdown-spacing-x) / 4);
+  --dropdown-z-index: 100;
+
   /* Forms */
   --fieldset-border-color: var(--component-border-color);
   --fieldset-border-width: var(--component-border-width);

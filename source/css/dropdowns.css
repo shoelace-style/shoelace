@@ -1,0 +1,86 @@
+/*! Dropdowns */
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-trigger::after {
+  content: '▼';
+  font-family: var(--font-system);
+  font-size: .6em;
+  vertical-align: middle;
+  margin-left: .5em;
+  display: inline-block;
+  transform: scaleY(.75);
+}
+
+.dropdown-top .dropdown-trigger::after {
+  transform: scaleY(.75) rotate(180deg);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + var(--dropdown-offset-y));;
+  left: var(--dropdown-offset-x);
+  z-index: var(--dropdown-z-index);
+  min-width: var(--dropdown-min-width);
+  max-width: var(--dropdown-max-width);
+  max-height: var(--dropdown-max-height);
+  background-color: var(--dropdown-bg-color);
+  border: solid var(--dropdown-border-width) var(--dropdown-border-color);
+  border-radius: var(--dropdown-border-radius);
+  box-shadow: var(--dropdown-box-shadow);
+  display: none;
+  padding: calc(var(--dropdown-spacing-y) / 2) 0;
+  overflow-y: auto;
+}
+
+.dropdown-top .dropdown-menu {
+  top: auto;
+  bottom: calc(100% + var(--dropdown-offset-y));;
+}
+
+.dropdown-left .dropdown-menu {
+  left: auto;
+  right: var(--dropdown-offset-x);
+}
+
+.dropdown.active .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu a {
+  position: relative;
+  color: var(--dropdown-color);
+  text-decoration: none;
+  padding: var(--dropdown-spacing-y) calc(var(--dropdown-spacing-x) + .5em);
+  display: block;
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
+
+.dropdown-menu a:hover:not(.disabled) {
+  color: var(--dropdown-color-hover);
+  background-color: var(--dropdown-bg-color-hover);
+}
+
+.dropdown-menu a.disabled {
+  cursor: not-allowed;
+  opacity: .5;
+}
+
+.dropdown-menu a.checked::before {
+  position: absolute;
+  left: calc(var(--dropdown-spacing-x) / 2 - .1em);
+  content: '✓';
+  font-family: var(--font-system);
+  font-weight: 600;
+}
+
+.dropdown-menu hr {
+  width: 100%;
+  border-top: solid var(--dropdown-divider-border-width) var(--dropdown-divider-border-color);
+  margin: calc(var(--dropdown-spacing-y) / 2) 0;
+}

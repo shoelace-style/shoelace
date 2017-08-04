@@ -255,20 +255,26 @@ progress {
 
 .input-group > input,
 .input-group > button,
-.input-group > .button {
+.input-group > .button,
+.input-group > .dropdown button,
+.input-group > .dropdown .button {
   border-radius: 0;
 }
 
 .input-group > input:first-child,
 .input-group > button:first-child,
-.input-group > .button:first-child {
+.input-group > .button:first-child,
+.input-group > .dropdown:first-child button,
+.input-group > .dropdown:first-child .button {
   border-top-left-radius: var(--input-border-radius);
   border-bottom-left-radius: var(--input-border-radius);
 }
 
 .input-group > input:last-child,
 .input-group > button:last-child,
-.input-group > .button:last-child {
+.input-group > .button:last-child,
+.input-group > .dropdown:last-child button,
+.input-group > .dropdown:last-child .button {
   border-top-right-radius: var(--input-border-radius);
   border-bottom-right-radius: var(--input-border-radius);
 }
