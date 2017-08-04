@@ -254,6 +254,8 @@
   --table-border-width: var(--component-border-width);
   --table-header-bg-color: transparent;
   --table-stripe-bg-color: var(--component-bg-color);
+  --table-hover-color: var(--color-white);
+  --table-hover-bg-color: var(--color-primary);
   --table-spacing-x: calc(var(--component-spacing-small) * 1.5);
   --table-spacing-y: var(--component-spacing-small);
 }

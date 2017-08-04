@@ -40,6 +40,7 @@ table.table-bordered td {
   border-color: var(--table-border-color);
 }
 
-table.table-hover tbody tr:hover {
-  background-color: var(--table-stripe-bg-color);
+table.table-hoverable tbody tr:hover td {
+  color: var(--table-hover-color);
+  background-color: var(--table-hover-bg-color);
 }
