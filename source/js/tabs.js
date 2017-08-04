@@ -27,6 +27,8 @@
 // To programmatically show or hide a tab, apply the "active" class to the appropriate tab nav and
 // tab pane. (Make sure to remove the "active" class from other active navs/panes first!)
 //
+// TODO - add show/hide events when tabs are shown/hidden
+//
 if(typeof jQuery === 'undefined') {
   throw new Error('The Shoelace tabs script requires jQuery.');
 } else {
