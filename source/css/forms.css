@@ -74,7 +74,7 @@ input[type="week"]:focus,
 select:focus,
 textarea:focus {
   outline: none;
-  border-color: var(--input-border-focus-color);
+  border-color: var(--input-border-color-focus);
 }
 
 select {

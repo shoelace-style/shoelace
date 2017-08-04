@@ -185,7 +185,7 @@
   --input-height-small: 1.25rem;
   --input-color: var(--body-color);
   --input-border-color: var(--component-border-color);
-  --input-border-focus-color: var(--color-primary);
+  --input-border-color-focus: var(--color-primary);
   --input-border-width: 1px;
   --input-border-radius: var(--component-border-radius);
   --input-bg-color: var(--color-white);
