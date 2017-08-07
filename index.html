@@ -675,7 +675,7 @@ PRINT "SHOELACE IS AWESOME"
       Dropdowns with button triggers can be used inside input groups.
     </p>
 
-    <div class="input-group width-50">
+    <div class="input-group">
       <span class="input-addon">$</span>
       <input type="text" placeholder="10.00">
       <div class="dropdown">
@@ -688,6 +688,43 @@ PRINT "SHOELACE IS AWESOME"
         </div>
       </div>
     </div>
+
+    <h3 id="dropdown-events">Events</h3>
+    <p>
+      Dropdowns require <code>shoelace.js</code> to make them interactive. You don’t need to
+      initialize them — simply include the script and everything “just works.”
+    </p>
+    <p>
+      There is no JavaScript API. Shoelace’s philosophy believes that custom components should act
+      like native components as much as possible. You can, however, listen for various events:
+    </p>
+    <ul>
+      <li>
+        <code>show</code> – Fires when a dropdown is shown.
+      </li>
+      <li>
+        <code>hide</code> – Fires when a dropdown is hidden.
+      </li>
+      <li>
+        <code>select</code> – Fires when a dropdown menu item is selected. The second callback
+        argument is a reference to the respective menu item.
+      </li>
+    </ul>
+    <p>
+      This example will log all three events for a dropdown with an id of <code>my-dropdown</code>.
+    </p>
+<pre>
+$('#my-dropdown')
+  .on('show', function(event) {
+    console.log('show', event.target);
+  })
+  .on('hide', function(event) {
+    console.log('hide', event.target);
+  })
+  .on('select', function(event, item) {
+    console.log('select', event.target, item);
+  });
+</pre>
 
     <!--********************************************************************************************
     * Forms
@@ -1306,6 +1343,38 @@ PRINT "SHOELACE IS AWESOME"
         </p>
       </div>
     </div>
+
+    <h3 id="tabs-events">Events</h3>
+    <p>
+      Tabs require <code>shoelace.js</code> to make them interactive. You don’t need to initialize
+      them — simply include the script and everything “just works.”
+    </p>
+    <p>
+      There is no JavaScript API. Shoelace’s philosophy believes that custom components should act
+      like native components as much as possible. You can, however, listen for various events:
+    </p>
+    <ul>
+      <li>
+        <code>show</code> – Fires when a tab is shown. The second callback argument is the
+        respective tab pane.
+      </li>
+      <li>
+        <code>hide</code> – Fires when a tab is hidden. The second callback argument is the
+        respective tab pane.
+      </li>
+    </ul>
+    <p>
+      This example will log both events for tabs with an id of <code>my-tabs</code>.
+    </p>
+<pre>
+$('#my-tabs')
+  .on('show', function(event, tabPane) {
+    console.log('show', event.target, tabPane);
+  })
+  .on('hide', function(event, tabPane) {
+    console.log('hide', event.target, tabPane);
+  });
+</pre>
 
     <!--********************************************************************************************
     * Tables
