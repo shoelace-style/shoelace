@@ -37,23 +37,23 @@ if(typeof jQuery === 'undefined') {
 
     // Watch for clicks on tabs
     $(document).on('click', '.tabs-nav a', function(event) {
-      var tabset = $(this).closest('.tabs');
-      var tab = this;
+      var tabs = $(this).closest('.tabs');
+      var tabNav = this;
 
       event.preventDefault();
 
       // Ignore tabs without an href or with the "disabled" class
-      if(!tab.hash || $(tab).is('.disabled')) return;
+      if(!tabNav.hash || $(tabNav).is('.disabled')) return;
 
       // Make the selected tab active
-      $(tab)
+      $(tabNav)
         .siblings().removeClass('active').end()
         .addClass('active');
 
       // Make the appropriate tab pane active
-      $(tabset)
+      $(tabs)
         .find('.tabs-pane').removeClass('active').end()
-        .find(tab.hash).addClass('active');
+        .find(tabNav.hash).addClass('active');
     });
   });
 }
