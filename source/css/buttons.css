@@ -40,10 +40,6 @@ button,
   display: block;
 }
 
-.button-block + .button-block {
-  margin-top: 1rem;
-}
-
 button:hover,
 .button:hover {
   color: var(--button-color);
