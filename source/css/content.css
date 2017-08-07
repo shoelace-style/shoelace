@@ -164,8 +164,6 @@ dd {
 ol,
 ul {
   line-height: var(--line-height);
-  list-style-position: inside;
-  padding-left: 1rem;
   margin-top: 0;
   margin-bottom: 1rem;
 }
