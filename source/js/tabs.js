@@ -1,4 +1,10 @@
-/*! Shoelace.css tabs {version} */
+/*!
+  Shoelace.css tabs {version}
+  (c) A Beautiful Site, LLC
+
+  Released under the MIT license
+  Source: https://github.com/claviska/shoelace-css
+*/
 //
 // This script is required to make tabs interactive. Before loading it, you must include either
 // jQuery or Zepto. You can load them locally or via CDN. You only need one.
