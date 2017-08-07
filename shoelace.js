@@ -14,8 +14,7 @@ const Path = require('path');
 const PostCSS = require('postcss');
 const Program = require('commander');
 const S3 = require('s3');
-
-let stats;
+const UglifyJS = require('uglify-js');
 
 // Initialize CLI
 Program
@@ -73,7 +72,7 @@ if(Program.build) {
       let shoelaceCSS = Path.join(__dirname, 'dist/shoelace.css');
 
       // Remember stats
-      stats = {
+      let stats = {
         originalSize: (output.stats.originalSize / 1024).toFixed(1) + 'KB',
         minifiedSize: (output.stats.minifiedSize / 1024).toFixed(1) + 'KB'
       };
@@ -92,12 +91,12 @@ if(Program.build) {
         }
         console.log(Chalk.green('CSS Minified: %s! 💪'), Path.relative(__dirname, shoelaceCSS));
 
-        resolve();
+        resolve(stats);
       });
     }))
 
     // Update docs
-    .then(() => new Promise((resolve, reject) => {
+    .then((stats) => new Promise((resolve, reject) => {
       let docs = Path.join(__dirname, 'index.html');
       let content = FS.readFileSync(docs, 'utf8');
 
@@ -114,6 +113,45 @@ if(Program.build) {
           return;
         }
         console.log(Chalk.green('Docs have been updated! 📚'));
+
+        resolve();
+      });
+    }))
+
+    // Minify scripts
+    .then(() => new Promise((resolve, reject) => {
+      let scripts = {
+        'dropdowns.js': FS.readFileSync(Path.join(__dirname, 'source/js/dropdowns.js'), 'utf8'),
+        'tabs.js': FS.readFileSync(Path.join(__dirname, 'source/js/tabs.js'), 'utf8')
+      };
+
+      let output = UglifyJS.minify(scripts, {
+        output: {
+          comments: /^!/
+        }
+      });
+      if(output.error) {
+        reject(output.error);
+        return;
+      }
+
+      resolve(output);
+    }))
+
+    // Write minified scripts to dist
+    .then((output) => new Promise((resolve, reject) => {
+      let shoelaceJS = Path.join(__dirname, 'dist/shoelace.js');
+
+      // Update placeholders in JS
+      output.code = output.code.replace(/\{version\}/g, __version);
+
+      // Write output file
+      FS.writeFile(shoelaceJS, output.code, 'utf8', (err) => {
+        if(err) {
+          reject(err);
+          return;
+        }
+        console.log(Chalk.green('JS Minified: %s! 💪'), Path.relative(__dirname, shoelaceJS));
 
         resolve();
       });

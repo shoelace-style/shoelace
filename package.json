@@ -11,7 +11,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
-    "chalk": "^2.0.1",
+    "chalk": "^2.1.0",
     "commander": "^2.11.0",
     "cssnano": "^3.10.0",
     "del": "^3.0.0",
@@ -19,7 +19,8 @@
     "fs": "0.0.1-security",
     "postcss": "^6.0.8",
     "postcss-import": "^10.0.0",
-    "s3": "^4.4.0"
+    "s3": "^4.4.0",
+    "uglify-js": "^3.0.27"
   },
   "dependencies": {}
 }
