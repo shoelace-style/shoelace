@@ -46,7 +46,7 @@ textarea {
   box-shadow: var(--input-box-shadow);
   background-color: var(--input-bg-color);
   height: var(--input-height);
-  line-height: 1;
+  line-height: var(--input-height);
   vertical-align: middle;
   display: block;
   padding-left: calc(var(--component-spacing) * .5);
@@ -126,6 +126,7 @@ input.input-small,
 select.input-small {
   font-size: var(--input-font-size-small);
   height: var(--input-height-small);
+  line-height: var(--input-height-small);
 }
 
 textarea.input-small {
@@ -136,6 +137,7 @@ input.input-big,
 select.input-big {
   font-size: var(--input-font-size-big);
   height: var(--input-height-big);
+  line-height: var(--input-height-big);
 }
 
 textarea.input-big {
