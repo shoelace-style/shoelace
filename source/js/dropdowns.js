@@ -23,10 +23,7 @@
 //   - Make sure your dropdown triggers are inside the dropdown container
 //
 // To disable a dropdown, add the "disabled" property to <button> dropdown triggers or the
-// "disabled" class to <a> and all other dropdown triggers.
-//
-// To programmatically show or hide a dropdown, apply the "active" class to the appropriate dropdown
-// container.
+// "disabled" class to <a> dropdown triggers.
 //
 // Dropdown containers will receive "show" and "hide" events when dropdowns are shown and hidden.
 // They will also receive "select" events when a menu item is selected, where the second argument is
@@ -57,7 +54,9 @@ if(typeof jQuery === 'undefined') {
             .trigger('hide');
 
           // Ignore dropdowns that have the disabled class
-          if($(trigger).is('.disabled, :disabled')) return;
+          if($(trigger).is('.disabled, :disabled')) {
+            return;
+          }
 
           // Toggle this dropdown
           $(dropdown)
