@@ -15,11 +15,6 @@ const PostCSS = require('postcss');
 const Program = require('commander');
 const S3 = require('s3');
 
-let source = Path.join(__dirname, 'source/css');
-let dist = Path.join(__dirname, 'dist');
-let docsFile = Path.join(__dirname, 'index.html');
-let inFile = Path.join(source, 'shoelace.css');
-let outFile = Path.join(dist, 'shoelace.css');
 let stats;
 
 // Initialize CLI
@@ -44,14 +39,15 @@ if(!process.argv.slice(2).length) {
 if(Program.build) {
   Promise.resolve()
     // Remove the dist folder
-    .then(() => Del(dist))
+    .then(() => Del(Path.join(__dirname, 'dist')))
 
     // Create the dist folder
-    .then(() => FS.mkdirSync(dist))
+    .then(() => FS.mkdirSync(Path.join(__dirname, 'dist')))
 
     // Generate minified stylesheet
     .then(() => new Promise((resolve, reject) => {
-      let css = FS.readFileSync(inFile, 'utf8');
+      let shoelaceCSS = Path.join(__dirname, 'source/css/shoelace.css');
+      let css = FS.readFileSync(shoelaceCSS, 'utf8');
       let output = {
         stats: {
           originalSize: css.length
@@ -63,7 +59,7 @@ if(Program.build) {
         AtImport,
         CSSnano({ safe: true })
       ])
-        .process(css, { from: inFile })
+        .process(css, { from: shoelaceCSS })
         .then((result) => {
           output.styles = result.css;
           output.stats.minifiedSize = output.styles.length;
@@ -74,6 +70,8 @@ if(Program.build) {
 
     // Write stylesheet to dist
     .then((output) => new Promise((resolve, reject) => {
+      let shoelaceCSS = Path.join(__dirname, 'dist/shoelace.css');
+
       // Remember stats
       stats = {
         originalSize: (output.stats.originalSize / 1024).toFixed(1) + 'KB',
@@ -87,12 +85,12 @@ if(Program.build) {
         .replace(/\{minifiedSize\}/, stats.minifiedSize);
 
       // Write output file
-      FS.writeFile(outFile, output.styles, 'utf8', (err) => {
+      FS.writeFile(shoelaceCSS, output.styles, 'utf8', (err) => {
         if(err) {
           reject(err);
           return;
         }
-        console.log(Chalk.green('CSS Minified: %s! 💪'), Path.relative(__dirname, outFile));
+        console.log(Chalk.green('CSS Minified: %s! 💪'), Path.relative(__dirname, shoelaceCSS));
 
         resolve();
       });
@@ -100,15 +98,17 @@ if(Program.build) {
 
     // Update docs
     .then(() => new Promise((resolve, reject) => {
+      let docs = Path.join(__dirname, 'index.html');
+      let content = FS.readFileSync(docs, 'utf8');
+
       // Update placeholders
-      let content = FS.readFileSync(docsFile, 'utf8');
       content = content
         .replace(/<span data-version>(.*?)<\/span>/g, '<span data-version>' + __version + '</span>')
         .replace(/<span data-originalSize>(.*?)<\/span>/g, '<span data-originalSize>' + stats.originalSize + '</span>')
         .replace(/<span data-minifiedSize>(.*?)<\/span>/g, '<span data-minifiedSize>' + stats.minifiedSize + '</span>');
 
       // Write docs file
-      FS.writeFile(docsFile, content, 'utf8', (err) => {
+      FS.writeFile(docs, content, 'utf8', (err) => {
         if(err) {
           reject(err);
           return;
@@ -136,7 +136,7 @@ if(Program.build) {
 
       // Sync the local /dist directory to /{version} in the S3 bucket
       let uploader = client.uploadDir({
-        localDir: dist,
+        localDir: Path.join(__dirname, 'dist'),
         deleteRemoved: true,
         s3Params: {
           ACL: process.env.S3_ACL,
@@ -172,6 +172,8 @@ if(Program.build) {
 
 // Clean task
 if(Program.clean) {
+  let dist = Path.join(__dirname, 'dist');
+
   Del(dist)
     .then(() => {
       console.log(Chalk.green('%s has been removed.'), dist);
