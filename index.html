@@ -105,29 +105,43 @@
       Shoelace is incredibly easy to use. To get started, simply link to <code>shoelace.css</code>
       in your project. You can use the CDN version or download the source manually.
     </p>
+    <p>
+      To make certain components interactive (e.g. dropdowns and tabs), you’ll need to load
+      <a href="https://cdnjs.com/libraries/jquery/">jQuery</a> or
+      <a href="https://cdnjs.com/libraries/zepto/">Zepto</a> along with <code>shoelace.js</code>.
+    </p>
 
     <h3 id="cdn">CDN</h3>
     <p>
-      The easiest way to use Shoelace is via CDN. This service is generously provided by the folks
-      at <a href="https://www.keycdn.com/">KeyCDN</a>.
+      The easiest way to use Shoelace is via CDN. Just add this to the <code>&lt;head&gt;</code>:
     </p>
 <pre>
-&lt;link rel=&quot;preload&quot; href=&quot;https://cdn.shoelace.style/<span data-version>1.0.0-beta8</span>/shoelace.css&quot; as=&quot;style&quot; crossorigin&gt;
 &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.shoelace.style/<span data-version>1.0.0-beta8</span>/shoelace.css&quot;&gt;
 </pre>
     <p>
-      Note that the first <code>&lt;link&gt;</code> is optional but can improve performance in
-      supportive browsers.
-      <a href="https://www.w3.org/TR/preload/#x2.link-type-preload">Learn more about preloading.</a>
+      And this before <code>&lt;/body&gt;</code> but after jQuery/Zepto:
+    </p>
+<pre>
+&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/shoelace-css/<span data-version>1.0.0-beta8</span>/shoelace.css&quot;&gt;&lt;/script&gt;
+</pre>
+    <p>
+      This service is provided free, courtesy of <a href="https://cdnjs.com/">CDNJS</a>.
     </p>
 
     <h3 id="download">Download</h3>
     <p>
       Alternatively, you can <a href="https://github.com/claviska/shoelace-css/releases">download
-      the source</a> and link to <code>shoelace.css</code> from your own server.
+      the source</a> and link to <code>shoelace.css</code> from your own server. Just add this
+      stylesheet to your <code>&lt;head&gt;</code>:
     </p>
 <pre>
 &lt;link rel=&quot;stylesheet&quot; href=&quot;dist/shoelace.css&quot;&gt;
+</pre>
+    <p>
+      And this before <code>&lt;/body&gt;</code> but after jQuery/Zepto:
+    </p>
+<pre>
+&lt;script src=&quot;dist/shoelace.js&quot;&gt;&lt;/script&gt;
 </pre>
 
     <h3 id="npm">NPM</h3>
@@ -674,12 +688,6 @@ PRINT "SHOELACE IS AWESOME"
         </div>
       </div>
     </div>
-
-    <p>
-      <strong>Dropdowns are not interactive by default!</strong> Shoelace is a CSS starter kit, not
-      a framework. For convenience, <a href="source/js/dropdowns.js">a lightweight sample script</a>
-      is provided to demonstrate how to make dropdowns interactive.
-    </p>
 
     <!--********************************************************************************************
     * Forms
@@ -1238,12 +1246,6 @@ PRINT "SHOELACE IS AWESOME"
       </div>
     </div>
 
-    <p>
-      <strong>Tabs are not interactive by default!</strong> Shoelace is a CSS starter kit, not a
-      framework. For convenience, <a href="source/js/tabs.js">a lightweight sample script</a> is
-      provided to demonstrate how to make tabs interactive.
-    </p>
-
     <h3 id="vertical-tabs">Vertical Tabs</h3>
     <p></p>
     <p>
@@ -1670,7 +1672,7 @@ Example: &lt;div class=&quot;padding-left-medium margin-bottom-none&quot;&gt;
         <a href="https://getbootstrap.com/">Bootstrap</a> – for inspiration
       </li>
       <li>
-        <a href="https://keycdn.com/">KeyCDN</a> – for providing a CDN
+        <a href="https://cdnjs.com/">cdnjs.com</a> – for providing a CDN
       </li>
       <li>
         <a href="https://github.com/">GitHub</a> – for hosting this and many other open source repos
@@ -1687,9 +1689,6 @@ Example: &lt;div class=&quot;padding-left-medium margin-bottom-none&quot;&gt;
       <p class="text-small text-muted">
         Shoelace.css <span data-version>1.0.0-beta8</span> &middot;
         &copy; A Beautiful Site, LLC
-      </p>
-      <p class="text-small text-muted">
-        <a href="https://www.keycdn.com/">Accelerated by KeyCDN</a>
       </p>
     </footer>
 
