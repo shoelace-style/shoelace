@@ -1,3 +1,4 @@
+/* eslint prefer-arrow-callback: "warn" */
 'use strict';
 
 global.__version = require('./package.json').version;
@@ -42,7 +43,7 @@ if(!process.argv.slice(2).length) {
 if(Program.build) {
   Promise.resolve()
     // Generate minified version
-    .then(() => new Promise((resolve, reject) =>{
+    .then(() => new Promise((resolve, reject) => {
       let css = FS.readFileSync(inFile, 'utf8');
       let output = {
         stats: {

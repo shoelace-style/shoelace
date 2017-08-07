@@ -7,7 +7,6 @@
     "quotes": ["error", "single"],
     "linebreak-style": ["error", "unix"],
     "no-unused-vars": ["warn", { "vars": "all", "args": "after-used" }],
-    "prefer-arrow-callback": ["warn"],
     "semi": ["error", "always"]
   },
   "env": {
