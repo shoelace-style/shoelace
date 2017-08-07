@@ -1,97 +1,91 @@
-/* eslint-env browser, jquery */
-/* eslint prefer-arrow-callback: "off" */
+/*! Shoelace.css dropdowns {version} */
 //
-// Example dropdowns plugin for Shoelace
+// This script is required to make dropdowns interactive. Before loading it, you must include either
+// jQuery or Zepto. You can load them locally or via CDN. You only need one.
 //
-// This plugin demonstrates one way to add interactivity to Shoelace dropdowns. You don't need to
-// initialize it. Just include jQuery along with this script and everything will just work.
+// jQuery via CDN (34.6KB)
 //
-// If you don't have a local copy of jQuery, you can load it via CDN:
+//   <script
+//     src="https://code.jquery.com/jquery-3.2.1.min.js"
+//     integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+//     crossorigin="anonymous"></script>
 //
-// <script
-//   src="https://code.jquery.com/jquery-3.2.1.min.js"
-//   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-//   crossorigin="anonymous"></script>
+// Zepto via CDN (9.7KB)
 //
-// Don't want to use jQuery? No problem! This is a just sample script to demonstrate how dropdowns
-// can be made interactive. You can write your own to replace it using vanilla JS or any other
-// library you want.
+//   <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
 //
 // Dropdowns not working?
-//   - Make sure you've included this script: <script src="dropdowns.js"></script>
+//   - Make sure you've loaded jQuery or Zepto before this script
 //   - Make sure your dropdowns are structured properly per the docs
 //   - Make sure your dropdown triggers are inside the dropdown container
 //
-// To disable a dropdown, add the "disabled" property to <button> dropdown triggers or the
-// "disabled" class to <a> dropdown triggers.
-//
-// Dropdown containers will receive "show" and "hide" events when dropdowns are shown and hidden.
-// They will also receive "select" events when a menu item is selected, where the second argument is
-// the selected item.
-//
-if(typeof jQuery === 'undefined') {
-  throw new Error('The Shoelace dropdown script requires jQuery.');
-} else {
-  jQuery(function($) {
-    'use strict';
+(function() {
+  /* eslint-env browser, jquery */
+  /* global Zepto */
+  'use strict';
 
-    $(document)
-      .on('click', function(event) {
-        var dropdown;
-        var menu;
-        var selectedItem;
-        var trigger;
+  if(typeof jQuery === 'undefined' && typeof Zepto === 'undefined') {
+    throw new Error('Shoelace dropdowns require either jQuery or Zepto.');
+  } else {
+    (typeof jQuery === 'function' ? jQuery : Zepto)(function($) {
+      $(document)
+        .on('click', function(event) {
+          var dropdown;
+          var menu;
+          var selectedItem;
+          var trigger;
 
-        // Watch for clicks on dropdown triggers
-        if($(event.target).is('.dropdown-trigger')) {
-          dropdown = $(event.target).closest('.dropdown');
-          trigger = event.target;
-
-          // Close other dropdowns
-          $('.dropdown.active')
-            .not(dropdown)
-            .removeClass('active')
-            .trigger('hide');
-
-          // Ignore dropdowns that have the disabled class
-          if($(trigger).is('.disabled, :disabled')) {
-            return;
-          }
-
-          // Toggle this dropdown
-          $(dropdown)
-            .toggleClass('active')
-            .trigger($(dropdown).is('.active') ? 'show' : 'hide');
-        } else {
-          menu = $(event.target).closest('.dropdown-menu');
-
-          // Watch for clicks on menu items
-          if(menu.length) {
+          // Watch for clicks on dropdown triggers
+          if($(event.target).is('.dropdown-trigger')) {
             dropdown = $(event.target).closest('.dropdown');
-            selectedItem = $(event.target).closest('a').get(0);
+            trigger = event.target;
 
-            // If the user selected a menu item and it's not disabled, fire the select event
-            if(selectedItem && !$(selectedItem).is('.disabled')) {
-              $(dropdown).trigger('select', selectedItem);
+            // Close other dropdowns
+            $('.dropdown.active')
+              .not(dropdown)
+              .removeClass('active')
+              .trigger('hide');
+
+            // Ignore dropdowns that have the disabled class
+            if($(trigger).is('.disabled, :disabled')) {
+              return;
             }
 
-            // Prevent the page from scrolling since menu items are #links
-            event.preventDefault();
-          }
+            // Toggle this dropdown
+            $(dropdown)
+              .toggleClass('active')
+              .trigger($(dropdown).is('.active') ? 'show' : 'hide');
+          } else {
+            menu = $(event.target).closest('.dropdown-menu');
 
-          // Close dropdowns on all other clicks
-          $('.dropdown.active')
-            .removeClass('active')
-            .trigger('hide');
-        }
-      })
-      .on('keydown', function(event) {
-        // Close dropdowns on escape
-        if(event.keyCode === 27) {
-          $('.dropdown.active')
-            .removeClass('active')
-            .trigger('hide');
-        }
-      });
-  });
-}
+            // Watch for clicks on menu items
+            if(menu.length) {
+              dropdown = $(event.target).closest('.dropdown');
+              selectedItem = $(event.target).closest('a').get(0);
+
+              // If the user selected a menu item and it's not disabled, fire the select event
+              if(selectedItem && !$(selectedItem).is('.disabled')) {
+                $(dropdown).trigger('select', selectedItem);
+              }
+
+              // Prevent the page from scrolling since menu items are #links
+              event.preventDefault();
+            }
+
+            // Close dropdowns on all other clicks
+            $('.dropdown.active')
+              .removeClass('active')
+              .trigger('hide');
+          }
+        })
+        .on('keydown', function(event) {
+          // Close dropdowns on escape
+          if(event.keyCode === 27) {
+            $('.dropdown.active')
+              .removeClass('active')
+              .trigger('hide');
+          }
+        });
+    });
+  }
+})();
