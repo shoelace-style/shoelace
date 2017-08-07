@@ -4,22 +4,23 @@
 global.__version = require('./package.json').version;
 
 require('dotenv').config();
+const AtImport = require('postcss-import');
+const Autoprefixer = require('autoprefixer');
 const Chalk = require('chalk');
+const CSSnano = require('cssnano');
 const Del = require('del');
 const FS = require('fs');
 const Path = require('path');
+const PostCSS = require('postcss');
 const Program = require('commander');
 const S3 = require('s3');
-const PostCSS = require('postcss');
-const Autoprefixer = require('autoprefixer');
-const AtImport = require('postcss-import');
-const CSSnano = require('cssnano');
 
 let source = Path.join(__dirname, 'source/css');
 let dist = Path.join(__dirname, 'dist');
 let docsFile = Path.join(__dirname, 'index.html');
 let inFile = Path.join(source, 'shoelace.css');
 let outFile = Path.join(dist, 'shoelace.css');
+let stats;
 
 // Initialize CLI
 Program
@@ -42,7 +43,13 @@ if(!process.argv.slice(2).length) {
 // Run build task
 if(Program.build) {
   Promise.resolve()
-    // Generate minified version
+    // Remove the dist folder
+    .then(() => Del(dist))
+
+    // Create the dist folder
+    .then(() => FS.mkdirSync(dist))
+
+    // Generate minified stylesheet
     .then(() => new Promise((resolve, reject) => {
       let css = FS.readFileSync(inFile, 'utf8');
       let output = {
@@ -51,26 +58,26 @@ if(Program.build) {
         }
       };
 
-      PostCSS([Autoprefixer({
-        browsers: ['last 2 versions', '> 5%', 'ie >= 11', 'iOS >= 8']
-      }), AtImport, CSSnano({
-        safe: true
-      })]).process(css, {
-        from: inFile
-      }).then((result) => {
-        output.styles = result.css;
-        output.stats.minifiedSize = output.styles.length;
-        resolve(output);
-      }).catch((err) => {
-        reject(err);
-      });
+      PostCSS([
+        Autoprefixer({ browsers: ['last 2 versions', '> 5%', 'ie >= 11', 'iOS >= 8'] }),
+        AtImport,
+        CSSnano({ safe: true })
+      ])
+        .process(css, { from: inFile })
+        .then((result) => {
+          output.styles = result.css;
+          output.stats.minifiedSize = output.styles.length;
+          resolve(output);
+        })
+        .catch((err) => reject(err));
     }))
-    // Write dist files
+
+    // Write stylesheet to dist
     .then((output) => new Promise((resolve, reject) => {
-      // Get stats
-      let stats = {
-        originalSize: (output.stats.originalSize / 1024).toFixed(1) + 'KB', // KB
-        minifiedSize: (output.stats.minifiedSize / 1024).toFixed(1) + 'KB' // KB
+      // Remember stats
+      stats = {
+        originalSize: (output.stats.originalSize / 1024).toFixed(1) + 'KB',
+        minifiedSize: (output.stats.minifiedSize / 1024).toFixed(1) + 'KB'
       };
 
       // Update placeholders in CSS
@@ -78,13 +85,6 @@ if(Program.build) {
         .replace(/\{version\}/g, __version)
         .replace(/\{originalSize\}/, stats.originalSize)
         .replace(/\{minifiedSize\}/, stats.minifiedSize);
-
-      // Create the dist folder if it doesn't exist
-      try {
-        FS.statSync(dist);
-      } catch(err) {
-        FS.mkdirSync(dist);
-      }
 
       // Write output file
       FS.writeFile(outFile, output.styles, 'utf8', (err) => {
@@ -94,11 +94,12 @@ if(Program.build) {
         }
         console.log(Chalk.green('CSS Minified: %s! 💪'), Path.relative(__dirname, outFile));
 
-        resolve(stats);
+        resolve();
       });
     }))
+
     // Update docs
-    .then((stats) => new Promise((resolve, reject) => {
+    .then(() => new Promise((resolve, reject) => {
       // Update placeholders
       let content = FS.readFileSync(docsFile, 'utf8');
       content = content
@@ -117,6 +118,7 @@ if(Program.build) {
         resolve();
       });
     }))
+
     // Publish to S3
     .then(() => new Promise((resolve, reject) => {
       // Skip if the --s3 flag is missing
@@ -151,7 +153,11 @@ if(Program.build) {
         resolve();
       });
     }))
+
+    // Exit with success
     .then(() => process.exit(1))
+
+    // Handle errors
     .catch((err) => {
       console.error(Chalk.red(err));
       process.exit(-1);
