@@ -29,6 +29,8 @@
 // container.
 //
 // Dropdown containers will receive "show" and "hide" events when dropdowns are shown and hidden.
+// They will also receive "select" events when a menu item is selected, where the second argument is
+// the selected item.
 //
 if(typeof jQuery === 'undefined') {
   throw new Error('The Shoelace dropdown script requires jQuery.');
@@ -38,10 +40,15 @@ if(typeof jQuery === 'undefined') {
 
     $(document)
       .on('click', function(event) {
-        // Watch for clicks on triggers
+        var dropdown;
+        var menu;
+        var selectedItem;
+        var trigger;
+
+        // Watch for clicks on dropdown triggers
         if($(event.target).is('.dropdown-trigger')) {
-          var trigger = event.target;
-          var dropdown = $(event.target).closest('.dropdown');
+          dropdown = $(event.target).closest('.dropdown');
+          trigger = event.target;
 
           // Close other dropdowns
           $('.dropdown.active')
@@ -57,8 +64,19 @@ if(typeof jQuery === 'undefined') {
             .toggleClass('active')
             .trigger($(dropdown).is('.active') ? 'show' : 'hide');
         } else {
-          // Don't scroll the page when clicking on dropdown menu items
-          if($(event.target).parents().addBack().is('.dropdown-menu')) {
+          menu = $(event.target).closest('.dropdown-menu');
+
+          // Watch for clicks on menu items
+          if(menu.length) {
+            dropdown = $(event.target).closest('.dropdown');
+            selectedItem = $(event.target).closest('a').get(0);
+
+            // If the user selected a menu item and it's not disabled, fire the select event
+            if(selectedItem && !$(selectedItem).is('.disabled')) {
+              $(dropdown).trigger('select', selectedItem);
+            }
+
+            // Prevent the page from scrolling since menu items are #links
             event.preventDefault();
           }
 
