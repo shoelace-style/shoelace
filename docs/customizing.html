@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="Learn how to customize Shoelace.css with CSS variables.">
+  <link rel="icon" href="../source/img/favicon.png">
+  <link rel="stylesheet" href="../source/css/shoelace.css">
+  <link rel="stylesheet" href="../source/css/_docs.css">
+  <link rel="stylesheet" href="https://cdn.rawgit.com/AGMStudio/prism-theme-one-dark/f81fe477/prism-onedark.css">
+  <title>Customizing</title>
+</head>
+<body>
+
+  <header id="head" class="text-center">
+    <h1>
+      <a href="../index.html">
+        <img src="../source/img/wordmark.svg" alt="Shoelace logo">
+      </a>
+    </h1>
+    <p class="text-muted text-small">
+      A back to the basics CSS starter kit. For when you don’t need the whole boot.
+    </p>
+  </header>
+
+  <main id="wrap">
+    <nav id="nav">
+      <a href="installing.html">Installing</a>
+      <a href="customizing.html">Customizing</a>
+      <a href="content.html">Content</a>
+      <a href="alerts.html">Alerts</a>
+      <a href="badges.html">Badges</a>
+      <a href="buttons.html">Buttons</a>
+      <a href="dropdowns.html">Dropdowns</a>
+      <a href="forms.html">Forms</a>
+      <a href="loaders.html">Loaders</a>
+      <a href="switches.html">Switches</a>
+      <a href="tabs.html">Tabs</a>
+      <a href="tables.html">Tables</a>
+      <a href="utilities.html">Utilities</a>
+      <a href="grid-system.html">Grid System</a>
+      <a href="icons.html">Icons</a>
+      <a href="browser-support.html">Browser Support</a>
+      <a href="attribution.html">Attribution</a>
+    </nav>
+
+    <div id="content">
+      <h2 id="customizing">Customizing</h2>
+<p>You can customize Shoelace without editing core files or using a preprocessor. To add customizations, simply override one or more of the variables found in <code>[variables.css](source/css/variables.css)</code> in your own stylesheet.</p>
+<p>For example, you can customize the default text color and background like this:</p>
+<pre><code class="lang-css">:root {
+  --body-color: white;
+  --body-bg-color: black;
+}
+</code></pre>
+<h3 id="using-variables">Using Variables</h3>
+<p>You can use any of Shoelace’s variables in your stylesheet. This makes it easy to reuse values without hardcoding them. It also provides a foundation for extending Shoelace with your own <a href="#custom-components">custom components</a>.</p>
+<p>.your-selector {
+  color: var(--state-danger);
+}
+```</p>
+<p>Refer to <code>[variables.css](source/css/variables.css)</code> for a complete list of variables in Shoelace. If you’re not familiar with CSS variables, <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_variables">this article</a> will bring you up to speed. There’s also an <a href="https://codepen.io/claviska/pen/NvGVYM?editors=1100">interactive demo</a> if you want to try it out.</p>
+<h3 id="custom-components">Custom Components</h3>
+<p>You can create custom components to extend Shoelace’s functionality. Here are some best practices to keep things consistent and easy for others to understand.</p>
+<p><strong>Familiarize yourself with Shoelace’s naming conventions.</strong> A custom accordion component, for example, would have a class name such as <code>accordion</code>, modifier classes such as <code>accordion-open</code>, and variable names that look like <code>--accordion-bg-color</code>. Try to follow similar patterns as much as possible.</p>
+<p><strong>Define new variables when it makes sense to.</strong> Take a look at <code>[variables.css](source/css/variables.css)</code> to see how existing components are defined. Many use core variables instead of hardcoded properties as default values. This makes it easy for users to customize things quickly, but still provides enough flexibility to style individual components.</p>
+<p><strong>Semantic markup is strongly encouraged.</strong> Custom components should use the most appropriate elements and the minimal amount of markup required.</p>
+<p><strong>Keep everything together.</strong> During development, each component should be in its own folder along with its stylesheets, scripts, and documentation. Components shouldn’t depend on other components’ styles or scripts. This makes it easier to add or remove components from your app without affecting others. Of course, it’s perfectly fine to bundle components for optimization purposes in production.</p>
+
+    </div>
+  </main>
+
+  <footer id="foot">
+    <a href="../index.html">
+      <img src="../source/img/wordmark.svg" alt="Shoelace logo">
+    </a>
+    <p class="text-small text-muted">
+      Shoelace.css 1.0.0-beta10 &middot;
+      &copy; A Beautiful Site, LLC
+    </p>
+
+    <p class="margin-y-small text-center">
+      <a class="github-button" href="https://github.com/claviska/shoelace-css/fork" data-size="large" aria-label="Fork claviska/shoelace-css on GitHub">Fork</a>
+      <a class="github-button" href="https://github.com/claviska/shoelace-css/releases" data-icon="octicon-cloud-download" data-size="large" aria-label="Download claviska/shoelace-css on GitHub">Download</a>
+      <a class="github-button" href="https://github.com/claviska/shoelace-css/issues" data-icon="octicon-issue-opened" data-size="large" aria-label="Issue claviska/shoelace-css on GitHub">Report a Bug</a>
+      <a class="github-button" href="https://github.com/claviska/shoelace-css" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star claviska/shoelace-css on GitHub">Star</a>
+    </p>
+    <p>
+      <a href="https://twitter.com/shoelacecss" class="button button-info" style="margin-bottom: 1.2rem;">Follow</a>
+      <a href="https://paypal.me/claviska" class="button button-success" style="margin-bottom: 1.2rem;">Donate</a>
+    </p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/prism.min.js"></script>
+  <script src="../source/js/dropdowns.js"></script>
+  <script src="../source/js/tabs.js"></script>
+  <script>
+    $(function() {
+      // Highlight current nav item
+      $('#nav a').each(function() {
+        if(this.pathname === location.pathname) {
+          $(this).addClass('current');
+        }
+      });
+    });
+  </script>
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="Add badges to your app with minimal effort.">
+  <link rel="icon" href="../source/img/favicon.png">
+  <link rel="stylesheet" href="../source/css/shoelace.css">
+  <link rel="stylesheet" href="../source/css/_docs.css">
+  <link rel="stylesheet" href="https://cdn.rawgit.com/AGMStudio/prism-theme-one-dark/f81fe477/prism-onedark.css">
+  <title>Badges</title>
+</head>
+<body>
+
+  <header id="head" class="text-center">
+    <h1>
+      <a href="../index.html">
+        <img src="../source/img/wordmark.svg" alt="Shoelace logo">
+      </a>
+    </h1>
+    <p class="text-muted text-small">
+      A back to the basics CSS starter kit. For when you don’t need the whole boot.
+    </p>
+  </header>
+
+  <main id="wrap">
+    <nav id="nav">
+      <a href="installing.html">Installing</a>
+      <a href="customizing.html">Customizing</a>
+      <a href="content.html">Content</a>
+      <a href="alerts.html">Alerts</a>
+      <a href="badges.html">Badges</a>
+      <a href="buttons.html">Buttons</a>
+      <a href="dropdowns.html">Dropdowns</a>
+      <a href="forms.html">Forms</a>
+      <a href="loaders.html">Loaders</a>
+      <a href="switches.html">Switches</a>
+      <a href="tabs.html">Tabs</a>
+      <a href="tables.html">Tables</a>
+      <a href="utilities.html">Utilities</a>
+      <a href="grid-system.html">Grid System</a>
+      <a href="icons.html">Icons</a>
+      <a href="browser-support.html">Browser Support</a>
+      <a href="attribution.html">Attribution</a>
+    </nav>
+
+    <div id="content">
+      <h2 id="badges">Badges</h2>
+<p>Create a badge by applying the <code>badge</code> class to an element such as a <code>&lt;span&gt;</code>. You can change a badge’s appearance using the <code>badge-*</code> modifier.</p>
+<pre><code class="lang-html">&lt;span class=&quot;badge&quot;&gt;Default&lt;/span&gt;
+&lt;span class=&quot;badge badge-success&quot;&gt;Success&lt;/span&gt;
+&lt;span class=&quot;badge badge-info&quot;&gt;Info&lt;/span&gt;
+&lt;span class=&quot;badge badge-warning&quot;&gt;Warning&lt;/span&gt;
+&lt;span class=&quot;badge badge-danger&quot;&gt;Danger&lt;/span&gt;
+&lt;span class=&quot;badge badge-inverse&quot;&gt;Inverse&lt;/span&gt;
+</code></pre>
+<p>
+  <span class="badge">Default</span>
+  <span class="badge badge-success">Success</span>
+  <span class="badge badge-info">Info</span>
+  <span class="badge badge-warning">Warning</span>
+  <span class="badge badge-danger">Danger</span>
+  <span class="badge badge-inverse">Inverse</span>
+</p>
+
+<p>By default, badges are sized relative to their parent element.</p>
+<pre><code class="lang-html">&lt;h1&gt;Heading 1 &lt;span class=&quot;badge&quot;&gt;Badge&lt;/span&gt;&lt;/h1&gt;
+&lt;h2&gt;Heading 2 &lt;span class=&quot;badge&quot;&gt;Badge&lt;/span&gt;&lt;/h2&gt;
+&lt;h3&gt;Heading 3 &lt;span class=&quot;badge&quot;&gt;Badge&lt;/span&gt;&lt;/h3&gt;
+&lt;p&gt;Paragraph &lt;span class=&quot;badge&quot;&gt;Badge&lt;/span&gt;&lt;/p&gt;
+</code></pre>
+<p><h1>Heading 1 <span class="badge">Badge</span></h1></p>
+<p><h2>Heading 2 <span class="badge">Badge</span></h2></p>
+<p><h3>Heading 3 <span class="badge">Badge</span></h3></p>
+<p>Paragraph <span class="badge">Badge</span></p>
+
+    </div>
+  </main>
+
+  <footer id="foot">
+    <a href="../index.html">
+      <img src="../source/img/wordmark.svg" alt="Shoelace logo">
+    </a>
+    <p class="text-small text-muted">
+      Shoelace.css 1.0.0-beta10 &middot;
+      &copy; A Beautiful Site, LLC
+    </p>
+
+    <p class="margin-y-small text-center">
+      <a class="github-button" href="https://github.com/claviska/shoelace-css/fork" data-size="large" aria-label="Fork claviska/shoelace-css on GitHub">Fork</a>
+      <a class="github-button" href="https://github.com/claviska/shoelace-css/releases" data-icon="octicon-cloud-download" data-size="large" aria-label="Download claviska/shoelace-css on GitHub">Download</a>
+      <a class="github-button" href="https://github.com/claviska/shoelace-css/issues" data-icon="octicon-issue-opened" data-size="large" aria-label="Issue claviska/shoelace-css on GitHub">Report a Bug</a>
+      <a class="github-button" href="https://github.com/claviska/shoelace-css" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star claviska/shoelace-css on GitHub">Star</a>
+    </p>
+    <p>
+      <a href="https://twitter.com/shoelacecss" class="button button-info" style="margin-bottom: 1.2rem;">Follow</a>
+      <a href="https://paypal.me/claviska" class="button button-success" style="margin-bottom: 1.2rem;">Donate</a>
+    </p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/prism.min.js"></script>
+  <script src="../source/js/dropdowns.js"></script>
+  <script src="../source/js/tabs.js"></script>
+  <script>
+    $(function() {
+      // Highlight current nav item
+      $('#nav a').each(function() {
+        if(this.pathname === location.pathname) {
+          $(this).addClass('current');
+        }
+      });
+    });
+  </script>
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+</body>
+</html>

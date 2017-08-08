@@ -2,10 +2,78 @@ body {
   border-top: solid .3rem var(--color-aqua);
 }
 
-main {
-  max-width: 45rem;
-  padding: 1rem;
+#head {
+  margin: var(--component-spacing-big) 0;
+}
+
+#head img {
+  width: 24rem;
+  vertical-align: middle;
+}
+
+#wrap {
+  max-width: 60rem;
+  padding: 0 2rem;
   margin: 2rem auto;
+  display: grid;
+  grid-template-columns: 12rem calc(100% - 12rem);
+}
+
+#nav {
+  text-align: right;
+  border-right: solid var(--component-border-width) var(--component-border-color);
+  padding-right: 1rem;
+  margin-right: 2rem;
+}
+
+#nav a {
+  border-radius: var(--component-border-radius);
+  margin: .5rem 0;
+  display: block;
+}
+
+#nav a.current {
+  color: var(--text-muted);
+  cursor: default;
+}
+
+#nav a.current:hover {
+
+}
+
+#foot {
+  text-align: center;
+  margin: var(--component-spacing-big) 0;
+}
+
+#foot img {
+  width: 14rem;
+  display: inline-block;
+  margin: .5rem 0;
+}
+
+#homepage #wrap {
+  max-width: 48rem;
+  display: block;
+}
+
+@media (max-width: 60rem) {
+  #wrap {
+    padding: 0 1rem;
+    display: block;
+  }
+
+  #nav {
+    font-size: .9rem;
+    border: none;
+    text-align: center;
+    margin: 0 0 2rem 0;
+  }
+
+  #nav a {
+    margin: .3rem;
+    display: inline-block;
+  }
 }
 
 h1[id]:not(:first-child),
@@ -20,45 +88,14 @@ h4[id] {
   color: var(--color-gray);
 }
 
-h1 img {
-  width: 24rem;
-  vertical-align: middle;
+pre {
+  margin-bottom: 1rem !important; /* Prism overrides our bottom margin */
 }
 
-header {
-  border-bottom: solid var(--component-border-width) var(--component-border-color);
-  padding-bottom: var(--component-spacing);
-  margin-bottom: var(--component-spacing-big);
-}
-
-footer {
-  border-top: solid var(--component-border-width) var(--component-border-color);
-  text-align: center;
-  padding-top: var(--component-spacing-big);
-  margin-top: var(--component-spacing-big);
-}
-
-footer img {
-  width: 16rem;
-}
-
-/* Main headings and bookmark links */
-h2[id] {
-  border-bottom: solid var(--component-border-width) var(--component-border-color);
-  padding-bottom: .25rem;
-  margin-bottom: 1rem;
-}
-
-a.bookmark {
-  width: 1em;
-  text-align: right;
-  color: var(--color-silver);
-  margin-left: -1em;
-  display: inline-block;
-}
-
-a.bookmark:hover {
-  text-decoration: none;
+pre code {
+  white-space: pre;
+  padding: 0;
+  display: block;
 }
 
 @media (max-width: 45rem) {

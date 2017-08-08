@@ -9,10 +9,15 @@ const Chalk = require('chalk');
 const CSSnano = require('cssnano');
 const Del = require('del');
 const FS = require('fs');
+const Layouts = require('metalsmith-layouts');
+const Markdown = require('metalsmith-markdown');
+const Metalsmith = require('metalsmith');
 const Path = require('path');
 const PostCSS = require('postcss');
 const Program = require('commander');
 const UglifyJS = require('uglify-js');
+
+let stats;
 
 // Initialize CLI
 Program
@@ -69,12 +74,12 @@ if(Program.build) {
       let shoelaceCSS = Path.join(__dirname, 'dist/shoelace.css');
 
       // Remember stats
-      let stats = {
+      stats = {
         originalSize: (output.stats.originalSize / 1024).toFixed(1) + 'KB',
         minifiedSize: (output.stats.minifiedSize / 1024).toFixed(1) + 'KB'
       };
 
-      // Update placeholders in CSS
+      // Update {placeholders} in CSS
       output.styles = output.styles
         .replace(/\{version\}/g, __version)
         .replace(/\{originalSize\}/, stats.originalSize)
@@ -87,29 +92,6 @@ if(Program.build) {
           return;
         }
         console.log(Chalk.green('CSS Minified: %s! 💪'), Path.relative(__dirname, shoelaceCSS));
-
-        resolve(stats);
-      });
-    }))
-
-    // Update docs
-    .then((stats) => new Promise((resolve, reject) => {
-      let docs = Path.join(__dirname, 'index.html');
-      let content = FS.readFileSync(docs, 'utf8');
-
-      // Update placeholders
-      content = content
-        .replace(/<span data-version>(.*?)<\/span>/g, '<span data-version>' + __version + '</span>')
-        .replace(/<span data-originalSize>(.*?)<\/span>/g, '<span data-originalSize>' + stats.originalSize + '</span>')
-        .replace(/<span data-minifiedSize>(.*?)<\/span>/g, '<span data-minifiedSize>' + stats.minifiedSize + '</span>');
-
-      // Write docs file
-      FS.writeFile(docs, content, 'utf8', (err) => {
-        if(err) {
-          reject(err);
-          return;
-        }
-        console.log(Chalk.green('Docs have been updated! 📚'));
 
         resolve();
       });
@@ -139,7 +121,7 @@ if(Program.build) {
     .then((output) => new Promise((resolve, reject) => {
       let shoelaceJS = Path.join(__dirname, 'dist/shoelace.js');
 
-      // Update placeholders in JS
+      // Update {placeholders} in JS
       output.code = output.code.replace(/\{version\}/g, __version);
 
       // Write output file
@@ -152,6 +134,45 @@ if(Program.build) {
 
         resolve();
       });
+    }))
+
+    // Generate the docs
+    .then(() => new Promise((resolve, reject) => {
+      Metalsmith(__dirname)
+        .source('./source/docs')
+        .destination('./docs')
+        .clean(true)
+        .use(Markdown())
+        .use(Layouts({
+          engine: 'handlebars',
+          directory: './source/layouts',
+          rename: false
+        }))
+        // Update {placeholders} in content
+        .use((files, metalsmith, done) => {
+          Object.keys(files).forEach((key) => {
+            let file = files[key];
+
+            file.contents = new Buffer(
+              file.contents
+                .toString()
+                .replace(/\{version\}/g, __version)
+                .replace(/\{minifiedSize\}/g, stats.minifiedSize)
+                .replace(/\{originalSize\}/g, stats.originalSize)
+            );
+          });
+
+          done();
+        })
+        .build((err) => {
+          if(err) {
+            reject(err);
+            return;
+          }
+          console.log(Chalk.green('Docs have been generated! 📚'));
+
+          resolve();
+        });
     }))
 
     // Exit with success

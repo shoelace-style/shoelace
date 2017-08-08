@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="How to install Shoelace.css.">
+  <link rel="icon" href="../source/img/favicon.png">
+  <link rel="stylesheet" href="../source/css/shoelace.css">
+  <link rel="stylesheet" href="../source/css/_docs.css">
+  <link rel="stylesheet" href="https://cdn.rawgit.com/AGMStudio/prism-theme-one-dark/f81fe477/prism-onedark.css">
+  <title>Installing</title>
+</head>
+<body>
+
+  <header id="head" class="text-center">
+    <h1>
+      <a href="../index.html">
+        <img src="../source/img/wordmark.svg" alt="Shoelace logo">
+      </a>
+    </h1>
+    <p class="text-muted text-small">
+      A back to the basics CSS starter kit. For when you don’t need the whole boot.
+    </p>
+  </header>
+
+  <main id="wrap">
+    <nav id="nav">
+      <a href="installing.html">Installing</a>
+      <a href="customizing.html">Customizing</a>
+      <a href="content.html">Content</a>
+      <a href="alerts.html">Alerts</a>
+      <a href="badges.html">Badges</a>
+      <a href="buttons.html">Buttons</a>
+      <a href="dropdowns.html">Dropdowns</a>
+      <a href="forms.html">Forms</a>
+      <a href="loaders.html">Loaders</a>
+      <a href="switches.html">Switches</a>
+      <a href="tabs.html">Tabs</a>
+      <a href="tables.html">Tables</a>
+      <a href="utilities.html">Utilities</a>
+      <a href="grid-system.html">Grid System</a>
+      <a href="icons.html">Icons</a>
+      <a href="browser-support.html">Browser Support</a>
+      <a href="attribution.html">Attribution</a>
+    </nav>
+
+    <div id="content">
+      <h2 id="installing">Installing</h2>
+<p>Shoelace is incredibly easy to use. To get started, simply link to <code>shoelace.css</code> in your project. You can use the CDN version or download the source manually.</p>
+<p>To make certain components interactive (e.g. dropdowns and tabs), you’ll need to load <a href="https://cdnjs.com/libraries/jquery/">jQuery</a> or <a href="https://cdnjs.com/libraries/zepto/">Zepto</a> along with <code>shoelace.js</code>.</p>
+<h3 id="cdn">CDN</h3>
+<p>The easiest way to use Shoelace is via CDN. Just add this to the <code>&lt;head&gt;</code>:</p>
+<pre><code class="lang-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/shoelace-css/1.0.0-beta10/shoelace.css&quot;&gt;
+</code></pre>
+<p>And this before <code>&lt;/body&gt;</code> but after jQuery/Zepto:</p>
+<pre><code class="lang-html">&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/shoelace-css/1.0.0-beta10/shoelace.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<p>This service is provided free, courtesy of <a href="https://cdnjs.com/">CDNJS</a>. New releases can take up to 12 hours to appear on the CDN.</p>
+<h3 id="download">Download</h3>
+<p>Alternatively, you can <a href="https://github.com/claviska/shoelace-css/releases">download the source</a> and link to <code>shoelace.css</code> from your own server. Just add this stylesheet to your <code>&lt;head&gt;</code>:</p>
+<pre><code class="lang-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;dist/shoelace.css&quot;&gt;
+</code></pre>
+<p>And this before <code>&lt;/body&gt;</code> but after jQuery/Zepto:</p>
+<pre><code class="lang-html">&lt;script src=&quot;dist/shoelace.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<h3 id="npm">NPM</h3>
+<p>If you’re using NPM, you can install Shoelace by running:</p>
+<pre><code>npm install --save-dev shoelace-css
+</code></pre>
+    </div>
+  </main>
+
+  <footer id="foot">
+    <a href="../index.html">
+      <img src="../source/img/wordmark.svg" alt="Shoelace logo">
+    </a>
+    <p class="text-small text-muted">
+      Shoelace.css 1.0.0-beta10 &middot;
+      &copy; A Beautiful Site, LLC
+    </p>
+
+    <p class="margin-y-small text-center">
+      <a class="github-button" href="https://github.com/claviska/shoelace-css/fork" data-size="large" aria-label="Fork claviska/shoelace-css on GitHub">Fork</a>
+      <a class="github-button" href="https://github.com/claviska/shoelace-css/releases" data-icon="octicon-cloud-download" data-size="large" aria-label="Download claviska/shoelace-css on GitHub">Download</a>
+      <a class="github-button" href="https://github.com/claviska/shoelace-css/issues" data-icon="octicon-issue-opened" data-size="large" aria-label="Issue claviska/shoelace-css on GitHub">Report a Bug</a>
+      <a class="github-button" href="https://github.com/claviska/shoelace-css" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star claviska/shoelace-css on GitHub">Star</a>
+    </p>
+    <p>
+      <a href="https://twitter.com/shoelacecss" class="button button-info" style="margin-bottom: 1.2rem;">Follow</a>
+      <a href="https://paypal.me/claviska" class="button button-success" style="margin-bottom: 1.2rem;">Donate</a>
+    </p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/prism.min.js"></script>
+  <script src="../source/js/dropdowns.js"></script>
+  <script src="../source/js/tabs.js"></script>
+  <script>
+    $(function() {
+      // Highlight current nav item
+      $('#nav a').each(function() {
+        if(this.pathname === location.pathname) {
+          $(this).addClass('current');
+        }
+      });
+    });
+  </script>
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+</body>
+</html>

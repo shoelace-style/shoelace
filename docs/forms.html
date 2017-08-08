@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="Default form control styles.">
+  <link rel="icon" href="../source/img/favicon.png">
+  <link rel="stylesheet" href="../source/css/shoelace.css">
+  <link rel="stylesheet" href="../source/css/_docs.css">
+  <link rel="stylesheet" href="https://cdn.rawgit.com/AGMStudio/prism-theme-one-dark/f81fe477/prism-onedark.css">
+  <title>Forms</title>
+</head>
+<body>
+
+  <header id="head" class="text-center">
+    <h1>
+      <a href="../index.html">
+        <img src="../source/img/wordmark.svg" alt="Shoelace logo">
+      </a>
+    </h1>
+    <p class="text-muted text-small">
+      A back to the basics CSS starter kit. For when you don’t need the whole boot.
+    </p>
+  </header>
+
+  <main id="wrap">
+    <nav id="nav">
+      <a href="installing.html">Installing</a>
+      <a href="customizing.html">Customizing</a>
+      <a href="content.html">Content</a>
+      <a href="alerts.html">Alerts</a>
+      <a href="badges.html">Badges</a>
+      <a href="buttons.html">Buttons</a>
+      <a href="dropdowns.html">Dropdowns</a>
+      <a href="forms.html">Forms</a>
+      <a href="loaders.html">Loaders</a>
+      <a href="switches.html">Switches</a>
+      <a href="tabs.html">Tabs</a>
+      <a href="tables.html">Tables</a>
+      <a href="utilities.html">Utilities</a>
+      <a href="grid-system.html">Grid System</a>
+      <a href="icons.html">Icons</a>
+      <a href="browser-support.html">Browser Support</a>
+      <a href="attribution.html">Attribution</a>
+    </nav>
+
+    <div id="content">
+      <h2 id="forms">Forms</h2>
+<p>Shoelace gives you beautiful forms without hassle. Most form controls don’t need a special class for styling.</p>
+<h3 id="form-controls">Form Controls</h3>
+<p>Form controls are styled at 100% of the width of their parent element.</p>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Input Type</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>&lt;input type=&quot;checkbox&quot;&gt;</code></td>
+      <td>
+        <label><input type="checkbox" checked> Checkbox 1</label><br>
+        <label><input type="checkbox"> Checkbox 2</label>
+      </td>
+    </tr>
+    <tr>
+      <td><code>&lt;input type=&quot;color&quot;&gt;</code></td>
+      <td><input type="color" value="#0099dd"></td>
+    </tr>
+    <tr>
+      <td><code>&lt;input type=&quot;date&quot;&gt;</code></td>
+      <td><input type="date"></td>
+    </tr>
+    <tr>
+      <td><code>&lt;input type=&quot;email&quot;&gt;</code></td>
+      <td><input type="email"></td>
+    </tr>
+    <tr>
+      <td>
+        <code>&lt;input type=&quot;file&quot;&gt;</code>
+        <br>
+        <span class="text-small text-muted">
+          File inputs aren’t supported. Use a <a href="#file-buttons">file button</a> instead.
+        </span>
+      </td>
+      <td>
+        <label class="button button-block">Select File <input type="file"></label>
+      </td>
+    </tr>
+    <tr>
+      <td><code>&lt;input type=&quot;number&quot;&gt;</code></td>
+      <td><input type="number"></td>
+    </tr>
+    <tr>
+      <td><code>&lt;input type=&quot;password&quot;&gt;</code></td>
+      <td><input type="password"></td>
+    </tr>
+    <tr>
+      <td><code>&lt;input type=&quot;radio&quot;&gt;</code></td>
+      <td>
+        <label><input type="Radio" name="radio" checked> Radio 1</label><br>
+        <label><input type="Radio" name="radio"> Radio 2</label>
+      </td>
+    </tr>
+    <tr>
+      <td><code>&lt;input type=&quot;range&quot;&gt;</code></td>
+      <td><input type="range"></td>
+    </tr>
+    <tr>
+      <td><code>&lt;input type=&quot;search&quot;&gt;</code></td>
+      <td><input type="search"></td>
+    </tr>
+    <tr>
+      <td><code>&lt;input type=&quot;text&quot;&gt;</code></td>
+      <td><input type="text"></td>
+    </tr>
+    <tr>
+      <td><code>&lt;input type=&quot;time&quot;&gt;</code></td>
+      <td><input type="time"></td>
+    </tr>
+    <tr>
+      <td><code>&lt;progress&gt;&lt;/progress&gt;</code></td>
+      <td><progress max="100" value="50"></progress></td>
+    </tr>
+    <tr>
+      <td><code>&lt;select&gt;</code></td>
+      <td>
+        <select>
+          <option>Item 1</option>
+          <option>Item 2</option>
+          <option>Item 3</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td><code>&lt;textarea&gt;</code></td>
+      <td><textarea rows="4"></textarea></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>You can change the size of most form controls with the <code>input-small</code> and <code>input-big</code> modifiers.</p>
+<pre><code class="lang-html">&lt;input type=&quot;text&quot; class=&quot;input-small&quot; placeholder=&quot;Small&quot;&gt;
+&lt;input type=&quot;text&quot; placeholder=&quot;Default&quot;&gt;
+&lt;input type=&quot;text&quot; class=&quot;input-big&quot; placeholder=&quot;Big&quot;&gt;
+
+&lt;select class=&quot;input-small&quot;&gt;&lt;option&gt;Item&lt;/option&gt;&lt;/select&gt;
+&lt;select&gt;&lt;option&gt;Item&lt;/option&gt;&lt;/select&gt;
+&lt;select class=&quot;input-big&quot;&gt;&lt;option&gt;Item&lt;/option&gt;&lt;/select&gt;
+</code></pre>
+<div class="two-column">
+  <p><input type="text" class="input-small" placeholder="Small"></p>
+  <p><input type="text" placeholder="Default"></p>
+  <p><input type="text" class="input-big" placeholder="Big"></p>
+  <p><select class="input-small"><option>Item</option></select></p>
+  <p><select><option>Item</option></select></p>
+  <p><select class="input-big"><option>Item</option></select></p>
+</div>
+
+<p>Disabled form controls look like this:</p>
+<div class="input-single">
+  <input type="text" placeholder="Input" disabled>
+</div>
+
+<div class="input-single">
+  <label><input type="checkbox" disabled> Checkbox</label>
+  <label><input type="radio" disabled> Radio</label>
+</div>
+
+<p>Read-only form controls look like this:</p>
+<div class="input-single">
+  <input type="text" readonly value="This is read-only">
+</div>
+
+<h3 id="form-control-spacing">Form Control Spacing</h3>
+<p>For proper spacing of individual form controls, wrap them in <code>input-single</code> containers.</p>
+<pre><code class="lang-html">&lt;div class=&quot;input-single&quot;&gt;
+  &lt;label&gt;Name&lt;/label&gt;
+  &lt;input type=&quot;text&quot;&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;input-single&quot;&gt;
+  &lt;label&gt;Password&lt;/label&gt;
+  &lt;input type=&quot;password&quot;&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;input-single&quot;&gt;
+  &lt;label&gt;&lt;input type=&quot;checkbox&quot;&gt; Remember me&lt;/label&gt;
+&lt;/div&gt;
+</code></pre>
+<div class="input-single">
+  <label>Username</label>
+  <input type="text">
+</div>
+
+<div class="input-single">
+  <label>Password</label>
+  <input type="password">
+</div>
+
+<div class="input-single">
+  <label><input type="checkbox"> Remember me</label>
+</div>
+
+<h3 id="input-groups">Input Groups</h3>
+<p>Form controls and buttons can be grouped by wrapping them in <code>input-group</code> containers.</p>
+<pre><code class="lang-html">&lt;div class=&quot;input-group&quot;&gt;
+  &lt;input type=&quot;text&quot;&gt;
+  &lt;button type=&quot;button&quot; class=&quot;button&quot;&gt;Submit&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;input-group&quot;&gt;
+  &lt;button type=&quot;button&quot; class=&quot;button&quot;&gt;Submit&lt;/button&gt;
+  &lt;input type=&quot;text&quot;&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;input-group&quot;&gt;
+  &lt;input type=&quot;text&quot; placeholder=&quot;First&quot;&gt;
+  &lt;input type=&quot;text&quot; placeholder=&quot;Middle&quot;&gt;
+  &lt;input type=&quot;text&quot; placeholder=&quot;Last&quot;&gt;
+  &lt;button type=&quot;button&quot; class=&quot;button&quot;&gt;Submit&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;input-group&quot;&gt;
+  &lt;button type=&quot;button&quot; class=&quot;button&quot;&gt;Option 1&lt;/button&gt;
+  &lt;button type=&quot;button&quot; class=&quot;button&quot;&gt;Option 2&lt;/button&gt;
+  &lt;button type=&quot;button&quot; class=&quot;button&quot;&gt;Option 3&lt;/button&gt;
+&lt;/div&gt;
+</code></pre>
+<div class="input-single">
+  <div class="input-group">
+    <input type="text">
+    <button type="button">Submit</button>
+  </div>
+</div>
+
+<div class="input-single">
+  <div class="input-group">
+    <button type="button">Submit</button>
+    <input type="text">
+  </div>
+</div>
+
+<div class="input-single">
+  <div class="input-group">
+    <input type="text" placeholder="First">
+    <input type="text" placeholder="Middle">
+    <input type="text" placeholder="Last">
+    <button type="button">Submit</button>
+  </div>
+</div>
+
+<div class="input-single">
+  <div class="input-group">
+    <button type="button">Option 1</button>
+    <button type="button">Option 2</button>
+    <button type="button">Option 3</button>
+  </div>
+</div>
+
+<h3 id="input-addons">Input Addons</h3>
+<p>To create an input addon, use <code>&lt;span class=&quot;input-addon&quot;&gt;</code>. Addons can appear anywhere inside an input group. Use the <code>input-addon-small</code> and <code>input-addon-big</code> modifiers to change the size to match adjacent form controls.</p>
+<pre><code class="lang-html">&lt;div class=&quot;input-group&quot;&gt;
+  &lt;span class=&quot;input-addon input-addon-small&quot;&gt;$&lt;/span&gt;
+  &lt;input type=&quot;text&quot; class=&quot;input-small&quot;&gt;
+  &lt;span class=&quot;input-addon input-addon-small&quot;&gt;.00&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;input-group&quot;&gt;
+  &lt;span class=&quot;input-addon&quot;&gt;$&lt;/span&gt;
+  &lt;input type=&quot;text&quot;&gt;
+  &lt;span class=&quot;input-addon&quot;&gt;.00&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;input-group&quot;&gt;
+  &lt;span class=&quot;input-addon input-addon-big&quot;&gt;$&lt;/span&gt;
+  &lt;input type=&quot;text&quot; class=&quot;input-big&quot;&gt;
+  &lt;span class=&quot;input-addon input-addon-big&quot;&gt;.00&lt;/span&gt;
+&lt;/div&gt;
+</code></pre>
+<div class="input-single">
+  <div class="input-group">
+    <span class="input-addon input-addon-small">$</span>
+    <input type="text" class="input-small">
+    <span class="input-addon input-addon-small">.00</span>
+  </div>
+</div>
+
+<div class="input-single">
+  <div class="input-group">
+    <span class="input-addon">$</span>
+    <input type="text">
+    <span class="input-addon">.00</span>
+  </div>
+</div>
+
+<div class="input-single">
+  <div class="input-group">
+    <span class="input-addon input-addon-big">$</span>
+    <input type="text" class="input-big">
+    <span class="input-addon input-addon-big">.00</span>
+  </div>
+</div>
+
+<h3 id="form-groups">Form Groups</h3>
+<p>Related form controls can be grouped in a <code>&lt;fieldset&gt;</code>. An optional <code>&lt;legend&gt;</code> can be used to display a name for the group.</p>
+<pre><code class="lang-html">&lt;fieldset&gt;
+  &lt;legend&gt;User&lt;/legend&gt;
+  ...
+&lt;/fieldset&gt;
+</code></pre>
+<fieldset>
+  <legend>Login</legend>
+  <div class="input-single">
+    <label>Username</label>
+    <input type="text">
+  </div>
+  <div class="input-single">
+    <label>Password</label>
+    <input type="password">
+  </div>
+  <div class="input-single">
+    <label>
+      <input type="checkbox"> Remember me
+    </label>
+  </div>
+  <div class="input-single">
+    <button type="button">Login</button>
+  </div>
+</fieldset>
+
+<h3 id="validation">Validation</h3>
+<p>Form controls can be made valid or invalid using the <code>input-valid</code> and <code>input-invalid</code> modifiers. It’s better to apply modifiers to the surrounding <code>input-single</code> so labels will be styled as well, but modifiers can be applied directly to form controls as needed.</p>
+<pre><code class="lang-html">&lt;div class=&quot;input-single input-valid&quot;&gt;
+  &lt;label&gt;Valid&lt;/label&gt;
+  &lt;input type=&quot;text&quot;&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;input-single input-invalid&quot;&gt;
+  &lt;label&gt;Invalid&lt;/label&gt;
+  &lt;input type=&quot;text&quot;&gt;
+&lt;/div&gt;
+</code></pre>
+<div class="two-column">
+  <div class="input-single input-valid">
+    <label>Valid</label>
+    <input type="text">
+  </div>
+
+  <div class="input-single input-invalid">
+    <label>Invalid</label>
+    <input type="text">
+  </div>
+</div>
+
+    </div>
+  </main>
+
+  <footer id="foot">
+    <a href="../index.html">
+      <img src="../source/img/wordmark.svg" alt="Shoelace logo">
+    </a>
+    <p class="text-small text-muted">
+      Shoelace.css 1.0.0-beta10 &middot;
+      &copy; A Beautiful Site, LLC
+    </p>
+
+    <p class="margin-y-small text-center">
+      <a class="github-button" href="https://github.com/claviska/shoelace-css/fork" data-size="large" aria-label="Fork claviska/shoelace-css on GitHub">Fork</a>
+      <a class="github-button" href="https://github.com/claviska/shoelace-css/releases" data-icon="octicon-cloud-download" data-size="large" aria-label="Download claviska/shoelace-css on GitHub">Download</a>
+      <a class="github-button" href="https://github.com/claviska/shoelace-css/issues" data-icon="octicon-issue-opened" data-size="large" aria-label="Issue claviska/shoelace-css on GitHub">Report a Bug</a>
+      <a class="github-button" href="https://github.com/claviska/shoelace-css" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star claviska/shoelace-css on GitHub">Star</a>
+    </p>
+    <p>
+      <a href="https://twitter.com/shoelacecss" class="button button-info" style="margin-bottom: 1.2rem;">Follow</a>
+      <a href="https://paypal.me/claviska" class="button button-success" style="margin-bottom: 1.2rem;">Donate</a>
+    </p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/prism.min.js"></script>
+  <script src="../source/js/dropdowns.js"></script>
+  <script src="../source/js/tabs.js"></script>
+  <script>
+    $(function() {
+      // Highlight current nav item
+      $('#nav a').each(function() {
+        if(this.pathname === location.pathname) {
+          $(this).addClass('current');
+        }
+      });
+    });
+  </script>
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+</body>
+</html>

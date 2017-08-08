@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="Shoelace ships with elegant table styles and a handful of modifiers.">
+  <link rel="icon" href="../source/img/favicon.png">
+  <link rel="stylesheet" href="../source/css/shoelace.css">
+  <link rel="stylesheet" href="../source/css/_docs.css">
+  <link rel="stylesheet" href="https://cdn.rawgit.com/AGMStudio/prism-theme-one-dark/f81fe477/prism-onedark.css">
+  <title>Tables</title>
+</head>
+<body>
+
+  <header id="head" class="text-center">
+    <h1>
+      <a href="../index.html">
+        <img src="../source/img/wordmark.svg" alt="Shoelace logo">
+      </a>
+    </h1>
+    <p class="text-muted text-small">
+      A back to the basics CSS starter kit. For when you don’t need the whole boot.
+    </p>
+  </header>
+
+  <main id="wrap">
+    <nav id="nav">
+      <a href="installing.html">Installing</a>
+      <a href="customizing.html">Customizing</a>
+      <a href="content.html">Content</a>
+      <a href="alerts.html">Alerts</a>
+      <a href="badges.html">Badges</a>
+      <a href="buttons.html">Buttons</a>
+      <a href="dropdowns.html">Dropdowns</a>
+      <a href="forms.html">Forms</a>
+      <a href="loaders.html">Loaders</a>
+      <a href="switches.html">Switches</a>
+      <a href="tabs.html">Tabs</a>
+      <a href="tables.html">Tables</a>
+      <a href="utilities.html">Utilities</a>
+      <a href="grid-system.html">Grid System</a>
+      <a href="icons.html">Icons</a>
+      <a href="browser-support.html">Browser Support</a>
+      <a href="attribution.html">Attribution</a>
+    </nav>
+
+    <div id="content">
+      <h2 id="tables">Tables</h2>
+<p>Tables are styled for you automatically — no special classes required.</p>
+<pre><code class="lang-html">&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;&lt;th&gt;Item&lt;/th&gt;&lt;th&gt;Price&lt;/th&gt;&lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;Shoe Freshener&lt;/td&gt;&lt;td&gt;$4.79&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Shoe Glue&lt;/td&gt;&lt;td&gt;$2.50&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Shoe Polish&lt;/td&gt;&lt;td&gt;$5.25&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Shoelaces&lt;/td&gt;&lt;td&gt;$3.99&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</code></pre>
+<table>
+  <thead>
+    <tr><th>Item</th><th>Price</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Shoe Freshener</td><td>$4.79</td></tr>
+    <tr><td>Shoe Glue</td><td>$2.50</td></tr>
+    <tr><td>Shoe Polish</td><td>$5.25</td></tr>
+    <tr><td>Shoelaces</td><td>$3.99</td></tr>
+  </tbody>
+</table>
+
+<h3 id="striped-tables">Striped Tables</h3>
+<p>Use the <code>table-striped</code> modifier to add stripes to alternating rows.</p>
+<pre><code class="lang-html">&lt;table class=&quot;table-striped&quot;&gt;
+  ...
+&lt;/table&gt;
+</code></pre>
+<table class="table-striped">
+  <thead>
+    <tr><th>Item</th><th>Price</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Shoe Freshener</td><td>$4.79</td></tr>
+    <tr><td>Shoe Glue</td><td>$2.50</td></tr>
+    <tr><td>Shoe Polish</td><td>$5.25</td></tr>
+    <tr><td>Shoelaces</td><td>$3.99</td></tr>
+  </tbody>
+</table>
+
+<h3 id="bordered-tables">Bordered Tables</h3>
+<p>Use the <code>table-bordered</code> modifier to add a border to the table.</p>
+<pre><code class="lang-html">&lt;table class=&quot;table-bordered&quot;&gt;
+  ...
+&lt;/table&gt;
+</code></pre>
+<table class="table-bordered">
+  <thead>
+    <tr><th>Item</th><th>Price</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Shoe Freshener</td><td>$4.79</td></tr>
+    <tr><td>Shoe Glue</td><td>$2.50</td></tr>
+    <tr><td>Shoe Polish</td><td>$5.25</td></tr>
+    <tr><td>Shoelaces</td><td>$3.99</td></tr>
+  </tbody>
+</table>
+
+<h3 id="hoverable-rows">Hoverable Rows</h3>
+<p>Use the <code>table-hoverable</code> modifier to enable the hover state on table rows.</p>
+<pre><code class="lang-html">&lt;table class=&quot;table-hoverable&quot;&gt;
+  ...
+&lt;/table&gt;
+</code></pre>
+<table class="table-hoverable">
+  <thead>
+    <tr><th>Item</th><th>Price</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Shoe Freshener</td><td>$4.79</td></tr>
+    <tr><td>Shoe Glue</td><td>$2.50</td></tr>
+    <tr><td>Shoe Polish</td><td>$5.25</td></tr>
+    <tr><td>Shoelaces</td><td>$3.99</td></tr>
+  </tbody>
+</table>
+
+    </div>
+  </main>
+
+  <footer id="foot">
+    <a href="../index.html">
+      <img src="../source/img/wordmark.svg" alt="Shoelace logo">
+    </a>
+    <p class="text-small text-muted">
+      Shoelace.css 1.0.0-beta10 &middot;
+      &copy; A Beautiful Site, LLC
+    </p>
+
+    <p class="margin-y-small text-center">
+      <a class="github-button" href="https://github.com/claviska/shoelace-css/fork" data-size="large" aria-label="Fork claviska/shoelace-css on GitHub">Fork</a>
+      <a class="github-button" href="https://github.com/claviska/shoelace-css/releases" data-icon="octicon-cloud-download" data-size="large" aria-label="Download claviska/shoelace-css on GitHub">Download</a>
+      <a class="github-button" href="https://github.com/claviska/shoelace-css/issues" data-icon="octicon-issue-opened" data-size="large" aria-label="Issue claviska/shoelace-css on GitHub">Report a Bug</a>
+      <a class="github-button" href="https://github.com/claviska/shoelace-css" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star claviska/shoelace-css on GitHub">Star</a>
+    </p>
+    <p>
+      <a href="https://twitter.com/shoelacecss" class="button button-info" style="margin-bottom: 1.2rem;">Follow</a>
+      <a href="https://paypal.me/claviska" class="button button-success" style="margin-bottom: 1.2rem;">Donate</a>
+    </p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/prism.min.js"></script>
+  <script src="../source/js/dropdowns.js"></script>
+  <script src="../source/js/tabs.js"></script>
+  <script>
+    $(function() {
+      // Highlight current nav item
+      $('#nav a').each(function() {
+        if(this.pathname === location.pathname) {
+          $(this).addClass('current');
+        }
+      });
+    });
+  </script>
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+</body>
+</html>

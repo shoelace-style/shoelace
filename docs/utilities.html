@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="Use these utilities for quick prototyping.">
+  <link rel="icon" href="../source/img/favicon.png">
+  <link rel="stylesheet" href="../source/css/shoelace.css">
+  <link rel="stylesheet" href="../source/css/_docs.css">
+  <link rel="stylesheet" href="https://cdn.rawgit.com/AGMStudio/prism-theme-one-dark/f81fe477/prism-onedark.css">
+  <title>Utilities</title>
+</head>
+<body>
+
+  <header id="head" class="text-center">
+    <h1>
+      <a href="../index.html">
+        <img src="../source/img/wordmark.svg" alt="Shoelace logo">
+      </a>
+    </h1>
+    <p class="text-muted text-small">
+      A back to the basics CSS starter kit. For when you don’t need the whole boot.
+    </p>
+  </header>
+
+  <main id="wrap">
+    <nav id="nav">
+      <a href="installing.html">Installing</a>
+      <a href="customizing.html">Customizing</a>
+      <a href="content.html">Content</a>
+      <a href="alerts.html">Alerts</a>
+      <a href="badges.html">Badges</a>
+      <a href="buttons.html">Buttons</a>
+      <a href="dropdowns.html">Dropdowns</a>
+      <a href="forms.html">Forms</a>
+      <a href="loaders.html">Loaders</a>
+      <a href="switches.html">Switches</a>
+      <a href="tabs.html">Tabs</a>
+      <a href="tables.html">Tables</a>
+      <a href="utilities.html">Utilities</a>
+      <a href="grid-system.html">Grid System</a>
+      <a href="icons.html">Icons</a>
+      <a href="browser-support.html">Browser Support</a>
+      <a href="attribution.html">Attribution</a>
+    </nav>
+
+    <div id="content">
+      <h2 id="utilities">Utilities</h2>
+<p>Shoelace provides a number of helpful utility classes that make prototyping easier.</p>
+<h3 id="text-utilities">Text Utilities</h3>
+<p>Text utilities are classes that can be applied to just about any element. The text inside will be
+formatted appropriately.</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Class</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>text-success</code></td>
+      <td class="text-success">This is success text</td>
+    </tr>
+    <tr>
+      <td><code>text-info</code></td>
+      <td class="text-info">This is info text</td>
+    </tr>
+    <tr>
+      <td><code>text-warning</code></td>
+      <td class="text-warning">This is warning text</td>
+    </tr>
+    <tr>
+      <td><code>text-danger</code></td>
+      <td class="text-danger">This is danger text</td>
+    </tr>
+    <tr>
+      <td><code>text-muted</code></td>
+      <td class="text-muted">This is muted text</td>
+    </tr>
+    <tr>
+      <td><code>text-small</code></td>
+      <td class="text-small">This is small text</td>
+    </tr>
+    <tr>
+      <td><code>text-bold</code></td>
+      <td class="text-bold">This is bold text</td>
+    </tr>
+    <tr>
+      <td><code>text-italic</code></td>
+      <td class="text-italic">This is italic text</td>
+    </tr>
+    <tr>
+      <td><code>text-left</code></td>
+      <td class="text-left">This is left-aligned text</td>
+    </tr>
+    <tr>
+      <td><code>text-center</code></td>
+      <td class="text-center">This is centered text</td>
+    </tr>
+    <tr>
+      <td><code>text-right</code></td>
+      <td class="text-right">This is right-aligned text</td>
+    </tr>
+    <tr>
+      <td><code>text-justify</code></td>
+      <td class="text-justify">This is justified text</td>
+    </tr>
+    <tr>
+      <td><code>text-nowrap</code></td>
+      <td class="text-nowrap">This is text that won’t wrap</td>
+    </tr>
+    <tr>
+      <td><code>text-lowercase</code></td>
+      <td class="text-lowercase">This is lowercase text</td>
+    </tr>
+    <tr>
+      <td><code>text-uppercase</code></td>
+      <td class="text-uppercase">This is uppercase text</td>
+    </tr>
+    <tr>
+      <td><code>text-capitalize</code></td>
+      <td class="text-capitalize">This is capitalized text</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="float-utilities">Float Utilities</h3>
+<p>Float utilities are provided to easily float elements to the left or right. Just apply the <code>float-left</code> or <code>float-right</code> class to an element to float it left or right.</p>
+<p>A clearfix utility is also available to clear floated elements. Just apply the <code>clearfix</code> class to the appropriate element.</p>
+<h3 id="sizing-utilities">Sizing Utilities</h3>
+<p>Sizing utilities can be used to set a relative width or height on any element. Just apply a <code>width-*</code> or <code>height-*</code> class and the appropriate element will be sized accordingly. Sizes are available as percentages from 0 – 100 in multiples of five.</p>
+<pre><code class="lang-html">&lt;div class=&quot;width-25&quot;&gt;25%&lt;/div&gt;
+&lt;div class=&quot;width-50&quot;&gt;50%&lt;/div&gt;
+&lt;div class=&quot;width-75&quot;&gt;75%&lt;/div&gt;
+&lt;div class=&quot;width-100&quot;&gt;100%&lt;/div&gt;
+
+&lt;div class=&quot;height-25&quot;&gt;25%&lt;/div&gt;
+&lt;div class=&quot;height-50&quot;&gt;50%&lt;/div&gt;
+&lt;div class=&quot;height-75&quot;&gt;75%&lt;/div&gt;
+&lt;div class=&quot;height-100&quot;&gt;100%&lt;/div&gt;
+</code></pre>
+<div class="width-sizing-example">
+  <div class="width-25">25%</div>
+  <div class="width-50">50%</div>
+  <div class="width-75">75%</div>
+  <div class="width-100">100%</div>
+</div>
+
+<div class="height-sizing-example">
+  <div class="height-25">25%</div>
+  <div class="height-50">50%</div>
+  <div class="height-75">75%</div>
+  <div class="height-100">100%</div>
+</div>
+
+<h3 id="spacing-utilities">Spacing Utilities</h3>
+<p>Spacing utilities can be used to add or remove paddings and margins to any element. Just apply the desired class and the appropriate element will receive the respective padding/margin.</p>
+<p>Class names are prefixed with <code>padding-</code> or <code>margin-</code> for padding and margin, respectively. To apply spacing to all sides of an element, use the following classes:</p>
+<pre><code>padding-[none|small|medium|big]
+margin-[none|small|medium|big]
+</code></pre><p>Example:</p>
+<pre><code class="lang-html">&lt;div class=&quot;padding-none margin-big&quot;&gt;
+</code></pre>
+<p>To apply spacing to a specific side of an element, use one or more of the following classes:</p>
+<pre><code>padding-[top|right|bottom|left|x|y]-[none|small|medium|big]
+margin-[top|right|bottom|left|x|y]-[none|small|medium|big]
+</code></pre><p>Example:</p>
+<pre><code class="lang-html">&lt;div class=&quot;padding-left-medium margin-bottom-none&quot;&gt;
+</code></pre>
+<p>You can also use <code>margin-[x|y|xy]-auto</code> to set automatic margins horizontally and/or vertically.</p>
+
+    </div>
+  </main>
+
+  <footer id="foot">
+    <a href="../index.html">
+      <img src="../source/img/wordmark.svg" alt="Shoelace logo">
+    </a>
+    <p class="text-small text-muted">
+      Shoelace.css 1.0.0-beta10 &middot;
+      &copy; A Beautiful Site, LLC
+    </p>
+
+    <p class="margin-y-small text-center">
+      <a class="github-button" href="https://github.com/claviska/shoelace-css/fork" data-size="large" aria-label="Fork claviska/shoelace-css on GitHub">Fork</a>
+      <a class="github-button" href="https://github.com/claviska/shoelace-css/releases" data-icon="octicon-cloud-download" data-size="large" aria-label="Download claviska/shoelace-css on GitHub">Download</a>
+      <a class="github-button" href="https://github.com/claviska/shoelace-css/issues" data-icon="octicon-issue-opened" data-size="large" aria-label="Issue claviska/shoelace-css on GitHub">Report a Bug</a>
+      <a class="github-button" href="https://github.com/claviska/shoelace-css" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star claviska/shoelace-css on GitHub">Star</a>
+    </p>
+    <p>
+      <a href="https://twitter.com/shoelacecss" class="button button-info" style="margin-bottom: 1.2rem;">Follow</a>
+      <a href="https://paypal.me/claviska" class="button button-success" style="margin-bottom: 1.2rem;">Donate</a>
+    </p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/prism.min.js"></script>
+  <script src="../source/js/dropdowns.js"></script>
+  <script src="../source/js/tabs.js"></script>
+  <script>
+    $(function() {
+      // Highlight current nav item
+      $('#nav a').each(function() {
+        if(this.pathname === location.pathname) {
+          $(this).addClass('current');
+        }
+      });
+    });
+  </script>
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+</body>
+</html>
