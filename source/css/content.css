@@ -53,6 +53,10 @@ blockquote {
   margin-left: 0;
 }
 
+blockquote :last-child {
+  margin-bottom: 0;
+}
+
 code {
   font-family: var(--font-monospace);
   font-size: var(--code-font-size);
