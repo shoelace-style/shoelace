@@ -175,6 +175,16 @@ ul ul {
   margin-bottom: 0;
 }
 
+ol {
+  counter-reset: ol-item;
+  list-style-type: none;
+}
+
+ol li::before {
+  counter-increment: ol-item;
+  content: counters(ol-item, ".") ". ";
+}
+
 /***************************************************************************************************
 * Placeholders
 ***************************************************************************************************/
