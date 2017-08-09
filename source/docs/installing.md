@@ -12,7 +12,7 @@ To make certain components interactive (e.g. dropdowns and tabs), you’ll need 
 
 ### CDN
 
-The easiest way to use Shoelace is via CDN. Just add this to the `<head>`:
+The easiest way to use Shoelace is via CDN. Just add this to your `<head>`:
 
 ```html
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shoelace-css/{version}/shoelace.css">
