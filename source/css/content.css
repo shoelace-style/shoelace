@@ -41,10 +41,6 @@ b, strong {
   font-weight: var(--font-weight-bold);
 }
 
-big {
-  font-size: var(--font-size-big);
-}
-
 blockquote {
   font-size: var(--font-size-big);
   border-left: solid .4rem var(--component-border-color);
