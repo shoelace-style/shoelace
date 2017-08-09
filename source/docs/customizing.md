@@ -6,7 +6,7 @@ description: Learn how to customize Shoelace.css with CSS variables.
 
 ## Customizing
 
-You can customize Shoelace without editing core files or using a preprocessor. To add customizations, simply override one or more of the variables found in [`variables.css`](source/css/variables.css) in your own stylesheet.
+You can customize Shoelace without editing core files or using a preprocessor. To add customizations, simply override one or more of the variables found in [`variables.css`](../source/css/variables.css) in your own stylesheet.
 
 For example, you can customize the default text color and background like this:
 
@@ -27,7 +27,7 @@ You can use any of Shoelace’s variables in your stylesheet. This makes it easy
 }
 ```
 
-Refer to [`variables.css`](source/css/variables.css) for a complete list of variables in Shoelace. If you’re not familiar with CSS variables, [this article](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_variables) will bring you up to speed. There’s also an [interactive demo](https://codepen.io/claviska/pen/NvGVYM?editors=1100) if you want to experiment.
+Refer to [`variables.css`](../source/css/variables.css) for a complete list of variables in Shoelace. If you’re not familiar with CSS variables, [this article](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_variables) will bring you up to speed. There’s also an [interactive demo](https://codepen.io/claviska/pen/NvGVYM?editors=1100) if you want to experiment.
 
 ### Custom Components
 
@@ -35,7 +35,7 @@ You can create custom components to extend Shoelace’s functionality. Here are 
 
 **Familiarize yourself with Shoelace’s naming conventions.** A custom accordion component, for example, would have a class name such as `accordion`, modifier classes such as `accordion-open`, and variable names that look like `--accordion-bg-color`. Try to follow similar patterns as much as possible.
 
-**Define new variables when it makes sense to.** Take a look at [`variables.css`](source/css/variables.css) to see how existing components are defined. Many use core variables instead of hardcoded properties as default values. This makes it easy for users to customize things quickly, but still provides enough flexibility to style individual components.
+**Define new variables when it makes sense to.** Take a look at [`variables.css`](../source/css/variables.css) to see how existing components are defined. Many use core variables instead of hardcoded properties as default values. This makes it easy for users to customize things quickly, but still provides enough flexibility to style individual components.
 
 **Semantic markup is strongly encouraged.** Custom components should use the most appropriate elements and the minimal amount of markup required.
 
