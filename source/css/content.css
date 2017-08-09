@@ -183,20 +183,13 @@ ul ul {
 * Placeholders
 ***************************************************************************************************/
 
-::-webkit-input-placeholder { color: var(--placeholder-color); }
-::-moz-placeholder { color: var(--placeholder-color); }
-:-ms-input-placeholder { color: var(--placeholder-color); }
-:-moz-placeholder { color: var(--placeholder-color); }
+::placeholder {
+  color: var(--placeholder-color);
+}
 
 /***************************************************************************************************
 * Selections
 ***************************************************************************************************/
-
-::-moz-selection {
-  background-color: var(--selection-bg-color);
-  color: var(--selection-color);
-  text-shadow: none !important;
-}
 
 ::selection {
   background-color: var(--selection-bg-color);
