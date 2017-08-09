@@ -7,6 +7,10 @@ body {
   margin: var(--component-spacing-big) 0;
 }
 
+#head a {
+  display: inline-block;
+}
+
 #head img {
   width: 24rem;
   margin: 0 auto;
