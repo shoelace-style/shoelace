@@ -12,7 +12,7 @@ Shoelace doesn’t bundle its own icons, but you can easily include your favorit
 
 This keeps Shoelace light and makes it more customizable.
 
-### FontAwesome
+### Font Awesome
 
 You can load Font Awesome locally or via CDN. To use the CDN version, add this to the `<head>` section of your page:
 
