@@ -62,8 +62,8 @@ if(Program.build) {
     .then((styles) => new Promise((resolve, reject) => {
       let shoelaceCSS = Path.join(__dirname, 'dist/shoelace.css');
 
-      // Update {version} in CSS
-      styles = styles.replace(/\{version\}/g, __version);
+      // Update {{version}} in CSS since it's not processed with Handlebars
+      styles = styles.replace(/\{\{version\}\}/g, __version);
 
       // Write output file
       FS.writeFile(shoelaceCSS, styles, 'utf8', (err) => {
@@ -101,8 +101,8 @@ if(Program.build) {
     .then((scripts) => new Promise((resolve, reject) => {
       let shoelaceJS = Path.join(__dirname, 'dist/shoelace.js');
 
-      // Update {version} in JS
-      scripts = scripts.replace(/\{version\}/g, __version);
+      // Update {{version}} in JS since it's not processed with Handlebars
+      scripts = scripts.replace(/\{\{version\}\}/g, __version);
 
       // Write output file
       FS.writeFile(shoelaceJS, scripts, 'utf8', (err) => {
@@ -123,12 +123,15 @@ if(Program.build) {
         .destination('./docs')
         .clean(true)
         .use(Markdown())
+        .metadata({
+          version: __version
+        })
         .use(Layouts({
           engine: 'handlebars',
           directory: './source/layouts',
           rename: false
         }))
-        // Update {version} in content
+        // Update {{version}} in content since it's not processed with Handlebars
         .use((files, metalsmith, done) => {
           Object.keys(files).forEach((key) => {
             let file = files[key];
@@ -136,7 +139,7 @@ if(Program.build) {
             file.contents = new Buffer(
               file.contents
                 .toString()
-                .replace(/\{version\}/g, __version)
+                .replace(/\{\{version\}\}/g, __version)
             );
           });
 

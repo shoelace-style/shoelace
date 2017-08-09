@@ -15,13 +15,13 @@ To make certain components interactive (e.g. dropdowns and tabs), you’ll need 
 The easiest way to use Shoelace is via CDN. Just add this to your `<head>`:
 
 ```html
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shoelace-css/{version}/shoelace.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shoelace-css/{{version}}/shoelace.css">
 ```
 
 And this before `</body>` but after jQuery/Zepto:
 
 ```html
-<script src="https://cdnjs.cloudflare.com/ajax/libs/shoelace-css/{version}/shoelace.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/shoelace-css/{{version}}/shoelace.js"></script>
 ```
 
 This service is provided free, courtesy of [CDNJS](https://cdnjs.com/). New releases can take up to 12 hours to appear on the CDN.

@@ -1,5 +1,5 @@
 /*!
-  Shoelace.css tabs {version}
+  Shoelace.css tabs {{version}}
   (c) A Beautiful Site, LLC
 
   Released under the MIT license
