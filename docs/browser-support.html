@@ -48,10 +48,10 @@
     <div id="content">
       <h2 id="browser-support">Browser Support</h2>
 <blockquote>
-<p>TL;DR — you can use Shoelace <em>today</em> if you don’t care about Internet Explorer and older browsers (Edge is fine). If you need to support older browsers, just make sure to use a <a href="#grid-system">grid system</a> and <a href="http://www.myth.io/">Myth</a> as a polyfill.</p>
+<p>TL;DR — you can use Shoelace <em>today</em> if you don’t care about Internet Explorer (Edge is fine). If you need to support IE, just use a <a href="https://github.com/zirafa/bootstrap-grid-only">grid system</a> and a polyfill such as <a href="http://www.myth.io/">Myth</a> or <a href="http://cssnext.io/">cssnext</a>.</p>
 </blockquote>
-<p>Browser support for CSS variables is <a href="http://caniuse.com/#feat=css-variables">pretty good</a>, but if you need to support Internet Explorer, consider using <a href="http://www.myth.io/">Myth</a> as a polyfill. Myth lets you write standards-compliant CSS and “fixes” it for unsupportive browsers.</p>
-<p>Browser support for the CSS Grid is <a href="http://caniuse.com/#feat=css-grid">very good</a>, but if you need to support older browsers you can use a <a href="#grid-system">grid system</a> instead.</p>
+<p>Browser support for CSS variables is <a href="http://caniuse.com/#feat=css-variables">pretty good</a>, but if you need to support Internet Explorer, consider using <a href="http://www.myth.io/">Myth</a> or <a href="http://cssnext.io/">cssnext</a> as a polyfill. Both libraries let you write standards-compliant CSS and processes it so it works properly in unsupportive browsers.</p>
+<p>Browser support for the CSS Grid is <a href="http://caniuse.com/#feat=css-grid">very good</a>, but if you need to support older browsers you can use a <a href="https://github.com/zirafa/bootstrap-grid-only">grid system</a> instead.</p>
 <p>Browser support for <code>calc</code> is <a href="http://caniuse.com/#feat=calc">excellent</a>. Shoelace uses this internally for relative calculations. You can use it along with CSS variables too.</p>
 <p>Browser support for color modifiers is non-existent. <a href="https://drafts.csswg.org/css-color/#modifying-colors">There is a draft</a>, so hopefully that will change soon. Shoelace doesn’t use this feature, but it will when support improves.</p>
 <p>Browser support for custom media queries is non-existent. <a href="https://drafts.csswg.org/mediaqueries-5/#custom-mq">There is a draft</a>, so hopefully that will change soon. Shoelace doesn’t use this feature, but it will when support improves.</p>
