@@ -3,12 +3,14 @@ body {
 }
 
 #head {
+  padding: 0 2rem;
   margin: var(--component-spacing-big) 0;
 }
 
 #head img {
   width: 24rem;
-  vertical-align: middle;
+  margin: 0 auto;
+  display: block;
 }
 
 #wrap {
@@ -58,6 +60,10 @@ body {
 }
 
 @media (max-width: 60rem) {
+  #head {
+    padding: 0 1rem;
+  }
+
   #wrap {
     padding: 0 1rem;
     display: block;
