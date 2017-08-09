@@ -56,8 +56,8 @@ if(Program.build) {
       };
 
       PostCSS([
-        Autoprefixer({ browsers: ['last 2 versions', '> 5%', 'ie >= 11', 'iOS >= 8'] }),
         AtImport,
+        Autoprefixer({ browsers: ['last 2 versions', '> 5%', 'ie >= 11', 'iOS >= 8'] }),
         CSSnano({ safe: true })
       ])
         .process(css, { from: shoelaceCSS })
