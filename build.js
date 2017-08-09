@@ -17,8 +17,6 @@ const PostCSS = require('postcss');
 const Program = require('commander');
 const UglifyJS = require('uglify-js');
 
-let stats;
-
 // Initialize CLI
 Program
   .version(__version)
@@ -49,11 +47,6 @@ if(Program.build) {
     .then(() => new Promise((resolve, reject) => {
       let shoelaceCSS = Path.join(__dirname, 'source/css/shoelace.css');
       let css = FS.readFileSync(shoelaceCSS, 'utf8');
-      let output = {
-        stats: {
-          originalSize: css.length
-        }
-      };
 
       PostCSS([
         AtImport,
@@ -61,32 +54,19 @@ if(Program.build) {
         CSSnano({ safe: true })
       ])
         .process(css, { from: shoelaceCSS })
-        .then((result) => {
-          output.styles = result.css;
-          output.stats.minifiedSize = output.styles.length;
-          resolve(output);
-        })
+        .then((result) => resolve(result.css))
         .catch((err) => reject(err));
     }))
 
     // Write stylesheet to dist
-    .then((output) => new Promise((resolve, reject) => {
+    .then((styles) => new Promise((resolve, reject) => {
       let shoelaceCSS = Path.join(__dirname, 'dist/shoelace.css');
 
-      // Remember stats
-      stats = {
-        originalSize: (output.stats.originalSize / 1024).toFixed(1) + 'KB',
-        minifiedSize: (output.stats.minifiedSize / 1024).toFixed(1) + 'KB'
-      };
-
-      // Update {placeholders} in CSS
-      output.styles = output.styles
-        .replace(/\{version\}/g, __version)
-        .replace(/\{originalSize\}/, stats.originalSize)
-        .replace(/\{minifiedSize\}/, stats.minifiedSize);
+      // Update {version} in CSS
+      styles = styles.replace(/\{version\}/g, __version);
 
       // Write output file
-      FS.writeFile(shoelaceCSS, output.styles, 'utf8', (err) => {
+      FS.writeFile(shoelaceCSS, styles, 'utf8', (err) => {
         if(err) {
           reject(err);
           return;
@@ -104,28 +84,28 @@ if(Program.build) {
         'tabs.js': FS.readFileSync(Path.join(__dirname, 'source/js/tabs.js'), 'utf8')
       };
 
-      let output = UglifyJS.minify(scripts, {
+      let result = UglifyJS.minify(scripts, {
         output: {
           comments: /^!/
         }
       });
-      if(output.error) {
-        reject(output.error);
+      if(result.error) {
+        reject(result.error);
         return;
       }
 
-      resolve(output);
+      resolve(result.code);
     }))
 
     // Write minified scripts to dist
-    .then((output) => new Promise((resolve, reject) => {
+    .then((scripts) => new Promise((resolve, reject) => {
       let shoelaceJS = Path.join(__dirname, 'dist/shoelace.js');
 
-      // Update {placeholders} in JS
-      output.code = output.code.replace(/\{version\}/g, __version);
+      // Update {version} in JS
+      scripts = scripts.replace(/\{version\}/g, __version);
 
       // Write output file
-      FS.writeFile(shoelaceJS, output.code, 'utf8', (err) => {
+      FS.writeFile(shoelaceJS, scripts, 'utf8', (err) => {
         if(err) {
           reject(err);
           return;
@@ -148,7 +128,7 @@ if(Program.build) {
           directory: './source/layouts',
           rename: false
         }))
-        // Update {placeholders} in content
+        // Update {version} in content
         .use((files, metalsmith, done) => {
           Object.keys(files).forEach((key) => {
             let file = files[key];
@@ -157,8 +137,6 @@ if(Program.build) {
               file.contents
                 .toString()
                 .replace(/\{version\}/g, __version)
-                .replace(/\{minifiedSize\}/g, stats.minifiedSize)
-                .replace(/\{originalSize\}/g, stats.originalSize)
             );
           });
 
