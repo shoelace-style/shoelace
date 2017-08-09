@@ -9,6 +9,9 @@
   <link rel="stylesheet" href="../source/css/shoelace.css">
   <link rel="stylesheet" href="../source/css/_docs.css">
   <link rel="stylesheet" href="https://cdn.rawgit.com/AGMStudio/prism-theme-one-dark/f81fe477/prism-onedark.css">
+  {{#each stylesheets}}
+  <link rel="stylesheet" href="{{.}}">
+  {{/each}}
   <title>{{title}}</title>
 </head>
 <body>
@@ -85,6 +88,9 @@
       });
     });
   </script>
+  {{#each scripts}}
+  <script src="{{.}}"></script>
+  {{/each}}
   <script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
 </html>
