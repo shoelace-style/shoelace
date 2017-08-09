@@ -48,7 +48,31 @@
     <div id="content">
       <h2 id="grid-system">Grid System</h2>
 <p>Shoelace doesn’t ship with a grid system because <a href="https://rachelandrew.co.uk/archives/2017/07/01/you-do-not-need-a-css-grid-based-grid-system/">you don’t need one</a>. You should use the <a href="https://gridbyexample.com/">CSS Grid Layout</a> instead.</p>
-<p>If you have an obligation to support older browsers, consider using the Bootstrap grid <a href="https://github.com/zirafa/bootstrap-grid-only">without any extras</a> in combination with Shoelace.</p>
+<p>This website uses the CSS Grid Layout. It’s really simple!</p>
+<pre><code class="lang-html">&lt;main id=&quot;wrap&quot;&gt;
+  &lt;nav id=&quot;nav&quot;&gt;
+    ...
+  &lt;/nav&gt;
+
+  &lt;div id=&quot;content&quot;&gt;
+    ...
+  &lt;/div&gt;
+&lt;/main&gt;
+</code></pre>
+<p>Now we just need a couple styles to turn the nav and content elements into columns. This will make the nav <code>12rem</code> wide and the content <code>100% - 12rem</code> so it fills the rest of the space.</p>
+<pre><code class="lang-css">#wrap {
+  display: grid;
+  grid-template-columns: 12rem calc(100% - 12rem);
+}
+</code></pre>
+<p>You can use media queries to make grids responsive. This is how we make the nav appear on top of the content on smaller screens.</p>
+<pre><code class="lang-css">@media (max-width: 60rem) {
+  #wrap {
+    display: block;
+  }
+}
+</code></pre>
+<p>Support for CSS Grid Layouts is <a href="http://caniuse.com/css-grid">very good</a>, but if you have an obligation to support older browsers, consider using the Bootstrap grid <a href="https://github.com/zirafa/bootstrap-grid-only">without any extras</a> in combination with Shoelace.</p>
 
     </div>
   </main>
