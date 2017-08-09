@@ -104,6 +104,10 @@ pre code {
   display: block;
 }
 
+a code {
+  color: inherit;
+}
+
 @media (max-width: 45rem) {
   a.bookmark {
     width: auto;
