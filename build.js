@@ -21,7 +21,7 @@ const UglifyJS = require('uglify-js');
 Program
   .version(__version)
   .option('--build', 'Builds a release')
-  .option('--clean', 'Removes existing release files')
+  .option('--clean', 'Removes existing release')
   .on('--help', () => {
     console.log(Chalk.cyan('\n  Version %s\n'), __version);
     process.exit(1);
@@ -168,13 +168,23 @@ if(Program.build) {
 
 // Clean task
 if(Program.clean) {
-  let dist = Path.join(__dirname, 'dist');
-
-  Del(dist)
+  Promise.resolve()
+    // Delete /dist
+    .then(() => Del(Path.join(__dirname, 'dist')))
     .then(() => {
-      console.log(Chalk.green('%s has been removed.'), dist);
-      process.exit(1);
+      console.log(Chalk.green('/dist has been removed.'));
     })
+
+    // Delete /docs
+    .then(() => Del(Path.join(__dirname, 'docs')))
+    .then(() => {
+      console.log(Chalk.green('/docs has been removed.'));
+    })
+
+    // Exit with success
+    .then(() => process.exit(1))
+
+    // Handle errors
     .catch((err) => {
       console.error(Chalk.red('Unable to delete dist directory: ' + err));
       process.exit(-1);
