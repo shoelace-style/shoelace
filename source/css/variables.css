@@ -120,7 +120,7 @@
 
   /* Badges */
   --badge-font-size: .8em; /* ems for relative sizing */
-  --badge-font-weight: var(--font-weight-bold);
+  --badge-font-weight: var(--font-weight);
   --badge-color: var(--color-white);
   --badge-border-radius: 1em;  /* ems for relative sizing */
   --badge-bg-color-primary: var(--color-primary);
