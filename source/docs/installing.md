@@ -45,5 +45,5 @@ And this before `</body>` but after jQuery/Zepto:
 If you’re using NPM, you can install Shoelace by running:
 
 ```
-npm install --save-dev shoelace-css
+npm install shoelace-css
 ```
