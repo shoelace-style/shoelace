@@ -86,6 +86,20 @@ body {
   }
 }
 
+/* Fallback to block nav for unsupportive browsers */
+@supports (not (display: grid)) {
+  #nav {
+    border: none;
+    text-align: center;
+    margin: 0 0 2rem 0;
+  }
+
+  #nav a {
+    margin: .5rem;
+    display: inline-block;
+  }
+}
+
 h1[id]:not(:first-child),
 h2[id]:not(:first-child),
 h3[id]:not(:first-child),
