@@ -231,10 +231,10 @@
   --switch-speed: .2s;
 
   /* Tabs */
-  --tab-bg-color: var(--body-bg);
-  --tab-bg-color-hover: var(--body-bg);
+  --tab-bg-color: var(--body-bg-color);
+  --tab-bg-color-hover: var(--body-bg-color);
   --tab-bg-color-active: var(--link-color);
-  --tab-bg-color-disabled: var(--body-bg);
+  --tab-bg-color-disabled: var(--body-bg-color);
   --tab-border-radius: var(--component-border-radius);
   --tab-color: var(--link-color);
   --tab-color-hover: var(--link-color-hover);
