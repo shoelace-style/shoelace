@@ -1,0 +1,62 @@
+/*! Progress Bars */
+
+@keyframes progress-indeterminate {
+  0% {
+    left: -50%;
+  }
+
+  100% {
+    left: 100%;
+  }
+}
+
+.progress {
+  position: relative;
+  width: 100%;
+  height: var(--progress-height);
+  background-color: var(--progress-bg-color);
+  border-radius: var(--progress-border-radius);
+  display: block;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  font-size: var(--progress-font-size);
+  line-height: var(--progress-height);
+  text-align: center;
+  color: var(--progress-color);
+  background-color: var(--progress-bar-bg-color);
+  transition: var(--progress-speed-change) width;
+  user-select: none;
+  cursor: default;
+}
+
+.progress-small {
+  height: var(--progress-height-small);
+}
+
+.progress-small .progress-bar {
+  line-height: var(--progress-height-small);
+  font-size: var(--progress-font-size-small);
+}
+
+.progress-big {
+  height: var(--progress-height-big);
+}
+
+.progress-big .progress-bar {
+  height: var(--progress-height-big);
+  line-height: var(--progress-height-big);
+  font-size: var(--progress-font-size-big);
+}
+
+.progress-indeterminate .progress-bar {
+  width: 50% !important;
+  animation: progress-indeterminate linear var(--progress-speed-indeterminate) infinite;
+}

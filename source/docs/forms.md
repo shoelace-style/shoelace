@@ -83,10 +83,6 @@ Form controls are styled at 100% of the width of their parent element.
       <td><input type="time"></td>
     </tr>
     <tr>
-      <td><code>&lt;progress&gt;&lt;/progress&gt;</code></td>
-      <td><progress max="100" value="50"></progress></td>
-    </tr>
-    <tr>
       <td><code>&lt;select&gt;</code></td>
       <td>
         <select>
