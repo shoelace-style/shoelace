@@ -11,7 +11,7 @@ button,
   background-color: var(--button-bg-color-primary);
   border-radius: var(--button-border-radius);
   border: none;
-  height: var(--input-height);
+  height: var(--button-height);
   line-height: 1;
   user-select: none;
   vertical-align: middle;
@@ -24,14 +24,14 @@ button,
 }
 
 .button-small {
-  font-size: calc(var(--button-font-size) * .8);
-  height: var(--input-height-small);
+  --button-font-size: var(--button-font-size-small);
+  --button-height: var(--button-height-small);
   padding: calc(var(--component-spacing) * .25) calc(var(--component-spacing) * .5);
 }
 
 .button-big {
-  font-size: calc(var(--button-font-size) * 1.2);
-  height: var(--input-height-big);
+  --button-font-size: var(--button-font-size-big);
+  --button-height: var(--button-height-big);
   padding: calc(var(--component-spacing) * .75) calc(var(--component-spacing) * 1);
 }
 
