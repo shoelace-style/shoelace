@@ -204,8 +204,12 @@
   /* Loaders */
   --loader-bg-color: var(--component-bg-color);
   --loader-border-color: var(--color-primary);
-  --loader-border-width: .25rem;
+  --loader-border-width: .2rem;
+  --loader-border-width-small: calc(var(--loader-border-width) / 2);
+  --loader-border-width-big: calc(var(--loader-border-width) * 2);;
   --loader-size: 2rem;
+  --loader-size-small: calc(var(--loader-size) / 2);
+  --loader-size-big: calc(var(--loader-size) * 2);
   --loader-speed: 750ms;
   --loader-spacing-x: var(--component-spacing-small);
   --loader-spacing-y: 0;

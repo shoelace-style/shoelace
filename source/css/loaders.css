@@ -1,7 +1,7 @@
 /*! Loaders */
 
 @keyframes loader {
-  0%   { transform: rotate(0deg); }
+  0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
 
@@ -19,20 +19,6 @@
   margin: var(--loader-spacing-y) var(--loader-spacing-x);
 }
 
-.loader-small,
-.loader-bg-small::after {
-  border-width: calc(var(--loader-border-width) / 2);
-  width: calc(var(--loader-size) / 2);
-  height: calc(var(--loader-size) / 2);
-}
-
-.loader-big,
-.loader-bg-big::after {
-  border-width: calc(var(--loader-border-width) * 1.5);
-  width: calc(var(--loader-size) * 2);
-  height: calc(var(--loader-size) * 2);
-}
-
 .loader-bg {
   position: relative !important;
 }
@@ -45,14 +31,14 @@
   margin: 0;
 }
 
-.loader-bg-small::after {
-  position: absolute;
-  top: calc(50% - var(--loader-size) / 4);
-  left: calc(50% - var(--loader-size) / 4);
+.loader-small,
+.loader-bg-small {
+  --loader-size: var(--loader-size-small);
+  --loader-border-width: var(--loader-border-width-small);
 }
 
-.loader-bg-big::after {
-  position: absolute;
-  top: calc(50% - var(--loader-size) / 1);
-  left: calc(50% - var(--loader-size) / 1);
+.loader-big,
+.loader-bg-big {
+  --loader-size: var(--loader-size-big);
+  --loader-border-width: var(--loader-border-width-big);
 }
