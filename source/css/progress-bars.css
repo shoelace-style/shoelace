@@ -14,11 +14,22 @@
   position: relative;
   width: 100%;
   height: var(--progress-height);
+  font-size: var(--progress-font-size);
   background-color: var(--progress-bg-color);
   border-radius: var(--progress-border-radius);
   display: block;
   overflow: hidden;
   margin-bottom: 1rem;
+}
+
+.progress-small {
+  font-size: var(--progress-font-size-small);
+  --progress-height: var(--progress-height-small);
+}
+
+.progress-big {
+  font-size: var(--progress-font-size-big);
+  --progress-height: var(--progress-height-big);
 }
 
 .progress-bar {
@@ -27,7 +38,6 @@
   left: 0;
   width: 0;
   height: 100%;
-  font-size: var(--progress-font-size);
   line-height: var(--progress-height);
   text-align: center;
   color: var(--progress-color);
@@ -35,25 +45,6 @@
   transition: var(--progress-speed-change) width;
   user-select: none;
   cursor: default;
-}
-
-.progress-small {
-  height: var(--progress-height-small);
-}
-
-.progress-small .progress-bar {
-  line-height: var(--progress-height-small);
-  font-size: var(--progress-font-size-small);
-}
-
-.progress-big {
-  height: var(--progress-height-big);
-}
-
-.progress-big .progress-bar {
-  height: var(--progress-height-big);
-  line-height: var(--progress-height-big);
-  font-size: var(--progress-font-size-big);
 }
 
 .progress-indeterminate .progress-bar {
