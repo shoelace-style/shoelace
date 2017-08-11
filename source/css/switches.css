@@ -5,12 +5,12 @@
 
 .switch-small {
   font-size: var(--switch-font-size-small);
-  --switch-size: var(--switch-size-small);
+  --switch-height: var(--switch-height-small);
 }
 
 .switch-big {
   font-size: var(--switch-font-size-big);
-  --switch-size: var(--switch-size-big);
+  --switch-height: var(--switch-height-big);
 }
 
 .switch input {
@@ -19,15 +19,15 @@
 
 .switch input + label {
   position: relative;
-  min-width: calc(var(--switch-size) * 2);
-  height: var(--switch-size);
-  line-height: var(--switch-size);
+  min-width: calc(var(--switch-height) * 2);
+  height: var(--switch-height);
+  line-height: var(--switch-height);
   display: inline-block;
   cursor: pointer;
   outline: none;
   user-select: none;
   vertical-align: middle;
-  text-indent: calc(var(--switch-size) * 2 + .5rem);
+  text-indent: calc(var(--switch-height) * 2 + .5rem);
 }
 
 .switch input + label::before,
@@ -36,7 +36,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: calc(var(--switch-size) * 2);
+  width: calc(var(--switch-height) * 2);
   bottom: 0;
   display: block;
 }
@@ -51,8 +51,8 @@
 .switch input + label:after {
   top: var(--switch-thumb-spacing);
   left: var(--switch-thumb-spacing);
-  width: calc(var(--switch-size) - var(--switch-thumb-spacing) * 2);
-  height: calc(var(--switch-size) - var(--switch-thumb-spacing) * 2);
+  width: calc(var(--switch-height) - var(--switch-thumb-spacing) * 2);
+  height: calc(var(--switch-height) - var(--switch-thumb-spacing) * 2);
   border-radius: var(--switch-thumb-border-radius);
   background-color: var(--switch-thumb-bg-color);
   transition: margin var(--switch-speed);
@@ -63,7 +63,7 @@
 }
 
 .switch input:checked + label::after {
-  margin-left: var(--switch-size);
+  margin-left: var(--switch-height);
 }
 
 .switch input:disabled + label {
