@@ -129,8 +129,8 @@
   --badge-bg-color-warning: var(--state-warning);
   --badge-bg-color-danger: var(--state-danger);
   --badge-bg-color-inverse: var(--state-inverse);
-  --badge-spacing-x: calc(var(--component-spacing) * .5);
-  --badge-spacing-y: calc(var(--component-spacing) * .15);
+  --badge-spacing-x: .6em;
+  --badge-spacing-y: .2em;
 
   /* Buttons */
   --button-font-family: inherit;
