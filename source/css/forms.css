@@ -122,26 +122,16 @@ input[readonly] {
   background-color: var(--input-readonly-bg-color);
 }
 
-input.input-small,
-select.input-small {
-  font-size: var(--input-font-size-small);
-  height: var(--input-height-small);
-  line-height: var(--input-height-small);
+.input-small {
+  --input-font-size: var(--input-font-size-small);
+  --input-height: var(--input-height-small);
+  --input-font-size: var(--input-font-size-small);
 }
 
-textarea.input-small {
-  font-size: var(--input-font-size-small);
-}
-
-input.input-big,
-select.input-big {
-  font-size: var(--input-font-size-big);
-  height: var(--input-height-big);
-  line-height: var(--input-height-big);
-}
-
-textarea.input-big {
-  font-size: var(--input-font-size-big);
+.input-big {
+  --input-font-size: var(--input-font-size-big);
+  --input-height: var(--input-height-big);
+  --input-font-size: var(--input-font-size-big);
 }
 
 /* Range styles courtesy of http://danielstern.ca/range.css/ */
@@ -297,6 +287,7 @@ progress {
 
 /* Input addons */
 .input-addon {
+  font-size: var(--input-font-size);
   color: var(--text-muted);
   height: var(--input-height);
   line-height: var(--input-height);
@@ -308,15 +299,13 @@ progress {
 }
 
 .input-addon-small {
-  font-size: var(--input-font-size-small);
-  height: var(--input-height-small);
-  line-height: var(--input-height-small);
+  --input-font-size: var(--input-font-size-small);
+  --input-height: var(--input-height-small);
 }
 
 .input-addon-big {
-  font-size: var(--input-font-size-big);
-  height: var(--input-height-big);
-  line-height: var(--input-height-big);
+  --input-font-size: var(--input-font-size-big);
+  --input-height: var(--input-height-big);
 }
 
 .input-addon:first-child {
