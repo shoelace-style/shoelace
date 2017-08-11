@@ -4,12 +4,12 @@
 }
 
 .switch-small {
-  font-size: var(--switch-font-size-small);
+  --switch-font-size: var(--switch-font-size-small);
   --switch-height: var(--switch-height-small);
 }
 
 .switch-big {
-  font-size: var(--switch-font-size-big);
+  --switch-font-size: var(--switch-font-size-big);
   --switch-height: var(--switch-height-big);
 }
 

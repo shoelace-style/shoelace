@@ -23,12 +23,12 @@
 }
 
 .progress-small {
-  font-size: var(--progress-font-size-small);
+  --progress-font-size: var(--progress-font-size-small);
   --progress-height: var(--progress-height-small);
 }
 
 .progress-big {
-  font-size: var(--progress-font-size-big);
+  --progress-font-size: var(--progress-font-size-big);
   --progress-height: var(--progress-height-big);
 }
 
