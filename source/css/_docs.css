@@ -204,3 +204,9 @@ a code {
 .tabs-vertical-example .tabs-nav a {
   display: block;
 }
+
+/* Fix a known issue in Edge: https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/11495448/ */
+::selection {
+  background-color: tomato;
+  color: white;
+}
