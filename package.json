@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
+    "bluebird": "^3.5.0",
     "chalk": "^2.1.0",
     "commander": "^2.11.0",
     "cssnano": "^3.10.0",
@@ -23,7 +24,8 @@
     "metalsmith-markdown": "^0.2.1",
     "postcss": "^6.0.8",
     "postcss-import": "^10.0.0",
-    "uglify-js": "^3.0.27"
+    "uglify-js": "^3.0.27",
+    "watch": "^1.0.2"
   },
   "dependencies": {}
 }
