@@ -3,16 +3,6 @@
   font-size: var(--switch-font-size);
 }
 
-.switch-small {
-  --switch-font-size: var(--switch-font-size-small);
-  --switch-height: var(--switch-height-small);
-}
-
-.switch-big {
-  --switch-font-size: var(--switch-font-size-big);
-  --switch-height: var(--switch-height-big);
-}
-
 .switch input {
   display: none;
 }
@@ -69,6 +59,54 @@
 .switch input:disabled + label {
   opacity: .5;
   cursor: not-allowed;
+}
+
+.switch-small {
+  font-size: var(--switch-font-size-small);
+}
+
+.switch-small input + label {
+  height: var(--switch-height-small);
+  line-height: var(--switch-height-small);
+  text-indent: calc(var(--switch-height-small) * 2 + .5rem);
+}
+
+.switch-small input + label::before,
+.switch-small input + label::after {
+  width: calc(var(--switch-height-small) * 2);
+}
+
+.switch-small input + label:after {
+  width: calc(var(--switch-height-small) - var(--switch-thumb-spacing) * 2);
+  height: calc(var(--switch-height-small) - var(--switch-thumb-spacing) * 2);
+}
+
+.switch-small input:checked + label::after {
+  margin-left: var(--switch-height-small);
+}
+
+.switch-big {
+  font-size: var(--switch-font-size-big);
+}
+
+.switch-big input + label {
+  height: var(--switch-height-big);
+  line-height: var(--switch-height-big);
+  text-indent: calc(var(--switch-height-big) * 2 + .5rem);
+}
+
+.switch-big input + label::before,
+.switch-big input + label::after {
+  width: calc(var(--switch-height-big) * 2);
+}
+
+.switch-big input + label:after {
+  width: calc(var(--switch-height-big) - var(--switch-thumb-spacing) * 2);
+  height: calc(var(--switch-height-big) - var(--switch-thumb-spacing) * 2);
+}
+
+.switch-big input:checked + label::after {
+  margin-left: var(--switch-height-big);
 }
 
 .switch + .switch {

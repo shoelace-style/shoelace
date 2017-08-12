@@ -32,13 +32,25 @@
 }
 
 .loader-small,
-.loader-bg-small {
-  --loader-size: var(--loader-size-small);
-  --loader-border-width: var(--loader-border-width-small);
+.loader-bg-small::after {
+  width: var(--loader-size-small);
+  height: var(--loader-size-small);
+  border-width: var(--loader-border-width-small);
 }
 
 .loader-big,
-.loader-bg-big {
-  --loader-size: var(--loader-size-big);
-  --loader-border-width: var(--loader-border-width-big);
+.loader-bg-big::after {
+  width: var(--loader-size-big);
+  height: var(--loader-size-big);
+  border-width: var(--loader-border-width-big);
+}
+
+.loader-bg-small::after {
+  top: calc(50% - var(--loader-size-small) / 2);
+  left: calc(50% - var(--loader-size-small) / 2);
+}
+
+.loader-bg-big::after {
+  top: calc(50% - var(--loader-size-big) / 2);
+  left: calc(50% - var(--loader-size-big) / 2);
 }

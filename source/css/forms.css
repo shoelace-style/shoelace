@@ -122,16 +122,50 @@ input[readonly] {
   background-color: var(--input-readonly-bg-color);
 }
 
-.input-small {
-  --input-font-size: var(--input-font-size-small);
-  --input-height: var(--input-height-small);
-  --input-font-size: var(--input-font-size-small);
+input[type="color"].input-small,
+input[type="date"].input-small,
+input[type="datetime-local"].input-small,
+input[type="email"].input-small,
+input[type="month"].input-small,
+input[type="number"].input-small,
+input[type="password"].input-small,
+input[type="search"].input-small,
+input[type="tel"].input-small,
+input[type="text"].input-small,
+input[type="time"].input-small,
+input[type="url"].input-small,
+input[type="week"].input-small,
+select.input-small {
+  font-size: var(--input-font-size-small);
+  height: var(--input-height-small);
+  line-height: var(--input-height-small);
 }
 
-.input-big {
-  --input-font-size: var(--input-font-size-big);
-  --input-height: var(--input-height-big);
-  --input-font-size: var(--input-font-size-big);
+textarea.input-small {
+  font-size: var(--input-font-size-small);
+}
+
+input[type="color"].input-big,
+input[type="date"].input-big,
+input[type="datetime-local"].input-big,
+input[type="email"].input-big,
+input[type="month"].input-big,
+input[type="number"].input-big,
+input[type="password"].input-big,
+input[type="search"].input-big,
+input[type="tel"].input-big,
+input[type="text"].input-big,
+input[type="time"].input-big,
+input[type="url"].input-big,
+input[type="week"].input-big,
+select.input-big {
+  font-size: var(--input-font-size-big);
+  height: var(--input-height-big);
+  line-height: var(--input-height-big);
+}
+
+textarea.input-big {
+  font-size: var(--input-font-size-big);
 }
 
 /* Range styles courtesy of http://danielstern.ca/range.css/ */
@@ -299,13 +333,15 @@ progress {
 }
 
 .input-addon-small {
-  --input-font-size: var(--input-font-size-small);
-  --input-height: var(--input-height-small);
+  font-size: var(--input-font-size-small);
+  height: var(--input-height-small);
+  line-height: var(--input-height-small);
 }
 
 .input-addon-big {
-  --input-font-size: var(--input-font-size-big);
-  --input-height: var(--input-height-big);
+  font-size: var(--input-font-size-big);
+  height: var(--input-height-big);
+  line-height: var(--input-height-big);
 }
 
 .input-addon:first-child {

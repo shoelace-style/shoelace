@@ -8,7 +8,9 @@ description: Learn about browser support and polyfills for older browsers.
 
 > TL;DR — you can use Shoelace _today_ if you don’t care about Internet Explorer (Edge is fine). If you need to support IE, just use a [grid system](https://github.com/zirafa/bootstrap-grid-only) and a polyfill such as [Myth](http://www.myth.io/) or [cssnext](http://cssnext.io/).
 
-Browser support for CSS variables is [pretty good](http://caniuse.com/#feat=css-variables), but if you need to support Internet Explorer, consider using [Myth](http://www.myth.io/) or [cssnext](http://cssnext.io/) as a polyfill. Both libraries let you write standards-compliant CSS and processes it so it works properly in unsupportive browsers.
+Browser support for CSS variables is [pretty good](http://caniuse.com/#feat=css-variables), but if you need to support Internet Explorer, consider using [Myth](http://www.myth.io/) or [cssnext](http://cssnext.io/) as a polyfill. Both libraries let you write standards-compliant CSS and process it to work properly in unsupportive browsers.
+
+Unfortunately, it’s impossible for polyfills to support variable scoping. Because of this, Shoelace only uses CSS variables that are assigned at the `:root` level.
 
 Browser support for the CSS Grid is [very good](http://caniuse.com/#feat=css-grid), but if you need to support older browsers you can use a [grid system](https://github.com/zirafa/bootstrap-grid-only) instead.
 
