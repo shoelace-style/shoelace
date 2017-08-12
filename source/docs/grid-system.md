@@ -41,4 +41,6 @@ You can use media queries to make grids responsive. This is how we make the nav 
 }
 ```
 
-Support for CSS Grid Layouts is [very good](http://caniuse.com/css-grid), but if you have an obligation to support older browsers, consider using the Bootstrap grid [without any extras](https://github.com/zirafa/bootstrap-grid-only) in combination with Shoelace.
+### For Older Browsers
+
+Support for CSS Grid Layouts is [decent](http://caniuse.com/css-grid), but if you have an obligation to support Internet Explorer or Edge < 16, consider using the [Flexbox Grid](http://flexboxgrid.com/) in combination with Shoelace.
