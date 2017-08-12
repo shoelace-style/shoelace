@@ -51,9 +51,9 @@ button:hover:not(:disabled),
   box-shadow: var(--button-box-shadow-hover);
 }
 
-button:active:not(:disabled),
-button.active:not(:disabled),
-.button.active:not(.disabled) {
+button:active:not(.button-link):not(:disabled),
+button.active:not(.button-link):not(:disabled),
+.button.active:not(.button-link):not(.disabled) {
   color: var(--button-color);
   box-shadow: var(--button-box-shadow-active);
 }
