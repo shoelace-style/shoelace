@@ -12,7 +12,7 @@ Browser support for CSS variables is [pretty good](http://caniuse.com/#feat=css-
 
 Unfortunately, it’s impossible for polyfills to support variable scoping. Because of this, Shoelace only uses CSS variables that are assigned at the `:root` level.
 
-Browser support for the CSS Grid is [very good](http://caniuse.com/#feat=css-grid), but if you need to support older browsers you can use a [grid system](https://github.com/zirafa/bootstrap-grid-only) instead.
+Browser support for the CSS Grid is [decent](http://caniuse.com/#feat=css-grid), but if you need to support Internet Explorer or Edge < 16, you can use the [Flexbox Grid](http://flexboxgrid.com/) instead.
 
 Browser support for `calc` is [excellent](http://caniuse.com/#feat=calc). Shoelace uses this internally for relative calculations. You can use it along with CSS variables too.
 
