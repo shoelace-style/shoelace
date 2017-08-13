@@ -32,7 +32,8 @@
 
   --hr-border-width: 1px;
   --hr-border-color: var(--component-border-color);
-  --hr-margin: var(--component-spacing-big);
+  --hr-margin-x: 0;
+  --hr-margin-y: 2rem;
 
   --kbd-font-size: 90%;
   --kbd-color: var(--color-white);
@@ -157,7 +158,7 @@ h6 { font-size: var(--headings-font-size-h6); }
 hr {
   border: none;
   border-top: solid var(--hr-border-width) var(--hr-border-color);
-  margin: var(--hr-margin) 0;
+  margin: var(--hr-margin-y) var(--hr-margin-x);
 }
 
 img {

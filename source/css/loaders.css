@@ -9,7 +9,7 @@
   --loader-size-small: calc(var(--loader-size) / 2);
   --loader-size-big: calc(var(--loader-size) * 2);
   --loader-speed: 750ms;
-  --loader-margin-x: var(--component-spacing-small);
+  --loader-margin-x: .5em;
   --loader-margin-y: 0;
 }
 

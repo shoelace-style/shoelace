@@ -6,8 +6,8 @@
   --table-stripe-bg-color: var(--component-bg-color);
   --table-hover-color: var(--color-white);
   --table-hover-bg-color: var(--state-primary);
-  --table-spacing-x: calc(var(--component-spacing-small) * 1.5);
-  --table-spacing-y: var(--component-spacing-small);
+  --table-spacing-x: .75rem;
+  --table-spacing-y: .5rem;
 }
 
 table {

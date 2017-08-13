@@ -4,7 +4,7 @@ body {
 
 #head {
   padding: 0 2rem;
-  margin: var(--component-spacing-big) 0;
+  margin: 2rem 0;
 }
 
 #head img {
