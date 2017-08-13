@@ -84,6 +84,7 @@ button:hover:not(:disabled),
 
 button:active:not(.button-link):not(:disabled),
 button.active:not(.button-link):not(:disabled),
+.button:active:not(.button-link),
 .button.active:not(.button-link) {
   box-shadow: var(--button-box-shadow-active);
 }
