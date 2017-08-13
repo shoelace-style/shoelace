@@ -25,6 +25,10 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat excepturi repe
 
 Blanditiis ea qui, veritatis animi recusandae praesentium magnam. Commodi placeat, laboriosam accusamus laudantium quasi eveniet soluta illo ducimus quis doloremque mollitia, officia pariatur deleniti reprehenderit, maxime, dicta libero vero cum.
 
+### Horizontal Rules `<hr>`
+
+---
+
 ### Ordered Lists `<ol>`
 
 1. List item 1
