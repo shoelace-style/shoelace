@@ -111,4 +111,6 @@
 .loader-dark.loader-bg::after {
   border-top-color: var(--state-dark);
   border-left-color: var(--state-dark);
+  border-bottom-color: var(--state-light);
+  border-right-color: var(--state-light);
 }
