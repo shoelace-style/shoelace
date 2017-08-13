@@ -82,13 +82,13 @@ You can force buttons to have an active state by applying the `active` class.
 Buttons can be styled to look like normal links with the `button-link` modifier. The appropriate sizing is placed so they align properly with regular buttons.
 
 ```html
-<button type="button">Button</button>
-<button type="button" class="button-link">Link</button>
+<a href="#" class="button">Button</a>
+<a href="#" class="button button-link">Link</a>
 ```
 
 <div class="input-single">
-  <button type="button">Button</button>
-  <button type="button" class="button-link">Link</button>
+  <a href="#" class="button">Button</a>
+  <a href="#" class="button button-link">Link</a>
 </div>
 
 ### File Buttons
