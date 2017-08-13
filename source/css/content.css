@@ -27,7 +27,7 @@ a {
   text-decoration: var(--link-text-decoration);
 }
 
-a:hover {
+a:hover:not(.badge, .button) {
   color: var(--link-color-hover);
   text-decoration: var(--link-text-decoration-hover);
 }
