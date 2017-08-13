@@ -103,14 +103,25 @@ Text utility classes can be applied to change an element’s text.
 
 Background utility classes can be applied to change an element’s background color.
 
-<div class="margin-bottom-small padding-small bg-primary text-light">bg-primary</div>
-<div class="margin-bottom-small padding-small bg-secondary text-light">bg-secondary</div>
-<div class="margin-bottom-small padding-small bg-success text-light">bg-success</div>
-<div class="margin-bottom-small padding-small bg-info text-light">bg-info</div>
-<div class="margin-bottom-small padding-small bg-warning text-light">bg-warning</div>
-<div class="margin-bottom-small padding-small bg-danger text-light">bg-danger</div>
-<div class="margin-bottom-small padding-small bg-light text-dark">bg-light</div>
-<div class="margin-bottom-small padding-small bg-dark text-light">bg-dark</div>
+```html
+<div class="bg-primary">Primary</div>
+<div class="bg-secondary">Secondary</div>
+<div class="bg-success">Success</div>
+<div class="bg-info">Info</div>
+<div class="bg-warning">Warning</div>
+<div class="bg-danger">Danger</div>
+<div class="bg-light">Light</div>
+<div class="bg-dark">Dark</div>
+```
+
+<div class="margin-bottom-small padding-small bg-primary text-light">Primary</div>
+<div class="margin-bottom-small padding-small bg-secondary text-light">Secondary</div>
+<div class="margin-bottom-small padding-small bg-success text-light">Success</div>
+<div class="margin-bottom-small padding-small bg-info text-light">Info</div>
+<div class="margin-bottom-small padding-small bg-warning text-light">Warning</div>
+<div class="margin-bottom-small padding-small bg-danger text-light">Danger</div>
+<div class="margin-bottom-small padding-small bg-light text-dark">Light</div>
+<div class="margin-bottom-small padding-small bg-dark text-light">Dark</div>
 
 ### Float Utilities
 
