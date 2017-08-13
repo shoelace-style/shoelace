@@ -1,4 +1,23 @@
 /*! Tabs */
+:root {
+  --tab-bg-color: var(--body-bg-color);
+  --tab-bg-color-hover: var(--body-bg-color);
+  --tab-bg-color-active: var(--link-color);
+  --tab-bg-color-disabled: var(--body-bg-color);
+  --tab-border-radius: var(--component-border-radius);
+  --tab-color: var(--link-color);
+  --tab-color-hover: var(--link-color-hover);
+  --tab-color-active: var(--color-white);
+  --tab-color-disabled: var(--state-secondary);
+  --tab-spacing-x: var(--component-spacing);
+  --tab-spacing-y: calc(var(--component-spacing) / 2);
+
+  --tab-pane-border-color: var(--component-border-color);
+  --tab-pane-border-radius: var(--component-border-radius);
+  --tab-pane-border-width: var(--component-border-width);
+  --tab-pane-spacing-x: var(--component-spacing);
+  --tab-pane-spacing-y: var(--component-spacing);
+}
 
 .tabs {
   width: 100%;

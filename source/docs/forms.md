@@ -43,7 +43,7 @@ Form controls are styled at 100% of the width of their parent element.
       <td>
         <code>&lt;input type=&quot;file&quot;&gt;</code>
         <br>
-        <span class="text-small text-muted">
+        <span class="text-small text-secondary">
           File inputs aren’t supported. Use a [file button](buttons.html#file-buttons) instead.
         </span>
       </td>
@@ -200,35 +200,27 @@ Form controls and buttons can be grouped by wrapping them in `input-group` conta
 </div>
 ```
 
-<div class="input-single">
-  <div class="input-group">
-    <input type="text">
-    <button type="button">Submit</button>
-  </div>
+<div class="input-group">
+  <input type="text">
+  <button type="button">Submit</button>
 </div>
 
-<div class="input-single">
-  <div class="input-group">
-    <button type="button">Submit</button>
-    <input type="text">
-  </div>
+<div class="input-group">
+  <button type="button">Submit</button>
+  <input type="text">
 </div>
 
-<div class="input-single">
-  <div class="input-group">
-    <input type="text" placeholder="First">
-    <input type="text" placeholder="Middle">
-    <input type="text" placeholder="Last">
-    <button type="button">Submit</button>
-  </div>
+<div class="input-group">
+  <input type="text" placeholder="First">
+  <input type="text" placeholder="Middle">
+  <input type="text" placeholder="Last">
+  <button type="button">Submit</button>
 </div>
 
-<div class="input-single">
-  <div class="input-group">
-    <button type="button">Option 1</button>
-    <button type="button">Option 2</button>
-    <button type="button">Option 3</button>
-  </div>
+<div class="input-group">
+  <button type="button">Option 1</button>
+  <button type="button">Option 2</button>
+  <button type="button">Option 3</button>
 </div>
 
 ### Input Addons

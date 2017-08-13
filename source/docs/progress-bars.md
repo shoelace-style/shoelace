@@ -49,3 +49,73 @@ When progress can’t be determined, use the `progress-indeterminate` modifier t
 <div class="progress progress-indeterminate">
   <div class="progress-bar"></div>
 </div>
+
+### Variations
+
+Use the `progress-*` modifier to create variations.
+
+```html
+<div class="progress">
+  <div class="progress-bar width-50">50%</div>
+</div>
+
+<div class="progress progress-secondary">
+  <div class="progress-bar width-50">50%</div>
+</div>
+
+<div class="progress progress-success">
+  <div class="progress-bar width-50">50%</div>
+</div>
+
+<div class="progress progress-info">
+  <div class="progress-bar width-50">50%</div>
+</div>
+
+<div class="progress progress-warning">
+  <div class="progress-bar width-50">50%</div>
+</div>
+
+<div class="progress progress-danger">
+  <div class="progress-bar width-50">50%</div>
+</div>
+
+<div class="progress progress-light">
+  <div class="progress-bar width-50">50%</div>
+</div>
+
+<div class="progress progress-dark">
+  <div class="progress-bar width-50">50%</div>
+</div>
+```
+
+<div class="progress">
+  <div class="progress-bar width-50">50%</div>
+</div>
+
+<div class="progress progress-secondary">
+  <div class="progress-bar width-50">50%</div>
+</div>
+
+<div class="progress progress-success">
+  <div class="progress-bar width-50">50%</div>
+</div>
+
+<div class="progress progress-info">
+  <div class="progress-bar width-50">50%</div>
+</div>
+
+<div class="progress progress-warning">
+  <div class="progress-bar width-50">50%</div>
+</div>
+
+<div class="progress progress-danger">
+  <div class="progress-bar width-50">50%</div>
+</div>
+
+<div class="progress progress-light">
+  <div class="progress-bar width-50">50%</div>
+</div>
+
+<div class="progress progress-dark">
+  <div class="progress-bar width-50">50%</div>
+</div>

@@ -1,4 +1,17 @@
 /*! Loaders */
+:root {
+  --loader-bg-color: var(--component-bg-color);
+  --loader-border-color: var(--state-primary);
+  --loader-border-width: .2rem;
+  --loader-border-width-small: calc(var(--loader-border-width) / 2);
+  --loader-border-width-big: calc(var(--loader-border-width) * 2);;
+  --loader-size: 2rem;
+  --loader-size-small: calc(var(--loader-size) / 2);
+  --loader-size-big: calc(var(--loader-size) * 2);
+  --loader-speed: 750ms;
+  --loader-margin-x: var(--component-spacing-small);
+  --loader-margin-y: 0;
+}
 
 @keyframes loader {
   0% { transform: rotate(0deg); }
@@ -16,7 +29,7 @@
   display: inline-block;
   animation: loader var(--loader-speed) linear infinite;
   vertical-align: middle;
-  margin: var(--loader-spacing-y) var(--loader-spacing-x);
+  margin: var(--loader-margin-y) var(--loader-margin-x);
 }
 
 .loader-bg {
@@ -53,4 +66,49 @@
 .loader-bg-big::after {
   top: calc(50% - var(--loader-size-big) / 2);
   left: calc(50% - var(--loader-size-big) / 2);
+}
+
+/* Variations */
+.loader-secondary,
+.loader-secondary.loader-bg::after {
+  border-top-color: var(--state-secondary);
+  border-left-color: var(--state-secondary);
+}
+
+.loader-success,
+.loader-success.loader-bg::after {
+  border-top-color: var(--state-success);
+  border-left-color: var(--state-success);
+}
+
+.loader-info,
+.loader-info.loader-bg::after {
+  border-top-color: var(--state-info);
+  border-left-color: var(--state-info);
+}
+
+.loader-warning,
+.loader-warning.loader-bg::after {
+  border-top-color: var(--state-warning);
+  border-left-color: var(--state-warning);
+}
+
+.loader-danger,
+.loader-danger.loader-bg::after {
+  border-top-color: var(--state-danger);
+  border-left-color: var(--state-danger);
+}
+
+.loader-light,
+.loader-light.loader-bg::after {
+  border-top-color: var(--state-light);
+  border-left-color: var(--state-light);
+  border-bottom-color: var(--state-dark);
+  border-right-color: var(--state-dark);
+}
+
+.loader-dark,
+.loader-dark.loader-bg::after {
+  border-top-color: var(--state-dark);
+  border-left-color: var(--state-dark);
 }

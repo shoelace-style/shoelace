@@ -1,50 +1,21 @@
 /*! Badges */
+:root {
+  --badge-font-size: .8em; /* ems for relative sizing */
+  --badge-color: var(--color-white);
+  --badge-bg-color: var(--state-primary);
+  --badge-border-radius: 1em;  /* ems for relative sizing */
+  --badge-box-shadow-hover: inset 0 0 0 1em rgba(0, 0, 0, .1);
+}
 
 .badge {
   font-size: var(--badge-font-size);
-  font-weight: var(--badge-font-weight);
   color: var(--badge-color);
   background-color: var(--badge-bg-color);
   border-radius: var(--badge-border-radius);
-  padding: var(--badge-spacing-y) var(--badge-spacing-x);
+  padding: .2em .6em;
   vertical-align: baseline;
   display: inline-block;
   transition: .1s box-shadow, .1s background-color, .1s color;
-}
-
-.badge-secondary {
-  color: var(--badge-color-secondary);
-  background-color: var(--badge-bg-color-secondary);
-}
-
-.badge-success {
-  color: var(--badge-color-success);
-  background-color: var(--badge-bg-color-success);
-}
-
-.badge-info {
-  color: var(--badge-color-info);
-  background-color: var(--badge-bg-color-info);
-}
-
-.badge-warning {
-  color: var(--badge-color-warning);
-  background-color: var(--badge-bg-color-warning);
-}
-
-.badge-danger {
-  color: var(--badge-color-danger);
-  background-color: var(--badge-bg-color-danger);
-}
-
-.badge-light {
-  color: var(--badge-color-light);
-  background-color: var(--badge-bg-color-light);
-}
-
-.badge-dark {
-  color: var(--badge-color-dark);
-  background-color: var(--badge-bg-color-dark);
 }
 
 .badge:empty {
@@ -52,6 +23,40 @@
 }
 
 a.badge:hover {
+  color: var(--badge-color);
   text-decoration: none;
   box-shadow: var(--badge-box-shadow-hover);
+}
+
+/* Variations */
+.badge-secondary {
+  background-color: var(--state-secondary);
+}
+
+.badge-success {
+  background-color: var(--state-success);
+}
+
+.badge-info {
+  background-color: var(--state-info);
+}
+
+.badge-warning {
+  background-color: var(--state-warning);
+}
+
+.badge-danger {
+  background-color: var(--state-danger);
+}
+
+.badge-light,
+a.badge-light:hover {
+  color: var(--state-dark);
+  background-color: var(--state-light);
+}
+
+.badge-dark,
+a.badge-dark:hover {
+  color: var(--state-light);
+  background-color: var(--state-dark);
 }

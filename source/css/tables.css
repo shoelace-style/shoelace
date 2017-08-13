@@ -1,4 +1,14 @@
 /*! Tables */
+:root {
+  --table-border-color: var(--component-border-color);
+  --table-border-width: var(--component-border-width);
+  --table-header-bg-color: transparent;
+  --table-stripe-bg-color: var(--component-bg-color);
+  --table-hover-color: var(--color-white);
+  --table-hover-bg-color: var(--state-primary);
+  --table-spacing-x: calc(var(--component-spacing-small) * 1.5);
+  --table-spacing-y: var(--component-spacing-small);
+}
 
 table {
   width: 100%;
@@ -9,7 +19,7 @@ table {
 table caption {
   caption-side: bottom;
   font-size: var(--font-size-small);
-  color: var(--text-muted);
+  color: var(--state-secondary);
   text-align: center;
   padding-top: var(--table-spacing-y);
 }

@@ -89,9 +89,27 @@ Use the `dropdown-top` and `dropdown-left` modifiers to change the positioning o
 
 Dropdowns with button triggers can be used inside input groups.
 
+```html
 <div class="input-group">
   <span class="input-addon">$</span>
   <input type="text" placeholder="10.00">
+
+  <div class="dropdown dropdown-left">
+    <button type="button" class="dropdown-trigger">Currency</button>
+    <div class="dropdown-menu">
+      <a href="#" class="checked">USD</a>
+      <a href="#">AUD</a>
+      <a href="#">CAD</a>
+      <a href="#">GBP</a>
+    </div>
+  </div>
+</div>
+```
+
+<div class="input-group">
+  <span class="input-addon">$</span>
+  <input type="text" placeholder="10.00">
+
   <div class="dropdown dropdown-left">
     <button type="button" class="dropdown-trigger">Currency</button>
     <div class="dropdown-menu">

@@ -19,6 +19,8 @@ Create a pure CSS loader by applying the `loader` class to an empty `<span>` ele
   <span class="loader loader-big"></span>
 </div>
 
+### Background Loaders
+
 You can simulate a background loader using `loader-bg`. This is achieved using `position: relative` on the container and the `::after` pseudo-element. You can use the `loader-bg-small` and `loader-bg-big` modifiers to change the size.
 
 ```html
@@ -32,3 +34,25 @@ You can simulate a background loader using `loader-bg`. This is achieved using `
   <div class="loader-bg"></div>
   <div class="loader-bg loader-bg-big"></div>
 </div>
+
+### Variations
+
+Use the `loader-*` modifier to create variations.
+
+```html
+<span class="loader loader-secondary"></span>
+<span class="loader loader-success"></span>
+<span class="loader loader-info"></span>
+<span class="loader loader-warning"></span>
+<span class="loader loader-danger"></span>
+<span class="loader loader-light"></span>
+<span class="loader loader-dark"></span>
+```
+
+<span class="loader loader-secondary"></span>
+<span class="loader loader-success"></span>
+<span class="loader loader-info"></span>
+<span class="loader loader-warning"></span>
+<span class="loader loader-danger"></span>
+<span class="loader loader-light"></span>
+<span class="loader loader-dark"></span>

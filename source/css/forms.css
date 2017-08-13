@@ -1,4 +1,37 @@
 /*! Forms */
+:root {
+  --fieldset-border-color: var(--component-border-color);
+  --fieldset-border-width: var(--component-border-width);
+  --fieldset-border-radius: var(--component-border-radius);
+  --fieldset-spacing-x: var(--component-spacing);
+  --fieldset-spacing-y: var(--component-spacing);
+
+  --input-font-family: inherit;
+  --input-font-size: var(--font-size);
+  --input-font-size-small: .8rem;
+  --input-font-size-big: 1.2rem;
+  --input-font-weight: inherit;
+  --input-height: 2rem;
+  --input-height-big: 2.75rem;
+  --input-height-small: 1.25rem;
+  --input-color: var(--body-color);
+  --input-border-color: var(--component-border-color);
+  --input-border-color-focus: var(--state-primary);
+  --input-border-width: 1px;
+  --input-border-radius: var(--component-border-radius);
+  --input-bg-color: var(--color-white);
+  --input-box-shadow: inset 0 1px 0 rgba(0, 0, 0, .05);
+  --input-readonly-bg-color: var(--component-bg-color);
+  --input-range-track-color: var(--component-bg-color);
+  --input-range-track-box-shadow: inset 0 1px 0 rgba(0, 0, 0, .05);
+  --input-range-thumb-color: var(--state-primary);
+  --input-range-thumb-height: 2rem;
+
+  --input-invalid-color: var(--state-danger);
+  --input-invalid-border-color: var(--state-danger);
+  --input-valid-color: var(--state-success);
+  --input-valid-border-color: var(--state-success);
+}
 
 fieldset {
   border: solid var(--fieldset-border-width) var(--fieldset-border-color);
@@ -322,7 +355,7 @@ progress {
 /* Input addons */
 .input-addon {
   font-size: var(--input-font-size);
-  color: var(--text-muted);
+  color: var(--state-secondary);
   height: var(--input-height);
   line-height: var(--input-height);
   border-top: solid var(--input-border-width) var(--input-border-color);

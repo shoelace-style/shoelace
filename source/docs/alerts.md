@@ -6,7 +6,17 @@ description: Call attention in your app with alerts.
 
 ## Alerts
 
-Create an alert by applying the `alert` class to an element such as a `<div>`. You can change an alert’s appearance using the `alert-*` modifier.
+Create an alert by applying the `alert` class to an element such as a `<div>`.
+
+```html
+<div class="alert">This is an alert</div>
+```
+
+<div class="alert">This is an alert</div>
+
+## Variations
+
+Use the `alert-*` modifier to create variations.
 
 ```html
 <div class="alert">Primary</div>

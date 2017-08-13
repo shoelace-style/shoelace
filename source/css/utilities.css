@@ -1,4 +1,56 @@
 /*! Utilties */
+:root {
+  --spacing-small: var(--component-spacing);
+  --spacing-medium: calc(var(--component-spacing) * 2);
+  --spacing-big: calc(var(--component-spacing) * 4);
+}
+
+/***************************************************************************************************
+* Text utilities
+***************************************************************************************************/
+
+/* Text color */
+.text-primary { color: var(--state-primary) !important; }
+.text-secondary { color: var(--state-secondary) !important; }
+.text-success { color: var(--state-success) !important; }
+.text-success { color: var(--state-success) !important; }
+.text-info { color: var(--state-info) !important; }
+.text-warning { color: var(--state-warning) !important; }
+.text-danger { color: var(--state-danger) !important; }
+.text-light { color: var(--state-light) !important; }
+.text-dark { color: var(--state-dark) !important; }
+
+/* Text style */
+.text-small { font-size: var(--font-size-small) !important; }
+.text-bold { font-weight: var(--font-weight-bold) !important; }
+.text-italic { font-style: italic !important; }
+
+/* Text alignment */
+.text-left { text-align: left !important; }
+.text-right { text-align: right !important; }
+.text-center { text-align: center !important; }
+.text-justify { text-align: justify !important; }
+
+/* Text case */
+.text-lowercase { text-transform: lowercase !important; }
+.text-uppercase { text-transform: uppercase !important; }
+.text-capitalize { text-transform: capitalize !important; }
+
+/* Text wrapping */
+.text-nowrap { white-space: nowrap !important; }
+
+/***************************************************************************************************
+* Background utilities
+***************************************************************************************************/
+
+.bg-primary { background-color: var(--state-primary) !important; }
+.bg-secondary { background-color: var(--state-secondary) !important; }
+.bg-success { background-color: var(--state-success) !important; }
+.bg-info { background-color: var(--state-info) !important; }
+.bg-warning { background-color: var(--state-warning) !important; }
+.bg-danger { background-color: var(--state-danger) !important; }
+.bg-light { background-color: var(--state-light) !important; }
+.bg-dark { background-color: var(--state-dark) !important; }
 
 /***************************************************************************************************
 * Float utilities
@@ -69,6 +121,9 @@
 .height-90 { height: 90% !important; }
 .height-95 { height: 95% !important; }
 .height-100 { height: 100% !important; }
+
+.max-width-100 { max-width: 100% !important; }
+.max-height-100 { max-width: 100% !important; }
 
 /***************************************************************************************************
 * Spacing utilities
@@ -141,33 +196,3 @@
 .margin-x-auto { margin-left: auto !important; margin-right: auto !important; }
 .margin-y-auto { margin-top: auto !important; margin-bottom: auto !important; }
 .margin-xy-auto { margin: auto !important; }
-
-/***************************************************************************************************
-* Text utilities
-***************************************************************************************************/
-
-/* Text color */
-.text-success { color: var(--state-success) !important; }
-.text-info { color: var(--state-info) !important; }
-.text-warning { color: var(--state-warning) !important; }
-.text-danger { color: var(--state-danger) !important; }
-.text-muted { color: var(--text-muted) !important; }
-
-/* Text style */
-.text-small { font-size: var(--font-size-small) !important; }
-.text-bold { font-weight: var(--font-weight-bold) !important; }
-.text-italic { font-style: italic !important; }
-
-/* Text alignment */
-.text-left { text-align: left !important; }
-.text-right { text-align: right !important; }
-.text-center { text-align: center !important; }
-.text-justify { text-align: justify !important; }
-
-/* Text case */
-.text-lowercase { text-transform: lowercase !important; }
-.text-uppercase { text-transform: uppercase !important; }
-.text-capitalize { text-transform: capitalize !important; }
-
-/* Text wrapping */
-.text-nowrap { white-space: nowrap !important; }

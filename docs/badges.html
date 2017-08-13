@@ -19,7 +19,7 @@
         <img src="../source/img/wordmark.svg" alt="Shoelace logo">
       </a>
     </h1>
-    <p class="text-muted text-small">
+    <p class="text-secondary text-small">
       A back to the basics CSS starter kit. For when you don’t need the whole boot.
     </p>
   </header>
@@ -48,27 +48,10 @@
 
     <div id="content">
       <h2 id="badges">Badges</h2>
-<p>Create a badge by applying the <code>badge</code> class to an element such as a <code>&lt;span&gt;</code>. You can change a badge’s appearance using the <code>badge-*</code> modifier.</p>
-<pre><code class="lang-html">&lt;span class=&quot;badge&quot;&gt;Primary&lt;/span&gt;
-&lt;span class=&quot;badge badge-secondary&quot;&gt;Secondary&lt;/span&gt;
-&lt;span class=&quot;badge badge-success&quot;&gt;Success&lt;/span&gt;
-&lt;span class=&quot;badge badge-info&quot;&gt;Info&lt;/span&gt;
-&lt;span class=&quot;badge badge-warning&quot;&gt;Warning&lt;/span&gt;
-&lt;span class=&quot;badge badge-danger&quot;&gt;Danger&lt;/span&gt;
-&lt;span class=&quot;badge badge-light&quot;&gt;Light&lt;/span&gt;
-&lt;span class=&quot;badge badge-dark&quot;&gt;Dark&lt;/span&gt;
+<p>Create a badge by applying the <code>badge</code> class to an element such as a <code>&lt;span&gt;</code>.</p>
+<pre><code class="lang-html">&lt;span class=&quot;badge&quot;&gt;Badge&lt;/span&gt;
 </code></pre>
-<p>
-  <span class="badge">Primary</span>
-  <span class="badge badge-secondary">Secondary</span>
-  <span class="badge badge-success">Success</span>
-  <span class="badge badge-info">Info</span>
-  <span class="badge badge-warning">Warning</span>
-  <span class="badge badge-danger">Danger</span>
-  <span class="badge badge-light">Light</span>
-  <span class="badge badge-dark">Dark</span>
-</p>
-
+<p><span class="badge">Badge</span></p>
 <p>By default, badges are sized relative to their parent element.</p>
 <pre><code class="lang-html">&lt;h1&gt;Heading 1 &lt;span class=&quot;badge&quot;&gt;Badge&lt;/span&gt;&lt;/h1&gt;
 &lt;h2&gt;Heading 2 &lt;span class=&quot;badge&quot;&gt;Badge&lt;/span&gt;&lt;/h2&gt;
@@ -80,8 +63,27 @@
 <p><h3>Heading 3 <span class="badge">Badge</span></h3></p>
 <p>Paragraph <span class="badge">Badge</span></p>
 
-
+<h3 id="variations">Variations</h3>
+<p>Use the <code>badge-*</code> modifier to create variations.</p>
+<pre><code class="lang-html">&lt;span class=&quot;badge&quot;&gt;Primary&lt;/span&gt;
+&lt;span class=&quot;badge badge-secondary&quot;&gt;Secondary&lt;/span&gt;
+&lt;span class=&quot;badge badge-success&quot;&gt;Success&lt;/span&gt;
+&lt;span class=&quot;badge badge-info&quot;&gt;Info&lt;/span&gt;
+&lt;span class=&quot;badge badge-warning&quot;&gt;Warning&lt;/span&gt;
+&lt;span class=&quot;badge badge-danger&quot;&gt;Danger&lt;/span&gt;
+&lt;span class=&quot;badge badge-light&quot;&gt;Light&lt;/span&gt;
+&lt;span class=&quot;badge badge-dark&quot;&gt;Dark&lt;/span&gt;
+</code></pre>
+<p><span class="badge">Primary</span>
+<span class="badge badge-secondary">Secondary</span>
+<span class="badge badge-success">Success</span>
+<span class="badge badge-info">Info</span>
+<span class="badge badge-warning">Warning</span>
+<span class="badge badge-danger">Danger</span>
+<span class="badge badge-light">Light</span>
+<span class="badge badge-dark">Dark</span></p>
 <h3 id="badge-links">Badge Links</h3>
+<p>Badges can also be made into links.</p>
 <pre><code class="lang-html">&lt;a href=&quot;#&quot; class=&quot;badge&quot;&gt;Primary&lt;/a&gt;
 &lt;a href=&quot;#&quot; class=&quot;badge badge-secondary&quot;&gt;Secondary&lt;/a&gt;
 &lt;a href=&quot;#&quot; class=&quot;badge badge-success&quot;&gt;Success&lt;/a&gt;
@@ -91,16 +93,14 @@
 &lt;a href=&quot;#&quot; class=&quot;badge badge-light&quot;&gt;Light&lt;/a&gt;
 &lt;a href=&quot;#&quot; class=&quot;badge badge-dark&quot;&gt;Dark&lt;/a&gt;
 </code></pre>
-<p>
-  <a href="#" class="badge">Primary</a>
-  <a href="#" class="badge badge-secondary">Secondary</a>
-  <a href="#" class="badge badge-success">Success</a>
-  <a href="#" class="badge badge-info">Info</a>
-  <a href="#" class="badge badge-warning">Warning</a>
-  <a href="#" class="badge badge-danger">Danger</a>
-  <a href="#" class="badge badge-light">Light</a>
-  <a href="#" class="badge badge-dark">Dark</a>
-</p>
+<p><a href="#" class="badge">Primary</a>
+<a href="#" class="badge badge-secondary">Secondary</a>
+<a href="#" class="badge badge-success">Success</a>
+<a href="#" class="badge badge-info">Info</a>
+<a href="#" class="badge badge-warning">Warning</a>
+<a href="#" class="badge badge-danger">Danger</a>
+<a href="#" class="badge badge-light">Light</a>
+<a href="#" class="badge badge-dark">Dark</a></p>
 
     </div>
   </main>
@@ -109,8 +109,8 @@
     <a href="../index.html">
       <img src="../source/img/wordmark.svg" alt="Shoelace logo">
     </a>
-    <p class="text-small text-muted">
-      Shoelace.css 1.0.0-beta13 &middot;
+    <p class="text-small text-secondary">
+      Shoelace.css 1.0.0-beta14 &middot;
       &copy; A Beautiful Site, LLC
     </p>
 
@@ -121,8 +121,8 @@
       <a class="github-button" href="https://github.com/claviska/shoelace-css" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star claviska/shoelace-css on GitHub">Star</a>
     </p>
     <p>
-      <a href="https://twitter.com/shoelacecss" class="button button-info" style="margin-bottom: 1.2rem;">Follow</a>
-      <a href="https://paypal.me/claviska" class="button button-success" style="margin-bottom: 1.2rem;">Donate</a>
+      <a href="https://twitter.com/shoelacecss" class="button button-info text-light" style="margin-bottom: 1.2rem;">Follow</a>
+      <a href="https://paypal.me/claviska" class="button button-success text-light" style="margin-bottom: 1.2rem;">Donate</a>
     </p>
   </footer>
 

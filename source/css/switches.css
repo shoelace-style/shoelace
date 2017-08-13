@@ -1,4 +1,20 @@
 /*! Switches */
+:root {
+  --switch-font-size: var(--input-font-size);
+  --switch-font-size-small: var(--input-font-size-small);
+  --switch-font-size-big: var(--input-font-size-big);
+  --switch-bg-color: var(--component-border-color);
+  --switch-bg-color-checked: var(--state-primary);
+  --switch-border-radius: var(--switch-height);
+  --switch-height: var(--input-height);
+  --switch-height-small: var(--input-height-small);
+  --switch-height-big: var(--input-height-big);
+  --switch-thumb-bg-color: white;
+  --switch-thumb-border-radius: 50%;
+  --switch-thumb-spacing: 2px;
+  --switch-speed: .2s;
+}
+
 .switch {
   font-size: var(--switch-font-size);
 }
@@ -111,4 +127,41 @@
 
 .switch + .switch {
   margin-left: 1rem;
+}
+
+/* Variations */
+.switch-secondary input:checked + label::before {
+  background-color: var(--state-secondary);
+}
+
+.switch-success input:checked + label::before {
+  background-color: var(--state-success);
+}
+
+.switch-info input:checked + label::before {
+  background-color: var(--state-info);
+}
+
+.switch-warning input:checked + label::before {
+  background-color: var(--state-warning);
+}
+
+.switch-danger input:checked + label::before {
+  background-color: var(--state-danger);
+}
+
+.switch-light input + label::before {
+  background-color: var(--state-dark);
+}
+
+.switch-light input:checked + label::before {
+  background-color: var(--state-light);
+}
+
+.switch-dark input + label::before {
+  background-color: var(--state-light);
+}
+
+.switch-dark input:checked + label::before {
+  background-color: var(--state-dark);
 }

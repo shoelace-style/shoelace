@@ -67,3 +67,53 @@ Disabled switches are dimmed out. To disable a switch, add the `disabled` attrib
     <label for="switch-6">Disabled</label>
   </span>
 </div>
+
+
+### Variations
+
+Use the `switch-*` modifier to create variations.
+
+```html
+<span class="switch switch-secondary">...</span>
+<span class="switch switch-success">...</span>
+<span class="switch switch-info">...</span>
+<span class="switch switch-warning">...</span>
+<span class="switch switch-danger">...</span>
+<span class="switch switch-light">...</span>
+<span class="switch switch-dark">...</span>
+```
+
+<span class="switch switch-secondary">
+  <input type="checkbox" class="switch" id="variation-1" checked>
+  <label for="variation-1">Secondary</label>
+</span>
+
+<span class="switch switch-success">
+  <input type="checkbox" class="switch" id="variation-2" checked>
+  <label for="variation-2">Success</label>
+</span>
+
+<span class="switch switch-info">
+  <input type="checkbox" class="switch" id="variation-3" checked>
+  <label for="variation-3">Info</label>
+</span>
+
+<span class="switch switch-warning">
+  <input type="checkbox" class="switch" id="variation-4" checked>
+  <label for="variation-4">Warning</label>
+</span>
+
+<span class="switch switch-danger">
+  <input type="checkbox" class="switch" id="variation-5" checked>
+  <label for="variation-5">Danger</label>
+</span>
+
+<span class="switch switch-light">
+  <input type="checkbox" class="switch" id="variation-6" checked>
+  <label for="variation-6">Light</label>
+</span>
+
+<span class="switch switch-dark">
+  <input type="checkbox" class="switch" id="variation-7" checked>
+  <label for="variation-7">Dark</label>
+</span>

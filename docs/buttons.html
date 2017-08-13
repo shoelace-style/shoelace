@@ -19,7 +19,7 @@
         <img src="../source/img/wordmark.svg" alt="Shoelace logo">
       </a>
     </h1>
-    <p class="text-muted text-small">
+    <p class="text-secondary text-small">
       A back to the basics CSS starter kit. For when you don’t need the whole boot.
     </p>
   </header>
@@ -48,9 +48,60 @@
 
     <div id="content">
       <h2 id="buttons">Buttons</h2>
-<p>To create a button, use the <code>&lt;button&gt;</code> element or apply the <code>button</code> class to another element such as an <code>&lt;a&gt;</code>. You can change a button’s appearance using the <code>button-*</code> modifier.</p>
+<p>To create a button, use the <code>&lt;button&gt;</code> element or apply the <code>button</code> class to an <code>&lt;a&gt;</code>.</p>
+<pre><code class="lang-html">&lt;button type=&quot;button&quot;&gt;Button&lt;/button&gt;
+</code></pre>
+<div class="input-single">
+  <button type="button">Button</button>
+</div>
+
+<p>Use the <code>button-small</code> and <code>button-big</code> modifiers to change the size of a button.</p>
+<pre><code class="lang-html">&lt;button type=&quot;button&quot; class=&quot;button-small&quot;&gt;Small Button&lt;/button&gt;
+&lt;button type=&quot;button&quot;&gt;Normal Button&lt;/button&gt;
+&lt;button type=&quot;button&quot; class=&quot;button-big&quot;&gt;Big Button&lt;/button&gt;
+</code></pre>
+<div class="input-single">
+  <button type="button" class="button-small">Small Button</button>
+  <button type="button">Normal Button</button>
+  <button type="button" class="button-big">Big Button</button>
+</div>
+
+<p>Use the <code>button-block</code> modifier to make a button span the entire width of its parent.</p>
+<pre><code class="lang-html">&lt;button type=&quot;button&quot; class=&quot;button-block button-small&quot;&gt;Small Block Button&lt;/button&gt;
+&lt;button type=&quot;button&quot; class=&quot;button-block&quot;&gt;Normal Block Button&lt;/button&gt;
+&lt;button type=&quot;button&quot; class=&quot;button-block button-big&quot;&gt;Big Block Button&lt;/button&gt;
+</code></pre>
+<div class="input-single">
+  <button type="button" class="button-block button-small">Small Block Button</button>
+</div>
+
+<div class="input-single">
+  <button type="button" class="button-block">Normal Block Button</button>
+</div>
+
+<div class="input-single">
+  <button type="button" class="button-block button-big">Big Block Button</button>
+</div>
+
+<p>To disable a button set the <code>disabled</code> property on <code>&lt;button&gt;</code> elements.</p>
+<pre><code class="lang-html">&lt;button type=&quot;button&quot; disabled&gt;Disabled&lt;/button&gt;
+</code></pre>
+<div class="input-single">
+  <button type="button" disabled>Disabled</button>
+</div>
+
+<p>You can force buttons to have an active state by applying the <code>active</code> class.</p>
+<pre><code class="lang-html">&lt;button type=&quot;button&quot; class=&quot;active&quot;&gt;Active&lt;/button&gt;
+</code></pre>
+<div class="input-single">
+  <button type="button" class="active">Active</button>
+</div>
+
+<h3 id="variations">Variations</h3>
+<p>Use the <code>button-*</code> modifier to create variations.</p>
 <pre><code class="lang-html">&lt;button type=&quot;button&quot;&gt;Primary&lt;/button&gt;
 &lt;button type=&quot;button&quot; class=&quot;button-secondary&quot;&gt;Secondary&lt;/button&gt;
+&lt;button type=&quot;button&quot; class=&quot;button-success&quot;&gt;Success&lt;/button&gt;
 &lt;button type=&quot;button&quot; class=&quot;button-info&quot;&gt;Info&lt;/button&gt;
 &lt;button type=&quot;button&quot; class=&quot;button-warning&quot;&gt;Warning&lt;/button&gt;
 &lt;button type=&quot;button&quot; class=&quot;button-danger&quot;&gt;Danger&lt;/button&gt;
@@ -68,57 +119,13 @@
   <button type="button" class="button-dark">Dark</button>
 </div>
 
-<p>Use the <code>button-small</code> and <code>button-big</code> modifiers to change the size of a button.</p>
-<div class="input-single">
-  <button type="button" class="button-small">Small Button</button>
-  <button type="button">Normal Button</button>
-  <button type="button" class="button-big">Big Button</button>
-</div>
-
-<p>Use the <code>button-block</code> modifier to make the button span the entire width of its parent element. You can also mix and match modifiers as needed.</p>
-<div class="input-single">
-  <button type="button" class="button-block button-small">Small Block Button</button>
-</div>
-
-<div class="input-single">
-  <button type="button" class="button-block">Normal Block Button</button>
-</div>
-
-<div class="input-single">
-  <button type="button" class="button-block button-big">Big Block Button</button>
-</div>
-
-<p>Disabled buttons look like this. Set the <code>disabled</code> property on <code>&lt;button&gt;</code> elements to achieve this effect. For all other elements, apply <code>class=&quot;disabled&quot;</code> instead.</p>
-<div class="input-single">
-  <button type="button" disabled>Primary</button>
-  <button type="button" class="button-secondary" disabled>Secondary</button>
-  <button type="button" class="button-success" disabled>Success</button>
-  <button type="button" class="button-info" disabled>Info</button>
-  <button type="button" class="button-warning" disabled>Warning</button>
-  <button type="button" class="button-danger" disabled>Danger</button>
-  <button type="button" class="button-light" disabled>Light</button>
-  <button type="button" class="button-dark" disabled>Dark</button>
-</div>
-
-<p>You can force buttons to have an active state by applying the <code>active</code> class.</p>
-<div class="input-single">
-  <button type="button" class="active">Primary</button>
-  <button type="button" class="button-secondary active">Secondary</button>
-  <button type="button" class="button-success active">Success</button>
-  <button type="button" class="button-info active">Info</button>
-  <button type="button" class="button-warning active">Warning</button>
-  <button type="button" class="button-danger active">Danger</button>
-  <button type="button" class="button-light active">Light</button>
-  <button type="button" class="button-dark active">Dark</button>
-</div>
-
 <h3 id="link-buttons">Link Buttons</h3>
-<p>Buttons can be styled to look like normal links with the <code>button-link</code> modifier. The appropriate sizing is placed so they align properly with regular buttons.</p>
-<pre><code class="lang-html">&lt;a href=&quot;#&quot; class=&quot;button&quot;&gt;Button&lt;/a&gt;
+<p>Buttons can be styled to look like normal links with the <code>button-link</code> modifier. Button sizing is maintained so they align properly with other buttons.</p>
+<pre><code class="lang-html">&lt;button type=&quot;button&quot;&gt;Button&lt;/button&gt;
 &lt;a href=&quot;#&quot; class=&quot;button button-link&quot;&gt;Link&lt;/a&gt;
 </code></pre>
 <div class="input-single">
-  <a href="#" class="button">Button</a>
+  <button type="button">Button</button>
   <a href="#" class="button button-link">Link</a>
 </div>
 
@@ -141,8 +148,8 @@
     <a href="../index.html">
       <img src="../source/img/wordmark.svg" alt="Shoelace logo">
     </a>
-    <p class="text-small text-muted">
-      Shoelace.css 1.0.0-beta13 &middot;
+    <p class="text-small text-secondary">
+      Shoelace.css 1.0.0-beta14 &middot;
       &copy; A Beautiful Site, LLC
     </p>
 
@@ -153,8 +160,8 @@
       <a class="github-button" href="https://github.com/claviska/shoelace-css" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star claviska/shoelace-css on GitHub">Star</a>
     </p>
     <p>
-      <a href="https://twitter.com/shoelacecss" class="button button-info" style="margin-bottom: 1.2rem;">Follow</a>
-      <a href="https://paypal.me/claviska" class="button button-success" style="margin-bottom: 1.2rem;">Donate</a>
+      <a href="https://twitter.com/shoelacecss" class="button button-info text-light" style="margin-bottom: 1.2rem;">Follow</a>
+      <a href="https://paypal.me/claviska" class="button button-success text-light" style="margin-bottom: 1.2rem;">Donate</a>
     </p>
   </footer>
 

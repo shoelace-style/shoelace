@@ -1,4 +1,19 @@
 /*! Progress Bars */
+:root {
+  --progress-font-size: var(--input-font-size);
+  --progress-font-size-small: var(--input-font-size-small);
+  --progress-font-size-big: var(--input-font-size-big);
+  --progress-height: var(--input-height);
+  --progress-height-small: var(--input-height-small);
+  --progress-height-big: var(--input-height-big);
+  --progress-color: var(--color-white);
+  --progress-bg-color: var(--component-bg-color);
+  --progress-bar-bg-color: var(--state-primary);
+  --progress-border-radius: var(--component-border-radius);
+  --progress-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+  --progress-speed-change: .2s;
+  --progress-speed-indeterminate: 1.5s;
+}
 
 @keyframes progress-indeterminate {
   0% {
@@ -21,6 +36,7 @@
   display: block;
   overflow: hidden;
   margin-bottom: 1rem;
+  box-shadow: var(--progress-box-shadow);
 }
 
 .progress-bar {
@@ -52,4 +68,39 @@
 .progress-indeterminate .progress-bar {
   width: 50% !important;
   animation: progress-indeterminate linear var(--progress-speed-indeterminate) infinite;
+}
+
+/* Variations */
+.progress-secondary .progress-bar {
+  background-color: var(--state-secondary);
+}
+
+.progress-success .progress-bar {
+  background-color: var(--state-success);
+}
+
+.progress-info .progress-bar {
+  background-color: var(--state-info);
+}
+
+.progress-warning .progress-bar {
+  background-color: var(--state-warning);
+}
+
+.progress-danger .progress-bar {
+  background-color: var(--state-danger);
+}
+
+.progress-light {
+  background-color: var(--state-dark);
+}
+
+.progress-light .progress-bar {
+  color: var(--state-dark);
+  background-color: var(--state-light);
+}
+
+.progress-dark .progress-bar {
+  color: var(--state-light);
+  background-color: var(--state-dark);
 }

@@ -39,7 +39,7 @@ body {
 }
 
 #nav a.current {
-  color: var(--text-muted);
+  color: var(--state-secondary);
   cursor: default;
 }
 
@@ -154,7 +154,7 @@ a code {
 }
 
 .width-sizing-example div {
-  background: var(--color-primary);
+  background: var(--state-primary);
   color: white;
   text-align: center;
   padding: .25rem;
@@ -175,7 +175,7 @@ a code {
 .height-sizing-example div {
   width: calc(25% - 1rem);
   float: left;
-  background: var(--color-primary);
+  background: var(--state-primary);
   color: white;
   text-align: center;
   padding: .25rem;

@@ -10,8 +10,7 @@ Shoelace provides a number of helpful utility classes that make prototyping easi
 
 ### Text Utilities
 
-Text utilities are classes that can be applied to just about any element. The text inside will be
-formatted appropriately.
+Text utility classes can be applied to change an element’s text.
 
 <table class="table">
   <thead>
@@ -21,6 +20,14 @@ formatted appropriately.
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td>`text-primary`</td>
+      <td class="text-primary">This is primary text</td>
+    </tr>
+    <tr>
+      <td>`text-secondary`</td>
+      <td class="text-secondary">This is secondary text</td>
+    </tr>
     <tr>
       <td>`text-success`</td>
       <td class="text-success">This is success text</td>
@@ -38,8 +45,12 @@ formatted appropriately.
       <td class="text-danger">This is danger text</td>
     </tr>
     <tr>
-      <td>`text-muted`</td>
-      <td class="text-muted">This is muted text</td>
+      <td>`text-light`</td>
+      <td class="text-light">This is light text</td>
+    </tr>
+    <tr>
+      <td>`text-dark`</td>
+      <td class="text-dark">This is dark text</td>
     </tr>
     <tr>
       <td>`text-small`</td>
@@ -88,7 +99,21 @@ formatted appropriately.
   </tbody>
 </table>
 
+### Background Utilities
+
+Background utility classes can be applied to change an element’s background color.
+
+<div class="margin-bottom-small padding-small bg-primary text-light">bg-primary</div>
+<div class="margin-bottom-small padding-small bg-secondary text-light">bg-secondary</div>
+<div class="margin-bottom-small padding-small bg-success text-light">bg-success</div>
+<div class="margin-bottom-small padding-small bg-info text-light">bg-info</div>
+<div class="margin-bottom-small padding-small bg-warning text-light">bg-warning</div>
+<div class="margin-bottom-small padding-small bg-danger text-light">bg-danger</div>
+<div class="margin-bottom-small padding-small bg-light text-dark">bg-light</div>
+<div class="margin-bottom-small padding-small bg-dark text-light">bg-dark</div>
+
 ### Float Utilities
+
 Float utilities are provided to easily float elements to the left or right. Just apply the `float-left` or `float-right` class to an element to float it left or right.
 
 A clearfix utility is also available to clear floated elements. Just apply the `clearfix` class to the appropriate element.
@@ -96,6 +121,8 @@ A clearfix utility is also available to clear floated elements. Just apply the `
 ### Sizing Utilities
 
 Sizing utilities can be used to set a relative width or height on any element. Just apply a `width-*` or `height-*` class and the appropriate element will be sized accordingly. Sizes are available as percentages from 0 – 100 in multiples of five.
+
+You can also use the `max-width-100` and `max-height-100` classes to set a max width and height of 100%.
 
 ```html
 <div class="width-25">25%</div>

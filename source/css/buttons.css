@@ -1,4 +1,20 @@
 /*! Buttons */
+:root {
+  --button-font-family: var(--input-font-family);
+  --button-font-weight: var(--input-font-weight);
+  --button-font-size: var(--input-font-size);
+  --button-font-size-small: var(--input-font-size-small);
+  --button-font-size-big: var(--input-font-size-big);
+  --button-color: var(--color-white);
+  --button-bg-color: var(--state-primary);
+  --button-height: var(--input-height);
+  --button-height-small: var(--input-height-small);
+  --button-height-big: var(--input-height-big);
+  --button-border-radius: var(--component-border-radius);
+  --button-box-shadow: inset 0 2px 0 rgba(255, 255, 255, .1), inset 0 -2px 0 rgba(0, 0, 0, .1);
+  --button-box-shadow-hover: inset 0 2px 5rem rgba(0, 0, 0, .1), inset 0 -2px 0 rgba(0, 0, 0, .1);
+  --button-box-shadow-active: inset 0 2px 5rem rgba(0, 0, 0, .1), inset 0 2px 0 rgba(0, 0, 0, .1);
+}
 
 button,
 .button {
@@ -40,41 +56,6 @@ button,
   display: block;
 }
 
-.button-secondary {
-  color: var(--button-color-secondary);
-  background-color: var(--button-bg-color-secondary);
-}
-
-.button-success {
-  color: var(--button-color-success);
-  background-color: var(--button-bg-color-success);
-}
-
-.button-info {
-  color: var(--button-color-info);
-  background-color: var(--button-bg-color-info);
-}
-
-.button-warning {
-  color: var(--button-color-warning);
-  background-color: var(--button-bg-color-warning);
-}
-
-.button-danger {
-  color: var(--button-color-danger);
-  background-color: var(--button-bg-color-danger);
-}
-
-.button-light {
-  color: var(--button-color-light);
-  background-color: var(--button-bg-color-light);
-}
-
-.button-dark {
-  color: var(--button-color-dark);
-  background-color: var(--button-bg-color-dark);
-}
-
 .button-link {
   background-color: transparent;
   color: var(--link-color);
@@ -82,7 +63,7 @@ button,
   box-shadow: none;
 }
 
-.button-link:hover:not(:disabled):not(.disabled) {
+.button-link:hover:not(:disabled) {
   background-color: transparent;
   color: var(--link-color-hover);
   text-decoration: var(--link-text-decoration-hover);
@@ -90,28 +71,62 @@ button,
 }
 
 button:hover,
-.button:hover {
+a.button:hover {
+  color: var(--button-color);
   text-decoration: none;
 }
 
-button:hover:not(:disabled),
-.button:hover:not(.disabled) {
+button:hover:not(:disabled) {
+  color: var(--button-color);
   box-shadow: var(--button-box-shadow-hover);
 }
 
 button:active:not(.button-link):not(:disabled),
 button.active:not(.button-link):not(:disabled),
-.button.active:not(.button-link):not(.disabled) {
+a.button.active:not(.button-link) {
   box-shadow: var(--button-box-shadow-active);
 }
 
-button:disabled,
-button.disabled,
-.button.disabled {
+button:disabled {
   opacity: .5;
   cursor: not-allowed;
 }
 
 label.button input[type="file"] {
   display: none;
+}
+
+/* Variations */
+.button-secondary {
+  background-color: var(--state-secondary);
+}
+
+.button-success {
+  background-color: var(--state-success);
+}
+
+.button-info {
+  background-color: var(--state-info);
+}
+
+.button-warning {
+  background-color: var(--state-warning);
+}
+
+.button-danger {
+  background-color: var(--state-danger);
+}
+
+.button-light,
+button.button-light:hover:not(:disabled),
+a.button-light:hover {
+  color: var(--state-dark);
+  background-color: var(--state-light);
+}
+
+.button-dark,
+button.button-dark:hover:not(:disabled),
+a.button-dark {
+  color: var(--state-light);
+  background-color: var(--state-dark);
 }

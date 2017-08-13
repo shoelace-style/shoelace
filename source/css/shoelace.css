@@ -6,14 +6,8 @@
   Source: https://github.com/claviska/shoelace-css
 */
 
-/* Reset */
 @import url('normalize.css');
-
-/* Shoelace variables and base styles */
-@import url('variables.css');
 @import url('content.css');
-
-/* Components */
 @import url('alerts.css');
 @import url('badges.css');
 @import url('buttons.css');
@@ -25,3 +19,49 @@
 @import url('tabs.css');
 @import url('tables.css');
 @import url('utilities.css');
+
+:root {
+  /* Fonts */
+  --font-sans-serif: sans-serif;
+  --font-serif: serif;
+  --font-system: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-monospace: Menlo, Consolas, "DejaVu Sans Mono", monospace;
+
+  /* Colors (most courtesy of http://clrs.cc/) */
+  --color-white: white;
+  --color-navy: #001f3f;
+  --color-blue: #0074d9;
+  --color-aqua: #7fdbff;
+  --color-teal: #39cccc;
+  --color-olive: #3d9970;
+  --color-green: #2ecc40;
+  --color-lime: #01ff70;
+  --color-yellow: #ffdc00;
+  --color-orange: #ff851b;
+  --color-red: #ff4136;
+  --color-maroon: #85144b;
+  --color-fuchsia: #f012be;
+  --color-purple: #b10dc9;
+  --color-black: #111;
+  --color-gray: #aaa;
+  --color-silver: #ddd;
+
+  /* States */
+  --state-primary: tomato;
+  --state-secondary: #a5a5a5;
+  --state-success: var(--color-green);
+  --state-info: var(--color-teal);
+  --state-warning: var(--color-orange);
+  --state-danger: var(--color-red);
+  --state-light: #eee;
+  --state-dark: var(--color-black);
+
+  /* Components */
+  --component-bg-color: #f2f2f2;
+  --component-border-color: #ddd;
+  --component-border-radius: .25rem;
+  --component-border-width: 1px;
+  --component-spacing: 1rem;
+  --component-spacing-big: 2rem;
+  --component-spacing-small: .5rem;
+}
