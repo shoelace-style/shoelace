@@ -15,8 +15,8 @@
   --code-color: var(--color-black);
   --code-border-radius: var(--component-border-radius);
   --code-bg-color: var(--component-bg-color);
-  --code-spacing-x: calc(var(--font-size) * .4);
-  --code-spacing-y: calc(var(--font-size) * .2);
+  --code-padding-x: calc(var(--font-size) * .4);
+  --code-padding-y: calc(var(--font-size) * .2);
 
   --headings-font-family: var(--font-system);
   --headings-font-weight: var(--font-weight-light);
@@ -32,14 +32,14 @@
 
   --hr-border-width: 1px;
   --hr-border-color: var(--component-border-color);
-  --hr-spacing: var(--component-spacing-big);
+  --hr-margin: var(--component-spacing-big);
 
   --kbd-font-size: 90%;
   --kbd-color: var(--color-white);
   --kbd-border-radius: var(--component-border-radius);
   --kbd-bg-color: var(--color-black);
-  --kbd-spacing-x: calc(var(--font-size) * .4);
-  --kbd-spacing-y: calc(var(--font-size) * .2);
+  --kbd-padding-x: calc(var(--font-size) * .4);
+  --kbd-padding-y: calc(var(--font-size) * .2);
 
   --link-color: var(--state-primary);
   --link-text-decoration: none;
@@ -48,8 +48,8 @@
 
   --mark-color: inherit;
   --mark-bg-color: var(--color-yellow);
-  --mark-spacing-x: calc(var(--font-size) * .4);
-  --mark-spacing-y: calc(var(--font-size) * .2);
+  --mark-padding-x: calc(var(--font-size) * .4);
+  --mark-padding-y: calc(var(--font-size) * .2);
 
   --placeholder-color: var(--state-secondary);
 
@@ -121,7 +121,7 @@ code {
   color: var(--code-color);
   background-color: var(--code-bg-color);
   border-radius: var(--code-border-radius);
-  padding: var(--code-spacing-y) var(--code-spacing-x);
+  padding: var(--code-padding-y) var(--code-padding-x);
 }
 
 del {
@@ -157,7 +157,7 @@ h6 { font-size: var(--headings-font-size-h6); }
 hr {
   border: none;
   border-top: solid var(--hr-border-width) var(--hr-border-color);
-  margin: var(--hr-spacing) 0;
+  margin: var(--hr-margin) 0;
 }
 
 img {
@@ -176,13 +176,13 @@ kbd {
   color: var(--kbd-color);
   background-color: var(--kbd-bg-color);
   border-radius: var(--kbd-border-radius);
-  padding: var(--kbd-spacing-y) var(--kbd-spacing-x);
+  padding: var(--kbd-padding-y) var(--kbd-padding-x);
 }
 
 mark {
   color: var(--mark-color);
   background-color: var(--mark-bg-color);
-  padding: var(--mark-spacing-y) var(--mark-spacing-x);
+  padding: var(--mark-padding-y) var(--mark-padding-x);
 }
 
 p {

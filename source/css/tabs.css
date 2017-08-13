@@ -9,14 +9,14 @@
   --tab-color-hover: var(--link-color-hover);
   --tab-color-active: var(--color-white);
   --tab-color-disabled: var(--state-secondary);
-  --tab-spacing-x: var(--component-spacing);
-  --tab-spacing-y: calc(var(--component-spacing) / 2);
+  --tab-padding-x: var(--component-spacing);
+  --tab-padding-y: calc(var(--component-spacing) / 2);
 
   --tab-pane-border-color: var(--component-border-color);
   --tab-pane-border-radius: var(--component-border-radius);
   --tab-pane-border-width: var(--component-border-width);
-  --tab-pane-spacing-x: var(--component-spacing);
-  --tab-pane-spacing-y: var(--component-spacing);
+  --tab-pane-padding-x: var(--component-spacing);
+  --tab-pane-padding-y: var(--component-spacing);
 }
 
 .tabs {
@@ -34,7 +34,7 @@
   text-decoration: none;
   background-color: var(--tab-bg-color);
   border-radius: var(--tab-border-radius);
-  padding: var(--tab-spacing-y) var(--tab-spacing-x);
+  padding: var(--tab-padding-y) var(--tab-padding-x);
   display: inline-block;
 }
 
@@ -59,7 +59,7 @@
 .tabs-pane {
   border: solid var(--tab-pane-border-width) var(--tab-pane-border-color);
   border-radius: .25rem;
-  padding: var(--tab-pane-spacing-y) var(--tab-pane-spacing-x);
+  padding: var(--tab-pane-padding-y) var(--tab-pane-padding-x);
 }
 
 .tabs-pane:not(.active) {

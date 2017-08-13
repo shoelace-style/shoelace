@@ -3,8 +3,8 @@
   --fieldset-border-color: var(--component-border-color);
   --fieldset-border-width: var(--component-border-width);
   --fieldset-border-radius: var(--component-border-radius);
-  --fieldset-spacing-x: var(--component-spacing);
-  --fieldset-spacing-y: var(--component-spacing);
+  --fieldset-padding-x: calc(var(--component-spacing) * 1.5);
+  --fieldset-padding-y: var(--component-spacing);
 
   --input-font-family: inherit;
   --input-font-size: var(--font-size);
@@ -36,7 +36,7 @@
 fieldset {
   border: solid var(--fieldset-border-width) var(--fieldset-border-color);
   border-radius: var(--fieldset-border-radius);
-  padding: var(--component-spacing) calc(var(--component-spacing) * 1.5);
+  padding: var(--fieldset-padding-y) var(--fieldset-padding-x);
   margin-bottom: 1rem;
 }
 

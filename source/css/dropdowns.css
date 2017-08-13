@@ -15,8 +15,8 @@
   --dropdown-box-shadow: 0 1px 0 rgba(0, 0, 0, .05);
   --dropdown-divider-border-color: var(--component-border-color);
   --dropdown-divider-border-width: var(--component-border-width);
-  --dropdown-spacing-x: 1rem;
-  --dropdown-spacing-y: .25rem;
+  --dropdown-padding-x: 1rem;
+  --dropdown-padding-y: .25rem;
   --dropdown-z-index: 100;
 }
 
@@ -53,7 +53,7 @@
   border-radius: var(--dropdown-border-radius);
   box-shadow: var(--dropdown-box-shadow);
   display: none;
-  padding: calc(var(--dropdown-spacing-y) / 2) 0;
+  padding: calc(var(--dropdown-padding-y) / 2) 0;
   overflow-y: auto;
 }
 
@@ -75,7 +75,7 @@
   position: relative;
   color: var(--dropdown-color);
   text-decoration: none;
-  padding: var(--dropdown-spacing-y) calc(var(--dropdown-spacing-x) + .5em);
+  padding: var(--dropdown-padding-y) calc(var(--dropdown-padding-x) + .5em);
   display: block;
   white-space: nowrap;
   overflow-x: hidden;
@@ -94,7 +94,7 @@
 
 .dropdown-menu a.checked::before {
   position: absolute;
-  left: calc(var(--dropdown-spacing-x) / 2 - .1em);
+  left: calc(var(--dropdown-padding-x) / 2 - .1em);
   content: '✓';
   font-family: var(--font-system);
   font-weight: 600;
@@ -103,5 +103,5 @@
 .dropdown-menu hr {
   width: 100%;
   border-top: solid var(--dropdown-divider-border-width) var(--dropdown-divider-border-color);
-  margin: calc(var(--dropdown-spacing-y) / 2) 0;
+  margin: calc(var(--dropdown-padding-y) / 2) 0;
 }
