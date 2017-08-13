@@ -36,7 +36,34 @@ If you’re not familiar with CSS variables, [this article](https://developer.mo
 
 ### Creating Custom Components
 
-You can create custom components to extend Shoelace’s functionality. Here are some best practices to keep things consistent and easy for others to understand.
+You can create custom components to extend Shoelace’s functionality. Here’s what a component’s stylesheet looks like.
+
+```css
+/* Set default variables here. It's a good idea to base them off
+   core variables when possible. This makes it easier to customize
+   the library as a whole but still lets users change individual
+   components.
+
+   Never change or override core variables in your extension!
+*/
+:root {
+  --accordion-bg-color: var(--component-bg-color);
+  --accordion-border-color: var(--component-border-color);
+  /* etc. */
+}
+
+/* Add your styles here. Create additional rules as needed. */
+.accordion {
+
+}
+
+/* Always prefix your modifiers with the component name. */
+.accordion-modifier {
+
+}
+```
+
+Here are some best practices for creating custom components:
 
 **Familiarize yourself with Shoelace’s naming conventions.** A custom accordion component, for example, would have a class name such as `accordion`, modifier classes such as `accordion-open`, and variable names that look like `--accordion-bg-color`. Try to follow similar patterns as much as possible.
 
@@ -44,4 +71,4 @@ You can create custom components to extend Shoelace’s functionality. Here are 
 
 **Semantic markup is strongly encouraged.** Custom components should use the most appropriate elements and the minimal amount of markup required.
 
-**Keep everything together.** Each component should be in its own folder along with its stylesheets, scripts, and documentation. Components can use core variables, but they shouldn’t depend on other components’ styles or scripts to work. This makes it easier to add or remove components from your app without worrying about dependencies.
+**Keep things together.** Each component should be in its own folder along with its stylesheets, scripts, and documentation. Components can use core variables, but they shouldn’t depend on other components’ styles or scripts to work. This makes it easier to add or remove components from your app without worrying about dependencies.
