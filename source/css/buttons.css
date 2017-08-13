@@ -8,7 +8,7 @@ button,
   text-align: center;
   text-decoration: none;
   color: var(--button-color);
-  background-color: var(--button-bg-color-primary);
+  background-color: var(--button-bg-color);
   border-radius: var(--button-border-radius);
   border: none;
   height: var(--button-height);
@@ -40,9 +40,57 @@ button,
   display: block;
 }
 
+.button-secondary {
+  color: var(--button-color-secondary);
+  background-color: var(--button-bg-color-secondary);
+}
+
+.button-success {
+  color: var(--button-color-success);
+  background-color: var(--button-bg-color-success);
+}
+
+.button-info {
+  color: var(--button-color-info);
+  background-color: var(--button-bg-color-info);
+}
+
+.button-warning {
+  color: var(--button-color-warning);
+  background-color: var(--button-bg-color-warning);
+}
+
+.button-danger {
+  color: var(--button-color-danger);
+  background-color: var(--button-bg-color-danger);
+}
+
+.button-light {
+  color: var(--button-color-light);
+  background-color: var(--button-bg-color-light);
+}
+
+.button-dark {
+  color: var(--button-color-dark);
+  background-color: var(--button-bg-color-dark);
+}
+
+.button-link {
+  background-color: transparent;
+  color: var(--link-color);
+  text-decoration: var(--link-text-decoration);
+  box-shadow: none;
+}
+
+.button-link:hover:not(:disabled):not(.disabled) {
+  background-color: transparent;
+  color: var(--link-color-hover);
+  text-decoration: var(--link-text-decoration-hover);
+  box-shadow: none;
+}
+
 button:hover,
 .button:hover {
-  color: var(--button-color);
   text-decoration: none;
 }
 
@@ -54,7 +102,6 @@ button:hover:not(:disabled),
 button:active:not(.button-link):not(:disabled),
 button.active:not(.button-link):not(:disabled),
 .button.active:not(.button-link):not(.disabled) {
-  color: var(--button-color);
   box-shadow: var(--button-box-shadow-active);
 }
 
@@ -63,26 +110,6 @@ button.disabled,
 .button.disabled {
   opacity: .5;
   cursor: not-allowed;
-}
-
-.button-success { background-color: var(--button-bg-color-success); }
-.button-info { background-color: var(--button-bg-color-info); }
-.button-warning { background-color: var(--button-bg-color-warning); }
-.button-danger { background-color: var(--button-bg-color-danger); }
-.button-inverse { background-color: var(--button-bg-color-inverse); }
-
-.button-link {
-  background-color: transparent;
-  color: var(--link-color);
-  text-decoration: var(--link-text-decoration);
-  box-shadow: none;
-}
-
-.button-link:hover:not(:disabled) {
-  background-color: transparent;
-  color: var(--link-color-hover);
-  text-decoration: var(--link-text-decoration-hover);
-  box-shadow: none;
 }
 
 label.button input[type="file"] {

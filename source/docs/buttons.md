@@ -9,23 +9,24 @@ description: Add styled buttons to your app with minimal effort.
 To create a button, use the `<button>` element or apply the `button` class to another element such as an `<a>`. You can change a button’s appearance using the `button-*` modifier.
 
 ```html
-<button type="button">Default</button>
-<button type="button" class="button-success">Success</button>
+<button type="button">Primary</button>
+<button type="button" class="button-secondary">Secondary</button>
 <button type="button" class="button-info">Info</button>
 <button type="button" class="button-warning">Warning</button>
 <button type="button" class="button-danger">Danger</button>
-<button type="button" class="button-inverse">Inverse</button>
-<button type="button" class="button button-link">Link</button>
+<button type="button" class="button-light">Light</button>
+<button type="button" class="button-dark">Dark</button>
 ```
 
 <div class="input-single">
-  <button type="button">Default</button>
+  <button type="button">Primary</button>
+  <button type="button" class="button-secondary">Secondary</button>
   <button type="button" class="button-success">Success</button>
   <button type="button" class="button-info">Info</button>
   <button type="button" class="button-warning">Warning</button>
   <button type="button" class="button-danger">Danger</button>
-  <button type="button" class="button-inverse">Inverse</button>
-  <button type="button" class="button-link">Link</button>
+  <button type="button" class="button-light">Light</button>
+  <button type="button" class="button-dark">Dark</button>
 </div>
 
 Use the `button-small` and `button-big` modifiers to change the size of a button.
@@ -53,23 +54,41 @@ Use the `button-block` modifier to make the button span the entire width of its 
 Disabled buttons look like this. Set the `disabled` property on `<button>` elements to achieve this effect. For all other elements, apply `class="disabled"` instead.
 
 <div class="input-single">
-  <button type="button" disabled>Default</button>
+  <button type="button" disabled>Primary</button>
+  <button type="button" class="button-secondary" disabled>Primary</button>
   <button type="button" class="button-success" disabled>Success</button>
   <button type="button" class="button-info" disabled>Info</button>
   <button type="button" class="button-warning" disabled>Warning</button>
   <button type="button" class="button-danger" disabled>Danger</button>
-  <button type="button" class="button-inverse" disabled>Inverse</button>
+  <button type="button" class="button-light" disabled>Light</button>
+  <button type="button" class="button-dark" disabled>Dark</button>
 </div>
 
 You can force buttons to have an active state by applying the `active` class.
 
 <div class="input-single">
-  <button type="button" class="active">Default</button>
+  <button type="button" class="active">Primary</button>
+  <button type="button" class="button-secondary active">Primary</button>
   <button type="button" class="button-success active">Success</button>
   <button type="button" class="button-info active">Info</button>
   <button type="button" class="button-warning active">Warning</button>
   <button type="button" class="button-danger active">Danger</button>
-  <button type="button" class="button-inverse active">Inverse</button>
+  <button type="button" class="button-light active">Light</button>
+  <button type="button" class="button-dark active">Dark</button>
+</div>
+
+### Link Buttons
+
+Buttons can be styled to look like normal links with the `button-link` modifier. The appropriate sizing is placed so they align properly with regular buttons.
+
+```html
+<button type="button">Button</button>
+<button type="button" class="button-link">Link</button>
+```
+
+<div class="input-single">
+  <button type="button">Button</button>
+  <button type="button" class="button-link">Link</button>
 </div>
 
 ### File Buttons

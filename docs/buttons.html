@@ -49,22 +49,23 @@
     <div id="content">
       <h2 id="buttons">Buttons</h2>
 <p>To create a button, use the <code>&lt;button&gt;</code> element or apply the <code>button</code> class to another element such as an <code>&lt;a&gt;</code>. You can change a button’s appearance using the <code>button-*</code> modifier.</p>
-<pre><code class="lang-html">&lt;button type=&quot;button&quot;&gt;Default&lt;/button&gt;
-&lt;button type=&quot;button&quot; class=&quot;button-success&quot;&gt;Success&lt;/button&gt;
+<pre><code class="lang-html">&lt;button type=&quot;button&quot;&gt;Primary&lt;/button&gt;
+&lt;button type=&quot;button&quot; class=&quot;button-secondary&quot;&gt;Secondary&lt;/button&gt;
 &lt;button type=&quot;button&quot; class=&quot;button-info&quot;&gt;Info&lt;/button&gt;
 &lt;button type=&quot;button&quot; class=&quot;button-warning&quot;&gt;Warning&lt;/button&gt;
 &lt;button type=&quot;button&quot; class=&quot;button-danger&quot;&gt;Danger&lt;/button&gt;
-&lt;button type=&quot;button&quot; class=&quot;button-inverse&quot;&gt;Inverse&lt;/button&gt;
-&lt;button type=&quot;button&quot; class=&quot;button button-link&quot;&gt;Link&lt;/button&gt;
+&lt;button type=&quot;button&quot; class=&quot;button-light&quot;&gt;Light&lt;/button&gt;
+&lt;button type=&quot;button&quot; class=&quot;button-dark&quot;&gt;Dark&lt;/button&gt;
 </code></pre>
 <div class="input-single">
-  <button type="button">Default</button>
+  <button type="button">Primary</button>
+  <button type="button" class="button-secondary">Secondary</button>
   <button type="button" class="button-success">Success</button>
   <button type="button" class="button-info">Info</button>
   <button type="button" class="button-warning">Warning</button>
   <button type="button" class="button-danger">Danger</button>
-  <button type="button" class="button-inverse">Inverse</button>
-  <button type="button" class="button-link">Link</button>
+  <button type="button" class="button-light">Light</button>
+  <button type="button" class="button-dark">Dark</button>
 </div>
 
 <p>Use the <code>button-small</code> and <code>button-big</code> modifiers to change the size of a button.</p>
@@ -89,22 +90,36 @@
 
 <p>Disabled buttons look like this. Set the <code>disabled</code> property on <code>&lt;button&gt;</code> elements to achieve this effect. For all other elements, apply <code>class=&quot;disabled&quot;</code> instead.</p>
 <div class="input-single">
-  <button type="button" disabled>Default</button>
+  <button type="button" disabled>Primary</button>
+  <button type="button" class="button-secondary" disabled>Primary</button>
   <button type="button" class="button-success" disabled>Success</button>
   <button type="button" class="button-info" disabled>Info</button>
   <button type="button" class="button-warning" disabled>Warning</button>
   <button type="button" class="button-danger" disabled>Danger</button>
-  <button type="button" class="button-inverse" disabled>Inverse</button>
+  <button type="button" class="button-light" disabled>Light</button>
+  <button type="button" class="button-dark" disabled>Dark</button>
 </div>
 
 <p>You can force buttons to have an active state by applying the <code>active</code> class.</p>
 <div class="input-single">
-  <button type="button" class="active">Default</button>
+  <button type="button" class="active">Primary</button>
+  <button type="button" class="button-secondary active">Primary</button>
   <button type="button" class="button-success active">Success</button>
   <button type="button" class="button-info active">Info</button>
   <button type="button" class="button-warning active">Warning</button>
   <button type="button" class="button-danger active">Danger</button>
-  <button type="button" class="button-inverse active">Inverse</button>
+  <button type="button" class="button-light active">Light</button>
+  <button type="button" class="button-dark active">Dark</button>
+</div>
+
+<h3 id="link-buttons">Link Buttons</h3>
+<p>Buttons can be styled to look like normal links with the <code>button-link</code> modifier. The appropriate sizing is placed so they align properly with regular buttons.</p>
+<pre><code class="lang-html">&lt;button type=&quot;button&quot;&gt;Button&lt;/button&gt;
+&lt;button type=&quot;button&quot; class=&quot;button-link&quot;&gt;Link&lt;/button&gt;
+</code></pre>
+<div class="input-single">
+  <button type="button">Button</button>
+  <button type="button" class="button-link">Link</button>
 </div>
 
 <h3 id="file-buttons">File Buttons</h3>
