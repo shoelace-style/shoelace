@@ -9,21 +9,25 @@ description: Add badges to your app with minimal effort.
 Create a badge by applying the `badge` class to an element such as a `<span>`. You can change a badge’s appearance using the `badge-*` modifier.
 
 ```html
-<span class="badge">Default</span>
+<span class="badge">Primary</span>
+<span class="badge badge-secondary">Secondary</span>
 <span class="badge badge-success">Success</span>
 <span class="badge badge-info">Info</span>
 <span class="badge badge-warning">Warning</span>
 <span class="badge badge-danger">Danger</span>
-<span class="badge badge-inverse">Inverse</span>
+<span class="badge badge-light">Light</span>
+<span class="badge badge-dark">Dark</span>
 ```
 
 <p>
-  <span class="badge">Default</span>
+  <span class="badge">Primary</span>
+  <span class="badge badge-secondary">Secondary</span>
   <span class="badge badge-success">Success</span>
   <span class="badge badge-info">Info</span>
   <span class="badge badge-warning">Warning</span>
   <span class="badge badge-danger">Danger</span>
-  <span class="badge badge-inverse">Inverse</span>
+  <span class="badge badge-light">Light</span>
+  <span class="badge badge-dark">Dark</span>
 </p>
 
 By default, badges are sized relative to their parent element.

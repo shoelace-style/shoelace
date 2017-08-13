@@ -33,7 +33,6 @@
   --state-info: var(--color-teal);
   --state-warning: var(--color-orange);
   --state-danger: var(--color-red);
-  --state-inverse: var(--color-black);
   --state-light: #f2f2f2;
   --state-dark: var(--color-black);
 
@@ -141,16 +140,33 @@
   /* Badges */
   --badge-font-size: .8em; /* ems for relative sizing */
   --badge-font-weight: var(--font-weight);
-  --badge-color: var(--color-white);
   --badge-border-radius: 1em;  /* ems for relative sizing */
-  --badge-bg-color-primary: var(--color-primary);
-  --badge-bg-color-success: var(--state-success);
-  --badge-bg-color-info: var(--state-info);
-  --badge-bg-color-warning: var(--state-warning);
-  --badge-bg-color-danger: var(--state-danger);
-  --badge-bg-color-inverse: var(--state-inverse);
   --badge-spacing-x: .6em;
   --badge-spacing-y: .2em;
+
+  --badge-color: var(--color-white);
+  --badge-bg-color: var(--color-primary);
+
+  --badge-color-secondary: var(--color-white);
+  --badge-bg-color-secondary: var(--color-secondary);
+
+  --badge-color-success: var(--color-white);
+  --badge-bg-color-success: var(--state-success);
+
+  --badge-color-info: var(--color-white);
+  --badge-bg-color-info: var(--state-info);
+
+  --badge-color-warning: var(--color-white);
+  --badge-bg-color-warning: var(--state-warning);
+
+  --badge-color-danger: var(--color-white);
+  --badge-bg-color-danger: var(--state-danger);
+
+  --badge-color-light: var(--color-black);
+  --badge-bg-color-light: var(--state-light);
+
+  --badge-color-dark: var(--color-white);
+  --badge-bg-color-dark: var(--state-dark);
 
   /* Buttons */
   --button-font-family: var(--input-font-family);
