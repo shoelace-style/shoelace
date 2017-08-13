@@ -55,7 +55,7 @@ Disabled buttons look like this. Set the `disabled` property on `<button>` eleme
 <div class="input-single">
   <button type="button" disabled>Default</button>
   <button type="button" class="button-success" disabled>Success</button>
-  <button type="button" class="button-info disabled">Info</button>
+  <button type="button" class="button-info" disabled>Info</button>
   <button type="button" class="button-warning" disabled>Warning</button>
   <button type="button" class="button-danger" disabled>Danger</button>
   <button type="button" class="button-inverse" disabled>Inverse</button>
