@@ -12,11 +12,11 @@ button,
   border-radius: var(--button-border-radius);
   border: none;
   height: var(--button-height);
-  line-height: 1;
+  line-height: var(--button-height);
   user-select: none;
   vertical-align: middle;
   white-space: nowrap;
-  padding: calc(var(--component-spacing) * .5) calc(var(--component-spacing) * .75);
+  padding: 0 .75em; /* ems for relative sizing */
   box-shadow: var(--button-box-shadow);
   cursor: pointer;
   display: inline-block;
@@ -26,13 +26,13 @@ button,
 .button-small {
   font-size: var(--button-font-size-small);
   height: var(--button-height-small);
-  padding: calc(var(--component-spacing) * .25) calc(var(--component-spacing) * .5);
+  line-height: var(--button-height-small);
 }
 
 .button-big {
   font-size: var(--button-font-size-big);
   height: var(--button-height-big);
-  padding: calc(var(--component-spacing) * .75) calc(var(--component-spacing) * 1);
+  line-height: var(--button-height-big);
 }
 
 .button-block {
