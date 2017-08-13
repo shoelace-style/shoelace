@@ -71,19 +71,20 @@ button,
 }
 
 button:hover,
-a.button:hover {
+.button:hover {
   color: var(--button-color);
   text-decoration: none;
 }
 
-button:hover:not(:disabled) {
+button:hover:not(:disabled),
+.button:hover {
   color: var(--button-color);
   box-shadow: var(--button-box-shadow-hover);
 }
 
 button:active:not(.button-link):not(:disabled),
 button.active:not(.button-link):not(:disabled),
-a.button.active:not(.button-link) {
+.button.active:not(.button-link) {
   box-shadow: var(--button-box-shadow-active);
 }
 
@@ -119,14 +120,14 @@ label.button input[type="file"] {
 
 .button-light,
 button.button-light:hover:not(:disabled),
-a.button-light:hover {
+.button-light:hover {
   color: var(--state-dark);
   background-color: var(--state-light);
 }
 
 .button-dark,
 button.button-dark:hover:not(:disabled),
-a.button-dark {
+.button-dark {
   color: var(--state-light);
   background-color: var(--state-dark);
 }
