@@ -55,7 +55,7 @@ Disabled buttons look like this. Set the `disabled` property on `<button>` eleme
 
 <div class="input-single">
   <button type="button" disabled>Primary</button>
-  <button type="button" class="button-secondary" disabled>Primary</button>
+  <button type="button" class="button-secondary" disabled>Secondary</button>
   <button type="button" class="button-success" disabled>Success</button>
   <button type="button" class="button-info" disabled>Info</button>
   <button type="button" class="button-warning" disabled>Warning</button>
@@ -68,7 +68,7 @@ You can force buttons to have an active state by applying the `active` class.
 
 <div class="input-single">
   <button type="button" class="active">Primary</button>
-  <button type="button" class="button-secondary active">Primary</button>
+  <button type="button" class="button-secondary active">Secondary</button>
   <button type="button" class="button-success active">Success</button>
   <button type="button" class="button-info active">Info</button>
   <button type="button" class="button-warning active">Warning</button>
