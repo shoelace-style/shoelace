@@ -43,3 +43,28 @@ By default, badges are sized relative to their parent element.
 <h2>Heading 2 <span class="badge">Badge</span></h2>
 <h3>Heading 3 <span class="badge">Badge</span></h3>
 <p>Paragraph <span class="badge">Badge</span></p>
+
+
+### Badge Links
+
+```html
+<a href="#" class="badge">Primary</a>
+<a href="#" class="badge badge-secondary">Secondary</a>
+<a href="#" class="badge badge-success">Success</a>
+<a href="#" class="badge badge-info">Info</a>
+<a href="#" class="badge badge-warning">Warning</a>
+<a href="#" class="badge badge-danger">Danger</a>
+<a href="#" class="badge badge-light">Light</a>
+<a href="#" class="badge badge-dark">Dark</a>
+```
+
+<p>
+  <a href="#" class="badge">Primary</a>
+  <a href="#" class="badge badge-secondary">Secondary</a>
+  <a href="#" class="badge badge-success">Success</a>
+  <a href="#" class="badge badge-info">Info</a>
+  <a href="#" class="badge badge-warning">Warning</a>
+  <a href="#" class="badge badge-danger">Danger</a>
+  <a href="#" class="badge badge-light">Light</a>
+  <a href="#" class="badge badge-dark">Dark</a>
+</p>

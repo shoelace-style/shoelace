@@ -9,6 +9,7 @@
   padding: var(--badge-spacing-y) var(--badge-spacing-x);
   vertical-align: baseline;
   display: inline-block;
+  transition: .1s box-shadow, .1s background-color, .1s color;
 }
 
 .badge-secondary {
@@ -49,3 +50,17 @@
 .badge:empty {
   display: none;
 }
+
+a.badge:hover {
+  color: var(--badge-color);
+  text-decoration: none;
+  box-shadow: var(--badge-box-shadow-hover);
+}
+
+a.badge-secondary:hover { color: var(--badge-color-secondary) }
+a.badge-success:hover { color: var(--badge-color-success) }
+a.badge-info:hover { color: var(--badge-color-info) }
+a.badge-warning:hover { color: var(--badge-color-warning) }
+a.badge-danger:hover { color: var(--badge-color-danger) }
+a.badge-dark:hover { color: var(--badge-color-dark) }
+a.badge-light:hover { color: var(--badge-color-light) }

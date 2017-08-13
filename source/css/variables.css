@@ -141,6 +141,7 @@
   --badge-font-size: .8em; /* ems for relative sizing */
   --badge-font-weight: var(--font-weight);
   --badge-border-radius: 1em;  /* ems for relative sizing */
+  --badge-box-shadow-hover: inset 0 0 0 1em rgba(0, 0, 0, .1);
   --badge-spacing-x: .6em;
   --badge-spacing-y: .2em;
 
