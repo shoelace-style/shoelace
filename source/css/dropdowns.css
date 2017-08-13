@@ -53,7 +53,7 @@
   border-radius: var(--dropdown-border-radius);
   box-shadow: var(--dropdown-box-shadow);
   display: none;
-  padding: calc(var(--dropdown-padding-y) / 2) 0;
+  padding: var(--dropdown-padding-y) 0;
   overflow-y: auto;
 }
 
@@ -103,5 +103,5 @@
 .dropdown-menu hr {
   width: 100%;
   border-top: solid var(--dropdown-divider-border-width) var(--dropdown-divider-border-color);
-  margin: calc(var(--dropdown-padding-y) / 2) 0;
+  margin: var(--dropdown-padding-y) 0;
 }

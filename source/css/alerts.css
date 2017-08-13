@@ -2,8 +2,8 @@
 :root {
   --alert-color: var(--color-white);
   --alert-bg-color: var(--state-primary);
-  --alert-padding-x: var(--component-spacing);
-  --alert-padding-y: var(--component-spacing);
+  --alert-padding-x: var(--component-padding-x);
+  --alert-padding-y: var(--component-padding-y);
 }
 
 .alert {

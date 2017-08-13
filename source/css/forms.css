@@ -3,8 +3,8 @@
   --fieldset-border-color: var(--component-border-color);
   --fieldset-border-width: var(--component-border-width);
   --fieldset-border-radius: var(--component-border-radius);
-  --fieldset-padding-x: calc(var(--component-spacing) * 1.5);
-  --fieldset-padding-y: var(--component-spacing);
+  --fieldset-padding-x: 1.5rem;
+  --fieldset-padding-y: 1rem;
 
   --input-font-family: inherit;
   --input-font-size: var(--font-size);
@@ -82,8 +82,8 @@ textarea {
   line-height: var(--input-height);
   vertical-align: middle;
   display: block;
-  padding-left: calc(var(--component-spacing) * .5);
-  padding-right: calc(var(--component-spacing) * .5);
+  padding-left: .5rem;
+  padding-right: .5rem;
   margin: 0;
   transition: .1s border-color, .1s background-color, .1s color;
   white-space: nowrap;
@@ -118,7 +118,7 @@ select {
   background-size: .75rem;
   padding-top: 0;
   padding-bottom: 0;
-  padding-right: calc(var(--component-spacing) * .5 + 1rem);
+  padding-right: 1.5rem;
 }
 
 textarea {
@@ -129,7 +129,7 @@ textarea {
 }
 
 input[type="color"] {
-  padding: calc(var(--component-spacing) * .5);
+  padding: .5rem;
 }
 
 input[type="color"]::-webkit-color-swatch-wrapper {
@@ -361,7 +361,7 @@ progress {
   border-top: solid var(--input-border-width) var(--input-border-color);
   border-bottom: solid var(--input-border-width) var(--input-border-color);
   background: #f8f8f8;
-  padding: 0 calc(var(--component-spacing) * .5);
+  padding: 0 .5rem;
   white-space: nowrap;
 }
 

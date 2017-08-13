@@ -61,5 +61,6 @@
   --component-border-color: #ddd;
   --component-border-radius: .25rem;
   --component-border-width: 1px;
-  --component-spacing: 1rem;
+  --component-padding-x: 1rem;
+  --component-padding-y: 1rem;
 }

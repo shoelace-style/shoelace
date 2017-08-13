@@ -1,8 +1,8 @@
 /*! Utilties */
 :root {
-  --spacing-small: var(--component-spacing);
-  --spacing-medium: calc(var(--component-spacing) * 2);
-  --spacing-big: calc(var(--component-spacing) * 4);
+  --spacing-small: 1rem;
+  --spacing-medium: 2rem;
+  --spacing-big: 4rem;
 }
 
 /***************************************************************************************************
