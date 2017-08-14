@@ -75,7 +75,6 @@ You can force buttons to have an active state by applying the `active` class.
 Use the `button-*` modifier to create variations.
 
 ```html
-<button type="button">Primary</button>
 <button type="button" class="button-secondary">Secondary</button>
 <button type="button" class="button-success">Success</button>
 <button type="button" class="button-info">Info</button>
@@ -86,7 +85,6 @@ Use the `button-*` modifier to create variations.
 ```
 
 <div class="input-single">
-  <button type="button">Primary</button>
   <button type="button" class="button-secondary">Secondary</button>
   <button type="button" class="button-success">Success</button>
   <button type="button" class="button-info">Info</button>

@@ -55,10 +55,6 @@ When progress can’t be determined, use the `progress-indeterminate` modifier t
 Use the `progress-*` modifier to create variations.
 
 ```html
-<div class="progress">
-  <div class="progress-bar width-50">50%</div>
-</div>
-
 <div class="progress progress-secondary">
   <div class="progress-bar width-50">50%</div>
 </div>
@@ -87,10 +83,6 @@ Use the `progress-*` modifier to create variations.
   <div class="progress-bar width-50">50%</div>
 </div>
 ```
-
-<div class="progress">
-  <div class="progress-bar width-50">50%</div>
-</div>
 
 <div class="progress progress-secondary">
   <div class="progress-bar width-50">50%</div>
