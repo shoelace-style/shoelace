@@ -42,7 +42,7 @@
 
 .dropdown-menu {
   position: absolute;
-  top: calc(100% + var(--dropdown-offset-y));;
+  top: calc(100% + var(--dropdown-offset-y));
   left: var(--dropdown-offset-x);
   z-index: var(--dropdown-z-index);
   min-width: var(--dropdown-min-width);
@@ -59,7 +59,7 @@
 
 .dropdown-top .dropdown-menu {
   top: auto;
-  bottom: calc(100% + var(--dropdown-offset-y));;
+  bottom: calc(100% + var(--dropdown-offset-y));
 }
 
 .dropdown-left .dropdown-menu {

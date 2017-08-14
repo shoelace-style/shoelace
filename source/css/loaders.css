@@ -4,7 +4,7 @@
   --loader-border-color: var(--state-primary);
   --loader-border-width: .2rem;
   --loader-border-width-small: calc(var(--loader-border-width) / 2);
-  --loader-border-width-big: calc(var(--loader-border-width) * 2);;
+  --loader-border-width-big: calc(var(--loader-border-width) * 2);
   --loader-size: 2rem;
   --loader-size-small: calc(var(--loader-size) / 2);
   --loader-size-big: calc(var(--loader-size) * 2);
