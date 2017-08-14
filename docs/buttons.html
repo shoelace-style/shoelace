@@ -83,11 +83,13 @@
   <button type="button" class="button-block button-big">Big Block Button</button>
 </div>
 
-<p>To disable a button set the <code>disabled</code> property on <code>&lt;button&gt;</code> elements.</p>
-<pre><code class="lang-html">&lt;button type=&quot;button&quot; disabled&gt;Disabled&lt;/button&gt;
+<p>To disable a button set the <code>disabled</code> property on <code>&lt;button&gt;</code> elements. You can simulate the disabled state on links by adding the <code>disabled</code> class, but additional JavaScript is required to prevent them from being activated.</p>
+<pre><code class="lang-html">&lt;button type=&quot;button&quot; disabled&gt;Disabled Button&lt;/button&gt;
+&lt;a href=&quot;#&quot; class=&quot;button disabled&quot;&gt;Disabled Link&lt;/a&gt;
 </code></pre>
 <div class="input-single">
-  <button type="button" disabled>Disabled</button>
+  <button type="button" disabled>Disabled Button</button>
+  <a href="#" class="button disabled">Disabled Link</a>
 </div>
 
 <p>You can force buttons to have an active state by applying the <code>active</code> class.</p>

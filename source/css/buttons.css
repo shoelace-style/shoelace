@@ -63,7 +63,7 @@ button,
   box-shadow: none;
 }
 
-.button-link:hover:not(:disabled) {
+.button-link:hover:not(:disabled):not(.disabled) {
   background-color: transparent;
   color: var(--link-color-hover);
   text-decoration: var(--link-text-decoration-hover);
@@ -77,19 +77,20 @@ button:hover,
 }
 
 button:hover:not(:disabled),
-.button:hover {
+.button:hover:not(.disabled) {
   color: var(--button-color);
   box-shadow: var(--button-box-shadow-hover);
 }
 
 button:active:not(.button-link):not(:disabled),
 button.active:not(.button-link):not(:disabled),
-.button:active:not(.button-link),
-.button.active:not(.button-link) {
+.button:active:not(.button-link):not(.disabled),
+.button.active:not(.button-link):not(.disabled) {
   box-shadow: var(--button-box-shadow-active);
 }
 
-button:disabled {
+button:disabled,
+.button.disabled {
   opacity: .5;
   cursor: not-allowed;
 }
@@ -121,14 +122,14 @@ label.button input[type="file"] {
 
 .button-light,
 button.button-light:hover:not(:disabled),
-.button-light:hover {
+.button-light:hover:not(.disabled) {
   color: var(--state-dark);
   background-color: var(--state-light);
 }
 
 .button-dark,
 button.button-dark:hover:not(:disabled),
-.button-dark {
+.button-dark:hover:not(.disabled) {
   color: var(--state-light);
   background-color: var(--state-dark);
 }

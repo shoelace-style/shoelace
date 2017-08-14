@@ -50,14 +50,16 @@ Use the `button-block` modifier to make a button span the entire width of its pa
   <button type="button" class="button-block button-big">Big Block Button</button>
 </div>
 
-To disable a button set the `disabled` property on `<button>` elements.
+To disable a button set the `disabled` property on `<button>` elements. You can simulate the disabled state on links by adding the `disabled` class, but additional JavaScript is required to prevent them from being activated.
 
 ```html
-<button type="button" disabled>Disabled</button>
+<button type="button" disabled>Disabled Button</button>
+<a href="#" class="button disabled">Disabled Link</a>
 ```
 
 <div class="input-single">
-  <button type="button" disabled>Disabled</button>
+  <button type="button" disabled>Disabled Button</button>
+  <a href="#" class="button disabled">Disabled Link</a>
 </div>
 
 You can force buttons to have an active state by applying the `active` class.
