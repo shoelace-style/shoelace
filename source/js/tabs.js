@@ -32,37 +32,37 @@
 
   if(typeof jQuery === 'undefined' && typeof Zepto === 'undefined') {
     throw new Error('Shoelace tabs require either jQuery or Zepto.');
-  } else {
-    (window.jQuery || window.Zepto)(function($) {
-      // Watch for clicks on tabs
-      $(document).on('click', '.tabs-nav a', function(event) {
-        var tabs = $(this).closest('.tabs');
-        var tabNav = this;
-        var selectedPane = $(tabs).find(tabNav.hash).get(0);
-
-        event.preventDefault();
-
-        // Ignore tabs without an href or with the "disabled" class
-        if(!tabNav.hash || $(tabNav).is('.disabled')) {
-          return;
-        }
-
-        // Make the selected tab active
-        $(tabNav).siblings().removeClass('active');
-        $(tabNav).addClass('active');
-
-        // Hide active tab panes that aren't getting selected
-        $(tabs).find('.tabs-pane.active').not(selectedPane).each(function() {
-          $(this).removeClass('active');
-          $(tabs).trigger('hide', this);
-        });
-
-        // Show the selected tab pane
-        if(selectedPane && !$(selectedPane).is('.active')) {
-          $(selectedPane).addClass('active');
-          $(tabs).trigger('show', selectedPane);
-        }
-      });
-    });
   }
+
+  (window.jQuery || window.Zepto)(function($) {
+    // Watch for clicks on tabs
+    $(document).on('click', '.tabs-nav a', function(event) {
+      var tabs = $(this).closest('.tabs');
+      var tabNav = this;
+      var selectedPane = $(tabs).find(tabNav.hash).get(0);
+
+      event.preventDefault();
+
+      // Ignore tabs without an href or with the "disabled" class
+      if(!tabNav.hash || $(tabNav).is('.disabled')) {
+        return;
+      }
+
+      // Make the selected tab active
+      $(tabNav).siblings().removeClass('active');
+      $(tabNav).addClass('active');
+
+      // Hide active tab panes that aren't getting selected
+      $(tabs).find('.tabs-pane.active').not(selectedPane).each(function() {
+        $(this).removeClass('active');
+        $(tabs).trigger('hide', this);
+      });
+
+      // Show the selected tab pane
+      if(selectedPane && !$(selectedPane).is('.active')) {
+        $(selectedPane).addClass('active');
+        $(tabs).trigger('show', selectedPane);
+      }
+    });
+  });
 })();
