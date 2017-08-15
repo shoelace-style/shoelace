@@ -65,11 +65,13 @@ To disable a button set the `disabled` property on `<button>` elements. You can 
 You can force buttons to have an active state by applying the `active` class.
 
 ```html
-<button type="button" class="active">Active</button>
+<button type="button" class="active">Active Button</button>
+<a href="#" class="button active">Active Link</a>
 ```
 
 <div class="input-single">
-  <button type="button" class="active">Active</button>
+  <button type="button" class="active">Active Button</button>
+  <a href="#" class="button active">Active Link</a>
 </div>
 
 ### Variations
@@ -101,13 +103,11 @@ Use the `button-*` modifier to create variations.
 Buttons can be styled to look like normal links with the `button-link` modifier. Button sizing is maintained so they align properly with other buttons.
 
 ```html
-<button type="button">Button</button>
-<a href="#" class="button button-link">Link</a>
+<a href="#" class="button button-link">Link Button</a>
 ```
 
 <div class="input-single">
-  <button type="button">Button</button>
-  <a href="#" class="button button-link">Link</a>
+  <a href="#" class="button button-link">Link Button</a>
 </div>
 
 ### Loader Buttons
