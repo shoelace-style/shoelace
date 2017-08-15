@@ -113,6 +113,7 @@ label.button input[type="file"] {
   position: relative;
   min-width: calc(var(--button-loader-size) * 2);
   color: transparent !important;
+  overflow: hidden;
 }
 
 .button-loader::after {
