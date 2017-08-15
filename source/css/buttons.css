@@ -123,7 +123,7 @@ label.button input[type="file"] {
   width: var(--button-loader-size);
   height: var(--button-loader-size);
   border-radius: 50%;
-  border: solid var(--button-loader-border-width) transparent;
+  border: solid var(--button-loader-border-width) rgba(255, 255, 255, .2);
   border-top-color: var(--button-color);
   border-left-color: var(--button-color);
   display: inline-block;
