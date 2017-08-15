@@ -14,6 +14,13 @@
   --button-box-shadow: inset 0 2px 0 rgba(255, 255, 255, .1), inset 0 -2px 0 rgba(0, 0, 0, .1);
   --button-box-shadow-hover: inset 0 2px 5rem rgba(0, 0, 0, .1), inset 0 -2px 0 rgba(0, 0, 0, .1);
   --button-box-shadow-active: inset 0 2px 5rem rgba(0, 0, 0, .1), inset 0 2px 0 rgba(0, 0, 0, .1);
+  --button-loader-size: 1.2em;
+  --button-loader-border-width: .2em;
+}
+
+@keyframes button-loader {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 button,
@@ -36,7 +43,7 @@ button,
   box-shadow: var(--button-box-shadow);
   cursor: pointer;
   display: inline-block;
-  transition: .1s box-shadow, .1s background-color, .1s color;
+  transition: .1s box-shadow, .1s background-color;
 }
 
 .button-small {
@@ -95,8 +102,42 @@ button:disabled,
   cursor: not-allowed;
 }
 
+/* File buttons */
 label.button input[type="file"] {
   display: none;
+}
+
+/* Loader buttons */
+.button-loader,
+.button-loader:hover {
+  position: relative;
+  min-width: calc(var(--button-loader-size) * 2);
+  color: transparent !important;
+}
+
+.button-loader::after {
+  content: '';
+  position: absolute;
+  top: calc(50% - calc(var(--button-loader-size) / 2));
+  left: calc(50% - calc(var(--button-loader-size) / 2));
+  width: var(--button-loader-size);
+  height: var(--button-loader-size);
+  border-radius: 50%;
+  border: solid var(--button-loader-border-width) transparent;
+  border-top-color: var(--button-color);
+  border-left-color: var(--button-color);
+  display: inline-block;
+  animation: button-loader var(--loader-speed) linear infinite;
+}
+
+.button-light.button-loader::after {
+  border-top-color: var(--state-dark);
+  border-left-color: var(--state-dark);
+}
+
+.button-dark.button-loader::after {
+  border-top-color: var(--state-light);
+  border-left-color: var(--state-light);
 }
 
 /* Variations */

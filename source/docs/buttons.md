@@ -110,6 +110,44 @@ Buttons can be styled to look like normal links with the `button-link` modifier.
   <a href="#" class="button button-link">Link</a>
 </div>
 
+### Loader Buttons
+
+Buttons can be given a loading state with the `button-loader` modifier. This will make the button text invisible and display a loader using the `::after` pseudo-element. The button’s width will not be affected.
+
+```html
+<button type="button" class="button-loader button-small">Small</button>
+<button type="button" class="button-loader">Loader</button>
+<button type="button" class="button-loader button-big">Loader</button>
+```
+
+<div class="input-single">
+  <button type="button" class="button-loader button-small">Loader</button>
+  <button type="button" class="button-loader">Loader</button>
+  <button type="button" class="button-loader button-big">Loader</button>
+</div>
+
+Loader buttons also work with button variations.
+
+```html
+<button type="button" class="button-loader button-secondary">Button</button>
+<button type="button" class="button-loader button-success">Button</button>
+<button type="button" class="button-loader button-info">Button</button>
+<button type="button" class="button-loader button-warning">Button</button>
+<button type="button" class="button-loader button-danger">Button</button>
+<button type="button" class="button-loader button-light">Button</button>
+<button type="button" class="button-loader button-dark">Button</button>
+```
+
+<div class="input-single">
+  <button type="button" class="button-loader button-secondary">Button</button>
+  <button type="button" class="button-loader button-success">Button</button>
+  <button type="button" class="button-loader button-info">Button</button>
+  <button type="button" class="button-loader button-warning">Button</button>
+  <button type="button" class="button-loader button-danger">Button</button>
+  <button type="button" class="button-loader button-light">Button</button>
+  <button type="button" class="button-loader button-dark">Button</button>
+</div>
+
 ### File Buttons
 
 File inputs are notoriously hard to style properly in every browser. Shoelace offers file buttons as an alternative. These are much easier to style consistently, but come with the caveat that the name (or number) of files selected will not be automatically shown to the user. This aspect of a file button’s UX can be handled effectively with JavaScript, but this is left as an [exercise for the user](https://stackoverflow.com/questions/2189615/how-to-get-file-name-when-user-select-a-file-via-input-type-file).
