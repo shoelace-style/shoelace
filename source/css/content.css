@@ -90,7 +90,8 @@ a {
   text-decoration: var(--link-text-decoration);
 }
 
-a:hover {
+a:hover,
+a:focus {
   color: var(--link-color-hover);
   text-decoration: var(--link-text-decoration-hover);
 }

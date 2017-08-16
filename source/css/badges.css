@@ -22,7 +22,8 @@
   display: none;
 }
 
-a.badge:hover {
+a.badge:hover,
+a.badge:focus {
   color: var(--badge-color);
   text-decoration: none;
   box-shadow: var(--badge-box-shadow-hover);
@@ -50,13 +51,15 @@ a.badge:hover {
 }
 
 .badge-light,
-a.badge-light:hover {
+a.badge-light:hover,
+a.badge-light:focus {
   color: var(--state-dark);
   background-color: var(--state-light);
 }
 
 .badge-dark,
-a.badge-dark:hover {
+a.badge-dark:hover,
+a.badge-dark:focus {
   color: var(--state-light);
   background-color: var(--state-dark);
 }

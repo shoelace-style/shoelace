@@ -78,13 +78,17 @@ button,
 }
 
 button:hover,
-.button:hover {
+button:focus,
+.button:hover,
+.button:focus {
   color: var(--button-color);
   text-decoration: none;
 }
 
 button:hover:not(:disabled),
-.button:hover:not(.disabled) {
+button:focus:not(:disabled),
+.button:hover:not(.disabled),
+.button:focus:not(.disabled) {
   color: var(--button-color);
   box-shadow: var(--button-box-shadow-hover);
 }
@@ -109,7 +113,8 @@ label.button input[type="file"] {
 
 /* Loader buttons */
 .button-loader,
-.button-loader:hover {
+.button-loader:hover,
+.button-loader:focus {
   position: relative;
   min-width: calc(var(--button-loader-size) * 2);
   color: transparent !important;
@@ -164,14 +169,18 @@ label.button input[type="file"] {
 
 .button-light,
 button.button-light:hover:not(:disabled),
-.button-light:hover:not(.disabled) {
+button.button-light:focus:not(:disabled),
+.button-light:hover:not(.disabled),
+.button-light:focus:not(.disabled) {
   color: var(--state-dark);
   background-color: var(--state-light);
 }
 
 .button-dark,
 button.button-dark:hover:not(:disabled),
-.button-dark:hover:not(.disabled) {
+button.button-dark:focus:not(:disabled),
+.button-dark:hover:not(.disabled),
+.button-dark:focus:not(.disabled) {
   color: var(--state-light);
   background-color: var(--state-dark);
 }
