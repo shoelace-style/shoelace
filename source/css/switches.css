@@ -17,10 +17,19 @@
 
 .switch {
   font-size: var(--switch-font-size);
+  position: relative;
 }
 
 .switch input {
-  display: none;
+  position: absolute;
+  height: 1px;
+  width: 1px;
+  background: none;
+  border: 0;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  overflow: hidden;
+  padding: 0;
 }
 
 .switch input + label {
@@ -75,6 +84,10 @@
 .switch input:disabled + label {
   opacity: .5;
   cursor: not-allowed;
+}
+
+.switch input:focus + label {
+  outline: 1px dotted;
 }
 
 .switch-small {
