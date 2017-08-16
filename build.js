@@ -5,9 +5,9 @@ global.__version = require('./package.json').version;
 
 const Promise = require('bluebird');
 const AtImport = require('postcss-import');
-const Autoprefixer = require('autoprefixer');
 const Chalk = require('chalk');
 const CSSnano = require('cssnano');
+const CSSnext = require('postcss-cssnext');
 const Del = require('del');
 const FS = Promise.promisifyAll(require('fs'));
 const Layouts = require('metalsmith-layouts');
@@ -59,7 +59,7 @@ function buildDocs() {
             reject(err);
             return;
           }
-          console.log(Chalk.green('Docs have been generated! 📚'));
+          console.log(Chalk.green('Docs generated! 📚'));
 
           resolve();
         });
@@ -102,16 +102,16 @@ function buildScripts() {
 
     // Write minified scripts to dist
     .then((scripts) => {
-      let shoelaceJS = Path.join(__dirname, 'dist/shoelace.js');
+      let file = Path.join(__dirname, 'dist/shoelace.js');
 
       // Update {{version}} in JS since it's not processed with Handlebars
       scripts = scripts.replace(/\{\{version\}\}/g, __version);
 
       // Output a message
-      console.log(Chalk.green('JS Minified: %s! 💪'), Path.relative(__dirname, shoelaceJS));
+      console.log(Chalk.green('JS processed: %s! 🐭'), Path.relative(__dirname, file));
 
       // Write output file
-      return FS.writeFileAsync(shoelaceJS, scripts, 'utf8');
+      return FS.writeFileAsync(file, scripts, 'utf8');
     });
 }
 
@@ -130,32 +130,36 @@ function buildStyles() {
     })
 
     // Generate minified stylesheet
-    .then(() => new Promise((resolve, reject) => {
-      let shoelaceCSS = Path.join(__dirname, 'source/css/shoelace.css');
-      let css = FS.readFileSync(shoelaceCSS, 'utf8');
+    .then(() => {
+      let file = Path.join(__dirname, 'source/css/shoelace.css');
+      let css = FS.readFileSync(file, 'utf8');
 
-      PostCSS([
+      return PostCSS([
         AtImport,
-        Autoprefixer({ browsers: ['last 2 versions', '> 5%', 'ie >= 11', 'iOS >= 8'] }),
-        CSSnano({ safe: true })
-      ])
-        .process(css, { from: shoelaceCSS })
-        .then((result) => resolve(result.css))
-        .catch((err) => reject(err));
-    }))
+        CSSnext({
+          features: {
+            rem: false
+          }
+        }),
+        CSSnano({
+          autoprefixer: false,
+          safe: true
+        })
+      ]).process(css, { from: file });
+    })
 
     // Write stylesheet to dist
-    .then((styles) => {
-      let shoelaceCSS = Path.join(__dirname, 'dist/shoelace.css');
+    .then((result) => {
+      let file = Path.join(__dirname, 'dist/shoelace.css');
 
       // Update {{version}} in CSS since it's not processed with Handlebars
-      styles = styles.replace(/\{\{version\}\}/g, __version);
+      result.css = result.css.replace(/\{\{version\}\}/g, __version);
 
       // Output a message
-      console.log(Chalk.green('CSS Minified: %s! 💪'), Path.relative(__dirname, shoelaceCSS));
+      console.log(Chalk.green('CSS processed: %s! 🦋'), Path.relative(__dirname, file));
 
       // Write output file
-      return FS.writeFileAsync(shoelaceCSS, styles, 'utf8');
+      return FS.writeFileAsync(file, result.css, 'utf8');
     });
 }
 

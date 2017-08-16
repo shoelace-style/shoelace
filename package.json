@@ -10,7 +10,6 @@
     "url": "https://github.com/claviska/shoelace-css"
   },
   "devDependencies": {
-    "autoprefixer": "^7.1.2",
     "bluebird": "^3.5.0",
     "chalk": "^2.1.0",
     "commander": "^2.11.0",
@@ -23,6 +22,7 @@
     "metalsmith-layouts": "^1.8.1",
     "metalsmith-markdown": "^0.2.1",
     "postcss": "^6.0.8",
+    "postcss-cssnext": "^3.0.2",
     "postcss-import": "^10.0.0",
     "uglify-js": "^3.0.27",
     "watch": "^1.0.2"
