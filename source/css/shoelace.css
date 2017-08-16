@@ -48,12 +48,12 @@
 
   /* States */
   --state-primary: tomato;
-  --state-secondary: #a5a5a5;
+  --state-secondary: var(--color-gray);
   --state-success: var(--color-green);
   --state-info: var(--color-teal);
   --state-warning: var(--color-orange);
   --state-danger: var(--color-red);
-  --state-light: #eee;
+  --state-light: var(--color-white);
   --state-dark: var(--color-black);
 
   /* Components */
