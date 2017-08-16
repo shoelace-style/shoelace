@@ -1,5 +1,5 @@
 body {
-  border-top: solid .3rem #7fdbff;
+  border-top: solid .3rem #0074d9;
 }
 
 #head {
@@ -38,10 +38,4 @@ pre code {
     padding: 0 1rem;
     display: block;
   }
-}
-
-/* Fix a known issue in Edge: https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/11495448/ */
-::selection {
-  background-color: tomato;
-  color: white;
 }
