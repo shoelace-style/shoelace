@@ -1,5 +1,5 @@
 body {
-  border-top: solid .3rem var(--color-aqua);
+  border-top: solid .3rem #7fdbff;
 }
 
 #head {
@@ -27,24 +27,19 @@ body {
 
 #nav {
   text-align: right;
-  border-right: solid var(--component-border-width) var(--component-border-color);
+  border-right: solid 1px #ddd;
   padding-right: 1rem;
   margin-right: 2rem;
 }
 
 #nav a {
-  border-radius: var(--component-border-radius);
   margin: .5rem 0;
   display: block;
 }
 
 #nav a.current {
-  color: var(--state-secondary);
+  color: #aaa;
   cursor: default;
-}
-
-#nav a.current:hover {
-
 }
 
 #foot {
@@ -109,7 +104,7 @@ h4[id]:not(:first-child) {
 
 h3[id],
 h4[id] {
-  color: var(--color-gray);
+  color: #aaa;
 }
 
 pre {
@@ -148,13 +143,13 @@ a code {
 
 /* Sizing examples */
 .width-sizing-example {
-  border: solid 1px var(--component-border-color);
+  border: solid 1px #ddd;
   padding: 1rem;
   margin-bottom: 1rem;
 }
 
 .width-sizing-example div {
-  background: var(--state-primary);
+  background: tomato;
   color: white;
   text-align: center;
   padding: .25rem;
@@ -166,7 +161,7 @@ a code {
 }
 
 .height-sizing-example {
-  border: solid 1px var(--component-border-color);
+  border: solid 1px #ddd;
   height: 15rem;
   padding: 1rem .5rem;
   margin-bottom: 1rem;
@@ -175,7 +170,7 @@ a code {
 .height-sizing-example div {
   width: calc(25% - 1rem);
   float: left;
-  background: var(--state-primary);
+  background: tomato;
   color: white;
   text-align: center;
   padding: .25rem;
@@ -187,7 +182,7 @@ a code {
   float: left;
   width: 6rem;
   height: 6rem;
-  border: dashed 1px var(--component-border-color);
+  border: dashed 1px #ddd;
   margin-right: .5rem;
 }
 
