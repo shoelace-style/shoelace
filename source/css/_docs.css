@@ -130,15 +130,14 @@ a code {
 
 /* Column helpers */
 .two-column {
-  column-count: 2;
-  column-gap: 1rem;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  margin-left: -.5rem;
+  margin-right: -.5rem;
 }
 
-@media (max-width: 50rem) {
-  .two-column {
-    column-count: 1;
-    column-gap: 0;
-  }
+.two-column .column {
+  padding: .5rem;
 }
 
 /* Sizing examples */
