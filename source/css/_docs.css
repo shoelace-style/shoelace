@@ -7,14 +7,10 @@ body {
   margin: 2rem 0;
 }
 
-#head a {
-  display: inline-block;
-}
-
 #head img {
   width: 24rem;
   margin: 0 auto;
-  display: block;
+  display: inline-block;
 }
 
 #wrap {

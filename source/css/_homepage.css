@@ -10,7 +10,7 @@ body {
 #head img {
   width: 24rem;
   margin: 0 auto;
-  display: block;
+  display: inline-block;
 }
 
 #wrap {
