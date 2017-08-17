@@ -38,7 +38,8 @@
   display: inline-block;
 }
 
-.tabs-nav a:hover {
+.tabs-nav a:hover,
+.tabs-nav a:focus {
   color: var(--tab-color-hover);
   background-color: var(--tab-bg-color-hover);
   text-decoration: none;
