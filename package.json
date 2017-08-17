@@ -24,6 +24,7 @@
     "postcss": "^6.0.8",
     "postcss-cssnext": "^3.0.2",
     "postcss-import": "^10.0.0",
+    "stylelint-config-standard": "^17.0.0",
     "uglify-js": "^3.0.27",
     "watch": "^1.0.2"
   },

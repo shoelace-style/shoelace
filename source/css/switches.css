@@ -63,7 +63,7 @@
   transition: background-color var(--switch-speed);
 }
 
-.switch input + label:after {
+.switch input + label::after {
   top: var(--switch-thumb-spacing);
   left: var(--switch-thumb-spacing);
   width: calc(var(--switch-height) - var(--switch-thumb-spacing) * 2);
@@ -105,7 +105,7 @@
   width: calc(var(--switch-height-small) * 2);
 }
 
-.switch-small input + label:after {
+.switch-small input + label::after {
   width: calc(var(--switch-height-small) - var(--switch-thumb-spacing) * 2);
   height: calc(var(--switch-height-small) - var(--switch-thumb-spacing) * 2);
 }
@@ -129,7 +129,7 @@
   width: calc(var(--switch-height-big) * 2);
 }
 
-.switch-big input + label:after {
+.switch-big input + label::after {
   width: calc(var(--switch-height-big) - var(--switch-thumb-spacing) * 2);
   height: calc(var(--switch-height-big) - var(--switch-thumb-spacing) * 2);
 }

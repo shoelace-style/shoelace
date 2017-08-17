@@ -4,8 +4,8 @@
   --table-border-color: var(--component-border-color);
   --table-border-width: var(--component-border-width);
   --table-header-bg-color: transparent;
-  --table-spacing-x: 0.75rem;
-  --table-spacing-y: 0.5rem;
+  --table-spacing-x: .75rem;
+  --table-spacing-y: .5rem;
   --table-hover-color: var(--color-white);
   --table-hover-bg-color: var(--state-primary);
   --table-stripe-bg-color: var(--component-bg-color);

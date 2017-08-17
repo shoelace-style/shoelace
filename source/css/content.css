@@ -68,7 +68,9 @@ html {
   box-sizing: border-box;
 }
 
-*, *:before, *:after {
+*,
+*::before,
+*::after {
   box-sizing: inherit;
 }
 
@@ -100,7 +102,8 @@ abbr[title] {
   border-bottom: dashed 2px currentcolor;
 }
 
-b, strong {
+b,
+strong {
   font-weight: var(--font-weight-bold);
 }
 

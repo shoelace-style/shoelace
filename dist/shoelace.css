@@ -470,7 +470,9 @@ html {
           box-sizing: border-box;
 }
 
-*, *:before, *:after {
+*,
+*::before,
+*::after {
   -webkit-box-sizing: inherit;
           box-sizing: inherit;
 }
@@ -503,7 +505,8 @@ abbr[title] {
   border-bottom: dashed 2px currentcolor;
 }
 
-b, strong {
+b,
+strong {
   font-weight: 700;
 }
 
@@ -1201,7 +1204,7 @@ input[type="color"] {
 }
 
 input[type="color"]::-webkit-color-swatch-wrapper {
-	padding: 0;
+  padding: 0;
 }
 
 input[type="color"]::-webkit-color-swatch {
@@ -1862,7 +1865,7 @@ progress {
   transition: background-color .2s;
 }
 
-.switch input + label:after {
+.switch input + label::after {
   top: 2px;
   left: 2px;
   width: calc(2rem - 4px);
@@ -1905,7 +1908,7 @@ progress {
   width: 2.5rem;
 }
 
-.switch-small input + label:after {
+.switch-small input + label::after {
   width: calc(1.25rem - 4px);
   height: calc(1.25rem - 4px);
 }
@@ -1929,7 +1932,7 @@ progress {
   width: 5.5rem;
 }
 
-.switch-big input + label:after {
+.switch-big input + label::after {
   width: calc(2.75rem - 4px);
   height: calc(2.75rem - 4px);
 }
@@ -2050,19 +2053,19 @@ table caption {
   font-size: .875rem;
   color: #aaa;
   text-align: center;
-  padding-top: 0.5rem;
+  padding-top: .5rem;
 }
 
 table th {
   text-align: left;
   background: transparent;
   border-bottom: solid 2px #ddd;
-  padding: 0.5rem 0.75rem;
+  padding: .5rem .75rem;
 }
 
 table td {
   border-bottom: solid 1px #ddd;
-  padding: 0.5rem 0.75rem;
+  padding: .5rem .75rem;
 }
 
 table.table-bordered {
