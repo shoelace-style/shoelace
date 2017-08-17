@@ -229,13 +229,11 @@ ul {
   line-height: var(--line-height);
   margin-top: 0;
   margin-bottom: 1rem;
-}
 
-ol ol,
-ol ul,
-ul ol,
-ul ul {
-  margin-bottom: 0;
+  & ol,
+  & ul {
+    margin-bottom: 0;
+  }
 }
 
 /***************************************************************************************************
