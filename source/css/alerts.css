@@ -1,7 +1,7 @@
 /*! Alerts */
 :root {
   --alert-border-radius: var(--component-border-radius);
-  --alert-border-width: 2px;
+  --alert-border-width: 1px;
   --alert-padding-x: var(--component-padding-x);
   --alert-padding-y: var(--component-padding-y);
 
@@ -63,7 +63,7 @@
 
   & a {
     color: currentcolor;
-    text-decoration: underline;
+    font-weight: var(--font-weight-bold);
   }
 
   & :last-child {
