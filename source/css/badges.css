@@ -2,6 +2,7 @@
 :root {
   --badge-font-size: .8em; /* ems for relative sizing */
   --badge-border-radius: 1em;  /* ems for relative sizing */
+  --badge-speed: .2s;
 
   /* Default */
   --badge-color: var(--color-white);
@@ -44,7 +45,7 @@
   padding: .2em .6em;
   vertical-align: baseline;
   display: inline-block;
-  transition: .1s box-shadow, .1s background-color, .1s color;
+  transition: var(--badge-speed) all;
 
   &:empty {
     display: none;
