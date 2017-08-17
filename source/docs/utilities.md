@@ -114,14 +114,14 @@ Background utility classes can be applied to change an element’s background co
 <div class="bg-dark">Dark</div>
 ```
 
-<div class="margin-bottom-small padding-small bg-primary text-light">Primary</div>
-<div class="margin-bottom-small padding-small bg-secondary text-light">Secondary</div>
-<div class="margin-bottom-small padding-small bg-success text-light">Success</div>
-<div class="margin-bottom-small padding-small bg-info text-light">Info</div>
-<div class="margin-bottom-small padding-small bg-warning text-light">Warning</div>
-<div class="margin-bottom-small padding-small bg-danger text-light">Danger</div>
-<div class="margin-bottom-small padding-small bg-light text-dark">Light</div>
-<div class="margin-bottom-small padding-small bg-dark text-light">Dark</div>
+<div class="mar-b-sm pad-sm bg-primary text-light">Primary</div>
+<div class="mar-b-sm pad-sm bg-secondary text-light">Secondary</div>
+<div class="mar-b-sm pad-sm bg-success text-light">Success</div>
+<div class="mar-b-sm pad-sm bg-info text-light">Info</div>
+<div class="mar-b-sm pad-sm bg-warning text-light">Warning</div>
+<div class="mar-b-sm pad-sm bg-danger text-light">Danger</div>
+<div class="mar-b-sm pad-sm bg-light text-dark">Light</div>
+<div class="mar-b-sm pad-sm bg-dark text-light">Dark</div>
 
 ### Float Utilities
 
@@ -165,30 +165,30 @@ You can also use the `max-width-100` and `max-height-100` classes to set a max w
 
 Spacing utilities can be used to add or remove paddings and margins to any element. Just apply the desired class and the appropriate element will receive the respective padding/margin.
 
-Class names are prefixed with `padding-` or `margin-` for padding and margin, respectively. To apply spacing to all sides of an element, use the following classes:
+Class names are prefixed with `pad-` or `mar-` for padding and margin, respectively. To apply spacing to all sides of an element, use the following classes.
 
 ```
-padding-[none|small|medium|big]
-margin-[none|small|medium|big]
-```
-
-Example:
-
-```html
-<div class="padding-none margin-big">
-```
-
-To apply spacing to a specific side of an element, use one or more of the following classes:
-
-```
-padding-[top|right|bottom|left|x|y]-[none|small|medium|big]
-margin-[top|right|bottom|left|x|y]-[none|small|medium|big]
+pad-[0|xs|sm|md|lg|xl]
+mar-[0|xs|sm|md|lg|xl]
 ```
 
 Example:
 
 ```html
-<div class="padding-left-medium margin-bottom-none">
+<div class="pad-0 mar-xl">
 ```
 
-You can also use `margin-[x|y|xy]-auto` to set automatic margins horizontally and/or vertically.
+To apply spacing to a specific side of an element, use one or more of the following classes.
+
+```
+pad-[t|r|b|l|x|y]-[0|xs|sm|md|lg|xl]
+mar-[t|r|b|l|x|y]-[0|xs|sm|md|lg|xl]
+```
+
+Example:
+
+```html
+<div class="pad-l-md mar-b-0">
+```
+
+You can also use `mar-[x|y|xy]-auto` to set automatic margins horizontally and/or vertically.
