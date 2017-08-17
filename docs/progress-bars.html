@@ -49,30 +49,46 @@
     <div id="content">
       <h2 id="progress-bars">Progress Bars</h2>
 <p>HTML5 introduced the <code>&lt;progress&gt;</code> element, but it’s not currently possible to style consistently in all browsers. As a result, Shoelace offers a custom alternative.</p>
-<p>Create a progress bar with the following markup. Use the <code>progress-small</code> and <code>progress-big</code> modifiers to change the size. To set the state, use a <a href="utilities.html#sizing-utilities">sizing utility</a> or set the width explicitly on the <code>progress-bar</code> element.</p>
+<p>Create a progress bar with the following markup. Use the <code>progress-[xs|sm|lg|xl]</code> modifiers to change the size. To set the state, use a <a href="utilities.html#sizing-utilities">sizing utility</a> or set the width explicitly on the <code>progress-bar</code> element.</p>
 <p>An optional text label can be included inside the <code>progress-bar</code> element.</p>
-<pre><code class="lang-html">&lt;div class=&quot;progress progress-small&quot;&gt;
-  &lt;div class=&quot;progress-bar w-25&quot;&gt;25%&lt;/div&gt;
+<pre><code class="lang-html">&lt;div class=&quot;progress progress-xs&quot;&gt;
+  &lt;div class=&quot;progress-bar w-20&quot;&gt;20%&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;progress progress-sm&quot;&gt;
+  &lt;div class=&quot;progress-bar w-40&quot;&gt;40%&lt;/div&gt;
 &lt;/div&gt;
 
 &lt;div class=&quot;progress&quot;&gt;
-  &lt;div class=&quot;progress-bar w-50&quot;&gt;50%&lt;/div&gt;
+  &lt;div class=&quot;progress-bar w-60&quot;&gt;60%&lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div class=&quot;progress progress-big&quot;&gt;
-  &lt;div class=&quot;progress-bar w-75&quot;&gt;75%&lt;/div&gt;
+&lt;div class=&quot;progress progress-lg&quot;&gt;
+  &lt;div class=&quot;progress-bar w-70&quot;&gt;80%&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;progress progress-xl&quot;&gt;
+  &lt;div class=&quot;progress-bar w-100&quot;&gt;100%&lt;/div&gt;
 &lt;/div&gt;
 </code></pre>
-<div class="progress progress-small">
-  <div class="progress-bar w-25">25%</div>
+<div class="progress progress-xs">
+  <div class="progress-bar w-20">20%</div>
+</div>
+
+<div class="progress progress-sm">
+  <div class="progress-bar w-40">40%</div>
 </div>
 
 <div class="progress">
-  <div class="progress-bar w-50">50%</div>
+  <div class="progress-bar w-60">60%</div>
 </div>
 
-<div class="progress progress-big">
-  <div class="progress-bar w-75">75%</div>
+<div class="progress progress-lg">
+  <div class="progress-bar w-70">80%</div>
+</div>
+
+<div class="progress progress-xl">
+  <div class="progress-bar w-100">100%</div>
 </div>
 
 <p>When progress can’t be determined, use the <code>progress-indeterminate</code> modifier to set an indeterminate state.</p>

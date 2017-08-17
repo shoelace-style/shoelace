@@ -1,28 +1,22 @@
 /*! Progress Bars */
 :root {
-  --progress-font-size: var(--input-font-size);
-  --progress-font-size-small: var(--input-font-size-small);
-  --progress-font-size-big: var(--input-font-size-big);
   --progress-height: var(--input-height);
-  --progress-height-small: var(--input-height-small);
-  --progress-height-big: var(--input-height-big);
+  --progress-height-xs: var(--input-height-xs);
+  --progress-height-sm: var(--input-height-sm);
+  --progress-height-lg: var(--input-height-lg);
+  --progress-height-xl: var(--input-height-xl);
+  --progress-font-size: var(--input-font-size);
+  --progress-font-size-xs: var(--input-font-size-xs);
+  --progress-font-size-sm: var(--input-font-size-sm);
+  --progress-font-size-lg: var(--input-font-size-lg);
+  --progress-font-size-xl: var(--input-font-size-xl);
   --progress-color: var(--color-white);
   --progress-bg-color: var(--component-bg-color);
-  --progress-bar-bg-color: var(--state-primary);
+  --progress-bar-color: var(--state-primary);
   --progress-border-radius: var(--component-border-radius);
   --progress-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
-  --progress-speed-change: .2s;
-  --progress-speed-indeterminate: 1.5s;
-}
-
-@keyframes progress-indeterminate {
-  0% {
-    left: -50%;
-  }
-
-  100% {
-    left: 100%;
-  }
+  --progress-speed: .2s;
+  --progress-speed-indeterminate: 3s;
 }
 
 .progress {
@@ -37,70 +31,111 @@
   overflow: hidden;
   margin-bottom: 1rem;
   box-shadow: var(--progress-box-shadow);
+
+  & .progress-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    text-align: center;
+    color: var(--progress-color);
+    background-color: var(--progress-bar-color);
+    transition: var(--progress-speed) width;
+    user-select: none;
+    cursor: default;
+  }
+
+  &.progress-indeterminate .progress-bar {
+    width: 75% !important;
+    animation: progress-indeterminate ease-in-out var(--progress-speed-indeterminate) infinite;
+  }
+
+  /* Sizes */
+  &.progress-xs {
+    font-size: var(--progress-font-size-xs);
+    height: var(--progress-height-xs);
+    line-height: var(--progress-height-xs);
+  }
+
+  &.progress-sm {
+    font-size: var(--progress-font-size-sm);
+    height: var(--progress-height-sm);
+    line-height: var(--progress-height-sm);
+  }
+
+  &.progress-lg {
+    font-size: var(--progress-font-size-lg);
+    height: var(--progress-height-lg);
+    line-height: var(--progress-height-lg);
+  }
+
+  &.progress-xl {
+    font-size: var(--progress-font-size-xl);
+    height: var(--progress-height-xl);
+    line-height: var(--progress-height-xl);
+  }
+
+  /* Variations */
+  &.progress-secondary {
+    & .progress-bar {
+      background-color: var(--state-secondary);
+    }
+  }
+
+  &.progress-success {
+    & .progress-bar {
+      background-color: var(--state-success);
+    }
+  }
+
+  &.progress-info {
+    & .progress-bar {
+      background-color: var(--state-info);
+    }
+  }
+
+  &.progress-warning {
+    & .progress-bar {
+      background-color: var(--state-warning);
+    }
+  }
+
+  &.progress-danger {
+    & .progress-bar {
+      background-color: var(--state-danger);
+    }
+  }
+
+  &.progress-light {
+    background-color: var(--state-dark);
+
+    & .progress-bar {
+      color: var(--state-dark);
+      background-color: var(--state-light);
+    }
+  }
+
+  &.progress-dark {
+    background-color: var(--state-light);
+
+    & .progress-bar {
+      color: var(--state-light);
+      background-color: var(--state-dark);
+    }
+  }
 }
 
-.progress-bar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 100%;
-  text-align: center;
-  color: var(--progress-color);
-  background-color: var(--progress-bar-bg-color);
-  transition: var(--progress-speed-change) width;
-  user-select: none;
-  cursor: default;
-}
+@keyframes progress-indeterminate {
+  0% {
+    left: -65%;
+  }
 
-.progress-small {
-  font-size: var(--progress-font-size-small);
-  height: var(--progress-height-small);
-  line-height: var(--progress-height-small);
-}
+  50% {
+    left: 90%;
+  }
 
-.progress-big {
-  font-size: var(--progress-font-size-big);
-  height: var(--progress-height-big);
-  line-height: var(--progress-height-big);
-}
-
-.progress-indeterminate .progress-bar {
-  width: 50% !important;
-  animation: progress-indeterminate linear var(--progress-speed-indeterminate) infinite;
-}
-
-/* Variations */
-.progress-secondary .progress-bar {
-  background-color: var(--state-secondary);
-}
-
-.progress-success .progress-bar {
-  background-color: var(--state-success);
-}
-
-.progress-info .progress-bar {
-  background-color: var(--state-info);
-}
-
-.progress-warning .progress-bar {
-  background-color: var(--state-warning);
-}
-
-.progress-danger .progress-bar {
-  background-color: var(--state-danger);
-}
-
-.progress-light {
-  background-color: var(--state-dark);
-}
-
-.progress-light .progress-bar {
-  color: var(--state-dark);
-  background-color: var(--state-light);
-}
-
-.progress-dark .progress-bar {
-  color: var(--state-light);
-  background-color: var(--state-dark);
+  100% {
+    left: -65%;
+  }
 }
