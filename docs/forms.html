@@ -138,22 +138,55 @@
   </tbody>
 </table>
 
-<p>You can change the size of most form controls with the <code>input-small</code> and <code>input-big</code> modifiers.</p>
-<pre><code class="lang-html">&lt;input type=&quot;text&quot; class=&quot;input-small&quot; placeholder=&quot;Small&quot;&gt;
+<p>You can change the size of most form controls with the <code>input-[xs|sm|lg|xl]</code> modifiers.</p>
+<pre><code class="lang-html">&lt;input type=&quot;text&quot; class=&quot;input-xs&quot; placeholder=&quot;XS&quot;&gt;
+&lt;input type=&quot;text&quot; class=&quot;input-sm&quot; placeholder=&quot;SM&quot;&gt;
 &lt;input type=&quot;text&quot; placeholder=&quot;Default&quot;&gt;
-&lt;input type=&quot;text&quot; class=&quot;input-big&quot; placeholder=&quot;Big&quot;&gt;
+&lt;input type=&quot;text&quot; class=&quot;input-lg&quot; placeholder=&quot;LG&quot;&gt;
+&lt;input type=&quot;text&quot; class=&quot;input-xl&quot; placeholder=&quot;XL&quot;&gt;
 
-&lt;select class=&quot;input-small&quot;&gt;&lt;option&gt;Item&lt;/option&gt;&lt;/select&gt;
+&lt;select class=&quot;input-xs&quot;&gt;&lt;option&gt;Item&lt;/option&gt;&lt;/select&gt;
+&lt;select class=&quot;input-sm&quot;&gt;&lt;option&gt;Item&lt;/option&gt;&lt;/select&gt;
 &lt;select&gt;&lt;option&gt;Item&lt;/option&gt;&lt;/select&gt;
-&lt;select class=&quot;input-big&quot;&gt;&lt;option&gt;Item&lt;/option&gt;&lt;/select&gt;
+&lt;select class=&quot;input-lg&quot;&gt;&lt;option&gt;Item&lt;/option&gt;&lt;/select&gt;
+&lt;select class=&quot;input-xl&quot;&gt;&lt;option&gt;Item&lt;/option&gt;&lt;/select&gt;
 </code></pre>
 <div class="two-column">
-  <p><input type="text" class="input-small" placeholder="Small"></p>
-  <p><input type="text" placeholder="Default"></p>
-  <p><input type="text" class="input-big" placeholder="Big"></p>
-  <p><select class="input-small"><option>Item</option></select></p>
-  <p><select><option>Item</option></select></p>
-  <p><select class="input-big"><option>Item</option></select></p>
+  <div class="column">
+    <div class="input-single">
+      <input type="text" class="input-xs" placeholder="XS">
+    </div>
+    <div class="input-single">
+      <input type="text" class="input-sm" placeholder="SM">
+    </div>
+    <div class="input-single">
+      <input type="text" placeholder="Default">
+    </div>
+    <div class="input-single">
+      <input type="text" class="input-lg" placeholder="LG">
+    </div>
+    <div class="input-single">
+      <input type="text" class="input-xl" placeholder="XL">
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="input-single">
+      <select class="input-xs"><option>XS</option></select>
+    </div>
+    <div class="input-single">
+      <select class="input-sm"><option>SM</option></select>
+    </div>
+    <div class="input-single">
+      <select><option>Default</option></select>
+    </div>
+    <div class="input-single">
+      <select class="input-lg"><option>LG</option></select>
+    </div>
+    <div class="input-single">
+      <select class="input-xl"><option>XL</option></select>
+    </div>
+  </div>
 </div>
 
 <p>Disabled form controls look like this:</p>
@@ -250,11 +283,17 @@
 </div>
 
 <h3 id="input-addons">Input Addons</h3>
-<p>To create an input addon, use <code>&lt;span class=&quot;input-addon&quot;&gt;</code>. Addons can appear anywhere inside an input group. Use the <code>input-addon-small</code> and <code>input-addon-big</code> modifiers to change the size to match adjacent form controls.</p>
+<p>To create an input addon, use <code>&lt;span class=&quot;input-addon&quot;&gt;</code>. Addons can appear anywhere inside an input group. Use the <code>input-addon-[xs|sm|lg|xl]</code> modifiers to change the size to match adjacent form controls.</p>
 <pre><code class="lang-html">&lt;div class=&quot;input-group&quot;&gt;
-  &lt;span class=&quot;input-addon input-addon-small&quot;&gt;$&lt;/span&gt;
-  &lt;input type=&quot;text&quot; class=&quot;input-small&quot;&gt;
-  &lt;span class=&quot;input-addon input-addon-small&quot;&gt;.00&lt;/span&gt;
+  &lt;span class=&quot;input-addon input-addon-xs&quot;&gt;$&lt;/span&gt;
+  &lt;input type=&quot;text&quot; class=&quot;input-xs&quot;&gt;
+  &lt;span class=&quot;input-addon input-addon-xs&quot;&gt;.00&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;input-group&quot;&gt;
+  &lt;span class=&quot;input-addon input-addon-sm&quot;&gt;$&lt;/span&gt;
+  &lt;input type=&quot;text&quot; class=&quot;input-sm&quot;&gt;
+  &lt;span class=&quot;input-addon input-addon-sm&quot;&gt;.00&lt;/span&gt;
 &lt;/div&gt;
 
 &lt;div class=&quot;input-group&quot;&gt;
@@ -264,16 +303,30 @@
 &lt;/div&gt;
 
 &lt;div class=&quot;input-group&quot;&gt;
-  &lt;span class=&quot;input-addon input-addon-big&quot;&gt;$&lt;/span&gt;
-  &lt;input type=&quot;text&quot; class=&quot;input-big&quot;&gt;
-  &lt;span class=&quot;input-addon input-addon-big&quot;&gt;.00&lt;/span&gt;
+  &lt;span class=&quot;input-addon input-addon-lg&quot;&gt;$&lt;/span&gt;
+  &lt;input type=&quot;text&quot; class=&quot;input-lg&quot;&gt;
+  &lt;span class=&quot;input-addon input-addon-lg&quot;&gt;.00&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;input-group&quot;&gt;
+  &lt;span class=&quot;input-addon input-addon-xl&quot;&gt;$&lt;/span&gt;
+  &lt;input type=&quot;text&quot; class=&quot;input-xl&quot;&gt;
+  &lt;span class=&quot;input-addon input-addon-xl&quot;&gt;.00&lt;/span&gt;
 &lt;/div&gt;
 </code></pre>
 <div class="input-single">
   <div class="input-group">
-    <span class="input-addon input-addon-small">$</span>
-    <input type="text" class="input-small">
-    <span class="input-addon input-addon-small">.00</span>
+    <span class="input-addon input-addon-xs">$</span>
+    <input type="text" class="input-xs">
+    <span class="input-addon input-addon-xs">.00</span>
+  </div>
+</div>
+
+<div class="input-single">
+  <div class="input-group">
+    <span class="input-addon input-addon-sm">$</span>
+    <input type="text" class="input-sm">
+    <span class="input-addon input-addon-sm">.00</span>
   </div>
 </div>
 
@@ -287,9 +340,17 @@
 
 <div class="input-single">
   <div class="input-group">
-    <span class="input-addon input-addon-big">$</span>
-    <input type="text" class="input-big">
-    <span class="input-addon input-addon-big">.00</span>
+    <span class="input-addon input-addon-lg">$</span>
+    <input type="text" class="input-lg">
+    <span class="input-addon input-addon-lg">.00</span>
+  </div>
+</div>
+
+<div class="input-single">
+  <div class="input-group">
+    <span class="input-addon input-addon-xl">$</span>
+    <input type="text" class="input-xl">
+    <span class="input-addon input-addon-xl">.00</span>
   </div>
 </div>
 
@@ -333,14 +394,18 @@
 &lt;/div&gt;
 </code></pre>
 <div class="two-column">
-  <div class="input-single input-valid">
-    <label>Valid</label>
-    <input type="text">
+  <div class="column">
+    <div class="input-single input-valid">
+      <label>Valid</label>
+      <input type="text">
+    </div>
   </div>
 
-  <div class="input-single input-invalid">
-    <label>Invalid</label>
-    <input type="text">
+  <div class="column">
+    <div class="input-single input-invalid">
+      <label>Invalid</label>
+      <input type="text">
+    </div>
   </div>
 </div>
 

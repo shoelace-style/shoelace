@@ -99,25 +99,58 @@ Form controls are styled at 100% of the width of their parent element.
   </tbody>
 </table>
 
-You can change the size of most form controls with the `input-small` and `input-big` modifiers.
+You can change the size of most form controls with the `input-[xs|sm|lg|xl]` modifiers.
 
 ```html
-<input type="text" class="input-small" placeholder="Small">
+<input type="text" class="input-xs" placeholder="XS">
+<input type="text" class="input-sm" placeholder="SM">
 <input type="text" placeholder="Default">
-<input type="text" class="input-big" placeholder="Big">
+<input type="text" class="input-lg" placeholder="LG">
+<input type="text" class="input-xl" placeholder="XL">
 
-<select class="input-small"><option>Item</option></select>
+<select class="input-xs"><option>Item</option></select>
+<select class="input-sm"><option>Item</option></select>
 <select><option>Item</option></select>
-<select class="input-big"><option>Item</option></select>
+<select class="input-lg"><option>Item</option></select>
+<select class="input-xl"><option>Item</option></select>
 ```
 
 <div class="two-column">
-  <p><input type="text" class="input-small" placeholder="Small"></p>
-  <p><input type="text" placeholder="Default"></p>
-  <p><input type="text" class="input-big" placeholder="Big"></p>
-  <p><select class="input-small"><option>Item</option></select></p>
-  <p><select><option>Item</option></select></p>
-  <p><select class="input-big"><option>Item</option></select></p>
+  <div class="column">
+    <div class="input-single">
+      <input type="text" class="input-xs" placeholder="XS">
+    </div>
+    <div class="input-single">
+      <input type="text" class="input-sm" placeholder="SM">
+    </div>
+    <div class="input-single">
+      <input type="text" placeholder="Default">
+    </div>
+    <div class="input-single">
+      <input type="text" class="input-lg" placeholder="LG">
+    </div>
+    <div class="input-single">
+      <input type="text" class="input-xl" placeholder="XL">
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="input-single">
+      <select class="input-xs"><option>XS</option></select>
+    </div>
+    <div class="input-single">
+      <select class="input-sm"><option>SM</option></select>
+    </div>
+    <div class="input-single">
+      <select><option>Default</option></select>
+    </div>
+    <div class="input-single">
+      <select class="input-lg"><option>LG</option></select>
+    </div>
+    <div class="input-single">
+      <select class="input-xl"><option>XL</option></select>
+    </div>
+  </div>
 </div>
 
 Disabled form controls look like this:
@@ -225,13 +258,19 @@ Form controls and buttons can be grouped by wrapping them in `input-group` conta
 
 ### Input Addons
 
-To create an input addon, use `<span class="input-addon">`. Addons can appear anywhere inside an input group. Use the `input-addon-small` and `input-addon-big` modifiers to change the size to match adjacent form controls.
+To create an input addon, use `<span class="input-addon">`. Addons can appear anywhere inside an input group. Use the `input-addon-[xs|sm|lg|xl]` modifiers to change the size to match adjacent form controls.
 
 ```html
 <div class="input-group">
-  <span class="input-addon input-addon-small">$</span>
-  <input type="text" class="input-small">
-  <span class="input-addon input-addon-small">.00</span>
+  <span class="input-addon input-addon-xs">$</span>
+  <input type="text" class="input-xs">
+  <span class="input-addon input-addon-xs">.00</span>
+</div>
+
+<div class="input-group">
+  <span class="input-addon input-addon-sm">$</span>
+  <input type="text" class="input-sm">
+  <span class="input-addon input-addon-sm">.00</span>
 </div>
 
 <div class="input-group">
@@ -241,17 +280,31 @@ To create an input addon, use `<span class="input-addon">`. Addons can appear an
 </div>
 
 <div class="input-group">
-  <span class="input-addon input-addon-big">$</span>
-  <input type="text" class="input-big">
-  <span class="input-addon input-addon-big">.00</span>
+  <span class="input-addon input-addon-lg">$</span>
+  <input type="text" class="input-lg">
+  <span class="input-addon input-addon-lg">.00</span>
+</div>
+
+<div class="input-group">
+  <span class="input-addon input-addon-xl">$</span>
+  <input type="text" class="input-xl">
+  <span class="input-addon input-addon-xl">.00</span>
 </div>
 ```
 
 <div class="input-single">
   <div class="input-group">
-    <span class="input-addon input-addon-small">$</span>
-    <input type="text" class="input-small">
-    <span class="input-addon input-addon-small">.00</span>
+    <span class="input-addon input-addon-xs">$</span>
+    <input type="text" class="input-xs">
+    <span class="input-addon input-addon-xs">.00</span>
+  </div>
+</div>
+
+<div class="input-single">
+  <div class="input-group">
+    <span class="input-addon input-addon-sm">$</span>
+    <input type="text" class="input-sm">
+    <span class="input-addon input-addon-sm">.00</span>
   </div>
 </div>
 
@@ -265,9 +318,17 @@ To create an input addon, use `<span class="input-addon">`. Addons can appear an
 
 <div class="input-single">
   <div class="input-group">
-    <span class="input-addon input-addon-big">$</span>
-    <input type="text" class="input-big">
-    <span class="input-addon input-addon-big">.00</span>
+    <span class="input-addon input-addon-lg">$</span>
+    <input type="text" class="input-lg">
+    <span class="input-addon input-addon-lg">.00</span>
+  </div>
+</div>
+
+<div class="input-single">
+  <div class="input-group">
+    <span class="input-addon input-addon-xl">$</span>
+    <input type="text" class="input-xl">
+    <span class="input-addon input-addon-xl">.00</span>
   </div>
 </div>
 
@@ -319,13 +380,17 @@ Form controls can be made valid or invalid using the `input-valid` and `input-in
 ```
 
 <div class="two-column">
-  <div class="input-single input-valid">
-    <label>Valid</label>
-    <input type="text">
+  <div class="column">
+    <div class="input-single input-valid">
+      <label>Valid</label>
+      <input type="text">
+    </div>
   </div>
 
-  <div class="input-single input-invalid">
-    <label>Invalid</label>
-    <input type="text">
+  <div class="column">
+    <div class="input-single input-invalid">
+      <label>Invalid</label>
+      <input type="text">
+    </div>
   </div>
 </div>
