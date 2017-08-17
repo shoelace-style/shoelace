@@ -27,7 +27,7 @@ table {
 
   & th {
     text-align: left;
-    background: var(--table-header-bg-color);
+    background-color: var(--table-header-bg-color);
     border-bottom: solid calc(var(--table-border-width) * 2) var(--table-border-color);
     padding: var(--table-spacing-y) var(--table-spacing-x);
   }
