@@ -68,12 +68,19 @@
       overflow-x: hidden;
       text-overflow: ellipsis;
 
+      &:focus:not(.disabled) {
+        outline: none;
+        color: var(--dropdown-color);
+        background-color: color(var(--dropdown-bg-color) shade(5%));
+      }
+
       &:hover:not(.disabled) {
         color: var(--dropdown-color-hover);
         background-color: var(--dropdown-bg-color-hover);
       }
 
       &.disabled {
+        outline: none;
         cursor: not-allowed;
         opacity: .5;
       }
