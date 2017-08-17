@@ -14,28 +14,28 @@ An optional text label can be included inside the `progress-bar` element.
 
 ```html
 <div class="progress progress-small">
-  <div class="progress-bar width-25">25%</div>
+  <div class="progress-bar w-25">25%</div>
 </div>
 
 <div class="progress">
-  <div class="progress-bar width-50">50%</div>
+  <div class="progress-bar w-50">50%</div>
 </div>
 
 <div class="progress progress-big">
-  <div class="progress-bar width-75">75%</div>
+  <div class="progress-bar w-75">75%</div>
 </div>
 ```
 
 <div class="progress progress-small">
-  <div class="progress-bar width-25">25%</div>
+  <div class="progress-bar w-25">25%</div>
 </div>
 
 <div class="progress">
-  <div class="progress-bar width-50">50%</div>
+  <div class="progress-bar w-50">50%</div>
 </div>
 
 <div class="progress progress-big">
-  <div class="progress-bar width-75">75%</div>
+  <div class="progress-bar w-75">75%</div>
 </div>
 
 When progress can’t be determined, use the `progress-indeterminate` modifier to set an indeterminate state.
@@ -56,58 +56,58 @@ Use the `progress-*` modifier to create variations.
 
 ```html
 <div class="progress progress-secondary">
-  <div class="progress-bar width-50">50%</div>
+  <div class="progress-bar w-50">50%</div>
 </div>
 
 <div class="progress progress-success">
-  <div class="progress-bar width-50">50%</div>
+  <div class="progress-bar w-50">50%</div>
 </div>
 
 <div class="progress progress-info">
-  <div class="progress-bar width-50">50%</div>
+  <div class="progress-bar w-50">50%</div>
 </div>
 
 <div class="progress progress-warning">
-  <div class="progress-bar width-50">50%</div>
+  <div class="progress-bar w-50">50%</div>
 </div>
 
 <div class="progress progress-danger">
-  <div class="progress-bar width-50">50%</div>
+  <div class="progress-bar w-50">50%</div>
 </div>
 
 <div class="progress progress-light">
-  <div class="progress-bar width-50">50%</div>
+  <div class="progress-bar w-50">50%</div>
 </div>
 
 <div class="progress progress-dark">
-  <div class="progress-bar width-50">50%</div>
+  <div class="progress-bar w-50">50%</div>
 </div>
 ```
 
 <div class="progress progress-secondary">
-  <div class="progress-bar width-50">50%</div>
+  <div class="progress-bar w-50">50%</div>
 </div>
 
 <div class="progress progress-success">
-  <div class="progress-bar width-50">50%</div>
+  <div class="progress-bar w-50">50%</div>
 </div>
 
 <div class="progress progress-info">
-  <div class="progress-bar width-50">50%</div>
+  <div class="progress-bar w-50">50%</div>
 </div>
 
 <div class="progress progress-warning">
-  <div class="progress-bar width-50">50%</div>
+  <div class="progress-bar w-50">50%</div>
 </div>
 
 <div class="progress progress-danger">
-  <div class="progress-bar width-50">50%</div>
+  <div class="progress-bar w-50">50%</div>
 </div>
 
 <div class="progress progress-light">
-  <div class="progress-bar width-50">50%</div>
+  <div class="progress-bar w-50">50%</div>
 </div>
 
 <div class="progress progress-dark">
-  <div class="progress-bar width-50">50%</div>
+  <div class="progress-bar w-50">50%</div>
 </div>

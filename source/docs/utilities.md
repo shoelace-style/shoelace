@@ -131,34 +131,34 @@ A clearfix utility is also available to clear floated elements. Just apply the `
 
 ### Sizing Utilities
 
-Sizing utilities can be used to set a relative width or height on any element. Just apply a `width-*` or `height-*` class and the appropriate element will be sized accordingly. Sizes are available as percentages from 0 – 100 in multiples of five.
+Sizing utilities can be used to set a relative width or height on any element. Just apply a `w-*` or `h-*` class and the appropriate element will be sized accordingly. Sizes are available as percentages from 0 – 100 in multiples of five.
 
-You can also use the `max-width-100` and `max-height-100` classes to set a max width and height of 100%.
+You can also use the `w-max-100` and `h-max-100` classes to set a max width and height of 100%.
 
 ```html
-<div class="width-25">25%</div>
-<div class="width-50">50%</div>
-<div class="width-75">75%</div>
-<div class="width-100">100%</div>
+<div class="w-25">25%</div>
+<div class="w-50">50%</div>
+<div class="w-75">75%</div>
+<div class="w-100">100%</div>
 
-<div class="height-25">25%</div>
-<div class="height-50">50%</div>
-<div class="height-75">75%</div>
-<div class="height-100">100%</div>
+<div class="h-25">25%</div>
+<div class="h-50">50%</div>
+<div class="h-75">75%</div>
+<div class="h-100">100%</div>
 ```
 
 <div class="width-sizing-example">
-  <div class="width-25">25%</div>
-  <div class="width-50">50%</div>
-  <div class="width-75">75%</div>
-  <div class="width-100">100%</div>
+  <div class="w-25">25%</div>
+  <div class="w-50">50%</div>
+  <div class="w-75">75%</div>
+  <div class="w-100">100%</div>
 </div>
 
 <div class="height-sizing-example">
-  <div class="height-25">25%</div>
-  <div class="height-50">50%</div>
-  <div class="height-75">75%</div>
-  <div class="height-100">100%</div>
+  <div class="h-25">25%</div>
+  <div class="h-50">50%</div>
+  <div class="h-75">75%</div>
+  <div class="h-100">100%</div>
 </div>
 
 ### Spacing Utilities
