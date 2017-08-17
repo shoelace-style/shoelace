@@ -1,180 +1,391 @@
 /*! Switches */
 :root {
-  --switch-font-size: var(--input-font-size);
-  --switch-font-size-small: var(--input-font-size-small);
-  --switch-font-size-big: var(--input-font-size-big);
-  --switch-bg-color: var(--component-border-color);
-  --switch-bg-color-checked: var(--state-primary);
-  --switch-border-radius: var(--switch-height);
   --switch-height: var(--input-height);
-  --switch-height-small: var(--input-height-small);
-  --switch-height-big: var(--input-height-big);
-  --switch-thumb-bg-color: white;
+  --switch-height-xs: var(--input-height-xs);
+  --switch-height-sm: var(--input-height-sm);
+  --switch-height-lg: var(--input-height-lg);
+  --switch-height-xl: var(--input-height-xl);
+  --switch-font-size: var(--input-font-size);
+  --switch-font-size-xs: var(--input-font-size-xs);
+  --switch-font-size-sm: var(--input-font-size-sm);
+  --switch-font-size-lg: var(--input-font-size-lg);
+  --switch-font-size-xl: var(--input-font-size-xl);
+  --switch-border-radius: var(--switch-height);
   --switch-thumb-border-radius: 50%;
   --switch-thumb-spacing: 2px;
   --switch-speed: .2s;
+
+  /* Default */
+  --switch-color: var(--state-primary);
+  --switch-bg-color: var(--component-border-color);
+  --switch-thumb-color: var(--color-white);
+
+  /* Secondary */
+  --switch-color-secondary: var(--state-secondary);
+  --switch-bg-color-secondary: var(--component-border-color);
+  --switch-thumb-color-secondary: var(--color-white);
+
+  /* Success */
+  --switch-color-success: var(--state-success);
+  --switch-bg-color-success: var(--component-border-color);
+  --switch-thumb-color-success: var(--color-white);
+
+  /* Info */
+  --switch-color-info: var(--state-info);
+  --switch-bg-color-info: var(--component-border-color);
+  --switch-thumb-color-info: var(--color-white);
+
+  /* Warning */
+  --switch-color-warning: var(--state-warning);
+  --switch-bg-color-warning: var(--component-border-color);
+  --switch-thumb-color-warning: var(--color-white);
+
+  /* Danger */
+  --switch-color-danger: var(--state-danger);
+  --switch-bg-color-danger: var(--component-border-color);
+  --switch-thumb-color-danger: var(--color-white);
+
+  /* Light */
+  --switch-color-light: color(var(--state-light) shade(25%));
+  --switch-bg-color-light: color(var(--state-light) shade(10%));
+  --switch-thumb-color-light: var(--color-white);
+
+  /* Dark */
+  --switch-color-dark: color(var(--state-dark) tint(10%));
+  --switch-bg-color-dark: color(var(--state-dark) tint(25%));
+  --switch-thumb-color-dark: var(--color-white);
 }
 
 .switch {
   font-size: var(--switch-font-size);
   position: relative;
-}
 
-.switch input {
-  position: absolute;
-  height: 1px;
-  width: 1px;
-  background: none;
-  border: 0;
-  clip: rect(0 0 0 0);
-  clip-path: inset(50%);
-  overflow: hidden;
-  padding: 0;
-}
+  & input {
+    position: absolute;
+    height: 1px;
+    width: 1px;
+    background: none;
+    border: 0;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    overflow: hidden;
+    padding: 0;
 
-.switch input + label {
-  position: relative;
-  min-width: calc(var(--switch-height) * 2);
-  height: var(--switch-height);
-  line-height: var(--switch-height);
-  display: inline-block;
-  cursor: pointer;
-  outline: none;
-  user-select: none;
-  vertical-align: middle;
-  text-indent: calc(var(--switch-height) * 2 + .5rem);
-}
+    & + label {
+      position: relative;
+      min-width: calc(var(--switch-height) * 2);
+      border-radius: var(--switch-border-radius);
+      height: var(--switch-height);
+      line-height: var(--switch-height);
+      display: inline-block;
+      cursor: pointer;
+      outline: none;
+      user-select: none;
+      vertical-align: middle;
+      text-indent: calc(var(--switch-height) * 2 + .5rem);
+    }
 
-.switch input + label::before,
-.switch input + label::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: calc(var(--switch-height) * 2);
-  bottom: 0;
-  display: block;
-}
+    & + label::before,
+    & + label::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: calc(var(--switch-height) * 2);
+      bottom: 0;
+      display: block;
+    }
 
-.switch input + label::before {
-  right: 0;
-  background-color: var(--switch-bg-color);
-  border-radius: var(--switch-border-radius);
-  transition: background-color var(--switch-speed);
-}
+    & + label::before {
+      right: 0;
+      background-color: var(--switch-bg-color);
+      border-radius: var(--switch-border-radius);
+      transition: var(--switch-speed) all;
+    }
 
-.switch input + label::after {
-  top: var(--switch-thumb-spacing);
-  left: var(--switch-thumb-spacing);
-  width: calc(var(--switch-height) - var(--switch-thumb-spacing) * 2);
-  height: calc(var(--switch-height) - var(--switch-thumb-spacing) * 2);
-  border-radius: var(--switch-thumb-border-radius);
-  background-color: var(--switch-thumb-bg-color);
-  transition: margin var(--switch-speed);
-}
+    & + label::after {
+      top: var(--switch-thumb-spacing);
+      left: var(--switch-thumb-spacing);
+      width: calc(var(--switch-height) - var(--switch-thumb-spacing) * 2);
+      height: calc(var(--switch-height) - var(--switch-thumb-spacing) * 2);
+      border-radius: var(--switch-thumb-border-radius);
+      background-color: var(--switch-thumb-color);
+      transition: var(--switch-speed) margin;
+    }
 
-.switch input:checked + label::before {
-  background-color: var(--switch-bg-color-checked);
-}
+    &:checked + label::before {
+      background-color: var(--switch-color);
+    }
 
-.switch input:checked + label::after {
-  margin-left: var(--switch-height);
-}
+    &:checked + label::after {
+      margin-left: var(--switch-height);
+    }
 
-.switch input:disabled + label {
-  opacity: .5;
-  cursor: not-allowed;
-}
+    &:focus + label::before {
+      outline: none;
+      box-shadow: 0 0 0 3px color(var(--switch-color) alpha(50%));
+    }
 
-.switch input:focus + label {
-  outline: 1px dotted;
-}
+    &:disabled + label {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+  }
 
-.switch-small {
-  font-size: var(--switch-font-size-small);
-}
+  & + .switch {
+    margin-left: 1rem;
+  }
 
-.switch-small input + label {
-  height: var(--switch-height-small);
-  line-height: var(--switch-height-small);
-  text-indent: calc(var(--switch-height-small) * 2 + .5rem);
-}
+  /* Sizes */
+  &.switch-xs {
+    font-size: var(--switch-font-size-xs);
 
-.switch-small input + label::before,
-.switch-small input + label::after {
-  width: calc(var(--switch-height-small) * 2);
-}
+    & input {
+      & + label {
+        min-width: calc(var(--switch-height-xs) * 2);
+        height: var(--switch-height-xs);
+        line-height: var(--switch-height-xs);
+        text-indent: calc(var(--switch-height-xs) * 2 + .5rem);
+      }
 
-.switch-small input + label::after {
-  width: calc(var(--switch-height-small) - var(--switch-thumb-spacing) * 2);
-  height: calc(var(--switch-height-small) - var(--switch-thumb-spacing) * 2);
-}
+      & + label::before,
+      & + label::after {
+        width: calc(var(--switch-height-xs) * 2);
+      }
 
-.switch-small input:checked + label::after {
-  margin-left: var(--switch-height-small);
-}
+      & + label::after {
+        width: calc(var(--switch-height-xs) - var(--switch-thumb-spacing) * 2);
+        height: calc(var(--switch-height-xs) - var(--switch-thumb-spacing) * 2);
+      }
 
-.switch-big {
-  font-size: var(--switch-font-size-big);
-}
+      &:checked + label::after {
+        margin-left: var(--switch-height-xs);
+      }
+    }
+  }
 
-.switch-big input + label {
-  height: var(--switch-height-big);
-  line-height: var(--switch-height-big);
-  text-indent: calc(var(--switch-height-big) * 2 + .5rem);
-}
+  &.switch-sm {
+    font-size: var(--switch-font-size-sm);
 
-.switch-big input + label::before,
-.switch-big input + label::after {
-  width: calc(var(--switch-height-big) * 2);
-}
+    & input {
+      & + label {
+        min-width: calc(var(--switch-height-sm) * 2);
+        height: var(--switch-height-sm);
+        line-height: var(--switch-height-sm);
+        text-indent: calc(var(--switch-height-sm) * 2 + .5rem);
+      }
 
-.switch-big input + label::after {
-  width: calc(var(--switch-height-big) - var(--switch-thumb-spacing) * 2);
-  height: calc(var(--switch-height-big) - var(--switch-thumb-spacing) * 2);
-}
+      & + label::before,
+      & + label::after {
+        width: calc(var(--switch-height-sm) * 2);
+      }
 
-.switch-big input:checked + label::after {
-  margin-left: var(--switch-height-big);
-}
+      & + label::after {
+        width: calc(var(--switch-height-sm) - var(--switch-thumb-spacing) * 2);
+        height: calc(var(--switch-height-sm) - var(--switch-thumb-spacing) * 2);
+      }
 
-.switch + .switch {
-  margin-left: 1rem;
-}
+      &:checked + label::after {
+        margin-left: var(--switch-height-sm);
+      }
+    }
+  }
 
-/* Variations */
-.switch-secondary input:checked + label::before {
-  background-color: var(--state-secondary);
-}
+  &.switch-lg {
+    font-size: var(--switch-font-size-lg);
 
-.switch-success input:checked + label::before {
-  background-color: var(--state-success);
-}
+    & input {
+      & + label {
+        min-width: calc(var(--switch-height-lg) * 2);
+        height: var(--switch-height-lg);
+        line-height: var(--switch-height-lg);
+        text-indent: calc(var(--switch-height-lg) * 2 + .5rem);
+      }
 
-.switch-info input:checked + label::before {
-  background-color: var(--state-info);
-}
+      & + label::before,
+      & + label::after {
+        width: calc(var(--switch-height-lg) * 2);
+      }
 
-.switch-warning input:checked + label::before {
-  background-color: var(--state-warning);
-}
+      & + label::after {
+        width: calc(var(--switch-height-lg) - var(--switch-thumb-spacing) * 2);
+        height: calc(var(--switch-height-lg) - var(--switch-thumb-spacing) * 2);
+      }
 
-.switch-danger input:checked + label::before {
-  background-color: var(--state-danger);
-}
+      &:checked + label::after {
+        margin-left: var(--switch-height-lg);
+      }
+    }
+  }
 
-.switch-light input + label::before {
-  background-color: var(--state-dark);
-}
+  &.switch-xl {
+    font-size: var(--switch-font-size-xl);
 
-.switch-light input:checked + label::before {
-  background-color: var(--state-light);
-}
+    & input {
+      & + label {
+        min-width: calc(var(--switch-height-xl) * 2);
+        height: var(--switch-height-xl);
+        line-height: var(--switch-height-xl);
+        text-indent: calc(var(--switch-height-xl) * 2 + .5rem);
+      }
 
-.switch-dark input + label::before {
-  background-color: var(--state-light);
-}
+      & + label::before,
+      & + label::after {
+        width: calc(var(--switch-height-xl) * 2);
+      }
 
-.switch-dark input:checked + label::before {
-  background-color: var(--state-dark);
+      & + label::after {
+        width: calc(var(--switch-height-xl) - var(--switch-thumb-spacing) * 2);
+        height: calc(var(--switch-height-xl) - var(--switch-thumb-spacing) * 2);
+      }
+
+      &:checked + label::after {
+        margin-left: var(--switch-height-xl);
+      }
+    }
+  }
+
+  /* Variations */
+  &.switch-secondary {
+    & input {
+      background-color: var(--switch-bg-color-secondary);
+
+      & + label::after { background-color: var(--switch-thumb-color-secondary); }
+      & + label::before { background-color: var(--switch-bg-color-secondary); }
+      &:checked + label::before { background-color: var(--switch-color-secondary); }
+      &:focus + label::before { box-shadow: 0 0 0 3px color(var(--switch-color-secondary) alpha(50%)); }
+    }
+  }
+
+  &.switch-success {
+    & input {
+      background-color: var(--switch-bg-color-success);
+
+      & + label::after {
+        background-color: var(--switch-thumb-color-success);
+      }
+
+      & + label::before {
+        background-color: var(--switch-bg-color-success);
+      }
+
+      &:checked + label::before {
+        background-color: var(--switch-color-success);
+      }
+
+      &:focus + label::before {
+        box-shadow: 0 0 0 3px color(var(--switch-color-success) alpha(50%));
+      }
+    }
+  }
+
+  &.switch-info {
+    & input {
+      background-color: var(--switch-bg-color-info);
+
+      & + label::after {
+        background-color: var(--switch-thumb-color-info);
+      }
+
+      & + label::before {
+        background-color: var(--switch-bg-color-info);
+      }
+
+      &:checked + label::before {
+        background-color: var(--switch-color-info);
+      }
+
+      &:focus + label::before {
+        box-shadow: 0 0 0 3px color(var(--switch-color-info) alpha(50%));
+      }
+    }
+  }
+
+  &.switch-warning {
+    & input {
+      background-color: var(--switch-bg-color-warning);
+
+      & + label::after {
+        background-color: var(--switch-thumb-color-warning);
+      }
+
+      & + label::before {
+        background-color: var(--switch-bg-color-warning);
+      }
+
+      &:checked + label::before {
+        background-color: var(--switch-color-warning);
+      }
+
+      &:focus + label::before {
+        box-shadow: 0 0 0 3px color(var(--switch-color-warning) alpha(50%));
+      }
+    }
+  }
+
+  &.switch-danger {
+    & input {
+      background-color: var(--switch-bg-color-danger);
+
+      & + label::after {
+        background-color: var(--switch-thumb-color-danger);
+      }
+
+      & + label::before {
+        background-color: var(--switch-bg-color-danger);
+      }
+
+      &:checked + label::before {
+        background-color: var(--switch-color-danger);
+      }
+
+      &:focus + label::before {
+        box-shadow: 0 0 0 3px color(var(--switch-color-danger) alpha(50%));
+      }
+    }
+  }
+
+  &.switch-light {
+    & input {
+      background-color: var(--switch-bg-color-light);
+
+      & + label::after {
+        background-color: var(--switch-thumb-color-light);
+      }
+
+      & + label::before {
+        background-color: var(--switch-bg-color-light);
+      }
+
+      &:checked + label::before {
+        background-color: var(--switch-color-light);
+      }
+
+      &:focus + label::before {
+        box-shadow: 0 0 0 3px color(var(--switch-color-light) alpha(50%));
+      }
+    }
+  }
+
+  &.switch-dark {
+    & input {
+      background-color: var(--switch-bg-color-dark);
+
+      & + label::after {
+        background-color: var(--switch-thumb-color-dark);
+      }
+
+      & + label::before {
+        background-color: var(--switch-bg-color-dark);
+      }
+
+      &:checked + label::before {
+        background-color: var(--switch-color-dark);
+      }
+
+      &:focus + label::before {
+        box-shadow: 0 0 0 3px color(var(--switch-color-dark) alpha(50%));
+      }
+    }
+  }
 }
