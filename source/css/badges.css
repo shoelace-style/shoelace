@@ -50,6 +50,7 @@
     display: none;
   }
 
+  /* Variations */
   &.badge-secondary {
     color: var(--badge-color-secondary);
     background-color: var(--badge-bg-color-secondary);

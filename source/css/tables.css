@@ -37,6 +37,7 @@ table {
     padding: var(--table-spacing-y) var(--table-spacing-x);
   }
 
+  /* Variations */
   &.table-bordered {
     border: solid var(--table-border-width) var(--table-border-color);
 

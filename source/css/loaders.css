@@ -61,6 +61,7 @@
   margin: var(--loader-margin-y) var(--loader-margin-x);
   vertical-align: middle;
 
+  /* Sizes */
   &.loader-xs {
     width: var(--loader-size-xs);
     height: var(--loader-size-xs);
@@ -85,6 +86,7 @@
     border-width: var(--loader-thickness-xl);
   }
 
+  /* Variations */
   &.loader-secondary {
     border-color: var(--loader-bg-color-secondary);
     border-top-color: var(--loader-color-secondary);
@@ -148,6 +150,7 @@
     animation: loader var(--loader-speed) linear infinite;
   }
 
+  /* Sizes */
   &.loader-bg-xs::after {
     top: calc(50% - var(--loader-size-xs) / 2);
     left: calc(50% - var(--loader-size-xs) / 2);
@@ -180,6 +183,7 @@
     border-width: var(--loader-thickness-xl);
   }
 
+  /* Variations */
   &.loader-bg-secondary::after {
     border-color: var(--loader-bg-color-secondary);
     border-top-color: var(--loader-color-secondary);
