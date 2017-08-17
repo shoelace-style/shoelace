@@ -20,10 +20,12 @@
   --input-bg-color: var(--color-white);
   --input-box-shadow: inset 0 1px 0 rgba(0, 0, 0, .05);
   --input-readonly-bg-color: var(--component-bg-color);
+
+  --input-range-track-height: .5rem;
   --input-range-track-color: var(--component-bg-color);
   --input-range-track-box-shadow: inset 0 1px 0 rgba(0, 0, 0, .05);
+  --input-range-thumb-height: 1.25rem;
   --input-range-thumb-color: var(--state-primary);
-  --input-range-thumb-height: 2rem;
 
   --input-invalid-color: var(--state-danger);
   --input-invalid-border-color: var(--state-danger);
@@ -52,10 +54,10 @@ fieldset {
 label {
   display: inline-block;
   margin-bottom: .25rem;
-}
 
-label + label {
-  margin-left: 1rem;
+  & + label {
+    margin-left: 1rem;
+  }
 }
 
 input[type="color"],
@@ -177,7 +179,9 @@ textarea.input-xl {
 input[type="range"] {
   -webkit-appearance: none;
   width: 100%;
-  margin: 1rem 0;
+  height: var(--input-height);
+  line-height: var(--input-height);
+  vertical-align: middle;
 
   &:focus {
     outline: none;
@@ -186,7 +190,7 @@ input[type="range"] {
   /* Webkit */
   &::-webkit-slider-runnable-track {
     width: 100%;
-    height: .5rem;
+    height: var(--input-range-track-height);
     cursor: pointer;
     background: var(--input-range-track-color);
     border-radius: var(--input-border-radius);
@@ -196,13 +200,13 @@ input[type="range"] {
 
   &::-webkit-slider-thumb {
     border: none;
-    width: 1.5rem;
-    height: 1.5rem;
+    width: var(--input-range-thumb-height);
+    height: var(--input-range-thumb-height);
     border-radius: 50%;
     background: var(--input-range-thumb-color);
     cursor: pointer;
     -webkit-appearance: none;
-    margin-top: -.5rem;
+    margin-top: calc(var(--input-range-thumb-height) / -2 + var(--input-range-track-height) / 2);
   }
 
   &:focus {
@@ -218,7 +222,7 @@ input[type="range"] {
   /* Firefox */
   &::-moz-range-track {
     width: 100%;
-    height: .5rem;
+    height: var(--input-range-track-height);
     cursor: pointer;
     background: var(--input-range-track-color);
     border-radius: var(--input-border-radius);
@@ -228,8 +232,8 @@ input[type="range"] {
 
   &::-moz-range-thumb {
     border: none;
-    height: 1.5rem;
-    width: 1.5rem;
+    height: var(--input-range-thumb-height);
+    width: var(--input-range-thumb-height);
     border-radius: 50%;
     background: var(--input-range-thumb-color);
     cursor: pointer;
@@ -242,7 +246,7 @@ input[type="range"] {
   /* IE / Edge */
   &::-ms-track {
     width: 100%;
-    height: .5rem;
+    height: var(--input-range-track-height);
     cursor: pointer;
     background: transparent;
     border-color: transparent;
@@ -250,7 +254,7 @@ input[type="range"] {
   }
 
   &::-ms-fill-lower {
-    background: #2f6ea5;
+    background: var(--input-range-track-color);
     border: none;
     border-radius: var(--input-border-radius);
   }
@@ -263,11 +267,12 @@ input[type="range"] {
 
   &::-ms-thumb {
     border: none;
-    height: .5rem;
-    width: .5rem;
+    height: var(--input-range-thumb-height);
+    width: var(--input-range-thumb-height);
     border-radius: 50%;
     background: var(--input-range-thumb-color);
     cursor: pointer;
+    margin-top: calc(var(--input-range-track-height) / -2);
   }
 
   &:focus::-ms-thumb {
