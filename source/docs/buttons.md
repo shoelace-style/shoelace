@@ -16,38 +16,22 @@ To create a button, use the `<button>` element or apply the `button` class to an
   <button type="button">Button</button>
 </div>
 
-Use the `button-small` and `button-big` modifiers to change the size of a button.
+Use the `button-[xs|sm|lg|xl]` modifiers to change the size of a button.
 
 ```html
-<button type="button" class="button-small">Small Button</button>
-<button type="button">Normal Button</button>
-<button type="button" class="button-big">Big Button</button>
+<button type="button" class="button-xs">XS Button</button>
+<button type="button" class="button-sm">SM Button</button>
+<button type="button">Default Button</button>
+<button type="button" class="button-lg">LG Button</button>
+<button type="button" class="button-xl">XL Button</button>
 ```
 
 <div class="input-single">
-  <button type="button" class="button-small">Small Button</button>
-  <button type="button">Normal Button</button>
-  <button type="button" class="button-big">Big Button</button>
-</div>
-
-Use the `button-block` modifier to make a button span the entire width of its parent.
-
-```html
-<button type="button" class="button-block button-small">Small Block Button</button>
-<button type="button" class="button-block">Normal Block Button</button>
-<button type="button" class="button-block button-big">Big Block Button</button>
-```
-
-<div class="input-single">
-  <button type="button" class="button-block button-small">Small Block Button</button>
-</div>
-
-<div class="input-single">
-  <button type="button" class="button-block">Normal Block Button</button>
-</div>
-
-<div class="input-single">
-  <button type="button" class="button-block button-big">Big Block Button</button>
+  <button type="button" class="button-xs">XS Button</button>
+  <button type="button" class="button-sm">SM Button</button>
+  <button type="button">Default Button</button>
+  <button type="button" class="button-lg">LG Button</button>
+  <button type="button" class="button-xl">XL Button</button>
 </div>
 
 To disable a button set the `disabled` property on `<button>` elements. You can simulate the disabled state on links by adding the `disabled` class, but additional JavaScript is required to prevent them from being activated.
@@ -98,6 +82,18 @@ Use the `button-*` modifier to create variations.
   <button type="button" class="button-dark">Dark</button>
 </div>
 
+### Block Buttons
+
+Use the `button-block` modifier to make a button span the entire width of its parent.
+
+```html
+<button type="button" class="button-block">Block Button</button>
+```
+
+<div class="input-single">
+  <button type="button" class="button-block">Block Button</button>
+</div>
+
 ### Link Buttons
 
 Buttons can be styled to look like normal links with the `button-link` modifier. Button sizing is maintained so they align properly with other buttons.
@@ -115,15 +111,19 @@ Buttons can be styled to look like normal links with the `button-link` modifier.
 Buttons can be given a loading state with the `button-loader` modifier. This will make the button text invisible and display a loader using the `::after` pseudo-element. The button’s width will not be affected.
 
 ```html
-<button type="button" class="button-loader button-small">Small</button>
-<button type="button" class="button-loader">Loader</button>
-<button type="button" class="button-loader button-big">Loader</button>
+<button type="button" class="button-loader button-xs">XS</button>
+<button type="button" class="button-loader button-sm">SM</button>
+<button type="button" class="button-loader">Default</button>
+<button type="button" class="button-loader button-lg">LG</button>
+<button type="button" class="button-loader button-xl">XL</button>
 ```
 
 <div class="input-single">
-  <button type="button" class="button-loader button-small">Loader</button>
-  <button type="button" class="button-loader">Loader</button>
-  <button type="button" class="button-loader button-big">Loader</button>
+  <button type="button" class="button-loader button-xs">XS</button>
+  <button type="button" class="button-loader button-sm">SM</button>
+  <button type="button" class="button-loader">Default</button>
+  <button type="button" class="button-loader button-lg">LG</button>
+  <button type="button" class="button-loader button-xl">XL</button>
 </div>
 
 Loader buttons also work with button variations.

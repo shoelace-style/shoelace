@@ -55,32 +55,19 @@
   <button type="button">Button</button>
 </div>
 
-<p>Use the <code>button-small</code> and <code>button-big</code> modifiers to change the size of a button.</p>
-<pre><code class="lang-html">&lt;button type=&quot;button&quot; class=&quot;button-small&quot;&gt;Small Button&lt;/button&gt;
-&lt;button type=&quot;button&quot;&gt;Normal Button&lt;/button&gt;
-&lt;button type=&quot;button&quot; class=&quot;button-big&quot;&gt;Big Button&lt;/button&gt;
+<p>Use the <code>button-[xs|sm|lg|xl]</code> modifiers to change the size of a button.</p>
+<pre><code class="lang-html">&lt;button type=&quot;button&quot; class=&quot;button-xs&quot;&gt;XS Button&lt;/button&gt;
+&lt;button type=&quot;button&quot; class=&quot;button-sm&quot;&gt;SM Button&lt;/button&gt;
+&lt;button type=&quot;button&quot;&gt;Default Button&lt;/button&gt;
+&lt;button type=&quot;button&quot; class=&quot;button-lg&quot;&gt;LG Button&lt;/button&gt;
+&lt;button type=&quot;button&quot; class=&quot;button-xl&quot;&gt;XL Button&lt;/button&gt;
 </code></pre>
 <div class="input-single">
-  <button type="button" class="button-small">Small Button</button>
-  <button type="button">Normal Button</button>
-  <button type="button" class="button-big">Big Button</button>
-</div>
-
-<p>Use the <code>button-block</code> modifier to make a button span the entire width of its parent.</p>
-<pre><code class="lang-html">&lt;button type=&quot;button&quot; class=&quot;button-block button-small&quot;&gt;Small Block Button&lt;/button&gt;
-&lt;button type=&quot;button&quot; class=&quot;button-block&quot;&gt;Normal Block Button&lt;/button&gt;
-&lt;button type=&quot;button&quot; class=&quot;button-block button-big&quot;&gt;Big Block Button&lt;/button&gt;
-</code></pre>
-<div class="input-single">
-  <button type="button" class="button-block button-small">Small Block Button</button>
-</div>
-
-<div class="input-single">
-  <button type="button" class="button-block">Normal Block Button</button>
-</div>
-
-<div class="input-single">
-  <button type="button" class="button-block button-big">Big Block Button</button>
+  <button type="button" class="button-xs">XS Button</button>
+  <button type="button" class="button-sm">SM Button</button>
+  <button type="button">Default Button</button>
+  <button type="button" class="button-lg">LG Button</button>
+  <button type="button" class="button-xl">XL Button</button>
 </div>
 
 <p>To disable a button set the <code>disabled</code> property on <code>&lt;button&gt;</code> elements. You can simulate the disabled state on links by adding the <code>disabled</code> class, but additional JavaScript is required to prevent them from being activated.</p>
@@ -121,6 +108,14 @@
   <button type="button" class="button-dark">Dark</button>
 </div>
 
+<h3 id="block-buttons">Block Buttons</h3>
+<p>Use the <code>button-block</code> modifier to make a button span the entire width of its parent.</p>
+<pre><code class="lang-html">&lt;button type=&quot;button&quot; class=&quot;button-block&quot;&gt;Block Button&lt;/button&gt;
+</code></pre>
+<div class="input-single">
+  <button type="button" class="button-block">Block Button</button>
+</div>
+
 <h3 id="link-buttons">Link Buttons</h3>
 <p>Buttons can be styled to look like normal links with the <code>button-link</code> modifier. Button sizing is maintained so they align properly with other buttons.</p>
 <pre><code class="lang-html">&lt;a href=&quot;#&quot; class=&quot;button button-link&quot;&gt;Link Button&lt;/a&gt;
@@ -131,14 +126,18 @@
 
 <h3 id="loader-buttons">Loader Buttons</h3>
 <p>Buttons can be given a loading state with the <code>button-loader</code> modifier. This will make the button text invisible and display a loader using the <code>::after</code> pseudo-element. The button’s width will not be affected.</p>
-<pre><code class="lang-html">&lt;button type=&quot;button&quot; class=&quot;button-loader button-small&quot;&gt;Small&lt;/button&gt;
-&lt;button type=&quot;button&quot; class=&quot;button-loader&quot;&gt;Loader&lt;/button&gt;
-&lt;button type=&quot;button&quot; class=&quot;button-loader button-big&quot;&gt;Loader&lt;/button&gt;
+<pre><code class="lang-html">&lt;button type=&quot;button&quot; class=&quot;button-loader button-xs&quot;&gt;XS&lt;/button&gt;
+&lt;button type=&quot;button&quot; class=&quot;button-loader button-sm&quot;&gt;SM&lt;/button&gt;
+&lt;button type=&quot;button&quot; class=&quot;button-loader&quot;&gt;Default&lt;/button&gt;
+&lt;button type=&quot;button&quot; class=&quot;button-loader button-lg&quot;&gt;LG&lt;/button&gt;
+&lt;button type=&quot;button&quot; class=&quot;button-loader button-xl&quot;&gt;XL&lt;/button&gt;
 </code></pre>
 <div class="input-single">
-  <button type="button" class="button-loader button-small">Loader</button>
-  <button type="button" class="button-loader">Loader</button>
-  <button type="button" class="button-loader button-big">Loader</button>
+  <button type="button" class="button-loader button-xs">XS</button>
+  <button type="button" class="button-loader button-sm">SM</button>
+  <button type="button" class="button-loader">Default</button>
+  <button type="button" class="button-loader button-lg">LG</button>
+  <button type="button" class="button-loader button-xl">XL</button>
 </div>
 
 <p>Loader buttons also work with button variations.</p>
