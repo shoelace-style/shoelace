@@ -178,12 +178,17 @@ a code {
 }
 
 /* Loader example */
+.loader-example {
+  margin-left: -.5rem;
+  margin-right: -.5rem;
+}
+
 .loader-example div {
   float: left;
   width: 6rem;
   height: 6rem;
   border: dashed 1px #ddd;
-  margin-right: .5rem;
+  margin: 0 .5rem 1rem .5rem;
 }
 
 /* Tabs example */

@@ -48,27 +48,19 @@
 
     <div id="content">
       <h2 id="loaders">Loaders</h2>
-<p>Create a pure CSS loader by applying the <code>loader</code> class to an empty <code>&lt;span&gt;</code> element. You can use the <code>loader-small</code> and <code>loader-big</code> modifiers to change the size.</p>
-<pre><code class="lang-html">&lt;span class=&quot;loader loader-small&quot;&gt;&lt;/span&gt;
+<p>Create a pure CSS loader by applying the <code>loader</code> class to an empty <code>&lt;span&gt;</code> element. You can use the <code>loader-xs|sm|lg|xl</code> modifiers to change the size.</p>
+<pre><code class="lang-html">&lt;span class=&quot;loader loader-xs&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;loader loader-sm&quot;&gt;&lt;/span&gt;
 &lt;span class=&quot;loader&quot;&gt;&lt;/span&gt;
-&lt;span class=&quot;loader loader-big&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;loader loader-lg&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;loader loader-xl&quot;&gt;&lt;/span&gt;
 </code></pre>
 <div class="input-single">
-  <span class="loader loader-small"></span>
+  <span class="loader loader-xs"></span>
+  <span class="loader loader-sm"></span>
   <span class="loader"></span>
-  <span class="loader loader-big"></span>
-</div>
-
-<h3 id="background-loaders">Background Loaders</h3>
-<p>You can simulate a background loader using <code>loader-bg</code>. This is achieved using <code>position: relative</code> on the container and the <code>::after</code> pseudo-element. You can use the <code>loader-bg-small</code> and <code>loader-bg-big</code> modifiers to change the size.</p>
-<pre><code class="lang-html">&lt;div class=&quot;loader-bg loader-bg-small&quot;&gt;&lt;/div&gt;
-&lt;div class=&quot;loader-bg&quot;&gt;&lt;/div&gt;
-&lt;div class=&quot;loader-bg loader-bg-big&quot;&gt;&lt;/div&gt;
-</code></pre>
-<div class="loader-example clearfix">
-  <div class="loader-bg loader-bg-small"></div>
-  <div class="loader-bg"></div>
-  <div class="loader-bg loader-bg-big"></div>
+  <span class="loader loader-lg"></span>
+  <span class="loader loader-xl"></span>
 </div>
 
 <h3 id="variations">Variations</h3>
@@ -88,6 +80,41 @@
 <span class="loader loader-danger"></span>
 <span class="loader loader-light"></span>
 <span class="loader loader-dark"></span></p>
+<h3 id="background-loaders">Background Loaders</h3>
+<p>You can simulate a background loader using <code>loader-bg</code>. This is achieved using <code>position: relative</code> on the container and the <code>::after</code> pseudo-element. You can use the <code>loader-bg-xs|sm|lg|xl</code> modifiers to change the size.</p>
+<pre><code class="lang-html">&lt;div class=&quot;loader-bg loader-bg-xs&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;loader-bg loader-bg-sm&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;loader-bg&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;loader-bg loader-bg-lg&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;loader-bg loader-bg-xl&quot;&gt;&lt;/div&gt;
+</code></pre>
+<div class="loader-example clearfix">
+  <div class="loader-bg loader-bg-xs"></div>
+  <div class="loader-bg loader-bg-sm"></div>
+  <div class="loader-bg"></div>
+  <div class="loader-bg loader-bg-lg"></div>
+  <div class="loader-bg loader-bg-xl"></div>
+</div>
+
+<h3 id="background-variations">Background Variations</h3>
+<p>Use the <code>loader-bg-*</code> modifier to create variations.</p>
+<pre><code class="lang-html">&lt;div class=&quot;loader-bg loader-bg-secondary&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;loader-bg loader-bg-success&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;loader-bg loader-bg-info&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;loader-bg loader-bg-warning&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;loader-bg loader-bg-danger&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;loader-bg loader-bg-light&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;loader-bg loader-bg-dark&quot;&gt;&lt;/div&gt;
+</code></pre>
+<div class="loader-example clearfix">
+  <div class="loader-bg loader-bg-secondary"></div>
+  <div class="loader-bg loader-bg-success"></div>
+  <div class="loader-bg loader-bg-info"></div>
+  <div class="loader-bg loader-bg-warning"></div>
+  <div class="loader-bg loader-bg-danger"></div>
+  <div class="loader-bg loader-bg-light"></div>
+  <div class="loader-bg loader-bg-dark"></div>
+</div>
 
     </div>
   </main>
