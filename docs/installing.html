@@ -53,12 +53,12 @@
 <p><strong>Note:</strong> To make certain components interactive (e.g. dropdowns and tabs), you’ll need to load <a href="https://cdnjs.com/libraries/jquery/">jQuery</a> or <a href="https://cdnjs.com/libraries/zepto/">Zepto</a> before <code>shoelace.js</code>.</p>
 <h3 id="cdn">CDN</h3>
 <p>This is the best approach for prototyping, however, this version isn’t customizable and doesn’t support future CSS features. To load Shoelace via CDN, add this to your <code>&lt;head&gt;</code>:</p>
-<pre><code class="lang-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/shoelace-css/1.0.0-beta16/shoelace.css&quot;&gt;
+<pre><code class="lang-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.shoelace.style/1.0.0-beta16/shoelace.css&quot;&gt;
 </code></pre>
 <p>And this before <code>&lt;/body&gt;</code> but after jQuery/Zepto:</p>
-<pre><code class="lang-html">&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/shoelace-css/1.0.0-beta16/shoelace.js&quot;&gt;&lt;/script&gt;
+<pre><code class="lang-html">&lt;script src=&quot;https://cdn.shoelace.style/1.0.0-beta16/shoelace.js&quot;&gt;&lt;/script&gt;
 </code></pre>
-<p>This service is provided free, courtesy of <a href="https://cdnjs.com/">CDNJS</a>. New releases can take up to 12 hours to appear on the CDN.</p>
+<p>This service is provided free, courtesy of <a href="https://keycdn.com/">KeyCDN</a>.</p>
 <h3 id="building-from-source">Building From Source</h3>
 <p>To make the most out of Shoelace, you should build it from source. This will let you use future CSS features <em>today</em>, such as <a href="https://www.w3.org/TR/css-variables/">CSS variables</a>, <a href="http://tabatkins.github.io/specs/css-nesting/">nesting</a>, <a href="https://drafts.csswg.org/css-color/#modifying-colors">color functions</a>, <a href="http://cssnext.io/features/">and more</a>. It also gives you complete control over customimakes Shoelace fully customizable.</p>
 <p>The recommended way to build Shoelace is with <a href="http://cssnext.io/">cssnext</a>. There are instructions for webpack, gulp, grunt, browserify, and others located on the <a href="http://cssnext.io/setup/">setup page</a>.</p>
@@ -74,9 +74,9 @@
     <a href="../index.html">
       <img src="../source/img/wordmark.svg" alt="Shoelace logo">
     </a>
+
     <p class="text-small text-secondary">
-      Shoelace.css 1.0.0-beta16 &middot;
-      &copy; A Beautiful Site, LLC
+      1.0.0-beta16
     </p>
 
     <p class="mar-y-sm text-center">
@@ -85,9 +85,15 @@
       <a class="github-button" href="https://github.com/claviska/shoelace-css/issues" data-icon="octicon-issue-opened" data-size="large" aria-label="Issue claviska/shoelace-css on GitHub">Report a Bug</a>
       <a class="github-button" href="https://github.com/claviska/shoelace-css" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star claviska/shoelace-css on GitHub">Star</a>
     </p>
+
     <p>
       <a href="https://twitter.com/shoelacecss" class="button button-info" style="margin-bottom: 1.2rem;">Follow</a>
       <a href="https://paypal.me/claviska" class="button button-success" style="margin-bottom: 1.2rem;">Donate</a>
+    </p>
+
+    <p class="text-small text-secondary">
+      <a href="https://keycdn.com/" class="text-secondary">Accelerated by KeyCDN</a> &middot;
+      &copy; A Beautiful Site, LLC
     </p>
   </footer>
 
