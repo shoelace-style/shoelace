@@ -10,7 +10,7 @@ Dropdowns can be created using the markup below. You can use a `<button>` or an 
 
 Note the class names used for the main container, the trigger, and the menu. Additionally, menu items can be disabled by adding the `disabled` class. Menu items can also be given a checked state using the `checked` class.
 
-To disable a dropdown entirely, add the `disabled` property to the dropdown trigger if it’s a button. If it’s a link, add the `disabled` class instead.
+To disable a dropdown entirely, add the `disabled` property to the dropdown trigger if it’s a button. If it’s a link, add the `disabled` class instead. When a dropdown is activated, it will receive the `active` class and the menu will show.
 
 ```html
 <div class="dropdown">
