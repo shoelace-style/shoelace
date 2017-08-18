@@ -1,6 +1,6 @@
 /*! Loaders */
 :root {
-  --loader-thickness: .25rem;
+  --loader-thickness: .2rem;
   --loader-thickness-xs: calc(var(--loader-thickness) / 2);
   --loader-thickness-sm: calc(var(--loader-thickness) / 1.5);
   --loader-thickness-lg: calc(var(--loader-thickness) * 1.5);
