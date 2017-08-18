@@ -3,6 +3,7 @@
 
 global.__version = require('./package.json').version;
 
+require('dotenv').config();
 const Promise = require('bluebird');
 const AtImport = require('postcss-import');
 const Chalk = require('chalk');
@@ -16,6 +17,7 @@ const Metalsmith = require('metalsmith');
 const Path = require('path');
 const PostCSS = require('postcss');
 const Program = require('commander');
+const S3 = require('s3');
 const UglifyJS = require('uglify-js');
 const Watch = require('watch');
 
@@ -164,6 +166,42 @@ function buildStyles() {
 }
 
 //
+// Publishes the dist folder to an S3 bucket.
+//
+//
+//
+function publishToS3() {
+  return new Promise((resolve, reject) => {
+    const client = S3.createClient({
+      s3Options: {
+        accessKeyId: process.env.S3_ACCESS_KEY,
+        secretAccessKey: process.env.S3_SECRET_KEY
+      }
+    });
+
+    // Sync the local /dist directory to /{version} in the S3 bucket
+    let uploader = client.uploadDir({
+      localDir: Path.join(__dirname, 'dist'),
+      deleteRemoved: true,
+      s3Params: {
+        ACL: process.env.S3_ACL,
+        Prefix: __version,
+        Bucket: process.env.S3_BUCKET
+      }
+    });
+
+    uploader.on('error', (err) => {
+      reject(err);
+    });
+
+    uploader.on('end', () => {
+      console.log(Chalk.green('%s has been published to S3! ☁️'), __version);
+      resolve();
+    });
+  });
+}
+
+//
 // Watches a directory for changes
 //
 //  - options (object)
@@ -197,6 +235,7 @@ Program
   .version(__version)
   .option('--build', 'Builds a release')
   .option('--clean', 'Removes existing release')
+  .option('--s3', 'Publish lastest release to an S3 bucket (requires .env)')
   .option('--watch', 'Watch for changes and build automatically')
   .on('--help', () => {
     console.log(Chalk.cyan('\n  Version %s\n'), __version);
@@ -225,6 +264,9 @@ if(Program.build) {
     // Generate docs
     .then(() => buildDocs())
 
+    // Publish to S3 if --s3 flag is set
+    .then(() => Program.s3 ? publishToS3() : null)
+
     // Exit with success
     .then(() => process.exit(1))
 
@@ -233,6 +275,12 @@ if(Program.build) {
       console.error(Chalk.red(err));
       process.exit(-1);
     });
+} else {
+  // Can't use the --s3 options without --build
+  if(Program.s3) {
+    console.error(Chalk.yellow('The --s3 flag can only be used with --build'));
+    process.exit(-1);
+  }
 }
 
 // Clean
