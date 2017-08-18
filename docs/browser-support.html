@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="description" content="Learn about browser support and polyfills for older browsers.">
+  <meta name="description" content="Shoelace works in just about every browser.">
   <link rel="icon" href="../source/img/favicon.png">
   <link rel="stylesheet" href="../dist/shoelace.css">
   <link rel="stylesheet" href="../source/css/_docs.css">
@@ -48,15 +48,20 @@
 
     <div id="content">
       <h2 id="browser-support">Browser Support</h2>
-<blockquote>
-<p>TL;DR — you can use Shoelace <em>today</em> if you don’t care about Internet Explorer (Edge is fine). If you need to support IE, just use a <a href="https://github.com/zirafa/bootstrap-grid-only">grid system</a> and a polyfill such as <a href="http://www.myth.io/">Myth</a> or <a href="http://cssnext.io/">cssnext</a>.</p>
-</blockquote>
-<p>Browser support for CSS variables is <a href="http://caniuse.com/#feat=css-variables">pretty good</a>, but if you need to support Internet Explorer, consider using <a href="http://www.myth.io/">Myth</a> or <a href="http://cssnext.io/">cssnext</a> as a polyfill. Both libraries let you write standards-compliant CSS and process it to work properly in unsupportive browsers.</p>
-<p>Unfortunately, it’s impossible for polyfills to support variable scoping. Because of this, Shoelace only uses CSS variables that are assigned at the <code>:root</code> level.</p>
-<p>Browser support for the CSS Grid is <a href="http://caniuse.com/#feat=css-grid">decent</a>, but if you need to support Internet Explorer or Edge &lt; 16, you can use the <a href="http://flexboxgrid.com/">Flexbox Grid</a> instead.</p>
-<p>Browser support for <code>calc</code> is <a href="http://caniuse.com/#feat=calc">excellent</a>. Shoelace uses this internally for relative calculations. You can use it along with CSS variables too.</p>
-<p>Browser support for color modifiers is non-existent. <a href="https://drafts.csswg.org/css-color/#modifying-colors">There is a draft</a>, so hopefully that will change soon. Shoelace doesn’t use this feature, but it will when support improves.</p>
-<p>Browser support for custom media queries is non-existent. <a href="https://drafts.csswg.org/mediaqueries-5/#custom-mq">There is a draft</a>, so hopefully that will change soon. Shoelace doesn’t use this feature, but it will when support improves.</p>
+<p>You can use Shoelace <em>today</em> in just about every browser. If you’re using the <a href="installing.html#cdn">CDN version</a> for prototyping, you’re good. If you’re <a href="installing.html#building-from-source">building from source</a>, you’re good.</p>
+<div class="browsers">
+  <img src="../source/img/chrome.svg" alt="Chrome">
+  <img src="../source/img/edge.svg" alt="Edge">
+  <img src="../source/img/firefox.svg" alt="Firefox">
+  <img src="../source/img/opera.svg" alt="Opera">
+  <img src="../source/img/safari.png" alt="Safari">
+</div>
+
+<p><em>What you can’t do</em> is use the source files without processing them with <a href="http://cssnext.io/">cssnext</a>.</p>
+<p>Shoelace makes extensive use of future CSS features in its source. Most browsers don’t support this syntax today, but they will soon. As CSS evolves and support improves, you’ll eventually be able to use Shoelace without any processing at all. In that sense, Shoelace is “future-ready.”</p>
+<p><a href="http://cssnext.io/features/">CSS has a really bright future</a>, and you can use most of its upcoming features today with Shoelace + cssnext. You no longer need Less or Sass to do amazing things with CSS.</p>
+<p>I believe we should focus on the future. Preprocessors had a place when the evolution of CSS seemed stagnant, but things have changed and it’s time to move forward. Instead of learning a different syntax, let’s just learn the <em>future syntax</em>.</p>
+<p>Unfortunately, many people aren’t aware of the great things happening with CSS these days. Shoelace aims to raise awareness by bringing us back to the basics and using tomorrow’s CSS today.</p>
 
     </div>
   </main>

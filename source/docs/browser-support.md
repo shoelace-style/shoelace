@@ -1,21 +1,27 @@
 ---
 layout: default.html
 title: Browser Support
-description: Learn about browser support and polyfills for older browsers.
+description: Shoelace works in just about every browser.
 ---
 
 ## Browser Support
 
-> TL;DR — you can use Shoelace _today_ if you don’t care about Internet Explorer (Edge is fine). If you need to support IE, just use a [grid system](https://github.com/zirafa/bootstrap-grid-only) and a polyfill such as [Myth](http://www.myth.io/) or [cssnext](http://cssnext.io/).
+You can use Shoelace _today_ in just about every browser. If you’re using the [CDN version](installing.html#cdn) for prototyping, you’re good. If you’re [building from source](installing.html#building-from-source), you’re good.
 
-Browser support for CSS variables is [pretty good](http://caniuse.com/#feat=css-variables), but if you need to support Internet Explorer, consider using [Myth](http://www.myth.io/) or [cssnext](http://cssnext.io/) as a polyfill. Both libraries let you write standards-compliant CSS and process it to work properly in unsupportive browsers.
+<div class="browsers">
+  ![Chrome](../source/img/chrome.svg)
+  ![Edge](../source/img/edge.svg)
+  ![Firefox](../source/img/firefox.svg)
+  ![Opera](../source/img/opera.svg)
+  ![Safari](../source/img/safari.png)
+</div>
 
-Unfortunately, it’s impossible for polyfills to support variable scoping. Because of this, Shoelace only uses CSS variables that are assigned at the `:root` level.
+_What you can’t do_ is use the source files without processing them with [cssnext](http://cssnext.io/).
 
-Browser support for the CSS Grid is [decent](http://caniuse.com/#feat=css-grid), but if you need to support Internet Explorer or Edge < 16, you can use the [Flexbox Grid](http://flexboxgrid.com/) instead.
+Shoelace makes extensive use of future CSS features in its source. Most browsers don’t support this syntax today, but they will soon. As CSS evolves and support improves, you’ll eventually be able to use Shoelace without any processing at all. In that sense, Shoelace is “future-ready.”
 
-Browser support for `calc` is [excellent](http://caniuse.com/#feat=calc). Shoelace uses this internally for relative calculations. You can use it along with CSS variables too.
+[CSS has a really bright future](http://cssnext.io/features/), and you can use most of its upcoming features today with Shoelace + cssnext. You no longer need Less or Sass to do amazing things with CSS.
 
-Browser support for color modifiers is non-existent. [There is a draft](https://drafts.csswg.org/css-color/#modifying-colors), so hopefully that will change soon. Shoelace doesn’t use this feature, but it will when support improves.
+I believe we should focus on the future. Preprocessors had a place when the evolution of CSS seemed stagnant, but things have changed and it’s time to move forward. Instead of learning a different syntax, let’s just learn the _future syntax_.
 
-Browser support for custom media queries is non-existent. [There is a draft](https://drafts.csswg.org/mediaqueries-5/#custom-mq), so hopefully that will change soon. Shoelace doesn’t use this feature, but it will when support improves.
+Unfortunately, many people aren’t aware of the great things happening with CSS these days. Shoelace aims to raise awareness by bringing us back to the basics and using tomorrow’s CSS today.
