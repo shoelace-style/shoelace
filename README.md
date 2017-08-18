@@ -1,4 +1,4 @@
-# 👟 Shoelace.css
+# <img src="https://shoelace.style/source/img/wordmark.svg" alt="Shoelace.css" width="380">
 
 A back to the basics CSS starter kit. For when you don’t need the whole boot.
 
@@ -18,7 +18,7 @@ Shoelace ships with a CLI that can be used to build a release and generate docum
 node build.js --build
 ```
 
-To see all available flags, run:
+To see all available options, run:
 
 ```
 node build.js --help
