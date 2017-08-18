@@ -48,27 +48,25 @@
 
     <div id="content">
       <h2 id="installing">Installing</h2>
-<p>Shoelace is incredibly easy to use. To get started, simply link to <code>shoelace.css</code> in your project. You can use the CDN version or download the source manually.</p>
-<p>To make certain components interactive (e.g. dropdowns and tabs), you’ll need to load <a href="https://cdnjs.com/libraries/jquery/">jQuery</a> or <a href="https://cdnjs.com/libraries/zepto/">Zepto</a> along with <code>shoelace.js</code>.</p>
+<p>There are two ways to use Shoelace. If you want to get things up and running quickly, use the <code>dist/</code> version or the <a href="#cdn">CDN version</a>. This version isn’t customizable, nor can you use future CSS features with it. It’s primarily intended for prototyping.</p>
+<p>If you’re developing a production app, you should <a href="#building-from-source">build Shoelace from source</a>. This version is completely customizable, modular, and let’s you use future CSS features <em>today</em>.</p>
+<p><strong>Note:</strong> To make certain components interactive (e.g. dropdowns and tabs), you’ll need to load <a href="https://cdnjs.com/libraries/jquery/">jQuery</a> or <a href="https://cdnjs.com/libraries/zepto/">Zepto</a> before <code>shoelace.js</code>.</p>
 <h3 id="cdn">CDN</h3>
-<p>The easiest way to use Shoelace is via CDN. Just add this to your <code>&lt;head&gt;</code>:</p>
+<p>This is the best approach for prototyping, however, this version isn’t customizable and doesn’t support future CSS features. To load Shoelace via CDN, add this to your <code>&lt;head&gt;</code>:</p>
 <pre><code class="lang-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/shoelace-css/1.0.0-beta16/shoelace.css&quot;&gt;
 </code></pre>
 <p>And this before <code>&lt;/body&gt;</code> but after jQuery/Zepto:</p>
 <pre><code class="lang-html">&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/shoelace-css/1.0.0-beta16/shoelace.js&quot;&gt;&lt;/script&gt;
 </code></pre>
 <p>This service is provided free, courtesy of <a href="https://cdnjs.com/">CDNJS</a>. New releases can take up to 12 hours to appear on the CDN.</p>
-<h3 id="download">Download</h3>
-<p>Alternatively, you can <a href="https://github.com/claviska/shoelace-css/releases">download the source</a> and link to <code>shoelace.css</code> from your own server. Just add this stylesheet to your <code>&lt;head&gt;</code>:</p>
-<pre><code class="lang-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;dist/shoelace.css&quot;&gt;
+<h3 id="building-from-source">Building From Source</h3>
+<p>To make the most out of Shoelace, you should build it from source. This will let you use future CSS features <em>today</em>, such as <a href="https://www.w3.org/TR/css-variables/">CSS variables</a>, <a href="http://tabatkins.github.io/specs/css-nesting/">nesting</a>, <a href="https://drafts.csswg.org/css-color/#modifying-colors">color functions</a>, <a href="http://cssnext.io/features/">and more</a>. It also gives you complete control over customimakes Shoelace fully customizable.</p>
+<p>The recommended way to build Shoelace is with <a href="http://cssnext.io/">cssnext</a>. There are instructions for webpack, gulp, grunt, browserify, and others located on the <a href="http://cssnext.io/setup/">setup page</a>.</p>
+<p>You can <a href="https://github.com/claviska/shoelace-css/releases">download Shoelace</a> from GitHub, but it’s probably better to use the npm version:</p>
+<pre><code class="lang-text">npm install shoelace-css
 </code></pre>
-<p>And this before <code>&lt;/body&gt;</code> but after jQuery/Zepto:</p>
-<pre><code class="lang-html">&lt;script src=&quot;dist/shoelace.js&quot;&gt;&lt;/script&gt;
-</code></pre>
-<h3 id="npm">NPM</h3>
-<p>If you’re using NPM, you can install Shoelace by running:</p>
-<pre><code>npm install shoelace-css
-</code></pre>
+<p>The main source file is <code>source/css/shoelace.css</code>. This sets core variables and imports all of Shoelace’s components. If you don’t need everything, you’re encouraged to create your own and import only the ones you’re going to use.</p>
+
     </div>
   </main>
 
