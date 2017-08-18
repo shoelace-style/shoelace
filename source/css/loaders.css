@@ -5,11 +5,11 @@
   --loader-thickness-sm: calc(var(--loader-thickness) / 1.5);
   --loader-thickness-lg: calc(var(--loader-thickness) * 1.5);
   --loader-thickness-xl: calc(var(--loader-thickness) * 2);
-  --loader-size-xs: 1rem;
-  --loader-size-sm: 2rem;
-  --loader-size: 3rem;
-  --loader-size-lg: 4rem;
-  --loader-size-xl: 5rem;
+  --loader-size-xs: var(--input-height-xs);
+  --loader-size-sm: var(--input-height-sm);
+  --loader-size: var(--input-height);
+  --loader-size-lg: var(--input-height-lg);
+  --loader-size-xl: var(--input-height-xl);
   --loader-speed: 750ms;
   --loader-margin-x: .5em;
   --loader-margin-y: 0;
