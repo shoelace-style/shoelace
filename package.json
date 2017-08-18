@@ -1,7 +1,7 @@
 {
   "name": "shoelace-css",
   "description": "A back to the basics CSS starter kit.",
-  "version": "1.0.0-beta16",
+  "version": "1.0.0-beta17",
   "author": "Cory LaViska",
   "homepage": "https://shoelace.style/",
   "license": "MIT",
@@ -22,7 +22,7 @@
     "metalsmith-in-place": "^3.0.1",
     "metalsmith-layouts": "^1.8.1",
     "metalsmith-markdown": "^0.2.1",
-    "postcss": "^6.0.8",
+    "postcss": "^6.0.9",
     "postcss-cssnext": "^3.0.2",
     "postcss-import": "^10.0.0",
     "s3": "^4.4.0",
