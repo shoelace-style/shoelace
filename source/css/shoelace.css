@@ -24,7 +24,7 @@
   /* Fonts */
   --font-sans-serif: sans-serif;
   --font-serif: serif;
-  --font-system: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue;
+  --font-system: system-ui;
   --font-monospace: Menlo, Consolas, "DejaVu Sans Mono", monospace;
 
   /* Colors (most courtesy of http://clrs.cc/) */
