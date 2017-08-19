@@ -30,7 +30,7 @@ This service is provided free, courtesy of [KeyCDN](https://keycdn.com/).
 
 ### Building From Source
 
-To make the most out of Shoelace, you should build it from source. This will let you use future CSS features _today_, such as [CSS variables](https://www.w3.org/TR/css-variables/), [nesting](http://tabatkins.github.io/specs/css-nesting/), [color functions](https://drafts.csswg.org/css-color/#modifying-colors), [and more](http://cssnext.io/features/). It also gives you complete control over customimakes Shoelace fully customizable.
+To make the most out of Shoelace, you should build it from source. This will let you use future CSS features _today_, such as [CSS variables](https://www.w3.org/TR/css-variables/), [nesting](http://tabatkins.github.io/specs/css-nesting/), [color functions](https://drafts.csswg.org/css-color/#modifying-colors), [and more](http://cssnext.io/features/). It also gives you complete control over customizing Shoelace.
 
 The recommended way to build Shoelace is with [cssnext](http://cssnext.io/). There are instructions for webpack, gulp, grunt, browserify, and others located on the [setup page](http://cssnext.io/setup/).
 
