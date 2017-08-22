@@ -10,7 +10,7 @@
   --dropdown-color-hover: var(--color-white);
   --dropdown-bg-color: var(--color-white);
   --dropdown-bg-color-hover: var(--state-primary);
-  --dropdown-box-shadow: 0 1px 0 rgba(0, 0, 0, .05);
+  --dropdown-box-shadow: var(--component-box-shadow-outer);
   --dropdown-divider-color: var(--component-border-color);
   --dropdown-divider-width: var(--component-border-width);
   --dropdown-padding-x: 1rem;

@@ -64,4 +64,6 @@
   --component-padding-x: 1rem;
   --component-padding-y: 1rem;
   --component-speed: .1s;
+  --component-box-shadow-inner: inset 0 1px 1px rgba(0, 0, 0, .05);
+  --component-box-shadow-outer: 0 1px 0 rgba(0, 0, 0, .05);
 }

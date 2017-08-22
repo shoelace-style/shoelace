@@ -14,7 +14,7 @@
   --progress-bg-color: var(--component-bg-color);
   --progress-bar-color: var(--state-primary);
   --progress-border-radius: var(--component-border-radius);
-  --progress-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+  --progress-box-shadow: var(--component-box-shadow-inner);
   --progress-speed: var(--component-speed);
   --progress-speed-indeterminate: 3s;
 }
