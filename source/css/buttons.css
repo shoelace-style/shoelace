@@ -13,9 +13,9 @@
   --button-font-family: var(--input-font-family);
   --button-font-weight: var(--input-font-weight);
   --button-border-radius: var(--component-border-radius);
-  --button-border-width: 1px;
-  --button-focus-width: 2px;
-  --button-speed: .1s;
+  --button-border-width: var(--component-border-width);
+  --button-focus-width: var(--input-focus-width);
+  --button-speed: var(--component-speed);
   --button-loader-size: 1em;
   --button-loader-border-width: .15em;
 

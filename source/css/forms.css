@@ -20,6 +20,8 @@
   --input-bg-color: var(--color-white);
   --input-box-shadow: inset 0 1px 0 rgba(0, 0, 0, .05);
   --input-readonly-bg-color: var(--component-bg-color);
+  --input-focus-width: 2px;
+  --input-speed: var(--component-speed);
 
   --input-range-track-height: .5rem;
   --input-range-track-color: var(--component-bg-color);
@@ -91,7 +93,10 @@ textarea {
   padding-left: .5rem;
   padding-right: .5rem;
   margin: 0;
-  transition: .1s border-color, .1s background-color, .1s color;
+  transition:
+    var(--input-speed) border-color,
+    var(--component-speed) background-color,
+    var(--component-speed) color;
   white-space: nowrap;
   -moz-appearance: none;
   -webkit-appearance: none;
@@ -215,7 +220,7 @@ input[type="range"] {
     }
 
     &::-webkit-slider-thumb {
-      box-shadow: 0 0 0 3px color(var(--input-range-thumb-color) alpha(50%));
+      box-shadow: 0 0 0 var(--input-focus-width) color(var(--input-range-thumb-color) alpha(50%));
     }
   }
 
@@ -240,7 +245,7 @@ input[type="range"] {
   }
 
   &:focus::-moz-range-thumb {
-    box-shadow: 0 0 0 3px color(var(--input-range-thumb-color) alpha(50%));
+    box-shadow: 0 0 0 var(--input-focus-width) color(var(--input-range-thumb-color) alpha(50%));
   }
 
   /* IE / Edge */
@@ -276,7 +281,7 @@ input[type="range"] {
   }
 
   &:focus::-ms-thumb {
-    box-shadow: 0 0 0 3px color(var(--input-range-thumb-color) alpha(50%));
+    box-shadow: 0 0 0 var(--input-focus-width) color(var(--input-range-thumb-color) alpha(50%));
   }
 
   &:focus::-ms-fill-lower {

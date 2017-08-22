@@ -13,7 +13,8 @@
   --switch-border-radius: var(--switch-height);
   --switch-thumb-border-radius: 50%;
   --switch-thumb-spacing: 2px;
-  --switch-speed: .2s;
+  --switch-focus-width: var(--input-focus-width);
+  --switch-speed: var(--component-speed);
 
   /* Default */
   --switch-color: var(--state-primary);
@@ -123,7 +124,7 @@
 
     &:focus + label::before {
       outline: none;
-      box-shadow: 0 0 0 3px color(var(--switch-color) alpha(50%));
+      box-shadow: 0 0 0 var(--switch-focus-width) color(var(--switch-color) alpha(50%));
     }
 
     &:disabled + label {
@@ -253,7 +254,7 @@
       & + label::after { background-color: var(--switch-thumb-color-secondary); }
       & + label::before { background-color: var(--switch-bg-color-secondary); }
       &:checked + label::before { background-color: var(--switch-color-secondary); }
-      &:focus + label::before { box-shadow: 0 0 0 3px color(var(--switch-color-secondary) alpha(50%)); }
+      &:focus + label::before { box-shadow: 0 0 0 var(--switch-focus-width) color(var(--switch-color-secondary) alpha(50%)); }
     }
   }
 
@@ -274,7 +275,7 @@
       }
 
       &:focus + label::before {
-        box-shadow: 0 0 0 3px color(var(--switch-color-success) alpha(50%));
+        box-shadow: 0 0 0 var(--switch-focus-width) color(var(--switch-color-success) alpha(50%));
       }
     }
   }
@@ -296,7 +297,7 @@
       }
 
       &:focus + label::before {
-        box-shadow: 0 0 0 3px color(var(--switch-color-info) alpha(50%));
+        box-shadow: 0 0 0 var(--switch-focus-width) color(var(--switch-color-info) alpha(50%));
       }
     }
   }
@@ -318,7 +319,7 @@
       }
 
       &:focus + label::before {
-        box-shadow: 0 0 0 3px color(var(--switch-color-warning) alpha(50%));
+        box-shadow: 0 0 0 var(--switch-focus-width) color(var(--switch-color-warning) alpha(50%));
       }
     }
   }
@@ -340,7 +341,7 @@
       }
 
       &:focus + label::before {
-        box-shadow: 0 0 0 3px color(var(--switch-color-danger) alpha(50%));
+        box-shadow: 0 0 0 var(--switch-focus-width) color(var(--switch-color-danger) alpha(50%));
       }
     }
   }
@@ -362,7 +363,7 @@
       }
 
       &:focus + label::before {
-        box-shadow: 0 0 0 3px color(var(--switch-color-light) alpha(50%));
+        box-shadow: 0 0 0 var(--switch-focus-width) color(var(--switch-color-light) alpha(50%));
       }
     }
   }
@@ -384,7 +385,7 @@
       }
 
       &:focus + label::before {
-        box-shadow: 0 0 0 3px color(var(--switch-color-dark) alpha(50%));
+        box-shadow: 0 0 0 var(--switch-focus-width) color(var(--switch-color-dark) alpha(50%));
       }
     }
   }

@@ -11,7 +11,8 @@
   --tab-color-disabled: var(--state-secondary);
   --tab-padding-x: var(--component-padding-x);
   --tab-padding-y: calc(var(--component-padding-y) / 2);
-  --tab-speed: .2s;
+  --tab-focus-width: var(--input-focus-width);
+  --tab-speed: var(--component-speed);
 
   --tab-pane-border-color: var(--component-border-color);
   --tab-pane-border-radius: var(--component-border-radius);
@@ -47,7 +48,7 @@
         outline: none;
 
         &:not(.disabled) {
-          box-shadow: 0 0 0 3px color(var(--tab-bg-color-active) alpha(50%));
+          box-shadow: 0 0 0 var(--tab-focus-width) color(var(--tab-bg-color-active) alpha(50%));
 
           /* Force a new stacking context so focus rings don't get truncated by adjacent elements */
           transform: translateZ(0);
