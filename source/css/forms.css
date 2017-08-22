@@ -37,8 +37,8 @@
   --fieldset-border-color: var(--component-border-color);
   --fieldset-border-width: var(--component-border-width);
   --fieldset-border-radius: var(--component-border-radius);
-  --fieldset-padding-x: 1.5rem;
-  --fieldset-padding-y: 1rem;
+  --fieldset-padding-x: 2rem;
+  --fieldset-padding-y: 1.5rem;
 }
 
 fieldset {
@@ -50,6 +50,10 @@ fieldset {
   & legend {
     font-weight: var(--font-weight-bold);
     padding: 0 .25rem;
+  }
+
+  & :last-child {
+    margin-bottom: 0;
   }
 }
 
