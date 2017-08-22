@@ -13,8 +13,9 @@
   --button-font-family: var(--input-font-family);
   --button-font-weight: var(--input-font-weight);
   --button-border-radius: var(--component-border-radius);
-  --button-border-width: 2px;
-  --button-speed: .2s;
+  --button-border-width: 1px;
+  --button-focus-width: 2px;
+  --button-speed: .1s;
   --button-loader-size: 1em;
   --button-loader-border-width: .15em;
 
@@ -98,7 +99,7 @@ button,
 
   &:focus:not(:disabled, .disabled) {
     outline: none;
-    box-shadow: 0 0 0 3px color(var(--button-bg-color) alpha(50%));
+    box-shadow: 0 0 0 var(--button-focus-width) color(var(--button-bg-color) alpha(50%));
   }
 
   &:disabled,
@@ -159,7 +160,7 @@ button,
 
     &:focus:not(:disabled, .disabled) {
       outline: none;
-      box-shadow: 0 0 0 3px color(var(--button-bg-color-secondary) alpha(50%));
+      box-shadow: 0 0 0 var(--button-focus-width) color(var(--button-bg-color-secondary) alpha(50%));
     }
   }
 
@@ -188,7 +189,7 @@ button,
 
     &:focus:not(:disabled, .disabled) {
       outline: none;
-      box-shadow: 0 0 0 3px color(var(--button-bg-color-success) alpha(50%));
+      box-shadow: 0 0 0 var(--button-focus-width) color(var(--button-bg-color-success) alpha(50%));
     }
   }
 
@@ -217,7 +218,7 @@ button,
 
     &:focus:not(:disabled, .disabled) {
       outline: none;
-      box-shadow: 0 0 0 3px color(var(--button-bg-color-info) alpha(50%));
+      box-shadow: 0 0 0 var(--button-focus-width) color(var(--button-bg-color-info) alpha(50%));
     }
   }
 
@@ -246,7 +247,7 @@ button,
 
     &:focus:not(:disabled, .disabled) {
       outline: none;
-      box-shadow: 0 0 0 3px color(var(--button-bg-color-warning) alpha(50%));
+      box-shadow: 0 0 0 var(--button-focus-width) color(var(--button-bg-color-warning) alpha(50%));
     }
   }
 
@@ -275,7 +276,7 @@ button,
 
     &:focus:not(:disabled, .disabled) {
       outline: none;
-      box-shadow: 0 0 0 3px color(var(--button-bg-color-danger) alpha(50%));
+      box-shadow: 0 0 0 var(--button-focus-width) color(var(--button-bg-color-danger) alpha(50%));
     }
   }
 
@@ -304,7 +305,7 @@ button,
 
     &:focus:not(:disabled, .disabled) {
       outline: none;
-      box-shadow: 0 0 0 3px color(var(--button-bg-color-light) alpha(50%));
+      box-shadow: 0 0 0 var(--button-focus-width) color(var(--button-bg-color-light) alpha(50%));
     }
   }
 
@@ -333,7 +334,7 @@ button,
 
     &:focus:not(:disabled, .disabled) {
       outline: none;
-      box-shadow: 0 0 0 3px color(var(--button-bg-color-dark) alpha(50%));
+      box-shadow: 0 0 0 var(--button-focus-width) color(var(--button-bg-color-dark) alpha(50%));
     }
   }
 
