@@ -111,7 +111,7 @@ blockquote {
   font-size: var(--font-size-big);
   border-left: solid .4rem var(--component-border-color);
   padding: .5rem .5rem .5rem 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   margin-left: 0;
 }
 
@@ -134,7 +134,7 @@ del {
 
 figure {
   margin-top: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 h1,
@@ -191,7 +191,7 @@ mark {
 
 p {
   margin-top: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 pre {
@@ -203,7 +203,7 @@ pre {
   border-radius: var(--pre-border-radius);
   padding: 1rem;
   margin-top: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 small {
@@ -215,7 +215,7 @@ small {
 ***************************************************************************************************/
 
 dl {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 dt {
@@ -224,14 +224,14 @@ dt {
 
 dd {
   margin-left: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 ol,
 ul {
   line-height: var(--line-height);
   margin-top: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 
   & ol,
   & ul {

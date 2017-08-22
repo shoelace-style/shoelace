@@ -104,7 +104,7 @@ h4[id] {
 }
 
 pre {
-  margin-bottom: 1rem !important; /* Prism overrides our bottom margin */
+  margin-bottom: 1.5rem !important; /* Prism overrides our bottom margin */
 }
 
 pre code {
@@ -150,7 +150,7 @@ a code {
 .width-sizing-example {
   border: solid 1px #ddd;
   padding: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .width-sizing-example div {
@@ -158,7 +158,7 @@ a code {
   color: white;
   text-align: center;
   padding: .25rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .width-sizing-example div:last-child {
@@ -169,7 +169,7 @@ a code {
   border: solid 1px #ddd;
   height: 15rem;
   padding: 1rem .5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .height-sizing-example div {

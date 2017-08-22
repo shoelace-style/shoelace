@@ -15,7 +15,7 @@ table {
   width: 100%;
   background-color: var(--table-bg-color);
   border-collapse: collapse;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 
   & caption {
     caption-side: bottom;

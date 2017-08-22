@@ -22,10 +22,10 @@
 
 .tabs {
   width: 100%;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 
   & .tabs-nav {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     user-select: none;
 
     & a {

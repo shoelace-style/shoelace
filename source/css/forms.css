@@ -43,7 +43,7 @@ fieldset {
   border: solid var(--fieldset-border-width) var(--fieldset-border-color);
   border-radius: var(--fieldset-border-radius);
   padding: var(--fieldset-padding-y) var(--fieldset-padding-x);
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 
   & legend {
     font-weight: var(--font-weight-bold);
@@ -290,14 +290,14 @@ input[type="range"] {
 
 /* Input singles */
 .input-single {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 /* Input groups */
 .input-group {
   width: 100%;
   display: flex;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 
   & > input,
   & > button,
