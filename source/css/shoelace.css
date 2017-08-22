@@ -63,4 +63,5 @@
   --component-border-width: 1px;
   --component-padding-x: 1rem;
   --component-padding-y: 1rem;
+  --component-speed: .1s;
 }
