@@ -315,7 +315,7 @@ button,
     border-top-color: color(var(--button-bg-color-dark) tint(10%));
     border-bottom-color: color(var(--button-bg-color-dark) shade(10%));
 
-    &:hover {
+    &:hover:not(:disabled, .disabled) {
       color: var(--button-color-dark);
       background-color: color(var(--button-bg-color-dark) shade(10%));
       border-color: color(var(--button-bg-color-dark) shade(10%));
@@ -323,7 +323,7 @@ button,
       border-bottom-color: color(var(--button-bg-color-dark) shade(20%));
     }
 
-    &:active,
+    &:active:not(:disabled, .disabled),
     &.active:not(:disabled, .disabled) {
       background-color: color(var(--button-bg-color-dark) shade(10%));
       border-color: color(var(--button-bg-color-dark) shade(10%));
