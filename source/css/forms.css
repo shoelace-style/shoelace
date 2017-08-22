@@ -1,10 +1,10 @@
 /*! Forms */
 :root {
-  --input-height-xs: 1rem;
-  --input-height-sm: 1.5rem;
-  --input-height: 2rem;
-  --input-height-lg: 2.5rem;
-  --input-height-xl: 3rem;
+  --input-height-xs: 1.25rem;
+  --input-height-sm: 1.75rem;
+  --input-height: 2.25rem;
+  --input-height-lg: 2.75rem;
+  --input-height-xl: 3.25rem;
   --input-font-size-xs: .7rem;
   --input-font-size-sm: .8rem;
   --input-font-size: 1rem;
