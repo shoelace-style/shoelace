@@ -1,10 +1,10 @@
 /*! Switches */
 :root {
-  --switch-height: var(--input-height);
-  --switch-height-xs: var(--input-height-xs);
-  --switch-height-sm: var(--input-height-sm);
-  --switch-height-lg: var(--input-height-lg);
-  --switch-height-xl: var(--input-height-xl);
+  --switch-height: calc(var(--input-height) * .75);
+  --switch-height-xs: calc(var(--input-height-xs) * .75);
+  --switch-height-sm: calc(var(--input-height-sm) * .75);
+  --switch-height-lg: calc(var(--input-height-lg) * .75);
+  --switch-height-xl: calc(var(--input-height-xl) * .75);
   --switch-font-size: var(--input-font-size);
   --switch-font-size-xs: var(--input-font-size-xs);
   --switch-font-size-sm: var(--input-font-size-sm);
