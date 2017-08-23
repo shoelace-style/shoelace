@@ -22,7 +22,7 @@ You can load Font Awesome locally or via CDN. To use the CDN version, add this t
 
 Then add icons as you normally would with `<i class="fa fa-*"></i>`:
 
-<div class="input-single text-secondary" style="font-size: 2rem;">
+<div class="input-field text-secondary" style="font-size: 2rem;">
   <i class="fa fa-magic"></i>
   <i class="fa fa-briefcase"></i>
   <i class="fa fa-cog"></i>
@@ -37,7 +37,7 @@ Then add icons as you normally would with `<i class="fa fa-*"></i>`:
   <i class="fa fa-warning"></i>
 </div>
 
-<div class="input-single">
+<div class="input-field">
   <button type="button"><i class="fa fa-star"></i> Star</button>
   <button type="button" class="button-success"><i class="fa fa-check"></i> Check</button>
   <button type="button" class="button-warning"><i class="fa fa-pencil"></i> Edit</button>

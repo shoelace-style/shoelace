@@ -12,7 +12,7 @@ To create a button, use the `<button>` element or apply the `button` class to an
 <button type="button">Button</button>
 ```
 
-<div class="input-single">
+<div class="input-field">
   <button type="button">Button</button>
 </div>
 
@@ -26,7 +26,7 @@ Use the `button-[xs|sm|lg|xl]` modifiers to change the size of a button.
 <button type="button" class="button-xl">XL Button</button>
 ```
 
-<div class="input-single">
+<div class="input-field">
   <button type="button" class="button-xs">XS Button</button>
   <button type="button" class="button-sm">SM Button</button>
   <button type="button">Default Button</button>
@@ -41,7 +41,7 @@ To disable a button set the `disabled` property on `<button>` elements. You can 
 <a href="#" class="button disabled">Disabled Link</a>
 ```
 
-<div class="input-single">
+<div class="input-field">
   <button type="button" disabled>Disabled Button</button>
   <a href="#" class="button disabled">Disabled Link</a>
 </div>
@@ -53,7 +53,7 @@ You can force buttons to have an active state by applying the `active` class.
 <a href="#" class="button active">Active Link</a>
 ```
 
-<div class="input-single">
+<div class="input-field">
   <button type="button" class="active">Active Button</button>
   <a href="#" class="button active">Active Link</a>
 </div>
@@ -72,7 +72,7 @@ Use the `button-*` modifier to create variations.
 <button type="button" class="button-dark">Dark</button>
 ```
 
-<div class="input-single">
+<div class="input-field">
   <button type="button" class="button-secondary">Secondary</button>
   <button type="button" class="button-success">Success</button>
   <button type="button" class="button-info">Info</button>
@@ -90,7 +90,7 @@ Use the `button-block` modifier to make a button span the entire width of its pa
 <button type="button" class="button-block">Block Button</button>
 ```
 
-<div class="input-single">
+<div class="input-field">
   <button type="button" class="button-block">Block Button</button>
 </div>
 
@@ -102,7 +102,7 @@ Buttons can be styled to look like normal links with the `button-link` modifier.
 <a href="#" class="button button-link">Link Button</a>
 ```
 
-<div class="input-single">
+<div class="input-field">
   <a href="#" class="button button-link">Link Button</a>
 </div>
 
@@ -118,7 +118,7 @@ Buttons can be given a loading state with the `button-loader` modifier. This wil
 <button type="button" class="button-loader button-xl">XL</button>
 ```
 
-<div class="input-single">
+<div class="input-field">
   <button type="button" class="button-loader button-xs">XS</button>
   <button type="button" class="button-loader button-sm">SM</button>
   <button type="button" class="button-loader">Default</button>
@@ -138,7 +138,7 @@ Loader buttons also work with button variations.
 <button type="button" class="button-loader button-dark">Button</button>
 ```
 
-<div class="input-single">
+<div class="input-field">
   <button type="button" class="button-loader button-secondary">Button</button>
   <button type="button" class="button-loader button-success">Button</button>
   <button type="button" class="button-loader button-info">Button</button>
@@ -161,6 +161,6 @@ File buttons are simply `<label>` elements with the `button` class and a nested 
 </label>
 ```
 
-<div class="input-single">
+<div class="input-field">
   <label class="button">Select File <input type="file"></label>
 </div>

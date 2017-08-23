@@ -117,37 +117,37 @@ You can change the size of most form controls with the `input-[xs|sm|lg|xl]` mod
 
 <div class="two-column">
   <div class="column">
-    <div class="input-single">
+    <div class="input-field">
       <input type="text" class="input-xs" placeholder="XS">
     </div>
-    <div class="input-single">
+    <div class="input-field">
       <input type="text" class="input-sm" placeholder="SM">
     </div>
-    <div class="input-single">
+    <div class="input-field">
       <input type="text" placeholder="Default">
     </div>
-    <div class="input-single">
+    <div class="input-field">
       <input type="text" class="input-lg" placeholder="LG">
     </div>
-    <div class="input-single">
+    <div class="input-field">
       <input type="text" class="input-xl" placeholder="XL">
     </div>
   </div>
 
   <div class="column">
-    <div class="input-single">
+    <div class="input-field">
       <select class="input-xs"><option>XS</option></select>
     </div>
-    <div class="input-single">
+    <div class="input-field">
       <select class="input-sm"><option>SM</option></select>
     </div>
-    <div class="input-single">
+    <div class="input-field">
       <select><option>Default</option></select>
     </div>
-    <div class="input-single">
+    <div class="input-field">
       <select class="input-lg"><option>LG</option></select>
     </div>
-    <div class="input-single">
+    <div class="input-field">
       <select class="input-xl"><option>XL</option></select>
     </div>
   </div>
@@ -155,52 +155,52 @@ You can change the size of most form controls with the `input-[xs|sm|lg|xl]` mod
 
 Disabled form controls look like this:
 
-<div class="input-single">
+<div class="input-field">
   <input type="text" placeholder="Input" disabled>
 </div>
 
-<div class="input-single">
+<div class="input-field">
   <label><input type="checkbox" disabled> Checkbox</label>
   <label><input type="radio" disabled> Radio</label>
 </div>
 
 Read-only form controls look like this:
 
-<div class="input-single">
+<div class="input-field">
   <input type="text" readonly value="This is read-only">
 </div>
 
 ### Form Control Spacing
 
-For proper spacing of individual form controls, wrap them in `input-single` containers.
+For proper spacing of individual form controls, wrap them in `input-field` containers.
 
 ```html
-<div class="input-single">
+<div class="input-field">
   <label>Name</label>
   <input type="text">
 </div>
 
-<div class="input-single">
+<div class="input-field">
   <label>Password</label>
   <input type="password">
 </div>
 
-<div class="input-single">
+<div class="input-field">
   <label><input type="checkbox"> Remember me</label>
 </div>
 ```
 
-<div class="input-single">
+<div class="input-field">
   <label>Username</label>
   <input type="text">
 </div>
 
-<div class="input-single">
+<div class="input-field">
   <label>Password</label>
   <input type="password">
 </div>
 
-<div class="input-single">
+<div class="input-field">
   <label><input type="checkbox"> Remember me</label>
 </div>
 
@@ -292,7 +292,7 @@ To create an input addon, use `<span class="input-addon">`. Addons can appear an
 </div>
 ```
 
-<div class="input-single">
+<div class="input-field">
   <div class="input-group">
     <span class="input-addon input-addon-xs">$</span>
     <input type="text" class="input-xs">
@@ -300,7 +300,7 @@ To create an input addon, use `<span class="input-addon">`. Addons can appear an
   </div>
 </div>
 
-<div class="input-single">
+<div class="input-field">
   <div class="input-group">
     <span class="input-addon input-addon-sm">$</span>
     <input type="text" class="input-sm">
@@ -308,7 +308,7 @@ To create an input addon, use `<span class="input-addon">`. Addons can appear an
   </div>
 </div>
 
-<div class="input-single">
+<div class="input-field">
   <div class="input-group">
     <span class="input-addon">$</span>
     <input type="text">
@@ -316,7 +316,7 @@ To create an input addon, use `<span class="input-addon">`. Addons can appear an
   </div>
 </div>
 
-<div class="input-single">
+<div class="input-field">
   <div class="input-group">
     <span class="input-addon input-addon-lg">$</span>
     <input type="text" class="input-lg">
@@ -324,7 +324,7 @@ To create an input addon, use `<span class="input-addon">`. Addons can appear an
   </div>
 </div>
 
-<div class="input-single">
+<div class="input-field">
   <div class="input-group">
     <span class="input-addon input-addon-xl">$</span>
     <input type="text" class="input-xl">
@@ -345,35 +345,35 @@ Related form controls can be grouped in a `<fieldset>`. An optional `<legend>` c
 
 <fieldset>
   <legend>Login</legend>
-  <div class="input-single">
+  <div class="input-field">
     <label>Username</label>
     <input type="text">
   </div>
-  <div class="input-single">
+  <div class="input-field">
     <label>Password</label>
     <input type="password">
   </div>
-  <div class="input-single">
+  <div class="input-field">
     <label>
       <input type="checkbox"> Remember me
     </label>
   </div>
-  <div class="input-single">
+  <div class="input-field">
     <button type="button">Login</button>
   </div>
 </fieldset>
 
 ### Validation
 
-Form controls can be made valid or invalid using the `input-valid` and `input-invalid` modifiers. It’s better to apply modifiers to the surrounding `input-single` so labels will be styled as well, but modifiers can be applied directly to form controls as needed.
+Form controls can be made valid or invalid using the `input-valid` and `input-invalid` modifiers. It’s better to apply modifiers to the surrounding `input-field` so labels will be styled as well, but modifiers can be applied directly to form controls as needed.
 
 ```html
-<div class="input-single input-valid">
+<div class="input-field input-valid">
   <label>Valid</label>
   <input type="text">
 </div>
 
-<div class="input-single input-invalid">
+<div class="input-field input-invalid">
   <label>Invalid</label>
   <input type="text">
 </div>
@@ -381,14 +381,14 @@ Form controls can be made valid or invalid using the `input-valid` and `input-in
 
 <div class="two-column">
   <div class="column">
-    <div class="input-single input-valid">
+    <div class="input-field input-valid">
       <label>Valid</label>
       <input type="text">
     </div>
   </div>
 
   <div class="column">
-    <div class="input-single input-invalid">
+    <div class="input-field input-invalid">
       <label>Invalid</label>
       <input type="text">
     </div>

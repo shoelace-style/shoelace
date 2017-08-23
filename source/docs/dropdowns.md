@@ -27,7 +27,7 @@ To disable a dropdown entirely, add the `disabled` property to the dropdown trig
 </div>
 ```
 
-<div class="input-single">
+<div class="input-field">
   <div class="dropdown">
     <button type="button" class="dropdown-trigger">Dropdown</button>
     <div class="dropdown-menu">
@@ -58,7 +58,7 @@ Use the `dropdown-top` and `dropdown-left` modifiers to change the positioning o
 </div>
 ```
 
-<div class="input-single">
+<div class="input-field">
   <div class="dropdown dropdown-top">
     <button type="button" class="dropdown-trigger">Top</button>
     <div class="dropdown-menu">

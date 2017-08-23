@@ -28,7 +28,7 @@ The markup for a switch looks like this:
 </span>
 ```
 
-<div class="input-single">
+<div class="input-field">
   <span class="switch">
     <input type="checkbox" class="switch" id="switch-1">
     <label for="switch-1">Switch 1</label>
@@ -69,7 +69,7 @@ Use the `switch-[xs|sm|lg|xl]` modifiers to change the size of a switch.
 </span>
 ```
 
-<div class="input-single">
+<div class="input-field">
   <span class="switch switch-xs">
     <input type="checkbox" class="switch" id="switch-xs">
     <label for="switch-xs">XS</label>
@@ -105,7 +105,7 @@ Disabled switches are dimmed out. To disable a switch, add the `disabled` attrib
 </span>
 ```
 
-<div class="input-single">
+<div class="input-field">
   <span class="switch">
     <input type="checkbox" class="switch" disabled id="switch-disabled">
     <label for="switch-disabled">Disabled</label>

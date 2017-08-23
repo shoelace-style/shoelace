@@ -15,7 +15,7 @@ Create a pure CSS loader by applying the `loader` class to an empty `<span>` ele
 <span class="loader loader-lg"></span>
 <span class="loader loader-xl"></span>
 ```
-<div class="input-single">
+<div class="input-field">
   <span class="loader loader-xs"></span>
   <span class="loader loader-sm"></span>
   <span class="loader"></span>
