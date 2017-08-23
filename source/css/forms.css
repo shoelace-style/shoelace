@@ -54,7 +54,7 @@ fieldset {
     padding: 0 .25rem;
   }
 
-  & :last-child {
+  & > :last-child {
     margin-bottom: 0;
   }
 }

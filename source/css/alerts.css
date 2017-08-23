@@ -66,7 +66,7 @@
     font-weight: var(--font-weight-bold);
   }
 
-  & :last-child {
+  & > :last-child {
     margin-bottom: 0;
   }
 
