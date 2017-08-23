@@ -39,6 +39,8 @@
   --fieldset-border-radius: var(--component-border-radius);
   --fieldset-padding-x: 2rem;
   --fieldset-padding-y: 1.5rem;
+
+  --label-color: inherit;
 }
 
 fieldset {
@@ -58,6 +60,7 @@ fieldset {
 }
 
 label {
+  color: var(--label-color);
   display: inline-block;
   margin-bottom: .25rem;
 
