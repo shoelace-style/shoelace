@@ -30,8 +30,8 @@
 
       <p>
         You can use Shoelace with just about every browser. The CDN version is great for
-        prototyping, but to take full advantage you should
-        <a href="docs/installing.html#building-from-source">build it from source</a>.
+        prototyping, but to take advantage of all its features you should
+        <a href="docs/installing.html#building-from-source">build Shoelace from source</a>.
       </p>
 
       <p>
@@ -39,15 +39,20 @@
       </p>
 
 <pre><code class="language-css">:root {
-  --info-color: white;
-  --info-bg: color(teal shade(25%));
+  /* Use CSS variables */
+  --state-primary: #09d;
+
+  /* Use color functions instead of hard-coding values */
+  --alert-bg-color: color(var(--state-primary) tint(75%));
+  --alert-color: color(var(--state-primary) lightness(25%));
 }
 
-.info {
-  color: var(--info-color);
-  background: var(--info-bg);
+/* Nest selectors for better legibility */
+.alert {
+  background-color: var(--alert-bg-color);
+  color: var(--alert-color);
 
-  &amp;.info-big {
+  &amp;.alert-lg {
     font-size: 2rem;
   }
 }
