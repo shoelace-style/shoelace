@@ -1,42 +1,4 @@
 /*! Badges */
-:root {
-  --badge-font-size: .8em; /* ems for relative sizing */
-  --badge-border-radius: 1em;  /* ems for relative sizing */
-  --badge-focus-width: var(--input-focus-width);
-  --badge-speed: var(--component-speed);
-
-  /* Default */
-  --badge-color: var(--color-white);
-  --badge-bg-color: var(--state-primary);
-
-  /* Secondary */
-  --badge-color-secondary: var(--color-white);
-  --badge-bg-color-secondary: var(--state-secondary);
-
-  /* Success */
-  --badge-color-success: var(--color-white);
-  --badge-bg-color-success: var(--state-success);
-
-  /* Info */
-  --badge-color-info: var(--color-white);
-  --badge-bg-color-info: var(--state-info);
-
-  /* Warning */
-  --badge-color-warning: var(--color-white);
-  --badge-bg-color-warning: var(--state-warning);
-
-  /* Danger */
-  --badge-color-danger: var(--color-white);
-  --badge-bg-color-danger: var(--state-danger);
-
-  /* Light */
-  --badge-color-light: var(--state-dark);
-  --badge-bg-color-light: var(--state-light);
-
-  /* Dark */
-  --badge-color-dark: var(--state-light);
-  --badge-bg-color-dark: var(--state-dark);
-}
 
 .badge {
   font-size: var(--badge-font-size);

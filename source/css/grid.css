@@ -7,14 +7,6 @@
 
   Licensed under the MIT license.
 */
-:root {
-  --container-max-width-sm: 540px;
-  --container-max-width-md: 720px;
-  --container-max-width-lg: 960px;
-  --container-max-width-xl: 1140px;
-
-  --grid-gutter-width: 2rem;
-}
 
 /* Containers */
 .container,

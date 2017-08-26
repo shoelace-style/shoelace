@@ -1,23 +1,4 @@
 /*! Progress Bars */
-:root {
-  --progress-height: var(--input-height);
-  --progress-height-xs: var(--input-height-xs);
-  --progress-height-sm: var(--input-height-sm);
-  --progress-height-lg: var(--input-height-lg);
-  --progress-height-xl: var(--input-height-xl);
-  --progress-font-size: var(--input-font-size);
-  --progress-font-size-xs: var(--input-font-size-xs);
-  --progress-font-size-sm: var(--input-font-size-sm);
-  --progress-font-size-lg: var(--input-font-size-lg);
-  --progress-font-size-xl: var(--input-font-size-xl);
-  --progress-color: var(--color-white);
-  --progress-bg-color: var(--component-bg-color);
-  --progress-bar-color: var(--state-primary);
-  --progress-border-radius: var(--component-border-radius);
-  --progress-box-shadow: var(--component-box-shadow-inner);
-  --progress-speed: var(--component-speed);
-  --progress-speed-indeterminate: 3s;
-}
 
 .progress {
   position: relative;

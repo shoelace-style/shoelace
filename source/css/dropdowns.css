@@ -1,24 +1,4 @@
 /*! Dropdowns */
-:root {
-  --dropdown-min-width: 10rem;
-  --dropdown-max-width: 25rem;
-  --dropdown-max-height: none;
-  --dropdown-border-color: var(--component-border-color);
-  --dropdown-border-radius: var(--component-border-radius);
-  --dropdown-border-width: var(--component-border-width);
-  --dropdown-color: var(--body-color);
-  --dropdown-color-hover: var(--color-white);
-  --dropdown-bg-color: var(--color-white);
-  --dropdown-bg-color-hover: var(--state-primary);
-  --dropdown-box-shadow: var(--component-box-shadow-outer);
-  --dropdown-divider-color: var(--component-border-color);
-  --dropdown-divider-width: var(--component-border-width);
-  --dropdown-padding-x: 1rem;
-  --dropdown-padding-y: .25rem;
-  --dropdown-offset-x: 0;
-  --dropdown-offset-y: 1px;
-  --dropdown-z-index: 100;
-}
 
 .dropdown {
   position: relative;

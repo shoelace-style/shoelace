@@ -1,25 +1,4 @@
 /*! Tabs */
-:root {
-  --tab-bg-color: var(--body-bg-color);
-  --tab-bg-color-hover: var(--body-bg-color);
-  --tab-bg-color-active: var(--link-color);
-  --tab-bg-color-disabled: var(--body-bg-color);
-  --tab-border-radius: var(--component-border-radius);
-  --tab-color: var(--link-color);
-  --tab-color-hover: var(--link-color-hover);
-  --tab-color-active: var(--color-white);
-  --tab-color-disabled: var(--state-secondary);
-  --tab-padding-x: var(--component-padding-x);
-  --tab-padding-y: calc(var(--component-padding-y) / 2);
-  --tab-focus-width: var(--input-focus-width);
-  --tab-speed: var(--component-speed);
-
-  --tab-pane-border-color: var(--component-border-color);
-  --tab-pane-border-radius: var(--component-border-radius);
-  --tab-pane-border-width: var(--component-border-width);
-  --tab-pane-padding-x: var(--component-padding-x);
-  --tab-pane-padding-y: var(--component-padding-y);
-}
 
 .tabs {
   width: 100%;
