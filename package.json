@@ -1,7 +1,7 @@
 {
   "name": "shoelace-css",
   "description": "A back to the basics CSS starter kit.",
-  "version": "1.0.0-beta18",
+  "version": "1.0.0-beta19",
   "author": "Cory LaViska",
   "homepage": "https://shoelace.style/",
   "license": "MIT",
@@ -27,7 +27,7 @@
     "postcss-import": "^10.0.0",
     "s3": "^4.4.0",
     "stylelint-config-standard": "^17.0.0",
-    "uglify-js": "^3.0.27",
+    "uglify-js": "^3.0.28",
     "watch": "^1.0.2"
   },
   "dependencies": {}
