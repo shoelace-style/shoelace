@@ -42,7 +42,7 @@ Responsive breakpoints exist for five tiers of screen sizes. By default, the bre
 - `lg` &rarr; 992px - 1199px
 - `xl` &rarr; 1200px and above
 
-If you’re building Shoelace from source, you can use the custom media queries found in [`source/css/shoelace.css`](../source/css/shoelace.css) to easily target various breakpoints without hard-coding screen sizes in your stylesheet.
+If you’re building Shoelace from source, you can use the custom media queries found in [`source/css/variables.css`](../source/css/variables.css) to easily target various breakpoints without hard-coding screen sizes in your stylesheet.
 
 ```css
 @media (--breakpoint-xs-up) { /* xs screens and above */ }

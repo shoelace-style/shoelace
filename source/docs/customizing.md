@@ -6,7 +6,7 @@ description: Learn how to customize Shoelace.css with CSS variables.
 
 ## Customizing
 
-If you’re using the source version of Shoelace (i.e. not the CDN or `/dist` version), you can customize components using CSS variables. To add customizations, simply override one or more of the variables found in the `:root` block of [`source/css/shoelace.css`](../source/css/shoelace.css).
+If you’re using the source version of Shoelace (i.e. not the CDN or `/dist` version), you can customize components using CSS variables. To add customizations, simply override one or more of the variables found in [`source/css/variables.css`](../source/css/variables.css).
 
 For example, you can customize the default text color, background color, and the primary color by adding this to your stylesheet:
 

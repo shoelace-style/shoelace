@@ -40,4 +40,6 @@ You can [download Shoelace](https://github.com/claviska/shoelace-css/releases) f
 npm install shoelace-css
 ```
 
-The main source file is `source/css/shoelace.css`. This sets core variables and imports all of Shoelace’s components. If you don’t need everything, you’re encouraged to create your own and import only the ones you’re going to use.
+The main source file is [`source/css/shoelace.css`](../source/css/shoelace.css). This bootstraps the entire project by importing core variables and all of Shoelace’s components.
+
+If you don’t need everything, just load [`source/css/variables.css`](../source/css/variables.css) along with the components you want.
