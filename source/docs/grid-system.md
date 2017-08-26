@@ -164,6 +164,60 @@ You can offset columns using `offset-*` and `offset-[sm|md|lg|xl]-*` modifiers. 
   </div>
 </div>
 
+### Aligning Columns
+
+Columns can be aligned with the `row-[start|center|end|around|between]` and `row-[sm|md|lg|xl]-[start|center|end|around|between]` modifiers.
+
+```html
+<div class="row row-start">
+  <div class="col-4">1st</div>
+  <div class="col-4">2nd</div>
+</div>
+
+<div class="row row-center">
+  <div class="col-4">1st</div>
+  <div class="col-4">2nd</div>
+</div>
+
+<div class="row row-end">
+  <div class="col-4">1st</div>
+  <div class="col-4">2nd</div>
+</div>
+
+<div class="row row-around">
+  <div class="col-4">1st</div>
+  <div class="col-4">2nd</div>
+</div>
+
+<div class="row row-between">
+  <div class="col-4">1st</div>
+  <div class="col-4">2nd</div>
+</div>
+```
+
+<div class="container grid-example">
+  <div class="row row-start">
+    <div class="col-4">1st</div>
+    <div class="col-4">2nd</div>
+  </div>
+  <div class="row row-center">
+    <div class="col-4">1st</div>
+    <div class="col-4">2nd</div>
+  </div>
+  <div class="row row-end">
+    <div class="col-4">1st</div>
+    <div class="col-4">2nd</div>
+  </div>
+  <div class="row row-around">
+    <div class="col-4">1st</div>
+    <div class="col-4">2nd</div>
+  </div>
+  <div class="row row-between">
+    <div class="col-4">1st</div>
+    <div class="col-4">2nd</div>
+  </div>
+</div>
+
 ### Reordering Columns
 
 You can control the visual order of columns using the `order-*` and `order-[sm|md|lg|xl]-*` modifiers. Note that columns without an order modifier will not be affected.

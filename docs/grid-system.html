@@ -180,6 +180,56 @@
   </div>
 </div>
 
+<h3 id="aligning-columns">Aligning Columns</h3>
+<p>Columns can be aligned with the <code>row-[start|center|end|around|between]</code> and <code>row-[sm|md|lg|xl]-[start|center|end|around|between]</code> modifiers.</p>
+<pre><code class="lang-html">&lt;div class=&quot;row row-start&quot;&gt;
+  &lt;div class=&quot;col-4&quot;&gt;1st&lt;/div&gt;
+  &lt;div class=&quot;col-4&quot;&gt;2nd&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;row row-center&quot;&gt;
+  &lt;div class=&quot;col-4&quot;&gt;1st&lt;/div&gt;
+  &lt;div class=&quot;col-4&quot;&gt;2nd&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;row row-end&quot;&gt;
+  &lt;div class=&quot;col-4&quot;&gt;1st&lt;/div&gt;
+  &lt;div class=&quot;col-4&quot;&gt;2nd&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;row row-around&quot;&gt;
+  &lt;div class=&quot;col-4&quot;&gt;1st&lt;/div&gt;
+  &lt;div class=&quot;col-4&quot;&gt;2nd&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;row row-between&quot;&gt;
+  &lt;div class=&quot;col-4&quot;&gt;1st&lt;/div&gt;
+  &lt;div class=&quot;col-4&quot;&gt;2nd&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<div class="container grid-example">
+  <div class="row row-start">
+    <div class="col-4">1st</div>
+    <div class="col-4">2nd</div>
+  </div>
+  <div class="row row-center">
+    <div class="col-4">1st</div>
+    <div class="col-4">2nd</div>
+  </div>
+  <div class="row row-end">
+    <div class="col-4">1st</div>
+    <div class="col-4">2nd</div>
+  </div>
+  <div class="row row-around">
+    <div class="col-4">1st</div>
+    <div class="col-4">2nd</div>
+  </div>
+  <div class="row row-between">
+    <div class="col-4">1st</div>
+    <div class="col-4">2nd</div>
+  </div>
+</div>
+
 <h3 id="reordering-columns">Reordering Columns</h3>
 <p>You can control the visual order of columns using the <code>order-*</code> and <code>order-[sm|md|lg|xl]-*</code> modifiers. Note that columns without an order modifier will not be affected.</p>
 <pre><code class="lang-html">&lt;div class=&quot;row&quot;&gt;
