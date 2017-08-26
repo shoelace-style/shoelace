@@ -1,7 +1,7 @@
 ---
 layout: default.html
 title: Grid System
-description: Shoelace doesn’t ship with a grid system because you don’t need one!
+description: Shoelace features a 12-column grid system based on Bootstrap 4’s grid.
 ---
 
 ## Grid System
