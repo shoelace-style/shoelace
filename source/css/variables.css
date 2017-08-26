@@ -1,0 +1,67 @@
+/* Core variables */
+:root {
+  /* Fonts */
+  --font-sans-serif: sans-serif;
+  --font-serif: serif;
+  --font-system: system-ui;
+  --font-monospace: Menlo, Consolas, "DejaVu Sans Mono", monospace;
+
+  /* Colors (most courtesy of http://clrs.cc/) */
+  --color-white: white;
+  --color-navy: #001f3f;
+  --color-blue: #0074d9;
+  --color-aqua: #7fdbff;
+  --color-teal: #39cccc;
+  --color-olive: #3d9970;
+  --color-green: #2ecc40;
+  --color-lime: #01ff70;
+  --color-yellow: #ffdc00;
+  --color-orange: #ff851b;
+  --color-red: #ff4136;
+  --color-maroon: #85144b;
+  --color-fuchsia: #f012be;
+  --color-purple: #b10dc9;
+  --color-black: #111;
+  --color-gray: #aaa;
+  --color-silver: #ddd;
+
+  /* States */
+  --state-primary: var(--color-blue);
+  --state-secondary: var(--color-gray);
+  --state-success: var(--color-green);
+  --state-info: var(--color-teal);
+  --state-warning: var(--color-orange);
+  --state-danger: var(--color-red);
+  --state-light: var(--color-white);
+  --state-dark: var(--color-black);
+
+  /* Components */
+  --component-bg-color: #f2f2f2;
+  --component-border-color: #ddd;
+  --component-border-radius: .25rem;
+  --component-border-width: 1px;
+  --component-padding-x: 1rem;
+  --component-padding-y: 1rem;
+  --component-speed: .1s;
+  --component-box-shadow-inner: inset 0 1px 1px rgba(0, 0, 0, .05);
+  --component-box-shadow-outer: 0 1px 0 rgba(0, 0, 0, .05);
+}
+
+/* Core breakpoints */
+@custom-media --breakpoint-xs-up only screen and (min-width: 0);
+@custom-media --breakpoint-sm-up only screen and (min-width: 576px);
+@custom-media --breakpoint-md-up only screen and (min-width: 768px);
+@custom-media --breakpoint-lg-up only screen and (min-width: 992px);
+@custom-media --breakpoint-xl-up only screen and (min-width: 1200px);
+
+@custom-media --breakpoint-xs-down only screen and (max-width: 575px);
+@custom-media --breakpoint-sm-down only screen and (max-width: 767px);
+@custom-media --breakpoint-md-down only screen and (max-width: 991px);
+@custom-media --breakpoint-lg-down only screen and (max-width: 1199px);
+@custom-media --breakpoint-xl-down only screen and (min-width: 0);
+
+@custom-media --breakpoint-xs-only only screen and (min-width: 0) and (max-width: 575px);
+@custom-media --breakpoint-sm-only only screen and (min-width: 576px) and (max-width: 767px);
+@custom-media --breakpoint-md-only only screen and (min-width: 768px) and (max-width: 991px);
+@custom-media --breakpoint-lg-only only screen and (min-width: 992px) and (max-width: 1199px);
+@custom-media --breakpoint-xl-only only screen and (min-width: 1200px);
