@@ -22,13 +22,15 @@ You don’t need to include all of the core variables. You only need to include 
 
 Additional variables can be found in the `:root` block of each component’s stylesheet. For example, to customize alerts, refer to the top of [`source/css/alerts.css`](../source/css/alerts.css) for a complete list of variables.
 
-### Using Variables
+### Using CSS Variables
 
-You can use any of Shoelace’s variables in your own stylesheet. This makes it easy to reuse values without hardcoding them. It also provides a foundation for extending Shoelace with your own [custom components](#creating-custom-components).
+You’re encouraged to use Shoelace’s variables in your own stylesheet. This makes it easy to reuse values without hardcoding them. It also provides a foundation for extending Shoelace with your own [custom components](#creating-custom-components).
 
 ```css
-.your-selector {
-  color: var(--state-danger);
+.your-component {
+  background-color: var(--component-bg-color);
+  border-color: var(--component-border-color);
+  color: var(--state-secondary);
 }
 ```
 
@@ -36,7 +38,7 @@ If you’re not familiar with CSS variables, [this article](https://developer.mo
 
 ### Creating Custom Components
 
-You can create custom components to extend Shoelace’s functionality. Here’s what a component’s stylesheet looks like.
+You can create custom components to extend Shoelace’s functionality. Here’s what a component stylesheet looks like.
 
 ```css
 /* Set default variables in a :root block. It's a good idea to
@@ -44,7 +46,7 @@ You can create custom components to extend Shoelace’s functionality. Here’s 
    easier to customize the library as a whole but still lets
    users change individual components.
 
-   Never change or override core variables in your extension!
+   Never change or override core variables!
 */
 :root {
   --accordion-bg-color: var(--component-bg-color);

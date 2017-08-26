@@ -62,21 +62,23 @@
 </code></pre>
 <p>You don’t need to include all of the core variables. You only need to include the ones you want to customize.</p>
 <p>Additional variables can be found in the <code>:root</code> block of each component’s stylesheet. For example, to customize alerts, refer to the top of <a href="../source/css/alerts.css"><code>source/css/alerts.css</code></a> for a complete list of variables.</p>
-<h3 id="using-variables">Using Variables</h3>
-<p>You can use any of Shoelace’s variables in your own stylesheet. This makes it easy to reuse values without hardcoding them. It also provides a foundation for extending Shoelace with your own <a href="#creating-custom-components">custom components</a>.</p>
-<pre><code class="lang-css">.your-selector {
-  color: var(--state-danger);
+<h3 id="using-css-variables">Using CSS Variables</h3>
+<p>You’re encouraged to use Shoelace’s variables in your own stylesheet. This makes it easy to reuse values without hardcoding them. It also provides a foundation for extending Shoelace with your own <a href="#creating-custom-components">custom components</a>.</p>
+<pre><code class="lang-css">.your-component {
+  background-color: var(--component-bg-color);
+  border-color: var(--component-border-color);
+  color: var(--state-secondary);
 }
 </code></pre>
 <p>If you’re not familiar with CSS variables, <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_variables">this article</a> will bring you up to speed.</p>
 <h3 id="creating-custom-components">Creating Custom Components</h3>
-<p>You can create custom components to extend Shoelace’s functionality. Here’s what a component’s stylesheet looks like.</p>
+<p>You can create custom components to extend Shoelace’s functionality. Here’s what a component stylesheet looks like.</p>
 <pre><code class="lang-css">/* Set default variables in a :root block. It&#39;s a good idea to
    base them off core variables when possible. This makes it
    easier to customize the library as a whole but still lets
    users change individual components.
 
-   Never change or override core variables in your extension!
+   Never change or override core variables!
 */
 :root {
   --accordion-bg-color: var(--component-bg-color);
