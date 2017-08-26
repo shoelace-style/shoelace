@@ -162,6 +162,34 @@
 <div class="mar-b-sm pad-sm bg-light text-dark">Light</div>
 <div class="mar-b-sm pad-sm bg-dark text-light">Dark</div>
 
+<h3 id="breakpoint-utilities">Breakpoint Utilities</h3>
+<p>Responsive breakpoints exist for five tiers of screen sizes (xs, sm, md, lg, xl). By default, the breakpoints are:</p>
+<ul>
+<li><code>xs</code>: 575px and below</li>
+<li><code>sm</code>: 576px – 767px</li>
+<li><code>md</code>: 768px – 991px</li>
+<li><code>lg</code>: 992px - 1199px</li>
+<li><code>xl</code>: 1200px and above</li>
+</ul>
+<p>If you’re building Shoelace from source, you can use the custom media queries found in <a href="../source/css/shoelace.css"><code>source/css/shoelace.css</code></a> to easily target various breakpoints without hard-coding screen sizes in your stylesheet.</p>
+<pre><code class="lang-css">@media (--breakpoint-xs-up) { /* xs screens and above */ }
+@media (--breakpoint-sm-up) { /* sm screens and above */ }
+@media (--breakpoint-md-up) { /* md screens and above */ }
+@media (--breakpoint-lg-up) { /* lg screens and above */ }
+@media (--breakpoint-xl-up) { /* xl screens and above */ }
+
+@media (--breakpoint-xs-down) { /* xs screens and below */ }
+@media (--breakpoint-sm-down) { /* sm screens and below */ }
+@media (--breakpoint-md-down) { /* md screens and below */ }
+@media (--breakpoint-lg-down) { /* lg screens and below */ }
+@media (--breakpoint-xl-down) { /* xl screens and below */ }
+
+@media (--breakpoint-xs-only) { /* xs screens only */ }
+@media (--breakpoint-sm-only) { /* sm screens only */ }
+@media (--breakpoint-md-only) { /* md screens only */ }
+@media (--breakpoint-lg-only) { /* lg screens only */ }
+@media (--breakpoint-xl-only) { /* xl screens only */ }
+</code></pre>
 <h3 id="display-utilities">Display Utilities</h3>
 <p>Display utilities let you hide elements based on the current breakpoint. Use <code>hide-[xs|sm|md|lg|xl]</code> to hide an element only at a specific viewport. Use <code>hide-*-up</code> to hide an element at and above a specific breakpoint. Use <code>hide-*-down</code> to hide an element at and below a specific breakpoint.</p>
 <pre><code class="lang-html">&lt;div class=&quot;row&quot;&gt;

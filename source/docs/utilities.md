@@ -123,6 +123,38 @@ Background utility classes can be applied to change an element’s background co
 <div class="mar-b-sm pad-sm bg-light text-dark">Light</div>
 <div class="mar-b-sm pad-sm bg-dark text-light">Dark</div>
 
+### Breakpoint Utilities
+
+Responsive breakpoints exist for five tiers of screen sizes (xs, sm, md, lg, xl). By default, the breakpoints are:
+
+- `xs`: 575px and below
+- `sm`: 576px – 767px
+- `md`: 768px – 991px
+- `lg`: 992px - 1199px
+- `xl`: 1200px and above
+
+If you’re building Shoelace from source, you can use the custom media queries found in [`source/css/shoelace.css`](../source/css/shoelace.css) to easily target various breakpoints without hard-coding screen sizes in your stylesheet.
+
+```css
+@media (--breakpoint-xs-up) { /* xs screens and above */ }
+@media (--breakpoint-sm-up) { /* sm screens and above */ }
+@media (--breakpoint-md-up) { /* md screens and above */ }
+@media (--breakpoint-lg-up) { /* lg screens and above */ }
+@media (--breakpoint-xl-up) { /* xl screens and above */ }
+
+@media (--breakpoint-xs-down) { /* xs screens and below */ }
+@media (--breakpoint-sm-down) { /* sm screens and below */ }
+@media (--breakpoint-md-down) { /* md screens and below */ }
+@media (--breakpoint-lg-down) { /* lg screens and below */ }
+@media (--breakpoint-xl-down) { /* xl screens and below */ }
+
+@media (--breakpoint-xs-only) { /* xs screens only */ }
+@media (--breakpoint-sm-only) { /* sm screens only */ }
+@media (--breakpoint-md-only) { /* md screens only */ }
+@media (--breakpoint-lg-only) { /* lg screens only */ }
+@media (--breakpoint-xl-only) { /* xl screens only */ }
+```
+
 ### Display Utilities
 
 Display utilities let you hide elements based on the current breakpoint. Use `hide-[xs|sm|md|lg|xl]` to hide an element only at a specific viewport. Use `hide-*-up` to hide an element at and above a specific breakpoint. Use `hide-*-down` to hide an element at and below a specific breakpoint.
