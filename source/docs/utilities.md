@@ -8,97 +8,6 @@ description: Use these utilities for quick prototyping.
 
 Shoelace provides a number of helpful utility classes that make prototyping easier.
 
-### Text Utilities
-
-Text utility classes can be applied to change an element’s text.
-
-<table class="table">
-  <thead>
-    <tr>
-      <th>Class</th>
-      <th>Example</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>`text-primary`</td>
-      <td class="text-primary">This is primary text</td>
-    </tr>
-    <tr>
-      <td>`text-secondary`</td>
-      <td class="text-secondary">This is secondary text</td>
-    </tr>
-    <tr>
-      <td>`text-success`</td>
-      <td class="text-success">This is success text</td>
-    </tr>
-    <tr>
-      <td>`text-info`</td>
-      <td class="text-info">This is info text</td>
-    </tr>
-    <tr>
-      <td>`text-warning`</td>
-      <td class="text-warning">This is warning text</td>
-    </tr>
-    <tr>
-      <td>`text-danger`</td>
-      <td class="text-danger">This is danger text</td>
-    </tr>
-    <tr>
-      <td>`text-light`</td>
-      <td class="text-light">This is light text</td>
-    </tr>
-    <tr>
-      <td>`text-dark`</td>
-      <td class="text-dark">This is dark text</td>
-    </tr>
-    <tr>
-      <td>`text-small`</td>
-      <td class="text-small">This is small text</td>
-    </tr>
-    <tr>
-      <td>`text-bold`</td>
-      <td class="text-bold">This is bold text</td>
-    </tr>
-    <tr>
-      <td>`text-italic`</td>
-      <td class="text-italic">This is italic text</td>
-    </tr>
-    <tr>
-      <td>`text-left`</td>
-      <td class="text-left">This is left-aligned text</td>
-    </tr>
-    <tr>
-      <td>`text-center`</td>
-      <td class="text-center">This is centered text</td>
-    </tr>
-    <tr>
-      <td>`text-right`</td>
-      <td class="text-right">This is right-aligned text</td>
-    </tr>
-    <tr>
-      <td>`text-justify`</td>
-      <td class="text-justify">This is justified text</td>
-    </tr>
-    <tr>
-      <td>`text-nowrap`</td>
-      <td class="text-nowrap">This is text that won’t wrap</td>
-    </tr>
-    <tr>
-      <td>`text-lowercase`</td>
-      <td class="text-lowercase">This is lowercase text</td>
-    </tr>
-    <tr>
-      <td>`text-uppercase`</td>
-      <td class="text-uppercase">This is uppercase text</td>
-    </tr>
-    <tr>
-      <td>`text-capitalize`</td>
-      <td class="text-capitalize">This is capitalized text</td>
-    </tr>
-  </tbody>
-</table>
-
 ### Background Utilities
 
 Background utility classes can be applied to change an element’s background color.
@@ -248,3 +157,94 @@ Example:
 ```
 
 You can also use `mar-[x|y|xy]-auto` to set automatic margins horizontally and/or vertically.
+
+### Text Utilities
+
+Text utility classes can be applied to change an element’s text.
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Class</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>`text-primary`</td>
+      <td class="text-primary">This is primary text</td>
+    </tr>
+    <tr>
+      <td>`text-secondary`</td>
+      <td class="text-secondary">This is secondary text</td>
+    </tr>
+    <tr>
+      <td>`text-success`</td>
+      <td class="text-success">This is success text</td>
+    </tr>
+    <tr>
+      <td>`text-info`</td>
+      <td class="text-info">This is info text</td>
+    </tr>
+    <tr>
+      <td>`text-warning`</td>
+      <td class="text-warning">This is warning text</td>
+    </tr>
+    <tr>
+      <td>`text-danger`</td>
+      <td class="text-danger">This is danger text</td>
+    </tr>
+    <tr>
+      <td>`text-light`</td>
+      <td class="text-light">This is light text</td>
+    </tr>
+    <tr>
+      <td>`text-dark`</td>
+      <td class="text-dark">This is dark text</td>
+    </tr>
+    <tr>
+      <td>`text-small`</td>
+      <td class="text-small">This is small text</td>
+    </tr>
+    <tr>
+      <td>`text-bold`</td>
+      <td class="text-bold">This is bold text</td>
+    </tr>
+    <tr>
+      <td>`text-italic`</td>
+      <td class="text-italic">This is italic text</td>
+    </tr>
+    <tr>
+      <td>`text-left`</td>
+      <td class="text-left">This is left-aligned text</td>
+    </tr>
+    <tr>
+      <td>`text-center`</td>
+      <td class="text-center">This is centered text</td>
+    </tr>
+    <tr>
+      <td>`text-right`</td>
+      <td class="text-right">This is right-aligned text</td>
+    </tr>
+    <tr>
+      <td>`text-justify`</td>
+      <td class="text-justify">This is justified text</td>
+    </tr>
+    <tr>
+      <td>`text-nowrap`</td>
+      <td class="text-nowrap">This is text that won’t wrap</td>
+    </tr>
+    <tr>
+      <td>`text-lowercase`</td>
+      <td class="text-lowercase">This is lowercase text</td>
+    </tr>
+    <tr>
+      <td>`text-uppercase`</td>
+      <td class="text-uppercase">This is uppercase text</td>
+    </tr>
+    <tr>
+      <td>`text-capitalize`</td>
+      <td class="text-capitalize">This is capitalized text</td>
+    </tr>
+  </tbody>
+</table>
