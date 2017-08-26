@@ -162,6 +162,26 @@
 <div class="mar-b-sm pad-sm bg-light text-dark">Light</div>
 <div class="mar-b-sm pad-sm bg-dark text-light">Dark</div>
 
+<h3 id="display-utilities">Display Utilities</h3>
+<p>Display utilities let you hide elements based on the current breakpoint. Use <code>hide-[xs|sm|md|lg|xl]</code> to hide an element only at a specific viewport. Use <code>hide-*-up</code> to hide an element at and above a specific breakpoint. Use <code>hide-*-down</code> to hide an element at and below a specific breakpoint.</p>
+<pre><code class="lang-html">&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col-2 hide-xs&quot;&gt;hide-xs&lt;/div&gt;
+  &lt;div class=&quot;col-2 hide-sm&quot;&gt;hide-sm&lt;/div&gt;
+  &lt;div class=&quot;col-2 hide-md&quot;&gt;hide-md&lt;/div&gt;
+  &lt;div class=&quot;col-2 hide-lg&quot;&gt;hide-lg&lt;/div&gt;
+  &lt;div class=&quot;col-2 hide-xl&quot;&gt;hide-xl&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<div class="container grid-example">
+  <div class="row">
+    <div class="col-2 hide-xs">hide-xs</div>
+    <div class="col-2 hide-sm">hide-sm</div>
+    <div class="col-2 hide-md">hide-md</div>
+    <div class="col-2 hide-lg">hide-lg</div>
+    <div class="col-2 hide-xl">hide-xl</div>
+  </div>
+</div>
+
 <h3 id="float-utilities">Float Utilities</h3>
 <p>Float utilities are provided to easily float elements to the left or right. Just apply the <code>float-left</code> or <code>float-right</code> class to an element to float it left or right.</p>
 <p>A clearfix utility is also available to clear floated elements. Just apply the <code>clearfix</code> class to the appropriate element.</p>

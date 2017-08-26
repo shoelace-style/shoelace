@@ -55,6 +55,30 @@
 .bg-dark { background-color: var(--state-dark) !important; }
 
 /***************************************************************************************************
+* Display utilities
+***************************************************************************************************/
+
+@media (--breakpoint-xs-only) { .hide-xs { display: none !important; } }
+@media (--breakpoint-xs-up) { .hide-xs-up { display: none !important; } }
+@media (--breakpoint-xs-down) { .hide-xs-down { display: none !important; } }
+
+@media (--breakpoint-sm-only) { .hide-sm { display: none !important; } }
+@media (--breakpoint-sm-up) { .hide-sm-up { display: none !important; } }
+@media (--breakpoint-sm-down) { .hide-sm-down { display: none !important; } }
+
+@media (--breakpoint-md-only) { .hide-md { display: none !important; } }
+@media (--breakpoint-md-up) { .hide-md-up { display: none !important; } }
+@media (--breakpoint-md-down) { .hide-md-down { display: none !important; } }
+
+@media (--breakpoint-lg-only) { .hide-lg { display: none !important; } }
+@media (--breakpoint-lg-up) { .hide-lg-up { display: none !important; } }
+@media (--breakpoint-lg-down) { .hide-lg-down { display: none !important; } }
+
+@media (--breakpoint-xl-only) { .hide-xl { display: none !important; } }
+@media (--breakpoint-xl-up) { .hide-xl-up { display: none !important; } }
+@media (--breakpoint-xl-down) { .hide-xl-down { display: none !important; } }
+
+/***************************************************************************************************
 * Float utilities
 ***************************************************************************************************/
 

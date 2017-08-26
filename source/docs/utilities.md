@@ -123,6 +123,30 @@ Background utility classes can be applied to change an element’s background co
 <div class="mar-b-sm pad-sm bg-light text-dark">Light</div>
 <div class="mar-b-sm pad-sm bg-dark text-light">Dark</div>
 
+### Display Utilities
+
+Display utilities let you hide elements based on the current breakpoint. Use `hide-[xs|sm|md|lg|xl]` to hide an element only at a specific viewport. Use `hide-*-up` to hide an element at and above a specific breakpoint. Use `hide-*-down` to hide an element at and below a specific breakpoint.
+
+```html
+<div class="row">
+  <div class="col-2 hide-xs">hide-xs</div>
+  <div class="col-2 hide-sm">hide-sm</div>
+  <div class="col-2 hide-md">hide-md</div>
+  <div class="col-2 hide-lg">hide-lg</div>
+  <div class="col-2 hide-xl">hide-xl</div>
+</div>
+```
+
+<div class="container grid-example">
+  <div class="row">
+    <div class="col-2 hide-xs">hide-xs</div>
+    <div class="col-2 hide-sm">hide-sm</div>
+    <div class="col-2 hide-md">hide-md</div>
+    <div class="col-2 hide-lg">hide-lg</div>
+    <div class="col-2 hide-xl">hide-xl</div>
+  </div>
+</div>
+
 ### Float Utilities
 
 Float utilities are provided to easily float elements to the left or right. Just apply the `float-left` or `float-right` class to an element to float it left or right.
