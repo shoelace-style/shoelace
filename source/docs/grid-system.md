@@ -6,43 +6,231 @@ description: Shoelace doesn’t ship with a grid system because you don’t need
 
 ## Grid System
 
-Shoelace doesn’t ship with a grid system because [you don’t need one](https://rachelandrew.co.uk/archives/2017/07/01/you-do-not-need-a-css-grid-based-grid-system/). You should use the [CSS Grid Layout](https://gridbyexample.com/) instead.
+Shoelace features a 12-column grid system based heavily on [Bootstrap 4’s grid](https://getbootstrap.com/docs/4.0/layout/grid/). It’s flexible, easy to use, and fully responsive.
 
-This website uses the CSS Grid Layout. It’s really simple!
+### Structure
+
+The grid consists of containers, rows, and columns. A basic, two-column grid looks like this:
 
 ```html
-<main id="wrap">
-  <nav id="nav">
-    ...
-  </nav>
-
-  <div id="content">
-    ...
+<div class="container">
+  <div class="row">
+    <div class="col">1st column</div>
+    <div class="col">2nd column</div>
   </div>
-</main>
+</div>
 ```
 
-Now we just need a couple styles to turn the nav and content elements into columns. This will make the nav `12rem` wide and the content `100% - 12rem` so it fills the rest of the space.
+<div class="container grid-example">
+  <div class="row">
+    <div class="col">1st column</div>
+    <div class="col">2nd column</div>
+  </div>
+</div>
 
-```css
-#wrap {
-  display: grid;
-  grid-template-columns: 12rem calc(100% - 12rem);
-}
+Containers can be used to wrap sections of your page. Use the `container` class to create a responsive, fixed-width container or the `container-fluid` class to create a fluid container.
+
+Rows are used to group columns horizontally. Rows can only contain columns as child elements.
+
+Columns are where your content will go. To create a complete row, use any combination of columns that adds up to 12 wide.
+
+### Creating Columns
+
+Columns are equal width by default. The grid will automatically determine the appropriate size for columns with the `col` class.
+
+```html
+<div class="row">
+  <div class="col">1</div>
+</div>
+
+<div class="row">
+  <div class="col">1</div>
+  <div class="col">2</div>
+</div>
+
+<div class="row">
+  <div class="col">1</div>
+  <div class="col">2</div>
+  <div class="col">3</div>
+</div>
 ```
 
-You can use media queries to make grids responsive. This is how we make the nav appear on top of the content on smaller screens.
+<div class="container grid-example">
+  <div class="row">
+    <div class="col">col</div>
+  </div>
+  <div class="row">
+    <div class="col">col</div>
+    <div class="col">col</div>
+  </div>
+  <div class="row">
+    <div class="col">col</div>
+    <div class="col">col</div>
+    <div class="col">col</div>
+  </div>
+</div>
 
-```css
-@media (max-width: 60rem) {
-  #wrap {
-    display: block;
-  }
-}
+To set the width of column, use the `col-*` modifier with a value of 1–12. Widths are calculated based on a total of 12 possible columns. Additional columns will wrap to a new line.
+
+```html
+<div class="row">
+  <div class="col-2">col-2</div>
+  <div class="col-4">col-4</div>
+  <div class="col-6">col-6</div>
+</div>
 ```
 
-### For Older Browsers
+<div class="container grid-example">
+  <div class="row">
+    <div class="col-2">col-2</div>
+    <div class="col-4">col-4</div>
+    <div class="col-6">col-6</div>
+  </div>
+</div>
 
-Support for CSS Grid Layouts is [decent](http://caniuse.com/css-grid), but if you have an obligation to support Internet Explorer or Edge < 16, consider using the [Flexbox Grid](https://evgenyrodionov.github.io/flexboxgrid2/) in combination with Shoelace.
+You can mix and match sized columns with unsized columns for flexibility. Unsized columns will take up equal widths of the remaining space.
 
-You can use it as-is or include the source files and customize it with CSS variables in your build process.
+```html
+<div class="row">
+  <div class="col">col</div>
+  <div class="col-6">col-6</div>
+  <div class="col">col</div>
+</div>
+```
+
+<div class="container grid-example">
+  <div class="row">
+    <div class="col">col</div>
+    <div class="col-6">col-6</div>
+    <div class="col">col</div>
+  </div>
+</div>
+
+### Making Columns Responsive
+
+There are five responsive tiers in Shoelace: `xs`, `sm`, `md`, `lg`, and `xl`. You can use these tiers to change the way the grid responds at various breakpoints.
+
+Use the `col-{tier}-*` modifier to target a specific tier. Note that tiers are based on minimum widths, so using `col-sm-6` will target `sm`, `md`, `lg`, and `xl`. However, you can target multiple tiers on the same column as needed.
+
+For example, the following columns will stack on `xs` screens, take up 50% each (6 out of 12 columns) on `sm` screens, and 75% and 25% respectively on `md`, `lg`, and `xl` screens.
+
+```html
+<div class="row">
+  <div class="col-12 col-sm-6 col-md-8">1st column</div>
+  <div class="col-12 col-sm-6 col-md-4">2nd column</div>
+</div>
+```
+
+<div class="container grid-example">
+  <div class="row">
+    <div class="col-12 col-sm-6 col-md-8">1st column</div>
+    <div class="col-12 col-sm-6 col-md-4">2nd column</div>
+  </div>
+</div>
+
+### Offsetting Columns
+
+You can offset columns using `offset-*` and `offset-{tier}-*` modifiers. To reset an offset at a specific tier, use `offset-{tier}-0`.
+
+```html
+<div class="row">
+  <div class="col-2">left</div>
+  <div class="col-2 offset-2">center</div>
+  <div class="col-2 offset-2">right</div>
+</div>
+```
+
+<div class="container grid-example">
+  <div class="row">
+    <div class="col-2">left</div>
+    <div class="col-2 offset-3">center</div>
+    <div class="col-2 offset-3">right</div>
+  </div>
+</div>
+
+### Reordering Columns
+
+You can control the visual order of columns using the `order-*` and `order-{tier}-*` modifiers. Note that columns without an order modifier will not be affected.
+
+```html
+<div class="row">
+  <div class="col-4">1st (no order)</div>
+  <div class="col-4 order-3">2nd (shown 3rd)</div>
+  <div class="col-4 order-2">3rd (shown 2nd)</div>
+</div>
+```
+
+<div class="container grid-example">
+  <div class="row">
+    <div class="col-4">1st (unordered)</div>
+    <div class="col-4 order-3">2nd</div>
+    <div class="col-4 order-2">3rd</div>
+  </div>
+</div>
+
+### Hiding Columns
+
+You can hide columns based on breakpoints using [display utilities](utilities.html#display-utilities).
+
+```html
+<div class="row">
+  <div class="col-2">always</div>
+  <div class="col-2 hidden-xs">hidden-xs</div>
+  <div class="col-2 hidden-sm">hidden-sm</div>
+  <div class="col-2 hidden-md">hidden-md</div>
+  <div class="col-2 hidden-lg">hidden-lg</div>
+  <div class="col-2 hidden-xl">hidden-xl</div>
+  </div>
+</div>
+```
+
+<div class="container grid-example">
+  <div class="row">
+    <div class="col-2 hidden-xs">xs</div>
+    <div class="col-2 hidden-sm">sm</div>
+    <div class="col-2 hidden-md">md</div>
+    <div class="col-2 hidden-lg">lg</div>
+    <div class="col-2 hidden-xl">xl</div>
+    </div>
+  </div>
+</div>
+
+### Removing Gutters
+
+By default, columns have horizontal spacing around them to create “gutters.” You can remove this spacing by applying the `no-gutters` class to the parent row.
+
+```html
+<div class="row no-gutters">
+  ...
+</div>
+```
+
+For an edge-to-edge design, refrain from using `container` and `container-fluid`.
+
+### Nesting Grids
+
+Grids can be nested. Simply add a new row inside of a column.
+
+```html
+<div class="row">
+  <div class="col-8">
+    outer, col-8
+    <div class="row">
+      <div class="col-3">inner, col-3</div>
+      <div class="col-9">inner, col-9</div>
+    </div>
+  </div>
+</div>
+```
+
+<div class="container grid-example">
+  <div class="row">
+    <div class="col-8">
+      outer, col-8
+      <div class="row">
+        <div class="col-3">inner, col-3</div>
+        <div class="col-9">inner, col-9</div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -24,60 +24,220 @@
     </p>
   </header>
 
-  <main id="wrap">
-    <nav id="nav">
-      <a href="installing.html">Installing</a>
-      <a href="customizing.html">Customizing</a>
-      <a href="content.html">Content</a>
-      <a href="alerts.html">Alerts</a>
-      <a href="badges.html">Badges</a>
-      <a href="buttons.html">Buttons</a>
-      <a href="dropdowns.html">Dropdowns</a>
-      <a href="forms.html">Forms</a>
-      <a href="loaders.html">Loaders</a>
-      <a href="progress-bars.html">Progress Bars</a>
-      <a href="switches.html">Switches</a>
-      <a href="tabs.html">Tabs</a>
-      <a href="tables.html">Tables</a>
-      <a href="utilities.html">Utilities</a>
-      <a href="grid-system.html">Grid System</a>
-      <a href="icons.html">Icons</a>
-      <a href="browser-support.html">Browser Support</a>
-      <a href="attribution.html">Attribution</a>
-    </nav>
+  <main class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <ul id="nav">
+          <li><a href="installing.html">Installing</a></li>
+          <li><a href="customizing.html">Customizing</a></li>
+          <li><a href="content.html">Content</a></li>
+          <li><a href="alerts.html">Alerts</a></li>
+          <li><a href="badges.html">Badges</a></li>
+          <li><a href="buttons.html">Buttons</a></li>
+          <li><a href="dropdowns.html">Dropdowns</a></li>
+          <li><a href="forms.html">Forms</a></li>
+          <li><a href="grid-system.html">Grid System</a></li>
+          <li><a href="loaders.html">Loaders</a></li>
+          <li><a href="progress-bars.html">Progress Bars</a></li>
+          <li><a href="switches.html">Switches</a></li>
+          <li><a href="tabs.html">Tabs</a></li>
+          <li><a href="tables.html">Tables</a></li>
+          <li><a href="utilities.html">Utilities</a></li>
+          <li><a href="icons.html">Icons</a></li>
+          <li><a href="browser-support.html">Browser Support</a></li>
+          <li><a href="attribution.html">Attribution</a></li>
+        </ul>
+      </div>
 
-    <div id="content">
-      <h2 id="grid-system">Grid System</h2>
-<p>Shoelace doesn’t ship with a grid system because <a href="https://rachelandrew.co.uk/archives/2017/07/01/you-do-not-need-a-css-grid-based-grid-system/">you don’t need one</a>. You should use the <a href="https://gridbyexample.com/">CSS Grid Layout</a> instead.</p>
-<p>This website uses the CSS Grid Layout. It’s really simple!</p>
-<pre><code class="lang-html">&lt;main id=&quot;wrap&quot;&gt;
-  &lt;nav id=&quot;nav&quot;&gt;
-    ...
-  &lt;/nav&gt;
-
-  &lt;div id=&quot;content&quot;&gt;
-    ...
+      <div class="col-md-9">
+        <div id="content">
+          <h2 id="grid-system">Grid System</h2>
+<p>Shoelace features a 12-column grid system based heavily on <a href="https://getbootstrap.com/docs/4.0/layout/grid/">Bootstrap 4’s grid</a>. It’s flexible, easy to use, and fully responsive.</p>
+<h3 id="structure">Structure</h3>
+<p>The grid consists of containers, rows, and columns. A basic, two-column grid looks like this:</p>
+<pre><code class="lang-html">&lt;div class=&quot;container&quot;&gt;
+  &lt;div class=&quot;row&quot;&gt;
+    &lt;div class=&quot;col&quot;&gt;1st column&lt;/div&gt;
+    &lt;div class=&quot;col&quot;&gt;2nd column&lt;/div&gt;
   &lt;/div&gt;
-&lt;/main&gt;
+&lt;/div&gt;
 </code></pre>
-<p>Now we just need a couple styles to turn the nav and content elements into columns. This will make the nav <code>12rem</code> wide and the content <code>100% - 12rem</code> so it fills the rest of the space.</p>
-<pre><code class="lang-css">#wrap {
-  display: grid;
-  grid-template-columns: 12rem calc(100% - 12rem);
-}
-</code></pre>
-<p>You can use media queries to make grids responsive. This is how we make the nav appear on top of the content on smaller screens.</p>
-<pre><code class="lang-css">@media (max-width: 60rem) {
-  #wrap {
-    display: block;
-  }
-}
-</code></pre>
-<h3 id="for-older-browsers">For Older Browsers</h3>
-<p>Support for CSS Grid Layouts is <a href="http://caniuse.com/css-grid">decent</a>, but if you have an obligation to support Internet Explorer or Edge &lt; 16, consider using the <a href="https://evgenyrodionov.github.io/flexboxgrid2/">Flexbox Grid</a> in combination with Shoelace.</p>
-<p>You can use it as-is or include the source files and customize it with CSS variables in your build process.</p>
+<div class="container grid-example">
+  <div class="row">
+    <div class="col">1st column</div>
+    <div class="col">2nd column</div>
+  </div>
+</div>
 
+<p>Containers can be used to wrap sections of your page. Use the <code>container</code> class to create a responsive, fixed-width container or the <code>container-fluid</code> class to create a fluid container.</p>
+<p>Rows are used to group columns horizontally. Rows can only contain columns as child elements.</p>
+<p>Columns are where your content will go. To create a complete row, use any combination of columns that adds up to 12 wide.</p>
+<h3 id="creating-columns">Creating Columns</h3>
+<p>Columns are equal width by default. The grid will automatically determine the appropriate size for columns with the <code>col</code> class.</p>
+<pre><code class="lang-html">&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col&quot;&gt;1&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col&quot;&gt;1&lt;/div&gt;
+  &lt;div class=&quot;col&quot;&gt;2&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col&quot;&gt;1&lt;/div&gt;
+  &lt;div class=&quot;col&quot;&gt;2&lt;/div&gt;
+  &lt;div class=&quot;col&quot;&gt;3&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<div class="container grid-example">
+  <div class="row">
+    <div class="col">col</div>
+  </div>
+  <div class="row">
+    <div class="col">col</div>
+    <div class="col">col</div>
+  </div>
+  <div class="row">
+    <div class="col">col</div>
+    <div class="col">col</div>
+    <div class="col">col</div>
+  </div>
+</div>
+
+<p>To set the width of column, use the <code>col-*</code> modifier with a value of 1–12. Widths are calculated based on a total of 12 possible columns. Additional columns will wrap to a new line.</p>
+<pre><code class="lang-html">&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col-2&quot;&gt;col-2&lt;/div&gt;
+  &lt;div class=&quot;col-4&quot;&gt;col-4&lt;/div&gt;
+  &lt;div class=&quot;col-6&quot;&gt;col-6&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<div class="container grid-example">
+  <div class="row">
+    <div class="col-2">col-2</div>
+    <div class="col-4">col-4</div>
+    <div class="col-6">col-6</div>
+  </div>
+</div>
+
+<p>You can mix and match sized columns with unsized columns for flexibility. Unsized columns will take up equal widths of the remaining space.</p>
+<pre><code class="lang-html">&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col&quot;&gt;col&lt;/div&gt;
+  &lt;div class=&quot;col-6&quot;&gt;col-6&lt;/div&gt;
+  &lt;div class=&quot;col&quot;&gt;col&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<div class="container grid-example">
+  <div class="row">
+    <div class="col">col</div>
+    <div class="col-6">col-6</div>
+    <div class="col">col</div>
+  </div>
+</div>
+
+<h3 id="making-columns-responsive">Making Columns Responsive</h3>
+<p>There are five responsive tiers in Shoelace: <code>xs</code>, <code>sm</code>, <code>md</code>, <code>lg</code>, and <code>xl</code>. You can use these tiers to change the way the grid responds at various breakpoints.</p>
+<p>Use the <code>col-{tier}-*</code> modifier to target a specific tier. Note that tiers are based on minimum widths, so using <code>col-sm-6</code> will target <code>sm</code>, <code>md</code>, <code>lg</code>, and <code>xl</code>. However, you can target multiple tiers on the same column as needed.</p>
+<p>For example, the following columns will stack on <code>xs</code> screens, take up 50% each (6 out of 12 columns) on <code>sm</code> screens, and 75% and 25% respectively on <code>md</code>, <code>lg</code>, and <code>xl</code> screens.</p>
+<pre><code class="lang-html">&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col-12 col-sm-6 col-md-8&quot;&gt;1st column&lt;/div&gt;
+  &lt;div class=&quot;col-12 col-sm-6 col-md-4&quot;&gt;2nd column&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<div class="container grid-example">
+  <div class="row">
+    <div class="col-12 col-sm-6 col-md-8">1st column</div>
+    <div class="col-12 col-sm-6 col-md-4">2nd column</div>
+  </div>
+</div>
+
+<h3 id="offsetting-columns">Offsetting Columns</h3>
+<p>You can offset columns using <code>offset-*</code> and <code>offset-{tier}-*</code> modifiers. To reset an offset at a specific tier, use <code>offset-{tier}-0</code>.</p>
+<pre><code class="lang-html">&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col-2&quot;&gt;left&lt;/div&gt;
+  &lt;div class=&quot;col-2 offset-2&quot;&gt;center&lt;/div&gt;
+  &lt;div class=&quot;col-2 offset-2&quot;&gt;right&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<div class="container grid-example">
+  <div class="row">
+    <div class="col-2">left</div>
+    <div class="col-2 offset-3">center</div>
+    <div class="col-2 offset-3">right</div>
+  </div>
+</div>
+
+<h3 id="reordering-columns">Reordering Columns</h3>
+<p>You can control the visual order of columns using the <code>order-*</code> and <code>order-{tier}-*</code> modifiers. Note that columns without an order modifier will not be affected.</p>
+<pre><code class="lang-html">&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col-4&quot;&gt;1st (no order)&lt;/div&gt;
+  &lt;div class=&quot;col-4 order-3&quot;&gt;2nd (shown 3rd)&lt;/div&gt;
+  &lt;div class=&quot;col-4 order-2&quot;&gt;3rd (shown 2nd)&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<div class="container grid-example">
+  <div class="row">
+    <div class="col-4">1st (unordered)</div>
+    <div class="col-4 order-3">2nd</div>
+    <div class="col-4 order-2">3rd</div>
+  </div>
+</div>
+
+<h3 id="hiding-columns">Hiding Columns</h3>
+<p>You can hide columns based on breakpoints using <a href="utilities.html#display-utilities">display utilities</a>.</p>
+<pre><code class="lang-html">&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col-2&quot;&gt;always&lt;/div&gt;
+  &lt;div class=&quot;col-2 hidden-xs&quot;&gt;hidden-xs&lt;/div&gt;
+  &lt;div class=&quot;col-2 hidden-sm&quot;&gt;hidden-sm&lt;/div&gt;
+  &lt;div class=&quot;col-2 hidden-md&quot;&gt;hidden-md&lt;/div&gt;
+  &lt;div class=&quot;col-2 hidden-lg&quot;&gt;hidden-lg&lt;/div&gt;
+  &lt;div class=&quot;col-2 hidden-xl&quot;&gt;hidden-xl&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<div class="container grid-example">
+  <div class="row">
+    <div class="col-2 hidden-xs">xs</div>
+    <div class="col-2 hidden-sm">sm</div>
+    <div class="col-2 hidden-md">md</div>
+    <div class="col-2 hidden-lg">lg</div>
+    <div class="col-2 hidden-xl">xl</div>
     </div>
+  </div>
+</div>
+
+<h3 id="removing-gutters">Removing Gutters</h3>
+<p>By default, columns have horizontal spacing around them to create “gutters.” You can remove this spacing by applying the <code>no-gutters</code> class to the parent row.</p>
+<pre><code class="lang-html">&lt;div class=&quot;row no-gutters&quot;&gt;
+  ...
+&lt;/div&gt;
+</code></pre>
+<p>For an edge-to-edge design, refrain from using <code>container</code> and <code>container-fluid</code>.</p>
+<h3 id="nesting-grids">Nesting Grids</h3>
+<p>Grids can be nested. Simply add a new row inside of a column.</p>
+<pre><code class="lang-html">&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col-8&quot;&gt;
+    outer, col-8
+    &lt;div class=&quot;row&quot;&gt;
+      &lt;div class=&quot;col-3&quot;&gt;inner, col-3&lt;/div&gt;
+      &lt;div class=&quot;col-9&quot;&gt;inner, col-9&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<div class="container grid-example">
+  <div class="row">
+    <div class="col-8">
+      outer, col-8
+      <div class="row">
+        <div class="col-3">inner, col-3</div>
+        <div class="col-9">inner, col-9</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+        </div>
+      </div>
   </main>
 
   <footer id="foot">

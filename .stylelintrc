@@ -6,6 +6,7 @@
     "custom-property-empty-line-before": null,
     "declaration-block-single-line-max-declarations": null,
     "number-leading-zero": "never",
+    "selector-list-comma-newline-after": null,
     "shorthand-property-no-redundant-values": null
   }
 }

@@ -13,12 +13,6 @@ body {
   display: inline-block;
 }
 
-#wrap {
-  max-width: 48rem;
-  padding: 0 2rem;
-  margin: 2rem auto;
-}
-
 pre {
   margin-bottom: 1rem !important; /* Prism overrides our bottom margin */
 }

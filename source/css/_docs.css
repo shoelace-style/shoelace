@@ -13,22 +13,14 @@ body {
   display: inline-block;
 }
 
-#wrap {
-  max-width: 60rem;
-  padding: 0 2rem;
-  margin: 2rem auto;
-  display: grid;
-  grid-template-columns: 12rem calc(100% - 12rem);
-}
-
 #nav {
   text-align: right;
+  list-style: none;
   border-right: solid 1px #ddd;
   padding-right: 1rem;
-  margin-right: 2rem;
 }
 
-#nav a {
+#nav li {
   margin: .5rem 0;
   display: block;
 }
@@ -36,6 +28,19 @@ body {
 #nav a.current {
   color: #aaa;
   cursor: default;
+}
+
+@media screen and (max-width: 767px) {
+  #nav {
+    border: none;
+    text-align: center;
+    margin: 0 0 2rem 0;
+  }
+
+  #nav li {
+    margin: .5rem;
+    display: inline-block;
+  }
 }
 
 #foot {
@@ -47,48 +52,6 @@ body {
   width: 14rem;
   display: inline-block;
   margin: .5rem 0;
-}
-
-#homepage #wrap {
-  max-width: 48rem;
-  display: block;
-}
-
-@media (max-width: 60rem) {
-  #head {
-    padding: 0 1rem;
-  }
-
-  #wrap {
-    padding: 0 1rem;
-    display: block;
-  }
-
-  #nav {
-    font-size: .9rem;
-    border: none;
-    text-align: center;
-    margin: 0 0 2rem 0;
-  }
-
-  #nav a {
-    margin: .3rem;
-    display: inline-block;
-  }
-}
-
-/* Fallback to block nav for unsupportive browsers */
-@supports (not (display: grid)) {
-  #nav {
-    border: none;
-    text-align: center;
-    margin: 0 0 2rem 0;
-  }
-
-  #nav a {
-    margin: .5rem;
-    display: inline-block;
-  }
 }
 
 h1[id]:not(:first-child),
@@ -117,13 +80,6 @@ a code {
   color: inherit;
 }
 
-@media (max-width: 45rem) {
-  a.bookmark {
-    width: auto;
-    margin-left: 0;
-  }
-}
-
 .browsers {
   text-align: center;
 }
@@ -132,18 +88,6 @@ a code {
   max-width: 6rem;
   display: inline-block;
   margin: 0 1rem 1rem 0;
-}
-
-/* Column helpers */
-.two-column {
-  display: grid;
-  grid-template-columns: 50% 50%;
-  margin-left: -.5rem;
-  margin-right: -.5rem;
-}
-
-.two-column .column {
-  padding: .5rem;
 }
 
 /* Sizing examples */
@@ -197,15 +141,28 @@ a code {
 }
 
 /* Tabs example */
-.tabs-vertical-example {
-  display: grid;
-  grid-template-columns: 30% 70%;
-}
-
-.tabs-vertical-example .tabs-nav {
-  padding-right: 2rem;
-}
-
 .tabs-vertical-example .tabs-nav a {
   display: block;
+}
+
+/* Grid example */
+.grid-example {
+  margin-bottom: 1.5rem;
+}
+
+.grid-example .row .col,
+.grid-example .row [class*="col-"] {
+  background: #0074d9;
+  border: solid 1px white;
+  color: white;
+  text-align: center;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+}
+
+.grid-example .row .row .col,
+.grid-example .row .row [class*="col-"] {
+  background: tomato;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
 }

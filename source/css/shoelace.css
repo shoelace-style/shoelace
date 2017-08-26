@@ -13,6 +13,7 @@
 @import url('buttons.css');
 @import url('dropdowns.css');
 @import url('forms.css');
+@import url('grid.css');
 @import url('loaders.css');
 @import url('progress-bars.css');
 @import url('switches.css');
@@ -20,6 +21,26 @@
 @import url('tables.css');
 @import url('utilities.css');
 
+/* Custom media queries */
+@custom-media --breakpoint-xs-up only screen and (min-width: 0);
+@custom-media --breakpoint-sm-up only screen and (min-width: 576px);
+@custom-media --breakpoint-md-up only screen and (min-width: 768px);
+@custom-media --breakpoint-lg-up only screen and (min-width: 992px);
+@custom-media --breakpoint-xl-up only screen and (min-width: 1200px);
+
+@custom-media --breakpoint-xs-down only screen and (max-width: 575px);
+@custom-media --breakpoint-sm-down only screen and (max-width: 767px);
+@custom-media --breakpoint-md-down only screen and (max-width: 991px);
+@custom-media --breakpoint-lg-down only screen and (max-width: 1199px);
+@custom-media --breakpoint-xl-down only screen and (min-width: 0);
+
+@custom-media --breakpoint-xs-only only screen and (min-width: 0) and (max-width: 575px);
+@custom-media --breakpoint-sm-only only screen and (min-width: 576px) and (max-width: 767px);
+@custom-media --breakpoint-md-only only screen and (min-width: 768px) and (max-width: 991px);
+@custom-media --breakpoint-lg-only only screen and (min-width: 992px) and (max-width: 1199px);
+@custom-media --breakpoint-xl-only only screen and (min-width: 1200px);
+
+/* Core variables */
 :root {
   /* Fonts */
   --font-sans-serif: sans-serif;
