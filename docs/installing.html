@@ -24,30 +24,34 @@
     </p>
   </header>
 
-  <main id="wrap">
-    <nav id="nav">
-      <a href="installing.html">Installing</a>
-      <a href="customizing.html">Customizing</a>
-      <a href="content.html">Content</a>
-      <a href="alerts.html">Alerts</a>
-      <a href="badges.html">Badges</a>
-      <a href="buttons.html">Buttons</a>
-      <a href="dropdowns.html">Dropdowns</a>
-      <a href="forms.html">Forms</a>
-      <a href="loaders.html">Loaders</a>
-      <a href="progress-bars.html">Progress Bars</a>
-      <a href="switches.html">Switches</a>
-      <a href="tabs.html">Tabs</a>
-      <a href="tables.html">Tables</a>
-      <a href="utilities.html">Utilities</a>
-      <a href="grid-system.html">Grid System</a>
-      <a href="icons.html">Icons</a>
-      <a href="browser-support.html">Browser Support</a>
-      <a href="attribution.html">Attribution</a>
-    </nav>
+  <main class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <ul id="nav">
+          <li><a href="installing.html">Installing</a></li>
+          <li><a href="customizing.html">Customizing</a></li>
+          <li><a href="content.html">Content</a></li>
+          <li><a href="alerts.html">Alerts</a></li>
+          <li><a href="badges.html">Badges</a></li>
+          <li><a href="buttons.html">Buttons</a></li>
+          <li><a href="dropdowns.html">Dropdowns</a></li>
+          <li><a href="forms.html">Forms</a></li>
+          <li><a href="grid-system.html">Grid System</a></li>
+          <li><a href="loaders.html">Loaders</a></li>
+          <li><a href="progress-bars.html">Progress Bars</a></li>
+          <li><a href="switches.html">Switches</a></li>
+          <li><a href="tabs.html">Tabs</a></li>
+          <li><a href="tables.html">Tables</a></li>
+          <li><a href="utilities.html">Utilities</a></li>
+          <li><a href="icons.html">Icons</a></li>
+          <li><a href="browser-support.html">Browser Support</a></li>
+          <li><a href="attribution.html">Attribution</a></li>
+        </ul>
+      </div>
 
-    <div id="content">
-      <h2 id="installing">Installing</h2>
+      <div class="col-md-9">
+        <div id="content">
+          <h2 id="installing">Installing</h2>
 <p>There are two ways to use Shoelace. If you want to get things up and running quickly, use the <code>dist/</code> version or the <a href="#cdn">CDN version</a>. This version isn’t customizable, nor can you use future CSS features with it. It’s primarily intended for prototyping.</p>
 <p>If you’re developing a production app, you should <a href="#building-from-source">build Shoelace from source</a>. This version is completely customizable, modular, and let’s you use future CSS features <em>today</em>.</p>
 <p><strong>Note:</strong> To make certain components interactive (e.g. dropdowns and tabs), you’ll need to load <a href="https://cdnjs.com/libraries/jquery/">jQuery</a> or <a href="https://cdnjs.com/libraries/zepto/">Zepto</a> before <code>shoelace.js</code>.</p>
@@ -67,7 +71,8 @@
 </code></pre>
 <p>The main source file is <code>source/css/shoelace.css</code>. This sets core variables and imports all of Shoelace’s components. If you don’t need everything, you’re encouraged to create your own and import only the ones you’re going to use.</p>
 
-    </div>
+        </div>
+      </div>
   </main>
 
   <footer id="foot">

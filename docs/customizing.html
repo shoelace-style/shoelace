@@ -24,30 +24,34 @@
     </p>
   </header>
 
-  <main id="wrap">
-    <nav id="nav">
-      <a href="installing.html">Installing</a>
-      <a href="customizing.html">Customizing</a>
-      <a href="content.html">Content</a>
-      <a href="alerts.html">Alerts</a>
-      <a href="badges.html">Badges</a>
-      <a href="buttons.html">Buttons</a>
-      <a href="dropdowns.html">Dropdowns</a>
-      <a href="forms.html">Forms</a>
-      <a href="loaders.html">Loaders</a>
-      <a href="progress-bars.html">Progress Bars</a>
-      <a href="switches.html">Switches</a>
-      <a href="tabs.html">Tabs</a>
-      <a href="tables.html">Tables</a>
-      <a href="utilities.html">Utilities</a>
-      <a href="grid-system.html">Grid System</a>
-      <a href="icons.html">Icons</a>
-      <a href="browser-support.html">Browser Support</a>
-      <a href="attribution.html">Attribution</a>
-    </nav>
+  <main class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <ul id="nav">
+          <li><a href="installing.html">Installing</a></li>
+          <li><a href="customizing.html">Customizing</a></li>
+          <li><a href="content.html">Content</a></li>
+          <li><a href="alerts.html">Alerts</a></li>
+          <li><a href="badges.html">Badges</a></li>
+          <li><a href="buttons.html">Buttons</a></li>
+          <li><a href="dropdowns.html">Dropdowns</a></li>
+          <li><a href="forms.html">Forms</a></li>
+          <li><a href="grid-system.html">Grid System</a></li>
+          <li><a href="loaders.html">Loaders</a></li>
+          <li><a href="progress-bars.html">Progress Bars</a></li>
+          <li><a href="switches.html">Switches</a></li>
+          <li><a href="tabs.html">Tabs</a></li>
+          <li><a href="tables.html">Tables</a></li>
+          <li><a href="utilities.html">Utilities</a></li>
+          <li><a href="icons.html">Icons</a></li>
+          <li><a href="browser-support.html">Browser Support</a></li>
+          <li><a href="attribution.html">Attribution</a></li>
+        </ul>
+      </div>
 
-    <div id="content">
-      <h2 id="customizing">Customizing</h2>
+      <div class="col-md-9">
+        <div id="content">
+          <h2 id="customizing">Customizing</h2>
 <p>If you’re using the source version of Shoelace (i.e. not the CDN or <code>/dist</code> version), you can customize components using CSS variables. To add customizations, simply override one or more of the variables found in the <code>:root</code> block of <a href="../source/css/shoelace.css"><code>source/css/shoelace.css</code></a>.</p>
 <p>For example, you can customize the default text color, background color, and the primary color by adding this to your stylesheet:</p>
 <pre><code class="lang-css">:root {
@@ -99,7 +103,8 @@
 <p><strong>Provide source and dist versions.</strong> Many people use Shoelace as a tool for prototyping. If you’re open sourcing your component, it’s best to provide both source and dist versions. The dist version is just a minified version of the source after it’s been processed by cssnext.</p>
 <p><strong>Semantic markup is strongly encouraged.</strong> Custom components should use the most appropriate elements and the minimal amount of markup required.</p>
 
-    </div>
+        </div>
+      </div>
   </main>
 
   <footer id="foot">

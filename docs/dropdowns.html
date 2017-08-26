@@ -24,30 +24,34 @@
     </p>
   </header>
 
-  <main id="wrap">
-    <nav id="nav">
-      <a href="installing.html">Installing</a>
-      <a href="customizing.html">Customizing</a>
-      <a href="content.html">Content</a>
-      <a href="alerts.html">Alerts</a>
-      <a href="badges.html">Badges</a>
-      <a href="buttons.html">Buttons</a>
-      <a href="dropdowns.html">Dropdowns</a>
-      <a href="forms.html">Forms</a>
-      <a href="loaders.html">Loaders</a>
-      <a href="progress-bars.html">Progress Bars</a>
-      <a href="switches.html">Switches</a>
-      <a href="tabs.html">Tabs</a>
-      <a href="tables.html">Tables</a>
-      <a href="utilities.html">Utilities</a>
-      <a href="grid-system.html">Grid System</a>
-      <a href="icons.html">Icons</a>
-      <a href="browser-support.html">Browser Support</a>
-      <a href="attribution.html">Attribution</a>
-    </nav>
+  <main class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <ul id="nav">
+          <li><a href="installing.html">Installing</a></li>
+          <li><a href="customizing.html">Customizing</a></li>
+          <li><a href="content.html">Content</a></li>
+          <li><a href="alerts.html">Alerts</a></li>
+          <li><a href="badges.html">Badges</a></li>
+          <li><a href="buttons.html">Buttons</a></li>
+          <li><a href="dropdowns.html">Dropdowns</a></li>
+          <li><a href="forms.html">Forms</a></li>
+          <li><a href="grid-system.html">Grid System</a></li>
+          <li><a href="loaders.html">Loaders</a></li>
+          <li><a href="progress-bars.html">Progress Bars</a></li>
+          <li><a href="switches.html">Switches</a></li>
+          <li><a href="tabs.html">Tabs</a></li>
+          <li><a href="tables.html">Tables</a></li>
+          <li><a href="utilities.html">Utilities</a></li>
+          <li><a href="icons.html">Icons</a></li>
+          <li><a href="browser-support.html">Browser Support</a></li>
+          <li><a href="attribution.html">Attribution</a></li>
+        </ul>
+      </div>
 
-    <div id="content">
-      <h2 id="dropdowns">Dropdowns</h2>
+      <div class="col-md-9">
+        <div id="content">
+          <h2 id="dropdowns">Dropdowns</h2>
 <p>Dropdowns can be created using the markup below. You can use a <code>&lt;button&gt;</code> or an <code>&lt;a&gt;</code> as a trigger. Dropdown indicators (i.e. carets) are added for you. Menu items are simply <code>&lt;a&gt;</code> elements. Dividers are simply <code>&lt;hr&gt;</code> elements.</p>
 <p>Note the class names used for the main container, the trigger, and the menu. Additionally, menu items can be disabled by adding the <code>disabled</code> class. Menu items can also be given a checked state using the <code>checked</code> class.</p>
 <p>To disable a dropdown entirely, add the <code>disabled</code> property to the dropdown trigger if it’s a button. If it’s a link, add the <code>disabled</code> class instead. When a dropdown is activated, it will receive the <code>active</code> class and the menu will show.</p>
@@ -173,7 +177,8 @@
   });
 </code></pre>
 
-    </div>
+        </div>
+      </div>
   </main>
 
   <footer id="foot">

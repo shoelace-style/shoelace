@@ -24,30 +24,34 @@
     </p>
   </header>
 
-  <main id="wrap">
-    <nav id="nav">
-      <a href="installing.html">Installing</a>
-      <a href="customizing.html">Customizing</a>
-      <a href="content.html">Content</a>
-      <a href="alerts.html">Alerts</a>
-      <a href="badges.html">Badges</a>
-      <a href="buttons.html">Buttons</a>
-      <a href="dropdowns.html">Dropdowns</a>
-      <a href="forms.html">Forms</a>
-      <a href="loaders.html">Loaders</a>
-      <a href="progress-bars.html">Progress Bars</a>
-      <a href="switches.html">Switches</a>
-      <a href="tabs.html">Tabs</a>
-      <a href="tables.html">Tables</a>
-      <a href="utilities.html">Utilities</a>
-      <a href="grid-system.html">Grid System</a>
-      <a href="icons.html">Icons</a>
-      <a href="browser-support.html">Browser Support</a>
-      <a href="attribution.html">Attribution</a>
-    </nav>
+  <main class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <ul id="nav">
+          <li><a href="installing.html">Installing</a></li>
+          <li><a href="customizing.html">Customizing</a></li>
+          <li><a href="content.html">Content</a></li>
+          <li><a href="alerts.html">Alerts</a></li>
+          <li><a href="badges.html">Badges</a></li>
+          <li><a href="buttons.html">Buttons</a></li>
+          <li><a href="dropdowns.html">Dropdowns</a></li>
+          <li><a href="forms.html">Forms</a></li>
+          <li><a href="grid-system.html">Grid System</a></li>
+          <li><a href="loaders.html">Loaders</a></li>
+          <li><a href="progress-bars.html">Progress Bars</a></li>
+          <li><a href="switches.html">Switches</a></li>
+          <li><a href="tabs.html">Tabs</a></li>
+          <li><a href="tables.html">Tables</a></li>
+          <li><a href="utilities.html">Utilities</a></li>
+          <li><a href="icons.html">Icons</a></li>
+          <li><a href="browser-support.html">Browser Support</a></li>
+          <li><a href="attribution.html">Attribution</a></li>
+        </ul>
+      </div>
 
-    <div id="content">
-      <h2 id="progress-bars">Progress Bars</h2>
+      <div class="col-md-9">
+        <div id="content">
+          <h2 id="progress-bars">Progress Bars</h2>
 <p>HTML5 introduced the <code>&lt;progress&gt;</code> element, but it’s not currently possible to style consistently in all browsers. As a result, Shoelace offers a custom alternative.</p>
 <p>Create a progress bar with the following markup. Use the <code>progress-[xs|sm|lg|xl]</code> modifiers to change the size. To set the state, use a <a href="utilities.html#sizing-utilities">sizing utility</a> or set the width explicitly on the <code>progress-bar</code> element.</p>
 <p>An optional text label can be included inside the <code>progress-bar</code> element.</p>
@@ -158,7 +162,8 @@
   <div class="progress-bar w-50">50%</div>
 </div>
 
-    </div>
+        </div>
+      </div>
   </main>
 
   <footer id="foot">

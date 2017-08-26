@@ -115,8 +115,8 @@ You can change the size of most form controls with the `input-[xs|sm|lg|xl]` mod
 <select class="input-xl"><option>Item</option></select>
 ```
 
-<div class="two-column">
-  <div class="column">
+<div class="row">
+  <div class="col-sm-6">
     <div class="input-field">
       <input type="text" class="input-xs" placeholder="XS">
     </div>
@@ -133,8 +133,7 @@ You can change the size of most form controls with the `input-[xs|sm|lg|xl]` mod
       <input type="text" class="input-xl" placeholder="XL">
     </div>
   </div>
-
-  <div class="column">
+  <div class="col-sm-6">
     <div class="input-field">
       <select class="input-xs"><option>XS</option></select>
     </div>
@@ -379,18 +378,16 @@ Form controls can be made valid or invalid using the `input-valid` and `input-in
 </div>
 ```
 
-<div class="two-column">
-  <div class="column">
+<div class="row">
+  <div class="col-sm-6">
     <div class="input-field input-valid">
       <label>Valid</label>
       <input type="text">
     </div>
   </div>
-
-  <div class="column">
+  <div class="col-sm-6">
     <div class="input-field input-invalid">
-      <label>Invalid</label>
-      <input type="text">
-    </div>
+    <label>Invalid</label>
+    <input type="text">
   </div>
 </div>

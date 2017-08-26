@@ -73,58 +73,65 @@ To disable a tab, add `disabled` to the appropriate tab nav.
 
 ### Vertical Tabs
 
-Tabs can be made vertical by adding custom CSS rules. Shoelace doesn’t include these styles by default because of the many ways tabs can be positioned, customized, and made responsive.
+Tabs can be made vertical when used along with the [grid system](grid-system.html).
 
-Here’s an example of vertical tabs that uses the CSS grid. The markup is exactly the same as the previous example, except the tabs container has a custom class and the following custom styles.
+```html
+<div class="tabs">
+  <div class="row">
+    <div class="col-4">
+      <nav class="tabs-nav">
+        <a href="#tab-1-example-2" class="active">Tab 1</a>
+        <a href="#tab-2-example-2">Tab 2</a>
+        <a href="#tab-3-example-2">Tab 3</a>
+        <a href="#" class="disabled">Disabled</a>
+      </nav>
+    </div>
 
-```css
-.tabs-vertical-example {
-  display: grid;
-  grid-template-columns: 30% 70%;
-}
-
-.tabs-vertical-example .tabs-nav {
-  padding-right: 2rem;
-}
-
-.tabs-vertical-example .tabs-nav a {
-  display: block;
-}
+    <div class="col-8">
+      <div class="tabs-pane active" id="tab-1-example-2">...</div>
+      <div class="tabs-pane" id="tab-2-example-2">...</div>
+      <div class="tabs-pane" id="tab-3-example-2">...</div>
+    </div>
+  </div>
+</div>
 ```
 
 <div class="tabs tabs-vertical-example">
-  <nav class="tabs-nav tabs-nav-block">
-    <a href="#tab-1-example-2" class="active">Tab 1</a>
-    <a href="#tab-2-example-2">Tab 2</a>
-    <a href="#tab-3-example-2">Tab 3</a>
-    <a href="#" class="disabled">Disabled</a>
-  </nav>
-
-  <div class="tabs-pane active" id="tab-1-example-2">
-    <h3>Tab 1</h3>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui repellat ea magni magnam
-      assumenda voluptas accusantium nemo. Iusto beatae illum mollitia aut quasi odit facilis
-      officiis, laudantium debitis! Excepturi, quis!
-    </p>
-  </div>
-
-  <div class="tabs-pane" id="tab-2-example-2">
-    <h3>Tab 2</h3>
-    <p>
-      Atque eius voluptatibus ipsa ex totam odit, quidem illo distinctio sit! Quod quae minus,
-      aut itaque. Mollitia, dolore! Facere molestiae necessitatibus sint recusandae incidunt
-      pariatur labore iste vel, velit odit.
-    </p>
-  </div>
-
-  <div class="tabs-pane" id="tab-3-example-2">
-    <h3>Tab 3</h3>
-    <p>
-      Aperiam asperiores optio iusto qui nisi, perspiciatis, ipsum, tenetur explicabo earum et
-      laboriosam odit magni maxime quos molestias aspernatur laudantium harum placeat tempora
-      quae necessitatibus, aut dignissimos totam non! Quod.
-    </p>
+  <div class="row">
+    <div class="col-4">
+      <nav class="tabs-nav">
+        <a href="#tab-1-example-2" class="active">Tab 1</a>
+        <a href="#tab-2-example-2">Tab 2</a>
+        <a href="#tab-3-example-2">Tab 3</a>
+        <a href="#" class="disabled">Disabled</a>
+      </nav>
+    </div>
+    <div class="col-8">
+      <div class="tabs-pane active" id="tab-1-example-2">
+        <h3>Tab 1</h3>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui repellat ea magni magnam
+          assumenda voluptas accusantium nemo. Iusto beatae illum mollitia aut quasi odit facilis
+          officiis, laudantium debitis! Excepturi, quis!
+        </p>
+      </div>
+      <div class="tabs-pane" id="tab-2-example-2">
+        <h3>Tab 2</h3>
+        <p>
+          Atque eius voluptatibus ipsa ex totam odit, quidem illo distinctio sit! Quod quae minus,
+          aut itaque. Mollitia, dolore! Facere molestiae necessitatibus sint recusandae incidunt
+          pariatur labore iste vel, velit odit.
+        </p>
+      </div>
+      <div class="tabs-pane" id="tab-3-example-2">
+        <h3>Tab 3</h3>
+        <p>
+          Aperiam asperiores optio iusto qui nisi, perspiciatis, ipsum, tenetur explicabo earum et
+          laboriosam odit magni maxime quos molestias aspernatur laudantium harum placeat tempora
+          quae necessitatibus, aut dignissimos totam non! Quod.
+        </p>
+      </div>
+    </div>
   </div>
 </div>
 

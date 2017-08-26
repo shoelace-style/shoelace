@@ -24,30 +24,34 @@
     </p>
   </header>
 
-  <main id="wrap">
-    <nav id="nav">
-      <a href="installing.html">Installing</a>
-      <a href="customizing.html">Customizing</a>
-      <a href="content.html">Content</a>
-      <a href="alerts.html">Alerts</a>
-      <a href="badges.html">Badges</a>
-      <a href="buttons.html">Buttons</a>
-      <a href="dropdowns.html">Dropdowns</a>
-      <a href="forms.html">Forms</a>
-      <a href="loaders.html">Loaders</a>
-      <a href="progress-bars.html">Progress Bars</a>
-      <a href="switches.html">Switches</a>
-      <a href="tabs.html">Tabs</a>
-      <a href="tables.html">Tables</a>
-      <a href="utilities.html">Utilities</a>
-      <a href="grid-system.html">Grid System</a>
-      <a href="icons.html">Icons</a>
-      <a href="browser-support.html">Browser Support</a>
-      <a href="attribution.html">Attribution</a>
-    </nav>
+  <main class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <ul id="nav">
+          <li><a href="installing.html">Installing</a></li>
+          <li><a href="customizing.html">Customizing</a></li>
+          <li><a href="content.html">Content</a></li>
+          <li><a href="alerts.html">Alerts</a></li>
+          <li><a href="badges.html">Badges</a></li>
+          <li><a href="buttons.html">Buttons</a></li>
+          <li><a href="dropdowns.html">Dropdowns</a></li>
+          <li><a href="forms.html">Forms</a></li>
+          <li><a href="grid-system.html">Grid System</a></li>
+          <li><a href="loaders.html">Loaders</a></li>
+          <li><a href="progress-bars.html">Progress Bars</a></li>
+          <li><a href="switches.html">Switches</a></li>
+          <li><a href="tabs.html">Tabs</a></li>
+          <li><a href="tables.html">Tables</a></li>
+          <li><a href="utilities.html">Utilities</a></li>
+          <li><a href="icons.html">Icons</a></li>
+          <li><a href="browser-support.html">Browser Support</a></li>
+          <li><a href="attribution.html">Attribution</a></li>
+        </ul>
+      </div>
 
-    <div id="content">
-      <h2 id="tabs">Tabs</h2>
+      <div class="col-md-9">
+        <div id="content">
+          <h2 id="tabs">Tabs</h2>
 <p>Tab sets can be created using the markup below. By default, Shoelace renders tabs as pills because they respond better than traditional tabs when rendered on smaller screens.</p>
 <p>Note the class names used for the main container, the tab navs, and the tab panes. Also note that each tab links to its respective tab pane’s <code>id</code>.</p>
 <p>To disable a tab, add <code>disabled</code> to the appropriate tab nav.</p>
@@ -109,54 +113,62 @@
 </div>
 
 <h3 id="vertical-tabs">Vertical Tabs</h3>
-<p>Tabs can be made vertical by adding custom CSS rules. Shoelace doesn’t include these styles by default because of the many ways tabs can be positioned, customized, and made responsive.</p>
-<p>Here’s an example of vertical tabs that uses the CSS grid. The markup is exactly the same as the previous example, except the tabs container has a custom class and the following custom styles.</p>
-<pre><code class="lang-css">.tabs-vertical-example {
-  display: grid;
-  grid-template-columns: 30% 70%;
-}
+<p>Tabs can be made vertical when used along with the <a href="grid-system.html">grid system</a>.</p>
+<pre><code class="lang-html">&lt;div class=&quot;tabs&quot;&gt;
+  &lt;div class=&quot;row&quot;&gt;
+    &lt;div class=&quot;col-4&quot;&gt;
+      &lt;nav class=&quot;tabs-nav&quot;&gt;
+        &lt;a href=&quot;#tab-1-example-2&quot; class=&quot;active&quot;&gt;Tab 1&lt;/a&gt;
+        &lt;a href=&quot;#tab-2-example-2&quot;&gt;Tab 2&lt;/a&gt;
+        &lt;a href=&quot;#tab-3-example-2&quot;&gt;Tab 3&lt;/a&gt;
+        &lt;a href=&quot;#&quot; class=&quot;disabled&quot;&gt;Disabled&lt;/a&gt;
+      &lt;/nav&gt;
+    &lt;/div&gt;
 
-.tabs-vertical-example .tabs-nav {
-  padding-right: 2rem;
-}
-
-.tabs-vertical-example .tabs-nav a {
-  display: block;
-}
+    &lt;div class=&quot;col-8&quot;&gt;
+      &lt;div class=&quot;tabs-pane active&quot; id=&quot;tab-1-example-2&quot;&gt;...&lt;/div&gt;
+      &lt;div class=&quot;tabs-pane&quot; id=&quot;tab-2-example-2&quot;&gt;...&lt;/div&gt;
+      &lt;div class=&quot;tabs-pane&quot; id=&quot;tab-3-example-2&quot;&gt;...&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
 </code></pre>
 <div class="tabs tabs-vertical-example">
-  <nav class="tabs-nav tabs-nav-block">
-    <a href="#tab-1-example-2" class="active">Tab 1</a>
-    <a href="#tab-2-example-2">Tab 2</a>
-    <a href="#tab-3-example-2">Tab 3</a>
-    <a href="#" class="disabled">Disabled</a>
-  </nav>
-
-  <div class="tabs-pane active" id="tab-1-example-2">
-    <h3>Tab 1</h3>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui repellat ea magni magnam
-      assumenda voluptas accusantium nemo. Iusto beatae illum mollitia aut quasi odit facilis
-      officiis, laudantium debitis! Excepturi, quis!
-    </p>
-  </div>
-
-  <div class="tabs-pane" id="tab-2-example-2">
-    <h3>Tab 2</h3>
-    <p>
-      Atque eius voluptatibus ipsa ex totam odit, quidem illo distinctio sit! Quod quae minus,
-      aut itaque. Mollitia, dolore! Facere molestiae necessitatibus sint recusandae incidunt
-      pariatur labore iste vel, velit odit.
-    </p>
-  </div>
-
-  <div class="tabs-pane" id="tab-3-example-2">
-    <h3>Tab 3</h3>
-    <p>
-      Aperiam asperiores optio iusto qui nisi, perspiciatis, ipsum, tenetur explicabo earum et
-      laboriosam odit magni maxime quos molestias aspernatur laudantium harum placeat tempora
-      quae necessitatibus, aut dignissimos totam non! Quod.
-    </p>
+  <div class="row">
+    <div class="col-4">
+      <nav class="tabs-nav">
+        <a href="#tab-1-example-2" class="active">Tab 1</a>
+        <a href="#tab-2-example-2">Tab 2</a>
+        <a href="#tab-3-example-2">Tab 3</a>
+        <a href="#" class="disabled">Disabled</a>
+      </nav>
+    </div>
+    <div class="col-8">
+      <div class="tabs-pane active" id="tab-1-example-2">
+        <h3>Tab 1</h3>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui repellat ea magni magnam
+          assumenda voluptas accusantium nemo. Iusto beatae illum mollitia aut quasi odit facilis
+          officiis, laudantium debitis! Excepturi, quis!
+        </p>
+      </div>
+      <div class="tabs-pane" id="tab-2-example-2">
+        <h3>Tab 2</h3>
+        <p>
+          Atque eius voluptatibus ipsa ex totam odit, quidem illo distinctio sit! Quod quae minus,
+          aut itaque. Mollitia, dolore! Facere molestiae necessitatibus sint recusandae incidunt
+          pariatur labore iste vel, velit odit.
+        </p>
+      </div>
+      <div class="tabs-pane" id="tab-3-example-2">
+        <h3>Tab 3</h3>
+        <p>
+          Aperiam asperiores optio iusto qui nisi, perspiciatis, ipsum, tenetur explicabo earum et
+          laboriosam odit magni maxime quos molestias aspernatur laudantium harum placeat tempora
+          quae necessitatibus, aut dignissimos totam non! Quod.
+        </p>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -177,7 +189,8 @@
   });
 </code></pre>
 
-    </div>
+        </div>
+      </div>
   </main>
 
   <footer id="foot">
