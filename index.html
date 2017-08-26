@@ -25,12 +25,13 @@
     <div class="row">
       <div class="col-lg-8 offset-lg-2">
         <p>
-          Shoelace.css is a starter kit, not a framework. Think of it as a CSS reset sprinkled with
-          helpful components. Bootstrap users will find it familiar, yet refreshing.
+          Shoelace.css is a lightweight, forward-thinking CSS library built with future CSS syntax.
+          It’s easy to use and highly customizable. Bootstrap users will find it familiar, yet
+          refreshing.
         </p>
 
         <p>
-          You can use Shoelace with just about every browser. The CDN version is great for
+          You can use Shoelace with just about any browser. The CDN version is great for
           prototyping, but to take advantage of all its features you should
           <a href="docs/installing.html#building-from-source">build Shoelace from source</a>.
         </p>
@@ -40,15 +41,15 @@
         </p>
 
 <pre><code class="language-css">:root {
-  /* Use CSS variables */
+  /* CSS variables */
   --state-primary: #09d;
 
-  /* Use color functions instead of hard-coding values */
+  /* Color functions */
   --alert-bg-color: color(var(--state-primary) tint(75%));
   --alert-color: color(var(--state-primary) lightness(25%));
 }
 
-/* Nest selectors for better legibility */
+/* Nested selectors */
 .alert {
   background-color: var(--alert-bg-color);
   color: var(--alert-color);
