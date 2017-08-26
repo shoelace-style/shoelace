@@ -6,7 +6,7 @@ description: Shoelace doesn’t ship with a grid system because you don’t need
 
 ## Grid System
 
-Shoelace features a 12-column grid system that’s based on [Bootstrap 4’s grid](https://getbootstrap.com/docs/4.0/layout/grid/). It’s flexible, easy to use, and fully responsive.
+Shoelace features a 12-column grid system based on [Bootstrap 4’s grid](https://getbootstrap.com/docs/4.0/layout/grid/). It’s flexible, easy to use, and fully responsive.
 
 ### Structure
 
@@ -224,9 +224,9 @@ You can control the visual order of columns using the `order-*` and `order-[sm|m
 
 ```html
 <div class="row">
-  <div class="col-4">1st (no order)</div>
-  <div class="col-4 order-3">2nd (shown 3rd)</div>
-  <div class="col-4 order-2">3rd (shown 2nd)</div>
+  <div class="col-4">1st (unordered)</div>
+  <div class="col-4 order-3">2nd</div>
+  <div class="col-4 order-2">3rd</div>
 </div>
 ```
 
