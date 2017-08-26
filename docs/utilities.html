@@ -52,9 +52,9 @@
       <div class="col-md-9">
         <div id="content">
           <h2 id="utilities">Utilities</h2>
-<p>Shoelace provides a number of helpful utility classes that make prototyping easier.</p>
+<p>Shoelace provides a number of helpful utilities that make designing and prototyping easier.</p>
 <h3 id="background-utilities">Background Utilities</h3>
-<p>Background utility classes can be applied to change an element’s background color.</p>
+<p>Background utilities can be applied to change an element’s background color.</p>
 <pre><code class="lang-html">&lt;div class=&quot;bg-primary&quot;&gt;Primary&lt;/div&gt;
 &lt;div class=&quot;bg-secondary&quot;&gt;Secondary&lt;/div&gt;
 &lt;div class=&quot;bg-success&quot;&gt;Success&lt;/div&gt;
@@ -74,13 +74,13 @@
 <div class="mar-b-sm pad-sm bg-dark text-light">Dark</div>
 
 <h3 id="breakpoint-utilities">Breakpoint Utilities</h3>
-<p>Responsive breakpoints exist for five tiers of screen sizes (xs, sm, md, lg, xl). By default, the breakpoints are:</p>
+<p>Responsive breakpoints exist for five tiers of screen sizes. By default, the breakpoints are:</p>
 <ul>
-<li><code>xs</code>: 575px and below</li>
-<li><code>sm</code>: 576px – 767px</li>
-<li><code>md</code>: 768px – 991px</li>
-<li><code>lg</code>: 992px - 1199px</li>
-<li><code>xl</code>: 1200px and above</li>
+<li><code>xs</code> &rarr; 575px and below</li>
+<li><code>sm</code> &rarr; 576px – 767px</li>
+<li><code>md</code> &rarr; 768px – 991px</li>
+<li><code>lg</code> &rarr; 992px - 1199px</li>
+<li><code>xl</code> &rarr; 1200px and above</li>
 </ul>
 <p>If you’re building Shoelace from source, you can use the custom media queries found in <a href="../source/css/shoelace.css"><code>source/css/shoelace.css</code></a> to easily target various breakpoints without hard-coding screen sizes in your stylesheet.</p>
 <pre><code class="lang-css">@media (--breakpoint-xs-up) { /* xs screens and above */ }
@@ -159,7 +159,7 @@ mar-[0|xs|sm|md|lg|xl]
 </code></pre><p>Example:</p>
 <pre><code class="lang-html">&lt;div class=&quot;pad-0 mar-xl&quot;&gt;
 </code></pre>
-<p>To apply spacing to a specific side of an element, use one or more of the following classes.</p>
+<p>To apply spacing to a specific side of an element, use one or more of the following classes indicating top, right, bottom, left, x (horizontal), and y (vertical):</p>
 <pre><code>pad-[t|r|b|l|x|y]-[0|xs|sm|md|lg|xl]
 mar-[t|r|b|l|x|y]-[0|xs|sm|md|lg|xl]
 </code></pre><p>Example:</p>
@@ -167,7 +167,7 @@ mar-[t|r|b|l|x|y]-[0|xs|sm|md|lg|xl]
 </code></pre>
 <p>You can also use <code>mar-[x|y|xy]-auto</code> to set automatic margins horizontally and/or vertically.</p>
 <h3 id="text-utilities">Text Utilities</h3>
-<p>Text utility classes can be applied to change an element’s text.</p>
+<p>Text utility classes can be applied to change the appearance of text.</p>
 <table class="table">
   <thead>
     <tr>

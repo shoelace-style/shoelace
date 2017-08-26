@@ -6,11 +6,11 @@ description: Use these utilities for quick prototyping.
 
 ## Utilities
 
-Shoelace provides a number of helpful utility classes that make prototyping easier.
+Shoelace provides a number of helpful utilities that make designing and prototyping easier.
 
 ### Background Utilities
 
-Background utility classes can be applied to change an element’s background color.
+Background utilities can be applied to change an element’s background color.
 
 ```html
 <div class="bg-primary">Primary</div>
@@ -34,13 +34,13 @@ Background utility classes can be applied to change an element’s background co
 
 ### Breakpoint Utilities
 
-Responsive breakpoints exist for five tiers of screen sizes (xs, sm, md, lg, xl). By default, the breakpoints are:
+Responsive breakpoints exist for five tiers of screen sizes. By default, the breakpoints are:
 
-- `xs`: 575px and below
-- `sm`: 576px – 767px
-- `md`: 768px – 991px
-- `lg`: 992px - 1199px
-- `xl`: 1200px and above
+- `xs` &rarr; 575px and below
+- `sm` &rarr; 576px – 767px
+- `md` &rarr; 768px – 991px
+- `lg` &rarr; 992px - 1199px
+- `xl` &rarr; 1200px and above
 
 If you’re building Shoelace from source, you can use the custom media queries found in [`source/css/shoelace.css`](../source/css/shoelace.css) to easily target various breakpoints without hard-coding screen sizes in your stylesheet.
 
@@ -143,7 +143,7 @@ Example:
 <div class="pad-0 mar-xl">
 ```
 
-To apply spacing to a specific side of an element, use one or more of the following classes.
+To apply spacing to a specific side of an element, use one or more of the following classes indicating top, right, bottom, left, x (horizontal), and y (vertical):
 
 ```
 pad-[t|r|b|l|x|y]-[0|xs|sm|md|lg|xl]
@@ -160,7 +160,7 @@ You can also use `mar-[x|y|xy]-auto` to set automatic margins horizontally and/o
 
 ### Text Utilities
 
-Text utility classes can be applied to change an element’s text.
+Text utility classes can be applied to change the appearance of text.
 
 <table class="table">
   <thead>
