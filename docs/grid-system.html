@@ -52,7 +52,7 @@
       <div class="col-md-9">
         <div id="content">
           <h2 id="grid-system">Grid System</h2>
-<p>Shoelace features a 12-column grid system based heavily on <a href="https://getbootstrap.com/docs/4.0/layout/grid/">Bootstrap 4’s grid</a>. It’s flexible, easy to use, and fully responsive.</p>
+<p>Shoelace features a 12-column grid system that’s based on <a href="https://getbootstrap.com/docs/4.0/layout/grid/">Bootstrap 4’s grid</a>. It’s flexible, easy to use, and fully responsive.</p>
 <h3 id="structure">Structure</h3>
 <p>The grid consists of containers, rows, and columns. A basic, two-column grid looks like this:</p>
 <pre><code class="lang-html">&lt;div class=&quot;container&quot;&gt;
@@ -70,8 +70,7 @@
 </div>
 
 <p>Containers can be used to wrap sections of your page. Use the <code>container</code> class to create a responsive, fixed-width container or the <code>container-fluid</code> class to create a fluid container.</p>
-<p>Rows are used to group columns horizontally. Rows can only contain columns as child elements.</p>
-<p>Columns are where your content will go. To create a complete row, use any combination of columns that adds up to 12 wide.</p>
+<p>Rows are used to group columns horizontally and can only contain columns as child elements. Columns are where you’ll put your content.</p>
 <h3 id="creating-columns">Creating Columns</h3>
 <p>Columns are equal width by default. The grid will automatically determine the appropriate size for columns with the <code>col</code> class.</p>
 <pre><code class="lang-html">&lt;div class=&quot;row&quot;&gt;
@@ -134,9 +133,24 @@
   </div>
 </div>
 
+<p>To size a column based on its content, use <code>col-auto</code>.</p>
+<pre><code class="lang-html">&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col&quot;&gt;col&lt;/div&gt;
+  &lt;div class=&quot;col-auto&quot;&gt;Sized to fit&lt;/div&gt;
+  &lt;div class=&quot;col&quot;&gt;col&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<div class="container grid-example">
+  <div class="row">
+    <div class="col">col</div>
+    <div class="col-auto">Sized to fit</div>
+    <div class="col">col</div>
+  </div>
+</div>
+
 <h3 id="making-columns-responsive">Making Columns Responsive</h3>
-<p>There are five responsive tiers in Shoelace: <code>xs</code>, <code>sm</code>, <code>md</code>, <code>lg</code>, and <code>xl</code>. You can use these tiers to change the way the grid responds at various breakpoints.</p>
-<p>Use the <code>col-[xs|sm|md|lg|xl]-*</code> modifier to target a specific tier. Note that tiers are based on minimum widths, so using <code>col-sm-6</code> will target <code>sm</code>, <code>md</code>, <code>lg</code>, and <code>xl</code>. However, you can target multiple tiers on the same column as needed.</p>
+<p>There are five responsive tiers in Shoelace: <code>xs</code>, <code>sm</code>, <code>md</code>, <code>lg</code>, and <code>xl</code>. You can use these tiers to change the way the grid responds at various breakpoints. The grid is mobile-first, so the default tier is <code>xs</code>.</p>
+<p>Use the <code>col-[sm|md|lg|xl]-*</code> modifier to target a specific tier. Note that tiers are based on minimum widths, so using <code>col-sm-6</code> will target <code>sm</code>, <code>md</code>, <code>lg</code>, and <code>xl</code> screens. Of course, you can target multiple tiers on the same column as needed.</p>
 <p>For example, the following columns will stack on <code>xs</code> screens, take up 50% each (6 out of 12 columns) on <code>sm</code> screens, and 75% and 25% respectively on <code>md</code>, <code>lg</code>, and <code>xl</code> screens.</p>
 <pre><code class="lang-html">&lt;div class=&quot;row&quot;&gt;
   &lt;div class=&quot;col-12 col-sm-6 col-md-8&quot;&gt;1st column&lt;/div&gt;
@@ -151,7 +165,7 @@
 </div>
 
 <h3 id="offsetting-columns">Offsetting Columns</h3>
-<p>You can offset columns using <code>offset-*</code> and <code>offset-[xs|sm|md|lg|xl]-*</code> modifiers. To reset an offset at a specific tier, use <code>offset-[xs|sm|md|lg|xl]-0</code>.</p>
+<p>You can offset columns using <code>offset-*</code> and <code>offset-[sm|md|lg|xl]-*</code> modifiers. To reset an offset at a specific tier, use <code>offset-[sm|md|lg|xl]-0</code>.</p>
 <pre><code class="lang-html">&lt;div class=&quot;row&quot;&gt;
   &lt;div class=&quot;col-2&quot;&gt;left&lt;/div&gt;
   &lt;div class=&quot;col-2 offset-2&quot;&gt;center&lt;/div&gt;
@@ -167,7 +181,7 @@
 </div>
 
 <h3 id="reordering-columns">Reordering Columns</h3>
-<p>You can control the visual order of columns using the <code>order-*</code> and <code>order-[xs|sm|md|lg|xl]-*</code> modifiers. Note that columns without an order modifier will not be affected.</p>
+<p>You can control the visual order of columns using the <code>order-*</code> and <code>order-[sm|md|lg|xl]-*</code> modifiers. Note that columns without an order modifier will not be affected.</p>
 <pre><code class="lang-html">&lt;div class=&quot;row&quot;&gt;
   &lt;div class=&quot;col-4&quot;&gt;1st (no order)&lt;/div&gt;
   &lt;div class=&quot;col-4 order-3&quot;&gt;2nd (shown 3rd)&lt;/div&gt;
@@ -203,13 +217,13 @@
 </div>
 
 <h3 id="removing-gutters">Removing Gutters</h3>
-<p>By default, columns have horizontal spacing around them to create “gutters.” You can remove this spacing by applying the <code>no-gutters</code> class to the parent row.</p>
-<pre><code class="lang-html">&lt;div class=&quot;row no-gutters&quot;&gt;
+<p>By default, columns have horizontal spacing around them to create “gutters.” You can remove this spacing by applying the <code>row-flush</code> modifier to the parent row.</p>
+<pre><code class="lang-html">&lt;div class=&quot;row row-flush&quot;&gt;
   ...
 &lt;/div&gt;
 </code></pre>
-<p>For an edge-to-edge design, refrain from using <code>container</code> and <code>container-fluid</code>.</p>
-<h3 id="nesting-grids">Nesting Grids</h3>
+<p>For an edge-to-edge design, refrain from using <code>container</code> and <code>container-fluid</code> around the row.</p>
+<h3 id="nested-grids">Nested Grids</h3>
 <p>Grids can be nested. Simply add a new row inside of a column.</p>
 <pre><code class="lang-html">&lt;div class=&quot;row&quot;&gt;
   &lt;div class=&quot;col-8&quot;&gt;

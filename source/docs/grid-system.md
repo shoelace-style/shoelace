@@ -6,7 +6,7 @@ description: Shoelace doesn’t ship with a grid system because you don’t need
 
 ## Grid System
 
-Shoelace features a 12-column grid system based heavily on [Bootstrap 4’s grid](https://getbootstrap.com/docs/4.0/layout/grid/). It’s flexible, easy to use, and fully responsive.
+Shoelace features a 12-column grid system that’s based on [Bootstrap 4’s grid](https://getbootstrap.com/docs/4.0/layout/grid/). It’s flexible, easy to use, and fully responsive.
 
 ### Structure
 
@@ -30,9 +30,7 @@ The grid consists of containers, rows, and columns. A basic, two-column grid loo
 
 Containers can be used to wrap sections of your page. Use the `container` class to create a responsive, fixed-width container or the `container-fluid` class to create a fluid container.
 
-Rows are used to group columns horizontally. Rows can only contain columns as child elements.
-
-Columns are where your content will go. To create a complete row, use any combination of columns that adds up to 12 wide.
+Rows are used to group columns horizontally and can only contain columns as child elements. Columns are where you’ll put your content.
 
 ### Creating Columns
 
@@ -106,11 +104,29 @@ You can mix and match sized columns with unsized columns for flexibility. Unsize
   </div>
 </div>
 
+To size a column based on its content, use `col-auto`.
+
+```html
+<div class="row">
+  <div class="col">col</div>
+  <div class="col-auto">Sized to fit</div>
+  <div class="col">col</div>
+</div>
+```
+
+<div class="container grid-example">
+  <div class="row">
+    <div class="col">col</div>
+    <div class="col-auto">Sized to fit</div>
+    <div class="col">col</div>
+  </div>
+</div>
+
 ### Making Columns Responsive
 
-There are five responsive tiers in Shoelace: `xs`, `sm`, `md`, `lg`, and `xl`. You can use these tiers to change the way the grid responds at various breakpoints.
+There are five responsive tiers in Shoelace: `xs`, `sm`, `md`, `lg`, and `xl`. You can use these tiers to change the way the grid responds at various breakpoints. The grid is mobile-first, so the default tier is `xs`.
 
-Use the `col-[xs|sm|md|lg|xl]-*` modifier to target a specific tier. Note that tiers are based on minimum widths, so using `col-sm-6` will target `sm`, `md`, `lg`, and `xl`. However, you can target multiple tiers on the same column as needed.
+Use the `col-[sm|md|lg|xl]-*` modifier to target a specific tier. Note that tiers are based on minimum widths, so using `col-sm-6` will target `sm`, `md`, `lg`, and `xl` screens. Of course, you can target multiple tiers on the same column as needed.
 
 For example, the following columns will stack on `xs` screens, take up 50% each (6 out of 12 columns) on `sm` screens, and 75% and 25% respectively on `md`, `lg`, and `xl` screens.
 
@@ -130,7 +146,7 @@ For example, the following columns will stack on `xs` screens, take up 50% each 
 
 ### Offsetting Columns
 
-You can offset columns using `offset-*` and `offset-[xs|sm|md|lg|xl]-*` modifiers. To reset an offset at a specific tier, use `offset-[xs|sm|md|lg|xl]-0`.
+You can offset columns using `offset-*` and `offset-[sm|md|lg|xl]-*` modifiers. To reset an offset at a specific tier, use `offset-[sm|md|lg|xl]-0`.
 
 ```html
 <div class="row">
@@ -150,7 +166,7 @@ You can offset columns using `offset-*` and `offset-[xs|sm|md|lg|xl]-*` modifier
 
 ### Reordering Columns
 
-You can control the visual order of columns using the `order-*` and `order-[xs|sm|md|lg|xl]-*` modifiers. Note that columns without an order modifier will not be affected.
+You can control the visual order of columns using the `order-*` and `order-[sm|md|lg|xl]-*` modifiers. Note that columns without an order modifier will not be affected.
 
 ```html
 <div class="row">
@@ -194,17 +210,17 @@ You can hide columns based on breakpoints using [display utilities](utilities.ht
 
 ### Removing Gutters
 
-By default, columns have horizontal spacing around them to create “gutters.” You can remove this spacing by applying the `no-gutters` class to the parent row.
+By default, columns have horizontal spacing around them to create “gutters.” You can remove this spacing by applying the `row-flush` modifier to the parent row.
 
 ```html
-<div class="row no-gutters">
+<div class="row row-flush">
   ...
 </div>
 ```
 
-For an edge-to-edge design, refrain from using `container` and `container-fluid`.
+For an edge-to-edge design, refrain from using `container` and `container-fluid` around the row.
 
-### Nesting Grids
+### Nested Grids
 
 Grids can be nested. Simply add a new row inside of a column.
 
