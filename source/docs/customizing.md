@@ -20,8 +20,6 @@ For example, you can customize the default text color, background color, and the
 
 You don’t need to include all of the core variables. You only need to include the ones you want to customize.
 
-Additional variables can be found in the `:root` block of each component’s stylesheet. For example, to customize alerts, refer to the top of [`source/css/alerts.css`](../source/css/alerts.css) for a complete list of variables.
-
 ### Using CSS Variables
 
 You’re encouraged to use Shoelace’s variables in your own stylesheet. This makes it easy to reuse values without hardcoding them. It also provides a foundation for extending Shoelace with your own [custom components](#creating-custom-components).
