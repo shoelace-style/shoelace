@@ -110,7 +110,7 @@ You can mix and match sized columns with unsized columns for flexibility. Unsize
 
 There are five responsive tiers in Shoelace: `xs`, `sm`, `md`, `lg`, and `xl`. You can use these tiers to change the way the grid responds at various breakpoints.
 
-Use the `col-{tier}-*` modifier to target a specific tier. Note that tiers are based on minimum widths, so using `col-sm-6` will target `sm`, `md`, `lg`, and `xl`. However, you can target multiple tiers on the same column as needed.
+Use the `col-[xs|sm|md|lg|xl]-*` modifier to target a specific tier. Note that tiers are based on minimum widths, so using `col-sm-6` will target `sm`, `md`, `lg`, and `xl`. However, you can target multiple tiers on the same column as needed.
 
 For example, the following columns will stack on `xs` screens, take up 50% each (6 out of 12 columns) on `sm` screens, and 75% and 25% respectively on `md`, `lg`, and `xl` screens.
 
@@ -130,7 +130,7 @@ For example, the following columns will stack on `xs` screens, take up 50% each 
 
 ### Offsetting Columns
 
-You can offset columns using `offset-*` and `offset-{tier}-*` modifiers. To reset an offset at a specific tier, use `offset-{tier}-0`.
+You can offset columns using `offset-*` and `offset-[xs|sm|md|lg|xl]-*` modifiers. To reset an offset at a specific tier, use `offset-[xs|sm|md|lg|xl]-0`.
 
 ```html
 <div class="row">
@@ -150,7 +150,7 @@ You can offset columns using `offset-*` and `offset-{tier}-*` modifiers. To rese
 
 ### Reordering Columns
 
-You can control the visual order of columns using the `order-*` and `order-{tier}-*` modifiers. Note that columns without an order modifier will not be affected.
+You can control the visual order of columns using the `order-*` and `order-[xs|sm|md|lg|xl]-*` modifiers. Note that columns without an order modifier will not be affected.
 
 ```html
 <div class="row">
@@ -174,24 +174,21 @@ You can hide columns based on breakpoints using [display utilities](utilities.ht
 
 ```html
 <div class="row">
-  <div class="col-2">always</div>
-  <div class="col-2 hidden-xs">hidden-xs</div>
-  <div class="col-2 hidden-sm">hidden-sm</div>
-  <div class="col-2 hidden-md">hidden-md</div>
-  <div class="col-2 hidden-lg">hidden-lg</div>
-  <div class="col-2 hidden-xl">hidden-xl</div>
-  </div>
+  <div class="col-2 hide-xs">hide-xs</div>
+  <div class="col-2 hide-sm">hide-sm</div>
+  <div class="col-2 hide-md">hide-md</div>
+  <div class="col-2 hide-lg">hide-lg</div>
+  <div class="col-2 hide-xl">hide-xl</div>
 </div>
 ```
 
 <div class="container grid-example">
   <div class="row">
-    <div class="col-2 hidden-xs">xs</div>
-    <div class="col-2 hidden-sm">sm</div>
-    <div class="col-2 hidden-md">md</div>
-    <div class="col-2 hidden-lg">lg</div>
-    <div class="col-2 hidden-xl">xl</div>
-    </div>
+    <div class="col-2 hide-xs">hide-xs</div>
+    <div class="col-2 hide-sm">hide-sm</div>
+    <div class="col-2 hide-md">hide-md</div>
+    <div class="col-2 hide-lg">hide-lg</div>
+    <div class="col-2 hide-xl">hide-xl</div>
   </div>
 </div>
 

@@ -136,7 +136,7 @@
 
 <h3 id="making-columns-responsive">Making Columns Responsive</h3>
 <p>There are five responsive tiers in Shoelace: <code>xs</code>, <code>sm</code>, <code>md</code>, <code>lg</code>, and <code>xl</code>. You can use these tiers to change the way the grid responds at various breakpoints.</p>
-<p>Use the <code>col-{tier}-*</code> modifier to target a specific tier. Note that tiers are based on minimum widths, so using <code>col-sm-6</code> will target <code>sm</code>, <code>md</code>, <code>lg</code>, and <code>xl</code>. However, you can target multiple tiers on the same column as needed.</p>
+<p>Use the <code>col-[xs|sm|md|lg|xl]-*</code> modifier to target a specific tier. Note that tiers are based on minimum widths, so using <code>col-sm-6</code> will target <code>sm</code>, <code>md</code>, <code>lg</code>, and <code>xl</code>. However, you can target multiple tiers on the same column as needed.</p>
 <p>For example, the following columns will stack on <code>xs</code> screens, take up 50% each (6 out of 12 columns) on <code>sm</code> screens, and 75% and 25% respectively on <code>md</code>, <code>lg</code>, and <code>xl</code> screens.</p>
 <pre><code class="lang-html">&lt;div class=&quot;row&quot;&gt;
   &lt;div class=&quot;col-12 col-sm-6 col-md-8&quot;&gt;1st column&lt;/div&gt;
@@ -151,7 +151,7 @@
 </div>
 
 <h3 id="offsetting-columns">Offsetting Columns</h3>
-<p>You can offset columns using <code>offset-*</code> and <code>offset-{tier}-*</code> modifiers. To reset an offset at a specific tier, use <code>offset-{tier}-0</code>.</p>
+<p>You can offset columns using <code>offset-*</code> and <code>offset-[xs|sm|md|lg|xl]-*</code> modifiers. To reset an offset at a specific tier, use <code>offset-[xs|sm|md|lg|xl]-0</code>.</p>
 <pre><code class="lang-html">&lt;div class=&quot;row&quot;&gt;
   &lt;div class=&quot;col-2&quot;&gt;left&lt;/div&gt;
   &lt;div class=&quot;col-2 offset-2&quot;&gt;center&lt;/div&gt;
@@ -167,7 +167,7 @@
 </div>
 
 <h3 id="reordering-columns">Reordering Columns</h3>
-<p>You can control the visual order of columns using the <code>order-*</code> and <code>order-{tier}-*</code> modifiers. Note that columns without an order modifier will not be affected.</p>
+<p>You can control the visual order of columns using the <code>order-*</code> and <code>order-[xs|sm|md|lg|xl]-*</code> modifiers. Note that columns without an order modifier will not be affected.</p>
 <pre><code class="lang-html">&lt;div class=&quot;row&quot;&gt;
   &lt;div class=&quot;col-4&quot;&gt;1st (no order)&lt;/div&gt;
   &lt;div class=&quot;col-4 order-3&quot;&gt;2nd (shown 3rd)&lt;/div&gt;
@@ -185,23 +185,20 @@
 <h3 id="hiding-columns">Hiding Columns</h3>
 <p>You can hide columns based on breakpoints using <a href="utilities.html#display-utilities">display utilities</a>.</p>
 <pre><code class="lang-html">&lt;div class=&quot;row&quot;&gt;
-  &lt;div class=&quot;col-2&quot;&gt;always&lt;/div&gt;
-  &lt;div class=&quot;col-2 hidden-xs&quot;&gt;hidden-xs&lt;/div&gt;
-  &lt;div class=&quot;col-2 hidden-sm&quot;&gt;hidden-sm&lt;/div&gt;
-  &lt;div class=&quot;col-2 hidden-md&quot;&gt;hidden-md&lt;/div&gt;
-  &lt;div class=&quot;col-2 hidden-lg&quot;&gt;hidden-lg&lt;/div&gt;
-  &lt;div class=&quot;col-2 hidden-xl&quot;&gt;hidden-xl&lt;/div&gt;
-  &lt;/div&gt;
+  &lt;div class=&quot;col-2 hide-xs&quot;&gt;hide-xs&lt;/div&gt;
+  &lt;div class=&quot;col-2 hide-sm&quot;&gt;hide-sm&lt;/div&gt;
+  &lt;div class=&quot;col-2 hide-md&quot;&gt;hide-md&lt;/div&gt;
+  &lt;div class=&quot;col-2 hide-lg&quot;&gt;hide-lg&lt;/div&gt;
+  &lt;div class=&quot;col-2 hide-xl&quot;&gt;hide-xl&lt;/div&gt;
 &lt;/div&gt;
 </code></pre>
 <div class="container grid-example">
   <div class="row">
-    <div class="col-2 hidden-xs">xs</div>
-    <div class="col-2 hidden-sm">sm</div>
-    <div class="col-2 hidden-md">md</div>
-    <div class="col-2 hidden-lg">lg</div>
-    <div class="col-2 hidden-xl">xl</div>
-    </div>
+    <div class="col-2 hide-xs">hide-xs</div>
+    <div class="col-2 hide-sm">hide-sm</div>
+    <div class="col-2 hide-md">hide-md</div>
+    <div class="col-2 hide-lg">hide-lg</div>
+    <div class="col-2 hide-xl">hide-xl</div>
   </div>
 </div>
 
