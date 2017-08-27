@@ -381,6 +381,7 @@ input[type="range"] {
     position: absolute;
     top: 0;
     left: var(--input-icon-offset);
+    height: var(--input-height);
     line-height: var(--input-height);
     color: var(--input-icon-color);
     vertical-align: middle;
@@ -396,6 +397,7 @@ input[type="range"] {
     & :first-child:not(input, select),
     & :last-child:not(input, select) {
       font-size: var(--input-font-size-xs);
+      height: var(--input-height-xs);
       line-height: var(--input-height-xs);
     }
   }
@@ -404,6 +406,7 @@ input[type="range"] {
     & :first-child:not(input, select),
     & :last-child:not(input, select) {
       font-size: var(--input-font-size-sm);
+      height: var(--input-height-sm);
       line-height: var(--input-height-sm);
     }
   }
@@ -412,6 +415,7 @@ input[type="range"] {
     & :first-child:not(input, select),
     & :last-child:not(input, select) {
       font-size: var(--input-font-size-lg);
+      height: var(--input-height-lg);
       line-height: var(--input-height-lg);
     }
   }
@@ -420,6 +424,7 @@ input[type="range"] {
     & :first-child:not(input, select),
     & :last-child:not(input, select) {
       font-size: var(--input-font-size-xl);
+      height: var(--input-height-xl);
       line-height: var(--input-height-xl);
     }
   }
