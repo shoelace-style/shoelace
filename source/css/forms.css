@@ -92,11 +92,6 @@ textarea {
     }
   }
 
-  &[type="checkbox"],
-  &[type="radio"] {
-    padding: 0;
-  }
-
   &.input-xs {
     font-size: var(--input-font-size-xs);
     height: var(--input-height-xs);
@@ -120,6 +115,11 @@ textarea {
     height: var(--input-height-xl);
     line-height: var(--input-height-xl);
   }
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  vertical-align: 1px;
 }
 
 select {
