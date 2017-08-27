@@ -436,6 +436,11 @@ input[type="range"] {
     color: var(--input-invalid-color) !important;
     border-color: var(--input-invalid-border-color) !important;
   }
+
+  & .input-icon :first-child:not(input, select),
+  & .input-icon :last-child:not(input, select) {
+    color: var(--input-invalid-color);
+  }
 }
 
 .input-valid {
@@ -447,5 +452,10 @@ input[type="range"] {
   & select {
     color: var(--input-valid-color) !important;
     border-color: var(--input-valid-border-color) !important;
+  }
+
+  & .input-icon :first-child:not(input, select),
+  & .input-icon :last-child:not(input, select) {
+    color: var(--input-valid-color);
   }
 }

@@ -509,7 +509,7 @@
 </fieldset>
 
 <h3 id="validation">Validation</h3>
-<p>Form controls can be made valid or invalid using the <code>input-valid</code> and <code>input-invalid</code> modifiers. It’s better to apply modifiers to the surrounding <code>input-field</code> so labels will be styled as well, but modifiers can be applied directly to form controls as needed.</p>
+<p>A form control can be made valid or invalid by adding the <code>input-valid</code> or <code>input-invalid</code> modifiers to the surrounding <code>input-field</code>.</p>
 <pre><code class="lang-html">&lt;div class=&quot;input-field input-valid&quot;&gt;
   &lt;label&gt;Valid&lt;/label&gt;
   &lt;input type=&quot;text&quot;&gt;
@@ -521,16 +521,59 @@
 &lt;/div&gt;
 </code></pre>
 <div class="row">
-  <div class="col-sm-6">
+  <div class="col-12 col-sm-6">
     <div class="input-field input-valid">
       <label>Valid</label>
       <input type="text">
     </div>
   </div>
-  <div class="col-sm-6">
+  <div class="col-12 col-sm-6">
     <div class="input-field input-invalid">
-    <label>Invalid</label>
-    <input type="text">
+      <label>Invalid</label>
+      <input type="text">
+    </div>
+  </div>
+</div>
+
+<p>Never apply validation modifiers directly to a form control, as some components (e.g. input icons) wrap inputs with additional elements that won’t be able to inherit the correct styles.</p>
+<pre><code class="lang-html">&lt;div class=&quot;input-field input-valid&quot;&gt;
+  &lt;label&gt;Valid with Icons&lt;/label&gt;
+  &lt;div class=&quot;input-icon&quot;&gt;
+    &lt;i class=&quot;fa fa-fw fa-user&quot;&gt;&lt;/i&gt;
+    &lt;input type=&quot;text&quot;&gt;
+    &lt;i class=&quot;fa fa-fw fa-check&quot;&gt;&lt;/i&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;input-field input-invalid&quot;&gt;
+  &lt;label&gt;Invalid with Icons&lt;/label&gt;
+  &lt;div class=&quot;input-icon&quot;&gt;
+    &lt;i class=&quot;fa fa-fw fa-user&quot;&gt;&lt;/i&gt;
+    &lt;input type=&quot;text&quot;&gt;
+    &lt;i class=&quot;fa fa-fw fa-times&quot;&gt;&lt;/i&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<div class="row">
+  <div class="col-12 col-sm-6">
+    <div class="input-field input-valid">
+      <label>Valid with Icons</label>
+      <div class="input-icon">
+        <i class="fa fa-fw fa-user"></i>
+        <input type="text">
+        <i class="fa fa-fw fa-check"></i>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6">
+    <div class="input-field input-invalid">
+      <label>Invalid with Icons</label>
+      <div class="input-icon">
+        <i class="fa fa-fw fa-user"></i>
+        <input type="text">
+        <i class="fa fa-fw fa-times"></i>
+      </div>
+    </div>
   </div>
 </div>
 

@@ -497,7 +497,7 @@ Related form controls can be grouped in a `<fieldset>`. An optional `<legend>` c
 
 ### Validation
 
-Form controls can be made valid or invalid using the `input-valid` and `input-invalid` modifiers. It’s better to apply modifiers to the surrounding `input-field` so labels will be styled as well, but modifiers can be applied directly to form controls as needed.
+A form control can be made valid or invalid by adding the `input-valid` or `input-invalid` modifiers to the surrounding `input-field`.
 
 ```html
 <div class="input-field input-valid">
@@ -512,15 +512,61 @@ Form controls can be made valid or invalid using the `input-valid` and `input-in
 ```
 
 <div class="row">
-  <div class="col-sm-6">
+  <div class="col-12 col-sm-6">
     <div class="input-field input-valid">
       <label>Valid</label>
       <input type="text">
     </div>
   </div>
-  <div class="col-sm-6">
+  <div class="col-12 col-sm-6">
     <div class="input-field input-invalid">
-    <label>Invalid</label>
+      <label>Invalid</label>
+      <input type="text">
+    </div>
+  </div>
+</div>
+
+Never apply validation modifiers directly to a form control, as some components (e.g. input icons) wrap inputs with additional elements that won’t be able to inherit the correct styles.
+
+```html
+<div class="input-field input-valid">
+  <label>Valid with Icons</label>
+  <div class="input-icon">
+    <i class="fa fa-fw fa-user"></i>
     <input type="text">
+    <i class="fa fa-fw fa-check"></i>
+  </div>
+</div>
+
+<div class="input-field input-invalid">
+  <label>Invalid with Icons</label>
+  <div class="input-icon">
+    <i class="fa fa-fw fa-user"></i>
+    <input type="text">
+    <i class="fa fa-fw fa-times"></i>
+  </div>
+</div>
+```
+
+<div class="row">
+  <div class="col-12 col-sm-6">
+    <div class="input-field input-valid">
+      <label>Valid with Icons</label>
+      <div class="input-icon">
+        <i class="fa fa-fw fa-user"></i>
+        <input type="text">
+        <i class="fa fa-fw fa-check"></i>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6">
+    <div class="input-field input-invalid">
+      <label>Invalid with Icons</label>
+      <div class="input-icon">
+        <i class="fa fa-fw fa-user"></i>
+        <input type="text">
+        <i class="fa fa-fw fa-times"></i>
+      </div>
+    </div>
   </div>
 </div>
