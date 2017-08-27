@@ -9,7 +9,7 @@ table {
   & caption {
     caption-side: bottom;
     font-size: var(--font-size-small);
-    color: var(--state-secondary);
+    color: var(--body-color-muted);
     text-align: center;
     padding-top: var(--table-spacing-y);
   }

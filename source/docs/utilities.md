@@ -215,6 +215,10 @@ Text utility classes can be applied to change the appearance of text.
       <td class="text-italic">This is italic text</td>
     </tr>
     <tr>
+      <td>`text-muted`</td>
+      <td class="text-muted">This is muted text</td>
+    </tr>
+    <tr>
       <td>`text-left`</td>
       <td class="text-left">This is left-aligned text</td>
     </tr>

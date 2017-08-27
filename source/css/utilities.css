@@ -19,6 +19,7 @@
 .text-small { font-size: var(--font-size-small) !important; }
 .text-bold { font-weight: var(--font-weight-bold) !important; }
 .text-italic { font-style: italic !important; }
+.text-muted { color: var(--body-color-muted) !important; }
 
 /* Text alignment */
 .text-left { text-align: left !important; }
