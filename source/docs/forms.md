@@ -358,7 +358,7 @@ This example uses Font Awesome, but you can use whatever icon library you want. 
 
 <div class="input-icon">
   <i class="fa fa-fw fa-map-marker"></i>
-  <select><option></option></select>
+  <select><option>United States</option></select>
 </div>
 ```
 
@@ -385,7 +385,7 @@ This example uses Font Awesome, but you can use whatever icon library you want. 
   <div class="col-md-6 mar-b-md">
     <div class="input-icon">
       <i class="fa fa-fw fa-map-marker"></i>
-      <select><option></option></select>
+      <select><option>United States</option></select>
     </div>
   </div>
 </div>
