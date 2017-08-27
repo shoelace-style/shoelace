@@ -2,6 +2,8 @@
 layout: default.html
 title: Forms
 description: Default form control styles.
+stylesheets:
+ - https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css
 ---
 
 ## Forms
@@ -328,6 +330,137 @@ To create an input addon, use `<span class="input-addon">`. Addons can appear an
     <span class="input-addon input-addon-xl">$</span>
     <input type="text" class="input-xl">
     <span class="input-addon input-addon-xl">.00</span>
+  </div>
+</div>
+
+### Input Icons
+
+Input icons add visual context to form controls. To add icons to a form control, wrap it with an `input-icon` element and add icons before and after it.
+
+This example uses Font Awesome, but you can use whatever icon library you want. For consistency, use fixed with icons if your icon library supports them.
+
+```html
+<div class="input-icon">
+  <i class="fa fa-fw fa-phone"></i>
+  <input type="text">
+</div>
+
+<div class="input-icon">
+  <input type="text">
+  <i class="fa fa-fw fa-envelope-o"></i>
+</div>
+
+<div class="input-icon">
+  <i class="fa fa-fw fa-user"></i>
+  <input type="text">
+  <i class="fa fa-check"></i>
+</div>
+
+<div class="input-icon">
+  <i class="fa fa-fw fa-map-marker"></i>
+  <select><option></option></select>
+</div>
+```
+
+<div class="row">
+  <div class="col-md-6 mar-b-md">
+    <div class="input-icon">
+      <i class="fa fa-fw fa-phone"></i>
+      <input type="text">
+    </div>
+  </div>
+  <div class="col-md-6 mar-b-md">
+    <div class="input-icon">
+      <input type="text">
+      <i class="fa fa-fw fa-envelope-o"></i>
+    </div>
+  </div>
+  <div class="col-md-6 mar-b-md">
+    <div class="input-icon">
+      <i class="fa fa-fw fa-user"></i>
+      <input type="text">
+      <i class="fa fa-check"></i>
+    </div>
+  </div>
+  <div class="col-md-6 mar-b-md">
+    <div class="input-icon">
+      <i class="fa fa-fw fa-map-marker"></i>
+      <select><option></option></select>
+    </div>
+  </div>
+</div>
+
+Use the `input-icon-[xs|sm|lg|xs]` modifiers to change the size of input icons.
+
+```html
+<div class="input-icon input-icon-xs">
+  <i class="fa fa-fw fa-user"></i>
+  <input class="input-xs" type="text">
+  <i class="fa fa-check"></i>
+</div>
+
+<div class="input-icon input-icon-sm">
+  <i class="fa fa-fw fa-user"></i>
+  <input class="input-sm" type="text">
+  <i class="fa fa-check"></i>
+</div>
+
+<div class="input-icon">
+  <i class="fa fa-fw fa-user"></i>
+  <input type="text">
+  <i class="fa fa-check"></i>
+</div>
+
+<div class="input-icon input-icon-lg">
+  <i class="fa fa-fw fa-user"></i>
+  <input class="input-lg" type="text">
+  <i class="fa fa-check"></i>
+</div>
+
+<div class="input-icon input-icon-xl">
+  <i class="fa fa-fw fa-user"></i>
+  <input class="input-xl" type="text">
+  <i class="fa fa-check"></i>
+</div>
+```
+
+<div class="input-field">
+  <div class="input-icon input-icon-xs">
+    <i class="fa fa-fw fa-user"></i>
+    <input class="input-xs" type="text">
+    <i class="fa fa-check"></i>
+  </div>
+</div>
+
+<div class="input-field">
+  <div class="input-icon input-icon-sm">
+    <i class="fa fa-fw fa-user"></i>
+    <input class="input-sm" type="text">
+    <i class="fa fa-check"></i>
+  </div>
+</div>
+
+<div class="input-field">
+  <div class="input-icon">
+    <i class="fa fa-fw fa-user"></i>
+    <input type="text">
+    <i class="fa fa-check"></i>
+  </div>
+</div>
+
+<div class="input-field">
+  <div class="input-icon input-icon-lg">
+    <i class="fa fa-fw fa-user"></i>
+    <input class="input-lg" type="text">
+    <i class="fa fa-check"></i>
+  </div>
+</div>
+
+<div class="input-field">
+  <div class="input-icon input-icon-xl">
+    <i class="fa fa-fw fa-user"></i>
+    <input class="input-xl" type="text">
+    <i class="fa fa-check"></i>
   </div>
 </div>
 

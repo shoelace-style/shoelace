@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="../dist/shoelace.css">
   <link rel="stylesheet" href="../source/css/_docs.css">
   <link rel="stylesheet" href="https://cdn.rawgit.com/AGMStudio/prism-theme-one-dark/f81fe477/prism-onedark.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
   <title>Forms</title>
 </head>
 <body>
@@ -354,6 +355,129 @@
     <span class="input-addon input-addon-xl">$</span>
     <input type="text" class="input-xl">
     <span class="input-addon input-addon-xl">.00</span>
+  </div>
+</div>
+
+<h3 id="input-icons">Input Icons</h3>
+<p>Input icons add visual context to form controls. To add icons to a form control, wrap it with an <code>input-icon</code> element and add icons before and after it.</p>
+<p>This example uses Font Awesome, but you can use whatever icon library you want. For consistency, use fixed with icons if your icon library supports them.</p>
+<pre><code class="lang-html">&lt;div class=&quot;input-icon&quot;&gt;
+  &lt;i class=&quot;fa fa-fw fa-phone&quot;&gt;&lt;/i&gt;
+  &lt;input type=&quot;text&quot;&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;input-icon&quot;&gt;
+  &lt;input type=&quot;text&quot;&gt;
+  &lt;i class=&quot;fa fa-fw fa-envelope-o&quot;&gt;&lt;/i&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;input-icon&quot;&gt;
+  &lt;i class=&quot;fa fa-fw fa-user&quot;&gt;&lt;/i&gt;
+  &lt;input type=&quot;text&quot;&gt;
+  &lt;i class=&quot;fa fa-check&quot;&gt;&lt;/i&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;input-icon&quot;&gt;
+  &lt;i class=&quot;fa fa-fw fa-map-marker&quot;&gt;&lt;/i&gt;
+  &lt;select&gt;&lt;option&gt;&lt;/option&gt;&lt;/select&gt;
+&lt;/div&gt;
+</code></pre>
+<div class="row">
+  <div class="col-md-6 mar-b-md">
+    <div class="input-icon">
+      <i class="fa fa-fw fa-phone"></i>
+      <input type="text">
+    </div>
+  </div>
+  <div class="col-md-6 mar-b-md">
+    <div class="input-icon">
+      <input type="text">
+      <i class="fa fa-fw fa-envelope-o"></i>
+    </div>
+  </div>
+  <div class="col-md-6 mar-b-md">
+    <div class="input-icon">
+      <i class="fa fa-fw fa-user"></i>
+      <input type="text">
+      <i class="fa fa-check"></i>
+    </div>
+  </div>
+  <div class="col-md-6 mar-b-md">
+    <div class="input-icon">
+      <i class="fa fa-fw fa-map-marker"></i>
+      <select><option></option></select>
+    </div>
+  </div>
+</div>
+
+<p>Use the <code>input-icon-[xs|sm|lg|xs]</code> modifiers to change the size of input icons.</p>
+<pre><code class="lang-html">&lt;div class=&quot;input-icon input-icon-xs&quot;&gt;
+  &lt;i class=&quot;fa fa-fw fa-user&quot;&gt;&lt;/i&gt;
+  &lt;input class=&quot;input-xs&quot; type=&quot;text&quot;&gt;
+  &lt;i class=&quot;fa fa-check&quot;&gt;&lt;/i&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;input-icon input-icon-sm&quot;&gt;
+  &lt;i class=&quot;fa fa-fw fa-user&quot;&gt;&lt;/i&gt;
+  &lt;input class=&quot;input-sm&quot; type=&quot;text&quot;&gt;
+  &lt;i class=&quot;fa fa-check&quot;&gt;&lt;/i&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;input-icon&quot;&gt;
+  &lt;i class=&quot;fa fa-fw fa-user&quot;&gt;&lt;/i&gt;
+  &lt;input type=&quot;text&quot;&gt;
+  &lt;i class=&quot;fa fa-check&quot;&gt;&lt;/i&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;input-icon input-icon-lg&quot;&gt;
+  &lt;i class=&quot;fa fa-fw fa-user&quot;&gt;&lt;/i&gt;
+  &lt;input class=&quot;input-lg&quot; type=&quot;text&quot;&gt;
+  &lt;i class=&quot;fa fa-check&quot;&gt;&lt;/i&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;input-icon input-icon-xl&quot;&gt;
+  &lt;i class=&quot;fa fa-fw fa-user&quot;&gt;&lt;/i&gt;
+  &lt;input class=&quot;input-xl&quot; type=&quot;text&quot;&gt;
+  &lt;i class=&quot;fa fa-check&quot;&gt;&lt;/i&gt;
+&lt;/div&gt;
+</code></pre>
+<div class="input-field">
+  <div class="input-icon input-icon-xs">
+    <i class="fa fa-fw fa-user"></i>
+    <input class="input-xs" type="text">
+    <i class="fa fa-check"></i>
+  </div>
+</div>
+
+<div class="input-field">
+  <div class="input-icon input-icon-sm">
+    <i class="fa fa-fw fa-user"></i>
+    <input class="input-sm" type="text">
+    <i class="fa fa-check"></i>
+  </div>
+</div>
+
+<div class="input-field">
+  <div class="input-icon">
+    <i class="fa fa-fw fa-user"></i>
+    <input type="text">
+    <i class="fa fa-check"></i>
+  </div>
+</div>
+
+<div class="input-field">
+  <div class="input-icon input-icon-lg">
+    <i class="fa fa-fw fa-user"></i>
+    <input class="input-lg" type="text">
+    <i class="fa fa-check"></i>
+  </div>
+</div>
+
+<div class="input-field">
+  <div class="input-icon input-icon-xl">
+    <i class="fa fa-fw fa-user"></i>
+    <input class="input-xl" type="text">
+    <i class="fa fa-check"></i>
   </div>
 </div>
 

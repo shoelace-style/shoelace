@@ -358,6 +358,73 @@ input[type="range"] {
   }
 }
 
+/* Input icons */
+.input-icon {
+  position: relative;
+
+  /* Change default position for select controls so icons don't get hidden */
+  & select {
+    position: static;
+  }
+
+  & input:not(:first-child),
+  & select:not(:first-child) {
+    padding-left: var(--input-icon-width);
+  }
+
+  & input:not(:last-child) {
+    padding-right: var(--input-icon-width);
+  }
+
+  & :first-child:not(input, select),
+  & :last-child:not(input, select) {
+    position: absolute;
+    top: 0;
+    left: var(--input-icon-offset);
+    line-height: var(--input-height);
+    color: var(--input-icon-color);
+    vertical-align: middle;
+    pointer-events: none;
+  }
+
+  & :last-child:not(input, select) {
+    left: auto;
+    right: var(--input-icon-offset);
+  }
+
+  &.input-icon-xs {
+    & :first-child:not(input, select),
+    & :last-child:not(input, select) {
+      font-size: var(--input-font-size-xs);
+      line-height: var(--input-height-xs);
+    }
+  }
+
+  &.input-icon-sm {
+    & :first-child:not(input, select),
+    & :last-child:not(input, select) {
+      font-size: var(--input-font-size-sm);
+      line-height: var(--input-height-sm);
+    }
+  }
+
+  &.input-icon-lg {
+    & :first-child:not(input, select),
+    & :last-child:not(input, select) {
+      font-size: var(--input-font-size-lg);
+      line-height: var(--input-height-lg);
+    }
+  }
+
+  &.input-icon-xl {
+    & :first-child:not(input, select),
+    & :last-child:not(input, select) {
+      font-size: var(--input-font-size-xl);
+      line-height: var(--input-height-xl);
+    }
+  }
+}
+
 /* Validation */
 .input-invalid {
   & label {

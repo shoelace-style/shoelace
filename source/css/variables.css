@@ -313,6 +313,10 @@
   --input-addon-bg-color: var(--component-bg-color);
   --input-addon-color: var(--state-secondary);
 
+  --input-icon-width: 2em;
+  --input-icon-offset: .5em;
+  --input-icon-color: var(--state-secondary);
+
   --input-range-track-height: .5rem;
   --input-range-track-color: var(--component-bg-color);
   --input-range-track-box-shadow: var(--component-box-shadow-inner);
