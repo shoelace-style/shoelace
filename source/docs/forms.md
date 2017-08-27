@@ -171,7 +171,7 @@ Read-only form controls look like this:
   <input type="text" readonly value="This is read-only">
 </div>
 
-### Form Control Spacing
+### Input Fields
 
 For proper spacing of individual form controls, wrap them in `input-field` containers.
 
