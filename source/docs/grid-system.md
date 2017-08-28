@@ -68,7 +68,7 @@ Columns are equal width by default. The grid will automatically determine the ap
   </div>
 </div>
 
-To set the width of column, use the `col-*` modifier with a value of 1–12. Widths are calculated based on a total of 12 possible columns. Additional columns will wrap to a new line.
+To set the width of a column, use the `col-*` modifier with a value of 1–12. Widths are calculated based on a total of 12 possible columns. Additional columns will wrap to a new line.
 
 ```html
 <div class="row">
