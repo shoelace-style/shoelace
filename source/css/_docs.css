@@ -34,6 +34,7 @@ body {
   #nav {
     border: none;
     text-align: center;
+    padding: 0;
     margin: 0 0 2rem 0;
   }
 
