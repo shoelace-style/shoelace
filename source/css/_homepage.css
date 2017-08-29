@@ -22,14 +22,3 @@ pre code {
   padding: 0;
   display: block;
 }
-
-@media (max-width: 60rem) {
-  #head {
-    padding: 0 1rem;
-  }
-
-  #wrap {
-    padding: 0 1rem;
-    display: block;
-  }
-}
