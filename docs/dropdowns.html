@@ -156,9 +156,9 @@
   </div>
 </div>
 
-<h3 id="events">Events</h3>
-<p>Dropdowns require <code>shoelace.js</code> to make them interactive. You don’t need to initialize them. Simply include the script and everything “just works.”</p>
-<p>There is no JavaScript API. Shoelace’s philosophy believes that custom components should act like native components as much as possible. You can, however, listen for various events:</p>
+<h3 id="interactivity">Interactivity</h3>
+<p>Dropdowns require <code>shoelace.js</code> for interactivity. You don’t need to initialize anything. Just include the script and everything “just works.”</p>
+<p>There is no JavaScript API. Shoelace’s philosophy believes that custom components should act like native components as much as possible. You can, however, listen for various events.</p>
 <ul>
 <li><code>show</code> – Fires when a dropdown is shown.</li>
 <li><code>hide</code> – Fires when a dropdown is hidden.</li>
@@ -175,6 +175,13 @@
   .on(&#39;select&#39;, function(event, item) {
     console.log(&#39;select&#39;, event.target, item);
   });
+</code></pre>
+<p>To show or hide a dropdown programmatically, just add or remove the <code>active</code> class to the dropdown.</p>
+<pre><code class="lang-javascript">// Show the dropdown
+$(&#39;#my-dropdown&#39;).addClass(&#39;active&#39;);
+
+// Hide the dropdown
+$(&#39;#my-dropdown&#39;).removeClass(&#39;active&#39;);
 </code></pre>
 
         </div>

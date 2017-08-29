@@ -121,11 +121,11 @@ Dropdowns with button triggers can be used inside input groups.
   </div>
 </div>
 
-### Events
+### Interactivity
 
-Dropdowns require `shoelace.js` to make them interactive. You don’t need to initialize them. Simply include the script and everything “just works.”
+Dropdowns require `shoelace.js` for interactivity. You don’t need to initialize anything. Just include the script and everything “just works.”
 
-There is no JavaScript API. Shoelace’s philosophy believes that custom components should act like native components as much as possible. You can, however, listen for various events:
+There is no JavaScript API. Shoelace’s philosophy believes that custom components should act like native components as much as possible. You can, however, listen for various events.
 
 - `show` – Fires when a dropdown is shown.
 - `hide` – Fires when a dropdown is hidden.
@@ -144,4 +144,14 @@ $('#my-dropdown')
   .on('select', function(event, item) {
     console.log('select', event.target, item);
   });
+```
+
+To show or hide a dropdown programmatically, just add or remove the `active` class to the dropdown.
+
+```javascript
+// Show the dropdown
+$('#my-dropdown').addClass('active');
+
+// Hide the dropdown
+$('#my-dropdown').removeClass('active');
 ```
