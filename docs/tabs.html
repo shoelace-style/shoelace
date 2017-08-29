@@ -53,8 +53,8 @@
         <div id="content">
           <h2 id="tabs">Tabs</h2>
 <p>Tab sets can be created using the markup below. By default, Shoelace renders tabs as pills because they respond better than traditional tabs when rendered on smaller screens.</p>
-<p>Note the class names used for the main container, the tab navs, and the tab panes. Also note that each tab links to its respective tab pane’s <code>id</code>.</p>
-<p>To disable a tab, add <code>disabled</code> to the appropriate tab nav.</p>
+<p>Note the class names used for the main container, the tabs, and the tab panes. Also note that each tab links to its respective tab pane’s <code>id</code>.</p>
+<p>For initial rendering, make sure the appropriate tab and tab pane have the <code>active</code> class.</p>
 <pre><code class="lang-html">&lt;div class=&quot;tabs&quot;&gt;
   &lt;nav class=&quot;tabs-nav&quot;&gt;
     &lt;a href=&quot;#tab-1&quot; class=&quot;active&quot;&gt;Tab 1&lt;/a&gt;
@@ -113,7 +113,7 @@
 </div>
 
 <h3 id="vertical-tabs">Vertical Tabs</h3>
-<p>Tabs can be made vertical when used along with the <a href="grid-system.html">grid system</a>.</p>
+<p>Tabs can be made vertical when used with the <a href="grid-system.html">grid system</a>.</p>
 <pre><code class="lang-html">&lt;div class=&quot;tabs&quot;&gt;
   &lt;div class=&quot;row&quot;&gt;
     &lt;div class=&quot;col-4&quot;&gt;
@@ -172,9 +172,9 @@
   </div>
 </div>
 
-<h3 id="events">Events</h3>
-<p>Tabs require <code>shoelace.js</code> to make them interactive. You don’t need to initialize them. Simply include the script and everything “just works.”</p>
-<p>There is no JavaScript API. Shoelace’s philosophy believes that custom components should act like native components as much as possible. You can, however, listen for various events:</p>
+<h3 id="interactivity">Interactivity</h3>
+<p>Tabs require <code>shoelace.js</code> for interactivity. You don’t need to initialize anything. Just include the script and everything “just works.”</p>
+<p>There is no JavaScript API. Shoelace’s philosophy believes that custom components should act like native components as much as possible. You can, however, listen for various events.</p>
 <ul>
 <li><code>show</code> – Fires when a tab is shown. The second callback argument is a reference to the respective tab pane.</li>
 <li><code>hide</code> – Fires when a tab is hidden. The second callback argument is a reference to the respective tab pane.</li>
@@ -188,6 +188,10 @@
     console.log(&#39;hide&#39;, event.target, tabPane);
   });
 </code></pre>
+<p>To activate a tab programmatically, just add the <code>active</code> class to it. We use a <a href="https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver">mutation observer</a> to remove the active class on other tabs and to show/hide the appropriate tab panes automatically.</p>
+<pre><code class="lang-javascript">$(&#39;#tab-id&#39;).addClass(&#39;active&#39;);
+</code></pre>
+<p>To disable a tab, add the <code>disabled</code> class to the appropriate tab.</p>
 
         </div>
       </div>

@@ -8,9 +8,9 @@ description: Add tabs to your app with the tabs component.
 
 Tab sets can be created using the markup below. By default, Shoelace renders tabs as pills because they respond better than traditional tabs when rendered on smaller screens.
 
-Note the class names used for the main container, the tab navs, and the tab panes. Also note that each tab links to its respective tab pane’s `id`.
+Note the class names used for the main container, the tabs, and the tab panes. Also note that each tab links to its respective tab pane’s `id`.
 
-To disable a tab, add `disabled` to the appropriate tab nav.
+For initial rendering, make sure the appropriate tab and tab pane have the `active` class.
 
 ```html
 <div class="tabs">
@@ -73,7 +73,7 @@ To disable a tab, add `disabled` to the appropriate tab nav.
 
 ### Vertical Tabs
 
-Tabs can be made vertical when used along with the [grid system](grid-system.html).
+Tabs can be made vertical when used with the [grid system](grid-system.html).
 
 ```html
 <div class="tabs">
@@ -135,11 +135,11 @@ Tabs can be made vertical when used along with the [grid system](grid-system.htm
   </div>
 </div>
 
-### Events
+### Interactivity
 
-Tabs require `shoelace.js` to make them interactive. You don’t need to initialize them. Simply include the script and everything “just works.”
+Tabs require `shoelace.js` for interactivity. You don’t need to initialize anything. Just include the script and everything “just works.”
 
-There is no JavaScript API. Shoelace’s philosophy believes that custom components should act like native components as much as possible. You can, however, listen for various events:
+There is no JavaScript API. Shoelace’s philosophy believes that custom components should act like native components as much as possible. You can, however, listen for various events.
 
 - `show` – Fires when a tab is shown. The second callback argument is a reference to the respective tab pane.
 - `hide` – Fires when a tab is hidden. The second callback argument is a reference to the respective tab pane.
@@ -155,3 +155,11 @@ $('#my-tabs')
     console.log('hide', event.target, tabPane);
   });
 ```
+
+To activate a tab programmatically, just add the `active` class to it. We use a [mutation observer](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) to remove the active class on other tabs and to show/hide the appropriate tab panes automatically.
+
+```javascript
+$('#tab-id').addClass('active');
+```
+
+To disable a tab, add the `disabled` class to the appropriate tab.
