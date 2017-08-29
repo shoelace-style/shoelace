@@ -43,7 +43,7 @@
         var trigger;
 
         // Watch for clicks on dropdown triggers
-        if($(event.target).is('.dropdown-trigger')) {
+        if($(event.target).closest('.dropdown-trigger')) {
           dropdown = $(event.target).closest('.dropdown');
           trigger = event.target;
 
