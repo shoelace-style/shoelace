@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="Add buttons to let users select files in your app.">
+  <link rel="icon" href="../source/img/favicon.png">
+  <link rel="stylesheet" href="../dist/shoelace.css">
+  <link rel="stylesheet" href="../source/css/_docs.css">
+  <link rel="stylesheet" href="https://cdn.rawgit.com/AGMStudio/prism-theme-one-dark/f81fe477/prism-onedark.css">
+  <title>File Buttons</title>
+</head>
+<body>
+
+  <header id="head" class="text-center">
+    <h1>
+      <a href="../index.html">
+        <img src="../source/img/wordmark.svg" alt="Shoelace logo">
+      </a>
+    </h1>
+
+    <p class="text-secondary text-small">
+      A back to the basics CSS starter kit. For when you don’t need the whole boot.
+    </p>
+  </header>
+
+  <main class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <ul id="nav">
+          <li><a href="installing.html">Installing</a></li>
+          <li><a href="customizing.html">Customizing</a></li>
+          <li><a href="content.html">Content</a></li>
+          <li><a href="alerts.html">Alerts</a></li>
+          <li><a href="badges.html">Badges</a></li>
+          <li><a href="buttons.html">Buttons</a></li>
+          <li><a href="dropdowns.html">Dropdowns</a></li>
+          <li><a href="file-buttons.html">File Buttons</a></li>
+          <li><a href="forms.html">Forms</a></li>
+          <li><a href="grid-system.html">Grid System</a></li>
+          <li><a href="loaders.html">Loaders</a></li>
+          <li><a href="progress-bars.html">Progress Bars</a></li>
+          <li><a href="switches.html">Switches</a></li>
+          <li><a href="tabs.html">Tabs</a></li>
+          <li><a href="tables.html">Tables</a></li>
+          <li><a href="utilities.html">Utilities</a></li>
+          <li><a href="icons.html">Icons</a></li>
+          <li><a href="browser-support.html">Browser Support</a></li>
+          <li><a href="attribution.html">Attribution</a></li>
+        </ul>
+      </div>
+
+      <div class="col-md-9">
+        <div id="content">
+          <h2 id="file-buttons">File Buttons</h2>
+<p>File inputs are notoriously hard to style consistently in every browser. Shoelace offers file buttons as an alternative.</p>
+<p>File buttons are much easier to style, but come with the caveat that the name and number of files selected will not be automatically shown to the user. This aspect of a file button’s UX can be handled effectively with JavaScript, but this is left as an <a href="https://stackoverflow.com/questions/2189615/how-to-get-file-name-when-user-select-a-file-via-input-type-file">exercise for the user</a>.</p>
+<p>To create a file button, use the following markup. Note that the input needs to have an <code>id</code> and the label needs to have a matching <code>for</code> attribute. The label also needs to have the <code>button</code> class.</p>
+<pre><code class="lang-html">&lt;span class=&quot;file-button&quot;&gt;
+  &lt;input type=&quot;file&quot; id=&quot;my-file&quot;&gt;
+  &lt;label class=&quot;button&quot; for=&quot;my-file&quot;&gt;Select File&lt;/label&gt;
+&lt;/span&gt;
+</code></pre>
+<p><span class="file-button">
+  <input type="file" id="file-input">
+  <label class="button" for="file-input">Select File</label>
+</span></p>
+<p>This approach is a bit more verbose than simply wrapping the input with a label, but the extra markup makes file buttons accessible via keyboard.</p>
+<p>You can allow multiple files to be selected by adding the <code>multiple</code> attribute:</p>
+<pre><code class="lang-html">&lt;span class=&quot;file-button&quot;&gt;
+  &lt;input type=&quot;file&quot; id=&quot;my-files&quot; multiple&gt;
+  &lt;label class=&quot;button&quot; for=&quot;my-files&quot;&gt;Select Files&lt;/label&gt;
+&lt;/span&gt;
+</code></pre>
+<p><span class="file-button">
+  <input type="file" id="my-files" multiple>
+  <label class="button" for="my-files">Select Files</label>
+</span></p>
+<h3 id="variations">Variations</h3>
+<p>File buttons can use <a href="buttons.html">button modifiers</a>. Just apply the appropriate classes to the label.</p>
+<p><span class="file-button">
+  <input type="file" id="file-input-xs">
+  <label class="button button-xs" for="file-input-xs">Browse</label>
+</span>
+<span class="file-button">
+  <input type="file" id="file-input-sm">
+  <label class="button button-sm" for="file-input-sm">Browse</label>
+</span>
+<span class="file-button">
+  <input type="file" id="file-input-default">
+  <label class="button" for="file-input-default">Browse</label>
+</span>
+<span class="file-button">
+  <input type="file" id="file-input-lg">
+  <label class="button button-lg" for="file-input-lg">Browse</label>
+</span>
+<span class="file-button">
+  <input type="file" id="file-input-xl">
+  <label class="button button-xl" for="file-input-xl">Browse</label>
+</span></p>
+<p><span class="file-button">
+  <input type="file" id="file-input-default">
+  <label class="button" for="file-input-default">Browse</label>
+</span>
+<span class="file-button">
+  <input type="file" id="file-input-secondary">
+  <label class="button button-secondary" for="file-input-secondary">Browse</label>
+</span>
+<span class="file-button">
+  <input type="file" id="file-input-success">
+  <label class="button button-success" for="file-input-success">Browse</label>
+</span>
+<span class="file-button">
+  <input type="file" id="file-input-info">
+  <label class="button button-info" for="file-input-info">Browse</label>
+</span>
+<span class="file-button">
+  <input type="file" id="file-input-warning">
+  <label class="button button-warning" for="file-input-warning">Browse</label>
+</span>
+<span class="file-button">
+  <input type="file" id="file-input-danger">
+  <label class="button button-danger" for="file-input-danger">Browse</label>
+</span>
+<span class="file-button">
+  <input type="file" id="file-input-light">
+  <label class="button button-light" for="file-input-light">Browse</label>
+</span>
+<span class="file-button">
+  <input type="file" id="file-input-dark">
+  <label class="button button-dark" for="file-input-dark">Browse</label>
+</span></p>
+<p>You can also use file buttons in <a href="forms.html#input-groups">input groups</a>.</p>
+<div class="input-group">
+  <span class="file-button">
+    <input type="file" id="file-input-group">
+    <label class="button" for="file-input-group">Select File</label>
+  </span>
+  <input type="text">
+  <button type="button">Submit</button>
+</div>
+
+        </div>
+      </div>
+  </main>
+
+  <footer id="foot">
+    <a href="../index.html">
+      <img src="../source/img/wordmark.svg" alt="Shoelace logo">
+    </a>
+
+    <p class="text-small text-secondary">
+      1.0.0-beta20
+    </p>
+
+    <p class="mar-y-sm text-center">
+      <a class="github-button" href="https://github.com/claviska/shoelace-css/fork" data-size="large" aria-label="Fork claviska/shoelace-css on GitHub">Fork</a>
+      <a class="github-button" href="https://github.com/claviska/shoelace-css/releases" data-icon="octicon-cloud-download" data-size="large" aria-label="Download claviska/shoelace-css on GitHub">Download</a>
+      <a class="github-button" href="https://github.com/claviska/shoelace-css/issues" data-icon="octicon-issue-opened" data-size="large" aria-label="Issue claviska/shoelace-css on GitHub">Report a Bug</a>
+      <a class="github-button" href="https://github.com/claviska/shoelace-css" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star claviska/shoelace-css on GitHub">Star</a>
+    </p>
+
+    <p>
+      <a href="https://twitter.com/shoelacecss" class="button button-info" style="margin-bottom: 1.2rem;">Follow</a>
+      <a href="https://paypal.me/claviska" class="button button-success" style="margin-bottom: 1.2rem;">Donate</a>
+    </p>
+
+    <p class="text-small text-secondary">
+      <a href="https://keycdn.com/" class="text-secondary">Accelerated by KeyCDN</a> &middot;
+      &copy; A Beautiful Site, LLC
+    </p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/prism.min.js"></script>
+  <script src="../dist/shoelace.js"></script>
+  <script>
+    $(function() {
+      // Highlight current nav item
+      $('#nav a').each(function() {
+        if(this.pathname === location.pathname) {
+          $(this).addClass('current');
+        }
+      });
+    });
+  </script>
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+</body>
+</html>

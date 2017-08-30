@@ -311,11 +311,6 @@ button,
   }
 }
 
-/* File buttons */
-label.button input[type="file"] {
-  display: none;
-}
-
 /* Loader buttons */
 .button-loader,
 .button-loader:hover {

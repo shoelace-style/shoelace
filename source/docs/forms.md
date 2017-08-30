@@ -46,11 +46,14 @@ Form controls are styled at 100% of the width of their parent element.
         <code>&lt;input type=&quot;file&quot;&gt;</code>
         <br>
         <span class="text-small text-secondary">
-          File inputs aren’t supported. Use a [file button](buttons.html#file-buttons) instead.
+          File inputs aren’t supported. Use a [file button](file-buttons.html) instead.
         </span>
       </td>
       <td>
-        <label class="button button-block">Select File <input type="file"></label>
+        <span class="file-button">
+          <input type="file" id="file-button-ex">
+          <label class="button button-block" for="file-button-ex">Select File</label>
+        </span>
       </td>
     </tr>
     <tr>

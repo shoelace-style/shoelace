@@ -147,20 +147,3 @@ Loader buttons also work with button variations.
   <button type="button" class="button-loader button-light">Button</button>
   <button type="button" class="button-loader button-dark">Button</button>
 </div>
-
-### File Buttons
-
-File inputs are notoriously hard to style properly in every browser. Shoelace offers file buttons as an alternative. These are much easier to style consistently, but come with the caveat that the name (or number) of files selected will not be automatically shown to the user. This aspect of a file button’s UX can be handled effectively with JavaScript, but this is left as an [exercise for the user](https://stackoverflow.com/questions/2189615/how-to-get-file-name-when-user-select-a-file-via-input-type-file).
-
-File buttons are simply `<label>` elements with the `button` class and a nested file input.
-
-```html
-<label class="button">
-  Select File
-  <input type="file">
-</label>
-```
-
-<div class="input-field">
-  <label class="button">Select File <input type="file"></label>
-</div>

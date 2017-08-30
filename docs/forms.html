@@ -37,6 +37,7 @@
           <li><a href="badges.html">Badges</a></li>
           <li><a href="buttons.html">Buttons</a></li>
           <li><a href="dropdowns.html">Dropdowns</a></li>
+          <li><a href="file-buttons.html">File Buttons</a></li>
           <li><a href="forms.html">Forms</a></li>
           <li><a href="grid-system.html">Grid System</a></li>
           <li><a href="loaders.html">Loaders</a></li>
@@ -89,11 +90,14 @@
         <code>&lt;input type=&quot;file&quot;&gt;</code>
         <br>
         <span class="text-small text-secondary">
-          File inputs aren’t supported. Use a <a href="buttons.html#file-buttons">file button</a> instead.
+          File inputs aren’t supported. Use a <a href="file-buttons.html">file button</a> instead.
         </span>
       </td>
       <td>
-        <label class="button button-block">Select File <input type="file"></label>
+        <span class="file-button">
+          <input type="file" id="file-button-ex">
+          <label class="button button-block" for="file-button-ex">Select File</label>
+        </span>
       </td>
     </tr>
     <tr>

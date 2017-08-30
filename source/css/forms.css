@@ -273,6 +273,7 @@ input[type="range"] {
   & > .button,
   & > .dropdown button,
   & > .dropdown .button,
+  & > .file-button label,
   & > .input-icon input,
   & > .input-icon select {
     border-radius: 0;
@@ -283,6 +284,7 @@ input[type="range"] {
   & > .button:first-child,
   & > .dropdown:first-child button,
   & > .dropdown:first-child .button,
+  & > .file-button:first-child label,
   & > .input-icon:first-child input,
   & > .input-icon:first-child select {
     border-top-left-radius: var(--input-border-radius);
@@ -294,6 +296,7 @@ input[type="range"] {
   & > .button:last-child,
   & > .dropdown:last-child button,
   & > .dropdown:last-child .button,
+  & > .file-button:last-child label,
   & > .input-icon:last-child input,
   & > .input-icon:last-child select {
     border-top-right-radius: var(--input-border-radius);
@@ -309,9 +312,10 @@ input[type="range"] {
     margin-left: calc(var(--input-border-width) * -1);
   }
 
+  /* Force a new stacking context so focus rings don't get truncated by adjacent elements */
   & button:focus,
-  & .button:focus {
-    /* Force a new stacking context so focus rings don't get truncated by adjacent elements */
+  & .button:focus,
+  & .file-button input[type="file"]:focus + label {
     transform: translateZ(0);
   }
 }

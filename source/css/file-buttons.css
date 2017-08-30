@@ -1,0 +1,25 @@
+/*! File buttons */
+
+.file-button {
+  & input[type="file"] {
+    position: absolute;
+    height: 1px;
+    width: 1px;
+    background: none;
+    border: 0;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    overflow: hidden;
+    padding: 0;
+
+    /* When the input receives focus, simulate button focus states on the label */
+    &:focus + label { box-shadow: 0 0 0 var(--button-focus-width) color(var(--button-bg-color) alpha(50%)); }
+    &:focus + label.button-secondary { box-shadow: 0 0 0 var(--button-focus-width) color(var(--button-bg-color-secondary) alpha(50%)); }
+    &:focus + label.button-success { box-shadow: 0 0 0 var(--button-focus-width) color(var(--button-bg-color-success) alpha(50%)); }
+    &:focus + label.button-info { box-shadow: 0 0 0 var(--button-focus-width) color(var(--button-bg-color-info) alpha(50%)); }
+    &:focus + label.button-warning { box-shadow: 0 0 0 var(--button-focus-width) color(var(--button-bg-color-warning) alpha(50%)); }
+    &:focus + label.button-danger { box-shadow: 0 0 0 var(--button-focus-width) color(var(--button-bg-color-danger) alpha(50%)); }
+    &:focus + label.button-light { box-shadow: 0 0 0 var(--button-focus-width) color(var(--button-bg-color-light) alpha(50%)); }
+    &:focus + label.button-dark { box-shadow: 0 0 0 var(--button-focus-width) color(var(--button-bg-color-dark) alpha(50%)); }
+  }
+}
