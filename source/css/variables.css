@@ -43,6 +43,7 @@
   --component-border-color: #ddd;
   --component-border-radius: .25rem;
   --component-border-width: 1px;
+  --component-focus-width: 2px;
   --component-padding-x: 1rem;
   --component-padding-y: 1rem;
   --component-speed: .1s;
@@ -104,7 +105,7 @@
 
   --badge-font-size: .8em; /* ems for relative sizing */
   --badge-border-radius: 1em;  /* ems for relative sizing */
-  --badge-focus-width: var(--input-focus-width);
+  --badge-focus-width: var(--component-focus-width);
   --badge-speed: var(--component-speed);
 
   /* Default */
@@ -157,7 +158,7 @@
   --button-font-weight: var(--input-font-weight);
   --button-border-radius: var(--component-border-radius);
   --button-border-width: var(--component-border-width);
-  --button-focus-width: var(--input-focus-width);
+  --button-focus-width: var(--component-focus-width);
   --button-speed: var(--component-speed);
   --button-loader-size: 1em;
   --button-loader-border-width: .15em;
@@ -303,13 +304,12 @@
   --input-font-weight: inherit;
   --input-color: var(--body-color);
   --input-border-color: var(--component-border-color);
-  --input-border-color-focus: var(--state-primary);
   --input-border-width: 1px;
   --input-border-radius: var(--component-border-radius);
   --input-bg-color: var(--color-white);
   --input-box-shadow: var(--component-box-shadow-inner);
   --input-readonly-bg-color: var(--component-bg-color);
-  --input-focus-width: 2px;
+  --input-focus-color: var(--state-primary);
   --input-speed: var(--component-speed);
 
   --input-addon-bg-color: var(--component-bg-color);
@@ -438,7 +438,7 @@
   --switch-border-radius: var(--switch-height);
   --switch-thumb-border-radius: 50%;
   --switch-thumb-spacing: 2px;
-  --switch-focus-width: var(--input-focus-width);
+  --switch-focus-width: var(--component-focus-width);
   --switch-speed: var(--component-speed);
 
   /* Default */
@@ -510,7 +510,7 @@
   --tab-color-disabled: var(--body-color-muted);
   --tab-padding-x: var(--component-padding-x);
   --tab-padding-y: calc(var(--component-padding-y) / 2);
-  --tab-focus-width: var(--input-focus-width);
+  --tab-focus-width: var(--component-focus-width);
   --tab-speed: var(--component-speed);
 
   --tab-pane-border-color: var(--component-border-color);
