@@ -1,12 +1,12 @@
 /*!
-  Shoelace.css dropdowns 1.0.0-beta21
+  Shoelace.css dropdowns 1.0.0-beta22
   (c) A Beautiful Site, LLC
 
   Released under the MIT license
   Source: https://github.com/claviska/shoelace-css
 */
 !function(){"use strict";if("undefined"==typeof jQuery&&"undefined"==typeof Zepto)throw new Error("Shoelace dropdowns require either jQuery or Zepto.");("function"==typeof jQuery?jQuery:Zepto)(function(e){e(document).on("click",function(t){var i=e(t.target).closest(".dropdown").get(0),r=i?e(t.target).closest(".dropdown-trigger").get(0):null,o=(i?e(t.target).closest(".dropdown-menu").get(0):null)?e(t.target).closest("a").get(0):null;if(r){if(e(".dropdown.active").not(i).removeClass("active").trigger("hide"),e(r).is(".disabled, :disabled"))return;e(i).toggleClass("active").trigger(e(i).is(".active")?"show":"hide")}else{if(o)return e(i).removeClass("active").trigger("hide"),e(o).is(".disabled")||e(i).trigger("select",o),void t.preventDefault();e(".dropdown.active").removeClass("active").trigger("hide")}}).on("keydown",function(t){27===t.keyCode&&e(".dropdown.active").removeClass("active").trigger("hide")})})}(),/*!
-  Shoelace.css tabs 1.0.0-beta21
+  Shoelace.css tabs 1.0.0-beta22
   (c) A Beautiful Site, LLC
 
   Released under the MIT license
