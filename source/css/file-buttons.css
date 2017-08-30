@@ -1,6 +1,8 @@
 /*! File buttons */
 
 .file-button {
+  position: relative;
+
   & input[type="file"] {
     position: absolute;
     height: 1px;
