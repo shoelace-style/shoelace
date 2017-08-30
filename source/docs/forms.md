@@ -390,7 +390,31 @@ This example uses Font Awesome, but you can use whatever icon library you want. 
   </div>
 </div>
 
-Use the `input-icon-[xs|sm|lg|xs]` modifiers to change the size of input icons.
+Input icons can be used inside form groups.
+
+```html
+<div class="input-group">
+  <span class="input-addon">Location</span>
+  <div class="input-icon">
+    <i class="fa fa-fw fa-map-marker"></i>
+    <input type="text">
+    <i class="fa fa-fw fa-check"></i>
+  </div>
+  <button type="button">Submit</button>
+</div>
+```
+
+<div class="input-group">
+  <span class="input-addon">Location</span>
+  <div class="input-icon">
+    <i class="fa fa-fw fa-map-marker"></i>
+    <input type="text">
+    <i class="fa fa-fw fa-check"></i>
+  </div>
+  <button type="button">Submit</button>
+</div>
+
+Use the `input-icon-[xs|sm|lg|xs]` modifiers to change the size of input icons to match form controls.
 
 ```html
 <div class="input-icon input-icon-xs">

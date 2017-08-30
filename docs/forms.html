@@ -411,7 +411,28 @@
   </div>
 </div>
 
-<p>Use the <code>input-icon-[xs|sm|lg|xs]</code> modifiers to change the size of input icons.</p>
+<p>Input icons can be used inside form groups.</p>
+<pre><code class="lang-html">&lt;div class=&quot;input-group&quot;&gt;
+  &lt;span class=&quot;input-addon&quot;&gt;Location&lt;/span&gt;
+  &lt;div class=&quot;input-icon&quot;&gt;
+    &lt;i class=&quot;fa fa-fw fa-map-marker&quot;&gt;&lt;/i&gt;
+    &lt;input type=&quot;text&quot;&gt;
+    &lt;i class=&quot;fa fa-fw fa-check&quot;&gt;&lt;/i&gt;
+  &lt;/div&gt;
+  &lt;button type=&quot;button&quot;&gt;Submit&lt;/button&gt;
+&lt;/div&gt;
+</code></pre>
+<div class="input-group">
+  <span class="input-addon">Location</span>
+  <div class="input-icon">
+    <i class="fa fa-fw fa-map-marker"></i>
+    <input type="text">
+    <i class="fa fa-fw fa-check"></i>
+  </div>
+  <button type="button">Submit</button>
+</div>
+
+<p>Use the <code>input-icon-[xs|sm|lg|xs]</code> modifiers to change the size of input icons to match form controls.</p>
 <pre><code class="lang-html">&lt;div class=&quot;input-icon input-icon-xs&quot;&gt;
   &lt;i class=&quot;fa fa-fw fa-user&quot;&gt;&lt;/i&gt;
   &lt;input class=&quot;input-xs&quot; type=&quot;text&quot;&gt;

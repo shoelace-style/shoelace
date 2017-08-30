@@ -67,7 +67,7 @@ textarea {
 
   &:focus {
     outline: none;
-    border-color: var(--input-border-color-focus);
+    border-color: var(--input-focus-color);
   }
 
   &[disabled] {
@@ -184,7 +184,7 @@ input[type="range"] {
     }
 
     &::-webkit-slider-thumb {
-      box-shadow: 0 0 0 var(--input-focus-width) color(var(--input-range-thumb-color) alpha(50%));
+      box-shadow: 0 0 0 var(--component-focus-width) color(var(--input-range-thumb-color) alpha(50%));
     }
   }
 
@@ -209,7 +209,7 @@ input[type="range"] {
   }
 
   &:focus::-moz-range-thumb {
-    box-shadow: 0 0 0 var(--input-focus-width) color(var(--input-range-thumb-color) alpha(50%));
+    box-shadow: 0 0 0 var(--component-focus-width) color(var(--input-range-thumb-color) alpha(50%));
   }
 
   /* IE / Edge */
@@ -245,7 +245,7 @@ input[type="range"] {
   }
 
   &:focus::-ms-thumb {
-    box-shadow: 0 0 0 var(--input-focus-width) color(var(--input-range-thumb-color) alpha(50%));
+    box-shadow: 0 0 0 var(--component-focus-width) color(var(--input-range-thumb-color) alpha(50%));
   }
 
   &:focus::-ms-fill-lower {
@@ -272,7 +272,9 @@ input[type="range"] {
   & > button,
   & > .button,
   & > .dropdown button,
-  & > .dropdown .button {
+  & > .dropdown .button,
+  & > .input-icon input,
+  & > .input-icon select {
     border-radius: 0;
   }
 
@@ -280,7 +282,9 @@ input[type="range"] {
   & > button:first-child,
   & > .button:first-child,
   & > .dropdown:first-child button,
-  & > .dropdown:first-child .button {
+  & > .dropdown:first-child .button,
+  & > .input-icon:first-child input,
+  & > .input-icon:first-child select {
     border-top-left-radius: var(--input-border-radius);
     border-bottom-left-radius: var(--input-border-radius);
   }
@@ -289,7 +293,9 @@ input[type="range"] {
   & > button:last-child,
   & > .button:last-child,
   & > .dropdown:last-child button,
-  & > .dropdown:last-child .button {
+  & > .dropdown:last-child .button,
+  & > .input-icon:last-child input,
+  & > .input-icon:last-child select {
     border-top-right-radius: var(--input-border-radius);
     border-bottom-right-radius: var(--input-border-radius);
   }
@@ -303,7 +309,8 @@ input[type="range"] {
     margin-left: calc(var(--input-border-width) * -1);
   }
 
-  & :focus {
+  & button:focus,
+  & .button:focus {
     /* Force a new stacking context so focus rings don't get truncated by adjacent elements */
     transform: translateZ(0);
   }
@@ -361,6 +368,7 @@ input[type="range"] {
 /* Input icons */
 .input-icon {
   position: relative;
+  width: 100%;
 
   /* Change default position for select controls so icons don't get hidden */
   & select {
