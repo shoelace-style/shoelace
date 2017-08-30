@@ -81,16 +81,11 @@
 
     // Watch for clicks on tabs
     $(document).on('click', '.tabs-nav a', function(event) {
-      var tab = this;
+      // Make the selected tab active. No need to worry about disabled tabs, showing the tab pane,
+      // or making other tabs inactive because the mutation observer handles everything.
+      $(this).addClass('active');
 
       event.preventDefault();
-
-      // Ignore disabled tabs
-      if($(tab).is('.disabled')) return;
-
-      // Make the selected tab active. No need to worry about showing the tab pane or making other
-      // tabs inactive because the mutation observer will handle that.
-      $(tab).addClass('active');
     });
   });
 })();
