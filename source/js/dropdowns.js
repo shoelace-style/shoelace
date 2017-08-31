@@ -65,25 +65,27 @@
 
         // If the user selected a menu item, close the dropdown and fire the select event
         if(selectedItem) {
-          $(dropdown)
-            .removeClass('active')
-            .trigger('hide');
-
-          // Don't select disabled menu items
-          if(!$(selectedItem).is('.disabled')) {
-            $(dropdown).trigger('select', selectedItem);
-          }
-
           // Prevent the page from scrolling since menu items are #links
           event.preventDefault();
+
+          // Don't select disabled menu items
+          if($(selectedItem).is('.disabled')) return;
+
+          // Trigger a selection
+          $(dropdown)
+            .removeClass('active')
+            .trigger('hide')
+            .trigger('select', selectedItem);
 
           return;
         }
 
-        // If the user didn't click a trigger or a menu item, hide any active dropdowns
-        $('.dropdown.active')
-          .removeClass('active')
-          .trigger('hide');
+        // If the click wasn't in a dropdown, hide any active dropdowns
+        if(!dropdown) {
+          $('.dropdown.active')
+            .removeClass('active')
+            .trigger('hide');
+        }
       })
       .on('keydown', function(event) {
         // Close dropdowns on escape
