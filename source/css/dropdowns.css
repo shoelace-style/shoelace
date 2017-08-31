@@ -29,6 +29,8 @@
     min-width: var(--dropdown-min-width);
     max-width: var(--dropdown-max-width);
     max-height: var(--dropdown-max-height);
+    font-size: var(--dropdown-font-size);
+    font-weight: var(--dropdown-font-weight);
     background-color: var(--dropdown-bg-color);
     border: solid var(--dropdown-border-width) var(--dropdown-border-color);
     border-radius: var(--dropdown-border-radius);
@@ -37,6 +39,7 @@
     padding: var(--dropdown-padding-y) 0;
     overflow-y: auto;
     transform: translateZ(0);
+    user-select: none;
 
     & a {
       position: relative;
@@ -78,6 +81,14 @@
       width: 100%;
       border-top: solid var(--dropdown-divider-width) var(--dropdown-divider-color);
       margin: var(--dropdown-padding-y) 0;
+    }
+
+    & .dropdown-heading {
+      font-size: var(--dropdown-heading-font-size);
+      font-weight: var(--dropdown-heading-font-weight);
+      color: var(--dropdown-heading-color);
+      padding: var(--dropdown-padding-y) calc(var(--dropdown-padding-x) + .5em);
+      cursor: default;
     }
   }
 

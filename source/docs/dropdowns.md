@@ -12,6 +12,8 @@ Note the class names used for the main container, the trigger, and the menu. Add
 
 To disable a dropdown entirely, add the `disabled` property to the dropdown trigger if it’s a button. If it’s a link, add the `disabled` class instead. When a dropdown is activated, it will receive the `active` class and the menu will show.
 
+Headings can be created with the `dropdown-heading` class.
+
 ```html
 <div class="dropdown">
   <button type="button" class="dropdown-trigger">Dropdown</button>
@@ -22,6 +24,7 @@ To disable a dropdown entirely, add the `disabled` property to the dropdown trig
     <a href="#" class="checked">Checked</a>
     <a href="#" class="disabled">Disabled</a>
     <hr>
+    <div class="dropdown-heading">Heading</div>
     <a href="#">More...</a>
   </div>
 </div>
@@ -37,6 +40,7 @@ To disable a dropdown entirely, add the `disabled` property to the dropdown trig
       <a href="#" class="checked">Checked</a>
       <a href="#" class="disabled">Disabled</a>
       <hr>
+      <div class="dropdown-heading">Heading</div>
       <a href="#">More...</a>
     </div>
   </div>
