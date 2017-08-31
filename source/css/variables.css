@@ -273,18 +273,25 @@
   --dropdown-border-color: var(--component-border-color);
   --dropdown-border-radius: var(--component-border-radius);
   --dropdown-border-width: var(--component-border-width);
+  --dropdown-font-size: inherit;
+  --dropdown-font-weight: inherit;
   --dropdown-color: var(--body-color);
   --dropdown-color-hover: var(--color-white);
   --dropdown-bg-color: var(--color-white);
   --dropdown-bg-color-hover: var(--state-primary);
   --dropdown-box-shadow: var(--component-box-shadow-outer);
-  --dropdown-divider-color: var(--component-border-color);
-  --dropdown-divider-width: var(--component-border-width);
   --dropdown-padding-x: 1rem;
   --dropdown-padding-y: .25rem;
   --dropdown-offset-x: 0;
   --dropdown-offset-y: 1px;
   --dropdown-z-index: 100;
+
+  --dropdown-divider-color: var(--component-border-color);
+  --dropdown-divider-width: var(--component-border-width);
+
+  --dropdown-heading-font-size: var(--font-size-small);
+  --dropdown-heading-font-weight: inherit;
+  --dropdown-heading-color: var(--body-color-muted);
 
   /*************************************************************************************************
   * Forms
