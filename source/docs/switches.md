@@ -18,24 +18,24 @@ The markup for a switch looks like this:
 
 ```html
 <span class="switch">
-  <input type="checkbox" class="switch" id="switch-1">
+  <input type="checkbox" id="switch-1">
   <label for="switch-1">Switch 1</label>
 </span>
 
 <span class="switch">
-  <input type="checkbox" class="switch" id="switch-2" checked>
+  <input type="checkbox" id="switch-2" checked>
   <label for="switch-2">Switch 2</label>
 </span>
 ```
 
 <div class="input-field">
   <span class="switch">
-    <input type="checkbox" class="switch" id="switch-1">
+    <input type="checkbox" id="switch-1">
     <label for="switch-1">Switch 1</label>
   </span>
 
   <span class="switch">
-    <input type="checkbox" class="switch" id="switch-2" checked>
+    <input type="checkbox" id="switch-2" checked>
     <label for="switch-2">Switch 2</label>
   </span>
 </div>
@@ -44,54 +44,54 @@ Use the `switch-[xs|sm|lg|xl]` modifiers to change the size of a switch.
 
 ```html
 <span class="switch switch-xs">
-  <input type="checkbox" class="switch" id="switch-xs">
+  <input type="checkbox" id="switch-xs">
   <label for="switch-xs">XS</label>
 </span>
 
 <span class="switch switch-sm">
-  <input type="checkbox" class="switch" id="switch-sm">
+  <input type="checkbox" id="switch-sm">
   <label for="switch-sm">SM</label>
 </span>
 
 <span class="switch">
-  <input type="checkbox" class="switch" id="switch-default">
+  <input type="checkbox" id="switch-default">
   <label for="switch-default">Default</label>
 </span>
 
 <span class="switch switch-lg">
-  <input type="checkbox" class="switch" id="switch-lg">
+  <input type="checkbox" id="switch-lg">
   <label for="switch-lg">LG</label>
 </span>
 
 <span class="switch switch-xl">
-  <input type="checkbox" class="switch" id="switch-xl">
+  <input type="checkbox" id="switch-xl">
   <label for="switch-xl">XL</label>
 </span>
 ```
 
 <div class="input-field">
   <span class="switch switch-xs">
-    <input type="checkbox" class="switch" id="switch-xs">
+    <input type="checkbox" id="switch-xs">
     <label for="switch-xs">XS</label>
   </span>
 
   <span class="switch switch-sm">
-    <input type="checkbox" class="switch" id="switch-sm">
+    <input type="checkbox" id="switch-sm">
     <label for="switch-sm">SM</label>
   </span>
 
   <span class="switch">
-    <input type="checkbox" class="switch" id="switch-default">
+    <input type="checkbox" id="switch-default">
     <label for="switch-default">Default</label>
   </span>
 
   <span class="switch switch-lg">
-    <input type="checkbox" class="switch" id="switch-lg">
+    <input type="checkbox" id="switch-lg">
     <label for="switch-lg">LG</label>
   </span>
 
   <span class="switch switch-xl">
-    <input type="checkbox" class="switch" id="switch-xl">
+    <input type="checkbox" id="switch-xl">
     <label for="switch-xl">XL</label>
   </span>
 </div>
@@ -100,14 +100,14 @@ Disabled switches are dimmed out. To disable a switch, add the `disabled` attrib
 
 ```html
 <span class="switch">
-  <input type="checkbox" class="switch" disabled id="switch-disabled">
+  <input type="checkbox" disabled id="switch-disabled">
   <label for="switch-disabled">Disabled</label>
 </span>
 ```
 
 <div class="input-field">
   <span class="switch">
-    <input type="checkbox" class="switch" disabled id="switch-disabled">
+    <input type="checkbox" disabled id="switch-disabled">
     <label for="switch-disabled">Disabled</label>
   </span>
 </div>
@@ -128,36 +128,36 @@ Use the `switch-*` modifier to create variations.
 ```
 
 <span class="switch switch-secondary">
-  <input type="checkbox" class="switch" id="variation-secondary" checked>
+  <input type="checkbox" id="variation-secondary" checked>
   <label for="variation-secondary">Secondary</label>
 </span>
 
 <span class="switch switch-success">
-  <input type="checkbox" class="switch" id="variation-success" checked>
+  <input type="checkbox" id="variation-success" checked>
   <label for="variation-success">Success</label>
 </span>
 
 <span class="switch switch-info">
-  <input type="checkbox" class="switch" id="variation-info" checked>
+  <input type="checkbox" id="variation-info" checked>
   <label for="variation-info">Info</label>
 </span>
 
 <span class="switch switch-warning">
-  <input type="checkbox" class="switch" id="variation-warning" checked>
+  <input type="checkbox" id="variation-warning" checked>
   <label for="variation-warning">Warning</label>
 </span>
 
 <span class="switch switch-danger">
-  <input type="checkbox" class="switch" id="variation-danger" checked>
+  <input type="checkbox" id="variation-danger" checked>
   <label for="variation-danger">Danger</label>
 </span>
 
 <span class="switch switch-light">
-  <input type="checkbox" class="switch" id="variation-light" checked>
+  <input type="checkbox" id="variation-light" checked>
   <label for="variation-light">Light</label>
 </span>
 
 <span class="switch switch-dark">
-  <input type="checkbox" class="switch" id="variation-dark" checked>
+  <input type="checkbox" id="variation-dark" checked>
   <label for="variation-dark">Dark</label>
 </span>
