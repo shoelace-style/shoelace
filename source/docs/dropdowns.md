@@ -147,6 +147,9 @@ $('#my-dropdown')
   })
   .on('select', function(event, item) {
     console.log('select', event.target, item);
+
+    // Tip: Use use event.preventDefault() to
+    // intercept the original click event.
   });
 ```
 

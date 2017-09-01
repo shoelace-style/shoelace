@@ -179,6 +179,9 @@
   })
   .on(&#39;select&#39;, function(event, item) {
     console.log(&#39;select&#39;, event.target, item);
+
+    // Tip: Use use event.preventDefault() to
+    // intercept the original click event.
   });
 </code></pre>
 <p>To show or hide a dropdown programmatically, just add or remove the <code>active</code> class to the dropdown.</p>

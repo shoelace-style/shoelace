@@ -65,17 +65,15 @@
 
         // If the user selected a menu item, close the dropdown and fire the select event
         if(selectedItem) {
-          // Prevent the page from scrolling since menu items are #links
-          event.preventDefault();
-
           // Don't select disabled menu items
           if($(selectedItem).is('.disabled')) return;
 
-          // Trigger a selection
+          // Close the dropdown and trigger the select event. The original click event is exposed to
+          // the handler so it can be prevented as needed.
           $(dropdown)
             .removeClass('active')
             .trigger('hide')
-            .trigger('select', selectedItem);
+            .trigger($.Event('select', event), selectedItem);
 
           return;
         }
