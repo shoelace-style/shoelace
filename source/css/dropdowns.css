@@ -29,8 +29,10 @@
     min-width: var(--dropdown-min-width);
     max-width: var(--dropdown-max-width);
     max-height: var(--dropdown-max-height);
+    line-height: var(--dropdown-line-height);
     font-size: var(--dropdown-font-size);
     font-weight: var(--dropdown-font-weight);
+    text-align: left;
     background-color: var(--dropdown-bg-color);
     border: solid var(--dropdown-border-width) var(--dropdown-border-color);
     border-radius: var(--dropdown-border-radius);

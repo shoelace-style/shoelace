@@ -280,6 +280,7 @@
   --dropdown-bg-color: var(--color-white);
   --dropdown-bg-color-hover: var(--state-primary);
   --dropdown-box-shadow: var(--component-box-shadow-outer);
+  --dropdown-line-height: var(--line-height);
   --dropdown-padding-x: 1rem;
   --dropdown-padding-y: .25rem;
   --dropdown-offset-x: 0;
