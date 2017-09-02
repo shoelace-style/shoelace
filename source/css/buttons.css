@@ -27,9 +27,6 @@ button,
 
   &:hover {
     color: var(--button-color);
-  }
-
-  &:hover:not(:disabled, .disabled) {
     text-decoration: none;
     background-color: color(var(--button-bg-color) shade(10%));
     border-color: color(var(--button-bg-color) shade(10%));
@@ -37,21 +34,25 @@ button,
     border-bottom-color: color(var(--button-bg-color) shade(20%));
   }
 
-  &:active:not(:disabled, .disabled),
-  &.active:not(:disabled, .disabled) {
+  &:active,
+  &.active {
     background-color: color(var(--button-bg-color) shade(10%));
     border-color: color(var(--button-bg-color) shade(10%));
     border-top-color: color(var(--button-bg-color) shade(20%));
     border-bottom-color: color(var(--button-bg-color) shade(10%));
   }
 
-  &:focus:not(:disabled, .disabled) {
+  &:focus {
     outline: none;
     box-shadow: 0 0 0 var(--button-focus-width) color(var(--button-bg-color) alpha(50%));
   }
 
   &:disabled,
   &.disabled {
+    background-color: color(var(--button-bg-color) shade(10%));
+    border-top-color: color(var(--button-bg-color) tint(10%));
+    border-bottom-color: color(var(--button-bg-color) shade(10%));
+    box-shadow: none;
     text-decoration: none;
     opacity: .5;
     cursor: not-allowed;
@@ -90,7 +91,7 @@ button,
     border-top-color: color(var(--button-bg-color-secondary) tint(10%));
     border-bottom-color: color(var(--button-bg-color-secondary) shade(10%));
 
-    &:hover:not(:disabled, .disabled) {
+    &:hover {
       color: var(--button-color-secondary);
       background-color: color(var(--button-bg-color-secondary) shade(10%));
       border-color: color(var(--button-bg-color-secondary) shade(10%));
@@ -98,17 +99,25 @@ button,
       border-bottom-color: color(var(--button-bg-color-secondary) shade(20%));
     }
 
-    &:active:not(:disabled, .disabled),
-    &.active:not(:disabled, .disabled) {
+    &:active,
+    &.active {
       background-color: color(var(--button-bg-color-secondary) shade(10%));
       border-color: color(var(--button-bg-color-secondary) shade(10%));
       border-top-color: color(var(--button-bg-color-secondary) shade(20%));
       border-bottom-color: color(var(--button-bg-color-secondary) shade(10%));
     }
 
-    &:focus:not(:disabled, .disabled) {
+    &:focus {
       outline: none;
       box-shadow: 0 0 0 var(--button-focus-width) color(var(--button-bg-color-secondary) alpha(50%));
+    }
+
+    &:disabled,
+    &.disabled {
+      background-color: color(var(--button-bg-color-secondary) shade(10%));
+      border-top-color: color(var(--button-bg-color-secondary) tint(10%));
+      border-bottom-color: color(var(--button-bg-color-secondary) shade(10%));
+      box-shadow: none;
     }
   }
 
@@ -119,7 +128,7 @@ button,
     border-top-color: color(var(--button-bg-color-success) tint(10%));
     border-bottom-color: color(var(--button-bg-color-success) shade(10%));
 
-    &:hover:not(:disabled, .disabled) {
+    &:hover {
       color: var(--button-color-success);
       background-color: color(var(--button-bg-color-success) shade(10%));
       border-color: color(var(--button-bg-color-success) shade(10%));
@@ -127,17 +136,25 @@ button,
       border-bottom-color: color(var(--button-bg-color-success) shade(20%));
     }
 
-    &:active:not(:disabled, .disabled),
-    &.active:not(:disabled, .disabled) {
+    &:active,
+    &.active {
       background-color: color(var(--button-bg-color-success) shade(10%));
       border-color: color(var(--button-bg-color-success) shade(10%));
       border-top-color: color(var(--button-bg-color-success) shade(20%));
       border-bottom-color: color(var(--button-bg-color-success) shade(10%));
     }
 
-    &:focus:not(:disabled, .disabled) {
+    &:focus {
       outline: none;
       box-shadow: 0 0 0 var(--button-focus-width) color(var(--button-bg-color-success) alpha(50%));
+    }
+
+    &:disabled,
+    &.disabled {
+      background-color: color(var(--button-bg-color-success) shade(10%));
+      border-top-color: color(var(--button-bg-color-success) tint(10%));
+      border-bottom-color: color(var(--button-bg-color-success) shade(10%));
+      box-shadow: none;
     }
   }
 
@@ -148,7 +165,7 @@ button,
     border-top-color: color(var(--button-bg-color-info) tint(10%));
     border-bottom-color: color(var(--button-bg-color-info) shade(10%));
 
-    &:hover:not(:disabled, .disabled) {
+    &:hover {
       color: var(--button-color-info);
       background-color: color(var(--button-bg-color-info) shade(10%));
       border-color: color(var(--button-bg-color-info) shade(10%));
@@ -156,17 +173,25 @@ button,
       border-bottom-color: color(var(--button-bg-color-info) shade(20%));
     }
 
-    &:active:not(:disabled, .disabled),
-    &.active:not(:disabled, .disabled) {
+    &:active,
+    &.active {
       background-color: color(var(--button-bg-color-info) shade(10%));
       border-color: color(var(--button-bg-color-info) shade(10%));
       border-top-color: color(var(--button-bg-color-info) shade(20%));
       border-bottom-color: color(var(--button-bg-color-info) shade(10%));
     }
 
-    &:focus:not(:disabled, .disabled) {
+    &:focus {
       outline: none;
       box-shadow: 0 0 0 var(--button-focus-width) color(var(--button-bg-color-info) alpha(50%));
+    }
+
+    &:disabled,
+    &.disabled {
+      background-color: color(var(--button-bg-color-info) shade(10%));
+      border-top-color: color(var(--button-bg-color-info) tint(10%));
+      border-bottom-color: color(var(--button-bg-color-info) shade(10%));
+      box-shadow: none;
     }
   }
 
@@ -177,7 +202,7 @@ button,
     border-top-color: color(var(--button-bg-color-warning) tint(10%));
     border-bottom-color: color(var(--button-bg-color-warning) shade(10%));
 
-    &:hover:not(:disabled, .disabled) {
+    &:hover {
       color: var(--button-color-warning);
       background-color: color(var(--button-bg-color-warning) shade(10%));
       border-color: color(var(--button-bg-color-warning) shade(10%));
@@ -185,17 +210,25 @@ button,
       border-bottom-color: color(var(--button-bg-color-warning) shade(20%));
     }
 
-    &:active:not(:disabled, .disabled),
-    &.active:not(:disabled, .disabled) {
+    &:active,
+    &.active {
       background-color: color(var(--button-bg-color-warning) shade(10%));
       border-color: color(var(--button-bg-color-warning) shade(10%));
       border-top-color: color(var(--button-bg-color-warning) shade(20%));
       border-bottom-color: color(var(--button-bg-color-warning) shade(10%));
     }
 
-    &:focus:not(:disabled, .disabled) {
+    &:focus {
       outline: none;
       box-shadow: 0 0 0 var(--button-focus-width) color(var(--button-bg-color-warning) alpha(50%));
+    }
+
+    &:disabled,
+    &.disabled {
+      background-color: color(var(--button-bg-color-warning) shade(10%));
+      border-top-color: color(var(--button-bg-color-warning) tint(10%));
+      border-bottom-color: color(var(--button-bg-color-warning) shade(10%));
+      box-shadow: none;
     }
   }
 
@@ -206,7 +239,7 @@ button,
     border-top-color: color(var(--button-bg-color-danger) tint(10%));
     border-bottom-color: color(var(--button-bg-color-danger) shade(10%));
 
-    &:hover:not(:disabled, .disabled) {
+    &:hover {
       color: var(--button-color-danger);
       background-color: color(var(--button-bg-color-danger) shade(10%));
       border-color: color(var(--button-bg-color-danger) shade(10%));
@@ -214,17 +247,25 @@ button,
       border-bottom-color: color(var(--button-bg-color-danger) shade(20%));
     }
 
-    &:active:not(:disabled, .disabled),
-    &.active:not(:disabled, .disabled) {
+    &:active,
+    &.active {
       background-color: color(var(--button-bg-color-danger) shade(10%));
       border-color: color(var(--button-bg-color-danger) shade(10%));
       border-top-color: color(var(--button-bg-color-danger) shade(20%));
       border-bottom-color: color(var(--button-bg-color-danger) shade(10%));
     }
 
-    &:focus:not(:disabled, .disabled) {
+    &:focus {
       outline: none;
       box-shadow: 0 0 0 var(--button-focus-width) color(var(--button-bg-color-danger) alpha(50%));
+    }
+
+    &:disabled,
+    &.disabled {
+      background-color: color(var(--button-bg-color-danger) shade(10%));
+      border-top-color: color(var(--button-bg-color-danger) tint(10%));
+      border-bottom-color: color(var(--button-bg-color-danger) shade(10%));
+      box-shadow: none;
     }
   }
 
@@ -235,7 +276,7 @@ button,
     border-top-color: color(var(--button-bg-color-light) tint(10%));
     border-bottom-color: color(var(--button-bg-color-light) shade(10%));
 
-    &:hover:not(:disabled, .disabled) {
+    &:hover {
       color: var(--button-color-light);
       background-color: color(var(--button-bg-color-light) shade(10%));
       border-color: color(var(--button-bg-color-light) shade(10%));
@@ -243,17 +284,25 @@ button,
       border-bottom-color: color(var(--button-bg-color-light) shade(20%));
     }
 
-    &:active:not(:disabled, .disabled),
-    &.active:not(:disabled, .disabled) {
+    &:active,
+    &.active {
       background-color: color(var(--button-bg-color-light) shade(10%));
       border-color: color(var(--button-bg-color-light) shade(10%));
       border-top-color: color(var(--button-bg-color-light) shade(20%));
       border-bottom-color: color(var(--button-bg-color-light) shade(10%));
     }
 
-    &:focus:not(:disabled, .disabled) {
+    &:focus {
       outline: none;
       box-shadow: 0 0 0 var(--button-focus-width) color(var(--button-bg-color-light) alpha(50%));
+    }
+
+    &:disabled,
+    &.disabled {
+      background-color: color(var(--button-bg-color-light) shade(10%));
+      border-top-color: color(var(--button-bg-color-light) tint(10%));
+      border-bottom-color: color(var(--button-bg-color-light) shade(10%));
+      box-shadow: none;
     }
   }
 
@@ -264,7 +313,7 @@ button,
     border-top-color: color(var(--button-bg-color-dark) tint(10%));
     border-bottom-color: color(var(--button-bg-color-dark) shade(10%));
 
-    &:hover:not(:disabled, .disabled) {
+    &:hover {
       color: var(--button-color-dark);
       background-color: color(var(--button-bg-color-dark) shade(10%));
       border-color: color(var(--button-bg-color-dark) shade(10%));
@@ -272,17 +321,25 @@ button,
       border-bottom-color: color(var(--button-bg-color-dark) shade(20%));
     }
 
-    &:active:not(:disabled, .disabled),
-    &.active:not(:disabled, .disabled) {
+    &:active,
+    &.active {
       background-color: color(var(--button-bg-color-dark) shade(10%));
       border-color: color(var(--button-bg-color-dark) shade(10%));
       border-top-color: color(var(--button-bg-color-dark) shade(20%));
       border-bottom-color: color(var(--button-bg-color-dark) shade(10%));
     }
 
-    &:focus:not(:disabled, .disabled) {
+    &:focus {
       outline: none;
       box-shadow: 0 0 0 var(--button-focus-width) color(var(--button-bg-color-dark) alpha(50%));
+    }
+
+    &:disabled,
+    &.disabled {
+      background-color: color(var(--button-bg-color-dark) shade(10%));
+      border-top-color: color(var(--button-bg-color-dark) tint(10%));
+      border-bottom-color: color(var(--button-bg-color-dark) shade(10%));
+      box-shadow: none;
     }
   }
 
@@ -301,8 +358,8 @@ button,
     box-shadow: none;
   }
 
-  &.button-link:hover:not(:disabled, .disabled),
-  &.button-link:focus:not(:disabled, .disabled) {
+  &.button-link:hover,
+  &.button-link:focus {
     border-color: transparent;
     background-color: transparent;
     color: var(--link-color-hover);
