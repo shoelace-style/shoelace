@@ -54,7 +54,7 @@ strong {
 }
 
 blockquote {
-  font-size: var(--font-size-big);
+  font-size: 120%;
   border-left: solid .4rem var(--component-border-color);
   padding: .5rem .5rem .5rem 1rem;
   margin-bottom: 1.5rem;

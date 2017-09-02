@@ -205,7 +205,6 @@
 
   --font-family: var(--font-system);
   --font-size: 1rem; /* Most browsers use a default font size of 16px */
-  --font-size-big: 1.25rem;
   --font-size-small: 80%;
   --font-weight-light: 300;
   --font-weight: 400;
