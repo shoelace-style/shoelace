@@ -234,6 +234,11 @@ $(&#39;#my-dropdown&#39;).removeClass(&#39;active&#39;);
           $(this).addClass('current');
         }
       });
+
+      // Intercept dropdown clicks for the demo
+      $('.dropdown').on('select', function(event) {
+        event.preventDefault();
+      });
     });
   </script>
   <script async defer src="https://buttons.github.io/buttons.js"></script>

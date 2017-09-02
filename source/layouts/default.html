@@ -99,6 +99,11 @@
           $(this).addClass('current');
         }
       });
+
+      // Intercept dropdown clicks for the demo
+      $('.dropdown').on('select', function(event) {
+        event.preventDefault();
+      });
     });
   </script>
   {{#each scripts}}
