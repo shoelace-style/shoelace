@@ -111,19 +111,19 @@ Buttons can be styled to look like normal links with the `button-link` modifier.
 Buttons can be given a loading state with the `button-loader` modifier. This will make the button text invisible and display a loader using the `::after` pseudo-element. The button’s width will not be affected.
 
 ```html
-<button type="button" class="button-loader button-xs">XS</button>
-<button type="button" class="button-loader button-sm">SM</button>
-<button type="button" class="button-loader">Default</button>
-<button type="button" class="button-loader button-lg">LG</button>
-<button type="button" class="button-loader button-xl">XL</button>
+<button type="button" class="button-loader button-xs">Button</button>
+<button type="button" class="button-loader button-sm">Button</button>
+<button type="button" class="button-loader">Button</button>
+<button type="button" class="button-loader button-lg">Button</button>
+<button type="button" class="button-loader button-xl">Button</button>
 ```
 
 <div class="input-field">
-  <button type="button" class="button-loader button-xs">XS</button>
-  <button type="button" class="button-loader button-sm">SM</button>
-  <button type="button" class="button-loader">Default</button>
-  <button type="button" class="button-loader button-lg">LG</button>
-  <button type="button" class="button-loader button-xl">XL</button>
+  <button type="button" class="button-loader button-xs">Button</button>
+  <button type="button" class="button-loader button-sm">Button</button>
+  <button type="button" class="button-loader">Button</button>
+  <button type="button" class="button-loader button-lg">Button</button>
+  <button type="button" class="button-loader button-xl">Button</button>
 </div>
 
 Loader buttons also work with button variations.
