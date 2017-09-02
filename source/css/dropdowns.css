@@ -53,18 +53,20 @@
       overflow-x: hidden;
       text-overflow: ellipsis;
 
-      &:focus:not(.disabled) {
+      &:focus {
         outline: none;
         color: var(--dropdown-color);
         background-color: color(var(--dropdown-bg-color) shade(5%));
       }
 
-      &:hover:not(.disabled) {
+      &:hover {
         color: var(--dropdown-color-hover);
         background-color: var(--dropdown-bg-color-hover);
       }
 
       &.disabled {
+        background-color: transparent;
+        color: var(--dropdown-color);
         outline: none;
         cursor: not-allowed;
         opacity: .5;
