@@ -286,6 +286,10 @@
   --dropdown-offset-y: 1px;
   --dropdown-z-index: 100;
 
+  --dropdown-caret-color: currentcolor;
+  --dropdown-caret-size: .5em;
+  --dropdown-caret-width: 2px;
+
   --dropdown-divider-color: var(--component-border-color);
   --dropdown-divider-width: var(--component-border-width);
 

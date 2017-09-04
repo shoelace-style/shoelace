@@ -4,20 +4,22 @@
   position: relative;
   display: inline-block;
 
-  /* Trigger */
   & .dropdown-trigger::after {
-    content: '▼';
-    font-family: var(--font-system);
-    font-size: .6em;
-    vertical-align: middle;
-    margin-left: .5em;
+    content: '';
+    width: var(--dropdown-caret-size);
+    height: var(--dropdown-caret-size);
+    border-top: solid var(--dropdown-caret-width) var(--dropdown-caret-color);
+    border-right: solid var(--dropdown-caret-width) var(--dropdown-caret-color);
+    margin-left: var(--dropdown-caret-size);
+    margin-top: calc(var(--dropdown-caret-size) * -1);
+    transform: rotate(135deg);
     display: inline-block;
-    transform: scaleY(.75);
-    margin-top: -.2em;
+    vertical-align: middle;
   }
 
   &.dropdown-top .dropdown-trigger::after {
-    transform: scaleY(.75) rotate(180deg);
+    transform: rotate(315deg);
+    margin-top: 0;
   }
 
   /* Menu */
