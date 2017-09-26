@@ -326,6 +326,9 @@
   --input-addon-bg-color: var(--component-bg-color);
   --input-addon-color: var(--body-color-muted);
 
+  --input-hint-color: var(--body-color-muted);
+  --input-hint-font-size: var(--font-size-small);
+
   --input-icon-width: 2em;
   --input-icon-offset: .5em;
   --input-icon-color: var(--state-secondary);

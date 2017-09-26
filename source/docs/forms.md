@@ -260,6 +260,41 @@ Form controls and buttons can be grouped by wrapping them in `input-group` conta
   <button type="button">Option 3</button>
 </div>
 
+### Input Hints
+
+You can add textual hints below form controls with the `input-hint` class.
+
+```html
+<div class="input-field">
+  <label>Name</label>
+  <input type="text">
+  <p class="input-hint">What do people call you?</p>
+</div>
+
+<div class="input-field">
+  <label>Age</label>
+  <input type="number">
+  <p class="input-hint">Enter your age in years</p>
+</div>
+```
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="input-field">
+      <label>Name</label>
+      <input type="text">
+      <p class="input-hint">What do people call you?</p>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="input-field">
+      <label>Age</label>
+      <input type="number">
+      <p class="input-hint">Enter your age in years</p>
+    </div>
+  </div>
+</div>
+
 ### Input Addons
 
 To create an input addon, use `<span class="input-addon">`. Addons can appear anywhere inside an input group. Use the `input-addon-[xs|sm|lg|xl]` modifiers to change the size to match adjacent form controls.

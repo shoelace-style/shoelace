@@ -257,9 +257,17 @@ input[type="range"] {
   }
 }
 
-/* Input singles */
+/* Input fields */
 .input-field {
   margin-bottom: 1.5rem;
+}
+
+/* Input hints */
+.input-hint {
+  font-size: var(--input-hint-font-size);
+  color: var(--input-hint-color);
+  margin: .25rem 0 0 0;
+  display: block;
 }
 
 /* Input groups */

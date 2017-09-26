@@ -291,6 +291,37 @@
   <button type="button">Option 3</button>
 </div>
 
+<h3 id="input-hints">Input Hints</h3>
+<p>You can add textual hints below form controls with the <code>input-hint</code> class.</p>
+<pre><code class="lang-html">&lt;div class=&quot;input-field&quot;&gt;
+  &lt;label&gt;Name&lt;/label&gt;
+  &lt;input type=&quot;text&quot;&gt;
+  &lt;p class=&quot;input-hint&quot;&gt;What do people call you?&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;input-field&quot;&gt;
+  &lt;label&gt;Age&lt;/label&gt;
+  &lt;input type=&quot;number&quot;&gt;
+  &lt;p class=&quot;input-hint&quot;&gt;Enter your age in years&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+<div class="row">
+  <div class="col-sm-6">
+    <div class="input-field">
+      <label>Name</label>
+      <input type="text">
+      <p class="input-hint">What do people call you?</p>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="input-field">
+      <label>Age</label>
+      <input type="number">
+      <p class="input-hint">Enter your age in years</p>
+    </div>
+  </div>
+</div>
+
 <h3 id="input-addons">Input Addons</h3>
 <p>To create an input addon, use <code>&lt;span class=&quot;input-addon&quot;&gt;</code>. Addons can appear anywhere inside an input group. Use the <code>input-addon-[xs|sm|lg|xl]</code> modifiers to change the size to match adjacent form controls.</p>
 <pre><code class="lang-html">&lt;div class=&quot;input-group&quot;&gt;
