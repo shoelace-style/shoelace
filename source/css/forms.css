@@ -262,14 +262,6 @@ input[type="range"] {
   margin-bottom: 1.5rem;
 }
 
-/* Input hints */
-.input-hint {
-  font-size: var(--input-hint-font-size);
-  color: var(--input-hint-color);
-  margin: .25rem 0 0 0;
-  display: block;
-}
-
 /* Input groups */
 .input-group {
   width: 100%;
@@ -326,6 +318,20 @@ input[type="range"] {
   & .file-button input[type="file"]:focus + label {
     transform: translateZ(0);
   }
+}
+
+/* Input hints */
+.input-hint {
+  font-size: var(--input-hint-font-size);
+  color: var(--input-hint-color);
+  margin: .25rem 0 0 0;
+  display: block;
+}
+
+/* Input groups can have input hints, but we need to adjust margins a bit */
+.input-group + .input-hint {
+  margin-top: -1.25rem; /* input group margin - input hint margin */
+  margin-bottom: 1.5rem;
 }
 
 /* Input addons */
