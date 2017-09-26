@@ -1,0 +1,6 @@
+{
+  // Ignore CSS validation errors so we can use
+  // PostCSS features. This lets stylelint handle
+  // validation instead.
+  "css.validate": false
+}
