@@ -73,13 +73,13 @@ For initial rendering, make sure the appropriate tab and tab pane have the `acti
 
 ### Vertical Tabs
 
-Tabs can be made vertical when used with the [grid system](grid-system.html).
+Tabs can be made vertical when used with the [grid system](grid-system.html) and `tabs-nav-block`.
 
 ```html
 <div class="tabs">
   <div class="row">
     <div class="col-4">
-      <nav class="tabs-nav">
+      <nav class="tabs-nav tabs-nav-block">
         <a href="#tab-1-example-2" class="active">Tab 1</a>
         <a href="#tab-2-example-2">Tab 2</a>
         <a href="#tab-3-example-2">Tab 3</a>
@@ -96,10 +96,10 @@ Tabs can be made vertical when used with the [grid system](grid-system.html).
 </div>
 ```
 
-<div class="tabs tabs-vertical-example">
+<div class="tabs">
   <div class="row">
     <div class="col-4">
-      <nav class="tabs-nav">
+      <nav class="tabs-nav tabs-nav-block">
         <a href="#tab-1-example-2" class="active">Tab 1</a>
         <a href="#tab-2-example-2">Tab 2</a>
         <a href="#tab-3-example-2">Tab 3</a>

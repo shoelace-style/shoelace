@@ -141,11 +141,6 @@ a code {
   margin: 0 .5rem 1rem .5rem;
 }
 
-/* Tabs example */
-.tabs-vertical-example .tabs-nav a {
-  display: block;
-}
-
 /* Grid example */
 .grid-example {
   margin-bottom: 1.5rem;

@@ -46,6 +46,10 @@
         cursor: not-allowed;
       }
     }
+
+    &.tabs-nav-block a {
+      display: block;
+    }
   }
 
   & .tabs-pane {
