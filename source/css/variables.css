@@ -524,7 +524,6 @@
   --tab-color-disabled: var(--body-color-muted);
   --tab-padding-x: var(--component-padding-x);
   --tab-padding-y: calc(var(--component-padding-y) / 2);
-  --tab-focus-width: var(--component-focus-width);
   --tab-speed: var(--component-speed);
 
   --tab-pane-border-color: var(--component-border-color);

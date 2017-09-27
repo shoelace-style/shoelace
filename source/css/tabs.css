@@ -23,17 +23,6 @@
         text-decoration: none;
       }
 
-      &:focus {
-        outline: none;
-
-        &:not(.disabled) {
-          box-shadow: 0 0 0 var(--tab-focus-width) color(var(--tab-bg-color-active) alpha(50%));
-
-          /* Force a new stacking context so focus rings don't get truncated by adjacent elements */
-          transform: translateZ(0);
-        }
-      }
-
       &.active {
         color: var(--tab-color-active);
         background-color: var(--tab-bg-color-active);
