@@ -8,7 +8,7 @@ description: How to install Shoelace.css.
 
 There are two ways to use Shoelace. If you want to get things up and running quickly, use the `dist/` version or the [CDN version](#cdn). This version isn’t customizable, nor can you use future CSS features with it. It’s primarily intended for prototyping.
 
-If you’re developing a production app, you should [build Shoelace from source](#building-from-source). This version is completely customizable, modular, and let’s you use future CSS features _today_.
+If you’re developing a production app, you should [build Shoelace from source](#building-from-source). This version is completely customizable, modular, and lets you use future CSS features _today_.
 
 **Note:** To make certain components interactive (e.g. dropdowns and tabs), you’ll need to load [jQuery](https://cdnjs.com/libraries/jquery/) or [Zepto](https://cdnjs.com/libraries/zepto/) before `shoelace.js`.
 
