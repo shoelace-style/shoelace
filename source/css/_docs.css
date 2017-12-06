@@ -2,6 +2,25 @@ body {
   border-top: solid .3rem #0074d9;
 }
 
+.skip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: .25rem .5rem;
+  background-color: #0074d9;
+  color: #fff;
+  transition: all .1s;
+  transform: translateY(-100%);
+}
+
+.skip:hover,
+.skip:focus {
+  text-decoration: none;
+  color: #fff;
+  background-color: #0068c3;
+  transform: none;
+}
+
 #head {
   padding: 0 2rem;
   margin: 2rem 0;
