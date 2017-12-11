@@ -15,6 +15,7 @@
   <title>{{title}}</title>
 </head>
 <body>
+  <a href="#content" class="skip">Skip to content</a>
 
   <header id="head" class="text-center">
     <h1>
@@ -30,7 +31,7 @@
 
   <main class="container">
     <div class="row">
-      <div class="col-md-3">
+      <nav class="col-md-3">
         <ul id="nav">
           <li><a href="installing.html">Installing</a></li>
           <li><a href="customizing.html">Customizing</a></li>
@@ -52,7 +53,7 @@
           <li><a href="browser-support.html">Browser Support</a></li>
           <li><a href="attribution.html">Attribution</a></li>
         </ul>
-      </div>
+      </nav>
 
       <div class="col-md-9">
         <div id="content">
@@ -61,7 +62,7 @@
       </div>
   </main>
 
-  <footer id="foot">
+  <footer id="foot" role="contentinfo">
     <a href="../index.html">
       <img src="../source/img/wordmark.svg" alt="Shoelace logo">
     </a>
