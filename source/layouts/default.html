@@ -20,7 +20,7 @@
   <header id="head" class="text-center">
     <h1>
       <a href="../index.html">
-        <img src="../source/img/wordmark.svg" alt="Shoelace logo">
+        <img src="../source/img/wordmark.svg" alt="Shoelace">
       </a>
     </h1>
 
@@ -29,7 +29,7 @@
     </p>
   </header>
 
-  <main class="container">
+  <div class="container">
     <div class="row">
       <nav class="col-md-3">
         <ul id="nav">
@@ -56,11 +56,11 @@
       </nav>
 
       <div class="col-md-9">
-        <div id="content">
+        <main id="content" aria-label="content">
           {{{contents}}}
-        </div>
+        </main>
       </div>
-  </main>
+  </div>
 
   <footer id="foot" role="contentinfo">
     <a href="../index.html">
