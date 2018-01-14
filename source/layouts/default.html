@@ -64,7 +64,7 @@
 
   <footer id="foot" role="contentinfo">
     <a href="../index.html">
-      <img src="../source/img/wordmark.svg" alt="Shoelace logo">
+      <img src="../source/img/wordmark.svg" alt="Shoelace - home">
     </a>
 
     <p class="text-small text-secondary">
@@ -79,7 +79,7 @@
     </p>
 
     <p>
-      <a href="https://twitter.com/shoelacecss" class="button button-info" style="margin-bottom: 1.2rem;">Follow</a>
+      <a href="https://twitter.com/shoelacecss" class="button button-info" style="margin-bottom: 1.2rem;" aria-label="Follow shoelace on twitter">Follow</a>
       <a href="https://paypal.me/claviska" class="button button-success" style="margin-bottom: 1.2rem;">Donate</a>
     </p>
 
@@ -98,6 +98,7 @@
       $('#nav a').each(function() {
         if(this.pathname === location.pathname) {
           $(this).addClass('current');
+          $(this).attr('aria-current', 'page');
         }
       });
 
