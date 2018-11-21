@@ -141,7 +141,7 @@ textarea.input-xl {
   height: auto;
   resize: vertical;
   line-height: var(--line-height);
-  white-space: normal;
+  white-space: pre-wrap;
 }
 
 /* Range */
