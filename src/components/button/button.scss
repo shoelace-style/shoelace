@@ -230,11 +230,13 @@ $button-loader-animation: 1s linear infinite spin;
   }
 
   .s-button__prefix:not(:empty) {
+    margin-left: -0.25em;
     margin-right: 0.25em;
   }
 
   .s-button__suffix:not(:empty) {
     margin-left: 0.25em;
+    margin-right: -0.25em;
   }
 }
 
