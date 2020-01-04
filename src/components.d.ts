@@ -28,9 +28,17 @@ export namespace Components {
     */
     'outline': boolean;
     /**
+    * Removes focus from the button.
+    */
+    'removeFocus': () => Promise<void>;
+    /**
     * Set to true to draw a rounded button.
     */
     'round': boolean;
+    /**
+    * Sets focus on the button.
+    */
+    'setFocus': () => Promise<void>;
     /**
     * The button's size, one of `small`, `medium`, or `large`.
     */

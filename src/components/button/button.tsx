@@ -1,4 +1,4 @@
-import { Component, Prop, h } from '@stencil/core';
+import { Component, Method, Prop, h } from '@stencil/core';
 
 @Component({
   tag: 's-button',
@@ -7,6 +7,8 @@ import { Component, Prop, h } from '@stencil/core';
   shadow: false
 })
 export class ShoelaceButton {
+  button: HTMLButtonElement;
+
   /** The button's type, one of `default`, `primary`, `success`, `info`, `warning`, `danger`, or `text`. */
   @Prop() type = 'default';
 
@@ -28,9 +30,22 @@ export class ShoelaceButton {
   /** Set to true to draw the button in a loading state. */
   @Prop() loading = false;
 
+  /** Sets focus on the button. */
+  @Method()
+  setFocus() {
+    this.button.focus();
+  }
+
+  /** Removes focus from the button. */
+  @Method()
+  removeFocus() {
+    this.button.blur();
+  }
+
   render() {
     return (
       <button
+        ref={el => (this.button = el)}
         class={{
           's-button': true,
 
