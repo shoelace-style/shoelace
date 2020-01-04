@@ -1,0 +1,214 @@
+@import 'variables';
+@import './mixins';
+
+$button-font-family: $font-sans-serif !default;
+$button-font-weight: 500 !default;
+$button-font-size-sm: 12px !default;
+$button-font-size-md: 14px !default;
+$button-font-size-lg: 16px !default;
+
+$button-height-sm: $input-height-sm !default;
+$button-height-md: $input-height-md !default;
+$button-height-lg: $input-height-lg !default;
+
+$button-border-width-sm: 1px !default;
+$button-border-width-md: 1px !default;
+$button-border-width-lg: 1px !default;
+
+$button-border-radius-sm: 4px !default;
+$button-border-radius-md: 4px !default;
+$button-border-radius-lg: 4px !default;
+
+$button-padding-x-sm: 14px !default;
+$button-padding-x-md: 20px !default;
+$button-padding-x-lg: 26px !default;
+
+$button-transition-speed: 100ms !default;
+
+:host {
+  display: inline-block;
+}
+
+// Standard buttons
+.s-button:not(.s-button--outline) {
+  &.s-button--default {
+    @include button(
+      $color: $color-gray-40,
+      $background-color: $color-white,
+      $border-color: $color-gray-80,
+      $color--hover: tint($color-primary, 20%),
+      $background-color--hover: tint($color-primary, 90%),
+      $border-color--hover: tint($color-primary, 60%),
+      $color--focus: tint($color-primary, 20%),
+      $background-color--focus: tint($color-primary, 90%),
+      $border-color--focus: tint($color-primary, 60%),
+      $color--active: $color-primary,
+      $background-color--active: tint($color-primary, 90%),
+      $border-color--active: $color-primary
+    );
+  }
+
+  &.s-button--primary {
+    @include button-solid($color-white, $color-primary);
+  }
+
+  &.s-button--success {
+    @include button-solid($color-white, $color-success);
+  }
+
+  &.s-button--info {
+    @include button-solid($color-white, $color-info);
+  }
+
+  &.s-button--warning {
+    @include button-solid($color-white, $color-warning);
+  }
+
+  &.s-button--danger {
+    @include button-solid($color-white, $color-danger);
+  }
+}
+
+// Outline buttons
+.s-button.s-button--outline {
+  &.s-button--default {
+    @include button(
+      $color: $color-gray-40,
+      $background-color: $color-white,
+      $border-color: $color-gray-80,
+      $color--hover: tint($color-primary, 20%),
+      $background-color--hover: $color-white,
+      $border-color--hover: tint($color-primary, 20%),
+      $color--focus: tint($color-primary, 20%),
+      $background-color--focus: $color-white,
+      $border-color--focus: tint($color-primary, 20%),
+      $color--active: $color-primary,
+      $background-color--active: $color-white,
+      $border-color--active: $color-primary
+    );
+  }
+
+  &.s-button--primary {
+    @include button-outline($color-white, $color-primary);
+  }
+
+  &.s-button--success {
+    @include button-outline($color-white, $color-success);
+  }
+
+  &.s-button--info {
+    @include button-outline($color-white, $color-info);
+  }
+
+  &.s-button--warning {
+    @include button-outline($color-white, $color-warning);
+  }
+
+  &.s-button--danger {
+    @include button-outline($color-white, $color-danger);
+  }
+}
+
+// Text buttons
+.s-button--text {
+  @include button(
+    $color: $color-gray-20,
+    $background-color: transparent,
+    $border-color: transparent,
+    $color--hover: $color-gray-40,
+    $background-color--hover: transparent,
+    $border-color--hover: transparent,
+    $color--focus: $color-gray-40,
+    $background-color--focus: transparent,
+    $border-color--focus: transparent,
+    $color--active: $color-gray-10,
+    $background-color--active: transparent,
+    $border-color--active: transparent
+  );
+}
+
+// Size modifiers
+.s-button--small {
+  font-size: $button-font-size-sm;
+  height: $button-height-sm;
+  line-height: $button-height-sm - 2px; // top + bottom border
+  border-radius: $button-border-radius-sm;
+  padding: 0 $button-padding-x-sm;
+}
+
+.s-button--medium {
+  font-size: $button-font-size-md;
+  height: $button-height-md;
+  line-height: $button-height-md - 2px; // top + bottom border
+  border-radius: $button-border-radius-md;
+  padding: 0 $button-padding-x-md;
+}
+
+.s-button--large {
+  font-size: $button-font-size-lg;
+  height: $button-height-lg;
+  line-height: $button-height-lg - 2px; // top + bottom border
+  border-radius: $button-border-radius-lg;
+  padding: 0 $button-padding-x-lg;
+}
+
+// Round modifier
+.s-button--round {
+  &.s-button--small {
+    border-radius: $button-height-sm;
+  }
+
+  &.s-button--medium {
+    border-radius: $button-height-md;
+  }
+
+  &.s-button--large {
+    border-radius: $button-height-lg;
+  }
+}
+
+// Circle modifier
+.s-button--circle {
+  padding-left: 0;
+  padding-right: 0;
+
+  &.s-button--small {
+    width: $button-height-sm;
+    border-radius: 50%;
+  }
+
+  &.s-button--medium {
+    width: $button-height-md;
+    border-radius: 50%;
+  }
+
+  &.s-button--large {
+    width: $button-height-lg;
+    border-radius: 50%;
+  }
+
+  .s-button__prefix,
+  .s-button__suffix {
+    display: none;
+  }
+}
+
+// Slots
+.s-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .s-button__prefix:empty,
+  .s-button__suffix:empty {
+    display: none;
+  }
+
+  .s-button__prefix:not(:empty) {
+    margin-right: 0.25em;
+  }
+
+  .s-button__suffix:not(:empty) {
+    margin-left: 0.25em;
+  }
+}

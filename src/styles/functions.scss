@@ -1,0 +1,18 @@
+// Slightly lighten a color
+@function tint($color, $percentage) {
+  @return mix(white, $color, $percentage);
+}
+
+// Slightly darken a color
+@function shade($color, $percentage) {
+  @return mix(black, $color, $percentage);
+}
+
+// Returns the optimal text color based on the background color
+@function bestTextColor($backgroundColor, $dark: #000, $light: #fff) {
+  @if (lightness($backgroundColor) > 50) {
+    @return $dark;
+  } @else {
+    @return $light;
+  }
+}

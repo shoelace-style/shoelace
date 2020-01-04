@@ -1,0 +1,34 @@
+{
+  "defaultSeverity": "error",
+  "extends": ["tslint-ionic-rules/strict", "tslint-stencil/default"],
+  "linterOptions": {
+    "exclude": ["**/*.spec.ts", "**/*.spec.tsx"]
+  },
+  "jsRules": {},
+  "rules": {
+    "component-member-order": [
+      true,
+      {
+        "order": [
+          "own-prop",
+          "element",
+          "state",
+          "watched-state",
+          "internal-prop",
+          "prop",
+          "watched-prop",
+          "event",
+          "lifecycle",
+          "listen",
+          "method",
+          "own-method",
+          "stencil-method"
+        ],
+        "alphabetical": false
+      }
+    ],
+    "trailing-comma": false,
+    "no-console": false
+  },
+  "rulesDirectory": []
+}

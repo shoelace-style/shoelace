@@ -1,0 +1,38 @@
+@import 'functions';
+
+// Colors
+$color-primary: #409eff !default;
+$color-success: #67c23a !default;
+$color-info: #909399 !default;
+$color-warning: #e6a23c !default;
+$color-danger: #f56c6c !default;
+$color-white: #fff !default;
+$color-black: #00070b !default;
+
+$color-gray-10: tint($color-black, 10%) !default;
+$color-gray-20: tint($color-black, 20%) !default;
+$color-gray-30: tint($color-black, 30%) !default;
+$color-gray-40: tint($color-black, 40%) !default;
+$color-gray-50: tint($color-black, 50%) !default;
+$color-gray-60: tint($color-black, 60%) !default;
+$color-gray-70: tint($color-black, 70%) !default;
+$color-gray-80: tint($color-black, 80%) !default;
+$color-gray-90: tint($color-black, 90%) !default;
+
+// Fonts
+$font-sans-serif: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
+  'Helvetica Neue', sans-serif !default;
+$font-serif: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif !default;
+$font-monospace: Menlo, Monaco, Courier New, monospace !default;
+$font-size: 16px !default;
+$font-weight-light: 300 !default;
+$font-weight-normal: 400 !default;
+$font-weight-bold: 500 !default;
+
+$text-color-primary: $color-gray-20;
+$text-color-secondary: $color-gray-60 !default;
+
+// Inputs
+$input-height-sm: 32px !default;
+$input-height-md: 38px !default;
+$input-height-lg: 44px !default;

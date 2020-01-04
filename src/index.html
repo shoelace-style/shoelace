@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+    <meta name="description" content="For when you don’t need the whole boot." />
+    <title>Shoelace: A forward-thinking component library built with Web Components</title>
+    <link rel="icon" href="/assets/images/favicon.png" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <script type="module" src="/build/shoelace.esm.js"></script>
+    <script nomodule src="/build/shoelace.js"></script>
+
+    <style>
+      html,
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
+          'Helvetica Neue', sans-serif;
+        font-size: 16px;
+      }
+
+      h1 img {
+        display: block;
+        max-width: 20rem;
+        margin: 2rem auto;
+      }
+    </style>
+  </head>
+  <body>
+    <s-button type="default">Default</s-button>
+    <s-button type="primary">Primary</s-button>
+    <s-button type="success">Success</s-button>
+    <s-button type="info">Info</s-button>
+    <s-button type="warning">Warning</s-button>
+    <s-button type="danger">Danger</s-button>
+
+    <br /><br />
+
+    <s-button type="default" outline>Default</s-button>
+    <s-button type="primary" outline>Primary</s-button>
+    <s-button type="success" outline>Success</s-button>
+    <s-button type="info" outline>Info</s-button>
+    <s-button type="warning" outline>Warning</s-button>
+    <s-button type="danger" outline>Danger</s-button>
+
+    <br /><br />
+
+    <s-button type="default" round>Default</s-button>
+    <s-button type="primary" round>Primary</s-button>
+    <s-button type="success" round>Success</s-button>
+    <s-button type="info" round>Info</s-button>
+    <s-button type="warning" round>Warning</s-button>
+    <s-button type="danger" round>Danger</s-button>
+
+    <br /><br />
+
+    <s-button type="default" round outline>Default</s-button>
+    <s-button type="primary" round outline>Primary</s-button>
+    <s-button type="success" round outline>Success</s-button>
+    <s-button type="info" round outline>Info</s-button>
+    <s-button type="warning" round outline>Warning</s-button>
+    <s-button type="danger" round outline>Danger</s-button>
+
+    <br /><br />
+
+    <s-button type="text">Text</s-button>
+    <s-button type="text" disabled>Text</s-button>
+
+    <br /><br />
+
+    <s-button size="small">Small</s-button>
+    <s-button size="medium">Medium</s-button>
+    <s-button size="large">Large</s-button>
+
+    <br /><br />
+
+    <s-button type="primary" round outline size="small">Primary</s-button>
+    <s-button type="primary" round outline size="medium">Primary</s-button>
+    <s-button type="primary" round outline size="large">Primary</s-button>
+
+    <br /><br />
+
+    <s-button type="default" size="small">
+      <span slot="prefix"><i class="fa fa-gear"></i></span>
+      Default
+      <span slot="suffix"><i class="fa fa-caret-down"></i></span>
+    </s-button>
+
+    <s-button type="default" size="medium">
+      <span slot="prefix"><i class="fa fa-gear"></i></span>
+      Default
+      <span slot="suffix"><i class="fa fa-caret-down"></i></span>
+    </s-button>
+
+    <s-button type="default" size="large">
+      <span slot="prefix"><i class="fa fa-gear"></i></span>
+      Default
+      <span slot="suffix"><i class="fa fa-caret-down"></i></span>
+    </s-button>
+
+    <br /><br />
+
+    <s-button type="default" size="small" circle>
+      <i class="fa fa-pencil"></i>
+    </s-button>
+
+    <s-button type="default" size="medium" circle>
+      <i class="fa fa-pencil"></i>
+    </s-button>
+
+    <s-button type="default" size="large" circle>
+      <i class="fa fa-pencil"></i>
+    </s-button>
+
+    <br /><br />
+
+    <s-button type="primary" size="small" circle>
+      <i class="fa fa-search"></i>
+    </s-button>
+
+    <s-button type="primary" size="medium" circle>
+      <i class="fa fa-search"></i>
+    </s-button>
+
+    <s-button type="primary" size="large" circle>
+      <i class="fa fa-search"></i>
+    </s-button>
+  </body>
+</html>

@@ -1,0 +1,84 @@
+// Generates button styles
+@mixin button(
+  $color,
+  $background-color,
+  $border-color,
+  $color--hover,
+  $background-color--hover,
+  $border-color--hover,
+  $color--focus,
+  $background-color--focus,
+  $border-color--focus,
+  $color--active,
+  $background-color--active,
+  $border-color--active
+) {
+  display: inline-block;
+  font-family: $button-font-family;
+  font-weight: $button-font-weight;
+  color: $color;
+  background-color: $background-color;
+  border: solid 1px $border-color;
+  transition: $button-transition-speed background-color, $button-transition-speed color, $button-transition-speed border;
+  cursor: pointer;
+
+  &:hover:not(:disabled) {
+    background-color: $background-color--hover;
+    border-color: $border-color--hover;
+    color: $color--hover;
+  }
+
+  &:focus:not(:disabled) {
+    background-color: $background-color--focus;
+    border-color: $border-color--focus;
+    color: $color--focus;
+    outline: none;
+  }
+
+  &:active:not(:disabled) {
+    background-color: $background-color--active;
+    border-color: $border-color--active;
+    color: $color--active;
+  }
+
+  &[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// Shortcut mixin for solid buttons
+@mixin button-solid($color, $background-color) {
+  @include button(
+    $color: $color,
+    $background-color: $background-color,
+    $border-color: $background-color,
+    $color--hover: $color,
+    $background-color--hover: tint($background-color, 15%),
+    $border-color--hover: tint($background-color, 15%),
+    $color--focus: $color,
+    $background-color--focus: tint($background-color, 15%),
+    $border-color--focus: tint($background-color, 15%),
+    $color--active: $color,
+    $background-color--active: shade($background-color, 15%),
+    $border-color--active: shade($background-color, 15%)
+  );
+}
+
+// Shortcut mixin for outline buttons
+@mixin button-outline($color, $background-color) {
+  @include button(
+    $color: $background-color,
+    $background-color: tint($background-color, 90%),
+    $border-color: tint($background-color, 60%),
+    $color--hover: $color,
+    $background-color--hover: $background-color,
+    $border-color--hover: $background-color,
+    $color--focus: $color,
+    $background-color--focus: $background-color,
+    $border-color--focus: $background-color,
+    $color--active: $color,
+    $background-color--active: shade($background-color, 15%),
+    $border-color--active: shade($background-color, 15%)
+  );
+}
