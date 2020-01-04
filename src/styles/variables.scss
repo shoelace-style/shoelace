@@ -33,8 +33,8 @@ $text-color-primary: $color-gray-20;
 $text-color-secondary: $color-gray-60 !default;
 
 // Inputs
-$input-height-sm: 32px !default;
-$input-height-md: 38px !default;
-$input-height-lg: 44px !default;
+$input-height--small: 32px !default;
+$input-height--medium: 38px !default;
+$input-height--large: 44px !default;
 
 $input-border-color: tint($color-black, 85%);

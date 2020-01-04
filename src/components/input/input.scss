@@ -2,24 +2,24 @@
 
 $input-font-family: $font-sans-serif !default;
 $input-font-weight: 400 !default;
-$input-font-size-sm: 12px !default;
-$input-font-size-md: 14px !default;
-$input-font-size-lg: 16px !default;
+$input-font-size--small: 12px !default;
+$input-font-size--medium: 14px !default;
+$input-font-size--large: 16px !default;
 
 $input-background-color: $color-white !default;
 $input-color: $color-gray-30 !default;
 
-$input-height-sm: $input-height-sm !default;
-$input-height-md: $input-height-md !default;
-$input-height-lg: $input-height-lg !default;
+$input-height--small: $input-height--small !default;
+$input-height--medium: $input-height--medium !default;
+$input-height--large: $input-height--large !default;
 
-$input-border-radius-sm: 4px !default;
-$input-border-radius-md: 4px !default;
-$input-border-radius-lg: 4px !default;
+$input-border-radius--small: 4px !default;
+$input-border-radius--medium: 4px !default;
+$input-border-radius--large: 4px !default;
 
-$input-padding-x-sm: 14px !default;
-$input-padding-x-md: 14px !default;
-$input-padding-x-lg: 14px !default;
+$input-padding-x--small: 14px !default;
+$input-padding-x--medium: 14px !default;
+$input-padding-x--large: 14px !default;
 
 $input-placeholder-color: $color-gray-70;
 $input-transition-speed: 100ms !default;
@@ -68,34 +68,34 @@ $input-transition-speed: 100ms !default;
 
 // Size modifiers
 .s-input--small {
-  border-radius: $input-border-radius-sm;
+  border-radius: $input-border-radius--small;
 
   .s-input__control {
-    font-size: $input-font-size-sm;
-    height: $input-height-sm;
-    line-height: $input-height-sm - 2px; // top + bottom border
-    padding: 0 $input-padding-x-sm;
+    font-size: $input-font-size--small;
+    height: $input-height--small;
+    line-height: $input-height--small - 2px; // top + bottom border
+    padding: 0 $input-padding-x--small;
   }
 }
 
 .s-input--medium {
-  border-radius: $input-border-radius-md;
+  border-radius: $input-border-radius--medium;
 
   .s-input__control {
-    font-size: $input-font-size-md;
-    height: $input-height-md;
-    line-height: $input-height-md - 2px; // top + bottom border
-    padding: 0 $input-padding-x-md;
+    font-size: $input-font-size--medium;
+    height: $input-height--medium;
+    line-height: $input-height--medium - 2px; // top + bottom border
+    padding: 0 $input-padding-x--medium;
   }
 }
 
 .s-input--large {
-  border-radius: $input-border-radius-lg;
+  border-radius: $input-border-radius--large;
 
   .s-input__control {
-    font-size: $input-font-size-lg;
-    height: $input-height-lg;
-    line-height: $input-height-lg - 2px; // top + bottom border
-    padding: 0 $input-padding-x-lg;
+    font-size: $input-font-size--large;
+    height: $input-height--large;
+    line-height: $input-height--large - 2px; // top + bottom border
+    padding: 0 $input-padding-x--large;
   }
 }

@@ -3,21 +3,21 @@
 
 $button-font-family: $font-sans-serif !default;
 $button-font-weight: 500 !default;
-$button-font-size-sm: 12px !default;
-$button-font-size-md: 14px !default;
-$button-font-size-lg: 16px !default;
+$button-font-size--small: 12px !default;
+$button-font-size--medium: 14px !default;
+$button-font-size--large: 16px !default;
 
-$button-height-sm: $input-height-sm !default;
-$button-height-md: $input-height-md !default;
-$button-height-lg: $input-height-lg !default;
+$button-height--small: $input-height--small !default;
+$button-height--medium: $input-height--medium !default;
+$button-height--large: $input-height--large !default;
 
-$button-border-radius-sm: 4px !default;
-$button-border-radius-md: 4px !default;
-$button-border-radius-lg: 4px !default;
+$button-border-radius--small: 4px !default;
+$button-border-radius--medium: 4px !default;
+$button-border-radius--large: 4px !default;
 
-$button-padding-x-sm: 14px !default;
-$button-padding-x-md: 20px !default;
-$button-padding-x-lg: 26px !default;
+$button-padding-x--small: 14px !default;
+$button-padding-x--medium: 20px !default;
+$button-padding-x--large: 26px !default;
 
 $button-transition-speed: 100ms !default;
 $button-loader-animation: 1s linear infinite spin;
@@ -126,41 +126,41 @@ $button-loader-animation: 1s linear infinite spin;
 
 // Size modifiers
 .s-button--small {
-  font-size: $button-font-size-sm;
-  height: $button-height-sm;
-  line-height: $button-height-sm - 2px; // top + bottom border
-  border-radius: $button-border-radius-sm;
-  padding: 0 $button-padding-x-sm;
+  font-size: $button-font-size--small;
+  height: $button-height--small;
+  line-height: $button-height--small - 2px; // top + bottom border
+  border-radius: $button-border-radius--small;
+  padding: 0 $button-padding-x--small;
 }
 
 .s-button--medium {
-  font-size: $button-font-size-md;
-  height: $button-height-md;
-  line-height: $button-height-md - 2px; // top + bottom border
-  border-radius: $button-border-radius-md;
-  padding: 0 $button-padding-x-md;
+  font-size: $button-font-size--medium;
+  height: $button-height--medium;
+  line-height: $button-height--medium - 2px; // top + bottom border
+  border-radius: $button-border-radius--medium;
+  padding: 0 $button-padding-x--medium;
 }
 
 .s-button--large {
-  font-size: $button-font-size-lg;
-  height: $button-height-lg;
-  line-height: $button-height-lg - 2px; // top + bottom border
-  border-radius: $button-border-radius-lg;
-  padding: 0 $button-padding-x-lg;
+  font-size: $button-font-size--large;
+  height: $button-height--large;
+  line-height: $button-height--large - 2px; // top + bottom border
+  border-radius: $button-border-radius--large;
+  padding: 0 $button-padding-x--large;
 }
 
 // Round modifier
 .s-button--round {
   &.s-button--small {
-    border-radius: $button-height-sm;
+    border-radius: $button-height--small;
   }
 
   &.s-button--medium {
-    border-radius: $button-height-md;
+    border-radius: $button-height--medium;
   }
 
   &.s-button--large {
-    border-radius: $button-height-lg;
+    border-radius: $button-height--large;
   }
 }
 
@@ -170,17 +170,17 @@ $button-loader-animation: 1s linear infinite spin;
   padding-right: 0;
 
   &.s-button--small {
-    width: $button-height-sm;
+    width: $button-height--small;
     border-radius: 50%;
   }
 
   &.s-button--medium {
-    width: $button-height-md;
+    width: $button-height--medium;
     border-radius: 50%;
   }
 
   &.s-button--large {
-    width: $button-height-lg;
+    width: $button-height--large;
     border-radius: 50%;
   }
 
