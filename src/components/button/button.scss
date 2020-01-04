@@ -36,7 +36,7 @@ $button-loader-animation: 1s linear infinite spin;
     @include button(
       $color: $color-gray-40,
       $background-color: $color-white,
-      $border-color: $color-gray-80,
+      $border-color: $input-border-color,
       $color--hover: tint($color-primary, 20%),
       $background-color--hover: tint($color-primary, 90%),
       $border-color--hover: tint($color-primary, 60%),
@@ -76,7 +76,7 @@ $button-loader-animation: 1s linear infinite spin;
     @include button(
       $color: $color-gray-40,
       $background-color: $color-white,
-      $border-color: $color-gray-80,
+      $border-color: $input-border-color,
       $color--hover: tint($color-primary, 20%),
       $background-color--hover: $color-white,
       $border-color--hover: tint($color-primary, 20%),
