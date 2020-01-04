@@ -24,6 +24,7 @@ $button-padding-x-md: 20px !default;
 $button-padding-x-lg: 26px !default;
 
 $button-transition-speed: 100ms !default;
+$button-loader-animation: 1s linear infinite spin;
 
 :host {
   display: inline-block;
@@ -193,6 +194,30 @@ $button-transition-speed: 100ms !default;
   }
 }
 
+// Loading state
+.s-button--loading {
+  position: relative;
+  pointer-events: none;
+
+  .s-button__prefix,
+  .s-button__label,
+  .s-button__suffix {
+    visibility: hidden;
+  }
+
+  .s-button__loader {
+    position: absolute;
+    top: calc(50% - 0.5em - 2px);
+    left: calc(50% - 0.5em - 2px);
+    width: 1em;
+    height: 1em;
+    border: solid 2px currentColor;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    animation: $button-loader-animation;
+  }
+}
+
 // Slots
 .s-button {
   display: flex;
@@ -210,5 +235,14 @@ $button-transition-speed: 100ms !default;
 
   .s-button__suffix:not(:empty) {
     margin-left: 0.25em;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }

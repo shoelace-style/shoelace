@@ -16,9 +16,13 @@ export namespace Components {
     */
     'circle': boolean;
     /**
-    * Set to true to disable the button
+    * Set to true to disable the button.
     */
     'disabled': boolean;
+    /**
+    * Set to true to draw the button in a loading state.
+    */
+    'loading': boolean;
     /**
     * Set to true to draw an outlined button.
     */
@@ -58,9 +62,13 @@ declare namespace LocalJSX {
     */
     'circle'?: boolean;
     /**
-    * Set to true to disable the button
+    * Set to true to disable the button.
     */
     'disabled'?: boolean;
+    /**
+    * Set to true to draw the button in a loading state.
+    */
+    'loading'?: boolean;
     /**
     * Set to true to draw an outlined button.
     */

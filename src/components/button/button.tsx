@@ -22,8 +22,11 @@ export class ShoelaceButton {
   /** Set to true to draw a circle button. */
   @Prop() circle = false;
 
-  /** Set to true to disable the button */
+  /** Set to true to disable the button. */
   @Prop() disabled = false;
+
+  /** Set to true to draw the button in a loading state. */
+  @Prop() loading = false;
 
   render() {
     return (
@@ -46,6 +49,8 @@ export class ShoelaceButton {
           's-button--large': this.size === 'large',
 
           // Modifiers
+          's-button--disabled': this.disabled,
+          's-button--loading': this.loading,
           's-button--outline': this.outline,
           's-button--round': this.round,
           's-button--circle': this.circle
@@ -61,6 +66,8 @@ export class ShoelaceButton {
         <span class="s-button__suffix">
           <slot name="suffix" />
         </span>
+
+        {this.loading ? <span class="s-button__loader" /> : ''}
       </button>
     );
   }
