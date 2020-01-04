@@ -48,6 +48,72 @@ export namespace Components {
     */
     'type': string;
   }
+  interface SInput {
+    /**
+    * The input's autocomplete attribute.
+    */
+    'autocomplete': string;
+    /**
+    * The input's autofocus attribute.
+    */
+    'autofocus': boolean;
+    /**
+    * Set to true to disable the input.
+    */
+    'disabled': boolean;
+    /**
+    * The input's max attribute.
+    */
+    'max': number;
+    /**
+    * The input's maxlength attribute.
+    */
+    'maxlength': number;
+    /**
+    * The input's min attribute.
+    */
+    'min': number;
+    /**
+    * The input's minlength attribute.
+    */
+    'minlength': number;
+    /**
+    * The input's name attribute.
+    */
+    'name': string;
+    /**
+    * The input's placeholder text.
+    */
+    'placeholder': string;
+    /**
+    * Set to true to disable the input.
+    */
+    'readonly': boolean;
+    /**
+    * Removes focus from the input.
+    */
+    'removeFocus': () => Promise<void>;
+    /**
+    * Sets focus on the input.
+    */
+    'setFocus': () => Promise<void>;
+    /**
+    * The input's size, one of `small`, `medium`, or `large`.
+    */
+    'size': string;
+    /**
+    * The input's step attribute.
+    */
+    'step': number;
+    /**
+    * The input's type, one of `text`, `number`, `email`, etc.
+    */
+    'type': string;
+    /**
+    * The input's value attribute.
+    */
+    'value': string;
+  }
 }
 
 declare global {
@@ -58,8 +124,15 @@ declare global {
     prototype: HTMLSButtonElement;
     new (): HTMLSButtonElement;
   };
+
+  interface HTMLSInputElement extends Components.SInput, HTMLStencilElement {}
+  var HTMLSInputElement: {
+    prototype: HTMLSInputElement;
+    new (): HTMLSInputElement;
+  };
   interface HTMLElementTagNameMap {
     's-button': HTMLSButtonElement;
+    's-input': HTMLSInputElement;
   }
 }
 
@@ -94,9 +167,68 @@ declare namespace LocalJSX {
     */
     'type'?: string;
   }
+  interface SInput {
+    /**
+    * The input's autocomplete attribute.
+    */
+    'autocomplete'?: string;
+    /**
+    * The input's autofocus attribute.
+    */
+    'autofocus'?: boolean;
+    /**
+    * Set to true to disable the input.
+    */
+    'disabled'?: boolean;
+    /**
+    * The input's max attribute.
+    */
+    'max'?: number;
+    /**
+    * The input's maxlength attribute.
+    */
+    'maxlength'?: number;
+    /**
+    * The input's min attribute.
+    */
+    'min'?: number;
+    /**
+    * The input's minlength attribute.
+    */
+    'minlength'?: number;
+    /**
+    * The input's name attribute.
+    */
+    'name'?: string;
+    /**
+    * The input's placeholder text.
+    */
+    'placeholder'?: string;
+    /**
+    * Set to true to disable the input.
+    */
+    'readonly'?: boolean;
+    /**
+    * The input's size, one of `small`, `medium`, or `large`.
+    */
+    'size'?: string;
+    /**
+    * The input's step attribute.
+    */
+    'step'?: number;
+    /**
+    * The input's type, one of `text`, `number`, `email`, etc.
+    */
+    'type'?: string;
+    /**
+    * The input's value attribute.
+    */
+    'value'?: string;
+  }
 
   interface IntrinsicElements {
     's-button': SButton;
+    's-input': SInput;
   }
 }
 
@@ -107,6 +239,7 @@ declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
       's-button': LocalJSX.SButton & JSXBase.HTMLAttributes<HTMLSButtonElement>;
+      's-input': LocalJSX.SInput & JSXBase.HTMLAttributes<HTMLSInputElement>;
     }
   }
 }

@@ -1,0 +1,101 @@
+@import 'variables';
+
+$input-font-family: $font-sans-serif !default;
+$input-font-weight: 400 !default;
+$input-font-size-sm: 12px !default;
+$input-font-size-md: 14px !default;
+$input-font-size-lg: 16px !default;
+
+$input-background-color: $color-white !default;
+$input-color: $color-gray-30 !default;
+
+$input-height-sm: $input-height-sm !default;
+$input-height-md: $input-height-md !default;
+$input-height-lg: $input-height-lg !default;
+
+$input-border-radius-sm: 4px !default;
+$input-border-radius-md: 4px !default;
+$input-border-radius-lg: 4px !default;
+
+$input-padding-x-sm: 14px !default;
+$input-padding-x-md: 14px !default;
+$input-padding-x-lg: 14px !default;
+
+$input-placeholder-color: $color-gray-70;
+$input-transition-speed: 100ms !default;
+
+:host {
+  display: block;
+}
+
+.s-input {
+  display: flex;
+  position: relative;
+  background-color: $input-background-color;
+  border: solid 1px $input-border-color;
+  transition: $input-transition-speed color, $input-transition-speed border;
+
+  .s-input__control {
+    flex: 1 1 auto;
+    font-family: $input-font-family;
+    font-weight: $input-font-weight;
+    color: $input-color;
+    border: none;
+    background: none;
+    -webkit-appearance: none;
+
+    &::placeholder {
+      color: $input-placeholder-color;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &:hover:not(.s-input--disabled) {
+    border-color: shade($input-border-color, 10%);
+  }
+
+  &.s-input--focus:not(.s-input--disabled) {
+    border-color: $color-primary;
+  }
+
+  &.s-input--disabled {
+    background-color: shade($input-background-color, 5%);
+  }
+}
+
+// Size modifiers
+.s-input--small {
+  border-radius: $input-border-radius-sm;
+
+  .s-input__control {
+    font-size: $input-font-size-sm;
+    height: $input-height-sm;
+    line-height: $input-height-sm - 2px; // top + bottom border
+    padding: 0 $input-padding-x-sm;
+  }
+}
+
+.s-input--medium {
+  border-radius: $input-border-radius-md;
+
+  .s-input__control {
+    font-size: $input-font-size-md;
+    height: $input-height-md;
+    line-height: $input-height-md - 2px; // top + bottom border
+    padding: 0 $input-padding-x-md;
+  }
+}
+
+.s-input--large {
+  border-radius: $input-border-radius-lg;
+
+  .s-input__control {
+    font-size: $input-font-size-lg;
+    height: $input-height-lg;
+    line-height: $input-height-lg - 2px; // top + bottom border
+    padding: 0 $input-padding-x-lg;
+  }
+}
