@@ -76,8 +76,9 @@ export class ShoelaceInput {
           's-input--medium': this.size === 'medium',
           's-input--large': this.size === 'large',
 
+          // States
           's-input--disabled': this.disabled,
-          's-input--focus': this.hasFocus
+          's-input--focused': this.hasFocus
         }}
       >
         <input

@@ -57,7 +57,7 @@ $input-transition-speed: 100ms !default;
     border-color: shade($input-border-color, 10%);
   }
 
-  &.s-input--focus:not(.s-input--disabled) {
+  &.s-input--focused:not(.s-input--disabled) {
     border-color: $color-primary;
   }
 
