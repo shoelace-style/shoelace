@@ -1,0 +1,106 @@
+@import 'variables';
+
+$range-height: $form-control-height--medium !default;
+$range-track-height: 4px !default;
+$range-track-color: tint($form-control-border-color, 30%) !default;
+$range-thumb-size: 20px !default;
+$range-thumb-color: $color-primary !default;
+$range-border-radius: $range-track-height !default;
+
+:host {
+  display: block;
+}
+
+.s-range {
+  .s-range__control {
+    -webkit-appearance: none;
+    width: 100%;
+    height: $range-height;
+    background: transparent;
+    line-height: $range-height;
+    vertical-align: middle;
+
+    // Webkit
+    &::-webkit-slider-runnable-track {
+      width: 100%;
+      height: $range-track-height;
+      background-color: $range-track-color;
+      border-radius: $range-border-radius;
+      border: none;
+    }
+
+    &::-webkit-slider-thumb {
+      border: none;
+      width: $range-thumb-size;
+      height: $range-thumb-size;
+      border-radius: 50%;
+      background-color: $range-thumb-color;
+      -webkit-appearance: none;
+      margin-top: ($range-thumb-size / -2) + ($range-track-height / 2);
+      cursor: pointer;
+    }
+
+    &:not(:disabled)::-webkit-slider-thumb:hover {
+      background-color: tint($range-thumb-color, 15%);
+    }
+
+    &:not(:disabled):focus::-webkit-slider-thumb {
+      background-color: tint($range-thumb-color, 15%);
+    }
+
+    &:not(:disabled)::-webkit-slider-thumb:active {
+      background-color: shade($range-thumb-color, 20%);
+    }
+
+    // Firefox
+    &::-moz-focus-outer {
+      border: 0;
+    }
+
+    &::-moz-range-track {
+      width: 100%;
+      height: $range-track-height;
+      background-color: $range-track-color;
+      border-radius: $range-border-radius;
+      border: none;
+    }
+
+    &::-moz-range-thumb {
+      border: none;
+      height: $range-thumb-size;
+      width: $range-thumb-size;
+      border-radius: 50%;
+      background-color: $range-thumb-color;
+      cursor: pointer;
+    }
+
+    &:not(:disabled)::-moz-range-thumb:hover {
+      background-color: tint($range-thumb-color, 15%);
+    }
+
+    &:not(:disabled):focus::-moz-range-thumb {
+      background-color: tint($range-thumb-color, 15%);
+    }
+
+    &:not(:disabled)::-moz-range-thumb:active {
+      background-color: shade($range-thumb-color, 10%);
+    }
+
+    // States
+    &:focus {
+      outline: none;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+
+      &::-webkit-slider-thumb {
+        cursor: default;
+      }
+
+      &::-moz-range-thumb {
+        cursor: default;
+      }
+    }
+  }
+}
