@@ -58,7 +58,7 @@ export class Input {
   /** The input's autofocus attribute. */
   @Prop() autofocus: boolean;
 
-  /** The input's autocomplete attribute. */
+  /** The input's inputmode attribute. */
   @Prop() inputmode: string;
 
   /** Set to true to add a clear button when the input is populated. */
