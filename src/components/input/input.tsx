@@ -5,7 +5,7 @@ import { Component, Method, Prop, State, h } from '@stencil/core';
   styleUrl: 'input.scss',
   scoped: true
 })
-export class ShoelaceInput {
+export class Input {
   input: HTMLInputElement;
 
   @State() hasFocus = false;

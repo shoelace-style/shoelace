@@ -5,7 +5,7 @@ import { Component, Method, Prop, h } from '@stencil/core';
   styleUrl: 'button.scss',
   scoped: true
 })
-export class ShoelaceButton {
+export class Button {
   button: HTMLButtonElement;
 
   /** The button's type, one of `default`, `primary`, `success`, `info`, `warning`, `danger`, or `text`. */
