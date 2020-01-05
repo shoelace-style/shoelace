@@ -94,8 +94,8 @@ $input-transition-speed: 100ms !default;
   cursor: pointer;
 
   svg {
-    width: $input-font-size--medium;
-    height: $input-font-size--medium;
+    width: 1em;
+    height: 1em;
   }
 
   &:hover,
