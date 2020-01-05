@@ -22,6 +22,10 @@
   transition: $button-transition-speed background-color, $button-transition-speed color, $button-transition-speed border;
   cursor: pointer;
 
+  &::-moz-focus-inner {
+    border: 0;
+  }
+
   &:hover:not(:disabled) {
     background-color: $background-color--hover;
     border-color: $border-color--hover;
