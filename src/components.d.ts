@@ -74,7 +74,7 @@ export namespace Components {
     */
     'disabled': boolean;
     /**
-    * The input's autocomplete attribute.
+    * The input's inputmode attribute.
     */
     'inputmode': string;
     /**
@@ -130,6 +130,40 @@ export namespace Components {
     */
     'value': string;
   }
+  interface SRange {
+    /**
+    * Set to true to disable the input.
+    */
+    'disabled': boolean;
+    /**
+    * The input's max attribute.
+    */
+    'max': number;
+    /**
+    * The input's min attribute.
+    */
+    'min': number;
+    /**
+    * The input's name attribute.
+    */
+    'name': string;
+    /**
+    * Removes focus from the input.
+    */
+    'removeFocus': () => Promise<void>;
+    /**
+    * Sets focus on the input.
+    */
+    'setFocus': () => Promise<void>;
+    /**
+    * The input's step attribute.
+    */
+    'step': number;
+    /**
+    * The input's value attribute.
+    */
+    'value': string;
+  }
 }
 
 declare global {
@@ -146,9 +180,16 @@ declare global {
     prototype: HTMLSInputElement;
     new (): HTMLSInputElement;
   };
+
+  interface HTMLSRangeElement extends Components.SRange, HTMLStencilElement {}
+  var HTMLSRangeElement: {
+    prototype: HTMLSRangeElement;
+    new (): HTMLSRangeElement;
+  };
   interface HTMLElementTagNameMap {
     's-button': HTMLSButtonElement;
     's-input': HTMLSInputElement;
+    's-range': HTMLSRangeElement;
   }
 }
 
@@ -209,7 +250,7 @@ declare namespace LocalJSX {
     */
     'disabled'?: boolean;
     /**
-    * The input's autocomplete attribute.
+    * The input's inputmode attribute.
     */
     'inputmode'?: string;
     /**
@@ -257,10 +298,37 @@ declare namespace LocalJSX {
     */
     'value'?: string;
   }
+  interface SRange {
+    /**
+    * Set to true to disable the input.
+    */
+    'disabled'?: boolean;
+    /**
+    * The input's max attribute.
+    */
+    'max'?: number;
+    /**
+    * The input's min attribute.
+    */
+    'min'?: number;
+    /**
+    * The input's name attribute.
+    */
+    'name'?: string;
+    /**
+    * The input's step attribute.
+    */
+    'step'?: number;
+    /**
+    * The input's value attribute.
+    */
+    'value'?: string;
+  }
 
   interface IntrinsicElements {
     's-button': SButton;
     's-input': SInput;
+    's-range': SRange;
   }
 }
 
@@ -272,6 +340,7 @@ declare module "@stencil/core" {
     interface IntrinsicElements {
       's-button': LocalJSX.SButton & JSXBase.HTMLAttributes<HTMLSButtonElement>;
       's-input': LocalJSX.SInput & JSXBase.HTMLAttributes<HTMLSInputElement>;
+      's-range': LocalJSX.SRange & JSXBase.HTMLAttributes<HTMLSRangeElement>;
     }
   }
 }
