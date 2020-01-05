@@ -30,16 +30,22 @@ $input-transition-speed: 100ms !default;
 
 .s-input {
   display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
+  font-family: $input-font-family;
+  font-weight: $input-font-weight;
+  color: $input-color;
   background-color: $input-background-color;
   border: solid 1px $input-border-color;
   transition: $input-transition-speed color, $input-transition-speed border;
 
   .s-input__control {
     flex: 1 1 auto;
-    font-family: $input-font-family;
-    font-weight: $input-font-weight;
-    color: $input-color;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
     border: none;
     background: none;
     -webkit-appearance: none;
@@ -69,33 +75,51 @@ $input-transition-speed: 100ms !default;
 // Size modifiers
 .s-input--small {
   border-radius: $input-border-radius--small;
+  font-size: $input-font-size--small;
+  padding: 0 $input-padding-x--small;
 
   .s-input__control {
-    font-size: $input-font-size--small;
     height: $input-height--small;
     line-height: $input-height--small - 2px; // top + bottom border
-    padding: 0 $input-padding-x--small;
   }
 }
 
 .s-input--medium {
   border-radius: $input-border-radius--medium;
+  font-size: $input-font-size--medium;
+  padding: 0 $input-padding-x--medium;
 
   .s-input__control {
-    font-size: $input-font-size--medium;
     height: $input-height--medium;
     line-height: $input-height--medium - 2px; // top + bottom border
-    padding: 0 $input-padding-x--medium;
   }
 }
 
 .s-input--large {
   border-radius: $input-border-radius--large;
+  font-size: $input-font-size--large;
+  padding: 0 $input-padding-x--large;
 
   .s-input__control {
-    font-size: $input-font-size--large;
     height: $input-height--large;
     line-height: $input-height--large - 2px; // top + bottom border
-    padding: 0 $input-padding-x--large;
+  }
+}
+
+// Slots
+.s-input {
+  .s-input__prefix:empty,
+  .s-input__suffix:empty {
+    display: none;
+  }
+
+  .s-input__prefix:not(:empty) {
+    color: $input-placeholder-color;
+    margin-right: 0.75em;
+  }
+
+  .s-input__suffix:not(:empty) {
+    color: $input-placeholder-color;
+    margin-left: 0.75em;
   }
 }

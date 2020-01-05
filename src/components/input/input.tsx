@@ -47,11 +47,20 @@ export class ShoelaceInput {
   /** The input's step attribute. */
   @Prop() step: number;
 
+  /** The input's autocaptialize attribute. */
+  @Prop() autocapitalize: string;
+
+  /** The input's autocorrect attribute. */
+  @Prop() autocorrect: string;
+
   /** The input's autocomplete attribute. */
-  @Prop() autocomplete = 'on';
+  @Prop() autocomplete: string;
 
   /** The input's autofocus attribute. */
-  @Prop() autofocus = false;
+  @Prop() autofocus: boolean;
+
+  /** The input's autocomplete attribute. */
+  @Prop() inputmode: string;
 
   /** Sets focus on the input. */
   @Method()
@@ -80,25 +89,39 @@ export class ShoelaceInput {
           's-input--disabled': this.disabled,
           's-input--focused': this.hasFocus
         }}
+        onClick={() => this.input.focus()}
       >
+        <span class="s-input__prefix">
+          <slot name="prefix" />
+        </span>
+
         <input
           ref={el => (this.input = el)}
           class="s-input__control"
           type={this.type}
+          name={this.name}
+          value={this.value}
           placeholder={this.placeholder}
           disabled={this.disabled}
           readonly={this.readonly}
-          name={this.name}
           minlength={this.minlength}
           maxlength={this.maxlength}
           min={this.min}
           max={this.max}
           step={this.step}
-          autocomplete={this.autocomplete}
-          autofocus={this.autofocus}
+          autoCapitalize={this.autocapitalize}
+          autoComplete={this.autocomplete}
+          autoCorrect={this.autocorrect}
+          autoFocus={this.autofocus}
+          inputMode={this.inputmode}
           onFocus={() => (this.hasFocus = true)}
           onBlur={() => (this.hasFocus = false)}
+          onInput={() => (this.value = this.input.value)}
         />
+
+        <span class="s-input__suffix">
+          <slot name="suffix" />
+        </span>
       </div>
     );
   }

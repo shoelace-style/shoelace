@@ -50,9 +50,17 @@ export namespace Components {
   }
   interface SInput {
     /**
+    * The input's autocaptialize attribute.
+    */
+    'autocapitalize': string;
+    /**
     * The input's autocomplete attribute.
     */
     'autocomplete': string;
+    /**
+    * The input's autocorrect attribute.
+    */
+    'autocorrect': string;
     /**
     * The input's autofocus attribute.
     */
@@ -61,6 +69,10 @@ export namespace Components {
     * Set to true to disable the input.
     */
     'disabled': boolean;
+    /**
+    * The input's autocomplete attribute.
+    */
+    'inputmode': string;
     /**
     * The input's max attribute.
     */
@@ -169,9 +181,17 @@ declare namespace LocalJSX {
   }
   interface SInput {
     /**
+    * The input's autocaptialize attribute.
+    */
+    'autocapitalize'?: string;
+    /**
     * The input's autocomplete attribute.
     */
     'autocomplete'?: string;
+    /**
+    * The input's autocorrect attribute.
+    */
+    'autocorrect'?: string;
     /**
     * The input's autofocus attribute.
     */
@@ -180,6 +200,10 @@ declare namespace LocalJSX {
     * Set to true to disable the input.
     */
     'disabled'?: boolean;
+    /**
+    * The input's autocomplete attribute.
+    */
+    'inputmode'?: string;
     /**
     * The input's max attribute.
     */
