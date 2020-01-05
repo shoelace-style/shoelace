@@ -103,7 +103,6 @@ export class Input {
           class="s-input__control"
           type={this.type}
           name={this.name}
-          value={this.value}
           placeholder={this.placeholder}
           disabled={this.disabled}
           readonly={this.readonly}
@@ -112,6 +111,7 @@ export class Input {
           min={this.min}
           max={this.max}
           step={this.step}
+          value={this.value}
           autoCapitalize={this.autocapitalize}
           autoComplete={this.autocomplete}
           autoCorrect={this.autocorrect}
