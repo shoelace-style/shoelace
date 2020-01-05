@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'mixins';
 
 $input-font-family: $font-sans-serif !default;
 $input-font-weight: 400 !default;
@@ -29,47 +30,21 @@ $input-transition-speed: 100ms !default;
 }
 
 .s-input {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  font-family: $input-font-family;
-  font-weight: $input-font-weight;
-  color: $input-color;
-  background-color: $input-background-color;
-  border: solid 1px $form-control-border-color;
-  transition: $input-transition-speed color, $input-transition-speed border;
-
-  .s-input__control {
-    flex: 1 1 auto;
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-    color: inherit;
-    border: none;
-    background: none;
-    -webkit-appearance: none;
-
-    &::placeholder {
-      color: $input-placeholder-color;
-    }
-
-    &:focus {
-      outline: none;
-    }
-  }
-
-  &:hover:not(.s-input--disabled) {
-    border-color: shade($form-control-border-color, 10%);
-  }
-
-  &.s-input--focused:not(.s-input--disabled) {
-    border-color: $color-primary;
-  }
-
-  &.s-input--disabled {
-    background-color: shade($input-background-color, 5%);
-  }
+  @include input(
+    $color: $input-color,
+    $background-color: $input-background-color,
+    $border-color: $form-control-border-color,
+    $color--hover: $input-color,
+    $background-color--hover: $input-background-color,
+    $border-color--hover: shade($form-control-border-color, 10%),
+    $color--focus: $input-color,
+    $background-color--focus: $input-background-color,
+    $border-color--focus: $color-primary,
+    $color--disabled: $input-color,
+    $background-color--disabled: shade($input-background-color, 5%),
+    $border-color--disabled: $form-control-border-color,
+    $placeholder-color: $input-placeholder-color
+  );
 }
 
 // Size modifiers

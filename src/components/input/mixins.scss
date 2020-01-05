@@ -1,0 +1,64 @@
+// Generates input styles
+@mixin input(
+  $color,
+  $background-color,
+  $border-color,
+  $color--hover,
+  $background-color--hover,
+  $border-color--hover,
+  $color--focus,
+  $background-color--focus,
+  $border-color--focus,
+  $color--disabled,
+  $background-color--disabled,
+  $border-color--disabled,
+  $placeholder-color
+) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  font-family: $input-font-family;
+  font-weight: $input-font-weight;
+  color: $color;
+  background-color: $background-color;
+  border: solid 1px $border-color;
+  transition: $input-transition-speed color, $input-transition-speed border;
+
+  .s-input__control {
+    flex: 1 1 auto;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
+    border: none;
+    background: none;
+    -webkit-appearance: none;
+
+    &::placeholder {
+      color: $placeholder-color;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &:hover:not(.s-input--disabled) {
+    color: $color--hover;
+    background-color: $background-color--hover;
+    border-color: $border-color--hover;
+  }
+
+  &.s-input--focused:not(.s-input--disabled) {
+    color: $color--focus;
+    background-color: $background-color--focus;
+    border-color: $border-color--focus;
+  }
+
+  &.s-input--disabled {
+    color: $color--disabled;
+    background-color: $background-color--disabled;
+    border-color: $border-color--disabled;
+  }
+}
