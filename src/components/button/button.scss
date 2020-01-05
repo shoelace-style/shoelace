@@ -3,13 +3,13 @@
 
 $button-font-family: $font-sans-serif !default;
 $button-font-weight: 500 !default;
-$button-font-size--small: 12px !default;
-$button-font-size--medium: 14px !default;
-$button-font-size--large: 16px !default;
+$button-font-size--small: $form-control-font-size--small !default;
+$button-font-size--medium: $form-control-font-size--medium !default;
+$button-font-size--large: $form-control-font-size--large !default;
 
-$button-height--small: $input-height--small !default;
-$button-height--medium: $input-height--medium !default;
-$button-height--large: $input-height--large !default;
+$button-height--small: $form-control-height--small !default;
+$button-height--medium: $form-control-height--medium !default;
+$button-height--large: $form-control-height--large !default;
 
 $button-border-radius--small: 4px !default;
 $button-border-radius--medium: 4px !default;
@@ -30,9 +30,9 @@ $button-loader-animation: 1s linear infinite spin;
 .s-button:not(.s-button--outline) {
   &.s-button--default {
     @include button(
-      $color: $color-gray-40,
+      $color: $form-control-color,
       $background-color: $color-white,
-      $border-color: $input-border-color,
+      $border-color: $form-control-border-color,
       $color--hover: tint($color-primary, 20%),
       $background-color--hover: tint($color-primary, 90%),
       $border-color--hover: tint($color-primary, 60%),
@@ -70,9 +70,9 @@ $button-loader-animation: 1s linear infinite spin;
 .s-button.s-button--outline {
   &.s-button--default {
     @include button(
-      $color: $color-gray-40,
+      $color: $form-control-color,
       $background-color: $color-white,
-      $border-color: $input-border-color,
+      $border-color: $form-control-border-color,
       $color--hover: tint($color-primary, 20%),
       $background-color--hover: $color-white,
       $border-color--hover: tint($color-primary, 20%),

@@ -29,12 +29,17 @@ $font-weight-light: 300 !default;
 $font-weight-normal: 400 !default;
 $font-weight-bold: 500 !default;
 
-$text-color-primary: $color-gray-20;
+$text-color-primary: $color-gray-20 !default;
 $text-color-secondary: $color-gray-60 !default;
 
-// Inputs
-$input-height--small: 32px !default;
-$input-height--medium: 38px !default;
-$input-height--large: 44px !default;
+// Form controls
+$form-control-height--small: 32px !default;
+$form-control-height--medium: 38px !default;
+$form-control-height--large: 44px !default;
 
-$input-border-color: tint($color-black, 85%);
+$form-control-font-size--small: 12px !default;
+$form-control-font-size--medium: 14px !default;
+$form-control-font-size--large: 16px !default;
+
+$form-control-border-color: tint($color-black, 85%) !default;
+$form-control-color: $color-gray-40 !default;

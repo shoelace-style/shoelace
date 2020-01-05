@@ -2,16 +2,16 @@
 
 $input-font-family: $font-sans-serif !default;
 $input-font-weight: 400 !default;
-$input-font-size--small: 12px !default;
-$input-font-size--medium: 14px !default;
-$input-font-size--large: 16px !default;
+$input-font-size--small: $form-control-font-size--small !default;
+$input-font-size--medium: $form-control-font-size--medium !default;
+$input-font-size--large: $form-control-font-size--large !default;
 
 $input-background-color: $color-white !default;
-$input-color: $color-gray-30 !default;
+$input-color: $form-control-color !default;
 
-$input-height--small: $input-height--small !default;
-$input-height--medium: $input-height--medium !default;
-$input-height--large: $input-height--large !default;
+$input-height--small: $form-control-height--small !default;
+$input-height--medium: $form-control-height--medium !default;
+$input-height--large: $form-control-height--large !default;
 
 $input-border-radius--small: 4px !default;
 $input-border-radius--medium: 4px !default;
@@ -21,7 +21,7 @@ $input-padding-x--small: 14px !default;
 $input-padding-x--medium: 14px !default;
 $input-padding-x--large: 14px !default;
 
-$input-placeholder-color: $color-gray-70;
+$input-placeholder-color: $color-gray-70 !default;
 $input-transition-speed: 100ms !default;
 
 :host {
@@ -37,7 +37,7 @@ $input-transition-speed: 100ms !default;
   font-weight: $input-font-weight;
   color: $input-color;
   background-color: $input-background-color;
-  border: solid 1px $input-border-color;
+  border: solid 1px $form-control-border-color;
   transition: $input-transition-speed color, $input-transition-speed border;
 
   .s-input__control {
@@ -60,7 +60,7 @@ $input-transition-speed: 100ms !default;
   }
 
   &:hover:not(.s-input--disabled) {
-    border-color: shade($input-border-color, 10%);
+    border-color: shade($form-control-border-color, 10%);
   }
 
   &.s-input--focused:not(.s-input--disabled) {
