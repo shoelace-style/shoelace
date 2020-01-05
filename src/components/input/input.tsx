@@ -61,15 +61,18 @@ export class ShoelaceInput {
   /** The input's autocomplete attribute. */
   @Prop() inputmode: string;
 
+  /** Set to true to add a clear button when the input is populated. */
+  @Prop() clearable = false;
+
   /** Sets focus on the input. */
   @Method()
-  setFocus() {
+  async setFocus() {
     this.input.focus();
   }
 
   /** Removes focus from the input. */
   @Method()
-  removeFocus() {
+  async removeFocus() {
     this.input.blur();
   }
 
@@ -86,7 +89,8 @@ export class ShoelaceInput {
 
           // States
           's-input--disabled': this.disabled,
-          's-input--focused': this.hasFocus
+          's-input--focused': this.hasFocus,
+          's-input--empty': this.value.length === 0
         }}
         onClick={() => this.input.focus()}
       >
@@ -117,6 +121,27 @@ export class ShoelaceInput {
           onBlur={() => (this.hasFocus = false)}
           onInput={() => (this.value = this.input.value)}
         />
+
+        {this.clearable ? (
+          <button
+            class="s-input__clear"
+            onMouseDown={event => event.preventDefault()}
+            onClick={() => (this.value = '')}
+            tabindex="-1"
+          >
+            <svg viewBox="0 0 53 53">
+              <g stroke="none" stroke-width="1" fill="none">
+                <g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="4">
+                  <path d="M17.3388247,17.3388247 L31.9410878,31.9410878" stroke-linecap="round"></path>
+                  <path d="M17.3388247,31.9410878 L31.9410878,17.3388247" stroke-linecap="round"></path>
+                  <circle cx="24.5" cy="24.5" r="24.5"></circle>
+                </g>
+              </g>
+            </svg>
+          </button>
+        ) : (
+          ''
+        )}
 
         <span class="s-input__suffix">
           <slot name="suffix" />

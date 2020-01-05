@@ -81,6 +81,33 @@ $input-transition-speed: 100ms !default;
   }
 }
 
+// Clearable
+.s-input__clear {
+  display: flex;
+  align-items: center;
+  font-size: inherit;
+  color: $input-placeholder-color;
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+
+  svg {
+    width: $input-font-size--medium;
+    height: $input-font-size--medium;
+  }
+
+  &:hover,
+  &:focus {
+    color: shade($input-placeholder-color, 15%);
+  }
+}
+
+.s-input--empty .s-input__clear {
+  visibility: hidden;
+}
+
 // Slots
 .s-input {
   .s-input__prefix:empty,

@@ -66,6 +66,10 @@ export namespace Components {
     */
     'autofocus': boolean;
     /**
+    * Set to true to add a clear button when the input is populated.
+    */
+    'clearable': boolean;
+    /**
     * Set to true to disable the input.
     */
     'disabled': boolean;
@@ -196,6 +200,10 @@ declare namespace LocalJSX {
     * The input's autofocus attribute.
     */
     'autofocus'?: boolean;
+    /**
+    * Set to true to add a clear button when the input is populated.
+    */
+    'clearable'?: boolean;
     /**
     * Set to true to disable the input.
     */
