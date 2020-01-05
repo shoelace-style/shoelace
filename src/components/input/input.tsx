@@ -3,8 +3,7 @@ import { Component, Method, Prop, State, h } from '@stencil/core';
 @Component({
   tag: 's-input',
   styleUrl: 'input.scss',
-  scoped: true,
-  shadow: false
+  scoped: true
 })
 export class ShoelaceInput {
   input: HTMLInputElement;

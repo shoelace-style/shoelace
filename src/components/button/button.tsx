@@ -3,8 +3,7 @@ import { Component, Method, Prop, h } from '@stencil/core';
 @Component({
   tag: 's-button',
   styleUrl: 'button.scss',
-  scoped: true,
-  shadow: false
+  scoped: true
 })
 export class ShoelaceButton {
   button: HTMLButtonElement;
