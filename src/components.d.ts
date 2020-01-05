@@ -158,7 +158,7 @@ export namespace Components {
     /**
     * The input's step attribute.
     */
-    'step': number;
+    'step': number | 'any';
     /**
     * The input's value attribute.
     */
@@ -318,7 +318,7 @@ declare namespace LocalJSX {
     /**
     * The input's step attribute.
     */
-    'step'?: number;
+    'step'?: number | 'any';
     /**
     * The input's value attribute.
     */

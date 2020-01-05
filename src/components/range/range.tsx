@@ -26,7 +26,7 @@ export class Range {
   @Prop() max: number;
 
   /** The input's step attribute. */
-  @Prop() step: number;
+  @Prop() step: number | 'any';
 
   /** Sets focus on the input. */
   @Method()
