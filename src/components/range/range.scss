@@ -1,7 +1,7 @@
 @import 'variables';
 
 $range-height: $form-control-height--medium !default;
-$range-track-height: 4px !default;
+$range-track-height: 3px !default;
 $range-track-color: tint($form-control-border-color, 30%) !default;
 $range-thumb-size: 20px !default;
 $range-thumb-color: $color-primary !default;
