@@ -1,0 +1,126 @@
+@import 'variables';
+
+$textarea-font-family: $font-sans-serif !default;
+$textarea-font-weight: $font-weight-normal !default;
+$textarea-font-size--small: $form-control-font-size--small !default;
+$textarea-font-size--medium: $form-control-font-size--medium !default;
+$textarea-font-size--large: $form-control-font-size--large !default;
+
+$textarea-background-color: $color-white !default;
+$textarea-color: $form-control-color !default;
+
+$textarea-border-radius--small: 4px !default;
+$textarea-border-radius--medium: 4px !default;
+$textarea-border-radius--large: 4px !default;
+
+$textarea-padding-x--small: 14px !default;
+$textarea-padding-x--medium: 14px !default;
+$textarea-padding-x--large: 14px !default;
+
+$textarea-placeholder-color: $color-gray-70 !default;
+$textarea-transition-speed: 100ms !default;
+
+:host {
+  display: block;
+}
+
+.s-textarea {
+  display: flex;
+  align-items: center;
+  position: relative;
+  font-family: $textarea-font-family;
+  font-weight: $textarea-font-weight;
+  color: $textarea-color;
+  background-color: $textarea-background-color;
+  border: solid 1px $form-control-border-color;
+  transition: $textarea-transition-speed color, $textarea-transition-speed border;
+
+  .s-textarea__control {
+    flex: 1 1 auto;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: 1.4;
+    min-height: 0;
+    color: inherit;
+    border: none;
+    background: none;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+
+    &::-webkit-search-decoration,
+    &::-webkit-search-cancel-button,
+    &::-webkit-search-results-button,
+    &::-webkit-search-results-decoration {
+      -webkit-appearance: none;
+    }
+
+    &::placeholder {
+      color: $textarea-placeholder-color;
+      user-select: none;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &:hover:not(.s-textarea--disabled) {
+    color: $textarea-color;
+    border-color: shade($form-control-border-color, 10%);
+  }
+
+  &.s-textarea--focused:not(.s-textarea--disabled) {
+    color: $textarea-color;
+    border-color: $color-primary;
+  }
+
+  &.s-textarea--disabled {
+    color: $textarea-color;
+    background-color: $textarea-background-color;
+    border-color: $form-control-border-color;
+    opacity: 0.5;
+  }
+}
+
+// Size modifiers
+.s-textarea--small {
+  border-radius: $textarea-border-radius--small;
+  font-size: $textarea-font-size--small;
+
+  .s-textarea__control {
+    padding: 0.5em $textarea-padding-x--small;
+  }
+}
+
+.s-textarea--medium {
+  border-radius: $textarea-border-radius--medium;
+  font-size: $textarea-font-size--medium;
+
+  .s-textarea__control {
+    padding: 0.5em $textarea-padding-x--medium;
+  }
+}
+
+.s-textarea--large {
+  border-radius: $textarea-border-radius--large;
+  font-size: $textarea-font-size--large;
+
+  .s-textarea__control {
+    padding: 0.5em $textarea-padding-x--large;
+  }
+}
+
+// Resize
+.s-textarea--resize-none .s-textarea__control {
+  resize: none;
+}
+
+.s-textarea--resize-vertical .s-textarea__control {
+  resize: vertical;
+}
+
+.s-textarea--resize-auto .s-textarea__control {
+  height: auto;
+  resize: none;
+}
