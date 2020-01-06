@@ -2,7 +2,7 @@
 @import 'mixins';
 
 $input-font-family: $font-sans-serif !default;
-$input-font-weight: 400 !default;
+$input-font-weight: $font-weight-normal !default;
 $input-font-size--small: $form-control-font-size--small !default;
 $input-font-size--medium: $form-control-font-size--medium !default;
 $input-font-size--large: $form-control-font-size--large !default;

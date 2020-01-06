@@ -2,7 +2,7 @@
 @import './mixins';
 
 $button-font-family: $font-sans-serif !default;
-$button-font-weight: 500 !default;
+$button-font-weight: $font-weight-normal !default;
 $button-font-size--small: $form-control-font-size--small !default;
 $button-font-size--medium: $form-control-font-size--medium !default;
 $button-font-size--large: $form-control-font-size--large !default;
