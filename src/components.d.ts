@@ -102,7 +102,7 @@ export namespace Components {
     */
     'placeholder': string;
     /**
-    * Set to true to disable the input.
+    * Set to true for a readonly input.
     */
     'readonly': boolean;
     /**
@@ -170,6 +170,68 @@ export namespace Components {
     */
     'size': string;
   }
+  interface STextarea {
+    /**
+    * The textarea's autocaptialize attribute.
+    */
+    'autocapitalize': string;
+    /**
+    * The textarea's autocomplete attribute.
+    */
+    'autocomplete': string;
+    /**
+    * The textarea's autocorrect attribute.
+    */
+    'autocorrect': string;
+    /**
+    * The textarea's autofocus attribute.
+    */
+    'autofocus': boolean;
+    /**
+    * Set to true to disable the textarea.
+    */
+    'disabled': boolean;
+    /**
+    * The textarea's inputmode attribute.
+    */
+    'inputmode': string;
+    /**
+    * The textarea's name attribute.
+    */
+    'name': string;
+    /**
+    * The textarea's placeholder text.
+    */
+    'placeholder': string;
+    /**
+    * Set to true for a readonly textarea.
+    */
+    'readonly': boolean;
+    /**
+    * Removes focus fromt the textarea.
+    */
+    'removeFocus': () => Promise<void>;
+    /**
+    * Controls how the textarea can be resized.
+    */
+    'resize': 'none' | 'vertical' | 'auto';
+    /**
+    * The number of rows to display by default.
+    */
+    'rows': number;
+    /**
+    * Sets focus on the textarea.
+    */
+    'setFocus': () => Promise<void>;
+    /**
+    * The textarea's size, one of `small`, `medium`, or `large`.
+    */
+    'size': string;
+    /**
+    * The textarea's value attribute.
+    */
+    'value': string;
+  }
 }
 
 declare global {
@@ -198,11 +260,18 @@ declare global {
     prototype: HTMLSSpinnerElement;
     new (): HTMLSSpinnerElement;
   };
+
+  interface HTMLSTextareaElement extends Components.STextarea, HTMLStencilElement {}
+  var HTMLSTextareaElement: {
+    prototype: HTMLSTextareaElement;
+    new (): HTMLSTextareaElement;
+  };
   interface HTMLElementTagNameMap {
     's-button': HTMLSButtonElement;
     's-input': HTMLSInputElement;
     's-range': HTMLSRangeElement;
     's-spinner': HTMLSSpinnerElement;
+    's-textarea': HTMLSTextareaElement;
   }
 }
 
@@ -291,7 +360,7 @@ declare namespace LocalJSX {
     */
     'placeholder'?: string;
     /**
-    * Set to true to disable the input.
+    * Set to true for a readonly input.
     */
     'readonly'?: boolean;
     /**
@@ -343,12 +412,67 @@ declare namespace LocalJSX {
     */
     'size'?: string;
   }
+  interface STextarea {
+    /**
+    * The textarea's autocaptialize attribute.
+    */
+    'autocapitalize'?: string;
+    /**
+    * The textarea's autocomplete attribute.
+    */
+    'autocomplete'?: string;
+    /**
+    * The textarea's autocorrect attribute.
+    */
+    'autocorrect'?: string;
+    /**
+    * The textarea's autofocus attribute.
+    */
+    'autofocus'?: boolean;
+    /**
+    * Set to true to disable the textarea.
+    */
+    'disabled'?: boolean;
+    /**
+    * The textarea's inputmode attribute.
+    */
+    'inputmode'?: string;
+    /**
+    * The textarea's name attribute.
+    */
+    'name'?: string;
+    /**
+    * The textarea's placeholder text.
+    */
+    'placeholder'?: string;
+    /**
+    * Set to true for a readonly textarea.
+    */
+    'readonly'?: boolean;
+    /**
+    * Controls how the textarea can be resized.
+    */
+    'resize'?: 'none' | 'vertical' | 'auto';
+    /**
+    * The number of rows to display by default.
+    */
+    'rows'?: number;
+    /**
+    * The textarea's size, one of `small`, `medium`, or `large`.
+    */
+    'size'?: string;
+    /**
+    * The textarea's value attribute.
+    */
+    'value'?: string;
+  }
 
   interface IntrinsicElements {
     's-button': SButton;
     's-input': SInput;
     's-range': SRange;
     's-spinner': SSpinner;
+    's-textarea': STextarea;
   }
 }
 
@@ -362,6 +486,7 @@ declare module "@stencil/core" {
       's-input': LocalJSX.SInput & JSXBase.HTMLAttributes<HTMLSInputElement>;
       's-range': LocalJSX.SRange & JSXBase.HTMLAttributes<HTMLSRangeElement>;
       's-spinner': LocalJSX.SSpinner & JSXBase.HTMLAttributes<HTMLSSpinnerElement>;
+      's-textarea': LocalJSX.STextarea & JSXBase.HTMLAttributes<HTMLSTextareaElement>;
     }
   }
 }

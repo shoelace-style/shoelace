@@ -28,7 +28,7 @@ export class Input {
   /** Set to true to disable the input. */
   @Prop() disabled = false;
 
-  /** Set to true to disable the input. */
+  /** Set to true for a readonly input. */
   @Prop() readonly = false;
 
   /** The input's minlength attribute. */
