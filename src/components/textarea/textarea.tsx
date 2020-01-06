@@ -6,10 +6,12 @@ import { Component, Method, Prop, State, h } from '@stencil/core';
   scoped: true
 })
 export class Textarea {
+  resizeObserver: any;
   textarea: HTMLTextAreaElement;
 
   constructor() {
     this.handleInput = this.handleInput.bind(this);
+    this.handleWindowResize = this.handleWindowResize.bind(this);
   }
 
   @State() hasFocus = false;
@@ -55,6 +57,25 @@ export class Textarea {
 
   componentDidLoad() {
     this.setTextareaHeight();
+
+    // @ts-ignore
+    if (ResizeObserver) {
+      // @ts-ignore
+      this.resizeObserver = new ResizeObserver(() => this.setTextareaHeight());
+      this.resizeObserver.observe(this.textarea);
+      console.log('resizseObserver');
+    } else {
+      window.addEventListener('resize', this.handleWindowResize);
+    }
+  }
+
+  componentDidUnload() {
+    // @ts-ignore
+    if (ResizeObserver) {
+      this.resizeObserver.unobserve();
+    } else {
+      window.removeEventListener('resize', this.handleWindowResize);
+    }
   }
 
   /** Sets focus on the textarea. */
@@ -71,6 +92,10 @@ export class Textarea {
 
   handleInput() {
     this.value = this.textarea.value;
+    this.setTextareaHeight();
+  }
+
+  handleWindowResize() {
     this.setTextareaHeight();
   }
 
