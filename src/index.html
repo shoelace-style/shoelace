@@ -20,7 +20,7 @@
 
       body {
         max-width: 600px;
-        margin: 0 auto;
+        margin: 2rem auto;
       }
 
       h1 img {
@@ -28,10 +28,18 @@
         max-width: 20rem;
         margin: 2rem auto;
       }
+
+      hr {
+        border: none;
+        border-top: solid 1px #eee;
+        margin: 4rem 0;
+      }
     </style>
   </head>
   <body>
     <h1><img src="/assets/images/wordmark.svg" alt="Shoelace" /></h1>
+
+    <h2>Button</h2>
 
     <s-button type="default">Default</s-button>
     <s-button type="primary">Primary</s-button>
@@ -158,7 +166,17 @@
       <i class="fa fa-search"></i>
     </s-button>
 
-    <br /><br />
+    <hr />
+
+    <h2>Spinner</h2>
+
+    <s-spinner></s-spinner>
+    <s-spinner size="2em"></s-spinner>
+    <s-spinner size="3em"></s-spinner>
+
+    <hr />
+
+    <h2>Input</h2>
 
     <s-input type="text" placeholder="Small" size="small"></s-input>
 
@@ -219,7 +237,9 @@
 
     <s-input type="number" placeholder="Number"></s-input>
 
-    <br /><br />
+    <hr />
+
+    <h2>Range</h2>
 
     <s-range min="0" max="100" step="1"></s-range>
 

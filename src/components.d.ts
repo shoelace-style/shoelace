@@ -164,6 +164,12 @@ export namespace Components {
     */
     'value': string;
   }
+  interface SSpinner {
+    /**
+    * The spinner's size.
+    */
+    'size': string;
+  }
 }
 
 declare global {
@@ -186,10 +192,17 @@ declare global {
     prototype: HTMLSRangeElement;
     new (): HTMLSRangeElement;
   };
+
+  interface HTMLSSpinnerElement extends Components.SSpinner, HTMLStencilElement {}
+  var HTMLSSpinnerElement: {
+    prototype: HTMLSSpinnerElement;
+    new (): HTMLSSpinnerElement;
+  };
   interface HTMLElementTagNameMap {
     's-button': HTMLSButtonElement;
     's-input': HTMLSInputElement;
     's-range': HTMLSRangeElement;
+    's-spinner': HTMLSSpinnerElement;
   }
 }
 
@@ -324,11 +337,18 @@ declare namespace LocalJSX {
     */
     'value'?: string;
   }
+  interface SSpinner {
+    /**
+    * The spinner's size.
+    */
+    'size'?: string;
+  }
 
   interface IntrinsicElements {
     's-button': SButton;
     's-input': SInput;
     's-range': SRange;
+    's-spinner': SSpinner;
   }
 }
 
@@ -341,6 +361,7 @@ declare module "@stencil/core" {
       's-button': LocalJSX.SButton & JSXBase.HTMLAttributes<HTMLSButtonElement>;
       's-input': LocalJSX.SInput & JSXBase.HTMLAttributes<HTMLSInputElement>;
       's-range': LocalJSX.SRange & JSXBase.HTMLAttributes<HTMLSRangeElement>;
+      's-spinner': LocalJSX.SSpinner & JSXBase.HTMLAttributes<HTMLSSpinnerElement>;
     }
   }
 }

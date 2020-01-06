@@ -1,0 +1,30 @@
+@import 'variables';
+
+$spinner-color: $color-primary !default;
+$spinner-speed: 1s !default;
+$spinner-border-width: 2px !default;
+$spinner-margin-x: 4px !default;
+$spinner-animation: 1s linear infinite spin !default;
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+:host {
+  display: inline-block;
+}
+
+.s-spinner {
+  display: inline-block;
+  border-radius: 50%;
+  border: solid $spinner-border-width $spinner-color;
+  border-bottom-color: transparent;
+  margin: 0 $spinner-margin-x;
+  vertical-align: middle;
+  animation: $spinner-animation;
+}
