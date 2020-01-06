@@ -22,6 +22,15 @@ $button-padding-x--large: 26px !default;
 $button-transition-speed: 100ms !default;
 $button-loader-animation: 1s linear infinite spin;
 
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 :host {
   display: inline-block;
 }
@@ -233,14 +242,5 @@ $button-loader-animation: 1s linear infinite spin;
   .s-button__suffix:not(:empty) {
     margin-left: 0.25em;
     margin-right: -0.25em;
-  }
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
   }
 }
