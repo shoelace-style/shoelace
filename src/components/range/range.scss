@@ -50,6 +50,7 @@ $range-border-radius: $range-track-height !default;
 
     &:not(:disabled)::-webkit-slider-thumb:active {
       background-color: shade($range-thumb-color, 20%);
+      cursor: grabbing;
     }
 
     // Firefox
@@ -84,6 +85,7 @@ $range-border-radius: $range-track-height !default;
 
     &:not(:disabled)::-moz-range-thumb:active {
       background-color: shade($range-thumb-color, 10%);
+      cursor: grabbing;
     }
 
     // States
