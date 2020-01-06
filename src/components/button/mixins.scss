@@ -20,6 +20,7 @@
   background-color: $background-color;
   border: solid 1px $border-color;
   transition: $button-transition-speed background-color, $button-transition-speed color, $button-transition-speed border;
+  user-select: none;
   cursor: pointer;
 
   &::-moz-focus-inner {
