@@ -81,7 +81,7 @@ export class Button {
           <slot name="suffix" />
         </span>
 
-        {this.loading ? <span class="s-button__loader" /> : ''}
+        {this.loading ? <span class="s-button__spinner" /> : ''}
       </button>
     );
   }

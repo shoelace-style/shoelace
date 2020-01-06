@@ -19,8 +19,10 @@ $button-padding-x--small: 14px !default;
 $button-padding-x--medium: 20px !default;
 $button-padding-x--large: 26px !default;
 
+$button-spinner-animation: 1s linear infinite spin !default;
+$button-spinner-width: 2px !default;
+
 $button-transition-speed: 100ms !default;
-$button-loader-animation: 1s linear infinite spin;
 
 @keyframes spin {
   from {
@@ -210,16 +212,16 @@ $button-loader-animation: 1s linear infinite spin;
     visibility: hidden;
   }
 
-  .s-button__loader {
+  .s-button__spinner {
     position: absolute;
     top: calc(50% - 0.5em - 2px);
     left: calc(50% - 0.5em - 2px);
     width: 1em;
     height: 1em;
-    border: solid 2px currentColor;
+    border: solid $button-spinner-width currentColor;
     border-bottom-color: transparent;
     border-radius: 50%;
-    animation: $button-loader-animation;
+    animation: $button-spinner-animation;
   }
 }
 
