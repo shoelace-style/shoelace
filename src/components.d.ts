@@ -48,6 +48,21 @@ export namespace Components {
     */
     'type': string;
   }
+  interface SDropdown {
+    'close': () => Promise<void>;
+    'open': () => Promise<void>;
+  }
+  interface SDropdownDivider {}
+  interface SDropdownItem {
+    /**
+    * Set to true to draw the item in a checked state.
+    */
+    'checked': boolean;
+    /**
+    * Set to true to draw the item in a disabled state.
+    */
+    'disabled': boolean;
+  }
   interface SInput {
     /**
     * The input's autocaptialize attribute.
@@ -243,6 +258,24 @@ declare global {
     new (): HTMLSButtonElement;
   };
 
+  interface HTMLSDropdownElement extends Components.SDropdown, HTMLStencilElement {}
+  var HTMLSDropdownElement: {
+    prototype: HTMLSDropdownElement;
+    new (): HTMLSDropdownElement;
+  };
+
+  interface HTMLSDropdownDividerElement extends Components.SDropdownDivider, HTMLStencilElement {}
+  var HTMLSDropdownDividerElement: {
+    prototype: HTMLSDropdownDividerElement;
+    new (): HTMLSDropdownDividerElement;
+  };
+
+  interface HTMLSDropdownItemElement extends Components.SDropdownItem, HTMLStencilElement {}
+  var HTMLSDropdownItemElement: {
+    prototype: HTMLSDropdownItemElement;
+    new (): HTMLSDropdownItemElement;
+  };
+
   interface HTMLSInputElement extends Components.SInput, HTMLStencilElement {}
   var HTMLSInputElement: {
     prototype: HTMLSInputElement;
@@ -268,6 +301,9 @@ declare global {
   };
   interface HTMLElementTagNameMap {
     's-button': HTMLSButtonElement;
+    's-dropdown': HTMLSDropdownElement;
+    's-dropdown-divider': HTMLSDropdownDividerElement;
+    's-dropdown-item': HTMLSDropdownItemElement;
     's-input': HTMLSInputElement;
     's-range': HTMLSRangeElement;
     's-spinner': HTMLSSpinnerElement;
@@ -305,6 +341,18 @@ declare namespace LocalJSX {
     * The button's type, one of `default`, `primary`, `success`, `info`, `warning`, `danger`, or `text`.
     */
     'type'?: string;
+  }
+  interface SDropdown {}
+  interface SDropdownDivider {}
+  interface SDropdownItem {
+    /**
+    * Set to true to draw the item in a checked state.
+    */
+    'checked'?: boolean;
+    /**
+    * Set to true to draw the item in a disabled state.
+    */
+    'disabled'?: boolean;
   }
   interface SInput {
     /**
@@ -469,6 +517,9 @@ declare namespace LocalJSX {
 
   interface IntrinsicElements {
     's-button': SButton;
+    's-dropdown': SDropdown;
+    's-dropdown-divider': SDropdownDivider;
+    's-dropdown-item': SDropdownItem;
     's-input': SInput;
     's-range': SRange;
     's-spinner': SSpinner;
@@ -483,6 +534,9 @@ declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
       's-button': LocalJSX.SButton & JSXBase.HTMLAttributes<HTMLSButtonElement>;
+      's-dropdown': LocalJSX.SDropdown & JSXBase.HTMLAttributes<HTMLSDropdownElement>;
+      's-dropdown-divider': LocalJSX.SDropdownDivider & JSXBase.HTMLAttributes<HTMLSDropdownDividerElement>;
+      's-dropdown-item': LocalJSX.SDropdownItem & JSXBase.HTMLAttributes<HTMLSDropdownItemElement>;
       's-input': LocalJSX.SInput & JSXBase.HTMLAttributes<HTMLSInputElement>;
       's-range': LocalJSX.SRange & JSXBase.HTMLAttributes<HTMLSRangeElement>;
       's-spinner': LocalJSX.SSpinner & JSXBase.HTMLAttributes<HTMLSSpinnerElement>;

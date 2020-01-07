@@ -1,0 +1,13 @@
+@import 'variables';
+
+$dropdown-divider-border-color: tint($form-control-border-color, 50%) !default;
+$dropdown-divider-margin-y: 10px !default;
+
+:host {
+  display: block;
+}
+
+.s-dropdown-divider {
+  border-top: solid 1px $dropdown-divider-border-color;
+  margin: $dropdown-divider-margin-y 0;
+}

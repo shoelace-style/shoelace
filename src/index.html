@@ -39,6 +39,35 @@
   <body>
     <h1><img src="/assets/images/wordmark.svg" alt="Shoelace" /></h1>
 
+    <s-dropdown>
+      <s-button slot="trigger">
+        Dropdown
+        <span slot="suffix"><i class="fa fa-angle-down"></i></span>
+      </s-button>
+
+      <s-dropdown-item>Dropdown Item 1</s-dropdown-item>
+      <s-dropdown-item>Dropdown Item 2</s-dropdown-item>
+      <s-dropdown-item>Dropdown Item 3</s-dropdown-item>
+      <s-dropdown-divider></s-dropdown-divider>
+      <s-dropdown-item>
+        Prefix
+        <span slot="prefix"><i class="fa fa-save"></i></span>
+      </s-dropdown-item>
+      <s-dropdown-item>
+        Suffix Text
+        <small slot="suffix"><kbd>cmd+s<kbd></small>
+      </s-dropdown-item>
+      <s-dropdown-item>
+        Suffix Icon
+        <span slot="suffix"><i class="fa fa-external-link"></i></span>
+      </s-dropdown-item>
+      <s-dropdown-divider></s-dropdown-divider>
+      <s-dropdown-item checked>Checked</s-dropdown-item>
+      <s-dropdown-item disabled>Disabled</s-dropdown-item>
+    </s-dropdown>
+
+    <br /><br />
+
     <h2>Button</h2>
 
     <s-button type="default">Default</s-button>
@@ -97,19 +126,19 @@
     <s-button type="default" size="small">
       <span slot="prefix"><i class="fa fa-gear"></i></span>
       Default
-      <span slot="suffix"><i class="fa fa-caret-down"></i></span>
+      <span slot="suffix"><i class="fa fa-angle-down"></i></span>
     </s-button>
 
     <s-button type="default" size="medium">
       <span slot="prefix"><i class="fa fa-gear"></i></span>
       Default
-      <span slot="suffix"><i class="fa fa-caret-down"></i></span>
+      <span slot="suffix"><i class="fa fa-angle-down"></i></span>
     </s-button>
 
     <s-button type="default" size="large">
       <span slot="prefix"><i class="fa fa-gear"></i></span>
       Default
-      <span slot="suffix"><i class="fa fa-caret-down"></i></span>
+      <span slot="suffix"><i class="fa fa-angle-down"></i></span>
     </s-button>
 
     <br /><br />

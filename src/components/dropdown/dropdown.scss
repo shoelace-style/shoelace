@@ -1,0 +1,41 @@
+@import 'variables';
+
+$dropdown-font-family: $font-sans-serif !default;
+$dropdown-font-weight: $font-weight-normal !default;
+$dropdown-color: $form-control-color !default;
+$dropdown-background-color: $color-white !default;
+
+:host {
+  display: inline-block;
+}
+
+.s-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+// TODO: use $dropdown-* variables here
+.s-dropdown__menu {
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 0;
+  font-family: $dropdown-font-family;
+  font-weight: $dropdown-font-weight;
+  color: $dropdown-color;
+  background-color: $dropdown-background-color;
+  border: solid 1px tint($form-control-border-color, 50%);
+  border-radius: 4px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  padding-top: 10px; // TODO: these should match $dropdown-item-padding-y
+  padding-bottom: 10px;
+  opacity: 0;
+  transform-origin: top left;
+  transform: scale(0.9);
+  transition: 100ms opacity, 100ms transform;
+  z-index: 10;
+}
+
+.s-dropdown--open .s-dropdown__menu {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}

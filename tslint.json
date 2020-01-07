@@ -28,7 +28,9 @@
       }
     ],
     "trailing-comma": false,
-    "no-console": false
+    "no-console": false,
+    "no-floating-promises": false,
+    "no-null-keyword": false
   },
   "rulesDirectory": []
 }
