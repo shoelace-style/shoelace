@@ -63,7 +63,6 @@ export class Textarea {
       // @ts-ignore
       this.resizeObserver = new ResizeObserver(() => this.setTextareaHeight());
       this.resizeObserver.observe(this.textarea);
-      console.log('resizseObserver');
     } else {
       window.addEventListener('resize', this.handleWindowResize);
     }
