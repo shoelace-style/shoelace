@@ -1,3 +1,4 @@
+@import 'reset';
 @import 'variables';
 
 $textarea-font-family: $font-sans-serif !default;
@@ -45,7 +46,6 @@ $textarea-transition-speed: 100ms !default;
     color: inherit;
     border: none;
     background: none;
-    box-sizing: border-box;
     -webkit-appearance: none;
 
     &::-webkit-search-decoration,

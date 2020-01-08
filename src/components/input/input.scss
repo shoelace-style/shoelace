@@ -1,3 +1,4 @@
+@import 'reset';
 @import 'variables';
 
 $input-font-family: $font-sans-serif !default;
@@ -45,6 +46,7 @@ $input-transition-speed: 100ms !default;
     font-family: inherit;
     font-size: inherit;
     font-weight: inherit;
+    height: 100%;
     color: inherit;
     border: none;
     background: none;
@@ -88,9 +90,9 @@ $input-transition-speed: 100ms !default;
   border-radius: $input-border-radius--small;
   font-size: $input-font-size--small;
   padding: 0 $input-padding-x--small;
+  height: $input-height--small;
 
   .s-input__control {
-    height: $input-height--small;
     line-height: $input-height--small - 2px; // top + bottom border
   }
 }
@@ -98,10 +100,10 @@ $input-transition-speed: 100ms !default;
 .s-input--medium {
   border-radius: $input-border-radius--medium;
   font-size: $input-font-size--medium;
+  height: $input-height--medium;
   padding: 0 $input-padding-x--medium;
 
   .s-input__control {
-    height: $input-height--medium;
     line-height: $input-height--medium - 2px; // top + bottom border
   }
 }
@@ -109,10 +111,10 @@ $input-transition-speed: 100ms !default;
 .s-input--large {
   border-radius: $input-border-radius--large;
   font-size: $input-font-size--large;
+  height: $input-height--large;
   padding: 0 $input-padding-x--large;
 
   .s-input__control {
-    height: $input-height--large;
     line-height: $input-height--large - 2px; // top + bottom border
   }
 }

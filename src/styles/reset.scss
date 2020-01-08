@@ -1,0 +1,10 @@
+// Box sizing reset
+:host {
+  box-sizing: border-box;
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: inherit;
+  }
+}
