@@ -1,8 +1,8 @@
 @import 'reset';
 @import 'variables';
 
-$dropdown-item-padding-x: $menu-item-padding-x !default;
-$dropdown-item-padding-y: $menu-item-padding-y !default;
+$dropdown-item-padding-x: $menu-padding-x !default;
+$dropdown-item-padding-y: $menu-padding-y !default;
 $dropdown-item-transition-speed: 100ms !default;
 
 :host {
@@ -21,12 +21,12 @@ $dropdown-item-transition-speed: 100ms !default;
   cursor: pointer;
 
   &.s-dropdown-item--active:not(.s-dropdown-item--disabled) {
-    background-color: $menu-item-background-color--hover;
-    color: $menu-item-color--hover;
+    background-color: $menu-background-color--hover;
+    color: $menu-color--hover;
   }
 
   &.s-dropdown-item--disabled {
-    color: $menu-item-color--disabled;
+    color: $menu-color--disabled;
     cursor: default;
   }
 
