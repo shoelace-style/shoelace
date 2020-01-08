@@ -39,35 +39,6 @@
   <body>
     <h1><img src="/assets/images/wordmark.svg" alt="Shoelace" /></h1>
 
-    <s-dropdown>
-      <s-button slot="trigger">
-        Dropdown
-        <span slot="suffix"><i class="fa fa-angle-down"></i></span>
-      </s-button>
-
-      <s-dropdown-item>Dropdown Item 1</s-dropdown-item>
-      <s-dropdown-item>Dropdown Item 2</s-dropdown-item>
-      <s-dropdown-item>Dropdown Item 3</s-dropdown-item>
-      <s-dropdown-divider></s-dropdown-divider>
-      <s-dropdown-item>
-        Prefix
-        <span slot="prefix"><i class="fa fa-save"></i></span>
-      </s-dropdown-item>
-      <s-dropdown-item>
-        Suffix Text
-        <small slot="suffix"><kbd>cmd+s<kbd></small>
-      </s-dropdown-item>
-      <s-dropdown-item>
-        Suffix Icon
-        <span slot="suffix"><i class="fa fa-external-link"></i></span>
-      </s-dropdown-item>
-      <s-dropdown-divider></s-dropdown-divider>
-      <s-dropdown-item checked>Checked</s-dropdown-item>
-      <s-dropdown-item disabled>Disabled</s-dropdown-item>
-    </s-dropdown>
-
-    <br /><br />
-
     <h2>Button</h2>
 
     <s-button type="default">Default</s-button>
@@ -198,6 +169,37 @@
     <s-button type="primary" size="large" circle loading>
       <i class="fa fa-search"></i>
     </s-button>
+
+    <hr />
+
+    <h2>Dropdown</h2>
+
+    <s-dropdown>
+      <s-button slot="trigger">
+        Dropdown
+        <span slot="suffix"><i class="fa fa-angle-down"></i></span>
+      </s-button>
+
+      <s-dropdown-item>Dropdown Item 1</s-dropdown-item>
+      <s-dropdown-item>Dropdown Item 2</s-dropdown-item>
+      <s-dropdown-item>Dropdown Item 3</s-dropdown-item>
+      <s-dropdown-divider></s-dropdown-divider>
+      <s-dropdown-item>
+        Prefix
+        <span slot="prefix"><i class="fa fa-save"></i></span>
+      </s-dropdown-item>
+      <s-dropdown-item>
+        Suffix Text
+        <small slot="suffix"><kbd>cmd+s<kbd></small>
+      </s-dropdown-item>
+      <s-dropdown-item>
+        Suffix Icon
+        <span slot="suffix"><i class="fa fa-external-link"></i></span>
+      </s-dropdown-item>
+      <s-dropdown-divider></s-dropdown-divider>
+      <s-dropdown-item checked>Checked</s-dropdown-item>
+      <s-dropdown-item disabled>Disabled</s-dropdown-item>
+    </s-dropdown>
 
     <hr />
 

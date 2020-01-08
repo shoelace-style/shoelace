@@ -6,12 +6,15 @@ import { Component, Method, State, h } from '@stencil/core';
   scoped: true
 })
 export class Dropdown {
+  items: [HTMLSDropdownItemElement];
   menu: HTMLElement;
 
   constructor() {
     this.handleDocumentClick = this.handleDocumentClick.bind(this);
     this.handleDocumentKeyDown = this.handleDocumentKeyDown.bind(this);
     this.handleMenuMouseDown = this.handleMenuMouseDown.bind(this);
+    this.handleMenuMouseOver = this.handleMenuMouseOver.bind(this);
+    this.handleMenuMouseOut = this.handleMenuMouseOut.bind(this);
     this.handleTransitionEnd = this.handleTransitionEnd.bind(this);
   }
 
@@ -19,6 +22,7 @@ export class Dropdown {
 
   @Method()
   async open() {
+    this.items = this.getAllItems();
     this.menu.hidden = false;
     requestAnimationFrame(() => (this.isOpen = true));
 
@@ -29,13 +33,22 @@ export class Dropdown {
   @Method()
   async close() {
     this.isOpen = false;
+    this.setSelectedItem(null);
 
     document.removeEventListener('click', this.handleDocumentClick);
     document.removeEventListener('keydown', this.handleDocumentKeyDown);
   }
 
-  getDropdownItems() {
-    return this.menu.querySelectorAll('s-dropdown-item:not([disabled])');
+  getAllItems() {
+    return [...this.menu.querySelectorAll('s-dropdown-item:not([disabled])')] as [HTMLSDropdownItemElement];
+  }
+
+  getSelectedItem() {
+    return this.items.filter(i => i.active)[0];
+  }
+
+  setSelectedItem(item: HTMLSDropdownItemElement) {
+    this.items.map(i => (i.active = i === item));
   }
 
   handleDocumentClick(event: MouseEvent) {
@@ -63,23 +76,43 @@ export class Dropdown {
     }
 
     if (event.key === 'Enter') {
+      const item = this.getSelectedItem();
       event.preventDefault();
-      //
-      // TODO:
-      //
+
+      if (item) {
+        item.click();
+        this.close();
+      }
     }
 
     if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+      const selectedItem = this.getSelectedItem();
       event.preventDefault();
-      //
-      // TODO:
-      //
+
+      let index = this.items.indexOf(selectedItem) + (event.key === 'ArrowDown' ? 1 : -1);
+      if (index < 0) index = this.items.length - 1;
+      if (index > this.items.length - 1) index = 0;
+
+      this.setSelectedItem(this.items[index]);
     }
   }
 
   handleMenuMouseDown(event: MouseEvent) {
     // Keep focus on the dropdown trigger when selecting a menu item
     event.preventDefault();
+  }
+
+  handleMenuMouseOver(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    const dropdownItem = target.closest('s-dropdown-item');
+
+    if (dropdownItem) {
+      this.setSelectedItem(dropdownItem);
+    }
+  }
+
+  handleMenuMouseOut() {
+    this.setSelectedItem(null);
   }
 
   handleTransitionEnd() {
@@ -110,6 +143,8 @@ export class Dropdown {
           class="s-dropdown__menu"
           ref={el => (this.menu = el)}
           onMouseDown={this.handleMenuMouseDown}
+          onMouseOver={this.handleMenuMouseOver}
+          onMouseOut={this.handleMenuMouseOut}
           onTransitionEnd={this.handleTransitionEnd}
           hidden
         >

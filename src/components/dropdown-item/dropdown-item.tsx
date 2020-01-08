@@ -1,4 +1,4 @@
-import { Component, Prop, h } from '@stencil/core';
+import { Component, Event, EventEmitter, Prop, h } from '@stencil/core';
 
 @Component({
   tag: 's-dropdown-item',
@@ -9,8 +9,13 @@ export class DropdownItem {
   /** Set to true to draw the item in a checked state. */
   @Prop() checked = false;
 
-  /** Set to true to draw the item in a disabled state. */
+  /** Set to true to draw the dropdown item in an active state. */
+  @Prop() active = false;
+
+  /** Set to true to draw the dropdown item in a disabled state. */
   @Prop() disabled = false;
+
+  @Event() shoelaceSelect: EventEmitter;
 
   render() {
     return (
@@ -18,6 +23,7 @@ export class DropdownItem {
         class={{
           's-dropdown-item': true,
           's-dropdown-item--checked': this.checked,
+          's-dropdown-item--active': this.active,
           's-dropdown-item--disabled': this.disabled
         }}
       >

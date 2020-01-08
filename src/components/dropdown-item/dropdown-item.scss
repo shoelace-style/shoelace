@@ -18,7 +18,7 @@ $dropdown-item-padding-y: 10px;
   white-space: nowrap;
   cursor: pointer;
 
-  &:hover:not(.s-dropdown-item--disabled) {
+  &.s-dropdown-item--active:not(.s-dropdown-item--disabled) {
     background-color: tint($color-primary, 90%);
     color: $color-primary;
   }
