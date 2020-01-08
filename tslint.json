@@ -27,10 +27,11 @@
         "alphabetical": false
       }
     ],
-    "trailing-comma": false,
+    "curly": false,
     "no-console": false,
     "no-floating-promises": false,
-    "no-null-keyword": false
+    "no-null-keyword": false,
+    "trailing-comma": false
   },
   "rulesDirectory": []
 }
