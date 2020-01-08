@@ -57,8 +57,8 @@ export class Dropdown {
   async open() {
     this.items = this.getAllItems();
     this.menu.hidden = false;
+    this.isOpen = true;
     this.popper.scheduleUpdate();
-    requestAnimationFrame(() => (this.isOpen = true));
 
     document.addEventListener('click', this.handleDocumentClick);
     document.addEventListener('keydown', this.handleDocumentKeyDown);
