@@ -18,11 +18,13 @@ $dropdown-color: $menu-color !default;
   display: inline-block;
 }
 
-// TODO: use $dropdown-* variables here
+.s-dropdown__trigger {
+  display: inline-block;
+}
+
 .s-dropdown__menu {
   position: absolute;
-  top: calc(100% + 2px);
-  left: 0;
+  z-index: 9999;
   font-family: $dropdown-font-family;
   font-weight: $dropdown-font-weight;
   font-size: $dropdown-font-size;
@@ -31,16 +33,12 @@ $dropdown-color: $menu-color !default;
   border: solid 1px $dropdown-border-color;
   border-radius: 4px;
   box-shadow: $dropdown-box-shadow;
-  padding-top: 10px; // TODO: these should match $dropdown-item-padding-y
-  padding-bottom: 10px;
+  padding-top: $menu-padding-y;
+  padding-bottom: $menu-padding-y;
   opacity: 0;
-  transform-origin: top left;
-  transform: scale(0.9);
-  transition: 100ms opacity, 100ms transform;
-  z-index: 10;
+  transition: 100ms opacity;
 }
 
 .s-dropdown--open .s-dropdown__menu {
   opacity: 1;
-  transform: scale(1) translateY(0);
 }

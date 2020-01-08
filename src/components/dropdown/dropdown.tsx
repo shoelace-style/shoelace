@@ -1,4 +1,5 @@
-import { Component, Method, State, h } from '@stencil/core';
+import { Component, Method, Prop, State, Watch, h } from '@stencil/core';
+import PopperJs from 'popper.js';
 
 @Component({
   tag: 's-dropdown',
@@ -8,6 +9,8 @@ import { Component, Method, State, h } from '@stencil/core';
 export class Dropdown {
   items: [HTMLSDropdownItemElement];
   menu: HTMLElement;
+  popper: PopperJs;
+  trigger: HTMLElement;
 
   constructor() {
     this.handleDocumentClick = this.handleDocumentClick.bind(this);
@@ -20,10 +23,41 @@ export class Dropdown {
 
   @State() isOpen = false;
 
+  /**
+   * The preferred placement of the dropdown menu. Note that the actual placement may vary as needed to keep the menu
+   * inside of the viewport.
+   */
+  @Prop() placement: 'bottom-start' | 'bottom-end' | 'top-start' | 'top-end' = 'bottom-start';
+
+  @Watch('placement')
+  handlePlacementChange() {
+    if (this.popper) {
+      this.popper.options.placement = this.placement;
+    }
+  }
+
+  componentDidLoad() {
+    this.popper = new PopperJs(this.trigger, this.menu, {
+      placement: this.placement,
+      modifiers: {
+        offset: {
+          offset: '0, 2px'
+        }
+      }
+    });
+  }
+
+  componentDidUnload() {
+    if (this.popper) {
+      this.popper.destroy();
+    }
+  }
+
   @Method()
   async open() {
     this.items = this.getAllItems();
     this.menu.hidden = false;
+    this.popper.scheduleUpdate();
     requestAnimationFrame(() => (this.isOpen = true));
 
     document.addEventListener('click', this.handleDocumentClick);
@@ -70,8 +104,7 @@ export class Dropdown {
   }
 
   handleDocumentKeyDown(event: KeyboardEvent) {
-    if (event.key === 'Escape') {
-      event.preventDefault();
+    if (event.key === 'Escape' || event.key === 'Tab') {
       this.close();
     }
 
@@ -98,7 +131,7 @@ export class Dropdown {
   }
 
   handleMenuMouseDown(event: MouseEvent) {
-    // Keep focus on the dropdown trigger when selecting a menu item
+    // Keep focus on the dropdown trigger when selecting menu items
     event.preventDefault();
   }
 
@@ -135,7 +168,7 @@ export class Dropdown {
           's-dropdown--open': this.isOpen
         }}
       >
-        <span class="s-dropdown__trigger" onClick={() => this.toggleMenu()}>
+        <span class="s-dropdown__trigger" ref={el => (this.trigger = el)} onClick={() => this.toggleMenu()}>
           <slot name="trigger" />
         </span>
 

@@ -30,5 +30,7 @@
     "workbox-build": "4.3.1"
   },
   "license": "MIT",
-  "dependencies": {}
+  "dependencies": {
+    "popper.js": "^1.16.0"
+  }
 }

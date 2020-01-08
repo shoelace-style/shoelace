@@ -55,6 +55,10 @@ export namespace Components {
   interface SDropdown {
     'close': () => Promise<void>;
     'open': () => Promise<void>;
+    /**
+    * The preferred placement of the dropdown menu. Note that the actual placement may vary as needed to keep the menu inside of the viewport.
+    */
+    'placement': 'bottom-start' | 'bottom-end' | 'top-start' | 'top-end';
   }
   interface SDropdownDivider {}
   interface SDropdownItem {
@@ -354,7 +358,12 @@ declare namespace LocalJSX {
     */
     'type'?: string;
   }
-  interface SDropdown {}
+  interface SDropdown {
+    /**
+    * The preferred placement of the dropdown menu. Note that the actual placement may vary as needed to keep the menu inside of the viewport.
+    */
+    'placement'?: 'bottom-start' | 'bottom-end' | 'top-start' | 'top-end';
+  }
   interface SDropdownDivider {}
   interface SDropdownItem {
     /**
