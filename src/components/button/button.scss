@@ -220,8 +220,8 @@ $button-transition-speed: 100ms !default;
 
   .s-button__spinner {
     position: absolute;
-    top: calc(50% - 0.5em - 2px);
-    left: calc(50% - 0.5em - 2px);
+    top: calc(50% - 0.5em);
+    left: calc(50% - 0.5em);
     width: 1em;
     height: 1em;
     border: solid $button-spinner-width currentColor;
