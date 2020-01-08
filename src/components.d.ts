@@ -12,6 +12,10 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 export namespace Components {
   interface SButton {
     /**
+    * Set to true to draw a full-width button.
+    */
+    'block': boolean;
+    /**
     * Set to true to draw a circle button.
     */
     'circle': boolean;
@@ -55,11 +59,15 @@ export namespace Components {
   interface SDropdownDivider {}
   interface SDropdownItem {
     /**
+    * Set to true to draw the dropdown item in an active state.
+    */
+    'active': boolean;
+    /**
     * Set to true to draw the item in a checked state.
     */
     'checked': boolean;
     /**
-    * Set to true to draw the item in a disabled state.
+    * Set to true to draw the dropdown item in a disabled state.
     */
     'disabled': boolean;
   }
@@ -314,6 +322,10 @@ declare global {
 declare namespace LocalJSX {
   interface SButton {
     /**
+    * Set to true to draw a full-width button.
+    */
+    'block'?: boolean;
+    /**
     * Set to true to draw a circle button.
     */
     'circle'?: boolean;
@@ -346,13 +358,18 @@ declare namespace LocalJSX {
   interface SDropdownDivider {}
   interface SDropdownItem {
     /**
+    * Set to true to draw the dropdown item in an active state.
+    */
+    'active'?: boolean;
+    /**
     * Set to true to draw the item in a checked state.
     */
     'checked'?: boolean;
     /**
-    * Set to true to draw the item in a disabled state.
+    * Set to true to draw the dropdown item in a disabled state.
     */
     'disabled'?: boolean;
+    'onShoelaceSelect'?: (event: CustomEvent<any>) => void;
   }
   interface SInput {
     /**

@@ -77,6 +77,11 @@ $button-transition-speed: 100ms !default;
   }
 }
 
+// Block button
+.s-button--block {
+  width: 100%;
+}
+
 // Outline buttons
 .s-button.s-button--outline {
   &.s-button--default {
