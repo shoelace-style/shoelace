@@ -43,3 +43,17 @@ $form-control-font-size--large: 16px !default;
 
 $form-control-border-color: tint($color-black, 85%) !default;
 $form-control-color: $color-gray-40 !default;
+
+// Menus
+$menu-font-family: $font-sans-serif !default;
+$menu-font-weight: $font-weight-normal !default;
+$menu-font-size: $font-size !default;
+$menu-border-color: tint($form-control-border-color, 50%) !default;
+$menu-background-color: $color-white !default;
+$menu-box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1) !default;
+$menu-color: $color-gray-40 !default;
+$menu-item-background-color--hover: tint($color-primary, 90%) !default;
+$menu-item-color--hover: $color-primary !default;
+$menu-item-color--disabled: $color-gray-70 !default;
+$menu-item-padding-x: 30px !default;
+$menu-item-padding-y: 10px !default;

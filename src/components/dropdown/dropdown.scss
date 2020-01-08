@@ -1,10 +1,13 @@
 @import 'reset';
 @import 'variables';
 
-$dropdown-font-family: $font-sans-serif !default;
-$dropdown-font-weight: $font-weight-normal !default;
-$dropdown-color: $form-control-color !default;
-$dropdown-background-color: $color-white !default;
+$dropdown-font-family: $menu-font-family !default;
+$dropdown-font-weight: $menu-font-weight !default;
+$dropdown-font-size: $menu-font-size !default;
+$dropdown-border-color: $menu-border-color !default;
+$dropdown-background-color: $menu-background-color !default;
+$dropdown-box-shadow: $menu-box-shadow !default;
+$dropdown-color: $menu-color !default;
 
 :host {
   display: inline-block;
@@ -22,11 +25,12 @@ $dropdown-background-color: $color-white !default;
   left: 0;
   font-family: $dropdown-font-family;
   font-weight: $dropdown-font-weight;
+  font-size: $dropdown-font-size;
   color: $dropdown-color;
   background-color: $dropdown-background-color;
-  border: solid 1px tint($form-control-border-color, 50%);
+  border: solid 1px $dropdown-border-color;
   border-radius: 4px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: $dropdown-box-shadow;
   padding-top: 10px; // TODO: these should match $dropdown-item-padding-y
   padding-bottom: 10px;
   opacity: 0;

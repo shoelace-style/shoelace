@@ -1,9 +1,9 @@
 @import 'reset';
 @import 'variables';
 
-$dropdown-item-var: value !default;
-$dropdown-item-padding-x: 30px;
-$dropdown-item-padding-y: 10px;
+$dropdown-item-padding-x: $menu-item-padding-x !default;
+$dropdown-item-padding-y: $menu-item-padding-y !default;
+$dropdown-item-transition-speed: 100ms !default;
 
 :host {
   display: block;
@@ -14,29 +14,31 @@ $dropdown-item-padding-y: 10px;
   display: flex;
   align-items: center;
   padding: $dropdown-item-padding-y $dropdown-item-padding-x;
-  transition: 100ms color, 100ms background-color, 100ms fill;
+  transition: $dropdown-item-transition-speed color, $dropdown-item-transition-speed background-color,
+    $dropdown-item-transition-speed fill;
   user-select: none;
   white-space: nowrap;
   cursor: pointer;
 
   &.s-dropdown-item--active:not(.s-dropdown-item--disabled) {
-    background-color: tint($color-primary, 90%);
-    color: $color-primary;
+    background-color: $menu-item-background-color--hover;
+    color: $menu-item-color--hover;
   }
 
   &.s-dropdown-item--disabled {
-    color: $color-gray-70;
+    color: $menu-item-color--disabled;
     cursor: default;
   }
 
   .s-dropdown-item__check {
+    display: flex;
     position: absolute;
-    top: calc(50% - 9px);
     left: 11px;
     visibility: hidden;
+    align-items: center;
 
     svg {
-      height: 13px;
+      height: 12px;
     }
   }
 
