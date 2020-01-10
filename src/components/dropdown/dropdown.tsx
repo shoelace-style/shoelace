@@ -2,6 +2,7 @@ import { Component, Element, Method, Prop, State, Watch, h } from '@stencil/core
 import PopperJs from 'popper.js';
 
 let id = 0;
+let openDropdowns = [];
 
 @Component({
   tag: 's-dropdown',
@@ -49,6 +50,8 @@ export class Dropdown {
         }
       }
     });
+
+    // PopperJs.Defaults.modifiers.computeStyle.enabled = false;
   }
 
   componentDidUnload() {
@@ -59,10 +62,12 @@ export class Dropdown {
 
   @Method()
   async open() {
+    this.closeOpenDropdowns();
     this.menu.hidden = false;
     this.isOpen = true;
     this.popper.scheduleUpdate();
-    this.closeOtherDropdowns();
+
+    openDropdowns.push(this.host);
 
     document.addEventListener('click', this.handleDocumentClick);
     document.addEventListener('keydown', this.handleDocumentKeyDown);
@@ -73,14 +78,19 @@ export class Dropdown {
     this.isOpen = false;
     this.setSelectedItem(null);
 
+    openDropdowns = openDropdowns.filter(dropdown => this.host !== dropdown);
+
     document.removeEventListener('click', this.handleDocumentClick);
     document.removeEventListener('keydown', this.handleDocumentKeyDown);
   }
 
-  closeOtherDropdowns() {
-    [...document.querySelectorAll('s-dropdown')].map(dropdown => {
-      if (this.host !== dropdown) {
+  closeOpenDropdowns() {
+    openDropdowns = openDropdowns.filter(dropdown => {
+      if (this.host === dropdown) {
+        return true;
+      } else {
         dropdown.close();
+        return false;
       }
     });
   }
