@@ -158,11 +158,11 @@ $input-transition-speed: 100ms !default;
 
   .s-input__prefix:not(:empty) {
     color: $input-placeholder-color;
-    margin-right: 0.75em;
+    margin-right: 0.5em;
   }
 
   .s-input__suffix:not(:empty) {
     color: $input-placeholder-color;
-    margin-left: 0.75em;
+    margin-left: 0.5em;
   }
 }
