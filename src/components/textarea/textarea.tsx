@@ -1,7 +1,7 @@
 import { Component, Method, Prop, State, h } from '@stencil/core';
 
 @Component({
-  tag: 's-textarea',
+  tag: 'sl-textarea',
   styleUrl: 'textarea.scss',
   scoped: true
 })
@@ -111,28 +111,28 @@ export class Textarea {
     return (
       <div
         class={{
-          's-textarea': true,
+          'sl-textarea': true,
 
           // Sizes
-          's-textarea--small': this.size === 'small',
-          's-textarea--medium': this.size === 'medium',
-          's-textarea--large': this.size === 'large',
+          'sl-textarea--small': this.size === 'small',
+          'sl-textarea--medium': this.size === 'medium',
+          'sl-textarea--large': this.size === 'large',
 
           // States
-          's-textarea--disabled': this.disabled,
-          's-textarea--focused': this.hasFocus,
-          's-textarea--empty': this.value.length === 0,
+          'sl-textarea--disabled': this.disabled,
+          'sl-textarea--focused': this.hasFocus,
+          'sl-textarea--empty': this.value.length === 0,
 
           // Modifiers
-          's-textarea--resize-none': this.resize === 'none',
-          's-textarea--resize-vertical': this.resize === 'vertical',
-          's-textarea--resize-auto': this.resize === 'auto'
+          'sl-textarea--resize-none': this.resize === 'none',
+          'sl-textarea--resize-vertical': this.resize === 'vertical',
+          'sl-textarea--resize-auto': this.resize === 'auto'
         }}
         onClick={() => this.textarea.focus()}
       >
         <textarea
           ref={el => (this.textarea = el)}
-          class="s-textarea__control"
+          class="sl-textarea__control"
           name={this.name}
           placeholder={this.placeholder}
           disabled={this.disabled}

@@ -1,7 +1,7 @@
 import { Component, Method, Prop, State, h } from '@stencil/core';
 
 @Component({
-  tag: 's-range',
+  tag: 'sl-range',
   styleUrl: 'range.scss',
   scoped: true
 })
@@ -44,18 +44,18 @@ export class Range {
     return (
       <div
         class={{
-          's-range': true,
+          'sl-range': true,
 
           // States
-          's-range--disabled': this.disabled,
-          's-range--focused': this.hasFocus
+          'sl-range--disabled': this.disabled,
+          'sl-range--focused': this.hasFocus
         }}
         onClick={() => this.input.focus()}
       >
         <input
           ref={el => (this.input = el)}
           type="range"
-          class="s-range__control"
+          class="sl-range__control"
           name={this.name}
           disabled={this.disabled}
           min={this.min}

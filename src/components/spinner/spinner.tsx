@@ -1,7 +1,7 @@
 import { Component, Prop, h } from '@stencil/core';
 
 @Component({
-  tag: 's-spinner',
+  tag: 'sl-spinner',
   styleUrl: 'spinner.scss',
   scoped: true
 })
@@ -12,7 +12,7 @@ export class Spinner {
   render() {
     return (
       <span
-        class="s-spinner"
+        class="sl-spinner"
         style={{
           width: this.size,
           height: this.size

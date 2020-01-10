@@ -29,7 +29,7 @@ $input-transition-speed: 100ms !default;
   display: block;
 }
 
-.s-input {
+.sl-input {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -41,7 +41,7 @@ $input-transition-speed: 100ms !default;
   border: solid 1px $form-control-border-color;
   transition: $input-transition-speed color, $input-transition-speed border;
 
-  .s-input__control {
+  .sl-input__control {
     flex: 1 1 auto;
     font-family: inherit;
     font-size: inherit;
@@ -69,61 +69,61 @@ $input-transition-speed: 100ms !default;
     }
   }
 
-  &:hover:not(.s-input--disabled) {
+  &:hover:not(.sl-input--disabled) {
     color: $input-color;
     background-color: $input-background-color;
     border-color: shade($form-control-border-color, 10%);
   }
 
-  &.s-input--focused:not(.s-input--disabled) {
+  &.sl-input--focused:not(.sl-input--disabled) {
     border-color: $color-primary;
   }
 
-  &.s-input--disabled {
+  &.sl-input--disabled {
     background-color: shade($input-background-color, 5%);
     opacity: 0.5;
   }
 }
 
 // Size modifiers
-.s-input--small {
+.sl-input--small {
   border-radius: $input-border-radius--small;
   font-size: $input-font-size--small;
   padding: 0 $input-padding-x--small;
   height: $input-height--small;
 
-  .s-input__control {
+  .sl-input__control {
     height: $input-height--small - 2px;
     line-height: $input-height--small - 2px; // top + bottom border
   }
 }
 
-.s-input--medium {
+.sl-input--medium {
   border-radius: $input-border-radius--medium;
   font-size: $input-font-size--medium;
   height: $input-height--medium;
   padding: 0 $input-padding-x--medium;
 
-  .s-input__control {
+  .sl-input__control {
     height: $input-height--small - 2px;
     line-height: $input-height--medium - 2px; // top + bottom border
   }
 }
 
-.s-input--large {
+.sl-input--large {
   border-radius: $input-border-radius--large;
   font-size: $input-font-size--large;
   height: $input-height--large;
   padding: 0 $input-padding-x--large;
 
-  .s-input__control {
+  .sl-input__control {
     height: $input-height--small - 2px;
     line-height: $input-height--large - 2px; // top + bottom border
   }
 }
 
 // Clearable
-.s-input__clear {
+.sl-input__clear {
   display: flex;
   align-items: center;
   font-size: inherit;
@@ -145,23 +145,23 @@ $input-transition-speed: 100ms !default;
   }
 }
 
-.s-input--empty .s-input__clear {
+.sl-input--empty .sl-input__clear {
   visibility: hidden;
 }
 
 // Slots
-.s-input {
-  .s-input__prefix:empty,
-  .s-input__suffix:empty {
+.sl-input {
+  .sl-input__prefix:empty,
+  .sl-input__suffix:empty {
     display: none;
   }
 
-  .s-input__prefix:not(:empty) {
+  .sl-input__prefix:not(:empty) {
     color: $input-placeholder-color;
     margin-right: 0.5em;
   }
 
-  .s-input__suffix:not(:empty) {
+  .sl-input__suffix:not(:empty) {
     color: $input-placeholder-color;
     margin-left: 0.5em;
   }

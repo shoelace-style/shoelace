@@ -39,8 +39,8 @@ $button-transition-speed: 100ms !default;
 }
 
 // Standard buttons
-.s-button:not(.s-button--outline) {
-  &.s-button--default {
+.sl-button:not(.sl-button--outline) {
+  &.sl-button--default {
     @include button(
       $color: $form-control-color,
       $background-color: $color-white,
@@ -57,35 +57,35 @@ $button-transition-speed: 100ms !default;
     );
   }
 
-  &.s-button--primary {
+  &.sl-button--primary {
     @include button-solid($color-white, $color-primary);
   }
 
-  &.s-button--success {
+  &.sl-button--success {
     @include button-solid($color-white, $color-success);
   }
 
-  &.s-button--info {
+  &.sl-button--info {
     @include button-solid($color-white, $color-info);
   }
 
-  &.s-button--warning {
+  &.sl-button--warning {
     @include button-solid($color-white, $color-warning);
   }
 
-  &.s-button--danger {
+  &.sl-button--danger {
     @include button-solid($color-white, $color-danger);
   }
 }
 
 // Block button
-.s-button--block {
+.sl-button--block {
   width: 100%;
 }
 
 // Outline buttons
-.s-button.s-button--outline {
-  &.s-button--default {
+.sl-button.sl-button--outline {
+  &.sl-button--default {
     @include button(
       $color: $form-control-color,
       $background-color: $color-white,
@@ -102,29 +102,29 @@ $button-transition-speed: 100ms !default;
     );
   }
 
-  &.s-button--primary {
+  &.sl-button--primary {
     @include button-outline($color-white, $color-primary);
   }
 
-  &.s-button--success {
+  &.sl-button--success {
     @include button-outline($color-white, $color-success);
   }
 
-  &.s-button--info {
+  &.sl-button--info {
     @include button-outline($color-white, $color-info);
   }
 
-  &.s-button--warning {
+  &.sl-button--warning {
     @include button-outline($color-white, $color-warning);
   }
 
-  &.s-button--danger {
+  &.sl-button--danger {
     @include button-outline($color-white, $color-danger);
   }
 }
 
 // Text buttons
-.s-button--text {
+.sl-button--text {
   @include button(
     $color: $color-gray-20,
     $background-color: transparent,
@@ -142,7 +142,7 @@ $button-transition-speed: 100ms !default;
 }
 
 // Size modifiers
-.s-button--small {
+.sl-button--small {
   font-size: $button-font-size--small;
   height: $button-height--small;
   line-height: $button-height--small - 2px; // top + bottom border
@@ -150,7 +150,7 @@ $button-transition-speed: 100ms !default;
   padding: 0 $button-padding-x--small;
 }
 
-.s-button--medium {
+.sl-button--medium {
   font-size: $button-font-size--medium;
   height: $button-height--medium;
   line-height: $button-height--medium - 2px; // top + bottom border
@@ -158,7 +158,7 @@ $button-transition-speed: 100ms !default;
   padding: 0 $button-padding-x--medium;
 }
 
-.s-button--large {
+.sl-button--large {
   font-size: $button-font-size--large;
   height: $button-height--large;
   line-height: $button-height--large - 2px; // top + bottom border
@@ -167,58 +167,58 @@ $button-transition-speed: 100ms !default;
 }
 
 // Round modifier
-.s-button--round {
-  &.s-button--small {
+.sl-button--round {
+  &.sl-button--small {
     border-radius: $button-height--small;
   }
 
-  &.s-button--medium {
+  &.sl-button--medium {
     border-radius: $button-height--medium;
   }
 
-  &.s-button--large {
+  &.sl-button--large {
     border-radius: $button-height--large;
   }
 }
 
 // Circle modifier
-.s-button--circle {
+.sl-button--circle {
   padding-left: 0;
   padding-right: 0;
 
-  &.s-button--small {
+  &.sl-button--small {
     width: $button-height--small;
     border-radius: 50%;
   }
 
-  &.s-button--medium {
+  &.sl-button--medium {
     width: $button-height--medium;
     border-radius: 50%;
   }
 
-  &.s-button--large {
+  &.sl-button--large {
     width: $button-height--large;
     border-radius: 50%;
   }
 
-  .s-button__prefix,
-  .s-button__suffix {
+  .sl-button__prefix,
+  .sl-button__suffix {
     display: none;
   }
 }
 
 // Loading state
-.s-button--loading {
+.sl-button--loading {
   position: relative;
   pointer-events: none;
 
-  .s-button__prefix,
-  .s-button__label,
-  .s-button__suffix {
+  .sl-button__prefix,
+  .sl-button__label,
+  .sl-button__suffix {
     visibility: hidden;
   }
 
-  .s-button__spinner {
+  .sl-button__spinner {
     position: absolute;
     top: calc(50% - 0.5em);
     left: calc(50% - 0.5em);
@@ -232,22 +232,22 @@ $button-transition-speed: 100ms !default;
 }
 
 // Slots
-.s-button {
+.sl-button {
   display: flex;
   align-items: center;
   justify-content: center;
 
-  .s-button__prefix:empty,
-  .s-button__suffix:empty {
+  .sl-button__prefix:empty,
+  .sl-button__suffix:empty {
     display: none;
   }
 
-  .s-button__prefix:not(:empty) {
+  .sl-button__prefix:not(:empty) {
     margin-left: -0.25em;
     margin-right: 0.25em;
   }
 
-  .s-button__suffix:not(:empty) {
+  .sl-button__suffix:not(:empty) {
     margin-left: 0.25em;
     margin-right: -0.25em;
   }

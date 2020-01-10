@@ -10,7 +10,7 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
-  interface SButton {
+  interface SlButton {
     /**
     * Set to true to draw a full-width button.
     */
@@ -52,7 +52,7 @@ export namespace Components {
     */
     'type': string;
   }
-  interface SDropdown {
+  interface SlDropdown {
     'close': () => Promise<void>;
     'open': () => Promise<void>;
     /**
@@ -60,8 +60,8 @@ export namespace Components {
     */
     'placement': 'bottom-start' | 'bottom-end' | 'top-start' | 'top-end';
   }
-  interface SDropdownDivider {}
-  interface SDropdownItem {
+  interface SlDropdownDivider {}
+  interface SlDropdownItem {
     /**
     * Set to true to draw the dropdown item in an active state.
     */
@@ -75,7 +75,7 @@ export namespace Components {
     */
     'disabled': boolean;
   }
-  interface SInput {
+  interface SlInput {
     /**
     * The input's autocaptialize attribute.
     */
@@ -157,7 +157,7 @@ export namespace Components {
     */
     'value': string;
   }
-  interface SRange {
+  interface SlRange {
     /**
     * Set to true to disable the input.
     */
@@ -191,13 +191,13 @@ export namespace Components {
     */
     'value': string;
   }
-  interface SSpinner {
+  interface SlSpinner {
     /**
     * The spinner's size.
     */
     'size': string;
   }
-  interface STextarea {
+  interface SlTextarea {
     /**
     * The textarea's autocaptialize attribute.
     */
@@ -264,67 +264,67 @@ export namespace Components {
 declare global {
 
 
-  interface HTMLSButtonElement extends Components.SButton, HTMLStencilElement {}
-  var HTMLSButtonElement: {
-    prototype: HTMLSButtonElement;
-    new (): HTMLSButtonElement;
+  interface HTMLSlButtonElement extends Components.SlButton, HTMLStencilElement {}
+  var HTMLSlButtonElement: {
+    prototype: HTMLSlButtonElement;
+    new (): HTMLSlButtonElement;
   };
 
-  interface HTMLSDropdownElement extends Components.SDropdown, HTMLStencilElement {}
-  var HTMLSDropdownElement: {
-    prototype: HTMLSDropdownElement;
-    new (): HTMLSDropdownElement;
+  interface HTMLSlDropdownElement extends Components.SlDropdown, HTMLStencilElement {}
+  var HTMLSlDropdownElement: {
+    prototype: HTMLSlDropdownElement;
+    new (): HTMLSlDropdownElement;
   };
 
-  interface HTMLSDropdownDividerElement extends Components.SDropdownDivider, HTMLStencilElement {}
-  var HTMLSDropdownDividerElement: {
-    prototype: HTMLSDropdownDividerElement;
-    new (): HTMLSDropdownDividerElement;
+  interface HTMLSlDropdownDividerElement extends Components.SlDropdownDivider, HTMLStencilElement {}
+  var HTMLSlDropdownDividerElement: {
+    prototype: HTMLSlDropdownDividerElement;
+    new (): HTMLSlDropdownDividerElement;
   };
 
-  interface HTMLSDropdownItemElement extends Components.SDropdownItem, HTMLStencilElement {}
-  var HTMLSDropdownItemElement: {
-    prototype: HTMLSDropdownItemElement;
-    new (): HTMLSDropdownItemElement;
+  interface HTMLSlDropdownItemElement extends Components.SlDropdownItem, HTMLStencilElement {}
+  var HTMLSlDropdownItemElement: {
+    prototype: HTMLSlDropdownItemElement;
+    new (): HTMLSlDropdownItemElement;
   };
 
-  interface HTMLSInputElement extends Components.SInput, HTMLStencilElement {}
-  var HTMLSInputElement: {
-    prototype: HTMLSInputElement;
-    new (): HTMLSInputElement;
+  interface HTMLSlInputElement extends Components.SlInput, HTMLStencilElement {}
+  var HTMLSlInputElement: {
+    prototype: HTMLSlInputElement;
+    new (): HTMLSlInputElement;
   };
 
-  interface HTMLSRangeElement extends Components.SRange, HTMLStencilElement {}
-  var HTMLSRangeElement: {
-    prototype: HTMLSRangeElement;
-    new (): HTMLSRangeElement;
+  interface HTMLSlRangeElement extends Components.SlRange, HTMLStencilElement {}
+  var HTMLSlRangeElement: {
+    prototype: HTMLSlRangeElement;
+    new (): HTMLSlRangeElement;
   };
 
-  interface HTMLSSpinnerElement extends Components.SSpinner, HTMLStencilElement {}
-  var HTMLSSpinnerElement: {
-    prototype: HTMLSSpinnerElement;
-    new (): HTMLSSpinnerElement;
+  interface HTMLSlSpinnerElement extends Components.SlSpinner, HTMLStencilElement {}
+  var HTMLSlSpinnerElement: {
+    prototype: HTMLSlSpinnerElement;
+    new (): HTMLSlSpinnerElement;
   };
 
-  interface HTMLSTextareaElement extends Components.STextarea, HTMLStencilElement {}
-  var HTMLSTextareaElement: {
-    prototype: HTMLSTextareaElement;
-    new (): HTMLSTextareaElement;
+  interface HTMLSlTextareaElement extends Components.SlTextarea, HTMLStencilElement {}
+  var HTMLSlTextareaElement: {
+    prototype: HTMLSlTextareaElement;
+    new (): HTMLSlTextareaElement;
   };
   interface HTMLElementTagNameMap {
-    's-button': HTMLSButtonElement;
-    's-dropdown': HTMLSDropdownElement;
-    's-dropdown-divider': HTMLSDropdownDividerElement;
-    's-dropdown-item': HTMLSDropdownItemElement;
-    's-input': HTMLSInputElement;
-    's-range': HTMLSRangeElement;
-    's-spinner': HTMLSSpinnerElement;
-    's-textarea': HTMLSTextareaElement;
+    'sl-button': HTMLSlButtonElement;
+    'sl-dropdown': HTMLSlDropdownElement;
+    'sl-dropdown-divider': HTMLSlDropdownDividerElement;
+    'sl-dropdown-item': HTMLSlDropdownItemElement;
+    'sl-input': HTMLSlInputElement;
+    'sl-range': HTMLSlRangeElement;
+    'sl-spinner': HTMLSlSpinnerElement;
+    'sl-textarea': HTMLSlTextareaElement;
   }
 }
 
 declare namespace LocalJSX {
-  interface SButton {
+  interface SlButton {
     /**
     * Set to true to draw a full-width button.
     */
@@ -358,14 +358,14 @@ declare namespace LocalJSX {
     */
     'type'?: string;
   }
-  interface SDropdown {
+  interface SlDropdown {
     /**
     * The preferred placement of the dropdown menu. Note that the actual placement may vary as needed to keep the menu inside of the viewport.
     */
     'placement'?: 'bottom-start' | 'bottom-end' | 'top-start' | 'top-end';
   }
-  interface SDropdownDivider {}
-  interface SDropdownItem {
+  interface SlDropdownDivider {}
+  interface SlDropdownItem {
     /**
     * Set to true to draw the dropdown item in an active state.
     */
@@ -380,7 +380,7 @@ declare namespace LocalJSX {
     'disabled'?: boolean;
     'onShoelaceSelect'?: (event: CustomEvent<any>) => void;
   }
-  interface SInput {
+  interface SlInput {
     /**
     * The input's autocaptialize attribute.
     */
@@ -454,7 +454,7 @@ declare namespace LocalJSX {
     */
     'value'?: string;
   }
-  interface SRange {
+  interface SlRange {
     /**
     * Set to true to disable the input.
     */
@@ -480,13 +480,13 @@ declare namespace LocalJSX {
     */
     'value'?: string;
   }
-  interface SSpinner {
+  interface SlSpinner {
     /**
     * The spinner's size.
     */
     'size'?: string;
   }
-  interface STextarea {
+  interface SlTextarea {
     /**
     * The textarea's autocaptialize attribute.
     */
@@ -542,14 +542,14 @@ declare namespace LocalJSX {
   }
 
   interface IntrinsicElements {
-    's-button': SButton;
-    's-dropdown': SDropdown;
-    's-dropdown-divider': SDropdownDivider;
-    's-dropdown-item': SDropdownItem;
-    's-input': SInput;
-    's-range': SRange;
-    's-spinner': SSpinner;
-    's-textarea': STextarea;
+    'sl-button': SlButton;
+    'sl-dropdown': SlDropdown;
+    'sl-dropdown-divider': SlDropdownDivider;
+    'sl-dropdown-item': SlDropdownItem;
+    'sl-input': SlInput;
+    'sl-range': SlRange;
+    'sl-spinner': SlSpinner;
+    'sl-textarea': SlTextarea;
   }
 }
 
@@ -559,14 +559,14 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
-      's-button': LocalJSX.SButton & JSXBase.HTMLAttributes<HTMLSButtonElement>;
-      's-dropdown': LocalJSX.SDropdown & JSXBase.HTMLAttributes<HTMLSDropdownElement>;
-      's-dropdown-divider': LocalJSX.SDropdownDivider & JSXBase.HTMLAttributes<HTMLSDropdownDividerElement>;
-      's-dropdown-item': LocalJSX.SDropdownItem & JSXBase.HTMLAttributes<HTMLSDropdownItemElement>;
-      's-input': LocalJSX.SInput & JSXBase.HTMLAttributes<HTMLSInputElement>;
-      's-range': LocalJSX.SRange & JSXBase.HTMLAttributes<HTMLSRangeElement>;
-      's-spinner': LocalJSX.SSpinner & JSXBase.HTMLAttributes<HTMLSSpinnerElement>;
-      's-textarea': LocalJSX.STextarea & JSXBase.HTMLAttributes<HTMLSTextareaElement>;
+      'sl-button': LocalJSX.SlButton & JSXBase.HTMLAttributes<HTMLSlButtonElement>;
+      'sl-dropdown': LocalJSX.SlDropdown & JSXBase.HTMLAttributes<HTMLSlDropdownElement>;
+      'sl-dropdown-divider': LocalJSX.SlDropdownDivider & JSXBase.HTMLAttributes<HTMLSlDropdownDividerElement>;
+      'sl-dropdown-item': LocalJSX.SlDropdownItem & JSXBase.HTMLAttributes<HTMLSlDropdownItemElement>;
+      'sl-input': LocalJSX.SlInput & JSXBase.HTMLAttributes<HTMLSlInputElement>;
+      'sl-range': LocalJSX.SlRange & JSXBase.HTMLAttributes<HTMLSlRangeElement>;
+      'sl-spinner': LocalJSX.SlSpinner & JSXBase.HTMLAttributes<HTMLSlSpinnerElement>;
+      'sl-textarea': LocalJSX.SlTextarea & JSXBase.HTMLAttributes<HTMLSlTextareaElement>;
     }
   }
 }

@@ -1,7 +1,7 @@
 import { Component, Host, Method, Prop, h } from '@stencil/core';
 
 @Component({
-  tag: 's-button',
+  tag: 'sl-button',
   styleUrl: 'button.scss',
   scoped: true
 })
@@ -54,43 +54,43 @@ export class Button {
         <button
           ref={el => (this.button = el)}
           class={{
-            's-button': true,
+            'sl-button': true,
 
             // Types
-            's-button--default': this.type === 'default',
-            's-button--primary': this.type === 'primary',
-            's-button--success': this.type === 'success',
-            's-button--info': this.type === 'info',
-            's-button--warning': this.type === 'warning',
-            's-button--danger': this.type === 'danger',
-            's-button--text': this.type === 'text',
+            'sl-button--default': this.type === 'default',
+            'sl-button--primary': this.type === 'primary',
+            'sl-button--success': this.type === 'success',
+            'sl-button--info': this.type === 'info',
+            'sl-button--warning': this.type === 'warning',
+            'sl-button--danger': this.type === 'danger',
+            'sl-button--text': this.type === 'text',
 
             // Sizes
-            's-button--small': this.size === 'small',
-            's-button--medium': this.size === 'medium',
-            's-button--large': this.size === 'large',
+            'sl-button--small': this.size === 'small',
+            'sl-button--medium': this.size === 'medium',
+            'sl-button--large': this.size === 'large',
 
             // Modifiers
-            's-button--block': this.block,
-            's-button--disabled': this.disabled,
-            's-button--loading': this.loading,
-            's-button--outline': this.outline,
-            's-button--round': this.round,
-            's-button--circle': this.circle
+            'sl-button--block': this.block,
+            'sl-button--disabled': this.disabled,
+            'sl-button--loading': this.loading,
+            'sl-button--outline': this.outline,
+            'sl-button--round': this.round,
+            'sl-button--circle': this.circle
           }}
           disabled={this.disabled}
         >
-          <span class="s-button__prefix">
+          <span class="sl-button__prefix">
             <slot name="prefix" />
           </span>
-          <span class="s-button__label">
+          <span class="sl-button__label">
             <slot />
           </span>
-          <span class="s-button__suffix">
+          <span class="sl-button__suffix">
             <slot name="suffix" />
           </span>
 
-          {this.loading ? <span class="s-button__spinner" /> : ''}
+          {this.loading ? <span class="sl-button__spinner" /> : ''}
         </button>
       </Host>
     );

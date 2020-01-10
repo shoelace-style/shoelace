@@ -1,7 +1,7 @@
 import { Component, Method, Prop, State, h } from '@stencil/core';
 
 @Component({
-  tag: 's-input',
+  tag: 'sl-input',
   styleUrl: 'input.scss',
   scoped: true
 })
@@ -80,27 +80,27 @@ export class Input {
     return (
       <div
         class={{
-          's-input': true,
+          'sl-input': true,
 
           // Sizes
-          's-input--small': this.size === 'small',
-          's-input--medium': this.size === 'medium',
-          's-input--large': this.size === 'large',
+          'sl-input--small': this.size === 'small',
+          'sl-input--medium': this.size === 'medium',
+          'sl-input--large': this.size === 'large',
 
           // States
-          's-input--disabled': this.disabled,
-          's-input--focused': this.hasFocus,
-          's-input--empty': this.value.length === 0
+          'sl-input--disabled': this.disabled,
+          'sl-input--focused': this.hasFocus,
+          'sl-input--empty': this.value.length === 0
         }}
         onClick={() => this.input.focus()}
       >
-        <span class="s-input__prefix">
+        <span class="sl-input__prefix">
           <slot name="prefix" />
         </span>
 
         <input
           ref={el => (this.input = el)}
-          class="s-input__control"
+          class="sl-input__control"
           type={this.type}
           name={this.name}
           placeholder={this.placeholder}
@@ -124,7 +124,7 @@ export class Input {
 
         {this.clearable ? (
           <button
-            class="s-input__clear"
+            class="sl-input__clear"
             onMouseDown={event => event.preventDefault()}
             onClick={() => (this.value = '')}
             tabindex="-1"
@@ -143,7 +143,7 @@ export class Input {
           ''
         )}
 
-        <span class="s-input__suffix">
+        <span class="sl-input__suffix">
           <slot name="suffix" />
         </span>
       </div>

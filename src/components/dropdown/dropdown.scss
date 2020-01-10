@@ -13,16 +13,16 @@ $dropdown-color: $menu-color !default;
   display: inline-block;
 }
 
-.s-dropdown {
+.sl-dropdown {
   position: relative;
   display: inline-block;
 }
 
-.s-dropdown__trigger {
+.sl-dropdown__trigger {
   display: inline-block;
 }
 
-.s-dropdown__menu {
+.sl-dropdown__menu {
   position: absolute;
   z-index: 9999;
   font-family: $dropdown-font-family;
@@ -39,6 +39,6 @@ $dropdown-color: $menu-color !default;
   transition: 100ms opacity;
 }
 
-.s-dropdown--open .s-dropdown__menu {
+.sl-dropdown--open .sl-dropdown__menu {
   opacity: 1;
 }

@@ -25,7 +25,7 @@ $textarea-transition-speed: 100ms !default;
   display: block;
 }
 
-.s-textarea {
+.sl-textarea {
   display: flex;
   align-items: center;
   position: relative;
@@ -36,7 +36,7 @@ $textarea-transition-speed: 100ms !default;
   border: solid 1px $form-control-border-color;
   transition: $textarea-transition-speed color, $textarea-transition-speed border;
 
-  .s-textarea__control {
+  .sl-textarea__control {
     flex: 1 1 auto;
     font-family: inherit;
     font-size: inherit;
@@ -64,17 +64,17 @@ $textarea-transition-speed: 100ms !default;
     }
   }
 
-  &:hover:not(.s-textarea--disabled) {
+  &:hover:not(.sl-textarea--disabled) {
     color: $textarea-color;
     border-color: shade($form-control-border-color, 10%);
   }
 
-  &.s-textarea--focused:not(.s-textarea--disabled) {
+  &.sl-textarea--focused:not(.sl-textarea--disabled) {
     color: $textarea-color;
     border-color: $color-primary;
   }
 
-  &.s-textarea--disabled {
+  &.sl-textarea--disabled {
     color: $textarea-color;
     background-color: $textarea-background-color;
     border-color: $form-control-border-color;
@@ -83,43 +83,43 @@ $textarea-transition-speed: 100ms !default;
 }
 
 // Size modifiers
-.s-textarea--small {
+.sl-textarea--small {
   border-radius: $textarea-border-radius--small;
   font-size: $textarea-font-size--small;
 
-  .s-textarea__control {
+  .sl-textarea__control {
     padding: 0.5em $textarea-padding-x--small;
   }
 }
 
-.s-textarea--medium {
+.sl-textarea--medium {
   border-radius: $textarea-border-radius--medium;
   font-size: $textarea-font-size--medium;
 
-  .s-textarea__control {
+  .sl-textarea__control {
     padding: 0.5em $textarea-padding-x--medium;
   }
 }
 
-.s-textarea--large {
+.sl-textarea--large {
   border-radius: $textarea-border-radius--large;
   font-size: $textarea-font-size--large;
 
-  .s-textarea__control {
+  .sl-textarea__control {
     padding: 0.5em $textarea-padding-x--large;
   }
 }
 
 // Resize
-.s-textarea--resize-none .s-textarea__control {
+.sl-textarea--resize-none .sl-textarea__control {
   resize: none;
 }
 
-.s-textarea--resize-vertical .s-textarea__control {
+.sl-textarea--resize-vertical .sl-textarea__control {
   resize: vertical;
 }
 
-.s-textarea--resize-auto .s-textarea__control {
+.sl-textarea--resize-auto .sl-textarea__control {
   height: auto;
   resize: none;
 }

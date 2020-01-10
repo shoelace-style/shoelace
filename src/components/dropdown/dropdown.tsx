@@ -5,12 +5,12 @@ let id = 0;
 let openDropdowns = [];
 
 @Component({
-  tag: 's-dropdown',
+  tag: 'sl-dropdown',
   styleUrl: 'dropdown.scss',
   scoped: true
 })
 export class Dropdown {
-  id = `s-dropdown-${++id}`;
+  id = `sl-dropdown-${++id}`;
   menu: HTMLElement;
   popper: PopperJs;
   trigger: HTMLElement;
@@ -96,21 +96,21 @@ export class Dropdown {
   }
 
   getAllItems() {
-    return [...this.menu.querySelectorAll('s-dropdown-item:not([disabled])')] as [HTMLSDropdownItemElement];
+    return [...this.menu.querySelectorAll('sl-dropdown-item:not([disabled])')] as [HTMLSlDropdownItemElement];
   }
 
   getSelectedItem() {
     return this.getAllItems().find(i => i.active);
   }
 
-  setSelectedItem(item: HTMLSDropdownItemElement) {
+  setSelectedItem(item: HTMLSlDropdownItemElement) {
     this.getAllItems().map(i => (i.active = i === item));
   }
 
   handleDocumentClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
-    const dropdown = target.closest('s-dropdown');
-    const dropdownItem = target.closest('s-dropdown-item');
+    const dropdown = target.closest('sl-dropdown');
+    const dropdownItem = target.closest('sl-dropdown-item');
 
     // Close when clicking outside of the dropdown control
     if (!dropdown) {
@@ -163,7 +163,7 @@ export class Dropdown {
 
   handleMenuMouseOver(event: MouseEvent) {
     const target = event.target as HTMLElement;
-    const dropdownItem = target.closest('s-dropdown-item');
+    const dropdownItem = target.closest('sl-dropdown-item');
 
     if (dropdownItem) {
       this.setSelectedItem(dropdownItem);
@@ -191,18 +191,18 @@ export class Dropdown {
       <div
         id={this.id}
         class={{
-          's-dropdown': true,
-          's-dropdown--open': this.isOpen
+          'sl-dropdown': true,
+          'sl-dropdown--open': this.isOpen
         }}
         aria-expanded={this.isOpen}
         aria-haspopup="true"
       >
-        <span class="s-dropdown__trigger" ref={el => (this.trigger = el)} onClick={() => this.toggleMenu()}>
+        <span class="sl-dropdown__trigger" ref={el => (this.trigger = el)} onClick={() => this.toggleMenu()}>
           <slot name="trigger" />
         </span>
 
         <div
-          class="s-dropdown__menu"
+          class="sl-dropdown__menu"
           ref={el => (this.menu = el)}
           role="menu"
           aria-hidden={!this.isOpen}
