@@ -194,6 +194,8 @@ export class Dropdown {
         <div
           class="s-dropdown__menu"
           ref={el => (this.menu = el)}
+          role="menu"
+          aria-hidden={!this.isOpen}
           aria-labeledby={this.id}
           onMouseDown={this.handleMenuMouseDown}
           onMouseOver={this.handleMenuMouseOver}
