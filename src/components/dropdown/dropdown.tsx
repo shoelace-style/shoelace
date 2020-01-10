@@ -78,7 +78,7 @@ export class Dropdown {
   }
 
   getSelectedItem() {
-    return this.items.filter(i => i.active)[0];
+    return this.items.find(i => i.active);
   }
 
   setSelectedItem(item: HTMLSDropdownItemElement) {
@@ -119,14 +119,17 @@ export class Dropdown {
     }
 
     if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
-      const selectedItem = this.getSelectedItem();
-      event.preventDefault();
+      if (!this.isOpen) {
+        this.open();
+      } else {
+        const selectedItem = this.getSelectedItem();
+        event.preventDefault();
 
-      let index = this.items.indexOf(selectedItem) + (event.key === 'ArrowDown' ? 1 : -1);
-      if (index < 0) index = this.items.length - 1;
-      if (index > this.items.length - 1) index = 0;
-
-      this.setSelectedItem(this.items[index]);
+        let index = this.items.indexOf(selectedItem) + (event.key === 'ArrowDown' ? 1 : -1);
+        if (index < 0) index = this.items.length - 1;
+        if (index > this.items.length - 1) index = 0;
+        this.setSelectedItem(this.items[index]);
+      }
     }
   }
 
