@@ -26,6 +26,9 @@ export class DropdownItem {
           's-dropdown-item--active': this.active,
           's-dropdown-item--disabled': this.disabled
         }}
+        aria-checked={this.checked}
+        aria-disabled={this.disabled}
+        aria-selected={this.active}
       >
         <span class="s-dropdown-item__check">
           <svg

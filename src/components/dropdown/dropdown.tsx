@@ -1,5 +1,7 @@
-import { Component, Method, Prop, State, Watch, h } from '@stencil/core';
+import { Component, Element, Method, Prop, State, Watch, h } from '@stencil/core';
 import PopperJs from 'popper.js';
+
+let id = 0;
 
 @Component({
   tag: 's-dropdown',
@@ -7,7 +9,7 @@ import PopperJs from 'popper.js';
   scoped: true
 })
 export class Dropdown {
-  items: [HTMLSDropdownItemElement];
+  id = `s-dropdown-${++id}`;
   menu: HTMLElement;
   popper: PopperJs;
   trigger: HTMLElement;
@@ -20,6 +22,8 @@ export class Dropdown {
     this.handleMenuMouseOut = this.handleMenuMouseOut.bind(this);
     this.handleTransitionEnd = this.handleTransitionEnd.bind(this);
   }
+
+  @Element() host: HTMLElement;
 
   @State() isOpen = false;
 
@@ -55,10 +59,10 @@ export class Dropdown {
 
   @Method()
   async open() {
-    this.items = this.getAllItems();
     this.menu.hidden = false;
     this.isOpen = true;
     this.popper.scheduleUpdate();
+    this.closeOtherDropdowns();
 
     document.addEventListener('click', this.handleDocumentClick);
     document.addEventListener('keydown', this.handleDocumentKeyDown);
@@ -73,16 +77,24 @@ export class Dropdown {
     document.removeEventListener('keydown', this.handleDocumentKeyDown);
   }
 
+  closeOtherDropdowns() {
+    [...document.querySelectorAll('s-dropdown')].map(dropdown => {
+      if (this.host !== dropdown) {
+        dropdown.close();
+      }
+    });
+  }
+
   getAllItems() {
     return [...this.menu.querySelectorAll('s-dropdown-item:not([disabled])')] as [HTMLSDropdownItemElement];
   }
 
   getSelectedItem() {
-    return this.items.find(i => i.active);
+    return this.getAllItems().find(i => i.active);
   }
 
   setSelectedItem(item: HTMLSDropdownItemElement) {
-    this.items.map(i => (i.active = i === item));
+    this.getAllItems().map(i => (i.active = i === item));
   }
 
   handleDocumentClick(event: MouseEvent) {
@@ -112,7 +124,7 @@ export class Dropdown {
       const item = this.getSelectedItem();
       event.preventDefault();
 
-      if (item) {
+      if (item && !item.disabled) {
         item.click();
         this.close();
       }
@@ -122,13 +134,14 @@ export class Dropdown {
       if (!this.isOpen) {
         this.open();
       } else {
+        const items = this.getAllItems();
         const selectedItem = this.getSelectedItem();
         event.preventDefault();
 
-        let index = this.items.indexOf(selectedItem) + (event.key === 'ArrowDown' ? 1 : -1);
-        if (index < 0) index = this.items.length - 1;
-        if (index > this.items.length - 1) index = 0;
-        this.setSelectedItem(this.items[index]);
+        let index = items.indexOf(selectedItem) + (event.key === 'ArrowDown' ? 1 : -1);
+        if (index < 0) index = items.length - 1;
+        if (index > items.length - 1) index = 0;
+        this.setSelectedItem(items[index]);
       }
     }
   }
@@ -166,10 +179,13 @@ export class Dropdown {
   render() {
     return (
       <div
+        id={this.id}
         class={{
           's-dropdown': true,
           's-dropdown--open': this.isOpen
         }}
+        aria-expanded={this.isOpen}
+        aria-haspopup="true"
       >
         <span class="s-dropdown__trigger" ref={el => (this.trigger = el)} onClick={() => this.toggleMenu()}>
           <slot name="trigger" />
@@ -178,6 +194,7 @@ export class Dropdown {
         <div
           class="s-dropdown__menu"
           ref={el => (this.menu = el)}
+          aria-labeledby={this.id}
           onMouseDown={this.handleMenuMouseDown}
           onMouseOver={this.handleMenuMouseOver}
           onMouseOut={this.handleMenuMouseOut}
