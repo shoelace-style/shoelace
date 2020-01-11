@@ -1,0 +1,76 @@
+@import 'reset';
+@import 'variables';
+
+:host {
+  display: inline-block;
+}
+
+.sl-radio {
+  display: flex;
+  align-items: center;
+  font-family: $font-sans-serif;
+  font-size: $form-control-font-size--medium;
+  color: $form-control-color;
+  cursor: pointer;
+}
+
+.sl-radio__control {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border: solid 1px $color-gray-80;
+  border-radius: 50%;
+  background-color: $color-white;
+  color: $color-white;
+  transition: 100ms border-color, 100ms background-color, 100ms color;
+
+  input[type='radio'] {
+    position: absolute;
+    opacity: 1;
+    padding: 0;
+    margin: 0;
+    pointer-events: none;
+    -webkit-appearance: none;
+  }
+
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+// Checked
+.sl-radio--checked .sl-radio__control {
+  border-color: $color-primary;
+  background-color: $color-primary;
+}
+
+// Hover
+.sl-radio:not(.sl-radio--disabled) .sl-radio__control:hover {
+  border-color: $color-primary;
+}
+
+// Focus
+.sl-radio.sl-radio--focused:not(.sl-radio--checked):not(.sl-radio--disabled) .sl-radio__control {
+  border-color: tint($color-primary, 15%);
+}
+
+// Focus + checked
+.sl-radio.sl-radio--checked:not(.sl-radio--disabled).sl-radio--focused .sl-radio__control {
+  background-color: tint($color-primary, 15%);
+  border-color: tint($color-primary, 15%);
+}
+
+// Disabled
+.sl-radio--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.sl-radio__label {
+  margin-left: 0.5em;
+  user-select: none;
+}

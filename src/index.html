@@ -39,12 +39,6 @@
   <body>
     <h1><img src="/assets/images/wordmark.svg" alt="Shoelace" /></h1>
 
-    <h2>Checkbox</h2>
-    <sl-checkbox>Checkbox</sl-checkbox><br><br>
-    <sl-checkbox checked>Checked</sl-checkbox><br><br>
-    <sl-checkbox indeterminate>Indeterminate</sl-checkbox><br><br>
-    <sl-checkbox disabled>Disabled</sl-checkbox><br><br>
-
     <h2>Button</h2>
 
     <sl-button type="default">Default</sl-button>
@@ -296,11 +290,24 @@
 
     <h2>Textarea</h2>
 
-    <sl-textarea placeholder="Standard" resize="none"></sl-textarea><br /><br />
+    <sl-textarea placeholder="Standard" resize="none" disabled></sl-textarea><br /><br />
 
     <sl-textarea placeholder="Resizable" resize="vertical"></sl-textarea><br /><br />
 
     <sl-textarea placeholder="Auto" resize="auto"></sl-textarea><br /><br />
+
+    <hr />
+
+    <h2>Checkbox</h2>
+    <sl-checkbox>Default</sl-checkbox><br><br>
+    <sl-checkbox checked>Checked</sl-checkbox><br><br>
+    <sl-checkbox indeterminate>Indeterminate</sl-checkbox><br><br>
+    <sl-checkbox disabled>Disabled</sl-checkbox><br><br>
+
+    <h2>Radio</h2>
+    <sl-radio name="test">Default</sl-radio><br><br>
+    <sl-radio name="test"checked>Checked</sl-radio><br><br>
+    <sl-radio name="test"disabled>Disabled</sl-radio><br><br>
 
     <hr />
 

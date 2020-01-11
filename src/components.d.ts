@@ -187,6 +187,32 @@ export namespace Components {
     */
     'value': string;
   }
+  interface SlRadio {
+    /**
+    * Set to true to draw the radio in a checked state.
+    */
+    'checked': boolean;
+    /**
+    * Set to true to disable the radio.
+    */
+    'disabled': boolean;
+    /**
+    * A native input's name attribute.
+    */
+    'name': string;
+    /**
+    * Removes focus from the radio.
+    */
+    'removeFocus': () => Promise<void>;
+    /**
+    * Sets focus on the radio.
+    */
+    'setFocus': () => Promise<void>;
+    /**
+    * The native input's value attribute.
+    */
+    'value': string;
+  }
   interface SlRange {
     /**
     * Set to true to disable the input.
@@ -330,6 +356,12 @@ declare global {
     new (): HTMLSlInputElement;
   };
 
+  interface HTMLSlRadioElement extends Components.SlRadio, HTMLStencilElement {}
+  var HTMLSlRadioElement: {
+    prototype: HTMLSlRadioElement;
+    new (): HTMLSlRadioElement;
+  };
+
   interface HTMLSlRangeElement extends Components.SlRange, HTMLStencilElement {}
   var HTMLSlRangeElement: {
     prototype: HTMLSlRangeElement;
@@ -354,6 +386,7 @@ declare global {
     'sl-dropdown-divider': HTMLSlDropdownDividerElement;
     'sl-dropdown-item': HTMLSlDropdownItemElement;
     'sl-input': HTMLSlInputElement;
+    'sl-radio': HTMLSlRadioElement;
     'sl-range': HTMLSlRangeElement;
     'sl-spinner': HTMLSlSpinnerElement;
     'sl-textarea': HTMLSlTextareaElement;
@@ -513,6 +546,24 @@ declare namespace LocalJSX {
     */
     'value'?: string;
   }
+  interface SlRadio {
+    /**
+    * Set to true to draw the radio in a checked state.
+    */
+    'checked'?: boolean;
+    /**
+    * Set to true to disable the radio.
+    */
+    'disabled'?: boolean;
+    /**
+    * A native input's name attribute.
+    */
+    'name'?: string;
+    /**
+    * The native input's value attribute.
+    */
+    'value'?: string;
+  }
   interface SlRange {
     /**
     * Set to true to disable the input.
@@ -607,6 +658,7 @@ declare namespace LocalJSX {
     'sl-dropdown-divider': SlDropdownDivider;
     'sl-dropdown-item': SlDropdownItem;
     'sl-input': SlInput;
+    'sl-radio': SlRadio;
     'sl-range': SlRange;
     'sl-spinner': SlSpinner;
     'sl-textarea': SlTextarea;
@@ -625,6 +677,7 @@ declare module "@stencil/core" {
       'sl-dropdown-divider': LocalJSX.SlDropdownDivider & JSXBase.HTMLAttributes<HTMLSlDropdownDividerElement>;
       'sl-dropdown-item': LocalJSX.SlDropdownItem & JSXBase.HTMLAttributes<HTMLSlDropdownItemElement>;
       'sl-input': LocalJSX.SlInput & JSXBase.HTMLAttributes<HTMLSlInputElement>;
+      'sl-radio': LocalJSX.SlRadio & JSXBase.HTMLAttributes<HTMLSlRadioElement>;
       'sl-range': LocalJSX.SlRange & JSXBase.HTMLAttributes<HTMLSlRangeElement>;
       'sl-spinner': LocalJSX.SlSpinner & JSXBase.HTMLAttributes<HTMLSlSpinnerElement>;
       'sl-textarea': LocalJSX.SlTextarea & JSXBase.HTMLAttributes<HTMLSlTextareaElement>;
