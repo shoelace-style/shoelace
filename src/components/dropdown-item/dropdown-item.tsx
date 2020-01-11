@@ -33,15 +33,15 @@ export class DropdownItem {
       >
         <span class="sl-dropdown-item__check">
           <svg
-            viewBox="0 0 32 32"
+            viewBox="0 0 14 14"
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
             xmlnsXlink="http://www.w3.org/1999/xlink"
           >
             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
-              <g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="4">
-                <path d="M0,16 L9,28"></path>
-                <path d="M28,0 L9,28"></path>
+              <g stroke="currentColor" stroke-width="2">
+                <path d="M2,8 L5,12"></path>
+                <path d="M12,2 L5,12"></path>
               </g>
             </g>
           </svg>

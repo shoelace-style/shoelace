@@ -129,12 +129,21 @@ export class Input {
             onClick={() => (this.value = '')}
             tabindex="-1"
           >
-            <svg viewBox="0 0 53 53">
-              <g stroke="none" stroke-width="1" fill="none">
-                <g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="4">
-                  <path d="M17.3388247,17.3388247 L31.9410878,31.9410878" stroke-linecap="round"></path>
-                  <path d="M17.3388247,31.9410878 L31.9410878,17.3388247" stroke-linecap="round"></path>
-                  <circle cx="24.5" cy="24.5" r="24.5"></circle>
+            <svg
+              viewBox="0 0 14 14"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlnsXlink="http://www.w3.org/1999/xlink"
+            >
+              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g stroke="currentColor">
+                  <path d="M5.09035326,5.09035326 L8.98429008,8.98429008" stroke-linecap="round"></path>
+                  <path
+                    d="M5.09035326,5.09035326 L8.98429008,8.98429008"
+                    stroke-linecap="round"
+                    transform="translate(7.000000, 7.000000) scale(-1, 1) translate(-7.000000, -7.000000) "
+                  ></path>
+                  <circle cx="7" cy="7" r="6"></circle>
                 </g>
               </g>
             </svg>
