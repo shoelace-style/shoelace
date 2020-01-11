@@ -98,11 +98,11 @@ $range-border-radius: $range-track-height !default;
       opacity: 0.5;
 
       &::-webkit-slider-thumb {
-        cursor: default;
+        cursor: not-allowed;
       }
 
       &::-moz-range-thumb {
-        cursor: default;
+        cursor: not-allowed;
       }
     }
   }

@@ -76,9 +76,13 @@ $textarea-transition-speed: 100ms !default;
 
   &.sl-textarea--disabled {
     color: $textarea-color;
-    background-color: $textarea-background-color;
+    background-color: shade($textarea-background-color, 5%);
     border-color: $form-control-border-color;
     opacity: 0.5;
+
+    .sl-textarea__control {
+      cursor: not-allowed;
+    }
   }
 }
 

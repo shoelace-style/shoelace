@@ -27,7 +27,7 @@ $dropdown-item-transition-speed: 100ms !default;
 
   &.sl-dropdown-item--disabled {
     color: $menu-color--disabled;
-    cursor: default;
+    cursor: not-allowed;
   }
 
   .sl-dropdown-item__check {

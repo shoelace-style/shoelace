@@ -82,6 +82,10 @@ $input-transition-speed: 100ms !default;
   &.sl-input--disabled {
     background-color: shade($input-background-color, 5%);
     opacity: 0.5;
+
+    .sl-input__control {
+      cursor: not-allowed;
+    }
   }
 }
 
