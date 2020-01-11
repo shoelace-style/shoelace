@@ -17,7 +17,7 @@
     "del": "^3.0.0",
     "dotenv": "^4.0.0",
     "fs": "0.0.1-security",
-    "handlebars": "^4.0.11",
+    "handlebars": "^4.7.0",
     "metalsmith": "^2.3.0",
     "metalsmith-in-place": "^3.0.1",
     "metalsmith-layouts": "^1.8.1",
