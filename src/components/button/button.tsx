@@ -34,13 +34,13 @@ export class Button {
 
   /** Sets focus on the button. */
   @Method()
-  setFocus() {
+  async setFocus() {
     this.button.focus();
   }
 
   /** Removes focus from the button. */
   @Method()
-  removeFocus() {
+  async removeFocus() {
     this.button.blur();
   }
 
