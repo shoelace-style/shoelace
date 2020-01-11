@@ -52,6 +52,36 @@ export namespace Components {
     */
     'type': string;
   }
+  interface SlCheckbox {
+    /**
+    * Set to true to draw the checkbox in a checked state.
+    */
+    'checked': boolean;
+    /**
+    * Set to true to disable the checkbox.
+    */
+    'disabled': boolean;
+    /**
+    * Set to true to draw the checkbox in an indeterminate state.
+    */
+    'indeterminate': boolean;
+    /**
+    * A native input's name attribute.
+    */
+    'name': string;
+    /**
+    * Removes focus from the checkbox.
+    */
+    'removeFocus': () => Promise<void>;
+    /**
+    * Sets focus on the checkbox.
+    */
+    'setFocus': () => Promise<void>;
+    /**
+    * The native input's value attribute.
+    */
+    'value': string;
+  }
   interface SlDropdown {
     'close': () => Promise<void>;
     'open': () => Promise<void>;
@@ -270,6 +300,12 @@ declare global {
     new (): HTMLSlButtonElement;
   };
 
+  interface HTMLSlCheckboxElement extends Components.SlCheckbox, HTMLStencilElement {}
+  var HTMLSlCheckboxElement: {
+    prototype: HTMLSlCheckboxElement;
+    new (): HTMLSlCheckboxElement;
+  };
+
   interface HTMLSlDropdownElement extends Components.SlDropdown, HTMLStencilElement {}
   var HTMLSlDropdownElement: {
     prototype: HTMLSlDropdownElement;
@@ -313,6 +349,7 @@ declare global {
   };
   interface HTMLElementTagNameMap {
     'sl-button': HTMLSlButtonElement;
+    'sl-checkbox': HTMLSlCheckboxElement;
     'sl-dropdown': HTMLSlDropdownElement;
     'sl-dropdown-divider': HTMLSlDropdownDividerElement;
     'sl-dropdown-item': HTMLSlDropdownItemElement;
@@ -357,6 +394,28 @@ declare namespace LocalJSX {
     * The button's type, one of `default`, `primary`, `success`, `info`, `warning`, `danger`, or `text`.
     */
     'type'?: string;
+  }
+  interface SlCheckbox {
+    /**
+    * Set to true to draw the checkbox in a checked state.
+    */
+    'checked'?: boolean;
+    /**
+    * Set to true to disable the checkbox.
+    */
+    'disabled'?: boolean;
+    /**
+    * Set to true to draw the checkbox in an indeterminate state.
+    */
+    'indeterminate'?: boolean;
+    /**
+    * A native input's name attribute.
+    */
+    'name'?: string;
+    /**
+    * The native input's value attribute.
+    */
+    'value'?: string;
   }
   interface SlDropdown {
     /**
@@ -543,6 +602,7 @@ declare namespace LocalJSX {
 
   interface IntrinsicElements {
     'sl-button': SlButton;
+    'sl-checkbox': SlCheckbox;
     'sl-dropdown': SlDropdown;
     'sl-dropdown-divider': SlDropdownDivider;
     'sl-dropdown-item': SlDropdownItem;
@@ -560,6 +620,7 @@ declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
       'sl-button': LocalJSX.SlButton & JSXBase.HTMLAttributes<HTMLSlButtonElement>;
+      'sl-checkbox': LocalJSX.SlCheckbox & JSXBase.HTMLAttributes<HTMLSlCheckboxElement>;
       'sl-dropdown': LocalJSX.SlDropdown & JSXBase.HTMLAttributes<HTMLSlDropdownElement>;
       'sl-dropdown-divider': LocalJSX.SlDropdownDivider & JSXBase.HTMLAttributes<HTMLSlDropdownDividerElement>;
       'sl-dropdown-item': LocalJSX.SlDropdownItem & JSXBase.HTMLAttributes<HTMLSlDropdownItemElement>;
