@@ -31,6 +31,7 @@
     "no-console": false,
     "no-floating-promises": false,
     "no-null-keyword": false,
+    "strict-boolean-conditions": false,
     "trailing-comma": false
   },
   "rulesDirectory": []

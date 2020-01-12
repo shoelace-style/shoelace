@@ -335,6 +335,75 @@ export namespace Components {
     */
     'value': string;
   }
+  interface SlTooltip {
+    /**
+    * Set to true to draw the the tooltip with an arrow.
+    */
+    'arrow': boolean;
+    /**
+    * Set to true to disable the tooltip so it won't show when triggered.
+    */
+    'disabled': boolean;
+    /**
+    * The distance in pixels from which to draw the tooltip from its target element.
+    */
+    'distance': number;
+    /**
+    * Shows the tooltip.
+    */
+    'hide': () => Promise<void>;
+    /**
+    * The delay in ms before the tooltip hides.
+    */
+    'hideDelay': number;
+    /**
+    * The duration in ms of the tooltip's hide transition.
+    */
+    'hideDuration': number;
+    /**
+    * The maximum width in pixels the tooltip can be before its content wraps.
+    */
+    'maxWidth': number;
+    /**
+    * The preferred placement of the tooltip. Note that the actual placement may vary as needed to keep the tooltip inside of the viewport.
+    */
+    'placement': | 'top'
+    | 'top-start'
+    | 'top-end'
+    | 'right'
+    | 'right-start'
+    | 'right-end'
+    | 'bottom'
+    | 'bottom-start'
+    | 'bottom-end'
+    | 'left'
+    | 'left-start'
+    | 'left-end';
+    /**
+    * Shows the tooltip.
+    */
+    'show': () => Promise<void>;
+    /**
+    * The delay in ms before showing the tooltip.
+    */
+    'showDelay': number;
+    /**
+    * The duration in ms of the tooltip's show transition.
+    */
+    'showDuration': number;
+    /**
+    * A selector or element to use as the tooltip's target. This is the element that will trigger the tooltip to show upon interaction. If no target is specified, the previous sibling element of the tooltip will be used. A common way to link a tooltip to a target is to give the target an `id` and pass `#id` to the `target` prop.
+    */
+    'target': string | HTMLElement;
+    /**
+    * The events that cause a tooltip to show, separated by a space. Possible values include any combination of `mouseenter`, `focus`, `click`, and `manual`. Use `manual` if you only want to show and hide the tooltip programmatically.
+    */
+    'trigger': string;
+    /**
+    * Sets the tooltip's z-index.
+    */
+    'zIndex': number;
+  }
 }
 
 declare global {
@@ -399,6 +468,12 @@ declare global {
     prototype: HTMLSlTextareaElement;
     new (): HTMLSlTextareaElement;
   };
+
+  interface HTMLSlTooltipElement extends Components.SlTooltip, HTMLStencilElement {}
+  var HTMLSlTooltipElement: {
+    prototype: HTMLSlTooltipElement;
+    new (): HTMLSlTooltipElement;
+  };
   interface HTMLElementTagNameMap {
     'sl-button': HTMLSlButtonElement;
     'sl-checkbox': HTMLSlCheckboxElement;
@@ -410,6 +485,7 @@ declare global {
     'sl-range': HTMLSlRangeElement;
     'sl-spinner': HTMLSlSpinnerElement;
     'sl-textarea': HTMLSlTextareaElement;
+    'sl-tooltip': HTMLSlTooltipElement;
   }
 }
 
@@ -690,6 +766,83 @@ declare namespace LocalJSX {
     */
     'value'?: string;
   }
+  interface SlTooltip {
+    /**
+    * Set to true to draw the the tooltip with an arrow.
+    */
+    'arrow'?: boolean;
+    /**
+    * Set to true to disable the tooltip so it won't show when triggered.
+    */
+    'disabled'?: boolean;
+    /**
+    * The distance in pixels from which to draw the tooltip from its target element.
+    */
+    'distance'?: number;
+    /**
+    * The delay in ms before the tooltip hides.
+    */
+    'hideDelay'?: number;
+    /**
+    * The duration in ms of the tooltip's hide transition.
+    */
+    'hideDuration'?: number;
+    /**
+    * The maximum width in pixels the tooltip can be before its content wraps.
+    */
+    'maxWidth'?: number;
+    /**
+    * Emitted when the tooltip has fully transitioned out and gets unmounted from the DOM.
+    */
+    'onSlHidden'?: (event: CustomEvent<any>) => void;
+    /**
+    * Emitted when the tooltip begins to hide.
+    */
+    'onSlHide'?: (event: CustomEvent<any>) => void;
+    /**
+    * Emitted when the tooltip begins to show, but before it gets mounted to the DOM.
+    */
+    'onSlShow'?: (event: CustomEvent<any>) => void;
+    /**
+    * Emitted when the tooltip has fully transitioned in.
+    */
+    'onSlShown'?: (event: CustomEvent<any>) => void;
+    /**
+    * The preferred placement of the tooltip. Note that the actual placement may vary as needed to keep the tooltip inside of the viewport.
+    */
+    'placement'?: | 'top'
+    | 'top-start'
+    | 'top-end'
+    | 'right'
+    | 'right-start'
+    | 'right-end'
+    | 'bottom'
+    | 'bottom-start'
+    | 'bottom-end'
+    | 'left'
+    | 'left-start'
+    | 'left-end';
+    /**
+    * The delay in ms before showing the tooltip.
+    */
+    'showDelay'?: number;
+    /**
+    * The duration in ms of the tooltip's show transition.
+    */
+    'showDuration'?: number;
+    /**
+    * A selector or element to use as the tooltip's target. This is the element that will trigger the tooltip to show upon interaction. If no target is specified, the previous sibling element of the tooltip will be used. A common way to link a tooltip to a target is to give the target an `id` and pass `#id` to the `target` prop.
+    */
+    'target'?: string | HTMLElement;
+    /**
+    * The events that cause a tooltip to show, separated by a space. Possible values include any combination of `mouseenter`, `focus`, `click`, and `manual`. Use `manual` if you only want to show and hide the tooltip programmatically.
+    */
+    'trigger'?: string;
+    /**
+    * Sets the tooltip's z-index.
+    */
+    'zIndex'?: number;
+  }
 
   interface IntrinsicElements {
     'sl-button': SlButton;
@@ -702,6 +855,7 @@ declare namespace LocalJSX {
     'sl-range': SlRange;
     'sl-spinner': SlSpinner;
     'sl-textarea': SlTextarea;
+    'sl-tooltip': SlTooltip;
   }
 }
 
@@ -721,6 +875,7 @@ declare module "@stencil/core" {
       'sl-range': LocalJSX.SlRange & JSXBase.HTMLAttributes<HTMLSlRangeElement>;
       'sl-spinner': LocalJSX.SlSpinner & JSXBase.HTMLAttributes<HTMLSlSpinnerElement>;
       'sl-textarea': LocalJSX.SlTextarea & JSXBase.HTMLAttributes<HTMLSlTextareaElement>;
+      'sl-tooltip': LocalJSX.SlTooltip & JSXBase.HTMLAttributes<HTMLSlTooltipElement>;
     }
   }
 }

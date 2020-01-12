@@ -1,0 +1,48 @@
+@import 'variables';
+@import 'tippy.js/dist/tippy';
+
+//
+// NOTE: Tooltips are appended on-the-fly to the <body> element, so we need to disable scoped styles for tooltips. As a
+// result, styles placed in this file will be applied to the global scope!
+//
+
+$sl-tooltip-font-family: $font-sans-serif !default;
+$sl-tooltip-font-size: $font-size * 0.875 !default;
+$sl-tooltip-font-weight: $font-weight-normal !default;
+$sl-tooltip-line-height: 1.4 !default;
+$sl-tooltip-background-color: $color-black !default;
+$sl-tooltip-border-radius: 3px !default;
+$sl-tooltip-color: $color-white !default;
+
+$sl-tooltip-padding-y: 5px !default;
+$sl-tooltip-padding-x: 10px !default;
+
+.tippy-tooltip {
+  border-radius: $sl-tooltip-border-radius;
+  background-color: $sl-tooltip-background-color;
+
+  &[data-placement^='top'] .tippy-arrow {
+    border-top-color: $sl-tooltip-background-color;
+  }
+
+  &[data-placement^='bottom'] .tippy-arrow {
+    border-bottom-color: $sl-tooltip-background-color;
+  }
+
+  &[data-placement^='left'] .tippy-arrow {
+    border-left-color: $sl-tooltip-background-color;
+  }
+
+  &[data-placement^='right'] .tippy-arrow {
+    border-right-color: $sl-tooltip-background-color;
+  }
+
+  .tippy-content {
+    font-family: $sl-tooltip-font-family;
+    font-size: $sl-tooltip-font-size;
+    font-weight: $sl-tooltip-font-weight;
+    line-height: $sl-tooltip-line-height;
+    color: $sl-tooltip-color;
+    padding: $sl-tooltip-padding-y $sl-tooltip-padding-x;
+  }
+}
