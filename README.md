@@ -22,5 +22,6 @@ TODO
 
 ## Attribution
 
+- Theme colors and form controls inspired by [Element](element.eleme.io)
 - Popover positioning is handled by [Popper.js](https://popper.js.org/)
 - Tooltips are provided by [Tippy.js](https://atomiks.github.io/tippyjs/)
