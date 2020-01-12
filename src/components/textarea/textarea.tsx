@@ -140,12 +140,12 @@ export class Textarea {
           ref={el => (this.textarea = el)}
           class="sl-textarea__control"
           name={this.name}
-          value={this.value}
           placeholder={this.placeholder}
           disabled={this.disabled}
           readonly={this.readonly}
           rows={this.rows}
           maxlength={this.maxlength}
+          value={this.value}
           autoCapitalize={this.autocapitalize}
           autoCorrect={this.autocorrect}
           autoFocus={this.autofocus}
