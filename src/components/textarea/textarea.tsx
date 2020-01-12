@@ -40,6 +40,9 @@ export class Textarea {
   /** The number of rows to display by default. */
   @Prop() rows = 4;
 
+  /** The textarea's maxlength attribute. */
+  @Prop() maxlength: number;
+
   /** The textarea's autocaptialize attribute. */
   @Prop() autocapitalize: string;
 
@@ -54,6 +57,9 @@ export class Textarea {
 
   /** The textarea's inputmode attribute. */
   @Prop() inputmode: string;
+
+  /** The textarea's required attribute. */
+  @Prop() required: boolean;
 
   componentDidLoad() {
     this.setTextareaHeight();
@@ -134,15 +140,17 @@ export class Textarea {
           ref={el => (this.textarea = el)}
           class="sl-textarea__control"
           name={this.name}
+          value={this.value}
           placeholder={this.placeholder}
           disabled={this.disabled}
           readonly={this.readonly}
           rows={this.rows}
-          value={this.value}
+          maxlength={this.maxlength}
           autoCapitalize={this.autocapitalize}
           autoCorrect={this.autocorrect}
           autoFocus={this.autofocus}
           inputMode={this.inputmode}
+          required={this.required}
           onFocus={() => (this.hasFocus = true)}
           onBlur={() => (this.hasFocus = false)}
           onInput={this.handleInput}

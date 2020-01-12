@@ -61,6 +61,12 @@ export class Input {
   /** The input's inputmode attribute. */
   @Prop() inputmode: string;
 
+  /** The input's pattern attribute. */
+  @Prop() pattern: string;
+
+  /** The input's required attribute. */
+  @Prop() required: boolean;
+
   /** Set to true to add a clear button when the input is populated. */
   @Prop() clearable = false;
 
@@ -103,6 +109,7 @@ export class Input {
           class="sl-input__control"
           type={this.type}
           name={this.name}
+          value={this.value}
           placeholder={this.placeholder}
           disabled={this.disabled}
           readonly={this.readonly}
@@ -111,12 +118,13 @@ export class Input {
           min={this.min}
           max={this.max}
           step={this.step}
-          value={this.value}
           autoCapitalize={this.autocapitalize}
           autoComplete={this.autocomplete}
           autoCorrect={this.autocorrect}
           autoFocus={this.autofocus}
           inputMode={this.inputmode}
+          pattern={this.pattern}
+          required={this.required}
           onFocus={() => (this.hasFocus = true)}
           onBlur={() => (this.hasFocus = false)}
           onInput={() => (this.value = this.input.value)}

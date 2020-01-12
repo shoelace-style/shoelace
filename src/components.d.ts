@@ -155,6 +155,10 @@ export namespace Components {
     */
     'name': string;
     /**
+    * The input's pattern attribute.
+    */
+    'pattern': string;
+    /**
     * The input's placeholder text.
     */
     'placeholder': string;
@@ -166,6 +170,10 @@ export namespace Components {
     * Removes focus from the input.
     */
     'removeFocus': () => Promise<void>;
+    /**
+    * The input's required attribute.
+    */
+    'required': boolean;
     /**
     * Sets focus on the input.
     */
@@ -279,6 +287,10 @@ export namespace Components {
     */
     'inputmode': string;
     /**
+    * The textarea's maxlength attribute.
+    */
+    'maxlength': number;
+    /**
     * The textarea's name attribute.
     */
     'name': string;
@@ -294,6 +306,10 @@ export namespace Components {
     * Removes focus fromt the textarea.
     */
     'removeFocus': () => Promise<void>;
+    /**
+    * The textarea's required attribute.
+    */
+    'required': boolean;
     /**
     * Controls how the textarea can be resized.
     */
@@ -522,6 +538,10 @@ declare namespace LocalJSX {
     */
     'name'?: string;
     /**
+    * The input's pattern attribute.
+    */
+    'pattern'?: string;
+    /**
     * The input's placeholder text.
     */
     'placeholder'?: string;
@@ -529,6 +549,10 @@ declare namespace LocalJSX {
     * Set to true for a readonly input.
     */
     'readonly'?: boolean;
+    /**
+    * The input's required attribute.
+    */
+    'required'?: boolean;
     /**
     * The input's size, one of `small`, `medium`, or `large`.
     */
@@ -622,6 +646,10 @@ declare namespace LocalJSX {
     */
     'inputmode'?: string;
     /**
+    * The textarea's maxlength attribute.
+    */
+    'maxlength'?: number;
+    /**
     * The textarea's name attribute.
     */
     'name'?: string;
@@ -633,6 +661,10 @@ declare namespace LocalJSX {
     * Set to true for a readonly textarea.
     */
     'readonly'?: boolean;
+    /**
+    * The textarea's required attribute.
+    */
+    'required'?: boolean;
     /**
     * Controls how the textarea can be resized.
     */
