@@ -17,6 +17,9 @@ export class Button {
   /** Set to true to draw a full-width button. */
   @Prop() block = false;
 
+  /** Set to true to draw the button with a caret for use with dropdowns, popovers, etc. */
+  @Prop() caret = false;
+
   /** Set to true to disable the button. */
   @Prop() disabled = false;
 
@@ -80,14 +83,28 @@ export class Button {
           }}
           disabled={this.disabled}
         >
-          <span class="sl-button__prefix">
-            <slot name="prefix" />
+          <span class="sl-button__icon">
+            <slot name="icon" />
           </span>
           <span class="sl-button__label">
             <slot />
           </span>
-          <span class="sl-button__suffix">
-            <slot name="suffix" />
+          <span class="sl-button__caret">
+            {this.caret ? (
+              <svg
+                viewBox="0 0 14 14"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlnsXlink="http://www.w3.org/1999/xlink"
+              >
+                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+                  <g stroke="currentColor">
+                    <path d="M3.5,5.5 L6.98821756,8.98821756"></path>
+                    <path d="M10.5,5.5 L7,9"></path>
+                  </g>
+                </g>
+              </svg>
+            ) : null}
           </span>
 
           {this.loading ? <span class="sl-button__spinner" /> : ''}

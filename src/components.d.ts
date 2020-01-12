@@ -16,6 +16,10 @@ export namespace Components {
     */
     'block': boolean;
     /**
+    * Set to true to draw the button with a caret for use with dropdowns, popovers, etc.
+    */
+    'caret': boolean;
+    /**
     * Set to true to draw a circle button.
     */
     'circle': boolean;
@@ -415,6 +419,10 @@ declare namespace LocalJSX {
     * Set to true to draw a full-width button.
     */
     'block'?: boolean;
+    /**
+    * Set to true to draw the button with a caret for use with dropdowns, popovers, etc.
+    */
+    'caret'?: boolean;
     /**
     * Set to true to draw a circle button.
     */

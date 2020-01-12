@@ -92,6 +92,12 @@
 
     <br /><br />
 
+    <sl-button size="small" caret>Small</sl-button>
+    <sl-button size="medium" caret>Medium</sl-button>
+    <sl-button size="large" caret>Large</sl-button>
+
+    <br /><br />
+
     <sl-button type="primary" round outline size="small">Primary</sl-button>
     <sl-button type="primary" round outline size="medium">Primary</sl-button>
     <sl-button type="primary" round outline size="large">Primary</sl-button>
@@ -99,21 +105,18 @@
     <br /><br />
 
     <sl-button type="default" size="small">
-      <span slot="prefix"><i class="fa fa-gear"></i></span>
+      <span slot="icon"><i class="fa fa-gear"></i></span>
       Default
-      <span slot="suffix"><i class="fa fa-angle-down"></i></span>
     </sl-button>
 
     <sl-button type="default" size="medium">
-      <span slot="prefix"><i class="fa fa-gear"></i></span>
+      <span slot="icon"><i class="fa fa-gear"></i></span>
       Default
-      <span slot="suffix"><i class="fa fa-angle-down"></i></span>
     </sl-button>
 
     <sl-button type="default" size="large">
-      <span slot="prefix"><i class="fa fa-gear"></i></span>
+      <span slot="icon"><i class="fa fa-gear"></i></span>
       Default
-      <span slot="suffix"><i class="fa fa-angle-down"></i></span>
     </sl-button>
 
     <br /><br />
@@ -175,11 +178,7 @@
     <h2>Dropdown</h2>
 
     <sl-dropdown>
-      <sl-button slot="trigger">
-        Dropdown
-        <span slot="suffix"><i class="fa fa-angle-down"></i></span>
-      </sl-button>
-
+      <sl-button slot="trigger" caret>Dropdown</sl-button>
       <sl-dropdown-item>Dropdown Item 1</sl-dropdown-item>
       <sl-dropdown-item>Dropdown Item 2</sl-dropdown-item>
       <sl-dropdown-item>Dropdown Item 3</sl-dropdown-item>
@@ -202,11 +201,7 @@
     </sl-dropdown>
 
     <sl-dropdown>
-      <sl-button slot="trigger">
-        Edit
-        <span slot="suffix"><i class="fa fa-angle-down"></i></span>
-      </sl-button>
-
+      <sl-button slot="trigger" caret>Edit</sl-button>
       <sl-dropdown-item>Cut</sl-dropdown-item>
       <sl-dropdown-item>Copy</sl-dropdown-item>
       <sl-dropdown-item>Paste</sl-dropdown-item>
