@@ -34,6 +34,7 @@ $textarea-transition-speed: 100ms !default;
   color: $textarea-color;
   background-color: $textarea-background-color;
   border: solid 1px $form-control-border-color;
+  vertical-align: middle;
   transition: $textarea-transition-speed color, $textarea-transition-speed border;
 
   .sl-textarea__control {

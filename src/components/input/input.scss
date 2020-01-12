@@ -39,6 +39,7 @@ $input-transition-speed: 100ms !default;
   color: $input-color;
   background-color: $input-background-color;
   border: solid 1px $form-control-border-color;
+  vertical-align: middle;
   transition: $input-transition-speed color, $input-transition-speed border;
 
   .sl-input__control {
