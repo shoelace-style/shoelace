@@ -19,3 +19,8 @@ TODO
 ## Bugs, Questions, & Support
 
 TODO
+
+## Attribution
+
+- Popover positioning is handled by [Popper.js](https://popper.js.org/)
+- Tooltips are provided by [Tippy.js](https://atomiks.github.io/tippyjs/)
