@@ -11,14 +11,14 @@ $sl-radio-background-color: $color-white !default;
 $sl-radio-background-color--hover: $color-white !default;
 $sl-radio-background-color--focus: $color-white !default;
 $sl-radio-background-color--checked: $color-primary !default;
-$sl-radio-background-color--checked--hover: $color-primary !default;
+$sl-radio-background-color--checked--hover: tint($color-primary, 15%) !default;
 $sl-radio-background-color--checked--focus: tint($color-primary, 15%) !default;
 
 $sl-radio-border-color: $form-control-border-color !default;
 $sl-radio-border-color--hover: $color-primary !default;
 $sl-radio-border-color--focus: $color-primary !default;
 $sl-radio-border-color--checked: $color-primary !default;
-$sl-radio-border-color--checked--hover: $color-primary !default;
+$sl-radio-border-color--checked--hover: tint($color-primary, 15%) !default;
 $sl-radio-border-color--checked--focus: tint($color-primary, 15%) !default;
 
 $sl-radio-tick-color: $color-white !default;
