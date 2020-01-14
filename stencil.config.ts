@@ -9,7 +9,8 @@ export const config: Config = {
       esmLoaderPath: '../loader'
     },
     {
-      type: 'docs-readme'
+      type: 'docs-readme',
+      footer: '*Shoelace Web Components are built with [StencilJS](https://stenciljs.com/)*'
     },
     {
       type: 'www',
