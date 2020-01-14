@@ -3,9 +3,9 @@
 
 $range-height: $form-control-height--medium !default;
 $range-track-height: 3px !default;
-$range-track-color: tint($form-control-border-color, 30%) !default;
+$range-track-background-color: tint($form-control-border-color, 30%) !default;
 $range-thumb-size: 20px !default;
-$range-thumb-color: $color-primary !default;
+$range-thumb-background-color: $color-primary !default;
 $range-border-radius: $range-track-height !default;
 
 :host {
@@ -25,7 +25,7 @@ $range-border-radius: $range-track-height !default;
     &::-webkit-slider-runnable-track {
       width: 100%;
       height: $range-track-height;
-      background-color: $range-track-color;
+      background-color: $range-track-background-color;
       border-radius: $range-border-radius;
       border: none;
     }
@@ -35,22 +35,22 @@ $range-border-radius: $range-track-height !default;
       width: $range-thumb-size;
       height: $range-thumb-size;
       border-radius: 50%;
-      background-color: $range-thumb-color;
+      background-color: $range-thumb-background-color;
       -webkit-appearance: none;
       margin-top: ($range-thumb-size / -2) + ($range-track-height / 2);
       cursor: pointer;
     }
 
     &:not(:disabled)::-webkit-slider-thumb:hover {
-      background-color: tint($range-thumb-color, 15%);
+      background-color: tint($range-thumb-background-color, 15%);
     }
 
     &:not(:disabled):focus::-webkit-slider-thumb {
-      background-color: tint($range-thumb-color, 15%);
+      background-color: tint($range-thumb-background-color, 15%);
     }
 
     &:not(:disabled)::-webkit-slider-thumb:active {
-      background-color: shade($range-thumb-color, 20%);
+      background-color: shade($range-thumb-background-color, 20%);
       cursor: grabbing;
     }
 
@@ -62,7 +62,7 @@ $range-border-radius: $range-track-height !default;
     &::-moz-range-track {
       width: 100%;
       height: $range-track-height;
-      background-color: $range-track-color;
+      background-color: $range-track-background-color;
       border-radius: $range-border-radius;
       border: none;
     }
@@ -72,20 +72,20 @@ $range-border-radius: $range-track-height !default;
       height: $range-thumb-size;
       width: $range-thumb-size;
       border-radius: 50%;
-      background-color: $range-thumb-color;
+      background-color: $range-thumb-background-color;
       cursor: pointer;
     }
 
     &:not(:disabled)::-moz-range-thumb:hover {
-      background-color: tint($range-thumb-color, 15%);
+      background-color: tint($range-thumb-background-color, 15%);
     }
 
     &:not(:disabled):focus::-moz-range-thumb {
-      background-color: tint($range-thumb-color, 15%);
+      background-color: tint($range-thumb-background-color, 15%);
     }
 
     &:not(:disabled)::-moz-range-thumb:active {
-      background-color: shade($range-thumb-color, 10%);
+      background-color: shade($range-thumb-background-color, 10%);
       cursor: grabbing;
     }
 
