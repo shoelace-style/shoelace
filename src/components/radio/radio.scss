@@ -1,31 +1,31 @@
 @import 'reset';
 @import 'variables';
 
-$sl-radio-font-family: $font-sans-serif !default;
-$sl-radio-font-size: $form-control-font-size--medium !default;
-$sl-radio-color: $form-control-color !default;
-$sl-radio-size: $sl-radio-font-size !default;
-$sl-radio-border-radius: 50% !default;
+$radio-font-family: $font-sans-serif !default;
+$radio-font-size: $form-control-font-size--medium !default;
+$radio-color: $form-control-color !default;
+$radio-size: $radio-font-size !default;
+$radio-border-radius: 50% !default;
 
-$sl-radio-background-color: $color-white !default;
-$sl-radio-background-color--hover: $color-white !default;
-$sl-radio-background-color--focus: $color-white !default;
-$sl-radio-background-color--checked: $color-primary !default;
-$sl-radio-background-color--checked--hover: tint($color-primary, 15%) !default;
-$sl-radio-background-color--checked--focus: tint($color-primary, 15%) !default;
+$radio-background-color: $color-white !default;
+$radio-background-color--hover: $color-white !default;
+$radio-background-color--focus: $color-white !default;
+$radio-background-color--checked: $color-primary !default;
+$radio-background-color--checked--hover: tint($color-primary, 15%) !default;
+$radio-background-color--checked--focus: tint($color-primary, 15%) !default;
 
-$sl-radio-border-color: $form-control-border-color !default;
-$sl-radio-border-color--hover: $color-primary !default;
-$sl-radio-border-color--focus: $color-primary !default;
-$sl-radio-border-color--checked: $color-primary !default;
-$sl-radio-border-color--checked--hover: tint($color-primary, 15%) !default;
-$sl-radio-border-color--checked--focus: tint($color-primary, 15%) !default;
+$radio-border-color: $form-control-border-color !default;
+$radio-border-color--hover: $color-primary !default;
+$radio-border-color--focus: $color-primary !default;
+$radio-border-color--checked: $color-primary !default;
+$radio-border-color--checked--hover: tint($color-primary, 15%) !default;
+$radio-border-color--checked--focus: tint($color-primary, 15%) !default;
 
-$sl-radio-tick-color: $color-white !default;
-$sl-radio-tick-color--hover: $color-white !default;
-$sl-radio-tick-color--focus: $color-white !default;
+$radio-tick-color: $color-white !default;
+$radio-tick-color--hover: $color-white !default;
+$radio-tick-color--focus: $color-white !default;
 
-$sl-radio-transition: 100ms border-color, 100ms background-color, 100ms color !default;
+$radio-transition: 100ms border-color, 100ms background-color, 100ms color !default;
 
 :host {
   display: inline-block;
@@ -34,9 +34,9 @@ $sl-radio-transition: 100ms border-color, 100ms background-color, 100ms color !d
 .sl-radio {
   display: flex;
   align-items: center;
-  font-family: $sl-radio-font-family;
-  font-size: $sl-radio-font-size;
-  color: $sl-radio-color;
+  font-family: $radio-font-family;
+  font-size: $radio-font-size;
+  color: $radio-color;
   vertical-align: middle;
   cursor: pointer;
 }
@@ -46,13 +46,13 @@ $sl-radio-transition: 100ms border-color, 100ms background-color, 100ms color !d
   display: flex;
   align-items: center;
   justify-content: center;
-  width: $sl-radio-size;
-  height: $sl-radio-size;
-  border: solid 1px $sl-radio-border-color;
-  border-radius: $sl-radio-border-radius;
-  background-color: $sl-radio-background-color;
-  color: $sl-radio-tick-color;
-  transition: $sl-radio-transition;
+  width: $radio-size;
+  height: $radio-size;
+  border: solid 1px $radio-border-color;
+  border-radius: $radio-border-radius;
+  background-color: $radio-background-color;
+  color: $radio-tick-color;
+  transition: $radio-transition;
 
   input[type='radio'] {
     position: absolute;
@@ -64,41 +64,41 @@ $sl-radio-transition: 100ms border-color, 100ms background-color, 100ms color !d
   }
 
   svg {
-    width: $sl-radio-size;
-    height: $sl-radio-size;
+    width: $radio-size;
+    height: $radio-size;
   }
 }
 
 // Hover
-.sl-radio .sl-radio__control:hover {
-  border-color: $sl-radio-border-color--hover;
-  background-color: $sl-radio-background-color--hover;
+.sl-radio:not(.sl-radio--checked):not(.sl-radio--disabled) .sl-radio__control:hover {
+  border-color: $radio-border-color--hover;
+  background-color: $radio-background-color--hover;
 }
 
 // Focus
 .sl-radio.sl-radio--focused:not(.sl-radio--checked):not(.sl-radio--disabled) .sl-radio__control {
-  border-color: $sl-radio-border-color--focus;
-  background-color: $sl-radio-background-color--focus;
+  border-color: $radio-border-color--focus;
+  background-color: $radio-background-color--focus;
 }
 
 // Checked
 .sl-radio--checked .sl-radio__control {
-  border-color: $sl-radio-border-color--checked;
-  background-color: $sl-radio-background-color--checked;
+  border-color: $radio-border-color--checked;
+  background-color: $radio-background-color--checked;
 }
 
 // Checked + hover
 .sl-radio.sl-radio--checked:not(.sl-radio--disabled) .sl-radio__control:hover {
-  border-color: $sl-radio-border-color--checked--hover;
-  background-color: $sl-radio-background-color--checked--hover;
-  color: $sl-radio-tick-color--hover;
+  border-color: $radio-border-color--checked--hover;
+  background-color: $radio-background-color--checked--hover;
+  color: $radio-tick-color--hover;
 }
 
 // Checked + focus
 .sl-radio.sl-radio--checked:not(.sl-radio--disabled).sl-radio--focused .sl-radio__control {
-  border-color: $sl-radio-border-color--checked--focus;
-  background-color: $sl-radio-background-color--checked--focus;
-  color: $sl-radio-tick-color--focus;
+  border-color: $radio-border-color--checked--focus;
+  background-color: $radio-background-color--checked--focus;
+  color: $radio-tick-color--focus;
 }
 
 // Disabled

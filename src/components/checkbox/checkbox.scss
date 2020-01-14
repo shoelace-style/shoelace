@@ -1,31 +1,31 @@
 @import 'reset';
 @import 'variables';
 
-$sl-checkbox-font-family: $font-sans-serif !default;
-$sl-checkbox-font-size: $form-control-font-size--medium !default;
-$sl-checkbox-color: $form-control-color !default;
-$sl-checkbox-size: $sl-checkbox-font-size !default;
-$sl-checkbox-border-radius: 2px !default;
+$checkbox-font-family: $font-sans-serif !default;
+$checkbox-font-size: $form-control-font-size--medium !default;
+$checkbox-color: $form-control-color !default;
+$checkbox-size: $checkbox-font-size !default;
+$checkbox-border-radius: 2px !default;
 
-$sl-checkbox-background-color: $color-white !default;
-$sl-checkbox-background-color--hover: $color-white !default;
-$sl-checkbox-background-color--focus: $color-white !default;
-$sl-checkbox-background-color--checked: $color-primary !default;
-$sl-checkbox-background-color--checked--hover: tint($color-primary, 15%) !default;
-$sl-checkbox-background-color--checked--focus: tint($color-primary, 15%) !default;
+$checkbox-background-color: $color-white !default;
+$checkbox-background-color--hover: $color-white !default;
+$checkbox-background-color--focus: $color-white !default;
+$checkbox-background-color--checked: $color-primary !default;
+$checkbox-background-color--checked--hover: tint($color-primary, 15%) !default;
+$checkbox-background-color--checked--focus: tint($color-primary, 15%) !default;
 
-$sl-checkbox-border-color: $form-control-border-color !default;
-$sl-checkbox-border-color--hover: $color-primary !default;
-$sl-checkbox-border-color--focus: $color-primary !default;
-$sl-checkbox-border-color--checked: $color-primary !default;
-$sl-checkbox-border-color--checked--hover: tint($color-primary, 15%) !default;
-$sl-checkbox-border-color--checked--focus: tint($color-primary, 15%) !default;
+$checkbox-border-color: $form-control-border-color !default;
+$checkbox-border-color--hover: $color-primary !default;
+$checkbox-border-color--focus: $color-primary !default;
+$checkbox-border-color--checked: $color-primary !default;
+$checkbox-border-color--checked--hover: tint($color-primary, 15%) !default;
+$checkbox-border-color--checked--focus: tint($color-primary, 15%) !default;
 
-$sl-checkbox-tick-color: $color-white !default;
-$sl-checkbox-tick-color--hover: $color-white !default;
-$sl-checkbox-tick-color--focus: $color-white !default;
+$checkbox-tick-color: $color-white !default;
+$checkbox-tick-color--hover: $color-white !default;
+$checkbox-tick-color--focus: $color-white !default;
 
-$sl-checkbox-transition: 100ms border-color, 100ms background-color, 100ms color !default;
+$checkbox-transition: 100ms border-color, 100ms background-color, 100ms color !default;
 
 :host {
   display: inline-block;
@@ -34,9 +34,9 @@ $sl-checkbox-transition: 100ms border-color, 100ms background-color, 100ms color
 .sl-checkbox {
   display: flex;
   align-items: center;
-  font-family: $sl-checkbox-font-family;
-  font-size: $sl-checkbox-font-size;
-  color: $sl-checkbox-color;
+  font-family: $checkbox-font-family;
+  font-size: $checkbox-font-size;
+  color: $checkbox-color;
   vertical-align: middle;
   cursor: pointer;
 }
@@ -46,13 +46,13 @@ $sl-checkbox-transition: 100ms border-color, 100ms background-color, 100ms color
   display: flex;
   align-items: center;
   justify-content: center;
-  width: $sl-checkbox-size;
-  height: $sl-checkbox-size;
-  border: solid 1px $sl-checkbox-border-color;
-  border-radius: $sl-checkbox-border-radius;
-  background-color: $sl-checkbox-background-color;
-  color: $sl-checkbox-tick-color;
-  transition: $sl-checkbox-transition;
+  width: $checkbox-size;
+  height: $checkbox-size;
+  border: solid 1px $checkbox-border-color;
+  border-radius: $checkbox-border-radius;
+  background-color: $checkbox-background-color;
+  color: $checkbox-tick-color;
+  transition: $checkbox-transition;
 
   input[type='checkbox'] {
     position: absolute;
@@ -64,44 +64,44 @@ $sl-checkbox-transition: 100ms border-color, 100ms background-color, 100ms color
   }
 
   svg {
-    width: $sl-checkbox-size;
-    height: $sl-checkbox-size;
+    width: $checkbox-size;
+    height: $checkbox-size;
   }
 }
 
 // Hover
-.sl-checkbox .sl-checkbox__control:hover {
-  border-color: $sl-checkbox-border-color--hover;
-  background-color: $sl-checkbox-background-color--hover;
+.sl-checkbox:not(.sl-checkbox--checked):not(.sl-checkbox--disabled) .sl-checkbox__control:hover {
+  border-color: $checkbox-border-color--hover;
+  background-color: $checkbox-background-color--hover;
 }
 
 // Focus
 .sl-checkbox.sl-checkbox--focused:not(.sl-checkbox--checked):not(.sl-checkbox--disabled) .sl-checkbox__control {
-  border-color: $sl-checkbox-border-color--focus;
-  background-color: $sl-checkbox-background-color--focus;
+  border-color: $checkbox-border-color--focus;
+  background-color: $checkbox-background-color--focus;
 }
 
 // Checked/indeterminate
 .sl-checkbox--checked .sl-checkbox__control,
 .sl-checkbox--indeterminate .sl-checkbox__control {
-  border-color: $sl-checkbox-border-color--checked;
-  background-color: $sl-checkbox-background-color--checked;
+  border-color: $checkbox-border-color--checked;
+  background-color: $checkbox-background-color--checked;
 }
 
 // Checked/indeterminate + hover
 .sl-checkbox.sl-checkbox--checked:not(.sl-checkbox--disabled) .sl-checkbox__control:hover,
 .sl-checkbox.sl-checkbox--indeterminate:not(.sl-checkbox--disabled) .sl-checkbox__control:hover {
-  border-color: $sl-checkbox-border-color--checked--hover;
-  background-color: $sl-checkbox-background-color--checked--hover;
-  color: $sl-checkbox-tick-color--hover;
+  border-color: $checkbox-border-color--checked--hover;
+  background-color: $checkbox-background-color--checked--hover;
+  color: $checkbox-tick-color--hover;
 }
 
 // Checked/indeterminate + focus
 .sl-checkbox.sl-checkbox--checked:not(.sl-checkbox--disabled).sl-checkbox--focused .sl-checkbox__control,
 .sl-checkbox.sl-checkbox--indeterminate:not(.sl-checkbox--disabled).sl-checkbox--focused .sl-checkbox__control {
-  border-color: $sl-checkbox-border-color--checked--focus;
-  background-color: $sl-checkbox-background-color--checked--focus;
-  color: $sl-checkbox-tick-color--focus;
+  border-color: $checkbox-border-color--checked--focus;
+  background-color: $checkbox-background-color--checked--focus;
+  color: $checkbox-tick-color--focus;
 }
 
 // Disabled
