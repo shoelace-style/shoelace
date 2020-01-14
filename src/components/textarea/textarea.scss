@@ -1,8 +1,8 @@
 @import 'reset';
 @import 'variables';
 
-$textarea-font-family: $font-sans-serif !default;
-$textarea-font-weight: $font-weight-normal !default;
+$textarea-font-family: $form-control-font-family !default;
+$textarea-font-weight: $form-control-font-weight !default;
 $textarea-font-size--small: $form-control-font-size--small !default;
 $textarea-font-size--medium: $form-control-font-size--medium !default;
 $textarea-font-size--large: $form-control-font-size--large !default;

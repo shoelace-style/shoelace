@@ -1,8 +1,8 @@
 @import 'reset';
 @import 'variables';
 
-$input-font-family: $font-sans-serif !default;
-$input-font-weight: $font-weight-normal !default;
+$input-font-family: $form-control-font-family !default;
+$input-font-weight: $form-control-font-weight !default;
 $input-font-size--small: $form-control-font-size--small !default;
 $input-font-size--medium: $form-control-font-size--medium !default;
 $input-font-size--large: $form-control-font-size--large !default;

@@ -2,8 +2,8 @@
 @import 'variables';
 @import './mixins';
 
-$button-font-family: $font-sans-serif !default;
-$button-font-weight: $font-weight-normal !default;
+$button-font-family: $form-control-font-family !default;
+$button-font-weight: $form-control-font-weight !default;
 $button-font-size--small: $form-control-font-size--small !default;
 $button-font-size--medium: $form-control-font-size--medium !default;
 $button-font-size--large: $form-control-font-size--large !default;

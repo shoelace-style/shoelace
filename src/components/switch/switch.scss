@@ -1,9 +1,9 @@
 @import 'reset';
 @import 'variables';
 
-$switch-font-family: $font-sans-serif !default;
+$switch-font-family: $form-control-font-family !default;
+$switch-font-weight: $form-control-font-weight !default;
 $switch-font-size: $form-control-font-size--medium !default;
-$switch-font-weight: $font-weight-normal !default;
 $switch-color: $form-control-color !default;
 $switch-height: 16px !default;
 $switch-width: $switch-height * 2 !default;

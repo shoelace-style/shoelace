@@ -1,9 +1,9 @@
 @import 'reset';
 @import 'variables';
 
-$checkbox-font-family: $font-sans-serif !default;
+$checkbox-font-family: $form-control-font-family !default;
+$checkbox-font-weight: $form-control-font-weight !default;
 $checkbox-font-size: $form-control-font-size--medium !default;
-$checkbox-font-weight: $font-weight-normal !default;
 $checkbox-color: $form-control-color !default;
 $checkbox-size: $checkbox-font-size !default;
 $checkbox-border-radius: 2px !default;
