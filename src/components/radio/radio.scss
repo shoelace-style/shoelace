@@ -87,16 +87,18 @@ $sl-radio-transition: 100ms border-color, 100ms background-color, 100ms color !d
   background-color: $sl-radio-background-color--checked;
 }
 
-// Hover + checked
+// Checked + hover
 .sl-radio.sl-radio--checked:not(.sl-radio--disabled) .sl-radio__control:hover {
   border-color: $sl-radio-border-color--checked--hover;
   background-color: $sl-radio-background-color--checked--hover;
+  color: $sl-radio-tick-color--hover;
 }
 
-// Focus + checked
+// Checked + focus
 .sl-radio.sl-radio--checked:not(.sl-radio--disabled).sl-radio--focused .sl-radio__control {
   border-color: $sl-radio-border-color--checked--focus;
   background-color: $sl-radio-background-color--checked--focus;
+  color: $sl-radio-tick-color--focus;
 }
 
 // Disabled

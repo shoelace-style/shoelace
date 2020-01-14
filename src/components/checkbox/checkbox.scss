@@ -88,18 +88,20 @@ $sl-checkbox-transition: 100ms border-color, 100ms background-color, 100ms color
   background-color: $sl-checkbox-background-color--checked;
 }
 
-// Hover + checked/indeterminate
+// Checked/indeterminate + hover
 .sl-checkbox.sl-checkbox--checked:not(.sl-checkbox--disabled) .sl-checkbox__control:hover,
 .sl-checkbox.sl-checkbox--indeterminate:not(.sl-checkbox--disabled) .sl-checkbox__control:hover {
   border-color: $sl-checkbox-border-color--checked--hover;
   background-color: $sl-checkbox-background-color--checked--hover;
+  color: $sl-checkbox-tick-color--hover;
 }
 
-// Focus + checked/indeterminate
+// Checked/indeterminate + focus
 .sl-checkbox.sl-checkbox--checked:not(.sl-checkbox--disabled).sl-checkbox--focused .sl-checkbox__control,
 .sl-checkbox.sl-checkbox--indeterminate:not(.sl-checkbox--disabled).sl-checkbox--focused .sl-checkbox__control {
   border-color: $sl-checkbox-border-color--checked--focus;
   background-color: $sl-checkbox-background-color--checked--focus;
+  color: $sl-checkbox-tick-color--focus;
 }
 
 // Disabled
