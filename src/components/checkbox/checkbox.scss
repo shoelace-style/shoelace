@@ -9,22 +9,22 @@ $checkbox-size: $checkbox-font-size !default;
 $checkbox-border-radius: 2px !default;
 
 $checkbox-background-color: $color-white !default;
-$checkbox-background-color--hover: $color-white !default;
-$checkbox-background-color--focus: $color-white !default;
+$checkbox-background-color--hover: $checkbox-background-color !default;
+$checkbox-background-color--focus: $checkbox-background-color !default;
 $checkbox-background-color--checked: $color-primary !default;
-$checkbox-background-color--checked--hover: tint($color-primary, 15%) !default;
-$checkbox-background-color--checked--focus: tint($color-primary, 15%) !default;
+$checkbox-background-color--checked--hover: tint($checkbox-background-color--checked, 15%) !default;
+$checkbox-background-color--checked--focus: tint($checkbox-background-color--checked, 15%) !default;
 
 $checkbox-border-color: $form-control-border-color !default;
 $checkbox-border-color--hover: $color-primary !default;
-$checkbox-border-color--focus: $color-primary !default;
+$checkbox-border-color--focus: $checkbox-border-color--hover !default;
 $checkbox-border-color--checked: $color-primary !default;
-$checkbox-border-color--checked--hover: tint($color-primary, 15%) !default;
-$checkbox-border-color--checked--focus: tint($color-primary, 15%) !default;
+$checkbox-border-color--checked--hover: tint($checkbox-border-color--checked, 15%) !default;
+$checkbox-border-color--checked--focus: tint($checkbox-border-color--checked, 15%) !default;
 
 $checkbox-tick-color: $color-white !default;
-$checkbox-tick-color--hover: $color-white !default;
-$checkbox-tick-color--focus: $color-white !default;
+$checkbox-tick-color--hover: $checkbox-tick-color !default;
+$checkbox-tick-color--focus: $checkbox-tick-color !default;
 
 $checkbox-transition: 100ms border-color, 100ms background-color, 100ms color !default;
 

@@ -9,22 +9,22 @@ $radio-size: $radio-font-size !default;
 $radio-border-radius: 50% !default;
 
 $radio-background-color: $color-white !default;
-$radio-background-color--hover: $color-white !default;
-$radio-background-color--focus: $color-white !default;
+$radio-background-color--hover: $radio-background-color !default;
+$radio-background-color--focus: $radio-background-color !default;
 $radio-background-color--checked: $color-primary !default;
-$radio-background-color--checked--hover: tint($color-primary, 15%) !default;
-$radio-background-color--checked--focus: tint($color-primary, 15%) !default;
+$radio-background-color--checked--hover: tint($radio-background-color--checked, 15%) !default;
+$radio-background-color--checked--focus: tint($radio-background-color--checked, 15%) !default;
 
 $radio-border-color: $form-control-border-color !default;
 $radio-border-color--hover: $color-primary !default;
-$radio-border-color--focus: $color-primary !default;
+$radio-border-color--focus: $radio-border-color--hover !default;
 $radio-border-color--checked: $color-primary !default;
-$radio-border-color--checked--hover: tint($color-primary, 15%) !default;
-$radio-border-color--checked--focus: tint($color-primary, 15%) !default;
+$radio-border-color--checked--hover: tint($radio-border-color--checked, 15%) !default;
+$radio-border-color--checked--focus: tint($radio-border-color--checked, 15%) !default;
 
 $radio-tick-color: $color-white !default;
-$radio-tick-color--hover: $color-white !default;
-$radio-tick-color--focus: $color-white !default;
+$radio-tick-color--hover: $radio-tick-color !default;
+$radio-tick-color--focus: $radio-tick-color !default;
 
 $radio-transition: 100ms border-color, 100ms background-color, 100ms color !default;
 
