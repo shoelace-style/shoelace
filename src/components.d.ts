@@ -265,6 +265,32 @@ export namespace Components {
     */
     'size': string;
   }
+  interface SlSwitch {
+    /**
+    * Set to true to draw the switch in a checked state.
+    */
+    'checked': boolean;
+    /**
+    * Set to true to disable the switch.
+    */
+    'disabled': boolean;
+    /**
+    * A native input's name attribute.
+    */
+    'name': string;
+    /**
+    * Removes focus from the switch.
+    */
+    'removeFocus': () => Promise<void>;
+    /**
+    * Sets focus on the switch.
+    */
+    'setFocus': () => Promise<void>;
+    /**
+    * The native input's value attribute.
+    */
+    'value': string;
+  }
   interface SlTextarea {
     /**
     * The textarea's autocaptialize attribute.
@@ -463,6 +489,12 @@ declare global {
     new (): HTMLSlSpinnerElement;
   };
 
+  interface HTMLSlSwitchElement extends Components.SlSwitch, HTMLStencilElement {}
+  var HTMLSlSwitchElement: {
+    prototype: HTMLSlSwitchElement;
+    new (): HTMLSlSwitchElement;
+  };
+
   interface HTMLSlTextareaElement extends Components.SlTextarea, HTMLStencilElement {}
   var HTMLSlTextareaElement: {
     prototype: HTMLSlTextareaElement;
@@ -484,6 +516,7 @@ declare global {
     'sl-radio': HTMLSlRadioElement;
     'sl-range': HTMLSlRangeElement;
     'sl-spinner': HTMLSlSpinnerElement;
+    'sl-switch': HTMLSlSwitchElement;
     'sl-textarea': HTMLSlTextareaElement;
     'sl-tooltip': HTMLSlTooltipElement;
   }
@@ -704,6 +737,24 @@ declare namespace LocalJSX {
     */
     'size'?: string;
   }
+  interface SlSwitch {
+    /**
+    * Set to true to draw the switch in a checked state.
+    */
+    'checked'?: boolean;
+    /**
+    * Set to true to disable the switch.
+    */
+    'disabled'?: boolean;
+    /**
+    * A native input's name attribute.
+    */
+    'name'?: string;
+    /**
+    * The native input's value attribute.
+    */
+    'value'?: string;
+  }
   interface SlTextarea {
     /**
     * The textarea's autocaptialize attribute.
@@ -854,6 +905,7 @@ declare namespace LocalJSX {
     'sl-radio': SlRadio;
     'sl-range': SlRange;
     'sl-spinner': SlSpinner;
+    'sl-switch': SlSwitch;
     'sl-textarea': SlTextarea;
     'sl-tooltip': SlTooltip;
   }
@@ -874,6 +926,7 @@ declare module "@stencil/core" {
       'sl-radio': LocalJSX.SlRadio & JSXBase.HTMLAttributes<HTMLSlRadioElement>;
       'sl-range': LocalJSX.SlRange & JSXBase.HTMLAttributes<HTMLSlRangeElement>;
       'sl-spinner': LocalJSX.SlSpinner & JSXBase.HTMLAttributes<HTMLSlSpinnerElement>;
+      'sl-switch': LocalJSX.SlSwitch & JSXBase.HTMLAttributes<HTMLSlSwitchElement>;
       'sl-textarea': LocalJSX.SlTextarea & JSXBase.HTMLAttributes<HTMLSlTextareaElement>;
       'sl-tooltip': LocalJSX.SlTooltip & JSXBase.HTMLAttributes<HTMLSlTooltipElement>;
     }
