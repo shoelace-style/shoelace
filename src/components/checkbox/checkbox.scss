@@ -3,6 +3,7 @@
 
 $checkbox-font-family: $font-sans-serif !default;
 $checkbox-font-size: $form-control-font-size--medium !default;
+$checkbox-font-weight: $font-weight-normal !default;
 $checkbox-color: $form-control-color !default;
 $checkbox-size: $checkbox-font-size !default;
 $checkbox-border-radius: 2px !default;
@@ -36,6 +37,7 @@ $checkbox-transition: 100ms border-color, 100ms background-color, 100ms color !d
   align-items: center;
   font-family: $checkbox-font-family;
   font-size: $checkbox-font-size;
+  font-weight: $checkbox-font-weight;
   color: $checkbox-color;
   vertical-align: middle;
   cursor: pointer;

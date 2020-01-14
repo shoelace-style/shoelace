@@ -3,6 +3,7 @@
 
 $radio-font-family: $font-sans-serif !default;
 $radio-font-size: $form-control-font-size--medium !default;
+$radio-font-weight: $font-weight-normal !default;
 $radio-color: $form-control-color !default;
 $radio-size: $radio-font-size !default;
 $radio-border-radius: 50% !default;
@@ -36,6 +37,7 @@ $radio-transition: 100ms border-color, 100ms background-color, 100ms color !defa
   align-items: center;
   font-family: $radio-font-family;
   font-size: $radio-font-size;
+  font-weight: $radio-font-weight;
   color: $radio-color;
   vertical-align: middle;
   cursor: pointer;
