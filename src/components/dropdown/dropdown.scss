@@ -25,6 +25,7 @@ $dropdown-color: $menu-color !default;
 .sl-dropdown__menu {
   position: absolute;
   z-index: 9999;
+  max-height: 50vh;
   font-family: $dropdown-font-family;
   font-weight: $dropdown-font-weight;
   font-size: $dropdown-font-size;
@@ -36,6 +37,7 @@ $dropdown-color: $menu-color !default;
   padding-top: $menu-padding-y;
   padding-bottom: $menu-padding-y;
   opacity: 0;
+  overflow-y: auto;
   transition: 100ms opacity;
 }
 
