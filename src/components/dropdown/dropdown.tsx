@@ -16,8 +16,8 @@ export class Dropdown {
   trigger: HTMLElement;
 
   constructor() {
-    this.handleDocumentClick = this.handleDocumentClick.bind(this);
     this.handleDocumentKeyDown = this.handleDocumentKeyDown.bind(this);
+    this.handleDocumentMouseDown = this.handleDocumentMouseDown.bind(this);
     this.handleMenuMouseDown = this.handleMenuMouseDown.bind(this);
     this.handleMenuMouseOver = this.handleMenuMouseOver.bind(this);
     this.handleMenuMouseOut = this.handleMenuMouseOut.bind(this);
@@ -69,7 +69,7 @@ export class Dropdown {
 
     openDropdowns.push(this.host);
 
-    document.addEventListener('click', this.handleDocumentClick);
+    document.addEventListener('mousedown', this.handleDocumentMouseDown);
     document.addEventListener('keydown', this.handleDocumentKeyDown);
   }
 
@@ -80,7 +80,7 @@ export class Dropdown {
 
     openDropdowns = openDropdowns.filter(dropdown => this.host !== dropdown);
 
-    document.removeEventListener('click', this.handleDocumentClick);
+    document.removeEventListener('mousedown', this.handleDocumentMouseDown);
     document.removeEventListener('keydown', this.handleDocumentKeyDown);
   }
 
@@ -120,24 +120,6 @@ export class Dropdown {
     }
   }
 
-  handleDocumentClick(event: MouseEvent) {
-    const target = event.target as HTMLElement;
-    const dropdown = target.closest('sl-dropdown');
-    const dropdownItem = target.closest('sl-dropdown-item');
-
-    // Close when clicking outside of the dropdown control
-    if (!dropdown) {
-      this.close();
-      return;
-    }
-
-    // Close when clicking on a dropdown item
-    if (dropdownItem && !dropdownItem.disabled) {
-      this.close();
-      return;
-    }
-  }
-
   handleDocumentKeyDown(event: KeyboardEvent) {
     if (event.key === 'Escape' || event.key === 'Tab') {
       this.close();
@@ -167,6 +149,24 @@ export class Dropdown {
         this.setSelectedItem(items[index]);
         this.scrollItemIntoView(items[index]);
       }
+    }
+  }
+
+  handleDocumentMouseDown(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    const dropdown = target.closest('sl-dropdown');
+    const dropdownItem = target.closest('sl-dropdown-item');
+
+    // Close when clicking outside of the dropdown control
+    if (!dropdown) {
+      this.close();
+      return;
+    }
+
+    // Close when clicking on a dropdown item
+    if (dropdownItem && !dropdownItem.disabled) {
+      this.close();
+      return;
     }
   }
 
