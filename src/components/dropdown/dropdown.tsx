@@ -107,19 +107,15 @@ export class Dropdown {
     this.getAllItems().map(i => (i.active = i === item));
   }
 
-  scrollSelectionIntoView(anchor: 'top' | 'bottom' = 'top') {
-    const item = this.getSelectedItem();
-
+  scrollItemIntoView(item: HTMLSlDropdownItemElement) {
     if (item) {
       const min = this.menu.scrollTop;
       const max = this.menu.scrollTop + this.menu.offsetHeight;
 
-      // Only scroll when the selection is out of view
-      if (item.offsetTop < min || item.offsetTop + item.clientHeight > max) {
-        this.menu.scrollTop =
-          anchor === 'top'
-            ? (this.menu.scrollTop = item.offsetTop)
-            : item.offsetTop - this.menu.offsetHeight + item.clientHeight;
+      if (item.offsetTop < min) {
+        this.menu.scrollTop = item.offsetTop;
+      } else if (item.offsetTop + item.clientHeight > max) {
+        this.menu.scrollTop = item.offsetTop - this.menu.offsetHeight + item.clientHeight;
       }
     }
   }
@@ -169,7 +165,7 @@ export class Dropdown {
         if (index < 0) index = items.length - 1;
         if (index > items.length - 1) index = 0;
         this.setSelectedItem(items[index]);
-        this.scrollSelectionIntoView(event.key === 'ArrowUp' ? 'top' : 'bottom');
+        this.scrollItemIntoView(items[index]);
       }
     }
   }
