@@ -23,7 +23,7 @@ $input-padding-x--medium: 14px !default;
 $input-padding-x--large: 14px !default;
 
 $input-placeholder-color: $color-gray-70 !default;
-$input-transition-speed: 100ms !default;
+$input-transition-speed: $form-control-transition-speed !default;
 
 :host {
   display: block;

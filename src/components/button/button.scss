@@ -23,7 +23,7 @@ $button-padding-x--large: 26px !default;
 $button-spinner-animation: 1s linear infinite spin !default;
 $button-spinner-width: 1px !default;
 
-$button-transition-speed: 100ms !default;
+$button-transition-speed: $form-control-transition-speed !default;
 
 @keyframes spin {
   from {

@@ -47,6 +47,8 @@ $form-control-height--large: 44px !default;
 $form-control-border-color: tint($color-black, 85%) !default;
 $form-control-color: $color-gray-40 !default;
 
+$form-control-transition-speed: 150ms;
+
 // Menus
 $menu-font-family: $font-sans-serif !default;
 $menu-font-weight: $font-weight-normal !default;

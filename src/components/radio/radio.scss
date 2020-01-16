@@ -26,7 +26,8 @@ $radio-tick-color: $color-white !default;
 $radio-tick-color--hover: $radio-tick-color !default;
 $radio-tick-color--focus: $radio-tick-color !default;
 
-$radio-transition: 100ms border-color, 100ms background-color, 100ms color, 100ms box-shadow !default;
+$radio-transition: $form-control-transition-speed border-color, $form-control-transition-speed background-color,
+  $form-control-transition-speed color, $form-control-transition-speed box-shadow !default;
 
 :host {
   display: inline-block;

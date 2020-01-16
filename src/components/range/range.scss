@@ -4,9 +4,12 @@
 $range-height: $form-control-height--medium !default;
 $range-track-height: 3px !default;
 $range-track-background-color: tint($form-control-border-color, 30%) !default;
+$range-border-radius: $range-track-height !default;
+
 $range-thumb-size: 20px !default;
 $range-thumb-background-color: $color-primary !default;
-$range-border-radius: $range-track-height !default;
+$range-thumb-transition: $form-control-transition-speed border-color, $form-control-transition-speed background-color,
+  $form-control-transition-speed color, $form-control-transition-speed box-shadow !default;
 
 :host {
   display: block;
@@ -38,6 +41,7 @@ $range-border-radius: $range-track-height !default;
       background-color: $range-thumb-background-color;
       -webkit-appearance: none;
       margin-top: ($range-thumb-size / -2) + ($range-track-height / 2);
+      transition: $range-thumb-transition;
       cursor: pointer;
     }
 
@@ -74,6 +78,7 @@ $range-border-radius: $range-track-height !default;
       width: $range-thumb-size;
       border-radius: 50%;
       background-color: $range-thumb-background-color;
+      transition: $range-thumb-transition;
       cursor: pointer;
     }
 

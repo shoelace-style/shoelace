@@ -9,7 +9,7 @@ $switch-height: 16px !default;
 $switch-width: $switch-height * 2 !default;
 $switch-border-radius: $switch-height !default;
 $switch-border-width: 1px;
-$switch-transition: 100ms border-color, 100ms background-color;
+$switch-transition: $form-control-transition-speed border-color, $form-control-transition-speed background-color;
 
 $switch-background-color: $form-control-border-color !default;
 $switch-background-color--hover: tint($switch-background-color, 15%) !default;
@@ -28,7 +28,8 @@ $switch-border-color--checked--focus: tint($switch-border-color--checked, 15%) !
 $switch-thumb-size: $switch-height + 4px !default;
 $switch-thumb-border-radius: 50% !default;
 $switch-thumb-border-width: 1px;
-$switch-thumb-transition: 150ms transform ease, 150ms background-color ease, 150ms border-color, 100ms box-shadow !default;
+$switch-thumb-transition: $form-control-transition-speed transform ease, $form-control-transition-speed background-color,
+  $form-control-transition-speed border-color, $form-control-transition-speed box-shadow !default;
 
 $switch-thumb-background-color: $color-white !default;
 $switch-thumb-background-color--hover: $switch-thumb-background-color !default;

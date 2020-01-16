@@ -26,7 +26,8 @@ $checkbox-tick-color: $color-white !default;
 $checkbox-tick-color--hover: $checkbox-tick-color !default;
 $checkbox-tick-color--focus: $checkbox-tick-color !default;
 
-$checkbox-transition: 100ms border-color, 100ms background-color, 100ms color, 100ms box-shadow !default;
+$checkbox-transition: $form-control-transition-speed border-color, $form-control-transition-speed background-color,
+  $form-control-transition-speed color, $form-control-transition-speed box-shadow !default;
 
 :host {
   display: inline-block;

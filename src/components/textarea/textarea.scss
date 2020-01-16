@@ -19,7 +19,7 @@ $textarea-padding-x--medium: 14px !default;
 $textarea-padding-x--large: 14px !default;
 
 $textarea-placeholder-color: $color-gray-70 !default;
-$textarea-transition-speed: 100ms !default;
+$textarea-transition-speed: $form-control-transition-speed !default;
 
 :host {
   display: block;
