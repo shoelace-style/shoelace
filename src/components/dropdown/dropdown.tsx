@@ -18,6 +18,7 @@ export class Dropdown {
   constructor() {
     this.handleDocumentKeyDown = this.handleDocumentKeyDown.bind(this);
     this.handleDocumentMouseDown = this.handleDocumentMouseDown.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleMenuMouseDown = this.handleMenuMouseDown.bind(this);
     this.handleMenuMouseOver = this.handleMenuMouseOver.bind(this);
     this.handleMenuMouseOut = this.handleMenuMouseOut.bind(this);
@@ -124,10 +125,12 @@ export class Dropdown {
   }
 
   handleDocumentKeyDown(event: KeyboardEvent) {
+    // Close when pressing escape or tab
     if (event.key === 'Escape' || event.key === 'Tab') {
       this.close();
     }
 
+    // Make a selection when pressing enter
     if (event.key === 'Enter') {
       const item = this.getSelectedItem();
       event.preventDefault();
@@ -138,20 +141,17 @@ export class Dropdown {
       }
     }
 
-    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
-      if (!this.isOpen) {
-        this.open();
-      } else {
-        const items = this.getAllItems();
-        const selectedItem = this.getSelectedItem();
-        event.preventDefault();
+    // Move the selection when pressing down or up
+    if (['ArrowDown', 'ArrowUp'].includes(event.key)) {
+      const items = this.getAllItems();
+      const selectedItem = this.getSelectedItem();
+      event.preventDefault();
 
-        let index = items.indexOf(selectedItem) + (event.key === 'ArrowDown' ? 1 : -1);
-        if (index < 0) index = items.length - 1;
-        if (index > items.length - 1) index = 0;
-        this.setSelectedItem(items[index]);
-        this.scrollItemIntoView(items[index]);
-      }
+      let index = items.indexOf(selectedItem) + (event.key === 'ArrowDown' ? 1 : -1);
+      if (index < 0) index = items.length - 1;
+      if (index > items.length - 1) index = 0;
+      this.setSelectedItem(items[index]);
+      this.scrollItemIntoView(items[index]);
     }
   }
 
@@ -170,6 +170,15 @@ export class Dropdown {
     if (dropdownItem && !dropdownItem.disabled) {
       this.close();
       return;
+    }
+  }
+
+  handleKeyDown(event: KeyboardEvent) {
+    // Open the menu when pressing down or up while focused on the trigger
+    if (!this.isOpen && ['ArrowDown', 'ArrowUp'].includes(event.key)) {
+      this.open();
+      event.preventDefault();
+      event.stopPropagation();
     }
   }
 
@@ -192,6 +201,11 @@ export class Dropdown {
   }
 
   handleTransitionEnd() {
+    // Reset the menu's scroll position before it gets hidden
+    if (!this.isOpen) {
+      this.menu.scrollTop = 0;
+    }
+
     this.menu.hidden = !this.isOpen;
   }
 
@@ -214,7 +228,12 @@ export class Dropdown {
         aria-expanded={this.isOpen}
         aria-haspopup="true"
       >
-        <span class="sl-dropdown__trigger" ref={el => (this.trigger = el)} onClick={() => this.toggleMenu()}>
+        <span
+          class="sl-dropdown__trigger"
+          ref={el => (this.trigger = el)}
+          onKeyDown={this.handleKeyDown}
+          onClick={() => this.toggleMenu()}
+        >
           <slot name="trigger" />
         </span>
 
