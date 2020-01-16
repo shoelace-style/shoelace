@@ -7,7 +7,7 @@ let openDropdowns = [];
 @Component({
   tag: 'sl-dropdown',
   styleUrl: 'dropdown.scss',
-  scoped: true
+  shadow: true
 })
 export class Dropdown {
   id = `sl-dropdown-${++id}`;
@@ -96,7 +96,10 @@ export class Dropdown {
   }
 
   getAllItems() {
-    return [...this.menu.querySelectorAll('sl-dropdown-item:not([disabled])')] as [HTMLSlDropdownItemElement];
+    const slot = this.menu.querySelector('slot');
+    return [...slot.assignedElements()].filter(
+      (el: any) => el.tagName.toLowerCase() === 'sl-dropdown-item' && !el.disabled
+    ) as [HTMLSlDropdownItemElement];
   }
 
   getSelectedItem() {
