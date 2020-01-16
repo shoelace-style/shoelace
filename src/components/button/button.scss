@@ -201,9 +201,32 @@ $button-transition-speed: 100ms !default;
     border-radius: 50%;
   }
 
-  .sl-button__icon,
+  .sl-button__prefix,
+  .sl-button__suffix,
   .sl-button__caret {
     display: none;
+  }
+}
+
+// Caret modifier
+.sl-button--caret {
+  .sl-button__suffix,
+  .sl-button__caret:empty {
+    display: none;
+  }
+
+  .sl-button__caret:not(:empty) {
+    position: relative;
+    margin-left: 0.75em;
+    margin-right: 0;
+
+    svg {
+      position: absolute;
+      top: calc(50% - 0.5em);
+      left: calc(50% - 0.5em);
+      width: 1em;
+      height: 1em;
+    }
   }
 }
 
@@ -212,8 +235,9 @@ $button-transition-speed: 100ms !default;
   position: relative;
   pointer-events: none;
 
-  .sl-button__icon,
+  .sl-button__prefix,
   .sl-button__label,
+  .sl-button__suffix,
   .sl-button__caret {
     visibility: hidden;
   }
@@ -237,27 +261,18 @@ $button-transition-speed: 100ms !default;
   align-items: center;
   justify-content: center;
 
-  .sl-button__icon:empty,
-  .sl-button__caret:empty {
+  .sl-button__prefix:empty,
+  .sl-button__suffix:empty {
     display: none;
   }
 
-  .sl-button__icon:not(:empty) {
+  .sl-button__prefix:not(:empty) {
     margin-left: -0.25em;
     margin-right: 0.25em;
   }
 
-  .sl-button__caret:not(:empty) {
-    position: relative;
-    margin-left: 0.75em;
-    margin-right: 0;
-
-    svg {
-      position: absolute;
-      top: calc(50% - 0.5em);
-      left: calc(50% - 0.5em);
-      width: 1em;
-      height: 1em;
-    }
+  .sl-button__suffix:not(:empty) {
+    margin-left: 0.25em;
+    margin-right: -0.25em;
   }
 }

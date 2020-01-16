@@ -3,7 +3,7 @@ import { Component, Host, Method, Prop, h } from '@stencil/core';
 @Component({
   tag: 'sl-button',
   styleUrl: 'button.scss',
-  scoped: true
+  shadow: false
 })
 export class Button {
   button: HTMLButtonElement;
@@ -17,7 +17,10 @@ export class Button {
   /** Set to true to draw a full-width button. */
   @Prop() block = false;
 
-  /** Set to true to draw the button with a caret for use with dropdowns, popovers, etc. */
+  /**
+   * Set to true to draw the button with a caret for use with dropdowns, popovers, etc. If this is enabled, the suffix
+   * slot will not be displayed.
+   */
   @Prop() caret = false;
 
   /** Set to true to disable the button. */
@@ -75,19 +78,23 @@ export class Button {
 
             // Modifiers
             'sl-button--block': this.block,
+            'sl-button--caret': this.caret,
+            'sl-button--circle': this.circle,
             'sl-button--disabled': this.disabled,
             'sl-button--loading': this.loading,
             'sl-button--outline': this.outline,
-            'sl-button--round': this.round,
-            'sl-button--circle': this.circle
+            'sl-button--round': this.round
           }}
           disabled={this.disabled}
         >
-          <span class="sl-button__icon">
-            <slot name="icon" />
+          <span class="sl-button__prefix">
+            <slot name="prefix" />
           </span>
           <span class="sl-button__label">
             <slot />
+          </span>
+          <span class="sl-button__suffix">
+            <slot name="suffix" />
           </span>
           <span class="sl-button__caret">
             {this.caret ? (
