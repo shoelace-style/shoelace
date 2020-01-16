@@ -47,19 +47,20 @@ $dropdown-item-transition-speed: 100ms !default;
     flex: 1 1 auto;
   }
 
-  .sl-dropdown-item__prefix:empty,
-  .sl-dropdown-item__suffix:empty {
-    display: none;
-  }
-
   .sl-dropdown-item__prefix:not(:empty) {
     flex: 0 0 auto;
-    margin-right: 0.5em;
+
+    ::slotted(*) {
+      margin-right: 0.5em;
+    }
   }
 
   .sl-dropdown-item__suffix:not(:empty) {
     flex: 0 0 auto;
-    margin-left: 0.5em;
+
+    ::slotted(*) {
+      margin-left: 0.5em;
+    }
   }
 }
 
