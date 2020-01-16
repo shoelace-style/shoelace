@@ -5,8 +5,7 @@ import tippy from 'tippy.js';
 @Component({
   tag: 'sl-tooltip',
   styleUrl: 'tooltip.scss',
-  scoped: false, // NOTE: see tooltip.scss for details
-  shadow: false
+  scoped: false // NOTE: see tooltip.scss for details
 })
 export class Tooltip {
   observer: MutationObserver;
