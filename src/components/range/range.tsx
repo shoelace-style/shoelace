@@ -3,7 +3,7 @@ import { Component, Method, Prop, State, h } from '@stencil/core';
 @Component({
   tag: 'sl-range',
   styleUrl: 'range.scss',
-  scoped: true
+  shadow: true
 })
 export class Range {
   input: HTMLInputElement;
