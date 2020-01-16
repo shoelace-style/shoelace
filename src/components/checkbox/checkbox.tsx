@@ -5,7 +5,7 @@ let id = 0;
 @Component({
   tag: 'sl-checkbox',
   styleUrl: 'checkbox.scss',
-  shadow: true
+  scoped: true
 })
 export class Checkbox {
   id = `sl-checkbox-${++id}`;

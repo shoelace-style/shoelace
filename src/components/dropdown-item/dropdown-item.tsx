@@ -3,7 +3,7 @@ import { Component, Event, EventEmitter, Prop, h } from '@stencil/core';
 @Component({
   tag: 'sl-dropdown-item',
   styleUrl: 'dropdown-item.scss',
-  shadow: true
+  scoped: true
 })
 export class DropdownItem {
   /** Set to true to draw the item in a checked state. */

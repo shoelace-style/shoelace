@@ -3,7 +3,7 @@ import { Component, h } from '@stencil/core';
 @Component({
   tag: 'sl-dropdown-divider',
   styleUrl: 'dropdown-divider.scss',
-  shadow: true
+  scoped: true
 })
 export class DropdownDivider {
   render() {

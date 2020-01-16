@@ -5,7 +5,7 @@ let id = 0;
 @Component({
   tag: 'sl-radio',
   styleUrl: 'radio.scss',
-  shadow: true
+  scoped: true
 })
 export class Radio {
   id = `sl-radio-${++id}`;

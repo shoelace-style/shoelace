@@ -3,7 +3,7 @@ import { Component, Method, Prop, State, h } from '@stencil/core';
 @Component({
   tag: 'sl-textarea',
   styleUrl: 'textarea.scss',
-  shadow: true
+  scoped: true
 })
 export class Textarea {
   resizeObserver: any;

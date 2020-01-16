@@ -3,7 +3,7 @@ import { Component, Prop, h } from '@stencil/core';
 @Component({
   tag: 'sl-spinner',
   styleUrl: 'spinner.scss',
-  shadow: true
+  scoped: true
 })
 export class Spinner {
   /** The spinner's size. */
