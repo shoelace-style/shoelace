@@ -40,7 +40,7 @@ $input-transition-speed: 100ms !default;
   background-color: $input-background-color;
   border: solid 1px $form-control-border-color;
   vertical-align: middle;
-  transition: $input-transition-speed color, $input-transition-speed border;
+  transition: $input-transition-speed color, $input-transition-speed border, $input-transition-speed box-shadow;
 
   .sl-input__control {
     flex: 1 1 auto;
@@ -78,6 +78,7 @@ $input-transition-speed: 100ms !default;
 
   &.sl-input--focused:not(.sl-input--disabled) {
     border-color: $color-primary;
+    box-shadow: 0 0 0 2px rgba($color-primary, 0.33);
   }
 
   &.sl-input--disabled {

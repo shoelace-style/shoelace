@@ -26,7 +26,7 @@ $checkbox-tick-color: $color-white !default;
 $checkbox-tick-color--hover: $checkbox-tick-color !default;
 $checkbox-tick-color--focus: $checkbox-tick-color !default;
 
-$checkbox-transition: 100ms border-color, 100ms background-color, 100ms color !default;
+$checkbox-transition: 100ms border-color, 100ms background-color, 100ms color, 100ms box-shadow !default;
 
 :host {
   display: inline-block;
@@ -81,6 +81,7 @@ $checkbox-transition: 100ms border-color, 100ms background-color, 100ms color !d
 .sl-checkbox.sl-checkbox--focused:not(.sl-checkbox--checked):not(.sl-checkbox--disabled) .sl-checkbox__control {
   border-color: $checkbox-border-color--focus;
   background-color: $checkbox-background-color--focus;
+  box-shadow: 0 0 0 2px rgba($checkbox-border-color--focus, 0.33);
 }
 
 // Checked/indeterminate
@@ -103,6 +104,7 @@ $checkbox-transition: 100ms border-color, 100ms background-color, 100ms color !d
 .sl-checkbox.sl-checkbox--indeterminate:not(.sl-checkbox--disabled).sl-checkbox--focused .sl-checkbox__control {
   border-color: $checkbox-border-color--checked--focus;
   background-color: $checkbox-background-color--checked--focus;
+  box-shadow: 0 0 0 2px rgba($checkbox-border-color--checked--focus, 0.33);
   color: $checkbox-tick-color--focus;
 }
 

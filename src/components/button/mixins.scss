@@ -40,6 +40,7 @@
     border-color: $border-color--focus;
     color: $color--focus;
     outline: none;
+    box-shadow: 0 0 0 2px rgba($border-color--focus, 0.33);
   }
 
   &:active:not(:disabled) {

@@ -47,6 +47,7 @@ $range-border-radius: $range-track-height !default;
 
     &:not(:disabled):focus::-webkit-slider-thumb {
       background-color: tint($range-thumb-background-color, 15%);
+      box-shadow: 0 0 0 2px rgba($range-thumb-background-color, 0.33);
     }
 
     &:not(:disabled)::-webkit-slider-thumb:active {
@@ -82,6 +83,7 @@ $range-border-radius: $range-track-height !default;
 
     &:not(:disabled):focus::-moz-range-thumb {
       background-color: tint($range-thumb-background-color, 15%);
+      box-shadow: 0 0 0 2px rgba($range-thumb-background-color, 0.33);
     }
 
     &:not(:disabled)::-moz-range-thumb:active {

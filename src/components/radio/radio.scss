@@ -26,7 +26,7 @@ $radio-tick-color: $color-white !default;
 $radio-tick-color--hover: $radio-tick-color !default;
 $radio-tick-color--focus: $radio-tick-color !default;
 
-$radio-transition: 100ms border-color, 100ms background-color, 100ms color !default;
+$radio-transition: 100ms border-color, 100ms background-color, 100ms color, 100ms box-shadow !default;
 
 :host {
   display: inline-block;
@@ -81,6 +81,7 @@ $radio-transition: 100ms border-color, 100ms background-color, 100ms color !defa
 .sl-radio.sl-radio--focused:not(.sl-radio--checked):not(.sl-radio--disabled) .sl-radio__control {
   border-color: $radio-border-color--focus;
   background-color: $radio-background-color--focus;
+  box-shadow: 0 0 0 2px rgba($radio-border-color--focus, 0.33);
 }
 
 // Checked
@@ -100,6 +101,7 @@ $radio-transition: 100ms border-color, 100ms background-color, 100ms color !defa
 .sl-radio.sl-radio--checked:not(.sl-radio--disabled).sl-radio--focused .sl-radio__control {
   border-color: $radio-border-color--checked--focus;
   background-color: $radio-background-color--checked--focus;
+  box-shadow: 0 0 0 2px rgba($radio-border-color--checked--focus, 0.33);
   color: $radio-tick-color--focus;
 }
 

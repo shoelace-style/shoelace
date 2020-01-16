@@ -35,7 +35,7 @@ $textarea-transition-speed: 100ms !default;
   background-color: $textarea-background-color;
   border: solid 1px $form-control-border-color;
   vertical-align: middle;
-  transition: $textarea-transition-speed color, $textarea-transition-speed border;
+  transition: $textarea-transition-speed color, $textarea-transition-speed border, $textarea-transition-speed box-shadow;
 
   .sl-textarea__control {
     flex: 1 1 auto;
@@ -73,6 +73,7 @@ $textarea-transition-speed: 100ms !default;
   &.sl-textarea--focused:not(.sl-textarea--disabled) {
     color: $textarea-color;
     border-color: $color-primary;
+    box-shadow: 0 0 0 2px rgba($color-primary, 0.33);
   }
 
   &.sl-textarea--disabled {
