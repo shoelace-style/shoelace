@@ -1,27 +1,11 @@
 @import 'reset';
 @import 'variables';
 
-$textarea-font-family: $form-control-font-family !default;
-$textarea-font-weight: $form-control-font-weight !default;
-$textarea-font-size--small: $form-control-font-size--small !default;
-$textarea-font-size--medium: $form-control-font-size--medium !default;
-$textarea-font-size--large: $form-control-font-size--large !default;
-
-$textarea-background-color: $color-white !default;
-$textarea-color: $form-control-color !default;
-
-$textarea-border-radius--small: 4px !default;
-$textarea-border-radius--medium: 4px !default;
-$textarea-border-radius--large: 4px !default;
-
-$textarea-padding-x--small: 14px !default;
-$textarea-padding-x--medium: 14px !default;
-$textarea-padding-x--large: 14px !default;
-
-$textarea-placeholder-color: $color-gray-70 !default;
-$textarea-transition-speed: $form-control-transition-speed !default;
-
 :host {
+  --textarea-padding-x--small: 14px;
+  --textarea-padding-x--medium: 14px;
+  --textarea-padding-x--large: 14px;
+
   display: block;
 }
 
@@ -29,13 +13,14 @@ $textarea-transition-speed: $form-control-transition-speed !default;
   display: flex;
   align-items: center;
   position: relative;
-  font-family: $textarea-font-family;
-  font-weight: $textarea-font-weight;
-  color: $textarea-color;
-  background-color: $textarea-background-color;
-  border: solid 1px $form-control-border-color;
+  font-family: var(--input-font-family);
+  font-weight: var(--input-font-weight);
+  color: var(--input-color);
+  background-color: var(--input-background-color);
+  border: solid 1px var(--input-border-color);
   vertical-align: middle;
-  transition: $textarea-transition-speed color, $textarea-transition-speed border, $textarea-transition-speed box-shadow;
+  transition: var(--input-transition-speed) color, var(--input-transition-speed) border,
+    var(--input-transition-speed) box-shadow;
 
   .sl-textarea__control {
     flex: 1 1 auto;
@@ -56,7 +41,7 @@ $textarea-transition-speed: $form-control-transition-speed !default;
     }
 
     &::placeholder {
-      color: $textarea-placeholder-color;
+      color: var(--input-placeholder-color);
       user-select: none;
     }
 
@@ -66,20 +51,19 @@ $textarea-transition-speed: $form-control-transition-speed !default;
   }
 
   &:hover:not(.sl-textarea--disabled) {
-    color: $textarea-color;
-    border-color: shade($form-control-border-color, 10%);
+    background-color: var(--input-background-color--hover);
+    border-color: var(--input-border-color--hover);
   }
 
   &.sl-textarea--focused:not(.sl-textarea--disabled) {
-    color: $textarea-color;
-    border-color: $color-primary;
-    box-shadow: 0 0 0 2px rgba($color-primary, 0.33);
+    background-color: var(--input-background-color--focus);
+    border-color: var(--input-border-color--focus);
+    box-shadow: 0 0 0 var(--input-focus-ring-width) var(--input-focus-ring-color);
   }
 
   &.sl-textarea--disabled {
-    color: $textarea-color;
-    background-color: shade($textarea-background-color, 5%);
-    border-color: $form-control-border-color;
+    background-color: var(--input-background-color--disabled);
+    border-color: var(--input-border-color--disabled);
     opacity: 0.5;
 
     .sl-textarea__control {
@@ -90,29 +74,29 @@ $textarea-transition-speed: $form-control-transition-speed !default;
 
 // Size modifiers
 .sl-textarea--small {
-  border-radius: $textarea-border-radius--small;
-  font-size: $textarea-font-size--small;
+  border-radius: var(--input-border-radius--small);
+  font-size: var(--input-font-size--small);
 
   .sl-textarea__control {
-    padding: 0.5em $textarea-padding-x--small;
+    padding: 0.5em var(--textarea-padding-x--small);
   }
 }
 
 .sl-textarea--medium {
-  border-radius: $textarea-border-radius--medium;
-  font-size: $textarea-font-size--medium;
+  border-radius: var(--input-border-radius--medium);
+  font-size: var(--input-font-size--medium);
 
   .sl-textarea__control {
-    padding: 0.5em $textarea-padding-x--medium;
+    padding: 0.5em var(--textarea-padding-x--medium);
   }
 }
 
 .sl-textarea--large {
-  border-radius: $textarea-border-radius--large;
-  font-size: $textarea-font-size--large;
+  border-radius: var(--input-border-radius--large);
+  font-size: var(--input-font-size--large);
 
   .sl-textarea__control {
-    padding: 0.5em $textarea-padding-x--large;
+    padding: 0.5em var(--textarea-padding-x--large);
   }
 }
 
