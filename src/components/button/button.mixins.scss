@@ -1,0 +1,59 @@
+@mixin button(
+  $color,
+  $color--hover,
+  $color--focus,
+  $color--active,
+  $background-color,
+  $background-color--hover,
+  $background-color--focus,
+  $background-color--active,
+  $border-color,
+  $border-color--hover,
+  $border-color--focus,
+  $border-color--active,
+  $border-width,
+  $focus-ring-width,
+  $focus-ring-color
+) {
+  display: inline-block;
+  font-family: var(--input-font-sans-serif);
+  font-weight: var(--input-font-weight);
+  color: $color;
+  background-color: $background-color;
+  border: solid $border-width $border-color;
+  transition: var(--input-transition-speed) background-color, var(--input-transition-speed) color,
+    var(--input-transition-speed) border;
+  user-select: none;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+
+  &::-moz-focus-inner {
+    border: 0;
+  }
+
+  &:hover:not(:disabled) {
+    background-color: $background-color--hover;
+    border-color: $border-color--hover;
+    color: $color--hover;
+  }
+
+  &:focus:not(:disabled) {
+    background-color: $background-color--focus;
+    border-color: $border-color--focus;
+    color: $color--focus;
+    outline: none;
+    box-shadow: 0 0 0 $focus-ring-width $focus-ring-color;
+  }
+
+  &:active:not(:disabled) {
+    background-color: $background-color--active;
+    border-color: $border-color--active;
+    color: $color--active;
+  }
+
+  &[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}

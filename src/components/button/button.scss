@@ -1,29 +1,6 @@
 @import 'reset';
 @import 'variables';
-@import './mixins';
-
-$button-font-family: $form-control-font-family !default;
-$button-font-weight: $form-control-font-weight !default;
-$button-font-size--small: $form-control-font-size--small !default;
-$button-font-size--medium: $form-control-font-size--medium !default;
-$button-font-size--large: $form-control-font-size--large !default;
-
-$button-height--small: $form-control-height--small !default;
-$button-height--medium: $form-control-height--medium !default;
-$button-height--large: $form-control-height--large !default;
-
-$button-border-radius--small: 4px !default;
-$button-border-radius--medium: 4px !default;
-$button-border-radius--large: 4px !default;
-
-$button-padding-x--small: 14px !default;
-$button-padding-x--medium: 20px !default;
-$button-padding-x--large: 26px !default;
-
-$button-spinner-animation: 1s linear infinite spin !default;
-$button-spinner-width: 1px !default;
-
-$button-transition-speed: $form-control-transition-speed !default;
+@import 'button.mixins';
 
 @keyframes spin {
   from {
@@ -35,149 +12,345 @@ $button-transition-speed: $form-control-transition-speed !default;
 }
 
 :host {
+  --button-padding-x--small: 14px;
+  --button-padding-x--medium: 20px;
+  --button-padding-x--large: 26px;
+  --button-spinner-animation: 1s linear infinite spin;
+  --button-spinner-width: 1px;
+
   display: inline-block;
+}
+
+.sl-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .sl-button__prefix:empty,
+  .sl-button__suffix:empty {
+    display: none;
+  }
+
+  .sl-button__prefix:not(:empty) {
+    margin-left: -0.25em;
+    margin-right: 0.25em;
+  }
+
+  .sl-button__suffix:not(:empty) {
+    margin-left: 0.25em;
+    margin-right: -0.25em;
+  }
 }
 
 // Standard buttons
 .sl-button:not(.sl-button--outline) {
   &.sl-button--default {
     @include button(
-      $color: $form-control-color,
-      $background-color: $color-white,
-      $border-color: $form-control-border-color,
-      $color--hover: tint($color-primary, 20%),
-      $background-color--hover: tint($color-primary, 90%),
-      $border-color--hover: tint($color-primary, 60%),
-      $color--focus: tint($color-primary, 20%),
-      $background-color--focus: tint($color-primary, 90%),
-      $border-color--focus: tint($color-primary, 60%),
-      $color--active: $color-primary,
-      $background-color--active: tint($color-primary, 90%),
-      $border-color--active: $color-primary
+      $color: var(--input-color),
+      $color--hover: var(--color-primary-500),
+      $color--focus: var(--color-primary-500),
+      $color--active: var(--color-primary-450),
+      $background-color: var(--input-background-color),
+      $background-color--hover: var(--color-primary-900),
+      $background-color--focus: var(--color-primary-900),
+      $background-color--active: var(--color-primary-900),
+      $border-color: var(--input-border-color),
+      $border-color--hover: var(--color-primary-800),
+      $border-color--focus: var(--color-primary-600),
+      $border-color--active: var(--color-primary-500),
+      $border-width: var(--input-border-width),
+      $focus-ring-width: var(--input-focus-ring-width),
+      $focus-ring-color: var(--color-focus-primary)
     );
   }
 
   &.sl-button--primary {
-    @include button-solid($color-white, $color-primary);
+    @include button(
+      $color: var(--color-white),
+      $color--hover: var(--color-white),
+      $color--focus: var(--color-white),
+      $color--active: var(--color-white),
+      $background-color: var(--color-primary),
+      $background-color--hover: var(--color-primary-550),
+      $background-color--focus: var(--color-primary-550),
+      $background-color--active: var(--color-primary-450),
+      $border-color: var(--color-primary),
+      $border-color--hover: var(--color-primary-550),
+      $border-color--focus: var(--color-primary-550),
+      $border-color--active: var(--color-primary-450),
+      $border-width: var(--input-border-width),
+      $focus-ring-width: var(--input-focus-ring-width),
+      $focus-ring-color: var(--color-focus-primary)
+    );
   }
 
   &.sl-button--success {
-    @include button-solid($color-white, $color-success);
+    @include button(
+      $color: var(--color-white),
+      $color--hover: var(--color-white),
+      $color--focus: var(--color-white),
+      $color--active: var(--color-white),
+      $background-color: var(--color-success),
+      $background-color--hover: var(--color-success-550),
+      $background-color--focus: var(--color-success-550),
+      $background-color--active: var(--color-success-450),
+      $border-color: var(--color-success),
+      $border-color--hover: var(--color-success-550),
+      $border-color--focus: var(--color-success-550),
+      $border-color--active: var(--color-success-450),
+      $border-width: var(--input-border-width),
+      $focus-ring-width: var(--input-focus-ring-width),
+      $focus-ring-color: var(--color-focus-success)
+    );
   }
 
   &.sl-button--info {
-    @include button-solid($color-white, $color-info);
+    @include button(
+      $color: var(--color-white),
+      $color--hover: var(--color-white),
+      $color--focus: var(--color-white),
+      $color--active: var(--color-white),
+      $background-color: var(--color-info),
+      $background-color--hover: var(--color-info-550),
+      $background-color--focus: var(--color-info-550),
+      $background-color--active: var(--color-info-450),
+      $border-color: var(--color-info),
+      $border-color--hover: var(--color-info-550),
+      $border-color--focus: var(--color-info-550),
+      $border-color--active: var(--color-info-450),
+      $border-width: var(--input-border-width),
+      $focus-ring-width: var(--input-focus-ring-width),
+      $focus-ring-color: var(--color-focus-info)
+    );
   }
 
   &.sl-button--warning {
-    @include button-solid($color-white, $color-warning);
+    @include button(
+      $color: var(--color-white),
+      $color--hover: var(--color-white),
+      $color--focus: var(--color-white),
+      $color--active: var(--color-white),
+      $background-color: var(--color-warning),
+      $background-color--hover: var(--color-warning-550),
+      $background-color--focus: var(--color-warning-550),
+      $background-color--active: var(--color-warning-450),
+      $border-color: var(--color-warning),
+      $border-color--hover: var(--color-warning-550),
+      $border-color--focus: var(--color-warning-550),
+      $border-color--active: var(--color-warning-450),
+      $border-width: var(--input-border-width),
+      $focus-ring-width: var(--input-focus-ring-width),
+      $focus-ring-color: var(--color-focus-warning)
+    );
   }
 
   &.sl-button--danger {
-    @include button-solid($color-white, $color-danger);
+    @include button(
+      $color: var(--color-white),
+      $color--hover: var(--color-white),
+      $color--focus: var(--color-white),
+      $color--active: var(--color-white),
+      $background-color: var(--color-danger),
+      $background-color--hover: var(--color-danger-550),
+      $background-color--focus: var(--color-danger-550),
+      $background-color--active: var(--color-danger-450),
+      $border-color: var(--color-danger),
+      $border-color--hover: var(--color-danger-550),
+      $border-color--focus: var(--color-danger-550),
+      $border-color--active: var(--color-danger-450),
+      $border-width: var(--input-border-width),
+      $focus-ring-width: var(--input-focus-ring-width),
+      $focus-ring-color: var(--color-focus-danger)
+    );
   }
-}
-
-// Block button
-.sl-button--block {
-  width: 100%;
 }
 
 // Outline buttons
 .sl-button.sl-button--outline {
   &.sl-button--default {
     @include button(
-      $color: $form-control-color,
-      $background-color: $color-white,
+      $color: var(--input-color),
+      $color--hover: var(--color-primary-500),
+      $color--focus: var(--color-primary-500),
+      $color--active: var(--color-primary-450),
+      $background-color: var(--color-white),
+      $background-color--hover: var(--color-white),
+      $background-color--focus: var(--color-white),
+      $background-color--active: var(--color-white),
       $border-color: $form-control-border-color,
-      $color--hover: tint($color-primary, 20%),
-      $background-color--hover: $color-white,
-      $border-color--hover: tint($color-primary, 20%),
-      $color--focus: tint($color-primary, 20%),
-      $background-color--focus: $color-white,
-      $border-color--focus: tint($color-primary, 20%),
-      $color--active: $color-primary,
-      $background-color--active: $color-white,
-      $border-color--active: $color-primary
+      $border-color--hover: var(--color-primary-600),
+      $border-color--focus: var(--color-primary-600),
+      $border-color--active: var(--color-primary-450),
+      $border-width: var(--input-border-width),
+      $focus-ring-width: var(--input-focus-ring-width),
+      $focus-ring-color: var(--color-focus-primary)
     );
   }
 
   &.sl-button--primary {
-    @include button-outline($color-white, $color-primary);
+    @include button(
+      $color: var(--color-primary),
+      $color--hover: var(--color-white),
+      $color--focus: var(--color-white),
+      $color--active: var(--color-white),
+      $background-color: var(--color-primary-900),
+      $background-color--hover: var(--color-primary-500),
+      $background-color--focus: var(--color-primary-500),
+      $background-color--active: var(--color-primary-450),
+      $border-color: var(--color-primary-800),
+      $border-color--hover: var(--color-primary),
+      $border-color--focus: var(--color-primary),
+      $border-color--active: var(--color-primary-450),
+      $border-width: var(--input-border-width),
+      $focus-ring-width: var(--input-focus-ring-width),
+      $focus-ring-color: var(--color-focus-primary)
+    );
   }
 
   &.sl-button--success {
-    @include button-outline($color-white, $color-success);
+    @include button(
+      $color: var(--color-success),
+      $color--hover: var(--color-white),
+      $color--focus: var(--color-white),
+      $color--active: var(--color-white),
+      $background-color: var(--color-success-900),
+      $background-color--hover: var(--color-success-500),
+      $background-color--focus: var(--color-success-500),
+      $background-color--active: var(--color-success-450),
+      $border-color: var(--color-success-800),
+      $border-color--hover: var(--color-success),
+      $border-color--focus: var(--color-success),
+      $border-color--active: var(--color-success-450),
+      $border-width: var(--input-border-width),
+      $focus-ring-width: var(--input-focus-ring-width),
+      $focus-ring-color: var(--color-focus-success)
+    );
   }
 
   &.sl-button--info {
-    @include button-outline($color-white, $color-info);
+    @include button(
+      $color: var(--color-info),
+      $color--hover: var(--color-white),
+      $color--focus: var(--color-white),
+      $color--active: var(--color-white),
+      $background-color: var(--color-info-900),
+      $background-color--hover: var(--color-info-500),
+      $background-color--focus: var(--color-info-500),
+      $background-color--active: var(--color-info-450),
+      $border-color: var(--color-info-800),
+      $border-color--hover: var(--color-info),
+      $border-color--focus: var(--color-info),
+      $border-color--active: var(--color-info-450),
+      $border-width: var(--input-border-width),
+      $focus-ring-width: var(--input-focus-ring-width),
+      $focus-ring-color: var(--color-focus-info)
+    );
   }
 
   &.sl-button--warning {
-    @include button-outline($color-white, $color-warning);
+    @include button(
+      $color: var(--color-warning),
+      $color--hover: var(--color-white),
+      $color--focus: var(--color-white),
+      $color--active: var(--color-white),
+      $background-color: var(--color-warning-900),
+      $background-color--hover: var(--color-warning-500),
+      $background-color--focus: var(--color-warning-500),
+      $background-color--active: var(--color-warning-450),
+      $border-color: var(--color-warning-800),
+      $border-color--hover: var(--color-warning),
+      $border-color--focus: var(--color-warning),
+      $border-color--active: var(--color-warning-450),
+      $border-width: var(--input-border-width),
+      $focus-ring-width: var(--input-focus-ring-width),
+      $focus-ring-color: var(--color-focus-warning)
+    );
   }
 
   &.sl-button--danger {
-    @include button-outline($color-white, $color-danger);
+    @include button(
+      $color: var(--color-danger),
+      $color--hover: var(--color-white),
+      $color--focus: var(--color-white),
+      $color--active: var(--color-white),
+      $background-color: var(--color-danger-900),
+      $background-color--hover: var(--color-danger-500),
+      $background-color--focus: var(--color-danger-500),
+      $background-color--active: var(--color-danger-450),
+      $border-color: var(--color-danger-800),
+      $border-color--hover: var(--color-danger),
+      $border-color--focus: var(--color-danger),
+      $border-color--active: var(--color-danger-450),
+      $border-width: var(--input-border-width),
+      $focus-ring-width: var(--input-focus-ring-width),
+      $focus-ring-color: var(--color-focus-danger)
+    );
   }
 }
 
 // Text buttons
 .sl-button--text {
   @include button(
-    $color: $color-gray-20,
+    $color: var(--color-gray-200),
+    $color--hover: var(--color-gray-400),
+    $color--focus: var(--color-gray-400),
+    $color--active: var(--color-gray-100),
     $background-color: transparent,
-    $border-color: transparent,
-    $color--hover: $color-gray-40,
     $background-color--hover: transparent,
-    $border-color--hover: transparent,
-    $color--focus: $color-gray-40,
     $background-color--focus: transparent,
-    $border-color--focus: transparent,
-    $color--active: $color-gray-10,
     $background-color--active: transparent,
-    $border-color--active: transparent
+    $border-color: transparent,
+    $border-color--hover: transparent,
+    $border-color--focus: transparent,
+    $border-color--active: transparent,
+    $border-width: var(--input-border-width),
+    $focus-ring-width: var(--input-focus-ring-width),
+    $focus-ring-color: var(--input-focus-ring-color)
   );
+}
+
+// Block modifier
+.sl-button--block {
+  width: 100%;
 }
 
 // Size modifiers
 .sl-button--small {
-  font-size: $button-font-size--small;
-  height: $button-height--small;
-  line-height: $button-height--small - 2px; // top + bottom border
-  border-radius: $button-border-radius--small;
-  padding: 0 $button-padding-x--small;
+  font-size: var(--input-font-size--small);
+  height: var(--input-height--small);
+  line-height: calc(var(--input-height--small) - var(--input-border-width) * 2);
+  border-radius: var(--input-border-radius--small);
+  padding: 0 var(--button-padding-x--small);
 }
 
 .sl-button--medium {
-  font-size: $button-font-size--medium;
-  height: $button-height--medium;
-  line-height: $button-height--medium - 2px; // top + bottom border
-  border-radius: $button-border-radius--medium;
-  padding: 0 $button-padding-x--medium;
+  font-size: var(--input-font-size--medium);
+  height: var(--input-height--medium);
+  line-height: calc(var(--input-height--medium) - var(--input-border-width) * 2);
+  border-radius: var(--input-border-radius--medium);
+  padding: 0 var(--button-padding-x--medium);
 }
 
 .sl-button--large {
-  font-size: $button-font-size--large;
-  height: $button-height--large;
-  line-height: $button-height--large - 2px; // top + bottom border
-  border-radius: $button-border-radius--large;
-  padding: 0 $button-padding-x--large;
+  font-size: var(--input-font-size--large);
+  height: var(--input-height--large);
+  line-height: calc(var(--input-height--large) - var(--input-border-width) * 2);
+  border-radius: var(--input-border-radius--large);
+  padding: 0 var(--button-padding-x--large);
 }
 
 // Round modifier
 .sl-button--round {
   &.sl-button--small {
-    border-radius: $button-height--small;
+    border-radius: var(--input-height--small);
   }
 
   &.sl-button--medium {
-    border-radius: $button-height--medium;
+    border-radius: var(--input-height--medium);
   }
 
   &.sl-button--large {
-    border-radius: $button-height--large;
+    border-radius: var(--input-height--large);
   }
 }
 
@@ -187,17 +360,17 @@ $button-transition-speed: $form-control-transition-speed !default;
   padding-right: 0;
 
   &.sl-button--small {
-    width: $button-height--small;
+    width: var(--input-height--small);
     border-radius: 50%;
   }
 
   &.sl-button--medium {
-    width: $button-height--medium;
+    width: var(--input-height--medium);
     border-radius: 50%;
   }
 
   &.sl-button--large {
-    width: $button-height--large;
+    width: var(--input-height--large);
     border-radius: 50%;
   }
 
@@ -230,7 +403,7 @@ $button-transition-speed: $form-control-transition-speed !default;
   }
 }
 
-// Loading state
+// Loading modifier
 .sl-button--loading {
   position: relative;
   pointer-events: none;
@@ -248,31 +421,9 @@ $button-transition-speed: $form-control-transition-speed !default;
     left: calc(50% - 0.5em);
     width: 1em;
     height: 1em;
-    border: solid $button-spinner-width currentColor;
+    border: solid var(--button-spinner-width) currentColor;
     border-bottom-color: transparent;
     border-radius: 50%;
-    animation: $button-spinner-animation;
-  }
-}
-
-// Slots
-.sl-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  .sl-button__prefix:empty,
-  .sl-button__suffix:empty {
-    display: none;
-  }
-
-  .sl-button__prefix:not(:empty) {
-    margin-left: -0.25em;
-    margin-right: 0.25em;
-  }
-
-  .sl-button__suffix:not(:empty) {
-    margin-left: 0.25em;
-    margin-right: -0.25em;
+    animation: var(--button-spinner-animation);
   }
 }
