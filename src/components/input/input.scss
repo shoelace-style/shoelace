@@ -63,7 +63,8 @@
   }
 
   &.sl-input--disabled {
-    background-color: var(--color-gray-900);
+    background-color: var(--input-background-color--disabled);
+    border-color: var(--input-border-color--disabled);
     opacity: 0.5;
 
     .sl-input__control {
