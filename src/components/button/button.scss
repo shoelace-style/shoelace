@@ -16,7 +16,7 @@
   --button-padding-x--medium: 20px;
   --button-padding-x--large: 26px;
   --button-spinner-animation: 1s linear infinite spin;
-  --button-spinner-width: 1px;
+  --button-spinner-border-width: 1px;
 
   display: inline-block;
 }
@@ -421,7 +421,7 @@
     left: calc(50% - 0.5em);
     width: 1em;
     height: 1em;
-    border: solid var(--button-spinner-width) currentColor;
+    border: solid var(--button-spinner-border-width) currentColor;
     border-bottom-color: transparent;
     border-radius: 50%;
     animation: var(--button-spinner-animation);
