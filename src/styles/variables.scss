@@ -165,7 +165,7 @@ $inputs: (
   height--large: 44px,
   border-width: 1px,
   border-color: map-get($gray-colors, 800),
-  border-color--hover: map-get($theme-colors, primary),
+  border-color--hover: map-get($gray-colors, 700),
   border-color--focus: map-get($theme-colors, primary),
   border-color--disabled: map-get($gray-colors, 800),
   border-radius--small: 4px,
@@ -177,6 +177,7 @@ $inputs: (
   background-color-disabled: map-get($gray-colors, 900),
   focus-ring-width: 2px,
   focus-ring-color: map-get($focus-colors, primary),
+  placeholder-color: map-get($gray-colors, 700),
   transition-speed: 150ms
 );
 
