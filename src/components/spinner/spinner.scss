@@ -1,12 +1,6 @@
 @import 'reset';
 @import 'variables';
 
-$spinner-color: $color-primary !default;
-$spinner-speed: 1s !default;
-$spinner-border-width: 2px !default;
-$spinner-margin-x: 4px !default;
-$spinner-animation: 1s linear infinite spin !default;
-
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -17,15 +11,20 @@ $spinner-animation: 1s linear infinite spin !default;
 }
 
 :host {
+  --spinner-animation: 1s linear infinite spin;
+  --spinner-border-width: 2px;
+  --spinner-color: var(--color-primary);
+  --spinner-margin-x: 4px;
+
   display: inline-block;
 }
 
 .sl-spinner {
   display: inline-block;
   border-radius: 50%;
-  border: solid $spinner-border-width $spinner-color;
+  border: solid var(--spinner-border-width) var(--spinner-color);
   border-bottom-color: transparent;
-  margin: 0 $spinner-margin-x;
+  margin: 0 var(--spinner-margin-x);
   vertical-align: middle;
-  animation: $spinner-animation;
+  animation: var(--spinner-animation);
 }
