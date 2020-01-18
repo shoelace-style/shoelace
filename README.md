@@ -2,6 +2,12 @@
 
 A forward-thinking component library built with Web Components.
 
+Objective:
+
+1. Design a framework-agnostic component library 🧩
+2. Be able to load it from a CDN ⚡️
+3. Fully customize it with CSS variables — no need to build it yourself! 🎨
+
 Designed and developed in New Hampshire by [Cory LaViska](https://twitter.com/claviska).
 
 ## Installation
