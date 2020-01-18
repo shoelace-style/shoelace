@@ -1,20 +1,13 @@
 @import 'reset';
 @import 'button.mixins';
 
-:host {
-  --button-padding-x--small: 14px;
-  --button-padding-x--medium: 20px;
-  --button-padding-x--large: 26px;
-
-  --button-spinner-animation: 1s linear infinite spin;
-  --button-spinner-border-width: 1px;
-
-  display: inline-block;
-}
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Base styles
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+:host {
+  display: inline-block;
+}
 
 .sl-button {
   display: flex;

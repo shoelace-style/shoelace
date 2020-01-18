@@ -124,7 +124,7 @@
   --color-danger-95: hsl(var(--color-danger-hue), var(--color-danger-saturation), 95%);
 
   --color-gray-hue: var(--color-primary-hue);
-  --color-gray-saturation: 20%;
+  --color-gray-saturation: 10%;
   --color-gray-05: hsl(var(--color-gray-hue), var(--color-gray-saturation), 5%);
   --color-gray-10: hsl(var(--color-gray-hue), var(--color-gray-saturation), 10%);
   --color-gray-15: hsl(var(--color-gray-hue), var(--color-gray-saturation), 15%);
@@ -197,10 +197,72 @@
   --form-control-background-color--focus: white;
   --form-control-background-color-disabled: var(--color-gray-90);
 
+  --form-control-padding-x--small: 14px;
+  --form-control-padding-x--medium: 14px;
+  --form-control-padding-x--large: 14px;
+
   --form-control-transition-speed: 150ms;
 
+  /* Focus */
   --focus-ring-width: 2px;
   --focus-ring-alpha: 33%;
+
+  /* Buttons */
+  --button-padding-x--small: 14px;
+  --button-padding-x--medium: 20px;
+  --button-padding-x--large: 26px;
+
+  --button-spinner-animation: 1s linear infinite spin;
+  --button-spinner-border-width: 1px;
+
+  /* Checkboxes */
+  --checkbox-size: 14px;
+  --checkbox-border-radius: 2px;
+  --checkbox-border-width: var(--form-control-border-width);
+  --checkbox-tick-color: white;
+  --checkbox-transition: var(--form-control-transition-speed) border-color,
+    var(--form-control-transition-speed) background-color, var(--form-control-transition-speed) color,
+    var(--form-control-transition-speed) box-shadow;
+
+  /* Radios */
+  --radio-size: 14px;
+  --radio-border-radius: 50%;
+  --radio-border-width: var(--form-control-border-width);
+  --radio-tick-color: white;
+  --radio-transition: var(--form-control-transition-speed) border-color,
+    var(--form-control-transition-speed) background-color, var(--form-control-transition-speed) color,
+    var(--form-control-transition-speed) box-shadow;
+
+  /* Switches */
+  --switch-height: 16px;
+  --switch-width: calc(var(--switch-height) * 2);
+  --switch-transition: var(--form-control-transition-speed) border-color,
+    var(--form-control-transition-speed) background-color;
+
+  --switch-track-background-color: var(--color-gray-80);
+  --switch-track-background-color--hover: var(--color-gray-85);
+  --switch-track-background-color--focus: var(--color-gray-85);
+
+  --switch-track-border-color: var(--color-gray-80);
+  --switch-track-border-color--hover: var(--color-gray-85);
+  --switch-track-border-color--focus: var(--color-gray-85);
+
+  --switch-track-border-radius: var(--switch-height);
+  --switch-track-border-width: var(--form-control-border-width);
+
+  --switch-thumb-size: 20px;
+  --switch-thumb-background-color: white;
+  --switch-thumb-border-radius: 50%;
+  --switch-thumb-border-width: var(--form-control-border-width);
+  --switch-thumb-transition: var(--form-control-transition-speed) transform ease,
+    var(--form-control-transition-speed) background-color, var(--form-control-transition-speed) border-color,
+    var(--form-control-transition-speed) box-shadow;
+
+  /* Ramges */
+  --range-track-border-radius: 3px;
+  --range-track-background-color: var(--color-gray-90);
+  --range-track-height: 3px;
+  --range-thumb-size: 20px;
 
   /*********************************************************************************************************************
   * Menus (dropdown, select, popover, et al)
@@ -216,6 +278,7 @@
 
   --menu-transition-speed: 150ms;
 
+  /* Menu items */
   --menu-item-color: var(--color-gray-40);
   --menu-item-color--active: var(--color-primary-50);
   --menu-item-color--disabled: var(--color-gray-70);
@@ -230,4 +293,19 @@
 
   --menu-padding-x: 30px;
   --menu-padding-y: 10px;
+
+  /*********************************************************************************************************************
+  * Tooltips
+  *********************************************************************************************************************/
+
+  --tooltip-font-family: var(--form-control-font-family);
+  --tooltip-font-weight: var(--form-control-font-weight);
+  --tooltip-font-size: var(--form-control-font-size--medium);
+  --tooltip-line-height: 1.4;
+  --tooltip-background-color: var(--color-gray-10);
+  --tooltip-border-radius: 3px;
+  --tooltip-color: white;
+
+  --tooltip-padding-y: 5px;
+  --tooltip-padding-x: 10px;
 }

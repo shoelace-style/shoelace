@@ -1,0 +1,121 @@
+@import 'reset';
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Base styles
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+:host {
+  display: block;
+}
+
+.sl-textarea {
+  display: flex;
+  align-items: center;
+  position: relative;
+  font-family: var(--form-control-font-family);
+  font-weight: var(--form-control-font-weight);
+  color: var(--form-control-color);
+  background-color: var(--form-control-background-color);
+  border: solid 1px var(--form-control-border-color);
+  vertical-align: middle;
+  transition: var(--form-control-transition-speed) color, var(--form-control-transition-speed) border,
+    var(--form-control-transition-speed) box-shadow;
+
+  .sl-textarea__control {
+    flex: 1 1 auto;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: 1.4;
+    color: inherit;
+    border: none;
+    background: none;
+    -webkit-appearance: none;
+
+    &::-webkit-search-decoration,
+    &::-webkit-search-cancel-button,
+    &::-webkit-search-results-button,
+    &::-webkit-search-results-decoration {
+      -webkit-appearance: none;
+    }
+
+    &::placeholder {
+      color: var(--form-control-placeholder-color);
+      user-select: none;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &:hover:not(.sl-textarea--disabled) {
+    background-color: var(--form-control-background-color--hover);
+    border-color: var(--form-control-border-color--hover);
+  }
+
+  &.sl-textarea--focused:not(.sl-textarea--disabled) {
+    background-color: var(--form-control-background-color--focus);
+    border-color: var(--form-control-border-color--focus);
+    box-shadow: 0 0 0 var(--focus-ring-width)
+      hsla(var(--color-primary-hue), var(--color-primary-saturation), 50%, var(--focus-ring-alpha));
+  }
+
+  &.sl-textarea--disabled {
+    background-color: var(--form-control-background-color--disabled);
+    border-color: var(--form-control-border-color--disabled);
+    opacity: 0.5;
+
+    .sl-textarea__control {
+      cursor: not-allowed;
+    }
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Size modifiers
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+.sl-textarea--small {
+  border-radius: var(--form-control-border-radius--small);
+  font-size: var(--form-control-font-size--small);
+
+  .sl-textarea__control {
+    padding: 0.5em var(--form-control-padding-x--small);
+  }
+}
+
+.sl-textarea--medium {
+  border-radius: var(--form-control-border-radius--medium);
+  font-size: var(--form-control-font-size--medium);
+
+  .sl-textarea__control {
+    padding: 0.5em var(--form-control-padding-x--medium);
+  }
+}
+
+.sl-textarea--large {
+  border-radius: var(--form-control-border-radius--large);
+  font-size: var(--form-control-font-size--large);
+
+  .sl-textarea__control {
+    padding: 0.5em var(--form-control-padding-x--large);
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Resize types
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+.sl-textarea--resize-none .sl-textarea__control {
+  resize: none;
+}
+
+.sl-textarea--resize-vertical .sl-textarea__control {
+  resize: vertical;
+}
+
+.sl-textarea--resize-auto .sl-textarea__control {
+  height: auto;
+  resize: none;
+}

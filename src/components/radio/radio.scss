@@ -1,0 +1,89 @@
+@import 'reset';
+
+:host {
+  display: inline-block;
+}
+
+.sl-radio {
+  display: flex;
+  align-items: center;
+  font-family: var(--form-control-font-family);
+  font-size: var(--form-control-font-size);
+  font-weight: var(--form-control-font-weight);
+  color: var(--form-control-color);
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.sl-radio__control {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--radio-size);
+  height: var(--radio-size);
+  border: solid var(--radio-border-width) var(--form-control-border-color);
+  border-radius: var(--radio-border-radius);
+  background-color: var(--form-control-background-color);
+  color: var(--radio-tick-color);
+  transition: var(--radio-transition);
+
+  input[type='radio'] {
+    position: absolute;
+    opacity: 1;
+    padding: 0;
+    margin: 0;
+    pointer-events: none;
+    -webkit-appearance: none;
+  }
+
+  svg {
+    width: var(--radio-size);
+    height: var(--radio-size);
+  }
+}
+
+// Hover
+.sl-radio:not(.sl-radio--checked):not(.sl-radio--disabled) .sl-radio__control:hover {
+  border-color: var(--color-primary-60);
+  background-color: var(--form-control-background-color--hover);
+}
+
+// Focus
+.sl-radio.sl-radio--focused:not(.sl-radio--checked):not(.sl-radio--disabled) .sl-radio__control {
+  border-color: var(--color-primary-60);
+  background-color: var(--form-control-background-color--focus);
+  box-shadow: 0 0 0 var(--focus-ring-width)
+    hsla(var(--color-primary-hue), var(--color-primary-saturation), 50%, var(--focus-ring-alpha));
+}
+
+// Checked
+.sl-radio--checked .sl-radio__control {
+  border-color: var(--color-primary-50);
+  background-color: var(--color-primary-50);
+}
+
+// Checked + hover
+.sl-radio.sl-radio--checked:not(.sl-radio--disabled) .sl-radio__control:hover {
+  border-color: var(--color-primary-60);
+  background-color: var(--color-primary-60);
+}
+
+// Checked + focus
+.sl-radio.sl-radio--checked:not(.sl-radio--disabled).sl-radio--focused .sl-radio__control {
+  border-color: var(--color-primary-60);
+  background-color: var(--color-primary-60);
+  box-shadow: 0 0 0 var(--focus-ring-width)
+    hsla(var(--color-primary-hue), var(--color-primary-saturation), 50%, var(--focus-ring-alpha));
+}
+
+// Disabled
+.sl-radio--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.sl-radio__label {
+  margin-left: 0.5em;
+  user-select: none;
+}

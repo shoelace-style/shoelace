@@ -1,0 +1,163 @@
+@import 'reset';
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Base styles
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+:host {
+  display: block;
+}
+
+.sl-input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  font-family: var(--form-control-font-family);
+  font-weight: var(--form-control-font-weight);
+  color: var(--form-control-color);
+  background-color: var(--form-control-background-color);
+  border: solid var(--form-control-border-width) var(--form-control-border-color);
+  vertical-align: middle;
+  transition: var(--form-control-transition-speed) color, var(--form-control-transition-speed) border,
+    var(--form-control-transition-speed) box-shadow;
+
+  .sl-input__control {
+    flex: 1 1 auto;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    height: 100%;
+    color: inherit;
+    border: none;
+    background: none;
+    -webkit-appearance: none;
+
+    &::-webkit-search-decoration,
+    &::-webkit-search-cancel-button,
+    &::-webkit-search-results-button,
+    &::-webkit-search-results-decoration {
+      -webkit-appearance: none;
+    }
+
+    &::placeholder {
+      color: var(--form-control-placeholder-color);
+      user-select: none;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &:hover:not(.sl-input--disabled) {
+    background-color: var(--form-control-background-color--hover);
+    border-color: var(--form-control-border-color--hover);
+  }
+
+  &.sl-input--focused:not(.sl-input--disabled) {
+    background-color: var(--form-control-background-color--focus);
+    border-color: var(--form-control-border-color--focus);
+    box-shadow: 0 0 0 var(--focus-ring-width)
+      hsla(var(--color-primary-hue), var(--color-primary-saturation), 50%, var(--focus-ring-alpha));
+  }
+
+  &.sl-input--disabled {
+    background-color: var(--form-control-background-color--disabled);
+    border-color: var(--form-control-border-color--disabled);
+    opacity: 0.5;
+
+    .sl-input__control {
+      cursor: not-allowed;
+    }
+  }
+
+  .sl-input__prefix:not(:empty) {
+    color: var(--form-control-placeholder-color);
+    margin-right: 0.5em;
+  }
+
+  .sl-input__suffix:not(:empty) {
+    color: var(--form-control-placeholder-color);
+    margin-left: 0.5em;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Size modifiers
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+.sl-input--small {
+  border-radius: var(--form-control-border-radius--small);
+  font-size: var(--form-control-font-size--small);
+  padding: 0 var(--form-control-padding-x--small);
+  height: var(--form-control-height--small);
+
+  .sl-input__control {
+    height: calc(var(--form-control-height--small) - var(--form-control-border-width) * 2);
+    line-height: calc(var(--form-control-height--small) - var(--form-control-border-width) * 2);
+  }
+}
+
+.sl-input--medium {
+  border-radius: var(--form-control-border-radius--medium);
+  font-size: var(--form-control-font-size--medium);
+  height: var(--form-control-height--medium);
+  padding: 0 var(--form-control-padding-x--medium);
+
+  .sl-input__control {
+    height: calc(var(--form-control-height--medium) - var(--form-control-border-width) * 2);
+    line-height: calc(var(--form-control-height--medium) - var(--form-control-border-width) * 2);
+  }
+}
+
+.sl-input--large {
+  border-radius: var(--form-control-border-radius--large);
+  font-size: var(--form-control-font-size--large);
+  height: var(--form-control-height--large);
+  padding: 0 var(--form-control-padding-x--large);
+
+  .sl-input__control {
+    height: calc(var(--form-control-height--large) - var(--form-control-border-width) * 2);
+    line-height: calc(var(--form-control-height--large) - var(--form-control-border-width) * 2);
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Clearable
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+.sl-input__clear {
+  display: flex;
+  align-items: center;
+  font-size: inherit;
+  color: var(--form-control-placeholder-color);
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+
+  svg {
+    width: 14px;
+    height: 14px;
+    transition: var(--form-control-transition-speed) filter;
+  }
+
+  &:hover,
+  &:focus {
+    svg {
+      filter: brightness(80%);
+    }
+  }
+
+  &:active {
+    svg {
+      filter: brightness(60%);
+    }
+  }
+}
+
+.sl-input--empty .sl-input__clear {
+  visibility: hidden;
+}

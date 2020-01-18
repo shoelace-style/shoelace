@@ -1,12 +1,6 @@
 @import 'reset';
-@import 'variables';
 
 :host {
-  --range-track-border-radius: 3px;
-  --range-track-background-color: var(--color-gray-900);
-  --range-track-height: 3px;
-  --range-thumb-size: 20px;
-
   display: block;
 }
 
@@ -14,9 +8,9 @@
   .sl-range__control {
     -webkit-appearance: none;
     width: 100%;
-    height: var(--input-height--medium);
+    height: var(--form-control-height--medium);
     background: transparent;
-    line-height: var(--input-height--medium);
+    line-height: var(--form-control-height--medium);
     vertical-align: middle;
 
     // Webkit
@@ -33,25 +27,27 @@
       width: var(--range-thumb-size);
       height: var(--range-thumb-size);
       border-radius: 50%;
-      background-color: var(--color-primary);
+      background-color: var(--color-primary-50);
       -webkit-appearance: none;
       margin-top: calc(var(--range-thumb-size) / -2 + var(--range-track-height) / 2);
-      transition: var(--input-transition-speed) border-color, var(--input-transition-speed) background-color,
-        var(--input-transition-speed) color, var(--input-transition-speed) box-shadow;
+      transition: var(--form-control-transition-speed) border-color,
+        var(--form-control-transition-speed) background-color, var(--form-control-transition-speed) color,
+        var(--form-control-transition-speed) box-shadow;
       cursor: pointer;
     }
 
     &:not(:disabled)::-webkit-slider-thumb:hover {
-      background-color: var(--color-primary-600);
+      background-color: var(--color-primary-60);
     }
 
     &:not(:disabled):focus::-webkit-slider-thumb {
-      background-color: var(--color-primary-600);
-      box-shadow: 0 0 0 var(--input-focus-ring-width) var(--color-focus-primary);
+      background-color: var(--color-primary-60);
+      box-shadow: 0 0 0 var(--focus-ring-width)
+        hsla(var(--color-primary-hue), var(--color-primary-saturation), 50%, var(--focus-ring-alpha));
     }
 
     &:not(:disabled)::-webkit-slider-thumb:active {
-      background-color: var(--color-primary-400);
+      background-color: var(--color-primary-40);
       cursor: grabbing;
     }
 
@@ -73,23 +69,25 @@
       height: var(--range-thumb-size);
       width: var(--range-thumb-size);
       border-radius: 50%;
-      background-color: var(--color-primary);
-      transition: var(--input-transition-speed) border-color, var(--input-transition-speed) background-color,
-        var(--input-transition-speed) color, var(--input-transition-speed) box-shadow;
+      background-color: var(--color-primary-50);
+      transition: var(--form-control-transition-speed) border-color,
+        var(--form-control-transition-speed) background-color, var(--form-control-transition-speed) color,
+        var(--form-control-transition-speed) box-shadow;
       cursor: pointer;
     }
 
     &:not(:disabled)::-moz-range-thumb:hover {
-      background-color: var(--color-primary-600);
+      background-color: var(--color-primary-60);
     }
 
     &:not(:disabled):focus::-moz-range-thumb {
-      background-color: var(--color-primary-600);
-      box-shadow: 0 0 0 var(--input-focus-ring-width) var(--color-focus-primary);
+      background-color: var(--color-primary-60);
+      box-shadow: 0 0 0 var(--focus-ring-width)
+        hsla(var(--color-primary-hue), var(--color-primary-saturation), 50%, var(--focus-ring-alpha));
     }
 
     &:not(:disabled)::-moz-range-thumb:active {
-      background-color: var(--color-primary-400);
+      background-color: var(--color-primary-40);
       cursor: grabbing;
     }
 

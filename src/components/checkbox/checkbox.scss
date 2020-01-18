@@ -1,0 +1,92 @@
+@import 'reset';
+
+:host {
+  display: inline-block;
+}
+
+.sl-checkbox {
+  display: flex;
+  align-items: center;
+  font-family: var(--form-control-font-family);
+  font-size: var(--form-control-font-size);
+  font-weight: var(--form-control-font-weight);
+  color: var(--form-control-color);
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.sl-checkbox__control {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--checkbox-size);
+  height: var(--checkbox-size);
+  border: solid var(--radio-border-width) var(--form-control-border-color);
+  border-radius: var(--checkbox-border-radius);
+  background-color: var(--form-control-background-color);
+  color: var(--checkbox-tick-color);
+  transition: var(--checkbox-transition);
+
+  input[type='checkbox'] {
+    position: absolute;
+    opacity: 1;
+    padding: 0;
+    margin: 0;
+    pointer-events: none;
+    -webkit-appearance: none;
+  }
+
+  svg {
+    width: var(--checkbox-size);
+    height: var(--checkbox-size);
+  }
+}
+
+// Hover
+.sl-checkbox:not(.sl-checkbox--checked):not(.sl-checkbox--disabled) .sl-checkbox__control:hover {
+  border-color: var(--color-primary-60);
+  background-color: var(--form-control-background-color--hover);
+}
+
+// Focus
+.sl-checkbox.sl-checkbox--focused:not(.sl-checkbox--checked):not(.sl-checkbox--disabled) .sl-checkbox__control {
+  border-color: var(--color-primary-60);
+  background-color: var(--form-control-background-color--focus);
+  box-shadow: 0 0 0 var(--focus-ring-width)
+    hsla(var(--color-primary-hue), var(--color-primary-saturation), 50%, var(--focus-ring-alpha));
+}
+
+// Checked/indeterminate
+.sl-checkbox--checked .sl-checkbox__control,
+.sl-checkbox--indeterminate .sl-checkbox__control {
+  border-color: var(--color-primary-50);
+  background-color: var(--color-primary-50);
+}
+
+// Checked/indeterminate + hover
+.sl-checkbox.sl-checkbox--checked:not(.sl-checkbox--disabled) .sl-checkbox__control:hover,
+.sl-checkbox.sl-checkbox--indeterminate:not(.sl-checkbox--disabled) .sl-checkbox__control:hover {
+  border-color: var(--color-primary-60);
+  background-color: var(--color-primary-60);
+}
+
+// Checked/indeterminate + focus
+.sl-checkbox.sl-checkbox--checked:not(.sl-checkbox--disabled).sl-checkbox--focused .sl-checkbox__control,
+.sl-checkbox.sl-checkbox--indeterminate:not(.sl-checkbox--disabled).sl-checkbox--focused .sl-checkbox__control {
+  border-color: var(--color-primary-60);
+  background-color: var(--color-primary-60);
+  box-shadow: 0 0 0 var(--focus-ring-width)
+    hsla(var(--color-primary-hue), var(--color-primary-saturation), 50%, var(--focus-ring-alpha));
+}
+
+// Disabled
+.sl-checkbox--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.sl-checkbox__label {
+  margin-left: 0.5em;
+  user-select: none;
+}

@@ -56,6 +56,36 @@ export namespace Components {
     */
     'type': string;
   }
+  interface SlCheckbox {
+    /**
+    * Set to true to draw the checkbox in a checked state.
+    */
+    'checked': boolean;
+    /**
+    * Set to true to disable the checkbox.
+    */
+    'disabled': boolean;
+    /**
+    * Set to true to draw the checkbox in an indeterminate state.
+    */
+    'indeterminate': boolean;
+    /**
+    * A native input's name attribute.
+    */
+    'name': string;
+    /**
+    * Removes focus from the checkbox.
+    */
+    'removeFocus': () => Promise<void>;
+    /**
+    * Sets focus on the checkbox.
+    */
+    'setFocus': () => Promise<void>;
+    /**
+    * The native input's value attribute.
+    */
+    'value': string;
+  }
   interface SlDropdown {
     'close': () => Promise<void>;
     'open': () => Promise<void>;
@@ -79,11 +109,326 @@ export namespace Components {
     */
     'disabled': boolean;
   }
+  interface SlInput {
+    /**
+    * The input's autocaptialize attribute.
+    */
+    'autocapitalize': string;
+    /**
+    * The input's autocomplete attribute.
+    */
+    'autocomplete': string;
+    /**
+    * The input's autocorrect attribute.
+    */
+    'autocorrect': string;
+    /**
+    * The input's autofocus attribute.
+    */
+    'autofocus': boolean;
+    /**
+    * Set to true to add a clear button when the input is populated.
+    */
+    'clearable': boolean;
+    /**
+    * Set to true to disable the input.
+    */
+    'disabled': boolean;
+    /**
+    * The input's inputmode attribute.
+    */
+    'inputmode': string;
+    /**
+    * The input's max attribute.
+    */
+    'max': number;
+    /**
+    * The input's maxlength attribute.
+    */
+    'maxlength': number;
+    /**
+    * The input's min attribute.
+    */
+    'min': number;
+    /**
+    * The input's minlength attribute.
+    */
+    'minlength': number;
+    /**
+    * The input's name attribute.
+    */
+    'name': string;
+    /**
+    * The input's pattern attribute.
+    */
+    'pattern': string;
+    /**
+    * The input's placeholder text.
+    */
+    'placeholder': string;
+    /**
+    * Set to true for a readonly input.
+    */
+    'readonly': boolean;
+    /**
+    * Removes focus from the input.
+    */
+    'removeFocus': () => Promise<void>;
+    /**
+    * The input's required attribute.
+    */
+    'required': boolean;
+    /**
+    * Sets focus on the input.
+    */
+    'setFocus': () => Promise<void>;
+    /**
+    * The input's size, one of `small`, `medium`, or `large`.
+    */
+    'size': string;
+    /**
+    * The input's step attribute.
+    */
+    'step': number;
+    /**
+    * The input's type, one of `text`, `number`, `email`, etc.
+    */
+    'type': string;
+    /**
+    * The input's value attribute.
+    */
+    'value': string;
+  }
+  interface SlRadio {
+    /**
+    * Set to true to draw the radio in a checked state.
+    */
+    'checked': boolean;
+    /**
+    * Set to true to disable the radio.
+    */
+    'disabled': boolean;
+    /**
+    * A native input's name attribute.
+    */
+    'name': string;
+    /**
+    * Removes focus from the radio.
+    */
+    'removeFocus': () => Promise<void>;
+    /**
+    * Sets focus on the radio.
+    */
+    'setFocus': () => Promise<void>;
+    /**
+    * The native input's value attribute.
+    */
+    'value': string;
+  }
+  interface SlRange {
+    /**
+    * Set to true to disable the input.
+    */
+    'disabled': boolean;
+    /**
+    * The input's max attribute.
+    */
+    'max': number;
+    /**
+    * The input's min attribute.
+    */
+    'min': number;
+    /**
+    * The input's name attribute.
+    */
+    'name': string;
+    /**
+    * Removes focus from the input.
+    */
+    'removeFocus': () => Promise<void>;
+    /**
+    * Sets focus on the input.
+    */
+    'setFocus': () => Promise<void>;
+    /**
+    * The input's step attribute.
+    */
+    'step': number | 'any';
+    /**
+    * The input's value attribute.
+    */
+    'value': string;
+  }
   interface SlSpinner {
     /**
     * The spinner's size.
     */
     'size': string;
+  }
+  interface SlSwitch {
+    /**
+    * Set to true to draw the switch in a checked state.
+    */
+    'checked': boolean;
+    /**
+    * Set to true to disable the switch.
+    */
+    'disabled': boolean;
+    /**
+    * A native input's name attribute.
+    */
+    'name': string;
+    /**
+    * Removes focus from the switch.
+    */
+    'removeFocus': () => Promise<void>;
+    /**
+    * Sets focus on the switch.
+    */
+    'setFocus': () => Promise<void>;
+    /**
+    * The native input's value attribute.
+    */
+    'value': string;
+  }
+  interface SlTextarea {
+    /**
+    * The textarea's autocaptialize attribute.
+    */
+    'autocapitalize': string;
+    /**
+    * The textarea's autocomplete attribute.
+    */
+    'autocomplete': string;
+    /**
+    * The textarea's autocorrect attribute.
+    */
+    'autocorrect': string;
+    /**
+    * The textarea's autofocus attribute.
+    */
+    'autofocus': boolean;
+    /**
+    * Set to true to disable the textarea.
+    */
+    'disabled': boolean;
+    /**
+    * The textarea's inputmode attribute.
+    */
+    'inputmode': string;
+    /**
+    * The textarea's maxlength attribute.
+    */
+    'maxlength': number;
+    /**
+    * The textarea's name attribute.
+    */
+    'name': string;
+    /**
+    * The textarea's placeholder text.
+    */
+    'placeholder': string;
+    /**
+    * Set to true for a readonly textarea.
+    */
+    'readonly': boolean;
+    /**
+    * Removes focus fromt the textarea.
+    */
+    'removeFocus': () => Promise<void>;
+    /**
+    * The textarea's required attribute.
+    */
+    'required': boolean;
+    /**
+    * Controls how the textarea can be resized.
+    */
+    'resize': 'none' | 'vertical' | 'auto';
+    /**
+    * The number of rows to display by default.
+    */
+    'rows': number;
+    /**
+    * Sets focus on the textarea.
+    */
+    'setFocus': () => Promise<void>;
+    /**
+    * The textarea's size, one of `small`, `medium`, or `large`.
+    */
+    'size': string;
+    /**
+    * The textarea's value attribute.
+    */
+    'value': string;
+  }
+  interface SlTooltip {
+    /**
+    * Set to true to draw the the tooltip with an arrow.
+    */
+    'arrow': boolean;
+    /**
+    * Set to true to disable the tooltip so it won't show when triggered.
+    */
+    'disabled': boolean;
+    /**
+    * The distance in pixels from which to draw the tooltip from its target element.
+    */
+    'distance': number;
+    /**
+    * Shows the tooltip.
+    */
+    'hide': () => Promise<void>;
+    /**
+    * The delay in ms before the tooltip hides.
+    */
+    'hideDelay': number;
+    /**
+    * The duration in ms of the tooltip's hide transition.
+    */
+    'hideDuration': number;
+    /**
+    * The maximum width in pixels the tooltip can be before its content wraps.
+    */
+    'maxWidth': number;
+    /**
+    * The preferred placement of the tooltip. Note that the actual placement may vary as needed to keep the tooltip inside of the viewport.
+    */
+    'placement': | 'top'
+    | 'top-start'
+    | 'top-end'
+    | 'right'
+    | 'right-start'
+    | 'right-end'
+    | 'bottom'
+    | 'bottom-start'
+    | 'bottom-end'
+    | 'left'
+    | 'left-start'
+    | 'left-end';
+    /**
+    * Shows the tooltip.
+    */
+    'show': () => Promise<void>;
+    /**
+    * The delay in ms before showing the tooltip.
+    */
+    'showDelay': number;
+    /**
+    * The duration in ms of the tooltip's show transition.
+    */
+    'showDuration': number;
+    /**
+    * A selector or element to use as the tooltip's target. This is the element that will trigger the tooltip to show upon interaction. If no target is specified, the previous sibling element of the tooltip will be used. A common way to link a tooltip to a target is to give the target an `id` and pass `#id` to the `target` prop.
+    */
+    'target': string | HTMLElement;
+    /**
+    * The events that cause a tooltip to show, separated by a space. Possible values include any combination of `mouseenter`, `focus`, `click`, and `manual`. Use `manual` if you only want to show and hide the tooltip programmatically.
+    */
+    'trigger': string;
+    /**
+    * Sets the tooltip's z-index.
+    */
+    'zIndex': number;
   }
 }
 
@@ -94,6 +439,12 @@ declare global {
   var HTMLSlButtonElement: {
     prototype: HTMLSlButtonElement;
     new (): HTMLSlButtonElement;
+  };
+
+  interface HTMLSlCheckboxElement extends Components.SlCheckbox, HTMLStencilElement {}
+  var HTMLSlCheckboxElement: {
+    prototype: HTMLSlCheckboxElement;
+    new (): HTMLSlCheckboxElement;
   };
 
   interface HTMLSlDropdownElement extends Components.SlDropdown, HTMLStencilElement {}
@@ -114,17 +465,60 @@ declare global {
     new (): HTMLSlDropdownItemElement;
   };
 
+  interface HTMLSlInputElement extends Components.SlInput, HTMLStencilElement {}
+  var HTMLSlInputElement: {
+    prototype: HTMLSlInputElement;
+    new (): HTMLSlInputElement;
+  };
+
+  interface HTMLSlRadioElement extends Components.SlRadio, HTMLStencilElement {}
+  var HTMLSlRadioElement: {
+    prototype: HTMLSlRadioElement;
+    new (): HTMLSlRadioElement;
+  };
+
+  interface HTMLSlRangeElement extends Components.SlRange, HTMLStencilElement {}
+  var HTMLSlRangeElement: {
+    prototype: HTMLSlRangeElement;
+    new (): HTMLSlRangeElement;
+  };
+
   interface HTMLSlSpinnerElement extends Components.SlSpinner, HTMLStencilElement {}
   var HTMLSlSpinnerElement: {
     prototype: HTMLSlSpinnerElement;
     new (): HTMLSlSpinnerElement;
   };
+
+  interface HTMLSlSwitchElement extends Components.SlSwitch, HTMLStencilElement {}
+  var HTMLSlSwitchElement: {
+    prototype: HTMLSlSwitchElement;
+    new (): HTMLSlSwitchElement;
+  };
+
+  interface HTMLSlTextareaElement extends Components.SlTextarea, HTMLStencilElement {}
+  var HTMLSlTextareaElement: {
+    prototype: HTMLSlTextareaElement;
+    new (): HTMLSlTextareaElement;
+  };
+
+  interface HTMLSlTooltipElement extends Components.SlTooltip, HTMLStencilElement {}
+  var HTMLSlTooltipElement: {
+    prototype: HTMLSlTooltipElement;
+    new (): HTMLSlTooltipElement;
+  };
   interface HTMLElementTagNameMap {
     'sl-button': HTMLSlButtonElement;
+    'sl-checkbox': HTMLSlCheckboxElement;
     'sl-dropdown': HTMLSlDropdownElement;
     'sl-dropdown-divider': HTMLSlDropdownDividerElement;
     'sl-dropdown-item': HTMLSlDropdownItemElement;
+    'sl-input': HTMLSlInputElement;
+    'sl-radio': HTMLSlRadioElement;
+    'sl-range': HTMLSlRangeElement;
     'sl-spinner': HTMLSlSpinnerElement;
+    'sl-switch': HTMLSlSwitchElement;
+    'sl-textarea': HTMLSlTextareaElement;
+    'sl-tooltip': HTMLSlTooltipElement;
   }
 }
 
@@ -167,6 +561,28 @@ declare namespace LocalJSX {
     */
     'type'?: string;
   }
+  interface SlCheckbox {
+    /**
+    * Set to true to draw the checkbox in a checked state.
+    */
+    'checked'?: boolean;
+    /**
+    * Set to true to disable the checkbox.
+    */
+    'disabled'?: boolean;
+    /**
+    * Set to true to draw the checkbox in an indeterminate state.
+    */
+    'indeterminate'?: boolean;
+    /**
+    * A native input's name attribute.
+    */
+    'name'?: string;
+    /**
+    * The native input's value attribute.
+    */
+    'value'?: string;
+  }
   interface SlDropdown {
     /**
     * The preferred placement of the dropdown menu. Note that the actual placement may vary as needed to keep the menu inside of the viewport.
@@ -189,19 +605,309 @@ declare namespace LocalJSX {
     'disabled'?: boolean;
     'onShoelaceSelect'?: (event: CustomEvent<any>) => void;
   }
+  interface SlInput {
+    /**
+    * The input's autocaptialize attribute.
+    */
+    'autocapitalize'?: string;
+    /**
+    * The input's autocomplete attribute.
+    */
+    'autocomplete'?: string;
+    /**
+    * The input's autocorrect attribute.
+    */
+    'autocorrect'?: string;
+    /**
+    * The input's autofocus attribute.
+    */
+    'autofocus'?: boolean;
+    /**
+    * Set to true to add a clear button when the input is populated.
+    */
+    'clearable'?: boolean;
+    /**
+    * Set to true to disable the input.
+    */
+    'disabled'?: boolean;
+    /**
+    * The input's inputmode attribute.
+    */
+    'inputmode'?: string;
+    /**
+    * The input's max attribute.
+    */
+    'max'?: number;
+    /**
+    * The input's maxlength attribute.
+    */
+    'maxlength'?: number;
+    /**
+    * The input's min attribute.
+    */
+    'min'?: number;
+    /**
+    * The input's minlength attribute.
+    */
+    'minlength'?: number;
+    /**
+    * The input's name attribute.
+    */
+    'name'?: string;
+    /**
+    * The input's pattern attribute.
+    */
+    'pattern'?: string;
+    /**
+    * The input's placeholder text.
+    */
+    'placeholder'?: string;
+    /**
+    * Set to true for a readonly input.
+    */
+    'readonly'?: boolean;
+    /**
+    * The input's required attribute.
+    */
+    'required'?: boolean;
+    /**
+    * The input's size, one of `small`, `medium`, or `large`.
+    */
+    'size'?: string;
+    /**
+    * The input's step attribute.
+    */
+    'step'?: number;
+    /**
+    * The input's type, one of `text`, `number`, `email`, etc.
+    */
+    'type'?: string;
+    /**
+    * The input's value attribute.
+    */
+    'value'?: string;
+  }
+  interface SlRadio {
+    /**
+    * Set to true to draw the radio in a checked state.
+    */
+    'checked'?: boolean;
+    /**
+    * Set to true to disable the radio.
+    */
+    'disabled'?: boolean;
+    /**
+    * A native input's name attribute.
+    */
+    'name'?: string;
+    /**
+    * The native input's value attribute.
+    */
+    'value'?: string;
+  }
+  interface SlRange {
+    /**
+    * Set to true to disable the input.
+    */
+    'disabled'?: boolean;
+    /**
+    * The input's max attribute.
+    */
+    'max'?: number;
+    /**
+    * The input's min attribute.
+    */
+    'min'?: number;
+    /**
+    * The input's name attribute.
+    */
+    'name'?: string;
+    /**
+    * The input's step attribute.
+    */
+    'step'?: number | 'any';
+    /**
+    * The input's value attribute.
+    */
+    'value'?: string;
+  }
   interface SlSpinner {
     /**
     * The spinner's size.
     */
     'size'?: string;
   }
+  interface SlSwitch {
+    /**
+    * Set to true to draw the switch in a checked state.
+    */
+    'checked'?: boolean;
+    /**
+    * Set to true to disable the switch.
+    */
+    'disabled'?: boolean;
+    /**
+    * A native input's name attribute.
+    */
+    'name'?: string;
+    /**
+    * The native input's value attribute.
+    */
+    'value'?: string;
+  }
+  interface SlTextarea {
+    /**
+    * The textarea's autocaptialize attribute.
+    */
+    'autocapitalize'?: string;
+    /**
+    * The textarea's autocomplete attribute.
+    */
+    'autocomplete'?: string;
+    /**
+    * The textarea's autocorrect attribute.
+    */
+    'autocorrect'?: string;
+    /**
+    * The textarea's autofocus attribute.
+    */
+    'autofocus'?: boolean;
+    /**
+    * Set to true to disable the textarea.
+    */
+    'disabled'?: boolean;
+    /**
+    * The textarea's inputmode attribute.
+    */
+    'inputmode'?: string;
+    /**
+    * The textarea's maxlength attribute.
+    */
+    'maxlength'?: number;
+    /**
+    * The textarea's name attribute.
+    */
+    'name'?: string;
+    /**
+    * The textarea's placeholder text.
+    */
+    'placeholder'?: string;
+    /**
+    * Set to true for a readonly textarea.
+    */
+    'readonly'?: boolean;
+    /**
+    * The textarea's required attribute.
+    */
+    'required'?: boolean;
+    /**
+    * Controls how the textarea can be resized.
+    */
+    'resize'?: 'none' | 'vertical' | 'auto';
+    /**
+    * The number of rows to display by default.
+    */
+    'rows'?: number;
+    /**
+    * The textarea's size, one of `small`, `medium`, or `large`.
+    */
+    'size'?: string;
+    /**
+    * The textarea's value attribute.
+    */
+    'value'?: string;
+  }
+  interface SlTooltip {
+    /**
+    * Set to true to draw the the tooltip with an arrow.
+    */
+    'arrow'?: boolean;
+    /**
+    * Set to true to disable the tooltip so it won't show when triggered.
+    */
+    'disabled'?: boolean;
+    /**
+    * The distance in pixels from which to draw the tooltip from its target element.
+    */
+    'distance'?: number;
+    /**
+    * The delay in ms before the tooltip hides.
+    */
+    'hideDelay'?: number;
+    /**
+    * The duration in ms of the tooltip's hide transition.
+    */
+    'hideDuration'?: number;
+    /**
+    * The maximum width in pixels the tooltip can be before its content wraps.
+    */
+    'maxWidth'?: number;
+    /**
+    * Emitted when the tooltip has fully transitioned out and gets unmounted from the DOM.
+    */
+    'onSlHidden'?: (event: CustomEvent<any>) => void;
+    /**
+    * Emitted when the tooltip begins to hide.
+    */
+    'onSlHide'?: (event: CustomEvent<any>) => void;
+    /**
+    * Emitted when the tooltip begins to show, but before it gets mounted to the DOM.
+    */
+    'onSlShow'?: (event: CustomEvent<any>) => void;
+    /**
+    * Emitted when the tooltip has fully transitioned in.
+    */
+    'onSlShown'?: (event: CustomEvent<any>) => void;
+    /**
+    * The preferred placement of the tooltip. Note that the actual placement may vary as needed to keep the tooltip inside of the viewport.
+    */
+    'placement'?: | 'top'
+    | 'top-start'
+    | 'top-end'
+    | 'right'
+    | 'right-start'
+    | 'right-end'
+    | 'bottom'
+    | 'bottom-start'
+    | 'bottom-end'
+    | 'left'
+    | 'left-start'
+    | 'left-end';
+    /**
+    * The delay in ms before showing the tooltip.
+    */
+    'showDelay'?: number;
+    /**
+    * The duration in ms of the tooltip's show transition.
+    */
+    'showDuration'?: number;
+    /**
+    * A selector or element to use as the tooltip's target. This is the element that will trigger the tooltip to show upon interaction. If no target is specified, the previous sibling element of the tooltip will be used. A common way to link a tooltip to a target is to give the target an `id` and pass `#id` to the `target` prop.
+    */
+    'target'?: string | HTMLElement;
+    /**
+    * The events that cause a tooltip to show, separated by a space. Possible values include any combination of `mouseenter`, `focus`, `click`, and `manual`. Use `manual` if you only want to show and hide the tooltip programmatically.
+    */
+    'trigger'?: string;
+    /**
+    * Sets the tooltip's z-index.
+    */
+    'zIndex'?: number;
+  }
 
   interface IntrinsicElements {
     'sl-button': SlButton;
+    'sl-checkbox': SlCheckbox;
     'sl-dropdown': SlDropdown;
     'sl-dropdown-divider': SlDropdownDivider;
     'sl-dropdown-item': SlDropdownItem;
+    'sl-input': SlInput;
+    'sl-radio': SlRadio;
+    'sl-range': SlRange;
     'sl-spinner': SlSpinner;
+    'sl-switch': SlSwitch;
+    'sl-textarea': SlTextarea;
+    'sl-tooltip': SlTooltip;
   }
 }
 
@@ -212,10 +918,17 @@ declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
       'sl-button': LocalJSX.SlButton & JSXBase.HTMLAttributes<HTMLSlButtonElement>;
+      'sl-checkbox': LocalJSX.SlCheckbox & JSXBase.HTMLAttributes<HTMLSlCheckboxElement>;
       'sl-dropdown': LocalJSX.SlDropdown & JSXBase.HTMLAttributes<HTMLSlDropdownElement>;
       'sl-dropdown-divider': LocalJSX.SlDropdownDivider & JSXBase.HTMLAttributes<HTMLSlDropdownDividerElement>;
       'sl-dropdown-item': LocalJSX.SlDropdownItem & JSXBase.HTMLAttributes<HTMLSlDropdownItemElement>;
+      'sl-input': LocalJSX.SlInput & JSXBase.HTMLAttributes<HTMLSlInputElement>;
+      'sl-radio': LocalJSX.SlRadio & JSXBase.HTMLAttributes<HTMLSlRadioElement>;
+      'sl-range': LocalJSX.SlRange & JSXBase.HTMLAttributes<HTMLSlRangeElement>;
       'sl-spinner': LocalJSX.SlSpinner & JSXBase.HTMLAttributes<HTMLSlSpinnerElement>;
+      'sl-switch': LocalJSX.SlSwitch & JSXBase.HTMLAttributes<HTMLSlSwitchElement>;
+      'sl-textarea': LocalJSX.SlTextarea & JSXBase.HTMLAttributes<HTMLSlTextareaElement>;
+      'sl-tooltip': LocalJSX.SlTooltip & JSXBase.HTMLAttributes<HTMLSlTooltipElement>;
     }
   }
 }

@@ -25,7 +25,7 @@
 }
 
 @mixin outline-button($theme-color) {
-  background-color: var(--color-#{$theme-color}-90);
+  background-color: var(--color-#{$theme-color}-95);
   border-color: var(--color-#{$theme-color}-80);
   color: var(--color-#{$theme-color}-50);
 

@@ -1,0 +1,36 @@
+@import 'tippy.js/dist/tippy';
+
+//
+// NOTE: Tooltips are appended on-the-fly to the <body> element, so we need to disable scoped styles for tooltips. As a
+// result, styles placed in this file will be applied to the global scope!
+//
+
+.tippy-tooltip {
+  border-radius: var(--tooltip-border-radius);
+  background-color: var(--tooltip-background-color);
+
+  &[data-placement^='top'] .tippy-arrow {
+    border-top-color: var(--tooltip-background-color);
+  }
+
+  &[data-placement^='bottom'] .tippy-arrow {
+    border-bottom-color: var(--tooltip-background-color);
+  }
+
+  &[data-placement^='left'] .tippy-arrow {
+    border-left-color: var(--tooltip-background-color);
+  }
+
+  &[data-placement^='right'] .tippy-arrow {
+    border-right-color: var(--tooltip-background-color);
+  }
+
+  .tippy-content {
+    font-family: var(--tooltip-font-family);
+    font-size: var(--tooltip-font-size);
+    font-weight: var(--tooltip-font-weight);
+    line-height: var(--tooltip-line-height);
+    color: var(--tooltip-color);
+    padding: var(--tooltip-padding-y) var(--tooltip-padding-x);
+  }
+}
