@@ -36,7 +36,7 @@
   --color-primary-95: hsl(var(--color-primary-hue), var(--color-primary-saturation), 95%);
 
   --color-success-hue: 100;
-  --color-success-saturation: 60%;
+  --color-success-saturation: 55%;
   --color-success-05: hsl(var(--color-success-hue), var(--color-success-saturation), 5%);
   --color-success-10: hsl(var(--color-success-hue), var(--color-success-saturation), 10%);
   --color-success-15: hsl(var(--color-success-hue), var(--color-success-saturation), 15%);
@@ -58,7 +58,7 @@
   --color-success-95: hsl(var(--color-success-hue), var(--color-success-saturation), 95%);
 
   --color-info-hue: 220;
-  --color-info-saturation: 10%;
+  --color-info-saturation: 15%;
   --color-info-05: hsl(var(--color-info-hue), var(--color-info-saturation), 5%);
   --color-info-10: hsl(var(--color-info-hue), var(--color-info-saturation), 10%);
   --color-info-15: hsl(var(--color-info-hue), var(--color-info-saturation), 15%);
@@ -102,7 +102,7 @@
   --color-warning-95: hsl(var(--color-warning-hue), var(--color-warning-saturation), 95%);
 
   --color-danger-hue: 0;
-  --color-danger-saturation: 90%;
+  --color-danger-saturation: 80%;
   --color-danger-05: hsl(var(--color-danger-hue), var(--color-danger-saturation), 5%);
   --color-danger-10: hsl(var(--color-danger-hue), var(--color-danger-saturation), 10%);
   --color-danger-15: hsl(var(--color-danger-hue), var(--color-danger-saturation), 15%);
