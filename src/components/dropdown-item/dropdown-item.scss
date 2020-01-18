@@ -1,9 +1,4 @@
 @import 'reset';
-@import 'variables';
-
-$dropdown-item-padding-x: $menu-padding-x !default;
-$dropdown-item-padding-y: $menu-padding-y !default;
-$dropdown-item-transition-speed: 100ms !default;
 
 :host {
   display: block;
@@ -13,20 +8,23 @@ $dropdown-item-transition-speed: 100ms !default;
   position: relative;
   display: flex;
   align-items: center;
-  padding: $dropdown-item-padding-y $dropdown-item-padding-x;
-  transition: $dropdown-item-transition-speed color, $dropdown-item-transition-speed background-color,
-    $dropdown-item-transition-speed fill;
+  background-color: var(--menu-item-background-color);
+  color: var(--menu-item-color);
+  padding: var(--menu-padding-y) var(--menu-padding-x);
+  transition: var(--menu-item-transition-speed) color, var(--menu-item-transition-speed) background-color,
+    var(--menu-item-transition-speed) fill;
   user-select: none;
   white-space: nowrap;
   cursor: pointer;
 
   &.sl-dropdown-item--active:not(.sl-dropdown-item--disabled) {
-    background-color: $menu-background-color--hover;
-    color: $menu-color--hover;
+    background-color: var(--menu-item-background-color--active);
+    color: var(--menu-item-color--active);
   }
 
   &.sl-dropdown-item--disabled {
-    color: $menu-color--disabled;
+    background-color: var(--menu-item-background-color--disabled);
+    color: var(--menu-item-color--disabled);
     cursor: not-allowed;
   }
 

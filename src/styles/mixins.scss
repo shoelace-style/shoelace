@@ -1,6 +1,0 @@
-// Given a map, outputs a list of custom properties scoped to the provided selector
-@mixin generateCustomProperties($map, $prefix: '') {
-  @each $key, $value in $map {
-    --#{$prefix}#{$key}: #{$value};
-  }
-}

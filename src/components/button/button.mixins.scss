@@ -1,59 +1,51 @@
-@mixin button(
-  $color,
-  $color--hover,
-  $color--focus,
-  $color--active,
-  $background-color,
-  $background-color--hover,
-  $background-color--focus,
-  $background-color--active,
-  $border-color,
-  $border-color--hover,
-  $border-color--focus,
-  $border-color--active,
-  $border-width,
-  $focus-ring-width,
-  $focus-ring-color
-) {
-  display: inline-block;
-  font-family: var(--input-font-sans-serif);
-  font-weight: var(--input-font-weight);
-  color: $color;
-  background-color: $background-color;
-  border: solid $border-width $border-color;
-  transition: var(--input-transition-speed) background-color, var(--input-transition-speed) color,
-    var(--input-transition-speed) border;
-  user-select: none;
-  white-space: nowrap;
-  vertical-align: middle;
-  cursor: pointer;
-
-  &::-moz-focus-inner {
-    border: 0;
-  }
+@mixin solid-button($theme-color) {
+  background-color: var(--color-#{$theme-color}-50);
+  border-color: var(--color-#{$theme-color}-50);
+  color: white;
 
   &:hover:not(:disabled) {
-    background-color: $background-color--hover;
-    border-color: $border-color--hover;
-    color: $color--hover;
+    background-color: var(--color-#{$theme-color}-55);
+    border-color: var(--color-#{$theme-color}-55);
+    color: white;
   }
 
   &:focus:not(:disabled) {
-    background-color: $background-color--focus;
-    border-color: $border-color--focus;
-    color: $color--focus;
-    outline: none;
-    box-shadow: 0 0 0 $focus-ring-width $focus-ring-color;
+    background-color: var(--color-#{$theme-color}-55);
+    border-color: var(--color-#{$theme-color}-55);
+    color: white;
+    box-shadow: 0 0 0 var(--focus-ring-width)
+      hsla(var(--color-#{$theme-color}-hue), var(--color-#{$theme-color}-saturation), 50%, var(--focus-ring-alpha));
   }
 
   &:active:not(:disabled) {
-    background-color: $background-color--active;
-    border-color: $border-color--active;
-    color: $color--active;
+    background-color: var(--color-#{$theme-color}-45);
+    border-color: var(--color-#{$theme-color}-45);
+    color: white;
+  }
+}
+
+@mixin outline-button($theme-color) {
+  background-color: var(--color-#{$theme-color}-90);
+  border-color: var(--color-#{$theme-color}-80);
+  color: var(--color-#{$theme-color}-50);
+
+  &:hover:not(:disabled) {
+    background-color: var(--color-#{$theme-color}-50);
+    border-color: var(--color-#{$theme-color}-50);
+    color: white;
   }
 
-  &[disabled] {
-    opacity: 0.5;
-    cursor: not-allowed;
+  &:focus:not(:disabled) {
+    background-color: var(--color-#{$theme-color}-50);
+    border-color: var(--color-#{$theme-color}-50);
+    color: white;
+    box-shadow: 0 0 0 var(--focus-ring-width)
+      hsla(var(--color-#{$theme-color}-hue), var(--color-#{$theme-color}-saturation), 50%, var(--focus-ring-alpha));
+  }
+
+  &:active:not(:disabled) {
+    background-color: var(--color-#{$theme-color}-45);
+    border-color: var(--color-#{$theme-color}-45);
+    color: white;
   }
 }

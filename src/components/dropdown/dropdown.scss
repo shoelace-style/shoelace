@@ -1,13 +1,4 @@
 @import 'reset';
-@import 'variables';
-
-$dropdown-font-family: $menu-font-family !default;
-$dropdown-font-weight: $menu-font-weight !default;
-$dropdown-font-size: $menu-font-size !default;
-$dropdown-border-color: $menu-border-color !default;
-$dropdown-background-color: $menu-background-color !default;
-$dropdown-box-shadow: $menu-box-shadow !default;
-$dropdown-color: $menu-color !default;
 
 :host {
   display: inline-block;
@@ -26,19 +17,18 @@ $dropdown-color: $menu-color !default;
   position: absolute;
   z-index: 9999;
   max-height: 50vh;
-  font-family: $dropdown-font-family;
-  font-weight: $dropdown-font-weight;
-  font-size: $dropdown-font-size;
-  color: $dropdown-color;
-  background-color: $dropdown-background-color;
-  border: solid 1px $dropdown-border-color;
+  font-family: var(--menu-font-family);
+  font-weight: var(--menu-font-weight);
+  font-size: var(--menu-font-size);
+  background-color: var(--menu-background-color);
+  border: solid 1px var(--menu-border-color);
   border-radius: 4px;
-  box-shadow: $dropdown-box-shadow;
-  padding-top: $menu-padding-y;
-  padding-bottom: $menu-padding-y;
+  box-shadow: var(--menu-box-shadow);
+  padding-top: var(--menu-padding-y);
+  padding-bottom: var(--menu-padding-y);
   opacity: 0;
   overflow-y: auto;
-  transition: 100ms opacity;
+  transition: var(--menu-transition-speed) opacity;
 }
 
 .sl-dropdown--open .sl-dropdown__menu {

@@ -1,19 +1,9 @@
 @import 'reset';
-@import 'variables';
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
 
 :host {
   --spinner-animation: 1s linear infinite spin;
   --spinner-border-width: 2px;
-  --spinner-color: var(--color-primary);
+  --spinner-color: var(--color-primary-50);
   --spinner-margin-x: 4px;
 
   display: inline-block;
@@ -27,4 +17,13 @@
   margin: 0 var(--spinner-margin-x);
   vertical-align: middle;
   animation: var(--spinner-animation);
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

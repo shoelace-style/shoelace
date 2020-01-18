@@ -1,6 +1,6 @@
-# Shoelace 2
+# Shoelace
 
-A framework agnostic library of Web Components for desktop and mobile.
+A forward-thinking component library built with Web Components.
 
 Designed and developed in New Hampshire by [Cory LaViska](https://twitter.com/claviska).
 

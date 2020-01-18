@@ -23,7 +23,6 @@
   },
   "devDependencies": {
     "@stencil/core": "^1.8.3",
-    "@stencil/sass": "^1.1.1",
     "tslint": "^5.20.1",
     "tslint-ionic-rules": "0.0.21",
     "tslint-stencil": "^1.0.1",
@@ -31,6 +30,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@stencil/sass": "^1.1.1",
     "popper.js": "^1.16.0",
     "tippy.js": "^5.1.3"
   }

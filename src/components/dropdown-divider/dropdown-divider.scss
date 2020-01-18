@@ -1,14 +1,10 @@
 @import 'reset';
-@import 'variables';
-
-$dropdown-divider-border-color: tint($form-control-border-color, 50%) !default;
-$dropdown-divider-margin-y: 10px !default;
 
 :host {
   display: block;
 }
 
 .sl-dropdown-divider {
-  border-top: solid 1px $dropdown-divider-border-color;
-  margin: $dropdown-divider-margin-y 0;
+  border-top: solid 1px var(--menu-divider-border-color);
+  margin: var(--menu-padding-y) 0;
 }
