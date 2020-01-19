@@ -1,4 +1,6 @@
-import { Component, Prop, h } from '@stencil/core';
+import { Component, Element, Host, Prop, h } from '@stencil/core';
+
+let id = 0;
 
 @Component({
   tag: 'sl-tab-panel',
@@ -6,6 +8,10 @@ import { Component, Prop, h } from '@stencil/core';
   shadow: true
 })
 export class TabPanel {
+  id = `sl-tab-panel-${++id}`;
+
+  @Element() host: HTMLElement;
+
   /** The tab panel's name. */
   @Prop() name = '';
 
@@ -14,9 +20,18 @@ export class TabPanel {
 
   render() {
     return (
-      <div class="sl-tab-panel" role="tabpanel" aria-selected={this.active} hidden={!this.active}>
-        <slot />
-      </div>
+      // If the user didn't provide an ID, we'll set one so we can link tabs and tab panels with aria labels
+      <Host id={this.host.id || this.id}>
+        <div
+          class="sl-tab-panel"
+          role="tabpanel"
+          aria-selected={this.active}
+          aria-hidden={!this.active}
+          hidden={!this.active}
+        >
+          <slot />
+        </div>
+      </Host>
     );
   }
 }

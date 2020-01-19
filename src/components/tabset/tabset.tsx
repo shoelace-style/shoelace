@@ -1,8 +1,5 @@
 import { Component, Element, Event, EventEmitter, Method, Prop, h } from '@stencil/core';
 
-let tabId = 0;
-let panelId = 0;
-
 @Component({
   tag: 'sl-tabset',
   styleUrl: 'tabset.scss',
@@ -40,7 +37,7 @@ export class Tabset {
 
     // Update aria labels id the DOM changes
     this.observer = new MutationObserver(() => setTimeout(() => this.setAriaLabels()));
-    this.observer.observe(this.host, { childList: true });
+    this.observer.observe(this.host, { attributes: true, childList: true });
   }
 
   componentDidUnload() {
@@ -100,11 +97,7 @@ export class Tabset {
     const tabs = this.getAllTabs();
     const panels = this.getAllPanels();
 
-    // Make sure all tabs and panels have an id
-    tabs.map(tab => (!tab.getAttribute('id') ? tab.setAttribute('id', `sl-tab-${++tabId}`) : null));
-    panels.map(panel => (!panel.getAttribute('id') ? panel.setAttribute('id', `sl-tab-panel-${++panelId}`) : null));
-
-    // Link tabs with panels
+    // Link each tab with its corresponding panel
     tabs.map(tab => {
       const panel = panels.find(el => el.name === tab.panel);
       if (panel) {
