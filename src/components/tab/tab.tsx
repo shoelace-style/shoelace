@@ -2,6 +2,8 @@ import { Component, Element, Host, Method, Prop, h } from '@stencil/core';
 
 let id = 0;
 
+/** @slot - The tab's label. */
+
 @Component({
   tag: 'sl-tab',
   styleUrl: 'tab.scss',

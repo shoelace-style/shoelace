@@ -1,5 +1,9 @@
 import { Component, Host, Method, Prop, h } from '@stencil/core';
 
+/** @slot prefix - Used to prepend an icon or similar element to the button. */
+/** @slot suffix - Used to append an icon or similar element to the button. */
+/** @slot - The button's label. */
+
 @Component({
   tag: 'sl-button',
   styleUrl: 'button.scss',

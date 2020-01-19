@@ -4,6 +4,9 @@ import PopperJs from 'popper.js';
 let id = 0;
 let openDropdowns = [];
 
+/** @slot trigger - The dropdown's trigger, usually a `<sl-button>` element. */
+/** @slot - Used to group the dropdown's menu items. */
+
 @Component({
   tag: 'sl-dropdown',
   styleUrl: 'dropdown.scss',

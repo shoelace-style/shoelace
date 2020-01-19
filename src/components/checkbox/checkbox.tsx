@@ -2,6 +2,8 @@ import { Component, Method, Prop, State, Watch, h } from '@stencil/core';
 
 let id = 0;
 
+/** @slot - The checkbox's label. */
+
 @Component({
   tag: 'sl-checkbox',
   styleUrl: 'checkbox.scss',

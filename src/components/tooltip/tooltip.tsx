@@ -2,6 +2,7 @@ import { Component, Element, Event, EventEmitter, Host, Method, Prop, Watch, h }
 import tippy from 'tippy.js';
 
 /** @slot - The tooltip's content. */
+
 @Component({
   tag: 'sl-tooltip',
   styleUrl: 'tooltip.scss',

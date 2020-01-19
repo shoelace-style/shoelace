@@ -1,5 +1,9 @@
 import { Component, Method, Prop, State, h } from '@stencil/core';
 
+/** @slot prefix - Used to prepend an icon or similar element to the input. */
+/** @slot suffix - Used to append an icon or similar element to the input. */
+/** @slot - The input's label. */
+
 @Component({
   tag: 'sl-input',
   styleUrl: 'input.scss',

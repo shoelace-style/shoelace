@@ -2,6 +2,8 @@ import { Component, Element, Method, Prop, State, h } from '@stencil/core';
 
 let id = 0;
 
+/** @slot - The radio's label. */
+
 @Component({
   tag: 'sl-radio',
   styleUrl: 'radio.scss',

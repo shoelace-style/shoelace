@@ -1,5 +1,8 @@
 import { Component, Element, Event, EventEmitter, Method, Prop, h } from '@stencil/core';
 
+/** @slot nav - Used for grouping tabs in the tabset. */
+/** @slot - Used for grouping tab panels in the tabset. */
+
 @Component({
   tag: 'sl-tabset',
   styleUrl: 'tabset.scss',

@@ -2,6 +2,8 @@ import { Component, Method, Prop, State, h } from '@stencil/core';
 
 let id = 0;
 
+/** @slot - The switch's label. */
+
 @Component({
   tag: 'sl-switch',
   styleUrl: 'switch.scss',
