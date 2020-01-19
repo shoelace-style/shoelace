@@ -291,6 +291,52 @@ export namespace Components {
     */
     'value': string;
   }
+  interface SlTab {
+    /**
+    * Set to true to draw the tab in an active state.
+    */
+    'active': boolean;
+    /**
+    * Set to true to draw the tab in a disabled state.
+    */
+    'disabled': boolean;
+    /**
+    * The name of the tab panel the tab will be synced to. The panel must exist in the same `<sl-tabs>` element.
+    */
+    'panel': string;
+    /**
+    * Removes focus from the tab.
+    */
+    'removeFocus': () => Promise<void>;
+    /**
+    * Sets focus to the tab.
+    */
+    'setFocus': () => Promise<void>;
+  }
+  interface SlTabPanel {
+    /**
+    * Set to true to show the tab panel.
+    */
+    'active': boolean;
+    /**
+    * The tab panel's name.
+    */
+    'name': string;
+  }
+  interface SlTabset {
+    /**
+    * The position of the tabs in the tabset.
+    */
+    'position': 'top' | 'right' | 'bottom' | 'left';
+    /**
+    * Shows the specified tab panel.
+    */
+    'show': (panel: string) => Promise<void>;
+    /**
+    * The type of tabs to draw.
+    */
+    'type': 'card' | 'pill';
+  }
   interface SlTextarea {
     /**
     * The textarea's autocaptialize attribute.
@@ -495,6 +541,24 @@ declare global {
     new (): HTMLSlSwitchElement;
   };
 
+  interface HTMLSlTabElement extends Components.SlTab, HTMLStencilElement {}
+  var HTMLSlTabElement: {
+    prototype: HTMLSlTabElement;
+    new (): HTMLSlTabElement;
+  };
+
+  interface HTMLSlTabPanelElement extends Components.SlTabPanel, HTMLStencilElement {}
+  var HTMLSlTabPanelElement: {
+    prototype: HTMLSlTabPanelElement;
+    new (): HTMLSlTabPanelElement;
+  };
+
+  interface HTMLSlTabsetElement extends Components.SlTabset, HTMLStencilElement {}
+  var HTMLSlTabsetElement: {
+    prototype: HTMLSlTabsetElement;
+    new (): HTMLSlTabsetElement;
+  };
+
   interface HTMLSlTextareaElement extends Components.SlTextarea, HTMLStencilElement {}
   var HTMLSlTextareaElement: {
     prototype: HTMLSlTextareaElement;
@@ -517,6 +581,9 @@ declare global {
     'sl-range': HTMLSlRangeElement;
     'sl-spinner': HTMLSlSpinnerElement;
     'sl-switch': HTMLSlSwitchElement;
+    'sl-tab': HTMLSlTabElement;
+    'sl-tab-panel': HTMLSlTabPanelElement;
+    'sl-tabset': HTMLSlTabsetElement;
     'sl-textarea': HTMLSlTextareaElement;
     'sl-tooltip': HTMLSlTooltipElement;
   }
@@ -755,6 +822,48 @@ declare namespace LocalJSX {
     */
     'value'?: string;
   }
+  interface SlTab {
+    /**
+    * Set to true to draw the tab in an active state.
+    */
+    'active'?: boolean;
+    /**
+    * Set to true to draw the tab in a disabled state.
+    */
+    'disabled'?: boolean;
+    /**
+    * The name of the tab panel the tab will be synced to. The panel must exist in the same `<sl-tabs>` element.
+    */
+    'panel'?: string;
+  }
+  interface SlTabPanel {
+    /**
+    * Set to true to show the tab panel.
+    */
+    'active'?: boolean;
+    /**
+    * The tab panel's name.
+    */
+    'name'?: string;
+  }
+  interface SlTabset {
+    /**
+    * Emitted when a tab is hidden.
+    */
+    'onSlTabHide'?: (event: CustomEvent<any>) => void;
+    /**
+    * Emitted when a tab is shown.
+    */
+    'onSlTabShow'?: (event: CustomEvent<any>) => void;
+    /**
+    * The position of the tabs in the tabset.
+    */
+    'position'?: 'top' | 'right' | 'bottom' | 'left';
+    /**
+    * The type of tabs to draw.
+    */
+    'type'?: 'card' | 'pill';
+  }
   interface SlTextarea {
     /**
     * The textarea's autocaptialize attribute.
@@ -906,6 +1015,9 @@ declare namespace LocalJSX {
     'sl-range': SlRange;
     'sl-spinner': SlSpinner;
     'sl-switch': SlSwitch;
+    'sl-tab': SlTab;
+    'sl-tab-panel': SlTabPanel;
+    'sl-tabset': SlTabset;
     'sl-textarea': SlTextarea;
     'sl-tooltip': SlTooltip;
   }
@@ -927,6 +1039,9 @@ declare module "@stencil/core" {
       'sl-range': LocalJSX.SlRange & JSXBase.HTMLAttributes<HTMLSlRangeElement>;
       'sl-spinner': LocalJSX.SlSpinner & JSXBase.HTMLAttributes<HTMLSlSpinnerElement>;
       'sl-switch': LocalJSX.SlSwitch & JSXBase.HTMLAttributes<HTMLSlSwitchElement>;
+      'sl-tab': LocalJSX.SlTab & JSXBase.HTMLAttributes<HTMLSlTabElement>;
+      'sl-tab-panel': LocalJSX.SlTabPanel & JSXBase.HTMLAttributes<HTMLSlTabPanelElement>;
+      'sl-tabset': LocalJSX.SlTabset & JSXBase.HTMLAttributes<HTMLSlTabsetElement>;
       'sl-textarea': LocalJSX.SlTextarea & JSXBase.HTMLAttributes<HTMLSlTextareaElement>;
       'sl-tooltip': LocalJSX.SlTooltip & JSXBase.HTMLAttributes<HTMLSlTooltipElement>;
     }

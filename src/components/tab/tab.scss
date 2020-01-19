@@ -1,0 +1,30 @@
+@import 'reset';
+
+:host {
+  display: inline-block;
+}
+
+.sl-tab {
+  padding: 10px 16px;
+  margin-right: 4px;
+  user-select: none;
+  cursor: pointer;
+
+  &.sl-tab--active {
+    color: var(--color-primary-50);
+  }
+
+  &:focus {
+    outline: none;
+
+    &:not(.sl-tab--disabled) {
+      box-shadow: 0 0 0 var(--focus-ring-width)
+        hsla(var(--color-primary-hue), var(--color-primary-saturation), 50%, var(--focus-ring-alpha));
+    }
+  }
+
+  &.sl-tab--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
