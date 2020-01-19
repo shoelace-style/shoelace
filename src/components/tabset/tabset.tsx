@@ -37,7 +37,7 @@ export class Tabset {
 
     // Update aria labels id the DOM changes
     this.observer = new MutationObserver(() => setTimeout(() => this.setAriaLabels()));
-    this.observer.observe(this.host, { attributes: true, childList: true });
+    this.observer.observe(this.host, { attributes: true, childList: true, subtree: true });
   }
 
   componentDidUnload() {
