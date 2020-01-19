@@ -1,5 +1,8 @@
 import { Component, Element, Event, EventEmitter, Method, Prop, h } from '@stencil/core';
 
+let tabId = 0;
+let panelId = 0;
+
 @Component({
   tag: 'sl-tabset',
   styleUrl: 'tabset.scss',
@@ -9,6 +12,7 @@ export class Tabset {
   activeTab: HTMLSlTabElement;
   body: HTMLElement;
   nav: HTMLElement;
+  observer: MutationObserver;
 
   constructor() {
     this.handleClick = this.handleClick.bind(this);
@@ -30,8 +34,17 @@ export class Tabset {
   @Event() slTabHide: EventEmitter;
 
   componentDidLoad() {
-    // Handle initial tab state
+    // Set initial tab state
+    this.setAriaLabels();
     this.setActiveTab(this.getActiveTab() || this.getAllTabs()[0], false);
+
+    // Update aria labels id the DOM changes
+    this.observer = new MutationObserver(() => setTimeout(() => this.setAriaLabels()));
+    this.observer.observe(this.host, { childList: true });
+  }
+
+  componentDidUnload() {
+    this.observer.disconnect();
   }
 
   /** Shows the specified tab panel. */
@@ -81,6 +94,24 @@ export class Tabset {
         this.slTabShow.emit({ name: this.activeTab.panel });
       }
     }
+  }
+
+  setAriaLabels() {
+    const tabs = this.getAllTabs();
+    const panels = this.getAllPanels();
+
+    // Make sure all tabs and panels have an id
+    tabs.map(tab => (!tab.getAttribute('id') ? tab.setAttribute('id', `sl-tab-${++tabId}`) : null));
+    panels.map(panel => (!panel.getAttribute('id') ? panel.setAttribute('id', `sl-tab-panel-${++panelId}`) : null));
+
+    // Link tabs with panels
+    tabs.map(tab => {
+      const panel = panels.find(el => el.name === tab.panel);
+      if (panel) {
+        tab.setAttribute('aria-controls', panel.getAttribute('id'));
+        panel.setAttribute('arial-labeledby', tab.getAttribute('id'));
+      }
+    });
   }
 
   handleClick(event: MouseEvent) {
