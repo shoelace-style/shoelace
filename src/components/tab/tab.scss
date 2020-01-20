@@ -5,26 +5,78 @@
 }
 
 .sl-tab {
-  padding: 10px 16px;
-  margin-right: 4px;
+  font-family: var(--tab-font-family);
+  font-size: var(--tab-font-size);
+  font-weight: var(--tab-font-weight);
+  color: var(--tab-color);
+
+  padding: var(--tab-padding-y) var(--tab-padding-x);
   user-select: none;
   cursor: pointer;
+  transition: var(--tab-transition-speed) border-color, var(--tab-transition-speed) background-color,
+    var(--tab-transition-speed) box-shadow, var(--tab-transition-speed) color;
 
   &.sl-tab--active {
     color: var(--color-primary-50);
   }
 
+  &:hover:not(.sl-tab--disabled) {
+    color: var(--color-primary-50);
+  }
+
   &:focus {
     outline: none;
+  }
 
-    &:not(.sl-tab--disabled) {
-      box-shadow: 0 0 0 var(--focus-ring-width)
-        hsla(var(--color-primary-hue), var(--color-primary-saturation), 50%, var(--focus-ring-alpha));
-    }
+  &:focus {
+    box-shadow: 0 0 0 var(--focus-ring-width)
+      hsla(var(--color-primary-hue), var(--color-primary-saturation), 50%, var(--focus-ring-alpha));
   }
 
   &.sl-tab--disabled {
     opacity: 0.5;
     cursor: not-allowed;
+  }
+}
+
+// Top
+.sl-tab--top {
+  border-bottom: solid var(--tab-nav-border-width) transparent;
+  transform: translateY(var(--tab-nav-border-width));
+
+  &.sl-tab--active {
+    border-bottom-color: var(--color-primary-50);
+  }
+}
+
+// Bottom
+.sl-tab--bottom {
+  border-top: solid var(--tab-nav-border-width) transparent;
+  transform: translateY(calc(-1 * var(--tab-nav-border-width)));
+
+  &.sl-tab--active {
+    border-top-color: var(--color-primary-50);
+  }
+}
+
+// Left
+.sl-tab--left {
+  text-align: right;
+  border-right: solid var(--tab-nav-border-width) transparent;
+  transform: translateX(var(--tab-nav-border-width));
+
+  &.sl-tab--active {
+    border-right-color: var(--color-primary-50);
+  }
+}
+
+// Right
+.sl-tab--right {
+  text-align: left;
+  border-left: solid var(--tab-nav-border-width) transparent;
+  transform: translateX(calc(-1 * var(--tab-nav-border-width)));
+
+  &.sl-tab--active {
+    border-left-color: var(--color-primary-50);
   }
 }

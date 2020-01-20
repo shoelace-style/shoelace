@@ -24,6 +24,12 @@ export class Tab {
   /** Set to true to draw the tab in a disabled state. */
   @Prop() disabled = false;
 
+  /**
+   * The tab's position in a tab nav. This prop is used internally by tabset, so you don't need to include it in your
+   * markup.
+   */
+  @Prop() position: 'top' | 'bottom' | 'left' | 'right' = 'top';
+
   /** Sets focus to the tab. */
   @Method()
   async setFocus() {
@@ -44,8 +50,16 @@ export class Tab {
           ref={el => (this.tab = el)}
           class={{
             'sl-tab': true,
+
+            // States
             'sl-tab--active': this.active,
-            'sl-tab--disabled': this.disabled
+            'sl-tab--disabled': this.disabled,
+
+            // Positions
+            'sl-tab--top': this.position === 'top',
+            'sl-tab--bottom': this.position === 'bottom',
+            'sl-tab--left': this.position === 'left',
+            'sl-tab--right': this.position === 'right'
           }}
           role="tab"
           aria-disabled={this.disabled}

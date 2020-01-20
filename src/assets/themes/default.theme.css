@@ -295,6 +295,25 @@
   --menu-padding-y: 10px;
 
   /*********************************************************************************************************************
+  * Tabs
+  *********************************************************************************************************************/
+
+  --tab-font-family: var(--font-sans-serif);
+  --tab-font-weight: var(--font-weight--normal);
+  --tab-font-size: var(--form-control-font-size);
+  --tab-background-color: white;
+  --tab-border-color: var(--color-gray-85);
+  --tab-color: var(--color-gray-30);
+  --tab-padding-x: 20px;
+  --tab-padding-y: 16px;
+  --tab-transition-speed: 150ms;
+
+  --tab-nav-border-width: 2px;
+
+  --tab-panel-padding-x: var(--tab-padding-x);
+  --tab-panel-padding-y: var(--tab-padding-y);
+
+  /*********************************************************************************************************************
   * Tooltips
   *********************************************************************************************************************/
 
@@ -303,7 +322,7 @@
   --tooltip-font-size: var(--form-control-font-size--medium);
   --tooltip-line-height: 1.4;
   --tooltip-background-color: var(--color-gray-10);
-  --tooltip-border-radius: 3px;
+  --tooltip-border-radius: 4px;
   --tooltip-color: white;
 
   --tooltip-padding-y: 5px;

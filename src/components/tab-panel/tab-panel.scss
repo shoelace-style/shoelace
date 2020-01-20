@@ -3,3 +3,7 @@
 :host {
   display: block;
 }
+
+.sl-tab-panel {
+  padding: var(--tab-panel-padding-y) var(--tab-panel-padding-x);
+}

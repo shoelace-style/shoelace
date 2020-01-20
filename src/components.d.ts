@@ -305,6 +305,10 @@ export namespace Components {
     */
     'panel': string;
     /**
+    * The tab's position in a tab nav. This prop is used internally by tabset, so you don't need to include it in your markup.
+    */
+    'position': 'top' | 'bottom' | 'left' | 'right';
+    /**
     * Removes focus from the tab.
     */
     'removeFocus': () => Promise<void>;
@@ -327,15 +331,11 @@ export namespace Components {
     /**
     * The position of the tabs in the tabset.
     */
-    'position': 'top' | 'right' | 'bottom' | 'left';
+    'position': 'top' | 'bottom' | 'left' | 'right';
     /**
     * Shows the specified tab panel.
     */
     'show': (panel: string) => Promise<void>;
-    /**
-    * The type of tabs to draw.
-    */
-    'type': 'card' | 'pill';
   }
   interface SlTextarea {
     /**
@@ -835,6 +835,10 @@ declare namespace LocalJSX {
     * The name of the tab panel the tab will be synced to. The panel must exist in the same `<sl-tabs>` element.
     */
     'panel'?: string;
+    /**
+    * The tab's position in a tab nav. This prop is used internally by tabset, so you don't need to include it in your markup.
+    */
+    'position'?: 'top' | 'bottom' | 'left' | 'right';
   }
   interface SlTabPanel {
     /**
@@ -858,11 +862,7 @@ declare namespace LocalJSX {
     /**
     * The position of the tabs in the tabset.
     */
-    'position'?: 'top' | 'right' | 'bottom' | 'left';
-    /**
-    * The type of tabs to draw.
-    */
-    'type'?: 'card' | 'pill';
+    'position'?: 'top' | 'bottom' | 'left' | 'right';
   }
   interface SlTextarea {
     /**

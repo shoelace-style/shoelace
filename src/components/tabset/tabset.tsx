@@ -22,10 +22,7 @@ export class Tabset {
   @Element() host: HTMLElement;
 
   /** The position of the tabs in the tabset. */
-  @Prop() position: 'top' | 'right' | 'bottom' | 'left' = 'top';
-
-  /** The type of tabs to draw. */
-  @Prop() type: 'card' | 'pill' = 'card';
+  @Prop() position: 'top' | 'bottom' | 'left' | 'right' = 'top';
 
   /** Emitted when a tab is shown. */
   @Event() slTabShow: EventEmitter;
@@ -36,10 +33,16 @@ export class Tabset {
   componentDidLoad() {
     // Set initial tab state
     this.setAriaLabels();
+    this.setTabPositions();
     this.setActiveTab(this.getActiveTab() || this.getAllTabs()[0], false);
 
     // Update aria labels id the DOM changes
-    this.observer = new MutationObserver(() => setTimeout(() => this.setAriaLabels()));
+    this.observer = new MutationObserver(() =>
+      setTimeout(() => {
+        this.setAriaLabels();
+        this.setTabPositions();
+      })
+    );
     this.observer.observe(this.host, { attributes: true, childList: true, subtree: true });
   }
 
@@ -58,11 +61,13 @@ export class Tabset {
     }
   }
 
-  getAllTabs() {
+  getAllTabs(includeDisabled = false) {
     const slot = this.nav.querySelector('slot');
-    return [...slot.assignedElements()].filter((el: any) => el.tagName.toLowerCase() === 'sl-tab' && !el.disabled) as [
-      HTMLSlTabElement
-    ];
+    return [...slot.assignedElements()].filter((el: any) => {
+      return includeDisabled
+        ? el.tagName.toLowerCase() === 'sl-tab'
+        : el.tagName.toLowerCase() === 'sl-tab' && !el.disabled;
+    }) as [HTMLSlTabElement];
   }
 
   getAllPanels() {
@@ -110,6 +115,11 @@ export class Tabset {
     });
   }
 
+  setTabPositions() {
+    const tabs = this.getAllTabs(true);
+    tabs.map(tab => (tab.position = this.position));
+  }
+
   handleClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
     const tab = target.closest('sl-tab');
@@ -155,13 +165,9 @@ export class Tabset {
 
           // Positions
           'sl-tabset--top': this.position === 'top',
-          'sl-tabset--right': this.position === 'right',
           'sl-tabset--bottom': this.position === 'bottom',
           'sl-tabset--left': this.position === 'left',
-
-          // Types
-          'sl-tabset--card': this.type === 'card',
-          'sl-tabset--pill': this.type === 'pill'
+          'sl-tabset--right': this.position === 'right'
         }}
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
