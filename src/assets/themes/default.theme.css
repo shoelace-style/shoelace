@@ -35,8 +35,8 @@
   --color-primary-90: hsl(var(--color-primary-hue), var(--color-primary-saturation), 90%);
   --color-primary-95: hsl(var(--color-primary-hue), var(--color-primary-saturation), 95%);
 
-  --color-success-hue: 100;
-  --color-success-saturation: 55%;
+  --color-success-hue: 110;
+  --color-success-saturation: 60%;
   --color-success-05: hsl(var(--color-success-hue), var(--color-success-saturation), 5%);
   --color-success-10: hsl(var(--color-success-hue), var(--color-success-saturation), 10%);
   --color-success-15: hsl(var(--color-success-hue), var(--color-success-saturation), 15%);
