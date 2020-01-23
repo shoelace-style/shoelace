@@ -1,4 +1,5 @@
 @import 'reset';
+@import 'mixins';
 
 :host {
   display: block;
@@ -8,23 +9,41 @@
   display: flex;
   font-size: 14px;
 
-  .sl-tabset__nav {
+  .sl-tabset__tabs {
     display: flex;
+    position: relative;
+  }
+
+  .sl-tabset__active-tab-indicator {
+    position: absolute;
+    transition: 200ms transform ease, 200ms width ease;
   }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Top
+// Top + bottom
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 .sl-tabset--top {
   flex-direction: column;
 
   .sl-tabset__nav {
-    position: relative;
+    display: flex;
     order: 1;
+    overflow-x: auto;
+    @include hide-scrollbar();
+  }
+
+  .sl-tabset__tabs {
+    flex: 1 1 auto;
+    position: relative;
     flex-direction: row;
     border-bottom: solid var(--tab-nav-border-width) var(--tab-border-color);
+  }
+
+  .sl-tabset__active-tab-indicator {
+    bottom: calc(-1 * var(--tab-nav-border-width));
+    border-bottom: solid var(--tab-nav-border-width) var(--color-primary-50);
   }
 
   .sl-tabset__body {
@@ -40,9 +59,22 @@
   flex-direction: column;
 
   .sl-tabset__nav {
+    display: flex;
     order: 2;
+    overflow-x: auto;
+    @include hide-scrollbar();
+  }
+
+  .sl-tabset__tabs {
+    flex: 1 1 auto;
+    position: relative;
     flex-direction: row;
     border-top: solid var(--tab-nav-border-width) var(--tab-border-color);
+  }
+
+  .sl-tabset__active-tab-indicator {
+    top: calc(-1 * var(--tab-nav-border-width));
+    border-top: solid var(--tab-nav-border-width) var(--color-primary-50);
   }
 
   .sl-tabset__body {
@@ -58,10 +90,18 @@
   flex-direction: row;
 
   .sl-tabset__nav {
-    flex: 0 0 auto;
     order: 1;
+  }
+
+  .sl-tabset__tabs {
+    flex: 0 0 auto;
     flex-direction: column;
     border-right: solid var(--tab-nav-border-width) var(--tab-border-color);
+  }
+
+  .sl-tabset__active-tab-indicator {
+    right: calc(-1 * var(--tab-nav-border-width));
+    border-right: solid var(--tab-nav-border-width) var(--color-primary-50);
   }
 
   .sl-tabset__body {
@@ -78,10 +118,18 @@
   flex-direction: row;
 
   .sl-tabset__nav {
-    flex: 0 0 auto;
     order: 2;
+  }
+
+  .sl-tabset__tabs {
+    flex: 0 0 auto;
     flex-direction: column;
     border-left: solid var(--tab-nav-border-width) var(--tab-border-color);
+  }
+
+  .sl-tabset__active-tab-indicator {
+    left: calc(-1 * var(--tab-nav-border-width));
+    border-left: solid var(--tab-nav-border-width) var(--color-primary-50);
   }
 
   .sl-tabset__body {

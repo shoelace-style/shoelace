@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, Method, Prop, h } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, Method, Prop, Watch, h } from '@stencil/core';
 
 /** @slot nav - Used for grouping tabs in the tabset. */
 /** @slot - Used for grouping tab panels in the tabset. */
@@ -10,8 +10,11 @@ import { Component, Element, Event, EventEmitter, Method, Prop, h } from '@stenc
 })
 export class Tabset {
   activeTab: HTMLSlTabElement;
+  activeTabIndicator: HTMLElement;
   body: HTMLElement;
+  isMouseDown = false;
   nav: HTMLElement;
+  tabs: HTMLElement;
   observer: MutationObserver;
 
   constructor() {
@@ -24,6 +27,11 @@ export class Tabset {
   /** The position of the tabs in the tabset. */
   @Prop() position: 'top' | 'bottom' | 'left' | 'right' = 'top';
 
+  @Watch('position')
+  handlePositionChange() {
+    this.syncActiveTabIndicator();
+  }
+
   /** Emitted when a tab is shown. */
   @Event() slTabShow: EventEmitter;
 
@@ -33,16 +41,10 @@ export class Tabset {
   componentDidLoad() {
     // Set initial tab state
     this.setAriaLabels();
-    this.setTabPositions();
     this.setActiveTab(this.getActiveTab() || this.getAllTabs()[0], false);
 
     // Update aria labels id the DOM changes
-    this.observer = new MutationObserver(() =>
-      setTimeout(() => {
-        this.setAriaLabels();
-        this.setTabPositions();
-      })
-    );
+    this.observer = new MutationObserver(() => setTimeout(() => this.setAriaLabels()));
     this.observer.observe(this.host, { attributes: true, childList: true, subtree: true });
   }
 
@@ -62,7 +64,7 @@ export class Tabset {
   }
 
   getAllTabs(includeDisabled = false) {
-    const slot = this.nav.querySelector('slot');
+    const slot = this.tabs.querySelector('slot');
     return [...slot.assignedElements()].filter((el: any) => {
       return includeDisabled
         ? el.tagName.toLowerCase() === 'sl-tab'
@@ -81,6 +83,19 @@ export class Tabset {
     return this.getAllTabs().find(el => el.active);
   }
 
+  scrollTabIntoView(tab: HTMLSlTabElement) {
+    if (tab) {
+      const min = this.nav.scrollLeft;
+      const max = this.nav.scrollLeft + this.nav.offsetWidth;
+
+      if (tab.offsetLeft < min) {
+        this.nav.scrollLeft = tab.offsetLeft;
+      } else if (tab.offsetLeft + tab.clientWidth > max) {
+        this.nav.scrollLeft = tab.offsetLeft - this.nav.offsetWidth + tab.clientWidth;
+      }
+    }
+  }
+
   setActiveTab(tab: HTMLSlTabElement, emitEvents = true) {
     if (tab && tab !== this.activeTab && !tab.disabled) {
       const previousTab = this.activeTab;
@@ -89,6 +104,11 @@ export class Tabset {
       // Sync tabs and panels
       this.getAllTabs().map(el => (el.active = el === this.activeTab));
       this.getAllPanels().map(el => (el.active = el.name === this.activeTab.panel));
+      this.syncActiveTabIndicator();
+
+      if (['top', 'bottom'].includes(this.position)) {
+        this.scrollTabIntoView(this.activeTab);
+      }
 
       // Emit events
       if (emitEvents) {
@@ -115,9 +135,28 @@ export class Tabset {
     });
   }
 
-  setTabPositions() {
-    const tabs = this.getAllTabs(true);
-    tabs.map(tab => (tab.position = this.position));
+  syncActiveTabIndicator() {
+    const tab = this.getActiveTab();
+    const width = tab.clientWidth;
+    const height = tab.clientHeight;
+    const x = tab.offsetLeft;
+    const y = tab.offsetTop;
+
+    switch (this.position) {
+      case 'top':
+      case 'bottom':
+        this.activeTabIndicator.style.width = `${width}px`;
+        this.activeTabIndicator.style.height = null;
+        this.activeTabIndicator.style.transform = `translateX(${x}px)`;
+        break;
+
+      case 'left':
+      case 'right':
+        this.activeTabIndicator.style.width = null;
+        this.activeTabIndicator.style.height = `${height}px`;
+        this.activeTabIndicator.style.transform = `translateY(${y}px)`;
+        break;
+    }
   }
 
   handleClick(event: MouseEvent) {
@@ -152,6 +191,11 @@ export class Tabset {
         if (index < 0) index = 0;
         if (index > tabs.length - 1) index = tabs.length - 1;
         tabs[index].setFocus();
+
+        if (['top', 'bottom'].includes(this.position)) {
+          this.scrollTabIntoView(tabs[index]);
+        }
+
         event.preventDefault();
       }
     }
@@ -172,8 +216,11 @@ export class Tabset {
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
       >
-        <div ref={el => (this.nav = el)} class="sl-tabset__nav" role="tablist">
-          <slot name="nav" />
+        <div ref={el => (this.nav = el)} class="sl-tabset__nav">
+          <div ref={el => (this.tabs = el)} class="sl-tabset__tabs" role="tablist">
+            <div ref={el => (this.activeTabIndicator = el)} class="sl-tabset__active-tab-indicator" />
+            <slot name="nav" />
+          </div>
         </div>
 
         <div ref={el => (this.body = el)} class="sl-tabset__body">

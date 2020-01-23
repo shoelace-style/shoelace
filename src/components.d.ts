@@ -309,10 +309,6 @@ export namespace Components {
     */
     'panel': string;
     /**
-    * The tab's position in a tab nav. This prop is used internally by tabset, so you don't need to include it in your markup.
-    */
-    'position': 'top' | 'bottom' | 'left' | 'right';
-    /**
     * Removes focus from the tab.
     */
     'removeFocus': () => Promise<void>;
@@ -843,10 +839,6 @@ declare namespace LocalJSX {
     * The name of the tab panel the tab will be synced to. The panel must exist in the same `<sl-tabs>` element.
     */
     'panel'?: string;
-    /**
-    * The tab's position in a tab nav. This prop is used internally by tabset, so you don't need to include it in your markup.
-    */
-    'position'?: 'top' | 'bottom' | 'left' | 'right';
   }
   interface SlTabPanel {
     /**
