@@ -9,6 +9,10 @@
   border-radius: var(--tooltip-border-radius);
   background-color: var(--tooltip-background-color);
 
+  .tippy-arrow {
+    transform: scale(0.75);
+  }
+
   &[data-placement^='top'] .tippy-arrow {
     border-top-color: var(--tooltip-background-color);
   }
