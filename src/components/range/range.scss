@@ -32,7 +32,7 @@
       margin-top: calc(var(--range-thumb-size) / -2 + var(--range-track-height) / 2);
       transition: var(--form-control-transition-speed) border-color,
         var(--form-control-transition-speed) background-color, var(--form-control-transition-speed) color,
-        var(--form-control-transition-speed) box-shadow;
+        var(--form-control-transition-speed) box-shadow, var(--form-control-transition-speed) transform;
       cursor: pointer;
     }
 
@@ -48,6 +48,7 @@
 
     &:not(:disabled)::-webkit-slider-thumb:active {
       background-color: var(--color-primary-40);
+      transform: scale(1.1);
       cursor: grabbing;
     }
 
@@ -72,7 +73,7 @@
       background-color: var(--color-primary-50);
       transition: var(--form-control-transition-speed) border-color,
         var(--form-control-transition-speed) background-color, var(--form-control-transition-speed) color,
-        var(--form-control-transition-speed) box-shadow;
+        var(--form-control-transition-speed) box-shadow, var(--form-control-transition-speed) transform;
       cursor: pointer;
     }
 
@@ -88,6 +89,7 @@
 
     &:not(:disabled)::-moz-range-thumb:active {
       background-color: var(--color-primary-40);
+      transform: scale(1.1);
       cursor: grabbing;
     }
 
