@@ -253,11 +253,15 @@ export namespace Components {
     /**
     * The input's step attribute.
     */
-    'step': number | 'any';
+    'step': number;
+    /**
+    * By default, a tooltip showing the current value will appear when the range has focus. Set this to `off` to prevent the tooltip from showing.
+    */
+    'tooltip': 'auto' | 'off';
     /**
     * The input's value attribute.
     */
-    'value': string;
+    'value': number;
   }
   interface SlSpinner {
     /**
@@ -792,11 +796,15 @@ declare namespace LocalJSX {
     /**
     * The input's step attribute.
     */
-    'step'?: number | 'any';
+    'step'?: number;
+    /**
+    * By default, a tooltip showing the current value will appear when the range has focus. Set this to `off` to prevent the tooltip from showing.
+    */
+    'tooltip'?: 'auto' | 'off';
     /**
     * The input's value attribute.
     */
-    'value'?: string;
+    'value'?: number;
   }
   interface SlSpinner {
     /**
