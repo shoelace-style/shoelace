@@ -146,6 +146,23 @@
   --color-gray-95: hsl(var(--color-gray-hue), var(--color-gray-saturation), 95%);
 
   /*********************************************************************************************************************
+  * Spacing
+  *********************************************************************************************************************/
+
+  --spacing-factor: 4px;
+
+  --spacing-1: calc(var(--spacing-factor) * 1);
+  --spacing-2: calc(var(--spacing-factor) * 2);
+  --spacing-3: calc(var(--spacing-factor) * 3);
+  --spacing-4: calc(var(--spacing-factor) * 4);
+  --spacing-5: calc(var(--spacing-factor) * 5);
+  --spacing-6: calc(var(--spacing-factor) * 6);
+  --spacing-7: calc(var(--spacing-factor) * 7);
+  --spacing-8: calc(var(--spacing-factor) * 8);
+  --spacing-9: calc(var(--spacing-factor) * 9);
+  --spacing-10: calc(var(--spacing-factor) * 10);
+
+  /*********************************************************************************************************************
   * Fonts
   *********************************************************************************************************************/
 
