@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, Method, Prop, Watch, h } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, Method, Prop, State, Watch, h } from '@stencil/core';
 
 import { getOffset } from '../../utilities/offset';
 import { scrollIntoView } from '../../utilities/scroll';
@@ -15,7 +15,6 @@ export class Tabset {
   activeTab: HTMLSlTabElement;
   activeTabIndicator: HTMLElement;
   body: HTMLElement;
-  isMouseDown = false;
   nav: HTMLElement;
   tabs: HTMLElement;
   observer: MutationObserver;
@@ -23,9 +22,12 @@ export class Tabset {
   constructor() {
     this.handleClick = this.handleClick.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleMouseDown = this.handleMouseDown.bind(this);
   }
 
   @Element() host: HTMLElement;
+
+  @State() isUsingMouse = false;
 
   /** The position of the tabs in the tabset. */
   @Prop() position: 'top' | 'bottom' | 'left' | 'right' = 'top';
@@ -160,6 +162,8 @@ export class Tabset {
   }
 
   handleKeyDown(event: KeyboardEvent) {
+    this.isUsingMouse = false;
+
     // Activate a tab
     if (['Enter', ' '].includes(event.key)) {
       const target = event.target as HTMLElement;
@@ -192,11 +196,16 @@ export class Tabset {
     }
   }
 
+  handleMouseDown() {
+    this.isUsingMouse = true;
+  }
+
   render() {
     return (
       <div
         class={{
           'sl-tabset': true,
+          'sl-tabset--using-mouse': this.isUsingMouse,
 
           // Positions
           'sl-tabset--top': this.position === 'top',
@@ -206,6 +215,7 @@ export class Tabset {
         }}
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
+        onMouseDown={this.handleMouseDown}
       >
         <div ref={el => (this.nav = el)} class="sl-tabset__nav" tabindex="-1">
           <div ref={el => (this.tabs = el)} class="sl-tabset__tabs" role="tablist">

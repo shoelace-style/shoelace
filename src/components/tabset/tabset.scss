@@ -17,6 +17,11 @@
     position: absolute;
     transition: 200ms transform ease, 200ms width ease;
   }
+
+  // Hide the focus ring if the user is interacting with a mouse
+  &.sl-tabset--using-mouse ::slotted(sl-tab) {
+    --focus-ring-width: 0;
+  }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

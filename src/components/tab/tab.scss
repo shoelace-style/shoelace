@@ -8,6 +8,7 @@
   font-family: var(--tab-font-family);
   font-size: var(--tab-font-size);
   font-weight: var(--tab-font-weight);
+  border-radius: 4px;
   color: var(--tab-color);
   padding: var(--spacing-4) var(--spacing-5);
   white-space: nowrap;
@@ -29,7 +30,6 @@
   }
 
   &:focus:not(.sl-tab--disabled) {
-    color: var(--color-primary-50);
     box-shadow: inset 0 0 0 var(--focus-ring-width)
       hsla(var(--color-primary-hue), var(--color-primary-saturation), 50%, var(--focus-ring-alpha));
   }
