@@ -207,7 +207,7 @@ export class Tabset {
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
       >
-        <div ref={el => (this.nav = el)} class="sl-tabset__nav">
+        <div ref={el => (this.nav = el)} class="sl-tabset__nav" tabindex="-1">
           <div ref={el => (this.tabs = el)} class="sl-tabset__tabs" role="tablist">
             <div ref={el => (this.activeTabIndicator = el)} class="sl-tabset__active-tab-indicator" />
             <slot name="nav" />
