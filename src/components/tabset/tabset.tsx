@@ -1,5 +1,8 @@
 import { Component, Element, Event, EventEmitter, Method, Prop, Watch, h } from '@stencil/core';
 
+import { getOffset } from '../../utilities/offset';
+import { scrollIntoView } from '../../utilities/scroll';
+
 /** @slot nav - Used for grouping tabs in the tabset. */
 /** @slot - Used for grouping tab panels in the tabset. */
 
@@ -83,19 +86,6 @@ export class Tabset {
     return this.getAllTabs().find(el => el.active);
   }
 
-  scrollTabIntoView(tab: HTMLSlTabElement) {
-    if (tab) {
-      const min = this.nav.scrollLeft;
-      const max = this.nav.scrollLeft + this.nav.offsetWidth;
-
-      if (tab.offsetLeft < min) {
-        this.nav.scrollLeft = tab.offsetLeft;
-      } else if (tab.offsetLeft + tab.clientWidth > max) {
-        this.nav.scrollLeft = tab.offsetLeft - this.nav.offsetWidth + tab.clientWidth;
-      }
-    }
-  }
-
   setActiveTab(tab: HTMLSlTabElement, emitEvents = true) {
     if (tab && tab !== this.activeTab && !tab.disabled) {
       const previousTab = this.activeTab;
@@ -107,7 +97,7 @@ export class Tabset {
       this.syncActiveTabIndicator();
 
       if (['top', 'bottom'].includes(this.position)) {
-        this.scrollTabIntoView(this.activeTab);
+        scrollIntoView(this.activeTab, this.nav, 'horizontal');
       }
 
       // Emit events
@@ -139,22 +129,23 @@ export class Tabset {
     const tab = this.getActiveTab();
     const width = tab.clientWidth;
     const height = tab.clientHeight;
-    const x = tab.offsetLeft;
-    const y = tab.offsetTop;
+    const offset = getOffset(tab, this.nav);
+    const offsetTop = offset.top + this.nav.scrollTop;
+    const offsetLeft = offset.left + this.nav.scrollLeft;
 
     switch (this.position) {
       case 'top':
       case 'bottom':
         this.activeTabIndicator.style.width = `${width}px`;
         this.activeTabIndicator.style.height = null;
-        this.activeTabIndicator.style.transform = `translateX(${x}px)`;
+        this.activeTabIndicator.style.transform = `translateX(${offsetLeft}px)`;
         break;
 
       case 'left':
       case 'right':
         this.activeTabIndicator.style.width = null;
         this.activeTabIndicator.style.height = `${height}px`;
-        this.activeTabIndicator.style.transform = `translateY(${y}px)`;
+        this.activeTabIndicator.style.transform = `translateY(${offsetTop}px)`;
         break;
     }
   }
@@ -193,7 +184,7 @@ export class Tabset {
         tabs[index].setFocus();
 
         if (['top', 'bottom'].includes(this.position)) {
-          this.scrollTabIntoView(tabs[index]);
+          scrollIntoView(tabs[index], this.nav, 'horizontal');
         }
 
         event.preventDefault();
