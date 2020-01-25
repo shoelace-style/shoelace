@@ -225,10 +225,6 @@
   --focus-ring-alpha: 33%;
 
   /* Buttons */
-  --button-padding-x--small: 14px;
-  --button-padding-x--medium: 20px;
-  --button-padding-x--large: 26px;
-
   --button-spinner-animation: 1s linear infinite spin;
   --button-spinner-border-width: 1px;
 

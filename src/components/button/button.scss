@@ -39,7 +39,7 @@
 
   .sl-button__prefix {
     ::slotted(*) {
-      margin-left: -0.25em;
+      margin-left: -0.5em;
       margin-right: 0.5em;
     }
   }
@@ -47,7 +47,7 @@
   .sl-button__suffix {
     ::slotted(*) {
       margin-left: 0.5em;
-      margin-right: -0.25em;
+      margin-right: -0.5em;
     }
   }
 }
@@ -203,7 +203,7 @@
   height: var(--form-control-height--small);
   line-height: calc(var(--form-control-height--small) - var(--form-control-border-width) * 2);
   border-radius: var(--form-control-border-radius--small);
-  padding: 0 var(--button-padding-x--small);
+  padding: 0 var(--spacing-4);
 }
 
 .sl-button--medium {
@@ -211,7 +211,7 @@
   height: var(--form-control-height--medium);
   line-height: calc(var(--form-control-height--medium) - var(--form-control-border-width) * 2);
   border-radius: var(--form-control-border-radius--medium);
-  padding: 0 var(--button-padding-x--medium);
+  padding: 0 var(--spacing-5);
 }
 
 .sl-button--large {
@@ -219,7 +219,7 @@
   height: var(--form-control-height--large);
   line-height: calc(var(--form-control-height--large) - var(--form-control-border-width) * 2);
   border-radius: var(--form-control-border-radius--large);
-  padding: 0 var(--button-padding-x--large);
+  padding: 0 var(--spacing-6);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
