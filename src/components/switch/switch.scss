@@ -64,8 +64,8 @@
 
   .sl-switch__thumb {
     border-color: var(--color-primary-60);
-    box-shadow: 0 0 0 var(--focus-ring-width)
-      hsla(var(--color-primary-hue), var(--color-primary-saturation), 50%, var(--focus-ring-alpha));
+    box-shadow: 0 0 0 var(--form-control-focus-ring-width)
+      hsla(var(--color-primary-hue), var(--color-primary-saturation), 50%, var(--form-control-focus-ring-alpha));
   }
 }
 
@@ -101,8 +101,8 @@
 
   .sl-switch__thumb {
     border-color: var(--color-primary-60);
-    box-shadow: 0 0 0 var(--focus-ring-width)
-      hsla(var(--color-primary-hue), var(--color-primary-saturation), 50%, var(--focus-ring-alpha));
+    box-shadow: 0 0 0 var(--form-control-focus-ring-width)
+      hsla(var(--color-primary-hue), var(--color-primary-saturation), 50%, var(--form-control-focus-ring-alpha));
   }
 }
 

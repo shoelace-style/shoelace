@@ -53,8 +53,8 @@
 .sl-checkbox.sl-checkbox--focused:not(.sl-checkbox--checked):not(.sl-checkbox--disabled) .sl-checkbox__control {
   border-color: var(--color-primary-60);
   background-color: var(--form-control-background-color--focus);
-  box-shadow: 0 0 0 var(--focus-ring-width)
-    hsla(var(--color-primary-hue), var(--color-primary-saturation), 50%, var(--focus-ring-alpha));
+  box-shadow: 0 0 0 var(--form-control-focus-ring-width)
+    hsla(var(--color-primary-hue), var(--color-primary-saturation), 50%, var(--form-control-focus-ring-alpha));
 }
 
 // Checked/indeterminate
@@ -76,8 +76,8 @@
 .sl-checkbox.sl-checkbox--indeterminate:not(.sl-checkbox--disabled).sl-checkbox--focused .sl-checkbox__control {
   border-color: var(--color-primary-60);
   background-color: var(--color-primary-60);
-  box-shadow: 0 0 0 var(--focus-ring-width)
-    hsla(var(--color-primary-hue), var(--color-primary-saturation), 50%, var(--focus-ring-alpha));
+  box-shadow: 0 0 0 var(--form-control-focus-ring-width)
+    hsla(var(--color-primary-hue), var(--color-primary-saturation), 50%, var(--form-control-focus-ring-alpha));
 }
 
 // Disabled

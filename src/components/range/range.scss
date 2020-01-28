@@ -44,8 +44,8 @@
 
     &:not(:disabled):focus::-webkit-slider-thumb {
       background-color: var(--color-primary-60);
-      box-shadow: 0 0 0 var(--focus-ring-width)
-        hsla(var(--color-primary-hue), var(--color-primary-saturation), 50%, var(--focus-ring-alpha));
+      box-shadow: 0 0 0 var(--form-control-focus-ring-width)
+        hsla(var(--color-primary-hue), var(--color-primary-saturation), 50%, var(--form-control-focus-ring-alpha));
     }
 
     &:not(:disabled)::-webkit-slider-thumb:active {
@@ -85,8 +85,8 @@
 
     &:not(:disabled):focus::-moz-range-thumb {
       background-color: var(--color-primary-60);
-      box-shadow: 0 0 0 var(--focus-ring-width)
-        hsla(var(--color-primary-hue), var(--color-primary-saturation), 50%, var(--focus-ring-alpha));
+      box-shadow: 0 0 0 var(--form-control-focus-ring-width)
+        hsla(var(--color-primary-hue), var(--color-primary-saturation), 50%, var(--form-control-focus-ring-alpha));
     }
 
     &:not(:disabled)::-moz-range-thumb:active {

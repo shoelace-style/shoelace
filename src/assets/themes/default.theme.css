@@ -57,8 +57,8 @@
   --color-success-90: hsl(var(--color-success-hue), var(--color-success-saturation), 90%);
   --color-success-95: hsl(var(--color-success-hue), var(--color-success-saturation), 95%);
 
-  --color-info-hue: 220;
-  --color-info-saturation: 15%;
+  --color-info-hue: var(--color-primary-hue);
+  --color-info-saturation: 10%;
   --color-info-05: hsl(var(--color-info-hue), var(--color-info-saturation), 5%);
   --color-info-10: hsl(var(--color-info-hue), var(--color-info-saturation), 10%);
   --color-info-15: hsl(var(--color-info-hue), var(--color-info-saturation), 15%);
@@ -220,13 +220,8 @@
 
   --form-control-transition-speed: 150ms;
 
-  /* Focus */
-  --focus-ring-width: 2px;
-  --focus-ring-alpha: 33%;
-
-  /* Buttons */
-  --button-spinner-animation: 1s linear infinite spin;
-  --button-spinner-border-width: 1px;
+  --form-control-focus-ring-width: 2px;
+  --form-control-focus-ring-alpha: 33%;
 
   /* Checkboxes */
   --checkbox-size: 14px;
