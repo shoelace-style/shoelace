@@ -6,8 +6,6 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 :host {
-  display: inline-block;
-
   /** @prop --border-radius--small: The small button's border radius. */
   --border-radius--small: var(--form-control-border-radius--small);
 
@@ -76,6 +74,8 @@
 
   /** @prop --transition-speed: The button's transition speed for hover, focus, and active effects. */
   --transition-speed: var(--form-control-transition-speed);
+
+  display: inline-block;
 }
 
 .sl-button {
