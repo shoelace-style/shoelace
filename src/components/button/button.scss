@@ -7,6 +7,75 @@
 
 :host {
   display: inline-block;
+
+  /** @prop --border-radius--small: The small button's border radius. */
+  --border-radius--small: var(--form-control-border-radius--small);
+
+  /** @prop --border-radius--medium: The medium button's border radius. */
+  --border-radius--medium: var(--form-control-border-radius--medium);
+
+  /** @prop --border-radius--large: The large button's border radius. */
+  --border-radius--large: var(--form-control-border-radius--large);
+
+  /** @prop --border-width: The button's border width. */
+  --border-width: var(--form-control-border-width);
+
+  /** @prop --default-background-color: The background color to use for default buttons. */
+  --default-background-color: var(--form-control-background-color);
+
+  /** @prop --default-border-color: The border color to use for default buttons. */
+  --default-border-color: var(--form-control-border-color);
+
+  /** @prop --default-color: The color to use for default buttons. */
+  --default-color: var(--form-control-color);
+
+  /** @prop --focus-width: The button's focus ring width in pixels. */
+  --focus-ring-width: var(--form-control-focus-ring-width);
+
+  /** @prop --focus-width: The button's focus ring width in pixels. */
+  --focus-ring-alpha: var(--form-control-focus-ring-alpha);
+
+  /** @prop --font-family: The button's font family. */
+  --font-family: var(--form-control-font-sans-serif);
+
+  /** @prop --font-size--small: The small button's font size. */
+  --font-size--small: var(--form-control-font-size--small);
+
+  /** @prop --font-size--medium: The medium button's font size. */
+  --font-size--medium: var(--form-control-font-size--medium);
+
+  /** @prop --font-size--large: The large button's font size. */
+  --font-size--large: var(--form-control-font-size--large);
+
+  /** @prop --font-weight: The button's font weight. */
+  --font-weight: var(--form-control-font-weight);
+
+  /** @prop --height--small: The small button's height. */
+  --height--small: var(--form-control-height--small);
+
+  /** @prop --height--medium: The medium button's height. */
+  --height--medium: var(--form-control-height--medium);
+
+  /** @prop --height--large: The large button's height. */
+  --height--large: var(--form-control-height--large);
+
+  /** @prop --button-padding-x--small: The small button's horizontal padding. */
+  --padding-x--small: 16px;
+
+  /** @prop --button-padding-x--medium: The medium button's horizontal padding. */
+  --padding-x--medium: 20px;
+
+  /** @prop --button-padding-x--large: The large button's horizontal padding. */
+  --padding-x--large: 24px;
+
+  /** @prop --spinner-border-width: The width of the loading button's spinner in pixels. */
+  --spinner-border-width: 1px;
+
+  /** @prop --spinner-animation: The animation to use for the loading button's spinner. */
+  --spinner-animation: 1s linear infinite spin;
+
+  /** @prop --transition-speed: The button's transition speed for hover, focus, and active effects. */
+  --transition-speed: var(--form-control-transition-speed);
 }
 
 .sl-button {
@@ -14,14 +83,13 @@
   align-items: center;
   justify-content: center;
   border-style: solid;
-  border-width: var(--form-control-border-width);
-  font-family: var(--form-control-font-sans-serif);
-  font-weight: var(--form-control-font-weight);
+  border-width: var(--border-width);
+  font-family: var(--font-family);
+  font-weight: var(--font-weight);
   user-select: none;
   white-space: nowrap;
   vertical-align: middle;
-  transition: var(--form-control-transition-speed) background-color, var(--form-control-transition-speed) color,
-    var(--form-control-transition-speed) border;
+  transition: var(--transition-speed) background-color, var(--transition-speed) color, var(--transition-speed) border;
   cursor: pointer;
 
   &::-moz-focus-inner {
@@ -58,9 +126,9 @@
 
 .sl-button:not(.sl-button--outline) {
   &.sl-button--default {
-    background-color: var(--form-control-background-color);
-    border-color: var(--form-control-border-color);
-    color: var(--form-control-color);
+    background-color: var(--default-background-color);
+    border-color: var(--default-border-color);
+    color: var(--default-color);
 
     &:hover:not(:disabled) {
       background-color: var(--color-primary-95);
@@ -110,18 +178,16 @@
 
 .sl-button.sl-button--outline {
   &.sl-button--default {
-    background-color: white;
-    border-color: var(--form-control-border-color);
-    color: var(--form-control-color);
+    background-color: var(--default-background-color);
+    border-color: var(--default-border-color);
+    color: var(--default-color);
 
     &:hover:not(:disabled) {
-      background-color: var(--color-white);
       border-color: var(--color-primary-60);
       color: var(--color-primary-50);
     }
 
     &:focus:not(:disabled) {
-      background-color: var(--color-white);
       border-color: var(--color-primary-60);
       color: var(--color-primary-50);
       box-shadow: 0 0 0 var(--focus-ring-width)
@@ -129,7 +195,6 @@
     }
 
     &:active:not(:disabled) {
-      background-color: var(--color-white);
       border-color: var(--color-primary-45);
       color: var(--color-primary-45);
     }
@@ -199,27 +264,27 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 .sl-button--small {
-  font-size: var(--form-control-font-size--small);
-  height: var(--form-control-height--small);
-  line-height: calc(var(--form-control-height--small) - var(--form-control-border-width) * 2);
-  border-radius: var(--form-control-border-radius--small);
-  padding: 0 var(--spacing-4);
+  font-size: var(--font-size--small);
+  height: var(--height--small);
+  line-height: calc(var(--height--small) - var(--border-width) * 2);
+  border-radius: var(--border-radius--small);
+  padding: 0 var(--padding-x--small);
 }
 
 .sl-button--medium {
-  font-size: var(--form-control-font-size--medium);
-  height: var(--form-control-height--medium);
-  line-height: calc(var(--form-control-height--medium) - var(--form-control-border-width) * 2);
-  border-radius: var(--form-control-border-radius--medium);
-  padding: 0 var(--spacing-5);
+  font-size: var(--font-size--medium);
+  height: var(--height--medium);
+  line-height: calc(var(--height--medium) - var(--border-width) * 2);
+  border-radius: var(--border-radius--medium);
+  padding: 0 var(--padding-x--medium);
 }
 
 .sl-button--large {
-  font-size: var(--form-control-font-size--large);
-  height: var(--form-control-height--large);
-  line-height: calc(var(--form-control-height--large) - var(--form-control-border-width) * 2);
-  border-radius: var(--form-control-border-radius--large);
-  padding: 0 var(--spacing-6);
+  font-size: var(--font-size--large);
+  height: var(--height--large);
+  line-height: calc(var(--height--large) - var(--border-width) * 2);
+  border-radius: var(--border-radius--large);
+  padding: 0 var(--padding-x--large);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -228,15 +293,15 @@
 
 .sl-button--round {
   &.sl-button--small {
-    border-radius: var(--form-control-height--small);
+    border-radius: var(--height--small);
   }
 
   &.sl-button--medium {
-    border-radius: var(--form-control-height--medium);
+    border-radius: var(--height--medium);
   }
 
   &.sl-button--large {
-    border-radius: var(--form-control-height--large);
+    border-radius: var(--height--large);
   }
 }
 
@@ -249,17 +314,17 @@
   padding-right: 0;
 
   &.sl-button--small {
-    width: var(--form-control-height--small);
+    width: var(--height--small);
     border-radius: 50%;
   }
 
   &.sl-button--medium {
-    width: var(--form-control-height--medium);
+    width: var(--height--medium);
     border-radius: 50%;
   }
 
   &.sl-button--large {
-    width: var(--form-control-height--large);
+    width: var(--height--large);
     border-radius: 50%;
   }
 
@@ -312,10 +377,10 @@
     left: calc(50% - 0.5em);
     width: 1em;
     height: 1em;
-    border: solid var(--button-spinner-border-width) currentColor;
+    border: solid var(--spinner-border-width) currentColor;
     border-bottom-color: transparent;
     border-radius: 50%;
-    animation: var(--button-spinner-animation);
+    animation: var(--spinner-animation);
   }
 }
 
