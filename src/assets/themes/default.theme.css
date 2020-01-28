@@ -15,6 +15,7 @@
 
   --color-primary-hue: 203;
   --color-primary-saturation: 100%;
+  --color-primary-text: white;
   --color-primary-05: hsl(var(--color-primary-hue), var(--color-primary-saturation), 5%);
   --color-primary-10: hsl(var(--color-primary-hue), var(--color-primary-saturation), 10%);
   --color-primary-15: hsl(var(--color-primary-hue), var(--color-primary-saturation), 15%);
@@ -37,6 +38,7 @@
 
   --color-success-hue: 110;
   --color-success-saturation: 60%;
+  --color-success-text: white;
   --color-success-05: hsl(var(--color-success-hue), var(--color-success-saturation), 5%);
   --color-success-10: hsl(var(--color-success-hue), var(--color-success-saturation), 10%);
   --color-success-15: hsl(var(--color-success-hue), var(--color-success-saturation), 15%);
@@ -59,6 +61,7 @@
 
   --color-info-hue: var(--color-primary-hue);
   --color-info-saturation: 10%;
+  --color-info-text: white;
   --color-info-05: hsl(var(--color-info-hue), var(--color-info-saturation), 5%);
   --color-info-10: hsl(var(--color-info-hue), var(--color-info-saturation), 10%);
   --color-info-15: hsl(var(--color-info-hue), var(--color-info-saturation), 15%);
@@ -81,6 +84,7 @@
 
   --color-warning-hue: 36;
   --color-warning-saturation: 90%;
+  --color-warning-text: white;
   --color-warning-05: hsl(var(--color-warning-hue), var(--color-warning-saturation), 5%);
   --color-warning-10: hsl(var(--color-warning-hue), var(--color-warning-saturation), 10%);
   --color-warning-15: hsl(var(--color-warning-hue), var(--color-warning-saturation), 15%);
@@ -103,6 +107,7 @@
 
   --color-danger-hue: 0;
   --color-danger-saturation: 80%;
+  --color-danger-text: white;
   --color-danger-05: hsl(var(--color-danger-hue), var(--color-danger-saturation), 5%);
   --color-danger-10: hsl(var(--color-danger-hue), var(--color-danger-saturation), 10%);
   --color-danger-15: hsl(var(--color-danger-hue), var(--color-danger-saturation), 15%);
@@ -125,6 +130,7 @@
 
   --color-gray-hue: var(--color-primary-hue);
   --color-gray-saturation: 10%;
+  --color-gray-text: white;
   --color-gray-05: hsl(var(--color-gray-hue), var(--color-gray-saturation), 5%);
   --color-gray-10: hsl(var(--color-gray-hue), var(--color-gray-saturation), 10%);
   --color-gray-15: hsl(var(--color-gray-hue), var(--color-gray-saturation), 15%);

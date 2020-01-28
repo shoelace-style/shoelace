@@ -1,18 +1,18 @@
 @mixin solid-button($theme-color) {
   background-color: var(--color-#{$theme-color}-50);
   border-color: var(--color-#{$theme-color}-50);
-  color: white;
+  color: var(--color-#{$theme-color}-text);
 
   &:hover:not(:disabled) {
     background-color: var(--color-#{$theme-color}-55);
     border-color: var(--color-#{$theme-color}-55);
-    color: white;
+    color: var(--color-#{$theme-color}-text);
   }
 
   &:focus:not(:disabled) {
     background-color: var(--color-#{$theme-color}-55);
     border-color: var(--color-#{$theme-color}-55);
-    color: white;
+    color: var(--color-#{$theme-color}-text);
     box-shadow: 0 0 0 var(--focus-ring-width)
       hsla(var(--color-#{$theme-color}-hue), var(--color-#{$theme-color}-saturation), 50%, var(--focus-ring-alpha));
   }
@@ -20,7 +20,7 @@
   &:active:not(:disabled) {
     background-color: var(--color-#{$theme-color}-45);
     border-color: var(--color-#{$theme-color}-45);
-    color: white;
+    color: var(--color-#{$theme-color}-text);
   }
 }
 
@@ -32,13 +32,13 @@
   &:hover:not(:disabled) {
     background-color: var(--color-#{$theme-color}-50);
     border-color: var(--color-#{$theme-color}-50);
-    color: white;
+    color: var(--color-#{$theme-color}-text);
   }
 
   &:focus:not(:disabled) {
     background-color: var(--color-#{$theme-color}-50);
     border-color: var(--color-#{$theme-color}-50);
-    color: white;
+    color: var(--color-#{$theme-color}-text);
     box-shadow: 0 0 0 var(--focus-ring-width)
       hsla(var(--color-#{$theme-color}-hue), var(--color-#{$theme-color}-saturation), 50%, var(--focus-ring-alpha));
   }
@@ -46,6 +46,6 @@
   &:active:not(:disabled) {
     background-color: var(--color-#{$theme-color}-45);
     border-color: var(--color-#{$theme-color}-45);
-    color: white;
+    color: var(--color-#{$theme-color}-text);
   }
 }
