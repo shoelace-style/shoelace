@@ -2,6 +2,9 @@
 
 :host {
   display: inline-block;
+
+  --padding-x: 20px;
+  --padding-y: 16px;
 }
 
 .sl-tab {
@@ -10,7 +13,7 @@
   font-weight: var(--tab-font-weight);
   border-radius: 4px;
   color: var(--tab-color);
-  padding: var(--spacing-4) var(--spacing-5);
+  padding: var(--padding-y) var(--padding-x);
   white-space: nowrap;
   user-select: none;
   cursor: pointer;
