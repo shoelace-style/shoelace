@@ -1,12 +1,12 @@
-/*********************************************************************************************************************
-  *
-  *  👟 Shoelace: A forward-thinking component library built with Web Components.
-  *
-  *  Designed and developed in New Hampshire by [Cory LaViska](https://twitter.com/claviska).
-  *
-  *  Learn more at https://shoelace.style/
-  *
-  *********************************************************************************************************************/
+/***********************************************************************************************************************
+*
+*  👟 Shoelace: A forward-thinking component library built with Web Components.
+*
+*  Designed and developed in New Hampshire by [Cory LaViska](https://twitter.com/claviska).
+*
+*  Learn more at https://shoelace.style/
+*
+***********************************************************************************************************************/
 
 :root {
   /*********************************************************************************************************************
@@ -122,7 +122,7 @@
   --sl-tooltip-padding-y: 5px;
 
   /*********************************************************************************************************************
-  * 🐉 Here be color palettes for each theme color. No need to change them...update hues & saturations instead!
+  * 🐉 Here be color palettes for each theme color. No need to change these...update hues & saturations instead!
   *********************************************************************************************************************/
 
   --sl-color-primary-05: hsl(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 5%);
