@@ -27,36 +27,39 @@
 
   --sl-color-primary-hue: 203;
   --sl-color-primary-saturation: 100%;
-  --sl-color-primary-text: white;
+  --sl-color-primary-text: var(--sl-color-white);
 
   --sl-color-success-hue: 110;
   --sl-color-success-saturation: 60%;
-  --sl-color-success-text: white;
+  --sl-color-success-text: var(--sl-color-white);
 
   --sl-color-info-hue: var(--sl-color-primary-hue);
   --sl-color-info-saturation: 10%;
-  --sl-color-info-text: white;
+  --sl-color-info-text: var(--sl-color-white);
 
   --sl-color-warning-hue: 36;
   --sl-color-warning-saturation: 90%;
-  --sl-color-warning-text: white;
+  --sl-color-warning-text: var(--sl-color-white);
 
   --sl-color-danger-hue: 0;
   --sl-color-danger-saturation: 80%;
-  --sl-color-danger-text: white;
+  --sl-color-danger-text: var(--sl-color-white);
 
   --sl-color-gray-hue: var(--sl-color-primary-hue);
   --sl-color-gray-saturation: 10%;
-  --sl-color-gray-text: white;
+  --sl-color-gray-text: var(--sl-color-white);
+
+  --sl-color-white: white;
+  --sl-color-black: black;
 
   /*********************************************************************************************************************
   * Form controls
   *********************************************************************************************************************/
 
-  --sl-form-control-background-color--focus: white;
-  --sl-form-control-background-color--hover: white;
+  --sl-form-control-background-color--focus: var(--sl-color-white);
+  --sl-form-control-background-color--hover: var(--sl-color-white);
   --sl-form-control-background-color-disabled: var(--sl-color-gray-90);
-  --sl-form-control-background-color: white;
+  --sl-form-control-background-color: var(--sl-color-white);
   --sl-form-control-border-color--disabled: var(--sl-color-gray-80);
   --sl-form-control-border-color--focus: var(--sl-color-primary-50);
   --sl-form-control-border-color--hover: var(--sl-color-gray-80);
@@ -87,7 +90,7 @@
   * Menus
   *********************************************************************************************************************/
 
-  --sl-menu-background-color: white;
+  --sl-menu-background-color: var(--sl-color-white);
   --sl-menu-border-color: var(--sl-color-gray-95);
   --sl-menu-box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
   --sl-menu-font-family: var(--sl-font-sans-serif);
@@ -98,8 +101,8 @@
   --sl-menu-transition-speed: 150ms;
 
   --sl-menu-item-background-color--active: var(--sl-color-primary-95);
-  --sl-menu-item-background-color--disabled: white;
-  --sl-menu-item-background-color: white;
+  --sl-menu-item-background-color--disabled: var(--sl-color-white);
+  --sl-menu-item-background-color: var(--sl-color-white);
   --sl-menu-item-color--active: var(--sl-color-primary-50);
   --sl-menu-item-color--disabled: var(--sl-color-gray-70);
   --sl-menu-item-color: var(--sl-color-gray-40);
@@ -113,7 +116,7 @@
 
   --sl-tooltip-background-color: var(--sl-color-gray-10);
   --sl-tooltip-border-radius: 4px;
-  --sl-tooltip-color: white;
+  --sl-tooltip-color: var(--sl-color-white);
   --sl-tooltip-font-family: var(--sl-form-control-font-family);
   --sl-tooltip-font-size: var(--sl-form-control-font-size--medium);
   --sl-tooltip-font-weight: var(--sl-form-control-font-weight);
