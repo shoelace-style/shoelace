@@ -5,6 +5,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 :host {
+  /* TODO: use menu vars */
   --dropdown-item-color: var(--sl-color-gray-40);
   --dropdown-item-color--active: var(--sl-color-primary-50);
   --dropdown-item-color--disabled: var(--sl-color-gray-70);

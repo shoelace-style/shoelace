@@ -1,5 +1,4 @@
-:root {
-  /*********************************************************************************************************************
+/*********************************************************************************************************************
   *
   *  👟 Shoelace: A forward-thinking component library built with Web Components.
   *
@@ -9,6 +8,19 @@
   *
   *********************************************************************************************************************/
 
+:root {
+  /*********************************************************************************************************************
+  * Fonts
+  *********************************************************************************************************************/
+
+  --sl-font-monospace: Menlo, Monaco, 'Courier New', monospace;
+  --sl-font-sans-serif: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
+    'Helvetica Neue', sans-serif;
+  --sl-font-serif: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  --sl-font-weight--light: 300;
+  --sl-font-weight--normal: 400;
+  --sl-font-weight--bold: 500;
+
   /*********************************************************************************************************************
   * Colors
   *********************************************************************************************************************/
@@ -16,6 +28,103 @@
   --sl-color-primary-hue: 203;
   --sl-color-primary-saturation: 100%;
   --sl-color-primary-text: white;
+
+  --sl-color-success-hue: 110;
+  --sl-color-success-saturation: 60%;
+  --sl-color-success-text: white;
+
+  --sl-color-info-hue: var(--sl-color-primary-hue);
+  --sl-color-info-saturation: 10%;
+  --sl-color-info-text: white;
+
+  --sl-color-warning-hue: 36;
+  --sl-color-warning-saturation: 90%;
+  --sl-color-warning-text: white;
+
+  --sl-color-danger-hue: 0;
+  --sl-color-danger-saturation: 80%;
+  --sl-color-danger-text: white;
+
+  --sl-color-gray-hue: var(--sl-color-primary-hue);
+  --sl-color-gray-saturation: 10%;
+  --sl-color-gray-text: white;
+
+  /*********************************************************************************************************************
+  * Form controls
+  *********************************************************************************************************************/
+
+  --sl-form-control-background-color--focus: white;
+  --sl-form-control-background-color--hover: white;
+  --sl-form-control-background-color-disabled: var(--sl-color-gray-90);
+  --sl-form-control-background-color: white;
+  --sl-form-control-border-color--disabled: var(--sl-color-gray-80);
+  --sl-form-control-border-color--focus: var(--sl-color-primary-50);
+  --sl-form-control-border-color--hover: var(--sl-color-gray-80);
+  --sl-form-control-border-color: var(--sl-color-gray-80);
+  --sl-form-control-border-radius--large: 4px;
+  --sl-form-control-border-radius--medium: 4px;
+  --sl-form-control-border-radius--small: 4px;
+  --sl-form-control-border-width: 1px;
+  --sl-form-control-color: var(--sl-color-gray-40);
+  --sl-form-control-font-family: var(--sl-font-sans-serif);
+  --sl-form-control-font-size--large: 16px;
+  --sl-form-control-font-size--medium: 14px;
+  --sl-form-control-font-size--small: 12px;
+  --sl-form-control-font-weight: var(--sl-font-weight--normal);
+  --sl-form-control-height--large: 44px;
+  --sl-form-control-height--medium: 38px;
+  --sl-form-control-height--small: 32px;
+  --sl-form-control-padding-x--large: 14px;
+  --sl-form-control-padding-x--medium: 14px;
+  --sl-form-control-padding-x--small: 14px;
+  --sl-form-control-placeholder-color: var(--sl-color-gray-70);
+  --sl-form-control-transition-speed: 150ms;
+
+  --sl-form-control-focus-ring-width: 2px;
+  --sl-form-control-focus-ring-alpha: 33%;
+
+  /*********************************************************************************************************************
+  * Menus
+  *********************************************************************************************************************/
+
+  --sl-menu-background-color: white;
+  --sl-menu-border-color: var(--sl-color-gray-95);
+  --sl-menu-box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  --sl-menu-font-family: var(--sl-font-sans-serif);
+  --sl-menu-font-size: var(--text-size-default);
+  --sl-menu-font-weight: var(--sl-font-weight--normal);
+  --sl-menu-padding-x: 30px;
+  --sl-menu-padding-y: 10px;
+  --sl-menu-transition-speed: 150ms;
+
+  --sl-menu-item-background-color--active: var(--sl-color-primary-95);
+  --sl-menu-item-background-color--disabled: white;
+  --sl-menu-item-background-color: white;
+  --sl-menu-item-color--active: var(--sl-color-primary-50);
+  --sl-menu-item-color--disabled: var(--sl-color-gray-70);
+  --sl-menu-item-color: var(--sl-color-gray-40);
+  --sl-menu-item-transition-speed: 150ms;
+
+  --sl-menu-divider-border-color: var(--sl-color-gray-90);
+
+  /*********************************************************************************************************************
+  * Tooltips
+  *********************************************************************************************************************/
+
+  --sl-tooltip-background-color: var(--sl-color-gray-10);
+  --sl-tooltip-border-radius: 4px;
+  --sl-tooltip-color: white;
+  --sl-tooltip-font-family: var(--sl-form-control-font-family);
+  --sl-tooltip-font-size: var(--sl-form-control-font-size--medium);
+  --sl-tooltip-font-weight: var(--sl-form-control-font-weight);
+  --sl-tooltip-line-height: 1.4;
+  --sl-tooltip-padding-x: 10px;
+  --sl-tooltip-padding-y: 5px;
+
+  /*********************************************************************************************************************
+  * 🐉 Here be color palettes for each theme color. No need to change them...update hues & saturations instead!
+  *********************************************************************************************************************/
+
   --sl-color-primary-05: hsl(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 5%);
   --sl-color-primary-10: hsl(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 10%);
   --sl-color-primary-15: hsl(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 15%);
@@ -36,9 +145,6 @@
   --sl-color-primary-90: hsl(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 90%);
   --sl-color-primary-95: hsl(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 95%);
 
-  --sl-color-success-hue: 110;
-  --sl-color-success-saturation: 60%;
-  --sl-color-success-text: white;
   --sl-color-success-05: hsl(var(--sl-color-success-hue), var(--sl-color-success-saturation), 5%);
   --sl-color-success-10: hsl(var(--sl-color-success-hue), var(--sl-color-success-saturation), 10%);
   --sl-color-success-15: hsl(var(--sl-color-success-hue), var(--sl-color-success-saturation), 15%);
@@ -59,9 +165,6 @@
   --sl-color-success-90: hsl(var(--sl-color-success-hue), var(--sl-color-success-saturation), 90%);
   --sl-color-success-95: hsl(var(--sl-color-success-hue), var(--sl-color-success-saturation), 95%);
 
-  --sl-color-info-hue: var(--sl-color-primary-hue);
-  --sl-color-info-saturation: 10%;
-  --sl-color-info-text: white;
   --sl-color-info-05: hsl(var(--sl-color-info-hue), var(--sl-color-info-saturation), 5%);
   --sl-color-info-10: hsl(var(--sl-color-info-hue), var(--sl-color-info-saturation), 10%);
   --sl-color-info-15: hsl(var(--sl-color-info-hue), var(--sl-color-info-saturation), 15%);
@@ -82,9 +185,6 @@
   --sl-color-info-90: hsl(var(--sl-color-info-hue), var(--sl-color-info-saturation), 90%);
   --sl-color-info-95: hsl(var(--sl-color-info-hue), var(--sl-color-info-saturation), 95%);
 
-  --sl-color-warning-hue: 36;
-  --sl-color-warning-saturation: 90%;
-  --sl-color-warning-text: white;
   --sl-color-warning-05: hsl(var(--sl-color-warning-hue), var(--sl-color-warning-saturation), 5%);
   --sl-color-warning-10: hsl(var(--sl-color-warning-hue), var(--sl-color-warning-saturation), 10%);
   --sl-color-warning-15: hsl(var(--sl-color-warning-hue), var(--sl-color-warning-saturation), 15%);
@@ -105,9 +205,6 @@
   --sl-color-warning-90: hsl(var(--sl-color-warning-hue), var(--sl-color-warning-saturation), 90%);
   --sl-color-warning-95: hsl(var(--sl-color-warning-hue), var(--sl-color-warning-saturation), 95%);
 
-  --sl-color-danger-hue: 0;
-  --sl-color-danger-saturation: 80%;
-  --sl-color-danger-text: white;
   --sl-color-danger-05: hsl(var(--sl-color-danger-hue), var(--sl-color-danger-saturation), 5%);
   --sl-color-danger-10: hsl(var(--sl-color-danger-hue), var(--sl-color-danger-saturation), 10%);
   --sl-color-danger-15: hsl(var(--sl-color-danger-hue), var(--sl-color-danger-saturation), 15%);
@@ -128,9 +225,6 @@
   --sl-color-danger-90: hsl(var(--sl-color-danger-hue), var(--sl-color-danger-saturation), 90%);
   --sl-color-danger-95: hsl(var(--sl-color-danger-hue), var(--sl-color-danger-saturation), 95%);
 
-  --sl-color-gray-hue: var(--sl-color-primary-hue);
-  --sl-color-gray-saturation: 10%;
-  --sl-color-gray-text: white;
   --sl-color-gray-05: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 5%);
   --sl-color-gray-10: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 10%);
   --sl-color-gray-15: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 15%);
@@ -150,71 +244,4 @@
   --sl-color-gray-85: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 85%);
   --sl-color-gray-90: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 90%);
   --sl-color-gray-95: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 95%);
-
-  /*********************************************************************************************************************
-  * Fonts
-  *********************************************************************************************************************/
-
-  --sl-font-sans-serif: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
-    'Helvetica Neue', sans-serif;
-  --sl-font-serif: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-  --sl-font-monospace: Menlo, Monaco, 'Courier New', monospace;
-  --sl-font-weight--light: 300;
-  --sl-font-weight--normal: 400;
-  --sl-font-weight--bold: 500;
-
-  /*********************************************************************************************************************
-  * Form controls
-  *********************************************************************************************************************/
-
-  --sl-form-control-font-family: var(--sl-font-sans-serif);
-  --sl-form-control-font-weight: var(--sl-font-weight--normal);
-  --sl-form-control-font-size--small: 12px;
-  --sl-form-control-font-size--medium: 14px;
-  --sl-form-control-font-size--large: 16px;
-  --sl-form-control-color: var(--sl-color-gray-40);
-  --sl-form-control-placeholder-color: var(--sl-color-gray-70);
-
-  --sl-form-control-height--small: 32px;
-  --sl-form-control-height--medium: 38px;
-  --sl-form-control-height--large: 44px;
-
-  --sl-form-control-border-width: 1px;
-  --sl-form-control-border-color: var(--sl-color-gray-80);
-  --sl-form-control-border-color--hover: var(--sl-color-gray-80);
-  --sl-form-control-border-color--focus: var(--sl-color-primary-50);
-  --sl-form-control-border-color--disabled: var(--sl-color-gray-80);
-
-  --sl-form-control-border-radius--small: 4px;
-  --sl-form-control-border-radius--medium: 4px;
-  --sl-form-control-border-radius--large: 4px;
-
-  --sl-form-control-background-color: white;
-  --sl-form-control-background-color--hover: white;
-  --sl-form-control-background-color--focus: white;
-  --sl-form-control-background-color-disabled: var(--sl-color-gray-90);
-
-  --sl-form-control-padding-x--small: 14px;
-  --sl-form-control-padding-x--medium: 14px;
-  --sl-form-control-padding-x--large: 14px;
-
-  --sl-form-control-transition-speed: 150ms;
-
-  --sl-form-control-focus-ring-width: 2px;
-  --sl-form-control-focus-ring-alpha: 33%;
-
-  /*********************************************************************************************************************
-  * Tooltips
-  *********************************************************************************************************************/
-
-  --sl-tooltip-font-family: var(--sl-form-control-font-family);
-  --sl-tooltip-font-weight: var(--sl-form-control-font-weight);
-  --sl-tooltip-font-size: var(--sl-form-control-font-size--medium);
-  --sl-tooltip-line-height: 1.4;
-  --sl-tooltip-background-color: var(--sl-color-gray-10);
-  --sl-tooltip-border-radius: 4px;
-  --sl-tooltip-color: white;
-
-  --sl-tooltip-padding-y: 5px;
-  --sl-tooltip-padding-x: 10px;
 }
