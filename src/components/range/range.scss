@@ -1,6 +1,11 @@
 @import 'reset';
 
 :host {
+  --range-track-border-radius: 3px;
+  --range-track-background-color: var(--color-gray-90);
+  --range-track-height: 3px;
+  --range-thumb-size: 20px;
+
   display: block;
 }
 

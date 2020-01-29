@@ -1,6 +1,14 @@
 @import 'reset';
 
 :host {
+  --radio-size: 14px;
+  --radio-border-radius: 50%;
+  --radio-border-width: var(--form-control-border-width);
+  --radio-tick-color: white;
+  --radio-transition: var(--form-control-transition-speed) border-color,
+    var(--form-control-transition-speed) background-color, var(--form-control-transition-speed) color,
+    var(--form-control-transition-speed) box-shadow;
+
   display: inline-block;
 }
 

@@ -1,6 +1,30 @@
 @import 'reset';
 
 :host {
+  --switch-height: 16px;
+  --switch-width: calc(var(--switch-height) * 2);
+  --switch-transition: var(--form-control-transition-speed) border-color,
+    var(--form-control-transition-speed) background-color;
+
+  --switch-track-background-color: var(--color-gray-80);
+  --switch-track-background-color--hover: var(--color-gray-85);
+  --switch-track-background-color--focus: var(--color-gray-85);
+
+  --switch-track-border-color: var(--color-gray-80);
+  --switch-track-border-color--hover: var(--color-gray-85);
+  --switch-track-border-color--focus: var(--color-gray-85);
+
+  --switch-track-border-radius: var(--switch-height);
+  --switch-track-border-width: var(--form-control-border-width);
+
+  --switch-thumb-size: 20px;
+  --switch-thumb-background-color: white;
+  --switch-thumb-border-radius: 50%;
+  --switch-thumb-border-width: var(--form-control-border-width);
+  --switch-thumb-transition: var(--form-control-transition-speed) transform ease,
+    var(--form-control-transition-speed) background-color, var(--form-control-transition-speed) border-color,
+    var(--form-control-transition-speed) box-shadow;
+
   display: inline-block;
 }
 

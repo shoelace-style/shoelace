@@ -5,10 +5,12 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 :host {
+  --dropdown-divider-border-color: var(--color-gray-90);
+
   display: block;
 }
 
 .sl-dropdown-divider {
-  border-top: solid 1px var(--menu-divider-border-color);
-  margin: var(--menu-padding-y) 0;
+  border-top: solid 1px var(--dropdown-divider-border-color);
+  margin: var(--dropdown-padding-y) 0;
 }

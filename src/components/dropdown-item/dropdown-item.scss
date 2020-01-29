@@ -5,6 +5,16 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 :host {
+  --dropdown-item-color: var(--color-gray-40);
+  --dropdown-item-color--active: var(--color-primary-50);
+  --dropdown-item-color--disabled: var(--color-gray-70);
+
+  --dropdown-item-background-color: white;
+  --dropdown-item-background-color--active: var(--color-primary-95);
+  --dropdown-item-background-color--disabled: white;
+
+  --dropdown-item-transition-speed: 150ms;
+
   display: block;
 }
 
@@ -12,23 +22,23 @@
   position: relative;
   display: flex;
   align-items: center;
-  background-color: var(--menu-item-background-color);
-  color: var(--menu-item-color);
-  padding: var(--menu-padding-y) var(--menu-padding-x);
-  transition: var(--menu-item-transition-speed) color, var(--menu-item-transition-speed) background-color,
-    var(--menu-item-transition-speed) fill;
+  background-color: var(--dropdown-item-background-color);
+  color: var(--dropdown-item-color);
+  padding: var(--dropdown-padding-y) var(--dropdown-padding-x);
+  transition: var(--dropdown-item-transition-speed) color, var(--dropdown-item-transition-speed) background-color,
+    var(--dropdown-item-transition-speed) fill;
   user-select: none;
   white-space: nowrap;
   cursor: pointer;
 
   &.sl-dropdown-item--active:not(.sl-dropdown-item--disabled) {
-    background-color: var(--menu-item-background-color--active);
-    color: var(--menu-item-color--active);
+    background-color: var(--dropdown-item-background-color--active);
+    color: var(--dropdown-item-color--active);
   }
 
   &.sl-dropdown-item--disabled {
-    background-color: var(--menu-item-background-color--disabled);
-    color: var(--menu-item-color--disabled);
+    background-color: var(--dropdown-item-background-color--disabled);
+    color: var(--dropdown-item-color--disabled);
     cursor: not-allowed;
   }
 

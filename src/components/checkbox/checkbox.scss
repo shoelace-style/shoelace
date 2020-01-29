@@ -1,6 +1,14 @@
 @import 'reset';
 
 :host {
+  --checkbox-size: 14px;
+  --checkbox-border-radius: 2px;
+  --checkbox-border-width: var(--form-control-border-width);
+  --checkbox-tick-color: white;
+  --checkbox-transition: var(--form-control-transition-speed) border-color,
+    var(--form-control-transition-speed) background-color, var(--form-control-transition-speed) color,
+    var(--form-control-transition-speed) box-shadow;
+
   display: inline-block;
 }
 

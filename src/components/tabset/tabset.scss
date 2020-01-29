@@ -2,6 +2,21 @@
 @import 'mixins';
 
 :host {
+  --tab-font-family: var(--font-sans-serif);
+  --tab-font-weight: var(--font-weight--normal);
+  --tab-font-size: var(--form-control-font-size--medium);
+  --tab-background-color: white;
+  --tab-border-color: var(--color-gray-85);
+  --tab-color: var(--color-gray-30);
+  --tab-padding-x: 20px;
+  --tab-padding-y: 16px;
+  --tab-transition-speed: 150ms;
+
+  --tab-nav-border-width: 2px;
+
+  --tab-panel-padding-x: var(--tab-padding-x);
+  --tab-panel-padding-y: var(--tab-padding-y);
+
   display: block;
 }
 
