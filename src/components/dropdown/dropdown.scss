@@ -5,11 +5,11 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 :host {
-  --dropdown-font-family: var(--font-sans-serif);
-  --dropdown-font-weight: var(--font-weight--normal);
+  --dropdown-font-family: var(--sl-font-sans-serif);
+  --dropdown-font-weight: var(--sl-font-weight--normal);
   --dropdown-font-size: var(--text-size-default);
 
-  --dropdown-border-color: var(--color-gray-95);
+  --dropdown-border-color: var(--sl-color-gray-95);
   --dropdown-background-color: white;
   --dropdown-box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
 

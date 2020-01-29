@@ -21,11 +21,11 @@
     var(--tab-transition-speed) box-shadow, var(--tab-transition-speed) color;
 
   &.sl-tab--active {
-    color: var(--color-primary-50);
+    color: var(--sl-color-primary-50);
   }
 
   &:hover:not(.sl-tab--disabled) {
-    color: var(--color-primary-50);
+    color: var(--sl-color-primary-50);
   }
 
   &:focus {
@@ -33,8 +33,13 @@
   }
 
   &:focus:not(.sl-tab--disabled) {
-    box-shadow: inset 0 0 0 var(--form-control-focus-ring-width)
-      hsla(var(--color-primary-hue), var(--color-primary-saturation), 50%, var(--form-control-focus-ring-alpha));
+    box-shadow: inset 0 0 0 var(--sl-form-control-focus-ring-width)
+      hsla(
+        var(--sl-color-primary-hue),
+        var(--sl-color-primary-saturation),
+        50%,
+        var(--sl-form-control-focus-ring-alpha)
+      );
   }
 
   &.sl-tab--disabled {

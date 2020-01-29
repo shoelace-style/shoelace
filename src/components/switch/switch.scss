@@ -3,27 +3,27 @@
 :host {
   --switch-height: 16px;
   --switch-width: calc(var(--switch-height) * 2);
-  --switch-transition: var(--form-control-transition-speed) border-color,
-    var(--form-control-transition-speed) background-color;
+  --switch-transition: var(--sl-form-control-transition-speed) border-color,
+    var(--sl-form-control-transition-speed) background-color;
 
-  --switch-track-background-color: var(--color-gray-80);
-  --switch-track-background-color--hover: var(--color-gray-85);
-  --switch-track-background-color--focus: var(--color-gray-85);
+  --switch-track-background-color: var(--sl-color-gray-80);
+  --switch-track-background-color--hover: var(--sl-color-gray-85);
+  --switch-track-background-color--focus: var(--sl-color-gray-85);
 
-  --switch-track-border-color: var(--color-gray-80);
-  --switch-track-border-color--hover: var(--color-gray-85);
-  --switch-track-border-color--focus: var(--color-gray-85);
+  --switch-track-border-color: var(--sl-color-gray-80);
+  --switch-track-border-color--hover: var(--sl-color-gray-85);
+  --switch-track-border-color--focus: var(--sl-color-gray-85);
 
   --switch-track-border-radius: var(--switch-height);
-  --switch-track-border-width: var(--form-control-border-width);
+  --switch-track-border-width: var(--sl-form-control-border-width);
 
   --switch-thumb-size: 20px;
   --switch-thumb-background-color: white;
   --switch-thumb-border-radius: 50%;
-  --switch-thumb-border-width: var(--form-control-border-width);
-  --switch-thumb-transition: var(--form-control-transition-speed) transform ease,
-    var(--form-control-transition-speed) background-color, var(--form-control-transition-speed) border-color,
-    var(--form-control-transition-speed) box-shadow;
+  --switch-thumb-border-width: var(--sl-form-control-border-width);
+  --switch-thumb-transition: var(--sl-form-control-transition-speed) transform ease,
+    var(--sl-form-control-transition-speed) background-color, var(--sl-form-control-transition-speed) border-color,
+    var(--sl-form-control-transition-speed) box-shadow;
 
   display: inline-block;
 }
@@ -31,10 +31,10 @@
 .sl-switch {
   display: flex;
   align-items: center;
-  font-family: var(--form-control-font-family);
-  font-size: var(--form-control-font-size--medium);
-  font-weight: var(--form-control-font-weight);
-  color: var(--form-control-color);
+  font-family: var(--sl-form-control-font-family);
+  font-size: var(--sl-form-control-font-size--medium);
+  font-weight: var(--sl-form-control-font-weight);
+  color: var(--sl-form-control-color);
   vertical-align: middle;
   cursor: pointer;
 }
@@ -56,7 +56,7 @@
     height: var(--switch-thumb-size);
     background-color: var(--switch-thumb-background-color);
     border-radius: var(--switch-thumb-border-radius);
-    border: solid var(--switch-thumb-border-width) var(--form-control-border-color);
+    border: solid var(--switch-thumb-border-width) var(--sl-form-control-border-color);
     transform: translateX(
       calc(
         var(--switch-width) / -2 + var(--switch-thumb-size) / 2 - (var(--switch-thumb-size) - var(--switch-height)) / 2
@@ -87,19 +87,24 @@
   border-color: var(--switch-track-border-color--focus);
 
   .sl-switch__thumb {
-    border-color: var(--color-primary-60);
-    box-shadow: 0 0 0 var(--form-control-focus-ring-width)
-      hsla(var(--color-primary-hue), var(--color-primary-saturation), 50%, var(--form-control-focus-ring-alpha));
+    border-color: var(--sl-color-primary-60);
+    box-shadow: 0 0 0 var(--sl-form-control-focus-ring-width)
+      hsla(
+        var(--sl-color-primary-hue),
+        var(--sl-color-primary-saturation),
+        50%,
+        var(--sl-form-control-focus-ring-alpha)
+      );
   }
 }
 
 // Checked
 .sl-switch--checked .sl-switch__control {
-  border-color: var(--color-primary-50);
-  background-color: var(--color-primary-50);
+  border-color: var(--sl-color-primary-50);
+  background-color: var(--sl-color-primary-50);
 
   .sl-switch__thumb {
-    border-color: var(--color-primary-50);
+    border-color: var(--sl-color-primary-50);
     transform: translateX(
       calc(
         var(--switch-width) / 2 - var(--switch-thumb-size) / 2 + (var(--switch-thumb-size) - var(--switch-height)) / 2
@@ -110,23 +115,28 @@
 
 // Checked + hover
 .sl-switch.sl-switch--checked:not(.sl-switch--disabled) .sl-switch__control:hover {
-  border-color: var(--color-primary-60);
-  background-color: var(--color-primary-60);
+  border-color: var(--sl-color-primary-60);
+  background-color: var(--sl-color-primary-60);
 
   .sl-switch__thumb {
-    border-color: var(--color-primary-60);
+    border-color: var(--sl-color-primary-60);
   }
 }
 
 // Checked + focus
 .sl-switch.sl-switch--checked:not(.sl-switch--disabled).sl-switch--focused .sl-switch__control {
-  border-color: var(--color-primary-60);
-  background-color: var(--color-primary-60);
+  border-color: var(--sl-color-primary-60);
+  background-color: var(--sl-color-primary-60);
 
   .sl-switch__thumb {
-    border-color: var(--color-primary-60);
-    box-shadow: 0 0 0 var(--form-control-focus-ring-width)
-      hsla(var(--color-primary-hue), var(--color-primary-saturation), 50%, var(--form-control-focus-ring-alpha));
+    border-color: var(--sl-color-primary-60);
+    box-shadow: 0 0 0 var(--sl-form-control-focus-ring-width)
+      hsla(
+        var(--sl-color-primary-hue),
+        var(--sl-color-primary-saturation),
+        50%,
+        var(--sl-form-control-focus-ring-alpha)
+      );
   }
 }
 

@@ -5,12 +5,12 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 :host {
-  --dropdown-item-color: var(--color-gray-40);
-  --dropdown-item-color--active: var(--color-primary-50);
-  --dropdown-item-color--disabled: var(--color-gray-70);
+  --dropdown-item-color: var(--sl-color-gray-40);
+  --dropdown-item-color--active: var(--sl-color-primary-50);
+  --dropdown-item-color--disabled: var(--sl-color-gray-70);
 
   --dropdown-item-background-color: white;
-  --dropdown-item-background-color--active: var(--color-primary-95);
+  --dropdown-item-background-color--active: var(--sl-color-primary-95);
   --dropdown-item-background-color--disabled: white;
 
   --dropdown-item-transition-speed: 150ms;

@@ -41,11 +41,11 @@ For example, `--sl-form-control-font-family` is a base variable that is used by 
 }
 ```
 
-Alternatively, you can override the button's `--font-family` variable to adjust the font only for buttons.
+Alternatively, you can override the button's `--sl-font-family` variable to adjust the font only for buttons.
 
 ```css
 sl-button {
-  --font-family: '', sans-serif;
+  --sl-font-family: '', sans-serif;
   --color: white;
 }
 ```

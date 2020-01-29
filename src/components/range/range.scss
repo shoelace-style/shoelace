@@ -2,7 +2,7 @@
 
 :host {
   --range-track-border-radius: 3px;
-  --range-track-background-color: var(--color-gray-90);
+  --range-track-background-color: var(--sl-color-gray-90);
   --range-track-height: 3px;
   --range-thumb-size: 20px;
 
@@ -15,9 +15,9 @@
   .sl-range__control {
     -webkit-appearance: none;
     width: 100%;
-    height: var(--form-control-height--medium);
+    height: var(--sl-form-control-height--medium);
     background: transparent;
-    line-height: var(--form-control-height--medium);
+    line-height: var(--sl-form-control-height--medium);
     vertical-align: middle;
 
     // Webkit
@@ -34,27 +34,32 @@
       width: var(--range-thumb-size);
       height: var(--range-thumb-size);
       border-radius: 50%;
-      background-color: var(--color-primary-50);
+      background-color: var(--sl-color-primary-50);
       -webkit-appearance: none;
       margin-top: calc(var(--range-thumb-size) / -2 + var(--range-track-height) / 2);
-      transition: var(--form-control-transition-speed) border-color,
-        var(--form-control-transition-speed) background-color, var(--form-control-transition-speed) color,
-        var(--form-control-transition-speed) box-shadow, var(--form-control-transition-speed) transform;
+      transition: var(--sl-form-control-transition-speed) border-color,
+        var(--sl-form-control-transition-speed) background-color, var(--sl-form-control-transition-speed) color,
+        var(--sl-form-control-transition-speed) box-shadow, var(--sl-form-control-transition-speed) transform;
       cursor: pointer;
     }
 
     &:not(:disabled)::-webkit-slider-thumb:hover {
-      background-color: var(--color-primary-60);
+      background-color: var(--sl-color-primary-60);
     }
 
     &:not(:disabled):focus::-webkit-slider-thumb {
-      background-color: var(--color-primary-60);
-      box-shadow: 0 0 0 var(--form-control-focus-ring-width)
-        hsla(var(--color-primary-hue), var(--color-primary-saturation), 50%, var(--form-control-focus-ring-alpha));
+      background-color: var(--sl-color-primary-60);
+      box-shadow: 0 0 0 var(--sl-form-control-focus-ring-width)
+        hsla(
+          var(--sl-color-primary-hue),
+          var(--sl-color-primary-saturation),
+          50%,
+          var(--sl-form-control-focus-ring-alpha)
+        );
     }
 
     &:not(:disabled)::-webkit-slider-thumb:active {
-      background-color: var(--color-primary-40);
+      background-color: var(--sl-color-primary-40);
       transform: scale(1.1);
       cursor: grabbing;
     }
@@ -77,25 +82,30 @@
       height: var(--range-thumb-size);
       width: var(--range-thumb-size);
       border-radius: 50%;
-      background-color: var(--color-primary-50);
-      transition: var(--form-control-transition-speed) border-color,
-        var(--form-control-transition-speed) background-color, var(--form-control-transition-speed) color,
-        var(--form-control-transition-speed) box-shadow, var(--form-control-transition-speed) transform;
+      background-color: var(--sl-color-primary-50);
+      transition: var(--sl-form-control-transition-speed) border-color,
+        var(--sl-form-control-transition-speed) background-color, var(--sl-form-control-transition-speed) color,
+        var(--sl-form-control-transition-speed) box-shadow, var(--sl-form-control-transition-speed) transform;
       cursor: pointer;
     }
 
     &:not(:disabled)::-moz-range-thumb:hover {
-      background-color: var(--color-primary-60);
+      background-color: var(--sl-color-primary-60);
     }
 
     &:not(:disabled):focus::-moz-range-thumb {
-      background-color: var(--color-primary-60);
-      box-shadow: 0 0 0 var(--form-control-focus-ring-width)
-        hsla(var(--color-primary-hue), var(--color-primary-saturation), 50%, var(--form-control-focus-ring-alpha));
+      background-color: var(--sl-color-primary-60);
+      box-shadow: 0 0 0 var(--sl-form-control-focus-ring-width)
+        hsla(
+          var(--sl-color-primary-hue),
+          var(--sl-color-primary-saturation),
+          50%,
+          var(--sl-form-control-focus-ring-alpha)
+        );
     }
 
     &:not(:disabled)::-moz-range-thumb:active {
-      background-color: var(--color-primary-40);
+      background-color: var(--sl-color-primary-40);
       transform: scale(1.1);
       cursor: grabbing;
     }
@@ -124,16 +134,16 @@
   position: absolute;
   top: calc(-1 * var(--range-thumb-size) - 10px);
   left: 1px;
-  border-radius: var(--tooltip-border-radius);
-  background-color: var(--tooltip-background-color);
-  font-family: var(--tooltip-font-family);
-  font-size: var(--tooltip-font-size);
-  font-weight: var(--tooltip-font-weight);
-  line-height: var(--tooltip-line-height);
-  color: var(--tooltip-color);
+  border-radius: var(--sl-tooltip-border-radius);
+  background-color: var(--sl-tooltip-background-color);
+  font-family: var(--sl-tooltip-font-family);
+  font-size: var(--sl-tooltip-font-size);
+  font-weight: var(--sl-tooltip-font-weight);
+  line-height: var(--sl-tooltip-line-height);
+  color: var(--sl-tooltip-color);
   opacity: 0;
-  padding: var(--tooltip-padding-y) var(--tooltip-padding-x);
-  transition: var(--form-control-transition-speed) opacity;
+  padding: var(--sl-tooltip-padding-y) var(--sl-tooltip-padding-x);
+  transition: var(--sl-form-control-transition-speed) opacity;
   pointer-events: none;
 
   &::after {
@@ -141,7 +151,7 @@
     position: absolute;
     width: 0;
     height: 0;
-    border-top: 6px solid var(--tooltip-background-color);
+    border-top: 6px solid var(--sl-tooltip-background-color);
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
     top: 100%;

@@ -1,51 +1,51 @@
 @mixin solid-button($theme-color) {
-  background-color: var(--color-#{$theme-color}-50);
-  border-color: var(--color-#{$theme-color}-50);
-  color: var(--color-#{$theme-color}-text);
+  background-color: var(--sl-color-#{$theme-color}-50);
+  border-color: var(--sl-color-#{$theme-color}-50);
+  color: var(--sl-color-#{$theme-color}-text);
 
   &:hover:not(:disabled) {
-    background-color: var(--color-#{$theme-color}-55);
-    border-color: var(--color-#{$theme-color}-55);
-    color: var(--color-#{$theme-color}-text);
+    background-color: var(--sl-color-#{$theme-color}-55);
+    border-color: var(--sl-color-#{$theme-color}-55);
+    color: var(--sl-color-#{$theme-color}-text);
   }
 
   &:focus:not(:disabled) {
-    background-color: var(--color-#{$theme-color}-55);
-    border-color: var(--color-#{$theme-color}-55);
-    color: var(--color-#{$theme-color}-text);
+    background-color: var(--sl-color-#{$theme-color}-55);
+    border-color: var(--sl-color-#{$theme-color}-55);
+    color: var(--sl-color-#{$theme-color}-text);
     box-shadow: 0 0 0 var(--focus-ring-width)
-      hsla(var(--color-#{$theme-color}-hue), var(--color-#{$theme-color}-saturation), 50%, var(--focus-ring-alpha));
+      hsla(var(--sl-color-#{$theme-color}-hue), var(--sl-color-#{$theme-color}-saturation), 50%, var(--focus-ring-alpha));
   }
 
   &:active:not(:disabled) {
-    background-color: var(--color-#{$theme-color}-45);
-    border-color: var(--color-#{$theme-color}-45);
-    color: var(--color-#{$theme-color}-text);
+    background-color: var(--sl-color-#{$theme-color}-45);
+    border-color: var(--sl-color-#{$theme-color}-45);
+    color: var(--sl-color-#{$theme-color}-text);
   }
 }
 
 @mixin outline-button($theme-color) {
-  background-color: var(--color-#{$theme-color}-95);
-  border-color: var(--color-#{$theme-color}-80);
-  color: var(--color-#{$theme-color}-50);
+  background-color: var(--sl-color-#{$theme-color}-95);
+  border-color: var(--sl-color-#{$theme-color}-80);
+  color: var(--sl-color-#{$theme-color}-50);
 
   &:hover:not(:disabled) {
-    background-color: var(--color-#{$theme-color}-50);
-    border-color: var(--color-#{$theme-color}-50);
-    color: var(--color-#{$theme-color}-text);
+    background-color: var(--sl-color-#{$theme-color}-50);
+    border-color: var(--sl-color-#{$theme-color}-50);
+    color: var(--sl-color-#{$theme-color}-text);
   }
 
   &:focus:not(:disabled) {
-    background-color: var(--color-#{$theme-color}-50);
-    border-color: var(--color-#{$theme-color}-50);
-    color: var(--color-#{$theme-color}-text);
+    background-color: var(--sl-color-#{$theme-color}-50);
+    border-color: var(--sl-color-#{$theme-color}-50);
+    color: var(--sl-color-#{$theme-color}-text);
     box-shadow: 0 0 0 var(--focus-ring-width)
-      hsla(var(--color-#{$theme-color}-hue), var(--color-#{$theme-color}-saturation), 50%, var(--focus-ring-alpha));
+      hsla(var(--sl-color-#{$theme-color}-hue), var(--sl-color-#{$theme-color}-saturation), 50%, var(--focus-ring-alpha));
   }
 
   &:active:not(:disabled) {
-    background-color: var(--color-#{$theme-color}-45);
-    border-color: var(--color-#{$theme-color}-45);
-    color: var(--color-#{$theme-color}-text);
+    background-color: var(--sl-color-#{$theme-color}-45);
+    border-color: var(--sl-color-#{$theme-color}-45);
+    color: var(--sl-color-#{$theme-color}-text);
   }
 }
