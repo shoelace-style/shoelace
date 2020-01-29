@@ -60,7 +60,6 @@
 
     &:not(:disabled)::-webkit-slider-thumb:active {
       background-color: var(--sl-color-primary-40);
-      transform: scale(1.1);
       cursor: grabbing;
     }
 
@@ -106,7 +105,6 @@
 
     &:not(:disabled)::-moz-range-thumb:active {
       background-color: var(--sl-color-primary-40);
-      transform: scale(1.1);
       cursor: grabbing;
     }
 
