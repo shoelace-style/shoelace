@@ -5,6 +5,38 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 :host {
+  --background-color--disabled: var(--sl-form-control-background-color--disabled);
+  --background-color--focus: var(--sl-form-control-background-color--focus);
+  --background-color--hover: var(--sl-form-control-background-color--hover);
+  --background-color: var(--sl-form-control-background-color);
+  --border-color--disabled: var(--sl-form-control-border-color--disabled);
+  --border-color--focus: var(--sl-form-control-border-color--focus);
+  --border-color--hover: var(--sl-form-control-border-color--hover);
+  --border-color: var(--sl-form-control-border-color);
+  --border-radius--large: var(--sl-form-control-border-radius--large);
+  --border-radius--medium: var(--sl-form-control-border-radius--medium);
+  --border-radius--small: var(--sl-form-control-border-radius--small);
+  --border-width: var(--sl-form-control-border-width);
+  --color--disabled: var(--sl-form-control-color--disabled);
+  --color--focus: var(--sl-form-control-color--focus);
+  --color--hover: var(--sl-form-control-color--hover);
+  --color: var(--sl-form-control-color);
+  --focus-ring-hue: var(--sl-color-primary-hue);
+  --focus-ring-saturation: var(--sl-color-primary-saturation);
+  --font-family: var(--sl-form-control-font-family);
+  --font-size--large: var(--sl-form-control-font-size--large);
+  --font-size--medium: var(--sl-form-control-font-size--medium);
+  --font-size--small: var(--sl-form-control-font-size--small);
+  --height--large: var(--sl-form-control-height--large);
+  --height--medium: var(--sl-form-control-height--medium);
+  --height--small: var(--sl-form-control-height--small);
+  --padding-x--large: var(--sl-form-control-padding-x--large);
+  --padding-x--medium: var(--sl-form-control-padding-x--medium);
+  --padding-x--small: var(--sl-form-control-padding-x--small);
+  --placeholder-color--disabled: var(--sl-form-control-placeholder-color--disabled);
+  --placeholder-color: var(--sl-form-control-placeholder-color);
+  --transition-speed: var(--sl-form-control-transition-speed);
+
   display: block;
 }
 
@@ -13,14 +45,13 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  font-family: var(--sl-form-control-font-family);
-  font-weight: var(--sl-form-control-font-weight);
-  color: var(--sl-form-control-color);
-  background-color: var(--sl-form-control-background-color);
-  border: solid var(--sl-form-control-border-width) var(--sl-form-control-border-color);
+  font-family: var(--font-family);
+  font-weight: var(--font-weight);
+  color: var(--color);
+  background-color: var(--background-color);
+  border: solid var(--border-width) var(--border-color);
   vertical-align: middle;
-  transition: var(--sl-form-control-transition-speed) color, var(--sl-form-control-transition-speed) border,
-    var(--sl-form-control-transition-speed) box-shadow;
+  transition: var(--transition-speed) color, var(--transition-speed) border, var(--transition-speed) box-shadow;
 
   .sl-input__control {
     flex: 1 1 auto;
@@ -41,7 +72,7 @@
     }
 
     &::placeholder {
-      color: var(--sl-form-control-placeholder-color);
+      color: var(--placeholder-color);
       user-select: none;
     }
 
@@ -51,39 +82,40 @@
   }
 
   &:hover:not(.sl-input--disabled) {
-    background-color: var(--sl-form-control-background-color--hover);
-    border-color: var(--sl-form-control-border-color--hover);
+    background-color: var(--background-color--hover);
+    border-color: var(--border-color--hover);
+    color: var(--color--hover);
   }
 
   &.sl-input--focused:not(.sl-input--disabled) {
-    background-color: var(--sl-form-control-background-color--focus);
-    border-color: var(--sl-form-control-border-color--focus);
-    box-shadow: 0 0 0 var(--sl-form-control-focus-ring-width)
-      hsla(
-        var(--sl-color-primary-hue),
-        var(--sl-color-primary-saturation),
-        50%,
-        var(--sl-form-control-focus-ring-alpha)
-      );
+    background-color: var(--background-color--focus);
+    border-color: var(--border-color--focus);
+    box-shadow: hsla(var(--focus-ring-hue), var(--focus-ring-saturation), 50%, var(--focus-ring-alpha));
+    color: var(--color--focus);
   }
 
   &.sl-input--disabled {
-    background-color: var(--sl-form-control-background-color--disabled);
-    border-color: var(--sl-form-control-border-color--disabled);
+    background-color: var(--background-color--disabled);
+    border-color: var(--border-color--disabled);
+    color: var(--color--disabled);
     opacity: 0.5;
 
     .sl-input__control {
       cursor: not-allowed;
+
+      &::placeholder {
+        color: var(--placeholder-color--disabled);
+      }
     }
   }
 
   .sl-input__prefix:not(:empty) {
-    color: var(--sl-form-control-placeholder-color);
+    color: var(--placeholder-color);
     margin-right: 0.5em;
   }
 
   .sl-input__suffix:not(:empty) {
-    color: var(--sl-form-control-placeholder-color);
+    color: var(--placeholder-color);
     margin-left: 0.5em;
   }
 }
@@ -93,38 +125,38 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 .sl-input--small {
-  border-radius: var(--sl-form-control-border-radius--small);
-  font-size: var(--sl-form-control-font-size--small);
-  padding: 0 var(--sl-form-control-padding-x--small);
-  height: var(--sl-form-control-height--small);
+  border-radius: var(--border-radius--small);
+  font-size: var(--font-size--small);
+  padding: 0 var(--padding-x--small);
+  height: var(--height--small);
 
   .sl-input__control {
-    height: calc(var(--sl-form-control-height--small) - var(--sl-form-control-border-width) * 2);
-    line-height: calc(var(--sl-form-control-height--small) - var(--sl-form-control-border-width) * 2);
+    height: calc(var(--height--small) - var(--border-width) * 2);
+    line-height: calc(var(--height--small) - var(--border-width) * 2);
   }
 }
 
 .sl-input--medium {
-  border-radius: var(--sl-form-control-border-radius--medium);
-  font-size: var(--sl-form-control-font-size--medium);
-  height: var(--sl-form-control-height--medium);
-  padding: 0 var(--sl-form-control-padding-x--medium);
+  border-radius: var(--border-radius--medium);
+  font-size: var(--font-size--medium);
+  height: var(--height--medium);
+  padding: 0 var(--padding-x--medium);
 
   .sl-input__control {
-    height: calc(var(--sl-form-control-height--medium) - var(--sl-form-control-border-width) * 2);
-    line-height: calc(var(--sl-form-control-height--medium) - var(--sl-form-control-border-width) * 2);
+    height: calc(var(--height--medium) - var(--border-width) * 2);
+    line-height: calc(var(--height--medium) - var(--border-width) * 2);
   }
 }
 
 .sl-input--large {
-  border-radius: var(--sl-form-control-border-radius--large);
-  font-size: var(--sl-form-control-font-size--large);
-  height: var(--sl-form-control-height--large);
-  padding: 0 var(--sl-form-control-padding-x--large);
+  border-radius: var(--border-radius--large);
+  font-size: var(--font-size--large);
+  height: var(--height--large);
+  padding: 0 var(--padding-x--large);
 
   .sl-input__control {
-    height: calc(var(--sl-form-control-height--large) - var(--sl-form-control-border-width) * 2);
-    line-height: calc(var(--sl-form-control-height--large) - var(--sl-form-control-border-width) * 2);
+    height: calc(var(--height--large) - var(--border-width) * 2);
+    line-height: calc(var(--height--large) - var(--border-width) * 2);
   }
 }
 
@@ -136,7 +168,7 @@
   display: flex;
   align-items: center;
   font-size: inherit;
-  color: var(--sl-form-control-placeholder-color);
+  color: var(--placeholder-color);
   border: none;
   background: none;
   padding: 0;
@@ -146,7 +178,7 @@
   svg {
     width: 14px;
     height: 14px;
-    transition: var(--sl-form-control-transition-speed) filter;
+    transition: var(--transition-speed) filter;
   }
 
   &:hover,
