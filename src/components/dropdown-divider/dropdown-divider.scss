@@ -5,13 +5,13 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 :host {
-  /* TODO: use menu vars */
-  --dropdown-divider-border-color: var(--sl-color-gray-90);
+  --border-color: var(--sl-menu-divider-border-color);
+  --padding-y: var(--sl-menu-padding-y);
 
   display: block;
 }
 
 .sl-dropdown-divider {
-  border-top: solid 1px var(--dropdown-divider-border-color);
-  margin: var(--dropdown-padding-y) 0;
+  border-top: solid 1px var(--border-color);
+  margin: var(--padding-y) 0;
 }

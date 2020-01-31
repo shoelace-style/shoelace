@@ -5,19 +5,15 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 :host {
-  /* TODO: use menu vars */
-  --dropdown-font-family: var(--sl-font-sans-serif);
-  --dropdown-font-weight: var(--sl-font-weight--normal);
-  --dropdown-font-size: var(--text-size-default);
-
-  --dropdown-border-color: var(--sl-color-gray-95);
-  --dropdown-background-color: white;
-  --dropdown-box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-
-  --dropdown-transition-speed: 150ms;
-
-  --dropdown-padding-x: 30px;
-  --dropdown-padding-y: 10px;
+  --background-color: var(--sl-menu-background-color);
+  --border-color: var(--sl-menu-border-color);
+  --box-shadow: var(--sl-menu-box-shadow);
+  --font-family: var(--sl-menu-font-family);
+  --font-size: var(--sl-menu-font-size);
+  --font-weight: var(--sl-menu-font-weight);
+  --padding-x: var(--sl-menu-padding-x);
+  --padding-y: var(--sl-menu-padding-y);
+  --transition-speed: var(--sl-menu-transition-speed);
 
   display: inline-block;
 }
@@ -35,18 +31,19 @@
   position: absolute;
   z-index: 9999;
   max-height: 50vh;
-  font-family: var(--dropdown-font-family);
-  font-weight: var(--dropdown-font-weight);
-  font-size: var(--dropdown-font-size);
-  background-color: var(--dropdown-background-color);
-  border: solid 1px var(--dropdown-border-color);
+  font-family: var(--font-family);
+  font-weight: var(--font-weight);
+  font-size: var(--font-size);
+  color: var(--color);
+  background-color: var(--background-color);
+  border: solid 1px var(--border-color);
   border-radius: 4px;
-  box-shadow: var(--dropdown-box-shadow);
-  padding-top: var(--dropdown-padding-y);
-  padding-bottom: var(--dropdown-padding-y);
+  box-shadow: var(--box-shadow);
+  padding-top: var(--padding-y);
+  padding-bottom: var(--padding-y);
   opacity: 0;
   overflow-y: auto;
-  transition: var(--dropdown-transition-speed) opacity;
+  transition: var(--transition-speed) opacity;
 }
 
 .sl-dropdown--open .sl-dropdown__menu {

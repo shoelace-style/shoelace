@@ -5,16 +5,13 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 :host {
-  /* TODO: use menu vars */
-  --dropdown-item-color: var(--sl-color-gray-40);
-  --dropdown-item-color--active: var(--sl-color-primary-50);
-  --dropdown-item-color--disabled: var(--sl-color-gray-70);
-
-  --dropdown-item-background-color: white;
-  --dropdown-item-background-color--active: var(--sl-color-primary-95);
-  --dropdown-item-background-color--disabled: white;
-
-  --dropdown-item-transition-speed: 150ms;
+  --background-color--active: var(--sl-menu-item-background-color--active);
+  --background-color--disabled: var(--sl-menu-item-background-color--disabled);
+  --background-color: var(--sl-menu-item-background-color);
+  --color--active: var(--sl-menu-item-color--active);
+  --color--disabled: var(--sl-menu-item-color--disabled);
+  --color: var(--sl-menu-item-color);
+  --transition-speed: 150ms;
 
   display: block;
 }
@@ -23,23 +20,22 @@
   position: relative;
   display: flex;
   align-items: center;
-  background-color: var(--dropdown-item-background-color);
-  color: var(--dropdown-item-color);
-  padding: var(--dropdown-padding-y) var(--dropdown-padding-x);
-  transition: var(--dropdown-item-transition-speed) color, var(--dropdown-item-transition-speed) background-color,
-    var(--dropdown-item-transition-speed) fill;
+  background-color: var(--background-color);
+  color: var(--color);
+  padding: var(--padding-y) var(--padding-x);
+  transition: var(--transition-speed) color, var(--transition-speed) background-color, var(--transition-speed) fill;
   user-select: none;
   white-space: nowrap;
   cursor: pointer;
 
   &.sl-dropdown-item--active:not(.sl-dropdown-item--disabled) {
-    background-color: var(--dropdown-item-background-color--active);
-    color: var(--dropdown-item-color--active);
+    background-color: var(--background-color--active);
+    color: var(--color--active);
   }
 
   &.sl-dropdown-item--disabled {
-    background-color: var(--dropdown-item-background-color--disabled);
-    color: var(--dropdown-item-color--disabled);
+    background-color: var(--background-color--disabled);
+    color: var(--color--disabled);
     cursor: not-allowed;
   }
 
