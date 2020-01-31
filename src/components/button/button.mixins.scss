@@ -1,51 +1,56 @@
-@mixin solid-button($theme-color) {
-  background-color: var(--sl-color-#{$theme-color}-50);
-  border-color: var(--sl-color-#{$theme-color}-50);
-  color: var(--sl-color-#{$theme-color}-text);
+@mixin solid-button($theme) {
+  background-color: var(--#{$theme}-background-color);
+  border-color: var(--#{$theme}-border-color);
+  color: var(--#{$theme}-color);
 
   &:hover:not(:disabled) {
-    background-color: var(--sl-color-#{$theme-color}-55);
-    border-color: var(--sl-color-#{$theme-color}-55);
-    color: var(--sl-color-#{$theme-color}-text);
+    background-color: var(--#{$theme}-background-color--hover);
+    border-color: var(--#{$theme}-border-color--hover);
+    color: var(--#{$theme}-color--hover);
   }
 
   &:focus:not(:disabled) {
-    background-color: var(--sl-color-#{$theme-color}-55);
-    border-color: var(--sl-color-#{$theme-color}-55);
-    color: var(--sl-color-#{$theme-color}-text);
+    background-color: var(--#{$theme}-background-color--focus);
+    border-color: var(--#{$theme}-border-color--focus);
+    color: var(--#{$theme}-color--focus);
     box-shadow: 0 0 0 var(--focus-ring-width)
-      hsla(var(--sl-color-#{$theme-color}-hue), var(--sl-color-#{$theme-color}-saturation), 50%, var(--focus-ring-alpha));
+      hsla(var(--#{$theme}-focus-ring-hue), var(--#{$theme}-focus-ring-saturation), 50%, var(--focus-ring-alpha));
   }
 
   &:active:not(:disabled) {
-    background-color: var(--sl-color-#{$theme-color}-45);
-    border-color: var(--sl-color-#{$theme-color}-45);
-    color: var(--sl-color-#{$theme-color}-text);
+    background-color: var(--#{$theme}-background-color--active);
+    border-color: var(--#{$theme}-border-color--active);
+    color: var(--#{$theme}-color--active);
   }
 }
 
-@mixin outline-button($theme-color) {
-  background-color: var(--sl-color-#{$theme-color}-95);
-  border-color: var(--sl-color-#{$theme-color}-80);
-  color: var(--sl-color-#{$theme-color}-50);
+@mixin outline-button($theme) {
+  background-color: var(--#{$theme}-outline-background-color);
+  border-color: var(--#{$theme}-outline-border-color);
+  color: var(--#{$theme}-outline-color);
 
   &:hover:not(:disabled) {
-    background-color: var(--sl-color-#{$theme-color}-50);
-    border-color: var(--sl-color-#{$theme-color}-50);
-    color: var(--sl-color-#{$theme-color}-text);
+    background-color: var(--#{$theme}-outline-background-color--hover);
+    border-color: var(--#{$theme}-outline-border-color--hover);
+    color: var(--#{$theme}-outline-color--hover);
   }
 
   &:focus:not(:disabled) {
-    background-color: var(--sl-color-#{$theme-color}-50);
-    border-color: var(--sl-color-#{$theme-color}-50);
-    color: var(--sl-color-#{$theme-color}-text);
+    background-color: var(--#{$theme}-outline-background-color--focus);
+    border-color: var(--#{$theme}-outline-border-color--focus);
+    color: var(--#{$theme}-outline-color--focus);
     box-shadow: 0 0 0 var(--focus-ring-width)
-      hsla(var(--sl-color-#{$theme-color}-hue), var(--sl-color-#{$theme-color}-saturation), 50%, var(--focus-ring-alpha));
+      hsla(
+        var(--#{$theme}-outline-focus-ring-hue),
+        var(--#{$theme}-outline-focus-ring-saturation),
+        50%,
+        var(--focus-ring-alpha)
+      );
   }
 
   &:active:not(:disabled) {
-    background-color: var(--sl-color-#{$theme-color}-45);
-    border-color: var(--sl-color-#{$theme-color}-45);
-    color: var(--sl-color-#{$theme-color}-text);
+    background-color: var(--#{$theme}-outline-background-color--active);
+    border-color: var(--#{$theme}-outline-border-color--active);
+    color: var(--#{$theme}-outline-color--active);
   }
 }
