@@ -11,8 +11,8 @@
   --border-radius--medium: var(--sl-form-control-border-radius--medium);
   --border-radius--small: var(--sl-form-control-border-radius--small);
   --border-width: var(--sl-form-control-border-width);
-  --focus-ring-alpha: var(--sl-form-control-focus-ring-alpha);
-  --focus-ring-width: var(--sl-form-control-focus-ring-width);
+  --focus-ring-alpha: var(--sl-focus-ring-alpha);
+  --focus-ring-width: var(--sl-focus-ring-width);
   --font-family: var(--sl-form-control-font-sans-serif);
   --font-size--large: var(--sl-form-control-font-size--large);
   --font-size--medium: var(--sl-form-control-font-size--medium);
@@ -41,8 +41,8 @@
   --default-color--focus: var(--sl-color-primary-50);
   --default-color--hover: var(--sl-color-primary-50);
   --default-color: var(--sl-color-gray-50);
-  --default-focus-ring-hue: var(--sl-color-primary-hue);
-  --default-focus-ring-saturation: var(--sl-color-primary-saturation);
+  --default-focus-ring-box-shadow: 0 0 0 var(--sl-focus-ring-width)
+    hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha));
 
   // Primary buttons
   --primary-background-color--active: var(--sl-color-primary-45);
@@ -57,8 +57,8 @@
   --primary-color--focus: var(--sl-color-primary-text);
   --primary-color--hover: var(--sl-color-primary-text);
   --primary-color: var(--sl-color-primary-text);
-  --primary-focus-ring-hue: var(--sl-color-primary-hue);
-  --primary-focus-ring-saturation: var(--sl-color-primary-saturation);
+  --primary-focus-ring-box-shadow: 0 0 0 var(--sl-focus-ring-width)
+    hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha));
 
   // Success buttons
   --success-background-color--active: var(--sl-color-success-45);
@@ -73,8 +73,8 @@
   --success-color--focus: var(--sl-color-success-text);
   --success-color--hover: var(--sl-color-success-text);
   --success-color: var(--sl-color-success-text);
-  --success-focus-ring-hue: var(--sl-color-success-hue);
-  --success-focus-ring-saturation: var(--sl-color-success-saturation);
+  --success-focus-ring-box-shadow: 0 0 0 var(--sl-focus-ring-width)
+    hsla(var(--sl-color-success-hue), var(--sl-color-success-saturation), 50%, var(--sl-focus-ring-alpha));
 
   // Info buttons
   --info-background-color--active: var(--sl-color-info-45);
@@ -89,8 +89,8 @@
   --info-color--focus: var(--sl-color-info-text);
   --info-color--hover: var(--sl-color-info-text);
   --info-color: var(--sl-color-info-text);
-  --info-focus-ring-hue: var(--sl-color-info-hue);
-  --info-focus-ring-saturation: var(--sl-color-info-saturation);
+  --info-focus-ring-box-shadow: 0 0 0 var(--sl-focus-ring-width)
+    hsla(var(--sl-color-info-hue), var(--sl-color-info-saturation), 50%, var(--sl-focus-ring-alpha));
 
   // Warning buttons
   --warning-background-color--active: var(--sl-color-warning-45);
@@ -105,8 +105,8 @@
   --warning-color--focus: var(--sl-color-warning-text);
   --warning-color--hover: var(--sl-color-warning-text);
   --warning-color: var(--sl-color-warning-text);
-  --warning-focus-ring-hue: var(--sl-color-warning-hue);
-  --warning-focus-ring-saturation: var(--sl-color-warning-saturation);
+  --warning-focus-ring-box-shadow: 0 0 0 var(--sl-focus-ring-width)
+    hsla(var(--sl-color-warning-hue), var(--sl-color-warning-saturation), 50%, var(--sl-focus-ring-alpha));
 
   // Danger buttons
   --danger-background-color--active: var(--sl-color-danger-45);
@@ -121,8 +121,8 @@
   --danger-color--focus: var(--sl-color-danger-text);
   --danger-color--hover: var(--sl-color-danger-text);
   --danger-color: var(--sl-color-danger-text);
-  --danger-focus-ring-hue: var(--sl-color-danger-hue);
-  --danger-focus-ring-saturation: var(--sl-color-danger-saturation);
+  --danger-focus-ring-box-shadow: 0 0 0 var(--sl-focus-ring-width)
+    hsla(var(--sl-color-danger-hue), var(--sl-color-danger-saturation), 50%, var(--sl-focus-ring-alpha));
 
   // Default outline buttons
   --default-outline-background-color--active: var(--sl-color-white);
@@ -137,8 +137,8 @@
   --default-outline-color--focus: var(--sl-color-primary-50);
   --default-outline-color--hover: var(--sl-color-primary-50);
   --default-outline-color: var(--sl-color-gray-50);
-  --default-outline-focus-ring-hue: var(--sl-color-primary-hue);
-  --default-outline-focus-ring-saturation: var(--sl-color-primary-saturation);
+  --default-focus-ring-box-shadow: 0 0 0 var(--sl-focus-ring-width)
+    hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha));
 
   // Primary outline buttons
   --primary-outline-background-color--active: var(--sl-color-primary-45);
@@ -153,8 +153,8 @@
   --primary-outline-color--focus: var(--sl-color-primary-text);
   --primary-outline-color--hover: var(--sl-color-primary-text);
   --primary-outline-color: var(--sl-color-primary-50);
-  --primary-outline-focus-ring-hue: var(--sl-color-primary-hue);
-  --primary-outline-focus-ring-saturation: var(--sl-color-primary-saturation);
+  --primary-focus-ring-box-shadow: 0 0 0 var(--sl-focus-ring-width)
+    hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha));
 
   // Success outline buttons
   --success-outline-background-color--active: var(--sl-color-success-45);
@@ -169,8 +169,8 @@
   --success-outline-color--focus: var(--sl-color-success-text);
   --success-outline-color--hover: var(--sl-color-success-text);
   --success-outline-color: var(--sl-color-success-50);
-  --success-outline-focus-ring-hue: var(--sl-color-success-hue);
-  --success-outline-focus-ring-saturation: var(--sl-color-success-saturation);
+  --success-focus-ring-box-shadow: 0 0 0 var(--sl-focus-ring-width)
+    hsla(var(--sl-color-success-hue), var(--sl-color-success-saturation), 50%, var(--sl-focus-ring-alpha));
 
   // Info outline buttons
   --info-outline-background-color--active: var(--sl-color-info-45);
@@ -185,8 +185,8 @@
   --info-outline-color--focus: var(--sl-color-info-text);
   --info-outline-color--hover: var(--sl-color-info-text);
   --info-outline-color: var(--sl-color-info-50);
-  --info-outline-focus-ring-hue: var(--sl-color-info-hue);
-  --info-outline-focus-ring-saturation: var(--sl-color-info-saturation);
+  --info-focus-ring-box-shadow: 0 0 0 var(--sl-focus-ring-width)
+    hsla(var(--sl-color-info-hue), var(--sl-color-info-saturation), 50%, var(--sl-focus-ring-alpha));
 
   // Warning outline buttons
   --warning-outline-background-color--active: var(--sl-color-warning-45);
@@ -201,8 +201,8 @@
   --warning-outline-color--focus: var(--sl-color-warning-text);
   --warning-outline-color--hover: var(--sl-color-warning-text);
   --warning-outline-color: var(--sl-color-warning-50);
-  --warning-outline-focus-ring-hue: var(--sl-color-warning-hue);
-  --warning-outline-focus-ring-saturation: var(--sl-color-warning-saturation);
+  --warning-focus-ring-box-shadow: 0 0 0 var(--sl-focus-ring-width)
+    hsla(var(--sl-color-warning-hue), var(--sl-color-warning-saturation), 50%, var(--sl-focus-ring-alpha));
 
   // Danger outline buttons
   --danger-outline-background-color--active: var(--sl-color-danger-45);
@@ -217,16 +217,16 @@
   --danger-outline-color--focus: var(--sl-color-danger-text);
   --danger-outline-color--hover: var(--sl-color-danger-text);
   --danger-outline-color: var(--sl-color-danger-50);
-  --danger-outline-focus-ring-hue: var(--sl-color-danger-hue);
-  --danger-outline-focus-ring-saturation: var(--sl-color-danger-saturation);
+  --danger-focus-ring-box-shadow: 0 0 0 var(--sl-focus-ring-width)
+    hsla(var(--sl-color-danger-hue), var(--sl-color-danger-saturation), 50%, var(--sl-focus-ring-alpha));
 
   // Text buttons
   --text-color--active: var(--sl-color-primary-40);
   --text-color--focus: var(--sl-color-primary-60);
   --text-color--hover: var(--sl-color-primary-60);
   --text-color: var(--sl-color-primary-50);
-  --text-focus-ring-hue: var(--sl-color-primary-hue);
-  --text-focus-ring-saturation: var(--sl-color-primary-saturation);
+  --text-focus-ring-box-shadow: 0 0 0 var(--sl-focus-ring-width)
+    hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha));
 
   display: inline-block;
 }
@@ -352,8 +352,7 @@
     background-color: transparent;
     border-color: transparent;
     color: var(--text-color--focus);
-    box-shadow: 0 0 0 var(--focus-ring-width)
-      hsla(var(--text-focus-ring-hue), var(--text-focus-ring-saturation), 50%, var(--focus-ring-alpha));
+    box-shadow: var(--text-focus-ring-box-shadow);
   }
 
   &:active:not(:disabled) {

@@ -21,8 +21,7 @@
   --color--focus: var(--sl-form-control-color--focus);
   --color--hover: var(--sl-form-control-color--hover);
   --color: var(--sl-form-control-color);
-  --focus-ring-hue: var(--sl-color-primary-hue);
-  --focus-ring-saturation: var(--sl-color-primary-saturation);
+  --focus-ring-box-shadow: var(--sl-focus-ring-box-shadow);
   --font-family: var(--sl-form-control-font-family);
   --font-size--large: var(--sl-form-control-font-size--large);
   --font-size--medium: var(--sl-form-control-font-size--medium);
@@ -95,7 +94,7 @@
   &.sl-textarea--focused:not(.sl-textarea--disabled) {
     background-color: var(--background-color--focus);
     border-color: var(--border-color--focus);
-    box-shadow: hsla(var(--focus-ring-hue), var(--focus-ring-saturation), 50%, var(--focus-ring-alpha));
+    box-shadow: var(--focus-ring-box-shadow);
     color: var(--color--focus);
   }
 

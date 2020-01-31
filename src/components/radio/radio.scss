@@ -1,13 +1,28 @@
 @import 'reset';
 
 :host {
-  --radio-size: 14px;
-  --radio-border-radius: 50%;
-  --radio-border-width: var(--sl-form-control-border-width);
-  --radio-tick-color: white;
-  --radio-transition: var(--sl-form-control-transition-speed) border-color,
-    var(--sl-form-control-transition-speed) background-color, var(--sl-form-control-transition-speed) color,
-    var(--sl-form-control-transition-speed) box-shadow;
+  --background-color--checked--focus: var(--sl-color-primary-60);
+  --background-color--checked--hover: var(--sl-color-primary-60);
+  --background-color--checked: var(--sl-color-primary-50);
+  --background-color--focus: var(--sl-form-control-background-color--focus);
+  --background-color--hover: var(--sl-form-control-background-color--hover);
+  --background-color: var(--sl-form-control-background-color);
+  --border-color--checked--focus: var(--sl-color-primary-60);
+  --border-color--checked--hover: var(--sl-color-primary-60);
+  --border-color--checked: var(--sl-color-primary-50);
+  --border-color--focus: var(--sl-form-control-border-color--focus);
+  --border-color--hover: var(--sl-form-control-border-color--hover);
+  --border-color: var(--sl-form-control-border-color);
+  --border-radius: 50%;
+  --border-width: var(--sl-form-control-border-width);
+  --focus-ring-box-shadow: var(--sl-focus-ring-box-shadow);
+  --font-family: var(--sl-form-control-font-sans-serif);
+  --font-size: var(--sl-form-control-font-size--medium);
+  --font-weight: var(--sl-font-weight--normal);
+  --label-color: var(--sl-form-control-color);
+  --size: 14px;
+  --tick-color: var(--sl-color-white);
+  --transition-speed: var(--sl-form-control-transition-speed);
 
   display: inline-block;
 }
@@ -15,10 +30,10 @@
 .sl-radio {
   display: flex;
   align-items: center;
-  font-family: var(--sl-form-control-font-family);
-  font-size: var(--sl-form-control-font-size);
-  font-weight: var(--sl-form-control-font-weight);
-  color: var(--sl-form-control-color);
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
+  color: var(--label-color);
   vertical-align: middle;
   cursor: pointer;
 }
@@ -28,13 +43,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: var(--radio-size);
-  height: var(--radio-size);
-  border: solid var(--radio-border-width) var(--sl-form-control-border-color);
-  border-radius: var(--radio-border-radius);
-  background-color: var(--sl-form-control-background-color);
-  color: var(--radio-tick-color);
-  transition: var(--radio-transition);
+  width: var(--size);
+  height: var(--size);
+  border: solid var(--border-width) var(--border-color);
+  border-radius: var(--border-radius);
+  background-color: var(--background-color);
+  color: var(--tick-color);
+  transition: var(--transition-speed) border-color, var(--transition-speed) background-color,
+    var(--transition-speed) color, var(--transition-speed) box-shadow;
 
   input[type='radio'] {
     position: absolute;
@@ -46,43 +62,41 @@
   }
 
   svg {
-    width: var(--radio-size);
-    height: var(--radio-size);
+    width: var(--size);
+    height: var(--size);
   }
 }
 
 // Hover
 .sl-radio:not(.sl-radio--checked):not(.sl-radio--disabled) .sl-radio__control:hover {
-  border-color: var(--sl-color-primary-60);
-  background-color: var(--sl-form-control-background-color--hover);
+  border-color: var(--border-color--hover);
+  background-color: var(--background-color--hover);
 }
 
 // Focus
 .sl-radio.sl-radio--focused:not(.sl-radio--checked):not(.sl-radio--disabled) .sl-radio__control {
-  border-color: var(--sl-color-primary-60);
-  background-color: var(--sl-form-control-background-color--focus);
-  box-shadow: 0 0 0 var(--sl-form-control-focus-ring-width)
-    hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-form-control-focus-ring-alpha));
+  border-color: var(--border-color--focus);
+  background-color: var(--background-color--focus);
+  box-shadow: var(--focus-ring-box-shadow);
 }
 
 // Checked
 .sl-radio--checked .sl-radio__control {
-  border-color: var(--sl-color-primary-50);
-  background-color: var(--sl-color-primary-50);
+  border-color: var(--border-color--checked);
+  background-color: var(--background-color--checked);
 }
 
 // Checked + hover
 .sl-radio.sl-radio--checked:not(.sl-radio--disabled) .sl-radio__control:hover {
-  border-color: var(--sl-color-primary-60);
-  background-color: var(--sl-color-primary-60);
+  border-color: var(--border-color--checked--hover);
+  background-color: var(--background-color--checked--hover);
 }
 
 // Checked + focus
 .sl-radio.sl-radio--checked:not(.sl-radio--disabled).sl-radio--focused .sl-radio__control {
-  border-color: var(--sl-color-primary-60);
-  background-color: var(--sl-color-primary-60);
-  box-shadow: 0 0 0 var(--sl-form-control-focus-ring-width)
-    hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-form-control-focus-ring-alpha));
+  border-color: var(--border-color--checked--focus);
+  background-color: var(--border-color--checked--focus);
+  box-shadow: var(--focus-ring-box-shadow);
 }
 
 // Disabled

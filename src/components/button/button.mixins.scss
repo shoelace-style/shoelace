@@ -13,8 +13,7 @@
     background-color: var(--#{$theme}-background-color--focus);
     border-color: var(--#{$theme}-border-color--focus);
     color: var(--#{$theme}-color--focus);
-    box-shadow: 0 0 0 var(--focus-ring-width)
-      hsla(var(--#{$theme}-focus-ring-hue), var(--#{$theme}-focus-ring-saturation), 50%, var(--focus-ring-alpha));
+    box-shadow: var(--#{$theme}-focus-ring-box-shadow);
   }
 
   &:active:not(:disabled) {
@@ -39,13 +38,7 @@
     background-color: var(--#{$theme}-outline-background-color--focus);
     border-color: var(--#{$theme}-outline-border-color--focus);
     color: var(--#{$theme}-outline-color--focus);
-    box-shadow: 0 0 0 var(--focus-ring-width)
-      hsla(
-        var(--#{$theme}-outline-focus-ring-hue),
-        var(--#{$theme}-outline-focus-ring-saturation),
-        50%,
-        var(--focus-ring-alpha)
-      );
+    box-shadow: var(--#{$theme}-focus-ring-box-shadow);
   }
 
   &:active:not(:disabled) {

@@ -56,9 +56,13 @@
   * Form controls
   *********************************************************************************************************************/
 
+  --sl-focus-ring-alpha: 0.33;
+  --sl-focus-ring-box-shadow: 0 0 0 var(--sl-focus-ring-width)
+    hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha));
+  --sl-focus-ring-width: 2px;
+  --sl-form-control-background-color--disabled: var(--sl-color-gray-95);
   --sl-form-control-background-color--focus: var(--sl-color-white);
   --sl-form-control-background-color--hover: var(--sl-color-white);
-  --sl-form-control-background-color--disabled: var(--sl-color-gray-95);
   --sl-form-control-background-color: var(--sl-color-white);
   --sl-form-control-border-color--disabled: var(--sl-color-gray-80);
   --sl-form-control-border-color--focus: var(--sl-color-primary-50);
@@ -68,10 +72,10 @@
   --sl-form-control-border-radius--medium: 4px;
   --sl-form-control-border-radius--small: 4px;
   --sl-form-control-border-width: 1px;
-  --sl-form-control-color: var(--sl-color-gray-40);
-  --sl-form-control-color--hover: var(--sl-color-gray-40);
-  --sl-form-control-color--focus: var(--sl-color-gray-40);
   --sl-form-control-color--disabled: red;
+  --sl-form-control-color--focus: var(--sl-color-gray-40);
+  --sl-form-control-color--hover: var(--sl-color-gray-40);
+  --sl-form-control-color: var(--sl-color-gray-40);
   --sl-form-control-font-family: var(--sl-font-sans-serif);
   --sl-form-control-font-size--large: 16px;
   --sl-form-control-font-size--medium: 14px;
@@ -83,13 +87,10 @@
   --sl-form-control-padding-x--large: 14px;
   --sl-form-control-padding-x--medium: 14px;
   --sl-form-control-padding-x--small: 14px;
-  --sl-form-control-placeholder-color: var(--sl-color-gray-70);
-  --sl-form-control-placeholder-color--hover: var(--sl-color-gray-70);
   --sl-form-control-placeholder-color--disabled: var(--sl-color-gray-60);
+  --sl-form-control-placeholder-color--hover: var(--sl-color-gray-70);
+  --sl-form-control-placeholder-color: var(--sl-color-gray-70);
   --sl-form-control-transition-speed: 150ms;
-
-  --sl-form-control-focus-ring-width: 2px;
-  --sl-form-control-focus-ring-alpha: 33%;
 
   /*********************************************************************************************************************
   * Menus

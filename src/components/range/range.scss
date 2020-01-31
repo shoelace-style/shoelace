@@ -49,13 +49,8 @@
 
     &:not(:disabled):focus::-webkit-slider-thumb {
       background-color: var(--sl-color-primary-60);
-      box-shadow: 0 0 0 var(--sl-form-control-focus-ring-width)
-        hsla(
-          var(--sl-color-primary-hue),
-          var(--sl-color-primary-saturation),
-          50%,
-          var(--sl-form-control-focus-ring-alpha)
-        );
+      box-shadow: 0 0 0 var(--sl-focus-ring-width)
+        hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha));
     }
 
     &:not(:disabled)::-webkit-slider-thumb:active {
@@ -94,13 +89,8 @@
 
     &:not(:disabled):focus::-moz-range-thumb {
       background-color: var(--sl-color-primary-60);
-      box-shadow: 0 0 0 var(--sl-form-control-focus-ring-width)
-        hsla(
-          var(--sl-color-primary-hue),
-          var(--sl-color-primary-saturation),
-          50%,
-          var(--sl-form-control-focus-ring-alpha)
-        );
+      box-shadow: 0 0 0 var(--sl-focus-ring-width)
+        hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha));
     }
 
     &:not(:disabled)::-moz-range-thumb:active {

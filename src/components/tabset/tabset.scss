@@ -35,7 +35,7 @@
 
   // Hide the focus ring if the user is interacting with a mouse
   &.sl-tabset--using-mouse ::slotted(sl-tab) {
-    --sl-form-control-focus-ring-width: 0;
+    --sl-focus-ring-width: 0;
   }
 }
 
