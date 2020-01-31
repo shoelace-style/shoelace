@@ -1,6 +1,8 @@
 @import 'reset';
 
 :host {
+  --border-color: transparent;
+  --border-width: 1px;
   --padding-x: 20px;
   --padding-y: 20px;
 
@@ -8,5 +10,6 @@
 }
 
 .sl-tab-panel {
+  border: solid var(--border-width) var(--border-color);
   padding: var(--padding-y) var(--padding-x);
 }

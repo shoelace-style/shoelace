@@ -2,10 +2,13 @@
 @import 'mixins';
 
 :host {
-  --border-color: var(--sl-color-gray-85);
-  --border-width: 2px;
+  --border-color: transparent;
+  --border-radius: 0;
+  --border-width: 1px;
   --indicator-border-color: var(--sl-color-primary-50);
   --indicator-transition-speed: var(--sl-form-control-transition-speed);
+  --nav-border-color: var(--sl-color-gray-85);
+  --nav-border-width: 2px;
   --transition-speed: var(--sl-form-control-transition-speed);
 
   display: block;
@@ -13,6 +16,8 @@
 
 .sl-tabset {
   display: flex;
+  border: solid var(--border-width) var(--border-color);
+  border-radius: var(--border-radius);
 
   .sl-tabset__tabs {
     display: flex;
@@ -48,12 +53,12 @@
     flex: 1 1 auto;
     position: relative;
     flex-direction: row;
-    border-bottom: solid var(--border-width) var(--border-color);
+    border-bottom: solid var(--nav-border-width) var(--nav-border-color);
   }
 
   .sl-tabset__active-tab-indicator {
-    bottom: calc(-1 * var(--border-width));
-    border-bottom: solid var(--border-width) var(--indicator-border-color);
+    bottom: calc(-1 * var(--nav-border-width));
+    border-bottom: solid var(--nav-border-width) var(--indicator-border-color);
   }
 
   .sl-tabset__body {
@@ -79,12 +84,12 @@
     flex: 1 1 auto;
     position: relative;
     flex-direction: row;
-    border-top: solid var(--border-width) var(--border-color);
+    border-top: solid var(--nav-border-width) var(--nav-border-color);
   }
 
   .sl-tabset__active-tab-indicator {
-    top: calc(-1 * var(--border-width));
-    border-top: solid var(--border-width) var(--indicator-border-color);
+    top: calc(-1 * var(--nav-border-width));
+    border-top: solid var(--nav-border-width) var(--indicator-border-color);
   }
 
   .sl-tabset__body {
@@ -106,12 +111,12 @@
   .sl-tabset__tabs {
     flex: 0 0 auto;
     flex-direction: column;
-    border-right: solid var(--border-width) var(--border-color);
+    border-right: solid var(--nav-border-width) var(--nav-border-color);
   }
 
   .sl-tabset__active-tab-indicator {
-    right: calc(-1 * var(--border-width));
-    border-right: solid var(--border-width) var(--indicator-border-color);
+    right: calc(-1 * var(--nav-border-width));
+    border-right: solid var(--nav-border-width) var(--indicator-border-color);
   }
 
   .sl-tabset__body {
@@ -134,12 +139,12 @@
   .sl-tabset__tabs {
     flex: 0 0 auto;
     flex-direction: column;
-    border-left: solid var(--border-width) var(--border-color);
+    border-left: solid var(--nav-border-width) var(--nav-border-color);
   }
 
   .sl-tabset__active-tab-indicator {
-    left: calc(-1 * var(--border-width));
-    border-left: solid var(--border-width) var(--indicator-border-color);
+    left: calc(-1 * var(--nav-border-width));
+    border-left: solid var(--nav-border-width) var(--indicator-border-color);
   }
 
   .sl-tabset__body {
