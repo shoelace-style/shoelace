@@ -1,29 +1,44 @@
 @import 'reset';
 
 :host {
-  --switch-height: 16px;
-  --switch-width: calc(var(--switch-height) * 2);
-  --switch-transition: var(--sl-form-control-transition-speed) border-color,
-    var(--sl-form-control-transition-speed) background-color;
-
-  --switch-track-background-color: var(--sl-color-gray-80);
-  --switch-track-background-color--hover: var(--sl-color-gray-85);
-  --switch-track-background-color--focus: var(--sl-color-gray-85);
-
-  --switch-track-border-color: var(--sl-color-gray-80);
-  --switch-track-border-color--hover: var(--sl-color-gray-85);
-  --switch-track-border-color--focus: var(--sl-color-gray-85);
-
-  --switch-track-border-radius: var(--switch-height);
-  --switch-track-border-width: var(--sl-form-control-border-width);
-
-  --switch-thumb-size: 20px;
-  --switch-thumb-background-color: white;
-  --switch-thumb-border-radius: 50%;
-  --switch-thumb-border-width: var(--sl-form-control-border-width);
-  --switch-thumb-transition: var(--sl-form-control-transition-speed) transform ease,
-    var(--sl-form-control-transition-speed) background-color, var(--sl-form-control-transition-speed) border-color,
-    var(--sl-form-control-transition-speed) box-shadow;
+  --color: var(--form-control-color);
+  --focus-ring-box-shadow: var(--sl-focus-ring-box-shadow);
+  --font-family: var(--sl-form-control-font-family);
+  --font-size: var(--sl-form-control-font-size--medium);
+  --font-weight: var(--sl-form-control-font-weight);
+  --height: var(--sl-form-control-checkbox-size);
+  --thumb-background-color--checked--focus: var(--sl-color-white);
+  --thumb-background-color--checked--hover: var(--sl-color-white);
+  --thumb-background-color--checked: var(--sl-color-white);
+  --thumb-background-color--focus: var(--sl-color-white);
+  --thumb-background-color--hover: var(--sl-color-white);
+  --thumb-background-color: var(--sl-color-white);
+  --thumb-border-color--checked--focus: var(--sl-color-primary-50);
+  --thumb-border-color--checked--hover: var(--sl-color-primary-50);
+  --thumb-border-color--checked: var(--sl-color-primary-50);
+  --thumb-border-color--focus: var(--sl-form-control-border-color);
+  --thumb-border-color--hover: var(--sl-form-control-border-color);
+  --thumb-border-color: var(--sl-form-control-border-color);
+  --thumb-border-radius: 50%;
+  --thumb-border-width: var(--sl-form-control-border-width);
+  --thumb-size: calc(var(--height) + 4px);
+  --thumb-transition-speed: var(--sl-form-control-transition-speed);
+  --track-background-color--checked--focus: var(--sl-color-primary-60);
+  --track-background-color--checked--hover: var(--sl-color-primary-60);
+  --track-background-color--checked: var(--sl-color-primary-50);
+  --track-background-color--focus: var(--sl-color-gray-85);
+  --track-background-color--hover: var(--sl-color-gray-85);
+  --track-background-color: var(--sl-color-gray-80);
+  --track-border-color--checked--focus: var(--sl-color-primary-60);
+  --track-border-color--checked--hover: var(--sl-color-primary-60);
+  --track-border-color--checked: var(--sl-color-primary-50);
+  --track-border-color--focus: var(--sl-color-gray-85);
+  --track-border-color--hover: var(--sl-color-gray-85);
+  --track-border-color: var(--sl-color-gray-80);
+  --track-border-radius: var(--height);
+  --track-border-width: var(--sl-form-control-border-width);
+  --transition-speed: var(--form-control-transition-speed);
+  --width: calc(var(--height) * 2);
 
   display: inline-block;
 }
@@ -31,10 +46,10 @@
 .sl-switch {
   display: flex;
   align-items: center;
-  font-family: var(--sl-form-control-font-family);
-  font-size: var(--sl-form-control-font-size--medium);
-  font-weight: var(--sl-form-control-font-weight);
-  color: var(--sl-form-control-color);
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
+  color: var(--color);
   vertical-align: middle;
   cursor: pointer;
 }
@@ -44,25 +59,22 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: var(--switch-width);
-  height: var(--switch-height);
-  background-color: var(--switch-track-background-color);
-  border: solid var(--switch-track-border-width) var(--switch-track-border-color);
-  border-radius: var(--switch-track-border-radius);
-  transition: var(--switch-transition);
+  width: var(--width);
+  height: var(--height);
+  background-color: var(--track-background-color);
+  border: solid var(--track-border-width) var(--track-border-color);
+  border-radius: var(--track-border-radius);
+  transition: var(--transition-speed) border-color, var(--transition-speed) background-color;
 
   .sl-switch__thumb {
-    width: var(--switch-thumb-size);
-    height: var(--switch-thumb-size);
-    background-color: var(--switch-thumb-background-color);
-    border-radius: var(--switch-thumb-border-radius);
-    border: solid var(--switch-thumb-border-width) var(--sl-form-control-border-color);
-    transform: translateX(
-      calc(
-        var(--switch-width) / -2 + var(--switch-thumb-size) / 2 - (var(--switch-thumb-size) - var(--switch-height)) / 2
-      )
-    );
-    transition: var(--switch-thumb-transition);
+    width: var(--thumb-size);
+    height: var(--thumb-size);
+    background-color: var(--thumb-background-color);
+    border-radius: var(--thumb-border-radius);
+    border: solid var(--thumb-border-width) var(--thumb-border-color);
+    transform: translateX(calc(var(--width) / -2 + var(--thumb-size) / 2 - (var(--thumb-size) - var(--height)) / 2));
+    transition: var(--thumb-transition-speed) transform ease, var(--thumb-transition-speed) background-color,
+      var(--thumb-transition-speed) border-color, var(--thumb-transition-speed) box-shadow;
   }
 
   input[type='checkbox'] {
@@ -77,56 +89,59 @@
 
 // Hover
 .sl-switch:not(.sl-switch--checked):not(.sl-switch--disabled) .sl-switch__control:hover {
-  background-color: var(--switch-track-background-color--hover);
-  border-color: var(--switch-track-border-color--hover);
+  background-color: var(--track-background-color--hover);
+  border-color: var(--track-border-color--hover);
+
+  .sl-switch__thumb {
+    background-color: var(--thumb-background-color--hover);
+    border-color: var(--thumb-border-color--hover);
+  }
 }
 
 // Focus
 .sl-switch.sl-switch--focused:not(.sl-switch--checked):not(.sl-switch--disabled) .sl-switch__control {
-  background-color: var(--switch-track-background-color--focus);
-  border-color: var(--switch-track-border-color--focus);
+  background-color: var(--track-background-color--focus);
+  border-color: var(--track-border-color--focus);
 
   .sl-switch__thumb {
-    border-color: var(--sl-color-primary-60);
-    box-shadow: 0 0 0 var(--sl-focus-ring-width)
-      hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha));
+    background-color: var(--thumb-background-color--focus);
+    border-color: var(--thumb-border-color--focus);
+    box-shadow: var(--focus-ring-box-shadow);
   }
 }
 
 // Checked
 .sl-switch--checked .sl-switch__control {
-  border-color: var(--sl-color-primary-50);
-  background-color: var(--sl-color-primary-50);
+  background-color: var(--track-background-color--checked);
+  border-color: var(--track-border-color--checked);
 
   .sl-switch__thumb {
-    border-color: var(--sl-color-primary-50);
-    transform: translateX(
-      calc(
-        var(--switch-width) / 2 - var(--switch-thumb-size) / 2 + (var(--switch-thumb-size) - var(--switch-height)) / 2
-      )
-    );
+    background-color: var(--thumb-background-color--checked);
+    border-color: var(--thumb-border-color--checked);
+    transform: translateX(calc(var(--width) / 2 - var(--thumb-size) / 2 + (var(--thumb-size) - var(--height)) / 2));
   }
 }
 
 // Checked + hover
 .sl-switch.sl-switch--checked:not(.sl-switch--disabled) .sl-switch__control:hover {
-  border-color: var(--sl-color-primary-60);
-  background-color: var(--sl-color-primary-60);
+  background-color: var(--track-background-color--checked--hover);
+  border-color: var(--track-border-color--checked--hover);
 
   .sl-switch__thumb {
-    border-color: var(--sl-color-primary-60);
+    background-color: var(--thumb-background-color--checked--hover);
+    border-color: var(--thumb-border-color--checked--hover);
   }
 }
 
 // Checked + focus
 .sl-switch.sl-switch--checked:not(.sl-switch--disabled).sl-switch--focused .sl-switch__control {
-  border-color: var(--sl-color-primary-60);
-  background-color: var(--sl-color-primary-60);
+  background-color: var(--track-background-color--checked--focus);
+  border-color: var(--track-border-color--checked--focus);
 
   .sl-switch__thumb {
-    border-color: var(--sl-color-primary-60);
-    box-shadow: 0 0 0 var(--sl-focus-ring-width)
-      hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha));
+    background-color: var(--thumb-background-color--checked--focus);
+    border-color: var(--thumb-border-color--checked--focus);
+    box-shadow: var(--focus-ring-box-shadow);
   }
 }
 
