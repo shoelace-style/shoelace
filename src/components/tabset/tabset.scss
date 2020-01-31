@@ -2,20 +2,11 @@
 @import 'mixins';
 
 :host {
-  --tab-font-family: var(--sl-font-sans-serif);
-  --tab-font-weight: var(--sl-font-weight--normal);
-  --tab-font-size: var(--sl-form-control-font-size--medium);
-  --tab-background-color: white;
-  --tab-border-color: var(--sl-color-gray-85);
-  --tab-color: var(--sl-color-gray-30);
-  --tab-padding-x: 20px;
-  --tab-padding-y: 16px;
-  --tab-transition-speed: 150ms;
-
-  --tab-nav-border-width: 2px;
-
-  --tab-panel-padding-x: var(--tab-padding-x);
-  --tab-panel-padding-y: var(--tab-padding-y);
+  --border-color: var(--sl-color-gray-85);
+  --border-width: 2px;
+  --indicator-border-color: var(--sl-color-primary-50);
+  --indicator-transition-speed: var(--sl-form-control-transition-speed);
+  --transition-speed: var(--sl-form-control-transition-speed);
 
   display: block;
 }
@@ -30,12 +21,12 @@
 
   .sl-tabset__active-tab-indicator {
     position: absolute;
-    transition: 200ms transform ease, 200ms width ease;
+    transition: var(--indicator-transition-speed) transform ease, var(--indicator-transition-speed) width ease;
   }
 
   // Hide the focus ring if the user is interacting with a mouse
   &.sl-tabset--using-mouse ::slotted(sl-tab) {
-    --sl-focus-ring-width: 0;
+    --focus-ring-box-shadow: none;
   }
 }
 
@@ -57,12 +48,12 @@
     flex: 1 1 auto;
     position: relative;
     flex-direction: row;
-    border-bottom: solid var(--tab-nav-border-width) var(--tab-border-color);
+    border-bottom: solid var(--border-width) var(--border-color);
   }
 
   .sl-tabset__active-tab-indicator {
-    bottom: calc(-1 * var(--tab-nav-border-width));
-    border-bottom: solid var(--tab-nav-border-width) var(--sl-color-primary-50);
+    bottom: calc(-1 * var(--border-width));
+    border-bottom: solid var(--border-width) var(--indicator-border-color);
   }
 
   .sl-tabset__body {
@@ -88,12 +79,12 @@
     flex: 1 1 auto;
     position: relative;
     flex-direction: row;
-    border-top: solid var(--tab-nav-border-width) var(--tab-border-color);
+    border-top: solid var(--border-width) var(--border-color);
   }
 
   .sl-tabset__active-tab-indicator {
-    top: calc(-1 * var(--tab-nav-border-width));
-    border-top: solid var(--tab-nav-border-width) var(--sl-color-primary-50);
+    top: calc(-1 * var(--border-width));
+    border-top: solid var(--border-width) var(--indicator-border-color);
   }
 
   .sl-tabset__body {
@@ -115,12 +106,12 @@
   .sl-tabset__tabs {
     flex: 0 0 auto;
     flex-direction: column;
-    border-right: solid var(--tab-nav-border-width) var(--tab-border-color);
+    border-right: solid var(--border-width) var(--border-color);
   }
 
   .sl-tabset__active-tab-indicator {
-    right: calc(-1 * var(--tab-nav-border-width));
-    border-right: solid var(--tab-nav-border-width) var(--sl-color-primary-50);
+    right: calc(-1 * var(--border-width));
+    border-right: solid var(--border-width) var(--indicator-border-color);
   }
 
   .sl-tabset__body {
@@ -143,12 +134,12 @@
   .sl-tabset__tabs {
     flex: 0 0 auto;
     flex-direction: column;
-    border-left: solid var(--tab-nav-border-width) var(--tab-border-color);
+    border-left: solid var(--border-width) var(--border-color);
   }
 
   .sl-tabset__active-tab-indicator {
-    left: calc(-1 * var(--tab-nav-border-width));
-    border-left: solid var(--tab-nav-border-width) var(--sl-color-primary-50);
+    left: calc(-1 * var(--border-width));
+    border-left: solid var(--border-width) var(--indicator-border-color);
   }
 
   .sl-tabset__body {

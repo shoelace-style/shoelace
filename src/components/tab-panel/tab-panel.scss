@@ -1,9 +1,12 @@
 @import 'reset';
 
 :host {
+  --padding-x: 20px;
+  --padding-y: 20px;
+
   display: block;
 }
 
 .sl-tab-panel {
-  padding: var(--tab-panel-padding-y) var(--tab-panel-padding-x);
+  padding: var(--padding-y) var(--padding-x);
 }

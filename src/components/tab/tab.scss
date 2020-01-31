@@ -1,31 +1,56 @@
 @import 'reset';
 
 :host {
-  display: inline-block;
-
+  --background-color--active: transparent;
+  --background-color--focus: transparent;
+  --background-color--hover: transparent;
+  --background-color: transparent;
+  --border-color--active: transparent;
+  --border-color--focus: transparent;
+  --border-color--hover: transparent;
+  --border-color: transparent;
+  --border-radius: 4px;
+  --border-width: 1px;
+  --color--active: var(--sl-color-primary-50);
+  --color--focus: var(--sl-color-primary-50);
+  --color--hover: var(--sl-color-primary-50);
+  --color: var(--sl-color-gray-40);
+  --focus-ring-box-shadow: inset 0 0 0 var(--sl-focus-ring-width)
+    hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha));
+  --font-family: var(--sl-font-sans-serif);
+  --font-size: var(--sl-form-control-font-size--medium);
+  --font-weight: var(--sl-font-weight--bold);
   --padding-x: 20px;
   --padding-y: 16px;
+
+  display: inline-block;
 }
 
 .sl-tab {
-  font-family: var(--tab-font-family);
-  font-size: var(--tab-font-size);
-  font-weight: var(--tab-font-weight);
-  border-radius: 4px;
-  color: var(--tab-color);
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
+  background-color: var(--background-color);
+  border: solid var(--border-width) var(--border-color);
+  border-radius: var(--border-radius);
+  color: var(--color);
   padding: var(--padding-y) var(--padding-x);
   white-space: nowrap;
   user-select: none;
   cursor: pointer;
-  transition: var(--tab-transition-speed) border-color, var(--tab-transition-speed) background-color,
-    var(--tab-transition-speed) box-shadow, var(--tab-transition-speed) color;
+  transition: var(--transition-speed) border-color, var(--transition-speed) background-color,
+    var(--transition-speed) box-shadow, var(--transition-speed) color;
 
   &.sl-tab--active {
-    color: var(--sl-color-primary-50);
+    background-color: var(--background-color--active);
+    border-color: var(--border-color--active);
+    color: var(--color--active);
   }
 
   &:hover:not(.sl-tab--disabled) {
-    color: var(--sl-color-primary-50);
+    background-color: var(--background-color--hover);
+    border-color: var(--border-color--hover);
+    color: var(--color--hover);
   }
 
   &:focus {
@@ -33,8 +58,10 @@
   }
 
   &:focus:not(.sl-tab--disabled) {
-    box-shadow: inset 0 0 0 var(--sl-focus-ring-width)
-      hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha));
+    background-color: var(--background-color--focus);
+    border-color: var(--border-color--focus);
+    color: var(--color--focus);
+    box-shadow: var(--focus-ring-box-shadow);
   }
 
   &.sl-tab--disabled {

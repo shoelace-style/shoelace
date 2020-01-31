@@ -22,6 +22,7 @@ export class Tabset {
   constructor() {
     this.handleClick = this.handleClick.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleKeyUp = this.handleKeyUp.bind(this);
     this.handleMouseDown = this.handleMouseDown.bind(this);
   }
 
@@ -196,6 +197,10 @@ export class Tabset {
     }
   }
 
+  handleKeyUp() {
+    this.isUsingMouse = false;
+  }
+
   handleMouseDown() {
     this.isUsingMouse = true;
   }
@@ -215,6 +220,7 @@ export class Tabset {
         }}
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
+        onKeyUp={this.handleKeyUp}
         onMouseDown={this.handleMouseDown}
       >
         <div ref={el => (this.nav = el)} class="sl-tabset__nav" tabindex="-1">
