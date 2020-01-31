@@ -62,7 +62,7 @@
   --sl-form-control-background-color: var(--sl-color-white);
   --sl-form-control-border-color--disabled: var(--sl-color-gray-80);
   --sl-form-control-border-color--focus: var(--sl-color-primary-50);
-  --sl-form-control-border-color--hover: var(--sl-color-gray-80);
+  --sl-form-control-border-color--hover: var(--sl-color-gray-70);
   --sl-form-control-border-color: var(--sl-color-gray-80);
   --sl-form-control-border-radius--large: 4px;
   --sl-form-control-border-radius--medium: 4px;
@@ -72,7 +72,6 @@
   --sl-form-control-color--hover: var(--sl-color-gray-40);
   --sl-form-control-color--focus: var(--sl-color-gray-40);
   --sl-form-control-color--disabled: red;
-
   --sl-form-control-font-family: var(--sl-font-sans-serif);
   --sl-form-control-font-size--large: 16px;
   --sl-form-control-font-size--medium: 14px;
@@ -85,6 +84,7 @@
   --sl-form-control-padding-x--medium: 14px;
   --sl-form-control-padding-x--small: 14px;
   --sl-form-control-placeholder-color: var(--sl-color-gray-70);
+  --sl-form-control-placeholder-color--hover: var(--sl-color-gray-70);
   --sl-form-control-placeholder-color--disabled: var(--sl-color-gray-60);
   --sl-form-control-transition-speed: 150ms;
 
