@@ -34,6 +34,7 @@
   --padding-x--medium: var(--sl-form-control-padding-x--medium);
   --padding-x--small: var(--sl-form-control-padding-x--small);
   --placeholder-color--disabled: var(--sl-form-control-placeholder-color--disabled);
+  --placeholder-color--hover: var(--sl-form-control-placeholder-color--hover);
   --placeholder-color: var(--sl-form-control-placeholder-color);
   --transition-speed: var(--sl-form-control-transition-speed);
 
@@ -47,7 +48,6 @@
   position: relative;
   font-family: var(--font-family);
   font-weight: var(--font-weight);
-  color: var(--color);
   background-color: var(--background-color);
   border: solid var(--border-width) var(--border-color);
   vertical-align: middle;
@@ -59,7 +59,7 @@
     font-size: inherit;
     font-weight: inherit;
     height: 100%;
-    color: inherit;
+    color: var(--color);
     border: none;
     background: none;
     -webkit-appearance: none;
@@ -85,6 +85,12 @@
     background-color: var(--background-color--hover);
     border-color: var(--border-color--hover);
     color: var(--color--hover);
+
+    .sl-input__control {
+      &::placeholder {
+        color: var(--placeholder-color--hover);
+      }
+    }
   }
 
   &.sl-input--focused:not(.sl-input--disabled) {
