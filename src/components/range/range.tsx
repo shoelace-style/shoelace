@@ -71,9 +71,8 @@ export class Range {
       const percent = Math.max(0, (this.value - this.min) / (this.max - this.min));
       const inputWidth = this.input.offsetWidth;
       const tooltipWidth = this.output.offsetWidth;
-      const thumbSize = getComputedStyle(this.input).getPropertyValue('--range-thumb-size');
+      const thumbSize = getComputedStyle(this.input).getPropertyValue('--thumb-size');
       const x = `calc(${inputWidth * percent}px - calc(calc(${percent} * ${thumbSize}) - calc(${thumbSize} / 2)))`;
-
       this.output.style.transform = `translateX(${x})`;
       this.output.style.marginLeft = `-${tooltipWidth / 2}px`;
     }
