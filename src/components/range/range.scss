@@ -25,7 +25,7 @@
   --tooltip-padding-y: var(--sl-tooltip-padding-y);
   --track-background-color: var(--sl-color-gray-90);
   --track-border-radius: 3px;
-  --track-height: 3px;
+  --track-height: 6px;
   --transition-speed: var(--sl-form-control-transition-speed);
 
   display: block;
@@ -146,7 +146,6 @@
 // Tooltip
 .sl-range__tooltip {
   position: absolute;
-  top: calc(-1 * var(--thumb-size) - var(--tooltip-offset-y));
   left: 1px;
   border-radius: var(--tooltip-border-radius);
   background-color: var(--tooltip-background-color);
@@ -165,16 +164,37 @@
     position: absolute;
     width: 0;
     height: 0;
-    border-top: 6px solid var(--tooltip-background-color);
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    top: 100%;
     left: 50%;
     margin-left: -6px;
-    margin-top: -1px;
   }
 }
 
 .sl-range--focused .sl-range__tooltip {
   opacity: 1;
+}
+
+// Tooltip on top
+.sl-range--tooltip-top .sl-range__tooltip {
+  top: calc(-1 * var(--thumb-size) - var(--tooltip-offset-y));
+
+  &::after {
+    border-top: 6px solid var(--tooltip-background-color);
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    top: 100%;
+    margin-top: -1px;
+  }
+}
+
+// Tooltip on bottom
+.sl-range--tooltip-bottom .sl-range__tooltip {
+  bottom: calc(-1 * var(--thumb-size) - var(--tooltip-offset-y));
+
+  &::after {
+    border-bottom: 6px solid var(--tooltip-background-color);
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    bottom: 100%;
+    margin-top: 1px;
+  }
 }

@@ -255,9 +255,13 @@ export namespace Components {
     */
     'step': number;
     /**
-    * By default, a tooltip showing the current value will appear when the range has focus. Set this to `off` to prevent the tooltip from showing.
+    * The tooltip's position.
     */
-    'tooltip': 'auto' | 'off';
+    'tooltip': 'top' | 'bottom' | 'off';
+    /**
+    * A function used to format the tooltip's value.
+    */
+    'tooltipFormatter': (value: number) => string;
     /**
     * The input's value attribute.
     */
@@ -794,9 +798,13 @@ declare namespace LocalJSX {
     */
     'step'?: number;
     /**
-    * By default, a tooltip showing the current value will appear when the range has focus. Set this to `off` to prevent the tooltip from showing.
+    * The tooltip's position.
     */
-    'tooltip'?: 'auto' | 'off';
+    'tooltip'?: 'top' | 'bottom' | 'off';
+    /**
+    * A function used to format the tooltip's value.
+    */
+    'tooltipFormatter'?: (value: number) => string;
     /**
     * The input's value attribute.
     */

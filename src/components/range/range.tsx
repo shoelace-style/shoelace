@@ -33,11 +33,11 @@ export class Range {
   /** The input's step attribute. */
   @Prop() step = 1;
 
-  /**
-   * By default, a tooltip showing the current value will appear when the range has focus. Set this to `off` to prevent
-   * the tooltip from showing.
-   */
-  @Prop() tooltip: 'auto' | 'off' = 'auto';
+  /** The tooltip's position. */
+  @Prop() tooltip: 'top' | 'bottom' | 'off' = 'top';
+
+  /** A function used to format the tooltip's value. */
+  @Prop() tooltipFormatter = (value: number) => value.toString();
 
   componentWillLoad() {
     if (this.value === undefined || this.value === null) this.value = this.min;
@@ -67,7 +67,7 @@ export class Range {
   }
 
   syncTooltip() {
-    if (this.tooltip === 'auto') {
+    if (this.tooltip !== 'off') {
       const percent = Math.max(0, (this.value - this.min) / (this.max - this.min));
       const inputWidth = this.input.offsetWidth;
       const tooltipWidth = this.output.offsetWidth;
@@ -86,7 +86,9 @@ export class Range {
 
           // States
           'sl-range--disabled': this.disabled,
-          'sl-range--focused': this.hasFocus
+          'sl-range--focused': this.hasFocus,
+          'sl-range--tooltip-top': this.tooltip === 'top',
+          'sl-range--tooltip-bottom': this.tooltip === 'bottom'
         }}
         onClick={() => this.input.focus()}
       >
@@ -104,9 +106,9 @@ export class Range {
           onBlur={() => (this.hasFocus = false)}
           onInput={this.handleInput}
         />
-        {this.tooltip === 'auto' && (
+        {this.tooltip !== 'off' && (
           <output ref={el => (this.output = el)} class="sl-range__tooltip">
-            {this.value}
+            {this.tooltipFormatter(this.value)}
           </output>
         )}
       </div>
