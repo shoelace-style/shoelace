@@ -147,8 +147,8 @@ export class Dropdown {
       event.preventDefault();
 
       let index = items.indexOf(selectedItem) + (event.key === 'ArrowDown' ? 1 : -1);
-      if (index < 0) index = items.length - 1;
-      if (index > items.length - 1) index = 0;
+      if (index < 0) index = 0;
+      if (index > items.length - 1) index = items.length - 1;
       this.setSelectedItem(items[index]);
       this.scrollItemIntoView(items[index]);
     }
