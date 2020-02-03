@@ -23,7 +23,8 @@ export class Dropdown {
   constructor() {
     this.handleDocumentKeyDown = this.handleDocumentKeyDown.bind(this);
     this.handleDocumentMouseDown = this.handleDocumentMouseDown.bind(this);
-    this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleTriggerKeyDown = this.handleTriggerKeyDown.bind(this);
+    this.handleMenuClick = this.handleMenuClick.bind(this);
     this.handleMenuMouseDown = this.handleMenuMouseDown.bind(this);
     this.handleMenuMouseOver = this.handleMenuMouseOver.bind(this);
     this.handleMenuMouseOut = this.handleMenuMouseOut.bind(this);
@@ -156,27 +157,32 @@ export class Dropdown {
   handleDocumentMouseDown(event: MouseEvent) {
     const target = event.target as HTMLElement;
     const dropdown = target.closest('sl-dropdown');
-    const dropdownItem = target.closest('sl-dropdown-item');
 
     // Close when clicking outside of the dropdown control
     if (!dropdown) {
       this.close();
       return;
     }
-
-    // Close when clicking on a dropdown item
-    if (dropdownItem && !dropdownItem.disabled) {
-      this.close();
-      return;
-    }
   }
 
-  handleKeyDown(event: KeyboardEvent) {
+  handleTriggerKeyDown(event: KeyboardEvent) {
     // Open the menu when pressing down or up while focused on the trigger
     if (!this.isOpen && ['ArrowDown', 'ArrowUp'].includes(event.key)) {
       this.open();
       event.preventDefault();
       event.stopPropagation();
+    }
+  }
+
+  handleMenuClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    const dropdownItem = target.closest('sl-dropdown-item');
+
+    // Close when clicking on a dropdown item
+    if (dropdownItem && !dropdownItem.disabled) {
+      this.close();
+      console.log(dropdownItem);
+      return;
     }
   }
 
@@ -229,7 +235,7 @@ export class Dropdown {
         <span
           class="sl-dropdown__trigger"
           ref={el => (this.trigger = el)}
-          onKeyDown={this.handleKeyDown}
+          onKeyDown={this.handleTriggerKeyDown}
           onClick={() => this.toggleMenu()}
         >
           <slot name="trigger" />
@@ -241,6 +247,7 @@ export class Dropdown {
           role="menu"
           aria-hidden={!this.isOpen}
           aria-labeledby={this.id}
+          onClick={this.handleMenuClick}
           onMouseDown={this.handleMenuMouseDown}
           onMouseOver={this.handleMenuMouseOver}
           onMouseOut={this.handleMenuMouseOut}
