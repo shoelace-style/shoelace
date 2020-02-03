@@ -119,14 +119,6 @@ export class Dropdown {
   scrollItemIntoView(item: HTMLSlDropdownItemElement) {
     if (item) {
       scrollIntoView(item, this.menu);
-      // const min = this.menu.scrollTop;
-      // const max = this.menu.scrollTop + this.menu.offsetHeight;
-
-      // if (item.offsetTop < min) {
-      //   this.menu.scrollTo({ top: item.offsetTop, behavior: 'smooth' });
-      // } else if (item.offsetTop + item.clientHeight > max) {
-      //   this.menu.scrollTo({ top: item.offsetTop - this.menu.offsetHeight + item.clientHeight, behavior: 'smooth' });
-      // }
     }
   }
 
