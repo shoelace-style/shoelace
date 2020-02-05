@@ -32,6 +32,7 @@
   "dependencies": {
     "@stencil/sass": "^1.1.1",
     "popper.js": "^1.16.0",
+    "resize-observer": "^1.0.0",
     "tippy.js": "^5.1.3"
   }
 }
