@@ -191,6 +191,10 @@ export namespace Components {
     */
     'step': number;
     /**
+    * Set to true to add a password toggle button for password inputs.
+    */
+    'togglePassword': boolean;
+    /**
     * The input's type, one of `text`, `number`, `email`, etc.
     */
     'type': string;
@@ -749,6 +753,10 @@ declare namespace LocalJSX {
     * The input's step attribute.
     */
     'step'?: number;
+    /**
+    * Set to true to add a password toggle button for password inputs.
+    */
+    'togglePassword'?: boolean;
     /**
     * The input's type, one of `text`, `number`, `email`, etc.
     */

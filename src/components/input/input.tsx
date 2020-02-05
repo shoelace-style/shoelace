@@ -13,6 +13,7 @@ export class Input {
   input: HTMLInputElement;
 
   @State() hasFocus = false;
+  @State() isPasswordVisible = false;
 
   /** The input's type, one of `text`, `number`, `email`, etc. */
   @Prop() type = 'text';
@@ -74,6 +75,9 @@ export class Input {
   /** Set to true to add a clear button when the input is populated. */
   @Prop() clearable = false;
 
+  /** Set to true to add a password toggle button for password inputs. */
+  @Prop() togglePassword = false;
+
   /** Sets focus on the input. */
   @Method()
   async setFocus() {
@@ -111,7 +115,7 @@ export class Input {
         <input
           ref={el => (this.input = el)}
           class="sl-input__control"
-          type={this.type}
+          type={this.type === 'password' && this.isPasswordVisible ? 'text' : this.type}
           name={this.name}
           placeholder={this.placeholder}
           disabled={this.disabled}
@@ -134,7 +138,7 @@ export class Input {
           onInput={() => (this.value = this.input.value)}
         />
 
-        {this.clearable ? (
+        {this.clearable && (
           <button
             class="sl-input__clear"
             onMouseDown={event => event.preventDefault()}
@@ -160,8 +164,56 @@ export class Input {
               </g>
             </svg>
           </button>
-        ) : (
-          ''
+        )}
+
+        {this.togglePassword && (
+          <button
+            class="sl-input__password-toggle"
+            onMouseDown={event => event.preventDefault()}
+            onClick={() => (this.isPasswordVisible = !this.isPasswordVisible)}
+            tabindex="-1"
+          >
+            {this.isPasswordVisible ? (
+              <svg
+                viewBox="0 0 14 14"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlnsXlink="http://www.w3.org/1999/xlink"
+              >
+                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g stroke="currentColor">
+                    <path
+                      d="M0.561279297,7.05270843 C2.78307812,4.40721792 4.94974478,3.08447266 7.0612793,3.08447266 C7.7102644,3.08447266 8.36445758,3.20942641 9.02385886,3.45933391 C9.67833093,3.70737329 10.3379335,4.07850528 11.0026666,4.57272988 C11.5657256,4.99136046 12.4185965,5.81801998 13.5612793,7.05270843 C11.4499758,9.74055125 9.28330918,11.0844727 7.0612793,11.0844727 C4.83924941,11.0844727 2.67258275,9.74055125 0.561279297,7.05270843 Z"
+                      stroke-linejoin="round"
+                    ></path>
+                    <circle fill="currentColor" cx="7" cy="7" r="2"></circle>
+                    <path
+                      d="M1,11.58 L13,2.58"
+                      stroke-linecap="round"
+                      transform="translate(7.000000, 7.080000) scale(-1, 1) translate(-7.000000, -7.080000) "
+                    ></path>
+                  </g>
+                </g>
+              </svg>
+            ) : (
+              <svg
+                viewBox="0 0 14 14"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlnsXlink="http://www.w3.org/1999/xlink"
+              >
+                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g stroke="currentColor">
+                    <path
+                      d="M0.561279297,7.05270843 C2.78307812,4.40721792 4.94974478,3.08447266 7.0612793,3.08447266 C9.17281381,3.08447266 11.3394805,4.40721792 13.5612793,7.05270843 C11.4499758,9.74055125 9.28330918,11.0844727 7.0612793,11.0844727 C4.83924941,11.0844727 2.67258275,9.74055125 0.561279297,7.05270843 Z"
+                      stroke-linejoin="round"
+                    ></path>
+                    <circle fill="currentColor" cx="7" cy="7" r="2"></circle>
+                  </g>
+                </g>
+              </svg>
+            )}
+          </button>
         )}
 
         <span class="sl-input__suffix">
