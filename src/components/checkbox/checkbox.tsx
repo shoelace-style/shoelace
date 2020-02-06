@@ -77,18 +77,16 @@ export class Checkbox {
         <span class="sl-checkbox__control">
           {this.checked ? (
             <svg
-              width="14px"
-              height="14px"
-              viewBox="0 0 14 14"
+              viewBox="0 0 16 16"
               version="1.1"
               xmlns="http://www.w3.org/2000/svg"
               xmlnsXlink="http://www.w3.org/1999/xlink"
             >
               <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
                 <g stroke="currentColor" stroke-width="2">
-                  <g transform="translate(3.000000, 3.000000)">
-                    <path d="M0,5 L3,8"></path>
-                    <path d="M8,0 L3,8"></path>
+                  <g transform="translate(3.428571, 3.428571)">
+                    <path d="M0,5.71428571 L3.42857143,9.14285714"></path>
+                    <path d="M9.14285714,0 L3.42857143,9.14285714"></path>
                   </g>
                 </g>
               </g>
@@ -97,17 +95,15 @@ export class Checkbox {
 
           {!this.checked && this.indeterminate ? (
             <svg
-              width="14px"
-              height="14px"
-              viewBox="0 0 14 14"
+              viewBox="0 0 16 16"
               version="1.1"
               xmlns="http://www.w3.org/2000/svg"
               xmlnsXlink="http://www.w3.org/1999/xlink"
             >
               <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
                 <g stroke="currentColor" stroke-width="2">
-                  <g transform="translate(2.000000, 6.000000)">
-                    <path d="M9,1 L1,1"></path>
+                  <g transform="translate(2.285714, 6.857143)">
+                    <path d="M10.2857143,1.14285714 L1.14285714,1.14285714"></path>
                   </g>
                 </g>
               </g>

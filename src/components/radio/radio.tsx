@@ -77,14 +77,14 @@ export class Radio {
         <span class="sl-radio__control">
           {this.checked ? (
             <svg
-              viewBox="0 0 14 14"
+              viewBox="0 0 16 16"
               version="1.1"
               xmlns="http://www.w3.org/2000/svg"
               xmlnsXlink="http://www.w3.org/1999/xlink"
             >
               <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                 <g fill="currentColor">
-                  <circle cx="7" cy="7" r="3"></circle>
+                  <circle cx="8" cy="8" r="3.42857143"></circle>
                 </g>
               </g>
             </svg>
