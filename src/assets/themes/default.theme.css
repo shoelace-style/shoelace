@@ -72,7 +72,7 @@
   --sl-form-control-border-radius--medium: 4px;
   --sl-form-control-border-radius--small: 4px;
   --sl-form-control-border-width: 1px;
-  --sl-form-control-checkbox-size: 14px;
+  --sl-form-control-checkbox-size: 16px;
   --sl-form-control-color--disabled: red;
   --sl-form-control-color--focus: var(--sl-color-gray-40);
   --sl-form-control-color--hover: var(--sl-color-gray-40);
@@ -85,9 +85,9 @@
   --sl-form-control-height--large: 50px;
   --sl-form-control-height--medium: 40px;
   --sl-form-control-height--small: 30px;
-  --sl-form-control-padding-x--large: 14px;
-  --sl-form-control-padding-x--medium: 14px;
-  --sl-form-control-padding-x--small: 14px;
+  --sl-form-control-padding-x--large: 12px;
+  --sl-form-control-padding-x--medium: 12px;
+  --sl-form-control-padding-x--small: 12px;
   --sl-form-control-placeholder-color--disabled: var(--sl-color-gray-60);
   --sl-form-control-placeholder-color--hover: var(--sl-color-gray-70);
   --sl-form-control-placeholder-color: var(--sl-color-gray-70);
