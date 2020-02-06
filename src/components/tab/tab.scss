@@ -41,12 +41,6 @@
   transition: var(--transition-speed) border-color, var(--transition-speed) background-color,
     var(--transition-speed) box-shadow, var(--transition-speed) color;
 
-  &.sl-tab--active {
-    background-color: var(--background-color--active);
-    border-color: var(--border-color--active);
-    color: var(--color--active);
-  }
-
   &:hover:not(.sl-tab--disabled) {
     background-color: var(--background-color--hover);
     border-color: var(--border-color--hover);
@@ -62,6 +56,12 @@
     border-color: var(--border-color--focus);
     color: var(--color--focus);
     box-shadow: var(--focus-ring-box-shadow);
+  }
+
+  &.sl-tab--active:not(.sl-tab--disabled) {
+    background-color: var(--background-color--active);
+    border-color: var(--border-color--active);
+    color: var(--color--active);
   }
 
   &.sl-tab--disabled {
