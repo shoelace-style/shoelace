@@ -1,8 +1,8 @@
-<svg viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
     <g>
-      <path d="M0.561279297,7.05270843 C2.78307812,4.40721792 4.94974478,3.08447266 7.0612793,3.08447266 C9.17281381,3.08447266 11.3394805,4.40721792 13.5612793,7.05270843 C11.4499758,9.74055125 9.28330918,11.0844727 7.0612793,11.0844727 C4.83924941,11.0844727 2.67258275,9.74055125 0.561279297,7.05270843 Z" stroke="currentColor" stroke-linejoin="round"></path>
-      <circle fill="currentColor" cx="7" cy="7" r="2"></circle>
+      <path d="M0.641462054,8.06023821 C3.1806607,5.03682047 5.65685118,3.52511161 8.07003348,3.52511161 C10.4832158,3.52511161 12.9594063,5.03682047 15.4986049,8.06023821 C13.0856867,11.1320586 10.6094962,12.6679688 8.07003348,12.6679688 C5.53057076,12.6679688 3.05438028,11.1320586 0.641462054,8.06023821 Z" stroke="#979797" stroke-linejoin="round"></path>
+      <circle fill="currentColor" cx="8" cy="8" r="2.28571429"></circle>
     </g>
   </g>
 </svg>

@@ -1,8 +1,8 @@
-<svg viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
     <g stroke="currentColor" stroke-width="2">
-      <path d="M2,8 L5,12"></path>
-      <path d="M12,2 L5,12"></path>
+      <path d="M2.28571429,9.14285714 L5.71428571,13.7142857"></path>
+      <path d="M13.7142857,2.28571429 L5.71428571,13.7142857"></path>
     </g>
   </g>
 </svg>
