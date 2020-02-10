@@ -1,4 +1,4 @@
-import { Component, Method, Prop, State, h } from '@stencil/core';
+import { Component, Method, Prop, State, Watch, h } from '@stencil/core';
 
 @Component({
   tag: 'sl-textarea',
@@ -37,9 +37,6 @@ export class Textarea {
   /** Controls how the textarea can be resized. */
   @Prop() resize: 'none' | 'vertical' | 'auto' = 'vertical';
 
-  /** The number of rows to display by default. */
-  @Prop() rows = 4;
-
   /** The textarea's maxlength attribute. */
   @Prop() maxlength: number;
 
@@ -60,6 +57,14 @@ export class Textarea {
 
   /** The textarea's required attribute. */
   @Prop() required: boolean;
+
+  /** The number of rows to display by default. */
+  @Prop() rows = 4;
+
+  @Watch('rows')
+  handleRowsChange() {
+    this.setTextareaHeight();
+  }
 
   componentDidLoad() {
     this.setTextareaHeight();
