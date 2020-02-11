@@ -1,4 +1,5 @@
 import { Component, Method, Prop, State, Watch, h } from '@stencil/core';
+import { ResizeObserver } from 'resize-observer';
 
 @Component({
   tag: 'sl-textarea',
@@ -68,24 +69,12 @@ export class Textarea {
 
   componentDidLoad() {
     this.setTextareaHeight();
-
-    // @ts-ignore
-    if (ResizeObserver) {
-      // @ts-ignore
-      this.resizeObserver = new ResizeObserver(() => this.setTextareaHeight());
-      this.resizeObserver.observe(this.textarea);
-    } else {
-      window.addEventListener('resize', this.handleWindowResize);
-    }
+    this.resizeObserver = new ResizeObserver(() => this.setTextareaHeight());
+    this.resizeObserver.observe(this.textarea);
   }
 
   componentDidUnload() {
-    // @ts-ignore
-    if (ResizeObserver) {
-      this.resizeObserver.unobserve();
-    } else {
-      window.removeEventListener('resize', this.handleWindowResize);
-    }
+    this.resizeObserver.unobserve();
   }
 
   /** Sets focus on the textarea. */
