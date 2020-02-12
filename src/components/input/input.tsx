@@ -1,8 +1,9 @@
 import { Component, Method, Prop, State, h } from '@stencil/core';
 
-/** @slot prefix - Used to prepend an icon or similar element to the input. */
-/** @slot suffix - Used to append an icon or similar element to the input. */
-/** @slot - The input's label. */
+/** @slot prefix-addon - Used to create an addon at the start of the input. */
+/** @slot prefix-icon - Used to prepend an icon or similar element to the input. */
+/** @slot suffix-addon - Used to create an addon at the end of the input. */
+/** @slot suffix-icon - Used to append an icon or similar element to the input. */
 
 @Component({
   tag: 'sl-input',
@@ -108,8 +109,12 @@ export class Input {
         }}
         onClick={() => this.input.focus()}
       >
-        <span class="sl-input__prefix">
-          <slot name="prefix" />
+        <span class="sl-input__prefix-addon">
+          <slot name="prefix-addon" />
+        </span>
+
+        <span class="sl-input__prefix-icon">
+          <slot name="prefix-icon" />
         </span>
 
         <input
@@ -207,8 +212,12 @@ export class Input {
           </button>
         )}
 
-        <span class="sl-input__suffix">
-          <slot name="suffix" />
+        <span class="sl-input__suffix-icon">
+          <slot name="suffix-icon" />
+        </span>
+
+        <span class="sl-input__suffix-addon">
+          <slot name="suffix-addon" />
         </span>
       </div>
     );

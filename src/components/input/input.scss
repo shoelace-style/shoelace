@@ -5,6 +5,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 :host {
+  --addon-background-color: var(--sl-color-gray-95);
+  --addon-color: var(--sl-color-gray-60);
   --background-color--disabled: var(--sl-form-control-background-color--disabled);
   --background-color--focus: var(--sl-form-control-background-color--focus);
   --background-color--hover: var(--sl-form-control-background-color--hover);
@@ -43,7 +45,7 @@
 
 .sl-input {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
   position: relative;
   font-family: var(--font-family);
@@ -52,6 +54,7 @@
   border: solid var(--border-width) var(--border-color);
   vertical-align: middle;
   transition: var(--transition-speed) color, var(--transition-speed) border, var(--transition-speed) box-shadow;
+  cursor: text;
 
   .sl-input__control {
     flex: 1 1 auto;
@@ -62,6 +65,8 @@
     color: var(--color);
     border: none;
     background: none;
+    padding: 0;
+    margin: 0;
     -webkit-appearance: none;
 
     &::-webkit-search-decoration,
@@ -115,14 +120,37 @@
     }
   }
 
-  .sl-input__prefix:not(:empty) {
-    color: var(--placeholder-color);
-    margin-right: 0.5em;
+  .sl-input__clear,
+  .sl-input__password-toggle {
+    width: 1.2em;
   }
 
-  .sl-input__suffix:not(:empty) {
+  .sl-input__prefix-addon:not(:empty),
+  .sl-input__suffix-addon:not(:empty) {
+    flex: 0 0 auto;
+    background-color: var(--addon-background-color);
+    color: var(--addon-color);
+    user-select: none;
+  }
+
+  .sl-input__prefix-addon:not(:empty) {
+    border-right: solid var(--border-width) var(--border-color);
+    border-top-left-radius: var(--border-radius--medium);
+    border-bottom-left-radius: var(--border-radius--medium);
+  }
+
+  .sl-input__suffix-addon:not(:empty) {
+    border-left: solid var(--border-width) var(--border-color);
+    border-top-right-radius: var(--border-radius--medium);
+    border-bottom-right-radius: var(--border-radius--medium);
+  }
+
+  .sl-input__prefix-icon:not(:empty) {
     color: var(--placeholder-color);
-    margin-left: 0.5em;
+  }
+
+  .sl-input__suffix-icon:not(:empty) {
+    color: var(--placeholder-color);
   }
 }
 
@@ -133,12 +161,31 @@
 .sl-input--small {
   border-radius: var(--border-radius--small);
   font-size: var(--font-size--small);
-  padding: 0 var(--padding-x--small);
   height: var(--height--small);
+  line-height: calc(var(--height--small) - var(--border-width) * 2);
 
   .sl-input__control {
     height: calc(var(--height--small) - var(--border-width) * 2);
     line-height: calc(var(--height--small) - var(--border-width) * 2);
+    margin: 0 var(--padding-x--small);
+  }
+
+  .sl-input__clear,
+  .sl-input__password-toggle {
+    margin-right: var(--padding-x--small);
+  }
+
+  .sl-input__prefix-icon:not(:empty) {
+    margin-left: var(--padding-x--small);
+  }
+
+  .sl-input__suffix-icon:not(:empty) {
+    margin-right: var(--padding-x--small);
+  }
+
+  .sl-input__prefix-addon:not(:empty),
+  .sl-input__suffix-addon:not(:empty) {
+    padding: 0 var(--padding-x--small);
   }
 }
 
@@ -146,11 +193,30 @@
   border-radius: var(--border-radius--medium);
   font-size: var(--font-size--medium);
   height: var(--height--medium);
-  padding: 0 var(--padding-x--medium);
+  line-height: calc(var(--height--medium) - var(--border-width) * 2);
 
   .sl-input__control {
     height: calc(var(--height--medium) - var(--border-width) * 2);
     line-height: calc(var(--height--medium) - var(--border-width) * 2);
+    margin: 0 var(--padding-x--medium);
+  }
+
+  .sl-input__clear,
+  .sl-input__password-toggle {
+    margin-right: var(--padding-x--medium);
+  }
+
+  .sl-input__prefix-icon:not(:empty) {
+    margin-left: var(--padding-x--medium);
+  }
+
+  .sl-input__suffix-icon:not(:empty) {
+    margin-right: var(--padding-x--medium);
+  }
+
+  .sl-input__prefix-addon:not(:empty),
+  .sl-input__suffix-addon:not(:empty) {
+    padding: 0 var(--padding-x--medium);
   }
 }
 
@@ -158,11 +224,30 @@
   border-radius: var(--border-radius--large);
   font-size: var(--font-size--large);
   height: var(--height--large);
-  padding: 0 var(--padding-x--large);
+  line-height: calc(var(--height--large) - var(--border-width) * 2);
 
   .sl-input__control {
     height: calc(var(--height--large) - var(--border-width) * 2);
     line-height: calc(var(--height--large) - var(--border-width) * 2);
+    margin: 0 var(--padding-x--large);
+  }
+
+  .sl-input__clear,
+  .sl-input__password-toggle {
+    margin-right: var(--padding-x--large);
+  }
+
+  .sl-input__prefix-icon:not(:empty) {
+    margin-left: var(--padding-x--large);
+  }
+
+  .sl-input__suffix-icon:not(:empty) {
+    margin-right: var(--padding-x--large);
+  }
+
+  .sl-input__prefix-addon:not(:empty),
+  .sl-input__suffix-addon:not(:empty) {
+    padding: 0 var(--padding-x--large);
   }
 }
 
@@ -179,7 +264,6 @@
   border: none;
   background: none;
   padding: 0;
-  margin: 0 0 0 0.5em;
   cursor: pointer;
 
   svg {
