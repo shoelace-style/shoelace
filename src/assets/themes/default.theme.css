@@ -59,7 +59,7 @@
   --sl-focus-ring-alpha: 0.33;
   --sl-focus-ring-box-shadow: 0 0 0 var(--sl-focus-ring-width)
     hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha));
-  --sl-focus-ring-width: 2px;
+  --sl-focus-ring-width: 3px;
   --sl-form-control-background-color--disabled: var(--sl-color-gray-95);
   --sl-form-control-background-color--focus: var(--sl-color-white);
   --sl-form-control-background-color--hover: var(--sl-color-white);
