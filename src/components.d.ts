@@ -203,6 +203,32 @@ export namespace Components {
     */
     'value': string;
   }
+  interface SlMarkdown {
+    /**
+    * A prefix url for any relative link in the source.
+    */
+    'baseUrl': string;
+    /**
+    * Set to true to add ids to headings (e.g. h1 - h6).
+    */
+    'headingIds': boolean;
+    /**
+    * A string to prepend to the heading id (requires `headingIds` to be `true`.
+    */
+    'headingPrefix': string;
+    /**
+    * A string to prepend to the class name in `<code>` blocks. Useful for syntax highlighters.
+    */
+    'languagePrefix': string;
+    /**
+    * For security purposes, the resulting HTML is sanitized using [DOMPurify](https://www.npmjs.com/package/dompurify). Set to true to disable this behavior (not recommended).
+    */
+    'noSanitize': boolean;
+    /**
+    * The markdown source to render. This component uses the [marked](https://www.npmjs.com/package/marked) library under the hood, which adheres to the [GFM specification](https://github.github.com/gfm/). The resulting markup is also sanitized through [DOMPurify](https://www.npmjs.com/package/dompurify) for added security.
+    */
+    'source': string;
+  }
   interface SlRadio {
     /**
     * Set to true to draw the radio in a checked state.
@@ -525,6 +551,12 @@ declare global {
     new (): HTMLSlInputElement;
   };
 
+  interface HTMLSlMarkdownElement extends Components.SlMarkdown, HTMLStencilElement {}
+  var HTMLSlMarkdownElement: {
+    prototype: HTMLSlMarkdownElement;
+    new (): HTMLSlMarkdownElement;
+  };
+
   interface HTMLSlRadioElement extends Components.SlRadio, HTMLStencilElement {}
   var HTMLSlRadioElement: {
     prototype: HTMLSlRadioElement;
@@ -585,6 +617,7 @@ declare global {
     'sl-dropdown-divider': HTMLSlDropdownDividerElement;
     'sl-dropdown-item': HTMLSlDropdownItemElement;
     'sl-input': HTMLSlInputElement;
+    'sl-markdown': HTMLSlMarkdownElement;
     'sl-radio': HTMLSlRadioElement;
     'sl-range': HTMLSlRangeElement;
     'sl-spinner': HTMLSlSpinnerElement;
@@ -765,6 +798,32 @@ declare namespace LocalJSX {
     * The input's value attribute.
     */
     'value'?: string;
+  }
+  interface SlMarkdown {
+    /**
+    * A prefix url for any relative link in the source.
+    */
+    'baseUrl'?: string;
+    /**
+    * Set to true to add ids to headings (e.g. h1 - h6).
+    */
+    'headingIds'?: boolean;
+    /**
+    * A string to prepend to the heading id (requires `headingIds` to be `true`.
+    */
+    'headingPrefix'?: string;
+    /**
+    * A string to prepend to the class name in `<code>` blocks. Useful for syntax highlighters.
+    */
+    'languagePrefix'?: string;
+    /**
+    * For security purposes, the resulting HTML is sanitized using [DOMPurify](https://www.npmjs.com/package/dompurify). Set to true to disable this behavior (not recommended).
+    */
+    'noSanitize'?: boolean;
+    /**
+    * The markdown source to render. This component uses the [marked](https://www.npmjs.com/package/marked) library under the hood, which adheres to the [GFM specification](https://github.github.com/gfm/). The resulting markup is also sanitized through [DOMPurify](https://www.npmjs.com/package/dompurify) for added security.
+    */
+    'source'?: string;
   }
   interface SlRadio {
     /**
@@ -1027,6 +1086,7 @@ declare namespace LocalJSX {
     'sl-dropdown-divider': SlDropdownDivider;
     'sl-dropdown-item': SlDropdownItem;
     'sl-input': SlInput;
+    'sl-markdown': SlMarkdown;
     'sl-radio': SlRadio;
     'sl-range': SlRange;
     'sl-spinner': SlSpinner;
@@ -1051,6 +1111,7 @@ declare module "@stencil/core" {
       'sl-dropdown-divider': LocalJSX.SlDropdownDivider & JSXBase.HTMLAttributes<HTMLSlDropdownDividerElement>;
       'sl-dropdown-item': LocalJSX.SlDropdownItem & JSXBase.HTMLAttributes<HTMLSlDropdownItemElement>;
       'sl-input': LocalJSX.SlInput & JSXBase.HTMLAttributes<HTMLSlInputElement>;
+      'sl-markdown': LocalJSX.SlMarkdown & JSXBase.HTMLAttributes<HTMLSlMarkdownElement>;
       'sl-radio': LocalJSX.SlRadio & JSXBase.HTMLAttributes<HTMLSlRadioElement>;
       'sl-range': LocalJSX.SlRange & JSXBase.HTMLAttributes<HTMLSlRangeElement>;
       'sl-spinner': LocalJSX.SlSpinner & JSXBase.HTMLAttributes<HTMLSlSpinnerElement>;

@@ -31,6 +31,8 @@
   "license": "MIT",
   "dependencies": {
     "@stencil/sass": "^1.1.1",
+    "dompurify": "^2.0.8",
+    "marked": "^0.8.0",
     "popper.js": "^1.16.0",
     "resize-observer": "^1.0.0",
     "tippy.js": "^5.1.3"
