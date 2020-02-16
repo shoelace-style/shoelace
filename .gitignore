@@ -1,3 +1,8 @@
+# Generated directories
+docs/assets
+docs/dist
+docs/components
+
 dist/
 www/
 loader/

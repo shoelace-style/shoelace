@@ -1,15 +1,16 @@
-- Welcome
+- Getting Started
   - [Overview](/)
-  - [Installing](installing.md)
-  - [Customizing](customizing.md)
-  - [Web Components](web-components.md)
+  - [Installing](getting-started/installing.md)
+  - [Customizing](getting-started/customizing.md)
+  - [Web Components](getting-started/web-components.md)
+
 - Frameworks
-  - [HTML + JavaScript](html-javascript.md)
-  - [React](react.md)
-  - [Vue](vue.md)
-  - [Angular](angular.md)
+  - [HTML + JavaScript](frameworks/html-javascript.md)
+  - [React](frameworks/react.md)
+  - [Vue](frameworks/vue.md)
+  - [Angular](frameworks/angular.md)
 
 - Components
-  - [Button](button.md)
-  - [Input](input.md)
-  - [Switch](switch.md)
+  - [Button](components/button.md)
+  - [Input](components/input.md)
+  - [Switch](components/switch.md)

@@ -16,15 +16,16 @@
   ],
   "scripts": {
     "build": "stencil build --docs",
-    "start": "concurrently --kill-others \"stencil build --dev --watch --no-open\" \"docsify serve docs --open\"",
+    "start": "concurrently --kill-others \"gulp\" \"stencil build --dev --docs --no-open --watch\" \"docsify serve docs --open\"",
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
     "generate": "stencil generate"
   },
   "devDependencies": {
-    "@stencil/core": "^1.8.3",
     "concurrently": "^5.1.0",
     "docsify-cli": "^4.4.0",
+    "gulp": "^4.0.2",
+    "recursive-copy": "^2.0.10",
     "tslint": "^5.20.1",
     "tslint-ionic-rules": "0.0.21",
     "tslint-stencil": "^1.0.1",
@@ -32,6 +33,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@stencil/core": "^1.8.8",
     "@stencil/sass": "^1.1.1",
     "dompurify": "^2.0.8",
     "marked": "^0.8.0",

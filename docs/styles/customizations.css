@@ -20,6 +20,38 @@ body {
   padding: 0 1rem;
 }
 
+h1 img {
+  max-height: 6rem;
+}
+
+/* Sidebar */
+.app-sub-sidebar li:before {
+  content: '•';
+}
+
+/* Heading links */
+.markdown-section h1 a,
+.markdown-section h2 a,
+.markdown-section h3 a,
+.markdown-section h4 a,
+.markdown-section h5 a,
+.markdown-section h6 a {
+  position: relative;
+  color: #34495e;
+}
+
+/* Show a hash for heading links h2-h6 */
+.markdown-section h2 a:hover::before,
+.markdown-section h3 a:hover::before,
+.markdown-section h4 a:hover::before,
+.markdown-section h5 a:hover::before,
+.markdown-section h6 a:hover::before {
+  position: absolute;
+  left: -1em;
+  content: '#';
+  color: var(--sl-color-gray-80);
+}
+
 /* Code samples */
 .markdown-section code {
   color: hsl(var(--sl-color-warning-hue), var(--sl-color-warning-saturation), 50%);
