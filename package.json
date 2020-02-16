@@ -16,13 +16,15 @@
   ],
   "scripts": {
     "build": "stencil build --docs",
-    "start": "stencil build --dev --watch --serve",
+    "start": "concurrently --kill-others \"stencil build --dev --watch --no-open\" \"docsify serve docs --open\"",
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
     "generate": "stencil generate"
   },
   "devDependencies": {
     "@stencil/core": "^1.8.3",
+    "concurrently": "^5.1.0",
+    "docsify-cli": "^4.4.0",
     "tslint": "^5.20.1",
     "tslint-ionic-rules": "0.0.21",
     "tslint-stencil": "^1.0.1",

@@ -1,0 +1,80 @@
+:root {
+  --theme-color: hsl(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%);
+}
+
+html,
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
+    'Helvetica Neue', sans-serif;
+  font-size: 16px;
+}
+
+/* Logo */
+.sidebar > h1 {
+  text-align: left;
+}
+
+.app-name-link img {
+  display: inline-block;
+  max-height: 2.8rem;
+  padding: 0 1rem;
+}
+
+/* Code samples */
+.markdown-section code {
+  color: hsl(var(--sl-color-warning-hue), var(--sl-color-warning-saturation), 50%);
+}
+
+/* Tables */
+.markdown-section table {
+  display: table;
+  width: 100%;
+}
+
+.markdown-section tr {
+  border-top: solid 1px #f2f2f2;
+}
+
+.markdown-section tr:nth-child(2n) {
+  background-color: transparent;
+}
+
+.markdown-section table th {
+  text-align: left;
+}
+
+.markdown-section table th,
+.markdown-section table td {
+  border: none;
+  padding: 16px;
+}
+
+/* Code highlighters */
+.token.attr-value,
+.token.control,
+.token.directive,
+.token.unit {
+  color: hsl(var(--sl-color-success-hue), var(--sl-color-success-saturation), 40%);
+}
+
+.token.property {
+  color: hsl(var(--sl-color-warning-hue), var(--sl-color-warning-saturation), 50%);
+}
+
+.token.selector {
+  color: #aa4fb7;
+}
+
+.token.tag,
+.token.attr-name {
+  color: hsl(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 40%);
+}
+
+/* Copy buttons */
+html .docsify-copy-code-button {
+  top: auto;
+  bottom: 0;
+  border-top-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  font-size: 0.875rem;
+}

@@ -424,6 +424,12 @@
   padding-left: 0;
   padding-right: 0;
 
+  .sl-button__label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   &.sl-button--small {
     width: var(--height--small);
     border-radius: 50%;
