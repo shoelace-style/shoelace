@@ -25,7 +25,9 @@
     "concurrently": "^5.1.0",
     "docsify-cli": "^4.4.0",
     "gulp": "^4.0.2",
+    "marked": "^0.8.0",
     "recursive-copy": "^2.0.10",
+    "through2": "^3.0.1",
     "tslint": "^5.20.1",
     "tslint-ionic-rules": "0.0.21",
     "tslint-stencil": "^1.0.1",
@@ -35,8 +37,6 @@
   "dependencies": {
     "@stencil/core": "^1.8.8",
     "@stencil/sass": "^1.1.1",
-    "dompurify": "^2.0.8",
-    "marked": "^0.8.0",
     "popper.js": "^1.16.0",
     "resize-observer": "^1.0.0",
     "tippy.js": "^5.1.3"
