@@ -10,7 +10,7 @@ export const config: Config = {
     },
     {
       type: 'docs-readme',
-      footer: '*Shoelace Web Components are built with [StencilJS](https://stenciljs.com/)*'
+      footer: ''
     },
     {
       type: 'www',
