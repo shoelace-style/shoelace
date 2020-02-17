@@ -16,7 +16,7 @@
   ],
   "scripts": {
     "build": "stencil build --docs",
-    "start": "concurrently --kill-others \"gulp\" \"stencil build --dev --docs --no-open --watch\" \"docsify serve docs --open\"",
+    "start": "stencil build --dev --docs --serve --watch",
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
     "generate": "stencil generate"
