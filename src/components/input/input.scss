@@ -145,11 +145,11 @@
     border-bottom-right-radius: var(--border-radius--medium);
   }
 
-  .sl-input__prefix-icon:not(:empty) {
-    color: var(--placeholder-color);
-  }
-
+  .sl-input__prefix-icon:not(:empty),
   .sl-input__suffix-icon:not(:empty) {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
     color: var(--placeholder-color);
   }
 }
