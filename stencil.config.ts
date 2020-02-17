@@ -10,7 +10,7 @@ export const config: Config = {
     },
     {
       type: 'docs-readme',
-      footer: ''
+      footer: 'This component was built with [Stencil](https://stenciljs.com/).'
     },
     {
       type: 'www',

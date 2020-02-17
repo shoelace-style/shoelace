@@ -43,4 +43,4 @@ Type: `Promise<void>`
 
 ----------------------------------------------
 
-
+This component was built with [Stencil](https://stenciljs.com/).
