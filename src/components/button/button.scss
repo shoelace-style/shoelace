@@ -257,20 +257,6 @@
     opacity: 0.5;
     cursor: not-allowed;
   }
-
-  .sl-button__prefix {
-    ::slotted(*) {
-      margin-left: -0.5em;
-      margin-right: 0.5em;
-    }
-  }
-
-  .sl-button__suffix {
-    ::slotted(*) {
-      margin-left: 0.5em;
-      margin-right: -0.5em;
-    }
-  }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
