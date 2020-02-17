@@ -335,9 +335,9 @@ export namespace Components {
     */
     'name': string;
   }
-  interface SlTabset {
+  interface SlTabSet {
     /**
-    * The position of the tabs in the tabset.
+    * The position of the tabs in the tab-set.
     */
     'position': 'top' | 'bottom' | 'left' | 'right';
     /**
@@ -561,10 +561,10 @@ declare global {
     new (): HTMLSlTabPanelElement;
   };
 
-  interface HTMLSlTabsetElement extends Components.SlTabset, HTMLStencilElement {}
-  var HTMLSlTabsetElement: {
-    prototype: HTMLSlTabsetElement;
-    new (): HTMLSlTabsetElement;
+  interface HTMLSlTabSetElement extends Components.SlTabSet, HTMLStencilElement {}
+  var HTMLSlTabSetElement: {
+    prototype: HTMLSlTabSetElement;
+    new (): HTMLSlTabSetElement;
   };
 
   interface HTMLSlTextareaElement extends Components.SlTextarea, HTMLStencilElement {}
@@ -591,7 +591,7 @@ declare global {
     'sl-switch': HTMLSlSwitchElement;
     'sl-tab': HTMLSlTabElement;
     'sl-tab-panel': HTMLSlTabPanelElement;
-    'sl-tabset': HTMLSlTabsetElement;
+    'sl-tab-set': HTMLSlTabSetElement;
     'sl-textarea': HTMLSlTextareaElement;
     'sl-tooltip': HTMLSlTooltipElement;
   }
@@ -866,7 +866,7 @@ declare namespace LocalJSX {
     */
     'name'?: string;
   }
-  interface SlTabset {
+  interface SlTabSet {
     /**
     * Emitted when a tab is hidden.
     */
@@ -876,7 +876,7 @@ declare namespace LocalJSX {
     */
     'onSlTabShow'?: (event: CustomEvent<any>) => void;
     /**
-    * The position of the tabs in the tabset.
+    * The position of the tabs in the tab-set.
     */
     'position'?: 'top' | 'bottom' | 'left' | 'right';
   }
@@ -1033,7 +1033,7 @@ declare namespace LocalJSX {
     'sl-switch': SlSwitch;
     'sl-tab': SlTab;
     'sl-tab-panel': SlTabPanel;
-    'sl-tabset': SlTabset;
+    'sl-tab-set': SlTabSet;
     'sl-textarea': SlTextarea;
     'sl-tooltip': SlTooltip;
   }
@@ -1057,7 +1057,7 @@ declare module "@stencil/core" {
       'sl-switch': LocalJSX.SlSwitch & JSXBase.HTMLAttributes<HTMLSlSwitchElement>;
       'sl-tab': LocalJSX.SlTab & JSXBase.HTMLAttributes<HTMLSlTabElement>;
       'sl-tab-panel': LocalJSX.SlTabPanel & JSXBase.HTMLAttributes<HTMLSlTabPanelElement>;
-      'sl-tabset': LocalJSX.SlTabset & JSXBase.HTMLAttributes<HTMLSlTabsetElement>;
+      'sl-tab-set': LocalJSX.SlTabSet & JSXBase.HTMLAttributes<HTMLSlTabSetElement>;
       'sl-textarea': LocalJSX.SlTextarea & JSXBase.HTMLAttributes<HTMLSlTextareaElement>;
       'sl-tooltip': LocalJSX.SlTooltip & JSXBase.HTMLAttributes<HTMLSlTooltipElement>;
     }

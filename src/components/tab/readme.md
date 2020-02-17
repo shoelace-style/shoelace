@@ -1,5 +1,4 @@
-# sl-tab
-
+TODO
 
 
 <!-- Auto Generated Below -->
@@ -46,4 +45,4 @@ Type: `Promise<void>`
 
 ----------------------------------------------
 
-*Shoelace Web Components are built with [StencilJS](https://stenciljs.com/)*
+

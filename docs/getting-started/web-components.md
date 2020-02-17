@@ -38,10 +38,10 @@ Slots are used to insert custom content into specific parts of a Custom Element.
 Sometimes you might need to put multiple elements into the same slot. This can be achieved by using the same `slot` on each element.
 
 ```html
-<sl-tabset>
+<sl-tab-set>
   <sl-tab slot="nav" panel="general">General</sl-tab>
   <sl-tab slot="nav" panel="custom">Custom</sl-tab>
   <sl-tab slot="nav" panel="advanced">Advanced</sl-tab>
   ...
-</sl-tabset>
+</sl-tab-set>
 ```

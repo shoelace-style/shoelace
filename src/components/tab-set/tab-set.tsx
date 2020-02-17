@@ -3,15 +3,15 @@ import { Component, Element, Event, EventEmitter, Method, Prop, State, Watch, h 
 import { getOffset } from '../../utilities/offset';
 import { scrollIntoView } from '../../utilities/scroll';
 
-/** @slot nav - Used for grouping tabs in the tabset. */
-/** @slot - Used for grouping tab panels in the tabset. */
+/** @slot nav - Used for grouping tabs in the tab-set. */
+/** @slot - Used for grouping tab panels in the tab-set. */
 
 @Component({
-  tag: 'sl-tabset',
-  styleUrl: 'tabset.scss',
+  tag: 'sl-tab-set',
+  styleUrl: 'tab-set.scss',
   shadow: true
 })
-export class Tabset {
+export class TabSet {
   activeTab: HTMLSlTabElement;
   activeTabIndicator: HTMLElement;
   body: HTMLElement;
@@ -30,7 +30,7 @@ export class Tabset {
 
   @State() isUsingMouse = false;
 
-  /** The position of the tabs in the tabset. */
+  /** The position of the tabs in the tab-set. */
   @Prop() position: 'top' | 'bottom' | 'left' | 'right' = 'top';
 
   @Watch('position')
@@ -209,28 +209,28 @@ export class Tabset {
     return (
       <div
         class={{
-          'sl-tabset': true,
-          'sl-tabset--using-mouse': this.isUsingMouse,
+          'sl-tab-set': true,
+          'sl-tab-set--using-mouse': this.isUsingMouse,
 
           // Positions
-          'sl-tabset--top': this.position === 'top',
-          'sl-tabset--bottom': this.position === 'bottom',
-          'sl-tabset--left': this.position === 'left',
-          'sl-tabset--right': this.position === 'right'
+          'sl-tab-set--top': this.position === 'top',
+          'sl-tab-set--bottom': this.position === 'bottom',
+          'sl-tab-set--left': this.position === 'left',
+          'sl-tab-set--right': this.position === 'right'
         }}
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
         onKeyUp={this.handleKeyUp}
         onMouseDown={this.handleMouseDown}
       >
-        <div ref={el => (this.nav = el)} class="sl-tabset__nav" tabindex="-1">
-          <div ref={el => (this.tabs = el)} class="sl-tabset__tabs" role="tablist">
-            <div ref={el => (this.activeTabIndicator = el)} class="sl-tabset__active-tab-indicator" />
+        <div ref={el => (this.nav = el)} class="sl-tab-set__nav" tabindex="-1">
+          <div ref={el => (this.tabs = el)} class="sl-tab-set__tabs" role="tablist">
+            <div ref={el => (this.activeTabIndicator = el)} class="sl-tab-set__active-tab-indicator" />
             <slot name="nav" />
           </div>
         </div>
 
-        <div ref={el => (this.body = el)} class="sl-tabset__body">
+        <div ref={el => (this.body = el)} class="sl-tab-set__body">
           <slot />
         </div>
       </div>

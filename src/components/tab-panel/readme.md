@@ -1,5 +1,4 @@
-# sl-tab-panel
-
+TODO
 
 
 <!-- Auto Generated Below -->
@@ -22,4 +21,4 @@
 
 ----------------------------------------------
 
-*Shoelace Web Components are built with [StencilJS](https://stenciljs.com/)*
+
