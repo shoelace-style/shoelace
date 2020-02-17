@@ -233,7 +233,7 @@
 
 .sl-button {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
   border-style: solid;
   border-width: var(--border-width);
@@ -256,6 +256,21 @@
   &[disabled] {
     opacity: 0.5;
     cursor: not-allowed;
+  }
+
+  .sl-button__prefix,
+  .sl-button__suffix {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+  }
+
+  .sl-button__prefix ::slotted(:first-child) {
+    margin-right: 0.5em;
+  }
+
+  .sl-button__suffix ::slotted(:last-child) {
+    margin-left: 0.5em;
   }
 }
 
