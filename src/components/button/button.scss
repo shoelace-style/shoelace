@@ -266,11 +266,13 @@
   }
 
   .sl-button__prefix ::slotted(:first-child) {
+    margin-left: -0.5em;
     margin-right: 0.5em;
   }
 
   .sl-button__suffix ::slotted(:last-child) {
     margin-left: 0.5em;
+    margin-right: -0.5em;
   }
 }
 
