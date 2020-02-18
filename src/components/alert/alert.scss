@@ -1,0 +1,110 @@
+:host {
+  --border-radius: 3px;
+  --border-width: 1px;
+  --font-family: var(--sl-font-sans-serif);
+  --font-size: 14px;
+  --font-weight: var(--sl-font-weight-normal);
+  --line-height: 1.6;
+  --padding-x: 1rem;
+  --padding-y: 1rem;
+  --margin-bottom: 1rem;
+
+  display: block;
+}
+
+.sl-alert {
+  display: flex;
+  align-items: stretch;
+  border: solid var(--border-width);
+  border-radius: var(--border-radius);
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
+  line-height: var(--line-height);
+  padding: var(--padding-y) var(--padding-x);
+  margin-bottom: var(--margin-bottom);
+  transition: 0.2s opacity;
+
+  &.sl-alert--closed {
+    opacity: 0;
+  }
+
+  &[hidden] {
+    display: none;
+  }
+
+  &.sl-alert--primary {
+    background-color: var(--sl-color-primary-95);
+    border-color: var(--sl-color-primary-90);
+    color: var(--sl-color-primary-40);
+  }
+
+  &.sl-alert--success {
+    background-color: var(--sl-color-success-95);
+    border-color: var(--sl-color-success-90);
+    color: var(--sl-color-success-40);
+  }
+
+  &.sl-alert--info {
+    background-color: var(--sl-color-info-95);
+    border-color: var(--sl-color-info-90);
+    color: var(--sl-color-info-40);
+  }
+
+  &.sl-alert--warning {
+    background-color: var(--sl-color-warning-95);
+    border-color: var(--sl-color-warning-90);
+    color: var(--sl-color-warning-40);
+  }
+
+  &.sl-alert--danger {
+    background-color: var(--sl-color-danger-95);
+    border-color: var(--sl-color-danger-90);
+    color: var(--sl-color-danger-40);
+  }
+
+  .sl-alert__icon {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    transform: scale(1.25);
+  }
+
+  .sl-alert__icon {
+    ::slotted(:first-child) {
+      margin-right: 0.5em;
+    }
+  }
+
+  .sl-alert__body {
+    flex: 1 1 auto;
+  }
+
+  .sl-alert__close {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    color: currentColor;
+    padding: 0;
+    margin: 0 0 0 var(--padding-x);
+    cursor: pointer;
+    -webkit-appearance: none;
+
+    &:hover,
+    &:focus {
+      outline: none;
+      filter: brightness(80%);
+    }
+
+    &:active {
+      filter: brightness(60%);
+    }
+
+    svg {
+      width: 14px;
+      height: 14px;
+    }
+  }
+}

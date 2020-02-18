@@ -10,6 +10,20 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
+  interface SlAlert {
+    /**
+    * Set to true to make the alert closable.
+    */
+    'closable': boolean;
+    /**
+    * Set to true to close the alert.
+    */
+    'closed': boolean;
+    /**
+    * The type of alert to draw.
+    */
+    'type': string;
+  }
   interface SlButton {
     /**
     * Set to true to draw a full-width button.
@@ -489,6 +503,12 @@ export namespace Components {
 declare global {
 
 
+  interface HTMLSlAlertElement extends Components.SlAlert, HTMLStencilElement {}
+  var HTMLSlAlertElement: {
+    prototype: HTMLSlAlertElement;
+    new (): HTMLSlAlertElement;
+  };
+
   interface HTMLSlButtonElement extends Components.SlButton, HTMLStencilElement {}
   var HTMLSlButtonElement: {
     prototype: HTMLSlButtonElement;
@@ -579,6 +599,7 @@ declare global {
     new (): HTMLSlTooltipElement;
   };
   interface HTMLElementTagNameMap {
+    'sl-alert': HTMLSlAlertElement;
     'sl-button': HTMLSlButtonElement;
     'sl-checkbox': HTMLSlCheckboxElement;
     'sl-dropdown': HTMLSlDropdownElement;
@@ -598,6 +619,24 @@ declare global {
 }
 
 declare namespace LocalJSX {
+  interface SlAlert {
+    /**
+    * Set to true to make the alert closable.
+    */
+    'closable'?: boolean;
+    /**
+    * Set to true to close the alert.
+    */
+    'closed'?: boolean;
+    /**
+    * Emitted when the alert is closed.
+    */
+    'onSlClose'?: (event: CustomEvent<any>) => void;
+    /**
+    * The type of alert to draw.
+    */
+    'type'?: string;
+  }
   interface SlButton {
     /**
     * Set to true to draw a full-width button.
@@ -1021,6 +1060,7 @@ declare namespace LocalJSX {
   }
 
   interface IntrinsicElements {
+    'sl-alert': SlAlert;
     'sl-button': SlButton;
     'sl-checkbox': SlCheckbox;
     'sl-dropdown': SlDropdown;
@@ -1045,6 +1085,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
+      'sl-alert': LocalJSX.SlAlert & JSXBase.HTMLAttributes<HTMLSlAlertElement>;
       'sl-button': LocalJSX.SlButton & JSXBase.HTMLAttributes<HTMLSlButtonElement>;
       'sl-checkbox': LocalJSX.SlCheckbox & JSXBase.HTMLAttributes<HTMLSlCheckboxElement>;
       'sl-dropdown': LocalJSX.SlDropdown & JSXBase.HTMLAttributes<HTMLSlDropdownElement>;

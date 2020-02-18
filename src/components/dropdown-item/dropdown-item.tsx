@@ -1,8 +1,10 @@
 import { Component, Event, EventEmitter, Prop, h } from '@stencil/core';
 
-/** @slot prefix - Used to prepend an icon or similar element to the dropdown item. */
-/** @slot suffix - Used to append an icon or similar element to the dropdown item. */
-/** @slot - The dropdown item's label. */
+/**
+ * @slot prefix - Used to prepend an icon or similar element to the dropdown item.
+ * @slot suffix - Used to append an icon or similar element to the dropdown item.
+ * @slot - The dropdown item's label.
+ */
 
 @Component({
   tag: 'sl-dropdown-item',

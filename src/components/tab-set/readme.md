@@ -34,9 +34,10 @@ Type: `Promise<void>`
 
 ## Slots
 
-| Slot | Description                                  |
-| ---- | -------------------------------------------- |
-|      | Used for grouping tab panels in the tab-set. |
+| Slot    | Description                                  |
+| ------- | -------------------------------------------- |
+|         | Used for grouping tab panels in the tab-set. |
+| `"nav"` | Used for grouping tabs in the tab-set.       |
 
 
 ----------------------------------------------

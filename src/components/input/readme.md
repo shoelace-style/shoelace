@@ -60,9 +60,12 @@ Type: `Promise<void>`
 
 ## Slots
 
-| Slot       | Description                                             |
-| ---------- | ------------------------------------------------------- |
-| `"suffix"` | Used to append an icon or similar element to the input. |
+| Slot       | Description                                              |
+| ---------- | -------------------------------------------------------- |
+| `"after"`  | Used to insert an addon after the input.                 |
+| `"before"` | Used to insert an addon before the input.                |
+| `"prefix"` | Used to prepend an icon or similar element to the input. |
+| `"suffix"` | Used to append an icon or similar element to the input.  |
 
 
 ----------------------------------------------

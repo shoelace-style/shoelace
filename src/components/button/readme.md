@@ -185,9 +185,11 @@ Type: `Promise<void>`
 
 ## Slots
 
-| Slot | Description         |
-| ---- | ------------------- |
-|      | The button's label. |
+| Slot       | Description                                               |
+| ---------- | --------------------------------------------------------- |
+|            | The button's label.                                       |
+| `"prefix"` | Used to prepend an icon or similar element to the button. |
+| `"suffix"` | Used to append an icon or similar element to the button.  |
 
 
 ----------------------------------------------

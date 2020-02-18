@@ -6,8 +6,10 @@ import { scrollIntoView } from '../../utilities/scroll';
 let id = 0;
 let openDropdowns = [];
 
-/** @slot trigger - The dropdown's trigger, usually a `<sl-button>` element. */
-/** @slot - Used to group the dropdown's menu items. */
+/**
+ * @slot trigger - The dropdown's trigger, usually a `<sl-button>` element.
+ * @slot - Used to group the dropdown's menu items.
+ */
 
 @Component({
   tag: 'sl-dropdown',

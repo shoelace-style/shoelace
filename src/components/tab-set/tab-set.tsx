@@ -3,8 +3,10 @@ import { Component, Element, Event, EventEmitter, Method, Prop, State, Watch, h 
 import { getOffset } from '../../utilities/offset';
 import { scrollIntoView } from '../../utilities/scroll';
 
-/** @slot nav - Used for grouping tabs in the tab-set. */
-/** @slot - Used for grouping tab panels in the tab-set. */
+/**
+ * @slot nav - Used for grouping tabs in the tab-set.
+ * @slot - Used for grouping tab panels in the tab-set.
+ */
 
 @Component({
   tag: 'sl-tab-set',

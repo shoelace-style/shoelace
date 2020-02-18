@@ -1,9 +1,11 @@
 import { Component, Method, Prop, State, h } from '@stencil/core';
 
-/** @slot before - Used to insert an addon before the input. */
-/** @slot after - Used to insert an addon after the input. */
-/** @slot prefix - Used to prepend an icon or similar element to the input. */
-/** @slot suffix - Used to append an icon or similar element to the input. */
+/**
+ * @slot before - Used to insert an addon before the input.
+ * @slot after - Used to insert an addon after the input.
+ * @slot prefix - Used to prepend an icon or similar element to the input.
+ * @slot suffix - Used to append an icon or similar element to the input.
+ */
 
 @Component({
   tag: 'sl-input',

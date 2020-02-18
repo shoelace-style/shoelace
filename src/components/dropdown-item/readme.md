@@ -22,9 +22,11 @@ TODO
 
 ## Slots
 
-| Slot | Description                |
-| ---- | -------------------------- |
-|      | The dropdown item's label. |
+| Slot       | Description                                                      |
+| ---------- | ---------------------------------------------------------------- |
+|            | The dropdown item's label.                                       |
+| `"prefix"` | Used to prepend an icon or similar element to the dropdown item. |
+| `"suffix"` | Used to append an icon or similar element to the dropdown item.  |
 
 
 ----------------------------------------------
