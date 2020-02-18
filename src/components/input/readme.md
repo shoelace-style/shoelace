@@ -60,9 +60,9 @@ Type: `Promise<void>`
 
 ## Slots
 
-| Slot            | Description                                             |
-| --------------- | ------------------------------------------------------- |
-| `"suffix-icon"` | Used to append an icon or similar element to the input. |
+| Slot       | Description                                             |
+| ---------- | ------------------------------------------------------- |
+| `"suffix"` | Used to append an icon or similar element to the input. |
 
 
 ----------------------------------------------
