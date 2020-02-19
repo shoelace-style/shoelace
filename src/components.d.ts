@@ -125,6 +125,21 @@ export namespace Components {
   }
   interface SlInput {
     /**
+    * The input's inputmode attribute.
+    */
+    '_inputMode': | 'none'
+    | 'text'
+    | 'decimal'
+    | 'numeric'
+    | 'tel'
+    | 'search'
+    | 'email'
+    | 'url';
+    /**
+    * The input's tabindex attribute.
+    */
+    '_tabIndex': number;
+    /**
     * The input's autocaptialize attribute.
     */
     'autocapitalize': string;
@@ -148,10 +163,6 @@ export namespace Components {
     * Set to true to disable the input.
     */
     'disabled': boolean;
-    /**
-    * The input's inputmode attribute.
-    */
-    'inputmode': string;
     /**
     * The input's max attribute.
     */
@@ -361,6 +372,21 @@ export namespace Components {
   }
   interface SlTextarea {
     /**
+    * The input's inputmode attribute.
+    */
+    '_inputMode': | 'none'
+    | 'text'
+    | 'decimal'
+    | 'numeric'
+    | 'tel'
+    | 'search'
+    | 'email'
+    | 'url';
+    /**
+    * The input's tabindex attribute.
+    */
+    '_tabIndex': number;
+    /**
     * The textarea's autocaptialize attribute.
     */
     'autocapitalize': string;
@@ -380,10 +406,6 @@ export namespace Components {
     * Set to true to disable the textarea.
     */
     'disabled': boolean;
-    /**
-    * The textarea's inputmode attribute.
-    */
-    'inputmode': string;
     /**
     * The textarea's maxlength attribute.
     */
@@ -721,6 +743,21 @@ declare namespace LocalJSX {
   }
   interface SlInput {
     /**
+    * The input's inputmode attribute.
+    */
+    '_inputMode'?: | 'none'
+    | 'text'
+    | 'decimal'
+    | 'numeric'
+    | 'tel'
+    | 'search'
+    | 'email'
+    | 'url';
+    /**
+    * The input's tabindex attribute.
+    */
+    '_tabIndex'?: number;
+    /**
     * The input's autocaptialize attribute.
     */
     'autocapitalize'?: string;
@@ -744,10 +781,6 @@ declare namespace LocalJSX {
     * Set to true to disable the input.
     */
     'disabled'?: boolean;
-    /**
-    * The input's inputmode attribute.
-    */
-    'inputmode'?: string;
     /**
     * The input's max attribute.
     */
@@ -921,6 +954,21 @@ declare namespace LocalJSX {
   }
   interface SlTextarea {
     /**
+    * The input's inputmode attribute.
+    */
+    '_inputMode'?: | 'none'
+    | 'text'
+    | 'decimal'
+    | 'numeric'
+    | 'tel'
+    | 'search'
+    | 'email'
+    | 'url';
+    /**
+    * The input's tabindex attribute.
+    */
+    '_tabIndex'?: number;
+    /**
     * The textarea's autocaptialize attribute.
     */
     'autocapitalize'?: string;
@@ -940,10 +988,6 @@ declare namespace LocalJSX {
     * Set to true to disable the textarea.
     */
     'disabled'?: boolean;
-    /**
-    * The textarea's inputmode attribute.
-    */
-    'inputmode'?: string;
     /**
     * The textarea's maxlength attribute.
     */
