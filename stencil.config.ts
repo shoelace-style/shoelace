@@ -3,6 +3,7 @@ import { sass } from '@stencil/sass';
 
 export const config: Config = {
   namespace: 'Shoelace',
+  globalStyle: 'src/styles/shoelace.scss',
   outputTargets: [
     {
       type: 'dist',
