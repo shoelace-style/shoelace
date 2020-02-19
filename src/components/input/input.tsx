@@ -15,6 +15,10 @@ import { Component, Method, Prop, State, h } from '@stencil/core';
 export class Input {
   input: HTMLInputElement;
 
+  constructor() {
+    this.handleClearClick = this.handleClearClick.bind(this);
+  }
+
   @State() hasFocus = false;
   @State() isPasswordVisible = false;
 
@@ -93,6 +97,12 @@ export class Input {
     this.input.blur();
   }
 
+  handleClearClick() {
+    this.input.value = '';
+    this.input.dispatchEvent(new Event('input', { bubbles: true }));
+    this.input.dispatchEvent(new Event('change', { bubbles: true }));
+  }
+
   render() {
     return (
       <div
@@ -149,7 +159,7 @@ export class Input {
           <button
             class="sl-input__clear"
             onMouseDown={event => event.preventDefault()}
-            onClick={() => (this.value = '')}
+            onClick={this.handleClearClick}
             tabindex="-1"
           >
             <svg
