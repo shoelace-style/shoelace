@@ -44,6 +44,9 @@ export class Button {
   /** Set to true to draw a circle button. */
   @Prop() circle = false;
 
+  /** The button's tabindex attribute. */
+  @Prop({ attribute: 'tabindex' }) _tabIndex: number;
+
   /** Sets focus on the button. */
   @Method()
   async setFocus() {
@@ -59,6 +62,7 @@ export class Button {
   render() {
     return (
       <Host
+        tabIndex={null}
         style={{
           display: this.block ? 'block' : null
         }}
@@ -92,6 +96,7 @@ export class Button {
             'sl-button--round': this.round
           }}
           disabled={this.disabled}
+          tabIndex={this._tabIndex}
         >
           <span class="sl-button__prefix">
             <slot name="prefix" />

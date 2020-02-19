@@ -26,6 +26,10 @@ export namespace Components {
   }
   interface SlButton {
     /**
+    * The button's tabindex attribute.
+    */
+    '_tabIndex': number;
+    /**
     * Set to true to draw a full-width button.
     */
     'block': boolean;
@@ -71,6 +75,10 @@ export namespace Components {
     'type': string;
   }
   interface SlCheckbox {
+    /**
+    * The checkbox's tabindex attribute.
+    */
+    '_tabIndex': number;
     /**
     * Set to true to draw the checkbox in a checked state.
     */
@@ -230,6 +238,10 @@ export namespace Components {
   }
   interface SlRadio {
     /**
+    * The radio's tabindex attribute.
+    */
+    '_tabIndex': number;
+    /**
     * Set to true to draw the radio in a checked state.
     */
     'checked': boolean;
@@ -255,6 +267,10 @@ export namespace Components {
     'value': string;
   }
   interface SlRange {
+    /**
+    * The range's tabindex attribute.
+    */
+    '_tabIndex': number;
     /**
     * Set to true to disable the input.
     */
@@ -303,6 +319,10 @@ export namespace Components {
     'size': string;
   }
   interface SlSwitch {
+    /**
+    * The switch's tabindex attribute.
+    */
+    '_tabIndex': number;
     /**
     * Set to true to draw the switch in a checked state.
     */
@@ -661,6 +681,10 @@ declare namespace LocalJSX {
   }
   interface SlButton {
     /**
+    * The button's tabindex attribute.
+    */
+    '_tabIndex'?: number;
+    /**
     * Set to true to draw a full-width button.
     */
     'block'?: boolean;
@@ -698,6 +722,10 @@ declare namespace LocalJSX {
     'type'?: string;
   }
   interface SlCheckbox {
+    /**
+    * The checkbox's tabindex attribute.
+    */
+    '_tabIndex'?: number;
     /**
     * Set to true to draw the checkbox in a checked state.
     */
@@ -840,6 +868,10 @@ declare namespace LocalJSX {
   }
   interface SlRadio {
     /**
+    * The radio's tabindex attribute.
+    */
+    '_tabIndex'?: number;
+    /**
     * Set to true to draw the radio in a checked state.
     */
     'checked'?: boolean;
@@ -857,6 +889,10 @@ declare namespace LocalJSX {
     'value'?: string;
   }
   interface SlRange {
+    /**
+    * The range's tabindex attribute.
+    */
+    '_tabIndex'?: number;
     /**
     * Set to true to disable the input.
     */
@@ -897,6 +933,10 @@ declare namespace LocalJSX {
     'size'?: string;
   }
   interface SlSwitch {
+    /**
+    * The switch's tabindex attribute.
+    */
+    '_tabIndex'?: number;
     /**
     * Set to true to draw the switch in a checked state.
     */

@@ -1,4 +1,4 @@
-import { Component, Element, Method, Prop, State, h } from '@stencil/core';
+import { Component, Element, Host, Method, Prop, State, h } from '@stencil/core';
 
 let id = 0;
 
@@ -34,6 +34,9 @@ export class Radio {
   /** Set to true to draw the radio in a checked state. */
   @Prop({ mutable: true }) checked = false;
 
+  /** The radio's tabindex attribute. */
+  @Prop({ attribute: 'tabindex' }) _tabIndex: number;
+
   /** Sets focus on the radio. */
   @Method()
   async setFocus() {
@@ -64,51 +67,54 @@ export class Radio {
 
   render() {
     return (
-      <label
-        htmlFor={this.id}
-        role="radio"
-        class={{
-          'sl-radio': true,
-          'sl-radio--checked': this.checked,
-          'sl-radio--disabled': this.disabled,
-          'sl-radio--focused': this.hasFocus
-        }}
-      >
-        <span class="sl-radio__control">
-          {this.checked ? (
-            <svg
-              viewBox="0 0 16 16"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-              xmlnsXlink="http://www.w3.org/1999/xlink"
-            >
-              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                <g fill="currentColor">
-                  <circle cx="8" cy="8" r="3.42857143"></circle>
+      <Host tabIndex={null}>
+        <label
+          htmlFor={this.id}
+          role="radio"
+          class={{
+            'sl-radio': true,
+            'sl-radio--checked': this.checked,
+            'sl-radio--disabled': this.disabled,
+            'sl-radio--focused': this.hasFocus
+          }}
+        >
+          <span class="sl-radio__control">
+            {this.checked ? (
+              <svg
+                viewBox="0 0 16 16"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlnsXlink="http://www.w3.org/1999/xlink"
+              >
+                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g fill="currentColor">
+                    <circle cx="8" cy="8" r="3.42857143"></circle>
+                  </g>
                 </g>
-              </g>
-            </svg>
-          ) : null}
+              </svg>
+            ) : null}
 
-          <input
-            ref={el => (this.input = el)}
-            id={this.id}
-            type="radio"
-            name={this.name}
-            value={this.value}
-            checked={this.checked}
-            disabled={this.disabled}
-            aria-labeledby={this.labelId}
-            onBlur={() => (this.hasFocus = false)}
-            onFocus={() => (this.hasFocus = true)}
-            onInput={this.handleInput}
-          />
-        </span>
+            <input
+              ref={el => (this.input = el)}
+              id={this.id}
+              type="radio"
+              name={this.name}
+              value={this.value}
+              checked={this.checked}
+              disabled={this.disabled}
+              tabIndex={this._tabIndex}
+              aria-labeledby={this.labelId}
+              onBlur={() => (this.hasFocus = false)}
+              onFocus={() => (this.hasFocus = true)}
+              onInput={this.handleInput}
+            />
+          </span>
 
-        <span id={this.labelId} class="sl-radio__label">
-          <slot />
-        </span>
-      </label>
+          <span id={this.labelId} class="sl-radio__label">
+            <slot />
+          </span>
+        </label>
+      </Host>
     );
   }
 }

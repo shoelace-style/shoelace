@@ -8,6 +8,7 @@ TODO
 
 | Property           | Attribute  | Description                                    | Type                         | Default                               |
 | ------------------ | ---------- | ---------------------------------------------- | ---------------------------- | ------------------------------------- |
+| `_tabIndex`        | `tabindex` | The range's tabindex attribute.                | `number`                     | `undefined`                           |
 | `disabled`         | `disabled` | Set to true to disable the input.              | `boolean`                    | `false`                               |
 | `max`              | `max`      | The input's max attribute.                     | `number`                     | `100`                                 |
 | `min`              | `min`      | The input's min attribute.                     | `number`                     | `0`                                   |

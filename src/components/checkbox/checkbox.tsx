@@ -1,4 +1,4 @@
-import { Component, Method, Prop, State, Watch, h } from '@stencil/core';
+import { Component, Host, Method, Prop, State, Watch, h } from '@stencil/core';
 
 let id = 0;
 
@@ -32,6 +32,9 @@ export class Checkbox {
   /** Set to true to draw the checkbox in a checked state. */
   @Prop({ mutable: true }) checked = false;
 
+  /** The checkbox's tabindex attribute. */
+  @Prop({ attribute: 'tabindex' }) _tabIndex: number;
+
   /** Set to true to draw the checkbox in an indeterminate state. */
   @Prop({ mutable: true }) indeterminate = false;
 
@@ -63,72 +66,75 @@ export class Checkbox {
 
   render() {
     return (
-      <label
-        htmlFor={this.id}
-        role="checkbox"
-        class={{
-          'sl-checkbox': true,
-          'sl-checkbox--checked': this.checked,
-          'sl-checkbox--disabled': this.disabled,
-          'sl-checkbox--focused': this.hasFocus,
-          'sl-checkbox--indeterminate': this.indeterminate
-        }}
-      >
-        <span class="sl-checkbox__control">
-          {this.checked ? (
-            <svg
-              viewBox="0 0 16 16"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-              xmlnsXlink="http://www.w3.org/1999/xlink"
-            >
-              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
-                <g stroke="currentColor" stroke-width="2">
-                  <g transform="translate(3.428571, 3.428571)">
-                    <path d="M0,5.71428571 L3.42857143,9.14285714"></path>
-                    <path d="M9.14285714,0 L3.42857143,9.14285714"></path>
+      <Host tabIndex={null}>
+        <label
+          htmlFor={this.id}
+          role="checkbox"
+          class={{
+            'sl-checkbox': true,
+            'sl-checkbox--checked': this.checked,
+            'sl-checkbox--disabled': this.disabled,
+            'sl-checkbox--focused': this.hasFocus,
+            'sl-checkbox--indeterminate': this.indeterminate
+          }}
+        >
+          <span class="sl-checkbox__control">
+            {this.checked ? (
+              <svg
+                viewBox="0 0 16 16"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlnsXlink="http://www.w3.org/1999/xlink"
+              >
+                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+                  <g stroke="currentColor" stroke-width="2">
+                    <g transform="translate(3.428571, 3.428571)">
+                      <path d="M0,5.71428571 L3.42857143,9.14285714"></path>
+                      <path d="M9.14285714,0 L3.42857143,9.14285714"></path>
+                    </g>
                   </g>
                 </g>
-              </g>
-            </svg>
-          ) : null}
+              </svg>
+            ) : null}
 
-          {!this.checked && this.indeterminate ? (
-            <svg
-              viewBox="0 0 16 16"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-              xmlnsXlink="http://www.w3.org/1999/xlink"
-            >
-              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
-                <g stroke="currentColor" stroke-width="2">
-                  <g transform="translate(2.285714, 6.857143)">
-                    <path d="M10.2857143,1.14285714 L1.14285714,1.14285714"></path>
+            {!this.checked && this.indeterminate ? (
+              <svg
+                viewBox="0 0 16 16"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlnsXlink="http://www.w3.org/1999/xlink"
+              >
+                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+                  <g stroke="currentColor" stroke-width="2">
+                    <g transform="translate(2.285714, 6.857143)">
+                      <path d="M10.2857143,1.14285714 L1.14285714,1.14285714"></path>
+                    </g>
                   </g>
                 </g>
-              </g>
-            </svg>
-          ) : null}
+              </svg>
+            ) : null}
 
-          <input
-            ref={el => (this.input = el)}
-            id={this.id}
-            type="checkbox"
-            name={this.name}
-            value={this.value}
-            checked={this.checked}
-            disabled={this.disabled}
-            aria-labeledby={this.labelId}
-            onBlur={() => (this.hasFocus = false)}
-            onFocus={() => (this.hasFocus = true)}
-            onInput={this.handleInput}
-          />
-        </span>
+            <input
+              ref={el => (this.input = el)}
+              id={this.id}
+              type="checkbox"
+              name={this.name}
+              value={this.value}
+              checked={this.checked}
+              disabled={this.disabled}
+              tabIndex={this._tabIndex}
+              aria-labeledby={this.labelId}
+              onBlur={() => (this.hasFocus = false)}
+              onFocus={() => (this.hasFocus = true)}
+              onInput={this.handleInput}
+            />
+          </span>
 
-        <span id={this.labelId} class="sl-checkbox__label">
-          <slot />
-        </span>
-      </label>
+          <span id={this.labelId} class="sl-checkbox__label">
+            <slot />
+          </span>
+        </label>
+      </Host>
     );
   }
 }

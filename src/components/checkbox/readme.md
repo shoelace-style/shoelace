@@ -8,6 +8,7 @@ TODO
 
 | Property        | Attribute       | Description                                                 | Type      | Default     |
 | --------------- | --------------- | ----------------------------------------------------------- | --------- | ----------- |
+| `_tabIndex`     | `tabindex`      | The checkbox's tabindex attribute.                          | `number`  | `undefined` |
 | `checked`       | `checked`       | Set to true to draw the checkbox in a checked state.        | `boolean` | `false`     |
 | `disabled`      | `disabled`      | Set to true to disable the checkbox.                        | `boolean` | `false`     |
 | `indeterminate` | `indeterminate` | Set to true to draw the checkbox in an indeterminate state. | `boolean` | `false`     |

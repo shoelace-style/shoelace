@@ -1,4 +1,4 @@
-import { Component, Method, Prop, State, h } from '@stencil/core';
+import { Component, Host, Method, Prop, State, h } from '@stencil/core';
 
 let id = 0;
 
@@ -33,6 +33,9 @@ export class Switch {
   /** Set to true to draw the switch in a checked state. */
   @Prop({ mutable: true }) checked = false;
 
+  /** The switch's tabindex attribute. */
+  @Prop({ attribute: 'tabindex' }) _tabIndex: number;
+
   /** Sets focus on the switch. */
   @Method()
   async setFocus() {
@@ -63,39 +66,42 @@ export class Switch {
 
   render() {
     return (
-      <label
-        htmlFor={this.id}
-        role="switch"
-        class={{
-          'sl-switch': true,
-          'sl-switch--checked': this.checked,
-          'sl-switch--disabled': this.disabled,
-          'sl-switch--focused': this.hasFocus
-        }}
-      >
-        <span class="sl-switch__control">
-          <span class="sl-switch__thumb" />
+      <Host tabIndex={null}>
+        <label
+          htmlFor={this.id}
+          role="switch"
+          class={{
+            'sl-switch': true,
+            'sl-switch--checked': this.checked,
+            'sl-switch--disabled': this.disabled,
+            'sl-switch--focused': this.hasFocus
+          }}
+        >
+          <span class="sl-switch__control">
+            <span class="sl-switch__thumb" />
 
-          <input
-            ref={el => (this.input = el)}
-            id={this.id}
-            type="checkbox"
-            name={this.name}
-            value={this.value}
-            checked={this.checked}
-            disabled={this.disabled}
-            aria-labeledby={this.labelId}
-            onBlur={() => (this.hasFocus = false)}
-            onFocus={() => (this.hasFocus = true)}
-            onKeyDown={this.handleKeyDown}
-            onInput={this.handleInput}
-          />
-        </span>
+            <input
+              ref={el => (this.input = el)}
+              id={this.id}
+              type="checkbox"
+              name={this.name}
+              value={this.value}
+              checked={this.checked}
+              disabled={this.disabled}
+              tabIndex={this._tabIndex}
+              aria-labeledby={this.labelId}
+              onBlur={() => (this.hasFocus = false)}
+              onFocus={() => (this.hasFocus = true)}
+              onKeyDown={this.handleKeyDown}
+              onInput={this.handleInput}
+            />
+          </span>
 
-        <span id={this.labelId} class="sl-switch__label">
-          <slot />
-        </span>
-      </label>
+          <span id={this.labelId} class="sl-switch__label">
+            <slot />
+          </span>
+        </label>
+      </Host>
     );
   }
 }

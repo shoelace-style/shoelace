@@ -147,17 +147,18 @@ Use the `disabled` prop to disable a button.
 
 ## Properties
 
-| Property   | Attribute  | Description                                                                                                                                   | Type      | Default     |
-| ---------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ----------- |
-| `block`    | `block`    | Set to true to draw a full-width button.                                                                                                      | `boolean` | `false`     |
-| `caret`    | `caret`    | Set to true to draw the button with a caret for use with dropdowns, popovers, etc. If this is enabled, the suffix slot will not be displayed. | `boolean` | `false`     |
-| `circle`   | `circle`   | Set to true to draw a circle button.                                                                                                          | `boolean` | `false`     |
-| `disabled` | `disabled` | Set to true to disable the button.                                                                                                            | `boolean` | `false`     |
-| `loading`  | `loading`  | Set to true to draw the button in a loading state.                                                                                            | `boolean` | `false`     |
-| `outline`  | `outline`  | Set to true to draw an outlined button.                                                                                                       | `boolean` | `false`     |
-| `round`    | `round`    | Set to true to draw a rounded button.                                                                                                         | `boolean` | `false`     |
-| `size`     | `size`     | The button's size, one of `small`, `medium`, or `large`.                                                                                      | `string`  | `'medium'`  |
-| `type`     | `type`     | The button's type, one of `default`, `primary`, `success`, `info`, `warning`, `danger`, or `text`.                                            | `string`  | `'default'` |
+| Property    | Attribute  | Description                                                                                                                                   | Type      | Default     |
+| ----------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ----------- |
+| `_tabIndex` | `tabindex` | The button's tabindex attribute.                                                                                                              | `number`  | `undefined` |
+| `block`     | `block`    | Set to true to draw a full-width button.                                                                                                      | `boolean` | `false`     |
+| `caret`     | `caret`    | Set to true to draw the button with a caret for use with dropdowns, popovers, etc. If this is enabled, the suffix slot will not be displayed. | `boolean` | `false`     |
+| `circle`    | `circle`   | Set to true to draw a circle button.                                                                                                          | `boolean` | `false`     |
+| `disabled`  | `disabled` | Set to true to disable the button.                                                                                                            | `boolean` | `false`     |
+| `loading`   | `loading`  | Set to true to draw the button in a loading state.                                                                                            | `boolean` | `false`     |
+| `outline`   | `outline`  | Set to true to draw an outlined button.                                                                                                       | `boolean` | `false`     |
+| `round`     | `round`    | Set to true to draw a rounded button.                                                                                                         | `boolean` | `false`     |
+| `size`      | `size`     | The button's size, one of `small`, `medium`, or `large`.                                                                                      | `string`  | `'medium'`  |
+| `type`      | `type`     | The button's type, one of `default`, `primary`, `success`, `info`, `warning`, `danger`, or `text`.                                            | `string`  | `'default'` |
 
 
 ## Methods
