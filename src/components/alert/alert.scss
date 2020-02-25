@@ -1,3 +1,5 @@
+@import 'reset';
+
 :host {
   --border-radius: 3px;
   --border-width: 1px;
@@ -10,6 +12,7 @@
   --margin-bottom: 1rem;
 
   display: block;
+  margin-bottom: var(--margin-bottom);
 }
 
 .sl-alert {
@@ -22,7 +25,6 @@
   font-weight: var(--font-weight);
   line-height: var(--line-height);
   padding: var(--padding-y) var(--padding-x);
-  margin-bottom: var(--margin-bottom);
   transition: 0.2s opacity;
 
   &.sl-alert--closed {
