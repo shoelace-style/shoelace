@@ -15,7 +15,7 @@ export class Button {
   button: HTMLButtonElement;
 
   /** The button's type. */
-  @Prop() type: 'default' | 'primary' | 'success' | 'info' | 'warning' | 'danger' = 'default';
+  @Prop() type: 'default' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text' = 'default';
 
   /** The button's size. */
   @Prop() size: 'small' | 'medium' | 'large' = 'medium';
