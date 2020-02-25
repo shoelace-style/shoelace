@@ -9,7 +9,6 @@
   --line-height: 1.6;
   --padding-x: 1rem;
   --padding-y: 1rem;
-  --margin-bottom: 1rem;
 
   display: block;
 }
@@ -24,7 +23,6 @@
   font-weight: var(--font-weight);
   line-height: var(--line-height);
   padding: var(--padding-y) var(--padding-x);
-  margin-bottom: var(--margin-bottom);
   transition: 0.2s opacity;
 
   &.sl-alert--closed {
