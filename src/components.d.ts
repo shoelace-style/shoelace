@@ -72,7 +72,7 @@ export namespace Components {
     /**
     * The button's type.
     */
-    'type': 'default' | 'primary' | 'success' | 'info' | 'warning' | 'danger';
+    'type': 'default' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text';
   }
   interface SlCheckbox {
     /**
@@ -231,11 +231,15 @@ export namespace Components {
   }
   interface SlProgress {
     /**
-    * The button's type.
+    * The indicator's color.
     */
     'color': string;
     /**
-    * The button's type, one of `default`, `primary`, `success`, `info`, `warning`, `danger`, or `text`.
+    * The progress bar's height including unit (e.g. `20px`).
+    */
+    'height': string;
+    /**
+    * The indicator's percentage.
     */
     'percentage': number;
   }
@@ -722,7 +726,7 @@ declare namespace LocalJSX {
     /**
     * The button's type.
     */
-    'type'?: 'default' | 'primary' | 'success' | 'info' | 'warning' | 'danger';
+    'type'?: 'default' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text';
   }
   interface SlCheckbox {
     /**
@@ -864,11 +868,15 @@ declare namespace LocalJSX {
   }
   interface SlProgress {
     /**
-    * The button's type.
+    * The indicator's color.
     */
     'color'?: string;
     /**
-    * The button's type, one of `default`, `primary`, `success`, `info`, `warning`, `danger`, or `text`.
+    * The progress bar's height including unit (e.g. `20px`).
+    */
+    'height'?: string;
+    /**
+    * The indicator's percentage.
     */
     'percentage'?: number;
   }

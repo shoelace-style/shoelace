@@ -7,19 +7,18 @@
 
 ## Properties
 
-| Property     | Attribute    | Description                                                                                        | Type     | Default                        |
-| ------------ | ------------ | -------------------------------------------------------------------------------------------------- | -------- | ------------------------------ |
-| `color`      | `color`      | The button's type.                                                                                 | `string` | `'var(--sl-color-primary-50)'` |
-| `percentage` | `percentage` | The button's type, one of `default`, `primary`, `success`, `info`, `warning`, `danger`, or `text`. | `number` | `0`                            |
+| Property     | Attribute    | Description                                             | Type     | Default                        |
+| ------------ | ------------ | ------------------------------------------------------- | -------- | ------------------------------ |
+| `color`      | `color`      | The indicator's color.                                  | `string` | `'var(--sl-color-primary-50)'` |
+| `height`     | `height`     | The progress bar's height including unit (e.g. `20px`). | `string` | `'6px'`                        |
+| `percentage` | `percentage` | The indicator's percentage.                             | `number` | `0`                            |
 
 
 ## Slots
 
-| Slot       | Description                                               |
-| ---------- | --------------------------------------------------------- |
-|            | The button's label.                                       |
-| `"prefix"` | Used to prepend an icon or similar element to the button. |
-| `"suffix"` | Used to append an icon or similar element to the button.  |
+| Slot | Description                           |
+| ---- | ------------------------------------- |
+|      | A label to show inside the indicator. |
 
 
 ----------------------------------------------

@@ -1,0 +1,33 @@
+@import 'reset';
+
+:host {
+  --background-color: var(--sl-color-gray-90);
+  --border-radius: var(--height);
+  --color: var(--sl-color-white);
+  --font-size: 0.75rem;
+  --height: 6px;
+  --margin-bottom: 1rem;
+  --transition-speed: 400ms;
+
+  display: block;
+  margin-bottom: var(--margin-bottom);
+}
+
+.sl-progress {
+  position: relative;
+  background: var(--background-color);
+  height: var(--height);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.sl-progress__indicator {
+  height: 100%;
+  font-size: var(--font-size);
+  color: var(--color);
+  text-align: center;
+  line-height: var(--height);
+  white-space: nowrap;
+  overflow: hidden;
+  transition: var(--transition-speed) width, var(--transition-speed) background-color;
+}
