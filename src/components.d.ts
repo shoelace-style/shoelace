@@ -26,10 +26,6 @@ export namespace Components {
   }
   interface SlButton {
     /**
-    * The button's tabindex attribute.
-    */
-    '_tabIndex': number;
-    /**
     * Set to true to draw a full-width button.
     */
     'block': boolean;
@@ -49,6 +45,10 @@ export namespace Components {
     * Set to true to draw the button in a loading state.
     */
     'loading': boolean;
+    /**
+    * The button's tabindex attribute.
+    */
+    'nativeTabindex': number;
     /**
     * Set to true to draw an outlined button.
     */
@@ -76,10 +76,6 @@ export namespace Components {
   }
   interface SlCheckbox {
     /**
-    * The checkbox's tabindex attribute.
-    */
-    '_tabIndex': number;
-    /**
     * Set to true to draw the checkbox in a checked state.
     */
     'checked': boolean;
@@ -95,6 +91,10 @@ export namespace Components {
     * A native input's name attribute.
     */
     'name': string;
+    /**
+    * The checkbox's tabindex attribute.
+    */
+    'nativeTabindex': number;
     /**
     * Removes focus from the checkbox.
     */
@@ -132,21 +132,6 @@ export namespace Components {
     'disabled': boolean;
   }
   interface SlInput {
-    /**
-    * The input's inputmode attribute.
-    */
-    '_inputMode': | 'none'
-    | 'text'
-    | 'decimal'
-    | 'numeric'
-    | 'tel'
-    | 'search'
-    | 'email'
-    | 'url';
-    /**
-    * The input's tabindex attribute.
-    */
-    '_tabIndex': number;
     /**
     * The input's autocaptialize attribute.
     */
@@ -191,6 +176,14 @@ export namespace Components {
     * The input's name attribute.
     */
     'name': string;
+    /**
+    * The input's inputmode attribute.
+    */
+    'nativeInputmode': 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
+    /**
+    * The input's tabindex attribute.
+    */
+    'nativeTabindex': number;
     /**
     * The input's pattern attribute.
     */
@@ -238,10 +231,6 @@ export namespace Components {
   }
   interface SlRadio {
     /**
-    * The radio's tabindex attribute.
-    */
-    '_tabIndex': number;
-    /**
     * Set to true to draw the radio in a checked state.
     */
     'checked': boolean;
@@ -253,6 +242,10 @@ export namespace Components {
     * A native input's name attribute.
     */
     'name': string;
+    /**
+    * The radio's tabindex attribute.
+    */
+    'nativeTabindex': number;
     /**
     * Removes focus from the radio.
     */
@@ -267,10 +260,6 @@ export namespace Components {
     'value': string;
   }
   interface SlRange {
-    /**
-    * The range's tabindex attribute.
-    */
-    '_tabIndex': number;
     /**
     * Set to true to disable the input.
     */
@@ -287,6 +276,10 @@ export namespace Components {
     * The input's name attribute.
     */
     'name': string;
+    /**
+    * The range's tabindex attribute.
+    */
+    'nativeTabindex': number;
     /**
     * Removes focus from the input.
     */
@@ -320,10 +313,6 @@ export namespace Components {
   }
   interface SlSwitch {
     /**
-    * The switch's tabindex attribute.
-    */
-    '_tabIndex': number;
-    /**
     * Set to true to draw the switch in a checked state.
     */
     'checked': boolean;
@@ -335,6 +324,10 @@ export namespace Components {
     * A native input's name attribute.
     */
     'name': string;
+    /**
+    * The switch's tabindex attribute.
+    */
+    'nativeTabindex': number;
     /**
     * Removes focus from the switch.
     */
@@ -392,21 +385,6 @@ export namespace Components {
   }
   interface SlTextarea {
     /**
-    * The input's inputmode attribute.
-    */
-    '_inputMode': | 'none'
-    | 'text'
-    | 'decimal'
-    | 'numeric'
-    | 'tel'
-    | 'search'
-    | 'email'
-    | 'url';
-    /**
-    * The input's tabindex attribute.
-    */
-    '_tabIndex': number;
-    /**
     * The textarea's autocaptialize attribute.
     */
     'autocapitalize': string;
@@ -434,6 +412,14 @@ export namespace Components {
     * The textarea's name attribute.
     */
     'name': string;
+    /**
+    * The input's inputmode attribute.
+    */
+    'nativeInputmode': 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
+    /**
+    * The input's tabindex attribute.
+    */
+    'nativeTabindex': number;
     /**
     * The textarea's placeholder text.
     */
@@ -681,10 +667,6 @@ declare namespace LocalJSX {
   }
   interface SlButton {
     /**
-    * The button's tabindex attribute.
-    */
-    '_tabIndex'?: number;
-    /**
     * Set to true to draw a full-width button.
     */
     'block'?: boolean;
@@ -705,6 +687,10 @@ declare namespace LocalJSX {
     */
     'loading'?: boolean;
     /**
+    * The button's tabindex attribute.
+    */
+    'nativeTabindex'?: number;
+    /**
     * Set to true to draw an outlined button.
     */
     'outline'?: boolean;
@@ -723,10 +709,6 @@ declare namespace LocalJSX {
   }
   interface SlCheckbox {
     /**
-    * The checkbox's tabindex attribute.
-    */
-    '_tabIndex'?: number;
-    /**
     * Set to true to draw the checkbox in a checked state.
     */
     'checked'?: boolean;
@@ -742,6 +724,10 @@ declare namespace LocalJSX {
     * A native input's name attribute.
     */
     'name'?: string;
+    /**
+    * The checkbox's tabindex attribute.
+    */
+    'nativeTabindex'?: number;
     /**
     * The native input's value attribute.
     */
@@ -770,21 +756,6 @@ declare namespace LocalJSX {
     'onShoelaceSelect'?: (event: CustomEvent<any>) => void;
   }
   interface SlInput {
-    /**
-    * The input's inputmode attribute.
-    */
-    '_inputMode'?: | 'none'
-    | 'text'
-    | 'decimal'
-    | 'numeric'
-    | 'tel'
-    | 'search'
-    | 'email'
-    | 'url';
-    /**
-    * The input's tabindex attribute.
-    */
-    '_tabIndex'?: number;
     /**
     * The input's autocaptialize attribute.
     */
@@ -830,6 +801,14 @@ declare namespace LocalJSX {
     */
     'name'?: string;
     /**
+    * The input's inputmode attribute.
+    */
+    'nativeInputmode'?: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
+    /**
+    * The input's tabindex attribute.
+    */
+    'nativeTabindex'?: number;
+    /**
     * The input's pattern attribute.
     */
     'pattern'?: string;
@@ -868,10 +847,6 @@ declare namespace LocalJSX {
   }
   interface SlRadio {
     /**
-    * The radio's tabindex attribute.
-    */
-    '_tabIndex'?: number;
-    /**
     * Set to true to draw the radio in a checked state.
     */
     'checked'?: boolean;
@@ -884,15 +859,15 @@ declare namespace LocalJSX {
     */
     'name'?: string;
     /**
+    * The radio's tabindex attribute.
+    */
+    'nativeTabindex'?: number;
+    /**
     * The native input's value attribute.
     */
     'value'?: string;
   }
   interface SlRange {
-    /**
-    * The range's tabindex attribute.
-    */
-    '_tabIndex'?: number;
     /**
     * Set to true to disable the input.
     */
@@ -909,6 +884,10 @@ declare namespace LocalJSX {
     * The input's name attribute.
     */
     'name'?: string;
+    /**
+    * The range's tabindex attribute.
+    */
+    'nativeTabindex'?: number;
     /**
     * The input's step attribute.
     */
@@ -934,10 +913,6 @@ declare namespace LocalJSX {
   }
   interface SlSwitch {
     /**
-    * The switch's tabindex attribute.
-    */
-    '_tabIndex'?: number;
-    /**
     * Set to true to draw the switch in a checked state.
     */
     'checked'?: boolean;
@@ -949,6 +924,10 @@ declare namespace LocalJSX {
     * A native input's name attribute.
     */
     'name'?: string;
+    /**
+    * The switch's tabindex attribute.
+    */
+    'nativeTabindex'?: number;
     /**
     * The native input's value attribute.
     */
@@ -994,21 +973,6 @@ declare namespace LocalJSX {
   }
   interface SlTextarea {
     /**
-    * The input's inputmode attribute.
-    */
-    '_inputMode'?: | 'none'
-    | 'text'
-    | 'decimal'
-    | 'numeric'
-    | 'tel'
-    | 'search'
-    | 'email'
-    | 'url';
-    /**
-    * The input's tabindex attribute.
-    */
-    '_tabIndex'?: number;
-    /**
     * The textarea's autocaptialize attribute.
     */
     'autocapitalize'?: string;
@@ -1036,6 +1000,14 @@ declare namespace LocalJSX {
     * The textarea's name attribute.
     */
     'name'?: string;
+    /**
+    * The input's inputmode attribute.
+    */
+    'nativeInputmode'?: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
+    /**
+    * The input's tabindex attribute.
+    */
+    'nativeTabindex'?: number;
     /**
     * The textarea's placeholder text.
     */

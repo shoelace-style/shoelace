@@ -1,4 +1,4 @@
-import { Component, Host, Method, Prop, State, h } from '@stencil/core';
+import { Component, Method, Prop, State, h } from '@stencil/core';
 
 @Component({
   tag: 'sl-range',
@@ -34,7 +34,7 @@ export class Range {
   @Prop() step = 1;
 
   /** The range's tabindex attribute. */
-  @Prop({ attribute: 'tabindex' }) _tabIndex: number;
+  @Prop() nativeTabindex: number;
 
   /** The tooltip's position. */
   @Prop() tooltip: 'top' | 'bottom' | 'off' = 'top';
@@ -83,41 +83,39 @@ export class Range {
 
   render() {
     return (
-      <Host tabIndex={null}>
-        <div
-          class={{
-            'sl-range': true,
+      <div
+        class={{
+          'sl-range': true,
 
-            // States
-            'sl-range--disabled': this.disabled,
-            'sl-range--focused': this.hasFocus,
-            'sl-range--tooltip-top': this.tooltip === 'top',
-            'sl-range--tooltip-bottom': this.tooltip === 'bottom'
-          }}
-          onClick={() => this.input.focus()}
-        >
-          <input
-            ref={el => (this.input = el)}
-            type="range"
-            class="sl-range__control"
-            name={this.name}
-            disabled={this.disabled}
-            min={this.min}
-            max={this.max}
-            step={this.step}
-            value={this.value}
-            tabIndex={this._tabIndex}
-            onFocus={() => (this.hasFocus = true)}
-            onBlur={() => (this.hasFocus = false)}
-            onInput={this.handleInput}
-          />
-          {this.tooltip !== 'off' && (
-            <output ref={el => (this.output = el)} class="sl-range__tooltip">
-              {this.tooltipFormatter(this.value)}
-            </output>
-          )}
-        </div>
-      </Host>
+          // States
+          'sl-range--disabled': this.disabled,
+          'sl-range--focused': this.hasFocus,
+          'sl-range--tooltip-top': this.tooltip === 'top',
+          'sl-range--tooltip-bottom': this.tooltip === 'bottom'
+        }}
+        onClick={() => this.input.focus()}
+      >
+        <input
+          ref={el => (this.input = el)}
+          type="range"
+          class="sl-range__control"
+          name={this.name}
+          disabled={this.disabled}
+          min={this.min}
+          max={this.max}
+          step={this.step}
+          value={this.value}
+          tabIndex={this.nativeTabindex}
+          onFocus={() => (this.hasFocus = true)}
+          onBlur={() => (this.hasFocus = false)}
+          onInput={this.handleInput}
+        />
+        {this.tooltip !== 'off' && (
+          <output ref={el => (this.output = el)} class="sl-range__tooltip">
+            {this.tooltipFormatter(this.value)}
+          </output>
+        )}
+      </div>
     );
   }
 }

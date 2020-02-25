@@ -1,4 +1,4 @@
-import { Component, Host, Method, Prop, State, Watch, h } from '@stencil/core';
+import { Component, Method, Prop, State, Watch, h } from '@stencil/core';
 import { ResizeObserver } from 'resize-observer';
 
 @Component({
@@ -57,18 +57,10 @@ export class Textarea {
   @Prop() required: boolean;
 
   /** The input's inputmode attribute. */
-  @Prop({ attribute: 'inputmode' }) _inputMode:
-    | 'none'
-    | 'text'
-    | 'decimal'
-    | 'numeric'
-    | 'tel'
-    | 'search'
-    | 'email'
-    | 'url';
+  @Prop() nativeInputmode: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
 
   /** The input's tabindex attribute. */
-  @Prop({ attribute: 'tabindex' }) _tabIndex: number;
+  @Prop() nativeTabindex: number;
 
   /** The number of rows to display by default. */
   @Prop() rows = 4;
@@ -120,50 +112,48 @@ export class Textarea {
 
   render() {
     return (
-      <Host inputMode={null} tabIndex={null}>
-        <div
-          class={{
-            'sl-textarea': true,
+      <div
+        class={{
+          'sl-textarea': true,
 
-            // Sizes
-            'sl-textarea--small': this.size === 'small',
-            'sl-textarea--medium': this.size === 'medium',
-            'sl-textarea--large': this.size === 'large',
+          // Sizes
+          'sl-textarea--small': this.size === 'small',
+          'sl-textarea--medium': this.size === 'medium',
+          'sl-textarea--large': this.size === 'large',
 
-            // States
-            'sl-textarea--disabled': this.disabled,
-            'sl-textarea--focused': this.hasFocus,
-            'sl-textarea--empty': this.value.length === 0,
+          // States
+          'sl-textarea--disabled': this.disabled,
+          'sl-textarea--focused': this.hasFocus,
+          'sl-textarea--empty': this.value.length === 0,
 
-            // Modifiers
-            'sl-textarea--resize-none': this.resize === 'none',
-            'sl-textarea--resize-vertical': this.resize === 'vertical',
-            'sl-textarea--resize-auto': this.resize === 'auto'
-          }}
-          onClick={() => this.textarea.focus()}
-        >
-          <textarea
-            ref={el => (this.textarea = el)}
-            class="sl-textarea__control"
-            name={this.name}
-            placeholder={this.placeholder}
-            disabled={this.disabled}
-            readOnly={this.readonly}
-            rows={this.rows}
-            maxLength={this.maxlength}
-            value={this.value}
-            autoCapitalize={this.autocapitalize}
-            autoCorrect={this.autocorrect}
-            autoFocus={this.autofocus}
-            required={this.required}
-            inputMode={this._inputMode}
-            tabIndex={this._tabIndex}
-            onFocus={() => (this.hasFocus = true)}
-            onBlur={() => (this.hasFocus = false)}
-            onInput={this.handleInput}
-          />
-        </div>
-      </Host>
+          // Modifiers
+          'sl-textarea--resize-none': this.resize === 'none',
+          'sl-textarea--resize-vertical': this.resize === 'vertical',
+          'sl-textarea--resize-auto': this.resize === 'auto'
+        }}
+        onClick={() => this.textarea.focus()}
+      >
+        <textarea
+          ref={el => (this.textarea = el)}
+          class="sl-textarea__control"
+          name={this.name}
+          placeholder={this.placeholder}
+          disabled={this.disabled}
+          readOnly={this.readonly}
+          rows={this.rows}
+          maxLength={this.maxlength}
+          value={this.value}
+          autoCapitalize={this.autocapitalize}
+          autoCorrect={this.autocorrect}
+          autoFocus={this.autofocus}
+          required={this.required}
+          inputMode={this.nativeInputmode}
+          tabIndex={this.nativeTabindex}
+          onFocus={() => (this.hasFocus = true)}
+          onBlur={() => (this.hasFocus = false)}
+          onInput={this.handleInput}
+        />
+      </div>
     );
   }
 }
