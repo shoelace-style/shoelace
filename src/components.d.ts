@@ -66,13 +66,13 @@ export namespace Components {
     */
     'setFocus': () => Promise<void>;
     /**
-    * The button's size, one of `small`, `medium`, or `large`.
+    * The button's size.
     */
-    'size': string;
+    'size': 'small' | 'medium' | 'large';
     /**
-    * The button's type, one of `default`, `primary`, `success`, `info`, `warning`, `danger`, or `text`.
+    * The button's type.
     */
-    'type': string;
+    'type': 'default' | 'primary' | 'success' | 'info' | 'warning' | 'danger';
   }
   interface SlCheckbox {
     /**
@@ -223,11 +223,21 @@ export namespace Components {
     /**
     * The input's type, one of `text`, `number`, `email`, etc.
     */
-    'type': string;
+    'type': 'email' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'url';
     /**
     * The input's value attribute.
     */
     'value': string;
+  }
+  interface SlProgress {
+    /**
+    * The button's type.
+    */
+    'color': string;
+    /**
+    * The button's type, one of `default`, `primary`, `success`, `info`, `warning`, `danger`, or `text`.
+    */
+    'percentage': number;
   }
   interface SlRadio {
     /**
@@ -449,9 +459,9 @@ export namespace Components {
     */
     'setFocus': () => Promise<void>;
     /**
-    * The textarea's size, one of `small`, `medium`, or `large`.
+    * The textarea's size.
     */
-    'size': string;
+    'size': 'small' | 'medium' | 'large';
     /**
     * The textarea's value attribute.
     */
@@ -573,6 +583,12 @@ declare global {
     new (): HTMLSlInputElement;
   };
 
+  interface HTMLSlProgressElement extends Components.SlProgress, HTMLStencilElement {}
+  var HTMLSlProgressElement: {
+    prototype: HTMLSlProgressElement;
+    new (): HTMLSlProgressElement;
+  };
+
   interface HTMLSlRadioElement extends Components.SlRadio, HTMLStencilElement {}
   var HTMLSlRadioElement: {
     prototype: HTMLSlRadioElement;
@@ -634,6 +650,7 @@ declare global {
     'sl-dropdown-divider': HTMLSlDropdownDividerElement;
     'sl-dropdown-item': HTMLSlDropdownItemElement;
     'sl-input': HTMLSlInputElement;
+    'sl-progress': HTMLSlProgressElement;
     'sl-radio': HTMLSlRadioElement;
     'sl-range': HTMLSlRangeElement;
     'sl-spinner': HTMLSlSpinnerElement;
@@ -699,13 +716,13 @@ declare namespace LocalJSX {
     */
     'round'?: boolean;
     /**
-    * The button's size, one of `small`, `medium`, or `large`.
+    * The button's size.
     */
-    'size'?: string;
+    'size'?: 'small' | 'medium' | 'large';
     /**
-    * The button's type, one of `default`, `primary`, `success`, `info`, `warning`, `danger`, or `text`.
+    * The button's type.
     */
-    'type'?: string;
+    'type'?: 'default' | 'primary' | 'success' | 'info' | 'warning' | 'danger';
   }
   interface SlCheckbox {
     /**
@@ -839,11 +856,21 @@ declare namespace LocalJSX {
     /**
     * The input's type, one of `text`, `number`, `email`, etc.
     */
-    'type'?: string;
+    'type'?: 'email' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'url';
     /**
     * The input's value attribute.
     */
     'value'?: string;
+  }
+  interface SlProgress {
+    /**
+    * The button's type.
+    */
+    'color'?: string;
+    /**
+    * The button's type, one of `default`, `primary`, `success`, `info`, `warning`, `danger`, or `text`.
+    */
+    'percentage'?: number;
   }
   interface SlRadio {
     /**
@@ -1029,9 +1056,9 @@ declare namespace LocalJSX {
     */
     'rows'?: number;
     /**
-    * The textarea's size, one of `small`, `medium`, or `large`.
+    * The textarea's size.
     */
-    'size'?: string;
+    'size'?: 'small' | 'medium' | 'large';
     /**
     * The textarea's value attribute.
     */
@@ -1123,6 +1150,7 @@ declare namespace LocalJSX {
     'sl-dropdown-divider': SlDropdownDivider;
     'sl-dropdown-item': SlDropdownItem;
     'sl-input': SlInput;
+    'sl-progress': SlProgress;
     'sl-radio': SlRadio;
     'sl-range': SlRange;
     'sl-spinner': SlSpinner;
@@ -1148,6 +1176,7 @@ declare module "@stencil/core" {
       'sl-dropdown-divider': LocalJSX.SlDropdownDivider & JSXBase.HTMLAttributes<HTMLSlDropdownDividerElement>;
       'sl-dropdown-item': LocalJSX.SlDropdownItem & JSXBase.HTMLAttributes<HTMLSlDropdownItemElement>;
       'sl-input': LocalJSX.SlInput & JSXBase.HTMLAttributes<HTMLSlInputElement>;
+      'sl-progress': LocalJSX.SlProgress & JSXBase.HTMLAttributes<HTMLSlProgressElement>;
       'sl-radio': LocalJSX.SlRadio & JSXBase.HTMLAttributes<HTMLSlRadioElement>;
       'sl-range': LocalJSX.SlRange & JSXBase.HTMLAttributes<HTMLSlRangeElement>;
       'sl-spinner': LocalJSX.SlSpinner & JSXBase.HTMLAttributes<HTMLSlSpinnerElement>;

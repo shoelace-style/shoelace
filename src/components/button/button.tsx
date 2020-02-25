@@ -14,11 +14,11 @@ import { Component, Host, Method, Prop, h } from '@stencil/core';
 export class Button {
   button: HTMLButtonElement;
 
-  /** The button's type, one of `default`, `primary`, `success`, `info`, `warning`, `danger`, or `text`. */
-  @Prop() type = 'default';
+  /** The button's type. */
+  @Prop() type: 'default' | 'primary' | 'success' | 'info' | 'warning' | 'danger' = 'default';
 
-  /** The button's size, one of `small`, `medium`, or `large`. */
-  @Prop() size = 'medium';
+  /** The button's size. */
+  @Prop() size: 'small' | 'medium' | 'large' = 'medium';
 
   /** Set to true to draw a full-width button. */
   @Prop() block = false;

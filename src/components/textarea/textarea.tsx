@@ -17,8 +17,8 @@ export class Textarea {
 
   @State() hasFocus = false;
 
-  /** The textarea's size, one of `small`, `medium`, or `large`. */
-  @Prop() size = 'medium';
+  /** The textarea's size. */
+  @Prop() size: 'small' | 'medium' | 'large' = 'medium';
 
   /** The textarea's name attribute. */
   @Prop() name = '';

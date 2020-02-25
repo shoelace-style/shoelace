@@ -23,7 +23,7 @@ export class Input {
   @State() isPasswordVisible = false;
 
   /** The input's type, one of `text`, `number`, `email`, etc. */
-  @Prop() type = 'text';
+  @Prop() type: 'email' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'url' = 'text';
 
   /** The input's size, one of `small`, `medium`, or `large`. */
   @Prop() size = 'medium';

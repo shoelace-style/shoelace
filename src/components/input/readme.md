@@ -32,7 +32,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 | `size`            | `size`             | The input's size, one of `small`, `medium`, or `large`.          | `string`                                                                              | `'medium'`  |
 | `step`            | `step`             | The input's step attribute.                                      | `number`                                                                              | `undefined` |
 | `togglePassword`  | `toggle-password`  | Set to true to add a password toggle button for password inputs. | `boolean`                                                                             | `false`     |
-| `type`            | `type`             | The input's type, one of `text`, `number`, `email`, etc.         | `string`                                                                              | `'text'`    |
+| `type`            | `type`             | The input's type, one of `text`, `number`, `email`, etc.         | `"email" \| "number" \| "password" \| "search" \| "tel" \| "text" \| "url"`           | `'text'`    |
 | `value`           | `value`            | The input's value attribute.                                     | `string`                                                                              | `''`        |
 
 
