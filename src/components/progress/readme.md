@@ -11,7 +11,7 @@
 | ------------ | ------------ | ------------------------------------------------------- | -------- | ------------------------------ |
 | `color`      | `color`      | The indicator's color.                                  | `string` | `'var(--sl-color-primary-50)'` |
 | `height`     | `height`     | The progress bar's height including unit (e.g. `20px`). | `string` | `'6px'`                        |
-| `percentage` | `percentage` | The indicator's percentage.                             | `number` | `0`                            |
+| `percentage` | `percentage` | The indicator's percentage, 0 to 100.                   | `number` | `0`                            |
 
 
 ## Slots

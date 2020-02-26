@@ -10,7 +10,7 @@ import { Component, Host, Prop, h } from '@stencil/core';
   shadow: true
 })
 export class Progress {
-  /** The indicator's percentage. */
+  /** The indicator's percentage, 0 to 100. */
   @Prop() percentage = 0;
 
   /** The indicator's color. */
@@ -22,7 +22,13 @@ export class Progress {
   render() {
     return (
       <Host style={{ '--height': this.height }}>
-        <div class="sl-progress">
+        <div
+          class="sl-progress"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow={this.percentage}
+        >
           <div
             class="sl-progress__indicator"
             style={{

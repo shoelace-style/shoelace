@@ -239,7 +239,7 @@ export namespace Components {
     */
     'height': string;
     /**
-    * The indicator's percentage.
+    * The indicator's percentage, 0 to 100.
     */
     'percentage': number;
   }
@@ -876,7 +876,7 @@ declare namespace LocalJSX {
     */
     'height'?: string;
     /**
-    * The indicator's percentage.
+    * The indicator's percentage, 0 to 100.
     */
     'percentage'?: number;
   }
