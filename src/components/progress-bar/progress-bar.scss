@@ -4,14 +4,14 @@
   --background-color: var(--sl-color-gray-90);
   --border-radius: var(--height);
   --color: var(--sl-color-white);
-  --font-size: 0.75rem;
-  --height: 6px;
+  --font-size: 12px;
+  --height: 18px;
   --transition-speed: 400ms;
 
   display: block;
 }
 
-.sl-progress {
+.sl-progress-bar {
   position: relative;
   background: var(--background-color);
   height: var(--height);
@@ -19,9 +19,10 @@
   overflow: hidden;
 }
 
-.sl-progress__indicator {
+.sl-progress-bar__indicator {
   height: 100%;
   font-size: var(--font-size);
+  background-color: var(--sl-color-primary-50);
   color: var(--color);
   text-align: center;
   line-height: var(--height);
