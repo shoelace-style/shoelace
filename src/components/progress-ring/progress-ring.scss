@@ -22,7 +22,7 @@
 
 .sl-progress-ring__indicator {
   stroke: var(--indicator-color);
-  transition: var(--transition-speed) stroke-dashoffset;
+  transition: var(--transition-speed) stroke-dashoffset, var(--transition-speed) stroke;
   transform: rotate(-90deg);
   transform-origin: 50% 50%;
 }
