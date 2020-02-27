@@ -59,8 +59,6 @@ export class Dropdown {
         }
       }
     });
-
-    // PopperJs.Defaults.modifiers.computeStyle.enabled = false;
   }
 
   componentDidUnload() {
