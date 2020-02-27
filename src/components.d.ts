@@ -231,9 +231,27 @@ export namespace Components {
   }
   interface SlProgressBar {
     /**
+    * The height of the progress bar in pixels.
+    */
+    'height': number;
+    /**
     * The progress bar's percentage, 0 to 100.
     */
     'percentage': number;
+  }
+  interface SlProgressRing {
+    /**
+    * The current progress percentage, 0 - 100.
+    */
+    'percentage': number;
+    /**
+    * The size of the progress ring.
+    */
+    'size': number;
+    /**
+    * The stroke width of the progress ring in pixels.
+    */
+    'strokeWidth': number;
   }
   interface SlRadio {
     /**
@@ -585,6 +603,12 @@ declare global {
     new (): HTMLSlProgressBarElement;
   };
 
+  interface HTMLSlProgressRingElement extends Components.SlProgressRing, HTMLStencilElement {}
+  var HTMLSlProgressRingElement: {
+    prototype: HTMLSlProgressRingElement;
+    new (): HTMLSlProgressRingElement;
+  };
+
   interface HTMLSlRadioElement extends Components.SlRadio, HTMLStencilElement {}
   var HTMLSlRadioElement: {
     prototype: HTMLSlRadioElement;
@@ -647,6 +671,7 @@ declare global {
     'sl-dropdown-item': HTMLSlDropdownItemElement;
     'sl-input': HTMLSlInputElement;
     'sl-progress-bar': HTMLSlProgressBarElement;
+    'sl-progress-ring': HTMLSlProgressRingElement;
     'sl-radio': HTMLSlRadioElement;
     'sl-range': HTMLSlRangeElement;
     'sl-spinner': HTMLSlSpinnerElement;
@@ -860,9 +885,27 @@ declare namespace LocalJSX {
   }
   interface SlProgressBar {
     /**
+    * The height of the progress bar in pixels.
+    */
+    'height'?: number;
+    /**
     * The progress bar's percentage, 0 to 100.
     */
     'percentage'?: number;
+  }
+  interface SlProgressRing {
+    /**
+    * The current progress percentage, 0 - 100.
+    */
+    'percentage'?: number;
+    /**
+    * The size of the progress ring.
+    */
+    'size'?: number;
+    /**
+    * The stroke width of the progress ring in pixels.
+    */
+    'strokeWidth'?: number;
   }
   interface SlRadio {
     /**
@@ -1143,6 +1186,7 @@ declare namespace LocalJSX {
     'sl-dropdown-item': SlDropdownItem;
     'sl-input': SlInput;
     'sl-progress-bar': SlProgressBar;
+    'sl-progress-ring': SlProgressRing;
     'sl-radio': SlRadio;
     'sl-range': SlRange;
     'sl-spinner': SlSpinner;
@@ -1169,6 +1213,7 @@ declare module "@stencil/core" {
       'sl-dropdown-item': LocalJSX.SlDropdownItem & JSXBase.HTMLAttributes<HTMLSlDropdownItemElement>;
       'sl-input': LocalJSX.SlInput & JSXBase.HTMLAttributes<HTMLSlInputElement>;
       'sl-progress-bar': LocalJSX.SlProgressBar & JSXBase.HTMLAttributes<HTMLSlProgressBarElement>;
+      'sl-progress-ring': LocalJSX.SlProgressRing & JSXBase.HTMLAttributes<HTMLSlProgressRingElement>;
       'sl-radio': LocalJSX.SlRadio & JSXBase.HTMLAttributes<HTMLSlRadioElement>;
       'sl-range': LocalJSX.SlRange & JSXBase.HTMLAttributes<HTMLSlRangeElement>;
       'sl-spinner': LocalJSX.SlSpinner & JSXBase.HTMLAttributes<HTMLSlSpinnerElement>;
