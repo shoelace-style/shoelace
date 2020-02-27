@@ -4,8 +4,10 @@
   --background-color: var(--sl-color-gray-90);
   --border-radius: var(--height);
   --color: var(--sl-color-white);
+  --font-family: var(--sl-font-sans-serif);
   --font-size: 12px;
-  --height: 18px;
+  --font-weight: var(--sl-font-weight--normal);
+  --indicator-background-color: var(--sl-color-primary-50);
   --transition-speed: 400ms;
 
   display: block;
@@ -21,12 +23,15 @@
 
 .sl-progress-bar__indicator {
   height: 100%;
+  font-family: var(--font-family);
   font-size: var(--font-size);
-  background-color: var(--sl-color-primary-50);
+  font-weight: var(--font-weight);
+  background-color: var(--indicator-background-color);
   color: var(--color);
   text-align: center;
   line-height: var(--height);
   white-space: nowrap;
   overflow: hidden;
   transition: var(--transition-speed) width, var(--transition-speed) background-color;
+  user-select: none;
 }
