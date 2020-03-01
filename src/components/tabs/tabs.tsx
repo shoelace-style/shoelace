@@ -4,16 +4,16 @@ import { getOffset } from '../../utilities/offset';
 import { scrollIntoView } from '../../utilities/scroll';
 
 /**
- * @slot nav - Used for grouping tabs in the tab-set.
- * @slot - Used for grouping tab panels in the tab-set.
+ * @slot nav - Used for grouping tabs in the tabs.
+ * @slot - Used for grouping tab panels in the tabs.
  */
 
 @Component({
-  tag: 'sl-tab-set',
-  styleUrl: 'tab-set.scss',
+  tag: 'sl-tabs',
+  styleUrl: 'tabs.scss',
   shadow: true
 })
-export class TabSet {
+export class Tab {
   activeTab: HTMLSlTabElement;
   activeTabIndicator: HTMLElement;
   body: HTMLElement;
@@ -32,7 +32,7 @@ export class TabSet {
 
   @State() isUsingMouse = false;
 
-  /** The position of the tabs in the tab-set. */
+  /** The position of the tabs. */
   @Prop() position: 'top' | 'bottom' | 'left' | 'right' = 'top';
 
   @Watch('position')
@@ -211,28 +211,28 @@ export class TabSet {
     return (
       <div
         class={{
-          'sl-tab-set': true,
-          'sl-tab-set--using-mouse': this.isUsingMouse,
+          'sl-tabs': true,
+          'sl-tabs--using-mouse': this.isUsingMouse,
 
           // Positions
-          'sl-tab-set--top': this.position === 'top',
-          'sl-tab-set--bottom': this.position === 'bottom',
-          'sl-tab-set--left': this.position === 'left',
-          'sl-tab-set--right': this.position === 'right'
+          'sl-tabs--top': this.position === 'top',
+          'sl-tabs--bottom': this.position === 'bottom',
+          'sl-tabs--left': this.position === 'left',
+          'sl-tabs--right': this.position === 'right'
         }}
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
         onKeyUp={this.handleKeyUp}
         onMouseDown={this.handleMouseDown}
       >
-        <div ref={el => (this.nav = el)} class="sl-tab-set__nav" tabindex="-1">
-          <div ref={el => (this.tabs = el)} class="sl-tab-set__tabs" role="tablist">
-            <div ref={el => (this.activeTabIndicator = el)} class="sl-tab-set__active-tab-indicator" />
+        <div ref={el => (this.nav = el)} class="sl-tabs__nav" tabindex="-1">
+          <div ref={el => (this.tabs = el)} class="sl-tabs__tabs" role="tablist">
+            <div ref={el => (this.activeTabIndicator = el)} class="sl-tabs__active-tab-indicator" />
             <slot name="nav" />
           </div>
         </div>
 
-        <div ref={el => (this.body = el)} class="sl-tab-set__body">
+        <div ref={el => (this.body = el)} class="sl-tabs__body">
           <slot />
         </div>
       </div>

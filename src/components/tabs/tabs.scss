@@ -14,23 +14,23 @@
   display: block;
 }
 
-.sl-tab-set {
+.sl-tabs {
   display: flex;
   border: solid var(--border-width) var(--border-color);
   border-radius: var(--border-radius);
 
-  .sl-tab-set__tabs {
+  .sl-tabs__tabs {
     display: flex;
     position: relative;
   }
 
-  .sl-tab-set__active-tab-indicator {
+  .sl-tabs__active-tab-indicator {
     position: absolute;
     transition: var(--indicator-transition-speed) transform ease, var(--indicator-transition-speed) width ease;
   }
 
   // Hide the focus ring if the user is interacting with a mouse
-  &.sl-tab-set--using-mouse ::slotted(sl-tab) {
+  &.sl-tabs--using-mouse ::slotted(sl-tab) {
     --focus-ring-box-shadow: none;
   }
 }
@@ -39,29 +39,29 @@
 // Top + bottom
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sl-tab-set--top {
+.sl-tabs--top {
   flex-direction: column;
 
-  .sl-tab-set__nav {
+  .sl-tabs__nav {
     display: flex;
     order: 1;
     overflow-x: auto;
     @include hide-scrollbar();
   }
 
-  .sl-tab-set__tabs {
+  .sl-tabs__tabs {
     flex: 1 1 auto;
     position: relative;
     flex-direction: row;
     border-bottom: solid var(--nav-border-width) var(--nav-border-color);
   }
 
-  .sl-tab-set__active-tab-indicator {
+  .sl-tabs__active-tab-indicator {
     bottom: calc(-1 * var(--nav-border-width));
     border-bottom: solid var(--nav-border-width) var(--indicator-border-color);
   }
 
-  .sl-tab-set__body {
+  .sl-tabs__body {
     order: 2;
   }
 }
@@ -70,29 +70,29 @@
 // Bottom
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sl-tab-set--bottom {
+.sl-tabs--bottom {
   flex-direction: column;
 
-  .sl-tab-set__nav {
+  .sl-tabs__nav {
     display: flex;
     order: 2;
     overflow-x: auto;
     @include hide-scrollbar();
   }
 
-  .sl-tab-set__tabs {
+  .sl-tabs__tabs {
     flex: 1 1 auto;
     position: relative;
     flex-direction: row;
     border-top: solid var(--nav-border-width) var(--nav-border-color);
   }
 
-  .sl-tab-set__active-tab-indicator {
+  .sl-tabs__active-tab-indicator {
     top: calc(-1 * var(--nav-border-width));
     border-top: solid var(--nav-border-width) var(--indicator-border-color);
   }
 
-  .sl-tab-set__body {
+  .sl-tabs__body {
     order: 1;
   }
 }
@@ -101,25 +101,25 @@
 // Left
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sl-tab-set--left {
+.sl-tabs--left {
   flex-direction: row;
 
-  .sl-tab-set__nav {
+  .sl-tabs__nav {
     order: 1;
   }
 
-  .sl-tab-set__tabs {
+  .sl-tabs__tabs {
     flex: 0 0 auto;
     flex-direction: column;
     border-right: solid var(--nav-border-width) var(--nav-border-color);
   }
 
-  .sl-tab-set__active-tab-indicator {
+  .sl-tabs__active-tab-indicator {
     right: calc(-1 * var(--nav-border-width));
     border-right: solid var(--nav-border-width) var(--indicator-border-color);
   }
 
-  .sl-tab-set__body {
+  .sl-tabs__body {
     flex: 1 1 auto;
     order: 2;
   }
@@ -129,25 +129,25 @@
 // Right
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sl-tab-set--right {
+.sl-tabs--right {
   flex-direction: row;
 
-  .sl-tab-set__nav {
+  .sl-tabs__nav {
     order: 2;
   }
 
-  .sl-tab-set__tabs {
+  .sl-tabs__tabs {
     flex: 0 0 auto;
     flex-direction: column;
     border-left: solid var(--nav-border-width) var(--nav-border-color);
   }
 
-  .sl-tab-set__active-tab-indicator {
+  .sl-tabs__active-tab-indicator {
     left: calc(-1 * var(--nav-border-width));
     border-left: solid var(--nav-border-width) var(--indicator-border-color);
   }
 
-  .sl-tab-set__body {
+  .sl-tabs__body {
     flex: 1 1 auto;
     order: 1;
   }
