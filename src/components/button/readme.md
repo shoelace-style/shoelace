@@ -1,4 +1,13 @@
+# Button
+
 Good ol' buttons. They're usually the first thing I look at when reviewing a component library. Shoelace offers a variation for every theme color.
+
+<sl-button type="default">Default</sl-button>
+<sl-button type="primary">Primary</sl-button>
+<sl-button type="success">Success</sl-button>
+<sl-button type="info">Info</sl-button>
+<sl-button type="warning">Warning</sl-button>
+<sl-button type="danger">Danger</sl-button>
 
 ```html preview
 <sl-button type="default">Default</sl-button>
@@ -195,4 +204,4 @@ Type: `Promise<void>`
 
 ----------------------------------------------
 
-This component was built with [Stencil](https://stenciljs.com/).
+

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>shoelace - Stencil Component Starter</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="description" content="Stencil Component Starter" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css" />
+    <link rel="stylesheet" href="/docs.css" />
+
+    <!-- Import Shoelace -->
+    <link rel="stylesheet" href="/dist/shoelace/shoelace.css" />
+    <script type="module" src="/dist/shoelace/shoelace.esm.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      window.$docsify = {
+        executeScript: true,
+        homepage: 'home.md',
+        loadSidebar: true,
+        logo: '/assets/images/wordmark.svg',
+        maxLevel: 3,
+        name: 'Shoelace',
+        notFoundPage: '404.md',
+        pagination: {
+          previousText: 'Previous',
+          nextText: 'Next up',
+          crossChapter: true,
+          crossChapterText: false
+        },
+        repo: '',
+        repo: 'https://github.com/claviska/shoelace/',
+        routerMode: 'hash', // history | hash
+        search: {
+          maxAge: 86400000, // Expiration time, the default one day
+          paths: 'auto', // or 'auto'
+          placeholder: 'Search',
+          noData: 'No Results',
+          depth: 3,
+          hideOtherSidebarContent: true,
+          namespace: 'shoelace-docs'
+        },
+        themeColor: '#049dff'
+      };
+    </script>
+    <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+    <script src="//unpkg.com/docsify/lib/plugins/search.min.js"></script>
+    <script src="//unpkg.com/docsify-copy-code"></script>
+    <script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
+    <script src="//unpkg.com/docsify/lib/plugins/zoom-image.min.js"></script>
+  </body>
+</html>

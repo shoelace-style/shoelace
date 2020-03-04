@@ -1,7 +1,5 @@
-# Generated directories
-docs/assets
-docs/dist
-docs/components
+# Ignore generated docs files
+docs/components/
 
 dist/
 www/

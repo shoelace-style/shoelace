@@ -1,15 +1,11 @@
 const { parallel, watch } = require('gulp');
 const copy = require('recursive-copy');
+const del = require('del');
 const path = require('path');
 const through = require('through2');
 
-function copyAssets(done) {
-  copy('src/assets', 'docs/assets', { overwrite: true });
-  done();
-}
-
-function copyDist(done) {
-  copy('dist', 'docs/dist', { overwrite: true });
+async function cleanReadmes(done) {
+  await del('./docs/components');
   done();
 }
 
@@ -29,16 +25,12 @@ function copyReadmes(done) {
   done();
 }
 
-function watchAssets() {
-  return watch('src/assets/**/*', { ignoreInitial: false }, copyAssets);
+function watchReadmes() {
+  return watch('src/components/**/*.md', copyReadmes);
 }
 
-function watchDist() {
-  return watch('dist/**/*', { ignoreInitial: false }, copyDist);
-}
+exports.clean = parallel(cleanReadmes);
+exports.copy = parallel(copyReadmes);
+exports.watch = parallel(watchReadmes);
 
-function watchDocs() {
-  return watch('src/components/**/*.md', { ignoreInitial: false }, copyReadmes);
-}
-
-exports.default = parallel(watchAssets, watchDist, watchDocs);
+exports.default = parallel(exports.clean, exports.copy, exports.watch);
