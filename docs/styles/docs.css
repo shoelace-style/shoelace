@@ -64,6 +64,8 @@ body {
   right: 0;
   bottom: 0;
   font-size: 14px;
+  border-top-left-radius: 3px;
+  border-bottom-right-radius: 3px;
 }
 
 .content .docsify-copy-code-button .error,
@@ -154,6 +156,10 @@ pre.code-block__pre {
   border-radius: 0;
   margin: 0;
   display: none;
+}
+
+.code-block__pre .docsify-copy-code-button {
+  border-bottom-right-radius: 0;
 }
 
 .code-block--expanded .code-block__pre {
