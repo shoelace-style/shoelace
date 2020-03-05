@@ -17,13 +17,30 @@ body {
   line-height: 1.8;
 }
 
-.sidebar-toggle {
+.search .input-wrap {
+  padding-left: 3rem;
+}
+
+.sidebar-toggle,
+body.close .sidebar-toggle {
   top: 0.5rem;
   left: 0.5rem;
   width: 2.5rem;
-  border-radius: 3px;
   bottom: auto;
+  border-radius: 3px;
+  display: block;
   cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .sidebar h1 {
+    padding: 1rem;
+  }
+
+  .sidebar-toggle,
+  body.close .sidebar-toggle {
+    padding: 10px;
+  }
 }
 
 .sidebar-toggle .sidebar-toggle-button:hover {
@@ -34,8 +51,12 @@ body {
   opacity: 0.5;
 }
 
-.search .input-wrap {
-  padding-left: 3rem;
+.content em {
+  color: inherit;
+}
+
+.content blockquote p {
+  font-weight: normal;
 }
 
 .content table {
@@ -89,6 +110,7 @@ body {
   background-color: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 98%);
   border-radius: 3px;
   font-family: var(--sl-font-monospace);
+  color: var(--sl-color-gray-20);
   -webkit-font-smoothing: auto;
 }
 
@@ -104,9 +126,8 @@ body {
 }
 
 .content code {
-  color: #ff851b;
-  background: rgba(0, 0, 0, 0.05);
-  padding: 0.125rem;
+  color: var(--sl-color-warning-50);
+  padding: 0.125rem 0.25rem;
 }
 
 .content h1 code,
@@ -129,7 +150,25 @@ body {
 .content code .token.control,
 .content code .token.directive,
 .content code .token.unit {
-  color: #ff851b;
+  color: var(--sl-color-warning-50);
+}
+
+.content code .token.attr-name,
+.content code .token.tag,
+.content code .token.selector {
+  color: var(--sl-color-primary-50);
+}
+
+.content code .token.string {
+  color: var(--sl-color-success-45);
+}
+
+.content code .token.property {
+  color: var(--sl-color-warning-50);
+}
+
+.content code .token.punctuation {
+  color: var(--sl-color-gray-40);
 }
 
 /* Code blocks */
@@ -150,7 +189,7 @@ body {
   vertical-align: middle;
 }
 
-pre.code-block__pre {
+pre.code-block__source {
   border: solid 1px var(--sl-color-gray-90);
   border-bottom: none;
   border-radius: 0;
@@ -158,11 +197,11 @@ pre.code-block__pre {
   display: none;
 }
 
-.code-block__pre .docsify-copy-code-button {
+.code-block__source .docsify-copy-code-button {
   border-bottom-right-radius: 0;
 }
 
-.code-block--expanded .code-block__pre {
+.code-block--expanded .code-block__source {
   display: block;
 }
 
@@ -210,4 +249,9 @@ pre.code-block__pre {
 
 .code-block--expanded .code-block__toggle::after {
   transform: rotate(180deg);
+}
+
+/* Logo */
+.content img.logo {
+  max-width: 400px;
 }

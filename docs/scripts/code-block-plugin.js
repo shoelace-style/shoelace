@@ -32,7 +32,7 @@
           preview.innerHTML = code.textContent;
 
           pre.id = preId;
-          pre.classList.add('code-block__pre');
+          pre.classList.add('code-block__source');
           pre.setAttribute('data-lang', pre.getAttribute('data-lang').replace(/ preview$/, ''));
           pre.setAttribute('aria-labeledby', toggleId);
 

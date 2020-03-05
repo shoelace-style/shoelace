@@ -1,6 +1,8 @@
 - Overview
-  - [Home](/home.md)
+  - [Getting Started](/)
   - [Installation](/installation.md)
+  - [Usage](/usage.md)
+  - [Customizing](/customizing.md)
 
 - Components
   - [Alert](/components/alert.md)

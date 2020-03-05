@@ -1,78 +1,51 @@
-# Shoelace
+<img class="logo" src="/assets/images/wordmark.svg" alt="Shoelace" data-no-zoom>
 
-A forward-thinking component library built with Web Components.
+👟_A forward-thinking library of Web Components._
 
-Objective:
+---
 
-1. Design a framework-agnostic component library 🧩
-2. Be able to load it from a CDN ⚡️
-3. Fully customize it with CSS variables — no need to build it yourself! 🎨
+Shoelace is an open source component library for desktop and mobile that's built with [Web Components](https://developer.mozilla.org/en-US/docs/Web/Web_Components). You should consider it for your next project because...
 
-Designed and developed in New Hampshire by [Cory LaViska](https://twitter.com/claviska).
+- Works with any framework 🧩
+- Can be loaded via CDN ⚡️
+- Fully customizable with CSS — no build required 🎨
+- Hand-crafted with developer experience in mind 📐
 
-## Installation
+Shoelace is designed and developed in New Hampshire by [@claviska](https://twitter.com/claviska). You can use it under the terms of the MIT License.
 
-TODO
+[Installation &rsaquo;](/installation)
 
-## Usage
+---
 
-TODO
+## Why Web Components?
 
-## Developers
+Thanks to the popularity of frameworks such as React, Vue, and Angular, component-driven development is a way of life for front-end developers these days. Let's face it — components are awesome, and they make a lot of sense in terms of design, development, and testing.
 
-TODO
+Unfortunately, framework-specific components fail us in a number of ways:
 
-## Bugs, Questions, & Support
+- You can only use them in the framework they're designed for. 🔒
+- Their lifespan is limited to that of the framework's. ⏳
+- New versions can lead to breaking changes, requiring substantial effort to update your components (or risk not being able to update anymore). 😭
 
-TODO
+Web Components solve these problems. They're [supported by all modern browsers](https://caniuse.com/#feat=custom-elementsv1), they're framework-agnostic, and because they're [part of the standard](https://www.webcomponents.org/specs), we can be confident that the respective APIs will be supported for many years to come.
 
-## Themes & Customization
+If you're not yet familiar with Web Components, [MDN describes them](https://developer.mozilla.org/en-US/docs/Web/Web_Components) as:
 
-Shoelace makes extensive use of CSS Custom Properties, or "CSS variables." As a result, you can load the entire library via CDN and customize it by overriding the necessary variables in your own stylesheet. **You don't need to build Shoelace from source, nor do you need to use a preprocessor to customize it.**
+> A suite of different technologies allowing you to create reusable custom elements — with their functionality encapsulated away from the rest of your code — and utilize them in your web apps.
 
-Each theme defines the core **theme variables**. Theme variables aren't component-specific; rather they define a set of design tokens that each component uses as a basis for its own styles.
+In other words, we finally have a way to create our very own HTML elements (with scoped styles and scripts) and use them in [whatever framework we want.](https://custom-elements-everywhere.com/)
 
-For example, `--sl-form-control-font-family` is a base variable that is used by a number of form controls, including `<sl-button>` and `<sl-input>`. Therefore, you can override `--sl-form-control-font-family` to adjust the font for all buttons, inputs, et al.
+## Browser Support
 
-```css
-:root {
-  --sl-form-control-font-family: 'Open Sans', sans-serif;
-  --sl-form-control-color: black;
-}
-```
+Shoelace is built for modern browsers. If you need to support IE11 or pre-Chromium Edge, you probably don't want to use this library.
 
-Alternatively, you can override the button's `--sl-font-family` variable to adjust the font only for buttons.
+Although Web Components can (to some degree) be polyfilled for older browsers, supporting them is outside the scope of this project. If you're using Shoelace in a legacy browser, things will probably not work the way they're intended to.
 
-```css
-sl-button {
-  --sl-font-family: '', sans-serif;
-  --color: white;
-}
-```
-
-Astute readers might be wondering why the button variables aren't located in the same `:root` selector as the theme variables — or why they don't use any sort of prefix. This is because theme variables are defined at the `:root` level, whereas component variables are defined at the `:host` level (e.g. `<sl-button>`). This design decision provides us with a few helpful benefits:
-
-- It's impossible to reuse component variables in other components. This is a good thing, as it prevents changes in one component's styles from inadvertently affecting another. (As a rule of thumb, if a style _really_ needs to be shared between components, it should be promoted to a theme variable.)
-
-- It's easier to document and manage component-specific variables when they live with their components, and customizing the library becomes easier as you don't have to sift through an exhaustive list of variables to find the ones you need (i.e. variable hell).
-
-- Component-specific overrides are very explicit in your stylesheet. There's no question as to which overrides affect which components.
-
-- Theme files remain small since they consist only of theme variables (and potentially a handful of component-specific overrides depending on the designer's intent).
-
-## Choosing a Theme Color
-
-Many component libraries let you choose a theme color (usually called "brand" or "primary") in hex or RGB format. The problem with this approach is...
-
-Shoelace uses HSL...
-
-## Shadow DOM
-
-Most Shoelace components use a Shadow DOM with the exception of form controls. This is for your convenience, since form controls inside a shadow DOM aren't submitted with standard HTML forms. In the future, when StencilJS and browsers add support for [Form-associated Custom Elements](https://html.spec.whatwg.org/multipage/custom-elements.html#custom-elements-face-example), it would be nice if all components can use a Shadow DOM.
+!> Shoelace makes extensive use of the `::part` selector for styling, which isn't supported in Safari yet. However, it was added to [Safari Technology Preview 94](https://developer.apple.com/safari/technology-preview/release-notes/#r94) so it should land very soon.
 
 ## Attribution
 
-- Theme colors and form controls inspired by [Element](element.eleme.io)
-- Popover positioning is handled by [Popper.js](https://popper.js.org/)
-- Tooltips are provided by [Tippy.js](https://atomiks.github.io/tippyjs/)
-- Special thanks to [Adam K Olson](https://twitter.com/adamkolson) for designing the logo with a single shoelace
+- Theme colors and form controls were inspired by [Element](element.eleme.io).
+- Popover positioning is handled by [Popper.js](https://popper.js.org/).
+- Tooltips are provided by [Tippy.js](https://atomiks.github.io/tippyjs/).
+- The Shoelace logo was designed with a single shoelace by [Adam K Olson](https://twitter.com/adamkolson)
