@@ -10,7 +10,7 @@
       content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
     />
     <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css" />
-    <link rel="stylesheet" href="/docs.css" />
+    <link rel="stylesheet" href="/styles/docs.css" />
 
     <!-- Import Shoelace -->
     <link rel="stylesheet" href="/dist/shoelace/shoelace.css" />
@@ -20,6 +20,11 @@
     <div id="app"></div>
     <script>
       window.$docsify = {
+        copyCode: {
+          buttonText: 'Copy Code',
+          errorText: '✖️',
+          successText: '✔'
+        },
         executeScript: true,
         homepage: 'home.md',
         loadSidebar: true,
@@ -53,5 +58,7 @@
     <script src="//unpkg.com/docsify-copy-code"></script>
     <script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
     <script src="//unpkg.com/docsify/lib/plugins/zoom-image.min.js"></script>
+    <script src="/scripts/code-block-plugin.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
   </body>
 </html>

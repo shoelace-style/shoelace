@@ -2,13 +2,6 @@
 
 Good ol' buttons. They're usually the first thing I look at when reviewing a component library. Shoelace offers a variation for every theme color.
 
-<sl-button type="default">Default</sl-button>
-<sl-button type="primary">Primary</sl-button>
-<sl-button type="success">Success</sl-button>
-<sl-button type="info">Info</sl-button>
-<sl-button type="warning">Warning</sl-button>
-<sl-button type="danger">Danger</sl-button>
-
 ```html preview
 <sl-button type="default">Default</sl-button>
 <sl-button type="primary">Primary</sl-button>
@@ -52,10 +45,6 @@ Use the `size` prop to change a button's size.
 <sl-button size="small">Small</sl-button>
 <sl-button size="medium">Medium</sl-button>
 <sl-button size="large">Large</sl-button>
-
-<sl-button size="small" round>Small</sl-button>
-<sl-button size="medium" round>Medium</sl-button>
-<sl-button size="large" round>Large</sl-button>
 ```
 
 ## Circle
@@ -66,10 +55,6 @@ Use the `circle` prop to create circular icon buttons.
 <sl-button type="default" size="small" circle><ion-icon name="settings-outline"></ion-icon></sl-button>
 <sl-button type="default" size="medium" circle><ion-icon name="settings-outline"></ion-icon></sl-button>
 <sl-button type="default" size="large" circle><ion-icon name="settings-outline"></ion-icon></sl-button>
-
-<sl-button type="primary" size="small" circle><ion-icon name="search-outline"></ion-icon></sl-button>
-<sl-button type="primary" size="medium" circle><ion-icon name="search-outline"></ion-icon></sl-button>
-<sl-button type="primary" size="large" circle><ion-icon name="search-outline"></ion-icon></sl-button>
 ```
 
 ## Text
@@ -88,9 +73,9 @@ Use the `block` prop to create a block-level button that spans 100% of its conta
 
 ```html preview
 <sl-button type="default" block size="small">Default</sl-button>
-
+<br>
 <sl-button type="default" block size="medium">Primary</sl-button>
-
+<br>
 <sl-button type="default" block size="large">Primary</sl-button>
 ```
 

@@ -1,0 +1,207 @@
+body {
+  font-family: var(--sl-font-sans-serif);
+  font-size: 16px;
+  font-weight: var(--sl-font-weight--normal);
+}
+
+.sidebar h1 {
+  text-align: left;
+  padding: 0 1rem;
+}
+
+.sidebar img {
+  max-width: 80%;
+}
+
+.sidebar .sidebar-nav {
+  line-height: 1.8;
+}
+
+.sidebar-toggle {
+  top: 0.5rem;
+  left: 0.5rem;
+  width: 2.5rem;
+  border-radius: 3px;
+  bottom: auto;
+  cursor: pointer;
+}
+
+.sidebar-toggle .sidebar-toggle-button:hover {
+  opacity: 1;
+}
+
+.sidebar-toggle:hover {
+  opacity: 0.5;
+}
+
+.search .input-wrap {
+  padding-left: 3rem;
+}
+
+.content table {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.content table th,
+.content table td {
+  border-color: var(--sl-color-gray-90);
+  padding: 1rem;
+}
+
+.content p.tip,
+.content tr:nth-child(2n) {
+  background-color: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 97%);
+}
+
+.content table th code:first-child:last-child,
+.content table td code:first-child:last-child {
+  background: transparent;
+}
+
+.content .docsify-copy-code-button {
+  top: auto;
+  right: 0;
+  bottom: 0;
+  font-size: 14px;
+}
+
+.content .docsify-copy-code-button .error,
+.content .docsify-copy-code-button .success {
+  border-radius: 50%;
+  transform: scale(0) translateY(-50%) rotate(0deg);
+  opacity: 0;
+  transition: 250ms all ease-in-out;
+}
+
+.content .docsify-copy-code-button.error .error,
+.content .docsify-copy-code-button.success .success {
+  transform: scale(1) translateX(-120%) translateY(-50%) rotate(360deg);
+  opacity: 1;
+}
+
+/* Code blocks */
+.content code,
+.content pre,
+.content pre > code {
+  background-color: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 98%);
+  border-radius: 3px;
+  font-family: var(--sl-font-monospace);
+  -webkit-font-smoothing: auto;
+}
+
+.content pre > code {
+  font-size: 0.75rem;
+}
+
+.content pre::after {
+  color: var(--sl-color-gray-70);
+  font-size: 0.7rem;
+  font-weight: 400;
+  line-height: 2;
+}
+
+.content code {
+  color: #ff851b;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 0.125rem;
+}
+
+.content h1 code,
+.content h2 code,
+.content h3 code,
+.content h4 code,
+.content h5 code,
+.content h6 code {
+  font-size: inherit;
+  color: inherit;
+  background-color: transparent;
+  padding: 0;
+}
+
+.content code .token {
+  -webkit-font-smoothing: auto;
+}
+
+.content code .token.attr-value,
+.content code .token.control,
+.content code .token.directive,
+.content code .token.unit {
+  color: #ff851b;
+}
+
+/* Code blocks */
+.code-block {
+  position: relative;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.025);
+}
+
+.code-block__preview {
+  border: solid 1px var(--sl-color-gray-90);
+  border-bottom: none;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  padding: 1.5rem;
+}
+
+.code-block__preview * {
+  vertical-align: middle;
+}
+
+pre.code-block__pre {
+  border: solid 1px var(--sl-color-gray-90);
+  border-bottom: none;
+  border-radius: 0;
+  margin: 0;
+  display: none;
+}
+
+.code-block--expanded .code-block__pre {
+  display: block;
+}
+
+.code-block__toggle {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 2.5rem;
+  border: solid 1px var(--sl-color-gray-90);
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  background: none;
+  font: inherit;
+  color: var(--sl-color-gray-60);
+  cursor: pointer;
+  transition: 250ms background-color;
+  -webkit-appearance: none;
+}
+
+.code-block__toggle:hover {
+  background-color: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 98%);
+}
+
+.code-block__toggle:active {
+  background-color: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 96%);
+}
+
+.code-block__toggle:focus {
+  outline: none;
+  color: var(--sl-color-primary-50);
+  border-color: var(--sl-color-primary-50);
+  box-shadow: var(--sl-focus-ring-box-shadow);
+}
+
+.code-block__toggle::after {
+  content: '';
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid currentColor;
+}
+
+.code-block--expanded .code-block__toggle::after {
+  transform: rotate(180deg);
+}
