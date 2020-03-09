@@ -4,7 +4,7 @@
 
 ---
 
-Shoelace is an open source component library for desktop and mobile that's built with [Web Components](https://developer.mozilla.org/en-US/docs/Web/Web_Components). You should consider it for your next project because...
+Shoelace is an open source component library for desktop and mobile that's built with [Web Components](https://developer.mozilla.org/en-US/docs/Web/Web_Components). Here are some reasons to consider it for your next project:
 
 - Works with any framework 🧩
 - Can be loaded via CDN ⚡️
@@ -25,7 +25,7 @@ Unfortunately, framework-specific components fail us in a number of ways:
 
 - You can only use them in the framework they're designed for. 🔒
 - Their lifespan is limited to that of the framework's. ⏳
-- New versions can lead to breaking changes, requiring substantial effort to update your components (or risk not being able to update anymore). 😭
+- New versions can lead to breaking changes, requiring substantial effort to update your components. 😭
 
 Web Components solve these problems. They're [supported by all modern browsers](https://caniuse.com/#feat=custom-elementsv1), they're framework-agnostic, and because they're [part of the standard](https://www.webcomponents.org/specs), we can be confident that the respective APIs will be supported for many years to come.
 
@@ -46,6 +46,6 @@ Although Web Components can (to some degree) be polyfilled for older browsers, s
 ## Attribution
 
 - Theme colors and form controls were inspired by [Element](element.eleme.io).
-- Popover positioning is handled by [Popper.js](https://popper.js.org/).
+- Positioning of menus, popovers, etc. is handled by [Popper.js](https://popper.js.org/).
 - Tooltips are provided by [Tippy.js](https://atomiks.github.io/tippyjs/).
 - The Shoelace logo was designed with a single shoelace by [Adam K Olson](https://twitter.com/adamkolson)
