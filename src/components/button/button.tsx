@@ -23,10 +23,7 @@ export class Button {
   /** Set to true to draw a full-width button. */
   @Prop() block = false;
 
-  /**
-   * Set to true to draw the button with a caret for use with dropdowns, popovers, etc. If this is enabled, the suffix
-   * slot will not be displayed.
-   */
+  /** Set to true to draw the button with a caret for use with dropdowns, popovers, etc. */
   @Prop() caret = false;
 
   /** Set to true to disable the button. */
