@@ -30,7 +30,7 @@ export namespace Components {
     */
     'block': boolean;
     /**
-    * Set to true to draw the button with a caret for use with dropdowns, popovers, etc. If this is enabled, the suffix slot will not be displayed.
+    * Set to true to draw the button with a caret for use with dropdowns, popovers, etc.
     */
     'caret': boolean;
     /**
@@ -709,7 +709,7 @@ declare namespace LocalJSX {
     */
     'block'?: boolean;
     /**
-    * Set to true to draw the button with a caret for use with dropdowns, popovers, etc. If this is enabled, the suffix slot will not be displayed.
+    * Set to true to draw the button with a caret for use with dropdowns, popovers, etc.
     */
     'caret'?: boolean;
     /**
