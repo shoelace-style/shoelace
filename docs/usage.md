@@ -8,7 +8,7 @@ TODO
 
 ## With Vue
 
-TODO
+TODO (see utilities/vue.ts)
 
 ## With Angular
 
