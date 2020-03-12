@@ -1,6 +1,10 @@
 # Spinner
 
-TODO
+```html preview
+<sl-spinner></sl-spinner>
+<sl-spinner size="2em"></sl-spinner>
+<sl-spinner size="3em"></sl-spinner>
+```
 
 
 <!-- Auto Generated Below -->

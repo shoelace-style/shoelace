@@ -1,3 +1,7 @@
+* {
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
 body {
   font-family: var(--sl-font-sans-serif);
   font-size: 16px;
@@ -175,6 +179,7 @@ body.close .sidebar-toggle {
 .code-block {
   position: relative;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.025);
+  margin-bottom: 1.5rem;
 }
 
 .code-block__preview {

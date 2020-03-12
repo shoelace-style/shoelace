@@ -1,9 +1,124 @@
 # Input
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
 ```html preview
-<sl-input type="text" placeholder="Type Something"></sl-input>
+<sl-input type="text" placeholder="Small" size="small"></sl-input>
+
+<br><br>
+
+<sl-input type="text" placeholder="Medium" size="medium"></sl-input>
+
+<br><br>
+
+<sl-input type="text" placeholder="Large" size="large"></sl-input>
+
+<br><br>
+
+<sl-input type="text" placeholder="Small" size="small">
+  <ion-icon name="settings-outline" slot="prefix"></ion-icon>
+  <ion-icon name="open-outline" slot="suffix"></ion-icon>
+</sl-input>
+
+<br><br>
+
+<sl-input type="text" placeholder="Medium" size="medium">
+  <ion-icon name="settings-outline" slot="prefix"></ion-icon>
+  <ion-icon name="open-outline" slot="suffix"></ion-icon>
+</sl-input>
+
+<br><br>
+
+<sl-input type="text" placeholder="Large" size="large">
+  <ion-icon name="settings-outline" slot="prefix"></ion-icon>
+  <ion-icon name="open-outline" slot="suffix"></ion-icon>
+</sl-input>
+
+<br><br>
+
+<sl-input type="text" placeholder="Addons" size="small">
+  <span slot="before">$</span>
+  <span slot="after">.00</span>
+</sl-input>
+
+<br><br>
+
+<sl-input type="text" placeholder="Addons" size="medium">
+  <span slot="before">$</span>
+  <span slot="after">.00</span>
+</sl-input>
+
+<br><br>
+
+<sl-input type="text" placeholder="Addons" size="large">
+  <span slot="before">$</span>
+  <span slot="after">.00</span>
+</sl-input>
+
+<br><br>
+
+<sl-input type="text" placeholder="Addons and Icons" size="small">
+  <span slot="before">$</span>
+  <span slot="after">.00</span>
+  <ion-icon name="settings-outline" slot="prefix"></ion-icon>
+  <ion-icon name="open-outline" slot="suffix"></ion-icon>
+</sl-input>
+
+<br><br>
+
+<sl-input type="text" placeholder="Addons and Icons" size="medium">
+  <span slot="before">$</span>
+  <span slot="after">.00</span>
+  <ion-icon name="settings-outline" slot="prefix"></ion-icon>
+  <ion-icon name="open-outline" slot="suffix"></ion-icon>
+</sl-input>
+
+<br><br>
+
+<sl-input type="text" placeholder="Addons and Icons" size="large">
+  <span slot="before">$</span>
+  <span slot="after">.00</span>
+  <ion-icon name="settings-outline" slot="prefix"></ion-icon>
+  <ion-icon name="open-outline" slot="suffix"></ion-icon>
+</sl-input>
+
+<br><br>
+
+<sl-input type="text" placeholder="Clearable" size="small" clearable></sl-input>
+
+<br><br>
+
+<sl-input type="text" placeholder="Clearable" size="medium" clearable></sl-input>
+
+<br><br>
+
+<sl-input type="text" placeholder="Clearable" size="large" clearable></sl-input>
+
+<br><br>
+
+<sl-input type="password" placeholder="Password Toggle" size="small" toggle-password></sl-input>
+
+<br><br>
+
+<sl-input type="password" placeholder="Password Toggle" size="medium" toggle-password></sl-input>
+
+<br><br>
+
+<sl-input type="password" placeholder="Password Toggle" size="large" toggle-password></sl-input>
+
+<br><br>
+
+<sl-input type="text" placeholder="Disabled" size="small" disabled></sl-input>
+
+<br><br>
+
+<sl-input type="text" placeholder="Disabled" size="medium" disabled></sl-input>
+
+<br><br>
+
+<sl-input type="text" placeholder="Disabled" size="large" disabled></sl-input>
+
+<br><br>
+
+<sl-input type="number" placeholder="Number"></sl-input>
 ```
 
 
