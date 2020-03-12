@@ -41,7 +41,7 @@ Shoelace is built for modern browsers. If you need to support IE11 or pre-Chromi
 
 Although Web Components can (to some degree) be polyfilled for older browsers, supporting them is outside the scope of this project. If you're using Shoelace in a legacy browser, things will probably not work the way they're intended to.
 
-!> Shoelace makes extensive use of the `::part` selector for styling, which isn't supported in Safari yet. However, it was added to [Safari Technology Preview 94](https://developer.apple.com/safari/technology-preview/release-notes/#r94) so it should land very soon.
+!> Shoelace makes extensive use of the `::part` selector for styling, which isn't supported in Safari yet. However, it's available in 13.1 beta so it should land very soon.
 
 ## Attribution
 
