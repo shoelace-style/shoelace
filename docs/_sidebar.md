@@ -23,3 +23,7 @@
     - [Tab Panel](/components/tab-panel.md)
   - [Textarea](/components/textarea.md)
   - [Tooltip](/components/tooltip.md)
+
+- Developers
+  - [Contributing](/developers/contributing.md)
+  - [Conventions](/developers/conventions.md)
