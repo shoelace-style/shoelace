@@ -7,7 +7,7 @@ let id = 0;
 @Component({
   tag: 'sl-switch',
   styleUrl: 'switch.scss',
-  scoped: true
+  shadow: true
 })
 export class Switch {
   id = `sl-switch-${++id}`;

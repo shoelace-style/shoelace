@@ -140,7 +140,7 @@
 | `min`             | `min`              | The input's min attribute.                                       | `number`                                                                              | `undefined` |
 | `minlength`       | `minlength`        | The input's minlength attribute.                                 | `number`                                                                              | `undefined` |
 | `name`            | `name`             | The input's name attribute.                                      | `string`                                                                              | `''`        |
-| `nativeInputmode` | `native-inputmode` | The input's inputmode attribute.                                 | `"decimal" \| "email" \| "none" \| "numeric" \| "search" \| "tel" \| "text" \| "url"` | `undefined` |
+| `nativeInputmode` | `native-inputmode` | The input's inputmode attribute.                                 | `"decimal" or "email" or "none" or "numeric" or "search" or "tel" or "text" or "url"` | `undefined` |
 | `nativeTabindex`  | `native-tabindex`  | The input's tabindex attribute.                                  | `number`                                                                              | `undefined` |
 | `pattern`         | `pattern`          | The input's pattern attribute.                                   | `string`                                                                              | `undefined` |
 | `placeholder`     | `placeholder`      | The input's placeholder text.                                    | `string`                                                                              | `undefined` |
@@ -149,7 +149,7 @@
 | `size`            | `size`             | The input's size, one of `small`, `medium`, or `large`.          | `string`                                                                              | `'medium'`  |
 | `step`            | `step`             | The input's step attribute.                                      | `number`                                                                              | `undefined` |
 | `togglePassword`  | `toggle-password`  | Set to true to add a password toggle button for password inputs. | `boolean`                                                                             | `false`     |
-| `type`            | `type`             | The input's type, one of `text`, `number`, `email`, etc.         | `"email" \| "number" \| "password" \| "search" \| "tel" \| "text" \| "url"`           | `'text'`    |
+| `type`            | `type`             | The input's type, one of `text`, `number`, `email`, etc.         | `"email" or "number" or "password" or "search" or "tel" or "text" or "url"`           | `'text'`    |
 | `value`           | `value`            | The input's value attribute.                                     | `string`                                                                              | `''`        |
 
 

@@ -60,9 +60,9 @@ Astute readers might be wondering why the button variables aren't located in the
 
 - Theme files remain small since they consist only of theme variables (and potentially a handful of component-specific overrides depending on the designer's intent).
 
-## Shadow DOM
+## Form Controls & Shadow DOM
 
-Most Shoelace components use a Shadow DOM with the exception of form controls. This is for your convenience, since form controls inside a shadow DOM aren't submitted with standard HTML forms. In the future, when StencilJS and browsers add support for [Form-associated Custom Elements](https://html.spec.whatwg.org/multipage/custom-elements.html#custom-elements-face-example), it would be nice if all components can use a Shadow DOM.
+Shoelace components use a Shadow DOM, meaning form controls will not submit like native form controls. In the future, when StencilJS and browsers add support for [Form-associated Custom Elements](https://html.spec.whatwg.org/multipage/custom-elements.html#custom-elements-face-example), it would be nice if all components can use a Shadow DOM.
 
 ## Attribution
 

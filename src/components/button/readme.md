@@ -151,8 +151,8 @@ Use the `disabled` prop to disable a button.
 | `nativeTabindex` | `native-tabindex` | The button's tabindex attribute.                                                   | `number`                                                                           | `undefined` |
 | `outline`        | `outline`         | Set to true to draw an outlined button.                                            | `boolean`                                                                          | `false`     |
 | `round`          | `round`           | Set to true to draw a rounded button.                                              | `boolean`                                                                          | `false`     |
-| `size`           | `size`            | The button's size.                                                                 | `"large" \| "medium" \| "small"`                                                   | `'medium'`  |
-| `type`           | `type`            | The button's type.                                                                 | `"danger" \| "default" \| "info" \| "primary" \| "success" \| "text" \| "warning"` | `'default'` |
+| `size`           | `size`            | The button's size.                                                                 | `"large" or "medium" or "small"`                                                   | `'medium'`  |
+| `type`           | `type`            | The button's type.                                                                 | `"danger" or "default" or "info" or "primary" or "success" or "text" or "warning"` | `'default'` |
 
 
 ## Methods
