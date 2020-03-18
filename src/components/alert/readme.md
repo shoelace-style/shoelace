@@ -25,12 +25,12 @@
 </sl-alert><br>
 
 <sl-alert type="warning">
-  <ion-icon slot="icon" name="alert-circle-outline"></ion-icon>
+  <ion-icon slot="icon" name="warning-outline"></ion-icon>
   This is a warning alert, if you couldn't tell.
 </sl-alert><br>
 
 <sl-alert type="danger">
-  <ion-icon slot="icon" name="alarm-outline"></ion-icon>
+  <ion-icon slot="icon" name="alert-circle-outline"></ion-icon>
   This is a danger alert, if you couldn't tell.
 </sl-alert>
 ```
