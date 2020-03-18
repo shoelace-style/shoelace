@@ -5,13 +5,15 @@ import tippy from 'tippy.js';
 
 @Component({
   tag: 'sl-tooltip',
-  styleUrl: 'tooltip.scss',
-  shadow: false // NOTE: see tooltip.scss for details
+  shadow: true
 })
 export class Tooltip {
-  observer: MutationObserver;
   tooltipTarget: HTMLElement;
   tooltip: any;
+
+  constructor() {
+    this.syncSettings = this.syncSettings.bind(this);
+  }
 
   @Element() host: HTMLElement;
 
@@ -95,16 +97,7 @@ export class Tooltip {
 
   componentDidLoad() {
     this.tooltip = tippy(this.getTarget());
-    this.syncSettings();
-
-    // Update the tooltip when its content changes
-    this.observer = new MutationObserver(() => setTimeout(() => this.syncSettings()));
-    this.observer.observe(this.host, {
-      attributes: true,
-      characterData: true,
-      childList: true,
-      subtree: true
-    });
+    this.host.shadowRoot.querySelector('slot').addEventListener('slotchange', this.syncSettings);
   }
 
   componentDidUpdate() {
@@ -112,8 +105,8 @@ export class Tooltip {
   }
 
   componentDidUnload() {
-    this.observer.disconnect();
     this.tooltip.destroy();
+    this.host.shadowRoot.querySelector('slot').removeEventListener('slotchange', this.syncSettings);
   }
 
   /** Shows the tooltip. */

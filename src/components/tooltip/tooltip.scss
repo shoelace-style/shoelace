@@ -1,9 +1,8 @@
+//
+// Tooltip styles are imported globally in shoelace.scss because we're using Tippy.js. This library appends tooltips
+// directly to the <body> element, so we need the styles to not be scoped to the component.
+//
 @import 'tippy.js/dist/tippy';
-
-//
-// NOTE: Tooltips are appended on-the-fly to the <body> element, so we need to disable scoped styles for tooltips. As a
-// result, styles placed in this file will be applied to the global scope!
-//
 
 .tippy-tooltip {
   border-radius: var(--sl-tooltip-border-radius);
