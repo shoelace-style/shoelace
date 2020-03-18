@@ -1,4 +1,4 @@
-import { Component, Method, Prop, State, h } from '@stencil/core';
+import { Component, Element, Method, Prop, State, h } from '@stencil/core';
 
 /**
  * @slot before - Used to insert an addon before the input.
@@ -10,14 +10,17 @@ import { Component, Method, Prop, State, h } from '@stencil/core';
 @Component({
   tag: 'sl-input',
   styleUrl: 'input.scss',
-  scoped: true
+  shadow: true
 })
 export class Input {
   input: HTMLInputElement;
 
   constructor() {
     this.handleClearClick = this.handleClearClick.bind(this);
+    this.handlePasswordToggle = this.handlePasswordToggle.bind(this);
   }
+
+  @Element() host: HTMLElement;
 
   @State() hasFocus = false;
   @State() isPasswordVisible = false;
@@ -106,6 +109,10 @@ export class Input {
     this.input.dispatchEvent(new Event('change', { bubbles: true }));
   }
 
+  handlePasswordToggle() {
+    this.isPasswordVisible = !this.isPasswordVisible;
+  }
+
   render() {
     return (
       <div
@@ -185,7 +192,7 @@ export class Input {
           <button
             class="sl-input__password-toggle"
             onMouseDown={event => event.preventDefault()}
-            onClick={() => (this.isPasswordVisible = !this.isPasswordVisible)}
+            onClick={this.handlePasswordToggle}
             tabindex="-1"
           >
             {this.isPasswordVisible ? (
