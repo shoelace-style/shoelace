@@ -16,7 +16,7 @@
   </sl-dropdown-item>
   <sl-dropdown-item>
     Suffix Text
-    <small slot="suffix"><kbd>cmd+s<kbd></small>
+    <small slot="suffix"><kbd>cmd+s</kbd></small>
   </sl-dropdown-item>
   <sl-dropdown-item>
     Suffix Icon
