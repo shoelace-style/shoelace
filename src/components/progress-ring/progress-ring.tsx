@@ -2,8 +2,8 @@ import { Component, Host, Prop, Watch, h } from '@stencil/core';
 
 @Component({
   tag: 'sl-progress-ring',
-  shadow: true,
-  styleUrl: 'progress-ring.scss'
+  styleUrl: 'progress-ring.scss',
+  shadow: true
 })
 export class Progress {
   indicator: SVGCircleElement;
