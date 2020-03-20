@@ -154,6 +154,10 @@ export namespace Components {
          */
         "disabled": boolean;
         /**
+          * The input's inputmode attribute.
+         */
+        "inputmode": "none" | "text" | "decimal" | "numeric" | "tel" | "search" | "email" | "url";
+        /**
           * The input's max attribute.
          */
         "max": number;
@@ -173,10 +177,6 @@ export namespace Components {
           * The input's name attribute.
          */
         "name": string;
-        /**
-          * The input's inputmode attribute.
-         */
-        "nativeInputmode": "none" | "text" | "decimal" | "numeric" | "tel" | "search" | "email" | "url";
         /**
           * The input's tabindex attribute.
          */
@@ -427,6 +427,10 @@ export namespace Components {
          */
         "disabled": boolean;
         /**
+          * The textarea's inputmode attribute.
+         */
+        "inputmode": "none" | "text" | "decimal" | "numeric" | "tel" | "search" | "email" | "url";
+        /**
           * The textarea's maxlength attribute.
          */
         "maxlength": number;
@@ -435,11 +439,7 @@ export namespace Components {
          */
         "name": string;
         /**
-          * The input's inputmode attribute.
-         */
-        "nativeInputmode": "none" | "text" | "decimal" | "numeric" | "tel" | "search" | "email" | "url";
-        /**
-          * The input's tabindex attribute.
+          * The textarea's tabindex attribute.
          */
         "nativeTabindex": number;
         /**
@@ -804,6 +804,10 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
+          * The input's inputmode attribute.
+         */
+        "inputmode"?: "none" | "text" | "decimal" | "numeric" | "tel" | "search" | "email" | "url";
+        /**
           * The input's max attribute.
          */
         "max"?: number;
@@ -823,10 +827,6 @@ declare namespace LocalJSX {
           * The input's name attribute.
          */
         "name"?: string;
-        /**
-          * The input's inputmode attribute.
-         */
-        "nativeInputmode"?: "none" | "text" | "decimal" | "numeric" | "tel" | "search" | "email" | "url";
         /**
           * The input's tabindex attribute.
          */
@@ -1041,6 +1041,10 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
+          * The textarea's inputmode attribute.
+         */
+        "inputmode"?: "none" | "text" | "decimal" | "numeric" | "tel" | "search" | "email" | "url";
+        /**
           * The textarea's maxlength attribute.
          */
         "maxlength"?: number;
@@ -1049,11 +1053,7 @@ declare namespace LocalJSX {
          */
         "name"?: string;
         /**
-          * The input's inputmode attribute.
-         */
-        "nativeInputmode"?: "none" | "text" | "decimal" | "numeric" | "tel" | "search" | "email" | "url";
-        /**
-          * The input's tabindex attribute.
+          * The textarea's tabindex attribute.
          */
         "nativeTabindex"?: number;
         /**

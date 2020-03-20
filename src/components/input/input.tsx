@@ -86,7 +86,7 @@ export class Input {
   @Prop() togglePassword = false;
 
   /** The input's inputmode attribute. */
-  @Prop() nativeInputmode: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
+  @Prop() inputmode: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
 
   /** The input's tabindex attribute. */
   @Prop() nativeTabindex: number;
@@ -159,7 +159,7 @@ export class Input {
           autoFocus={this.autofocus}
           pattern={this.pattern}
           required={this.required}
-          inputMode={this.nativeInputmode}
+          inputMode={this.inputmode}
           tabIndex={this.nativeTabindex}
           onFocus={() => (this.hasFocus = true)}
           onBlur={() => (this.hasFocus = false)}
