@@ -1,9 +1,9 @@
 # Radio
 
 ```html preview
-<sl-radio name="test">Default</sl-radio><br><br>
-<sl-radio name="test"checked>Checked</sl-radio><br><br>
-<sl-radio name="test"disabled>Disabled</sl-radio><br><br>
+<sl-radio>Default</sl-radio><br><br>
+<sl-radio checked>Checked</sl-radio><br><br>
+<sl-radio disabled>Disabled</sl-radio><br><br>
 ```
 
 <!-- Auto Generated Below -->
