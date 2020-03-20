@@ -1,7 +1,3 @@
-* {
-  -webkit-font-smoothing: subpixel-antialiased;
-}
-
 body {
   font-family: var(--sl-font-sans-serif);
   font-size: 16px;
