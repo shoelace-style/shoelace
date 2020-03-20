@@ -1,4 +1,4 @@
-import { Component, Host, Prop, h } from '@stencil/core';
+import { Component, Prop, h } from '@stencil/core';
 
 /**
  * @slot - A label to show inside the indicator.
@@ -18,30 +18,27 @@ export class ProgressBar {
 
   render() {
     return (
-      <Host
+      <div
+        class="sl-progress-bar"
         style={{
           '--height': `${this.height}px`
         }}
+        role="progressbar"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        aria-valuenow={this.percentage}
       >
         <div
-          class="sl-progress-bar"
-          role="progressbar"
-          aria-valuemin="0"
-          aria-valuemax="100"
-          aria-valuenow={this.percentage}
+          class="sl-progress-bar__indicator"
+          style={{
+            width: `${this.percentage}%`
+          }}
         >
-          <div
-            class="sl-progress-bar__indicator"
-            style={{
-              width: `${this.percentage}%`
-            }}
-          >
-            <span class="sl-progress-bar__label">
-              <slot />
-            </span>
-          </div>
+          <span class="sl-progress-bar__label">
+            <slot />
+          </span>
         </div>
-      </Host>
+      </div>
     );
   }
 }
