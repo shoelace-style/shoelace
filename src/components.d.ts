@@ -238,13 +238,13 @@ export namespace Components {
     }
     interface SlProgressRing {
         /**
+          * The diameter of the progress ring.
+         */
+        "diameter": number;
+        /**
           * The current progress percentage, 0 - 100.
          */
         "percentage": number;
-        /**
-          * The size of the progress ring.
-         */
-        "size": number;
         /**
           * The stroke width of the progress ring in pixels.
          */
@@ -879,13 +879,13 @@ declare namespace LocalJSX {
     }
     interface SlProgressRing {
         /**
+          * The diameter of the progress ring.
+         */
+        "diameter"?: number;
+        /**
           * The current progress percentage, 0 - 100.
          */
         "percentage"?: number;
-        /**
-          * The size of the progress ring.
-         */
-        "size"?: number;
         /**
           * The stroke width of the progress ring in pixels.
          */
