@@ -51,18 +51,6 @@ export class Radio {
 
   handleInput() {
     this.checked = this.input.checked;
-
-    // No event is fired when a radio is unchecked, so we need to sync all radios with the same name to their native
-    // input element's checked state. This lets us borrow the native browser radio selection behavior while keeping
-    // the checked prop of our custom elements in sync.
-    if (this.checked) {
-      [...document.querySelectorAll(`sl-radio[name="${this.name}"]`)].map((radio: HTMLSlRadioElement) => {
-        const nativeInput = radio.querySelector('input[type="radio"]') as HTMLInputElement; // tslint:disable-line
-        if (nativeInput) {
-          radio.checked = nativeInput.checked;
-        }
-      });
-    }
   }
 
   render() {
