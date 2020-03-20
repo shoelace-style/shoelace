@@ -7,15 +7,18 @@ import { Component, Prop, h } from '@stencil/core';
 })
 export class Spinner {
   /** The spinner's size. */
-  @Prop() size = '1em';
+  @Prop() diameter = 24;
+
+  @Prop() stroke = 2;
 
   render() {
     return (
       <span
         class="sl-spinner"
         style={{
-          width: this.size,
-          height: this.size
+          borderWidth: `${this.stroke}px`,
+          width: `${this.diameter}px`,
+          height: `${this.diameter}px`
         }}
       />
     );

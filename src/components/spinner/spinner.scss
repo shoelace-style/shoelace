@@ -6,7 +6,6 @@
 
 :host {
   --animation: 1s linear infinite spin;
-  --border-width: 2px;
   --border-color: var(--sl-color-primary-50);
   --margin-x: 4px;
 
@@ -16,7 +15,7 @@
 .sl-spinner {
   display: inline-block;
   border-radius: 50%;
-  border: solid var(--border-width) var(--border-color);
+  border: solid var(--border-color);
   border-bottom-color: transparent;
   margin: 0 var(--margin-x);
   vertical-align: middle;

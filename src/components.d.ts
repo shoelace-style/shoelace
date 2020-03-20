@@ -238,7 +238,7 @@ export namespace Components {
     }
     interface SlProgressRing {
         /**
-          * The diameter of the progress ring.
+          * The diameter of the progress ring in pixels.
          */
         "diameter": number;
         /**
@@ -330,7 +330,8 @@ export namespace Components {
         /**
           * The spinner's size.
          */
-        "size": string;
+        "diameter": number;
+        "stroke": number;
     }
     interface SlSwitch {
         /**
@@ -879,7 +880,7 @@ declare namespace LocalJSX {
     }
     interface SlProgressRing {
         /**
-          * The diameter of the progress ring.
+          * The diameter of the progress ring in pixels.
          */
         "diameter"?: number;
         /**
@@ -955,7 +956,8 @@ declare namespace LocalJSX {
         /**
           * The spinner's size.
          */
-        "size"?: string;
+        "diameter"?: number;
+        "stroke"?: number;
     }
     interface SlSwitch {
         /**

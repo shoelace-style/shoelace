@@ -17,7 +17,7 @@
 
 | Property     | Attribute    | Description                                      | Type     | Default     |
 | ------------ | ------------ | ------------------------------------------------ | -------- | ----------- |
-| `diameter`   | `diameter`   | The diameter of the progress ring.               | `number` | `128`       |
+| `diameter`   | `diameter`   | The diameter of the progress ring in pixels.     | `number` | `128`       |
 | `percentage` | `percentage` | The current progress percentage, 0 - 100.        | `number` | `undefined` |
 | `stroke`     | `stroke`     | The stroke width of the progress ring in pixels. | `number` | `6`         |
 

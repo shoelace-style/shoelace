@@ -8,7 +8,7 @@ import { Component, Host, Prop, Watch, h } from '@stencil/core';
 export class Progress {
   indicator: SVGCircleElement;
 
-  /** The diameter of the progress ring. */
+  /** The diameter of the progress ring in pixels. */
   @Prop() diameter = 128;
 
   /** The stroke width of the progress ring in pixels. */
