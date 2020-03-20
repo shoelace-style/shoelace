@@ -25,31 +25,31 @@
 
 ```html preview
 <sl-alert type="primary">
-  <ion-icon slot="icon" name="information-circle-outline"></ion-icon>
+  <ion-icon slot="icon" style="font-size: 20px;" name="information-circle-outline"></ion-icon>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
 </sl-alert><br>
 
 <sl-alert type="success">
-  <ion-icon slot="icon" name="checkmark-outline"></ion-icon>
+  <ion-icon slot="icon" style="font-size: 20px;" name="checkmark-outline"></ion-icon>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
 </sl-alert><br>
 
 <sl-alert type="info">
-  <ion-icon slot="icon" name="settings-outline"></ion-icon>
+  <ion-icon slot="icon" style="font-size: 20px;" name="settings-outline"></ion-icon>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
 </sl-alert><br>
 
 <sl-alert type="warning">
-  <ion-icon slot="icon" name="warning-outline"></ion-icon>
+  <ion-icon slot="icon" style="font-size: 20px;" name="warning-outline"></ion-icon>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
 </sl-alert><br>
 
 <sl-alert type="danger">
-  <ion-icon slot="icon" name="alert-circle-outline"></ion-icon>
+  <ion-icon slot="icon" style="font-size: 20px;" name="alert-circle-outline"></ion-icon>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
 </sl-alert>
