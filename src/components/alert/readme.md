@@ -1,46 +1,85 @@
 # Alert
 
 ```html preview
-<sl-alert type="primary">This is a primary alert, if you couldn't tell.</sl-alert><br>
-<sl-alert type="success">This is a success alert, if you couldn't tell.</sl-alert><br>
-<sl-alert type="info">This is a info alert, if you couldn't tell.</sl-alert><br>
-<sl-alert type="warning">This is a warning alert, if you couldn't tell.</sl-alert><br>
-<sl-alert type="danger">This is a danger alert, if you couldn't tell.</sl-alert>
+<sl-alert type="primary">
+  <strong>Your changes have been saved</strong><br>
+  You can continue working or safely leave the app now.
+</sl-alert><br>
+<sl-alert type="success">
+  <strong>Your changes have been saved</strong><br>
+  You can continue working or safely leave the app now.
+</sl-alert><br>
+<sl-alert type="info">
+  <strong>Your changes have been saved</strong><br>
+  You can continue working or safely leave the app now.
+</sl-alert><br>
+<sl-alert type="warning">
+  <strong>Your changes have been saved</strong><br>
+  You can continue working or safely leave the app now.
+</sl-alert><br>
+<sl-alert type="danger">
+  <strong>Your changes have been saved</strong><br>
+  You can continue working or safely leave the app now.
+</sl-alert>
 ```
 
 ```html preview
 <sl-alert type="primary">
   <ion-icon slot="icon" name="information-circle-outline"></ion-icon>
-  This is a primary alert, if you couldn't tell.
+  <strong>Your changes have been saved</strong><br>
+  You can continue working or safely leave the app now.
 </sl-alert><br>
 
 <sl-alert type="success">
   <ion-icon slot="icon" name="checkmark-outline"></ion-icon>
-  This is a success alert, if you couldn't tell.
+  <strong>Your changes have been saved</strong><br>
+  You can continue working or safely leave the app now.
 </sl-alert><br>
 
 <sl-alert type="info">
   <ion-icon slot="icon" name="settings-outline"></ion-icon>
-  This is a info alert, if you couldn't tell.
+  <strong>Your changes have been saved</strong><br>
+  You can continue working or safely leave the app now.
 </sl-alert><br>
 
 <sl-alert type="warning">
   <ion-icon slot="icon" name="warning-outline"></ion-icon>
-  This is a warning alert, if you couldn't tell.
+  <strong>Your changes have been saved</strong><br>
+  You can continue working or safely leave the app now.
 </sl-alert><br>
 
 <sl-alert type="danger">
   <ion-icon slot="icon" name="alert-circle-outline"></ion-icon>
-  This is a danger alert, if you couldn't tell.
+  <strong>Your changes have been saved</strong><br>
+  You can continue working or safely leave the app now.
 </sl-alert>
 ```
 
 ```html preview
-<sl-alert type="primary" closable>This is a primary alert, if you couldn't tell.</sl-alert><br>
-<sl-alert type="success" closable>This is a success alert, if you couldn't tell.</sl-alert><br>
-<sl-alert type="info" closable>This is a info alert, if you couldn't tell.</sl-alert><br>
-<sl-alert type="warning" closable>This is a warning alert, if you couldn't tell.</sl-alert><br>
-<sl-alert type="danger" closable>This is a danger alert, if you couldn't tell.</sl-alert>
+<sl-alert type="primary" closable>
+  <strong>Your changes have been saved</strong><br>
+  You can continue working or safely leave the app now.
+</sl-alert><br>
+
+<sl-alert type="success" closable>
+  <strong>Your changes have been saved</strong><br>
+  You can continue working or safely leave the app now.
+</sl-alert><br>
+
+<sl-alert type="info" closable>
+  <strong>Your changes have been saved</strong><br>
+  You can continue working or safely leave the app now.
+</sl-alert><br>
+
+<sl-alert type="warning" closable>
+  <strong>Your changes have been saved</strong><br>
+  You can continue working or safely leave the app now.
+</sl-alert><br>
+
+<sl-alert type="danger" closable>
+  <strong>Your changes have been saved</strong><br>
+  You can continue working or safely leave the app now.
+</sl-alert>
 ```
 
 <!-- Auto Generated Below -->

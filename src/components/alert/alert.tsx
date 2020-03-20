@@ -52,6 +52,7 @@ export class Tab {
         ref={el => (this.alert = el)}
         class={{
           'sl-alert': true,
+          'sl-alert--closable': this.closable,
           'sl-alert--closed': this.closed,
 
           // States
