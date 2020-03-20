@@ -248,7 +248,7 @@ export namespace Components {
         /**
           * The stroke width of the progress ring in pixels.
          */
-        "strokeWidth": number;
+        "stroke": number;
     }
     interface SlRadio {
         /**
@@ -889,7 +889,7 @@ declare namespace LocalJSX {
         /**
           * The stroke width of the progress ring in pixels.
          */
-        "strokeWidth"?: number;
+        "stroke"?: number;
     }
     interface SlRadio {
         /**
