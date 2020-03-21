@@ -1,37 +1,28 @@
 @import 'reset';
 
 :host {
-  --background-color: var(--sl-color-gray-90);
-  --border-radius: 12px;
-  --color: var(--sl-color-white);
-  --font-family: var(--sl-font-sans-serif);
-  --font-size: 12px;
-  --font-weight: var(--sl-font-weight--normal);
-  --indicator-background-color: var(--sl-color-primary-50);
-  --transition-speed: 400ms;
-
   display: block;
 }
 
 .sl-progress-bar {
   position: relative;
-  background: var(--background-color);
+  background: var(--sl-color-gray-90);
   height: var(--height);
-  border-radius: var(--border-radius);
+  border-radius: 12px;
   overflow: hidden;
 }
 
 .sl-progress-bar__indicator {
   height: 100%;
-  font-family: var(--font-family);
-  font-size: var(--font-size);
-  font-weight: var(--font-weight);
-  background-color: var(--indicator-background-color);
-  color: var(--color);
+  font-family: var(--sl-font-sans-serif);
+  font-size: 12px;
+  font-weight: var(--sl-font-weight--normal);
+  background-color: var(--sl-color-primary-50);
+  color: var(--sl-color-white);
   text-align: center;
   line-height: var(--height);
   white-space: nowrap;
   overflow: hidden;
-  transition: var(--transition-speed) width, var(--transition-speed) background-color;
+  transition: 400ms width, 400ms background-color;
   user-select: none;
 }

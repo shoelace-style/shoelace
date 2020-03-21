@@ -1,13 +1,6 @@
 @import 'reset';
 
 :host {
-  --border-radius: 3px;
-  --border-width: 4px;
-  --font-family: var(--sl-font-sans-serif);
-  --font-size: 14px;
-  --font-weight: var(--sl-font-weight-normal);
-  --line-height: 1.6;
-
   display: block;
 }
 
@@ -16,12 +9,12 @@
   display: flex;
   align-items: stretch;
   background-color: var(--sl-color-white);
-  border-left: solid var(--border-width);
+  border-left: solid 4px;
   border-radius: 0;
-  font-family: var(--font-family);
-  font-size: var(--font-size);
-  font-weight: var(--font-weight);
-  line-height: var(--line-height);
+  font-family: var(--sl-font-sans-serif);
+  font-size: 14px;
+  font-weight: var(--sl-font-weight-normal);
+  line-height: 1.6;
   color: var(--sl-color-gray-30);
   transition: 0.2s opacity;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);

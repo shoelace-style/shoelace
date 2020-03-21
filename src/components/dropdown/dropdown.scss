@@ -1,20 +1,6 @@
 @import 'reset';
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Base styles
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 :host {
-  --background-color: var(--sl-menu-background-color);
-  --border-color: var(--sl-menu-border-color);
-  --box-shadow: var(--sl-menu-box-shadow);
-  --font-family: var(--sl-menu-font-family);
-  --font-size: var(--sl-menu-font-size);
-  --font-weight: var(--sl-menu-font-weight);
-  --padding-x: var(--sl-menu-padding-x);
-  --padding-y: var(--sl-menu-padding-y);
-  --transition-speed: var(--sl-menu-transition-speed);
-
   display: inline-block;
 }
 
@@ -31,19 +17,19 @@
   position: absolute;
   z-index: 9999;
   max-height: 50vh;
-  font-family: var(--font-family);
-  font-weight: var(--font-weight);
-  font-size: var(--font-size);
+  font-family: var(--sl-menu-font-family);
+  font-size: var(--sl-menu-font-size);
+  font-weight: var(--sl-menu-font-weight);
   color: var(--color);
-  background-color: var(--background-color);
-  border: solid 1px var(--border-color);
+  background-color: var(--sl-menu-background-color);
+  border: solid 1px var(--sl-menu-border-color);
   border-radius: 4px;
-  box-shadow: var(--box-shadow);
-  padding-top: var(--padding-y);
-  padding-bottom: var(--padding-y);
+  box-shadow: var(--sl-menu-box-shadow);
+  padding-top: var(--sl-menu-padding-y);
+  padding-bottom: var(--sl-menu-padding-y);
   opacity: 0;
   overflow-y: auto;
-  transition: var(--transition-speed) opacity;
+  transition: var(--sl-menu-transition-speed) opacity;
 }
 
 .sl-dropdown--open .sl-dropdown__menu {

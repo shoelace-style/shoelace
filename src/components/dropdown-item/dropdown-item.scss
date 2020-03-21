@@ -5,14 +5,6 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 :host {
-  --background-color--active: var(--sl-menu-item-background-color--active);
-  --background-color--disabled: var(--sl-menu-item-background-color--disabled);
-  --background-color: var(--sl-menu-item-background-color);
-  --color--active: var(--sl-menu-item-color--active);
-  --color--disabled: var(--sl-menu-item-color--disabled);
-  --color: var(--sl-menu-item-color);
-  --transition-speed: 150ms;
-
   display: block;
 }
 
@@ -20,22 +12,23 @@
   position: relative;
   display: flex;
   align-items: stretch;
-  background-color: var(--background-color);
-  color: var(--color);
-  padding: var(--padding-y) var(--padding-x);
-  transition: var(--transition-speed) color, var(--transition-speed) background-color, var(--transition-speed) fill;
+  background-color: var(--sl-menu-item-background-color);
+  color: var(--sl-menu-item-color);
+  padding: var(--sl-menu-padding-y) var(--sl-menu-padding-x);
+  transition: var(--sl-form-control-transition-speed) color, var(--sl-form-control-transition-speed) background-color,
+    var(--sl-form-control-transition-speed) fill;
   user-select: none;
   white-space: nowrap;
   cursor: pointer;
 
   &.sl-dropdown-item--active:not(.sl-dropdown-item--disabled) {
-    background-color: var(--background-color--active);
-    color: var(--color--active);
+    background-color: var(--sl-menu-item-background-color--active);
+    color: var(--sl-menu-item-color--active);
   }
 
   &.sl-dropdown-item--disabled {
-    background-color: var(--background-color--disabled);
-    color: var(--color--disabled);
+    background-color: var(--sl-menu-item-background-color--disabled);
+    color: var(--sl-menu-item-color--disabled);
     cursor: not-allowed;
   }
 

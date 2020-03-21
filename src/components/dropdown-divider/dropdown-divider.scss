@@ -5,13 +5,10 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 :host {
-  --border-color: var(--sl-menu-border-color);
-  --padding-y: var(--sl-menu-padding-y);
-
   display: block;
 }
 
 .sl-dropdown-divider {
-  border-top: solid 1px var(--border-color);
-  margin: var(--padding-y) 0;
+  border-top: solid 1px var(--sl-menu-border-color);
+  margin: var(--sl-menu-padding-y) 0;
 }

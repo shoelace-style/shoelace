@@ -89,10 +89,10 @@
   --sl-form-control-border-radius--small: 4px;
   --sl-form-control-border-width: 1px;
   --sl-form-control-checkbox-size: 14px;
-  --sl-form-control-color--disabled: red;
-  --sl-form-control-color--focus: var(--sl-color-gray-40);
-  --sl-form-control-color--hover: var(--sl-color-gray-40);
-  --sl-form-control-color: var(--sl-color-gray-40);
+  --sl-form-control-color--disabled: var(--sl-color-gray-10);
+  --sl-form-control-color--focus: var(--sl-color-gray-30);
+  --sl-form-control-color--hover: var(--sl-color-gray-30);
+  --sl-form-control-color: var(--sl-color-gray-30);
   --sl-form-control-font-family: var(--sl-font-sans-serif);
   --sl-form-control-font-size--large: 16px;
   --sl-form-control-font-size--medium: 14px;
@@ -104,9 +104,9 @@
   --sl-form-control-padding-x--large: 12px;
   --sl-form-control-padding-x--medium: 10px;
   --sl-form-control-padding-x--small: 8px;
-  --sl-form-control-placeholder-color--disabled: var(--sl-color-gray-60);
-  --sl-form-control-placeholder-color--hover: var(--sl-color-gray-70);
-  --sl-form-control-placeholder-color: var(--sl-color-gray-70);
+  --sl-form-control-placeholder-color--disabled: var(--sl-color-gray-40);
+  --sl-form-control-placeholder-color--hover: var(--sl-color-gray-60);
+  --sl-form-control-placeholder-color: var(--sl-color-gray-60);
   --sl-form-control-transition-speed: 150ms;
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

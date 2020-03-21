@@ -1,28 +1,20 @@
 :host {
-  --color: var(--sl-color-black);
-  --font-family: var(--sl-font-sans-serif);
-  --font-size: 12px;
-  --font-weight: var(--sl-font-weight--normal);
-  --track-color: var(--sl-color-gray-90);
-  --indicator-color: var(--sl-color-primary-50);
-  --transition-speed: 0.35s;
-
   display: inline-flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  font-family: var(--font-family);
-  font-size: var(--font-size);
-  font-weight: var(--font-weight);
+  font-family: var(--sl-font-sans-serif);
+  font-size: 12px;
+  font-weight: var(--sl-font-weight--normal);
 }
 
 .sl-progress-ring__track {
-  stroke: var(--track-color);
+  stroke: var(--sl-color-gray-90);
 }
 
 .sl-progress-ring__indicator {
-  stroke: var(--indicator-color);
-  transition: var(--transition-speed) stroke-dashoffset, var(--transition-speed) stroke;
+  stroke: var(--sl-color-primary-50);
+  transition: 0.35s stroke-dashoffset, 0.35s stroke;
   transform: rotate(-90deg);
   transform-origin: 50% 50%;
 }
@@ -37,6 +29,6 @@
   width: 100%;
   height: 100%;
   text-align: center;
-  color: var(--color);
+  color: var(--sl-color-black);
   user-select: none;
 }

@@ -5,41 +5,6 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 :host {
-  --addon-background-color: var(--sl-color-gray-95);
-  --addon-color: var(--sl-color-gray-60);
-  --background-color--disabled: var(--sl-form-control-background-color--disabled);
-  --background-color--focus: var(--sl-form-control-background-color--focus);
-  --background-color--hover: var(--sl-form-control-background-color--hover);
-  --background-color: var(--sl-form-control-background-color);
-  --border-color--disabled: var(--sl-form-control-border-color--disabled);
-  --border-color--focus: var(--sl-form-control-border-color--focus);
-  --border-color--hover: var(--sl-form-control-border-color--hover);
-  --border-color: var(--sl-form-control-border-color);
-  --border-radius--large: var(--sl-form-control-border-radius--large);
-  --border-radius--medium: var(--sl-form-control-border-radius--medium);
-  --border-radius--small: var(--sl-form-control-border-radius--small);
-  --border-width: var(--sl-form-control-border-width);
-  --color--disabled: var(--sl-form-control-color--disabled);
-  --color--focus: var(--sl-form-control-color--focus);
-  --color--hover: var(--sl-form-control-color--hover);
-  --color: var(--sl-form-control-color);
-  --focus-ring-box-shadow: var(--sl-focus-ring-box-shadow);
-  --font-family: var(--sl-form-control-font-family);
-  --font-size--large: var(--sl-form-control-font-size--large);
-  --font-size--medium: var(--sl-form-control-font-size--medium);
-  --font-size--small: var(--sl-form-control-font-size--small);
-  --font-weight: var(--sl-form-control-font-weight);
-  --height--large: var(--sl-form-control-height--large);
-  --height--medium: var(--sl-form-control-height--medium);
-  --height--small: var(--sl-form-control-height--small);
-  --padding-x--large: var(--sl-form-control-padding-x--large);
-  --padding-x--medium: var(--sl-form-control-padding-x--medium);
-  --padding-x--small: var(--sl-form-control-padding-x--small);
-  --placeholder-color--disabled: var(--sl-form-control-placeholder-color--disabled);
-  --placeholder-color--hover: var(--sl-form-control-placeholder-color--hover);
-  --placeholder-color: var(--sl-form-control-placeholder-color);
-  --transition-speed: var(--sl-form-control-transition-speed);
-
   display: block;
 }
 
@@ -48,12 +13,13 @@
   align-items: stretch;
   justify-content: center;
   position: relative;
-  font-family: var(--font-family);
-  font-weight: var(--font-weight);
-  background-color: var(--background-color);
-  border: solid var(--border-width) var(--border-color);
+  font-family: var(--sl-form-control-font-family);
+  font-weight: var(--sl-form-control-font-weight);
+  background-color: var(--sl-form-control-background-color);
+  border: solid var(--sl-form-control-border-width) var(--sl-form-control-border-color);
   vertical-align: middle;
-  transition: var(--transition-speed) color, var(--transition-speed) border, var(--transition-speed) box-shadow;
+  transition: var(--sl-form-control-transition-speed) color, var(--sl-form-control-transition-speed) border,
+    var(--sl-form-control-transition-speed) box-shadow;
   cursor: text;
 
   .sl-input__control {
@@ -62,7 +28,7 @@
     font-size: inherit;
     font-weight: inherit;
     height: 100%;
-    color: var(--color);
+    color: var(--sl-form-control-color);
     border: none;
     background: none;
     padding: 0;
@@ -77,7 +43,7 @@
     }
 
     &::placeholder {
-      color: var(--placeholder-color);
+      color: var(--sl-form-control-placeholder-color);
       user-select: none;
     }
 
@@ -87,35 +53,35 @@
   }
 
   &:hover:not(.sl-input--disabled) {
-    background-color: var(--background-color--hover);
-    border-color: var(--border-color--hover);
-    color: var(--color--hover);
+    background-color: var(--sl-form-control-background-color--hover);
+    border-color: var(--sl-form-control-border-color--hover);
+    color: var(--sl-form-control-color--hover);
 
     .sl-input__control {
       &::placeholder {
-        color: var(--placeholder-color--hover);
+        color: var(--sl-form-control-placeholder-color--hover);
       }
     }
   }
 
   &.sl-input--focused:not(.sl-input--disabled) {
-    background-color: var(--background-color--focus);
-    border-color: var(--border-color--focus);
-    box-shadow: var(--focus-ring-box-shadow);
-    color: var(--color--focus);
+    background-color: var(--sl-form-control-background-color--focus);
+    border-color: var(--sl-form-control-border-color--focus);
+    box-shadow: var(--sl-focus-ring-box-shadow);
+    color: var(--sl-form-control-color--focus);
   }
 
   &.sl-input--disabled {
-    background-color: var(--background-color--disabled);
-    border-color: var(--border-color--disabled);
-    color: var(--color--disabled);
+    background-color: var(--sl-form-control-background-color--disabled);
+    border-color: var(--sl-form-control-border-color--disabled);
     opacity: 0.5;
 
     .sl-input__control {
+      color: var(--sl-form-control-color--disabled);
       cursor: not-allowed;
 
       &::placeholder {
-        color: var(--placeholder-color--disabled);
+        color: var(--sl-form-control-placeholder-color--disabled);
       }
     }
   }
@@ -134,21 +100,21 @@
   .sl-input__before ::slotted(*),
   .sl-input__after ::slotted(*) {
     flex: 1 1 auto;
-    background-color: var(--addon-background-color);
-    color: var(--addon-color);
+    background-color: var(--sl-color-gray-95);
+    color: var(--sl-color-gray-50);
     user-select: none;
   }
 
   .sl-input__before ::slotted(*) {
-    border-right: solid var(--border-width) var(--border-color);
-    border-top-left-radius: var(--border-radius--medium);
-    border-bottom-left-radius: var(--border-radius--medium);
+    border-right: solid var(--sl-form-control-border-width) var(--sl-form-control-border-color);
+    border-top-left-radius: var(--sl-form-control-border-radius--medium);
+    border-bottom-left-radius: var(--sl-form-control-border-radius--medium);
   }
 
   .sl-input__after ::slotted(*) {
-    border-left: solid var(--border-width) var(--border-color);
-    border-top-right-radius: var(--border-radius--medium);
-    border-bottom-right-radius: var(--border-radius--medium);
+    border-left: solid var(--sl-form-control-border-width) var(--sl-form-control-border-color);
+    border-top-right-radius: var(--sl-form-control-border-radius--medium);
+    border-bottom-right-radius: var(--sl-form-control-border-radius--medium);
   }
 
   .sl-input__prefix,
@@ -156,7 +122,7 @@
     display: flex;
     flex: 0 0 auto;
     align-items: center;
-    color: var(--placeholder-color);
+    color: var(--sl-form-control-placeholder-color);
   }
 }
 
@@ -165,95 +131,95 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 .sl-input--small {
-  border-radius: var(--border-radius--small);
-  font-size: var(--font-size--small);
-  height: var(--height--small);
-  line-height: calc(var(--height--small) - var(--border-width) * 2);
+  border-radius: var(--sl-form-control-border-radius--small);
+  font-size: var(--sl-form-control-font-size--small);
+  height: var(--sl-form-control-height--small);
+  line-height: calc(var(--sl-form-control-height--small) - var(--sl-form-control-border-width) * 2);
 
   .sl-input__control {
-    height: calc(var(--height--small) - var(--border-width) * 2);
-    line-height: calc(var(--height--small) - var(--border-width) * 2);
-    margin: 0 var(--padding-x--small);
+    height: calc(var(--sl-form-control-height--small) - var(--sl-form-control-border-width) * 2);
+    line-height: calc(var(--sl-form-control-height--small) - var(--sl-form-control-border-width) * 2);
+    margin: 0 var(--sl-form-control-padding-x--small);
   }
 
   .sl-input__clear,
   .sl-input__password-toggle {
-    margin-right: var(--padding-x--small);
+    margin-right: var(--sl-form-control-padding-x--small);
   }
 
   .sl-input__prefix ::slotted(*) {
-    margin-left: var(--padding-x--small);
+    margin-left: var(--sl-form-control-padding-x--small);
   }
 
   .sl-input__suffix ::slotted(*) {
-    margin-right: var(--padding-x--small);
+    margin-right: var(--sl-form-control-padding-x--small);
   }
 
   .sl-input__before ::slotted(*),
   .sl-input__after ::slotted(*) {
-    padding: 0 var(--padding-x--small);
+    padding: 0 var(--sl-form-control-padding-x--small);
   }
 }
 
 .sl-input--medium {
-  border-radius: var(--border-radius--medium);
-  font-size: var(--font-size--medium);
-  height: var(--height--medium);
-  line-height: calc(var(--height--medium) - var(--border-width) * 2);
+  border-radius: var(--sl-form-control-border-radius--medium);
+  font-size: var(--sl-form-control-font-size--medium);
+  height: var(--sl-form-control-height--medium);
+  line-height: calc(var(--sl-form-control-height--medium) - var(--sl-form-control-border-width) * 2);
 
   .sl-input__control {
-    height: calc(var(--height--medium) - var(--border-width) * 2);
-    line-height: calc(var(--height--medium) - var(--border-width) * 2);
-    margin: 0 var(--padding-x--medium);
+    height: calc(var(--sl-form-control-height--medium) - var(--sl-form-control-border-width) * 2);
+    line-height: calc(var(--sl-form-control-height--medium) - var(--sl-form-control-border-width) * 2);
+    margin: 0 var(--sl-form-control-padding-x--medium);
   }
 
   .sl-input__clear,
   .sl-input__password-toggle {
-    margin-right: var(--padding-x--medium);
+    margin-right: var(--sl-form-control-padding-x--medium);
   }
 
   .sl-input__prefix ::slotted(*) {
-    margin-left: var(--padding-x--medium);
+    margin-left: var(--sl-form-control-padding-x--medium);
   }
 
   .sl-input__suffix ::slotted(*) {
-    margin-right: var(--padding-x--medium);
+    margin-right: var(--sl-form-control-padding-x--medium);
   }
 
   .sl-input__before ::slotted(*),
   .sl-input__after ::slotted(*) {
-    padding: 0 var(--padding-x--medium);
+    padding: 0 var(--sl-form-control-padding-x--medium);
   }
 }
 
 .sl-input--large {
-  border-radius: var(--border-radius--large);
-  font-size: var(--font-size--large);
-  height: var(--height--large);
-  line-height: calc(var(--height--large) - var(--border-width) * 2);
+  border-radius: var(--sl-form-control-border-radius--large);
+  font-size: var(--sl-form-control-font-size--large);
+  height: var(--sl-form-control-height--large);
+  line-height: calc(var(--sl-form-control-height--large) - var(--sl-form-control-border-width) * 2);
 
   .sl-input__control {
-    height: calc(var(--height--large) - var(--border-width) * 2);
-    line-height: calc(var(--height--large) - var(--border-width) * 2);
-    margin: 0 var(--padding-x--large);
+    height: calc(var(--sl-form-control-height--large) - var(--sl-form-control-border-width) * 2);
+    line-height: calc(var(--sl-form-control-height--large) - var(--sl-form-control-border-width) * 2);
+    margin: 0 var(--sl-form-control-padding-x--large);
   }
 
   .sl-input__clear,
   .sl-input__password-toggle {
-    margin-right: var(--padding-x--large);
+    margin-right: var(--sl-form-control-padding-x--large);
   }
 
   .sl-input__prefix ::slotted(*) {
-    margin-left: var(--padding-x--large);
+    margin-left: var(--sl-form-control-padding-x--large);
   }
 
   .sl-input__suffix ::slotted(*) {
-    margin-right: var(--padding-x--large);
+    margin-right: var(--sl-form-control-padding-x--large);
   }
 
   .sl-input__before ::slotted(*),
   .sl-input__after ::slotted(*) {
-    padding: 0 var(--padding-x--large);
+    padding: 0 var(--sl-form-control-padding-x--large);
   }
 }
 
@@ -266,7 +232,7 @@
   display: flex;
   align-items: center;
   font-size: inherit;
-  color: var(--placeholder-color);
+  color: var(--sl-form-control-placeholder-color);
   border: none;
   background: none;
   padding: 0;
@@ -275,7 +241,7 @@
   svg {
     width: 1.2em;
     height: 1.2em;
-    transition: var(--transition-speed) filter;
+    transition: var(--sl-form-control-transition-speed) filter;
   }
 
   &:hover,
