@@ -6,28 +6,6 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 :host {
-  // Base variables
-  --border-radius--large: var(--sl-form-control-border-radius--large);
-  --border-radius--medium: var(--sl-form-control-border-radius--medium);
-  --border-radius--small: var(--sl-form-control-border-radius--small);
-  --border-width: var(--sl-form-control-border-width);
-  --focus-ring-alpha: var(--sl-focus-ring-alpha);
-  --focus-ring-width: var(--sl-focus-ring-width);
-  --font-family: var(--sl-form-control-font-sans-serif);
-  --font-size--large: var(--sl-form-control-font-size--large);
-  --font-size--medium: var(--sl-form-control-font-size--medium);
-  --font-size--small: var(--sl-form-control-font-size--small);
-  --font-weight: var(--sl-font-weight--normal);
-  --height--large: var(--sl-form-control-height--large);
-  --height--medium: var(--sl-form-control-height--medium);
-  --height--small: var(--sl-form-control-height--small);
-  --padding-x--large: 24px;
-  --padding-x--medium: 20px;
-  --padding-x--small: 16px;
-  --spinner-animation: 1s linear infinite spin;
-  --spinner-border-width: 1px;
-  --transition-speed: var(--sl-form-control-transition-speed);
-
   // Default buttons
   --default-background-color--active: var(--sl-color-primary-95);
   --default-background-color--focus: var(--sl-color-primary-95);
@@ -236,13 +214,14 @@
   align-items: stretch;
   justify-content: center;
   border-style: solid;
-  border-width: var(--border-width);
-  font-family: var(--font-family);
-  font-weight: var(--font-weight);
+  border-width: var(--sl-form-control-border-width);
+  font-family: var(--sl-form-control-font-sans-serif);
+  font-weight: var(--sl-font-weight--normal);
   user-select: none;
   white-space: nowrap;
   vertical-align: middle;
-  transition: var(--transition-speed) background-color, var(--transition-speed) color, var(--transition-speed) border;
+  transition: var(--sl-form-control-transition-speed) background-color, var(--sl-form-control-transition-speed) color,
+    var(--sl-form-control-transition-speed) border;
   cursor: pointer;
 
   &::-moz-focus-inner {
@@ -378,27 +357,27 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 .sl-button--small {
-  font-size: var(--font-size--small);
-  height: var(--height--small);
-  line-height: calc(var(--height--small) - var(--border-width) * 2);
-  border-radius: var(--border-radius--small);
-  padding: 0 var(--padding-x--small);
+  font-size: var(--sl-form-control-font-size--small);
+  height: var(--sl-form-control-height--small);
+  line-height: calc(var(--sl-form-control-height--small) - var(--sl-form-control-border-width) * 2);
+  border-radius: var(--sl-form-control-border-radius--small);
+  padding: 0 16px;
 }
 
 .sl-button--medium {
-  font-size: var(--font-size--medium);
-  height: var(--height--medium);
-  line-height: calc(var(--height--medium) - var(--border-width) * 2);
-  border-radius: var(--border-radius--medium);
-  padding: 0 var(--padding-x--medium);
+  font-size: var(--sl-form-control-font-size--medium);
+  height: var(--sl-form-control-height--medium);
+  line-height: calc(var(--sl-form-control-height--medium) - var(--sl-form-control-border-width) * 2);
+  border-radius: var(--sl-form-control-border-radius--medium);
+  padding: 0 20px;
 }
 
 .sl-button--large {
-  font-size: var(--font-size--large);
-  height: var(--height--large);
-  line-height: calc(var(--height--large) - var(--border-width) * 2);
-  border-radius: var(--border-radius--large);
-  padding: 0 var(--padding-x--large);
+  font-size: var(--sl-form-control-font-size--large);
+  height: var(--sl-form-control-height--large);
+  line-height: calc(var(--sl-form-control-height--large) - var(--sl-form-control-border-width) * 2);
+  border-radius: var(--sl-form-control-border-radius--large);
+  padding: 0 24px;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -407,15 +386,15 @@
 
 .sl-button--round {
   &.sl-button--small {
-    border-radius: var(--height--small);
+    border-radius: var(--sl-form-control-height--small);
   }
 
   &.sl-button--medium {
-    border-radius: var(--height--medium);
+    border-radius: var(--sl-form-control-height--medium);
   }
 
   &.sl-button--large {
-    border-radius: var(--height--large);
+    border-radius: var(--sl-form-control-height--large);
   }
 }
 
@@ -434,17 +413,17 @@
   }
 
   &.sl-button--small {
-    width: var(--height--small);
+    width: var(--sl-form-control-height--small);
     border-radius: 50%;
   }
 
   &.sl-button--medium {
-    width: var(--height--medium);
+    width: var(--sl-form-control-height--medium);
     border-radius: 50%;
   }
 
   &.sl-button--large {
-    width: var(--height--large);
+    width: var(--sl-form-control-height--large);
     border-radius: 50%;
   }
 
@@ -500,10 +479,10 @@
     left: calc(50% - 0.5em);
     width: 1em;
     height: 1em;
-    border: solid var(--spinner-border-width) currentColor;
+    border: solid 1px currentColor;
     border-bottom-color: transparent;
     border-radius: 50%;
-    animation: var(--spinner-animation);
+    animation: 1s linear infinite spin;
   }
 }
 
