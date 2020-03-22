@@ -5,39 +5,6 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 :host {
-  --background-color--disabled: var(--sl-form-control-background-color--disabled);
-  --background-color--focus: var(--sl-form-control-background-color--focus);
-  --background-color--hover: var(--sl-form-control-background-color--hover);
-  --background-color: var(--sl-form-control-background-color);
-  --border-color--disabled: var(--sl-form-control-border-color--disabled);
-  --border-color--focus: var(--sl-form-control-border-color--focus);
-  --border-color--hover: var(--sl-form-control-border-color--hover);
-  --border-color: var(--sl-form-control-border-color);
-  --border-radius--large: var(--sl-form-control-border-radius--large);
-  --border-radius--medium: var(--sl-form-control-border-radius--medium);
-  --border-radius--small: var(--sl-form-control-border-radius--small);
-  --border-width: var(--sl-form-control-border-width);
-  --color--disabled: var(--sl-form-control-color--disabled);
-  --color--focus: var(--sl-form-control-color--focus);
-  --color--hover: var(--sl-form-control-color--hover);
-  --color: var(--sl-form-control-color);
-  --focus-ring-box-shadow: var(--sl-focus-ring-box-shadow);
-  --font-family: var(--sl-form-control-font-family);
-  --font-size--large: var(--sl-form-control-font-size--large);
-  --font-size--medium: var(--sl-form-control-font-size--medium);
-  --font-size--small: var(--sl-form-control-font-size--small);
-  --font-weight: var(--sl-form-control-font-weight);
-  --height--large: var(--sl-form-control-height--large);
-  --height--medium: var(--sl-form-control-height--medium);
-  --height--small: var(--sl-form-control-height--small);
-  --padding-x--large: var(--sl-form-control-padding-x--large);
-  --padding-x--medium: var(--sl-form-control-padding-x--medium);
-  --padding-x--small: var(--sl-form-control-padding-x--small);
-  --placeholder-color--disabled: var(--sl-form-control-placeholder-color--disabled);
-  --placeholder-color--hover: var(--sl-form-control-placeholder-color--hover);
-  --placeholder-color: var(--sl-form-control-placeholder-color);
-  --transition-speed: var(--sl-form-control-transition-speed);
-
   display: block;
 }
 
@@ -45,12 +12,13 @@
   display: flex;
   align-items: center;
   position: relative;
-  font-family: var(--font-family);
-  font-weight: var(--font-weight);
-  background-color: var(--background-color);
-  border: solid 1px var(--border-color);
+  font-family: var(--sl-form-control-font-family);
+  font-weight: var(--sl-form-control-font-weight);
+  background-color: var(--sl-form-control-background-color);
+  border: solid var(--sl-form-control-border-width) var(--sl-form-control-border-color);
   vertical-align: middle;
-  transition: var(--transition-speed) color, var(--transition-speed) border, var(--transition-speed) box-shadow;
+  transition: var(--sl-form-control-transition-speed) color, var(--sl-form-control-transition-speed) border,
+    var(--sl-form-control-transition-speed) box-shadow;
 
   .sl-textarea__control {
     flex: 1 1 auto;
@@ -58,7 +26,7 @@
     font-size: inherit;
     font-weight: inherit;
     line-height: 1.4;
-    color: var(--color);
+    color: var(--sl-form-control-color);
     border: none;
     background: none;
     -webkit-appearance: none;
@@ -71,7 +39,7 @@
     }
 
     &::placeholder {
-      color: var(--placeholder-color);
+      color: var(--sl-form-control-placeholder-color);
       user-select: none;
     }
 
@@ -81,35 +49,35 @@
   }
 
   &:hover:not(.sl-textarea--disabled) {
-    background-color: var(--background-color--hover);
-    border-color: var(--border-color--hover);
-    color: var(--color--hover);
+    background-color: var(--sl-form-control-background-color--hover);
+    border-color: var(--sl-form-control-border-color--hover);
+    color: var(--sl-form-control-color--hover);
 
     .sl-textarea__control {
       &::placeholder {
-        color: var(--placeholder-color--hover);
+        color: var(--sl-form-control-placeholder-color--hover);
       }
     }
   }
 
   &.sl-textarea--focused:not(.sl-textarea--disabled) {
-    background-color: var(--background-color--focus);
-    border-color: var(--border-color--focus);
-    box-shadow: var(--focus-ring-box-shadow);
-    color: var(--color--focus);
+    background-color: var(--sl-form-control-background-color--focus);
+    border-color: var(--sl-form-control-border-color--focus);
+    box-shadow: var(--sl-focus-ring-box-shadow);
+    color: var(--sl-form-control-color--focus);
   }
 
   &.sl-textarea--disabled {
-    background-color: var(--background-color--disabled);
-    border-color: var(--border-color--disabled);
-    color: var(--color--disabled);
+    background-color: var(--sl-form-control-background-color--disabled);
+    border-color: var(--sl-form-control-border-color--disabled);
+    color: var(--sl-form-control-color--disabled);
     opacity: 0.5;
 
     .sl-textarea__control {
       cursor: not-allowed;
 
       &::placeholder {
-        color: var(--placeholder-color--disabled);
+        color: var(--sl-form-control-placeholder-color--disabled);
       }
     }
   }
@@ -120,29 +88,29 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 .sl-textarea--small {
-  border-radius: var(--border-radius--small);
-  font-size: var(--font-size--small);
+  border-radius: var(--sl-form-control-border-radius--small);
+  font-size: var(--sl-form-control-font-size--small);
 
   .sl-textarea__control {
-    padding: 0.5em var(--padding-x--small);
+    padding: 0.5em var(--sl-form-control-padding-x--small);
   }
 }
 
 .sl-textarea--medium {
-  border-radius: var(--border-radius--medium);
-  font-size: var(--font-size--medium);
+  border-radius: var(--sl-form-control-border-radius--medium);
+  font-size: var(--sl-form-control-font-size--medium);
 
   .sl-textarea__control {
-    padding: 0.5em var(--padding-x--medium);
+    padding: 0.5em var(--sl-form-control-padding-x--medium);
   }
 }
 
 .sl-textarea--large {
-  border-radius: var(--border-radius--large);
-  font-size: var(--font-size--large);
+  border-radius: var(--sl-form-control-border-radius--large);
+  font-size: var(--sl-form-control-font-size--large);
 
   .sl-textarea__control {
-    padding: 0.5em var(--padding-x--large);
+    padding: 0.5em var(--sl-form-control-padding-x--large);
   }
 }
 

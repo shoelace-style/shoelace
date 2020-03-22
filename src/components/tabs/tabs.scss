@@ -2,22 +2,13 @@
 @import 'mixins';
 
 :host {
-  --border-color: transparent;
-  --border-radius: 0;
-  --border-width: 1px;
-  --indicator-border-color: var(--sl-color-primary-50);
-  --indicator-transition-speed: var(--sl-form-control-transition-speed);
-  --nav-border-color: var(--sl-color-gray-85);
-  --nav-border-width: 2px;
-  --transition-speed: var(--sl-form-control-transition-speed);
-
   display: block;
 }
 
 .sl-tabs {
   display: flex;
-  border: solid var(--border-width) var(--border-color);
-  border-radius: var(--border-radius);
+  border: solid 1px transparent;
+  border-radius: 0;
 
   .sl-tabs__tabs {
     display: flex;
@@ -26,7 +17,8 @@
 
   .sl-tabs__active-tab-indicator {
     position: absolute;
-    transition: var(--indicator-transition-speed) transform ease, var(--indicator-transition-speed) width ease;
+    transition: var(--sl-form-control-transition-speed) transform ease,
+      var(--sl-form-control-transition-speed) width ease;
   }
 
   // Hide the focus ring if the user is interacting with a mouse
@@ -53,12 +45,12 @@
     flex: 1 1 auto;
     position: relative;
     flex-direction: row;
-    border-bottom: solid var(--nav-border-width) var(--nav-border-color);
+    border-bottom: solid 2px var(--sl-color-gray-85);
   }
 
   .sl-tabs__active-tab-indicator {
-    bottom: calc(-1 * var(--nav-border-width));
-    border-bottom: solid var(--nav-border-width) var(--indicator-border-color);
+    bottom: -2px;
+    border-bottom: solid 2px var(--sl-color-primary-50);
   }
 
   .sl-tabs__body {
@@ -84,12 +76,12 @@
     flex: 1 1 auto;
     position: relative;
     flex-direction: row;
-    border-top: solid var(--nav-border-width) var(--nav-border-color);
+    border-top: solid 2px var(--sl-color-gray-85);
   }
 
   .sl-tabs__active-tab-indicator {
-    top: calc(-1 * var(--nav-border-width));
-    border-top: solid var(--nav-border-width) var(--indicator-border-color);
+    top: calc(-1 * 2px);
+    border-top: solid 2px var(--sl-color-primary-50);
   }
 
   .sl-tabs__body {
@@ -111,12 +103,12 @@
   .sl-tabs__tabs {
     flex: 0 0 auto;
     flex-direction: column;
-    border-right: solid var(--nav-border-width) var(--nav-border-color);
+    border-right: solid 2px var(--sl-color-gray-85);
   }
 
   .sl-tabs__active-tab-indicator {
-    right: calc(-1 * var(--nav-border-width));
-    border-right: solid var(--nav-border-width) var(--indicator-border-color);
+    right: calc(-1 * 2px);
+    border-right: solid 2px var(--sl-color-primary-50);
   }
 
   .sl-tabs__body {
@@ -139,12 +131,12 @@
   .sl-tabs__tabs {
     flex: 0 0 auto;
     flex-direction: column;
-    border-left: solid var(--nav-border-width) var(--nav-border-color);
+    border-left: solid 2px var(--sl-color-gray-85);
   }
 
   .sl-tabs__active-tab-indicator {
-    left: calc(-1 * var(--nav-border-width));
-    border-left: solid var(--nav-border-width) var(--indicator-border-color);
+    left: calc(-1 * 2px);
+    border-left: solid 2px var(--sl-color-primary-50);
   }
 
   .sl-tabs__body {
