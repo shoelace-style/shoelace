@@ -6,206 +6,6 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 :host {
-  // Default buttons
-  --default-background-color--active: var(--sl-color-primary-95);
-  --default-background-color--focus: var(--sl-color-primary-95);
-  --default-background-color--hover: var(--sl-color-primary-95);
-  --default-background-color: var(--sl-color-white);
-  --default-border-color--active: var(--sl-color-primary-50);
-  --default-border-color--focus: var(--sl-color-primary-70);
-  --default-border-color--hover: var(--sl-color-primary-80);
-  --default-border-color: var(--sl-color-gray-85);
-  --default-color--active: var(--sl-color-primary-40);
-  --default-color--focus: var(--sl-color-primary-50);
-  --default-color--hover: var(--sl-color-primary-50);
-  --default-color: var(--sl-color-gray-50);
-  --default-focus-ring-box-shadow: 0 0 0 var(--sl-focus-ring-width)
-    hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha));
-
-  // Primary buttons
-  --primary-background-color--active: var(--sl-color-primary-45);
-  --primary-background-color--focus: var(--sl-color-primary-55);
-  --primary-background-color--hover: var(--sl-color-primary-55);
-  --primary-background-color: var(--sl-color-primary-50);
-  --primary-border-color--active: var(--sl-color-primary-45);
-  --primary-border-color--focus: var(--sl-color-primary-55);
-  --primary-border-color--hover: var(--sl-color-primary-55);
-  --primary-border-color: var(--sl-color-primary-50);
-  --primary-color--active: var(--sl-color-primary-text);
-  --primary-color--focus: var(--sl-color-primary-text);
-  --primary-color--hover: var(--sl-color-primary-text);
-  --primary-color: var(--sl-color-primary-text);
-  --primary-focus-ring-box-shadow: 0 0 0 var(--sl-focus-ring-width)
-    hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha));
-
-  // Success buttons
-  --success-background-color--active: var(--sl-color-success-45);
-  --success-background-color--focus: var(--sl-color-success-55);
-  --success-background-color--hover: var(--sl-color-success-55);
-  --success-background-color: var(--sl-color-success-50);
-  --success-border-color--active: var(--sl-color-success-45);
-  --success-border-color--focus: var(--sl-color-success-55);
-  --success-border-color--hover: var(--sl-color-success-55);
-  --success-border-color: var(--sl-color-success-50);
-  --success-color--active: var(--sl-color-success-text);
-  --success-color--focus: var(--sl-color-success-text);
-  --success-color--hover: var(--sl-color-success-text);
-  --success-color: var(--sl-color-success-text);
-  --success-focus-ring-box-shadow: 0 0 0 var(--sl-focus-ring-width)
-    hsla(var(--sl-color-success-hue), var(--sl-color-success-saturation), 50%, var(--sl-focus-ring-alpha));
-
-  // Info buttons
-  --info-background-color--active: var(--sl-color-info-45);
-  --info-background-color--focus: var(--sl-color-info-55);
-  --info-background-color--hover: var(--sl-color-info-55);
-  --info-background-color: var(--sl-color-info-50);
-  --info-border-color--active: var(--sl-color-info-45);
-  --info-border-color--focus: var(--sl-color-info-55);
-  --info-border-color--hover: var(--sl-color-info-55);
-  --info-border-color: var(--sl-color-info-50);
-  --info-color--active: var(--sl-color-info-text);
-  --info-color--focus: var(--sl-color-info-text);
-  --info-color--hover: var(--sl-color-info-text);
-  --info-color: var(--sl-color-info-text);
-  --info-focus-ring-box-shadow: 0 0 0 var(--sl-focus-ring-width)
-    hsla(var(--sl-color-info-hue), var(--sl-color-info-saturation), 50%, var(--sl-focus-ring-alpha));
-
-  // Warning buttons
-  --warning-background-color--active: var(--sl-color-warning-45);
-  --warning-background-color--focus: var(--sl-color-warning-55);
-  --warning-background-color--hover: var(--sl-color-warning-55);
-  --warning-background-color: var(--sl-color-warning-50);
-  --warning-border-color--active: var(--sl-color-warning-45);
-  --warning-border-color--focus: var(--sl-color-warning-55);
-  --warning-border-color--hover: var(--sl-color-warning-55);
-  --warning-border-color: var(--sl-color-warning-50);
-  --warning-color--active: var(--sl-color-warning-text);
-  --warning-color--focus: var(--sl-color-warning-text);
-  --warning-color--hover: var(--sl-color-warning-text);
-  --warning-color: var(--sl-color-warning-text);
-  --warning-focus-ring-box-shadow: 0 0 0 var(--sl-focus-ring-width)
-    hsla(var(--sl-color-warning-hue), var(--sl-color-warning-saturation), 50%, var(--sl-focus-ring-alpha));
-
-  // Danger buttons
-  --danger-background-color--active: var(--sl-color-danger-45);
-  --danger-background-color--focus: var(--sl-color-danger-55);
-  --danger-background-color--hover: var(--sl-color-danger-55);
-  --danger-background-color: var(--sl-color-danger-50);
-  --danger-border-color--active: var(--sl-color-danger-45);
-  --danger-border-color--focus: var(--sl-color-danger-55);
-  --danger-border-color--hover: var(--sl-color-danger-55);
-  --danger-border-color: var(--sl-color-danger-50);
-  --danger-color--active: var(--sl-color-danger-text);
-  --danger-color--focus: var(--sl-color-danger-text);
-  --danger-color--hover: var(--sl-color-danger-text);
-  --danger-color: var(--sl-color-danger-text);
-  --danger-focus-ring-box-shadow: 0 0 0 var(--sl-focus-ring-width)
-    hsla(var(--sl-color-danger-hue), var(--sl-color-danger-saturation), 50%, var(--sl-focus-ring-alpha));
-
-  // Default outline buttons
-  --default-outline-background-color--active: var(--sl-color-white);
-  --default-outline-background-color--focus: var(--sl-color-white);
-  --default-outline-background-color--hover: var(--sl-color-white);
-  --default-outline-background-color: var(--sl-color-white);
-  --default-outline-border-color--active: var(--sl-color-primary-45);
-  --default-outline-border-color--focus: var(--sl-color-primary-60);
-  --default-outline-border-color--hover: var(--sl-color-primary-60);
-  --default-outline-border-color: var(--sl-color-gray-85);
-  --default-outline-color--active: var(--sl-color-primary-40);
-  --default-outline-color--focus: var(--sl-color-primary-50);
-  --default-outline-color--hover: var(--sl-color-primary-50);
-  --default-outline-color: var(--sl-color-gray-50);
-  --default-focus-ring-box-shadow: 0 0 0 var(--sl-focus-ring-width)
-    hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha));
-
-  // Primary outline buttons
-  --primary-outline-background-color--active: var(--sl-color-primary-45);
-  --primary-outline-background-color--focus: var(--sl-color-primary-50);
-  --primary-outline-background-color--hover: var(--sl-color-primary-50);
-  --primary-outline-background-color: var(--sl-color-primary-95);
-  --primary-outline-border-color--active: var(--sl-color-primary-45);
-  --primary-outline-border-color--focus: var(--sl-color-primary-50);
-  --primary-outline-border-color--hover: var(--sl-color-primary-50);
-  --primary-outline-border-color: var(--sl-color-primary-80);
-  --primary-outline-color--active: var(--sl-color-primary-text);
-  --primary-outline-color--focus: var(--sl-color-primary-text);
-  --primary-outline-color--hover: var(--sl-color-primary-text);
-  --primary-outline-color: var(--sl-color-primary-50);
-  --primary-focus-ring-box-shadow: 0 0 0 var(--sl-focus-ring-width)
-    hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha));
-
-  // Success outline buttons
-  --success-outline-background-color--active: var(--sl-color-success-45);
-  --success-outline-background-color--focus: var(--sl-color-success-50);
-  --success-outline-background-color--hover: var(--sl-color-success-50);
-  --success-outline-background-color: var(--sl-color-success-95);
-  --success-outline-border-color--active: var(--sl-color-success-45);
-  --success-outline-border-color--focus: var(--sl-color-success-50);
-  --success-outline-border-color--hover: var(--sl-color-success-50);
-  --success-outline-border-color: var(--sl-color-success-80);
-  --success-outline-color--active: var(--sl-color-success-text);
-  --success-outline-color--focus: var(--sl-color-success-text);
-  --success-outline-color--hover: var(--sl-color-success-text);
-  --success-outline-color: var(--sl-color-success-50);
-  --success-focus-ring-box-shadow: 0 0 0 var(--sl-focus-ring-width)
-    hsla(var(--sl-color-success-hue), var(--sl-color-success-saturation), 50%, var(--sl-focus-ring-alpha));
-
-  // Info outline buttons
-  --info-outline-background-color--active: var(--sl-color-info-45);
-  --info-outline-background-color--focus: var(--sl-color-info-50);
-  --info-outline-background-color--hover: var(--sl-color-info-50);
-  --info-outline-background-color: var(--sl-color-info-95);
-  --info-outline-border-color--active: var(--sl-color-info-45);
-  --info-outline-border-color--focus: var(--sl-color-info-50);
-  --info-outline-border-color--hover: var(--sl-color-info-50);
-  --info-outline-border-color: var(--sl-color-info-80);
-  --info-outline-color--active: var(--sl-color-info-text);
-  --info-outline-color--focus: var(--sl-color-info-text);
-  --info-outline-color--hover: var(--sl-color-info-text);
-  --info-outline-color: var(--sl-color-info-50);
-  --info-focus-ring-box-shadow: 0 0 0 var(--sl-focus-ring-width)
-    hsla(var(--sl-color-info-hue), var(--sl-color-info-saturation), 50%, var(--sl-focus-ring-alpha));
-
-  // Warning outline buttons
-  --warning-outline-background-color--active: var(--sl-color-warning-45);
-  --warning-outline-background-color--focus: var(--sl-color-warning-50);
-  --warning-outline-background-color--hover: var(--sl-color-warning-50);
-  --warning-outline-background-color: var(--sl-color-warning-95);
-  --warning-outline-border-color--active: var(--sl-color-warning-45);
-  --warning-outline-border-color--focus: var(--sl-color-warning-50);
-  --warning-outline-border-color--hover: var(--sl-color-warning-50);
-  --warning-outline-border-color: var(--sl-color-warning-80);
-  --warning-outline-color--active: var(--sl-color-warning-text);
-  --warning-outline-color--focus: var(--sl-color-warning-text);
-  --warning-outline-color--hover: var(--sl-color-warning-text);
-  --warning-outline-color: var(--sl-color-warning-50);
-  --warning-focus-ring-box-shadow: 0 0 0 var(--sl-focus-ring-width)
-    hsla(var(--sl-color-warning-hue), var(--sl-color-warning-saturation), 50%, var(--sl-focus-ring-alpha));
-
-  // Danger outline buttons
-  --danger-outline-background-color--active: var(--sl-color-danger-45);
-  --danger-outline-background-color--focus: var(--sl-color-danger-50);
-  --danger-outline-background-color--hover: var(--sl-color-danger-50);
-  --danger-outline-background-color: var(--sl-color-danger-95);
-  --danger-outline-border-color--active: var(--sl-color-danger-45);
-  --danger-outline-border-color--focus: var(--sl-color-danger-50);
-  --danger-outline-border-color--hover: var(--sl-color-danger-50);
-  --danger-outline-border-color: var(--sl-color-danger-80);
-  --danger-outline-color--active: var(--sl-color-danger-text);
-  --danger-outline-color--focus: var(--sl-color-danger-text);
-  --danger-outline-color--hover: var(--sl-color-danger-text);
-  --danger-outline-color: var(--sl-color-danger-50);
-  --danger-focus-ring-box-shadow: 0 0 0 var(--sl-focus-ring-width)
-    hsla(var(--sl-color-danger-hue), var(--sl-color-danger-saturation), 50%, var(--sl-focus-ring-alpha));
-
-  // Text buttons
-  --text-color--active: var(--sl-color-primary-40);
-  --text-color--focus: var(--sl-color-primary-60);
-  --text-color--hover: var(--sl-color-primary-60);
-  --text-color: var(--sl-color-primary-50);
-  --text-focus-ring-box-shadow: 0 0 0 var(--sl-focus-ring-width)
-    hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha));
-
   display: inline-block;
 }
 
@@ -261,27 +61,117 @@
 
 .sl-button:not(.sl-button--outline) {
   &.sl-button--default {
-    @include solid-button('default');
+    @include button(
+      $background-color: var(--sl-color-white),
+      $border-color: var(--sl-color-gray-85),
+      $color: var(--sl-color-gray-50),
+      $background-color--hover: var(--sl-color-primary-95),
+      $border-color--hover: var(--sl-color-primary-80),
+      $color--hover: var(--sl-color-primary-50),
+      $background-color--focus: var(--sl-color-primary-95),
+      $border-color--focus: var(--sl-color-primary-70),
+      $color--focus: var(--sl-color-primary-50),
+      $box-shadow--focus: 0 0 0 var(--sl-focus-ring-width)
+        hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha)),
+      $background-color--active: var(--sl-color-primary-95),
+      $border-color--active: var(--sl-color-primary-50),
+      $color--active: var(--sl-color-primary-40)
+    );
   }
 
   &.sl-button--primary {
-    @include solid-button('primary');
+    @include button(
+      $background-color: var(--sl-color-primary-50),
+      $border-color: var(--sl-color-primary-50),
+      $color: var(--sl-color-primary-text),
+      $background-color--hover: var(--sl-color-primary-55),
+      $border-color--hover: var(--sl-color-primary-55),
+      $color--hover: var(--sl-color-primary-text),
+      $background-color--focus: var(--sl-color-primary-55),
+      $border-color--focus: var(--sl-color-primary-55),
+      $color--focus: var(--sl-color-primary-text),
+      $box-shadow--focus: 0 0 0 var(--sl-focus-ring-width)
+        hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha)),
+      $background-color--active: var(--sl-color-primary-45),
+      $border-color--active: var(--sl-color-primary-45),
+      $color--active: var(--sl-color-primary-text)
+    );
   }
 
   &.sl-button--success {
-    @include solid-button('success');
+    @include button(
+      $background-color: var(--sl-color-success-50),
+      $border-color: var(--sl-color-success-50),
+      $color: var(--sl-color-success-text),
+      $background-color--hover: var(--sl-color-success-55),
+      $border-color--hover: var(--sl-color-success-55),
+      $color--hover: var(--sl-color-success-text),
+      $background-color--focus: var(--sl-color-success-55),
+      $border-color--focus: var(--sl-color-success-55),
+      $color--focus: var(--sl-color-success-text),
+      $box-shadow--focus: 0 0 0 var(--sl-focus-ring-width)
+        hsla(var(--sl-color-success-hue), var(--sl-color-success-saturation), 50%, var(--sl-focus-ring-alpha)),
+      $background-color--active: var(--sl-color-success-45),
+      $border-color--active: var(--sl-color-success-45),
+      $color--active: var(--sl-color-success-text)
+    );
   }
 
   &.sl-button--info {
-    @include solid-button('info');
+    @include button(
+      $background-color: var(--sl-color-info-50),
+      $border-color: var(--sl-color-info-50),
+      $color: var(--sl-color-info-text),
+      $background-color--hover: var(--sl-color-info-55),
+      $border-color--hover: var(--sl-color-info-55),
+      $color--hover: var(--sl-color-info-text),
+      $background-color--focus: var(--sl-color-info-55),
+      $border-color--focus: var(--sl-color-info-55),
+      $color--focus: var(--sl-color-info-text),
+      $box-shadow--focus: 0 0 0 var(--sl-focus-ring-width)
+        hsla(var(--sl-color-info-hue), var(--sl-color-info-saturation), 50%, var(--sl-focus-ring-alpha)),
+      $background-color--active: var(--sl-color-info-45),
+      $border-color--active: var(--sl-color-info-45),
+      $color--active: var(--sl-color-info-text)
+    );
   }
 
   &.sl-button--warning {
-    @include solid-button('warning');
+    @include button(
+      $background-color: var(--sl-color-warning-50),
+      $border-color: var(--sl-color-warning-50),
+      $color: var(--sl-color-warning-text),
+      $background-color--hover: var(--sl-color-warning-55),
+      $border-color--hover: var(--sl-color-warning-55),
+      $color--hover: var(--sl-color-warning-text),
+      $background-color--focus: var(--sl-color-warning-55),
+      $border-color--focus: var(--sl-color-warning-55),
+      $color--focus: var(--sl-color-warning-text),
+      $box-shadow--focus: 0 0 0 var(--sl-focus-ring-width)
+        hsla(var(--sl-color-warning-hue), var(--sl-color-warning-saturation), 50%, var(--sl-focus-ring-alpha)),
+      $background-color--active: var(--sl-color-warning-45),
+      $border-color--active: var(--sl-color-warning-45),
+      $color--active: var(--sl-color-warning-text)
+    );
   }
 
   &.sl-button--danger {
-    @include solid-button('danger');
+    @include button(
+      $background-color: var(--sl-color-danger-50),
+      $border-color: var(--sl-color-danger-50),
+      $color: var(--sl-color-danger-text),
+      $background-color--hover: var(--sl-color-danger-55),
+      $border-color--hover: var(--sl-color-danger-55),
+      $color--hover: var(--sl-color-danger-text),
+      $background-color--focus: var(--sl-color-danger-55),
+      $border-color--focus: var(--sl-color-danger-55),
+      $color--focus: var(--sl-color-danger-text),
+      $box-shadow--focus: 0 0 0 var(--sl-focus-ring-width)
+        hsla(var(--sl-color-danger-hue), var(--sl-color-danger-saturation), 50%, var(--sl-focus-ring-alpha)),
+      $background-color--active: var(--sl-color-danger-45),
+      $border-color--active: var(--sl-color-danger-45),
+      $color--active: var(--sl-color-danger-text)
+    );
   }
 }
 
@@ -291,27 +181,117 @@
 
 .sl-button.sl-button--outline {
   &.sl-button--default {
-    @include outline-button('default');
+    @include button(
+      $background-color: var(--sl-color-white),
+      $border-color: var(--sl-color-gray-85),
+      $color: var(--sl-color-gray-50),
+      $background-color--hover: var(--sl-color-white),
+      $border-color--hover: var(--sl-color-primary-60),
+      $color--hover: var(--sl-color-primary-50),
+      $background-color--focus: var(--sl-color-white),
+      $border-color--focus: var(--sl-color-primary-60),
+      $color--focus: var(--sl-color-primary-50),
+      $box-shadow--focus: 0 0 0 var(--sl-focus-ring-width)
+        hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha)),
+      $background-color--active: var(--sl-color-white),
+      $border-color--active: var(--sl-color-primary-45),
+      $color--active: var(--sl-color-primary-40)
+    );
   }
 
   &.sl-button--primary {
-    @include outline-button('primary');
+    @include button(
+      $background-color: var(--sl-color-primary-95),
+      $border-color: var(--sl-color-primary-80),
+      $color: var(--sl-color-primary-50),
+      $background-color--hover: var(--sl-color-primary-50),
+      $border-color--hover: var(--sl-color-primary-50),
+      $color--hover: var(--sl-color-primary-text),
+      $background-color--focus: var(--sl-color-primary-50),
+      $border-color--focus: var(--sl-color-primary-50),
+      $color--focus: var(--sl-color-primary-text),
+      $box-shadow--focus: 0 0 0 var(--sl-focus-ring-width)
+        hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha)),
+      $background-color--active: var(--sl-color-primary-45),
+      $border-color--active: var(--sl-color-primary-45),
+      $color--active: var(--sl-color-primary-text)
+    );
   }
 
   &.sl-button--success {
-    @include outline-button('success');
+    @include button(
+      $background-color: var(--sl-color-success-95),
+      $border-color: var(--sl-color-success-80),
+      $color: var(--sl-color-success-50),
+      $background-color--hover: var(--sl-color-success-50),
+      $border-color--hover: var(--sl-color-success-50),
+      $color--hover: var(--sl-color-success-text),
+      $background-color--focus: var(--sl-color-success-50),
+      $border-color--focus: var(--sl-color-success-50),
+      $color--focus: var(--sl-color-success-text),
+      $box-shadow--focus: 0 0 0 var(--sl-focus-ring-width)
+        hsla(var(--sl-color-success-hue), var(--sl-color-success-saturation), 50%, var(--sl-focus-ring-alpha)),
+      $background-color--active: var(--sl-color-success-45),
+      $border-color--active: var(--sl-color-success-45),
+      $color--active: var(--sl-color-success-text)
+    );
   }
 
   &.sl-button--info {
-    @include outline-button('info');
+    @include button(
+      $background-color: var(--sl-color-info-95),
+      $border-color: var(--sl-color-info-80),
+      $color: var(--sl-color-info-50),
+      $background-color--hover: var(--sl-color-info-50),
+      $border-color--hover: var(--sl-color-info-50),
+      $color--hover: var(--sl-color-info-text),
+      $background-color--focus: var(--sl-color-info-50),
+      $border-color--focus: var(--sl-color-info-50),
+      $color--focus: var(--sl-color-info-text),
+      $box-shadow--focus: 0 0 0 var(--sl-focus-ring-width)
+        hsla(var(--sl-color-info-hue), var(--sl-color-info-saturation), 50%, var(--sl-focus-ring-alpha)),
+      $background-color--active: var(--sl-color-info-45),
+      $border-color--active: var(--sl-color-info-45),
+      $color--active: var(--sl-color-info-text)
+    );
   }
 
   &.sl-button--warning {
-    @include outline-button('warning');
+    @include button(
+      $background-color: var(--sl-color-warning-95),
+      $border-color: var(--sl-color-warning-80),
+      $color: var(--sl-color-warning-50),
+      $background-color--hover: var(--sl-color-warning-50),
+      $border-color--hover: var(--sl-color-warning-50),
+      $color--hover: var(--sl-color-warning-text),
+      $background-color--focus: var(--sl-color-warning-50),
+      $border-color--focus: var(--sl-color-warning-50),
+      $color--focus: var(--sl-color-warning-text),
+      $box-shadow--focus: 0 0 0 var(--sl-focus-ring-width)
+        hsla(var(--sl-color-warning-hue), var(--sl-color-warning-saturation), 50%, var(--sl-focus-ring-alpha)),
+      $background-color--active: var(--sl-color-warning-45),
+      $border-color--active: var(--sl-color-warning-45),
+      $color--active: var(--sl-color-warning-text)
+    );
   }
 
   &.sl-button--danger {
-    @include outline-button('danger');
+    @include button(
+      $background-color: var(--sl-color-danger-95),
+      $border-color: var(--sl-color-danger-80),
+      $color: var(--sl-color-danger-50),
+      $background-color--hover: var(--sl-color-danger-50),
+      $border-color--hover: var(--sl-color-danger-50),
+      $color--hover: var(--sl-color-danger-text),
+      $background-color--focus: var(--sl-color-danger-50),
+      $border-color--focus: var(--sl-color-danger-50),
+      $color--focus: var(--sl-color-danger-text),
+      $box-shadow--focus: 0 0 0 var(--sl-focus-ring-width)
+        hsla(var(--sl-color-danger-hue), var(--sl-color-danger-saturation), 50%, var(--sl-focus-ring-alpha)),
+      $background-color--active: var(--sl-color-danger-45),
+      $border-color--active: var(--sl-color-danger-45),
+      $color--active: var(--sl-color-danger-text)
+    );
   }
 }
 
@@ -322,25 +302,26 @@
 .sl-button--text {
   background-color: transparent;
   border-color: transparent;
-  color: var(--text-color);
+  color: var(--sl-color-primary-50);
 
   &:hover:not(:disabled) {
     background-color: transparent;
     border-color: transparent;
-    color: var(--text-color--hover);
+    color: var(--sl-color-primary-60);
   }
 
   &:focus:not(:disabled) {
     background-color: transparent;
     border-color: transparent;
-    color: var(--text-color--focus);
-    box-shadow: var(--text-focus-ring-box-shadow);
+    color: var(--sl-color-primary-60);
+    box-shadow: 0 0 0 var(--sl-focus-ring-width)
+      hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha));
   }
 
   &:active:not(:disabled) {
     background-color: transparent;
     border-color: transparent;
-    color: var(--text-color--active);
+    color: var(--sl-color-primary-40);
   }
 }
 
