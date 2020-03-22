@@ -8,10 +8,10 @@ TODO
 
 ## Properties
 
-| Property | Attribute | Description                        | Type      | Default |
-| -------- | --------- | ---------------------------------- | --------- | ------- |
-| `active` | `active`  | Set to true to show the tab panel. | `boolean` | `false` |
-| `name`   | `name`    | The tab panel's name.              | `string`  | `''`    |
+| Property | Attribute | Description                             | Type      | Default |
+| -------- | --------- | --------------------------------------- | --------- | ------- |
+| `active` | `active`  | When true, the tab panel will be shown. | `boolean` | `false` |
+| `name`   | `name`    | The tab panel's name.                   | `string`  | `''`    |
 
 
 ## Slots
