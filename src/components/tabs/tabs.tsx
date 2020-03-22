@@ -51,7 +51,7 @@ export class Tab {
     this.setAriaLabels();
     this.setActiveTab(this.getActiveTab() || this.getAllTabs()[0], false);
 
-    // Update aria labels id the DOM changes
+    // Update aria labels if the DOM changes
     this.observer = new MutationObserver(() => setTimeout(() => this.setAriaLabels()));
     this.observer.observe(this.host, { attributes: true, childList: true, subtree: true });
   }
