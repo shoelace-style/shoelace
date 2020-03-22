@@ -387,7 +387,7 @@ export namespace Components {
     }
     interface SlTabPanel {
         /**
-          * Set to true to show the tab panel.
+          * When true, the tab panel will be shown.
          */
         "active": boolean;
         /**
@@ -997,7 +997,7 @@ declare namespace LocalJSX {
     }
     interface SlTabPanel {
         /**
-          * Set to true to show the tab panel.
+          * When true, the tab panel will be shown.
          */
         "active"?: boolean;
         /**
