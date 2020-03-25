@@ -98,8 +98,7 @@ body.close .sidebar-toggle {
   opacity: 1;
 }
 
-/* Code blocks */
-.content code,
+/* Code */
 .content pre,
 .content pre > code {
   border-radius: 3px;
@@ -117,8 +116,12 @@ body.close .sidebar-toggle {
 }
 
 .content code {
+  background-color: transparent;
+  font-family: var(--sl-font-monospace);
+  font-size: 0.875em;
   color: var(--sl-color-warning-50);
-  padding: 0.125rem 0.25rem;
+  padding: 0;
+  -webkit-font-smoothing: auto;
 }
 
 .content h1 code,

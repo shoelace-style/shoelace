@@ -4,6 +4,9 @@
   - [Usage](/usage.md)
   - [Customizing](/customizing.md)
 
+- Design
+  - [Design Tokens](/design/tokens.md)
+
 - Components
   - [Alert](/components/alert.md)
   - [Button](/components/button.md)
