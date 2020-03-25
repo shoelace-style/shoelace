@@ -32,9 +32,6 @@ export class Button {
   /** Set to true to draw the button in a loading state. */
   @Prop() loading = false;
 
-  /** Set to true to draw an outlined button. */
-  @Prop() outline = false;
-
   /** Set to true to draw a rounded button. */
   @Prop() round = false;
 
@@ -88,7 +85,6 @@ export class Button {
             'sl-button--circle': this.circle,
             'sl-button--disabled': this.disabled,
             'sl-button--loading': this.loading,
-            'sl-button--outline': this.outline,
             'sl-button--round': this.round
           }}
           disabled={this.disabled}

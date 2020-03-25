@@ -46,10 +46,6 @@ export namespace Components {
          */
         "nativeTabindex": number;
         /**
-          * Set to true to draw an outlined button.
-         */
-        "outline": boolean;
-        /**
           * Removes focus from the button.
          */
         "removeFocus": () => Promise<void>;
@@ -712,10 +708,6 @@ declare namespace LocalJSX {
           * The button's tabindex attribute.
          */
         "nativeTabindex"?: number;
-        /**
-          * Set to true to draw an outlined button.
-         */
-        "outline"?: boolean;
         /**
           * Set to true to draw a rounded button.
          */

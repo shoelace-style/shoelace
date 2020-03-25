@@ -11,19 +11,6 @@ Good ol' buttons. They're usually the first thing I look at when reviewing a com
 <sl-button type="danger">Danger</sl-button>
 ```
 
-## Outline
-
-Use the `outline` prop to give buttons an outlined effect.
-
-```html preview
-<sl-button type="default" outline>Default</sl-button>
-<sl-button type="primary" outline>Primary</sl-button>
-<sl-button type="success" outline>Success</sl-button>
-<sl-button type="info" outline>Info</sl-button>
-<sl-button type="warning" outline>Warning</sl-button>
-<sl-button type="danger" outline>Danger</sl-button>
-```
-
 ## Round
 
 Use the `round` prop to give buttons rounded edges.
@@ -72,11 +59,11 @@ Use `type="text"` to create text buttons, which share the same size as regular b
 Use the `block` prop to create a block-level button that spans 100% of its container's width.
 
 ```html preview
-<sl-button type="default" block size="small">Default</sl-button>
+<sl-button type="default" block size="small">Small</sl-button>
 <br>
-<sl-button type="default" block size="medium">Primary</sl-button>
+<sl-button type="default" block size="medium">Medium</sl-button>
 <br>
-<sl-button type="default" block size="large">Primary</sl-button>
+<sl-button type="default" block size="large">Large</sl-button>
 ```
 
 ## Icons
@@ -149,7 +136,6 @@ Use the `disabled` prop to disable a button.
 | `disabled`       | `disabled`        | Set to true to disable the button.                                                 | `boolean`                                                                          | `false`     |
 | `loading`        | `loading`         | Set to true to draw the button in a loading state.                                 | `boolean`                                                                          | `false`     |
 | `nativeTabindex` | `native-tabindex` | The button's tabindex attribute.                                                   | `number`                                                                           | `undefined` |
-| `outline`        | `outline`         | Set to true to draw an outlined button.                                            | `boolean`                                                                          | `false`     |
 | `round`          | `round`           | Set to true to draw a rounded button.                                              | `boolean`                                                                          | `false`     |
 | `size`           | `size`            | The button's size.                                                                 | `"large" or "medium" or "small"`                                                   | `'medium'`  |
 | `type`           | `type`            | The button's type.                                                                 | `"danger" or "default" or "info" or "primary" or "success" or "text" or "warning"` | `'default'` |
