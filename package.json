@@ -39,7 +39,7 @@
     "@stencil/core": "^1.9.2",
     "@stencil/sass": "^1.1.1",
     "popper.js": "^1.16.0",
-    "resize-observer": "^1.0.0",
+    "resize-observer-polyfill": "^1.5.1",
     "tippy.js": "^5.1.3"
   }
 }

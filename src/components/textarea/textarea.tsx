@@ -1,5 +1,5 @@
 import { Component, Method, Prop, State, Watch, h } from '@stencil/core';
-import { ResizeObserver } from 'resize-observer';
+import ResizeObserver from 'resize-observer-polyfill';
 
 @Component({
   tag: 'sl-textarea',
