@@ -75,11 +75,6 @@ body.close .sidebar-toggle {
   background-color: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 97%);
 }
 
-.content table th code:first-child:last-child,
-.content table td code:first-child:last-child {
-  background: transparent;
-}
-
 .content .docsify-copy-code-button {
   top: auto;
   right: 0;
@@ -107,15 +102,11 @@ body.close .sidebar-toggle {
 .content code,
 .content pre,
 .content pre > code {
-  background-color: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 98%);
   border-radius: 3px;
   font-family: var(--sl-font-monospace);
+  font-size: 0.825rem;
   color: var(--sl-color-gray-20);
   -webkit-font-smoothing: auto;
-}
-
-.content pre > code {
-  font-size: 0.75rem;
 }
 
 .content pre::after {
