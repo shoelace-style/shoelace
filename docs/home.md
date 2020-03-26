@@ -1,10 +1,12 @@
 <img class="logo" src="/assets/images/wordmark.svg" alt="Shoelace" data-no-zoom>
 
-👟_A forward-thinking library of Web Components._
+👟_A forward-thinking design system for desktop and mobile._
 
 ---
 
-Shoelace is an open source component library for desktop and mobile that's built with [Web Components](https://developer.mozilla.org/en-US/docs/Web/Web_Components). Here are some reasons to consider it for your next project:
+Shoelace harnesses the power of [web components](#web-components) to bring you a modern, versatile, open source design system. 
+
+Here's why you'll love it:
 
 - Works with any framework 🧩
 - Can be loaded via CDN ⚡️
@@ -13,11 +15,28 @@ Shoelace is an open source component library for desktop and mobile that's built
 
 Shoelace is designed and developed in New Hampshire by [@claviska](https://twitter.com/claviska). You can use it under the terms of the MIT License.
 
-[Installation &rsaquo;](/installation)
+---
+
+## Quick Start
+
+The fastest way to start using Shoelace is with the CDN. In the `<head>` section of your page, include these tags.
+
+```html
+<link rel="stylesheet" src="//SOME_CDN/shoelace/shoelace.css">
+<script type="module" src="//SOME_CDN/shoelace/shoelace.esm.js"></script>
+```
+
+Now you have access to all of Shoelace's components! Try adding a button to your page:
+
+```html
+<sh-button>Click Me</sh-button>
+```
+
+!> Don't want to use the CDN? Check out the [installation instructions](installation.md) for more options.
 
 ---
 
-## Why Web Components?
+## Web Components
 
 Thanks to the popularity of frameworks such as React, Vue, and Angular, component-driven development is a way of life for front-end developers these days. Let's face it — components are awesome, and they make a lot of sense in terms of design, development, and testing.
 
@@ -33,7 +52,7 @@ If you're not yet familiar with Web Components, [MDN describes them](https://dev
 
 > A suite of different technologies allowing you to create reusable custom elements — with their functionality encapsulated away from the rest of your code — and utilize them in your web apps.
 
-In other words, we finally have a way to create our very own HTML elements (with scoped styles and scripts) and use them in [whatever framework we want.](https://custom-elements-everywhere.com/)
+In other words, we finally have a way to create our very own HTML elements and use them in any framework we want!
 
 ## Browser Support
 
@@ -41,11 +60,13 @@ Shoelace is built for modern browsers. If you need to support IE11 or pre-Chromi
 
 Although Web Components can (to some degree) be polyfilled for older browsers, supporting them is outside the scope of this project. If you're using Shoelace in a legacy browser, things will probably not work the way they're intended to.
 
-!> Shoelace makes extensive use of the `::part` selector for styling, which isn't supported in Safari yet. However, it's available in 13.1 beta so it should land very soon.
+!> Shoelace makes use of the `::part` selector for styling, which isn't supported in Safari yet. However, it's present in Safari 13.1 beta so it should be available very soon.
 
 ## Attribution
 
-- Theme colors and form controls were inspired by [Element](element.eleme.io).
-- Positioning of menus, popovers, etc. is handled by [Popper.js](https://popper.js.org/).
-- Tooltips are provided by [Tippy.js](https://atomiks.github.io/tippyjs/).
+- Components are compiled by [Stencil](https://stenciljs.com/)
+- Theme colors and form controls are inspired by [Element](element.eleme.io)
+- Positioning of menus, popovers, etc. is handled by [Popper.js](https://popper.js.org/)
+- Tooltips are powered by [Tippy.js](https://atomiks.github.io/tippyjs/)
+- Documentation is powered by [Docsify](https://docsify.js.org/)
 - The Shoelace logo was designed with a single shoelace by [Adam K Olson](https://twitter.com/adamkolson)

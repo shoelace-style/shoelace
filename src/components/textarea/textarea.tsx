@@ -2,7 +2,7 @@ import { Component, Method, Prop, State, Watch, h } from '@stencil/core';
 import ResizeObserver from 'resize-observer-polyfill';
 
 @Component({
-  tag: 'sl-textarea',
+  tag: 'sh-textarea',
   styleUrl: 'textarea.scss',
   shadow: true
 })
@@ -114,28 +114,28 @@ export class Textarea {
     return (
       <div
         class={{
-          'sl-textarea': true,
+          'sh-textarea': true,
 
           // Sizes
-          'sl-textarea--small': this.size === 'small',
-          'sl-textarea--medium': this.size === 'medium',
-          'sl-textarea--large': this.size === 'large',
+          'sh-textarea--small': this.size === 'small',
+          'sh-textarea--medium': this.size === 'medium',
+          'sh-textarea--large': this.size === 'large',
 
           // States
-          'sl-textarea--disabled': this.disabled,
-          'sl-textarea--focused': this.hasFocus,
-          'sl-textarea--empty': this.value.length === 0,
+          'sh-textarea--disabled': this.disabled,
+          'sh-textarea--focused': this.hasFocus,
+          'sh-textarea--empty': this.value.length === 0,
 
           // Modifiers
-          'sl-textarea--resize-none': this.resize === 'none',
-          'sl-textarea--resize-vertical': this.resize === 'vertical',
-          'sl-textarea--resize-auto': this.resize === 'auto'
+          'sh-textarea--resize-none': this.resize === 'none',
+          'sh-textarea--resize-vertical': this.resize === 'vertical',
+          'sh-textarea--resize-auto': this.resize === 'auto'
         }}
         onClick={() => this.textarea.focus()}
       >
         <textarea
           ref={el => (this.textarea = el)}
-          class="sl-textarea__control"
+          class="sh-textarea__control"
           name={this.name}
           placeholder={this.placeholder}
           disabled={this.disabled}

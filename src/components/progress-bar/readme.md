@@ -1,19 +1,19 @@
 # Progress Bar
 
 ```html preview
-<sl-progress-bar percentage="0">0%</sl-progress-bar><br>
-<sl-progress-bar percentage="25">25%</sl-progress-bar><br>
-<sl-progress-bar percentage="50">50%</sl-progress-bar><br>
-<sl-progress-bar percentage="75">75%</sl-progress-bar><br>
-<sl-progress-bar percentage="100">100%</sl-progress-bar>
+<sh-progress-bar percentage="0">0%</sh-progress-bar><br>
+<sh-progress-bar percentage="25">25%</sh-progress-bar><br>
+<sh-progress-bar percentage="50">50%</sh-progress-bar><br>
+<sh-progress-bar percentage="75">75%</sh-progress-bar><br>
+<sh-progress-bar percentage="100">100%</sh-progress-bar>
 ```
 
 ```html preview
-<sl-progress-bar percentage="0" height="6"></sl-progress-bar><br>
-<sl-progress-bar percentage="25" height="6"></sl-progress-bar><br>
-<sl-progress-bar percentage="50" height="6"></sl-progress-bar><br>
-<sl-progress-bar percentage="75" height="6"></sl-progress-bar><br>
-<sl-progress-bar percentage="100" height="6"></sl-progress-bar>
+<sh-progress-bar percentage="0" height="6"></sh-progress-bar><br>
+<sh-progress-bar percentage="25" height="6"></sh-progress-bar><br>
+<sh-progress-bar percentage="50" height="6"></sh-progress-bar><br>
+<sh-progress-bar percentage="75" height="6"></sh-progress-bar><br>
+<sh-progress-bar percentage="100" height="6"></sh-progress-bar>
 ```
 
 

@@ -2,15 +2,15 @@
 
 TODO
 
-## With React
+## React
 
 TODO
 
-## With Vue
+## Vue
 
 TODO (see utilities/vue.ts)
 
-## With Angular
+## Angular
 
 TODO
 

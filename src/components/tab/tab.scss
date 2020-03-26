@@ -1,42 +1,42 @@
 @import 'component';
 
 :host {
-  --focus-ring-box-shadow: inset 0 0 0 var(--sl-focus-ring-width)
-    hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha));
+  --focus-ring-box-shadow: inset 0 0 0 var(--sh-focus-ring-width)
+    hsla(var(--sh-color-primary-hue), var(--sh-color-primary-saturation), 50%, var(--sh-focus-ring-alpha));
 
   display: inline-block;
 }
 
-.sl-tab {
-  font-family: var(--sl-font-sans);
-  font-size: var(--sl-form-control-font-size--medium);
-  font-weight: var(--sl-font-weight-semibold);
+.sh-tab {
+  font-family: var(--sh-font-sans);
+  font-size: var(--sh-form-control-font-size--medium);
+  font-weight: var(--sh-font-weight-semibold);
   border-radius: 4px;
-  color: var(--sl-color-gray-40);
+  color: var(--sh-color-gray-40);
   padding: 16px 20px;
   white-space: nowrap;
   user-select: none;
   cursor: pointer;
   transition: var(--transition-speed) box-shadow, var(--transition-speed) color;
 
-  &:hover:not(.sl-tab--disabled) {
-    color: var(--sl-color-primary-50);
+  &:hover:not(.sh-tab--disabled) {
+    color: var(--sh-color-primary-50);
   }
 
   &:focus {
     outline: none;
   }
 
-  &:focus:not(.sl-tab--disabled) {
-    color: var(--sl-color-primary-50);
+  &:focus:not(.sh-tab--disabled) {
+    color: var(--sh-color-primary-50);
     box-shadow: var(--focus-ring-box-shadow);
   }
 
-  &.sl-tab--active:not(.sl-tab--disabled) {
-    color: var(--sl-color-primary-50);
+  &.sh-tab--active:not(.sh-tab--disabled) {
+    color: var(--sh-color-primary-50);
   }
 
-  &.sl-tab--disabled {
+  &.sh-tab--disabled {
     opacity: 0.5;
     cursor: not-allowed;
   }

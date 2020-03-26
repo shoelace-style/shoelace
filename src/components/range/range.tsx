@@ -1,7 +1,7 @@
 import { Component, Method, Prop, State, h } from '@stencil/core';
 
 @Component({
-  tag: 'sl-range',
+  tag: 'sh-range',
   styleUrl: 'range.scss',
   shadow: true
 })
@@ -85,20 +85,20 @@ export class Range {
     return (
       <div
         class={{
-          'sl-range': true,
+          'sh-range': true,
 
           // States
-          'sl-range--disabled': this.disabled,
-          'sl-range--focused': this.hasFocus,
-          'sl-range--tooltip-top': this.tooltip === 'top',
-          'sl-range--tooltip-bottom': this.tooltip === 'bottom'
+          'sh-range--disabled': this.disabled,
+          'sh-range--focused': this.hasFocus,
+          'sh-range--tooltip-top': this.tooltip === 'top',
+          'sh-range--tooltip-bottom': this.tooltip === 'bottom'
         }}
         onClick={() => this.input.focus()}
       >
         <input
           ref={el => (this.input = el)}
           type="range"
-          class="sl-range__control"
+          class="sh-range__control"
           name={this.name}
           disabled={this.disabled}
           min={this.min}
@@ -111,7 +111,7 @@ export class Range {
           onInput={this.handleInput}
         />
         {this.tooltip !== 'off' && (
-          <output ref={el => (this.output = el)} class="sl-range__tooltip">
+          <output ref={el => (this.output = el)} class="sh-range__tooltip">
             {this.tooltipFormatter(this.value)}
           </output>
         )}

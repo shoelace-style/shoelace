@@ -1,10 +1,10 @@
 # Checkbox
 
 ```html preview
-<sl-checkbox>Default</sl-checkbox><br><br>
-<sl-checkbox checked>Checked</sl-checkbox><br><br>
-<sl-checkbox indeterminate>Indeterminate</sl-checkbox><br><br>
-<sl-checkbox disabled>Disabled</sl-checkbox><br><br>
+<sh-checkbox>Default</sh-checkbox><br><br>
+<sh-checkbox checked>Checked</sh-checkbox><br><br>
+<sh-checkbox indeterminate>Indeterminate</sh-checkbox><br><br>
+<sh-checkbox disabled>Disabled</sh-checkbox><br><br>
 ```
 
 <!-- Auto Generated Below -->

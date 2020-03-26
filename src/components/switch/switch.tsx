@@ -5,13 +5,13 @@ let id = 0;
 /** @slot - The switch's label. */
 
 @Component({
-  tag: 'sl-switch',
+  tag: 'sh-switch',
   styleUrl: 'switch.scss',
   shadow: true
 })
 export class Switch {
-  id = `sl-switch-${++id}`;
-  labelId = `sl-switch-label-${id}`;
+  id = `sh-switch-${++id}`;
+  labelId = `sh-switch-label-${id}`;
   input: HTMLInputElement;
 
   constructor() {
@@ -70,14 +70,14 @@ export class Switch {
         htmlFor={this.id}
         role="switch"
         class={{
-          'sl-switch': true,
-          'sl-switch--checked': this.checked,
-          'sl-switch--disabled': this.disabled,
-          'sl-switch--focused': this.hasFocus
+          'sh-switch': true,
+          'sh-switch--checked': this.checked,
+          'sh-switch--disabled': this.disabled,
+          'sh-switch--focused': this.hasFocus
         }}
       >
-        <span class="sl-switch__control">
-          <span class="sl-switch__thumb" />
+        <span class="sh-switch__control">
+          <span class="sh-switch__thumb" />
 
           <input
             ref={el => (this.input = el)}
@@ -96,7 +96,7 @@ export class Switch {
           />
         </span>
 
-        <span id={this.labelId} class="sl-switch__label">
+        <span id={this.labelId} class="sh-switch__label">
           <slot />
         </span>
       </label>

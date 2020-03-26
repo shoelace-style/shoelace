@@ -4,21 +4,21 @@
   display: block;
 }
 
-.sl-progress-bar {
+.sh-progress-bar {
   position: relative;
-  background: var(--sl-color-gray-90);
+  background: var(--sh-color-gray-90);
   height: var(--height);
   border-radius: 12px;
   overflow: hidden;
 }
 
-.sl-progress-bar__indicator {
+.sh-progress-bar__indicator {
   height: 100%;
-  font-family: var(--sl-font-sans);
+  font-family: var(--sh-font-sans);
   font-size: 12px;
-  font-weight: var(--sl-font-weight-normal);
-  background-color: var(--sl-color-primary-50);
-  color: var(--sl-color-white);
+  font-weight: var(--sh-font-weight-normal);
+  background-color: var(--sh-color-primary-50);
+  color: var(--sh-color-white);
   text-align: center;
   line-height: var(--height);
   white-space: nowrap;

@@ -1,24 +1,14 @@
 # Installation
 
+The fastest way to start using Shoelace is with the CDN, which is covered in the [quick start](/home.md#quick-start). These instructions are for folks who want to install Shoelace and host it themselves.
 
-## Using a CDN
-
-In the `<head>` section of your page, include these tags.
-
-```html
-<link rel="stylesheet" src="//SOME_CDN/shoelace/shoelace.css">
-<script type="module" src="//SOME_CDN/shoelace/shoelace.esm.js"></script>
-```
-
-## Installing Locally
+## NPM
 
 ```shell
 npm install @claviska/shoelace
 ```
 
-In the `<head>` section of your page, include these tags.
+TODO
 
-```html
-<link rel="stylesheet" src="shoelace/shoelace.css">
-<script type="module" src="shoelace/shoelace.esm.js"></script>
-```
+- Lazy loading
+- As modules

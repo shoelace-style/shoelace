@@ -6,7 +6,7 @@ import { Component, Event, EventEmitter, Prop, Watch, h } from '@stencil/core';
  */
 
 @Component({
-  tag: 'sl-alert',
+  tag: 'sh-alert',
   styleUrl: 'alert.scss',
   shadow: true
 })
@@ -27,7 +27,7 @@ export class Tab {
   @Prop({ mutable: true }) closed = false;
 
   /** Emitted when the alert is closed. */
-  @Event() slClose: EventEmitter;
+  @Event() shClose: EventEmitter;
 
   @Watch('closed')
   handleClosedChange() {
@@ -35,7 +35,7 @@ export class Tab {
     this.alert.removeAttribute('hidden');
 
     if (this.closed) {
-      this.slClose.emit();
+      this.shClose.emit();
     }
   }
 
@@ -51,31 +51,31 @@ export class Tab {
       <div
         ref={el => (this.alert = el)}
         class={{
-          'sl-alert': true,
-          'sl-alert--closable': this.closable,
-          'sl-alert--closed': this.closed,
+          'sh-alert': true,
+          'sh-alert--closable': this.closable,
+          'sh-alert--closed': this.closed,
 
           // States
-          'sl-alert--primary': this.type === 'primary',
-          'sl-alert--success': this.type === 'success',
-          'sl-alert--info': this.type === 'info',
-          'sl-alert--warning': this.type === 'warning',
-          'sl-alert--danger': this.type === 'danger'
+          'sh-alert--primary': this.type === 'primary',
+          'sh-alert--success': this.type === 'success',
+          'sh-alert--info': this.type === 'info',
+          'sh-alert--warning': this.type === 'warning',
+          'sh-alert--danger': this.type === 'danger'
         }}
         role="alert"
         aria-hidden={this.closed}
         onTransitionEnd={this.handleTransitionEnd}
       >
-        <span class="sl-alert__icon">
+        <span class="sh-alert__icon">
           <slot name="icon" />
         </span>
 
-        <span class="sl-alert__body">
+        <span class="sh-alert__body">
           <slot />
         </span>
 
         {this.closable && (
-          <button type="button" class="sl-alert__close" onClick={() => (this.closed = true)}>
+          <button type="button" class="sh-alert__close" onClick={() => (this.closed = true)}>
             <svg
               viewBox="0 0 16 16"
               version="1.1"

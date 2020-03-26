@@ -7,17 +7,17 @@ let id = 0;
 let openDropdowns = [];
 
 /**
- * @slot trigger - The dropdown's trigger, usually a `<sl-button>` element.
+ * @slot trigger - The dropdown's trigger, usually a `<sh-button>` element.
  * @slot - Used to group the dropdown's menu items.
  */
 
 @Component({
-  tag: 'sl-dropdown',
+  tag: 'sh-dropdown',
   styleUrl: 'dropdown.scss',
   shadow: true
 })
 export class Dropdown {
-  id = `sl-dropdown-${++id}`;
+  id = `sh-dropdown-${++id}`;
   menu: HTMLElement;
   popper: PopperJs;
   trigger: HTMLElement;
@@ -105,7 +105,7 @@ export class Dropdown {
   getAllItems() {
     const slot = this.menu.querySelector('slot');
     return [...slot.assignedElements()].filter(
-      (el: any) => el.tagName.toLowerCase() === 'sl-dropdown-item' && !el.disabled
+      (el: any) => el.tagName.toLowerCase() === 'sh-dropdown-item' && !el.disabled
     ) as [HTMLSlDropdownItemElement];
   }
 
@@ -156,7 +156,7 @@ export class Dropdown {
 
   handleDocumentMouseDown(event: MouseEvent) {
     const target = event.target as HTMLElement;
-    const dropdown = target.closest('sl-dropdown');
+    const dropdown = target.closest('sh-dropdown');
 
     // Close when clicking outside of the dropdown control
     if (!dropdown) {
@@ -176,7 +176,7 @@ export class Dropdown {
 
   handleMenuClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
-    const dropdownItem = target.closest('sl-dropdown-item');
+    const dropdownItem = target.closest('sh-dropdown-item');
 
     // Close when clicking on a dropdown item
     if (dropdownItem && !dropdownItem.disabled) {
@@ -193,7 +193,7 @@ export class Dropdown {
 
   handleMenuMouseOver(event: MouseEvent) {
     const target = event.target as HTMLElement;
-    const dropdownItem = target.closest('sl-dropdown-item');
+    const dropdownItem = target.closest('sh-dropdown-item');
 
     if (dropdownItem) {
       this.setSelectedItem(dropdownItem);
@@ -226,14 +226,14 @@ export class Dropdown {
       <div
         id={this.id}
         class={{
-          'sl-dropdown': true,
-          'sl-dropdown--open': this.isOpen
+          'sh-dropdown': true,
+          'sh-dropdown--open': this.isOpen
         }}
         aria-expanded={this.isOpen}
         aria-haspopup="true"
       >
         <span
-          class="sl-dropdown__trigger"
+          class="sh-dropdown__trigger"
           ref={el => (this.trigger = el)}
           onKeyDown={this.handleTriggerKeyDown}
           onClick={() => this.toggleMenu()}
@@ -242,7 +242,7 @@ export class Dropdown {
         </span>
 
         <div
-          class="sl-dropdown__menu"
+          class="sh-dropdown__menu"
           ref={el => (this.menu = el)}
           role="menu"
           aria-hidden={!this.isOpen}

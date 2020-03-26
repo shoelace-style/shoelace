@@ -4,7 +4,7 @@ import tippy from 'tippy.js';
 /** @slot - The tooltip's content. */
 
 @Component({
-  tag: 'sl-tooltip',
+  tag: 'sh-tooltip',
   shadow: true
 })
 export class Tooltip {
@@ -84,16 +84,16 @@ export class Tooltip {
   }
 
   /** Emitted when the tooltip begins to show, but before it gets mounted to the DOM. */
-  @Event() slShow: EventEmitter;
+  @Event() shShow: EventEmitter;
 
   /** Emitted when the tooltip has fully transitioned in. */
-  @Event() slShown: EventEmitter;
+  @Event() shShown: EventEmitter;
 
   /** Emitted when the tooltip begins to hide. */
-  @Event() slHide: EventEmitter;
+  @Event() shHide: EventEmitter;
 
   /** Emitted when the tooltip has fully transitioned out and gets unmounted from the DOM. */
-  @Event() slHidden: EventEmitter;
+  @Event() shHidden: EventEmitter;
 
   componentDidLoad() {
     this.tooltip = tippy(this.getTarget());
@@ -154,10 +154,10 @@ export class Tooltip {
       trigger: this.trigger,
       zIndex: this.zIndex,
 
-      onShow: () => this.slShow.emit(),
-      onShown: () => this.slShown.emit(),
-      onHide: () => this.slHide.emit(),
-      onHidden: () => this.slHidden.emit()
+      onShow: () => this.shShow.emit(),
+      onShown: () => this.shShown.emit(),
+      onHide: () => this.shHide.emit(),
+      onHidden: () => this.shHidden.emit()
     });
 
     if (this.disabled) {

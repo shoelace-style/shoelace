@@ -1,28 +1,28 @@
 # Tooltip
 
 ```html preview
-<sl-button>Tooltip</sl-button>
-<sl-tooltip>This is a tooltip</sl-tooltip>
+<sh-button>Tooltip</sh-button>
+<sh-tooltip>This is a tooltip</sh-tooltip>
 
-<sl-button>Tooltip With Arrow</sl-button>
-<sl-tooltip arrow>This is a tooltip with arrow</sl-tooltip>
+<sh-button>Tooltip With Arrow</sh-button>
+<sh-tooltip arrow>This is a tooltip with arrow</sh-tooltip>
 
 <a href="#">Tooltip On Link</a>
-<sl-tooltip>This is a tooltip on a link</sl-tooltip>
+<sh-tooltip>This is a tooltip on a link</sh-tooltip>
 
 <br><br>
 
-<sl-button>Top</sl-button>
-<sl-tooltip placement="top" arrow>Tooltip</sl-tooltip>
+<sh-button>Top</sh-button>
+<sh-tooltip placement="top" arrow>Tooltip</sh-tooltip>
 
-<sl-button>Bottom</sl-button>
-<sl-tooltip placement="bottom" arrow>Tooltip</sl-tooltip>
+<sh-button>Bottom</sh-button>
+<sh-tooltip placement="bottom" arrow>Tooltip</sh-tooltip>
 
-<sl-button>Left</sl-button>
-<sl-tooltip placement="left" arrow>Tooltip</sl-tooltip>
+<sh-button>Left</sh-button>
+<sh-tooltip placement="left" arrow>Tooltip</sh-tooltip>
 
-<sl-button>Right</sl-button>
-<sl-tooltip placement="right" arrow>Tooltip</sl-tooltip>
+<sh-button>Right</sh-button>
+<sh-tooltip placement="right" arrow>Tooltip</sh-tooltip>
 ```
 
 
@@ -51,10 +51,10 @@
 
 | Event      | Description                                                                          | Type               |
 | ---------- | ------------------------------------------------------------------------------------ | ------------------ |
-| `slHidden` | Emitted when the tooltip has fully transitioned out and gets unmounted from the DOM. | `CustomEvent<any>` |
-| `slHide`   | Emitted when the tooltip begins to hide.                                             | `CustomEvent<any>` |
-| `slShow`   | Emitted when the tooltip begins to show, but before it gets mounted to the DOM.      | `CustomEvent<any>` |
-| `slShown`  | Emitted when the tooltip has fully transitioned in.                                  | `CustomEvent<any>` |
+| `shHidden` | Emitted when the tooltip has fully transitioned out and gets unmounted from the DOM. | `CustomEvent<any>` |
+| `shHide`   | Emitted when the tooltip begins to hide.                                             | `CustomEvent<any>` |
+| `shShow`   | Emitted when the tooltip begins to show, but before it gets mounted to the DOM.      | `CustomEvent<any>` |
+| `shShown`  | Emitted when the tooltip has fully transitioned in.                                  | `CustomEvent<any>` |
 
 
 ## Methods

@@ -1,11 +1,16 @@
-- Overview
+- Concepts
   - [Getting Started](/)
   - [Installation](/installation.md)
-  - [Usage](/usage.md)
   - [Customizing](/customizing.md)
 
-- Design
-  - [Design Tokens](/design/tokens.md)
+- Design Tokens
+  - [Typography](/tokens/typography.md)
+  - [Color](/tokens/color.md)
+  - [Spacing](/tokens/spacing.md)
+  - [Elevation](/tokens/elevation.md)
+  - [Border Radius](/tokens/border-radius.md)
+  - [Transition](/tokens/transition.md)
+  - [Z-index](/tokens/z-index.md)
 
 - Components
   - [Alert](/components/alert.md)
@@ -27,6 +32,8 @@
   - [Textarea](/components/textarea.md)
   - [Tooltip](/components/tooltip.md)
 
-- Developers
-  - [Contributing](/developers/contributing.md)
-  - [Conventions](/developers/conventions.md)
+- Frameworks
+  - [HTML + JS](/frameworks/html-js.md)
+  - [React](/frameworks/react.md)
+  - [Vue](/frameworks/vue.md)
+  - [Angular](/frameworks/angular.md)

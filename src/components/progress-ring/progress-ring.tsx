@@ -1,7 +1,7 @@
 import { Component, Host, Prop, Watch, h } from '@stencil/core';
 
 @Component({
-  tag: 'sl-progress-ring',
+  tag: 'sh-progress-ring',
   styleUrl: 'progress-ring.scss',
   shadow: true
 })
@@ -38,9 +38,9 @@ export class Progress {
   render() {
     return (
       <Host>
-        <svg class="sl-progress-ring" width={this.diameter} height={this.diameter}>
+        <svg class="sh-progress-ring" width={this.diameter} height={this.diameter}>
           <circle
-            class="sl-progress-ring__track"
+            class="sh-progress-ring__track"
             stroke-width={this.stroke}
             stroke-linecap="round"
             fill="transparent"
@@ -51,7 +51,7 @@ export class Progress {
 
           <circle
             ref={(el: SVGCircleElement) => (this.indicator = el)}
-            class="sl-progress-ring__indicator"
+            class="sh-progress-ring__indicator"
             stroke-width={this.stroke}
             stroke-linecap="round"
             fill="transparent"
@@ -61,7 +61,7 @@ export class Progress {
           />
         </svg>
 
-        <span class="sl-progress-ring__label">
+        <span class="sh-progress-ring__label">
           <slot />
         </span>
       </Host>

@@ -1,124 +1,124 @@
 # Input
 
 ```html preview
-<sl-input type="text" placeholder="Small" size="small"></sl-input>
+<sh-input type="text" placeholder="Small" size="small"></sh-input>
 
 <br><br>
 
-<sl-input type="text" placeholder="Medium" size="medium"></sl-input>
+<sh-input type="text" placeholder="Medium" size="medium"></sh-input>
 
 <br><br>
 
-<sl-input type="text" placeholder="Large" size="large"></sl-input>
+<sh-input type="text" placeholder="Large" size="large"></sh-input>
 
 <br><br>
 
-<sl-input type="text" placeholder="Small" size="small">
+<sh-input type="text" placeholder="Small" size="small">
   <ion-icon name="settings-outline" slot="prefix"></ion-icon>
   <ion-icon name="open-outline" slot="suffix"></ion-icon>
-</sl-input>
+</sh-input>
 
 <br><br>
 
-<sl-input type="text" placeholder="Medium" size="medium">
+<sh-input type="text" placeholder="Medium" size="medium">
   <ion-icon name="settings-outline" slot="prefix"></ion-icon>
   <ion-icon name="open-outline" slot="suffix"></ion-icon>
-</sl-input>
+</sh-input>
 
 <br><br>
 
-<sl-input type="text" placeholder="Large" size="large">
+<sh-input type="text" placeholder="Large" size="large">
   <ion-icon name="settings-outline" slot="prefix"></ion-icon>
   <ion-icon name="open-outline" slot="suffix"></ion-icon>
-</sl-input>
+</sh-input>
 
 <br><br>
 
-<sl-input type="text" placeholder="Addons" size="small">
+<sh-input type="text" placeholder="Addons" size="small">
   <span slot="before">$</span>
   <span slot="after">.00</span>
-</sl-input>
+</sh-input>
 
 <br><br>
 
-<sl-input type="text" placeholder="Addons" size="medium">
+<sh-input type="text" placeholder="Addons" size="medium">
   <span slot="before">$</span>
   <span slot="after">.00</span>
-</sl-input>
+</sh-input>
 
 <br><br>
 
-<sl-input type="text" placeholder="Addons" size="large">
+<sh-input type="text" placeholder="Addons" size="large">
   <span slot="before">$</span>
   <span slot="after">.00</span>
-</sl-input>
+</sh-input>
 
 <br><br>
 
-<sl-input type="text" placeholder="Addons and Icons" size="small">
-  <span slot="before">$</span>
-  <span slot="after">.00</span>
-  <ion-icon name="settings-outline" slot="prefix"></ion-icon>
-  <ion-icon name="open-outline" slot="suffix"></ion-icon>
-</sl-input>
-
-<br><br>
-
-<sl-input type="text" placeholder="Addons and Icons" size="medium">
+<sh-input type="text" placeholder="Addons and Icons" size="small">
   <span slot="before">$</span>
   <span slot="after">.00</span>
   <ion-icon name="settings-outline" slot="prefix"></ion-icon>
   <ion-icon name="open-outline" slot="suffix"></ion-icon>
-</sl-input>
+</sh-input>
 
 <br><br>
 
-<sl-input type="text" placeholder="Addons and Icons" size="large">
+<sh-input type="text" placeholder="Addons and Icons" size="medium">
   <span slot="before">$</span>
   <span slot="after">.00</span>
   <ion-icon name="settings-outline" slot="prefix"></ion-icon>
   <ion-icon name="open-outline" slot="suffix"></ion-icon>
-</sl-input>
+</sh-input>
 
 <br><br>
 
-<sl-input type="text" placeholder="Clearable" size="small" clearable></sl-input>
+<sh-input type="text" placeholder="Addons and Icons" size="large">
+  <span slot="before">$</span>
+  <span slot="after">.00</span>
+  <ion-icon name="settings-outline" slot="prefix"></ion-icon>
+  <ion-icon name="open-outline" slot="suffix"></ion-icon>
+</sh-input>
 
 <br><br>
 
-<sl-input type="text" placeholder="Clearable" size="medium" clearable></sl-input>
+<sh-input type="text" placeholder="Clearable" size="small" clearable></sh-input>
 
 <br><br>
 
-<sl-input type="text" placeholder="Clearable" size="large" clearable></sl-input>
+<sh-input type="text" placeholder="Clearable" size="medium" clearable></sh-input>
 
 <br><br>
 
-<sl-input type="password" placeholder="Password Toggle" size="small" toggle-password></sl-input>
+<sh-input type="text" placeholder="Clearable" size="large" clearable></sh-input>
 
 <br><br>
 
-<sl-input type="password" placeholder="Password Toggle" size="medium" toggle-password></sl-input>
+<sh-input type="password" placeholder="Password Toggle" size="small" toggle-password></sh-input>
 
 <br><br>
 
-<sl-input type="password" placeholder="Password Toggle" size="large" toggle-password></sl-input>
+<sh-input type="password" placeholder="Password Toggle" size="medium" toggle-password></sh-input>
 
 <br><br>
 
-<sl-input type="text" placeholder="Disabled" size="small" disabled></sl-input>
+<sh-input type="password" placeholder="Password Toggle" size="large" toggle-password></sh-input>
 
 <br><br>
 
-<sl-input type="text" placeholder="Disabled" size="medium" disabled></sl-input>
+<sh-input type="text" placeholder="Disabled" size="small" disabled></sh-input>
 
 <br><br>
 
-<sl-input type="text" placeholder="Disabled" size="large" disabled></sl-input>
+<sh-input type="text" placeholder="Disabled" size="medium" disabled></sh-input>
 
 <br><br>
 
-<sl-input type="number" placeholder="Number"></sl-input>
+<sh-input type="text" placeholder="Disabled" size="large" disabled></sh-input>
+
+<br><br>
+
+<sh-input type="number" placeholder="Number"></sh-input>
 ```
 
 

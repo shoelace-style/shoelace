@@ -4,31 +4,31 @@
   display: inline-block;
 }
 
-.sl-radio {
+.sh-radio {
   display: flex;
   align-items: center;
-  font-family: var(--sl-form-control-font-sans-serif);
-  font-size: var(--sl-form-control-font-size--medium);
-  font-weight: var(--sl-font-weight-normal);
-  color: var(--sl-form-control-color);
+  font-family: var(--sh-form-control-font-sans-serif);
+  font-size: var(--sh-form-control-font-size--medium);
+  font-weight: var(--sh-font-weight-normal);
+  color: var(--sh-form-control-color);
   vertical-align: middle;
   cursor: pointer;
 }
 
-.sl-radio__control {
+.sh-radio__control {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: var(--sl-form-control-checkbox-size);
-  height: var(--sl-form-control-checkbox-size);
-  border: solid var(--sl-form-control-border-width) var(--sl-form-control-border-color);
+  width: var(--sh-form-control-checkbox-size);
+  height: var(--sh-form-control-checkbox-size);
+  border: solid var(--sh-form-control-border-width) var(--sh-form-control-border-color);
   border-radius: 50%;
-  background-color: var(--sl-form-control-background-color);
-  color: var(--sl-color-white);
-  transition: var(--sl-form-control-transition-speed) border-color,
-    var(--sl-form-control-transition-speed) background-color, var(--sl-form-control-transition-speed) color,
-    var(--sl-form-control-transition-speed) box-shadow;
+  background-color: var(--sh-form-control-background-color);
+  color: var(--sh-color-white);
+  transition: var(--sh-form-control-transition-speed) border-color,
+    var(--sh-form-control-transition-speed) background-color, var(--sh-form-control-transition-speed) color,
+    var(--sh-form-control-transition-speed) box-shadow;
 
   input[type='radio'] {
     position: absolute;
@@ -40,51 +40,51 @@
   }
 
   svg {
-    width: var(--sl-form-control-checkbox-size);
-    height: var(--sl-form-control-checkbox-size);
+    width: var(--sh-form-control-checkbox-size);
+    height: var(--sh-form-control-checkbox-size);
   }
 }
 
 // Hover
-.sl-radio:not(.sl-radio--checked):not(.sl-radio--disabled) .sl-radio__control:hover {
-  border-color: var(--sl-form-control-border-color--hover);
-  background-color: var(--sl-form-control-background-color--hover);
+.sh-radio:not(.sh-radio--checked):not(.sh-radio--disabled) .sh-radio__control:hover {
+  border-color: var(--sh-form-control-border-color--hover);
+  background-color: var(--sh-form-control-background-color--hover);
 }
 
 // Focus
-.sl-radio.sl-radio--focused:not(.sl-radio--checked):not(.sl-radio--disabled) .sl-radio__control {
-  border-color: var(--sl-form-control-border-color--focus);
-  background-color: var(--sl-form-control-background-color--focus);
-  box-shadow: var(--sl-focus-ring-box-shadow);
+.sh-radio.sh-radio--focused:not(.sh-radio--checked):not(.sh-radio--disabled) .sh-radio__control {
+  border-color: var(--sh-form-control-border-color--focus);
+  background-color: var(--sh-form-control-background-color--focus);
+  box-shadow: var(--sh-focus-ring-box-shadow);
 }
 
 // Checked
-.sl-radio--checked .sl-radio__control {
-  border-color: var(--sl-color-primary-50);
-  background-color: var(--sl-color-primary-50);
+.sh-radio--checked .sh-radio__control {
+  border-color: var(--sh-color-primary-50);
+  background-color: var(--sh-color-primary-50);
 }
 
 // Checked + hover
-.sl-radio.sl-radio--checked:not(.sl-radio--disabled) .sl-radio__control:hover {
-  border-color: var(--sl-color-primary-60);
-  background-color: var(--sl-color-primary-60);
+.sh-radio.sh-radio--checked:not(.sh-radio--disabled) .sh-radio__control:hover {
+  border-color: var(--sh-color-primary-60);
+  background-color: var(--sh-color-primary-60);
 }
 
 // Checked + focus
-.sl-radio.sl-radio--checked:not(.sl-radio--disabled).sl-radio--focused .sl-radio__control {
-  border-color: var(--sl-color-primary-60);
-  background-color: var(--sl-color-primary-60);
-  box-shadow: var(--sl-focus-ring-box-shadow);
+.sh-radio.sh-radio--checked:not(.sh-radio--disabled).sh-radio--focused .sh-radio__control {
+  border-color: var(--sh-color-primary-60);
+  background-color: var(--sh-color-primary-60);
+  box-shadow: var(--sh-focus-ring-box-shadow);
 }
 
 // Disabled
-.sl-radio--disabled {
+.sh-radio--disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.sl-radio__label {
-  line-height: var(--sl-form-control-checkbox-size);
+.sh-radio__label {
+  line-height: var(--sh-form-control-checkbox-size);
   margin-left: 0.5em;
   user-select: none;
 }

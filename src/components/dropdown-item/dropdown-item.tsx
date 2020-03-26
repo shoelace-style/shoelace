@@ -7,7 +7,7 @@ import { Component, Event, EventEmitter, Prop, h } from '@stencil/core';
  */
 
 @Component({
-  tag: 'sl-dropdown-item',
+  tag: 'sh-dropdown-item',
   styleUrl: 'dropdown-item.scss',
   shadow: true
 })
@@ -27,17 +27,17 @@ export class DropdownItem {
     return (
       <div
         class={{
-          'sl-dropdown-item': true,
-          'sl-dropdown-item--checked': this.checked,
-          'sl-dropdown-item--active': this.active,
-          'sl-dropdown-item--disabled': this.disabled
+          'sh-dropdown-item': true,
+          'sh-dropdown-item--checked': this.checked,
+          'sh-dropdown-item--active': this.active,
+          'sh-dropdown-item--disabled': this.disabled
         }}
         role="menuitem"
         aria-checked={this.checked}
         aria-disabled={this.disabled}
         aria-selected={this.active}
       >
-        <span class="sl-dropdown-item__check">
+        <span class="sh-dropdown-item__check">
           <svg
             viewBox="0 0 14 14"
             version="1.1"
@@ -53,15 +53,15 @@ export class DropdownItem {
           </svg>
         </span>
 
-        <span class="sl-dropdown-item__prefix">
+        <span class="sh-dropdown-item__prefix">
           <slot name="prefix" />
         </span>
 
-        <span class="sl-dropdown-item__label">
+        <span class="sh-dropdown-item__label">
           <slot />
         </span>
 
-        <span class="sl-dropdown-item__suffix">
+        <span class="sh-dropdown-item__suffix">
           <slot name="suffix" />
         </span>
       </div>

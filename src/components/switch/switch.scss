@@ -1,7 +1,7 @@
 @import 'component';
 
 :host {
-  --height: var(--sl-form-control-checkbox-size);
+  --height: var(--sh-form-control-checkbox-size);
   --thumb-size: calc(var(--height) + 4px);
   --track-border-radius: var(--height);
   --width: calc(var(--height) * 2);
@@ -9,40 +9,40 @@
   display: inline-block;
 }
 
-.sl-switch {
+.sh-switch {
   display: flex;
   align-items: center;
-  font-family: var(--sl-form-control-font-family);
-  font-size: var(--sl-form-control-font-size--medium);
-  font-weight: var(--sl-form-control-font-weight);
+  font-family: var(--sh-form-control-font-family);
+  font-size: var(--sh-form-control-font-size--medium);
+  font-weight: var(--sh-form-control-font-weight);
   color: var(--form-control-color);
   vertical-align: middle;
   cursor: pointer;
 }
 
-.sl-switch__control {
+.sh-switch__control {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   width: var(--width);
   height: var(--height);
-  background-color: var(--sl-color-gray-80);
-  border: solid var(--sl-form-control-border-width) var(--sl-color-gray-80);
+  background-color: var(--sh-color-gray-80);
+  border: solid var(--sh-form-control-border-width) var(--sh-color-gray-80);
   border-radius: var(--track-border-radius);
-  transition: var(--sl-form-control-transition-speed) border-color,
-    var(--sl-form-control-transition-speed) background-color;
+  transition: var(--sh-form-control-transition-speed) border-color,
+    var(--sh-form-control-transition-speed) background-color;
 
-  .sl-switch__thumb {
+  .sh-switch__thumb {
     width: var(--thumb-size);
     height: var(--thumb-size);
-    background-color: var(--sl-color-white);
+    background-color: var(--sh-color-white);
     border-radius: 50%;
-    border: solid var(--sl-form-control-border-width) var(--sl-form-control-border-color);
+    border: solid var(--sh-form-control-border-width) var(--sh-form-control-border-color);
     transform: translateX(calc(var(--width) / -2 + var(--thumb-size) / 2 - (var(--thumb-size) - var(--height)) / 2));
-    transition: var(--sl-form-control-transition-speed) transform ease,
-      var(--sl-form-control-transition-speed) background-color, var(--sl-form-control-transition-speed) border-color,
-      var(--sl-form-control-transition-speed) box-shadow;
+    transition: var(--sh-form-control-transition-speed) transform ease,
+      var(--sh-form-control-transition-speed) background-color, var(--sh-form-control-transition-speed) border-color,
+      var(--sh-form-control-transition-speed) box-shadow;
   }
 
   input[type='checkbox'] {
@@ -56,70 +56,70 @@
 }
 
 // Hover
-.sl-switch:not(.sl-switch--checked):not(.sl-switch--disabled) .sl-switch__control:hover {
-  background-color: var(--sl-color-gray-85);
-  border-color: var(--sl-color-gray-85);
+.sh-switch:not(.sh-switch--checked):not(.sh-switch--disabled) .sh-switch__control:hover {
+  background-color: var(--sh-color-gray-85);
+  border-color: var(--sh-color-gray-85);
 
-  .sl-switch__thumb {
-    background-color: var(--sl-color-white);
-    border-color: var(--sl-form-control-border-color);
+  .sh-switch__thumb {
+    background-color: var(--sh-color-white);
+    border-color: var(--sh-form-control-border-color);
   }
 }
 
 // Focus
-.sl-switch.sl-switch--focused:not(.sl-switch--checked):not(.sl-switch--disabled) .sl-switch__control {
-  background-color: var(--sl-color-gray-85);
-  border-color: var(--sl-color-gray-85);
+.sh-switch.sh-switch--focused:not(.sh-switch--checked):not(.sh-switch--disabled) .sh-switch__control {
+  background-color: var(--sh-color-gray-85);
+  border-color: var(--sh-color-gray-85);
 
-  .sl-switch__thumb {
-    background-color: var(--sl-color-white);
-    border-color: var(--sl-form-control-border-color);
-    box-shadow: var(--sl-focus-ring-box-shadow);
+  .sh-switch__thumb {
+    background-color: var(--sh-color-white);
+    border-color: var(--sh-form-control-border-color);
+    box-shadow: var(--sh-focus-ring-box-shadow);
   }
 }
 
 // Checked
-.sl-switch--checked .sl-switch__control {
-  background-color: var(--sl-color-primary-50);
-  border-color: var(--sl-color-primary-50);
+.sh-switch--checked .sh-switch__control {
+  background-color: var(--sh-color-primary-50);
+  border-color: var(--sh-color-primary-50);
 
-  .sl-switch__thumb {
-    background-color: var(--sl-color-white);
-    border-color: var(--sl-color-primary-50);
+  .sh-switch__thumb {
+    background-color: var(--sh-color-white);
+    border-color: var(--sh-color-primary-50);
     transform: translateX(calc(var(--width) / 2 - var(--thumb-size) / 2 + (var(--thumb-size) - var(--height)) / 2));
   }
 }
 
 // Checked + hover
-.sl-switch.sl-switch--checked:not(.sl-switch--disabled) .sl-switch__control:hover {
-  background-color: var(--sl-color-primary-60);
-  border-color: var(--sl-color-primary-60);
+.sh-switch.sh-switch--checked:not(.sh-switch--disabled) .sh-switch__control:hover {
+  background-color: var(--sh-color-primary-60);
+  border-color: var(--sh-color-primary-60);
 
-  .sl-switch__thumb {
-    background-color: var(--sl-color-white);
-    border-color: var(--sl-color-primary-50);
+  .sh-switch__thumb {
+    background-color: var(--sh-color-white);
+    border-color: var(--sh-color-primary-50);
   }
 }
 
 // Checked + focus
-.sl-switch.sl-switch--checked:not(.sl-switch--disabled).sl-switch--focused .sl-switch__control {
-  background-color: var(--sl-color-primary-60);
-  border-color: var(--sl-color-primary-60);
+.sh-switch.sh-switch--checked:not(.sh-switch--disabled).sh-switch--focused .sh-switch__control {
+  background-color: var(--sh-color-primary-60);
+  border-color: var(--sh-color-primary-60);
 
-  .sl-switch__thumb {
-    background-color: var(--sl-color-white);
-    border-color: var(--sl-color-primary-50);
-    box-shadow: var(--sl-focus-ring-box-shadow);
+  .sh-switch__thumb {
+    background-color: var(--sh-color-white);
+    border-color: var(--sh-color-primary-50);
+    box-shadow: var(--sh-focus-ring-box-shadow);
   }
 }
 
 // Disabled
-.sl-switch--disabled {
+.sh-switch--disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.sl-switch__label {
+.sh-switch__label {
   line-height: var(--height);
   margin-left: 0.5em;
   user-select: none;

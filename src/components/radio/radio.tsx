@@ -5,13 +5,13 @@ let id = 0;
 /** @slot - The radio's label. */
 
 @Component({
-  tag: 'sl-radio',
+  tag: 'sh-radio',
   styleUrl: 'radio.scss',
   shadow: true
 })
 export class Radio {
-  id = `sl-radio-${++id}`;
-  labelId = `sl-radio-label-${id}`;
+  id = `sh-radio-${++id}`;
+  labelId = `sh-radio-label-${id}`;
   input: HTMLInputElement;
 
   constructor() {
@@ -59,13 +59,13 @@ export class Radio {
         htmlFor={this.id}
         role="radio"
         class={{
-          'sl-radio': true,
-          'sl-radio--checked': this.checked,
-          'sl-radio--disabled': this.disabled,
-          'sl-radio--focused': this.hasFocus
+          'sh-radio': true,
+          'sh-radio--checked': this.checked,
+          'sh-radio--disabled': this.disabled,
+          'sh-radio--focused': this.hasFocus
         }}
       >
-        <span class="sl-radio__control">
+        <span class="sh-radio__control">
           {this.checked ? (
             <svg
               viewBox="0 0 16 16"
@@ -97,7 +97,7 @@ export class Radio {
           />
         </span>
 
-        <span id={this.labelId} class="sl-radio__label">
+        <span id={this.labelId} class="sh-radio__label">
           <slot />
         </span>
       </label>

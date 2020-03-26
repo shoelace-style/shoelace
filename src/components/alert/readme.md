@@ -1,85 +1,85 @@
 # Alert
 
 ```html preview
-<sl-alert type="primary">
+<sh-alert type="primary">
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
-</sl-alert><br>
-<sl-alert type="success">
+</sh-alert><br>
+<sh-alert type="success">
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
-</sl-alert><br>
-<sl-alert type="info">
+</sh-alert><br>
+<sh-alert type="info">
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
-</sl-alert><br>
-<sl-alert type="warning">
+</sh-alert><br>
+<sh-alert type="warning">
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
-</sl-alert><br>
-<sl-alert type="danger">
+</sh-alert><br>
+<sh-alert type="danger">
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
-</sl-alert>
+</sh-alert>
 ```
 
 ```html preview
-<sl-alert type="primary">
+<sh-alert type="primary">
   <ion-icon slot="icon" style="font-size: 20px;" name="information-circle-outline"></ion-icon>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
-</sl-alert><br>
+</sh-alert><br>
 
-<sl-alert type="success">
+<sh-alert type="success">
   <ion-icon slot="icon" style="font-size: 20px;" name="checkmark-outline"></ion-icon>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
-</sl-alert><br>
+</sh-alert><br>
 
-<sl-alert type="info">
+<sh-alert type="info">
   <ion-icon slot="icon" style="font-size: 20px;" name="settings-outline"></ion-icon>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
-</sl-alert><br>
+</sh-alert><br>
 
-<sl-alert type="warning">
+<sh-alert type="warning">
   <ion-icon slot="icon" style="font-size: 20px;" name="warning-outline"></ion-icon>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
-</sl-alert><br>
+</sh-alert><br>
 
-<sl-alert type="danger">
+<sh-alert type="danger">
   <ion-icon slot="icon" style="font-size: 20px;" name="alert-circle-outline"></ion-icon>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
-</sl-alert>
+</sh-alert>
 ```
 
 ```html preview
-<sl-alert type="primary" closable>
+<sh-alert type="primary" closable>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
-</sl-alert><br>
+</sh-alert><br>
 
-<sl-alert type="success" closable>
+<sh-alert type="success" closable>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
-</sl-alert><br>
+</sh-alert><br>
 
-<sl-alert type="info" closable>
+<sh-alert type="info" closable>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
-</sl-alert><br>
+</sh-alert><br>
 
-<sl-alert type="warning" closable>
+<sh-alert type="warning" closable>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
-</sl-alert><br>
+</sh-alert><br>
 
-<sl-alert type="danger" closable>
+<sh-alert type="danger" closable>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
-</sl-alert>
+</sh-alert>
 ```
 
 <!-- Auto Generated Below -->
@@ -98,7 +98,7 @@
 
 | Event     | Description                       | Type               |
 | --------- | --------------------------------- | ------------------ |
-| `slClose` | Emitted when the alert is closed. | `CustomEvent<any>` |
+| `shClose` | Emitted when the alert is closed. | `CustomEvent<any>` |
 
 
 ## Slots
