@@ -1,4 +1,4 @@
-@import 'reset';
+@import 'component';
 
 :host {
   --focus-ring-box-shadow: inset 0 0 0 var(--sl-focus-ring-width)
@@ -8,9 +8,9 @@
 }
 
 .sl-tab {
-  font-family: var(--sl-font-sans-serif);
+  font-family: var(--sl-font-sans);
   font-size: var(--sl-form-control-font-size--medium);
-  font-weight: var(--sl-font-weight--bold);
+  font-weight: var(--sl-font-weight-semibold);
   border-radius: 4px;
   color: var(--sl-color-gray-40);
   padding: 16px 20px;

@@ -1,5 +1,5 @@
-@import 'reset';
-@import 'mixins';
+@import 'component';
+@import 'mixins/hide-scrollbar';
 
 :host {
   display: block;

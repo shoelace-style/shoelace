@@ -1,0 +1,50 @@
+:root {
+  // Font families
+  --sl-font-mono: Menlo, Monaco, 'Courier New', monospace;
+  --sl-font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
+    'Helvetica Neue', sans-serif;
+  --sl-font-serif: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
+  --sl-font-heading: var(--sl-font-sans);
+  --sl-font-body: var(--sl-font-sans);
+
+  // Font sizes
+  --sl-font-size-0: 0.75rem;
+  --sl-font-size-1: 0.875rem;
+  --sl-font-size-2: 1rem;
+  --sl-font-size-3: 1.125rem;
+  --sl-font-size-4: 1.25rem;
+  --sl-font-size-5: 1.5rem;
+  --sl-font-size-6: 1.75rem;
+  --sl-font-size-7: 2rem;
+  --sl-font-size-8: 2.25rem;
+  --sl-font-size-9: 0.2625rem;
+  --sl-font-size-10: 3rem;
+  --sl-font-size-11: 3.375rem;
+  --sl-font-size-12: 3.75rem;
+  --sl-font-size-13: 4.25rem;
+  --sl-font-size-14: 4.75rem;
+  --sl-font-size-15: 5.25rem;
+  --sl-font-size-16: 5.75rem;
+
+  // Font weights
+  --sl-font-weight-light: 300;
+  --sl-font-weight-normal: 400;
+  --sl-font-weight-semibold: 500;
+  --sl-font-weight-bold: 600;
+
+  --sl-font-weight-body: var(--sl-font-weight-default);
+
+  // Letter spacings
+  --sl-letter-spacing-dense: -0.015em;
+  --sl-letter-spacing-normal: normal;
+  --sl-letter-spacing-loose: 0.075em;
+
+  // Line heights
+  --sl-line-height-dense: 1.25;
+  --sl-line-height-normal: 1.5;
+  --sl-line-height-loose: 1.75;
+
+  --sl-line-height-body: var(--sl-line-height-default);
+  --sl-line-height-heading: var(--sl-line-height-dense);
+}

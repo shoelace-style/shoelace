@@ -1,4 +1,4 @@
-@import 'reset';
+@import 'component';
 
 :host {
   display: block;
@@ -11,7 +11,7 @@
   background-color: var(--sl-color-white);
   border-left: solid 4px;
   border-radius: 0;
-  font-family: var(--sl-font-sans-serif);
+  font-family: var(--sl-font-sans);
   font-size: 14px;
   font-weight: var(--sl-font-weight-normal);
   line-height: 1.6;
@@ -73,13 +73,13 @@
     align-items: center;
 
     ::slotted(*) {
-      margin-left: var(--sl-spacing--lg);
+      margin-left: var(--sl-spacing-6);
     }
   }
 
   .sl-alert__body {
     flex: 1 1 auto;
-    padding: var(--sl-spacing--md) var(--sl-spacing--lg);
+    padding: var(--sl-spacing-5) var(--sl-spacing-6);
   }
 
   .sl-alert__close {
@@ -91,7 +91,7 @@
     font-size: inherit;
     font-weight: inherit;
     color: currentColor;
-    padding: 0 var(--sl-spacing--lg);
+    padding: 0 var(--sl-spacing-6);
     cursor: pointer;
     -webkit-appearance: none;
     transition: var(--sl-form-control-transition-speed) background-color, var(--sl-form-control-transition-speed) color;

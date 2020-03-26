@@ -1,7 +1,7 @@
 body {
-  font-family: var(--sl-font-sans-serif);
+  font-family: var(--sl-font-sans);
   font-size: 16px;
-  font-weight: var(--sl-font-weight--normal);
+  font-weight: var(--sl-font-weight-normal);
 }
 
 .sidebar h1 {
@@ -102,7 +102,7 @@ body.close .sidebar-toggle {
 .content pre,
 .content pre > code {
   border-radius: 3px;
-  font-family: var(--sl-font-monospace);
+  font-family: var(--sl-font-mono);
   font-size: 0.825rem;
   color: var(--sl-color-gray-20);
   -webkit-font-smoothing: auto;
@@ -117,7 +117,7 @@ body.close .sidebar-toggle {
 
 .content code {
   background-color: transparent;
-  font-family: var(--sl-font-monospace);
+  font-family: var(--sl-font-mono);
   font-size: 0.875em;
   color: var(--sl-color-warning-50);
   padding: 0;

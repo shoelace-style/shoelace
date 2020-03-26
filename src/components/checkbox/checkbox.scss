@@ -1,4 +1,4 @@
-@import 'reset';
+@import 'component';
 
 :host {
   display: inline-block;
@@ -9,7 +9,7 @@
   align-items: center;
   font-family: var(--sl-form-control-font-sans-serif);
   font-size: var(--sl-form-control-font-size--medium);
-  font-weight: var(--sl-font-weight--normal);
+  font-weight: var(--sl-font-weight-normal);
   color: var(--sl-form-control-color);
   vertical-align: middle;
   cursor: pointer;
