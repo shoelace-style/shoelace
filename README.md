@@ -1,6 +1,6 @@
 # Shoelace
 
-👟_A forward-thinking design system for desktop and mobile._
+👟 _A forward-thinking design system for desktop and mobile._
 
 
 Shoelace harnesses the power of [web components](#web-components) to bring you a modern, versatile, open source design system. 

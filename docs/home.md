@@ -1,6 +1,6 @@
 <img class="logo" src="/assets/images/wordmark.svg" alt="Shoelace" data-no-zoom>
 
-👟_A forward-thinking design system for desktop and mobile._
+👟 _A forward-thinking design system for desktop and mobile._
 
 ---
 
