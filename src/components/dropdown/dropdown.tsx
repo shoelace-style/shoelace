@@ -106,18 +106,18 @@ export class Dropdown {
     const slot = this.menu.querySelector('slot');
     return [...slot.assignedElements()].filter(
       (el: any) => el.tagName.toLowerCase() === 'sh-dropdown-item' && !el.disabled
-    ) as [HTMLSlDropdownItemElement];
+    ) as [HTMLShDropdownItemElement];
   }
 
   getSelectedItem() {
     return this.getAllItems().find(i => i.active);
   }
 
-  setSelectedItem(item: HTMLSlDropdownItemElement) {
+  setSelectedItem(item: HTMLShDropdownItemElement) {
     this.getAllItems().map(i => (i.active = i === item));
   }
 
-  scrollItemIntoView(item: HTMLSlDropdownItemElement) {
+  scrollItemIntoView(item: HTMLShDropdownItemElement) {
     if (item) {
       scrollIntoView(item, this.menu);
     }
