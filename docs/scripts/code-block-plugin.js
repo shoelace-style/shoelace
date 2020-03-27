@@ -11,6 +11,7 @@
   }
 
   window.$docsify.plugins.push((hook, vm) => {
+    // Convert code blocks to previews
     hook.afterEach(function(html, next) {
       const domParser = new DOMParser();
       const doc = domParser.parseFromString(html, 'text/html');
@@ -30,6 +31,20 @@
 
           preview.classList.add('code-block__preview');
           preview.innerHTML = code.textContent;
+          preview.innerHTML += `
+            <div class="code-block__resizer">
+               <svg width="8" height="15" viewBox="0 0 8 15" xmlns="http://www.w3.org/2000/svg">
+                <g fill="currentColor" fill-rule="nonzero" transform="translate(8) rotate(90)">
+                  <circle cx="1.5" cy="1.5" r="1.5"></circle>
+                  <circle cx="1.5" cy="6.5" r="1.5"></circle>
+                  <circle cx="7.5" cy="1.5" r="1.5"></circle>
+                  <circle cx="7.5" cy="6.5" r="1.5"></circle>
+                  <circle cx="13.5" cy="1.5" r="1.5"></circle>
+                  <circle cx="13.5" cy="6.5" r="1.5"></circle>
+                </g>
+              </svg>
+            </div>
+          `;
 
           pre.id = preId;
           pre.classList.add('code-block__source');
@@ -51,8 +66,40 @@
 
       next(doc.body.innerHTML);
     });
+
+    // Horizontal resizing
+    hook.doneEach(() => {
+      [...document.querySelectorAll('.code-block__preview')].map(resizeElement => {
+        let startX;
+        let startY;
+        let startWidth;
+        let startHeight;
+
+        const initDrag = event => {
+          startX = event.clientX;
+          startY = event.clientY;
+          startWidth = parseInt(document.defaultView.getComputedStyle(resizeElement).width, 10);
+          startHeight = parseInt(document.defaultView.getComputedStyle(resizeElement).height, 10);
+          document.documentElement.addEventListener('mousemove', doDrag, false);
+          document.documentElement.addEventListener('mouseup', stopDrag, false);
+          event.preventDefault();
+        };
+
+        const doDrag = event => {
+          resizeElement.style.width = startWidth + event.clientX - startX + 'px';
+        };
+
+        const stopDrag = event => {
+          document.documentElement.removeEventListener('mousemove', doDrag, false);
+          document.documentElement.removeEventListener('mouseup', stopDrag, false);
+        };
+
+        resizeElement.querySelector('.code-block__resizer').addEventListener('mousedown', initDrag);
+      }, false);
+    });
   });
 
+  // Expand and collapse code blocks
   document.addEventListener('click', event => {
     if (event.target.classList.contains('code-block__toggle')) {
       const codeBlock = event.target.closest('.code-block');

@@ -168,20 +168,42 @@ body.close .sidebar-toggle {
 /* Code blocks */
 .code-block {
   position: relative;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.025);
+  border-radius: 3px;
   margin-bottom: 1.5rem;
+  background: var(--sh-color-gray-95);
 }
 
 .code-block__preview {
+  position: relative;
   border: solid 1px var(--sh-color-gray-90);
   border-bottom: none;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
-  padding: 1.5rem;
+  background-color: var(--sh-color-white);
+  overflow: auto;
+  min-width: 200px;
+  max-width: 100%;
+  padding: 1.5rem 3rem 1.5rem 1.5rem;
 }
 
 .code-block__preview * {
   vertical-align: middle;
+}
+
+.code-block__resizer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  color: var(--sh-color-gray-70);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 1.5rem;
+  border-left: solid 1px var(--sh-color-gray-90);
+  box-shadow: var(--sh-shadow-1);
+  cursor: ew-resize;
+  transition: 250ms background-color;
 }
 
 pre.code-block__source {
@@ -209,7 +231,7 @@ pre.code-block__source {
   border: solid 1px var(--sh-color-gray-90);
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
-  background: none;
+  background-color: var(--sh-color-white);
   font: inherit;
   color: var(--sh-color-gray-60);
   cursor: pointer;
