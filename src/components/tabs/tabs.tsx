@@ -14,7 +14,7 @@ import { scrollIntoView } from '../../utilities/scroll';
   shadow: true
 })
 export class Tab {
-  activeTab: HTMLSlTabElement;
+  activeTab: HTMLShTabElement;
   activeTabIndicator: HTMLElement;
   body: HTMLElement;
   nav: HTMLElement;
@@ -77,13 +77,13 @@ export class Tab {
       return includeDisabled
         ? el.tagName.toLowerCase() === 'sh-tab'
         : el.tagName.toLowerCase() === 'sh-tab' && !el.disabled;
-    }) as [HTMLSlTabElement];
+    }) as [HTMLShTabElement];
   }
 
   getAllPanels() {
     const slot = this.body.querySelector('slot');
     return [...slot.assignedElements()].filter((el: any) => el.tagName.toLowerCase() === 'sh-tab-panel') as [
-      HTMLSlTabPanelElement
+      HTMLShTabPanelElement
     ];
   }
 
@@ -91,7 +91,7 @@ export class Tab {
     return this.getAllTabs().find(el => el.active);
   }
 
-  setActiveTab(tab: HTMLSlTabElement, emitEvents = true) {
+  setActiveTab(tab: HTMLShTabElement, emitEvents = true) {
     if (tab && tab !== this.activeTab && !tab.disabled) {
       const previousTab = this.activeTab;
       this.activeTab = tab;
