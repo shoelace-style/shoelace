@@ -56,14 +56,12 @@ Use `type="text"` to create text buttons, which share the same size as regular b
 
 ## Block
 
-Use the `block` prop to create a block-level button that spans 100% of its container's width.
+Block buttons can be created by setting the button's width to `100%`.
 
 ```html preview
-<sh-button type="default" block size="small">Small</sh-button>
-<br>
-<sh-button type="default" block size="medium">Medium</sh-button>
-<br>
-<sh-button type="default" block size="large">Large</sh-button>
+<sh-button type="default" size="small" style="width: 100%; margin-bottom: 1rem;">Small</sh-button>
+<sh-button type="default" size="medium" style="width: 100%; margin-bottom: 1rem;">Medium</sh-button>
+<sh-button type="default" size="large" style="width: 100%; margin-bottom: 1rem;">Large</sh-button>
 ```
 
 ## Icons
@@ -130,7 +128,6 @@ Use the `disabled` prop to disable a button.
 
 | Property         | Attribute         | Description                                                                        | Type                                                                               | Default     |
 | ---------------- | ----------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ----------- |
-| `block`          | `block`           | Set to true to draw a full-width button.                                           | `boolean`                                                                          | `false`     |
 | `caret`          | `caret`           | Set to true to draw the button with a caret for use with dropdowns, popovers, etc. | `boolean`                                                                          | `false`     |
 | `circle`         | `circle`          | Set to true to draw a circle button.                                               | `boolean`                                                                          | `false`     |
 | `disabled`       | `disabled`        | Set to true to disable the button.                                                 | `boolean`                                                                          | `false`     |

@@ -22,10 +22,6 @@ export namespace Components {
     }
     interface ShButton {
         /**
-          * Set to true to draw a full-width button.
-         */
-        "block": boolean;
-        /**
           * Set to true to draw the button with a caret for use with dropdowns, popovers, etc.
          */
         "caret": boolean;
@@ -684,10 +680,6 @@ declare namespace LocalJSX {
         "type"?: string;
     }
     interface ShButton {
-        /**
-          * Set to true to draw a full-width button.
-         */
-        "block"?: boolean;
         /**
           * Set to true to draw the button with a caret for use with dropdowns, popovers, etc.
          */

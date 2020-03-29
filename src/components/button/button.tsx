@@ -1,4 +1,4 @@
-import { Component, Host, Method, Prop, h } from '@stencil/core';
+import { Component, Method, Prop, h } from '@stencil/core';
 
 /**
  * @slot prefix - Used to prepend an icon or similar element to the button.
@@ -19,9 +19,6 @@ export class Button {
 
   /** The button's size. */
   @Prop() size: 'small' | 'medium' | 'large' = 'medium';
-
-  /** Set to true to draw a full-width button. */
-  @Prop() block = false;
 
   /** Set to true to draw the button with a caret for use with dropdowns, popovers, etc. */
   @Prop() caret = false;
@@ -55,71 +52,64 @@ export class Button {
 
   render() {
     return (
-      <Host
-        style={{
-          display: this.block ? 'block' : null
+      <button
+        ref={el => (this.button = el)}
+        class={{
+          'sh-button': true,
+
+          // Types
+          'sh-button--default': this.type === 'default',
+          'sh-button--primary': this.type === 'primary',
+          'sh-button--success': this.type === 'success',
+          'sh-button--info': this.type === 'info',
+          'sh-button--warning': this.type === 'warning',
+          'sh-button--danger': this.type === 'danger',
+          'sh-button--text': this.type === 'text',
+
+          // Sizes
+          'sh-button--small': this.size === 'small',
+          'sh-button--medium': this.size === 'medium',
+          'sh-button--large': this.size === 'large',
+
+          // Modifiers
+          'sh-button--caret': this.caret,
+          'sh-button--circle': this.circle,
+          'sh-button--disabled': this.disabled,
+          'sh-button--loading': this.loading,
+          'sh-button--round': this.round
         }}
+        disabled={this.disabled}
+        tabIndex={this.nativeTabindex}
       >
-        <button
-          ref={el => (this.button = el)}
-          class={{
-            'sh-button': true,
-
-            // Types
-            'sh-button--default': this.type === 'default',
-            'sh-button--primary': this.type === 'primary',
-            'sh-button--success': this.type === 'success',
-            'sh-button--info': this.type === 'info',
-            'sh-button--warning': this.type === 'warning',
-            'sh-button--danger': this.type === 'danger',
-            'sh-button--text': this.type === 'text',
-
-            // Sizes
-            'sh-button--small': this.size === 'small',
-            'sh-button--medium': this.size === 'medium',
-            'sh-button--large': this.size === 'large',
-
-            // Modifiers
-            'sh-button--block': this.block,
-            'sh-button--caret': this.caret,
-            'sh-button--circle': this.circle,
-            'sh-button--disabled': this.disabled,
-            'sh-button--loading': this.loading,
-            'sh-button--round': this.round
-          }}
-          disabled={this.disabled}
-          tabIndex={this.nativeTabindex}
-        >
-          <span class="sh-button__prefix">
-            <slot name="prefix" />
-          </span>
-          <span class="sh-button__label">
-            <slot />
-          </span>
-          <span class="sh-button__suffix">
-            <slot name="suffix" />
-          </span>
-          <span class="sh-button__caret">
-            {this.caret ? (
-              <svg
-                viewBox="0 0 16 16"
-                version="1.1"
-                xmlns="http://www.w3.org/2000/svg"
-                xmlnsXlink="http://www.w3.org/1999/xlink"
-              >
-                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
-                  <g stroke="currentColor">
-                    <path d="M4,6.28571429 L7.98653436,10.2722486"></path>
-                    <path d="M12,6.28571429 L8,10.2857143"></path>
-                  </g>
+        <span class="sh-button__prefix">
+          <slot name="prefix" />
+        </span>
+        <span class="sh-button__label">
+          <slot />
+        </span>
+        <span class="sh-button__suffix">
+          <slot name="suffix" />
+        </span>
+        <span class="sh-button__caret">
+          {this.caret ? (
+            <svg
+              viewBox="0 0 16 16"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlnsXlink="http://www.w3.org/1999/xlink"
+            >
+              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+                <g stroke="currentColor">
+                  <path d="M4,6.28571429 L7.98653436,10.2722486"></path>
+                  <path d="M12,6.28571429 L8,10.2857143"></path>
                 </g>
-              </svg>
-            ) : null}
-          </span>
+              </g>
+            </svg>
+          ) : null}
+        </span>
 
-          {this.loading ? <span class="sh-button__spinner" /> : ''}
-        </button>
-      </Host>
+        {this.loading ? <span class="sh-button__spinner" /> : ''}
+      </button>
     );
   }
 }
