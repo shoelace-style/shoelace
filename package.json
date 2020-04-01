@@ -36,7 +36,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@stencil/core": "^1.9.2",
+    "@stencil/core": "^1.11.3",
     "@stencil/sass": "^1.1.1",
     "normalize.css": "^8.0.1",
     "popper.js": "^1.16.0",
