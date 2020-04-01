@@ -134,8 +134,8 @@ Use the `disabled` prop to disable a button.
 | `loading`        | `loading`         | Set to true to draw the button in a loading state.                                 | `boolean`                                                                          | `false`     |
 | `nativeTabindex` | `native-tabindex` | The button's tabindex attribute.                                                   | `number`                                                                           | `undefined` |
 | `round`          | `round`           | Set to true to draw a rounded button.                                              | `boolean`                                                                          | `false`     |
-| `size`           | `size`            | The button's size.                                                                 | `"large" or "medium" or "small"`                                                   | `'medium'`  |
-| `type`           | `type`            | The button's type.                                                                 | `"danger" or "default" or "info" or "primary" or "success" or "text" or "warning"` | `'default'` |
+| `size`           | `size`            | The button's size.                                                                 | `"large" \| "medium" \| "small"`                                                   | `'medium'`  |
+| `type`           | `type`            | The button's type.                                                                 | `"danger" \| "default" \| "info" \| "primary" \| "success" \| "text" \| "warning"` | `'default'` |
 
 
 ## Methods

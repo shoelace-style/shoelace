@@ -71,7 +71,7 @@
 
 | Property    | Attribute   | Description                                                                                                                              | Type                                                         | Default          |
 | ----------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ | ---------------- |
-| `placement` | `placement` | The preferred placement of the dropdown menu. Note that the actual placement may vary as needed to keep the menu inside of the viewport. | `"bottom-end" or "bottom-start" or "top-end" or "top-start"` | `'bottom-start'` |
+| `placement` | `placement` | The preferred placement of the dropdown menu. Note that the actual placement may vary as needed to keep the menu inside of the viewport. | `"bottom-end" \| "bottom-start" \| "top-end" \| "top-start"` | `'bottom-start'` |
 
 
 ## Methods
