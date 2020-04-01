@@ -117,6 +117,10 @@ body.close .sidebar-toggle:focus {
   box-shadow: var(--sh-focus-ring-box-shadow);
 }
 
+.sidebar .search .clear-button svg {
+  transform: scale(0.75);
+}
+
 .sidebar .search a {
   display: block;
 }
