@@ -79,12 +79,7 @@ export class Checkbox {
       >
         <span class="sh-checkbox__control">
           {this.checked ? (
-            <svg
-              viewBox="0 0 16 16"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-              xmlnsXlink="http://www.w3.org/1999/xlink"
-            >
+            <svg viewBox="0 0 16 16">
               <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
                 <g stroke="currentColor" stroke-width="2">
                   <g transform="translate(3.428571, 3.428571)">
@@ -97,12 +92,7 @@ export class Checkbox {
           ) : null}
 
           {!this.checked && this.indeterminate ? (
-            <svg
-              viewBox="0 0 16 16"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-              xmlnsXlink="http://www.w3.org/1999/xlink"
-            >
+            <svg viewBox="0 0 16 16">
               <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
                 <g stroke="currentColor" stroke-width="2">
                   <g transform="translate(2.285714, 6.857143)">

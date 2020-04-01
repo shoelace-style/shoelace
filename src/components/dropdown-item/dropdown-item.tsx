@@ -38,12 +38,7 @@ export class DropdownItem {
         aria-selected={this.active}
       >
         <span class="sh-dropdown-item__check">
-          <svg
-            viewBox="0 0 14 14"
-            version="1.1"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlnsXlink="http://www.w3.org/1999/xlink"
-          >
+          <svg viewBox="0 0 14 14">
             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
               <g stroke="currentColor" stroke-width="2">
                 <path d="M2,8 L5,12"></path>

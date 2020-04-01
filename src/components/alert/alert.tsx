@@ -76,12 +76,7 @@ export class Tab {
 
         {this.closable && (
           <button type="button" class="sh-alert__close" onClick={() => (this.closed = true)}>
-            <svg
-              viewBox="0 0 16 16"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-              xmlnsXlink="http://www.w3.org/1999/xlink"
-            >
+            <svg viewBox="0 0 16 16">
               <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
                 <g stroke="currentColor" stroke-width="2">
                   <path d="M3.5,12.5 L12.3466797,3.65332031"></path>
