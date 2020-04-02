@@ -5,6 +5,12 @@
     throw new Error('Docsify must be loaded before installing this plugin.');
   }
 
+  function runScript(script) {
+    const newScript = document.createElement('script');
+    newScript.appendChild(document.createTextNode(script.innerHTML));
+    script.parentNode.replaceChild(newScript, script);
+  }
+
   function wrap(el, wrapper) {
     el.parentNode.insertBefore(wrapper, el);
     wrapper.appendChild(el);
@@ -65,6 +71,11 @@
       });
 
       next(doc.body.innerHTML);
+    });
+
+    // After the page is done loading, force scripts in previews to execute
+    hook.doneEach(() => {
+      [...document.querySelectorAll('.code-block__preview script')].map(script => runScript(script));
     });
 
     // Horizontal resizing
