@@ -102,7 +102,7 @@ export namespace Components {
         /**
           * The preferred placement of the dropdown menu. Note that the actual placement may vary as needed to keep the menu inside of the viewport.
          */
-        "placement": "bottom-start" | "bottom-end" | "top-start" | "top-end";
+        "placement": "top" | "top-start" | "top-end" | "bottom" | "bottom-start" | "bottom-end" | "right" | "right-start" | "right-end" | "left" | "left-start" | "left-end";
     }
     interface ShDropdownDivider {
     }
@@ -743,7 +743,7 @@ declare namespace LocalJSX {
         /**
           * The preferred placement of the dropdown menu. Note that the actual placement may vary as needed to keep the menu inside of the viewport.
          */
-        "placement"?: "bottom-start" | "bottom-end" | "top-start" | "top-end";
+        "placement"?: "top" | "top-start" | "top-end" | "bottom" | "bottom-start" | "bottom-end" | "right" | "right-start" | "right-end" | "left" | "left-start" | "left-end";
     }
     interface ShDropdownDivider {
     }

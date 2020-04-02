@@ -1,5 +1,5 @@
+import { createPopper } from '@popperjs/core';
 import { Component, Element, Method, Prop, State, Watch, h } from '@stencil/core';
-import PopperJs from 'popper.js';
 
 import { scrollIntoView } from '../../utilities/scroll';
 
@@ -19,7 +19,7 @@ let openDropdowns = [];
 export class Dropdown {
   id = `sh-dropdown-${++id}`;
   menu: HTMLElement;
-  popper: PopperJs;
+  popper: any;
   trigger: HTMLElement;
 
   constructor() {
@@ -41,30 +41,30 @@ export class Dropdown {
    * The preferred placement of the dropdown menu. Note that the actual placement may vary as needed to keep the menu
    * inside of the viewport.
    */
-  @Prop() placement: 'bottom-start' | 'bottom-end' | 'top-start' | 'top-end' = 'bottom-start';
+  @Prop() placement:
+    | 'top'
+    | 'top-start'
+    | 'top-end'
+    | 'bottom'
+    | 'bottom-start'
+    | 'bottom-end'
+    | 'right'
+    | 'right-start'
+    | 'right-end'
+    | 'left'
+    | 'left-start'
+    | 'left-end' = 'bottom-start';
 
   @Watch('placement')
   handlePlacementChange() {
     if (this.popper) {
-      this.popper.options.placement = this.placement;
+      this.popper.setOptions({ placement: this.placement });
+      requestAnimationFrame(() => this.popper.update());
     }
-  }
-
-  componentDidLoad() {
-    this.popper = new PopperJs(this.trigger, this.menu, {
-      placement: this.placement,
-      modifiers: {
-        offset: {
-          offset: '0, 2px'
-        }
-      }
-    });
   }
 
   componentDidUnload() {
-    if (this.popper) {
-      this.popper.destroy();
-    }
+    this.close();
   }
 
   @Method()
@@ -72,7 +72,33 @@ export class Dropdown {
     this.closeOpenDropdowns();
     this.menu.hidden = false;
     this.isOpen = true;
-    this.popper.scheduleUpdate();
+
+    if (this.popper) {
+      this.popper.destroy();
+      this.popper = null;
+    }
+
+    this.popper = createPopper(this.trigger, this.menu, {
+      placement: this.placement,
+      strategy: 'fixed',
+      modifiers: [
+        {
+          name: 'flip',
+          options: {
+            boundary: 'viewport'
+          }
+        },
+        {
+          name: 'offset',
+          options: {
+            offset: [0, 2]
+          }
+        }
+      ]
+    });
+
+    // Reposition the menu after it appears in case a modifier kicks in
+    requestAnimationFrame(() => this.popper.update());
 
     openDropdowns.push(this.host);
 
@@ -211,6 +237,11 @@ export class Dropdown {
     }
 
     this.menu.hidden = !this.isOpen;
+
+    if (!this.isOpen && this.popper) {
+      this.popper.destroy();
+      this.popper = null;
+    }
   }
 
   toggleMenu() {
@@ -242,8 +273,8 @@ export class Dropdown {
         </span>
 
         <div
-          class="sh-dropdown__menu"
           ref={el => (this.menu = el)}
+          class="sh-dropdown__menu"
           role="menu"
           aria-hidden={!this.isOpen}
           aria-labeledby={this.id}
