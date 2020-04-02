@@ -167,20 +167,6 @@ body.close .sidebar-toggle:focus {
   border-bottom-right-radius: 3px;
 }
 
-.content .docsify-copy-code-button .error,
-.content .docsify-copy-code-button .success {
-  border-radius: 50%;
-  transform: scale(0) translateY(-50%) rotate(0deg);
-  opacity: 0;
-  transition: 250ms all ease-in-out;
-}
-
-.content .docsify-copy-code-button.error .error,
-.content .docsify-copy-code-button.success .success {
-  transform: scale(1) translateX(-120%) translateY(-50%) rotate(360deg);
-  opacity: 1;
-}
-
 /* Code */
 .content pre,
 .content pre > code {
