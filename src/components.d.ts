@@ -104,9 +104,9 @@ export namespace Components {
          */
         "placement": "top" | "top-start" | "top-end" | "bottom" | "bottom-start" | "bottom-end" | "right" | "right-start" | "right-end" | "left" | "left-start" | "left-end";
         /**
-          * The positioning strategy used for displaying the menu. If the menu is clipped by a containing element's overflow, setting this to `fixed` usually resolves it. Note that `fixed`` is less performant than `absolute`, so avoid using it when possible.
+          * The positioning strategy used for displaying the menu. If the menu is clipped by a containing element's overflow, setting this to `fixed` usually resolves it. Note that `fixed` is less performant than `absolute`, so avoid using the former when possible.
          */
-        "strategy": "fixed" | "absolute";
+        "position": "fixed" | "absolute";
     }
     interface ShDropdownDivider {
     }
@@ -749,9 +749,9 @@ declare namespace LocalJSX {
          */
         "placement"?: "top" | "top-start" | "top-end" | "bottom" | "bottom-start" | "bottom-end" | "right" | "right-start" | "right-end" | "left" | "left-start" | "left-end";
         /**
-          * The positioning strategy used for displaying the menu. If the menu is clipped by a containing element's overflow, setting this to `fixed` usually resolves it. Note that `fixed`` is less performant than `absolute`, so avoid using it when possible.
+          * The positioning strategy used for displaying the menu. If the menu is clipped by a containing element's overflow, setting this to `fixed` usually resolves it. Note that `fixed` is less performant than `absolute`, so avoid using the former when possible.
          */
-        "strategy"?: "fixed" | "absolute";
+        "position"?: "fixed" | "absolute";
     }
     interface ShDropdownDivider {
     }
