@@ -103,6 +103,10 @@ export namespace Components {
           * The preferred placement of the dropdown menu. Note that the actual placement may vary as needed to keep the menu inside of the viewport.
          */
         "placement": "top" | "top-start" | "top-end" | "bottom" | "bottom-start" | "bottom-end" | "right" | "right-start" | "right-end" | "left" | "left-start" | "left-end";
+        /**
+          * The positioning strategy used for displaying the menu. If the menu is clipped by a containing element's overflow, setting this to `fixed` usually resolves it. Note that `fixed`` is less performant than `absolute`, so avoid using it when possible.
+         */
+        "strategy": "fixed" | "absolute";
     }
     interface ShDropdownDivider {
     }
@@ -744,6 +748,10 @@ declare namespace LocalJSX {
           * The preferred placement of the dropdown menu. Note that the actual placement may vary as needed to keep the menu inside of the viewport.
          */
         "placement"?: "top" | "top-start" | "top-end" | "bottom" | "bottom-start" | "bottom-end" | "right" | "right-start" | "right-end" | "left" | "left-start" | "left-end";
+        /**
+          * The positioning strategy used for displaying the menu. If the menu is clipped by a containing element's overflow, setting this to `fixed` usually resolves it. Note that `fixed`` is less performant than `absolute`, so avoid using it when possible.
+         */
+        "strategy"?: "fixed" | "absolute";
     }
     interface ShDropdownDivider {
     }

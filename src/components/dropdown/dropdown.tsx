@@ -55,10 +55,25 @@ export class Dropdown {
     | 'left-start'
     | 'left-end' = 'bottom-start';
 
+  /**
+   * The positioning strategy used for displaying the menu. If the menu is clipped by a containing element's overflow,
+   * setting this to `fixed` usually resolves it. Note that `fixed`` is less performant than `absolute`, so avoid using
+   * it when possible.
+   */
+  @Prop() strategy: 'fixed' | 'absolute' = 'absolute';
+
   @Watch('placement')
   handlePlacementChange() {
     if (this.popper) {
       this.popper.setOptions({ placement: this.placement });
+      requestAnimationFrame(() => this.popper.update());
+    }
+  }
+
+  @Watch('strategy')
+  handleStrategyChange() {
+    if (this.popper) {
+      this.popper.setOptions({ strategy: this.strategy });
       requestAnimationFrame(() => this.popper.update());
     }
   }
@@ -80,7 +95,7 @@ export class Dropdown {
 
     this.popper = createPopper(this.trigger, this.menu, {
       placement: this.placement,
-      strategy: 'fixed',
+      strategy: this.strategy,
       modifiers: [
         {
           name: 'flip',
