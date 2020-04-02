@@ -1,4 +1,4 @@
-import { createPopper } from '@popperjs/core';
+import { Instance as PopperInstance, createPopper } from '@popperjs/core';
 import { Component, Element, Method, Prop, State, Watch, h } from '@stencil/core';
 
 import { scrollIntoView } from '../../utilities/scroll';
@@ -19,7 +19,7 @@ let openDropdowns = [];
 export class Dropdown {
   id = `sh-dropdown-${++id}`;
   menu: HTMLElement;
-  popper: any;
+  popper: PopperInstance;
   trigger: HTMLElement;
 
   constructor() {
