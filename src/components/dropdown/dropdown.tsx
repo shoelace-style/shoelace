@@ -8,7 +8,7 @@ let openDropdowns = [];
 
 /**
  * @slot trigger - The dropdown's trigger, usually a `<sh-button>` element.
- * @slot - Used to group the dropdown's menu items.
+ * @slot - The dropdown's menu items.
  */
 
 @Component({

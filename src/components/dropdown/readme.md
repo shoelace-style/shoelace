@@ -101,7 +101,7 @@ Type: `Promise<void>`
 
 | Slot        | Description                                              |
 | ----------- | -------------------------------------------------------- |
-|             | Used to group the dropdown's menu items.                 |
+|             | The dropdown's menu items.                               |
 | `"trigger"` | The dropdown's trigger, usually a `<sh-button>` element. |
 
 
