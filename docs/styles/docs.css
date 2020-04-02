@@ -41,7 +41,8 @@ body.close .sidebar {
 body.close .sidebar-toggle {
   top: 1.5rem;
   left: calc(var(--sidebar-width) - 1px);
-  width: 2.5rem;
+  width: 2.4rem;
+  height: 2.4rem;
   bottom: auto;
   border: solid 1px var(--sh-color-gray-90);
   border-top-right-radius: 2px;
@@ -74,8 +75,7 @@ body.close .sidebar-toggle {
 }
 
 .sidebar-toggle .sidebar-toggle-button {
-  margin-top: 3px;
-  margin-left: 1px;
+  margin-top: 1px;
 }
 
 .sidebar-toggle:hover {
