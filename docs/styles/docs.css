@@ -263,7 +263,6 @@ body.close .sidebar-toggle:focus {
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
   background-color: var(--sh-color-white);
-  overflow: auto;
   min-width: 200px;
   max-width: 100%;
   padding: 1.5rem 3rem 1.5rem 1.5rem;
