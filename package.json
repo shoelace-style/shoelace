@@ -28,6 +28,7 @@
     "del": "^5.1.0",
     "gulp": "^4.0.2",
     "recursive-copy": "^2.0.10",
+    "stencil-inline-svg": "^1.0.1",
     "through2": "^3.0.1",
     "tslint": "^5.20.1",
     "tslint-ionic-rules": "0.0.21",

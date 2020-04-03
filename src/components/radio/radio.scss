@@ -15,6 +15,11 @@
   cursor: pointer;
 }
 
+.sl-radio__icon {
+  width: var(--sl-form-control-checkbox-size);
+  height: var(--sl-form-control-checkbox-size);
+}
+
 .sl-radio__control {
   position: relative;
   display: flex;
@@ -37,11 +42,6 @@
     margin: 0;
     pointer-events: none;
     -webkit-appearance: none;
-  }
-
-  svg {
-    width: var(--sl-form-control-checkbox-size);
-    height: var(--sl-form-control-checkbox-size);
   }
 }
 

@@ -1,5 +1,7 @@
 import { Component, Event, EventEmitter, Prop, Watch, h } from '@stencil/core';
 
+import closeIcon from '../../icons/close.svg';
+
 /**
  * @slot - The alert's content.
  * @slot icon - An icon to show in the alert.
@@ -75,19 +77,7 @@ export class Tab {
         </span>
 
         {this.closable && (
-          <button type="button" class="sl-alert__close" onClick={() => (this.closed = true)}>
-            <svg viewBox="0 0 16 16">
-              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
-                <g stroke="currentColor" stroke-width="2">
-                  <path d="M3.5,12.5 L12.3466797,3.65332031"></path>
-                  <path
-                    d="M3.5,12.5 L12.3466797,3.65332031"
-                    transform="translate(8.000000, 8.000000) scale(-1, 1) translate(-8.000000, -8.000000) "
-                  ></path>
-                </g>
-              </g>
-            </svg>
-          </button>
+          <button type="button" class="sl-alert__close" onClick={() => (this.closed = true)} innerHTML={closeIcon} />
         )}
       </div>
     );

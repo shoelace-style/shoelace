@@ -1,5 +1,6 @@
 import { Config } from '@stencil/core';
 import { sass } from '@stencil/sass';
+import { inlineSvg } from 'stencil-inline-svg';
 
 export const config: Config = {
   namespace: 'Shoelace',
@@ -21,6 +22,8 @@ export const config: Config = {
   plugins: [
     sass({
       includePaths: ['./node_modules', './src/styles']
-    })
+    }),
+
+    inlineSvg()
   ]
 };
