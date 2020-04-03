@@ -73,13 +73,13 @@
     align-items: center;
 
     ::slotted(*) {
-      margin-left: var(--sh-spacing-6);
+      margin-left: var(--sh-spacing-5);
     }
   }
 
   .sh-alert__body {
     flex: 1 1 auto;
-    padding: var(--sh-spacing-5) var(--sh-spacing-6);
+    padding: var(--sh-spacing-5);
   }
 
   .sh-alert__close {
@@ -91,7 +91,7 @@
     font-size: inherit;
     font-weight: inherit;
     color: currentColor;
-    padding: 0 var(--sh-spacing-6);
+    padding: 0 var(--sh-spacing-5);
     cursor: pointer;
     -webkit-appearance: none;
     transition: var(--sh-form-control-transition-speed) background-color, var(--sh-form-control-transition-speed) color;

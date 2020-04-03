@@ -1,15 +1,266 @@
 /*! Shoelace */
-@import './tokens/border-radius.scss';
-@import './tokens/color.scss';
-@import './tokens/elevation.scss';
-@import './tokens/spacing.scss';
-@import './tokens/transition.scss';
-@import './tokens/typography.scss';
-@import './tokens/z-index.scss';
 
-// Third-party libs
 @import 'node_modules/normalize.css/normalize';
 @import 'tippy.js/dist/tippy';
+
+:root {
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Color
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  --sh-color-primary-hue: 203;
+  --sh-color-primary-saturation: 100%;
+  --sh-color-primary-text: var(--sh-color-white);
+
+  --sh-color-success-hue: 110;
+  --sh-color-success-saturation: 60%;
+  --sh-color-success-text: var(--sh-color-white);
+
+  --sh-color-info-hue: var(--sh-color-primary-hue);
+  --sh-color-info-saturation: 10%;
+  --sh-color-info-text: var(--sh-color-white);
+
+  --sh-color-warning-hue: 36;
+  --sh-color-warning-saturation: 90%;
+  --sh-color-warning-text: var(--sh-color-white);
+
+  --sh-color-danger-hue: 0;
+  --sh-color-danger-saturation: 80%;
+  --sh-color-danger-text: var(--sh-color-white);
+
+  --sh-color-gray-hue: var(--sh-color-primary-hue);
+  --sh-color-gray-saturation: 10%;
+  --sh-color-gray-text: var(--sh-color-white);
+
+  --sh-color-white: white;
+  --sh-color-black: black;
+
+  --sh-color-primary-05: hsl(var(--sh-color-primary-hue), var(--sh-color-primary-saturation), 5%);
+  --sh-color-primary-10: hsl(var(--sh-color-primary-hue), var(--sh-color-primary-saturation), 10%);
+  --sh-color-primary-15: hsl(var(--sh-color-primary-hue), var(--sh-color-primary-saturation), 15%);
+  --sh-color-primary-20: hsl(var(--sh-color-primary-hue), var(--sh-color-primary-saturation), 20%);
+  --sh-color-primary-25: hsl(var(--sh-color-primary-hue), var(--sh-color-primary-saturation), 25%);
+  --sh-color-primary-30: hsl(var(--sh-color-primary-hue), var(--sh-color-primary-saturation), 30%);
+  --sh-color-primary-35: hsl(var(--sh-color-primary-hue), var(--sh-color-primary-saturation), 35%);
+  --sh-color-primary-40: hsl(var(--sh-color-primary-hue), var(--sh-color-primary-saturation), 40%);
+  --sh-color-primary-45: hsl(var(--sh-color-primary-hue), var(--sh-color-primary-saturation), 45%);
+  --sh-color-primary-50: hsl(var(--sh-color-primary-hue), var(--sh-color-primary-saturation), 50%);
+  --sh-color-primary-55: hsl(var(--sh-color-primary-hue), var(--sh-color-primary-saturation), 55%);
+  --sh-color-primary-60: hsl(var(--sh-color-primary-hue), var(--sh-color-primary-saturation), 60%);
+  --sh-color-primary-65: hsl(var(--sh-color-primary-hue), var(--sh-color-primary-saturation), 65%);
+  --sh-color-primary-70: hsl(var(--sh-color-primary-hue), var(--sh-color-primary-saturation), 70%);
+  --sh-color-primary-75: hsl(var(--sh-color-primary-hue), var(--sh-color-primary-saturation), 75%);
+  --sh-color-primary-80: hsl(var(--sh-color-primary-hue), var(--sh-color-primary-saturation), 80%);
+  --sh-color-primary-85: hsl(var(--sh-color-primary-hue), var(--sh-color-primary-saturation), 85%);
+  --sh-color-primary-90: hsl(var(--sh-color-primary-hue), var(--sh-color-primary-saturation), 90%);
+  --sh-color-primary-95: hsl(var(--sh-color-primary-hue), var(--sh-color-primary-saturation), 95%);
+
+  --sh-color-success-05: hsl(var(--sh-color-success-hue), var(--sh-color-success-saturation), 5%);
+  --sh-color-success-10: hsl(var(--sh-color-success-hue), var(--sh-color-success-saturation), 10%);
+  --sh-color-success-15: hsl(var(--sh-color-success-hue), var(--sh-color-success-saturation), 15%);
+  --sh-color-success-20: hsl(var(--sh-color-success-hue), var(--sh-color-success-saturation), 20%);
+  --sh-color-success-25: hsl(var(--sh-color-success-hue), var(--sh-color-success-saturation), 25%);
+  --sh-color-success-30: hsl(var(--sh-color-success-hue), var(--sh-color-success-saturation), 30%);
+  --sh-color-success-35: hsl(var(--sh-color-success-hue), var(--sh-color-success-saturation), 35%);
+  --sh-color-success-40: hsl(var(--sh-color-success-hue), var(--sh-color-success-saturation), 40%);
+  --sh-color-success-45: hsl(var(--sh-color-success-hue), var(--sh-color-success-saturation), 45%);
+  --sh-color-success-50: hsl(var(--sh-color-success-hue), var(--sh-color-success-saturation), 50%);
+  --sh-color-success-55: hsl(var(--sh-color-success-hue), var(--sh-color-success-saturation), 55%);
+  --sh-color-success-60: hsl(var(--sh-color-success-hue), var(--sh-color-success-saturation), 60%);
+  --sh-color-success-65: hsl(var(--sh-color-success-hue), var(--sh-color-success-saturation), 65%);
+  --sh-color-success-70: hsl(var(--sh-color-success-hue), var(--sh-color-success-saturation), 70%);
+  --sh-color-success-75: hsl(var(--sh-color-success-hue), var(--sh-color-success-saturation), 75%);
+  --sh-color-success-80: hsl(var(--sh-color-success-hue), var(--sh-color-success-saturation), 80%);
+  --sh-color-success-85: hsl(var(--sh-color-success-hue), var(--sh-color-success-saturation), 85%);
+  --sh-color-success-90: hsl(var(--sh-color-success-hue), var(--sh-color-success-saturation), 90%);
+  --sh-color-success-95: hsl(var(--sh-color-success-hue), var(--sh-color-success-saturation), 95%);
+
+  --sh-color-info-05: hsl(var(--sh-color-info-hue), var(--sh-color-info-saturation), 5%);
+  --sh-color-info-10: hsl(var(--sh-color-info-hue), var(--sh-color-info-saturation), 10%);
+  --sh-color-info-15: hsl(var(--sh-color-info-hue), var(--sh-color-info-saturation), 15%);
+  --sh-color-info-20: hsl(var(--sh-color-info-hue), var(--sh-color-info-saturation), 20%);
+  --sh-color-info-25: hsl(var(--sh-color-info-hue), var(--sh-color-info-saturation), 25%);
+  --sh-color-info-30: hsl(var(--sh-color-info-hue), var(--sh-color-info-saturation), 30%);
+  --sh-color-info-35: hsl(var(--sh-color-info-hue), var(--sh-color-info-saturation), 35%);
+  --sh-color-info-40: hsl(var(--sh-color-info-hue), var(--sh-color-info-saturation), 40%);
+  --sh-color-info-45: hsl(var(--sh-color-info-hue), var(--sh-color-info-saturation), 45%);
+  --sh-color-info-50: hsl(var(--sh-color-info-hue), var(--sh-color-info-saturation), 50%);
+  --sh-color-info-55: hsl(var(--sh-color-info-hue), var(--sh-color-info-saturation), 55%);
+  --sh-color-info-60: hsl(var(--sh-color-info-hue), var(--sh-color-info-saturation), 60%);
+  --sh-color-info-65: hsl(var(--sh-color-info-hue), var(--sh-color-info-saturation), 65%);
+  --sh-color-info-70: hsl(var(--sh-color-info-hue), var(--sh-color-info-saturation), 70%);
+  --sh-color-info-75: hsl(var(--sh-color-info-hue), var(--sh-color-info-saturation), 75%);
+  --sh-color-info-80: hsl(var(--sh-color-info-hue), var(--sh-color-info-saturation), 80%);
+  --sh-color-info-85: hsl(var(--sh-color-info-hue), var(--sh-color-info-saturation), 85%);
+  --sh-color-info-90: hsl(var(--sh-color-info-hue), var(--sh-color-info-saturation), 90%);
+  --sh-color-info-95: hsl(var(--sh-color-info-hue), var(--sh-color-info-saturation), 95%);
+
+  --sh-color-warning-05: hsl(var(--sh-color-warning-hue), var(--sh-color-warning-saturation), 5%);
+  --sh-color-warning-10: hsl(var(--sh-color-warning-hue), var(--sh-color-warning-saturation), 10%);
+  --sh-color-warning-15: hsl(var(--sh-color-warning-hue), var(--sh-color-warning-saturation), 15%);
+  --sh-color-warning-20: hsl(var(--sh-color-warning-hue), var(--sh-color-warning-saturation), 20%);
+  --sh-color-warning-25: hsl(var(--sh-color-warning-hue), var(--sh-color-warning-saturation), 25%);
+  --sh-color-warning-30: hsl(var(--sh-color-warning-hue), var(--sh-color-warning-saturation), 30%);
+  --sh-color-warning-35: hsl(var(--sh-color-warning-hue), var(--sh-color-warning-saturation), 35%);
+  --sh-color-warning-40: hsl(var(--sh-color-warning-hue), var(--sh-color-warning-saturation), 40%);
+  --sh-color-warning-45: hsl(var(--sh-color-warning-hue), var(--sh-color-warning-saturation), 45%);
+  --sh-color-warning-50: hsl(var(--sh-color-warning-hue), var(--sh-color-warning-saturation), 50%);
+  --sh-color-warning-55: hsl(var(--sh-color-warning-hue), var(--sh-color-warning-saturation), 55%);
+  --sh-color-warning-60: hsl(var(--sh-color-warning-hue), var(--sh-color-warning-saturation), 60%);
+  --sh-color-warning-65: hsl(var(--sh-color-warning-hue), var(--sh-color-warning-saturation), 65%);
+  --sh-color-warning-70: hsl(var(--sh-color-warning-hue), var(--sh-color-warning-saturation), 70%);
+  --sh-color-warning-75: hsl(var(--sh-color-warning-hue), var(--sh-color-warning-saturation), 75%);
+  --sh-color-warning-80: hsl(var(--sh-color-warning-hue), var(--sh-color-warning-saturation), 80%);
+  --sh-color-warning-85: hsl(var(--sh-color-warning-hue), var(--sh-color-warning-saturation), 85%);
+  --sh-color-warning-90: hsl(var(--sh-color-warning-hue), var(--sh-color-warning-saturation), 90%);
+  --sh-color-warning-95: hsl(var(--sh-color-warning-hue), var(--sh-color-warning-saturation), 95%);
+
+  --sh-color-danger-05: hsl(var(--sh-color-danger-hue), var(--sh-color-danger-saturation), 5%);
+  --sh-color-danger-10: hsl(var(--sh-color-danger-hue), var(--sh-color-danger-saturation), 10%);
+  --sh-color-danger-15: hsl(var(--sh-color-danger-hue), var(--sh-color-danger-saturation), 15%);
+  --sh-color-danger-20: hsl(var(--sh-color-danger-hue), var(--sh-color-danger-saturation), 20%);
+  --sh-color-danger-25: hsl(var(--sh-color-danger-hue), var(--sh-color-danger-saturation), 25%);
+  --sh-color-danger-30: hsl(var(--sh-color-danger-hue), var(--sh-color-danger-saturation), 30%);
+  --sh-color-danger-35: hsl(var(--sh-color-danger-hue), var(--sh-color-danger-saturation), 35%);
+  --sh-color-danger-40: hsl(var(--sh-color-danger-hue), var(--sh-color-danger-saturation), 40%);
+  --sh-color-danger-45: hsl(var(--sh-color-danger-hue), var(--sh-color-danger-saturation), 45%);
+  --sh-color-danger-50: hsl(var(--sh-color-danger-hue), var(--sh-color-danger-saturation), 50%);
+  --sh-color-danger-55: hsl(var(--sh-color-danger-hue), var(--sh-color-danger-saturation), 55%);
+  --sh-color-danger-60: hsl(var(--sh-color-danger-hue), var(--sh-color-danger-saturation), 60%);
+  --sh-color-danger-65: hsl(var(--sh-color-danger-hue), var(--sh-color-danger-saturation), 65%);
+  --sh-color-danger-70: hsl(var(--sh-color-danger-hue), var(--sh-color-danger-saturation), 70%);
+  --sh-color-danger-75: hsl(var(--sh-color-danger-hue), var(--sh-color-danger-saturation), 75%);
+  --sh-color-danger-80: hsl(var(--sh-color-danger-hue), var(--sh-color-danger-saturation), 80%);
+  --sh-color-danger-85: hsl(var(--sh-color-danger-hue), var(--sh-color-danger-saturation), 85%);
+  --sh-color-danger-90: hsl(var(--sh-color-danger-hue), var(--sh-color-danger-saturation), 90%);
+  --sh-color-danger-95: hsl(var(--sh-color-danger-hue), var(--sh-color-danger-saturation), 95%);
+
+  --sh-color-gray-05: hsl(var(--sh-color-gray-hue), var(--sh-color-gray-saturation), 5%);
+  --sh-color-gray-10: hsl(var(--sh-color-gray-hue), var(--sh-color-gray-saturation), 10%);
+  --sh-color-gray-15: hsl(var(--sh-color-gray-hue), var(--sh-color-gray-saturation), 15%);
+  --sh-color-gray-20: hsl(var(--sh-color-gray-hue), var(--sh-color-gray-saturation), 20%);
+  --sh-color-gray-25: hsl(var(--sh-color-gray-hue), var(--sh-color-gray-saturation), 25%);
+  --sh-color-gray-30: hsl(var(--sh-color-gray-hue), var(--sh-color-gray-saturation), 30%);
+  --sh-color-gray-35: hsl(var(--sh-color-gray-hue), var(--sh-color-gray-saturation), 35%);
+  --sh-color-gray-40: hsl(var(--sh-color-gray-hue), var(--sh-color-gray-saturation), 40%);
+  --sh-color-gray-45: hsl(var(--sh-color-gray-hue), var(--sh-color-gray-saturation), 45%);
+  --sh-color-gray-50: hsl(var(--sh-color-gray-hue), var(--sh-color-gray-saturation), 50%);
+  --sh-color-gray-55: hsl(var(--sh-color-gray-hue), var(--sh-color-gray-saturation), 55%);
+  --sh-color-gray-60: hsl(var(--sh-color-gray-hue), var(--sh-color-gray-saturation), 60%);
+  --sh-color-gray-65: hsl(var(--sh-color-gray-hue), var(--sh-color-gray-saturation), 65%);
+  --sh-color-gray-70: hsl(var(--sh-color-gray-hue), var(--sh-color-gray-saturation), 70%);
+  --sh-color-gray-75: hsl(var(--sh-color-gray-hue), var(--sh-color-gray-saturation), 75%);
+  --sh-color-gray-80: hsl(var(--sh-color-gray-hue), var(--sh-color-gray-saturation), 80%);
+  --sh-color-gray-85: hsl(var(--sh-color-gray-hue), var(--sh-color-gray-saturation), 85%);
+  --sh-color-gray-90: hsl(var(--sh-color-gray-hue), var(--sh-color-gray-saturation), 90%);
+  --sh-color-gray-95: hsl(var(--sh-color-gray-hue), var(--sh-color-gray-saturation), 95%);
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Border Radius
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  --sh-border-radius-sm: 0.125rem; // 2px
+  --sh-border-radius-md: 0.25rem; // 4px
+  --sh-border-radius-lg: 0.5rem; // 8px
+  --sh-border-radius-xl: 1rem; // 16px
+
+  --sh-border-radius-circle: 50%;
+  --sh-border-radius-pill: 9999px;
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Elevation
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  --sh-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
+  --sh-shadow-md: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --sh-shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --sh-shadow-xl: 0 8px 16px rgba(0, 0, 0, 0.1);
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Spacing
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  --sh-spacing-0: 0; // 0px
+  --sh-spacing-1: 0.25rem; // 4px
+  --sh-spacing-2: 0.5rem; // 8px
+  --sh-spacing-3: 0.75rem; // 12px
+  --sh-spacing-4: 1rem; // 16px
+  --sh-spacing-5: 1.25rem; // 20px
+  --sh-spacing-6: 1.5rem; // 24px
+  --sh-spacing-7: 2rem; // 32px
+  --sh-spacing-8: 2.5rem; // 40px
+  --sh-spacing-9: 3rem; // 48px
+  --sh-spacing-10: 3.5rem; // 56px
+  --sh-spacing-11: 4rem; // 64px
+  --sh-spacing-12: 4.5rem; // 72px
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Transition
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  --sh-transition-slower: 1000ms;
+  --sh-transition-slow: 500ms;
+  --sh-transition-default: 250ms;
+  --sh-transition-fast: 150ms;
+  --sh-transition-faster: 50ms;
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Typography
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  // Fonts
+  --sh-font-mono: Menlo, Monaco, 'Courier New', monospace;
+  --sh-font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
+    'Helvetica Neue', sans-serif;
+  --sh-font-serif: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
+  --sh-font-heading: var(--sh-font-sans);
+  --sh-font-body: var(--sh-font-sans);
+
+  // Font sizes
+  --sh-font-size-1: 0.75rem; // 12px
+  --sh-font-size-2: 0.875rem; // 14px
+  --sh-font-size-3: 1rem; // 16px
+  --sh-font-size-4: 1.125rem; // 18px
+  --sh-font-size-5: 1.25rem; // 20px
+  --sh-font-size-6: 1.5rem; // 24px
+  --sh-font-size-7: 1.75rem; // 28px
+  --sh-font-size-8: 2.25rem; // 36px
+  --sh-font-size-9: 3rem; // 48px
+  --sh-font-size-10: 3.5rem; // 56px
+  --sh-font-size-11: 4rem; // 64px
+  --sh-font-size-12: 4.5rem; // 72px
+
+  // Font weights
+  --sh-font-weight-light: 300;
+  --sh-font-weight-normal: 400;
+  --sh-font-weight-semibold: 500;
+  --sh-font-weight-bold: 600;
+
+  --sh-font-weight-body: var(--sh-font-weight-default);
+
+  // Letter spacings
+  --sh-letter-spacing-dense: -0.015em;
+  --sh-letter-spacing-normal: normal;
+  --sh-letter-spacing-loose: 0.075em;
+
+  // Line heights
+  --sh-line-height-dense: 1.25;
+  --sh-line-height-normal: 1.5;
+  --sh-line-height-loose: 1.75;
+
+  --sh-line-height-body: var(--sh-line-height-default);
+  --sh-line-height-heading: var(--sh-line-height-dense);
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Z-index
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  --sh-z-index-default: 1;
+  --sh-z-index-panel: 80;
+  --sh-z-index-notification: 90;
+  --sh-z-index-dialog: 100;
+}
 
 //
 // TODO:
@@ -93,6 +344,16 @@ body {
   font-family: var(--sh-font-body);
   font-weight: var(--sh-font-weight-body);
   font-size: 16px;
+}
+
+a {
+  color: var(--sh-color-primary-50);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--sh-color-primary-60);
+  text-decoration: underline;
 }
 
 // Customize tooltips using our own tokens
