@@ -154,7 +154,7 @@ body.close .sidebar-toggle:focus {
 
 .content p.tip,
 .content tr:nth-child(2n) {
-  background-color: hsl(var(--sh-color-gray-hue), var(--sh-color-gray-saturation), 97%);
+  background-color: hsl(var(--sh-color-gray-hue), var(--sh-color-gray-sat), 97%);
 }
 
 .content .docsify-copy-code-button {
@@ -308,11 +308,11 @@ pre.code-block__source {
 }
 
 .code-block__toggle:hover {
-  background-color: hsl(var(--sh-color-gray-hue), var(--sh-color-gray-saturation), 98%);
+  background-color: hsl(var(--sh-color-gray-hue), var(--sh-color-gray-sat), 98%);
 }
 
 .code-block__toggle:active {
-  background-color: hsl(var(--sh-color-gray-hue), var(--sh-color-gray-saturation), 96%);
+  background-color: hsl(var(--sh-color-gray-hue), var(--sh-color-gray-sat), 96%);
 }
 
 .code-block__toggle:focus {

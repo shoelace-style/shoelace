@@ -2,7 +2,7 @@
 
 :host {
   --focus-ring-box-shadow: inset 0 0 0 var(--sh-focus-ring-width)
-    hsla(var(--sh-color-primary-hue), var(--sh-color-primary-saturation), 50%, var(--sh-focus-ring-alpha));
+    hsla(var(--sh-color-primary-hue), var(--sh-color-primary-sat), 50%, var(--sh-focus-ring-alpha));
 
   display: inline-block;
 }

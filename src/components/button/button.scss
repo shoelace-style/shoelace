@@ -73,7 +73,7 @@
       $border-color--focus: var(--sh-color-primary-70),
       $color--focus: var(--sh-color-primary-40),
       $box-shadow--focus: 0 0 0 var(--sh-focus-ring-width)
-        hsla(var(--sh-color-primary-hue), var(--sh-color-primary-saturation), 50%, var(--sh-focus-ring-alpha)),
+        hsla(var(--sh-color-primary-hue), var(--sh-color-primary-sat), 50%, var(--sh-focus-ring-alpha)),
       $background-color--active: var(--sh-color-primary-95),
       $border-color--active: var(--sh-color-primary-50),
       $color--active: var(--sh-color-primary-30)
@@ -92,7 +92,7 @@
       $border-color--focus: var(--sh-color-primary-55),
       $color--focus: var(--sh-color-primary-text),
       $box-shadow--focus: 0 0 0 var(--sh-focus-ring-width)
-        hsla(var(--sh-color-primary-hue), var(--sh-color-primary-saturation), 50%, var(--sh-focus-ring-alpha)),
+        hsla(var(--sh-color-primary-hue), var(--sh-color-primary-sat), 50%, var(--sh-focus-ring-alpha)),
       $background-color--active: var(--sh-color-primary-45),
       $border-color--active: var(--sh-color-primary-45),
       $color--active: var(--sh-color-primary-text)
@@ -111,7 +111,7 @@
       $border-color--focus: var(--sh-color-success-55),
       $color--focus: var(--sh-color-success-text),
       $box-shadow--focus: 0 0 0 var(--sh-focus-ring-width)
-        hsla(var(--sh-color-success-hue), var(--sh-color-success-saturation), 50%, var(--sh-focus-ring-alpha)),
+        hsla(var(--sh-color-success-hue), var(--sh-color-success-sat), 50%, var(--sh-focus-ring-alpha)),
       $background-color--active: var(--sh-color-success-45),
       $border-color--active: var(--sh-color-success-45),
       $color--active: var(--sh-color-success-text)
@@ -130,7 +130,7 @@
       $border-color--focus: var(--sh-color-info-55),
       $color--focus: var(--sh-color-info-text),
       $box-shadow--focus: 0 0 0 var(--sh-focus-ring-width)
-        hsla(var(--sh-color-info-hue), var(--sh-color-info-saturation), 50%, var(--sh-focus-ring-alpha)),
+        hsla(var(--sh-color-info-hue), var(--sh-color-info-sat), 50%, var(--sh-focus-ring-alpha)),
       $background-color--active: var(--sh-color-info-45),
       $border-color--active: var(--sh-color-info-45),
       $color--active: var(--sh-color-info-text)
@@ -149,7 +149,7 @@
       $border-color--focus: var(--sh-color-warning-55),
       $color--focus: var(--sh-color-warning-text),
       $box-shadow--focus: 0 0 0 var(--sh-focus-ring-width)
-        hsla(var(--sh-color-warning-hue), var(--sh-color-warning-saturation), 50%, var(--sh-focus-ring-alpha)),
+        hsla(var(--sh-color-warning-hue), var(--sh-color-warning-sat), 50%, var(--sh-focus-ring-alpha)),
       $background-color--active: var(--sh-color-warning-45),
       $border-color--active: var(--sh-color-warning-45),
       $color--active: var(--sh-color-warning-text)
@@ -168,7 +168,7 @@
       $border-color--focus: var(--sh-color-danger-55),
       $color--focus: var(--sh-color-danger-text),
       $box-shadow--focus: 0 0 0 var(--sh-focus-ring-width)
-        hsla(var(--sh-color-danger-hue), var(--sh-color-danger-saturation), 50%, var(--sh-focus-ring-alpha)),
+        hsla(var(--sh-color-danger-hue), var(--sh-color-danger-sat), 50%, var(--sh-focus-ring-alpha)),
       $background-color--active: var(--sh-color-danger-45),
       $border-color--active: var(--sh-color-danger-45),
       $color--active: var(--sh-color-danger-text)
@@ -196,7 +196,7 @@
     border-color: transparent;
     color: var(--sh-color-primary-60);
     box-shadow: 0 0 0 var(--sh-focus-ring-width)
-      hsla(var(--sh-color-primary-hue), var(--sh-color-primary-saturation), 50%, var(--sh-focus-ring-alpha));
+      hsla(var(--sh-color-primary-hue), var(--sh-color-primary-sat), 50%, var(--sh-focus-ring-alpha));
   }
 
   &:active:not(:disabled) {
