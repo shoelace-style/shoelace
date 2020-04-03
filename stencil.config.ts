@@ -4,6 +4,14 @@ import { inlineSvg } from 'stencil-inline-svg';
 
 export const config: Config = {
   namespace: 'Shoelace',
+  buildEs5: false,
+  extras: {
+    cssVarsShim: false,
+    dynamicImportShim: false,
+    safari10: false,
+    scriptDataOpts: false,
+    shadowDomShim: false
+  },
   globalStyle: 'src/styles/shoelace.scss',
   outputTargets: [
     {
