@@ -159,10 +159,10 @@
   // Border Radius
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  --sh-border-radius-sm: 0.125rem; // 2px
-  --sh-border-radius-md: 0.25rem; // 4px
-  --sh-border-radius-lg: 0.5rem; // 8px
-  --sh-border-radius-xl: 1rem; // 16px
+  --sh-border-radius-small: 0.125rem; // 2px
+  --sh-border-radius-medium: 0.25rem; // 4px
+  --sh-border-radius-large: 0.5rem; // 8px
+  --sh-border-radius-xlarge: 1rem; // 16px
 
   --sh-border-radius-circle: 50%;
   --sh-border-radius-pill: 9999px;
@@ -171,10 +171,10 @@
   // Elevation
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  --sh-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
-  --sh-shadow-md: 0 2px 4px rgba(0, 0, 0, 0.1);
-  --sh-shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.1);
-  --sh-shadow-xl: 0 8px 16px rgba(0, 0, 0, 0.1);
+  --sh-shadow-small: 0 1px 2px rgba(0, 0, 0, 0.1);
+  --sh-shadow-medium: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --sh-shadow-large: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --sh-shadow-xlarge: 0 8px 16px rgba(0, 0, 0, 0.1);
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // Spacing
