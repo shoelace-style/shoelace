@@ -8,25 +8,25 @@
   display: block;
 }
 
-.sh-textarea {
+.sl-textarea {
   display: flex;
   align-items: center;
   position: relative;
-  font-family: var(--sh-form-control-font-family);
-  font-weight: var(--sh-form-control-font-weight);
-  background-color: var(--sh-form-control-background-color);
-  border: solid var(--sh-form-control-border-width) var(--sh-form-control-border-color);
+  font-family: var(--sl-form-control-font-family);
+  font-weight: var(--sl-form-control-font-weight);
+  background-color: var(--sl-form-control-background-color);
+  border: solid var(--sl-form-control-border-width) var(--sl-form-control-border-color);
   vertical-align: middle;
-  transition: var(--sh-form-control-transition-speed) color, var(--sh-form-control-transition-speed) border,
-    var(--sh-form-control-transition-speed) box-shadow;
+  transition: var(--sl-form-control-transition-speed) color, var(--sl-form-control-transition-speed) border,
+    var(--sl-form-control-transition-speed) box-shadow;
 
-  .sh-textarea__control {
+  .sl-textarea__control {
     flex: 1 1 auto;
     font-family: inherit;
     font-size: inherit;
     font-weight: inherit;
     line-height: 1.4;
-    color: var(--sh-form-control-color);
+    color: var(--sl-form-control-color);
     border: none;
     background: none;
     -webkit-appearance: none;
@@ -39,7 +39,7 @@
     }
 
     &::placeholder {
-      color: var(--sh-form-control-placeholder-color);
+      color: var(--sl-form-control-placeholder-color);
       user-select: none;
     }
 
@@ -48,36 +48,36 @@
     }
   }
 
-  &:hover:not(.sh-textarea--disabled) {
-    background-color: var(--sh-form-control-background-color--hover);
-    border-color: var(--sh-form-control-border-color--hover);
-    color: var(--sh-form-control-color--hover);
+  &:hover:not(.sl-textarea--disabled) {
+    background-color: var(--sl-form-control-background-color--hover);
+    border-color: var(--sl-form-control-border-color--hover);
+    color: var(--sl-form-control-color--hover);
 
-    .sh-textarea__control {
+    .sl-textarea__control {
       &::placeholder {
-        color: var(--sh-form-control-placeholder-color--hover);
+        color: var(--sl-form-control-placeholder-color--hover);
       }
     }
   }
 
-  &.sh-textarea--focused:not(.sh-textarea--disabled) {
-    background-color: var(--sh-form-control-background-color--focus);
-    border-color: var(--sh-form-control-border-color--focus);
-    box-shadow: var(--sh-focus-ring-box-shadow);
-    color: var(--sh-form-control-color--focus);
+  &.sl-textarea--focused:not(.sl-textarea--disabled) {
+    background-color: var(--sl-form-control-background-color--focus);
+    border-color: var(--sl-form-control-border-color--focus);
+    box-shadow: var(--sl-focus-ring-box-shadow);
+    color: var(--sl-form-control-color--focus);
   }
 
-  &.sh-textarea--disabled {
-    background-color: var(--sh-form-control-background-color--disabled);
-    border-color: var(--sh-form-control-border-color--disabled);
-    color: var(--sh-form-control-color--disabled);
+  &.sl-textarea--disabled {
+    background-color: var(--sl-form-control-background-color--disabled);
+    border-color: var(--sl-form-control-border-color--disabled);
+    color: var(--sl-form-control-color--disabled);
     opacity: 0.5;
 
-    .sh-textarea__control {
+    .sl-textarea__control {
       cursor: not-allowed;
 
       &::placeholder {
-        color: var(--sh-form-control-placeholder-color--disabled);
+        color: var(--sl-form-control-placeholder-color--disabled);
       }
     }
   }
@@ -87,30 +87,30 @@
 // Size modifiers
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sh-textarea--small {
-  border-radius: var(--sh-form-control-border-radius--small);
-  font-size: var(--sh-form-control-font-size--small);
+.sl-textarea--small {
+  border-radius: var(--sl-form-control-border-radius--small);
+  font-size: var(--sl-form-control-font-size--small);
 
-  .sh-textarea__control {
-    padding: 0.5em var(--sh-form-control-padding-x--small);
+  .sl-textarea__control {
+    padding: 0.5em var(--sl-form-control-padding-x--small);
   }
 }
 
-.sh-textarea--medium {
-  border-radius: var(--sh-form-control-border-radius--medium);
-  font-size: var(--sh-form-control-font-size--medium);
+.sl-textarea--medium {
+  border-radius: var(--sl-form-control-border-radius--medium);
+  font-size: var(--sl-form-control-font-size--medium);
 
-  .sh-textarea__control {
-    padding: 0.5em var(--sh-form-control-padding-x--medium);
+  .sl-textarea__control {
+    padding: 0.5em var(--sl-form-control-padding-x--medium);
   }
 }
 
-.sh-textarea--large {
-  border-radius: var(--sh-form-control-border-radius--large);
-  font-size: var(--sh-form-control-font-size--large);
+.sl-textarea--large {
+  border-radius: var(--sl-form-control-border-radius--large);
+  font-size: var(--sl-form-control-font-size--large);
 
-  .sh-textarea__control {
-    padding: 0.5em var(--sh-form-control-padding-x--large);
+  .sl-textarea__control {
+    padding: 0.5em var(--sl-form-control-padding-x--large);
   }
 }
 
@@ -118,15 +118,15 @@
 // Resize types
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sh-textarea--resize-none .sh-textarea__control {
+.sl-textarea--resize-none .sl-textarea__control {
   resize: none;
 }
 
-.sh-textarea--resize-vertical .sh-textarea__control {
+.sl-textarea--resize-vertical .sl-textarea__control {
   resize: vertical;
 }
 
-.sh-textarea--resize-auto .sh-textarea__control {
+.sl-textarea--resize-auto .sl-textarea__control {
   height: auto;
   resize: none;
 }

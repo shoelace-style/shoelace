@@ -5,17 +5,17 @@ let id = 0;
 /** @slot - The tab's label. */
 
 @Component({
-  tag: 'sh-tab',
+  tag: 'sl-tab',
   styleUrl: 'tab.scss',
   shadow: true
 })
 export class Tab {
-  id = `sh-tab-${++id}`;
+  id = `sl-tab-${++id}`;
   tab: HTMLElement;
 
   @Element() host: HTMLElement;
 
-  /** The name of the tab panel the tab will be synced to. The panel must exist in the same `<sh-tabs>` element. */
+  /** The name of the tab panel the tab will be synced to. The panel must exist in the same `<sl-tabs>` element. */
   @Prop() panel = '';
 
   /** Set to true to draw the tab in an active state. */
@@ -43,11 +43,11 @@ export class Tab {
         <div
           ref={el => (this.tab = el)}
           class={{
-            'sh-tab': true,
+            'sl-tab': true,
 
             // States
-            'sh-tab--active': this.active,
-            'sh-tab--disabled': this.disabled
+            'sl-tab--active': this.active,
+            'sl-tab--disabled': this.disabled
           }}
           role="tab"
           aria-disabled={this.disabled}

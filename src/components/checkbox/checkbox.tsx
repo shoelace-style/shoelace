@@ -5,13 +5,13 @@ let id = 0;
 /** @slot - The checkbox's label. */
 
 @Component({
-  tag: 'sh-checkbox',
+  tag: 'sl-checkbox',
   styleUrl: 'checkbox.scss',
   shadow: true
 })
 export class Checkbox {
-  id = `sh-checkbox-${++id}`;
-  labelId = `sh-checkbox-label-${id}`;
+  id = `sl-checkbox-${++id}`;
+  labelId = `sl-checkbox-label-${id}`;
   input: HTMLInputElement;
 
   constructor() {
@@ -70,14 +70,14 @@ export class Checkbox {
         htmlFor={this.id}
         role="checkbox"
         class={{
-          'sh-checkbox': true,
-          'sh-checkbox--checked': this.checked,
-          'sh-checkbox--disabled': this.disabled,
-          'sh-checkbox--focused': this.hasFocus,
-          'sh-checkbox--indeterminate': this.indeterminate
+          'sl-checkbox': true,
+          'sl-checkbox--checked': this.checked,
+          'sl-checkbox--disabled': this.disabled,
+          'sl-checkbox--focused': this.hasFocus,
+          'sl-checkbox--indeterminate': this.indeterminate
         }}
       >
-        <span class="sh-checkbox__control">
+        <span class="sl-checkbox__control">
           {this.checked ? (
             <svg viewBox="0 0 16 16">
               <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
@@ -119,7 +119,7 @@ export class Checkbox {
           />
         </span>
 
-        <span id={this.labelId} class="sh-checkbox__label">
+        <span id={this.labelId} class="sl-checkbox__label">
           <slot />
         </span>
       </label>

@@ -8,7 +8,7 @@ import { Component, Element, Method, Prop, State, h } from '@stencil/core';
  */
 
 @Component({
-  tag: 'sh-input',
+  tag: 'sl-input',
   styleUrl: 'input.scss',
   shadow: true
 })
@@ -117,31 +117,31 @@ export class Input {
     return (
       <div
         class={{
-          'sh-input': true,
+          'sl-input': true,
 
           // Sizes
-          'sh-input--small': this.size === 'small',
-          'sh-input--medium': this.size === 'medium',
-          'sh-input--large': this.size === 'large',
+          'sl-input--small': this.size === 'small',
+          'sl-input--medium': this.size === 'medium',
+          'sl-input--large': this.size === 'large',
 
           // States
-          'sh-input--disabled': this.disabled,
-          'sh-input--focused': this.hasFocus,
-          'sh-input--empty': this.value.length === 0
+          'sl-input--disabled': this.disabled,
+          'sl-input--focused': this.hasFocus,
+          'sl-input--empty': this.value.length === 0
         }}
         onClick={() => this.input.focus()}
       >
-        <span class="sh-input__before">
+        <span class="sl-input__before">
           <slot name="before" />
         </span>
 
-        <span class="sh-input__prefix">
+        <span class="sl-input__prefix">
           <slot name="prefix" />
         </span>
 
         <input
           ref={el => (this.input = el)}
-          class="sh-input__control"
+          class="sl-input__control"
           type={this.type === 'password' && this.isPasswordVisible ? 'text' : this.type}
           name={this.name}
           placeholder={this.placeholder}
@@ -168,7 +168,7 @@ export class Input {
 
         {this.clearable && (
           <button
-            class="sh-input__clear"
+            class="sl-input__clear"
             onMouseDown={event => event.preventDefault()}
             onClick={this.handleClearClick}
             tabindex="-1"
@@ -185,7 +185,7 @@ export class Input {
 
         {this.togglePassword && (
           <button
-            class="sh-input__password-toggle"
+            class="sl-input__password-toggle"
             onMouseDown={event => event.preventDefault()}
             onClick={this.handlePasswordToggle}
             tabindex="-1"
@@ -220,11 +220,11 @@ export class Input {
           </button>
         )}
 
-        <span class="sh-input__suffix">
+        <span class="sl-input__suffix">
           <slot name="suffix" />
         </span>
 
-        <span class="sh-input__after">
+        <span class="sl-input__after">
           <slot name="after" />
         </span>
       </div>

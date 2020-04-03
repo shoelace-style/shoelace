@@ -1,9 +1,9 @@
 # Spinner
 
 ```html preview
-<sh-spinner></sh-spinner>
-<sh-spinner diameter="32"></sh-spinner>
-<sh-spinner diameter="48"></sh-spinner>
+<sl-spinner></sl-spinner>
+<sl-spinner diameter="32"></sl-spinner>
+<sl-spinner diameter="48"></sl-spinner>
 ```
 
 <!-- Auto Generated Below -->

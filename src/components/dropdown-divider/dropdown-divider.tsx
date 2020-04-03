@@ -1,12 +1,12 @@
 import { Component, h } from '@stencil/core';
 
 @Component({
-  tag: 'sh-dropdown-divider',
+  tag: 'sl-dropdown-divider',
   styleUrl: 'dropdown-divider.scss',
   shadow: true
 })
 export class DropdownDivider {
   render() {
-    return <div class="sh-dropdown-divider" />;
+    return <div class="sl-dropdown-divider" />;
   }
 }

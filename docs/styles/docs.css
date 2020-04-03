@@ -4,13 +4,13 @@
 }
 
 body {
-  font-family: var(--sh-font-sans);
+  font-family: var(--sl-font-sans);
   font-size: 16px;
-  font-weight: var(--sh-font-weight-normal);
+  font-weight: var(--sl-font-weight-normal);
 }
 
 .sidebar {
-  border-right-color: var(--sh-color-gray-90);
+  border-right-color: var(--sl-color-gray-90);
   display: flex;
   flex-direction: column;
   width: var(--sidebar-width);
@@ -44,10 +44,10 @@ body.close .sidebar-toggle {
   width: 2.4rem;
   height: 2.4rem;
   bottom: auto;
-  border: solid 1px var(--sh-color-gray-90);
+  border: solid 1px var(--sl-color-gray-90);
   border-top-right-radius: 2px;
   border-bottom-right-radius: 2px;
-  background: var(--sh-color-white);
+  background: var(--sl-color-white);
   display: flex;
   cursor: pointer;
   transition: var(--sidebar-transition);
@@ -79,14 +79,14 @@ body.close .sidebar-toggle {
 }
 
 .sidebar-toggle:hover {
-  border-color: var(--sh-color-gray-85);
+  border-color: var(--sl-color-gray-85);
   opacity: 1;
 }
 
 .sidebar-toggle:focus,
 body.close .sidebar-toggle:focus {
-  border-color: var(--sh-form-control-border-color--focus);
-  box-shadow: var(--sh-focus-ring-box-shadow);
+  border-color: var(--sl-form-control-border-color--focus);
+  box-shadow: var(--sl-focus-ring-box-shadow);
 }
 
 .sidebar-toggle:hover .sidebar-toggle-button {
@@ -101,20 +101,20 @@ body.close .sidebar-toggle:focus {
 }
 
 .sidebar .search input {
-  border: solid 1px var(--sh-form-control-border-color);
+  border: solid 1px var(--sl-form-control-border-color);
   border-radius: 3px;
-  padding: 0 var(--sh-form-control-padding-x--medium);
-  transition: var(--sh-form-control-transition-speed) color, var(--sh-form-control-transition-speed) border,
-    var(--sh-form-control-transition-speed) box-shadow;
+  padding: 0 var(--sl-form-control-padding-x--medium);
+  transition: var(--sl-form-control-transition-speed) color, var(--sl-form-control-transition-speed) border,
+    var(--sl-form-control-transition-speed) box-shadow;
 }
 
 .sidebar .search input:hover {
-  border-color: var(--sh-form-control-border-color--hover);
+  border-color: var(--sl-form-control-border-color--hover);
 }
 
 .sidebar .search input:focus {
-  border-color: var(--sh-form-control-border-color--focus);
-  box-shadow: var(--sh-focus-ring-box-shadow);
+  border-color: var(--sl-form-control-border-color--focus);
+  box-shadow: var(--sl-focus-ring-box-shadow);
 }
 
 .sidebar .search .clear-button svg {
@@ -148,20 +148,20 @@ body.close .sidebar-toggle:focus {
 
 .content table th,
 .content table td {
-  border-color: var(--sh-color-gray-90);
+  border-color: var(--sl-color-gray-90);
   padding: 1rem;
 }
 
 .content p.tip,
 .content tr:nth-child(2n) {
-  background-color: hsl(var(--sh-color-gray-hue), var(--sh-color-gray-sat), 97%);
+  background-color: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-sat), 97%);
 }
 
 .content .docsify-copy-code-button {
   top: auto;
   right: 0;
   bottom: 0;
-  font-family: var(--sh-font-body);
+  font-family: var(--sl-font-body);
   font-size: 14px;
   border-top-left-radius: 3px;
   border-bottom-right-radius: 3px;
@@ -171,14 +171,14 @@ body.close .sidebar-toggle:focus {
 .content pre,
 .content pre > code {
   border-radius: 3px;
-  font-family: var(--sh-font-mono);
+  font-family: var(--sl-font-mono);
   font-size: 0.825rem;
-  color: var(--sh-color-gray-20);
+  color: var(--sl-color-gray-20);
   -webkit-font-smoothing: auto;
 }
 
 .content pre::after {
-  color: var(--sh-color-gray-70);
+  color: var(--sl-color-gray-70);
   font-size: 0.7rem;
   font-weight: 400;
   line-height: 2;
@@ -186,9 +186,9 @@ body.close .sidebar-toggle:focus {
 
 .content code {
   background-color: transparent;
-  font-family: var(--sh-font-mono);
+  font-family: var(--sl-font-mono);
   font-size: 0.875em;
-  color: var(--sh-color-warning-50);
+  color: var(--sl-color-warning-50);
   padding: 0;
   -webkit-font-smoothing: auto;
 }
@@ -213,25 +213,25 @@ body.close .sidebar-toggle:focus {
 .content code .token.control,
 .content code .token.directive,
 .content code .token.unit {
-  color: var(--sh-color-warning-50);
+  color: var(--sl-color-warning-50);
 }
 
 .content code .token.attr-name,
 .content code .token.tag,
 .content code .token.selector {
-  color: var(--sh-color-primary-50);
+  color: var(--sl-color-primary-50);
 }
 
 .content code .token.string {
-  color: var(--sh-color-success-45);
+  color: var(--sl-color-success-45);
 }
 
 .content code .token.property {
-  color: var(--sh-color-warning-50);
+  color: var(--sl-color-warning-50);
 }
 
 .content code .token.punctuation {
-  color: var(--sh-color-gray-40);
+  color: var(--sl-color-gray-40);
 }
 
 /* Code blocks */
@@ -239,16 +239,16 @@ body.close .sidebar-toggle:focus {
   position: relative;
   border-radius: 3px;
   margin-bottom: 1.5rem;
-  background: var(--sh-color-gray-95);
+  background: var(--sl-color-gray-95);
 }
 
 .code-block__preview {
   position: relative;
-  border: solid 1px var(--sh-color-gray-90);
+  border: solid 1px var(--sl-color-gray-90);
   border-bottom: none;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
-  background-color: var(--sh-color-white);
+  background-color: var(--sl-color-white);
   min-width: 200px;
   max-width: 100%;
   padding: 1.5rem 3rem 1.5rem 1.5rem;
@@ -263,19 +263,19 @@ body.close .sidebar-toggle:focus {
   align-items: center;
   justify-content: center;
   position: absolute;
-  color: var(--sh-color-gray-70);
+  color: var(--sl-color-gray-70);
   top: 0;
   right: 0;
   bottom: 0;
   width: 1.5rem;
-  border-left: solid 1px var(--sh-color-gray-90);
-  box-shadow: var(--sh-shadow-1);
+  border-left: solid 1px var(--sl-color-gray-90);
+  box-shadow: var(--sl-shadow-1);
   cursor: ew-resize;
   transition: 250ms background-color;
 }
 
 pre.code-block__source {
-  border: solid 1px var(--sh-color-gray-90);
+  border: solid 1px var(--sl-color-gray-90);
   border-bottom: none;
   border-radius: 0;
   margin: 0;
@@ -296,30 +296,30 @@ pre.code-block__source {
   display: block;
   width: 100%;
   height: 2.5rem;
-  border: solid 1px var(--sh-color-gray-90);
+  border: solid 1px var(--sl-color-gray-90);
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
-  background-color: var(--sh-color-white);
+  background-color: var(--sl-color-white);
   font: inherit;
-  color: var(--sh-color-gray-60);
+  color: var(--sl-color-gray-60);
   cursor: pointer;
   transition: 250ms background-color;
   -webkit-appearance: none;
 }
 
 .code-block__toggle:hover {
-  background-color: hsl(var(--sh-color-gray-hue), var(--sh-color-gray-sat), 98%);
+  background-color: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-sat), 98%);
 }
 
 .code-block__toggle:active {
-  background-color: hsl(var(--sh-color-gray-hue), var(--sh-color-gray-sat), 96%);
+  background-color: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-sat), 96%);
 }
 
 .code-block__toggle:focus {
   outline: none;
-  color: var(--sh-color-primary-50);
-  border-color: var(--sh-color-primary-50);
-  box-shadow: var(--sh-focus-ring-box-shadow);
+  color: var(--sl-color-primary-50);
+  border-color: var(--sl-color-primary-50);
+  box-shadow: var(--sl-focus-ring-box-shadow);
 }
 
 .code-block__toggle::after {

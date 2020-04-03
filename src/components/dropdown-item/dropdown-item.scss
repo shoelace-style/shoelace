@@ -8,35 +8,35 @@
   display: block;
 }
 
-.sh-dropdown-item {
+.sl-dropdown-item {
   position: relative;
   display: flex;
   align-items: stretch;
-  background-color: var(--sh-menu-item-background-color);
-  color: var(--sh-menu-item-color);
-  padding: var(--sh-menu-padding-y) var(--sh-menu-padding-x);
-  transition: var(--sh-form-control-transition-speed) color, var(--sh-form-control-transition-speed) background-color,
-    var(--sh-form-control-transition-speed) fill;
+  background-color: var(--sl-menu-item-background-color);
+  color: var(--sl-menu-item-color);
+  padding: var(--sl-menu-padding-y) var(--sl-menu-padding-x);
+  transition: var(--sl-form-control-transition-speed) color, var(--sl-form-control-transition-speed) background-color,
+    var(--sl-form-control-transition-speed) fill;
   user-select: none;
   white-space: nowrap;
   cursor: pointer;
 
-  &.sh-dropdown-item--active:not(.sh-dropdown-item--disabled) {
-    background-color: var(--sh-menu-item-background-color--active);
-    color: var(--sh-menu-item-color--active);
+  &.sl-dropdown-item--active:not(.sl-dropdown-item--disabled) {
+    background-color: var(--sl-menu-item-background-color--active);
+    color: var(--sl-menu-item-color--active);
   }
 
-  &.sh-dropdown-item--disabled {
-    background-color: var(--sh-menu-item-background-color--disabled);
-    color: var(--sh-menu-item-color--disabled);
+  &.sl-dropdown-item--disabled {
+    background-color: var(--sl-menu-item-background-color--disabled);
+    color: var(--sl-menu-item-color--disabled);
     cursor: not-allowed;
   }
 
-  .sh-dropdown-item__label {
+  .sl-dropdown-item__label {
     flex: 1 1 auto;
   }
 
-  .sh-dropdown-item__prefix {
+  .sl-dropdown-item__prefix {
     flex: 0 0 auto;
     display: flex;
     align-items: center;
@@ -46,7 +46,7 @@
     }
   }
 
-  .sh-dropdown-item__suffix {
+  .sl-dropdown-item__suffix {
     flex: 0 0 auto;
     display: flex;
     align-items: center;
@@ -61,7 +61,7 @@
 // Checked state
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sh-dropdown-item .sh-dropdown-item__check {
+.sl-dropdown-item .sl-dropdown-item__check {
   display: flex;
   position: absolute;
   left: 11px;
@@ -75,6 +75,6 @@
   }
 }
 
-.sh-dropdown-item--checked .sh-dropdown-item__check {
+.sl-dropdown-item--checked .sl-dropdown-item__check {
   visibility: visible;
 }

@@ -8,27 +8,27 @@
   display: block;
 }
 
-.sh-input {
+.sl-input {
   display: flex;
   align-items: stretch;
   justify-content: center;
   position: relative;
-  font-family: var(--sh-form-control-font-family);
-  font-weight: var(--sh-form-control-font-weight);
-  background-color: var(--sh-form-control-background-color);
-  border: solid var(--sh-form-control-border-width) var(--sh-form-control-border-color);
+  font-family: var(--sl-form-control-font-family);
+  font-weight: var(--sl-form-control-font-weight);
+  background-color: var(--sl-form-control-background-color);
+  border: solid var(--sl-form-control-border-width) var(--sl-form-control-border-color);
   vertical-align: middle;
-  transition: var(--sh-form-control-transition-speed) color, var(--sh-form-control-transition-speed) border,
-    var(--sh-form-control-transition-speed) box-shadow;
+  transition: var(--sl-form-control-transition-speed) color, var(--sl-form-control-transition-speed) border,
+    var(--sl-form-control-transition-speed) box-shadow;
   cursor: text;
 
-  .sh-input__control {
+  .sl-input__control {
     flex: 1 1 auto;
     font-family: inherit;
     font-size: inherit;
     font-weight: inherit;
     height: 100%;
-    color: var(--sh-form-control-color);
+    color: var(--sl-form-control-color);
     border: none;
     background: none;
     padding: 0;
@@ -43,7 +43,7 @@
     }
 
     &::placeholder {
-      color: var(--sh-form-control-placeholder-color);
+      color: var(--sl-form-control-placeholder-color);
       user-select: none;
     }
 
@@ -52,77 +52,77 @@
     }
   }
 
-  &:hover:not(.sh-input--disabled) {
-    background-color: var(--sh-form-control-background-color--hover);
-    border-color: var(--sh-form-control-border-color--hover);
-    color: var(--sh-form-control-color--hover);
+  &:hover:not(.sl-input--disabled) {
+    background-color: var(--sl-form-control-background-color--hover);
+    border-color: var(--sl-form-control-border-color--hover);
+    color: var(--sl-form-control-color--hover);
 
-    .sh-input__control {
+    .sl-input__control {
       &::placeholder {
-        color: var(--sh-form-control-placeholder-color--hover);
+        color: var(--sl-form-control-placeholder-color--hover);
       }
     }
   }
 
-  &.sh-input--focused:not(.sh-input--disabled) {
-    background-color: var(--sh-form-control-background-color--focus);
-    border-color: var(--sh-form-control-border-color--focus);
-    box-shadow: var(--sh-focus-ring-box-shadow);
-    color: var(--sh-form-control-color--focus);
+  &.sl-input--focused:not(.sl-input--disabled) {
+    background-color: var(--sl-form-control-background-color--focus);
+    border-color: var(--sl-form-control-border-color--focus);
+    box-shadow: var(--sl-focus-ring-box-shadow);
+    color: var(--sl-form-control-color--focus);
   }
 
-  &.sh-input--disabled {
-    background-color: var(--sh-form-control-background-color--disabled);
-    border-color: var(--sh-form-control-border-color--disabled);
+  &.sl-input--disabled {
+    background-color: var(--sl-form-control-background-color--disabled);
+    border-color: var(--sl-form-control-border-color--disabled);
     opacity: 0.5;
 
-    .sh-input__control {
-      color: var(--sh-form-control-color--disabled);
+    .sl-input__control {
+      color: var(--sl-form-control-color--disabled);
       cursor: not-allowed;
 
       &::placeholder {
-        color: var(--sh-form-control-placeholder-color--disabled);
+        color: var(--sl-form-control-placeholder-color--disabled);
       }
     }
   }
 
-  .sh-input__clear,
-  .sh-input__password-toggle {
+  .sl-input__clear,
+  .sl-input__password-toggle {
     width: 1.2em;
   }
 
-  .sh-input__before,
-  .sh-input__after {
+  .sl-input__before,
+  .sl-input__after {
     flex: 0 0 auto;
     display: flex;
   }
 
-  .sh-input__before ::slotted(*),
-  .sh-input__after ::slotted(*) {
+  .sl-input__before ::slotted(*),
+  .sl-input__after ::slotted(*) {
     flex: 1 1 auto;
-    background-color: var(--sh-color-gray-95);
-    color: var(--sh-color-gray-50);
+    background-color: var(--sl-color-gray-95);
+    color: var(--sl-color-gray-50);
     user-select: none;
   }
 
-  .sh-input__before ::slotted(*) {
-    border-right: solid var(--sh-form-control-border-width) var(--sh-form-control-border-color);
-    border-top-left-radius: var(--sh-form-control-border-radius--medium);
-    border-bottom-left-radius: var(--sh-form-control-border-radius--medium);
+  .sl-input__before ::slotted(*) {
+    border-right: solid var(--sl-form-control-border-width) var(--sl-form-control-border-color);
+    border-top-left-radius: var(--sl-form-control-border-radius--medium);
+    border-bottom-left-radius: var(--sl-form-control-border-radius--medium);
   }
 
-  .sh-input__after ::slotted(*) {
-    border-left: solid var(--sh-form-control-border-width) var(--sh-form-control-border-color);
-    border-top-right-radius: var(--sh-form-control-border-radius--medium);
-    border-bottom-right-radius: var(--sh-form-control-border-radius--medium);
+  .sl-input__after ::slotted(*) {
+    border-left: solid var(--sl-form-control-border-width) var(--sl-form-control-border-color);
+    border-top-right-radius: var(--sl-form-control-border-radius--medium);
+    border-bottom-right-radius: var(--sl-form-control-border-radius--medium);
   }
 
-  .sh-input__prefix,
-  .sh-input__suffix {
+  .sl-input__prefix,
+  .sl-input__suffix {
     display: flex;
     flex: 0 0 auto;
     align-items: center;
-    color: var(--sh-form-control-placeholder-color);
+    color: var(--sl-form-control-placeholder-color);
   }
 }
 
@@ -130,96 +130,96 @@
 // Size modifiers
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sh-input--small {
-  border-radius: var(--sh-form-control-border-radius--small);
-  font-size: var(--sh-form-control-font-size--small);
-  height: var(--sh-form-control-height--small);
-  line-height: calc(var(--sh-form-control-height--small) - var(--sh-form-control-border-width) * 2);
+.sl-input--small {
+  border-radius: var(--sl-form-control-border-radius--small);
+  font-size: var(--sl-form-control-font-size--small);
+  height: var(--sl-form-control-height--small);
+  line-height: calc(var(--sl-form-control-height--small) - var(--sl-form-control-border-width) * 2);
 
-  .sh-input__control {
-    height: calc(var(--sh-form-control-height--small) - var(--sh-form-control-border-width) * 2);
-    line-height: calc(var(--sh-form-control-height--small) - var(--sh-form-control-border-width) * 2);
-    margin: 0 var(--sh-form-control-padding-x--small);
+  .sl-input__control {
+    height: calc(var(--sl-form-control-height--small) - var(--sl-form-control-border-width) * 2);
+    line-height: calc(var(--sl-form-control-height--small) - var(--sl-form-control-border-width) * 2);
+    margin: 0 var(--sl-form-control-padding-x--small);
   }
 
-  .sh-input__clear,
-  .sh-input__password-toggle {
-    margin-right: var(--sh-form-control-padding-x--small);
+  .sl-input__clear,
+  .sl-input__password-toggle {
+    margin-right: var(--sl-form-control-padding-x--small);
   }
 
-  .sh-input__prefix ::slotted(*) {
-    margin-left: var(--sh-form-control-padding-x--small);
+  .sl-input__prefix ::slotted(*) {
+    margin-left: var(--sl-form-control-padding-x--small);
   }
 
-  .sh-input__suffix ::slotted(*) {
-    margin-right: var(--sh-form-control-padding-x--small);
+  .sl-input__suffix ::slotted(*) {
+    margin-right: var(--sl-form-control-padding-x--small);
   }
 
-  .sh-input__before ::slotted(*),
-  .sh-input__after ::slotted(*) {
-    padding: 0 var(--sh-form-control-padding-x--small);
-  }
-}
-
-.sh-input--medium {
-  border-radius: var(--sh-form-control-border-radius--medium);
-  font-size: var(--sh-form-control-font-size--medium);
-  height: var(--sh-form-control-height--medium);
-  line-height: calc(var(--sh-form-control-height--medium) - var(--sh-form-control-border-width) * 2);
-
-  .sh-input__control {
-    height: calc(var(--sh-form-control-height--medium) - var(--sh-form-control-border-width) * 2);
-    line-height: calc(var(--sh-form-control-height--medium) - var(--sh-form-control-border-width) * 2);
-    margin: 0 var(--sh-form-control-padding-x--medium);
-  }
-
-  .sh-input__clear,
-  .sh-input__password-toggle {
-    margin-right: var(--sh-form-control-padding-x--medium);
-  }
-
-  .sh-input__prefix ::slotted(*) {
-    margin-left: var(--sh-form-control-padding-x--medium);
-  }
-
-  .sh-input__suffix ::slotted(*) {
-    margin-right: var(--sh-form-control-padding-x--medium);
-  }
-
-  .sh-input__before ::slotted(*),
-  .sh-input__after ::slotted(*) {
-    padding: 0 var(--sh-form-control-padding-x--medium);
+  .sl-input__before ::slotted(*),
+  .sl-input__after ::slotted(*) {
+    padding: 0 var(--sl-form-control-padding-x--small);
   }
 }
 
-.sh-input--large {
-  border-radius: var(--sh-form-control-border-radius--large);
-  font-size: var(--sh-form-control-font-size--large);
-  height: var(--sh-form-control-height--large);
-  line-height: calc(var(--sh-form-control-height--large) - var(--sh-form-control-border-width) * 2);
+.sl-input--medium {
+  border-radius: var(--sl-form-control-border-radius--medium);
+  font-size: var(--sl-form-control-font-size--medium);
+  height: var(--sl-form-control-height--medium);
+  line-height: calc(var(--sl-form-control-height--medium) - var(--sl-form-control-border-width) * 2);
 
-  .sh-input__control {
-    height: calc(var(--sh-form-control-height--large) - var(--sh-form-control-border-width) * 2);
-    line-height: calc(var(--sh-form-control-height--large) - var(--sh-form-control-border-width) * 2);
-    margin: 0 var(--sh-form-control-padding-x--large);
+  .sl-input__control {
+    height: calc(var(--sl-form-control-height--medium) - var(--sl-form-control-border-width) * 2);
+    line-height: calc(var(--sl-form-control-height--medium) - var(--sl-form-control-border-width) * 2);
+    margin: 0 var(--sl-form-control-padding-x--medium);
   }
 
-  .sh-input__clear,
-  .sh-input__password-toggle {
-    margin-right: var(--sh-form-control-padding-x--large);
+  .sl-input__clear,
+  .sl-input__password-toggle {
+    margin-right: var(--sl-form-control-padding-x--medium);
   }
 
-  .sh-input__prefix ::slotted(*) {
-    margin-left: var(--sh-form-control-padding-x--large);
+  .sl-input__prefix ::slotted(*) {
+    margin-left: var(--sl-form-control-padding-x--medium);
   }
 
-  .sh-input__suffix ::slotted(*) {
-    margin-right: var(--sh-form-control-padding-x--large);
+  .sl-input__suffix ::slotted(*) {
+    margin-right: var(--sl-form-control-padding-x--medium);
   }
 
-  .sh-input__before ::slotted(*),
-  .sh-input__after ::slotted(*) {
-    padding: 0 var(--sh-form-control-padding-x--large);
+  .sl-input__before ::slotted(*),
+  .sl-input__after ::slotted(*) {
+    padding: 0 var(--sl-form-control-padding-x--medium);
+  }
+}
+
+.sl-input--large {
+  border-radius: var(--sl-form-control-border-radius--large);
+  font-size: var(--sl-form-control-font-size--large);
+  height: var(--sl-form-control-height--large);
+  line-height: calc(var(--sl-form-control-height--large) - var(--sl-form-control-border-width) * 2);
+
+  .sl-input__control {
+    height: calc(var(--sl-form-control-height--large) - var(--sl-form-control-border-width) * 2);
+    line-height: calc(var(--sl-form-control-height--large) - var(--sl-form-control-border-width) * 2);
+    margin: 0 var(--sl-form-control-padding-x--large);
+  }
+
+  .sl-input__clear,
+  .sl-input__password-toggle {
+    margin-right: var(--sl-form-control-padding-x--large);
+  }
+
+  .sl-input__prefix ::slotted(*) {
+    margin-left: var(--sl-form-control-padding-x--large);
+  }
+
+  .sl-input__suffix ::slotted(*) {
+    margin-right: var(--sl-form-control-padding-x--large);
+  }
+
+  .sl-input__before ::slotted(*),
+  .sl-input__after ::slotted(*) {
+    padding: 0 var(--sl-form-control-padding-x--large);
   }
 }
 
@@ -227,12 +227,12 @@
 // Clearable + Password Toggle
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sh-input__clear,
-.sh-input__password-toggle {
+.sl-input__clear,
+.sl-input__password-toggle {
   display: flex;
   align-items: center;
   font-size: inherit;
-  color: var(--sh-form-control-placeholder-color);
+  color: var(--sl-form-control-placeholder-color);
   border: none;
   background: none;
   padding: 0;
@@ -241,7 +241,7 @@
   svg {
     width: 1.2em;
     height: 1.2em;
-    transition: var(--sh-form-control-transition-speed) filter;
+    transition: var(--sl-form-control-transition-speed) filter;
   }
 
   &:hover,
@@ -258,6 +258,6 @@
   }
 }
 
-.sh-input--empty .sh-input__clear {
+.sl-input--empty .sl-input__clear {
   visibility: hidden;
 }

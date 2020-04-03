@@ -5,24 +5,24 @@
   display: block;
 }
 
-.sh-tabs {
+.sl-tabs {
   display: flex;
   border: solid 1px transparent;
   border-radius: 0;
 
-  .sh-tabs__tabs {
+  .sl-tabs__tabs {
     display: flex;
     position: relative;
   }
 
-  .sh-tabs__active-tab-indicator {
+  .sl-tabs__active-tab-indicator {
     position: absolute;
-    transition: var(--sh-form-control-transition-speed) transform ease,
-      var(--sh-form-control-transition-speed) width ease;
+    transition: var(--sl-form-control-transition-speed) transform ease,
+      var(--sl-form-control-transition-speed) width ease;
   }
 
   // Hide the focus ring if the user is interacting with a mouse
-  &.sh-tabs--using-mouse ::slotted(sh-tab) {
+  &.sl-tabs--using-mouse ::slotted(sl-tab) {
     --focus-ring-box-shadow: none;
   }
 }
@@ -31,29 +31,29 @@
 // Top + bottom
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sh-tabs--top {
+.sl-tabs--top {
   flex-direction: column;
 
-  .sh-tabs__nav {
+  .sl-tabs__nav {
     display: flex;
     order: 1;
     overflow-x: auto;
     @include hide-scrollbar();
   }
 
-  .sh-tabs__tabs {
+  .sl-tabs__tabs {
     flex: 1 1 auto;
     position: relative;
     flex-direction: row;
-    border-bottom: solid 2px var(--sh-color-gray-85);
+    border-bottom: solid 2px var(--sl-color-gray-85);
   }
 
-  .sh-tabs__active-tab-indicator {
+  .sl-tabs__active-tab-indicator {
     bottom: -2px;
-    border-bottom: solid 2px var(--sh-color-primary-50);
+    border-bottom: solid 2px var(--sl-color-primary-50);
   }
 
-  .sh-tabs__body {
+  .sl-tabs__body {
     order: 2;
   }
 }
@@ -62,29 +62,29 @@
 // Bottom
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sh-tabs--bottom {
+.sl-tabs--bottom {
   flex-direction: column;
 
-  .sh-tabs__nav {
+  .sl-tabs__nav {
     display: flex;
     order: 2;
     overflow-x: auto;
     @include hide-scrollbar();
   }
 
-  .sh-tabs__tabs {
+  .sl-tabs__tabs {
     flex: 1 1 auto;
     position: relative;
     flex-direction: row;
-    border-top: solid 2px var(--sh-color-gray-85);
+    border-top: solid 2px var(--sl-color-gray-85);
   }
 
-  .sh-tabs__active-tab-indicator {
+  .sl-tabs__active-tab-indicator {
     top: calc(-1 * 2px);
-    border-top: solid 2px var(--sh-color-primary-50);
+    border-top: solid 2px var(--sl-color-primary-50);
   }
 
-  .sh-tabs__body {
+  .sl-tabs__body {
     order: 1;
   }
 }
@@ -93,25 +93,25 @@
 // Left
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sh-tabs--left {
+.sl-tabs--left {
   flex-direction: row;
 
-  .sh-tabs__nav {
+  .sl-tabs__nav {
     order: 1;
   }
 
-  .sh-tabs__tabs {
+  .sl-tabs__tabs {
     flex: 0 0 auto;
     flex-direction: column;
-    border-right: solid 2px var(--sh-color-gray-85);
+    border-right: solid 2px var(--sl-color-gray-85);
   }
 
-  .sh-tabs__active-tab-indicator {
+  .sl-tabs__active-tab-indicator {
     right: calc(-1 * 2px);
-    border-right: solid 2px var(--sh-color-primary-50);
+    border-right: solid 2px var(--sl-color-primary-50);
   }
 
-  .sh-tabs__body {
+  .sl-tabs__body {
     flex: 1 1 auto;
     order: 2;
   }
@@ -121,25 +121,25 @@
 // Right
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sh-tabs--right {
+.sl-tabs--right {
   flex-direction: row;
 
-  .sh-tabs__nav {
+  .sl-tabs__nav {
     order: 2;
   }
 
-  .sh-tabs__tabs {
+  .sl-tabs__tabs {
     flex: 0 0 auto;
     flex-direction: column;
-    border-left: solid 2px var(--sh-color-gray-85);
+    border-left: solid 2px var(--sl-color-gray-85);
   }
 
-  .sh-tabs__active-tab-indicator {
+  .sl-tabs__active-tab-indicator {
     left: calc(-1 * 2px);
-    border-left: solid 2px var(--sh-color-primary-50);
+    border-left: solid 2px var(--sl-color-primary-50);
   }
 
-  .sh-tabs__body {
+  .sl-tabs__body {
     flex: 1 1 auto;
     order: 1;
   }

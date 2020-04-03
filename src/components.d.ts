@@ -6,7 +6,7 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
-    interface ShAlert {
+    interface SlAlert {
         /**
           * Set to true to make the alert closable.
          */
@@ -20,7 +20,7 @@ export namespace Components {
          */
         "type": string;
     }
-    interface ShButton {
+    interface SlButton {
         /**
           * Set to true to draw the button with a caret for use with dropdowns, popovers, etc.
          */
@@ -62,7 +62,7 @@ export namespace Components {
          */
         "type": "default" | "primary" | "success" | "info" | "warning" | "danger" | "text";
     }
-    interface ShCheckbox {
+    interface SlCheckbox {
         /**
           * Set to true to draw the checkbox in a checked state.
          */
@@ -96,7 +96,7 @@ export namespace Components {
          */
         "value": string;
     }
-    interface ShDropdown {
+    interface SlDropdown {
         "close": () => Promise<void>;
         "open": () => Promise<void>;
         /**
@@ -108,9 +108,9 @@ export namespace Components {
          */
         "position": "fixed" | "absolute";
     }
-    interface ShDropdownDivider {
+    interface SlDropdownDivider {
     }
-    interface ShDropdownItem {
+    interface SlDropdownItem {
         /**
           * Set to true to draw the dropdown item in an active state.
          */
@@ -124,7 +124,7 @@ export namespace Components {
          */
         "disabled": boolean;
     }
-    interface ShInput {
+    interface SlInput {
         /**
           * The input's autocaptialize attribute.
          */
@@ -222,7 +222,7 @@ export namespace Components {
          */
         "value": string;
     }
-    interface ShProgressBar {
+    interface SlProgressBar {
         /**
           * The height of the progress bar in pixels.
          */
@@ -232,7 +232,7 @@ export namespace Components {
          */
         "percentage": number;
     }
-    interface ShProgressRing {
+    interface SlProgressRing {
         /**
           * The diameter of the progress ring in pixels.
          */
@@ -246,7 +246,7 @@ export namespace Components {
          */
         "stroke": number;
     }
-    interface ShRadio {
+    interface SlRadio {
         /**
           * Set to true to draw the radio in a checked state.
          */
@@ -276,7 +276,7 @@ export namespace Components {
          */
         "value": string;
     }
-    interface ShRange {
+    interface SlRange {
         /**
           * Set to true to disable the input.
          */
@@ -322,14 +322,14 @@ export namespace Components {
          */
         "value": number;
     }
-    interface ShSpinner {
+    interface SlSpinner {
         /**
           * The spinner's size.
          */
         "diameter": number;
         "stroke": number;
     }
-    interface ShSwitch {
+    interface SlSwitch {
         /**
           * Set to true to draw the switch in a checked state.
          */
@@ -359,7 +359,7 @@ export namespace Components {
          */
         "value": string;
     }
-    interface ShTab {
+    interface SlTab {
         /**
           * Set to true to draw the tab in an active state.
          */
@@ -369,7 +369,7 @@ export namespace Components {
          */
         "disabled": boolean;
         /**
-          * The name of the tab panel the tab will be synced to. The panel must exist in the same `<sh-tabs>` element.
+          * The name of the tab panel the tab will be synced to. The panel must exist in the same `<sl-tabs>` element.
          */
         "panel": string;
         /**
@@ -381,7 +381,7 @@ export namespace Components {
          */
         "setFocus": () => Promise<void>;
     }
-    interface ShTabPanel {
+    interface SlTabPanel {
         /**
           * When true, the tab panel will be shown.
          */
@@ -391,7 +391,7 @@ export namespace Components {
          */
         "name": string;
     }
-    interface ShTabs {
+    interface SlTabs {
         /**
           * The position of the tabs.
          */
@@ -401,7 +401,7 @@ export namespace Components {
          */
         "show": (panel: string) => Promise<void>;
     }
-    interface ShTextarea {
+    interface SlTextarea {
         /**
           * The textarea's autocaptialize attribute.
          */
@@ -475,7 +475,7 @@ export namespace Components {
          */
         "value": string;
     }
-    interface ShTooltip {
+    interface SlTooltip {
         /**
           * Set to true to draw the the tooltip with an arrow.
          */
@@ -535,137 +535,137 @@ export namespace Components {
     }
 }
 declare global {
-    interface HTMLShAlertElement extends Components.ShAlert, HTMLStencilElement {
+    interface HTMLSlAlertElement extends Components.SlAlert, HTMLStencilElement {
     }
-    var HTMLShAlertElement: {
-        prototype: HTMLShAlertElement;
-        new (): HTMLShAlertElement;
+    var HTMLSlAlertElement: {
+        prototype: HTMLSlAlertElement;
+        new (): HTMLSlAlertElement;
     };
-    interface HTMLShButtonElement extends Components.ShButton, HTMLStencilElement {
+    interface HTMLSlButtonElement extends Components.SlButton, HTMLStencilElement {
     }
-    var HTMLShButtonElement: {
-        prototype: HTMLShButtonElement;
-        new (): HTMLShButtonElement;
+    var HTMLSlButtonElement: {
+        prototype: HTMLSlButtonElement;
+        new (): HTMLSlButtonElement;
     };
-    interface HTMLShCheckboxElement extends Components.ShCheckbox, HTMLStencilElement {
+    interface HTMLSlCheckboxElement extends Components.SlCheckbox, HTMLStencilElement {
     }
-    var HTMLShCheckboxElement: {
-        prototype: HTMLShCheckboxElement;
-        new (): HTMLShCheckboxElement;
+    var HTMLSlCheckboxElement: {
+        prototype: HTMLSlCheckboxElement;
+        new (): HTMLSlCheckboxElement;
     };
-    interface HTMLShDropdownElement extends Components.ShDropdown, HTMLStencilElement {
+    interface HTMLSlDropdownElement extends Components.SlDropdown, HTMLStencilElement {
     }
-    var HTMLShDropdownElement: {
-        prototype: HTMLShDropdownElement;
-        new (): HTMLShDropdownElement;
+    var HTMLSlDropdownElement: {
+        prototype: HTMLSlDropdownElement;
+        new (): HTMLSlDropdownElement;
     };
-    interface HTMLShDropdownDividerElement extends Components.ShDropdownDivider, HTMLStencilElement {
+    interface HTMLSlDropdownDividerElement extends Components.SlDropdownDivider, HTMLStencilElement {
     }
-    var HTMLShDropdownDividerElement: {
-        prototype: HTMLShDropdownDividerElement;
-        new (): HTMLShDropdownDividerElement;
+    var HTMLSlDropdownDividerElement: {
+        prototype: HTMLSlDropdownDividerElement;
+        new (): HTMLSlDropdownDividerElement;
     };
-    interface HTMLShDropdownItemElement extends Components.ShDropdownItem, HTMLStencilElement {
+    interface HTMLSlDropdownItemElement extends Components.SlDropdownItem, HTMLStencilElement {
     }
-    var HTMLShDropdownItemElement: {
-        prototype: HTMLShDropdownItemElement;
-        new (): HTMLShDropdownItemElement;
+    var HTMLSlDropdownItemElement: {
+        prototype: HTMLSlDropdownItemElement;
+        new (): HTMLSlDropdownItemElement;
     };
-    interface HTMLShInputElement extends Components.ShInput, HTMLStencilElement {
+    interface HTMLSlInputElement extends Components.SlInput, HTMLStencilElement {
     }
-    var HTMLShInputElement: {
-        prototype: HTMLShInputElement;
-        new (): HTMLShInputElement;
+    var HTMLSlInputElement: {
+        prototype: HTMLSlInputElement;
+        new (): HTMLSlInputElement;
     };
-    interface HTMLShProgressBarElement extends Components.ShProgressBar, HTMLStencilElement {
+    interface HTMLSlProgressBarElement extends Components.SlProgressBar, HTMLStencilElement {
     }
-    var HTMLShProgressBarElement: {
-        prototype: HTMLShProgressBarElement;
-        new (): HTMLShProgressBarElement;
+    var HTMLSlProgressBarElement: {
+        prototype: HTMLSlProgressBarElement;
+        new (): HTMLSlProgressBarElement;
     };
-    interface HTMLShProgressRingElement extends Components.ShProgressRing, HTMLStencilElement {
+    interface HTMLSlProgressRingElement extends Components.SlProgressRing, HTMLStencilElement {
     }
-    var HTMLShProgressRingElement: {
-        prototype: HTMLShProgressRingElement;
-        new (): HTMLShProgressRingElement;
+    var HTMLSlProgressRingElement: {
+        prototype: HTMLSlProgressRingElement;
+        new (): HTMLSlProgressRingElement;
     };
-    interface HTMLShRadioElement extends Components.ShRadio, HTMLStencilElement {
+    interface HTMLSlRadioElement extends Components.SlRadio, HTMLStencilElement {
     }
-    var HTMLShRadioElement: {
-        prototype: HTMLShRadioElement;
-        new (): HTMLShRadioElement;
+    var HTMLSlRadioElement: {
+        prototype: HTMLSlRadioElement;
+        new (): HTMLSlRadioElement;
     };
-    interface HTMLShRangeElement extends Components.ShRange, HTMLStencilElement {
+    interface HTMLSlRangeElement extends Components.SlRange, HTMLStencilElement {
     }
-    var HTMLShRangeElement: {
-        prototype: HTMLShRangeElement;
-        new (): HTMLShRangeElement;
+    var HTMLSlRangeElement: {
+        prototype: HTMLSlRangeElement;
+        new (): HTMLSlRangeElement;
     };
-    interface HTMLShSpinnerElement extends Components.ShSpinner, HTMLStencilElement {
+    interface HTMLSlSpinnerElement extends Components.SlSpinner, HTMLStencilElement {
     }
-    var HTMLShSpinnerElement: {
-        prototype: HTMLShSpinnerElement;
-        new (): HTMLShSpinnerElement;
+    var HTMLSlSpinnerElement: {
+        prototype: HTMLSlSpinnerElement;
+        new (): HTMLSlSpinnerElement;
     };
-    interface HTMLShSwitchElement extends Components.ShSwitch, HTMLStencilElement {
+    interface HTMLSlSwitchElement extends Components.SlSwitch, HTMLStencilElement {
     }
-    var HTMLShSwitchElement: {
-        prototype: HTMLShSwitchElement;
-        new (): HTMLShSwitchElement;
+    var HTMLSlSwitchElement: {
+        prototype: HTMLSlSwitchElement;
+        new (): HTMLSlSwitchElement;
     };
-    interface HTMLShTabElement extends Components.ShTab, HTMLStencilElement {
+    interface HTMLSlTabElement extends Components.SlTab, HTMLStencilElement {
     }
-    var HTMLShTabElement: {
-        prototype: HTMLShTabElement;
-        new (): HTMLShTabElement;
+    var HTMLSlTabElement: {
+        prototype: HTMLSlTabElement;
+        new (): HTMLSlTabElement;
     };
-    interface HTMLShTabPanelElement extends Components.ShTabPanel, HTMLStencilElement {
+    interface HTMLSlTabPanelElement extends Components.SlTabPanel, HTMLStencilElement {
     }
-    var HTMLShTabPanelElement: {
-        prototype: HTMLShTabPanelElement;
-        new (): HTMLShTabPanelElement;
+    var HTMLSlTabPanelElement: {
+        prototype: HTMLSlTabPanelElement;
+        new (): HTMLSlTabPanelElement;
     };
-    interface HTMLShTabsElement extends Components.ShTabs, HTMLStencilElement {
+    interface HTMLSlTabsElement extends Components.SlTabs, HTMLStencilElement {
     }
-    var HTMLShTabsElement: {
-        prototype: HTMLShTabsElement;
-        new (): HTMLShTabsElement;
+    var HTMLSlTabsElement: {
+        prototype: HTMLSlTabsElement;
+        new (): HTMLSlTabsElement;
     };
-    interface HTMLShTextareaElement extends Components.ShTextarea, HTMLStencilElement {
+    interface HTMLSlTextareaElement extends Components.SlTextarea, HTMLStencilElement {
     }
-    var HTMLShTextareaElement: {
-        prototype: HTMLShTextareaElement;
-        new (): HTMLShTextareaElement;
+    var HTMLSlTextareaElement: {
+        prototype: HTMLSlTextareaElement;
+        new (): HTMLSlTextareaElement;
     };
-    interface HTMLShTooltipElement extends Components.ShTooltip, HTMLStencilElement {
+    interface HTMLSlTooltipElement extends Components.SlTooltip, HTMLStencilElement {
     }
-    var HTMLShTooltipElement: {
-        prototype: HTMLShTooltipElement;
-        new (): HTMLShTooltipElement;
+    var HTMLSlTooltipElement: {
+        prototype: HTMLSlTooltipElement;
+        new (): HTMLSlTooltipElement;
     };
     interface HTMLElementTagNameMap {
-        "sh-alert": HTMLShAlertElement;
-        "sh-button": HTMLShButtonElement;
-        "sh-checkbox": HTMLShCheckboxElement;
-        "sh-dropdown": HTMLShDropdownElement;
-        "sh-dropdown-divider": HTMLShDropdownDividerElement;
-        "sh-dropdown-item": HTMLShDropdownItemElement;
-        "sh-input": HTMLShInputElement;
-        "sh-progress-bar": HTMLShProgressBarElement;
-        "sh-progress-ring": HTMLShProgressRingElement;
-        "sh-radio": HTMLShRadioElement;
-        "sh-range": HTMLShRangeElement;
-        "sh-spinner": HTMLShSpinnerElement;
-        "sh-switch": HTMLShSwitchElement;
-        "sh-tab": HTMLShTabElement;
-        "sh-tab-panel": HTMLShTabPanelElement;
-        "sh-tabs": HTMLShTabsElement;
-        "sh-textarea": HTMLShTextareaElement;
-        "sh-tooltip": HTMLShTooltipElement;
+        "sl-alert": HTMLSlAlertElement;
+        "sl-button": HTMLSlButtonElement;
+        "sl-checkbox": HTMLSlCheckboxElement;
+        "sl-dropdown": HTMLSlDropdownElement;
+        "sl-dropdown-divider": HTMLSlDropdownDividerElement;
+        "sl-dropdown-item": HTMLSlDropdownItemElement;
+        "sl-input": HTMLSlInputElement;
+        "sl-progress-bar": HTMLSlProgressBarElement;
+        "sl-progress-ring": HTMLSlProgressRingElement;
+        "sl-radio": HTMLSlRadioElement;
+        "sl-range": HTMLSlRangeElement;
+        "sl-spinner": HTMLSlSpinnerElement;
+        "sl-switch": HTMLSlSwitchElement;
+        "sl-tab": HTMLSlTabElement;
+        "sl-tab-panel": HTMLSlTabPanelElement;
+        "sl-tabs": HTMLSlTabsElement;
+        "sl-textarea": HTMLSlTextareaElement;
+        "sl-tooltip": HTMLSlTooltipElement;
     }
 }
 declare namespace LocalJSX {
-    interface ShAlert {
+    interface SlAlert {
         /**
           * Set to true to make the alert closable.
          */
@@ -677,13 +677,13 @@ declare namespace LocalJSX {
         /**
           * Emitted when the alert is closed.
          */
-        "onShClose"?: (event: CustomEvent<any>) => void;
+        "onSlClose"?: (event: CustomEvent<any>) => void;
         /**
           * The type of alert to draw.
          */
         "type"?: string;
     }
-    interface ShButton {
+    interface SlButton {
         /**
           * Set to true to draw the button with a caret for use with dropdowns, popovers, etc.
          */
@@ -717,7 +717,7 @@ declare namespace LocalJSX {
          */
         "type"?: "default" | "primary" | "success" | "info" | "warning" | "danger" | "text";
     }
-    interface ShCheckbox {
+    interface SlCheckbox {
         /**
           * Set to true to draw the checkbox in a checked state.
          */
@@ -743,7 +743,7 @@ declare namespace LocalJSX {
          */
         "value"?: string;
     }
-    interface ShDropdown {
+    interface SlDropdown {
         /**
           * The preferred placement of the dropdown menu. Note that the actual placement may vary as needed to keep the menu inside of the viewport.
          */
@@ -753,9 +753,9 @@ declare namespace LocalJSX {
          */
         "position"?: "fixed" | "absolute";
     }
-    interface ShDropdownDivider {
+    interface SlDropdownDivider {
     }
-    interface ShDropdownItem {
+    interface SlDropdownItem {
         /**
           * Set to true to draw the dropdown item in an active state.
          */
@@ -768,9 +768,9 @@ declare namespace LocalJSX {
           * Set to true to draw the dropdown item in a disabled state.
          */
         "disabled"?: boolean;
-        "onShoelaceSelect"?: (event: CustomEvent<any>) => void;
+        "onSlSelect"?: (event: CustomEvent<any>) => void;
     }
-    interface ShInput {
+    interface SlInput {
         /**
           * The input's autocaptialize attribute.
          */
@@ -860,7 +860,7 @@ declare namespace LocalJSX {
          */
         "value"?: string;
     }
-    interface ShProgressBar {
+    interface SlProgressBar {
         /**
           * The height of the progress bar in pixels.
          */
@@ -870,7 +870,7 @@ declare namespace LocalJSX {
          */
         "percentage"?: number;
     }
-    interface ShProgressRing {
+    interface SlProgressRing {
         /**
           * The diameter of the progress ring in pixels.
          */
@@ -884,7 +884,7 @@ declare namespace LocalJSX {
          */
         "stroke"?: number;
     }
-    interface ShRadio {
+    interface SlRadio {
         /**
           * Set to true to draw the radio in a checked state.
          */
@@ -906,7 +906,7 @@ declare namespace LocalJSX {
          */
         "value"?: string;
     }
-    interface ShRange {
+    interface SlRange {
         /**
           * Set to true to disable the input.
          */
@@ -944,14 +944,14 @@ declare namespace LocalJSX {
          */
         "value"?: number;
     }
-    interface ShSpinner {
+    interface SlSpinner {
         /**
           * The spinner's size.
          */
         "diameter"?: number;
         "stroke"?: number;
     }
-    interface ShSwitch {
+    interface SlSwitch {
         /**
           * Set to true to draw the switch in a checked state.
          */
@@ -973,7 +973,7 @@ declare namespace LocalJSX {
          */
         "value"?: string;
     }
-    interface ShTab {
+    interface SlTab {
         /**
           * Set to true to draw the tab in an active state.
          */
@@ -983,11 +983,11 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
-          * The name of the tab panel the tab will be synced to. The panel must exist in the same `<sh-tabs>` element.
+          * The name of the tab panel the tab will be synced to. The panel must exist in the same `<sl-tabs>` element.
          */
         "panel"?: string;
     }
-    interface ShTabPanel {
+    interface SlTabPanel {
         /**
           * When true, the tab panel will be shown.
          */
@@ -997,21 +997,21 @@ declare namespace LocalJSX {
          */
         "name"?: string;
     }
-    interface ShTabs {
+    interface SlTabs {
         /**
           * Emitted when a tab is hidden.
          */
-        "onShTabHide"?: (event: CustomEvent<any>) => void;
+        "onSlTabHide"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when a tab is shown.
          */
-        "onShTabShow"?: (event: CustomEvent<any>) => void;
+        "onSlTabShow"?: (event: CustomEvent<any>) => void;
         /**
           * The position of the tabs.
          */
         "position"?: "top" | "bottom" | "left" | "right";
     }
-    interface ShTextarea {
+    interface SlTextarea {
         /**
           * The textarea's autocaptialize attribute.
          */
@@ -1077,7 +1077,7 @@ declare namespace LocalJSX {
          */
         "value"?: string;
     }
-    interface ShTooltip {
+    interface SlTooltip {
         /**
           * Set to true to draw the the tooltip with an arrow.
          */
@@ -1109,15 +1109,15 @@ declare namespace LocalJSX {
         /**
           * Emitted when the tooltip begins to hide.
          */
-        "onShHide"?: (event: CustomEvent<any>) => void;
+        "onSlHide"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the tooltip begins to show, but before it gets mounted to the DOM.
          */
-        "onShShow"?: (event: CustomEvent<any>) => void;
+        "onSlShow"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the tooltip has fully transitioned in.
          */
-        "onShShown"?: (event: CustomEvent<any>) => void;
+        "onSlShown"?: (event: CustomEvent<any>) => void;
         /**
           * The preferred placement of the tooltip. Note that the actual placement may vary as needed to keep the tooltip inside of the viewport.
          */
@@ -1144,48 +1144,48 @@ declare namespace LocalJSX {
         "zIndex"?: number;
     }
     interface IntrinsicElements {
-        "sh-alert": ShAlert;
-        "sh-button": ShButton;
-        "sh-checkbox": ShCheckbox;
-        "sh-dropdown": ShDropdown;
-        "sh-dropdown-divider": ShDropdownDivider;
-        "sh-dropdown-item": ShDropdownItem;
-        "sh-input": ShInput;
-        "sh-progress-bar": ShProgressBar;
-        "sh-progress-ring": ShProgressRing;
-        "sh-radio": ShRadio;
-        "sh-range": ShRange;
-        "sh-spinner": ShSpinner;
-        "sh-switch": ShSwitch;
-        "sh-tab": ShTab;
-        "sh-tab-panel": ShTabPanel;
-        "sh-tabs": ShTabs;
-        "sh-textarea": ShTextarea;
-        "sh-tooltip": ShTooltip;
+        "sl-alert": SlAlert;
+        "sl-button": SlButton;
+        "sl-checkbox": SlCheckbox;
+        "sl-dropdown": SlDropdown;
+        "sl-dropdown-divider": SlDropdownDivider;
+        "sl-dropdown-item": SlDropdownItem;
+        "sl-input": SlInput;
+        "sl-progress-bar": SlProgressBar;
+        "sl-progress-ring": SlProgressRing;
+        "sl-radio": SlRadio;
+        "sl-range": SlRange;
+        "sl-spinner": SlSpinner;
+        "sl-switch": SlSwitch;
+        "sl-tab": SlTab;
+        "sl-tab-panel": SlTabPanel;
+        "sl-tabs": SlTabs;
+        "sl-textarea": SlTextarea;
+        "sl-tooltip": SlTooltip;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "sh-alert": LocalJSX.ShAlert & JSXBase.HTMLAttributes<HTMLShAlertElement>;
-            "sh-button": LocalJSX.ShButton & JSXBase.HTMLAttributes<HTMLShButtonElement>;
-            "sh-checkbox": LocalJSX.ShCheckbox & JSXBase.HTMLAttributes<HTMLShCheckboxElement>;
-            "sh-dropdown": LocalJSX.ShDropdown & JSXBase.HTMLAttributes<HTMLShDropdownElement>;
-            "sh-dropdown-divider": LocalJSX.ShDropdownDivider & JSXBase.HTMLAttributes<HTMLShDropdownDividerElement>;
-            "sh-dropdown-item": LocalJSX.ShDropdownItem & JSXBase.HTMLAttributes<HTMLShDropdownItemElement>;
-            "sh-input": LocalJSX.ShInput & JSXBase.HTMLAttributes<HTMLShInputElement>;
-            "sh-progress-bar": LocalJSX.ShProgressBar & JSXBase.HTMLAttributes<HTMLShProgressBarElement>;
-            "sh-progress-ring": LocalJSX.ShProgressRing & JSXBase.HTMLAttributes<HTMLShProgressRingElement>;
-            "sh-radio": LocalJSX.ShRadio & JSXBase.HTMLAttributes<HTMLShRadioElement>;
-            "sh-range": LocalJSX.ShRange & JSXBase.HTMLAttributes<HTMLShRangeElement>;
-            "sh-spinner": LocalJSX.ShSpinner & JSXBase.HTMLAttributes<HTMLShSpinnerElement>;
-            "sh-switch": LocalJSX.ShSwitch & JSXBase.HTMLAttributes<HTMLShSwitchElement>;
-            "sh-tab": LocalJSX.ShTab & JSXBase.HTMLAttributes<HTMLShTabElement>;
-            "sh-tab-panel": LocalJSX.ShTabPanel & JSXBase.HTMLAttributes<HTMLShTabPanelElement>;
-            "sh-tabs": LocalJSX.ShTabs & JSXBase.HTMLAttributes<HTMLShTabsElement>;
-            "sh-textarea": LocalJSX.ShTextarea & JSXBase.HTMLAttributes<HTMLShTextareaElement>;
-            "sh-tooltip": LocalJSX.ShTooltip & JSXBase.HTMLAttributes<HTMLShTooltipElement>;
+            "sl-alert": LocalJSX.SlAlert & JSXBase.HTMLAttributes<HTMLSlAlertElement>;
+            "sl-button": LocalJSX.SlButton & JSXBase.HTMLAttributes<HTMLSlButtonElement>;
+            "sl-checkbox": LocalJSX.SlCheckbox & JSXBase.HTMLAttributes<HTMLSlCheckboxElement>;
+            "sl-dropdown": LocalJSX.SlDropdown & JSXBase.HTMLAttributes<HTMLSlDropdownElement>;
+            "sl-dropdown-divider": LocalJSX.SlDropdownDivider & JSXBase.HTMLAttributes<HTMLSlDropdownDividerElement>;
+            "sl-dropdown-item": LocalJSX.SlDropdownItem & JSXBase.HTMLAttributes<HTMLSlDropdownItemElement>;
+            "sl-input": LocalJSX.SlInput & JSXBase.HTMLAttributes<HTMLSlInputElement>;
+            "sl-progress-bar": LocalJSX.SlProgressBar & JSXBase.HTMLAttributes<HTMLSlProgressBarElement>;
+            "sl-progress-ring": LocalJSX.SlProgressRing & JSXBase.HTMLAttributes<HTMLSlProgressRingElement>;
+            "sl-radio": LocalJSX.SlRadio & JSXBase.HTMLAttributes<HTMLSlRadioElement>;
+            "sl-range": LocalJSX.SlRange & JSXBase.HTMLAttributes<HTMLSlRangeElement>;
+            "sl-spinner": LocalJSX.SlSpinner & JSXBase.HTMLAttributes<HTMLSlSpinnerElement>;
+            "sl-switch": LocalJSX.SlSwitch & JSXBase.HTMLAttributes<HTMLSlSwitchElement>;
+            "sl-tab": LocalJSX.SlTab & JSXBase.HTMLAttributes<HTMLSlTabElement>;
+            "sl-tab-panel": LocalJSX.SlTabPanel & JSXBase.HTMLAttributes<HTMLSlTabPanelElement>;
+            "sl-tabs": LocalJSX.SlTabs & JSXBase.HTMLAttributes<HTMLSlTabsElement>;
+            "sl-textarea": LocalJSX.SlTextarea & JSXBase.HTMLAttributes<HTMLSlTextareaElement>;
+            "sl-tooltip": LocalJSX.SlTooltip & JSXBase.HTMLAttributes<HTMLSlTooltipElement>;
         }
     }
 }

@@ -5,7 +5,7 @@ import { Component, Prop, h } from '@stencil/core';
  */
 
 @Component({
-  tag: 'sh-progress-bar',
+  tag: 'sl-progress-bar',
   styleUrl: 'progress-bar.scss',
   shadow: true
 })
@@ -19,7 +19,7 @@ export class ProgressBar {
   render() {
     return (
       <div
-        class="sh-progress-bar"
+        class="sl-progress-bar"
         style={{
           '--height': `${this.height}px`
         }}
@@ -29,12 +29,12 @@ export class ProgressBar {
         aria-valuenow={this.percentage}
       >
         <div
-          class="sh-progress-bar__indicator"
+          class="sl-progress-bar__indicator"
           style={{
             width: `${this.percentage}%`
           }}
         >
-          <span class="sh-progress-bar__label">
+          <span class="sl-progress-bar__label">
             <slot />
           </span>
         </div>

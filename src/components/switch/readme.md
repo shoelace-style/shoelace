@@ -1,9 +1,9 @@
 # Switch
 
 ```html preview
-<sh-switch>Switch</sh-switch><br><br>
-<sh-switch checked>Checked</sh-switch><br><br>
-<sh-switch disabled>Disabled</sh-switch><br><br>
+<sl-switch>Switch</sl-switch><br><br>
+<sl-switch checked>Checked</sl-switch><br><br>
+<sl-switch disabled>Disabled</sl-switch><br><br>
 ```
 
 

@@ -8,22 +8,22 @@
   display: block;
 }
 
-.sh-range {
+.sl-range {
   position: relative;
 
-  .sh-range__control {
+  .sl-range__control {
     -webkit-appearance: none;
     width: 100%;
-    height: var(--sh-form-control-height--medium);
+    height: var(--sl-form-control-height--medium);
     background: transparent;
-    line-height: var(--sh-form-control-height--medium);
+    line-height: var(--sl-form-control-height--medium);
     vertical-align: middle;
 
     // Webkit
     &::-webkit-slider-runnable-track {
       width: 100%;
       height: var(--track-height);
-      background-color: var(--sh-color-gray-90);
+      background-color: var(--sl-color-gray-90);
       border-radius: 3px;
       border: none;
     }
@@ -33,30 +33,30 @@
       width: var(--thumb-size);
       height: var(--thumb-size);
       border-radius: 50%;
-      background-color: var(--sh-color-primary-50);
-      border: solid var(--sh-form-control-border-width) var(--sh-color-primary-50);
+      background-color: var(--sl-color-primary-50);
+      border: solid var(--sl-form-control-border-width) var(--sl-color-primary-50);
       -webkit-appearance: none;
       margin-top: calc(var(--thumb-size) / -2 + var(--track-height) / 2);
-      transition: var(--sh-form-control-transition-speed) border-color,
-        var(--sh-form-control-transition-speed) background-color, var(--sh-form-control-transition-speed) color,
-        var(--sh-form-control-transition-speed) box-shadow, var(--sh-form-control-transition-speed) transform;
+      transition: var(--sl-form-control-transition-speed) border-color,
+        var(--sl-form-control-transition-speed) background-color, var(--sl-form-control-transition-speed) color,
+        var(--sl-form-control-transition-speed) box-shadow, var(--sl-form-control-transition-speed) transform;
       cursor: pointer;
     }
 
     &:not(:disabled)::-webkit-slider-thumb:hover {
-      background-color: var(--sh-color-primary-60);
-      border-color: var(--sh-color-primary-60);
+      background-color: var(--sl-color-primary-60);
+      border-color: var(--sl-color-primary-60);
     }
 
     &:not(:disabled):focus::-webkit-slider-thumb {
-      background-color: var(--sh-color-primary-60);
-      border-color: var(--sh-color-primary-60);
-      box-shadow: var(--sh-focus-ring-box-shadow);
+      background-color: var(--sl-color-primary-60);
+      border-color: var(--sl-color-primary-60);
+      box-shadow: var(--sl-focus-ring-box-shadow);
     }
 
     &:not(:disabled)::-webkit-slider-thumb:active {
-      background-color: var(--sh-color-primary-40);
-      border-color: var(--sh-color-primary-40);
+      background-color: var(--sl-color-primary-40);
+      border-color: var(--sl-color-primary-40);
       cursor: grabbing;
     }
 
@@ -68,7 +68,7 @@
     &::-moz-range-track {
       width: 100%;
       height: var(--track-height);
-      background-color: var(--sh-color-gray-90);
+      background-color: var(--sl-color-gray-90);
       border-radius: 3px;
       border: none;
     }
@@ -78,28 +78,28 @@
       height: var(--thumb-size);
       width: var(--thumb-size);
       border-radius: 50%;
-      background-color: var(--sh-color-primary-50);
-      border-color: var(--sh-color-primary-50);
-      transition: var(--sh-form-control-transition-speed) border-color,
-        var(--sh-form-control-transition-speed) background-color, var(--sh-form-control-transition-speed) color,
-        var(--sh-form-control-transition-speed) box-shadow, var(--sh-form-control-transition-speed) transform;
+      background-color: var(--sl-color-primary-50);
+      border-color: var(--sl-color-primary-50);
+      transition: var(--sl-form-control-transition-speed) border-color,
+        var(--sl-form-control-transition-speed) background-color, var(--sl-form-control-transition-speed) color,
+        var(--sl-form-control-transition-speed) box-shadow, var(--sl-form-control-transition-speed) transform;
       cursor: pointer;
     }
 
     &:not(:disabled)::-moz-range-thumb:hover {
-      background-color: var(--sh-color-primary-60);
-      border-color: var(--sh-color-primary-60);
+      background-color: var(--sl-color-primary-60);
+      border-color: var(--sl-color-primary-60);
     }
 
     &:not(:disabled):focus::-moz-range-thumb {
-      background-color: var(--sh-color-primary-60);
-      border-color: var(--sh-color-primary-60);
-      box-shadow: var(--sh-focus-ring-box-shadow);
+      background-color: var(--sl-color-primary-60);
+      border-color: var(--sl-color-primary-60);
+      box-shadow: var(--sl-focus-ring-box-shadow);
     }
 
     &:not(:disabled)::-moz-range-thumb:active {
-      background-color: var(--sh-color-primary-40);
-      border-color: var(--sh-color-primary-40);
+      background-color: var(--sl-color-primary-40);
+      border-color: var(--sl-color-primary-40);
       cursor: grabbing;
     }
 
@@ -123,19 +123,19 @@
 }
 
 // Tooltip
-.sh-range__tooltip {
+.sl-range__tooltip {
   position: absolute;
   left: 1px;
-  border-radius: var(--sh-tooltip-border-radius);
-  background-color: var(--sh-tooltip-background-color);
-  font-family: var(--sh-tooltip-font-family);
-  font-size: var(--sh-tooltip-font-size);
-  font-weight: var(--sh-tooltip-font-weight);
-  line-height: var(--sh-tooltip-line-height);
-  color: var(--sh-tooltip-color);
+  border-radius: var(--sl-tooltip-border-radius);
+  background-color: var(--sl-tooltip-background-color);
+  font-family: var(--sl-tooltip-font-family);
+  font-size: var(--sl-tooltip-font-size);
+  font-weight: var(--sl-tooltip-font-weight);
+  line-height: var(--sl-tooltip-line-height);
+  color: var(--sl-tooltip-color);
   opacity: 0;
-  padding: var(--sh-tooltip-padding-y) var(--sh-tooltip-padding-x);
-  transition: var(--sh-form-control-transition-speed) opacity;
+  padding: var(--sl-tooltip-padding-y) var(--sl-tooltip-padding-x);
+  transition: var(--sl-form-control-transition-speed) opacity;
   pointer-events: none;
 
   &::after {
@@ -148,16 +148,16 @@
   }
 }
 
-.sh-range--focused .sh-range__tooltip {
+.sl-range--focused .sl-range__tooltip {
   opacity: 1;
 }
 
 // Tooltip on top
-.sh-range--tooltip-top .sh-range__tooltip {
+.sl-range--tooltip-top .sl-range__tooltip {
   top: calc(-1 * var(--thumb-size) - var(--tooltip-offset-y));
 
   &::after {
-    border-top: 6px solid var(--sh-tooltip-background-color);
+    border-top: 6px solid var(--sl-tooltip-background-color);
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
     top: 100%;
@@ -166,11 +166,11 @@
 }
 
 // Tooltip on bottom
-.sh-range--tooltip-bottom .sh-range__tooltip {
+.sl-range--tooltip-bottom .sl-range__tooltip {
   bottom: calc(-1 * var(--thumb-size) - var(--tooltip-offset-y));
 
   &::after {
-    border-bottom: 6px solid var(--sh-tooltip-background-color);
+    border-bottom: 6px solid var(--sl-tooltip-background-color);
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
     bottom: 100%;

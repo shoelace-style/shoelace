@@ -29,7 +29,7 @@ The fastest way to start using Shoelace is with the CDN. In the `<head>` section
 Now you have access to all of Shoelace's components! Try adding a button to your page:
 
 ```html
-<sh-button>Click Me</sh-button>
+<sl-button>Click Me</sl-button>
 ```
 
 !> Don't want to use the CDN? Check out the [installation instructions](installation.md) for more options.

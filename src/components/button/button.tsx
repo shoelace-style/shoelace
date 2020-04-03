@@ -7,7 +7,7 @@ import { Component, Method, Prop, h } from '@stencil/core';
  */
 
 @Component({
-  tag: 'sh-button',
+  tag: 'sl-button',
   styleUrl: 'button.scss',
   shadow: true
 })
@@ -55,42 +55,42 @@ export class Button {
       <button
         ref={el => (this.button = el)}
         class={{
-          'sh-button': true,
+          'sl-button': true,
 
           // Types
-          'sh-button--default': this.type === 'default',
-          'sh-button--primary': this.type === 'primary',
-          'sh-button--success': this.type === 'success',
-          'sh-button--info': this.type === 'info',
-          'sh-button--warning': this.type === 'warning',
-          'sh-button--danger': this.type === 'danger',
-          'sh-button--text': this.type === 'text',
+          'sl-button--default': this.type === 'default',
+          'sl-button--primary': this.type === 'primary',
+          'sl-button--success': this.type === 'success',
+          'sl-button--info': this.type === 'info',
+          'sl-button--warning': this.type === 'warning',
+          'sl-button--danger': this.type === 'danger',
+          'sl-button--text': this.type === 'text',
 
           // Sizes
-          'sh-button--small': this.size === 'small',
-          'sh-button--medium': this.size === 'medium',
-          'sh-button--large': this.size === 'large',
+          'sl-button--small': this.size === 'small',
+          'sl-button--medium': this.size === 'medium',
+          'sl-button--large': this.size === 'large',
 
           // Modifiers
-          'sh-button--caret': this.caret,
-          'sh-button--circle': this.circle,
-          'sh-button--disabled': this.disabled,
-          'sh-button--loading': this.loading,
-          'sh-button--round': this.round
+          'sl-button--caret': this.caret,
+          'sl-button--circle': this.circle,
+          'sl-button--disabled': this.disabled,
+          'sl-button--loading': this.loading,
+          'sl-button--round': this.round
         }}
         disabled={this.disabled}
         tabIndex={this.nativeTabindex}
       >
-        <span class="sh-button__prefix">
+        <span class="sl-button__prefix">
           <slot name="prefix" />
         </span>
-        <span class="sh-button__label">
+        <span class="sl-button__label">
           <slot />
         </span>
-        <span class="sh-button__suffix">
+        <span class="sl-button__suffix">
           <slot name="suffix" />
         </span>
-        <span class="sh-button__caret">
+        <span class="sl-button__caret">
           {this.caret ? (
             <svg viewBox="0 0 16 16">
               <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
@@ -103,7 +103,7 @@ export class Button {
           ) : null}
         </span>
 
-        {this.loading ? <span class="sh-button__spinner" /> : ''}
+        {this.loading ? <span class="sl-button__spinner" /> : ''}
       </button>
     );
   }

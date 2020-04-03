@@ -9,12 +9,12 @@ import { scrollIntoView } from '../../utilities/scroll';
  */
 
 @Component({
-  tag: 'sh-tabs',
+  tag: 'sl-tabs',
   styleUrl: 'tabs.scss',
   shadow: true
 })
 export class Tab {
-  activeTab: HTMLShTabElement;
+  activeTab: HTMLSlTabElement;
   activeTabIndicator: HTMLElement;
   body: HTMLElement;
   nav: HTMLElement;
@@ -41,10 +41,10 @@ export class Tab {
   }
 
   /** Emitted when a tab is shown. */
-  @Event() shTabShow: EventEmitter;
+  @Event() slTabShow: EventEmitter;
 
   /** Emitted when a tab is hidden. */
-  @Event() shTabHide: EventEmitter;
+  @Event() slTabHide: EventEmitter;
 
   componentDidLoad() {
     // Set initial tab state
@@ -75,15 +75,15 @@ export class Tab {
     const slot = this.tabs.querySelector('slot');
     return [...slot.assignedElements()].filter((el: any) => {
       return includeDisabled
-        ? el.tagName.toLowerCase() === 'sh-tab'
-        : el.tagName.toLowerCase() === 'sh-tab' && !el.disabled;
-    }) as [HTMLShTabElement];
+        ? el.tagName.toLowerCase() === 'sl-tab'
+        : el.tagName.toLowerCase() === 'sl-tab' && !el.disabled;
+    }) as [HTMLSlTabElement];
   }
 
   getAllPanels() {
     const slot = this.body.querySelector('slot');
-    return [...slot.assignedElements()].filter((el: any) => el.tagName.toLowerCase() === 'sh-tab-panel') as [
-      HTMLShTabPanelElement
+    return [...slot.assignedElements()].filter((el: any) => el.tagName.toLowerCase() === 'sl-tab-panel') as [
+      HTMLSlTabPanelElement
     ];
   }
 
@@ -91,7 +91,7 @@ export class Tab {
     return this.getAllTabs().find(el => el.active);
   }
 
-  setActiveTab(tab: HTMLShTabElement, emitEvents = true) {
+  setActiveTab(tab: HTMLSlTabElement, emitEvents = true) {
     if (tab && tab !== this.activeTab && !tab.disabled) {
       const previousTab = this.activeTab;
       this.activeTab = tab;
@@ -108,10 +108,10 @@ export class Tab {
       // Emit events
       if (emitEvents) {
         if (previousTab) {
-          this.shTabHide.emit({ name: previousTab.panel });
+          this.slTabHide.emit({ name: previousTab.panel });
         }
 
-        this.shTabShow.emit({ name: this.activeTab.panel });
+        this.slTabShow.emit({ name: this.activeTab.panel });
       }
     }
   }
@@ -157,7 +157,7 @@ export class Tab {
 
   handleClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
-    const tab = target.closest('sh-tab');
+    const tab = target.closest('sl-tab');
 
     if (tab) {
       this.setActiveTab(tab);
@@ -170,7 +170,7 @@ export class Tab {
     // Activate a tab
     if (['Enter', ' '].includes(event.key)) {
       const target = event.target as HTMLElement;
-      const tab = target.closest('sh-tab');
+      const tab = target.closest('sl-tab');
 
       if (tab) {
         this.setActiveTab(tab);
@@ -182,7 +182,7 @@ export class Tab {
     if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(event.key)) {
       const activeEl = document.activeElement as any;
 
-      if (activeEl && activeEl.tagName.toLowerCase() === 'sh-tab') {
+      if (activeEl && activeEl.tagName.toLowerCase() === 'sl-tab') {
         const tabs = this.getAllTabs();
         let index = tabs.indexOf(activeEl);
         index = index + (['ArrowLeft', 'ArrowUp'].includes(event.key) ? -1 : 1);
@@ -211,28 +211,28 @@ export class Tab {
     return (
       <div
         class={{
-          'sh-tabs': true,
-          'sh-tabs--using-mouse': this.isUsingMouse,
+          'sl-tabs': true,
+          'sl-tabs--using-mouse': this.isUsingMouse,
 
           // Positions
-          'sh-tabs--top': this.position === 'top',
-          'sh-tabs--bottom': this.position === 'bottom',
-          'sh-tabs--left': this.position === 'left',
-          'sh-tabs--right': this.position === 'right'
+          'sl-tabs--top': this.position === 'top',
+          'sl-tabs--bottom': this.position === 'bottom',
+          'sl-tabs--left': this.position === 'left',
+          'sl-tabs--right': this.position === 'right'
         }}
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
         onKeyUp={this.handleKeyUp}
         onMouseDown={this.handleMouseDown}
       >
-        <div ref={el => (this.nav = el)} class="sh-tabs__nav" tabindex="-1">
-          <div ref={el => (this.tabs = el)} class="sh-tabs__tabs" role="tablist">
-            <div ref={el => (this.activeTabIndicator = el)} class="sh-tabs__active-tab-indicator" />
+        <div ref={el => (this.nav = el)} class="sl-tabs__nav" tabindex="-1">
+          <div ref={el => (this.tabs = el)} class="sl-tabs__tabs" role="tablist">
+            <div ref={el => (this.activeTabIndicator = el)} class="sl-tabs__active-tab-indicator" />
             <slot name="nav" />
           </div>
         </div>
 
-        <div ref={el => (this.body = el)} class="sh-tabs__body">
+        <div ref={el => (this.body = el)} class="sl-tabs__body">
           <slot />
         </div>
       </div>

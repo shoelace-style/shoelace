@@ -1,31 +1,31 @@
 # Range
 
 ```html preview
-<sh-range min="0" max="100" step="1"></sh-range>
+<sl-range min="0" max="100" step="1"></sl-range>
 
 <br><br>
 
-<sh-range min="0" max="100" step="1" tooltip="bottom"></sh-range>
+<sl-range min="0" max="100" step="1" tooltip="bottom"></sl-range>
 
 <br><br>
 
 <!-- TODO: JS not executing -->
-<sh-range id="range-with-custom-formatter" min="0" max="100" step="1"></sh-range>
+<sl-range id="range-with-custom-formatter" min="0" max="100" step="1"></sl-range>
 <script>
 document.querySelector('#range-with-custom-formatter').tooltipFormatter = value => `Total - ${value}%`;
 </script>
 
 <br><br>
 
-<sh-range min="1" max="10" step=".25"></sh-range>
+<sl-range min="1" max="10" step=".25"></sl-range>
 
 <br><br>
 
-<sh-range min="0" max="100" step="1" disabled></sh-range>
+<sl-range min="0" max="100" step="1" disabled></sl-range>
 
 <br><br>
 
-<sh-range min="0" max="100" step="1" tooltip="off"></sh-range>
+<sl-range min="0" max="100" step="1" tooltip="off"></sl-range>
 ```
 
 <!-- Auto Generated Below -->

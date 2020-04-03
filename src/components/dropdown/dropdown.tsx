@@ -7,17 +7,17 @@ let id = 0;
 let openDropdowns = [];
 
 /**
- * @slot trigger - The dropdown's trigger, usually a `<sh-button>` element.
+ * @slot trigger - The dropdown's trigger, usually a `<sl-button>` element.
  * @slot - The dropdown's menu items.
  */
 
 @Component({
-  tag: 'sh-dropdown',
+  tag: 'sl-dropdown',
   styleUrl: 'dropdown.scss',
   shadow: true
 })
 export class Dropdown {
-  id = `sh-dropdown-${++id}`;
+  id = `sl-dropdown-${++id}`;
   menu: HTMLElement;
   popper: PopperInstance;
   trigger: HTMLElement;
@@ -146,19 +146,19 @@ export class Dropdown {
   getAllItems() {
     const slot = this.menu.querySelector('slot');
     return [...slot.assignedElements()].filter(
-      (el: any) => el.tagName.toLowerCase() === 'sh-dropdown-item' && !el.disabled
-    ) as [HTMLShDropdownItemElement];
+      (el: any) => el.tagName.toLowerCase() === 'sl-dropdown-item' && !el.disabled
+    ) as [HTMLSlDropdownItemElement];
   }
 
   getSelectedItem() {
     return this.getAllItems().find(i => i.active);
   }
 
-  setSelectedItem(item: HTMLShDropdownItemElement) {
+  setSelectedItem(item: HTMLSlDropdownItemElement) {
     this.getAllItems().map(i => (i.active = i === item));
   }
 
-  scrollItemIntoView(item: HTMLShDropdownItemElement) {
+  scrollItemIntoView(item: HTMLSlDropdownItemElement) {
     if (item) {
       scrollIntoView(item, this.menu);
     }
@@ -197,7 +197,7 @@ export class Dropdown {
 
   handleDocumentMouseDown(event: MouseEvent) {
     const target = event.target as HTMLElement;
-    const dropdown = target.closest('sh-dropdown');
+    const dropdown = target.closest('sl-dropdown');
 
     // Close when clicking outside of the dropdown control
     if (!dropdown) {
@@ -217,7 +217,7 @@ export class Dropdown {
 
   handleMenuClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
-    const dropdownItem = target.closest('sh-dropdown-item');
+    const dropdownItem = target.closest('sl-dropdown-item');
 
     // Close when clicking on a dropdown item
     if (dropdownItem && !dropdownItem.disabled) {
@@ -234,7 +234,7 @@ export class Dropdown {
 
   handleMenuMouseOver(event: MouseEvent) {
     const target = event.target as HTMLElement;
-    const dropdownItem = target.closest('sh-dropdown-item');
+    const dropdownItem = target.closest('sl-dropdown-item');
 
     if (dropdownItem) {
       this.setSelectedItem(dropdownItem);
@@ -272,14 +272,14 @@ export class Dropdown {
       <div
         id={this.id}
         class={{
-          'sh-dropdown': true,
-          'sh-dropdown--open': this.isOpen
+          'sl-dropdown': true,
+          'sl-dropdown--open': this.isOpen
         }}
         aria-expanded={this.isOpen}
         aria-haspopup="true"
       >
         <span
-          class="sh-dropdown__trigger"
+          class="sl-dropdown__trigger"
           ref={el => (this.trigger = el)}
           onKeyDown={this.handleTriggerKeyDown}
           onClick={() => this.toggleMenu()}
@@ -289,7 +289,7 @@ export class Dropdown {
 
         <div
           ref={el => (this.menu = el)}
-          class="sh-dropdown__menu"
+          class="sl-dropdown__menu"
           role="menu"
           aria-hidden={!this.isOpen}
           aria-labeledby={this.id}

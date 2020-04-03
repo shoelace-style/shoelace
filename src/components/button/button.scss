@@ -9,20 +9,20 @@
   display: inline-block;
 }
 
-.sh-button {
+.sl-button {
   display: flex;
   align-items: stretch;
   justify-content: center;
   width: 100%;
   border-style: solid;
-  border-width: var(--sh-form-control-border-width);
-  font-family: var(--sh-form-control-font-sans-serif);
-  font-weight: var(--sh-font-weight-semibold);
+  border-width: var(--sl-form-control-border-width);
+  font-family: var(--sl-form-control-font-sans-serif);
+  font-weight: var(--sl-font-weight-semibold);
   user-select: none;
   white-space: nowrap;
   vertical-align: middle;
-  transition: var(--sh-form-control-transition-speed) background-color, var(--sh-form-control-transition-speed) color,
-    var(--sh-form-control-transition-speed) border;
+  transition: var(--sl-form-control-transition-speed) background-color, var(--sl-form-control-transition-speed) color,
+    var(--sl-form-control-transition-speed) border;
   cursor: pointer;
 
   &::-moz-focus-inner {
@@ -38,19 +38,19 @@
     cursor: not-allowed;
   }
 
-  .sh-button__prefix,
-  .sh-button__suffix {
+  .sl-button__prefix,
+  .sl-button__suffix {
     flex: 0 0 auto;
     display: flex;
     align-items: center;
   }
 
-  .sh-button__prefix ::slotted(:first-child) {
+  .sl-button__prefix ::slotted(:first-child) {
     margin-left: -0.5em;
     margin-right: 0.5em;
   }
 
-  .sh-button__suffix ::slotted(:last-child) {
+  .sl-button__suffix ::slotted(:last-child) {
     margin-left: 0.5em;
     margin-right: -0.5em;
   }
@@ -60,118 +60,118 @@
 // Standard buttons
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sh-button {
-  &.sh-button--default {
+.sl-button {
+  &.sl-button--default {
     @include button(
-      $background-color: var(--sh-color-white),
-      $border-color: var(--sh-color-gray-80),
-      $color: var(--sh-color-gray-40),
-      $background-color--hover: var(--sh-color-primary-95),
-      $border-color--hover: var(--sh-color-primary-80),
-      $color--hover: var(--sh-color-primary-40),
-      $background-color--focus: var(--sh-color-primary-95),
-      $border-color--focus: var(--sh-color-primary-70),
-      $color--focus: var(--sh-color-primary-40),
-      $box-shadow--focus: 0 0 0 var(--sh-focus-ring-width)
-        hsla(var(--sh-color-primary-hue), var(--sh-color-primary-sat), 50%, var(--sh-focus-ring-alpha)),
-      $background-color--active: var(--sh-color-primary-95),
-      $border-color--active: var(--sh-color-primary-50),
-      $color--active: var(--sh-color-primary-30)
+      $background-color: var(--sl-color-white),
+      $border-color: var(--sl-color-gray-80),
+      $color: var(--sl-color-gray-40),
+      $background-color--hover: var(--sl-color-primary-95),
+      $border-color--hover: var(--sl-color-primary-80),
+      $color--hover: var(--sl-color-primary-40),
+      $background-color--focus: var(--sl-color-primary-95),
+      $border-color--focus: var(--sl-color-primary-70),
+      $color--focus: var(--sl-color-primary-40),
+      $box-shadow--focus: 0 0 0 var(--sl-focus-ring-width)
+        hsla(var(--sl-color-primary-hue), var(--sl-color-primary-sat), 50%, var(--sl-focus-ring-alpha)),
+      $background-color--active: var(--sl-color-primary-95),
+      $border-color--active: var(--sl-color-primary-50),
+      $color--active: var(--sl-color-primary-30)
     );
   }
 
-  &.sh-button--primary {
+  &.sl-button--primary {
     @include button(
-      $background-color: var(--sh-color-primary-50),
-      $border-color: var(--sh-color-primary-50),
-      $color: var(--sh-color-primary-text),
-      $background-color--hover: var(--sh-color-primary-55),
-      $border-color--hover: var(--sh-color-primary-55),
-      $color--hover: var(--sh-color-primary-text),
-      $background-color--focus: var(--sh-color-primary-55),
-      $border-color--focus: var(--sh-color-primary-55),
-      $color--focus: var(--sh-color-primary-text),
-      $box-shadow--focus: 0 0 0 var(--sh-focus-ring-width)
-        hsla(var(--sh-color-primary-hue), var(--sh-color-primary-sat), 50%, var(--sh-focus-ring-alpha)),
-      $background-color--active: var(--sh-color-primary-45),
-      $border-color--active: var(--sh-color-primary-45),
-      $color--active: var(--sh-color-primary-text)
+      $background-color: var(--sl-color-primary-50),
+      $border-color: var(--sl-color-primary-50),
+      $color: var(--sl-color-primary-text),
+      $background-color--hover: var(--sl-color-primary-55),
+      $border-color--hover: var(--sl-color-primary-55),
+      $color--hover: var(--sl-color-primary-text),
+      $background-color--focus: var(--sl-color-primary-55),
+      $border-color--focus: var(--sl-color-primary-55),
+      $color--focus: var(--sl-color-primary-text),
+      $box-shadow--focus: 0 0 0 var(--sl-focus-ring-width)
+        hsla(var(--sl-color-primary-hue), var(--sl-color-primary-sat), 50%, var(--sl-focus-ring-alpha)),
+      $background-color--active: var(--sl-color-primary-45),
+      $border-color--active: var(--sl-color-primary-45),
+      $color--active: var(--sl-color-primary-text)
     );
   }
 
-  &.sh-button--success {
+  &.sl-button--success {
     @include button(
-      $background-color: var(--sh-color-success-50),
-      $border-color: var(--sh-color-success-50),
-      $color: var(--sh-color-success-text),
-      $background-color--hover: var(--sh-color-success-55),
-      $border-color--hover: var(--sh-color-success-55),
-      $color--hover: var(--sh-color-success-text),
-      $background-color--focus: var(--sh-color-success-55),
-      $border-color--focus: var(--sh-color-success-55),
-      $color--focus: var(--sh-color-success-text),
-      $box-shadow--focus: 0 0 0 var(--sh-focus-ring-width)
-        hsla(var(--sh-color-success-hue), var(--sh-color-success-sat), 50%, var(--sh-focus-ring-alpha)),
-      $background-color--active: var(--sh-color-success-45),
-      $border-color--active: var(--sh-color-success-45),
-      $color--active: var(--sh-color-success-text)
+      $background-color: var(--sl-color-success-50),
+      $border-color: var(--sl-color-success-50),
+      $color: var(--sl-color-success-text),
+      $background-color--hover: var(--sl-color-success-55),
+      $border-color--hover: var(--sl-color-success-55),
+      $color--hover: var(--sl-color-success-text),
+      $background-color--focus: var(--sl-color-success-55),
+      $border-color--focus: var(--sl-color-success-55),
+      $color--focus: var(--sl-color-success-text),
+      $box-shadow--focus: 0 0 0 var(--sl-focus-ring-width)
+        hsla(var(--sl-color-success-hue), var(--sl-color-success-sat), 50%, var(--sl-focus-ring-alpha)),
+      $background-color--active: var(--sl-color-success-45),
+      $border-color--active: var(--sl-color-success-45),
+      $color--active: var(--sl-color-success-text)
     );
   }
 
-  &.sh-button--info {
+  &.sl-button--info {
     @include button(
-      $background-color: var(--sh-color-info-50),
-      $border-color: var(--sh-color-info-50),
-      $color: var(--sh-color-info-text),
-      $background-color--hover: var(--sh-color-info-55),
-      $border-color--hover: var(--sh-color-info-55),
-      $color--hover: var(--sh-color-info-text),
-      $background-color--focus: var(--sh-color-info-55),
-      $border-color--focus: var(--sh-color-info-55),
-      $color--focus: var(--sh-color-info-text),
-      $box-shadow--focus: 0 0 0 var(--sh-focus-ring-width)
-        hsla(var(--sh-color-info-hue), var(--sh-color-info-sat), 50%, var(--sh-focus-ring-alpha)),
-      $background-color--active: var(--sh-color-info-45),
-      $border-color--active: var(--sh-color-info-45),
-      $color--active: var(--sh-color-info-text)
+      $background-color: var(--sl-color-info-50),
+      $border-color: var(--sl-color-info-50),
+      $color: var(--sl-color-info-text),
+      $background-color--hover: var(--sl-color-info-55),
+      $border-color--hover: var(--sl-color-info-55),
+      $color--hover: var(--sl-color-info-text),
+      $background-color--focus: var(--sl-color-info-55),
+      $border-color--focus: var(--sl-color-info-55),
+      $color--focus: var(--sl-color-info-text),
+      $box-shadow--focus: 0 0 0 var(--sl-focus-ring-width)
+        hsla(var(--sl-color-info-hue), var(--sl-color-info-sat), 50%, var(--sl-focus-ring-alpha)),
+      $background-color--active: var(--sl-color-info-45),
+      $border-color--active: var(--sl-color-info-45),
+      $color--active: var(--sl-color-info-text)
     );
   }
 
-  &.sh-button--warning {
+  &.sl-button--warning {
     @include button(
-      $background-color: var(--sh-color-warning-50),
-      $border-color: var(--sh-color-warning-50),
-      $color: var(--sh-color-warning-text),
-      $background-color--hover: var(--sh-color-warning-55),
-      $border-color--hover: var(--sh-color-warning-55),
-      $color--hover: var(--sh-color-warning-text),
-      $background-color--focus: var(--sh-color-warning-55),
-      $border-color--focus: var(--sh-color-warning-55),
-      $color--focus: var(--sh-color-warning-text),
-      $box-shadow--focus: 0 0 0 var(--sh-focus-ring-width)
-        hsla(var(--sh-color-warning-hue), var(--sh-color-warning-sat), 50%, var(--sh-focus-ring-alpha)),
-      $background-color--active: var(--sh-color-warning-45),
-      $border-color--active: var(--sh-color-warning-45),
-      $color--active: var(--sh-color-warning-text)
+      $background-color: var(--sl-color-warning-50),
+      $border-color: var(--sl-color-warning-50),
+      $color: var(--sl-color-warning-text),
+      $background-color--hover: var(--sl-color-warning-55),
+      $border-color--hover: var(--sl-color-warning-55),
+      $color--hover: var(--sl-color-warning-text),
+      $background-color--focus: var(--sl-color-warning-55),
+      $border-color--focus: var(--sl-color-warning-55),
+      $color--focus: var(--sl-color-warning-text),
+      $box-shadow--focus: 0 0 0 var(--sl-focus-ring-width)
+        hsla(var(--sl-color-warning-hue), var(--sl-color-warning-sat), 50%, var(--sl-focus-ring-alpha)),
+      $background-color--active: var(--sl-color-warning-45),
+      $border-color--active: var(--sl-color-warning-45),
+      $color--active: var(--sl-color-warning-text)
     );
   }
 
-  &.sh-button--danger {
+  &.sl-button--danger {
     @include button(
-      $background-color: var(--sh-color-danger-50),
-      $border-color: var(--sh-color-danger-50),
-      $color: var(--sh-color-danger-text),
-      $background-color--hover: var(--sh-color-danger-55),
-      $border-color--hover: var(--sh-color-danger-55),
-      $color--hover: var(--sh-color-danger-text),
-      $background-color--focus: var(--sh-color-danger-55),
-      $border-color--focus: var(--sh-color-danger-55),
-      $color--focus: var(--sh-color-danger-text),
-      $box-shadow--focus: 0 0 0 var(--sh-focus-ring-width)
-        hsla(var(--sh-color-danger-hue), var(--sh-color-danger-sat), 50%, var(--sh-focus-ring-alpha)),
-      $background-color--active: var(--sh-color-danger-45),
-      $border-color--active: var(--sh-color-danger-45),
-      $color--active: var(--sh-color-danger-text)
+      $background-color: var(--sl-color-danger-50),
+      $border-color: var(--sl-color-danger-50),
+      $color: var(--sl-color-danger-text),
+      $background-color--hover: var(--sl-color-danger-55),
+      $border-color--hover: var(--sl-color-danger-55),
+      $color--hover: var(--sl-color-danger-text),
+      $background-color--focus: var(--sl-color-danger-55),
+      $border-color--focus: var(--sl-color-danger-55),
+      $color--focus: var(--sl-color-danger-text),
+      $box-shadow--focus: 0 0 0 var(--sl-focus-ring-width)
+        hsla(var(--sl-color-danger-hue), var(--sl-color-danger-sat), 50%, var(--sl-focus-ring-alpha)),
+      $background-color--active: var(--sl-color-danger-45),
+      $border-color--active: var(--sl-color-danger-45),
+      $color--active: var(--sl-color-danger-text)
     );
   }
 }
@@ -180,29 +180,29 @@
 // Text buttons
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sh-button--text {
+.sl-button--text {
   background-color: transparent;
   border-color: transparent;
-  color: var(--sh-color-primary-50);
+  color: var(--sl-color-primary-50);
 
   &:hover:not(:disabled) {
     background-color: transparent;
     border-color: transparent;
-    color: var(--sh-color-primary-60);
+    color: var(--sl-color-primary-60);
   }
 
   &:focus:not(:disabled) {
     background-color: transparent;
     border-color: transparent;
-    color: var(--sh-color-primary-60);
-    box-shadow: 0 0 0 var(--sh-focus-ring-width)
-      hsla(var(--sh-color-primary-hue), var(--sh-color-primary-sat), 50%, var(--sh-focus-ring-alpha));
+    color: var(--sl-color-primary-60);
+    box-shadow: 0 0 0 var(--sl-focus-ring-width)
+      hsla(var(--sl-color-primary-hue), var(--sl-color-primary-sat), 50%, var(--sl-focus-ring-alpha));
   }
 
   &:active:not(:disabled) {
     background-color: transparent;
     border-color: transparent;
-    color: var(--sh-color-primary-40);
+    color: var(--sl-color-primary-40);
   }
 }
 
@@ -210,7 +210,7 @@
 // Block modifier
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sh-button--block {
+.sl-button--block {
   width: 100%;
 }
 
@@ -218,27 +218,27 @@
 // Size modifiers
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sh-button--small {
-  font-size: var(--sh-form-control-font-size--small);
-  height: var(--sh-form-control-height--small);
-  line-height: calc(var(--sh-form-control-height--small) - var(--sh-form-control-border-width) * 2);
-  border-radius: var(--sh-form-control-border-radius--small);
+.sl-button--small {
+  font-size: var(--sl-form-control-font-size--small);
+  height: var(--sl-form-control-height--small);
+  line-height: calc(var(--sl-form-control-height--small) - var(--sl-form-control-border-width) * 2);
+  border-radius: var(--sl-form-control-border-radius--small);
   padding: 0 16px;
 }
 
-.sh-button--medium {
-  font-size: var(--sh-form-control-font-size--medium);
-  height: var(--sh-form-control-height--medium);
-  line-height: calc(var(--sh-form-control-height--medium) - var(--sh-form-control-border-width) * 2);
-  border-radius: var(--sh-form-control-border-radius--medium);
+.sl-button--medium {
+  font-size: var(--sl-form-control-font-size--medium);
+  height: var(--sl-form-control-height--medium);
+  line-height: calc(var(--sl-form-control-height--medium) - var(--sl-form-control-border-width) * 2);
+  border-radius: var(--sl-form-control-border-radius--medium);
   padding: 0 20px;
 }
 
-.sh-button--large {
-  font-size: var(--sh-form-control-font-size--large);
-  height: var(--sh-form-control-height--large);
-  line-height: calc(var(--sh-form-control-height--large) - var(--sh-form-control-border-width) * 2);
-  border-radius: var(--sh-form-control-border-radius--large);
+.sl-button--large {
+  font-size: var(--sl-form-control-font-size--large);
+  height: var(--sl-form-control-height--large);
+  line-height: calc(var(--sl-form-control-height--large) - var(--sl-form-control-border-width) * 2);
+  border-radius: var(--sl-form-control-border-radius--large);
   padding: 0 24px;
 }
 
@@ -246,17 +246,17 @@
 // Round modifier
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sh-button--round {
-  &.sh-button--small {
-    border-radius: var(--sh-form-control-height--small);
+.sl-button--round {
+  &.sl-button--small {
+    border-radius: var(--sl-form-control-height--small);
   }
 
-  &.sh-button--medium {
-    border-radius: var(--sh-form-control-height--medium);
+  &.sl-button--medium {
+    border-radius: var(--sl-form-control-height--medium);
   }
 
-  &.sh-button--large {
-    border-radius: var(--sh-form-control-height--large);
+  &.sl-button--large {
+    border-radius: var(--sl-form-control-height--large);
   }
 }
 
@@ -264,34 +264,34 @@
 // Circle modifier
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sh-button--circle {
+.sl-button--circle {
   padding-left: 0;
   padding-right: 0;
 
-  .sh-button__label {
+  .sl-button__label {
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-  &.sh-button--small {
-    width: var(--sh-form-control-height--small);
+  &.sl-button--small {
+    width: var(--sl-form-control-height--small);
     border-radius: 50%;
   }
 
-  &.sh-button--medium {
-    width: var(--sh-form-control-height--medium);
+  &.sl-button--medium {
+    width: var(--sl-form-control-height--medium);
     border-radius: 50%;
   }
 
-  &.sh-button--large {
-    width: var(--sh-form-control-height--large);
+  &.sl-button--large {
+    width: var(--sl-form-control-height--large);
     border-radius: 50%;
   }
 
-  .sh-button__prefix,
-  .sh-button__suffix,
-  .sh-button__caret {
+  .sl-button__prefix,
+  .sl-button__suffix,
+  .sl-button__caret {
     display: none;
   }
 }
@@ -300,12 +300,12 @@
 // Caret modifier
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sh-button--caret {
-  .sh-button__suffix {
+.sl-button--caret {
+  .sl-button__suffix {
     display: none;
   }
 
-  .sh-button__caret {
+  .sl-button__caret {
     position: relative;
     margin-left: 0.75em;
     margin-right: 0;
@@ -324,18 +324,18 @@
 // Loading modifier
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sh-button--loading {
+.sl-button--loading {
   position: relative;
   pointer-events: none;
 
-  .sh-button__prefix,
-  .sh-button__label,
-  .sh-button__suffix,
-  .sh-button__caret {
+  .sl-button__prefix,
+  .sl-button__label,
+  .sl-button__suffix,
+  .sl-button__caret {
     visibility: hidden;
   }
 
-  .sh-button__spinner {
+  .sl-button__spinner {
     position: absolute;
     top: calc(50% - 0.5em);
     left: calc(50% - 0.5em);

@@ -6,7 +6,7 @@ import { Component, Event, EventEmitter, Prop, Watch, h } from '@stencil/core';
  */
 
 @Component({
-  tag: 'sh-alert',
+  tag: 'sl-alert',
   styleUrl: 'alert.scss',
   shadow: true
 })
@@ -27,7 +27,7 @@ export class Tab {
   @Prop({ mutable: true }) closed = false;
 
   /** Emitted when the alert is closed. */
-  @Event() shClose: EventEmitter;
+  @Event() slClose: EventEmitter;
 
   @Watch('closed')
   handleClosedChange() {
@@ -35,7 +35,7 @@ export class Tab {
     this.alert.removeAttribute('hidden');
 
     if (this.closed) {
-      this.shClose.emit();
+      this.slClose.emit();
     }
   }
 
@@ -51,31 +51,31 @@ export class Tab {
       <div
         ref={el => (this.alert = el)}
         class={{
-          'sh-alert': true,
-          'sh-alert--closable': this.closable,
-          'sh-alert--closed': this.closed,
+          'sl-alert': true,
+          'sl-alert--closable': this.closable,
+          'sl-alert--closed': this.closed,
 
           // States
-          'sh-alert--primary': this.type === 'primary',
-          'sh-alert--success': this.type === 'success',
-          'sh-alert--info': this.type === 'info',
-          'sh-alert--warning': this.type === 'warning',
-          'sh-alert--danger': this.type === 'danger'
+          'sl-alert--primary': this.type === 'primary',
+          'sl-alert--success': this.type === 'success',
+          'sl-alert--info': this.type === 'info',
+          'sl-alert--warning': this.type === 'warning',
+          'sl-alert--danger': this.type === 'danger'
         }}
         role="alert"
         aria-hidden={this.closed}
         onTransitionEnd={this.handleTransitionEnd}
       >
-        <span class="sh-alert__icon">
+        <span class="sl-alert__icon">
           <slot name="icon" />
         </span>
 
-        <span class="sh-alert__body">
+        <span class="sl-alert__body">
           <slot />
         </span>
 
         {this.closable && (
-          <button type="button" class="sh-alert__close" onClick={() => (this.closed = true)}>
+          <button type="button" class="sl-alert__close" onClick={() => (this.closed = true)}>
             <svg viewBox="0 0 16 16">
               <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
                 <g stroke="currentColor" stroke-width="2">

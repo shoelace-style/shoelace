@@ -17,9 +17,9 @@ TODO
 
 ## Events
 
-| Event            | Description | Type               |
-| ---------------- | ----------- | ------------------ |
-| `shoelaceSelect` |             | `CustomEvent<any>` |
+| Event      | Description | Type               |
+| ---------- | ----------- | ------------------ |
+| `slSelect` |             | `CustomEvent<any>` |
 
 
 ## Slots
