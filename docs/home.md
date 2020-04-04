@@ -66,6 +66,7 @@ Although Web Components can (to some degree) be polyfilled for older browsers, s
 
 - Components are compiled by [Stencil](https://stenciljs.com/)
 - Theme colors and form controls are inspired by [Element](element.eleme.io)
+- Icons are courtesy of [Bootstrap Icons](https://icons.getbootstrap.com/)
 - Positioning of menus, popovers, etc. is handled by [Popper.js](https://popper.js.org/)
 - Tooltips are powered by [Tippy.js](https://atomiks.github.io/tippyjs/)
 - Documentation is powered by [Docsify](https://docsify.js.org/)

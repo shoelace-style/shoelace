@@ -124,6 +124,16 @@ export namespace Components {
          */
         "disabled": boolean;
     }
+    interface SlIcon {
+        /**
+          * The name of the icon to draw.
+         */
+        "name": string;
+        /**
+          * An external URL of the SVG file to fetch.
+         */
+        "src": string;
+    }
     interface SlInput {
         /**
           * The input's autocaptialize attribute.
@@ -571,6 +581,12 @@ declare global {
         prototype: HTMLSlDropdownItemElement;
         new (): HTMLSlDropdownItemElement;
     };
+    interface HTMLSlIconElement extends Components.SlIcon, HTMLStencilElement {
+    }
+    var HTMLSlIconElement: {
+        prototype: HTMLSlIconElement;
+        new (): HTMLSlIconElement;
+    };
     interface HTMLSlInputElement extends Components.SlInput, HTMLStencilElement {
     }
     var HTMLSlInputElement: {
@@ -650,6 +666,7 @@ declare global {
         "sl-dropdown": HTMLSlDropdownElement;
         "sl-dropdown-divider": HTMLSlDropdownDividerElement;
         "sl-dropdown-item": HTMLSlDropdownItemElement;
+        "sl-icon": HTMLSlIconElement;
         "sl-input": HTMLSlInputElement;
         "sl-progress-bar": HTMLSlProgressBarElement;
         "sl-progress-ring": HTMLSlProgressRingElement;
@@ -769,6 +786,16 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         "onSlSelect"?: (event: CustomEvent<any>) => void;
+    }
+    interface SlIcon {
+        /**
+          * The name of the icon to draw.
+         */
+        "name"?: string;
+        /**
+          * An external URL of the SVG file to fetch.
+         */
+        "src"?: string;
     }
     interface SlInput {
         /**
@@ -1150,6 +1177,7 @@ declare namespace LocalJSX {
         "sl-dropdown": SlDropdown;
         "sl-dropdown-divider": SlDropdownDivider;
         "sl-dropdown-item": SlDropdownItem;
+        "sl-icon": SlIcon;
         "sl-input": SlInput;
         "sl-progress-bar": SlProgressBar;
         "sl-progress-ring": SlProgressRing;
@@ -1174,6 +1202,7 @@ declare module "@stencil/core" {
             "sl-dropdown": LocalJSX.SlDropdown & JSXBase.HTMLAttributes<HTMLSlDropdownElement>;
             "sl-dropdown-divider": LocalJSX.SlDropdownDivider & JSXBase.HTMLAttributes<HTMLSlDropdownDividerElement>;
             "sl-dropdown-item": LocalJSX.SlDropdownItem & JSXBase.HTMLAttributes<HTMLSlDropdownItemElement>;
+            "sl-icon": LocalJSX.SlIcon & JSXBase.HTMLAttributes<HTMLSlIconElement>;
             "sl-input": LocalJSX.SlInput & JSXBase.HTMLAttributes<HTMLSlInputElement>;
             "sl-progress-bar": LocalJSX.SlProgressBar & JSXBase.HTMLAttributes<HTMLSlProgressBarElement>;
             "sl-progress-ring": LocalJSX.SlProgressRing & JSXBase.HTMLAttributes<HTMLSlProgressRingElement>;

@@ -19,6 +19,7 @@
   - [Dropdown](/components/dropdown.md)
   - [Dropdown Item](/components/dropdown-item.md)
   - [Dropdown Divider](/components/dropdown-divider.md)
+  - [Icon](/components/icon.md)
   - [Input](/components/input.md)
   - [Progress Bar](/components/progress-bar.md)
   - [Progress Ring](/components/progress-ring.md)

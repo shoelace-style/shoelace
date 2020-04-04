@@ -40,6 +40,7 @@
     "@popperjs/core": "^2.1.1",
     "@stencil/core": "^1.12.1",
     "@stencil/sass": "^1.1.1",
+    "bootstrap-icons": "^1.0.0-alpha3",
     "normalize.css": "^8.0.1",
     "resize-observer-polyfill": "^1.5.1",
     "tippy.js": "^5.1.3"
