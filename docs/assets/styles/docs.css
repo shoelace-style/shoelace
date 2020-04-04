@@ -267,7 +267,7 @@ body.close .sidebar-toggle:focus {
   top: 0;
   right: 0;
   bottom: 0;
-  width: 1.5rem;
+  width: 1.75rem;
   border-left: solid 1px var(--sl-color-gray-90);
   box-shadow: var(--sl-shadow-1);
   cursor: ew-resize;

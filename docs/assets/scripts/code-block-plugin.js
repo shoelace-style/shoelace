@@ -18,7 +18,7 @@
 
   window.$docsify.plugins.push((hook, vm) => {
     // Convert code blocks to previews
-    hook.afterEach(function(html, next) {
+    hook.afterEach(function (html, next) {
       const domParser = new DOMParser();
       const doc = domParser.parseFromString(html, 'text/html');
 
@@ -39,7 +39,7 @@
           preview.innerHTML = code.textContent;
           preview.innerHTML += `
             <div class="code-block__resizer">
-               <svg width="8" height="15" viewBox="0 0 8 15" xmlns="http://www.w3.org/2000/svg">
+              <svg width="9" viewBox="0 0 9 15" xmlns="http://www.w3.org/2000/svg">
                 <g fill="currentColor" fill-rule="nonzero" transform="translate(8) rotate(90)">
                   <circle cx="1.5" cy="1.5" r="1.5"></circle>
                   <circle cx="1.5" cy="6.5" r="1.5"></circle>
