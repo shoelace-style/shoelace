@@ -41,7 +41,7 @@ document.querySelector('#range-with-custom-formatter').tooltipFormatter = value 
 | `name`             | `name`            | The input's name attribute.                    | `string`                     | `''`                                  |
 | `nativeTabindex`   | `native-tabindex` | The range's tabindex attribute.                | `number`                     | `undefined`                           |
 | `step`             | `step`            | The input's step attribute.                    | `number`                     | `1`                                   |
-| `tooltip`          | `tooltip`         | The tooltip's position.                        | `"bottom" or "off" or "top"` | `'top'`                               |
+| `tooltip`          | `tooltip`         | The tooltip's position.                        | `"bottom" \| "off" \| "top"` | `'top'`                               |
 | `tooltipFormatter` | --                | A function used to format the tooltip's value. | `(value: number) => string`  | `(value: number) => value.toString()` |
 | `value`            | `value`           | The input's value attribute.                   | `number`                     | `undefined`                           |
 

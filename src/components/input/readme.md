@@ -135,7 +135,7 @@
 | `autofocus`      | `autofocus`       | The input's autofocus attribute.                                 | `boolean`                                                                             | `undefined` |
 | `clearable`      | `clearable`       | Set to true to add a clear button when the input is populated.   | `boolean`                                                                             | `false`     |
 | `disabled`       | `disabled`        | Set to true to disable the input.                                | `boolean`                                                                             | `false`     |
-| `inputmode`      | `inputmode`       | The input's inputmode attribute.                                 | `"decimal" or "email" or "none" or "numeric" or "search" or "tel" or "text" or "url"` | `undefined` |
+| `inputmode`      | `inputmode`       | The input's inputmode attribute.                                 | `"decimal" \| "email" \| "none" \| "numeric" \| "search" \| "tel" \| "text" \| "url"` | `undefined` |
 | `max`            | `max`             | The input's max attribute.                                       | `number`                                                                              | `undefined` |
 | `maxlength`      | `maxlength`       | The input's maxlength attribute.                                 | `number`                                                                              | `undefined` |
 | `min`            | `min`             | The input's min attribute.                                       | `number`                                                                              | `undefined` |
@@ -149,7 +149,7 @@
 | `size`           | `size`            | The input's size, one of `small`, `medium`, or `large`.          | `string`                                                                              | `'medium'`  |
 | `step`           | `step`            | The input's step attribute.                                      | `number`                                                                              | `undefined` |
 | `togglePassword` | `toggle-password` | Set to true to add a password toggle button for password inputs. | `boolean`                                                                             | `false`     |
-| `type`           | `type`            | The input's type, one of `text`, `number`, `email`, etc.         | `"email" or "number" or "password" or "search" or "tel" or "text" or "url"`           | `'text'`    |
+| `type`           | `type`            | The input's type, one of `text`, `number`, `email`, etc.         | `"email" \| "number" \| "password" \| "search" \| "tel" \| "text" \| "url"`           | `'text'`    |
 | `value`          | `value`           | The input's value attribute.                                     | `string`                                                                              | `''`        |
 
 
