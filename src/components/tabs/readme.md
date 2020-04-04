@@ -110,7 +110,7 @@
 
 | Property   | Attribute  | Description               | Type                                     | Default |
 | ---------- | ---------- | ------------------------- | ---------------------------------------- | ------- |
-| `position` | `position` | The position of the tabs. | `"bottom" \| "left" \| "right" \| "top"` | `'top'` |
+| `position` | `position` | The position of the tabs. | `"bottom" or "left" or "right" or "top"` | `'top'` |
 
 
 ## Events

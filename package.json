@@ -16,6 +16,7 @@
   ],
   "scripts": {
     "build": "stencil build --docs",
+    "install": "node postinstall.js",
     "start": "concurrently --kill-others \"npm run stencil\" \"gulp\" \"npm run docsify\"",
     "stencil": "stencil build --dev --docs --watch --no-open",
     "docsify": "docsify serve ./docs --open",
@@ -38,7 +39,7 @@
   "license": "MIT",
   "dependencies": {
     "@popperjs/core": "^2.1.1",
-    "@stencil/core": "^1.12.1",
+    "@stencil/core": "^1.9.2",
     "@stencil/sass": "^1.1.1",
     "bootstrap-icons": "^1.0.0-alpha3",
     "normalize.css": "^8.0.1",
