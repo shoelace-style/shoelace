@@ -1,4 +1,4 @@
-<img class="logo" src="/assets/wordmark.svg" alt="Shoelace" data-no-zoom>
+<img class="logo" src="/images/wordmark.svg" alt="Shoelace" data-no-zoom>
 
 👟 _A forward-thinking design system for desktop and mobile._
 
