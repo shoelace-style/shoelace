@@ -222,7 +222,6 @@ export class Dropdown {
     // Close when clicking on a dropdown item
     if (dropdownItem && !dropdownItem.disabled) {
       this.close();
-      console.log(dropdownItem);
       return;
     }
   }
