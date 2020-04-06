@@ -39,9 +39,9 @@ Use the `size` prop to change a button's size.
 Use the `circle` prop to create circular icon buttons.
 
 ```html preview
-<sl-button type="default" size="small" circle><ion-icon name="settings-outline"></ion-icon></sl-button>
-<sl-button type="default" size="medium" circle><ion-icon name="settings-outline"></ion-icon></sl-button>
-<sl-button type="default" size="large" circle><ion-icon name="settings-outline"></ion-icon></sl-button>
+<sl-button type="default" size="small" circle><sl-icon name="gear"></sl-icon></sl-button>
+<sl-button type="default" size="medium" circle><sl-icon name="gear"></sl-icon></sl-button>
+<sl-button type="default" size="large" circle><sl-icon name="gear"></sl-icon></sl-button>
 ```
 
 ## Text
@@ -70,16 +70,16 @@ Use the `prefix` and `suffix` slots to add icons.
 
 ```html preview
 <sl-button type="default">
-  <ion-icon slot="prefix" name="arrow-back-outline"></ion-icon>
-  Back
+  <sl-icon slot="prefix" name="gear"></sl-icon>
+  Settings
 </sl-button>
 <sl-button type="default">
-  <ion-icon slot="suffix" name="arrow-forward-outline"></ion-icon>
-  Next
+  <sl-icon slot="suffix" name="arrow-clockwise"></sl-icon>
+  Refresh
 </sl-button>
 <sl-button type="default">
-  <ion-icon slot="prefix" name="link-outline"></ion-icon>
-  <ion-icon slot="suffix" name="open-outline"></ion-icon>
+  <sl-icon slot="prefix" name="link-45deg"></sl-icon>
+  <sl-icon slot="suffix" name="box-arrow-up-right"></sl-icon>
   Open
 </sl-button>
 ```
@@ -169,6 +169,19 @@ Type: `Promise<void>`
 | `"prefix"` | Used to prepend an icon or similar element to the button. |
 | `"suffix"` | Used to append an icon or similar element to the button.  |
 
+
+## Dependencies
+
+### Depends on
+
+- [sl-icon](../icon)
+
+### Graph
+```mermaid
+graph TD;
+  sl-button --> sl-icon
+  style sl-button fill:#f9f,stroke:#333,stroke-width:4px
+```
 
 ----------------------------------------------
 

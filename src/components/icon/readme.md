@@ -29,6 +29,19 @@
 | `src`    | `src`     | An external URL of the SVG file to fetch. | `string` | `undefined` |
 
 
+## Dependencies
+
+### Used by
+
+ - [sl-button](../button)
+
+### Graph
+```mermaid
+graph TD;
+  sl-button --> sl-icon
+  style sl-icon fill:#f9f,stroke:#333,stroke-width:4px
+```
+
 ----------------------------------------------
 
 

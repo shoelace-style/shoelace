@@ -12,15 +12,11 @@
   <sl-dropdown-divider></sl-dropdown-divider>
   <sl-dropdown-item>
     Prefix
-    <ion-icon slot="prefix" name="save-outline"></ion-icon>
-  </sl-dropdown-item>
-  <sl-dropdown-item>
-    Suffix Text
-    <small slot="suffix"><kbd>cmd+s</kbd></small>
+    <sl-icon slot="prefix" name="gift"></sl-icon>
   </sl-dropdown-item>
   <sl-dropdown-item>
     Suffix Icon
-    <ion-icon slot="suffix" name="open-outline"></ion-icon>
+    <sl-icon slot="suffix" name="heart"></sl-icon>
   </sl-dropdown-item>
 </sl-dropdown>
 ```

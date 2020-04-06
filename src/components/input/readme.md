@@ -14,22 +14,22 @@
 <br><br>
 
 <sl-input type="text" placeholder="Small" size="small">
-  <ion-icon name="settings-outline" slot="prefix"></ion-icon>
-  <ion-icon name="open-outline" slot="suffix"></ion-icon>
+  <sl-icon name="tag" slot="prefix"></sl-icon>
+  <sl-icon name="gear" slot="suffix"></sl-icon>
 </sl-input>
 
 <br><br>
 
 <sl-input type="text" placeholder="Medium" size="medium">
-  <ion-icon name="settings-outline" slot="prefix"></ion-icon>
-  <ion-icon name="open-outline" slot="suffix"></ion-icon>
+  <sl-icon name="tag" slot="prefix"></sl-icon>
+  <sl-icon name="gear" slot="suffix"></sl-icon>
 </sl-input>
 
 <br><br>
 
 <sl-input type="text" placeholder="Large" size="large">
-  <ion-icon name="settings-outline" slot="prefix"></ion-icon>
-  <ion-icon name="open-outline" slot="suffix"></ion-icon>
+  <sl-icon name="tag" slot="prefix"></sl-icon>
+  <sl-icon name="gear" slot="suffix"></sl-icon>
 </sl-input>
 
 <br><br>
@@ -58,8 +58,8 @@
 <sl-input type="text" placeholder="Addons and Icons" size="small">
   <span slot="before">$</span>
   <span slot="after">.00</span>
-  <ion-icon name="settings-outline" slot="prefix"></ion-icon>
-  <ion-icon name="open-outline" slot="suffix"></ion-icon>
+  <sl-icon name="tag" slot="prefix"></sl-icon>
+  <sl-icon name="gear" slot="suffix"></sl-icon>
 </sl-input>
 
 <br><br>
@@ -67,8 +67,8 @@
 <sl-input type="text" placeholder="Addons and Icons" size="medium">
   <span slot="before">$</span>
   <span slot="after">.00</span>
-  <ion-icon name="settings-outline" slot="prefix"></ion-icon>
-  <ion-icon name="open-outline" slot="suffix"></ion-icon>
+  <sl-icon name="tag" slot="prefix"></sl-icon>
+  <sl-icon name="gear" slot="suffix"></sl-icon>
 </sl-input>
 
 <br><br>
@@ -76,8 +76,8 @@
 <sl-input type="text" placeholder="Addons and Icons" size="large">
   <span slot="before">$</span>
   <span slot="after">.00</span>
-  <ion-icon name="settings-outline" slot="prefix"></ion-icon>
-  <ion-icon name="open-outline" slot="suffix"></ion-icon>
+  <sl-icon name="tag" slot="prefix"></sl-icon>
+  <sl-icon name="gear" slot="suffix"></sl-icon>
 </sl-input>
 
 <br><br>
