@@ -306,16 +306,13 @@
   }
 
   .sl-button__caret {
-    position: relative;
-    margin-left: 0.75em;
-    margin-right: 0;
+    display: flex;
+    align-items: center;
 
-    svg {
-      position: absolute;
-      top: calc(50% - 0.5em);
-      left: calc(50% - 0.5em);
-      width: 1em;
-      height: 1em;
+    sl-icon {
+      width: 0.75em;
+      height: 0.75em;
+      margin-left: var(--sl-spacing-1);
     }
   }
 }

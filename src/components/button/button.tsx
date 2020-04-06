@@ -1,7 +1,5 @@
 import { Component, Method, Prop, h } from '@stencil/core';
 
-import caretIcon from '../../icons/caret.svg';
-
 /**
  * @slot prefix - Used to prepend an icon or similar element to the button.
  * @slot suffix - Used to append an icon or similar element to the button.
@@ -92,7 +90,11 @@ export class Button {
         <span class="sl-button__suffix">
           <slot name="suffix" />
         </span>
-        <span class="sl-button__caret" innerHTML={caretIcon} />
+        {this.caret && (
+          <span class="sl-button__caret">
+            <sl-icon name="chevron-down" />
+          </span>
+        )}
 
         {this.loading && <span class="sl-button__spinner" />}
       </button>
