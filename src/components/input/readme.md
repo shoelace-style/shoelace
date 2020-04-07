@@ -178,13 +178,29 @@ Type: `Promise<void>`
 
 ## Slots
 
-| Slot       | Description                                              |
-| ---------- | -------------------------------------------------------- |
-| `"after"`  | Used to insert an addon after the input.                 |
-| `"before"` | Used to insert an addon before the input.                |
-| `"prefix"` | Used to prepend an icon or similar element to the input. |
-| `"suffix"` | Used to append an icon or similar element to the input.  |
+| Slot                   | Description                                               |
+| ---------------------- | --------------------------------------------------------- |
+| `"after"`              | Used to insert an addon after the input.                  |
+| `"before"`             | Used to insert an addon before the input.                 |
+| `"clear-icon"`         | An icon to use in lieu of the default clear icon.         |
+| `"hide-password-icon"` | An icon to use in lieu of the default hide password icon. |
+| `"prefix"`             | Used to prepend an icon or similar element to the input.  |
+| `"show-password-icon"` | An icon to use in lieu of the default show password icon. |
+| `"suffix"`             | Used to append an icon or similar element to the input.   |
 
+
+## Dependencies
+
+### Depends on
+
+- [sl-icon](../icon)
+
+### Graph
+```mermaid
+graph TD;
+  sl-input --> sl-icon
+  style sl-input fill:#f9f,stroke:#333,stroke-width:4px
+```
 
 ----------------------------------------------
 

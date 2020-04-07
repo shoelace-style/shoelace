@@ -293,7 +293,9 @@ pre.code-block__source {
 .code-block__toggle {
   position: relative;
   z-index: 1;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   height: 2.5rem;
   border: solid 1px var(--sl-color-gray-90);
@@ -322,19 +324,7 @@ pre.code-block__source {
   box-shadow: var(--sl-focus-ring-box-shadow);
 }
 
-.code-block__toggle::after {
-  content: '';
-  position: absolute;
-  top: calc(50% - 3px);
-  left: calc(50% - 3px);
-  width: 0px;
-  height: 0px;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-top: 6px solid currentColor;
-}
-
-.code-block--expanded .code-block__toggle::after {
+.code-block--expanded .code-block__toggle sl-icon {
   transform: rotate(180deg);
 }
 

@@ -24,12 +24,26 @@ TODO
 
 ## Slots
 
-| Slot       | Description                                                      |
-| ---------- | ---------------------------------------------------------------- |
-|            | The dropdown item's label.                                       |
-| `"prefix"` | Used to prepend an icon or similar element to the dropdown item. |
-| `"suffix"` | Used to append an icon or similar element to the dropdown item.  |
+| Slot           | Description                                                      |
+| -------------- | ---------------------------------------------------------------- |
+|                | The dropdown item's label.                                       |
+| `"check-icon"` | An icon to use in lieu of the default check icon.                |
+| `"prefix"`     | Used to prepend an icon or similar element to the dropdown item. |
+| `"suffix"`     | Used to append an icon or similar element to the dropdown item.  |
 
+
+## Dependencies
+
+### Depends on
+
+- [sl-icon](../icon)
+
+### Graph
+```mermaid
+graph TD;
+  sl-dropdown-item --> sl-icon
+  style sl-dropdown-item fill:#f9f,stroke:#333,stroke-width:4px
+```
 
 ----------------------------------------------
 

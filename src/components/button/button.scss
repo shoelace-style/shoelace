@@ -17,7 +17,7 @@
   border-style: solid;
   border-width: var(--sl-form-control-border-width);
   font-family: var(--sl-form-control-font-sans-serif);
-  font-weight: var(--sl-font-weight-semibold);
+  font-weight: var(--sl-font-weight-normal);
   user-select: none;
   white-space: nowrap;
   vertical-align: middle;
@@ -313,6 +313,7 @@
       width: 0.75em;
       height: 0.75em;
       margin-left: var(--sl-spacing-1);
+      margin-right: calc(-1 * var(--sl-spacing-1));
     }
   }
 }

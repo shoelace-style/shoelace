@@ -1,9 +1,10 @@
 import { Component, Method, Prop, h } from '@stencil/core';
 
 /**
+ * @slot - The button's label.
  * @slot prefix - Used to prepend an icon or similar element to the button.
  * @slot suffix - Used to append an icon or similar element to the button.
- * @slot - The button's label.
+ * @slot caret-icon - An icon to use in lieu of the normal caret icon.
  */
 
 @Component({
@@ -92,7 +93,9 @@ export class Button {
         </span>
         {this.caret && (
           <span class="sl-button__caret">
-            <sl-icon name="chevron-down" />
+            <slot name="caret-icon">
+              <sl-icon name="chevron-down" />
+            </slot>
           </span>
         )}
 

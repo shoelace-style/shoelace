@@ -25,31 +25,31 @@
 
 ```html preview
 <sl-alert type="primary">
-  <sl-icon slot="icon" name="info-circle"></sl-icon>
+  <sl-icon slot="icon" name="info-circle" style="font-size: 20px;"></sl-icon>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
 </sl-alert><br>
 
 <sl-alert type="success">
-  <sl-icon slot="icon" name="check-circle"></sl-icon>
+  <sl-icon slot="icon" name="check-circle" style="font-size: 20px;"></sl-icon>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
 </sl-alert><br>
 
 <sl-alert type="info">
-  <sl-icon slot="icon" name="gear"></sl-icon>
+  <sl-icon slot="icon" name="gear" style="font-size: 20px;"></sl-icon>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
 </sl-alert><br>
 
 <sl-alert type="warning">
-  <sl-icon slot="icon" name="exclamation-triangle"></sl-icon>
+  <sl-icon slot="icon" name="exclamation-triangle" style="font-size: 20px;"></sl-icon>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
 </sl-alert><br>
 
 <sl-alert type="danger">
-  <sl-icon slot="icon" name="exclamation-octagon"></sl-icon>
+  <sl-icon slot="icon" name="exclamation-octagon" style="font-size: 20px;"></sl-icon>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
 </sl-alert>
@@ -103,11 +103,11 @@
 
 ## Slots
 
-| Slot           | Description                                      |
-| -------------- | ------------------------------------------------ |
-|                | The alert's content.                             |
-| `"close-icon"` | An icon to use in lieu of the normal close icon. |
-| `"icon"`       | An icon to show in the alert.                    |
+| Slot           | Description                                       |
+| -------------- | ------------------------------------------------- |
+|                | The alert's content.                              |
+| `"close-icon"` | An icon to use in lieu of the default close icon. |
+| `"icon"`       | An icon to show in the alert.                     |
 
 
 ## Dependencies

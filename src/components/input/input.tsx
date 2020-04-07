@@ -1,14 +1,13 @@
 import { Component, Element, Method, Prop, State, h } from '@stencil/core';
 
-import inputEyeOpenIcon from '../../icons/input-eye-open.svg';
-import inputEyeSlashIcon from '../../icons/input-eye-slash.svg';
-import inputClearIcon from '../../icons/input-clear.svg';
-
 /**
  * @slot before - Used to insert an addon before the input.
  * @slot after - Used to insert an addon after the input.
  * @slot prefix - Used to prepend an icon or similar element to the input.
  * @slot suffix - Used to append an icon or similar element to the input.
+ * @slot clear-icon - An icon to use in lieu of the default clear icon.
+ * @slot show-password-icon - An icon to use in lieu of the default show password icon.
+ * @slot hide-password-icon - An icon to use in lieu of the default hide password icon.
  */
 
 @Component({
@@ -176,8 +175,11 @@ export class Input {
             onMouseDown={event => event.preventDefault()}
             onClick={this.handleClearClick}
             tabindex="-1"
-            innerHTML={inputClearIcon}
-          />
+          >
+            <slot name="clear-icon">
+              <sl-icon name="x-circle" />
+            </slot>
+          </button>
         )}
 
         {this.togglePassword && (
@@ -186,8 +188,18 @@ export class Input {
             onMouseDown={event => event.preventDefault()}
             onClick={this.handlePasswordToggle}
             tabindex="-1"
-            innerHTML={this.isPasswordVisible ? inputEyeSlashIcon : inputEyeOpenIcon}
-          />
+          >
+            {this.isPasswordVisible ? (
+              <slot name="show-password-icon">
+                <sl-icon name="eye" />
+              </slot>
+            ) : (
+              <slot name="hide-password-icon">
+                {' '}
+                <sl-icon name="eye-slash" />
+              </slot>
+            )}
+          </button>
         )}
 
         <span class="sl-input__suffix">

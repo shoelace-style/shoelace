@@ -1,7 +1,5 @@
 import { Component, Element, Method, Prop, State, h } from '@stencil/core';
 
-import radioCheckIcon from '../../icons/radio-check.svg';
-
 let id = 0;
 
 /** @slot - The radio's label. */
@@ -68,7 +66,15 @@ export class Radio {
         }}
       >
         <span class="sl-radio__control">
-          <span class="sl-radio__icon" innerHTML={radioCheckIcon} />
+          <span class="sl-radio__icon">
+            <svg viewBox="0 0 16 16">
+              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g fill="currentColor">
+                  <circle cx="8" cy="8" r="3.42857143"></circle>
+                </g>
+              </g>
+            </svg>
+          </span>
 
           <input
             ref={el => (this.input = el)}

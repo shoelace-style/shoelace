@@ -126,6 +126,10 @@ export namespace Components {
     }
     interface SlIcon {
         /**
+          * An alternative description to use for accessibility. If omitted, the name or src will be used to generate it.
+         */
+        "label": string;
+        /**
           * The name of the icon to draw.
          */
         "name": string;
@@ -788,6 +792,10 @@ declare namespace LocalJSX {
         "onSlSelect"?: (event: CustomEvent<any>) => void;
     }
     interface SlIcon {
+        /**
+          * An alternative description to use for accessibility. If omitted, the name or src will be used to generate it.
+         */
+        "label"?: string;
         /**
           * The name of the icon to draw.
          */

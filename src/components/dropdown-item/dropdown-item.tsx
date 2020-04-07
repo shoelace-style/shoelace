@@ -1,11 +1,10 @@
 import { Component, Event, EventEmitter, Prop, h } from '@stencil/core';
 
-import menuItemCheckIcon from '../../icons/menu-item-check.svg';
-
 /**
+ * @slot - The dropdown item's label.
  * @slot prefix - Used to prepend an icon or similar element to the dropdown item.
  * @slot suffix - Used to append an icon or similar element to the dropdown item.
- * @slot - The dropdown item's label.
+ * @slot check-icon - An icon to use in lieu of the default check icon.
  */
 
 @Component({
@@ -39,7 +38,11 @@ export class DropdownItem {
         aria-disabled={this.disabled}
         aria-selected={this.active}
       >
-        <span class="sl-dropdown-item__check" innerHTML={menuItemCheckIcon} />
+        <span class="sl-dropdown-item__check">
+          <slot name="check-icon">
+            <sl-icon name="check" />
+          </slot>
+        </span>
 
         <span class="sl-dropdown-item__prefix">
           <slot name="prefix" />

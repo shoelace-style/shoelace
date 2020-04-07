@@ -3,7 +3,7 @@ import { Component, Event, EventEmitter, Prop, Watch, h } from '@stencil/core';
 /**
  * @slot - The alert's content.
  * @slot icon - An icon to show in the alert.
- * @slot close-icon - An icon to use in lieu of the normal close icon.
+ * @slot close-icon - An icon to use in lieu of the default close icon.
  */
 
 @Component({

@@ -68,8 +68,9 @@
   top: calc(50% - 7px);
   visibility: hidden;
   align-items: center;
+  font-size: inherit;
 
-  svg {
+  .sl-dropdown-item__check-icon {
     width: 14px;
     height: 14px;
   }

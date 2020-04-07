@@ -41,12 +41,12 @@
             <div class="code-block__resizer">
               <svg width="9" viewBox="0 0 9 15" xmlns="http://www.w3.org/2000/svg">
                 <g fill="currentColor" fill-rule="nonzero" transform="translate(8) rotate(90)">
-                  <circle cx="1.5" cy="1.5" r="1.5"></circle>
-                  <circle cx="1.5" cy="6.5" r="1.5"></circle>
-                  <circle cx="7.5" cy="1.5" r="1.5"></circle>
-                  <circle cx="7.5" cy="6.5" r="1.5"></circle>
-                  <circle cx="13.5" cy="1.5" r="1.5"></circle>
-                  <circle cx="13.5" cy="6.5" r="1.5"></circle>
+                  <circle cx="1.5" cy="1.5" r="1.25"></circle>
+                  <circle cx="1.5" cy="6.5" r="1.25"></circle>
+                  <circle cx="7.5" cy="1.5" r="1.25"></circle>
+                  <circle cx="7.5" cy="6.5" r="1.25"></circle>
+                  <circle cx="13.5" cy="1.5" r="1.25"></circle>
+                  <circle cx="13.5" cy="6.5" r="1.25"></circle>
                 </g>
               </svg>
             </div>
@@ -62,6 +62,7 @@
           toggle.classList.add('code-block__toggle');
           toggle.setAttribute('aria-expanded', 'false');
           toggle.setAttribute('aria-controls', preId);
+          toggle.innerHTML = '<sl-icon name="chevron-down" style="font-size: 12px;"></sl-icon>';
 
           codeBlock.prepend(preview);
           codeBlock.append(toggle);
