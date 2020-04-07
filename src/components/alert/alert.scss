@@ -71,6 +71,7 @@
     flex: 0 0 auto;
     display: flex;
     align-items: center;
+    font-size: var(--sl-font-size-5);
 
     ::slotted(*) {
       margin-left: var(--sl-spacing-5);
@@ -88,7 +89,7 @@
     background: none;
     border: none;
     font-family: inherit;
-    font-size: inherit;
+    font-size: var(--sl-font-size-5);
     font-weight: inherit;
     color: currentColor;
     padding: 0 var(--sl-spacing-5);

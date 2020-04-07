@@ -33,11 +33,13 @@
 
 ### Used by
 
+ - [sl-alert](../alert)
  - [sl-button](../button)
 
 ### Graph
 ```mermaid
 graph TD;
+  sl-alert --> sl-icon
   sl-button --> sl-icon
   style sl-icon fill:#f9f,stroke:#333,stroke-width:4px
 ```
