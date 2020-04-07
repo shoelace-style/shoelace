@@ -35,7 +35,6 @@
 ### Used by
 
  - [sl-alert](../alert)
- - [sl-button](../button)
  - [sl-dropdown-item](../dropdown-item)
  - [sl-input](../input)
 
@@ -43,7 +42,6 @@
 ```mermaid
 graph TD;
   sl-alert --> sl-icon
-  sl-button --> sl-icon
   sl-dropdown-item --> sl-icon
   sl-input --> sl-icon
   style sl-icon fill:#f9f,stroke:#333,stroke-width:4px

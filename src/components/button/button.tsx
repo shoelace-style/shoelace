@@ -4,7 +4,6 @@ import { Component, Method, Prop, h } from '@stencil/core';
  * @slot - The button's label.
  * @slot prefix - Used to prepend an icon or similar element to the button.
  * @slot suffix - Used to append an icon or similar element to the button.
- * @slot caret-icon - An icon to use in lieu of the normal caret icon.
  */
 
 @Component({
@@ -30,8 +29,8 @@ export class Button {
   /** Set to true to draw the button in a loading state. */
   @Prop() loading = false;
 
-  /** Set to true to draw a rounded button. */
-  @Prop() round = false;
+  /** Set to true to draw a pill-style button with rounded edges. */
+  @Prop() pill = false;
 
   /** Set to true to draw a circle button. */
   @Prop() circle = false;
@@ -77,7 +76,7 @@ export class Button {
           'sl-button--circle': this.circle,
           'sl-button--disabled': this.disabled,
           'sl-button--loading': this.loading,
-          'sl-button--round': this.round
+          'sl-button--pill': this.pill
         }}
         disabled={this.disabled}
         tabIndex={this.nativeTabindex}
@@ -93,9 +92,14 @@ export class Button {
         </span>
         {this.caret && (
           <span class="sl-button__caret">
-            <slot name="caret-icon">
-              <sl-icon name="chevron-down" />
-            </slot>
+            <svg viewBox="0 0 16 16">
+              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+                <g stroke="currentColor">
+                  <path d="M4,6.28571429 L7.98653436,10.2722486"></path>
+                  <path d="M12,6.28571429 L8,10.2857143"></path>
+                </g>
+              </g>
+            </svg>
           </span>
         )}
 

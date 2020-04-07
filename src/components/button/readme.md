@@ -11,17 +11,17 @@ Good ol' buttons. They're usually the first thing I look at when reviewing a com
 <sl-button type="danger">Danger</sl-button>
 ```
 
-## Round
+## Pill
 
-Use the `round` prop to give buttons rounded edges.
+Use the `pill` prop to give buttons rounded edges.
 
 ```html preview
-<sl-button type="default" round>Default</sl-button>
-<sl-button type="primary" round>Primary</sl-button>
-<sl-button type="success" round>Success</sl-button>
-<sl-button type="info" round>Info</sl-button>
-<sl-button type="warning" round>Warning</sl-button>
-<sl-button type="danger" round>Danger</sl-button>
+<sl-button type="default" pill>Default</sl-button>
+<sl-button type="primary" pill>Primary</sl-button>
+<sl-button type="success" pill>Success</sl-button>
+<sl-button type="info" pill>Info</sl-button>
+<sl-button type="warning" pill>Warning</sl-button>
+<sl-button type="danger" pill>Danger</sl-button>
 ```
 
 ## Sizes
@@ -133,7 +133,7 @@ Use the `disabled` prop to disable a button.
 | `disabled`       | `disabled`        | Set to true to disable the button.                                                 | `boolean`                                                                          | `false`     |
 | `loading`        | `loading`         | Set to true to draw the button in a loading state.                                 | `boolean`                                                                          | `false`     |
 | `nativeTabindex` | `native-tabindex` | The button's tabindex attribute.                                                   | `number`                                                                           | `undefined` |
-| `round`          | `round`           | Set to true to draw a rounded button.                                              | `boolean`                                                                          | `false`     |
+| `pill`           | `pill`            | Set to true to draw a pill-style button with rounded edges.                        | `boolean`                                                                          | `false`     |
 | `size`           | `size`            | The button's size.                                                                 | `"large" \| "medium" \| "small"`                                                   | `'medium'`  |
 | `type`           | `type`            | The button's type.                                                                 | `"danger" \| "default" \| "info" \| "primary" \| "success" \| "text" \| "warning"` | `'default'` |
 
@@ -163,26 +163,12 @@ Type: `Promise<void>`
 
 ## Slots
 
-| Slot           | Description                                               |
-| -------------- | --------------------------------------------------------- |
-|                | The button's label.                                       |
-| `"caret-icon"` | An icon to use in lieu of the normal caret icon.          |
-| `"prefix"`     | Used to prepend an icon or similar element to the button. |
-| `"suffix"`     | Used to append an icon or similar element to the button.  |
+| Slot       | Description                                               |
+| ---------- | --------------------------------------------------------- |
+|            | The button's label.                                       |
+| `"prefix"` | Used to prepend an icon or similar element to the button. |
+| `"suffix"` | Used to append an icon or similar element to the button.  |
 
-
-## Dependencies
-
-### Depends on
-
-- [sl-icon](../icon)
-
-### Graph
-```mermaid
-graph TD;
-  sl-button --> sl-icon
-  style sl-button fill:#f9f,stroke:#333,stroke-width:4px
-```
 
 ----------------------------------------------
 

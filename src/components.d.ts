@@ -42,13 +42,13 @@ export namespace Components {
          */
         "nativeTabindex": number;
         /**
+          * Set to true to draw a pill-style button with rounded edges.
+         */
+        "pill": boolean;
+        /**
           * Removes focus from the button.
          */
         "removeFocus": () => Promise<void>;
-        /**
-          * Set to true to draw a rounded button.
-         */
-        "round": boolean;
         /**
           * Sets focus on the button.
          */
@@ -726,9 +726,9 @@ declare namespace LocalJSX {
          */
         "nativeTabindex"?: number;
         /**
-          * Set to true to draw a rounded button.
+          * Set to true to draw a pill-style button with rounded edges.
          */
-        "round"?: boolean;
+        "pill"?: boolean;
         /**
           * The button's size.
          */

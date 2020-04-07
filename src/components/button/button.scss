@@ -243,10 +243,10 @@
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Round modifier
+// Pill modifier
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sl-button--round {
+.sl-button--pill {
   &.sl-button--small {
     border-radius: var(--sl-form-control-height--small);
   }
@@ -308,12 +308,12 @@
   .sl-button__caret {
     display: flex;
     align-items: center;
+    margin-left: var(--sl-spacing-1);
+    margin-right: calc(-1 * var(--sl-spacing-1));
 
-    sl-icon {
-      width: 0.75em;
-      height: 0.75em;
-      margin-left: var(--sl-spacing-1);
-      margin-right: calc(-1 * var(--sl-spacing-1));
+    svg {
+      width: 1em;
+      height: 1em;
     }
   }
 }
