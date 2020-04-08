@@ -23,7 +23,7 @@ export class Icon {
   @Prop() label: string;
 
   /** An alternative description to use for accessibility. If omitted, the name or src will be used to generate it. */
-  @Prop() strokeWidth = '2';
+  @Prop() strokeWidth = '1.5';
 
   @Watch('name')
   @Watch('src')
