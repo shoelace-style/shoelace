@@ -113,7 +113,7 @@
 
   // Expand and collapse code blocks
   document.addEventListener('click', event => {
-    if (event.target.classList.contains('code-block__toggle')) {
+    if (event.target.closest('.code-block__toggle')) {
       const codeBlock = event.target.closest('.code-block');
       codeBlock.classList.toggle('code-block--expanded');
       event.target.setAttribute('aria-expanded', codeBlock.classList.contains('code-block--expanded'));
