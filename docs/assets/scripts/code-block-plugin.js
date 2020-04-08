@@ -62,7 +62,7 @@
           toggle.classList.add('code-block__toggle');
           toggle.setAttribute('aria-expanded', 'false');
           toggle.setAttribute('aria-controls', preId);
-          toggle.innerHTML = '<sl-icon name="chevron-down" style="font-size: 12px;"></sl-icon>';
+          toggle.innerHTML = '<sl-icon name="chevron-down"></sl-icon>';
 
           codeBlock.prepend(preview);
           codeBlock.append(toggle);

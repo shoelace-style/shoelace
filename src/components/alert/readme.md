@@ -25,7 +25,7 @@
 
 ```html preview
 <sl-alert type="primary">
-  <sl-icon slot="icon" name="info-circle" style="font-size: 20px;"></sl-icon>
+  <sl-icon slot="icon" name="info" style="font-size: 20px;"></sl-icon>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
 </sl-alert><br>
@@ -37,19 +37,19 @@
 </sl-alert><br>
 
 <sl-alert type="info">
-  <sl-icon slot="icon" name="gear" style="font-size: 20px;"></sl-icon>
+  <sl-icon slot="icon" name="settings" style="font-size: 20px;"></sl-icon>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
 </sl-alert><br>
 
 <sl-alert type="warning">
-  <sl-icon slot="icon" name="exclamation-triangle" style="font-size: 20px;"></sl-icon>
+  <sl-icon slot="icon" name="alert-triangle" style="font-size: 20px;"></sl-icon>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
 </sl-alert><br>
 
 <sl-alert type="danger">
-  <sl-icon slot="icon" name="exclamation-octagon" style="font-size: 20px;"></sl-icon>
+  <sl-icon slot="icon" name="alert-octagon" style="font-size: 20px;"></sl-icon>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
 </sl-alert>

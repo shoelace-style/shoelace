@@ -92,14 +92,7 @@ export class Button {
         </span>
         {this.caret && (
           <span class="sl-button__caret">
-            <svg viewBox="0 0 16 16">
-              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
-                <g stroke="currentColor">
-                  <path d="M4,6.28571429 L7.98653436,10.2722486"></path>
-                  <path d="M12,6.28571429 L8,10.2857143"></path>
-                </g>
-              </g>
-            </svg>
+            <sl-icon name="chevron-down" />
           </span>
         )}
 

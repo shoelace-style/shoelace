@@ -2,6 +2,8 @@ import { Component, Prop, State, Watch, getAssetPath, h } from '@stencil/core';
 
 import { requestIcon } from './request';
 
+const parser = new DOMParser();
+
 @Component({
   tag: 'sl-icon',
   styleUrl: 'icon.scss',
@@ -19,6 +21,9 @@ export class Icon {
 
   /** An alternative description to use for accessibility. If omitted, the name or src will be used to generate it. */
   @Prop() label: string;
+
+  /** An alternative description to use for accessibility. If omitted, the name or src will be used to generate it. */
+  @Prop() strokeWidth = '2';
 
   @Watch('name')
   @Watch('src')
@@ -46,10 +51,20 @@ export class Icon {
 
   setIcon() {
     const url = this.name ? getAssetPath(`./icons/${this.name}.svg`) : this.src;
-    requestIcon(url).then(svg => (this.svg = svg));
+    requestIcon(url).then(source => {
+      const doc = parser.parseFromString(source, 'text/html');
+      const svg = doc.body.querySelector('svg');
+
+      if (svg) {
+        svg.setAttribute('stroke-width', this.strokeWidth);
+        this.svg = svg.outerHTML;
+      } else {
+        this.svg = '';
+      }
+    });
   }
 
   render() {
-    return <div class="sl-icon" role="img" aria-label={this.getLabel()} innerHTML={this.svg || ''} />;
+    return <div class="sl-icon" role="img" aria-label={this.getLabel()} innerHTML={this.svg} />;
   }
 }

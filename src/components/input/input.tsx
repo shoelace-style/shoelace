@@ -191,12 +191,12 @@ export class Input {
           >
             {this.isPasswordVisible ? (
               <slot name="show-password-icon">
-                <sl-icon name="eye" />
+                <sl-icon name="eye-off" />
               </slot>
             ) : (
               <slot name="hide-password-icon">
                 {' '}
-                <sl-icon name="eye-slash" />
+                <sl-icon name="eye" />
               </slot>
             )}
           </button>

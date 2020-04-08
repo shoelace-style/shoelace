@@ -1,6 +1,15 @@
 const copy = require('recursive-copy');
+const del = require('del');
 
-Promise.all([
-  copy('./node_modules/bootstrap-icons/icons', './src/components/icon/icons', { overwrite: true }),
-  copy('./node_modules/bootstrap-icons/LICENSE.md', './src/components/icon/icons/LICENSE.md', { overwrite: true })
-]).catch(err => console.error(err));
+(async () => {
+  try {
+    await del('./src/components/icon/icons');
+
+    await Promise.all([
+      copy('./node_modules/feather-icons/dist/icons', './src/components/icon/icons', { overwrite: true }),
+      copy('./node_modules/feather-icons/LICENSE', './src/components/icon/icons/LICENSE', { overwrite: true })
+    ]);
+  } catch (err) {
+    console.error(err);
+  }
+})();

@@ -137,6 +137,10 @@ export namespace Components {
           * An external URL of the SVG file to fetch.
          */
         "src": string;
+        /**
+          * An alternative description to use for accessibility. If omitted, the name or src will be used to generate it.
+         */
+        "strokeWidth": string;
     }
     interface SlInput {
         /**
@@ -804,6 +808,10 @@ declare namespace LocalJSX {
           * An external URL of the SVG file to fetch.
          */
         "src"?: string;
+        /**
+          * An alternative description to use for accessibility. If omitted, the name or src will be used to generate it.
+         */
+        "strokeWidth"?: string;
     }
     interface SlInput {
         /**

@@ -16,7 +16,8 @@
   background-color: $background-color;
   border-color: $border-color;
   color: $color;
-  s &:hover:not(:disabled) {
+
+  &:hover:not(:disabled) {
     background-color: $background-color--hover;
     border-color: $border-color--hover;
     color: $color--hover;
