@@ -141,7 +141,6 @@
 | `min`            | `min`             | The input's min attribute.                                       | `number`                                                                              | `undefined` |
 | `minlength`      | `minlength`       | The input's minlength attribute.                                 | `number`                                                                              | `undefined` |
 | `name`           | `name`            | The input's name attribute.                                      | `string`                                                                              | `''`        |
-| `nativeTabindex` | `native-tabindex` | The input's tabindex attribute.                                  | `number`                                                                              | `undefined` |
 | `pattern`        | `pattern`         | The input's pattern attribute.                                   | `string`                                                                              | `undefined` |
 | `placeholder`    | `placeholder`     | The input's placeholder text.                                    | `string`                                                                              | `undefined` |
 | `readonly`       | `readonly`        | Set to true for a readonly input.                                | `boolean`                                                                             | `false`     |

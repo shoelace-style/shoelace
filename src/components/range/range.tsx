@@ -33,9 +33,6 @@ export class Range {
   /** The input's step attribute. */
   @Prop() step = 1;
 
-  /** The range's tabindex attribute. */
-  @Prop() nativeTabindex: number;
-
   /** The tooltip's position. */
   @Prop() tooltip: 'top' | 'bottom' | 'off' = 'top';
 
@@ -105,7 +102,6 @@ export class Range {
           max={this.max}
           step={this.step}
           value={this.value}
-          tabIndex={this.nativeTabindex}
           onFocus={() => (this.hasFocus = true)}
           onBlur={() => (this.hasFocus = false)}
           onInput={this.handleInput}

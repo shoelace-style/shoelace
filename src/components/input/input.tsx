@@ -91,9 +91,6 @@ export class Input {
   /** The input's inputmode attribute. */
   @Prop() inputmode: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
 
-  /** The input's tabindex attribute. */
-  @Prop() nativeTabindex: number;
-
   /** Sets focus on the input. */
   @Method()
   async setFocus() {
@@ -163,7 +160,6 @@ export class Input {
           pattern={this.pattern}
           required={this.required}
           inputMode={this.inputmode}
-          tabIndex={this.nativeTabindex}
           onFocus={() => (this.hasFocus = true)}
           onBlur={() => (this.hasFocus = false)}
           onInput={() => (this.value = this.input.value)}

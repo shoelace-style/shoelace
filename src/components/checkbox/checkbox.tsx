@@ -32,9 +32,6 @@ export class Checkbox {
   /** Set to true to draw the checkbox in a checked state. */
   @Prop({ mutable: true }) checked = false;
 
-  /** The checkbox's tabindex attribute. */
-  @Prop() nativeTabindex: number;
-
   /** Set to true to draw the checkbox in an indeterminate state. */
   @Prop({ mutable: true }) indeterminate = false;
 
@@ -115,7 +112,6 @@ export class Checkbox {
             value={this.value}
             checked={this.checked}
             disabled={this.disabled}
-            tabIndex={this.nativeTabindex}
             aria-labeledby={this.labelId}
             onBlur={() => (this.hasFocus = false)}
             onFocus={() => (this.hasFocus = true)}

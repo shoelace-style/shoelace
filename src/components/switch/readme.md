@@ -12,13 +12,12 @@
 
 ## Properties
 
-| Property         | Attribute         | Description                                        | Type      | Default     |
-| ---------------- | ----------------- | -------------------------------------------------- | --------- | ----------- |
-| `checked`        | `checked`         | Set to true to draw the switch in a checked state. | `boolean` | `false`     |
-| `disabled`       | `disabled`        | Set to true to disable the switch.                 | `boolean` | `false`     |
-| `name`           | `name`            | A native input's name attribute.                   | `string`  | `undefined` |
-| `nativeTabindex` | `native-tabindex` | The switch's tabindex attribute.                   | `number`  | `undefined` |
-| `value`          | `value`           | The native input's value attribute.                | `string`  | `undefined` |
+| Property   | Attribute  | Description                                        | Type      | Default     |
+| ---------- | ---------- | -------------------------------------------------- | --------- | ----------- |
+| `checked`  | `checked`  | Set to true to draw the switch in a checked state. | `boolean` | `false`     |
+| `disabled` | `disabled` | Set to true to disable the switch.                 | `boolean` | `false`     |
+| `name`     | `name`     | A native input's name attribute.                   | `string`  | `undefined` |
+| `value`    | `value`    | The native input's value attribute.                | `string`  | `undefined` |
 
 
 ## Methods

@@ -34,9 +34,6 @@ export class Radio {
   /** Set to true to draw the radio in a checked state. */
   @Prop({ mutable: true }) checked = false;
 
-  /** The radio's tabindex attribute. */
-  @Prop() nativeTabindex: number;
-
   /** Sets focus on the radio. */
   @Method()
   async setFocus() {
@@ -84,7 +81,6 @@ export class Radio {
             value={this.value}
             checked={this.checked}
             disabled={this.disabled}
-            tabIndex={this.nativeTabindex}
             aria-labeledby={this.labelId}
             onBlur={() => (this.hasFocus = false)}
             onFocus={() => (this.hasFocus = true)}

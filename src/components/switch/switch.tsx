@@ -33,9 +33,6 @@ export class Switch {
   /** Set to true to draw the switch in a checked state. */
   @Prop({ mutable: true }) checked = false;
 
-  /** The switch's tabindex attribute. */
-  @Prop() nativeTabindex: number;
-
   /** Sets focus on the switch. */
   @Method()
   async setFocus() {
@@ -87,7 +84,6 @@ export class Switch {
             value={this.value}
             checked={this.checked}
             disabled={this.disabled}
-            tabIndex={this.nativeTabindex}
             aria-labeledby={this.labelId}
             onBlur={() => (this.hasFocus = false)}
             onFocus={() => (this.hasFocus = true)}

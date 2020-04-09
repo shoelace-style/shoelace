@@ -59,9 +59,6 @@ export class Textarea {
   /** The textarea's inputmode attribute. */
   @Prop() inputmode: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
 
-  /** The textarea's tabindex attribute. */
-  @Prop() nativeTabindex: number;
-
   /** The number of rows to display by default. */
   @Prop() rows = 4;
 
@@ -148,7 +145,6 @@ export class Textarea {
           autoFocus={this.autofocus}
           required={this.required}
           inputMode={this.inputmode}
-          tabIndex={this.nativeTabindex}
           onFocus={() => (this.hasFocus = true)}
           onBlur={() => (this.hasFocus = false)}
           onInput={this.handleInput}

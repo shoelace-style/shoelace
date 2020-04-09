@@ -38,10 +38,6 @@ export namespace Components {
          */
         "loading": boolean;
         /**
-          * The button's tabindex attribute.
-         */
-        "nativeTabindex": number;
-        /**
           * Set to true to draw a pill-style button with rounded edges.
          */
         "pill": boolean;
@@ -79,10 +75,6 @@ export namespace Components {
           * A native input's name attribute.
          */
         "name": string;
-        /**
-          * The checkbox's tabindex attribute.
-         */
-        "nativeTabindex": number;
         /**
           * Removes focus from the checkbox.
          */
@@ -192,10 +184,6 @@ export namespace Components {
          */
         "name": string;
         /**
-          * The input's tabindex attribute.
-         */
-        "nativeTabindex": number;
-        /**
           * The input's pattern attribute.
          */
         "pattern": string;
@@ -278,10 +266,6 @@ export namespace Components {
          */
         "name": string;
         /**
-          * The radio's tabindex attribute.
-         */
-        "nativeTabindex": number;
-        /**
           * Removes focus from the radio.
          */
         "removeFocus": () => Promise<void>;
@@ -311,10 +295,6 @@ export namespace Components {
           * The input's name attribute.
          */
         "name": string;
-        /**
-          * The range's tabindex attribute.
-         */
-        "nativeTabindex": number;
         /**
           * Removes focus from the input.
          */
@@ -360,10 +340,6 @@ export namespace Components {
           * A native input's name attribute.
          */
         "name": string;
-        /**
-          * The switch's tabindex attribute.
-         */
-        "nativeTabindex": number;
         /**
           * Removes focus from the switch.
          */
@@ -452,10 +428,6 @@ export namespace Components {
           * The textarea's name attribute.
          */
         "name": string;
-        /**
-          * The textarea's tabindex attribute.
-         */
-        "nativeTabindex": number;
         /**
           * The textarea's placeholder text.
          */
@@ -726,10 +698,6 @@ declare namespace LocalJSX {
          */
         "loading"?: boolean;
         /**
-          * The button's tabindex attribute.
-         */
-        "nativeTabindex"?: number;
-        /**
           * Set to true to draw a pill-style button with rounded edges.
          */
         "pill"?: boolean;
@@ -759,10 +727,6 @@ declare namespace LocalJSX {
           * A native input's name attribute.
          */
         "name"?: string;
-        /**
-          * The checkbox's tabindex attribute.
-         */
-        "nativeTabindex"?: number;
         /**
           * The native input's value attribute.
          */
@@ -863,10 +827,6 @@ declare namespace LocalJSX {
          */
         "name"?: string;
         /**
-          * The input's tabindex attribute.
-         */
-        "nativeTabindex"?: number;
-        /**
           * The input's pattern attribute.
          */
         "pattern"?: string;
@@ -941,10 +901,6 @@ declare namespace LocalJSX {
          */
         "name"?: string;
         /**
-          * The radio's tabindex attribute.
-         */
-        "nativeTabindex"?: number;
-        /**
           * The native input's value attribute.
          */
         "value"?: string;
@@ -966,10 +922,6 @@ declare namespace LocalJSX {
           * The input's name attribute.
          */
         "name"?: string;
-        /**
-          * The range's tabindex attribute.
-         */
-        "nativeTabindex"?: number;
         /**
           * The input's step attribute.
          */
@@ -1007,10 +959,6 @@ declare namespace LocalJSX {
           * A native input's name attribute.
          */
         "name"?: string;
-        /**
-          * The switch's tabindex attribute.
-         */
-        "nativeTabindex"?: number;
         /**
           * The native input's value attribute.
          */
@@ -1087,10 +1035,6 @@ declare namespace LocalJSX {
           * The textarea's name attribute.
          */
         "name"?: string;
-        /**
-          * The textarea's tabindex attribute.
-         */
-        "nativeTabindex"?: number;
         /**
           * The textarea's placeholder text.
          */

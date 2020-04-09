@@ -12,14 +12,13 @@
 
 ## Properties
 
-| Property         | Attribute         | Description                                                 | Type      | Default     |
-| ---------------- | ----------------- | ----------------------------------------------------------- | --------- | ----------- |
-| `checked`        | `checked`         | Set to true to draw the checkbox in a checked state.        | `boolean` | `false`     |
-| `disabled`       | `disabled`        | Set to true to disable the checkbox.                        | `boolean` | `false`     |
-| `indeterminate`  | `indeterminate`   | Set to true to draw the checkbox in an indeterminate state. | `boolean` | `false`     |
-| `name`           | `name`            | A native input's name attribute.                            | `string`  | `undefined` |
-| `nativeTabindex` | `native-tabindex` | The checkbox's tabindex attribute.                          | `number`  | `undefined` |
-| `value`          | `value`           | The native input's value attribute.                         | `string`  | `undefined` |
+| Property        | Attribute       | Description                                                 | Type      | Default     |
+| --------------- | --------------- | ----------------------------------------------------------- | --------- | ----------- |
+| `checked`       | `checked`       | Set to true to draw the checkbox in a checked state.        | `boolean` | `false`     |
+| `disabled`      | `disabled`      | Set to true to disable the checkbox.                        | `boolean` | `false`     |
+| `indeterminate` | `indeterminate` | Set to true to draw the checkbox in an indeterminate state. | `boolean` | `false`     |
+| `name`          | `name`          | A native input's name attribute.                            | `string`  | `undefined` |
+| `value`         | `value`         | The native input's value attribute.                         | `string`  | `undefined` |
 
 
 ## Methods

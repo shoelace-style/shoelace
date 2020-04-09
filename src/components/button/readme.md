@@ -3,9 +3,9 @@
 Good ol' buttons. They're usually the first thing I look at when reviewing a component library. Shoelace offers a variation for every theme color.
 
 ```html preview
-<sl-button type="default">Default</sl-button>
-<sl-button type="primary">Primary</sl-button>
-<sl-button type="success">Success</sl-button>
+<sl-button type="default" tabindex>Default</sl-button>
+<sl-button type="primary" tabindex>Primary</sl-button>
+<sl-button type="success" tabindex>Success</sl-button>
 <sl-button type="info">Info</sl-button>
 <sl-button type="warning">Warning</sl-button>
 <sl-button type="danger">Danger</sl-button>
@@ -126,16 +126,15 @@ Use the `disabled` prop to disable a button.
 
 ## Properties
 
-| Property         | Attribute         | Description                                                                        | Type                                                                               | Default     |
-| ---------------- | ----------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ----------- |
-| `caret`          | `caret`           | Set to true to draw the button with a caret for use with dropdowns, popovers, etc. | `boolean`                                                                          | `false`     |
-| `circle`         | `circle`          | Set to true to draw a circle button.                                               | `boolean`                                                                          | `false`     |
-| `disabled`       | `disabled`        | Set to true to disable the button.                                                 | `boolean`                                                                          | `false`     |
-| `loading`        | `loading`         | Set to true to draw the button in a loading state.                                 | `boolean`                                                                          | `false`     |
-| `nativeTabindex` | `native-tabindex` | The button's tabindex attribute.                                                   | `number`                                                                           | `undefined` |
-| `pill`           | `pill`            | Set to true to draw a pill-style button with rounded edges.                        | `boolean`                                                                          | `false`     |
-| `size`           | `size`            | The button's size.                                                                 | `"large" \| "medium" \| "small"`                                                   | `'medium'`  |
-| `type`           | `type`            | The button's type.                                                                 | `"danger" \| "default" \| "info" \| "primary" \| "success" \| "text" \| "warning"` | `'default'` |
+| Property   | Attribute  | Description                                                                        | Type                                                                               | Default     |
+| ---------- | ---------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ----------- |
+| `caret`    | `caret`    | Set to true to draw the button with a caret for use with dropdowns, popovers, etc. | `boolean`                                                                          | `false`     |
+| `circle`   | `circle`   | Set to true to draw a circle button.                                               | `boolean`                                                                          | `false`     |
+| `disabled` | `disabled` | Set to true to disable the button.                                                 | `boolean`                                                                          | `false`     |
+| `loading`  | `loading`  | Set to true to draw the button in a loading state.                                 | `boolean`                                                                          | `false`     |
+| `pill`     | `pill`     | Set to true to draw a pill-style button with rounded edges.                        | `boolean`                                                                          | `false`     |
+| `size`     | `size`     | The button's size.                                                                 | `"large" \| "medium" \| "small"`                                                   | `'medium'`  |
+| `type`     | `type`     | The button's type.                                                                 | `"danger" \| "default" \| "info" \| "primary" \| "success" \| "text" \| "warning"` | `'default'` |
 
 
 ## Methods

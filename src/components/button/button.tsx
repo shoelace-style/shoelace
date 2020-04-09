@@ -35,9 +35,6 @@ export class Button {
   /** Set to true to draw a circle button. */
   @Prop() circle = false;
 
-  /** The button's tabindex attribute. */
-  @Prop() nativeTabindex: number;
-
   /** Sets focus on the button. */
   @Method()
   async setFocus() {
@@ -79,7 +76,6 @@ export class Button {
           'sl-button--pill': this.pill
         }}
         disabled={this.disabled}
-        tabIndex={this.nativeTabindex}
       >
         <span class="sl-button__prefix">
           <slot name="prefix" />
