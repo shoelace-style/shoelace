@@ -6,7 +6,9 @@ TODO
 - Show color tokens in a table with var names
 - Add black/white tokens
 
-## Primary
+## Theme Colors
+
+### Primary
 <div style="display: flex;">
   <div class="swatch" style="background-color: var(--sl-color-primary-10);"></div>
   <div class="swatch" style="background-color: var(--sl-color-primary-20);"></div>
@@ -20,7 +22,7 @@ TODO
   <div class="swatch" style="background-color: var(--sl-color-primary-95);"></div>
 </div>
 
-## Gray
+### Gray
 <div style="display: flex;">
   <div class="swatch" style="background-color: var(--sl-color-gray-10);"></div>
   <div class="swatch" style="background-color: var(--sl-color-gray-20);"></div>
@@ -34,7 +36,7 @@ TODO
   <div class="swatch" style="background-color: var(--sl-color-gray-95);"></div>
 </div>
 
-## Success
+### Success
 <div style="display: flex;">
   <div class="swatch" style="background-color: var(--sl-color-success-10);"></div>
   <div class="swatch" style="background-color: var(--sl-color-success-20);"></div>
@@ -48,7 +50,7 @@ TODO
   <div class="swatch" style="background-color: var(--sl-color-success-95);"></div>
 </div>
 
-## Info
+### Info
 <div style="display: flex;">
   <div class="swatch" style="background-color: var(--sl-color-info-10);"></div>
   <div class="swatch" style="background-color: var(--sl-color-info-20);"></div>
@@ -62,7 +64,7 @@ TODO
   <div class="swatch" style="background-color: var(--sl-color-info-95);"></div>
 </div>
 
-## Warning
+### Warning
 <div style="display: flex;">
   <div class="swatch" style="background-color: var(--sl-color-warning-10);"></div>
   <div class="swatch" style="background-color: var(--sl-color-warning-20);"></div>
@@ -76,7 +78,7 @@ TODO
   <div class="swatch" style="background-color: var(--sl-color-warning-95);"></div>
 </div>
 
-## Danger
+### Danger
 <div style="display: flex;">
   <div class="swatch" style="background-color: var(--sl-color-danger-10);"></div>
   <div class="swatch" style="background-color: var(--sl-color-danger-20);"></div>
