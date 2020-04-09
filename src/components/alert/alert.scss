@@ -71,16 +71,16 @@
     flex: 0 0 auto;
     display: flex;
     align-items: center;
-    font-size: var(--sl-font-size-5);
+    font-size: var(--sl-font-size-large);
 
     ::slotted(*) {
-      margin-left: var(--sl-spacing-5);
+      margin-left: var(--sl-spacing-large);
     }
   }
 
   .sl-alert__body {
     flex: 1 1 auto;
-    padding: var(--sl-spacing-5);
+    padding: var(--sl-spacing-large);
   }
 
   .sl-alert__close {
@@ -89,10 +89,10 @@
     background: none;
     border: none;
     font-family: inherit;
-    font-size: var(--sl-font-size-5);
+    font-size: var(--sl-font-size-large);
     font-weight: inherit;
     color: currentColor;
-    padding: 0 var(--sl-spacing-5);
+    padding: 0 var(--sl-spacing-large);
     cursor: pointer;
     -webkit-appearance: none;
     transition: var(--sl-form-control-transition-speed) background-color, var(--sl-form-control-transition-speed) color;

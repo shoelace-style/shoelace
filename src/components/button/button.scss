@@ -308,8 +308,8 @@
   .sl-button__caret {
     display: flex;
     align-items: center;
-    margin-left: var(--sl-spacing-1);
-    margin-right: calc(-1 * var(--sl-spacing-1));
+    margin-left: var(--sl-spacing-xx-small);
+    margin-right: calc(-1 * var(--sl-spacing-xx-small));
 
     svg {
       width: 1em;

@@ -9,13 +9,6 @@
   // Color
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  @include make-color-palette('primary');
-  @include make-color-palette('success');
-  @include make-color-palette('info');
-  @include make-color-palette('warning');
-  @include make-color-palette('danger');
-  @include make-color-palette('gray');
-
   --sl-color-primary-hue: 203;
   --sl-color-primary-sat: 100%;
   --sl-color-primary-text: var(--sl-color-white);
@@ -43,6 +36,13 @@
   --sl-color-white: white;
   --sl-color-black: black;
 
+  @include make-color-palette('primary');
+  @include make-color-palette('success');
+  @include make-color-palette('info');
+  @include make-color-palette('warning');
+  @include make-color-palette('danger');
+  @include make-color-palette('gray');
+
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // Border Radius
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -50,7 +50,7 @@
   --sl-border-radius-small: 0.125rem; // 2px
   --sl-border-radius-medium: 0.25rem; // 4px
   --sl-border-radius-large: 0.5rem; // 8px
-  --sl-border-radius-xlarge: 1rem; // 16px
+  --sl-border-radius-x-large: 1rem; // 16px
 
   --sl-border-radius-circle: 50%;
   --sl-border-radius-pill: 9999px;
@@ -62,35 +62,32 @@
   --sl-shadow-small: 0 1px 2px rgba(0, 0, 0, 0.1);
   --sl-shadow-medium: 0 2px 4px rgba(0, 0, 0, 0.1);
   --sl-shadow-large: 0 4px 8px rgba(0, 0, 0, 0.1);
-  --sl-shadow-xlarge: 0 8px 16px rgba(0, 0, 0, 0.1);
+  --sl-shadow-x-large: 0 8px 16px rgba(0, 0, 0, 0.1);
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // Spacing
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  --sl-spacing-0: 0; // 0px
-  --sl-spacing-1: 0.25rem; // 4px
-  --sl-spacing-2: 0.5rem; // 8px
-  --sl-spacing-3: 0.75rem; // 12px
-  --sl-spacing-4: 1rem; // 16px
-  --sl-spacing-5: 1.25rem; // 20px
-  --sl-spacing-6: 1.5rem; // 24px
-  --sl-spacing-7: 2rem; // 32px
-  --sl-spacing-8: 2.5rem; // 40px
-  --sl-spacing-9: 3rem; // 48px
-  --sl-spacing-10: 3.5rem; // 56px
-  --sl-spacing-11: 4rem; // 64px
-  --sl-spacing-12: 4.5rem; // 72px
+  --sl-spacing-xxx-small: 0.125rem; // 2px
+  --sl-spacing-xx-small: 0.25rem; // 4px
+  --sl-spacing-x-small: 0.5rem; // 8px
+  --sl-spacing-small: 0.75rem; // 12px
+  --sl-spacing-medium: 1rem; // 16px
+  --sl-spacing-large: 1.25rem; // 20px
+  --sl-spacing-x-large: 1.75rem; // 28px
+  --sl-spacing-xx-large: 2.25rem; // 36px
+  --sl-spacing-xxx-large: 3rem; // 48px
+  --sl-spacing-xxxx-large: 4.5rem; // 72px
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // Transition
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  --sl-transition-slower: 1000ms;
+  --sl-transition-x-slow: 1000ms;
   --sl-transition-slow: 500ms;
-  --sl-transition-default: 250ms;
+  --sl-transition-medium: 250ms;
   --sl-transition-fast: 150ms;
-  --sl-transition-faster: 50ms;
+  --sl-transition-x-fast: 50ms;
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // Typography
@@ -106,18 +103,14 @@
   --sl-font-body: var(--sl-font-sans);
 
   // Font sizes
-  --sl-font-size-1: 0.75rem; // 12px
-  --sl-font-size-2: 0.875rem; // 14px
-  --sl-font-size-3: 1rem; // 16px
-  --sl-font-size-4: 1.125rem; // 18px
-  --sl-font-size-5: 1.25rem; // 20px
-  --sl-font-size-6: 1.5rem; // 24px
-  --sl-font-size-7: 1.75rem; // 28px
-  --sl-font-size-8: 2.25rem; // 36px
-  --sl-font-size-9: 3rem; // 48px
-  --sl-font-size-10: 3.5rem; // 56px
-  --sl-font-size-11: 4rem; // 64px
-  --sl-font-size-12: 4.5rem; // 72px
+  --sl-font-size-x-small: 0.75rem; // 12px
+  --sl-font-size-small: 0.875rem; // 14px
+  --sl-font-size-medium: 1rem; // 16px
+  --sl-font-size-large: 1.25rem; // 20px
+  --sl-font-size-x-large: 1.5rem; // 24px
+  --sl-font-size-xx-large: 2.25rem; // 36px
+  --sl-font-size-xxxx-large: 3rem; // 48px
+  --sl-font-size-xxxxx-large: 4.5rem; // 72px
 
   // Font weights
   --sl-font-weight-light: 300;

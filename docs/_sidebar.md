@@ -26,6 +26,7 @@
   - [Radio](/components/radio.md)
   - [Range](/components/range.md)
   - [Spinner](/components/spinner.md)
+  - [Stack](/components/stack.md)
   - [Switch](/components/switch.md)
   - [Tabs](/components/tabs.md)
   - [Tab](/components/tab.md)

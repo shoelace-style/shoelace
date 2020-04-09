@@ -6,5 +6,5 @@ Elevation tokens are used to give elements the appearance of being raised off th
   <div style="border-radius: 3px; padding: 20px; margin: 20px; box-shadow: var(--sl-shadow-small);"><code>--sl-shadow-small</code></div>
   <div style="border-radius: 3px; padding: 20px; margin: 20px; box-shadow: var(--sl-shadow-medium);"><code>--sl-shadow-medium</code></div>
   <div style="border-radius: 3px; padding: 20px; margin: 20px; box-shadow: var(--sl-shadow-large);"><code>--sl-shadow-large</code></div>
-  <div style="border-radius: 3px; padding: 20px; margin: 20px; box-shadow: var(--sl-shadow-xlarge);"><code>--sl-shadow-xlarge</code></div>
+  <div style="border-radius: 3px; padding: 20px; margin: 20px; box-shadow: var(--sl-shadow-x-large);"><code>--sl-shadow-x-large</code></div>
 </div>
