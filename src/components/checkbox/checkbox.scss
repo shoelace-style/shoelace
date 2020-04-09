@@ -42,6 +42,11 @@
   .sl-checkbox__icon {
     width: var(--sl-form-control-checkbox-size);
     height: var(--sl-form-control-checkbox-size);
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
   }
 }
 
