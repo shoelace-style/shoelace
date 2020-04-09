@@ -17,7 +17,7 @@
   line-height: 1.6;
   color: var(--sl-color-gray-30);
   transition: 0.2s opacity;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--sl-shadow-large);
 
   &.sl-alert--closed {
     opacity: 0;
