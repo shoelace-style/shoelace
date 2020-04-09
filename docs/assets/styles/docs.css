@@ -79,7 +79,7 @@ body.close .sidebar-toggle {
 }
 
 .sidebar-toggle:hover {
-  border-color: var(--sl-color-gray-85);
+  border-color: var(--sl-color-gray-80);
   opacity: 1;
 }
 
@@ -331,4 +331,12 @@ pre.code-block__source {
 /* Logo */
 .content img.logo {
   max-width: 400px;
+}
+
+/* Color swatches */
+.swatch {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 2px;
+  margin-right: 2px;
 }

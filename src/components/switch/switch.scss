@@ -57,8 +57,8 @@
 
 // Hover
 .sl-switch:not(.sl-switch--checked):not(.sl-switch--disabled) .sl-switch__control:hover {
-  background-color: var(--sl-color-gray-85);
-  border-color: var(--sl-color-gray-85);
+  background-color: var(--sl-color-gray-90);
+  border-color: var(--sl-color-gray-90);
 
   .sl-switch__thumb {
     background-color: var(--sl-color-white);
@@ -68,8 +68,8 @@
 
 // Focus
 .sl-switch.sl-switch--focused:not(.sl-switch--checked):not(.sl-switch--disabled) .sl-switch__control {
-  background-color: var(--sl-color-gray-85);
-  border-color: var(--sl-color-gray-85);
+  background-color: var(--sl-color-gray-90);
+  border-color: var(--sl-color-gray-90);
 
   .sl-switch__thumb {
     background-color: var(--sl-color-white);

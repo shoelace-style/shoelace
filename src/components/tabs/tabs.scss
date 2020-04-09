@@ -45,7 +45,7 @@
     flex: 1 1 auto;
     position: relative;
     flex-direction: row;
-    border-bottom: solid 2px var(--sl-color-gray-85);
+    border-bottom: solid 2px var(--sl-color-gray-90);
   }
 
   .sl-tabs__active-tab-indicator {
@@ -76,7 +76,7 @@
     flex: 1 1 auto;
     position: relative;
     flex-direction: row;
-    border-top: solid 2px var(--sl-color-gray-85);
+    border-top: solid 2px var(--sl-color-gray-90);
   }
 
   .sl-tabs__active-tab-indicator {
@@ -103,7 +103,7 @@
   .sl-tabs__tabs {
     flex: 0 0 auto;
     flex-direction: column;
-    border-right: solid 2px var(--sl-color-gray-85);
+    border-right: solid 2px var(--sl-color-gray-90);
   }
 
   .sl-tabs__active-tab-indicator {
@@ -131,7 +131,7 @@
   .sl-tabs__tabs {
     flex: 0 0 auto;
     flex-direction: column;
-    border-left: solid 2px var(--sl-color-gray-85);
+    border-left: solid 2px var(--sl-color-gray-90);
   }
 
   .sl-tabs__active-tab-indicator {

@@ -1,5 +1,5 @@
 @import 'component';
-@import 'mixins/button';
+@import 'mixins/make-button';
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Base styles
@@ -62,7 +62,7 @@
 
 .sl-button {
   &.sl-button--default {
-    @include button(
+    @include make-button(
       $background-color: var(--sl-color-white),
       $border-color: var(--sl-color-gray-80),
       $color: var(--sl-color-gray-40),
@@ -81,96 +81,96 @@
   }
 
   &.sl-button--primary {
-    @include button(
+    @include make-button(
       $background-color: var(--sl-color-primary-50),
       $border-color: var(--sl-color-primary-50),
       $color: var(--sl-color-primary-text),
-      $background-color--hover: var(--sl-color-primary-55),
-      $border-color--hover: var(--sl-color-primary-55),
+      $background-color--hover: var(--sl-color-primary-60),
+      $border-color--hover: var(--sl-color-primary-60),
       $color--hover: var(--sl-color-primary-text),
-      $background-color--focus: var(--sl-color-primary-55),
-      $border-color--focus: var(--sl-color-primary-55),
+      $background-color--focus: var(--sl-color-primary-60),
+      $border-color--focus: var(--sl-color-primary-60),
       $color--focus: var(--sl-color-primary-text),
       $box-shadow--focus: 0 0 0 var(--sl-focus-ring-width)
         hsla(var(--sl-color-primary-hue), var(--sl-color-primary-sat), 50%, var(--sl-focus-ring-alpha)),
-      $background-color--active: var(--sl-color-primary-45),
-      $border-color--active: var(--sl-color-primary-45),
+      $background-color--active: var(--sl-color-primary-50),
+      $border-color--active: var(--sl-color-primary-50),
       $color--active: var(--sl-color-primary-text)
     );
   }
 
   &.sl-button--success {
-    @include button(
+    @include make-button(
       $background-color: var(--sl-color-success-50),
       $border-color: var(--sl-color-success-50),
       $color: var(--sl-color-success-text),
-      $background-color--hover: var(--sl-color-success-55),
-      $border-color--hover: var(--sl-color-success-55),
+      $background-color--hover: var(--sl-color-success-60),
+      $border-color--hover: var(--sl-color-success-60),
       $color--hover: var(--sl-color-success-text),
-      $background-color--focus: var(--sl-color-success-55),
-      $border-color--focus: var(--sl-color-success-55),
+      $background-color--focus: var(--sl-color-success-60),
+      $border-color--focus: var(--sl-color-success-60),
       $color--focus: var(--sl-color-success-text),
       $box-shadow--focus: 0 0 0 var(--sl-focus-ring-width)
         hsla(var(--sl-color-success-hue), var(--sl-color-success-sat), 50%, var(--sl-focus-ring-alpha)),
-      $background-color--active: var(--sl-color-success-45),
-      $border-color--active: var(--sl-color-success-45),
+      $background-color--active: var(--sl-color-success-50),
+      $border-color--active: var(--sl-color-success-50),
       $color--active: var(--sl-color-success-text)
     );
   }
 
   &.sl-button--info {
-    @include button(
+    @include make-button(
       $background-color: var(--sl-color-info-50),
       $border-color: var(--sl-color-info-50),
       $color: var(--sl-color-info-text),
-      $background-color--hover: var(--sl-color-info-55),
-      $border-color--hover: var(--sl-color-info-55),
+      $background-color--hover: var(--sl-color-info-60),
+      $border-color--hover: var(--sl-color-info-60),
       $color--hover: var(--sl-color-info-text),
-      $background-color--focus: var(--sl-color-info-55),
-      $border-color--focus: var(--sl-color-info-55),
+      $background-color--focus: var(--sl-color-info-60),
+      $border-color--focus: var(--sl-color-info-60),
       $color--focus: var(--sl-color-info-text),
       $box-shadow--focus: 0 0 0 var(--sl-focus-ring-width)
         hsla(var(--sl-color-info-hue), var(--sl-color-info-sat), 50%, var(--sl-focus-ring-alpha)),
-      $background-color--active: var(--sl-color-info-45),
-      $border-color--active: var(--sl-color-info-45),
+      $background-color--active: var(--sl-color-info-50),
+      $border-color--active: var(--sl-color-info-50),
       $color--active: var(--sl-color-info-text)
     );
   }
 
   &.sl-button--warning {
-    @include button(
+    @include make-button(
       $background-color: var(--sl-color-warning-50),
       $border-color: var(--sl-color-warning-50),
       $color: var(--sl-color-warning-text),
-      $background-color--hover: var(--sl-color-warning-55),
-      $border-color--hover: var(--sl-color-warning-55),
+      $background-color--hover: var(--sl-color-warning-60),
+      $border-color--hover: var(--sl-color-warning-60),
       $color--hover: var(--sl-color-warning-text),
-      $background-color--focus: var(--sl-color-warning-55),
-      $border-color--focus: var(--sl-color-warning-55),
+      $background-color--focus: var(--sl-color-warning-60),
+      $border-color--focus: var(--sl-color-warning-60),
       $color--focus: var(--sl-color-warning-text),
       $box-shadow--focus: 0 0 0 var(--sl-focus-ring-width)
         hsla(var(--sl-color-warning-hue), var(--sl-color-warning-sat), 50%, var(--sl-focus-ring-alpha)),
-      $background-color--active: var(--sl-color-warning-45),
-      $border-color--active: var(--sl-color-warning-45),
+      $background-color--active: var(--sl-color-warning-50),
+      $border-color--active: var(--sl-color-warning-50),
       $color--active: var(--sl-color-warning-text)
     );
   }
 
   &.sl-button--danger {
-    @include button(
+    @include make-button(
       $background-color: var(--sl-color-danger-50),
       $border-color: var(--sl-color-danger-50),
       $color: var(--sl-color-danger-text),
-      $background-color--hover: var(--sl-color-danger-55),
-      $border-color--hover: var(--sl-color-danger-55),
+      $background-color--hover: var(--sl-color-danger-60),
+      $border-color--hover: var(--sl-color-danger-60),
       $color--hover: var(--sl-color-danger-text),
-      $background-color--focus: var(--sl-color-danger-55),
-      $border-color--focus: var(--sl-color-danger-55),
+      $background-color--focus: var(--sl-color-danger-60),
+      $border-color--focus: var(--sl-color-danger-60),
       $color--focus: var(--sl-color-danger-text),
       $box-shadow--focus: 0 0 0 var(--sl-focus-ring-width)
         hsla(var(--sl-color-danger-hue), var(--sl-color-danger-sat), 50%, var(--sl-focus-ring-alpha)),
-      $background-color--active: var(--sl-color-danger-45),
-      $border-color--active: var(--sl-color-danger-45),
+      $background-color--active: var(--sl-color-danger-50),
+      $border-color--active: var(--sl-color-danger-50),
       $color--active: var(--sl-color-danger-text)
     );
   }
