@@ -49,6 +49,6 @@ Font sizes use `rem` units so they scale with the base font size. The pixel valu
 
 | Token | Value | Example
 |-------|-------|---------
-| `--sl-line-height-dense` | -0.015em | <span style="line-height: var(--sl-line-height-dense);">The quick brown fox jumped over the lazy dog.<br>The quick brown fox jumped over the lazy dog.<br>The quick brown fox jumped over the lazy dog.</span>
-| `--sl-line-height-normal` | normal | <span style="line-height: var(--sl-line-height-normal);">The quick brown fox jumped over the lazy dog.<br>The quick brown fox jumped over the lazy dog.<br>The quick brown fox jumped over the lazy dog.</span>
-| `--sl-line-height-loose` | 0.075em | <span style="line-height: var(--sl-line-height-loose);">The quick brown fox jumped over the lazy dog.<br>The quick brown fox jumped over the lazy dog.<br>The quick brown fox jumped over the lazy dog.</span>
+| `--sl-line-height-dense` | 1.25 | <div style="line-height: var(--sl-line-height-dense);">The quick brown fox jumped over the lazy dog.<br>The quick brown fox jumped over the lazy dog.<br>The quick brown fox jumped over the lazy dog.</div>
+| `--sl-line-height-normal` | 1.5 | <div style="line-height: var(--sl-line-height-normal);">The quick brown fox jumped over the lazy dog.<br>The quick brown fox jumped over the lazy dog.<br>The quick brown fox jumped over the lazy dog.</div>
+| `--sl-line-height-loose` | 1.7m | <div style="line-height: var(--sl-line-height-loose);">The quick brown fox jumped over the lazy dog.<br>The quick brown fox jumped over the lazy dog.<br>The quick brown fox jumped over the lazy dog.</div>

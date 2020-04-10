@@ -99,9 +99,6 @@
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   --sl-font-serif: Georgia, 'Times New Roman', serif;
 
-  --sl-font-heading: var(--sl-font-sans);
-  --sl-font-body: var(--sl-font-sans);
-
   // Font sizes
   --sl-font-size-x-small: 0.75rem; // 12px
   --sl-font-size-small: 0.875rem; // 14px
@@ -118,8 +115,6 @@
   --sl-font-weight-semibold: 500;
   --sl-font-weight-bold: 600;
 
-  --sl-font-weight-body: var(--sl-font-weight-default);
-
   // Letter spacings
   --sl-letter-spacing-dense: -0.015em;
   --sl-letter-spacing-normal: normal;
@@ -129,9 +124,6 @@
   --sl-line-height-dense: 1.25;
   --sl-line-height-normal: 1.5;
   --sl-line-height-loose: 1.75;
-
-  --sl-line-height-body: var(--sl-line-height-default);
-  --sl-line-height-heading: var(--sl-line-height-dense);
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // Z-index
@@ -222,8 +214,8 @@
 
 // Base styles
 body {
-  font-family: var(--sl-font-body);
-  font-weight: var(--sl-font-weight-body);
+  font-family: var(--sl-font-sans);
+  font-weight: var(--sl-font-weight-normal);
   font-size: 16px;
 }
 

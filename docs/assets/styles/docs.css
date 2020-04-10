@@ -195,7 +195,7 @@ body.close .sidebar-toggle:focus {
   top: auto;
   right: 0;
   bottom: 0;
-  font-family: var(--sl-font-body);
+  font-family: var(--sl-font-sans);
   font-size: 14px;
   border-top-left-radius: 3px;
   border-bottom-right-radius: 3px;
