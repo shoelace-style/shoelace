@@ -140,7 +140,8 @@
   --sl-z-index-default: 1;
   --sl-z-index-panel: 80;
   --sl-z-index-notification: 90;
-  --sl-z-index-dialog: 100;
+  --sl-z-index-overlay: 100;
+  --sl-z-index-dialog: 600;
 }
 
 //
@@ -270,4 +271,15 @@ a:hover {
     color: var(--sl-tooltip-color);
     padding: var(--sl-tooltip-padding-y) var(--sl-tooltip-padding-x);
   }
+}
+
+// Overlays
+.sl-dialog-overlay {
+  position: fixed;
+  z-index: var(--sl-z-index-overlay);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
 }

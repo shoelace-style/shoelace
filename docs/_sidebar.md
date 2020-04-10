@@ -16,6 +16,7 @@
   - [Alert](/components/alert.md)
   - [Button](/components/button.md)
   - [Checkbox](/components/checkbox.md)
+  - [Dialog](/components/dialog.md)
   - [Dropdown](/components/dropdown.md)
   - [Dropdown Item](/components/dropdown-item.md)
   - [Dropdown Divider](/components/dropdown-divider.md)
