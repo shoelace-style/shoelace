@@ -39,7 +39,7 @@ body.close .sidebar {
 
 .sidebar-toggle,
 body.close .sidebar-toggle {
-  top: 1.5rem;
+  top: 2rem;
   left: calc(var(--sidebar-width) - 1px);
   width: 2.4rem;
   height: 2.4rem;
@@ -48,6 +48,7 @@ body.close .sidebar-toggle {
   border-top-right-radius: 2px;
   border-bottom-right-radius: 2px;
   background: var(--sl-color-white);
+  border-left-color: var(--sl-color-white);
   display: flex;
   cursor: pointer;
   transition: var(--sidebar-transition);
@@ -80,6 +81,7 @@ body.close .sidebar-toggle {
 
 .sidebar-toggle:hover {
   border-color: var(--sl-color-gray-80);
+  border-left-color: var(--sl-color-white);
   opacity: 1;
 }
 
