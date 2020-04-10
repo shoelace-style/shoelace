@@ -30,7 +30,7 @@
   --sl-color-danger-text: var(--sl-color-white);
 
   --sl-color-gray-hue: var(--sl-color-primary-hue);
-  --sl-color-gray-sat: 10%;
+  --sl-color-gray-sat: 20%;
   --sl-color-gray-text: var(--sl-color-white);
 
   --sl-color-white: white;
@@ -97,7 +97,7 @@
   --sl-font-mono: Menlo, Monaco, 'Courier New', monospace;
   --sl-font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
     'Helvetica Neue', sans-serif;
-  --sl-font-serif: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  --sl-font-serif: Georgia, 'Times New Roman', serif;
 
   --sl-font-heading: var(--sl-font-sans);
   --sl-font-body: var(--sl-font-sans);
@@ -109,8 +109,8 @@
   --sl-font-size-large: 1.25rem; // 20px
   --sl-font-size-x-large: 1.5rem; // 24px
   --sl-font-size-xx-large: 2.25rem; // 36px
-  --sl-font-size-xxxx-large: 3rem; // 48px
-  --sl-font-size-xxxxx-large: 4.5rem; // 72px
+  --sl-font-size-xxx-large: 3rem; // 48px
+  --sl-font-size-xxxx-large: 4.5rem; // 72px
 
   // Font weights
   --sl-font-weight-light: 300;
