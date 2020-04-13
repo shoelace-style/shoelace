@@ -15,7 +15,7 @@ export class Radio {
   input: HTMLInputElement;
 
   constructor() {
-    this.handleInput = this.handleInput.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   @Element() host: HTMLElement;
@@ -46,7 +46,7 @@ export class Radio {
     this.input.blur();
   }
 
-  handleInput() {
+  handleClick() {
     this.checked = this.input.checked;
   }
 
@@ -84,7 +84,7 @@ export class Radio {
             aria-labeledby={this.labelId}
             onBlur={() => (this.hasFocus = false)}
             onFocus={() => (this.hasFocus = true)}
-            onInput={this.handleInput}
+            onClick={this.handleClick}
           />
         </span>
 

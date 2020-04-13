@@ -15,7 +15,7 @@ export class Switch {
   input: HTMLInputElement;
 
   constructor() {
-    this.handleInput = this.handleInput.bind(this);
+    this.handleClick = this.handleClick.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
   }
 
@@ -45,7 +45,7 @@ export class Switch {
     this.input.blur();
   }
 
-  handleInput() {
+  handleClick() {
     this.checked = this.input.checked;
   }
 
@@ -88,7 +88,7 @@ export class Switch {
             onBlur={() => (this.hasFocus = false)}
             onFocus={() => (this.hasFocus = true)}
             onKeyDown={this.handleKeyDown}
-            onInput={this.handleInput}
+            onClick={this.handleClick}
           />
         </span>
 

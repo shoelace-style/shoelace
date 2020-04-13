@@ -15,7 +15,7 @@ export class Checkbox {
   input: HTMLInputElement;
 
   constructor() {
-    this.handleInput = this.handleInput.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   @State() hasFocus = false;
@@ -56,7 +56,7 @@ export class Checkbox {
     this.input.blur();
   }
 
-  handleInput() {
+  handleClick() {
     this.checked = this.input.checked;
     this.indeterminate = this.input.indeterminate;
   }
@@ -115,7 +115,7 @@ export class Checkbox {
             aria-labeledby={this.labelId}
             onBlur={() => (this.hasFocus = false)}
             onFocus={() => (this.hasFocus = true)}
-            onInput={this.handleInput}
+            onClick={this.handleClick}
           />
         </span>
 
