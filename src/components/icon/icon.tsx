@@ -16,13 +16,13 @@ export class Icon {
   /** The name of the icon to draw. */
   @Prop() name: string;
 
-  /** An external URL of the SVG file to fetch. */
+  /** An external URL of an SVG file. */
   @Prop() src: string;
 
   /** An alternative description to use for accessibility. If omitted, the name or src will be used to generate it. */
   @Prop() label: string;
 
-  /** An alternative description to use for accessibility. If omitted, the name or src will be used to generate it. */
+  /** Sets the stroke width in supported icons. */
   @Prop() strokeWidth = '1.5';
 
   @Watch('name')

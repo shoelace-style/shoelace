@@ -47,8 +47,8 @@ Icons are courtesy of [Bootstrap Icons](https://icons.getbootstrap.com/).
 | ------------- | -------------- | ------------------------------------------------------------------------------------------------------------- | -------- | ----------- |
 | `label`       | `label`        | An alternative description to use for accessibility. If omitted, the name or src will be used to generate it. | `string` | `undefined` |
 | `name`        | `name`         | The name of the icon to draw.                                                                                 | `string` | `undefined` |
-| `src`         | `src`          | An external URL of the SVG file to fetch.                                                                     | `string` | `undefined` |
-| `strokeWidth` | `stroke-width` | An alternative description to use for accessibility. If omitted, the name or src will be used to generate it. | `string` | `'1.5'`     |
+| `src`         | `src`          | An external URL of an SVG file.                                                                               | `string` | `undefined` |
+| `strokeWidth` | `stroke-width` | Sets the stroke width in supported icons.                                                                     | `string` | `'1.5'`     |
 
 
 ## Dependencies

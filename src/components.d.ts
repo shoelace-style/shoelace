@@ -126,11 +126,11 @@ export namespace Components {
          */
         "name": string;
         /**
-          * An external URL of the SVG file to fetch.
+          * An external URL of an SVG file.
          */
         "src": string;
         /**
-          * An alternative description to use for accessibility. If omitted, the name or src will be used to generate it.
+          * Sets the stroke width in supported icons.
          */
         "strokeWidth": string;
     }
@@ -769,11 +769,11 @@ declare namespace LocalJSX {
          */
         "name"?: string;
         /**
-          * An external URL of the SVG file to fetch.
+          * An external URL of an SVG file.
          */
         "src"?: string;
         /**
-          * An alternative description to use for accessibility. If omitted, the name or src will be used to generate it.
+          * Sets the stroke width in supported icons.
          */
         "strokeWidth"?: string;
     }
