@@ -412,3 +412,10 @@ pre.code-block__source {
   width: 100px;
   background: var(--sl-color-primary-50);
 }
+
+/* Elevation dmeo */
+.elevation-demo {
+  border-radius: 3px;
+  width: 4rem;
+  height: 4rem;
+}

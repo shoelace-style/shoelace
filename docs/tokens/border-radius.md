@@ -1,7 +1,5 @@
 # Border Radius Tokens
 
-TODO
-
 | Token | Value | Example
 |-------|-------|---------
 | `--sl-border-radius-small` | 0.125rem (2px) | <div class="border-radius-demo" style="border-radius: var(--sl-border-radius-small);"></div>

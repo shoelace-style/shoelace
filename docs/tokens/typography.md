@@ -34,7 +34,7 @@ Font sizes use `rem` units so they scale with the base font size. The pixel valu
 | `--sl-font-weight-light` | 300 | <span style="font-weight: var(--sl-font-weight-light);">The quick brown fox jumped over the lazy dog.</span>
 | `--sl-font-weight-normal` | 400 | <span style="font-weight: var(--sl-font-weight-normal);">The quick brown fox jumped over the lazy dog.</span>
 | `--sl-font-weight-semibold` | 500 | <span style="font-weight: var(--sl-font-weight-semibold);">The quick brown fox jumped over the lazy dog.</span>
-| `--sl-font-weight-bold` | 600 | <span style="font-weight: var(--sl-font-weight-bold);">The quick brown fox jumped over the lazy dog.</span>
+| `--sl-font-weight-bold` | 700 | <span style="font-weight: var(--sl-font-weight-bold);">The quick brown fox jumped over the lazy dog.</span>
 
 
 ## Letter Spacing

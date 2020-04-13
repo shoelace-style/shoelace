@@ -2,9 +2,7 @@
 
 TODO
 
-- Describe how HSL is used
-- Show color tokens in a table with var names
-- Add black/white tokens
+- Describe how color tokens are generated using HSL
 
 ## Primary
 
@@ -26,6 +24,7 @@ TODO
 
 | Token | Example |
 |-------|---------|
+| `--sl-color-black` | <div class="color-demo" style="background-color: var(--sl-color-black);"></div>
 | `--sl-color-gray-10` | <div class="color-demo" style="background-color: var(--sl-color-gray-10);"></div>
 | `--sl-color-gray-20` | <div class="color-demo" style="background-color: var(--sl-color-gray-20);"></div>
 | `--sl-color-gray-30` | <div class="color-demo" style="background-color: var(--sl-color-gray-30);"></div>
@@ -36,6 +35,7 @@ TODO
 | `--sl-color-gray-80` | <div class="color-demo" style="background-color: var(--sl-color-gray-80);"></div>
 | `--sl-color-gray-90` | <div class="color-demo" style="background-color: var(--sl-color-gray-90);"></div>
 | `--sl-color-gray-95` | <div class="color-demo" style="background-color: var(--sl-color-gray-95);"></div>
+| `--sl-color-white` | <div class="color-demo" style="background-color: var(--sl-color-white);"></div>
 
 
 ## Success
@@ -100,10 +100,3 @@ TODO
 | `--sl-color-danger-80` | <div class="color-demo" style="background-color: var(--sl-color-danger-80);"></div>
 | `--sl-color-danger-90` | <div class="color-demo" style="background-color: var(--sl-color-danger-90);"></div>
 | `--sl-color-danger-95` | <div class="color-demo" style="background-color: var(--sl-color-danger-95);"></div>
-
-## More
-
-| Token | Example |
-|-------|---------|
-| `--sl-color-black` | <div class="color-demo" style="background-color: var(--sl-color-black);"></div>
-| `--sl-color-white` | <div class="color-demo" style="background-color: var(--sl-color-white);"></div>

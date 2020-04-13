@@ -4,7 +4,7 @@ Elevation tokens are used to give elements the appearance of being raised off th
 
 | Token | Example |
 |-------|---------|
-| `--sl-shadow-small` | <div style="border-radius: 3px; padding: 20px; box-shadow: var(--sl-shadow-small);">Example</div>
-| `--sl-shadow-medium` | <div style="border-radius: 3px; padding: 20px; box-shadow: var(--sl-shadow-medium);">Example</div>
-| `--sl-shadow-large` | <div style="border-radius: 3px; padding: 20px; box-shadow: var(--sl-shadow-large);">Example</div>
-| `--sl-shadow-x-large` | <div style="border-radius: 3px; padding: 20px; box-shadow: var(--sl-shadow-x-large);">Example</div>
+| `--sl-shadow-small` | <div class="elevation-demo" style="box-shadow: var(--sl-shadow-small);"></div>
+| `--sl-shadow-medium` | <div class="elevation-demo" style="box-shadow: var(--sl-shadow-medium);"></div>
+| `--sl-shadow-large` | <div class="elevation-demo" style="box-shadow: var(--sl-shadow-large);"></div>
+| `--sl-shadow-x-large` | <div class="elevation-demo" style="box-shadow: var(--sl-shadow-x-large);"></div>
