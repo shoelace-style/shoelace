@@ -36,7 +36,7 @@
 </div>
 ```
 
-Icons are courtesy of [Bootstrap Icons](https://icons.getbootstrap.com/).
+Icons are courtesy of [Feather Icons](https://feathericons.com/).
 
 <!-- Auto Generated Below -->
 
