@@ -14,7 +14,7 @@ export class ProgressBar {
   @Prop() percentage = 0;
 
   /** The height of the progress bar in pixels. */
-  @Prop() height = 18;
+  @Prop() height = 6;
 
   render() {
     return (

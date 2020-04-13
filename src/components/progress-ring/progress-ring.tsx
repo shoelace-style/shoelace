@@ -12,7 +12,7 @@ export class Progress {
   @Prop() diameter = 128;
 
   /** The stroke width of the progress ring in pixels. */
-  @Prop() stroke = 6;
+  @Prop() strokeWidth = 6;
 
   /** The current progress percentage, 0 - 100. */
   @Prop() percentage: number;
@@ -41,10 +41,10 @@ export class Progress {
         <svg class="sl-progress-ring" width={this.diameter} height={this.diameter}>
           <circle
             class="sl-progress-ring__track"
-            stroke-width={this.stroke}
+            stroke-width={this.strokeWidth}
             stroke-linecap="round"
             fill="transparent"
-            r={(this.diameter - this.stroke) / 2}
+            r={(this.diameter - this.strokeWidth) / 2}
             cx={this.diameter / 2}
             cy={this.diameter / 2}
           />
@@ -52,10 +52,10 @@ export class Progress {
           <circle
             ref={(el: SVGCircleElement) => (this.indicator = el)}
             class="sl-progress-ring__indicator"
-            stroke-width={this.stroke}
+            stroke-width={this.strokeWidth}
             stroke-linecap="round"
             fill="transparent"
-            r={(this.diameter - this.stroke) / 2}
+            r={(this.diameter - this.strokeWidth) / 2}
             cx={this.diameter / 2}
             cy={this.diameter / 2}
           />
