@@ -245,19 +245,6 @@
     height: 1.2em;
     transition: var(--sl-form-control-transition-speed) filter;
   }
-
-  &:hover,
-  &:focus {
-    svg {
-      filter: brightness(80%);
-    }
-  }
-
-  &:active {
-    svg {
-      filter: brightness(60%);
-    }
-  }
 }
 
 .sl-input--empty .sl-input__clear {
