@@ -91,7 +91,7 @@
     font-family: inherit;
     font-size: var(--sl-font-size-large);
     font-weight: inherit;
-    color: currentColor;
+    color: var(--sl-color-gray-30);
     padding: 0 var(--sl-spacing-large);
     cursor: pointer;
     -webkit-appearance: none;
@@ -99,12 +99,12 @@
 
     &:hover,
     &:focus {
-      background-color: var(--sl-color-gray-95);
+      color: var(--sl-color-gray-50);
       outline: none;
     }
 
     &:active {
-      background-color: var(--sl-color-gray-90);
+      color: var(--sl-color-gray-30);
     }
 
     svg {
