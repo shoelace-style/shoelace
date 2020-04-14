@@ -27,7 +27,7 @@
   - [Range](/components/range.md)
   - [Spinner](/components/spinner.md)
   - [Switch](/components/switch.md)
-  - [Tabs](/components/tabs.md)
+  - [Tab Group](/components/tab-group.md)
   - [Tab](/components/tab.md)
   - [Tab Panel](/components/tab-panel.md)
   - [Textarea](/components/textarea.md)

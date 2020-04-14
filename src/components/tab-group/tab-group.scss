@@ -5,24 +5,24 @@
   display: block;
 }
 
-.sl-tabs {
+.sl-tab-group {
   display: flex;
   border: solid 1px transparent;
   border-radius: 0;
 
-  .sl-tabs__tabs {
+  .sl-tab-group__tabs {
     display: flex;
     position: relative;
   }
 
-  .sl-tabs__active-tab-indicator {
+  .sl-tab-group__active-tab-indicator {
     position: absolute;
     transition: var(--sl-form-control-transition-speed) transform ease,
       var(--sl-form-control-transition-speed) width ease;
   }
 
   // Hide the focus ring if the user is interacting with a mouse
-  &.sl-tabs--using-mouse ::slotted(sl-tab) {
+  &.sl-tab-group--using-mouse ::slotted(sl-tab) {
     --focus-ring-box-shadow: none;
   }
 }
@@ -31,29 +31,29 @@
 // Top + bottom
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sl-tabs--top {
+.sl-tab-group--top {
   flex-direction: column;
 
-  .sl-tabs__nav {
+  .sl-tab-group__nav {
     display: flex;
     order: 1;
     overflow-x: auto;
     @include hide-scrollbar();
   }
 
-  .sl-tabs__tabs {
+  .sl-tab-group__tabs {
     flex: 1 1 auto;
     position: relative;
     flex-direction: row;
     border-bottom: solid 2px var(--sl-color-gray-90);
   }
 
-  .sl-tabs__active-tab-indicator {
+  .sl-tab-group__active-tab-indicator {
     bottom: -2px;
     border-bottom: solid 2px var(--sl-color-primary-50);
   }
 
-  .sl-tabs__body {
+  .sl-tab-group__body {
     order: 2;
   }
 }
@@ -62,29 +62,29 @@
 // Bottom
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sl-tabs--bottom {
+.sl-tab-group--bottom {
   flex-direction: column;
 
-  .sl-tabs__nav {
+  .sl-tab-group__nav {
     display: flex;
     order: 2;
     overflow-x: auto;
     @include hide-scrollbar();
   }
 
-  .sl-tabs__tabs {
+  .sl-tab-group__tabs {
     flex: 1 1 auto;
     position: relative;
     flex-direction: row;
     border-top: solid 2px var(--sl-color-gray-90);
   }
 
-  .sl-tabs__active-tab-indicator {
+  .sl-tab-group__active-tab-indicator {
     top: calc(-1 * 2px);
     border-top: solid 2px var(--sl-color-primary-50);
   }
 
-  .sl-tabs__body {
+  .sl-tab-group__body {
     order: 1;
   }
 }
@@ -93,25 +93,25 @@
 // Left
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sl-tabs--left {
+.sl-tab-group--left {
   flex-direction: row;
 
-  .sl-tabs__nav {
+  .sl-tab-group__nav {
     order: 1;
   }
 
-  .sl-tabs__tabs {
+  .sl-tab-group__tabs {
     flex: 0 0 auto;
     flex-direction: column;
     border-right: solid 2px var(--sl-color-gray-90);
   }
 
-  .sl-tabs__active-tab-indicator {
+  .sl-tab-group__active-tab-indicator {
     right: calc(-1 * 2px);
     border-right: solid 2px var(--sl-color-primary-50);
   }
 
-  .sl-tabs__body {
+  .sl-tab-group__body {
     flex: 1 1 auto;
     order: 2;
   }
@@ -121,25 +121,25 @@
 // Right
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sl-tabs--right {
+.sl-tab-group--right {
   flex-direction: row;
 
-  .sl-tabs__nav {
+  .sl-tab-group__nav {
     order: 2;
   }
 
-  .sl-tabs__tabs {
+  .sl-tab-group__tabs {
     flex: 0 0 auto;
     flex-direction: column;
     border-left: solid 2px var(--sl-color-gray-90);
   }
 
-  .sl-tabs__active-tab-indicator {
+  .sl-tab-group__active-tab-indicator {
     left: calc(-1 * 2px);
     border-left: solid 2px var(--sl-color-primary-50);
   }
 
-  .sl-tabs__body {
+  .sl-tab-group__body {
     flex: 1 1 auto;
     order: 1;
   }

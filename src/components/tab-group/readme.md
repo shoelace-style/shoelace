@@ -1,7 +1,7 @@
-# Tabs
+# Tab Group
 
 ```html preview
-<sl-tabs position="top">
+<sl-tab-group placement="top">
   <sl-tab slot="nav" panel="general">General</sl-tab>
   <sl-tab slot="nav" panel="custom">Custom</sl-tab>
   <sl-tab slot="nav" panel="advanced">Advanced</sl-tab>
@@ -11,11 +11,11 @@
   <sl-tab-panel name="custom">Custom</sl-tab-panel>
   <sl-tab-panel name="advanced">Advanced</sl-tab-panel>
   <sl-tab-panel name="disabled">Disabled</sl-tab-panel>
-</sl-tabs>
+</sl-tab-group>
 ```
 
 ```html preview
-<sl-tabs position="bottom">
+<sl-tab-group placement="bottom">
   <sl-tab slot="nav" panel="general">General</sl-tab>
   <sl-tab slot="nav" panel="custom">Custom</sl-tab>
   <sl-tab slot="nav" panel="advanced">Advanced</sl-tab>
@@ -25,11 +25,11 @@
   <sl-tab-panel name="custom">Custom</sl-tab-panel>
   <sl-tab-panel name="advanced">Advanced</sl-tab-panel>
   <sl-tab-panel name="disabled">Disabled</sl-tab-panel>
-</sl-tabs>
+</sl-tab-group>
 ```
 
 ```html preview
-<sl-tabs position="left">
+<sl-tab-group placement="left">
   <sl-tab slot="nav" panel="general">General</sl-tab>
   <sl-tab slot="nav" panel="custom">Custom</sl-tab>
   <sl-tab slot="nav" panel="advanced">Advanced</sl-tab>
@@ -39,11 +39,11 @@
   <sl-tab-panel name="custom">Custom</sl-tab-panel>
   <sl-tab-panel name="advanced">Advanced</sl-tab-panel>
   <sl-tab-panel name="disabled">Disabled</sl-tab-panel>
-</sl-tabs>
+</sl-tab-group>
 ```
 
 ```html preview
-<sl-tabs position="right">
+<sl-tab-group placement="right">
   <sl-tab slot="nav" panel="general">General</sl-tab>
   <sl-tab slot="nav" panel="custom">Custom</sl-tab>
   <sl-tab slot="nav" panel="advanced">Advanced</sl-tab>
@@ -53,11 +53,11 @@
   <sl-tab-panel name="custom">Custom</sl-tab-panel>
   <sl-tab-panel name="advanced">Advanced</sl-tab-panel>
   <sl-tab-panel name="disabled">Disabled</sl-tab-panel>
-</sl-tabs>
+</sl-tab-group>
 ```
 
 ```html preview
-<sl-tabs>
+<sl-tab-group>
   <sl-tab slot="nav" panel="tab-1">Tab 1</sl-tab>
   <sl-tab slot="nav" panel="tab-2">Tab 2</sl-tab>
   <sl-tab slot="nav" panel="tab-3">Tab 3</sl-tab>
@@ -79,27 +79,27 @@
   <sl-tab slot="nav" panel="tab-19">Tab 19</sl-tab>
   <sl-tab slot="nav" panel="tab-20">Tab 20</sl-tab>
 
-  <sl-tab-panel name="tab-1">Tab Panel 1</sl-tab-panel>
-  <sl-tab-panel name="tab-2">Tab Panel 2</sl-tab-panel>
-  <sl-tab-panel name="tab-3">Tab Panel 3</sl-tab-panel>
-  <sl-tab-panel name="tab-4">Tab Panel 4</sl-tab-panel>
-  <sl-tab-panel name="tab-5">Tab Panel 5</sl-tab-panel>
-  <sl-tab-panel name="tab-6">Tab Panel 6</sl-tab-panel>
-  <sl-tab-panel name="tab-7">Tab Panel 7</sl-tab-panel>
-  <sl-tab-panel name="tab-8">Tab Panel 8</sl-tab-panel>
-  <sl-tab-panel name="tab-9">Tab Panel 9</sl-tab-panel>
-  <sl-tab-panel name="tab-10">Tab Panel 10</sl-tab-panel>
-  <sl-tab-panel name="tab-11">Tab Panel 11</sl-tab-panel>
-  <sl-tab-panel name="tab-12">Tab Panel 12</sl-tab-panel>
-  <sl-tab-panel name="tab-13">Tab Panel 13</sl-tab-panel>
-  <sl-tab-panel name="tab-14">Tab Panel 14</sl-tab-panel>
-  <sl-tab-panel name="tab-15">Tab Panel 15</sl-tab-panel>
-  <sl-tab-panel name="tab-16">Tab Panel 16</sl-tab-panel>
-  <sl-tab-panel name="tab-17">Tab Panel 17</sl-tab-panel>
-  <sl-tab-panel name="tab-18">Tab Panel 18</sl-tab-panel>
-  <sl-tab-panel name="tab-19">Tab Panel 19</sl-tab-panel>
-  <sl-tab-panel name="tab-20">Tab Panel 20</sl-tab-panel>
-</sl-tabs>
+  <sl-tab-panel name="tab-1">Tab panel 1</sl-tab-panel>
+  <sl-tab-panel name="tab-2">Tab panel 2</sl-tab-panel>
+  <sl-tab-panel name="tab-3">Tab panel 3</sl-tab-panel>
+  <sl-tab-panel name="tab-4">Tab panel 4</sl-tab-panel>
+  <sl-tab-panel name="tab-5">Tab panel 5</sl-tab-panel>
+  <sl-tab-panel name="tab-6">Tab panel 6</sl-tab-panel>
+  <sl-tab-panel name="tab-7">Tab panel 7</sl-tab-panel>
+  <sl-tab-panel name="tab-8">Tab panel 8</sl-tab-panel>
+  <sl-tab-panel name="tab-9">Tab panel 9</sl-tab-panel>
+  <sl-tab-panel name="tab-10">Tab panel 10</sl-tab-panel>
+  <sl-tab-panel name="tab-11">Tab panel 11</sl-tab-panel>
+  <sl-tab-panel name="tab-12">Tab panel 12</sl-tab-panel>
+  <sl-tab-panel name="tab-13">Tab panel 13</sl-tab-panel>
+  <sl-tab-panel name="tab-14">Tab panel 14</sl-tab-panel>
+  <sl-tab-panel name="tab-15">Tab panel 15</sl-tab-panel>
+  <sl-tab-panel name="tab-16">Tab panel 16</sl-tab-panel>
+  <sl-tab-panel name="tab-17">Tab panel 17</sl-tab-panel>
+  <sl-tab-panel name="tab-18">Tab panel 18</sl-tab-panel>
+  <sl-tab-panel name="tab-19">Tab panel 19</sl-tab-panel>
+  <sl-tab-panel name="tab-20">Tab panel 20</sl-tab-panel>
+</sl-tab-group>
 ```
 
 
@@ -108,9 +108,9 @@
 
 ## Properties
 
-| Property   | Attribute  | Description               | Type                                     | Default |
-| ---------- | ---------- | ------------------------- | ---------------------------------------- | ------- |
-| `position` | `position` | The position of the tabs. | `"bottom" \| "left" \| "right" \| "top"` | `'top'` |
+| Property    | Attribute   | Description                | Type                                     | Default |
+| ----------- | ----------- | -------------------------- | ---------------------------------------- | ------- |
+| `placement` | `placement` | The placement of the tabs. | `"bottom" \| "left" \| "right" \| "top"` | `'top'` |
 
 
 ## Events
