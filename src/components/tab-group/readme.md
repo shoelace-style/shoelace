@@ -102,6 +102,24 @@
 </sl-tab-group>
 ```
 
+## Notes
+
+Serious consideration was given to simplifying the tab group API into two components with a structure similar to:
+
+```html
+<!-- Not a valid syntax -->
+<sl-tab-group placement="top">
+  <sl-tab label="General">General</sl-tab>
+  <sl-tab label="Custom">Custom</sl-tab>
+  <sl-tab label="Advanced">Advanced</sl-tab>
+  <sl-tab label="Disabled" disabled>Disabled</sl-tab>
+</sl-tab-group>
+```
+
+However, there are two caveats to this approach. The first is that labels must be generated and stored in the tab group's shadow DOM. For accessibility reasons, tabs and tab panels must be linked via `id` using the `aria-controls` and `aria-labeledby` attribute, respectively. When a tab is inside a shadow DOM, its `id` becomes inaccessible to the light DOM and accessibility is broken.
+
+The second thing is that labels would be limited to text only. If you wanted to put an icon, a badge, or another element inside the label, it wouldn't be possible with this approach.
+
 
 <!-- Auto Generated Below -->
 
