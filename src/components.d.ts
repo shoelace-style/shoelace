@@ -728,6 +728,18 @@ declare namespace LocalJSX {
          */
         "name"?: string;
         /**
+          * Emitted when the control loses focus.
+         */
+        "onSlBlur"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the control's state changes.
+         */
+        "onSlChange"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the control gains focus.
+         */
+        "onSlFocus"?: (event: CustomEvent<any>) => void;
+        /**
           * The native input's value attribute.
          */
         "value"?: string;
@@ -827,6 +839,22 @@ declare namespace LocalJSX {
          */
         "name"?: string;
         /**
+          * Emitted when the control loses focus.
+         */
+        "onSlBlur"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the control's value changes.
+         */
+        "onSlChange"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the control gains focus.
+         */
+        "onSlFocus"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the control receives input.
+         */
+        "onSlInput"?: (event: CustomEvent<any>) => void;
+        /**
           * The input's pattern attribute.
          */
         "pattern"?: string;
@@ -901,6 +929,18 @@ declare namespace LocalJSX {
          */
         "name"?: string;
         /**
+          * Emitted when the control loses focus.
+         */
+        "onSlBlur"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the control's state changes.
+         */
+        "onSlChange"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the control gains focus.
+         */
+        "onSlFocus"?: (event: CustomEvent<any>) => void;
+        /**
           * The native input's value attribute.
          */
         "value"?: string;
@@ -922,6 +962,18 @@ declare namespace LocalJSX {
           * The input's name attribute.
          */
         "name"?: string;
+        /**
+          * Emitted when the control loses focus.
+         */
+        "onSlBlur"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the control's value changes.
+         */
+        "onSlChange"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the control gains focus.
+         */
+        "onSlFocus"?: (event: CustomEvent<any>) => void;
         /**
           * The input's step attribute.
          */
@@ -959,6 +1011,18 @@ declare namespace LocalJSX {
           * A native input's name attribute.
          */
         "name"?: string;
+        /**
+          * Emitted when the control loses focus.
+         */
+        "onSlBlur"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the control's state changes.
+         */
+        "onSlChange"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the control gains focus.
+         */
+        "onSlFocus"?: (event: CustomEvent<any>) => void;
         /**
           * The native input's value attribute.
          */
@@ -1035,6 +1099,22 @@ declare namespace LocalJSX {
           * The textarea's name attribute.
          */
         "name"?: string;
+        /**
+          * Emitted when the control loses focus.
+         */
+        "onSlBlur"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the control's value changes.
+         */
+        "onSlChange"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the control gains focus.
+         */
+        "onSlFocus"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the control receives input.
+         */
+        "onSlInput"?: (event: CustomEvent<any>) => void;
         /**
           * The textarea's placeholder text.
          */

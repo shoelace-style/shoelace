@@ -1,4 +1,4 @@
-import { Component, Element, Method, Prop, State, h } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, Method, Prop, State, h } from '@stencil/core';
 
 let id = 0;
 
@@ -16,6 +16,8 @@ export class Radio {
 
   constructor() {
     this.handleClick = this.handleClick.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
   }
 
   @Element() host: HTMLElement;
@@ -34,6 +36,15 @@ export class Radio {
   /** Set to true to draw the radio in a checked state. */
   @Prop({ mutable: true }) checked = false;
 
+  /** Emitted when the control loses focus. */
+  @Event() slBlur: EventEmitter;
+
+  /** Emitted when the control's state changes. */
+  @Event() slChange: EventEmitter;
+
+  /** Emitted when the control gains focus. */
+  @Event() slFocus: EventEmitter;
+
   /** Sets focus on the radio. */
   @Method()
   async setFocus() {
@@ -46,8 +57,24 @@ export class Radio {
     this.input.blur();
   }
 
-  handleClick() {
-    this.checked = this.input.checked;
+  handleClick(event: MouseEvent) {
+    const slChange = this.slChange.emit();
+
+    if (slChange.defaultPrevented) {
+      event.preventDefault();
+    } else {
+      this.checked = this.input.checked;
+    }
+  }
+
+  handleBlur() {
+    this.hasFocus = false;
+    this.slBlur.emit();
+  }
+
+  handleFocus() {
+    this.hasFocus = true;
+    this.slFocus.emit();
   }
 
   render() {
@@ -82,9 +109,9 @@ export class Radio {
             checked={this.checked}
             disabled={this.disabled}
             aria-labeledby={this.labelId}
-            onBlur={() => (this.hasFocus = false)}
-            onFocus={() => (this.hasFocus = true)}
             onClick={this.handleClick}
+            onBlur={this.handleBlur}
+            onFocus={this.handleFocus}
           />
         </span>
 

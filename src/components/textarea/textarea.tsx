@@ -1,4 +1,4 @@
-import { Component, Method, Prop, State, Watch, h } from '@stencil/core';
+import { Component, Event, EventEmitter, Method, Prop, State, Watch, h } from '@stencil/core';
 import ResizeObserver from 'resize-observer-polyfill';
 
 @Component({
@@ -11,8 +11,10 @@ export class Textarea {
   textarea: HTMLTextAreaElement;
 
   constructor() {
+    this.handleChange = this.handleChange.bind(this);
     this.handleInput = this.handleInput.bind(this);
-    this.handleWindowResize = this.handleWindowResize.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
   }
 
   @State() hasFocus = false;
@@ -62,6 +64,18 @@ export class Textarea {
   /** The number of rows to display by default. */
   @Prop() rows = 4;
 
+  /** Emitted when the control's value changes. */
+  @Event() slChange: EventEmitter;
+
+  /** Emitted when the control receives input. */
+  @Event() slInput: EventEmitter;
+
+  /** Emitted when the control gains focus. */
+  @Event() slFocus: EventEmitter;
+
+  /** Emitted when the control loses focus. */
+  @Event() slBlur: EventEmitter;
+
   @Watch('rows')
   handleRowsChange() {
     this.setTextareaHeight();
@@ -89,13 +103,24 @@ export class Textarea {
     this.textarea.blur();
   }
 
+  handleChange() {
+    this.slChange.emit();
+  }
+
   handleInput() {
     this.value = this.textarea.value;
     this.setTextareaHeight();
+    this.slInput.emit();
   }
 
-  handleWindowResize() {
-    this.setTextareaHeight();
+  handleBlur() {
+    this.hasFocus = false;
+    this.slBlur.emit();
+  }
+
+  handleFocus() {
+    this.hasFocus = true;
+    this.slFocus.emit();
   }
 
   setTextareaHeight() {
@@ -145,9 +170,10 @@ export class Textarea {
           autoFocus={this.autofocus}
           required={this.required}
           inputMode={this.inputmode}
-          onFocus={() => (this.hasFocus = true)}
-          onBlur={() => (this.hasFocus = false)}
+          onChange={this.handleChange}
           onInput={this.handleInput}
+          onFocus={this.handleFocus}
+          onBlur={this.handleBlur}
         />
       </div>
     );

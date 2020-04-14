@@ -1,4 +1,4 @@
-import { Component, Method, Prop, State, h } from '@stencil/core';
+import { Component, Event, EventEmitter, Method, Prop, State, h } from '@stencil/core';
 
 @Component({
   tag: 'sl-range',
@@ -11,6 +11,8 @@ export class Range {
 
   constructor() {
     this.handleInput = this.handleInput.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
   }
 
   @State() hasFocus = false;
@@ -39,6 +41,15 @@ export class Range {
   /** A function used to format the tooltip's value. */
   @Prop() tooltipFormatter = (value: number) => value.toString();
 
+  /** Emitted when the control's value changes. */
+  @Event() slChange: EventEmitter;
+
+  /** Emitted when the control loses focus. */
+  @Event() slBlur: EventEmitter;
+
+  /** Emitted when the control gains focus. */
+  @Event() slFocus: EventEmitter;
+
   componentWillLoad() {
     if (this.value === undefined || this.value === null) this.value = this.min;
     if (this.value < this.min) this.value = this.min;
@@ -63,7 +74,19 @@ export class Range {
 
   handleInput() {
     this.value = Number(this.input.value);
+    this.slChange.emit();
+
     requestAnimationFrame(() => this.syncTooltip());
+  }
+
+  handleBlur() {
+    this.hasFocus = false;
+    this.slBlur.emit();
+  }
+
+  handleFocus() {
+    this.hasFocus = true;
+    this.slFocus.emit();
   }
 
   syncTooltip() {
@@ -102,9 +125,9 @@ export class Range {
           max={this.max}
           step={this.step}
           value={this.value}
-          onFocus={() => (this.hasFocus = true)}
-          onBlur={() => (this.hasFocus = false)}
           onInput={this.handleInput}
+          onFocus={this.handleFocus}
+          onBlur={this.handleBlur}
         />
         {this.tooltip !== 'off' && (
           <output ref={el => (this.output = el)} class="sl-range__tooltip">

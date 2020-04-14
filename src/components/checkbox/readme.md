@@ -21,6 +21,15 @@
 | `value`         | `value`         | The native input's value attribute.                         | `string`  | `undefined` |
 
 
+## Events
+
+| Event      | Description                               | Type               |
+| ---------- | ----------------------------------------- | ------------------ |
+| `slBlur`   | Emitted when the control loses focus.     | `CustomEvent<any>` |
+| `slChange` | Emitted when the control's state changes. | `CustomEvent<any>` |
+| `slFocus`  | Emitted when the control gains focus.     | `CustomEvent<any>` |
+
+
 ## Methods
 
 ### `removeFocus() => Promise<void>`

@@ -1,4 +1,4 @@
-import { Component, Element, Method, Prop, State, h } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, Method, Prop, State, h } from '@stencil/core';
 
 /**
  * @slot before - Used to insert an addon before the input.
@@ -19,6 +19,10 @@ export class Input {
   input: HTMLInputElement;
 
   constructor() {
+    this.handleChange = this.handleChange.bind(this);
+    this.handleInput = this.handleInput.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
     this.handleClearClick = this.handleClearClick.bind(this);
     this.handlePasswordToggle = this.handlePasswordToggle.bind(this);
   }
@@ -91,6 +95,18 @@ export class Input {
   /** The input's inputmode attribute. */
   @Prop() inputmode: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
 
+  /** Emitted when the control's value changes. */
+  @Event() slChange: EventEmitter;
+
+  /** Emitted when the control receives input. */
+  @Event() slInput: EventEmitter;
+
+  /** Emitted when the control gains focus. */
+  @Event() slFocus: EventEmitter;
+
+  /** Emitted when the control loses focus. */
+  @Event() slBlur: EventEmitter;
+
   /** Sets focus on the input. */
   @Method()
   async setFocus() {
@@ -103,10 +119,29 @@ export class Input {
     this.input.blur();
   }
 
+  handleChange() {
+    this.slChange.emit();
+  }
+
+  handleInput() {
+    this.value = this.input.value;
+    this.slInput.emit();
+  }
+
+  handleBlur() {
+    this.hasFocus = false;
+    this.slBlur.emit();
+  }
+
+  handleFocus() {
+    this.hasFocus = true;
+    this.slFocus.emit();
+  }
+
   handleClearClick() {
     this.input.value = '';
-    this.input.dispatchEvent(new Event('input', { bubbles: true }));
-    this.input.dispatchEvent(new Event('change', { bubbles: true }));
+    this.input.dispatchEvent(new window.Event('input', { bubbles: true }));
+    this.input.dispatchEvent(new window.Event('change', { bubbles: true }));
   }
 
   handlePasswordToggle() {
@@ -160,9 +195,10 @@ export class Input {
           pattern={this.pattern}
           required={this.required}
           inputMode={this.inputmode}
-          onFocus={() => (this.hasFocus = true)}
-          onBlur={() => (this.hasFocus = false)}
-          onInput={() => (this.value = this.input.value)}
+          onChange={this.handleChange}
+          onInput={this.handleInput}
+          onFocus={this.handleFocus}
+          onBlur={this.handleBlur}
         />
 
         {this.clearable && (
