@@ -88,6 +88,7 @@
     display: flex;
     background: none;
     border: none;
+    border-radius: var(--sl-border-radius-small);
     font-family: inherit;
     font-size: var(--sl-font-size-large);
     font-weight: inherit;
@@ -111,5 +112,10 @@
       width: 14px;
       height: 14px;
     }
+  }
+
+  &.sl-alert--using-keyboard .sl-alert__close:focus {
+    box-shadow: 0 0 0 var(--sl-focus-ring-width)
+      hsla(var(--sl-color-primary-hue), var(--sl-color-primary-sat), 50%, var(--sl-focus-ring-alpha));
   }
 }

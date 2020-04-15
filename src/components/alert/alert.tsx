@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, Prop, Watch, h } from '@stencil/core';
+import { Component, Event, EventEmitter, Prop, State, Watch, h } from '@stencil/core';
 
 /**
  * @slot - The alert's content.
@@ -15,9 +15,14 @@ export class Tab {
   private alert: HTMLElement;
 
   constructor() {
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleKeyUp = this.handleKeyUp.bind(this);
+    this.handleMouseDown = this.handleMouseDown.bind(this);
     this.handleCloseClick = this.handleCloseClick.bind(this);
     this.handleTransitionEnd = this.handleTransitionEnd.bind(this);
   }
+
+  @State() isUsingKeyboard = false;
 
   /** The type of alert to draw. */
   @Prop() type = 'primary';
@@ -41,6 +46,18 @@ export class Tab {
     }
   }
 
+  handleKeyDown() {
+    this.isUsingKeyboard = true;
+  }
+
+  handleKeyUp() {
+    this.isUsingKeyboard = true;
+  }
+
+  handleMouseDown() {
+    this.isUsingKeyboard = false;
+  }
+
   handleCloseClick() {
     this.closed = true;
   }
@@ -60,6 +77,7 @@ export class Tab {
           'sl-alert': true,
           'sl-alert--closable': this.closable,
           'sl-alert--closed': this.closed,
+          'sl-alert--using-keyboard': this.isUsingKeyboard,
 
           // States
           'sl-alert--primary': this.type === 'primary',
@@ -70,6 +88,9 @@ export class Tab {
         }}
         role="alert"
         aria-hidden={this.closed}
+        onMouseDown={this.handleMouseDown}
+        onKeyDown={this.handleKeyDown}
+        onKeyUp={this.handleKeyUp}
         onTransitionEnd={this.handleTransitionEnd}
       >
         <span class="sl-alert__icon">
