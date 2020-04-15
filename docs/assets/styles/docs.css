@@ -184,10 +184,6 @@ body.close .sidebar-toggle:focus {
   padding-right: 0;
 }
 
-.content table td code {
-  white-space: nowrap;
-}
-
 .content p.tip,
 .content tr:nth-child(2n) {
   background-color: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-sat), 97%);
