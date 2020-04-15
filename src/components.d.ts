@@ -698,6 +698,14 @@ declare namespace LocalJSX {
          */
         "loading"?: boolean;
         /**
+          * Emitted when the button loses focus.
+         */
+        "onSlBlur"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the button gains focus.
+         */
+        "onSlFocus"?: (event: CustomEvent<any>) => void;
+        /**
           * Set to true to draw a pill-style button with rounded edges.
          */
         "pill"?: boolean;
