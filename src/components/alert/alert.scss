@@ -98,14 +98,8 @@
     -webkit-appearance: none;
     transition: var(--sl-form-control-transition-speed) background-color, var(--sl-form-control-transition-speed) color;
 
-    &:hover,
     &:focus {
-      color: var(--sl-color-gray-50);
       outline: none;
-    }
-
-    &:active {
-      color: var(--sl-color-gray-30);
     }
 
     svg {

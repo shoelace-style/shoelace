@@ -1,5 +1,5 @@
 import { Component, Element, Event, EventEmitter, Method, Prop, State, Watch, h } from '@stencil/core';
-
+import { KeyboardDetector } from '../../utilities/keyboard-detector';
 import { getOffset } from '../../utilities/offset';
 import { scrollIntoView } from '../../utilities/scroll';
 
@@ -17,15 +17,15 @@ export class Tab {
   activeTab: HTMLSlTabElement;
   activeTabIndicator: HTMLElement;
   body: HTMLElement;
+  keyboardDetector: KeyboardDetector;
   nav: HTMLElement;
+  tabGroup: HTMLElement;
   tabs: HTMLElement;
   observer: MutationObserver;
 
   constructor() {
     this.handleClick = this.handleClick.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
-    this.handleKeyUp = this.handleKeyUp.bind(this);
-    this.handleMouseDown = this.handleMouseDown.bind(this);
   }
 
   @Element() host: HTMLSlTabGroupElement;
@@ -54,10 +54,17 @@ export class Tab {
     // Update aria labels if the DOM changes
     this.observer = new MutationObserver(() => setTimeout(() => this.setAriaLabels()));
     this.observer.observe(this.host, { attributes: true, childList: true, subtree: true });
+
+    this.keyboardDetector = new KeyboardDetector({
+      whenUsing: () => (this.isUsingKeyboard = true),
+      whenNotUsing: () => (this.isUsingKeyboard = false)
+    });
+    this.keyboardDetector.observe(this.tabGroup);
   }
 
   componentDidUnload() {
     this.observer.disconnect();
+    this.keyboardDetector.unobserve(this.tabGroup);
   }
 
   /** Shows the specified tab panel. */
@@ -165,8 +172,6 @@ export class Tab {
   }
 
   handleKeyDown(event: KeyboardEvent) {
-    this.isUsingKeyboard = true;
-
     // Activate a tab
     if (['Enter', ' '].includes(event.key)) {
       const target = event.target as HTMLElement;
@@ -199,17 +204,10 @@ export class Tab {
     }
   }
 
-  handleKeyUp() {
-    this.isUsingKeyboard = true;
-  }
-
-  handleMouseDown() {
-    this.isUsingKeyboard = false;
-  }
-
   render() {
     return (
       <div
+        ref={el => (this.tabGroup = el)}
         class={{
           'sl-tab-group': true,
           'sl-tab-group--using-keyboard': this.isUsingKeyboard,
@@ -222,8 +220,6 @@ export class Tab {
         }}
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
-        onKeyUp={this.handleKeyUp}
-        onMouseDown={this.handleMouseDown}
       >
         <div ref={el => (this.nav = el)} class="sl-tab-group__nav" tabindex="-1">
           <div ref={el => (this.tabs = el)} class="sl-tab-group__tabs" role="tablist">

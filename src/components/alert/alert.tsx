@@ -1,4 +1,5 @@
 import { Component, Event, EventEmitter, Prop, State, Watch, h } from '@stencil/core';
+import { KeyboardDetector } from '../../utilities/keyboard-detector';
 
 /**
  * @slot - The alert's content.
@@ -12,12 +13,10 @@ import { Component, Event, EventEmitter, Prop, State, Watch, h } from '@stencil/
   shadow: true
 })
 export class Tab {
-  private alert: HTMLElement;
+  alert: HTMLElement;
+  keyboardDetector: KeyboardDetector;
 
   constructor() {
-    this.handleKeyDown = this.handleKeyDown.bind(this);
-    this.handleKeyUp = this.handleKeyUp.bind(this);
-    this.handleMouseDown = this.handleMouseDown.bind(this);
     this.handleCloseClick = this.handleCloseClick.bind(this);
     this.handleTransitionEnd = this.handleTransitionEnd.bind(this);
   }
@@ -46,16 +45,16 @@ export class Tab {
     }
   }
 
-  handleKeyDown() {
-    this.isUsingKeyboard = true;
+  componentDidLoad() {
+    this.keyboardDetector = new KeyboardDetector({
+      whenUsing: () => this.alert.classList.add('sl-alert--using-keyboard'),
+      whenNotUsing: () => this.alert.classList.remove('sl-alert--using-keyboard')
+    });
+    this.keyboardDetector.observe(this.alert);
   }
 
-  handleKeyUp() {
-    this.isUsingKeyboard = true;
-  }
-
-  handleMouseDown() {
-    this.isUsingKeyboard = false;
+  componentDidUnload() {
+    this.keyboardDetector.unobserve(this.alert);
   }
 
   handleCloseClick() {
@@ -88,9 +87,6 @@ export class Tab {
         }}
         role="alert"
         aria-hidden={this.closed}
-        onMouseDown={this.handleMouseDown}
-        onKeyDown={this.handleKeyDown}
-        onKeyUp={this.handleKeyUp}
         onTransitionEnd={this.handleTransitionEnd}
       >
         <span class="sl-alert__icon">
