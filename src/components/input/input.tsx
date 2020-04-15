@@ -19,14 +19,13 @@ export class Input {
   input: HTMLInputElement;
 
   constructor() {
-    this.cancelEvent = this.cancelEvent.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleInput = this.handleInput.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
     this.handleClearClick = this.handleClearClick.bind(this);
     this.handlePasswordToggle = this.handlePasswordToggle.bind(this);
-    this.handleContainerClick = this.handleContainerClick.bind(this);
+    this.handleContainerMouseDown = this.handleContainerMouseDown.bind(this);
   }
 
   @Element() host: HTMLSlInputElement;
@@ -121,10 +120,6 @@ export class Input {
     this.input.blur();
   }
 
-  cancelEvent(event: Event) {
-    event.preventDefault();
-  }
-
   handleChange() {
     this.slChange.emit();
   }
@@ -154,7 +149,8 @@ export class Input {
     this.isPasswordVisible = !this.isPasswordVisible;
   }
 
-  handleContainerClick() {
+  handleContainerMouseDown(event) {
+    event.preventDefault();
     this.input.focus();
   }
 
@@ -174,13 +170,13 @@ export class Input {
           'sl-input--focused': this.hasFocus,
           'sl-input--empty': this.value.length === 0
         }}
-        onClick={this.handleContainerClick}
+        onMouseDown={this.handleContainerMouseDown}
       >
-        <span class="sl-input__before" onMouseDown={this.cancelEvent}>
+        <span class="sl-input__before">
           <slot name="before" />
         </span>
 
-        <span class="sl-input__prefix" onMouseDown={this.cancelEvent}>
+        <span class="sl-input__prefix">
           <slot name="prefix" />
         </span>
 
@@ -212,7 +208,7 @@ export class Input {
         />
 
         {this.clearable && (
-          <button class="sl-input__clear" onMouseDown={this.cancelEvent} onClick={this.handleClearClick} tabindex="-1">
+          <button class="sl-input__clear" onClick={this.handleClearClick} tabindex="-1">
             <slot name="clear-icon">
               <sl-icon name="x-circle" />
             </slot>
@@ -220,12 +216,7 @@ export class Input {
         )}
 
         {this.togglePassword && (
-          <button
-            class="sl-input__password-toggle"
-            onMouseDown={this.cancelEvent}
-            onClick={this.handlePasswordToggle}
-            tabindex="-1"
-          >
+          <button class="sl-input__password-toggle" onClick={this.handlePasswordToggle} tabindex="-1">
             {this.isPasswordVisible ? (
               <slot name="show-password-icon">
                 <sl-icon name="eye-off" />
@@ -239,11 +230,11 @@ export class Input {
           </button>
         )}
 
-        <span class="sl-input__suffix" onMouseDown={this.cancelEvent}>
+        <span class="sl-input__suffix">
           <slot name="suffix" />
         </span>
 
-        <span class="sl-input__after" onMouseDown={this.cancelEvent}>
+        <span class="sl-input__after">
           <slot name="after" />
         </span>
       </div>
