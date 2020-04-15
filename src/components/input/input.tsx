@@ -149,7 +149,7 @@ export class Input {
     this.isPasswordVisible = !this.isPasswordVisible;
   }
 
-  handleContainerMouseDown(event) {
+  handleContainerMouseDown(event: MouseEvent) {
     event.preventDefault();
     this.input.focus();
   }
