@@ -31,9 +31,10 @@ export class Dropdown {
     this.handleMenuMouseOver = this.handleMenuMouseOver.bind(this);
     this.handleMenuMouseOut = this.handleMenuMouseOut.bind(this);
     this.handleTransitionEnd = this.handleTransitionEnd.bind(this);
+    this.toggleMenu = this.toggleMenu.bind(this);
   }
 
-  @Element() host: HTMLElement;
+  @Element() host: HTMLSlDropdownElement;
 
   @State() isOpen = false;
 
@@ -82,6 +83,7 @@ export class Dropdown {
     this.close();
   }
 
+  /** Opens the dropdown menu */
   @Method()
   async open() {
     this.closeOpenDropdowns();
@@ -121,6 +123,7 @@ export class Dropdown {
     document.addEventListener('keydown', this.handleDocumentKeyDown);
   }
 
+  /** Closes the dropdown menu */
   @Method()
   async close() {
     this.isOpen = false;
@@ -281,7 +284,7 @@ export class Dropdown {
           class="sl-dropdown__trigger"
           ref={el => (this.trigger = el)}
           onKeyDown={this.handleTriggerKeyDown}
-          onClick={() => this.toggleMenu()}
+          onClick={this.toggleMenu}
         >
           <slot name="trigger" />
         </span>

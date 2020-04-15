@@ -75,7 +75,7 @@
 
 ### `close() => Promise<void>`
 
-
+Closes the dropdown menu
 
 #### Returns
 
@@ -85,7 +85,7 @@ Type: `Promise<void>`
 
 ### `open() => Promise<void>`
 
-
+Opens the dropdown menu
 
 #### Returns
 

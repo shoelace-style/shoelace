@@ -13,7 +13,7 @@ export class Tab {
   id = `sl-tab-${++id}`;
   tab: HTMLElement;
 
-  @Element() host: HTMLElement;
+  @Element() host: HTMLSlTabElement;
 
   /** The name of the tab panel the tab will control. The panel must exist in the same tab group. */
   @Prop() panel = '';

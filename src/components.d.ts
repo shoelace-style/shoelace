@@ -89,7 +89,13 @@ export namespace Components {
         "value": string;
     }
     interface SlDropdown {
+        /**
+          * Closes the dropdown menu
+         */
         "close": () => Promise<void>;
+        /**
+          * Opens the dropdown menu
+         */
         "open": () => Promise<void>;
         /**
           * The preferred placement of the dropdown menu. Note that the actual placement may vary as needed to keep the menu inside of the viewport.
@@ -325,7 +331,10 @@ export namespace Components {
           * The spinner's size.
          */
         "diameter": number;
-        "stroke": number;
+        /**
+          * The stroke width of the spinner in pixels.
+         */
+        "strokeWidth": number;
     }
     interface SlSwitch {
         /**
@@ -777,6 +786,9 @@ declare namespace LocalJSX {
           * Set to true to draw the dropdown item in a disabled state.
          */
         "disabled"?: boolean;
+        /**
+          * Emitted when an item is selected.
+         */
         "onSlSelect"?: (event: CustomEvent<any>) => void;
     }
     interface SlIcon {
@@ -1004,7 +1016,10 @@ declare namespace LocalJSX {
           * The spinner's size.
          */
         "diameter"?: number;
-        "stroke"?: number;
+        /**
+          * The stroke width of the spinner in pixels.
+         */
+        "strokeWidth"?: number;
     }
     interface SlSwitch {
         /**

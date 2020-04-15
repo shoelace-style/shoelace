@@ -12,7 +12,7 @@ let id = 0;
 export class TabPanel {
   id = `sl-tab-panel-${++id}`;
 
-  @Element() host: HTMLElement;
+  @Element() host: HTMLSlTabPanelElement;
 
   /** The tab panel's name. */
   @Prop() name = '';

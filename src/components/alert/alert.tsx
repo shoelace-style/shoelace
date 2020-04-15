@@ -12,9 +12,10 @@ import { Component, Event, EventEmitter, Prop, Watch, h } from '@stencil/core';
   shadow: true
 })
 export class Tab {
-  alert: HTMLElement;
+  private alert: HTMLElement;
 
   constructor() {
+    this.handleCloseClick = this.handleCloseClick.bind(this);
     this.handleTransitionEnd = this.handleTransitionEnd.bind(this);
   }
 
@@ -38,6 +39,10 @@ export class Tab {
     if (this.closed) {
       this.slClose.emit();
     }
+  }
+
+  handleCloseClick() {
+    this.closed = true;
   }
 
   handleTransitionEnd() {
@@ -76,7 +81,7 @@ export class Tab {
         </span>
 
         {this.closable && (
-          <button type="button" class="sl-alert__close" onClick={() => (this.closed = true)}>
+          <button type="button" class="sl-alert__close" onClick={this.handleCloseClick}>
             <slot name="close-icon">
               <sl-icon name="x" />
             </slot>

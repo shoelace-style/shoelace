@@ -15,7 +15,7 @@ export class Tooltip {
     this.syncSettings = this.syncSettings.bind(this);
   }
 
-  @Element() host: HTMLElement;
+  @Element() host: HTMLSlTooltipElement;
 
   /** Set to true to draw the the tooltip with an arrow. */
   @Prop() arrow = false;

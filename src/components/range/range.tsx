@@ -113,7 +113,6 @@ export class Range {
           'sl-range--tooltip-top': this.tooltip === 'top',
           'sl-range--tooltip-bottom': this.tooltip === 'bottom'
         }}
-        onClick={() => this.input.focus()}
       >
         <input
           ref={el => (this.input = el)}

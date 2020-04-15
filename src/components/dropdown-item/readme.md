@@ -17,9 +17,9 @@ TODO
 
 ## Events
 
-| Event      | Description | Type               |
-| ---------- | ----------- | ------------------ |
-| `slSelect` |             | `CustomEvent<any>` |
+| Event      | Description                       | Type               |
+| ---------- | --------------------------------- | ------------------ |
+| `slSelect` | Emitted when an item is selected. | `CustomEvent<any>` |
 
 
 ## Slots

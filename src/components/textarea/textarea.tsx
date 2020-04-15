@@ -153,7 +153,6 @@ export class Textarea {
           'sl-textarea--resize-vertical': this.resize === 'vertical',
           'sl-textarea--resize-auto': this.resize === 'auto'
         }}
-        onClick={() => this.textarea.focus()}
       >
         <textarea
           ref={el => (this.textarea = el)}

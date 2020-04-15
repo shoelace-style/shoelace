@@ -28,7 +28,7 @@ export class Tab {
     this.handleMouseDown = this.handleMouseDown.bind(this);
   }
 
-  @Element() host: HTMLElement;
+  @Element() host: HTMLSlTabGroupElement;
 
   @State() isUsingMouse = false;
 

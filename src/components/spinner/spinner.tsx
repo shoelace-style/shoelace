@@ -9,14 +9,15 @@ export class Spinner {
   /** The spinner's size. */
   @Prop() diameter = 24;
 
-  @Prop() stroke = 2;
+  /** The stroke width of the spinner in pixels. */
+  @Prop() strokeWidth = 2;
 
   render() {
     return (
       <span
         class="sl-spinner"
         style={{
-          borderWidth: `${this.stroke}px`,
+          borderWidth: `${this.strokeWidth}px`,
           width: `${this.diameter}px`,
           height: `${this.diameter}px`
         }}

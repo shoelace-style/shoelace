@@ -21,7 +21,7 @@ export class Radio {
     this.handleMouseDown = this.handleMouseDown.bind(this);
   }
 
-  @Element() host: HTMLElement;
+  @Element() host: HTMLSlRadioElement;
 
   @State() hasFocus = false;
 
