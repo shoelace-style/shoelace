@@ -18,6 +18,7 @@ export class Radio {
     this.handleClick = this.handleClick.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
+    this.handleMouseDown = this.handleMouseDown.bind(this);
   }
 
   @Element() host: HTMLElement;
@@ -77,6 +78,12 @@ export class Radio {
     this.slFocus.emit();
   }
 
+  handleMouseDown(event: MouseEvent) {
+    // Prevent clicks on the label from briefly blurring the input
+    event.preventDefault();
+    this.input.focus();
+  }
+
   render() {
     return (
       <label
@@ -88,6 +95,7 @@ export class Radio {
           'sl-radio--disabled': this.disabled,
           'sl-radio--focused': this.hasFocus
         }}
+        onMouseDown={this.handleMouseDown}
       >
         <span class="sl-radio__control">
           <span class="sl-radio__icon">

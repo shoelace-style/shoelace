@@ -19,6 +19,7 @@ export class Switch {
     this.handleBlur = this.handleBlur.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleMouseDown = this.handleMouseDown.bind(this);
   }
 
   @State() hasFocus = false;
@@ -88,6 +89,12 @@ export class Switch {
     }
   }
 
+  handleMouseDown(event: MouseEvent) {
+    // Prevent clicks on the label from briefly blurring the input
+    event.preventDefault();
+    this.input.focus();
+  }
+
   render() {
     return (
       <label
@@ -99,6 +106,7 @@ export class Switch {
           'sl-switch--disabled': this.disabled,
           'sl-switch--focused': this.hasFocus
         }}
+        onMouseDown={this.handleMouseDown}
       >
         <span class="sl-switch__control">
           <span class="sl-switch__thumb" />

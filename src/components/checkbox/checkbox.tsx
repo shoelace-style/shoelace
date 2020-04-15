@@ -18,6 +18,7 @@ export class Checkbox {
     this.handleClick = this.handleClick.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
+    this.handleMouseDown = this.handleMouseDown.bind(this);
   }
 
   @State() hasFocus = false;
@@ -88,6 +89,12 @@ export class Checkbox {
     this.slFocus.emit();
   }
 
+  handleMouseDown(event: MouseEvent) {
+    // Prevent clicks on the label from briefly blurring the input
+    event.preventDefault();
+    this.input.focus();
+  }
+
   render() {
     return (
       <label
@@ -100,6 +107,7 @@ export class Checkbox {
           'sl-checkbox--focused': this.hasFocus,
           'sl-checkbox--indeterminate': this.indeterminate
         }}
+        onMouseDown={this.handleMouseDown}
       >
         <span class="sl-checkbox__control">
           {this.checked && (
