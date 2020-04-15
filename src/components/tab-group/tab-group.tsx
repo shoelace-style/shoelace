@@ -30,7 +30,7 @@ export class Tab {
 
   @Element() host: HTMLSlTabGroupElement;
 
-  @State() isUsingMouse = false;
+  @State() isUsingKeyboard = false;
 
   /** The placement of the tabs. */
   @Prop() placement: 'top' | 'bottom' | 'left' | 'right' = 'top';
@@ -165,7 +165,7 @@ export class Tab {
   }
 
   handleKeyDown(event: KeyboardEvent) {
-    this.isUsingMouse = false;
+    this.isUsingKeyboard = true;
 
     // Activate a tab
     if (['Enter', ' '].includes(event.key)) {
@@ -200,11 +200,11 @@ export class Tab {
   }
 
   handleKeyUp() {
-    this.isUsingMouse = false;
+    this.isUsingKeyboard = true;
   }
 
   handleMouseDown() {
-    this.isUsingMouse = true;
+    this.isUsingKeyboard = false;
   }
 
   render() {
@@ -212,7 +212,7 @@ export class Tab {
       <div
         class={{
           'sl-tab-group': true,
-          'sl-tab-group--using-mouse': this.isUsingMouse,
+          'sl-tab-group--using-keyboard': this.isUsingKeyboard,
 
           // Placements
           'sl-tab-group--top': this.placement === 'top',

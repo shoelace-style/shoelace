@@ -21,8 +21,8 @@
       var(--sl-form-control-transition-speed) width ease;
   }
 
-  // Hide the focus ring if the user is interacting with a mouse
-  &.sl-tab-group--using-mouse ::slotted(sl-tab) {
+  // Show a focus ring if the user is interacting with a keyboard
+  &:not(.sl-tab-group--using-keyboard) ::slotted(sl-tab) {
     --focus-ring-box-shadow: none;
   }
 }
