@@ -49,12 +49,12 @@
 
 ## Events
 
-| Event      | Description                                                                          | Type               |
-| ---------- | ------------------------------------------------------------------------------------ | ------------------ |
-| `shHidden` | Emitted when the tooltip has fully transitioned out and gets unmounted from the DOM. | `CustomEvent<any>` |
-| `slHide`   | Emitted when the tooltip begins to hide.                                             | `CustomEvent<any>` |
-| `slShow`   | Emitted when the tooltip begins to show, but before it gets mounted to the DOM.      | `CustomEvent<any>` |
-| `slShown`  | Emitted when the tooltip has fully transitioned in.                                  | `CustomEvent<any>` |
+| Event         | Description                                                                                                  | Type               |
+| ------------- | ------------------------------------------------------------------------------------------------------------ | ------------------ |
+| `slAfterHide` | Emitted after the tooltip has hidden and all transitions are complete.                                       | `CustomEvent<any>` |
+| `slAfterShow` | Emitted after the tooltip has shown and all transitions are complete.                                        | `CustomEvent<any>` |
+| `slHide`      | Emitted when the tooltip begins to hide. Calling `event.preventDefault()` will prevent it from being hidden. | `CustomEvent<any>` |
+| `slShow`      | Emitted when the tooltip begins to show. Calling `event.preventDefault()` will prevent it from being shown.  | `CustomEvent<any>` |
 
 
 ## Methods

@@ -92,11 +92,11 @@ export namespace Components {
         /**
           * Closes the dropdown menu
          */
-        "close": () => Promise<void>;
+        "close": () => Promise<boolean>;
         /**
           * Opens the dropdown menu
          */
-        "open": () => Promise<void>;
+        "open": () => Promise<boolean>;
         /**
           * The preferred placement of the dropdown menu. Note that the actual placement may vary as needed to keep the menu inside of the viewport.
          */
@@ -763,6 +763,22 @@ declare namespace LocalJSX {
     }
     interface SlDropdown {
         /**
+          * Emitted after the dropdown menu closes and all transitions are complete.
+         */
+        "onSlAfterClose"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted after the dropdown menu opens and all transitions are complete.
+         */
+        "onSlAfterOpen"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the dropdown menu closes. Calling `event.preventDefault()` will prevent it from being closed.
+         */
+        "onSlClose"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the dropdown menu opens. Calling `event.preventDefault()` will prevent it from being opened.
+         */
+        "onSlOpen"?: (event: CustomEvent<any>) => void;
+        /**
           * The preferred placement of the dropdown menu. Note that the actual placement may vary as needed to keep the menu inside of the viewport.
          */
         "placement"?: "top" | "top-start" | "top-end" | "bottom" | "bottom-start" | "bottom-end" | "right" | "right-start" | "right-end" | "left" | "left-start" | "left-end";
@@ -1193,21 +1209,21 @@ declare namespace LocalJSX {
          */
         "maxWidth"?: number;
         /**
-          * Emitted when the tooltip has fully transitioned out and gets unmounted from the DOM.
+          * Emitted after the tooltip has hidden and all transitions are complete.
          */
-        "onShHidden"?: (event: CustomEvent<any>) => void;
+        "onSlAfterHide"?: (event: CustomEvent<any>) => void;
         /**
-          * Emitted when the tooltip begins to hide.
+          * Emitted after the tooltip has shown and all transitions are complete.
+         */
+        "onSlAfterShow"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the tooltip begins to hide. Calling `event.preventDefault()` will prevent it from being hidden.
          */
         "onSlHide"?: (event: CustomEvent<any>) => void;
         /**
-          * Emitted when the tooltip begins to show, but before it gets mounted to the DOM.
+          * Emitted when the tooltip begins to show. Calling `event.preventDefault()` will prevent it from being shown.
          */
         "onSlShow"?: (event: CustomEvent<any>) => void;
-        /**
-          * Emitted when the tooltip has fully transitioned in.
-         */
-        "onSlShown"?: (event: CustomEvent<any>) => void;
         /**
           * The preferred placement of the tooltip. Note that the actual placement may vary as needed to keep the tooltip inside of the viewport.
          */
