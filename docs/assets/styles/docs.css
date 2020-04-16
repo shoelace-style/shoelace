@@ -202,7 +202,7 @@ body.close .sidebar-toggle:focus {
 /* Code */
 .content pre,
 .content pre > code {
-  border-radius: 3px;
+  border-radius: var(--sl-border-radius-small);
   font-family: var(--sl-font-mono);
   font-size: 0.875rem;
   color: var(--sl-color-gray-20);
@@ -268,7 +268,7 @@ body.close .sidebar-toggle:focus {
 /* Code blocks */
 .code-block {
   position: relative;
-  border-radius: 3px;
+  border-radius: var(--sl-border-radius-small);
   margin-bottom: 1.5rem;
   background: var(--sl-color-gray-95);
 }
@@ -301,6 +301,7 @@ body.close .sidebar-toggle:focus {
   bottom: 0;
   width: 1.75rem;
   border-left: solid 1px var(--sl-color-gray-90);
+  border-top-right-radius: var(--sl-border-radius-small);
   box-shadow: var(--sl-shadow-1);
   cursor: ew-resize;
   transition: 250ms background-color;
