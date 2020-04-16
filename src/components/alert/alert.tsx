@@ -1,4 +1,5 @@
-import { Component, Event, EventEmitter, Prop, Watch, h } from '@stencil/core';
+import { Component, Event, EventEmitter, Prop, State, Watch, h } from '@stencil/core';
+import { KeyboardDetector } from '../../utilities/keyboard-detector';
 
 /**
  * @slot - The alert's content.
@@ -13,10 +14,14 @@ import { Component, Event, EventEmitter, Prop, Watch, h } from '@stencil/core';
 })
 export class Tab {
   alert: HTMLElement;
+  keyboardDetector: KeyboardDetector;
 
   constructor() {
+    this.handleCloseClick = this.handleCloseClick.bind(this);
     this.handleTransitionEnd = this.handleTransitionEnd.bind(this);
   }
+
+  @State() isUsingKeyboard = false;
 
   /** The type of alert to draw. */
   @Prop() type = 'primary';
@@ -40,6 +45,22 @@ export class Tab {
     }
   }
 
+  componentDidLoad() {
+    this.keyboardDetector = new KeyboardDetector({
+      whenUsing: () => this.alert.classList.add('sl-alert--using-keyboard'),
+      whenNotUsing: () => this.alert.classList.remove('sl-alert--using-keyboard')
+    });
+    this.keyboardDetector.observe(this.alert);
+  }
+
+  componentDidUnload() {
+    this.keyboardDetector.unobserve(this.alert);
+  }
+
+  handleCloseClick() {
+    this.closed = true;
+  }
+
   handleTransitionEnd() {
     // Hide the alert when the transition ends
     if (this.closed) {
@@ -55,6 +76,7 @@ export class Tab {
           'sl-alert': true,
           'sl-alert--closable': this.closable,
           'sl-alert--closed': this.closed,
+          'sl-alert--using-keyboard': this.isUsingKeyboard,
 
           // States
           'sl-alert--primary': this.type === 'primary',
@@ -76,7 +98,7 @@ export class Tab {
         </span>
 
         {this.closable && (
-          <button type="button" class="sl-alert__close" onClick={() => (this.closed = true)}>
+          <button type="button" class="sl-alert__close" onClick={this.handleCloseClick}>
             <slot name="close-icon">
               <sl-icon name="x" />
             </slot>

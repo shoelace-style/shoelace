@@ -1,4 +1,4 @@
-import { Component, Element, Method, Prop, State, h } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, Method, Prop, State, h } from '@stencil/core';
 
 /**
  * @slot before - Used to insert an addon before the input.
@@ -19,11 +19,16 @@ export class Input {
   input: HTMLInputElement;
 
   constructor() {
+    this.handleChange = this.handleChange.bind(this);
+    this.handleInput = this.handleInput.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
     this.handleClearClick = this.handleClearClick.bind(this);
     this.handlePasswordToggle = this.handlePasswordToggle.bind(this);
+    this.handleContainerMouseDown = this.handleContainerMouseDown.bind(this);
   }
 
-  @Element() host: HTMLElement;
+  @Element() host: HTMLSlInputElement;
 
   @State() hasFocus = false;
   @State() isPasswordVisible = false;
@@ -91,6 +96,18 @@ export class Input {
   /** The input's inputmode attribute. */
   @Prop() inputmode: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
 
+  /** Emitted when the control's value changes. */
+  @Event() slChange: EventEmitter;
+
+  /** Emitted when the control receives input. */
+  @Event() slInput: EventEmitter;
+
+  /** Emitted when the control gains focus. */
+  @Event() slFocus: EventEmitter;
+
+  /** Emitted when the control loses focus. */
+  @Event() slBlur: EventEmitter;
+
   /** Sets focus on the input. */
   @Method()
   async setFocus() {
@@ -103,14 +120,38 @@ export class Input {
     this.input.blur();
   }
 
+  handleChange() {
+    this.slChange.emit();
+  }
+
+  handleInput() {
+    this.value = this.input.value;
+    this.slInput.emit();
+  }
+
+  handleBlur() {
+    this.hasFocus = false;
+    this.slBlur.emit();
+  }
+
+  handleFocus() {
+    this.hasFocus = true;
+    this.slFocus.emit();
+  }
+
   handleClearClick() {
     this.input.value = '';
-    this.input.dispatchEvent(new Event('input', { bubbles: true }));
-    this.input.dispatchEvent(new Event('change', { bubbles: true }));
+    this.input.dispatchEvent(new window.Event('input', { bubbles: true }));
+    this.input.dispatchEvent(new window.Event('change', { bubbles: true }));
   }
 
   handlePasswordToggle() {
     this.isPasswordVisible = !this.isPasswordVisible;
+  }
+
+  handleContainerMouseDown(event: MouseEvent) {
+    event.preventDefault();
+    this.input.focus();
   }
 
   render() {
@@ -129,7 +170,7 @@ export class Input {
           'sl-input--focused': this.hasFocus,
           'sl-input--empty': this.value.length === 0
         }}
-        onClick={() => this.input.focus()}
+        onMouseDown={this.handleContainerMouseDown}
       >
         <span class="sl-input__before">
           <slot name="before" />
@@ -160,18 +201,14 @@ export class Input {
           pattern={this.pattern}
           required={this.required}
           inputMode={this.inputmode}
-          onFocus={() => (this.hasFocus = true)}
-          onBlur={() => (this.hasFocus = false)}
-          onInput={() => (this.value = this.input.value)}
+          onChange={this.handleChange}
+          onInput={this.handleInput}
+          onFocus={this.handleFocus}
+          onBlur={this.handleBlur}
         />
 
         {this.clearable && (
-          <button
-            class="sl-input__clear"
-            onMouseDown={event => event.preventDefault()}
-            onClick={this.handleClearClick}
-            tabindex="-1"
-          >
+          <button class="sl-input__clear" onClick={this.handleClearClick} tabindex="-1">
             <slot name="clear-icon">
               <sl-icon name="x-circle" />
             </slot>
@@ -179,12 +216,7 @@ export class Input {
         )}
 
         {this.togglePassword && (
-          <button
-            class="sl-input__password-toggle"
-            onMouseDown={event => event.preventDefault()}
-            onClick={this.handlePasswordToggle}
-            tabindex="-1"
-          >
+          <button class="sl-input__password-toggle" onClick={this.handlePasswordToggle} tabindex="-1">
             {this.isPasswordVisible ? (
               <slot name="show-password-icon">
                 <sl-icon name="eye-off" />

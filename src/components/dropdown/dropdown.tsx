@@ -1,5 +1,5 @@
+import { Component, Element, Event, EventEmitter, Method, Prop, State, Watch, h } from '@stencil/core';
 import { Instance as PopperInstance, createPopper } from '@popperjs/core';
-import { Component, Element, Method, Prop, State, Watch, h } from '@stencil/core';
 
 import { scrollIntoView } from '../../utilities/scroll';
 
@@ -31,9 +31,10 @@ export class Dropdown {
     this.handleMenuMouseOver = this.handleMenuMouseOver.bind(this);
     this.handleMenuMouseOut = this.handleMenuMouseOut.bind(this);
     this.handleTransitionEnd = this.handleTransitionEnd.bind(this);
+    this.toggleMenu = this.toggleMenu.bind(this);
   }
 
-  @Element() host: HTMLElement;
+  @Element() host: HTMLSlDropdownElement;
 
   @State() isOpen = false;
 
@@ -62,6 +63,18 @@ export class Dropdown {
    */
   @Prop() position: 'fixed' | 'absolute' = 'absolute';
 
+  /** Emitted when the dropdown menu opens. Calling `event.preventDefault()` will prevent it from being opened. */
+  @Event() slOpen: EventEmitter;
+
+  /** Emitted after the dropdown menu opens and all transitions are complete. */
+  @Event() slAfterOpen: EventEmitter;
+
+  /** Emitted when the dropdown menu closes. Calling `event.preventDefault()` will prevent it from being closed. */
+  @Event() slClose: EventEmitter;
+
+  /** Emitted after the dropdown menu closes and all transitions are complete. */
+  @Event() slAfterClose: EventEmitter;
+
   @Watch('placement')
   handlePlacementChange() {
     if (this.popper) {
@@ -82,8 +95,15 @@ export class Dropdown {
     this.close();
   }
 
+  /** Opens the dropdown menu */
   @Method()
   async open() {
+    const slOpen = this.slOpen.emit();
+
+    if (slOpen.defaultPrevented) {
+      return false;
+    }
+
     this.closeOpenDropdowns();
     this.menu.hidden = false;
     this.isOpen = true;
@@ -121,8 +141,15 @@ export class Dropdown {
     document.addEventListener('keydown', this.handleDocumentKeyDown);
   }
 
+  /** Closes the dropdown menu */
   @Method()
   async close() {
+    const slClose = this.slClose.emit();
+
+    if (slClose.defaultPrevented) {
+      return false;
+    }
+
     this.isOpen = false;
     this.setSelectedItem(null);
 
@@ -245,16 +272,18 @@ export class Dropdown {
   }
 
   handleTransitionEnd() {
-    // Reset the menu's scroll position before it gets hidden
-    if (!this.isOpen) {
+    if (this.isOpen) {
+      this.menu.hidden = false;
+      this.slAfterOpen.emit();
+    } else {
       this.menu.scrollTop = 0;
-    }
+      this.menu.hidden = true;
+      this.slAfterClose.emit();
 
-    this.menu.hidden = !this.isOpen;
-
-    if (!this.isOpen && this.popper) {
-      this.popper.destroy();
-      this.popper = null;
+      if (this.popper) {
+        this.popper.destroy();
+        this.popper = null;
+      }
     }
   }
 
@@ -281,7 +310,7 @@ export class Dropdown {
           class="sl-dropdown__trigger"
           ref={el => (this.trigger = el)}
           onKeyDown={this.handleTriggerKeyDown}
-          onClick={() => this.toggleMenu()}
+          onClick={this.toggleMenu}
         >
           <slot name="trigger" />
         </span>

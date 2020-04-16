@@ -18,6 +18,7 @@
   background-color: var(--sl-form-control-background-color);
   border: solid var(--sl-form-control-border-width) var(--sl-form-control-border-color);
   vertical-align: middle;
+  overflow: hidden;
   transition: var(--sl-form-control-transition-speed) color, var(--sl-form-control-transition-speed) border,
     var(--sl-form-control-transition-speed) box-shadow;
   cursor: text;
@@ -27,6 +28,7 @@
     font-family: inherit;
     font-size: inherit;
     font-weight: inherit;
+    min-width: 0;
     height: 100%;
     color: var(--sl-form-control-color);
     border: none;
@@ -99,7 +101,7 @@
 
   .sl-input__before ::slotted(*),
   .sl-input__after ::slotted(*) {
-    flex: 1 1 auto;
+    flex: 0 0 auto;
     background-color: var(--sl-color-gray-95);
     color: var(--sl-color-gray-50);
     user-select: none;
@@ -242,19 +244,6 @@
     width: 1.2em;
     height: 1.2em;
     transition: var(--sl-form-control-transition-speed) filter;
-  }
-
-  &:hover,
-  &:focus {
-    svg {
-      filter: brightness(80%);
-    }
-  }
-
-  &:active {
-    svg {
-      filter: brightness(60%);
-    }
   }
 }
 

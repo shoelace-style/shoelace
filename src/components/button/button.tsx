@@ -1,4 +1,4 @@
-import { Component, Method, Prop, h } from '@stencil/core';
+import { Component, Event, EventEmitter, Method, Prop, State, h } from '@stencil/core';
 
 /**
  * @slot - The button's label.
@@ -13,6 +13,13 @@ import { Component, Method, Prop, h } from '@stencil/core';
 })
 export class Button {
   button: HTMLButtonElement;
+
+  constructor() {
+    this.handleBlur = this.handleBlur.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
+  }
+
+  @State() hasFocus = false;
 
   /** The button's type. */
   @Prop() type: 'default' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text' = 'default';
@@ -35,6 +42,12 @@ export class Button {
   /** Set to true to draw a circle button. */
   @Prop() circle = false;
 
+  /** Emitted when the button loses focus. */
+  @Event() slBlur: EventEmitter;
+
+  /** Emitted when the button gains focus. */
+  @Event() slFocus: EventEmitter;
+
   /** Sets focus on the button. */
   @Method()
   async setFocus() {
@@ -45,6 +58,16 @@ export class Button {
   @Method()
   async removeFocus() {
     this.button.blur();
+  }
+
+  handleBlur() {
+    this.hasFocus = false;
+    this.slBlur.emit();
+  }
+
+  handleFocus() {
+    this.hasFocus = true;
+    this.slFocus.emit();
   }
 
   render() {
@@ -72,10 +95,13 @@ export class Button {
           'sl-button--caret': this.caret,
           'sl-button--circle': this.circle,
           'sl-button--disabled': this.disabled,
+          'sl-button--focused': this.hasFocus,
           'sl-button--loading': this.loading,
           'sl-button--pill': this.pill
         }}
         disabled={this.disabled}
+        onBlur={this.handleBlur}
+        onFocus={this.handleFocus}
       >
         <span class="sl-button__prefix">
           <slot name="prefix" />
@@ -93,6 +119,10 @@ export class Button {
         )}
 
         {this.loading && <span class="sl-button__spinner" />}
+
+        <span class="sl-button__split">
+          <slot name="split" />
+        </span>
       </button>
     );
   }

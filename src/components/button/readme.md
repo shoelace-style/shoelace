@@ -137,6 +137,14 @@ Use the `disabled` prop to disable a button.
 | `type`     | `type`     | The button's type.                                                                 | `"danger" \| "default" \| "info" \| "primary" \| "success" \| "text" \| "warning"` | `'default'` |
 
 
+## Events
+
+| Event     | Description                          | Type               |
+| --------- | ------------------------------------ | ------------------ |
+| `slBlur`  | Emitted when the button loses focus. | `CustomEvent<any>` |
+| `slFocus` | Emitted when the button gains focus. | `CustomEvent<any>` |
+
+
 ## Methods
 
 ### `removeFocus() => Promise<void>`

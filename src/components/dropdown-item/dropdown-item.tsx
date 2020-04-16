@@ -13,6 +13,10 @@ import { Component, Event, EventEmitter, Prop, h } from '@stencil/core';
   shadow: true
 })
 export class DropdownItem {
+  constructor() {
+    this.handleClick = this.handleClick.bind(this);
+  }
+
   /** Set to true to draw the item in a checked state. */
   @Prop() checked = false;
 
@@ -22,7 +26,14 @@ export class DropdownItem {
   /** Set to true to draw the dropdown item in a disabled state. */
   @Prop() disabled = false;
 
+  /** Emitted when an item is selected. */
   @Event() slSelect: EventEmitter;
+
+  handleClick() {
+    if (!this.disabled) {
+      this.slSelect.emit();
+    }
+  }
 
   render() {
     return (
@@ -37,6 +48,7 @@ export class DropdownItem {
         aria-checked={this.checked}
         aria-disabled={this.disabled}
         aria-selected={this.active}
+        onClick={this.handleClick}
       >
         <span class="sl-dropdown-item__check">
           <slot name="check-icon">

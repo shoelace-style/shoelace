@@ -45,6 +45,15 @@ document.querySelector('#range-with-custom-formatter').tooltipFormatter = value 
 | `value`            | `value`    | The input's value attribute.                   | `number`                     | `undefined`                           |
 
 
+## Events
+
+| Event      | Description                               | Type               |
+| ---------- | ----------------------------------------- | ------------------ |
+| `slBlur`   | Emitted when the control loses focus.     | `CustomEvent<any>` |
+| `slChange` | Emitted when the control's value changes. | `CustomEvent<any>` |
+| `slFocus`  | Emitted when the control gains focus.     | `CustomEvent<any>` |
+
+
 ## Methods
 
 ### `removeFocus() => Promise<void>`

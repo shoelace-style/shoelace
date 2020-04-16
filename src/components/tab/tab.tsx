@@ -13,9 +13,9 @@ export class Tab {
   id = `sl-tab-${++id}`;
   tab: HTMLElement;
 
-  @Element() host: HTMLElement;
+  @Element() host: HTMLSlTabElement;
 
-  /** The name of the tab panel the tab will be synced to. The panel must exist in the same `<sl-tabs>` element. */
+  /** The name of the tab panel the tab will control. The panel must exist in the same tab group. */
   @Prop() panel = '';
 
   /** Set to true to draw the tab in an active state. */

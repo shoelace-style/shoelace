@@ -15,7 +15,7 @@ export class Tooltip {
     this.syncSettings = this.syncSettings.bind(this);
   }
 
-  @Element() host: HTMLElement;
+  @Element() host: HTMLSlTooltipElement;
 
   /** Set to true to draw the the tooltip with an arrow. */
   @Prop() arrow = false;
@@ -83,17 +83,17 @@ export class Tooltip {
     this.syncSettings();
   }
 
-  /** Emitted when the tooltip begins to show, but before it gets mounted to the DOM. */
+  /** Emitted when the tooltip begins to show. Calling `event.preventDefault()` will prevent it from being shown. */
   @Event() slShow: EventEmitter;
 
-  /** Emitted when the tooltip has fully transitioned in. */
-  @Event() slShown: EventEmitter;
+  /** Emitted after the tooltip has shown and all transitions are complete. */
+  @Event() slAfterShow: EventEmitter;
 
-  /** Emitted when the tooltip begins to hide. */
+  /** Emitted when the tooltip begins to hide. Calling `event.preventDefault()` will prevent it from being hidden. */
   @Event() slHide: EventEmitter;
 
-  /** Emitted when the tooltip has fully transitioned out and gets unmounted from the DOM. */
-  @Event() shHidden: EventEmitter;
+  /** Emitted after the tooltip has hidden and all transitions are complete. */
+  @Event() slAfterHide: EventEmitter;
 
   componentDidLoad() {
     this.tooltip = tippy(this.getTarget());
@@ -154,10 +154,22 @@ export class Tooltip {
       trigger: this.trigger,
       zIndex: this.zIndex,
 
-      onShow: () => this.slShow.emit(),
-      onShown: () => this.slShown.emit(),
-      onHide: () => this.slHide.emit(),
-      onHidden: () => this.shHidden.emit()
+      onShow: () => {
+        const slShow = this.slShow.emit();
+
+        if (slShow.defaultPrevented) {
+          return false;
+        }
+      },
+      onShown: () => this.slAfterShow.emit(),
+      onHide: () => {
+        const slHide = this.slHide.emit();
+
+        if (slHide.defaultPrevented) {
+          return false;
+        }
+      },
+      onHidden: () => this.slAfterHide.emit()
     });
 
     if (this.disabled) {

@@ -71,25 +71,35 @@
 | `position`  | `position`  | The positioning strategy used for displaying the menu. If the menu is clipped by a containing element's overflow, setting this to `fixed` usually resolves it. Note that `fixed` is less performant than `absolute`, so avoid using the former when possible. | `"absolute" \| "fixed"`                                                                                                                                              | `'absolute'`     |
 
 
+## Events
+
+| Event          | Description                                                                                                | Type               |
+| -------------- | ---------------------------------------------------------------------------------------------------------- | ------------------ |
+| `slAfterClose` | Emitted after the dropdown menu closes and all transitions are complete.                                   | `CustomEvent<any>` |
+| `slAfterOpen`  | Emitted after the dropdown menu opens and all transitions are complete.                                    | `CustomEvent<any>` |
+| `slClose`      | Emitted when the dropdown menu closes. Calling `event.preventDefault()` will prevent it from being closed. | `CustomEvent<any>` |
+| `slOpen`       | Emitted when the dropdown menu opens. Calling `event.preventDefault()` will prevent it from being opened.  | `CustomEvent<any>` |
+
+
 ## Methods
 
-### `close() => Promise<void>`
+### `close() => Promise<boolean>`
 
-
-
-#### Returns
-
-Type: `Promise<void>`
-
-
-
-### `open() => Promise<void>`
-
-
+Closes the dropdown menu
 
 #### Returns
 
-Type: `Promise<void>`
+Type: `Promise<boolean>`
+
+
+
+### `open() => Promise<boolean>`
+
+Opens the dropdown menu
+
+#### Returns
+
+Type: `Promise<boolean>`
 
 
 

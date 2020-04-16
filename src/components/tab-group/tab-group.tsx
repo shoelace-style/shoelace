@@ -1,5 +1,5 @@
 import { Component, Element, Event, EventEmitter, Method, Prop, State, Watch, h } from '@stencil/core';
-
+import { KeyboardDetector } from '../../utilities/keyboard-detector';
 import { getOffset } from '../../utilities/offset';
 import { scrollIntoView } from '../../utilities/scroll';
 
@@ -9,34 +9,34 @@ import { scrollIntoView } from '../../utilities/scroll';
  */
 
 @Component({
-  tag: 'sl-tabs',
-  styleUrl: 'tabs.scss',
+  tag: 'sl-tab-group',
+  styleUrl: 'tab-group.scss',
   shadow: true
 })
 export class Tab {
   activeTab: HTMLSlTabElement;
   activeTabIndicator: HTMLElement;
   body: HTMLElement;
+  keyboardDetector: KeyboardDetector;
   nav: HTMLElement;
+  tabGroup: HTMLElement;
   tabs: HTMLElement;
   observer: MutationObserver;
 
   constructor() {
     this.handleClick = this.handleClick.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
-    this.handleKeyUp = this.handleKeyUp.bind(this);
-    this.handleMouseDown = this.handleMouseDown.bind(this);
   }
 
-  @Element() host: HTMLElement;
+  @Element() host: HTMLSlTabGroupElement;
 
-  @State() isUsingMouse = false;
+  @State() isUsingKeyboard = false;
 
-  /** The position of the tabs. */
-  @Prop() position: 'top' | 'bottom' | 'left' | 'right' = 'top';
+  /** The placement of the tabs. */
+  @Prop() placement: 'top' | 'bottom' | 'left' | 'right' = 'top';
 
-  @Watch('position')
-  handlePositionChange() {
+  @Watch('placement')
+  handlePlacementChange() {
     this.syncActiveTabIndicator();
   }
 
@@ -54,10 +54,17 @@ export class Tab {
     // Update aria labels if the DOM changes
     this.observer = new MutationObserver(() => setTimeout(() => this.setAriaLabels()));
     this.observer.observe(this.host, { attributes: true, childList: true, subtree: true });
+
+    this.keyboardDetector = new KeyboardDetector({
+      whenUsing: () => (this.isUsingKeyboard = true),
+      whenNotUsing: () => (this.isUsingKeyboard = false)
+    });
+    this.keyboardDetector.observe(this.tabGroup);
   }
 
   componentDidUnload() {
     this.observer.disconnect();
+    this.keyboardDetector.unobserve(this.tabGroup);
   }
 
   /** Shows the specified tab panel. */
@@ -101,7 +108,7 @@ export class Tab {
       this.getAllPanels().map(el => (el.active = el.name === this.activeTab.panel));
       this.syncActiveTabIndicator();
 
-      if (['top', 'bottom'].includes(this.position)) {
+      if (['top', 'bottom'].includes(this.placement)) {
         scrollIntoView(this.activeTab, this.nav, 'horizontal');
       }
 
@@ -138,7 +145,7 @@ export class Tab {
     const offsetTop = offset.top + this.nav.scrollTop;
     const offsetLeft = offset.left + this.nav.scrollLeft;
 
-    switch (this.position) {
+    switch (this.placement) {
       case 'top':
       case 'bottom':
         this.activeTabIndicator.style.width = `${width}px`;
@@ -165,8 +172,6 @@ export class Tab {
   }
 
   handleKeyDown(event: KeyboardEvent) {
-    this.isUsingMouse = false;
-
     // Activate a tab
     if (['Enter', ' '].includes(event.key)) {
       const target = event.target as HTMLElement;
@@ -190,7 +195,7 @@ export class Tab {
         if (index > tabs.length - 1) index = tabs.length - 1;
         tabs[index].setFocus();
 
-        if (['top', 'bottom'].includes(this.position)) {
+        if (['top', 'bottom'].includes(this.placement)) {
           scrollIntoView(tabs[index], this.nav, 'horizontal');
         }
 
@@ -199,40 +204,31 @@ export class Tab {
     }
   }
 
-  handleKeyUp() {
-    this.isUsingMouse = false;
-  }
-
-  handleMouseDown() {
-    this.isUsingMouse = true;
-  }
-
   render() {
     return (
       <div
+        ref={el => (this.tabGroup = el)}
         class={{
-          'sl-tabs': true,
-          'sl-tabs--using-mouse': this.isUsingMouse,
+          'sl-tab-group': true,
+          'sl-tab-group--using-keyboard': this.isUsingKeyboard,
 
-          // Positions
-          'sl-tabs--top': this.position === 'top',
-          'sl-tabs--bottom': this.position === 'bottom',
-          'sl-tabs--left': this.position === 'left',
-          'sl-tabs--right': this.position === 'right'
+          // Placements
+          'sl-tab-group--top': this.placement === 'top',
+          'sl-tab-group--bottom': this.placement === 'bottom',
+          'sl-tab-group--left': this.placement === 'left',
+          'sl-tab-group--right': this.placement === 'right'
         }}
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
-        onKeyUp={this.handleKeyUp}
-        onMouseDown={this.handleMouseDown}
       >
-        <div ref={el => (this.nav = el)} class="sl-tabs__nav" tabindex="-1">
-          <div ref={el => (this.tabs = el)} class="sl-tabs__tabs" role="tablist">
-            <div ref={el => (this.activeTabIndicator = el)} class="sl-tabs__active-tab-indicator" />
+        <div ref={el => (this.nav = el)} class="sl-tab-group__nav" tabindex="-1">
+          <div ref={el => (this.tabs = el)} class="sl-tab-group__tabs" role="tablist">
+            <div ref={el => (this.activeTabIndicator = el)} class="sl-tab-group__active-tab-indicator" />
             <slot name="nav" />
           </div>
         </div>
 
-        <div ref={el => (this.body = el)} class="sl-tabs__body">
+        <div ref={el => (this.body = el)} class="sl-tab-group__body">
           <slot />
         </div>
       </div>

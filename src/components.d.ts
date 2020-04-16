@@ -92,8 +92,14 @@ export namespace Components {
         "open": boolean;
     }
     interface SlDropdown {
-        "close": () => Promise<void>;
-        "open": () => Promise<void>;
+        /**
+          * Closes the dropdown menu
+         */
+        "close": () => Promise<boolean>;
+        /**
+          * Opens the dropdown menu
+         */
+        "open": () => Promise<boolean>;
         /**
           * The preferred placement of the dropdown menu. Note that the actual placement may vary as needed to keep the menu inside of the viewport.
          */
@@ -129,11 +135,11 @@ export namespace Components {
          */
         "name": string;
         /**
-          * An external URL of the SVG file to fetch.
+          * An external URL of an SVG file.
          */
         "src": string;
         /**
-          * An alternative description to use for accessibility. If omitted, the name or src will be used to generate it.
+          * Sets the stroke width in supported icons.
          */
         "strokeWidth": string;
     }
@@ -253,7 +259,7 @@ export namespace Components {
         /**
           * The stroke width of the progress ring in pixels.
          */
-        "stroke": number;
+        "strokeWidth": number;
     }
     interface SlRadio {
         /**
@@ -328,7 +334,10 @@ export namespace Components {
           * The spinner's size.
          */
         "diameter": number;
-        "stroke": number;
+        /**
+          * The stroke width of the spinner in pixels.
+         */
+        "strokeWidth": number;
     }
     interface SlSwitch {
         /**
@@ -366,7 +375,7 @@ export namespace Components {
          */
         "disabled": boolean;
         /**
-          * The name of the tab panel the tab will be synced to. The panel must exist in the same `<sl-tabs>` element.
+          * The name of the tab panel the tab will control. The panel must exist in the same tab group.
          */
         "panel": string;
         /**
@@ -378,6 +387,16 @@ export namespace Components {
          */
         "setFocus": () => Promise<void>;
     }
+    interface SlTabGroup {
+        /**
+          * The placement of the tabs.
+         */
+        "placement": "top" | "bottom" | "left" | "right";
+        /**
+          * Shows the specified tab panel.
+         */
+        "show": (panel: string) => Promise<void>;
+    }
     interface SlTabPanel {
         /**
           * When true, the tab panel will be shown.
@@ -387,16 +406,6 @@ export namespace Components {
           * The tab panel's name.
          */
         "name": string;
-    }
-    interface SlTabs {
-        /**
-          * The position of the tabs.
-         */
-        "position": "top" | "bottom" | "left" | "right";
-        /**
-          * Shows the specified tab panel.
-         */
-        "show": (panel: string) => Promise<void>;
     }
     interface SlTextarea {
         /**
@@ -624,17 +633,17 @@ declare global {
         prototype: HTMLSlTabElement;
         new (): HTMLSlTabElement;
     };
+    interface HTMLSlTabGroupElement extends Components.SlTabGroup, HTMLStencilElement {
+    }
+    var HTMLSlTabGroupElement: {
+        prototype: HTMLSlTabGroupElement;
+        new (): HTMLSlTabGroupElement;
+    };
     interface HTMLSlTabPanelElement extends Components.SlTabPanel, HTMLStencilElement {
     }
     var HTMLSlTabPanelElement: {
         prototype: HTMLSlTabPanelElement;
         new (): HTMLSlTabPanelElement;
-    };
-    interface HTMLSlTabsElement extends Components.SlTabs, HTMLStencilElement {
-    }
-    var HTMLSlTabsElement: {
-        prototype: HTMLSlTabsElement;
-        new (): HTMLSlTabsElement;
     };
     interface HTMLSlTextareaElement extends Components.SlTextarea, HTMLStencilElement {
     }
@@ -665,8 +674,8 @@ declare global {
         "sl-spinner": HTMLSlSpinnerElement;
         "sl-switch": HTMLSlSwitchElement;
         "sl-tab": HTMLSlTabElement;
+        "sl-tab-group": HTMLSlTabGroupElement;
         "sl-tab-panel": HTMLSlTabPanelElement;
-        "sl-tabs": HTMLSlTabsElement;
         "sl-textarea": HTMLSlTextareaElement;
         "sl-tooltip": HTMLSlTooltipElement;
     }
@@ -708,6 +717,14 @@ declare namespace LocalJSX {
          */
         "loading"?: boolean;
         /**
+          * Emitted when the button loses focus.
+         */
+        "onSlBlur"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the button gains focus.
+         */
+        "onSlFocus"?: (event: CustomEvent<any>) => void;
+        /**
           * Set to true to draw a pill-style button with rounded edges.
          */
         "pill"?: boolean;
@@ -738,6 +755,18 @@ declare namespace LocalJSX {
          */
         "name"?: string;
         /**
+          * Emitted when the control loses focus.
+         */
+        "onSlBlur"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the control's state changes.
+         */
+        "onSlChange"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the control gains focus.
+         */
+        "onSlFocus"?: (event: CustomEvent<any>) => void;
+        /**
           * The native input's value attribute.
          */
         "value"?: string;
@@ -746,6 +775,22 @@ declare namespace LocalJSX {
         "open"?: boolean;
     }
     interface SlDropdown {
+        /**
+          * Emitted after the dropdown menu closes and all transitions are complete.
+         */
+        "onSlAfterClose"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted after the dropdown menu opens and all transitions are complete.
+         */
+        "onSlAfterOpen"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the dropdown menu closes. Calling `event.preventDefault()` will prevent it from being closed.
+         */
+        "onSlClose"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the dropdown menu opens. Calling `event.preventDefault()` will prevent it from being opened.
+         */
+        "onSlOpen"?: (event: CustomEvent<any>) => void;
         /**
           * The preferred placement of the dropdown menu. Note that the actual placement may vary as needed to keep the menu inside of the viewport.
          */
@@ -770,6 +815,9 @@ declare namespace LocalJSX {
           * Set to true to draw the dropdown item in a disabled state.
          */
         "disabled"?: boolean;
+        /**
+          * Emitted when an item is selected.
+         */
         "onSlSelect"?: (event: CustomEvent<any>) => void;
     }
     interface SlIcon {
@@ -782,11 +830,11 @@ declare namespace LocalJSX {
          */
         "name"?: string;
         /**
-          * An external URL of the SVG file to fetch.
+          * An external URL of an SVG file.
          */
         "src"?: string;
         /**
-          * An alternative description to use for accessibility. If omitted, the name or src will be used to generate it.
+          * Sets the stroke width in supported icons.
          */
         "strokeWidth"?: string;
     }
@@ -839,6 +887,22 @@ declare namespace LocalJSX {
           * The input's name attribute.
          */
         "name"?: string;
+        /**
+          * Emitted when the control loses focus.
+         */
+        "onSlBlur"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the control's value changes.
+         */
+        "onSlChange"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the control gains focus.
+         */
+        "onSlFocus"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the control receives input.
+         */
+        "onSlInput"?: (event: CustomEvent<any>) => void;
         /**
           * The input's pattern attribute.
          */
@@ -898,7 +962,7 @@ declare namespace LocalJSX {
         /**
           * The stroke width of the progress ring in pixels.
          */
-        "stroke"?: number;
+        "strokeWidth"?: number;
     }
     interface SlRadio {
         /**
@@ -913,6 +977,18 @@ declare namespace LocalJSX {
           * A native input's name attribute.
          */
         "name"?: string;
+        /**
+          * Emitted when the control loses focus.
+         */
+        "onSlBlur"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the control's state changes.
+         */
+        "onSlChange"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the control gains focus.
+         */
+        "onSlFocus"?: (event: CustomEvent<any>) => void;
         /**
           * The native input's value attribute.
          */
@@ -936,6 +1012,18 @@ declare namespace LocalJSX {
          */
         "name"?: string;
         /**
+          * Emitted when the control loses focus.
+         */
+        "onSlBlur"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the control's value changes.
+         */
+        "onSlChange"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the control gains focus.
+         */
+        "onSlFocus"?: (event: CustomEvent<any>) => void;
+        /**
           * The input's step attribute.
          */
         "step"?: number;
@@ -957,7 +1045,10 @@ declare namespace LocalJSX {
           * The spinner's size.
          */
         "diameter"?: number;
-        "stroke"?: number;
+        /**
+          * The stroke width of the spinner in pixels.
+         */
+        "strokeWidth"?: number;
     }
     interface SlSwitch {
         /**
@@ -973,6 +1064,18 @@ declare namespace LocalJSX {
          */
         "name"?: string;
         /**
+          * Emitted when the control loses focus.
+         */
+        "onSlBlur"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the control's state changes.
+         */
+        "onSlChange"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the control gains focus.
+         */
+        "onSlFocus"?: (event: CustomEvent<any>) => void;
+        /**
           * The native input's value attribute.
          */
         "value"?: string;
@@ -987,9 +1090,23 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
-          * The name of the tab panel the tab will be synced to. The panel must exist in the same `<sl-tabs>` element.
+          * The name of the tab panel the tab will control. The panel must exist in the same tab group.
          */
         "panel"?: string;
+    }
+    interface SlTabGroup {
+        /**
+          * Emitted when a tab is hidden.
+         */
+        "onSlTabHide"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when a tab is shown.
+         */
+        "onSlTabShow"?: (event: CustomEvent<any>) => void;
+        /**
+          * The placement of the tabs.
+         */
+        "placement"?: "top" | "bottom" | "left" | "right";
     }
     interface SlTabPanel {
         /**
@@ -1000,20 +1117,6 @@ declare namespace LocalJSX {
           * The tab panel's name.
          */
         "name"?: string;
-    }
-    interface SlTabs {
-        /**
-          * Emitted when a tab is hidden.
-         */
-        "onSlTabHide"?: (event: CustomEvent<any>) => void;
-        /**
-          * Emitted when a tab is shown.
-         */
-        "onSlTabShow"?: (event: CustomEvent<any>) => void;
-        /**
-          * The position of the tabs.
-         */
-        "position"?: "top" | "bottom" | "left" | "right";
     }
     interface SlTextarea {
         /**
@@ -1048,6 +1151,22 @@ declare namespace LocalJSX {
           * The textarea's name attribute.
          */
         "name"?: string;
+        /**
+          * Emitted when the control loses focus.
+         */
+        "onSlBlur"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the control's value changes.
+         */
+        "onSlChange"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the control gains focus.
+         */
+        "onSlFocus"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the control receives input.
+         */
+        "onSlInput"?: (event: CustomEvent<any>) => void;
         /**
           * The textarea's placeholder text.
          */
@@ -1103,21 +1222,21 @@ declare namespace LocalJSX {
          */
         "maxWidth"?: number;
         /**
-          * Emitted when the tooltip has fully transitioned out and gets unmounted from the DOM.
+          * Emitted after the tooltip has hidden and all transitions are complete.
          */
-        "onShHidden"?: (event: CustomEvent<any>) => void;
+        "onSlAfterHide"?: (event: CustomEvent<any>) => void;
         /**
-          * Emitted when the tooltip begins to hide.
+          * Emitted after the tooltip has shown and all transitions are complete.
+         */
+        "onSlAfterShow"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the tooltip begins to hide. Calling `event.preventDefault()` will prevent it from being hidden.
          */
         "onSlHide"?: (event: CustomEvent<any>) => void;
         /**
-          * Emitted when the tooltip begins to show, but before it gets mounted to the DOM.
+          * Emitted when the tooltip begins to show. Calling `event.preventDefault()` will prevent it from being shown.
          */
         "onSlShow"?: (event: CustomEvent<any>) => void;
-        /**
-          * Emitted when the tooltip has fully transitioned in.
-         */
-        "onSlShown"?: (event: CustomEvent<any>) => void;
         /**
           * The preferred placement of the tooltip. Note that the actual placement may vary as needed to keep the tooltip inside of the viewport.
          */
@@ -1160,8 +1279,8 @@ declare namespace LocalJSX {
         "sl-spinner": SlSpinner;
         "sl-switch": SlSwitch;
         "sl-tab": SlTab;
+        "sl-tab-group": SlTabGroup;
         "sl-tab-panel": SlTabPanel;
-        "sl-tabs": SlTabs;
         "sl-textarea": SlTextarea;
         "sl-tooltip": SlTooltip;
     }
@@ -1186,8 +1305,8 @@ declare module "@stencil/core" {
             "sl-spinner": LocalJSX.SlSpinner & JSXBase.HTMLAttributes<HTMLSlSpinnerElement>;
             "sl-switch": LocalJSX.SlSwitch & JSXBase.HTMLAttributes<HTMLSlSwitchElement>;
             "sl-tab": LocalJSX.SlTab & JSXBase.HTMLAttributes<HTMLSlTabElement>;
+            "sl-tab-group": LocalJSX.SlTabGroup & JSXBase.HTMLAttributes<HTMLSlTabGroupElement>;
             "sl-tab-panel": LocalJSX.SlTabPanel & JSXBase.HTMLAttributes<HTMLSlTabPanelElement>;
-            "sl-tabs": LocalJSX.SlTabs & JSXBase.HTMLAttributes<HTMLSlTabsElement>;
             "sl-textarea": LocalJSX.SlTextarea & JSXBase.HTMLAttributes<HTMLSlTextareaElement>;
             "sl-tooltip": LocalJSX.SlTooltip & JSXBase.HTMLAttributes<HTMLSlTooltipElement>;
         }
