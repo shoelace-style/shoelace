@@ -4,9 +4,12 @@ export interface KeyboardDetectorOptions {
 }
 
 //
-// This class can be used to watch an element for keyboard interaction. When the user interacts via keyboard, the
-// whenUsing() callback is activated. When the user stops interacting via keyboard, the whenNotUsing() callback is
-// activated. This is most useful for managing focus states that need to differ for mouse and keyboard users.
+// This utility can be used to watch an element for keyboard interaction. When the user interacts via keyboard, the
+// `whenUsing()` callback is activated and you can set state, modify a class, etc. to indicate keyboard use. When the
+// user stops interacting via keyboard (e.g. starts using the mouse again), the `whenNotUsing()` callback is activated
+// and you can use it to reverse the changes made in `whenUsing()`.
+//
+// This is especially useful for managing focus states that need to differ for mouse and keyboard users.
 //
 export class KeyboardDetector {
   el: HTMLElement;
