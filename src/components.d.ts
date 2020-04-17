@@ -88,9 +88,6 @@ export namespace Components {
          */
         "value": string;
     }
-    interface SlDialog {
-        "open": boolean;
-    }
     interface SlDropdown {
         /**
           * Closes the dropdown menu
@@ -104,10 +101,6 @@ export namespace Components {
           * The preferred placement of the dropdown menu. Note that the actual placement may vary as needed to keep the menu inside of the viewport.
          */
         "placement": "top" | "top-start" | "top-end" | "bottom" | "bottom-start" | "bottom-end" | "right" | "right-start" | "right-end" | "left" | "left-start" | "left-end";
-        /**
-          * The positioning strategy used for displaying the menu. If the menu is clipped by a containing element's overflow, setting this to `fixed` usually resolves it. Note that `fixed` is less performant than `absolute`, so avoid using the former when possible.
-         */
-        "position": "fixed" | "absolute";
     }
     interface SlDropdownDivider {
     }
@@ -555,12 +548,6 @@ declare global {
         prototype: HTMLSlCheckboxElement;
         new (): HTMLSlCheckboxElement;
     };
-    interface HTMLSlDialogElement extends Components.SlDialog, HTMLStencilElement {
-    }
-    var HTMLSlDialogElement: {
-        prototype: HTMLSlDialogElement;
-        new (): HTMLSlDialogElement;
-    };
     interface HTMLSlDropdownElement extends Components.SlDropdown, HTMLStencilElement {
     }
     var HTMLSlDropdownElement: {
@@ -661,7 +648,6 @@ declare global {
         "sl-alert": HTMLSlAlertElement;
         "sl-button": HTMLSlButtonElement;
         "sl-checkbox": HTMLSlCheckboxElement;
-        "sl-dialog": HTMLSlDialogElement;
         "sl-dropdown": HTMLSlDropdownElement;
         "sl-dropdown-divider": HTMLSlDropdownDividerElement;
         "sl-dropdown-item": HTMLSlDropdownItemElement;
@@ -771,9 +757,6 @@ declare namespace LocalJSX {
          */
         "value"?: string;
     }
-    interface SlDialog {
-        "open"?: boolean;
-    }
     interface SlDropdown {
         /**
           * Emitted after the dropdown menu closes and all transitions are complete.
@@ -795,10 +778,6 @@ declare namespace LocalJSX {
           * The preferred placement of the dropdown menu. Note that the actual placement may vary as needed to keep the menu inside of the viewport.
          */
         "placement"?: "top" | "top-start" | "top-end" | "bottom" | "bottom-start" | "bottom-end" | "right" | "right-start" | "right-end" | "left" | "left-start" | "left-end";
-        /**
-          * The positioning strategy used for displaying the menu. If the menu is clipped by a containing element's overflow, setting this to `fixed` usually resolves it. Note that `fixed` is less performant than `absolute`, so avoid using the former when possible.
-         */
-        "position"?: "fixed" | "absolute";
     }
     interface SlDropdownDivider {
     }
@@ -1266,7 +1245,6 @@ declare namespace LocalJSX {
         "sl-alert": SlAlert;
         "sl-button": SlButton;
         "sl-checkbox": SlCheckbox;
-        "sl-dialog": SlDialog;
         "sl-dropdown": SlDropdown;
         "sl-dropdown-divider": SlDropdownDivider;
         "sl-dropdown-item": SlDropdownItem;
@@ -1292,7 +1270,6 @@ declare module "@stencil/core" {
             "sl-alert": LocalJSX.SlAlert & JSXBase.HTMLAttributes<HTMLSlAlertElement>;
             "sl-button": LocalJSX.SlButton & JSXBase.HTMLAttributes<HTMLSlButtonElement>;
             "sl-checkbox": LocalJSX.SlCheckbox & JSXBase.HTMLAttributes<HTMLSlCheckboxElement>;
-            "sl-dialog": LocalJSX.SlDialog & JSXBase.HTMLAttributes<HTMLSlDialogElement>;
             "sl-dropdown": LocalJSX.SlDropdown & JSXBase.HTMLAttributes<HTMLSlDropdownElement>;
             "sl-dropdown-divider": LocalJSX.SlDropdownDivider & JSXBase.HTMLAttributes<HTMLSlDropdownDividerElement>;
             "sl-dropdown-item": LocalJSX.SlDropdownItem & JSXBase.HTMLAttributes<HTMLSlDropdownItemElement>;

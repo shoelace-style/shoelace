@@ -264,14 +264,3 @@ a:hover {
     padding: var(--sl-tooltip-padding-y) var(--sl-tooltip-padding-x);
   }
 }
-
-// Overlays
-.sl-dialog-overlay {
-  position: fixed;
-  z-index: var(--sl-z-index-overlay);
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.1);
-}
