@@ -17,6 +17,8 @@ let openDropdowns = [];
 })
 export class Dropdown {
   id = `sl-dropdown-${++id}`;
+  ignoreMouseEvents = false;
+  ignoreMouseTimeout: any;
   menu: HTMLElement;
   popper: PopperInstance;
   trigger: HTMLElement;
@@ -175,6 +177,13 @@ export class Dropdown {
   }
 
   handleDocumentKeyDown(event: KeyboardEvent) {
+    // When keying through the menu, if the mouse happens to be hovering over a menu item and the menu scrolls, the
+    // mouseout/mouseover event will fire causing the selection to be different than what the user expects. This gives
+    // us a way to temporarily ignore mouse events while the user is interacting with a keyboard.
+    clearTimeout(this.ignoreMouseTimeout);
+    this.ignoreMouseTimeout = setTimeout(() => (this.ignoreMouseEvents = false), 500);
+    this.ignoreMouseEvents = true;
+
     // Close when pressing escape or tab
     if (event.key === 'Escape' || event.key === 'Tab') {
       this.close();
@@ -257,13 +266,15 @@ export class Dropdown {
     const target = event.target as HTMLElement;
     const dropdownItem = target.closest('sl-dropdown-item');
 
-    if (dropdownItem) {
+    if (!this.ignoreMouseEvents && dropdownItem) {
       this.setSelectedItem(dropdownItem);
     }
   }
 
   handleMenuMouseOut() {
-    this.setSelectedItem(null);
+    if (!this.ignoreMouseEvents) {
+      this.setSelectedItem(null);
+    }
   }
 
   handleTransitionEnd() {
