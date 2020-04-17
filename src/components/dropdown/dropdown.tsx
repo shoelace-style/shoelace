@@ -1,6 +1,5 @@
 import { Component, Element, Event, EventEmitter, Method, Prop, State, Watch, h } from '@stencil/core';
 import { Instance as PopperInstance, createPopper } from '@popperjs/core';
-
 import { scrollIntoView } from '../../utilities/scroll';
 
 let id = 0;
@@ -56,13 +55,6 @@ export class Dropdown {
     | 'left-start'
     | 'left-end' = 'bottom-start';
 
-  /**
-   * The positioning strategy used for displaying the menu. If the menu is clipped by a containing element's overflow,
-   * setting this to `fixed` usually resolves it. Note that `fixed` is less performant than `absolute`, so avoid using
-   * the former when possible.
-   */
-  @Prop() position: 'fixed' | 'absolute' = 'absolute';
-
   /** Emitted when the dropdown menu opens. Calling `event.preventDefault()` will prevent it from being opened. */
   @Event() slOpen: EventEmitter;
 
@@ -79,14 +71,6 @@ export class Dropdown {
   handlePlacementChange() {
     if (this.popper) {
       this.popper.setOptions({ placement: this.placement });
-      requestAnimationFrame(() => this.popper.update());
-    }
-  }
-
-  @Watch('position')
-  handlePositionChange() {
-    if (this.popper) {
-      this.popper.setOptions({ strategy: this.position });
       requestAnimationFrame(() => this.popper.update());
     }
   }
@@ -115,7 +99,6 @@ export class Dropdown {
 
     this.popper = createPopper(this.trigger, this.menu, {
       placement: this.placement,
-      strategy: this.position,
       modifiers: [
         {
           name: 'flip',
@@ -209,14 +192,26 @@ export class Dropdown {
     }
 
     // Move the selection when pressing down or up
-    if (['ArrowDown', 'ArrowUp'].includes(event.key)) {
+    if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
       const items = this.getAllItems();
       const selectedItem = this.getSelectedItem();
+      let index = items.indexOf(selectedItem);
+
       event.preventDefault();
 
-      let index = items.indexOf(selectedItem) + (event.key === 'ArrowDown' ? 1 : -1);
+      if (event.key === 'ArrowDown') {
+        index++;
+      } else if (event.key === 'ArrowUp') {
+        index--;
+      } else if (event.key === 'Home') {
+        index = 0;
+      } else if (event.key === 'End') {
+        index = items.length - 1;
+      }
+
       if (index < 0) index = 0;
       if (index > items.length - 1) index = items.length - 1;
+
       this.setSelectedItem(items[index]);
       this.scrollItemIntoView(items[index]);
     }
