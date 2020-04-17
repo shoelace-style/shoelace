@@ -13,7 +13,7 @@
 <br><br>
 
 <sl-button>Top</sl-button>
-<sl-tooltip placement="top" arrow>Tooltip</sl-tooltip>
+<sl-tooltip placement="top" arrow trigger="click">Tooltip</sl-tooltip>
 
 <sl-button>Bottom</sl-button>
 <sl-tooltip placement="bottom" arrow>Tooltip</sl-tooltip>
@@ -44,7 +44,6 @@
 | `showDuration` | `show-duration` | The duration in ms of the tooltip's show transition.                                                                                                                                                                                                                                                                                 | `number`                                                                                                                                                             | `275`                |
 | `target`       | `target`        | A selector or element to use as the tooltip's target. This is the element that will trigger the tooltip to show upon interaction. If no target is specified, the previous sibling element of the tooltip will be used. A common way to link a tooltip to a target is to give the target an `id` and pass `#id` to the `target` prop. | `HTMLElement \| string`                                                                                                                                              | `undefined`          |
 | `trigger`      | `trigger`       | The events that cause a tooltip to show, separated by a space. Possible values include any combination of `mouseenter`, `focus`, `click`, and `manual`. Use `manual` if you only want to show and hide the tooltip programmatically.                                                                                                 | `string`                                                                                                                                                             | `'mouseenter focus'` |
-| `zIndex`       | `z-index`       | Sets the tooltip's z-index.                                                                                                                                                                                                                                                                                                          | `number`                                                                                                                                                             | `9999`               |
 
 
 ## Events

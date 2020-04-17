@@ -126,16 +126,16 @@
 .sl-range__tooltip {
   position: absolute;
   left: 1px;
-  border-radius: var(--sl-tooltip-border-radius);
-  background-color: var(--sl-tooltip-background-color);
-  font-family: var(--sl-tooltip-font-family);
-  font-size: var(--sl-tooltip-font-size);
-  font-weight: var(--sl-tooltip-font-weight);
-  line-height: var(--sl-tooltip-line-height);
-  color: var(--sl-tooltip-color);
+  border-radius: var(--sl-border-radius-medium);
+  background-color: var(--sl-color-gray-10);
+  font-family: var(--sl-font-sans);
+  font-size: var(--sl-font-size-small);
+  font-weight: var(--sl-font-weight-normal);
+  line-height: var(--sl-line-height-normal);
+  color: var(--sl-color-white);
   opacity: 0;
-  padding: var(--sl-tooltip-padding-y) var(--sl-tooltip-padding-x);
-  transition: var(--sl-form-control-transition-speed) opacity;
+  padding: var(--sl-spacing-xxx-small) var(--sl-spacing-x-small);
+  transition: var(--sl-transition-fast) opacity;
   pointer-events: none;
 
   &::after {
@@ -157,7 +157,7 @@
   top: calc(-1 * var(--thumb-size) - var(--tooltip-offset-y));
 
   &::after {
-    border-top: 6px solid var(--sl-tooltip-background-color);
+    border-top: 6px solid var(--sl-color-gray-10);
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
     top: 100%;
@@ -170,7 +170,7 @@
   bottom: calc(-1 * var(--thumb-size) - var(--tooltip-offset-y));
 
   &::after {
-    border-bottom: 6px solid var(--sl-tooltip-background-color);
+    border-bottom: 6px solid var(--sl-color-gray-10);
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
     bottom: 100%;

@@ -523,10 +523,6 @@ export namespace Components {
           * The events that cause a tooltip to show, separated by a space. Possible values include any combination of `mouseenter`, `focus`, `click`, and `manual`. Use `manual` if you only want to show and hide the tooltip programmatically.
          */
         "trigger": string;
-        /**
-          * Sets the tooltip's z-index.
-         */
-        "zIndex": number;
     }
 }
 declare global {
@@ -1236,10 +1232,6 @@ declare namespace LocalJSX {
           * The events that cause a tooltip to show, separated by a space. Possible values include any combination of `mouseenter`, `focus`, `click`, and `manual`. Use `manual` if you only want to show and hide the tooltip programmatically.
          */
         "trigger"?: string;
-        /**
-          * Sets the tooltip's z-index.
-         */
-        "zIndex"?: number;
     }
     interface IntrinsicElements {
         "sl-alert": SlAlert;

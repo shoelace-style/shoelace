@@ -15,21 +15,21 @@
 
 .sl-dropdown__menu {
   position: absolute;
-  z-index: 9999;
+  z-index: var(--sl-z-index-dropdown);
   max-height: 50vh;
-  font-family: var(--sl-menu-font-family);
-  font-size: var(--sl-menu-font-size);
-  font-weight: var(--sl-menu-font-weight);
+  font-family: var(--sl-font-sans);
+  font-size: var(--sl-font-size-medium);
+  font-weight: var(--sl-font-weight-normal);
   color: var(--color);
-  background-color: var(--sl-menu-background-color);
-  border: solid 1px var(--sl-menu-border-color);
+  background-color: var(--sl-color-white);
+  border: solid 1px var(--sl-color-gray-90);
   border-radius: 4px;
-  box-shadow: var(--sl-menu-box-shadow);
-  padding-top: var(--sl-menu-padding-y);
-  padding-bottom: var(--sl-menu-padding-y);
+  box-shadow: var(--sl-shadow-large);
+  padding-top: var(--sl-spacing-x-small);
+  padding-bottom: var(--sl-spacing-x-small);
   opacity: 0;
   overflow-y: auto;
-  transition: var(--sl-menu-transition-speed) opacity;
+  transition: var(--sl-transition-fast) opacity;
 }
 
 .sl-dropdown--open .sl-dropdown__menu {

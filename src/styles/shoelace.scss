@@ -126,6 +126,10 @@
   --sl-line-height-loose: 1.75;
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Form
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // Z-index
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -134,6 +138,8 @@
   --sl-z-index-notification: 90;
   --sl-z-index-overlay: 100;
   --sl-z-index-dialog: 600;
+  --sl-z-index-dropdown: 800;
+  --sl-z-index-tooltip: 1000;
 }
 
 //
@@ -181,39 +187,12 @@
   --sl-form-control-placeholder-color--hover: var(--sl-color-gray-60);
   --sl-form-control-placeholder-color: var(--sl-color-gray-60);
   --sl-form-control-transition-speed: 150ms;
-
-  // Menus
-  --sl-menu-background-color: var(--sl-color-white);
-  --sl-menu-border-color: var(--sl-color-gray-90);
-  --sl-menu-box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-  --sl-menu-font-family: var(--sl-font-sans);
-  --sl-menu-font-size: var(--text-size-default);
-  --sl-menu-font-weight: var(--sl-font-weight-normal);
-  --sl-menu-padding-x: 30px;
-  --sl-menu-padding-y: 10px;
-  --sl-menu-transition-speed: 150ms;
-
-  --sl-menu-item-background-color--active: var(--sl-color-primary-95);
-  --sl-menu-item-background-color--disabled: var(--sl-color-white);
-  --sl-menu-item-background-color: var(--sl-color-white);
-  --sl-menu-item-color--active: var(--sl-color-primary-50);
-  --sl-menu-item-color--disabled: var(--sl-color-gray-70);
-  --sl-menu-item-color: var(--sl-color-gray-40);
-  --sl-menu-item-transition-speed: 150ms;
-
-  // Tooltips
-  --sl-tooltip-background-color: var(--sl-color-gray-10);
-  --sl-tooltip-border-radius: 4px;
-  --sl-tooltip-color: var(--sl-color-white);
-  --sl-tooltip-font-family: var(--sl-form-control-font-family);
-  --sl-tooltip-font-size: var(--sl-form-control-font-size--medium);
-  --sl-tooltip-font-weight: var(--sl-form-control-font-weight);
-  --sl-tooltip-line-height: 1.4;
-  --sl-tooltip-padding-x: 10px;
-  --sl-tooltip-padding-y: 5px;
 }
 
-// Base styles
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Tooltips
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 body {
   font-family: var(--sl-font-sans);
   font-weight: var(--sl-font-weight-normal);
@@ -230,37 +209,44 @@ a:hover {
   text-decoration: underline;
 }
 
-// Customize tooltips using our own tokens
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Tooltips
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+.tippy-popper {
+  z-index: var(--sl-z-index-tooltip) !important;
+}
+
 .tippy-tooltip {
-  border-radius: var(--sl-tooltip-border-radius);
-  background-color: var(--sl-tooltip-background-color);
+  border-radius: var(--sl-border-radius-medium);
+  background-color: var(--sl-color-gray-10);
 
   .tippy-arrow {
     transform: scale(0.75);
   }
 
   &[data-placement^='top'] .tippy-arrow {
-    border-top-color: var(--sl-tooltip-background-color);
+    border-top-color: var(--sl-color-gray-10);
   }
 
   &[data-placement^='bottom'] .tippy-arrow {
-    border-bottom-color: var(--sl-tooltip-background-color);
+    border-bottom-color: var(--sl-color-gray-10);
   }
 
   &[data-placement^='left'] .tippy-arrow {
-    border-left-color: var(--sl-tooltip-background-color);
+    border-left-color: var(--sl-color-gray-10);
   }
 
   &[data-placement^='right'] .tippy-arrow {
-    border-right-color: var(--sl-tooltip-background-color);
+    border-right-color: var(--sl-color-gray-10);
   }
 
   .tippy-content {
-    font-family: var(--sl-tooltip-font-family);
-    font-size: var(--sl-tooltip-font-size);
-    font-weight: var(--sl-tooltip-font-weight);
-    line-height: var(--sl-tooltip-line-height);
-    color: var(--sl-tooltip-color);
-    padding: var(--sl-tooltip-padding-y) var(--sl-tooltip-padding-x);
+    font-family: var(--sl-font-sans);
+    font-size: var(--sl-font-size-small);
+    font-weight: var(--sl-font-weight-normal);
+    line-height: var(--sl-line-height-normal);
+    color: var(--sl-color-white);
+    padding: var(--sl-spacing-xxx-small) var(--sl-spacing-x-small);
   }
 }

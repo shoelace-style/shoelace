@@ -66,9 +66,6 @@ export class Tooltip {
    */
   @Prop() trigger = 'mouseenter focus';
 
-  /** Sets the tooltip's z-index. */
-  @Prop() zIndex = 9999;
-
   /**
    * A selector or element to use as the tooltip's target. This is the element that will trigger the tooltip to show
    * upon interaction. If no target is specified, the previous sibling element of the tooltip will be used. A common way
@@ -152,7 +149,6 @@ export class Tooltip {
       maxWidth: this.maxWidth,
       placement: this.placement,
       trigger: this.trigger,
-      zIndex: this.zIndex,
 
       onShow: () => {
         const slShow = this.slShow.emit();
