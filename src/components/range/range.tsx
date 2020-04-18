@@ -1,4 +1,5 @@
 import { Component, Event, EventEmitter, Method, Prop, State, h } from '@stencil/core';
+import ResizeObserver from 'resize-observer-polyfill';
 
 @Component({
   tag: 'sl-range',
@@ -8,6 +9,7 @@ import { Component, Event, EventEmitter, Method, Prop, State, h } from '@stencil
 export class Range {
   input: HTMLInputElement;
   output: HTMLElement;
+  resizeObserver: any;
 
   constructor() {
     this.handleInput = this.handleInput.bind(this);
@@ -58,6 +60,7 @@ export class Range {
 
   componentDidLoad() {
     this.syncTooltip();
+    this.resizeObserver = new ResizeObserver(() => this.syncTooltip());
   }
 
   /** Sets focus on the input. */
@@ -82,11 +85,13 @@ export class Range {
   handleBlur() {
     this.hasFocus = false;
     this.slBlur.emit();
+    this.resizeObserver.unobserve(this.input);
   }
 
   handleFocus() {
     this.hasFocus = true;
     this.slFocus.emit();
+    this.resizeObserver.observe(this.input);
   }
 
   syncTooltip() {
