@@ -88,7 +88,7 @@ export class Textarea {
   }
 
   componentDidUnload() {
-    this.resizeObserver.unobserve();
+    this.resizeObserver.unobserve(this.textarea);
   }
 
   /** Sets focus on the textarea. */
