@@ -13,14 +13,13 @@
   align-items: stretch;
   justify-content: center;
   position: relative;
-  font-family: var(--sl-form-control-font-family);
-  font-weight: var(--sl-form-control-font-weight);
-  background-color: var(--sl-form-control-background-color);
-  border: solid var(--sl-form-control-border-width) var(--sl-form-control-border-color);
+  font-family: var(--sl-input-font-family);
+  font-weight: var(--sl-input-font-weight);
+  background-color: var(--sl-input-background-color);
+  border: solid var(--sl-input-border-width) var(--sl-input-border-color);
   vertical-align: middle;
   overflow: hidden;
-  transition: var(--sl-form-control-transition-speed) color, var(--sl-form-control-transition-speed) border,
-    var(--sl-form-control-transition-speed) box-shadow;
+  transition: var(--sl-transition-fast) color, var(--sl-transition-fast) border, var(--sl-transition-fast) box-shadow;
   cursor: text;
 
   .sl-input__control {
@@ -30,7 +29,7 @@
     font-weight: inherit;
     min-width: 0;
     height: 100%;
-    color: var(--sl-form-control-color);
+    color: var(--sl-input-color);
     border: none;
     background: none;
     padding: 0;
@@ -45,7 +44,7 @@
     }
 
     &::placeholder {
-      color: var(--sl-form-control-placeholder-color);
+      color: var(--sl-input-placeholder-color);
       user-select: none;
     }
 
@@ -55,35 +54,29 @@
   }
 
   &:hover:not(.sl-input--disabled) {
-    background-color: var(--sl-form-control-background-color--hover);
-    border-color: var(--sl-form-control-border-color--hover);
-    color: var(--sl-form-control-color--hover);
-
-    .sl-input__control {
-      &::placeholder {
-        color: var(--sl-form-control-placeholder-color--hover);
-      }
-    }
+    background-color: var(--sl-input-background-color-hover);
+    border-color: var(--sl-input-border-color-hover);
+    color: var(--sl-input-color-hover);
   }
 
   &.sl-input--focused:not(.sl-input--disabled) {
-    background-color: var(--sl-form-control-background-color--focus);
-    border-color: var(--sl-form-control-border-color--focus);
+    background-color: var(--sl-input-background-color-focus);
+    border-color: var(--sl-input-border-color-focus);
     box-shadow: var(--sl-focus-ring-box-shadow);
-    color: var(--sl-form-control-color--focus);
+    color: var(--sl-input-color-focus);
   }
 
   &.sl-input--disabled {
-    background-color: var(--sl-form-control-background-color--disabled);
-    border-color: var(--sl-form-control-border-color--disabled);
+    background-color: var(--sl-input-background-color-disabled);
+    border-color: var(--sl-input-border-color-disabled);
     opacity: 0.5;
 
     .sl-input__control {
-      color: var(--sl-form-control-color--disabled);
+      color: var(--sl-input-color-disabled);
       cursor: not-allowed;
 
       &::placeholder {
-        color: var(--sl-form-control-placeholder-color--disabled);
+        color: var(--sl-input-placeholder-color-disabled);
       }
     }
   }
@@ -108,15 +101,15 @@
   }
 
   .sl-input__before ::slotted(*) {
-    border-right: solid var(--sl-form-control-border-width) var(--sl-form-control-border-color);
-    border-top-left-radius: var(--sl-form-control-border-radius--medium);
-    border-bottom-left-radius: var(--sl-form-control-border-radius--medium);
+    border-right: solid var(--sl-input-border-width) var(--sl-input-border-color);
+    border-top-left-radius: var(--sl-input-border-radius-medium);
+    border-bottom-left-radius: var(--sl-input-border-radius-medium);
   }
 
   .sl-input__after ::slotted(*) {
-    border-left: solid var(--sl-form-control-border-width) var(--sl-form-control-border-color);
-    border-top-right-radius: var(--sl-form-control-border-radius--medium);
-    border-bottom-right-radius: var(--sl-form-control-border-radius--medium);
+    border-left: solid var(--sl-input-border-width) var(--sl-input-border-color);
+    border-top-right-radius: var(--sl-input-border-radius-medium);
+    border-bottom-right-radius: var(--sl-input-border-radius-medium);
   }
 
   .sl-input__prefix,
@@ -124,7 +117,7 @@
     display: flex;
     flex: 0 0 auto;
     align-items: center;
-    color: var(--sl-form-control-placeholder-color);
+    color: var(--sl-input-placeholder-color);
   }
 }
 
@@ -133,95 +126,95 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 .sl-input--small {
-  border-radius: var(--sl-form-control-border-radius--small);
-  font-size: var(--sl-form-control-font-size--small);
-  height: var(--sl-form-control-height--small);
-  line-height: calc(var(--sl-form-control-height--small) - var(--sl-form-control-border-width) * 2);
+  border-radius: var(--sl-input-border-radius-small);
+  font-size: var(--sl-input-font-size-small);
+  height: var(--sl-input-height-small);
+  line-height: calc(var(--sl-input-height-small) - var(--sl-input-border-width) * 2);
 
   .sl-input__control {
-    height: calc(var(--sl-form-control-height--small) - var(--sl-form-control-border-width) * 2);
-    line-height: calc(var(--sl-form-control-height--small) - var(--sl-form-control-border-width) * 2);
-    margin: 0 var(--sl-form-control-padding-x--small);
+    height: calc(var(--sl-input-height-small) - var(--sl-input-border-width) * 2);
+    line-height: calc(var(--sl-input-height-small) - var(--sl-input-border-width) * 2);
+    margin: 0 var(--sl-input-spacing-small);
   }
 
   .sl-input__clear,
   .sl-input__password-toggle {
-    margin-right: var(--sl-form-control-padding-x--small);
+    margin-right: var(--sl-input-spacing-small);
   }
 
   .sl-input__prefix ::slotted(*) {
-    margin-left: var(--sl-form-control-padding-x--small);
+    margin-left: var(--sl-input-spacing-small);
   }
 
   .sl-input__suffix ::slotted(*) {
-    margin-right: var(--sl-form-control-padding-x--small);
+    margin-right: var(--sl-input-spacing-small);
   }
 
   .sl-input__before ::slotted(*),
   .sl-input__after ::slotted(*) {
-    padding: 0 var(--sl-form-control-padding-x--small);
+    padding: 0 var(--sl-input-spacing-small);
   }
 }
 
 .sl-input--medium {
-  border-radius: var(--sl-form-control-border-radius--medium);
-  font-size: var(--sl-form-control-font-size--medium);
-  height: var(--sl-form-control-height--medium);
-  line-height: calc(var(--sl-form-control-height--medium) - var(--sl-form-control-border-width) * 2);
+  border-radius: var(--sl-input-border-radius-medium);
+  font-size: var(--sl-input-font-size-medium);
+  height: var(--sl-input-height-medium);
+  line-height: calc(var(--sl-input-height-medium) - var(--sl-input-border-width) * 2);
 
   .sl-input__control {
-    height: calc(var(--sl-form-control-height--medium) - var(--sl-form-control-border-width) * 2);
-    line-height: calc(var(--sl-form-control-height--medium) - var(--sl-form-control-border-width) * 2);
-    margin: 0 var(--sl-form-control-padding-x--medium);
+    height: calc(var(--sl-input-height-medium) - var(--sl-input-border-width) * 2);
+    line-height: calc(var(--sl-input-height-medium) - var(--sl-input-border-width) * 2);
+    margin: 0 var(--sl-input-spacing-medium);
   }
 
   .sl-input__clear,
   .sl-input__password-toggle {
-    margin-right: var(--sl-form-control-padding-x--medium);
+    margin-right: var(--sl-input-spacing-medium);
   }
 
   .sl-input__prefix ::slotted(*) {
-    margin-left: var(--sl-form-control-padding-x--medium);
+    margin-left: var(--sl-input-spacing-medium);
   }
 
   .sl-input__suffix ::slotted(*) {
-    margin-right: var(--sl-form-control-padding-x--medium);
+    margin-right: var(--sl-input-spacing-medium);
   }
 
   .sl-input__before ::slotted(*),
   .sl-input__after ::slotted(*) {
-    padding: 0 var(--sl-form-control-padding-x--medium);
+    padding: 0 var(--sl-input-spacing-medium);
   }
 }
 
 .sl-input--large {
-  border-radius: var(--sl-form-control-border-radius--large);
-  font-size: var(--sl-form-control-font-size--large);
-  height: var(--sl-form-control-height--large);
-  line-height: calc(var(--sl-form-control-height--large) - var(--sl-form-control-border-width) * 2);
+  border-radius: var(--sl-input-border-radius-large);
+  font-size: var(--sl-input-font-size-large);
+  height: var(--sl-input-height-large);
+  line-height: calc(var(--sl-input-height-large) - var(--sl-input-border-width) * 2);
 
   .sl-input__control {
-    height: calc(var(--sl-form-control-height--large) - var(--sl-form-control-border-width) * 2);
-    line-height: calc(var(--sl-form-control-height--large) - var(--sl-form-control-border-width) * 2);
-    margin: 0 var(--sl-form-control-padding-x--large);
+    height: calc(var(--sl-input-height-large) - var(--sl-input-border-width) * 2);
+    line-height: calc(var(--sl-input-height-large) - var(--sl-input-border-width) * 2);
+    margin: 0 var(--sl-input-spacing-large);
   }
 
   .sl-input__clear,
   .sl-input__password-toggle {
-    margin-right: var(--sl-form-control-padding-x--large);
+    margin-right: var(--sl-input-spacing-large);
   }
 
   .sl-input__prefix ::slotted(*) {
-    margin-left: var(--sl-form-control-padding-x--large);
+    margin-left: var(--sl-input-spacing-large);
   }
 
   .sl-input__suffix ::slotted(*) {
-    margin-right: var(--sl-form-control-padding-x--large);
+    margin-right: var(--sl-input-spacing-large);
   }
 
   .sl-input__before ::slotted(*),
   .sl-input__after ::slotted(*) {
-    padding: 0 var(--sl-form-control-padding-x--large);
+    padding: 0 var(--sl-input-spacing-large);
   }
 }
 
@@ -234,7 +227,7 @@
   display: flex;
   align-items: center;
   font-size: inherit;
-  color: var(--sl-form-control-placeholder-color);
+  color: var(--sl-input-placeholder-color);
   border: none;
   background: none;
   padding: 0;
@@ -243,7 +236,7 @@
   svg {
     width: 1.2em;
     height: 1.2em;
-    transition: var(--sl-form-control-transition-speed) filter;
+    transition: var(--sl-transition-fast) filter;
   }
 }
 

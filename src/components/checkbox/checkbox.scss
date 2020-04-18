@@ -7,10 +7,10 @@
 .sl-checkbox {
   display: flex;
   align-items: center;
-  font-family: var(--sl-form-control-font-sans-serif);
-  font-size: var(--sl-form-control-font-size--medium);
-  font-weight: var(--sl-font-weight-normal);
-  color: var(--sl-form-control-color);
+  font-family: var(--sl-input-font-family);
+  font-size: var(--sl-input-font-size-medium);
+  font-weight: var(--sl-input-font-weight);
+  color: var(--sl-input-color);
   vertical-align: middle;
   cursor: pointer;
 }
@@ -20,15 +20,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: var(--sl-form-control-checkbox-size);
-  height: var(--sl-form-control-checkbox-size);
-  border: solid var(--sl-form-control-border-width) var(--sl-form-control-border-color);
+  width: var(--sl-toggle-size);
+  height: var(--sl-toggle-size);
+  border: solid var(--sl-input-border-width) var(--sl-input-border-color);
   border-radius: 2px;
-  background-color: var(--sl-form-control-background-color);
+  background-color: var(--sl-input-background-color);
   color: var(--sl-color-white);
-  transition: var(--sl-form-control-transition-speed) border-color,
-    var(--sl-form-control-transition-speed) background-color, var(--sl-form-control-transition-speed) color,
-    var(--sl-form-control-transition-speed) box-shadow;
+  transition: var(--sl-transition-fast) border-color, var(--sl-transition-fast) background-color,
+    var(--sl-transition-fast) color, var(--sl-transition-fast) box-shadow;
 
   input[type='checkbox'] {
     position: absolute;
@@ -40,8 +39,8 @@
   }
 
   .sl-checkbox__icon {
-    width: var(--sl-form-control-checkbox-size);
-    height: var(--sl-form-control-checkbox-size);
+    width: var(--sl-toggle-size);
+    height: var(--sl-toggle-size);
 
     svg {
       width: 100%;
@@ -52,14 +51,14 @@
 
 // Hover
 .sl-checkbox:not(.sl-checkbox--checked):not(.sl-checkbox--disabled) .sl-checkbox__control:hover {
-  border-color: var(--sl-form-control-border-color--hover);
-  background-color: var(--sl-form-control-background-color--hover);
+  border-color: var(--sl-input-border-color-hover);
+  background-color: var(--sl-input-background-color-hover);
 }
 
 // Focus
 .sl-checkbox.sl-checkbox--focused:not(.sl-checkbox--checked):not(.sl-checkbox--disabled) .sl-checkbox__control {
-  border-color: var(--sl-form-control-border-color--focus);
-  background-color: var(--sl-form-control-background-color--focus);
+  border-color: var(--sl-input-border-color-focus);
+  background-color: var(--sl-input-background-color-focus);
   box-shadow: var(--sl-focus-ring-box-shadow);
 }
 
@@ -92,7 +91,7 @@
 }
 
 .sl-checkbox__label {
-  line-height: var(--sl-form-control-checkbox-size);
+  line-height: var(--sl-toggle-size);
   margin-left: 0.5em;
   user-select: none;
 }

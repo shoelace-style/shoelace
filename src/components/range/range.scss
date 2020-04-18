@@ -14,9 +14,9 @@
   .sl-range__control {
     -webkit-appearance: none;
     width: 100%;
-    height: var(--sl-form-control-height--medium);
+    height: var(--sl-input-height-medium);
     background: transparent;
-    line-height: var(--sl-form-control-height--medium);
+    line-height: var(--sl-input-height-medium);
     vertical-align: middle;
 
     // Webkit
@@ -34,12 +34,11 @@
       height: var(--thumb-size);
       border-radius: 50%;
       background-color: var(--sl-color-primary-50);
-      border: solid var(--sl-form-control-border-width) var(--sl-color-primary-50);
+      border: solid var(--sl-input-border-width) var(--sl-color-primary-50);
       -webkit-appearance: none;
       margin-top: calc(var(--thumb-size) / -2 + var(--track-height) / 2);
-      transition: var(--sl-form-control-transition-speed) border-color,
-        var(--sl-form-control-transition-speed) background-color, var(--sl-form-control-transition-speed) color,
-        var(--sl-form-control-transition-speed) box-shadow, var(--sl-form-control-transition-speed) transform;
+      transition: var(--sl-transition-fast) border-color, var(--sl-transition-fast) background-color,
+        var(--sl-transition-fast) color, var(--sl-transition-fast) box-shadow, var(--sl-transition-fast) transform;
       cursor: pointer;
     }
 
@@ -80,9 +79,8 @@
       border-radius: 50%;
       background-color: var(--sl-color-primary-50);
       border-color: var(--sl-color-primary-50);
-      transition: var(--sl-form-control-transition-speed) border-color,
-        var(--sl-form-control-transition-speed) background-color, var(--sl-form-control-transition-speed) color,
-        var(--sl-form-control-transition-speed) box-shadow, var(--sl-form-control-transition-speed) transform;
+      transition: var(--sl-transition-fast) border-color, var(--sl-transition-fast) background-color,
+        var(--sl-transition-fast) color, var(--sl-transition-fast) box-shadow, var(--sl-transition-fast) transform;
       cursor: pointer;
     }
 

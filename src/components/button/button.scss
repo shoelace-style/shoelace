@@ -15,14 +15,14 @@
   justify-content: center;
   width: 100%;
   border-style: solid;
-  border-width: var(--sl-form-control-border-width);
-  font-family: var(--sl-form-control-font-sans-serif);
+  border-width: var(--sl-input-border-width);
+  font-family: var(--sl-input-font-family);
   font-weight: var(--sl-font-weight-semibold);
   user-select: none;
   white-space: nowrap;
   vertical-align: middle;
-  transition: var(--sl-form-control-transition-speed) background-color, var(--sl-form-control-transition-speed) color,
-    var(--sl-form-control-transition-speed) border;
+  transition: var(--sl-transition-fast) background-color, var(--sl-transition-fast) color,
+    var(--sl-transition-fast) border;
   cursor: pointer;
 
   &::-moz-focus-inner {
@@ -46,13 +46,11 @@
   }
 
   .sl-button__prefix ::slotted(:first-child) {
-    margin-left: -0.5em;
     margin-right: 0.5em;
   }
 
   .sl-button__suffix ::slotted(:last-child) {
     margin-left: 0.5em;
-    margin-right: -0.5em;
   }
 }
 
@@ -73,7 +71,7 @@
       $border-color--focus: var(--sl-color-primary-70),
       $color--focus: var(--sl-color-primary-40),
       $box-shadow--focus: 0 0 0 var(--sl-focus-ring-width)
-        hsla(var(--sl-color-primary-hue), var(--sl-color-primary-sat), 50%, var(--sl-focus-ring-alpha)),
+        hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha)),
       $background-color--active: var(--sl-color-primary-95),
       $border-color--active: var(--sl-color-primary-50),
       $color--active: var(--sl-color-primary-30)
@@ -92,7 +90,7 @@
       $border-color--focus: var(--sl-color-primary-60),
       $color--focus: var(--sl-color-primary-text),
       $box-shadow--focus: 0 0 0 var(--sl-focus-ring-width)
-        hsla(var(--sl-color-primary-hue), var(--sl-color-primary-sat), 50%, var(--sl-focus-ring-alpha)),
+        hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha)),
       $background-color--active: var(--sl-color-primary-50),
       $border-color--active: var(--sl-color-primary-50),
       $color--active: var(--sl-color-primary-text)
@@ -111,7 +109,7 @@
       $border-color--focus: var(--sl-color-success-60),
       $color--focus: var(--sl-color-success-text),
       $box-shadow--focus: 0 0 0 var(--sl-focus-ring-width)
-        hsla(var(--sl-color-success-hue), var(--sl-color-success-sat), 50%, var(--sl-focus-ring-alpha)),
+        hsla(var(--sl-color-success-hue), var(--sl-color-success-saturation), 50%, var(--sl-focus-ring-alpha)),
       $background-color--active: var(--sl-color-success-50),
       $border-color--active: var(--sl-color-success-50),
       $color--active: var(--sl-color-success-text)
@@ -130,7 +128,7 @@
       $border-color--focus: var(--sl-color-info-60),
       $color--focus: var(--sl-color-info-text),
       $box-shadow--focus: 0 0 0 var(--sl-focus-ring-width)
-        hsla(var(--sl-color-info-hue), var(--sl-color-info-sat), 50%, var(--sl-focus-ring-alpha)),
+        hsla(var(--sl-color-info-hue), var(--sl-color-info-saturation), 50%, var(--sl-focus-ring-alpha)),
       $background-color--active: var(--sl-color-info-50),
       $border-color--active: var(--sl-color-info-50),
       $color--active: var(--sl-color-info-text)
@@ -149,7 +147,7 @@
       $border-color--focus: var(--sl-color-warning-60),
       $color--focus: var(--sl-color-warning-text),
       $box-shadow--focus: 0 0 0 var(--sl-focus-ring-width)
-        hsla(var(--sl-color-warning-hue), var(--sl-color-warning-sat), 50%, var(--sl-focus-ring-alpha)),
+        hsla(var(--sl-color-warning-hue), var(--sl-color-warning-saturation), 50%, var(--sl-focus-ring-alpha)),
       $background-color--active: var(--sl-color-warning-50),
       $border-color--active: var(--sl-color-warning-50),
       $color--active: var(--sl-color-warning-text)
@@ -168,7 +166,7 @@
       $border-color--focus: var(--sl-color-danger-60),
       $color--focus: var(--sl-color-danger-text),
       $box-shadow--focus: 0 0 0 var(--sl-focus-ring-width)
-        hsla(var(--sl-color-danger-hue), var(--sl-color-danger-sat), 50%, var(--sl-focus-ring-alpha)),
+        hsla(var(--sl-color-danger-hue), var(--sl-color-danger-saturation), 50%, var(--sl-focus-ring-alpha)),
       $background-color--active: var(--sl-color-danger-50),
       $border-color--active: var(--sl-color-danger-50),
       $color--active: var(--sl-color-danger-text)
@@ -196,7 +194,7 @@
     border-color: transparent;
     color: var(--sl-color-primary-60);
     box-shadow: 0 0 0 var(--sl-focus-ring-width)
-      hsla(var(--sl-color-primary-hue), var(--sl-color-primary-sat), 50%, var(--sl-focus-ring-alpha));
+      hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha));
   }
 
   &:active:not(:disabled) {
@@ -219,26 +217,26 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 .sl-button--small {
-  font-size: var(--sl-form-control-font-size--small);
-  height: var(--sl-form-control-height--small);
-  line-height: calc(var(--sl-form-control-height--small) - var(--sl-form-control-border-width) * 2);
-  border-radius: var(--sl-form-control-border-radius--small);
+  font-size: var(--sl-input-font-size-small);
+  height: var(--sl-input-height-small);
+  line-height: calc(var(--sl-input-height-small) - var(--sl-input-border-width) * 2);
+  border-radius: var(--sl-input-border-radius-small);
   padding: 0 16px;
 }
 
 .sl-button--medium {
-  font-size: var(--sl-form-control-font-size--medium);
-  height: var(--sl-form-control-height--medium);
-  line-height: calc(var(--sl-form-control-height--medium) - var(--sl-form-control-border-width) * 2);
-  border-radius: var(--sl-form-control-border-radius--medium);
+  font-size: var(--sl-input-font-size-medium);
+  height: var(--sl-input-height-medium);
+  line-height: calc(var(--sl-input-height-medium) - var(--sl-input-border-width) * 2);
+  border-radius: var(--sl-input-border-radius-medium);
   padding: 0 20px;
 }
 
 .sl-button--large {
-  font-size: var(--sl-form-control-font-size--large);
-  height: var(--sl-form-control-height--large);
-  line-height: calc(var(--sl-form-control-height--large) - var(--sl-form-control-border-width) * 2);
-  border-radius: var(--sl-form-control-border-radius--large);
+  font-size: var(--sl-input-font-size-large);
+  height: var(--sl-input-height-large);
+  line-height: calc(var(--sl-input-height-large) - var(--sl-input-border-width) * 2);
+  border-radius: var(--sl-input-border-radius-large);
   padding: 0 24px;
 }
 
@@ -248,15 +246,15 @@
 
 .sl-button--pill {
   &.sl-button--small {
-    border-radius: var(--sl-form-control-height--small);
+    border-radius: var(--sl-input-height-small);
   }
 
   &.sl-button--medium {
-    border-radius: var(--sl-form-control-height--medium);
+    border-radius: var(--sl-input-height-medium);
   }
 
   &.sl-button--large {
-    border-radius: var(--sl-form-control-height--large);
+    border-radius: var(--sl-input-height-large);
   }
 }
 
@@ -275,17 +273,17 @@
   }
 
   &.sl-button--small {
-    width: var(--sl-form-control-height--small);
+    width: var(--sl-input-height-small);
     border-radius: 50%;
   }
 
   &.sl-button--medium {
-    width: var(--sl-form-control-height--medium);
+    width: var(--sl-input-height-medium);
     border-radius: 50%;
   }
 
   &.sl-button--large {
-    width: var(--sl-form-control-height--large);
+    width: var(--sl-input-height-large);
     border-radius: 50%;
   }
 

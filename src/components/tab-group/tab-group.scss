@@ -17,8 +17,7 @@
 
   .sl-tab-group__active-tab-indicator {
     position: absolute;
-    transition: var(--sl-form-control-transition-speed) transform ease,
-      var(--sl-form-control-transition-speed) width ease;
+    transition: var(--sl-transition-fast) transform ease, var(--sl-transition-fast) width ease;
   }
 
   // Show a focus ring if the user is interacting with a keyboard

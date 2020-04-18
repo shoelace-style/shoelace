@@ -3,6 +3,7 @@
 TODO
 
 - Describe how color tokens are generated using HSL
+- Show hue + saturation tokens for each base color
 
 ## Primary
 

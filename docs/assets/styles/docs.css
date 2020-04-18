@@ -87,7 +87,7 @@ body.close .sidebar-toggle {
 
 .sidebar-toggle:focus,
 body.close .sidebar-toggle:focus {
-  border-color: var(--sl-form-control-border-color--focus);
+  border-color: var(--sl-input-border-color-focus);
   box-shadow: var(--sl-focus-ring-box-shadow);
 }
 
@@ -103,19 +103,18 @@ body.close .sidebar-toggle:focus {
 }
 
 .sidebar .search input {
-  border: solid 1px var(--sl-form-control-border-color);
+  border: solid 1px var(--sl-input-border-color);
   border-radius: 3px;
-  padding: 0 var(--sl-form-control-padding-x--medium);
-  transition: var(--sl-form-control-transition-speed) color, var(--sl-form-control-transition-speed) border,
-    var(--sl-form-control-transition-speed) box-shadow;
+  padding: 0 var(--sl-spacing-small);
+  transition: var(--sl-transition-fast) color, var(--sl-transition-fast) border, var(--sl-transition-fast) box-shadow;
 }
 
 .sidebar .search input:hover {
-  border-color: var(--sl-form-control-border-color--hover);
+  border-color: var(--sl-input-border-color-hover);
 }
 
 .sidebar .search input:focus {
-  border-color: var(--sl-form-control-border-color--focus);
+  border-color: var(--sl-input-border-color-focus);
   box-shadow: var(--sl-focus-ring-box-shadow);
 }
 
@@ -186,7 +185,7 @@ body.close .sidebar-toggle:focus {
 
 .content p.tip,
 .content tr:nth-child(2n) {
-  background-color: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-sat), 97%);
+  background-color: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 97%);
 }
 
 .content .docsify-copy-code-button {
@@ -217,7 +216,7 @@ body.close .sidebar-toggle:focus {
 }
 
 .content code {
-  background-color: hsla(var(--sl-color-gray-hue), var(--sl-color-gray-sat), 50%, 0.075);
+  background-color: hsla(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 50%, 0.075);
   font-family: var(--sl-font-mono);
   font-size: 0.875em;
   color: var(--sl-color-gray-20);
@@ -343,11 +342,11 @@ pre.code-block__source {
 }
 
 .code-block__toggle:hover {
-  background-color: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-sat), 98%);
+  background-color: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 98%);
 }
 
 .code-block__toggle:active {
-  background-color: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-sat), 96%);
+  background-color: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 96%);
 }
 
 .code-block__toggle:focus {

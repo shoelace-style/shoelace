@@ -12,13 +12,12 @@
   display: flex;
   align-items: center;
   position: relative;
-  font-family: var(--sl-form-control-font-family);
-  font-weight: var(--sl-form-control-font-weight);
-  background-color: var(--sl-form-control-background-color);
-  border: solid var(--sl-form-control-border-width) var(--sl-form-control-border-color);
+  font-family: var(--sl-input-font-family);
+  font-weight: var(--sl-input-font-weight);
+  background-color: var(--sl-input-background-color);
+  border: solid var(--sl-input-border-width) var(--sl-input-border-color);
   vertical-align: middle;
-  transition: var(--sl-form-control-transition-speed) color, var(--sl-form-control-transition-speed) border,
-    var(--sl-form-control-transition-speed) box-shadow;
+  transition: var(--sl-transition-fast) color, var(--sl-transition-fast) border, var(--sl-transition-fast) box-shadow;
 
   .sl-textarea__control {
     flex: 1 1 auto;
@@ -26,7 +25,7 @@
     font-size: inherit;
     font-weight: inherit;
     line-height: 1.4;
-    color: var(--sl-form-control-color);
+    color: var(--sl-input-color);
     border: none;
     background: none;
     -webkit-appearance: none;
@@ -39,7 +38,7 @@
     }
 
     &::placeholder {
-      color: var(--sl-form-control-placeholder-color);
+      color: var(--sl-input-placeholder-color);
       user-select: none;
     }
 
@@ -49,35 +48,29 @@
   }
 
   &:hover:not(.sl-textarea--disabled) {
-    background-color: var(--sl-form-control-background-color--hover);
-    border-color: var(--sl-form-control-border-color--hover);
-    color: var(--sl-form-control-color--hover);
-
-    .sl-textarea__control {
-      &::placeholder {
-        color: var(--sl-form-control-placeholder-color--hover);
-      }
-    }
+    background-color: var(--sl-input-background-color-hover);
+    border-color: var(--sl-input-border-color-hover);
+    color: var(--sl-input-color-hover);
   }
 
   &.sl-textarea--focused:not(.sl-textarea--disabled) {
-    background-color: var(--sl-form-control-background-color--focus);
-    border-color: var(--sl-form-control-border-color--focus);
+    background-color: var(--sl-input-background-color-focus);
+    border-color: var(--sl-input-border-color-focus);
     box-shadow: var(--sl-focus-ring-box-shadow);
-    color: var(--sl-form-control-color--focus);
+    color: var(--sl-input-color-focus);
   }
 
   &.sl-textarea--disabled {
-    background-color: var(--sl-form-control-background-color--disabled);
-    border-color: var(--sl-form-control-border-color--disabled);
-    color: var(--sl-form-control-color--disabled);
+    background-color: var(--sl-input-background-color-disabled);
+    border-color: var(--sl-input-border-color-disabled);
+    color: var(--sl-input-color-disabled);
     opacity: 0.5;
 
     .sl-textarea__control {
       cursor: not-allowed;
 
       &::placeholder {
-        color: var(--sl-form-control-placeholder-color--disabled);
+        color: var(--sl-input-placeholder-color-disabled);
       }
     }
   }
@@ -88,29 +81,29 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 .sl-textarea--small {
-  border-radius: var(--sl-form-control-border-radius--small);
-  font-size: var(--sl-form-control-font-size--small);
+  border-radius: var(--sl-input-border-radius-small);
+  font-size: var(--sl-input-font-size-small);
 
   .sl-textarea__control {
-    padding: 0.5em var(--sl-form-control-padding-x--small);
+    padding: 0.5em var(--sl-input-spacing-small);
   }
 }
 
 .sl-textarea--medium {
-  border-radius: var(--sl-form-control-border-radius--medium);
-  font-size: var(--sl-form-control-font-size--medium);
+  border-radius: var(--sl-input-border-radius-medium);
+  font-size: var(--sl-input-font-size-medium);
 
   .sl-textarea__control {
-    padding: 0.5em var(--sl-form-control-padding-x--medium);
+    padding: 0.5em var(--sl-input-spacing-medium);
   }
 }
 
 .sl-textarea--large {
-  border-radius: var(--sl-form-control-border-radius--large);
-  font-size: var(--sl-form-control-font-size--large);
+  border-radius: var(--sl-input-border-radius-large);
+  font-size: var(--sl-input-font-size-large);
 
   .sl-textarea__control {
-    padding: 0.5em var(--sl-form-control-padding-x--large);
+    padding: 0.5em var(--sl-input-spacing-large);
   }
 }
 

@@ -2,7 +2,7 @@
 @mixin make-color-palette($name) {
   @for $i from 5 through 95 {
     @if $i == 95 or $i % 10 == 0 {
-      --sl-color-#{$name}-#{$i}: hsl(var(--sl-color-#{$name}-hue), var(--sl-color-#{$name}-sat), #{$i * 1%});
+      --sl-color-#{$name}-#{$i}: hsl(var(--sl-color-#{$name}-hue), var(--sl-color-#{$name}-saturation), #{$i * 1%});
     }
   }
 }
