@@ -13,7 +13,6 @@ let id = 0;
   shadow: true
 })
 export class Dialog {
-  bodyOverflow = '';
   box: HTMLElement;
   overlay: HTMLElement;
   dialog: HTMLElement;
@@ -56,13 +55,13 @@ export class Dialog {
     this.open ? this.show() : this.hide();
   }
 
-  /** Emitted when the dialog menu opens. Calling `event.preventDefault()` will prevent it from being opened. */
+  /** Emitted when the dialog opens. Calling `event.preventDefault()` will prevent it from being opened. */
   @Event() slShow: EventEmitter;
 
   /** Emitted after the dialog opens and all transitions are complete. */
   @Event() slAfterShow: EventEmitter;
 
-  /** Emitted when the dialog menu closes. Calling `event.preventDefault()` will prevent it from being closed. */
+  /** Emitted when the dialog closes. Calling `event.preventDefault()` will prevent it from being closed. */
   @Event() slHide: EventEmitter;
 
   /** Emitted after the dialog closes and all transitions are complete. */
@@ -82,10 +81,11 @@ export class Dialog {
   }
 
   componentDidUnload() {
+    document.body.style.overflow = null;
     this.keyboardDetector.unobserve(this.dialog);
   }
 
-  /** Opens the dialog */
+  /** Shows the dialog */
   @Method()
   async show() {
     const slShow = this.slShow.emit();
@@ -98,15 +98,12 @@ export class Dialog {
     this.open = true;
     this.box.focus();
 
-    // Lock body scrolling
-    this.bodyOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
-
     document.addEventListener('keydown', this.handleDocumentKeyDown);
     document.addEventListener('focusin', this.keepDialogFocused);
   }
 
-  /** Closes the dialog */
+  /** Hides the dialog */
   @Method()
   async hide() {
     const slHide = this.slHide.emit();
@@ -117,9 +114,7 @@ export class Dialog {
 
     this.open = false;
 
-    // Unlock body scrolling
-    document.body.style.overflow = this.bodyOverflow;
-
+    document.body.style.overflow = null;
     document.removeEventListener('keydown', this.handleDocumentKeyDown);
     document.removeEventListener('focusin', this.keepDialogFocused);
   }
