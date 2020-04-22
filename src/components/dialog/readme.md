@@ -14,8 +14,8 @@
     const openButton = document.querySelector('#dialog-1-open');
     const closeButton = document.querySelector('#dialog-1-close');
     
-    openButton.addEventListener('click', () => dialog.open());
-    closeButton.addEventListener('click', () => dialog.close());
+    openButton.addEventListener('click', () => dialog.show());
+    closeButton.addEventListener('click', () => dialog.hide());
   })();
 </script>
 ```
@@ -31,21 +31,22 @@
 | `label`        | `label`          | The dialog's label as displayed in the header. You should always include a relevant label even when using `no-header`, as it is required for proper accessibility.       | `string`  | `''`    |
 | `noFooter`     | `no-footer`      | Set to true to disable the footer.                                                                                                                                       | `boolean` | `false` |
 | `noHeader`     | `no-header`      | Set to true to disable the header. This will also remove the default close button, so please ensure you provide an easy, accessible way for users to dismiss the dialog. | `boolean` | `false` |
+| `open`         | `open`           | Indicates whether or not the dialog is open.                                                                                                                             | `boolean` | `false` |
 
 
 ## Events
 
-| Event          | Description                                                                                              | Type               |
-| -------------- | -------------------------------------------------------------------------------------------------------- | ------------------ |
-| `slAfterClose` | Emitted after the dialog closes and all transitions are complete.                                        | `CustomEvent<any>` |
-| `slAfterOpen`  | Emitted after the dialog opens and all transitions are complete.                                         | `CustomEvent<any>` |
-| `slClose`      | Emitted when the dialog menu closes. Calling `event.preventDefault()` will prevent it from being closed. | `CustomEvent<any>` |
-| `slOpen`       | Emitted when the dialog menu opens. Calling `event.preventDefault()` will prevent it from being opened.  | `CustomEvent<any>` |
+| Event         | Description                                                                                              | Type               |
+| ------------- | -------------------------------------------------------------------------------------------------------- | ------------------ |
+| `slAfterHide` | Emitted after the dialog closes and all transitions are complete.                                        | `CustomEvent<any>` |
+| `slAfterShow` | Emitted after the dialog opens and all transitions are complete.                                         | `CustomEvent<any>` |
+| `slHide`      | Emitted when the dialog menu closes. Calling `event.preventDefault()` will prevent it from being closed. | `CustomEvent<any>` |
+| `slShow`      | Emitted when the dialog menu opens. Calling `event.preventDefault()` will prevent it from being opened.  | `CustomEvent<any>` |
 
 
 ## Methods
 
-### `close() => Promise<boolean>`
+### `hide() => Promise<boolean>`
 
 Closes the dialog
 
@@ -55,7 +56,7 @@ Type: `Promise<boolean>`
 
 
 
-### `open() => Promise<boolean>`
+### `show() => Promise<boolean>`
 
 Opens the dialog
 

@@ -90,13 +90,13 @@ export namespace Components {
     }
     interface SlDialog {
         /**
-          * Closes the dialog
-         */
-        "close": () => Promise<boolean>;
-        /**
           * When true, clicking on the overlay will close the dialog.
          */
         "closeOnClick": boolean;
+        /**
+          * Closes the dialog
+         */
+        "hide": () => Promise<boolean>;
         /**
           * The dialog's label as displayed in the header. You should always include a relevant label even when using `no-header`, as it is required for proper accessibility.
          */
@@ -110,9 +110,13 @@ export namespace Components {
          */
         "noHeader": boolean;
         /**
+          * Indicates whether or not the dialog is open.
+         */
+        "open": boolean;
+        /**
           * Opens the dialog
          */
-        "open": () => Promise<boolean>;
+        "show": () => Promise<boolean>;
     }
     interface SlDropdown {
         /**
@@ -806,19 +810,23 @@ declare namespace LocalJSX {
         /**
           * Emitted after the dialog closes and all transitions are complete.
          */
-        "onSlAfterClose"?: (event: CustomEvent<any>) => void;
+        "onSlAfterHide"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted after the dialog opens and all transitions are complete.
          */
-        "onSlAfterOpen"?: (event: CustomEvent<any>) => void;
+        "onSlAfterShow"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the dialog menu closes. Calling `event.preventDefault()` will prevent it from being closed.
          */
-        "onSlClose"?: (event: CustomEvent<any>) => void;
+        "onSlHide"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the dialog menu opens. Calling `event.preventDefault()` will prevent it from being opened.
          */
-        "onSlOpen"?: (event: CustomEvent<any>) => void;
+        "onSlShow"?: (event: CustomEvent<any>) => void;
+        /**
+          * Indicates whether or not the dialog is open.
+         */
+        "open"?: boolean;
     }
     interface SlDropdown {
         /**

@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, Method, Prop, State, h } from '@stencil/core';
+import { Component, Event, EventEmitter, Method, Prop, State, Watch, h } from '@stencil/core';
 import { KeyboardDetector } from '../../utilities/keyboard-detector';
 
 let id = 0;
@@ -28,8 +28,10 @@ export class Dialog {
     this.handleOverlayClick = this.handleOverlayClick.bind(this);
   }
 
-  @State() isOpen = false;
   @State() isUsingKeyboard = false;
+
+  /** Indicates whether or not the dialog is open. */
+  @Prop({ mutable: true, reflect: true }) open = false;
 
   /**
    * The dialog's label as displayed in the header. You should always include a relevant label even when using
@@ -49,17 +51,22 @@ export class Dialog {
   /** Set to true to disable the footer. */
   @Prop() noFooter = false;
 
+  @Watch('open')
+  handleOpenChange() {
+    this.open ? this.show() : this.hide();
+  }
+
   /** Emitted when the dialog menu opens. Calling `event.preventDefault()` will prevent it from being opened. */
-  @Event() slOpen: EventEmitter;
+  @Event() slShow: EventEmitter;
 
   /** Emitted after the dialog opens and all transitions are complete. */
-  @Event() slAfterOpen: EventEmitter;
+  @Event() slAfterShow: EventEmitter;
 
   /** Emitted when the dialog menu closes. Calling `event.preventDefault()` will prevent it from being closed. */
-  @Event() slClose: EventEmitter;
+  @Event() slHide: EventEmitter;
 
   /** Emitted after the dialog closes and all transitions are complete. */
-  @Event() slAfterClose: EventEmitter;
+  @Event() slAfterHide: EventEmitter;
 
   componentDidLoad() {
     this.keyboardDetector = new KeyboardDetector({
@@ -75,15 +82,15 @@ export class Dialog {
 
   /** Opens the dialog */
   @Method()
-  async open() {
-    const slOpen = this.slOpen.emit();
+  async show() {
+    const slShow = this.slShow.emit();
 
-    if (slOpen.defaultPrevented) {
+    if (slShow.defaultPrevented) {
       return false;
     }
 
     this.dialog.hidden = false;
-    this.isOpen = true;
+    this.open = true;
     this.box.focus();
 
     // Lock body scrolling
@@ -96,14 +103,14 @@ export class Dialog {
 
   /** Closes the dialog */
   @Method()
-  async close() {
-    const slClose = this.slClose.emit();
+  async hide() {
+    const slHide = this.slHide.emit();
 
-    if (slClose.defaultPrevented) {
+    if (slHide.defaultPrevented) {
       return false;
     }
 
-    this.isOpen = false;
+    this.open = false;
 
     // Unlock body scrolling
     document.body.style.overflow = this.bodyOverflow;
@@ -113,29 +120,29 @@ export class Dialog {
   }
 
   handleCloseClick() {
-    this.close();
+    this.hide();
   }
 
   handleDocumentKeyDown(event: KeyboardEvent) {
     if (event.key === 'Escape') {
-      this.close();
+      this.hide();
     }
   }
 
   handleOverlayClick() {
     if (this.closeOnClick) {
-      this.close();
+      this.hide();
     }
   }
 
   handleTransitionEnd(event: TransitionEvent) {
     const target = event.target as HTMLElement;
 
-    this.dialog.hidden = !this.isOpen;
+    this.dialog.hidden = !this.open;
 
     // Ensure we only handle one transition event
     if (event.propertyName === 'opacity' && target.classList.contains('sl-dialog__box')) {
-      this.isOpen ? this.slAfterOpen.emit() : this.slAfterClose.emit();
+      this.open ? this.slAfterShow.emit() : this.slAfterHide.emit();
     }
   }
 
@@ -153,7 +160,7 @@ export class Dialog {
         ref={el => (this.dialog = el)}
         class={{
           'sl-dialog': true,
-          'sl-dialog--open': this.isOpen,
+          'sl-dialog--open': this.open,
           'sl-dialog--using-keyboard': this.isUsingKeyboard
         }}
         onTransitionEnd={this.handleTransitionEnd}
@@ -164,7 +171,7 @@ export class Dialog {
           class="sl-dialog__box"
           role="dialog"
           aria-modal="true"
-          aria-hidden={!this.isOpen}
+          aria-hidden={!this.open}
           aria-label={this.noHeader ? this.label : null}
           aria-labeledby={!this.noHeader ? `${this.id}-title` : null}
           tabIndex={0}
