@@ -30,6 +30,10 @@
   opacity: 0;
   overflow-y: auto;
   transition: var(--sl-transition-fast) opacity;
+
+  &[hidden] {
+    display: none;
+  }
 }
 
 .sl-dropdown--open .sl-dropdown__menu {

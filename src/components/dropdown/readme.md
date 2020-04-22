@@ -67,22 +67,23 @@
 
 | Property    | Attribute   | Description                                                                                                                              | Type                                                                                                                                                                 | Default          |
 | ----------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
+| `open`      | `open`      | Indicates whether or not the dropdown is open.                                                                                           | `boolean`                                                                                                                                                            | `false`          |
 | `placement` | `placement` | The preferred placement of the dropdown menu. Note that the actual placement may vary as needed to keep the menu inside of the viewport. | `"bottom" \| "bottom-end" \| "bottom-start" \| "left" \| "left-end" \| "left-start" \| "right" \| "right-end" \| "right-start" \| "top" \| "top-end" \| "top-start"` | `'bottom-start'` |
 
 
 ## Events
 
-| Event          | Description                                                                                                | Type               |
-| -------------- | ---------------------------------------------------------------------------------------------------------- | ------------------ |
-| `slAfterClose` | Emitted after the dropdown menu closes and all transitions are complete.                                   | `CustomEvent<any>` |
-| `slAfterOpen`  | Emitted after the dropdown menu opens and all transitions are complete.                                    | `CustomEvent<any>` |
-| `slClose`      | Emitted when the dropdown menu closes. Calling `event.preventDefault()` will prevent it from being closed. | `CustomEvent<any>` |
-| `slOpen`       | Emitted when the dropdown menu opens. Calling `event.preventDefault()` will prevent it from being opened.  | `CustomEvent<any>` |
+| Event         | Description                                                                                                | Type               |
+| ------------- | ---------------------------------------------------------------------------------------------------------- | ------------------ |
+| `slAfterHide` | Emitted after the dropdown menu closes and all transitions are complete.                                   | `CustomEvent<any>` |
+| `slAfterShow` | Emitted after the dropdown menu opens and all transitions are complete.                                    | `CustomEvent<any>` |
+| `slHide`      | Emitted when the dropdown menu closes. Calling `event.preventDefault()` will prevent it from being closed. | `CustomEvent<any>` |
+| `slShow`      | Emitted when the dropdown menu opens. Calling `event.preventDefault()` will prevent it from being opened.  | `CustomEvent<any>` |
 
 
 ## Methods
 
-### `close() => Promise<boolean>`
+### `hide() => Promise<boolean>`
 
 Closes the dropdown menu
 
@@ -92,7 +93,7 @@ Type: `Promise<boolean>`
 
 
 
-### `open() => Promise<boolean>`
+### `show() => Promise<boolean>`
 
 Opens the dropdown menu
 

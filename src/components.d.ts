@@ -122,15 +122,19 @@ export namespace Components {
         /**
           * Closes the dropdown menu
          */
-        "close": () => Promise<boolean>;
+        "hide": () => Promise<boolean>;
         /**
-          * Opens the dropdown menu
+          * Indicates whether or not the dropdown is open.
          */
-        "open": () => Promise<boolean>;
+        "open": boolean;
         /**
           * The preferred placement of the dropdown menu. Note that the actual placement may vary as needed to keep the menu inside of the viewport.
          */
         "placement": "top" | "top-start" | "top-end" | "bottom" | "bottom-start" | "bottom-end" | "right" | "right-start" | "right-end" | "left" | "left-start" | "left-end";
+        /**
+          * Opens the dropdown menu
+         */
+        "show": () => Promise<boolean>;
     }
     interface SlDropdownDivider {
     }
@@ -832,19 +836,23 @@ declare namespace LocalJSX {
         /**
           * Emitted after the dropdown menu closes and all transitions are complete.
          */
-        "onSlAfterClose"?: (event: CustomEvent<any>) => void;
+        "onSlAfterHide"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted after the dropdown menu opens and all transitions are complete.
          */
-        "onSlAfterOpen"?: (event: CustomEvent<any>) => void;
+        "onSlAfterShow"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the dropdown menu closes. Calling `event.preventDefault()` will prevent it from being closed.
          */
-        "onSlClose"?: (event: CustomEvent<any>) => void;
+        "onSlHide"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the dropdown menu opens. Calling `event.preventDefault()` will prevent it from being opened.
          */
-        "onSlOpen"?: (event: CustomEvent<any>) => void;
+        "onSlShow"?: (event: CustomEvent<any>) => void;
+        /**
+          * Indicates whether or not the dropdown is open.
+         */
+        "open"?: boolean;
         /**
           * The preferred placement of the dropdown menu. Note that the actual placement may vary as needed to keep the menu inside of the viewport.
          */

@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, Method, Prop, State, Watch, h } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, Method, Prop, Watch, h } from '@stencil/core';
 import { Instance as PopperInstance, createPopper } from '@popperjs/core';
 import { scrollIntoView } from '../../utilities/scroll';
 
@@ -37,7 +37,8 @@ export class Dropdown {
 
   @Element() host: HTMLSlDropdownElement;
 
-  @State() isOpen = false;
+  /** Indicates whether or not the dropdown is open. */
+  @Prop({ mutable: true, reflect: true }) open = false;
 
   /**
    * The preferred placement of the dropdown menu. Note that the actual placement may vary as needed to keep the menu
@@ -58,16 +59,21 @@ export class Dropdown {
     | 'left-end' = 'bottom-start';
 
   /** Emitted when the dropdown menu opens. Calling `event.preventDefault()` will prevent it from being opened. */
-  @Event() slOpen: EventEmitter;
+  @Event() slShow: EventEmitter;
 
   /** Emitted after the dropdown menu opens and all transitions are complete. */
-  @Event() slAfterOpen: EventEmitter;
+  @Event() slAfterShow: EventEmitter;
 
   /** Emitted when the dropdown menu closes. Calling `event.preventDefault()` will prevent it from being closed. */
-  @Event() slClose: EventEmitter;
+  @Event() slHide: EventEmitter;
 
   /** Emitted after the dropdown menu closes and all transitions are complete. */
-  @Event() slAfterClose: EventEmitter;
+  @Event() slAfterHide: EventEmitter;
+
+  @Watch('open')
+  handleOpenChange() {
+    this.open ? this.show() : this.hide();
+  }
 
   @Watch('placement')
   handlePlacementChange() {
@@ -78,21 +84,21 @@ export class Dropdown {
   }
 
   componentDidUnload() {
-    this.close();
+    this.hide();
   }
 
   /** Opens the dropdown menu */
   @Method()
-  async open() {
-    const slOpen = this.slOpen.emit();
+  async show() {
+    const slShow = this.slShow.emit();
 
-    if (slOpen.defaultPrevented) {
+    if (slShow.defaultPrevented) {
       return false;
     }
 
     this.closeOpenDropdowns();
     this.menu.hidden = false;
-    this.isOpen = true;
+    this.open = true;
 
     if (this.popper) {
       this.popper.destroy();
@@ -128,14 +134,14 @@ export class Dropdown {
 
   /** Closes the dropdown menu */
   @Method()
-  async close() {
-    const slClose = this.slClose.emit();
+  async hide() {
+    const slHide = this.slHide.emit();
 
-    if (slClose.defaultPrevented) {
+    if (slHide.defaultPrevented) {
       return false;
     }
 
-    this.isOpen = false;
+    this.open = false;
     this.setSelectedItem(null);
 
     openDropdowns = openDropdowns.filter(dropdown => this.host !== dropdown);
@@ -186,7 +192,7 @@ export class Dropdown {
 
     // Close when pressing escape or tab
     if (event.key === 'Escape' || event.key === 'Tab') {
-      this.close();
+      this.hide();
     }
 
     // Make a selection when pressing enter
@@ -196,7 +202,7 @@ export class Dropdown {
 
       if (item && !item.disabled) {
         item.click();
-        this.close();
+        this.hide();
       }
     }
 
@@ -232,15 +238,15 @@ export class Dropdown {
 
     // Close when clicking outside of the dropdown control
     if (!dropdown) {
-      this.close();
+      this.hide();
       return;
     }
   }
 
   handleTriggerKeyDown(event: KeyboardEvent) {
     // Open the menu when pressing down or up while focused on the trigger
-    if (!this.isOpen && ['ArrowDown', 'ArrowUp'].includes(event.key)) {
-      this.open();
+    if (!this.open && ['ArrowDown', 'ArrowUp'].includes(event.key)) {
+      this.show();
       event.preventDefault();
       event.stopPropagation();
     }
@@ -252,7 +258,7 @@ export class Dropdown {
 
     // Close when clicking on a dropdown item
     if (dropdownItem && !dropdownItem.disabled) {
-      this.close();
+      this.hide();
       return;
     }
   }
@@ -278,13 +284,13 @@ export class Dropdown {
   }
 
   handleTransitionEnd() {
-    if (this.isOpen) {
+    if (this.open) {
       this.menu.hidden = false;
-      this.slAfterOpen.emit();
+      this.slAfterShow.emit();
     } else {
       this.menu.scrollTop = 0;
       this.menu.hidden = true;
-      this.slAfterClose.emit();
+      this.slAfterHide.emit();
 
       if (this.popper) {
         this.popper.destroy();
@@ -294,10 +300,10 @@ export class Dropdown {
   }
 
   toggleMenu() {
-    if (this.isOpen) {
-      this.close();
+    if (this.open) {
+      this.hide();
     } else {
-      this.open();
+      this.show();
     }
   }
 
@@ -307,9 +313,9 @@ export class Dropdown {
         id={this.id}
         class={{
           'sl-dropdown': true,
-          'sl-dropdown--open': this.isOpen
+          'sl-dropdown--open': this.open
         }}
-        aria-expanded={this.isOpen}
+        aria-expanded={this.open}
         aria-haspopup="true"
       >
         <span
@@ -325,7 +331,7 @@ export class Dropdown {
           ref={el => (this.menu = el)}
           class="sl-dropdown__menu"
           role="menu"
-          aria-hidden={!this.isOpen}
+          aria-hidden={!this.open}
           aria-labeledby={this.id}
           onClick={this.handleMenuClick}
           onMouseDown={this.handleMenuMouseDown}
