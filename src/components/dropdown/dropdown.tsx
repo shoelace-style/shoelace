@@ -155,7 +155,7 @@ export class Dropdown {
       if (this.host === dropdown) {
         return true;
       } else {
-        dropdown.close();
+        dropdown.hide();
         return false;
       }
     });
@@ -300,11 +300,7 @@ export class Dropdown {
   }
 
   toggleMenu() {
-    if (this.open) {
-      this.hide();
-    } else {
-      this.show();
-    }
+    this.open ? this.hide() : this.show();
   }
 
   render() {
