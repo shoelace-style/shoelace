@@ -1,12 +1,11 @@
-import { Component, Element, Event, EventEmitter, Prop, State, Watch, h } from '@stencil/core';
+import { Component, Event, EventEmitter, Method, Prop, State, h } from '@stencil/core';
 import { KeyboardDetector } from '../../utilities/keyboard-detector';
 
 let id = 0;
 
 /**
  * @slot - The dialog's content.
- * @slot footer - The dialog's footer, usually one or more buttons representing various actions. For convenience, any
- *   element with `data-dialog="close"` will trigger the dialog to close when clicked.
+ * @slot footer - The dialog's footer, usually one or more buttons representing various actions.
  */
 @Component({
   tag: 'sl-dialog',
@@ -24,23 +23,17 @@ export class Dialog {
   constructor() {
     this.keepDialogFocused = this.keepDialogFocused.bind(this);
     this.handleCloseClick = this.handleCloseClick.bind(this);
-    this.handleDialogClick = this.handleDialogClick.bind(this);
     this.handleTransitionEnd = this.handleTransitionEnd.bind(this);
     this.handleDocumentKeyDown = this.handleDocumentKeyDown.bind(this);
     this.handleOverlayClick = this.handleOverlayClick.bind(this);
   }
 
-  @Element() host: HTMLSlDialogElement;
-
-  @State() isVisible = false;
+  @State() isOpen = false;
   @State() isUsingKeyboard = false;
 
-  /** Set to true to show the modal. */
-  @Prop({ reflect: true }) open = false;
-
   /**
-   * The dialog's label as displayed in the header. You should still include a relevant label when using `no-header`, as
-   * it is still used under the hood for accessibility purposes.
+   * The dialog's label as displayed in the header. You should always include a relevant label even when using
+   * `no-header`, as it is required for proper accessibility.
    */
   @Prop() label = '';
 
@@ -56,18 +49,13 @@ export class Dialog {
   /** Set to true to disable the footer. */
   @Prop() noFooter = false;
 
-  @Watch('open')
-  handleOpenChange() {
-    this.open ? this.handleOpen() : this.handleClose();
-  }
-
-  /** Emitted when the dialog opens. */
+  /** Emitted when the dialog menu opens. Calling `event.preventDefault()` will prevent it from being opened. */
   @Event() slOpen: EventEmitter;
 
   /** Emitted after the dialog opens and all transitions are complete. */
   @Event() slAfterOpen: EventEmitter;
 
-  /** Emitted when the dialog closes. */
+  /** Emitted when the dialog menu closes. Calling `event.preventDefault()` will prevent it from being closed. */
   @Event() slClose: EventEmitter;
 
   /** Emitted after the dialog closes and all transitions are complete. */
@@ -79,20 +67,23 @@ export class Dialog {
       whenNotUsing: () => (this.isUsingKeyboard = false)
     });
     this.keyboardDetector.observe(this.dialog);
-
-    // Show the dialog if it's open initially
-    if (this.open) {
-      this.handleOpen();
-    }
   }
 
   componentDidUnload() {
     this.keyboardDetector.unobserve(this.dialog);
   }
 
-  handleOpen() {
-    this.slOpen.emit();
+  /** Opens the dialog */
+  @Method()
+  async open() {
+    const slOpen = this.slOpen.emit();
+
+    if (slOpen.defaultPrevented) {
+      return false;
+    }
+
     this.dialog.hidden = false;
+    this.isOpen = true;
     this.box.focus();
 
     // Lock body scrolling
@@ -103,8 +94,16 @@ export class Dialog {
     document.addEventListener('focusin', this.keepDialogFocused);
   }
 
-  handleClose() {
-    this.slClose.emit();
+  /** Closes the dialog */
+  @Method()
+  async close() {
+    const slClose = this.slClose.emit();
+
+    if (slClose.defaultPrevented) {
+      return false;
+    }
+
+    this.isOpen = false;
 
     // Unlock body scrolling
     document.body.style.overflow = this.bodyOverflow;
@@ -114,48 +113,36 @@ export class Dialog {
   }
 
   handleCloseClick() {
-    this.open = false;
-  }
-
-  handleDialogClick(event: MouseEvent) {
-    const target = event.target as HTMLElement;
-
-    if (target.closest('[data-dialog="close"]')) {
-      this.open = false;
-    }
+    this.close();
   }
 
   handleDocumentKeyDown(event: KeyboardEvent) {
     if (event.key === 'Escape') {
-      this.open = false;
+      this.close();
     }
   }
 
   handleOverlayClick() {
     if (this.closeOnClick) {
-      this.open = false;
+      this.close();
     }
   }
 
   handleTransitionEnd(event: TransitionEvent) {
     const target = event.target as HTMLElement;
 
+    this.dialog.hidden = !this.isOpen;
+
     // Ensure we only handle one transition event
     if (event.propertyName === 'opacity' && target.classList.contains('sl-dialog__box')) {
-      if (this.open) {
-        this.dialog.hidden = false;
-        this.slAfterOpen.emit();
-      } else {
-        this.dialog.hidden = true;
-        this.slAfterClose.emit();
-      }
+      this.isOpen ? this.slAfterOpen.emit() : this.slAfterClose.emit();
     }
   }
 
   keepDialogFocused(event: Event) {
     const target = event.target as HTMLElement;
 
-    if (target.closest('sl-dialog') !== this.host) {
+    if (!target.closest('sl-dialog')) {
       this.box.focus();
     }
   }
@@ -166,11 +153,10 @@ export class Dialog {
         ref={el => (this.dialog = el)}
         class={{
           'sl-dialog': true,
-          'sl-dialog--open': this.open,
+          'sl-dialog--open': this.isOpen,
           'sl-dialog--using-keyboard': this.isUsingKeyboard
         }}
         onTransitionEnd={this.handleTransitionEnd}
-        onClick={this.handleDialogClick}
         hidden
       >
         <div
@@ -178,7 +164,7 @@ export class Dialog {
           class="sl-dialog__box"
           role="dialog"
           aria-modal="true"
-          aria-hidden={!this.open}
+          aria-hidden={!this.isOpen}
           aria-label={this.noHeader ? this.label : null}
           aria-labeledby={!this.noHeader ? `${this.id}-title` : null}
           tabIndex={0}

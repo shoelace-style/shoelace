@@ -90,11 +90,15 @@ export namespace Components {
     }
     interface SlDialog {
         /**
+          * Closes the dialog
+         */
+        "close": () => Promise<boolean>;
+        /**
           * When true, clicking on the overlay will close the dialog.
          */
         "closeOnClick": boolean;
         /**
-          * The dialog's label as displayed in the header. You should still include a relevant label when using `no-header`, as it is still used under the hood for accessibility purposes.
+          * The dialog's label as displayed in the header. You should always include a relevant label even when using `no-header`, as it is required for proper accessibility.
          */
         "label": string;
         /**
@@ -106,9 +110,9 @@ export namespace Components {
          */
         "noHeader": boolean;
         /**
-          * Set to true to show the modal.
+          * Opens the dialog
          */
-        "open": boolean;
+        "open": () => Promise<boolean>;
     }
     interface SlDropdown {
         /**
@@ -788,7 +792,7 @@ declare namespace LocalJSX {
          */
         "closeOnClick"?: boolean;
         /**
-          * The dialog's label as displayed in the header. You should still include a relevant label when using `no-header`, as it is still used under the hood for accessibility purposes.
+          * The dialog's label as displayed in the header. You should always include a relevant label even when using `no-header`, as it is required for proper accessibility.
          */
         "label"?: string;
         /**
@@ -808,17 +812,13 @@ declare namespace LocalJSX {
          */
         "onSlAfterOpen"?: (event: CustomEvent<any>) => void;
         /**
-          * Emitted when the dialog closes.
+          * Emitted when the dialog menu closes. Calling `event.preventDefault()` will prevent it from being closed.
          */
         "onSlClose"?: (event: CustomEvent<any>) => void;
         /**
-          * Emitted when the dialog opens.
+          * Emitted when the dialog menu opens. Calling `event.preventDefault()` will prevent it from being opened.
          */
         "onSlOpen"?: (event: CustomEvent<any>) => void;
-        /**
-          * Set to true to show the modal.
-         */
-        "open"?: boolean;
     }
     interface SlDropdown {
         /**
