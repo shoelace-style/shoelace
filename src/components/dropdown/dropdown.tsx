@@ -58,16 +58,16 @@ export class Dropdown {
     | 'left-start'
     | 'left-end' = 'bottom-start';
 
-  /** Emitted when the dropdown menu opens. Calling `event.preventDefault()` will prevent it from being opened. */
+  /** Emitted when the dropdown opens. Calling `event.preventDefault()` will prevent it from being opened. */
   @Event() slShow: EventEmitter;
 
-  /** Emitted after the dropdown menu opens and all transitions are complete. */
+  /** Emitted after the dropdown opens and all transitions are complete. */
   @Event() slAfterShow: EventEmitter;
 
-  /** Emitted when the dropdown menu closes. Calling `event.preventDefault()` will prevent it from being closed. */
+  /** Emitted when the dropdown closes. Calling `event.preventDefault()` will prevent it from being closed. */
   @Event() slHide: EventEmitter;
 
-  /** Emitted after the dropdown menu closes and all transitions are complete. */
+  /** Emitted after the dropdown closes and all transitions are complete. */
   @Event() slAfterHide: EventEmitter;
 
   @Watch('open')
@@ -87,7 +87,7 @@ export class Dropdown {
     this.hide();
   }
 
-  /** Opens the dropdown menu */
+  /** Shows the dropdown menu */
   @Method()
   async show() {
     const slShow = this.slShow.emit();
@@ -132,7 +132,7 @@ export class Dropdown {
     document.addEventListener('keydown', this.handleDocumentKeyDown);
   }
 
-  /** Closes the dropdown menu */
+  /** Hides the dropdown menu */
   @Method()
   async hide() {
     const slHide = this.slHide.emit();
@@ -284,13 +284,11 @@ export class Dropdown {
   }
 
   handleTransitionEnd() {
-    if (this.open) {
-      this.menu.hidden = false;
-      this.slAfterShow.emit();
-    } else {
+    this.menu.hidden = !this.open;
+    this.open ? this.slAfterShow.emit() : this.slAfterHide.emit();
+
+    if (!this.open) {
       this.menu.scrollTop = 0;
-      this.menu.hidden = true;
-      this.slAfterHide.emit();
 
       if (this.popper) {
         this.popper.destroy();
