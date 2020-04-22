@@ -1,0 +1,134 @@
+@import 'component';
+
+:host {
+  /**
+   * @prop --body-padding: The padding to use for the dialog's body. Useful for creating edge-to-edge components inside
+   *   the dialog.
+   * @prop --width: The preferred width of the dialog. Note that the dialog will shrink to accommodate smaller screens.
+   */
+  --body-padding: var(--sl-spacing-large);
+  --width: 31rem;
+
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.sl-dialog {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: var(--sl-z-index-dialog);
+
+  &[hidden] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    pointer-events: none;
+    opacity: 0;
+  }
+}
+
+.sl-dialog__box {
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+  width: var(--width);
+  max-width: calc(100vw - var(--sl-spacing-xx-large));
+  max-height: calc(100vh - var(--sl-spacing-xx-large));
+  background-color: var(--sl-color-white);
+  border-radius: var(--sl-border-radius-medium);
+  box-shadow: var(--sl-shadow-x-large);
+  opacity: 0;
+  transform: scale(0.8);
+  transition: var(--sl-transition-medium) opacity, var(--sl-transition-medium) transform;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.sl-dialog--open .sl-dialog__box {
+  display: flex;
+  opacity: 1;
+  transform: scale(1);
+}
+
+.sl-dialog__header {
+  display: flex;
+}
+
+.sl-dialog__title {
+  flex: 1 1 auto;
+  font-size: var(--sl-font-size-large);
+  line-height: var(--sl-line-height-dense);
+  padding: var(--sl-spacing-large);
+}
+
+.sl-dialog__close {
+  flex: 0 0 auto;
+  display: flex;
+  background: none;
+  border: none;
+  border-radius: var(--sl-border-radius-small);
+  font-family: inherit;
+  font-size: var(--sl-font-size-large);
+  font-weight: inherit;
+  color: var(--sl-color-gray-30);
+  padding: 0 var(--sl-spacing-large);
+  cursor: pointer;
+  transition: var(--sl-transition-fast) color;
+  -webkit-appearance: none;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: var(--sl-color-primary-50);
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.sl-dialog--using-keyboard .sl-dialog__close:focus {
+  box-shadow: 0 0 0 var(--sl-focus-ring-width)
+    hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha));
+}
+
+.sl-dialog__body {
+  padding: var(--body-padding);
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.sl-dialog__footer {
+  text-align: right;
+  padding: var(--sl-spacing-large);
+
+  ::slotted(sl-button:not(:first-of-type)) {
+    margin-left: var(--sl-spacing-x-small);
+  }
+}
+
+.sl-dialog__overlay {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: var(--sl-transition-medium) opacity;
+}
+
+.sl-dialog--open .sl-dialog__overlay {
+  opacity: 1;
+}

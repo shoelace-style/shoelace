@@ -88,6 +88,28 @@ export namespace Components {
          */
         "value": string;
     }
+    interface SlDialog {
+        /**
+          * When true, clicking on the overlay will close the dialog.
+         */
+        "closeOnClick": boolean;
+        /**
+          * The dialog's label as displayed in the header. You should still include a relevant label when using `no-header`, as it is still used under the hood for accessibility purposes.
+         */
+        "label": string;
+        /**
+          * Set to true to disable the footer.
+         */
+        "noFooter": boolean;
+        /**
+          * Set to true to disable the header. This will also remove the default close button, so please ensure you provide an easy, accessible way for users to dismiss the dialog.
+         */
+        "noHeader": boolean;
+        /**
+          * Set to true to show the modal.
+         */
+        "open": boolean;
+    }
     interface SlDropdown {
         /**
           * Closes the dropdown menu
@@ -544,6 +566,12 @@ declare global {
         prototype: HTMLSlCheckboxElement;
         new (): HTMLSlCheckboxElement;
     };
+    interface HTMLSlDialogElement extends Components.SlDialog, HTMLStencilElement {
+    }
+    var HTMLSlDialogElement: {
+        prototype: HTMLSlDialogElement;
+        new (): HTMLSlDialogElement;
+    };
     interface HTMLSlDropdownElement extends Components.SlDropdown, HTMLStencilElement {
     }
     var HTMLSlDropdownElement: {
@@ -644,6 +672,7 @@ declare global {
         "sl-alert": HTMLSlAlertElement;
         "sl-button": HTMLSlButtonElement;
         "sl-checkbox": HTMLSlCheckboxElement;
+        "sl-dialog": HTMLSlDialogElement;
         "sl-dropdown": HTMLSlDropdownElement;
         "sl-dropdown-divider": HTMLSlDropdownDividerElement;
         "sl-dropdown-item": HTMLSlDropdownItemElement;
@@ -752,6 +781,44 @@ declare namespace LocalJSX {
           * The native input's value attribute.
          */
         "value"?: string;
+    }
+    interface SlDialog {
+        /**
+          * When true, clicking on the overlay will close the dialog.
+         */
+        "closeOnClick"?: boolean;
+        /**
+          * The dialog's label as displayed in the header. You should still include a relevant label when using `no-header`, as it is still used under the hood for accessibility purposes.
+         */
+        "label"?: string;
+        /**
+          * Set to true to disable the footer.
+         */
+        "noFooter"?: boolean;
+        /**
+          * Set to true to disable the header. This will also remove the default close button, so please ensure you provide an easy, accessible way for users to dismiss the dialog.
+         */
+        "noHeader"?: boolean;
+        /**
+          * Emitted after the dialog closes and all transitions are complete.
+         */
+        "onSlAfterClose"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted after the dialog opens and all transitions are complete.
+         */
+        "onSlAfterOpen"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the dialog closes.
+         */
+        "onSlClose"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the dialog opens.
+         */
+        "onSlOpen"?: (event: CustomEvent<any>) => void;
+        /**
+          * Set to true to show the modal.
+         */
+        "open"?: boolean;
     }
     interface SlDropdown {
         /**
@@ -1237,6 +1304,7 @@ declare namespace LocalJSX {
         "sl-alert": SlAlert;
         "sl-button": SlButton;
         "sl-checkbox": SlCheckbox;
+        "sl-dialog": SlDialog;
         "sl-dropdown": SlDropdown;
         "sl-dropdown-divider": SlDropdownDivider;
         "sl-dropdown-item": SlDropdownItem;
@@ -1262,6 +1330,7 @@ declare module "@stencil/core" {
             "sl-alert": LocalJSX.SlAlert & JSXBase.HTMLAttributes<HTMLSlAlertElement>;
             "sl-button": LocalJSX.SlButton & JSXBase.HTMLAttributes<HTMLSlButtonElement>;
             "sl-checkbox": LocalJSX.SlCheckbox & JSXBase.HTMLAttributes<HTMLSlCheckboxElement>;
+            "sl-dialog": LocalJSX.SlDialog & JSXBase.HTMLAttributes<HTMLSlDialogElement>;
             "sl-dropdown": LocalJSX.SlDropdown & JSXBase.HTMLAttributes<HTMLSlDropdownElement>;
             "sl-dropdown-divider": LocalJSX.SlDropdownDivider & JSXBase.HTMLAttributes<HTMLSlDropdownDividerElement>;
             "sl-dropdown-item": LocalJSX.SlDropdownItem & JSXBase.HTMLAttributes<HTMLSlDropdownItemElement>;
