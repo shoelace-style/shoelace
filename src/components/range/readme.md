@@ -12,7 +12,9 @@
 <!-- TODO: JS not executing -->
 <sl-range id="range-with-custom-formatter" min="0" max="100" step="1"></sl-range>
 <script>
-document.querySelector('#range-with-custom-formatter').tooltipFormatter = value => `Total - ${value}%`;
+(() => {
+  document.querySelector('#range-with-custom-formatter').tooltipFormatter = value => `Total - ${value}%`;
+})();
 </script>
 
 <br><br>
