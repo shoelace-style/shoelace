@@ -74,6 +74,11 @@ export class Dialog {
       whenNotUsing: () => (this.isUsingKeyboard = false)
     });
     this.keyboardDetector.observe(this.dialog);
+
+    // Show the dialog on init
+    if (this.open) {
+      this.show();
+    }
   }
 
   componentDidUnload() {
