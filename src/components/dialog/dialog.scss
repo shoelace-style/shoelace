@@ -26,12 +26,7 @@
   z-index: var(--sl-z-index-dialog);
 
   &[hidden] {
-    position: absolute;
-    width: 0;
-    height: 0;
-    overflow: hidden;
-    pointer-events: none;
-    opacity: 0;
+    display: none;
   }
 }
 

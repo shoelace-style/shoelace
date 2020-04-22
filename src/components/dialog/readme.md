@@ -75,6 +75,14 @@ Type: `Promise<boolean>`
 | `"footer"` | The dialog's footer, usually one or more buttons representing various actions. |
 
 
+## CSS Custom Properties
+
+| Name             | Description                                                                                              |
+| ---------------- | -------------------------------------------------------------------------------------------------------- |
+| `--body-padding` | The padding to use for the dialog's body. Useful for creating edge-to-edge components inside the dialog. |
+| `--width`        | The preferred width of the dialog. Note that the dialog will shrink to accommodate smaller screens.      |
+
+
 ## Dependencies
 
 ### Depends on
