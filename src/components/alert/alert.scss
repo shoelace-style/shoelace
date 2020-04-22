@@ -95,8 +95,14 @@
     color: var(--sl-color-gray-30);
     padding: 0 var(--sl-spacing-large);
     cursor: pointer;
+    transition: var(--sl-transition-fast) color;
     -webkit-appearance: none;
-    transition: var(--sl-transition-fast) background-color, var(--sl-transition-fast) color;
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: var(--sl-color-primary-50);
+    }
 
     &:focus {
       outline: none;

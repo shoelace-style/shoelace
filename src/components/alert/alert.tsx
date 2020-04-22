@@ -47,8 +47,8 @@ export class Tab {
 
   componentDidLoad() {
     this.keyboardDetector = new KeyboardDetector({
-      whenUsing: () => this.alert.classList.add('sl-alert--using-keyboard'),
-      whenNotUsing: () => this.alert.classList.remove('sl-alert--using-keyboard')
+      whenUsing: () => (this.isUsingKeyboard = true),
+      whenNotUsing: () => (this.isUsingKeyboard = false)
     });
     this.keyboardDetector.observe(this.alert);
   }
