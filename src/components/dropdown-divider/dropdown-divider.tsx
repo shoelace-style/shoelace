@@ -7,6 +7,6 @@ import { Component, h } from '@stencil/core';
 })
 export class DropdownDivider {
   render() {
-    return <div class="sl-dropdown-divider" />;
+    return <div class="sl-dropdown-divider" role="separator" />;
   }
 }
