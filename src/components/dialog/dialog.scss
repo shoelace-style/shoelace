@@ -2,11 +2,8 @@
 
 :host {
   /**
-   * @prop --body-padding: The padding to use for the dialog's body. Useful for creating edge-to-edge components inside
-   *   the dialog.
    * @prop --width: The preferred width of the dialog. Note that the dialog will shrink to accommodate smaller screens.
    */
-  --body-padding: var(--sl-spacing-large);
   --width: 31rem;
 
   position: absolute;
@@ -98,7 +95,7 @@
 }
 
 .sl-dialog__body {
-  padding: var(--body-padding);
+  padding: var(--sl-spacing-large);
   overflow: auto;
   -webkit-overflow-scrolling: touch;
 }

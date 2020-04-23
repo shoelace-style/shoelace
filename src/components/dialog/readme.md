@@ -36,19 +36,19 @@
 
 ## Events
 
-| Event         | Description                                                                                              | Type               |
-| ------------- | -------------------------------------------------------------------------------------------------------- | ------------------ |
-| `slAfterHide` | Emitted after the dialog closes and all transitions are complete.                                        | `CustomEvent<any>` |
-| `slAfterShow` | Emitted after the dialog opens and all transitions are complete.                                         | `CustomEvent<any>` |
-| `slHide`      | Emitted when the dialog menu closes. Calling `event.preventDefault()` will prevent it from being closed. | `CustomEvent<any>` |
-| `slShow`      | Emitted when the dialog menu opens. Calling `event.preventDefault()` will prevent it from being opened.  | `CustomEvent<any>` |
+| Event         | Description                                                                                         | Type               |
+| ------------- | --------------------------------------------------------------------------------------------------- | ------------------ |
+| `slAfterHide` | Emitted after the dialog closes and all transitions are complete.                                   | `CustomEvent<any>` |
+| `slAfterShow` | Emitted after the dialog opens and all transitions are complete.                                    | `CustomEvent<any>` |
+| `slHide`      | Emitted when the dialog closes. Calling `event.preventDefault()` will prevent it from being closed. | `CustomEvent<any>` |
+| `slShow`      | Emitted when the dialog opens. Calling `event.preventDefault()` will prevent it from being opened.  | `CustomEvent<any>` |
 
 
 ## Methods
 
 ### `hide() => Promise<boolean>`
 
-Closes the dialog
+Hides the dialog
 
 #### Returns
 
@@ -58,7 +58,7 @@ Type: `Promise<boolean>`
 
 ### `show() => Promise<boolean>`
 
-Opens the dialog
+Shows the dialog
 
 #### Returns
 
@@ -77,10 +77,9 @@ Type: `Promise<boolean>`
 
 ## CSS Custom Properties
 
-| Name             | Description                                                                                              |
-| ---------------- | -------------------------------------------------------------------------------------------------------- |
-| `--body-padding` | The padding to use for the dialog's body. Useful for creating edge-to-edge components inside the dialog. |
-| `--width`        | The preferred width of the dialog. Note that the dialog will shrink to accommodate smaller screens.      |
+| Name      | Description                                                                                         |
+| --------- | --------------------------------------------------------------------------------------------------- |
+| `--width` | The preferred width of the dialog. Note that the dialog will shrink to accommodate smaller screens. |
 
 
 ## Dependencies
