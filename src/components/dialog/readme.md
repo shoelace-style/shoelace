@@ -72,14 +72,7 @@ Type: `Promise<boolean>`
 | Slot       | Description                                                                    |
 | ---------- | ------------------------------------------------------------------------------ |
 |            | The dialog's content.                                                          |
-| `"footer"` | The dialog's footer, usually one or more buttons representing various actions. |
-
-
-## CSS Custom Properties
-
-| Name      | Description                                                                                         |
-| --------- | --------------------------------------------------------------------------------------------------- |
-| `--width` | The preferred width of the dialog. Note that the dialog will shrink to accommodate smaller screens. |
+| `"footer"` | The dialog's footer, usually one or more buttons representing various options. |
 
 
 ## Dependencies

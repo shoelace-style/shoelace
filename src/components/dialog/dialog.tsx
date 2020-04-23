@@ -5,7 +5,7 @@ let id = 0;
 
 /**
  * @slot - The dialog's content.
- * @slot footer - The dialog's footer, usually one or more buttons representing various actions.
+ * @slot footer - The dialog's footer, usually one or more buttons representing various options.
  */
 @Component({
   tag: 'sl-dialog',
