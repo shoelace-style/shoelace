@@ -73,19 +73,19 @@
 
 ## Events
 
-| Event         | Description                                                                                                | Type               |
-| ------------- | ---------------------------------------------------------------------------------------------------------- | ------------------ |
-| `slAfterHide` | Emitted after the dropdown menu closes and all transitions are complete.                                   | `CustomEvent<any>` |
-| `slAfterShow` | Emitted after the dropdown menu opens and all transitions are complete.                                    | `CustomEvent<any>` |
-| `slHide`      | Emitted when the dropdown menu closes. Calling `event.preventDefault()` will prevent it from being closed. | `CustomEvent<any>` |
-| `slShow`      | Emitted when the dropdown menu opens. Calling `event.preventDefault()` will prevent it from being opened.  | `CustomEvent<any>` |
+| Event         | Description                                                                                           | Type               |
+| ------------- | ----------------------------------------------------------------------------------------------------- | ------------------ |
+| `slAfterHide` | Emitted after the dropdown closes and all transitions are complete.                                   | `CustomEvent<any>` |
+| `slAfterShow` | Emitted after the dropdown opens and all transitions are complete.                                    | `CustomEvent<any>` |
+| `slHide`      | Emitted when the dropdown closes. Calling `event.preventDefault()` will prevent it from being closed. | `CustomEvent<any>` |
+| `slShow`      | Emitted when the dropdown opens. Calling `event.preventDefault()` will prevent it from being opened.  | `CustomEvent<any>` |
 
 
 ## Methods
 
 ### `hide() => Promise<boolean>`
 
-Closes the dropdown menu
+Hides the dropdown menu
 
 #### Returns
 
@@ -95,7 +95,7 @@ Type: `Promise<boolean>`
 
 ### `show() => Promise<boolean>`
 
-Opens the dropdown menu
+Shows the dropdown menu
 
 #### Returns
 
