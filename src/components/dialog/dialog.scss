@@ -9,6 +9,10 @@
   position: absolute;
   width: 0;
   height: 0;
+
+  &[hidden] {
+    display: none;
+  }
 }
 
 .sl-dialog {
@@ -21,10 +25,6 @@
   bottom: 0;
   left: 0;
   z-index: var(--sl-z-index-dialog);
-
-  &[hidden] {
-    display: none;
-  }
 }
 
 .sl-dialog__box {
