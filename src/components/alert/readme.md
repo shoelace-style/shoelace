@@ -7,7 +7,7 @@
 
 <sl-alert type="primary" open closable>
   <sl-icon slot="icon" name="info"></sl-icon>
-  A bit fancier because now it has an icon. I'm also closable.
+  A bit fancier because now it has an icon and is closable.
 </sl-alert>
 ```
 
