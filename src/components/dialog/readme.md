@@ -75,6 +75,13 @@ Type: `Promise<boolean>`
 | `"footer"` | The dialog's footer, usually one or more buttons representing various options. |
 
 
+## CSS Custom Properties
+
+| Name      | Description                                                                                         |
+| --------- | --------------------------------------------------------------------------------------------------- |
+| `--width` | The preferred width of the dialog. Note that the dialog will shrink to accommodate smaller screens. |
+
+
 ## Dependencies
 
 ### Depends on
