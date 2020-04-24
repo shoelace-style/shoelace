@@ -1,14 +1,6 @@
 # Alert
 
 ```html preview
-<sl-alert type="primary" open closable>
-  <sl-icon slot="icon" name="info" style="font-size: 20px;"></sl-icon>
-  <strong>Your changes have been saved</strong><br>
-  You can continue working or safely leave the app now.
-</sl-alert><br>
-```
-
-```html preview
 <sl-alert type="primary" open>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
