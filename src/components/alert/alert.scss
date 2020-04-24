@@ -1,6 +1,11 @@
 @import 'component';
 
 :host {
+  /**
+   * @prop --box-shadow: The box shadow to render the alert with.
+   */
+  --box-shadow: none;
+
   display: block;
 
   &[hidden] {
@@ -13,16 +18,14 @@
   display: flex;
   align-items: stretch;
   background-color: var(--sl-color-white);
-  border-left: solid 4px;
-  border-radius: 0;
-  border-top-right-radius: var(--sl-border-radius-medium);
-  border-bottom-right-radius: var(--sl-border-radius-medium);
+  border: solid 1px var(--sl-color-gray-90);
+  border-radius: var(--sl-border-radius-medium);
   font-family: var(--sl-font-sans);
-  font-size: 14px;
+  font-size: var(--sl-font-size-small);
   font-weight: var(--sl-font-weight-normal);
   line-height: 1.6;
   color: var(--sl-color-gray-30);
-  box-shadow: var(--sl-shadow-large);
+  box-shadow: var(--box-shadow);
   opacity: 0;
   transition: var(--sl-transition-medium);
 }
@@ -31,51 +34,12 @@
   opacity: 1;
 }
 
-.sl-alert--primary {
-  border-left-color: var(--sl-color-primary-50);
-
-  .sl-alert__icon ::slotted(*) {
-    color: var(--sl-color-primary-50);
-  }
-}
-
-.sl-alert--success {
-  border-left-color: var(--sl-color-success-50);
-
-  .sl-alert__icon ::slotted(*) {
-    color: var(--sl-color-success-50);
-  }
-}
-
-.sl-alert--info {
-  border-left-color: var(--sl-color-info-50);
-
-  .sl-alert__icon ::slotted(*) {
-    color: var(--sl-color-info-50);
-  }
-}
-
-.sl-alert--warning {
-  border-left-color: var(--sl-color-warning-50);
-
-  .sl-alert__icon ::slotted(*) {
-    color: var(--sl-color-warning-50);
-  }
-}
-
-.sl-alert--danger {
-  border-left-color: var(--sl-color-danger-50);
-
-  .sl-alert__icon ::slotted(*) {
-    color: var(--sl-color-danger-50);
-  }
-}
-
 .sl-alert__icon {
   flex: 0 0 auto;
   display: flex;
   align-items: center;
   font-size: var(--sl-font-size-large);
+  color: var(--sl-color-primary-50);
 
   ::slotted(*) {
     margin-left: var(--sl-spacing-large);

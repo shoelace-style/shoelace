@@ -2,81 +2,42 @@
 
 ```html preview
 <sl-alert type="primary" open>
-  <strong>Your changes have been saved</strong><br>
-  You can continue working or safely leave the app now.
-</sl-alert><br>
-<sl-alert type="success" open>
-  <strong>Your changes have been saved</strong><br>
-  You can continue working or safely leave the app now.
-</sl-alert><br>
-<sl-alert type="info" open>
-  <strong>Your changes have been saved</strong><br>
-  You can continue working or safely leave the app now.
-</sl-alert><br>
-<sl-alert type="warning" open>
-  <strong>Your changes have been saved</strong><br>
-  You can continue working or safely leave the app now.
-</sl-alert><br>
-<sl-alert type="danger" open>
-  <strong>Your changes have been saved</strong><br>
-  You can continue working or safely leave the app now.
-</sl-alert>
-```
-
-```html preview
-<sl-alert type="primary" open>
-  <sl-icon slot="icon" name="info" style="font-size: 20px;"></sl-icon>
-  <strong>Your changes have been saved</strong><br>
-  You can continue working or safely leave the app now.
+  Nothing fancy here, just a simple and functional alert.
 </sl-alert><br>
 
-<sl-alert type="success" open>
-  <sl-icon slot="icon" name="check-circle" style="font-size: 20px;"></sl-icon>
-  <strong>Your changes have been saved</strong><br>
-  You can continue working or safely leave the app now.
-</sl-alert><br>
-
-<sl-alert type="info" open>
-  <sl-icon slot="icon" name="settings" style="font-size: 20px;"></sl-icon>
-  <strong>Your changes have been saved</strong><br>
-  You can continue working or safely leave the app now.
-</sl-alert><br>
-
-<sl-alert type="warning" open>
-  <sl-icon slot="icon" name="alert-triangle" style="font-size: 20px;"></sl-icon>
-  <strong>Your changes have been saved</strong><br>
-  You can continue working or safely leave the app now.
-</sl-alert><br>
-
-<sl-alert type="danger" open>
-  <sl-icon slot="icon" name="alert-octagon" style="font-size: 20px;"></sl-icon>
-  <strong>Your changes have been saved</strong><br>
-  You can continue working or safely leave the app now.
+<sl-alert type="primary" open closable>
+  <sl-icon slot="icon" name="info"></sl-icon>
+  A bit fancier because now it has an icon. I'm also closable.
 </sl-alert>
 ```
 
 ```html preview
 <sl-alert type="primary" open closable>
+  <sl-icon slot="icon" name="info" style="color: var(--sl-color-primary-50);"></sl-icon>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
 </sl-alert><br>
 
 <sl-alert type="success" open closable>
+  <sl-icon slot="icon" name="check-circle" style="color: var(--sl-color-success-50);"></sl-icon>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
 </sl-alert><br>
 
 <sl-alert type="info" open closable>
+  <sl-icon slot="icon" name="settings" style="color: var(--sl-color-info-50);"></sl-icon>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
 </sl-alert><br>
 
 <sl-alert type="warning" open closable>
+  <sl-icon slot="icon" name="alert-triangle" style="color: var(--sl-color-warning-50);"></sl-icon>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
 </sl-alert><br>
 
 <sl-alert type="danger" open closable>
+  <sl-icon slot="icon" name="alert-octagon" style="color: var(--sl-color-danger-50);"></sl-icon>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
 </sl-alert>
@@ -87,11 +48,10 @@
 
 ## Properties
 
-| Property   | Attribute  | Description                                 | Type      | Default     |
-| ---------- | ---------- | ------------------------------------------- | --------- | ----------- |
-| `closable` | `closable` | Set to true to make the alert closable.     | `boolean` | `false`     |
-| `open`     | `open`     | Indicates whether or not the alert is open. | `boolean` | `false`     |
-| `type`     | `type`     | The type of alert to draw.                  | `string`  | `'primary'` |
+| Property   | Attribute  | Description                                 | Type      | Default |
+| ---------- | ---------- | ------------------------------------------- | --------- | ------- |
+| `closable` | `closable` | Set to true to make the alert closable.     | `boolean` | `false` |
+| `open`     | `open`     | Indicates whether or not the alert is open. | `boolean` | `false` |
 
 
 ## Events
@@ -134,6 +94,13 @@ Type: `Promise<boolean>`
 |                | The alert's content.                              |
 | `"close-icon"` | An icon to use in lieu of the default close icon. |
 | `"icon"`       | An icon to show in the alert.                     |
+
+
+## CSS Custom Properties
+
+| Name           | Description                              |
+| -------------- | ---------------------------------------- |
+| `--box-shadow` | The box shadow to render the alert with. |
 
 
 ## Dependencies

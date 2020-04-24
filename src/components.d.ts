@@ -23,10 +23,6 @@ export namespace Components {
           * Hides the alert.
          */
         "show": () => Promise<boolean>;
-        /**
-          * The type of alert to draw.
-         */
-        "type": string;
     }
     interface SlButton {
         /**
@@ -737,10 +733,6 @@ declare namespace LocalJSX {
           * Indicates whether or not the alert is open.
          */
         "open"?: boolean;
-        /**
-          * The type of alert to draw.
-         */
-        "type"?: string;
     }
     interface SlButton {
         /**
