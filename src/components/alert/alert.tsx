@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, Prop, State, Watch, h } from '@stencil/core';
+import { Component, Prop, State, h } from '@stencil/core';
 import { KeyboardDetector } from '../../utilities/keyboard-detector';
 
 /**
@@ -16,12 +16,10 @@ export class Tab {
   alert: HTMLElement;
   keyboardDetector: KeyboardDetector;
 
-  constructor() {
-    this.handleCloseClick = this.handleCloseClick.bind(this);
-    this.handleTransitionEnd = this.handleTransitionEnd.bind(this);
-  }
-
   @State() isUsingKeyboard = false;
+
+  /** Indicates whether or not the alert is open. */
+  @Prop({ mutable: true, reflect: true }) open = false;
 
   /** The type of alert to draw. */
   @Prop() type = 'primary';
@@ -29,43 +27,22 @@ export class Tab {
   /** Set to true to make the alert closable. */
   @Prop() closable = false;
 
-  /** Set to true to close the alert. */
-  @Prop({ mutable: true }) closed = false;
-
-  /** Emitted when the alert is closed. */
-  @Event() slClose: EventEmitter;
-
-  @Watch('closed')
-  handleClosedChange() {
-    // Remove the hidden attribute so the transition can run
-    this.alert.removeAttribute('hidden');
-
-    if (this.closed) {
-      this.slClose.emit();
-    }
-  }
-
   componentDidLoad() {
     this.keyboardDetector = new KeyboardDetector({
       whenUsing: () => (this.isUsingKeyboard = true),
       whenNotUsing: () => (this.isUsingKeyboard = false)
     });
+
     this.keyboardDetector.observe(this.alert);
+
+    // Show the alert on init
+    if (this.open) {
+      // TODO:
+    }
   }
 
   componentDidUnload() {
     this.keyboardDetector.unobserve(this.alert);
-  }
-
-  handleCloseClick() {
-    this.closed = true;
-  }
-
-  handleTransitionEnd() {
-    // Hide the alert when the transition ends
-    if (this.closed) {
-      this.alert.setAttribute('hidden', 'true');
-    }
   }
 
   render() {
@@ -74,8 +51,8 @@ export class Tab {
         ref={el => (this.alert = el)}
         class={{
           'sl-alert': true,
+          'sl-alert--open': this.open,
           'sl-alert--closable': this.closable,
-          'sl-alert--closed': this.closed,
           'sl-alert--using-keyboard': this.isUsingKeyboard,
 
           // States
@@ -86,19 +63,18 @@ export class Tab {
           'sl-alert--danger': this.type === 'danger'
         }}
         role="alert"
-        aria-hidden={this.closed}
-        onTransitionEnd={this.handleTransitionEnd}
+        aria-hidden={!this.open}
       >
         <span class="sl-alert__icon">
           <slot name="icon" />
         </span>
 
-        <span class="sl-alert__body">
+        <span class="sl-alert__message">
           <slot />
         </span>
 
         {this.closable && (
-          <button type="button" class="sl-alert__close" onClick={this.handleCloseClick}>
+          <button type="button" class="sl-alert__close">
             <slot name="close-icon">
               <sl-icon name="x" />
             </slot>

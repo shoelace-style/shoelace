@@ -16,16 +16,7 @@
   font-weight: var(--sl-font-weight-normal);
   line-height: 1.6;
   color: var(--sl-color-gray-30);
-  transition: 0.2s opacity;
   box-shadow: var(--sl-shadow-large);
-
-  &.sl-alert--closed {
-    opacity: 0;
-  }
-
-  &[hidden] {
-    display: none;
-  }
 
   &.sl-alert--primary {
     border-left-color: var(--sl-color-primary-50);
@@ -78,9 +69,10 @@
     }
   }
 
-  .sl-alert__body {
+  .sl-alert__message {
     flex: 1 1 auto;
     padding: var(--sl-spacing-large);
+    overflow: hidden;
   }
 
   .sl-alert__close {

@@ -12,9 +12,9 @@ export namespace Components {
          */
         "closable": boolean;
         /**
-          * Set to true to close the alert.
+          * Indicates whether or not the alert is open.
          */
-        "closed": boolean;
+        "open": boolean;
         /**
           * The type of alert to draw.
          */
@@ -94,7 +94,7 @@ export namespace Components {
          */
         "closeOnClick": boolean;
         /**
-          * Closes the dialog
+          * Hides the dialog
          */
         "hide": () => Promise<boolean>;
         /**
@@ -114,13 +114,13 @@ export namespace Components {
          */
         "open": boolean;
         /**
-          * Opens the dialog
+          * Shows the dialog
          */
         "show": () => Promise<boolean>;
     }
     interface SlDropdown {
         /**
-          * Closes the dropdown menu
+          * Hides the dropdown menu
          */
         "hide": () => Promise<boolean>;
         /**
@@ -132,7 +132,7 @@ export namespace Components {
          */
         "placement": "top" | "top-start" | "top-end" | "bottom" | "bottom-start" | "bottom-end" | "right" | "right-start" | "right-end" | "left" | "left-start" | "left-end";
         /**
-          * Opens the dropdown menu
+          * Shows the dropdown menu
          */
         "show": () => Promise<boolean>;
     }
@@ -710,13 +710,9 @@ declare namespace LocalJSX {
          */
         "closable"?: boolean;
         /**
-          * Set to true to close the alert.
+          * Indicates whether or not the alert is open.
          */
-        "closed"?: boolean;
-        /**
-          * Emitted when the alert is closed.
-         */
-        "onSlClose"?: (event: CustomEvent<any>) => void;
+        "open"?: boolean;
         /**
           * The type of alert to draw.
          */
@@ -820,11 +816,11 @@ declare namespace LocalJSX {
          */
         "onSlAfterShow"?: (event: CustomEvent<any>) => void;
         /**
-          * Emitted when the dialog menu closes. Calling `event.preventDefault()` will prevent it from being closed.
+          * Emitted when the dialog closes. Calling `event.preventDefault()` will prevent it from being closed.
          */
         "onSlHide"?: (event: CustomEvent<any>) => void;
         /**
-          * Emitted when the dialog menu opens. Calling `event.preventDefault()` will prevent it from being opened.
+          * Emitted when the dialog opens. Calling `event.preventDefault()` will prevent it from being opened.
          */
         "onSlShow"?: (event: CustomEvent<any>) => void;
         /**
@@ -834,19 +830,19 @@ declare namespace LocalJSX {
     }
     interface SlDropdown {
         /**
-          * Emitted after the dropdown menu closes and all transitions are complete.
+          * Emitted after the dropdown closes and all transitions are complete.
          */
         "onSlAfterHide"?: (event: CustomEvent<any>) => void;
         /**
-          * Emitted after the dropdown menu opens and all transitions are complete.
+          * Emitted after the dropdown opens and all transitions are complete.
          */
         "onSlAfterShow"?: (event: CustomEvent<any>) => void;
         /**
-          * Emitted when the dropdown menu closes. Calling `event.preventDefault()` will prevent it from being closed.
+          * Emitted when the dropdown closes. Calling `event.preventDefault()` will prevent it from being closed.
          */
         "onSlHide"?: (event: CustomEvent<any>) => void;
         /**
-          * Emitted when the dropdown menu opens. Calling `event.preventDefault()` will prevent it from being opened.
+          * Emitted when the dropdown opens. Calling `event.preventDefault()` will prevent it from being opened.
          */
         "onSlShow"?: (event: CustomEvent<any>) => void;
         /**

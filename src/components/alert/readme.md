@@ -1,54 +1,54 @@
 # Alert
 
 ```html preview
-<sl-alert type="primary">
+<sl-alert type="primary" open>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
 </sl-alert><br>
-<sl-alert type="success">
+<sl-alert type="success" open>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
 </sl-alert><br>
-<sl-alert type="info">
+<sl-alert type="info" open>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
 </sl-alert><br>
-<sl-alert type="warning">
+<sl-alert type="warning" open>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
 </sl-alert><br>
-<sl-alert type="danger">
+<sl-alert type="danger" open>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
 </sl-alert>
 ```
 
 ```html preview
-<sl-alert type="primary">
+<sl-alert type="primary" open>
   <sl-icon slot="icon" name="info" style="font-size: 20px;"></sl-icon>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
 </sl-alert><br>
 
-<sl-alert type="success">
+<sl-alert type="success" open>
   <sl-icon slot="icon" name="check-circle" style="font-size: 20px;"></sl-icon>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
 </sl-alert><br>
 
-<sl-alert type="info">
+<sl-alert type="info" open>
   <sl-icon slot="icon" name="settings" style="font-size: 20px;"></sl-icon>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
 </sl-alert><br>
 
-<sl-alert type="warning">
+<sl-alert type="warning" open>
   <sl-icon slot="icon" name="alert-triangle" style="font-size: 20px;"></sl-icon>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
 </sl-alert><br>
 
-<sl-alert type="danger">
+<sl-alert type="danger" open>
   <sl-icon slot="icon" name="alert-octagon" style="font-size: 20px;"></sl-icon>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
@@ -56,27 +56,27 @@
 ```
 
 ```html preview
-<sl-alert type="primary" closable>
+<sl-alert type="primary" open closable>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
 </sl-alert><br>
 
-<sl-alert type="success" closable>
+<sl-alert type="success" open closable>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
 </sl-alert><br>
 
-<sl-alert type="info" closable>
+<sl-alert type="info" open closable>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
 </sl-alert><br>
 
-<sl-alert type="warning" closable>
+<sl-alert type="warning" open closable>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
 </sl-alert><br>
 
-<sl-alert type="danger" closable>
+<sl-alert type="danger" open closable>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
 </sl-alert>
@@ -87,18 +87,11 @@
 
 ## Properties
 
-| Property   | Attribute  | Description                             | Type      | Default     |
-| ---------- | ---------- | --------------------------------------- | --------- | ----------- |
-| `closable` | `closable` | Set to true to make the alert closable. | `boolean` | `false`     |
-| `closed`   | `closed`   | Set to true to close the alert.         | `boolean` | `false`     |
-| `type`     | `type`     | The type of alert to draw.              | `string`  | `'primary'` |
-
-
-## Events
-
-| Event     | Description                       | Type               |
-| --------- | --------------------------------- | ------------------ |
-| `slClose` | Emitted when the alert is closed. | `CustomEvent<any>` |
+| Property   | Attribute  | Description                                 | Type      | Default     |
+| ---------- | ---------- | ------------------------------------------- | --------- | ----------- |
+| `closable` | `closable` | Set to true to make the alert closable.     | `boolean` | `false`     |
+| `open`     | `open`     | Indicates whether or not the alert is open. | `boolean` | `false`     |
+| `type`     | `type`     | The type of alert to draw.                  | `string`  | `'primary'` |
 
 
 ## Slots
