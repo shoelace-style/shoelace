@@ -15,6 +15,8 @@
   background-color: var(--sl-color-white);
   border-left: solid 4px;
   border-radius: 0;
+  border-top-right-radius: var(--sl-border-radius-medium);
+  border-bottom-right-radius: var(--sl-border-radius-medium);
   font-family: var(--sl-font-sans);
   font-size: 14px;
   font-weight: var(--sl-font-weight-normal);
@@ -95,7 +97,7 @@
   font-family: inherit;
   font-size: var(--sl-font-size-large);
   font-weight: inherit;
-  color: var(--sl-color-gray-30);
+  color: var(--sl-color-gray-50);
   padding: 0 var(--sl-spacing-large);
   cursor: pointer;
   transition: var(--sl-transition-fast) color;
