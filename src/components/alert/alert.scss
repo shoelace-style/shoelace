@@ -2,6 +2,10 @@
 
 :host {
   display: block;
+
+  &[hidden] {
+    display: none;
+  }
 }
 
 .sl-alert {
@@ -17,92 +21,98 @@
   line-height: 1.6;
   color: var(--sl-color-gray-30);
   box-shadow: var(--sl-shadow-large);
+  opacity: 0;
+  transition: var(--sl-transition-medium);
+}
 
-  &.sl-alert--primary {
-    border-left-color: var(--sl-color-primary-50);
+.sl-alert--open {
+  opacity: 1;
+}
 
-    .sl-alert__icon ::slotted(*) {
-      color: var(--sl-color-primary-50);
-    }
+.sl-alert--primary {
+  border-left-color: var(--sl-color-primary-50);
+
+  .sl-alert__icon ::slotted(*) {
+    color: var(--sl-color-primary-50);
+  }
+}
+
+.sl-alert--success {
+  border-left-color: var(--sl-color-success-50);
+
+  .sl-alert__icon ::slotted(*) {
+    color: var(--sl-color-success-50);
+  }
+}
+
+.sl-alert--info {
+  border-left-color: var(--sl-color-info-50);
+
+  .sl-alert__icon ::slotted(*) {
+    color: var(--sl-color-info-50);
+  }
+}
+
+.sl-alert--warning {
+  border-left-color: var(--sl-color-warning-50);
+
+  .sl-alert__icon ::slotted(*) {
+    color: var(--sl-color-warning-50);
+  }
+}
+
+.sl-alert--danger {
+  border-left-color: var(--sl-color-danger-50);
+
+  .sl-alert__icon ::slotted(*) {
+    color: var(--sl-color-danger-50);
+  }
+}
+
+.sl-alert__icon {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  font-size: var(--sl-font-size-large);
+
+  ::slotted(*) {
+    margin-left: var(--sl-spacing-large);
+  }
+}
+
+.sl-alert__message {
+  flex: 1 1 auto;
+  padding: var(--sl-spacing-large);
+  overflow: hidden;
+}
+
+.sl-alert__close {
+  flex: 0 0 auto;
+  display: flex;
+  background: none;
+  border: none;
+  border-radius: var(--sl-border-radius-small);
+  font-family: inherit;
+  font-size: var(--sl-font-size-large);
+  font-weight: inherit;
+  color: var(--sl-color-gray-30);
+  padding: 0 var(--sl-spacing-large);
+  cursor: pointer;
+  transition: var(--sl-transition-fast) color;
+  -webkit-appearance: none;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: var(--sl-color-primary-50);
   }
 
-  &.sl-alert--success {
-    border-left-color: var(--sl-color-success-50);
-
-    .sl-alert__icon ::slotted(*) {
-      color: var(--sl-color-success-50);
-    }
+  &:focus {
+    outline: none;
   }
+}
 
-  &.sl-alert--info {
-    border-left-color: var(--sl-color-info-50);
-
-    .sl-alert__icon ::slotted(*) {
-      color: var(--sl-color-info-50);
-    }
-  }
-
-  &.sl-alert--warning {
-    border-left-color: var(--sl-color-warning-50);
-
-    .sl-alert__icon ::slotted(*) {
-      color: var(--sl-color-warning-50);
-    }
-  }
-
-  &.sl-alert--danger {
-    border-left-color: var(--sl-color-danger-50);
-
-    .sl-alert__icon ::slotted(*) {
-      color: var(--sl-color-danger-50);
-    }
-  }
-
-  .sl-alert__icon {
-    flex: 0 0 auto;
-    display: flex;
-    align-items: center;
-    font-size: var(--sl-font-size-large);
-
-    ::slotted(*) {
-      margin-left: var(--sl-spacing-large);
-    }
-  }
-
-  .sl-alert__message {
-    flex: 1 1 auto;
-    padding: var(--sl-spacing-large);
-    overflow: hidden;
-  }
-
-  .sl-alert__close {
-    flex: 0 0 auto;
-    display: flex;
-    background: none;
-    border: none;
-    border-radius: var(--sl-border-radius-small);
-    font-family: inherit;
-    font-size: var(--sl-font-size-large);
-    font-weight: inherit;
-    color: var(--sl-color-gray-30);
-    padding: 0 var(--sl-spacing-large);
-    cursor: pointer;
-    transition: var(--sl-transition-fast) color;
-    -webkit-appearance: none;
-
-    &:hover,
-    &:focus,
-    &:active {
-      color: var(--sl-color-primary-50);
-    }
-
-    &:focus {
-      outline: none;
-    }
-  }
-
-  &.sl-alert--using-keyboard .sl-alert__close:focus {
-    box-shadow: 0 0 0 var(--sl-focus-ring-width)
-      hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha));
-  }
+.sl-alert--using-keyboard .sl-alert__close:focus {
+  box-shadow: 0 0 0 var(--sl-focus-ring-width)
+    hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha));
 }

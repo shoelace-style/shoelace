@@ -12,9 +12,17 @@ export namespace Components {
          */
         "closable": boolean;
         /**
+          * Hides the alert
+         */
+        "hide": () => Promise<boolean>;
+        /**
           * Indicates whether or not the alert is open.
          */
         "open": boolean;
+        /**
+          * Hides the alert.
+         */
+        "show": () => Promise<boolean>;
         /**
           * The type of alert to draw.
          */
@@ -709,6 +717,22 @@ declare namespace LocalJSX {
           * Set to true to make the alert closable.
          */
         "closable"?: boolean;
+        /**
+          * Emitted after the alert closes and all transitions are complete.
+         */
+        "onSlAfterHide"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted after the alert opens and all transitions are complete.
+         */
+        "onSlAfterShow"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the alert closes. Calling `event.preventDefault()` will prevent it from being closed.
+         */
+        "onSlHide"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the alert opens. Calling `event.preventDefault()` will prevent it from being opened.
+         */
+        "onSlShow"?: (event: CustomEvent<any>) => void;
         /**
           * Indicates whether or not the alert is open.
          */

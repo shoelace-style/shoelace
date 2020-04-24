@@ -1,5 +1,6 @@
-import { Component, Prop, State, h } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, Host, Method, Prop, State, Watch, h } from '@stencil/core';
 import { KeyboardDetector } from '../../utilities/keyboard-detector';
+import { showWithReflow } from '../../utilities/reflow';
 
 /**
  * @slot - The alert's content.
@@ -16,6 +17,13 @@ export class Tab {
   alert: HTMLElement;
   keyboardDetector: KeyboardDetector;
 
+  constructor() {
+    this.handleCloseClick = this.handleCloseClick.bind(this);
+    this.handleTransitionEnd = this.handleTransitionEnd.bind(this);
+  }
+
+  @Element() host: HTMLSlAlertElement;
+
   @State() isUsingKeyboard = false;
 
   /** Indicates whether or not the alert is open. */
@@ -27,6 +35,23 @@ export class Tab {
   /** Set to true to make the alert closable. */
   @Prop() closable = false;
 
+  @Watch('open')
+  handleOpenChange() {
+    this.open ? this.show() : this.hide();
+  }
+
+  /** Emitted when the alert opens. Calling `event.preventDefault()` will prevent it from being opened. */
+  @Event() slShow: EventEmitter;
+
+  /** Emitted after the alert opens and all transitions are complete. */
+  @Event() slAfterShow: EventEmitter;
+
+  /** Emitted when the alert closes. Calling `event.preventDefault()` will prevent it from being closed. */
+  @Event() slHide: EventEmitter;
+
+  /** Emitted after the alert closes and all transitions are complete. */
+  @Event() slAfterHide: EventEmitter;
+
   componentDidLoad() {
     this.keyboardDetector = new KeyboardDetector({
       whenUsing: () => (this.isUsingKeyboard = true),
@@ -35,9 +60,9 @@ export class Tab {
 
     this.keyboardDetector.observe(this.alert);
 
-    // Show the alert on init
+    // Show on init if open
     if (this.open) {
-      // TODO:
+      this.show();
     }
   }
 
@@ -45,42 +70,84 @@ export class Tab {
     this.keyboardDetector.unobserve(this.alert);
   }
 
+  /** Hides the alert. */
+  @Method()
+  async show() {
+    const slShow = this.slShow.emit();
+
+    if (slShow.defaultPrevented) {
+      return false;
+    }
+
+    showWithReflow(this.host);
+    this.open = true;
+  }
+
+  /** Hides the alert */
+  @Method()
+  async hide() {
+    const slHide = this.slHide.emit();
+
+    if (slHide.defaultPrevented) {
+      return false;
+    }
+
+    this.open = false;
+  }
+
+  handleCloseClick() {
+    this.open = false;
+  }
+
+  handleTransitionEnd(event: TransitionEvent) {
+    const target = event.target as HTMLElement;
+
+    // Ensure we only handle one transition event on the target element
+    if (event.propertyName === 'opacity' && target.classList.contains('sl-alert')) {
+      this.host.hidden = !this.open;
+      this.open ? this.slAfterShow.emit() : this.slAfterHide.emit();
+    }
+  }
+
   render() {
     return (
-      <div
-        ref={el => (this.alert = el)}
-        class={{
-          'sl-alert': true,
-          'sl-alert--open': this.open,
-          'sl-alert--closable': this.closable,
-          'sl-alert--using-keyboard': this.isUsingKeyboard,
+      <Host hidden>
+        <div
+          ref={el => (this.alert = el)}
+          class={{
+            'sl-alert': true,
+            'sl-alert--open': this.open,
+            'sl-alert--closable': this.closable,
+            'sl-alert--using-keyboard': this.isUsingKeyboard,
 
-          // States
-          'sl-alert--primary': this.type === 'primary',
-          'sl-alert--success': this.type === 'success',
-          'sl-alert--info': this.type === 'info',
-          'sl-alert--warning': this.type === 'warning',
-          'sl-alert--danger': this.type === 'danger'
-        }}
-        role="alert"
-        aria-hidden={!this.open}
-      >
-        <span class="sl-alert__icon">
-          <slot name="icon" />
-        </span>
+            // States
+            'sl-alert--primary': this.type === 'primary',
+            'sl-alert--success': this.type === 'success',
+            'sl-alert--info': this.type === 'info',
+            'sl-alert--warning': this.type === 'warning',
+            'sl-alert--danger': this.type === 'danger'
+          }}
+          role="alert"
+          aria-hidden={!this.open}
+          onTransitionEnd={this.handleTransitionEnd}
+        >
+          <span class="sl-alert__icon">
+            <slot name="icon" />
+          </span>
 
-        <span class="sl-alert__message">
-          <slot />
-        </span>
+          <span class="sl-alert__message">
+            <slot />
+          </span>
 
-        {this.closable && (
-          <button type="button" class="sl-alert__close">
-            <slot name="close-icon">
-              <sl-icon name="x" />
-            </slot>
-          </button>
-        )}
-      </div>
+          {this.closable && (
+            <button type="button" class="sl-alert__close" onClick={this.handleCloseClick}>
+              <slot name="close-icon">
+                <sl-icon name="x" />
+              </slot>
+            </button>
+          )}
+        </div>
+      </Host>
     );
   }
 }

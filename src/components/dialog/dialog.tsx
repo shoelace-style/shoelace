@@ -1,5 +1,6 @@
 import { Component, Element, Event, EventEmitter, Host, Method, Prop, State, Watch, h } from '@stencil/core';
 import { KeyboardDetector } from '../../utilities/keyboard-detector';
+import { showWithReflow } from '../../utilities/reflow';
 
 let id = 0;
 
@@ -96,7 +97,7 @@ export class Dialog {
       return false;
     }
 
-    this.host.hidden = false;
+    showWithReflow(this.host);
     this.open = true;
     this.box.focus();
 
@@ -140,10 +141,9 @@ export class Dialog {
   handleTransitionEnd(event: TransitionEvent) {
     const target = event.target as HTMLElement;
 
-    this.host.hidden = !this.open;
-
-    // Ensure we only handle one transition event
+    // Ensure we only handle one transition event on the target element
     if (event.propertyName === 'opacity' && target.classList.contains('sl-dialog__box')) {
+      this.host.hidden = !this.open;
       this.open ? this.slAfterShow.emit() : this.slAfterHide.emit();
     }
   }

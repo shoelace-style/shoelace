@@ -1,6 +1,7 @@
 import { Component, Element, Event, EventEmitter, Method, Prop, Watch, h } from '@stencil/core';
 import { Instance as PopperInstance, createPopper } from '@popperjs/core';
 import { scrollIntoView } from '../../utilities/scroll';
+import { showWithReflow } from '../../utilities/reflow';
 
 let id = 0;
 let openDropdowns = [];
@@ -104,7 +105,7 @@ export class Dropdown {
     }
 
     this.closeOpenDropdowns();
-    this.menu.hidden = false;
+    showWithReflow(this.menu);
     this.open = true;
 
     if (this.popper) {
@@ -290,16 +291,21 @@ export class Dropdown {
     }
   }
 
-  handleTransitionEnd() {
-    this.menu.hidden = !this.open;
-    this.open ? this.slAfterShow.emit() : this.slAfterHide.emit();
+  handleTransitionEnd(event: TransitionEvent) {
+    const target = event.target as HTMLElement;
 
-    if (!this.open) {
-      this.menu.scrollTop = 0;
+    // Ensure we only handle one transition event on the target element
+    if (event.propertyName === 'opacity' && target.classList.contains('sl-dropdown__menu')) {
+      this.menu.hidden = !this.open;
+      this.open ? this.slAfterShow.emit() : this.slAfterHide.emit();
 
-      if (this.popper) {
-        this.popper.destroy();
-        this.popper = null;
+      if (!this.open) {
+        this.menu.scrollTop = 0;
+
+        if (this.popper) {
+          this.popper.destroy();
+          this.popper = null;
+        }
       }
     }
   }

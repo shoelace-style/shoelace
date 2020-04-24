@@ -1,6 +1,14 @@
 # Alert
 
 ```html preview
+<sl-alert type="primary" open closable>
+  <sl-icon slot="icon" name="info" style="font-size: 20px;"></sl-icon>
+  <strong>Your changes have been saved</strong><br>
+  You can continue working or safely leave the app now.
+</sl-alert><br>
+```
+
+```html preview
 <sl-alert type="primary" open>
   <strong>Your changes have been saved</strong><br>
   You can continue working or safely leave the app now.
@@ -92,6 +100,39 @@
 | `closable` | `closable` | Set to true to make the alert closable.     | `boolean` | `false`     |
 | `open`     | `open`     | Indicates whether or not the alert is open. | `boolean` | `false`     |
 | `type`     | `type`     | The type of alert to draw.                  | `string`  | `'primary'` |
+
+
+## Events
+
+| Event         | Description                                                                                        | Type               |
+| ------------- | -------------------------------------------------------------------------------------------------- | ------------------ |
+| `slAfterHide` | Emitted after the alert closes and all transitions are complete.                                   | `CustomEvent<any>` |
+| `slAfterShow` | Emitted after the alert opens and all transitions are complete.                                    | `CustomEvent<any>` |
+| `slHide`      | Emitted when the alert closes. Calling `event.preventDefault()` will prevent it from being closed. | `CustomEvent<any>` |
+| `slShow`      | Emitted when the alert opens. Calling `event.preventDefault()` will prevent it from being opened.  | `CustomEvent<any>` |
+
+
+## Methods
+
+### `hide() => Promise<boolean>`
+
+Hides the alert
+
+#### Returns
+
+Type: `Promise<boolean>`
+
+
+
+### `show() => Promise<boolean>`
+
+Hides the alert.
+
+#### Returns
+
+Type: `Promise<boolean>`
+
+
 
 
 ## Slots
