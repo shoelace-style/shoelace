@@ -76,7 +76,7 @@ export class Dialog {
     });
     this.keyboardDetector.observe(this.dialog);
 
-    // Show the dialog on init
+    // Show on init if open
     if (this.open) {
       this.show();
     }
