@@ -83,6 +83,13 @@ export class Dropdown {
     }
   }
 
+  componentDidLoad() {
+    // Show on init if open
+    if (this.open) {
+      this.show();
+    }
+  }
+
   componentDidUnload() {
     this.hide();
   }
