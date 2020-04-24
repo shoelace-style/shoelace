@@ -41,7 +41,7 @@
   "license": "MIT",
   "dependencies": {
     "@popperjs/core": "^2.1.1",
-    "@stencil/core": "^1.12.1",
+    "@stencil/core": "^1.12.6",
     "@stencil/sass": "^1.1.1",
     "feather-icons": "^4.28.0",
     "normalize.css": "^8.0.1",
