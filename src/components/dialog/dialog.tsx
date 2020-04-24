@@ -41,8 +41,8 @@ export class Dialog {
    */
   @Prop() label = '';
 
-  /** When true, clicking on the overlay will close the dialog. */
-  @Prop() closeOnClick = false;
+  /** When true, the dialog will not be dismissed when the user clicks on the overlay. */
+  @Prop() ignoreOverlayClicks = false;
 
   /**
    * Set to true to disable the header. This will also remove the default close button, so please ensure you provide an
@@ -133,7 +133,7 @@ export class Dialog {
   }
 
   handleOverlayClick() {
-    if (this.closeOnClick) {
+    if (!this.ignoreOverlayClicks) {
       this.hide();
     }
   }

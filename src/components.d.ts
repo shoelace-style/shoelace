@@ -94,13 +94,13 @@ export namespace Components {
     }
     interface SlDialog {
         /**
-          * When true, clicking on the overlay will close the dialog.
-         */
-        "closeOnClick": boolean;
-        /**
           * Hides the dialog
          */
         "hide": () => Promise<boolean>;
+        /**
+          * When true, the dialog will not be dismissed when the user clicks on the overlay.
+         */
+        "ignoreOverlayClicks": boolean;
         /**
           * The dialog's label as displayed in the header. You should always include a relevant label even when using `no-header`, as it is required for proper accessibility.
          */
@@ -808,9 +808,9 @@ declare namespace LocalJSX {
     }
     interface SlDialog {
         /**
-          * When true, clicking on the overlay will close the dialog.
+          * When true, the dialog will not be dismissed when the user clicks on the overlay.
          */
-        "closeOnClick"?: boolean;
+        "ignoreOverlayClicks"?: boolean;
         /**
           * The dialog's label as displayed in the header. You should always include a relevant label even when using `no-header`, as it is required for proper accessibility.
          */
