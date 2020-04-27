@@ -81,11 +81,6 @@
     }
   }
 
-  .sl-input__clear,
-  .sl-input__password-toggle {
-    width: 1.2em;
-  }
-
   .sl-input__before,
   .sl-input__after {
     flex: 0 0 auto;
@@ -232,12 +227,6 @@
   background: none;
   padding: 0;
   cursor: pointer;
-
-  svg {
-    width: 1.2em;
-    height: 1.2em;
-    transition: var(--sl-transition-fast) filter;
-  }
 }
 
 .sl-input--empty .sl-input__clear {
