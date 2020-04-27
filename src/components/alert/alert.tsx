@@ -32,6 +32,9 @@ export class Tab {
   /** Set to true to make the alert closable. */
   @Prop() closable = false;
 
+  /** The type of alert. */
+  @Prop() type: 'primary' | 'success' | 'info' | 'warning' | 'danger' = 'primary';
+
   @Watch('open')
   handleOpenChange() {
     this.open ? this.show() : this.hide();
@@ -115,7 +118,14 @@ export class Tab {
             'sl-alert': true,
             'sl-alert--open': this.open,
             'sl-alert--closable': this.closable,
-            'sl-alert--using-keyboard': this.isUsingKeyboard
+            'sl-alert--using-keyboard': this.isUsingKeyboard,
+
+            // States
+            'sl-alert--primary': this.type === 'primary',
+            'sl-alert--success': this.type === 'success',
+            'sl-alert--info': this.type === 'info',
+            'sl-alert--warning': this.type === 'warning',
+            'sl-alert--danger': this.type === 'danger'
           }}
           role="alert"
           aria-hidden={!this.open}

@@ -23,6 +23,10 @@ export namespace Components {
           * Hides the alert.
          */
         "show": () => Promise<boolean>;
+        /**
+          * The type of alert.
+         */
+        "type": "primary" | "success" | "info" | "warning" | "danger";
     }
     interface SlButton {
         /**
@@ -733,6 +737,10 @@ declare namespace LocalJSX {
           * Indicates whether or not the alert is open.
          */
         "open"?: boolean;
+        /**
+          * The type of alert.
+         */
+        "type"?: "primary" | "success" | "info" | "warning" | "danger";
     }
     interface SlButton {
         /**
