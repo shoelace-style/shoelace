@@ -20,7 +20,7 @@ export namespace Components {
          */
         "open": boolean;
         /**
-          * Hides the alert.
+          * Shows the alert.
          */
         "show": () => Promise<boolean>;
         /**

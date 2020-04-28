@@ -13,7 +13,7 @@
 <br><br>
 
 <sl-button>Top</sl-button>
-<sl-tooltip placement="top" arrow trigger="click">Tooltip</sl-tooltip>
+<sl-tooltip placement="top" arrow>Tooltip</sl-tooltip>
 
 <sl-button>Bottom</sl-button>
 <sl-tooltip placement="bottom" arrow>Tooltip</sl-tooltip>

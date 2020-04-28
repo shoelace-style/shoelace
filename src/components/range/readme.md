@@ -9,7 +9,6 @@
 
 <br><br>
 
-<!-- TODO: JS not executing -->
 <sl-range id="range-with-custom-formatter" min="0" max="100" step="1"></sl-range>
 <script>
 (() => {
