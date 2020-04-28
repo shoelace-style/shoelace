@@ -4,7 +4,6 @@ import { scrollIntoView } from '../../utilities/scroll';
 import { showWithReflow } from '../../utilities/reflow';
 
 let id = 0;
-let openDropdowns = [];
 
 /**
  * @slot trigger - The dropdown's trigger, usually a `<sl-button>` element.
@@ -104,7 +103,6 @@ export class Dropdown {
       return false;
     }
 
-    this.closeOpenDropdowns();
     showWithReflow(this.menu);
     this.open = true;
 
@@ -134,8 +132,6 @@ export class Dropdown {
     // Reposition the menu after it appears in case a modifier kicks in
     requestAnimationFrame(() => this.popper.update());
 
-    openDropdowns.push(this.host);
-
     document.addEventListener('mousedown', this.handleDocumentMouseDown);
     document.addEventListener('keydown', this.handleDocumentKeyDown);
   }
@@ -152,21 +148,8 @@ export class Dropdown {
     this.open = false;
     this.setSelectedItem(null);
 
-    openDropdowns = openDropdowns.filter(dropdown => this.host !== dropdown);
-
     document.removeEventListener('mousedown', this.handleDocumentMouseDown);
     document.removeEventListener('keydown', this.handleDocumentKeyDown);
-  }
-
-  closeOpenDropdowns() {
-    openDropdowns = openDropdowns.filter(dropdown => {
-      if (this.host === dropdown) {
-        return true;
-      } else {
-        dropdown.hide();
-        return false;
-      }
-    });
   }
 
   getAllItems() {
@@ -242,10 +225,9 @@ export class Dropdown {
 
   handleDocumentMouseDown(event: MouseEvent) {
     const target = event.target as HTMLElement;
-    const dropdown = target.closest('sl-dropdown');
 
-    // Close when clicking outside of the dropdown control
-    if (!dropdown) {
+    // Close when clicking outside of the dropdown
+    if (target.closest('sl-dropdown') !== this.host) {
       this.hide();
       return;
     }
