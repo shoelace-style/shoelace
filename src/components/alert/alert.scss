@@ -1,12 +1,8 @@
 @import 'component';
 
 :host {
-  /**
-   * @prop --box-shadow: The box shadow to render the alert with.
-   */
-  --box-shadow: none;
-
   display: block;
+  border-radius: var(--sl-border-radius-medium);
 
   &[hidden] {
     display: none;
@@ -25,7 +21,6 @@
   font-weight: var(--sl-font-weight-normal);
   line-height: 1.6;
   color: var(--sl-color-gray-30);
-  box-shadow: var(--box-shadow);
   opacity: 0;
   transition: var(--sl-transition-medium);
 }

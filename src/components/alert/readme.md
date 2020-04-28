@@ -99,13 +99,6 @@ Type: `Promise<boolean>`
 | `"icon"`       | An icon to show in the alert.                     |
 
 
-## CSS Custom Properties
-
-| Name           | Description                              |
-| -------------- | ---------------------------------------- |
-| `--box-shadow` | The box shadow to render the alert with. |
-
-
 ## Dependencies
 
 ### Depends on
