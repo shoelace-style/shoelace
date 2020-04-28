@@ -81,7 +81,7 @@ Type: `Promise<boolean>`
 
 ### `show() => Promise<boolean>`
 
-Hides the alert.
+Shows the alert.
 
 #### Returns
 

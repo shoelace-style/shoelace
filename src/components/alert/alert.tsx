@@ -70,7 +70,7 @@ export class Tab {
     this.keyboardDetector.unobserve(this.alert);
   }
 
-  /** Hides the alert. */
+  /** Shows the alert. */
   @Method()
   async show() {
     const slShow = this.slShow.emit();
@@ -96,7 +96,7 @@ export class Tab {
   }
 
   handleCloseClick() {
-    this.open = false;
+    this.hide();
   }
 
   handleTransitionEnd(event: TransitionEvent) {
