@@ -96,6 +96,8 @@ export namespace Components {
          */
         "value": string;
     }
+    interface SlColorPicker {
+    }
     interface SlDialog {
         /**
           * Hides the dialog
@@ -586,6 +588,12 @@ declare global {
         prototype: HTMLSlCheckboxElement;
         new (): HTMLSlCheckboxElement;
     };
+    interface HTMLSlColorPickerElement extends Components.SlColorPicker, HTMLStencilElement {
+    }
+    var HTMLSlColorPickerElement: {
+        prototype: HTMLSlColorPickerElement;
+        new (): HTMLSlColorPickerElement;
+    };
     interface HTMLSlDialogElement extends Components.SlDialog, HTMLStencilElement {
     }
     var HTMLSlDialogElement: {
@@ -692,6 +700,7 @@ declare global {
         "sl-alert": HTMLSlAlertElement;
         "sl-button": HTMLSlButtonElement;
         "sl-checkbox": HTMLSlCheckboxElement;
+        "sl-color-picker": HTMLSlColorPickerElement;
         "sl-dialog": HTMLSlDialogElement;
         "sl-dropdown": HTMLSlDropdownElement;
         "sl-dropdown-divider": HTMLSlDropdownDividerElement;
@@ -813,6 +822,8 @@ declare namespace LocalJSX {
           * The native input's value attribute.
          */
         "value"?: string;
+    }
+    interface SlColorPicker {
     }
     interface SlDialog {
         /**
@@ -1340,6 +1351,7 @@ declare namespace LocalJSX {
         "sl-alert": SlAlert;
         "sl-button": SlButton;
         "sl-checkbox": SlCheckbox;
+        "sl-color-picker": SlColorPicker;
         "sl-dialog": SlDialog;
         "sl-dropdown": SlDropdown;
         "sl-dropdown-divider": SlDropdownDivider;
@@ -1366,6 +1378,7 @@ declare module "@stencil/core" {
             "sl-alert": LocalJSX.SlAlert & JSXBase.HTMLAttributes<HTMLSlAlertElement>;
             "sl-button": LocalJSX.SlButton & JSXBase.HTMLAttributes<HTMLSlButtonElement>;
             "sl-checkbox": LocalJSX.SlCheckbox & JSXBase.HTMLAttributes<HTMLSlCheckboxElement>;
+            "sl-color-picker": LocalJSX.SlColorPicker & JSXBase.HTMLAttributes<HTMLSlColorPickerElement>;
             "sl-dialog": LocalJSX.SlDialog & JSXBase.HTMLAttributes<HTMLSlDialogElement>;
             "sl-dropdown": LocalJSX.SlDropdown & JSXBase.HTMLAttributes<HTMLSlDropdownElement>;
             "sl-dropdown-divider": LocalJSX.SlDropdownDivider & JSXBase.HTMLAttributes<HTMLSlDropdownDividerElement>;
