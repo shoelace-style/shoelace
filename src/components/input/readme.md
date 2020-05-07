@@ -200,6 +200,10 @@ Type: `Promise<void>`
 
 ## Dependencies
 
+### Used by
+
+ - [sl-color-picker](../color-picker)
+
 ### Depends on
 
 - [sl-icon](../icon)
@@ -208,6 +212,7 @@ Type: `Promise<void>`
 ```mermaid
 graph TD;
   sl-input --> sl-icon
+  sl-color-picker --> sl-input
   style sl-input fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

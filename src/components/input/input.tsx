@@ -43,7 +43,7 @@ export class Input {
   @Prop() name = '';
 
   /** The input's value attribute. */
-  @Prop({ mutable: true }) value = '';
+  @Prop({ mutable: true }) value: string = '';
 
   /** The input's placeholder text. */
   @Prop() placeholder: string;
