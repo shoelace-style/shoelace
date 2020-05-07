@@ -5,8 +5,9 @@
 
   --grid-width: 260px;
   --grid-height: 200px;
-  --sight-size: 14px;
-  --slider-size: 14px;
+  --grid-handle-size: 14px;
+  --slider-height: 10px;
+  --slider-handle-size: 14px;
 }
 
 .sl-color-picker__menu {
@@ -49,16 +50,23 @@
   cursor: crosshair;
 }
 
-.sl-color-picker__sight {
+.sl-color-picker__grid-handle {
   position: absolute;
-  width: var(--sight-size);
-  height: var(--sight-size);
+  width: var(--grid-handle-size);
+  height: var(--grid-handle-size);
   border-radius: 50%;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25), inset 0 0 0 1px rgba(0, 0, 0, 0.25);
   border: solid 2px white;
-  margin-top: calc(var(--sight-size) / -2);
-  margin-left: calc(var(--sight-size) / -2);
-  cursor: pointer;
+  margin-top: calc(var(--grid-handle-size) / -2);
+  margin-left: calc(var(--grid-handle-size) / -2);
+  transition: var(--sl-transition-fast) box-shadow;
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 1px hsl(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%),
+      inset 0 0 0 1px hsl(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%),
+      var(--sl-focus-ring-box-shadow);
+  }
 }
 
 .sl-color-picker__controls {
@@ -73,7 +81,7 @@
 
 .sl-color-picker__slider {
   position: relative;
-  height: 10px;
+  height: var(--slider-height);
   border-radius: var(--sl-border-radius-pill);
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2);
 
@@ -84,14 +92,21 @@
 
 .sl-color-picker__slider-handle {
   position: absolute;
-  top: calc(50% - var(--slider-size) / 2);
-  width: var(--slider-size);
-  height: var(--slider-size);
+  top: calc(50% - var(--slider-handle-size) / 2);
+  width: var(--slider-handle-size);
+  height: var(--slider-handle-size);
   background-color: white;
   border-radius: 50%;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
-  margin-left: calc(var(--slider-size) / -2);
+  margin-left: calc(var(--slider-handle-size) / -2);
+  transition: var(--sl-transition-fast) box-shadow;
   cursor: pointer;
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 1px hsl(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%),
+      var(--sl-focus-ring-box-shadow);
+  }
 }
 
 .sl-color-picker__hue {
@@ -178,4 +193,9 @@
   border-radius: 2px;
   border: solid 1px rgba(0, 0, 0, 0.125);
   cursor: pointer;
+
+  &:focus {
+    outline: none;
+    box-shadow: var(--sl-focus-ring-box-shadow);
+  }
 }

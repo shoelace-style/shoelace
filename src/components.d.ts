@@ -97,6 +97,18 @@ export namespace Components {
         "value": string;
     }
     interface SlColorPicker {
+        /**
+          * Whether to show the opacity slider.
+         */
+        "opacity": boolean;
+        /**
+          * An array of predefined color swatches to display.
+         */
+        "swatches": string[];
+        /**
+          * The current color.
+         */
+        "value": string;
     }
     interface SlDialog {
         /**
@@ -824,6 +836,18 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface SlColorPicker {
+        /**
+          * Whether to show the opacity slider.
+         */
+        "opacity"?: boolean;
+        /**
+          * An array of predefined color swatches to display.
+         */
+        "swatches"?: string[];
+        /**
+          * The current color.
+         */
+        "value"?: string;
     }
     interface SlDialog {
         /**
