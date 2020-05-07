@@ -1,5 +1,6 @@
 import { Component, Element, Event, EventEmitter, Host, Method, Prop, State, Watch, h } from '@stencil/core';
 import { KeyboardDetector } from '../../utilities/keyboard-detector';
+import { lockBodyScrolling } from '../../utilities/scroll';
 import { showWithReflow } from '../../utilities/reflow';
 
 let id = 0;
@@ -84,7 +85,7 @@ export class Dialog {
   }
 
   componentDidUnload() {
-    document.body.style.overflow = null;
+    lockBodyScrolling(false);
     this.keyboardDetector.unobserve(this.dialog);
   }
 
@@ -101,7 +102,7 @@ export class Dialog {
     this.open = true;
     this.box.focus();
 
-    document.body.style.overflow = 'hidden';
+    lockBodyScrolling(true);
     document.addEventListener('keydown', this.handleDocumentKeyDown);
     document.addEventListener('focusin', this.keepDialogFocused);
   }
@@ -117,7 +118,7 @@ export class Dialog {
 
     this.open = false;
 
-    document.body.style.overflow = null;
+    lockBodyScrolling(false);
     document.removeEventListener('keydown', this.handleDocumentKeyDown);
     document.removeEventListener('focusin', this.keepDialogFocused);
   }
