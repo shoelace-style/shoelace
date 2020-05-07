@@ -1,6 +1,19 @@
 import { getOffset } from './offset';
 
 //
+// Locks and unlocks the body to prevent scrolling. By design, this method doesn't try to maintain the body's existing
+// overflow state, as setting <body style="overflow: *"> is considered a bad practice. If you need to set a non-default
+// overflow to the body element, it's better to do so in your stylesheet.
+//
+export function lockBodyScrolling(isLocked = true) {
+  if (isLocked) {
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = null;
+  }
+}
+
+//
 // Scrolls an element into view of its container. If the element is already in view, nothing will happen.
 //
 export function scrollIntoView(
