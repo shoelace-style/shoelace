@@ -29,6 +29,7 @@ export class ColorPicker {
     this.handleGridKeyDown = this.handleGridKeyDown.bind(this);
     this.handleHueDrag = this.handleHueDrag.bind(this);
     this.handleHueKeyDown = this.handleHueKeyDown.bind(this);
+    this.handleUserChange = this.handleUserChange.bind(this);
     this.handleUserInput = this.handleUserInput.bind(this);
   }
 
@@ -70,7 +71,7 @@ export class ColorPicker {
     '#fff'
   ];
 
-  componentDidLoad() {
+  componentWillLoad() {
     this.syncValue();
   }
 
@@ -266,9 +267,18 @@ export class ColorPicker {
     }
   }
 
+  handleUserChange(event: CustomEvent) {
+    const target = event.target as HTMLInputElement;
+
+    if (!this.setColor(target.value)) {
+      // Revert to the last valid color
+      this.setColor(this.value);
+    }
+  }
+
   handleUserInput(event: KeyboardEvent) {
     const target = event.target as HTMLInputElement;
-    // this.setColor(target.value);
+    this.setColor(target.value, false);
   }
 
   parseColor(color: string) {
@@ -280,9 +290,13 @@ export class ColorPicker {
 
     color = color.trim().toLowerCase();
 
-    // Parse RGB
     if (/^rgba?/i.test(color)) {
+      // Parse as RGB
       const rgb = color.replace(/[^\d,.%]/g, '').split(',');
+      if (parseInt(rgb[0]) < 0 || parseInt(rgb[0]) > 255) return false;
+      if (parseInt(rgb[1]) < 0 || parseInt(rgb[1]) > 255) return false;
+      if (parseInt(rgb[2]) < 0 || parseInt(rgb[2]) > 255) return false;
+
       [hue, saturation, lightness] = convert.rgb.hsl(rgb);
 
       if (rgb[3] && rgb[3].indexOf('%') > -1) {
@@ -290,11 +304,13 @@ export class ColorPicker {
       } else if (rgb[3]) {
         alpha = Number(rgb[3]) * 100;
       }
-    }
-
-    // Parse HSL
-    if (/^hsla?/i.test(color)) {
+    } else if (/^hsla?/i.test(color)) {
+      // Parse as HSL
       const hsl = color.replace(/[^\d,.%]/g, '').split(',');
+      if (parseInt(hsl[0]) < 0 || parseInt(hsl[0]) > 360) return false;
+      if (parseInt(hsl[1]) < 0 || parseInt(hsl[1]) > 100) return false;
+      if (parseInt(hsl[2]) < 0 || parseInt(hsl[2]) > 100) return false;
+
       hue = Number(hsl[0]);
       saturation = Number(hsl[0]);
       lightness = Number(hsl[0]);
@@ -304,18 +320,25 @@ export class ColorPicker {
       } else if (hsl[3]) {
         alpha = Number(hsl[3]) * 100;
       }
-    }
-
-    // Parse hex
-    if (hexPattern.test(color)) {
+    } else if (hexPattern.test(color)) {
+      // Parse as hex
       const hex = color.match(hexPattern).slice(1, 5);
+      if (!/^[a-f0-9]{1,2}$/i.test(hex[0])) return false;
+      if (!/^[a-f0-9]{1,2}$/i.test(hex[1])) return false;
+      if (!/^[a-f0-9]{1,2}$/i.test(hex[2])) return false;
+
       [hue, saturation, lightness] = convert.hex.hsl(hex.join(''));
 
       if (hex[3]) {
         alpha = Math.round((parseInt(hex[3], 16) / 255) * 100);
-        console.log(hex[3], alpha);
-
-        // const alpha = (Math.round((this.alpha * 255) / 100) + 0x10000).toString(16).substr(-2).toUpperCase();
+      }
+    } else if (/[a-z]+/.test(color)) {
+      // Parse as CSS color
+      try {
+        [hue, saturation, lightness] = convert.keyword.hsl(color);
+        alpha = 100;
+      } catch {
+        return false;
       }
     }
 
@@ -327,13 +350,23 @@ export class ColorPicker {
     };
   }
 
-  setColor(color: string) {
-    const hsla = this.parseColor(color);
-    this.hue = hsla.hue;
-    this.saturation = hsla.saturation;
-    this.lightness = hsla.lightness;
-    this.alpha = this.opacity ? hsla.alpha : 100;
-    this.syncValue();
+  setColor(color: string, syncValue = true) {
+    const parsed = this.parseColor(color);
+
+    if (!parsed) {
+      return false;
+    }
+
+    this.hue = parsed.hue;
+    this.saturation = parsed.saturation;
+    this.lightness = parsed.lightness;
+    this.alpha = this.opacity ? parsed.alpha : 100;
+
+    if (syncValue) {
+      this.syncValue();
+    }
+
+    return true;
   }
 
   syncValue() {
@@ -451,6 +484,7 @@ export class ColorPicker {
                 pattern="[a-fA-F\d]+"
                 value={this.value}
                 onInput={this.handleUserInput}
+                onSlChange={this.handleUserChange}
               />
             </div>
           </div>
@@ -463,6 +497,7 @@ export class ColorPicker {
                   class="sl-color-picker__swatch sl-color-picker__transparent-bg"
                   tabIndex={0}
                   onClick={() => this.setColor(swatch)} // eslint-disable-line
+                  onKeyDown={event => event.key === 'Enter' && this.setColor(swatch)} // eslint-disable-line
                 >
                   <div class="sl-color-picker__swatch-color" style={{ backgroundColor: swatch }} />
                 </div>
