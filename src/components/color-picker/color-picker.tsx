@@ -29,15 +29,23 @@ export class ColorPicker {
     this.handleGridKeyDown = this.handleGridKeyDown.bind(this);
     this.handleHueDrag = this.handleHueDrag.bind(this);
     this.handleHueKeyDown = this.handleHueKeyDown.bind(this);
+    this.handleUserInput = this.handleUserInput.bind(this);
   }
 
   @State() hue = 0;
   @State() saturation = 100;
-  @State() lightness = 50;
+  @State() lightness = 100;
   @State() alpha = 100;
 
   /** The current color. */
   @Prop({ mutable: true, reflect: true }) value = '';
+
+  /**
+   * The format to use for the generated color `value`. If opacity is enabled, these will translate to HEXA, RGBA, and
+   * HSLA respectively. Note that browser support for HEXA doesn't include pre-Chromium Edge, so it's usually safer to
+   * use RGBA or HSLA when using opacity.
+   */
+  @Prop() format: 'hex' | 'rgb' | 'hsl' = 'hex';
 
   /** Whether to show the opacity slider. */
   @Prop() opacity = false;
@@ -61,6 +69,46 @@ export class ColorPicker {
     '#ccc',
     '#fff'
   ];
+
+  componentDidLoad() {
+    this.syncValue();
+  }
+
+  getHex() {
+    const hsl = [this.hue, this.saturation, this.lightness];
+    const hex = convert.hsl.hex(hsl);
+    const alpha = Math.ceil((this.alpha * 255) / 100 + 0x10000)
+      .toString(16)
+      .substr(-2)
+      .toUpperCase();
+
+    if (this.opacity) {
+      return `#${hex}${alpha}`;
+    } else {
+      return `#${hex}`;
+    }
+  }
+
+  getRGB() {
+    const hsl = [this.hue, this.saturation, this.lightness];
+    const rgb = convert.hsl.rgb(hsl);
+
+    if (this.opacity) {
+      return `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${this.alpha}%)`;
+    } else {
+      return `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
+    }
+  }
+
+  getHSL() {
+    const hsl = [this.hue, this.saturation, this.lightness];
+
+    if (this.opacity) {
+      return `hsla(${hsl[0]}, ${hsl[1]}%, ${hsl[2]}%, ${this.alpha}%)`;
+    } else {
+      return `hsl(${hsl[0]}, ${hsl[1]}%, ${hsl[2]}%)`;
+    }
+  }
 
   handleHueInput(event: Event) {
     const target = event.target as HTMLInputElement;
@@ -91,6 +139,7 @@ export class ColorPicker {
 
     this.handleDrag(event, container, x => {
       this.alpha = clamp(Math.round((x / width) * 100), 0, 100);
+      this.syncValue();
     });
   }
 
@@ -103,6 +152,7 @@ export class ColorPicker {
 
     this.handleDrag(event, container, x => {
       this.hue = clamp(Math.round((x / width) * 360), 0, 360);
+      this.syncValue();
     });
   }
 
@@ -116,6 +166,7 @@ export class ColorPicker {
     this.handleDrag(event, container, (x, y) => {
       this.saturation = clamp(Math.round((x / width) * 100), 0, 100);
       this.lightness = clamp(Math.round(100 - (y / height) * 100), 0, 100);
+      this.syncValue();
     });
   }
 
@@ -215,26 +266,92 @@ export class ColorPicker {
     }
   }
 
+  handleUserInput(event: KeyboardEvent) {
+    const target = event.target as HTMLInputElement;
+    // this.setColor(target.value);
+  }
+
+  parseColor(color: string) {
+    const hexPattern = /#?([a-f0-9]{1,2})([a-f0-9]{1,2})([a-f0-9]{1,2})([a-f0-9]{1,2})?/i;
+    let hue = 0;
+    let saturation = 0;
+    let lightness = 0;
+    let alpha = 100;
+
+    color = color.trim().toLowerCase();
+
+    // Parse RGB
+    if (/^rgba?/i.test(color)) {
+      const rgb = color.replace(/[^\d,.%]/g, '').split(',');
+      [hue, saturation, lightness] = convert.rgb.hsl(rgb);
+
+      if (rgb[3] && rgb[3].indexOf('%') > -1) {
+        alpha = Number(rgb[3].replace('%', ''));
+      } else if (rgb[3]) {
+        alpha = Number(rgb[3]) * 100;
+      }
+    }
+
+    // Parse HSL
+    if (/^hsla?/i.test(color)) {
+      const hsl = color.replace(/[^\d,.%]/g, '').split(',');
+      hue = Number(hsl[0]);
+      saturation = Number(hsl[0]);
+      lightness = Number(hsl[0]);
+
+      if (hsl[3] && hsl[3].indexOf('%') > -1) {
+        alpha = Number(hsl[3].replace('%', ''));
+      } else if (hsl[3]) {
+        alpha = Number(hsl[3]) * 100;
+      }
+    }
+
+    // Parse hex
+    if (hexPattern.test(color)) {
+      const hex = color.match(hexPattern).slice(1, 5);
+      [hue, saturation, lightness] = convert.hex.hsl(hex.join(''));
+
+      if (hex[3]) {
+        alpha = Math.round((parseInt(hex[3], 16) / 255) * 100);
+        console.log(hex[3], alpha);
+
+        // const alpha = (Math.round((this.alpha * 255) / 100) + 0x10000).toString(16).substr(-2).toUpperCase();
+      }
+    }
+
+    return {
+      hue,
+      saturation,
+      lightness,
+      alpha
+    };
+  }
+
   setColor(color: string) {
-    //
-    // TODO:
-    //
-    // - detect what format the color is in
-    // - parse it
-    // - convert to HSL and update HSLA
-    //
+    const hsla = this.parseColor(color);
+    this.hue = hsla.hue;
+    this.saturation = hsla.saturation;
+    this.lightness = hsla.lightness;
+    this.alpha = this.opacity ? hsla.alpha : 100;
+    this.syncValue();
+  }
+
+  syncValue() {
+    if (this.format === 'hsl') {
+      this.value = this.getHSL();
+    } else if (this.format === 'rgb') {
+      this.value = this.getRGB();
+    } else {
+      this.value = this.getHex();
+    }
   }
 
   render() {
-    const hsl = [this.hue, this.saturation, this.lightness];
-    // const rgb = convert.hsl.rgb(hsl);
-    const hex = convert.hsl.hex(hsl);
     const x = this.saturation;
     const y = 100 - this.lightness;
 
     return (
       <div ref={el => (this.trigger = el)} class="sl-color-picker">
-        <div class="sl-color-picker__trigger">Trigger</div>
         <div ref={el => (this.menu = el)} class="sl-color-picker__menu">
           <div
             ref={el => (this.grid = el)}
@@ -286,7 +403,7 @@ export class ColorPicker {
               {this.opacity && (
                 <div
                   ref={el => (this.alphaSlider = el)}
-                  class="sl-color-picker__alpha sl-color-picker__slider"
+                  class="sl-color-picker__alpha sl-color-picker__slider  sl-color-picker__transparent-bg"
                   onMouseDown={this.handleAlphaDrag}
                   onTouchStart={this.handleAlphaDrag}
                 >
@@ -319,7 +436,7 @@ export class ColorPicker {
             </div>
 
             <div
-              class="sl-color-picker__preview"
+              class="sl-color-picker__preview  sl-color-picker__transparent-bg"
               style={{
                 color: `hsla(${this.hue}deg, ${this.saturation}%, ${this.lightness}%, ${this.alpha}%)`
               }}
@@ -327,17 +444,28 @@ export class ColorPicker {
           </div>
 
           <div class="sl-color-picker__inputs">
-            <div class="sl-color-picker__input sl-color-picker__input--hex">
-              <sl-input size="small" type="text" pattern="[a-fA-F\d]+" value={hex}>
-                <span slot="prefix">#</span>
-              </sl-input>
+            <div class="sl-color-picker__input">
+              <sl-input
+                size="small"
+                type="text"
+                pattern="[a-fA-F\d]+"
+                value={this.value}
+                onInput={this.handleUserInput}
+              />
             </div>
           </div>
 
           {this.swatches && (
             <div class="sl-color-picker__swatches">
               {this.swatches.map(swatch => (
-                <div class="sl-color-picker__swatch" style={{ backgroundColor: swatch }} tabIndex={0}></div>
+                // @ts-ignore
+                <div
+                  class="sl-color-picker__swatch sl-color-picker__transparent-bg"
+                  tabIndex={0}
+                  onClick={() => this.setColor(swatch)} // eslint-disable-line
+                >
+                  <div class="sl-color-picker__swatch-color" style={{ backgroundColor: swatch }} />
+                </div>
               ))}
             </div>
           )}

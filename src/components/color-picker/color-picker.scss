@@ -59,7 +59,8 @@
   border: solid 2px white;
   margin-top: calc(var(--grid-handle-size) / -2);
   margin-left: calc(var(--grid-handle-size) / -2);
-  transition: var(--sl-transition-fast) box-shadow;
+  transition: var(--sl-transition-fast) box-shadow, var(--sl-transition-x-fast) top ease,
+    var(--sl-transition-x-fast) left ease;
 
   &:focus {
     outline: none;
@@ -99,7 +100,8 @@
   border-radius: 50%;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
   margin-left: calc(var(--slider-handle-size) / -2);
-  transition: var(--sl-transition-fast) box-shadow;
+  transition: var(--sl-transition-fast) box-shadow, var(--sl-transition-x-fast) top ease,
+    var(--sl-transition-x-fast) left ease;
   cursor: pointer;
 
   &:focus {
@@ -123,11 +125,6 @@
 }
 
 .sl-color-picker__alpha {
-  background-image: linear-gradient(45deg, #eee 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #eee 75%),
-    linear-gradient(45deg, transparent 75%, #eee 75%), linear-gradient(45deg, #eee 25%, transparent 25%);
-  background-size: 10px 10px;
-  background-position: 0 0, 0 0, -5px -5px, 5px 5px;
-
   .sl-color-picker__alpha-gradient {
     position: absolute;
     top: 0;
@@ -143,10 +140,6 @@
   position: relative;
   width: 2rem;
   height: 2rem;
-  background-image: linear-gradient(45deg, #eee 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #eee 75%),
-    linear-gradient(45deg, transparent 75%, #eee 75%), linear-gradient(45deg, #eee 25%, transparent 25%);
-  background-size: 10px 10px;
-  background-position: 0 0, 0 0, -5px -5px, 5px 5px;
   border-radius: 50%;
   margin-left: var(--sl-spacing-medium);
 
@@ -188,14 +181,31 @@
 
 .sl-color-picker__swatch {
   flex: 0 0 auto;
+  position: relative;
   width: 20px;
   height: 20px;
   border-radius: 2px;
-  border: solid 1px rgba(0, 0, 0, 0.125);
-  cursor: pointer;
+
+  .sl-color-picker__swatch-color {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: solid 1px rgba(0, 0, 0, 0.125);
+    border-radius: inherit;
+    cursor: pointer;
+  }
 
   &:focus {
     outline: none;
     box-shadow: var(--sl-focus-ring-box-shadow);
   }
+}
+
+.sl-color-picker__transparent-bg {
+  background-image: linear-gradient(45deg, #eee 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #eee 75%),
+    linear-gradient(45deg, transparent 75%, #eee 75%), linear-gradient(45deg, #eee 25%, transparent 25%);
+  background-size: 10px 10px;
+  background-position: 0 0, 0 0, -5px -5px, 5px 5px;
 }
