@@ -36,31 +36,17 @@
   position: relative;
   width: var(--grid-width);
   height: var(--grid-height);
+  background-image: linear-gradient(
+      to bottom,
+      hsl(0, 0%, 100%) 0%,
+      hsla(0, 0%, 100%, 0) 50%,
+      hsla(0, 0%, 0%, 0) 50%,
+      hsl(0, 0%, 0%) 100%
+    ),
+    linear-gradient(to right, hsl(0, 0%, 50%) 0%, hsla(0, 0%, 50%, 0) 100%);
   border-top-left-radius: var(--sl-border-radius-medium);
   border-top-right-radius: var(--sl-border-radius-medium);
   cursor: crosshair;
-}
-
-.sl-color-picker__grid-gradient {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: linear-gradient(to right, rgb(255, 255, 255), rgba(255, 255, 255, 0));
-  border-top-left-radius: calc(var(--sl-border-radius-medium) - 1px);
-  border-top-right-radius: calc(var(--sl-border-radius-medium) - 1px);
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: linear-gradient(to top, rgb(0, 0, 0), rgba(0, 0, 0, 0));
-    border-radius: inherit;
-  }
 }
 
 .sl-color-picker__sight {

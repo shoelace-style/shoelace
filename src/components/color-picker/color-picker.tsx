@@ -15,13 +15,13 @@ export class ColorPicker {
     this.handleHueInput = this.handleHueInput.bind(this);
     this.handleSaturationInput = this.handleSaturationInput.bind(this);
     this.handleLightnessInput = this.handleLightnessInput.bind(this);
-    this.handleOpacityInput = this.handleOpacityInput.bind(this);
+    this.handleAlphaInput = this.handleAlphaInput.bind(this);
   }
 
   @State() hue = 0;
   @State() saturation = 100;
   @State() lightness = 50;
-  @State() opacity = 100;
+  @State() alpha = 100;
 
   handleHueInput(event: Event) {
     const target = event.target as HTMLInputElement;
@@ -38,9 +38,9 @@ export class ColorPicker {
     this.lightness = clamp(Number(target.value), 0, 100);
   }
 
-  handleOpacityInput(event: Event) {
+  handleAlphaInput(event: Event) {
     const target = event.target as HTMLInputElement;
-    this.opacity = clamp(Number(target.value), 0, 100);
+    this.alpha = clamp(Number(target.value), 0, 100);
   }
 
   render() {
@@ -48,13 +48,8 @@ export class ColorPicker {
     const rgb = convert.hsl.rgb(hsl);
     const hex = convert.hsl.hex(hsl);
 
-    // const x = clamp(this.saturation, 0, 100);
-    // const y = 100 - this.lightness * 100;
-
-    const x = Math.abs((this.saturation * 260) / 100);
-    const y = Math.abs((220 - this.lightness * 220) / 100);
-
-    // console.log(x / 100, y / 100);
+    const x = clamp(this.saturation, 0, 100);
+    const y = clamp(100 - this.lightness, 0, 100);
 
     return (
       <div ref={el => (this.trigger = el)} class="sl-color-picker">
@@ -66,12 +61,11 @@ export class ColorPicker {
               backgroundColor: `hsl(${this.hue}deg, 100%, 50%)`
             }}
           >
-            <div class="sl-color-picker__grid-gradient" />
             <span
               class="sl-color-picker__sight"
               style={{
-                top: `${y}px`, // TODO: %
-                left: `${x}px` // TODO: %
+                top: `${y}%`,
+                left: `${x}%`
               }}
             />
           </div>
@@ -101,7 +95,7 @@ export class ColorPicker {
                 <span
                   class="sl-color-picker__slider-handle"
                   style={{
-                    left: `${this.opacity}%`
+                    left: `${this.alpha}%`
                   }}
                 />
               </div>
@@ -110,7 +104,7 @@ export class ColorPicker {
             <div
               class="sl-color-picker__preview"
               style={{
-                color: `hsla(${this.hue}deg, ${this.saturation}%, ${this.lightness}%, ${this.opacity}%)`
+                color: `hsla(${this.hue}deg, ${this.saturation}%, ${this.lightness}%, ${this.alpha}%)`
               }}
             />
           </div>
@@ -185,8 +179,8 @@ export class ColorPicker {
                 min={0}
                 max={100}
                 inputmode="numeric"
-                value={this.opacity.toString()}
-                onInput={this.handleOpacityInput}
+                value={this.alpha.toString()}
+                onInput={this.handleAlphaInput}
               />
             </div>
           </div>
