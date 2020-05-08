@@ -1,5 +1,5 @@
 import { Component, Prop, State, h } from '@stencil/core';
-import convert from 'color-convert';
+import color from 'color';
 import { clamp } from '../../utilities/math';
 
 @Component({
@@ -14,6 +14,7 @@ export class ColorPicker {
   gridHandle: HTMLElement;
   hueSlider: HTMLElement;
   hueHandle: HTMLElement;
+  input: HTMLSlInputElement;
   menu: HTMLElement;
   trigger: HTMLElement;
 
@@ -30,7 +31,6 @@ export class ColorPicker {
     this.handleHueDrag = this.handleHueDrag.bind(this);
     this.handleHueKeyDown = this.handleHueKeyDown.bind(this);
     this.handleUserChange = this.handleUserChange.bind(this);
-    this.handleUserInput = this.handleUserInput.bind(this);
   }
 
   @State() hue = 0;
@@ -72,43 +72,7 @@ export class ColorPicker {
   ];
 
   componentWillLoad() {
-    this.syncValue();
-  }
-
-  getHex() {
-    const hsl = [this.hue, this.saturation, this.lightness];
-    const hex = convert.hsl.hex(hsl);
-    const alpha = Math.ceil((this.alpha * 255) / 100 + 0x10000)
-      .toString(16)
-      .substr(-2)
-      .toUpperCase();
-
-    if (this.opacity) {
-      return `#${hex}${alpha}`;
-    } else {
-      return `#${hex}`;
-    }
-  }
-
-  getRGB() {
-    const hsl = [this.hue, this.saturation, this.lightness];
-    const rgb = convert.hsl.rgb(hsl);
-
-    if (this.opacity) {
-      return `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${this.alpha}%)`;
-    } else {
-      return `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
-    }
-  }
-
-  getHSL() {
-    const hsl = [this.hue, this.saturation, this.lightness];
-
-    if (this.opacity) {
-      return `hsla(${hsl[0]}, ${hsl[1]}%, ${hsl[2]}%, ${this.alpha}%)`;
-    } else {
-      return `hsl(${hsl[0]}, ${hsl[1]}%, ${hsl[2]}%)`;
-    }
+    this.setColor(`hsla(${this.hue}, ${this.saturation}%, ${this.lightness}%, ${this.alpha}%)`);
   }
 
   handleHueInput(event: Event) {
@@ -140,7 +104,7 @@ export class ColorPicker {
 
     this.handleDrag(event, container, x => {
       this.alpha = clamp(Math.round((x / width) * 100), 0, 100);
-      this.syncValue();
+      this.syncInputValue();
     });
   }
 
@@ -153,7 +117,7 @@ export class ColorPicker {
 
     this.handleDrag(event, container, x => {
       this.hue = clamp(Math.round((x / width) * 360), 0, 360);
-      this.syncValue();
+      this.syncInputValue();
     });
   }
 
@@ -167,7 +131,7 @@ export class ColorPicker {
     this.handleDrag(event, container, (x, y) => {
       this.saturation = clamp(Math.round((x / width) * 100), 0, 100);
       this.lightness = clamp(Math.round(100 - (y / height) * 100), 0, 100);
-      this.syncValue();
+      this.syncInputValue();
     });
   }
 
@@ -270,112 +234,124 @@ export class ColorPicker {
   handleUserChange(event: CustomEvent) {
     const target = event.target as HTMLInputElement;
 
-    if (!this.setColor(target.value)) {
-      // Revert to the last valid color
-      this.setColor(this.value);
-    }
+    this.setColor(target.value);
+
+    target.value = this.value;
   }
 
-  handleUserInput(event: KeyboardEvent) {
-    const target = event.target as HTMLInputElement;
-    this.setColor(target.value, false);
-  }
+  normalizeColorString(colorString: string) {
+    //
+    // The color module we're using doesn't parse % values for the alpha channel in RGBA and HSLA. It also doesn't parse
+    // hex colors when the # is missing. This pre-parser tries to normalize these edge cases to provide a better
+    // experience for users who type in color values.
+    //
+    if (/rgba?/.test(colorString)) {
+      const rgba = colorString
+        .replace(/[^\d.%]/g, ' ')
+        .split(' ')
+        .map(val => val.trim())
+        .filter(val => val.length);
 
-  parseColor(color: string) {
-    const hexPattern = /#?([a-f0-9]{1,2})([a-f0-9]{1,2})([a-f0-9]{1,2})([a-f0-9]{1,2})?/i;
-    let hue = 0;
-    let saturation = 0;
-    let lightness = 0;
-    let alpha = 100;
-
-    color = color.trim().toLowerCase();
-
-    if (/^rgba?/i.test(color)) {
-      // Parse as RGB
-      const rgb = color.replace(/[^\d,.%]/g, '').split(',');
-      if (parseInt(rgb[0]) < 0 || parseInt(rgb[0]) > 255) return false;
-      if (parseInt(rgb[1]) < 0 || parseInt(rgb[1]) > 255) return false;
-      if (parseInt(rgb[2]) < 0 || parseInt(rgb[2]) > 255) return false;
-
-      [hue, saturation, lightness] = convert.rgb.hsl(rgb);
-
-      if (rgb[3] && rgb[3].indexOf('%') > -1) {
-        alpha = Number(rgb[3].replace('%', ''));
-      } else if (rgb[3]) {
-        alpha = Number(rgb[3]) * 100;
+      if (rgba[3] && rgba[3].indexOf('%') > -1) {
+        rgba[3] = (Number(rgba[3].replace(/%/g, '')) / 100).toString();
       }
-    } else if (/^hsla?/i.test(color)) {
-      // Parse as HSL
-      const hsl = color.replace(/[^\d,.%]/g, '').split(',');
-      if (parseInt(hsl[0]) < 0 || parseInt(hsl[0]) > 360) return false;
-      if (parseInt(hsl[1]) < 0 || parseInt(hsl[1]) > 100) return false;
-      if (parseInt(hsl[2]) < 0 || parseInt(hsl[2]) > 100) return false;
 
-      hue = Number(hsl[0]);
-      saturation = Number(hsl[0]);
-      lightness = Number(hsl[0]);
-
-      if (hsl[3] && hsl[3].indexOf('%') > -1) {
-        alpha = Number(hsl[3].replace('%', ''));
-      } else if (hsl[3]) {
-        alpha = Number(hsl[3]) * 100;
-      }
-    } else if (hexPattern.test(color)) {
-      // Parse as hex
-      const hex = color.match(hexPattern).slice(1, 5);
-      if (!/^[a-f0-9]{1,2}$/i.test(hex[0])) return false;
-      if (!/^[a-f0-9]{1,2}$/i.test(hex[1])) return false;
-      if (!/^[a-f0-9]{1,2}$/i.test(hex[2])) return false;
-
-      [hue, saturation, lightness] = convert.hex.hsl(hex.join(''));
-
-      if (hex[3]) {
-        alpha = Math.round((parseInt(hex[3], 16) / 255) * 100);
-      }
-    } else if (/[a-z]+/.test(color)) {
-      // Parse as CSS color
-      try {
-        [hue, saturation, lightness] = convert.keyword.hsl(color);
-        alpha = 100;
-      } catch {
-        return false;
-      }
+      return `rgba(${rgba[0]}, ${rgba[1]}, ${rgba[2]}, ${rgba[3]})`;
     }
 
-    return {
-      hue,
-      saturation,
-      lightness,
-      alpha
-    };
+    if (/hsla?/.test(colorString)) {
+      const hsla = colorString
+        .replace(/[^\d.%]/g, ' ')
+        .split(' ')
+        .map(val => val.trim())
+        .filter(val => val.length);
+
+      if (hsla[3] && hsla[3].indexOf('%') > -1) {
+        hsla[3] = (Number(hsla[3].replace(/%/g, '')) / 100).toString();
+      }
+
+      return `hsla(${hsla[0]}, ${hsla[1]}, ${hsla[2]}, ${hsla[3]})`;
+    }
+
+    if (/^[0-9a-f]+$/.test(colorString)) {
+      return `#${colorString}`;
+    }
+
+    return colorString;
   }
 
-  setColor(color: string, syncValue = true) {
-    const parsed = this.parseColor(color);
+  parseColor(colorString: string) {
+    function toHex(value: number) {
+      const hex = Math.round(value).toString(16);
+      return hex.length == 1 ? `0${hex}` : hex;
+    }
 
-    if (!parsed) {
+    let parsed: any;
+
+    // NOTE: The color module doesn't support % values for alpha channels, so we need to normalize them to 0-1 decimals
+    colorString = this.normalizeColorString(colorString);
+
+    try {
+      parsed = color(colorString);
+    } catch {
       return false;
     }
 
-    this.hue = parsed.hue;
-    this.saturation = parsed.saturation;
-    this.lightness = parsed.lightness;
-    this.alpha = this.opacity ? parsed.alpha : 100;
+    const h = parsed.hsl().color[0];
+    const s = parsed.hsl().color[1];
+    const l = parsed.hsl().color[2];
+    const a = parsed.hsl().valpha;
 
-    if (syncValue) {
-      this.syncValue();
+    const r = parsed.rgb().color[0];
+    const g = parsed.rgb().color[0];
+    const b = parsed.rgb().color[0];
+
+    const hex = `#${toHex(parsed.rgb().color[0])}${toHex(parsed.rgb().color[1])}${toHex(
+      parsed.rgb().color[2]
+    )}`.toUpperCase();
+    const hexa = hex + toHex((parsed.rgb().valpha || 1) * 255).toUpperCase();
+
+    return {
+      hsl: { h, s, l, string: `hsl(${h}, ${s}%, ${l}%)` },
+      hsla: { h, s, l, a, string: `hsla(${h}, ${s}%, ${l}%, ${a})` },
+      rgb: { r, g, b, string: `rgb(${r}, ${g}, ${b})` },
+      rgba: { r, g, b, a, string: `rgba(${r}, ${g}, ${b}, ${a})` },
+      hex,
+      hexa
+    };
+  }
+
+  setColor(colorString: string) {
+    const newColor = this.parseColor(colorString);
+
+    if (!newColor) {
+      return false;
     }
+
+    this.hue = newColor.hsla.h;
+    this.saturation = newColor.hsla.s;
+    this.lightness = newColor.hsla.l;
+    this.alpha = this.opacity ? newColor.hsla.a * 100 : 100;
+
+    this.syncInputValue();
 
     return true;
   }
 
-  syncValue() {
+  syncInputValue() {
+    const currentColor = this.parseColor(`hsla(${this.hue}, ${this.saturation}%, ${this.lightness}%, ${this.alpha}%)`);
+
+    if (!currentColor) {
+      return false;
+    }
+
+    // Update the value
     if (this.format === 'hsl') {
-      this.value = this.getHSL();
+      this.value = this.opacity ? currentColor.hsla.string : currentColor.hsl.string;
     } else if (this.format === 'rgb') {
-      this.value = this.getRGB();
+      this.value = this.opacity ? currentColor.rgba.string : currentColor.rgb.string;
     } else {
-      this.value = this.getHex();
+      this.value = this.opacity ? currentColor.hexa : currentColor.hex;
     }
   }
 
@@ -403,6 +379,7 @@ export class ColorPicker {
                 left: `${x}%`
               }}
               role="slider"
+              aria-label="HSL"
               aria-valuetext={`hsl(${this.hue}, ${this.saturation}%, ${this.lightness}%)`}
               tabIndex={0}
               onKeyDown={this.handleGridKeyDown}
@@ -424,6 +401,7 @@ export class ColorPicker {
                     left: `${this.hue === 0 ? 0 : 100 / (360 / this.hue)}%`
                   }}
                   role="slider"
+                  aria-label="hue"
                   aria-orientation="horizontal"
                   aria-valuemin="0"
                   aria-valuemax="360"
@@ -457,6 +435,7 @@ export class ColorPicker {
                       left: `${this.alpha}%`
                     }}
                     role="slider"
+                    aria-label="alpha"
                     aria-orientation="horizontal"
                     aria-valuemin="0"
                     aria-valuemax="100"
@@ -479,11 +458,11 @@ export class ColorPicker {
           <div class="sl-color-picker__inputs">
             <div class="sl-color-picker__input">
               <sl-input
+                ref={el => (this.input = el)}
                 size="small"
                 type="text"
                 pattern="[a-fA-F\d]+"
                 value={this.value}
-                onInput={this.handleUserInput}
                 onSlChange={this.handleUserChange}
               />
             </div>

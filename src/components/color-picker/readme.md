@@ -1,6 +1,7 @@
 # Color Picker
 
 ```html preview
+<sl-color-picker format="hex"></sl-color-picker>
 <sl-color-picker opacity format="hex"></sl-color-picker>
 ```
 

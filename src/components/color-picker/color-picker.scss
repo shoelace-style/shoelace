@@ -102,7 +102,6 @@
   margin-left: calc(var(--slider-handle-size) / -2);
   transition: var(--sl-transition-fast) box-shadow, var(--sl-transition-x-fast) top ease,
     var(--sl-transition-x-fast) left ease;
-  cursor: pointer;
 
   &:focus {
     outline: none;
