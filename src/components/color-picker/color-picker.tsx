@@ -181,6 +181,8 @@ export class ColorPicker {
       event.preventDefault();
       this.alpha = 100;
     }
+
+    this.syncInputValue();
   }
 
   handleHueKeyDown(event: KeyboardEvent) {
@@ -205,6 +207,8 @@ export class ColorPicker {
       event.preventDefault();
       this.hue = 360;
     }
+
+    this.syncInputValue();
   }
 
   handleGridKeyDown(event: KeyboardEvent) {
@@ -229,6 +233,8 @@ export class ColorPicker {
       event.preventDefault();
       this.lightness = clamp(this.lightness - increment, 0, 100);
     }
+
+    this.syncInputValue();
   }
 
   handleUserChange(event: CustomEvent) {
@@ -469,12 +475,11 @@ export class ColorPicker {
           {this.swatches && (
             <div class="sl-color-picker__swatches">
               {this.swatches.map(swatch => (
-                // @ts-ignore
                 <div
                   class="sl-color-picker__swatch sl-color-picker__transparent-bg"
                   tabIndex={0}
-                  onClick={() => this.setColor(swatch)} // eslint-disable-line
-                  onKeyDown={event => event.key === 'Enter' && this.setColor(swatch)} // eslint-disable-line
+                  onClick={() => this.setColor(swatch)}
+                  onKeyDown={event => event.key === 'Enter' && this.setColor(swatch)}
                 >
                   <div class="sl-color-picker__swatch-color" style={{ backgroundColor: swatch }} />
                 </div>

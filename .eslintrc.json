@@ -33,6 +33,7 @@
     "@stencil/reserved-member-names": "error",
     "@stencil/single-export": "error",
     "@stencil/strict-boolean-conditions": "off",
-    "@stencil/strict-mutable": "off"
+    "@stencil/strict-mutable": "off",
+    "react/jsx-no-bind": "off"
   }
 }
