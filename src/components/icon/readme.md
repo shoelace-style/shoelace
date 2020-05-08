@@ -57,6 +57,7 @@ Icons are courtesy of [Feather Icons](https://feathericons.com/).
 
  - [sl-alert](../alert)
  - [sl-button](../button)
+ - [sl-color-picker](../color-picker)
  - [sl-dialog](../dialog)
  - [sl-dropdown-item](../dropdown-item)
  - [sl-input](../input)
@@ -66,6 +67,7 @@ Icons are courtesy of [Feather Icons](https://feathericons.com/).
 graph TD;
   sl-alert --> sl-icon
   sl-button --> sl-icon
+  sl-color-picker --> sl-icon
   sl-dialog --> sl-icon
   sl-dropdown-item --> sl-icon
   sl-input --> sl-icon

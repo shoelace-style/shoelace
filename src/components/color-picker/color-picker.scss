@@ -137,12 +137,13 @@
 .sl-color-picker__preview {
   flex: 0 0 auto;
   position: relative;
-  width: 32px;
-  height: 32px;
+  width: var(--sl-input-height-small);
+  height: var(--sl-input-height-small);
   border-radius: 50%;
   margin-left: var(--sl-spacing-medium);
+  cursor: pointer;
 
-  &::after {
+  &::before {
     content: '';
     position: absolute;
     top: 0;
@@ -152,6 +153,30 @@
     border-radius: inherit;
     background-color: currentColor;
     box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.sl-color-picker__copy {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-size: var(--sl-input-font-size-medium);
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: inherit;
+  opacity: 0;
+  transition: var(--sl-transition-fast) all;
+
+  &:active {
+    opacity: 1;
+  }
+
+  sl-icon {
+    color: var(--sl-color-white);
   }
 }
 

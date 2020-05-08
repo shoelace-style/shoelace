@@ -14,11 +14,12 @@ export class ColorPicker {
   gridHandle: HTMLElement;
   hueSlider: HTMLElement;
   hueHandle: HTMLElement;
-  input: HTMLSlInputElement;
   menu: HTMLElement;
   trigger: HTMLElement;
+  userInput: HTMLSlInputElement;
 
   constructor() {
+    this.handleCopy = this.handleCopy.bind(this);
     this.handleHueInput = this.handleHueInput.bind(this);
     this.handleSaturationInput = this.handleSaturationInput.bind(this);
     this.handleLightnessInput = this.handleLightnessInput.bind(this);
@@ -73,6 +74,19 @@ export class ColorPicker {
 
   componentWillLoad() {
     this.setColor(`hsla(${this.hue}, ${this.saturation}%, ${this.lightness}%, ${this.alpha}%)`);
+  }
+
+  handleCopy() {
+    const input = Object.assign(document.createElement('input'), {
+      type: 'text',
+      value: this.userInput.value,
+      style: 'position: absolute; opacity: 0; pointer-events: none;'
+    });
+
+    document.body.appendChild(input);
+    input.select();
+    document.execCommand('copy');
+    document.body.removeChild(input);
   }
 
   handleHueInput(event: Event) {
@@ -455,15 +469,22 @@ export class ColorPicker {
 
             <div
               class="sl-color-picker__preview  sl-color-picker__transparent-bg"
+              role="button"
+              aria-label="copy"
               style={{
                 color: `hsla(${this.hue}deg, ${this.saturation}%, ${this.lightness}%, ${this.alpha}%)`
               }}
-            />
+              onClick={this.handleCopy}
+            >
+              <div class="sl-color-picker__copy">
+                <sl-icon name="clipboard" />
+              </div>
+            </div>
           </div>
 
           <div class="sl-color-picker__user-input">
             <sl-input
-              ref={el => (this.input = el)}
+              ref={el => (this.userInput = el)}
               size="small"
               type="text"
               pattern="[a-fA-F\d]+"

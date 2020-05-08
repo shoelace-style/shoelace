@@ -25,7 +25,6 @@ export class Input {
     this.handleFocus = this.handleFocus.bind(this);
     this.handleClearClick = this.handleClearClick.bind(this);
     this.handlePasswordToggle = this.handlePasswordToggle.bind(this);
-    this.handleSlotMouseDown = this.handleSlotMouseDown.bind(this);
   }
 
   @Element() host: HTMLSlInputElement;
@@ -149,11 +148,6 @@ export class Input {
     this.isPasswordVisible = !this.isPasswordVisible;
   }
 
-  handleSlotMouseDown(event: MouseEvent) {
-    event.preventDefault();
-    this.input.focus();
-  }
-
   render() {
     return (
       <div
@@ -171,11 +165,11 @@ export class Input {
           'sl-input--empty': this.value.length === 0
         }}
       >
-        <span class="sl-input__before" onMouseDown={this.handleSlotMouseDown}>
+        <span class="sl-input__before">
           <slot name="before" />
         </span>
 
-        <span class="sl-input__prefix" onMouseDown={this.handleSlotMouseDown}>
+        <span class="sl-input__prefix">
           <slot name="prefix" />
         </span>
 
@@ -229,11 +223,11 @@ export class Input {
           </button>
         )}
 
-        <span class="sl-input__suffix" onMouseDown={this.handleSlotMouseDown}>
+        <span class="sl-input__suffix">
           <slot name="suffix" />
         </span>
 
-        <span class="sl-input__after" onMouseDown={this.handleSlotMouseDown}>
+        <span class="sl-input__after">
           <slot name="after" />
         </span>
       </div>
