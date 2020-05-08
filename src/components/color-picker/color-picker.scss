@@ -137,8 +137,8 @@
 .sl-color-picker__preview {
   flex: 0 0 auto;
   position: relative;
-  width: 2rem;
-  height: 2rem;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   margin-left: var(--sl-spacing-medium);
 
@@ -165,7 +165,7 @@
   border: solid 1px rgba(0, 0, 0, 0.125);
 }
 
-.sl-color-picker__input {
+.sl-color-picker__user-input {
   padding: 0 var(--sl-spacing-small) var(--sl-spacing-small) var(--sl-spacing-small);
 }
 

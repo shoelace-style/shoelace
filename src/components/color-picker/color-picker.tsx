@@ -455,17 +455,15 @@ export class ColorPicker {
             />
           </div>
 
-          <div class="sl-color-picker__inputs">
-            <div class="sl-color-picker__input">
-              <sl-input
-                ref={el => (this.input = el)}
-                size="small"
-                type="text"
-                pattern="[a-fA-F\d]+"
-                value={this.value}
-                onSlChange={this.handleUserChange}
-              />
-            </div>
+          <div class="sl-color-picker__user-input">
+            <sl-input
+              ref={el => (this.input = el)}
+              size="small"
+              type="text"
+              pattern="[a-fA-F\d]+"
+              value={this.value}
+              onSlChange={this.handleUserChange}
+            />
           </div>
 
           {this.swatches && (
