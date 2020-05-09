@@ -57,9 +57,39 @@ Type: `Promise<void>`
 
 
 
+### `select() => Promise<void>`
+
+Selects all the text in the input.
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
 ### `setFocus() => Promise<void>`
 
 Sets focus on the textarea.
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
+### `setRangeText(replacement: string, start: number, end: number, selectMode?: SelectionMode) => Promise<void>`
+
+Replaces a range of text with a new string.
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
+### `setSelectionRange(selectionStart: number, selectionEnd: number, selectionDirection?: "none" | "forward" | "backward") => Promise<void>`
+
+Sets the start and end positions of the text selection (0-based).
 
 #### Returns
 
