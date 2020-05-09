@@ -466,7 +466,9 @@ export class ColorPicker {
               }}
               role="slider"
               aria-label="HSL"
-              aria-valuetext={`hsl(${this.hue}, ${this.saturation}%, ${this.lightness}%)`}
+              aria-valuetext={`hsl(${Math.round(this.hue)}, ${Math.round(this.saturation)}%, ${Math.round(
+                this.lightness
+              )}%)`}
               tabIndex={0}
               onKeyDown={this.handleGridKeyDown}
             />
@@ -491,7 +493,7 @@ export class ColorPicker {
                   aria-orientation="horizontal"
                   aria-valuemin="0"
                   aria-valuemax="360"
-                  aria-valuenow={this.hue}
+                  aria-valuenow={Math.round(this.hue)}
                   tabIndex={0}
                   onKeyDown={this.handleHueKeyDown}
                 />
@@ -525,7 +527,7 @@ export class ColorPicker {
                     aria-orientation="horizontal"
                     aria-valuemin="0"
                     aria-valuemax="100"
-                    aria-valuenow={this.alpha}
+                    aria-valuenow={Math.round(this.alpha)}
                     tabIndex={0}
                     onKeyDown={this.handleAlphaKeyDown}
                   />
