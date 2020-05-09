@@ -77,16 +77,7 @@ export class ColorPicker {
   }
 
   handleCopy() {
-    const input = Object.assign(document.createElement('input'), {
-      type: 'text',
-      value: this.userInput.value,
-      style: 'position: absolute; opacity: 0; pointer-events: none;'
-    });
-
-    document.body.appendChild(input);
-    input.select();
-    document.execCommand('copy');
-    document.body.removeChild(input);
+    this.userInput.select().then(() => document.execCommand('copy'));
   }
 
   handleHueInput(event: Event) {
