@@ -1,4 +1,4 @@
-import { Component, Prop, State, h } from '@stencil/core';
+import { Component, Prop, State, Watch, h } from '@stencil/core';
 import color from 'color';
 import { clamp } from '../../utilities/math';
 
@@ -40,7 +40,7 @@ export class ColorPicker {
   @State() alpha = 100;
 
   /** The current color. */
-  @Prop({ mutable: true, reflect: true }) value = '';
+  @Prop({ mutable: true, reflect: true }) value = '#00ff00';
 
   /**
    * The format to use for the generated color `value`. If opacity is enabled, these will translate to HEXA, RGBA, and
@@ -51,6 +51,9 @@ export class ColorPicker {
 
   /** Whether to show the opacity slider. */
   @Prop() opacity = false;
+
+  /** By default, the value will be set in lowercase. Set this to true to set it in uppercase instead. */
+  @Prop() uppercase = false;
 
   /** An array of predefined color swatches to display. */
   @Prop() swatches = [
@@ -72,8 +75,24 @@ export class ColorPicker {
     '#fff'
   ];
 
+  @Watch('value')
+  handleValueChange(newValue: string, oldValue: string) {
+    const newColor = this.parseColor(newValue);
+
+    if (newColor) {
+      this.hue = newColor.hsla.h;
+      this.saturation = newColor.hsla.s;
+      this.lightness = newColor.hsla.l;
+      this.alpha = newColor.hsla.a * 100;
+    } else {
+      this.value = oldValue;
+    }
+  }
+
   componentWillLoad() {
-    this.setColor(`hsla(${this.hue}, ${this.saturation}%, ${this.lightness}%, ${this.alpha}%)`);
+    if (!this.setColor(this.value)) {
+      this.setColor(`#ffff`);
+    }
   }
 
   handleCopy() {
@@ -108,7 +127,7 @@ export class ColorPicker {
     event.preventDefault();
 
     this.handleDrag(event, container, x => {
-      this.alpha = clamp(Math.round((x / width) * 100), 0, 100);
+      this.alpha = clamp((x / width) * 100, 0, 100);
       this.syncInputValue();
     });
   }
@@ -121,7 +140,7 @@ export class ColorPicker {
     event.preventDefault();
 
     this.handleDrag(event, container, x => {
-      this.hue = clamp(Math.round((x / width) * 360), 0, 360);
+      this.hue = clamp((x / width) * 360, 0, 360);
       this.syncInputValue();
     });
   }
@@ -134,8 +153,8 @@ export class ColorPicker {
     event.preventDefault();
 
     this.handleDrag(event, container, (x, y) => {
-      this.saturation = clamp(Math.round((x / width) * 100), 0, 100);
-      this.lightness = clamp(Math.round(100 - (y / height) * 100), 0, 100);
+      this.saturation = clamp((x / width) * 100, 0, 100);
+      this.lightness = clamp(100 - (y / height) * 100, 0, 100);
       this.syncInputValue();
     });
   }
@@ -170,24 +189,26 @@ export class ColorPicker {
     if (event.key === 'ArrowLeft') {
       event.preventDefault();
       this.alpha = clamp(this.alpha - increment, 0, 100);
+      this.syncInputValue();
     }
 
     if (event.key === 'ArrowRight') {
       event.preventDefault();
       this.alpha = clamp(this.alpha + increment, 0, 100);
+      this.syncInputValue();
     }
 
     if (event.key === 'Home') {
       event.preventDefault();
       this.alpha = 0;
+      this.syncInputValue();
     }
 
     if (event.key === 'End') {
       event.preventDefault();
       this.alpha = 100;
+      this.syncInputValue();
     }
-
-    this.syncInputValue();
   }
 
   handleHueKeyDown(event: KeyboardEvent) {
@@ -196,24 +217,26 @@ export class ColorPicker {
     if (event.key === 'ArrowLeft') {
       event.preventDefault();
       this.hue = clamp(this.hue - increment, 0, 360);
+      this.syncInputValue();
     }
 
     if (event.key === 'ArrowRight') {
       event.preventDefault();
       this.hue = clamp(this.hue + increment, 0, 360);
+      this.syncInputValue();
     }
 
     if (event.key === 'Home') {
       event.preventDefault();
       this.hue = 0;
+      this.syncInputValue();
     }
 
     if (event.key === 'End') {
       event.preventDefault();
       this.hue = 360;
+      this.syncInputValue();
     }
-
-    this.syncInputValue();
   }
 
   handleGridKeyDown(event: KeyboardEvent) {
@@ -222,31 +245,32 @@ export class ColorPicker {
     if (event.key === 'ArrowLeft') {
       event.preventDefault();
       this.saturation = clamp(this.saturation - increment, 0, 100);
+      this.syncInputValue();
     }
 
     if (event.key === 'ArrowRight') {
       event.preventDefault();
       this.saturation = clamp(this.saturation + increment, 0, 100);
+      this.syncInputValue();
     }
 
     if (event.key === 'ArrowUp') {
       event.preventDefault();
       this.lightness = clamp(this.lightness + increment, 0, 100);
+      this.syncInputValue();
     }
 
     if (event.key === 'ArrowDown') {
       event.preventDefault();
       this.lightness = clamp(this.lightness - increment, 0, 100);
+      this.syncInputValue();
     }
-
-    this.syncInputValue();
   }
 
   handleUserChange(event: CustomEvent) {
     const target = event.target as HTMLInputElement;
 
     this.setColor(target.value);
-
     target.value = this.value;
   }
 
@@ -293,13 +317,13 @@ export class ColorPicker {
 
   parseColor(colorString: string) {
     function toHex(value: number) {
-      const hex = Math.round(value).toString(16);
+      const hex = value.toString(16);
       return hex.length == 1 ? `0${hex}` : hex;
     }
 
     let parsed: any;
 
-    // NOTE: The color module doesn't support % values for alpha channels, so we need to normalize them to 0-1 decimals
+    // The color module has a weak parser, so we normalize certain things to make the user experience better
     colorString = this.normalizeColorString(colorString);
 
     try {
@@ -308,25 +332,22 @@ export class ColorPicker {
       return false;
     }
 
-    const h = parsed.hsl().color[0];
-    const s = parsed.hsl().color[1];
-    const l = parsed.hsl().color[2];
-    const a = parsed.hsl().valpha;
+    const h = Math.round(parsed.hsl().color[0]);
+    const s = Math.round(parsed.hsl().color[1]);
+    const l = Math.round(parsed.hsl().color[2]);
+    const a = parsed.hsl().valpha.toFixed(2);
 
-    const r = parsed.rgb().color[0];
-    const g = parsed.rgb().color[0];
-    const b = parsed.rgb().color[0];
-
-    const hex = `#${toHex(parsed.rgb().color[0])}${toHex(parsed.rgb().color[1])}${toHex(
-      parsed.rgb().color[2]
-    )}`.toUpperCase();
-    const hexa = hex + toHex((parsed.rgb().valpha || 1) * 255).toUpperCase();
+    const r = Math.round(parsed.rgb().color[0]);
+    const g = Math.round(parsed.rgb().color[1]);
+    const b = Math.round(parsed.rgb().color[2]);
+    const hex = this.setLetterCase(`#${toHex(r)}${toHex(g)}${toHex(b)}`);
+    const hexa = this.setLetterCase(hex + toHex(a * 255));
 
     return {
-      hsl: { h, s, l, string: `hsl(${h}, ${s}%, ${l}%)` },
-      hsla: { h, s, l, a, string: `hsla(${h}, ${s}%, ${l}%, ${a})` },
-      rgb: { r, g, b, string: `rgb(${r}, ${g}, ${b})` },
-      rgba: { r, g, b, a, string: `rgba(${r}, ${g}, ${b}, ${a})` },
+      hsl: { h, s, l, string: this.setLetterCase(`hsl(${h}, ${s}%, ${l}%)`) },
+      hsla: { h, s, l, a, string: this.setLetterCase(`hsla(${h}, ${s}%, ${l}%, ${a})`) },
+      rgb: { r, g, b, string: this.setLetterCase(`rgb(${r}, ${g}, ${b})`) },
+      rgba: { r, g, b, a, string: this.setLetterCase(`rgba(${r}, ${g}, ${b}, ${a})`) },
       hex,
       hexa
     };
@@ -349,8 +370,14 @@ export class ColorPicker {
     return true;
   }
 
+  setLetterCase(string: string) {
+    return this.uppercase ? string.toUpperCase() : string.toLowerCase();
+  }
+
   syncInputValue() {
-    const currentColor = this.parseColor(`hsla(${this.hue}, ${this.saturation}%, ${this.lightness}%, ${this.alpha}%)`);
+    const currentColor = this.parseColor(
+      `hsla(${this.hue}, ${this.saturation}%, ${this.lightness}%, ${this.alpha / 100})`
+    );
 
     if (!currentColor) {
       return false;
@@ -463,7 +490,7 @@ export class ColorPicker {
               role="button"
               aria-label="copy"
               style={{
-                color: `hsla(${this.hue}deg, ${this.saturation}%, ${this.lightness}%, ${this.alpha}%)`
+                color: `hsla(${this.hue}deg, ${this.saturation}%, ${this.lightness}%, ${this.alpha / 100})`
               }}
               onClick={this.handleCopy}
             >

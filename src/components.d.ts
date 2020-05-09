@@ -110,6 +110,10 @@ export namespace Components {
          */
         "swatches": string[];
         /**
+          * By default, the value will be set in lowercase. Set this to true to set it in uppercase instead.
+         */
+        "uppercase": boolean;
+        /**
           * The current color.
          */
         "value": string;
@@ -876,6 +880,10 @@ declare namespace LocalJSX {
           * An array of predefined color swatches to display.
          */
         "swatches"?: string[];
+        /**
+          * By default, the value will be set in lowercase. Set this to true to set it in uppercase instead.
+         */
+        "uppercase"?: boolean;
         /**
           * The current color.
          */
