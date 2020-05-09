@@ -41,7 +41,7 @@ export class ColorPicker {
   @State() alpha = 100;
 
   /** The current color. */
-  @Prop({ mutable: true, reflect: true }) value = '#00ff00';
+  @Prop({ mutable: true, reflect: true }) value = '#ffffff';
 
   /**
    * The format to use for the generated color `value`. If opacity is enabled, these will translate to HEXA, RGBA, and
@@ -73,11 +73,7 @@ export class ColorPicker {
     '#444',
     '#888',
     '#ccc',
-    '#fff',
-    'rgba(255, 255, 255, 1)',
-    'rgba(0, 0, 0, 1)',
-    'rgba(127, 127, 127, 1)',
-    'rgba(128, 128, 128, 1)'
+    '#fff'
   ];
 
   @Watch('value')
@@ -101,6 +97,7 @@ export class ColorPicker {
     }
 
     this.textInputValue = this.value;
+    this.syncTextInput();
   }
 
   handleCopy() {
@@ -139,7 +136,7 @@ export class ColorPicker {
 
     this.handleDrag(event, container, x => {
       this.alpha = clamp((x / width) * 100, 0, 100);
-      this.syncInputValue();
+      this.syncTextInput();
     });
   }
 
@@ -152,7 +149,7 @@ export class ColorPicker {
 
     this.handleDrag(event, container, x => {
       this.hue = clamp((x / width) * 360, 0, 360);
-      this.syncInputValue();
+      this.syncTextInput();
     });
   }
 
@@ -166,7 +163,7 @@ export class ColorPicker {
     this.handleDrag(event, container, (x, y) => {
       this.saturation = clamp((x / width) * 100, 0, 100);
       this.lightness = clamp(100 - (y / height) * 100, 0, 100);
-      this.syncInputValue();
+      this.syncTextInput();
     });
   }
 
@@ -200,25 +197,25 @@ export class ColorPicker {
     if (event.key === 'ArrowLeft') {
       event.preventDefault();
       this.alpha = clamp(this.alpha - increment, 0, 100);
-      this.syncInputValue();
+      this.syncTextInput();
     }
 
     if (event.key === 'ArrowRight') {
       event.preventDefault();
       this.alpha = clamp(this.alpha + increment, 0, 100);
-      this.syncInputValue();
+      this.syncTextInput();
     }
 
     if (event.key === 'Home') {
       event.preventDefault();
       this.alpha = 0;
-      this.syncInputValue();
+      this.syncTextInput();
     }
 
     if (event.key === 'End') {
       event.preventDefault();
       this.alpha = 100;
-      this.syncInputValue();
+      this.syncTextInput();
     }
   }
 
@@ -228,25 +225,25 @@ export class ColorPicker {
     if (event.key === 'ArrowLeft') {
       event.preventDefault();
       this.hue = clamp(this.hue - increment, 0, 360);
-      this.syncInputValue();
+      this.syncTextInput();
     }
 
     if (event.key === 'ArrowRight') {
       event.preventDefault();
       this.hue = clamp(this.hue + increment, 0, 360);
-      this.syncInputValue();
+      this.syncTextInput();
     }
 
     if (event.key === 'Home') {
       event.preventDefault();
       this.hue = 0;
-      this.syncInputValue();
+      this.syncTextInput();
     }
 
     if (event.key === 'End') {
       event.preventDefault();
       this.hue = 360;
-      this.syncInputValue();
+      this.syncTextInput();
     }
   }
 
@@ -256,25 +253,25 @@ export class ColorPicker {
     if (event.key === 'ArrowLeft') {
       event.preventDefault();
       this.saturation = clamp(this.saturation - increment, 0, 100);
-      this.syncInputValue();
+      this.syncTextInput();
     }
 
     if (event.key === 'ArrowRight') {
       event.preventDefault();
       this.saturation = clamp(this.saturation + increment, 0, 100);
-      this.syncInputValue();
+      this.syncTextInput();
     }
 
     if (event.key === 'ArrowUp') {
       event.preventDefault();
       this.lightness = clamp(this.lightness + increment, 0, 100);
-      this.syncInputValue();
+      this.syncTextInput();
     }
 
     if (event.key === 'ArrowDown') {
       event.preventDefault();
       this.lightness = clamp(this.lightness - increment, 0, 100);
-      this.syncInputValue();
+      this.syncTextInput();
     }
   }
 
@@ -328,14 +325,7 @@ export class ColorPicker {
 
   parseColor(colorString: string) {
     function toHex(value: number) {
-      //
-      // TODO: fix rounding error. This might actually be in the color library :-\
-      //
-      //  #d0021b => #cf021a
-      //  #444444 => #454545
-      //  #888888 => #878787
-      //
-      const hex = Math.trunc(value).toString(16);
+      const hex = Math.round(value).toString(16);
       return hex.length === 1 ? `0${hex}` : hex;
     }
 
@@ -351,17 +341,17 @@ export class ColorPicker {
     }
 
     const hsl = {
-      h: Math.round(parsed.hsl().color[0]),
-      s: Math.round(parsed.hsl().color[1]),
-      l: Math.round(parsed.hsl().color[2]),
-      a: Number(parsed.hsl().valpha.toFixed(2).toString())
+      h: parsed.hsl().color[0],
+      s: parsed.hsl().color[1],
+      l: parsed.hsl().color[2],
+      a: parsed.hsl().valpha
     };
 
     const rgb = {
-      r: Math.round(parsed.rgb().color[0]),
-      g: Math.round(parsed.rgb().color[1]),
-      b: Math.round(parsed.rgb().color[2]),
-      a: Number(parsed.rgb().valpha.toFixed(2).toString())
+      r: parsed.rgb().color[0],
+      g: parsed.rgb().color[1],
+      b: parsed.rgb().color[2],
+      a: parsed.rgb().valpha
     };
 
     const hex = {
@@ -376,27 +366,35 @@ export class ColorPicker {
         h: hsl.h,
         s: hsl.s,
         l: hsl.l,
-        string: this.setLetterCase(`hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`)
+        string: this.setLetterCase(`hsl(${Math.round(hsl.h)}, ${Math.round(hsl.s)}%, ${Math.round(hsl.l)}%)`)
       },
       hsla: {
         h: hsl.h,
         s: hsl.s,
         l: hsl.l,
         a: hsl.a,
-        string: this.setLetterCase(`hsla(${hsl.h}, ${hsl.s}%, ${hsl.l}%, ${hsl.a})`)
+        string: this.setLetterCase(
+          `hsla(${Math.round(hsl.h)}, ${Math.round(hsl.s)}%, ${Math.round(hsl.l)}%, ${Number(
+            hsl.a.toFixed(2).toString()
+          )})`
+        )
       },
       rgb: {
         r: rgb.r,
         g: rgb.g,
         b: rgb.b,
-        string: this.setLetterCase(`rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`)
+        string: this.setLetterCase(`rgb(${Math.round(rgb.r)}, ${Math.round(rgb.g)}, ${Math.round(rgb.b)})`)
       },
       rgba: {
         r: rgb.r,
         g: rgb.g,
         b: rgb.b,
         a: rgb.a,
-        string: this.setLetterCase(`rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${rgb.a})`)
+        string: this.setLetterCase(
+          `rgba(${Math.round(rgb.r)}, ${Math.round(rgb.g)}, ${Math.round(rgb.b)}, ${Number(
+            rgb.a.toFixed(2).toString()
+          )})`
+        )
       },
       hex: this.setLetterCase(`#${hex.r}${hex.g}${hex.b}`),
       hexa: this.setLetterCase(`#${hex.r}${hex.g}${hex.b}${hex.a}`)
@@ -415,7 +413,7 @@ export class ColorPicker {
     this.lightness = newColor.hsla.l;
     this.alpha = this.opacity ? newColor.hsla.a * 100 : 100;
 
-    this.syncInputValue();
+    this.syncTextInput();
 
     return true;
   }
@@ -424,7 +422,7 @@ export class ColorPicker {
     return this.uppercase ? string.toUpperCase() : string.toLowerCase();
   }
 
-  syncInputValue() {
+  syncTextInput() {
     const currentColor = this.parseColor(
       `hsla(${this.hue}, ${this.saturation}%, ${this.lightness}%, ${this.alpha / 100})`
     );
