@@ -15,8 +15,8 @@ export class ColorPicker {
   hueSlider: HTMLElement;
   hueHandle: HTMLElement;
   menu: HTMLElement;
+  textInput: HTMLSlInputElement;
   trigger: HTMLElement;
-  userInput: HTMLSlInputElement;
 
   constructor() {
     this.handleCopy = this.handleCopy.bind(this);
@@ -31,9 +31,10 @@ export class ColorPicker {
     this.handleGridKeyDown = this.handleGridKeyDown.bind(this);
     this.handleHueDrag = this.handleHueDrag.bind(this);
     this.handleHueKeyDown = this.handleHueKeyDown.bind(this);
-    this.handleUserChange = this.handleUserChange.bind(this);
+    this.handletextInputChange = this.handletextInputChange.bind(this);
   }
 
+  @State() textInputValue = '';
   @State() hue = 0;
   @State() saturation = 100;
   @State() lightness = 100;
@@ -72,7 +73,11 @@ export class ColorPicker {
     '#444',
     '#888',
     '#ccc',
-    '#fff'
+    '#fff',
+    'rgba(255, 255, 255, 1)',
+    'rgba(0, 0, 0, 1)',
+    'rgba(127, 127, 127, 1)',
+    'rgba(128, 128, 128, 1)'
   ];
 
   @Watch('value')
@@ -80,12 +85,13 @@ export class ColorPicker {
     const newColor = this.parseColor(newValue);
 
     if (newColor) {
+      this.textInputValue = this.value;
       this.hue = newColor.hsla.h;
       this.saturation = newColor.hsla.s;
       this.lightness = newColor.hsla.l;
       this.alpha = newColor.hsla.a * 100;
     } else {
-      this.value = oldValue;
+      this.textInputValue = oldValue;
     }
   }
 
@@ -93,10 +99,15 @@ export class ColorPicker {
     if (!this.setColor(this.value)) {
       this.setColor(`#ffff`);
     }
+
+    this.textInputValue = this.value;
   }
 
   handleCopy() {
-    this.userInput.select().then(() => document.execCommand('copy'));
+    this.textInput
+      .select()
+      .then(() => document.execCommand('copy'))
+      .then(() => this.textInput.removeFocus());
   }
 
   handleHueInput(event: Event) {
@@ -267,7 +278,7 @@ export class ColorPicker {
     }
   }
 
-  handleUserChange(event: CustomEvent) {
+  handletextInputChange(event: CustomEvent) {
     const target = event.target as HTMLInputElement;
 
     this.setColor(target.value);
@@ -317,8 +328,15 @@ export class ColorPicker {
 
   parseColor(colorString: string) {
     function toHex(value: number) {
-      const hex = value.toString(16);
-      return hex.length == 1 ? `0${hex}` : hex;
+      //
+      // TODO: fix rounding error. This might actually be in the color library :-\
+      //
+      //  #d0021b => #cf021a
+      //  #444444 => #454545
+      //  #888888 => #878787
+      //
+      const hex = Math.trunc(value).toString(16);
+      return hex.length === 1 ? `0${hex}` : hex;
     }
 
     let parsed: any;
@@ -332,24 +350,56 @@ export class ColorPicker {
       return false;
     }
 
-    const h = Math.round(parsed.hsl().color[0]);
-    const s = Math.round(parsed.hsl().color[1]);
-    const l = Math.round(parsed.hsl().color[2]);
-    const a = parsed.hsl().valpha.toFixed(2);
+    const hsl = {
+      h: Math.round(parsed.hsl().color[0]),
+      s: Math.round(parsed.hsl().color[1]),
+      l: Math.round(parsed.hsl().color[2]),
+      a: Number(parsed.hsl().valpha.toFixed(2).toString())
+    };
 
-    const r = Math.round(parsed.rgb().color[0]);
-    const g = Math.round(parsed.rgb().color[1]);
-    const b = Math.round(parsed.rgb().color[2]);
-    const hex = this.setLetterCase(`#${toHex(r)}${toHex(g)}${toHex(b)}`);
-    const hexa = this.setLetterCase(hex + toHex(a * 255));
+    const rgb = {
+      r: Math.round(parsed.rgb().color[0]),
+      g: Math.round(parsed.rgb().color[1]),
+      b: Math.round(parsed.rgb().color[2]),
+      a: Number(parsed.rgb().valpha.toFixed(2).toString())
+    };
+
+    const hex = {
+      r: toHex(parsed.rgb().color[0]),
+      g: toHex(parsed.rgb().color[1]),
+      b: toHex(parsed.rgb().color[2]),
+      a: toHex(parsed.rgb().valpha * 255)
+    };
 
     return {
-      hsl: { h, s, l, string: this.setLetterCase(`hsl(${h}, ${s}%, ${l}%)`) },
-      hsla: { h, s, l, a, string: this.setLetterCase(`hsla(${h}, ${s}%, ${l}%, ${a})`) },
-      rgb: { r, g, b, string: this.setLetterCase(`rgb(${r}, ${g}, ${b})`) },
-      rgba: { r, g, b, a, string: this.setLetterCase(`rgba(${r}, ${g}, ${b}, ${a})`) },
-      hex,
-      hexa
+      hsl: {
+        h: hsl.h,
+        s: hsl.s,
+        l: hsl.l,
+        string: this.setLetterCase(`hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`)
+      },
+      hsla: {
+        h: hsl.h,
+        s: hsl.s,
+        l: hsl.l,
+        a: hsl.a,
+        string: this.setLetterCase(`hsla(${hsl.h}, ${hsl.s}%, ${hsl.l}%, ${hsl.a})`)
+      },
+      rgb: {
+        r: rgb.r,
+        g: rgb.g,
+        b: rgb.b,
+        string: this.setLetterCase(`rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`)
+      },
+      rgba: {
+        r: rgb.r,
+        g: rgb.g,
+        b: rgb.b,
+        a: rgb.a,
+        string: this.setLetterCase(`rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${rgb.a})`)
+      },
+      hex: this.setLetterCase(`#${hex.r}${hex.g}${hex.b}`),
+      hexa: this.setLetterCase(`#${hex.r}${hex.g}${hex.b}${hex.a}`)
     };
   }
 
@@ -385,11 +435,11 @@ export class ColorPicker {
 
     // Update the value
     if (this.format === 'hsl') {
-      this.value = this.opacity ? currentColor.hsla.string : currentColor.hsl.string;
+      this.textInputValue = this.opacity ? currentColor.hsla.string : currentColor.hsl.string;
     } else if (this.format === 'rgb') {
-      this.value = this.opacity ? currentColor.rgba.string : currentColor.rgb.string;
+      this.textInputValue = this.opacity ? currentColor.rgba.string : currentColor.rgb.string;
     } else {
-      this.value = this.opacity ? currentColor.hexa : currentColor.hex;
+      this.textInputValue = this.opacity ? currentColor.hexa : currentColor.hex;
     }
   }
 
@@ -500,14 +550,14 @@ export class ColorPicker {
             </div>
           </div>
 
-          <div class="sl-color-picker__user-input">
+          <div class="sl-color-picker__text-input">
             <sl-input
-              ref={el => (this.userInput = el)}
+              ref={el => (this.textInput = el)}
               size="small"
               type="text"
               pattern="[a-fA-F\d]+"
-              value={this.value}
-              onSlChange={this.handleUserChange}
+              value={this.textInputValue}
+              onSlChange={this.handletextInputChange}
             />
           </div>
 
