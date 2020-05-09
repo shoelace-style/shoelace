@@ -266,9 +266,21 @@ export namespace Components {
          */
         "required": boolean;
         /**
+          * Selects all the text in the input.
+         */
+        "select": () => Promise<void>;
+        /**
           * Sets focus on the input.
          */
         "setFocus": () => Promise<void>;
+        /**
+          * Replaces a range of text with a new string.
+         */
+        "setRangeText": (replacement: string, start: number, end: number, selectMode?: SelectionMode) => Promise<void>;
+        /**
+          * Sets the start and end positions of the text selection (0-based).
+         */
+        "setSelectionRange": (selectionStart: number, selectionEnd: number, selectionDirection?: "none" | "forward" | "backward") => Promise<void>;
         /**
           * The input's size, one of `small`, `medium`, or `large`.
          */
@@ -518,9 +530,21 @@ export namespace Components {
          */
         "rows": number;
         /**
+          * Selects all the text in the input.
+         */
+        "select": () => Promise<void>;
+        /**
           * Sets focus on the textarea.
          */
         "setFocus": () => Promise<void>;
+        /**
+          * Replaces a range of text with a new string.
+         */
+        "setRangeText": (replacement: string, start: number, end: number, selectMode?: SelectionMode) => Promise<void>;
+        /**
+          * Sets the start and end positions of the text selection (0-based).
+         */
+        "setSelectionRange": (selectionStart: number, selectionEnd: number, selectionDirection?: "none" | "forward" | "backward") => Promise<void>;
         /**
           * The textarea's size.
          */
