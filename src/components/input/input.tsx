@@ -119,6 +119,33 @@ export class Input {
     this.input.blur();
   }
 
+  /** Selects all the text in the input. */
+  @Method()
+  async select() {
+    return this.input.select();
+  }
+
+  /** Sets the start and end positions of the text selection (0-based). */
+  @Method()
+  async setSelectionRange(
+    selectionStart: number,
+    selectionEnd: number,
+    selectionDirection: 'forward' | 'backward' | 'none' = 'none'
+  ) {
+    return this.input.setSelectionRange(selectionStart, selectionEnd, selectionDirection);
+  }
+
+  /** Replaces a range of text with a new string. */
+  @Method()
+  async setRangeText(
+    replacement: string,
+    start: number,
+    end: number,
+    selectMode: 'select' | 'start' | 'end' | 'preserve' = 'preserve'
+  ) {
+    return this.input.setRangeText(replacement, start, end, selectMode);
+  }
+
   handleChange() {
     this.slChange.emit();
   }
