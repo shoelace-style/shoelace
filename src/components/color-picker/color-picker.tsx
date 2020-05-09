@@ -10,6 +10,7 @@ import { clamp } from '../../utilities/math';
 export class ColorPicker {
   alphaSlider: HTMLElement;
   alphaHandle: HTMLElement;
+  bypassValueParse = false;
   grid: HTMLElement;
   gridHandle: HTMLElement;
   hueSlider: HTMLElement;
@@ -78,16 +79,18 @@ export class ColorPicker {
 
   @Watch('value')
   handleValueChange(newValue: string, oldValue: string) {
-    const newColor = this.parseColor(newValue);
+    if (!this.bypassValueParse) {
+      const newColor = this.parseColor(newValue);
 
-    if (newColor) {
-      this.textInputValue = this.value;
-      this.hue = newColor.hsla.h;
-      this.saturation = newColor.hsla.s;
-      this.lightness = newColor.hsla.l;
-      this.alpha = newColor.hsla.a * 100;
-    } else {
-      this.textInputValue = oldValue;
+      if (newColor) {
+        this.textInputValue = this.value;
+        this.hue = newColor.hsla.h;
+        this.saturation = newColor.hsla.s;
+        this.lightness = newColor.hsla.l;
+        this.alpha = newColor.hsla.a * 100;
+      } else {
+        this.textInputValue = oldValue;
+      }
     }
   }
 
@@ -97,7 +100,7 @@ export class ColorPicker {
     }
 
     this.textInputValue = this.value;
-    this.syncTextInput();
+    this.syncValues();
   }
 
   handleCopy() {
@@ -136,7 +139,7 @@ export class ColorPicker {
 
     this.handleDrag(event, container, x => {
       this.alpha = clamp((x / width) * 100, 0, 100);
-      this.syncTextInput();
+      this.syncValues();
     });
   }
 
@@ -149,7 +152,7 @@ export class ColorPicker {
 
     this.handleDrag(event, container, x => {
       this.hue = clamp((x / width) * 360, 0, 360);
-      this.syncTextInput();
+      this.syncValues();
     });
   }
 
@@ -163,7 +166,7 @@ export class ColorPicker {
     this.handleDrag(event, container, (x, y) => {
       this.saturation = clamp((x / width) * 100, 0, 100);
       this.lightness = clamp(100 - (y / height) * 100, 0, 100);
-      this.syncTextInput();
+      this.syncValues();
     });
   }
 
@@ -197,25 +200,25 @@ export class ColorPicker {
     if (event.key === 'ArrowLeft') {
       event.preventDefault();
       this.alpha = clamp(this.alpha - increment, 0, 100);
-      this.syncTextInput();
+      this.syncValues();
     }
 
     if (event.key === 'ArrowRight') {
       event.preventDefault();
       this.alpha = clamp(this.alpha + increment, 0, 100);
-      this.syncTextInput();
+      this.syncValues();
     }
 
     if (event.key === 'Home') {
       event.preventDefault();
       this.alpha = 0;
-      this.syncTextInput();
+      this.syncValues();
     }
 
     if (event.key === 'End') {
       event.preventDefault();
       this.alpha = 100;
-      this.syncTextInput();
+      this.syncValues();
     }
   }
 
@@ -225,25 +228,25 @@ export class ColorPicker {
     if (event.key === 'ArrowLeft') {
       event.preventDefault();
       this.hue = clamp(this.hue - increment, 0, 360);
-      this.syncTextInput();
+      this.syncValues();
     }
 
     if (event.key === 'ArrowRight') {
       event.preventDefault();
       this.hue = clamp(this.hue + increment, 0, 360);
-      this.syncTextInput();
+      this.syncValues();
     }
 
     if (event.key === 'Home') {
       event.preventDefault();
       this.hue = 0;
-      this.syncTextInput();
+      this.syncValues();
     }
 
     if (event.key === 'End') {
       event.preventDefault();
       this.hue = 360;
-      this.syncTextInput();
+      this.syncValues();
     }
   }
 
@@ -253,25 +256,25 @@ export class ColorPicker {
     if (event.key === 'ArrowLeft') {
       event.preventDefault();
       this.saturation = clamp(this.saturation - increment, 0, 100);
-      this.syncTextInput();
+      this.syncValues();
     }
 
     if (event.key === 'ArrowRight') {
       event.preventDefault();
       this.saturation = clamp(this.saturation + increment, 0, 100);
-      this.syncTextInput();
+      this.syncValues();
     }
 
     if (event.key === 'ArrowUp') {
       event.preventDefault();
       this.lightness = clamp(this.lightness + increment, 0, 100);
-      this.syncTextInput();
+      this.syncValues();
     }
 
     if (event.key === 'ArrowDown') {
       event.preventDefault();
       this.lightness = clamp(this.lightness - increment, 0, 100);
-      this.syncTextInput();
+      this.syncValues();
     }
   }
 
@@ -413,7 +416,7 @@ export class ColorPicker {
     this.lightness = newColor.hsla.l;
     this.alpha = this.opacity ? newColor.hsla.a * 100 : 100;
 
-    this.syncTextInput();
+    this.syncValues();
 
     return true;
   }
@@ -422,7 +425,7 @@ export class ColorPicker {
     return this.uppercase ? string.toUpperCase() : string.toLowerCase();
   }
 
-  syncTextInput() {
+  syncValues() {
     const currentColor = this.parseColor(
       `hsla(${this.hue}, ${this.saturation}%, ${this.lightness}%, ${this.alpha / 100})`
     );
@@ -439,6 +442,12 @@ export class ColorPicker {
     } else {
       this.textInputValue = this.opacity ? currentColor.hexa : currentColor.hex;
     }
+
+    // Setting this.value will trigger the watcher which parses the new color. We want to bypass that behavior because
+    // a) we've already done it in this function and b) conversion/rounding can lead to values changing slightly.
+    this.bypassValueParse = true;
+    this.value = this.textInputValue;
+    this.bypassValueParse = false;
   }
 
   render() {
