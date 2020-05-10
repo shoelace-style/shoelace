@@ -19,6 +19,13 @@
 | `value`     | `value`     | The current color.                                                                                                                                                                                                                                                       | `string`                  | `'#ffffff'`                                                                                                                                                                                                                             |
 
 
+## Events
+
+| Event      | Description                                    | Type               |
+| ---------- | ---------------------------------------------- | ------------------ |
+| `slChange` | Emitted when the color picker's value changes. | `CustomEvent<any>` |
+
+
 ## Dependencies
 
 ### Depends on

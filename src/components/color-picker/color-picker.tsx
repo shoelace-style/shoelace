@@ -1,4 +1,4 @@
-import { Component, Prop, State, Watch, h } from '@stencil/core';
+import { Component, Event, EventEmitter, Prop, State, Watch, h } from '@stencil/core';
 import color from 'color';
 import { clamp } from '../../utilities/math';
 
@@ -15,6 +15,7 @@ export class ColorPicker {
   gridHandle: HTMLElement;
   hueSlider: HTMLElement;
   hueHandle: HTMLElement;
+  lastValueEmitted: string;
   menu: HTMLElement;
   textInput: HTMLSlInputElement;
   trigger: HTMLElement;
@@ -32,7 +33,7 @@ export class ColorPicker {
     this.handleGridKeyDown = this.handleGridKeyDown.bind(this);
     this.handleHueDrag = this.handleHueDrag.bind(this);
     this.handleHueKeyDown = this.handleHueKeyDown.bind(this);
-    this.handletextInputChange = this.handletextInputChange.bind(this);
+    this.handleTextInputChange = this.handleTextInputChange.bind(this);
   }
 
   @State() textInputValue = '';
@@ -77,6 +78,9 @@ export class ColorPicker {
     '#fff'
   ];
 
+  /** Emitted when the color picker's value changes. */
+  @Event() slChange: EventEmitter;
+
   @Watch('value')
   handleValueChange(newValue: string, oldValue: string) {
     if (!this.bypassValueParse) {
@@ -92,6 +96,11 @@ export class ColorPicker {
         this.textInputValue = oldValue;
       }
     }
+
+    if (this.value !== this.lastValueEmitted) {
+      this.slChange.emit();
+      this.lastValueEmitted = this.value;
+    }
   }
 
   componentWillLoad() {
@@ -100,6 +109,7 @@ export class ColorPicker {
     }
 
     this.textInputValue = this.value;
+    this.lastValueEmitted = this.value;
     this.syncValues();
   }
 
@@ -278,11 +288,12 @@ export class ColorPicker {
     }
   }
 
-  handletextInputChange(event: CustomEvent) {
+  handleTextInputChange(event: CustomEvent) {
     const target = event.target as HTMLInputElement;
 
     this.setColor(target.value);
     target.value = this.value;
+    event.stopPropagation();
   }
 
   normalizeColorString(colorString: string) {
@@ -566,7 +577,7 @@ export class ColorPicker {
               type="text"
               pattern="[a-fA-F\d]+"
               value={this.textInputValue}
-              onSlChange={this.handletextInputChange}
+              onSlChange={this.handleTextInputChange}
             />
           </div>
 

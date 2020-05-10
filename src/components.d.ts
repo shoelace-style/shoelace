@@ -873,6 +873,10 @@ declare namespace LocalJSX {
          */
         "format"?: "hex" | "rgb" | "hsl";
         /**
+          * Emitted when the color picker's value changes.
+         */
+        "onSlChange"?: (event: CustomEvent<any>) => void;
+        /**
           * Whether to show the opacity slider.
          */
         "opacity"?: boolean;
