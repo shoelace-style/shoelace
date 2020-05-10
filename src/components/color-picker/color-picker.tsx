@@ -58,7 +58,10 @@ export class ColorPicker {
   /** By default, the value will be set in lowercase. Set this to true to set it in uppercase instead. */
   @Prop() uppercase = false;
 
-  /** An array of predefined color swatches to display. */
+  /**
+   * An array of predefined color swatches to display. Can include any format the color picker can parse, including
+   * HEX(A), RGB(A), HSL(A), and CSS color names.
+   */
   @Prop() swatches = [
     '#d0021b',
     '#f5a623',

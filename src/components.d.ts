@@ -106,7 +106,7 @@ export namespace Components {
          */
         "opacity": boolean;
         /**
-          * An array of predefined color swatches to display.
+          * An array of predefined color swatches to display. Can include any format the color picker can parse, including HEX(A), RGB(A), HSL(A), and CSS color names.
          */
         "swatches": string[];
         /**
@@ -881,7 +881,7 @@ declare namespace LocalJSX {
          */
         "opacity"?: boolean;
         /**
-          * An array of predefined color swatches to display.
+          * An array of predefined color swatches to display. Can include any format the color picker can parse, including HEX(A), RGB(A), HSL(A), and CSS color names.
          */
         "swatches"?: string[];
         /**
