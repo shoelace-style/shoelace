@@ -525,7 +525,7 @@ export class ColorPicker {
               {this.opacity && (
                 <div
                   ref={el => (this.alphaSlider = el)}
-                  class="sl-color-picker__alpha sl-color-picker__slider  sl-color-picker__transparent-bg"
+                  class="sl-color-picker__alpha sl-color-picker__slider sl-color-picker__transparent-bg"
                   onMouseDown={this.handleAlphaDrag}
                   onTouchStart={this.handleAlphaDrag}
                 >
@@ -559,7 +559,7 @@ export class ColorPicker {
             </div>
 
             <div
-              class="sl-color-picker__preview  sl-color-picker__transparent-bg"
+              class="sl-color-picker__preview sl-color-picker__transparent-bg"
               role="button"
               aria-label="copy"
               style={{
@@ -590,6 +590,8 @@ export class ColorPicker {
                 <div
                   class="sl-color-picker__swatch sl-color-picker__transparent-bg"
                   tabIndex={0}
+                  role="button"
+                  aria-label={swatch}
                   onClick={() => this.setColor(swatch)}
                   onKeyDown={event => event.key === 'Enter' && this.setColor(swatch)}
                 >
