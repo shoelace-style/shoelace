@@ -1,15 +1,26 @@
 import { getOffset } from './offset';
 
+let locks = [];
+
 //
-// Locks and unlocks the body to prevent scrolling. By design, this method doesn't try to maintain the body's existing
-// overflow state, as setting <body style="overflow: *"> is considered a bad practice. If you need to set a non-default
-// overflow to the body element, it's better to do so in your stylesheet.
+// Prevents body scrolling. Keeps track of which elements requested a lock so multiple levels of locking are possible
+// without premature unlocking.
 //
-export function lockBodyScrolling(isLocked = true) {
-  if (isLocked) {
-    document.body.style.overflow = 'hidden';
-  } else {
-    document.body.style.overflow = null;
+export function lockBodyScrolling(lockingEl: HTMLElement) {
+  if (lockingEl && !locks.includes(lockingEl)) {
+    locks.push(lockingEl);
+    document.body.classList.add('sl-scroll-lock');
+  }
+}
+
+//
+// Unlocks body scrolling. Scrolling will only be unlocked once all elements that requested a lock call this method.
+//
+export function unlockBodyScrolling(lockingEl: HTMLElement) {
+  locks = locks.filter(el => el !== lockingEl);
+
+  if (locks.length === 0) {
+    document.body.classList.remove('sl-scroll-lock');
   }
 }
 
