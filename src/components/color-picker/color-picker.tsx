@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, Prop, State, Watch, h } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, Prop, State, Watch, h } from '@stencil/core';
 import color from 'color';
 import { clamp } from '../../utilities/math';
 
@@ -11,6 +11,7 @@ export class ColorPicker {
   alphaSlider: HTMLElement;
   alphaHandle: HTMLElement;
   bypassValueParse = false;
+  dropdown: HTMLSlDropdownElement;
   grid: HTMLElement;
   gridHandle: HTMLElement;
   hueSlider: HTMLElement;
@@ -36,6 +37,8 @@ export class ColorPicker {
     this.handleTextInputChange = this.handleTextInputChange.bind(this);
   }
 
+  @Element() host: HTMLSlColorPickerElement;
+
   @State() textInputValue = '';
   @State() hue = 0;
   @State() saturation = 100;
@@ -51,6 +54,12 @@ export class ColorPicker {
    * use RGBA or HSLA when using opacity.
    */
   @Prop() format: 'hex' | 'rgb' | 'hsl' = 'hex';
+
+  /** The color picker's trigger size. Only applies when `inline` is false. */
+  @Prop() size: 'small' | 'medium' | 'large' = 'medium';
+
+  /** When true, the color picker will be rendered inline instead of in a dropdown. */
+  @Prop() inline = false;
 
   /** Whether to show the opacity slider. */
   @Prop() opacity = false;
@@ -114,6 +123,18 @@ export class ColorPicker {
     this.textInputValue = this.value;
     this.lastValueEmitted = this.value;
     this.syncValues();
+  }
+
+  componentDidLoad() {
+    this.host.addEventListener('slShow', event => {});
+
+    this.host.addEventListener('slHide', event => {
+      //
+      // TODO:
+      //
+
+      event.preventDefault();
+    });
   }
 
   handleCopy() {
@@ -468,7 +489,7 @@ export class ColorPicker {
     const x = this.saturation;
     const y = 100 - this.lightness;
 
-    return (
+    const colorPicker = (
       <div ref={el => (this.trigger = el)} class="sl-color-picker">
         <div ref={el => (this.menu = el)} class="sl-color-picker__menu">
           <div
@@ -603,5 +624,30 @@ export class ColorPicker {
         </div>
       </div>
     );
+
+    if (this.inline) {
+      return colorPicker;
+    } else {
+      return (
+        <sl-dropdown ref={el => (this.dropdown = el)}>
+          <span
+            slot="trigger"
+            class={{
+              'sl-color-picker__trigger': true,
+              'sl-color-picker__transparent-bg': true,
+
+              'sl-color-picker__trigger--small': this.size === 'small',
+              'sl-color-picker__trigger--medium': this.size === 'medium',
+              'sl-color-picker__trigger--large': this.size === 'large'
+            }}
+            role="button"
+            style={{
+              color: `hsla(${this.hue}deg, ${this.saturation}%, ${this.lightness}%, ${this.alpha / 100})`
+            }}
+          />
+          {colorPicker}
+        </sl-dropdown>
+      );
+    }
   }
 }
