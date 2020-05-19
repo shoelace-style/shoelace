@@ -226,6 +226,21 @@
   background-position: 0 0, 0 0, -5px -5px, 5px 5px;
 }
 
+.sl-color-picker--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+
+  .sl-color-picker__grid,
+  .sl-color-picker__grid-handle,
+  .sl-color-picker__slider,
+  .sl-color-picker__slider-handle,
+  .sl-color-picker__preview,
+  .sl-color-picker__swatch,
+  .sl-color-picker__swatch-color {
+    pointer-events: none;
+  }
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Color picker input
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -280,11 +295,20 @@
   }
 
   &:focus {
+    outline: none;
+  }
+
+  &:focus:not(.sl-color-input__trigger--disabled) {
     box-shadow: var(--sl-focus-ring-box-shadow);
     outline: none;
 
     &::before {
       box-shadow: inset 0 0 0 1px var(--sl-color-primary-50);
     }
+  }
+
+  &.sl-color-input__trigger--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 }

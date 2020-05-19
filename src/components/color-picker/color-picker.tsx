@@ -68,6 +68,9 @@ export class ColorPicker {
   /** When `inline` is true, this determines the size of the color picker's trigger. */
   @Prop() size: 'small' | 'medium' | 'large' = 'medium';
 
+  /** Set to true to disable the color picker. */
+  @Prop() disabled = false;
+
   /** Whether to show the opacity slider. */
   @Prop() opacity = false;
 
@@ -212,6 +215,10 @@ export class ColorPicker {
   }
 
   handleDrag(event: any, container: HTMLElement, onMove: (x: number, y: number) => void) {
+    if (this.disabled) {
+      return false;
+    }
+
     const move = (event: any) => {
       const dims = container.getBoundingClientRect();
       const x = event.pageX - (dims.left + container.ownerDocument.defaultView.pageXOffset);
@@ -327,7 +334,12 @@ export class ColorPicker {
     event.stopPropagation();
   }
 
-  handleDropdownShow() {
+  handleDropdownShow(event: CustomEvent) {
+    if (this.disabled) {
+      event.preventDefault();
+      return false;
+    }
+
     this.isDropdownOpen = true;
     document.addEventListener('keydown', this.handleDocumentKeyDown);
     document.addEventListener('mousedown', this.handleDocumentMouseDown);
@@ -347,6 +359,16 @@ export class ColorPicker {
     if (event.key === 'Escape') {
       this.isDropdownOpen = false;
       this.dropdown.hide();
+    }
+
+    // Close when tabbing out of the color picker
+    if (event.key === 'Tab') {
+      setTimeout(() => {
+        if (document.activeElement && document.activeElement.closest('sl-color-picker') !== this.host) {
+          this.isDropdownOpen = false;
+          this.dropdown.hide();
+        }
+      });
     }
   }
 
@@ -541,7 +563,8 @@ export class ColorPicker {
       <div
         class={{
           'sl-color-picker': true,
-          'sl-color-picker--inline': this.inline
+          'sl-color-picker--inline': this.inline,
+          'sl-color-picker--disabled': this.disabled
         }}
       >
         <div
@@ -565,7 +588,7 @@ export class ColorPicker {
             aria-valuetext={`hsl(${Math.round(this.hue)}, ${Math.round(this.saturation)}%, ${Math.round(
               this.lightness
             )}%)`}
-            tabIndex={0}
+            tabIndex={this.disabled ? null : 0}
             onKeyDown={this.handleGridKeyDown}
           />
         </div>
@@ -590,7 +613,7 @@ export class ColorPicker {
                 aria-valuemin="0"
                 aria-valuemax="360"
                 aria-valuenow={Math.round(this.hue)}
-                tabIndex={0}
+                tabIndex={this.disabled ? null : 0}
                 onKeyDown={this.handleHueKeyDown}
               />
             </div>
@@ -624,7 +647,7 @@ export class ColorPicker {
                   aria-valuemin="0"
                   aria-valuemax="100"
                   aria-valuenow={Math.round(this.alpha)}
-                  tabIndex={0}
+                  tabIndex={this.disabled ? null : 0}
                   onKeyDown={this.handleAlphaKeyDown}
                 />
               </div>
@@ -653,6 +676,7 @@ export class ColorPicker {
             type="text"
             pattern="[a-fA-F\d]+"
             value={this.textInputValue}
+            disabled={this.disabled}
             onSlChange={this.handleTextInputChange}
           />
         </div>
@@ -662,11 +686,11 @@ export class ColorPicker {
             {this.swatches.map(swatch => (
               <div
                 class="sl-color-picker__swatch sl-color-picker__transparent-bg"
-                tabIndex={0}
+                tabIndex={this.disabled ? null : 0}
                 role="button"
                 aria-label={swatch}
-                onClick={() => this.setColor(swatch)}
-                onKeyDown={event => event.key === 'Enter' && this.setColor(swatch)}
+                onClick={() => !this.disabled && this.setColor(swatch)}
+                onKeyDown={event => !this.disabled && event.key === 'Enter' && this.setColor(swatch)}
               >
                 <div class="sl-color-picker__swatch-color" style={{ backgroundColor: swatch }} />
               </div>
@@ -697,6 +721,7 @@ export class ColorPicker {
           slot="trigger"
           class={{
             'sl-color-input__trigger': true,
+            'sl-color-input__trigger--disabled': this.disabled,
             'sl-color-input__trigger--small': this.size === 'small',
             'sl-color-input__trigger--medium': this.size === 'medium',
             'sl-color-input__trigger--large': this.size === 'large',

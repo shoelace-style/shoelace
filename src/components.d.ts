@@ -98,6 +98,10 @@ export namespace Components {
     }
     interface SlColorPicker {
         /**
+          * Set to true to disable the color picker.
+         */
+        "disabled": boolean;
+        /**
           * The format to use for the generated color `value`. If opacity is enabled, these will translate to HEXA, RGBA, and HSLA respectively. Note that browser support for HEXA doesn't include pre-Chromium Edge, so it's usually safer to use RGBA or HSLA when using opacity.
          */
         "format": "hex" | "rgb" | "hsl";
@@ -876,6 +880,10 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface SlColorPicker {
+        /**
+          * Set to true to disable the color picker.
+         */
+        "disabled"?: boolean;
         /**
           * The format to use for the generated color `value`. If opacity is enabled, these will translate to HEXA, RGBA, and HSLA respectively. Note that browser support for HEXA doesn't include pre-Chromium Edge, so it's usually safer to use RGBA or HSLA when using opacity.
          */
