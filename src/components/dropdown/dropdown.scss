@@ -27,15 +27,6 @@
   box-shadow: var(--sl-shadow-large);
   padding-top: var(--sl-spacing-x-small);
   padding-bottom: var(--sl-spacing-x-small);
-  opacity: 0;
   overflow-y: auto;
   transition: var(--sl-transition-fast) opacity;
-
-  &[hidden] {
-    display: none;
-  }
-}
-
-.sl-dropdown--open .sl-dropdown__menu {
-  opacity: 1;
 }

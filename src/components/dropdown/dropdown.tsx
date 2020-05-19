@@ -1,7 +1,6 @@
 import { Component, Element, Event, EventEmitter, Method, Prop, Watch, h } from '@stencil/core';
-import { Instance as PopperInstance, createPopper } from '@popperjs/core';
 import { scrollIntoView } from '../../utilities/scroll';
-import { showWithReflow } from '../../utilities/reflow';
+import Popover from '../../utilities/popover';
 
 let id = 0;
 
@@ -20,7 +19,7 @@ export class Dropdown {
   ignoreMouseEvents = false;
   ignoreMouseTimeout: any;
   menu: HTMLElement;
-  popper: PopperInstance;
+  popover: Popover;
   trigger: HTMLElement;
 
   constructor() {
@@ -31,7 +30,6 @@ export class Dropdown {
     this.handleMenuMouseDown = this.handleMenuMouseDown.bind(this);
     this.handleMenuMouseOver = this.handleMenuMouseOver.bind(this);
     this.handleMenuMouseOut = this.handleMenuMouseOut.bind(this);
-    this.handleTransitionEnd = this.handleTransitionEnd.bind(this);
     this.toggleMenu = this.toggleMenu.bind(this);
   }
 
@@ -77,13 +75,31 @@ export class Dropdown {
 
   @Watch('placement')
   handlePlacementChange() {
-    if (this.popper) {
-      this.popper.setOptions({ placement: this.placement });
-      requestAnimationFrame(() => this.popper.update());
-    }
+    this.popover.setOptions({ placement: this.placement });
   }
 
   componentDidLoad() {
+    this.popover = new Popover(this.trigger, this.menu, {
+      placement: 'bottom-start',
+      offset: [0, 2],
+
+      onAfterHide: () => {
+        console.log('onAfterHide');
+        this.slAfterHide.emit();
+      },
+
+      onAfterShow: () => {
+        console.log('onAfterShow');
+        this.slAfterShow.emit();
+      },
+
+      onTransitionEnd: () => {
+        if (!this.open) {
+          this.menu.scrollTop = 0;
+        }
+      }
+    });
+
     // Show on init if open
     if (this.open) {
       this.show();
@@ -92,6 +108,7 @@ export class Dropdown {
 
   componentDidUnload() {
     this.hide();
+    this.popover.destroy();
   }
 
   /** Shows the dropdown menu */
@@ -103,34 +120,8 @@ export class Dropdown {
       return false;
     }
 
-    showWithReflow(this.menu);
+    this.popover.show();
     this.open = true;
-
-    if (this.popper) {
-      this.popper.destroy();
-      this.popper = null;
-    }
-
-    this.popper = createPopper(this.trigger, this.menu, {
-      placement: this.placement,
-      modifiers: [
-        {
-          name: 'flip',
-          options: {
-            boundary: 'viewport'
-          }
-        },
-        {
-          name: 'offset',
-          options: {
-            offset: [0, 2]
-          }
-        }
-      ]
-    });
-
-    // Reposition the menu after it appears in case a modifier kicks in
-    requestAnimationFrame(() => this.popper.update());
 
     document.addEventListener('mousedown', this.handleDocumentMouseDown);
     document.addEventListener('keydown', this.handleDocumentKeyDown);
@@ -145,6 +136,7 @@ export class Dropdown {
       return false;
     }
 
+    this.popover.hide();
     this.open = false;
     this.setSelectedItem(null);
 
@@ -236,7 +228,7 @@ export class Dropdown {
   handleTriggerKeyDown(event: KeyboardEvent) {
     // Open the menu when pressing down or up while focused on the trigger
     if (!this.open && ['ArrowDown', 'ArrowUp'].includes(event.key)) {
-      this.show();
+      this.open = true;
       event.preventDefault();
       event.stopPropagation();
     }
@@ -273,27 +265,8 @@ export class Dropdown {
     }
   }
 
-  handleTransitionEnd(event: TransitionEvent) {
-    const target = event.target as HTMLElement;
-
-    // Ensure we only handle one transition event on the target element
-    if (event.propertyName === 'opacity' && target.classList.contains('sl-dropdown__menu')) {
-      this.menu.hidden = !this.open;
-      this.open ? this.slAfterShow.emit() : this.slAfterHide.emit();
-
-      if (!this.open) {
-        this.menu.scrollTop = 0;
-
-        if (this.popper) {
-          this.popper.destroy();
-          this.popper = null;
-        }
-      }
-    }
-  }
-
   toggleMenu() {
-    this.open ? this.hide() : this.show();
+    this.open = !this.open;
   }
 
   render() {
@@ -326,7 +299,6 @@ export class Dropdown {
           onMouseDown={this.handleMenuMouseDown}
           onMouseOver={this.handleMenuMouseOver}
           onMouseOut={this.handleMenuMouseOut}
-          onTransitionEnd={this.handleTransitionEnd}
           hidden
         >
           <slot />
