@@ -282,6 +282,7 @@ export class Dropdown {
 
         <div
           ref={el => (this.menu = el)}
+          part="menu"
           class="sl-dropdown__menu"
           role="menu"
           aria-hidden={!this.open}

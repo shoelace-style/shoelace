@@ -11,10 +11,12 @@ export class ColorPicker {
   alphaSlider: HTMLElement;
   alphaHandle: HTMLElement;
   bypassValueParse = false;
+  dropdown: HTMLSlDropdownElement;
   grid: HTMLElement;
   gridHandle: HTMLElement;
   hueSlider: HTMLElement;
   hueHandle: HTMLElement;
+  isDropdownOpen = false;
   lastValueEmitted: string;
   menu: HTMLElement;
   textInput: HTMLSlInputElement;
@@ -34,6 +36,12 @@ export class ColorPicker {
     this.handleHueDrag = this.handleHueDrag.bind(this);
     this.handleHueKeyDown = this.handleHueKeyDown.bind(this);
     this.handleTextInputChange = this.handleTextInputChange.bind(this);
+
+    this.handleDropdownHide = this.handleDropdownHide.bind(this);
+    this.handleDropdownShow = this.handleDropdownShow.bind(this);
+    this.handleDocumentKeyDown = this.handleDocumentKeyDown.bind(this);
+    this.handleDocumentMouseDown = this.handleDocumentMouseDown.bind(this);
+    this.handleTriggerClick = this.handleTriggerClick.bind(this);
   }
 
   @Element() host: HTMLSlColorPickerElement;
@@ -53,6 +61,12 @@ export class ColorPicker {
    * use RGBA or HSLA when using opacity.
    */
   @Prop() format: 'hex' | 'rgb' | 'hsl' = 'hex';
+
+  /** Set to true to render the color picker inline rather than inside a dropdown. */
+  @Prop() inline = false;
+
+  /** When `inline` is true, this determines the size of the color picker's trigger. */
+  @Prop() size: 'small' | 'medium' | 'large' = 'medium';
 
   /** Whether to show the opacity slider. */
   @Prop() opacity = false;
@@ -313,6 +327,47 @@ export class ColorPicker {
     event.stopPropagation();
   }
 
+  handleDropdownShow() {
+    this.isDropdownOpen = true;
+    document.addEventListener('keydown', this.handleDocumentKeyDown);
+    document.addEventListener('mousedown', this.handleDocumentMouseDown);
+  }
+
+  handleDropdownHide(event: CustomEvent) {
+    if (this.isDropdownOpen) {
+      event.preventDefault();
+    } else {
+      document.removeEventListener('keydown', this.handleDocumentKeyDown);
+      document.removeEventListener('mousedown', this.handleDocumentMouseDown);
+    }
+  }
+
+  handleDocumentKeyDown(event: KeyboardEvent) {
+    // Close when pressing escape or tab
+    if (event.key === 'Escape') {
+      this.isDropdownOpen = false;
+      this.dropdown.hide();
+    }
+  }
+
+  handleDocumentMouseDown(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+
+    // Close when clicking outside of the dropdown
+    if (target.closest('sl-color-picker') !== this.host) {
+      this.isDropdownOpen = false;
+      this.dropdown.hide();
+    }
+  }
+
+  handleTriggerClick(event: MouseEvent) {
+    if (this.isDropdownOpen) {
+      event.stopPropagation();
+      this.isDropdownOpen = false;
+      this.dropdown.hide();
+    }
+  }
+
   normalizeColorString(colorString: string) {
     //
     // The color module we're using doesn't parse % values for the alpha channel in RGBA and HSLA. It also doesn't parse
@@ -482,140 +537,179 @@ export class ColorPicker {
     const x = this.saturation;
     const y = 100 - this.lightness;
 
-    return (
-      <div ref={el => (this.trigger = el)} class="sl-color-picker">
-        <div ref={el => (this.menu = el)} class="sl-color-picker__menu">
-          <div
-            ref={el => (this.grid = el)}
-            class="sl-color-picker__grid"
+    const ColorPicker = (
+      <div
+        class={{
+          'sl-color-picker': true,
+          'sl-color-picker--inline': this.inline
+        }}
+      >
+        <div
+          ref={el => (this.grid = el)}
+          class="sl-color-picker__grid"
+          style={{
+            backgroundColor: `hsl(${this.hue}deg, 100%, 50%)`
+          }}
+          onMouseDown={this.handleGridDrag}
+          onTouchStart={this.handleGridDrag}
+        >
+          <span
+            ref={el => (this.gridHandle = el)}
+            class="sl-color-picker__grid-handle"
             style={{
-              backgroundColor: `hsl(${this.hue}deg, 100%, 50%)`
+              top: `${y}%`,
+              left: `${x}%`
             }}
-            onMouseDown={this.handleGridDrag}
-            onTouchStart={this.handleGridDrag}
-          >
-            <span
-              ref={el => (this.gridHandle = el)}
-              class="sl-color-picker__grid-handle"
-              style={{
-                top: `${y}%`,
-                left: `${x}%`
-              }}
-              role="slider"
-              aria-label="HSL"
-              aria-valuetext={`hsl(${Math.round(this.hue)}, ${Math.round(this.saturation)}%, ${Math.round(
-                this.lightness
-              )}%)`}
-              tabIndex={0}
-              onKeyDown={this.handleGridKeyDown}
-            />
-          </div>
+            role="slider"
+            aria-label="HSL"
+            aria-valuetext={`hsl(${Math.round(this.hue)}, ${Math.round(this.saturation)}%, ${Math.round(
+              this.lightness
+            )}%)`}
+            tabIndex={0}
+            onKeyDown={this.handleGridKeyDown}
+          />
+        </div>
 
-          <div class="sl-color-picker__controls">
-            <div class="sl-color-picker__sliders">
+        <div class="sl-color-picker__controls">
+          <div class="sl-color-picker__sliders">
+            <div
+              ref={el => (this.hueSlider = el)}
+              class="sl-color-picker__hue sl-color-picker__slider"
+              onMouseDown={this.handleHueDrag}
+              onTouchStart={this.handleHueDrag}
+            >
+              <span
+                ref={el => (this.hueHandle = el)}
+                class="sl-color-picker__slider-handle"
+                style={{
+                  left: `${this.hue === 0 ? 0 : 100 / (360 / this.hue)}%`
+                }}
+                role="slider"
+                aria-label="hue"
+                aria-orientation="horizontal"
+                aria-valuemin="0"
+                aria-valuemax="360"
+                aria-valuenow={Math.round(this.hue)}
+                tabIndex={0}
+                onKeyDown={this.handleHueKeyDown}
+              />
+            </div>
+
+            {this.opacity && (
               <div
-                ref={el => (this.hueSlider = el)}
-                class="sl-color-picker__hue sl-color-picker__slider"
-                onMouseDown={this.handleHueDrag}
-                onTouchStart={this.handleHueDrag}
+                ref={el => (this.alphaSlider = el)}
+                class="sl-color-picker__alpha sl-color-picker__slider sl-color-picker__transparent-bg"
+                onMouseDown={this.handleAlphaDrag}
+                onTouchStart={this.handleAlphaDrag}
               >
+                <div
+                  class="sl-color-picker__alpha-gradient"
+                  style={{
+                    backgroundImage: `linear-gradient(
+                      to right,
+                      hsl(${this.hue}deg, ${this.saturation}%, ${this.lightness}%, 0%) 0%,
+                      hsl(${this.hue}deg, ${this.saturation}%, ${this.lightness}%) 100%
+                      )`
+                  }}
+                />
                 <span
-                  ref={el => (this.hueHandle = el)}
+                  ref={el => (this.alphaHandle = el)}
                   class="sl-color-picker__slider-handle"
                   style={{
-                    left: `${this.hue === 0 ? 0 : 100 / (360 / this.hue)}%`
+                    left: `${this.alpha}%`
                   }}
                   role="slider"
-                  aria-label="hue"
+                  aria-label="alpha"
                   aria-orientation="horizontal"
                   aria-valuemin="0"
-                  aria-valuemax="360"
-                  aria-valuenow={Math.round(this.hue)}
+                  aria-valuemax="100"
+                  aria-valuenow={Math.round(this.alpha)}
                   tabIndex={0}
-                  onKeyDown={this.handleHueKeyDown}
+                  onKeyDown={this.handleAlphaKeyDown}
                 />
               </div>
-
-              {this.opacity && (
-                <div
-                  ref={el => (this.alphaSlider = el)}
-                  class="sl-color-picker__alpha sl-color-picker__slider sl-color-picker__transparent-bg"
-                  onMouseDown={this.handleAlphaDrag}
-                  onTouchStart={this.handleAlphaDrag}
-                >
-                  <div
-                    class="sl-color-picker__alpha-gradient"
-                    style={{
-                      backgroundImage: `linear-gradient(
-                        to right,
-                        hsl(${this.hue}deg, ${this.saturation}%, ${this.lightness}%, 0%) 0%,
-                        hsl(${this.hue}deg, ${this.saturation}%, ${this.lightness}%) 100%
-                        )`
-                    }}
-                  />
-                  <span
-                    ref={el => (this.alphaHandle = el)}
-                    class="sl-color-picker__slider-handle"
-                    style={{
-                      left: `${this.alpha}%`
-                    }}
-                    role="slider"
-                    aria-label="alpha"
-                    aria-orientation="horizontal"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                    aria-valuenow={Math.round(this.alpha)}
-                    tabIndex={0}
-                    onKeyDown={this.handleAlphaKeyDown}
-                  />
-                </div>
-              )}
-            </div>
-
-            <div
-              class="sl-color-picker__preview sl-color-picker__transparent-bg"
-              role="button"
-              aria-label="copy"
-              style={{
-                color: `hsla(${this.hue}deg, ${this.saturation}%, ${this.lightness}%, ${this.alpha / 100})`
-              }}
-              onClick={this.handleCopy}
-            >
-              <div class="sl-color-picker__copy">
-                <sl-icon name="clipboard" />
-              </div>
-            </div>
+            )}
           </div>
 
-          <div class="sl-color-picker__text-input">
-            <sl-input
-              ref={el => (this.textInput = el)}
-              size="small"
-              type="text"
-              pattern="[a-fA-F\d]+"
-              value={this.textInputValue}
-              onSlChange={this.handleTextInputChange}
-            />
-          </div>
-
-          {this.swatches && (
-            <div class="sl-color-picker__swatches">
-              {this.swatches.map(swatch => (
-                <div
-                  class="sl-color-picker__swatch sl-color-picker__transparent-bg"
-                  tabIndex={0}
-                  role="button"
-                  aria-label={swatch}
-                  onClick={() => this.setColor(swatch)}
-                  onKeyDown={event => event.key === 'Enter' && this.setColor(swatch)}
-                >
-                  <div class="sl-color-picker__swatch-color" style={{ backgroundColor: swatch }} />
-                </div>
-              ))}
+          <div
+            class="sl-color-picker__preview sl-color-picker__transparent-bg"
+            role="button"
+            aria-label="copy"
+            style={{
+              color: `hsla(${this.hue}deg, ${this.saturation}%, ${this.lightness}%, ${this.alpha / 100})`
+            }}
+            onClick={this.handleCopy}
+          >
+            <div class="sl-color-picker__copy">
+              <sl-icon name="clipboard" />
             </div>
-          )}
+          </div>
         </div>
+
+        <div class="sl-color-picker__text-input">
+          <sl-input
+            ref={el => (this.textInput = el)}
+            size="small"
+            type="text"
+            pattern="[a-fA-F\d]+"
+            value={this.textInputValue}
+            onSlChange={this.handleTextInputChange}
+          />
+        </div>
+
+        {this.swatches && (
+          <div class="sl-color-picker__swatches">
+            {this.swatches.map(swatch => (
+              <div
+                class="sl-color-picker__swatch sl-color-picker__transparent-bg"
+                tabIndex={0}
+                role="button"
+                aria-label={swatch}
+                onClick={() => this.setColor(swatch)}
+                onKeyDown={event => event.key === 'Enter' && this.setColor(swatch)}
+              >
+                <div class="sl-color-picker__swatch-color" style={{ backgroundColor: swatch }} />
+              </div>
+            ))}
+          </div>
+        )}
       </div>
+    );
+
+    // Render inline
+    if (this.inline) {
+      return ColorPicker;
+    }
+
+    // Render as a dropdown
+    return (
+      <sl-dropdown
+        ref={el => (this.dropdown = el)}
+        class={{
+          'sl-color-input__dropdown': true,
+          'sl-color-input__dropdown--open': this.isDropdownOpen
+        }}
+        onSlShow={this.handleDropdownShow}
+        onSlHide={this.handleDropdownHide}
+      >
+        <button
+          ref={el => (this.trigger = el)}
+          slot="trigger"
+          class={{
+            'sl-color-input__trigger': true,
+            'sl-color-input__trigger--small': this.size === 'small',
+            'sl-color-input__trigger--medium': this.size === 'medium',
+            'sl-color-input__trigger--large': this.size === 'large',
+            'sl-color-picker__transparent-bg': true
+          }}
+          style={{
+            color: `hsla(${this.hue}deg, ${this.saturation}%, ${this.lightness}%, ${this.alpha / 100})`
+          }}
+          type="button"
+          onClick={this.handleTriggerClick}
+        />
+        {ColorPicker}
+      </sl-dropdown>
     );
   }
 }

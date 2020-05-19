@@ -102,9 +102,17 @@ export namespace Components {
          */
         "format": "hex" | "rgb" | "hsl";
         /**
+          * Set to true to render the color picker inline rather than inside a dropdown.
+         */
+        "inline": boolean;
+        /**
           * Whether to show the opacity slider.
          */
         "opacity": boolean;
+        /**
+          * When `inline` is true, this determines the size of the color picker's trigger.
+         */
+        "size": "small" | "medium" | "large";
         /**
           * An array of predefined color swatches to display. Can include any format the color picker can parse, including HEX(A), RGB(A), HSL(A), and CSS color names.
          */
@@ -873,6 +881,10 @@ declare namespace LocalJSX {
          */
         "format"?: "hex" | "rgb" | "hsl";
         /**
+          * Set to true to render the color picker inline rather than inside a dropdown.
+         */
+        "inline"?: boolean;
+        /**
           * Emitted after the color picker closes and all transitions are complete.
          */
         "onSlAfterHide"?: (event: CustomEvent<any>) => void;
@@ -896,6 +908,10 @@ declare namespace LocalJSX {
           * Whether to show the opacity slider.
          */
         "opacity"?: boolean;
+        /**
+          * When `inline` is true, this determines the size of the color picker's trigger.
+         */
+        "size"?: "small" | "medium" | "large";
         /**
           * An array of predefined color swatches to display. Can include any format the color picker can parse, including HEX(A), RGB(A), HSL(A), and CSS color names.
          */

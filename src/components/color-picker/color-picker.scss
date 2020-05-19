@@ -10,6 +10,21 @@
   --slider-handle-size: 12px;
 }
 
+.sl-color-picker {
+  font-family: var(--sl-font-sans);
+  font-size: var(--sl-font-size-medium);
+  font-weight: var(--sl-font-weight-normal);
+  color: var(--color);
+  background-color: var(--sl-color-white);
+  border-radius: var(--sl-border-radius-medium);
+  user-select: none;
+}
+
+.sl-color-picker--inline {
+  border: solid 1px var(--sl-color-gray-90);
+  box-shadow: var(--sl-shadow-small);
+}
+
 .sl-color-picker__grid {
   position: relative;
   width: var(--grid-width);
@@ -209,4 +224,67 @@
     linear-gradient(45deg, transparent 75%, #eee 75%), linear-gradient(45deg, #eee 25%, transparent 25%);
   background-size: 10px 10px;
   background-position: 0 0, 0 0, -5px -5px, 5px 5px;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Color picker input
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+.sl-color-input__dropdown::part(menu) {
+  max-height: none;
+  padding: 0;
+
+  .sl-color-picker {
+    border: none;
+  }
+}
+
+.sl-color-input__trigger {
+  display: inline-block;
+  position: relative;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: var(--sl-transition-fast) box-shadow;
+  -webkit-appearance: none;
+
+  &.sl-color-input__trigger--small {
+    width: var(--sl-input-height-small);
+    height: var(--sl-input-height-small);
+    border-radius: var(--sl-border-radius-circle);
+  }
+
+  &.sl-color-input__trigger--medium {
+    width: var(--sl-input-height-medium);
+    height: var(--sl-input-height-medium);
+    border-radius: var(--sl-border-radius-circle);
+  }
+
+  &.sl-color-input__trigger--large {
+    width: var(--sl-input-height-large);
+    height: var(--sl-input-height-large);
+    border-radius: var(--sl-border-radius-circle);
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    background-color: currentColor;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25); //var(--sl-input-border-color);
+    transition: inherit;
+  }
+
+  &:focus {
+    box-shadow: var(--sl-focus-ring-box-shadow);
+    outline: none;
+
+    &::before {
+      box-shadow: inset 0 0 0 1px var(--sl-color-primary-50);
+    }
+  }
 }
