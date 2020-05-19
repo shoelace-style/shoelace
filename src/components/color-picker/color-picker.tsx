@@ -566,6 +566,7 @@ export class ColorPicker {
           'sl-color-picker--inline': this.inline,
           'sl-color-picker--disabled': this.disabled
         }}
+        aria-disabled={this.disabled}
       >
         <div
           ref={el => (this.grid = el)}
@@ -710,9 +711,10 @@ export class ColorPicker {
       <sl-dropdown
         ref={el => (this.dropdown = el)}
         class={{
-          'sl-color-input__dropdown': true,
-          'sl-color-input__dropdown--open': this.isDropdownOpen
+          'sl-color-dropdown': true,
+          'sl-color-dropdown--open': this.isDropdownOpen
         }}
+        aria-disabled={this.disabled}
         onSlShow={this.handleDropdownShow}
         onSlHide={this.handleDropdownHide}
       >
@@ -720,11 +722,11 @@ export class ColorPicker {
           ref={el => (this.trigger = el)}
           slot="trigger"
           class={{
-            'sl-color-input__trigger': true,
-            'sl-color-input__trigger--disabled': this.disabled,
-            'sl-color-input__trigger--small': this.size === 'small',
-            'sl-color-input__trigger--medium': this.size === 'medium',
-            'sl-color-input__trigger--large': this.size === 'large',
+            'sl-color-dropdown__trigger': true,
+            'sl-color-dropdown__trigger--disabled': this.disabled,
+            'sl-color-dropdown__trigger--small': this.size === 'small',
+            'sl-color-dropdown__trigger--medium': this.size === 'medium',
+            'sl-color-dropdown__trigger--large': this.size === 'large',
             'sl-color-picker__transparent-bg': true
           }}
           style={{

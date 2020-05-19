@@ -242,10 +242,10 @@
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Color picker input
+// Color dropdown
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sl-color-input__dropdown::part(menu) {
+.sl-color-dropdown::part(menu) {
   max-height: none;
   padding: 0;
 
@@ -254,7 +254,7 @@
   }
 }
 
-.sl-color-input__trigger {
+.sl-color-dropdown__trigger {
   display: inline-block;
   position: relative;
   border: none;
@@ -263,19 +263,19 @@
   transition: var(--sl-transition-fast) box-shadow;
   -webkit-appearance: none;
 
-  &.sl-color-input__trigger--small {
+  &.sl-color-dropdown__trigger--small {
     width: var(--sl-input-height-small);
     height: var(--sl-input-height-small);
     border-radius: var(--sl-border-radius-circle);
   }
 
-  &.sl-color-input__trigger--medium {
+  &.sl-color-dropdown__trigger--medium {
     width: var(--sl-input-height-medium);
     height: var(--sl-input-height-medium);
     border-radius: var(--sl-border-radius-circle);
   }
 
-  &.sl-color-input__trigger--large {
+  &.sl-color-dropdown__trigger--large {
     width: var(--sl-input-height-large);
     height: var(--sl-input-height-large);
     border-radius: var(--sl-border-radius-circle);
@@ -298,7 +298,7 @@
     outline: none;
   }
 
-  &:focus:not(.sl-color-input__trigger--disabled) {
+  &:focus:not(.sl-color-dropdown__trigger--disabled) {
     box-shadow: var(--sl-focus-ring-box-shadow);
     outline: none;
 
@@ -307,7 +307,7 @@
     }
   }
 
-  &.sl-color-input__trigger--disabled {
+  &.sl-color-dropdown__trigger--disabled {
     opacity: 0.5;
     cursor: not-allowed;
   }
