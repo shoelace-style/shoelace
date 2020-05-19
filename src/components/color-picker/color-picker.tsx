@@ -1,6 +1,7 @@
 import { Component, Element, Event, EventEmitter, Prop, State, Watch, h } from '@stencil/core';
 import color from 'color';
 import { clamp } from '../../utilities/math';
+import { throttle } from '../../utilities/throttle';
 
 @Component({
   tag: 'sl-color-picker',
@@ -221,23 +222,27 @@ export class ColorPicker {
 
     const move = (event: any) => {
       const dims = container.getBoundingClientRect();
-      const x = event.pageX - (dims.left + container.ownerDocument.defaultView.pageXOffset);
-      const y = event.pageY - (dims.top + container.ownerDocument.defaultView.pageYOffset);
+      const offsetX = dims.left + container.ownerDocument.defaultView.pageXOffset;
+      const offsetY = dims.top + container.ownerDocument.defaultView.pageYOffset;
+      const x = (event.changedTouches ? event.changedTouches[0].pageX : event.pageX) - offsetX;
+      const y = (event.changedTouches ? event.changedTouches[0].pageY : event.pageY) - offsetY;
+
       onMove(x, y);
     };
+    const moveWithThrottle = throttle(move, 50);
 
     // Move on init
     move(event);
 
     const stop = () => {
-      document.removeEventListener('mousemove', move);
-      document.removeEventListener('touchmove', move);
+      document.removeEventListener('mousemove', moveWithThrottle);
+      document.removeEventListener('touchmove', moveWithThrottle);
       document.removeEventListener('mouseup', stop);
       document.removeEventListener('touchend', stop);
     };
 
-    document.addEventListener('mousemove', move);
-    document.addEventListener('touchmove', move);
+    document.addEventListener('mousemove', moveWithThrottle);
+    document.addEventListener('touchmove', moveWithThrottle);
     document.addEventListener('mouseup', stop);
     document.addEventListener('touchend', stop);
   }
