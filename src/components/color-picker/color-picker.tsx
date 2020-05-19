@@ -126,7 +126,7 @@ export class ColorPicker {
   }
 
   componentDidLoad() {
-    this.host.addEventListener('slShow', event => {});
+    this.host.addEventListener('slShow', () => {});
 
     this.host.addEventListener('slHide', event => {
       //
