@@ -1,7 +1,6 @@
 import { Component, Element, Event, EventEmitter, Host, Method, Prop, State, Watch, h } from '@stencil/core';
 import { KeyboardDetector } from '../../utilities/keyboard-detector';
 import { lockBodyScrolling, unlockBodyScrolling } from '../../utilities/scroll';
-import { showWithReflow } from '../../utilities/reflow';
 
 let id = 0;
 
@@ -98,7 +97,8 @@ export class Dialog {
       return false;
     }
 
-    showWithReflow(this.host);
+    this.host.hidden = false;
+    this.host.clientWidth; // force a reflow
     this.open = true;
     this.box.focus();
 

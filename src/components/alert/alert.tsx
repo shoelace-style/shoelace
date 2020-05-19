@@ -1,6 +1,5 @@
 import { Component, Element, Event, EventEmitter, Host, Method, Prop, State, Watch, h } from '@stencil/core';
 import { KeyboardDetector } from '../../utilities/keyboard-detector';
-import { showWithReflow } from '../../utilities/reflow';
 
 /**
  * @slot - The alert's content.
@@ -79,7 +78,8 @@ export class Tab {
       return false;
     }
 
-    showWithReflow(this.host);
+    this.host.hidden = false;
+    this.host.clientWidth; // force a reflow
     this.open = true;
   }
 
