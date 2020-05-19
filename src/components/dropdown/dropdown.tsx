@@ -27,7 +27,6 @@ export class Dropdown {
     this.handleDocumentMouseDown = this.handleDocumentMouseDown.bind(this);
     this.handleTriggerKeyDown = this.handleTriggerKeyDown.bind(this);
     this.handleMenuClick = this.handleMenuClick.bind(this);
-    this.handleMenuMouseDown = this.handleMenuMouseDown.bind(this);
     this.handleMenuMouseOver = this.handleMenuMouseOver.bind(this);
     this.handleMenuMouseOut = this.handleMenuMouseOut.bind(this);
     this.toggleMenu = this.toggleMenu.bind(this);
@@ -236,11 +235,6 @@ export class Dropdown {
     }
   }
 
-  handleMenuMouseDown(event: MouseEvent) {
-    // Keep focus on the dropdown trigger when selecting menu items
-    event.preventDefault();
-  }
-
   handleMenuMouseOver(event: MouseEvent) {
     const target = event.target as HTMLElement;
     const dropdownItem = target.closest('sl-dropdown-item');
@@ -288,7 +282,6 @@ export class Dropdown {
           aria-hidden={!this.open}
           aria-labeledby={this.id}
           onClick={this.handleMenuClick}
-          onMouseDown={this.handleMenuMouseDown}
           onMouseOver={this.handleMenuMouseOver}
           onMouseOut={this.handleMenuMouseOut}
           hidden
