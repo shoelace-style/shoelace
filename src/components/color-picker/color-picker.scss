@@ -246,6 +246,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 .sl-color-dropdown::part(menu) {
+  overflow: visible;
   max-height: none;
   padding: 0;
 
@@ -258,7 +259,6 @@
   display: inline-block;
   position: relative;
   border: none;
-  background: none;
   cursor: pointer;
   transition: var(--sl-transition-fast) box-shadow;
   -webkit-appearance: none;
