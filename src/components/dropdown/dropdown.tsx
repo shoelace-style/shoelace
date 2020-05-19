@@ -82,17 +82,8 @@ export class Dropdown {
     this.popover = new Popover(this.trigger, this.menu, {
       placement: 'bottom-start',
       offset: [0, 2],
-
-      onAfterHide: () => {
-        console.log('onAfterHide');
-        this.slAfterHide.emit();
-      },
-
-      onAfterShow: () => {
-        console.log('onAfterShow');
-        this.slAfterShow.emit();
-      },
-
+      onAfterHide: () => this.slAfterHide.emit(),
+      onAfterShow: () => this.slAfterShow.emit(),
       onTransitionEnd: () => {
         if (!this.open) {
           this.menu.scrollTop = 0;
