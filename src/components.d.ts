@@ -102,17 +102,9 @@ export namespace Components {
          */
         "format": "hex" | "rgb" | "hsl";
         /**
-          * When true, the color picker will be rendered inline instead of in a dropdown.
-         */
-        "inline": boolean;
-        /**
           * Whether to show the opacity slider.
          */
         "opacity": boolean;
-        /**
-          * The color picker's trigger size. Only applies when `inline` is false.
-         */
-        "size": "small" | "medium" | "large";
         /**
           * An array of predefined color swatches to display. Can include any format the color picker can parse, including HEX(A), RGB(A), HSL(A), and CSS color names.
          */
@@ -881,21 +873,29 @@ declare namespace LocalJSX {
          */
         "format"?: "hex" | "rgb" | "hsl";
         /**
-          * When true, the color picker will be rendered inline instead of in a dropdown.
+          * Emitted after the color picker closes and all transitions are complete.
          */
-        "inline"?: boolean;
+        "onSlAfterHide"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted after the color picker opens and all transitions are complete.
+         */
+        "onSlAfterShow"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the color picker's value changes.
          */
         "onSlChange"?: (event: CustomEvent<any>) => void;
         /**
+          * Emitted when the color picker closes. Calling `event.preventDefault()` will prevent it from being closed.
+         */
+        "onSlHide"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the color picker opens. Calling `event.preventDefault()` will prevent it from being opened.
+         */
+        "onSlShow"?: (event: CustomEvent<any>) => void;
+        /**
           * Whether to show the opacity slider.
          */
         "opacity"?: boolean;
-        /**
-          * The color picker's trigger size. Only applies when `inline` is false.
-         */
-        "size"?: "small" | "medium" | "large";
         /**
           * An array of predefined color swatches to display. Can include any format the color picker can parse, including HEX(A), RGB(A), HSL(A), and CSS color names.
          */

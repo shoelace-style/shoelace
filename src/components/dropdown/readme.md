@@ -112,19 +112,6 @@ Type: `Promise<boolean>`
 | `"trigger"` | The dropdown's trigger, usually a `<sl-button>` element. |
 
 
-## Dependencies
-
-### Used by
-
- - [sl-color-picker](../color-picker)
-
-### Graph
-```mermaid
-graph TD;
-  sl-color-picker --> sl-dropdown
-  style sl-dropdown fill:#f9f,stroke:#333,stroke-width:4px
-```
-
 ----------------------------------------------
 
 

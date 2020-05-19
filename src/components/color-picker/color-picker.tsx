@@ -11,7 +11,6 @@ export class ColorPicker {
   alphaSlider: HTMLElement;
   alphaHandle: HTMLElement;
   bypassValueParse = false;
-  dropdown: HTMLSlDropdownElement;
   grid: HTMLElement;
   gridHandle: HTMLElement;
   hueSlider: HTMLElement;
@@ -55,12 +54,6 @@ export class ColorPicker {
    */
   @Prop() format: 'hex' | 'rgb' | 'hsl' = 'hex';
 
-  /** The color picker's trigger size. Only applies when `inline` is false. */
-  @Prop() size: 'small' | 'medium' | 'large' = 'medium';
-
-  /** When true, the color picker will be rendered inline instead of in a dropdown. */
-  @Prop() inline = false;
-
   /** Whether to show the opacity slider. */
   @Prop() opacity = false;
 
@@ -93,6 +86,18 @@ export class ColorPicker {
   /** Emitted when the color picker's value changes. */
   @Event() slChange: EventEmitter;
 
+  /** Emitted when the color picker opens. Calling `event.preventDefault()` will prevent it from being opened. */
+  @Event() slShow: EventEmitter;
+
+  /** Emitted after the color picker opens and all transitions are complete. */
+  @Event() slAfterShow: EventEmitter;
+
+  /** Emitted when the color picker closes. Calling `event.preventDefault()` will prevent it from being closed. */
+  @Event() slHide: EventEmitter;
+
+  /** Emitted after the color picker closes and all transitions are complete. */
+  @Event() slAfterHide: EventEmitter;
+
   @Watch('value')
   handleValueChange(newValue: string, oldValue: string) {
     if (!this.bypassValueParse) {
@@ -123,18 +128,6 @@ export class ColorPicker {
     this.textInputValue = this.value;
     this.lastValueEmitted = this.value;
     this.syncValues();
-  }
-
-  componentDidLoad() {
-    this.host.addEventListener('slShow', () => {});
-
-    this.host.addEventListener('slHide', event => {
-      //
-      // TODO:
-      //
-
-      event.preventDefault();
-    });
   }
 
   handleCopy() {
@@ -489,7 +482,7 @@ export class ColorPicker {
     const x = this.saturation;
     const y = 100 - this.lightness;
 
-    const colorPicker = (
+    return (
       <div ref={el => (this.trigger = el)} class="sl-color-picker">
         <div ref={el => (this.menu = el)} class="sl-color-picker__menu">
           <div
@@ -624,30 +617,5 @@ export class ColorPicker {
         </div>
       </div>
     );
-
-    if (this.inline) {
-      return colorPicker;
-    } else {
-      return (
-        <sl-dropdown ref={el => (this.dropdown = el)}>
-          <span
-            slot="trigger"
-            class={{
-              'sl-color-picker__trigger': true,
-              'sl-color-picker__transparent-bg': true,
-
-              'sl-color-picker__trigger--small': this.size === 'small',
-              'sl-color-picker__trigger--medium': this.size === 'medium',
-              'sl-color-picker__trigger--large': this.size === 'large'
-            }}
-            role="button"
-            style={{
-              color: `hsla(${this.hue}deg, ${this.saturation}%, ${this.lightness}%, ${this.alpha / 100})`
-            }}
-          />
-          {colorPicker}
-        </sl-dropdown>
-      );
-    }
   }
 }
