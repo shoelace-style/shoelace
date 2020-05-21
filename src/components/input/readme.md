@@ -34,54 +34,6 @@
 
 <br><br>
 
-<sl-input type="text" placeholder="Addons" size="small">
-  <span slot="before">$</span>
-  <span slot="after">.00</span>
-</sl-input>
-
-<br><br>
-
-<sl-input type="text" placeholder="Addons" size="medium">
-  <span slot="before">$</span>
-  <span slot="after">.00</span>
-</sl-input>
-
-<br><br>
-
-<sl-input type="text" placeholder="Addons" size="large">
-  <span slot="before">$</span>
-  <span slot="after">.00</span>
-</sl-input>
-
-<br><br>
-
-<sl-input type="text" placeholder="Addons and Icons" size="small">
-  <span slot="before">$</span>
-  <span slot="after">.00</span>
-  <sl-icon name="tag" slot="prefix"></sl-icon>
-  <sl-icon name="settings" slot="suffix"></sl-icon>
-</sl-input>
-
-<br><br>
-
-<sl-input type="text" placeholder="Addons and Icons" size="medium">
-  <span slot="before">$</span>
-  <span slot="after">.00</span>
-  <sl-icon name="tag" slot="prefix"></sl-icon>
-  <sl-icon name="settings" slot="suffix"></sl-icon>
-</sl-input>
-
-<br><br>
-
-<sl-input type="text" placeholder="Addons and Icons" size="large">
-  <span slot="before">$</span>
-  <span slot="after">.00</span>
-  <sl-icon name="tag" slot="prefix"></sl-icon>
-  <sl-icon name="settings" slot="suffix"></sl-icon>
-</sl-input>
-
-<br><br>
-
 <sl-input type="text" placeholder="Clearable" size="small" clearable></sl-input>
 
 <br><br>
@@ -219,8 +171,6 @@ Type: `Promise<void>`
 
 | Slot                   | Description                                               |
 | ---------------------- | --------------------------------------------------------- |
-| `"after"`              | Used to insert an addon after the input.                  |
-| `"before"`             | Used to insert an addon before the input.                 |
 | `"clear-icon"`         | An icon to use in lieu of the default clear icon.         |
 | `"hide-password-icon"` | An icon to use in lieu of the default hide password icon. |
 | `"prefix"`             | Used to prepend an icon or similar element to the input.  |

@@ -82,38 +82,12 @@
     }
   }
 
-  .sl-input__before,
-  .sl-input__after {
-    flex: 0 0 auto;
-    display: flex;
-  }
-
-  .sl-input__before ::slotted(*),
-  .sl-input__after ::slotted(*) {
-    flex: 0 0 auto;
-    background-color: var(--sl-color-gray-95);
-    color: var(--sl-color-gray-50);
-    user-select: none;
-  }
-
-  .sl-input__before ::slotted(*) {
-    border-right: solid var(--sl-input-border-width) var(--sl-input-border-color);
-    border-top-left-radius: var(--sl-input-border-radius-medium);
-    border-bottom-left-radius: var(--sl-input-border-radius-medium);
-  }
-
-  .sl-input__after ::slotted(*) {
-    border-left: solid var(--sl-input-border-width) var(--sl-input-border-color);
-    border-top-right-radius: var(--sl-input-border-radius-medium);
-    border-bottom-right-radius: var(--sl-input-border-radius-medium);
-  }
-
   .sl-input__prefix,
   .sl-input__suffix {
     display: flex;
     flex: 0 0 auto;
     align-items: center;
-    color: var(--sl-input-placeholder-color);
+    color: var(--sl-input-icon-color);
   }
 }
 
@@ -145,11 +119,6 @@
   .sl-input__suffix ::slotted(*) {
     margin-right: var(--sl-input-spacing-small);
   }
-
-  .sl-input__before ::slotted(*),
-  .sl-input__after ::slotted(*) {
-    padding: 0 var(--sl-input-spacing-small);
-  }
 }
 
 .sl-input--medium {
@@ -175,11 +144,6 @@
 
   .sl-input__suffix ::slotted(*) {
     margin-right: var(--sl-input-spacing-medium);
-  }
-
-  .sl-input__before ::slotted(*),
-  .sl-input__after ::slotted(*) {
-    padding: 0 var(--sl-input-spacing-medium);
   }
 }
 
@@ -207,11 +171,6 @@
   .sl-input__suffix ::slotted(*) {
     margin-right: var(--sl-input-spacing-large);
   }
-
-  .sl-input__before ::slotted(*),
-  .sl-input__after ::slotted(*) {
-    padding: 0 var(--sl-input-spacing-large);
-  }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -223,11 +182,20 @@
   display: flex;
   align-items: center;
   font-size: inherit;
-  color: var(--sl-input-placeholder-color);
+  color: var(--sl-input-icon-color);
   border: none;
   background: none;
   padding: 0;
+  transition: var(--sl-transition-fast) color;
   cursor: pointer;
+
+  &:hover {
+    color: var(--sl-input-icon-color-hover);
+  }
+
+  &:focus {
+    outline: none;
+  }
 }
 
 .sl-input--empty .sl-input__clear {

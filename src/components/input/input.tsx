@@ -1,8 +1,6 @@
 import { Component, Element, Event, EventEmitter, Method, Prop, State, h } from '@stencil/core';
 
 /**
- * @slot before - Used to insert an addon before the input.
- * @slot after - Used to insert an addon after the input.
  * @slot prefix - Used to prepend an icon or similar element to the input.
  * @slot suffix - Used to append an icon or similar element to the input.
  * @slot clear-icon - An icon to use in lieu of the default clear icon.
@@ -24,6 +22,7 @@ export class Input {
     this.handleBlur = this.handleBlur.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
     this.handleClearClick = this.handleClearClick.bind(this);
+    this.handleMouseDown = this.handleMouseDown.bind(this);
     this.handlePasswordToggle = this.handlePasswordToggle.bind(this);
   }
 
@@ -166,9 +165,18 @@ export class Input {
   }
 
   handleClearClick() {
-    this.input.value = '';
-    this.input.dispatchEvent(new window.Event('input', { bubbles: true }));
-    this.input.dispatchEvent(new window.Event('change', { bubbles: true }));
+    if (this.input.value !== '') {
+      this.input.value = '';
+      this.input.dispatchEvent(new window.Event('input', { bubbles: true }));
+      this.input.dispatchEvent(new window.Event('change', { bubbles: true }));
+    }
+
+    this.input.focus();
+  }
+
+  handleMouseDown(event: MouseEvent) {
+    event.preventDefault();
+    this.input.focus();
   }
 
   handlePasswordToggle() {
@@ -191,11 +199,8 @@ export class Input {
           'sl-input--focused': this.hasFocus,
           'sl-input--empty': this.value.length === 0
         }}
+        onMouseDown={this.handleMouseDown}
       >
-        <span class="sl-input__before">
-          <slot name="before" />
-        </span>
-
         <span class="sl-input__prefix">
           <slot name="prefix" />
         </span>
@@ -252,10 +257,6 @@ export class Input {
 
         <span class="sl-input__suffix">
           <slot name="suffix" />
-        </span>
-
-        <span class="sl-input__after">
-          <slot name="after" />
         </span>
       </div>
     );
