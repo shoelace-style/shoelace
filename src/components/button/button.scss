@@ -52,6 +52,11 @@
   .sl-button__suffix ::slotted(:last-child) {
     margin-left: 0.5em;
   }
+
+  // Clicks on icons shouldn't prevent the button from gaining focus
+  ::slotted(sl-icon) {
+    pointer-events: none;
+  }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
