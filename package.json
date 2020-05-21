@@ -48,6 +48,6 @@
     "feather-icons": "^4.28.0",
     "normalize.css": "^8.0.1",
     "resize-observer-polyfill": "^1.5.1",
-    "tippy.js": "^5.1.3"
+    "tippy.js": "^5.2.1"
   }
 }
