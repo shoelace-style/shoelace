@@ -149,10 +149,7 @@ export class ColorPicker {
   }
 
   handleCopy() {
-    this.textInput
-      .select()
-      .then(() => document.execCommand('copy'))
-      .then(() => this.textInput.removeFocus());
+    this.textInput.select().then(() => document.execCommand('copy'));
   }
 
   handleHueInput(event: Event) {
@@ -662,20 +659,13 @@ export class ColorPicker {
 
           <div
             class="sl-color-picker__preview sl-color-picker__transparent-bg"
-            role="button"
-            aria-label="copy"
             style={{
               color: `hsla(${this.hue}deg, ${this.saturation}%, ${this.lightness}%, ${this.alpha / 100})`
             }}
-            onClick={this.handleCopy}
-          >
-            <div class="sl-color-picker__copy">
-              <sl-icon name="clipboard" />
-            </div>
-          </div>
+          />
         </div>
 
-        <div class="sl-color-picker__text-input">
+        <div class="sl-color-picker__user-input">
           <sl-input
             ref={el => (this.textInput = el)}
             size="small"
@@ -685,6 +675,9 @@ export class ColorPicker {
             disabled={this.disabled}
             onSlChange={this.handleTextInputChange}
           />
+          <sl-button slot="suffix" size="small" circle onClick={this.handleCopy}>
+            <sl-icon name="clipboard" />
+          </sl-button>
         </div>
 
         {this.swatches && (

@@ -40,17 +40,20 @@
 
 ### Depends on
 
-- [sl-icon](../icon)
 - [sl-input](../input)
+- [sl-button](../button)
+- [sl-icon](../icon)
 - [sl-dropdown](../dropdown)
 
 ### Graph
 ```mermaid
 graph TD;
-  sl-color-picker --> sl-icon
   sl-color-picker --> sl-input
+  sl-color-picker --> sl-button
+  sl-color-picker --> sl-icon
   sl-color-picker --> sl-dropdown
   sl-input --> sl-icon
+  sl-button --> sl-icon
   style sl-color-picker fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
