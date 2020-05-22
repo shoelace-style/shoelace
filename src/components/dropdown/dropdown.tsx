@@ -69,7 +69,30 @@ export class Dropdown {
 
   @Watch('open')
   handleOpenChange() {
-    this.open ? this.show() : this.hide();
+    if (this.open) {
+      const slShow = this.slShow.emit();
+
+      if (slShow.defaultPrevented) {
+        return false;
+      }
+
+      this.popover.show();
+
+      document.addEventListener('mousedown', this.handleDocumentMouseDown);
+      document.addEventListener('keydown', this.handleDocumentKeyDown);
+    } else {
+      const slHide = this.slHide.emit();
+
+      if (slHide.defaultPrevented) {
+        return false;
+      }
+
+      this.popover.hide();
+      this.setSelectedItem(null);
+
+      document.removeEventListener('mousedown', this.handleDocumentMouseDown);
+      document.removeEventListener('keydown', this.handleDocumentKeyDown);
+    }
   }
 
   @Watch('placement')
@@ -104,34 +127,13 @@ export class Dropdown {
   /** Shows the dropdown menu */
   @Method()
   async show() {
-    const slShow = this.slShow.emit();
-
-    if (slShow.defaultPrevented) {
-      return false;
-    }
-
-    this.popover.show();
     this.open = true;
-
-    document.addEventListener('mousedown', this.handleDocumentMouseDown);
-    document.addEventListener('keydown', this.handleDocumentKeyDown);
   }
 
   /** Hides the dropdown menu */
   @Method()
   async hide() {
-    const slHide = this.slHide.emit();
-
-    if (slHide.defaultPrevented) {
-      return false;
-    }
-
-    this.popover.hide();
     this.open = false;
-    this.setSelectedItem(null);
-
-    document.removeEventListener('mousedown', this.handleDocumentMouseDown);
-    document.removeEventListener('keydown', this.handleDocumentKeyDown);
   }
 
   getAllItems() {
@@ -166,6 +168,7 @@ export class Dropdown {
     // Close when pressing escape or tab
     if (event.key === 'Escape' || event.key === 'Tab') {
       this.hide();
+      return;
     }
 
     // Make a selection when pressing enter
@@ -176,6 +179,7 @@ export class Dropdown {
       if (item && !item.disabled) {
         item.click();
         this.hide();
+        return;
       }
     }
 
@@ -202,6 +206,8 @@ export class Dropdown {
 
       this.setSelectedItem(items[index]);
       this.scrollItemIntoView(items[index]);
+
+      return;
     }
   }
 
@@ -218,7 +224,7 @@ export class Dropdown {
   handleTriggerKeyDown(event: KeyboardEvent) {
     // Open the menu when pressing down or up while focused on the trigger
     if (!this.open && ['ArrowDown', 'ArrowUp'].includes(event.key)) {
-      this.open = true;
+      this.show();
       event.preventDefault();
       event.stopPropagation();
     }
@@ -251,7 +257,7 @@ export class Dropdown {
   }
 
   toggleMenu() {
-    this.open = !this.open;
+    this.open ? this.hide() : this.show();
   }
 
   render() {

@@ -164,7 +164,7 @@ export namespace Components {
         /**
           * Hides the dropdown menu
          */
-        "hide": () => Promise<boolean>;
+        "hide": () => Promise<void>;
         /**
           * Indicates whether or not the dropdown is open.
          */
@@ -176,7 +176,7 @@ export namespace Components {
         /**
           * Shows the dropdown menu
          */
-        "show": () => Promise<boolean>;
+        "show": () => Promise<void>;
     }
     interface SlDropdownDivider {
     }

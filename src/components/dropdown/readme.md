@@ -83,23 +83,23 @@
 
 ## Methods
 
-### `hide() => Promise<boolean>`
+### `hide() => Promise<void>`
 
 Hides the dropdown menu
 
 #### Returns
 
-Type: `Promise<boolean>`
+Type: `Promise<void>`
 
 
 
-### `show() => Promise<boolean>`
+### `show() => Promise<void>`
 
 Shows the dropdown menu
 
 #### Returns
 
-Type: `Promise<boolean>`
+Type: `Promise<void>`
 
 
 
