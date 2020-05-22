@@ -42,6 +42,7 @@ export class ColorPicker {
     this.handleLightnessInput = this.handleLightnessInput.bind(this);
     this.handleSaturationInput = this.handleSaturationInput.bind(this);
     this.handleTextInputChange = this.handleTextInputChange.bind(this);
+    this.handleTextInputKeyDown = this.handleTextInputKeyDown.bind(this);
   }
 
   @Element() host: HTMLSlColorPickerElement;
@@ -340,6 +341,14 @@ export class ColorPicker {
     this.setColor(target.value);
     target.value = this.value;
     event.stopPropagation();
+  }
+
+  handleTextInputKeyDown(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      this.setColor(this.textInput.value);
+      this.textInput.value = this.value;
+      setTimeout(() => this.textInput.select());
+    }
   }
 
   handleDocumentKeyDown(event: KeyboardEvent) {
@@ -668,6 +677,7 @@ export class ColorPicker {
             pattern="[a-fA-F\d]+"
             value={this.textInputValue}
             disabled={this.disabled}
+            onKeyDown={this.handleTextInputKeyDown}
             onSlChange={this.handleTextInputChange}
           />
           <sl-button slot="suffix" size="small" circle onClick={this.handleCopy}>
