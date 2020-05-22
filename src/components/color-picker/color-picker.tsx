@@ -30,6 +30,10 @@ export class ColorPicker {
     this.handleDocumentKeyDown = this.handleDocumentKeyDown.bind(this);
     this.handleDocumentMouseDown = this.handleDocumentMouseDown.bind(this);
     this.handleDrag = this.handleDrag.bind(this);
+    this.handleDropdownAfterHide = this.handleDropdownAfterHide.bind(this);
+    this.handleDropdownAfterShow = this.handleDropdownAfterShow.bind(this);
+    this.handleDropdownHide = this.handleDropdownHide.bind(this);
+    this.handleDropdownShow = this.handleDropdownShow.bind(this);
     this.handleGridDrag = this.handleGridDrag.bind(this);
     this.handleGridKeyDown = this.handleGridKeyDown.bind(this);
     this.handleHueDrag = this.handleHueDrag.bind(this);
@@ -38,13 +42,6 @@ export class ColorPicker {
     this.handleLightnessInput = this.handleLightnessInput.bind(this);
     this.handleSaturationInput = this.handleSaturationInput.bind(this);
     this.handleTextInputChange = this.handleTextInputChange.bind(this);
-
-    this.handleDropdownShow = this.handleDropdownShow.bind(this);
-    this.handleDropdownAfterShow = this.handleDropdownAfterShow.bind(this);
-    this.handleDropdownHide = this.handleDropdownHide.bind(this);
-    this.handleDropdownAfterHide = this.handleDropdownAfterHide.bind(this);
-    this.handleDropdownKeyDown = this.handleDropdownKeyDown.bind(this);
-    this.handleDropdownMouseDown = this.handleDropdownMouseDown.bind(this);
   }
 
   @Element() host: HTMLSlColorPickerElement;
@@ -388,25 +385,6 @@ export class ColorPicker {
   handleDropdownAfterHide(event: CustomEvent) {
     event.stopPropagation();
     this.slAfterHide.emit();
-  }
-
-  handleDropdownKeyDown(event: CustomEvent) {
-    const keyDownEvent = event.detail.event;
-
-    // Don't close the dropdown if the tab key is pressed
-    if (keyDownEvent.key === 'Tab') {
-      event.preventDefault();
-    }
-  }
-
-  handleDropdownMouseDown(event: CustomEvent) {
-    const mouseDownEvent = event.detail.event;
-    const target = mouseDownEvent.target as HTMLElement;
-
-    // Don't close the dropdown if a click occurs inside the color picker
-    if (target.closest('sl-color-picker') === this.host) {
-      event.preventDefault();
-    }
   }
 
   normalizeColorString(colorString: string) {
