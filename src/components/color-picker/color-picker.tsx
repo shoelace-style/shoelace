@@ -17,32 +17,34 @@ export class ColorPicker {
   gridHandle: HTMLElement;
   hueSlider: HTMLElement;
   hueHandle: HTMLElement;
-  isDropdownOpen = false;
   lastValueEmitted: string;
   menu: HTMLElement;
   textInput: HTMLSlInputElement;
   trigger: HTMLElement;
 
   constructor() {
-    this.handleCopy = this.handleCopy.bind(this);
-    this.handleHueInput = this.handleHueInput.bind(this);
-    this.handleSaturationInput = this.handleSaturationInput.bind(this);
-    this.handleLightnessInput = this.handleLightnessInput.bind(this);
-    this.handleDrag = this.handleDrag.bind(this);
-    this.handleAlphaInput = this.handleAlphaInput.bind(this);
     this.handleAlphaDrag = this.handleAlphaDrag.bind(this);
+    this.handleAlphaInput = this.handleAlphaInput.bind(this);
     this.handleAlphaKeyDown = this.handleAlphaKeyDown.bind(this);
+    this.handleCopy = this.handleCopy.bind(this);
+    this.handleDocumentKeyDown = this.handleDocumentKeyDown.bind(this);
+    this.handleDocumentMouseDown = this.handleDocumentMouseDown.bind(this);
+    this.handleDrag = this.handleDrag.bind(this);
     this.handleGridDrag = this.handleGridDrag.bind(this);
     this.handleGridKeyDown = this.handleGridKeyDown.bind(this);
     this.handleHueDrag = this.handleHueDrag.bind(this);
+    this.handleHueInput = this.handleHueInput.bind(this);
     this.handleHueKeyDown = this.handleHueKeyDown.bind(this);
+    this.handleLightnessInput = this.handleLightnessInput.bind(this);
+    this.handleSaturationInput = this.handleSaturationInput.bind(this);
     this.handleTextInputChange = this.handleTextInputChange.bind(this);
 
-    this.handleDropdownHide = this.handleDropdownHide.bind(this);
     this.handleDropdownShow = this.handleDropdownShow.bind(this);
-    this.handleDocumentKeyDown = this.handleDocumentKeyDown.bind(this);
-    this.handleDocumentMouseDown = this.handleDocumentMouseDown.bind(this);
-    this.handleTriggerClick = this.handleTriggerClick.bind(this);
+    this.handleDropdownAfterShow = this.handleDropdownAfterShow.bind(this);
+    this.handleDropdownHide = this.handleDropdownHide.bind(this);
+    this.handleDropdownAfterHide = this.handleDropdownAfterHide.bind(this);
+    this.handleDropdownKeyDown = this.handleDropdownKeyDown.bind(this);
+    this.handleDropdownMouseDown = this.handleDropdownMouseDown.bind(this);
   }
 
   @Element() host: HTMLSlColorPickerElement;
@@ -115,6 +117,13 @@ export class ColorPicker {
 
   /** Emitted after the color picker closes and all transitions are complete. */
   @Event() slAfterHide: EventEmitter;
+
+  @Watch('inline')
+  handleInlineChange() {
+    //
+    // TODO:
+    //
+  }
 
   @Watch('value')
   handleValueChange(newValue: string, oldValue: string) {
@@ -336,30 +345,9 @@ export class ColorPicker {
     event.stopPropagation();
   }
 
-  handleDropdownShow(event: CustomEvent) {
-    if (this.disabled) {
-      event.preventDefault();
-      return false;
-    }
-
-    this.isDropdownOpen = true;
-    document.addEventListener('keydown', this.handleDocumentKeyDown);
-    document.addEventListener('mousedown', this.handleDocumentMouseDown);
-  }
-
-  handleDropdownHide(event: CustomEvent) {
-    if (this.isDropdownOpen) {
-      event.preventDefault();
-    } else {
-      document.removeEventListener('keydown', this.handleDocumentKeyDown);
-      document.removeEventListener('mousedown', this.handleDocumentMouseDown);
-    }
-  }
-
   handleDocumentKeyDown(event: KeyboardEvent) {
     // Close when pressing escape or tab
     if (event.key === 'Escape') {
-      this.isDropdownOpen = false;
       this.dropdown.hide();
     }
 
@@ -367,7 +355,6 @@ export class ColorPicker {
     if (event.key === 'Tab') {
       setTimeout(() => {
         if (document.activeElement && document.activeElement.closest('sl-color-picker') !== this.host) {
-          this.isDropdownOpen = false;
           this.dropdown.hide();
         }
       });
@@ -379,16 +366,46 @@ export class ColorPicker {
 
     // Close when clicking outside of the dropdown
     if (target.closest('sl-color-picker') !== this.host) {
-      this.isDropdownOpen = false;
       this.dropdown.hide();
     }
   }
 
-  handleTriggerClick(event: MouseEvent) {
-    if (this.isDropdownOpen) {
-      event.stopPropagation();
-      this.isDropdownOpen = false;
-      this.dropdown.hide();
+  handleDropdownShow(event: CustomEvent) {
+    event.stopPropagation();
+    this.slShow.emit();
+  }
+
+  handleDropdownAfterShow(event: CustomEvent) {
+    event.stopPropagation();
+    this.slAfterShow.emit();
+  }
+
+  handleDropdownHide(event: CustomEvent) {
+    event.stopPropagation();
+    this.slHide.emit();
+  }
+
+  handleDropdownAfterHide(event: CustomEvent) {
+    event.stopPropagation();
+    this.slAfterHide.emit();
+  }
+
+  handleDropdownKeyDown(event: CustomEvent) {
+    const keyDownEvent = event.detail.event;
+
+    // Don't close the dropdown if the tab key is pressed
+    if (keyDownEvent.key === 'Tab') {
+      event.preventDefault();
+    }
+  }
+
+  handleDropdownMouseDown(event: CustomEvent) {
+    const mouseDownEvent = event.detail.event;
+    const target = mouseDownEvent.target as HTMLElement;
+
+    // Don't close the dropdown if a click occurs inside the color picker
+    if (target.closest('sl-color-picker') === this.host) {
+      event.preventDefault();
     }
   }
 
@@ -708,13 +725,13 @@ export class ColorPicker {
     return (
       <sl-dropdown
         ref={el => (this.dropdown = el)}
-        class={{
-          'sl-color-dropdown': true,
-          'sl-color-dropdown--open': this.isDropdownOpen
-        }}
+        class="sl-color-dropdown"
         aria-disabled={this.disabled}
+        containingElement={this.host}
         onSlShow={this.handleDropdownShow}
+        onSlAfterShow={this.handleDropdownAfterShow}
         onSlHide={this.handleDropdownHide}
+        onSlAfterHide={this.handleDropdownAfterHide}
       >
         <button
           ref={el => (this.trigger = el)}
@@ -731,7 +748,6 @@ export class ColorPicker {
             color: `hsla(${this.hue}deg, ${this.saturation}%, ${this.lightness}%, ${this.alpha / 100})`
           }}
           type="button"
-          onClick={this.handleTriggerClick}
         />
         {ColorPicker}
       </sl-dropdown>

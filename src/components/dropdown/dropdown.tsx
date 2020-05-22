@@ -56,6 +56,9 @@ export class Dropdown {
     | 'left-start'
     | 'left-end' = 'bottom-start';
 
+  /** The dropdown will close when the user interacts outside of this element (e.g. clicking). */
+  @Prop() containingElement: HTMLElement = this.host;
+
   /** Emitted when the dropdown opens. Calling `event.preventDefault()` will prevent it from being opened. */
   @Event() slShow: EventEmitter;
 
@@ -176,10 +179,23 @@ export class Dropdown {
     this.ignoreMouseTimeout = setTimeout(() => (this.ignoreMouseEvents = false), 500);
     this.ignoreMouseEvents = true;
 
-    // Close when pressing escape or tab
-    if (event.key === 'Escape' || event.key === 'Tab') {
+    // Close when escape is pressed
+    if (event.key === 'Escape') {
       this.hide();
       return;
+    }
+
+    // Close when tabbing results in the focus leaving the close element
+    if (event.key === 'Tab') {
+      setTimeout(() => {
+        if (
+          document.activeElement &&
+          document.activeElement.closest(this.containingElement.tagName.toLowerCase()) !== this.containingElement
+        ) {
+          this.hide();
+          return;
+        }
+      });
     }
 
     // Make a selection when pressing enter
@@ -200,33 +216,35 @@ export class Dropdown {
       const selectedItem = this.getSelectedItem();
       let index = items.indexOf(selectedItem);
 
-      event.preventDefault();
+      if (items.length) {
+        event.preventDefault();
 
-      if (event.key === 'ArrowDown') {
-        index++;
-      } else if (event.key === 'ArrowUp') {
-        index--;
-      } else if (event.key === 'Home') {
-        index = 0;
-      } else if (event.key === 'End') {
-        index = items.length - 1;
+        if (event.key === 'ArrowDown') {
+          index++;
+        } else if (event.key === 'ArrowUp') {
+          index--;
+        } else if (event.key === 'Home') {
+          index = 0;
+        } else if (event.key === 'End') {
+          index = items.length - 1;
+        }
+
+        if (index < 0) index = 0;
+        if (index > items.length - 1) index = items.length - 1;
+
+        this.setSelectedItem(items[index]);
+        this.scrollItemIntoView(items[index]);
+
+        return;
       }
-
-      if (index < 0) index = 0;
-      if (index > items.length - 1) index = items.length - 1;
-
-      this.setSelectedItem(items[index]);
-      this.scrollItemIntoView(items[index]);
-
-      return;
     }
   }
 
   handleDocumentMouseDown(event: MouseEvent) {
     const target = event.target as HTMLElement;
 
-    // Close when clicking outside of the dropdown
-    if (target.closest('sl-dropdown') !== this.host) {
+    // Close when clicking outside of the close element
+    if (target.closest(this.containingElement.tagName.toLowerCase()) !== this.containingElement) {
       this.hide();
       return;
     }

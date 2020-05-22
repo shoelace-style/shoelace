@@ -162,6 +162,10 @@ export namespace Components {
     }
     interface SlDropdown {
         /**
+          * The dropdown will close when the user interacts outside of this element (e.g. clicking).
+         */
+        "containingElement": HTMLElement;
+        /**
           * Hides the dropdown menu
          */
         "hide": () => Promise<void>;
@@ -972,6 +976,10 @@ declare namespace LocalJSX {
         "open"?: boolean;
     }
     interface SlDropdown {
+        /**
+          * The dropdown will close when the user interacts outside of this element (e.g. clicking).
+         */
+        "containingElement"?: HTMLElement;
         /**
           * Emitted after the dropdown closes and all transitions are complete.
          */
