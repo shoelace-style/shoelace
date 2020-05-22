@@ -1,6 +1,5 @@
-# Tab
+# sl-tab
 
-TODO
 
 
 <!-- Auto Generated Below -->
@@ -47,4 +46,4 @@ Type: `Promise<void>`
 
 ----------------------------------------------
 
-
+*Built with [StencilJS](https://stenciljs.com/)*

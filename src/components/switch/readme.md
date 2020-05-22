@@ -1,10 +1,5 @@
-# Switch
+# sl-switch
 
-```html preview
-<sl-switch>Switch</sl-switch><br><br>
-<sl-switch checked>Checked</sl-switch><br><br>
-<sl-switch disabled>Disabled</sl-switch><br><br>
-```
 
 
 <!-- Auto Generated Below -->
@@ -61,4 +56,4 @@ Type: `Promise<void>`
 
 ----------------------------------------------
 
-
+*Built with [StencilJS](https://stenciljs.com/)*

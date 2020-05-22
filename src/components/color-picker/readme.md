@@ -1,12 +1,6 @@
-# Color Picker
+# sl-color-picker
 
-```html preview
-<sl-color-picker opacity></sl-color-picker>
-```
 
-```html preview
-<sl-color-picker opacity inline></sl-color-picker>
-```
 
 <!-- Auto Generated Below -->
 
@@ -59,4 +53,4 @@ graph TD;
 
 ----------------------------------------------
 
-
+*Built with [StencilJS](https://stenciljs.com/)*

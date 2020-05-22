@@ -1,10 +1,6 @@
-# Spinner
+# sl-spinner
 
-```html preview
-<sl-spinner></sl-spinner>
-<sl-spinner diameter="32"></sl-spinner>
-<sl-spinner diameter="48"></sl-spinner>
-```
+
 
 <!-- Auto Generated Below -->
 
@@ -19,4 +15,4 @@
 
 ----------------------------------------------
 
-
+*Built with [StencilJS](https://stenciljs.com/)*

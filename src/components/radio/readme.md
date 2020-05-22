@@ -1,10 +1,6 @@
-# Radio
+# sl-radio
 
-```html preview
-<sl-radio>Default</sl-radio><br><br>
-<sl-radio checked>Checked</sl-radio><br><br>
-<sl-radio disabled>Disabled</sl-radio><br><br>
-```
+
 
 <!-- Auto Generated Below -->
 
@@ -60,4 +56,4 @@ Type: `Promise<void>`
 
 ----------------------------------------------
 
-
+*Built with [StencilJS](https://stenciljs.com/)*

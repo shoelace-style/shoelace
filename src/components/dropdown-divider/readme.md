@@ -1,6 +1,5 @@
-# Dropdown Divider
+# sl-dropdown-divider
 
-TODO
 
 
 <!-- Auto Generated Below -->
@@ -8,4 +7,4 @@ TODO
 
 ----------------------------------------------
 
-
+*Built with [StencilJS](https://stenciljs.com/)*

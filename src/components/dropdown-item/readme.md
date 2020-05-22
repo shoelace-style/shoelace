@@ -1,6 +1,5 @@
-# Dropdown Item
+# sl-dropdown-item
 
-TODO
 
 
 <!-- Auto Generated Below -->
@@ -47,4 +46,4 @@ graph TD;
 
 ----------------------------------------------
 
-
+*Built with [StencilJS](https://stenciljs.com/)*

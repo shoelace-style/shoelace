@@ -21,10 +21,6 @@ export const config: Config = {
       type: 'dist-custom-elements-bundle'
     },
     {
-      type: 'docs-readme',
-      footer: ''
-    },
-    {
       type: 'docs-json',
       file: './dist/components.json'
     },

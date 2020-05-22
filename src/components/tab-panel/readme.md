@@ -1,6 +1,5 @@
-# Tab Panel
+# sl-tab-panel
 
-TODO
 
 
 <!-- Auto Generated Below -->
@@ -23,4 +22,4 @@ TODO
 
 ----------------------------------------------
 
-
+*Built with [StencilJS](https://stenciljs.com/)*
