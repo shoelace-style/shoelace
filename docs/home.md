@@ -4,14 +4,11 @@
 
 ---
 
-Shoelace harnesses the power of [web components](#web-components) to bring you a modern, versatile, open source component library. 
-
 Here's why you'll love it:
 
-- Works with any framework 🧩
-- Can be loaded via CDN ⚡️
-- Fully customizable with CSS — no build required 🎨
-- Hand-crafted with developer experience in mind 📐
+- 🧩 Works with any framework
+- ⚡️ Can be loaded via CDN
+- 🎨 Fully customizable with pure CSS — no build required!
 
 Shoelace is designed and developed in New Hampshire by [@claviska](https://twitter.com/claviska). You can use it under the terms of the MIT License.
 
@@ -19,7 +16,7 @@ Shoelace is designed and developed in New Hampshire by [@claviska](https://twitt
 
 ## Quick Start
 
-The fastest way to start using Shoelace is with the CDN. In the `<head>` section of your page, include these tags.
+The fastest way to get started is with the CDN. Add this to your `<head>` section:
 
 ```html
 <link rel="stylesheet" src="//SOME_CDN/shoelace/shoelace.css">
@@ -38,21 +35,17 @@ Now you have access to all of Shoelace's components! Try adding a button to your
 
 ## Web Components
 
-Thanks to the popularity of frameworks such as React, Vue, and Angular, component-driven development is a way of life for front-end developers these days. Let's face it — components are awesome, and they make a lot of sense in terms of design, development, and testing.
+**TL;DR** – we finally have a way to create our very own HTML elements and use them in any framework we want!
 
-Unfortunately, framework-specific components fail us in a number of ways:
+Thanks to the popularity of frameworks such as React, Vue, and Angular, component-driven development is a way of life for front-end developers. Components are awesome, and they make a lot of sense in terms of design, development, and testing.
 
-- You can only use them in the framework they're designed for. 🔒
-- Their lifespan is limited to that of the framework's. ⏳
-- New versions can lead to breaking changes, requiring substantial effort to update your components. 😭
+Unfortunately, *framework-specific* components fail us in a number of ways:
 
-Web Components solve these problems. They're [supported by all modern browsers](https://caniuse.com/#feat=custom-elementsv1), they're framework-agnostic, and because they're [part of the standard](https://www.webcomponents.org/specs), we can be confident that the respective APIs will be supported for many years to come.
+- 🔒 You can only use them in the framework they're designed for
+- ⏳ Their lifespan is limited to that of the framework's
+- 😭 New versions of the framework can lead to breaking changes, requiring substantial effort to update components
 
-If you're not yet familiar with Web Components, [MDN describes them](https://developer.mozilla.org/en-US/docs/Web/Web_Components) as:
-
-> A suite of different technologies allowing you to create reusable custom elements — with their functionality encapsulated away from the rest of your code — and utilize them in your web apps.
-
-In other words, we finally have a way to create our very own HTML elements and use them in any framework we want!
+Web Components solve these problems. They're [supported by all modern browsers](https://caniuse.com/#feat=custom-elementsv1), they're framework-agnostic, and they're [part of the standard](https://www.webcomponents.org/specs), so we know they'll be supported by browsers for many years to come.
 
 ## Browser Support
 
