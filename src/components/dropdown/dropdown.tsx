@@ -18,6 +18,7 @@ export class Dropdown {
   id = `sl-dropdown-${++id}`;
   ignoreMouseEvents = false;
   ignoreMouseTimeout: any;
+  ignoreOpenWatcher = false;
   menu: HTMLElement;
   popover: Popover;
   trigger: HTMLElement;
@@ -69,29 +70,8 @@ export class Dropdown {
 
   @Watch('open')
   handleOpenChange() {
-    if (this.open) {
-      const slShow = this.slShow.emit();
-
-      if (slShow.defaultPrevented) {
-        return false;
-      }
-
-      this.popover.show();
-
-      document.addEventListener('mousedown', this.handleDocumentMouseDown);
-      document.addEventListener('keydown', this.handleDocumentKeyDown);
-    } else {
-      const slHide = this.slHide.emit();
-
-      if (slHide.defaultPrevented) {
-        return false;
-      }
-
-      this.popover.hide();
-      this.setSelectedItem(null);
-
-      document.removeEventListener('mousedown', this.handleDocumentMouseDown);
-      document.removeEventListener('keydown', this.handleDocumentKeyDown);
+    if (!this.ignoreOpenWatcher) {
+      this.open ? this.show() : this.hide();
     }
   }
 
@@ -127,13 +107,44 @@ export class Dropdown {
   /** Shows the dropdown menu */
   @Method()
   async show() {
+    this.ignoreOpenWatcher = true;
     this.open = true;
+
+    const slShow = this.slShow.emit();
+
+    if (slShow.defaultPrevented) {
+      this.open = false;
+      this.ignoreOpenWatcher = false;
+      return;
+    }
+
+    this.popover.show();
+    this.ignoreOpenWatcher = false;
+
+    document.addEventListener('mousedown', this.handleDocumentMouseDown);
+    document.addEventListener('keydown', this.handleDocumentKeyDown);
   }
 
   /** Hides the dropdown menu */
   @Method()
   async hide() {
+    this.ignoreOpenWatcher = true;
     this.open = false;
+
+    const slHide = this.slHide.emit();
+
+    if (slHide.defaultPrevented) {
+      this.open = true;
+      this.ignoreOpenWatcher = false;
+      return;
+    }
+
+    this.popover.hide();
+    this.ignoreOpenWatcher = false;
+    this.setSelectedItem(null);
+
+    document.removeEventListener('mousedown', this.handleDocumentMouseDown);
+    document.removeEventListener('keydown', this.handleDocumentKeyDown);
   }
 
   getAllItems() {
