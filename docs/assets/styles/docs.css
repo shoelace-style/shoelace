@@ -248,14 +248,17 @@ body.close .sidebar-toggle:focus {
 
 .content code .token.attr-name,
 .content code .token.tag,
-.content code .token.selector {
+.content code .token.selector,
+.content code .token.function,
+.content code .token.keyword {
   color: var(--sl-color-primary-50);
 }
 
 .content code .token.string {
-  color: var(--sl-color-success-45);
+  color: var(--sl-color-success-40);
 }
 
+.content code .token.parameter,
 .content code .token.property {
   color: var(--sl-color-warning-50);
 }
@@ -307,11 +310,16 @@ body.close .sidebar-toggle:focus {
 }
 
 pre.code-block__source {
+  background: var(--sl-color-gray-95);
   border: solid 1px var(--sl-color-gray-90);
   border-bottom: none;
   border-radius: 0;
   margin: 0;
   display: none;
+}
+
+pre.code-block__source > code {
+  background-color: var(--sl-color-gray-95);
 }
 
 .code-block__source .docsify-copy-code-button {
