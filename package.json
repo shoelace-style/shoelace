@@ -17,7 +17,7 @@
   "scripts": {
     "build": "stencil build --docs",
     "install": "node postinstall.js",
-    "start": "concurrently --kill-others \"npm run stencil\" \"gulp\" \"npm run docsify\"",
+    "start": "concurrently --kill-others \"npm run stencil\" \"npm run docsify\"",
     "stencil": "stencil build --dev --docs --watch --no-open",
     "docsify": "docsify serve ./docs --open",
     "test": "stencil test --spec --e2e",
@@ -33,7 +33,6 @@
     "del": "^5.1.0",
     "eslint": "^6.8.0",
     "eslint-plugin-react": "^7.19.0",
-    "gulp": "^4.0.2",
     "recursive-copy": "^2.0.10",
     "through2": "^3.0.1",
     "workbox-build": "4.3.1"
@@ -42,7 +41,7 @@
   "dependencies": {
     "@popperjs/core": "^2.1.1",
     "@sphinxxxx/color-conversion": "^2.2.2",
-    "@stencil/core": "^1.12.7",
+    "@stencil/core": "^1.13.0",
     "@stencil/sass": "^1.1.1",
     "color": "^3.1.2",
     "feather-icons": "^4.28.0",

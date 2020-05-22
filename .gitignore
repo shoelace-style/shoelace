@@ -1,6 +1,3 @@
-# Ignore generated docs files
-docs/components/
-
 src/components/icon/icons
 
 dist/
