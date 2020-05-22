@@ -14,6 +14,7 @@ Here's why you'll love it:
 - Hand-crafted with developer experience in mind 📐
 
 Shoelace is designed and developed in New Hampshire by [@claviska](https://twitter.com/claviska). You can use it under the terms of the MIT License.
+
 ---
 
 [Documentation](https://shoelace.style)
