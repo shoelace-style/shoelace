@@ -175,8 +175,12 @@ export class Input {
   }
 
   handleMouseDown(event: MouseEvent) {
-    event.preventDefault();
-    this.input.focus();
+    const target = event.target as HTMLElement;
+
+    if (target !== this.input) {
+      event.preventDefault();
+      this.input.focus();
+    }
   }
 
   handlePasswordToggle() {
