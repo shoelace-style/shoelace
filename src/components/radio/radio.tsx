@@ -2,7 +2,12 @@ import { Component, Element, Event, EventEmitter, Method, Prop, State, h } from 
 
 let id = 0;
 
-/** @slot - The radio's label. */
+/**
+ * @since 1.0.0
+ * @status ready
+ *
+ * @slot - The radio's label.
+ */
 
 @Component({
   tag: 'sl-radio',

@@ -9,8 +9,10 @@
       name="viewport"
       content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
     />
-    <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css" />
     <link rel="stylesheet" href="/assets/styles/docs.css" />
+    <link rel="stylesheet" href="/assets/styles/demos.css" />
+    <link rel="stylesheet" href="/assets/plugins/code-block/code-block.css" />
     <link rel="icon" href="/assets/images/logo.svg" type="image/x-icon" />
 
     <!-- Import Shoelace -->
@@ -30,8 +32,9 @@
           errorText: 'Failed to copy',
           successText: 'Copied'
         },
+        coverpage: false,
         executeScript: true,
-        homepage: 'home.md',
+        homepage: 'overview/getting-started.md',
         loadSidebar: true,
         logo: '/assets/images/wordmark.svg',
         maxLevel: 3,
@@ -40,7 +43,7 @@
         notFoundPage: '404.md',
         pagination: {
           previousText: 'Previous',
-          nextText: 'Next up',
+          nextText: 'Next',
           crossChapter: true,
           crossChapterText: false
         },
@@ -56,16 +59,21 @@
           hideOtherSidebarContent: true,
           namespace: 'shoelace-docs'
         },
+        themeable: {
+          readyTransition: true, // default
+          responsiveTables: true // default
+        },
         themeColor: '#049dff'
       };
     </script>
     <script src="https://unpkg.com/docsify/lib/docsify.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/docsify-themeable@0"></script>
     <script src="https://unpkg.com/docsify/lib/plugins/search.min.js"></script>
     <script src="https://unpkg.com/docsify-copy-code"></script>
     <script src="https://unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
     <script src="https://unpkg.com/docsify/lib/plugins/zoom-image.min.js"></script>
     <script src="https://unpkg.com/prismjs@1.19.0/components/prism-bash.js"></script>
-    <script src="/assets/scripts/code-block-plugin.js"></script>
-    <script src="/assets/scripts/component-metadata-plugin.js"></script>
+    <script src="/assets/plugins/code-block/code-block.js"></script>
+    <script src="/assets/plugins/metadata/metadata.js"></script>
   </body>
 </html>

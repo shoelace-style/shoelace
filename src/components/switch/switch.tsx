@@ -2,7 +2,13 @@ import { Component, Event, EventEmitter, Method, Prop, State, h } from '@stencil
 
 let id = 0;
 
-/** @slot - The switch's label. */
+/**
+ * @since 1.0.0
+ * @status ready
+ *
+ *
+ * @slot - The switch's label.
+ */
 
 @Component({
   tag: 'sl-switch',

@@ -1,6 +1,8 @@
-<img class="logo" src="/assets/images/wordmark.svg" alt="Shoelace" data-no-zoom>
+<img id="top" class="logo" src="/assets/images/wordmark.svg" alt="Shoelace" data-no-zoom style="max-width: 24rem;">
 
-👟 _A forward-thinking web component library for desktop and mobile._
+_A forward-thinking web component library for desktop and mobile._
+
+<span class="badge"><docs-version /></span>
 
 ---
 
@@ -52,8 +54,6 @@ Web Components solve these problems. They're [supported by all modern browsers](
 Shoelace is built for modern browsers. If you need to support IE11 or pre-Chromium Edge, you probably don't want to use this library.
 
 Although Web Components can (to some degree) be polyfilled for older browsers, supporting them is outside the scope of this project. If you're using Shoelace in a legacy browser, things will probably not work the way they're intended to.
-
-!> Shoelace makes use of the `::part` selector for styling, which isn't supported in Safari yet. However, it's present in Safari 13.1 beta so it should be available very soon.
 
 ## Attribution
 

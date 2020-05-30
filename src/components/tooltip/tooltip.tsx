@@ -1,7 +1,12 @@
 import { Component, Element, Event, EventEmitter, Host, Method, Prop, Watch, h } from '@stencil/core';
 import tippy from 'tippy.js';
 
-/** @slot - The tooltip's content. */
+/**
+ * @since 1.0.0
+ * @status ready
+ *
+ * @slot - The tooltip's content.
+ */
 
 @Component({
   tag: 'sl-tooltip',

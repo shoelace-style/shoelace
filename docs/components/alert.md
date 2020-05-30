@@ -1,5 +1,11 @@
 # Alert
 
+[component-header:sl-alert]
+
+Alerts...
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
 ```html preview
 <sl-alert type="primary" open>
   Nothing fancy here, just a simple alert.
@@ -11,7 +17,9 @@
 </sl-alert>
 ```
 
-## Types
+## Examples
+
+### Types
 
 ```html preview
 <sl-alert type="primary" open closable>

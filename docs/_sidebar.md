@@ -1,7 +1,7 @@
 - Overview
-  - [Getting Started](/)
-  - [Installation](/installation.md)
-  - [Customizing](/customizing.md)
+  - [Getting Started](/overview/getting-started.md)
+  - [Installation](/overview/installation.md)
+  - [Customizing](/overview/customizing.md)
 
 - Design Tokens
   - [Typography](/tokens/typography.md)

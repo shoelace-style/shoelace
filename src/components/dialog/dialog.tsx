@@ -5,6 +5,9 @@ import { lockBodyScrolling, unlockBodyScrolling } from '../../utilities/scroll';
 let id = 0;
 
 /**
+ * @since 1.0.0
+ * @status ready
+ *
  * @slot - The dialog's content.
  * @slot footer - The dialog's footer, usually one or more buttons representing various options.
  */

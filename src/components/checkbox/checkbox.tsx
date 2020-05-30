@@ -2,7 +2,12 @@ import { Component, Event, EventEmitter, Method, Prop, State, Watch, h } from '@
 
 let id = 0;
 
-/** @slot - The checkbox's label. */
+/**
+ * @since 1.0.0
+ * @status ready
+ *
+ * @slot - The checkbox's label.
+ */
 
 @Component({
   tag: 'sl-checkbox',

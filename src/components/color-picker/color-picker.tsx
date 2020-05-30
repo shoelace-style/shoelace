@@ -3,6 +3,11 @@ import color from 'color';
 import { clamp } from '../../utilities/math';
 import { throttle } from '../../utilities/throttle';
 
+/**
+ * @since 1.0.0
+ * @status ready
+ */
+
 @Component({
   tag: 'sl-color-picker',
   styleUrl: 'color-picker.scss',

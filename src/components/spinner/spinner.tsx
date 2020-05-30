@@ -1,5 +1,10 @@
 import { Component, Prop, h } from '@stencil/core';
 
+/**
+ * @since 1.0.0
+ * @status ready
+ */
+
 @Component({
   tag: 'sl-spinner',
   styleUrl: 'spinner.scss',

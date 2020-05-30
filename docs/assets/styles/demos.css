@@ -1,0 +1,52 @@
+/* Color demo */
+.color-demo {
+  width: 4rem;
+  height: 2rem;
+  border-radius: var(--sl-border-radius-small);
+  box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.33);
+}
+
+/* Border radius demo */
+.border-radius-demo {
+  width: 3rem;
+  height: 3rem;
+  background: var(--sl-color-primary-50);
+}
+
+/* Transition demo */
+.transition-demo {
+  position: relative;
+  background: var(--sl-color-gray-90);
+  width: 8rem;
+  height: 2rem;
+}
+
+.transition-demo::after {
+  content: '';
+  position: absolute;
+  background-color: var(--sl-color-primary-50);
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  transition-duration: inherit;
+  transition-property: width;
+}
+
+.transition-demo:hover::after {
+  width: 100%;
+}
+
+/* Spacing demo */
+.spacing-demo {
+  width: 100px;
+  background: var(--sl-color-primary-50);
+}
+
+/* Elevation dmeo */
+.elevation-demo {
+  background: var(--sl-color-white);
+  border-radius: 3px;
+  width: 4rem;
+  height: 4rem;
+}

@@ -1,6 +1,10 @@
 # Button
 
-Good ol' buttons. They're usually the first thing I look at when reviewing a component library. Shoelace offers a variation for every theme color.
+[component-header:sl-button]
+
+Buttons represent actions that are available to the user.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 
 ```html preview
 <sl-button type="default" tabindex>Default</sl-button>
@@ -11,7 +15,11 @@ Good ol' buttons. They're usually the first thing I look at when reviewing a com
 <sl-button type="danger">Danger</sl-button>
 ```
 
-## Pill
+[component-metadata:sl-button]
+
+## Examples
+
+### Pill
 
 Use the `pill` prop to give buttons rounded edges.
 
@@ -24,7 +32,7 @@ Use the `pill` prop to give buttons rounded edges.
 <sl-button type="danger" pill>Danger</sl-button>
 ```
 
-## Sizes
+### Sizes
 
 Use the `size` prop to change a button's size.
 
@@ -34,7 +42,7 @@ Use the `size` prop to change a button's size.
 <sl-button size="large">Large</sl-button>
 ```
 
-## Circle
+### Circle
 
 Use the `circle` prop to create circular icon buttons.
 
@@ -44,7 +52,7 @@ Use the `circle` prop to create circular icon buttons.
 <sl-button type="default" size="large" circle><sl-icon name="settings"></sl-icon></sl-button>
 ```
 
-## Text
+### Text
 
 Use `type="text"` to create text buttons, which share the same size as regular buttons but don't have backgrounds or borders.
 
@@ -54,7 +62,7 @@ Use `type="text"` to create text buttons, which share the same size as regular b
 <sl-button type="text" size="large">Text</sl-button>
 ```
 
-## Block
+### Block
 
 Block buttons can be created by setting the button's width to `100%`.
 
@@ -64,7 +72,7 @@ Block buttons can be created by setting the button's width to `100%`.
 <sl-button type="default" size="large" style="width: 100%; margin-bottom: 1rem;">Large</sl-button>
 ```
 
-## Icons
+### Icons
 
 Use the `prefix` and `suffix` slots to add icons.
 
@@ -84,7 +92,7 @@ Use the `prefix` and `suffix` slots to add icons.
 </sl-button>
 ```
 
-## Caret
+### Caret
 
 Use the `caret` prop to add a dropdown indicator when a button will trigger a dropdown, menu, or popover.
 
@@ -94,7 +102,7 @@ Use the `caret` prop to add a dropdown indicator when a button will trigger a dr
 <sl-button size="large" caret>Large</sl-button>
 ```
 
-## Loading
+### Loading
 
 Use the `loading` prop to make a button busy. The width will remain the same as before, preventing adjacent elements from moving around.
 
@@ -107,7 +115,7 @@ Use the `loading` prop to make a button busy. The width will remain the same as 
 <sl-button type="danger" loading>Danger</sl-button>
 ```
 
-## Disabled
+### Disabled
 
 Use the `disabled` prop to disable a button.
 
@@ -119,6 +127,4 @@ Use the `disabled` prop to disable a button.
 <sl-button type="warning" disabled>Warning</sl-button>
 <sl-button type="danger" disabled>Danger</sl-button>
 ```
-
-[component-metadata:sl-button]
 

@@ -1,5 +1,5 @@
 (() => {
-  let componentMetadata;
+  let metadataStore;
 
   function createPropsTable(props) {
     const table = document.createElement('table');
@@ -167,17 +167,35 @@
 
   function getMetadata() {
     return new Promise((resolve, reject) => {
-      if (componentMetadata) {
-        return resolve(componentMetadata);
+      // Simple caching to prevent multiple XHR requests
+      if (metadataStore) {
+        return resolve(metadataStore);
       }
 
-      return fetch('/assets/dist/components.json')
-        .then(res => res.json())
+      Promise.all([
+        fetch('/assets/dist/components.json').then(res => res.json()),
+        fetch('/assets/data/custom.json').then(res => res.json())
+      ])
+        .then(res => ({
+          component: res[0],
+          custom: res[1]
+        }))
         .then(data => {
-          componentMetadata = data;
-          resolve(componentMetadata);
-        });
+          metadataStore = data;
+          resolve(metadataStore);
+        })
+        .catch(err => console.error(err));
     });
+  }
+
+  function getDocsTagsObject(docsTags) {
+    let tags = {};
+
+    for (const tag of docsTags) {
+      tags[tag.name] = tag.text;
+    }
+
+    return tags;
   }
 
   if (!window.$docsify) {
@@ -188,12 +206,49 @@
     hook.beforeEach(async function (content, next) {
       const metadata = await getMetadata();
 
-      content = content.replace(/\[component-metadata:([a-z-]+)\]/g, (match, tag) => {
-        const data = metadata.components.filter(data => data.tag === tag)[0];
+      // Handle [component-header] tags
+      content = content.replace(/\[component-header:([a-z-]+)\]/g, (match, tag) => {
+        const data = metadata.component.components.filter(data => data.tag === tag)[0];
         let result = '';
 
         if (!data) {
-          throw new Error('Component not found in metadata: ' + tag);
+          console.error('Component not found in metadata: ' + tag);
+          next(content);
+        }
+
+        const tags = getDocsTagsObject(data.docsTags);
+
+        if (tags && tags.status) {
+          result += `
+            <div class="component-header">
+              <div class="component-header__tag">
+                <code>&lt;${tag}&gt;</code>
+              </div>
+
+              <div class="component-header__info">
+                <small class="badge badge--since">
+                  Since ${tags.since || '?'}
+                </small>
+
+                <small class="component-header__status badge badge--${tags.status.replace(/\s/g, '-')}">
+                  ${tags.status}
+                </small>
+              </div>
+            </div>
+          `;
+        }
+
+        return result.replace(/^ +| +$/gm, '');
+      });
+
+      // Handle [component-metadata] tags
+      content = content.replace(/\[component-metadata:([a-z-]+)\]/g, (match, tag) => {
+        const data = metadata.component.components.filter(data => data.tag === tag)[0];
+        let result = '';
+
+        if (!data) {
+          console.error('Component not found in metadata: ' + tag);
+          next(content);
         }
 
         if (data.props.length) {
@@ -243,6 +298,16 @@
       });
 
       next(content);
+    });
+
+    hook.doneEach(async function (html, next) {
+      const metadata = await getMetadata();
+      const version = metadata.custom.version;
+
+      // Replace <docs-version> with version number
+      [...document.body.querySelectorAll('docs-version')].map(el => el.replaceWith(version));
+
+      next(html);
     });
   });
 })();

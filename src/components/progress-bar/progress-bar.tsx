@@ -1,6 +1,9 @@
 import { Component, Prop, h } from '@stencil/core';
 
 /**
+ * @since 1.0.0
+ * @status ready
+ *
  * @slot - A label to show inside the indicator.
  */
 

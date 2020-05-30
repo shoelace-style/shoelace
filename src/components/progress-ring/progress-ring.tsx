@@ -1,5 +1,10 @@
 import { Component, Host, Prop, Watch, h } from '@stencil/core';
 
+/**
+ * @since 1.0.0
+ * @status ready
+ */
+
 @Component({
   tag: 'sl-progress-ring',
   styleUrl: 'progress-ring.scss',

@@ -2,6 +2,9 @@ import { Component, Element, Event, EventEmitter, Host, Method, Prop, State, Wat
 import { KeyboardDetector } from '../../utilities/keyboard-detector';
 
 /**
+ * @since 1.0.0
+ * @status ready
+ *
  * @slot - The alert's content.
  * @slot icon - An icon to show in the alert.
  * @slot close-icon - An icon to use in lieu of the default close icon.

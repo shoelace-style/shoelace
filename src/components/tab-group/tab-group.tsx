@@ -4,6 +4,9 @@ import { getOffset } from '../../utilities/offset';
 import { scrollIntoView } from '../../utilities/scroll';
 
 /**
+ * @since 1.0.0
+ * @status ready
+ *
  * @slot nav - Used for grouping tabs in the tabs.
  * @slot - Used for grouping tab panels in the tabs.
  */

@@ -1,6 +1,9 @@
 import { Component, Event, EventEmitter, Method, Prop, State, h } from '@stencil/core';
 
 /**
+ * @since 1.0.0
+ * @status ready
+ *
  * @slot - The button's label.
  * @slot prefix - Used to prepend an icon or similar element to the button.
  * @slot suffix - Used to append an icon or similar element to the button.

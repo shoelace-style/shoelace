@@ -4,6 +4,11 @@ import { requestIcon } from './request';
 
 const parser = new DOMParser();
 
+/**
+ * @since 1.0.0
+ * @status ready
+ */
+
 @Component({
   tag: 'sl-icon',
   styleUrl: 'icon.scss',

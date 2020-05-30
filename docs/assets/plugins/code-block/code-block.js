@@ -7,7 +7,13 @@
 
   function runScript(script) {
     const newScript = document.createElement('script');
-    newScript.appendChild(document.createTextNode(script.innerHTML));
+    newScript.appendChild(
+      document.createTextNode(`
+      (() => {
+        ${script.innerHTML}
+      })();
+    `)
+    );
     script.parentNode.replaceChild(newScript, script);
   }
 
@@ -62,7 +68,7 @@
           toggle.classList.add('code-block__toggle');
           toggle.setAttribute('aria-expanded', 'false');
           toggle.setAttribute('aria-controls', preId);
-          toggle.innerHTML = '<sl-icon name="chevron-down"></sl-icon>';
+          toggle.innerHTML = 'Source <sl-icon name="chevron-down"></sl-icon>';
 
           codeBlock.prepend(preview);
           codeBlock.append(toggle);
@@ -113,7 +119,8 @@
 
   // Expand and collapse code blocks
   document.addEventListener('click', event => {
-    if (event.target.closest('.code-block__toggle')) {
+    const toggle = event.target.closest('.code-block__toggle');
+    if (toggle) {
       const codeBlock = event.target.closest('.code-block');
       codeBlock.classList.toggle('code-block--expanded');
       event.target.setAttribute('aria-expanded', codeBlock.classList.contains('code-block--expanded'));

@@ -1,5 +1,11 @@
 # Dropdown
 
+[component-header:sl-dropdown]
+
+Dropdowns...
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
 ```html preview
 <sl-dropdown>
   <sl-button slot="trigger" caret>Dropdown</sl-button>
@@ -21,6 +27,12 @@
 </sl-dropdown>
 ```
 
+[component-metadata:sl-dropdown]
+
+## Examples
+
+### Basic
+
 ```html preview
 <sl-dropdown>
   <sl-button slot="trigger" caret>Edit</sl-button>
@@ -32,6 +44,8 @@
   <sl-dropdown-item>Replace</sl-dropdown-item>
 </sl-dropdown>
 ```
+
+### Scrolling
 
 ```html preview
 <sl-dropdown>
@@ -58,5 +72,3 @@
   <sl-dropdown-item>Item 20</sl-dropdown-item>
 </sl-dropdown>
 ```
-
-[component-metadata:sl-dropdown]
