@@ -153,7 +153,6 @@
 }
 
 /* Code */
-
 .markdown-section pre .token.comment {
   color: var(--sl-color-gray-70);
 }
@@ -181,4 +180,9 @@
 .markdown-section pre .token.value,
 .markdown-section pre .token.class-name {
   color: var(--sl-color-warning-50);
+}
+
+/* Content */
+.markdown-section table code {
+  white-space: normal !important;
 }
