@@ -1,7 +1,9 @@
 # Tab Panel
 
-Tab Panels are used to create panels inside Tab Groups.
+[component-header:sl-tab-panel]
 
-See the Tab Group component for more usage examples.
+Tab panels...
+
+A demonstration of this component can be found in the [tab group examples](/components/tab-group.md).
 
 [component-metadata:sl-tab-panel]

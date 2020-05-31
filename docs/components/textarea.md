@@ -1,13 +1,33 @@
 # Textarea
 
+[component-header:sl-textarea]
+
+Textareas...
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
 ```html preview
-<sl-textarea placeholder="Standard" resize="none"></sl-textarea><br><br>
-
-<sl-textarea placeholder="Resizable" resize="vertical"></sl-textarea><br><br>
-
-<sl-textarea placeholder="Auto" resize="auto"></sl-textarea><br><br>
-
-<sl-textarea placeholder="Disabled" resize="none" disabled></sl-textarea><br><br>
+<sl-textarea placeholder="Textarea"></sl-textarea>
 ```
 
 [component-metadata:sl-textarea]
+
+## Examples
+
+### No Resize
+
+```html preview
+<sl-textarea placeholder="Textarea" resize="none"></sl-textarea>
+```
+
+### Resize to Content
+
+```html preview
+<sl-textarea placeholder="Textarea" resize="auto"></sl-textarea>
+```
+
+### Disabled
+
+```html preview
+<sl-textarea placeholder="Textarea" resize="none" disabled></sl-textarea>
+```

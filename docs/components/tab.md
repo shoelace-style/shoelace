@@ -1,7 +1,9 @@
 # Tab
 
-Tabs are used to create tabs inside Tab Groups.
+[component-header:sl-tab]
 
-See the Tab Group component for more usage examples.
+Tabs...
+
+A demonstration of this component can be found in the [tab group examples](/components/tab-group.md).
 
 [component-metadata:sl-tab]

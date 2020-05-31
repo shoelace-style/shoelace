@@ -1,5 +1,11 @@
 # Tab Group
 
+[component-header:sl-tab-group]
+
+Tab groups...
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
 ```html preview
 <sl-tab-group placement="top">
   <sl-tab slot="nav" panel="general">General</sl-tab>
@@ -14,6 +20,12 @@
 </sl-tab-group>
 ```
 
+[component-metadata:sl-tab-group]
+
+## Examples
+
+### Tabs on Bottom
+
 ```html preview
 <sl-tab-group placement="bottom">
   <sl-tab slot="nav" panel="general">General</sl-tab>
@@ -27,6 +39,7 @@
   <sl-tab-panel name="disabled">Disabled</sl-tab-panel>
 </sl-tab-group>
 ```
+### Tabs on Left
 
 ```html preview
 <sl-tab-group placement="left">
@@ -42,6 +55,8 @@
 </sl-tab-group>
 ```
 
+### Tabs on Right
+
 ```html preview
 <sl-tab-group placement="right">
   <sl-tab slot="nav" panel="general">General</sl-tab>
@@ -55,6 +70,8 @@
   <sl-tab-panel name="disabled">Disabled</sl-tab-panel>
 </sl-tab-group>
 ```
+
+### Scrolling Tabs
 
 ```html preview
 <sl-tab-group>
@@ -101,23 +118,3 @@
   <sl-tab-panel name="tab-20">Tab panel 20</sl-tab-panel>
 </sl-tab-group>
 ```
-
-## Notes
-
-Serious consideration was given to simplifying the tab group API into two components with a structure similar to:
-
-```html
-<!-- Not a valid syntax! -->
-<sl-tab-group placement="top">
-  <sl-tab label="General">General</sl-tab>
-  <sl-tab label="Custom">Custom</sl-tab>
-  <sl-tab label="Advanced">Advanced</sl-tab>
-  <sl-tab label="Disabled" disabled>Disabled</sl-tab>
-</sl-tab-group>
-```
-
-However, there are two caveats to this approach. The first is that labels must be generated and stored in the tab group's shadow DOM. For accessibility reasons, tabs and tab panels must be linked via `id` using the `aria-controls` and `aria-labeledby` attribute, respectively. When a tab is inside a shadow DOM, its `id` becomes inaccessible to the light DOM and accessibility is broken.
-
-The second thing is that labels would be limited to text only. If you wanted to put an icon, a badge, or another element inside the label, it wouldn't be possible with this approach.
-
-[component-metadata:sl-tab-group]

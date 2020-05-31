@@ -42,8 +42,8 @@ export class Range {
   /** The input's step attribute. */
   @Prop() step = 1;
 
-  /** The tooltip's position. */
-  @Prop() tooltip: 'top' | 'bottom' | 'off' = 'top';
+  /** The preferred placedment of the tooltip. */
+  @Prop() tooltipPlacement: 'top' | 'bottom' | 'hidden' = 'top';
 
   /** A function used to format the tooltip's value. */
   @Prop() tooltipFormatter = (value: number) => value.toString();
@@ -100,7 +100,7 @@ export class Range {
   }
 
   syncTooltip() {
-    if (this.tooltip !== 'off') {
+    if (this.tooltipPlacement !== 'hidden') {
       const percent = Math.max(0, (this.value - this.min) / (this.max - this.min));
       const inputWidth = this.input.offsetWidth;
       const tooltipWidth = this.output.offsetWidth;
@@ -120,8 +120,8 @@ export class Range {
           // States
           'sl-range--disabled': this.disabled,
           'sl-range--focused': this.hasFocus,
-          'sl-range--tooltip-top': this.tooltip === 'top',
-          'sl-range--tooltip-bottom': this.tooltip === 'bottom'
+          'sl-range--tooltip-top': this.tooltipPlacement === 'top',
+          'sl-range--tooltip-bottom': this.tooltipPlacement === 'bottom'
         }}
       >
         <input
@@ -138,7 +138,7 @@ export class Range {
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
         />
-        {this.tooltip !== 'off' && (
+        {this.tooltipPlacement !== 'hidden' && (
           <output ref={el => (this.output = el)} class="sl-range__tooltip">
             {this.tooltipFormatter(this.value)}
           </output>
