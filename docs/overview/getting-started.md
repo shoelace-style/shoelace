@@ -2,7 +2,7 @@
 
 _A forward-thinking web component library for desktop and mobile._
 
-<span class="badge"><docs-version /></span>
+<span class="badge"><docs-version></docs-version></span>
 
 ---
 
