@@ -16,6 +16,7 @@
 }
 
 .sl-radio__icon {
+  display: flex;
   width: var(--sl-toggle-size);
   height: var(--sl-toggle-size);
 
