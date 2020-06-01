@@ -1,6 +1,5 @@
 .code-block {
   position: relative;
-  background-color: var(--sl-color-gray-95);
   border-radius: 3px;
   margin-bottom: 1.5rem;
 }
@@ -44,11 +43,6 @@
   border-radius: 0 !important;
   margin: 0 !important;
   display: none;
-}
-
-.code-block__source,
-.code-block__source code {
-  background: #f8f8f8;
 }
 
 .code-block__source .docsify-copy-code-button {
