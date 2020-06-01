@@ -304,7 +304,7 @@
       const metadata = await getMetadata();
       const version = metadata.custom.version;
 
-      // Replace <docs-version> with version number
+      // Replace <docs-version> tags with version number
       [...document.body.querySelectorAll('docs-version')].map(el => el.replaceWith(version));
 
       next(html);
