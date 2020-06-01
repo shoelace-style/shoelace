@@ -33,6 +33,7 @@
     "eslint": "^6.8.0",
     "eslint-plugin-react": "^7.19.0",
     "gulp": "^4.0.2",
+    "husky": "^4.2.5",
     "mkdirp": "^1.0.4",
     "recursive-copy": "^2.0.10",
     "through2": "^3.0.1",
@@ -49,5 +50,11 @@
     "normalize.css": "^8.0.1",
     "resize-observer-polyfill": "^1.5.1",
     "tippy.js": "^5.2.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint",
+      "pre-push": "npm run lint"
+    }
   }
 }
