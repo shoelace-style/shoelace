@@ -35,7 +35,10 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 ```html preview
 <sl-dialog label="Dialog" id="dialog-scrolling">
   <div style="height: 150vh; border: dashed 1px var(--sl-color-gray-80); padding: 0 1rem;">
-    <p>By design, the dialog's height will never exceed that of the viewport. As such, the dialog won't scroll with the page, ensuring the header and footer are always accessible to the user.</p>
+    <p>
+      By design, the dialog's height will never exceed that of the viewport. As such, the dialog won't scroll with the 
+      page, ensuring the header and footer are always accessible to the user.
+    </p>
     <p>Give it a try! 👇</p>
   </div>
   <sl-button slot="footer" type="primary" id="dialog-scrolling-close">Close</sl-button>
