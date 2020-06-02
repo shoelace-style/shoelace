@@ -22,7 +22,8 @@
     "lint": "eslint src/**/*{.ts,.tsx}",
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
-    "generate": "stencil generate"
+    "generate": "stencil generate",
+    "postinstall": "node postinstall.js"
   },
   "devDependencies": {
     "@stencil/eslint-plugin": "^0.3.1",
