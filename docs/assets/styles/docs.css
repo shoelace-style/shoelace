@@ -35,8 +35,10 @@
   --search-input-border-color: transparent;
   --search-input-background-color: var(--sl-color-white);
 
-  --code-font-family: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+  --code-font-family: 'SF Mono', Monaco, 'Andale Mono', 'Lucida Console', 'Bitstream Vera Sans Mono', 'Courier New',
+    Courier, monospace;
   --code-font-size: 14px;
+  --code-font-weight: 400;
   --code-inline-background: hsla(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 50%, 0.067);
   --code-tab-size: 2;
   --code-theme-background: var(--mono-tint3);
