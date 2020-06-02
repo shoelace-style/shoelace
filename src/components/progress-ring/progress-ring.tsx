@@ -13,8 +13,8 @@ import { Component, Host, Prop, Watch, h } from '@stencil/core';
 export class Progress {
   indicator: SVGCircleElement;
 
-  /** The diameter of the progress ring in pixels. */
-  @Prop() diameter = 128;
+  /** The size of the progress ring in pixels. */
+  @Prop() size = 128;
 
   /** The stroke width of the progress ring in pixels. */
   @Prop() strokeWidth = 6;
@@ -43,15 +43,15 @@ export class Progress {
   render() {
     return (
       <Host>
-        <svg class="sl-progress-ring" width={this.diameter} height={this.diameter}>
+        <svg class="sl-progress-ring" width={this.size} height={this.size}>
           <circle
             class="sl-progress-ring__track"
             stroke-width={this.strokeWidth}
             stroke-linecap="round"
             fill="transparent"
-            r={(this.diameter - this.strokeWidth) / 2}
-            cx={this.diameter / 2}
-            cy={this.diameter / 2}
+            r={(this.size - this.strokeWidth) / 2}
+            cx={this.size / 2}
+            cy={this.size / 2}
           />
 
           <circle
@@ -60,9 +60,9 @@ export class Progress {
             stroke-width={this.strokeWidth}
             stroke-linecap="round"
             fill="transparent"
-            r={(this.diameter - this.strokeWidth) / 2}
-            cx={this.diameter / 2}
-            cy={this.diameter / 2}
+            r={(this.size - this.strokeWidth) / 2}
+            cx={this.size / 2}
+            cy={this.size / 2}
           />
         </svg>
 

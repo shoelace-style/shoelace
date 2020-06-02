@@ -8,8 +8,16 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 ```html preview
 <sl-spinner></sl-spinner>
-<sl-spinner diameter="32"></sl-spinner>
-<sl-spinner diameter="48"></sl-spinner>
 ```
 
 [component-metadata:sl-spinner]
+
+## Examples
+
+## Size
+
+```html preview
+<sl-spinner size="16"></sl-spinner>
+<sl-spinner size="32"></sl-spinner>
+<sl-spinner size="48"></sl-spinner>
+```

@@ -12,7 +12,7 @@ import { Component, Prop, h } from '@stencil/core';
 })
 export class Spinner {
   /** The spinner's size. */
-  @Prop() diameter = 24;
+  @Prop() size = 24;
 
   /** The stroke width of the spinner in pixels. */
   @Prop() strokeWidth = 2;
@@ -23,8 +23,8 @@ export class Spinner {
         class="sl-spinner"
         style={{
           borderWidth: `${this.strokeWidth}px`,
-          width: `${this.diameter}px`,
-          height: `${this.diameter}px`
+          width: `${this.size}px`,
+          height: `${this.size}px`
         }}
       />
     );

@@ -17,3 +17,15 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 ```
 
 [component-metadata:sl-progress-ring]
+
+## Examples
+
+### Size
+
+```html preview
+<div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+  <sl-progress-ring percentage="50" size="100">50%</sl-progress-ring><br>
+  <sl-progress-ring percentage="50" size="150">50%</sl-progress-ring><br>
+  <sl-progress-ring percentage="50" size="200">50%</sl-progress-ring><br>
+</div>
+```
