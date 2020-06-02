@@ -1,6 +1,9 @@
 const copy = require('recursive-copy');
 const del = require('del');
 
+//
+// Copy Feather Icons and license to src/components/icon/icons since local assets can't be linked from node_modules
+//
 (async () => {
   try {
     await del('./src/components/icon/icons');
