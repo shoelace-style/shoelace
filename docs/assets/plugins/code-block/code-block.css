@@ -1,6 +1,7 @@
 .code-block {
   position: relative;
   border-radius: 3px;
+  background: var(--sl-color-gray-95);
   margin-bottom: 1.5rem;
 }
 
