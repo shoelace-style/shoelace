@@ -172,14 +172,8 @@
         return resolve(metadataStore);
       }
 
-      Promise.all([
-        fetch('/assets/dist/components.json').then(res => res.json()),
-        fetch('/assets/data/custom.json').then(res => res.json())
-      ])
-        .then(res => ({
-          component: res[0],
-          custom: res[1]
-        }))
+      fetch('/dist/components.json')
+        .then(res => res.json())
         .then(data => {
           metadataStore = data;
           resolve(metadataStore);
@@ -208,7 +202,7 @@
 
       // Handle [component-header] tags
       content = content.replace(/\[component-header:([a-z-]+)\]/g, (match, tag) => {
-        const data = metadata.component.components.filter(data => data.tag === tag)[0];
+        const data = metadata.components.filter(data => data.tag === tag)[0];
         let result = '';
 
         if (!data) {
@@ -243,7 +237,7 @@
 
       // Handle [component-metadata] tags
       content = content.replace(/\[component-metadata:([a-z-]+)\]/g, (match, tag) => {
-        const data = metadata.component.components.filter(data => data.tag === tag)[0];
+        const data = metadata.components.filter(data => data.tag === tag)[0];
         let result = '';
 
         if (!data) {
@@ -302,10 +296,9 @@
 
     hook.doneEach(async function (html, next) {
       const metadata = await getMetadata();
-      const version = metadata.custom.version;
 
       // Replace <docs-version> tags with version number
-      [...document.body.querySelectorAll('docs-version')].map(el => el.replaceWith(version));
+      [...document.body.querySelectorAll('docs-version')].map(el => el.replaceWith(metadata.version));
 
       next(html);
     });

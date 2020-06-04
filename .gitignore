@@ -1,11 +1,10 @@
 src/components/*/readme.md
 src/components/icon/icons
-docs/assets/dist
 docs/assets/data/custom.json
 
 dist/
+docs-dist/
 loader/
-website/
 www/
 
 *~

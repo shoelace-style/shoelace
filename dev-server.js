@@ -35,8 +35,8 @@ app.use(
   })
 );
 
-// Inject Stencil's dev server iframe into index.html
-app.use(/^\/(index.html)?$/, async (req, res, next) => {
+// Inject Stencil's dev server iframe into the main entry point
+app.use(/^\/$/, async (req, res, next) => {
   let index = await fs.readFile('./docs/index.html', 'utf8');
   index = index.replace(
     '</body>',

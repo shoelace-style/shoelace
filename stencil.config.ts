@@ -1,5 +1,6 @@
 import { Config } from '@stencil/core';
 import { sass } from '@stencil/sass';
+import { version } from './package.json';
 
 export const config: Config = {
   namespace: 'Shoelace',
@@ -19,6 +20,12 @@ export const config: Config = {
     },
     {
       type: 'dist-custom-elements-bundle'
+    },
+    {
+      type: 'docs-custom',
+      generator: (docs: any) => {
+        docs.version = version;
+      }
     },
     {
       type: 'docs-json',

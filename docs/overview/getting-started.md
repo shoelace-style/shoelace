@@ -1,4 +1,4 @@
-<img id="top" class="logo" src="assets/images/wordmark.svg" alt="Shoelace" data-no-zoom style="max-width: 24rem;">
+<img id="top" class="logo" src="/assets/images/wordmark.svg" alt="Shoelace" data-no-zoom style="max-width: 24rem;">
 
 _A forward-thinking web component library for desktop and mobile._
 

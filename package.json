@@ -23,6 +23,7 @@
     "test.watch": "stencil test --spec --e2e --watchAll",
     "generate": "stencil generate",
     "serve": "node dev-server.js",
+    "prebuild": "npm run lint",
     "postbuild": "node postbuild.js",
     "postinstall": "node postinstall.js"
   },
