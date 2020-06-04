@@ -26,7 +26,7 @@ export namespace Components {
         /**
           * The type of alert.
          */
-        "type": "primary" | "success" | "info" | "warning" | "danger";
+        "type": 'primary' | 'success' | 'info' | 'warning' | 'danger';
     }
     interface SlButton {
         /**
@@ -60,11 +60,11 @@ export namespace Components {
         /**
           * The button's size.
          */
-        "size": "small" | "medium" | "large";
+        "size": 'small' | 'medium' | 'large';
         /**
           * The button's type.
          */
-        "type": "default" | "primary" | "success" | "info" | "warning" | "danger" | "text";
+        "type": 'default' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text';
     }
     interface SlCheckbox {
         /**
@@ -104,7 +104,7 @@ export namespace Components {
         /**
           * The format to use for the generated color `value`. If opacity is enabled, these will translate to HEXA, RGBA, and HSLA respectively. Note that browser support for HEXA doesn't include pre-Chromium Edge, so it's usually safer to use RGBA or HSLA when using opacity.
          */
-        "format": "hex" | "rgb" | "hsl";
+        "format": 'hex' | 'rgb' | 'hsl';
         /**
           * Set to true to render the color picker inline rather than inside a dropdown.
          */
@@ -116,7 +116,7 @@ export namespace Components {
         /**
           * When `inline` is true, this determines the size of the color picker's trigger.
          */
-        "size": "small" | "medium" | "large";
+        "size": 'small' | 'medium' | 'large';
         /**
           * An array of predefined color swatches to display. Can include any format the color picker can parse, including HEX(A), RGB(A), HSL(A), and CSS color names.
          */
@@ -176,7 +176,18 @@ export namespace Components {
         /**
           * The preferred placement of the dropdown menu. Note that the actual placement may vary as needed to keep the menu inside of the viewport.
          */
-        "placement": "top" | "top-start" | "top-end" | "bottom" | "bottom-start" | "bottom-end" | "right" | "right-start" | "right-end" | "left" | "left-start" | "left-end";
+        "placement": | 'top'
+    | 'top-start'
+    | 'top-end'
+    | 'bottom'
+    | 'bottom-start'
+    | 'bottom-end'
+    | 'right'
+    | 'right-start'
+    | 'right-end'
+    | 'left'
+    | 'left-start'
+    | 'left-end';
         /**
           * Shows the dropdown menu
          */
@@ -244,7 +255,7 @@ export namespace Components {
         /**
           * The input's inputmode attribute.
          */
-        "inputmode": "none" | "text" | "decimal" | "numeric" | "tel" | "search" | "email" | "url";
+        "inputmode": 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
         /**
           * The input's max attribute.
          */
@@ -296,11 +307,11 @@ export namespace Components {
         /**
           * Replaces a range of text with a new string.
          */
-        "setRangeText": (replacement: string, start: number, end: number, selectMode?: SelectionMode) => Promise<void>;
+        "setRangeText": (replacement: string, start: number, end: number, selectMode?: 'select' | 'start' | 'end' | 'preserve') => Promise<void>;
         /**
           * Sets the start and end positions of the text selection (0-based).
          */
-        "setSelectionRange": (selectionStart: number, selectionEnd: number, selectionDirection?: "none" | "forward" | "backward") => Promise<void>;
+        "setSelectionRange": (selectionStart: number, selectionEnd: number, selectionDirection?: 'forward' | 'backward' | 'none') => Promise<void>;
         /**
           * The input's size, one of `small`, `medium`, or `large`.
          */
@@ -316,7 +327,7 @@ export namespace Components {
         /**
           * The input's type, one of `text`, `number`, `email`, etc.
          */
-        "type": "email" | "number" | "password" | "search" | "tel" | "text" | "url";
+        "type": 'email' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'url';
         /**
           * The input's value attribute.
          */
@@ -408,7 +419,7 @@ export namespace Components {
         /**
           * The preferred placedment of the tooltip.
          */
-        "tooltipPlacement": "top" | "bottom" | "hidden";
+        "tooltipPlacement": 'top' | 'bottom' | 'hidden';
         /**
           * The input's value attribute.
          */
@@ -476,7 +487,7 @@ export namespace Components {
         /**
           * The placement of the tabs.
          */
-        "placement": "top" | "bottom" | "left" | "right";
+        "placement": 'top' | 'bottom' | 'left' | 'right';
         /**
           * Shows the specified tab panel.
          */
@@ -516,7 +527,7 @@ export namespace Components {
         /**
           * The textarea's inputmode attribute.
          */
-        "inputmode": "none" | "text" | "decimal" | "numeric" | "tel" | "search" | "email" | "url";
+        "inputmode": 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
         /**
           * The textarea's maxlength attribute.
          */
@@ -544,7 +555,7 @@ export namespace Components {
         /**
           * Controls how the textarea can be resized.
          */
-        "resize": "none" | "vertical" | "auto";
+        "resize": 'none' | 'vertical' | 'auto';
         /**
           * The number of rows to display by default.
          */
@@ -560,15 +571,15 @@ export namespace Components {
         /**
           * Replaces a range of text with a new string.
          */
-        "setRangeText": (replacement: string, start: number, end: number, selectMode?: SelectionMode) => Promise<void>;
+        "setRangeText": (replacement: string, start: number, end: number, selectMode?: 'select' | 'start' | 'end' | 'preserve') => Promise<void>;
         /**
           * Sets the start and end positions of the text selection (0-based).
          */
-        "setSelectionRange": (selectionStart: number, selectionEnd: number, selectionDirection?: "none" | "forward" | "backward") => Promise<void>;
+        "setSelectionRange": (selectionStart: number, selectionEnd: number, selectionDirection?: 'forward' | 'backward' | 'none') => Promise<void>;
         /**
           * The textarea's size.
          */
-        "size": "small" | "medium" | "large";
+        "size": 'small' | 'medium' | 'large';
         /**
           * The textarea's value attribute.
          */
@@ -606,7 +617,18 @@ export namespace Components {
         /**
           * The preferred placement of the tooltip. Note that the actual placement may vary as needed to keep the tooltip inside of the viewport.
          */
-        "placement": "top" | "top-start" | "top-end" | "right" | "right-start" | "right-end" | "bottom" | "bottom-start" | "bottom-end" | "left" | "left-start" | "left-end";
+        "placement": | 'top'
+    | 'top-start'
+    | 'top-end'
+    | 'right'
+    | 'right-start'
+    | 'right-end'
+    | 'bottom'
+    | 'bottom-start'
+    | 'bottom-end'
+    | 'left'
+    | 'left-start'
+    | 'left-end';
         /**
           * Shows the tooltip.
          */
@@ -809,7 +831,7 @@ declare namespace LocalJSX {
         /**
           * The type of alert.
          */
-        "type"?: "primary" | "success" | "info" | "warning" | "danger";
+        "type"?: 'primary' | 'success' | 'info' | 'warning' | 'danger';
     }
     interface SlButton {
         /**
@@ -843,11 +865,11 @@ declare namespace LocalJSX {
         /**
           * The button's size.
          */
-        "size"?: "small" | "medium" | "large";
+        "size"?: 'small' | 'medium' | 'large';
         /**
           * The button's type.
          */
-        "type"?: "default" | "primary" | "success" | "info" | "warning" | "danger" | "text";
+        "type"?: 'default' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text';
     }
     interface SlCheckbox {
         /**
@@ -891,7 +913,7 @@ declare namespace LocalJSX {
         /**
           * The format to use for the generated color `value`. If opacity is enabled, these will translate to HEXA, RGBA, and HSLA respectively. Note that browser support for HEXA doesn't include pre-Chromium Edge, so it's usually safer to use RGBA or HSLA when using opacity.
          */
-        "format"?: "hex" | "rgb" | "hsl";
+        "format"?: 'hex' | 'rgb' | 'hsl';
         /**
           * Set to true to render the color picker inline rather than inside a dropdown.
          */
@@ -923,7 +945,7 @@ declare namespace LocalJSX {
         /**
           * When `inline` is true, this determines the size of the color picker's trigger.
          */
-        "size"?: "small" | "medium" | "large";
+        "size"?: 'small' | 'medium' | 'large';
         /**
           * An array of predefined color swatches to display. Can include any format the color picker can parse, including HEX(A), RGB(A), HSL(A), and CSS color names.
          */
@@ -1003,7 +1025,18 @@ declare namespace LocalJSX {
         /**
           * The preferred placement of the dropdown menu. Note that the actual placement may vary as needed to keep the menu inside of the viewport.
          */
-        "placement"?: "top" | "top-start" | "top-end" | "bottom" | "bottom-start" | "bottom-end" | "right" | "right-start" | "right-end" | "left" | "left-start" | "left-end";
+        "placement"?: | 'top'
+    | 'top-start'
+    | 'top-end'
+    | 'bottom'
+    | 'bottom-start'
+    | 'bottom-end'
+    | 'right'
+    | 'right-start'
+    | 'right-end'
+    | 'left'
+    | 'left-start'
+    | 'left-end';
     }
     interface SlDropdownDivider {
     }
@@ -1071,7 +1104,7 @@ declare namespace LocalJSX {
         /**
           * The input's inputmode attribute.
          */
-        "inputmode"?: "none" | "text" | "decimal" | "numeric" | "tel" | "search" | "email" | "url";
+        "inputmode"?: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
         /**
           * The input's max attribute.
          */
@@ -1139,7 +1172,7 @@ declare namespace LocalJSX {
         /**
           * The input's type, one of `text`, `number`, `email`, etc.
          */
-        "type"?: "email" | "number" | "password" | "search" | "tel" | "text" | "url";
+        "type"?: 'email' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'url';
         /**
           * The input's value attribute.
          */
@@ -1239,7 +1272,7 @@ declare namespace LocalJSX {
         /**
           * The preferred placedment of the tooltip.
          */
-        "tooltipPlacement"?: "top" | "bottom" | "hidden";
+        "tooltipPlacement"?: 'top' | 'bottom' | 'hidden';
         /**
           * The input's value attribute.
          */
@@ -1311,7 +1344,7 @@ declare namespace LocalJSX {
         /**
           * The placement of the tabs.
          */
-        "placement"?: "top" | "bottom" | "left" | "right";
+        "placement"?: 'top' | 'bottom' | 'left' | 'right';
     }
     interface SlTabPanel {
         /**
@@ -1347,7 +1380,7 @@ declare namespace LocalJSX {
         /**
           * The textarea's inputmode attribute.
          */
-        "inputmode"?: "none" | "text" | "decimal" | "numeric" | "tel" | "search" | "email" | "url";
+        "inputmode"?: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
         /**
           * The textarea's maxlength attribute.
          */
@@ -1387,7 +1420,7 @@ declare namespace LocalJSX {
         /**
           * Controls how the textarea can be resized.
          */
-        "resize"?: "none" | "vertical" | "auto";
+        "resize"?: 'none' | 'vertical' | 'auto';
         /**
           * The number of rows to display by default.
          */
@@ -1395,7 +1428,7 @@ declare namespace LocalJSX {
         /**
           * The textarea's size.
          */
-        "size"?: "small" | "medium" | "large";
+        "size"?: 'small' | 'medium' | 'large';
         /**
           * The textarea's value attribute.
          */
@@ -1445,7 +1478,18 @@ declare namespace LocalJSX {
         /**
           * The preferred placement of the tooltip. Note that the actual placement may vary as needed to keep the tooltip inside of the viewport.
          */
-        "placement"?: "top" | "top-start" | "top-end" | "right" | "right-start" | "right-end" | "bottom" | "bottom-start" | "bottom-end" | "left" | "left-start" | "left-end";
+        "placement"?: | 'top'
+    | 'top-start'
+    | 'top-end'
+    | 'right'
+    | 'right-start'
+    | 'right-end'
+    | 'bottom'
+    | 'bottom-start'
+    | 'bottom-end'
+    | 'left'
+    | 'left-start'
+    | 'left-end';
         /**
           * The delay in ms before showing the tooltip.
          */

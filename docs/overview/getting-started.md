@@ -1,4 +1,4 @@
-<img id="top" class="logo" src="/assets/images/wordmark.svg" alt="Shoelace" data-no-zoom style="max-width: 24rem;">
+<img id="top" class="logo" src="assets/images/wordmark.svg" alt="Shoelace" data-no-zoom style="max-width: 24rem;">
 
 _A forward-thinking web component library for desktop and mobile._
 
@@ -31,7 +31,7 @@ Now you have access to all of Shoelace's components! Try adding a button to your
 <sl-button>Click Me</sl-button>
 ```
 
-!> Don't want to use the CDN? Check out the [installation instructions](installation.md) for more options.
+?> Don't want to use the CDN? Check out the [installation instructions](overview/installation.md) for more options.
 
 ---
 
@@ -45,7 +45,7 @@ Unfortunately, *framework-specific* components fail us in a number of ways:
 
 - 🔒 You can only use them in the framework they're designed for
 - ⏳ Their lifespan is limited to that of the framework's
-- 😭 New versions of the framework can lead to breaking changes, requiring substantial effort to update components
+- 😭 New versions lead to breaking changes, requiring substantial effort to update components
 
 Web Components solve these problems. They're [supported by all modern browsers](https://caniuse.com/#feat=custom-elementsv1), they're framework-agnostic, and they're [part of the standard](https://www.webcomponents.org/specs), so we know they'll be supported by browsers for many years to come.
 
