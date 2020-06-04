@@ -4,8 +4,9 @@ docs/assets/dist
 docs/assets/data/custom.json
 
 dist/
-www/
 loader/
+website/
+www/
 
 *~
 *.sw[mnpcod]

@@ -1,20 +1,17 @@
 //
-// Launches an Express app that:
+// The Shoelace dev server! 👟
 //
-//  - Proxies Stencil's dev server (for HMR)
+// This is an Express + Browsersync script that:
+//
+//  - Proxies Stencil's dev server (for HMR of components)
 //  - Serves dist/ and docs/ from https://localhost:3000/
-//  - Launches the Docsify site that reloads when the docs are modified
+//  - Launches the docs site and reloads the page when pages are modified
 //
 // Usage:
 //
-//   1. Launch Stencil: `stencil build --dev --docs --watch --serve --no-open`
+//   1. Run Stencil: `stencil build --dev --docs --watch --serve --no-open`
 //
-//   2. Launch this script.
-//
-// Result:
-//
-//  - Changes to components will hot reload
-//  - Changes to docs will refresh
+//   2. Run this script at the same time as Stencil
 //
 
 const bs = require('browser-sync').create();
@@ -38,24 +35,20 @@ app.use(
   })
 );
 
-// Inject the dev server iframe into index.html
+// Inject Stencil's dev server iframe into index.html
 app.use(/^\/(index.html)?$/, async (req, res, next) => {
   let index = await fs.readFile('./docs/index.html', 'utf8');
   index = index.replace(
     '</body>',
-    `
-      <iframe src="/~dev-server" style="display: block; width: 0; height: 0; border: 0;"></iframe>
-      </body>
-    `
+    '<iframe src="/~dev-server" style="display: block; width: 0; height: 0; border: 0;"></iframe></body>'
   );
   res.type('html').send(index);
 });
-
 app.use('/dist', express.static('./dist'));
 app.use('/', express.static('./docs'));
 app.listen(proxyPort);
 
-// Give the dev server a few seconds to spin up, then launch the browser
+// Give Stencil's dev server a few seconds to spin up, then launch the browser
 setTimeout(() => {
   console.log(chalk.cyan(`\nLaunching the Shoelace dev server at http://localhost:${browserPort}! 👟\n`));
 

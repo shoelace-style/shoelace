@@ -1,3 +1,4 @@
+const chalk = require('chalk');
 const copy = require('recursive-copy');
 const del = require('del');
 
@@ -6,6 +7,8 @@ const del = require('del');
 //
 (async () => {
   try {
+    console.log(chalk.cyan('Copying icons 📦\n'));
+
     await del('./src/components/icon/icons');
 
     await Promise.all([

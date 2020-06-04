@@ -15,13 +15,15 @@
     "loader/"
   ],
   "scripts": {
-    "start": "concurrently --kill-others \"npm run dev\" \"node serve.js\"",
+    "start": "concurrently --kill-others \"npm run dev\" \"npm run serve\"",
     "dev": "stencil build --dev --docs --watch --serve --port 3333 --no-open",
     "build": "stencil build --docs",
     "lint": "eslint src/**/*{.ts,.tsx}",
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
     "generate": "stencil generate",
+    "serve": "node dev-server.js",
+    "postbuild": "node postbuild.js",
     "postinstall": "node postinstall.js"
   },
   "devDependencies": {
