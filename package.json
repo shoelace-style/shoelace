@@ -25,7 +25,8 @@
     "serve": "node dev-server.js",
     "prebuild": "npm run lint",
     "postbuild": "node postbuild.js",
-    "postinstall": "node postinstall.js"
+    "postinstall": "node postinstall.js",
+    "version": "npm run build"
   },
   "devDependencies": {
     "@stencil/eslint-plugin": "^0.3.1",
