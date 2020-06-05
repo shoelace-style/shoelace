@@ -2,6 +2,7 @@
   - [Getting Started](/overview/getting-started.md)
   - [Installation](/overview/installation.md)
   - [Customizing](/overview/customizing.md)
+  - [Roadmap](/overview/roadmap.md)
 
 - Design Tokens
   - [Typography](/tokens/typography.md)
