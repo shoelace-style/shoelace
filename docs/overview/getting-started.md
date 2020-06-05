@@ -4,17 +4,11 @@ _A forward-thinking web component library for desktop and mobile._
 
 <span class="badge"><docs-version></docs-version></span>
 
----
-
-Here's why you'll love it:
-
 - 🧩 Works with any framework
-- ⚡️ Can be loaded via CDN
-- 🎨 Fully customizable with pure CSS — no build required!
+- ⚡️ Works with CDNs
+- 🎨 Fully customizable (no preprocessor required)
 
-Shoelace is designed and developed in New Hampshire by [@claviska](https://twitter.com/claviska). You can use it under the terms of the MIT License.
-
----
+Shoelace is actively designed and developed in New Hampshire by [@claviska](https://twitter.com/claviska) and available under the MIT License.
 
 ## Quick Start
 
@@ -58,9 +52,8 @@ Although Web Components can (to some degree) be polyfilled for older browsers, s
 ## Attribution
 
 - Components are compiled by [Stencil](https://stenciljs.com/)
+- Documentation is powered by [Docsify](https://docsify.js.org/)
 - Theme colors and form controls are inspired by [Element](element.eleme.io)
 - Icons are courtesy of [Feather Icons](https://feathericons.com/)
-- Positioning of menus, popovers, etc. is handled by [Popper.js](https://popper.js.org/)
-- Tooltips are powered by [Tippy.js](https://atomiks.github.io/tippyjs/)
-- Documentation is powered by [Docsify](https://docsify.js.org/)
+- Positioning of menus, tooltips, etc. is handled by [Popper.js](https://popper.js.org/)
 - The Shoelace logo was designed with a single shoelace by [Adam K Olson](https://twitter.com/adamkolson)
