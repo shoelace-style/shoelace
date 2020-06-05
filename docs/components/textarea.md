@@ -29,5 +29,5 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 ### Disabled
 
 ```html preview
-<sl-textarea placeholder="Textarea" resize="none" disabled></sl-textarea>
+<sl-textarea placeholder="Textarea" disabled></sl-textarea>
 ```
