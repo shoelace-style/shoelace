@@ -3,7 +3,7 @@ src/components/icon/icons
 docs/assets/data/custom.json
 
 dist/
-docs-dist/
+docs/dist/
 loader/
 www/
 

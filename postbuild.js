@@ -6,8 +6,8 @@ const del = require('del');
   try {
     // Create the docs distribution
     console.log(chalk.cyan('Creating docs distribution 📚\n'));
-    await del('./docs-dist');
-    await Promise.all([copy('./docs', './docs-dist'), copy('./dist', './docs-dist/dist')]);
+    await del('./docs/dist');
+    await copy('./dist', './docs/dist');
   } catch (err) {
     console.error(err);
   }
