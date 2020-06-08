@@ -8,8 +8,7 @@ The roadmap tracks the status of components and features that are planned, in de
 
 - [ ] Accordion
 - [x] Alert
-- [ ] Avatar
-  - [ ] Avatar Group
+- [x] Avatar
 - [x] Button
 - [x] Checkbox
 - [x] Color Picker
@@ -61,6 +60,6 @@ The roadmap tracks the status of components and features that are planned, in de
 ## Under Consideration 🤔
 
 - [ ] Carousel
-- [ ] Fit text to container (based on [FitText.js](https://github.com/adactio/FitText.js))
+- [ ] Fit text to container
 - [ ] Graphing components (based on [Chart.js](https://www.chartjs.org/))
 - [ ] Table (probably a `<table>` wrapper that implements styles, sorting, and some other features)
