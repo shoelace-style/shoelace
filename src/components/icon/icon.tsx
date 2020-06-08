@@ -27,9 +27,6 @@ export class Icon {
   /** An alternative description to use for accessibility. If omitted, the name or src will be used to generate it. */
   @Prop() label: string;
 
-  /** Sets the stroke width in supported icons. */
-  @Prop() strokeWidth = '1.5';
-
   @Watch('name')
   @Watch('src')
   handleChange() {
@@ -61,7 +58,6 @@ export class Icon {
       const svg = doc.body.querySelector('svg');
 
       if (svg) {
-        svg.setAttribute('stroke-width', this.strokeWidth);
         this.svg = svg.outerHTML;
       } else {
         this.svg = '';

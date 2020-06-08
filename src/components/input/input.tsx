@@ -251,7 +251,7 @@ export class Input {
           <button class="sl-input__password-toggle" onClick={this.handlePasswordToggle} tabindex="-1">
             {this.isPasswordVisible ? (
               <slot name="show-password-icon">
-                <sl-icon name="eye-off" />
+                <sl-icon name="eye-slash" />
               </slot>
             ) : (
               <slot name="hide-password-icon">

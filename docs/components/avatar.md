@@ -32,14 +32,14 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 ```html preview
 <sl-avatar>
+  <sl-icon slot="icon" name="image"></sl-icon>
+</sl-avatar>
+
+<sl-avatar>
   <sl-icon slot="icon" name="archive"></sl-icon>
 </sl-avatar>
 
 <sl-avatar>
-  <sl-icon slot="icon" name="coffee"></sl-icon>
-</sl-avatar>
-
-<sl-avatar>
-  <sl-icon slot="icon" name="feather"></sl-icon>
+  <sl-icon slot="icon" name="briefcase"></sl-icon>
 </sl-avatar>
 ```

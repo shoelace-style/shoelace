@@ -240,10 +240,6 @@ export namespace Components {
           * An external URL of an SVG file.
          */
         "src": string;
-        /**
-          * Sets the stroke width in supported icons.
-         */
-        "strokeWidth": string;
     }
     interface SlInput {
         /**
@@ -1114,10 +1110,6 @@ declare namespace LocalJSX {
           * An external URL of an SVG file.
          */
         "src"?: string;
-        /**
-          * Sets the stroke width in supported icons.
-         */
-        "strokeWidth"?: string;
     }
     interface SlInput {
         /**

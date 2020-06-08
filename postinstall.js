@@ -4,13 +4,12 @@ const del = require('del');
 
 (async () => {
   try {
-    // Copy Feather Icons and license to src/components/icon/icons since local assets can't be linked from node_modules
+    // Copy Bootstrap Icons to src/components/icon/icons since local assets can't be linked from node_modules
     console.log(chalk.cyan('Copying icons 📦\n'));
+
     await del('./src/components/icon/icons');
-    await Promise.all([
-      copy('./node_modules/feather-icons/dist/icons', './src/components/icon/icons', { overwrite: true }),
-      copy('./node_modules/feather-icons/LICENSE', './src/components/icon/icons/LICENSE', { overwrite: true })
-    ]);
+    await copy('./node_modules/bootstrap-icons/icons', './src/components/icon/icons');
+    await copy('./node_modules/bootstrap-icons/LICENSE.md', './src/components/icon/icons/LICENSE.md');
   } catch (err) {
     console.error(err);
   }

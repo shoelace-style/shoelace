@@ -28,17 +28,17 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 ```html preview
 <sl-input type="text" placeholder="Small" size="small">
   <sl-icon name="tag" slot="prefix"></sl-icon>
-  <sl-icon name="settings" slot="suffix"></sl-icon>
+  <sl-icon name="gear" slot="suffix"></sl-icon>
 </sl-input>
 <br>
 <sl-input type="text" placeholder="Medium" size="medium">
   <sl-icon name="tag" slot="prefix"></sl-icon>
-  <sl-icon name="settings" slot="suffix"></sl-icon>
+  <sl-icon name="gear" slot="suffix"></sl-icon>
 </sl-input>
 <br>
 <sl-input type="text" placeholder="Large" size="large">
   <sl-icon name="tag" slot="prefix"></sl-icon>
-  <sl-icon name="settings" slot="suffix"></sl-icon>
+  <sl-icon name="gear" slot="suffix"></sl-icon>
 </sl-input>
 ```
 

@@ -89,11 +89,13 @@
   box-shadow: var(--sl-focus-ring-box-shadow);
 }
 
-.code-block__toggle sl-icon {
+.code-block__toggle svg {
+  width: 1em;
+  height: 1em;
   margin-left: 0.25rem;
   transition: 250ms transform;
 }
 
-.code-block--expanded .code-block__toggle sl-icon {
+.code-block--expanded .code-block__toggle svg {
   transform: rotate(180deg);
 }

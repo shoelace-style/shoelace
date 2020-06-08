@@ -47,9 +47,9 @@ Use the `size` prop to change a button's size.
 Use the `circle` prop to create circular icon buttons.
 
 ```html preview
-<sl-button type="default" size="small" circle><sl-icon name="settings"></sl-icon></sl-button>
-<sl-button type="default" size="medium" circle><sl-icon name="settings"></sl-icon></sl-button>
-<sl-button type="default" size="large" circle><sl-icon name="settings"></sl-icon></sl-button>
+<sl-button type="default" size="small" circle><sl-icon name="gear"></sl-icon></sl-button>
+<sl-button type="default" size="medium" circle><sl-icon name="gear"></sl-icon></sl-button>
+<sl-button type="default" size="large" circle><sl-icon name="gear"></sl-icon></sl-button>
 ```
 
 ### Text
@@ -78,16 +78,16 @@ Use the `prefix` and `suffix` slots to add icons.
 
 ```html preview
 <sl-button type="default">
-  <sl-icon slot="prefix" name="settings"></sl-icon>
+  <sl-icon slot="prefix" name="gear"></sl-icon>
   Settings
 </sl-button>
 <sl-button type="default">
-  <sl-icon slot="suffix" name="refresh-ccw"></sl-icon>
+  <sl-icon slot="suffix" name="arrow-counterclockwise"></sl-icon>
   Refresh
 </sl-button>
 <sl-button type="default">
-  <sl-icon slot="prefix" name="link"></sl-icon>
-  <sl-icon slot="suffix" name="external-link"></sl-icon>
+  <sl-icon slot="prefix" name="link-45deg"></sl-icon>
+  <sl-icon slot="suffix" name="box-arrow-up-right"></sl-icon>
   Open
 </sl-button>
 ```

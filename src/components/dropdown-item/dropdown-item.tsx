@@ -55,7 +55,7 @@ export class DropdownItem {
       >
         <span class="sl-dropdown-item__check">
           <slot name="check-icon">
-            <sl-icon name="check" />
+            <sl-icon name="check2" />
           </slot>
         </span>
 

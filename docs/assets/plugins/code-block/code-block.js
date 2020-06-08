@@ -68,7 +68,20 @@
           toggle.classList.add('code-block__toggle');
           toggle.setAttribute('aria-expanded', 'false');
           toggle.setAttribute('aria-controls', preId);
-          toggle.innerHTML = 'Source <sl-icon name="chevron-down"></sl-icon>';
+          toggle.innerHTML = `
+            Source
+
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          `;
 
           codeBlock.prepend(preview);
           codeBlock.append(toggle);
