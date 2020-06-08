@@ -28,6 +28,24 @@ export namespace Components {
          */
         "type": 'primary' | 'success' | 'info' | 'warning' | 'danger';
     }
+    interface SlAvatar {
+        /**
+          * Alternative text for the image.
+         */
+        "alt": string;
+        /**
+          * The image source to use for the avatar.
+         */
+        "image": string;
+        /**
+          * Initials to use as a fallback when no image is available (1-2 characters max recommended).
+         */
+        "initials": string;
+        /**
+          * Initials to use as a fallback when no image is available (1-2 characters max recommended).
+         */
+        "shape": 'circle' | 'square';
+    }
     interface SlButton {
         /**
           * Set to true to draw the button with a caret for use with dropdowns, popovers, etc.
@@ -658,6 +676,12 @@ declare global {
         prototype: HTMLSlAlertElement;
         new (): HTMLSlAlertElement;
     };
+    interface HTMLSlAvatarElement extends Components.SlAvatar, HTMLStencilElement {
+    }
+    var HTMLSlAvatarElement: {
+        prototype: HTMLSlAvatarElement;
+        new (): HTMLSlAvatarElement;
+    };
     interface HTMLSlButtonElement extends Components.SlButton, HTMLStencilElement {
     }
     var HTMLSlButtonElement: {
@@ -780,6 +804,7 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "sl-alert": HTMLSlAlertElement;
+        "sl-avatar": HTMLSlAvatarElement;
         "sl-button": HTMLSlButtonElement;
         "sl-checkbox": HTMLSlCheckboxElement;
         "sl-color-picker": HTMLSlColorPickerElement;
@@ -832,6 +857,24 @@ declare namespace LocalJSX {
           * The type of alert.
          */
         "type"?: 'primary' | 'success' | 'info' | 'warning' | 'danger';
+    }
+    interface SlAvatar {
+        /**
+          * Alternative text for the image.
+         */
+        "alt"?: string;
+        /**
+          * The image source to use for the avatar.
+         */
+        "image"?: string;
+        /**
+          * Initials to use as a fallback when no image is available (1-2 characters max recommended).
+         */
+        "initials"?: string;
+        /**
+          * Initials to use as a fallback when no image is available (1-2 characters max recommended).
+         */
+        "shape"?: 'circle' | 'square';
     }
     interface SlButton {
         /**
@@ -1509,6 +1552,7 @@ declare namespace LocalJSX {
     }
     interface IntrinsicElements {
         "sl-alert": SlAlert;
+        "sl-avatar": SlAvatar;
         "sl-button": SlButton;
         "sl-checkbox": SlCheckbox;
         "sl-color-picker": SlColorPicker;
@@ -1536,6 +1580,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "sl-alert": LocalJSX.SlAlert & JSXBase.HTMLAttributes<HTMLSlAlertElement>;
+            "sl-avatar": LocalJSX.SlAvatar & JSXBase.HTMLAttributes<HTMLSlAvatarElement>;
             "sl-button": LocalJSX.SlButton & JSXBase.HTMLAttributes<HTMLSlButtonElement>;
             "sl-checkbox": LocalJSX.SlCheckbox & JSXBase.HTMLAttributes<HTMLSlCheckboxElement>;
             "sl-color-picker": LocalJSX.SlColorPicker & JSXBase.HTMLAttributes<HTMLSlColorPickerElement>;

@@ -15,6 +15,7 @@
 
 - Components
   - [Alert](/components/alert.md)
+  - [Avatar](/components/avatar.md)
   - [Button](/components/button.md)
   - [Checkbox](/components/checkbox.md)
   - [Color Picker](/components/color-picker.md)

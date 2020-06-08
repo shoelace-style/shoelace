@@ -1,0 +1,62 @@
+@import 'component';
+
+/**
+  * @prop --background-color - The avatar's background color.
+  * @prop --size - The size of the avatar.
+  */
+:host {
+  display: inline-flex;
+
+  --background-color: var(--sl-color-gray-80);
+  --size: 3rem;
+}
+
+.sl-avatar {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: var(--size);
+  height: var(--size);
+  background-color: var(--background-color);
+  font-family: var(--sl-font-sans);
+  font-size: calc(var(--size) * 0.5);
+  font-weight: var(--sl-font-weight-normal);
+  color: var(--sl-color-white);
+  overflow: hidden;
+  user-select: none;
+}
+
+.sl-avatar--circle {
+  border-radius: var(--sl-border-radius-circle);
+}
+
+.sl-avatar--square {
+  border-radius: var(--sl-border-radius-medium);
+}
+
+.sl-avatar__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.sl-avatar__initials {
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.sl-avatar__image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
