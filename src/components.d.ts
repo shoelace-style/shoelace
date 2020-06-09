@@ -601,15 +601,15 @@ export namespace Components {
     }
     interface SlTooltip {
         /**
-          * Set to true to draw the the tooltip with an arrow.
+          * The tooltip's content.
          */
-        "arrow": boolean;
+        "content": string;
         /**
           * Set to true to disable the tooltip so it won't show when triggered.
          */
         "disabled": boolean;
         /**
-          * The distance in pixels from which to draw the tooltip from its target element.
+          * The distance in pixels from which to offset the tooltip away from its target.
          */
         "distance": number;
         /**
@@ -624,10 +624,6 @@ export namespace Components {
           * The duration in ms of the tooltip's hide transition.
          */
         "hideDuration": number;
-        /**
-          * The maximum width in pixels the tooltip can be before its content wraps.
-         */
-        "maxWidth": number;
         /**
           * The preferred placement of the tooltip. Note that the actual placement may vary as needed to keep the tooltip inside of the viewport.
          */
@@ -656,9 +652,9 @@ export namespace Components {
          */
         "showDuration": number;
         /**
-          * A selector or element to use as the tooltip's target. This is the element that will trigger the tooltip to show upon interaction. If no target is specified, the previous sibling element of the tooltip will be used. A common way to link a tooltip to a target is to give the target an `id` and pass `#id` to the `target` prop.
+          * The distance in pixels from which to offset the tooltip along its target.
          */
-        "target": string | HTMLElement;
+        "skidding": number;
         /**
           * The events that cause a tooltip to show, separated by a space. Possible values include any combination of `mouseenter`, `focus`, `click`, and `manual`. Use `manual` if you only want to show and hide the tooltip programmatically.
          */
@@ -1471,15 +1467,15 @@ declare namespace LocalJSX {
     }
     interface SlTooltip {
         /**
-          * Set to true to draw the the tooltip with an arrow.
+          * The tooltip's content.
          */
-        "arrow"?: boolean;
+        "content"?: string;
         /**
           * Set to true to disable the tooltip so it won't show when triggered.
          */
         "disabled"?: boolean;
         /**
-          * The distance in pixels from which to draw the tooltip from its target element.
+          * The distance in pixels from which to offset the tooltip away from its target.
          */
         "distance"?: number;
         /**
@@ -1490,10 +1486,6 @@ declare namespace LocalJSX {
           * The duration in ms of the tooltip's hide transition.
          */
         "hideDuration"?: number;
-        /**
-          * The maximum width in pixels the tooltip can be before its content wraps.
-         */
-        "maxWidth"?: number;
         /**
           * Emitted after the tooltip has hidden and all transitions are complete.
          */
@@ -1534,9 +1526,9 @@ declare namespace LocalJSX {
          */
         "showDuration"?: number;
         /**
-          * A selector or element to use as the tooltip's target. This is the element that will trigger the tooltip to show upon interaction. If no target is specified, the previous sibling element of the tooltip will be used. A common way to link a tooltip to a target is to give the target an `id` and pass `#id` to the `target` prop.
+          * The distance in pixels from which to offset the tooltip along its target.
          */
-        "target"?: string | HTMLElement;
+        "skidding"?: number;
         /**
           * The events that cause a tooltip to show, separated by a space. Possible values include any combination of `mouseenter`, `focus`, `click`, and `manual`. Use `manual` if you only want to show and hide the tooltip programmatically.
          */

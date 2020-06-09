@@ -1,44 +1,49 @@
-import { Component, Element, Event, EventEmitter, Host, Method, Prop, Watch, h } from '@stencil/core';
-import tippy from 'tippy.js';
+import { Component, Element, Event, EventEmitter, Host, Method, Prop, State, Watch, h } from '@stencil/core';
+import Popover from '../../utilities/popover';
 
 /**
  * @since 1.0.0
- * @status ready
+ * @status experimental
  *
  * @slot - The tooltip's content.
  */
 
 @Component({
   tag: 'sl-tooltip',
+  styleUrl: 'tooltip.scss',
   shadow: true
 })
 export class Tooltip {
-  tooltipTarget: HTMLElement;
+  popover: Popover;
+  target: HTMLElement;
   tooltip: any;
 
   constructor() {
+    this.handleMouseOver = this.handleMouseOver.bind(this);
+    this.handleMouseOut = this.handleMouseOut.bind(this);
+
     this.syncSettings = this.syncSettings.bind(this);
   }
 
   @Element() host: HTMLSlTooltipElement;
 
-  /** Set to true to draw the the tooltip with an arrow. */
-  @Prop() arrow = false;
+  /** The tooltip's content. */
+  @Prop() content = '';
 
   /** Set to true to disable the tooltip so it won't show when triggered. */
   @Prop() disabled = false;
 
-  /** The distance in pixels from which to draw the tooltip from its target element. */
+  /** The distance in pixels from which to offset the tooltip away from its target. */
   @Prop() distance = 10;
+
+  /** The distance in pixels from which to offset the tooltip along its target. */
+  @Prop() skidding = 0;
 
   /** The delay in ms before the tooltip hides. */
   @Prop() hideDelay = 0;
 
   /** The duration in ms of the tooltip's hide transition. */
   @Prop() hideDuration = 250;
-
-  /** The maximum width in pixels the tooltip can be before its content wraps. */
-  @Prop() maxWidth = 350;
 
   /**
    * The preferred placement of the tooltip. Note that the actual placement may vary as needed to keep the tooltip
@@ -71,20 +76,6 @@ export class Tooltip {
    */
   @Prop() trigger = 'mouseenter focus';
 
-  /**
-   * A selector or element to use as the tooltip's target. This is the element that will trigger the tooltip to show
-   * upon interaction. If no target is specified, the previous sibling element of the tooltip will be used. A common way
-   * to link a tooltip to a target is to give the target an `id` and pass `#id` to the `target` prop.
-   */
-  @Prop() target: string | HTMLElement;
-
-  @Watch('target')
-  handleTargetChange() {
-    this.tooltip.destroy();
-    this.tooltip = tippy(this.getTarget());
-    this.syncSettings();
-  }
-
   /** Emitted when the tooltip begins to show. Calling `event.preventDefault()` will prevent it from being shown. */
   @Event() slShow: EventEmitter;
 
@@ -98,7 +89,15 @@ export class Tooltip {
   @Event() slAfterHide: EventEmitter;
 
   componentDidLoad() {
-    this.tooltip = tippy(this.getTarget());
+    this.target = this.getTarget();
+
+    this.popover = new Popover(this.target, this.tooltip, {
+      placement: this.placement,
+      offset: [this.skidding, this.distance],
+      onAfterHide: () => this.slAfterHide.emit(),
+      onAfterShow: () => this.slAfterShow.emit()
+    });
+
     this.host.shadowRoot.querySelector('slot').addEventListener('slotchange', this.syncSettings);
   }
 
@@ -107,7 +106,7 @@ export class Tooltip {
   }
 
   componentDidUnload() {
-    this.tooltip.destroy();
+    this.popover.destroy();
     this.host.shadowRoot.querySelector('slot').removeEventListener('slotchange', this.syncSettings);
   }
 
@@ -124,66 +123,67 @@ export class Tooltip {
   }
 
   getTarget() {
-    if (typeof this.target === 'string' && this.target.length) {
-      const target = document.querySelector(this.target);
-      if (!target) {
-        throw new Error('Invalid tooltip target: no element was returned by the specified selector.');
-      }
-      return target;
-    } else if (this.target instanceof HTMLElement) {
-      return this.target;
-    } else {
-      const target = this.host.previousElementSibling;
-      if (!target) {
-        throw new Error('Invalid tooltip target: no previous sibling element was found.');
-      }
-      return target;
+    const target = this.host.querySelector('*:not(style)') as HTMLElement;
+    if (!target) {
+      throw new Error('Invalid tooltip target: no child element was found.');
     }
+
+    return target;
+  }
+
+  handleMouseOver() {
+    this.popover.show();
+  }
+
+  handleMouseOut() {
+    this.popover.hide();
   }
 
   syncSettings() {
-    this.tooltip.setProps({
-      allowHTML: true,
-      animation: 'fade',
-      arrow: this.arrow,
-      content: this.host.innerHTML,
-      delay: [this.showDelay, this.hideDelay],
-      distance: this.distance,
-      duration: [this.showDuration, this.hideDuration],
-      ignoreAttributes: true,
-      maxWidth: this.maxWidth,
-      placement: this.placement,
-      trigger: this.trigger,
+    this.target = this.getTarget();
 
-      onShow: () => {
-        const slShow = this.slShow.emit();
-
-        if (slShow.defaultPrevented) {
-          return false;
-        }
-      },
-      onShown: () => this.slAfterShow.emit(),
-      onHide: () => {
-        const slHide = this.slHide.emit();
-
-        if (slHide.defaultPrevented) {
-          return false;
-        }
-      },
-      onHidden: () => this.slAfterHide.emit()
-    });
-
-    if (this.disabled) {
-      this.tooltip.disable();
-    } else {
-      this.tooltip.enable();
-    }
+    // this.tooltip.setProps({
+    //   allowHTML: true,
+    //   animation: 'fade',
+    //   arrow: this.arrow,
+    //   content: this.host.innerHTML,
+    //   delay: [this.showDelay, this.hideDelay],
+    //   distance: this.distance,
+    //   duration: [this.showDuration, this.hideDuration],
+    //   ignoreAttributes: true,
+    //   maxWidth: this.maxWidth,
+    //   placement: this.placement,
+    //   trigger: this.trigger,
+    //   onShow: () => {
+    //     const slShow = this.slShow.emit();
+    //     if (slShow.defaultPrevented) {
+    //       return false;
+    //     }
+    //   },
+    //   onShown: () => this.slAfterShow.emit(),
+    //   onHide: () => {
+    //     const slHide = this.slHide.emit();
+    //     if (slHide.defaultPrevented) {
+    //       return false;
+    //     }
+    //   },
+    //   onHidden: () => this.slAfterHide.emit()
+    // });
+    // if (this.disabled) {
+    //   this.tooltip.disable();
+    // } else {
+    //   this.tooltip.enable();
+    // }
   }
 
   render() {
     return (
-      <Host aria-hidden="true" hidden>
+      <Host onMouseOver={this.handleMouseOver} onMouseOut={this.handleMouseOut}>
         <slot />
+
+        <div ref={el => (this.tooltip = el)} class="sl-tooltip" hidden>
+          {this.content}
+        </div>
       </Host>
     );
   }

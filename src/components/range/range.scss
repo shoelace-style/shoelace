@@ -124,15 +124,15 @@
 .sl-range__tooltip {
   position: absolute;
   left: 1px;
-  border-radius: var(--sl-border-radius-medium);
-  background-color: var(--sl-color-gray-10);
-  font-family: var(--sl-font-sans);
-  font-size: var(--sl-font-size-small);
-  font-weight: var(--sl-font-weight-normal);
-  line-height: var(--sl-line-height-normal);
-  color: var(--sl-color-white);
+  border-radius: var(--sl-tooltip-border-radius);
+  background-color: var(--sl-tooltip-background-color);
+  font-family: var(--sl-tooltip-font-family);
+  font-size: var(--sl-tooltip-font-size);
+  font-weight: var(--sl-tooltip-font-weight);
+  line-height: var(--sl-tooltip-line-height);
+  color: var(--sl-tooltip-color);
   opacity: 0;
-  padding: var(--sl-spacing-xxx-small) var(--sl-spacing-x-small);
+  padding: var(--sl-tooltip-padding);
   transition: var(--sl-transition-fast) opacity;
   pointer-events: none;
 
@@ -142,7 +142,7 @@
     width: 0;
     height: 0;
     left: 50%;
-    margin-left: -6px;
+    margin-left: calc(-1 * var(--sl-tooltip-arrow-size));
   }
 }
 
@@ -155,11 +155,10 @@
   top: calc(-1 * var(--thumb-size) - var(--tooltip-offset-y));
 
   &::after {
-    border-top: 6px solid var(--sl-color-gray-10);
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
+    border-top: var(--sl-tooltip-arrow-size) solid var(--sl-tooltip-background-color);
+    border-left: var(--sl-tooltip-arrow-size) solid transparent;
+    border-right: var(--sl-tooltip-arrow-size) solid transparent;
     top: 100%;
-    margin-top: -1px;
   }
 }
 
@@ -168,10 +167,9 @@
   bottom: calc(-1 * var(--thumb-size) - var(--tooltip-offset-y));
 
   &::after {
-    border-bottom: 6px solid var(--sl-color-gray-10);
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
+    border-bottom: var(--sl-tooltip-arrow-size) solid var(--sl-tooltip-background-color);
+    border-left: var(--sl-tooltip-arrow-size) solid transparent;
+    border-right: var(--sl-tooltip-arrow-size) solid transparent;
     bottom: 100%;
-    margin-top: 1px;
   }
 }

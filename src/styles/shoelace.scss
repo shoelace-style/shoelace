@@ -1,7 +1,6 @@
 /*! Shoelace */
 
 @import 'normalize.css/normalize';
-@import 'tippy.js/dist/tippy';
 @import 'mixins/make-color-palette';
 
 :root {
@@ -189,6 +188,21 @@
   --sl-toggle-size: 14px;
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Tooltips
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  --sl-tooltip-border-radius: var(--sl-border-radius-medium);
+  --sl-tooltip-background-color: var(--sl-color-gray-10);
+  --sl-tooltip-color: var(--sl-color-white);
+  --sl-tooltip-font-family: var(--sl-font-sans);
+  --sl-tooltip-font-weight: var(--sl-font-weight-normal);
+  --sl-tooltip-font-size: var(--sl-font-size-small);
+  --sl-tooltip-line-height: var(--sl-line-height-normal);
+  --sl-tooltip-padding: var(--sl-spacing-xxx-small) var(--sl-spacing-x-small);
+  --sl-tooltip-arrow-size: 5px;
+  --sl-tooltip-arrow-start-end-offset: 8px;
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // Z-index
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -210,7 +224,7 @@
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Tooltips
+// Base styles
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 body {
@@ -227,46 +241,4 @@ a {
 a:hover {
   color: var(--sl-color-primary-60);
   text-decoration: underline;
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Tooltips
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-.tippy-popper {
-  z-index: var(--sl-z-index-tooltip) !important;
-}
-
-.tippy-tooltip {
-  border-radius: var(--sl-border-radius-medium);
-  background-color: var(--sl-color-gray-10);
-
-  .tippy-arrow {
-    transform: scale(0.75);
-  }
-
-  &[data-placement^='top'] .tippy-arrow {
-    border-top-color: var(--sl-color-gray-10);
-  }
-
-  &[data-placement^='bottom'] .tippy-arrow {
-    border-bottom-color: var(--sl-color-gray-10);
-  }
-
-  &[data-placement^='left'] .tippy-arrow {
-    border-left-color: var(--sl-color-gray-10);
-  }
-
-  &[data-placement^='right'] .tippy-arrow {
-    border-right-color: var(--sl-color-gray-10);
-  }
-
-  .tippy-content {
-    font-family: var(--sl-font-sans);
-    font-size: var(--sl-font-size-small);
-    font-weight: var(--sl-font-weight-normal);
-    line-height: var(--sl-line-height-normal);
-    color: var(--sl-color-white);
-    padding: var(--sl-spacing-xxx-small) var(--sl-spacing-x-small);
-  }
 }
