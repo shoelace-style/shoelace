@@ -1,9 +1,9 @@
 @import 'component';
 
+/**
+  * @prop --width: The preferred width of the dialog. Note that the dialog will shrink to accommodate smaller screens.
+  */
 :host {
-  /**
-   * @prop --width: The preferred width of the dialog. Note that the dialog will shrink to accommodate smaller screens.
-   */
   --width: 31rem;
 
   position: absolute;
