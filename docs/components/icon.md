@@ -15,6 +15,7 @@ The icons that come bundled with Shoelace are courtesy of the [Bootstrap Icons](
 <sl-icon name="download"></sl-icon>
 <sl-icon name="file"></sl-icon>
 <sl-icon name="flag"></sl-icon>
+<sl-icon name="heart"></sl-icon>
 <sl-icon name="image"></sl-icon>
 <sl-icon name="lightning"></sl-icon>
 <sl-icon name="mic"></sl-icon>
@@ -41,6 +42,7 @@ Icon sizes are determined by the current font size.
   <sl-icon name="download"></sl-icon>
   <sl-icon name="file"></sl-icon>
   <sl-icon name="flag"></sl-icon>
+<sl-icon name="heart"></sl-icon>
   <sl-icon name="image"></sl-icon>
   <sl-icon name="lightning"></sl-icon>
   <sl-icon name="mic"></sl-icon>
