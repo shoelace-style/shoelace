@@ -46,7 +46,6 @@ The roadmap tracks the status of components and features that are planned, in de
 - [ ] Card
 - [ ] Content Placeholder (multiple variations)
 - [ ] Date & Time Picker (possibly wrap [flatpickr](https://flatpickr.js.org/))
-- [ ] File Button
 - [ ] Input group
 - [ ] Panel (aka "drawer")
 - [ ] Popover
@@ -60,6 +59,7 @@ The roadmap tracks the status of components and features that are planned, in de
 ## Under Consideration 🤔
 
 - [ ] Carousel
+- [ ] File Button / Uploader
 - [ ] Fit text to container
 - [ ] Graphing components (based on [Chart.js](https://www.chartjs.org/))
 - [ ] Table (probably a `<table>` wrapper that implements styles, sorting, and some other features)
