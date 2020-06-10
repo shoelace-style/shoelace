@@ -38,7 +38,7 @@ export class Dropdown {
 
   @Element() host: HTMLSlDropdownElement;
 
-  /** Indicates whether or not the dropdown is open. */
+  /** Indicates whether or not the dropdown is open. You can use this in lieu of the show/hide methods. */
   @Prop({ mutable: true, reflect: true }) open = false;
 
   /**

@@ -35,7 +35,7 @@ export class Dialog {
 
   @State() isUsingKeyboard = false;
 
-  /** Indicates whether or not the dialog is open. */
+  /** Indicates whether or not the dialog is open. You can use this in lieu of the show/hide methods. */
   @Prop({ mutable: true, reflect: true }) open = false;
 
   /**

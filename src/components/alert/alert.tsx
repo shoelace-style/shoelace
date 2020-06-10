@@ -28,7 +28,7 @@ export class Tab {
 
   @State() isUsingKeyboard = false;
 
-  /** Indicates whether or not the alert is open. */
+  /** Indicates whether or not the alert is open. You can use this in lieu of the show/hide methods. */
   @Prop({ mutable: true, reflect: true }) open = false;
 
   /** Set to true to make the alert closable. */

@@ -16,7 +16,7 @@ export namespace Components {
          */
         "hide": () => Promise<boolean>;
         /**
-          * Indicates whether or not the alert is open.
+          * Indicates whether or not the alert is open. You can use this in lieu of the show/hide methods.
          */
         "open": boolean;
         /**
@@ -170,7 +170,7 @@ export namespace Components {
          */
         "noHeader": boolean;
         /**
-          * Indicates whether or not the dialog is open.
+          * Indicates whether or not the dialog is open. You can use this in lieu of the show/hide methods.
          */
         "open": boolean;
         /**
@@ -188,7 +188,7 @@ export namespace Components {
          */
         "hide": () => Promise<void>;
         /**
-          * Indicates whether or not the dropdown is open.
+          * Indicates whether or not the dropdown is open. You can use this in lieu of the show/hide methods.
          */
         "open": boolean;
         /**
@@ -617,7 +617,7 @@ export namespace Components {
          */
         "hide": () => Promise<boolean>;
         /**
-          * Indicates whether or not the tooltip is open.
+          * Indicates whether or not the tooltip is open. You can use this in lieu of the show/hide methods.
          */
         "open": boolean;
         /**
@@ -644,9 +644,9 @@ export namespace Components {
          */
         "skidding": number;
         /**
-          * When to activate the tooltip. When set to `manual`, the tooltip must be shown programmatically.
+          * Controls how the tooltip is activated. Possible options include `click`, `hover`, `focus`, and `manual`. Multiple options can be passed by separating them with a space. When manual is used, the tooltip must be activated programmatically.
          */
-        "trigger": 'hover' | 'manual';
+        "trigger": string;
     }
 }
 declare global {
@@ -830,7 +830,7 @@ declare namespace LocalJSX {
          */
         "onSlShow"?: (event: CustomEvent<any>) => void;
         /**
-          * Indicates whether or not the alert is open.
+          * Indicates whether or not the alert is open. You can use this in lieu of the show/hide methods.
          */
         "open"?: boolean;
         /**
@@ -1016,7 +1016,7 @@ declare namespace LocalJSX {
          */
         "onSlShow"?: (event: CustomEvent<any>) => void;
         /**
-          * Indicates whether or not the dialog is open.
+          * Indicates whether or not the dialog is open. You can use this in lieu of the show/hide methods.
          */
         "open"?: boolean;
     }
@@ -1042,7 +1042,7 @@ declare namespace LocalJSX {
          */
         "onSlShow"?: (event: CustomEvent<any>) => void;
         /**
-          * Indicates whether or not the dropdown is open.
+          * Indicates whether or not the dropdown is open. You can use this in lieu of the show/hide methods.
          */
         "open"?: boolean;
         /**
@@ -1483,7 +1483,7 @@ declare namespace LocalJSX {
          */
         "onSlShow"?: (event: CustomEvent<any>) => void;
         /**
-          * Indicates whether or not the tooltip is open.
+          * Indicates whether or not the tooltip is open. You can use this in lieu of the show/hide methods.
          */
         "open"?: boolean;
         /**
@@ -1506,9 +1506,9 @@ declare namespace LocalJSX {
          */
         "skidding"?: number;
         /**
-          * When to activate the tooltip. When set to `manual`, the tooltip must be shown programmatically.
+          * Controls how the tooltip is activated. Possible options include `click`, `hover`, `focus`, and `manual`. Multiple options can be passed by separating them with a space. When manual is used, the tooltip must be activated programmatically.
          */
-        "trigger"?: 'hover' | 'manual';
+        "trigger"?: string;
     }
     interface IntrinsicElements {
         "sl-alert": SlAlert;
