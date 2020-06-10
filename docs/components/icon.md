@@ -25,6 +25,8 @@ The icons that come bundled with Shoelace are courtesy of the [Bootstrap Icons](
 <sl-icon name="x-circle"></sl-icon>
 ```
 
+?> For a searchable list of 600+ icons, please refer to the [Bootstrap Icons website](https://icons.getbootstrap.com/).
+
 [component-metadata:sl-icon]
 
 ## Examples
