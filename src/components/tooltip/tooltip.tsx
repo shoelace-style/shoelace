@@ -7,7 +7,7 @@ let id = 0;
  * @since 1.0.0
  * @status ready
  *
- * @slot - The tooltip's content.
+ * @slot - The tooltip's target element. Only the first element will be used as the target.
  */
 
 @Component({
