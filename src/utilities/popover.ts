@@ -32,7 +32,7 @@ export default class Popover {
   popper: PopperInstance;
   options: PopoverOptions;
 
-  constructor(anchor: HTMLElement, popover: HTMLElement, options: PopoverOptions) {
+  constructor(anchor: HTMLElement, popover: HTMLElement, options?: PopoverOptions) {
     this.handleTransitionEnd = this.handleTransitionEnd.bind(this);
 
     this.anchor = anchor;
@@ -43,11 +43,15 @@ export default class Popover {
         placement: 'bottom-start',
         hideStyles: {
           opacity: '0',
-          transition: 'var(--sl-transition-fast) opacity'
+          transitionDelay: '0',
+          transitionDuration: 'var(--sl-transition-fast)',
+          transitionProperty: 'opacity'
         },
         showStyles: {
           opacity: '1',
-          transition: 'var(--sl-transition-fast) opacity'
+          transitionDelay: '0',
+          transitionDuration: 'var(--sl-transition-fast)',
+          transitionProperty: 'opacity'
         },
         onAfterShow: () => {},
         onAfterHide: () => {},
@@ -136,6 +140,7 @@ export default class Popover {
 
   setOptions(options: PopoverOptions) {
     this.options = Object.assign(this.options, options);
+    this.applyStyles(this.isVisible ? this.options.showStyles : this.options.hideStyles);
 
     // Update popper options
     if (this.popper) {
