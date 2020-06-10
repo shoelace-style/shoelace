@@ -19,89 +19,116 @@ A tooltip's target is its _first child element_, so you should only wrap one ele
 ### Placement
 
 ```html preview
-<div class="tooltip-grid">
-  <sl-tooltip content="This is a tooltip" placement="top-start">
-    <div class="tooltip-target">top-start</div>
-  </sl-tooltip>
+<div class="tooltip-placement-example">
+  <div class="tooltip-placement-example-row">
+    <sl-tooltip content="top-start" placement="top-start">
+      <sl-button></sl-button>
+    </sl-tooltip>
 
-  <sl-tooltip content="This is a tooltip" placement="top">
-    <div class="tooltip-target">top</div>
-  </sl-tooltip>
+    <sl-tooltip content="top" placement="top">
+      <sl-button></sl-button>
+    </sl-tooltip>
 
-  <sl-tooltip content="This is a tooltip" placement="top-end">
-    <div class="tooltip-target">top-end</div>
-  </sl-tooltip>
+    <sl-tooltip content="top-end" placement="top-end">
+      <sl-button></sl-button>
+    </sl-tooltip>
+  </div>
 
-  <sl-tooltip content="This is a tooltip" placement="bottom-start">
-    <div class="tooltip-target">bottom-start</div>
-  </sl-tooltip>
+  <div class="tooltip-placement-example-row">
+    <sl-tooltip content="left-start" placement="left-start">
+      <sl-button></sl-button>
+    </sl-tooltip>
 
-  <sl-tooltip content="This is a tooltip" placement="bottom">
-    <div class="tooltip-target">bottom</div>
-  </sl-tooltip>
+    <sl-tooltip content="right-start" placement="right-start" style="margin-left: 400px;">
+      <sl-button></sl-button>
+    </sl-tooltip>
+  </div>
 
-  <sl-tooltip content="This is a tooltip" placement="bottom-end">
-    <div class="tooltip-target">bottom-end</div>
-  </sl-tooltip>
+  <div class="tooltip-placement-example-row">
+    <sl-tooltip content="left" placement="left">
+      <sl-button></sl-button>
+    </sl-tooltip>
 
-  <sl-tooltip content="This is a tooltip" placement="left-start">
-    <div class="tooltip-target">left-start</div>
-  </sl-tooltip>
+    <sl-tooltip content="right" placement="right">
+      <sl-button></sl-button>
+    </sl-tooltip>
+  </div>
 
-  <sl-tooltip content="This is a tooltip" placement="left">
-    <div class="tooltip-target">left</div>
-  </sl-tooltip>
+  <div class="tooltip-placement-example-row">
+    <sl-tooltip content="left-end" placement="left-end">
+      <sl-button></sl-button>
+    </sl-tooltip>    
 
-  <sl-tooltip content="This is a tooltip" placement="left-end">
-    <div class="tooltip-target">left-end</div>
-  </sl-tooltip>
+    <sl-tooltip content="right-end" placement="right-end">
+      <sl-button></sl-button>
+    </sl-tooltip>
+  </div>
 
-  <sl-tooltip content="This is a tooltip" placement="right-start">
-    <div class="tooltip-target">right-start</div>
-  </sl-tooltip>
+  <div class="tooltip-placement-example-row">
+    <sl-tooltip content="bottom-start" placement="bottom-start">
+      <sl-button></sl-button>
+    </sl-tooltip>
 
-  <sl-tooltip content="This is a tooltip" placement="right">
-    <div class="tooltip-target">right</div>
-  </sl-tooltip>
+    <sl-tooltip content="bottom" placement="bottom">
+      <sl-button></sl-button>
+    </sl-tooltip>
 
-  <sl-tooltip content="This is a tooltip" placement="right-end">
-    <div class="tooltip-target">right-end</div>
-  </sl-tooltip>
+    <sl-tooltip content="bottom-end" placement="bottom-end">
+      <sl-button></sl-button>
+    </sl-tooltip>
+  </div>  
 </div>
 
 <style>
-  .tooltip-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
-    gap: 1rem 1rem;
+  .tooltip-placement-example {
+    width: 250px;
   }
 
-  .tooltip-target {
-    display: flex;
-    min-height: 8em;
+  .tooltip-placement-example-row::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
 
-    border: dashed 1px var(--sl-color-primary-80);
-    background-color: var(--sl-color-primary-95);
-    font-size: var(--sl-font-size-x-small);
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
+  .tooltip-placement-example sl-button {
+    float: left;
+    margin-right: .25rem;
+    margin-bottom: .25rem;
+  }
+
+  .tooltip-placement-example [placement="top-start"] sl-button,
+  .tooltip-placement-example [placement="bottom-start"] sl-button {
+    margin-left: calc(40px + .25rem);
+  }
+
+  .tooltip-placement-example [placement^="right"] sl-button {
+    margin-left: calc((40px * 3) + (.25rem * 3));
   }
 </style>
+```
+
+### Click Trigger
+
+```html preview
+<sl-tooltip content="I am shown and hidden programmatically" trigger="click">
+  <sl-button>Click to Toggle</sl-button>
+</sl-tooltip>
 ```
 
 ### Manual Trigger
 
 ```html preview
-<sl-tooltip content="I am shown and hidden programmatically" trigger="manual">
-  <sl-button>Click to Toggle</sl-button>
+<sl-button style="margin-right: 4rem;">Toggle Manually</sl-button>
+
+<sl-tooltip content="This is an avatar" trigger="manual">
+  <sl-avatar></sl-avatar>
 </sl-tooltip>
+
 
 <script>
   const tooltip = document.querySelector('sl-tooltip[trigger="manual"]');
-  const button = tooltip.querySelector('sl-button');
+  const toggle = tooltip.previousElementSibling;
 
-  button.addEventListener('click', () => tooltip.open = !tooltip.open);
+  toggle.addEventListener('click', () => tooltip.open = !tooltip.open);
 </script>
 ```

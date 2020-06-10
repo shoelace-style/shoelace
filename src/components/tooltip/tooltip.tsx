@@ -22,6 +22,9 @@ export class Tooltip {
   tooltip: any;
 
   constructor() {
+    this.handleBlur = this.handleBlur.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
     this.handleMouseOver = this.handleMouseOver.bind(this);
     this.handleMouseOut = this.handleMouseOut.bind(this);
     this.handleSlotChange = this.handleSlotChange.bind(this);
@@ -56,14 +59,18 @@ export class Tooltip {
   /** The distance in pixels from which to offset the tooltip away from its target. */
   @Prop() distance = 10;
 
-  /** Indicates whether or not the tooltip is open. */
+  /** Indicates whether or not the tooltip is open. You can use this in lieu of the show/hide methods. */
   @Prop({ mutable: true, reflect: true }) open = false;
 
   /** The distance in pixels from which to offset the tooltip along its target. */
   @Prop() skidding = 0;
 
-  /** When to activate the tooltip. When set to `manual`, the tooltip must be shown programmatically. */
-  @Prop() trigger: 'hover' | 'manual' = 'hover';
+  /**
+   * Controls how the tooltip is activated. Possible options include `click`, `hover`, `focus`, and `manual`. Multiple
+   * options can be passed by separating them with a space. When manual is used, the tooltip must be activated
+   * programmatically.
+   */
+  @Prop() trigger: string = 'hover focus';
 
   @Watch('open')
   handleOpenChange() {
@@ -89,6 +96,9 @@ export class Tooltip {
     this.popover = new Popover(this.target, this.tooltip);
     this.syncOptions();
 
+    this.host.addEventListener('blur', this.handleBlur, true);
+    this.host.addEventListener('click', this.handleClick, true);
+    this.host.addEventListener('focus', this.handleFocus, true);
     slot.addEventListener('slotchange', this.handleSlotChange);
 
     // Show on init if open
@@ -104,6 +114,10 @@ export class Tooltip {
 
   componentDidUnload() {
     this.popover.destroy();
+
+    this.host.removeEventListener('blur', this.handleBlur, true);
+    this.host.removeEventListener('click', this.handleClick, true);
+    this.host.removeEventListener('focus', this.handleFocus, true);
     this.host.shadowRoot.querySelector('slot').removeEventListener('slotchange', this.handleSlotChange);
   }
 
@@ -142,15 +156,33 @@ export class Tooltip {
     return target;
   }
 
+  handleBlur() {
+    if (this.hasTrigger('focus')) {
+      this.hide();
+    }
+  }
+
+  handleClick() {
+    if (this.hasTrigger('click')) {
+      this.open ? this.hide() : this.show();
+    }
+  }
+
+  handleFocus() {
+    if (this.hasTrigger('focus')) {
+      this.show();
+    }
+  }
+
   handleMouseOver() {
-    if (this.trigger === 'hover') {
-      this.open = true;
+    if (this.hasTrigger('hover')) {
+      this.show();
     }
   }
 
   handleMouseOut() {
-    if (this.trigger === 'hover') {
-      this.open = false;
+    if (this.hasTrigger('hover')) {
+      this.hide();
     }
   }
 
@@ -164,6 +196,11 @@ export class Tooltip {
     }
   }
 
+  hasTrigger(triggerType: string) {
+    const triggers = this.trigger.split(' ');
+    return triggers.includes(triggerType);
+  }
+
   syncOptions() {
     this.popover.setOptions({
       placement: this.placement,
@@ -172,13 +209,13 @@ export class Tooltip {
       onAfterShow: () => this.slAfterShow.emit(),
       hideStyles: {
         opacity: '0',
-        transitionDelay: this.trigger === 'manual' ? '0' : 'var(--hide-delay)',
+        transitionDelay: this.hasTrigger('manual') ? '0' : 'var(--hide-delay)',
         transitionProperty: 'opacity',
         transitionDuration: 'var(--hide-duration)'
       },
       showStyles: {
         opacity: '1',
-        transitionDelay: this.trigger === 'manual' ? '0' : 'var(--show-delay)',
+        transitionDelay: this.hasTrigger('manual') ? '0' : 'var(--show-delay)',
         transitionProperty: 'opacity',
         transitionDuration: 'var(--show-duration)'
       }
