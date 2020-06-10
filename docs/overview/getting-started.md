@@ -55,5 +55,5 @@ Although Web Components can (to some degree) be polyfilled for older browsers, s
 - Documentation is powered by [Docsify](https://docsify.js.org/)
 - Theme colors and form controls are inspired by [Element](element.eleme.io)
 - Icons are courtesy of [Feather Icons](https://feathericons.com/)
-- Positioning of menus, tooltips, etc. is handled by [Popper.js](https://popper.js.org/)
+- Positioning of menus, tooltips, et al is handled by [Popper.js](https://popper.js.org/)
 - The Shoelace logo was designed with a single shoelace by [Adam K Olson](https://twitter.com/adamkolson)
