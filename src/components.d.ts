@@ -615,15 +615,11 @@ export namespace Components {
         /**
           * Shows the tooltip.
          */
-        "hide": () => Promise<void>;
+        "hide": () => Promise<boolean>;
         /**
-          * The delay in ms before the tooltip hides.
+          * Indicates whether or not the tooltip is open.
          */
-        "hideDelay": number;
-        /**
-          * The duration in ms of the tooltip's hide transition.
-         */
-        "hideDuration": number;
+        "open": boolean;
         /**
           * The preferred placement of the tooltip. Note that the actual placement may vary as needed to keep the tooltip inside of the viewport.
          */
@@ -642,23 +638,15 @@ export namespace Components {
         /**
           * Shows the tooltip.
          */
-        "show": () => Promise<void>;
-        /**
-          * The delay in ms before showing the tooltip.
-         */
-        "showDelay": number;
-        /**
-          * The duration in ms of the tooltip's show transition.
-         */
-        "showDuration": number;
+        "show": () => Promise<boolean>;
         /**
           * The distance in pixels from which to offset the tooltip along its target.
          */
         "skidding": number;
         /**
-          * The events that cause a tooltip to show, separated by a space. Possible values include any combination of `mouseenter`, `focus`, `click`, and `manual`. Use `manual` if you only want to show and hide the tooltip programmatically.
+          * When to activate the tooltip. When set to `manual`, the tooltip must be shown programmatically.
          */
-        "trigger": string;
+        "trigger": 'hover' | 'manual';
     }
 }
 declare global {
@@ -1479,14 +1467,6 @@ declare namespace LocalJSX {
          */
         "distance"?: number;
         /**
-          * The delay in ms before the tooltip hides.
-         */
-        "hideDelay"?: number;
-        /**
-          * The duration in ms of the tooltip's hide transition.
-         */
-        "hideDuration"?: number;
-        /**
           * Emitted after the tooltip has hidden and all transitions are complete.
          */
         "onSlAfterHide"?: (event: CustomEvent<any>) => void;
@@ -1503,6 +1483,10 @@ declare namespace LocalJSX {
          */
         "onSlShow"?: (event: CustomEvent<any>) => void;
         /**
+          * Indicates whether or not the tooltip is open.
+         */
+        "open"?: boolean;
+        /**
           * The preferred placement of the tooltip. Note that the actual placement may vary as needed to keep the tooltip inside of the viewport.
          */
         "placement"?: | 'top'
@@ -1518,21 +1502,13 @@ declare namespace LocalJSX {
     | 'left-start'
     | 'left-end';
         /**
-          * The delay in ms before showing the tooltip.
-         */
-        "showDelay"?: number;
-        /**
-          * The duration in ms of the tooltip's show transition.
-         */
-        "showDuration"?: number;
-        /**
           * The distance in pixels from which to offset the tooltip along its target.
          */
         "skidding"?: number;
         /**
-          * The events that cause a tooltip to show, separated by a space. Possible values include any combination of `mouseenter`, `focus`, `click`, and `manual`. Use `manual` if you only want to show and hide the tooltip programmatically.
+          * When to activate the tooltip. When set to `manual`, the tooltip must be shown programmatically.
          */
-        "trigger"?: string;
+        "trigger"?: 'hover' | 'manual';
     }
     interface IntrinsicElements {
         "sl-alert": SlAlert;

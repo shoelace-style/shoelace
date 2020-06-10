@@ -4,24 +4,13 @@
 
 Tooltips...
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+A tooltip's target is its _first child element_, so you should only wrap one element inside of a tooltip. If you need the tooltip to show up for multiple elements, nest them inside a container first.
 
 ```html preview
 <sl-tooltip content="This is a tooltip">
-  <sl-button>Tooltip</sl-button>
+  <sl-button>Hover Me</sl-button>
 </sl-tooltip>
 ```
-
-## TODO 🧪 
-
-- [ ] Disabled state
-- [ ] Show/hide delay
-- [ ] Show/hide duration
-- [ ] Customizable animations (?)
-- [ ] Show on focus
-- [ ] Show via method
-- [ ] Accessibility
-- [ ] Emit events and make show/hide preventable
 
 [component-metadata:sl-tooltip]
 
@@ -31,48 +20,48 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 ```html preview
 <div class="tooltip-grid">
-  <sl-tooltip content="This is a tooltip" placement="top">
-    <div class="tooltip-target">top</div>
-  </sl-tooltip>
-
   <sl-tooltip content="This is a tooltip" placement="top-start">
     <div class="tooltip-target">top-start</div>
+  </sl-tooltip>
+
+  <sl-tooltip content="This is a tooltip" placement="top">
+    <div class="tooltip-target">top</div>
   </sl-tooltip>
 
   <sl-tooltip content="This is a tooltip" placement="top-end">
     <div class="tooltip-target">top-end</div>
   </sl-tooltip>
 
-  <sl-tooltip content="This is a tooltip" placement="bottom">
-    <div class="tooltip-target">bottom</div>
-  </sl-tooltip>
-
   <sl-tooltip content="This is a tooltip" placement="bottom-start">
     <div class="tooltip-target">bottom-start</div>
+  </sl-tooltip>
+
+  <sl-tooltip content="This is a tooltip" placement="bottom">
+    <div class="tooltip-target">bottom</div>
   </sl-tooltip>
 
   <sl-tooltip content="This is a tooltip" placement="bottom-end">
     <div class="tooltip-target">bottom-end</div>
   </sl-tooltip>
 
-  <sl-tooltip content="This is a tooltip" placement="left">
-    <div class="tooltip-target">left</div>
-  </sl-tooltip>
-
   <sl-tooltip content="This is a tooltip" placement="left-start">
     <div class="tooltip-target">left-start</div>
+  </sl-tooltip>
+
+  <sl-tooltip content="This is a tooltip" placement="left">
+    <div class="tooltip-target">left</div>
   </sl-tooltip>
 
   <sl-tooltip content="This is a tooltip" placement="left-end">
     <div class="tooltip-target">left-end</div>
   </sl-tooltip>
 
-  <sl-tooltip content="This is a tooltip" placement="right">
-    <div class="tooltip-target">right</div>
-  </sl-tooltip>
-
   <sl-tooltip content="This is a tooltip" placement="right-start">
     <div class="tooltip-target">right-start</div>
+  </sl-tooltip>
+
+  <sl-tooltip content="This is a tooltip" placement="right">
+    <div class="tooltip-target">right</div>
   </sl-tooltip>
 
   <sl-tooltip content="This is a tooltip" placement="right-end">
@@ -90,14 +79,29 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
   .tooltip-target {
     display: flex;
-    min-height: 10em;
+    min-height: 8em;
 
-    border: solid 1px var(--sl-color-primary-80);
-    background: var(--sl-color-primary-95);
+    border: dashed 1px var(--sl-color-primary-80);
+    background-color: var(--sl-color-primary-95);
     font-size: var(--sl-font-size-x-small);
     align-items: center;
     justify-content: center;
     padding: 1rem;
   }
 </style>
+```
+
+### Manual Trigger
+
+```html preview
+<sl-tooltip content="I am shown and hidden programmatically" trigger="manual">
+  <sl-button>Click to Toggle</sl-button>
+</sl-tooltip>
+
+<script>
+  const tooltip = document.querySelector('sl-tooltip[trigger="manual"]');
+  const button = tooltip.querySelector('sl-button');
+
+  button.addEventListener('click', () => tooltip.open = !tooltip.open);
+</script>
 ```

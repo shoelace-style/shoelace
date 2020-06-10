@@ -1,5 +1,7 @@
-import { Component, Element, Event, EventEmitter, Host, Method, Prop, State, Watch, h } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, Host, Method, Prop, Watch, h } from '@stencil/core';
 import Popover from '../../utilities/popover';
+
+let id = 0;
 
 /**
  * @since 1.0.0
@@ -14,6 +16,7 @@ import Popover from '../../utilities/popover';
   shadow: true
 })
 export class Tooltip {
+  id = `sl-tooltip-${++id}`;
   popover: Popover;
   target: HTMLElement;
   tooltip: any;
@@ -21,29 +24,13 @@ export class Tooltip {
   constructor() {
     this.handleMouseOver = this.handleMouseOver.bind(this);
     this.handleMouseOut = this.handleMouseOut.bind(this);
-
-    this.syncSettings = this.syncSettings.bind(this);
+    this.handleSlotChange = this.handleSlotChange.bind(this);
   }
 
   @Element() host: HTMLSlTooltipElement;
 
   /** The tooltip's content. */
   @Prop() content = '';
-
-  /** Set to true to disable the tooltip so it won't show when triggered. */
-  @Prop() disabled = false;
-
-  /** The distance in pixels from which to offset the tooltip away from its target. */
-  @Prop() distance = 10;
-
-  /** The distance in pixels from which to offset the tooltip along its target. */
-  @Prop() skidding = 0;
-
-  /** The delay in ms before the tooltip hides. */
-  @Prop() hideDelay = 0;
-
-  /** The duration in ms of the tooltip's hide transition. */
-  @Prop() hideDuration = 250;
 
   /**
    * The preferred placement of the tooltip. Note that the actual placement may vary as needed to keep the tooltip
@@ -63,18 +50,25 @@ export class Tooltip {
     | 'left-start'
     | 'left-end' = 'top';
 
-  /** The delay in ms before showing the tooltip. */
-  @Prop() showDelay = 0;
+  /** Set to true to disable the tooltip so it won't show when triggered. */
+  @Prop() disabled = false;
 
-  /** The duration in ms of the tooltip's show transition. */
-  @Prop() showDuration = 275;
+  /** The distance in pixels from which to offset the tooltip away from its target. */
+  @Prop() distance = 10;
 
-  /**
-   * The events that cause a tooltip to show, separated by a space. Possible values include any combination of
-   * `mouseenter`, `focus`, `click`, and `manual`. Use `manual` if you only want to show and hide the tooltip
-   * programmatically.
-   */
-  @Prop() trigger = 'mouseenter focus';
+  /** Indicates whether or not the tooltip is open. */
+  @Prop({ mutable: true, reflect: true }) open = false;
+
+  /** The distance in pixels from which to offset the tooltip along its target. */
+  @Prop() skidding = 0;
+
+  /** When to activate the tooltip. When set to `manual`, the tooltip must be shown programmatically. */
+  @Prop() trigger: 'hover' | 'manual' = 'hover';
+
+  @Watch('open')
+  handleOpenChange() {
+    this.open ? this.show() : this.hide();
+  }
 
   /** Emitted when the tooltip begins to show. Calling `event.preventDefault()` will prevent it from being shown. */
   @Event() slShow: EventEmitter;
@@ -89,37 +83,54 @@ export class Tooltip {
   @Event() slAfterHide: EventEmitter;
 
   componentDidLoad() {
+    const slot = this.host.shadowRoot.querySelector('slot');
+
     this.target = this.getTarget();
+    this.popover = new Popover(this.target, this.tooltip);
+    this.syncOptions();
 
-    this.popover = new Popover(this.target, this.tooltip, {
-      placement: this.placement,
-      offset: [this.skidding, this.distance],
-      onAfterHide: () => this.slAfterHide.emit(),
-      onAfterShow: () => this.slAfterShow.emit()
-    });
+    slot.addEventListener('slotchange', this.handleSlotChange);
 
-    this.host.shadowRoot.querySelector('slot').addEventListener('slotchange', this.syncSettings);
+    // Show on init if open
+    this.tooltip.hidden = !this.open;
+    if (this.open) {
+      this.show();
+    }
   }
 
   componentDidUpdate() {
-    this.syncSettings();
+    this.syncOptions();
   }
 
   componentDidUnload() {
     this.popover.destroy();
-    this.host.shadowRoot.querySelector('slot').removeEventListener('slotchange', this.syncSettings);
+    this.host.shadowRoot.querySelector('slot').removeEventListener('slotchange', this.handleSlotChange);
   }
 
   /** Shows the tooltip. */
   @Method()
   async show() {
-    this.tooltip.show();
+    const slShow = this.slShow.emit();
+
+    if (slShow.defaultPrevented) {
+      return false;
+    }
+
+    this.popover.show();
+    this.open = true;
   }
 
   /** Shows the tooltip. */
   @Method()
   async hide() {
-    this.tooltip.hide();
+    const slHide = this.slHide.emit();
+
+    if (slHide.defaultPrevented) {
+      return false;
+    }
+
+    this.popover.hide();
+    this.open = false;
   }
 
   getTarget() {
@@ -132,58 +143,67 @@ export class Tooltip {
   }
 
   handleMouseOver() {
-    this.popover.show();
+    if (this.trigger === 'hover') {
+      this.open = true;
+    }
   }
 
   handleMouseOut() {
-    this.popover.hide();
+    if (this.trigger === 'hover') {
+      this.open = false;
+    }
   }
 
-  syncSettings() {
-    this.target = this.getTarget();
+  handleSlotChange() {
+    const oldTarget = this.target;
+    const newTarget = this.getTarget();
 
-    // this.tooltip.setProps({
-    //   allowHTML: true,
-    //   animation: 'fade',
-    //   arrow: this.arrow,
-    //   content: this.host.innerHTML,
-    //   delay: [this.showDelay, this.hideDelay],
-    //   distance: this.distance,
-    //   duration: [this.showDuration, this.hideDuration],
-    //   ignoreAttributes: true,
-    //   maxWidth: this.maxWidth,
-    //   placement: this.placement,
-    //   trigger: this.trigger,
-    //   onShow: () => {
-    //     const slShow = this.slShow.emit();
-    //     if (slShow.defaultPrevented) {
-    //       return false;
-    //     }
-    //   },
-    //   onShown: () => this.slAfterShow.emit(),
-    //   onHide: () => {
-    //     const slHide = this.slHide.emit();
-    //     if (slHide.defaultPrevented) {
-    //       return false;
-    //     }
-    //   },
-    //   onHidden: () => this.slAfterHide.emit()
-    // });
-    // if (this.disabled) {
-    //   this.tooltip.disable();
-    // } else {
-    //   this.tooltip.enable();
-    // }
+    if (newTarget !== oldTarget) {
+      oldTarget.removeAttribute('aria-describedby');
+      newTarget.setAttribute('aria-describedby', this.id);
+    }
+  }
+
+  syncOptions() {
+    this.popover.setOptions({
+      placement: this.placement,
+      offset: [this.skidding, this.distance],
+      onAfterHide: () => this.slAfterHide.emit(),
+      onAfterShow: () => this.slAfterShow.emit(),
+      hideStyles: {
+        opacity: '0',
+        transitionDelay: this.trigger === 'manual' ? '0' : 'var(--hide-delay)',
+        transitionProperty: 'opacity',
+        transitionDuration: 'var(--hide-duration)'
+      },
+      showStyles: {
+        opacity: '1',
+        transitionDelay: this.trigger === 'manual' ? '0' : 'var(--show-delay)',
+        transitionProperty: 'opacity',
+        transitionDuration: 'var(--show-duration)'
+      }
+    });
   }
 
   render() {
     return (
       <Host onMouseOver={this.handleMouseOver} onMouseOut={this.handleMouseOut}>
-        <slot />
+        <slot aria-describedby={this.id} />
 
-        <div ref={el => (this.tooltip = el)} class="sl-tooltip" hidden>
-          {this.content}
-        </div>
+        {!this.disabled && (
+          <div
+            ref={el => (this.tooltip = el)}
+            id={this.id}
+            class={{
+              'sl-tooltip': true,
+              'sl-tooltip--open': this.open
+            }}
+            role="tooltip"
+            aria-hidden={!this.open}
+          >
+            {this.content}
+          </div>
+        )}
       </Host>
     );
   }
