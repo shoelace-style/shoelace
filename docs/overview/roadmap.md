@@ -30,7 +30,7 @@ The roadmap tracks the status of components and features that are planned, in de
   - [x] Tab
   - [x] Tab Panel
 - [x] Textarea
-- [ ] Tooltip (needs refactor)
+- [x] Tooltip
 
 ### Features
 
