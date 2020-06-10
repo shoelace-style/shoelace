@@ -20,6 +20,7 @@ The icons that come bundled with Shoelace are courtesy of the [Bootstrap Icons](
 <sl-icon name="lightning"></sl-icon>
 <sl-icon name="mic"></sl-icon>
 <sl-icon name="search"></sl-icon>
+<sl-icon name="star"></sl-icon>
 <sl-icon name="trash"></sl-icon>
 <sl-icon name="x-circle"></sl-icon>
 ```
@@ -33,7 +34,7 @@ The icons that come bundled with Shoelace are courtesy of the [Bootstrap Icons](
 Icon sizes are determined by the current font size.
 
 ```html preview
-<div style="font-size: 2rem;">
+<div style="font-size: 32px;">
   <sl-icon name="exclamation-triangle"></sl-icon>
   <sl-icon name="archive"></sl-icon>
   <sl-icon name="battery"></sl-icon>
@@ -42,11 +43,12 @@ Icon sizes are determined by the current font size.
   <sl-icon name="download"></sl-icon>
   <sl-icon name="file"></sl-icon>
   <sl-icon name="flag"></sl-icon>
-<sl-icon name="heart"></sl-icon>
+  <sl-icon name="heart"></sl-icon>
   <sl-icon name="image"></sl-icon>
   <sl-icon name="lightning"></sl-icon>
   <sl-icon name="mic"></sl-icon>
   <sl-icon name="search"></sl-icon>
+  <sl-icon name="star"></sl-icon>
   <sl-icon name="trash"></sl-icon>
   <sl-icon name="x-circle"></sl-icon>
 </div>
