@@ -5,7 +5,7 @@ let id = 0;
 
 /**
  * @since 1.0.0
- * @status experimental
+ * @status ready
  *
  * @slot - The tooltip's content.
  */
