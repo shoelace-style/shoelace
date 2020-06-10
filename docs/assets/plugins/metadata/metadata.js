@@ -162,7 +162,8 @@
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;')
-      .replace(/'/g, '&apos;');
+      .replace(/'/g, '&apos;')
+      .replace(/`(.*?)`/g, '<code>$1</code>');
   }
 
   function getMetadata() {
