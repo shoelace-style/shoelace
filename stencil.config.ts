@@ -24,7 +24,7 @@ export const config: Config = {
     {
       type: 'docs-custom',
       generator: (docs: any) => {
-        docs.version = version;
+        docs = Object.assign(docs, { version });
       }
     },
     {
