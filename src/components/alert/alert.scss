@@ -23,7 +23,7 @@
   line-height: 1.6;
   color: var(--sl-color-gray-30);
   opacity: 0;
-  transition: var(--sl-transition-medium);
+  transition: var(--sl-transition-medium) opacity ease;
 }
 
 .sl-alert--open {
