@@ -6,12 +6,12 @@ The roadmap tracks the status of components and features that are planned, in de
 
 ### Components
 
-- [ ] Accordion
 - [x] Alert
 - [x] Avatar
 - [x] Button
 - [x] Checkbox
 - [x] Color Picker
+- [x] Details
 - [x] Dialog
 - [x] Dropdown
   - [x] Dropdown Item
@@ -37,6 +37,7 @@ The roadmap tracks the status of components and features that are planned, in de
 - [ ] Alert service (controller for generating and managing alerts)
 - [ ] Form control labels
 - [ ] Form control validation states
+- [ ] Expose [parts](https://developer.mozilla.org/en-US/docs/Web/CSS/::part) to allow more granular styling of all components
 
 ## 1.1.0 📦
 
@@ -51,10 +52,6 @@ The roadmap tracks the status of components and features that are planned, in de
 - [ ] Popover
 - [ ] Stepper
 - [ ] Token (aka "chip")
-
-### Features
-
-- [ ] Expose [parts](https://developer.mozilla.org/en-US/docs/Web/CSS/::part) to allow more granular styling of all components
 
 ## Under Consideration 🤔
 

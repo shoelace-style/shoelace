@@ -148,6 +148,28 @@ export namespace Components {
          */
         "value": string;
     }
+    interface SlDetails {
+        /**
+          * Set to true to prevent the user from toggling the details.
+         */
+        "disabled": boolean;
+        /**
+          * Hides the alert
+         */
+        "hide": () => Promise<boolean>;
+        /**
+          * Indicates whether or not the details is open. You can use this in lieu of the show/hide methods.
+         */
+        "open": boolean;
+        /**
+          * Shows the alert.
+         */
+        "show": () => Promise<boolean>;
+        /**
+          * The plain-text summary to show in the details header. To show an HTML summary, use the `summary` slot.
+         */
+        "summary": string;
+    }
     interface SlDialog {
         /**
           * Hides the dialog
@@ -680,6 +702,12 @@ declare global {
         prototype: HTMLSlColorPickerElement;
         new (): HTMLSlColorPickerElement;
     };
+    interface HTMLSlDetailsElement extends Components.SlDetails, HTMLStencilElement {
+    }
+    var HTMLSlDetailsElement: {
+        prototype: HTMLSlDetailsElement;
+        new (): HTMLSlDetailsElement;
+    };
     interface HTMLSlDialogElement extends Components.SlDialog, HTMLStencilElement {
     }
     var HTMLSlDialogElement: {
@@ -788,6 +816,7 @@ declare global {
         "sl-button": HTMLSlButtonElement;
         "sl-checkbox": HTMLSlCheckboxElement;
         "sl-color-picker": HTMLSlColorPickerElement;
+        "sl-details": HTMLSlDetailsElement;
         "sl-dialog": HTMLSlDialogElement;
         "sl-dropdown": HTMLSlDropdownElement;
         "sl-dropdown-divider": HTMLSlDropdownDividerElement;
@@ -981,6 +1010,36 @@ declare namespace LocalJSX {
           * The current color.
          */
         "value"?: string;
+    }
+    interface SlDetails {
+        /**
+          * Set to true to prevent the user from toggling the details.
+         */
+        "disabled"?: boolean;
+        /**
+          * Emitted after the details closes and all transitions are complete.
+         */
+        "onSlAfterHide"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted after the details opens and all transitions are complete.
+         */
+        "onSlAfterShow"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the details closes. Calling `event.preventDefault()` will prevent it from being closed.
+         */
+        "onSlHide"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the details opens. Calling `event.preventDefault()` will prevent it from being opened.
+         */
+        "onSlShow"?: (event: CustomEvent<any>) => void;
+        /**
+          * Indicates whether or not the details is open. You can use this in lieu of the show/hide methods.
+         */
+        "open"?: boolean;
+        /**
+          * The plain-text summary to show in the details header. To show an HTML summary, use the `summary` slot.
+         */
+        "summary"?: string;
     }
     interface SlDialog {
         /**
@@ -1516,6 +1575,7 @@ declare namespace LocalJSX {
         "sl-button": SlButton;
         "sl-checkbox": SlCheckbox;
         "sl-color-picker": SlColorPicker;
+        "sl-details": SlDetails;
         "sl-dialog": SlDialog;
         "sl-dropdown": SlDropdown;
         "sl-dropdown-divider": SlDropdownDivider;
@@ -1544,6 +1604,7 @@ declare module "@stencil/core" {
             "sl-button": LocalJSX.SlButton & JSXBase.HTMLAttributes<HTMLSlButtonElement>;
             "sl-checkbox": LocalJSX.SlCheckbox & JSXBase.HTMLAttributes<HTMLSlCheckboxElement>;
             "sl-color-picker": LocalJSX.SlColorPicker & JSXBase.HTMLAttributes<HTMLSlColorPickerElement>;
+            "sl-details": LocalJSX.SlDetails & JSXBase.HTMLAttributes<HTMLSlDetailsElement>;
             "sl-dialog": LocalJSX.SlDialog & JSXBase.HTMLAttributes<HTMLSlDialogElement>;
             "sl-dropdown": LocalJSX.SlDropdown & JSXBase.HTMLAttributes<HTMLSlDropdownElement>;
             "sl-dropdown-divider": LocalJSX.SlDropdownDivider & JSXBase.HTMLAttributes<HTMLSlDropdownDividerElement>;

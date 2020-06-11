@@ -1,0 +1,77 @@
+@import 'component';
+
+/**
+  * @prop --hide-duration: The length of the hide transition.
+  * @prop --hide-timing-function: The timing function (easing) to use for the hide transition.
+  * @prop --show-duration: The length of the show transition.
+  * @prop --show-timing-function: The timing function (easing) to use for the show transition.
+  */
+:host {
+  display: block;
+
+  --hide-duration: var(--sl-transition-medium);
+  --hide-timing-function: ease;
+  --show-duration: var(--sl-transition-medium);
+  --show-timing-function: ease;
+}
+
+.sl-details {
+  border: solid 1px var(--sl-color-gray-80);
+  border-radius: var(--sl-border-radius-medium);
+}
+
+.sl-details--disabled {
+  opacity: 0.5;
+}
+
+.sl-details__header {
+  display: flex;
+  align-items: center;
+  border-radius: inherit;
+  padding: var(--sl-spacing-medium);
+  user-select: none;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+    box-shadow: var(--sl-focus-ring-box-shadow);
+  }
+}
+
+.sl-details--disabled .sl-details__header {
+  cursor: not-allowed;
+
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+}
+
+.sl-details__summary {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+}
+
+.sl-details__summary-icon {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+.sl-details__body {
+  height: 0;
+  overflow: hidden;
+  transition-property: height;
+  transition-duration: var(--hide-duration);
+  transition-timing-function: var(--hide-timing-function);
+}
+
+.sl-details--open .sl-details__body {
+  transition-duration: var(--show-duration);
+  transition-timing-function: var(--show-timing-function);
+}
+
+.sl-details__content {
+  padding: var(--sl-spacing-medium);
+}
