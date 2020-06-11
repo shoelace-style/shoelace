@@ -34,11 +34,11 @@ export class Input {
   @State() hasFocus = false;
   @State() isPasswordVisible = false;
 
-  /** The input's type, one of `text`, `number`, `email`, etc. */
+  /** The input's type. */
   @Prop() type: 'email' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'url' = 'text';
 
-  /** The input's size, one of `small`, `medium`, or `large`. */
-  @Prop() size = 'medium';
+  /** The input's size. */
+  @Prop() size: 'small' | 'medium' | 'large' = 'medium';
 
   /** The input's name attribute. */
   @Prop() name = '';
