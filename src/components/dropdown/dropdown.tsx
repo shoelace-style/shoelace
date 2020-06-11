@@ -155,7 +155,7 @@ export class Dropdown {
 
   getAllItems() {
     const slot = this.menu.querySelector('slot');
-    return [...slot.assignedElements()].filter(
+    return [...slot.assignedElements({ flatten: true })].filter(
       (el: any) => el.tagName.toLowerCase() === 'sl-dropdown-item' && !el.disabled
     ) as [HTMLSlDropdownItemElement];
   }
