@@ -210,14 +210,16 @@ export class Tooltip {
       hideStyles: {
         opacity: '0',
         transitionDelay: this.hasTrigger('manual') ? '0' : 'var(--hide-delay)',
+        transitionDuration: 'var(--hide-duration)',
         transitionProperty: 'opacity',
-        transitionDuration: 'var(--hide-duration)'
+        transitionTimingFunction: 'var(--hide-timing-function)'
       },
       showStyles: {
         opacity: '1',
         transitionDelay: this.hasTrigger('manual') ? '0' : 'var(--show-delay)',
+        transitionDuration: 'var(--show-duration)',
         transitionProperty: 'opacity',
-        transitionDuration: 'var(--show-duration)'
+        transitionTimingFunction: 'var(--show-timing-function)'
       }
     });
   }

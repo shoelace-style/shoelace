@@ -3,18 +3,22 @@
 /**
   * @prop --hide-delay: The amount of time to wait before hiding the tooltip.
   * @prop --hide-duration: The amount of time the hide transition takes to complete.
+  * @prop --hide-timing-function: The timing function (easing) to use for the hide transition.
   * @prop --max-width: The maximum width of the tooltip.
   * @prop --show-delay: The amount of time to wait before showing the tooltip.
   * @prop --show-duration: The amount of time the show transition takes to complete.
+  * @prop --show-timing-function: The timing function (easing) to use for the show transition.
   */
 :host {
   display: contents;
 
   --max-width: 20rem;
   --hide-delay: 0s;
-  --hide-duration: var(--sl-transition-fast);
+  --hide-duration: 2s;
+  --hide-timing-function: ease;
   --show-delay: 0.125s;
-  --show-duration: var(--sl-transition-fast);
+  --show-duration: 2s;
+  --show-timing-function: ease;
 }
 
 .sl-tooltip {
