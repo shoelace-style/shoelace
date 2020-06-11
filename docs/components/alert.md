@@ -17,6 +17,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 </sl-alert>
 ```
 
+[component-metadata:sl-alert]
+
 ## Examples
 
 ### Types
@@ -52,5 +54,3 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
   You can continue working or safely leave the app now.
 </sl-alert>
 ```
-
-[component-metadata:sl-alert]
