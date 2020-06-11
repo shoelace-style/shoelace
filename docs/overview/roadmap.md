@@ -34,7 +34,6 @@ The roadmap tracks the status of components and features that are planned, in de
 
 ### Features
 
-- [ ] Alert service (controller for generating and managing alerts)
 - [ ] Form control labels
 - [ ] Form control validation states
 - [ ] Expose [parts](https://developer.mozilla.org/en-US/docs/Web/CSS/::part) to allow more granular styling of all components
@@ -55,6 +54,7 @@ The roadmap tracks the status of components and features that are planned, in de
 
 ## Under Consideration 🤔
 
+- [ ] Alert service
 - [ ] Carousel
 - [ ] File Button / Uploader
 - [ ] Fit text to container
