@@ -141,13 +141,13 @@
     return table.outerHTML;
   }
 
-  function createDependenciesList(dependencies) {
+  function createDependentsList(dependents) {
     const ul = document.createElement('ul');
     ul.innerHTML = `
-        ${dependencies
+        ${dependents
           .map(
-            dependency => `
-              <li><code>${escapeHtml(dependency)}</code></li>
+            dependent => `
+              <li><code>${escapeHtml(dependent)}</code></li>
             `
           )
           .join('')}
@@ -281,10 +281,15 @@
           `;
         }
 
-        if (data.dependencies.length) {
+        console.log(data);
+
+        if (data.dependents.length) {
           result += `
-            ## Dependencies
-            ${createDependenciesList(data.dependencies)}
+            ## Dependents
+
+            The following components make use of this component.
+
+            ${createDependentsList(data.dependents)}
           `;
         }
 
