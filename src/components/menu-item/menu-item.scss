@@ -1,18 +1,19 @@
 @import 'component';
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Base styles
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 :host {
   display: block;
 }
 
-.sl-dropdown-item {
+.sl-menu-item {
   position: relative;
   display: flex;
   align-items: stretch;
   background-color: var(--sl-color-white);
+  font-family: var(--sl-font-sans);
+  font-size: var(--sl-font-size-medium);
+  font-weight: var(--sl-font-weight-normal);
+  line-height: var(--sl-line-height-normal);
+  letter-spacing: var(--sl-letter-spacing-normal);
   color: var(--color-gray-40);
   padding: var(--sl-spacing-xx-small) var(--sl-spacing-x-large);
   transition: var(--sl-transition-fast) fill;
@@ -20,21 +21,21 @@
   white-space: nowrap;
   cursor: pointer;
 
-  &.sl-dropdown-item--active:not(.sl-dropdown-item--disabled) {
+  &.sl-menu-item--active:not(.sl-menu-item--disabled) {
     background-color: var(--sl-color-primary-95);
     color: var(--sl-color-primary-50);
   }
 
-  &.sl-dropdown-item--disabled {
+  &.sl-menu-item--disabled {
     color: var(--sl-color-gray-70);
     cursor: not-allowed;
   }
 
-  .sl-dropdown-item__label {
+  .sl-menu-item__label {
     flex: 1 1 auto;
   }
 
-  .sl-dropdown-item__prefix {
+  .sl-menu-item__prefix {
     flex: 0 0 auto;
     display: flex;
     align-items: center;
@@ -44,7 +45,7 @@
     }
   }
 
-  .sl-dropdown-item__suffix {
+  .sl-menu-item__suffix {
     flex: 0 0 auto;
     display: flex;
     align-items: center;
@@ -55,11 +56,7 @@
   }
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Checked state
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-.sl-dropdown-item .sl-dropdown-item__check {
+.sl-menu-item .sl-menu-item__check {
   display: flex;
   position: absolute;
   left: 0.5em;
@@ -69,6 +66,6 @@
   font-size: inherit;
 }
 
-.sl-dropdown-item--checked .sl-dropdown-item__check {
+.sl-menu-item--checked .sl-menu-item__check {
   visibility: visible;
 }

@@ -206,7 +206,11 @@ export namespace Components {
          */
         "containingElement": HTMLElement;
         /**
-          * Hides the dropdown menu
+          * The distance in pixels from which to offset the panel away from its trigger.
+         */
+        "distance": number;
+        /**
+          * Hides the dropdown panel
          */
         "hide": () => Promise<void>;
         /**
@@ -214,7 +218,7 @@ export namespace Components {
          */
         "open": boolean;
         /**
-          * The preferred placement of the dropdown menu. Note that the actual placement may vary as needed to keep the menu inside of the viewport.
+          * The preferred placement of the dropdown panel. Note that the actual placement may vary as needed to keep the panel inside of the viewport.
          */
         "placement": | 'top'
     | 'top-start'
@@ -229,25 +233,13 @@ export namespace Components {
     | 'left-start'
     | 'left-end';
         /**
-          * Shows the dropdown menu
+          * Shows the dropdown panel
          */
         "show": () => Promise<void>;
-    }
-    interface SlDropdownDivider {
-    }
-    interface SlDropdownItem {
         /**
-          * Set to true to draw the dropdown item in an active state.
+          * The distance in pixels from which to offset the panel along its trigger.
          */
-        "active": boolean;
-        /**
-          * Set to true to draw the item in a checked state.
-         */
-        "checked": boolean;
-        /**
-          * Set to true to draw the dropdown item in a disabled state.
-         */
-        "disabled": boolean;
+        "skidding": number;
     }
     interface SlIcon {
         /**
@@ -368,6 +360,34 @@ export namespace Components {
           * The input's value attribute.
          */
         "value": string;
+    }
+    interface SlMenu {
+        /**
+          * Sets focus on the menu.
+         */
+        "setFocus": () => Promise<void>;
+    }
+    interface SlMenuDivider {
+    }
+    interface SlMenuItem {
+        /**
+          * Set to true to draw the menu item in an active state.
+         */
+        "active": boolean;
+        /**
+          * Set to true to draw the item in a checked state.
+         */
+        "checked": boolean;
+        /**
+          * Set to true to draw the menu item in a disabled state.
+         */
+        "disabled": boolean;
+        /**
+          * A unique value to store in the menu item.
+         */
+        "value": string;
+    }
+    interface SlMenuLabel {
     }
     interface SlProgressBar {
         /**
@@ -730,18 +750,6 @@ declare global {
         prototype: HTMLSlDropdownElement;
         new (): HTMLSlDropdownElement;
     };
-    interface HTMLSlDropdownDividerElement extends Components.SlDropdownDivider, HTMLStencilElement {
-    }
-    var HTMLSlDropdownDividerElement: {
-        prototype: HTMLSlDropdownDividerElement;
-        new (): HTMLSlDropdownDividerElement;
-    };
-    interface HTMLSlDropdownItemElement extends Components.SlDropdownItem, HTMLStencilElement {
-    }
-    var HTMLSlDropdownItemElement: {
-        prototype: HTMLSlDropdownItemElement;
-        new (): HTMLSlDropdownItemElement;
-    };
     interface HTMLSlIconElement extends Components.SlIcon, HTMLStencilElement {
     }
     var HTMLSlIconElement: {
@@ -753,6 +761,30 @@ declare global {
     var HTMLSlInputElement: {
         prototype: HTMLSlInputElement;
         new (): HTMLSlInputElement;
+    };
+    interface HTMLSlMenuElement extends Components.SlMenu, HTMLStencilElement {
+    }
+    var HTMLSlMenuElement: {
+        prototype: HTMLSlMenuElement;
+        new (): HTMLSlMenuElement;
+    };
+    interface HTMLSlMenuDividerElement extends Components.SlMenuDivider, HTMLStencilElement {
+    }
+    var HTMLSlMenuDividerElement: {
+        prototype: HTMLSlMenuDividerElement;
+        new (): HTMLSlMenuDividerElement;
+    };
+    interface HTMLSlMenuItemElement extends Components.SlMenuItem, HTMLStencilElement {
+    }
+    var HTMLSlMenuItemElement: {
+        prototype: HTMLSlMenuItemElement;
+        new (): HTMLSlMenuItemElement;
+    };
+    interface HTMLSlMenuLabelElement extends Components.SlMenuLabel, HTMLStencilElement {
+    }
+    var HTMLSlMenuLabelElement: {
+        prototype: HTMLSlMenuLabelElement;
+        new (): HTMLSlMenuLabelElement;
     };
     interface HTMLSlProgressBarElement extends Components.SlProgressBar, HTMLStencilElement {
     }
@@ -835,10 +867,12 @@ declare global {
         "sl-details": HTMLSlDetailsElement;
         "sl-dialog": HTMLSlDialogElement;
         "sl-dropdown": HTMLSlDropdownElement;
-        "sl-dropdown-divider": HTMLSlDropdownDividerElement;
-        "sl-dropdown-item": HTMLSlDropdownItemElement;
         "sl-icon": HTMLSlIconElement;
         "sl-input": HTMLSlInputElement;
+        "sl-menu": HTMLSlMenuElement;
+        "sl-menu-divider": HTMLSlMenuDividerElement;
+        "sl-menu-item": HTMLSlMenuItemElement;
+        "sl-menu-label": HTMLSlMenuLabelElement;
         "sl-progress-bar": HTMLSlProgressBarElement;
         "sl-progress-ring": HTMLSlProgressRingElement;
         "sl-radio": HTMLSlRadioElement;
@@ -1102,6 +1136,10 @@ declare namespace LocalJSX {
          */
         "containingElement"?: HTMLElement;
         /**
+          * The distance in pixels from which to offset the panel away from its trigger.
+         */
+        "distance"?: number;
+        /**
           * Emitted after the dropdown closes and all transitions are complete.
          */
         "onSlAfterHide"?: (event: CustomEvent<any>) => void;
@@ -1122,7 +1160,7 @@ declare namespace LocalJSX {
          */
         "open"?: boolean;
         /**
-          * The preferred placement of the dropdown menu. Note that the actual placement may vary as needed to keep the menu inside of the viewport.
+          * The preferred placement of the dropdown panel. Note that the actual placement may vary as needed to keep the panel inside of the viewport.
          */
         "placement"?: | 'top'
     | 'top-start'
@@ -1136,26 +1174,10 @@ declare namespace LocalJSX {
     | 'left'
     | 'left-start'
     | 'left-end';
-    }
-    interface SlDropdownDivider {
-    }
-    interface SlDropdownItem {
         /**
-          * Set to true to draw the dropdown item in an active state.
+          * The distance in pixels from which to offset the panel along its trigger.
          */
-        "active"?: boolean;
-        /**
-          * Set to true to draw the item in a checked state.
-         */
-        "checked"?: boolean;
-        /**
-          * Set to true to draw the dropdown item in a disabled state.
-         */
-        "disabled"?: boolean;
-        /**
-          * Emitted when an item is selected.
-         */
-        "onSlSelect"?: (event: CustomEvent<any>) => void;
+        "skidding"?: number;
     }
     interface SlIcon {
         /**
@@ -1272,6 +1294,42 @@ declare namespace LocalJSX {
           * The input's value attribute.
          */
         "value"?: string;
+    }
+    interface SlMenu {
+        /**
+          * Emitted when the menu loses focus.
+         */
+        "onSlBlur"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the menu gains focus.
+         */
+        "onSlFocus"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when a menu item is selected.
+         */
+        "onSlSelect"?: (event: CustomEvent<any>) => void;
+    }
+    interface SlMenuDivider {
+    }
+    interface SlMenuItem {
+        /**
+          * Set to true to draw the menu item in an active state.
+         */
+        "active"?: boolean;
+        /**
+          * Set to true to draw the item in a checked state.
+         */
+        "checked"?: boolean;
+        /**
+          * Set to true to draw the menu item in a disabled state.
+         */
+        "disabled"?: boolean;
+        /**
+          * A unique value to store in the menu item.
+         */
+        "value"?: string;
+    }
+    interface SlMenuLabel {
     }
     interface SlProgressBar {
         /**
@@ -1605,10 +1663,12 @@ declare namespace LocalJSX {
         "sl-details": SlDetails;
         "sl-dialog": SlDialog;
         "sl-dropdown": SlDropdown;
-        "sl-dropdown-divider": SlDropdownDivider;
-        "sl-dropdown-item": SlDropdownItem;
         "sl-icon": SlIcon;
         "sl-input": SlInput;
+        "sl-menu": SlMenu;
+        "sl-menu-divider": SlMenuDivider;
+        "sl-menu-item": SlMenuItem;
+        "sl-menu-label": SlMenuLabel;
         "sl-progress-bar": SlProgressBar;
         "sl-progress-ring": SlProgressRing;
         "sl-radio": SlRadio;
@@ -1635,10 +1695,12 @@ declare module "@stencil/core" {
             "sl-details": LocalJSX.SlDetails & JSXBase.HTMLAttributes<HTMLSlDetailsElement>;
             "sl-dialog": LocalJSX.SlDialog & JSXBase.HTMLAttributes<HTMLSlDialogElement>;
             "sl-dropdown": LocalJSX.SlDropdown & JSXBase.HTMLAttributes<HTMLSlDropdownElement>;
-            "sl-dropdown-divider": LocalJSX.SlDropdownDivider & JSXBase.HTMLAttributes<HTMLSlDropdownDividerElement>;
-            "sl-dropdown-item": LocalJSX.SlDropdownItem & JSXBase.HTMLAttributes<HTMLSlDropdownItemElement>;
             "sl-icon": LocalJSX.SlIcon & JSXBase.HTMLAttributes<HTMLSlIconElement>;
             "sl-input": LocalJSX.SlInput & JSXBase.HTMLAttributes<HTMLSlInputElement>;
+            "sl-menu": LocalJSX.SlMenu & JSXBase.HTMLAttributes<HTMLSlMenuElement>;
+            "sl-menu-divider": LocalJSX.SlMenuDivider & JSXBase.HTMLAttributes<HTMLSlMenuDividerElement>;
+            "sl-menu-item": LocalJSX.SlMenuItem & JSXBase.HTMLAttributes<HTMLSlMenuItemElement>;
+            "sl-menu-label": LocalJSX.SlMenuLabel & JSXBase.HTMLAttributes<HTMLSlMenuLabelElement>;
             "sl-progress-bar": LocalJSX.SlProgressBar & JSXBase.HTMLAttributes<HTMLSlProgressBarElement>;
             "sl-progress-ring": LocalJSX.SlProgressRing & JSXBase.HTMLAttributes<HTMLSlProgressRingElement>;
             "sl-radio": LocalJSX.SlRadio & JSXBase.HTMLAttributes<HTMLSlRadioElement>;

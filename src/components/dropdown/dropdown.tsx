@@ -1,5 +1,4 @@
 import { Component, Element, Event, EventEmitter, Method, Prop, Watch, h } from '@stencil/core';
-import { scrollIntoView } from '../../utilities/scroll';
 import Popover from '../../utilities/popover';
 
 let id = 0;
@@ -9,7 +8,7 @@ let id = 0;
  * @status ready
  *
  * @slot trigger - The dropdown's trigger, usually a `<sl-button>` element.
- * @slot - The dropdown's menu items.
+ * @slot - The dropdown's content.
  */
 
 @Component({
@@ -22,18 +21,16 @@ export class Dropdown {
   ignoreMouseEvents = false;
   ignoreMouseTimeout: any;
   ignoreOpenWatcher = false;
-  menu: HTMLElement;
+  panel: HTMLElement;
   popover: Popover;
   trigger: HTMLElement;
 
   constructor() {
     this.handleDocumentKeyDown = this.handleDocumentKeyDown.bind(this);
     this.handleDocumentMouseDown = this.handleDocumentMouseDown.bind(this);
+    this.handlePanelSelect = this.handlePanelSelect.bind(this);
     this.handleTriggerKeyDown = this.handleTriggerKeyDown.bind(this);
-    this.handleMenuClick = this.handleMenuClick.bind(this);
-    this.handleMenuMouseOver = this.handleMenuMouseOver.bind(this);
-    this.handleMenuMouseOut = this.handleMenuMouseOut.bind(this);
-    this.toggleMenu = this.toggleMenu.bind(this);
+    this.togglePanel = this.togglePanel.bind(this);
   }
 
   @Element() host: HTMLSlDropdownElement;
@@ -42,7 +39,7 @@ export class Dropdown {
   @Prop({ mutable: true, reflect: true }) open = false;
 
   /**
-   * The preferred placement of the dropdown menu. Note that the actual placement may vary as needed to keep the menu
+   * The preferred placement of the dropdown panel. Note that the actual placement may vary as needed to keep the panel
    * inside of the viewport.
    */
   @Prop() placement:
@@ -61,6 +58,12 @@ export class Dropdown {
 
   /** The dropdown will close when the user interacts outside of this element (e.g. clicking). */
   @Prop() containingElement: HTMLElement = this.host;
+
+  /** The distance in pixels from which to offset the panel away from its trigger. */
+  @Prop() distance = 2;
+
+  /** The distance in pixels from which to offset the panel along its trigger. */
+  @Prop() skidding = 0;
 
   /** Emitted when the dropdown opens. Calling `event.preventDefault()` will prevent it from being opened. */
   @Event() slShow: EventEmitter;
@@ -82,19 +85,21 @@ export class Dropdown {
   }
 
   @Watch('placement')
-  handlePlacementChange() {
+  @Watch('distance')
+  @Watch('skidding')
+  handlePopoverOptionsChange() {
     this.popover.setOptions({ placement: this.placement });
   }
 
   componentDidLoad() {
-    this.popover = new Popover(this.trigger, this.menu, {
-      placement: 'bottom-start',
-      offset: [0, 2],
+    this.popover = new Popover(this.trigger, this.panel, {
+      placement: this.placement,
+      offset: [this.skidding, this.distance],
       onAfterHide: () => this.slAfterHide.emit(),
       onAfterShow: () => this.slAfterShow.emit(),
       onTransitionEnd: () => {
         if (!this.open) {
-          this.menu.scrollTop = 0;
+          this.panel.scrollTop = 0;
         }
       }
     });
@@ -110,7 +115,7 @@ export class Dropdown {
     this.popover.destroy();
   }
 
-  /** Shows the dropdown menu */
+  /** Shows the dropdown panel */
   @Method()
   async show() {
     this.ignoreOpenWatcher = true;
@@ -127,11 +132,12 @@ export class Dropdown {
     this.popover.show();
     this.ignoreOpenWatcher = false;
 
+    this.panel.addEventListener('slSelect', this.handlePanelSelect);
     document.addEventListener('mousedown', this.handleDocumentMouseDown);
     document.addEventListener('keydown', this.handleDocumentKeyDown);
   }
 
-  /** Hides the dropdown menu */
+  /** Hides the dropdown panel */
   @Method()
   async hide() {
     this.ignoreOpenWatcher = true;
@@ -147,41 +153,13 @@ export class Dropdown {
 
     this.popover.hide();
     this.ignoreOpenWatcher = false;
-    this.setSelectedItem(null);
 
+    this.panel.removeEventListener('slSelect', this.handlePanelSelect);
     document.removeEventListener('mousedown', this.handleDocumentMouseDown);
     document.removeEventListener('keydown', this.handleDocumentKeyDown);
   }
 
-  getAllItems() {
-    const slot = this.menu.querySelector('slot');
-    return [...slot.assignedElements({ flatten: true })].filter(
-      (el: any) => el.tagName.toLowerCase() === 'sl-dropdown-item' && !el.disabled
-    ) as [HTMLSlDropdownItemElement];
-  }
-
-  getSelectedItem() {
-    return this.getAllItems().find(i => i.active);
-  }
-
-  setSelectedItem(item: HTMLSlDropdownItemElement) {
-    this.getAllItems().map(i => (i.active = i === item));
-  }
-
-  scrollItemIntoView(item: HTMLSlDropdownItemElement) {
-    if (item) {
-      scrollIntoView(item, this.menu);
-    }
-  }
-
   handleDocumentKeyDown(event: KeyboardEvent) {
-    // When keying through the menu, if the mouse happens to be hovering over a menu item and the menu scrolls, the
-    // mouseout/mouseover event will fire causing the selection to be different than what the user expects. This gives
-    // us a way to temporarily ignore mouse events while the user is interacting with a keyboard.
-    clearTimeout(this.ignoreMouseTimeout);
-    this.ignoreMouseTimeout = setTimeout(() => (this.ignoreMouseEvents = false), 500);
-    this.ignoreMouseEvents = true;
-
     // Close when escape is pressed
     if (event.key === 'Escape') {
       this.hide();
@@ -201,44 +179,14 @@ export class Dropdown {
       });
     }
 
-    // Make a selection when pressing enter
-    if (event.key === 'Enter') {
-      const item = this.getSelectedItem();
-      event.preventDefault();
+    // If a menu is present, focus on it when up/down is pressed
+    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+      const elements = this.panel.querySelector('slot').assignedElements({ flatten: true });
+      const menu = elements.filter(el => el.tagName.toLowerCase() === 'sl-menu')[0] as HTMLSlMenuElement;
 
-      if (item && !item.disabled) {
-        item.click();
-        this.hide();
-        return;
-      }
-    }
-
-    // Move the selection when pressing down or up
-    if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
-      const items = this.getAllItems();
-      const selectedItem = this.getSelectedItem();
-      let index = items.indexOf(selectedItem);
-
-      if (items.length) {
+      if (menu) {
+        menu.setFocus();
         event.preventDefault();
-
-        if (event.key === 'ArrowDown') {
-          index++;
-        } else if (event.key === 'ArrowUp') {
-          index--;
-        } else if (event.key === 'Home') {
-          index = 0;
-        } else if (event.key === 'End') {
-          index = items.length - 1;
-        }
-
-        if (index < 0) index = 0;
-        if (index > items.length - 1) index = items.length - 1;
-
-        this.setSelectedItem(items[index]);
-        this.scrollItemIntoView(items[index]);
-
-        return;
       }
     }
   }
@@ -253,8 +201,17 @@ export class Dropdown {
     }
   }
 
+  handlePanelSelect(event: CustomEvent) {
+    const target = event.target as HTMLElement;
+
+    // Hide the dropdown when a menu item is selected
+    if (target.tagName.toLowerCase() === 'sl-menu') {
+      this.hide();
+    }
+  }
+
   handleTriggerKeyDown(event: KeyboardEvent) {
-    // Open the menu when pressing down or up while focused on the trigger
+    // Open the panel when pressing down or up while focused on the trigger
     if (!this.open && ['ArrowDown', 'ArrowUp'].includes(event.key)) {
       this.show();
       event.preventDefault();
@@ -262,33 +219,7 @@ export class Dropdown {
     }
   }
 
-  handleMenuClick(event: MouseEvent) {
-    const target = event.target as HTMLElement;
-    const dropdownItem = target.closest('sl-dropdown-item');
-
-    // Close when clicking on a dropdown item
-    if (dropdownItem && !dropdownItem.disabled) {
-      this.hide();
-      return;
-    }
-  }
-
-  handleMenuMouseOver(event: MouseEvent) {
-    const target = event.target as HTMLElement;
-    const dropdownItem = target.closest('sl-dropdown-item');
-
-    if (!this.ignoreMouseEvents && dropdownItem) {
-      this.setSelectedItem(dropdownItem);
-    }
-  }
-
-  handleMenuMouseOut() {
-    if (!this.ignoreMouseEvents) {
-      this.setSelectedItem(null);
-    }
-  }
-
-  toggleMenu() {
+  togglePanel() {
     this.open ? this.hide() : this.show();
   }
 
@@ -307,21 +238,17 @@ export class Dropdown {
           class="sl-dropdown__trigger"
           ref={el => (this.trigger = el)}
           onKeyDown={this.handleTriggerKeyDown}
-          onClick={this.toggleMenu}
+          onClick={this.togglePanel}
         >
           <slot name="trigger" />
         </span>
 
         <div
-          ref={el => (this.menu = el)}
-          part="menu"
-          class="sl-dropdown__menu"
+          ref={el => (this.panel = el)}
+          class="sl-dropdown__panel"
           role="menu"
           aria-hidden={!this.open}
           aria-labeledby={this.id}
-          onClick={this.handleMenuClick}
-          onMouseOver={this.handleMenuMouseOver}
-          onMouseOut={this.handleMenuMouseOut}
           hidden
         >
           <slot />

@@ -230,16 +230,6 @@
 // Color dropdown
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sl-color-dropdown::part(menu) {
-  overflow: visible;
-  max-height: none;
-  padding: 0;
-
-  .sl-color-picker {
-    border: none;
-  }
-}
-
 .sl-color-dropdown__trigger {
   display: inline-block;
   position: relative;

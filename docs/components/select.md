@@ -8,13 +8,13 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 ```html preview
 <sl-select>
-  <sl-dropdown-item>Option 1</sl-dropdown-item>
-  <sl-dropdown-item>Option 2</sl-dropdown-item>
-  <sl-dropdown-item>Option 3</sl-dropdown-item>
-  <sl-dropdown-divider></sl-dropdown-divider>
-  <sl-dropdown-item>Option 4</sl-dropdown-item>
-  <sl-dropdown-item>Option 5</sl-dropdown-item>
-  <sl-dropdown-item>Option 6</sl-dropdown-item>
+  <sl-menu-item>Option 1</sl-menu-item>
+  <sl-menu-item>Option 2</sl-menu-item>
+  <sl-menu-item>Option 3</sl-menu-item>
+  <sl-menu-divider></sl-menu-divider>
+  <sl-menu-item>Option 4</sl-menu-item>
+  <sl-menu-item>Option 5</sl-menu-item>
+  <sl-menu-item>Option 6</sl-menu-item>
 </sl-select>
 ```
 

@@ -1,0 +1,20 @@
+@import 'component';
+
+/**
+  * @prop --max-height: The maximum height of the menu. */
+:host {
+  display: block;
+
+  --max-height: none;
+}
+
+.sl-menu {
+  max-height: var(--max-height);
+  padding: var(--sl-spacing-x-small) 0;
+  overflow-y: auto;
+  overscroll-behavior: none;
+
+  &:focus {
+    outline: none;
+  }
+}
