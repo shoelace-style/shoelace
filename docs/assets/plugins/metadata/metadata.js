@@ -281,8 +281,6 @@
           `;
         }
 
-        console.log(data);
-
         if (data.dependents.length) {
           result += `
             ## Dependents
