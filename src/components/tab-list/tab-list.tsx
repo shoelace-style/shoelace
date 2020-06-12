@@ -7,22 +7,22 @@ import { scrollIntoView } from '../../utilities/scroll';
  * @since 1.0.0
  * @status ready
  *
- * @slot nav - Used for grouping tabs in the tabs.
- * @slot - Used for grouping tab panels in the tabs.
+ * @slot nav - Used for grouping tabs in the tab list.
+ * @slot - Used for grouping tab panels in the tab list.
  */
 
 @Component({
-  tag: 'sl-tab-group',
-  styleUrl: 'tab-group.scss',
+  tag: 'sl-tab-list',
+  styleUrl: 'tab-list.scss',
   shadow: true
 })
-export class Tab {
+export class TabList {
   activeTab: HTMLSlTabElement;
   activeTabIndicator: HTMLElement;
   body: HTMLElement;
   keyboardDetector: KeyboardDetector;
   nav: HTMLElement;
-  tabGroup: HTMLElement;
+  tabList: HTMLElement;
   tabs: HTMLElement;
   observer: MutationObserver;
 
@@ -31,7 +31,7 @@ export class Tab {
     this.handleKeyDown = this.handleKeyDown.bind(this);
   }
 
-  @Element() host: HTMLSlTabGroupElement;
+  @Element() host: HTMLSlTabListElement;
 
   @State() isUsingKeyboard = false;
 
@@ -62,12 +62,12 @@ export class Tab {
       whenUsing: () => (this.isUsingKeyboard = true),
       whenNotUsing: () => (this.isUsingKeyboard = false)
     });
-    this.keyboardDetector.observe(this.tabGroup);
+    this.keyboardDetector.observe(this.tabList);
   }
 
   componentDidUnload() {
     this.observer.disconnect();
-    this.keyboardDetector.unobserve(this.tabGroup);
+    this.keyboardDetector.unobserve(this.tabList);
   }
 
   /** Shows the specified tab panel. */
@@ -210,28 +210,28 @@ export class Tab {
   render() {
     return (
       <div
-        ref={el => (this.tabGroup = el)}
+        ref={el => (this.tabList = el)}
         class={{
-          'sl-tab-group': true,
-          'sl-tab-group--using-keyboard': this.isUsingKeyboard,
+          'sl-tab-list': true,
+          'sl-tab-list--using-keyboard': this.isUsingKeyboard,
 
           // Placements
-          'sl-tab-group--top': this.placement === 'top',
-          'sl-tab-group--bottom': this.placement === 'bottom',
-          'sl-tab-group--left': this.placement === 'left',
-          'sl-tab-group--right': this.placement === 'right'
+          'sl-tab-list--top': this.placement === 'top',
+          'sl-tab-list--bottom': this.placement === 'bottom',
+          'sl-tab-list--left': this.placement === 'left',
+          'sl-tab-list--right': this.placement === 'right'
         }}
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
       >
-        <div ref={el => (this.nav = el)} class="sl-tab-group__nav" tabindex="-1">
-          <div ref={el => (this.tabs = el)} class="sl-tab-group__tabs" role="tablist">
-            <div ref={el => (this.activeTabIndicator = el)} class="sl-tab-group__active-tab-indicator" />
+        <div ref={el => (this.nav = el)} class="sl-tab-list__nav" tabindex="-1">
+          <div ref={el => (this.tabs = el)} class="sl-tab-list__tabs" role="tablist">
+            <div ref={el => (this.activeTabIndicator = el)} class="sl-tab-list__active-tab-indicator" />
             <slot name="nav" />
           </div>
         </div>
 
-        <div ref={el => (this.body = el)} class="sl-tab-group__body">
+        <div ref={el => (this.body = el)} class="sl-tab-list__body">
           <slot />
         </div>
       </div>

@@ -349,9 +349,9 @@ export namespace Components {
          */
         "setSelectionRange": (selectionStart: number, selectionEnd: number, selectionDirection?: 'forward' | 'backward' | 'none') => Promise<void>;
         /**
-          * The input's size, one of `small`, `medium`, or `large`.
+          * The input's size.
          */
-        "size": string;
+        "size": 'small' | 'medium' | 'large';
         /**
           * The input's step attribute.
          */
@@ -361,7 +361,7 @@ export namespace Components {
          */
         "togglePassword": boolean;
         /**
-          * The input's type, one of `text`, `number`, `email`, etc.
+          * The input's type.
          */
         "type": 'email' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'url';
         /**
@@ -461,6 +461,16 @@ export namespace Components {
          */
         "value": number;
     }
+    interface SlSelect {
+        /**
+          * Set to true to disable the select control.
+         */
+        "disabled": boolean;
+        /**
+          * The select's size.
+         */
+        "size": 'small' | 'medium' | 'large';
+    }
     interface SlSpinner {
         /**
           * The spinner's size.
@@ -507,7 +517,7 @@ export namespace Components {
          */
         "disabled": boolean;
         /**
-          * The name of the tab panel the tab will control. The panel must exist in the same tab group.
+          * The name of the tab panel the tab will control. The panel must be located in the same tab list.
          */
         "panel": string;
         /**
@@ -519,7 +529,7 @@ export namespace Components {
          */
         "setFocus": () => Promise<void>;
     }
-    interface SlTabGroup {
+    interface SlTabList {
         /**
           * The placement of the tabs.
          */
@@ -768,6 +778,12 @@ declare global {
         prototype: HTMLSlRangeElement;
         new (): HTMLSlRangeElement;
     };
+    interface HTMLSlSelectElement extends Components.SlSelect, HTMLStencilElement {
+    }
+    var HTMLSlSelectElement: {
+        prototype: HTMLSlSelectElement;
+        new (): HTMLSlSelectElement;
+    };
     interface HTMLSlSpinnerElement extends Components.SlSpinner, HTMLStencilElement {
     }
     var HTMLSlSpinnerElement: {
@@ -786,11 +802,11 @@ declare global {
         prototype: HTMLSlTabElement;
         new (): HTMLSlTabElement;
     };
-    interface HTMLSlTabGroupElement extends Components.SlTabGroup, HTMLStencilElement {
+    interface HTMLSlTabListElement extends Components.SlTabList, HTMLStencilElement {
     }
-    var HTMLSlTabGroupElement: {
-        prototype: HTMLSlTabGroupElement;
-        new (): HTMLSlTabGroupElement;
+    var HTMLSlTabListElement: {
+        prototype: HTMLSlTabListElement;
+        new (): HTMLSlTabListElement;
     };
     interface HTMLSlTabPanelElement extends Components.SlTabPanel, HTMLStencilElement {
     }
@@ -827,10 +843,11 @@ declare global {
         "sl-progress-ring": HTMLSlProgressRingElement;
         "sl-radio": HTMLSlRadioElement;
         "sl-range": HTMLSlRangeElement;
+        "sl-select": HTMLSlSelectElement;
         "sl-spinner": HTMLSlSpinnerElement;
         "sl-switch": HTMLSlSwitchElement;
         "sl-tab": HTMLSlTabElement;
-        "sl-tab-group": HTMLSlTabGroupElement;
+        "sl-tab-list": HTMLSlTabListElement;
         "sl-tab-panel": HTMLSlTabPanelElement;
         "sl-textarea": HTMLSlTextareaElement;
         "sl-tooltip": HTMLSlTooltipElement;
@@ -1236,9 +1253,9 @@ declare namespace LocalJSX {
          */
         "required"?: boolean;
         /**
-          * The input's size, one of `small`, `medium`, or `large`.
+          * The input's size.
          */
-        "size"?: string;
+        "size"?: 'small' | 'medium' | 'large';
         /**
           * The input's step attribute.
          */
@@ -1248,7 +1265,7 @@ declare namespace LocalJSX {
          */
         "togglePassword"?: boolean;
         /**
-          * The input's type, one of `text`, `number`, `email`, etc.
+          * The input's type.
          */
         "type"?: 'email' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'url';
         /**
@@ -1356,6 +1373,16 @@ declare namespace LocalJSX {
          */
         "value"?: number;
     }
+    interface SlSelect {
+        /**
+          * Set to true to disable the select control.
+         */
+        "disabled"?: boolean;
+        /**
+          * The select's size.
+         */
+        "size"?: 'small' | 'medium' | 'large';
+    }
     interface SlSpinner {
         /**
           * The spinner's size.
@@ -1406,11 +1433,11 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
-          * The name of the tab panel the tab will control. The panel must exist in the same tab group.
+          * The name of the tab panel the tab will control. The panel must be located in the same tab list.
          */
         "panel"?: string;
     }
-    interface SlTabGroup {
+    interface SlTabList {
         /**
           * Emitted when a tab is hidden.
          */
@@ -1586,10 +1613,11 @@ declare namespace LocalJSX {
         "sl-progress-ring": SlProgressRing;
         "sl-radio": SlRadio;
         "sl-range": SlRange;
+        "sl-select": SlSelect;
         "sl-spinner": SlSpinner;
         "sl-switch": SlSwitch;
         "sl-tab": SlTab;
-        "sl-tab-group": SlTabGroup;
+        "sl-tab-list": SlTabList;
         "sl-tab-panel": SlTabPanel;
         "sl-textarea": SlTextarea;
         "sl-tooltip": SlTooltip;
@@ -1615,10 +1643,11 @@ declare module "@stencil/core" {
             "sl-progress-ring": LocalJSX.SlProgressRing & JSXBase.HTMLAttributes<HTMLSlProgressRingElement>;
             "sl-radio": LocalJSX.SlRadio & JSXBase.HTMLAttributes<HTMLSlRadioElement>;
             "sl-range": LocalJSX.SlRange & JSXBase.HTMLAttributes<HTMLSlRangeElement>;
+            "sl-select": LocalJSX.SlSelect & JSXBase.HTMLAttributes<HTMLSlSelectElement>;
             "sl-spinner": LocalJSX.SlSpinner & JSXBase.HTMLAttributes<HTMLSlSpinnerElement>;
             "sl-switch": LocalJSX.SlSwitch & JSXBase.HTMLAttributes<HTMLSlSwitchElement>;
             "sl-tab": LocalJSX.SlTab & JSXBase.HTMLAttributes<HTMLSlTabElement>;
-            "sl-tab-group": LocalJSX.SlTabGroup & JSXBase.HTMLAttributes<HTMLSlTabGroupElement>;
+            "sl-tab-list": LocalJSX.SlTabList & JSXBase.HTMLAttributes<HTMLSlTabListElement>;
             "sl-tab-panel": LocalJSX.SlTabPanel & JSXBase.HTMLAttributes<HTMLSlTabPanelElement>;
             "sl-textarea": LocalJSX.SlTextarea & JSXBase.HTMLAttributes<HTMLSlTextareaElement>;
             "sl-tooltip": LocalJSX.SlTooltip & JSXBase.HTMLAttributes<HTMLSlTooltipElement>;

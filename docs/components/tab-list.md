@@ -1,13 +1,13 @@
-# Tab Group
+# Tab List
 
-[component-header:sl-tab-group]
+[component-header:sl-tab-list]
 
-Tab groups...
+Tab lists...
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 
 ```html preview
-<sl-tab-group placement="top">
+<sl-tab-list placement="top">
   <sl-tab slot="nav" panel="general">General</sl-tab>
   <sl-tab slot="nav" panel="custom">Custom</sl-tab>
   <sl-tab slot="nav" panel="advanced">Advanced</sl-tab>
@@ -17,17 +17,17 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
   <sl-tab-panel name="custom">Custom</sl-tab-panel>
   <sl-tab-panel name="advanced">Advanced</sl-tab-panel>
   <sl-tab-panel name="disabled">Disabled</sl-tab-panel>
-</sl-tab-group>
+</sl-tab-list>
 ```
 
-[component-metadata:sl-tab-group]
+[component-metadata:sl-tab-list]
 
 ## Examples
 
 ### Tabs on Bottom
 
 ```html preview
-<sl-tab-group placement="bottom">
+<sl-tab-list placement="bottom">
   <sl-tab slot="nav" panel="general">General</sl-tab>
   <sl-tab slot="nav" panel="custom">Custom</sl-tab>
   <sl-tab slot="nav" panel="advanced">Advanced</sl-tab>
@@ -37,12 +37,12 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
   <sl-tab-panel name="custom">Custom</sl-tab-panel>
   <sl-tab-panel name="advanced">Advanced</sl-tab-panel>
   <sl-tab-panel name="disabled">Disabled</sl-tab-panel>
-</sl-tab-group>
+</sl-tab-list>
 ```
 ### Tabs on Left
 
 ```html preview
-<sl-tab-group placement="left">
+<sl-tab-list placement="left">
   <sl-tab slot="nav" panel="general">General</sl-tab>
   <sl-tab slot="nav" panel="custom">Custom</sl-tab>
   <sl-tab slot="nav" panel="advanced">Advanced</sl-tab>
@@ -52,13 +52,13 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
   <sl-tab-panel name="custom">Custom</sl-tab-panel>
   <sl-tab-panel name="advanced">Advanced</sl-tab-panel>
   <sl-tab-panel name="disabled">Disabled</sl-tab-panel>
-</sl-tab-group>
+</sl-tab-list>
 ```
 
 ### Tabs on Right
 
 ```html preview
-<sl-tab-group placement="right">
+<sl-tab-list placement="right">
   <sl-tab slot="nav" panel="general">General</sl-tab>
   <sl-tab slot="nav" panel="custom">Custom</sl-tab>
   <sl-tab slot="nav" panel="advanced">Advanced</sl-tab>
@@ -68,13 +68,13 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
   <sl-tab-panel name="custom">Custom</sl-tab-panel>
   <sl-tab-panel name="advanced">Advanced</sl-tab-panel>
   <sl-tab-panel name="disabled">Disabled</sl-tab-panel>
-</sl-tab-group>
+</sl-tab-list>
 ```
 
 ### Scrolling Tabs
 
 ```html preview
-<sl-tab-group>
+<sl-tab-list>
   <sl-tab slot="nav" panel="tab-1">Tab 1</sl-tab>
   <sl-tab slot="nav" panel="tab-2">Tab 2</sl-tab>
   <sl-tab slot="nav" panel="tab-3">Tab 3</sl-tab>
@@ -116,5 +116,5 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
   <sl-tab-panel name="tab-18">Tab panel 18</sl-tab-panel>
   <sl-tab-panel name="tab-19">Tab panel 19</sl-tab-panel>
   <sl-tab-panel name="tab-20">Tab panel 20</sl-tab-panel>
-</sl-tab-group>
+</sl-tab-list>
 ```

@@ -20,7 +20,7 @@ export class Tab {
 
   @Element() host: HTMLSlTabElement;
 
-  /** The name of the tab panel the tab will control. The panel must exist in the same tab group. */
+  /** The name of the tab panel the tab will control. The panel must be located in the same tab list. */
   @Prop() panel = '';
 
   /** Set to true to draw the tab in an active state. */

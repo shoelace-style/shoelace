@@ -1,0 +1,9 @@
+@import 'component';
+
+:host {
+  display: block;
+}
+
+.sl-select {
+  outline: dotted 1px pink;
+}

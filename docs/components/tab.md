@@ -4,6 +4,6 @@
 
 Tabs...
 
-A demonstration of this component can be found in the [tab group examples](/components/tab-group.md).
+A demonstration of this component can be found in the [tab list examples](/components/tab-list.md).
 
 [component-metadata:sl-tab]

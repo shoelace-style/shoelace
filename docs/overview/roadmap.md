@@ -26,7 +26,7 @@ The roadmap tracks the status of components and features that are planned, in de
 - [ ] Select (single + multi)
 - [x] Spinner
 - [x] Switch
-- [x] Tab Group
+- [x] Tab List
   - [x] Tab
   - [x] Tab Panel
 - [x] Textarea

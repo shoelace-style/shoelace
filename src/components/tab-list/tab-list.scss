@@ -5,23 +5,23 @@
   display: block;
 }
 
-.sl-tab-group {
+.sl-tab-list {
   display: flex;
   border: solid 1px transparent;
   border-radius: 0;
 
-  .sl-tab-group__tabs {
+  .sl-tab-list__tabs {
     display: flex;
     position: relative;
   }
 
-  .sl-tab-group__active-tab-indicator {
+  .sl-tab-list__active-tab-indicator {
     position: absolute;
     transition: var(--sl-transition-fast) transform ease, var(--sl-transition-fast) width ease;
   }
 
   // Show a focus ring if the user is interacting with a keyboard
-  &:not(.sl-tab-group--using-keyboard) ::slotted(sl-tab) {
+  &:not(.sl-tab-list--using-keyboard) ::slotted(sl-tab) {
     --focus-ring-box-shadow: none;
   }
 }
@@ -30,29 +30,29 @@
 // Top + bottom
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sl-tab-group--top {
+.sl-tab-list--top {
   flex-direction: column;
 
-  .sl-tab-group__nav {
+  .sl-tab-list__nav {
     display: flex;
     order: 1;
     overflow-x: auto;
     @include hide-scrollbar();
   }
 
-  .sl-tab-group__tabs {
+  .sl-tab-list__tabs {
     flex: 1 1 auto;
     position: relative;
     flex-direction: row;
     border-bottom: solid 2px var(--sl-color-gray-90);
   }
 
-  .sl-tab-group__active-tab-indicator {
+  .sl-tab-list__active-tab-indicator {
     bottom: -2px;
     border-bottom: solid 2px var(--sl-color-primary-50);
   }
 
-  .sl-tab-group__body {
+  .sl-tab-list__body {
     order: 2;
   }
 }
@@ -61,29 +61,29 @@
 // Bottom
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sl-tab-group--bottom {
+.sl-tab-list--bottom {
   flex-direction: column;
 
-  .sl-tab-group__nav {
+  .sl-tab-list__nav {
     display: flex;
     order: 2;
     overflow-x: auto;
     @include hide-scrollbar();
   }
 
-  .sl-tab-group__tabs {
+  .sl-tab-list__tabs {
     flex: 1 1 auto;
     position: relative;
     flex-direction: row;
     border-top: solid 2px var(--sl-color-gray-90);
   }
 
-  .sl-tab-group__active-tab-indicator {
+  .sl-tab-list__active-tab-indicator {
     top: calc(-1 * 2px);
     border-top: solid 2px var(--sl-color-primary-50);
   }
 
-  .sl-tab-group__body {
+  .sl-tab-list__body {
     order: 1;
   }
 }
@@ -92,25 +92,25 @@
 // Left
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sl-tab-group--left {
+.sl-tab-list--left {
   flex-direction: row;
 
-  .sl-tab-group__nav {
+  .sl-tab-list__nav {
     order: 1;
   }
 
-  .sl-tab-group__tabs {
+  .sl-tab-list__tabs {
     flex: 0 0 auto;
     flex-direction: column;
     border-right: solid 2px var(--sl-color-gray-90);
   }
 
-  .sl-tab-group__active-tab-indicator {
+  .sl-tab-list__active-tab-indicator {
     right: calc(-1 * 2px);
     border-right: solid 2px var(--sl-color-primary-50);
   }
 
-  .sl-tab-group__body {
+  .sl-tab-list__body {
     flex: 1 1 auto;
     order: 2;
   }
@@ -120,25 +120,25 @@
 // Right
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sl-tab-group--right {
+.sl-tab-list--right {
   flex-direction: row;
 
-  .sl-tab-group__nav {
+  .sl-tab-list__nav {
     order: 2;
   }
 
-  .sl-tab-group__tabs {
+  .sl-tab-list__tabs {
     flex: 0 0 auto;
     flex-direction: column;
     border-left: solid 2px var(--sl-color-gray-90);
   }
 
-  .sl-tab-group__active-tab-indicator {
+  .sl-tab-list__active-tab-indicator {
     left: calc(-1 * 2px);
     border-left: solid 2px var(--sl-color-primary-50);
   }
 
-  .sl-tab-group__body {
+  .sl-tab-list__body {
     flex: 1 1 auto;
     order: 1;
   }
