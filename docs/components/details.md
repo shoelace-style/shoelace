@@ -36,7 +36,7 @@ The `summary` prop is intended for plain-text summaries. For HTML summaries, use
 </sl-details>
 ```
 
-### Details Groups
+### Grouping Details
 
 Details are designed to function independently, but you can simulate a group where only one is shown at a time by listening for the `slShow` event.
 
