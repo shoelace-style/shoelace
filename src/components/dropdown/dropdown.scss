@@ -6,11 +6,10 @@
 
 .sl-dropdown {
   position: relative;
-  display: inline-block;
 }
 
 .sl-dropdown__trigger {
-  display: inline-flex;
+  display: block;
 }
 
 .sl-dropdown__panel {
