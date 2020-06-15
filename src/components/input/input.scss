@@ -5,12 +5,15 @@
 }
 
 .sl-input {
+  flex: 1 1 auto;
   display: flex;
   align-items: stretch;
   justify-content: center;
   position: relative;
   font-family: var(--sl-input-font-family);
   font-weight: var(--sl-input-font-weight);
+  line-height: var(--sl-line-height-normal);
+  letter-spacing: var(--sl-letter-spacing-normal);
   background-color: var(--sl-input-background-color);
   border: solid var(--sl-input-border-width) var(--sl-input-border-color);
   vertical-align: middle;
