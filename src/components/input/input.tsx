@@ -240,7 +240,7 @@ export class Input {
         />
 
         {this.clearable && (
-          <button class="sl-input__clear" onClick={this.handleClearClick} tabindex="-1">
+          <button class="sl-input__clear" type="button" onClick={this.handleClearClick} tabindex="-1">
             <slot name="clear-icon">
               <sl-icon name="x-circle" />
             </slot>
@@ -248,7 +248,7 @@ export class Input {
         )}
 
         {this.togglePassword && (
-          <button class="sl-input__password-toggle" onClick={this.handlePasswordToggle} tabindex="-1">
+          <button class="sl-input__password-toggle" type="button" onClick={this.handlePasswordToggle} tabindex="-1">
             {this.isPasswordVisible ? (
               <slot name="show-password-icon">
                 <sl-icon name="eye-slash" />
