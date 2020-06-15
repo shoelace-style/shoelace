@@ -202,6 +202,10 @@ export namespace Components {
     }
     interface SlDropdown {
         /**
+          * Determines whether the dropdown should hide when a menu item is selected.
+         */
+        "closeOnSelect": boolean;
+        /**
           * The dropdown will close when the user interacts outside of this element (e.g. clicking).
          */
         "containingElement": HTMLElement;
@@ -487,9 +491,21 @@ export namespace Components {
          */
         "disabled": boolean;
         /**
+          * The maximum number of tags to display before collapsing. Only applies when `multiple` is true. Set to -1 to remove the limit.
+         */
+        "maxVisibleTags": number;
+        /**
+          * Set to true to enable multiselect.
+         */
+        "multiple": boolean;
+        /**
           * The select's size.
          */
         "size": 'small' | 'medium' | 'large';
+        /**
+          * The value of the control. This will be a string unless `multiple` is true, in which case it will be an array.
+         */
+        "value": string | Array<string>;
     }
     interface SlSpinner {
         /**
@@ -1132,6 +1148,10 @@ declare namespace LocalJSX {
     }
     interface SlDropdown {
         /**
+          * Determines whether the dropdown should hide when a menu item is selected.
+         */
+        "closeOnSelect"?: boolean;
+        /**
           * The dropdown will close when the user interacts outside of this element (e.g. clicking).
          */
         "containingElement"?: HTMLElement;
@@ -1437,9 +1457,33 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
+          * The maximum number of tags to display before collapsing. Only applies when `multiple` is true. Set to -1 to remove the limit.
+         */
+        "maxVisibleTags"?: number;
+        /**
+          * Set to true to enable multiselect.
+         */
+        "multiple"?: boolean;
+        /**
+          * Emitted when the control loses focus
+         */
+        "onSlBlur"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the control's value changes.
+         */
+        "onSlChange"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the control gains focus
+         */
+        "onSlFocus"?: (event: CustomEvent<any>) => void;
+        /**
           * The select's size.
          */
         "size"?: 'small' | 'medium' | 'large';
+        /**
+          * The value of the control. This will be a string unless `multiple` is true, in which case it will be an array.
+         */
+        "value"?: string | Array<string>;
     }
     interface SlSpinner {
         /**
