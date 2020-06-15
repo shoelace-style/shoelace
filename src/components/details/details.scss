@@ -57,6 +57,11 @@
   flex: 0 0 auto;
   display: flex;
   align-items: center;
+  transition: var(--sl-transition-medium) transform ease;
+}
+
+.sl-details--open .sl-details__summary-icon {
+  transform: rotate(90deg);
 }
 
 .sl-details__body {

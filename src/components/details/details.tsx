@@ -7,8 +7,6 @@ let id = 0;
  * @status ready
  *
  * @slot summary - The text to show in the details' header. Use the `summary` prop instead for plain-text summaries.
- * @slot show-icon - The icon shown when the detail is closed.
- * @slot hide-icon - The icon shown when the detail is open.
  */
 
 @Component({
@@ -141,7 +139,7 @@ export class Details {
         }}
       >
         <div
-          ref={el => this.header = el}
+          ref={el => (this.header = el)}
           id={`${this.id}-header`}
           class="sl-details__header"
           role="button"
@@ -157,15 +155,7 @@ export class Details {
           </div>
 
           <span class="sl-details__summary-icon">
-            {this.open ? (
-              <slot name="show-icon">
-                <sl-icon name="chevron-down" />
-              </slot>
-            ) : (
-              <slot name="hide-icon">
-                <sl-icon name="chevron-right" />
-              </slot>
-            )}
+            <sl-icon name="chevron-right" />
           </span>
         </div>
 
