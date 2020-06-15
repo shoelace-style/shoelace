@@ -56,6 +56,9 @@ export class Dropdown {
     | 'left-start'
     | 'left-end' = 'bottom-start';
 
+  /** Determines whether the dropdown should hide when a menu item is selected. */
+  @Prop() closeOnSelect = true;
+
   /** The dropdown will close when the user interacts outside of this element (e.g. clicking). */
   @Prop() containingElement: HTMLElement = this.host;
 
@@ -205,7 +208,7 @@ export class Dropdown {
     const target = event.target as HTMLElement;
 
     // Hide the dropdown when a menu item is selected
-    if (target.tagName.toLowerCase() === 'sl-menu') {
+    if (this.closeOnSelect && target.tagName.toLowerCase() === 'sl-menu') {
       this.hide();
     }
   }
