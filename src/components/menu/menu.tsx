@@ -98,8 +98,8 @@ export class Menu {
     this.ignoreMouseTimeout = setTimeout(() => (this.ignoreMouseEvents = false), 500);
     this.ignoreMouseEvents = true;
 
-    // Make a selection when pressing enter
-    if (event.key === 'Enter') {
+    // Make a selection when pressing enter or space
+    if (event.key === 'Enter' || event.key === ' ') {
       const item = this.getActiveItem();
       event.preventDefault();
 
