@@ -21,10 +21,10 @@ export class TabList {
   activeTabIndicator: HTMLElement;
   body: HTMLElement;
   keyboardDetector: KeyboardDetector;
+  mutationObserver: MutationObserver;
   nav: HTMLElement;
   tabList: HTMLElement;
   tabs: HTMLElement;
-  observer: MutationObserver;
 
   constructor() {
     this.handleClick = this.handleClick.bind(this);
@@ -55,8 +55,8 @@ export class TabList {
     this.setActiveTab(this.getActiveTab() || this.getAllTabs()[0], false);
 
     // Update aria labels if the DOM changes
-    this.observer = new MutationObserver(() => setTimeout(() => this.setAriaLabels()));
-    this.observer.observe(this.host, { attributes: true, childList: true, subtree: true });
+    this.mutationObserver = new MutationObserver(() => setTimeout(() => this.setAriaLabels()));
+    this.mutationObserver.observe(this.host, { attributes: true, childList: true, subtree: true });
 
     this.keyboardDetector = new KeyboardDetector({
       whenUsing: () => (this.isUsingKeyboard = true),
@@ -66,7 +66,7 @@ export class TabList {
   }
 
   componentDidUnload() {
-    this.observer.disconnect();
+    this.mutationObserver.disconnect();
     this.keyboardDetector.unobserve(this.tabList);
   }
 
