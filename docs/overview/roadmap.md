@@ -46,8 +46,6 @@ The roadmap tracks the status of components and features that are planned, in de
 
 ## Planned 🗺
 
-### Components
-
 - [ ] Alert service
 - [ ] Button group
 - [ ] Card
