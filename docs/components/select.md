@@ -7,7 +7,7 @@ Selects...
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 
 ```html preview
-<sl-select placeholder="Select an option">
+<sl-select placeholder="Select one">
   <sl-menu-item value="option-1">Option 1</sl-menu-item>
   <sl-menu-item value="option-2">Option 2</sl-menu-item>
   <sl-menu-item value="option-3">Option 3</sl-menu-item>
@@ -36,16 +36,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 </sl-select>
 ```
 
-### Disabled
-
-```html preview
-<sl-select placeholder="Disabled" disabled>
-  <sl-menu-item value="option-1">Option 1</sl-menu-item>
-  <sl-menu-item value="option-2">Option 2</sl-menu-item>
-  <sl-menu-item value="option-3">Option 3</sl-menu-item>
-</sl-select>
-```
-
 ### Size
 
 ```html preview
@@ -66,6 +56,32 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 <br>
 
 <sl-select placeholder="Large" size="large" multiple>
+  <sl-menu-item value="option-1">Option 1</sl-menu-item>
+  <sl-menu-item value="option-2">Option 2</sl-menu-item>
+  <sl-menu-item value="option-3">Option 3</sl-menu-item>
+</sl-select>
+```
+
+### Groups
+
+```html preview
+<sl-select placeholder="Select one">
+  <sl-menu-label>Group 1</sl-menu-label>
+  <sl-menu-item value="option-1">Option 1</sl-menu-item>
+  <sl-menu-item value="option-2">Option 2</sl-menu-item>
+  <sl-menu-item value="option-3">Option 3</sl-menu-item>
+  <sl-menu-divider></sl-menu-divider>
+  <sl-menu-label>Group 2</sl-menu-label>
+  <sl-menu-item value="option-4">Option 4</sl-menu-item>
+  <sl-menu-item value="option-5">Option 5</sl-menu-item>
+  <sl-menu-item value="option-6">Option 6</sl-menu-item>
+</sl-select>
+```
+
+### Disabled
+
+```html preview
+<sl-select placeholder="Disabled" disabled>
   <sl-menu-item value="option-1">Option 1</sl-menu-item>
   <sl-menu-item value="option-2">Option 2</sl-menu-item>
   <sl-menu-item value="option-3">Option 3</sl-menu-item>
