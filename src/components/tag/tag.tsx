@@ -64,7 +64,7 @@ export class Tag {
         </span>
 
         {this.removable && (
-          <span class="sl-tag__remove" role="button" tabIndex={1} onClick={this.handleRemoveClick}>
+          <span class="sl-tag__remove" role="button" tabIndex={-1} onClick={this.handleRemoveClick}>
             <sl-icon name="x" />
           </span>
         )}
