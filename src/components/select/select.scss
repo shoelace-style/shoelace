@@ -12,6 +12,14 @@
   flex: 1 1 auto;
   width: 100%;
   cursor: pointer;
+
+  span[slot='prefix'] {
+    margin-left: var(--sl-spacing-xx-small);
+
+    sl-tag:not(:last-of-type) {
+      margin-right: var(--sl-spacing-xx-small);
+    }
+  }
 }
 
 .sl-select__icon {
@@ -20,16 +28,4 @@
 
 .sl-select--open .sl-select__icon {
   transform: rotate(-180deg);
-}
-
-.sl-select__tag {
-  background-color: var(--sl-color-gray-90);
-  color: var(--sl-color-gray-40);
-  border-radius: var(--sl-border-radius-medium);
-  line-height: 1;
-  padding: var(--sl-spacing-x-small);
-
-  + .sl-select__tag {
-    margin-left: var(--sl-spacing-xx-small);
-  }
 }
