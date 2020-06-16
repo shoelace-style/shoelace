@@ -589,6 +589,20 @@ export namespace Components {
          */
         "name": string;
     }
+    interface SlTag {
+        /**
+          * Set to true to make the tag removable.
+         */
+        "removable": boolean;
+        /**
+          * The tag's size.
+         */
+        "size": 'small' | 'medium' | 'large';
+        /**
+          * The tag's type.
+         */
+        "type": 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text';
+    }
     interface SlTextarea {
         /**
           * The textarea's autocaptialize attribute.
@@ -866,6 +880,12 @@ declare global {
         prototype: HTMLSlTabPanelElement;
         new (): HTMLSlTabPanelElement;
     };
+    interface HTMLSlTagElement extends Components.SlTag, HTMLStencilElement {
+    }
+    var HTMLSlTagElement: {
+        prototype: HTMLSlTagElement;
+        new (): HTMLSlTagElement;
+    };
     interface HTMLSlTextareaElement extends Components.SlTextarea, HTMLStencilElement {
     }
     var HTMLSlTextareaElement: {
@@ -903,6 +923,7 @@ declare global {
         "sl-tab": HTMLSlTabElement;
         "sl-tab-list": HTMLSlTabListElement;
         "sl-tab-panel": HTMLSlTabPanelElement;
+        "sl-tag": HTMLSlTagElement;
         "sl-textarea": HTMLSlTextareaElement;
         "sl-tooltip": HTMLSlTooltipElement;
     }
@@ -1571,6 +1592,24 @@ declare namespace LocalJSX {
          */
         "name"?: string;
     }
+    interface SlTag {
+        /**
+          * Emitted when the remove button is activated.
+         */
+        "onSlRemove"?: (event: CustomEvent<any>) => void;
+        /**
+          * Set to true to make the tag removable.
+         */
+        "removable"?: boolean;
+        /**
+          * The tag's size.
+         */
+        "size"?: 'small' | 'medium' | 'large';
+        /**
+          * The tag's type.
+         */
+        "type"?: 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text';
+    }
     interface SlTextarea {
         /**
           * The textarea's autocaptialize attribute.
@@ -1731,6 +1770,7 @@ declare namespace LocalJSX {
         "sl-tab": SlTab;
         "sl-tab-list": SlTabList;
         "sl-tab-panel": SlTabPanel;
+        "sl-tag": SlTag;
         "sl-textarea": SlTextarea;
         "sl-tooltip": SlTooltip;
     }
@@ -1763,6 +1803,7 @@ declare module "@stencil/core" {
             "sl-tab": LocalJSX.SlTab & JSXBase.HTMLAttributes<HTMLSlTabElement>;
             "sl-tab-list": LocalJSX.SlTabList & JSXBase.HTMLAttributes<HTMLSlTabListElement>;
             "sl-tab-panel": LocalJSX.SlTabPanel & JSXBase.HTMLAttributes<HTMLSlTabPanelElement>;
+            "sl-tag": LocalJSX.SlTag & JSXBase.HTMLAttributes<HTMLSlTagElement>;
             "sl-textarea": LocalJSX.SlTextarea & JSXBase.HTMLAttributes<HTMLSlTextareaElement>;
             "sl-tooltip": LocalJSX.SlTooltip & JSXBase.HTMLAttributes<HTMLSlTooltipElement>;
         }

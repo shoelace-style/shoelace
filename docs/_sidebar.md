@@ -38,6 +38,7 @@
   - [Tab List](/components/tab-list.md)
   - [Tab](/components/tab.md)
   - [Tab Panel](/components/tab-panel.md)
+  - [Tag](/components/tag.md)
   - [Textarea](/components/textarea.md)
   - [Tooltip](/components/tooltip.md)
 

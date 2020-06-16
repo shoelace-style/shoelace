@@ -1,0 +1,106 @@
+@import 'component';
+
+:host {
+  display: inline-block;
+  cursor: default;
+}
+
+.sl-tag {
+  display: flex;
+  align-items: center;
+  border: solid 1px;
+  border-radius: var(--sl-border-radius-medium);
+  line-height: 1;
+  white-space: nowrap;
+  user-select: none;
+  cursor: inherit;
+}
+
+.sl-tag__remove {
+  display: flex;
+  align-items: center;
+  border-radius: var(--sl-border-radius-small);
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+    box-shadow: var(--sl-focus-ring-box-shadow);
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Type modifiers
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+.sl-tag--primary {
+  background-color: var(--sl-color-primary-95);
+  border-color: var(--sl-color-primary-90);
+  color: var(--sl-color-primary-50);
+}
+
+.sl-tag--success {
+  background-color: var(--sl-color-success-95);
+  border-color: var(--sl-color-success-90);
+  color: var(--sl-color-success-50);
+}
+
+.sl-tag--info {
+  background-color: var(--sl-color-info-95);
+  border-color: var(--sl-color-info-90);
+  color: var(--sl-color-info-50);
+}
+
+.sl-tag--warning {
+  background-color: var(--sl-color-warning-95);
+  border-color: var(--sl-color-warning-90);
+  color: var(--sl-color-warning-50);
+}
+
+.sl-tag--danger {
+  background-color: var(--sl-color-danger-95);
+  border-color: var(--sl-color-danger-90);
+  color: var(--sl-color-danger-50);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Size modifiers
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+.sl-tag--small {
+  font-size: var(--sl-input-font-size-small);
+  height: calc(var(--sl-input-height-small) * 0.8);
+  line-height: calc(var(--sl-input-height-small) - var(--sl-input-border-width) * 2);
+  border-radius: var(--sl-input-border-radius-small);
+  padding: 0 var(--sl-spacing-x-small);
+
+  .sl-tag__remove {
+    margin-left: var(--sl-spacing-xx-small);
+    margin-right: calc(-1 * var(--sl-spacing-xx-small));
+  }
+}
+
+.sl-tag--medium {
+  font-size: var(--sl-input-font-size-medium);
+  height: calc(var(--sl-input-height-medium) * 0.8);
+  line-height: calc(var(--sl-input-height-medium) - var(--sl-input-border-width) * 2);
+  border-radius: var(--sl-input-border-radius-medium);
+  padding: 0 var(--sl-spacing-small);
+
+  .sl-tag__remove {
+    margin-left: var(--sl-spacing-xx-small);
+    margin-right: calc(-1 * var(--sl-spacing-x-small));
+  }
+}
+
+.sl-tag--large {
+  font-size: var(--sl-input-font-size-large);
+  height: calc(var(--sl-input-height-large) * 0.8);
+  line-height: calc(var(--sl-input-height-large) - var(--sl-input-border-width) * 2);
+  border-radius: var(--sl-input-border-radius-large);
+  padding: 0 var(--sl-spacing-medium);
+
+  .sl-tag__remove {
+    margin-left: var(--sl-spacing-xx-small);
+    margin-right: calc(-1 * var(--sl-spacing-small));
+  }
+}
