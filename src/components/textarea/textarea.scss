@@ -2,6 +2,7 @@
 
 :host {
   display: block;
+  cursor: text;
 }
 
 .sl-textarea {
@@ -17,6 +18,7 @@
   border: solid var(--sl-input-border-width) var(--sl-input-border-color);
   vertical-align: middle;
   transition: var(--sl-transition-fast) color, var(--sl-transition-fast) border, var(--sl-transition-fast) box-shadow;
+  cursor: inherit;
 
   .sl-textarea__control {
     flex: 1 1 auto;
@@ -28,6 +30,7 @@
     border: none;
     background: none;
     box-shadow: none;
+    cursor: inherit;
     -webkit-appearance: none;
 
     &::-webkit-search-decoration,
@@ -65,10 +68,9 @@
     border-color: var(--sl-input-border-color-disabled);
     color: var(--sl-input-color-disabled);
     opacity: 0.5;
+    cursor: not-allowed;
 
     .sl-textarea__control {
-      cursor: not-allowed;
-
       &::placeholder {
         color: var(--sl-input-placeholder-color-disabled);
       }

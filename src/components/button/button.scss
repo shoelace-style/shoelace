@@ -3,6 +3,7 @@
 
 :host {
   display: inline-block;
+  cursor: pointer;
 }
 
 .sl-button {
@@ -19,7 +20,7 @@
   vertical-align: middle;
   transition: var(--sl-transition-fast) background-color, var(--sl-transition-fast) color,
     var(--sl-transition-fast) border;
-  cursor: pointer;
+  cursor: inherit;
 
   &::-moz-focus-inner {
     border: 0;

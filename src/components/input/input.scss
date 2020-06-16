@@ -2,6 +2,7 @@
 
 :host {
   display: block;
+  cursor: text;
 }
 
 .sl-input {
@@ -19,7 +20,7 @@
   vertical-align: middle;
   overflow: hidden;
   transition: var(--sl-transition-fast) color, var(--sl-transition-fast) border, var(--sl-transition-fast) box-shadow;
-  cursor: text;
+  cursor: inherit;
 
   .sl-input__control {
     flex: 1 1 auto;
@@ -34,6 +35,7 @@
     box-shadow: none;
     padding: 0;
     margin: 0;
+    cursor: inherit;
     -webkit-appearance: none;
 
     &::-webkit-search-decoration,
@@ -70,10 +72,10 @@
     background-color: var(--sl-input-background-color-disabled);
     border-color: var(--sl-input-border-color-disabled);
     opacity: 0.5;
+    cursor: not-allowed;
 
     .sl-input__control {
       color: var(--sl-input-color-disabled);
-      cursor: not-allowed;
 
       &::placeholder {
         color: var(--sl-input-placeholder-color-disabled);

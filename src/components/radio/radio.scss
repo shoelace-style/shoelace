@@ -2,6 +2,7 @@
 
 :host {
   display: inline-block;
+  cursor: pointer;
 }
 
 .sl-radio {
@@ -12,7 +13,7 @@
   font-weight: var(--sl-input-font-weight);
   color: var(--sl-input-color);
   vertical-align: middle;
-  cursor: pointer;
+  cursor: inherit;
 }
 
 .sl-radio__icon {
