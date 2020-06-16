@@ -225,7 +225,7 @@
   height: var(--sl-input-height-small);
   line-height: calc(var(--sl-input-height-small) - var(--sl-input-border-width) * 2);
   border-radius: var(--sl-input-border-radius-small);
-  padding: 0 16px;
+  padding: 0 var(--sl-spacing-medium);
 }
 
 .sl-button--medium {
@@ -233,7 +233,7 @@
   height: var(--sl-input-height-medium);
   line-height: calc(var(--sl-input-height-medium) - var(--sl-input-border-width) * 2);
   border-radius: var(--sl-input-border-radius-medium);
-  padding: 0 20px;
+  padding: 0 var(--sl-spacing-large);
 }
 
 .sl-button--large {
@@ -241,7 +241,7 @@
   height: var(--sl-input-height-large);
   line-height: calc(var(--sl-input-height-large) - var(--sl-input-border-width) * 2);
   border-radius: var(--sl-input-border-radius-large);
-  padding: 0 24px;
+  padding: 0 var(--sl-spacing-x-large);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
