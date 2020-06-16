@@ -23,20 +23,23 @@ The roadmap tracks the status of components and features that are planned, in de
 - [x] Progress Ring
 - [x] Radio
 - [x] Range
-- [ ] Select (single + multi)
+- [x] Select (single + multi)
 - [x] Spinner
 - [x] Switch
 - [x] Tab List
   - [x] Tab
   - [x] Tab Panel
+- [x] Tag
 - [x] Textarea
 - [x] Tooltip
 
-### Features
+### Features / Misc.
 
+- [ ] Type-ahead selection for menu
 - [ ] Form control labels
 - [ ] Form control validation states
 - [ ] Expose [parts](https://developer.mozilla.org/en-US/docs/Web/CSS/::part) to allow more granular styling of all components
+- [ ] Ensure components are making proper use of design tokens
 
 ## 1.1.0 📦
 
@@ -50,7 +53,6 @@ The roadmap tracks the status of components and features that are planned, in de
 - [ ] Panel (aka "drawer")
 - [ ] Popover
 - [ ] Stepper
-- [ ] Token (aka "chip")
 
 ## Under Consideration 🤔
 
