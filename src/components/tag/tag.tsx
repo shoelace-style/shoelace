@@ -2,7 +2,7 @@ import { Component, Event, EventEmitter, Prop, h } from '@stencil/core';
 
 /**
  * @since 1.0.0
- * @status experimental
+ * @status ready
  *
  * @slot - The tag's content.
  */
