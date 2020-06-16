@@ -4,17 +4,8 @@ import { getTextContent } from '../../utilities/slot';
 
 /**
  * @since 1.0.0
- * @status experimental
+ * @status ready
  */
-
-//
-// TODO:
-//
-// - Users MUST be able to access items with more than the arrow keys. Instead of type-ahead search, which is arguably
-//   unintuitive, let's add an input that filters. The filter function can be overrided if necessary, but the basic
-//   filter will be case-insensitive (should we latinize it too?)
-// - Replace tags with <sl-tag> and make clearable
-//
 
 @Component({
   tag: 'sl-select',
@@ -49,10 +40,10 @@ export class Select {
   @Prop() multiple = false;
 
   /**
-   * The maximum number of tags to display before collapsing. Only applies when `multiple` is true. Set to -1 to remove
-   * the limit.
+   * The maximum number of tags to show when `multiple` is true. After the maximum, "+n" will be shown to indicate the
+   * number of additional items that are selected. Set to -1 to remove the limit.
    */
-  @Prop() maxVisibleTags = 3;
+  @Prop() maxTagsVisible = 3;
 
   /** Set to true to disable the select control. */
   @Prop() disabled = false;
@@ -63,7 +54,7 @@ export class Select {
   /** The select's size. */
   @Prop() size: 'small' | 'medium' | 'large' = 'medium';
 
-  /** The value of the control. This will be a string unless `multiple` is true, in which case it will be an array. */
+  /** The value of the control. This will be a string or an array depending on `multiple`. */
   @Prop({ mutable: true }) value: string | Array<string> = '';
 
   @Watch('multiple')
@@ -71,12 +62,12 @@ export class Select {
     // Cast to array | string based on `this.multiple`
     const value = this.getValueAsArray();
     this.value = this.multiple ? value : value[0] || '';
-    this.syncFromValue();
+    this.syncItemsFromValue();
   }
 
   @Watch('value')
   handleValueChange() {
-    this.syncFromValue();
+    this.syncItemsFromValue();
     this.slChange.emit();
   }
 
@@ -94,7 +85,7 @@ export class Select {
     this.resizeObserver = new ResizeObserver(() => this.resizeMenu());
 
     // We need to do an initial sync after the component has rendered, so this will suppress the re-render warning
-    requestAnimationFrame(() => this.syncFromValue());
+    requestAnimationFrame(() => this.syncItemsFromValue());
   }
 
   componentDidUnload() {
@@ -142,7 +133,7 @@ export class Select {
       this.value = item.value;
     }
 
-    this.syncFromValue();
+    this.syncItemsFromValue();
   }
 
   handleMenuShow(event: CustomEvent) {
@@ -163,17 +154,14 @@ export class Select {
   }
 
   handleSlotChange() {
-    //
-    // TODO - make sure all value items still exist and update items checked state
-    //
-    console.log('slotchange');
+    this.syncItemsFromValue();
   }
 
   resizeMenu() {
     this.menu.style.width = `${this.input.clientWidth}px`;
   }
 
-  syncFromValue() {
+  syncItemsFromValue() {
     const items = this.getItems();
     const value = this.getValueAsArray();
 
@@ -186,13 +174,30 @@ export class Select {
       value.map(val => items.map(item => (item.value === val ? checkedItems.push(item) : null)));
 
       this.displayTags = checkedItems.map(item => {
-        return <span class="sl-select__tag">{this.getItemLabel(item)}</span>;
+        return (
+          <sl-tag
+            type="info"
+            size={this.size}
+            removable
+            onClick={event => event.stopPropagation()}
+            onSlRemove={() => {
+              item.checked = false;
+              this.syncValueFromItems();
+            }}
+          >
+            {this.getItemLabel(item)}
+          </sl-tag>
+        );
       });
 
-      if (this.maxVisibleTags > 0 && this.displayTags.length > this.maxVisibleTags) {
+      if (this.maxTagsVisible > 0 && this.displayTags.length > this.maxTagsVisible) {
         const total = this.displayTags.length;
-        this.displayTags = this.displayTags.slice(0, this.maxVisibleTags);
-        this.displayTags.push(<span class="sl-select__tag">+{total - this.maxVisibleTags}</span>);
+        this.displayTags = this.displayTags.slice(0, this.maxTagsVisible);
+        this.displayTags.push(
+          <sl-tag type="info" size={this.size}>
+            +{total - this.maxTagsVisible}
+          </sl-tag>
+        );
       }
 
       this.displayLabel = '';
@@ -246,7 +251,11 @@ export class Select {
           onSlBlur={this.handleBlur}
           onKeyDown={this.handleKeyDown}
         >
-          {this.displayTags.length && <span slot="prefix">{this.displayTags}</span>}
+          {this.displayTags.length && (
+            <span slot="prefix" class="sl-select__tags">
+              {this.displayTags}
+            </span>
+          )}
 
           <sl-icon slot="suffix" class="sl-select__icon" name="chevron-down" />
         </sl-input>

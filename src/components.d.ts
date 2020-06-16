@@ -491,9 +491,9 @@ export namespace Components {
          */
         "disabled": boolean;
         /**
-          * The maximum number of tags to display before collapsing. Only applies when `multiple` is true. Set to -1 to remove the limit.
+          * The maximum number of tags to show when `multiple` is true. After the maximum, "+n" will be shown to indicate the number of additional items that are selected. Set to -1 to remove the limit.
          */
-        "maxVisibleTags": number;
+        "maxTagsVisible": number;
         /**
           * Set to true to enable multiselect.
          */
@@ -507,7 +507,7 @@ export namespace Components {
          */
         "size": 'small' | 'medium' | 'large';
         /**
-          * The value of the control. This will be a string unless `multiple` is true, in which case it will be an array.
+          * The value of the control. This will be a string or an array depending on `multiple`.
          */
         "value": string | Array<string>;
     }
@@ -1482,9 +1482,9 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
-          * The maximum number of tags to display before collapsing. Only applies when `multiple` is true. Set to -1 to remove the limit.
+          * The maximum number of tags to show when `multiple` is true. After the maximum, "+n" will be shown to indicate the number of additional items that are selected. Set to -1 to remove the limit.
          */
-        "maxVisibleTags"?: number;
+        "maxTagsVisible"?: number;
         /**
           * Set to true to enable multiselect.
          */
@@ -1510,7 +1510,7 @@ declare namespace LocalJSX {
          */
         "size"?: 'small' | 'medium' | 'large';
         /**
-          * The value of the control. This will be a string unless `multiple` is true, in which case it will be an array.
+          * The value of the control. This will be a string or an array depending on `multiple`.
          */
         "value"?: string | Array<string>;
     }
