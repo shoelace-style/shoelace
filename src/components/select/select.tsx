@@ -10,10 +10,9 @@ import { getTextContent } from '../../utilities/slot';
 //
 // TODO:
 //
-// - Placeholder
 // - Users MUST be able to access items with more than the arrow keys. Instead of type-ahead search, which is arguably
 //   unintuitive, let's add an input that filters. The filter function can be overrided if necessary, but the basic
-//   filter will be case-insensitive (should we latinize too?)
+//   filter will be case-insensitive (should we latinize it too?)
 // - Replace tags with <sl-tag> and make clearable
 //
 
@@ -23,8 +22,8 @@ import { getTextContent } from '../../utilities/slot';
   shadow: true
 })
 export class Select {
-  control: HTMLElement;
   dropdown: HTMLSlDropdownElement;
+  input: HTMLSlInputElement;
   menu: HTMLSlMenuElement;
   resizeObserver: any;
 
@@ -43,7 +42,8 @@ export class Select {
   @State() hasFocus = false;
   @State() isOpen = false;
   @State() items = [];
-  @State() label: any = '';
+  @State() displayLabel = '';
+  @State() displayTags = [];
 
   /** Set to true to enable multiselect. */
   @Prop() multiple = false;
@@ -56,6 +56,9 @@ export class Select {
 
   /** Set to true to disable the select control. */
   @Prop() disabled = false;
+
+  /** The select's placeholder text. */
+  @Prop() placeholder = '';
 
   /** The select's size. */
   @Prop() size: 'small' | 'medium' | 'large' = 'medium';
@@ -87,9 +90,11 @@ export class Select {
   @Event() slBlur: EventEmitter;
 
   componentDidLoad() {
-    this.syncFromValue();
     this.menu.querySelector('slot').addEventListener('slotchange', this.handleSlotChange);
     this.resizeObserver = new ResizeObserver(() => this.resizeMenu());
+
+    // We need to do an initial sync after the component has rendered, so this will suppress the re-render warning
+    requestAnimationFrame(() => this.syncFromValue());
   }
 
   componentDidUnload() {
@@ -154,7 +159,7 @@ export class Select {
   handleMenuHide() {
     this.resizeObserver.unobserve(this.host);
     this.isOpen = false;
-    this.control.focus();
+    this.input.setFocus();
   }
 
   handleSlotChange() {
@@ -165,31 +170,36 @@ export class Select {
   }
 
   resizeMenu() {
-    this.menu.style.width = `${this.control.clientWidth}px`;
+    this.menu.style.width = `${this.input.clientWidth}px`;
   }
 
   syncFromValue() {
     const items = this.getItems();
     const value = this.getValueAsArray();
-    const labels = [];
 
-    // Update checked states
+    // Sync checked states
     items.map(item => (item.checked = value.includes(item.value)));
 
-    // Set labels based on the order they appear up in `this.value`
-    value.map(v => items.map(item => (item.value === v ? labels.push(this.getItemLabel(item)) : null)));
+    // Sync display label
     if (this.multiple) {
-      this.label = labels.map(label => {
-        return <span class="sl-select__tag">{label}</span>;
+      const checkedItems = [];
+      value.map(val => items.map(item => (item.value === val ? checkedItems.push(item) : null)));
+
+      this.displayTags = checkedItems.map(item => {
+        return <span class="sl-select__tag">{this.getItemLabel(item)}</span>;
       });
 
-      if (this.maxVisibleTags > 0 && this.label.length > this.maxVisibleTags) {
-        const total = this.label.length;
-        this.label = this.label.slice(0, this.maxVisibleTags);
-        this.label.push(<span class="sl-select__tag">+{total - this.maxVisibleTags}</span>);
+      if (this.maxVisibleTags > 0 && this.displayTags.length > this.maxVisibleTags) {
+        const total = this.displayTags.length;
+        this.displayTags = this.displayTags.slice(0, this.maxVisibleTags);
+        this.displayTags.push(<span class="sl-select__tag">+{total - this.maxVisibleTags}</span>);
       }
+
+      this.displayLabel = '';
     } else {
-      this.label = labels.length > 0 ? labels[0] : '';
+      const checkedItem = items.filter(item => item.value === value[0])[0];
+      this.displayLabel = checkedItem ? this.getItemLabel(checkedItem) : '';
+      this.displayTags = [];
     }
   }
 
@@ -223,21 +233,23 @@ export class Select {
         onSlShow={this.handleMenuShow}
         onSlHide={this.handleMenuHide}
       >
-        <div
+        <sl-input
           slot="trigger"
-          ref={el => (this.control = el)}
-          class="sl-select__control"
-          role="button"
-          tabIndex={this.disabled ? -1 : 0}
-          onFocus={this.handleFocus}
-          onBlur={this.handleBlur}
+          ref={el => (this.input = el)}
+          class="sl-select__input"
+          value={this.displayLabel}
+          disabled={this.disabled}
+          placeholder={this.displayLabel === '' && this.displayTags.length === 0 ? this.placeholder : null}
+          readonly={true}
+          size={this.size}
+          onSlFocus={this.handleFocus}
+          onSlBlur={this.handleBlur}
           onKeyDown={this.handleKeyDown}
         >
-          <div class="sl-select__label">{this.label}</div>
-          <div class="sl-select__icon">
-            <sl-icon name="chevron-down" />
-          </div>
-        </div>
+          {this.displayTags.length && <span slot="prefix">{this.displayTags}</span>}
+
+          <sl-icon slot="suffix" class="sl-select__icon" name="chevron-down" />
+        </sl-input>
 
         <sl-menu ref={el => (this.menu = el)} class="sl-select__menu" onSlSelect={this.handleMenuSelect}>
           <slot />

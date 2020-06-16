@@ -499,6 +499,10 @@ export namespace Components {
          */
         "multiple": boolean;
         /**
+          * The select's placeholder text.
+         */
+        "placeholder": string;
+        /**
           * The select's size.
          */
         "size": 'small' | 'medium' | 'large';
@@ -1476,6 +1480,10 @@ declare namespace LocalJSX {
           * Emitted when the control gains focus
          */
         "onSlFocus"?: (event: CustomEvent<any>) => void;
+        /**
+          * The select's placeholder text.
+         */
+        "placeholder"?: string;
         /**
           * The select's size.
          */
