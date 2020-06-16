@@ -14,11 +14,14 @@ The roadmap tracks the status of components and features that are planned, in de
 - [x] Details
 - [x] Dialog
 - [x] Dropdown
-  - [x] Dropdown Item
-  - [x] Dropdown Divider
 - [ ] Form (necessary to make shadowed form controls easier to consume)
 - [x] Icon
 - [x] Input
+- [x] Menu
+- [x] Menu Divider
+- [x] Menu Item
+- [x] Menu Label
+- [ ] Panel (aka "drawer")
 - [x] Progress Bar
 - [x] Progress Ring
 - [x] Radio
@@ -41,22 +44,21 @@ The roadmap tracks the status of components and features that are planned, in de
 - [ ] Expose [parts](https://developer.mozilla.org/en-US/docs/Web/CSS/::part) to allow more granular styling of all components
 - [ ] Ensure components are making proper use of design tokens
 
-## 1.1.0 📦
+## Planned 🗺
 
 ### Components
 
+- [ ] Alert service
 - [ ] Button group
 - [ ] Card
 - [ ] Content Placeholder (multiple variations)
 - [ ] Date & Time Picker (possibly wrap [flatpickr](https://flatpickr.js.org/))
 - [ ] Input group
-- [ ] Panel (aka "drawer")
 - [ ] Popover
 - [ ] Stepper
 
 ## Under Consideration 🤔
 
-- [ ] Alert service
 - [ ] Carousel
 - [ ] File Button / Uploader
 - [ ] Fit text to container
