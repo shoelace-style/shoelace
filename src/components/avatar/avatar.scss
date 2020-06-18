@@ -5,15 +5,14 @@
   * @prop --size: The size of the avatar.
   */
 :host {
-  display: inline-flex;
+  display: inline-block;
 
   --background-color: var(--sl-color-gray-80);
   --size: 3rem;
 }
 
 .sl-avatar {
-  flex: 1 1 auto;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   position: relative;
@@ -26,6 +25,7 @@
   color: var(--sl-color-white);
   overflow: hidden;
   user-select: none;
+  vertical-align: middle;
 }
 
 .sl-avatar--circle {

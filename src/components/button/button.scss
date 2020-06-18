@@ -7,7 +7,7 @@
 }
 
 .sl-button {
-  display: flex;
+  display: inline-flex;
   align-items: stretch;
   justify-content: center;
   width: 100%;
@@ -35,27 +35,27 @@
     cursor: not-allowed;
   }
 
-  .sl-button__prefix,
-  .sl-button__suffix {
-    flex: 0 0 auto;
-    display: flex;
-    align-items: center;
-  }
-
-  .sl-button__prefix ::slotted(:first-child) {
-    margin-left: calc(-1 * var(--sl-spacing-x-small));
-    margin-right: var(--sl-spacing-x-small);
-  }
-
-  .sl-button__suffix ::slotted(:last-child) {
-    margin-left: var(--sl-spacing-x-small);
-    margin-right: calc(-1 * var(--sl-spacing-x-small));
-  }
-
   // Clicks on icons shouldn't prevent the button from gaining focus
   ::slotted(sl-icon) {
     pointer-events: none;
   }
+}
+
+.sl-button__prefix,
+.sl-button__suffix {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+.sl-button__prefix ::slotted(:first-child) {
+  margin-left: calc(-1 * var(--sl-spacing-x-small));
+  margin-right: var(--sl-spacing-x-small);
+}
+
+.sl-button__suffix ::slotted(:last-child) {
+  margin-left: var(--sl-spacing-x-small);
+  margin-right: calc(-1 * var(--sl-spacing-x-small));
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -69,7 +69,7 @@ Block buttons can be created by setting the button's width to `100%`.
 ```html preview
 <sl-button type="default" size="small" style="width: 100%; margin-bottom: 1rem;">Small</sl-button>
 <sl-button type="default" size="medium" style="width: 100%; margin-bottom: 1rem;">Medium</sl-button>
-<sl-button type="default" size="large" style="width: 100%; margin-bottom: 1rem;">Large</sl-button>
+<sl-button type="default" size="large" style="width: 100%;">Large</sl-button>
 ```
 
 ### Icons
@@ -81,10 +81,12 @@ Use the `prefix` and `suffix` slots to add icons.
   <sl-icon slot="prefix" name="gear"></sl-icon>
   Settings
 </sl-button>
+
 <sl-button type="default">
   <sl-icon slot="suffix" name="arrow-counterclockwise"></sl-icon>
   Refresh
 </sl-button>
+
 <sl-button type="default">
   <sl-icon slot="prefix" name="link-45deg"></sl-icon>
   <sl-icon slot="suffix" name="box-arrow-up-right"></sl-icon>
