@@ -131,10 +131,6 @@ export class Button {
         )}
 
         {this.loading && <span class="sl-button__spinner" />}
-
-        <span class="sl-button__split">
-          <slot name="split" />
-        </span>
       </button>
     );
   }
