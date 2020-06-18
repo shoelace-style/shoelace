@@ -59,7 +59,7 @@ export class Tag {
           'sl-tag--removable': this.removable
         }}
       >
-        <span class="sl-tag__label">
+        <span class="sl-tag__content">
           <slot />
         </span>
 
