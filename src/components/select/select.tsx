@@ -211,11 +211,12 @@ export class Select {
   syncValueFromItems() {
     const items = this.getItems();
     const checkedItems = items.filter(item => item.checked);
+    const checkedValues = checkedItems.map(item => item.value);
 
     if (this.multiple) {
-      this.value = checkedItems.map(item => item.value);
+      this.value = (this.value as []).filter(val => checkedValues.includes(val));
     } else {
-      this.value = checkedItems.length > 0 ? checkedItems[0].value : '';
+      this.value = checkedValues.length > 0 ? checkedValues[0] : '';
     }
   }
 
