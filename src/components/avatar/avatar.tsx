@@ -49,7 +49,7 @@ export class Avatar {
         {!this.initials && (
           <div class="sl-avatar__icon">
             <slot name="icon">
-              <sl-icon name="person" />
+              <sl-icon name="person-fill" />
             </slot>
           </div>
         )}
