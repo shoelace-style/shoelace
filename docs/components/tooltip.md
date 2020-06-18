@@ -110,7 +110,7 @@ A tooltip's target is its _first child element_, so you should only wrap one ele
 ### Click Trigger
 
 ```html preview
-<sl-tooltip content="I am shown and hidden programmatically" trigger="click">
+<sl-tooltip content="Click again to dismiss me" trigger="click">
   <sl-button>Click to Toggle</sl-button>
 </sl-tooltip>
 ```
