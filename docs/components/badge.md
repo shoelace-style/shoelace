@@ -21,7 +21,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 </sl-button>
 ```
 
-[component-metadata:sl-tag]
+[component-metadata:sl-badge]
 
 ## Examples
 
