@@ -7,18 +7,18 @@ Dialogs...
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 
 ```html preview
-<sl-dialog label="Dialog" id="dialog-overview">
+<sl-dialog label="Dialog" class="dialog-overview">
   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-  <sl-button slot="footer" type="primary" id="dialog-overview-close">Close</sl-button>
+  <sl-button slot="footer" type="primary">Close</sl-button>
 </sl-dialog>
 
-<sl-button id="dialog-overview-open">Open Dialog</sl-button>
+<sl-button>Open Dialog</sl-button>
 
 <script>
   (() => {
-    const dialog = document.querySelector('#dialog-overview');
-    const openButton = document.querySelector('#dialog-overview-open');
-    const closeButton = document.querySelector('#dialog-overview-close');
+    const dialog = document.querySelector('.dialog-overview');
+    const openButton = dialog.nextElementSibling;
+    const closeButton = dialog.querySelector('sl-button[slot="footer"]');
     
     openButton.addEventListener('click', () => dialog.show());
     closeButton.addEventListener('click', () => dialog.hide());
@@ -33,7 +33,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 ### Scrolling
 
 ```html preview
-<sl-dialog label="Dialog" id="dialog-scrolling">
+<sl-dialog label="Dialog" class="dialog-scrolling">
   <div style="height: 150vh; border: dashed 1px var(--sl-color-gray-80); padding: 0 1rem;">
     <p>
       By design, the dialog's height will never exceed that of the viewport. As such, the dialog won't scroll with the 
@@ -41,16 +41,16 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
     </p>
     <p>Give it a try! 👇</p>
   </div>
-  <sl-button slot="footer" type="primary" id="dialog-scrolling-close">Close</sl-button>
+  <sl-button slot="footer" type="primary">Close</sl-button>
 </sl-dialog>
 
-<sl-button id="dialog-scrolling-open">Open Dialog</sl-button>
+<sl-button>Open Dialog</sl-button>
 
 <script>
   (() => {
-    const dialog = document.querySelector('#dialog-scrolling');
-    const openButton = document.querySelector('#dialog-scrolling-open');
-    const closeButton = document.querySelector('#dialog-scrolling-close');
+    const dialog = document.querySelector('.dialog-scrolling');
+    const openButton = dialog.nextElementSibling;
+    const closeButton = dialog.querySelector('sl-button[slot="footer"]');
     
     openButton.addEventListener('click', () => dialog.show());
     closeButton.addEventListener('click', () => dialog.hide());

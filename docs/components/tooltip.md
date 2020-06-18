@@ -120,13 +120,13 @@ A tooltip's target is its _first child element_, so you should only wrap one ele
 ```html preview
 <sl-button style="margin-right: 4rem;">Toggle Manually</sl-button>
 
-<sl-tooltip content="This is an avatar" trigger="manual">
+<sl-tooltip content="This is an avatar" class="manual-tooltip">
   <sl-avatar></sl-avatar>
 </sl-tooltip>
 
 
 <script>
-  const tooltip = document.querySelector('sl-tooltip[trigger="manual"]');
+  const tooltip = document.querySelector('.manual-tooltip');
   const toggle = tooltip.previousElementSibling;
 
   toggle.addEventListener('click', () => tooltip.open = !tooltip.open);

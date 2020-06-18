@@ -17,10 +17,11 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 ### Custom Formatter
 
 ```html preview
-<sl-range id="range-with-custom-formatter" min="0" max="100" step="1"></sl-range>
+<sl-range min="0" max="100" step="1" class="range-with-custom-formatter"></sl-range>
 
 <script>
-  document.querySelector('#range-with-custom-formatter').tooltipFormatter = value => `Total - ${value}%`;
+  const range = document.querySelector('.range-with-custom-formatter');
+  range.tooltipFormatter = value => `Total - ${value}%`;
 </script>
 ```
 
