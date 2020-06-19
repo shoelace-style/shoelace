@@ -54,12 +54,6 @@ export class Menu {
     this.host.blur();
   }
 
-  /** Passes key presses to the control. Useful for managing the menu when other elements have focus. */
-  @Method()
-  async sendKeyEvent(event: KeyboardEvent) {
-    this.handleKeyDown(event);
-  }
-
   getItems() {
     const slot = this.host.shadowRoot.querySelector('slot');
     return [...slot.assignedElements({ flatten: true })].filter(
@@ -111,11 +105,6 @@ export class Menu {
     this.ignoreMouseTimeout = setTimeout(() => (this.ignoreMouseEvents = false), 500);
     this.ignoreMouseEvents = true;
 
-    // Prevent scrolling when certain keys are pressed
-    if ([' ', 'ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
-      event.preventDefault();
-    }
-
     // Make a selection when pressing enter
     if (event.key === 'Enter') {
       const item = this.getActiveItem();
@@ -145,8 +134,8 @@ export class Menu {
           index = items.length - 1;
         }
 
-        if (index < 0) index = 0;
-        if (index > items.length - 1) index = items.length - 1;
+        if (index < 0) index = items.length - 1;
+        if (index > items.length - 1) index = 0;
 
         this.setActiveItem(items[index]);
         this.scrollItemIntoView(items[index]);

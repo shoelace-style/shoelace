@@ -189,6 +189,11 @@ export class Dropdown {
       });
     }
 
+    // Prevent scrolling when certain keys are pressed
+    if ([' ', 'ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
+      event.preventDefault();
+    }
+
     const menu = this.getMenu();
 
     // If a menu is present, focus on it when certain keys are pressed
@@ -198,10 +203,10 @@ export class Dropdown {
       return;
     }
 
-    // All other keys should focus the menu and pass through the event to type-to-search
+    // All other keys focus the menu and pass the event through to menu (necessary for type-to-search to work)
     if (menu && event.target !== menu) {
       menu.setFocus();
-      menu.sendKeyEvent(event);
+      menu.dispatchEvent(new KeyboardEvent(event.type, event));
       return;
     }
   }
