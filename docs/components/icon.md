@@ -4,7 +4,7 @@
 
 Icons are symbols that can be used to represent or provide context to various options and actions within an application.
 
-Shoelace comes bundled with over 600 icons courtesy of the [Bootstrap Icons](https://icons.getbootstrap.com/) project. You can also use your own SVG icons with this component with the `src` attribute.
+Shoelace comes bundled with over 600 icons courtesy of the [Bootstrap Icons](https://icons.getbootstrap.com/) project. You can also use your own SVG icons with this component through the `src` attribute.
 
 <div class="icon-search">
   <div class="icon-search-controls">
@@ -12,8 +12,8 @@ Shoelace comes bundled with over 600 icons courtesy of the [Bootstrap Icons](htt
       <sl-icon slot="prefix" name="search"></sl-icon>
     </sl-input>
     <sl-select value="outline">
-      <sl-menu-item value="outline">Outlined icons</sl-menu-item>
-      <sl-menu-item value="fill">Filled icons</sl-menu-item>
+      <sl-menu-item value="outline">Outlined</sl-menu-item>
+      <sl-menu-item value="fill">Filled</sl-menu-item>
       <sl-menu-item value="all">All icons</sl-menu-item>
     </sl-select>
   </div>

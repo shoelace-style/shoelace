@@ -21,11 +21,11 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 ### Size
 
 ```html preview
-<sl-tag size="small" type="primary">Primary</sl-tag>
-<sl-tag size="small" type="success">Success</sl-tag>
-<sl-tag size="small" type="info">Info</sl-tag>
-<sl-tag size="small" type="warning">Warning</sl-tag>
-<sl-tag size="small" type="danger">Danger</sl-tag>
+<sl-tag type="primary" size="small">Primary</sl-tag>
+<sl-tag type="success" size="small">Success</sl-tag>
+<sl-tag type="info" size="small">Info</sl-tag>
+<sl-tag type="warning" size="small">Warning</sl-tag>
+<sl-tag type="danger" size="small">Danger</sl-tag>
 
 <br><br>
 
@@ -47,25 +47,25 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 ### Removable
 
 ```html preview
-<sl-tag removable size="small" type="primary">Primary</sl-tag>
-<sl-tag removable size="small" type="success">Success</sl-tag>
-<sl-tag removable size="small" type="info">Info</sl-tag>
-<sl-tag removable size="small" type="warning">Warning</sl-tag>
-<sl-tag removable size="small" type="danger">Danger</sl-tag>
+<sl-tag type="primary" size="small" removable>Primary</sl-tag>
+<sl-tag type="success" size="small" removable>Success</sl-tag>
+<sl-tag type="info" size="small" removable>Info</sl-tag>
+<sl-tag type="warning" size="small" removable>Warning</sl-tag>
+<sl-tag type="danger" size="small" removable>Danger</sl-tag>
 
 <br><br>
 
-<sl-tag removable size="medium" type="primary">Primary</sl-tag>
-<sl-tag removable size="medium" type="success">Success</sl-tag>
-<sl-tag removable size="medium" type="info">Info</sl-tag>
-<sl-tag removable size="medium" type="warning">Warning</sl-tag>
-<sl-tag removable size="medium" type="danger">Danger</sl-tag>
+<sl-tag size="medium" type="primary" removable>Primary</sl-tag>
+<sl-tag size="medium" type="success" removable>Success</sl-tag>
+<sl-tag size="medium" type="info" removable>Info</sl-tag>
+<sl-tag size="medium" type="warning" removable>Warning</sl-tag>
+<sl-tag size="medium" type="danger" removable>Danger</sl-tag>
 
 <br><br>
 
-<sl-tag removable size="large" type="primary">Primary</sl-tag>
-<sl-tag removable size="large" type="success">Success</sl-tag>
-<sl-tag removable size="large" type="info">Info</sl-tag>
-<sl-tag removable size="large" type="warning">Warning</sl-tag>
-<sl-tag removable size="large" type="danger">Danger</sl-tag>
+<sl-tag size="large" type="primary" removable>Primary</sl-tag>
+<sl-tag size="large" type="success" removable>Success</sl-tag>
+<sl-tag size="large" type="info" removable>Info</sl-tag>
+<sl-tag size="large" type="warning" removable>Warning</sl-tag>
+<sl-tag size="large" type="danger" removable>Danger</sl-tag>
 ```

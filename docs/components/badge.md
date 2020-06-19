@@ -12,13 +12,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 <sl-badge type="info">Info</sl-badge>
 <sl-badge type="warning">Warning</sl-badge>
 <sl-badge type="danger">Danger</sl-badge>
-
-<br><br>
-
-<sl-button>
-  Unread
-  <sl-badge>12</sl-badge>
-</sl-button>
 ```
 
 [component-metadata:sl-badge]
