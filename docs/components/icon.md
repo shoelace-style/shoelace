@@ -4,14 +4,22 @@
 
 Icons are symbols that can be used to represent or provide context to various options and actions within an application.
 
-Shoelace comes bundled with over 600 icons courtesy of the [Bootstrap Icons](https://icons.getbootstrap.com/) project. However, you can also use your own SVG icons with the `src` attribute.
-
-Hover to see the respective icon's `name` or click to copy the HTML tag to the clipboard.
+Shoelace comes bundled with over 600 icons courtesy of the [Bootstrap Icons](https://icons.getbootstrap.com/) project. You can also use your own SVG icons with this component with the `src` attribute.
 
 <div class="icon-search">
-  <sl-input placeholder="Search Icons" clearable class="icon-search"></sl-input>
+  <div class="icon-search-controls">
+    <sl-input placeholder="Search Icons" clearable>
+      <sl-icon slot="prefix" name="search"></sl-icon>
+    </sl-input>
+    <sl-select value="outline">
+      <sl-menu-item value="outline">Outlined icons</sl-menu-item>
+      <sl-menu-item value="fill">Filled icons</sl-menu-item>
+      <sl-menu-item value="all">All icons</sl-menu-item>
+    </sl-select>
+  </div>
   <div class="icon-loader"><sl-spinner size="48"></sl-spinner></div>
   <div class="icon-list" hidden></div>
+  <div class="icon-no-results" hidden>No Results</div>
   <input type="text" class="icon-copy-input">
 </div>
 
@@ -50,15 +58,17 @@ Icon sizes are determined by the current font size.
     .then(icons => {
       const container = document.querySelector('.icon-search');
       const input = container.querySelector('sl-input');
+      const select = container.querySelector('sl-select');
       const copyInput = container.querySelector('.icon-copy-input');
       const loader = container.querySelector('.icon-loader');
       const list = container.querySelector('.icon-list');
       const queue = [];
 
+      // Generate icons
       icons.map(i => {
         const icon = document.createElement('sl-icon');
         icon.setAttribute('data-name', i.name);
-        icon.setAttribute('data-terms', [...i.tags || [], i.categories || [], i.title].join(' '));
+        icon.setAttribute('data-terms', [i.name, i.title, ...(i.tags || []), ...(i.categories || [])].join(' '));
         icon.name = i.name;
 
         const tooltip = document.createElement('sl-tooltip');
@@ -73,7 +83,7 @@ Icon sizes are determined by the current font size.
         }));
 
         icon.addEventListener('click', () => {
-          copyInput.value = `<sl-icon name="${i.name}"></sl-icon>`;
+          copyInput.value = i.name;
           copyInput.select();
           document.execCommand('copy');
           tooltip.content = 'Copied!';
@@ -81,11 +91,13 @@ Icon sizes are determined by the current font size.
         });
       });
 
+      // Wait for all icons to load
       Promise.all(queue).then(() => {
         list.hidden = false;
         loader.hidden = true;
       });
 
+      // Filter as the user types
       input.addEventListener('slInput', () => {
         [...list.querySelectorAll('sl-icon')].map(slIcon => {
           if (input.value === '') {
@@ -97,10 +109,38 @@ Icon sizes are determined by the current font size.
           }
         });
       });
+
+      // Sort by type and remember preference
+      const iconType = localStorage.getItem('sl-icon:type') || 'outline';
+      select.value = iconType;
+      list.setAttribute('data-type', select.value);
+      select.addEventListener('slChange', () => {
+        list.setAttribute('data-type', select.value);
+        localStorage.setItem('sl-icon:type', select.value);
+      });
     });
 </script>
 
 <style>
+  .icon-search {
+    border: solid 1px var(--sl-color-gray-90);
+    border-radius: var(--sl-border-radius-medium);
+    padding: var(--sl-spacing-medium);
+  }
+
+  .icon-search-controls {
+    display: flex;
+  }
+
+  .icon-search-controls sl-input {
+    flex: 1 1 auto;
+  }
+
+  .icon-search-controls sl-select {
+    flex: 0 0 auto;
+    margin-left: 1rem;
+  }
+
   .icon-loader {
     display: flex;
     align-items: center;
@@ -109,8 +149,8 @@ Icon sizes are determined by the current font size.
   }
 
   .icon-list {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
     margin-top: 1rem;
   }
 
@@ -121,8 +161,9 @@ Icon sizes are determined by the current font size.
 
   .icon-list sl-icon {
     font-size: 32px;
-    border-radius: var(--sl-border-radius-medium);
+    border-radius: var(--sl-border-radius-circle);
     padding: .5em;
+    margin: auto;
     transition: var(--sl-transition-medium) all;
     cursor: pointer;
   }
@@ -132,9 +173,36 @@ Icon sizes are determined by the current font size.
     color: var(--sl-color-primary-50);
   }
 
+  .icon-list[data-type="outline"] sl-icon[data-name$="-fill"] {
+    display: none;
+  }
+
+  .icon-list[data-type="fill"] sl-icon:not([data-name$="-fill"]) {
+    display: none;
+  }
+
   .icon-copy-input {
     position: absolute;
     opacity: 0;
     pointer-events: none;
   }
+
+  @media screen and (max-width: 1000px) {
+    .icon-search-controls {
+      display: block;
+    }
+
+    .icon-search-controls sl-select {
+      margin-left: 0;
+      margin-top: 1rem;
+    }
+
+    .icon-list {
+      grid-template-columns: repeat(6, 1fr);
+    }
+
+    .icon-list sl-icon {
+      font-size: 24px;
+    }    
+  }  
 </style>
