@@ -373,6 +373,14 @@ export namespace Components {
     }
     interface SlMenu {
         /**
+          * Removes focus from the menu.
+         */
+        "removeFocus": () => Promise<void>;
+        /**
+          * Passes key presses to the control. Useful for managing the menu when other elements have focus.
+         */
+        "sendKeyEvent": (event: KeyboardEvent) => Promise<void>;
+        /**
           * Sets focus on the menu.
          */
         "setFocus": () => Promise<void>;

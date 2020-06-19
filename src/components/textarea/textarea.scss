@@ -20,36 +20,6 @@
   transition: var(--sl-transition-fast) color, var(--sl-transition-fast) border, var(--sl-transition-fast) box-shadow;
   cursor: inherit;
 
-  .sl-textarea__control {
-    flex: 1 1 auto;
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-    line-height: 1.4;
-    color: var(--sl-input-color);
-    border: none;
-    background: none;
-    box-shadow: none;
-    cursor: inherit;
-    -webkit-appearance: none;
-
-    &::-webkit-search-decoration,
-    &::-webkit-search-cancel-button,
-    &::-webkit-search-results-button,
-    &::-webkit-search-results-decoration {
-      -webkit-appearance: none;
-    }
-
-    &::placeholder {
-      color: var(--sl-input-placeholder-color);
-      user-select: none;
-    }
-
-    &:focus {
-      outline: none;
-    }
-  }
-
   &:hover:not(.sl-textarea--disabled) {
     background-color: var(--sl-input-background-color-hover);
     border-color: var(--sl-input-border-color-hover);
@@ -75,6 +45,36 @@
         color: var(--sl-input-placeholder-color-disabled);
       }
     }
+  }
+}
+
+.sl-textarea__control {
+  flex: 1 1 auto;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: 1.4;
+  color: var(--sl-input-color);
+  border: none;
+  background: none;
+  box-shadow: none;
+  cursor: inherit;
+  -webkit-appearance: none;
+
+  &::-webkit-search-decoration,
+  &::-webkit-search-cancel-button,
+  &::-webkit-search-results-button,
+  &::-webkit-search-results-decoration {
+    -webkit-appearance: none;
+  }
+
+  &::placeholder {
+    color: var(--sl-input-placeholder-color);
+    user-select: none;
+  }
+
+  &:focus {
+    outline: none;
   }
 }
 

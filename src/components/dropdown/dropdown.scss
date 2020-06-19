@@ -26,6 +26,6 @@
   transition: var(--sl-transition-fast) opacity;
 
   ::slotted(sl-menu) {
-    --max-height: 50vh;
+    max-height: 50vh;
   }
 }

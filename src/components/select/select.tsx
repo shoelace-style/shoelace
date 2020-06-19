@@ -22,6 +22,7 @@ export class Select {
     this.handleBlur = this.handleBlur.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleMenuKeyDown = this.handleMenuKeyDown.bind(this);
     this.handleMenuHide = this.handleMenuHide.bind(this);
     this.handleMenuShow = this.handleMenuShow.bind(this);
     this.handleMenuSelect = this.handleMenuSelect.bind(this);
@@ -116,10 +117,16 @@ export class Select {
   }
 
   handleKeyDown(event: KeyboardEvent) {
-    if (!this.isOpen && (event.key === 'Enter' || event.key === ' ')) {
+    // Open the dropdown when enter is pressed
+    if (!this.isOpen && event.key === 'Enter') {
       this.dropdown.show();
       event.preventDefault();
+      return;
     }
+  }
+
+  handleMenuKeyDown(event: KeyboardEvent) {
+    event.stopPropagation();
   }
 
   handleMenuSelect(event: CustomEvent) {
@@ -261,7 +268,12 @@ export class Select {
           <sl-icon slot="suffix" class="sl-select__icon" name="chevron-down" />
         </sl-input>
 
-        <sl-menu ref={el => (this.menu = el)} class="sl-select__menu" onSlSelect={this.handleMenuSelect}>
+        <sl-menu
+          ref={el => (this.menu = el)}
+          class="sl-select__menu"
+          onSlSelect={this.handleMenuSelect}
+          onKeyDown={this.handleMenuKeyDown}
+        >
           <slot />
         </sl-menu>
       </sl-dropdown>

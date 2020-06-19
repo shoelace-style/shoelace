@@ -1,5 +1,6 @@
-import { Component, Element, Event, EventEmitter, Method, h } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, Host, Method, h } from '@stencil/core';
 import { scrollIntoView } from '../../utilities/scroll';
+import { getTextContent } from '../../utilities/slot';
 
 /**
  * @since 1.0.0
@@ -17,6 +18,8 @@ export class Menu {
   ignoreMouseEvents = false;
   ignoreMouseTimeout: any;
   menu: HTMLElement;
+  typeToSelect = '';
+  typeToSelectTimeout: any;
 
   constructor() {
     this.handleBlur = this.handleBlur.bind(this);
@@ -42,11 +45,23 @@ export class Menu {
   /** Sets focus on the menu. */
   @Method()
   async setFocus() {
-    this.menu.focus();
+    this.host.focus();
+  }
+
+  /** Removes focus from the menu. */
+  @Method()
+  async removeFocus() {
+    this.host.blur();
+  }
+
+  /** Passes key presses to the control. Useful for managing the menu when other elements have focus. */
+  @Method()
+  async sendKeyEvent(event: KeyboardEvent) {
+    this.handleKeyDown(event);
   }
 
   getItems() {
-    const slot = this.menu.querySelector('slot');
+    const slot = this.host.shadowRoot.querySelector('slot');
     return [...slot.assignedElements({ flatten: true })].filter(
       (el: any) => el.tagName.toLowerCase() === 'sl-menu-item' && !el.disabled
     ) as [HTMLSlMenuItemElement];
@@ -62,7 +77,7 @@ export class Menu {
 
   scrollItemIntoView(item: HTMLSlMenuItemElement) {
     if (item) {
-      scrollIntoView(item, this.menu);
+      scrollIntoView(item, this.host);
     }
   }
 
@@ -83,8 +98,6 @@ export class Menu {
     const target = event.target as HTMLElement;
     const item = target.closest('sl-menu-item');
 
-    this.menu.focus();
-
     if (item && !item.disabled) {
       this.slSelect.emit({ item });
     }
@@ -98,8 +111,13 @@ export class Menu {
     this.ignoreMouseTimeout = setTimeout(() => (this.ignoreMouseEvents = false), 500);
     this.ignoreMouseEvents = true;
 
-    // Make a selection when pressing enter or space
-    if (event.key === 'Enter' || event.key === ' ') {
+    // Prevent scrolling when certain keys are pressed
+    if ([' ', 'ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
+      event.preventDefault();
+    }
+
+    // Make a selection when pressing enter
+    if (event.key === 'Enter') {
       const item = this.getActiveItem();
       event.preventDefault();
 
@@ -136,11 +154,33 @@ export class Menu {
         return;
       }
     }
+
+    // Handle type-to-search behavior when non-control characters are entered
+    if (event.key === ' ' || /^[\d\w]$/i.test(event.key)) {
+      clearTimeout(this.typeToSelectTimeout);
+      this.typeToSelectTimeout = setTimeout(() => (this.typeToSelect = ''), 750);
+      this.typeToSelect += event.key;
+
+      const items = this.getItems();
+      for (const item of items) {
+        const slot = item.shadowRoot.querySelector('slot:not([name])') as HTMLSlotElement;
+        const label = getTextContent(slot).toLowerCase().trim();
+        if (label.substring(0, this.typeToSelect.length) === this.typeToSelect) {
+          items.map(i => (i.active = i === item));
+          break;
+        }
+      }
+    }
   }
 
   handleMouseDown(event: MouseEvent) {
-    // Prevent the menu's focus from being lost when interacting with items, dividers, and headers
-    event.preventDefault();
+    const target = event.target as HTMLElement;
+    const menuItem = target.closest('sl-menu-item:not([disabled])');
+
+    // Prevent the menu's focus from being lost when interacting with non-menu items
+    if (!menuItem) {
+      event.preventDefault();
+    }
   }
 
   handleMouseOver(event: MouseEvent) {
@@ -163,9 +203,7 @@ export class Menu {
 
   render() {
     return (
-      <div
-        ref={el => (this.menu = el)}
-        class="sl-menu"
+      <Host
         tabIndex={0}
         role="menu"
         onClick={this.handleClick}
@@ -177,7 +215,7 @@ export class Menu {
         onMouseOut={this.handleMouseOut}
       >
         <slot />
-      </div>
+      </Host>
     );
   }
 }

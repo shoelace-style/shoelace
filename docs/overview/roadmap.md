@@ -2,9 +2,7 @@
 
 The roadmap tracks the status of components and features that are planned, in development, and under consideration.
 
-## 1.0.0 📦
-
-### Components
+## 2.0 🚀
 
 - [x] Alert
 - [x] Avatar
@@ -14,19 +12,19 @@ The roadmap tracks the status of components and features that are planned, in de
 - [x] Details
 - [x] Dialog
 - [x] Dropdown
-- [ ] Form (necessary to make shadowed form controls easier to consume)
+- [ ] Form
 - [x] Icon
 - [x] Input
 - [x] Menu
 - [x] Menu Divider
 - [x] Menu Item
 - [x] Menu Label
-- [ ] Panel (aka "drawer")
+- [ ] Panel
 - [x] Progress Bar
 - [x] Progress Ring
 - [x] Radio
 - [x] Range
-- [x] Select (single + multi)
+- [x] Select
 - [x] Spinner
 - [x] Switch
 - [x] Tab List
@@ -36,29 +34,20 @@ The roadmap tracks the status of components and features that are planned, in de
 - [x] Textarea
 - [x] Tooltip
 
-### Features / Misc.
+## 2.1 📦
 
-- [ ] Type-ahead selection for menu
-- [ ] Form control labels
-- [ ] Form control validation states
-- [ ] Expose [parts](https://developer.mozilla.org/en-US/docs/Web/CSS/::part) to allow more granular styling of all components
-- [ ] Ensure components are making proper use of design tokens
-
-## Planned 🗺
-
-- [ ] Alert service
+- [ ] Alert service (aka "toast")
 - [ ] Button group
-- [ ] Card
-- [ ] Content Placeholder (multiple variations)
-- [ ] Date & Time Picker (possibly wrap [flatpickr](https://flatpickr.js.org/))
 - [ ] Input group
-- [ ] Popover
-- [ ] Stepper
 
 ## Under Consideration 🤔
 
+- [ ] Card
 - [ ] Carousel
+- [ ] Content Placeholders
+- [ ] Date & Time Picker
 - [ ] File Button / Uploader
 - [ ] Fit text to container
-- [ ] Graphing components (based on [Chart.js](https://www.chartjs.org/))
-- [ ] Table (probably a `<table>` wrapper that implements styles, sorting, and some other features)
+- [ ] Graphing components based on [Chart.js](https://www.chartjs.org/)
+- [ ] Popover
+- [ ] Stepper

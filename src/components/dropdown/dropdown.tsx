@@ -162,6 +162,13 @@ export class Dropdown {
     document.removeEventListener('keydown', this.handleDocumentKeyDown);
   }
 
+  getMenu() {
+    return this.panel
+      .querySelector('slot')
+      .assignedElements({ flatten: true })
+      .filter(el => el.tagName.toLowerCase() === 'sl-menu')[0] as HTMLSlMenuElement;
+  }
+
   handleDocumentKeyDown(event: KeyboardEvent) {
     // Close when escape is pressed
     if (event.key === 'Escape') {
@@ -182,15 +189,20 @@ export class Dropdown {
       });
     }
 
-    // If a menu is present, focus on it when up/down is pressed
-    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
-      const elements = this.panel.querySelector('slot').assignedElements({ flatten: true });
-      const menu = elements.filter(el => el.tagName.toLowerCase() === 'sl-menu')[0] as HTMLSlMenuElement;
+    const menu = this.getMenu();
 
-      if (menu) {
-        menu.setFocus();
-        event.preventDefault();
-      }
+    // If a menu is present, focus on it when certain keys are pressed
+    if (menu && ['ArrowDown', 'ArrowUp'].includes(event.key)) {
+      event.preventDefault();
+      menu.setFocus();
+      return;
+    }
+
+    // All other keys should focus the menu and pass through the event to type-to-search
+    if (menu && event.target !== menu) {
+      menu.setFocus();
+      menu.sendKeyEvent(event);
+      return;
     }
   }
 

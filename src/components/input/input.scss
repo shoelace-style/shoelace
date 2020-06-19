@@ -22,39 +22,6 @@
   transition: var(--sl-transition-fast) color, var(--sl-transition-fast) border, var(--sl-transition-fast) box-shadow;
   cursor: inherit;
 
-  .sl-input__control {
-    flex: 1 1 auto;
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-    min-width: 0;
-    height: 100%;
-    color: var(--sl-input-color);
-    border: none;
-    background: none;
-    box-shadow: none;
-    padding: 0;
-    margin: 0;
-    cursor: inherit;
-    -webkit-appearance: none;
-
-    &::-webkit-search-decoration,
-    &::-webkit-search-cancel-button,
-    &::-webkit-search-results-button,
-    &::-webkit-search-results-decoration {
-      -webkit-appearance: none;
-    }
-
-    &::placeholder {
-      color: var(--sl-input-placeholder-color);
-      user-select: none;
-    }
-
-    &:focus {
-      outline: none;
-    }
-  }
-
   &:hover:not(.sl-input--disabled) {
     background-color: var(--sl-input-background-color-hover);
     border-color: var(--sl-input-border-color-hover);
@@ -82,14 +49,47 @@
       }
     }
   }
+}
 
-  .sl-input__prefix,
-  .sl-input__suffix {
-    display: flex;
-    flex: 0 0 auto;
-    align-items: center;
-    color: var(--sl-input-icon-color);
+.sl-input__control {
+  flex: 1 1 auto;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  min-width: 0;
+  height: 100%;
+  color: var(--sl-input-color);
+  border: none;
+  background: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+  cursor: inherit;
+  -webkit-appearance: none;
+
+  &::-webkit-search-decoration,
+  &::-webkit-search-cancel-button,
+  &::-webkit-search-results-button,
+  &::-webkit-search-results-decoration {
+    -webkit-appearance: none;
   }
+
+  &::placeholder {
+    color: var(--sl-input-placeholder-color);
+    user-select: none;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.sl-input__prefix,
+.sl-input__suffix {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  color: var(--sl-input-icon-color);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
