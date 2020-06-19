@@ -1,4 +1,4 @@
-import { Component, Prop, State, Watch, getAssetPath, h } from '@stencil/core';
+import { Component, Event, EventEmitter, Prop, State, Watch, getAssetPath, h } from '@stencil/core';
 
 import { requestIcon } from './request';
 
@@ -27,6 +27,12 @@ export class Icon {
   /** An alternative description to use for accessibility. If omitted, the name or src will be used to generate it. */
   @Prop() label: string;
 
+  /** Emitted when the icon has loaded. */
+  @Event() slLoad: EventEmitter;
+
+  /** Emitted when the icon failed to load. */
+  @Event() slError: EventEmitter;
+
   @Watch('name')
   @Watch('src')
   handleChange() {
@@ -53,16 +59,20 @@ export class Icon {
 
   setIcon() {
     const url = this.name ? getAssetPath(`./icons/${this.name}.svg`) : this.src;
-    requestIcon(url).then(source => {
-      const doc = parser.parseFromString(source, 'text/html');
-      const svg = doc.body.querySelector('svg');
+    requestIcon(url)
+      .then(source => {
+        const doc = parser.parseFromString(source, 'text/html');
+        const svg = doc.body.querySelector('svg');
 
-      if (svg) {
-        this.svg = svg.outerHTML;
-      } else {
-        this.svg = '';
-      }
-    });
+        if (svg) {
+          this.svg = svg.outerHTML;
+          this.slLoad.emit();
+        } else {
+          this.svg = '';
+          this.slError.emit();
+        }
+      })
+      .catch(error => this.slError.emit(error));
   }
 
   render() {

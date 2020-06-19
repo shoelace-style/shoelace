@@ -1253,6 +1253,14 @@ declare namespace LocalJSX {
          */
         "name"?: string;
         /**
+          * Emitted when the icon failed to load.
+         */
+        "onSlError"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the icon has loaded.
+         */
+        "onSlLoad"?: (event: CustomEvent<any>) => void;
+        /**
           * An external URL of an SVG file.
          */
         "src"?: string;
