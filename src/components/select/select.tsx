@@ -85,6 +85,8 @@ export class Select {
     this.menu.querySelector('slot').addEventListener('slotchange', this.handleSlotChange);
     this.resizeObserver = new ResizeObserver(() => this.resizeMenu());
 
+    this.reportDuplicateItemValues();
+
     // We need to do an initial sync after the component has rendered, so this will suppress the re-render warning
     requestAnimationFrame(() => this.syncItemsFromValue());
   }
@@ -162,6 +164,17 @@ export class Select {
 
   handleSlotChange() {
     this.syncItemsFromValue();
+    this.reportDuplicateItemValues();
+  }
+
+  reportDuplicateItemValues() {
+    const items = this.getItems();
+
+    // Report duplicate values since they can break selection logic
+    const duplicateValues = items.map(item => item.value).filter((e, i, a) => a.indexOf(e) !== i);
+    if (duplicateValues.length) {
+      throw new Error('Duplicate value found on <sl-menu-item> in <sl-select>: "' + duplicateValues.join('", "') + '"');
+    }
   }
 
   resizeMenu() {
