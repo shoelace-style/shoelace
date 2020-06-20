@@ -11,9 +11,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
   <sl-menu-item value="option-1">Option 1</sl-menu-item>
   <sl-menu-item value="option-2">Option 2</sl-menu-item>
   <sl-menu-item value="option-3">Option 3</sl-menu-item>
-  <sl-menu-item value="cat">Cat</sl-menu-item>
-  <sl-menu-item value="dog">Dog</sl-menu-item>
-  <sl-menu-item value="monkey">Monkey</sl-menu-item>
   <sl-menu-divider></sl-menu-divider>
   <sl-menu-item value="option-4">Option 4</sl-menu-item>
   <sl-menu-item value="option-5">Option 5</sl-menu-item>
