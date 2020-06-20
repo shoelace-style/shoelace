@@ -115,6 +115,11 @@ export class Menu {
       }
     }
 
+    // Prevent scrolling when space is pressed
+    if (event.key === ' ') {
+      event.preventDefault();
+    }
+
     // Move the selection when pressing down or up
     if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
       const items = this.getItems();
