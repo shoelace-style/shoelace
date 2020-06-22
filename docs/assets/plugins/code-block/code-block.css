@@ -22,12 +22,13 @@
   align-items: center;
   justify-content: center;
   position: absolute;
-  background-color: white;
-  color: var(--sl-color-gray-40);
   top: 0;
   right: 0;
   bottom: 0;
   width: 1.75rem;
+  font-size: 20px;
+  color: var(--sl-color-gray-50);
+  background-color: white;
   border-left: solid 1px var(--sl-color-gray-90);
   border-top-right-radius: 3px;
   cursor: ew-resize;
