@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, Host, Method, Prop, State, h } from '@stencil/core';
+import { Component, Event, EventEmitter, Method, Prop, State, h } from '@stencil/core';
 
 /**
  * @since 1.0.0
@@ -22,30 +22,28 @@ export class Button {
     this.handleFocus = this.handleFocus.bind(this);
   }
 
-  @Element() host: HTMLSlButtonElement;
-
   @State() hasFocus = false;
 
   /** The button's type. */
-  @Prop({ reflect: true }) type: 'default' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text' = 'default';
+  @Prop() type: 'default' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text' = 'default';
 
   /** The button's size. */
-  @Prop({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
+  @Prop() size: 'small' | 'medium' | 'large' = 'medium';
 
   /** Set to true to draw the button with a caret for use with dropdowns, popovers, etc. */
-  @Prop({ reflect: true }) caret = false;
+  @Prop() caret = false;
 
   /** Set to true to disable the button. */
-  @Prop({ reflect: true }) disabled = false;
+  @Prop() disabled = false;
 
   /** Set to true to draw the button in a loading state. */
-  @Prop({ reflect: true }) loading = false;
+  @Prop() loading = false;
 
   /** Set to true to draw a pill-style button with rounded edges. */
-  @Prop({ reflect: true }) pill = false;
+  @Prop() pill = false;
 
   /** Set to true to draw a circle button. */
-  @Prop({ reflect: true }) circle = false;
+  @Prop() circle = false;
 
   /** Emitted when the button loses focus. */
   @Event() slBlur: EventEmitter;
@@ -77,41 +75,63 @@ export class Button {
 
   render() {
     return (
-      <Host>
-        <button
-          id="button"
-          ref={el => (this.button = el)}
-          disabled={this.disabled}
-          onBlur={this.handleBlur}
-          onFocus={this.handleFocus}
-        >
-          <span id="prefix">
-            <slot name="prefix" />
-          </span>
-          <span id="label">
-            <slot />
-          </span>
-          <span id="suffix">
-            <slot name="suffix" />
-          </span>
-          {this.caret && (
-            <span id="caret">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </span>
-          )}
+      <button
+        ref={el => (this.button = el)}
+        class={{
+          'sl-button': true,
 
-          {this.loading && <span id="spinner" />}
-        </button>
-      </Host>
+          // Types
+          'sl-button--default': this.type === 'default',
+          'sl-button--primary': this.type === 'primary',
+          'sl-button--success': this.type === 'success',
+          'sl-button--info': this.type === 'info',
+          'sl-button--warning': this.type === 'warning',
+          'sl-button--danger': this.type === 'danger',
+          'sl-button--text': this.type === 'text',
+
+          // Sizes
+          'sl-button--small': this.size === 'small',
+          'sl-button--medium': this.size === 'medium',
+          'sl-button--large': this.size === 'large',
+
+          // Modifiers
+          'sl-button--caret': this.caret,
+          'sl-button--circle': this.circle,
+          'sl-button--disabled': this.disabled,
+          'sl-button--focused': this.hasFocus,
+          'sl-button--loading': this.loading,
+          'sl-button--pill': this.pill
+        }}
+        disabled={this.disabled}
+        onBlur={this.handleBlur}
+        onFocus={this.handleFocus}
+      >
+        <span class="sl-button__prefix">
+          <slot name="prefix" />
+        </span>
+        <span class="sl-button__label">
+          <slot />
+        </span>
+        <span class="sl-button__suffix">
+          <slot name="suffix" />
+        </span>
+        {this.caret && (
+          <span class="sl-button__caret">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </span>
+        )}
+
+        {this.loading && <span class="sl-button__spinner" />}
+      </button>
     );
   }
 }

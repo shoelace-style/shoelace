@@ -1,10 +1,12 @@
 @import 'component';
+@import 'mixins/make-button';
 
 :host {
   display: inline-block;
+  cursor: pointer;
 }
 
-#button {
+.sl-button {
   display: inline-flex;
   align-items: stretch;
   justify-content: center;
@@ -18,7 +20,7 @@
   vertical-align: middle;
   transition: var(--sl-transition-fast) background-color, var(--sl-transition-fast) color,
     var(--sl-transition-fast) border;
-  cursor: pointer;
+  cursor: inherit;
 
   &::-moz-focus-inner {
     border: 0;
@@ -39,19 +41,19 @@
   }
 }
 
-#prefix,
-#suffix {
+.sl-button__prefix,
+.sl-button__suffix {
   flex: 0 0 auto;
   display: flex;
   align-items: center;
 }
 
-#prefix ::slotted(:first-child) {
+.sl-button__prefix ::slotted(:first-child) {
   margin-left: calc(-1 * var(--sl-spacing-x-small));
   margin-right: var(--sl-spacing-x-small);
 }
 
-#suffix ::slotted(:last-child) {
+.sl-button__suffix ::slotted(:last-child) {
   margin-left: var(--sl-spacing-x-small);
   margin-right: calc(-1 * var(--sl-spacing-x-small));
 }
@@ -60,171 +62,119 @@
 // Standard buttons
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-:host([type='default']) {
-  #button {
-    background-color: var(--sl-color-white);
-    border-color: var(--sl-color-gray-80);
-    color: var(--sl-color-gray-40);
-
-    &:hover:not(:disabled) {
-      background-color: var(--sl-color-primary-95);
-      border-color: var(--sl-color-primary-80);
-      color: var(--sl-color-primary-40);
-    }
-
-    &:focus:not(:disabled) {
-      background-color: var(--sl-color-primary-95);
-      border-color: var(--sl-color-primary-70);
-      color: var(--sl-color-primary-40);
-      box-shadow: 0 0 0 var(--sl-focus-ring-width)
-        hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha));
-    }
-
-    &:active:not(:disabled) {
-      background-color: var(--sl-color-primary-95);
-      border-color: var(--sl-color-primary-50);
-      color: var(--sl-color-primary-30);
-    }
+.sl-button {
+  &.sl-button--default {
+    @include make-button(
+      $background-color: var(--sl-color-white),
+      $border-color: var(--sl-color-gray-80),
+      $color: var(--sl-color-gray-40),
+      $background-color--hover: var(--sl-color-primary-95),
+      $border-color--hover: var(--sl-color-primary-80),
+      $color--hover: var(--sl-color-primary-40),
+      $background-color--focus: var(--sl-color-primary-95),
+      $border-color--focus: var(--sl-color-primary-70),
+      $color--focus: var(--sl-color-primary-40),
+      $box-shadow--focus: 0 0 0 var(--sl-focus-ring-width)
+        hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha)),
+      $background-color--active: var(--sl-color-primary-95),
+      $border-color--active: var(--sl-color-primary-50),
+      $color--active: var(--sl-color-primary-30)
+    );
   }
-}
 
-:host([type='primary']) {
-  #button {
-    background-color: var(--sl-color-primary-50);
-    border-color: var(--sl-color-primary-50);
-    color: var(--sl-color-primary-text);
-
-    &:hover:not(:disabled) {
-      background-color: var(--sl-color-primary-60);
-      border-color: var(--sl-color-primary-60);
-      color: var(--sl-color-primary-text);
-    }
-
-    &:focus:not(:disabled) {
-      background-color: var(--sl-color-primary-60);
-      border-color: var(--sl-color-primary-60);
-      color: var(--sl-color-primary-text);
-      box-shadow: 0 0 0 var(--sl-focus-ring-width)
-        hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha));
-    }
-
-    &:active:not(:disabled) {
-      background-color: var(--sl-color-primary-50);
-      border-color: var(--sl-color-primary-50);
-      color: var(--sl-color-primary-text);
-    }
+  &.sl-button--primary {
+    @include make-button(
+      $background-color: var(--sl-color-primary-50),
+      $border-color: var(--sl-color-primary-50),
+      $color: var(--sl-color-primary-text),
+      $background-color--hover: var(--sl-color-primary-60),
+      $border-color--hover: var(--sl-color-primary-60),
+      $color--hover: var(--sl-color-primary-text),
+      $background-color--focus: var(--sl-color-primary-60),
+      $border-color--focus: var(--sl-color-primary-60),
+      $color--focus: var(--sl-color-primary-text),
+      $box-shadow--focus: 0 0 0 var(--sl-focus-ring-width)
+        hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha)),
+      $background-color--active: var(--sl-color-primary-50),
+      $border-color--active: var(--sl-color-primary-50),
+      $color--active: var(--sl-color-primary-text)
+    );
   }
-}
 
-:host([type='success']) {
-  #button {
-    background-color: var(--sl-color-success-50);
-    border-color: var(--sl-color-success-50);
-    color: var(--sl-color-success-text);
-
-    &:hover:not(:disabled) {
-      background-color: var(--sl-color-success-60);
-      border-color: var(--sl-color-success-60);
-      color: var(--sl-color-success-text);
-    }
-
-    &:focus:not(:disabled) {
-      background-color: var(--sl-color-success-60);
-      border-color: var(--sl-color-success-60);
-      color: var(--sl-color-success-text);
-      box-shadow: 0 0 0 var(--sl-focus-ring-width)
-        hsla(var(--sl-color-success-hue), var(--sl-color-success-saturation), 50%, var(--sl-focus-ring-alpha));
-    }
-
-    &:active:not(:disabled) {
-      background-color: var(--sl-color-success-50);
-      border-color: var(--sl-color-success-50);
-      color: var(--sl-color-success-text);
-    }
+  &.sl-button--success {
+    @include make-button(
+      $background-color: var(--sl-color-success-50),
+      $border-color: var(--sl-color-success-50),
+      $color: var(--sl-color-success-text),
+      $background-color--hover: var(--sl-color-success-60),
+      $border-color--hover: var(--sl-color-success-60),
+      $color--hover: var(--sl-color-success-text),
+      $background-color--focus: var(--sl-color-success-60),
+      $border-color--focus: var(--sl-color-success-60),
+      $color--focus: var(--sl-color-success-text),
+      $box-shadow--focus: 0 0 0 var(--sl-focus-ring-width)
+        hsla(var(--sl-color-success-hue), var(--sl-color-success-saturation), 50%, var(--sl-focus-ring-alpha)),
+      $background-color--active: var(--sl-color-success-50),
+      $border-color--active: var(--sl-color-success-50),
+      $color--active: var(--sl-color-success-text)
+    );
   }
-}
 
-:host([type='info']) {
-  #button {
-    background-color: var(--sl-color-info-50);
-    border-color: var(--sl-color-info-50);
-    color: var(--sl-color-info-text);
-
-    &:hover:not(:disabled) {
-      background-color: var(--sl-color-info-60);
-      border-color: var(--sl-color-info-60);
-      color: var(--sl-color-info-text);
-    }
-
-    &:focus:not(:disabled) {
-      background-color: var(--sl-color-info-60);
-      border-color: var(--sl-color-info-60);
-      color: var(--sl-color-info-text);
-      box-shadow: 0 0 0 var(--sl-focus-ring-width)
-        hsla(var(--sl-color-info-hue), var(--sl-color-info-saturation), 50%, var(--sl-focus-ring-alpha));
-    }
-
-    &:active:not(:disabled) {
-      background-color: var(--sl-color-info-50);
-      border-color: var(--sl-color-info-50);
-      color: var(--sl-color-info-text);
-    }
+  &.sl-button--info {
+    @include make-button(
+      $background-color: var(--sl-color-info-50),
+      $border-color: var(--sl-color-info-50),
+      $color: var(--sl-color-info-text),
+      $background-color--hover: var(--sl-color-info-60),
+      $border-color--hover: var(--sl-color-info-60),
+      $color--hover: var(--sl-color-info-text),
+      $background-color--focus: var(--sl-color-info-60),
+      $border-color--focus: var(--sl-color-info-60),
+      $color--focus: var(--sl-color-info-text),
+      $box-shadow--focus: 0 0 0 var(--sl-focus-ring-width)
+        hsla(var(--sl-color-info-hue), var(--sl-color-info-saturation), 50%, var(--sl-focus-ring-alpha)),
+      $background-color--active: var(--sl-color-info-50),
+      $border-color--active: var(--sl-color-info-50),
+      $color--active: var(--sl-color-info-text)
+    );
   }
-}
 
-:host([type='warning']) {
-  #button {
-    background-color: var(--sl-color-warning-50);
-    border-color: var(--sl-color-warning-50);
-    color: var(--sl-color-warning-text);
-
-    &:hover:not(:disabled) {
-      background-color: var(--sl-color-warning-60);
-      border-color: var(--sl-color-warning-60);
-      color: var(--sl-color-warning-text);
-    }
-
-    &:focus:not(:disabled) {
-      background-color: var(--sl-color-warning-60);
-      border-color: var(--sl-color-warning-60);
-      color: var(--sl-color-warning-text);
-      box-shadow: 0 0 0 var(--sl-focus-ring-width)
-        hsla(var(--sl-color-warning-hue), var(--sl-color-warning-saturation), 50%, var(--sl-focus-ring-alpha));
-    }
-
-    &:active:not(:disabled) {
-      background-color: var(--sl-color-warning-50);
-      border-color: var(--sl-color-warning-50);
-      color: var(--sl-color-warning-text);
-    }
+  &.sl-button--warning {
+    @include make-button(
+      $background-color: var(--sl-color-warning-50),
+      $border-color: var(--sl-color-warning-50),
+      $color: var(--sl-color-warning-text),
+      $background-color--hover: var(--sl-color-warning-60),
+      $border-color--hover: var(--sl-color-warning-60),
+      $color--hover: var(--sl-color-warning-text),
+      $background-color--focus: var(--sl-color-warning-60),
+      $border-color--focus: var(--sl-color-warning-60),
+      $color--focus: var(--sl-color-warning-text),
+      $box-shadow--focus: 0 0 0 var(--sl-focus-ring-width)
+        hsla(var(--sl-color-warning-hue), var(--sl-color-warning-saturation), 50%, var(--sl-focus-ring-alpha)),
+      $background-color--active: var(--sl-color-warning-50),
+      $border-color--active: var(--sl-color-warning-50),
+      $color--active: var(--sl-color-warning-text)
+    );
   }
-}
 
-:host([type='danger']) {
-  #button {
-    background-color: var(--sl-color-danger-50);
-    border-color: var(--sl-color-danger-50);
-    color: var(--sl-color-danger-text);
-
-    &:hover:not(:disabled) {
-      background-color: var(--sl-color-danger-60);
-      border-color: var(--sl-color-danger-60);
-      color: var(--sl-color-danger-text);
-    }
-
-    &:focus:not(:disabled) {
-      background-color: var(--sl-color-danger-60);
-      border-color: var(--sl-color-danger-60);
-      color: var(--sl-color-danger-text);
-      box-shadow: 0 0 0 var(--sl-focus-ring-width)
-        hsla(var(--sl-color-danger-hue), var(--sl-color-danger-saturation), 50%, var(--sl-focus-ring-alpha));
-    }
-
-    &:active:not(:disabled) {
-      background-color: var(--sl-color-danger-50);
-      border-color: var(--sl-color-danger-50);
-      color: var(--sl-color-danger-text);
-    }
+  &.sl-button--danger {
+    @include make-button(
+      $background-color: var(--sl-color-danger-50),
+      $border-color: var(--sl-color-danger-50),
+      $color: var(--sl-color-danger-text),
+      $background-color--hover: var(--sl-color-danger-60),
+      $border-color--hover: var(--sl-color-danger-60),
+      $color--hover: var(--sl-color-danger-text),
+      $background-color--focus: var(--sl-color-danger-60),
+      $border-color--focus: var(--sl-color-danger-60),
+      $color--focus: var(--sl-color-danger-text),
+      $box-shadow--focus: 0 0 0 var(--sl-focus-ring-width)
+        hsla(var(--sl-color-danger-hue), var(--sl-color-danger-saturation), 50%, var(--sl-focus-ring-alpha)),
+      $background-color--active: var(--sl-color-danger-50),
+      $border-color--active: var(--sl-color-danger-50),
+      $color--active: var(--sl-color-danger-text)
+    );
   }
 }
 
@@ -232,131 +182,119 @@
 // Text buttons
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-:host([type='text']) {
-  #button {
+.sl-button--text {
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--sl-color-primary-50);
+
+  &:hover:not(:disabled) {
     background-color: transparent;
     border-color: transparent;
-    color: var(--sl-color-primary-50);
-
-    &:hover:not(:disabled) {
-      background-color: transparent;
-      border-color: transparent;
-      color: var(--sl-color-primary-60);
-    }
-
-    &:focus:not(:disabled) {
-      background-color: transparent;
-      border-color: transparent;
-      color: var(--sl-color-primary-60);
-      box-shadow: 0 0 0 var(--sl-focus-ring-width)
-        hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha));
-    }
-
-    &:active:not(:disabled) {
-      background-color: transparent;
-      border-color: transparent;
-      color: var(--sl-color-primary-40);
-    }
+    color: var(--sl-color-primary-60);
   }
+
+  &:focus:not(:disabled) {
+    background-color: transparent;
+    border-color: transparent;
+    color: var(--sl-color-primary-60);
+    box-shadow: 0 0 0 var(--sl-focus-ring-width)
+      hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha));
+  }
+
+  &:active:not(:disabled) {
+    background-color: transparent;
+    border-color: transparent;
+    color: var(--sl-color-primary-40);
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Block modifier
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+.sl-button--block {
+  width: 100%;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Size modifiers
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-:host([size='small']) {
+.sl-button--small {
+  font-size: var(--sl-input-font-size-small);
+  height: var(--sl-input-height-small);
+  line-height: calc(var(--sl-input-height-small) - var(--sl-input-border-width) * 2);
   border-radius: var(--sl-input-border-radius-small);
-
-  #button {
-    font-size: var(--sl-input-font-size-small);
-    height: var(--sl-input-height-small);
-    line-height: calc(var(--sl-input-height-small) - var(--sl-input-border-width) * 2);
-    border-radius: inherit;
-    padding: 0 var(--sl-spacing-medium);
-  }
+  padding: 0 var(--sl-spacing-medium);
 }
 
-:host([size='medium']) {
+.sl-button--medium {
+  font-size: var(--sl-input-font-size-medium);
+  height: var(--sl-input-height-medium);
+  line-height: calc(var(--sl-input-height-medium) - var(--sl-input-border-width) * 2);
   border-radius: var(--sl-input-border-radius-medium);
-
-  #button {
-    font-size: var(--sl-input-font-size-medium);
-    height: var(--sl-input-height-medium);
-    line-height: calc(var(--sl-input-height-medium) - var(--sl-input-border-width) * 2);
-    border-radius: inherit;
-    padding: 0 var(--sl-spacing-large);
-  }
+  padding: 0 var(--sl-spacing-large);
 }
 
-:host([size='large']) {
+.sl-button--large {
+  font-size: var(--sl-input-font-size-large);
+  height: var(--sl-input-height-large);
+  line-height: calc(var(--sl-input-height-large) - var(--sl-input-border-width) * 2);
   border-radius: var(--sl-input-border-radius-large);
-
-  #button {
-    font-size: var(--sl-input-font-size-large);
-    height: var(--sl-input-height-large);
-    line-height: calc(var(--sl-input-height-large) - var(--sl-input-border-width) * 2);
-    border-radius: inherit;
-    padding: 0 var(--sl-spacing-x-large);
-  }
+  padding: 0 var(--sl-spacing-x-large);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Pill modifier
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-:host([pill][size='small']) {
-  border-radius: var(--sl-input-height-small);
-}
+.sl-button--pill {
+  &.sl-button--small {
+    border-radius: var(--sl-input-height-small);
+  }
 
-:host([pill][size='medium']) {
-  border-radius: var(--sl-input-height-medium);
-}
+  &.sl-button--medium {
+    border-radius: var(--sl-input-height-medium);
+  }
 
-:host([pill][size='large']) {
-  border-radius: var(--sl-input-height-large);
+  &.sl-button--large {
+    border-radius: var(--sl-input-height-large);
+  }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Circle modifier
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-:host([circle]) {
-  #button {
-    padding-left: 0;
-    padding-right: 0;
-  }
+.sl-button--circle {
+  padding-left: 0;
+  padding-right: 0;
 
-  #label {
+  .sl-button__label {
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-  #prefix,
-  #suffix,
-  #caret {
-    display: none;
-  }
-}
-
-:host([circle][size='small']) {
-  #button {
+  &.sl-button--small {
     width: var(--sl-input-height-small);
     border-radius: 50%;
   }
-}
 
-:host([circle][size='medium']) {
-  #button {
+  &.sl-button--medium {
     width: var(--sl-input-height-medium);
     border-radius: 50%;
   }
-}
 
-:host([circle][size='large']) {
-  #button {
+  &.sl-button--large {
     width: var(--sl-input-height-large);
     border-radius: 50%;
+  }
+
+  .sl-button__prefix,
+  .sl-button__suffix,
+  .sl-button__caret {
+    display: none;
   }
 }
 
@@ -364,12 +302,12 @@
 // Caret modifier
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-:host([caret]) {
-  #suffix {
+.sl-button--caret {
+  .sl-button__suffix {
     display: none;
   }
 
-  #caret {
+  .sl-button__caret {
     display: flex;
     align-items: center;
     margin-left: var(--sl-spacing-xx-small);
@@ -386,20 +324,18 @@
 // Loading modifier
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-:host([loading]) {
-  #button {
-    position: relative;
-    pointer-events: none;
-  }
+.sl-button--loading {
+  position: relative;
+  pointer-events: none;
 
-  #prefix,
-  #label,
-  #suffix,
-  #caret {
+  .sl-button__prefix,
+  .sl-button__label,
+  .sl-button__suffix,
+  .sl-button__caret {
     visibility: hidden;
   }
 
-  #spinner {
+  .sl-button__spinner {
     position: absolute;
     top: calc(50% - 0.5em);
     left: calc(50% - 0.5em);
@@ -425,7 +361,7 @@
 // Badges
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#button ::slotted(sl-badge) {
+.sl-button ::slotted(sl-badge) {
   position: absolute;
   top: 0;
   right: 0;
