@@ -34,8 +34,11 @@
 
   &:focus {
     outline: none;
-    box-shadow: var(--sl-focus-ring-box-shadow);
   }
+}
+
+.focus-visible .details__header:focus {
+  box-shadow: var(--sl-focus-ring-box-shadow);
 }
 
 .details--disabled .details__header {

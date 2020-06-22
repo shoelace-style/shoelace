@@ -1,4 +1,5 @@
 import { Component, Event, EventEmitter, Method, Prop, Watch, h } from '@stencil/core';
+import { focusVisible } from '../../utilities/focus-visible';
 
 let id = 0;
 
@@ -15,6 +16,7 @@ let id = 0;
   shadow: true
 })
 export class Details {
+  details: HTMLElement;
   header: HTMLElement;
   id = `details-${++id}`;
   body: HTMLElement;
@@ -52,10 +54,16 @@ export class Details {
   @Event() slAfterHide: EventEmitter;
 
   componentDidLoad() {
+    focusVisible.observe(this.details);
+
     // Show on init if open
     if (this.open) {
       this.show();
     }
+  }
+
+  componentDidUnload() {
+    focusVisible.observe(this.details);
   }
 
   /** Shows the alert. */
@@ -132,6 +140,7 @@ export class Details {
   render() {
     return (
       <div
+        ref={el => (this.details = el)}
         class={{
           details: true,
           'details--open': this.open,

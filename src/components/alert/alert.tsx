@@ -1,4 +1,5 @@
 import { Component, Element, Event, EventEmitter, Host, Method, Prop, Watch, h } from '@stencil/core';
+import { focusVisible } from '../../utilities/focus-visible';
 
 /**
  * @since 1.0.0
@@ -51,10 +52,16 @@ export class Tab {
   @Event() slAfterHide: EventEmitter;
 
   componentDidLoad() {
+    focusVisible.observe(this.alert);
+
     // Show on init if open
     if (this.open) {
       this.show();
     }
+  }
+
+  componentDidUnload() {
+    focusVisible.unobserve(this.alert);
   }
 
   /** Shows the alert. */

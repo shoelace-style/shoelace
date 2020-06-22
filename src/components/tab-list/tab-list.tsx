@@ -1,6 +1,7 @@
 import { Component, Element, Event, EventEmitter, Method, Prop, Watch, h } from '@stencil/core';
 import { getOffset } from '../../utilities/offset';
 import { scrollIntoView } from '../../utilities/scroll';
+import { focusVisible } from '../../utilities/focus-visible';
 
 /**
  * @since 1.0.0
@@ -49,6 +50,7 @@ export class TabList {
     // Set initial tab state
     this.setAriaLabels();
     this.setActiveTab(this.getActiveTab() || this.getAllTabs()[0], false);
+    focusVisible.observe(this.tabList);
 
     // Update aria labels if the DOM changes
     this.mutationObserver = new MutationObserver(() => setTimeout(() => this.setAriaLabels()));
@@ -56,6 +58,7 @@ export class TabList {
   }
 
   componentDidUnload() {
+    focusVisible.unobserve(this.tabList);
     this.mutationObserver.disconnect();
   }
 

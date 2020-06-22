@@ -1,5 +1,6 @@
 import { Component, Element, Event, EventEmitter, Host, Method, Prop, Watch, h } from '@stencil/core';
 import { lockBodyScrolling, unlockBodyScrolling } from '../../utilities/scroll';
+import { focusVisible } from '../../utilities/focus-visible';
 
 let id = 0;
 
@@ -70,6 +71,8 @@ export class Dialog {
   @Event() slAfterHide: EventEmitter;
 
   componentDidLoad() {
+    focusVisible.observe(this.dialog);
+
     // Show on init if open
     if (this.open) {
       this.show();
@@ -77,6 +80,7 @@ export class Dialog {
   }
 
   componentDidUnload() {
+    focusVisible.unobserve(this.dialog);
     unlockBodyScrolling(this.host);
   }
 

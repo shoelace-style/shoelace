@@ -19,6 +19,11 @@
     position: absolute;
     transition: var(--sl-transition-fast) transform ease, var(--sl-transition-fast) width ease;
   }
+
+  // Remove the focus ring when the user isn't interacting with a keyboard
+  &:not(.focus-visible) ::slotted(sl-tab) {
+    --focus-ring-box-shadow: none;
+  }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
