@@ -5,7 +5,7 @@
   cursor: text;
 }
 
-.sl-input {
+.input {
   flex: 1 1 auto;
   display: inline-flex;
   align-items: stretch;
@@ -23,26 +23,26 @@
   transition: var(--sl-transition-fast) color, var(--sl-transition-fast) border, var(--sl-transition-fast) box-shadow;
   cursor: inherit;
 
-  &:hover:not(.sl-input--disabled) {
+  &:hover:not(.input--disabled) {
     background-color: var(--sl-input-background-color-hover);
     border-color: var(--sl-input-border-color-hover);
     color: var(--sl-input-color-hover);
   }
 
-  &.sl-input--focused:not(.sl-input--disabled) {
+  &.input--focused:not(.input--disabled) {
     background-color: var(--sl-input-background-color-focus);
     border-color: var(--sl-input-border-color-focus);
     box-shadow: var(--sl-focus-ring-box-shadow);
     color: var(--sl-input-color-focus);
   }
 
-  &.sl-input--disabled {
+  &.input--disabled {
     background-color: var(--sl-input-background-color-disabled);
     border-color: var(--sl-input-border-color-disabled);
     opacity: 0.5;
     cursor: not-allowed;
 
-    .sl-input__control {
+    .input__control {
       color: var(--sl-input-color-disabled);
 
       &::placeholder {
@@ -52,7 +52,7 @@
   }
 }
 
-.sl-input__control {
+.input__control {
   flex: 1 1 auto;
   font-family: inherit;
   font-size: inherit;
@@ -85,8 +85,8 @@
   }
 }
 
-.sl-input__prefix,
-.sl-input__suffix {
+.input__prefix,
+.input__suffix {
   display: inline-flex;
   flex: 0 0 auto;
   align-items: center;
@@ -97,80 +97,80 @@
 // Size modifiers
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sl-input--small {
+.input--small {
   border-radius: var(--sl-input-border-radius-small);
   font-size: var(--sl-input-font-size-small);
   height: var(--sl-input-height-small);
   line-height: calc(var(--sl-input-height-small) - var(--sl-input-border-width) * 2);
 
-  .sl-input__control {
+  .input__control {
     height: calc(var(--sl-input-height-small) - var(--sl-input-border-width) * 2);
     line-height: calc(var(--sl-input-height-small) - var(--sl-input-border-width) * 2);
     margin: 0 var(--sl-input-spacing-small);
   }
 
-  .sl-input__clear,
-  .sl-input__password-toggle {
+  .input__clear,
+  .input__password-toggle {
     margin-right: var(--sl-input-spacing-small);
   }
 
-  .sl-input__prefix ::slotted(*) {
+  .input__prefix ::slotted(*) {
     margin-left: var(--sl-input-spacing-small);
   }
 
-  .sl-input__suffix ::slotted(*) {
+  .input__suffix ::slotted(*) {
     margin-right: var(--sl-input-spacing-small);
   }
 }
 
-.sl-input--medium {
+.input--medium {
   border-radius: var(--sl-input-border-radius-medium);
   font-size: var(--sl-input-font-size-medium);
   height: var(--sl-input-height-medium);
   line-height: calc(var(--sl-input-height-medium) - var(--sl-input-border-width) * 2);
 
-  .sl-input__control {
+  .input__control {
     height: calc(var(--sl-input-height-medium) - var(--sl-input-border-width) * 2);
     line-height: calc(var(--sl-input-height-medium) - var(--sl-input-border-width) * 2);
     margin: 0 var(--sl-input-spacing-medium);
   }
 
-  .sl-input__clear,
-  .sl-input__password-toggle {
+  .input__clear,
+  .input__password-toggle {
     margin-right: var(--sl-input-spacing-medium);
   }
 
-  .sl-input__prefix ::slotted(*) {
+  .input__prefix ::slotted(*) {
     margin-left: var(--sl-input-spacing-medium);
   }
 
-  .sl-input__suffix ::slotted(*) {
+  .input__suffix ::slotted(*) {
     margin-right: var(--sl-input-spacing-medium);
   }
 }
 
-.sl-input--large {
+.input--large {
   border-radius: var(--sl-input-border-radius-large);
   font-size: var(--sl-input-font-size-large);
   height: var(--sl-input-height-large);
   line-height: calc(var(--sl-input-height-large) - var(--sl-input-border-width) * 2);
 
-  .sl-input__control {
+  .input__control {
     height: calc(var(--sl-input-height-large) - var(--sl-input-border-width) * 2);
     line-height: calc(var(--sl-input-height-large) - var(--sl-input-border-width) * 2);
     margin: 0 var(--sl-input-spacing-large);
   }
 
-  .sl-input__clear,
-  .sl-input__password-toggle {
+  .input__clear,
+  .input__password-toggle {
     margin-right: var(--sl-input-spacing-large);
   }
 
-  .sl-input__prefix ::slotted(*) {
+  .input__prefix ::slotted(*) {
     margin-left: var(--sl-input-spacing-large);
   }
 
-  .sl-input__suffix ::slotted(*) {
+  .input__suffix ::slotted(*) {
     margin-right: var(--sl-input-spacing-large);
   }
 }
@@ -179,8 +179,8 @@
 // Clearable + Password Toggle
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sl-input__clear,
-.sl-input__password-toggle {
+.input__clear,
+.input__password-toggle {
   display: inline-flex;
   align-items: center;
   font-size: inherit;
@@ -200,6 +200,6 @@
   }
 }
 
-.sl-input--empty .sl-input__clear {
+.input--empty .input__clear {
   visibility: hidden;
 }

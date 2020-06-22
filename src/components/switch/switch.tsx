@@ -16,8 +16,8 @@ let id = 0;
   shadow: true
 })
 export class Switch {
-  id = `sl-switch-${++id}`;
-  labelId = `sl-switch-label-${id}`;
+  id = `switch-${++id}`;
+  labelId = `switch-label-${id}`;
   input: HTMLInputElement;
 
   constructor() {
@@ -107,15 +107,15 @@ export class Switch {
         htmlFor={this.id}
         role="switch"
         class={{
-          'sl-switch': true,
-          'sl-switch--checked': this.checked,
-          'sl-switch--disabled': this.disabled,
-          'sl-switch--focused': this.hasFocus
+          switch: true,
+          'switch--checked': this.checked,
+          'switch--disabled': this.disabled,
+          'switch--focused': this.hasFocus
         }}
         onMouseDown={this.handleMouseDown}
       >
-        <span class="sl-switch__control">
-          <span class="sl-switch__thumb" />
+        <span class="switch__control">
+          <span class="switch__thumb" />
 
           <input
             ref={el => (this.input = el)}
@@ -133,7 +133,7 @@ export class Switch {
           />
         </span>
 
-        <span id={this.labelId} class="sl-switch__label">
+        <span id={this.labelId} class="switch__label">
           <slot />
         </span>
       </label>

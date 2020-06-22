@@ -15,8 +15,8 @@ let id = 0;
   shadow: true
 })
 export class Checkbox {
-  id = `sl-checkbox-${++id}`;
-  labelId = `sl-checkbox-label-${id}`;
+  id = `checkbox-${++id}`;
+  labelId = `checkbox-label-${id}`;
   input: HTMLInputElement;
 
   constructor() {
@@ -106,17 +106,17 @@ export class Checkbox {
         htmlFor={this.id}
         role="checkbox"
         class={{
-          'sl-checkbox': true,
-          'sl-checkbox--checked': this.checked,
-          'sl-checkbox--disabled': this.disabled,
-          'sl-checkbox--focused': this.hasFocus,
-          'sl-checkbox--indeterminate': this.indeterminate
+          checkbox: true,
+          'checkbox--checked': this.checked,
+          'checkbox--disabled': this.disabled,
+          'checkbox--focused': this.hasFocus,
+          'checkbox--indeterminate': this.indeterminate
         }}
         onMouseDown={this.handleMouseDown}
       >
-        <span class="sl-checkbox__control">
+        <span class="checkbox__control">
           {this.checked && (
-            <span class="sl-checkbox__icon">
+            <span class="checkbox__icon">
               <svg viewBox="0 0 16 16">
                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
                   <g stroke="currentColor" stroke-width="2">
@@ -131,7 +131,7 @@ export class Checkbox {
           )}
 
           {!this.checked && this.indeterminate && (
-            <span class="sl-checkbox__icon">
+            <span class="checkbox__icon">
               <svg viewBox="0 0 16 16">
                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
                   <g stroke="currentColor" stroke-width="2">
@@ -159,7 +159,7 @@ export class Checkbox {
           />
         </span>
 
-        <span id={this.labelId} class="sl-checkbox__label">
+        <span id={this.labelId} class="checkbox__label">
           <slot />
         </span>
       </label>

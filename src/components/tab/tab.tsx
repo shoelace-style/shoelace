@@ -15,7 +15,7 @@ let id = 0;
   shadow: true
 })
 export class Tab {
-  id = `sl-tab-${++id}`;
+  id = `tab-${++id}`;
   tab: HTMLElement;
 
   @Element() host: HTMLSlTabElement;
@@ -48,11 +48,11 @@ export class Tab {
         <div
           ref={el => (this.tab = el)}
           class={{
-            'sl-tab': true,
+            tab: true,
 
             // States
-            'sl-tab--active': this.active,
-            'sl-tab--disabled': this.disabled
+            'tab--active': this.active,
+            'tab--disabled': this.disabled
           }}
           role="tab"
           aria-disabled={this.disabled}

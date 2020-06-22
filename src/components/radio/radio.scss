@@ -5,7 +5,7 @@
   cursor: pointer;
 }
 
-.sl-radio {
+.radio {
   display: flex;
   align-items: center;
   font-family: var(--sl-input-font-family);
@@ -16,7 +16,7 @@
   cursor: inherit;
 }
 
-.sl-radio__icon {
+.radio__icon {
   display: flex;
   width: var(--sl-toggle-size);
   height: var(--sl-toggle-size);
@@ -27,7 +27,7 @@
   }
 }
 
-.sl-radio__control {
+.radio__control {
   position: relative;
   display: flex;
   align-items: center;
@@ -52,44 +52,44 @@
 }
 
 // Hover
-.sl-radio:not(.sl-radio--checked):not(.sl-radio--disabled) .sl-radio__control:hover {
+.radio:not(.radio--checked):not(.radio--disabled) .radio__control:hover {
   border-color: var(--sl-input-border-color-hover);
   background-color: var(--sl-input-background-color-hover);
 }
 
 // Focus
-.sl-radio.sl-radio--focused:not(.sl-radio--checked):not(.sl-radio--disabled) .sl-radio__control {
+.radio.radio--focused:not(.radio--checked):not(.radio--disabled) .radio__control {
   border-color: var(--sl-input-border-color-focus);
   background-color: var(--sl-input-background-color-focus);
   box-shadow: var(--sl-focus-ring-box-shadow);
 }
 
 // Checked
-.sl-radio--checked .sl-radio__control {
+.radio--checked .radio__control {
   border-color: var(--sl-color-primary-50);
   background-color: var(--sl-color-primary-50);
 }
 
 // Checked + hover
-.sl-radio.sl-radio--checked:not(.sl-radio--disabled) .sl-radio__control:hover {
+.radio.radio--checked:not(.radio--disabled) .radio__control:hover {
   border-color: var(--sl-color-primary-60);
   background-color: var(--sl-color-primary-60);
 }
 
 // Checked + focus
-.sl-radio.sl-radio--checked:not(.sl-radio--disabled).sl-radio--focused .sl-radio__control {
+.radio.radio--checked:not(.radio--disabled).radio--focused .radio__control {
   border-color: var(--sl-color-primary-60);
   background-color: var(--sl-color-primary-60);
   box-shadow: var(--sl-focus-ring-box-shadow);
 }
 
 // Disabled
-.sl-radio--disabled {
+.radio--disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.sl-radio__label {
+.radio__label {
   line-height: var(--sl-toggle-size);
   margin-left: 0.5em;
   user-select: none;

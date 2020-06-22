@@ -115,19 +115,19 @@ export class Range {
     return (
       <div
         class={{
-          'sl-range': true,
+          range: true,
 
           // States
-          'sl-range--disabled': this.disabled,
-          'sl-range--focused': this.hasFocus,
-          'sl-range--tooltip-top': this.tooltipPlacement === 'top',
-          'sl-range--tooltip-bottom': this.tooltipPlacement === 'bottom'
+          'range--disabled': this.disabled,
+          'range--focused': this.hasFocus,
+          'range--tooltip-top': this.tooltipPlacement === 'top',
+          'range--tooltip-bottom': this.tooltipPlacement === 'bottom'
         }}
       >
         <input
           ref={el => (this.input = el)}
           type="range"
-          class="sl-range__control"
+          class="range__control"
           name={this.name}
           disabled={this.disabled}
           min={this.min}
@@ -139,7 +139,7 @@ export class Range {
           onBlur={this.handleBlur}
         />
         {this.tooltipPlacement !== 'hidden' && (
-          <output ref={el => (this.output = el)} class="sl-range__tooltip">
+          <output ref={el => (this.output = el)} class="range__tooltip">
             {this.tooltipFormatter(this.value)}
           </output>
         )}

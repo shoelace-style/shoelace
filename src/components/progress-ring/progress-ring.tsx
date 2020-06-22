@@ -43,9 +43,9 @@ export class Progress {
   render() {
     return (
       <Host>
-        <svg class="sl-progress-ring" width={this.size} height={this.size}>
+        <svg class="progress-ring" width={this.size} height={this.size}>
           <circle
-            class="sl-progress-ring__track"
+            class="progress-ring__track"
             stroke-width={this.strokeWidth}
             stroke-linecap="round"
             fill="transparent"
@@ -56,7 +56,7 @@ export class Progress {
 
           <circle
             ref={(el: SVGCircleElement) => (this.indicator = el)}
-            class="sl-progress-ring__indicator"
+            class="progress-ring__indicator"
             stroke-width={this.strokeWidth}
             stroke-linecap="round"
             fill="transparent"
@@ -66,7 +66,7 @@ export class Progress {
           />
         </svg>
 
-        <span class="sl-progress-ring__label">
+        <span class="progress-ring__label">
           <slot />
         </span>
       </Host>

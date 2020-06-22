@@ -7,7 +7,7 @@
   display: inline-block;
 }
 
-.sl-tab {
+.tab {
   font-family: var(--sl-font-sans);
   font-size: var(--sl-input-font-size-medium);
   font-weight: var(--sl-font-weight-semibold);
@@ -19,7 +19,7 @@
   cursor: pointer;
   transition: var(--transition-speed) box-shadow, var(--transition-speed) color;
 
-  &:hover:not(.sl-tab--disabled) {
+  &:hover:not(.tab--disabled) {
     color: var(--sl-color-primary-50);
   }
 
@@ -27,16 +27,16 @@
     outline: none;
   }
 
-  &:focus:not(.sl-tab--disabled) {
+  &:focus:not(.tab--disabled) {
     color: var(--sl-color-primary-50);
     box-shadow: var(--focus-ring-box-shadow);
   }
 
-  &.sl-tab--active:not(.sl-tab--disabled) {
+  &.tab--active:not(.tab--disabled) {
     color: var(--sl-color-primary-50);
   }
 
-  &.sl-tab--disabled {
+  &.tab--disabled {
     opacity: 0.5;
     cursor: not-allowed;
   }

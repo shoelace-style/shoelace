@@ -2,12 +2,14 @@
 
 :host {
   display: block;
+}
 
+.menu {
   padding: var(--sl-spacing-x-small) 0;
   overflow-y: auto;
   overscroll-behavior: none;
-}
 
-:host(:focus) {
-  outline: none;
+  &:focus {
+    outline: none;
+  }
 }

@@ -8,10 +8,10 @@
   display: block;
 }
 
-.sl-range {
+.range {
   position: relative;
 
-  .sl-range__control {
+  .range__control {
     -webkit-appearance: none;
     width: 100%;
     height: var(--sl-input-height-medium);
@@ -121,7 +121,7 @@
 }
 
 // Tooltip
-.sl-range__tooltip {
+.range__tooltip {
   position: absolute;
   left: 1px;
   border-radius: var(--sl-tooltip-border-radius);
@@ -146,12 +146,12 @@
   }
 }
 
-.sl-range--focused .sl-range__tooltip {
+.range--focused .range__tooltip {
   opacity: 1;
 }
 
 // Tooltip on top
-.sl-range--tooltip-top .sl-range__tooltip {
+.range--tooltip-top .range__tooltip {
   top: calc(-1 * var(--thumb-size) - var(--tooltip-offset-y));
 
   &::after {
@@ -163,7 +163,7 @@
 }
 
 // Tooltip on bottom
-.sl-range--tooltip-bottom .sl-range__tooltip {
+.range--tooltip-bottom .range__tooltip {
   bottom: calc(-1 * var(--thumb-size) - var(--tooltip-offset-y));
 
   &::after {

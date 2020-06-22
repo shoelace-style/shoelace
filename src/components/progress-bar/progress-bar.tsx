@@ -22,7 +22,7 @@ export class ProgressBar {
   render() {
     return (
       <div
-        class="sl-progress-bar"
+        class="progress-bar"
         style={{
           '--height': `${this.height}px`
         }}
@@ -32,12 +32,12 @@ export class ProgressBar {
         aria-valuenow={this.percentage}
       >
         <div
-          class="sl-progress-bar__indicator"
+          class="progress-bar__indicator"
           style={{
             width: `${this.percentage}%`
           }}
         >
-          <span class="sl-progress-bar__label">
+          <span class="progress-bar__label">
             <slot />
           </span>
         </div>

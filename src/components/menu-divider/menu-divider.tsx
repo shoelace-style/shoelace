@@ -12,6 +12,6 @@ import { Component, h } from '@stencil/core';
 })
 export class MenuDivider {
   render() {
-    return <div class="sl-menu-divider" role="separator" />;
+    return <div class="menu-divider" role="separator" />;
   }
 }

@@ -76,6 +76,6 @@ export class Icon {
   }
 
   render() {
-    return <div class="sl-icon" role="img" aria-label={this.getLabel()} innerHTML={this.svg} />;
+    return <div class="icon" role="img" aria-label={this.getLabel()} innerHTML={this.svg} />;
   }
 }

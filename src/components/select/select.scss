@@ -4,11 +4,11 @@
   display: block;
 }
 
-.sl-select {
+.select {
   width: 100%;
 }
 
-.sl-select__input {
+.select__input {
   flex: 1 1 auto;
   width: 100%;
   cursor: pointer;
@@ -22,10 +22,10 @@
   }
 }
 
-.sl-select__icon {
+.select__icon {
   transition: var(--sl-transition-medium) transform ease;
 }
 
-.sl-select--open .sl-select__icon {
+.select--open .select__icon {
   transform: rotate(-180deg);
 }

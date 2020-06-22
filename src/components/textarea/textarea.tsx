@@ -168,27 +168,27 @@ export class Textarea {
     return (
       <div
         class={{
-          'sl-textarea': true,
+          textarea: true,
 
           // Sizes
-          'sl-textarea--small': this.size === 'small',
-          'sl-textarea--medium': this.size === 'medium',
-          'sl-textarea--large': this.size === 'large',
+          'textarea--small': this.size === 'small',
+          'textarea--medium': this.size === 'medium',
+          'textarea--large': this.size === 'large',
 
           // States
-          'sl-textarea--disabled': this.disabled,
-          'sl-textarea--focused': this.hasFocus,
-          'sl-textarea--empty': this.value.length === 0,
+          'textarea--disabled': this.disabled,
+          'textarea--focused': this.hasFocus,
+          'textarea--empty': this.value.length === 0,
 
           // Modifiers
-          'sl-textarea--resize-none': this.resize === 'none',
-          'sl-textarea--resize-vertical': this.resize === 'vertical',
-          'sl-textarea--resize-auto': this.resize === 'auto'
+          'textarea--resize-none': this.resize === 'none',
+          'textarea--resize-vertical': this.resize === 'vertical',
+          'textarea--resize-auto': this.resize === 'auto'
         }}
       >
         <textarea
           ref={el => (this.textarea = el)}
-          class="sl-textarea__control"
+          class="textarea__control"
           name={this.name}
           placeholder={this.placeholder}
           disabled={this.disabled}

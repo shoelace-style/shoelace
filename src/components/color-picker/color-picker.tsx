@@ -573,15 +573,15 @@ export class ColorPicker {
     const ColorPicker = (
       <div
         class={{
-          'sl-color-picker': true,
-          'sl-color-picker--inline': this.inline,
-          'sl-color-picker--disabled': this.disabled
+          'color-picker': true,
+          'color-picker--inline': this.inline,
+          'color-picker--disabled': this.disabled
         }}
         aria-disabled={this.disabled}
       >
         <div
           ref={el => (this.grid = el)}
-          class="sl-color-picker__grid"
+          class="color-picker__grid"
           style={{
             backgroundColor: `hsl(${this.hue}deg, 100%, 50%)`
           }}
@@ -590,7 +590,7 @@ export class ColorPicker {
         >
           <span
             ref={el => (this.gridHandle = el)}
-            class="sl-color-picker__grid-handle"
+            class="color-picker__grid-handle"
             style={{
               top: `${y}%`,
               left: `${x}%`
@@ -605,17 +605,17 @@ export class ColorPicker {
           />
         </div>
 
-        <div class="sl-color-picker__controls">
-          <div class="sl-color-picker__sliders">
+        <div class="color-picker__controls">
+          <div class="color-picker__sliders">
             <div
               ref={el => (this.hueSlider = el)}
-              class="sl-color-picker__hue sl-color-picker__slider"
+              class="color-picker__hue color-picker__slider"
               onMouseDown={this.handleHueDrag}
               onTouchStart={this.handleHueDrag}
             >
               <span
                 ref={el => (this.hueHandle = el)}
-                class="sl-color-picker__slider-handle"
+                class="color-picker__slider-handle"
                 style={{
                   left: `${this.hue === 0 ? 0 : 100 / (360 / this.hue)}%`
                 }}
@@ -633,12 +633,12 @@ export class ColorPicker {
             {this.opacity && (
               <div
                 ref={el => (this.alphaSlider = el)}
-                class="sl-color-picker__alpha sl-color-picker__slider sl-color-picker__transparent-bg"
+                class="color-picker__alpha color-picker__slider color-picker__transparent-bg"
                 onMouseDown={this.handleAlphaDrag}
                 onTouchStart={this.handleAlphaDrag}
               >
                 <div
-                  class="sl-color-picker__alpha-gradient"
+                  class="color-picker__alpha-gradient"
                   style={{
                     backgroundImage: `linear-gradient(
                       to right,
@@ -649,7 +649,7 @@ export class ColorPicker {
                 />
                 <span
                   ref={el => (this.alphaHandle = el)}
-                  class="sl-color-picker__slider-handle"
+                  class="color-picker__slider-handle"
                   style={{
                     left: `${this.alpha}%`
                   }}
@@ -667,14 +667,14 @@ export class ColorPicker {
           </div>
 
           <div
-            class="sl-color-picker__preview sl-color-picker__transparent-bg"
+            class="color-picker__preview color-picker__transparent-bg"
             style={{
               color: `hsla(${this.hue}deg, ${this.saturation}%, ${this.lightness}%, ${this.alpha / 100})`
             }}
           />
         </div>
 
-        <div class="sl-color-picker__user-input">
+        <div class="color-picker__user-input">
           <sl-input
             ref={el => (this.textInput = el)}
             size="small"
@@ -691,17 +691,17 @@ export class ColorPicker {
         </div>
 
         {this.swatches && (
-          <div class="sl-color-picker__swatches">
+          <div class="color-picker__swatches">
             {this.swatches.map(swatch => (
               <div
-                class="sl-color-picker__swatch sl-color-picker__transparent-bg"
+                class="color-picker__swatch color-picker__transparent-bg"
                 tabIndex={this.disabled ? null : 0}
                 role="button"
                 aria-label={swatch}
                 onClick={() => !this.disabled && this.setColor(swatch)}
                 onKeyDown={event => !this.disabled && event.key === 'Enter' && this.setColor(swatch)}
               >
-                <div class="sl-color-picker__swatch-color" style={{ backgroundColor: swatch }} />
+                <div class="color-picker__swatch-color" style={{ backgroundColor: swatch }} />
               </div>
             ))}
           </div>
@@ -718,7 +718,7 @@ export class ColorPicker {
     return (
       <sl-dropdown
         ref={el => (this.dropdown = el)}
-        class="sl-color-dropdown"
+        class="color-dropdown"
         aria-disabled={this.disabled}
         containingElement={this.host}
         onSlShow={this.handleDropdownShow}
@@ -730,12 +730,12 @@ export class ColorPicker {
           ref={el => (this.trigger = el)}
           slot="trigger"
           class={{
-            'sl-color-dropdown__trigger': true,
-            'sl-color-dropdown__trigger--disabled': this.disabled,
-            'sl-color-dropdown__trigger--small': this.size === 'small',
-            'sl-color-dropdown__trigger--medium': this.size === 'medium',
-            'sl-color-dropdown__trigger--large': this.size === 'large',
-            'sl-color-picker__transparent-bg': true
+            'color-dropdown__trigger': true,
+            'color-dropdown__trigger--disabled': this.disabled,
+            'color-dropdown__trigger--small': this.size === 'small',
+            'color-dropdown__trigger--medium': this.size === 'medium',
+            'color-dropdown__trigger--large': this.size === 'large',
+            'color-picker__transparent-bg': true
           }}
           style={{
             color: `hsla(${this.hue}deg, ${this.saturation}%, ${this.lightness}%, ${this.alpha / 100})`

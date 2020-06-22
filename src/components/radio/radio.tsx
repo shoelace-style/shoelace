@@ -15,8 +15,8 @@ let id = 0;
   shadow: true
 })
 export class Radio {
-  id = `sl-radio-${++id}`;
-  labelId = `sl-radio-label-${id}`;
+  id = `radio-${++id}`;
+  labelId = `radio-label-${id}`;
   input: HTMLInputElement;
 
   constructor() {
@@ -95,15 +95,15 @@ export class Radio {
         htmlFor={this.id}
         role="radio"
         class={{
-          'sl-radio': true,
-          'sl-radio--checked': this.checked,
-          'sl-radio--disabled': this.disabled,
-          'sl-radio--focused': this.hasFocus
+          radio: true,
+          'radio--checked': this.checked,
+          'radio--disabled': this.disabled,
+          'radio--focused': this.hasFocus
         }}
         onMouseDown={this.handleMouseDown}
       >
-        <span class="sl-radio__control">
-          <span class="sl-radio__icon">
+        <span class="radio__control">
+          <span class="radio__icon">
             <svg viewBox="0 0 16 16">
               <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                 <g fill="currentColor">
@@ -128,7 +128,7 @@ export class Radio {
           />
         </span>
 
-        <span id={this.labelId} class="sl-radio__label">
+        <span id={this.labelId} class="radio__label">
           <slot />
         </span>
       </label>

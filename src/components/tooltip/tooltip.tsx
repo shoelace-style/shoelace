@@ -16,7 +16,7 @@ let id = 0;
   shadow: true
 })
 export class Tooltip {
-  id = `sl-tooltip-${++id}`;
+  id = `tooltip-${++id}`;
   popover: Popover;
   target: HTMLElement;
   tooltip: any;
@@ -221,8 +221,8 @@ export class Tooltip {
             ref={el => (this.tooltip = el)}
             id={this.id}
             class={{
-              'sl-tooltip': true,
-              'sl-tooltip--open': this.open
+              tooltip: true,
+              'tooltip--open': this.open
             }}
             role="tooltip"
             aria-hidden={!this.open}

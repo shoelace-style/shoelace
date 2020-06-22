@@ -20,7 +20,7 @@ export class Dialog {
   box: HTMLElement;
   overlay: HTMLElement;
   dialog: HTMLElement;
-  id = `sl-dialog-${++id}`;
+  id = `dialog-${++id}`;
   keyboardDetector: KeyboardDetector;
 
   constructor() {
@@ -166,15 +166,15 @@ export class Dialog {
         <div
           ref={el => (this.dialog = el)}
           class={{
-            'sl-dialog': true,
-            'sl-dialog--open': this.open,
-            'sl-dialog--using-keyboard': this.isUsingKeyboard
+            dialog: true,
+            'dialog--open': this.open,
+            'dialog--using-keyboard': this.isUsingKeyboard
           }}
           onTransitionEnd={this.handleTransitionEnd}
         >
           <div
             ref={el => (this.box = el)}
-            class="sl-dialog__box"
+            class="dialog__box"
             role="dialog"
             aria-modal="true"
             aria-hidden={!this.open}
@@ -183,29 +183,29 @@ export class Dialog {
             tabIndex={0}
           >
             {!this.noHeader && (
-              <div class="sl-dialog__header">
-                <span class="sl-dialog__title" id={`${this.id}-title`}>
+              <div class="dialog__header">
+                <span class="dialog__title" id={`${this.id}-title`}>
                   {/* If there's no label, use an invisible character to prevent the heading from collapsing */}
                   {this.label || String.fromCharCode(65279)}
                 </span>
-                <button class="sl-dialog__close" type="button" onClick={this.handleCloseClick}>
+                <button class="dialog__close" type="button" onClick={this.handleCloseClick}>
                   <sl-icon name="x"></sl-icon>
                 </button>
               </div>
             )}
 
-            <div class="sl-dialog__body">
+            <div class="dialog__body">
               <slot />
             </div>
 
             {!this.noFooter && (
-              <div class="sl-dialog__footer">
+              <div class="dialog__footer">
                 <slot name="footer" />
               </div>
             )}
           </div>
 
-          <div ref={el => (this.overlay = el)} class="sl-dialog__overlay" onClick={this.handleOverlayClick} />
+          <div ref={el => (this.overlay = el)} class="dialog__overlay" onClick={this.handleOverlayClick} />
         </div>
       </Host>
     );

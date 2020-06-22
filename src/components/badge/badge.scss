@@ -6,7 +6,7 @@
   pointer-events: none;
 }
 
-.sl-badge {
+.badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -17,7 +17,7 @@
   border-radius: inherit;
   border: solid 1px var(--sl-color-white);
   white-space: nowrap;
-  padding: 3px 6px;
+  padding: 4px 8px;
   user-select: none;
   cursor: inherit;
 }
@@ -26,27 +26,27 @@
 // Type modifiers
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sl-badge--primary {
+.badge--primary {
   background-color: var(--sl-color-primary-50);
   color: var(--sl-color-white);
 }
 
-.sl-badge--success {
+.badge--success {
   background-color: var(--sl-color-success-50);
   color: var(--sl-color-white);
 }
 
-.sl-badge--info {
+.badge--info {
   background-color: var(--sl-color-info-50);
   color: var(--sl-color-white);
 }
 
-.sl-badge--warning {
+.badge--warning {
   background-color: var(--sl-color-warning-50);
   color: var(--sl-color-white);
 }
 
-.sl-badge--danger {
+.badge--danger {
   background-color: var(--sl-color-danger-50);
   color: var(--sl-color-white);
 }

@@ -78,45 +78,45 @@ export class Button {
       <button
         ref={el => (this.button = el)}
         class={{
-          'sl-button': true,
+          button: true,
 
           // Types
-          'sl-button--default': this.type === 'default',
-          'sl-button--primary': this.type === 'primary',
-          'sl-button--success': this.type === 'success',
-          'sl-button--info': this.type === 'info',
-          'sl-button--warning': this.type === 'warning',
-          'sl-button--danger': this.type === 'danger',
-          'sl-button--text': this.type === 'text',
+          'button--default': this.type === 'default',
+          'button--primary': this.type === 'primary',
+          'button--success': this.type === 'success',
+          'button--info': this.type === 'info',
+          'button--warning': this.type === 'warning',
+          'button--danger': this.type === 'danger',
+          'button--text': this.type === 'text',
 
           // Sizes
-          'sl-button--small': this.size === 'small',
-          'sl-button--medium': this.size === 'medium',
-          'sl-button--large': this.size === 'large',
+          'button--small': this.size === 'small',
+          'button--medium': this.size === 'medium',
+          'button--large': this.size === 'large',
 
           // Modifiers
-          'sl-button--caret': this.caret,
-          'sl-button--circle': this.circle,
-          'sl-button--disabled': this.disabled,
-          'sl-button--focused': this.hasFocus,
-          'sl-button--loading': this.loading,
-          'sl-button--pill': this.pill
+          'button--caret': this.caret,
+          'button--circle': this.circle,
+          'button--disabled': this.disabled,
+          'button--focused': this.hasFocus,
+          'button--loading': this.loading,
+          'button--pill': this.pill
         }}
         disabled={this.disabled}
         onBlur={this.handleBlur}
         onFocus={this.handleFocus}
       >
-        <span class="sl-button__prefix">
+        <span class="button__prefix">
           <slot name="prefix" />
         </span>
-        <span class="sl-button__label">
+        <span class="button__label">
           <slot />
         </span>
-        <span class="sl-button__suffix">
+        <span class="button__suffix">
           <slot name="suffix" />
         </span>
         {this.caret && (
-          <span class="sl-button__caret">
+          <span class="button__caret">
             <svg
               viewBox="0 0 24 24"
               fill="none"
@@ -130,7 +130,7 @@ export class Button {
           </span>
         )}
 
-        {this.loading && <span class="sl-button__spinner" />}
+        {this.loading && <span class="button__spinner" />}
       </button>
     );
   }

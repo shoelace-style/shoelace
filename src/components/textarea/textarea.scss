@@ -5,7 +5,7 @@
   cursor: text;
 }
 
-.sl-textarea {
+.textarea {
   display: flex;
   align-items: center;
   position: relative;
@@ -20,27 +20,27 @@
   transition: var(--sl-transition-fast) color, var(--sl-transition-fast) border, var(--sl-transition-fast) box-shadow;
   cursor: inherit;
 
-  &:hover:not(.sl-textarea--disabled) {
+  &:hover:not(.textarea--disabled) {
     background-color: var(--sl-input-background-color-hover);
     border-color: var(--sl-input-border-color-hover);
     color: var(--sl-input-color-hover);
   }
 
-  &.sl-textarea--focused:not(.sl-textarea--disabled) {
+  &.textarea--focused:not(.textarea--disabled) {
     background-color: var(--sl-input-background-color-focus);
     border-color: var(--sl-input-border-color-focus);
     box-shadow: var(--sl-focus-ring-box-shadow);
     color: var(--sl-input-color-focus);
   }
 
-  &.sl-textarea--disabled {
+  &.textarea--disabled {
     background-color: var(--sl-input-background-color-disabled);
     border-color: var(--sl-input-border-color-disabled);
     color: var(--sl-input-color-disabled);
     opacity: 0.5;
     cursor: not-allowed;
 
-    .sl-textarea__control {
+    .textarea__control {
       &::placeholder {
         color: var(--sl-input-placeholder-color-disabled);
       }
@@ -48,7 +48,7 @@
   }
 }
 
-.sl-textarea__control {
+.textarea__control {
   flex: 1 1 auto;
   font-family: inherit;
   font-size: inherit;
@@ -82,29 +82,29 @@
 // Size modifiers
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sl-textarea--small {
+.textarea--small {
   border-radius: var(--sl-input-border-radius-small);
   font-size: var(--sl-input-font-size-small);
 
-  .sl-textarea__control {
+  .textarea__control {
     padding: 0.5em var(--sl-input-spacing-small);
   }
 }
 
-.sl-textarea--medium {
+.textarea--medium {
   border-radius: var(--sl-input-border-radius-medium);
   font-size: var(--sl-input-font-size-medium);
 
-  .sl-textarea__control {
+  .textarea__control {
     padding: 0.5em var(--sl-input-spacing-medium);
   }
 }
 
-.sl-textarea--large {
+.textarea--large {
   border-radius: var(--sl-input-border-radius-large);
   font-size: var(--sl-input-font-size-large);
 
-  .sl-textarea__control {
+  .textarea__control {
     padding: 0.5em var(--sl-input-spacing-large);
   }
 }
@@ -113,15 +113,15 @@
 // Resize types
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sl-textarea--resize-none .sl-textarea__control {
+.textarea--resize-none .textarea__control {
   resize: none;
 }
 
-.sl-textarea--resize-vertical .sl-textarea__control {
+.textarea--resize-vertical .textarea__control {
   resize: vertical;
 }
 
-.sl-textarea--resize-auto .sl-textarea__control {
+.textarea--resize-auto .textarea__control {
   height: auto;
   resize: none;
 }

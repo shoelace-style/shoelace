@@ -194,27 +194,27 @@ export class Input {
     return (
       <div
         class={{
-          'sl-input': true,
+          input: true,
 
           // Sizes
-          'sl-input--small': this.size === 'small',
-          'sl-input--medium': this.size === 'medium',
-          'sl-input--large': this.size === 'large',
+          'input--small': this.size === 'small',
+          'input--medium': this.size === 'medium',
+          'input--large': this.size === 'large',
 
           // States
-          'sl-input--disabled': this.disabled,
-          'sl-input--focused': this.hasFocus,
-          'sl-input--empty': this.value.length === 0
+          'input--disabled': this.disabled,
+          'input--focused': this.hasFocus,
+          'input--empty': this.value.length === 0
         }}
         onMouseDown={this.handleMouseDown}
       >
-        <span class="sl-input__prefix">
+        <span class="input__prefix">
           <slot name="prefix" />
         </span>
 
         <input
           ref={el => (this.input = el)}
-          class="sl-input__control"
+          class="input__control"
           type={this.type === 'password' && this.isPasswordVisible ? 'text' : this.type}
           name={this.name}
           placeholder={this.placeholder}
@@ -240,7 +240,7 @@ export class Input {
         />
 
         {this.clearable && (
-          <button class="sl-input__clear" type="button" onClick={this.handleClearClick} tabindex="-1">
+          <button class="input__clear" type="button" onClick={this.handleClearClick} tabindex="-1">
             <slot name="clear-icon">
               <sl-icon name="x-circle" />
             </slot>
@@ -248,7 +248,7 @@ export class Input {
         )}
 
         {this.togglePassword && (
-          <button class="sl-input__password-toggle" type="button" onClick={this.handlePasswordToggle} tabindex="-1">
+          <button class="input__password-toggle" type="button" onClick={this.handlePasswordToggle} tabindex="-1">
             {this.isPasswordVisible ? (
               <slot name="show-password-icon">
                 <sl-icon name="eye-slash" />
@@ -262,7 +262,7 @@ export class Input {
           </button>
         )}
 
-        <span class="sl-input__suffix">
+        <span class="input__suffix">
           <slot name="suffix" />
         </span>
       </div>

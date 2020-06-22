@@ -31,15 +31,15 @@ export class Badge {
       <span
         ref={el => (this.badge = el)}
         class={{
-          'sl-badge': true,
+          badge: true,
 
           // Types
-          'sl-badge--primary': this.type === 'primary',
-          'sl-badge--success': this.type === 'success',
-          'sl-badge--info': this.type === 'info',
-          'sl-badge--warning': this.type === 'warning',
-          'sl-badge--danger': this.type === 'danger',
-          'sl-badge--text': this.type === 'text'
+          'badge--primary': this.type === 'primary',
+          'badge--success': this.type === 'success',
+          'badge--info': this.type === 'info',
+          'badge--warning': this.type === 'warning',
+          'badge--danger': this.type === 'danger',
+          'badge--text': this.type === 'text'
         }}
         role="status"
       >

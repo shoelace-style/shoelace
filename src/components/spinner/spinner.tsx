@@ -20,7 +20,7 @@ export class Spinner {
   render() {
     return (
       <span
-        class="sl-spinner"
+        class="spinner"
         style={{
           borderWidth: `${this.strokeWidth}px`,
           width: `${this.size}px`,

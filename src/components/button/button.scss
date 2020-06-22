@@ -5,7 +5,7 @@
   cursor: pointer;
 }
 
-.sl-button {
+.button {
   display: inline-flex;
   align-items: stretch;
   justify-content: center;
@@ -40,19 +40,19 @@
   }
 }
 
-.sl-button__prefix,
-.sl-button__suffix {
+.button__prefix,
+.button__suffix {
   flex: 0 0 auto;
   display: flex;
   align-items: center;
 }
 
-.sl-button__prefix ::slotted(:first-child) {
+.button__prefix ::slotted(:first-child) {
   margin-left: calc(-1 * var(--sl-spacing-x-small));
   margin-right: var(--sl-spacing-x-small);
 }
 
-.sl-button__suffix ::slotted(:last-child) {
+.button__suffix ::slotted(:last-child) {
   margin-left: var(--sl-spacing-x-small);
   margin-right: calc(-1 * var(--sl-spacing-x-small));
 }
@@ -61,8 +61,8 @@
 // Standard buttons
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sl-button {
-  &.sl-button--default {
+.button {
+  &.button--default {
     background-color: var(--sl-color-white);
     border-color: var(--sl-color-gray-80);
     color: var(--sl-color-gray-40);
@@ -88,7 +88,7 @@
     }
   }
 
-  &.sl-button--primary {
+  &.button--primary {
     background-color: var(--sl-color-primary-50);
     border-color: var(--sl-color-primary-50);
     color: var(--sl-color-primary-text);
@@ -114,7 +114,7 @@
     }
   }
 
-  &.sl-button--success {
+  &.button--success {
     background-color: var(--sl-color-success-50);
     border-color: var(--sl-color-success-50);
     color: var(--sl-color-success-text);
@@ -140,7 +140,7 @@
     }
   }
 
-  &.sl-button--info {
+  &.button--info {
     background-color: var(--sl-color-info-50);
     border-color: var(--sl-color-info-50);
     color: var(--sl-color-info-text);
@@ -166,7 +166,7 @@
     }
   }
 
-  &.sl-button--warning {
+  &.button--warning {
     background-color: var(--sl-color-warning-50);
     border-color: var(--sl-color-warning-50);
     color: var(--sl-color-warning-text);
@@ -192,7 +192,7 @@
     }
   }
 
-  &.sl-button--danger {
+  &.button--danger {
     background-color: var(--sl-color-danger-50);
     border-color: var(--sl-color-danger-50);
     color: var(--sl-color-danger-text);
@@ -223,7 +223,7 @@
 // Text buttons
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sl-button--text {
+.button--text {
   background-color: transparent;
   border-color: transparent;
   color: var(--sl-color-primary-50);
@@ -253,7 +253,7 @@
 // Block modifier
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sl-button--block {
+.button--block {
   width: 100%;
 }
 
@@ -261,7 +261,7 @@
 // Size modifiers
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sl-button--small {
+.button--small {
   font-size: var(--sl-input-font-size-small);
   height: var(--sl-input-height-small);
   line-height: calc(var(--sl-input-height-small) - var(--sl-input-border-width) * 2);
@@ -269,7 +269,7 @@
   padding: 0 var(--sl-spacing-medium);
 }
 
-.sl-button--medium {
+.button--medium {
   font-size: var(--sl-input-font-size-medium);
   height: var(--sl-input-height-medium);
   line-height: calc(var(--sl-input-height-medium) - var(--sl-input-border-width) * 2);
@@ -277,7 +277,7 @@
   padding: 0 var(--sl-spacing-large);
 }
 
-.sl-button--large {
+.button--large {
   font-size: var(--sl-input-font-size-large);
   height: var(--sl-input-height-large);
   line-height: calc(var(--sl-input-height-large) - var(--sl-input-border-width) * 2);
@@ -289,16 +289,16 @@
 // Pill modifier
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sl-button--pill {
-  &.sl-button--small {
+.button--pill {
+  &.button--small {
     border-radius: var(--sl-input-height-small);
   }
 
-  &.sl-button--medium {
+  &.button--medium {
     border-radius: var(--sl-input-height-medium);
   }
 
-  &.sl-button--large {
+  &.button--large {
     border-radius: var(--sl-input-height-large);
   }
 }
@@ -307,34 +307,34 @@
 // Circle modifier
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sl-button--circle {
+.button--circle {
   padding-left: 0;
   padding-right: 0;
 
-  .sl-button__label {
+  .button__label {
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-  &.sl-button--small {
+  &.button--small {
     width: var(--sl-input-height-small);
     border-radius: 50%;
   }
 
-  &.sl-button--medium {
+  &.button--medium {
     width: var(--sl-input-height-medium);
     border-radius: 50%;
   }
 
-  &.sl-button--large {
+  &.button--large {
     width: var(--sl-input-height-large);
     border-radius: 50%;
   }
 
-  .sl-button__prefix,
-  .sl-button__suffix,
-  .sl-button__caret {
+  .button__prefix,
+  .button__suffix,
+  .button__caret {
     display: none;
   }
 }
@@ -343,12 +343,12 @@
 // Caret modifier
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sl-button--caret {
-  .sl-button__suffix {
+.button--caret {
+  .button__suffix {
     display: none;
   }
 
-  .sl-button__caret {
+  .button__caret {
     display: flex;
     align-items: center;
     margin-left: var(--sl-spacing-xx-small);
@@ -365,18 +365,18 @@
 // Loading modifier
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sl-button--loading {
+.button--loading {
   position: relative;
   pointer-events: none;
 
-  .sl-button__prefix,
-  .sl-button__label,
-  .sl-button__suffix,
-  .sl-button__caret {
+  .button__prefix,
+  .button__label,
+  .button__suffix,
+  .button__caret {
     visibility: hidden;
   }
 
-  .sl-button__spinner {
+  .button__spinner {
     position: absolute;
     top: calc(50% - 0.5em);
     left: calc(50% - 0.5em);
@@ -402,7 +402,7 @@
 // Badges
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sl-button ::slotted(sl-badge) {
+.button ::slotted(sl-badge) {
   position: absolute;
   top: 0;
   right: 0;

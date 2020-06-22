@@ -5,7 +5,7 @@
   cursor: pointer;
 }
 
-.sl-checkbox {
+.checkbox {
   display: flex;
   align-items: center;
   font-family: var(--sl-input-font-family);
@@ -16,7 +16,7 @@
   cursor: inherit;
 }
 
-.sl-checkbox__control {
+.checkbox__control {
   position: relative;
   display: flex;
   align-items: center;
@@ -39,7 +39,7 @@
     -webkit-appearance: none;
   }
 
-  .sl-checkbox__icon {
+  .checkbox__icon {
     display: flex;
     width: var(--sl-toggle-size);
     height: var(--sl-toggle-size);
@@ -52,47 +52,47 @@
 }
 
 // Hover
-.sl-checkbox:not(.sl-checkbox--checked):not(.sl-checkbox--disabled) .sl-checkbox__control:hover {
+.checkbox:not(.checkbox--checked):not(.checkbox--disabled) .checkbox__control:hover {
   border-color: var(--sl-input-border-color-hover);
   background-color: var(--sl-input-background-color-hover);
 }
 
 // Focus
-.sl-checkbox.sl-checkbox--focused:not(.sl-checkbox--checked):not(.sl-checkbox--disabled) .sl-checkbox__control {
+.checkbox.checkbox--focused:not(.checkbox--checked):not(.checkbox--disabled) .checkbox__control {
   border-color: var(--sl-input-border-color-focus);
   background-color: var(--sl-input-background-color-focus);
   box-shadow: var(--sl-focus-ring-box-shadow);
 }
 
 // Checked/indeterminate
-.sl-checkbox--checked .sl-checkbox__control,
-.sl-checkbox--indeterminate .sl-checkbox__control {
+.checkbox--checked .checkbox__control,
+.checkbox--indeterminate .checkbox__control {
   border-color: var(--sl-color-primary-50);
   background-color: var(--sl-color-primary-50);
 }
 
 // Checked/indeterminate + hover
-.sl-checkbox.sl-checkbox--checked:not(.sl-checkbox--disabled) .sl-checkbox__control:hover,
-.sl-checkbox.sl-checkbox--indeterminate:not(.sl-checkbox--disabled) .sl-checkbox__control:hover {
+.checkbox.checkbox--checked:not(.checkbox--disabled) .checkbox__control:hover,
+.checkbox.checkbox--indeterminate:not(.checkbox--disabled) .checkbox__control:hover {
   border-color: var(--sl-color-primary-60);
   background-color: var(--sl-color-primary-60);
 }
 
 // Checked/indeterminate + focus
-.sl-checkbox.sl-checkbox--checked:not(.sl-checkbox--disabled).sl-checkbox--focused .sl-checkbox__control,
-.sl-checkbox.sl-checkbox--indeterminate:not(.sl-checkbox--disabled).sl-checkbox--focused .sl-checkbox__control {
+.checkbox.checkbox--checked:not(.checkbox--disabled).checkbox--focused .checkbox__control,
+.checkbox.checkbox--indeterminate:not(.checkbox--disabled).checkbox--focused .checkbox__control {
   border-color: var(--sl-color-primary-60);
   background-color: var(--sl-color-primary-60);
   box-shadow: var(--sl-focus-ring-box-shadow);
 }
 
 // Disabled
-.sl-checkbox--disabled {
+.checkbox--disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.sl-checkbox__label {
+.checkbox__label {
   line-height: var(--sl-toggle-size);
   margin-left: 0.5em;
   user-select: none;

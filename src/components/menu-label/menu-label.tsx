@@ -13,7 +13,7 @@ import { Component, h } from '@stencil/core';
 export class MenuLabel {
   render() {
     return (
-      <div class="sl-menu-label">
+      <div class="menu-label">
         <slot />
       </div>
     );

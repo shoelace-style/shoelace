@@ -17,7 +17,7 @@ let id = 0;
   shadow: true
 })
 export class Dropdown {
-  id = `sl-dropdown-${++id}`;
+  id = `dropdown-${++id}`;
   ignoreMouseEvents = false;
   ignoreMouseTimeout: any;
   ignoreOpenWatcher = false;
@@ -249,14 +249,14 @@ export class Dropdown {
       <div
         id={this.id}
         class={{
-          'sl-dropdown': true,
-          'sl-dropdown--open': this.open
+          dropdown: true,
+          'dropdown--open': this.open
         }}
         aria-expanded={this.open}
         aria-haspopup="true"
       >
         <span
-          class="sl-dropdown__trigger"
+          class="dropdown__trigger"
           ref={el => (this.trigger = el)}
           onKeyDown={this.handleTriggerKeyDown}
           onClick={this.togglePanel}
@@ -266,7 +266,7 @@ export class Dropdown {
 
         <div
           ref={el => (this.panel = el)}
-          class="sl-dropdown__panel"
+          class="dropdown__panel"
           role="menu"
           aria-hidden={!this.open}
           aria-labeledby={this.id}

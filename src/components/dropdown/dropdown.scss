@@ -4,15 +4,15 @@
   display: inline-block;
 }
 
-.sl-dropdown {
+.dropdown {
   position: relative;
 }
 
-.sl-dropdown__trigger {
+.dropdown__trigger {
   display: block;
 }
 
-.sl-dropdown__panel {
+.dropdown__panel {
   position: absolute;
   z-index: var(--sl-z-index-dropdown);
   font-family: var(--sl-font-sans);

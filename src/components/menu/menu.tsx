@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, Host, Method, h } from '@stencil/core';
+import { Component, Event, EventEmitter, Method, h } from '@stencil/core';
 import { scrollIntoView } from '../../utilities/scroll';
 import { getTextContent } from '../../utilities/slot';
 
@@ -31,8 +31,6 @@ export class Menu {
     this.handleMouseOut = this.handleMouseOut.bind(this);
   }
 
-  @Element() host: HTMLSlMenuElement;
-
   /** Emitted when the menu gains focus. */
   @Event() slFocus: EventEmitter;
 
@@ -45,17 +43,17 @@ export class Menu {
   /** Sets focus on the menu. */
   @Method()
   async setFocus() {
-    this.host.focus();
+    this.menu.focus();
   }
 
   /** Removes focus from the menu. */
   @Method()
   async removeFocus() {
-    this.host.blur();
+    this.menu.blur();
   }
 
   getItems() {
-    const slot = this.host.shadowRoot.querySelector('slot');
+    const slot = this.menu.querySelector('slot');
     return [...slot.assignedElements({ flatten: true })].filter(
       (el: any) => el.tagName.toLowerCase() === 'sl-menu-item' && !el.disabled
     ) as [HTMLSlMenuItemElement];
@@ -71,7 +69,7 @@ export class Menu {
 
   scrollItemIntoView(item: HTMLSlMenuItemElement) {
     if (item) {
-      scrollIntoView(item, this.host);
+      scrollIntoView(item, this.menu);
     }
   }
 
@@ -197,7 +195,9 @@ export class Menu {
 
   render() {
     return (
-      <Host
+      <div
+        ref={el => (this.menu = el)}
+        class="menu"
         tabIndex={0}
         role="menu"
         onClick={this.handleClick}
@@ -209,7 +209,7 @@ export class Menu {
         onMouseOut={this.handleMouseOut}
       >
         <slot />
-      </Host>
+      </div>
     );
   }
 }

@@ -41,24 +41,22 @@ export class Avatar {
         role="image"
         aria-label={this.alt}
         class={{
-          'sl-avatar': true,
-          'sl-avatar--circle': this.shape === 'circle',
-          'sl-avatar--square': this.shape === 'square'
+          avatar: true,
+          'avatar--circle': this.shape === 'circle',
+          'avatar--square': this.shape === 'square'
         }}
       >
         {!this.initials && (
-          <div class="sl-avatar__icon">
+          <div class="avatar__icon">
             <slot name="icon">
               <sl-icon name="person-fill" />
             </slot>
           </div>
         )}
 
-        {this.initials && <div class="sl-avatar__initials">{this.initials}</div>}
+        {this.initials && <div class="avatar__initials">{this.initials}</div>}
 
-        {this.image && !this.hasError && (
-          <img class="sl-avatar__image" src={this.image} onError={this.handleImageError} />
-        )}
+        {this.image && !this.hasError && <img class="avatar__image" src={this.image} onError={this.handleImageError} />}
       </div>
     );
   }

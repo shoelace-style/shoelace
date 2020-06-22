@@ -40,31 +40,31 @@ export class Tag {
       <span
         ref={el => (this.tag = el)}
         class={{
-          'sl-tag': true,
+          tag: true,
 
           // Types
-          'sl-tag--primary': this.type === 'primary',
-          'sl-tag--success': this.type === 'success',
-          'sl-tag--info': this.type === 'info',
-          'sl-tag--warning': this.type === 'warning',
-          'sl-tag--danger': this.type === 'danger',
-          'sl-tag--text': this.type === 'text',
+          'tag--primary': this.type === 'primary',
+          'tag--success': this.type === 'success',
+          'tag--info': this.type === 'info',
+          'tag--warning': this.type === 'warning',
+          'tag--danger': this.type === 'danger',
+          'tag--text': this.type === 'text',
 
           // Sizes
-          'sl-tag--small': this.size === 'small',
-          'sl-tag--medium': this.size === 'medium',
-          'sl-tag--large': this.size === 'large',
+          'tag--small': this.size === 'small',
+          'tag--medium': this.size === 'medium',
+          'tag--large': this.size === 'large',
 
           // Modifers
-          'sl-tag--removable': this.removable
+          'tag--removable': this.removable
         }}
       >
-        <span class="sl-tag__content">
+        <span class="tag__content">
           <slot />
         </span>
 
         {this.removable && (
-          <span class="sl-tag__remove" role="button" tabIndex={-1} onClick={this.handleRemoveClick}>
+          <span class="tag__remove" role="button" tabIndex={-1} onClick={this.handleRemoveClick}>
             <sl-icon name="x" />
           </span>
         )}

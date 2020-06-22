@@ -16,7 +16,7 @@ let id = 0;
 })
 export class Details {
   header: HTMLElement;
-  id = `sl-details-${++id}`;
+  id = `details-${++id}`;
   body: HTMLElement;
 
   constructor() {
@@ -98,7 +98,7 @@ export class Details {
     const target = event.target as HTMLElement;
 
     // Ensure we only handle one transition event on the target element
-    if (event.propertyName === 'height' && target.classList.contains('sl-details__body')) {
+    if (event.propertyName === 'height' && target.classList.contains('details__body')) {
       this.body.style.overflow = this.open ? 'visible' : 'hidden';
       this.body.style.height = this.open ? 'auto' : '0';
       this.open ? this.slAfterShow.emit() : this.slAfterHide.emit();
@@ -133,15 +133,15 @@ export class Details {
     return (
       <div
         class={{
-          'sl-details': true,
-          'sl-details--open': this.open,
-          'sl-details--disabled': this.disabled
+          details: true,
+          'details--open': this.open,
+          'details--disabled': this.disabled
         }}
       >
         <div
           ref={el => (this.header = el)}
           id={`${this.id}-header`}
-          class="sl-details__header"
+          class="details__header"
           role="button"
           aria-expanded={this.open}
           aria-controls={`${this.id}-content`}
@@ -150,17 +150,17 @@ export class Details {
           onClick={this.handleSummaryClick}
           onKeyDown={this.handleSummaryKeyDown}
         >
-          <div class="sl-details__summary">
+          <div class="details__summary">
             <slot name="summary">{this.summary}</slot>
           </div>
 
-          <span class="sl-details__summary-icon">
+          <span class="details__summary-icon">
             <sl-icon name="chevron-right" />
           </span>
         </div>
 
-        <div ref={el => (this.body = el)} class="sl-details__body" onTransitionEnd={this.handleBodyTransitionEnd}>
-          <div id={`${this.id}-content`} class="sl-details__content" role="region" aria-labeledby={`${this.id}-header`}>
+        <div ref={el => (this.body = el)} class="details__body" onTransitionEnd={this.handleBodyTransitionEnd}>
+          <div id={`${this.id}-content`} class="details__content" role="region" aria-labeledby={`${this.id}-header`}>
             <slot />
           </div>
         </div>

@@ -8,18 +8,18 @@
   font-weight: var(--sl-font-weight-normal);
 }
 
-.sl-progress-ring__track {
+.progress-ring__track {
   stroke: var(--sl-color-gray-90);
 }
 
-.sl-progress-ring__indicator {
+.progress-ring__indicator {
   stroke: var(--sl-color-primary-50);
   transition: 0.35s stroke-dashoffset, 0.35s stroke;
   transform: rotate(-90deg);
   transform-origin: 50% 50%;
 }
 
-.sl-progress-ring__label {
+.progress-ring__label {
   display: flex;
   align-items: center;
   justify-content: center;

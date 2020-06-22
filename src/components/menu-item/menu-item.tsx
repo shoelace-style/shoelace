@@ -32,31 +32,31 @@ export class MenuItem {
     return (
       <div
         class={{
-          'sl-menu-item': true,
-          'sl-menu-item--checked': this.checked,
-          'sl-menu-item--active': this.active,
-          'sl-menu-item--disabled': this.disabled
+          'menu-item': true,
+          'menu-item--checked': this.checked,
+          'menu-item--active': this.active,
+          'menu-item--disabled': this.disabled
         }}
         role="menuitem"
         aria-checked={this.checked}
         aria-disabled={this.disabled}
         aria-selected={this.active}
       >
-        <span class="sl-menu-item__check">
+        <span class="menu-item__check">
           <slot name="check-icon">
             <sl-icon name="check2" />
           </slot>
         </span>
 
-        <span class="sl-menu-item__prefix">
+        <span class="menu-item__prefix">
           <slot name="prefix" />
         </span>
 
-        <span class="sl-menu-item__label">
+        <span class="menu-item__label">
           <slot />
         </span>
 
-        <span class="sl-menu-item__suffix">
+        <span class="menu-item__suffix">
           <slot name="suffix" />
         </span>
       </div>

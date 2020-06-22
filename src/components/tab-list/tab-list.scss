@@ -5,23 +5,23 @@
   display: block;
 }
 
-.sl-tab-list {
+.tab-list {
   display: flex;
   border: solid 1px transparent;
   border-radius: 0;
 
-  .sl-tab-list__tabs {
+  .tab-list__tabs {
     display: flex;
     position: relative;
   }
 
-  .sl-tab-list__active-tab-indicator {
+  .tab-list__active-tab-indicator {
     position: absolute;
     transition: var(--sl-transition-fast) transform ease, var(--sl-transition-fast) width ease;
   }
 
   // Show a focus ring if the user is interacting with a keyboard
-  &:not(.sl-tab-list--using-keyboard) ::slotted(sl-tab) {
+  &:not(.tab-list--using-keyboard) ::slotted(sl-tab) {
     --focus-ring-box-shadow: none;
   }
 }
@@ -30,29 +30,29 @@
 // Top + bottom
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sl-tab-list--top {
+.tab-list--top {
   flex-direction: column;
 
-  .sl-tab-list__nav {
+  .tab-list__nav {
     display: flex;
     order: 1;
     overflow-x: auto;
     @include hide-scrollbar();
   }
 
-  .sl-tab-list__tabs {
+  .tab-list__tabs {
     flex: 1 1 auto;
     position: relative;
     flex-direction: row;
     border-bottom: solid 2px var(--sl-color-gray-90);
   }
 
-  .sl-tab-list__active-tab-indicator {
+  .tab-list__active-tab-indicator {
     bottom: -2px;
     border-bottom: solid 2px var(--sl-color-primary-50);
   }
 
-  .sl-tab-list__body {
+  .tab-list__body {
     order: 2;
   }
 }
@@ -61,29 +61,29 @@
 // Bottom
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sl-tab-list--bottom {
+.tab-list--bottom {
   flex-direction: column;
 
-  .sl-tab-list__nav {
+  .tab-list__nav {
     display: flex;
     order: 2;
     overflow-x: auto;
     @include hide-scrollbar();
   }
 
-  .sl-tab-list__tabs {
+  .tab-list__tabs {
     flex: 1 1 auto;
     position: relative;
     flex-direction: row;
     border-top: solid 2px var(--sl-color-gray-90);
   }
 
-  .sl-tab-list__active-tab-indicator {
+  .tab-list__active-tab-indicator {
     top: calc(-1 * 2px);
     border-top: solid 2px var(--sl-color-primary-50);
   }
 
-  .sl-tab-list__body {
+  .tab-list__body {
     order: 1;
   }
 }
@@ -92,25 +92,25 @@
 // Left
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sl-tab-list--left {
+.tab-list--left {
   flex-direction: row;
 
-  .sl-tab-list__nav {
+  .tab-list__nav {
     order: 1;
   }
 
-  .sl-tab-list__tabs {
+  .tab-list__tabs {
     flex: 0 0 auto;
     flex-direction: column;
     border-right: solid 2px var(--sl-color-gray-90);
   }
 
-  .sl-tab-list__active-tab-indicator {
+  .tab-list__active-tab-indicator {
     right: calc(-1 * 2px);
     border-right: solid 2px var(--sl-color-primary-50);
   }
 
-  .sl-tab-list__body {
+  .tab-list__body {
     flex: 1 1 auto;
     order: 2;
   }
@@ -120,25 +120,25 @@
 // Right
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.sl-tab-list--right {
+.tab-list--right {
   flex-direction: row;
 
-  .sl-tab-list__nav {
+  .tab-list__nav {
     order: 2;
   }
 
-  .sl-tab-list__tabs {
+  .tab-list__tabs {
     flex: 0 0 auto;
     flex-direction: column;
     border-left: solid 2px var(--sl-color-gray-90);
   }
 
-  .sl-tab-list__active-tab-indicator {
+  .tab-list__active-tab-indicator {
     left: calc(-1 * 2px);
     border-left: solid 2px var(--sl-color-primary-50);
   }
 
-  .sl-tab-list__body {
+  .tab-list__body {
     flex: 1 1 auto;
     order: 1;
   }

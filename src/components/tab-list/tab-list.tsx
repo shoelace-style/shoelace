@@ -212,26 +212,26 @@ export class TabList {
       <div
         ref={el => (this.tabList = el)}
         class={{
-          'sl-tab-list': true,
-          'sl-tab-list--using-keyboard': this.isUsingKeyboard,
+          'tab-list': true,
+          'tab-list--using-keyboard': this.isUsingKeyboard,
 
           // Placements
-          'sl-tab-list--top': this.placement === 'top',
-          'sl-tab-list--bottom': this.placement === 'bottom',
-          'sl-tab-list--left': this.placement === 'left',
-          'sl-tab-list--right': this.placement === 'right'
+          'tab-list--top': this.placement === 'top',
+          'tab-list--bottom': this.placement === 'bottom',
+          'tab-list--left': this.placement === 'left',
+          'tab-list--right': this.placement === 'right'
         }}
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
       >
-        <div ref={el => (this.nav = el)} class="sl-tab-list__nav" tabindex="-1">
-          <div ref={el => (this.tabs = el)} class="sl-tab-list__tabs" role="tablist">
-            <div ref={el => (this.activeTabIndicator = el)} class="sl-tab-list__active-tab-indicator" />
+        <div ref={el => (this.nav = el)} class="tab-list__nav" tabindex="-1">
+          <div ref={el => (this.tabs = el)} class="tab-list__tabs" role="tablist">
+            <div ref={el => (this.activeTabIndicator = el)} class="tab-list__active-tab-indicator" />
             <slot name="nav" />
           </div>
         </div>
 
-        <div ref={el => (this.body = el)} class="sl-tab-list__body">
+        <div ref={el => (this.body = el)} class="tab-list__body">
           <slot />
         </div>
       </div>

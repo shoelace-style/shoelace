@@ -247,14 +247,14 @@ export class Select {
         closeOnSelect={!this.multiple}
         containingElement={this.host}
         class={{
-          'sl-select': true,
-          'sl-select--open': this.isOpen,
-          'sl-select--focused': this.hasFocus,
-          'sl-select--disabled': this.disabled,
-          'sl-select--multiple': this.multiple,
-          'sl-select--small': this.size === 'small',
-          'sl-select--medium': this.size === 'medium',
-          'sl-select--large': this.size === 'large'
+          select: true,
+          'select--open': this.isOpen,
+          'select--focused': this.hasFocus,
+          'select--disabled': this.disabled,
+          'select--multiple': this.multiple,
+          'select--small': this.size === 'small',
+          'select--medium': this.size === 'medium',
+          'select--large': this.size === 'large'
         }}
         onSlShow={this.handleMenuShow}
         onSlHide={this.handleMenuHide}
@@ -262,7 +262,7 @@ export class Select {
         <sl-input
           slot="trigger"
           ref={el => (this.input = el)}
-          class="sl-select__input"
+          class="select__input"
           value={this.displayLabel}
           disabled={this.disabled}
           placeholder={this.displayLabel === '' && this.displayTags.length === 0 ? this.placeholder : null}
@@ -273,17 +273,17 @@ export class Select {
           onKeyDown={this.handleKeyDown}
         >
           {this.displayTags.length && (
-            <span slot="prefix" class="sl-select__tags">
+            <span slot="prefix" class="select__tags">
               {this.displayTags}
             </span>
           )}
 
-          <sl-icon slot="suffix" class="sl-select__icon" name="chevron-down" />
+          <sl-icon slot="suffix" class="select__icon" name="chevron-down" />
         </sl-input>
 
         <sl-menu
           ref={el => (this.menu = el)}
-          class="sl-select__menu"
+          class="select__menu"
           onSlSelect={this.handleMenuSelect}
           onKeyDown={this.handleMenuKeyDown}
         >

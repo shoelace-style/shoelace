@@ -11,7 +11,7 @@
   --size: 3rem;
 }
 
-.sl-avatar {
+.avatar {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -28,15 +28,15 @@
   vertical-align: middle;
 }
 
-.sl-avatar--circle {
+.avatar--circle {
   border-radius: var(--sl-border-radius-circle);
 }
 
-.sl-avatar--square {
+.avatar--square {
   border-radius: var(--sl-border-radius-medium);
 }
 
-.sl-avatar__icon {
+.avatar__icon {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -47,12 +47,12 @@
   height: 100%;
 }
 
-.sl-avatar__initials {
+.avatar__initials {
   line-height: 1;
   text-transform: uppercase;
 }
 
-.sl-avatar__image {
+.avatar__image {
   position: absolute;
   top: 0;
   left: 0;
