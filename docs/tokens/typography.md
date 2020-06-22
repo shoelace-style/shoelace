@@ -17,6 +17,7 @@ Font sizes use `rem` units so they scale with the base font size. The pixel valu
 
 | Token | Value | Example 
 |-------|-------|---------
+| `--sl-font-size-xx-small` | 0.625rem (10px) | <span style="font-size: var(--sl-font-size-xx-small)">Aa</span>
 | `--sl-font-size-x-small` | 0.75rem (12px) | <span style="font-size: var(--sl-font-size-x-small)">Aa</span>
 | `--sl-font-size-small` | 0.875rem (14px) | <span style="font-size: var(--sl-font-size-small)">Aa</span>
 | `--sl-font-size-medium` | 1rem (16px) | <span style="font-size: var(--sl-font-size-medium)">Aa</span>
