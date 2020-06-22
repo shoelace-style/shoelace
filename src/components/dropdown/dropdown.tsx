@@ -97,7 +97,8 @@ export class Dropdown {
   componentDidLoad() {
     this.popover = new Popover(this.trigger, this.panel, {
       placement: this.placement,
-      offset: [this.skidding, this.distance],
+      skidding: this.skidding,
+      distance: this.distance,
       onAfterHide: () => this.slAfterHide.emit(),
       onAfterShow: () => this.slAfterShow.emit(),
       onTransitionEnd: () => {

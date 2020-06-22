@@ -32,6 +32,8 @@
   font-weight: var(--sl-tooltip-font-weight);
   line-height: var(--sl-tooltip-line-height);
   color: var(--sl-tooltip-color);
+  opacity: 0;
+  transition: var(--sl-transition-fast) opacity;
   padding: var(--sl-tooltip-padding);
   pointer-events: none;
 
@@ -40,6 +42,10 @@
     position: absolute;
     width: 0;
     height: 0;
+  }
+
+  &.popover-visible {
+    opacity: 1;
   }
 }
 

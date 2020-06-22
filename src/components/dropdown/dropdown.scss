@@ -23,7 +23,12 @@
   border: solid 1px var(--sl-color-gray-90);
   border-radius: 4px;
   box-shadow: var(--sl-shadow-large);
+  opacity: 0;
   transition: var(--sl-transition-fast) opacity;
+
+  &.popover-visible {
+    opacity: 1;
+  }
 
   ::slotted(sl-menu) {
     max-height: 50vh;

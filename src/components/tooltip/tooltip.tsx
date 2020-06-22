@@ -204,23 +204,10 @@ export class Tooltip {
   syncOptions() {
     this.popover.setOptions({
       placement: this.placement,
-      offset: [this.skidding, this.distance],
+      skidding: this.skidding,
+      distance: this.distance,
       onAfterHide: () => this.slAfterHide.emit(),
-      onAfterShow: () => this.slAfterShow.emit(),
-      hideStyles: {
-        opacity: '0',
-        transitionDelay: this.hasTrigger('manual') ? '0' : 'var(--hide-delay)',
-        transitionDuration: 'var(--hide-duration)',
-        transitionProperty: 'opacity',
-        transitionTimingFunction: 'var(--hide-timing-function)'
-      },
-      showStyles: {
-        opacity: '1',
-        transitionDelay: this.hasTrigger('manual') ? '0' : 'var(--show-delay)',
-        transitionDuration: 'var(--show-duration)',
-        transitionProperty: 'opacity',
-        transitionTimingFunction: 'var(--show-timing-function)'
-      }
+      onAfterShow: () => this.slAfterShow.emit()
     });
   }
 
