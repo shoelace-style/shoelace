@@ -16,7 +16,6 @@ import { KeyboardDetector } from '../../utilities/keyboard-detector';
   shadow: true
 })
 export class Tab {
-  alert: HTMLElement;
   keyboardDetector: KeyboardDetector;
 
   constructor() {
@@ -32,10 +31,10 @@ export class Tab {
   @Prop({ mutable: true, reflect: true }) open = false;
 
   /** Set to true to make the alert closable. */
-  @Prop() closable = false;
+  @Prop({ reflect: true }) closable = false;
 
   /** The type of alert. */
-  @Prop() type: 'primary' | 'success' | 'info' | 'warning' | 'danger' = 'primary';
+  @Prop({ reflect: true }) type: 'primary' | 'success' | 'info' | 'warning' | 'danger' = 'primary';
 
   @Watch('open')
   handleOpenChange() {
@@ -60,7 +59,7 @@ export class Tab {
       whenNotUsing: () => (this.isUsingKeyboard = false)
     });
 
-    this.keyboardDetector.observe(this.alert);
+    this.keyboardDetector.observe(this.host);
 
     // Show on init if open
     if (this.open) {
@@ -69,7 +68,7 @@ export class Tab {
   }
 
   componentDidUnload() {
-    this.keyboardDetector.unobserve(this.alert);
+    this.keyboardDetector.unobserve(this.host);
   }
 
   /** Shows the alert. */
@@ -114,42 +113,28 @@ export class Tab {
 
   render() {
     return (
-      <Host hidden>
-        <div
-          ref={el => (this.alert = el)}
-          class={{
-            'sl-alert': true,
-            'sl-alert--open': this.open,
-            'sl-alert--closable': this.closable,
-            'sl-alert--using-keyboard': this.isUsingKeyboard,
+      <Host
+        data-keyboard={this.isUsingKeyboard}
+        role="alert"
+        aria-hidden={!this.open}
+        onTransitionEnd={this.handleTransitionEnd}
+        hidden
+      >
+        <span id="icon">
+          <slot name="icon" />
+        </span>
 
-            // States
-            'sl-alert--primary': this.type === 'primary',
-            'sl-alert--success': this.type === 'success',
-            'sl-alert--info': this.type === 'info',
-            'sl-alert--warning': this.type === 'warning',
-            'sl-alert--danger': this.type === 'danger'
-          }}
-          role="alert"
-          aria-hidden={!this.open}
-          onTransitionEnd={this.handleTransitionEnd}
-        >
-          <span class="sl-alert__icon">
-            <slot name="icon" />
-          </span>
+        <span id="message">
+          <slot />
+        </span>
 
-          <span class="sl-alert__message">
-            <slot />
-          </span>
-
-          {this.closable && (
-            <button type="button" class="sl-alert__close" onClick={this.handleCloseClick}>
-              <slot name="close-icon">
-                <sl-icon name="x" />
-              </slot>
-            </button>
-          )}
-        </div>
+        {this.closable && (
+          <button type="button" id="close" onClick={this.handleCloseClick}>
+            <slot name="close-icon">
+              <sl-icon name="x" />
+            </slot>
+          </button>
+        )}
       </Host>
     );
   }
