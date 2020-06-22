@@ -118,32 +118,32 @@ export class Tab {
         <div
           ref={el => (this.alert = el)}
           class={{
-            'sl-alert': true,
-            'sl-alert--open': this.open,
-            'sl-alert--closable': this.closable,
-            'sl-alert--using-keyboard': this.isUsingKeyboard,
+            alert: true,
+            'alert--open': this.open,
+            'alert--closable': this.closable,
+            'alert--using-keyboard': this.isUsingKeyboard,
 
             // States
-            'sl-alert--primary': this.type === 'primary',
-            'sl-alert--success': this.type === 'success',
-            'sl-alert--info': this.type === 'info',
-            'sl-alert--warning': this.type === 'warning',
-            'sl-alert--danger': this.type === 'danger'
+            'alert--primary': this.type === 'primary',
+            'alert--success': this.type === 'success',
+            'alert--info': this.type === 'info',
+            'alert--warning': this.type === 'warning',
+            'alert--danger': this.type === 'danger'
           }}
           role="alert"
           aria-hidden={!this.open}
           onTransitionEnd={this.handleTransitionEnd}
         >
-          <span class="sl-alert__icon">
+          <span class="alert__icon">
             <slot name="icon" />
           </span>
 
-          <span class="sl-alert__message">
+          <span class="alert__message">
             <slot />
           </span>
 
           {this.closable && (
-            <button type="button" class="sl-alert__close" onClick={this.handleCloseClick}>
+            <button type="button" class="alert__close" onClick={this.handleCloseClick}>
               <slot name="close-icon">
                 <sl-icon name="x" />
               </slot>
