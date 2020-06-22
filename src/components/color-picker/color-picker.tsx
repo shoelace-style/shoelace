@@ -17,6 +17,7 @@ export class ColorPicker {
   alphaSlider: HTMLElement;
   alphaHandle: HTMLElement;
   bypassValueParse = false;
+  copyButton: HTMLSlButtonElement;
   dropdown: HTMLSlDropdownElement;
   grid: HTMLElement;
   gridHandle: HTMLElement;
@@ -57,6 +58,7 @@ export class ColorPicker {
   @State() saturation = 100;
   @State() lightness = 100;
   @State() alpha = 100;
+  @State() showCopyCheckmark = false;
 
   /** The current color. */
   @Prop({ mutable: true, reflect: true }) value = '#ffffff';
@@ -161,7 +163,12 @@ export class ColorPicker {
   }
 
   handleCopy() {
-    this.textInput.select().then(() => document.execCommand('copy'));
+    this.textInput.select().then(() => {
+      document.execCommand('copy');
+      this.copyButton.setFocus();
+      this.showCopyCheckmark = true;
+      setTimeout(() => (this.showCopyCheckmark = false), 1000);
+    });
   }
 
   handleHueInput(event: Event) {
@@ -685,8 +692,8 @@ export class ColorPicker {
             onKeyDown={this.handleTextInputKeyDown}
             onSlChange={this.handleTextInputChange}
           />
-          <sl-button slot="suffix" size="small" circle onClick={this.handleCopy}>
-            <sl-icon name="clipboard" />
+          <sl-button ref={el => (this.copyButton = el)} slot="suffix" size="small" circle onClick={this.handleCopy}>
+            <sl-icon name={this.showCopyCheckmark ? 'check2' : 'clipboard'} />
           </sl-button>
         </div>
 
