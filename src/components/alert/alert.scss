@@ -1,10 +1,18 @@
 @import 'component';
 
 :host {
+  display: block;
+  border-radius: var(--sl-border-radius-medium);
+
+  &[hidden] {
+    display: none;
+  }
+}
+
+.sl-alert {
+  position: relative;
   display: flex;
   align-items: stretch;
-  position: relative;
-  width: 100%;
   background-color: var(--sl-color-white);
   border: solid 1px var(--sl-color-gray-90);
   border-top-width: 3px;
@@ -16,17 +24,13 @@
   color: var(--sl-color-gray-30);
   opacity: 0;
   transition: var(--sl-transition-medium) opacity ease;
-
-  &[hidden] {
-    display: none;
-  }
 }
 
-:host([open]) {
+.sl-alert--open {
   opacity: 1;
 }
 
-#icon {
+.sl-alert__icon {
   flex: 0 0 auto;
   display: flex;
   align-items: center;
@@ -37,53 +41,53 @@
   }
 }
 
-:host([type='primary']) {
+.sl-alert--primary {
   border-top-color: var(--sl-color-primary-50);
 
-  #icon {
+  .sl-alert__icon {
     color: var(--sl-color-primary-50);
   }
 }
 
-:host([type='success']) {
+.sl-alert--success {
   border-top-color: var(--sl-color-success-50);
 
-  #icon {
+  .sl-alert__icon {
     color: var(--sl-color-success-50);
   }
 }
 
-:host([type='info']) {
+.sl-alert--info {
   border-top-color: var(--sl-color-info-50);
 
-  #icon {
+  .sl-alert__icon {
     color: var(--sl-color-info-50);
   }
 }
 
-:host([type='warning']) {
+.sl-alert--warning {
   border-top-color: var(--sl-color-warning-50);
 
-  #icon {
+  .sl-alert__icon {
     color: var(--sl-color-warning-50);
   }
 }
 
-:host([type='danger']) {
+.sl-alert--danger {
   border-top-color: var(--sl-color-danger-50);
 
-  #icon {
+  .sl-alert__icon {
     color: var(--sl-color-danger-50);
   }
 }
 
-#message {
+.sl-alert__message {
   flex: 1 1 auto;
   padding: var(--sl-spacing-large);
   overflow: hidden;
 }
 
-#close {
+.sl-alert__close {
   flex: 0 0 auto;
   display: flex;
   align-items: center;
@@ -110,7 +114,7 @@
   }
 }
 
-:host([data-keyboard]) #close:focus {
+.sl-alert--using-keyboard .sl-alert__close:focus {
   box-shadow: 0 0 0 var(--sl-focus-ring-width)
     hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha));
 }
