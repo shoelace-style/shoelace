@@ -150,7 +150,8 @@ Icon sizes are determined by the current font size.
 
   .icon-list {
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
+    grid-template-columns: repeat(12, 1fr);
+    position: relative;
     margin-top: 1rem;
   }
 
@@ -160,10 +161,10 @@ Icon sizes are determined by the current font size.
   }
 
   .icon-list sl-icon {
-    font-size: 32px;
+    font-size: 24px;
     border-radius: var(--sl-border-radius-circle);
     padding: .5em;
-    margin: auto;
+    margin: 0 auto;
     transition: var(--sl-transition-medium) all;
     cursor: pointer;
   }
@@ -198,11 +199,11 @@ Icon sizes are determined by the current font size.
     }
 
     .icon-list {
-      grid-template-columns: repeat(6, 1fr);
+      grid-template-columns: repeat(8, 1fr);
     }
 
     .icon-list sl-icon {
-      font-size: 24px;
+      font-size: 20px;
     }    
   }  
 </style>
