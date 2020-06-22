@@ -41,7 +41,7 @@ One of the most common use cases for badges is attaching them to buttons. To mak
 
 ### Menu Items
 
-When including badges in menu items, use the `suffix` slot to make sure they're placed correctly.
+When including badges in menu items, use the `suffix` slot to make sure they're aligned correctly.
 
 ```html preview
 <sl-menu style="max-width: 240px; border: solid 1px var(--sl-color-gray-90); border-radius: var(--sl-border-radius-medium);">
