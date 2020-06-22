@@ -1,5 +1,4 @@
-import { Component, Element, Event, EventEmitter, Method, Prop, State, Watch, h } from '@stencil/core';
-import { KeyboardDetector } from '../../utilities/keyboard-detector';
+import { Component, Element, Event, EventEmitter, Method, Prop, Watch, h } from '@stencil/core';
 import { getOffset } from '../../utilities/offset';
 import { scrollIntoView } from '../../utilities/scroll';
 
@@ -20,7 +19,6 @@ export class TabList {
   activeTab: HTMLSlTabElement;
   activeTabIndicator: HTMLElement;
   body: HTMLElement;
-  keyboardDetector: KeyboardDetector;
   mutationObserver: MutationObserver;
   nav: HTMLElement;
   tabList: HTMLElement;
@@ -32,8 +30,6 @@ export class TabList {
   }
 
   @Element() host: HTMLSlTabListElement;
-
-  @State() isUsingKeyboard = false;
 
   /** The placement of the tabs. */
   @Prop() placement: 'top' | 'bottom' | 'left' | 'right' = 'top';
@@ -57,17 +53,10 @@ export class TabList {
     // Update aria labels if the DOM changes
     this.mutationObserver = new MutationObserver(() => setTimeout(() => this.setAriaLabels()));
     this.mutationObserver.observe(this.host, { attributes: true, childList: true, subtree: true });
-
-    this.keyboardDetector = new KeyboardDetector({
-      whenUsing: () => (this.isUsingKeyboard = true),
-      whenNotUsing: () => (this.isUsingKeyboard = false)
-    });
-    this.keyboardDetector.observe(this.tabList);
   }
 
   componentDidUnload() {
     this.mutationObserver.disconnect();
-    this.keyboardDetector.unobserve(this.tabList);
   }
 
   /** Shows the specified tab panel. */
@@ -213,7 +202,6 @@ export class TabList {
         ref={el => (this.tabList = el)}
         class={{
           'tab-list': true,
-          'tab-list--using-keyboard': this.isUsingKeyboard,
 
           // Placements
           'tab-list--top': this.placement === 'top',

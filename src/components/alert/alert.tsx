@@ -1,5 +1,4 @@
-import { Component, Element, Event, EventEmitter, Host, Method, Prop, State, Watch, h } from '@stencil/core';
-import { KeyboardDetector } from '../../utilities/keyboard-detector';
+import { Component, Element, Event, EventEmitter, Host, Method, Prop, Watch, h } from '@stencil/core';
 
 /**
  * @since 1.0.0
@@ -17,7 +16,6 @@ import { KeyboardDetector } from '../../utilities/keyboard-detector';
 })
 export class Tab {
   alert: HTMLElement;
-  keyboardDetector: KeyboardDetector;
 
   constructor() {
     this.handleCloseClick = this.handleCloseClick.bind(this);
@@ -25,8 +23,6 @@ export class Tab {
   }
 
   @Element() host: HTMLSlAlertElement;
-
-  @State() isUsingKeyboard = false;
 
   /** Indicates whether or not the alert is open. You can use this in lieu of the show/hide methods. */
   @Prop({ mutable: true, reflect: true }) open = false;
@@ -55,21 +51,10 @@ export class Tab {
   @Event() slAfterHide: EventEmitter;
 
   componentDidLoad() {
-    this.keyboardDetector = new KeyboardDetector({
-      whenUsing: () => (this.isUsingKeyboard = true),
-      whenNotUsing: () => (this.isUsingKeyboard = false)
-    });
-
-    this.keyboardDetector.observe(this.alert);
-
     // Show on init if open
     if (this.open) {
       this.show();
     }
-  }
-
-  componentDidUnload() {
-    this.keyboardDetector.unobserve(this.alert);
   }
 
   /** Shows the alert. */
@@ -121,7 +106,6 @@ export class Tab {
             alert: true,
             'alert--open': this.open,
             'alert--closable': this.closable,
-            'alert--using-keyboard': this.isUsingKeyboard,
 
             // States
             'alert--primary': this.type === 'primary',

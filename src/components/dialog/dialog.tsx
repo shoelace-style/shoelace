@@ -1,5 +1,4 @@
-import { Component, Element, Event, EventEmitter, Host, Method, Prop, State, Watch, h } from '@stencil/core';
-import { KeyboardDetector } from '../../utilities/keyboard-detector';
+import { Component, Element, Event, EventEmitter, Host, Method, Prop, Watch, h } from '@stencil/core';
 import { lockBodyScrolling, unlockBodyScrolling } from '../../utilities/scroll';
 
 let id = 0;
@@ -21,7 +20,6 @@ export class Dialog {
   overlay: HTMLElement;
   dialog: HTMLElement;
   id = `dialog-${++id}`;
-  keyboardDetector: KeyboardDetector;
 
   constructor() {
     this.keepDialogFocused = this.keepDialogFocused.bind(this);
@@ -32,8 +30,6 @@ export class Dialog {
   }
 
   @Element() host: HTMLSlDialogElement;
-
-  @State() isUsingKeyboard = false;
 
   /** Indicates whether or not the dialog is open. You can use this in lieu of the show/hide methods. */
   @Prop({ mutable: true, reflect: true }) open = false;
@@ -74,12 +70,6 @@ export class Dialog {
   @Event() slAfterHide: EventEmitter;
 
   componentDidLoad() {
-    this.keyboardDetector = new KeyboardDetector({
-      whenUsing: () => (this.isUsingKeyboard = true),
-      whenNotUsing: () => (this.isUsingKeyboard = false)
-    });
-    this.keyboardDetector.observe(this.dialog);
-
     // Show on init if open
     if (this.open) {
       this.show();
@@ -88,7 +78,6 @@ export class Dialog {
 
   componentDidUnload() {
     unlockBodyScrolling(this.host);
-    this.keyboardDetector.unobserve(this.dialog);
   }
 
   /** Shows the dialog */
@@ -167,8 +156,7 @@ export class Dialog {
           ref={el => (this.dialog = el)}
           class={{
             dialog: true,
-            'dialog--open': this.open,
-            'dialog--using-keyboard': this.isUsingKeyboard
+            'dialog--open': this.open
           }}
           onTransitionEnd={this.handleTransitionEnd}
         >

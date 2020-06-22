@@ -19,11 +19,6 @@
     position: absolute;
     transition: var(--sl-transition-fast) transform ease, var(--sl-transition-fast) width ease;
   }
-
-  // Show a focus ring if the user is interacting with a keyboard
-  &:not(.tab-list--using-keyboard) ::slotted(sl-tab) {
-    --focus-ring-box-shadow: none;
-  }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
