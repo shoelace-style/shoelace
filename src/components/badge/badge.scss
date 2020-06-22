@@ -1,7 +1,8 @@
 @import 'component';
 
 :host {
-  display: inline-block;
+  display: inline-flex;
+  border-radius: var(--sl-border-radius-pill);
   pointer-events: none;
 }
 
@@ -13,7 +14,7 @@
   font-weight: var(--sl-font-weight-normal);
   letter-spacing: var(--sl-letter-spacing-normal);
   line-height: 1;
-  border-radius: var(--sl-border-radius-pill);
+  border-radius: inherit;
   border: solid 1px var(--sl-color-white);
   white-space: nowrap;
   padding: 3px 6px;
