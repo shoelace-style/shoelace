@@ -1,4 +1,4 @@
-import { Component, Prop, State, h } from '@stencil/core';
+import { Component, Host, Prop, State, h } from '@stencil/core';
 
 /**
  * @since 1.0.0
@@ -29,7 +29,7 @@ export class Avatar {
   @Prop() initials = '';
 
   /** Initials to use as a fallback when no image is available (1-2 characters max recommended). */
-  @Prop() shape: 'circle' | 'square' = 'circle';
+  @Prop({ reflect: true }) shape: 'circle' | 'square' = 'circle';
 
   handleImageError() {
     this.hasError = true;
@@ -37,29 +37,19 @@ export class Avatar {
 
   render() {
     return (
-      <div
-        role="image"
-        aria-label={this.alt}
-        class={{
-          'sl-avatar': true,
-          'sl-avatar--circle': this.shape === 'circle',
-          'sl-avatar--square': this.shape === 'square'
-        }}
-      >
+      <Host role="image" aria-label={this.alt}>
         {!this.initials && (
-          <div class="sl-avatar__icon">
+          <div id="icon">
             <slot name="icon">
               <sl-icon name="person-fill" />
             </slot>
           </div>
         )}
 
-        {this.initials && <div class="sl-avatar__initials">{this.initials}</div>}
+        {this.initials && <div id="initials">{this.initials}</div>}
 
-        {this.image && !this.hasError && (
-          <img class="sl-avatar__image" src={this.image} onError={this.handleImageError} />
-        )}
-      </div>
+        {this.image && !this.hasError && <img id="image" src={this.image} onError={this.handleImageError} />}
+      </Host>
     );
   }
 }
