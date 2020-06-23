@@ -147,7 +147,7 @@ export class Details {
           'details--disabled': this.disabled
         }}
       >
-        <div
+        <header
           ref={el => (this.header = el)}
           id={`${this.id}-header`}
           class="details__header"
@@ -166,7 +166,7 @@ export class Details {
           <span class="details__summary-icon">
             <sl-icon name="chevron-right" />
           </span>
-        </div>
+        </header>
 
         <div ref={el => (this.body = el)} class="details__body" onTransitionEnd={this.handleBodyTransitionEnd}>
           <div id={`${this.id}-content`} class="details__content" role="region" aria-labeledby={`${this.id}-header`}>

@@ -175,7 +175,7 @@ export class Dialog {
             tabIndex={0}
           >
             {!this.noHeader && (
-              <div class="dialog__header">
+              <header class="dialog__header">
                 <span class="dialog__title" id={`${this.id}-title`}>
                   {/* If there's no label, use an invisible character to prevent the heading from collapsing */}
                   {this.label || String.fromCharCode(65279)}
@@ -183,7 +183,7 @@ export class Dialog {
                 <button class="dialog__close" type="button" onClick={this.handleCloseClick}>
                   <sl-icon name="x"></sl-icon>
                 </button>
-              </div>
+              </header>
             )}
 
             <div class="dialog__body">
@@ -191,9 +191,9 @@ export class Dialog {
             </div>
 
             {!this.noFooter && (
-              <div class="dialog__footer">
+              <footer class="dialog__footer">
                 <slot name="footer" />
-              </div>
+              </footer>
             )}
           </div>
 
