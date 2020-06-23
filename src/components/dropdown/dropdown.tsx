@@ -191,7 +191,7 @@ export class Dropdown {
     }
 
     // Prevent scrolling when certain keys are pressed
-    if ([' ', 'ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
+    if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
       event.preventDefault();
     }
 
