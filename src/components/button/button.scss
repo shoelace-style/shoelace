@@ -1,13 +1,8 @@
 @import 'component';
 
-/**
-  * @prop --width: The width of the button.
-  */
 :host {
-  --width: auto;
-
   display: inline-block;
-  width: var(--width);
+  width: auto;
   cursor: pointer;
 }
 
@@ -15,7 +10,7 @@
   display: inline-flex;
   align-items: stretch;
   justify-content: center;
-  width: var(--width);
+  width: inherit;
   border-style: solid;
   border-width: var(--sl-input-border-width);
   font-family: var(--sl-input-font-family);

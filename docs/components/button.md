@@ -64,12 +64,12 @@ Use `type="text"` to create text buttons, which share the same size as regular b
 
 ### Custom Width
 
-Block buttons can be created by setting the button's `--width` property to `100%`. Note that this is different than the standard `width` property.
+Custom width buttons can be created by setting the button's `width`.
 
 ```html preview
-<sl-button type="default" size="small" style="--width: 100%; margin-bottom: 1rem;">Small</sl-button>
-<sl-button type="default" size="medium" style="--width: 100%; margin-bottom: 1rem;">Medium</sl-button>
-<sl-button type="default" size="large" style="--width: 100%;">Large</sl-button>
+<sl-button type="default" size="small" style="width: 100%; margin-bottom: 1rem;">Small</sl-button>
+<sl-button type="default" size="medium" style="width: 100%; margin-bottom: 1rem;">Medium</sl-button>
+<sl-button type="default" size="large" style="width: 100%;">Large</sl-button>
 ```
 
 ### Icons
