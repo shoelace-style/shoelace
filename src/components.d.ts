@@ -206,44 +206,6 @@ export namespace Components {
          */
         "show": () => Promise<boolean>;
     }
-    interface SlDrawer {
-        /**
-          * Hides the drawer
-         */
-        "hide": () => Promise<boolean>;
-        /**
-          * The drawer's label as displayed in the header. You should always include a relevant label even when using `no-header`, as it is required for proper accessibility.
-         */
-        "label": string;
-        /**
-          * Removes the footer.
-         */
-        "noFooter": boolean;
-        /**
-          * Removes the header. This will also remove the default close button, so please ensure you provide an easy, accessible way for users to dismiss the drawer.
-         */
-        "noHeader": boolean;
-        /**
-          * Indicates whether or not the drawer is open. You can use this in lieu of the show/hide methods.
-         */
-        "open": boolean;
-        /**
-          * Adds an overlay when the drawer is open.
-         */
-        "overlay": boolean;
-        /**
-          * When true, the drawer will not be dismissed when the user clicks outside of it.
-         */
-        "pinned": boolean;
-        /**
-          * The direction from which the drawer will open.
-         */
-        "placement": 'left' | 'right';
-        /**
-          * Shows the drawer
-         */
-        "show": () => Promise<boolean>;
-    }
     interface SlDropdown {
         /**
           * Determines whether the dropdown should hide when a menu item is selected.
@@ -832,12 +794,6 @@ declare global {
         prototype: HTMLSlDialogElement;
         new (): HTMLSlDialogElement;
     };
-    interface HTMLSlDrawerElement extends Components.SlDrawer, HTMLStencilElement {
-    }
-    var HTMLSlDrawerElement: {
-        prototype: HTMLSlDrawerElement;
-        new (): HTMLSlDrawerElement;
-    };
     interface HTMLSlDropdownElement extends Components.SlDropdown, HTMLStencilElement {
     }
     var HTMLSlDropdownElement: {
@@ -967,7 +923,6 @@ declare global {
         "sl-color-picker": HTMLSlColorPickerElement;
         "sl-details": HTMLSlDetailsElement;
         "sl-dialog": HTMLSlDialogElement;
-        "sl-drawer": HTMLSlDrawerElement;
         "sl-dropdown": HTMLSlDropdownElement;
         "sl-icon": HTMLSlIconElement;
         "sl-input": HTMLSlInputElement;
@@ -1238,52 +1193,6 @@ declare namespace LocalJSX {
           * When true, the dialog will not be dismissed when the user clicks outside of it.
          */
         "pinned"?: boolean;
-    }
-    interface SlDrawer {
-        /**
-          * The drawer's label as displayed in the header. You should always include a relevant label even when using `no-header`, as it is required for proper accessibility.
-         */
-        "label"?: string;
-        /**
-          * Removes the footer.
-         */
-        "noFooter"?: boolean;
-        /**
-          * Removes the header. This will also remove the default close button, so please ensure you provide an easy, accessible way for users to dismiss the drawer.
-         */
-        "noHeader"?: boolean;
-        /**
-          * Emitted after the drawer closes and all transitions are complete.
-         */
-        "onSlAfterHide"?: (event: CustomEvent<any>) => void;
-        /**
-          * Emitted after the drawer opens and all transitions are complete.
-         */
-        "onSlAfterShow"?: (event: CustomEvent<any>) => void;
-        /**
-          * Emitted when the drawer closes. Calling `event.preventDefault()` will prevent it from being closed.
-         */
-        "onSlHide"?: (event: CustomEvent<any>) => void;
-        /**
-          * Emitted when the drawer opens. Calling `event.preventDefault()` will prevent it from being opened.
-         */
-        "onSlShow"?: (event: CustomEvent<any>) => void;
-        /**
-          * Indicates whether or not the drawer is open. You can use this in lieu of the show/hide methods.
-         */
-        "open"?: boolean;
-        /**
-          * Adds an overlay when the drawer is open.
-         */
-        "overlay"?: boolean;
-        /**
-          * When true, the drawer will not be dismissed when the user clicks outside of it.
-         */
-        "pinned"?: boolean;
-        /**
-          * The direction from which the drawer will open.
-         */
-        "placement"?: 'left' | 'right';
     }
     interface SlDropdown {
         /**
@@ -1876,7 +1785,6 @@ declare namespace LocalJSX {
         "sl-color-picker": SlColorPicker;
         "sl-details": SlDetails;
         "sl-dialog": SlDialog;
-        "sl-drawer": SlDrawer;
         "sl-dropdown": SlDropdown;
         "sl-icon": SlIcon;
         "sl-input": SlInput;
@@ -1911,7 +1819,6 @@ declare module "@stencil/core" {
             "sl-color-picker": LocalJSX.SlColorPicker & JSXBase.HTMLAttributes<HTMLSlColorPickerElement>;
             "sl-details": LocalJSX.SlDetails & JSXBase.HTMLAttributes<HTMLSlDetailsElement>;
             "sl-dialog": LocalJSX.SlDialog & JSXBase.HTMLAttributes<HTMLSlDialogElement>;
-            "sl-drawer": LocalJSX.SlDrawer & JSXBase.HTMLAttributes<HTMLSlDrawerElement>;
             "sl-dropdown": LocalJSX.SlDropdown & JSXBase.HTMLAttributes<HTMLSlDropdownElement>;
             "sl-icon": LocalJSX.SlIcon & JSXBase.HTMLAttributes<HTMLSlIconElement>;
             "sl-input": LocalJSX.SlInput & JSXBase.HTMLAttributes<HTMLSlInputElement>;
