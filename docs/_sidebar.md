@@ -22,6 +22,7 @@
   - [Color Picker](/components/color-picker.md)
   - [Details](/components/details.md)
   - [Dialog](/components/dialog.md)
+  - [Drawer](/components/drawer.md)
   - [Dropdown](/components/dropdown.md)
   - [Icon](/components/icon.md)
   - [Input](/components/input.md)

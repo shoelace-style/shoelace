@@ -11,6 +11,7 @@ The roadmap tracks the status of components and features that are planned, in de
 - [x] Color Picker
 - [x] Details
 - [x] Dialog
+- [ ] Drawer
 - [x] Dropdown
 - [ ] Form
 - [x] Icon
@@ -19,7 +20,6 @@ The roadmap tracks the status of components and features that are planned, in de
 - [x] Menu Divider
 - [x] Menu Item
 - [x] Menu Label
-- [ ] Panel
 - [x] Progress Bar
 - [x] Progress Ring
 - [x] Radio

@@ -182,9 +182,35 @@ export namespace Components {
          */
         "hide": () => Promise<boolean>;
         /**
-          * When true, the dialog will not be dismissed when the user clicks on the overlay.
+          * The dialog's label as displayed in the header. You should always include a relevant label even when using `no-header`, as it is required for proper accessibility.
          */
-        "ignoreOverlayClicks": boolean;
+        "label": string;
+        /**
+          * Set to true to disable the footer.
+         */
+        "noFooter": boolean;
+        /**
+          * Set to true to disable the header. This will also remove the default close button, so please ensure you provide an easy, accessible way for users to dismiss the dialog.
+         */
+        "noHeader": boolean;
+        /**
+          * Indicates whether or not the dialog is open. You can use this in lieu of the show/hide methods.
+         */
+        "open": boolean;
+        /**
+          * When true, the dialog will not be dismissed when the user clicks outside of it.
+         */
+        "pinned": boolean;
+        /**
+          * Shows the dialog
+         */
+        "show": () => Promise<boolean>;
+    }
+    interface SlDrawer {
+        /**
+          * Hides the dialog
+         */
+        "hide": () => Promise<boolean>;
         /**
           * The dialog's label as displayed in the header. You should always include a relevant label even when using `no-header`, as it is required for proper accessibility.
          */
@@ -201,6 +227,18 @@ export namespace Components {
           * Indicates whether or not the dialog is open. You can use this in lieu of the show/hide methods.
          */
         "open": boolean;
+        /**
+          * Prevents the drawer from closing automatically when the user interacts outside of it (e.g. clicks something outside of it).
+         */
+        "pinned": boolean;
+        /**
+          * The location from which the drawer will slide out.
+         */
+        "placement": 'left' | 'right';
+        /**
+          * The drawer's position. Use `fixed` to make the drawer slide out from the viewport. To make the drawer slide out of an arbitrary element, use `absolute` and place the drawer inside a `position: relative` container and set `overflow: hidden` on it.
+         */
+        "position": 'absolute' | 'fixed';
         /**
           * Shows the dialog
          */
@@ -794,6 +832,12 @@ declare global {
         prototype: HTMLSlDialogElement;
         new (): HTMLSlDialogElement;
     };
+    interface HTMLSlDrawerElement extends Components.SlDrawer, HTMLStencilElement {
+    }
+    var HTMLSlDrawerElement: {
+        prototype: HTMLSlDrawerElement;
+        new (): HTMLSlDrawerElement;
+    };
     interface HTMLSlDropdownElement extends Components.SlDropdown, HTMLStencilElement {
     }
     var HTMLSlDropdownElement: {
@@ -923,6 +967,7 @@ declare global {
         "sl-color-picker": HTMLSlColorPickerElement;
         "sl-details": HTMLSlDetailsElement;
         "sl-dialog": HTMLSlDialogElement;
+        "sl-drawer": HTMLSlDrawerElement;
         "sl-dropdown": HTMLSlDropdownElement;
         "sl-icon": HTMLSlIconElement;
         "sl-input": HTMLSlInputElement;
@@ -1158,9 +1203,43 @@ declare namespace LocalJSX {
     }
     interface SlDialog {
         /**
-          * When true, the dialog will not be dismissed when the user clicks on the overlay.
+          * The dialog's label as displayed in the header. You should always include a relevant label even when using `no-header`, as it is required for proper accessibility.
          */
-        "ignoreOverlayClicks"?: boolean;
+        "label"?: string;
+        /**
+          * Set to true to disable the footer.
+         */
+        "noFooter"?: boolean;
+        /**
+          * Set to true to disable the header. This will also remove the default close button, so please ensure you provide an easy, accessible way for users to dismiss the dialog.
+         */
+        "noHeader"?: boolean;
+        /**
+          * Emitted after the dialog closes and all transitions are complete.
+         */
+        "onSlAfterHide"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted after the dialog opens and all transitions are complete.
+         */
+        "onSlAfterShow"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the dialog closes. Calling `event.preventDefault()` will prevent it from being closed.
+         */
+        "onSlHide"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the dialog opens. Calling `event.preventDefault()` will prevent it from being opened.
+         */
+        "onSlShow"?: (event: CustomEvent<any>) => void;
+        /**
+          * Indicates whether or not the dialog is open. You can use this in lieu of the show/hide methods.
+         */
+        "open"?: boolean;
+        /**
+          * When true, the dialog will not be dismissed when the user clicks outside of it.
+         */
+        "pinned"?: boolean;
+    }
+    interface SlDrawer {
         /**
           * The dialog's label as displayed in the header. You should always include a relevant label even when using `no-header`, as it is required for proper accessibility.
          */
@@ -1193,6 +1272,18 @@ declare namespace LocalJSX {
           * Indicates whether or not the dialog is open. You can use this in lieu of the show/hide methods.
          */
         "open"?: boolean;
+        /**
+          * Prevents the drawer from closing automatically when the user interacts outside of it (e.g. clicks something outside of it).
+         */
+        "pinned"?: boolean;
+        /**
+          * The location from which the drawer will slide out.
+         */
+        "placement"?: 'left' | 'right';
+        /**
+          * The drawer's position. Use `fixed` to make the drawer slide out from the viewport. To make the drawer slide out of an arbitrary element, use `absolute` and place the drawer inside a `position: relative` container and set `overflow: hidden` on it.
+         */
+        "position"?: 'absolute' | 'fixed';
     }
     interface SlDropdown {
         /**
@@ -1785,6 +1876,7 @@ declare namespace LocalJSX {
         "sl-color-picker": SlColorPicker;
         "sl-details": SlDetails;
         "sl-dialog": SlDialog;
+        "sl-drawer": SlDrawer;
         "sl-dropdown": SlDropdown;
         "sl-icon": SlIcon;
         "sl-input": SlInput;
@@ -1819,6 +1911,7 @@ declare module "@stencil/core" {
             "sl-color-picker": LocalJSX.SlColorPicker & JSXBase.HTMLAttributes<HTMLSlColorPickerElement>;
             "sl-details": LocalJSX.SlDetails & JSXBase.HTMLAttributes<HTMLSlDetailsElement>;
             "sl-dialog": LocalJSX.SlDialog & JSXBase.HTMLAttributes<HTMLSlDialogElement>;
+            "sl-drawer": LocalJSX.SlDrawer & JSXBase.HTMLAttributes<HTMLSlDrawerElement>;
             "sl-dropdown": LocalJSX.SlDropdown & JSXBase.HTMLAttributes<HTMLSlDropdownElement>;
             "sl-icon": LocalJSX.SlIcon & JSXBase.HTMLAttributes<HTMLSlIconElement>;
             "sl-input": LocalJSX.SlInput & JSXBase.HTMLAttributes<HTMLSlInputElement>;

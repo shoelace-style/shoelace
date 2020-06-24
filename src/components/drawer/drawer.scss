@@ -1,0 +1,131 @@
+/**
+  * @prop --width: The width of the drawer.
+  */
+:host {
+  display: block;
+
+  --width: 400px;
+}
+
+.drawer {
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  bottom: 0;
+  z-index: var(--sl-z-index-drawer);
+  width: var(--width);
+  background-color: var(--sl-color-white);
+  transition: var(--sl-transition-medium) transform;
+  overflow: auto;
+}
+
+.drawer--fixed {
+  position: fixed;
+}
+
+.drawer--absolute {
+  position: absolute;
+}
+
+.drawer--left {
+  right: auto;
+  left: 0;
+  border-right: solid 1px var(--sl-color-gray-95);
+  transform: translateX(-100%);
+}
+
+.drawer--right {
+  right: 0;
+  left: auto;
+  border-left: solid 1px var(--sl-color-gray-95);
+  transform: translateX(100%);
+}
+
+.drawer--open {
+  box-shadow: var(--sl-shadow-x-large);
+  transform: translateX(0);
+}
+
+.drawer__overlay {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: var(--sl-transition-medium) opacity;
+}
+
+.drawer--open .drawer__overlay {
+  opacity: 1;
+}
+
+.drawer__header {
+  flex: 0 0 auto;
+  display: flex;
+}
+
+.drawer__title {
+  flex: 1 1 auto;
+  font-size: var(--sl-font-size-large);
+  line-height: var(--sl-line-height-dense);
+  padding: var(--sl-spacing-medium);
+}
+
+.drawer__close {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  border-radius: var(--sl-border-radius-small);
+  font-family: inherit;
+  font-size: var(--sl-font-size-large);
+  font-weight: inherit;
+  color: var(--sl-color-gray-50);
+  padding: 0 var(--sl-spacing-large);
+  cursor: pointer;
+  transition: var(--sl-transition-fast) color;
+  -webkit-appearance: none;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: var(--sl-color-primary-50);
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.focus-visible .drawer__close:focus {
+  box-shadow: var(--sl-focus-ring-box-shadow);
+}
+
+.drawer__body {
+  flex: 1 1 auto;
+  position: relative;
+  overflow: auto;
+  overscroll-behavior: none;
+  padding: var(--sl-spacing-medium);
+}
+
+.drawer__footer {
+  flex: 0 0 auto;
+  padding: var(--sl-spacing-medium);
+
+  ::slotted(sl-button:not(:first-of-type)) {
+    margin-left: var(--sl-spacing-x-small);
+  }
+}
+
+.drawer--right .drawer__footer {
+  text-align: left;
+}
+
+.drawer--left .drawer__footer {
+  text-align: right;
+}
