@@ -11,7 +11,6 @@ The roadmap tracks the status of components and features that are planned, in de
 - [x] Color Picker
 - [x] Details
 - [x] Dialog
-- [ ] Drawer
 - [x] Dropdown
 - [ ] Form
 - [x] Icon
@@ -46,6 +45,7 @@ The roadmap tracks the status of components and features that are planned, in de
 - [ ] Carousel
 - [ ] Content Placeholders
 - [ ] Date & Time Picker
+- [ ] Drawer
 - [ ] File Button / Uploader
 - [ ] Fit text to container
 - [ ] Graphing components based on [Chart.js](https://www.chartjs.org/)
