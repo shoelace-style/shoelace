@@ -47,9 +47,6 @@ export class Drawer {
   /** When true, the drawer will not be dismissed when the user clicks outside of it. */
   @Prop() pinned = false;
 
-  /** Adds an overlay when the drawer is open. */
-  @Prop() overlay = false;
-
   /**
    * Removes the header. This will also remove the default close button, so please ensure you provide an easy,
    * accessible way for users to dismiss the drawer.
@@ -58,6 +55,9 @@ export class Drawer {
 
   /** Removes the footer. */
   @Prop() noFooter = false;
+
+  /** Adds an overlay when the drawer is open. */
+  @Prop() overlay = false;
 
   @Watch('open')
   handleOpenChange() {
