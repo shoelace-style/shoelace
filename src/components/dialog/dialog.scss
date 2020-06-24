@@ -90,9 +90,8 @@
   }
 }
 
-.dialog.focus-visible .dialog__close:focus {
-  box-shadow: 0 0 0 var(--sl-focus-ring-width)
-    hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha));
+.focus-visible .dialog__close:focus {
+  box-shadow: var(--sl-focus-ring-box-shadow);
 }
 
 .dialog__body {

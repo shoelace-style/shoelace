@@ -98,7 +98,7 @@ export class Tab {
     const target = event.target as HTMLElement;
 
     // Ensure we only handle one transition event on the target element
-    if (event.propertyName === 'opacity' && target.classList.contains('sl-alert')) {
+    if (event.propertyName === 'opacity' && target.classList.contains('alert')) {
       this.host.hidden = !this.open;
       this.open ? this.slAfterShow.emit() : this.slAfterHide.emit();
     }
