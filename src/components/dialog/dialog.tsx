@@ -41,8 +41,8 @@ export class Dialog {
    */
   @Prop() label = '';
 
-  /** When true, the dialog will not be dismissed when the user clicks on the overlay. */
-  @Prop() ignoreOverlayClicks = false;
+  /** When true, the dialog will not be dismissed when the user clicks outside of it. */
+  @Prop() pinned = false;
 
   /**
    * Set to true to disable the header. This will also remove the default close button, so please ensure you provide an
@@ -130,7 +130,7 @@ export class Dialog {
   }
 
   handleOverlayClick() {
-    if (!this.ignoreOverlayClicks) {
+    if (!this.pinned) {
       this.hide();
     }
   }
@@ -139,7 +139,7 @@ export class Dialog {
     const target = event.target as HTMLElement;
 
     // Ensure we only handle one transition event on the target element
-    if (event.propertyName === 'opacity' && target.classList.contains('sl-dialog__box')) {
+    if (event.propertyName === 'opacity' && target.classList.contains('dialog__box')) {
       this.host.hidden = !this.open;
       this.open ? this.slAfterShow.emit() : this.slAfterHide.emit();
     }
