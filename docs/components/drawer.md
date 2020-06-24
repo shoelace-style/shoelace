@@ -7,12 +7,10 @@ Drawers...
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 
 ```html preview
-<sl-drawer label="Title" class="drawer-overview">
-
-  <div style="border: dashed 2px var(--sl-color-gray-90); height: calc(100% - 4px);"></div>
-  
-  <sl-button slot="footer" type="primary">Apply Changes</sl-button>
-  <sl-button slot="footer" type="default">Cancel</sl-button>
+<sl-drawer label="Drawer" class="drawer-overview">
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  <sl-button slot="footer" class="cancel">Cancel</sl-button>
+  <sl-button slot="footer" type="primary" class="save">Save</sl-button>
 </sl-drawer>
 
 <sl-button>Open Drawer</sl-button>
@@ -21,13 +19,12 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
   (() => {
     const drawer = document.querySelector('.drawer-overview');
     const openButton = drawer.nextElementSibling;
-
-    const cancelButton = drawer.querySelector('sl-button[type="default"]');
-    const applyButton = drawer.querySelector('sl-button[type="primary"]');
-
+    const saveButton = drawer.querySelector('.save');
+    const cancelButton = drawer.querySelector('.cancel');
+    
     openButton.addEventListener('click', () => drawer.show());
+    saveButton.addEventListener('click', () => drawer.hide());
     cancelButton.addEventListener('click', () => drawer.hide());
-    applyButton.addEventListener('click', () => drawer.hide());
   })();
 </script>
 ```
@@ -36,48 +33,176 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 ## Examples
 
-### Absolute
 
-To make the drawer slide out of a parent container, set `position: relative` and `overflow: hidden` on the parent container and set `position` to `absolute` on the drawer.
+### Placement
 
 ```html preview
-<div class="drawer-in-container" style="position: relative; overflow: hidden; height: 250px; border: solid 2px var(--sl-color-gray-90); margin-bottom: 1rem;">
-  <sl-drawer label="Title" position="absolute" style="--width: 50%;">
-    I'm attached to a parent container
-  </sl-drawer>
-</div>
+<sl-drawer label="Drawer" placement="left" class="drawer-placement">
+  I slide in from the left.
+  <sl-button slot="footer" class="cancel">Cancel</sl-button>
+  <sl-button slot="footer" type="primary" class="save">Save</sl-button>
+</sl-drawer>
+
 <sl-button>Open Drawer</sl-button>
 
 <script>
   (() => {
-    const drawer = document.querySelector('.drawer-in-container > sl-drawer');
-    const openButton = document.querySelector('.drawer-in-container').nextElementSibling;
-  
+    const drawer = document.querySelector('.drawer-placement');
+    const openButton = drawer.nextElementSibling;
+    const saveButton = drawer.querySelector('.save');
+    const cancelButton = drawer.querySelector('.cancel');
+    
     openButton.addEventListener('click', () => drawer.show());
+    saveButton.addEventListener('click', () => drawer.hide());
+    cancelButton.addEventListener('click', () => drawer.hide());
   })();
 </script>
 ```
 
 ### Pinned
 
-By default, drawers are closed when the user interacts outside of it (e.g. clicks outside). The `pinned` prop keeps the drawer open until the user explicitly closes it. When using this, consider providing a visual indicator to the user so it's obvious that the drawer can't be dismissed in the usual way.
+By default, drawers are closed when the user interacts outside of it (e.g. clicks outside). The `pinned` prop keeps the drawer open until the user explicitly closes it.
 
 ```html preview
-<sl-drawer label="Title" pinned class="drawer-pinned">
-  <div style="border: dashed 2px var(--sl-color-gray-90); height: calc(100% - 4px);"></div>
-  <sl-button slot="footer" type="primary">Close</sl-button>
+<sl-drawer label="Drawer" pinned class="drawer-pinned">
+  I'm pinned, so I won't be closed when you click outside of the drawer.
+  <sl-button slot="footer" class="cancel">Cancel</sl-button>
+  <sl-button slot="footer" type="primary" class="save">Save</sl-button>
 </sl-drawer>
 
-<sl-button>Toggle Drawer</sl-button>
+<sl-button>Open Drawer</sl-button>
 
 <script>
   (() => {
     const drawer = document.querySelector('.drawer-pinned');
-    const toggleButton = drawer.nextElementSibling;
-    const closeButton = drawer.querySelector('sl-button[type="primary"]');
+    const openButton = drawer.nextElementSibling;
+    const saveButton = drawer.querySelector('.save');
+    const cancelButton = drawer.querySelector('.cancel');
+    
+    openButton.addEventListener('click', () => drawer.show());
+    saveButton.addEventListener('click', () => drawer.hide());
+    cancelButton.addEventListener('click', () => drawer.hide());
+  })();
+</script>
+```
 
-    toggleButton.addEventListener('click', () => drawer.open = !drawer.open);
-    closeButton.addEventListener('click', () => drawer.hide());
+### Scrolling
+
+```html preview
+<sl-drawer label="Drawer" class="drawer-scrolling">
+  <div style="height: 150vh; border: dashed 2px var(--sl-color-gray-80); padding: 0 1rem;">
+    <p>Scroll down and give it a try! 👇</p>
+  </div>
+  <sl-button slot="footer" class="cancel">Cancel</sl-button>
+  <sl-button slot="footer" type="primary" class="save">Save</sl-button>
+</sl-drawer>
+
+<sl-button>Open Drawer</sl-button>
+
+<script>
+  (() => {
+    const drawer = document.querySelector('.drawer-scrolling');
+    const openButton = drawer.nextElementSibling;
+    const saveButton = drawer.querySelector('.save');
+    const cancelButton = drawer.querySelector('.cancel');
+    
+    openButton.addEventListener('click', () => drawer.show());
+    saveButton.addEventListener('click', () => drawer.hide());
+    cancelButton.addEventListener('click', () => drawer.hide());
+  })();
+</script>
+```
+
+### Overlay
+
+```html preview
+<sl-drawer label="Drawer" overlay class="drawer-overlay">
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  <sl-button slot="footer" class="cancel">Cancel</sl-button>
+  <sl-button slot="footer" type="primary" class="save">Save</sl-button>
+</sl-drawer>
+
+<sl-button>Open Drawer</sl-button>
+
+<script>
+  (() => {
+    const drawer = document.querySelector('.drawer-overlay');
+    const openButton = drawer.nextElementSibling;
+    const saveButton = drawer.querySelector('.save');
+    const cancelButton = drawer.querySelector('.cancel');
+    
+    openButton.addEventListener('click', () => drawer.show());
+    saveButton.addEventListener('click', () => drawer.hide());
+    cancelButton.addEventListener('click', () => drawer.hide());
+  })();
+</script>
+```
+
+### Custom Width
+
+```html preview
+<sl-drawer label="Drawer" class="drawer-custom-width" style="--width: 50vw;">
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  <sl-button slot="footer" class="cancel">Cancel</sl-button>
+  <sl-button slot="footer" type="primary" class="save">Save</sl-button>
+</sl-drawer>
+
+<sl-button>Open Drawer</sl-button>
+
+<script>
+  (() => {
+    const drawer = document.querySelector('.drawer-custom-width');
+    const openButton = drawer.nextElementSibling;
+    const saveButton = drawer.querySelector('.save');
+    const cancelButton = drawer.querySelector('.cancel');
+    
+    openButton.addEventListener('click', () => drawer.show());
+    saveButton.addEventListener('click', () => drawer.hide());
+    cancelButton.addEventListener('click', () => drawer.hide());
+  })();
+</script>
+```
+
+### No Header
+
+```html preview
+<sl-drawer label="Drawer" no-header class="drawer-no-header">
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  <sl-button slot="footer" class="cancel">Cancel</sl-button>
+  <sl-button slot="footer" type="primary" class="save">Save</sl-button>
+</sl-drawer>
+
+<sl-button>Open Drawer</sl-button>
+
+<script>
+  (() => {
+    const drawer = document.querySelector('.drawer-no-header');
+    const openButton = drawer.nextElementSibling;
+    const saveButton = drawer.querySelector('.save');
+    const cancelButton = drawer.querySelector('.cancel');
+    
+    openButton.addEventListener('click', () => drawer.show());
+    saveButton.addEventListener('click', () => drawer.hide());
+    cancelButton.addEventListener('click', () => drawer.hide());
+  })();
+</script>
+```
+
+### No Footer
+
+```html preview
+<sl-drawer label="Drawer" no-footer class="drawer-no-footer">
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+</sl-drawer>
+
+<sl-button>Open Drawer</sl-button>
+
+<script>
+  (() => {
+    const drawer = document.querySelector('.drawer-no-footer');
+    const openButton = drawer.nextElementSibling;
+    
+    openButton.addEventListener('click', () => drawer.show());
   })();
 </script>
 ```
