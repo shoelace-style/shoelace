@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, Host, Method, Prop, Watch, h } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, Method, Prop, Watch, h } from '@stencil/core';
 import { lockBodyScrolling, unlockBodyScrolling } from '../../utilities/scroll';
 import { focusVisible } from '../../utilities/focus-visible';
 
@@ -93,7 +93,7 @@ export class Dialog {
       return false;
     }
 
-    this.host.hidden = false;
+    this.dialog.hidden = false;
     this.host.clientWidth; // force a reflow
     this.open = true;
     this.box.focus();
@@ -140,7 +140,7 @@ export class Dialog {
 
     // Ensure we only handle one transition event on the target element
     if (event.propertyName === 'opacity' && target.classList.contains('dialog__box')) {
-      this.host.hidden = !this.open;
+      this.dialog.hidden = !this.open;
       this.open ? this.slAfterShow.emit() : this.slAfterHide.emit();
     }
   }
@@ -155,51 +155,50 @@ export class Dialog {
 
   render() {
     return (
-      <Host hidden>
+      <div
+        ref={el => (this.dialog = el)}
+        class={{
+          dialog: true,
+          'dialog--open': this.open
+        }}
+        onTransitionEnd={this.handleTransitionEnd}
+        hidden
+      >
         <div
-          ref={el => (this.dialog = el)}
-          class={{
-            dialog: true,
-            'dialog--open': this.open
-          }}
-          onTransitionEnd={this.handleTransitionEnd}
+          ref={el => (this.box = el)}
+          class="dialog__box"
+          role="dialog"
+          aria-modal="true"
+          aria-hidden={!this.open}
+          aria-label={this.noHeader ? this.label : null}
+          aria-labeledby={!this.noHeader ? `${this.id}-title` : null}
+          tabIndex={0}
         >
-          <div
-            ref={el => (this.box = el)}
-            class="dialog__box"
-            role="dialog"
-            aria-modal="true"
-            aria-hidden={!this.open}
-            aria-label={this.noHeader ? this.label : null}
-            aria-labeledby={!this.noHeader ? `${this.id}-title` : null}
-            tabIndex={0}
-          >
-            {!this.noHeader && (
-              <header class="dialog__header">
-                <span class="dialog__title" id={`${this.id}-title`}>
-                  {/* If there's no label, use an invisible character to prevent the heading from collapsing */}
-                  {this.label || String.fromCharCode(65279)}
-                </span>
-                <button class="dialog__close" type="button" onClick={this.handleCloseClick}>
-                  <sl-icon name="x"></sl-icon>
-                </button>
-              </header>
-            )}
+          {!this.noHeader && (
+            <header class="dialog__header">
+              <span class="dialog__title" id={`${this.id}-title`}>
+                {/* If there's no label, use an invisible character to prevent the heading from collapsing */}
+                {this.label || String.fromCharCode(65279)}
+              </span>
+              <button class="dialog__close" type="button" onClick={this.handleCloseClick}>
+                <sl-icon name="x"></sl-icon>
+              </button>
+            </header>
+          )}
 
-            <div class="dialog__body">
-              <slot />
-            </div>
-
-            {!this.noFooter && (
-              <footer class="dialog__footer">
-                <slot name="footer" />
-              </footer>
-            )}
+          <div class="dialog__body">
+            <slot />
           </div>
 
-          <div ref={el => (this.overlay = el)} class="dialog__overlay" onClick={this.handleOverlayClick} />
+          {!this.noFooter && (
+            <footer class="dialog__footer">
+              <slot name="footer" />
+            </footer>
+          )}
         </div>
-      </Host>
+
+        <div ref={el => (this.overlay = el)} class="dialog__overlay" onClick={this.handleOverlayClick} />
+      </div>
     );
   }
 }

@@ -6,13 +6,7 @@
 :host {
   --width: 31rem;
 
-  position: absolute;
-  width: 0;
-  height: 0;
-
-  &[hidden] {
-    display: none;
-  }
+  display: contents;
 }
 
 .dialog {
@@ -25,6 +19,10 @@
   bottom: 0;
   left: 0;
   z-index: var(--sl-z-index-dialog);
+
+  &[hidden] {
+    display: none;
+  }
 }
 
 .dialog__box {
