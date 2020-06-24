@@ -142,6 +142,13 @@
       var(--sl-focus-ring-lightness),
       var(--sl-focus-ring-alpha)
     );
+  --sl-focus-ring-box-shadow-inset: inset 0 0 0 var(--sl-focus-ring-width)
+    hsla(
+      var(--sl-focus-ring-hue),
+      var(--sl-focus-ring-saturation),
+      var(--sl-focus-ring-lightness),
+      var(--sl-focus-ring-alpha)
+    );
 
   // Inputs
   --sl-input-height-small: 30px;

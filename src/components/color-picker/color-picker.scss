@@ -56,8 +56,8 @@
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 1px hsl(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%),
-      inset 0 0 0 1px hsl(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%),
+    box-shadow: 0 0 0 1px hsl(var(--sl-focus-ring-hue), var(--sl-focus-ring-saturation), var(--sl-focus-ring-lightness)),
+      inset 0 0 0 1px hsl(var(--sl-focus-ring-hue), var(--sl-focus-ring-saturation), var(--sl-focus-ring-lightness)),
       var(--sl-focus-ring-box-shadow);
   }
 }
