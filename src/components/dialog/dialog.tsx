@@ -99,8 +99,8 @@ export class Dialog {
     this.box.focus();
 
     lockBodyScrolling(this.host);
-    document.addEventListener('keydown', this.handleDocumentKeyDown);
     document.addEventListener('focusin', this.keepDialogFocused);
+    document.addEventListener('keydown', this.handleDocumentKeyDown);
   }
 
   /** Hides the dialog */
@@ -115,8 +115,8 @@ export class Dialog {
     this.open = false;
 
     unlockBodyScrolling(this.host);
-    document.removeEventListener('keydown', this.handleDocumentKeyDown);
     document.removeEventListener('focusin', this.keepDialogFocused);
+    document.removeEventListener('keydown', this.handleDocumentKeyDown);
   }
 
   handleCloseClick() {
