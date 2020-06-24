@@ -28,7 +28,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 [component-metadata:sl-drawer]
 
-## Examples=
+## Examples
 
 ### Placement
 

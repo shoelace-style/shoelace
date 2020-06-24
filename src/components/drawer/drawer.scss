@@ -6,13 +6,7 @@
 :host {
   --width: 31rem;
 
-  position: absolute;
-  width: 0;
-  height: 0;
-
-  &[hidden] {
-    display: none;
-  }
+  display: contents;
 }
 
 .drawer {
@@ -22,6 +16,10 @@
   bottom: 0;
   width: var(--width);
   z-index: var(--sl-z-index-drawer);
+
+  &[hidden] {
+    display: none;
+  }
 }
 
 .drawer--left {
@@ -111,19 +109,8 @@
 }
 
 .drawer__footer {
-  padding: var(--sl-spacing-large);
-}
-
-.drawer--left .drawer__footer {
-  text-align: left;
-
-  ::slotted(sl-button:not(:first-of-type)) {
-    margin-left: var(--sl-spacing-x-small);
-  }
-}
-
-.drawer--right .drawer__footer {
   text-align: right;
+  padding: var(--sl-spacing-large);
 
   ::slotted(sl-button:not(:last-of-type)) {
     margin-right: var(--sl-spacing-x-small);

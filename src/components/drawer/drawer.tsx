@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, Host, Method, Prop, Watch, h } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, Method, Prop, Watch, h } from '@stencil/core';
 import { lockBodyScrolling, unlockBodyScrolling } from '../../utilities/scroll';
 import { focusVisible } from '../../utilities/focus-visible';
 
@@ -107,7 +107,7 @@ export class Drawer {
       return false;
     }
 
-    this.host.hidden = false;
+    this.drawer.hidden = false;
     this.host.clientWidth; // force a reflow
     this.open = true;
     this.panel.focus();
@@ -169,7 +169,7 @@ export class Drawer {
 
     // Ensure we only handle one transition event on the target element
     if (event.propertyName === 'transform' && target.classList.contains('drawer__panel')) {
-      this.host.hidden = !this.open;
+      this.drawer.hidden = !this.open;
       this.open ? this.slAfterShow.emit() : this.slAfterHide.emit();
     }
   }
@@ -184,53 +184,52 @@ export class Drawer {
 
   render() {
     return (
-      <Host hidden>
+      <div
+        ref={el => (this.drawer = el)}
+        class={{
+          drawer: true,
+          'drawer--open': this.open,
+          'drawer--left': this.placement === 'left',
+          'drawer--right': this.placement === 'right'
+        }}
+        onTransitionEnd={this.handleTransitionEnd}
+        hidden
+      >
         <div
-          ref={el => (this.drawer = el)}
-          class={{
-            drawer: true,
-            'drawer--open': this.open,
-            'drawer--left': this.placement === 'left',
-            'drawer--right': this.placement === 'right'
-          }}
-          onTransitionEnd={this.handleTransitionEnd}
+          ref={el => (this.panel = el)}
+          class="drawer__panel"
+          role="drawer"
+          aria-modal="true"
+          aria-hidden={!this.open}
+          aria-label={this.noHeader ? this.label : null}
+          aria-labeledby={!this.noHeader ? `${this.id}-title` : null}
+          tabIndex={0}
         >
-          <div
-            ref={el => (this.panel = el)}
-            class="drawer__panel"
-            role="drawer"
-            aria-modal="true"
-            aria-hidden={!this.open}
-            aria-label={this.noHeader ? this.label : null}
-            aria-labeledby={!this.noHeader ? `${this.id}-title` : null}
-            tabIndex={0}
-          >
-            {!this.noHeader && (
-              <header class="drawer__header">
-                <span class="drawer__title" id={`${this.id}-title`}>
-                  {/* If there's no label, use an invisible character to prevent the heading from collapsing */}
-                  {this.label || String.fromCharCode(65279)}
-                </span>
-                <button class="drawer__close" type="button" onClick={this.handleCloseClick}>
-                  <sl-icon name="x"></sl-icon>
-                </button>
-              </header>
-            )}
+          {!this.noHeader && (
+            <header class="drawer__header">
+              <span class="drawer__title" id={`${this.id}-title`}>
+                {/* If there's no label, use an invisible character to prevent the heading from collapsing */}
+                {this.label || String.fromCharCode(65279)}
+              </span>
+              <button class="drawer__close" type="button" onClick={this.handleCloseClick}>
+                <sl-icon name="x"></sl-icon>
+              </button>
+            </header>
+          )}
 
-            <div class="drawer__body">
-              <slot />
-            </div>
-
-            {!this.noFooter && (
-              <footer class="drawer__footer">
-                <slot name="footer" />
-              </footer>
-            )}
+          <div class="drawer__body">
+            <slot />
           </div>
 
-          {this.overlay && <div class="drawer__overlay" onClick={this.handleOverlayClick} />}
+          {!this.noFooter && (
+            <footer class="drawer__footer">
+              <slot name="footer" />
+            </footer>
+          )}
         </div>
-      </Host>
+
+        {this.overlay && <div class="drawer__overlay" onClick={this.handleOverlayClick} />}
+      </div>
     );
   }
 }
