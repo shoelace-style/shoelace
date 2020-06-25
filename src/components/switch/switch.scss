@@ -2,7 +2,7 @@
 
 :host {
   --height: var(--sl-toggle-size);
-  --thumb-size: calc(var(--sl-toggle-size) + 2px);
+  --thumb-size: calc(var(--sl-toggle-size) + 4px);
   --track-border-radius: var(--height);
   --width: calc(var(--height) * 2);
 
