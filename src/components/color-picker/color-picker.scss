@@ -51,8 +51,6 @@
   border: solid 2px white;
   margin-top: calc(var(--grid-handle-size) / -2);
   margin-left: calc(var(--grid-handle-size) / -2);
-  transition: var(--sl-transition-fast) box-shadow, var(--sl-transition-x-fast) top ease,
-    var(--sl-transition-x-fast) left ease;
 
   &:focus {
     outline: none;
@@ -92,8 +90,6 @@
   border-radius: 50%;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
   margin-left: calc(var(--slider-handle-size) / -2);
-  transition: var(--sl-transition-fast) box-shadow, var(--sl-transition-x-fast) top ease,
-    var(--sl-transition-x-fast) left ease;
 
   &:focus {
     outline: none;

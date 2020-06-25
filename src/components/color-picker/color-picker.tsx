@@ -1,7 +1,6 @@
 import { Component, Element, Event, EventEmitter, Prop, State, Watch, h } from '@stencil/core';
 import color from 'color';
 import { clamp } from '../../utilities/math';
-import { throttle } from '../../utilities/throttle';
 
 /**
  * @since 1.0.0
@@ -245,20 +244,19 @@ export class ColorPicker {
 
       onMove(x, y);
     };
-    const moveWithThrottle = throttle(move, 50);
 
     // Move on init
     move(event);
 
     const stop = () => {
-      document.removeEventListener('mousemove', moveWithThrottle);
-      document.removeEventListener('touchmove', moveWithThrottle);
+      document.removeEventListener('mousemove', move);
+      document.removeEventListener('touchmove', move);
       document.removeEventListener('mouseup', stop);
       document.removeEventListener('touchend', stop);
     };
 
-    document.addEventListener('mousemove', moveWithThrottle);
-    document.addEventListener('touchmove', moveWithThrottle);
+    document.addEventListener('mousemove', move);
+    document.addEventListener('touchmove', move);
     document.addEventListener('mouseup', stop);
     document.addEventListener('touchend', stop);
   }
@@ -692,7 +690,14 @@ export class ColorPicker {
             onKeyDown={this.handleTextInputKeyDown}
             onSlChange={this.handleTextInputChange}
           />
-          <sl-button ref={el => (this.copyButton = el)} slot="suffix" size="small" circle onClick={this.handleCopy}>
+          <sl-button
+            ref={el => (this.copyButton = el)}
+            slot="suffix"
+            class="color-picker__copy-button"
+            size="small"
+            circle
+            onClick={this.handleCopy}
+          >
             <sl-icon name={this.showCopyCheckmark ? 'check2' : 'clipboard'} />
           </sl-button>
         </div>
