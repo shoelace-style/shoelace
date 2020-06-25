@@ -17,16 +17,15 @@ let id = 0;
   shadow: true
 })
 export class Dialog {
-  box: HTMLElement;
-  overlay: HTMLElement;
+  panel: HTMLElement;
   dialog: HTMLElement;
   id = `dialog-${++id}`;
 
   constructor() {
-    this.keepDialogFocused = this.keepDialogFocused.bind(this);
+    this.handleDocumentFocusIn = this.handleDocumentFocusIn.bind(this);
     this.handleCloseClick = this.handleCloseClick.bind(this);
     this.handleTransitionEnd = this.handleTransitionEnd.bind(this);
-    this.handleDocumentKeyDown = this.handleDocumentKeyDown.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleOverlayClick = this.handleOverlayClick.bind(this);
   }
 
@@ -41,8 +40,8 @@ export class Dialog {
    */
   @Prop() label = '';
 
-  /** When true, the dialog will not be dismissed when the user clicks outside of it. */
-  @Prop() pinned = false;
+  /** When true, the dialog will not be dismissed when the users clicks on the overlay. */
+  @Prop() noOverlayDismiss = false;
 
   /**
    * Set to true to disable the header. This will also remove the default close button, so please ensure you provide an
@@ -96,11 +95,9 @@ export class Dialog {
     this.dialog.hidden = false;
     this.host.clientWidth; // force a reflow
     this.open = true;
-    this.box.focus();
 
     lockBodyScrolling(this.host);
-    document.addEventListener('focusin', this.keepDialogFocused);
-    document.addEventListener('keydown', this.handleDocumentKeyDown);
+    document.addEventListener('focusin', this.handleDocumentFocusIn);
   }
 
   /** Hides the dialog */
@@ -115,22 +112,29 @@ export class Dialog {
     this.open = false;
 
     unlockBodyScrolling(this.host);
-    document.removeEventListener('focusin', this.keepDialogFocused);
-    document.removeEventListener('keydown', this.handleDocumentKeyDown);
+    document.removeEventListener('focusin', this.handleDocumentFocusIn);
   }
 
   handleCloseClick() {
     this.hide();
   }
 
-  handleDocumentKeyDown(event: KeyboardEvent) {
+  handleDocumentFocusIn(event: Event) {
+    const target = event.target as HTMLElement;
+
+    if (target.closest('sl-dialog') !== this.host) {
+      this.panel.focus();
+    }
+  }
+
+  handleKeyDown(event: KeyboardEvent) {
     if (event.key === 'Escape') {
       this.hide();
     }
   }
 
   handleOverlayClick() {
-    if (!this.pinned) {
+    if (!this.noOverlayDismiss) {
       this.hide();
     }
   }
@@ -139,17 +143,13 @@ export class Dialog {
     const target = event.target as HTMLElement;
 
     // Ensure we only handle one transition event on the target element
-    if (event.propertyName === 'opacity' && target.classList.contains('dialog__box')) {
+    if (event.propertyName === 'opacity' && target.classList.contains('dialog__panel')) {
       this.dialog.hidden = !this.open;
       this.open ? this.slAfterShow.emit() : this.slAfterHide.emit();
-    }
-  }
 
-  keepDialogFocused(event: Event) {
-    const target = event.target as HTMLElement;
-
-    if (!target.closest('sl-dialog')) {
-      this.box.focus();
+      if (this.open) {
+        this.panel.focus();
+      }
     }
   }
 
@@ -161,12 +161,15 @@ export class Dialog {
           dialog: true,
           'dialog--open': this.open
         }}
+        onKeyDown={this.handleKeyDown}
         onTransitionEnd={this.handleTransitionEnd}
         hidden
       >
+        <div class="dialog__overlay" onClick={this.handleOverlayClick} />
+
         <div
-          ref={el => (this.box = el)}
-          class="dialog__box"
+          ref={el => (this.panel = el)}
+          class="dialog__panel"
           role="dialog"
           aria-modal="true"
           aria-hidden={!this.open}
@@ -196,8 +199,6 @@ export class Dialog {
             </footer>
           )}
         </div>
-
-        <div ref={el => (this.overlay = el)} class="dialog__overlay" onClick={this.handleOverlayClick} />
       </div>
     );
   }

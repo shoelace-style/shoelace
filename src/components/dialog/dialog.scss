@@ -25,7 +25,7 @@
   }
 }
 
-.dialog__box {
+.dialog__panel {
   display: flex;
   flex-direction: column;
   z-index: 2;
@@ -44,7 +44,7 @@
   }
 }
 
-.dialog--open .dialog__box {
+.dialog--open .dialog__panel {
   display: flex;
   opacity: 1;
   transform: scale(1);
@@ -109,12 +109,11 @@
 
 .dialog__overlay {
   position: fixed;
-  z-index: 1;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--sl-overlay-background-color);
   opacity: 0;
   transition: var(--sl-transition-medium) opacity;
 }

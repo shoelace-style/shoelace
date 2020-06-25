@@ -30,13 +30,13 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 ## Examples
 
-### Pinned
+### No Overlay Dismiss
 
-By default, dialogs are closed when the user interacts outside of it (e.g. clicks outside). The `pinned` prop keeps the dialog open until the user explicitly closes it.
+By default, dialogs are closed when the user clicks or taps on the overlay. The `no-overlay-dismiss` prop keeps the dialog open until the user explicitly closes it.
 
 ```html preview
-<sl-dialog label="Dialog" pinned class="dialog-pinned">
-  I'm pinned, so I won't be closed when you click outside of the dialog.
+<sl-dialog label="Dialog" no-overlay-dismiss class="dialog-no-overlay-dismiss">
+  This dialog will not be closed when you click outside of it.
   <sl-button slot="footer" type="primary">Close</sl-button>
 </sl-dialog>
 
@@ -44,7 +44,7 @@ By default, dialogs are closed when the user interacts outside of it (e.g. click
 
 <script>
   (() => {
-    const dialog = document.querySelector('.dialog-pinned');
+    const dialog = document.querySelector('.dialog-no-overlay-dismiss');
     const openButton = dialog.nextElementSibling;
     const closeButton = dialog.querySelector('sl-button[slot="footer"]');
     
