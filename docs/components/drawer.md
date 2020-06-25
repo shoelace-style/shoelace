@@ -54,7 +54,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 ### Contained
 
-By default, the drawer slides out of its [containing block](https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#Identifying_the_containing_block). To make the drawer slide out of a parent element, set this prop and add `position: relative` to the parent element.
+By default, the drawer slides out of its [containing block](https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#Identifying_the_containing_block), which is usually the viewport. To make the drawer slide out of its parent element, set this prop and add `position: relative` to the parent.
 
 ```html preview
 <div style="position: relative; border: solid 2px var(--sl-color-gray-80); height: 300px; padding: 1rem; margin-bottom: 1rem;">

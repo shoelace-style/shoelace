@@ -47,9 +47,8 @@ export class Drawer {
   @Prop() noOverlayDismiss = false;
 
   /**
-   * By default, the drawer slides out of its containing block (usually the viewport, unless a parent element has a
-   * `transform`, `perspective`, or `filter` property other than `none`). To make the drawer slide out of a parent
-   * element, set this prop and add `position: relative` to the parent element.
+   * By default, the drawer slides out of its containing block (usually the viewport). To make the drawer slide out of
+   * its parent element, set this prop and add `position: relative` to the parent.
    */
   @Prop() contained = false;
 
