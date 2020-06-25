@@ -1,0 +1,148 @@
+@import 'component';
+
+/**
+  * @prop --width: The preferred width of the drawer. Note that the drawer will shrink to accommodate smaller screens.
+  */
+:host {
+  --width: 25rem;
+
+  display: contents;
+}
+
+.drawer {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+
+  &[hidden] {
+    display: none;
+  }
+}
+
+.drawer--contained {
+  position: absolute;
+  z-index: initial;
+}
+
+.drawer--fixed {
+  position: fixed;
+  z-index: var(--sl-z-index-drawer);
+}
+
+.drawer__panel {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  width: var(--width);
+  height: 100%;
+  z-index: 2;
+  background-color: var(--sl-color-white);
+  box-shadow: var(--sl-shadow-x-large);
+  transition: var(--sl-transition-medium) transform;
+  overflow: auto;
+  pointer-events: all;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.drawer--left .drawer__panel {
+  right: auto;
+  left: 0;
+  transform: translateX(-100%);
+}
+
+.drawer--right .drawer__panel {
+  right: 0;
+  left: auto;
+  transform: translateX(100%);
+}
+
+.drawer--open .drawer__panel {
+  transform: translateX(0);
+}
+
+.drawer__header {
+  display: flex;
+}
+
+.drawer__title {
+  flex: 1 1 auto;
+  font-size: var(--sl-font-size-large);
+  line-height: var(--sl-line-height-dense);
+  padding: var(--sl-spacing-large);
+}
+
+.drawer__close {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  border-radius: var(--sl-border-radius-small);
+  font-family: inherit;
+  font-size: var(--sl-font-size-x-large);
+  font-weight: inherit;
+  color: var(--sl-color-gray-50);
+  padding: 0 var(--sl-spacing-large);
+  cursor: pointer;
+  transition: var(--sl-transition-fast) color;
+  -webkit-appearance: none;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: var(--sl-color-primary-50);
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.focus-visible .drawer__close:focus {
+  box-shadow: var(--sl-focus-ring-box-shadow);
+}
+
+.drawer__body {
+  flex: 1 1 auto;
+  padding: var(--sl-spacing-large);
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.drawer__footer {
+  text-align: right;
+  padding: var(--sl-spacing-large);
+
+  ::slotted(sl-button:not(:last-of-type)) {
+    margin-right: var(--sl-spacing-x-small);
+  }
+}
+
+.drawer__overlay {
+  display: block;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: var(--sl-overlay-background-color);
+  opacity: 0;
+  transition: var(--sl-transition-medium) opacity;
+  pointer-events: all;
+}
+
+.drawer--contained .drawer__overlay {
+  position: absolute;
+}
+
+.drawer--open .drawer__overlay {
+  opacity: 1;
+}
