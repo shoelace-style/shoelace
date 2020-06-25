@@ -7,22 +7,22 @@ import { focusVisible } from '../../utilities/focus-visible';
  * @since 1.0.0
  * @status ready
  *
- * @slot nav - Used for grouping tabs in the tab list.
- * @slot - Used for grouping tab panels in the tab list.
+ * @slot nav - Used for grouping tabs in the tab group.
+ * @slot - Used for grouping tab panels in the tab group.
  */
 
 @Component({
-  tag: 'sl-tab-list',
-  styleUrl: 'tab-list.scss',
+  tag: 'sl-tab-group',
+  styleUrl: 'tab-group.scss',
   shadow: true
 })
-export class TabList {
+export class TabGroup {
   activeTab: HTMLSlTabElement;
   activeTabIndicator: HTMLElement;
   body: HTMLElement;
   mutationObserver: MutationObserver;
   nav: HTMLElement;
-  tabList: HTMLElement;
+  tabGroup: HTMLElement;
   tabs: HTMLElement;
 
   constructor() {
@@ -30,7 +30,7 @@ export class TabList {
     this.handleKeyDown = this.handleKeyDown.bind(this);
   }
 
-  @Element() host: HTMLSlTabListElement;
+  @Element() host: HTMLSlTabGroupElement;
 
   /** The placement of the tabs. */
   @Prop() placement: 'top' | 'bottom' | 'left' | 'right' = 'top';
@@ -50,7 +50,7 @@ export class TabList {
     // Set initial tab state
     this.setAriaLabels();
     this.setActiveTab(this.getActiveTab() || this.getAllTabs()[0], false);
-    focusVisible.observe(this.tabList);
+    focusVisible.observe(this.tabGroup);
 
     // Update aria labels if the DOM changes
     this.mutationObserver = new MutationObserver(() => setTimeout(() => this.setAriaLabels()));
@@ -58,7 +58,7 @@ export class TabList {
   }
 
   componentDidUnload() {
-    focusVisible.unobserve(this.tabList);
+    focusVisible.unobserve(this.tabGroup);
     this.mutationObserver.disconnect();
   }
 
@@ -202,27 +202,27 @@ export class TabList {
   render() {
     return (
       <div
-        ref={el => (this.tabList = el)}
+        ref={el => (this.tabGroup = el)}
         class={{
-          'tab-list': true,
+          'tab-group': true,
 
           // Placements
-          'tab-list--top': this.placement === 'top',
-          'tab-list--bottom': this.placement === 'bottom',
-          'tab-list--left': this.placement === 'left',
-          'tab-list--right': this.placement === 'right'
+          'tab-group--top': this.placement === 'top',
+          'tab-group--bottom': this.placement === 'bottom',
+          'tab-group--left': this.placement === 'left',
+          'tab-group--right': this.placement === 'right'
         }}
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
       >
-        <div ref={el => (this.nav = el)} class="tab-list__nav" tabindex="-1">
-          <div ref={el => (this.tabs = el)} class="tab-list__tabs" role="tablist">
-            <div ref={el => (this.activeTabIndicator = el)} class="tab-list__active-tab-indicator" />
+        <div ref={el => (this.nav = el)} class="tab-group__nav" tabindex="-1">
+          <div ref={el => (this.tabs = el)} class="tab-group__tabs" role="tablist">
+            <div ref={el => (this.activeTabIndicator = el)} class="tab-group__active-tab-indicator" />
             <slot name="nav" />
           </div>
         </div>
 
-        <div ref={el => (this.body = el)} class="tab-list__body">
+        <div ref={el => (this.body = el)} class="tab-group__body">
           <slot />
         </div>
       </div>

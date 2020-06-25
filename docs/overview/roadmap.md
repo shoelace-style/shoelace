@@ -17,9 +17,9 @@ The roadmap tracks the status of components and features that are planned, in de
 - [x] Icon
 - [x] Input
 - [x] Menu
-- [x] Menu Divider
-- [x] Menu Item
-- [x] Menu Label
+  - [x] Menu Divider
+  - [x] Menu Item
+  - [x] Menu Label
 - [x] Progress Bar
 - [x] Progress Ring
 - [x] Radio
@@ -27,7 +27,7 @@ The roadmap tracks the status of components and features that are planned, in de
 - [x] Select
 - [x] Spinner
 - [x] Switch
-- [x] Tab List
+- [x] Tab Group
   - [x] Tab
   - [x] Tab Panel
 - [x] Tag

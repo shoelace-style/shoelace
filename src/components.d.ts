@@ -605,7 +605,7 @@ export namespace Components {
          */
         "disabled": boolean;
         /**
-          * The name of the tab panel the tab will control. The panel must be located in the same tab list.
+          * The name of the tab panel the tab will control. The panel must be located in the same tab group.
          */
         "panel": string;
         /**
@@ -617,7 +617,7 @@ export namespace Components {
          */
         "setFocus": () => Promise<void>;
     }
-    interface SlTabList {
+    interface SlTabGroup {
         /**
           * The placement of the tabs.
          */
@@ -928,11 +928,11 @@ declare global {
         prototype: HTMLSlTabElement;
         new (): HTMLSlTabElement;
     };
-    interface HTMLSlTabListElement extends Components.SlTabList, HTMLStencilElement {
+    interface HTMLSlTabGroupElement extends Components.SlTabGroup, HTMLStencilElement {
     }
-    var HTMLSlTabListElement: {
-        prototype: HTMLSlTabListElement;
-        new (): HTMLSlTabListElement;
+    var HTMLSlTabGroupElement: {
+        prototype: HTMLSlTabGroupElement;
+        new (): HTMLSlTabGroupElement;
     };
     interface HTMLSlTabPanelElement extends Components.SlTabPanel, HTMLStencilElement {
     }
@@ -983,7 +983,7 @@ declare global {
         "sl-spinner": HTMLSlSpinnerElement;
         "sl-switch": HTMLSlSwitchElement;
         "sl-tab": HTMLSlTabElement;
-        "sl-tab-list": HTMLSlTabListElement;
+        "sl-tab-group": HTMLSlTabGroupElement;
         "sl-tab-panel": HTMLSlTabPanelElement;
         "sl-tag": HTMLSlTagElement;
         "sl-textarea": HTMLSlTextareaElement;
@@ -1686,11 +1686,11 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
-          * The name of the tab panel the tab will control. The panel must be located in the same tab list.
+          * The name of the tab panel the tab will control. The panel must be located in the same tab group.
          */
         "panel"?: string;
     }
-    interface SlTabList {
+    interface SlTabGroup {
         /**
           * Emitted when a tab is hidden.
          */
@@ -1892,7 +1892,7 @@ declare namespace LocalJSX {
         "sl-spinner": SlSpinner;
         "sl-switch": SlSwitch;
         "sl-tab": SlTab;
-        "sl-tab-list": SlTabList;
+        "sl-tab-group": SlTabGroup;
         "sl-tab-panel": SlTabPanel;
         "sl-tag": SlTag;
         "sl-textarea": SlTextarea;
@@ -1927,7 +1927,7 @@ declare module "@stencil/core" {
             "sl-spinner": LocalJSX.SlSpinner & JSXBase.HTMLAttributes<HTMLSlSpinnerElement>;
             "sl-switch": LocalJSX.SlSwitch & JSXBase.HTMLAttributes<HTMLSlSwitchElement>;
             "sl-tab": LocalJSX.SlTab & JSXBase.HTMLAttributes<HTMLSlTabElement>;
-            "sl-tab-list": LocalJSX.SlTabList & JSXBase.HTMLAttributes<HTMLSlTabListElement>;
+            "sl-tab-group": LocalJSX.SlTabGroup & JSXBase.HTMLAttributes<HTMLSlTabGroupElement>;
             "sl-tab-panel": LocalJSX.SlTabPanel & JSXBase.HTMLAttributes<HTMLSlTabPanelElement>;
             "sl-tag": LocalJSX.SlTag & JSXBase.HTMLAttributes<HTMLSlTagElement>;
             "sl-textarea": LocalJSX.SlTextarea & JSXBase.HTMLAttributes<HTMLSlTextareaElement>;

@@ -37,7 +37,7 @@
   - [Select](/components/select.md)
   - [Spinner](/components/spinner.md)
   - [Switch](/components/switch.md)
-  - [Tab List](/components/tab-list.md)
+  - [Tab Group](/components/tab-group.md)
   - [Tab](/components/tab.md)
   - [Tab Panel](/components/tab-panel.md)
   - [Tag](/components/tag.md)
