@@ -54,6 +54,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 ### Contained
 
+By default, the drawer slides out of its [containing block](https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#Identifying_the_containing_block). To make the drawer slide out of a parent element, set this prop and add `position: relative` to the parent element.
+
 ```html preview
 <div style="position: relative; border: solid 2px var(--sl-color-gray-80); height: 300px; padding: 1rem; margin-bottom: 1rem;">
   The drawer will be contained to this box. This content won't shift or be affected in any way when the drawer opens.
