@@ -24,6 +24,7 @@
   - [Dialog](/components/dialog.md)
   - [Drawer](/components/drawer.md)
   - [Dropdown](/components/dropdown.md)
+  - [Form](/components/form.md)
   - [Icon](/components/icon.md)
   - [Input](/components/input.md)
   - [Menu](/components/menu.md)

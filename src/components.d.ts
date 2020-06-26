@@ -70,6 +70,10 @@ export namespace Components {
          */
         "loading": boolean;
         /**
+          * An optional name for the button.
+         */
+        "name": string;
+        /**
           * Set to true to draw a pill-style button with rounded edges.
          */
         "pill": boolean;
@@ -86,9 +90,17 @@ export namespace Components {
          */
         "size": 'small' | 'medium' | 'large';
         /**
+          * Indicates if activating the button should submit the form.
+         */
+        "submit": boolean;
+        /**
           * The button's type.
          */
         "type": 'default' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text';
+        /**
+          * An optional value for the button.
+         */
+        "value": string;
     }
     interface SlCheckbox {
         /**
@@ -288,6 +300,12 @@ export namespace Components {
           * The distance in pixels from which to offset the panel along its trigger.
          */
         "skidding": number;
+    }
+    interface SlForm {
+        /**
+          * Serializes form controls and returns all data as a FormData object.
+         */
+        "getFormData": () => Promise<FormData>;
     }
     interface SlIcon {
         /**
@@ -844,6 +862,12 @@ declare global {
         prototype: HTMLSlDropdownElement;
         new (): HTMLSlDropdownElement;
     };
+    interface HTMLSlFormElement extends Components.SlForm, HTMLStencilElement {
+    }
+    var HTMLSlFormElement: {
+        prototype: HTMLSlFormElement;
+        new (): HTMLSlFormElement;
+    };
     interface HTMLSlIconElement extends Components.SlIcon, HTMLStencilElement {
     }
     var HTMLSlIconElement: {
@@ -969,6 +993,7 @@ declare global {
         "sl-dialog": HTMLSlDialogElement;
         "sl-drawer": HTMLSlDrawerElement;
         "sl-dropdown": HTMLSlDropdownElement;
+        "sl-form": HTMLSlFormElement;
         "sl-icon": HTMLSlIconElement;
         "sl-input": HTMLSlInputElement;
         "sl-menu": HTMLSlMenuElement;
@@ -1063,6 +1088,10 @@ declare namespace LocalJSX {
          */
         "loading"?: boolean;
         /**
+          * An optional name for the button.
+         */
+        "name"?: string;
+        /**
           * Emitted when the button loses focus.
          */
         "onSlBlur"?: (event: CustomEvent<any>) => void;
@@ -1070,6 +1099,10 @@ declare namespace LocalJSX {
           * Emitted when the button gains focus.
          */
         "onSlFocus"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when a submit button is activated.
+         */
+        "onSlSubmit"?: (event: CustomEvent<any>) => void;
         /**
           * Set to true to draw a pill-style button with rounded edges.
          */
@@ -1079,9 +1112,17 @@ declare namespace LocalJSX {
          */
         "size"?: 'small' | 'medium' | 'large';
         /**
+          * Indicates if activating the button should submit the form.
+         */
+        "submit"?: boolean;
+        /**
           * The button's type.
          */
         "type"?: 'default' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text';
+        /**
+          * An optional value for the button.
+         */
+        "value"?: string;
     }
     interface SlCheckbox {
         /**
@@ -1337,6 +1378,8 @@ declare namespace LocalJSX {
           * The distance in pixels from which to offset the panel along its trigger.
          */
         "skidding"?: number;
+    }
+    interface SlForm {
     }
     interface SlIcon {
         /**
@@ -1878,6 +1921,7 @@ declare namespace LocalJSX {
         "sl-dialog": SlDialog;
         "sl-drawer": SlDrawer;
         "sl-dropdown": SlDropdown;
+        "sl-form": SlForm;
         "sl-icon": SlIcon;
         "sl-input": SlInput;
         "sl-menu": SlMenu;
@@ -1913,6 +1957,7 @@ declare module "@stencil/core" {
             "sl-dialog": LocalJSX.SlDialog & JSXBase.HTMLAttributes<HTMLSlDialogElement>;
             "sl-drawer": LocalJSX.SlDrawer & JSXBase.HTMLAttributes<HTMLSlDrawerElement>;
             "sl-dropdown": LocalJSX.SlDropdown & JSXBase.HTMLAttributes<HTMLSlDropdownElement>;
+            "sl-form": LocalJSX.SlForm & JSXBase.HTMLAttributes<HTMLSlFormElement>;
             "sl-icon": LocalJSX.SlIcon & JSXBase.HTMLAttributes<HTMLSlIconElement>;
             "sl-input": LocalJSX.SlInput & JSXBase.HTMLAttributes<HTMLSlInputElement>;
             "sl-menu": LocalJSX.SlMenu & JSXBase.HTMLAttributes<HTMLSlMenuElement>;
