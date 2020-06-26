@@ -12,15 +12,15 @@ import ResizeObserver from 'resize-observer-polyfill';
   shadow: true
 })
 export class Range {
-  input: HTMLInputElement;
-  output: HTMLElement;
-  resizeObserver: any;
-
   constructor() {
     this.handleInput = this.handleInput.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
   }
+
+  input: HTMLInputElement;
+  output: HTMLElement;
+  resizeObserver: any;
 
   @State() hasFocus = false;
 

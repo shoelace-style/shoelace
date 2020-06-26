@@ -16,16 +16,16 @@ let id = 0;
   shadow: true
 })
 export class Details {
-  details: HTMLElement;
-  header: HTMLElement;
-  id = `details-${++id}`;
-  body: HTMLElement;
-
   constructor() {
     this.handleBodyTransitionEnd = this.handleBodyTransitionEnd.bind(this);
     this.handleSummaryClick = this.handleSummaryClick.bind(this);
     this.handleSummaryKeyDown = this.handleSummaryKeyDown.bind(this);
   }
+
+  details: HTMLElement;
+  header: HTMLElement;
+  id = `details-${++id}`;
+  body: HTMLElement;
 
   /** Indicates whether or not the details is open. You can use this in lieu of the show/hide methods. */
   @Prop({ mutable: true, reflect: true }) open = false;

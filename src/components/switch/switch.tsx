@@ -16,10 +16,6 @@ let id = 0;
   shadow: true
 })
 export class Switch {
-  id = `switch-${++id}`;
-  labelId = `switch-label-${id}`;
-  input: HTMLInputElement;
-
   constructor() {
     this.handleClick = this.handleClick.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
@@ -27,6 +23,10 @@ export class Switch {
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleMouseDown = this.handleMouseDown.bind(this);
   }
+
+  id = `switch-${++id}`;
+  labelId = `switch-label-${id}`;
+  input: HTMLInputElement;
 
   @State() hasFocus = false;
 

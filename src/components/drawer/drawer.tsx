@@ -17,10 +17,6 @@ let id = 0;
   shadow: true
 })
 export class Drawer {
-  panel: HTMLElement;
-  drawer: HTMLElement;
-  id = `drawer-${++id}`;
-
   constructor() {
     this.handleCloseClick = this.handleCloseClick.bind(this);
     this.handleTransitionEnd = this.handleTransitionEnd.bind(this);
@@ -28,6 +24,10 @@ export class Drawer {
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleOverlayClick = this.handleOverlayClick.bind(this);
   }
+
+  panel: HTMLElement;
+  drawer: HTMLElement;
+  id = `drawer-${++id}`;
 
   @Element() host: HTMLSlDrawerElement;
 

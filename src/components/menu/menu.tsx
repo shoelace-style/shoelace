@@ -15,12 +15,6 @@ import { getTextContent } from '../../utilities/slot';
   shadow: true
 })
 export class Menu {
-  ignoreMouseEvents = false;
-  ignoreMouseTimeout: any;
-  menu: HTMLElement;
-  typeToSelect = '';
-  typeToSelectTimeout: any;
-
   constructor() {
     this.handleBlur = this.handleBlur.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -30,6 +24,12 @@ export class Menu {
     this.handleMouseOver = this.handleMouseOver.bind(this);
     this.handleMouseOut = this.handleMouseOut.bind(this);
   }
+
+  ignoreMouseEvents = false;
+  ignoreMouseTimeout: any;
+  menu: HTMLElement;
+  typeToSelect = '';
+  typeToSelectTimeout: any;
 
   /** Emitted when the menu gains focus. */
   @Event() slFocus: EventEmitter;

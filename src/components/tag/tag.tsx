@@ -13,11 +13,11 @@ import { Component, Event, EventEmitter, Prop, h } from '@stencil/core';
   shadow: true
 })
 export class Tag {
-  tag: HTMLElement;
-
   constructor() {
     this.handleRemoveClick = this.handleRemoveClick.bind(this);
   }
+
+  tag: HTMLElement;
 
   /** The tag's type. */
   @Prop() type: 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text' = 'primary';

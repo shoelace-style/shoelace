@@ -13,20 +13,6 @@ import { clamp } from '../../utilities/math';
   shadow: true
 })
 export class ColorPicker {
-  alphaSlider: HTMLElement;
-  alphaHandle: HTMLElement;
-  bypassValueParse = false;
-  copyButton: HTMLSlButtonElement;
-  dropdown: HTMLSlDropdownElement;
-  grid: HTMLElement;
-  gridHandle: HTMLElement;
-  hueSlider: HTMLElement;
-  hueHandle: HTMLElement;
-  lastValueEmitted: string;
-  menu: HTMLElement;
-  textInput: HTMLSlInputElement;
-  trigger: HTMLElement;
-
   constructor() {
     this.handleAlphaDrag = this.handleAlphaDrag.bind(this);
     this.handleAlphaInput = this.handleAlphaInput.bind(this);
@@ -49,6 +35,20 @@ export class ColorPicker {
     this.handleTextInputChange = this.handleTextInputChange.bind(this);
     this.handleTextInputKeyDown = this.handleTextInputKeyDown.bind(this);
   }
+
+  alphaSlider: HTMLElement;
+  alphaHandle: HTMLElement;
+  bypassValueParse = false;
+  copyButton: HTMLSlButtonElement;
+  dropdown: HTMLSlDropdownElement;
+  grid: HTMLElement;
+  gridHandle: HTMLElement;
+  hueSlider: HTMLElement;
+  hueHandle: HTMLElement;
+  lastValueEmitted: string;
+  menu: HTMLElement;
+  textInput: HTMLSlInputElement;
+  trigger: HTMLElement;
 
   @Element() host: HTMLSlColorPickerElement;
 

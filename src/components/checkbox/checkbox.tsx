@@ -15,16 +15,16 @@ let id = 0;
   shadow: true
 })
 export class Checkbox {
-  id = `checkbox-${++id}`;
-  labelId = `checkbox-label-${id}`;
-  input: HTMLInputElement;
-
   constructor() {
     this.handleClick = this.handleClick.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
     this.handleMouseDown = this.handleMouseDown.bind(this);
   }
+
+  id = `checkbox-${++id}`;
+  labelId = `checkbox-label-${id}`;
+  input: HTMLInputElement;
 
   @State() hasFocus = false;
 

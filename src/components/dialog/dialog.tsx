@@ -17,10 +17,6 @@ let id = 0;
   shadow: true
 })
 export class Dialog {
-  panel: HTMLElement;
-  dialog: HTMLElement;
-  id = `dialog-${++id}`;
-
   constructor() {
     this.handleDocumentFocusIn = this.handleDocumentFocusIn.bind(this);
     this.handleCloseClick = this.handleCloseClick.bind(this);
@@ -28,6 +24,10 @@ export class Dialog {
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleOverlayClick = this.handleOverlayClick.bind(this);
   }
+
+  panel: HTMLElement;
+  dialog: HTMLElement;
+  id = `dialog-${++id}`;
 
   @Element() host: HTMLSlDialogElement;
 
