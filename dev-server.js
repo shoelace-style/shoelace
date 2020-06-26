@@ -1,5 +1,5 @@
 //
-// The Shoelace dev server! 👟
+// The Shoelace dev server! 🥾
 //
 // This is an Express + Browsersync script that:
 //
@@ -50,7 +50,7 @@ app.listen(proxyPort);
 
 // Give Stencil's dev server a few seconds to spin up, then launch the browser
 setTimeout(() => {
-  console.log(chalk.cyan(`\nLaunching the Shoelace dev server at http://localhost:${browserPort}! 👟\n`));
+  console.log(chalk.cyan(`\nLaunching the Shoelace dev server at http://localhost:${browserPort}! 🥾\n`));
 
   bs.init({
     startPath: '/',
