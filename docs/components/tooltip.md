@@ -132,3 +132,18 @@ A tooltip's target is its _first child element_, so you should only wrap one ele
   toggle.addEventListener('click', () => tooltip.open = !tooltip.open);
 </script>
 ```
+
+### No Arrows
+
+```html preview
+<div style="--sl-tooltip-arrow-size: 0">
+  <sl-tooltip content="This is a tooltip">
+    <sl-button>Above</sl-button>
+  </sl-tooltip>
+
+
+  <sl-tooltip content="This is a tooltip" placement="bottom">
+    <sl-button>Below</sl-button>
+  </sl-tooltip>
+</div>
+```
