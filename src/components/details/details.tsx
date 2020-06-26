@@ -105,7 +105,7 @@ export class Details {
   handleBodyTransitionEnd(event: TransitionEvent) {
     const target = event.target as HTMLElement;
 
-    // Ensure we only handle one transition event on the target element
+    // Ensure we only emit one event when the target element is no longer visible
     if (event.propertyName === 'height' && target.classList.contains('details__body')) {
       this.body.style.overflow = this.open ? 'visible' : 'hidden';
       this.body.style.height = this.open ? 'auto' : '0';

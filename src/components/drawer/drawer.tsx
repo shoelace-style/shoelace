@@ -157,7 +157,7 @@ export class Drawer {
   handleTransitionEnd(event: TransitionEvent) {
     const target = event.target as HTMLElement;
 
-    // Ensure we only handle one transition event on the target element
+    // Ensure we only emit one event when the target element is no longer visible
     if (event.propertyName === 'transform' && target.classList.contains('drawer__panel')) {
       this.drawer.hidden = !this.open;
       this.open ? this.slAfterShow.emit() : this.slAfterHide.emit();
