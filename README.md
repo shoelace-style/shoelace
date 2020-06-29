@@ -1,6 +1,6 @@
 # Shoelace
 
-👟 _A forward-thinking web component library for desktop and mobile._
+_A forward-thinking web component library for desktop and mobile._ 🥾
 
 ---
 

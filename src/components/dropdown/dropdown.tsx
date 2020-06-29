@@ -17,14 +17,6 @@ let id = 0;
   shadow: true
 })
 export class Dropdown {
-  id = `dropdown-${++id}`;
-  ignoreMouseEvents = false;
-  ignoreMouseTimeout: any;
-  ignoreOpenWatcher = false;
-  panel: HTMLElement;
-  popover: Popover;
-  trigger: HTMLElement;
-
   constructor() {
     this.handleDocumentKeyDown = this.handleDocumentKeyDown.bind(this);
     this.handleDocumentMouseDown = this.handleDocumentMouseDown.bind(this);
@@ -32,6 +24,14 @@ export class Dropdown {
     this.handleTriggerKeyDown = this.handleTriggerKeyDown.bind(this);
     this.togglePanel = this.togglePanel.bind(this);
   }
+
+  id = `dropdown-${++id}`;
+  ignoreMouseEvents = false;
+  ignoreMouseTimeout: any;
+  ignoreOpenWatcher = false;
+  panel: HTMLElement;
+  popover: Popover;
+  trigger: HTMLElement;
 
   @Element() host: HTMLSlDropdownElement;
 

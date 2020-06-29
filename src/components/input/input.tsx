@@ -17,8 +17,6 @@ import { Component, Element, Event, EventEmitter, Method, Prop, State, h } from 
   shadow: true
 })
 export class Input {
-  input: HTMLInputElement;
-
   constructor() {
     this.handleChange = this.handleChange.bind(this);
     this.handleInput = this.handleInput.bind(this);
@@ -28,6 +26,8 @@ export class Input {
     this.handleMouseDown = this.handleMouseDown.bind(this);
     this.handlePasswordToggle = this.handlePasswordToggle.bind(this);
   }
+
+  input: HTMLInputElement;
 
   @Element() host: HTMLSlInputElement;
 

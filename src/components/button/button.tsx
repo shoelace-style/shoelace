@@ -15,13 +15,13 @@ import { Component, Event, EventEmitter, Method, Prop, State, h } from '@stencil
   shadow: true
 })
 export class Button {
-  button: HTMLButtonElement;
-
   constructor() {
     this.handleBlur = this.handleBlur.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
   }
+
+  button: HTMLButtonElement;
 
   @State() hasFocus = false;
 

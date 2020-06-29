@@ -12,15 +12,15 @@ import ResizeObserver from 'resize-observer-polyfill';
   shadow: true
 })
 export class Textarea {
-  resizeObserver: any;
-  textarea: HTMLTextAreaElement;
-
   constructor() {
     this.handleChange = this.handleChange.bind(this);
     this.handleInput = this.handleInput.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
   }
+
+  resizeObserver: any;
+  textarea: HTMLTextAreaElement;
 
   @State() hasFocus = false;
 

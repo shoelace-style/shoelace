@@ -16,12 +16,12 @@ import { focusVisible } from '../../utilities/focus-visible';
   shadow: true
 })
 export class Tab {
-  alert: HTMLElement;
-
   constructor() {
     this.handleCloseClick = this.handleCloseClick.bind(this);
     this.handleTransitionEnd = this.handleTransitionEnd.bind(this);
   }
+
+  alert: HTMLElement;
 
   @Element() host: HTMLSlAlertElement;
 

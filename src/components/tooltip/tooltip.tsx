@@ -16,11 +16,6 @@ let id = 0;
   shadow: true
 })
 export class Tooltip {
-  id = `tooltip-${++id}`;
-  popover: Popover;
-  target: HTMLElement;
-  tooltip: any;
-
   constructor() {
     this.handleBlur = this.handleBlur.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -29,6 +24,11 @@ export class Tooltip {
     this.handleMouseOut = this.handleMouseOut.bind(this);
     this.handleSlotChange = this.handleSlotChange.bind(this);
   }
+
+  id = `tooltip-${++id}`;
+  popover: Popover;
+  target: HTMLElement;
+  tooltip: any;
 
   @Element() host: HTMLSlTooltipElement;
 

@@ -4,7 +4,11 @@
 
 Icons are symbols that can be used to represent or provide context to various options and actions within an application.
 
-Shoelace comes bundled with over 600 icons courtesy of the [Bootstrap Icons](https://icons.getbootstrap.com/) project. You can also use your own SVG icons with this component through the `src` attribute.
+Shoelace comes bundled with over 1,000 icons courtesy of the [Bootstrap Icons](https://icons.getbootstrap.com/) project. Click or tap on an icon below to copy the name and use it like this.
+
+```html
+<sl-icon name="icon-name-here"></sl-icon>
+```
 
 <div class="icon-search">
   <div class="icon-search-controls">
@@ -29,7 +33,7 @@ Shoelace comes bundled with over 600 icons courtesy of the [Bootstrap Icons](htt
 
 ### Sizes
 
-Icon sizes are determined by the current font size.
+Icons are sized relative to the current font size. To change their size, set the `font-size` property on the icon itself or on a parent element as shown below.
 
 ```html preview
 <div style="font-size: 32px;">
@@ -50,6 +54,14 @@ Icon sizes are determined by the current font size.
   <sl-icon name="trash"></sl-icon>
   <sl-icon name="x-circle"></sl-icon>
 </div>
+```
+
+### Custom Icons
+
+Custom icons can be loaded by setting the `src` attribute. Only SVG images are supported
+
+```html preview
+<sl-icon src="/assets/images/boot.svg" style="font-size: 8rem;"></sl-icon>
 ```
 
 <script>

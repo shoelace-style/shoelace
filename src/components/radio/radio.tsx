@@ -15,16 +15,16 @@ let id = 0;
   shadow: true
 })
 export class Radio {
-  id = `radio-${++id}`;
-  labelId = `radio-label-${id}`;
-  input: HTMLInputElement;
-
   constructor() {
     this.handleClick = this.handleClick.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
     this.handleMouseDown = this.handleMouseDown.bind(this);
   }
+
+  id = `radio-${++id}`;
+  labelId = `radio-label-${id}`;
+  input: HTMLInputElement;
 
   @Element() host: HTMLSlRadioElement;
 

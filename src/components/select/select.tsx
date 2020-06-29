@@ -13,11 +13,6 @@ import { getTextContent } from '../../utilities/slot';
   shadow: true
 })
 export class Select {
-  dropdown: HTMLSlDropdownElement;
-  input: HTMLSlInputElement;
-  menu: HTMLSlMenuElement;
-  resizeObserver: any;
-
   constructor() {
     this.handleBlur = this.handleBlur.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
@@ -28,6 +23,11 @@ export class Select {
     this.handleMenuSelect = this.handleMenuSelect.bind(this);
     this.handleSlotChange = this.handleSlotChange.bind(this);
   }
+
+  dropdown: HTMLSlDropdownElement;
+  input: HTMLSlInputElement;
+  menu: HTMLSlMenuElement;
+  resizeObserver: any;
 
   @Element() host: HTMLSlSelectElement;
 
