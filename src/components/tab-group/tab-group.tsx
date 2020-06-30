@@ -179,15 +179,23 @@ export class TabGroup {
     }
 
     // Move focus left or right
-    if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(event.key)) {
+    if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) {
       const activeEl = document.activeElement as any;
 
       if (activeEl && activeEl.tagName.toLowerCase() === 'sl-tab') {
         const tabs = this.getAllTabs();
         let index = tabs.indexOf(activeEl);
-        index = index + (['ArrowLeft', 'ArrowUp'].includes(event.key) ? -1 : 1);
-        if (index < 0) index = 0;
-        if (index > tabs.length - 1) index = tabs.length - 1;
+
+        if (event.key === 'Home') {
+          index = 0;
+        } else if (event.key === 'End') {
+          index = tabs.length - 1;
+        } else if (event.key === 'ArrowLeft') {
+          index = Math.max(0, index - 1);
+        } else if (event.key === 'ArrowRight') {
+          index = Math.min(tabs.length - 1, index + 1);
+        }
+
         tabs[index].setFocus();
 
         if (['top', 'bottom'].includes(this.placement)) {
