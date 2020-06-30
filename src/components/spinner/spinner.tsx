@@ -21,6 +21,8 @@ export class Spinner {
     return (
       <span
         class="spinner"
+        aria-busy="true"
+        aria-live="polite"
         style={{
           borderWidth: `${this.strokeWidth}px`,
           width: `${this.size}px`,
