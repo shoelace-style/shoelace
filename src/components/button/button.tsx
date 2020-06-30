@@ -17,7 +17,6 @@ import { Component, Event, EventEmitter, Method, Prop, State, h } from '@stencil
 export class Button {
   constructor() {
     this.handleBlur = this.handleBlur.bind(this);
-    this.handleClick = this.handleClick.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
   }
 
@@ -61,9 +60,6 @@ export class Button {
   /** Emitted when the button gains focus. */
   @Event() slFocus: EventEmitter;
 
-  /** Emitted when a submit button is activated. */
-  @Event() slSubmit: EventEmitter;
-
   /** Sets focus on the button. */
   @Method()
   async setFocus() {
@@ -79,12 +75,6 @@ export class Button {
   handleBlur() {
     this.hasFocus = false;
     this.slBlur.emit();
-  }
-
-  handleClick() {
-    if (this.submit) {
-      this.slSubmit.emit();
-    }
   }
 
   handleFocus() {
@@ -126,7 +116,6 @@ export class Button {
         disabled={this.disabled}
         type={this.submit ? 'submit' : 'button'}
         onBlur={this.handleBlur}
-        onClick={this.handleClick}
         onFocus={this.handleFocus}
       >
         <span class="button__prefix">

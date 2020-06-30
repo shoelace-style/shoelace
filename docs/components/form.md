@@ -16,13 +16,21 @@ TODO
 
 ```html preview
 <sl-form class="form-overview">
+  <sl-input name="name" type="text" placeholder="Name"></sl-input>
 
-  <sl-input name="name" type="text"></sl-input>
-  <sl-input name="email" type="email"></sl-input>
+  <br><br>
 
-  <input type="text" name="native-text">
+  <sl-textarea name="bio" placeholder="Bio"></sl-textarea>
+
+  <br><br>
+
+  <input type="text" name="native-text" placeholder="Native Textfield">
+  
+  <br><br>
 
   <input type="file" name="upload">
+
+  <br><br>
 
   <sl-button type="primary" submit>Submit</sl-button>
 </sl-form>

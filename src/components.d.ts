@@ -306,6 +306,10 @@ export namespace Components {
           * Serializes form controls and returns all data as a FormData object.
          */
         "getFormData": () => Promise<FormData>;
+        /**
+          * Submits the form.
+         */
+        "submit": () => Promise<void>;
     }
     interface SlIcon {
         /**
@@ -1100,10 +1104,6 @@ declare namespace LocalJSX {
          */
         "onSlFocus"?: (event: CustomEvent<any>) => void;
         /**
-          * Emitted when a submit button is activated.
-         */
-        "onSlSubmit"?: (event: CustomEvent<any>) => void;
-        /**
           * Set to true to draw a pill-style button with rounded edges.
          */
         "pill"?: boolean;
@@ -1380,6 +1380,10 @@ declare namespace LocalJSX {
         "skidding"?: number;
     }
     interface SlForm {
+        /**
+          * Emitted when the form is submitted.
+         */
+        "onSlSubmit"?: (event: CustomEvent<any>) => void;
     }
     interface SlIcon {
         /**
