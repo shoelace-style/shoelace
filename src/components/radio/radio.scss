@@ -6,7 +6,7 @@
 }
 
 .radio {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   font-family: var(--sl-input-font-family);
   font-size: var(--sl-input-font-size-medium);
@@ -17,7 +17,7 @@
 }
 
 .radio__icon {
-  display: flex;
+  display: inline-flex;
   width: var(--sl-toggle-size);
   height: var(--sl-toggle-size);
 
@@ -29,7 +29,7 @@
 
 .radio__control {
   position: relative;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   width: var(--sl-toggle-size);

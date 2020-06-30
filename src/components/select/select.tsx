@@ -49,6 +49,9 @@ export class Select {
   /** Set to true to disable the select control. */
   @Prop() disabled = false;
 
+  /** The select's name. */
+  @Prop() name = '';
+
   /** The select's placeholder text. */
   @Prop() placeholder = '';
 
@@ -263,6 +266,7 @@ export class Select {
           slot="trigger"
           ref={el => (this.input = el)}
           class="select__input"
+          name={this.name}
           value={this.displayLabel}
           disabled={this.disabled}
           placeholder={this.displayLabel === '' && this.displayTags.length === 0 ? this.placeholder : null}

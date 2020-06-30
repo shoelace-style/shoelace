@@ -70,6 +70,10 @@ export namespace Components {
          */
         "loading": boolean;
         /**
+          * An optional name for the button.
+         */
+        "name": string;
+        /**
           * Set to true to draw a pill-style button with rounded edges.
          */
         "pill": boolean;
@@ -86,9 +90,17 @@ export namespace Components {
          */
         "size": 'small' | 'medium' | 'large';
         /**
+          * Indicates if activating the button should submit the form.
+         */
+        "submit": boolean;
+        /**
           * The button's type.
          */
         "type": 'default' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text';
+        /**
+          * An optional value for the button.
+         */
+        "value": string;
     }
     interface SlCheckbox {
         /**
@@ -288,6 +300,20 @@ export namespace Components {
           * The distance in pixels from which to offset the panel along its trigger.
          */
         "skidding": number;
+    }
+    interface SlForm {
+        /**
+          * Gets all form control elements (native and custom).
+         */
+        "getFormControls": () => Promise<HTMLElement[]>;
+        /**
+          * Serializes all form controls elements and returns a `FormData` object.
+         */
+        "getFormData": () => Promise<FormData>;
+        /**
+          * Submits the form.
+         */
+        "submit": () => Promise<void>;
     }
     interface SlIcon {
         /**
@@ -546,6 +572,10 @@ export namespace Components {
           * Set to true to enable multiselect.
          */
         "multiple": boolean;
+        /**
+          * The select's name.
+         */
+        "name": string;
         /**
           * The select's placeholder text.
          */
@@ -844,6 +874,12 @@ declare global {
         prototype: HTMLSlDropdownElement;
         new (): HTMLSlDropdownElement;
     };
+    interface HTMLSlFormElement extends Components.SlForm, HTMLStencilElement {
+    }
+    var HTMLSlFormElement: {
+        prototype: HTMLSlFormElement;
+        new (): HTMLSlFormElement;
+    };
     interface HTMLSlIconElement extends Components.SlIcon, HTMLStencilElement {
     }
     var HTMLSlIconElement: {
@@ -969,6 +1005,7 @@ declare global {
         "sl-dialog": HTMLSlDialogElement;
         "sl-drawer": HTMLSlDrawerElement;
         "sl-dropdown": HTMLSlDropdownElement;
+        "sl-form": HTMLSlFormElement;
         "sl-icon": HTMLSlIconElement;
         "sl-input": HTMLSlInputElement;
         "sl-menu": HTMLSlMenuElement;
@@ -1063,6 +1100,10 @@ declare namespace LocalJSX {
          */
         "loading"?: boolean;
         /**
+          * An optional name for the button.
+         */
+        "name"?: string;
+        /**
           * Emitted when the button loses focus.
          */
         "onSlBlur"?: (event: CustomEvent<any>) => void;
@@ -1079,9 +1120,17 @@ declare namespace LocalJSX {
          */
         "size"?: 'small' | 'medium' | 'large';
         /**
+          * Indicates if activating the button should submit the form.
+         */
+        "submit"?: boolean;
+        /**
           * The button's type.
          */
         "type"?: 'default' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text';
+        /**
+          * An optional value for the button.
+         */
+        "value"?: string;
     }
     interface SlCheckbox {
         /**
@@ -1337,6 +1386,12 @@ declare namespace LocalJSX {
           * The distance in pixels from which to offset the panel along its trigger.
          */
         "skidding"?: number;
+    }
+    interface SlForm {
+        /**
+          * Emitted when the form is submitted.
+         */
+        "onSlSubmit"?: (event: CustomEvent<any>) => void;
     }
     interface SlIcon {
         /**
@@ -1612,6 +1667,10 @@ declare namespace LocalJSX {
          */
         "multiple"?: boolean;
         /**
+          * The select's name.
+         */
+        "name"?: string;
+        /**
           * Emitted when the control loses focus
          */
         "onSlBlur"?: (event: CustomEvent<any>) => void;
@@ -1878,6 +1937,7 @@ declare namespace LocalJSX {
         "sl-dialog": SlDialog;
         "sl-drawer": SlDrawer;
         "sl-dropdown": SlDropdown;
+        "sl-form": SlForm;
         "sl-icon": SlIcon;
         "sl-input": SlInput;
         "sl-menu": SlMenu;
@@ -1913,6 +1973,7 @@ declare module "@stencil/core" {
             "sl-dialog": LocalJSX.SlDialog & JSXBase.HTMLAttributes<HTMLSlDialogElement>;
             "sl-drawer": LocalJSX.SlDrawer & JSXBase.HTMLAttributes<HTMLSlDrawerElement>;
             "sl-dropdown": LocalJSX.SlDropdown & JSXBase.HTMLAttributes<HTMLSlDropdownElement>;
+            "sl-form": LocalJSX.SlForm & JSXBase.HTMLAttributes<HTMLSlFormElement>;
             "sl-icon": LocalJSX.SlIcon & JSXBase.HTMLAttributes<HTMLSlIconElement>;
             "sl-input": LocalJSX.SlInput & JSXBase.HTMLAttributes<HTMLSlInputElement>;
             "sl-menu": LocalJSX.SlMenu & JSXBase.HTMLAttributes<HTMLSlMenuElement>;

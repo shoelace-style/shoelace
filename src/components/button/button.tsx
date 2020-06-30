@@ -39,11 +39,20 @@ export class Button {
   /** Set to true to draw the button in a loading state. */
   @Prop() loading = false;
 
+  /** An optional name for the button. */
+  @Prop() name: string;
+
   /** Set to true to draw a pill-style button with rounded edges. */
   @Prop() pill = false;
 
   /** Set to true to draw a circle button. */
   @Prop() circle = false;
+
+  /** An optional value for the button. */
+  @Prop() value: string;
+
+  /** Indicates if activating the button should submit the form. */
+  @Prop() submit = false;
 
   /** Emitted when the button loses focus. */
   @Event() slBlur: EventEmitter;
@@ -102,7 +111,10 @@ export class Button {
           'button--loading': this.loading,
           'button--pill': this.pill
         }}
+        name={this.name}
+        value={this.value}
         disabled={this.disabled}
+        type={this.submit ? 'submit' : 'button'}
         onBlur={this.handleBlur}
         onFocus={this.handleFocus}
       >
