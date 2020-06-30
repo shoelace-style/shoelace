@@ -6,7 +6,7 @@ Dropdowns expose additional content that "drops down" in a panel.
 
 Dropdowns consist of a trigger and a panel. Activating the trigger will open the panel and interacting outside of the panel will close it.
 
-Dropdowns are designed to work well with [menus](/components/menu.md) to provide a list of options the user can select from. However, dropdowns can also be used in more advanced applications (e.g. [color picker](/components/color-picker.md) and [select](/components/select.md)). The API gives you complete control over showing, hiding, and positioning the panel.
+Dropdowns are designed to work well with [menus](/components/menu.md) to provide a list of options the user can select from. However, dropdowns can also be used in lower-level applications (e.g. [color picker](/components/color-picker.md) and [select](/components/select.md)). The API gives you complete control over showing, hiding, and positioning the panel.
 
 ```html preview
 <sl-dropdown>
