@@ -11,7 +11,7 @@
 }
 
 .switch {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   font-family: var(--sl-input-font-family);
   font-size: var(--sl-input-font-size-medium);
@@ -23,7 +23,7 @@
 
 .switch__control {
   position: relative;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   width: var(--width);

@@ -303,7 +303,11 @@ export namespace Components {
     }
     interface SlForm {
         /**
-          * Serializes form controls and returns all data as a FormData object.
+          * Gets all form control elements (native and custom).
+         */
+        "getFormControls": () => Promise<HTMLElement[]>;
+        /**
+          * Serializes all form controls elements and returns a `FormData` object.
          */
         "getFormData": () => Promise<FormData>;
         /**
@@ -568,6 +572,10 @@ export namespace Components {
           * Set to true to enable multiselect.
          */
         "multiple": boolean;
+        /**
+          * The select's name.
+         */
+        "name": string;
         /**
           * The select's placeholder text.
          */
@@ -1658,6 +1666,10 @@ declare namespace LocalJSX {
           * Set to true to enable multiselect.
          */
         "multiple"?: boolean;
+        /**
+          * The select's name.
+         */
+        "name"?: string;
         /**
           * Emitted when the control loses focus
          */

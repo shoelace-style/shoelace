@@ -1,23 +1,16 @@
 import { Component, Event, EventEmitter, Method, h } from '@stencil/core';
 
-interface FormControlSerializer {
-  elements: string[];
-  serialize: (el: any) => any;
+interface FormControl {
+  tag: string;
+  serialize: (el: HTMLElement, formData: FormData) => void;
   click?: (event: MouseEvent) => any;
   keyDown?: (event: KeyboardEvent) => any;
 }
 
 /**
  * @since 1.0.0
- * @status ready
+ * @status experimental
  */
-
-//
-// TODO:
-//
-// - restructure serializer logic to make more sense
-// - serialize file inputs
-//
 
 @Component({
   tag: 'sl-form',
@@ -26,79 +19,139 @@ interface FormControlSerializer {
 })
 export class Form {
   form: HTMLElement;
-  serializers: FormControlSerializer[];
+  formControls: FormControl[];
 
   constructor() {
-    this.serializers = [
+    this.formControls = [
       {
-        elements: ['sl-button', 'sl-input', 'sl-range', 'sl-select', 'sl-textarea'],
-        serialize: el => (!el.name || el.disabled ? null : { name: el.name, value: el.value }),
-        click: (event: MouseEvent) => {
-          const target = event.target as any;
-          const tag = target.tagName.toLowerCase();
-
-          if (tag === 'sl-button' && target.submit) {
-            this.submit();
-          }
-        },
-        keyDown: (event: KeyboardEvent) => {
-          const target = event.target as any;
-          const tag = target.tagName.toLowerCase();
-
-          if (event.key === 'Enter' && tag === 'sl-input') {
-            this.submit();
-          }
-
-          // Submit buttons should trigger a submit
-          if (tag === 'sl-button' && target.submit && event.key === 'Enter') {
+        tag: 'button',
+        serialize: (el: HTMLButtonElement, formData) =>
+          el.name && !el.disabled ? formData.append(el.name, el.value) : null,
+        click: event => {
+          const target = event.target as HTMLButtonElement;
+          if (target.type === 'submit') {
             this.submit();
           }
         }
       },
       {
-        elements: ['sl-checkbox', 'sl-radio', 'sl-switch'],
-        serialize: el => (!el.name || !el.checked || el.disabled ? null : { name: el.name, value: el.value })
-      },
-      {
-        elements: ['button', 'input', 'select', 'textarea'],
-        serialize: el => {
+        tag: 'input',
+        serialize: (el: HTMLInputElement, formData) => {
           if (!el.name || el.disabled) {
-            return null;
+            return;
           }
 
           if ((el.type === 'checkbox' || el.type === 'radio') && !el.checked) {
-            return null;
+            return;
           }
 
           if (el.type === 'file') {
-            console.log(el.files);
-            return el.multiple ? el.files : el.files[0];
+            [...el.files].map(file => formData.append(el.name, file));
+            return;
           }
 
-          return { name: el.name, value: el.value };
+          formData.append(el.name, el.value);
         },
-        click: (event: MouseEvent) => {
-          const target = event.target as any;
-          const tag = target.tagName.toLowerCase();
-
-          if (tag === 'button' && target.type === 'submit' && target.submit) {
-            this.submit();
-          }
-        },
-        keyDown: (event: KeyboardEvent) => {
+        click: event => {
           const target = event.target as HTMLInputElement;
-          const tag = target.tagName.toLowerCase();
-
-          // Pressing enter in an input should submit
-          if (event.key === 'Enter' && tag === 'input') {
+          if (target.type === 'submit') {
             this.submit();
           }
-
-          // Submit buttons should trigger a submit
-          if (tag === 'button' && target.type === 'submit' && event.key === 'Enter') {
+        },
+        keyDown: event => {
+          const target = event.target as HTMLInputElement;
+          if (event.key === 'Enter' && !['checkbox', 'file', 'radio'].includes(target.type)) {
             this.submit();
           }
         }
+      },
+      {
+        tag: 'select',
+        serialize: (el: HTMLSelectElement, formData) => {
+          if (el.name && !el.disabled) {
+            if (el.multiple) {
+              const selectedOptions = [...el.querySelectorAll('option:checked')];
+              if (selectedOptions.length) {
+                selectedOptions.map((option: HTMLOptionElement) => formData.append(el.name, option.value));
+              } else {
+                formData.append(el.name, '');
+              }
+            } else {
+              formData.append(el.name, el.value);
+            }
+          }
+        }
+      },
+      {
+        tag: 'sl-button',
+        serialize: (el: HTMLSlButtonElement, formData) =>
+          el.name && !el.disabled ? formData.append(el.name, el.value) : null,
+        click: event => {
+          const target = event.target as HTMLSlButtonElement;
+          if (target.submit) {
+            this.submit();
+          }
+        }
+      },
+      {
+        tag: 'sl-checkbox',
+        serialize: (el: HTMLSlCheckboxElement, formData) =>
+          el.name && el.checked && !el.disabled ? formData.append(el.name, el.value) : null
+      },
+      {
+        tag: 'sl-input',
+        serialize: (el: HTMLSlInputElement, formData) =>
+          el.name && !el.disabled ? formData.append(el.name, el.value) : null,
+        keyDown: event => {
+          if (event.key === 'Enter') {
+            this.submit();
+          }
+        }
+      },
+      {
+        tag: 'sl-radio',
+        serialize: (el: HTMLSlRadioElement, formData) =>
+          el.name && el.checked && !el.disabled ? formData.append(el.name, el.value) : null
+      },
+      {
+        tag: 'sl-range',
+        serialize: (el: HTMLSlRangeElement, formData) => {
+          if (el.name && !el.disabled) {
+            formData.append(el.name, el.value + '');
+          }
+        }
+      },
+      {
+        tag: 'sl-select',
+        serialize: (el: HTMLSlSelectElement, formData) => {
+          if (el.name && !el.disabled) {
+            if (el.multiple) {
+              const selectedOptions = [...el.value];
+              if (selectedOptions.length) {
+                selectedOptions.map(value => formData.append(el.name, value));
+              } else {
+                formData.append(el.name, '');
+              }
+            } else {
+              formData.append(el.name, el.value + '');
+            }
+          }
+        }
+      },
+      {
+        tag: 'sl-switch',
+        serialize: (el: HTMLSlSwitchElement, formData) =>
+          el.name && el.checked && !el.disabled ? formData.append(el.name, el.value) : null
+      },
+      {
+        tag: 'sl-textarea',
+        serialize: (el: HTMLSlTextareaElement, formData) =>
+          el.name && !el.disabled ? formData.append(el.name, el.value) : null
+      },
+      {
+        tag: 'textarea',
+        serialize: (el: HTMLTextAreaElement, formData) =>
+          el.name && !el.disabled ? formData.append(el.name, el.value) : null
       }
     ];
 
@@ -109,41 +162,43 @@ export class Form {
   /** Emitted when the form is submitted. */
   @Event() slSubmit: EventEmitter;
 
-  /** Serializes form controls and returns all data as a FormData object. */
+  /** Serializes all form controls elements and returns a `FormData` object. */
   @Method()
   async getFormData() {
     const formData = new FormData();
-    const assignedElements = this.getAssignedElements();
+    const formControls = await this.getFormControls();
 
-    assignedElements.map(el => {
-      const data = this.serializeElement(el);
-      if (data) {
-        formData.append(data.name, data.value);
-      }
-    });
+    formControls.map(el => this.serializeElement(el, formData));
 
     return formData;
+  }
+
+  /** Gets all form control elements (native and custom). */
+  @Method()
+  async getFormControls() {
+    const slot = this.form.querySelector('slot');
+    const tags = this.formControls.map(control => control.tag);
+    return slot
+      .assignedElements({ flatten: true })
+      .filter(el => tags.includes(el.tagName.toLowerCase())) as HTMLElement[];
   }
 
   /** Submits the form. */
   @Method()
   async submit() {
     const formData = await this.getFormData();
-    this.slSubmit.emit({ formData });
-  }
+    const formControls = await this.getFormControls();
 
-  getAssignedElements() {
-    const slot = this.form.querySelector('slot');
-    return slot.assignedElements({ flatten: true }) as HTMLElement[];
+    this.slSubmit.emit({ formData, formControls });
   }
 
   handleClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
     const tag = target.tagName.toLowerCase();
 
-    for (const serializer of this.serializers) {
-      if (serializer.elements.includes(tag) && serializer.keyDown) {
-        serializer.click(event);
+    for (const formControl of this.formControls) {
+      if (formControl.tag === tag && formControl.click) {
+        formControl.click(event);
       }
     }
   }
@@ -152,19 +207,19 @@ export class Form {
     const target = event.target as HTMLElement;
     const tag = target.tagName.toLowerCase();
 
-    for (const serializer of this.serializers) {
-      if (serializer.elements.includes(tag) && serializer.keyDown) {
-        serializer.keyDown(event);
+    for (const formControl of this.formControls) {
+      if (formControl.tag === tag && formControl.keyDown) {
+        formControl.keyDown(event);
       }
     }
   }
 
-  serializeElement(el: HTMLElement) {
+  serializeElement(el: HTMLElement, formData: FormData) {
     const tag = el.tagName.toLowerCase();
 
-    for (const serializer of this.serializers) {
-      if (serializer.elements.includes(tag)) {
-        return serializer.serialize(el);
+    for (const formControl of this.formControls) {
+      if (formControl.tag === tag) {
+        return formControl.serialize(el, formData);
       }
     }
 
