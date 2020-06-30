@@ -36,12 +36,13 @@ The roadmap tracks the status of components and features that are planned, in de
 
 ## 2.1 📦
 
-- [ ] Alert service (aka "toast")
-- [ ] Button group
-- [ ] Input group
+Nothing is officially slated for this version yet.
 
 ## Under Consideration 🤔
 
+- [ ] Alert service (aka "toast")
+- [ ] Button group
+- [ ] Input group
 - [ ] Card
 - [ ] Carousel
 - [ ] Content Placeholders
