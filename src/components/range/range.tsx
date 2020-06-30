@@ -43,7 +43,7 @@ export class Range {
   @Prop() step = 1;
 
   /** The preferred placedment of the tooltip. */
-  @Prop() tooltipPlacement: 'top' | 'bottom' | 'hidden' = 'top';
+  @Prop() tooltip: 'top' | 'bottom' | 'none' = 'none';
 
   /** A function used to format the tooltip's value. */
   @Prop() tooltipFormatter = (value: number) => value.toString();
@@ -100,7 +100,7 @@ export class Range {
   }
 
   syncTooltip() {
-    if (this.tooltipPlacement !== 'hidden') {
+    if (this.tooltip !== 'none') {
       const percent = Math.max(0, (this.value - this.min) / (this.max - this.min));
       const inputWidth = this.input.offsetWidth;
       const tooltipWidth = this.output.offsetWidth;
@@ -120,8 +120,8 @@ export class Range {
           // States
           'range--disabled': this.disabled,
           'range--focused': this.hasFocus,
-          'range--tooltip-top': this.tooltipPlacement === 'top',
-          'range--tooltip-bottom': this.tooltipPlacement === 'bottom'
+          'range--tooltip-top': this.tooltip === 'top',
+          'range--tooltip-bottom': this.tooltip === 'bottom'
         }}
       >
         <input
@@ -138,7 +138,7 @@ export class Range {
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
         />
-        {this.tooltipPlacement !== 'hidden' && (
+        {this.tooltip !== 'none' && (
           <output ref={el => (this.output = el)} class="range__tooltip">
             {this.tooltipFormatter(this.value)}
           </output>

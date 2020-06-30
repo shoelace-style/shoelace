@@ -28,7 +28,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 ### Without Tooltip
 
 ```html preview
-<sl-range min="0" max="100" step="1" tooltip="off"></sl-range>
+<sl-range min="0" max="100" step="1" tooltip="none"></sl-range>
 ```
 
 ### Disabled

@@ -521,13 +521,13 @@ export namespace Components {
          */
         "step": number;
         /**
+          * The preferred placedment of the tooltip.
+         */
+        "tooltip": 'top' | 'bottom' | 'none';
+        /**
           * A function used to format the tooltip's value.
          */
         "tooltipFormatter": (value: number) => string;
-        /**
-          * The preferred placedment of the tooltip.
-         */
-        "tooltipPlacement": 'top' | 'bottom' | 'hidden';
         /**
           * The input's value attribute.
          */
@@ -1586,13 +1586,13 @@ declare namespace LocalJSX {
          */
         "step"?: number;
         /**
+          * The preferred placedment of the tooltip.
+         */
+        "tooltip"?: 'top' | 'bottom' | 'none';
+        /**
           * A function used to format the tooltip's value.
          */
         "tooltipFormatter"?: (value: number) => string;
-        /**
-          * The preferred placedment of the tooltip.
-         */
-        "tooltipPlacement"?: 'top' | 'bottom' | 'hidden';
         /**
           * The input's value attribute.
          */
