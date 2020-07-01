@@ -24,6 +24,7 @@
   border-radius: 4px;
   box-shadow: var(--sl-shadow-large);
   opacity: 0;
+  overflow: auto;
   transition: var(--sl-transition-fast) opacity;
 
   &.popover-visible {
