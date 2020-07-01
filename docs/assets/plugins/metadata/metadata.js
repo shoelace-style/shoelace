@@ -198,8 +198,26 @@
   }
 
   window.$docsify.plugins.push((hook, vm) => {
+    hook.mounted(function () {
+      getMetadata().then(metadata => {
+        // Add a div showing the current version
+        const target = document.querySelector('.app-name');
+        const div = document.createElement('div');
+        div.classList.add('sidebar-version');
+        div.innerHTML = `
+            <sl-badge type="warning">
+              ${metadata.version}
+            </sl-badge>
+          `;
+        target.insertAdjacentElement('afterend', div);
+      });
+    });
+
     hook.beforeEach(async function (content, next) {
       const metadata = await getMetadata();
+
+      // Replace %VERSION% placeholders
+      content = content.replace(/%VERSION%/g, metadata.version);
 
       // Handle [component-header] tags
       content = content.replace(/\[component-header:([a-z-]+)\]/g, (match, tag) => {
@@ -296,15 +314,6 @@
       });
 
       next(content);
-    });
-
-    hook.doneEach(async function (html, next) {
-      const metadata = await getMetadata();
-
-      // Replace <docs-version> tags with version number
-      [...document.body.querySelectorAll('docs-version')].map(el => el.replaceWith(metadata.version));
-
-      next(html);
     });
   });
 })();

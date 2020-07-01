@@ -102,6 +102,13 @@
   margin-left: -1px;
 }
 
+.sidebar-version {
+  text-align: right;
+  padding: 0 24px;
+  margin-top: -1rem;
+  margin-bottom: 0.5rem;
+}
+
 .sidebar .search input[type='search'] {
   box-shadow: 0 0 0 var(--sl-focus-ring-width) transparent, inset 0 0 0 1px var(--sl-input-border-color);
   border-radius: 9999px;
@@ -126,6 +133,7 @@
 
 .sidebar-nav {
   flex: 1 1 auto;
+  margin-top: 0.5rem;
 }
 
 .sidebar-nav > ul > li {

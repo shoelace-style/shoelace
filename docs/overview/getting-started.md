@@ -2,8 +2,6 @@
 
 _A forward-thinking web component library for desktop and mobile._ 🥾
 
-<span class="badge"><docs-version></docs-version></span>
-
 - 🧩 Works with any framework
 - ⚡️ Works with CDNs
 - 🎨 Fully customizable (no preprocessor required)
