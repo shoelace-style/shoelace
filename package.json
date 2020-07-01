@@ -1,5 +1,5 @@
 {
-  "name": "shoelace",
+  "name": "@claviska/shoelace",
   "version": "1.0.0-beta.1",
   "description": "A forward-thinking library of Web Components.",
   "main": "dist/index.js",
