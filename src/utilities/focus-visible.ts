@@ -1,5 +1,5 @@
 //
-// Simulates :focus-visible on an element by watching for certain keyboard and mouse heuristics and toggling a
+// Simulates :focus-visible behavior on an element by watching for certain keyboard and mouse heuristics and toggling a
 // `focus-visible` class. Works at the component level so no global polyfill is necessary.
 //
 // This will eventually be removed pending better :focus-visible support: https://caniuse.com/#search=focus-visible
