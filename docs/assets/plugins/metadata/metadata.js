@@ -205,11 +205,14 @@
         const div = document.createElement('div');
         div.classList.add('sidebar-version');
         div.innerHTML = `
-            <sl-badge type="warning">
-              ${metadata.version}
-            </sl-badge>
-          `;
-        target.insertAdjacentElement('afterend', div);
+          <a class="button button--version" href="https://github.com/claviska/shoelace" rel="noopener" target="_blank">
+          <sl-icon name="tag"></sl-icon> ${metadata.version}
+          </a>
+          <a class="button button--sponsor" href="https://github.com/sponsors/claviska" rel="noopener" target="_blank">
+            <sl-icon name="heart"></sl-icon> Sponsor
+          </a>
+        `;
+        target.appendChild(div);
       });
     });
 
@@ -232,6 +235,12 @@
         const tags = getDocsTagsObject(data.docsTags);
 
         if (tags && tags.status) {
+          let badgeType = 'info';
+          if (tags.status === 'stable') badgeType = 'primary';
+          if (tags.status === 'experimental') badgeType = 'warning';
+          if (tags.status === 'planned') badgeType = 'info';
+          if (tags.status === 'deprecated') badgeType = 'danger';
+
           result += `
             <div class="component-header">
               <div class="component-header__tag">
@@ -239,13 +248,13 @@
               </div>
 
               <div class="component-header__info">
-                <small class="badge badge--since">
+                <sl-badge type="info">
                   Since ${tags.since || '?'}
-                </small>
+                </sl-badge>
 
-                <small class="component-header__status badge badge--${tags.status.replace(/\s/g, '-')}">
+                <sl-badge type="${badgeType}" style="text-transform: capitalize;">
                   ${tags.status}
-                </small>
+                </sl-badge>
               </div>
             </div>
           `;

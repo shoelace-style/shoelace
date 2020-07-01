@@ -1,8 +1,8 @@
 import { Component, Host, Prop, Watch, h } from '@stencil/core';
 
 /**
- * @since 1.0.0
- * @status ready
+ * @since 1.0
+ * @status stable
  */
 
 @Component({

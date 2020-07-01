@@ -1,8 +1,8 @@
 import { Component, Element, Event, EventEmitter, Method, Prop, State, h } from '@stencil/core';
 
 /**
- * @since 1.0.0
- * @status ready
+ * @since 1.0
+ * @status stable
  *
  * @slot prefix - Used to prepend an icon or similar element to the input.
  * @slot suffix - Used to append an icon or similar element to the input.

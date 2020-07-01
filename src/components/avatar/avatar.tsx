@@ -1,8 +1,8 @@
 import { Component, Prop, State, h } from '@stencil/core';
 
 /**
- * @since 1.0.0
- * @status ready
+ * @since 1.0
+ * @status stable
  *
  * @slot icon - The default icon to use when no image or initials are present.
  */

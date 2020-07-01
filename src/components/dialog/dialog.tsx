@@ -5,8 +5,8 @@ import { focusVisible } from '../../utilities/focus-visible';
 let id = 0;
 
 /**
- * @since 1.0.0
- * @status ready
+ * @since 1.0
+ * @status stable
  *
  * @slot - The dialog's content.
  * @slot footer - The dialog's footer, usually one or more buttons representing various options.

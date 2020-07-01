@@ -8,7 +8,7 @@ interface FormControl {
 }
 
 /**
- * @since 1.0.0
+ * @since 1.0
  * @status experimental
  */
 

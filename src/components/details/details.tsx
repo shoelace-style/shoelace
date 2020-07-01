@@ -4,8 +4,8 @@ import { focusVisible } from '../../utilities/focus-visible';
 let id = 0;
 
 /**
- * @since 1.0.0
- * @status ready
+ * @since 1.0
+ * @status stable
  *
  * @slot summary - The text to show in the details' header. Use the `summary` prop instead for plain-text summaries.
  */

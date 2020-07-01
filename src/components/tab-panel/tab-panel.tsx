@@ -3,8 +3,8 @@ import { Component, Element, Host, Prop, h } from '@stencil/core';
 let id = 0;
 
 /**
- * @since 1.0.0
- * @status ready
+ * @since 1.0
+ * @status stable
  *
  * @slot - The tab panel's content.
  */

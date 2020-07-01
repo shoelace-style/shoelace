@@ -2,8 +2,8 @@ import { Component, Element, Event, EventEmitter, Host, Method, Prop, Watch, h }
 import { focusVisible } from '../../utilities/focus-visible';
 
 /**
- * @since 1.0.0
- * @status ready
+ * @since 1.0
+ * @status stable
  *
  * @slot - The alert's content.
  * @slot icon - An icon to show in the alert.

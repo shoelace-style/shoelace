@@ -3,8 +3,8 @@ import ResizeObserver from 'resize-observer-polyfill';
 import { getTextContent } from '../../utilities/slot';
 
 /**
- * @since 1.0.0
- * @status ready
+ * @since 1.0
+ * @status stable
  */
 
 @Component({
@@ -132,6 +132,13 @@ export class Select {
 
   handleMenuKeyDown(event: KeyboardEvent) {
     event.stopPropagation();
+
+    // Close when escape is pressed
+    if (event.key === 'Escape') {
+      this.dropdown.hide();
+      event.preventDefault();
+      return;
+    }
   }
 
   handleMenuSelect(event: CustomEvent) {

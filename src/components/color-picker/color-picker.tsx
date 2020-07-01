@@ -3,8 +3,8 @@ import color from 'color';
 import { clamp } from '../../utilities/math';
 
 /**
- * @since 1.0.0
- * @status ready
+ * @since 1.0
+ * @status stable
  */
 
 @Component({

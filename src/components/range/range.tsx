@@ -2,8 +2,8 @@ import { Component, Event, EventEmitter, Method, Prop, State, h } from '@stencil
 import ResizeObserver from 'resize-observer-polyfill';
 
 /**
- * @since 1.0.0
- * @status ready
+ * @since 1.0
+ * @status stable
  */
 
 @Component({

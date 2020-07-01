@@ -4,8 +4,8 @@ import Popover from '../../utilities/popover';
 let id = 0;
 
 /**
- * @since 1.0.0
- * @status ready
+ * @since 1.0
+ * @status stable
  *
  * @slot - The tooltip's target element. Only the first element will be used as the target.
  */
