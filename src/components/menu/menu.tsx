@@ -136,8 +136,8 @@ export class Menu {
           index = items.length - 1;
         }
 
-        if (index < 0) index = items.length - 1;
-        if (index > items.length - 1) index = 0;
+        if (index < 0) index = 0;
+        if (index > items.length - 1) index = items.length - 1;
 
         this.setActiveItem(items[index]);
         this.scrollItemIntoView(items[index]);
