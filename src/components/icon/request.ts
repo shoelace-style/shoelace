@@ -15,6 +15,7 @@ export const requestIcon = (url: string) => {
           cache.set(url, div.innerHTML);
           return svg.outerHTML;
         } else {
+          console.warn(`Invalid SVG icon: ${url}`);
           return '';
         }
       } else {
