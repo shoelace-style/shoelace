@@ -569,6 +569,10 @@ export namespace Components {
          */
         "disabled": boolean;
         /**
+          * The select's label.
+         */
+        "label": string;
+        /**
           * The maximum number of tags to show when `multiple` is true. After the maximum, "+n" will be shown to indicate the number of additional items that are selected. Set to -1 to remove the limit.
          */
         "maxTagsVisible": number;
@@ -1670,6 +1674,10 @@ declare namespace LocalJSX {
           * Set to true to disable the select control.
          */
         "disabled"?: boolean;
+        /**
+          * The select's label.
+         */
+        "label"?: string;
         /**
           * The maximum number of tags to show when `multiple` is true. After the maximum, "+n" will be shown to indicate the number of additional items that are selected. Set to -1 to remove the limit.
          */

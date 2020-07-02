@@ -8,9 +8,9 @@ All of Shoelace's components make use of the [shadow DOM](https://developer.mozi
 
 ```html preview
 <sl-form class="form-overview">
-  <sl-input name="name" type="text" placeholder="Name"></sl-input>
+  <sl-input name="name" type="text" label="Name"></sl-input>
   <br>
-  <sl-select name="options" placeholder="Select your favorite">
+  <sl-select name="options" label="Select your favorite">
     <sl-menu-item value="birds">Birds</sl-menu-item>
     <sl-menu-item value="cats">Cats</sl-menu-item>
     <sl-menu-item value="dogs">Dogs</sl-menu-item>

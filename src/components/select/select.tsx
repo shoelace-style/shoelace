@@ -2,6 +2,8 @@ import { Component, Element, Event, EventEmitter, Prop, State, Watch, h } from '
 import ResizeObserver from 'resize-observer-polyfill';
 import { getTextContent } from '../../utilities/slot';
 
+let id = 0;
+
 /**
  * @since 1.0
  * @status stable
@@ -17,6 +19,7 @@ export class Select {
     this.handleBlur = this.handleBlur.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleLabelClick = this.handleLabelClick.bind(this);
     this.handleMenuKeyDown = this.handleMenuKeyDown.bind(this);
     this.handleMenuHide = this.handleMenuHide.bind(this);
     this.handleMenuShow = this.handleMenuShow.bind(this);
@@ -26,6 +29,8 @@ export class Select {
 
   dropdown: HTMLSlDropdownElement;
   input: HTMLSlInputElement;
+  inputId = `input-${++id}`;
+  labelId = `input-label-${id}`;
   menu: HTMLSlMenuElement;
   resizeObserver: any;
 
@@ -60,6 +65,9 @@ export class Select {
 
   /** The value of the control. This will be a string or an array depending on `multiple`. */
   @Prop({ mutable: true }) value: string | Array<string> = '';
+
+  /** The select's label. */
+  @Prop() label = '';
 
   @Watch('multiple')
   handleMultipleChange() {
@@ -128,6 +136,10 @@ export class Select {
       event.preventDefault();
       return;
     }
+  }
+
+  handleLabelClick() {
+    this.input.setFocus();
   }
 
   handleMenuKeyDown(event: KeyboardEvent) {
@@ -252,55 +264,76 @@ export class Select {
 
   render() {
     return (
-      <sl-dropdown
-        ref={el => (this.dropdown = el)}
-        closeOnSelect={!this.multiple}
-        containingElement={this.host}
+      <div
         class={{
-          select: true,
-          'select--open': this.isOpen,
-          'select--focused': this.hasFocus,
-          'select--disabled': this.disabled,
-          'select--multiple': this.multiple,
-          'select--small': this.size === 'small',
-          'select--medium': this.size === 'medium',
-          'select--large': this.size === 'large'
+          'form-control': true,
+          'form-control--has-label': this.label.length > 0
         }}
-        onSlShow={this.handleMenuShow}
-        onSlHide={this.handleMenuHide}
       >
-        <sl-input
-          slot="trigger"
-          ref={el => (this.input = el)}
-          class="select__input"
-          name={this.name}
-          value={this.displayLabel}
-          disabled={this.disabled}
-          placeholder={this.displayLabel === '' && this.displayTags.length === 0 ? this.placeholder : null}
-          readonly={true}
-          size={this.size}
-          onSlFocus={this.handleFocus}
-          onSlBlur={this.handleBlur}
-          onKeyDown={this.handleKeyDown}
+        <label
+          class={{
+            label: true,
+            'label--small': this.size === 'small',
+            'label--medium': this.size === 'medium',
+            'label--large': this.size === 'large'
+          }}
+          htmlFor={this.inputId}
+          onClick={this.handleLabelClick}
         >
-          {this.displayTags.length && (
-            <span slot="prefix" class="select__tags">
-              {this.displayTags}
-            </span>
-          )}
-
-          <sl-icon slot="suffix" class="select__icon" name="chevron-down" />
-        </sl-input>
-
-        <sl-menu
-          ref={el => (this.menu = el)}
-          class="select__menu"
-          onSlSelect={this.handleMenuSelect}
-          onKeyDown={this.handleMenuKeyDown}
+          <slot name="label">{this.label}</slot>
+        </label>
+        <sl-dropdown
+          ref={el => (this.dropdown = el)}
+          closeOnSelect={!this.multiple}
+          containingElement={this.host}
+          class={{
+            select: true,
+            'select--open': this.isOpen,
+            'select--focused': this.hasFocus,
+            'select--disabled': this.disabled,
+            'select--multiple': this.multiple,
+            'select--small': this.size === 'small',
+            'select--medium': this.size === 'medium',
+            'select--large': this.size === 'large'
+          }}
+          onSlShow={this.handleMenuShow}
+          onSlHide={this.handleMenuHide}
         >
-          <slot />
-        </sl-menu>
-      </sl-dropdown>
+          <sl-input
+            slot="trigger"
+            ref={el => (this.input = el)}
+            id={this.inputId}
+            class="select__input"
+            name={this.name}
+            value={this.displayLabel}
+            disabled={this.disabled}
+            placeholder={this.displayLabel === '' && this.displayTags.length === 0 ? this.placeholder : null}
+            readonly={true}
+            size={this.size}
+            aria-labelledby={this.labelId}
+            onSlFocus={this.handleFocus}
+            onSlBlur={this.handleBlur}
+            onKeyDown={this.handleKeyDown}
+          >
+            {this.displayTags.length && (
+              <span slot="prefix" class="select__tags">
+                {this.displayTags}
+              </span>
+            )}
+
+            <sl-icon slot="suffix" class="select__icon" name="chevron-down" />
+          </sl-input>
+
+          <sl-menu
+            ref={el => (this.menu = el)}
+            class="select__menu"
+            onSlSelect={this.handleMenuSelect}
+            onKeyDown={this.handleMenuKeyDown}
+          >
+            <slot />
+          </sl-menu>
+        </sl-dropdown>
+      </div>
     );
   }
 }

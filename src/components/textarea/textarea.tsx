@@ -226,6 +226,7 @@ export class Textarea {
             autoFocus={this.autofocus}
             required={this.required}
             inputMode={this.inputmode}
+            aria-labelledby={this.labelId}
             onChange={this.handleChange}
             onInput={this.handleInput}
             onFocus={this.handleFocus}
