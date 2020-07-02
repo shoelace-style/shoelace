@@ -24,7 +24,7 @@ export class Switch {
     this.handleMouseDown = this.handleMouseDown.bind(this);
   }
 
-  id = `switch-${++id}`;
+  switchId = `switch-${++id}`;
   labelId = `switch-label-${id}`;
   input: HTMLInputElement;
 
@@ -104,7 +104,7 @@ export class Switch {
   render() {
     return (
       <label
-        htmlFor={this.id}
+        htmlFor={this.switchId}
         role="switch"
         class={{
           switch: true,
@@ -119,7 +119,7 @@ export class Switch {
 
           <input
             ref={el => (this.input = el)}
-            id={this.id}
+            id={this.switchId}
             type="checkbox"
             name={this.name}
             value={this.value}
