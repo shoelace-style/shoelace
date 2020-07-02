@@ -22,7 +22,7 @@ export class Radio {
     this.handleMouseDown = this.handleMouseDown.bind(this);
   }
 
-  id = `radio-${++id}`;
+  inputId = `radio-${++id}`;
   labelId = `radio-label-${id}`;
   input: HTMLInputElement;
 
@@ -92,7 +92,7 @@ export class Radio {
   render() {
     return (
       <label
-        htmlFor={this.id}
+        htmlFor={this.inputId}
         role="radio"
         class={{
           radio: true,
@@ -115,7 +115,7 @@ export class Radio {
 
           <input
             ref={el => (this.input = el)}
-            id={this.id}
+            id={this.inputId}
             type="radio"
             name={this.name}
             value={this.value}

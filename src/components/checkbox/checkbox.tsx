@@ -22,7 +22,7 @@ export class Checkbox {
     this.handleMouseDown = this.handleMouseDown.bind(this);
   }
 
-  id = `checkbox-${++id}`;
+  inputId = `checkbox-${++id}`;
   labelId = `checkbox-label-${id}`;
   input: HTMLInputElement;
 
@@ -103,7 +103,7 @@ export class Checkbox {
   render() {
     return (
       <label
-        htmlFor={this.id}
+        htmlFor={this.inputId}
         role="checkbox"
         class={{
           checkbox: true,
@@ -146,7 +146,7 @@ export class Checkbox {
 
           <input
             ref={el => (this.input = el)}
-            id={this.id}
+            id={this.inputId}
             type="checkbox"
             name={this.name}
             value={this.value}
