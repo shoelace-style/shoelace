@@ -18,8 +18,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 </sl-select>
 ```
 
-[component-metadata:sl-select]
-
 ## Examples
 
 ### Labels
@@ -97,3 +95,5 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
   <sl-menu-item value="option-3">Option 3</sl-menu-item>
 </sl-select>
 ```
+
+[component-metadata:sl-select]

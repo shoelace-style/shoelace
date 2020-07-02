@@ -14,8 +14,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 <sl-progress-bar percentage="100"></sl-progress-bar>
 ```
 
-[component-metadata:sl-progress-bar]
-
 ## Examples
 
 ### Custom Height & Label
@@ -27,3 +25,5 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 <sl-progress-bar percentage="75" height="18">75%</sl-progress-bar><br>
 <sl-progress-bar percentage="100" height="18">100%</sl-progress-bar>
 ```
+
+[component-metadata:sl-progress-bar]

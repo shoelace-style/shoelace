@@ -12,8 +12,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 </sl-details>
 ```
 
-[component-metadata:sl-details]
-
 ## Examples
 
 ### Disabled
@@ -59,3 +57,5 @@ Details are designed to function independently, but you can simulate a group whe
   }
 </style>
 ```
+
+[component-metadata:sl-details]

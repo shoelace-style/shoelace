@@ -10,8 +10,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 <sl-input type="text" placeholder="Input"></sl-input>
 ```
 
-[component-metadata:sl-input]
-
 ## Examples
 
 ### Labels
@@ -85,3 +83,5 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 <br>
 <sl-input type="text" placeholder="Disabled" size="large" disabled></sl-input>
 ```
+
+[component-metadata:sl-input]

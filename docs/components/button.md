@@ -15,8 +15,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 <sl-button type="danger">Danger</sl-button>
 ```
 
-[component-metadata:sl-button]
-
 ## Examples
 
 ### Pill
@@ -130,3 +128,4 @@ Use the `disabled` prop to disable a button.
 <sl-button type="danger" disabled>Danger</sl-button>
 ```
 
+[component-metadata:sl-button]

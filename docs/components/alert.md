@@ -13,8 +13,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 </sl-alert>
 ```
 
-[component-metadata:sl-alert]
-
 ## Examples
 
 ### Types
@@ -75,3 +73,5 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
   Nothing fancy here, just a simple alert.
 </sl-alert>
 ```
+
+[component-metadata:sl-alert]

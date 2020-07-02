@@ -10,8 +10,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 <sl-spinner></sl-spinner>
 ```
 
-[component-metadata:sl-spinner]
-
 ## Examples
 
 ## Size
@@ -21,3 +19,5 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 <sl-spinner size="32"></sl-spinner>
 <sl-spinner size="48"></sl-spinner>
 ```
+
+[component-metadata:sl-spinner]

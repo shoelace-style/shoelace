@@ -10,8 +10,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 <sl-range min="0" max="100" step="1"></sl-range>
 ```
 
-[component-metadata:sl-range]
-
 ## Examples
 
 ### Custom Formatter
@@ -36,3 +34,5 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 ```html preview
 <sl-range min="0" max="100" step="1" disabled></sl-range>
 ```
+
+[component-metadata:sl-range]

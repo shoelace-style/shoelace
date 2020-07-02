@@ -12,8 +12,6 @@ A tooltip's target is its _first child element_, so you should only wrap one ele
 </sl-tooltip>
 ```
 
-[component-metadata:sl-tooltip]
-
 ## Examples
 
 ### Placement
@@ -147,3 +145,5 @@ A tooltip's target is its _first child element_, so you should only wrap one ele
   </sl-tooltip>
 </div>
 ```
+
+[component-metadata:sl-tooltip]

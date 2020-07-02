@@ -27,8 +27,6 @@ Shoelace comes bundled with over 1,000 icons courtesy of the [Bootstrap Icons](h
   <input type="text" class="icon-copy-input">
 </div>
 
-[component-metadata:sl-icon]
-
 ## Examples
 
 ### Sizes
@@ -219,3 +217,5 @@ Custom icons can be loaded by setting the `src` attribute. Only SVG images are s
     }    
   }  
 </style>
+
+[component-metadata:sl-icon]

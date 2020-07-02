@@ -10,8 +10,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 <sl-textarea placeholder="Textarea"></sl-textarea>
 ```
 
-[component-metadata:sl-textarea]
-
 ## Examples
 
 ### Labels
@@ -37,3 +35,5 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 ```html preview
 <sl-textarea placeholder="Textarea" disabled></sl-textarea>
 ```
+
+[component-metadata:sl-textarea]

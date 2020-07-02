@@ -31,8 +31,6 @@ Dropdowns are designed to work well with [menus](/components/menu.md) to provide
 </sl-dropdown>
 ```
 
-[component-metadata:sl-dropdown]
-
 ## Examples
 
 ### Placement
@@ -112,3 +110,5 @@ Dropdowns are designed to work well with [menus](/components/menu.md) to provide
   </sl-menu>
 </sl-dropdown>
 ```
+
+[component-metadata:sl-dropdown]

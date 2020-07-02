@@ -26,8 +26,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 </script>
 ```
 
-[component-metadata:sl-drawer]
-
 ## Examples
 
 ### Placement
@@ -192,3 +190,5 @@ By design, a drawer's height is 100% of its container and will never exceed that
   })();
 </script>
 ```
+
+[component-metadata:sl-drawer]

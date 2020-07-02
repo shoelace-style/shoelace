@@ -1,6 +1,6 @@
 # Color Picker
 
-[component-header:sl-checkbox]
+[component-header:sl-color-picker]
 
 Color pickers give users a way to select a color.
 
@@ -9,8 +9,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 ```html preview
 <sl-color-picker></sl-color-picker>
 ```
-
-[component-metadata:sl-checkbox]
 
 ## Examples
 
@@ -49,3 +47,5 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 ```html preview
 <sl-color-picker opacity inline></sl-color-picker>
 ```
+
+[component-metadata:sl-color-picker]

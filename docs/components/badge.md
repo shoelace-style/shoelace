@@ -14,8 +14,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 <sl-badge type="danger">Danger</sl-badge>
 ```
 
-[component-metadata:sl-badge]
-
 ## Examples
 
 ### Buttons
@@ -50,3 +48,5 @@ When including badges in menu items, use the `suffix` slot to make sure they're 
   <sl-menu-item>Replies <sl-badge slot="suffix">12</sl-badge></sl-menu-item>
 </sl-menu>
 ```
+
+[component-metadata:sl-badge]

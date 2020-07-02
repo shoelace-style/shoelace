@@ -20,8 +20,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 </sl-tab-group>
 ```
 
-[component-metadata:sl-tab-group]
-
 ## Examples
 
 ### Tabs on Bottom
@@ -118,3 +116,5 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
   <sl-tab-panel name="tab-20">Tab panel 20</sl-tab-panel>
 </sl-tab-group>
 ```
+
+[component-metadata:sl-tab-group]

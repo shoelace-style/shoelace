@@ -43,8 +43,6 @@ All of Shoelace's components make use of the [shadow DOM](https://developer.mozi
 
 ?> Shoelace forms don't make use of `action` and `method` attributes, and they don't submit automatically like native forms. To handle submission, you need to listen for the `slSubmit` event as shown in the example's source above.
 
-[component-metadata:sl-form]
-
 ## Examples
 
 ### GET
@@ -58,3 +56,5 @@ TODO
 ### Native Form Controls
 
 TODO
+
+[component-metadata:sl-form]

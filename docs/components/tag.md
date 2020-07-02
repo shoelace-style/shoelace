@@ -14,8 +14,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 <sl-tag type="danger">Danger</sl-tag>
 ```
 
-[component-metadata:sl-tag]
-
 ## Examples
 
 ### Size
@@ -69,3 +67,5 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 <sl-tag size="large" type="warning" removable>Warning</sl-tag>
 <sl-tag size="large" type="danger" removable>Danger</sl-tag>
 ```
+
+[component-metadata:sl-tag]

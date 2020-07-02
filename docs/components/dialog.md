@@ -26,8 +26,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 </script>
 ```
 
-[component-metadata:sl-dialog]
-
 ## Examples
 
 ### No Overlay Dismiss
@@ -79,3 +77,5 @@ By design, a dialog's height will never exceed that of the viewport. As such, di
   })();
 </script>
 ```
+
+[component-metadata:sl-dialog]

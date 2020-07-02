@@ -16,8 +16,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 </div>
 ```
 
-[component-metadata:sl-progress-ring]
-
 ## Examples
 
 ### Size
@@ -29,3 +27,5 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
   <sl-progress-ring percentage="50" size="200">50%</sl-progress-ring><br>
 </div>
 ```
+
+[component-metadata:sl-progress-ring]
