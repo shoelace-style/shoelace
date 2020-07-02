@@ -59,7 +59,7 @@ Icons are sized relative to the current font size. To change their size, set the
 Custom icons can be loaded by setting the `src` attribute. Only SVG images are supported
 
 ```html preview
-<sl-icon src="/assets/images/boot.svg" style="font-size: 8rem;"></sl-icon>
+<sl-icon src="/assets/images/shoe.svg" style="font-size: 8rem;"></sl-icon>
 ```
 
 <script>
