@@ -7,15 +7,13 @@ const download = require('download');
 const fm = require('front-matter');
 const fs = require('fs').promises;
 const glob = promisify(require('glob'));
-const latestVersion = require('latest-version');
 const path = require('path');
 
 let numIcons = 0;
 
 (async () => {
   try {
-    // Determine the latest version of Bootstrap icons
-    const version = await latestVersion('bootstrap-icons');
+    const version = require('./node_modules/bootstrap-icons/package.json').version;
     const srcPath = `./temp/icons-${version}`;
     const url = `https://github.com/twbs/icons/archive/v${version}.zip`;
 

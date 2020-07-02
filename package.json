@@ -15,17 +15,18 @@
     "loader/"
   ],
   "scripts": {
-    "start": "concurrently --kill-others \"npm run dev\" \"npm run serve\"",
-    "dev": "stencil build --dev --docs --watch --serve --port 3333 --no-open",
     "build": "stencil build --docs",
+    "dev": "stencil build --dev --docs --watch --serve --port 3333 --no-open",
     "lint": "eslint src/**/*{.ts,.tsx}",
-    "test": "stencil test --spec --e2e",
-    "test.watch": "stencil test --spec --e2e --watchAll",
-    "generate": "stencil generate",
+    "make-dist": "node make-dist.js",
+    "make-icons": "node make-icons.js",
+    "postbuild": "make-dist",
+    "postinstall": "make-icons",
+    "prebuild": "npm run lint && npm run make-icons",
     "serve": "node dev-server.js",
-    "prebuild": "npm run lint",
-    "postbuild": "node make-dist.js",
-    "postinstall": "node make-icons.js",
+    "start": "concurrently --kill-others \"npm run dev\" \"npm run serve\"",
+    "test.watch": "stencil test --spec --e2e --watchAll",
+    "test": "stencil test --spec --e2e",
     "version": "npm run build"
   },
   "devDependencies": {
@@ -33,6 +34,7 @@
     "@typescript-eslint/eslint-plugin": "^2.28.0",
     "@typescript-eslint/parser": "^2.28.0",
     "bluebird": "^3.7.2",
+    "bootstrap-icons": "^1.0.0-alpha5",
     "browser-sync": "^2.26.7",
     "chalk": "^4.0.0",
     "concurrently": "^5.1.0",
@@ -46,7 +48,6 @@
     "http-proxy": "^1.18.1",
     "http-proxy-middleware": "^1.0.4",
     "husky": "^4.2.5",
-    "latest-version": "^5.1.0",
     "recursive-copy": "^2.0.10",
     "through2": "^3.0.1",
     "workbox-build": "4.3.1"
