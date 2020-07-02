@@ -17,7 +17,7 @@ export class Progress {
   @Prop() size = 128;
 
   /** The stroke width of the progress ring in pixels. */
-  @Prop() strokeWidth = 6;
+  @Prop() strokeWidth = 4;
 
   /** The current progress percentage, 0 - 100. */
   @Prop() percentage: number;
@@ -49,7 +49,7 @@ export class Progress {
             stroke-width={this.strokeWidth}
             stroke-linecap="round"
             fill="transparent"
-            r={(this.size - this.strokeWidth) / 2}
+            r={this.size / 2 - this.strokeWidth * 2}
             cx={this.size / 2}
             cy={this.size / 2}
           />
@@ -60,7 +60,7 @@ export class Progress {
             stroke-width={this.strokeWidth}
             stroke-linecap="round"
             fill="transparent"
-            r={(this.size - this.strokeWidth) / 2}
+            r={this.size / 2 - this.strokeWidth * 2}
             cx={this.size / 2}
             cy={this.size / 2}
           />
