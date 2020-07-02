@@ -25,17 +25,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 ```
 
-### HTML Summary
-
-The `summary` prop is intended for plain-text summaries. For HTML summaries, use the `summary` slot.
-
-```html preview
-<sl-details>
-  <h3 slot="summary">Toggle Me</h3>
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-</sl-details>
-```
-
 ### Grouping Details
 
 Details are designed to function independently, but you can simulate a group where only one is shown at a time by listening for the `slShow` event.

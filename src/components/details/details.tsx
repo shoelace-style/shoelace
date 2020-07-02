@@ -6,8 +6,6 @@ let id = 0;
 /**
  * @since 1.0
  * @status stable
- *
- * @slot summary - The text to show in the details' header. Use the `summary` prop instead for plain-text summaries.
  */
 
 @Component({
@@ -18,6 +16,7 @@ let id = 0;
 export class Details {
   constructor() {
     this.handleBodyTransitionEnd = this.handleBodyTransitionEnd.bind(this);
+
     this.handleSummaryClick = this.handleSummaryClick.bind(this);
     this.handleSummaryKeyDown = this.handleSummaryKeyDown.bind(this);
   }
@@ -30,7 +29,7 @@ export class Details {
   /** Indicates whether or not the details is open. You can use this in lieu of the show/hide methods. */
   @Prop({ mutable: true, reflect: true }) open = false;
 
-  /** The plain-text summary to show in the details header. To show an HTML summary, use the `summary` slot. */
+  /** The summary to show in the details header. */
   @Prop() summary = '';
 
   /** Set to true to prevent the user from toggling the details. */
@@ -159,9 +158,7 @@ export class Details {
           onClick={this.handleSummaryClick}
           onKeyDown={this.handleSummaryKeyDown}
         >
-          <div class="details__summary">
-            <slot name="summary">{this.summary}</slot>
-          </div>
+          <div class="details__summary">{this.summary}</div>
 
           <span class="details__summary-icon">
             <sl-icon name="chevron-right" />
