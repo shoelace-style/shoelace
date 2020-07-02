@@ -14,6 +14,12 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 ## Examples
 
+### Labels
+
+```html preview
+<sl-textarea label="Comments"></sl-textarea>
+```
+
 ### No Resize
 
 ```html preview

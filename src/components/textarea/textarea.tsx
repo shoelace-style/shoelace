@@ -1,6 +1,8 @@
 import { Component, Event, EventEmitter, Method, Prop, State, Watch, h } from '@stencil/core';
 import ResizeObserver from 'resize-observer-polyfill';
 
+let id = 0;
+
 /**
  * @since 1.0
  * @status stable
@@ -19,6 +21,8 @@ export class Textarea {
     this.handleFocus = this.handleFocus.bind(this);
   }
 
+  textareaId = `input-${++id}`;
+  labelId = `input-label-${id}`;
   resizeObserver: any;
   textarea: HTMLTextAreaElement;
 
@@ -32,6 +36,9 @@ export class Textarea {
 
   /** The textarea's value attribute. */
   @Prop({ mutable: true }) value = '';
+
+  /** The textarea's label. */
+  @Prop() label = '';
 
   /** The textarea's placeholder text. */
   @Prop() placeholder: string;
@@ -168,44 +175,63 @@ export class Textarea {
     return (
       <div
         class={{
-          textarea: true,
-
-          // Sizes
-          'textarea--small': this.size === 'small',
-          'textarea--medium': this.size === 'medium',
-          'textarea--large': this.size === 'large',
-
-          // States
-          'textarea--disabled': this.disabled,
-          'textarea--focused': this.hasFocus,
-          'textarea--empty': this.value.length === 0,
-
-          // Modifiers
-          'textarea--resize-none': this.resize === 'none',
-          'textarea--resize-vertical': this.resize === 'vertical',
-          'textarea--resize-auto': this.resize === 'auto'
+          'form-control': true,
+          'form-control--has-label': this.label.length > 0
         }}
       >
-        <textarea
-          ref={el => (this.textarea = el)}
-          class="textarea__control"
-          name={this.name}
-          placeholder={this.placeholder}
-          disabled={this.disabled}
-          readOnly={this.readonly}
-          rows={this.rows}
-          maxLength={this.maxlength}
-          value={this.value}
-          autoCapitalize={this.autocapitalize}
-          autoCorrect={this.autocorrect}
-          autoFocus={this.autofocus}
-          required={this.required}
-          inputMode={this.inputmode}
-          onChange={this.handleChange}
-          onInput={this.handleInput}
-          onFocus={this.handleFocus}
-          onBlur={this.handleBlur}
-        />
+        <label
+          class={{
+            label: true,
+            'label--small': this.size === 'small',
+            'label--medium': this.size === 'medium',
+            'label--large': this.size === 'large'
+          }}
+          htmlFor={this.textareaId}
+        >
+          <slot name="label">{this.label}</slot>
+        </label>
+        <div
+          class={{
+            textarea: true,
+
+            // Sizes
+            'textarea--small': this.size === 'small',
+            'textarea--medium': this.size === 'medium',
+            'textarea--large': this.size === 'large',
+
+            // States
+            'textarea--disabled': this.disabled,
+            'textarea--focused': this.hasFocus,
+            'textarea--empty': this.value.length === 0,
+
+            // Modifiers
+            'textarea--resize-none': this.resize === 'none',
+            'textarea--resize-vertical': this.resize === 'vertical',
+            'textarea--resize-auto': this.resize === 'auto'
+          }}
+        >
+          <textarea
+            ref={el => (this.textarea = el)}
+            id={this.textareaId}
+            class="textarea__control"
+            name={this.name}
+            placeholder={this.placeholder}
+            disabled={this.disabled}
+            readOnly={this.readonly}
+            rows={this.rows}
+            maxLength={this.maxlength}
+            value={this.value}
+            autoCapitalize={this.autocapitalize}
+            autoCorrect={this.autocorrect}
+            autoFocus={this.autofocus}
+            required={this.required}
+            inputMode={this.inputmode}
+            onChange={this.handleChange}
+            onInput={this.handleInput}
+            onFocus={this.handleFocus}
+            onBlur={this.handleBlur}
+          />
+        </div>
       </div>
     );
   }

@@ -1,5 +1,7 @@
 import { Component, Element, Event, EventEmitter, Method, Prop, State, h } from '@stencil/core';
 
+let id = 0;
+
 /**
  * @since 1.0
  * @status stable
@@ -27,6 +29,8 @@ export class Input {
     this.handlePasswordToggle = this.handlePasswordToggle.bind(this);
   }
 
+  inputId = `input-${++id}`;
+  labelId = `input-label-${id}`;
   input: HTMLInputElement;
 
   @Element() host: HTMLSlInputElement;
@@ -45,6 +49,9 @@ export class Input {
 
   /** The input's value attribute. */
   @Prop({ mutable: true }) value: string = '';
+
+  /** The input's label. */
+  @Prop() label = '';
 
   /** The input's placeholder text. */
   @Prop() placeholder: string;
@@ -194,77 +201,98 @@ export class Input {
     return (
       <div
         class={{
-          input: true,
-
-          // Sizes
-          'input--small': this.size === 'small',
-          'input--medium': this.size === 'medium',
-          'input--large': this.size === 'large',
-
-          // States
-          'input--disabled': this.disabled,
-          'input--focused': this.hasFocus,
-          'input--empty': this.value.length === 0
+          'form-control': true,
+          'form-control--has-label': this.label.length > 0
         }}
-        onMouseDown={this.handleMouseDown}
       >
-        <span class="input__prefix">
-          <slot name="prefix" />
-        </span>
+        <label
+          class={{
+            label: true,
+            'label--small': this.size === 'small',
+            'label--medium': this.size === 'medium',
+            'label--large': this.size === 'large'
+          }}
+          htmlFor={this.inputId}
+        >
+          <slot name="label">{this.label}</slot>
+        </label>
 
-        <input
-          ref={el => (this.input = el)}
-          class="input__control"
-          type={this.type === 'password' && this.isPasswordVisible ? 'text' : this.type}
-          name={this.name}
-          placeholder={this.placeholder}
-          disabled={this.disabled}
-          readonly={this.readonly}
-          minLength={this.minlength}
-          maxLength={this.maxlength}
-          min={this.min}
-          max={this.max}
-          step={this.step}
-          value={this.value}
-          autoCapitalize={this.autocapitalize}
-          autoComplete={this.autocomplete}
-          autoCorrect={this.autocorrect}
-          autoFocus={this.autofocus}
-          pattern={this.pattern}
-          required={this.required}
-          inputMode={this.inputmode}
-          onChange={this.handleChange}
-          onInput={this.handleInput}
-          onFocus={this.handleFocus}
-          onBlur={this.handleBlur}
-        />
+        <div
+          class={{
+            input: true,
 
-        {this.clearable && (
-          <button class="input__clear" type="button" onClick={this.handleClearClick} tabindex="-1">
-            <slot name="clear-icon">
-              <sl-icon name="x-circle" />
-            </slot>
-          </button>
-        )}
+            // Sizes
+            'input--small': this.size === 'small',
+            'input--medium': this.size === 'medium',
+            'input--large': this.size === 'large',
 
-        {this.togglePassword && (
-          <button class="input__password-toggle" type="button" onClick={this.handlePasswordToggle} tabindex="-1">
-            {this.isPasswordVisible ? (
-              <slot name="show-password-icon">
-                <sl-icon name="eye-slash" />
+            // States
+            'input--disabled': this.disabled,
+            'input--focused': this.hasFocus,
+            'input--empty': this.value.length === 0
+          }}
+          onMouseDown={this.handleMouseDown}
+        >
+          <span class="input__prefix">
+            <slot name="prefix" />
+          </span>
+
+          <input
+            ref={el => (this.input = el)}
+            id={this.inputId}
+            class="input__control"
+            type={this.type === 'password' && this.isPasswordVisible ? 'text' : this.type}
+            name={this.name}
+            placeholder={this.placeholder}
+            disabled={this.disabled}
+            readonly={this.readonly}
+            minLength={this.minlength}
+            maxLength={this.maxlength}
+            min={this.min}
+            max={this.max}
+            step={this.step}
+            value={this.value}
+            autoCapitalize={this.autocapitalize}
+            autoComplete={this.autocomplete}
+            autoCorrect={this.autocorrect}
+            autoFocus={this.autofocus}
+            pattern={this.pattern}
+            required={this.required}
+            inputMode={this.inputmode}
+            aria-labelledby={this.labelId}
+            onChange={this.handleChange}
+            onInput={this.handleInput}
+            onFocus={this.handleFocus}
+            onBlur={this.handleBlur}
+          />
+
+          {this.clearable && (
+            <button class="input__clear" type="button" onClick={this.handleClearClick} tabindex="-1">
+              <slot name="clear-icon">
+                <sl-icon name="x-circle" />
               </slot>
-            ) : (
-              <slot name="hide-password-icon">
-                {' '}
-                <sl-icon name="eye" />
-              </slot>
-            )}
-          </button>
-        )}
+            </button>
+          )}
 
-        <span class="input__suffix">
-          <slot name="suffix" />
-        </span>
+          {this.togglePassword && (
+            <button class="input__password-toggle" type="button" onClick={this.handlePasswordToggle} tabindex="-1">
+              {this.isPasswordVisible ? (
+                <slot name="show-password-icon">
+                  <sl-icon name="eye-slash" />
+                </slot>
+              ) : (
+                <slot name="hide-password-icon">
+                  {' '}
+                  <sl-icon name="eye" />
+                </slot>
+              )}
+            </button>
+          )}
+
+          <span class="input__suffix">
+            <slot name="suffix" />
+          </span>
+        </div>
       </div>
     );
   }

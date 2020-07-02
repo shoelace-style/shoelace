@@ -184,7 +184,7 @@ export namespace Components {
          */
         "show": () => Promise<boolean>;
         /**
-          * The plain-text summary to show in the details header. To show an HTML summary, use the `summary` slot.
+          * The summary to show in the details header.
          */
         "summary": string;
     }
@@ -358,6 +358,10 @@ export namespace Components {
           * The input's inputmode attribute.
          */
         "inputmode": 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
+        /**
+          * The input's label.
+         */
+        "label": string;
         /**
           * The input's max attribute.
          */
@@ -706,6 +710,10 @@ export namespace Components {
           * The textarea's inputmode attribute.
          */
         "inputmode": 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
+        /**
+          * The textarea's label.
+         */
+        "label": string;
         /**
           * The textarea's maxlength attribute.
          */
@@ -1246,7 +1254,7 @@ declare namespace LocalJSX {
          */
         "open"?: boolean;
         /**
-          * The plain-text summary to show in the details header. To show an HTML summary, use the `summary` slot.
+          * The summary to show in the details header.
          */
         "summary"?: string;
     }
@@ -1444,6 +1452,10 @@ declare namespace LocalJSX {
           * The input's inputmode attribute.
          */
         "inputmode"?: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
+        /**
+          * The input's label.
+         */
+        "label"?: string;
         /**
           * The input's max attribute.
          */
@@ -1816,6 +1828,10 @@ declare namespace LocalJSX {
           * The textarea's inputmode attribute.
          */
         "inputmode"?: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
+        /**
+          * The textarea's label.
+         */
+        "label"?: string;
         /**
           * The textarea's maxlength attribute.
          */

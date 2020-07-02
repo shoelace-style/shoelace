@@ -5,6 +5,34 @@
   cursor: text;
 }
 
+.form-control {
+  display: flex;
+  flex-direction: column;
+
+  .label {
+    display: none;
+  }
+}
+
+.form-control--has-label {
+  .label {
+    display: inline-block;
+    margin-bottom: var(--sl-spacing-xx-small);
+
+    &.label--small {
+      font-size: var(--sl-input-font-size-small);
+    }
+
+    &.label--medium {
+      font-size: var(--sl-input-font-size-medium);
+    }
+
+    &.label--large {
+      font-size: var(--sl-input-font-size-large);
+    }
+  }
+}
+
 .textarea {
   display: flex;
   align-items: center;
@@ -13,7 +41,7 @@
   font-family: var(--sl-input-font-family);
   font-weight: var(--sl-input-font-weight);
   line-height: var(--sl-line-height-normal);
-  letter-spacing: var(--sl-letter-spacing-normal);
+  letter-spacing: var(--sl-input-letter-spacing);
   background-color: var(--sl-input-background-color);
   border: solid var(--sl-input-border-width) var(--sl-input-border-color);
   vertical-align: middle;

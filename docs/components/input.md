@@ -14,6 +14,14 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 ## Examples
 
+### Labels
+
+```html preview
+<sl-input type="text" label="Name"></sl-input>
+<br>
+<sl-input type="email" label="Email" placeholder="bob@example.com"></sl-input>
+```
+
 ### Size
 
 ```html preview
