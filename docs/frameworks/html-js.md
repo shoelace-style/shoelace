@@ -1,3 +1,0 @@
-# HTML + JavaScript
-
-TODO

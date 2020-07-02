@@ -1,17 +1,9 @@
-- Overview
-  - [Getting Started](/overview/getting-started.md)
-  - [Installation](/overview/installation.md)
-  - [Customizing](/overview/customizing.md)
-  - [Roadmap](/overview/roadmap.md)
-
-- Design Tokens
-  - [Typography](/tokens/typography.md)
-  - [Color](/tokens/color.md)
-  - [Spacing](/tokens/spacing.md)
-  - [Elevation](/tokens/elevation.md)
-  - [Border Radius](/tokens/border-radius.md)
-  - [Transition](/tokens/transition.md)
-  - [Z-index](/tokens/z-index.md)
+- Getting Started
+  - [Overview](/getting-started/getting-started.md)
+  - [Installation](/getting-started/installation.md)
+  - [Usage](/getting-started/usage.md)
+  - [Customizing](/getting-started/customizing.md)
+  - [Roadmap](/getting-started/roadmap.md)
 
 - Components
   - [Alert](/components/alert.md)
@@ -45,8 +37,11 @@
   - [Textarea](/components/textarea.md)
   - [Tooltip](/components/tooltip.md)
 
-- Frameworks
-  - [HTML + JS](/frameworks/html-js.md)
-  - [React](/frameworks/react.md)
-  - [Vue](/frameworks/vue.md)
-  - [Angular](/frameworks/angular.md)
+- Design Tokens
+  - [Typography](/tokens/typography.md)
+  - [Color](/tokens/color.md)
+  - [Spacing](/tokens/spacing.md)
+  - [Elevation](/tokens/elevation.md)
+  - [Border Radius](/tokens/border-radius.md)
+  - [Transition](/tokens/transition.md)
+  - [Z-index](/tokens/z-index.md)

@@ -23,7 +23,7 @@ Now you have access to all of Shoelace's components! Try adding a button to your
 <sl-button>Click Me</sl-button>
 ```
 
-?> Don't want to use the CDN? Check out the [installation instructions](overview/installation.md) for more options.
+?> Don't want to use the CDN? Check out the [installation instructions](getting-started/installation.md) for more options.
 
 ---
 
