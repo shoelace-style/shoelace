@@ -387,6 +387,10 @@ export namespace Components {
          */
         "pattern": string;
         /**
+          * Set to true to draw a pill-style button with rounded edges.
+         */
+        "pill": boolean;
+        /**
           * The input's placeholder text.
          */
         "placeholder": string;
@@ -1500,6 +1504,10 @@ declare namespace LocalJSX {
           * The input's pattern attribute.
          */
         "pattern"?: string;
+        /**
+          * Set to true to draw a pill-style button with rounded edges.
+         */
+        "pill"?: boolean;
         /**
           * The input's placeholder text.
          */

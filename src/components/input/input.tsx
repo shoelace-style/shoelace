@@ -50,6 +50,9 @@ export class Input {
   /** The input's value attribute. */
   @Prop({ mutable: true }) value: string = '';
 
+  /** Set to true to draw a pill-style button with rounded edges. */
+  @Prop() pill = false;
+
   /** The input's label. */
   @Prop() label = '';
 
@@ -227,6 +230,7 @@ export class Input {
             'input--large': this.size === 'large',
 
             // States
+            'input--pill': this.pill,
             'input--disabled': this.disabled,
             'input--focused': this.hasFocus,
             'input--empty': this.value.length === 0

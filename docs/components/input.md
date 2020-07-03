@@ -23,11 +23,21 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 ### Size
 
 ```html preview
-<sl-input type="text" placeholder="Small" size="small"></sl-input>
+<sl-input placeholder="Small" size="small"></sl-input>
 <br>
-<sl-input type="text" placeholder="Medium" size="medium"></sl-input>
+<sl-input placeholder="Medium" size="medium"></sl-input>
 <br>
-<sl-input type="text" placeholder="Large" size="large"></sl-input>
+<sl-input placeholder="Large" size="large"></sl-input>
+```
+
+### Pill
+
+```html preview
+<sl-input placeholder="Small" size="small" pill></sl-input>
+<br>
+<sl-input placeholder="Medium" size="medium" pill></sl-input>
+<br>
+<sl-input placeholder="Large" size="large" pill></sl-input>
 ```
 
 ### Prefix & Suffix Icons
