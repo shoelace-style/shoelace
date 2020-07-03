@@ -17,6 +17,16 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 ## Examples
 
+### Sizes
+
+Use the `size` prop to change a button's size.
+
+```html preview
+<sl-button size="small">Small</sl-button>
+<sl-button size="medium">Medium</sl-button>
+<sl-button size="large">Large</sl-button>
+```
+
 ### Pill
 
 Use the `pill` prop to give buttons rounded edges.
@@ -28,16 +38,6 @@ Use the `pill` prop to give buttons rounded edges.
 <sl-button type="info" pill>Info</sl-button>
 <sl-button type="warning" pill>Warning</sl-button>
 <sl-button type="danger" pill>Danger</sl-button>
-```
-
-### Sizes
-
-Use the `size` prop to change a button's size.
-
-```html preview
-<sl-button size="small">Small</sl-button>
-<sl-button size="medium">Medium</sl-button>
-<sl-button size="large">Large</sl-button>
 ```
 
 ### Circle
