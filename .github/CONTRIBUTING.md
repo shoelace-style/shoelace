@@ -1,6 +1,6 @@
 # Contributing to Shoelace
 
-Shoelace is an open source project, meaning everyone can use it and contribute to its development. Please take a moment to review this document to make the contribution process as easy as possible for both you and the project's maintainers.
+Shoelace is an open source project, meaning everyone can use it and contribute to its development. Please take a moment to review these guidelines to make the contribution process as easy as possible for both you and the project's maintainers.
 
 
 ## Using the Issue Tracker
