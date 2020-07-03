@@ -1,16 +1,29 @@
-# Contributing
+# Contributing to Shoelace
+
+Shoelace is an open source project, meaning everyone can use it and contribute to its development. Please take a moment to review this document to make the contribution process as easy as possible for both you and the project's maintainers.
 
 
-## The Issue Tracker
+## Using the Issue Tracker
 
 The [issue tracker](https://github.com/claviska/shoelace/issues) is for bug reports, feature requests, and pull requests.
 
 - Please **do not** use the issue tracker for personal support requests. Please [ask your question](https://stackoverflow.com/questions/ask) on StackOverflow instead.
 - Please **do not** derail, hijack, or troll issues. Keep the discussion on topic and be respectful of others.
-- Please **do not** post comments with "+1" or "👍". Use [GitHub reactions](https://github.blog/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/) instead.
+- Please **do not** post comments with "+1" or "👍". Use [reactions](https://github.blog/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/) instead.
 - Please **do** use the issue tracker for feature requests, bug reports, and pull requests.
 
 Issues that do not follow these guidelines are subject to closure. There simply aren't enough resources for the author and contributors to troubleshoot personal support requests.
+
+### Feature Requests
+
+Feature requests can be added using the issue tracker.
+
+- Please **do** search for an existing request before suggesting a new feature.
+- Please **do** use the "👍" reaction to vote for a feature.
+- Please **do** share substantial use cases and perspective that support new features if they haven't already been mentioned.
+- Please **do not** bump, spam, or ping contributors to prioritize your own feature.
+
+If you would like your feature prioritized, please consider [sponsoring the project](https://github.com/sponsors/claviska).
 
 ### Bug Reports
 
@@ -24,8 +37,7 @@ A bug is _a demonstrable problem_ caused by code in the library. Bug reports are
 
 **A minimal test case is critical to a successful bug report.** It demonstrates that the bug exists in the library and not in surrounding code. Contributors should be able to understand the bug without studying your code, otherwise they'll probably move on to another bug.
 
-If you need your bug prioritized, please consider [sponsoring the project](https://github.com/sponsors/claviska).
-
+If you would like your bug prioritized, please consider [sponsoring the project](https://github.com/sponsors/claviska).
 
 ### Pull Requests
 
