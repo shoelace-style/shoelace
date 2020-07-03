@@ -1,8 +1,9 @@
 - Getting Started
-  - [Overview](/getting-started/getting-started.md)
+  - [Overview](/)
   - [Installation](/getting-started/installation.md)
   - [Usage](/getting-started/usage.md)
   - [Customizing](/getting-started/customizing.md)
+  - [Contributing](/getting-started/contributing.md)
   - [Roadmap](/getting-started/roadmap.md)
 
 - Components
