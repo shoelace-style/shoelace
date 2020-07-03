@@ -9,6 +9,8 @@ let id = 0;
  *
  * @slot trigger - The dropdown's trigger, usually a `<sl-button>` element.
  * @slot - The dropdown's content.
+ *
+ * @part panel - The panel that gets shown when the dropdown is open.
  */
 
 @Component({
@@ -266,6 +268,7 @@ export class Dropdown {
 
         <div
           ref={el => (this.panel = el)}
+          part="panel"
           class="dropdown__panel"
           role="menu"
           aria-hidden={!this.open}
