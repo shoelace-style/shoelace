@@ -78,12 +78,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 <sl-input type="password" placeholder="Password Toggle" size="large" toggle-password></sl-input>
 ```
 
-### Number
-
-```html preview
-<sl-input type="number" placeholder="Number"></sl-input>
-```
-
 ### Disabled
 
 ```html preview
