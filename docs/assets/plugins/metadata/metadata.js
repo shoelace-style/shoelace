@@ -141,6 +141,32 @@
     return table.outerHTML;
   }
 
+  function createPartsTable(parts) {
+    const table = document.createElement('table');
+    table.innerHTML = `
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${parts
+          .map(
+            part => `
+        <tr>
+          <td><code>${escapeHtml(part.name)}</code></td>
+          <td>${escapeHtml(part.docs)}</td>
+        </tr>
+        `
+          )
+          .join('')}
+      </tbody>
+    `;
+
+    return table.outerHTML;
+  }
+
   function createDependentsList(dependents) {
     const ul = document.createElement('ul');
     ul.innerHTML = `
@@ -305,6 +331,13 @@
           result += `
             ## CSS Custom Properties
             ${createCustomPropertiesTable(data.styles)}
+          `;
+        }
+
+        if (data.parts.length) {
+          result += `
+            ## CSS Parts
+            ${createPartsTable(data.parts)}
           `;
         }
 
