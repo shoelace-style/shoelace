@@ -7,7 +7,9 @@ Menu items...
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 
 ```html preview
-<sl-menu style="max-width: 200px; border: solid 1px var(--sl-color-gray-90); border-radius: var(--sl-border-radius-medium);">
+<sl-menu
+  style="max-width: 200px; border: solid 1px var(--sl-color-gray-90); border-radius: var(--sl-border-radius-medium);"
+>
   <sl-menu-item>Option 1</sl-menu-item>
   <sl-menu-item>Option 2</sl-menu-item>
   <sl-menu-item>Option 3</sl-menu-item>
@@ -24,7 +26,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
     <sl-icon slot="suffix" name="heart"></sl-icon>
   </sl-menu-item>
 </sl-menu>
-
 ```
 
 [component-metadata:sl-menu-item]

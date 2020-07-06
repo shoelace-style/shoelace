@@ -19,7 +19,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
     const drawer = document.querySelector('.drawer-overview');
     const openButton = drawer.nextElementSibling;
     const closeButton = drawer.querySelector('sl-button[type="primary"]');
-    
+
     openButton.addEventListener('click', () => drawer.show());
     closeButton.addEventListener('click', () => drawer.hide());
   })();
@@ -43,7 +43,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
     const drawer = document.querySelector('.drawer-placement');
     const openButton = drawer.nextElementSibling;
     const closeButton = drawer.querySelector('sl-button[type="primary"]');
-    
+
     openButton.addEventListener('click', () => drawer.show());
     closeButton.addEventListener('click', () => drawer.hide());
   })();
@@ -55,7 +55,9 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 By default, the drawer slides out of its [containing block](https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#Identifying_the_containing_block), which is usually the viewport. To make the drawer slide out of its parent element, set this prop and add `position: relative` to the parent.
 
 ```html preview
-<div style="position: relative; border: solid 2px var(--sl-color-gray-80); height: 300px; padding: 1rem; margin-bottom: 1rem;">
+<div
+  style="position: relative; border: solid 2px var(--sl-color-gray-80); height: 300px; padding: 1rem; margin-bottom: 1rem;"
+>
   The drawer will be contained to this box. This content won't shift or be affected in any way when the drawer opens.
 
   <sl-drawer label="Drawer" contained class="drawer-contained" style="--width: 50%;">
@@ -71,7 +73,7 @@ By default, the drawer slides out of its [containing block](https://developer.mo
     const drawer = document.querySelector('.drawer-contained');
     const openButton = drawer.parentElement.nextElementSibling;
     const closeButton = drawer.querySelector('sl-button[type="primary"]');
-    
+
     openButton.addEventListener('click', () => drawer.show());
     closeButton.addEventListener('click', () => drawer.hide());
   })();
@@ -95,7 +97,7 @@ By default, drawers are closed when the user clicks or taps on the overlay. The 
     const drawer = document.querySelector('.drawer-no-overlay-dismiss');
     const openButton = drawer.nextElementSibling;
     const closeButton = drawer.querySelector('sl-button[type="primary"]');
-    
+
     openButton.addEventListener('click', () => drawer.show());
     closeButton.addEventListener('click', () => drawer.hide());
   })();
@@ -121,7 +123,7 @@ By design, a drawer's height is 100% of its container and will never exceed that
     const drawer = document.querySelector('.drawer-scrolling');
     const openButton = drawer.nextElementSibling;
     const closeButton = drawer.querySelector('sl-button[type="primary"]');
-    
+
     openButton.addEventListener('click', () => drawer.show());
     closeButton.addEventListener('click', () => drawer.hide());
   })();
@@ -143,7 +145,7 @@ By design, a drawer's height is 100% of its container and will never exceed that
     const drawer = document.querySelector('.drawer-custom-width');
     const openButton = drawer.nextElementSibling;
     const closeButton = drawer.querySelector('sl-button[type="primary"]');
-    
+
     openButton.addEventListener('click', () => drawer.show());
     closeButton.addEventListener('click', () => drawer.hide());
   })();
@@ -165,7 +167,7 @@ By design, a drawer's height is 100% of its container and will never exceed that
     const drawer = document.querySelector('.drawer-no-header');
     const openButton = drawer.nextElementSibling;
     const closeButton = drawer.querySelector('sl-button[type="primary"]');
-    
+
     openButton.addEventListener('click', () => drawer.show());
     closeButton.addEventListener('click', () => drawer.hide());
   })();
@@ -185,7 +187,7 @@ By design, a drawer's height is 100% of its container and will never exceed that
   (() => {
     const drawer = document.querySelector('.drawer-no-footer');
     const openButton = drawer.nextElementSibling;
-    
+
     openButton.addEventListener('click', () => drawer.show());
   })();
 </script>

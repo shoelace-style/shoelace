@@ -13,7 +13,7 @@ Shoelace is actively designed and developed in New Hampshire by [@claviska](http
 The fastest way to get started is with the CDN. Add this to your `<head>` section:
 
 ```html
-<link rel="stylesheet" src="//SOME_CDN/shoelace/shoelace.css">
+<link rel="stylesheet" src="//SOME_CDN/shoelace/shoelace.css" />
 <script type="module" src="//SOME_CDN/shoelace/shoelace.esm.js"></script>
 ```
 
@@ -33,7 +33,7 @@ Now you have access to all of Shoelace's components! Try adding a button to your
 
 Thanks to the popularity of frameworks such as React, Vue, and Angular, component-driven development is a way of life for front-end developers. Components are awesome, and they make a lot of sense in terms of design, development, and testing.
 
-Unfortunately, *framework-specific* components fail us in a number of ways:
+Unfortunately, _framework-specific_ components fail us in a number of ways:
 
 - 🔒 You can only use them in the framework they're designed for
 - ⏳ Their lifespan is limited to that of the framework's

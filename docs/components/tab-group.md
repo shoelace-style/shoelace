@@ -37,6 +37,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
   <sl-tab-panel name="disabled">Disabled</sl-tab-panel>
 </sl-tab-group>
 ```
+
 ### Tabs on Left
 
 ```html preview

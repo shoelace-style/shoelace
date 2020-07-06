@@ -55,7 +55,7 @@ A tooltip's target is its _first child element_, so you should only wrap one ele
   <div class="tooltip-placement-example-row">
     <sl-tooltip content="left-end" placement="left-end">
       <sl-button></sl-button>
-    </sl-tooltip>    
+    </sl-tooltip>
 
     <sl-tooltip content="right-end" placement="right-end">
       <sl-button></sl-button>
@@ -74,7 +74,7 @@ A tooltip's target is its _first child element_, so you should only wrap one ele
     <sl-tooltip content="bottom-end" placement="bottom-end">
       <sl-button></sl-button>
     </sl-tooltip>
-  </div>  
+  </div>
 </div>
 
 <style>
@@ -90,17 +90,17 @@ A tooltip's target is its _first child element_, so you should only wrap one ele
 
   .tooltip-placement-example sl-button {
     float: left;
-    margin-right: .25rem;
-    margin-bottom: .25rem;
+    margin-right: 0.25rem;
+    margin-bottom: 0.25rem;
   }
 
-  .tooltip-placement-example [placement="top-start"] sl-button,
-  .tooltip-placement-example [placement="bottom-start"] sl-button {
-    margin-left: calc(40px + .25rem);
+  .tooltip-placement-example [placement='top-start'] sl-button,
+  .tooltip-placement-example [placement='bottom-start'] sl-button {
+    margin-left: calc(40px + 0.25rem);
   }
 
-  .tooltip-placement-example [placement^="right"] sl-button {
-    margin-left: calc((40px * 3) + (.25rem * 3));
+  .tooltip-placement-example [placement^='right'] sl-button {
+    margin-left: calc((40px * 3) + (0.25rem * 3));
   }
 </style>
 ```
@@ -122,12 +122,11 @@ A tooltip's target is its _first child element_, so you should only wrap one ele
   <sl-avatar></sl-avatar>
 </sl-tooltip>
 
-
 <script>
   const tooltip = document.querySelector('.manual-tooltip');
   const toggle = tooltip.previousElementSibling;
 
-  toggle.addEventListener('click', () => tooltip.open = !tooltip.open);
+  toggle.addEventListener('click', () => (tooltip.open = !tooltip.open));
 </script>
 ```
 
@@ -138,7 +137,6 @@ A tooltip's target is its _first child element_, so you should only wrap one ele
   <sl-tooltip content="This is a tooltip">
     <sl-button>Above</sl-button>
   </sl-tooltip>
-
 
   <sl-tooltip content="This is a tooltip" placement="bottom">
     <sl-button>Below</sl-button>

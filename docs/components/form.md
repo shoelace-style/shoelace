@@ -9,28 +9,28 @@ All of Shoelace's components make use of the [shadow DOM](https://developer.mozi
 ```html preview
 <sl-form class="form-overview">
   <sl-input name="name" type="text" label="Name"></sl-input>
-  <br>
+  <br />
   <sl-select name="favorite" label="Select your favorite">
     <sl-menu-item value="birds">Birds</sl-menu-item>
     <sl-menu-item value="cats">Cats</sl-menu-item>
     <sl-menu-item value="dogs">Dogs</sl-menu-item>
   </sl-select>
-  <br>
+  <br />
   <sl-checkbox name="agree" value="yes">
     I totally agree
   </sl-checkbox>
-  <br><br>
+  <br /><br />
   <sl-button submit>Submit</sl-button>
 </sl-form>
 
 <script>
   const form = document.querySelector('.form-overview');
-  
+
   form.addEventListener('slSubmit', event => {
     const formData = event.detail.formData;
     const formControls = event.detail.formControls;
     let output = '';
-    
+
     // do something with the form data...
     for (const entry of formData.entries()) {
       output += `${entry[0]}: ${entry[1]}\n`;

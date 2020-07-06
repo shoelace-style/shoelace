@@ -19,7 +19,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
     const dialog = document.querySelector('.dialog-overview');
     const openButton = dialog.nextElementSibling;
     const closeButton = dialog.querySelector('sl-button[slot="footer"]');
-    
+
     openButton.addEventListener('click', () => dialog.show());
     closeButton.addEventListener('click', () => dialog.hide());
   })();
@@ -45,7 +45,7 @@ By default, dialogs are closed when the user clicks or taps on the overlay. The 
     const dialog = document.querySelector('.dialog-no-overlay-dismiss');
     const openButton = dialog.nextElementSibling;
     const closeButton = dialog.querySelector('sl-button[slot="footer"]');
-    
+
     openButton.addEventListener('click', () => dialog.show());
     closeButton.addEventListener('click', () => dialog.hide());
   })();
@@ -71,7 +71,7 @@ By design, a dialog's height will never exceed that of the viewport. As such, di
     const dialog = document.querySelector('.dialog-scrolling');
     const openButton = dialog.nextElementSibling;
     const closeButton = dialog.querySelector('sl-button[slot="footer"]');
-    
+
     openButton.addEventListener('click', () => dialog.show());
     closeButton.addEventListener('click', () => dialog.hide());
   })();

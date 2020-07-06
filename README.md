@@ -4,7 +4,7 @@ _A forward-thinking web component library for desktop and mobile._ 🥾
 
 ---
 
-Shoelace harnesses the power of [web components](#web-components) to bring you a modern, versatile, open source component library. 
+Shoelace harnesses the power of [web components](#web-components) to bring you a modern, versatile, open source component library.
 
 Here's why you'll love it:
 

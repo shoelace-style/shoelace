@@ -9,11 +9,11 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 ```html preview
 <sl-switch>Default</sl-switch>
 
-<br>
+<br />
 
 <sl-switch checked>Checked</sl-switch>
 
-<br>
+<br />
 
 <sl-switch disabled>Disabled</sl-switch>
 ```

@@ -1,4 +1,5 @@
 - Getting Started
+
   - [Overview](/)
   - [Installation](/getting-started/installation.md)
   - [Usage](/getting-started/usage.md)
@@ -6,6 +7,7 @@
   - [Roadmap](/getting-started/roadmap.md)
 
 - Components
+
   - [Alert](/components/alert.md)
   - [Avatar](/components/avatar.md)
   - [Badge](/components/badge.md)
