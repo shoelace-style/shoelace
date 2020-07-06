@@ -1,57 +1,79 @@
 <img id="top" class="logo" src="/assets/images/wordmark.svg" alt="Shoelace" data-no-zoom style="max-width: 24rem;">
 
-_A forward-thinking web component library for desktop and mobile._ 🥾
+A forward-thinking library of web components. 🥾
 
 - 🧩 Works with any framework
-- ⚡️ Works with CDNs
-- 🎨 Fully customizable (no preprocessor required)
-
-Shoelace is actively designed and developed in New Hampshire by [@claviska](https://twitter.com/claviska) and available under the MIT License.
+- 🚚 Works with CDNs
+- 🎨 Fully customizable with CSS
+- 😸 Open source
 
 ## Quick Start
 
-The fastest way to get started is with the CDN. Add this to your `<head>` section:
+Add the following code to your page.
 
 ```html
-<link rel="stylesheet" src="//SOME_CDN/shoelace/shoelace.css" />
-<script type="module" src="//SOME_CDN/shoelace/shoelace.esm.js"></script>
+<link rel="stylesheet" src="https://unpkg.com/@claviska/shoelace@%VERSION%/shoelace.css" />
+<script type="module" src="https://unpkg.com/@claviska/shoelace@%VERSION%/shoelace.esm.js"></script>
 ```
 
-Now you have access to all of Shoelace's components! Try adding a button to your page:
+Now you have access to all of Shoelace's components! Try adding a button:
 
 ```html
-<sl-button>Click Me</sl-button>
+<sl-button>Click me</sl-button>
 ```
 
-?> Don't want to use the CDN? Check out the [installation instructions](getting-started/installation.md) for more options.
+See the [installation instructions](getting-started/installation.md) for more details and alternative ways to install Shoelace.
 
----
+## New to Web Components?
 
-## Web Components
+**TL;DR** – we finally have a way to create our own HTML elements and use them in any framework we want!
 
-**TL;DR** – we finally have a way to create our very own HTML elements and use them in any framework we want!
-
-Thanks to the popularity of frameworks such as React, Vue, and Angular, component-driven development is a way of life for front-end developers. Components are awesome, and they make a lot of sense in terms of design, development, and testing.
+Thanks to the popularity of frameworks such as Angular, Vue, and React, component-driven development has become a way of life for front-end developers. Components help us encapsulate styles and behaviors into reusable building blocks. They make a lot of sense in terms of design, development, and testing.
 
 Unfortunately, _framework-specific_ components fail us in a number of ways:
 
 - 🔒 You can only use them in the framework they're designed for
 - ⏳ Their lifespan is limited to that of the framework's
-- 😭 New versions lead to breaking changes, requiring substantial effort to update components
+- 😭 New framework versions can lead to breaking changes, requiring substantial effort to update components
 
-Web Components solve these problems. They're [supported by all modern browsers](https://caniuse.com/#feat=custom-elementsv1), they're framework-agnostic, and they're [part of the standard](https://www.webcomponents.org/specs), so we know they'll be supported by browsers for many years to come.
+Web components solve these problems. They're [supported by all modern browsers](https://caniuse.com/#feat=custom-elementsv1), they're framework-agnostic, and they're [part of the standard](https://www.webcomponents.org/specs), so we know they'll be supported by browsers for many years to come.
 
 ## Browser Support
 
-Shoelace is built for modern browsers. If you need to support IE11 or pre-Chromium Edge, you probably don't want to use this library.
+Components are tested to work in the last two versions of the following browsers:
 
-Although Web Components can (to some degree) be polyfilled for older browsers, supporting them is outside the scope of this project. If you're using Shoelace in a legacy browser, things will probably not work the way they're intended to.
+<img src="/assets/images/chrome.png" alt="Chrome" width="64" height="64" />
+<img src="/assets/images/edge.png" alt="Edge" width="64" height="64" />
+<img src="/assets/images/firefox.png" alt="Firefox" width="64" height="64" />
+<img src="/assets/images/opera.png" alt="Opera" width="64" height="64" />
+<img src="/assets/images/safari.png" alt="Safari" width="64" height="64" />
+
+If you need to support IE11 or pre-Chromium Edge, this library isn't for you. Although web components can (to some degree) be polyfilled for legacy browsers, supporting them is outside the scope of this project. If you're using Shoelace in such a browser, you're gonna have a bad time. ⛷
 
 ## Attribution
+
+Shoelace was designed in New Hampshire by [Cory LaViska](https://twitter.com/claviska). It's available under the terms of the MIT license.
+
+If you enjoy using this software, [please sponsor me](https://github.com/sponsors/claviska) so I can continue working on it! 🏆
+
+<a class="repo-button repo-button--sponsor" href="https://github.com/sponsors/claviska" rel="noopener" target="_blank">
+  <sl-icon name="heart"></sl-icon> Become a sponsor
+</a>
+
+<a class="repo-button" href="https://github.com/claviska/shoelace/stargazers" rel="noopener" target="_blank">
+  <sl-icon name="star"></sl-icon> Star
+</a>
+
+<a class="repo-button" href="https://twitter.com/claviska" rel="noopener" target="_blank">
+  <sl-icon name="chat"></sl-icon> Follow
+</a>
+
+Special thanks to the following projects and individuals that helped make Shoelace possible.
 
 - Components are compiled by [Stencil](https://stenciljs.com/)
 - Documentation is powered by [Docsify](https://docsify.js.org/)
 - Theme colors and form controls are inspired by [Element](element.eleme.io)
 - Icons are courtesy of [Bootstrap Icons](https://icons.getbootstrap.com/)
 - Positioning of menus, tooltips, et al is handled by [Popper.js](https://popper.js.org/)
+- CDN services are provided by [unpkg](https://unpkg.com/)
 - The Shoelace logo was designed with a single shoelace by [Adam K Olson](https://twitter.com/adamkolson)

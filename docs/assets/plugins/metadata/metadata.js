@@ -231,10 +231,10 @@
         const div = document.createElement('div');
         div.classList.add('sidebar-buttons');
         div.innerHTML = `
-          <a class="button button--version" href="https://github.com/claviska/shoelace" rel="noopener" target="_blank">
+          <a class="repo-button repo-button--version" href="https://github.com/claviska/shoelace" rel="noopener" target="_blank">
           <sl-icon name="tag"></sl-icon> ${metadata.version}
           </a>
-          <a class="button button--sponsor" href="https://github.com/sponsors/claviska" rel="noopener" target="_blank">
+          <a class="repo-button repo-button--sponsor" href="https://github.com/sponsors/claviska" rel="noopener" target="_blank">
             <sl-icon name="heart"></sl-icon> Sponsor
           </a>
         `;

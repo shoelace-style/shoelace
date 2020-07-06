@@ -48,7 +48,8 @@
   --code-theme-selection: var(--sl-color-primary-40);
   --code-theme-punctuation: var(--sl-color-gray-20);
   --code-theme-tag: var(--sl-color-primary-40);
-  --code-theme-selector: #e98614;
+  --code-theme
+  -selector: #e98614;
   --code-theme-keyword: #a151d2;
   --code-theme-function: #e98614;
   --code-theme-operator: var(--sl-color-gray-20);
@@ -79,51 +80,6 @@
 .sidebar-buttons {
   text-align: center;
   margin-top: 0;
-}
-
-.sidebar-buttons .button {
-  display: inline-block;
-  vertical-align: middle;
-  background-color: var(--sl-color-white);
-  border: solid 1px var(--sl-color-gray-85);
-  border-radius: var(--sl-border-radius-medium);
-  box-shadow: var(--sl-shadow-x-small);
-  font-size: var(--sl-font-size-x-small);
-  font-weight: var(--sl-font-weight-semibold);
-  color: var(--sl-color-gray-30);
-  padding: var(--sl-spacing-xxx-small) var(--sl-spacing-x-small);
-  transition: 0.25s all;
-}
-
-.sidebar-buttons .button:hover {
-  text-decoration: none;
-  background-color: var(--sl-color-gray-95);
-  border-color: var(--sl-color-gray-80);
-}
-
-.sidebar-buttons .button:focus {
-  outline: none;
-  border-color: var(--sl-color-primary-50);
-  box-shadow: var(--sl-focus-ring-box-shadow);
-}
-
-.sidebar-buttons .button:not(:last-of-type) {
-  margin-right: 0.25rem;
-}
-
-.sidebar-buttons .button {
-  margin-right: 0.25rem;
-}
-
-.sidebar-buttons .button sl-icon {
-  position: relative;
-  top: -1px;
-  vertical-align: middle;
-  margin-right: 0.125rem;
-}
-
-.sidebar-buttons .button--sponsor sl-icon {
-  color: #ea4aaa;
 }
 
 .sidebar-buttons img {
@@ -224,4 +180,50 @@
 
 .markdown-section table code {
   white-space: normal !important;
+}
+
+html .repo-button {
+  display: inline-block;
+  vertical-align: middle;
+  background-color: var(--sl-color-white);
+  border: solid 1px var(--sl-color-gray-85);
+  border-radius: var(--sl-border-radius-medium);
+  box-shadow: var(--sl-shadow-x-small);
+  font-size: var(--sl-font-size-x-small);
+  font-weight: var(--sl-font-weight-semibold);
+  text-decoration: none;
+  color: var(--sl-color-gray-30);
+  padding: var(--sl-spacing-xxx-small) var(--sl-spacing-x-small);
+  transition: 0.25s all;
+}
+
+html .repo-button:hover {
+  text-decoration: none;
+  background-color: var(--sl-color-gray-95);
+  border: solid 1px var(--sl-color-gray-80);
+}
+
+html .repo-button:focus {
+  outline: none;
+  border-color: var(--sl-color-primary-50);
+  box-shadow: var(--sl-focus-ring-box-shadow);
+}
+
+html .repo-button:not(:last-of-type) {
+  margin-right: 0.25rem;
+}
+
+html .repo-button {
+  margin-right: 0.25rem;
+}
+
+html .repo-button sl-icon {
+  position: relative;
+  top: -1px;
+  vertical-align: middle;
+  margin-right: 0.125rem;
+}
+
+html .repo-button--sponsor sl-icon {
+  color: #ea4aaa;
 }
