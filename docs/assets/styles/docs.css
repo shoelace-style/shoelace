@@ -76,12 +76,12 @@
   margin-left: -1px;
 }
 
-.sidebar-version {
+.sidebar-buttons {
   text-align: center;
   margin-top: 0;
 }
 
-.sidebar-version .button {
+.sidebar-buttons .button {
   display: inline-block;
   vertical-align: middle;
   background-color: var(--sl-color-white);
@@ -95,32 +95,38 @@
   transition: 0.25s all;
 }
 
-.sidebar-version .button:hover {
+.sidebar-buttons .button:hover {
   text-decoration: none;
   background-color: var(--sl-color-gray-95);
   border-color: var(--sl-color-gray-80);
 }
 
-.sidebar-version .button:not(:last-of-type) {
+.sidebar-buttons .button:focus {
+  outline: none;
+  border-color: var(--sl-color-primary-50);
+  box-shadow: var(--sl-focus-ring-box-shadow);
+}
+
+.sidebar-buttons .button:not(:last-of-type) {
   margin-right: 0.25rem;
 }
 
-.sidebar-version .button {
+.sidebar-buttons .button {
   margin-right: 0.25rem;
 }
 
-.sidebar-version .button sl-icon {
+.sidebar-buttons .button sl-icon {
   position: relative;
   top: -1px;
   vertical-align: middle;
   margin-right: 0.125rem;
 }
 
-.sidebar-version .button--sponsor sl-icon {
+.sidebar-buttons .button--sponsor sl-icon {
   color: #ea4aaa;
 }
 
-.sidebar-version img {
+.sidebar-buttons img {
   width: auto;
   height: 22px;
   vertical-align: middle;

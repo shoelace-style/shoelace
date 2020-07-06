@@ -229,7 +229,7 @@
         // Add a div showing the current version
         const target = document.querySelector('.app-name');
         const div = document.createElement('div');
-        div.classList.add('sidebar-version');
+        div.classList.add('sidebar-buttons');
         div.innerHTML = `
           <a class="button button--version" href="https://github.com/claviska/shoelace" rel="noopener" target="_blank">
           <sl-icon name="tag"></sl-icon> ${metadata.version}
