@@ -1,7 +1,7 @@
 {
   "name": "@claviska/shoelace",
   "version": "1.0.0-beta.1",
-  "description": "A forward-thinking library of Web Components.",
+  "description": "A forward-thinking library of web components.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "es2015": "dist/esm/index.mjs",
@@ -20,7 +20,7 @@
     "lint": "eslint src/**/*{.ts,.tsx}",
     "make-dist": "node make-dist.js",
     "make-icons": "node make-icons.js",
-    "prettier": "npx prettier --write .",
+    "prettier": "npx prettier --write --loglevel warn .",
     "postbuild": "make-dist",
     "postinstall": "make-icons",
     "prebuild": "npm run lint && npm run prettier && npm run make-icons",
