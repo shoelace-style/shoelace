@@ -43,7 +43,7 @@ export class Range {
   @Prop() step = 1;
 
   /** The preferred placedment of the tooltip. */
-  @Prop() tooltip: 'top' | 'bottom' | 'none' = 'none';
+  @Prop() tooltip: 'top' | 'bottom' | 'none' = 'top';
 
   /** A function used to format the tooltip's value. */
   @Prop() tooltipFormatter = (value: number) => value.toString();
