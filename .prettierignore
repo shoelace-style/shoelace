@@ -1,4 +1,9 @@
-node_modules
+.github
+.stencil
 dist
+docs/assets
+loader
+node_modules
+src
+www
 package-lock.json
-*.md
