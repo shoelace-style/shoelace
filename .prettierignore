@@ -4,6 +4,7 @@ dist
 docs/assets
 loader
 node_modules
-src
+src/components/**/readme.md
+src/components.d.ts
 www
 package-lock.json
