@@ -34,9 +34,9 @@ Thanks to the popularity of frameworks such as Angular, Vue, and React, componen
 
 Unfortunately, _framework-specific_ components fail us in a number of ways:
 
-- 🔒 You can only use them in the framework they're designed for
-- ⏳ Their lifespan is limited to that of the framework's
-- 😭 New framework versions can lead to breaking changes, requiring substantial effort to update components
+- You can only use them in the framework they're designed for 🔒
+- Their lifespan is limited to that of the framework's ⏳
+- New framework versions can lead to breaking changes, requiring substantial effort to update components 😭
 
 Web components solve these problems. They're [supported by all modern browsers](https://caniuse.com/#feat=custom-elementsv1), they're framework-agnostic, and they're [part of the standard](https://www.webcomponents.org/specs), so we know they'll be supported by browsers for many years to come.
 
