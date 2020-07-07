@@ -52,9 +52,14 @@ Components are tested to work in the last two versions of the following browsers
 
 If you need to support IE11 or pre-Chromium Edge, this library isn't for you. Although web components can (to some degree) be polyfilled for legacy browsers, supporting them is outside the scope of this project. If you're using Shoelace in such a browser, you're gonna have a bad time. ⛷
 
-## Attribution
+
+## License
 
 Shoelace was designed in New Hampshire by [Cory LaViska](https://twitter.com/claviska). It's available under the terms of the MIT license.
+
+Designing, developing, and supporting this library requires a lot of time, effort, and skill. I'd like to keep it open source so anyone can use it, but that doesn't provide me with an income.
+
+**If you're using my software to make profit,** I respectfully ask that you help [fund its development](https://github.com/sponsors/claviska) by becoming a sponsor. There are multiple tiers to choose from with  benefits at various levels, including prioritized support, bug fixes, feature requests, and advertising.
 
 <a class="repo-button repo-button--sponsor" href="https://github.com/sponsors/claviska" rel="noopener" target="_blank">
   <sl-icon name="heart"></sl-icon> Become a sponsor
@@ -68,7 +73,7 @@ Shoelace was designed in New Hampshire by [Cory LaViska](https://twitter.com/cla
   <sl-icon src="/assets/images/twitter.svg" style="transform: scale(1.5);"></sl-icon> Follow
 </a>
 
-?> If you enjoy using this software, [please sponsor me](https://github.com/sponsors/claviska) so I can continue working on it!
+## Attribution
 
 Special thanks to the following projects and individuals that helped make Shoelace possible.
 

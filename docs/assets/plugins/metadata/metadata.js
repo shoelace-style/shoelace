@@ -238,13 +238,13 @@
         const buttons = document.createElement('div');
         buttons.classList.add('sidebar-buttons');
         buttons.innerHTML = `
-          <a class="repo-button repo-button--sponsor" href="https://github.com/sponsors/claviska" rel="noopener" target="_blank">
+          <a class="repo-button repo-button--small repo-button--sponsor" href="https://github.com/sponsors/claviska" rel="noopener" target="_blank">
             <sl-icon name="heart"></sl-icon> Sponsor
           </a>
-          <a class="repo-button" href="https://github.com/claviska/shoelace" rel="noopener" target="_blank">
+          <a class="repo-button repo-button--small" href="https://github.com/claviska/shoelace" rel="noopener" target="_blank">
             <sl-icon name="star"></sl-icon> Star
           </a>
-          <a class="repo-button" href="https://twitter.com/shoelaceui" rel="noopener" target="_blank">
+          <a class="repo-button repo-button--small" href="https://twitter.com/shoelaceui" rel="noopener" target="_blank">
             <sl-icon src="/assets/images/twitter.svg" style="transform: scale(1.5);"></sl-icon> Follow
           </a>
         `;
