@@ -16,7 +16,7 @@
   ],
   "scripts": {
     "build": "stencil build --docs",
-    "dev": "stencil build --dev --docs --watch --serve --port 3333 --no-open",
+    "dev": "stencil build --dev --docs --watch --serve --port 4001 --no-open",
     "lint": "eslint src/**/*{.ts,.tsx}",
     "make-dist": "node make-dist.js",
     "make-icons": "node make-icons.js",

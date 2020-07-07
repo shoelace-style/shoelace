@@ -22,14 +22,15 @@ const path = require('path');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const app = express();
-const proxyPort = 3000;
 const browserPort = 4000;
+const stencilPort = 4001;
+const proxyPort = 4002;
 
 // Proxy Stencil's dev server
 app.use(
   '/~dev-server',
   createProxyMiddleware({
-    target: 'http://localhost:3333',
+    target: `http://localhost:${stencilPort}`,
     changeOrigin: true,
     ws: true
   })
