@@ -96,3 +96,7 @@ The select component, for example, makes use of the dropdown, input, and menu co
 When designing a component's API, standard properties ("props") are generally used to change the _behavior_ of a component, whereas CSS custom properties ("CSS variables") are used to change the _appearance_ of a component. Remember that props can't respond to media queries, but CSS variables can.
 
 There are some exceptions to this (e.g. when it significantly improves developer experience), but a good rule of thumbs is "will this need to change based on screen size?" If so, you probably want to use a CSS variable.
+
+### Boolean Props
+
+Boolean props should _always_ default to `false`, otherwise there's no way for the user to unset it without JavaScript. To keep the API as friendly and consistent as possible, use a name like `noHeader` with a default value of `false` instead of `header` with a default value of `true`.
