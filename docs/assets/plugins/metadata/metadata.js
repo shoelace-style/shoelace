@@ -226,19 +226,29 @@
   window.$docsify.plugins.push((hook, vm) => {
     hook.mounted(function () {
       getMetadata().then(metadata => {
-        // Add a div showing the current version
         const target = document.querySelector('.app-name');
-        const div = document.createElement('div');
-        div.classList.add('sidebar-buttons');
-        div.innerHTML = `
-          <a class="repo-button repo-button--version" href="https://github.com/claviska/shoelace" rel="noopener" target="_blank">
-          <sl-icon name="tag"></sl-icon> ${metadata.version}
-          </a>
+
+        // Add version
+        const version = document.createElement('div');
+        version.classList.add('sidebar-version');
+        version.textContent = metadata.version;
+        target.appendChild(version);
+
+        // Add repo buttons
+        const buttons = document.createElement('div');
+        buttons.classList.add('sidebar-buttons');
+        buttons.innerHTML = `
           <a class="repo-button repo-button--sponsor" href="https://github.com/sponsors/claviska" rel="noopener" target="_blank">
             <sl-icon name="heart"></sl-icon> Sponsor
           </a>
+          <a class="repo-button" href="https://github.com/claviska/shoelace" rel="noopener" target="_blank">
+            <sl-icon name="star"></sl-icon> Star
+          </a>
+          <a class="repo-button" href="https://twitter.com/shoelaceui" rel="noopener" target="_blank">
+            <sl-icon src="/assets/images/twitter.svg" style="transform: scale(1.5);"></sl-icon> Follow
+          </a>
         `;
-        target.appendChild(div);
+        target.appendChild(buttons);
       });
     });
 

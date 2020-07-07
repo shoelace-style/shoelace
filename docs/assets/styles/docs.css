@@ -16,7 +16,7 @@
   --link-color-hover: var(--sl-color-primary-50);
   --link-color: var(--sl-color-primary-50);
 
-  --sidebar-width: 18rem;
+  --sidebar-width: 20rem;
   --sidebar-background: var(--sl-color-white);
   --sidebar-border-color: var(--sl-color-gray-90);
   --sidebar-nav-link-before-content: '';
@@ -75,6 +75,15 @@
 .sidebar-toggle-button {
   border-left: solid 1px var(--sidebar-background) !important;
   margin-left: -1px;
+}
+
+.sidebar-version {
+  font-size: var(--sl-font-size-x-small);
+  font-weight: var(--sl-font-weight-normal);
+  color: var(--sl-color-gray-60);
+  text-align: right;
+  padding: 0 var(--sl-spacing-small);
+  margin: -1.25rem 0 .5rem 0;
 }
 
 .sidebar-buttons {
@@ -210,7 +219,7 @@ html .repo-button:focus {
 }
 
 html .repo-button:not(:last-of-type) {
-  margin-right: 0.25rem;
+  margin-right: .125rem;
 }
 
 html .repo-button {
@@ -222,6 +231,10 @@ html .repo-button sl-icon {
   top: -1px;
   vertical-align: middle;
   margin-right: 0.125rem;
+}
+
+html .repo-button sl-icon[name="star"] {
+  top: -2px;
 }
 
 html .repo-button--sponsor sl-icon {

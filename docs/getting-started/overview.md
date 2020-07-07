@@ -3,9 +3,11 @@
 A forward-thinking library of web components. 🥾
 
 - 🧩 Works with any framework
-- 🚚 Works with CDNs
+- 🚛 Works with CDNs
 - 🎨 Fully customizable with CSS
 - 😸 Open source
+
+Designed in New Hampshire by [Cory LaViska](https://twitter.com/claviska).
 
 ## Quick Start
 
@@ -54,19 +56,19 @@ If you need to support IE11 or pre-Chromium Edge, this library isn't for you. Al
 
 Shoelace was designed in New Hampshire by [Cory LaViska](https://twitter.com/claviska). It's available under the terms of the MIT license.
 
-If you enjoy using this software, [please sponsor me](https://github.com/sponsors/claviska) so I can continue working on it! 🏆
-
 <a class="repo-button repo-button--sponsor" href="https://github.com/sponsors/claviska" rel="noopener" target="_blank">
   <sl-icon name="heart"></sl-icon> Become a sponsor
 </a>
 
-<a class="repo-button" href="https://github.com/claviska/shoelace/stargazers" rel="noopener" target="_blank">
+<a class="repo-button" href="https://github.com/claviska/shoelace" rel="noopener" target="_blank">
   <sl-icon name="star"></sl-icon> Star
 </a>
 
-<a class="repo-button" href="https://twitter.com/claviska" rel="noopener" target="_blank">
-  <sl-icon name="chat"></sl-icon> Follow
+<a class="repo-button" href="https://twitter.com/shoelaceui" rel="noopener" target="_blank">
+  <sl-icon src="/assets/images/twitter.svg" style="transform: scale(1.5);"></sl-icon> Follow
 </a>
+
+?> If you enjoy using this software, [please sponsor me](https://github.com/sponsors/claviska) so I can continue working on it!
 
 Special thanks to the following projects and individuals that helped make Shoelace possible.
 
