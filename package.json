@@ -9,7 +9,6 @@
   "types": "dist/types/index.d.ts",
   "collection": "dist/collection/collection-manifest.json",
   "collection:main": "dist/collection/index.js",
-  "unpkg": "dist/shoelace/shoelace.js",
   "files": [
     "dist/",
     "loader/"

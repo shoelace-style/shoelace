@@ -1,15 +1,15 @@
 <img id="top" class="logo" src="/assets/images/wordmark.svg" alt="Shoelace" data-no-zoom style="max-width: 24rem;">
 
-A forward-thinking library of web components. 🥾
+A forward-thinking library of web components.
 
-- 🧩 Works with any framework
-- 🚛 Works with CDNs
-- 🎨 Fully customizable with CSS
-- 😸 Open source
+- Works with all frameworks 🧩
+- Works with CDNs 🚛
+- Fully customizable with CSS 🎨
+- Open source 😸
 
 Designed in New Hampshire by [Cory LaViska](https://twitter.com/claviska).
 
-## Quick Start
+## Quick Start 🥾
 
 Add the following code to your page.
 
@@ -24,7 +24,7 @@ Now you have access to all of Shoelace's components! Try adding a button:
 <sl-button>Click me</sl-button>
 ```
 
-See the [installation instructions](getting-started/installation.md) for more details and alternative ways to install Shoelace.
+See the [installation instructions](getting-started/installation.md) for more details and other ways to install Shoelace.
 
 ## New to Web Components?
 
@@ -44,11 +44,11 @@ Web components solve these problems. They're [supported by all modern browsers](
 
 Components are tested to work in the last two versions of the following browsers:
 
-<img src="/assets/images/chrome.png" alt="Chrome" width="64" height="64" />
-<img src="/assets/images/edge.png" alt="Edge" width="64" height="64" />
-<img src="/assets/images/firefox.png" alt="Firefox" width="64" height="64" />
-<img src="/assets/images/opera.png" alt="Opera" width="64" height="64" />
-<img src="/assets/images/safari.png" alt="Safari" width="64" height="64" />
+<img src="/assets/images/chrome.png" alt="Chrome" width="64" height="64" data-no-zoom />
+<img src="/assets/images/edge.png" alt="Edge" width="64" height="64" data-no-zoom />
+<img src="/assets/images/firefox.png" alt="Firefox" width="64" height="64" data-no-zoom />
+<img src="/assets/images/opera.png" alt="Opera" width="64" height="64" data-no-zoom />
+<img src="/assets/images/safari.png" alt="Safari" width="64" height="64" data-no-zoom />
 
 If you need to support IE11 or pre-Chromium Edge, this library isn't for you. Although web components can (to some degree) be polyfilled for legacy browsers, supporting them is outside the scope of this project. If you're using Shoelace in such a browser, you're gonna have a bad time. ⛷
 

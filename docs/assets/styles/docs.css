@@ -179,6 +179,10 @@
 }
 
 /* Content */
+.markdown-section a code {
+  color: inherit !important;
+}
+
 .markdown-section pre ::selection {
   color: white;
 }
