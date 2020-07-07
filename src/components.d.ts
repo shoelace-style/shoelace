@@ -1170,7 +1170,7 @@ declare namespace LocalJSX {
          */
         "onSlBlur"?: (event: CustomEvent<any>) => void;
         /**
-          * Emitted when the control's state changes.
+          * Emitted when the control's checked state changes.
          */
         "onSlChange"?: (event: CustomEvent<any>) => void;
         /**
@@ -1619,7 +1619,7 @@ declare namespace LocalJSX {
          */
         "onSlBlur"?: (event: CustomEvent<any>) => void;
         /**
-          * Emitted when the control's state changes.
+          * Emitted when the control's checked state changes.
          */
         "onSlChange"?: (event: CustomEvent<any>) => void;
         /**
@@ -1751,7 +1751,7 @@ declare namespace LocalJSX {
          */
         "onSlBlur"?: (event: CustomEvent<any>) => void;
         /**
-          * Emitted when the control's state changes.
+          * Emitted when the control's checked state changes.
          */
         "onSlChange"?: (event: CustomEvent<any>) => void;
         /**

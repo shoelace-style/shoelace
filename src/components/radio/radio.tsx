@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, Method, Prop, State, h } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, Method, Prop, State, Watch, h } from '@stencil/core';
 
 let id = 0;
 
@@ -19,6 +19,7 @@ export class Radio {
     this.handleClick = this.handleClick.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleMouseDown = this.handleMouseDown.bind(this);
   }
 
@@ -42,10 +43,19 @@ export class Radio {
   /** Set to true to draw the radio in a checked state. */
   @Prop({ mutable: true }) checked = false;
 
+  @Watch('checked')
+  handleCheckedChange() {
+    if (this.checked) {
+      this.getSiblingRadios().map(radio => (radio.checked = false));
+    }
+    this.input.checked = this.checked;
+    this.slChange.emit();
+  }
+
   /** Emitted when the control loses focus. */
   @Event() slBlur: EventEmitter;
 
-  /** Emitted when the control's state changes. */
+  /** Emitted when the control's checked state changes. */
   @Event() slChange: EventEmitter;
 
   /** Emitted when the control gains focus. */
@@ -63,14 +73,19 @@ export class Radio {
     this.input.blur();
   }
 
-  handleClick(event: MouseEvent) {
-    const slChange = this.slChange.emit();
+  getAllRadios() {
+    const form = this.host.closest('sl-form, form') || document.body;
+    return [...form.querySelectorAll('sl-radio')].filter(
+      (radio: HTMLSlRadioElement) => radio.name === this.name
+    ) as HTMLSlRadioElement[];
+  }
 
-    if (slChange.defaultPrevented) {
-      event.preventDefault();
-    } else {
-      this.checked = this.input.checked;
-    }
+  getSiblingRadios() {
+    return this.getAllRadios().filter(radio => radio !== this.host) as HTMLSlRadioElement[];
+  }
+
+  handleClick() {
+    this.checked = this.input.checked;
   }
 
   handleBlur() {
@@ -81,6 +96,22 @@ export class Radio {
   handleFocus() {
     this.hasFocus = true;
     this.slFocus.emit();
+  }
+
+  handleKeyDown(event: KeyboardEvent) {
+    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
+      const radios = this.getAllRadios().filter(radio => !radio.disabled);
+      const incr = ['ArrowUp', 'ArrowLeft'].includes(event.key) ? -1 : 1;
+      let index = radios.indexOf(this.host) + incr;
+      if (index < 0) index = radios.length - 1;
+      if (index > radios.length - 1) index = 0;
+
+      this.getAllRadios().map(radio => (radio.checked = false));
+      radios[index].setFocus();
+      radios[index].checked = true;
+
+      event.preventDefault();
+    }
   }
 
   handleMouseDown(event: MouseEvent) {
@@ -100,6 +131,7 @@ export class Radio {
           'radio--disabled': this.disabled,
           'radio--focused': this.hasFocus
         }}
+        onKeyDown={this.handleKeyDown}
         onMouseDown={this.handleMouseDown}
       >
         <span class="radio__control">

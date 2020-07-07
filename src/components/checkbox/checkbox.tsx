@@ -46,15 +46,18 @@ export class Checkbox {
   /** Emitted when the control loses focus. */
   @Event() slBlur: EventEmitter;
 
-  /** Emitted when the control's state changes. */
+  /** Emitted when the control's checked state changes. */
   @Event() slChange: EventEmitter;
 
   /** Emitted when the control gains focus. */
   @Event() slFocus: EventEmitter;
 
+  @Watch('checked')
   @Watch('indeterminate')
-  handleIndeterminateChange() {
+  handleCheckedChange() {
+    this.input.checked = this.checked;
     this.input.indeterminate = this.indeterminate;
+    this.slChange.emit();
   }
 
   componentDidLoad() {
@@ -73,15 +76,9 @@ export class Checkbox {
     this.input.blur();
   }
 
-  handleClick(event: MouseEvent) {
-    const slChange = this.slChange.emit();
-
-    if (slChange.defaultPrevented) {
-      event.preventDefault();
-    } else {
-      this.checked = this.input.checked;
-      this.indeterminate = this.input.indeterminate;
-    }
+  handleClick() {
+    this.checked = this.input.checked;
+    this.indeterminate = this.input.indeterminate;
   }
 
   handleBlur() {
