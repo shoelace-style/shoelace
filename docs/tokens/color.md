@@ -1,14 +1,28 @@
 # Color Tokens
 
-TODO
+Color tokens are used to maintain consistent color use throughout your app.
 
-- Describe how color tokens are generated using HSL
-- Show hue + saturation tokens for each base color
+## Theme Colors
+
+Theme colors are based on HSL values rather than hex or RGB. This technique lets us generate more consistent palettes for every theme color, ranging from 5% to 95% lightness. There are no 0% nor 100% values for theme colors. Use `--sl-color-black` and `--sl-color-white` instead.
+
+Theme colors include primary, gray, success, info, warning, and danger. They are used extensively throughout the library to maintain a consistent appearance across components.
+
+To customize a theme color, change its respective hue, saturation, and text tokens. This will update all colors in the palette — there's no need to update individual palette colors. In fact, doing so is strongly discouraged.
+
+```css
+--sl-color-primary-hue: 203;
+--sl-color-primary-saturation: 100%;
+--sl-color-primary-text: var(--sl-color-white);
+```
+
+?> Palettes are comprised of CSS custom properties ("CSS variables"), so you can update them live in your app and see the changes reflect instantly.
 
 ## Primary
 
 | Token                   | Example                                                                              |
 | ----------------------- | ------------------------------------------------------------------------------------ |
+| `--sl-color-primary-5` | <div class="color-demo" style="background-color: var(--sl-color-primary-5);"></div> |
 | `--sl-color-primary-10` | <div class="color-demo" style="background-color: var(--sl-color-primary-10);"></div> |
 | `--sl-color-primary-15` | <div class="color-demo" style="background-color: var(--sl-color-primary-15);"></div> |
 | `--sl-color-primary-20` | <div class="color-demo" style="background-color: var(--sl-color-primary-20);"></div> |
@@ -33,6 +47,7 @@ TODO
 | Token                | Example                                                                           |
 | -------------------- | --------------------------------------------------------------------------------- |
 | `--sl-color-black`   | <div class="color-demo" style="background-color: var(--sl-color-black);"></div>   |
+| `--sl-color-gray-5` | <div class="color-demo" style="background-color: var(--sl-color-gray-5);"></div> |
 | `--sl-color-gray-10` | <div class="color-demo" style="background-color: var(--sl-color-gray-10);"></div> |
 | `--sl-color-gray-15` | <div class="color-demo" style="background-color: var(--sl-color-gray-15);"></div> |
 | `--sl-color-gray-20` | <div class="color-demo" style="background-color: var(--sl-color-gray-20);"></div> |
@@ -57,6 +72,7 @@ TODO
 
 | Token                   | Example                                                                              |
 | ----------------------- | ------------------------------------------------------------------------------------ |
+| `--sl-color-success-5` | <div class="color-demo" style="background-color: var(--sl-color-success-5);"></div> |
 | `--sl-color-success-10` | <div class="color-demo" style="background-color: var(--sl-color-success-10);"></div> |
 | `--sl-color-success-15` | <div class="color-demo" style="background-color: var(--sl-color-success-15);"></div> |
 | `--sl-color-success-20` | <div class="color-demo" style="background-color: var(--sl-color-success-20);"></div> |
@@ -80,6 +96,7 @@ TODO
 
 | Token                | Example                                                                           |
 | -------------------- | --------------------------------------------------------------------------------- |
+| `--sl-color-info-5` | <div class="color-demo" style="background-color: var(--sl-color-info-5);"></div> |
 | `--sl-color-info-10` | <div class="color-demo" style="background-color: var(--sl-color-info-10);"></div> |
 | `--sl-color-info-15` | <div class="color-demo" style="background-color: var(--sl-color-info-15);"></div> |
 | `--sl-color-info-20` | <div class="color-demo" style="background-color: var(--sl-color-info-20);"></div> |
@@ -103,6 +120,7 @@ TODO
 
 | Token                   | Example                                                                              |
 | ----------------------- | ------------------------------------------------------------------------------------ |
+| `--sl-color-warning-5` | <div class="color-demo" style="background-color: var(--sl-color-warning-5);"></div> |
 | `--sl-color-warning-10` | <div class="color-demo" style="background-color: var(--sl-color-warning-10);"></div> |
 | `--sl-color-warning-15` | <div class="color-demo" style="background-color: var(--sl-color-warning-15);"></div> |
 | `--sl-color-warning-20` | <div class="color-demo" style="background-color: var(--sl-color-warning-20);"></div> |
@@ -126,6 +144,7 @@ TODO
 
 | Token                  | Example                                                                             |
 | ---------------------- | ----------------------------------------------------------------------------------- |
+| `--sl-color-danger-5` | <div class="color-demo" style="background-color: var(--sl-color-danger-5);"></div> |
 | `--sl-color-danger-10` | <div class="color-demo" style="background-color: var(--sl-color-danger-10);"></div> |
 | `--sl-color-danger-15` | <div class="color-demo" style="background-color: var(--sl-color-danger-15);"></div> |
 | `--sl-color-danger-20` | <div class="color-demo" style="background-color: var(--sl-color-danger-20);"></div> |

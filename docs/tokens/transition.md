@@ -1,5 +1,7 @@
 # Transition Tokens
 
+Transition tokens are used to provide consistent transitions throughout your app.
+
 | Token                    | Value  | Example                                                                                       |
 | ------------------------ | ------ | --------------------------------------------------------------------------------------------- |
 | `--sl-transition-x-slow` | 1000ms | <div class="transition-demo" style="transition-duration: var(--sl-transition-x-slow);"></div> |

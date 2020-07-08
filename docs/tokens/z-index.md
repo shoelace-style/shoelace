@@ -1,6 +1,6 @@
 # Z-Index Tokens
 
-Z-indexes are still very much a work in progress.
+Z-indexes are used to stack components in a logical manner.
 
 | Token                       | Value |
 | --------------------------- | ----- |

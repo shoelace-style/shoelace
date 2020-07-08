@@ -1,5 +1,7 @@
 # Typography Tokens
 
+Typography tokens are used to maintain a consistent set of font styles throughout your app.
+
 ## Font Family
 
 The default font stack is designed to be simple and highly available on as many devices as possible.

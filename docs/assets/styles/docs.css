@@ -191,8 +191,8 @@
   font-family: var(--base-font-family);
 }
 
-.markdown-section table code {
-  white-space: normal !important;
+.markdown-section table code:not([class*="lang-"]):not([class*="language-"]) {
+  white-space: normal;
 }
 
 html .repo-button {
@@ -244,4 +244,9 @@ html .repo-button--small {
 
 html .repo-button--sponsor sl-icon {
   color: #ea4aaa;
+}
+
+body[data-page^="tokens/"] .table-wrapper td:first-child,
+body[data-page^="tokens/"] .table-wrapper td:first-child code {
+  white-space: nowrap;
 }

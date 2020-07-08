@@ -1,5 +1,7 @@
 # Spacing Tokens
 
+Spacing tokens are used to provide consistent spacing between components and content throughout your app.
+
 | Token                     | Value          | Example                                                                                                             |
 | ------------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------- |
 | `--sl-spacing-xxx-small`  | 0.125rem (2px) | <div class="spacing-demo" style="width: var(--sl-spacing-xxx-small); height: var(--sl-spacing-xxx-small);"></div>   |

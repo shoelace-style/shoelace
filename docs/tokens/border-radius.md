@@ -1,5 +1,7 @@
 # Border Radius Tokens
 
+Border radius tokens are used to give sharp edges a more subtle, rounded effect. They use rem units so they scale with the base font size. The pixel values displayed are based on a 16px font size.
+
 | Token                        | Value          | Example                                                                                                  |
 | ---------------------------- | -------------- | -------------------------------------------------------------------------------------------------------- |
 | `--sl-border-radius-small`   | 0.125rem (2px) | <div class="border-radius-demo" style="border-radius: var(--sl-border-radius-small);"></div>             |
