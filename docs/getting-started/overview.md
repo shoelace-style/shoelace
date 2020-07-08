@@ -57,9 +57,11 @@ If you need to support IE11 or pre-Chromium Edge, this library isn't for you. Al
 
 Shoelace was designed in New Hampshire by [Cory LaViska](https://twitter.com/claviska). It's available under the terms of the MIT license.
 
-Designing, developing, and supporting this library requires a lot of time, effort, and skill. I'd like to keep it open source so anyone can use it, but that doesn't provide me with an income.
+Designing, developing, and supporting this library requires a lot of time, effort, and skill. I'd like to keep it open source so everyone can use it, but that doesn't provide me with any income. 
 
-**If you're using my software to make profit,** I respectfully ask that you help [fund its development](https://github.com/sponsors/claviska) by becoming a sponsor. There are multiple tiers to choose from with  benefits at various levels, including prioritized support, bug fixes, feature requests, and advertising.
+**Therefore, if you're using my software to make profit,** I respectfully ask that you help [fund its development](https://github.com/sponsors/claviska) by becoming a sponsor. There are multiple tiers to choose from with  benefits at various levels, including prioritized support, bug fixes, feature requests, and advertising.
+
+👇 Your support is very much appreciated! 👇
 
 <a class="repo-button repo-button--sponsor" href="https://github.com/sponsors/claviska" rel="noopener" target="_blank">
   <sl-icon name="heart"></sl-icon> Become a sponsor
