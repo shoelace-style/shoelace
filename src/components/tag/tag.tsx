@@ -25,6 +25,9 @@ export class Tag {
   /** The tag's size. */
   @Prop() size: 'small' | 'medium' | 'large' = 'medium';
 
+  /** Set to true to draw a pill-style button with rounded edges. */
+  @Prop() pill = false;
+
   /** Set to true to make the tag removable. */
   @Prop() removable = false;
 
@@ -56,6 +59,7 @@ export class Tag {
           'tag--large': this.size === 'large',
 
           // Modifers
+          'tag--pill': this.pill,
           'tag--removable': this.removable
         }}
       >

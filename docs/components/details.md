@@ -2,9 +2,7 @@
 
 [component-header:sl-details]
 
-Details...
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Details show a brief summary and expand to show additional content.
 
 ```html preview
 <sl-details summary="Toggle Me">
@@ -26,7 +24,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 ### Grouping Details
 
-Details are designed to function independently, but you can simulate a group where only one is shown at a time by listening for the `slShow` event.
+Details are designed to function independently, but you can simulate a group or "accordion" where only one is shown at a time by listening for the `slShow` event.
 
 ```html preview
 <div class="details-group-example">

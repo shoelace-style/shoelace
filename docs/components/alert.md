@@ -2,9 +2,7 @@
 
 [component-header:sl-alert]
 
-Alerts...
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Alerts are used to display important messages.
 
 ```html preview
 <sl-alert type="primary" open>

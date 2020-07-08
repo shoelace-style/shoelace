@@ -2,7 +2,7 @@
 
 [component-header:sl-tab]
 
-Tabs...
+Tabs are used inside tab groups to represent tab panels.
 
 A demonstration of this component can be found in the [tab group examples](/components/tab-group.md).
 

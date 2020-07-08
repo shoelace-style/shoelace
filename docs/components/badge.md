@@ -4,8 +4,6 @@
 
 Badges are used to draw attention and display statuses or counts.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-
 ```html preview
 <sl-badge type="primary">Primary</sl-icon></sl-badge>
 <sl-badge type="success">Success</sl-badge>

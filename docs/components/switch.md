@@ -2,9 +2,7 @@
 
 [component-header:sl-switch]
 
-Switches...
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Switches allow the user to toggle an option on or off. 
 
 ```html preview
 <sl-switch>Default</sl-switch>

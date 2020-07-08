@@ -58,7 +58,9 @@ In order to keep the project in a maintainable state, code that doesn't follow c
 
 ### Semantic Versioning
 
-This project follows [Semantic Versioning](https://semver.org/). Breaking changes will not be accepted until the next major version. As such, all contributions must consider the project's roadmap and take this into consideration.
+This project follows [Semantic Versioning](https://semver.org/). Breaking changes in stable components will not be accepted until the next major version. As such, all contributions must consider the project's roadmap and take this into consideration. Features that are deemed no longer necessary in future versions will be deprecated instead.
+
+**Components marked "experimental" should not be used in production,** as changes to them will not be subject to this rule.
 
 ### Code Formatting & Linting
 

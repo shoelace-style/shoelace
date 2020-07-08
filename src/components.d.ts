@@ -138,7 +138,7 @@ export namespace Components {
          */
         "disabled": boolean;
         /**
-          * The format to use for the generated color `value`. If opacity is enabled, these will translate to HEXA, RGBA, and HSLA respectively. Note that browser support for HEXA doesn't include pre-Chromium Edge, so it's usually safer to use RGBA or HSLA when using opacity.
+          * The format to use for the display value. If opacity is enabled, these will translate to HEXA, RGBA, and HSLA respectively. The color picker will always accept user input in any format (including CSS color names) and convert it to the desired format.
          */
         "format": 'hex' | 'rgb' | 'hsl';
         /**
@@ -681,6 +681,10 @@ export namespace Components {
     }
     interface SlTag {
         /**
+          * Set to true to draw a pill-style button with rounded edges.
+         */
+        "pill": boolean;
+        /**
           * Set to true to make the tag removable.
          */
         "removable": boolean;
@@ -1188,7 +1192,7 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
-          * The format to use for the generated color `value`. If opacity is enabled, these will translate to HEXA, RGBA, and HSLA respectively. Note that browser support for HEXA doesn't include pre-Chromium Edge, so it's usually safer to use RGBA or HSLA when using opacity.
+          * The format to use for the display value. If opacity is enabled, these will translate to HEXA, RGBA, and HSLA respectively. The color picker will always accept user input in any format (including CSS color names) and convert it to the desired format.
          */
         "format"?: 'hex' | 'rgb' | 'hsl';
         /**
@@ -1806,6 +1810,10 @@ declare namespace LocalJSX {
           * Emitted when the remove button is activated.
          */
         "onSlRemove"?: (event: CustomEvent<any>) => void;
+        /**
+          * Set to true to draw a pill-style button with rounded edges.
+         */
+        "pill"?: boolean;
         /**
           * Set to true to make the tag removable.
          */

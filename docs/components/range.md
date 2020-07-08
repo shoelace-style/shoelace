@@ -2,9 +2,7 @@
 
 [component-header:sl-range]
 
-Ranges...
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Ranges allow the user to select a single value within a given range using a slider.
 
 ```html preview
 <sl-range min="0" max="100" step="1"></sl-range>

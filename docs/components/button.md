@@ -4,8 +4,6 @@
 
 Buttons represent actions that are available to the user.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-
 ```html preview
 <sl-button type="default">Default</sl-button>
 <sl-button type="primary">Primary</sl-button>

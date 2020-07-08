@@ -2,9 +2,7 @@
 
 [component-header:sl-menu-item]
 
-Menu items...
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Menu items provide options for the user to pick from in a menu.
 
 ```html preview
 <sl-menu

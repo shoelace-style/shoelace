@@ -4,7 +4,7 @@ Color tokens are used to maintain consistent color use throughout your app.
 
 ## Theme Colors
 
-Theme colors are based on HSL values rather than hex or RGB. This technique lets us generate more consistent palettes for every theme color, ranging from 5% to 95% lightness. There are no 0% nor 100% values for theme colors. Use `--sl-color-black` and `--sl-color-white` instead.
+Theme colors are based on HSL values rather than hex or RGB. This technique lets us generate more consistent palettes for every theme color, ranging from 5% to 95% lightness. There are no 0% or 100% values for theme colors. Use `--sl-color-black` and `--sl-color-white` instead.
 
 Theme colors include primary, gray, success, info, warning, and danger. They are used extensively throughout the library to maintain a consistent appearance across components.
 
@@ -16,7 +16,7 @@ To customize a theme color, change its respective hue, saturation, and text toke
 --sl-color-primary-text: var(--sl-color-white);
 ```
 
-?> Palettes are comprised of CSS custom properties ("CSS variables"), so you can update them live in your app and see the changes reflect instantly.
+?> Color palettes are comprised of CSS custom properties ("CSS variables"), so you can update them live in your app and see the changes reflect instantly.
 
 ## Primary
 

@@ -2,9 +2,7 @@
 
 [component-header:sl-dialog]
 
-Dialogs...
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Dialogs appear above the page and require the user's immediate attention.
 
 ```html preview
 <sl-dialog label="Dialog" class="dialog-overview">
@@ -25,6 +23,12 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
   })();
 </script>
 ```
+
+## UX Tips
+
+- Use a dialog when you immediately require the user's attention, e.g. confirming a destructive action.
+- Always provide an obvious way for the user to dismiss the dialog.
+- Don't nest dialogs. It almost always leads to a poor experience for the user.
 
 ## Examples
 

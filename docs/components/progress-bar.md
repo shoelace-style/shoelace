@@ -2,9 +2,7 @@
 
 [component-header:sl-progress-bar]
 
-Progress bars...
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Progress bars are used to show the progress of a determinate operation.
 
 ```html preview
 <sl-progress-bar percentage="0"></sl-progress-bar><br />

@@ -110,11 +110,11 @@ Custom icons can be loaded by setting the `src` attribute. Only SVG images are s
       // Filter as the user types
       input.addEventListener('slInput', () => {
         [...list.querySelectorAll('sl-icon')].map(slIcon => {
-          if (input.value === '') {
+          const filter = input.value.toLowerCase();
+          if (filter === '') {
             slIcon.hidden = false;
           } else {
             const terms = slIcon.getAttribute('data-terms').toLowerCase();
-            const filter = input.value.toLowerCase();
             slIcon.hidden = terms.indexOf(filter) < 0;
           }
         });

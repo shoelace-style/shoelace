@@ -63,9 +63,9 @@ export class ColorPicker {
   @Prop({ mutable: true, reflect: true }) value = '#ffffff';
 
   /**
-   * The format to use for the generated color `value`. If opacity is enabled, these will translate to HEXA, RGBA, and
-   * HSLA respectively. Note that browser support for HEXA doesn't include pre-Chromium Edge, so it's usually safer to
-   * use RGBA or HSLA when using opacity.
+   * The format to use for the display value. If opacity is enabled, these will translate to HEXA, RGBA, and HSLA
+   * respectively. The color picker will always accept user input in any format (including CSS color names) and convert
+   * it to the desired format.
    */
   @Prop() format: 'hex' | 'rgb' | 'hsl' = 'hex';
 

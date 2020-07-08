@@ -160,22 +160,13 @@
 
 /* Lead sentences that occur immediately after the header */
 .component-header + p {
-  font-size: var(--sl-font-size-x-large);
+  font-size: var(--sl-font-size-large);
   line-height: 1.6;
 }
 
-/* In component pages we have:
- *
- * .component-header
- * p (leading sentence)
- * p (optional secondary sentence)
- * .code-block (main example)
- *
- * So if we have this structure, space out the code block a bit to make it appear on its own.
- */
-.component-header + p + .code-block,
-.component-header + p + p + .code-block {
-  margin-top: 2.5rem;
+/* Code blocks that occur immediately after the leading sentence. */
+p + .code-block {
+  margin-top: 2rem;
 }
 
 /* Content */

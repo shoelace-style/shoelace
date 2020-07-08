@@ -2,9 +2,7 @@
 
 [component-header:sl-textarea]
 
-Textareas...
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Textareas collect data from the user and allow multiple lines of text.
 
 ```html preview
 <sl-textarea placeholder="Textarea"></sl-textarea>

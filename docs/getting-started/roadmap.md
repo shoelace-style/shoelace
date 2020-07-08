@@ -8,7 +8,7 @@ Version 2.1 is still in the planning phase. To request a feature, please [submit
 
 ?> Is there a feature you really want to see here? Sponsoring Shoelace is the best way to prioritize its development. [Learn more](https://github.com/sponsors/claviska)
 
-## 2.0 📦
+## 2.0 🚀
 
 - [x] Alert
 - [x] Avatar

@@ -2,9 +2,7 @@
 
 [component-header:sl-progress-ring]
 
-Progress rings...
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Progress rings are used to show the progress of a determinate operation in a circular fashion.
 
 ```html preview
 <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
