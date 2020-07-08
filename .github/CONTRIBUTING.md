@@ -68,7 +68,7 @@ Linting is run automatically at build time. By design, the project will not buil
 
 ### BEM Class Names
 
-All components use shadow DOM, so styles are completely encapsulated from the rest of the document. As a result, class names _inside_ a component won't conflict with class names _outside_ the component, so we're free to name them whatever we want.
+All components use a [shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM), so styles are completely encapsulated from the rest of the document. As a result, class names _inside_ a component won't conflict with class names _outside_ the component, so we're free to name them whatever we want.
 
 Internally, each component uses the [BEM methodology](http://getbem.com/) for its class names. There is no technical requirement to do this — it's purely the preference of the author. However, all contributions are expected to follow this practice for the sake of consistency.
 

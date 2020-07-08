@@ -7,7 +7,6 @@
 :host {
   display: inline-block;
 
-  --background-color: var(--sl-color-gray-80);
   --size: 3rem;
 }
 
@@ -18,7 +17,7 @@
   position: relative;
   width: var(--size);
   height: var(--size);
-  background-color: var(--background-color);
+  background-color: var(--sl-color-gray-80);
   font-family: var(--sl-font-sans);
   font-size: calc(var(--size) * 0.5);
   font-weight: var(--sl-font-weight-normal);
