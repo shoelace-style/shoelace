@@ -59,7 +59,7 @@ Shoelace was designed in New Hampshire by [Cory LaViska](https://twitter.com/cla
 
 Designing, developing, and supporting this library requires a lot of time, effort, and skill. I'd like to keep it open source so everyone can use it, but that doesn't provide me with any income. 
 
-**Therefore, if you're using my software to make profit,** I respectfully ask that you help [fund its development](https://github.com/sponsors/claviska) by becoming a sponsor. There are multiple tiers to choose from with  benefits at various levels, including prioritized support, bug fixes, feature requests, and advertising.
+**Therefore, if you're using my software in a for-profit website or application,** I respectfully ask that you help [fund its development](https://github.com/sponsors/claviska) by becoming a sponsor. There are multiple tiers to choose from with  benefits at various levels, including prioritized support, bug fixes, feature requests, and advertising.
 
 👇 Your support is very much appreciated! 👇
 
