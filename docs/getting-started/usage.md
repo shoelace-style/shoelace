@@ -244,7 +244,7 @@ export default function wrapCustomElement(tagName) {
 }
 ```
 
-Then you can import Shoelace components like this.
+Then you can import Shoelace components and use them like this.
 
 ```js
 import wrapCustomElement from 'wrap-custom-element.js';
