@@ -14,7 +14,7 @@ Designed in New Hampshire by [Cory LaViska](https://twitter.com/claviska).
 Add the following code to your page.
 
 ```html
-<link rel="stylesheet" src="https://unpkg.com/@claviska/shoelace@%VERSION%/shoelace.css" />
+<link rel="stylesheet" src="https://unpkg.com/@claviska/shoelace@%VERSION%/shoelace.css">
 <script type="module" src="https://unpkg.com/@claviska/shoelace@%VERSION%/shoelace.esm.js"></script>
 ```
 
@@ -44,11 +44,11 @@ Web components solve these problems. They're [supported by all modern browsers](
 
 Components are tested to work in the last two versions of the following browsers:
 
-<img src="/assets/images/chrome.png" alt="Chrome" width="64" height="64" data-no-zoom />
-<img src="/assets/images/edge.png" alt="Edge" width="64" height="64" data-no-zoom />
-<img src="/assets/images/firefox.png" alt="Firefox" width="64" height="64" data-no-zoom />
-<img src="/assets/images/opera.png" alt="Opera" width="64" height="64" data-no-zoom />
-<img src="/assets/images/safari.png" alt="Safari" width="64" height="64" data-no-zoom />
+<img src="/assets/images/chrome.png" alt="Chrome" width="64" height="64" data-no-zoom>
+<img src="/assets/images/edge.png" alt="Edge" width="64" height="64" data-no-zoom>
+<img src="/assets/images/firefox.png" alt="Firefox" width="64" height="64" data-no-zoom>
+<img src="/assets/images/opera.png" alt="Opera" width="64" height="64" data-no-zoom>
+<img src="/assets/images/safari.png" alt="Safari" width="64" height="64" data-no-zoom>
 
 If you need to support IE11 or pre-Chromium Edge, this library isn't for you. Although web components can (to some degree) be polyfilled for legacy browsers, supporting them is outside the scope of this project. If you're using Shoelace in such a browser, you're gonna have a bad time. ⛷
 

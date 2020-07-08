@@ -53,7 +53,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
   <sl-menu-item value="option-3">Option 3</sl-menu-item>
 </sl-select>
 
-<br />
+<br>
 
 <sl-select placeholder="Medium" size="medium" multiple>
   <sl-menu-item value="option-1">Option 1</sl-menu-item>
@@ -61,7 +61,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
   <sl-menu-item value="option-3">Option 3</sl-menu-item>
 </sl-select>
 
-<br />
+<br>
 
 <sl-select placeholder="Large" size="large" multiple>
   <sl-menu-item value="option-1">Option 1</sl-menu-item>

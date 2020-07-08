@@ -23,7 +23,7 @@ Tags are used as labels to organize things or to indicate a selection.
 <sl-tag type="warning" size="small">Warning</sl-tag>
 <sl-tag type="danger" size="small">Danger</sl-tag>
 
-<br /><br />
+<br><br>
 
 <sl-tag size="medium" type="primary">Primary</sl-tag>
 <sl-tag size="medium" type="success">Success</sl-tag>
@@ -31,7 +31,7 @@ Tags are used as labels to organize things or to indicate a selection.
 <sl-tag size="medium" type="warning">Warning</sl-tag>
 <sl-tag size="medium" type="danger">Danger</sl-tag>
 
-<br /><br />
+<br><br>
 
 <sl-tag size="large" type="primary">Primary</sl-tag>
 <sl-tag size="large" type="success">Success</sl-tag>
@@ -49,7 +49,7 @@ Tags are used as labels to organize things or to indicate a selection.
 <sl-tag type="warning" size="small" pill>Warning</sl-tag>
 <sl-tag type="danger" size="small" pill>Danger</sl-tag>
 
-<br /><br />
+<br><br>
 
 <sl-tag size="medium" type="primary" pill>Primary</sl-tag>
 <sl-tag size="medium" type="success" pill>Success</sl-tag>
@@ -57,7 +57,7 @@ Tags are used as labels to organize things or to indicate a selection.
 <sl-tag size="medium" type="warning" pill>Warning</sl-tag>
 <sl-tag size="medium" type="danger" pill>Danger</sl-tag>
 
-<br /><br />
+<br><br>
 
 <sl-tag size="large" type="primary" pill>Primary</sl-tag>
 <sl-tag size="large" type="success" pill>Success</sl-tag>
@@ -75,7 +75,7 @@ Tags are used as labels to organize things or to indicate a selection.
 <sl-tag type="warning" size="small" removable>Warning</sl-tag>
 <sl-tag type="danger" size="small" removable>Danger</sl-tag>
 
-<br /><br />
+<br><br>
 
 <sl-tag size="medium" type="primary" removable>Primary</sl-tag>
 <sl-tag size="medium" type="success" removable>Success</sl-tag>
@@ -83,7 +83,7 @@ Tags are used as labels to organize things or to indicate a selection.
 <sl-tag size="medium" type="warning" removable>Warning</sl-tag>
 <sl-tag size="medium" type="danger" removable>Danger</sl-tag>
 
-<br /><br />
+<br><br>
 
 <sl-tag size="large" type="primary" removable>Primary</sl-tag>
 <sl-tag size="large" type="success" removable>Success</sl-tag>

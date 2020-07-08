@@ -110,10 +110,10 @@ One caveat is there's currently [no support for v-model on custom elements](http
 
 ```html
 <!-- This doesn't work -->
-<sl-input v-model="name" />
+<sl-input v-model="name">
 
 <!-- This works, but it's a bit longer -->
-<sl-input :value="name" @input="name = $event.target.value" />
+<sl-input :value="name" @input="name = $event.target.value">
 ```
 
 If that's too verbose, you can use a custom directive instead. 👇
@@ -158,7 +158,7 @@ new Vue({ ... });
 Now you can use the `v-sl-model` directive to keep your data in sync!
 
 ```html
-<sl-input v-sl-model="name" />
+<sl-input v-sl-model="name">
 ```
 
 ## React

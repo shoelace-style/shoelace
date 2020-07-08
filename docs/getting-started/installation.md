@@ -9,7 +9,7 @@ The easiest way to install Shoelace is via CDN with the lazy loader. A lightweig
 To install the lazy loader, add the following tags to your page.
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/@claviska/shoelace@%VERSION%/shoelace.css" />
+<link rel="stylesheet" href="https://unpkg.com/@claviska/shoelace@%VERSION%/shoelace.css">
 <script type="module" src="https://unpkg.com/@claviska/shoelace@%VERSION%/shoelace.esm.js"></script>
 ```
 
@@ -22,7 +22,7 @@ Another way to consume the library is with the custom elements bundle. Compared 
 To install the custom elements bundle, add the following tags to your page.
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/@claviska/shoelace@%VERSION%/shoelace.css" />
+<link rel="stylesheet" href="https://unpkg.com/@claviska/shoelace@%VERSION%/shoelace.css">
 <script type="module">
   import { defineCustomElements } from 'https://unpkg.com/@claviska/shoelace@%VERSION%/custom-elements-bundle';
   defineCustomElements();
@@ -46,14 +46,14 @@ Once you've done that, add the following tags to your page.
 ### Lazy Loader
 
 ```html
-<link rel="stylesheet" href="/assets/shoelace/shoelace.css" />
+<link rel="stylesheet" href="/assets/shoelace/shoelace.css">
 <script type="module" src="/assets/shoelace/shoelace.esm.js"></script>
 ```
 
 ### Custom Elements Bundle
 
 ```html
-<link rel="stylesheet" href="/assets/shoelace/shoelace.css" />
+<link rel="stylesheet" href="/assets/shoelace/shoelace.css">
 <script type="module">
   import { defineCustomElements } from '/assets/shoelace/custom-elements-bundle';
   defineCustomElements();
