@@ -1,5 +1,7 @@
 # Customizing
 
+Shoelace can be customized at a high level through design tokens. This gives you control over theme colors and general styling. For more advanced customizations, you can make use of component parts and custom properties to target individual components.
+
 ## Design Tokens
 
 Shoelace makes use of several design tokens to provide a consistent appearance across components. You can customize them and use them in your own application with pure CSS — no preprocessor required.
@@ -18,7 +20,7 @@ To customize a design token, simply override it in your stylesheet using a `:roo
 }
 ```
 
-Many design tokens are described later in this documentation. For a complete list, refer to one `shoelace.css` or `shoelace.scss` in the project's source code.
+Many design tokens are described further along in this documentation. For a complete list, refer to one `shoelace.css` or `shoelace.scss` in the project's source code.
 
 !> **Never modify variables directly in `shoelace.css`** because your changes will be overwritten when you upgrade the library. Even if you don't plan on upgrading, it's always better to override design tokens in your own stylesheet for better maintainability.
 
