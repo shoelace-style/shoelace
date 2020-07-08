@@ -100,3 +100,9 @@ There are some exceptions to this (e.g. when it significantly improves developer
 ### Boolean Props
 
 Boolean props should _always_ default to `false`, otherwise there's no way for the user to unset it without JavaScript. To keep the API as friendly and consistent as possible, use a name like `noHeader` with a default value of `false` instead of `header` with a default value of `true`.
+
+### A Note About Sass
+
+The Shoelace _source_ is developed using Sass for the convenience of nested selectors, imports, and tedious things such as color palette generation. By design, Sass variables, color functions, and other preprocessor-specific feaures are not used in the source and will not be accepted in a PR.
+
+Consumers of the library should never need to worry about preprocessing the library.
