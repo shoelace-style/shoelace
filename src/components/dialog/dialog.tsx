@@ -40,9 +40,6 @@ export class Dialog {
    */
   @Prop() label = '';
 
-  /** When true, the dialog will not be dismissed when the users clicks on the overlay. */
-  @Prop() noOverlayDismiss = false;
-
   /**
    * Set to true to disable the header. This will also remove the default close button, so please ensure you provide an
    * easy, accessible way for users to dismiss the dialog.
@@ -68,6 +65,9 @@ export class Dialog {
 
   /** Emitted after the dialog closes and all transitions are complete. */
   @Event() slAfterHide: EventEmitter;
+
+  /** Emitted when the overlay is clicked. Calling `event.preventDefault()` will prevent the dialog from closing. */
+  @Event() slOverlayDismiss: EventEmitter;
 
   componentDidLoad() {
     focusVisible.observe(this.dialog);
@@ -134,7 +134,9 @@ export class Dialog {
   }
 
   handleOverlayClick() {
-    if (!this.noOverlayDismiss) {
+    const slOverlayDismiss = this.slOverlayDismiss.emit();
+
+    if (!slOverlayDismiss.defaultPrevented) {
       this.hide();
     }
   }

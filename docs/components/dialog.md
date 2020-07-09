@@ -32,30 +32,6 @@ Dialogs appear above the page and require the user's immediate attention.
 
 ## Examples
 
-### No Overlay Dismiss
-
-By default, dialogs are closed when the user clicks or taps on the overlay. The `no-overlay-dismiss` prop keeps the dialog open until the user explicitly closes it.
-
-```html preview
-<sl-dialog label="Dialog" no-overlay-dismiss class="dialog-no-overlay-dismiss">
-  This dialog will not be closed when you click outside of it.
-  <sl-button slot="footer" type="primary">Close</sl-button>
-</sl-dialog>
-
-<sl-button>Open Dialog</sl-button>
-
-<script>
-  (() => {
-    const dialog = document.querySelector('.dialog-no-overlay-dismiss');
-    const openButton = dialog.nextElementSibling;
-    const closeButton = dialog.querySelector('sl-button[slot="footer"]');
-
-    openButton.addEventListener('click', () => dialog.show());
-    closeButton.addEventListener('click', () => dialog.hide());
-  })();
-</script>
-```
-
 ### Scrolling
 
 By design, a dialog's height will never exceed that of the viewport. As such, dialogs will not scroll with the page ensuring the header and footer are always accessible to the user.
@@ -78,6 +54,32 @@ By design, a dialog's height will never exceed that of the viewport. As such, di
 
     openButton.addEventListener('click', () => dialog.show());
     closeButton.addEventListener('click', () => dialog.hide());
+  })();
+</script>
+```
+
+### Ignore Overlay Clicks
+
+By default, dialogs are closed when the user clicks or taps on the overlay. To prevent this behavior, cancel the `slOverlayDismiss` event.
+
+```html preview
+<sl-dialog label="Dialog" class="dialog-no-overlay-dismiss">
+  This dialog will not be closed when you click outside of it.
+  <sl-button slot="footer" type="primary">Close</sl-button>
+</sl-dialog>
+
+<sl-button>Open Dialog</sl-button>
+
+<script>
+  (() => {
+    const dialog = document.querySelector('.dialog-no-overlay-dismiss');
+    const openButton = dialog.nextElementSibling;
+    const closeButton = dialog.querySelector('sl-button[slot="footer"]');
+
+    openButton.addEventListener('click', () => dialog.show());
+    closeButton.addEventListener('click', () => dialog.hide());
+
+    dialog.addEventListener('slOverlayDismiss', event => event.preventDefault());
   })();
 </script>
 ```

@@ -43,9 +43,6 @@ export class Drawer {
   /** The direction from which the drawer will open. */
   @Prop() placement: 'left' | 'right' = 'right';
 
-  /** When true, the drawer will not be dismissed when the users clicks on the overlay. */
-  @Prop() noOverlayDismiss = false;
-
   /**
    * By default, the drawer slides out of its containing block (usually the viewport). To make the drawer slide out of
    * its parent element, set this prop and add `position: relative` to the parent.
@@ -77,6 +74,9 @@ export class Drawer {
 
   /** Emitted after the drawer closes and all transitions are complete. */
   @Event() slAfterHide: EventEmitter;
+
+  /** Emitted when the overlay is clicked. Calling `event.preventDefault()` will prevent the dialog from closing. */
+  @Event() slOverlayDismiss: EventEmitter;
 
   componentDidLoad() {
     focusVisible.observe(this.drawer);
@@ -149,7 +149,9 @@ export class Drawer {
   }
 
   handleOverlayClick() {
-    if (!this.noOverlayDismiss) {
+    const slOverlayDismiss = this.slOverlayDismiss.emit();
+
+    if (!slOverlayDismiss.defaultPrevented) {
       this.hide();
     }
   }

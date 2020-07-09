@@ -206,10 +206,6 @@ export namespace Components {
          */
         "noHeader": boolean;
         /**
-          * When true, the dialog will not be dismissed when the users clicks on the overlay.
-         */
-        "noOverlayDismiss": boolean;
-        /**
           * Indicates whether or not the dialog is open. You can use this in lieu of the show/hide methods.
          */
         "open": boolean;
@@ -239,10 +235,6 @@ export namespace Components {
           * Removes the header. This will also remove the default close button, so please ensure you provide an easy, accessible way for users to dismiss the drawer.
          */
         "noHeader": boolean;
-        /**
-          * When true, the drawer will not be dismissed when the users clicks on the overlay.
-         */
-        "noOverlayDismiss": boolean;
         /**
           * Indicates whether or not the drawer is open. You can use this in lieu of the show/hide methods.
          */
@@ -1284,10 +1276,6 @@ declare namespace LocalJSX {
          */
         "noHeader"?: boolean;
         /**
-          * When true, the dialog will not be dismissed when the users clicks on the overlay.
-         */
-        "noOverlayDismiss"?: boolean;
-        /**
           * Emitted after the dialog closes and all transitions are complete.
          */
         "onSlAfterHide"?: (event: CustomEvent<any>) => void;
@@ -1299,6 +1287,10 @@ declare namespace LocalJSX {
           * Emitted when the dialog closes. Calling `event.preventDefault()` will prevent it from being closed.
          */
         "onSlHide"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the overlay is clicked. Calling `event.preventDefault()` will prevent the dialog from closing.
+         */
+        "onSlOverlayDismiss"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the dialog opens. Calling `event.preventDefault()` will prevent it from being opened.
          */
@@ -1326,10 +1318,6 @@ declare namespace LocalJSX {
          */
         "noHeader"?: boolean;
         /**
-          * When true, the drawer will not be dismissed when the users clicks on the overlay.
-         */
-        "noOverlayDismiss"?: boolean;
-        /**
           * Emitted after the drawer closes and all transitions are complete.
          */
         "onSlAfterHide"?: (event: CustomEvent<any>) => void;
@@ -1341,6 +1329,10 @@ declare namespace LocalJSX {
           * Emitted when the drawer closes. Calling `event.preventDefault()` will prevent it from being closed.
          */
         "onSlHide"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the overlay is clicked. Calling `event.preventDefault()` will prevent the dialog from closing.
+         */
+        "onSlOverlayDismiss"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the drawer opens. Calling `event.preventDefault()` will prevent it from being opened.
          */

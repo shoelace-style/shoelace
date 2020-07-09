@@ -78,30 +78,6 @@ By default, the drawer slides out of its [containing block](https://developer.mo
 </script>
 ```
 
-### No Overlay Dismiss
-
-By default, drawers are closed when the user clicks or taps on the overlay. The `no-overlay-dismiss` prop keeps the drawer open until the user explicitly closes it.
-
-```html preview
-<sl-drawer label="Drawer" no-overlay-dismiss class="drawer-no-overlay-dismiss">
-  This drawer will not be closed when you click outside of it.
-  <sl-button slot="footer" type="primary">Close</sl-button>
-</sl-drawer>
-
-<sl-button>Open Drawer</sl-button>
-
-<script>
-  (() => {
-    const drawer = document.querySelector('.drawer-no-overlay-dismiss');
-    const openButton = drawer.nextElementSibling;
-    const closeButton = drawer.querySelector('sl-button[type="primary"]');
-
-    openButton.addEventListener('click', () => drawer.show());
-    closeButton.addEventListener('click', () => drawer.hide());
-  })();
-</script>
-```
-
 ### Scrolling
 
 By design, a drawer's height is 100% of its container and will never exceed that of the viewport. As such, drawers will not scroll with the page ensuring the header and footer are always accessible to the user.
@@ -187,6 +163,32 @@ By design, a drawer's height is 100% of its container and will never exceed that
     const openButton = drawer.nextElementSibling;
 
     openButton.addEventListener('click', () => drawer.show());
+  })();
+</script>
+```
+
+### Ignore Overlay Clicks
+
+By default, drawers are closed when the user clicks or taps on the overlay. To prevent this behavior, cancel the `slOverlayDismiss` event.
+
+```html preview
+<sl-drawer label="Drawer" class="drawer-no-overlay-dismiss">
+  This drawer will not be closed when you click outside of it.
+  <sl-button slot="footer" type="primary">Close</sl-button>
+</sl-drawer>
+
+<sl-button>Open Drawer</sl-button>
+
+<script>
+  (() => {
+    const drawer = document.querySelector('.drawer-no-overlay-dismiss');
+    const openButton = drawer.nextElementSibling;
+    const closeButton = drawer.querySelector('sl-button[type="primary"]');
+
+    openButton.addEventListener('click', () => drawer.show());
+    closeButton.addEventListener('click', () => drawer.hide());
+
+    drawer.addEventListener('slOverlayDismiss', event => event.preventDefault());
   })();
 </script>
 ```
