@@ -26,7 +26,8 @@ let numIcons = 0;
     console.log(chalk.cyan(`Copying icons and license... 🚛\n`));
     await Promise.all([
       copy(`${srcPath}/icons`, './src/components/icon/icons'),
-      copy(`${srcPath}/LICENSE.md`, './src/components/icon/icons/LICENSE.md')
+      copy(`${srcPath}/LICENSE.md`, './src/components/icon/icons/LICENSE.md'),
+      copy(`${srcPath}/bootstrap-icons.svg`, './docs/assets/icons/sprite.svg')
     ]);
 
     // Generate metadata

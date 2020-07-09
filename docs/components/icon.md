@@ -7,7 +7,7 @@ Icons are symbols that can be used to represent or provide context to various op
 Shoelace comes bundled with over 1,000 icons courtesy of the [Bootstrap Icons](https://icons.getbootstrap.com/) project. Click or tap on an icon below to copy the name and use it like this.
 
 ```html
-<sl-icon name="icon-name-here"></sl-icon>
+<sl-icon name="icon-name-here" hidden></sl-icon>
 ```
 
 <div class="icon-search">
@@ -21,15 +21,13 @@ Shoelace comes bundled with over 1,000 icons courtesy of the [Bootstrap Icons](h
       <sl-menu-item value="all">All icons</sl-menu-item>
     </sl-select>
   </div>
-  <div class="icon-loader"><sl-spinner size="48"></sl-spinner></div>
-  <div class="icon-list" hidden></div>
-  <div class="icon-no-results" hidden>No Results</div>
+  <div class="icon-list"></div>
   <input type="text" class="icon-copy-input">
 </div>
 
 ## Examples
 
-### Sizes
+### Icon Sizes
 
 Icons are sized relative to the current font size. To change their size, set the `font-size` property on the icon itself or on a parent element as shown below.
 
@@ -64,7 +62,7 @@ Custom icons can be loaded by setting the `src` attribute. Only SVG images are s
 
 <script>
   fetch('/dist/shoelace/icons/icons.json')
-    .then(res => res.json())
+    .then(res => res.json())  
     .then(icons => {
       const container = document.querySelector('.icon-search');
       const input = container.querySelector('sl-input');
@@ -76,23 +74,23 @@ Custom icons can be loaded by setting the `src` attribute. Only SVG images are s
 
       // Generate icons
       icons.map(i => {
-        const icon = document.createElement('sl-icon');
-        icon.setAttribute('data-name', i.name);
-        icon.setAttribute('data-terms', [i.name, i.title, ...(i.tags || []), ...(i.categories || [])].join(' '));
-        icon.name = i.name;
+        const item = document.createElement('div');
+        item.classList.add('icon-list-item');
+        item.setAttribute('data-name', i.name);
+        item.setAttribute('data-terms', [i.name, i.title, ...(i.tags || []), ...(i.categories || [])].join(' '));
+        item.innerHTML = `
+          <svg width="1em" height="1em">
+            <use xlink:href="/assets/icons/sprite.svg#${i.name}"></use>
+          </svg>      
+        `;
 
         const tooltip = document.createElement('sl-tooltip');
         tooltip.content = i.name;
-
-        tooltip.appendChild(icon);        
+        
+        tooltip.appendChild(item);
         list.appendChild(tooltip);
 
-        queue.push(new Promise((resolve, reject) => {
-          icon.addEventListener('slLoad', () => resolve());
-          icon.addEventListener('slError', () => reoslve());
-        }));
-
-        icon.addEventListener('click', () => {
+        item.addEventListener('click', () => {
           copyInput.value = i.name;
           copyInput.select();
           document.execCommand('copy');
@@ -101,21 +99,15 @@ Custom icons can be loaded by setting the `src` attribute. Only SVG images are s
         });
       });
 
-      // Wait for all icons to load
-      Promise.all(queue).then(() => {
-        list.hidden = false;
-        loader.hidden = true;
-      });
-
       // Filter as the user types
       input.addEventListener('slInput', () => {
-        [...list.querySelectorAll('sl-icon')].map(slIcon => {
+        [...list.querySelectorAll('.icon-list-item')].map(item => {
           const filter = input.value.toLowerCase();
           if (filter === '') {
-            slIcon.hidden = false;
+            item.hidden = false;
           } else {
-            const terms = slIcon.getAttribute('data-terms').toLowerCase();
-            slIcon.hidden = terms.indexOf(filter) < 0;
+            const terms = item.getAttribute('data-terms').toLowerCase();
+            item.hidden = terms.indexOf(filter) < 0;
           }
         });
       });
@@ -170,25 +162,29 @@ Custom icons can be loaded by setting the `src` attribute. Only SVG images are s
     display: none;
   }
 
-  .icon-list sl-icon {
-    font-size: 24px;
+  .icon-list-item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     border-radius: var(--sl-border-radius-circle);
-    padding: .5em;
+    font-size: 24px;
+    width: 2em;
+    height: 2em;
     margin: 0 auto;
-    transition: var(--sl-transition-medium) all;
     cursor: pointer;
+    transition: var(--sl-transition-medium) all;
   }
 
-  .icon-list sl-icon:hover {
+  .icon-list-item:hover {
     background-color: var(--sl-color-primary-95);
     color: var(--sl-color-primary-50);
   }
 
-  .icon-list[data-type="outline"] sl-icon[data-name$="-fill"] {
+  .icon-list[data-type="outline"] .icon-list-item[data-name$="-fill"] {
     display: none;
   }
 
-  .icon-list[data-type="fill"] sl-icon:not([data-name$="-fill"]) {
+  .icon-list[data-type="fill"] .icon-list-item:not([data-name$="-fill"]) {
     display: none;
   }
 
@@ -212,7 +208,7 @@ Custom icons can be loaded by setting the `src` attribute. Only SVG images are s
       grid-template-columns: repeat(8, 1fr);
     }
 
-    .icon-list sl-icon {
+    .icon-list-item {
       font-size: 20px;
     }    
   }  
