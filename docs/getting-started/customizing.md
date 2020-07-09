@@ -91,7 +91,7 @@ Themes that are in high demand include:
 - Dark mode (must complement the default theme)
 - High contrast (for optimal accessibility)
 
-**I am willing to contribute a minimum of $100 USD each to commission the themes listed above.** Reach out to [@claviska](https://twitter.com/claviska) on Twitter for details and requirements (DMs are open).
+**I am willing to contribute a minimum of $200 USD to commission each of the themes listed above.** Reach out to [@claviska](https://twitter.com/claviska) on Twitter for details and requirements (DMs are open).
 
 Please note the following requirements before submitting a theme.
 
