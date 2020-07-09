@@ -83,4 +83,4 @@ Designing, developing, and supporting this library requires a lot of time, effor
 - [Star on GitHub](https://github.com/claviska/shoelace/stargazers)
 - [Follow on Twitter](https://twitter.com/shoelaceui)
 
-Whether you're building Shoelace or building something with Shoelace — have fun creating! 🥾
+Whether you're building Shoelace or building something _with_ Shoelace — have fun creating! 🥾
