@@ -2,7 +2,6 @@
 
 Shoelace is an open source project, meaning everyone can use it and contribute to its development. Please take a moment to review these guidelines to make the contribution process as easy as possible for both you and the project's maintainers.
 
-
 ## Using the Issue Tracker
 
 The [issue tracker](https://github.com/claviska/shoelace/issues) is for bug reports, feature requests, and pull requests.
@@ -49,7 +48,6 @@ To keep the project on track, please consider the following guidelines before su
 
 The author reserves the right to reject any PR that's outside the scope of the project or doesn't meet code quality standards.
 
-
 ## Conventions
 
 This section aims to describe some of the design decisions and code conventions that support the project. All contributors are expected to follow conventions and best practices, even those not explicitly defined in this document. When in doubt, refer to existing source code and execute your best judgment.
@@ -74,7 +72,6 @@ All components use a [shadow DOM](https://developer.mozilla.org/en-US/docs/Web/W
 
 Internally, each component uses the [BEM methodology](http://getbem.com/) for its class names. There is no technical requirement to do this — it's purely the preference of the author. However, all contributions are expected to follow this practice for the sake of consistency.
 
-
 ## Developer Tips
 
 ### Documentation is the key to success
@@ -91,7 +88,7 @@ If you need help with documentation, feel free to reach out!
 
 When designed right, web components are highly composable, meaning you can easily reuse them in other components. This reduces the overall size of the library, expedites feature development, and maintains a consistent user experience throughout.
 
-The select component, for example, makes use of the dropdown, input, and menu components. Because it's offloading most of its functionality and styles to these lower-level components, the select component remains very lightweight, yet its appearance and behavior is consistent with other form controls and menus.
+The select component, for example, makes use of the dropdown, input, and menu components. Because it's offloading most of its functionality and styles to these lower-level components, the select component remains very lightweight and its appearance and behavior is consistent with other form controls and menus.
 
 ### When to use a standard property vs. a CSS custom property
 
