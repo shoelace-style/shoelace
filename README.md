@@ -25,7 +25,7 @@ Shoemakers, or "developers," can use this documentation to learn how to build Sh
 
 **You don't need to do any of this to use Shoelace!** This page is for people who want to contribute to the project, tinker with the source, or create a custom build of Shoelace.
 
-If that's not what you're trying to do, you might be looking for the [documentation website](https://shoelace.style) instead.
+If that's not what you're trying to do, the [documentation website](https://shoelace.style) is where you want to be.
 
 ### What are you using to build Shoelace?
 
