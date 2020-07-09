@@ -241,11 +241,11 @@
           <a class="repo-button repo-button--small repo-button--sponsor" href="https://github.com/sponsors/claviska" rel="noopener" target="_blank">
             <sl-icon name="heart"></sl-icon> Sponsor
           </a>
-          <a class="repo-button repo-button--small" href="https://github.com/claviska/shoelace" rel="noopener" target="_blank">
-            <sl-icon name="star"></sl-icon> Star
+          <a class="repo-button repo-button--small repo-button--github" href="https://github.com/claviska/shoelace/stargazers" rel="noopener" target="_blank">
+            <sl-icon src="/assets/images/github.svg"></sl-icon> Star
           </a>
-          <a class="repo-button repo-button--small" href="https://twitter.com/shoelaceui" rel="noopener" target="_blank">
-            <sl-icon src="/assets/images/twitter.svg" style="transform: scale(1.5);"></sl-icon> Follow
+          <a class="repo-button repo-button--small repo-button--twitter" href="https://twitter.com/shoelaceui" rel="noopener" target="_blank">
+            <sl-icon src="/assets/images/twitter.svg"></sl-icon> Follow
           </a>
         `;
         target.appendChild(buttons);

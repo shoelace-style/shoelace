@@ -170,6 +170,10 @@ p + .code-block {
 }
 
 /* Content */
+.markdown-section .logo {
+  max-width: 24rem;
+}
+
 .markdown-section a code {
   color: inherit !important;
 }
@@ -224,10 +228,6 @@ html .repo-button sl-icon {
   margin-right: 0.125rem;
 }
 
-html .repo-button sl-icon[name="star"] {
-  top: -2px;
-}
-
 html .repo-button--small {
   font-size: var(--sl-font-size-x-small);
   padding: var(--sl-spacing-xxx-small) var(--sl-spacing-x-small);
@@ -235,6 +235,14 @@ html .repo-button--small {
 
 html .repo-button--sponsor sl-icon {
   color: #ea4aaa;
+}
+
+html .repo-button--github sl-icon {
+  color: #242a2e;
+}
+
+html .repo-button--twitter sl-icon {
+  color: #1ea0f2;
 }
 
 body[data-page^="tokens/"] .table-wrapper td:first-child,

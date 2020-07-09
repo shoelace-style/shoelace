@@ -1,4 +1,4 @@
-<img id="top" class="logo" src="/assets/images/wordmark.svg" alt="Shoelace" data-no-zoom style="max-width: 24rem;">
+<img class="logo" src="/assets/images/wordmark.svg" alt="Shoelace" data-no-zoom>
 
 A forward-thinking library of web components.
 
@@ -55,11 +55,11 @@ If you need to support IE11 or pre-Chromium Edge, this library isn't for you. Al
 
 ## License
 
-Shoelace was designed in New Hampshire by [Cory LaViska](https://twitter.com/claviska). It's available under the terms of the MIT license.
+Shoelace is designed in New Hampshire by [Cory LaViska](https://twitter.com/claviska). It's available under the terms of the MIT license.
 
 Designing, developing, and supporting this library requires a lot of time, effort, and skill. I'd like to keep it open source so everyone can use it, but that doesn't provide me with any income. 
 
-**Therefore, if you're using my software in a for-profit website or application,** I respectfully ask that you help [fund its development](https://github.com/sponsors/claviska) by becoming a sponsor. There are multiple tiers to choose from with  benefits at various levels, including prioritized support, bug fixes, feature requests, and advertising.
+**Therefore, if you're using my software to make a profit,** I respectfully ask that you help [fund its development](https://github.com/sponsors/claviska) by becoming a sponsor. There are multiple tiers to choose from with benefits at every level, including prioritized support, bug fixes, feature requests, and advertising.
 
 👇 Your support is very much appreciated! 👇
 
@@ -67,12 +67,12 @@ Designing, developing, and supporting this library requires a lot of time, effor
   <sl-icon name="heart"></sl-icon> Become a sponsor
 </a>
 
-<a class="repo-button" href="https://github.com/claviska/shoelace" rel="noopener" target="_blank">
-  <sl-icon name="star"></sl-icon> Star
+<a class="repo-button repo-button--github" href="https://github.com/claviska/shoelace/stargazers" rel="noopener" target="_blank">
+  <sl-icon src="/assets/images/github.svg"></sl-icon> Star
 </a>
 
-<a class="repo-button" href="https://twitter.com/shoelaceui" rel="noopener" target="_blank">
-  <sl-icon src="/assets/images/twitter.svg" style="transform: scale(1.5);"></sl-icon> Follow
+<a class="repo-button repo-button--twitter" href="https://twitter.com/shoelaceui" rel="noopener" target="_blank">
+  <sl-icon src="/assets/images/twitter.svg"></sl-icon> Follow
 </a>
 
 ## Attribution
