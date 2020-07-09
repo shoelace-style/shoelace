@@ -35,7 +35,7 @@ The build is done through a combination of Stencil's CLI and a handful of custom
 
 ### Forking the Repo
 
-Start by [forking the repo](https://github.com/claviska/shoelace/fork) on GitHub, then clone the repo locally and install dependencies.
+Start by [forking the repo](https://github.com/claviska/shoelace/fork) on GitHub, then clone it locally and install dependencies.
 
 ```sh
 git clone https://github.com/YOUR_GITHUB_USERNAME/shoelace
@@ -55,9 +55,7 @@ This will spin up the Shoelace dev server. Note that the dev server requires por
 
 After the initial build, a browser will open at `http://localhost:4000`.
 
-Hot module reloading (HMR) is enabled for components, so changes will instantly reflect in the browser as you work.
-
-The documentation is powered by Docsify, which uses raw markdown files to generate pages. As such, no static files are built for the docs. Unfortunately, changes to _documentation pages_ will trigger a page refresh (no HMR).
+Hot module reloading (HMR) is enabled for components, so changes will instantly reflect in the browser as you work. The documentation is powered by Docsify, which uses raw markdown files to generate pages. As such, no static files are built for the docs. Unfortunately, changes to _documentation pages_ will trigger a page refresh (no HMR).
 
 ### Building
 
@@ -69,7 +67,7 @@ npm run build
 
 ### Contributing
 
-Shoelace is an open source project and contributions are encouraged! If you're interesting in contributing, please review the [contribution guidelines](CONTRIBUTING.md).
+Shoelace is an open source project and contributions are encouraged! If you're interesting in contributing, please review the [contribution guidelines](CONTRIBUTING.md) first.
 
 ## License
 
@@ -85,4 +83,4 @@ Designing, developing, and supporting this library requires a lot of time, effor
 - [Star on GitHub](https://github.com/claviska/shoelace/stargazers)
 - [Follow on Twitter](https://twitter.com/shoelaceui)
 
-Have fun creating! 🥾
+Whether you're building Shoelace or building something with Shoelace — have fun creating! 🥾
