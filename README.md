@@ -29,7 +29,7 @@ If that's not what you're trying to do, the [documentation website](https://shoe
 
 ### What are you using to build Shoelace?
 
-Components are built with [Stencil](https://stenciljs.com/), a compiler that generates standards-based web components. The source code is a combination of TypeScript + JSX (TSX). Stylesheets make limited use of SCSS (see the contributor guidelines for details).
+Components are built with [Stencil](https://stenciljs.com/), a compiler that generates standards-based web components. The source code is a combination of TypeScript + JSX (TSX). Stylesheets are written in SCSS.
 
 The build is done through a combination of Stencil's CLI and a handful of custom scripts.
 
