@@ -88,10 +88,10 @@ It's a good practice to include `shoelace.css` in your app and add your theme's 
 
 Themes that are in high demand include:
 
-- Dark mode (must complement the default theme)
-- High contrast (for optimal accessibility)
+- Dark mode ([details](https://github.com/shoelace-style/shoelace/issues/98))
+- High contrast ([details](https://github.com/shoelace-style/shoelace/issues/99))
 
-**I am willing to contribute a minimum of $200 USD to commission each of the themes listed above.** Reach out to [@claviska](https://twitter.com/claviska) on Twitter for details and requirements (DMs are open).
+**I am willing to contribute a minimum of $200 USD to commission each of the themes listed above.** 
 
 Please note the following requirements before submitting a theme.
 
