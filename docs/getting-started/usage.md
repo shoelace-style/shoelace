@@ -178,18 +178,18 @@ If you're starting a new project, one solution is to consider using [Preact](htt
 
 ### Wrapping Components
 
-You can use this utility to wrap Shoelace components so they work better in React. Add the following code to a file called `wrap-custom-element.js`:
+You can use this utility to wrap Shoelace components so they work like like regular React components. Add the following code to a file called `wrap-custom-element.js`:
 
 ```js
 import React from 'react';
 
-export default function wrapCustomElement(tagName) {
+export default tagName => {
   const CustomElement = tagName;
 
   return class extends React.Component {
     constructor(props) {
       super(props);
-      this.customElement = React.createRef();
+      this.element = React.createRef();
     }
 
     componentDidMount() {
@@ -201,8 +201,7 @@ export default function wrapCustomElement(tagName) {
     }
 
     syncProps(props) {
-      const el = this.customElement.current;
-
+      const el = this.element.current;
       Object.keys(props).forEach(name => {
         if (name === 'children' || name === 'style') {
           return;
@@ -217,7 +216,7 @@ export default function wrapCustomElement(tagName) {
     }
 
     syncEvent(eventName, newEventHandler) {
-      const el = this.customElement.current;
+      const el = this.element.current;
       const eventNameLc = eventName[0].toLowerCase() + eventName.substring(1);
       const eventStore = el.__events || (el.__events = {});
       const oldEventHandler = eventStore[eventNameLc];
@@ -238,7 +237,7 @@ export default function wrapCustomElement(tagName) {
 
     render() {
       return (
-        <CustomElement ref={this.customElement} style={this.props.style}>
+        <CustomElement ref={this.element} style={this.props.style}>
           {this.props.children}
         </CustomElement>
       );
@@ -252,8 +251,18 @@ Then you can import Shoelace components and use them like this.
 ```js
 import wrapCustomElement from 'wrap-custom-element.js';
 
-const SlButton = wrapCustomElement('sl-button');
+const ShoelaceButton = wrapCustomElement('sl-button');
 
-return <SlButton type="primary">Click me</SlButton>;
+return <ShoelaceButton type="primary">Click me</ShoelaceButton>;
 ```
 
+A reference ("ref") to the underlying Shoelace element is exposed through the `element` property so you can access it directly. This is useful for calling methods.
+
+```jsx
+<ShoelaceButton 
+  ref={el => this.button = el} 
+  onClick={() => this.button.element.current.removeFocus()}
+>
+  Click me
+</ShoelaceButton>
+```
