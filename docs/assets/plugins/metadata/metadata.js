@@ -241,7 +241,7 @@
           <a class="repo-button repo-button--small repo-button--sponsor" href="https://github.com/sponsors/claviska" rel="noopener" target="_blank">
             <sl-icon name="heart"></sl-icon> Sponsor
           </a>
-          <a class="repo-button repo-button--small repo-button--github" href="https://github.com/claviska/shoelace/stargazers" rel="noopener" target="_blank">
+          <a class="repo-button repo-button--small repo-button--github" href="https://github.com/shoelace-style/shoelace/stargazers" rel="noopener" target="_blank">
             <sl-icon src="/assets/images/github.svg"></sl-icon> Star
           </a>
           <a class="repo-button repo-button--small repo-button--twitter" href="https://twitter.com/shoelace_style" rel="noopener" target="_blank">

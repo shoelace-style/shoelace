@@ -4,7 +4,7 @@ Shoelace is an open source project, meaning everyone can use it and contribute t
 
 ## Using the Issue Tracker
 
-The [issue tracker](https://github.com/claviska/shoelace/issues) is for bug reports, feature requests, and pull requests.
+The [issue tracker](https://github.com/shoelace-style/shoelace/issues) is for bug reports, feature requests, and pull requests.
 
 - Please **do not** use the issue tracker for personal support requests. Please [ask your question](https://stackoverflow.com/questions/ask) on StackOverflow instead.
 - Please **do not** derail, hijack, or troll issues. Keep the discussion on topic and be respectful of others.

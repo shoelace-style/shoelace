@@ -13,7 +13,7 @@ Designed in New Hampshire by [Cory LaViska](https://twitter.com/claviska).
 
 Documentation: [shoelace.style](https://shoelace.style)
 
-Source: [github.com/claviska/shoelace](https://github.com/claviska/shoelace)
+Source: [github.com/shoelace-style/shoelace](https://github.com/shoelace-style/shoelace)
 
 Twitter: [@shoelace_style](https://twitter.com/shoelace_style)
 
@@ -35,7 +35,7 @@ The build is done through a combination of Stencil's CLI and a handful of custom
 
 ### Forking the Repo
 
-Start by [forking the repo](https://github.com/claviska/shoelace/fork) on GitHub, then clone it locally and install dependencies.
+Start by [forking the repo](https://github.com/shoelace-style/shoelace/fork) on GitHub, then clone it locally and install dependencies.
 
 ```sh
 git clone https://github.com/YOUR_GITHUB_USERNAME/shoelace
@@ -80,7 +80,7 @@ Designing, developing, and supporting this library requires a lot of time, effor
 👇 Your support is very much appreciated! 👇
 
 - [Become a sponsor](https://github.com/sponsors/claviska)
-- [Star on GitHub](https://github.com/claviska/shoelace/stargazers)
+- [Star on GitHub](https://github.com/shoelace-style/shoelace/stargazers)
 - [Follow on Twitter](https://twitter.com/shoelace_style)
 
 Whether you're building Shoelace or building something _with_ Shoelace — have fun creating! 🥾

@@ -14,8 +14,8 @@ Designed in New Hampshire by [Cory LaViska](https://twitter.com/claviska).
 Add the following code to your page.
 
 ```html
-<link rel="stylesheet" src="https://unpkg.com/@claviska/shoelace@%VERSION%/shoelace.css">
-<script type="module" src="https://unpkg.com/@claviska/shoelace@%VERSION%/shoelace.esm.js"></script>
+<link rel="stylesheet" src="https://unpkg.com/@shoelace-style/shoelace@%VERSION%/shoelace.css">
+<script type="module" src="https://unpkg.com/@shoelace-style/shoelace@%VERSION%/shoelace.esm.js"></script>
 ```
 
 Now you have access to all of Shoelace's components! Try adding a button:
@@ -70,7 +70,7 @@ Designing, developing, and supporting this library requires a lot of time, effor
   <sl-icon name="heart"></sl-icon> Become a sponsor
 </a>
 
-<a class="repo-button repo-button--github" href="https://github.com/claviska/shoelace/stargazers" rel="noopener" target="_blank">
+<a class="repo-button repo-button--github" href="https://github.com/shoelace-style/shoelace/stargazers" rel="noopener" target="_blank">
   <sl-icon src="/assets/images/github.svg"></sl-icon> Star
 </a>
 
