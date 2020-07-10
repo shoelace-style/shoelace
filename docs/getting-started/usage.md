@@ -124,23 +124,26 @@ This will create a `v-sl-model` directive that works with Shoelace components. A
 
 ```js
 const wm = new WeakMap();
-const ShoelaceModelDirective = {
+
+export default {
   install: function (Vue) {
     Vue.directive('sl-model', {
-      bind(el, binding, vnode) {
-        const changeHandler = () => vnode.context[binding.expression] = el.value;
-        wm.set(el, changeHandler);
-        el.addEventListener('change', changeHandler);
+      bind (el, binding, vnode) {
+        const inputHandler = event => Vue.set(vnode.context, binding.expression, event.target.value);
+        wm.set(el, inputHandler);
+        el.value = binding.value;
+        el.addEventListener('input', inputHandler);
       },
+      componentUpdated(el, binding) {
+        el.value = binding.value;
+      },      
       unbind(el) {
-        const changeHandler = wm.get(el);
-        el.removeEventListener('change', changeHandler);
+        const inputHandler = wm.get(el);
+        el.removeEventListener(el, inputHandler);
       }
     })
   }    
 };
-
-export default ShoelaceModelPlugin;
 ```
 
 Next, import the directive and enable it like this.
@@ -148,7 +151,7 @@ Next, import the directive and enable it like this.
 ```js
 import ShoelaceModelDirective from 'shoelace-model-directive.js';
 
-Vue.use(ShoelaceModelPlugin);
+Vue.use(ShoelaceModelDirective);
 Vue.config.ignoredElements = [/^sl-/];
 
 // Your init here
