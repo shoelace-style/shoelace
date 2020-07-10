@@ -106,7 +106,7 @@ new Vue({ ... });
 
 ### Two-way Binding
 
-One caveat is there's currently [no support for v-model on custom elements](https://github.com/vuejs/vue/issues/7830), but you can handle two-way binding manually instead.
+One caveat is there's currently [no support for v-model on custom elements](https://github.com/vuejs/vue/issues/7830), but you can handle two-way binding manually.
 
 ```html
 <!-- This doesn't work -->
