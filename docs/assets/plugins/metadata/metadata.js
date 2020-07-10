@@ -244,7 +244,7 @@
           <a class="repo-button repo-button--small repo-button--github" href="https://github.com/claviska/shoelace/stargazers" rel="noopener" target="_blank">
             <sl-icon src="/assets/images/github.svg"></sl-icon> Star
           </a>
-          <a class="repo-button repo-button--small repo-button--twitter" href="https://twitter.com/shoelaceui" rel="noopener" target="_blank">
+          <a class="repo-button repo-button--small repo-button--twitter" href="https://twitter.com/shoelace_style" rel="noopener" target="_blank">
             <sl-icon src="/assets/images/twitter.svg"></sl-icon> Follow
           </a>
         `;

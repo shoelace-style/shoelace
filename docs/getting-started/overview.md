@@ -74,7 +74,7 @@ Designing, developing, and supporting this library requires a lot of time, effor
   <sl-icon src="/assets/images/github.svg"></sl-icon> Star
 </a>
 
-<a class="repo-button repo-button--twitter" href="https://twitter.com/shoelaceui" rel="noopener" target="_blank">
+<a class="repo-button repo-button--twitter" href="https://twitter.com/shoelace_style" rel="noopener" target="_blank">
   <sl-icon src="/assets/images/twitter.svg"></sl-icon> Follow
 </a>
 

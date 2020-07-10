@@ -15,7 +15,7 @@ Documentation: [shoelace.style](https://shoelace.style)
 
 Source: [github.com/claviska/shoelace](https://github.com/claviska/shoelace)
 
-Twitter: [@shoelaceUI](https://twitter.com/shoelaceui)
+Twitter: [@shoelace_style](https://twitter.com/shoelace_style)
 
 ---
 
@@ -81,6 +81,6 @@ Designing, developing, and supporting this library requires a lot of time, effor
 
 - [Become a sponsor](https://github.com/sponsors/claviska)
 - [Star on GitHub](https://github.com/claviska/shoelace/stargazers)
-- [Follow on Twitter](https://twitter.com/shoelaceui)
+- [Follow on Twitter](https://twitter.com/shoelace_style)
 
 Whether you're building Shoelace or building something _with_ Shoelace — have fun creating! 🥾
