@@ -118,41 +118,21 @@ One caveat is there's currently [no support for v-model on custom elements](http
 
 If that's too verbose, you can use a custom directive instead. 👇
 
-### Two-way Binding with a Custom Directive
+### Using a Custom Directive
 
-This will create a `v-sl-model` directive that works with Shoelace components. Add the following code to a file called `shoelace-model-directive.js`:
+You can use [this utility](https://www.npmjs.com/package/@shoelace-style/v-sl-model) to add a custom directive to Vue that will work just like `v-model` but for Shoelace components. To install the utility, use this command.
 
-```js
-const wm = new WeakMap();
-
-export default {
-  install: function (Vue) {
-    Vue.directive('sl-model', {
-      bind (el, binding, vnode) {
-        const inputHandler = event => Vue.set(vnode.context, binding.expression, event.target.value);
-        wm.set(el, inputHandler);
-        el.value = binding.value;
-        el.addEventListener('input', inputHandler);
-      },
-      componentUpdated(el, binding) {
-        el.value = binding.value;
-      },      
-      unbind(el) {
-        const inputHandler = wm.get(el);
-        el.removeEventListener(el, inputHandler);
-      }
-    })
-  }    
-};
+```sh
+npm install @shoelace-style/v-sl-model
 ```
 
 Next, import the directive and enable it like this.
 
 ```js
-import ShoelaceModelDirective from 'shoelace-model-directive.js';
+import ShoelaceModelDirective from '@shoelace-style/v-sl-model';
 
-Vue.use(ShoelaceModelDirective);
 Vue.config.ignoredElements = [/^sl-/];
+Vue.use(ShoelaceModelDirective);
 
 // Your init here
 new Vue({ ... });
@@ -166,7 +146,7 @@ Now you can use the `v-sl-model` directive to keep your data in sync!
 
 ## React
 
-React [mostly plays nice](https://custom-elements-everywhere.com/#react) with custom elements, but it's a bit finicky about props.
+React [doesn't play as nice](https://custom-elements-everywhere.com/#react) with custom elements — it's a bit finicky about props.
 
 > React passes all data to Custom Elements in the form of HTML attributes. For primitive data this is fine, but the system breaks down when passing rich data, like objects or arrays. In these instances you end up with stringified values like `some-attr="[object Object]"` which can't actually be used.
 
@@ -174,89 +154,27 @@ Event handling can also be cumbersome.
 
 > Because React implements its own synthetic event system, it cannot listen for DOM events coming from Custom Elements without the use of a workaround. Developers will need to reference their Custom Elements using a ref and manually attach event listeners with addEventListener. This makes working with Custom Elements cumbersome.
 
-If you're starting a new project, one solution is to consider using [Preact](https://preactjs.com/) as [this isn't an issue.](https://custom-elements-everywhere.com/#preact) If you're dead set on using React, you can wrap Shoelace components for a better experience. 👇
+If you're starting a new project, one solution is to consider using [Preact](https://preactjs.com/), which [handles custom elements just fine](https://custom-elements-everywhere.com/#preact). But if you'd still rather use React, you can wrap Shoelace components for a better experience. 👇
 
 ### Wrapping Components
 
-You can use this utility to wrap Shoelace components so they work like like regular React components. Add the following code to a file called `wrap-custom-element.js`:
+You can use [this utility](https://www.npmjs.com/package/@shoelace-style/react-wrapper) to wrap Shoelace components so they work like like regular React components. To install the utility, use this command.
 
-```js
-import React from 'react';
-
-export default tagName => {
-  const CustomElement = tagName;
-
-  return class extends React.Component {
-    constructor(props) {
-      super(props);
-      this.element = React.createRef();
-    }
-
-    componentDidMount() {
-      this.syncProps(this.props);
-    }
-
-    componentWillReceiveProps(props) {
-      this.syncProps(props);
-    }
-
-    syncProps(props) {
-      const el = this.element.current;
-      Object.keys(props).forEach(name => {
-        if (name === 'children' || name === 'style') {
-          return;
-        }
-
-        if (name.indexOf('on') === 0 && name[2] === name[2].toUpperCase()) {
-          this.syncEvent(name.substring(2), props[name]);
-        } else {
-          el[name] = props[name];
-        }
-      });
-    }
-
-    syncEvent(eventName, newEventHandler) {
-      const el = this.element.current;
-      const eventNameLc = eventName[0].toLowerCase() + eventName.substring(1);
-      const eventStore = el.__events || (el.__events = {});
-      const oldEventHandler = eventStore[eventNameLc];
-
-      if (oldEventHandler) {
-        el.removeEventListener(eventNameLc, oldEventHandler);
-      }
-
-      if (newEventHandler) {
-        el.addEventListener(
-          eventNameLc,
-          (eventStore[eventNameLc] = function handler(event) {
-            newEventHandler.call(this, event);
-          })
-        );
-      }
-    }
-
-    render() {
-      return (
-        <CustomElement ref={this.element} style={this.props.style}>
-          {this.props.children}
-        </CustomElement>
-      );
-    }
-  };
-}
+```sh
+npm install @shoelace-style/react-wrapper
 ```
 
-Then you can import Shoelace components and use them like this.
+Now you can import Shoelace components and use them as if they were React components.
 
 ```js
-import wrapCustomElement from 'wrap-custom-element.js';
+import wrapCustomElement from '@shoelace-style/react-wrapper';
 
 const ShoelaceButton = wrapCustomElement('sl-button');
 
 return <ShoelaceButton type="primary">Click me</ShoelaceButton>;
 ```
 
-A reference ("ref") to the underlying Shoelace element is exposed through the `element` property so you can access it directly. This is useful for calling methods.
+A reference ("ref") to the underlying custom element is exposed through the `element` property so you can access it directly. This is useful for calling methods.
 
 ```jsx
 <ShoelaceButton 
