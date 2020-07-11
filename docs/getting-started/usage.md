@@ -96,7 +96,7 @@ For example, both `<button>` and `<sl-button>` have a `type` attribute, but they
 
 ## Vue
 
-Vue [plays nice](https://custom-elements-everywhere.com/#vue) with custom elements. Just make sure to tell it to ignore Shoelace components. This is pretty easy because they all start with `sl-`.
+Vue [plays nice](https://custom-elements-everywhere.com/#vue) with custom elements. You just have to tell it to ignore Shoelace components. This is pretty easy because they all start with `sl-`.
 
 ```js
 Vue.config.ignoredElements = [/^sl-/];
@@ -106,7 +106,7 @@ new Vue({ ... });
 
 ### Two-way Binding
 
-One caveat is there's currently [no support for v-model on custom elements](https://github.com/vuejs/vue/issues/7830), but you can handle two-way binding manually.
+One caveat is there's currently [no support for v-model on custom elements](https://github.com/vuejs/vue/issues/7830), but you can still achieve two-way binding manually.
 
 ```html
 <!-- This doesn't work -->
@@ -120,7 +120,7 @@ If that's too verbose, you can use a custom directive instead. 👇
 
 ### Using a Custom Directive
 
-You can use [this utility](https://www.npmjs.com/package/@shoelace-style/vue-sl-model) to add a custom directive to Vue that will work just like `v-model` but for Shoelace components. To install the utility, use this command.
+You can use [this utility](https://www.npmjs.com/package/@shoelace-style/vue-sl-model) to add a custom directive to Vue that will work just like `v-model` but for Shoelace components. To install it, use this command.
 
 ```sh
 npm install @shoelace-style/vue-sl-model
@@ -154,11 +154,13 @@ Event handling can also be cumbersome.
 
 > Because React implements its own synthetic event system, it cannot listen for DOM events coming from Custom Elements without the use of a workaround. Developers will need to reference their Custom Elements using a ref and manually attach event listeners with addEventListener. This makes working with Custom Elements cumbersome.
 
-If you're starting a new project, one solution is to consider using [Preact](https://preactjs.com/), which [handles custom elements just fine](https://custom-elements-everywhere.com/#preact). But if you'd still rather use React, you can wrap Shoelace components for a better experience. 👇
+Fortunately, there's a utility that will wrap Shoelace components so you can use them as if they were React components. 👇
+
+?> If you're starting a new project, consider using [Preact](https://preactjs.com/) as an alternative. It shares the same API as React and [handles custom elements quite well](https://custom-elements-everywhere.com/#preact).
 
 ### Wrapping Components
 
-You can use [this utility](https://www.npmjs.com/package/@shoelace-style/react-wrapper) to wrap Shoelace components so they work like like regular React components. To install the utility, use this command.
+You can use [this utility](https://www.npmjs.com/package/@shoelace-style/react-wrapper) to wrap Shoelace components so they work like like regular React components. To install it, use this command.
 
 ```sh
 npm install @shoelace-style/react-wrapper
