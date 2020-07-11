@@ -146,7 +146,7 @@ Now you can use the `v-sl-model` directive to keep your data in sync!
 
 ## React
 
-React [doesn't play as nice](https://custom-elements-everywhere.com/#react) with custom elements — it's a bit finicky about props.
+React [doesn't play nice](https://custom-elements-everywhere.com/#react) with custom elements — it's a bit finicky about props.
 
 > React passes all data to Custom Elements in the form of HTML attributes. For primitive data this is fine, but the system breaks down when passing rich data, like objects or arrays. In these instances you end up with stringified values like `some-attr="[object Object]"` which can't actually be used.
 
