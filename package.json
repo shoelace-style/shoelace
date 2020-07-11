@@ -13,6 +13,10 @@
     "dist/",
     "loader/"
   ],
+  "funding": {
+    "type": "individual",
+    "url": "https://github.com/sponsors/claviska"
+  },
   "scripts": {
     "build": "stencil build --docs",
     "dev": "stencil build --dev --docs --watch --serve --port 4001 --no-open",
