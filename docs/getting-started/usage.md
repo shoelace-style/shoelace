@@ -120,16 +120,16 @@ If that's too verbose, you can use a custom directive instead. 👇
 
 ### Using a Custom Directive
 
-You can use [this utility](https://www.npmjs.com/package/@shoelace-style/v-sl-model) to add a custom directive to Vue that will work just like `v-model` but for Shoelace components. To install the utility, use this command.
+You can use [this utility](https://www.npmjs.com/package/@shoelace-style/vue-sl-model) to add a custom directive to Vue that will work just like `v-model` but for Shoelace components. To install the utility, use this command.
 
 ```sh
-npm install @shoelace-style/v-sl-model
+npm install @shoelace-style/vue-sl-model
 ```
 
 Next, import the directive and enable it like this.
 
 ```js
-import ShoelaceModelDirective from '@shoelace-style/v-sl-model';
+import ShoelaceModelDirective from '@shoelace-style/vue-sl-model';
 
 Vue.config.ignoredElements = [/^sl-/];
 Vue.use(ShoelaceModelDirective);
