@@ -594,14 +594,6 @@ export namespace Components {
         "value": string | Array<string>;
     }
     interface SlSpinner {
-        /**
-          * The spinner's size.
-         */
-        "size": number;
-        /**
-          * The stroke width of the spinner in pixels.
-         */
-        "strokeWidth": number;
     }
     interface SlSwitch {
         /**
@@ -1720,14 +1712,6 @@ declare namespace LocalJSX {
         "value"?: string | Array<string>;
     }
     interface SlSpinner {
-        /**
-          * The spinner's size.
-         */
-        "size"?: number;
-        /**
-          * The stroke width of the spinner in pixels.
-         */
-        "strokeWidth"?: number;
     }
     interface SlSwitch {
         /**

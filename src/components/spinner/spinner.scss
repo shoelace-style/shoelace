@@ -1,15 +1,19 @@
 @import 'component';
 
 :host {
-  display: inline-block;
+  display: inline-flex;
+
+  --stroke-width: 2px;
+  --color: var(--sl-color-primary-50);
 }
 
 .spinner {
   display: inline-block;
+  width: 1em;
+  height: 1em;
   border-radius: 50%;
-  border: solid var(--sl-color-primary-50);
+  border: solid var(--stroke-width) var(--color);
   border-bottom-color: transparent;
-  vertical-align: middle;
   animation: 1s linear infinite spin;
 }
 

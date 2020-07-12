@@ -18,6 +18,7 @@ export class Button {
   constructor() {
     this.handleBlur = this.handleBlur.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   button: HTMLButtonElement;
@@ -82,6 +83,13 @@ export class Button {
     this.slFocus.emit();
   }
 
+  handleClick(event: MouseEvent) {
+    if (this.disabled || this.loading) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  }
+
   render() {
     return (
       <button
@@ -117,6 +125,7 @@ export class Button {
         type={this.submit ? 'submit' : 'button'}
         onBlur={this.handleBlur}
         onFocus={this.handleFocus}
+        onClick={this.handleClick}
       >
         <span class="button__prefix">
           <slot name="prefix" />
@@ -142,7 +151,7 @@ export class Button {
           </span>
         )}
 
-        {this.loading && <span class="button__spinner" />}
+        {this.loading && <sl-spinner />}
       </button>
     );
   }

@@ -364,7 +364,7 @@
 
 .button--loading {
   position: relative;
-  pointer-events: none;
+  cursor: wait;
 
   .button__prefix,
   .button__label,
@@ -373,25 +373,14 @@
     visibility: hidden;
   }
 
-  .button__spinner {
+  sl-spinner {
+    --color: currentColor;
+    --stroke-width: 1px;
     position: absolute;
+    height: 1em;
+    width: 1em;
     top: calc(50% - 0.5em);
     left: calc(50% - 0.5em);
-    width: 1em;
-    height: 1em;
-    border: solid 1px currentColor;
-    border-bottom-color: transparent;
-    border-radius: 50%;
-    animation: 1s linear infinite spin;
-  }
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
   }
 }
 
