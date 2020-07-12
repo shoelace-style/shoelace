@@ -18,6 +18,8 @@ Tooltip's use `display: contents` so they won't interfere with how elements are 
 
 ### Placement
 
+Use the `placement` attribute to set the preferred placement of the tooltip.
+
 ```html preview
 <div class="tooltip-placement-example">
   <div class="tooltip-placement-example-row">
@@ -109,6 +111,8 @@ Tooltip's use `display: contents` so they won't interfere with how elements are 
 
 ### Click Trigger
 
+Set the `trigger` attribute to `click` to toggle the tooltip on click instead of hover.
+
 ```html preview
 <sl-tooltip content="Click again to dismiss" trigger="click">
   <sl-button>Click to Toggle</sl-button>
@@ -117,10 +121,12 @@ Tooltip's use `display: contents` so they won't interfere with how elements are 
 
 ### Manual Trigger
 
+Tooltips can be controller programmatically by setting the `trigger` attribute to `manual`. Use the `open` prop to control when the tooltip is shown.
+
 ```html preview
 <sl-button style="margin-right: 4rem;">Toggle Manually</sl-button>
 
-<sl-tooltip content="This is an avatar" class="manual-tooltip">
+<sl-tooltip content="This is an avatar" trigger="manual" class="manual-tooltip">
   <sl-avatar></sl-avatar>
 </sl-tooltip>
 
@@ -132,10 +138,12 @@ Tooltip's use `display: contents` so they won't interfere with how elements are 
 </script>
 ```
 
-### No Arrows
+### Remove Arrows
+
+You can control the size of tooltip arrows by overriding the `--sl-tooltip-arrow-size` design token.
 
 ```html preview
-<div style="--sl-tooltip-arrow-size: 0">
+<div style="--sl-tooltip-arrow-size: 0;">
   <sl-tooltip content="This is a tooltip">
     <sl-button>Above</sl-button>
   </sl-tooltip>
@@ -145,5 +153,14 @@ Tooltip's use `display: contents` so they won't interfere with how elements are 
   </sl-tooltip>
 </div>
 ```
+
+To override it globally, set it in a root block in your stylesheet after `shoelace.css` is loaded.
+
+```css
+:root {
+  --sl-tooltip-arrow-size: 0;
+}
+```
+
 
 [component-metadata:sl-tooltip]

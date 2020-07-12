@@ -4,6 +4,8 @@
 
 Menus provide a list of options for the user.
 
+Use [menu items](/components/menu-item.md), [menu dividers](/components/menu-divider.md), and [menu labels](/components/menu-label.md) to compose a menu.
+
 ```html preview
 <sl-menu
   style="max-width: 200px; border: solid 1px var(--sl-color-gray-90); border-radius: var(--sl-border-radius-medium);"

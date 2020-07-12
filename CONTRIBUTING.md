@@ -105,3 +105,7 @@ Boolean props should _always_ default to `false`, otherwise there's no way for t
 The Shoelace _source_ is developed using Sass for the convenience of nested selectors, imports, and tedious things such as color palette generation. By design, Sass variables, color functions, and other preprocessor-specific feaures are not used in the source and will not be accepted in a PR.
 
 Consumers of the library should never need to worry about preprocessing the library.
+
+### Positioning Popovers
+
+Shoelace uses an internal popover utility for dropdowns, tooltips, etc. This is a light abstraction of Popper.js designed to make positioning and transitioning things easy and consistent throughout the library. When possible, use this utility instead of relying on Popper directly. See `src/utilities/popover.ts` for details.

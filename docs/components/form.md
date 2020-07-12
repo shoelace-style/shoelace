@@ -4,7 +4,9 @@
 
 Forms collect data that can easily be processed and sent to a server.
 
-All of Shoelace's components make use of the [shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM) to encapsulate markup, style, and behavior. One caveat of this approach is that native `<form>` elements don't recognize Shoelace form controls. This component solves that problem by serializing _both_ Shoelace form controls and native form controls.
+All of Shoelace's components make use of the [shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM) to encapsulate markup, style, and behavior. One caveat of this approach is that native `<form>` elements don't recognize Shoelace form controls.
+
+This component solves that problem by serializing _both_ Shoelace form controls and native form controls. The resulting form data is exposed in the `slSubmit` event in a [`FormData`](https://developer.mozilla.org/en-US/docs/Web/API/FormData) object.
 
 ```html preview
 <sl-form class="form-overview">
@@ -28,21 +30,21 @@ All of Shoelace's components make use of the [shadow DOM](https://developer.mozi
 
   form.addEventListener('slSubmit', event => {
     const formData = event.detail.formData;
-    const formControls = event.detail.formControls;
     let output = '';
 
-    // do something with the form data...
+    // Do something with the form data
     for (const entry of formData.entries()) {
       output += `${entry[0]}: ${entry[1]}\n`;
     }
     alert(output);
 
-    // ...or do something with the raw form controls
-    console.log(formControls);
+    // Tip: you can also access every form control that was serialized, which
+    // is useful for validation purposes.
+    console.log(event.detail.formControls);
   });
 </script>
 ```
 
-?> Shoelace forms don't make use of `action` and `method` attributes, and they don't submit automatically like native forms. To handle submission, you need to listen for the `slSubmit` event as shown in the example above.
+?> Shoelace forms don't make use of `action` and `method` attributes and they don't submit automatically like native forms. To handle submission, you need to listen for the `slSubmit` event as shown in the example above.
 
 [component-metadata:sl-form]

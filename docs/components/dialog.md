@@ -32,6 +32,30 @@ Dialogs appear above the page and require the user's immediate attention.
 
 ## Examples
 
+### Custom Width
+
+Use the `--width` custom property to set the dialog's width.
+
+```html preview
+<sl-dialog label="Dialog" class="dialog-width" style="--width: 50vw;">
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  <sl-button slot="footer" type="primary">Close</sl-button>
+</sl-dialog>
+
+<sl-button>Open Dialog</sl-button>
+
+<script>
+  (() => {
+    const dialog = document.querySelector('.dialog-width');
+    const openButton = dialog.nextElementSibling;
+    const closeButton = dialog.querySelector('sl-button[slot="footer"]');
+
+    openButton.addEventListener('click', () => dialog.show());
+    closeButton.addEventListener('click', () => dialog.hide());
+  })();
+</script>
+```
+
 ### Scrolling
 
 By design, a dialog's height will never exceed that of the viewport. As such, dialogs will not scroll with the page ensuring the header and footer are always accessible to the user.
@@ -58,7 +82,7 @@ By design, a dialog's height will never exceed that of the viewport. As such, di
 </script>
 ```
 
-### Ignore Overlay Clicks
+### Ignoring Clicks on the Overlay
 
 By default, dialogs are closed when the user clicks or taps on the overlay. To prevent this behavior, cancel the `slOverlayDismiss` event.
 

@@ -2,9 +2,7 @@
 
 [component-header:sl-select]
 
-Selects...
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Selects allow you to choose one or more items from a dropdown menu.
 
 ```html preview
 <sl-select placeholder="Select one">
@@ -24,6 +22,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 ### Labels
 
+Use the `label` attribute to give the select an accessible label.
+
 ```html preview
 <sl-select label="Select one">
   <sl-menu-item value="option-1">Option 1</sl-menu-item>
@@ -33,6 +33,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 ```
 
 ### Multiple
+
+To allow multiple options to be selected, use the `multiple` attribute.
 
 ```html preview
 <sl-select placeholder="Select a few" multiple>
@@ -47,6 +49,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 ```
 
 ### Size
+
+Use the `size` attribute to change a select's size.
 
 ```html preview
 <sl-select placeholder="Small" size="small" multiple>
@@ -72,7 +76,21 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 </sl-select>
 ```
 
+### Pill
+
+Use the `pill` prop to give selects rounded edges.
+
+```html preview
+<sl-select label="Select one" pill multiple>
+  <sl-menu-item value="option-1">Option 1</sl-menu-item>
+  <sl-menu-item value="option-2">Option 2</sl-menu-item>
+  <sl-menu-item value="option-3">Option 3</sl-menu-item>
+</sl-select>
+```
+
 ### Groups
+
+Options can be grouped visually using menu labels and menu dividers.
 
 ```html preview
 <sl-select placeholder="Select one">
@@ -89,6 +107,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 ```
 
 ### Disabled
+
+Use the `disabled` prop to disable a select.
 
 ```html preview
 <sl-select placeholder="Disabled" disabled>

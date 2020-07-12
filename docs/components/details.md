@@ -15,6 +15,8 @@ Details show a brief summary and expand to show additional content.
 
 ### Disabled
 
+Use the `disable` attribute to prevent the details from expanding.
+
 ```html preview
 <sl-details summary="Disabled" disabled>
   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
@@ -55,7 +57,7 @@ Details are designed to function independently, but you can simulate a group or 
 
 <style>
   .details-group-example sl-details:not(:last-of-type) {
-    margin-bottom: 0.5rem;
+    margin-bottom: var(--sl-spacing-xx-small);
   }
 </style>
 ```

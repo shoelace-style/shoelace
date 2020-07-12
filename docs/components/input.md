@@ -5,7 +5,7 @@
 Inputs collect data from the user.
 
 ```html preview
-<sl-input type="text" placeholder="Input"></sl-input>
+<sl-input type="text"></sl-input>
 ```
 
 ?> This component doesn't work with standard forms. Use [`<sl-form>`](/components/form.md) instead.
@@ -14,13 +14,25 @@ Inputs collect data from the user.
 
 ### Labels
 
+Use the `label` attribute to give the input an accessible label.
+
 ```html preview
 <sl-input type="text" label="Name"></sl-input>
 <br>
 <sl-input type="email" label="Email" placeholder="bob@example.com"></sl-input>
 ```
 
+### Placeholder
+
+Use the `placeholder` attribute to add a placeholder.
+
+```html preview
+<sl-input type="text" placeholder="Type something"></sl-input>
+```
+
 ### Size
+
+Use the `size` attribute to change an input's size.
 
 ```html preview
 <sl-input placeholder="Small" size="small"></sl-input>
@@ -32,6 +44,8 @@ Inputs collect data from the user.
 
 ### Pill
 
+Use the `pill` prop to give inputs rounded edges.
+
 ```html preview
 <sl-input placeholder="Small" size="small" pill></sl-input>
 <br>
@@ -41,6 +55,8 @@ Inputs collect data from the user.
 ```
 
 ### Prefix & Suffix Icons
+
+Use the `prefix` and `suffix` slots to add icons.
 
 ```html preview
 <sl-input type="text" placeholder="Small" size="small">
@@ -61,6 +77,8 @@ Inputs collect data from the user.
 
 ### Clearable
 
+Add the `clearable` prop to add a clear button when the input has content.
+
 ```html preview
 <sl-input type="text" placeholder="Clearable" size="small" clearable></sl-input>
 <br>
@@ -71,6 +89,8 @@ Inputs collect data from the user.
 
 ### Toggle Password
 
+Add the `toggle-password` prop to add a toggle button that will show the password when activated.
+
 ```html preview
 <sl-input type="password" placeholder="Password Toggle" size="small" toggle-password></sl-input>
 <br>
@@ -80,6 +100,8 @@ Inputs collect data from the user.
 ```
 
 ### Disabled
+
+Use the `disabled` attribute to disable an input.
 
 ```html preview
 <sl-input type="text" placeholder="Disabled" size="small" disabled></sl-input>

@@ -16,6 +16,8 @@ Tags are used as labels to organize things or to indicate a selection.
 
 ### Size
 
+Use the `size` prop to change a tab's size.
+
 ```html preview
 <sl-tag type="primary" size="small">Primary</sl-tag>
 <sl-tag type="success" size="small">Success</sl-tag>
@@ -42,6 +44,8 @@ Tags are used as labels to organize things or to indicate a selection.
 
 ### Pill
 
+Use the `pill` prop to give tabs rounded edges.
+
 ```html preview
 <sl-tag type="primary" size="small" pill>Primary</sl-tag>
 <sl-tag type="success" size="small" pill>Success</sl-tag>
@@ -67,6 +71,8 @@ Tags are used as labels to organize things or to indicate a selection.
 ```
 
 ### Removable
+
+Use the `removable` attribute to add a remove button to the tag.
 
 ```html preview
 <sl-tag type="primary" size="small" removable>Primary</sl-tag>

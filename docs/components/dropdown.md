@@ -4,7 +4,7 @@
 
 Dropdowns expose additional content that "drops down" in a panel.
 
-Dropdowns consist of a trigger and a panel. Activating the trigger will open the panel and interacting outside of the panel will close it.
+Dropdowns consist of a trigger and a panel. By default, activating the trigger will expose the panel and interacting outside of the panel will close it.
 
 Dropdowns are designed to work well with [menus](/components/menu.md) to provide a list of options the user can select from. However, dropdowns can also be used in lower-level applications (e.g. [color picker](/components/color-picker.md) and [select](/components/select.md)). The API gives you complete control over showing, hiding, and positioning the panel.
 
@@ -35,6 +35,8 @@ Dropdowns are designed to work well with [menus](/components/menu.md) to provide
 
 ### Placement
 
+The preferred placement of the dropdown can be set with the `placement` attribute. Note that the actual position may vary to ensure the panel remains in the viewport.
+
 ```html preview
 <sl-dropdown placement="top-start">
   <sl-button slot="trigger" caret>Edit</sl-button>
@@ -50,6 +52,8 @@ Dropdowns are designed to work well with [menus](/components/menu.md) to provide
 ```
 
 ### Distance
+
+The distance from the panel to the trigger can be customized using the `distance` attribute. This value is specified in pixels.
 
 ```html preview
 <sl-dropdown distance="30">
@@ -67,6 +71,8 @@ Dropdowns are designed to work well with [menus](/components/menu.md) to provide
 
 ### Skidding
 
+The offset of the panel along the trigger can be customized using the `skidding` attribute. This value is specified in pixels.
+
 ```html preview
 <sl-dropdown skidding="30">
   <sl-button slot="trigger" caret>Edit</sl-button>
@@ -77,36 +83,6 @@ Dropdowns are designed to work well with [menus](/components/menu.md) to provide
     <sl-menu-divider></sl-menu-divider>
     <sl-menu-item>Find</sl-menu-item>
     <sl-menu-item>Replace</sl-menu-item>
-  </sl-menu>
-</sl-dropdown>
-```
-
-### Scrolling Content
-
-```html preview
-<sl-dropdown>
-  <sl-button slot="trigger" caret>Scrolling Menu</sl-button>
-  <sl-menu>
-    <sl-menu-item>Item 1</sl-menu-item>
-    <sl-menu-item>Item 2</sl-menu-item>
-    <sl-menu-item>Item 3</sl-menu-item>
-    <sl-menu-item>Item 4</sl-menu-item>
-    <sl-menu-item>Item 5</sl-menu-item>
-    <sl-menu-item>Item 6</sl-menu-item>
-    <sl-menu-item>Item 7</sl-menu-item>
-    <sl-menu-item>Item 8</sl-menu-item>
-    <sl-menu-item>Item 9</sl-menu-item>
-    <sl-menu-item>Item 10</sl-menu-item>
-    <sl-menu-item>Item 11</sl-menu-item>
-    <sl-menu-item>Item 12</sl-menu-item>
-    <sl-menu-item>Item 13</sl-menu-item>
-    <sl-menu-item>Item 14</sl-menu-item>
-    <sl-menu-item>Item 15</sl-menu-item>
-    <sl-menu-item>Item 16</sl-menu-item>
-    <sl-menu-item>Item 17</sl-menu-item>
-    <sl-menu-item>Item 18</sl-menu-item>
-    <sl-menu-item>Item 19</sl-menu-item>
-    <sl-menu-item>Item 20</sl-menu-item>
   </sl-menu>
 </sl-dropdown>
 ```

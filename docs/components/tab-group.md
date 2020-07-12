@@ -4,6 +4,8 @@
 
 Tab groups organize content into a container that shows one section at a time.
 
+Tab groups make use of [tabs](/components/tab.md) and [tab panels](/components/tab-panel.md). Each tab must be slotted into the `nav` slot and its `panel` must refer to a tab panel of the same name.
+
 ```html preview
 <sl-tab-group placement="top">
   <sl-tab slot="nav" panel="general">General</sl-tab>
@@ -22,6 +24,8 @@ Tab groups organize content into a container that shows one section at a time.
 
 ### Tabs on Bottom
 
+Tabs can be shown on the bottom by setting `placement` to `bottom`.
+
 ```html preview
 <sl-tab-group placement="bottom">
   <sl-tab slot="nav" panel="general">General</sl-tab>
@@ -37,6 +41,8 @@ Tab groups organize content into a container that shows one section at a time.
 ```
 
 ### Tabs on Left
+
+Tabs can be shown on the left by setting `placement` to `left`.
 
 ```html preview
 <sl-tab-group placement="left">
@@ -54,6 +60,8 @@ Tab groups organize content into a container that shows one section at a time.
 
 ### Tabs on Right
 
+Tabs can be shown on the right by setting `placement` to `right`.
+
 ```html preview
 <sl-tab-group placement="right">
   <sl-tab slot="nav" panel="general">General</sl-tab>
@@ -69,6 +77,8 @@ Tab groups organize content into a container that shows one section at a time.
 ```
 
 ### Scrolling Tabs
+
+When there are more tabs than horizontal space allows, the nav will be scrollable.
 
 ```html preview
 <sl-tab-group>
