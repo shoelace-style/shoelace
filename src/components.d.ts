@@ -379,7 +379,7 @@ export namespace Components {
          */
         "pattern": string;
         /**
-          * Set to true to draw a pill-style button with rounded edges.
+          * Set to true to draw a pill-style input with rounded edges.
          */
         "pill": boolean;
         /**
@@ -468,10 +468,6 @@ export namespace Components {
     interface SlMenuLabel {
     }
     interface SlProgressBar {
-        /**
-          * The height of the progress bar in pixels.
-         */
-        "height": number;
         /**
           * The progress bar's percentage, 0 to 100.
          */
@@ -581,6 +577,10 @@ export namespace Components {
          */
         "name": string;
         /**
+          * Set to true to draw a pill-style select with rounded edges.
+         */
+        "pill": boolean;
+        /**
           * The select's placeholder text.
          */
         "placeholder": string;
@@ -665,7 +665,7 @@ export namespace Components {
     }
     interface SlTag {
         /**
-          * Set to true to draw a pill-style button with rounded edges.
+          * Set to true to draw a pill-style tag with rounded edges.
          */
         "pill": boolean;
         /**
@@ -1493,7 +1493,7 @@ declare namespace LocalJSX {
          */
         "pattern"?: string;
         /**
-          * Set to true to draw a pill-style button with rounded edges.
+          * Set to true to draw a pill-style input with rounded edges.
          */
         "pill"?: boolean;
         /**
@@ -1566,10 +1566,6 @@ declare namespace LocalJSX {
     interface SlMenuLabel {
     }
     interface SlProgressBar {
-        /**
-          * The height of the progress bar in pixels.
-         */
-        "height"?: number;
         /**
           * The progress bar's percentage, 0 to 100.
          */
@@ -1699,6 +1695,10 @@ declare namespace LocalJSX {
          */
         "onSlFocus"?: (event: CustomEvent<any>) => void;
         /**
+          * Set to true to draw a pill-style select with rounded edges.
+         */
+        "pill"?: boolean;
+        /**
           * The select's placeholder text.
          */
         "placeholder"?: string;
@@ -1787,7 +1787,7 @@ declare namespace LocalJSX {
          */
         "onSlRemove"?: (event: CustomEvent<any>) => void;
         /**
-          * Set to true to draw a pill-style button with rounded edges.
+          * Set to true to draw a pill-style tag with rounded edges.
          */
         "pill"?: boolean;
         /**

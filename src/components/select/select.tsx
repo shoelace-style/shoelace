@@ -66,6 +66,9 @@ export class Select {
   /** The value of the control. This will be a string or an array depending on `multiple`. */
   @Prop({ mutable: true }) value: string | Array<string> = '';
 
+  /** Set to true to draw a pill-style select with rounded edges. */
+  @Prop() pill = false;
+
   /** The select's label. */
   @Prop() label = '';
 
@@ -220,6 +223,7 @@ export class Select {
           <sl-tag
             type="info"
             size={this.size}
+            pill={this.pill}
             removable
             onClick={event => event.stopPropagation()}
             onSlRemove={() => {
@@ -294,7 +298,8 @@ export class Select {
             'select--multiple': this.multiple,
             'select--small': this.size === 'small',
             'select--medium': this.size === 'medium',
-            'select--large': this.size === 'large'
+            'select--large': this.size === 'large',
+            'select--pill': this.pill
           }}
           onSlShow={this.handleMenuShow}
           onSlHide={this.handleMenuHide}
@@ -307,6 +312,7 @@ export class Select {
             name={this.name}
             value={this.displayLabel}
             disabled={this.disabled}
+            pill={this.pill}
             placeholder={this.displayLabel === '' && this.displayTags.length === 0 ? this.placeholder : null}
             readonly={true}
             size={this.size}
