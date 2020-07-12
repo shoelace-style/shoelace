@@ -5,6 +5,16 @@
 Badges are used to draw attention and display statuses or counts.
 
 ```html preview
+<sl-badge>Badge</sl-icon></sl-badge>
+```
+
+## Examples
+
+### Types
+
+Set the `type` attribute to change the badge's type.
+
+```html preview
 <sl-badge type="primary">Primary</sl-icon></sl-badge>
 <sl-badge type="success">Success</sl-badge>
 <sl-badge type="info">Info</sl-badge>
@@ -12,9 +22,7 @@ Badges are used to draw attention and display statuses or counts.
 <sl-badge type="danger">Danger</sl-badge>
 ```
 
-## Examples
-
-### Buttons
+### With Buttons
 
 One of the most common use cases for badges is attaching them to buttons. To make this easier, badges will be automatically positioned at the top-right when they're a child of a button.
 
@@ -35,7 +43,7 @@ One of the most common use cases for badges is attaching them to buttons. To mak
 </sl-button>
 ```
 
-### Menu Items
+### With Menu Items
 
 When including badges in menu items, use the `suffix` slot to make sure they're aligned correctly.
 

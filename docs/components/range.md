@@ -8,6 +8,8 @@ Ranges allow the user to select a single value within a given range using a slid
 <sl-range min="0" max="100" step="1"></sl-range>
 ```
 
+?> This component doesn't work with standard forms. Use [`<sl-form>`](/components/form.md) instead.
+
 ## Examples
 
 ### Custom Formatter

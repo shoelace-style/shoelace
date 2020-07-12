@@ -8,6 +8,8 @@ Inputs collect data from the user.
 <sl-input type="text" placeholder="Input"></sl-input>
 ```
 
+?> This component doesn't work with standard forms. Use [`<sl-form>`](/components/form.md) instead.
+
 ## Examples
 
 ### Labels

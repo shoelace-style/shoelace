@@ -8,6 +8,8 @@ Textareas collect data from the user and allow multiple lines of text.
 <sl-textarea placeholder="Textarea"></sl-textarea>
 ```
 
+?> This component doesn't work with standard forms. Use [`<sl-form>`](/components/form.md) instead.
+
 ## Examples
 
 ### Labels

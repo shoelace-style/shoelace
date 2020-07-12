@@ -5,6 +5,16 @@
 Buttons represent actions that are available to the user.
 
 ```html preview
+<sl-button>Button</sl-button>
+```
+
+## Examples
+
+### Types
+
+Use the `type` attribute to set the button's type.
+
+```html preview
 <sl-button type="default">Default</sl-button>
 <sl-button type="primary">Primary</sl-button>
 <sl-button type="success">Success</sl-button>
@@ -12,8 +22,6 @@ Buttons represent actions that are available to the user.
 <sl-button type="warning">Warning</sl-button>
 <sl-button type="danger">Danger</sl-button>
 ```
-
-## Examples
 
 ### Sizes
 
@@ -25,20 +33,17 @@ Use the `size` prop to change a button's size.
 <sl-button size="large">Large</sl-button>
 ```
 
-### Pill
+### Pill Buttons
 
 Use the `pill` prop to give buttons rounded edges.
 
 ```html preview
-<sl-button type="default" pill>Default</sl-button>
-<sl-button type="primary" pill>Primary</sl-button>
-<sl-button type="success" pill>Success</sl-button>
-<sl-button type="info" pill>Info</sl-button>
-<sl-button type="warning" pill>Warning</sl-button>
-<sl-button type="danger" pill>Danger</sl-button>
+<sl-button size="small" pill>Small</sl-button>
+<sl-button size="medium" pill>Medium</sl-button>
+<sl-button size="large" pill>Large</sl-button>
 ```
 
-### Circle
+### Circle Buttons
 
 Use the `circle` prop to create circular icon buttons.
 
@@ -48,9 +53,9 @@ Use the `circle` prop to create circular icon buttons.
 <sl-button type="default" size="large" circle><sl-icon name="gear"></sl-icon></sl-button>
 ```
 
-### Text
+### Text Buttons
 
-Use `type="text"` to create text buttons, which share the same size as regular buttons but don't have backgrounds or borders.
+Use the `text` type to create text buttons that share the same size as regular buttons but don't have backgrounds or borders.
 
 ```html preview
 <sl-button type="text" size="small">Text</sl-button>
@@ -58,9 +63,9 @@ Use `type="text"` to create text buttons, which share the same size as regular b
 <sl-button type="text" size="large">Text</sl-button>
 ```
 
-### Custom Width
+### Setting a Custom Width
 
-Custom width buttons can be created by setting the button's `width`.
+As expected, buttons can be given a custom width by setting its `width`. This is useful for making buttons span the full width of their container on smaller screens.
 
 ```html preview
 <sl-button type="default" size="small" style="width: 100%; margin-bottom: 1rem;">Small</sl-button>
@@ -68,7 +73,7 @@ Custom width buttons can be created by setting the button's `width`.
 <sl-button type="default" size="large" style="width: 100%;">Large</sl-button>
 ```
 
-### Icons
+### Prefix and Suffix Icons
 
 Use the `prefix` and `suffix` slots to add icons.
 
@@ -102,7 +107,7 @@ Use the `caret` prop to add a dropdown indicator when a button will trigger a dr
 
 ### Loading
 
-Use the `loading` prop to make a button busy. The width will remain the same as before, preventing adjacent elements from moving around.
+Use the `loading` prop to make a button busy. The width will remain the same as before, preventing adjacent elements from moving around. Clicks will be suppressed until the loading state is removed.
 
 ```html preview
 <sl-button type="default" loading>Default</sl-button>
@@ -115,7 +120,7 @@ Use the `loading` prop to make a button busy. The width will remain the same as 
 
 ### Disabled
 
-Use the `disabled` prop to disable a button.
+Use the `disabled` prop to disable a button. Clicks will be suppressed until the disabled state is removed.
 
 ```html preview
 <sl-button type="default" disabled>Default</sl-button>

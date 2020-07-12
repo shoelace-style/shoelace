@@ -10,12 +10,30 @@ Spinners are used to show the progress of an indeterminate operation.
 
 ## Examples
 
-## Size
+### Size
+
+Spinners are sized relative to the current font size. To change their size, set the `font-size` property on the spinner itself or on a parent element as shown below.
 
 ```html preview
-<sl-spinner size="16"></sl-spinner>
-<sl-spinner size="32"></sl-spinner>
-<sl-spinner size="48"></sl-spinner>
+<sl-spinner></sl-spinner>
+<sl-spinner style="font-size: 2rem;"></sl-spinner>
+<sl-spinner style="font-size: 3rem;"></sl-spinner>
+```
+
+### Stroke Width
+
+The width of the spinner can be changed by setting the `--stroke-width` custom property.
+
+```html preview
+<sl-spinner style="font-size: 2rem; --stroke-width: 6px;"></sl-spinner>
+```
+
+### Color
+
+The spinner's color can be changed by setting the `--color` custom property.
+
+```html preview
+<sl-spinner style="font-size: 2rem; --color: tomato;"></sl-spinner>
 ```
 
 [component-metadata:sl-spinner]

@@ -4,8 +4,10 @@
 
 Alerts are used to display important messages.
 
+Alerts are designed to be shown dynamically, so you need to include the `open` attribute to display them.
+
 ```html preview
-<sl-alert type="primary" open>
+<sl-alert open>
   <sl-icon slot="icon" name="info-circle"></sl-icon>
   This is a standard alert. You can customize its content and even the icon.
 </sl-alert>
@@ -14,6 +16,8 @@ Alerts are used to display important messages.
 ## Examples
 
 ### Types
+
+Set the `type` attribute to change the alert's type.
 
 ```html preview
 <sl-alert type="primary" open>
@@ -57,14 +61,25 @@ Alerts are used to display important messages.
 
 ### Closable
 
+Add the `closable` attribute to show a close button that will hide the alert.
+
 ```html preview
-<sl-alert type="primary" open closable>
+<sl-alert type="primary" open closable class="alert-closable">
   <sl-icon slot="icon" name="info-circle"></sl-icon>
   You can close this alert any time!
 </sl-alert>
+
+<script>
+  const alert = document.querySelector('.alert-closable');
+  alert.addEventListener('slAfterHide', () => {
+    setTimeout(() => alert.open = true, 2000);
+  });
+</script>
 ```
 
-### Without Icon
+### Without Icons
+
+Icons are optional. Simply omit the `icon` slot if you don't want them.
 
 ```html preview
 <sl-alert type="primary" open>

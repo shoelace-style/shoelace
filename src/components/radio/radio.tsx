@@ -75,6 +75,9 @@ export class Radio {
 
   getAllRadios() {
     const form = this.host.closest('sl-form, form') || document.body;
+
+    if (!this.name) return [];
+
     return [...form.querySelectorAll('sl-radio')].filter(
       (radio: HTMLSlRadioElement) => radio.name === this.name
     ) as HTMLSlRadioElement[];

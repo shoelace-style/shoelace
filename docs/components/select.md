@@ -18,6 +18,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 </sl-select>
 ```
 
+?> This component doesn't work with standard forms. Use [`<sl-form>`](/components/form.md) instead.
+
 ## Examples
 
 ### Labels
