@@ -16,16 +16,10 @@ export class ProgressBar {
   /** The progress bar's percentage, 0 to 100. */
   @Prop() percentage = 0;
 
-  /** The height of the progress bar in pixels. */
-  @Prop() height = 6;
-
   render() {
     return (
       <div
         class="progress-bar"
-        style={{
-          '--height': `${this.height}px`
-        }}
         role="progressbar"
         aria-valuemin="0"
         aria-valuemax="100"

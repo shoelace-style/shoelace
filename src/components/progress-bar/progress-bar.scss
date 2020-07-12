@@ -1,14 +1,19 @@
 @import 'component';
 
+/**
+ * @prop height: The progress bar's height.
+ */
 :host {
   display: block;
+
+  --height: 16px;
 }
 
 .progress-bar {
   position: relative;
   background: var(--sl-color-gray-90);
   height: var(--height);
-  border-radius: 12px;
+  border-radius: var(--sl-border-radius-pill);
   overflow: hidden;
 }
 
