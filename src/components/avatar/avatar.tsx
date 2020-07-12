@@ -29,7 +29,7 @@ export class Avatar {
   @Prop() initials = '';
 
   /** Initials to use as a fallback when no image is available (1-2 characters max recommended). */
-  @Prop() shape: 'circle' | 'square' = 'circle';
+  @Prop() shape: 'circle' | 'square' | 'rounded' = 'circle';
 
   handleImageError() {
     this.hasError = true;
@@ -43,6 +43,7 @@ export class Avatar {
         class={{
           avatar: true,
           'avatar--circle': this.shape === 'circle',
+          'avatar--rounded': this.shape === 'rounded',
           'avatar--square': this.shape === 'square'
         }}
       >

@@ -44,7 +44,7 @@ export namespace Components {
         /**
           * Initials to use as a fallback when no image is available (1-2 characters max recommended).
          */
-        "shape": 'circle' | 'square';
+        "shape": 'circle' | 'square' | 'rounded';
     }
     interface SlBadge {
         /**
@@ -1086,7 +1086,7 @@ declare namespace LocalJSX {
         /**
           * Initials to use as a fallback when no image is available (1-2 characters max recommended).
          */
-        "shape"?: 'circle' | 'square';
+        "shape"?: 'circle' | 'square' | 'rounded';
     }
     interface SlBadge {
         /**

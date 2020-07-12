@@ -31,8 +31,12 @@
   border-radius: var(--sl-border-radius-circle);
 }
 
-.avatar--square {
+.avatar--rounded {
   border-radius: var(--sl-border-radius-medium);
+}
+
+.avatar--square {
+  border-radius: 0;
 }
 
 .avatar__icon {
