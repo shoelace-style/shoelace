@@ -50,7 +50,7 @@ export class Input {
   /** The input's value attribute. */
   @Prop({ mutable: true }) value: string = '';
 
-  /** Set to true to draw a pill-style button with rounded edges. */
+  /** Set to true to draw a pill-style input with rounded edges. */
   @Prop() pill = false;
 
   /** The input's label. */

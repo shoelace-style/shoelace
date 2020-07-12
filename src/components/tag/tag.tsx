@@ -25,7 +25,7 @@ export class Tag {
   /** The tag's size. */
   @Prop() size: 'small' | 'medium' | 'large' = 'medium';
 
-  /** Set to true to draw a pill-style button with rounded edges. */
+  /** Set to true to draw a pill-style tag with rounded edges. */
   @Prop() pill = false;
 
   /** Set to true to make the tag removable. */
