@@ -94,6 +94,49 @@ For example, both `<button>` and `<sl-button>` have a `type` attribute, but they
 
 ?> **Don't make assumptions about a component's API!** To prevent unexpected behaviors, please take the time to review the documentation and make sure you understand what each property, method, and event is intended to do.
 
+## React
+
+React [doesn't play nice](https://custom-elements-everywhere.com/#react) with custom elements — it's a bit finicky about props.
+
+> React passes all data to Custom Elements in the form of HTML attributes. For primitive data this is fine, but the system breaks down when passing rich data, like objects or arrays. In these instances you end up with stringified values like `some-attr="[object Object]"` which can't actually be used.
+
+Event handling can also be cumbersome.
+
+> Because React implements its own synthetic event system, it cannot listen for DOM events coming from Custom Elements without the use of a workaround. Developers will need to reference their Custom Elements using a ref and manually attach event listeners with addEventListener. This makes working with Custom Elements cumbersome.
+
+Fortunately, there's a utility that will wrap Shoelace components so you can use them as if they were React components. 👇
+
+?> If you're starting a new project, consider using [Preact](https://preactjs.com/) as an alternative. It shares the same API as React and [handles custom elements quite well](https://custom-elements-everywhere.com/#preact).
+
+### Wrapping Components
+
+You can use [this utility](https://www.npmjs.com/package/@shoelace-style/react-wrapper) to wrap Shoelace components so they work like like regular React components. To install it, use this command.
+
+```sh
+npm install @shoelace-style/react-wrapper
+```
+
+Now you can "import" Shoelace components as React components! Remember to [install Shoelace](/getting-started/installation.md) as well, otherwise this won't work as intended.
+
+```js
+import wrapCustomElement from '@shoelace-style/react-wrapper';
+
+const ShoelaceButton = wrapCustomElement('sl-button');
+
+return <ShoelaceButton type="primary">Click me</ShoelaceButton>;
+```
+
+A reference ("ref") to the underlying custom element is exposed through the `element` property so you can access it directly. This is useful for calling methods.
+
+```jsx
+<ShoelaceButton 
+  ref={el => this.button = el} 
+  onClick={() => this.button.element.current.removeFocus()}
+>
+  Click me
+</ShoelaceButton>
+```
+
 ## Vue
 
 Vue [plays nice](https://custom-elements-everywhere.com/#vue) with custom elements. You just have to tell it to ignore Shoelace components. This is pretty easy because they all start with `sl-`.
@@ -144,45 +187,22 @@ Now you can use the `v-sl-model` directive to keep your data in sync!
 <sl-input v-sl-model="name">
 ```
 
-## React
+## Angular
 
-React [doesn't play nice](https://custom-elements-everywhere.com/#react) with custom elements — it's a bit finicky about props.
-
-> React passes all data to Custom Elements in the form of HTML attributes. For primitive data this is fine, but the system breaks down when passing rich data, like objects or arrays. In these instances you end up with stringified values like `some-attr="[object Object]"` which can't actually be used.
-
-Event handling can also be cumbersome.
-
-> Because React implements its own synthetic event system, it cannot listen for DOM events coming from Custom Elements without the use of a workaround. Developers will need to reference their Custom Elements using a ref and manually attach event listeners with addEventListener. This makes working with Custom Elements cumbersome.
-
-Fortunately, there's a utility that will wrap Shoelace components so you can use them as if they were React components. 👇
-
-?> If you're starting a new project, consider using [Preact](https://preactjs.com/) as an alternative. It shares the same API as React and [handles custom elements quite well](https://custom-elements-everywhere.com/#preact).
-
-### Wrapping Components
-
-You can use [this utility](https://www.npmjs.com/package/@shoelace-style/react-wrapper) to wrap Shoelace components so they work like like regular React components. To install it, use this command.
-
-```sh
-npm install @shoelace-style/react-wrapper
-```
-
-Now you can import Shoelace components and use them as if they were React components.
+Angular [plays nice](https://custom-elements-everywhere.com/#angular) with custom elements. Just make sure to apply the custom elements schema as shown below.
 
 ```js
-import wrapCustomElement from '@shoelace-style/react-wrapper';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
-const ShoelaceButton = wrapCustomElement('sl-button');
+import { AppComponent } from './app.component';
 
-return <ShoelaceButton type="primary">Click me</ShoelaceButton>;
-```
-
-A reference ("ref") to the underlying custom element is exposed through the `element` property so you can access it directly. This is useful for calling methods.
-
-```jsx
-<ShoelaceButton 
-  ref={el => this.button = el} 
-  onClick={() => this.button.element.current.removeFocus()}
->
-  Click me
-</ShoelaceButton>
+@NgModule({
+  declarations: [AppComponent],
+  imports: [BrowserModule],
+  providers: [],
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+})
+export class AppModule {}
 ```
