@@ -1,6 +1,6 @@
 # Customizing
 
-Shoelace can be customized at a high level through design tokens. This gives you control over theme colors and general styling. For more advanced customizations, you can make use of component parts and custom properties to target individual components.
+Shoelace components can be customized at a high level through design tokens. This gives you control over theme colors and general styling. For more advanced customizations, you can make use of component parts and custom properties to target individual components.
 
 ## Design Tokens
 
@@ -30,23 +30,46 @@ Whereas design tokens offer a high-level way to customize the library, component
 
 Shoelace components use a [shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM) to encapsulate their styles and behaviors. As a result, you can't simply target their internals with the usual CSS selectors. Instead, components expose "parts" that can be targetted with the [CSS part selector](https://developer.mozilla.org/en-US/docs/Web/CSS/::part), or `::part()`.
 
-Here's an example that targets a buttons label.
+Here's an example that modifies buttons with the `tomato-button` class.
 
-```css
-sl-button::part(label) {
-  color: tomato;
-}
+```html preview
+<sl-button class="tomato-button">
+  Tomato Button
+</sl-button>
+
+<style>
+  .tomato-button::part(base) {
+    background: white;
+    border: solid 1px tomato;
+  }
+
+  .tomato-button::part(base):hover {
+    background: rgba(255, 99, 71, .1);
+  }  
+
+  .tomato-button::part(base):active {
+    background: rgba(255, 99, 71, .2);
+  }    
+
+  .tomato-button::part(base):focus {
+    box-shadow: 0 0 0 3px rgba(255, 99, 71, .33);
+  }
+
+  .tomato-button::part(label) {
+    color: tomato;
+  }
+</style>
 ```
 
-At first glance, this might seem a bit limiting, but it comes with a few important advantages:
+At first glance, this approach might seem a bit verbose or even limiting, but it comes with a few important advantages:
 
 - Customizations can be made to components with explicit selectors, such as `::part(icon)`, rather than implicit selectors, such as `.button > div > span + .icon`, that are much more fragile.
 
-- The internal structure of a component will likely change as the component evolves. By exposing its parts through the API, the internals can be reworked without fear of breaking users' customizations as long as its parts remain the same.
+- The internal structure of a component will likely change as it evolves. By exposing component parts through an API, the internals can be reworked without fear of breaking customizations as long as its parts remain intact.
 
-- It encourages us to think more about how components are designed and how customizations should be allowed before users can take advantage of them. Once we opt a part into the component's API, it won't be altered or removed until the next major version of the library.
+- It encourages us to think more about how components are designed and how customizations should be allowed before users can take advantage of them. Once we opt a part into the component's API, it's guaranteed to be supported and can't be removed until a major version of the library is released.
 
-Not all components expose parts. For those that do, they can be found in the component's API documentation.
+Most (but not all) components expose parts. You can find them in each component's API documention under the "CSS Parts" section.
 
 ### Custom Properties
 
