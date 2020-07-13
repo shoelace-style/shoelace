@@ -35,7 +35,7 @@ This component solves that problem by serializing _both_ Shoelace form controls 
     //
     // Example 1: Post data to a server and wait for a JSON response
     //
-    fetch('https://example.com/api', {
+    fetch('https://jsonplaceholder.typicode.com/posts', {
       method: 'POST',
       body: formData
     })
