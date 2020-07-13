@@ -422,8 +422,6 @@ export class ColorPicker {
 
       if (rgba[3] && rgba[3].indexOf('%') > -1) {
         rgba[3] = (Number(rgba[3].replace(/%/g, '')) / 100).toString();
-      } else {
-        rgba[3] = '1';
       }
 
       return `rgba(${rgba[0]}, ${rgba[1]}, ${rgba[2]}, ${rgba[3]})`;
@@ -438,8 +436,6 @@ export class ColorPicker {
 
       if (hsla[3] && hsla[3].indexOf('%') > -1) {
         hsla[3] = (Number(hsla[3].replace(/%/g, '')) / 100).toString();
-      } else {
-        hsla[3] = '1';
       }
 
       return `hsla(${hsla[0]}, ${hsla[1]}, ${hsla[2]}, ${hsla[3]})`;
