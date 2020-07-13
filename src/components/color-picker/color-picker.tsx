@@ -420,7 +420,11 @@ export class ColorPicker {
         .map(val => val.trim())
         .filter(val => val.length);
 
-      if (rgba[3] && rgba[3].indexOf('%') > -1) {
+      if (rgba.length < 4) {
+        rgba[3] = '1';
+      }
+
+      if (rgba[3].indexOf('%') > -1) {
         rgba[3] = (Number(rgba[3].replace(/%/g, '')) / 100).toString();
       }
 
@@ -434,7 +438,11 @@ export class ColorPicker {
         .map(val => val.trim())
         .filter(val => val.length);
 
-      if (hsla[3] && hsla[3].indexOf('%') > -1) {
+      if (hsla.length < 4) {
+        hsla[3] = '1';
+      }
+
+      if (hsla[3].indexOf('%') > -1) {
         hsla[3] = (Number(hsla[3].replace(/%/g, '')) / 100).toString();
       }
 
