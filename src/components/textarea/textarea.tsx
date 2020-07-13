@@ -9,7 +9,7 @@ let id = 0;
  *
  * @slot label - The textarea's label. Alternatively, you can use the label prop.
  *
- * @part base - The base element of the textarea.
+ * @part base - The component's base wrapper.
  * @part form-control - The form control that wraps the textarea and label.
  * @part label - The textarea label.
  * @part textarea - The native textarea.

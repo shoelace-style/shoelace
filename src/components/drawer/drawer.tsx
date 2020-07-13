@@ -11,7 +11,7 @@ let id = 0;
  * @slot - The drawer's content.
  * @slot footer - The drawer's footer, usually one or more buttons representing various options.
  *
- * @part base - The base drawer element.
+ * @part base - The component's base wrapper.
  * @part overlay - The overlay.
  * @part panel - The drawer panel (where the drawer and its is rendered).
  * @part header - The drawer header.

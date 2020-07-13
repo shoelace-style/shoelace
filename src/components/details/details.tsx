@@ -9,7 +9,7 @@ let id = 0;
  *
  * @slot - The details' content.
  *
- * @part base - The details base container.
+ * @part base - The component's base wrapper.
  * @part summary - The details summary.
  * @part summary-icon - The expand/collapse summary icon.
  * @part content - The details content.

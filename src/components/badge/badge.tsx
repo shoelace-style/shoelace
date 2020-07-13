@@ -6,7 +6,7 @@ import { Component, Prop, h } from '@stencil/core';
  *
  * @slot - The badge's content.
  *
- * @part base - The badge base element.
+ * @part base - The base wrapper
  */
 
 //

@@ -9,7 +9,7 @@ import { focusVisible } from '../../utilities/focus-visible';
  * @slot icon - An icon to show in the alert.
  * @slot close-icon - An icon to use in lieu of the default close icon.
  *
- * @part base - The alert base element.
+ * @part base - The component's base wrapper.
  * @part icon - The container that wraps the alert icon.
  * @part message - The alert message.
  * @part close-button - The close button.

@@ -6,7 +6,7 @@ import { Component, Prop, Watch, h } from '@stencil/core';
  *
  * @slot - A label to show inside the ring.
  *
- * @part base - The base element of the progress ring.
+ * @part base - The component's base wrapper.
  * @part label - The progress ring label.
  */
 

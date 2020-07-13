@@ -6,7 +6,7 @@ import { Component, Event, EventEmitter, Prop, h } from '@stencil/core';
  *
  * @slot - The tag's content.
  *
- * @part base - The base element of the tag.
+ * @part base - The component's base wrapper.
  * @part content - The tag content.
  * @part remove-button - The remove button.
  */

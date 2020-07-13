@@ -13,7 +13,7 @@ let id = 0;
  * @slot show-password-icon - An icon to use in lieu of the default show password icon.
  * @slot hide-password-icon - An icon to use in lieu of the default hide password icon.
  *
- * @part base - The base element of the input.
+ * @part base - The component's base wrapper.
  * @part form-control - The form control that wraps the label and the input.
  * @part label - The input label.
  * @part input - The synthetic input container.

@@ -8,7 +8,7 @@ import { Component, Event, EventEmitter, Method, Prop, State, h } from '@stencil
  * @slot prefix - Used to prepend an icon or similar element to the button.
  * @slot suffix - Used to append an icon or similar element to the button.
  *
- * @part base - The base element.
+ * @part base - The component's base wrapper.
  * @part prefix - The prefix container.
  * @part label - The button's label.
  * @part suffix - The suffix container.

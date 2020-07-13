@@ -6,7 +6,7 @@ import { Component, Prop, h } from '@stencil/core';
  *
  * @slot - A label to show inside the indicator.
  *
- * @part base - The base element of the progress bar.
+ * @part base - The component's base wrapper.
  * @part indicator - The progress bar indicator.
  * @part label - The progress bar label.
  */

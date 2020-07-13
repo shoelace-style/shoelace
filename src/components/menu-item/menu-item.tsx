@@ -8,7 +8,7 @@ import { Component, Prop, h } from '@stencil/core';
  * @slot prefix - Used to prepend an icon or similar element to the menu item.
  * @slot suffix - Used to append an icon or similar element to the menu item.
  *
- * @part base - The base element of the menu item.
+ * @part base - The component's base wrapper.
  * @part checked-icon - The container that wraps the checked icon.
  * @part prefix - The prefix container.
  * @part label - The menu item label.

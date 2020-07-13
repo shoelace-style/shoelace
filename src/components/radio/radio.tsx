@@ -8,7 +8,7 @@ let id = 0;
  *
  * @slot - The radio's label.
  *
- * @part base - The radio base element.
+ * @part base - The component's base wrapper.
  * @part control - The radio control.
  * @part checked-icon - The container the wraps the checked icon.
  * @part label - The radio label.

@@ -8,7 +8,7 @@ let id = 0;
  *
  * @slot - The switch's label.
  *
- * @part base - The base element of the switch.
+ * @part base - The component's base wrapper.
  * @part control - The switch control.
  * @part thumb - The switch position indicator.
  * @part label - The switch label.

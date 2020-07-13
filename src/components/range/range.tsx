@@ -5,7 +5,7 @@ import ResizeObserver from 'resize-observer-polyfill';
  * @since 1.0
  * @status stable
  *
- * @part base - The base element of the range.
+ * @part base - The component's base wrapper.
  * @part input - The native range input.
  * @part tooltip - The range tooltip.
  */

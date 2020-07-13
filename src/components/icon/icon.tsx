@@ -8,7 +8,7 @@ const parser = new DOMParser();
  * @since 1.0
  * @status stable
  *
- * @part base - The base element of the icon.
+ * @part base - The component's base wrapper.
  */
 
 @Component({

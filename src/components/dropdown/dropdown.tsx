@@ -10,7 +10,7 @@ let id = 0;
  * @slot trigger - The dropdown's trigger, usually a `<sl-button>` element.
  * @slot - The dropdown's content.
  *
- * @part base - The base element of the dropdown.
+ * @part base - The component's base wrapper.
  * @part trigger - The container that wraps the trigger.
  * @part panel - The panel that gets shown when the dropdown is open.
  */

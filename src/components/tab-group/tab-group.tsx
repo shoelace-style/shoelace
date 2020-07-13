@@ -10,7 +10,7 @@ import { focusVisible } from '../../utilities/focus-visible';
  * @slot nav - Used for grouping tabs in the tab group.
  * @slot - Used for grouping tab panels in the tab group.
  *
- * @part base - The base element of the tab group.
+ * @part base - The component's base wrapper.
  * @part nav - The tab group navigation container.
  * @part tabs - The container that wraps the slotted tabs.
  * @part active-tab-indicator - An element that displays the currently selected tab. This is a child of the tabs container.

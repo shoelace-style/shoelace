@@ -8,7 +8,7 @@ let id = 0;
  *
  * @slot - The checkbox's label.
  *
- * @part base - The checkbox base element.
+ * @part base - The component's base wrapper.
  * @part control - The checkbox control.
  * @part checked-icon - The container the wraps the checked icon.
  * @part indeterminate-icon - The container that wraps the indeterminate icon.

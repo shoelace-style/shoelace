@@ -11,7 +11,7 @@ let id = 0;
  * @slot - The dialog's content.
  * @slot footer - The dialog's footer, usually one or more buttons representing various options.
  *
- * @part base - The base dialog element.
+ * @part base - The component's base wrapper.
  * @part overlay - The overlay.
  * @part panel - The dialog panel (where the dialog and its is rendered).
  * @part header - The dialog header.

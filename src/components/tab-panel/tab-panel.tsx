@@ -8,7 +8,7 @@ let id = 0;
  *
  * @slot - The tab panel's content.
  *
- * @part base - The base element of the tab panel.
+ * @part base - The component's base wrapper.
  */
 
 @Component({

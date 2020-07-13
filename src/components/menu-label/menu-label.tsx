@@ -6,7 +6,7 @@ import { Component, h } from '@stencil/core';
  *
  * @slot - The menu label's content.
  *
- * @part base - The base element of the menu label.
+ * @part base - The component's base wrapper.
  */
 
 @Component({

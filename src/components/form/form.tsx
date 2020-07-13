@@ -13,7 +13,7 @@ interface FormControl {
  *
  * @slot - The form's content.
  *
- * @part base - The base element of the form.
+ * @part base - The component's base wrapper.
  */
 
 @Component({

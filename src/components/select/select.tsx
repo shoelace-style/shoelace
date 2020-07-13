@@ -11,7 +11,7 @@ let id = 0;
  * @slot - The select's options in the form of menu items.
  * @slot label - The select's label. Alternatively, you can use the label prop.
  *
- * @part base - The base element of the select (a dropdown).
+ * @part base - The component's base wrapper.
  * @part form-control - The form control that wraps the label and the select.
  * @part label - The select label.
  * @part input - The select input.

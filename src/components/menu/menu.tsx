@@ -8,7 +8,7 @@ import { getTextContent } from '../../utilities/slot';
  *
  * @slot - The menu's items.
  *
- * @part base - The base element of the menu.
+ * @part base - The component's base wrapper.
  */
 
 @Component({
