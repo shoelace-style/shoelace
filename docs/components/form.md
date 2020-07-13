@@ -32,14 +32,33 @@ This component solves that problem by serializing _both_ Shoelace form controls 
     const formData = event.detail.formData;
     let output = '';
 
-    // Do something with the form data
+    //
+    // Example 1: Post data to a server and wait for a JSON response
+    //
+    fetch('https://example.com/api', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.json())
+    .then(result => {
+      console.log('Success:', result);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+
+    //
+    // Example 2: Output all form control names + values
+    //
     for (const entry of formData.entries()) {
       output += `${entry[0]}: ${entry[1]}\n`;
     }
     alert(output);
 
-    // Tip: you can also access every form control that was serialized, which
-    // is useful for validation purposes.
+    //
+    // Example 3: Get all form controls that were serialized as 
+    // an array of HTML elements
+    //
     console.log(event.detail.formControls);
   });
 </script>
