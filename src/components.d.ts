@@ -116,7 +116,7 @@ export namespace Components {
          */
         "indeterminate": boolean;
         /**
-          * A native input's name attribute.
+          * The checkbox's name attribute.
          */
         "name": string;
         /**
@@ -128,7 +128,7 @@ export namespace Components {
          */
         "setFocus": () => Promise<void>;
         /**
-          * The native input's value attribute.
+          * The checkbox's value attribute.
          */
         "value": string;
     }
@@ -497,7 +497,7 @@ export namespace Components {
          */
         "disabled": boolean;
         /**
-          * A native input's name attribute.
+          * The radio's name attribute.
          */
         "name": string;
         /**
@@ -509,7 +509,7 @@ export namespace Components {
          */
         "setFocus": () => Promise<void>;
         /**
-          * The native input's value attribute.
+          * The radio's value attribute.
          */
         "value": string;
     }
@@ -605,7 +605,7 @@ export namespace Components {
          */
         "disabled": boolean;
         /**
-          * A native input's name attribute.
+          * The switch's name attribute.
          */
         "name": string;
         /**
@@ -617,7 +617,7 @@ export namespace Components {
          */
         "setFocus": () => Promise<void>;
         /**
-          * The native input's value attribute.
+          * The switch's value attribute.
          */
         "value": string;
     }
@@ -1150,7 +1150,7 @@ declare namespace LocalJSX {
          */
         "indeterminate"?: boolean;
         /**
-          * A native input's name attribute.
+          * The checkbox's name attribute.
          */
         "name"?: string;
         /**
@@ -1166,7 +1166,7 @@ declare namespace LocalJSX {
          */
         "onSlFocus"?: (event: CustomEvent<any>) => void;
         /**
-          * The native input's value attribute.
+          * The checkbox's value attribute.
          */
         "value"?: string;
     }
@@ -1595,7 +1595,7 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
-          * A native input's name attribute.
+          * The radio's name attribute.
          */
         "name"?: string;
         /**
@@ -1611,7 +1611,7 @@ declare namespace LocalJSX {
          */
         "onSlFocus"?: (event: CustomEvent<any>) => void;
         /**
-          * The native input's value attribute.
+          * The radio's value attribute.
          */
         "value"?: string;
     }
@@ -1723,7 +1723,7 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
-          * A native input's name attribute.
+          * The switch's name attribute.
          */
         "name"?: string;
         /**
@@ -1739,7 +1739,7 @@ declare namespace LocalJSX {
          */
         "onSlFocus"?: (event: CustomEvent<any>) => void;
         /**
-          * The native input's value attribute.
+          * The switch's value attribute.
          */
         "value"?: string;
     }

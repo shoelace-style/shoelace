@@ -36,10 +36,10 @@ export class Radio {
 
   @State() hasFocus = false;
 
-  /** A native input's name attribute. */
+  /** The radio's name attribute. */
   @Prop() name: string;
 
-  /** The native input's value attribute. */
+  /** The radio's value attribute. */
   @Prop() value: string;
 
   /** Set to true to disable the radio. */

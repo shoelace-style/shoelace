@@ -6,7 +6,7 @@ import { getTextContent } from '../../utilities/slot';
  * @since 1.0
  * @status stable
  *
- * @slot - The menu's items.
+ * @slot - The menu's content, including menu items, menu dividers, and menu labels.
  *
  * @part base - The component's base wrapper.
  */

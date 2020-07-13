@@ -9,7 +9,7 @@ let id = 0;
  *
  * @slot - The tooltip's target element. Only the first element will be used as the target.
  *
- * @part - The base element of the tooltip.
+ * @part base - The component's base wrapper.
  */
 
 @Component({

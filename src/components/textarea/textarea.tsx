@@ -12,7 +12,7 @@ let id = 0;
  * @part base - The component's base wrapper.
  * @part form-control - The form control that wraps the textarea and label.
  * @part label - The textarea label.
- * @part textarea - The native textarea.
+ * @part textarea - The textarea control.
  */
 
 @Component({

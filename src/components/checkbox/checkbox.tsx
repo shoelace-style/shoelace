@@ -34,10 +34,10 @@ export class Checkbox {
 
   @State() hasFocus = false;
 
-  /** A native input's name attribute. */
+  /** The checkbox's name attribute. */
   @Prop() name: string;
 
-  /** The native input's value attribute. */
+  /** The checkbox's value attribute. */
   @Prop() value: string;
 
   /** Set to true to disable the checkbox. */

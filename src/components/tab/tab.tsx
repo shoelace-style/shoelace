@@ -8,7 +8,7 @@ let id = 0;
  *
  * @slot - The tab's label.
  *
- * @part - The base element of the tab.
+ * @part base - The component's base wrapper.
  */
 
 @Component({

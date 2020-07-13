@@ -34,10 +34,10 @@ export class Switch {
 
   @State() hasFocus = false;
 
-  /** A native input's name attribute. */
+  /** The switch's name attribute. */
   @Prop() name: string;
 
-  /** The native input's value attribute. */
+  /** The switch's value attribute. */
   @Prop() value: string;
 
   /** Set to true to disable the switch. */

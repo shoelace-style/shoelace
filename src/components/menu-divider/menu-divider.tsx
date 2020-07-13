@@ -4,7 +4,7 @@ import { Component, h } from '@stencil/core';
  * @since 1.0
  * @status stable
  *
- * @part - The base element of the menu divider.
+ * @part base - The component's base wrapper.
  */
 
 @Component({
