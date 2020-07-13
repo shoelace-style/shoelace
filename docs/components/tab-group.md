@@ -7,16 +7,16 @@ Tab groups organize content into a container that shows one section at a time.
 Tab groups make use of [tabs](/components/tab.md) and [tab panels](/components/tab-panel.md). Each tab must be slotted into the `nav` slot and its `panel` must refer to a tab panel of the same name.
 
 ```html preview
-<sl-tab-group placement="top">
+<sl-tab-group>
   <sl-tab slot="nav" panel="general">General</sl-tab>
   <sl-tab slot="nav" panel="custom">Custom</sl-tab>
   <sl-tab slot="nav" panel="advanced">Advanced</sl-tab>
   <sl-tab slot="nav" panel="disabled" disabled>Disabled</sl-tab>
 
-  <sl-tab-panel name="general">General</sl-tab-panel>
-  <sl-tab-panel name="custom">Custom</sl-tab-panel>
-  <sl-tab-panel name="advanced">Advanced</sl-tab-panel>
-  <sl-tab-panel name="disabled">Disabled</sl-tab-panel>
+  <sl-tab-panel name="general">This is the general tab panel.</sl-tab-panel>
+  <sl-tab-panel name="custom">This is the custom tab panel.</sl-tab-panel>
+  <sl-tab-panel name="advanced">This is the advanced tab panel.</sl-tab-panel>
+  <sl-tab-panel name="disabled">This is a disabled tab panel.</sl-tab-panel>
 </sl-tab-group>
 ```
 
@@ -33,10 +33,10 @@ Tabs can be shown on the bottom by setting `placement` to `bottom`.
   <sl-tab slot="nav" panel="advanced">Advanced</sl-tab>
   <sl-tab slot="nav" panel="disabled" disabled>Disabled</sl-tab>
 
-  <sl-tab-panel name="general">General</sl-tab-panel>
-  <sl-tab-panel name="custom">Custom</sl-tab-panel>
-  <sl-tab-panel name="advanced">Advanced</sl-tab-panel>
-  <sl-tab-panel name="disabled">Disabled</sl-tab-panel>
+  <sl-tab-panel name="general">This is the general tab panel.</sl-tab-panel>
+  <sl-tab-panel name="custom">This is the custom tab panel.</sl-tab-panel>
+  <sl-tab-panel name="advanced">This is the advanced tab panel.</sl-tab-panel>
+  <sl-tab-panel name="disabled">This is a disabled tab panel.</sl-tab-panel>
 </sl-tab-group>
 ```
 
@@ -51,10 +51,10 @@ Tabs can be shown on the left by setting `placement` to `left`.
   <sl-tab slot="nav" panel="advanced">Advanced</sl-tab>
   <sl-tab slot="nav" panel="disabled" disabled>Disabled</sl-tab>
 
-  <sl-tab-panel name="general">General</sl-tab-panel>
-  <sl-tab-panel name="custom">Custom</sl-tab-panel>
-  <sl-tab-panel name="advanced">Advanced</sl-tab-panel>
-  <sl-tab-panel name="disabled">Disabled</sl-tab-panel>
+  <sl-tab-panel name="general">This is the general tab panel.</sl-tab-panel>
+  <sl-tab-panel name="custom">This is the custom tab panel.</sl-tab-panel>
+  <sl-tab-panel name="advanced">This is the advanced tab panel.</sl-tab-panel>
+  <sl-tab-panel name="disabled">This is a disabled tab panel.</sl-tab-panel>
 </sl-tab-group>
 ```
 
@@ -69,10 +69,10 @@ Tabs can be shown on the right by setting `placement` to `right`.
   <sl-tab slot="nav" panel="advanced">Advanced</sl-tab>
   <sl-tab slot="nav" panel="disabled" disabled>Disabled</sl-tab>
 
-  <sl-tab-panel name="general">General</sl-tab-panel>
-  <sl-tab-panel name="custom">Custom</sl-tab-panel>
-  <sl-tab-panel name="advanced">Advanced</sl-tab-panel>
-  <sl-tab-panel name="disabled">Disabled</sl-tab-panel>
+  <sl-tab-panel name="general">This is the general tab panel.</sl-tab-panel>
+  <sl-tab-panel name="custom">This is the custom tab panel.</sl-tab-panel>
+  <sl-tab-panel name="advanced">This is the advanced tab panel.</sl-tab-panel>
+  <sl-tab-panel name="disabled">This is a disabled tab panel.</sl-tab-panel>
 </sl-tab-group>
 ```
 

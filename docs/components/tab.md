@@ -4,6 +4,12 @@
 
 Tabs are used inside tab groups to represent tab panels.
 
-A demonstration of this component can be found in the [tab group examples](/components/tab-group.md).
+```html preview
+<sl-tab>Tab</sl-tab>
+<sl-tab active>Active</sl-tab>
+<sl-tab disabled>Disabled</sl-tab>
+```
+
+?> Additional demonstrations can be found in the [tab group examples](/components/tab-group.md).
 
 [component-metadata:sl-tab]
