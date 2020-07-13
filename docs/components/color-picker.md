@@ -25,7 +25,7 @@ Set the color picker's format with the `format` attribute. Valid options include
 ```html preview
 <sl-color-picker format="hex" value="#4a90e2"></sl-color-picker>
 <sl-color-picker format="rgb" value="rgb(80, 227, 194)"></sl-color-picker>
-<sl-color-picker format="hsl" value="hsl(90, 69%, 72%)"></sl-color-picker>
+<sl-color-picker format="hsl" value="hsl(290, 87%, 47%)"></sl-color-picker>
 ```
 
 ### Inline
