@@ -5,6 +5,17 @@ import { clamp } from '../../utilities/math';
 /**
  * @since 1.0
  * @status stable
+ *
+ * @part base - The component's base wrapper.
+ * @part swatches - The container that holds swatches.
+ * @part swatch - Each individual swatch.
+ * @part grid - The color grid.
+ * @part grid-handle - The color grid's handle.
+ * @part slider - Hue and opacity sliders.
+ * @part slider-handle - Hue and opacity slider handles.
+ * @part preview - The preview color.
+ * @part input - The text input.
+ * @part copy-button - The copy button.
  */
 
 @Component({
@@ -581,6 +592,7 @@ export class ColorPicker {
 
     const ColorPicker = (
       <div
+        part="base"
         class={{
           'color-picker': true,
           'color-picker--inline': this.inline,
@@ -590,6 +602,7 @@ export class ColorPicker {
       >
         <div
           ref={el => (this.grid = el)}
+          part="grid"
           class="color-picker__grid"
           style={{
             backgroundColor: `hsl(${this.hue}deg, 100%, 50%)`
@@ -599,6 +612,7 @@ export class ColorPicker {
         >
           <span
             ref={el => (this.gridHandle = el)}
+            part="grid-handle"
             class="color-picker__grid-handle"
             style={{
               top: `${y}%`,
@@ -618,12 +632,14 @@ export class ColorPicker {
           <div class="color-picker__sliders">
             <div
               ref={el => (this.hueSlider = el)}
+              part="slider"
               class="color-picker__hue color-picker__slider"
               onMouseDown={this.handleHueDrag}
               onTouchStart={this.handleHueDrag}
             >
               <span
                 ref={el => (this.hueHandle = el)}
+                part="slider-handle"
                 class="color-picker__slider-handle"
                 style={{
                   left: `${this.hue === 0 ? 0 : 100 / (360 / this.hue)}%`
@@ -642,6 +658,7 @@ export class ColorPicker {
             {this.opacity && (
               <div
                 ref={el => (this.alphaSlider = el)}
+                part="slider"
                 class="color-picker__alpha color-picker__slider color-picker__transparent-bg"
                 onMouseDown={this.handleAlphaDrag}
                 onTouchStart={this.handleAlphaDrag}
@@ -658,6 +675,7 @@ export class ColorPicker {
                 />
                 <span
                   ref={el => (this.alphaHandle = el)}
+                  part="slider-handle"
                   class="color-picker__slider-handle"
                   style={{
                     left: `${this.alpha}%`
@@ -676,6 +694,7 @@ export class ColorPicker {
           </div>
 
           <div
+            part="preview"
             class="color-picker__preview color-picker__transparent-bg"
             style={{
               color: `hsla(${this.hue}deg, ${this.saturation}%, ${this.lightness}%, ${this.alpha / 100})`
@@ -686,6 +705,7 @@ export class ColorPicker {
         <div class="color-picker__user-input">
           <sl-input
             ref={el => (this.textInput = el)}
+            part="input"
             size="small"
             type="text"
             pattern="[a-fA-F\d]+"
@@ -696,6 +716,7 @@ export class ColorPicker {
           />
           <sl-button
             ref={el => (this.copyButton = el)}
+            part="copy-button"
             slot="suffix"
             class="color-picker__copy-button"
             size="small"
@@ -707,9 +728,10 @@ export class ColorPicker {
         </div>
 
         {this.swatches && (
-          <div class="color-picker__swatches">
+          <div part="swatches" class="color-picker__swatches">
             {this.swatches.map(swatch => (
               <div
+                part="swatch"
                 class="color-picker__swatch color-picker__transparent-bg"
                 tabIndex={this.disabled ? null : 0}
                 role="button"
