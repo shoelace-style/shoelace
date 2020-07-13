@@ -8,6 +8,7 @@ let id = 0;
  * @status stable
  *
  * @slot - The details' content.
+ * @slot summary - The details' summary. Alternatively, you can use the summary prop.
  *
  * @part base - The component's base wrapper.
  * @part summary - The details summary.
@@ -167,7 +168,7 @@ export class Details {
           onKeyDown={this.handleSummaryKeyDown}
         >
           <div part="summary" class="details__summary">
-            {this.summary}
+            <slot name="summary">{this.summary}</slot>
           </div>
 
           <span part="summary-icon" class="details__summary-icon">
