@@ -47,15 +47,9 @@ export class ColorPicker {
     this.handleTextInputKeyDown = this.handleTextInputKeyDown.bind(this);
   }
 
-  alphaSlider: HTMLElement;
-  alphaHandle: HTMLElement;
   bypassValueParse = false;
   copyButton: HTMLSlButtonElement;
   dropdown: HTMLSlDropdownElement;
-  grid: HTMLElement;
-  gridHandle: HTMLElement;
-  hueSlider: HTMLElement;
-  hueHandle: HTMLElement;
   lastValueEmitted: string;
   menu: HTMLElement;
   textInput: HTMLSlInputElement;
@@ -133,13 +127,6 @@ export class ColorPicker {
   /** Emitted after the color picker closes and all transitions are complete. */
   @Event() slAfterHide: EventEmitter;
 
-  @Watch('inline')
-  handleInlineChange() {
-    //
-    // TODO:
-    //
-  }
-
   @Watch('value')
   handleValueChange(newValue: string, oldValue: string) {
     if (!this.bypassValueParse) {
@@ -202,10 +189,11 @@ export class ColorPicker {
   }
 
   handleAlphaDrag(event: any) {
-    const container = this.alphaSlider;
+    const container = this.host.shadowRoot.querySelector('.color-picker__slider.color-picker__alpha') as HTMLElement;
+    const handle = container.querySelector('.color-picker__slider-handle') as HTMLElement;
     const { width } = container.getBoundingClientRect();
 
-    this.alphaHandle.focus();
+    handle.focus();
     event.preventDefault();
 
     this.handleDrag(event, container, x => {
@@ -215,10 +203,11 @@ export class ColorPicker {
   }
 
   handleHueDrag(event: any) {
-    const container = this.hueSlider;
+    const container = this.host.shadowRoot.querySelector('.color-picker__slider.color-picker__hue') as HTMLElement;
+    const handle = container.querySelector('.color-picker__slider-handle') as HTMLElement;
     const { width } = container.getBoundingClientRect();
 
-    this.hueHandle.focus();
+    handle.focus();
     event.preventDefault();
 
     this.handleDrag(event, container, x => {
@@ -228,13 +217,14 @@ export class ColorPicker {
   }
 
   handleGridDrag(event: any) {
-    const container = this.grid;
-    const { width, height } = container.getBoundingClientRect();
+    const grid = this.host.shadowRoot.querySelector('.color-picker__grid') as HTMLElement;
+    const handle = grid.querySelector('.color-picker__grid-handle') as HTMLElement;
+    const { width, height } = grid.getBoundingClientRect();
 
-    this.gridHandle.focus();
+    handle.focus();
     event.preventDefault();
 
-    this.handleDrag(event, container, (x, y) => {
+    this.handleDrag(event, grid, (x, y) => {
       this.saturation = clamp((x / width) * 100, 0, 100);
       this.lightness = clamp(100 - (y / height) * 100, 0, 100);
       this.syncValues();
@@ -590,166 +580,162 @@ export class ColorPicker {
     const x = this.saturation;
     const y = 100 - this.lightness;
 
-    const ColorPicker = (
-      <div
-        part="base"
-        class={{
-          'color-picker': true,
-          'color-picker--inline': this.inline,
-          'color-picker--disabled': this.disabled
-        }}
-        aria-disabled={this.disabled}
-      >
+    const ColorPicker = () => {
+      return (
         <div
-          ref={el => (this.grid = el)}
-          part="grid"
-          class="color-picker__grid"
-          style={{
-            backgroundColor: `hsl(${this.hue}deg, 100%, 50%)`
+          part="base"
+          class={{
+            'color-picker': true,
+            'color-picker--inline': this.inline,
+            'color-picker--disabled': this.disabled
           }}
-          onMouseDown={this.handleGridDrag}
-          onTouchStart={this.handleGridDrag}
+          aria-disabled={this.disabled}
         >
-          <span
-            ref={el => (this.gridHandle = el)}
-            part="grid-handle"
-            class="color-picker__grid-handle"
+          <div
+            part="grid"
+            class="color-picker__grid"
             style={{
-              top: `${y}%`,
-              left: `${x}%`
+              backgroundColor: `hsl(${this.hue}deg, 100%, 50%)`
             }}
-            role="slider"
-            aria-label="HSL"
-            aria-valuetext={`hsl(${Math.round(this.hue)}, ${Math.round(this.saturation)}%, ${Math.round(
-              this.lightness
-            )}%)`}
-            tabIndex={this.disabled ? null : 0}
-            onKeyDown={this.handleGridKeyDown}
-          />
-        </div>
+            onMouseDown={this.handleGridDrag}
+            onTouchStart={this.handleGridDrag}
+          >
+            <span
+              part="grid-handle"
+              class="color-picker__grid-handle"
+              style={{
+                top: `${y}%`,
+                left: `${x}%`
+              }}
+              role="slider"
+              aria-label="HSL"
+              aria-valuetext={`hsl(${Math.round(this.hue)}, ${Math.round(this.saturation)}%, ${Math.round(
+                this.lightness
+              )}%)`}
+              tabIndex={this.disabled ? null : 0}
+              onKeyDown={this.handleGridKeyDown}
+            />
+          </div>
 
-        <div class="color-picker__controls">
-          <div class="color-picker__sliders">
-            <div
-              ref={el => (this.hueSlider = el)}
-              part="slider"
-              class="color-picker__hue color-picker__slider"
-              onMouseDown={this.handleHueDrag}
-              onTouchStart={this.handleHueDrag}
-            >
-              <span
-                ref={el => (this.hueHandle = el)}
-                part="slider-handle"
-                class="color-picker__slider-handle"
-                style={{
-                  left: `${this.hue === 0 ? 0 : 100 / (360 / this.hue)}%`
-                }}
-                role="slider"
-                aria-label="hue"
-                aria-orientation="horizontal"
-                aria-valuemin="0"
-                aria-valuemax="360"
-                aria-valuenow={Math.round(this.hue)}
-                tabIndex={this.disabled ? null : 0}
-                onKeyDown={this.handleHueKeyDown}
-              />
-            </div>
-
-            {this.opacity && (
+          <div class="color-picker__controls">
+            <div class="color-picker__sliders">
               <div
-                ref={el => (this.alphaSlider = el)}
                 part="slider"
-                class="color-picker__alpha color-picker__slider color-picker__transparent-bg"
-                onMouseDown={this.handleAlphaDrag}
-                onTouchStart={this.handleAlphaDrag}
+                class="color-picker__hue color-picker__slider"
+                onMouseDown={this.handleHueDrag}
+                onTouchStart={this.handleHueDrag}
               >
-                <div
-                  class="color-picker__alpha-gradient"
+                <span
+                  part="slider-handle"
+                  class="color-picker__slider-handle"
                   style={{
-                    backgroundImage: `linear-gradient(
+                    left: `${this.hue === 0 ? 0 : 100 / (360 / this.hue)}%`
+                  }}
+                  role="slider"
+                  aria-label="hue"
+                  aria-orientation="horizontal"
+                  aria-valuemin="0"
+                  aria-valuemax="360"
+                  aria-valuenow={Math.round(this.hue)}
+                  tabIndex={this.disabled ? null : 0}
+                  onKeyDown={this.handleHueKeyDown}
+                />
+              </div>
+
+              {this.opacity && (
+                <div
+                  part="slider"
+                  class="color-picker__alpha color-picker__slider color-picker__transparent-bg"
+                  onMouseDown={this.handleAlphaDrag}
+                  onTouchStart={this.handleAlphaDrag}
+                >
+                  <div
+                    class="color-picker__alpha-gradient"
+                    style={{
+                      backgroundImage: `linear-gradient(
                       to right,
                       hsl(${this.hue}deg, ${this.saturation}%, ${this.lightness}%, 0%) 0%,
                       hsl(${this.hue}deg, ${this.saturation}%, ${this.lightness}%) 100%
                       )`
-                  }}
-                />
-                <span
-                  ref={el => (this.alphaHandle = el)}
-                  part="slider-handle"
-                  class="color-picker__slider-handle"
-                  style={{
-                    left: `${this.alpha}%`
-                  }}
-                  role="slider"
-                  aria-label="alpha"
-                  aria-orientation="horizontal"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                  aria-valuenow={Math.round(this.alpha)}
+                    }}
+                  />
+                  <span
+                    part="slider-handle"
+                    class="color-picker__slider-handle"
+                    style={{
+                      left: `${this.alpha}%`
+                    }}
+                    role="slider"
+                    aria-label="alpha"
+                    aria-orientation="horizontal"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    aria-valuenow={Math.round(this.alpha)}
+                    tabIndex={this.disabled ? null : 0}
+                    onKeyDown={this.handleAlphaKeyDown}
+                  />
+                </div>
+              )}
+            </div>
+
+            <div
+              part="preview"
+              class="color-picker__preview color-picker__transparent-bg"
+              style={{
+                color: `hsla(${this.hue}deg, ${this.saturation}%, ${this.lightness}%, ${this.alpha / 100})`
+              }}
+            />
+          </div>
+
+          <div class="color-picker__user-input">
+            <sl-input
+              ref={el => (this.textInput = el)}
+              part="input"
+              size="small"
+              type="text"
+              pattern="[a-fA-F\d]+"
+              value={this.textInputValue}
+              disabled={this.disabled}
+              onKeyDown={this.handleTextInputKeyDown}
+              onSlChange={this.handleTextInputChange}
+            />
+            <sl-button
+              ref={el => (this.copyButton = el)}
+              part="copy-button"
+              slot="suffix"
+              class="color-picker__copy-button"
+              size="small"
+              circle
+              onClick={this.handleCopy}
+            >
+              <sl-icon name={this.showCopyCheckmark ? 'check2' : 'clipboard'} />
+            </sl-button>
+          </div>
+
+          {this.swatches && (
+            <div part="swatches" class="color-picker__swatches">
+              {this.swatches.map(swatch => (
+                <div
+                  part="swatch"
+                  class="color-picker__swatch color-picker__transparent-bg"
                   tabIndex={this.disabled ? null : 0}
-                  onKeyDown={this.handleAlphaKeyDown}
-                />
-              </div>
-            )}
-          </div>
-
-          <div
-            part="preview"
-            class="color-picker__preview color-picker__transparent-bg"
-            style={{
-              color: `hsla(${this.hue}deg, ${this.saturation}%, ${this.lightness}%, ${this.alpha / 100})`
-            }}
-          />
+                  role="button"
+                  aria-label={swatch}
+                  onClick={() => !this.disabled && this.setColor(swatch)}
+                  onKeyDown={event => !this.disabled && event.key === 'Enter' && this.setColor(swatch)}
+                >
+                  <div class="color-picker__swatch-color" style={{ backgroundColor: swatch }} />
+                </div>
+              ))}
+            </div>
+          )}
         </div>
-
-        <div class="color-picker__user-input">
-          <sl-input
-            ref={el => (this.textInput = el)}
-            part="input"
-            size="small"
-            type="text"
-            pattern="[a-fA-F\d]+"
-            value={this.textInputValue}
-            disabled={this.disabled}
-            onKeyDown={this.handleTextInputKeyDown}
-            onSlChange={this.handleTextInputChange}
-          />
-          <sl-button
-            ref={el => (this.copyButton = el)}
-            part="copy-button"
-            slot="suffix"
-            class="color-picker__copy-button"
-            size="small"
-            circle
-            onClick={this.handleCopy}
-          >
-            <sl-icon name={this.showCopyCheckmark ? 'check2' : 'clipboard'} />
-          </sl-button>
-        </div>
-
-        {this.swatches && (
-          <div part="swatches" class="color-picker__swatches">
-            {this.swatches.map(swatch => (
-              <div
-                part="swatch"
-                class="color-picker__swatch color-picker__transparent-bg"
-                tabIndex={this.disabled ? null : 0}
-                role="button"
-                aria-label={swatch}
-                onClick={() => !this.disabled && this.setColor(swatch)}
-                onKeyDown={event => !this.disabled && event.key === 'Enter' && this.setColor(swatch)}
-              >
-                <div class="color-picker__swatch-color" style={{ backgroundColor: swatch }} />
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-    );
+      );
+    };
 
     // Render inline
     if (this.inline) {
-      return ColorPicker;
+      return <ColorPicker />;
     }
 
     // Render as a dropdown
@@ -780,7 +766,7 @@ export class ColorPicker {
           }}
           type="button"
         />
-        {ColorPicker}
+        <ColorPicker />
       </sl-dropdown>
     );
   }

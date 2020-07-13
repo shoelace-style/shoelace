@@ -15,7 +15,7 @@ Color pickers allow the user to select a color.
 Use the `opacity` attribute to enable the opacity slider. When this is enabled, the value will be displayed as HEXA, RGBA, or HSLA based on `format`.
 
 ```html preview
-<sl-color-picker opacity></sl-color-picker>
+<sl-color-picker opacity format="hsl"></sl-color-picker>
 ```
 
 ### Formats
