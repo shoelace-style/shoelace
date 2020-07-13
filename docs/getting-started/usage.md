@@ -86,11 +86,23 @@ The location of a named slot doesn't matter. You can put it anywhere inside the 
 
 Refer to a component's documentation for a complete list of available slots.
 
+### Don't Use Self-closing Tags
+
+Custom elements cannot have self-closing tags. Similar to `<script>` and `<textarea>`, you must always include the full closing tag.
+
+```html
+<!-- Don't do this -->
+<sl-input />
+
+<!-- Always do this -->
+<sl-input></sl-input>
+```
+
 ### Differences from Native Elements
 
-You might expect similarly named elements to share the same API as native elements. This is not the case. Shoelace components are not designed to be one-to-one replacements for their HTML counterparts.
+You might expect similarly named elements to share the same API as native HTML elements. This is not always the case. Shoelace components **are not** designed to be one-to-one replacements for their HTML counterparts.
 
-For example, both `<button>` and `<sl-button>` have a `type` attribute, but they do different things (the former controls whether the button submits the form and the latter controls the button's appearance). Similarly, you can't call `focus()` on a Shoelace input — you need to use the component's `setFocus()` method instead. There are technical reasons for some of these design decisions that are outside the scope of this page.
+For example, `<button>` and `<sl-button>` both have a `type` attribute, but it does different things (the former controls whether the button submits a form and the latter controls the button's appearance). Similarly, you can't call `focus()` on a Shoelace input — you need to use the component's `setFocus()` method instead. There are technical reasons for some of these design decisions that are outside the scope of this page.
 
 ?> **Don't make assumptions about a component's API!** To prevent unexpected behaviors, please take the time to review the documentation and make sure you understand what each property, method, and event is intended to do.
 
