@@ -7,7 +7,12 @@ import { Component, Prop, h } from '@stencil/core';
  * @slot - The menu item's label.
  * @slot prefix - Used to prepend an icon or similar element to the menu item.
  * @slot suffix - Used to append an icon or similar element to the menu item.
- * @slot check-icon - An icon to use in lieu of the default check icon.
+ *
+ * @part base - The base element of the menu item.
+ * @part checked-icon - The container that wraps the checked icon.
+ * @part prefix - The prefix container.
+ * @part label - The menu item label.
+ * @part suffix - The suffix container.
  */
 
 @Component({
@@ -31,6 +36,7 @@ export class MenuItem {
   render() {
     return (
       <div
+        part="base"
         class={{
           'menu-item': true,
           'menu-item--checked': this.checked,
@@ -42,21 +48,19 @@ export class MenuItem {
         aria-disabled={this.disabled}
         aria-selected={this.active}
       >
-        <span class="menu-item__check">
-          <slot name="check-icon">
-            <sl-icon name="check2" />
-          </slot>
+        <span part="checked-icon" class="menu-item__check">
+          <sl-icon name="check2" />
         </span>
 
-        <span class="menu-item__prefix">
+        <span part="prefix" class="menu-item__prefix">
           <slot name="prefix" />
         </span>
 
-        <span class="menu-item__label">
+        <span part="label" class="menu-item__label">
           <slot />
         </span>
 
-        <span class="menu-item__suffix">
+        <span part="suffix" class="menu-item__suffix">
           <slot name="suffix" />
         </span>
       </div>

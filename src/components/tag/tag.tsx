@@ -5,6 +5,10 @@ import { Component, Event, EventEmitter, Prop, h } from '@stencil/core';
  * @status stable
  *
  * @slot - The tag's content.
+ *
+ * @part base - The base element of the tag.
+ * @part content - The tag content.
+ * @part remove-button - The remove button.
  */
 
 @Component({
@@ -42,6 +46,7 @@ export class Tag {
     return (
       <span
         ref={el => (this.tag = el)}
+        part="base"
         class={{
           tag: true,
 
@@ -63,12 +68,12 @@ export class Tag {
           'tag--removable': this.removable
         }}
       >
-        <span class="tag__content">
+        <span part="content" class="tag__content">
           <slot />
         </span>
 
         {this.removable && (
-          <span class="tag__remove" role="button" tabIndex={-1} onClick={this.handleRemoveClick}>
+          <span part="remove-button" class="tag__remove" role="button" tabIndex={-1} onClick={this.handleRemoveClick}>
             <sl-icon name="x" />
           </span>
         )}

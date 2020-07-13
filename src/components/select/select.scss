@@ -48,9 +48,12 @@
 }
 
 .select__icon {
+  display: inline-flex;
+}
+.select__icon sl-icon {
   transition: var(--sl-transition-medium) transform ease;
 }
 
-.select--open .select__icon {
+.select--open .select__icon sl-icon {
   transform: rotate(-180deg);
 }

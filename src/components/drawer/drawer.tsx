@@ -10,6 +10,15 @@ let id = 0;
  *
  * @slot - The drawer's content.
  * @slot footer - The drawer's footer, usually one or more buttons representing various options.
+ *
+ * @part base - The base drawer element.
+ * @part overlay - The overlay.
+ * @part panel - The drawer panel (where the drawer and its is rendered).
+ * @part header - The drawer header.
+ * @part title - The drawer title.
+ * @part close-button - The close button.
+ * @part body - The drawer body.
+ * @part footer - The drawer footer.
  */
 @Component({
   tag: 'sl-drawer',
@@ -174,6 +183,7 @@ export class Drawer {
     return (
       <div
         ref={el => (this.drawer = el)}
+        part="base"
         class={{
           drawer: true,
           'drawer--open': this.open,
@@ -186,10 +196,11 @@ export class Drawer {
         onTransitionEnd={this.handleTransitionEnd}
         hidden
       >
-        <div class="drawer__overlay" onClick={this.handleOverlayClick} />
+        <div part="overlay" class="drawer__overlay" onClick={this.handleOverlayClick} />
 
         <div
           ref={el => (this.panel = el)}
+          part="panel"
           class="drawer__panel"
           role="dialog"
           aria-modal="true"
@@ -199,23 +210,23 @@ export class Drawer {
           tabIndex={0}
         >
           {!this.noHeader && (
-            <header class="drawer__header">
-              <span class="drawer__title" id={`${this.id}-title`}>
+            <header part="header" class="drawer__header">
+              <span part="title" class="drawer__title" id={`${this.id}-title`}>
                 {/* If there's no label, use an invisible character to prevent the heading from collapsing */}
                 {this.label || String.fromCharCode(65279)}
               </span>
-              <button class="drawer__close" type="button" onClick={this.handleCloseClick}>
+              <button part="close-button" class="drawer__close" type="button" onClick={this.handleCloseClick}>
                 <sl-icon name="x"></sl-icon>
               </button>
             </header>
           )}
 
-          <div class="drawer__body">
+          <div part="body" class="drawer__body">
             <slot />
           </div>
 
           {!this.noFooter && (
-            <footer class="drawer__footer">
+            <footer part="footer" class="drawer__footer">
               <slot name="footer" />
             </footer>
           )}

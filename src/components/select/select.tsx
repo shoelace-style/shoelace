@@ -7,6 +7,16 @@ let id = 0;
 /**
  * @since 1.0
  * @status stable
+ *
+ * @slot - The select's options in the form of menu items.
+ * @slot label - The select's label. Alternatively, you can use the label prop.
+ *
+ * @part base - The base element of the select (a dropdown).
+ * @part form-control - The form control that wraps the label and the select.
+ * @part label - The select label.
+ * @part input - The select input.
+ * @part tags - The container in which multiselect options are rendered.
+ * @part icon - The select icon.
  */
 
 @Component({
@@ -269,12 +279,14 @@ export class Select {
   render() {
     return (
       <div
+        part="form-control"
         class={{
           'form-control': true,
           'form-control--has-label': this.label.length > 0
         }}
       >
         <label
+          part="label"
           class={{
             label: true,
             'label--small': this.size === 'small',
@@ -287,6 +299,7 @@ export class Select {
           <slot name="label">{this.label}</slot>
         </label>
         <sl-dropdown
+          part="base"
           ref={el => (this.dropdown = el)}
           closeOnSelect={!this.multiple}
           containingElement={this.host}
@@ -306,6 +319,7 @@ export class Select {
         >
           <sl-input
             slot="trigger"
+            part="input"
             ref={el => (this.input = el)}
             id={this.inputId}
             class="select__input"
@@ -322,12 +336,14 @@ export class Select {
             onKeyDown={this.handleKeyDown}
           >
             {this.displayTags.length && (
-              <span slot="prefix" class="select__tags">
+              <span part="tags" slot="prefix" class="select__tags">
                 {this.displayTags}
               </span>
             )}
 
-            <sl-icon slot="suffix" class="select__icon" name="chevron-down" />
+            <span part="icon" slot="suffix" class="select__icon">
+              <sl-icon name="chevron-down" />
+            </span>
           </sl-input>
 
           <sl-menu

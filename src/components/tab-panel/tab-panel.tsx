@@ -7,6 +7,8 @@ let id = 0;
  * @status stable
  *
  * @slot - The tab panel's content.
+ *
+ * @part base - The base element of the tab panel.
  */
 
 @Component({
@@ -29,7 +31,7 @@ export class TabPanel {
     return (
       // If the user didn't provide an ID, we'll set one so we can link tabs and tab panels with aria labels
       <Host id={this.host.id || this.id} style={{ display: this.active ? 'block' : 'none' }}>
-        <div class="tab-panel" role="tabpanel" aria-selected={this.active} aria-hidden={!this.active}>
+        <div part="base" class="tab-panel" role="tabpanel" aria-selected={this.active} aria-hidden={!this.active}>
           <slot />
         </div>
       </Host>

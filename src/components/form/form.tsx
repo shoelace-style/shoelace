@@ -10,6 +10,10 @@ interface FormControl {
 /**
  * @since 1.0
  * @status experimental
+ *
+ * @slot - The form's content.
+ *
+ * @part base - The base element of the form.
  */
 
 @Component({
@@ -230,6 +234,7 @@ export class Form {
     return (
       <div
         ref={el => (this.form = el)}
+        part="base"
         class="form"
         role="form"
         onClick={this.handleClick}

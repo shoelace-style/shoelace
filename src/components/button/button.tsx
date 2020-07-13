@@ -7,6 +7,12 @@ import { Component, Event, EventEmitter, Method, Prop, State, h } from '@stencil
  * @slot - The button's label.
  * @slot prefix - Used to prepend an icon or similar element to the button.
  * @slot suffix - Used to append an icon or similar element to the button.
+ *
+ * @part base - The base element.
+ * @part prefix - The prefix container.
+ * @part label - The button's label.
+ * @part suffix - The suffix container.
+ * @part caret - The button's caret.
  */
 
 @Component({
@@ -94,6 +100,7 @@ export class Button {
     return (
       <button
         ref={el => (this.button = el)}
+        part="base"
         class={{
           button: true,
 
@@ -127,17 +134,17 @@ export class Button {
         onFocus={this.handleFocus}
         onClick={this.handleClick}
       >
-        <span class="button__prefix">
+        <span part="prefix" class="button__prefix">
           <slot name="prefix" />
         </span>
-        <span class="button__label">
+        <span part="label" class="button__label">
           <slot />
         </span>
-        <span class="button__suffix">
+        <span part="suffix" class="button__suffix">
           <slot name="suffix" />
         </span>
         {this.caret && (
-          <span class="button__caret">
+          <span part="caret" class="button__caret">
             <svg
               viewBox="0 0 24 24"
               fill="none"

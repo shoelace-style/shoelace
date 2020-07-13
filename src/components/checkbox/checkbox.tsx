@@ -7,6 +7,12 @@ let id = 0;
  * @status stable
  *
  * @slot - The checkbox's label.
+ *
+ * @part base - The checkbox base element.
+ * @part control - The checkbox control.
+ * @part checked-icon - The container the wraps the checked icon.
+ * @part indeterminate-icon - The container that wraps the indeterminate icon.
+ * @part label - The checkbox label.
  */
 
 @Component({
@@ -100,8 +106,7 @@ export class Checkbox {
   render() {
     return (
       <label
-        htmlFor={this.inputId}
-        role="checkbox"
+        part="base"
         class={{
           checkbox: true,
           'checkbox--checked': this.checked,
@@ -109,11 +114,13 @@ export class Checkbox {
           'checkbox--focused': this.hasFocus,
           'checkbox--indeterminate': this.indeterminate
         }}
+        htmlFor={this.inputId}
+        role="checkbox"
         onMouseDown={this.handleMouseDown}
       >
-        <span class="checkbox__control">
+        <span part="control" class="checkbox__control">
           {this.checked && (
-            <span class="checkbox__icon">
+            <span part="checked-icon" class="checkbox__icon">
               <svg viewBox="0 0 16 16">
                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
                   <g stroke="currentColor" stroke-width="2">
@@ -128,7 +135,7 @@ export class Checkbox {
           )}
 
           {!this.checked && this.indeterminate && (
-            <span class="checkbox__icon">
+            <span part="indeterminate-icon" class="checkbox__icon">
               <svg viewBox="0 0 16 16">
                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
                   <g stroke="currentColor" stroke-width="2">
@@ -156,7 +163,7 @@ export class Checkbox {
           />
         </span>
 
-        <span id={this.labelId} class="checkbox__label">
+        <span part="label" id={this.labelId} class="checkbox__label">
           <slot />
         </span>
       </label>

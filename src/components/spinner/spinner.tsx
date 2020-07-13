@@ -3,6 +3,8 @@ import { Component, h } from '@stencil/core';
 /**
  * @since 1.0
  * @status stable
+ *
+ * @part base - The base element of the spinner.
  */
 
 @Component({
@@ -12,6 +14,6 @@ import { Component, h } from '@stencil/core';
 })
 export class Spinner {
   render() {
-    return <span class="spinner" aria-busy="true" aria-live="polite" />;
+    return <span part="base" class="spinner" aria-busy="true" aria-live="polite" />;
   }
 }

@@ -9,6 +9,12 @@ import { focusVisible } from '../../utilities/focus-visible';
  *
  * @slot nav - Used for grouping tabs in the tab group.
  * @slot - Used for grouping tab panels in the tab group.
+ *
+ * @part base - The base element of the tab group.
+ * @part nav - The tab group navigation container.
+ * @part tabs - The container that wraps the slotted tabs.
+ * @part active-tab-indicator - An element that displays the currently selected tab. This is a child of the tabs container.
+ * @part body - The tab group body where tab panels are slotted in.
  */
 
 @Component({
@@ -210,6 +216,7 @@ export class TabGroup {
   render() {
     return (
       <div
+        part="base"
         ref={el => (this.tabGroup = el)}
         class={{
           'tab-group': true,
@@ -223,14 +230,18 @@ export class TabGroup {
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
       >
-        <div ref={el => (this.nav = el)} class="tab-group__nav" tabindex="-1">
-          <div ref={el => (this.tabs = el)} class="tab-group__tabs" role="tablist">
-            <div ref={el => (this.activeTabIndicator = el)} class="tab-group__active-tab-indicator" />
+        <div ref={el => (this.nav = el)} part="nav" class="tab-group__nav" tabindex="-1">
+          <div ref={el => (this.tabs = el)} part="tabs" class="tab-group__tabs" role="tablist">
+            <div
+              ref={el => (this.activeTabIndicator = el)}
+              part="active-tab-indicator"
+              class="tab-group__active-tab-indicator"
+            />
             <slot name="nav" />
           </div>
         </div>
 
-        <div ref={el => (this.body = el)} class="tab-group__body">
+        <div ref={el => (this.body = el)} part="body" class="tab-group__body">
           <slot />
         </div>
       </div>

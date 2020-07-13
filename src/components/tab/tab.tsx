@@ -7,6 +7,8 @@ let id = 0;
  * @status stable
  *
  * @slot - The tab's label.
+ *
+ * @part - The base element of the tab.
  */
 
 @Component({
@@ -46,6 +48,7 @@ export class Tab {
       // If the user didn't provide an ID, we'll set one so we can link tabs and tab panels with aria labels
       <Host id={this.host.id || this.id}>
         <div
+          part="base"
           ref={el => (this.tab = el)}
           class={{
             tab: true,

@@ -5,6 +5,10 @@ import { Component, Prop, h } from '@stencil/core';
  * @status stable
  *
  * @slot - A label to show inside the indicator.
+ *
+ * @part base - The base element of the progress bar.
+ * @part indicator - The progress bar indicator.
+ * @part label - The progress bar label.
  */
 
 @Component({
@@ -19,6 +23,7 @@ export class ProgressBar {
   render() {
     return (
       <div
+        part="base"
         class="progress-bar"
         role="progressbar"
         aria-valuemin="0"
@@ -26,12 +31,13 @@ export class ProgressBar {
         aria-valuenow={this.percentage}
       >
         <div
+          part="base"
           class="progress-bar__indicator"
           style={{
             width: `${this.percentage}%`
           }}
         >
-          <span class="progress-bar__label">
+          <span part="label" class="progress-bar__label">
             <slot />
           </span>
         </div>

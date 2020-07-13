@@ -8,6 +8,8 @@ let id = 0;
  * @status stable
  *
  * @slot - The tooltip's target element. Only the first element will be used as the target.
+ *
+ * @part - The base element of the tooltip.
  */
 
 @Component({
@@ -218,6 +220,7 @@ export class Tooltip {
 
         {!this.disabled && (
           <div
+            part="base"
             ref={el => (this.tooltip = el)}
             id={this.id}
             class={{

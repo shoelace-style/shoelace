@@ -7,6 +7,8 @@ const parser = new DOMParser();
 /**
  * @since 1.0
  * @status stable
+ *
+ * @part base - The base element of the icon.
  */
 
 @Component({
@@ -76,6 +78,6 @@ export class Icon {
   }
 
   render() {
-    return <div class="icon" role="img" aria-label={this.getLabel()} innerHTML={this.svg} />;
+    return <div part="base" class="icon" role="img" aria-label={this.getLabel()} innerHTML={this.svg} />;
   }
 }

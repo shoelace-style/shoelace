@@ -6,11 +6,21 @@ let id = 0;
  * @since 1.0
  * @status stable
  *
+ * @slot label - The input's label. Alternatively, you can use the label prop.
  * @slot prefix - Used to prepend an icon or similar element to the input.
  * @slot suffix - Used to append an icon or similar element to the input.
  * @slot clear-icon - An icon to use in lieu of the default clear icon.
  * @slot show-password-icon - An icon to use in lieu of the default show password icon.
  * @slot hide-password-icon - An icon to use in lieu of the default hide password icon.
+ *
+ * @part base - The base element of the input.
+ * @part form-control - The form control that wraps the label and the input.
+ * @part label - The input label.
+ * @part input - The synthetic input container.
+ * @part prefix - The input prefix container.
+ * @part clear-button - The clear button.
+ * @part password-toggle-button - The password toggle button.
+ * @part suffix - The input suffix container.
  */
 
 @Component({
@@ -203,12 +213,14 @@ export class Input {
   render() {
     return (
       <div
+        part="form-control"
         class={{
           'form-control': true,
           'form-control--has-label': this.label.length > 0
         }}
       >
         <label
+          part="label"
           class={{
             label: true,
             'label--small': this.size === 'small',
@@ -221,6 +233,7 @@ export class Input {
         </label>
 
         <div
+          part="base"
           class={{
             input: true,
 
@@ -237,11 +250,12 @@ export class Input {
           }}
           onMouseDown={this.handleMouseDown}
         >
-          <span class="input__prefix">
+          <span part="prefix" class="input__prefix">
             <slot name="prefix" />
           </span>
 
           <input
+            part="input"
             ref={el => (this.input = el)}
             id={this.inputId}
             class="input__control"
@@ -271,7 +285,13 @@ export class Input {
           />
 
           {this.clearable && (
-            <button class="input__clear" type="button" onClick={this.handleClearClick} tabindex="-1">
+            <button
+              part="clear-button"
+              class="input__clear"
+              type="button"
+              onClick={this.handleClearClick}
+              tabindex="-1"
+            >
               <slot name="clear-icon">
                 <sl-icon name="x-circle" />
               </slot>
@@ -279,7 +299,13 @@ export class Input {
           )}
 
           {this.togglePassword && (
-            <button class="input__password-toggle" type="button" onClick={this.handlePasswordToggle} tabindex="-1">
+            <button
+              part="password-toggle-button"
+              class="input__password-toggle"
+              type="button"
+              onClick={this.handlePasswordToggle}
+              tabindex="-1"
+            >
               {this.isPasswordVisible ? (
                 <slot name="show-password-icon">
                   <sl-icon name="eye-slash" />
@@ -293,7 +319,7 @@ export class Input {
             </button>
           )}
 
-          <span class="input__suffix">
+          <span part="suffix" class="input__suffix">
             <slot name="suffix" />
           </span>
         </div>

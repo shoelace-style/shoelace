@@ -6,6 +6,13 @@ let id = 0;
 /**
  * @since 1.0
  * @status stable
+ *
+ * @slot - The details' content.
+ *
+ * @part base - The details base container.
+ * @part summary - The details summary.
+ * @part summary-icon - The expand/collapse summary icon.
+ * @part content - The details content.
  */
 
 @Component({
@@ -140,6 +147,7 @@ export class Details {
     return (
       <div
         ref={el => (this.details = el)}
+        part="base"
         class={{
           details: true,
           'details--open': this.open,
@@ -158,15 +166,23 @@ export class Details {
           onClick={this.handleSummaryClick}
           onKeyDown={this.handleSummaryKeyDown}
         >
-          <div class="details__summary">{this.summary}</div>
+          <div part="summary" class="details__summary">
+            {this.summary}
+          </div>
 
-          <span class="details__summary-icon">
+          <span part="summary-icon" class="details__summary-icon">
             <sl-icon name="chevron-right" />
           </span>
         </header>
 
         <div ref={el => (this.body = el)} class="details__body" onTransitionEnd={this.handleBodyTransitionEnd}>
-          <div id={`${this.id}-content`} class="details__content" role="region" aria-labeledby={`${this.id}-header`}>
+          <div
+            part="content"
+            id={`${this.id}-content`}
+            class="details__content"
+            role="region"
+            aria-labeledby={`${this.id}-header`}
+          >
             <slot />
           </div>
         </div>

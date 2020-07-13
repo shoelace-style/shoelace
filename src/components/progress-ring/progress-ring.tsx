@@ -1,8 +1,13 @@
-import { Component, Host, Prop, Watch, h } from '@stencil/core';
+import { Component, Prop, Watch, h } from '@stencil/core';
 
 /**
  * @since 1.0
  * @status stable
+ *
+ * @slot - A label to show inside the ring.
+ *
+ * @part base - The base element of the progress ring.
+ * @part label - The progress ring label.
  */
 
 @Component({
@@ -42,8 +47,8 @@ export class Progress {
 
   render() {
     return (
-      <Host>
-        <svg class="progress-ring" width={this.size} height={this.size}>
+      <div part="base" class="progress-ring">
+        <svg class="progress-ring__image" width={this.size} height={this.size}>
           <circle
             class="progress-ring__track"
             stroke-width={this.strokeWidth}
@@ -66,10 +71,10 @@ export class Progress {
           />
         </svg>
 
-        <span class="progress-ring__label">
+        <span part="label" class="progress-ring__label">
           <slot />
         </span>
-      </Host>
+      </div>
     );
   }
 }

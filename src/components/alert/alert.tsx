@@ -8,6 +8,11 @@ import { focusVisible } from '../../utilities/focus-visible';
  * @slot - The alert's content.
  * @slot icon - An icon to show in the alert.
  * @slot close-icon - An icon to use in lieu of the default close icon.
+ *
+ * @part base - The alert base element.
+ * @part icon - The container that wraps the alert icon.
+ * @part message - The alert message.
+ * @part close-button - The close button.
  */
 
 @Component({
@@ -109,6 +114,7 @@ export class Tab {
       <Host hidden>
         <div
           ref={el => (this.alert = el)}
+          part="base"
           class={{
             alert: true,
             'alert--open': this.open,
@@ -125,16 +131,16 @@ export class Tab {
           aria-hidden={!this.open}
           onTransitionEnd={this.handleTransitionEnd}
         >
-          <span class="alert__icon">
+          <span part="icon" class="alert__icon">
             <slot name="icon" />
           </span>
 
-          <span class="alert__message">
+          <span part="message" class="alert__message">
             <slot />
           </span>
 
           {this.closable && (
-            <button type="button" class="alert__close" onClick={this.handleCloseClick}>
+            <button part="close-button" class="alert__close" type="button" onClick={this.handleCloseClick}>
               <slot name="close-icon">
                 <sl-icon name="x" />
               </slot>

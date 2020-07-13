@@ -4,6 +4,10 @@ import ResizeObserver from 'resize-observer-polyfill';
 /**
  * @since 1.0
  * @status stable
+ *
+ * @part base - The base element of the range.
+ * @part input - The native range input.
+ * @part tooltip - The range tooltip.
  */
 
 @Component({
@@ -114,6 +118,7 @@ export class Range {
   render() {
     return (
       <div
+        part="base"
         class={{
           range: true,
 
@@ -125,6 +130,7 @@ export class Range {
         }}
       >
         <input
+          part="input"
           ref={el => (this.input = el)}
           type="range"
           class="range__control"
@@ -139,7 +145,7 @@ export class Range {
           onBlur={this.handleBlur}
         />
         {this.tooltip !== 'none' && (
-          <output ref={el => (this.output = el)} class="range__tooltip">
+          <output part="tooltip" ref={el => (this.output = el)} class="range__tooltip">
             {this.tooltipFormatter(this.value)}
           </output>
         )}

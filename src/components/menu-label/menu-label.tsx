@@ -3,6 +3,10 @@ import { Component, h } from '@stencil/core';
 /**
  * @since 1.0
  * @status stable
+ *
+ * @slot - The menu label's content.
+ *
+ * @part base - The base element of the menu label.
  */
 
 @Component({
@@ -13,7 +17,7 @@ import { Component, h } from '@stencil/core';
 export class MenuLabel {
   render() {
     return (
-      <div class="menu-label">
+      <div part="base" class="menu-label">
         <slot />
       </div>
     );

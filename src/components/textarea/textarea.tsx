@@ -6,6 +6,13 @@ let id = 0;
 /**
  * @since 1.0
  * @status stable
+ *
+ * @slot label - The textarea's label. Alternatively, you can use the label prop.
+ *
+ * @part base - The base element of the textarea.
+ * @part form-control - The form control that wraps the textarea and label.
+ * @part label - The textarea label.
+ * @part textarea - The native textarea.
  */
 
 @Component({
@@ -174,12 +181,14 @@ export class Textarea {
   render() {
     return (
       <div
+        part="form-control"
         class={{
           'form-control': true,
           'form-control--has-label': this.label.length > 0
         }}
       >
         <label
+          part="label"
           class={{
             label: true,
             'label--small': this.size === 'small',
@@ -191,6 +200,7 @@ export class Textarea {
           <slot name="label">{this.label}</slot>
         </label>
         <div
+          part="base"
           class={{
             textarea: true,
 
@@ -211,6 +221,7 @@ export class Textarea {
           }}
         >
           <textarea
+            part="textarea"
             ref={el => (this.textarea = el)}
             id={this.textareaId}
             class="textarea__control"

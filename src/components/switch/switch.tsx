@@ -6,8 +6,12 @@ let id = 0;
  * @since 1.0
  * @status stable
  *
- *
  * @slot - The switch's label.
+ *
+ * @part base - The base element of the switch.
+ * @part control - The switch control.
+ * @part thumb - The switch position indicator.
+ * @part label - The switch label.
  */
 
 @Component({
@@ -104,6 +108,7 @@ export class Switch {
   render() {
     return (
       <label
+        part="base"
         htmlFor={this.switchId}
         role="switch"
         class={{
@@ -114,8 +119,8 @@ export class Switch {
         }}
         onMouseDown={this.handleMouseDown}
       >
-        <span class="switch__control">
-          <span class="switch__thumb" />
+        <span part="control" class="switch__control">
+          <span part="thumb" class="switch__thumb" />
 
           <input
             ref={el => (this.input = el)}
@@ -133,7 +138,7 @@ export class Switch {
           />
         </span>
 
-        <span id={this.labelId} class="switch__label">
+        <span part="label" id={this.labelId} class="switch__label">
           <slot />
         </span>
       </label>

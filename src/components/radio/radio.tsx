@@ -7,6 +7,11 @@ let id = 0;
  * @status stable
  *
  * @slot - The radio's label.
+ *
+ * @part base - The radio base element.
+ * @part control - The radio control.
+ * @part checked-icon - The container the wraps the checked icon.
+ * @part label - The radio label.
  */
 
 @Component({
@@ -126,19 +131,20 @@ export class Radio {
   render() {
     return (
       <label
-        htmlFor={this.inputId}
-        role="radio"
+        part="base"
         class={{
           radio: true,
           'radio--checked': this.checked,
           'radio--disabled': this.disabled,
           'radio--focused': this.hasFocus
         }}
+        htmlFor={this.inputId}
+        role="radio"
         onKeyDown={this.handleKeyDown}
         onMouseDown={this.handleMouseDown}
       >
-        <span class="radio__control">
-          <span class="radio__icon">
+        <span part="control" class="radio__control">
+          <span part="checked-icon" class="radio__icon">
             <svg viewBox="0 0 16 16">
               <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                 <g fill="currentColor">
@@ -163,7 +169,7 @@ export class Radio {
           />
         </span>
 
-        <span id={this.labelId} class="radio__label">
+        <span part="label" id={this.labelId} class="radio__label">
           <slot />
         </span>
       </label>

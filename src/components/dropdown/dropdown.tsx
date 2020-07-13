@@ -10,6 +10,8 @@ let id = 0;
  * @slot trigger - The dropdown's trigger, usually a `<sl-button>` element.
  * @slot - The dropdown's content.
  *
+ * @part base - The base element of the dropdown.
+ * @part trigger - The container that wraps the trigger.
  * @part panel - The panel that gets shown when the dropdown is open.
  */
 
@@ -249,6 +251,7 @@ export class Dropdown {
   render() {
     return (
       <div
+        part="base"
         id={this.id}
         class={{
           dropdown: true,
@@ -258,6 +261,7 @@ export class Dropdown {
         aria-haspopup="true"
       >
         <span
+          part="trigger"
           class="dropdown__trigger"
           ref={el => (this.trigger = el)}
           onKeyDown={this.handleTriggerKeyDown}

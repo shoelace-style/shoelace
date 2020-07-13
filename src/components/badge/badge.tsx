@@ -5,6 +5,8 @@ import { Component, Prop, h } from '@stencil/core';
  * @status experimental
  *
  * @slot - The badge's content.
+ *
+ * @part base - The badge base element.
  */
 
 //
@@ -30,6 +32,7 @@ export class Badge {
     return (
       <span
         ref={el => (this.badge = el)}
+        part="base"
         class={{
           badge: true,
 

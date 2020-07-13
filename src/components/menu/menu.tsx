@@ -7,6 +7,8 @@ import { getTextContent } from '../../utilities/slot';
  * @status stable
  *
  * @slot - The menu's items.
+ *
+ * @part base - The base element of the menu.
  */
 
 @Component({
@@ -186,6 +188,7 @@ export class Menu {
     return (
       <div
         ref={el => (this.menu = el)}
+        part="base"
         class="menu"
         tabIndex={0}
         role="menu"

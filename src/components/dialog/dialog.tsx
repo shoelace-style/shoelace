@@ -10,6 +10,16 @@ let id = 0;
  *
  * @slot - The dialog's content.
  * @slot footer - The dialog's footer, usually one or more buttons representing various options.
+ *
+ * @part base - The base dialog element.
+ * @part overlay - The overlay.
+ * @part panel - The dialog panel (where the dialog and its is rendered).
+ * @part header - The dialog header.
+ * @part title - The dialog title.
+ * @part close-button - The close button.
+ * @part body - The dialog body.
+ * @part footer - The dialog footer.
+ *
  */
 @Component({
   tag: 'sl-dialog',
@@ -159,6 +169,7 @@ export class Dialog {
     return (
       <div
         ref={el => (this.dialog = el)}
+        part="base"
         class={{
           dialog: true,
           'dialog--open': this.open
@@ -167,10 +178,11 @@ export class Dialog {
         onTransitionEnd={this.handleTransitionEnd}
         hidden
       >
-        <div class="dialog__overlay" onClick={this.handleOverlayClick} />
+        <div part="overlay" class="dialog__overlay" onClick={this.handleOverlayClick} />
 
         <div
           ref={el => (this.panel = el)}
+          part="panel"
           class="dialog__panel"
           role="dialog"
           aria-modal="true"
@@ -180,23 +192,23 @@ export class Dialog {
           tabIndex={0}
         >
           {!this.noHeader && (
-            <header class="dialog__header">
-              <span class="dialog__title" id={`${this.id}-title`}>
+            <header part="header" class="dialog__header">
+              <span part="title" class="dialog__title" id={`${this.id}-title`}>
                 {/* If there's no label, use an invisible character to prevent the heading from collapsing */}
                 {this.label || String.fromCharCode(65279)}
               </span>
-              <button class="dialog__close" type="button" onClick={this.handleCloseClick}>
+              <button part="close-button" class="dialog__close" type="button" onClick={this.handleCloseClick}>
                 <sl-icon name="x"></sl-icon>
               </button>
             </header>
           )}
 
-          <div class="dialog__body">
+          <div part="body" class="dialog__body">
             <slot />
           </div>
 
           {!this.noFooter && (
-            <footer class="dialog__footer">
+            <footer part="footer" class="dialog__footer">
               <slot name="footer" />
             </footer>
           )}
