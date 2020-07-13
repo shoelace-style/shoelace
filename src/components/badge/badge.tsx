@@ -9,13 +9,6 @@ import { Component, Prop, h } from '@stencil/core';
  * @part base - The base wrapper
  */
 
-//
-// TODO:
-//
-// - transition in/out when label disappears
-// - prevent initial rerender if possible (requestAnimationFrame hack)
-//
-
 @Component({
   tag: 'sl-badge',
   styleUrl: 'badge.scss',
