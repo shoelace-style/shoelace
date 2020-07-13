@@ -50,7 +50,7 @@ export class Drawer {
   @Prop() label = '';
 
   /** The direction from which the drawer will open. */
-  @Prop() placement: 'left' | 'right' = 'right';
+  @Prop() placement: 'top' | 'right' | 'bottom' | 'left' = 'right';
 
   /**
    * By default, the drawer slides out of its containing block (usually the viewport). To make the drawer slide out of
@@ -187,8 +187,10 @@ export class Drawer {
         class={{
           drawer: true,
           'drawer--open': this.open,
-          'drawer--left': this.placement === 'left',
+          'drawer--top': this.placement === 'top',
           'drawer--right': this.placement === 'right',
+          'drawer--bottom': this.placement === 'bottom',
+          'drawer--left': this.placement === 'left',
           'drawer--contained': this.contained,
           'drawer--fixed': !this.contained
         }}

@@ -242,7 +242,7 @@ export namespace Components {
         /**
           * The direction from which the drawer will open.
          */
-        "placement": 'left' | 'right';
+        "placement": 'top' | 'right' | 'bottom' | 'left';
         /**
           * Shows the drawer
          */
@@ -1336,7 +1336,7 @@ declare namespace LocalJSX {
         /**
           * The direction from which the drawer will open.
          */
-        "placement"?: 'left' | 'right';
+        "placement"?: 'top' | 'right' | 'bottom' | 'left';
     }
     interface SlDropdown {
         /**

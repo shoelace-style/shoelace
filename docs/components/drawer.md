@@ -2,7 +2,7 @@
 
 [component-header:sl-drawer]
 
-Drawers slide out from a container to expose additional options and information.
+Drawers slide in from a container to expose additional options and information.
 
 ```html preview
 <sl-drawer label="Drawer" class="drawer-overview">
@@ -26,12 +26,12 @@ Drawers slide out from a container to expose additional options and information.
 
 ## Examples
 
-### Placement
+### Slide in From Left
 
-Drawers slide out from the right by default. To slide them out from the left, use the `placement` attribute.
+To make the drawer slide in from the left, set the `placement` attribute to `left`.
 
 ```html preview
-<sl-drawer label="Drawer" placement="left" class="drawer-placement">
+<sl-drawer label="Drawer" placement="left" class="drawer-placement-left">
   This drawer slides in from the left.
   <sl-button slot="footer" type="primary">Close</sl-button>
 </sl-drawer>
@@ -40,7 +40,55 @@ Drawers slide out from the right by default. To slide them out from the left, us
 
 <script>
   (() => {
-    const drawer = document.querySelector('.drawer-placement');
+    const drawer = document.querySelector('.drawer-placement-left');
+    const openButton = drawer.nextElementSibling;
+    const closeButton = drawer.querySelector('sl-button[type="primary"]');
+
+    openButton.addEventListener('click', () => drawer.show());
+    closeButton.addEventListener('click', () => drawer.hide());
+  })();
+</script>
+```
+
+### Slide in From Top
+
+To make the drawer slide in from the top, set the `placement` attribute to `top`.
+
+```html preview
+<sl-drawer label="Drawer" placement="top" class="drawer-placement-top">
+  This drawer slides in from the top.
+  <sl-button slot="footer" type="primary">Close</sl-button>
+</sl-drawer>
+
+<sl-button>Open Drawer</sl-button>
+
+<script>
+  (() => {
+    const drawer = document.querySelector('.drawer-placement-top');
+    const openButton = drawer.nextElementSibling;
+    const closeButton = drawer.querySelector('sl-button[type="primary"]');
+
+    openButton.addEventListener('click', () => drawer.show());
+    closeButton.addEventListener('click', () => drawer.hide());
+  })();
+</script>
+```
+
+### Slide in From Bottom
+
+To make the drawer slide in from the bottom, set the `placement` attribute to `bottom`.
+
+```html preview
+<sl-drawer label="Drawer" placement="bottom" class="drawer-placement-bottom">
+  This drawer slides in from the bottom.
+  <sl-button slot="footer" type="primary">Close</sl-button>
+</sl-drawer>
+
+<sl-button>Open Drawer</sl-button>
+
+<script>
+  (() => {
+    const drawer = document.querySelector('.drawer-placement-bottom');
     const openButton = drawer.nextElementSibling;
     const closeButton = drawer.querySelector('sl-button[type="primary"]');
 
@@ -60,7 +108,7 @@ By default, the drawer slides out of its [containing block](https://developer.mo
 >
   The drawer will be contained to this box. This content won't shift or be affected in any way when the drawer opens.
 
-  <sl-drawer label="Drawer" contained class="drawer-contained" style="--width: 50%;">
+  <sl-drawer label="Drawer" contained class="drawer-contained" style="--size: 50%;">
     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
     <sl-button slot="footer" type="primary">Close</sl-button>
   </sl-drawer>
@@ -80,12 +128,12 @@ By default, the drawer slides out of its [containing block](https://developer.mo
 </script>
 ```
 
-### Custom Width
+### Custom Size
 
-Use the `--width` custom property to set the drawer's width.
+Use the `--size` custom property to set the drawer's size. This will be applied to the drawer's width or height depending on its `placement`.
 
 ```html preview
-<sl-drawer label="Drawer" class="drawer-custom-width" style="--width: 50vw;">
+<sl-drawer label="Drawer" class="drawer-custom-size" style="--size: 50vw;">
   This drawer is always 50% of the viewport.
   <sl-button slot="footer" type="primary">Close</sl-button>
 </sl-drawer>
@@ -94,7 +142,7 @@ Use the `--width` custom property to set the drawer's width.
 
 <script>
   (() => {
-    const drawer = document.querySelector('.drawer-custom-width');
+    const drawer = document.querySelector('.drawer-custom-size');
     const openButton = drawer.nextElementSibling;
     const closeButton = drawer.querySelector('sl-button[type="primary"]');
 

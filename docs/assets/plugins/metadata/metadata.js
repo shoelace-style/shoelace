@@ -19,7 +19,7 @@
             prop => `
         <tr>
           <td><code>${escapeHtml(prop.name)}</code></td>
-          <td><code>${escapeHtml(prop.attr)}</code></td>
+          <td><code style="white-space: nowrap;">${escapeHtml(prop.attr)}</code></td>
           <td>${escapeHtml(prop.docs)}</td>
           <td><code>${escapeHtml(prop.type)}</code></td>
           <td><code>${escapeHtml(prop.default)}</code></td>
@@ -129,7 +129,7 @@
           .map(
             style => `
         <tr>
-          <td><code>${escapeHtml(style.name)}</code></td>
+          <td><code style="white-space: nowrap;">${escapeHtml(style.name)}</code></td>
           <td>${escapeHtml(style.docs)}</td>
         </tr>
         `

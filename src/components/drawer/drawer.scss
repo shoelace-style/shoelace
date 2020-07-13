@@ -1,10 +1,11 @@
 @import 'component';
 
 /**
- * @prop --width: The preferred width of the drawer. Note that the drawer will shrink to accommodate smaller screens.
+ * @prop --size: The preferred size of the drawer. This will be applied to the drawer's width or height depending on its
+ *   `placement`. Note that the drawer will shrink to accommodate smaller screens.
  */
 :host {
-  --width: 25rem;
+  --size: 25rem;
 
   display: contents;
 }
@@ -34,12 +35,8 @@
 
 .drawer__panel {
   position: absolute;
-  top: 0;
-  height: 100%;
   display: flex;
   flex-direction: column;
-  width: var(--width);
-  height: 100%;
   z-index: 2;
   background-color: var(--sl-color-white);
   box-shadow: var(--sl-shadow-x-large);
@@ -52,20 +49,40 @@
   }
 }
 
-.drawer--left .drawer__panel {
-  right: auto;
+.drawer--top .drawer__panel {
+  top: 0;
   left: 0;
-  transform: translateX(-100%);
+  width: 100%;
+  height: var(--size);
+  transform: translate(0, -100%);
 }
 
 .drawer--right .drawer__panel {
+  top: 0;
   right: 0;
-  left: auto;
-  transform: translateX(100%);
+  width: var(--size);
+  height: 100%;
+  transform: translate(100%, 0);
+}
+
+.drawer--bottom .drawer__panel {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: var(--size);
+  transform: translate(0, 100%);
+}
+
+.drawer--left .drawer__panel {
+  top: 0;
+  left: 0;
+  width: var(--size);
+  height: 100%;
+  transform: translate(-100%, 0);
 }
 
 .drawer--open .drawer__panel {
-  transform: translateX(0);
+  transform: translate(0, 0);
 }
 
 .drawer__header {
