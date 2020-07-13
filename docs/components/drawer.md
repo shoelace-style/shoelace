@@ -154,7 +154,7 @@ Use the `--size` custom property to set the drawer's size. This will be applied 
 
 ### Scrolling
 
-By design, a drawer's height is 100% of its container and will never exceed that of the viewport. As such, drawers will not scroll with the page ensuring the header and footer are always accessible to the user.
+By design, a drawer's height will never exceed 100% of its container. As such, drawers will not scroll with the page to ensure the header and footer are always accessible to the user.
 
 ```html preview
 <sl-drawer label="Drawer" class="drawer-scrolling">
