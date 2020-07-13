@@ -24,9 +24,9 @@
     "make-dist": "node make-dist.js",
     "make-icons": "node make-icons.js",
     "prettier": "npx prettier --write --loglevel warn .",
-    "postbuild": "make-dist",
-    "postinstall": "make-icons",
-    "prebuild": "npm run lint && npm run prettier && npm run make-icons",
+    "postbuild": "npm run make-dist",
+    "postinstall": "npm run make-icons",
+    "prebuild": "npm run prettier && npm run lint && npm run make-icons",
     "serve": "node dev-server.js",
     "start": "concurrently --kill-others \"npm run dev\" \"npm run serve\"",
     "test.watch": "stencil test --spec --e2e --watchAll",
@@ -68,7 +68,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint"
+      "pre-commit": "npm run prettier && npm run lint"
     }
   }
 }
