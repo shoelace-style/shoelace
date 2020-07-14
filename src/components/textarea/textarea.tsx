@@ -7,8 +7,6 @@ let id = 0;
  * @since 1.0
  * @status stable
  *
- * @slot label - The textarea's label. Alternatively, you can use the label prop.
- *
  * @part base - The component's base wrapper.
  * @part form-control - The form control that wraps the textarea and label.
  * @part label - The textarea label.
@@ -197,7 +195,7 @@ export class Textarea {
           }}
           htmlFor={this.textareaId}
         >
-          <slot name="label">{this.label}</slot>
+          {this.label}
         </label>
         <div
           part="base"

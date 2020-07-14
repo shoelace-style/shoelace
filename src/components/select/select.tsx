@@ -9,14 +9,13 @@ let id = 0;
  * @status stable
  *
  * @slot - The select's options in the form of menu items.
- * @slot label - The select's label. Alternatively, you can use the label prop.
+ * @slot help-text - Help text that describes how to use the select.
  *
  * @part base - The component's base wrapper.
- * @part form-control - The form control that wraps the label and the select.
- * @part label - The select label.
  * @part input - The select input.
  * @part tags - The container in which multiselect options are rendered.
  * @part icon - The select icon.
+ * @part help-text - The select help text.
  */
 
 @Component({
@@ -39,8 +38,9 @@ export class Select {
 
   dropdown: HTMLSlDropdownElement;
   input: HTMLSlInputElement;
-  inputId = `input-${++id}`;
-  labelId = `input-label-${id}`;
+  inputId = `select-${++id}`;
+  labelId = `select-label-${id}`;
+  helpTextId = `select-help-text-${id}`;
   menu: HTMLSlMenuElement;
   resizeObserver: any;
 
@@ -81,6 +81,12 @@ export class Select {
 
   /** The select's label. */
   @Prop() label = '';
+
+  /** Set to true to indicate that the user input is valid. */
+  @Prop() valid = false;
+
+  /** Set to true to indicate that the user input is invalid. */
+  @Prop() invalid = false;
 
   @Watch('multiple')
   handleMultipleChange() {
@@ -282,22 +288,11 @@ export class Select {
         part="form-control"
         class={{
           'form-control': true,
-          'form-control--has-label': this.label.length > 0
+          'form-control--has-label': this.label.length > 0,
+          'form-control--valid': this.valid,
+          'form-control--invalid': this.invalid
         }}
       >
-        <label
-          part="label"
-          class={{
-            label: true,
-            'label--small': this.size === 'small',
-            'label--medium': this.size === 'medium',
-            'label--large': this.size === 'large'
-          }}
-          htmlFor={this.inputId}
-          onClick={this.handleLabelClick}
-        >
-          <slot name="label">{this.label}</slot>
-        </label>
         <sl-dropdown
           part="base"
           ref={el => (this.dropdown = el)}
@@ -327,9 +322,12 @@ export class Select {
             value={this.displayLabel}
             disabled={this.disabled}
             pill={this.pill}
+            label={this.label}
             placeholder={this.displayLabel === '' && this.displayTags.length === 0 ? this.placeholder : null}
             readonly={true}
             size={this.size}
+            valid={this.valid}
+            invalid={this.invalid}
             aria-labelledby={this.labelId}
             onSlFocus={this.handleFocus}
             onSlBlur={this.handleBlur}
@@ -355,6 +353,21 @@ export class Select {
             <slot />
           </sl-menu>
         </sl-dropdown>
+
+        <div
+          part="help-text"
+          id={this.helpTextId}
+          class={{
+            'help-text': true,
+            'help-text--small': this.size === 'small',
+            'help-text--medium': this.size === 'medium',
+            'help-text--large': this.size === 'large',
+            'help-text--valid': this.valid,
+            'help-text--invalid': this.invalid
+          }}
+        >
+          <slot name="help-text" />
+        </div>
       </div>
     );
   }

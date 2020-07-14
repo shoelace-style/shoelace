@@ -137,9 +137,4 @@ Show a valid or invalid state by setting the `valid` and `invalid` attributes, r
 </sl-input>
 ```
 
-The easiest way to handle validation in Shoelace is with the `valid` and `invalid` props shown above. This is designed to work well with client-side and server-side validation.
-
-[HTML form validation](https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation#Using_built-in_form_validation) is also possible with limitations. For example, providing validation styles to all the component's internals (e.g. prefix, suffix, labels, and help text) is not a trivial task with this approach. If you only care about styling the underlying _native input_, you can target the component's `input` part with the `:valid` and `:invalid` selector.
-
-
 [component-metadata:sl-input]

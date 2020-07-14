@@ -569,6 +569,10 @@ export namespace Components {
          */
         "disabled": boolean;
         /**
+          * Set to true to indicate that the user input is invalid.
+         */
+        "invalid": boolean;
+        /**
           * The select's label.
          */
         "label": string;
@@ -596,6 +600,10 @@ export namespace Components {
           * The select's size.
          */
         "size": 'small' | 'medium' | 'large';
+        /**
+          * Set to true to indicate that the user input is valid.
+         */
+        "valid": boolean;
         /**
           * The value of the control. This will be a string or an array depending on `multiple`.
          */
@@ -1683,6 +1691,10 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
+          * Set to true to indicate that the user input is invalid.
+         */
+        "invalid"?: boolean;
+        /**
           * The select's label.
          */
         "label"?: string;
@@ -1722,6 +1734,10 @@ declare namespace LocalJSX {
           * The select's size.
          */
         "size"?: 'small' | 'medium' | 'large';
+        /**
+          * Set to true to indicate that the user input is valid.
+         */
+        "valid"?: boolean;
         /**
           * The value of the control. This will be a string or an array depending on `multiple`.
          */

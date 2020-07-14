@@ -32,6 +32,20 @@ Use the `label` attribute to give the select an accessible label.
 </sl-select>
 ```
 
+### Help Text
+
+Add descriptive help text to an input with the `help-text` slot.
+
+```html preview
+<sl-select label="Experience">
+  <sl-menu-item value="option-1">Novice</sl-menu-item>
+  <sl-menu-item value="option-2">Intermediate</sl-menu-item>
+  <sl-menu-item value="option-3">Advanced</sl-menu-item>
+
+  <div slot="help-text">Please tell us your skill level.</div>
+</sl-select>
+```
+
 ### Multiple
 
 To allow multiple options to be selected, use the `multiple` attribute.
@@ -115,6 +129,30 @@ Use the `disabled` prop to disable a select.
   <sl-menu-item value="option-1">Option 1</sl-menu-item>
   <sl-menu-item value="option-2">Option 2</sl-menu-item>
   <sl-menu-item value="option-3">Option 3</sl-menu-item>
+</sl-select>
+```
+
+### Validation
+
+Show a valid or invalid state by setting the `valid` and `invalid` attributes, respectively. Help text can be used to provide feedback for validation and will be styled accordingly.
+
+```html preview
+<sl-select placeholder="Valid" valid>
+  <sl-menu-item value="option-1">Option 1</sl-menu-item>
+  <sl-menu-item value="option-2">Option 2</sl-menu-item>
+  <sl-menu-item value="option-3">Option 3</sl-menu-item>
+
+  <div slot="help-text">This is a valid selection!</div>
+</sl-select>
+
+<br>
+
+<sl-select placeholder="Invalid" invalid>
+  <sl-menu-item value="option-1">Option 1</sl-menu-item>
+  <sl-menu-item value="option-2">Option 2</sl-menu-item>
+  <sl-menu-item value="option-3">Option 3</sl-menu-item>
+
+  <div slot="help-text">This is not a valid selection!</div>
 </sl-select>
 ```
 
