@@ -19,6 +19,7 @@ const chalk = require('chalk');
 const express = require('express');
 const fs = require('fs').promises;
 const path = require('path');
+const historyFallback = require('connect-history-api-fallback');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const app = express();
@@ -58,7 +59,8 @@ setTimeout(() => {
     port: browserPort,
     proxy: {
       target: `http://localhost:${proxyPort}`,
-      ws: true
+      ws: true,
+      middleware: [historyFallback()]
     },
     logLevel: 'silent',
     notify: false,
