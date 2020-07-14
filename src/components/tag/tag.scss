@@ -65,7 +65,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 .tag--small {
-  font-size: var(--sl-input-font-size-small);
+  font-size: var(--sl-button-font-size-small);
   height: calc(var(--sl-input-height-small) * 0.8);
   line-height: calc(var(--sl-input-height-small) - var(--sl-input-border-width) * 2);
   border-radius: var(--sl-input-border-radius-small);
@@ -78,7 +78,7 @@
 }
 
 .tag--medium {
-  font-size: var(--sl-input-font-size-medium);
+  font-size: var(--sl-button-font-size-medium);
   height: calc(var(--sl-input-height-medium) * 0.8);
   line-height: calc(var(--sl-input-height-medium) - var(--sl-input-border-width) * 2);
   border-radius: var(--sl-input-border-radius-medium);
@@ -91,7 +91,7 @@
 }
 
 .tag--large {
-  font-size: var(--sl-input-font-size-large);
+  font-size: var(--sl-button-font-size-large);
   height: calc(var(--sl-input-height-large) * 0.8);
   line-height: calc(var(--sl-input-height-large) - var(--sl-input-border-width) * 2);
   border-radius: var(--sl-input-border-radius-large);
