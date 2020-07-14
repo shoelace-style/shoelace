@@ -5,7 +5,7 @@
 Progress rings are used to show the progress of a determinate operation in a circular fashion.
 
 ```html preview
-<sl-progress-ring percentage="50"></sl-progress-ring><br>
+<sl-progress-ring percentage="50"></sl-progress-ring>
 ```
 
 ## Examples
@@ -15,7 +15,7 @@ Progress rings are used to show the progress of a determinate operation in a cir
 Use the `size` attribute to set the diameter of the progress ring.
 
 ```html preview
-<sl-progress-ring percentage="50" size="200"></sl-progress-ring><br>
+<sl-progress-ring percentage="50" size="200"></sl-progress-ring>
 ```
 
 ### Stroke Width
@@ -23,7 +23,18 @@ Use the `size` attribute to set the diameter of the progress ring.
 Use the `stroke-width` attribute to set the width of the progress ring's indicator.
 
 ```html preview
-<sl-progress-ring percentage="50" stroke-width="10"></sl-progress-ring><br>
+<sl-progress-ring percentage="50" stroke-width="10"></sl-progress-ring>
+```
+
+### Colors
+
+To change the color, use the `--track-color` and `--indicator-color` custom properties.
+
+```html preview
+<sl-progress-ring 
+  percentage="50" 
+  style="--track-color: #ffe2c6; --indicator-color: tomato;"
+></sl-progress-ring>
 ```
 
 ### Labels

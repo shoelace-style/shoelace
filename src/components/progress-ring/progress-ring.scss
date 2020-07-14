@@ -1,7 +1,14 @@
 @import 'component';
 
+/**
+ * @prop --track-color: The track color.
+ * @prop --indicator-color: The indicator color.
+ */
 :host {
   display: inline-flex;
+
+  --track-color: var(--sl-color-gray-90);
+  --indicator-color: var(--sl-color-primary-50);
 }
 
 .progress-ring {
@@ -12,11 +19,11 @@
 }
 
 .progress-ring__track {
-  stroke: var(--sl-color-gray-90);
+  stroke: var(--track-color);
 }
 
 .progress-ring__indicator {
-  stroke: var(--sl-color-primary-50);
+  stroke: var(--indicator-color);
   transition: 0.35s stroke-dashoffset, 0.35s stroke;
   transform: rotate(-90deg);
   transform-origin: 50% 50%;
