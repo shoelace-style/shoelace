@@ -12,6 +12,7 @@ let id = 0;
  * @slot clear-icon - An icon to use in lieu of the default clear icon.
  * @slot show-password-icon - An icon to use in lieu of the default show password icon.
  * @slot hide-password-icon - An icon to use in lieu of the default hide password icon.
+ * @slot help-text - Help text that describes how to use the input.
  *
  * @part base - The component's base wrapper.
  * @part form-control - The form control that wraps the label and the input.
@@ -21,6 +22,7 @@ let id = 0;
  * @part clear-button - The clear button.
  * @part password-toggle-button - The password toggle button.
  * @part suffix - The input suffix container.
+ * @part help-text - The input help text.
  */
 
 @Component({
@@ -41,6 +43,7 @@ export class Input {
 
   inputId = `input-${++id}`;
   labelId = `input-label-${id}`;
+  helpTextId = `input-help-text-${id}`;
   input: HTMLInputElement;
 
   @Element() host: HTMLSlInputElement;
@@ -116,6 +119,12 @@ export class Input {
 
   /** The input's inputmode attribute. */
   @Prop() inputmode: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
+
+  /** Set to true to indicate that the user input is valid. */
+  @Prop() valid = false;
+
+  /** Set to true to indicate that the user input is invalid. */
+  @Prop() invalid = false;
 
   /** Emitted when the control's value changes. */
   @Event() slChange: EventEmitter;
@@ -216,7 +225,9 @@ export class Input {
         part="form-control"
         class={{
           'form-control': true,
-          'form-control--has-label': this.label.length > 0
+          'form-control--has-label': this.label.length > 0,
+          'form-control--valid': this.valid,
+          'form-control--invalid': this.invalid
         }}
       >
         <label
@@ -225,7 +236,9 @@ export class Input {
             label: true,
             'label--small': this.size === 'small',
             'label--medium': this.size === 'medium',
-            'label--large': this.size === 'large'
+            'label--large': this.size === 'large',
+            'label--valid': this.valid,
+            'label--invalid': this.invalid
           }}
           htmlFor={this.inputId}
         >
@@ -246,7 +259,9 @@ export class Input {
             'input--pill': this.pill,
             'input--disabled': this.disabled,
             'input--focused': this.hasFocus,
-            'input--empty': this.value.length === 0
+            'input--empty': this.value.length === 0,
+            'input--valid': this.valid,
+            'input--invalid': this.invalid
           }}
           onMouseDown={this.handleMouseDown}
         >
@@ -278,6 +293,7 @@ export class Input {
             required={this.required}
             inputMode={this.inputmode}
             aria-labelledby={this.labelId}
+            aria-describedby={this.helpTextId}
             onChange={this.handleChange}
             onInput={this.handleInput}
             onFocus={this.handleFocus}
@@ -322,6 +338,21 @@ export class Input {
           <span part="suffix" class="input__suffix">
             <slot name="suffix" />
           </span>
+        </div>
+
+        <div
+          part="help-text"
+          id={this.helpTextId}
+          class={{
+            'help-text': true,
+            'help-text--small': this.size === 'small',
+            'help-text--medium': this.size === 'medium',
+            'help-text--large': this.size === 'large',
+            'help-text--valid': this.valid,
+            'help-text--invalid': this.invalid
+          }}
+        >
+          <slot name="help-text" />
         </div>
       </div>
     );

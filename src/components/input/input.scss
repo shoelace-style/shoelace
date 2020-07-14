@@ -14,18 +14,27 @@
 .form-control--has-label {
   .label {
     display: inline-block;
+    color: var(--sl-input-label-color);
     margin-bottom: var(--sl-spacing-xx-small);
 
     &.label--small {
-      font-size: var(--sl-input-font-size-small);
+      font-size: var(--sl-input-label-font-size-small);
     }
 
     &.label--medium {
-      font-size: var(--sl-input-font-size-medium);
+      font-size: var(--sl-input-label-font-size-medium);
     }
 
     &.label--large {
-      font-size: var(--sl-input-font-size-large);
+      font-size: var(--sl-input-label-font-size-large);
+    }
+
+    &.label--valid {
+      color: var(--sl-input-label-color-valid);
+    }
+
+    &.label--invalid {
+      color: var(--sl-input-label-color-invalid);
     }
   }
 }
@@ -72,6 +81,24 @@
       &::placeholder {
         color: var(--sl-input-placeholder-color-disabled);
       }
+    }
+  }
+
+  &.input--valid:not(.input--disabled) {
+    color: var(--sl-input-color-valid);
+    border-color: var(--sl-input-border-color-valid);
+
+    &.input--focused {
+      box-shadow: var(--sl-focus-ring-box-shadow-valid);
+      border-color: var(--sl-input-border-color-valid);
+    }
+  }
+
+  &.input--invalid:not(.input--disabled) {
+    border-color: var(--sl-color-danger-50);
+
+    &.input--focused {
+      box-shadow: var(--sl-focus-ring-box-shadow-invalid);
     }
   }
 }
@@ -244,4 +271,36 @@
 
 .input--empty .input__clear {
   visibility: hidden;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Help text
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+.help-text {
+  color: var(--sl-input-help-text-color);
+
+  &.help-text--small {
+    font-size: var(--sl-input-help-text-font-size-small);
+  }
+
+  &.help-text--medium {
+    font-size: var(--sl-input-help-text-font-size-medium);
+  }
+
+  &.help-text--large {
+    font-size: var(--sl-input-help-text-font-size-large);
+  }
+
+  &.help-text--valid {
+    color: var(--sl-input-help-text-color-valid);
+  }
+
+  &.help-text--invalid {
+    color: var(--sl-input-help-text-color-invalid);
+  }
+
+  ::slotted(*) {
+    margin-top: var(--sl-spacing-xxx-small);
+  }
 }

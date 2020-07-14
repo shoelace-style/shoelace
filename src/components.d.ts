@@ -351,6 +351,10 @@ export namespace Components {
          */
         "inputmode": 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
         /**
+          * Set to true to indicate that the user input is invalid.
+         */
+        "invalid": boolean;
+        /**
           * The input's label.
          */
         "label": string;
@@ -430,6 +434,10 @@ export namespace Components {
           * The input's type.
          */
         "type": 'email' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'url';
+        /**
+          * Set to true to indicate that the user input is valid.
+         */
+        "valid": boolean;
         /**
           * The input's value attribute.
          */
@@ -1449,6 +1457,10 @@ declare namespace LocalJSX {
          */
         "inputmode"?: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
         /**
+          * Set to true to indicate that the user input is invalid.
+         */
+        "invalid"?: boolean;
+        /**
           * The input's label.
          */
         "label"?: string;
@@ -1524,6 +1536,10 @@ declare namespace LocalJSX {
           * The input's type.
          */
         "type"?: 'email' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'url';
+        /**
+          * Set to true to indicate that the user input is valid.
+         */
+        "valid"?: boolean;
         /**
           * The input's value attribute.
          */

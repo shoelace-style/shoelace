@@ -142,9 +142,26 @@
       var(--sl-focus-ring-lightness),
       var(--sl-focus-ring-alpha)
     );
+
   --sl-focus-ring-box-shadow-inset: inset 0 0 0 var(--sl-focus-ring-width)
     hsla(
       var(--sl-focus-ring-hue),
+      var(--sl-focus-ring-saturation),
+      var(--sl-focus-ring-lightness),
+      var(--sl-focus-ring-alpha)
+    );
+
+  --sl-focus-ring-box-shadow-valid: 0 0 0 var(--sl-focus-ring-width)
+    hsla(
+      var(--sl-color-success-hue),
+      var(--sl-focus-ring-saturation),
+      var(--sl-focus-ring-lightness),
+      var(--sl-focus-ring-alpha)
+    );
+
+  --sl-focus-ring-box-shadow-invalid: 0 0 0 var(--sl-focus-ring-width)
+    hsla(
+      var(--sl-color-danger-hue),
       var(--sl-focus-ring-saturation),
       var(--sl-focus-ring-lightness),
       var(--sl-focus-ring-alpha)
@@ -164,6 +181,8 @@
   --sl-input-border-color-hover: var(--sl-color-gray-70);
   --sl-input-border-color-focus: var(--sl-color-primary-50);
   --sl-input-border-color-disabled: var(--sl-color-gray-80);
+  --sl-input-border-color-valid: var(--sl-color-success-50);
+  --sl-input-border-color-invalid: var(--sl-color-danger-50);
   --sl-input-border-width: 1px;
 
   --sl-input-border-radius-small: 4px;
@@ -172,15 +191,17 @@
 
   --sl-input-font-family: var(--sl-font-sans);
   --sl-input-font-weight: var(--sl-font-weight-normal);
-  --sl-input-font-size-small: var(--sl-font-size-x-small);
-  --sl-input-font-size-medium: var(--sl-font-size-small);
-  --sl-input-font-size-large: var(--sl-font-size-medium);
+  --sl-input-font-size-small: var(--sl-font-size-small);
+  --sl-input-font-size-medium: var(--sl-font-size-medium);
+  --sl-input-font-size-large: var(--sl-font-size-large);
   --sl-input-letter-spacing: var(--sl-letter-spacing-normal);
 
   --sl-input-color: var(--sl-color-gray-30);
   --sl-input-color-hover: var(--sl-color-gray-30);
   --sl-input-color-focus: var(--sl-color-gray-30);
   --sl-input-color-disabled: var(--sl-color-gray-10);
+  --sl-input-color-valid: var(--sl-color-success-40);
+  --sl-input-color-invalid: var(--sl-color-danger-40);
 
   --sl-input-icon-color: var(--sl-color-gray-60);
   --sl-input-icon-color-hover: var(--sl-color-gray-40);
@@ -192,6 +213,24 @@
   --sl-input-spacing-small: 10px;
   --sl-input-spacing-medium: 12px;
   --sl-input-spacing-large: 14px;
+
+  // Labels
+  --sl-input-label-font-size-small: var(--sl-font-size-small);
+  --sl-input-label-font-size-medium: var(--sl-font-size-medium);
+  --sl-input-label-font-size-large: var(--sl-font-size-large);
+
+  --sl-input-label-color: inherit;
+  --sl-input-label-color-valid: inherit;
+  --sl-input-label-color-invalid: inherit;
+
+  // Help text
+  --sl-input-help-text-font-size-small: var(--sl-font-size-x-small);
+  --sl-input-help-text-font-size-medium: var(--sl-font-size-small);
+  --sl-input-help-text-font-size-large: var(--sl-font-size-medium);
+
+  --sl-input-help-text-color: var(--sl-color-gray-60);
+  --sl-input-help-text-color-valid: var(--sl-color-success-40);
+  --sl-input-help-text-color-invalid: var(--sl-color-danger-40);
 
   // Toggles (checkboxes, radios, switches)
   --sl-toggle-size: 14px;
