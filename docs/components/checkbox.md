@@ -5,7 +5,7 @@
 Checkboxes allow the user to toggle an option on or off.
 
 ```html preview
-<sl-checkbox>Checkbox</sl-checkbox><br>
+<sl-checkbox>Checkbox</sl-checkbox>
 ```
 
 ?> This component doesn't work with standard forms. Use [`<sl-form>`](/components/form.md) instead.
@@ -17,7 +17,7 @@ Checkboxes allow the user to toggle an option on or off.
 Use the `checked` attribute to activate the checkbox.
 
 ```html preview
-<sl-checkbox checked>Checked</sl-checkbox><br>
+<sl-checkbox checked>Checked</sl-checkbox>
 ```
 
 ### Indeterminate
@@ -25,7 +25,7 @@ Use the `checked` attribute to activate the checkbox.
 Use the `indeterminate` attribute to make the checkbox indeterminate.
 
 ```html preview
-<sl-checkbox indeterminate>Indeterminate</sl-checkbox><br>
+<sl-checkbox indeterminate>Indeterminate</sl-checkbox>
 ```
 
 ### Disabled
@@ -33,7 +33,7 @@ Use the `indeterminate` attribute to make the checkbox indeterminate.
 Use the `disabled` attribute to disable the checkbox.
 
 ```html preview
-<sl-checkbox disabled>Disabled</sl-checkbox><br>
+<sl-checkbox disabled>Disabled</sl-checkbox>
 ```
 
 [component-metadata:sl-checkbox]

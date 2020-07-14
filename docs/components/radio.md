@@ -5,7 +5,7 @@
 Radios allow the user to select one option from a group of many.
 
 ```html preview
-<sl-radio>Radio</sl-radio><br>
+<sl-radio>Radio</sl-radio>
 ```
 
 ?> This component doesn't work with standard forms. Use [`<sl-form>`](/components/form.md) instead.
@@ -17,7 +17,7 @@ Radios allow the user to select one option from a group of many.
 Use the `checked` attribute to activate the radio.
 
 ```html preview
-<sl-radio checked>Checked</sl-radio><br>
+<sl-radio checked>Checked</sl-radio>
 ```
 
 ### Disabled
@@ -25,12 +25,12 @@ Use the `checked` attribute to activate the radio.
 Use the `disabled` attribute to disable the radio.
 
 ```html preview
-<sl-radio disabled>Disabled</sl-radio><br>
+<sl-radio disabled>Disabled</sl-radio>
 ```
 
 ### Grouping Radios
 
-Radios are grouped based on their `name` attribute.
+Radios are grouped based on their `name` attribute and scoped to the nearest form.
 
 ```html preview
 <sl-radio name="option" checked>Option 1</sl-radio><br>

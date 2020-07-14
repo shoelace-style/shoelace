@@ -17,7 +17,7 @@ Switches allow the user to toggle an option on or off.
 Use the `checked` attribute to activate the switch.
 
 ```html preview
-<sl-switch checked>Checked</sl-switch><br>
+<sl-switch checked>Checked</sl-switch>
 ```
 
 ### Disabled
@@ -25,7 +25,7 @@ Use the `checked` attribute to activate the switch.
 Use the `disabled` attribute to disable the switch.
 
 ```html preview
-<sl-switch disabled>Disabled</sl-switch><br>
+<sl-switch disabled>Disabled</sl-switch>
 ```
 
 
