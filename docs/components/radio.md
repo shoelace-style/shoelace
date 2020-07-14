@@ -36,7 +36,7 @@ Radios are grouped based on their `name` attribute and scoped to the nearest for
 <sl-radio name="option" checked>Option 1</sl-radio><br>
 <sl-radio name="option">Option 2</sl-radio><br>
 <sl-radio name="option">Option 3</sl-radio><br>
-<sl-radio name="option">Option 4</sl-radio><br>
+<sl-radio name="option">Option 4</sl-radio>
 ```
 
 [component-metadata:sl-radio]
