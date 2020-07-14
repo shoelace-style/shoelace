@@ -19,7 +19,6 @@ const chalk = require('chalk');
 const express = require('express');
 const fs = require('fs').promises;
 const path = require('path');
-const historyFallback = require('connect-history-api-fallback');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const app = express();
@@ -40,10 +39,12 @@ app.use(
 // Inject Stencil's dev server iframe into the main entry point
 app.use(/^\/$/, async (req, res, next) => {
   let index = await fs.readFile('./docs/index.html', 'utf8');
-  index = index.replace(
-    '</body>',
-    '<iframe src="/~dev-server" style="display: block; width: 0; height: 0; border: 0;"></iframe></body>'
-  );
+  index = index
+    .replace('</head>', '<script>window.ShoelaceDevServer = true;</script></head>')
+    .replace(
+      '</body>',
+      '<iframe src="/~dev-server" style="display: block; width: 0; height: 0; border: 0;"></iframe></body>'
+    );
   res.type('html').send(index);
 });
 app.use('/dist', express.static('./dist'));
@@ -59,8 +60,7 @@ setTimeout(() => {
     port: browserPort,
     proxy: {
       target: `http://localhost:${proxyPort}`,
-      ws: true,
-      middleware: [historyFallback()]
+      ws: true
     },
     logLevel: 'silent',
     notify: false,
