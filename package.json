@@ -13,6 +13,10 @@
     "dist/",
     "loader/"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/shoelace-style/shoelace.git"
+  },
   "funding": {
     "type": "individual",
     "url": "https://github.com/sponsors/claviska"
