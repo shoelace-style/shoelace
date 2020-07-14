@@ -293,6 +293,21 @@ export class Select {
           'form-control--invalid': this.invalid
         }}
       >
+        <label
+          part="label"
+          class={{
+            label: true,
+            'label--small': this.size === 'small',
+            'label--medium': this.size === 'medium',
+            'label--large': this.size === 'large',
+            'label--valid': this.valid,
+            'label--invalid': this.invalid
+          }}
+          htmlFor={this.inputId}
+        >
+          {this.label}
+        </label>
+
         <sl-dropdown
           part="base"
           ref={el => (this.dropdown = el)}
@@ -322,7 +337,6 @@ export class Select {
             value={this.displayLabel}
             disabled={this.disabled}
             pill={this.pill}
-            label={this.label}
             placeholder={this.displayLabel === '' && this.displayTags.length === 0 ? this.placeholder : null}
             readonly={true}
             size={this.size}

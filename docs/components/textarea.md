@@ -20,6 +20,16 @@ Use the `label` attribute to give the textarea an accessible label.
 <sl-textarea label="Comments"></sl-textarea>
 ```
 
+### Help Text
+
+Add descriptive help text to a textarea with the `help-text` slot.
+
+```html preview
+<sl-textarea label="Feedback">
+  <div slot="help-text">Please tell us what you think.</div>
+</sl-textarea>
+```
+
 ### Rows
 
 Use the `rows` attribute to change the number of text rows that get shown.
@@ -42,6 +52,22 @@ Use the `disabled` attribute to disable an input.
 
 ```html preview
 <sl-textarea placeholder="Textarea" disabled></sl-textarea>
+```
+
+### Validation
+
+Show a valid or invalid state by setting the `valid` and `invalid` attributes, respectively. Help text can be used to provide feedback for validation and will be styled accordingly.
+
+```html preview
+<sl-textarea label="Valid" valid>
+  <div slot="help-text">This is a valid textarea.</div>
+</sl-textarea>
+
+<br>
+
+<sl-textarea label="Invalid" invalid>
+  <div slot="help-text">This is an invalid textarea.</div>
+</sl-textarea>
 ```
 
 ### Prevent Resizing

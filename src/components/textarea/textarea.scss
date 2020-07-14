@@ -1,33 +1,10 @@
 @import 'component';
+@import 'form-control-label';
+@import 'form-control-help-text';
 
 :host {
   display: block;
   cursor: text;
-}
-
-.form-control {
-  .label {
-    display: none;
-  }
-}
-
-.form-control--has-label {
-  .label {
-    display: inline-block;
-    margin-bottom: var(--sl-spacing-xx-small);
-
-    &.label--small {
-      font-size: var(--sl-input-font-size-small);
-    }
-
-    &.label--medium {
-      font-size: var(--sl-input-font-size-medium);
-    }
-
-    &.label--large {
-      font-size: var(--sl-input-font-size-large);
-    }
-  }
 }
 
 .textarea {
@@ -69,6 +46,24 @@
       &::placeholder {
         color: var(--sl-input-placeholder-color-disabled);
       }
+    }
+  }
+
+  &.textarea--valid:not(.textarea--disabled) {
+    color: var(--sl-input-color-valid);
+    border-color: var(--sl-input-border-color-valid);
+
+    &.textarea--focused {
+      box-shadow: var(--sl-focus-ring-box-shadow-valid);
+      border-color: var(--sl-input-border-color-valid);
+    }
+  }
+
+  &.textarea--invalid:not(.textarea--disabled) {
+    border-color: var(--sl-color-danger-50);
+
+    &.textarea--focused {
+      box-shadow: var(--sl-focus-ring-box-shadow-invalid);
     }
   }
 }

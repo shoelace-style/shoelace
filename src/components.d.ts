@@ -723,6 +723,10 @@ export namespace Components {
          */
         "inputmode": 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
         /**
+          * Set to true to indicate that the user input is invalid.
+         */
+        "invalid": boolean;
+        /**
           * The textarea's label.
          */
         "label": string;
@@ -778,6 +782,10 @@ export namespace Components {
           * The textarea's size.
          */
         "size": 'small' | 'medium' | 'large';
+        /**
+          * Set to true to indicate that the user input is valid.
+         */
+        "valid": boolean;
         /**
           * The textarea's value attribute.
          */
@@ -1861,6 +1869,10 @@ declare namespace LocalJSX {
          */
         "inputmode"?: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
         /**
+          * Set to true to indicate that the user input is invalid.
+         */
+        "invalid"?: boolean;
+        /**
           * The textarea's label.
          */
         "label"?: string;
@@ -1912,6 +1924,10 @@ declare namespace LocalJSX {
           * The textarea's size.
          */
         "size"?: 'small' | 'medium' | 'large';
+        /**
+          * Set to true to indicate that the user input is valid.
+         */
+        "valid"?: boolean;
         /**
           * The textarea's value attribute.
          */

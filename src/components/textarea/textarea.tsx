@@ -7,10 +7,13 @@ let id = 0;
  * @since 1.0
  * @status stable
  *
+ * @slot help-text - Help text that describes how to use the input.
+ *
  * @part base - The component's base wrapper.
  * @part form-control - The form control that wraps the textarea and label.
  * @part label - The textarea label.
  * @part textarea - The textarea control.
+ * @part help-text - The textarea help text.
  */
 
 @Component({
@@ -26,8 +29,9 @@ export class Textarea {
     this.handleFocus = this.handleFocus.bind(this);
   }
 
-  textareaId = `input-${++id}`;
-  labelId = `input-label-${id}`;
+  textareaId = `textarea-${++id}`;
+  labelId = `textarea-label-${id}`;
+  helpTextId = `textarea-help-text-${id}`;
   resizeObserver: any;
   textarea: HTMLTextAreaElement;
 
@@ -77,6 +81,12 @@ export class Textarea {
 
   /** The textarea's inputmode attribute. */
   @Prop() inputmode: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
+
+  /** Set to true to indicate that the user input is valid. */
+  @Prop() valid = false;
+
+  /** Set to true to indicate that the user input is invalid. */
+  @Prop() invalid = false;
 
   /** The number of rows to display by default. */
   @Prop() rows = 4;
@@ -182,7 +192,9 @@ export class Textarea {
         part="form-control"
         class={{
           'form-control': true,
-          'form-control--has-label': this.label.length > 0
+          'form-control--has-label': this.label.length > 0,
+          'form-control--valid': this.valid,
+          'form-control--invalid': this.invalid
         }}
       >
         <label
@@ -191,7 +203,9 @@ export class Textarea {
             label: true,
             'label--small': this.size === 'small',
             'label--medium': this.size === 'medium',
-            'label--large': this.size === 'large'
+            'label--large': this.size === 'large',
+            'label--valid': this.valid,
+            'label--invalid': this.invalid
           }}
           htmlFor={this.textareaId}
         >
@@ -211,6 +225,8 @@ export class Textarea {
             'textarea--disabled': this.disabled,
             'textarea--focused': this.hasFocus,
             'textarea--empty': this.value.length === 0,
+            'textarea--valid': this.valid,
+            'textarea--invalid': this.invalid,
 
             // Modifiers
             'textarea--resize-none': this.resize === 'none',
@@ -241,6 +257,21 @@ export class Textarea {
             onFocus={this.handleFocus}
             onBlur={this.handleBlur}
           />
+        </div>
+
+        <div
+          part="help-text"
+          id={this.helpTextId}
+          class={{
+            'help-text': true,
+            'help-text--small': this.size === 'small',
+            'help-text--medium': this.size === 'medium',
+            'help-text--large': this.size === 'large',
+            'help-text--valid': this.valid,
+            'help-text--invalid': this.invalid
+          }}
+        >
+          <slot name="help-text" />
         </div>
       </div>
     );
