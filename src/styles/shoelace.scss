@@ -12,7 +12,7 @@
   --sl-color-primary-text: var(--sl-color-white);
 
   --sl-color-success-hue: 110;
-  --sl-color-success-saturation: 60%;
+  --sl-color-success-saturation: 70%;
   --sl-color-success-text: var(--sl-color-white);
 
   --sl-color-info-hue: var(--sl-color-primary-hue);
@@ -142,7 +142,6 @@
       var(--sl-focus-ring-lightness),
       var(--sl-focus-ring-alpha)
     );
-
   --sl-focus-ring-box-shadow-inset: inset 0 0 0 var(--sl-focus-ring-width)
     hsla(
       var(--sl-focus-ring-hue),
@@ -151,21 +150,10 @@
       var(--sl-focus-ring-alpha)
     );
 
-  --sl-focus-ring-box-shadow-valid: 0 0 0 var(--sl-focus-ring-width)
-    hsla(
-      var(--sl-color-success-hue),
-      var(--sl-focus-ring-saturation),
-      var(--sl-focus-ring-lightness),
-      var(--sl-focus-ring-alpha)
-    );
-
-  --sl-focus-ring-box-shadow-invalid: 0 0 0 var(--sl-focus-ring-width)
-    hsla(
-      var(--sl-color-danger-hue),
-      var(--sl-focus-ring-saturation),
-      var(--sl-focus-ring-lightness),
-      var(--sl-focus-ring-alpha)
-    );
+  // Buttons
+  --sl-button-font-size-small: var(--sl-font-size-x-small);
+  --sl-button-font-size-medium: var(--sl-font-size-small);
+  --sl-button-font-size-large: var(--sl-font-size-medium);
 
   // Inputs
   --sl-input-height-small: 30px;

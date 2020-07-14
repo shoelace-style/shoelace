@@ -54,7 +54,8 @@
     border-color: var(--sl-input-border-color-valid);
 
     &.textarea--focused {
-      box-shadow: var(--sl-focus-ring-box-shadow-valid);
+      box-shadow: 0 0 0 var(--sl-focus-ring-width)
+        hsla(var(--sl-color-success-hue), var(--sl-color-success-saturation), 50%, var(--sl-focus-ring-alpha));
       border-color: var(--sl-input-border-color-valid);
     }
   }
@@ -63,7 +64,8 @@
     border-color: var(--sl-color-danger-50);
 
     &.textarea--focused {
-      box-shadow: var(--sl-focus-ring-box-shadow-invalid);
+      box-shadow: 0 0 0 var(--sl-focus-ring-width)
+        hsla(var(--sl-color-danger-hue), var(--sl-color-danger-saturation), 50%, var(--sl-focus-ring-alpha));
     }
   }
 }
