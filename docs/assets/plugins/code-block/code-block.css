@@ -1,7 +1,7 @@
 .code-block {
   position: relative;
   border-radius: 3px;
-  background: var(--sl-color-gray-95);
+  background: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 97%);
   margin-bottom: 1.5rem;
 }
 
