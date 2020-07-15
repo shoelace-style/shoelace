@@ -284,11 +284,6 @@ a {
   color: var(--sl-color-primary-45);
 }
 
-.markdown-section pre .token.class-name {
-  color: #f8e71c;
-  text-decoration: underline;
-}
-
 .markdown-section pre .token.symbol,
 .markdown-section pre .token.deleted {
   color: #f92672;
@@ -312,7 +307,8 @@ a {
   color: #9013fe;
 }
 
-.markdown-section pre .token.function {
+.markdown-section pre .token.function,
+.markdown-section pre .token.class-name {
   color: #eb9200;
 }
 
