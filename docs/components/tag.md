@@ -34,14 +34,14 @@ Use the `pill` prop to give tabs rounded edges.
 <sl-tag size="large" pill>Large</sl-tag>
 ```
 
-### Removable
+### Clearable
 
-Use the `removable` attribute to add a remove button to the tag.
+Use the `clearable` attribute to add a clear button to the tag.
 
 ```html preview
-<sl-tag size="small" removable>Small</sl-tag>
-<sl-tag size="medium" removable>Medium</sl-tag>
-<sl-tag size="large" removable>Large</sl-tag>
+<sl-tag size="small" clearable>Small</sl-tag>
+<sl-tag size="medium" clearable>Medium</sl-tag>
+<sl-tag size="large" clearable>Large</sl-tag>
 ```
 
 [component-metadata:sl-tag]

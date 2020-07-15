@@ -15,7 +15,7 @@
   cursor: inherit;
 }
 
-.tag__remove {
+.tag__clear {
   display: flex;
   align-items: center;
   border-radius: var(--sl-border-radius-small);
@@ -71,7 +71,7 @@
   border-radius: var(--sl-input-border-radius-small);
   padding: 0 var(--sl-spacing-x-small);
 
-  .tag__remove {
+  .tag__clear {
     margin-left: var(--sl-spacing-xx-small);
     margin-right: calc(-1 * var(--sl-spacing-xxx-small));
   }
@@ -84,7 +84,7 @@
   border-radius: var(--sl-input-border-radius-medium);
   padding: 0 var(--sl-spacing-small);
 
-  .tag__remove {
+  .tag__clear {
     margin-left: var(--sl-spacing-xx-small);
     margin-right: calc(-1 * var(--sl-spacing-xx-small));
   }
@@ -97,7 +97,7 @@
   border-radius: var(--sl-input-border-radius-large);
   padding: 0 var(--sl-spacing-medium);
 
-  .tag__remove {
+  .tag__clear {
     margin-left: var(--sl-spacing-xx-small);
     margin-right: calc(-1 * var(--sl-spacing-x-small));
   }

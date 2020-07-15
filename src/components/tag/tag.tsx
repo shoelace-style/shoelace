@@ -8,7 +8,7 @@ import { Component, Event, EventEmitter, Prop, h } from '@stencil/core';
  *
  * @part base - The component's base wrapper.
  * @part content - The tag content.
- * @part remove-button - The remove button.
+ * @part clear-button - The clear button.
  */
 
 @Component({
@@ -18,7 +18,7 @@ import { Component, Event, EventEmitter, Prop, h } from '@stencil/core';
 })
 export class Tag {
   constructor() {
-    this.handleRemoveClick = this.handleRemoveClick.bind(this);
+    this.handleClearClick = this.handleClearClick.bind(this);
   }
 
   tag: HTMLElement;
@@ -32,14 +32,14 @@ export class Tag {
   /** Set to true to draw a pill-style tag with rounded edges. */
   @Prop() pill = false;
 
-  /** Set to true to make the tag removable. */
-  @Prop() removable = false;
+  /** Set to true to make the tag clearable. */
+  @Prop() clearable = false;
 
-  /** Emitted when the remove button is activated. */
-  @Event() slRemove: EventEmitter;
+  /** Emitted when the clear button is activated. */
+  @Event() slClear: EventEmitter;
 
-  handleRemoveClick() {
-    this.slRemove.emit();
+  handleClearClick() {
+    this.slClear.emit();
   }
 
   render() {
@@ -65,15 +65,15 @@ export class Tag {
 
           // Modifers
           'tag--pill': this.pill,
-          'tag--removable': this.removable
+          'tag--clearable': this.clearable
         }}
       >
         <span part="content" class="tag__content">
           <slot />
         </span>
 
-        {this.removable && (
-          <span part="remove-button" class="tag__remove" role="button" tabIndex={-1} onClick={this.handleRemoveClick}>
+        {this.clearable && (
+          <span part="clear-button" class="tag__clear" role="button" tabIndex={-1} onClick={this.handleClearClick}>
             <sl-icon name="x" />
           </span>
         )}

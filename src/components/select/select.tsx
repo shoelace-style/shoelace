@@ -240,9 +240,9 @@ export class Select {
             type="info"
             size={this.size}
             pill={this.pill}
-            removable
+            clearable
             onClick={event => event.stopPropagation()}
-            onSlRemove={() => {
+            onSlClear={() => {
               item.checked = false;
               this.syncValueFromItems();
             }}

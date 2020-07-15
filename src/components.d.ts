@@ -681,13 +681,13 @@ export namespace Components {
     }
     interface SlTag {
         /**
+          * Set to true to make the tag clearable.
+         */
+        "clearable": boolean;
+        /**
           * Set to true to draw a pill-style tag with rounded edges.
          */
         "pill": boolean;
-        /**
-          * Set to true to make the tag removable.
-         */
-        "removable": boolean;
         /**
           * The tag's size.
          */
@@ -1823,17 +1823,17 @@ declare namespace LocalJSX {
     }
     interface SlTag {
         /**
-          * Emitted when the remove button is activated.
+          * Set to true to make the tag clearable.
          */
-        "onSlRemove"?: (event: CustomEvent<any>) => void;
+        "clearable"?: boolean;
+        /**
+          * Emitted when the clear button is activated.
+         */
+        "onSlClear"?: (event: CustomEvent<any>) => void;
         /**
           * Set to true to draw a pill-style tag with rounded edges.
          */
         "pill"?: boolean;
-        /**
-          * Set to true to make the tag removable.
-         */
-        "removable"?: boolean;
         /**
           * The tag's size.
          */
