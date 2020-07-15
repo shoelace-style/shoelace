@@ -54,8 +54,7 @@
   --code-theme-selection: var(--sl-color-primary-40);
   --code-theme-punctuation: var(--sl-color-gray-20);
   --code-theme-tag: var(--sl-color-primary-40);
-  --code-theme
-  -selector: #e98614;
+  --code-theme-selector: #e98614;
   --code-theme-keyword: #a151d2;
   --code-theme-function: #e98614;
   --code-theme-operator: var(--sl-color-gray-20);
@@ -129,10 +128,6 @@
 .sidebar-nav {
   flex: 1 1 auto;
   margin-top: 0.5rem;
-}
-
-.sidebar-nav > ul > li {
-  font-weight: bold;
 }
 
 /* Component headers */
