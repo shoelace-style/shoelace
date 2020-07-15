@@ -48,15 +48,15 @@ Shoelace provides a collection of professionally designed, every day UI componen
 
 With Shoelace, you can:
 
-- Start building things faster (no need to roll your own buttons or inputs)
-- Build multiple apps in different frameworks that all share the same UI
-- Stop worrying about new component libraries when you switch frameworks
+- Start building things faster (no need to roll your own buttons)
+- Build multiple apps with different frameworks that all share the same UI
+- Skip having to learn a new component library every time you switch frameworks
 
-If your organization is looking to build a design system, [Shoelace will save you thousands of dollars](https://medium.com/eightshapes-llc/and-you-thought-buttons-were-easy-26eb5b5c1871).* All the foundational components you need are right here, ready to be customized for your brand.
+If your organization is looking to build a design system, [Shoelace will save you thousands of dollars](https://medium.com/eightshapes-llc/and-you-thought-buttons-were-easy-26eb5b5c1871).* All the foundational components you need are right here, ready to be customized for your brand. And since it's built on web standards, browsers will continue to support it for many years to come.
 
 Whether you use Shoelace as a starting point for your organization's design system or for a fun personal project, there's no limit to what you can do with it.
 
-<small>*You're more than welcome to do this, but please [support the project with a sponsorship](https://github.com/sponsors/claviska) to continue its development.</small>
+<small>*Please consider giving back some of what you save by [supporting this project with a sponsorship](https://github.com/sponsors/claviska).</small>
 
 ## Browser Support
 

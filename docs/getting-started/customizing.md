@@ -20,7 +20,7 @@ To customize a design token, simply override it in your stylesheet using a `:roo
 }
 ```
 
-Many design tokens are described further along in this documentation. For a complete list, refer to one `shoelace.css` or `shoelace.scss` in the project's source code.
+Design tokens are described further along in this documentation. For a complete list, refer to `shoelace.scss` in the project's [source code](https://github.com/shoelace-style/shoelace/blob/master/src/styles/shoelace.scss).
 
 !> **Never modify variables directly in `shoelace.css`** because your changes will be overwritten when you upgrade the library. Even if you don't plan on upgrading, it's always better to override design tokens in your own stylesheet for better maintainability.
 
@@ -73,7 +73,7 @@ Most (but not all) components expose parts. You can find them in each component'
 
 ### Custom Properties
 
-For convenience, some components expose CSS custom properties that you can customize. These are not design tokens, nor do they have the same `--sl-` prefix since they're always scoped to a component.
+For convenience, some components expose CSS custom properties you can override. These are not design tokens, nor do they have the same `--sl-` prefix since they're scoped to a component.
 
 You can set custom properties on a component in your stylesheet.
 
@@ -107,7 +107,7 @@ It's a good practice to include `shoelace.css` in your app and add your theme's 
 
 ### Submitting a Theme
 
-**I am very interested in offering well-designed themes to compliment this library.** To submit a theme for review, please open an issue on GitHub with the theme attached. Once approved, your theme will be showcased in the project's documentation (that section is coming soon).
+**I am very interested in offering well-designed themes to complement this library.** To submit a theme for review, please open an issue on GitHub with the theme attached. Once approved, your theme will be showcased in the project's documentation (that section is coming soon).
 
 Themes that are in high demand include:
 

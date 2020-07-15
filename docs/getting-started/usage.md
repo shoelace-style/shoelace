@@ -9,13 +9,13 @@ Shoelace components are just regular HTML elements, or "custom elements" to be p
 Many components have properties ("props") that can be set using attributes. For example, buttons accept a `size` attribute that dictates the button's size.
 
 ```html
-<sl-button size="small">Small</sl-button>
+<sl-button size="small">Click me</sl-button>
 ```
 
 Some props are booleans, so they only have true/false values. To activate a boolean prop, add the corresponding attribute without a value.
 
 ```html
-<sl-button disabled>Pill Button</sl-button>
+<sl-button disabled>Click me</sl-button>
 ```
 
 In rare cases, a prop may require an array, an object, or a function. For example, to customize the color picker's list of preset swatches, you set the `swatches` prop to an array of colors. This can be done with JavaScript.
@@ -36,7 +36,7 @@ Refer to a component's documentation for a complete list of its properties.
 You can listen for standard events such as `click`, `mouseover`, etc. as you normally would. In addition, some components emit custom events. These work the same way as standard events, but are prefixed with `sl` to prevent collisions with standard events and other libraries.
 
 ```html
-<sl-checkbox>Checkbox</sl-checkbox>
+<sl-checkbox>Check me</sl-checkbox>
 
 <script>
   const checkbox = document.querySelector('sl-checkbox');
@@ -65,12 +65,12 @@ Refer to a component's documentation for a complete list of its methods and thei
 
 ### Slots
 
-Most components use slots to accept content inside of them. The most common slot is the _default_ slot, which includes any content inside the component that doesn't have a `slot` attribute.
+Many components use slots to accept content inside of them. The most common slot is the _default_ slot, which includes any content inside the component that doesn't have a `slot` attribute.
 
 For example, a button's default slot is used to populate its label.
 
 ```html
-<sl-button>Label</sl-button>
+<sl-button>Click me</sl-button>
 ```
 
 Some components also have _named_ slots. A named slot can be populated by adding a child element with the appropriate `slot` attribute. Notice how the icon below has the `slot="prefix"` attribute? This tells the component to place the icon into its `prefix` slot.
