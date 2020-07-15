@@ -211,7 +211,13 @@ Custom icons can be loaded by setting the `src` attribute. Only SVG images are s
     .icon-list-item {
       font-size: 20px;
     }    
-  }  
+  }
+
+  @media screen and (max-width: 500px) {
+    .icon-list {
+      grid-template-columns: repeat(4, 1fr);
+    }    
+  }
 </style>
 
 [component-metadata:sl-icon]
