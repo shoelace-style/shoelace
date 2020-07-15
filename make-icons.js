@@ -18,7 +18,7 @@ let numIcons = 0;
     const url = `https://github.com/twbs/icons/archive/v${version}.zip`;
 
     // Download the source from GitHub (since not everything is published to NPM)
-    console.log(chalk.cyan(`\nDownloading and extracting ${version}... 📦\n`));
+    console.log(chalk.cyan(`\nDownloading and extracting Bootstrap Icons ${version}... 📦\n`));
     await del(['./src/components/icon/icons', './temp']);
     await download(url, './temp', { extract: true });
 
