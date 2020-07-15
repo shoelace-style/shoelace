@@ -83,7 +83,7 @@
   color: var(--sl-color-gray-60);
   text-align: right;
   padding: 0 var(--sl-spacing-small);
-  margin: -1.25rem 0 .5rem 0;
+  margin: -1.25rem 0 .6rem 0;
 }
 
 .sidebar-buttons {
@@ -170,6 +170,13 @@ p + .code-block {
 }
 
 /* Content */
+@media screen and (max-width: 600px) {
+  .markdown-section {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
 .markdown-section .logo {
   max-width: 24rem;
 }
@@ -202,6 +209,7 @@ html .repo-button {
   text-decoration: none;
   color: var(--sl-color-gray-30);
   padding: var(--sl-spacing-xx-small) var(--sl-spacing-small);
+  margin-bottom: var(--sl-spacing-xx-small);
   transition: 0.25s all;
 }
 

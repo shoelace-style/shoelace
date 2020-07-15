@@ -35,6 +35,16 @@
   transition: 250ms background-color;
 }
 
+@media screen and (max-width: 600px) {
+  .code-block__preview {
+    padding-right: 1.5rem;
+  }
+
+  .code-block__resizer {
+    display: none;
+  }
+}
+
 .code-block__source {
   border: solid 1px var(--sl-color-gray-90);
   border-bottom: none;
