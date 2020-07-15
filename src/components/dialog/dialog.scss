@@ -44,6 +44,13 @@
   }
 }
 
+// Ensure there's enough vertical padding for phones that don't update vh when chrome appears (e.g. iPhone)
+@media screen and (max-width: 420px) {
+  .dialog__panel {
+    max-height: calc(80vh);
+  }
+}
+
 .dialog--open .dialog__panel {
   display: flex;
   opacity: 1;
