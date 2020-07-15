@@ -25,10 +25,16 @@
   --sidebar-toggle-border-color: var(--sidebar-border-color);
   --sidebar-toggle-border-width: 1px;
   --sidebar-nav-link-color--active: var(--sl-color-primary-50);
-  --sidebar-nav-pagelink-background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='7' height='11.2' viewBox='0 0 7 11.2'%3E%3Cpath d='M1.5 1.5l4 4.1 -4 4.1' stroke-width='1.5' stroke='rgb(179, 179, 179)' fill='none' stroke-linecap='square' stroke-linejoin='miter' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
-  --sidebar-nav-pagelink-background-image--active: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11.2' height='7' viewBox='0 0 11.2 7'%3E%3Cpath d='M1.5 1.5l4.1 4 4.1-4' stroke-width='1.5' stroke='rgb(179, 179, 179)' fill='none' stroke-linecap='square' stroke-linejoin='miter' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
-  --sidebar-nav-pagelink-background-image--loaded: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11.2' height='7' viewBox='0 0 11.2 7'%3E%3Cpath d='M1.5 1.5l4.1 4 4.1-4' stroke-width='1.5' stroke='rgb(179, 179, 179)' fill='none' stroke-linecap='square' stroke-linejoin='miter' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
-  --sidebar-nav-pagelink-background-image--collapse: var(--sidebar-nav-pagelink-background-image);
+
+  --nav-chevron-down: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11.2' height='7' viewBox='0 0 11.2 7'%3E%3Cpath d='M1.5 1.5l4.1 4 4.1-4' stroke-width='1.5' stroke='%23029DFF' fill='none' stroke-linecap='square' stroke-linejoin='miter' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
+  --nav-chevron-right: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='7' height='11.2' viewBox='0 0 7 11.2'%3E%3Cpath d='M1.5 1.5l4 4.1 -4 4.1' stroke-width='1.5' stroke='rgb(179, 179, 179)' fill='none' stroke-linecap='square' stroke-linejoin='miter' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
+
+  --sidebar-nav-pagelink-background-image: var(--nav-chevron-right);
+  --sidebar-nav-pagelink-background-image--active: var(--nav-chevron-down);
+  --sidebar-nav-pagelink-background-image--loaded: var(--nav-chevron-right);
+  --sidebar-nav-pagelink-background-image--collapse: var(--nav-chevron-right);
+  --sidebar-nav-indent: .5rem;
+
   --sidebar-nav-link-before-content-l2: '';
   --sidebar-nav-link-before-content-l3: '•';
 
