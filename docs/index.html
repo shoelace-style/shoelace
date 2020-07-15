@@ -18,6 +18,19 @@
     <!-- Import Shoelace -->
     <link rel="stylesheet" href="/dist/shoelace/shoelace.css" />
     <script type="module" src="/dist/shoelace/shoelace.esm.js"></script>
+
+    <!-- Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-6412891-16"></script>
+    <script>
+      if (!window.ShoelaceDevServer) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'UA-6412891-16');
+      }
+    </script>
   </head>
   <body>
     <div id="app"></div>

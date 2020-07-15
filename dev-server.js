@@ -40,7 +40,7 @@ app.use(
 app.use(/^\/$/, async (req, res, next) => {
   let index = await fs.readFile('./docs/index.html', 'utf8');
   index = index
-    .replace('</head>', '<script>window.ShoelaceDevServer = true;</script></head>')
+    .replace('<head>', '<head><script>window.ShoelaceDevServer = true;</script>')
     .replace(
       '</body>',
       '<iframe src="/~dev-server" style="display: block; width: 0; height: 0; border: 0;"></iframe></body>'
