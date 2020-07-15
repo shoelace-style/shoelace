@@ -1,5 +1,12 @@
 @import 'component';
 
+/**
+ * @prop --grid-width: The width of the color grid.
+ * @prop --grid-height: The height of the color grid.
+ * @prop --grid-handle-size: The size of the color grid's handle.
+ * @prop --slider-height: The height of the hue and alpha sliders.
+ * @prop --slider-handle-size: The diameter of the slider's handle.
+ */
 :host {
   display: inline-block;
 
@@ -11,6 +18,7 @@
 }
 
 .color-picker {
+  width: var(--grid-width);
   font-family: var(--sl-font-sans);
   font-size: var(--sl-font-size-medium);
   font-weight: var(--sl-font-weight-normal);
@@ -27,7 +35,6 @@
 
 .color-picker__grid {
   position: relative;
-  width: var(--grid-width);
   height: var(--grid-height);
   background-image: linear-gradient(
       to bottom,
