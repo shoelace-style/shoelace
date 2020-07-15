@@ -1,0 +1,396 @@
+@import 'component';
+
+:host {
+  display: inline-block;
+  width: auto;
+  cursor: pointer;
+}
+
+.button {
+  display: inline-flex;
+  align-items: stretch;
+  justify-content: center;
+  width: inherit;
+  border-style: solid;
+  border-width: var(--sl-input-border-width);
+  font-family: var(--sl-input-font-family);
+  font-weight: var(--sl-font-weight-semibold);
+  user-select: none;
+  white-space: nowrap;
+  vertical-align: middle;
+  transition: var(--sl-transition-fast) background-color, var(--sl-transition-fast) color,
+    var(--sl-transition-fast) border, var(--sl-transition-fast) box-shadow;
+  cursor: inherit;
+
+  &::-moz-focus-inner {
+    border: 0;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  // Clicks on icons shouldn't prevent the button from gaining focus
+  ::slotted(sl-icon) {
+    pointer-events: none;
+  }
+}
+
+.button__prefix,
+.button__suffix {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+.button__prefix ::slotted(:first-child) {
+  margin-left: calc(-1 * var(--sl-spacing-x-small));
+  margin-right: var(--sl-spacing-x-small);
+}
+
+.button__suffix ::slotted(:last-child) {
+  margin-left: var(--sl-spacing-x-small);
+  margin-right: calc(-1 * var(--sl-spacing-x-small));
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Standard buttons
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+.button {
+  &.button--default {
+    background-color: var(--sl-color-white);
+    border-color: var(--sl-color-gray-80);
+    color: var(--sl-color-gray-40);
+
+    &:hover:not(:disabled) {
+      background-color: var(--sl-color-primary-95);
+      border-color: var(--sl-color-primary-80);
+      color: var(--sl-color-primary-40);
+    }
+
+    &:focus:not(:disabled) {
+      background-color: var(--sl-color-primary-95);
+      border-color: var(--sl-color-primary-70);
+      color: var(--sl-color-primary-40);
+      box-shadow: 0 0 0 var(--sl-focus-ring-width)
+        hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha));
+    }
+
+    &:active:not(:disabled) {
+      background-color: var(--sl-color-primary-95);
+      border-color: var(--sl-color-primary-50);
+      color: var(--sl-color-primary-30);
+    }
+  }
+
+  &.button--primary {
+    background-color: var(--sl-color-primary-50);
+    border-color: var(--sl-color-primary-50);
+    color: var(--sl-color-primary-text);
+
+    &:hover:not(:disabled) {
+      background-color: var(--sl-color-primary-60);
+      border-color: var(--sl-color-primary-60);
+      color: var(--sl-color-primary-text);
+    }
+
+    &:focus:not(:disabled) {
+      background-color: var(--sl-color-primary-60);
+      border-color: var(--sl-color-primary-60);
+      color: var(--sl-color-primary-text);
+      box-shadow: 0 0 0 var(--sl-focus-ring-width)
+        hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha));
+    }
+
+    &:active:not(:disabled) {
+      background-color: var(--sl-color-primary-50);
+      border-color: var(--sl-color-primary-50);
+      color: var(--sl-color-primary-text);
+    }
+  }
+
+  &.button--success {
+    background-color: var(--sl-color-success-50);
+    border-color: var(--sl-color-success-50);
+    color: var(--sl-color-success-text);
+
+    &:hover:not(:disabled) {
+      background-color: var(--sl-color-success-60);
+      border-color: var(--sl-color-success-60);
+      color: var(--sl-color-success-text);
+    }
+
+    &:focus:not(:disabled) {
+      background-color: var(--sl-color-success-60);
+      border-color: var(--sl-color-success-60);
+      color: var(--sl-color-success-text);
+      box-shadow: 0 0 0 var(--sl-focus-ring-width)
+        hsla(var(--sl-color-success-hue), var(--sl-color-success-saturation), 50%, var(--sl-focus-ring-alpha));
+    }
+
+    &:active:not(:disabled) {
+      background-color: var(--sl-color-success-50);
+      border-color: var(--sl-color-success-50);
+      color: var(--sl-color-success-text);
+    }
+  }
+
+  &.button--info {
+    background-color: var(--sl-color-info-50);
+    border-color: var(--sl-color-info-50);
+    color: var(--sl-color-info-text);
+
+    &:hover:not(:disabled) {
+      background-color: var(--sl-color-info-60);
+      border-color: var(--sl-color-info-60);
+      color: var(--sl-color-info-text);
+    }
+
+    &:focus:not(:disabled) {
+      background-color: var(--sl-color-info-60);
+      border-color: var(--sl-color-info-60);
+      color: var(--sl-color-info-text);
+      box-shadow: 0 0 0 var(--sl-focus-ring-width)
+        hsla(var(--sl-color-info-hue), var(--sl-color-info-saturation), 50%, var(--sl-focus-ring-alpha));
+    }
+
+    &:active:not(:disabled) {
+      background-color: var(--sl-color-info-50);
+      border-color: var(--sl-color-info-50);
+      color: var(--sl-color-info-text);
+    }
+  }
+
+  &.button--warning {
+    background-color: var(--sl-color-warning-50);
+    border-color: var(--sl-color-warning-50);
+    color: var(--sl-color-warning-text);
+
+    &:hover:not(:disabled) {
+      background-color: var(--sl-color-warning-60);
+      border-color: var(--sl-color-warning-60);
+      color: var(--sl-color-warning-text);
+    }
+
+    &:focus:not(:disabled) {
+      background-color: var(--sl-color-warning-60);
+      border-color: var(--sl-color-warning-60);
+      color: var(--sl-color-warning-text);
+      box-shadow: 0 0 0 var(--sl-focus-ring-width)
+        hsla(var(--sl-color-warning-hue), var(--sl-color-warning-saturation), 50%, var(--sl-focus-ring-alpha));
+    }
+
+    &:active:not(:disabled) {
+      background-color: var(--sl-color-warning-50);
+      border-color: var(--sl-color-warning-50);
+      color: var(--sl-color-warning-text);
+    }
+  }
+
+  &.button--danger {
+    background-color: var(--sl-color-danger-50);
+    border-color: var(--sl-color-danger-50);
+    color: var(--sl-color-danger-text);
+
+    &:hover:not(:disabled) {
+      background-color: var(--sl-color-danger-60);
+      border-color: var(--sl-color-danger-60);
+      color: var(--sl-color-danger-text);
+    }
+
+    &:focus:not(:disabled) {
+      background-color: var(--sl-color-danger-60);
+      border-color: var(--sl-color-danger-60);
+      color: var(--sl-color-danger-text);
+      box-shadow: 0 0 0 var(--sl-focus-ring-width)
+        hsla(var(--sl-color-danger-hue), var(--sl-color-danger-saturation), 50%, var(--sl-focus-ring-alpha));
+    }
+
+    &:active:not(:disabled) {
+      background-color: var(--sl-color-danger-50);
+      border-color: var(--sl-color-danger-50);
+      color: var(--sl-color-danger-text);
+    }
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Text buttons
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+.button--text {
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--sl-color-primary-50);
+
+  &:hover:not(:disabled) {
+    background-color: transparent;
+    border-color: transparent;
+    color: var(--sl-color-primary-60);
+  }
+
+  &:focus:not(:disabled) {
+    background-color: transparent;
+    border-color: transparent;
+    color: var(--sl-color-primary-60);
+    box-shadow: 0 0 0 var(--sl-focus-ring-width)
+      hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha));
+  }
+
+  &:active:not(:disabled) {
+    background-color: transparent;
+    border-color: transparent;
+    color: var(--sl-color-primary-40);
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Size modifiers
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+.button--small {
+  font-size: var(--sl-button-font-size-small);
+  height: var(--sl-input-height-small);
+  line-height: calc(var(--sl-input-height-small) - var(--sl-input-border-width) * 2);
+  border-radius: var(--sl-input-border-radius-small);
+  padding: 0 var(--sl-spacing-medium);
+}
+
+.button--medium {
+  font-size: var(--sl-button-font-size-medium);
+  height: var(--sl-input-height-medium);
+  line-height: calc(var(--sl-input-height-medium) - var(--sl-input-border-width) * 2);
+  border-radius: var(--sl-input-border-radius-medium);
+  padding: 0 var(--sl-spacing-large);
+}
+
+.button--large {
+  font-size: var(--sl-button-font-size-large);
+  height: var(--sl-input-height-large);
+  line-height: calc(var(--sl-input-height-large) - var(--sl-input-border-width) * 2);
+  border-radius: var(--sl-input-border-radius-large);
+  padding: 0 var(--sl-spacing-x-large);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Pill modifier
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+.button--pill {
+  &.button--small {
+    border-radius: var(--sl-input-height-small);
+  }
+
+  &.button--medium {
+    border-radius: var(--sl-input-height-medium);
+  }
+
+  &.button--large {
+    border-radius: var(--sl-input-height-large);
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Circle modifier
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+.button--circle {
+  padding-left: 0;
+  padding-right: 0;
+
+  .button__label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &.button--small {
+    width: var(--sl-input-height-small);
+    border-radius: 50%;
+  }
+
+  &.button--medium {
+    width: var(--sl-input-height-medium);
+    border-radius: 50%;
+  }
+
+  &.button--large {
+    width: var(--sl-input-height-large);
+    border-radius: 50%;
+  }
+
+  .button__prefix,
+  .button__suffix,
+  .button__caret {
+    display: none;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Block modifier
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Caret modifier
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+.button--caret {
+  .button__suffix {
+    display: none;
+  }
+
+  .button__caret {
+    display: flex;
+    align-items: center;
+    margin-left: var(--sl-spacing-xx-small);
+    margin-right: calc(-1 * var(--sl-spacing-xx-small));
+
+    svg {
+      width: 1em;
+      height: 1em;
+    }
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Loading modifier
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+.button--loading {
+  position: relative;
+  cursor: wait;
+
+  .button__prefix,
+  .button__label,
+  .button__suffix,
+  .button__caret {
+    visibility: hidden;
+  }
+
+  sl-spinner {
+    --indicator-color: currentColor;
+    --stroke-width: 1px;
+    position: absolute;
+    height: 1em;
+    width: 1em;
+    top: calc(50% - 0.5em);
+    left: calc(50% - 0.5em);
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Badges
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+.button ::slotted(sl-badge) {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translateY(-50%) translateX(50%);
+}

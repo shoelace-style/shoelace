@@ -1,0 +1,130 @@
+@import 'component';
+
+/**
+ * @prop --width: The preferred width of the dialog. Note that the dialog will shrink to accommodate smaller screens.
+ */
+:host {
+  --width: 31rem;
+
+  display: contents;
+}
+
+.dialog {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: var(--sl-z-index-dialog);
+
+  &[hidden] {
+    display: none;
+  }
+}
+
+.dialog__panel {
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+  width: var(--width);
+  max-width: calc(100vw - var(--sl-spacing-xx-large));
+  max-height: calc(100vh - var(--sl-spacing-xx-large));
+  background-color: var(--sl-color-white);
+  border-radius: var(--sl-border-radius-medium);
+  box-shadow: var(--sl-shadow-x-large);
+  opacity: 0;
+  transform: scale(0.8);
+  transition: var(--sl-transition-medium) opacity, var(--sl-transition-medium) transform;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+// Ensure there's enough vertical padding for phones that don't update vh when chrome appears (e.g. iPhone)
+@media screen and (max-width: 420px) {
+  .dialog__panel {
+    max-height: calc(80vh);
+  }
+}
+
+.dialog--open .dialog__panel {
+  display: flex;
+  opacity: 1;
+  transform: scale(1);
+}
+
+.dialog__header {
+  display: flex;
+}
+
+.dialog__title {
+  flex: 1 1 auto;
+  font-size: var(--sl-font-size-large);
+  line-height: var(--sl-line-height-dense);
+  padding: var(--sl-spacing-large);
+}
+
+.dialog__close {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  border-radius: var(--sl-border-radius-small);
+  font-family: inherit;
+  font-size: var(--sl-font-size-x-large);
+  font-weight: inherit;
+  color: var(--sl-color-gray-50);
+  padding: 0 var(--sl-spacing-large);
+  cursor: pointer;
+  transition: var(--sl-transition-fast) color;
+  -webkit-appearance: none;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: var(--sl-color-primary-50);
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.focus-visible .dialog__close:focus {
+  box-shadow: var(--sl-focus-ring-box-shadow);
+}
+
+.dialog__body {
+  padding: var(--sl-spacing-large);
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.dialog__footer {
+  text-align: right;
+  padding: var(--sl-spacing-large);
+
+  ::slotted(sl-button:not(:first-of-type)) {
+    margin-left: var(--sl-spacing-x-small);
+  }
+}
+
+.dialog__overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: var(--sl-overlay-background-color);
+  opacity: 0;
+  transition: var(--sl-transition-medium) opacity;
+}
+
+.dialog--open .dialog__overlay {
+  opacity: 1;
+}

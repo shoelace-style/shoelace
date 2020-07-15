@@ -1,0 +1,96 @@
+@import 'component';
+
+:host {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.radio {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--sl-input-font-family);
+  font-size: var(--sl-input-font-size-medium);
+  font-weight: var(--sl-input-font-weight);
+  color: var(--sl-input-color);
+  vertical-align: middle;
+  cursor: inherit;
+}
+
+.radio__icon {
+  display: inline-flex;
+  width: var(--sl-toggle-size);
+  height: var(--sl-toggle-size);
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.radio__control {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--sl-toggle-size);
+  height: var(--sl-toggle-size);
+  border: solid var(--sl-input-border-width) var(--sl-input-border-color);
+  border-radius: 50%;
+  background-color: var(--sl-input-background-color);
+  color: var(--sl-color-white);
+  transition: var(--sl-transition-fast) border-color, var(--sl-transition-fast) background-color,
+    var(--sl-transition-fast) color, var(--sl-transition-fast) box-shadow;
+
+  input[type='radio'] {
+    position: absolute;
+    opacity: 0;
+    padding: 0;
+    margin: 0;
+    pointer-events: none;
+    -webkit-appearance: none;
+  }
+}
+
+// Hover
+.radio:not(.radio--checked):not(.radio--disabled) .radio__control:hover {
+  border-color: var(--sl-input-border-color-hover);
+  background-color: var(--sl-input-background-color-hover);
+}
+
+// Focus
+.radio.radio--focused:not(.radio--checked):not(.radio--disabled) .radio__control {
+  border-color: var(--sl-input-border-color-focus);
+  background-color: var(--sl-input-background-color-focus);
+  box-shadow: var(--sl-focus-ring-box-shadow);
+}
+
+// Checked
+.radio--checked .radio__control {
+  border-color: var(--sl-color-primary-50);
+  background-color: var(--sl-color-primary-50);
+}
+
+// Checked + hover
+.radio.radio--checked:not(.radio--disabled) .radio__control:hover {
+  border-color: var(--sl-color-primary-60);
+  background-color: var(--sl-color-primary-60);
+}
+
+// Checked + focus
+.radio.radio--checked:not(.radio--disabled).radio--focused .radio__control {
+  border-color: var(--sl-color-primary-60);
+  background-color: var(--sl-color-primary-60);
+  box-shadow: var(--sl-focus-ring-box-shadow);
+}
+
+// Disabled
+.radio--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.radio__label {
+  line-height: var(--sl-toggle-size);
+  margin-left: 0.5em;
+  user-select: none;
+}

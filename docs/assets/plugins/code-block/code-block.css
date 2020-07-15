@@ -1,0 +1,108 @@
+.code-block {
+  position: relative;
+  border-radius: 3px;
+  background: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 97%);
+  margin-bottom: 1.5rem;
+}
+
+.code-block__preview {
+  position: relative;
+  border: solid 1px var(--sl-color-gray-90);
+  border-bottom: none;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  background-color: white;
+  min-width: 20rem;
+  max-width: 100%;
+  padding: 1.5rem 3rem 1.5rem 1.5rem;
+}
+
+.code-block__resizer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 1.75rem;
+  font-size: 20px;
+  color: var(--sl-color-gray-50);
+  background-color: white;
+  border-left: solid 1px var(--sl-color-gray-90);
+  border-top-right-radius: 3px;
+  cursor: ew-resize;
+  transition: 250ms background-color;
+}
+
+@media screen and (max-width: 600px) {
+  .code-block__preview {
+    padding-right: 1.5rem;
+  }
+
+  .code-block__resizer {
+    display: none;
+  }
+}
+
+.code-block__source {
+  border: solid 1px var(--sl-color-gray-90);
+  border-bottom: none;
+  border-radius: 0 !important;
+  margin: 0 !important;
+  display: none;
+}
+
+.code-block__source .docsify-copy-code-button {
+  border-top-right-radius: 0;
+}
+
+.code-block--expanded .code-block__source {
+  display: block;
+}
+
+.code-block__toggle {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 2.5rem;
+  border: solid 1px var(--sl-color-gray-90);
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  background: var(--sl-color-white);
+  font: inherit;
+  font-size: 0.875rem;
+  color: var(--sl-color-gray-40);
+  cursor: pointer;
+  transition: 250ms background-color;
+  -webkit-appearance: none;
+}
+
+.code-block__toggle:hover,
+.code-block__toggle:active {
+  border-color: var(--sl-color-primary-80);
+  background-color: var(--sl-color-primary-95);
+  color: var(--sl-color-primary-50);
+}
+
+.code-block__toggle:focus {
+  outline: none;
+  border-color: var(--sl-color-primary-50);
+  background-color: var(--sl-color-primary-95);
+  color: var(--sl-color-primary-50);
+  box-shadow: var(--sl-focus-ring-box-shadow);
+}
+
+.code-block__toggle svg {
+  width: 1em;
+  height: 1em;
+  margin-left: 0.25rem;
+  transition: 250ms transform;
+}
+
+.code-block--expanded .code-block__toggle svg {
+  transform: rotate(180deg);
+}

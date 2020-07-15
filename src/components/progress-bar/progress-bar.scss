@@ -1,0 +1,33 @@
+@import 'component';
+
+/**
+ * @prop height: The progress bar's height.
+ */
+:host {
+  display: block;
+
+  --height: 16px;
+}
+
+.progress-bar {
+  position: relative;
+  background: var(--sl-color-gray-90);
+  height: var(--height);
+  border-radius: var(--sl-border-radius-pill);
+  overflow: hidden;
+}
+
+.progress-bar__indicator {
+  height: 100%;
+  font-family: var(--sl-font-sans);
+  font-size: 12px;
+  font-weight: var(--sl-font-weight-normal);
+  background-color: var(--sl-color-primary-50);
+  color: var(--sl-color-white);
+  text-align: center;
+  line-height: var(--height);
+  white-space: nowrap;
+  overflow: hidden;
+  transition: 400ms width, 400ms background-color;
+  user-select: none;
+}

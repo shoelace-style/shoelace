@@ -1,0 +1,10 @@
+@import 'component';
+
+:host {
+  display: block;
+}
+
+.tab-panel {
+  border: solid 1px transparent;
+  padding: 20px 20px;
+}

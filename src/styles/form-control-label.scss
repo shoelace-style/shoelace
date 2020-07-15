@@ -1,0 +1,33 @@
+.form-control {
+  .label {
+    display: none;
+  }
+}
+
+.form-control--has-label {
+  .label {
+    display: inline-block;
+    color: var(--sl-input-label-color);
+    margin-bottom: var(--sl-spacing-xxx-small);
+
+    &.label--small {
+      font-size: var(--sl-input-label-font-size-small);
+    }
+
+    &.label--medium {
+      font-size: var(--sl-input-label-font-size-medium);
+    }
+
+    &.label--large {
+      font-size: var(--sl-input-label-font-size-large);
+    }
+
+    &.label--valid {
+      color: var(--sl-input-label-color-valid);
+    }
+
+    &.label--invalid {
+      color: var(--sl-input-label-color-invalid);
+    }
+  }
+}

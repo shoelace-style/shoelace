@@ -1,0 +1,78 @@
+{
+  "name": "@shoelace-style/shoelace",
+  "version": "2.0.0-beta.3",
+  "description": "A forward-thinking library of web components.",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "es2015": "dist/esm/index.mjs",
+  "es2017": "dist/esm/index.mjs",
+  "types": "dist/types/index.d.ts",
+  "collection": "dist/collection/collection-manifest.json",
+  "collection:main": "dist/collection/index.js",
+  "files": [
+    "dist/",
+    "loader/"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/shoelace-style/shoelace.git"
+  },
+  "funding": {
+    "type": "individual",
+    "url": "https://github.com/sponsors/claviska"
+  },
+  "scripts": {
+    "build": "stencil build --docs",
+    "dev": "stencil build --dev --docs --watch --serve --port 4001 --no-open",
+    "lint": "eslint src/**/*{.ts,.tsx}",
+    "make-dist": "node make-dist.js",
+    "make-icons": "node make-icons.js",
+    "prettier": "npx prettier --write --loglevel warn .",
+    "postbuild": "npm run make-dist",
+    "postinstall": "npm run make-icons",
+    "prebuild": "npm run prettier && npm run lint && npm run make-icons",
+    "serve": "node dev-server.js",
+    "start": "concurrently --kill-others \"npm run dev\" \"npm run serve\"",
+    "test.watch": "stencil test --spec --e2e --watchAll",
+    "test": "stencil test --spec --e2e",
+    "version": "npm run build"
+  },
+  "devDependencies": {
+    "@stencil/eslint-plugin": "^0.3.1",
+    "@typescript-eslint/eslint-plugin": "^2.28.0",
+    "@typescript-eslint/parser": "^2.28.0",
+    "bluebird": "^3.7.2",
+    "bootstrap-icons": "^1.0.0-alpha5",
+    "browser-sync": "^2.26.7",
+    "chalk": "^4.0.0",
+    "concurrently": "^5.1.0",
+    "del": "^5.1.0",
+    "download": "^8.0.0",
+    "eslint": "^6.8.0",
+    "eslint-plugin-react": "^7.19.0",
+    "express": "^4.17.1",
+    "front-matter": "^4.0.2",
+    "glob": "^7.1.6",
+    "http-proxy": "^1.18.1",
+    "http-proxy-middleware": "^1.0.4",
+    "husky": "^4.2.5",
+    "prettier": "2.0.5",
+    "recursive-copy": "^2.0.10",
+    "through2": "^3.0.1",
+    "workbox-build": "4.3.1"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@popperjs/core": "^2.1.1",
+    "@sphinxxxx/color-conversion": "^2.2.2",
+    "@stencil/core": "^1.14.0",
+    "@stencil/sass": "^1.1.1",
+    "color": "^3.1.2",
+    "resize-observer-polyfill": "^1.5.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run prettier && npm run lint"
+    }
+  }
+}

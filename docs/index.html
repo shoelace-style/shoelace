@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Shoelace: A forward-thinking library of web components.</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="description" content="Stencil Component Starter" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify/themes/pure.css" />
+    <link rel="stylesheet" href="/assets/styles/docs.css" />
+    <link rel="stylesheet" href="/assets/styles/demos.css" />
+    <link rel="stylesheet" href="/assets/plugins/code-block/code-block.css" />
+    <link rel="icon" href="/assets/images/logo.svg" type="image/x-icon" />
+
+    <!-- Import Shoelace -->
+    <link rel="stylesheet" href="/dist/shoelace/shoelace.css" />
+    <script type="module" src="/dist/shoelace/shoelace.esm.js"></script>
+
+    <!-- Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-6412891-16"></script>
+    <script>
+      if (!window.ShoelaceDevServer) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'UA-6412891-16');
+      }
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      window.$docsify = {
+        alias: {
+          '/.*/_sidebar.md': '/_sidebar.md'
+        },
+        auto2top: true,
+        copyCode: {
+          buttonText: 'Copy Code',
+          errorText: 'Failed to copy',
+          successText: 'Copied'
+        },
+        coverpage: false,
+        executeScript: true,
+        homepage: '/getting-started/overview.md',
+        loadSidebar: true,
+        logo: '/assets/images/wordmark.svg',
+        maxLevel: 3,
+        subMaxLevel: 2,
+        name: 'Shoelace',
+        notFoundPage: '404.md',
+        pagination: {
+          previousText: 'Previous',
+          nextText: 'Next',
+          crossChapter: true,
+          crossChapterText: false
+        },
+        repo: 'https://github.com/shoelace-style/shoelace/',
+        routerMode: window.ShoelaceDevServer ? 'hash' : 'history',
+        search: {
+          maxAge: 86400000, // Expiration time, the default one day
+          paths: 'auto',
+          placeholder: 'Search',
+          noData: 'No Results',
+          depth: 3,
+          namespace: 'shoelace-docs'
+        },
+        themeColor: '#049dff'
+      };
+    </script>
+    <script src="https://unpkg.com/docsify/lib/docsify.min.js"></script>
+    <script src="https://unpkg.com/docsify/lib/plugins/search.min.js"></script>
+    <script src="https://unpkg.com/docsify-copy-code"></script>
+    <script src="https://unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
+    <script src="https://unpkg.com/docsify/lib/plugins/zoom-image.min.js"></script>
+    <script src="https://unpkg.com/prismjs@1.19.0/components/prism-bash.min.js"></script>
+    <script src="https://unpkg.com/prismjs@1.19.0/components/prism-jsx.min.js"></script>
+    <script src="/assets/plugins/code-block/code-block.js"></script>
+    <script src="/assets/plugins/metadata/metadata.js"></script>
+    <script src="/assets/plugins/sidebar/sidebar.js"></script>
+  </body>
+</html>

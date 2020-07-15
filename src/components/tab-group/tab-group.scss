@@ -1,0 +1,145 @@
+@import 'component';
+@import 'mixins/hide-scrollbar';
+
+:host {
+  display: block;
+}
+
+.tab-group {
+  display: flex;
+  border: solid 1px transparent;
+  border-radius: 0;
+
+  .tab-group__tabs {
+    display: flex;
+    position: relative;
+  }
+
+  .tab-group__active-tab-indicator {
+    position: absolute;
+    transition: var(--sl-transition-fast) transform ease, var(--sl-transition-fast) width ease;
+  }
+
+  // Remove the focus ring when the user isn't interacting with a keyboard
+  &:not(.focus-visible) ::slotted(sl-tab) {
+    --focus-ring-box-shadow: none;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Top + bottom
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+.tab-group--top {
+  flex-direction: column;
+
+  .tab-group__nav {
+    display: flex;
+    order: 1;
+    overflow-x: auto;
+    @include hide-scrollbar();
+  }
+
+  .tab-group__tabs {
+    flex: 1 1 auto;
+    position: relative;
+    flex-direction: row;
+    border-bottom: solid 2px var(--sl-color-gray-90);
+  }
+
+  .tab-group__active-tab-indicator {
+    bottom: -2px;
+    border-bottom: solid 2px var(--sl-color-primary-50);
+  }
+
+  .tab-group__body {
+    order: 2;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Bottom
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+.tab-group--bottom {
+  flex-direction: column;
+
+  .tab-group__nav {
+    display: flex;
+    order: 2;
+    overflow-x: auto;
+    @include hide-scrollbar();
+  }
+
+  .tab-group__tabs {
+    flex: 1 1 auto;
+    position: relative;
+    flex-direction: row;
+    border-top: solid 2px var(--sl-color-gray-90);
+  }
+
+  .tab-group__active-tab-indicator {
+    top: calc(-1 * 2px);
+    border-top: solid 2px var(--sl-color-primary-50);
+  }
+
+  .tab-group__body {
+    order: 1;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Left
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+.tab-group--left {
+  flex-direction: row;
+
+  .tab-group__nav {
+    order: 1;
+  }
+
+  .tab-group__tabs {
+    flex: 0 0 auto;
+    flex-direction: column;
+    border-right: solid 2px var(--sl-color-gray-90);
+  }
+
+  .tab-group__active-tab-indicator {
+    right: calc(-1 * 2px);
+    border-right: solid 2px var(--sl-color-primary-50);
+  }
+
+  .tab-group__body {
+    flex: 1 1 auto;
+    order: 2;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Right
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+.tab-group--right {
+  flex-direction: row;
+
+  .tab-group__nav {
+    order: 2;
+  }
+
+  .tab-group__tabs {
+    flex: 0 0 auto;
+    flex-direction: column;
+    border-left: solid 2px var(--sl-color-gray-90);
+  }
+
+  .tab-group__active-tab-indicator {
+    left: calc(-1 * 2px);
+    border-left: solid 2px var(--sl-color-primary-50);
+  }
+
+  .tab-group__body {
+    flex: 1 1 auto;
+    order: 1;
+  }
+}

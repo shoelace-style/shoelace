@@ -1,0 +1,36 @@
+@import 'component';
+@import 'form-control-label';
+@import 'form-control-help-text';
+
+:host {
+  display: block;
+}
+
+.select {
+  width: 100%;
+}
+
+.select__input {
+  flex: 1 1 auto;
+  width: 100%;
+  cursor: pointer;
+
+  span[slot='prefix'] {
+    margin-left: var(--sl-spacing-xx-small);
+
+    sl-tag:not(:last-of-type) {
+      margin-right: var(--sl-spacing-xx-small);
+    }
+  }
+}
+
+.select__icon {
+  display: inline-flex;
+}
+.select__icon sl-icon {
+  transition: var(--sl-transition-medium) transform ease;
+}
+
+.select--open .select__icon sl-icon {
+  transform: rotate(-180deg);
+}

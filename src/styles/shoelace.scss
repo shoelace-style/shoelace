@@ -1,0 +1,267 @@
+/*! Shoelace */
+
+@import 'mixins/make-color-palette';
+
+:root {
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Color tokens
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  --sl-color-primary-hue: 203;
+  --sl-color-primary-saturation: 100%;
+  --sl-color-primary-text: var(--sl-color-white);
+
+  --sl-color-success-hue: 110;
+  --sl-color-success-saturation: 70%;
+  --sl-color-success-text: var(--sl-color-white);
+
+  --sl-color-info-hue: var(--sl-color-primary-hue);
+  --sl-color-info-saturation: 10%;
+  --sl-color-info-text: var(--sl-color-white);
+
+  --sl-color-warning-hue: 40;
+  --sl-color-warning-saturation: 90%;
+  --sl-color-warning-text: var(--sl-color-white);
+
+  --sl-color-danger-hue: 10;
+  --sl-color-danger-saturation: 95%;
+  --sl-color-danger-text: var(--sl-color-white);
+
+  --sl-color-gray-hue: var(--sl-color-primary-hue);
+  --sl-color-gray-saturation: 10%;
+  --sl-color-gray-text: var(--sl-color-white);
+
+  --sl-color-white: white;
+  --sl-color-black: black;
+
+  @include make-color-palette('primary');
+  @include make-color-palette('success');
+  @include make-color-palette('info');
+  @include make-color-palette('warning');
+  @include make-color-palette('danger');
+  @include make-color-palette('gray');
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Border radius tokens
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  --sl-border-radius-small: 0.125rem; // 2px
+  --sl-border-radius-medium: 0.25rem; // 4px
+  --sl-border-radius-large: 0.5rem; // 8px
+  --sl-border-radius-x-large: 1rem; // 16px
+
+  --sl-border-radius-circle: 50%;
+  --sl-border-radius-pill: 9999px;
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Elevation tokens
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  --sl-shadow-x-small: 0 1px 0 rgba(0, 0, 0, 0.05);
+  --sl-shadow-small: 0 1px 2px rgba(0, 0, 0, 0.1);
+  --sl-shadow-medium: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --sl-shadow-large: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --sl-shadow-x-large: 0 4px 16px rgba(0, 0, 0, 0.1);
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Spacing tokens
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  --sl-spacing-xxx-small: 0.125rem; // 2px
+  --sl-spacing-xx-small: 0.25rem; // 4px
+  --sl-spacing-x-small: 0.5rem; // 8px
+  --sl-spacing-small: 0.75rem; // 12px
+  --sl-spacing-medium: 1rem; // 16px
+  --sl-spacing-large: 1.25rem; // 20px
+  --sl-spacing-x-large: 1.75rem; // 28px
+  --sl-spacing-xx-large: 2.25rem; // 36px
+  --sl-spacing-xxx-large: 3rem; // 48px
+  --sl-spacing-xxxx-large: 4.5rem; // 72px
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Transition tokens
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  --sl-transition-x-slow: 1000ms;
+  --sl-transition-slow: 500ms;
+  --sl-transition-medium: 250ms;
+  --sl-transition-fast: 150ms;
+  --sl-transition-x-fast: 50ms;
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Typography tokens
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  // Fonts
+  --sl-font-mono: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+  --sl-font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  --sl-font-serif: Georgia, 'Times New Roman', serif;
+
+  // Font sizes
+  --sl-font-size-xx-small: 0.625rem; // 10px
+  --sl-font-size-x-small: 0.75rem; // 12px
+  --sl-font-size-small: 0.875rem; // 14px
+  --sl-font-size-medium: 1rem; // 16px
+  --sl-font-size-large: 1.25rem; // 20px
+  --sl-font-size-x-large: 1.5rem; // 24px
+  --sl-font-size-xx-large: 2.25rem; // 36px
+  --sl-font-size-xxx-large: 3rem; // 48px
+  --sl-font-size-xxxx-large: 4.5rem; // 72px
+
+  // Font weights
+  --sl-font-weight-light: 300;
+  --sl-font-weight-normal: 400;
+  --sl-font-weight-semibold: 500;
+  --sl-font-weight-bold: 700;
+
+  // Letter spacings
+  --sl-letter-spacing-dense: -0.015em;
+  --sl-letter-spacing-normal: normal;
+  --sl-letter-spacing-loose: 0.075em;
+
+  // Line heights
+  --sl-line-height-dense: 1.4;
+  --sl-line-height-normal: 1.8;
+  --sl-line-height-loose: 2.2;
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Form tokens
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  // Focus ring
+  --sl-focus-ring-hue: var(--sl-color-primary-hue);
+  --sl-focus-ring-saturation: var(--sl-color-primary-saturation);
+  --sl-focus-ring-lightness: 50%;
+  --sl-focus-ring-alpha: 0.33;
+  --sl-focus-ring-width: 3px;
+  --sl-focus-ring-box-shadow: 0 0 0 var(--sl-focus-ring-width)
+    hsla(
+      var(--sl-focus-ring-hue),
+      var(--sl-focus-ring-saturation),
+      var(--sl-focus-ring-lightness),
+      var(--sl-focus-ring-alpha)
+    );
+  --sl-focus-ring-box-shadow-inset: inset 0 0 0 var(--sl-focus-ring-width)
+    hsla(
+      var(--sl-focus-ring-hue),
+      var(--sl-focus-ring-saturation),
+      var(--sl-focus-ring-lightness),
+      var(--sl-focus-ring-alpha)
+    );
+
+  // Buttons
+  --sl-button-font-size-small: var(--sl-font-size-x-small);
+  --sl-button-font-size-medium: var(--sl-font-size-small);
+  --sl-button-font-size-large: var(--sl-font-size-medium);
+
+  // Inputs
+  --sl-input-height-small: 30px;
+  --sl-input-height-medium: 40px;
+  --sl-input-height-large: 50px;
+
+  --sl-input-background-color: var(--sl-color-white);
+  --sl-input-background-color-hover: var(--sl-color-white);
+  --sl-input-background-color-focus: var(--sl-color-white);
+  --sl-input-background-color-disabled: var(--sl-color-gray-95);
+
+  --sl-input-border-color: var(--sl-color-gray-80);
+  --sl-input-border-color-hover: var(--sl-color-gray-70);
+  --sl-input-border-color-focus: var(--sl-color-primary-50);
+  --sl-input-border-color-disabled: var(--sl-color-gray-80);
+  --sl-input-border-color-valid: var(--sl-color-success-50);
+  --sl-input-border-color-invalid: var(--sl-color-danger-50);
+  --sl-input-border-width: 1px;
+
+  --sl-input-border-radius-small: 4px;
+  --sl-input-border-radius-medium: 4px;
+  --sl-input-border-radius-large: 4px;
+
+  --sl-input-font-family: var(--sl-font-sans);
+  --sl-input-font-weight: var(--sl-font-weight-normal);
+  --sl-input-font-size-small: var(--sl-font-size-small);
+  --sl-input-font-size-medium: var(--sl-font-size-medium);
+  --sl-input-font-size-large: var(--sl-font-size-large);
+  --sl-input-letter-spacing: var(--sl-letter-spacing-normal);
+
+  --sl-input-color: var(--sl-color-gray-30);
+  --sl-input-color-hover: var(--sl-color-gray-30);
+  --sl-input-color-focus: var(--sl-color-gray-30);
+  --sl-input-color-disabled: var(--sl-color-gray-10);
+  --sl-input-color-valid: var(--sl-color-success-40);
+  --sl-input-color-invalid: var(--sl-color-danger-40);
+
+  --sl-input-icon-color: var(--sl-color-gray-60);
+  --sl-input-icon-color-hover: var(--sl-color-gray-40);
+  --sl-input-icon-color-focus: var(--sl-color-gray-40);
+
+  --sl-input-placeholder-color: var(--sl-color-gray-60);
+  --sl-input-placeholder-color-disabled: var(--sl-color-gray-40);
+
+  --sl-input-spacing-small: 10px;
+  --sl-input-spacing-medium: 12px;
+  --sl-input-spacing-large: 14px;
+
+  // Labels
+  --sl-input-label-font-size-small: var(--sl-font-size-small);
+  --sl-input-label-font-size-medium: var(--sl-font-size-medium);
+  --sl-input-label-font-size-large: var(--sl-font-size-large);
+
+  --sl-input-label-color: inherit;
+  --sl-input-label-color-valid: inherit;
+  --sl-input-label-color-invalid: inherit;
+
+  // Help text
+  --sl-input-help-text-font-size-small: var(--sl-font-size-x-small);
+  --sl-input-help-text-font-size-medium: var(--sl-font-size-small);
+  --sl-input-help-text-font-size-large: var(--sl-font-size-medium);
+
+  --sl-input-help-text-color: var(--sl-color-gray-60);
+  --sl-input-help-text-color-valid: var(--sl-color-success-40);
+  --sl-input-help-text-color-invalid: var(--sl-color-danger-40);
+
+  // Toggles (checkboxes, radios, switches)
+  --sl-toggle-size: 16px;
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Overlay tokens
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  --sl-overlay-background-color: hsla(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 20%, 0.5);
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Tooltip tokens
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  --sl-tooltip-border-radius: var(--sl-border-radius-medium);
+  --sl-tooltip-background-color: var(--sl-color-gray-10);
+  --sl-tooltip-color: var(--sl-color-white);
+  --sl-tooltip-font-family: var(--sl-font-sans);
+  --sl-tooltip-font-weight: var(--sl-font-weight-normal);
+  --sl-tooltip-font-size: var(--sl-font-size-small);
+  --sl-tooltip-line-height: var(--sl-line-height-normal);
+  --sl-tooltip-padding: var(--sl-spacing-xxx-small) var(--sl-spacing-x-small);
+  --sl-tooltip-arrow-size: 5px;
+  --sl-tooltip-arrow-start-end-offset: 8px;
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Z-index tokens
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  --sl-z-index-drawer: 700;
+  --sl-z-index-dialog: 800;
+  --sl-z-index-dropdown: 900;
+  --sl-z-index-tooltip: 1000;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Internal utility classes
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+[hidden] {
+  display: none !important;
+}
+
+.sl-scroll-lock {
+  overflow: hidden !important;
+}

@@ -1,0 +1,42 @@
+@import 'component';
+
+:host {
+  --focus-ring-box-shadow: var(--sl-focus-ring-box-shadow-inset);
+
+  display: inline-block;
+}
+
+.tab {
+  font-family: var(--sl-font-sans);
+  font-size: var(--sl-font-size-small);
+  font-weight: var(--sl-font-weight-semibold);
+  border-radius: 4px;
+  color: var(--sl-color-gray-40);
+  padding: 16px 20px;
+  white-space: nowrap;
+  user-select: none;
+  cursor: pointer;
+  transition: var(--transition-speed) box-shadow, var(--transition-speed) color;
+
+  &:hover:not(.tab--disabled) {
+    color: var(--sl-color-primary-50);
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus:not(.tab--disabled) {
+    color: var(--sl-color-primary-50);
+    box-shadow: var(--focus-ring-box-shadow);
+  }
+
+  &.tab--active:not(.tab--disabled) {
+    color: var(--sl-color-primary-50);
+  }
+
+  &.tab--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
