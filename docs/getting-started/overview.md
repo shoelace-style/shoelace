@@ -1,13 +1,19 @@
-<img class="logo" src="/assets/images/wordmark.svg" alt="Shoelace" data-no-zoom>
-
-A forward-thinking library of web components.
-
-- Works with all frameworks 🧩
-- Works with CDNs 🚛
-- Fully customizable with CSS 🎨
-- Open source 😸
-
-Designed in New Hampshire by [Cory LaViska](https://twitter.com/claviska).
+<div class="splash">
+  <div class="splash-start">
+    <img class="splash-logo" src="/assets/images/wordmark.svg" alt="Shoelace" data-no-zoom >
+    <p><strong>A forward-thinking library of web components.</strong></p>
+    <ul>
+      <li>Works with all frameworks 🧩</li>
+      <li>Works with CDNs 🚛</li>
+      <li>Fully customizable with CSS 🎨</li>
+      <li>Open source 😸</li>
+    </ul>
+    <p>Designed in New Hampshire by <a href="https://twitter.com/claviska" rel="noopener" target="_blank">Cory LaViska</a>.</p>
+  </div>
+  <div class="splash-end">
+    <img class="splash-image" src="/assets/images/undraw-content-team.svg" alt="Cartoon of people assembling components while standing on a giant laptop." data-no-zoom />
+  </div>
+</div>
 
 ## Quick Start
 
@@ -102,6 +108,7 @@ Special thanks to the following projects and individuals that helped make Shoela
 - Documentation is powered by [Docsify](https://docsify.js.org/)
 - Theme colors and form controls are inspired by [Element](element.eleme.io)
 - Icons are courtesy of [Bootstrap Icons](https://icons.getbootstrap.com/)
+- Illustrations are courtesy of [unDraw](https://undraw.co/)
 - Positioning of menus, tooltips, et al is handled by [Popper.js](https://popper.js.org/)
 - CDN services are provided by [unpkg](https://unpkg.com/)
 - The Shoelace logo was designed with a single shoelace by [Adam K Olson](https://twitter.com/adamkolson)

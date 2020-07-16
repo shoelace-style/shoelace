@@ -163,6 +163,52 @@ a {
   margin-left: 1.5rem;
 }
 
+/* Splash */
+.splash {
+  display: flex;
+  margin-bottom: 2rem;
+}
+
+.splash-start {
+  min-width: 420px;
+}
+
+.splash-end {
+  display: flex;
+  align-items: flex-end;
+  width: auto;
+  padding-left: 1rem;
+}
+
+.splash-image {
+  width: 100%;
+  height: auto;
+}
+
+.splash-logo {
+  max-width: 22rem;
+}
+
+@media screen and (max-width: 1040px) {
+  .splash {
+    display: block;
+  }
+
+  .splash-start {
+    min-width: 0;
+    padding-bottom: 1rem;
+  }
+
+  .splash-end {
+    padding: 0;
+  }
+
+  .splash-image {
+    display: block;
+    max-width: 400px;
+  }
+}
+
 /* Content */
 .content {
   padding-top: 0;
@@ -170,10 +216,6 @@ a {
 
 .markdown-section {
   max-width: 860px;
-}
-
-.markdown-section .logo {
-  max-width: 24rem;
 }
 
 .markdown-section ul {
