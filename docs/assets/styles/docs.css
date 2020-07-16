@@ -172,7 +172,7 @@ strong {
 /* Splash */
 .splash {
   display: flex;
-  margin-bottom: 2rem;
+  padding: 2rem 0;
 }
 
 .splash-start {
