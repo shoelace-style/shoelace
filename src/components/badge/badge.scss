@@ -2,8 +2,6 @@
 
 :host {
   display: inline-flex;
-  border-radius: var(--sl-border-radius-pill);
-  pointer-events: none;
 }
 
 .badge {
@@ -14,9 +12,10 @@
   font-weight: var(--sl-font-weight-semibold);
   letter-spacing: var(--sl-letter-spacing-normal);
   line-height: 1;
-  border-radius: inherit;
+  border-radius: var(--sl-border-radius-small);
   white-space: nowrap;
-  padding: 4px 8px;
+  padding: 3px 6px;
+  pointer-events: none;
   user-select: none;
   cursor: inherit;
 }
@@ -48,4 +47,12 @@
 .badge--danger {
   background-color: var(--sl-color-danger-50);
   color: var(--sl-color-white);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Pill modifiers
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+.badge--pill {
+  border-radius: var(--sl-border-radius-pill);
 }

@@ -48,6 +48,10 @@ export namespace Components {
     }
     interface SlBadge {
         /**
+          * Set to true to draw a pill-style badge with rounded edges.
+         */
+        "pill": boolean;
+        /**
           * The badge's type.
          */
         "type": 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text';
@@ -1105,6 +1109,10 @@ declare namespace LocalJSX {
         "shape"?: 'circle' | 'square' | 'rounded';
     }
     interface SlBadge {
+        /**
+          * Set to true to draw a pill-style badge with rounded edges.
+         */
+        "pill"?: boolean;
         /**
           * The badge's type.
          */

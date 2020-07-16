@@ -292,11 +292,11 @@
               </div>
 
               <div class="component-header__info">
-                <sl-badge type="info">
+                <sl-badge type="info" pill>
                   Since ${tags.since || '?'}
                 </sl-badge>
 
-                <sl-badge type="${badgeType}" style="text-transform: capitalize;">
+                <sl-badge type="${badgeType}" pill style="text-transform: capitalize;">
                   ${tags.status}
                 </sl-badge>
               </div>
