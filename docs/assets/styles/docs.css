@@ -224,6 +224,22 @@ strong {
   max-width: 860px;
 }
 
+.markdown-section blockquote {
+  position: relative;
+  border-left: solid 4px var(--sl-color-gray-90);
+  font-style: italic;
+  padding: 1rem 1.5rem;
+  margin: 0 0 1rem 0;
+}
+
+.markdown-section blockquote p:first-child {
+  margin-top: 0;
+}
+
+.markdown-section blockquote p:last-child {
+  margin-bottom: 0;
+}
+
 .markdown-section ul {
   padding: 0 0 0 1.5rem;
   margin: 0;
