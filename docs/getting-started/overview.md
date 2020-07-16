@@ -48,7 +48,7 @@ Web components solve these problems. They're [supported by all modern browsers](
 
 This is the technology that Shoelace is built on.
 
-## What Problems Does This Solve?
+## What Problem Does This Solve?
 
 Shoelace provides a collection of professionally designed, every day UI components built on a framework-agnostic technology. Why spend hundreds of hours or more building a design system from scratch? Why make a component library that only works with one framework?
 
