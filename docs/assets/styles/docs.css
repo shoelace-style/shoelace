@@ -126,6 +126,8 @@ strong {
 
 @media screen and (max-width: 768px) {
   body.close .sidebar-toggle {
+    width: 2rem;
+    background: none;
     padding: .5rem;
   }
 }
