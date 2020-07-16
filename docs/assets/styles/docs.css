@@ -19,6 +19,10 @@ a {
   color: var(--sl-color-primary-50);
 }
 
+strong {
+  font-weight: var(--sl-font-weight-bold);
+}
+
 /* Sidebar */
 .sidebar {
   background: var(--sl-color-white);
