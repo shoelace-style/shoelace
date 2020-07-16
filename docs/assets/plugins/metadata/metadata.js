@@ -7,7 +7,6 @@
       <thead>
         <tr>
           <th>Property</th>
-          <th>Attribute</th>
           <th>Description</th>
           <th>Type</th>
           <th>Default</th>
@@ -18,11 +17,20 @@
           .map(
             prop => `
         <tr>
-          <td><code>${escapeHtml(prop.name)}</code></td>
-          <td><code style="white-space: nowrap;">${escapeHtml(prop.attr)}</code></td>
+          <td>
+            <code>${escapeHtml(prop.name)}</code>
+            ${prop.name !== prop.attr && prop.attr !== undefined ? (`
+              <br>
+              <small>
+                <sl-tooltip content="Use the kebab-case variation in your HTML">
+                  <code class="attribute-tooltip">${escapeHtml(prop.attr)}</code>
+                </sl-tooltip>
+              </small>`
+            ) : ''}
+          </td>
           <td>${escapeHtml(prop.docs)}</td>
-          <td><code>${escapeHtml(prop.type)}</code></td>
-          <td><code>${escapeHtml(prop.default)}</code></td>
+          <td><code style="white-space: normal;">${escapeHtml(prop.type)}</code></td>
+          <td><code style="white-space: normal;">${escapeHtml(prop.default)}</code></td>
         </tr>
         `
           )
@@ -129,7 +137,7 @@
           .map(
             style => `
         <tr>
-          <td><code style="white-space: nowrap;">${escapeHtml(style.name)}</code></td>
+          <td><code>${escapeHtml(style.name)}</code></td>
           <td>${escapeHtml(style.docs)}</td>
         </tr>
         `

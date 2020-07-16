@@ -283,10 +283,6 @@ strong {
   padding: 2px 4px;
 }
 
-.markdown-section table code:not([class*="lang-"]):not([class*="language-"]) {
-  white-space: normal;
-}
-
 /* Code blocks */
 .markdown-section pre {
   position: relative;
@@ -399,6 +395,16 @@ strong {
   border-bottom: solid 1px var(--sl-color-gray-90);
   border-left: none;
   border-right: none;
+}
+
+.markdown-section td code {
+  white-space: nowrap;
+}
+
+.markdown-section table .attribute-tooltip {
+  background: none;
+  border-bottom: dashed 1px var(--sl-color-gray-80);
+  cursor: help;
 }
 
 /* Tips & Warnings */
