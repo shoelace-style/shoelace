@@ -5,7 +5,7 @@ import { getTextContent } from '../../utilities/slot';
 let id = 0;
 
 /**
- * @since 1.0
+ * @since 2.0
  * @status stable
  *
  * @slot - The select's options in the form of menu items.

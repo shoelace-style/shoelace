@@ -5,7 +5,7 @@ import { requestIcon } from './request';
 const parser = new DOMParser();
 
 /**
- * @since 1.0
+ * @since 2.0
  * @status stable
  *
  * @part base - The component's base wrapper.

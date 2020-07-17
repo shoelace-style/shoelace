@@ -3,7 +3,7 @@ import { scrollIntoView } from '../../utilities/scroll';
 import { getTextContent } from '../../utilities/slot';
 
 /**
- * @since 1.0
+ * @since 2.0
  * @status stable
  *
  * @slot - The menu's content, including menu items, menu dividers, and menu labels.

@@ -3,7 +3,7 @@ import { Component, Event, EventEmitter, Method, Prop, State, Watch, h } from '@
 let id = 0;
 
 /**
- * @since 1.0
+ * @since 2.0
  * @status stable
  *
  * @slot - The switch's label.

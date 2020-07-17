@@ -4,7 +4,7 @@ import Popover from '../../utilities/popover';
 let id = 0;
 
 /**
- * @since 1.0
+ * @since 2.0
  * @status stable
  *
  * @slot trigger - The dropdown's trigger, usually a `<sl-button>` element.

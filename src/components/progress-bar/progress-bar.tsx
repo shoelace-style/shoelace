@@ -1,7 +1,7 @@
 import { Component, Prop, h } from '@stencil/core';
 
 /**
- * @since 1.0
+ * @since 2.0
  * @status stable
  *
  * @slot - A label to show inside the indicator.

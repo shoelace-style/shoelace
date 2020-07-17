@@ -1,7 +1,7 @@
 import { Component, Event, EventEmitter, Method, Prop, State, h } from '@stencil/core';
 
 /**
- * @since 1.0
+ * @since 2.0
  * @status stable
  *
  * @slot - The button's label.

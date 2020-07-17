@@ -1,7 +1,7 @@
 import { Component, h } from '@stencil/core';
 
 /**
- * @since 1.0
+ * @since 2.0
  * @status stable
  *
  * @part base - The component's base wrapper.

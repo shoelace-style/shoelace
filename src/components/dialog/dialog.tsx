@@ -5,7 +5,7 @@ import { focusVisible } from '../../utilities/focus-visible';
 let id = 0;
 
 /**
- * @since 1.0
+ * @since 2.0
  * @status stable
  *
  * @slot - The dialog's content.

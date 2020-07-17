@@ -3,7 +3,7 @@ import { Component, Element, Event, EventEmitter, Method, Prop, State, Watch, h 
 let id = 0;
 
 /**
- * @since 1.0
+ * @since 2.0
  * @status stable
  *
  * @slot - The radio's label.

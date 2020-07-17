@@ -3,7 +3,7 @@ import { Component, Element, Host, Method, Prop, h } from '@stencil/core';
 let id = 0;
 
 /**
- * @since 1.0
+ * @since 2.0
  * @status stable
  *
  * @slot - The tab's label.

@@ -3,7 +3,7 @@ import { Component, Element, Event, EventEmitter, Method, Prop, State, h } from 
 let id = 0;
 
 /**
- * @since 1.0
+ * @since 2.0
  * @status stable
  *
  * @slot prefix - Used to prepend an icon or similar element to the input.

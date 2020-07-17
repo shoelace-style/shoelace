@@ -4,7 +4,7 @@ import { scrollIntoView } from '../../utilities/scroll';
 import { focusVisible } from '../../utilities/focus-visible';
 
 /**
- * @since 1.0
+ * @since 2.0
  * @status stable
  *
  * @slot nav - Used for grouping tabs in the tab group.
