@@ -165,6 +165,7 @@
   padding: 0 var(--sl-spacing-small) var(--sl-spacing-small) var(--sl-spacing-small);
 
   sl-input {
+    min-width: 0; // fix input width in Safari
     flex: 1 1 auto;
   }
 
