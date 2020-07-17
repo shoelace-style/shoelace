@@ -122,11 +122,9 @@
   border-radius: var(--sl-input-border-radius-small);
   font-size: var(--sl-input-font-size-small);
   height: var(--sl-input-height-small);
-  line-height: calc(var(--sl-input-height-small) - var(--sl-input-border-width) * 2);
 
   .input__control {
     height: calc(var(--sl-input-height-small) - var(--sl-input-border-width) * 2);
-    line-height: calc(var(--sl-input-height-small) - var(--sl-input-border-width) * 2);
     margin: 0 var(--sl-input-spacing-small);
   }
 
@@ -148,11 +146,9 @@
   border-radius: var(--sl-input-border-radius-medium);
   font-size: var(--sl-input-font-size-medium);
   height: var(--sl-input-height-medium);
-  line-height: calc(var(--sl-input-height-medium) - var(--sl-input-border-width) * 2);
 
   .input__control {
     height: calc(var(--sl-input-height-medium) - var(--sl-input-border-width) * 2);
-    line-height: calc(var(--sl-input-height-medium) - var(--sl-input-border-width) * 2);
     margin: 0 var(--sl-input-spacing-medium);
   }
 
@@ -174,11 +170,9 @@
   border-radius: var(--sl-input-border-radius-large);
   font-size: var(--sl-input-font-size-large);
   height: var(--sl-input-height-large);
-  line-height: calc(var(--sl-input-height-large) - var(--sl-input-border-width) * 2);
 
   .input__control {
     height: calc(var(--sl-input-height-large) - var(--sl-input-border-width) * 2);
-    line-height: calc(var(--sl-input-height-large) - var(--sl-input-border-width) * 2);
     margin: 0 var(--sl-input-spacing-large);
   }
 
