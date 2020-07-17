@@ -48,6 +48,12 @@ To keep the project on track, please consider the following guidelines before su
 
 The author reserves the right to reject any PR that's outside the scope of the project or doesn't meet code quality standards.
 
+### Branches
+
+`master` - This branch reflects the latest release and powers [shoelace.style](https://shoelace.style/).
+
+`next` - This branch is where pull requests will land. It reflects what's coming in the _next_ release, which can be previewed at [next.shoelace.style](https://next.shoelace.style/).
+
 ## Conventions
 
 This section aims to describe some of the design decisions and code conventions that support the project. All contributors are expected to follow conventions and best practices, even those not explicitly defined in this document. When in doubt, refer to existing source code and execute your best judgment.
