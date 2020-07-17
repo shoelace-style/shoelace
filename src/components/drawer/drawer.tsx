@@ -112,7 +112,7 @@ export class Drawer {
 
     this.drawer.hidden = false;
     this.host.clientWidth; // force a reflow
-    this.open = true;
+    requestAnimationFrame(() => (this.open = true));
 
     // Lock body scrolling only if the drawer isn't contained
     if (!this.contained) {
