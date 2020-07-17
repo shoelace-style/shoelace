@@ -2,12 +2,14 @@
 
 ## 2.0.0-beta.4
 
-- Added pill variation to badges
-- Fixed bug where all badges had `pointer-events: none`;
+- Added `pill` variation to badges
+- Fixed a bug where all badges had `pointer-events: none`
 - Fixed `@since` props to show 2.0 instead of 1.0
 - Fixed giant cursors in inputs in Safari
 - Fixed color picker input width in Safari
 - Fixed initial transitions for drawer, dialog, and popover consumers
+- Fixed a bug where dialog, dropdown, and drawer would sometimes not transition in on the first open
+- Fixed various documentation typos
 
 ## 2.0.0-beta.3
 
