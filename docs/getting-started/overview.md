@@ -106,7 +106,7 @@ Special thanks to the following projects and individuals that helped make Shoela
 
 - Components are compiled by [Stencil](https://stenciljs.com/)
 - Documentation is powered by [Docsify](https://docsify.js.org/)
-- Theme colors and form controls are inspired by [Element](element.eleme.io)
+- Theme colors and form controls are inspired by [Element](https://element.eleme.io/)
 - Icons are courtesy of [Bootstrap Icons](https://icons.getbootstrap.com/)
 - Illustrations are courtesy of [unDraw](https://undraw.co/)
 - Positioning of menus, tooltips, et al is handled by [Popper.js](https://popper.js.org/)
