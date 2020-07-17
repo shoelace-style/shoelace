@@ -104,7 +104,7 @@ export class Dialog {
 
     this.dialog.hidden = false;
     this.host.clientWidth; // force a reflow
-    this.open = true;
+    requestAnimationFrame(() => (this.open = true));
 
     lockBodyScrolling(this.host);
     document.addEventListener('focusin', this.handleDocumentFocusIn);
