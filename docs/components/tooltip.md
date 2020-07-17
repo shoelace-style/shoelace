@@ -6,7 +6,7 @@ Tooltips display additional information based on a specific action.
 
 A tooltip's target is its _first child element_, so you should only wrap one element inside of the tooltip. If you need the tooltip to show up for multiple elements, nest them inside a container first.
 
-Tooltip's use `display: contents` so they won't interfere with how elements are positioned in a flex or grid layout.
+Tooltips use `display: contents` so they won't interfere with how elements are positioned in a flex or grid layout.
 
 ```html preview
 <sl-tooltip content="This is a tooltip">
