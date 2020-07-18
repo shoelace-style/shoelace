@@ -20,7 +20,7 @@ To customize a design token, simply override it in your stylesheet using a `:roo
 }
 ```
 
-Design tokens are described further along in this documentation. For a complete list, refer to `shoelace.scss` in the project's [source code](https://github.com/shoelace-style/shoelace/blob/master/src/styles/shoelace.scss).
+Many design tokens are described further along in this documentation. For a complete list, refer to `shoelace.scss` in the project's [source code](https://github.com/shoelace-style/shoelace/blob/master/src/styles/shoelace.scss).
 
 !> **Never modify variables directly in `shoelace.css`** because your changes will be overwritten when you upgrade the library. Even if you don't plan on upgrading, it's always better to override design tokens in your own stylesheet for better maintainability.
 

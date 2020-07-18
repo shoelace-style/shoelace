@@ -8,15 +8,26 @@ Theme colors are based on HSL values rather than hex or RGB. This technique lets
 
 Theme colors include primary, gray, success, info, warning, and danger. They are used extensively throughout the library to maintain a consistent appearance across components.
 
-To customize a theme color, change its respective hue, saturation, and text tokens. This will update all colors in the palette — there's no need to update individual palette colors. In fact, doing so is strongly discouraged.
+To customize a theme color, change its respective hue, saturation, and text tokens. Possible theme colors include `primary`, `gray`, `success`, `info`, `warning`, and `danger`.
+
+This will make all colors in the primary color palette various shades of purple.
 
 ```css
---sl-color-primary-hue: 203;
---sl-color-primary-saturation: 100%;
---sl-color-primary-text: var(--sl-color-white);
+:root {
+  --sl-color-primary-hue: 290;
+  --sl-color-primary-saturation: 87%;
+  --sl-color-primary-text: var(--sl-color-white);
+}
 ```
 
-?> Color palettes are comprised of CSS custom properties ("CSS variables"), so you can update them live in your app and see the changes reflect instantly.
+You can update these values on the client and the changes will reflect instantly. To update the primary color using JavaScript, try this.
+
+```js
+document.documentElement.style.setProperty('--sl-color-primary-hue', '290');
+document.documentElement.style.setProperty('--sl-color-primary-saturation', '87%');
+```
+
+?> Although CSS lets you override custom properties on specific elements, these values _must_ be scoped to the `:root` block for the entire palette to be recalculated. [See this page for details.](https://stackoverflow.com/questions/52015737/css-scoped-custom-property-ignored-when-used-to-calculate-variable-in-outer-scop)
 
 ## Primary
 
