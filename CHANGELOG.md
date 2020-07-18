@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.0-beta.5
+
+- Removed unused dependency
+
 ## 2.0.0-beta.4
 
 - Added `pill` variation to badges

@@ -14,16 +14,21 @@ let numIcons = 0;
 (async () => {
   try {
     const version = require('./node_modules/bootstrap-icons/package.json').version;
-    const srcPath = `./temp/icons-${version}`;
+    const srcPath = `./.icons/icons-${version}`;
     const url = `https://github.com/twbs/icons/archive/v${version}.zip`;
 
-    // Download the source from GitHub (since not everything is published to NPM)
-    console.log(chalk.cyan(`\nDownloading and extracting Bootstrap Icons ${version}... 📦\n`));
-    await del(['./src/components/icon/icons', './temp']);
-    await download(url, './temp', { extract: true });
+    try {
+      await fs.stat(`${srcPath}/LICENSE.md`);
+      console.log(chalk.cyan('Generating icons from cache... ♻️'));
+    } catch {
+      // Download the source from GitHub (since not everything is published to NPM)
+      console.log(chalk.cyan(`Downloading and extracting Bootstrap Icons ${version}... 📦`));
+      await download(url, './.icons', { extract: true });
+    }
 
     // Copy icons
-    console.log(chalk.cyan(`Copying icons and license... 🚛\n`));
+    console.log(chalk.cyan(`Copying icons and license... 🚛`));
+    await del(['./src/components/icon/icons']);
     await Promise.all([
       copy(`${srcPath}/icons`, './src/components/icon/icons'),
       copy(`${srcPath}/LICENSE.md`, './src/components/icon/icons/LICENSE.md'),
@@ -31,7 +36,7 @@ let numIcons = 0;
     ]);
 
     // Generate metadata
-    console.log(chalk.cyan(`Generating icon metadata... 🏷\n`));
+    console.log(chalk.cyan(`Generating icon metadata... 🏷`));
     const files = await glob(`${srcPath}/docs/content/icons/**/*.md`);
 
     const metadata = await Promise.map(files, async file => {
@@ -48,10 +53,6 @@ let numIcons = 0;
     });
 
     await fs.writeFile('./src/components/icon/icons/icons.json', JSON.stringify(metadata, null, 2), 'utf8');
-
-    // More cleanup
-    console.log(chalk.cyan(`Cleaning up... 🧹\n`));
-    await del('./temp');
 
     console.log(chalk.green(`Successfully processed ${numIcons} icons! ✨\n`));
   } catch (err) {
