@@ -14,20 +14,20 @@ let numIcons = 0;
 (async () => {
   try {
     const version = require('./node_modules/bootstrap-icons/package.json').version;
-    const srcPath = `./.icons/icons-${version}`;
+    const srcPath = `./.cache/icons/icons-${version}`;
     const url = `https://github.com/twbs/icons/archive/v${version}.zip`;
 
     try {
       await fs.stat(`${srcPath}/LICENSE.md`);
-      console.log(chalk.cyan('Generating icons from cache... ♻️'));
+      console.log(chalk.cyan('Generating icons from cache ♻️'));
     } catch {
       // Download the source from GitHub (since not everything is published to NPM)
-      console.log(chalk.cyan(`Downloading and extracting Bootstrap Icons ${version}... 📦`));
-      await download(url, './.icons', { extract: true });
+      console.log(chalk.cyan(`Downloading and extracting Bootstrap Icons ${version} 📦`));
+      await download(url, './.cache/icons', { extract: true });
     }
 
     // Copy icons
-    console.log(chalk.cyan(`Copying icons and license... 🚛`));
+    console.log(chalk.cyan(`Copying icons and license 🚛`));
     await del(['./src/components/icon/icons']);
     await Promise.all([
       copy(`${srcPath}/icons`, './src/components/icon/icons'),
@@ -36,7 +36,7 @@ let numIcons = 0;
     ]);
 
     // Generate metadata
-    console.log(chalk.cyan(`Generating icon metadata... 🏷`));
+    console.log(chalk.cyan(`Generating icon metadata 🏷`));
     const files = await glob(`${srcPath}/docs/content/icons/**/*.md`);
 
     const metadata = await Promise.map(files, async file => {
