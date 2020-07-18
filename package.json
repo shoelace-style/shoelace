@@ -64,7 +64,6 @@
   "license": "MIT",
   "dependencies": {
     "@popperjs/core": "^2.1.1",
-    "@sphinxxxx/color-conversion": "^2.2.2",
     "@stencil/core": "^1.14.0",
     "@stencil/sass": "^1.1.1",
     "color": "^3.1.2",
