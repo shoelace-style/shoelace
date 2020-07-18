@@ -2,6 +2,7 @@
 
 ## 2.0.0-beta.5
 
+- Fixed bug where `npm install` would fail due to postinstall script
 - Removed unused dependency
 
 ## 2.0.0-beta.4
