@@ -140,6 +140,9 @@ strong {
 .sidebar-nav a {
   color: inherit;
   text-decoration: none;
+  line-height: 1.5em;
+  padding-top: .25em;
+  padding-bottom: .25em;
 }
 
 .sidebar-nav li.collapse > a,
