@@ -19,6 +19,9 @@ export const config: Config = {
       esmLoaderPath: '../loader'
     },
     {
+      type: 'dist-custom-elements-bundle'
+    },
+    {
       type: 'docs-custom',
       generator: (docs: any) => {
         docs = Object.assign(docs, { version });
