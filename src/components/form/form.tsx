@@ -184,6 +184,7 @@ export class Form {
     const tags = this.formControls.map(control => control.tag);
     return slot
       .assignedElements({ flatten: true })
+      .reduce((all, el) => all.concat(el, [...el.querySelectorAll('*')]), [])
       .filter(el => tags.includes(el.tagName.toLowerCase())) as HTMLElement[];
   }
 
