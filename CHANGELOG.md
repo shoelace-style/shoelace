@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.0-beta.6
+
+- Enabled the `dist-custom-elements-bundle` output target
+- Fixed a bug where nested form controls were ignored in `<sl-form>`
+
 ## 2.0.0-beta.5
 
 - Fixed bug where `npm install` would fail due to postinstall script
