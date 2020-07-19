@@ -13,7 +13,7 @@ Just add the following tags to your page.
 <script type="module" src="https://unpkg.com/@shoelace-style/shoelace@%VERSION%/dist/shoelace/shoelace.esm.js"></script>
 ```
 
-Now you can [start using Shoelace components!](/getting-started/usage.md)
+Now you can [start using Shoelace!](/getting-started/usage.md)
 
 ## Local Installation
 
@@ -32,4 +32,22 @@ Once you've done that, add the following tags to your page. Make sure to update 
 <script type="module" src="/assets/shoelace/shoelace.esm.js"></script>
 ```
 
-Now you can [start using Shoelace components!](/getting-started/usage.md)
+## Importing Custom Elements
+
+A [custom elements bundle](https://stenciljs.com/docs/custom-elements) is also exposed so you can import components and register them individually. This is a flexible alternative to the lazy loading approach described above.
+
+To import a single Shoelace components, use this syntax.
+
+```js
+import { Button } from '@shoelace-style/shoelace/dist/custom-elements';
+
+customElements.define('sl-button', Button);
+```
+
+For convenience, the bundle also exports a `defineCustomElements()` method. When this method is called, it will automatically define all Shoelace components in the bundle.
+
+```js
+import { defineCustomElements } from '@shoelace-style/shoelace/dist/custom-elements';
+
+defineCustomElements();
+```
