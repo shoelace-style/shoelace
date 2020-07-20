@@ -115,3 +115,40 @@ Consumers of the library should never need to worry about preprocessing the libr
 ### Positioning Popovers
 
 Shoelace uses an internal popover utility for dropdowns, tooltips, etc. This is a light abstraction of Popper.js designed to make positioning and transitioning things easy and consistent throughout the library. When possible, use this utility instead of relying on Popper directly. See `src/utilities/popover.ts` for details.
+
+### Host and Base Elements
+
+All components have a host element, which is a reference to the actual `<sl-*>` elements. Make sure to always set the host element's `display` property to the appropriate value depending on your needs, as the default is `inline` per the HTML spec.
+
+```css
+:host {
+  display: inline-block;
+}
+```
+
+Aside from `display`, avoid setting properties on the host element when possible. The reason for this is that styles applied to the host element are not encapsulated. Instead, create a base element that wraps the internals and style that instead. This convention also makes it easier to use BEM in components.
+
+```css
+.sl-example {
+  /* This is the base element */
+}
+
+.sl-example--primary {
+  /* Primary modifier */
+}
+```
+
+To expose custom properties for a component, define them in the `:host` block and use the following syntax for comments so they appear in the generated docs.
+
+```css
+/**
+ * @param --color: The component's text color.
+ * @param --background-color: The component's background color. 
+ */
+:host {
+  --color: white;
+  --background-color: tomato;
+
+  display: inline-block;
+}
+```
