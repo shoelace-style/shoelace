@@ -95,12 +95,8 @@ export class Rating {
 
     const newValue = this.getValueFromMousePosition(event);
 
-    if (newValue === this.value) {
-      this.value = 0;
-      this.isHovering = false;
-    } else {
-      this.value = newValue;
-    }
+    this.value = newValue === this.value ? 0 : newValue;
+    this.isHovering = false;
   }
 
   handleKeyDown(event: KeyboardEvent) {
