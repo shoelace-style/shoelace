@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.0-beta.7
+
+- Added links to version 1 resources to the docs
+
 ## 2.0.0-beta.6
 
 - Enabled the `dist-custom-elements-bundle` output target
