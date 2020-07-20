@@ -36,6 +36,12 @@ Once you've done that, add the following tags to your page. Make sure to update 
 
 A [custom elements bundle](https://stenciljs.com/docs/custom-elements) is also exposed so you can import components and register them individually. This is a flexible alternative to the lazy loading approach described above.
 
+Install Shoelace locally with the following command.
+
+```sh
+npm install @shoelace-style/shoelace
+```
+
 To import a single Shoelace component, use this syntax.
 
 ```js
