@@ -573,6 +573,10 @@ export namespace Components {
          */
         "disabled": boolean;
         /**
+          * A function that returns the symbols to display. Accepts an option `value` parameter you can use to map a specific symbol to a value.
+         */
+        "getSymbol": (value?: number) => string;
+        /**
           * The highest rating to show.
          */
         "max": number;
@@ -584,6 +588,14 @@ export namespace Components {
           * Makes the rating readonly.
          */
         "readonly": boolean;
+        /**
+          * Removes focus from the rating.
+         */
+        "removeFocus": () => Promise<void>;
+        /**
+          * Sets focus on the rating.
+         */
+        "setFocus": () => Promise<void>;
         /**
           * The current rating.
          */
@@ -1735,6 +1747,10 @@ declare namespace LocalJSX {
           * Disables the rating.
          */
         "disabled"?: boolean;
+        /**
+          * A function that returns the symbols to display. Accepts an option `value` parameter you can use to map a specific symbol to a value.
+         */
+        "getSymbol"?: (value?: number) => string;
         /**
           * The highest rating to show.
          */

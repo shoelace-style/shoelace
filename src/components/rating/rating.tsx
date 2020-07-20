@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, Prop, State, Watch, h } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, Method, Prop, State, Watch, h } from '@stencil/core';
 import { focusVisible } from '../../utilities/focus-visible';
 import { clamp } from '../../utilities/math';
 
@@ -9,17 +9,6 @@ import { clamp } from '../../utilities/math';
  * @part base - The component's base wrapper.
  */
 
-//
-// TODO:
-//
-// - sizing
-// - labels
-// - disabled
-// - readonly
-// - custom icons
-// - icon should grow on hover
-//
-
 @Component({
   tag: 'sl-rating',
   styleUrl: 'rating.scss',
@@ -29,30 +18,37 @@ export class Rating {
   constructor() {
     this.handleClick = this.handleClick.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
-    this.handleMouseOver = this.handleMouseOver.bind(this);
-    this.handleMouseOut = this.handleMouseOut.bind(this);
+    this.handleMouseEnter = this.handleMouseEnter.bind(this);
+    this.handleMouseLeave = this.handleMouseLeave.bind(this);
     this.handleMouseMove = this.handleMouseMove.bind(this);
   }
 
   rating: HTMLElement;
 
+  @Element() host: HTMLSlRatingElement;
+
   @State() hoverValue = 0;
   @State() isHovering = false;
 
   /** The current rating. */
-  @Prop({ mutable: true, reflect: true }) value = 2.5;
+  @Prop({ mutable: true, reflect: true }) value = 0;
 
   /** The highest rating to show. */
   @Prop() max = 5;
 
   /** The minimum increment value allowed by the control. */
-  @Prop() precision = 0.5;
+  @Prop() precision = 1;
 
   /** Makes the rating readonly. */
   @Prop() readonly = false;
 
   /** Disables the rating. */
   @Prop() disabled = false;
+
+  /** A function that returns the symbols to display. Accepts an option `value` parameter you can use to map a specific
+   * symbol to a value. */
+  // @ts-ignore
+  @Prop() getSymbol = (value?: number) => '<sl-icon name="star-fill"></sl-icon>';
 
   @Watch('value')
   handleValueChange() {
@@ -61,6 +57,18 @@ export class Rating {
 
   /** Emitted when the rating's value changes. */
   @Event() slChange: EventEmitter;
+
+  /** Sets focus on the rating. */
+  @Method()
+  async setFocus() {
+    this.rating.focus();
+  }
+
+  /** Removes focus from the rating. */
+  @Method()
+  async removeFocus() {
+    this.rating.blur();
+  }
 
   componentDidLoad() {
     focusVisible.observe(this.rating);
@@ -73,14 +81,33 @@ export class Rating {
   getValueFromMousePosition(event: MouseEvent) {
     const containerLeft = this.rating.getBoundingClientRect().left;
     const containerWidth = this.rating.getBoundingClientRect().width;
-    return clamp(this.roundToPrecision(((event.clientX - containerLeft) / containerWidth) * this.max), 0, this.max);
+    return clamp(
+      this.roundToPrecision(((event.clientX - containerLeft) / containerWidth) * this.max, this.precision),
+      0,
+      this.max
+    );
   }
 
   handleClick(event: MouseEvent) {
-    this.value = this.getValueFromMousePosition(event);
+    if (this.disabled || this.readonly) {
+      return;
+    }
+
+    const newValue = this.getValueFromMousePosition(event);
+
+    if (newValue === this.value) {
+      this.value = 0;
+      this.isHovering = false;
+    } else {
+      this.value = newValue;
+    }
   }
 
   handleKeyDown(event: KeyboardEvent) {
+    if (this.disabled || this.readonly) {
+      return;
+    }
+
     if (event.key === 'ArrowLeft') {
       const decrement = event.shiftKey ? 1 : this.precision;
       this.value = Math.max(0, this.value - decrement);
@@ -104,11 +131,11 @@ export class Rating {
     }
   }
 
-  handleMouseOver() {
+  handleMouseEnter() {
     this.isHovering = true;
   }
 
-  handleMouseOut() {
+  handleMouseLeave() {
     this.isHovering = false;
   }
 
@@ -122,42 +149,66 @@ export class Rating {
   }
 
   render() {
-    const counter = Array.from(Array(this.max));
-    const displayValue = this.isHovering ? this.hoverValue : this.value;
+    const counter = Array.from(Array(this.max).keys());
+    let displayValue = 0;
+
+    if (this.disabled || this.readonly) {
+      displayValue = this.value;
+    } else {
+      displayValue = this.isHovering ? this.hoverValue : this.value;
+    }
 
     return (
       <div
         ref={el => (this.rating = el)}
         part="base"
-        class="rating"
+        class={{
+          rating: true,
+          'rating--readonly': this.readonly,
+          'rating--disabled': this.disabled
+        }}
+        aria-disabled={this.disabled}
+        aria-readonly={this.readonly}
         aria-value={this.value}
         aria-valuemin={0}
         aria-valuemax={this.max}
-        tabIndex={0}
+        tabIndex={this.disabled ? -1 : 0}
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
-        onMouseEnter={this.handleMouseOver}
-        onMouseLeave={this.handleMouseOut}
+        onMouseEnter={this.handleMouseEnter}
+        onMouseLeave={this.handleMouseLeave}
         onMouseMove={this.handleMouseMove}
       >
-        <span class="rating__symbols">
-          {counter.map(() => (
-            <span class="rating__symbol">
-              <sl-icon name="star-fill" role="presentation" />
-            </span>
+        <span class="rating__symbols rating__symbols--inactive">
+          {counter.map(index => (
+            <span
+              class={{
+                rating__symbol: true,
+                'rating__symbol--hover': this.isHovering && Math.ceil(displayValue) === index + 1
+              }}
+              role="presentation"
+              // Users can click the current value to clear the rating. When this happens, we set this.isHovering to
+              // false to prevent the hover state from confusing them as they move the mouse out of the control. This
+              // extra mouseenter will reinstate it if they happen to mouse over an adjacent symbol.
+              onMouseEnter={this.handleMouseEnter}
+              innerHTML={this.getSymbol(index + 1)}
+            />
           ))}
         </span>
 
-        <span
-          class="rating__symbols rating__indicator"
-          style={{
-            width: `${(displayValue / this.max) * 100}%`
-          }}
-        >
-          {counter.map(() => (
-            <span class="rating__symbol">
-              <sl-icon name="star-fill" role="presentation" />
-            </span>
+        <span class="rating__symbols rating__symbols--indicator">
+          {counter.map(index => (
+            <span
+              class={{
+                rating__symbol: true,
+                'rating__symbol--hover': this.isHovering && Math.ceil(displayValue) === index + 1
+              }}
+              style={{
+                clipPath: displayValue > index + 1 ? null : `inset(0 ${100 - ((displayValue - index) / 1) * 100}% 0 0)`
+              }}
+              role="presentation"
+              innerHTML={this.getSymbol(index + 1)}
+            />
           ))}
         </span>
       </div>
