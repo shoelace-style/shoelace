@@ -3,6 +3,10 @@
 ## 2.0.0-beta.7
 
 - Added links to version 1 resources to the docs
+- Added rating component
+- Fixed a bug where some build files were missing
+- Fixed clearable tags demo
+- Fixed touch icon size in docs
 
 ## 2.0.0-beta.6
 
