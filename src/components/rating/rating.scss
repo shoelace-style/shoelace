@@ -1,0 +1,49 @@
+@import 'component';
+
+:host {
+  display: inline-flex;
+
+  --inactive-color: var(--sl-color-gray-90);
+  --active-color: #f8e71c;
+}
+
+.rating {
+  position: relative;
+  display: inline-flex;
+  border-radius: var(--sl-border-radius-medium);
+
+  &:focus {
+    outline: none;
+  }
+
+  &.focus-visible:focus {
+    box-shadow: var(--sl-focus-ring-box-shadow);
+  }
+}
+
+.rating__symbols {
+  display: inline-block;
+  position: relative;
+  font-size: 1.4rem;
+  line-height: 0;
+  color: var(--inactive-color);
+  cursor: pointer;
+  white-space: nowrap;
+
+  > :not(:last-of-type) {
+    margin-right: var(--sl-spacing-xx-small);
+  }
+}
+
+.rating__indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--active-color);
+  overflow: hidden;
+}
+
+.rating__symbol {
+  display: inline-block;
+  transition: var(--sl-transition-medium) transform;
+}

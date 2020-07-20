@@ -567,6 +567,28 @@ export namespace Components {
          */
         "value": number;
     }
+    interface SlRating {
+        /**
+          * Disables the rating.
+         */
+        "disabled": boolean;
+        /**
+          * The highest rating to show.
+         */
+        "max": number;
+        /**
+          * The minimum increment value allowed by the control.
+         */
+        "precision": number;
+        /**
+          * Makes the rating readonly.
+         */
+        "readonly": boolean;
+        /**
+          * The current rating.
+         */
+        "value": number;
+    }
     interface SlSelect {
         /**
           * Set to true to disable the select control.
@@ -972,6 +994,12 @@ declare global {
         prototype: HTMLSlRangeElement;
         new (): HTMLSlRangeElement;
     };
+    interface HTMLSlRatingElement extends Components.SlRating, HTMLStencilElement {
+    }
+    var HTMLSlRatingElement: {
+        prototype: HTMLSlRatingElement;
+        new (): HTMLSlRatingElement;
+    };
     interface HTMLSlSelectElement extends Components.SlSelect, HTMLStencilElement {
     }
     var HTMLSlSelectElement: {
@@ -1048,6 +1076,7 @@ declare global {
         "sl-progress-ring": HTMLSlProgressRingElement;
         "sl-radio": HTMLSlRadioElement;
         "sl-range": HTMLSlRangeElement;
+        "sl-rating": HTMLSlRatingElement;
         "sl-select": HTMLSlSelectElement;
         "sl-spinner": HTMLSlSpinnerElement;
         "sl-switch": HTMLSlSwitchElement;
@@ -1701,6 +1730,32 @@ declare namespace LocalJSX {
          */
         "value"?: number;
     }
+    interface SlRating {
+        /**
+          * Disables the rating.
+         */
+        "disabled"?: boolean;
+        /**
+          * The highest rating to show.
+         */
+        "max"?: number;
+        /**
+          * Emitted when the rating's value changes.
+         */
+        "onSlChange"?: (event: CustomEvent<any>) => void;
+        /**
+          * The minimum increment value allowed by the control.
+         */
+        "precision"?: number;
+        /**
+          * Makes the rating readonly.
+         */
+        "readonly"?: boolean;
+        /**
+          * The current rating.
+         */
+        "value"?: number;
+    }
     interface SlSelect {
         /**
           * Set to true to disable the select control.
@@ -2020,6 +2075,7 @@ declare namespace LocalJSX {
         "sl-progress-ring": SlProgressRing;
         "sl-radio": SlRadio;
         "sl-range": SlRange;
+        "sl-rating": SlRating;
         "sl-select": SlSelect;
         "sl-spinner": SlSpinner;
         "sl-switch": SlSwitch;
@@ -2056,6 +2112,7 @@ declare module "@stencil/core" {
             "sl-progress-ring": LocalJSX.SlProgressRing & JSXBase.HTMLAttributes<HTMLSlProgressRingElement>;
             "sl-radio": LocalJSX.SlRadio & JSXBase.HTMLAttributes<HTMLSlRadioElement>;
             "sl-range": LocalJSX.SlRange & JSXBase.HTMLAttributes<HTMLSlRangeElement>;
+            "sl-rating": LocalJSX.SlRating & JSXBase.HTMLAttributes<HTMLSlRatingElement>;
             "sl-select": LocalJSX.SlSelect & JSXBase.HTMLAttributes<HTMLSlSelectElement>;
             "sl-spinner": LocalJSX.SlSpinner & JSXBase.HTMLAttributes<HTMLSlSpinnerElement>;
             "sl-switch": LocalJSX.SlSwitch & JSXBase.HTMLAttributes<HTMLSlSwitchElement>;

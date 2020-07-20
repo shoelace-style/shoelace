@@ -29,6 +29,7 @@
   - [Progress Ring](/components/progress-ring.md)
   - [Radio](/components/radio.md)
   - [Range](/components/range.md)
+  - [Rating](/components/rating.md)
   - [Select](/components/select.md)
   - [Spinner](/components/spinner.md)
   - [Switch](/components/switch.md)
