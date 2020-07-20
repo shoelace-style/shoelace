@@ -22,7 +22,7 @@
 
   // Remove the focus ring when the user isn't interacting with a keyboard
   &:not(.focus-visible) ::slotted(sl-tab) {
-    --focus-ring-box-shadow: none;
+    --focus-ring: none;
   }
 }
 

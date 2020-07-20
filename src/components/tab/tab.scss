@@ -1,7 +1,10 @@
 @import 'component';
 
+/**
+ * @prop --focus-ring: The focus ring's box shadow.
+ */
 :host {
-  --focus-ring-box-shadow: var(--sl-focus-ring-box-shadow-inset);
+  --focus-ring: var(--sl-focus-ring-box-shadow-inset);
 
   display: inline-block;
 }
@@ -28,7 +31,7 @@
 
   &:focus:not(.tab--disabled) {
     color: var(--sl-color-primary-50);
-    box-shadow: var(--focus-ring-box-shadow);
+    box-shadow: var(--focus-ring);
   }
 
   &.tab--active:not(.tab--disabled) {
