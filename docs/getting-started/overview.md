@@ -112,3 +112,9 @@ Special thanks to the following projects and individuals that helped make Shoela
 - Positioning of menus, tooltips, et al is handled by [Popper.js](https://popper.js.org/)
 - CDN services are provided by [unpkg](https://unpkg.com/)
 - The Shoelace logo was designed with a single shoelace by [Adam K Olson](https://twitter.com/adamkolson)
+
+## Previous Versions
+
+Shoelace v1 has been deprecated, but you can still [view the docs](https://v1.shoelace.style) or [download the source](https://github.com/shoelace-style/shoelace/releases/tag/1.0.0-beta.25) for historical purposes.
+
+If you're new to this project, please see the [installation instructions](/getting-started/installation.md) for v2 instead.
