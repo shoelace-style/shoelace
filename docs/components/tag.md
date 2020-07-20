@@ -39,9 +39,27 @@ Use the `pill` prop to give tabs rounded edges.
 Use the `clearable` attribute to add a clear button to the tag.
 
 ```html preview
-<sl-tag size="small" clearable>Small</sl-tag>
-<sl-tag size="medium" clearable>Medium</sl-tag>
-<sl-tag size="large" clearable>Large</sl-tag>
+<div class="tags-clearable">
+  <sl-tag size="small" clearable>Small</sl-tag>
+  <sl-tag size="medium" clearable>Medium</sl-tag>
+  <sl-tag size="large" clearable>Large</sl-tag>
+</div>
+
+<script>
+  const div = document.querySelector('.tags-clearable');
+
+  div.addEventListener('slClear', event => {
+    const tag = event.target;
+    tag.style.opacity = '0';
+    setTimeout(() => tag.style.opacity = '1', 2000);
+  });
+</script>
+
+<style>
+  .tags-clearable sl-tag {
+    transition: var(--sl-transition-medium) opacity;
+  }
+</style>
 ```
 
 [component-metadata:sl-tag]
