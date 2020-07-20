@@ -8,13 +8,13 @@
  * @prop --slider-handle-size: The diameter of the slider's handle.
  */
 :host {
-  display: inline-block;
-
   --grid-width: 260px;
   --grid-height: 200px;
   --grid-handle-size: 12px;
   --slider-height: 10px;
   --slider-handle-size: 12px;
+
+  display: inline-block;
 }
 
 .color-picker {

@@ -4,7 +4,6 @@
 
 :host {
   display: block;
-  cursor: text;
 }
 
 .textarea {
@@ -20,7 +19,7 @@
   border: solid var(--sl-input-border-width) var(--sl-input-border-color);
   vertical-align: middle;
   transition: var(--sl-transition-fast) color, var(--sl-transition-fast) border, var(--sl-transition-fast) box-shadow;
-  cursor: inherit;
+  cursor: text;
 
   &:hover:not(.textarea--disabled) {
     background-color: var(--sl-input-background-color-hover);

@@ -7,7 +7,6 @@
   --width: calc(var(--height) * 2);
 
   display: inline-block;
-  cursor: pointer;
 }
 
 .switch {
@@ -18,7 +17,7 @@
   font-weight: var(--sl-input-font-weight);
   color: var(--sl-input-color);
   vertical-align: middle;
-  cursor: inherit;
+  cursor: pointer;
 }
 
 .switch__control {

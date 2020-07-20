@@ -2,7 +2,6 @@
 
 :host {
   display: inline-block;
-  cursor: default;
 }
 
 .tag {
@@ -12,7 +11,7 @@
   line-height: 1;
   white-space: nowrap;
   user-select: none;
-  cursor: inherit;
+  cursor: default;
 }
 
 .tag__clear {

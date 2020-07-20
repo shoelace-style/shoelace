@@ -2,7 +2,6 @@
 
 :host {
   display: inline-block;
-  cursor: pointer;
 }
 
 .checkbox {
@@ -13,7 +12,7 @@
   font-weight: var(--sl-input-font-weight);
   color: var(--sl-input-color);
   vertical-align: middle;
-  cursor: inherit;
+  cursor: pointer;
 }
 
 .checkbox__control {

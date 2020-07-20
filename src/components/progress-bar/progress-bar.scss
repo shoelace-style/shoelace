@@ -4,9 +4,9 @@
  * @prop height: The progress bar's height.
  */
 :host {
-  display: block;
-
   --height: 16px;
+
+  display: block;
 }
 
 .progress-bar {

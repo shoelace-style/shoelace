@@ -7,12 +7,12 @@
  * @prop --symbol-spacing: The spacing to use around symbols.
  */
 :host {
-  display: inline-block;
-
   --symbol-color: var(--sl-color-gray-85);
   --symbol-color-active: #ffbe00;
   --symbol-size: 1.2rem;
   --symbol-spacing: var(--sl-spacing-xxx-small);
+
+  display: inline-block;
 }
 
 .rating {

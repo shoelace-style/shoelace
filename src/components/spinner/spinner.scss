@@ -6,11 +6,11 @@
  * @prop --stroke-width: The width of the indicator.
  */
 :host {
-  display: inline-flex;
-
   --track-color: transparent;
   --indicator-color: var(--sl-color-primary-50);
   --stroke-width: 2px;
+
+  display: inline-flex;
 }
 
 .spinner {

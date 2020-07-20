@@ -10,8 +10,6 @@
  * @prop --show-timing-function: The timing function (easing) to use for the show transition.
  */
 :host {
-  display: contents;
-
   --max-width: 20rem;
   --hide-delay: 0s;
   --hide-duration: 0.125s;
@@ -19,6 +17,8 @@
   --show-delay: 0.125s;
   --show-duration: 0.125s;
   --show-timing-function: ease;
+
+  display: contents;
 }
 
 .tooltip {

@@ -7,12 +7,12 @@
  * @prop --show-timing-function: The timing function (easing) to use for the show transition.
  */
 :host {
-  display: block;
-
   --hide-duration: var(--sl-transition-medium);
   --hide-timing-function: ease;
   --show-duration: var(--sl-transition-medium);
   --show-timing-function: ease;
+
+  display: block;
 }
 
 .details {
