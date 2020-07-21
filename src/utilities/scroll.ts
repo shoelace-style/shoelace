@@ -6,8 +6,7 @@ const locks = new Set();
 // Prevents body scrolling. Keeps track of which elements requested a lock so multiple levels of locking are possible
 // without premature unlocking.
 //
-export function lockBodyScrolling(lockingEl: HTMLElement | null) {
-  if (!lockingEl) return
+export function lockBodyScrolling(lockingEl: HTMLElement) {
   locks.add(lockingEl);
   document.body.classList.add('sl-scroll-lock');
 }
