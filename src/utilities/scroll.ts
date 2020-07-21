@@ -1,25 +1,23 @@
 import { getOffset } from './offset';
 
-let locks = [];
+const locks = new Set();
 
 //
 // Prevents body scrolling. Keeps track of which elements requested a lock so multiple levels of locking are possible
 // without premature unlocking.
 //
 export function lockBodyScrolling(lockingEl: HTMLElement) {
-  if (lockingEl && !locks.includes(lockingEl)) {
-    locks.push(lockingEl);
-    document.body.classList.add('sl-scroll-lock');
-  }
+  locks.add(lockingEl);
+  document.body.classList.add('sl-scroll-lock');
 }
 
 //
 // Unlocks body scrolling. Scrolling will only be unlocked once all elements that requested a lock call this method.
 //
 export function unlockBodyScrolling(lockingEl: HTMLElement) {
-  locks = locks.filter(el => el !== lockingEl);
+  locks.delete(lockingEl);
 
-  if (locks.length === 0) {
+  if (locks.size === 0) {
     document.body.classList.remove('sl-scroll-lock');
   }
 }
