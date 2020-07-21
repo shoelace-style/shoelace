@@ -128,7 +128,7 @@ You can use [this utility](https://www.npmjs.com/package/@shoelace-style/react-w
 npm install @shoelace-style/react-wrapper
 ```
 
-Now you can "import" Shoelace components as React components! Remember to [install Shoelace](/getting-started/installation.md) as well, otherwise this won't work as intended.
+Now you can "import" Shoelace components as React components! Remember to [install Shoelace](/getting-started/installation.md) first, otherwise this won't work.
 
 ```js
 import wrapCustomElement from '@shoelace-style/react-wrapper';
