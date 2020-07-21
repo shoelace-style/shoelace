@@ -42,12 +42,13 @@ To use the custom elements bundle, install Shoelace locally with the following c
 npm install @shoelace-style/shoelace
 ```
 
-To import a single Shoelace component, use this syntax.
+To import individual Shoelace components, use this syntax.
 
 ```js
-import { Button } from '@shoelace-style/shoelace/dist/custom-elements';
+import { SlButton, SlDropdown } from '@shoelace-style/shoelace/dist/custom-elements';
 
-customElements.define('sl-button', Button);
+customElements.define('sl-button', SlButton);
+customElements.define('sl-dropdown', SlButton);
 ```
 
 For convenience, the bundle also exports a `defineCustomElements()` method. When this method is called, it will automatically define all Shoelace components in the bundle.
