@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.0.0-beta.8
+
+- Added `--focus-ring` custom property to tab
+- Fixed constructor bindings so they don't break the custom elements bundle
+- Fixed tag color contrast to be AA compliant
+- Refactored `:host` variables and moved non-display props to base elements
+- Update custom elements bundle documentation
+
 ## 2.0.0-beta.7
 
 - Added links to version 1 resources to the docs
