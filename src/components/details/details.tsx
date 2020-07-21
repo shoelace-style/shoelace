@@ -22,13 +22,6 @@ let id = 0;
   shadow: true
 })
 export class Details {
-  constructor() {
-    this.handleBodyTransitionEnd = this.handleBodyTransitionEnd.bind(this);
-
-    this.handleSummaryClick = this.handleSummaryClick.bind(this);
-    this.handleSummaryKeyDown = this.handleSummaryKeyDown.bind(this);
-  }
-
   details: HTMLElement;
   header: HTMLElement;
   id = `details-${++id}`;
@@ -59,6 +52,12 @@ export class Details {
 
   /** Emitted after the details closes and all transitions are complete. */
   @Event() slAfterHide: EventEmitter;
+
+  connectedCallback() {
+    this.handleBodyTransitionEnd = this.handleBodyTransitionEnd.bind(this);
+    this.handleSummaryClick = this.handleSummaryClick.bind(this);
+    this.handleSummaryKeyDown = this.handleSummaryKeyDown.bind(this);
+  }
 
   componentDidLoad() {
     focusVisible.observe(this.details);

@@ -15,14 +15,6 @@ import { clamp } from '../../utilities/math';
   shadow: true
 })
 export class Rating {
-  constructor() {
-    this.handleClick = this.handleClick.bind(this);
-    this.handleKeyDown = this.handleKeyDown.bind(this);
-    this.handleMouseEnter = this.handleMouseEnter.bind(this);
-    this.handleMouseLeave = this.handleMouseLeave.bind(this);
-    this.handleMouseMove = this.handleMouseMove.bind(this);
-  }
-
   rating: HTMLElement;
 
   @Element() host: HTMLSlRatingElement;
@@ -57,6 +49,14 @@ export class Rating {
 
   /** Emitted when the rating's value changes. */
   @Event() slChange: EventEmitter;
+
+  connectedCallback() {
+    this.handleClick = this.handleClick.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleMouseEnter = this.handleMouseEnter.bind(this);
+    this.handleMouseLeave = this.handleMouseLeave.bind(this);
+    this.handleMouseMove = this.handleMouseMove.bind(this);
+  }
 
   /** Sets focus on the rating. */
   @Method()

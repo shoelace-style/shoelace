@@ -21,11 +21,6 @@ import { focusVisible } from '../../utilities/focus-visible';
   shadow: true
 })
 export class Tab {
-  constructor() {
-    this.handleCloseClick = this.handleCloseClick.bind(this);
-    this.handleTransitionEnd = this.handleTransitionEnd.bind(this);
-  }
-
   alert: HTMLElement;
 
   @Element() host: HTMLSlAlertElement;
@@ -55,6 +50,11 @@ export class Tab {
 
   /** Emitted after the alert closes and all transitions are complete. */
   @Event() slAfterHide: EventEmitter;
+
+  connectedCallback() {
+    this.handleCloseClick = this.handleCloseClick.bind(this);
+    this.handleTransitionEnd = this.handleTransitionEnd.bind(this);
+  }
 
   componentDidLoad() {
     focusVisible.observe(this.alert);

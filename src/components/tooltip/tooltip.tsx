@@ -18,15 +18,6 @@ let id = 0;
   shadow: true
 })
 export class Tooltip {
-  constructor() {
-    this.handleBlur = this.handleBlur.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-    this.handleFocus = this.handleFocus.bind(this);
-    this.handleMouseOver = this.handleMouseOver.bind(this);
-    this.handleMouseOut = this.handleMouseOut.bind(this);
-    this.handleSlotChange = this.handleSlotChange.bind(this);
-  }
-
   id = `tooltip-${++id}`;
   popover: Popover;
   target: HTMLElement;
@@ -90,6 +81,15 @@ export class Tooltip {
 
   /** Emitted after the tooltip has hidden and all transitions are complete. */
   @Event() slAfterHide: EventEmitter;
+
+  connectedCallback() {
+    this.handleBlur = this.handleBlur.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
+    this.handleMouseOver = this.handleMouseOver.bind(this);
+    this.handleMouseOut = this.handleMouseOut.bind(this);
+    this.handleSlotChange = this.handleSlotChange.bind(this);
+  }
 
   componentDidLoad() {
     const slot = this.host.shadowRoot.querySelector('slot');

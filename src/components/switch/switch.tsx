@@ -20,14 +20,6 @@ let id = 0;
   shadow: true
 })
 export class Switch {
-  constructor() {
-    this.handleClick = this.handleClick.bind(this);
-    this.handleBlur = this.handleBlur.bind(this);
-    this.handleFocus = this.handleFocus.bind(this);
-    this.handleKeyDown = this.handleKeyDown.bind(this);
-    this.handleMouseDown = this.handleMouseDown.bind(this);
-  }
-
   switchId = `switch-${++id}`;
   labelId = `switch-label-${id}`;
   input: HTMLInputElement;
@@ -60,6 +52,14 @@ export class Switch {
 
   /** Emitted when the control gains focus. */
   @Event() slFocus: EventEmitter;
+
+  connectedCallback() {
+    this.handleClick = this.handleClick.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleMouseDown = this.handleMouseDown.bind(this);
+  }
 
   /** Sets focus on the switch. */
   @Method()

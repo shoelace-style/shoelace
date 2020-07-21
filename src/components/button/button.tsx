@@ -21,12 +21,6 @@ import { Component, Event, EventEmitter, Method, Prop, State, h } from '@stencil
   shadow: true
 })
 export class Button {
-  constructor() {
-    this.handleBlur = this.handleBlur.bind(this);
-    this.handleFocus = this.handleFocus.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-  }
-
   button: HTMLButtonElement;
 
   @State() hasFocus = false;
@@ -66,6 +60,12 @@ export class Button {
 
   /** Emitted when the button gains focus. */
   @Event() slFocus: EventEmitter;
+
+  connectedCallback() {
+    this.handleBlur = this.handleBlur.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+  }
 
   /** Sets focus on the button. */
   @Method()

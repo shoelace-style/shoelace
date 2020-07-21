@@ -30,16 +30,6 @@ let id = 0;
   shadow: true
 })
 export class Input {
-  constructor() {
-    this.handleChange = this.handleChange.bind(this);
-    this.handleInput = this.handleInput.bind(this);
-    this.handleBlur = this.handleBlur.bind(this);
-    this.handleFocus = this.handleFocus.bind(this);
-    this.handleClearClick = this.handleClearClick.bind(this);
-    this.handleMouseDown = this.handleMouseDown.bind(this);
-    this.handlePasswordToggle = this.handlePasswordToggle.bind(this);
-  }
-
   inputId = `input-${++id}`;
   labelId = `input-label-${id}`;
   helpTextId = `input-help-text-${id}`;
@@ -136,6 +126,16 @@ export class Input {
 
   /** Emitted when the control loses focus. */
   @Event() slBlur: EventEmitter;
+
+  connectedCallback() {
+    this.handleChange = this.handleChange.bind(this);
+    this.handleInput = this.handleInput.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
+    this.handleClearClick = this.handleClearClick.bind(this);
+    this.handleMouseDown = this.handleMouseDown.bind(this);
+    this.handlePasswordToggle = this.handlePasswordToggle.bind(this);
+  }
 
   /** Sets focus on the input. */
   @Method()

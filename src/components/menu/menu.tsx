@@ -17,15 +17,6 @@ import { getTextContent } from '../../utilities/slot';
   shadow: true
 })
 export class Menu {
-  constructor() {
-    this.handleBlur = this.handleBlur.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-    this.handleFocus = this.handleFocus.bind(this);
-    this.handleKeyDown = this.handleKeyDown.bind(this);
-    this.handleMouseOver = this.handleMouseOver.bind(this);
-    this.handleMouseOut = this.handleMouseOut.bind(this);
-  }
-
   ignoreMouseEvents = false;
   ignoreMouseTimeout: any;
   menu: HTMLElement;
@@ -40,6 +31,15 @@ export class Menu {
 
   /** Emitted when a menu item is selected. */
   @Event() slSelect: EventEmitter;
+
+  connectedCallback() {
+    this.handleBlur = this.handleBlur.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleMouseOver = this.handleMouseOver.bind(this);
+    this.handleMouseOut = this.handleMouseOut.bind(this);
+  }
 
   /** Sets focus on the menu. */
   @Method()

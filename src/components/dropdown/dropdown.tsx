@@ -21,14 +21,6 @@ let id = 0;
   shadow: true
 })
 export class Dropdown {
-  constructor() {
-    this.handleDocumentKeyDown = this.handleDocumentKeyDown.bind(this);
-    this.handleDocumentMouseDown = this.handleDocumentMouseDown.bind(this);
-    this.handlePanelSelect = this.handlePanelSelect.bind(this);
-    this.handleTriggerKeyDown = this.handleTriggerKeyDown.bind(this);
-    this.togglePanel = this.togglePanel.bind(this);
-  }
-
   id = `dropdown-${++id}`;
   ignoreMouseEvents = false;
   ignoreMouseTimeout: any;
@@ -96,6 +88,14 @@ export class Dropdown {
   @Watch('skidding')
   handlePopoverOptionsChange() {
     this.popover.setOptions({ placement: this.placement });
+  }
+
+  connectedCallback() {
+    this.handleDocumentKeyDown = this.handleDocumentKeyDown.bind(this);
+    this.handleDocumentMouseDown = this.handleDocumentMouseDown.bind(this);
+    this.handlePanelSelect = this.handlePanelSelect.bind(this);
+    this.handleTriggerKeyDown = this.handleTriggerKeyDown.bind(this);
+    this.togglePanel = this.togglePanel.bind(this);
   }
 
   componentDidLoad() {

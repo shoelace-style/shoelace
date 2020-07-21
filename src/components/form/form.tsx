@@ -25,7 +25,10 @@ export class Form {
   form: HTMLElement;
   formControls: FormControl[];
 
-  constructor() {
+  /** Emitted when the form is submitted. */
+  @Event() slSubmit: EventEmitter;
+
+  connectedCallback() {
     this.formControls = [
       {
         tag: 'button',
@@ -162,9 +165,6 @@ export class Form {
     this.handleClick = this.handleClick.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
   }
-
-  /** Emitted when the form is submitted. */
-  @Event() slSubmit: EventEmitter;
 
   /** Serializes all form controls elements and returns a `FormData` object. */
   @Method()

@@ -21,13 +21,6 @@ let id = 0;
   shadow: true
 })
 export class Checkbox {
-  constructor() {
-    this.handleClick = this.handleClick.bind(this);
-    this.handleBlur = this.handleBlur.bind(this);
-    this.handleFocus = this.handleFocus.bind(this);
-    this.handleMouseDown = this.handleMouseDown.bind(this);
-  }
-
   inputId = `checkbox-${++id}`;
   labelId = `checkbox-label-${id}`;
   input: HTMLInputElement;
@@ -64,6 +57,13 @@ export class Checkbox {
     this.input.checked = this.checked;
     this.input.indeterminate = this.indeterminate;
     this.slChange.emit();
+  }
+
+  connectedCallback() {
+    this.handleClick = this.handleClick.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
+    this.handleMouseDown = this.handleMouseDown.bind(this);
   }
 
   componentDidLoad() {

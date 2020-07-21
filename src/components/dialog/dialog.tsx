@@ -27,14 +27,6 @@ let id = 0;
   shadow: true
 })
 export class Dialog {
-  constructor() {
-    this.handleDocumentFocusIn = this.handleDocumentFocusIn.bind(this);
-    this.handleCloseClick = this.handleCloseClick.bind(this);
-    this.handleTransitionEnd = this.handleTransitionEnd.bind(this);
-    this.handleKeyDown = this.handleKeyDown.bind(this);
-    this.handleOverlayClick = this.handleOverlayClick.bind(this);
-  }
-
   panel: HTMLElement;
   dialog: HTMLElement;
   id = `dialog-${++id}`;
@@ -78,6 +70,14 @@ export class Dialog {
 
   /** Emitted when the overlay is clicked. Calling `event.preventDefault()` will prevent the dialog from closing. */
   @Event() slOverlayDismiss: EventEmitter;
+
+  connectedCallback() {
+    this.handleDocumentFocusIn = this.handleDocumentFocusIn.bind(this);
+    this.handleCloseClick = this.handleCloseClick.bind(this);
+    this.handleTransitionEnd = this.handleTransitionEnd.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleOverlayClick = this.handleOverlayClick.bind(this);
+  }
 
   componentDidLoad() {
     focusVisible.observe(this.dialog);

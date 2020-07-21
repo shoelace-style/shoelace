@@ -24,29 +24,6 @@ import { clamp } from '../../utilities/math';
   shadow: true
 })
 export class ColorPicker {
-  constructor() {
-    this.handleAlphaDrag = this.handleAlphaDrag.bind(this);
-    this.handleAlphaInput = this.handleAlphaInput.bind(this);
-    this.handleAlphaKeyDown = this.handleAlphaKeyDown.bind(this);
-    this.handleCopy = this.handleCopy.bind(this);
-    this.handleDocumentKeyDown = this.handleDocumentKeyDown.bind(this);
-    this.handleDocumentMouseDown = this.handleDocumentMouseDown.bind(this);
-    this.handleDrag = this.handleDrag.bind(this);
-    this.handleDropdownAfterHide = this.handleDropdownAfterHide.bind(this);
-    this.handleDropdownAfterShow = this.handleDropdownAfterShow.bind(this);
-    this.handleDropdownHide = this.handleDropdownHide.bind(this);
-    this.handleDropdownShow = this.handleDropdownShow.bind(this);
-    this.handleGridDrag = this.handleGridDrag.bind(this);
-    this.handleGridKeyDown = this.handleGridKeyDown.bind(this);
-    this.handleHueDrag = this.handleHueDrag.bind(this);
-    this.handleHueInput = this.handleHueInput.bind(this);
-    this.handleHueKeyDown = this.handleHueKeyDown.bind(this);
-    this.handleLightnessInput = this.handleLightnessInput.bind(this);
-    this.handleSaturationInput = this.handleSaturationInput.bind(this);
-    this.handleTextInputChange = this.handleTextInputChange.bind(this);
-    this.handleTextInputKeyDown = this.handleTextInputKeyDown.bind(this);
-  }
-
   bypassValueParse = false;
   copyButton: HTMLSlButtonElement;
   dropdown: HTMLSlDropdownElement;
@@ -147,6 +124,29 @@ export class ColorPicker {
       this.slChange.emit();
       this.lastValueEmitted = this.value;
     }
+  }
+
+  connectedCallback() {
+    this.handleAlphaDrag = this.handleAlphaDrag.bind(this);
+    this.handleAlphaInput = this.handleAlphaInput.bind(this);
+    this.handleAlphaKeyDown = this.handleAlphaKeyDown.bind(this);
+    this.handleCopy = this.handleCopy.bind(this);
+    this.handleDocumentKeyDown = this.handleDocumentKeyDown.bind(this);
+    this.handleDocumentMouseDown = this.handleDocumentMouseDown.bind(this);
+    this.handleDrag = this.handleDrag.bind(this);
+    this.handleDropdownAfterHide = this.handleDropdownAfterHide.bind(this);
+    this.handleDropdownAfterShow = this.handleDropdownAfterShow.bind(this);
+    this.handleDropdownHide = this.handleDropdownHide.bind(this);
+    this.handleDropdownShow = this.handleDropdownShow.bind(this);
+    this.handleGridDrag = this.handleGridDrag.bind(this);
+    this.handleGridKeyDown = this.handleGridKeyDown.bind(this);
+    this.handleHueDrag = this.handleHueDrag.bind(this);
+    this.handleHueInput = this.handleHueInput.bind(this);
+    this.handleHueKeyDown = this.handleHueKeyDown.bind(this);
+    this.handleLightnessInput = this.handleLightnessInput.bind(this);
+    this.handleSaturationInput = this.handleSaturationInput.bind(this);
+    this.handleTextInputChange = this.handleTextInputChange.bind(this);
+    this.handleTextInputKeyDown = this.handleTextInputKeyDown.bind(this);
   }
 
   componentWillLoad() {

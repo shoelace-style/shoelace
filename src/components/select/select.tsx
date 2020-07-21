@@ -24,18 +24,6 @@ let id = 0;
   shadow: true
 })
 export class Select {
-  constructor() {
-    this.handleBlur = this.handleBlur.bind(this);
-    this.handleFocus = this.handleFocus.bind(this);
-    this.handleKeyDown = this.handleKeyDown.bind(this);
-    this.handleLabelClick = this.handleLabelClick.bind(this);
-    this.handleMenuKeyDown = this.handleMenuKeyDown.bind(this);
-    this.handleMenuHide = this.handleMenuHide.bind(this);
-    this.handleMenuShow = this.handleMenuShow.bind(this);
-    this.handleMenuSelect = this.handleMenuSelect.bind(this);
-    this.handleSlotChange = this.handleSlotChange.bind(this);
-  }
-
   dropdown: HTMLSlDropdownElement;
   input: HTMLSlInputElement;
   inputId = `select-${++id}`;
@@ -110,6 +98,18 @@ export class Select {
 
   /** Emitted when the control loses focus */
   @Event() slBlur: EventEmitter;
+
+  connectedCallback() {
+    this.handleBlur = this.handleBlur.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleLabelClick = this.handleLabelClick.bind(this);
+    this.handleMenuKeyDown = this.handleMenuKeyDown.bind(this);
+    this.handleMenuHide = this.handleMenuHide.bind(this);
+    this.handleMenuShow = this.handleMenuShow.bind(this);
+    this.handleMenuSelect = this.handleMenuSelect.bind(this);
+    this.handleSlotChange = this.handleSlotChange.bind(this);
+  }
 
   componentDidLoad() {
     this.menu.querySelector('slot').addEventListener('slotchange', this.handleSlotChange);

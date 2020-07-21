@@ -22,13 +22,6 @@ let id = 0;
   shadow: true
 })
 export class Textarea {
-  constructor() {
-    this.handleChange = this.handleChange.bind(this);
-    this.handleInput = this.handleInput.bind(this);
-    this.handleBlur = this.handleBlur.bind(this);
-    this.handleFocus = this.handleFocus.bind(this);
-  }
-
   textareaId = `textarea-${++id}`;
   labelId = `textarea-label-${id}`;
   helpTextId = `textarea-help-text-${id}`;
@@ -106,6 +99,13 @@ export class Textarea {
   @Watch('rows')
   handleRowsChange() {
     this.setTextareaHeight();
+  }
+
+  connectedCallback() {
+    this.handleChange = this.handleChange.bind(this);
+    this.handleInput = this.handleInput.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
   }
 
   componentDidLoad() {

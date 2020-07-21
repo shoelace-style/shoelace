@@ -18,10 +18,6 @@ import { Component, Prop, State, h } from '@stencil/core';
   shadow: true
 })
 export class Avatar {
-  constructor() {
-    this.handleImageError = this.handleImageError.bind(this);
-  }
-
   @State() hasError = false;
 
   /** The image source to use for the avatar. */
@@ -35,6 +31,10 @@ export class Avatar {
 
   /** Initials to use as a fallback when no image is available (1-2 characters max recommended). */
   @Prop() shape: 'circle' | 'square' | 'rounded' = 'circle';
+
+  connectedCallback() {
+    this.handleImageError = this.handleImageError.bind(this);
+  }
 
   handleImageError() {
     this.hasError = true;

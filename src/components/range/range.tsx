@@ -16,12 +16,6 @@ import ResizeObserver from 'resize-observer-polyfill';
   shadow: true
 })
 export class Range {
-  constructor() {
-    this.handleInput = this.handleInput.bind(this);
-    this.handleBlur = this.handleBlur.bind(this);
-    this.handleFocus = this.handleFocus.bind(this);
-  }
-
   input: HTMLInputElement;
   output: HTMLElement;
   resizeObserver: any;
@@ -60,6 +54,12 @@ export class Range {
 
   /** Emitted when the control gains focus. */
   @Event() slFocus: EventEmitter;
+
+  connectedCallback() {
+    this.handleInput = this.handleInput.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
+  }
 
   componentWillLoad() {
     if (this.value === undefined || this.value === null) this.value = this.min;

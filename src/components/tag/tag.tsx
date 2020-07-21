@@ -17,10 +17,6 @@ import { Component, Event, EventEmitter, Prop, h } from '@stencil/core';
   shadow: true
 })
 export class Tag {
-  constructor() {
-    this.handleClearClick = this.handleClearClick.bind(this);
-  }
-
   tag: HTMLElement;
 
   /** The tag's type. */
@@ -37,6 +33,10 @@ export class Tag {
 
   /** Emitted when the clear button is activated. */
   @Event() slClear: EventEmitter;
+
+  connectedCallback() {
+    this.handleClearClick = this.handleClearClick.bind(this);
+  }
 
   handleClearClick() {
     this.slClear.emit();

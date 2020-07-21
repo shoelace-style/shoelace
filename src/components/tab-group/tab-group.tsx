@@ -23,11 +23,6 @@ import { focusVisible } from '../../utilities/focus-visible';
   shadow: true
 })
 export class TabGroup {
-  constructor() {
-    this.handleClick = this.handleClick.bind(this);
-    this.handleKeyDown = this.handleKeyDown.bind(this);
-  }
-
   activeTab: HTMLSlTabElement;
   activeTabIndicator: HTMLElement;
   body: HTMLElement;
@@ -51,6 +46,11 @@ export class TabGroup {
 
   /** Emitted when a tab is hidden. */
   @Event() slTabHide: EventEmitter;
+
+  connectedCallback() {
+    this.handleClick = this.handleClick.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+  }
 
   componentDidLoad() {
     // Set initial tab state
