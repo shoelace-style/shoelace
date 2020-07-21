@@ -48,7 +48,7 @@ To import individual Shoelace components, use this syntax.
 import { SlButton, SlDropdown } from '@shoelace-style/shoelace/dist/custom-elements';
 
 customElements.define('sl-button', SlButton);
-customElements.define('sl-dropdown', SlButton);
+customElements.define('sl-dropdown', SlDropdown);
 ```
 
 For convenience, the bundle also exports a `defineCustomElements()` method. When this method is called, it will automatically define all Shoelace components in the bundle.
