@@ -34,9 +34,9 @@ Once you've done that, add the following tags to your page. Make sure to update 
 
 ## Importing Custom Elements
 
-A [custom elements bundle](https://stenciljs.com/docs/custom-elements) is also exposed so you can import components and register them individually. This is a flexible alternative to the lazy loading approach described above.
+A [custom elements bundle](https://stenciljs.com/docs/custom-elements) is available so you can import components and register them individually. This is a more flexible alternative to the lazy loading approach, but it requires the use of a bundler such as [Webpack](https://webpack.js.org/) or [Rollup](https://rollupjs.org/guide/en/).
 
-Install Shoelace locally with the following command.
+To use the custom elements bundle, install Shoelace locally with the following command.
 
 ```sh
 npm install @shoelace-style/shoelace
@@ -57,3 +57,5 @@ import { defineCustomElements } from '@shoelace-style/shoelace/dist/custom-eleme
 
 defineCustomElements();
 ```
+
+While convenient, importing all components like this will make your bundle larger. For best results, only import the components you're actually going to use.
