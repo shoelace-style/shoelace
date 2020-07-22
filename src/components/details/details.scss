@@ -1,12 +1,16 @@
 @import 'component';
 
 /**
+ * @prop --border-color: The color of the header border.
+ * @prop --border-radius: The border radius of the component.
  * @prop --hide-duration: The length of the hide transition.
  * @prop --hide-timing-function: The timing function (easing) to use for the hide transition.
  * @prop --show-duration: The length of the show transition.
  * @prop --show-timing-function: The timing function (easing) to use for the show transition.
  */
 :host {
+  --border-color: var(--sl-color-gray-90);
+  --border-radius: var(--sl-border-radius-medium);
   --hide-duration: var(--sl-transition-medium);
   --hide-timing-function: ease;
   --show-duration: var(--sl-transition-medium);
@@ -16,8 +20,8 @@
 }
 
 .details {
-  border: solid 1px var(--sl-color-gray-90);
-  border-radius: var(--sl-border-radius-medium);
+  border: solid 1px var(--border-color);
+  border-radius: var(--border-radius);
 }
 
 .details--disabled {
