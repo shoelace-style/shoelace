@@ -71,7 +71,7 @@ At first glance, this approach might seem a bit verbose or even limiting, but it
 
 Most (but not all) components expose parts. You can find them in each component's API documention under the "CSS Parts" section.
 
-### Custom Properties
+## Custom Properties
 
 For convenience, some components expose CSS custom properties you can override. These are not design tokens, nor do they have the same `--sl-` prefix since they're scoped to a component.
 
