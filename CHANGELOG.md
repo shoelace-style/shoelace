@@ -2,11 +2,19 @@
 
 ## 2.0.0-beta.8
 
+- Added the card component
 - Added `--focus-ring` custom property to tab
+- Fixed a bug where range tooltips didn't appear on iOS
 - Fixed constructor bindings so they don't break the custom elements bundle
 - Fixed tag color contrast to be AA compliant
+- Fixed a bug that made it difficult to vertically align rating
+- Made tag text colors AA compliant
+- Promoted badge to stable
 - Refactored `:host` variables and moved non-display props to base elements
-- Update custom elements bundle documentation
+- Refactored event handler bindings to occur in `connectedCallback` instead of the constructor
+- Refactored scroll locking logic to use `Set` instead of an array
+- Updated the custom elements bundle documentation and added webpack example
+- Upgraded Stencil to 1.17.0-0 (next) to fix custom elements bundle
 
 ## 2.0.0-beta.7
 
