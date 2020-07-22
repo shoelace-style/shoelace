@@ -50,7 +50,7 @@ The author reserves the right to reject any PR that's outside the scope of the p
 
 ### Branches
 
-`master` - This branch reflects the latest release and powers [shoelace.style](https://shoelace.style/).
+`current` - This branch reflects the latest release and powers [shoelace.style](https://shoelace.style/).
 
 `next` - This branch is where pull requests will land. It reflects what's coming in the _next_ release, which can be previewed at [next.shoelace.style](https://next.shoelace.style/).
 
