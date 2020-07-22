@@ -21,6 +21,7 @@ export class Range {
   resizeObserver: any;
 
   @State() hasFocus = false;
+  @State() hasTooltip = false;
 
   /** The input's name attribute. */
   @Prop() name = '';
@@ -59,6 +60,7 @@ export class Range {
     this.handleInput = this.handleInput.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
+    this.handleTouchStart = this.handleTouchStart.bind(this);
   }
 
   componentWillLoad() {
@@ -93,14 +95,20 @@ export class Range {
 
   handleBlur() {
     this.hasFocus = false;
+    this.hasTooltip = false;
     this.slBlur.emit();
     this.resizeObserver.unobserve(this.input);
   }
 
   handleFocus() {
     this.hasFocus = true;
+    this.hasTooltip = true;
     this.slFocus.emit();
     this.resizeObserver.observe(this.input);
+  }
+
+  handleTouchStart() {
+    this.setFocus();
   }
 
   syncTooltip() {
@@ -125,9 +133,11 @@ export class Range {
           // States
           'range--disabled': this.disabled,
           'range--focused': this.hasFocus,
+          'range--tooltip-visible': this.hasTooltip,
           'range--tooltip-top': this.tooltip === 'top',
           'range--tooltip-bottom': this.tooltip === 'bottom'
         }}
+        onTouchStart={this.handleTouchStart}
       >
         <input
           part="input"
