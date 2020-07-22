@@ -106,6 +106,8 @@ export namespace Components {
          */
         "value": string;
     }
+    interface SlCard {
+    }
     interface SlCheckbox {
         /**
           * Set to true to draw the checkbox in a checked state.
@@ -904,6 +906,12 @@ declare global {
         prototype: HTMLSlButtonElement;
         new (): HTMLSlButtonElement;
     };
+    interface HTMLSlCardElement extends Components.SlCard, HTMLStencilElement {
+    }
+    var HTMLSlCardElement: {
+        prototype: HTMLSlCardElement;
+        new (): HTMLSlCardElement;
+    };
     interface HTMLSlCheckboxElement extends Components.SlCheckbox, HTMLStencilElement {
     }
     var HTMLSlCheckboxElement: {
@@ -1071,6 +1079,7 @@ declare global {
         "sl-avatar": HTMLSlAvatarElement;
         "sl-badge": HTMLSlBadgeElement;
         "sl-button": HTMLSlButtonElement;
+        "sl-card": HTMLSlCardElement;
         "sl-checkbox": HTMLSlCheckboxElement;
         "sl-color-picker": HTMLSlColorPickerElement;
         "sl-details": HTMLSlDetailsElement;
@@ -1208,6 +1217,8 @@ declare namespace LocalJSX {
           * An optional value for the button.
          */
         "value"?: string;
+    }
+    interface SlCard {
     }
     interface SlCheckbox {
         /**
@@ -2074,6 +2085,7 @@ declare namespace LocalJSX {
         "sl-avatar": SlAvatar;
         "sl-badge": SlBadge;
         "sl-button": SlButton;
+        "sl-card": SlCard;
         "sl-checkbox": SlCheckbox;
         "sl-color-picker": SlColorPicker;
         "sl-details": SlDetails;
@@ -2111,6 +2123,7 @@ declare module "@stencil/core" {
             "sl-avatar": LocalJSX.SlAvatar & JSXBase.HTMLAttributes<HTMLSlAvatarElement>;
             "sl-badge": LocalJSX.SlBadge & JSXBase.HTMLAttributes<HTMLSlBadgeElement>;
             "sl-button": LocalJSX.SlButton & JSXBase.HTMLAttributes<HTMLSlButtonElement>;
+            "sl-card": LocalJSX.SlCard & JSXBase.HTMLAttributes<HTMLSlCardElement>;
             "sl-checkbox": LocalJSX.SlCheckbox & JSXBase.HTMLAttributes<HTMLSlCheckboxElement>;
             "sl-color-picker": LocalJSX.SlColorPicker & JSXBase.HTMLAttributes<HTMLSlColorPickerElement>;
             "sl-details": LocalJSX.SlDetails & JSXBase.HTMLAttributes<HTMLSlDetailsElement>;

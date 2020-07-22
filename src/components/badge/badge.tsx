@@ -2,7 +2,7 @@ import { Component, Prop, h } from '@stencil/core';
 
 /**
  * @since 2.0
- * @status experimental
+ * @status stable
  *
  * @slot - The badge's content.
  *
