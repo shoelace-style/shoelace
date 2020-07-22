@@ -1,6 +1,6 @@
 <div class="splash">
   <div class="splash-start">
-    <img class="splash-logo" src="/assets/images/wordmark.svg" alt="Shoelace" data-no-zoom >
+    <img class="splash-logo" src="/assets/images/wordmark.svg" alt="Shoelace">
     <p><strong>A forward-thinking library of web components.</strong></p>
     <ul>
       <li>Works with all frameworks 🧩</li>
@@ -11,7 +11,7 @@
     <p>Designed in New Hampshire by <a href="https://twitter.com/claviska" rel="noopener" target="_blank">Cory LaViska</a>.</p>
   </div>
   <div class="splash-end">
-    <img class="splash-image" src="/assets/images/undraw-content-team.svg" alt="Cartoon of people assembling components while standing on a giant laptop." data-no-zoom />
+    <img class="splash-image" src="/assets/images/undraw-content-team.svg" alt="Cartoon of people assembling components while standing on a giant laptop.">
   </div>
 </div>
 
@@ -68,11 +68,11 @@ Whether you use Shoelace as a starting point for your organization's design syst
 
 Shoelace is tested in the latest two versions of the following browsers.
 
-<img src="/assets/images/chrome.png" alt="Chrome" width="64" height="64" data-no-zoom>
-<img src="/assets/images/edge.png" alt="Edge" width="64" height="64" data-no-zoom>
-<img src="/assets/images/firefox.png" alt="Firefox" width="64" height="64" data-no-zoom>
-<img src="/assets/images/opera.png" alt="Opera" width="64" height="64" data-no-zoom>
-<img src="/assets/images/safari.png" alt="Safari" width="64" height="64" data-no-zoom>
+<img src="/assets/images/chrome.png" alt="Chrome" width="64" height="64">
+<img src="/assets/images/edge.png" alt="Edge" width="64" height="64">
+<img src="/assets/images/firefox.png" alt="Firefox" width="64" height="64">
+<img src="/assets/images/opera.png" alt="Opera" width="64" height="64">
+<img src="/assets/images/safari.png" alt="Safari" width="64" height="64">
 
 Critical bug fixes in earlier versions will be addressed based on their severity and impact.
 
