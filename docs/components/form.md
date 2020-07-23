@@ -4,7 +4,7 @@
 
 Forms collect data that can easily be processed and sent to a server.
 
-All of Shoelace's components make use of the [shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM) to encapsulate markup, style, and behavior. One caveat of this approach is that native `<form>` elements don't recognize Shoelace form controls.
+All of Shoelace's components make use of the [shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM) to encapsulate markup, styles, and behavior. One caveat of this approach is that native `<form>` elements don't recognize Shoelace form controls.
 
 This component solves that problem by serializing _both_ Shoelace form controls and native form controls. The resulting form data is exposed in the `slSubmit` event in a [`FormData`](https://developer.mozilla.org/en-US/docs/Web/API/FormData) object.
 
