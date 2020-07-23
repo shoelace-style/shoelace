@@ -8,12 +8,13 @@
 - Fixed constructor bindings so they don't break the custom elements bundle
 - Fixed tag color contrast to be AA compliant
 - Fixed a bug that made it difficult to vertically align rating
+- Fixed a bug where dropdowns would always close on mousedown when inside a shadow root
 - Made tag text colors AA compliant
 - Promoted badge to stable
 - Refactored `:host` variables and moved non-display props to base elements
 - Refactored event handler bindings to occur in `connectedCallback` instead of the constructor
 - Refactored scroll locking logic to use `Set` instead of an array
-- Updated the custom elements bundle documentation and added webpack example
+- Updated the custom elements bundle documentation and added bundler examples
 - Upgraded Stencil to 1.17.0-0 (next) to fix custom elements bundle
 
 ## 2.0.0-beta.7
