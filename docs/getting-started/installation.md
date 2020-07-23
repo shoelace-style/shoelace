@@ -34,11 +34,11 @@ Once you've done that, add the following tags to your page. Make sure to update 
 
 ## Importing Custom Elements
 
-A [custom elements bundle](https://stenciljs.com/docs/custom-elements) is available so you can import components and register them individually. This is a more flexible alternative to the lazy loading approach, but it requires the use of a bundler such as [webpack](https://webpack.js.org/) or [Rollup](https://rollupjs.org/guide/en/). You'll also need to manage static assets yourself.
+A [custom elements bundle](https://stenciljs.com/docs/custom-elements) is available so you can import components and register them individually. This is a more flexible alternative to the lazy loading approach, but it requires the use of a bundler such as [webpack](https://webpack.js.org/) or [Rollup](https://rollupjs.org/guide/en/). You'll also need to manage static assets on your own.
 
 Instructions vary depending on the bundler you're using.
 
-### webpack Example
+## Using webpack
 
 To use the custom elements bundle with webpack, install Shoelace first.
 
@@ -46,7 +46,7 @@ To use the custom elements bundle with webpack, install Shoelace first.
 npm install @shoelace-style/shoelace
 ```
 
-Your `webpack.config.js` should look something like this. Note how assets such as icons are copied from `node_modules` to `dist/icons` via the `CopyPlugin` utility.
+Your `webpack.config.js` should look something like what's shown below. Note how assets such as icons are copied from `node_modules` to `dist/icons` via the `CopyPlugin` utility.
 
 ```js
 const path = require('path');
@@ -79,9 +79,10 @@ module.exports = {
 };
 ```
 
-Next, import the components want to use and set the assets directory.
+Next, import the components you want to use and set the assets directory.
 
 ```js
+import '@shoelace-style/shoelace/dist/shoelace/shoelace.css';
 import { setAssetPath, SlButton, SlDropdown } from '@shoelace-style/shoelace/dist/custom-elements';
 
 setAssetPath(document.currentScript.src);
@@ -92,16 +93,76 @@ customElements.define('sl-dropdown', SlDropdown);
 For convenience, the bundle also exports a `defineCustomElements()` method. When this method is called, it will register all Shoelace components in the bundle.
 
 ```js
+import '@shoelace-style/shoelace/dist/shoelace/shoelace.css';
 import { defineCustomElements, setAssetPath } from '@shoelace-style/shoelace/dist/custom-elements';
 
 setAssetPath(document.currentScript.src);
 defineCustomElements();
 ```
 
-While convenient for prototyping, importing every component will make your bundle larger. For best results, only import the components you're actually going to use.
+While convenient for prototyping, importing all components will make your bundle larger. For best results, only import the components you're actually using.
 
 ?> An [example webpack project](https://github.com/shoelace-style/webpack-example) is also available on GitHub for your convenience.
 
-### Rollup Example
+## Using Rollup
 
-A Rollup example is coming soon!
+To use the custom elements bundle with Rollup, install Shoelace first.
+
+```sh
+npm install @shoelace-style/shoelace
+```
+
+Your `rollup.config.js` should look something like what's shown below. Note how assets such as icons are copied from `node_modules` to `dist/icons` via the `rollup-copy-plugin`.
+
+```js
+import path from 'path';
+import commonjs from '@rollup/plugin-commonjs';
+import copy from 'rollup-plugin-copy';
+import postcss from 'rollup-plugin-postcss';
+import resolve from '@rollup/plugin-node-resolve';
+
+export default {
+  input: 'src/index.js',
+  output: [{ dir: path.resolve('dist/'), format: 'es' }],
+  plugins: [
+    resolve(),
+    commonjs(),
+    postcss({
+      extensions: ['.css']
+    }),
+    copy({
+      targets: [
+        {
+          src: path.resolve(__dirname, 'node_modules/@shoelace-style/shoelace/dist/shoelace/icons'),
+          dest: path.resolve(__dirname, 'dist')
+        }
+      ]
+    })
+  ]
+};
+```
+
+Next, import the components you want to use and set the assets directory.
+
+```js
+import '@shoelace-style/shoelace/dist/shoelace/shoelace.css';
+import { setAssetPath, SlButton, SlDropdown } from '@shoelace-style/shoelace/dist/custom-elements';
+
+setAssetPath(document.currentScript.src);
+customElements.define('sl-button', SlButton);
+customElements.define('sl-dropdown', SlDropdown);
+```
+
+For convenience, the bundle also exports a `defineCustomElements()` method. When this method is called, it will register all Shoelace components in the bundle.
+
+```js
+import '@shoelace-style/shoelace/dist/shoelace/shoelace.css';
+import { defineCustomElements, setAssetPath } from '@shoelace-style/shoelace/dist/custom-elements';
+
+setAssetPath(document.currentScript.src);
+defineCustomElements();
+```
+
+While convenient for prototyping, importing all components will make your bundle larger. For best results, only import the components you're actually using.
+
+?> An [example Rollup project](https://github.com/shoelace-style/rollup-example) is also available on GitHub for your convenience.
