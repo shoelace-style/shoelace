@@ -13,7 +13,10 @@
 .select__input {
   flex: 1 1 auto;
   width: 100%;
-  cursor: pointer;
+
+  &::part(input) {
+    cursor: pointer;
+  }
 
   span[slot='prefix'] {
     margin-left: var(--sl-spacing-xx-small);
