@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.0-beta.9
+
+- Fixed a big where hovering over select showed the wrong cursor
+
 ## 2.0.0-beta.8
 
 - Added the card component
