@@ -6,6 +6,7 @@
       <li>Works with all frameworks 🧩</li>
       <li>Works with CDNs 🚛</li>
       <li>Fully customizable with CSS 🎨</li>
+      <li>Built with accessibility in mind ♿️</li>
       <li>Open source 😸</li>
     </ul>
     <p>Designed in New Hampshire by <a href="https://twitter.com/claviska" rel="noopener" target="_blank">Cory LaViska</a>.</p>
