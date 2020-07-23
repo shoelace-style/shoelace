@@ -30,19 +30,6 @@
     <!-- Import Shoelace -->
     <link rel="stylesheet" href="/dist/shoelace/shoelace.css" />
     <script type="module" src="/dist/shoelace/shoelace.esm.js"></script>
-
-    <!-- Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-6412891-16"></script>
-    <script>
-      if (!window.ShoelaceDevServer) {
-        window.dataLayer = window.dataLayer || [];
-        function gtag() {
-          dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-        gtag('config', 'UA-6412891-16');
-      }
-    </script>
   </head>
   <body>
     <div id="app"></div>
@@ -59,6 +46,7 @@
         },
         coverpage: false,
         executeScript: true,
+        ga: 'UA-6412891-16',
         homepage: '/getting-started/overview.md',
         loadSidebar: true,
         logo: '/assets/images/wordmark.svg',
@@ -86,6 +74,7 @@
     </script>
     <script src="https://unpkg.com/docsify/lib/docsify.min.js"></script>
     <script src="https://unpkg.com/docsify/lib/plugins/search.min.js"></script>
+    <script src="https://unpkg.com/docsify/lib/plugins/ga.min.js"></script>
     <script src="https://unpkg.com/docsify-copy-code"></script>
     <script src="https://unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
     <script src="https://unpkg.com/prismjs@1.19.0/components/prism-bash.min.js"></script>
