@@ -62,9 +62,9 @@ In order to keep the project in a maintainable state, code that doesn't follow c
 
 ### Semantic Versioning
 
-This project follows [Semantic Versioning](https://semver.org/). Breaking changes in stable components will not be accepted until the next major version. As such, all contributions must consider the project's roadmap and take this into consideration. Features that are deemed no longer necessary in future versions will be deprecated instead.
+Shoelace follows [Semantic Versioning](https://semver.org/). Breaking changes in components with the "Stable" badge will not be accepted until the next major version. As such, all contributions must consider the project's roadmap and take this into consideration. Features that are deemed no longer necessary will be deprecated but not removed.
 
-**Components marked "experimental" should not be used in production,** as changes to them will not be subject to this rule.
+Components with the "Experimental" badge should not be used in production. They are made available as release candidates for development and testing purposes. As such, changes to experimental components will not be subject to semantic versioning.
 
 ### Code Formatting & Linting
 
