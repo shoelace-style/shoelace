@@ -8,6 +8,12 @@ Shoelace follows [Semantic Versioning](https://semver.org/). Breaking changes in
 
 Components with the <sl-badge type="warning" pill>Experimental</sl-badge> badge should not be used in production. They are made available as release candidates for development and testing purposes. As such, changes to experimental components will not be subject to semantic versioning.
 
+## Changelog
+
+The changelog is available in the project's source in the `CHANGELOG.md` file.
+
+You can [view the most recent changelog](https://github.com/shoelace-style/shoelace/blob/next/CHANGELOG.md) on GitHub.
+
 ## 2.1 🤔
 
 Version 2.1 is still in the planning phase. To request a feature, please [submit an issue](https://github.com/shoelace-style/shoelace/issues) on GitHub. Make sure to search for existing issues and vote using 👍 to add your support!
