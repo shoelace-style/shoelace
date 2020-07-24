@@ -194,7 +194,7 @@ export class Dropdown {
       return;
     }
 
-    // Close when tabbing results in the focus leaving the close element
+    // Close when tabbing results in the focus leaving the containing element
     if (event.key === 'Tab') {
       setTimeout(() => {
         if (
