@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, Method, h } from '@stencil/core';
+import { Component, Event, EventEmitter, Method, State, h } from '@stencil/core';
 import { scrollIntoView } from '../../utilities/scroll';
 import { getTextContent } from '../../utilities/slot';
 
@@ -23,6 +23,8 @@ export class Menu {
   typeToSelectString = '';
   typeToSelectTimeout: any;
 
+  @State() hasFocus = false;
+
   /** Emitted when the menu gains focus. */
   @Event() slFocus: EventEmitter;
 
@@ -37,6 +39,7 @@ export class Menu {
     this.handleClick = this.handleClick.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleMouseDown = this.handleMouseDown.bind(this);
     this.handleMouseOver = this.handleMouseOver.bind(this);
     this.handleMouseOut = this.handleMouseOut.bind(this);
   }
@@ -44,13 +47,38 @@ export class Menu {
   /** Sets focus on the menu. */
   @Method()
   async setFocus() {
+    this.hasFocus = true;
     this.menu.focus();
   }
 
   /** Removes focus from the menu. */
   @Method()
   async removeFocus() {
+    this.hasFocus = false;
     this.menu.blur();
+  }
+
+  /**
+   * Initiates type-to-select logic, which automatically selects an option based on what the user is currently typing.
+   * The key passed will be appended to the internal query and the selection will be updated. After a brief period, the
+   * internal query is cleared automatically. This method is intended to be used with the keydown event. Useful for
+   * enabling type-to-select when the menu doesn't have focus.
+   */
+  @Method()
+  async typeToSelect(key: string) {
+    clearTimeout(this.typeToSelectTimeout);
+    this.typeToSelectTimeout = setTimeout(() => (this.typeToSelectString = ''), 750);
+    this.typeToSelectString += key.toLowerCase();
+
+    const items = this.getItems();
+    for (const item of items) {
+      const slot = item.shadowRoot.querySelector('slot:not([name])') as HTMLSlotElement;
+      const label = getTextContent(slot).toLowerCase().trim();
+      if (label.substring(0, this.typeToSelectString.length) === this.typeToSelectString) {
+        items.map(i => (i.active = i === item));
+        break;
+      }
+    }
   }
 
   getItems() {
@@ -154,27 +182,9 @@ export class Menu {
     }
   }
 
-  /**
-   * Initiates type-to-select logic, which automatically selects an option based on what the user is currently typing.
-   * The key passed will be appended to the internal query and the selection will be updated. After a brief period, the
-   * internal query is cleared automatically. This method is intended to be used with the keydown event. Useful for
-   * enabling type-to-select when the menu doesn't have focus.
-   */
-  @Method()
-  async typeToSelect(key: string) {
-    clearTimeout(this.typeToSelectTimeout);
-    this.typeToSelectTimeout = setTimeout(() => (this.typeToSelectString = ''), 750);
-    this.typeToSelectString += key.toLowerCase();
-
-    const items = this.getItems();
-    for (const item of items) {
-      const slot = item.shadowRoot.querySelector('slot:not([name])') as HTMLSlotElement;
-      const label = getTextContent(slot).toLowerCase().trim();
-      if (label.substring(0, this.typeToSelectString.length) === this.typeToSelectString) {
-        items.map(i => (i.active = i === item));
-        break;
-      }
-    }
+  handleMouseDown(event: MouseEvent) {
+    event.preventDefault();
+    this.menu.focus();
   }
 
   handleMouseOver(event: MouseEvent) {
@@ -200,13 +210,17 @@ export class Menu {
       <div
         ref={el => (this.menu = el)}
         part="base"
-        class="menu"
+        class={{
+          menu: true,
+          'menu--has-focus': this.hasFocus
+        }}
         tabIndex={0}
         role="menu"
         onClick={this.handleClick}
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
         onKeyDown={this.handleKeyDown}
+        onMouseDown={this.handleMouseDown}
         onMouseOver={this.handleMouseOver}
         onMouseOut={this.handleMouseOut}
       >
