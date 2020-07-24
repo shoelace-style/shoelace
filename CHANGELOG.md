@@ -3,6 +3,7 @@
 ## 2.0.0-beta.9
 
 - Fixed a big where hovering over select showed the wrong cursor
+- Removed `noFooter` prop from dialog and drawer (slot detection is automatic, so the prop is not required)
 
 ## 2.0.0-beta.8
 
