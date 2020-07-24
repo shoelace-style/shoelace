@@ -167,6 +167,18 @@ export class Dropdown {
     document.removeEventListener('keydown', this.handleDocumentKeyDown);
   }
 
+  focusOnTrigger() {
+    const slot = this.trigger.querySelector('slot');
+    const trigger = slot.assignedElements({ flatten: true })[0] as any;
+    if (trigger) {
+      if (typeof trigger.setFocus === 'function') {
+        trigger.setFocus();
+      } else if (typeof trigger.focus === 'function') {
+        trigger.focus();
+      }
+    }
+  }
+
   getMenu() {
     return this.panel
       .querySelector('slot')
@@ -178,6 +190,7 @@ export class Dropdown {
     // Close when escape is pressed
     if (event.key === 'Escape') {
       this.hide();
+      this.focusOnTrigger();
       return;
     }
 
@@ -208,10 +221,10 @@ export class Dropdown {
       return;
     }
 
-    // All other keys focus the menu and pass the event through to menu (necessary for type-to-search to work)
+    // All other keys focus the menu and pass the event through to it (necessary for type-to-search to work)
     if (menu && event.target !== menu) {
       menu.setFocus();
-      menu.dispatchEvent(new KeyboardEvent(event.type, event));
+      requestAnimationFrame(() => menu.dispatchEvent(new KeyboardEvent(event.type, event)));
       return;
     }
   }
@@ -231,6 +244,7 @@ export class Dropdown {
     // Hide the dropdown when a menu item is selected
     if (this.closeOnSelect && target.tagName.toLowerCase() === 'sl-menu') {
       this.hide();
+      this.focusOnTrigger();
     }
   }
 
