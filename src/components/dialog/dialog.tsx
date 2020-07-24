@@ -1,6 +1,5 @@
 import { Component, Element, Event, EventEmitter, Method, Prop, State, Watch, h } from '@stencil/core';
 import { lockBodyScrolling, unlockBodyScrolling } from '../../utilities/scroll';
-import { focusVisible } from '../../utilities/focus-visible';
 import { hasSlot } from '../../utilities/slot';
 
 let id = 0;
@@ -85,8 +84,6 @@ export class Dialog {
   }
 
   componentDidLoad() {
-    focusVisible.observe(this.dialog);
-
     // Show on init if open
     if (this.open) {
       this.show();
@@ -94,7 +91,6 @@ export class Dialog {
   }
 
   componentDidUnload() {
-    focusVisible.unobserve(this.dialog);
     unlockBodyScrolling(this.host);
 
     this.host.shadowRoot.removeEventListener('slotchange', this.updateSlots);
@@ -209,9 +205,7 @@ export class Dialog {
                 {/* If there's no label, use an invisible character to prevent the heading from collapsing */}
                 {this.label || String.fromCharCode(65279)}
               </span>
-              <button part="close-button" class="dialog__close" type="button" onClick={this.handleCloseClick}>
-                <sl-icon name="x"></sl-icon>
-              </button>
+              <sl-icon-button part="close-button" class="dialog__close" name="x" onClick={this.handleCloseClick} />
             </header>
           )}
 

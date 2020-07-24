@@ -73,9 +73,7 @@ export class Tag {
         </span>
 
         {this.clearable && (
-          <span part="clear-button" class="tag__clear" role="button" tabIndex={-1} onClick={this.handleClearClick}>
-            <sl-icon name="x" />
-          </span>
+          <sl-icon-button part="clear-button" name="x" class="tag__clear" onClick={this.handleClearClick} />
         )}
       </span>
     );

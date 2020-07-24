@@ -90,30 +90,6 @@
   flex: 0 0 auto;
   display: flex;
   align-items: center;
-  background: none;
-  border: none;
-  border-radius: var(--sl-border-radius-small);
-  font-family: inherit;
   font-size: var(--sl-font-size-large);
-  font-weight: inherit;
-  color: var(--sl-color-gray-50);
-  padding: 0 var(--sl-spacing-large);
-  cursor: pointer;
-  transition: var(--sl-transition-fast) color;
-  -webkit-appearance: none;
-
-  &:hover,
-  &:focus,
-  &:active {
-    color: var(--sl-color-primary-50);
-  }
-
-  &:focus {
-    outline: none;
-  }
-}
-
-.focus-visible .alert__close:focus {
-  box-shadow: 0 0 0 var(--sl-focus-ring-width)
-    hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha));
+  padding: 0 var(--sl-spacing-medium);
 }

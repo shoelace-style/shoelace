@@ -1,5 +1,4 @@
 import { Component, Element, Event, EventEmitter, Host, Method, Prop, Watch, h } from '@stencil/core';
-import { focusVisible } from '../../utilities/focus-visible';
 
 /**
  * @since 2.0
@@ -7,7 +6,6 @@ import { focusVisible } from '../../utilities/focus-visible';
  *
  * @slot - The alert's content.
  * @slot icon - An icon to show in the alert.
- * @slot close-icon - An icon to use in lieu of the default close icon.
  *
  * @part base - The component's base wrapper.
  * @part icon - The container that wraps the alert icon.
@@ -57,16 +55,10 @@ export class Tab {
   }
 
   componentDidLoad() {
-    focusVisible.observe(this.alert);
-
     // Show on init if open
     if (this.open) {
       this.show();
     }
-  }
-
-  componentDidUnload() {
-    focusVisible.unobserve(this.alert);
   }
 
   /** Shows the alert. */
@@ -140,11 +132,7 @@ export class Tab {
           </span>
 
           {this.closable && (
-            <button part="close-button" class="alert__close" type="button" onClick={this.handleCloseClick}>
-              <slot name="close-icon">
-                <sl-icon name="x" />
-              </slot>
-            </button>
+            <sl-icon-button part="close-button" class="alert__close" name="x" onClick={this.handleCloseClick} />
           )}
         </div>
       </Host>

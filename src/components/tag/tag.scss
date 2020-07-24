@@ -14,15 +14,9 @@
   cursor: default;
 }
 
-.tag__clear {
-  display: flex;
-  align-items: center;
-  border-radius: var(--sl-border-radius-small);
-  cursor: pointer;
-
-  &:focus {
-    outline: none;
-  }
+.tag__clear::part(base) {
+  color: inherit;
+  padding: 0;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

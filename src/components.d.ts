@@ -319,6 +319,24 @@ export namespace Components {
          */
         "src": string;
     }
+    interface SlIconButton {
+        /**
+          * Set to true to disable the button.
+         */
+        "disabled": boolean;
+        /**
+          * An alternative description to use for accessibility. If omitted, the name or src will be used to generate it.
+         */
+        "label": string;
+        /**
+          * The name of the icon to draw. See the icon component for a full list of icons.
+         */
+        "name": string;
+        /**
+          * An external URL of an SVG file.
+         */
+        "src": string;
+    }
     interface SlInput {
         /**
           * The input's autocaptialize attribute.
@@ -956,6 +974,12 @@ declare global {
         prototype: HTMLSlIconElement;
         new (): HTMLSlIconElement;
     };
+    interface HTMLSlIconButtonElement extends Components.SlIconButton, HTMLStencilElement {
+    }
+    var HTMLSlIconButtonElement: {
+        prototype: HTMLSlIconButtonElement;
+        new (): HTMLSlIconButtonElement;
+    };
     interface HTMLSlInputElement extends Components.SlInput, HTMLStencilElement {
     }
     var HTMLSlInputElement: {
@@ -1084,6 +1108,7 @@ declare global {
         "sl-dropdown": HTMLSlDropdownElement;
         "sl-form": HTMLSlFormElement;
         "sl-icon": HTMLSlIconElement;
+        "sl-icon-button": HTMLSlIconButtonElement;
         "sl-input": HTMLSlInputElement;
         "sl-menu": HTMLSlMenuElement;
         "sl-menu-divider": HTMLSlMenuDividerElement;
@@ -1486,6 +1511,24 @@ declare namespace LocalJSX {
           * Emitted when the icon has loaded.
          */
         "onSlLoad"?: (event: CustomEvent<any>) => void;
+        /**
+          * An external URL of an SVG file.
+         */
+        "src"?: string;
+    }
+    interface SlIconButton {
+        /**
+          * Set to true to disable the button.
+         */
+        "disabled"?: boolean;
+        /**
+          * An alternative description to use for accessibility. If omitted, the name or src will be used to generate it.
+         */
+        "label"?: string;
+        /**
+          * The name of the icon to draw. See the icon component for a full list of icons.
+         */
+        "name"?: string;
         /**
           * An external URL of an SVG file.
          */
@@ -2082,6 +2125,7 @@ declare namespace LocalJSX {
         "sl-dropdown": SlDropdown;
         "sl-form": SlForm;
         "sl-icon": SlIcon;
+        "sl-icon-button": SlIconButton;
         "sl-input": SlInput;
         "sl-menu": SlMenu;
         "sl-menu-divider": SlMenuDivider;
@@ -2120,6 +2164,7 @@ declare module "@stencil/core" {
             "sl-dropdown": LocalJSX.SlDropdown & JSXBase.HTMLAttributes<HTMLSlDropdownElement>;
             "sl-form": LocalJSX.SlForm & JSXBase.HTMLAttributes<HTMLSlFormElement>;
             "sl-icon": LocalJSX.SlIcon & JSXBase.HTMLAttributes<HTMLSlIconElement>;
+            "sl-icon-button": LocalJSX.SlIconButton & JSXBase.HTMLAttributes<HTMLSlIconButtonElement>;
             "sl-input": LocalJSX.SlInput & JSXBase.HTMLAttributes<HTMLSlInputElement>;
             "sl-menu": LocalJSX.SlMenu & JSXBase.HTMLAttributes<HTMLSlMenuElement>;
             "sl-menu-divider": LocalJSX.SlMenuDivider & JSXBase.HTMLAttributes<HTMLSlMenuDividerElement>;
