@@ -2,6 +2,7 @@
 
 ## 2.0.0-beta.9
 
+- Added the icon button component
 - Added the `typeToSelect` method to menu so type-to-select behavior can be controlled externally
 - Fixed a bug where hovering over select showed the wrong cursor
 - Fixed a bug where tabbing into a select control would highlight the label
@@ -10,6 +11,8 @@
 - Fixed a bug where type-to-select wasn't working after the first letter
 - Fixed a bug where clicking on menu items and dividers would steal focus from the menu
 - Removed `noFooter` prop from dialog and drawer (slot detection is automatic, so the prop is not required)
+- Removed `close-icon` slot from alert
+- Replaced make-shift icon buttons with `sl-icon-button` in alert, dialog, drawer, and tag
 - Updated Stencil to 1.17.0
 - Switched to jsDelivr for better CDN performance
 
