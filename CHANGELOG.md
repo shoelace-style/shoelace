@@ -9,6 +9,7 @@
 - Fixed a bug where closing dropdowns wouldn't give focus back to the trigger
 - Fixed a bug where type-to-select wasn't working after the first letter
 - Removed `noFooter` prop from dialog and drawer (slot detection is automatic, so the prop is not required)
+- Updated Stencil to 1.17.0
 - Switched to jsDelivr for better CDN performance
 
 ## 2.0.0-beta.8
