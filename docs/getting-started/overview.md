@@ -21,8 +21,8 @@
 Add the following code to your page.
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/@shoelace-style/shoelace@%VERSION%/dist/shoelace/shoelace.css">
-<script type="module" src="https://unpkg.com/@shoelace-style/shoelace@%VERSION%/dist/shoelace/shoelace.esm.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/shoelace/shoelace.css">
+<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/shoelace/shoelace.esm.js"></script>
 ```
 
 Now you have access to all of Shoelace's components! Try adding a button:
@@ -111,7 +111,7 @@ Special thanks to the following projects and individuals that helped make Shoela
 - Icons are courtesy of [Bootstrap Icons](https://icons.getbootstrap.com/)
 - Illustrations are courtesy of [unDraw](https://undraw.co/)
 - Positioning of menus, tooltips, et al is handled by [Popper.js](https://popper.js.org/)
-- CDN services are provided by [unpkg](https://unpkg.com/)
+- CDN services are provided by [jsDelivr](https://www.jsdelivr.com/)
 - The Shoelace logo was designed with a single shoelace by [Adam K Olson](https://twitter.com/adamkolson)
 
 ## Previous Versions

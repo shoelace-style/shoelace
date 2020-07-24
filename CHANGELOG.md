@@ -7,6 +7,7 @@
 - Fixed a bug where tabbing out of a select control wouldn't close it
 - Fixed a bug where closing dropdowns wouldn't give focus back to the trigger
 - Removed `noFooter` prop from dialog and drawer (slot detection is automatic, so the prop is not required)
+- Switched to jsDelivr for better CDN performance
 
 ## 2.0.0-beta.8
 

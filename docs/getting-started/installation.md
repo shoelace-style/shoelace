@@ -9,8 +9,8 @@ The easiest way to install Shoelace is with the CDN. A lightweight loader will b
 Just add the following tags to your page.
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/@shoelace-style/shoelace@%VERSION%/dist/shoelace/shoelace.css">
-<script type="module" src="https://unpkg.com/@shoelace-style/shoelace@%VERSION%/dist/shoelace/shoelace.esm.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/shoelace/shoelace.css">
+<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/shoelace/shoelace.esm.js"></script>
 ```
 
 Now you can [start using Shoelace!](/getting-started/usage.md)
