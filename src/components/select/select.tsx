@@ -162,10 +162,8 @@ export class Select {
   }
 
   handleMenuKeyDown(event: KeyboardEvent) {
-    event.stopPropagation();
-
-    // Close when escape is pressed
-    if (event.key === 'Escape') {
+    // Close when escape or tab pressed
+    if (event.key === 'Escape' || event.key === 'Tab') {
       this.dropdown.hide();
       event.preventDefault();
       return;
