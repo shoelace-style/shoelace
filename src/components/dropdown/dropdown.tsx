@@ -212,19 +212,11 @@ export class Dropdown {
       event.preventDefault();
     }
 
-    const menu = this.getMenu();
-
     // If a menu is present, focus on it when certain keys are pressed
+    const menu = this.getMenu();
     if (menu && ['ArrowDown', 'ArrowUp'].includes(event.key)) {
       event.preventDefault();
       menu.setFocus();
-      return;
-    }
-
-    // All other keys focus the menu and pass the event through to it (necessary for type-to-search to work)
-    if (menu && event.target !== menu) {
-      menu.setFocus();
-      requestAnimationFrame(() => menu.dispatchEvent(new KeyboardEvent(event.type, event)));
       return;
     }
   }
@@ -254,6 +246,14 @@ export class Dropdown {
       this.show();
       event.preventDefault();
       event.stopPropagation();
+    }
+
+    // All other keys focus the menu and initiate type-to-select
+    const menu = this.getMenu();
+    if (menu && event.target !== menu) {
+      menu.setFocus();
+      menu.typeToSelect(event.key);
+      return;
     }
   }
 

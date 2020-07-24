@@ -450,6 +450,10 @@ export namespace Components {
           * Sets focus on the menu.
          */
         "setFocus": () => Promise<void>;
+        /**
+          * Initiates type-to-select logic, which automatically selects an option based on what the user is currently typing. The key passed will be appended to the internal query and the selection will be updated. After a brief period, the internal query is cleared automatically. This method is intended to be used with the keydown event. Useful for enabling type-to-select when the menu doesn't have focus.
+         */
+        "typeToSelect": (key: string) => Promise<void>;
     }
     interface SlMenuDivider {
     }

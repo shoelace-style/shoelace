@@ -20,7 +20,7 @@ export class Menu {
   ignoreMouseEvents = false;
   ignoreMouseTimeout: any;
   menu: HTMLElement;
-  typeToSelect = '';
+  typeToSelectString = '';
   typeToSelectTimeout: any;
 
   /** Emitted when the menu gains focus. */
@@ -148,20 +148,31 @@ export class Menu {
       }
     }
 
-    // Handle type-to-search behavior when non-control characters are entered
+    // Handle type-to-select behavior when non-control characters are entered
     if (event.key === ' ' || /^[\d\w]$/i.test(event.key)) {
-      clearTimeout(this.typeToSelectTimeout);
-      this.typeToSelectTimeout = setTimeout(() => (this.typeToSelect = ''), 750);
-      this.typeToSelect += event.key;
+      this.typeToSelect(event.key);
+    }
+  }
 
-      const items = this.getItems();
-      for (const item of items) {
-        const slot = item.shadowRoot.querySelector('slot:not([name])') as HTMLSlotElement;
-        const label = getTextContent(slot).toLowerCase().trim();
-        if (label.substring(0, this.typeToSelect.length) === this.typeToSelect) {
-          items.map(i => (i.active = i === item));
-          break;
-        }
+  /**
+   * Initiates type-to-select logic, which automatically selects an option based on what the user is currently typing.
+   * The key passed will be appended to the internal query and the selection will be updated. After a brief period, the
+   * internal query is cleared automatically. This method is intended to be used with the keydown event. Useful for
+   * enabling type-to-select when the menu doesn't have focus.
+   */
+  @Method()
+  async typeToSelect(key: string) {
+    clearTimeout(this.typeToSelectTimeout);
+    this.typeToSelectTimeout = setTimeout(() => (this.typeToSelectString = ''), 750);
+    this.typeToSelectString += key.toLowerCase();
+
+    const items = this.getItems();
+    for (const item of items) {
+      const slot = item.shadowRoot.querySelector('slot:not([name])') as HTMLSlotElement;
+      const label = getTextContent(slot).toLowerCase().trim();
+      if (label.substring(0, this.typeToSelectString.length) === this.typeToSelectString) {
+        items.map(i => (i.active = i === item));
+        break;
       }
     }
   }
