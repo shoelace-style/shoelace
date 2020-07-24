@@ -2,10 +2,12 @@
 
 ## 2.0.0-beta.9
 
+- Added the `typeToSelect` method to menu so type-to-select behavior can be controlled externally
 - Fixed a bug where hovering over select showed the wrong cursor
 - Fixed a bug where tabbing into a select control would highlight the label
 - Fixed a bug where tabbing out of a select control wouldn't close it
 - Fixed a bug where closing dropdowns wouldn't give focus back to the trigger
+- Fixed a bug where type-to-select wasn't working after the first letter
 - Removed `noFooter` prop from dialog and drawer (slot detection is automatic, so the prop is not required)
 - Switched to jsDelivr for better CDN performance
 
