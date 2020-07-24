@@ -16,7 +16,6 @@ import { Component, Prop, h } from '@stencil/core';
 })
 export class Badge {
   badge: HTMLElement;
-  hasSlot: boolean;
 
   /** The badge's type. */
   @Prop() type: 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text' = 'primary';
