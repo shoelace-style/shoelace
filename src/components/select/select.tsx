@@ -146,6 +146,7 @@ export class Select {
   handleFocus() {
     this.hasFocus = true;
     this.slFocus.emit();
+    this.input.setSelectionRange(0, 0);
   }
 
   handleKeyDown(event: KeyboardEvent) {
