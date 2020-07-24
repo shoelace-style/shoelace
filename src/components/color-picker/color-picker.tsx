@@ -131,7 +131,6 @@ export class ColorPicker {
     this.handleAlphaInput = this.handleAlphaInput.bind(this);
     this.handleAlphaKeyDown = this.handleAlphaKeyDown.bind(this);
     this.handleCopy = this.handleCopy.bind(this);
-    this.handleDocumentKeyDown = this.handleDocumentKeyDown.bind(this);
     this.handleDocumentMouseDown = this.handleDocumentMouseDown.bind(this);
     this.handleDrag = this.handleDrag.bind(this);
     this.handleDropdownAfterHide = this.handleDropdownAfterHide.bind(this);
@@ -359,22 +358,6 @@ export class ColorPicker {
       this.setColor(this.textInput.value);
       this.textInput.value = this.value;
       setTimeout(() => this.textInput.select());
-    }
-  }
-
-  handleDocumentKeyDown(event: KeyboardEvent) {
-    // Close when pressing escape or tab
-    if (event.key === 'Escape') {
-      this.dropdown.hide();
-    }
-
-    // Close when tabbing out of the color picker
-    if (event.key === 'Tab') {
-      setTimeout(() => {
-        if (document.activeElement && document.activeElement.closest('sl-color-picker') !== this.host) {
-          this.dropdown.hide();
-        }
-      });
     }
   }
 
