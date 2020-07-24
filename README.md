@@ -37,7 +37,7 @@ The build is done through a combination of Stencil's CLI and a handful of custom
 
 Start by [forking the repo](https://github.com/shoelace-style/shoelace/fork) on GitHub, then clone it locally and install dependencies.
 
-```sh
+```bash
 git clone https://github.com/YOUR_GITHUB_USERNAME/shoelace
 cd shoelace
 npm install
@@ -47,7 +47,7 @@ npm install
 
 Once you've cloned the repo, run the following command.
 
-```sh
+```bash
 npm run start
 ```
 
@@ -61,7 +61,7 @@ Hot module reloading (HMR) is enabled for components, so changes will instantly 
 
 To generate a production build, run the following command.
 
-```sh
+```bash
 npm run build
 ```
 

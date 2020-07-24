@@ -124,7 +124,7 @@ Fortunately, there's a utility that will wrap Shoelace components so you can use
 
 You can use [this utility](https://www.npmjs.com/package/@shoelace-style/react-wrapper) to wrap Shoelace components so they work like like regular React components. To install it, use this command.
 
-```sh
+```bash
 npm install @shoelace-style/react-wrapper
 ```
 
@@ -177,7 +177,7 @@ If that's too verbose, you can use a custom directive instead. 👇
 
 You can use [this utility](https://www.npmjs.com/package/@shoelace-style/vue-sl-model) to add a custom directive to Vue that will work just like `v-model` but for Shoelace components. To install it, use this command.
 
-```sh
+```bash
 npm install @shoelace-style/vue-sl-model
 ```
 

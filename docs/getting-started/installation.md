@@ -19,7 +19,7 @@ Now you can [start using Shoelace!](/getting-started/usage.md)
 
 If you don't want to use the CDN, you can install Shoelace locally with the following command. 
 
-```sh
+```bash
 npm install @shoelace-style/shoelace
 ```
 
@@ -42,7 +42,7 @@ Instructions vary depending on the bundler you're using.
 
 To use the custom elements bundle with webpack, install Shoelace first.
 
-```sh
+```bash
 npm install @shoelace-style/shoelace
 ```
 
@@ -108,7 +108,7 @@ While convenient for prototyping, importing all components will make your bundle
 
 To use the custom elements bundle with Rollup, install Shoelace first.
 
-```sh
+```bash
 npm install @shoelace-style/shoelace
 ```
 
