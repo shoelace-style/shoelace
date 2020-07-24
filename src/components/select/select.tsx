@@ -150,8 +150,10 @@ export class Select {
   }
 
   handleKeyDown(event: KeyboardEvent) {
-    // Open the dropdown when enter is pressed
-    if (!this.isOpen && event.key === 'Enter') {
+    const target = event.target as HTMLElement;
+
+    // Open the dropdown when enter is pressed while the input is focused
+    if (!this.isOpen && event.key === 'Enter' && target === this.input) {
       this.dropdown.show();
       event.preventDefault();
       return;
