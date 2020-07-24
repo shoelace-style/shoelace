@@ -153,6 +153,10 @@
   }
 }
 
+.drawer:not(.drawer--has-footer) .drawer__footer {
+  display: none;
+}
+
 .drawer__overlay {
   display: block;
   position: fixed;

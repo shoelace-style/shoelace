@@ -114,6 +114,10 @@
   }
 }
 
+.dialog:not(.dialog--has-footer) .dialog__footer {
+  display: none;
+}
+
 .dialog__overlay {
   position: fixed;
   top: 0;

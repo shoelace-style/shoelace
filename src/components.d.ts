@@ -204,10 +204,6 @@ export namespace Components {
          */
         "label": string;
         /**
-          * Set to true to disable the footer.
-         */
-        "noFooter": boolean;
-        /**
           * Set to true to disable the header. This will also remove the default close button, so please ensure you provide an easy, accessible way for users to dismiss the dialog.
          */
         "noHeader": boolean;
@@ -233,10 +229,6 @@ export namespace Components {
           * The drawer's label as displayed in the header. You should always include a relevant label even when using `no-header`, as it is required for proper accessibility.
          */
         "label": string;
-        /**
-          * Removes the footer.
-         */
-        "noFooter": boolean;
         /**
           * Removes the header. This will also remove the default close button, so please ensure you provide an easy, accessible way for users to dismiss the drawer.
          */
@@ -1344,10 +1336,6 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
-          * Set to true to disable the footer.
-         */
-        "noFooter"?: boolean;
-        /**
           * Set to true to disable the header. This will also remove the default close button, so please ensure you provide an easy, accessible way for users to dismiss the dialog.
          */
         "noHeader"?: boolean;
@@ -1386,10 +1374,6 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
-          * Removes the footer.
-         */
-        "noFooter"?: boolean;
-        /**
           * Removes the header. This will also remove the default close button, so please ensure you provide an easy, accessible way for users to dismiss the drawer.
          */
         "noHeader"?: boolean;
@@ -1406,7 +1390,7 @@ declare namespace LocalJSX {
          */
         "onSlHide"?: (event: CustomEvent<any>) => void;
         /**
-          * Emitted when the overlay is clicked. Calling `event.preventDefault()` will prevent the dialog from closing.
+          * Emitted when the overlay is clicked. Calling `event.preventDefault()` will prevent the drawer from closing.
          */
         "onSlOverlayDismiss"?: (event: CustomEvent<any>) => void;
         /**

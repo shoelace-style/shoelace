@@ -1,6 +1,7 @@
-import { Component, Element, Event, EventEmitter, Method, Prop, Watch, h } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, Method, Prop, State, Watch, h } from '@stencil/core';
 import { lockBodyScrolling, unlockBodyScrolling } from '../../utilities/scroll';
 import { focusVisible } from '../../utilities/focus-visible';
+import { hasSlot } from '../../utilities/slot';
 
 let id = 0;
 
@@ -32,6 +33,8 @@ export class Drawer {
 
   @Element() host: HTMLSlDrawerElement;
 
+  @State() hasFooter = false;
+
   /** Indicates whether or not the drawer is open. You can use this in lieu of the show/hide methods. */
   @Prop({ mutable: true, reflect: true }) open = false;
 
@@ -56,9 +59,6 @@ export class Drawer {
    */
   @Prop() noHeader = false;
 
-  /** Removes the footer. */
-  @Prop() noFooter = false;
-
   @Watch('open')
   handleOpenChange() {
     this.open ? this.show() : this.hide();
@@ -76,7 +76,7 @@ export class Drawer {
   /** Emitted after the drawer closes and all transitions are complete. */
   @Event() slAfterHide: EventEmitter;
 
-  /** Emitted when the overlay is clicked. Calling `event.preventDefault()` will prevent the dialog from closing. */
+  /** Emitted when the overlay is clicked. Calling `event.preventDefault()` will prevent the drawer from closing. */
   @Event() slOverlayDismiss: EventEmitter;
 
   connectedCallback() {
@@ -85,6 +85,11 @@ export class Drawer {
     this.handleDocumentFocusIn = this.handleDocumentFocusIn.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleOverlayClick = this.handleOverlayClick.bind(this);
+  }
+
+  componentWillLoad() {
+    this.updateSlots();
+    this.host.shadowRoot.addEventListener('slotchange', this.updateSlots);
   }
 
   componentDidLoad() {
@@ -99,6 +104,8 @@ export class Drawer {
   componentDidUnload() {
     focusVisible.unobserve(this.drawer);
     unlockBodyScrolling(this.host);
+
+    this.host.shadowRoot.removeEventListener('slotchange', this.updateSlots);
   }
 
   /** Shows the drawer */
@@ -179,6 +186,10 @@ export class Drawer {
     }
   }
 
+  updateSlots() {
+    this.hasFooter = hasSlot(this.host, 'footer');
+  }
+
   render() {
     return (
       <div
@@ -192,7 +203,8 @@ export class Drawer {
           'drawer--bottom': this.placement === 'bottom',
           'drawer--left': this.placement === 'left',
           'drawer--contained': this.contained,
-          'drawer--fixed': !this.contained
+          'drawer--fixed': !this.contained,
+          'drawer--has-footer': this.hasFooter
         }}
         onKeyDown={this.handleKeyDown}
         onTransitionEnd={this.handleTransitionEnd}
@@ -227,11 +239,9 @@ export class Drawer {
             <slot />
           </div>
 
-          {!this.noFooter && (
-            <footer part="footer" class="drawer__footer">
-              <slot name="footer" />
-            </footer>
-          )}
+          <footer part="footer" class="drawer__footer">
+            <slot name="footer" />
+          </footer>
         </div>
       </div>
     );

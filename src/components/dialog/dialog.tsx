@@ -1,6 +1,7 @@
-import { Component, Element, Event, EventEmitter, Method, Prop, Watch, h } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, Method, Prop, State, Watch, h } from '@stencil/core';
 import { lockBodyScrolling, unlockBodyScrolling } from '../../utilities/scroll';
 import { focusVisible } from '../../utilities/focus-visible';
+import { hasSlot } from '../../utilities/slot';
 
 let id = 0;
 
@@ -33,6 +34,8 @@ export class Dialog {
 
   @Element() host: HTMLSlDialogElement;
 
+  @State() hasFooter = false;
+
   /** Indicates whether or not the dialog is open. You can use this in lieu of the show/hide methods. */
   @Prop({ mutable: true, reflect: true }) open = false;
 
@@ -47,9 +50,6 @@ export class Dialog {
    * easy, accessible way for users to dismiss the dialog.
    */
   @Prop() noHeader = false;
-
-  /** Set to true to disable the footer. */
-  @Prop() noFooter = false;
 
   @Watch('open')
   handleOpenChange() {
@@ -79,6 +79,11 @@ export class Dialog {
     this.handleOverlayClick = this.handleOverlayClick.bind(this);
   }
 
+  componentWillLoad() {
+    this.updateSlots();
+    this.host.shadowRoot.addEventListener('slotchange', this.updateSlots);
+  }
+
   componentDidLoad() {
     focusVisible.observe(this.dialog);
 
@@ -91,6 +96,8 @@ export class Dialog {
   componentDidUnload() {
     focusVisible.unobserve(this.dialog);
     unlockBodyScrolling(this.host);
+
+    this.host.shadowRoot.removeEventListener('slotchange', this.updateSlots);
   }
 
   /** Shows the dialog */
@@ -165,6 +172,10 @@ export class Dialog {
     }
   }
 
+  updateSlots() {
+    this.hasFooter = hasSlot(this.host, 'footer');
+  }
+
   render() {
     return (
       <div
@@ -172,7 +183,8 @@ export class Dialog {
         part="base"
         class={{
           dialog: true,
-          'dialog--open': this.open
+          'dialog--open': this.open,
+          'dialog--has-footer': this.hasFooter
         }}
         onKeyDown={this.handleKeyDown}
         onTransitionEnd={this.handleTransitionEnd}
@@ -207,11 +219,9 @@ export class Dialog {
             <slot />
           </div>
 
-          {!this.noFooter && (
-            <footer part="footer" class="dialog__footer">
-              <slot name="footer" />
-            </footer>
-          )}
+          <footer part="footer" class="dialog__footer">
+            <slot name="footer" />
+          </footer>
         </div>
       </div>
     );
