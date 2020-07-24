@@ -59,25 +59,14 @@ Basic cards aren't very exciting, but they can display any content you want them
 
 ## Card with Header
 
-Headers can be used to display titles and other card options.
+Headers can be used to display titles and more.
 
 ```html preview
 <sl-card class="card-header">
   <div slot="header">
     Header Title
 
-    <sl-dropdown placement="bottom-end">
-      <sl-button slot="trigger" type="text">
-        <sl-icon slot="suffix" name="pencil"></sl-icon>
-        Edit
-      </sl-button>
-      <sl-menu>
-        <sl-menu-item>Rename</sl-menu-item>
-        <sl-menu-item>Duplicate</sl-menu-item>
-        <sl-menu-divider></sl-menu-divider>
-        <sl-menu-item>Delete</sl-menu-item>
-      </sl-menu>
-    </sl-dropdown>
+    <sl-icon-button name="gear"></sl-icon-button>
   </div>
 
   This card has a header. You can put all sorts of things in it!
@@ -96,6 +85,10 @@ Headers can be used to display titles and other card options.
 
 .card-header h3 {
   margin: 0;
+}
+
+.card-header sl-icon-button {
+  font-size: var(--sl-font-size-medium);
 }
 </style>
 ```
