@@ -23,6 +23,9 @@ export class Badge {
   /** Set to true to draw a pill-style badge with rounded edges. */
   @Prop() pill = false;
 
+  /** Set to true to make the badge pulsate to draw attention. */
+  @Prop() pulse = false;
+
   render() {
     return (
       <span
@@ -38,7 +41,8 @@ export class Badge {
           'badge--warning': this.type === 'warning',
           'badge--danger': this.type === 'danger',
           'badge--text': this.type === 'text',
-          'badge--pill': this.pill
+          'badge--pill': this.pill,
+          'badge--pulse': this.pulse
         }}
         role="status"
       >

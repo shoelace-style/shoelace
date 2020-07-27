@@ -52,6 +52,10 @@ export namespace Components {
          */
         "pill": boolean;
         /**
+          * Set to true to make the badge pulsate to draw attention.
+         */
+        "pulse": boolean;
+        /**
           * The badge's type.
          */
         "type": 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text';
@@ -1184,6 +1188,10 @@ declare namespace LocalJSX {
           * Set to true to draw a pill-style badge with rounded edges.
          */
         "pill"?: boolean;
+        /**
+          * Set to true to make the badge pulsate to draw attention.
+         */
+        "pulse"?: boolean;
         /**
           * The badge's type.
          */

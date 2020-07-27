@@ -24,12 +24,34 @@ Set the `type` attribute to change the badge's type.
 
 ### Pill Badges
 
+Use the `pill` attribute to give badges rounded edges.
+
 ```html preview
 <sl-badge type="primary" pill>Primary</sl-icon></sl-badge>
 <sl-badge type="success" pill>Success</sl-badge>
 <sl-badge type="info" pill>Info</sl-badge>
 <sl-badge type="warning" pill>Warning</sl-badge>
 <sl-badge type="danger" pill>Danger</sl-badge>
+```
+
+### Pulsating Badges
+
+Use the `pulse` attribute to draw attention to the badge with a subtle animation.
+
+```html preview
+<div class="badge-pulse">
+  <sl-badge type="primary" pill pulse>1</sl-icon></sl-badge>
+  <sl-badge type="success" pill pulse>1</sl-badge>
+  <sl-badge type="info" pill pulse>1</sl-badge>
+  <sl-badge type="warning" pill pulse>1</sl-badge>
+  <sl-badge type="danger" pill pulse>1</sl-badge>
+</div>
+
+<style>
+  .badge-pulse sl-badge:not(:last-of-type) {
+    margin-right: 1rem;
+  }
+</style>
 ```
 
 ### With Buttons

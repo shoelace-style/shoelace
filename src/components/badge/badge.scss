@@ -49,9 +49,54 @@
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Pill modifiers
+// Pill modifier
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 .badge--pill {
   border-radius: var(--sl-border-radius-pill);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Pulse modifier
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+.badge--pulse {
+  animation: pulse 1.5s infinite;
+}
+
+.badge--pulse.badge--primary {
+  --pulse-hue: var(--sl-color-primary-hue);
+  --pulse-saturation: var(--sl-color-primary-saturation);
+}
+
+.badge--pulse.badge--success {
+  --pulse-hue: var(--sl-color-success-hue);
+  --pulse-saturation: var(--sl-color-success-saturation);
+}
+
+.badge--pulse.badge--info {
+  --pulse-hue: var(--sl-color-info-hue);
+  --pulse-saturation: var(--sl-color-info-saturation);
+}
+
+.badge--pulse.badge--warning {
+  --pulse-hue: var(--sl-color-warning-hue);
+  --pulse-saturation: var(--sl-color-warning-saturation);
+}
+
+.badge--pulse.badge--danger {
+  --pulse-hue: var(--sl-color-danger-hue);
+  --pulse-saturation: var(--sl-color-danger-saturation);
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 hsla(var(--pulse-hue), var(--pulse-saturation), 50%, 0.75);
+  }
+  70% {
+    box-shadow: 0 0 0 0.5rem hsla(var(--pulse-hue), var(--pulse-saturation), 50%, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 hsla(var(--pulse-hue), var(--pulse-saturation), 50%, 0);
+  }
 }
