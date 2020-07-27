@@ -4,12 +4,14 @@
 
 - Added the icon button component
 - Added the `typeToSelect` method to menu so type-to-select behavior can be controlled externally
+- Added the `pulse` prop to badge
 - Fixed a bug where hovering over select showed the wrong cursor
 - Fixed a bug where tabbing into a select control would highlight the label
 - Fixed a bug where tabbing out of a select control wouldn't close it
 - Fixed a bug where closing dropdowns wouldn't give focus back to the trigger
 - Fixed a bug where type-to-select wasn't working after the first letter
 - Fixed a bug where clicking on menu items and dividers would steal focus from the menu
+- Fix a bug where the color picker wouldn't parse uppercase values
 - Removed `noFooter` prop from dialog and drawer (slot detection is automatic, so the prop is not required)
 - Removed `close-icon` slot from alert
 - Replaced make-shift icon buttons with `sl-icon-button` in alert, dialog, drawer, and tag
