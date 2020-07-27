@@ -396,7 +396,7 @@ export class ColorPicker {
     // hex colors when the # is missing. This pre-parser tries to normalize these edge cases to provide a better
     // experience for users who type in color values.
     //
-    if (/rgba?/.test(colorString)) {
+    if (/rgba?/i.test(colorString)) {
       const rgba = colorString
         .replace(/[^\d.%]/g, ' ')
         .split(' ')
@@ -414,7 +414,7 @@ export class ColorPicker {
       return `rgba(${rgba[0]}, ${rgba[1]}, ${rgba[2]}, ${rgba[3]})`;
     }
 
-    if (/hsla?/.test(colorString)) {
+    if (/hsla?/i.test(colorString)) {
       const hsla = colorString
         .replace(/[^\d.%]/g, ' ')
         .split(' ')
@@ -432,7 +432,7 @@ export class ColorPicker {
       return `hsla(${hsla[0]}, ${hsla[1]}, ${hsla[2]}, ${hsla[3]})`;
     }
 
-    if (/^[0-9a-f]+$/.test(colorString)) {
+    if (/^[0-9a-f]+$/i.test(colorString)) {
       return `#${colorString}`;
     }
 
