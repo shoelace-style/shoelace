@@ -33,6 +33,7 @@
   - [Range](/components/range.md)
   - [Rating](/components/rating.md)
   - [Select](/components/select.md)
+  - [Skeleton](/components/skeleton.md)
   - [Spinner](/components/spinner.md)
   - [Switch](/components/switch.md)
   - [Tab Group](/components/tab-group.md)

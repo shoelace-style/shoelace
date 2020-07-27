@@ -1,0 +1,34 @@
+@import 'component';
+
+/**
+ * @prop --color: The color of the skeleton.
+ * @prop --sheen-color: The sheen color when the skeleton is in its loading state.
+ */
+:host {
+  --color: var(--sl-color-gray-90);
+  --sheen-color: var(--sl-color-gray-95);
+
+  display: flex;
+  height: 1em;
+}
+
+.skeleton {
+  flex: 1 1 auto;
+  background: var(--color);
+  border-radius: var(--sl-border-radius-pill);
+}
+
+.skeleton--loading {
+  background: linear-gradient(90deg, var(--sheen-color) 20%, var(--color) 40%, var(--sheen-color) 60%);
+  background-size: 400% 100%;
+  animation: loading 1.5s ease infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}

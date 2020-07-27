@@ -667,6 +667,12 @@ export namespace Components {
          */
         "value": string | Array<string>;
     }
+    interface SlSkeleton {
+        /**
+          * When enabled, the skeleton will be animated to indicate that content is loading.
+         */
+        "loading": boolean;
+    }
     interface SlSpinner {
     }
     interface SlSwitch {
@@ -1050,6 +1056,12 @@ declare global {
         prototype: HTMLSlSelectElement;
         new (): HTMLSlSelectElement;
     };
+    interface HTMLSlSkeletonElement extends Components.SlSkeleton, HTMLStencilElement {
+    }
+    var HTMLSlSkeletonElement: {
+        prototype: HTMLSlSkeletonElement;
+        new (): HTMLSlSkeletonElement;
+    };
     interface HTMLSlSpinnerElement extends Components.SlSpinner, HTMLStencilElement {
     }
     var HTMLSlSpinnerElement: {
@@ -1124,6 +1136,7 @@ declare global {
         "sl-range": HTMLSlRangeElement;
         "sl-rating": HTMLSlRatingElement;
         "sl-select": HTMLSlSelectElement;
+        "sl-skeleton": HTMLSlSkeletonElement;
         "sl-spinner": HTMLSlSpinnerElement;
         "sl-switch": HTMLSlSwitchElement;
         "sl-tab": HTMLSlTabElement;
@@ -1880,6 +1893,12 @@ declare namespace LocalJSX {
          */
         "value"?: string | Array<string>;
     }
+    interface SlSkeleton {
+        /**
+          * When enabled, the skeleton will be animated to indicate that content is loading.
+         */
+        "loading"?: boolean;
+    }
     interface SlSpinner {
     }
     interface SlSwitch {
@@ -2145,6 +2164,7 @@ declare namespace LocalJSX {
         "sl-range": SlRange;
         "sl-rating": SlRating;
         "sl-select": SlSelect;
+        "sl-skeleton": SlSkeleton;
         "sl-spinner": SlSpinner;
         "sl-switch": SlSwitch;
         "sl-tab": SlTab;
@@ -2184,6 +2204,7 @@ declare module "@stencil/core" {
             "sl-range": LocalJSX.SlRange & JSXBase.HTMLAttributes<HTMLSlRangeElement>;
             "sl-rating": LocalJSX.SlRating & JSXBase.HTMLAttributes<HTMLSlRatingElement>;
             "sl-select": LocalJSX.SlSelect & JSXBase.HTMLAttributes<HTMLSlSelectElement>;
+            "sl-skeleton": LocalJSX.SlSkeleton & JSXBase.HTMLAttributes<HTMLSlSkeletonElement>;
             "sl-spinner": LocalJSX.SlSpinner & JSXBase.HTMLAttributes<HTMLSlSpinnerElement>;
             "sl-switch": LocalJSX.SlSwitch & JSXBase.HTMLAttributes<HTMLSlSwitchElement>;
             "sl-tab": LocalJSX.SlTab & JSXBase.HTMLAttributes<HTMLSlTabElement>;
