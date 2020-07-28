@@ -7,7 +7,7 @@ Icons are symbols that can be used to represent or provide context to various op
 Shoelace comes bundled with over 1,000 icons courtesy of the [Bootstrap Icons](https://icons.getbootstrap.com/) project. Click or tap on an icon below to copy the name and use it like this.
 
 ```html
-<sl-icon name="icon-name-here" hidden></sl-icon>
+<sl-icon name="icon-name-here"></sl-icon>
 ```
 
 <div class="icon-search">
