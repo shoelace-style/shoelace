@@ -3,6 +3,7 @@
 ## 2.0.0-beta.9
 
 - Added the icon button component
+- Added the skeleton component
 - Added the `typeToSelect` method to menu so type-to-select behavior can be controlled externally
 - Added the `pulse` prop to badge
 - Fixed a bug where hovering over select showed the wrong cursor
@@ -15,7 +16,7 @@
 - Removed `noFooter` prop from dialog and drawer (slot detection is automatic, so the prop is not required)
 - Removed `close-icon` slot from alert
 - Replaced make-shift icon buttons with `sl-icon-button` in alert, dialog, drawer, and tag
-- Updated Stencil to 1.17.0
+- Updated Stencil to 1.17.1
 - Switched to jsDelivr for better CDN performance
 
 ## 2.0.0-beta.8
