@@ -29,7 +29,7 @@ export class Avatar {
   /** Initials to use as a fallback when no image is available (1-2 characters max recommended). */
   @Prop() initials = '';
 
-  /** Initials to use as a fallback when no image is available (1-2 characters max recommended). */
+  /** The shape of the avatar. */
   @Prop() shape: 'circle' | 'square' | 'rounded' = 'circle';
 
   connectedCallback() {
