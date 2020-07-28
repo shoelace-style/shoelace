@@ -5,6 +5,7 @@ import { Component, Prop, h } from '@stencil/core';
  * @status stable
  *
  * @part base - The component's base wrapper.
+ * @part indicator - The skeleton's indicator which is responsible for its color and animation.
  */
 
 @Component({
@@ -13,8 +14,8 @@ import { Component, Prop, h } from '@stencil/core';
   shadow: true
 })
 export class Skeleton {
-  /** When enabled, the skeleton will be animated to indicate that content is loading. */
-  @Prop() loading = false;
+  /** Determines which effect the skeleton will use. */
+  @Prop() effect: 'pulse' | 'sheen' | 'none' = 'sheen';
 
   render() {
     return (
@@ -22,11 +23,14 @@ export class Skeleton {
         part="base"
         class={{
           skeleton: true,
-          'skeleton--loading': this.loading
+          'skeleton--pulse': this.effect === 'pulse',
+          'skeleton--sheen': this.effect === 'sheen'
         }}
-        aria-busy={this.loading}
+        aria-busy
         aria-live="polite"
-      />
+      >
+        <div part="indicator" class="skeleton__indicator" />
+      </div>
     );
   }
 }

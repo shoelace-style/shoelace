@@ -42,7 +42,7 @@ export namespace Components {
          */
         "initials": string;
         /**
-          * Initials to use as a fallback when no image is available (1-2 characters max recommended).
+          * The shape of the avatar.
          */
         "shape": 'circle' | 'square' | 'rounded';
     }
@@ -669,9 +669,9 @@ export namespace Components {
     }
     interface SlSkeleton {
         /**
-          * When enabled, the skeleton will be animated to indicate that content is loading.
+          * Determines which effect the skeleton will use.
          */
-        "loading": boolean;
+        "effect": 'pulse' | 'sheen' | 'none';
     }
     interface SlSpinner {
     }
@@ -1192,7 +1192,7 @@ declare namespace LocalJSX {
          */
         "initials"?: string;
         /**
-          * Initials to use as a fallback when no image is available (1-2 characters max recommended).
+          * The shape of the avatar.
          */
         "shape"?: 'circle' | 'square' | 'rounded';
     }
@@ -1895,9 +1895,9 @@ declare namespace LocalJSX {
     }
     interface SlSkeleton {
         /**
-          * When enabled, the skeleton will be animated to indicate that content is loading.
+          * Determines which effect the skeleton will use.
          */
-        "loading"?: boolean;
+        "effect"?: 'pulse' | 'sheen' | 'none';
     }
     interface SlSpinner {
     }
