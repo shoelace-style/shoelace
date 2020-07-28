@@ -18,7 +18,7 @@ let id = 0;
   shadow: true
 })
 export class Tooltip {
-  id = `tooltip-${++id}`;
+  componentId = `tooltip-${++id}`;
   popover: Popover;
   target: HTMLElement;
   tooltip: any;
@@ -194,7 +194,7 @@ export class Tooltip {
 
     if (newTarget !== oldTarget) {
       oldTarget.removeAttribute('aria-describedby');
-      newTarget.setAttribute('aria-describedby', this.id);
+      newTarget.setAttribute('aria-describedby', this.componentId);
     }
   }
 
@@ -216,13 +216,13 @@ export class Tooltip {
   render() {
     return (
       <Host onMouseOver={this.handleMouseOver} onMouseOut={this.handleMouseOut}>
-        <slot aria-describedby={this.id} />
+        <slot aria-describedby={this.componentId} />
 
         {!this.disabled && (
           <div
             part="base"
             ref={el => (this.tooltip = el)}
-            id={this.id}
+            id={this.componentId}
             class={{
               tooltip: true,
               'tooltip--open': this.open

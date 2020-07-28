@@ -17,7 +17,7 @@ let id = 0;
   shadow: true
 })
 export class TabPanel {
-  id = `tab-panel-${++id}`;
+  componentId = `tab-panel-${++id}`;
 
   @Element() host: HTMLSlTabPanelElement;
 
@@ -30,7 +30,7 @@ export class TabPanel {
   render() {
     return (
       // If the user didn't provide an ID, we'll set one so we can link tabs and tab panels with aria labels
-      <Host id={this.host.id || this.id} style={{ display: this.active ? 'block' : 'none' }}>
+      <Host id={this.host.id || this.componentId} style={{ display: this.active ? 'block' : 'none' }}>
         <div part="base" class="tab-panel" role="tabpanel" aria-selected={this.active} aria-hidden={!this.active}>
           <slot />
         </div>

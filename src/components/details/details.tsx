@@ -24,7 +24,7 @@ let id = 0;
 export class Details {
   details: HTMLElement;
   header: HTMLElement;
-  id = `details-${++id}`;
+  componentId = `details-${++id}`;
   body: HTMLElement;
 
   /** Indicates whether or not the details is open. You can use this in lieu of the show/hide methods. */
@@ -156,11 +156,11 @@ export class Details {
       >
         <header
           ref={el => (this.header = el)}
-          id={`${this.id}-header`}
+          id={`${this.componentId}-header`}
           class="details__header"
           role="button"
           aria-expanded={this.open}
-          aria-controls={`${this.id}-content`}
+          aria-controls={`${this.componentId}-content`}
           aria-disabled={this.disabled}
           tabIndex={this.disabled ? -1 : 0}
           onClick={this.handleSummaryClick}
@@ -178,10 +178,10 @@ export class Details {
         <div ref={el => (this.body = el)} class="details__body" onTransitionEnd={this.handleBodyTransitionEnd}>
           <div
             part="content"
-            id={`${this.id}-content`}
+            id={`${this.componentId}-content`}
             class="details__content"
             role="region"
-            aria-labeledby={`${this.id}-header`}
+            aria-labeledby={`${this.componentId}-header`}
           >
             <slot />
           </div>

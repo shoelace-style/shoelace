@@ -28,7 +28,7 @@ let id = 0;
 export class Drawer {
   panel: HTMLElement;
   drawer: HTMLElement;
-  id = `drawer-${++id}`;
+  componentId = `drawer-${++id}`;
 
   @Element() host: HTMLSlDrawerElement;
 
@@ -216,12 +216,12 @@ export class Drawer {
           aria-modal="true"
           aria-hidden={!this.open}
           aria-label={this.noHeader ? this.label : null}
-          aria-labeledby={!this.noHeader ? `${this.id}-title` : null}
+          aria-labeledby={!this.noHeader ? `${this.componentId}-title` : null}
           tabIndex={0}
         >
           {!this.noHeader && (
             <header part="header" class="drawer__header">
-              <span part="title" class="drawer__title" id={`${this.id}-title`}>
+              <span part="title" class="drawer__title" id={`${this.componentId}-title`}>
                 {/* If there's no label, use an invisible character to prevent the heading from collapsing */}
                 {this.label || String.fromCharCode(65279)}
               </span>
