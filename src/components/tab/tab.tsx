@@ -17,7 +17,7 @@ let id = 0;
   shadow: true
 })
 export class Tab {
-  id = `tab-${++id}`;
+  componentId = `tab-${++id}`;
   tab: HTMLElement;
 
   @Element() host: HTMLSlTabElement;
@@ -46,7 +46,7 @@ export class Tab {
   render() {
     return (
       // If the user didn't provide an ID, we'll set one so we can link tabs and tab panels with aria labels
-      <Host id={this.host.id || this.id}>
+      <Host id={this.host.id || this.componentId}>
         <div
           part="base"
           ref={el => (this.tab = el)}

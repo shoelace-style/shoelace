@@ -21,7 +21,7 @@ let id = 0;
   shadow: true
 })
 export class Dropdown {
-  id = `dropdown-${++id}`;
+  componentId = `dropdown-${++id}`;
   ignoreMouseEvents = false;
   ignoreMouseTimeout: any;
   ignoreOpenWatcher = false;
@@ -265,7 +265,7 @@ export class Dropdown {
     return (
       <div
         part="base"
-        id={this.id}
+        id={this.componentId}
         class={{
           dropdown: true,
           'dropdown--open': this.open
@@ -289,7 +289,7 @@ export class Dropdown {
           class="dropdown__panel"
           role="menu"
           aria-hidden={!this.open}
-          aria-labeledby={this.id}
+          aria-labeledby={this.componentId}
           hidden
         >
           <slot />

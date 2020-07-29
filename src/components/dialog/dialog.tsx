@@ -29,7 +29,7 @@ let id = 0;
 export class Dialog {
   panel: HTMLElement;
   dialog: HTMLElement;
-  id = `dialog-${++id}`;
+  componentId = `dialog-${++id}`;
 
   @Element() host: HTMLSlDialogElement;
 
@@ -196,12 +196,12 @@ export class Dialog {
           aria-modal="true"
           aria-hidden={!this.open}
           aria-label={this.noHeader ? this.label : null}
-          aria-labeledby={!this.noHeader ? `${this.id}-title` : null}
+          aria-labeledby={!this.noHeader ? `${this.componentId}-title` : null}
           tabIndex={0}
         >
           {!this.noHeader && (
             <header part="header" class="dialog__header">
-              <span part="title" class="dialog__title" id={`${this.id}-title`}>
+              <span part="title" class="dialog__title" id={`${this.componentId}-title`}>
                 {/* If there's no label, use an invisible character to prevent the heading from collapsing */}
                 {this.label || String.fromCharCode(65279)}
               </span>
