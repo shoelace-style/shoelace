@@ -106,6 +106,25 @@ For example, `<button>` and `<sl-button>` both have a `type` attribute, but it d
 
 ?> **Don't make assumptions about a component's API!** To prevent unexpected behaviors, please take the time to review the documentation and make sure you understand what each property, method, and event is intended to do.
 
+## Code Completion
+
+Shoelace ships with a `custom-elements.json` file that can be used to describe its components to supportive editors, providing code completion (also known as "code hinting" or "IntelliSense"). To enable this, you need to tell your editor where this file is.
+
+### VS Code
+
+1. [Install Shoelace locally](/getting-started/installation.md#local-installation)
+2. Create a folder called `.vscode` at the root of your project
+3. Create a file inside the folder called `settings.json`
+4. Add the following to the file
+
+```js
+{
+  "html.customData": ["./node_modules/@shoelace-style/shoelace/dist/custom-elements.json"]
+}
+```
+
+If `settings.json` already exists in your project, simply add the `html.customData` line to the root of the object.
+
 ## React
 
 React [doesn't play nice](https://custom-elements-everywhere.com/#react) with custom elements — it's a bit finicky about props.
