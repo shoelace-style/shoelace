@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.0-beta.10
+
+- Fixed a bug where many components would erroneously receive an `id` when using the custom elements bundle
+
 ## 2.0.0-beta.9
 
 - Added the icon button component
