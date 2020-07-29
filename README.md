@@ -5,6 +5,7 @@ A forward-thinking library of web components.
 - Works with all frameworks 🧩
 - Works with CDNs 🚛
 - Fully customizable with CSS 🎨
+- Built with accessibility in mind ♿️
 - Open source 😸
 
 Designed in New Hampshire by [Cory LaViska](https://twitter.com/claviska).
