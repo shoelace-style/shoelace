@@ -94,7 +94,7 @@ Designing, developing, and supporting this library requires a lot of time, effor
 </a>
 
 <a class="repo-button repo-button--github" href="https://github.com/shoelace-style/shoelace/stargazers" rel="noopener" target="_blank">
-  <sl-icon src="/assets/images/github.svg"></sl-icon> Star
+  <sl-icon src="/assets/images/github.svg"></sl-icon> <span class="github-star-count">Star</span>
 </a>
 
 <a class="repo-button repo-button--twitter" href="https://twitter.com/shoelace_style" rel="noopener" target="_blank">

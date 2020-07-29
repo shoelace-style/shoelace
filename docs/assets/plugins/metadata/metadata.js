@@ -217,6 +217,18 @@
     });
   }
 
+  function getShortNumber(value) {
+    const suffixes = ['', 'k', 'm', 'b', 't'];
+    const index = Math.floor(('' + value).length / 3);
+    let shortValue = parseFloat((index !== 0 ? (value / Math.pow(1000, index)) : value).toPrecision(2));
+
+    if (shortValue % 1 !== 0) {
+      shortValue = shortValue.toFixed(1);
+    }
+
+    return shortValue + suffixes[index];
+  }
+
   function getDocsTagsObject(docsTags) {
     let tags = {};
 
@@ -233,31 +245,40 @@
 
   window.$docsify.plugins.push((hook, vm) => {
     hook.mounted(function () {
-      getMetadata().then(metadata => {
-        const target = document.querySelector('.app-name');
+      getMetadata()
+        .then(metadata => {
+          const target = document.querySelector('.app-name');
 
-        // Add version
-        const version = document.createElement('div');
-        version.classList.add('sidebar-version');
-        version.textContent = metadata.version;
-        target.appendChild(version);
+          // Add version
+          const version = document.createElement('div');
+          version.classList.add('sidebar-version');
+          version.textContent = metadata.version;
+          target.appendChild(version);
 
-        // Add repo buttons
-        const buttons = document.createElement('div');
-        buttons.classList.add('sidebar-buttons');
-        buttons.innerHTML = `
-          <a class="repo-button repo-button--small repo-button--sponsor" href="https://github.com/sponsors/claviska" rel="noopener" target="_blank">
-            <sl-icon name="heart"></sl-icon> Sponsor
-          </a>
-          <a class="repo-button repo-button--small repo-button--github" href="https://github.com/shoelace-style/shoelace/stargazers" rel="noopener" target="_blank">
-            <sl-icon src="/assets/images/github.svg"></sl-icon> Star
-          </a>
-          <a class="repo-button repo-button--small repo-button--twitter" href="https://twitter.com/shoelace_style" rel="noopener" target="_blank">
-            <sl-icon src="/assets/images/twitter.svg"></sl-icon> Follow
-          </a>
-        `;
-        target.appendChild(buttons);
-      });
+          // Add repo buttons
+          const buttons = document.createElement('div');
+          buttons.classList.add('sidebar-buttons');
+          buttons.innerHTML = `
+            <a class="repo-button repo-button--small repo-button--sponsor" href="https://github.com/sponsors/claviska" rel="noopener" target="_blank">
+              <sl-icon name="heart"></sl-icon> Sponsor
+            </a>
+            <a class="repo-button repo-button--small repo-button--github" href="https://github.com/shoelace-style/shoelace/stargazers" rel="noopener" target="_blank">
+              <sl-icon src="/assets/images/github.svg"></sl-icon> <span class="github-star-count">Star</span>
+            </a>
+            <a class="repo-button repo-button--small repo-button--twitter" href="https://twitter.com/shoelace_style" rel="noopener" target="_blank">
+              <sl-icon src="/assets/images/twitter.svg"></sl-icon> Follow
+            </a>
+          `;
+          target.appendChild(buttons);
+        })
+        .then(() => {
+          fetch('https://api.github.com/repos/shoelace-style/shoelace')
+            .then(res => res.json())
+            .then(json => {
+              const count = getShortNumber(json.stargazers_count);
+              [...document.querySelectorAll('.github-star-count')].map(stars => stars.textContent = count);
+            });
+        });
     });
 
     hook.beforeEach(async function (content, next) {
