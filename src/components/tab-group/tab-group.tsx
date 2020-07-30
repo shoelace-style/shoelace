@@ -59,7 +59,15 @@ export class TabGroup {
     focusVisible.observe(this.tabGroup);
 
     // Update aria labels if the DOM changes
-    this.mutationObserver = new MutationObserver(() => setTimeout(() => this.setAriaLabels()));
+    this.mutationObserver = new MutationObserver(mutations => {
+      if (
+        mutations.some(mutation => {
+          return !['arial-labeledby', 'aria-controls'].includes(mutation.attributeName);
+        })
+      ) {
+        setTimeout(() => this.setAriaLabels());
+      }
+    });
     this.mutationObserver.observe(this.host, { attributes: true, childList: true, subtree: true });
   }
 
