@@ -62,7 +62,7 @@ export class TabGroup {
     this.mutationObserver = new MutationObserver(mutations => {
       if (
         mutations.some(mutation => {
-          return !['arial-labeledby', 'aria-controls'].includes(mutation.attributeName);
+          return !['aria-labeledby', 'aria-controls'].includes(mutation.attributeName);
         })
       ) {
         setTimeout(() => this.setAriaLabels());
@@ -141,7 +141,7 @@ export class TabGroup {
       const panel = panels.find(el => el.name === tab.panel);
       if (panel) {
         tab.setAttribute('aria-controls', panel.getAttribute('id'));
-        panel.setAttribute('arial-labeledby', tab.getAttribute('id'));
+        panel.setAttribute('aria-labeledby', tab.getAttribute('id'));
       }
     });
   }
