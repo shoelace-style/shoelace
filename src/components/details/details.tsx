@@ -11,6 +11,7 @@ let id = 0;
  * @slot summary - The details' summary. Alternatively, you can use the summary prop.
  *
  * @part base - The component's base wrapper.
+ * @part header - The summary header.
  * @part summary - The details summary.
  * @part summary-icon - The expand/collapse summary icon.
  * @part content - The details content.
@@ -156,6 +157,7 @@ export class Details {
       >
         <header
           ref={el => (this.header = el)}
+          part="header"
           id={`${this.componentId}-header`}
           class="details__header"
           role="button"
