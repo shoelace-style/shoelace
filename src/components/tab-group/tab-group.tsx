@@ -59,7 +59,15 @@ export class TabGroup {
     focusVisible.observe(this.tabGroup);
 
     // Update aria labels if the DOM changes
-    this.mutationObserver = new MutationObserver(() => setTimeout(() => this.setAriaLabels()));
+    this.mutationObserver = new MutationObserver(mutations => {
+      if (
+        mutations.some(mutation => {
+          return !['aria-labeledby', 'aria-controls'].includes(mutation.attributeName);
+        })
+      ) {
+        setTimeout(() => this.setAriaLabels());
+      }
+    });
     this.mutationObserver.observe(this.host, { attributes: true, childList: true, subtree: true });
   }
 
@@ -133,7 +141,7 @@ export class TabGroup {
       const panel = panels.find(el => el.name === tab.panel);
       if (panel) {
         tab.setAttribute('aria-controls', panel.getAttribute('id'));
-        panel.setAttribute('arial-labeledby', tab.getAttribute('id'));
+        panel.setAttribute('aria-labeledby', tab.getAttribute('id'));
       }
     });
   }
