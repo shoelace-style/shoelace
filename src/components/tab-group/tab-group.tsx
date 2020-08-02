@@ -53,9 +53,16 @@ export class TabGroup {
   }
 
   componentDidLoad() {
-    // Set initial tab state
-    this.setAriaLabels();
-    this.setActiveTab(this.getActiveTab() || this.getAllTabs()[0], false);
+    // Set initial tab state when the tabs first become visible
+    const observer = new IntersectionObserver((entries, observer) => {
+      if (entries[0].intersectionRatio > 0) {
+        this.setAriaLabels();
+        this.setActiveTab(this.getActiveTab() || this.getAllTabs()[0], false);
+        observer.unobserve(entries[0].target);
+      }
+    });
+    observer.observe(this.host);
+
     focusVisible.observe(this.tabGroup);
 
     // Update aria labels if the DOM changes
