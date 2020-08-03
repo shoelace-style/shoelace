@@ -5,6 +5,7 @@
   - [Usage](/getting-started/usage.md)
   - [Customizing](/getting-started/customizing.md)
   - [Roadmap](/getting-started/roadmap.md)
+  - [Community](/getting-started/community.md)
 
 - Components
 
