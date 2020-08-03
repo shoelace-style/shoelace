@@ -31,7 +31,7 @@ export class Details {
   /** Indicates whether or not the details is open. You can use this in lieu of the show/hide methods. */
   @Prop({ mutable: true, reflect: true }) open = false;
 
-  /** The summary to show in the details header. */
+  /** The summary to show in the details header. If you need to display HTML, use the `summary` slot instead. */
   @Prop() summary = '';
 
   /** Set to true to prevent the user from toggling the details. */

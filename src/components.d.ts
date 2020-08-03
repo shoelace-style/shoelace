@@ -194,7 +194,7 @@ export namespace Components {
          */
         "show": () => Promise<boolean>;
         /**
-          * The summary to show in the details header.
+          * The summary to show in the details header. If you need to display HTML, use the `summary` slot instead.
          */
         "summary": string;
     }
@@ -1376,7 +1376,7 @@ declare namespace LocalJSX {
          */
         "open"?: boolean;
         /**
-          * The summary to show in the details header.
+          * The summary to show in the details header. If you need to display HTML, use the `summary` slot instead.
          */
         "summary"?: string;
     }
