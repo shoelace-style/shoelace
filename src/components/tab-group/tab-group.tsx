@@ -1,7 +1,8 @@
-import { Component, Element, Event, EventEmitter, Method, Prop, Watch, h } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, Method, Prop, State, Watch, h } from '@stencil/core';
 import { getOffset } from '../../utilities/offset';
 import { scrollIntoView } from '../../utilities/scroll';
 import { focusVisible } from '../../utilities/focus-visible';
+import ResizeObserver from 'resize-observer-polyfill';
 
 /**
  * @since 2.0
@@ -28,10 +29,13 @@ export class TabGroup {
   body: HTMLElement;
   mutationObserver: MutationObserver;
   nav: HTMLElement;
+  resizeObserver: any;
   tabGroup: HTMLElement;
   tabs: HTMLElement;
 
   @Element() host: HTMLSlTabGroupElement;
+
+  @State() canScrollHorizontally = false;
 
   /** The placement of the tabs. */
   @Prop() placement: 'top' | 'bottom' | 'left' | 'right' = 'top';
@@ -50,6 +54,8 @@ export class TabGroup {
   connectedCallback() {
     this.handleClick = this.handleClick.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleScrollLeft = this.handleScrollLeft.bind(this);
+    this.handleScrollRight = this.handleScrollRight.bind(this);
   }
 
   componentDidLoad() {
@@ -65,6 +71,10 @@ export class TabGroup {
 
     focusVisible.observe(this.tabGroup);
 
+    this.resizeObserver = new ResizeObserver(() => this.syncHorizontalScroll());
+    this.resizeObserver.observe(this.nav);
+    requestAnimationFrame(() => this.syncHorizontalScroll());
+
     // Update aria labels if the DOM changes
     this.mutationObserver = new MutationObserver(mutations => {
       if (
@@ -79,8 +89,9 @@ export class TabGroup {
   }
 
   componentDidUnload() {
-    focusVisible.unobserve(this.tabGroup);
     this.mutationObserver.disconnect();
+    focusVisible.unobserve(this.tabGroup);
+    this.resizeObserver.unobserve(this.nav);
   }
 
   /** Shows the specified tab panel. */
@@ -112,6 +123,20 @@ export class TabGroup {
 
   getActiveTab() {
     return this.getAllTabs().find(el => el.active);
+  }
+
+  handleScrollLeft() {
+    this.nav.scroll({
+      left: this.nav.scrollLeft - this.nav.clientWidth,
+      behavior: 'smooth'
+    });
+  }
+
+  handleScrollRight() {
+    this.nav.scroll({
+      left: this.nav.scrollLeft + this.nav.clientWidth,
+      behavior: 'smooth'
+    });
   }
 
   setActiveTab(tab: HTMLSlTabElement, emitEvents = true) {
@@ -228,6 +253,11 @@ export class TabGroup {
     }
   }
 
+  syncHorizontalScroll() {
+    this.canScrollHorizontally =
+      ['top', 'bottom'].includes(this.placement) && this.nav.scrollWidth > this.nav.clientWidth;
+  }
+
   render() {
     return (
       <div
@@ -240,20 +270,38 @@ export class TabGroup {
           'tab-group--top': this.placement === 'top',
           'tab-group--bottom': this.placement === 'bottom',
           'tab-group--left': this.placement === 'left',
-          'tab-group--right': this.placement === 'right'
+          'tab-group--right': this.placement === 'right',
+
+          'tab-group--horizontal-scroll': this.canScrollHorizontally
         }}
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
       >
-        <div ref={el => (this.nav = el)} part="nav" class="tab-group__nav" tabindex="-1">
-          <div ref={el => (this.tabs = el)} part="tabs" class="tab-group__tabs" role="tablist">
-            <div
-              ref={el => (this.activeTabIndicator = el)}
-              part="active-tab-indicator"
-              class="tab-group__active-tab-indicator"
+        <div class="tab-group__nav-container">
+          {this.canScrollHorizontally && (
+            <sl-icon-button
+              class="tab-group__scroll-button tab-group__scroll-button--left"
+              name="chevron-left"
+              onClick={this.handleScrollLeft}
             />
-            <slot name="nav" />
+          )}
+          <div ref={el => (this.nav = el)} key="nav" part="nav" class="tab-group__nav" tabindex="-1">
+            <div ref={el => (this.tabs = el)} part="tabs" class="tab-group__tabs" role="tablist">
+              <div
+                ref={el => (this.activeTabIndicator = el)}
+                part="active-tab-indicator"
+                class="tab-group__active-tab-indicator"
+              />
+              <slot name="nav" />
+            </div>
           </div>
+          {this.canScrollHorizontally && (
+            <sl-icon-button
+              class="tab-group__scroll-button tab-group__scroll-button--right"
+              name="chevron-right"
+              onClick={this.handleScrollRight}
+            />
+          )}
         </div>
 
         <div ref={el => (this.body = el)} part="body" class="tab-group__body">

@@ -26,8 +26,31 @@
   }
 }
 
+.tab-group--horizontal-scroll .tab-group__nav-container {
+  position: relative;
+  padding: 0 var(--sl-spacing-x-large);
+}
+
+.tab-group__scroll-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: var(--sl-spacing-x-large);
+}
+
+.tab-group__scroll-button--left {
+  left: 0;
+}
+
+.tab-group__scroll-button--right {
+  right: 0;
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Top + bottom
+// Top
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 .tab-group--top {

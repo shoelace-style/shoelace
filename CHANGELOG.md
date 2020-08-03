@@ -3,6 +3,7 @@
 ## 2.0.0-beta.10
 
 - Fixed a bug where many components would erroneously receive an `id` when using the custom elements bundle
+- Fixed a bug where tab groups weren't scrollable with the mouse
 
 ## 2.0.0-beta.9
 
