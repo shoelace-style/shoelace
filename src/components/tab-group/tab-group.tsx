@@ -125,6 +125,56 @@ export class TabGroup {
     return this.getAllTabs().find(el => el.active);
   }
 
+  handleClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    const tab = target.closest('sl-tab');
+
+    if (tab) {
+      this.setActiveTab(tab);
+    }
+  }
+
+  handleKeyDown(event: KeyboardEvent) {
+    // Activate a tab
+    if (['Enter', ' '].includes(event.key)) {
+      const target = event.target as HTMLElement;
+      const tab = target.closest('sl-tab');
+
+      if (tab) {
+        this.setActiveTab(tab);
+        event.preventDefault();
+      }
+    }
+
+    // Move focus left or right
+    if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) {
+      const activeEl = document.activeElement as any;
+
+      if (activeEl && activeEl.tagName.toLowerCase() === 'sl-tab') {
+        const tabs = this.getAllTabs();
+        let index = tabs.indexOf(activeEl);
+
+        if (event.key === 'Home') {
+          index = 0;
+        } else if (event.key === 'End') {
+          index = tabs.length - 1;
+        } else if (event.key === 'ArrowLeft') {
+          index = Math.max(0, index - 1);
+        } else if (event.key === 'ArrowRight') {
+          index = Math.min(tabs.length - 1, index + 1);
+        }
+
+        tabs[index].setFocus();
+
+        if (['top', 'bottom'].includes(this.placement)) {
+          scrollIntoView(tabs[index], this.nav, 'horizontal');
+        }
+
+        event.preventDefault();
+      }
+    }
+  }
+
   handleScrollLeft() {
     this.nav.scroll({
       left: this.nav.scrollLeft - this.nav.clientWidth,
@@ -200,56 +250,6 @@ export class TabGroup {
         this.activeTabIndicator.style.height = `${height}px`;
         this.activeTabIndicator.style.transform = `translateY(${offsetTop}px)`;
         break;
-    }
-  }
-
-  handleClick(event: MouseEvent) {
-    const target = event.target as HTMLElement;
-    const tab = target.closest('sl-tab');
-
-    if (tab) {
-      this.setActiveTab(tab);
-    }
-  }
-
-  handleKeyDown(event: KeyboardEvent) {
-    // Activate a tab
-    if (['Enter', ' '].includes(event.key)) {
-      const target = event.target as HTMLElement;
-      const tab = target.closest('sl-tab');
-
-      if (tab) {
-        this.setActiveTab(tab);
-        event.preventDefault();
-      }
-    }
-
-    // Move focus left or right
-    if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) {
-      const activeEl = document.activeElement as any;
-
-      if (activeEl && activeEl.tagName.toLowerCase() === 'sl-tab') {
-        const tabs = this.getAllTabs();
-        let index = tabs.indexOf(activeEl);
-
-        if (event.key === 'Home') {
-          index = 0;
-        } else if (event.key === 'End') {
-          index = tabs.length - 1;
-        } else if (event.key === 'ArrowLeft') {
-          index = Math.max(0, index - 1);
-        } else if (event.key === 'ArrowRight') {
-          index = Math.min(tabs.length - 1, index + 1);
-        }
-
-        tabs[index].setFocus();
-
-        if (['top', 'bottom'].includes(this.placement)) {
-          scrollIntoView(tabs[index], this.nav, 'horizontal');
-        }
-
-        event.preventDefault();
-      }
     }
   }
 
