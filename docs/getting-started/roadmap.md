@@ -14,40 +14,14 @@ The changelog is available in the project's source in the `CHANGELOG.md` file.
 
 You can [view the most recent changelog](https://github.com/shoelace-style/shoelace/blob/next/CHANGELOG.md) on GitHub.
 
-## 2.1 🤔
+## 2.1 🧭
 
 Version 2.1 is still in the planning phase. To request a feature, please [submit an issue](https://github.com/shoelace-style/shoelace/issues) on GitHub. Make sure to search for existing issues and vote using 👍 to add your support!
 
 ?> Is there a feature you really want to see here? Sponsoring Shoelace is the best way to prioritize its development. [Learn more](https://github.com/sponsors/claviska)
 
-## 2.0 🚀
+## 2.0 🧪
 
-- [x] Alert
-- [x] Avatar
-- [x] Button
-- [x] Checkbox
-- [x] Color Picker
-- [x] Details
-- [x] Dialog
-- [x] Drawer
-- [x] Dropdown
-- [x] Form
-- [x] Icon
-- [x] Input
-- [x] Menu
-  - [x] Menu Divider
-  - [x] Menu Item
-  - [x] Menu Label
-- [x] Progress Bar
-- [x] Progress Ring
-- [x] Radio
-- [x] Range
-- [x] Select
-- [x] Spinner
-- [x] Switch
-- [x] Tab Group
-  - [x] Tab
-  - [x] Tab Panel
-- [x] Tag
-- [x] Textarea
-- [x] Tooltip
+Shoelace 2.0 is currently in beta. The primary goal of the beta period is to ensure the library's stability. New features may be introduced, but nothing specific is planned.
+
+At this point, bugs and API issues receive the highest priority.
