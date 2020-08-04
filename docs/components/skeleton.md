@@ -149,33 +149,46 @@ Set a matching width and height to make a circle, square, or rounded avatar skel
 Use the `--border-radius` custom property to make circles, squares, and rectangles. For more complex shapes, you can apply `clip-path` to the `indicator` part. [Try Clippy](https://bennettfeely.com/clippy/) if you need help generating custom shapes.
 
 ```html preview
-<div class="skeleton-sizes">
-  <sl-skeleton style="width: 100px; height: 100px; --border-radius: var(--sl-border-radius-medium);"></sl-skeleton>
-  <sl-skeleton style="width: 100px; height: 100px; --border-radius: var(--sl-border-radius-circle);"></sl-skeleton>
-  <sl-skeleton style="width: 100px; height: 100px; --border-radius: 0;"></sl-skeleton>
-  <sl-skeleton style="width: 100px; height: 100px; --border-radius: 0;"></sl-skeleton>
-  <sl-skeleton style="width: 100px; height: 100px; --border-radius: 0;"></sl-skeleton>
+<div class="skeleton-shapes">
+  <sl-skeleton class="square"></sl-skeleton>
+  <sl-skeleton class="circle"></sl-skeleton>
+  <sl-skeleton class="triangle"></sl-skeleton>
+  <sl-skeleton class="cross"></sl-skeleton>
+  <sl-skeleton class="comment"></sl-skeleton>
 </div>
 
 <style>
-  .skeleton-sizes sl-skeleton {
+  .skeleton-shapes sl-skeleton {
     display: inline-flex;
+    width: 50px;
+    height: 50px;
   }
 
-  .skeleton-sizes sl-skeleton:nth-child(3)::part(indicator) {
+  .skeleton-shapes .square::part(indicator) {
+    --border-radius: var(--sl-border-radius-medium);
+  }
+
+  .skeleton-shapes .circle::part(indicator) {
+    --border-radius: var(--sl-border-radius-circle);
+  }
+
+  .skeleton-shapes .triangle::part(indicator) {
+    --border-radius: 0;
     clip-path: polygon(50% 0, 0 100%, 100% 100%);
   }
 
-  .skeleton-sizes sl-skeleton:nth-child(4)::part(indicator) {
+  .skeleton-shapes .cross::part(indicator) {
+    --border-radius: 0;
     clip-path: polygon(20% 0%, 0% 20%, 30% 50%, 0% 80%, 20% 100%, 50% 70%, 80% 100%, 100% 80%, 70% 50%, 100% 20%, 80% 0%, 50% 30%);
   }
 
-  .skeleton-sizes sl-skeleton:nth-child(5)::part(indicator) {
+  .skeleton-shapes .comment::part(indicator) {
+    --border-radius: 0;
     clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 75% 75%, 75% 100%, 50% 75%, 0% 75%);
   }
 
-  .skeleton-sizes sl-skeleton:not(:last-child) {
-    margin-right: 1rem;
+  .skeleton-shapes sl-skeleton:not(:last-child) {
+    margin-right: .5rem;
   }
 </style>
 ```
