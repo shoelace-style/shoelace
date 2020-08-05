@@ -65,7 +65,8 @@ export class Details {
 
     // Show on init if open
     if (this.open) {
-      this.show();
+      this.body.style.height = 'auto';
+      this.body.style.overflow = 'visible';
     }
   }
 
