@@ -33,7 +33,9 @@ export class IconButton {
   }
 
   componentDidUnload() {
-    focusVisible.unobserve(this.button);
+    if (this.button) {
+      focusVisible.unobserve(this.button);
+    }
   }
 
   render() {

@@ -90,8 +90,14 @@ export class TabGroup {
 
   componentDidUnload() {
     this.mutationObserver.disconnect();
-    focusVisible.unobserve(this.tabGroup);
-    this.resizeObserver.unobserve(this.nav);
+
+    if (this.tabGroup) {
+      focusVisible.unobserve(this.tabGroup);
+    }
+
+    if (this.nav) {
+      this.resizeObserver.unobserve(this.nav);
+    }
   }
 
   /** Shows the specified tab panel. */
