@@ -65,8 +65,7 @@ export class Details {
 
     // Show on init if open
     if (this.open) {
-      this.body.style.height = 'auto';
-      this.body.style.overflow = 'visible';
+      this.show();
     }
   }
 
@@ -83,8 +82,15 @@ export class Details {
       return false;
     }
 
-    this.body.style.height = `${this.body.scrollHeight}px`;
-    this.body.style.overflow = 'hidden';
+    if (this.body.scrollHeight === 0) {
+      // When the scroll height can't be measured, use auto. This prevents a borked open state when the details is open
+      // intiially, but not immediately visible (i.e. in a tab panel).
+      this.body.style.height = 'auto';
+      this.body.style.overflow = 'visible';
+    } else {
+      this.body.style.height = `${this.body.scrollHeight}px`;
+      this.body.style.overflow = 'hidden';
+    }
 
     this.open = true;
   }
