@@ -70,7 +70,7 @@ export class Details {
   }
 
   componentDidUnload() {
-    focusVisible.observe(this.details);
+    focusVisible.unobserve(this.details);
   }
 
   /** Shows the alert. */
