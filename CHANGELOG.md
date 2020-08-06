@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.0-beta.12
+
+- Fixed a bug where buttons would have horizontal spacing in Safari
+
 ## 2.0.0-beta.11
 
 - Added button group component
