@@ -3,7 +3,7 @@
 ## 2.0.0-beta.12
 
 - Fixed a bug where buttons would have horizontal spacing in Safari
-- Fixed a bug that caused an import resolution when using Shoelace in a Stencil app
+- Fixed a bug that caused an import resolution error when using Shoelace in a Stencil app
 
 ## 2.0.0-beta.11
 
