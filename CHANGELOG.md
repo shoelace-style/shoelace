@@ -1,12 +1,17 @@
 # Changelog
 
-## 2.0.0-beta.10
+## 2.0.0-beta.11
 
 - Added button group component
+- Fixed icon button alignment
+- Fixed a bug where focus visible observer wasn't removed from `sl-details`
+- Replaced the deprecated `componentDidUnload` lifecycle method with `disconnectedCallback` to prevent issues with frameworks
+
+## 2.0.0-beta.10
+
 - Added community page to the docs
 - Fixed a bug where many components would erroneously receive an `id` when using the custom elements bundle
 - Fixed a bug where tab groups weren't scrollable with the mouse
-- Fixed icon button alignment
 
 ## 2.0.0-beta.9
 
