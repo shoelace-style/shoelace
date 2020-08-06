@@ -13,6 +13,7 @@
   - [Avatar](/components/avatar.md)
   - [Badge](/components/badge.md)
   - [Button](/components/button.md)
+  - [Button Group](/components/button-group.md)
   - [Card](/components/card.md)
   - [Checkbox](/components/checkbox.md)
   - [Color Picker](/components/color-picker.md)

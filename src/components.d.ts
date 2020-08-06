@@ -110,6 +110,12 @@ export namespace Components {
          */
         "value": string;
     }
+    interface SlButtonGroup {
+        /**
+          * A label to use for the button groups `aria-label` attribute.
+         */
+        "label": string;
+    }
     interface SlCard {
     }
     interface SlCheckbox {
@@ -930,6 +936,12 @@ declare global {
         prototype: HTMLSlButtonElement;
         new (): HTMLSlButtonElement;
     };
+    interface HTMLSlButtonGroupElement extends Components.SlButtonGroup, HTMLStencilElement {
+    }
+    var HTMLSlButtonGroupElement: {
+        prototype: HTMLSlButtonGroupElement;
+        new (): HTMLSlButtonGroupElement;
+    };
     interface HTMLSlCardElement extends Components.SlCard, HTMLStencilElement {
     }
     var HTMLSlCardElement: {
@@ -1115,6 +1127,7 @@ declare global {
         "sl-avatar": HTMLSlAvatarElement;
         "sl-badge": HTMLSlBadgeElement;
         "sl-button": HTMLSlButtonElement;
+        "sl-button-group": HTMLSlButtonGroupElement;
         "sl-card": HTMLSlCardElement;
         "sl-checkbox": HTMLSlCheckboxElement;
         "sl-color-picker": HTMLSlColorPickerElement;
@@ -1259,6 +1272,12 @@ declare namespace LocalJSX {
           * An optional value for the button.
          */
         "value"?: string;
+    }
+    interface SlButtonGroup {
+        /**
+          * A label to use for the button groups `aria-label` attribute.
+         */
+        "label"?: string;
     }
     interface SlCard {
     }
@@ -2143,6 +2162,7 @@ declare namespace LocalJSX {
         "sl-avatar": SlAvatar;
         "sl-badge": SlBadge;
         "sl-button": SlButton;
+        "sl-button-group": SlButtonGroup;
         "sl-card": SlCard;
         "sl-checkbox": SlCheckbox;
         "sl-color-picker": SlColorPicker;
@@ -2183,6 +2203,7 @@ declare module "@stencil/core" {
             "sl-avatar": LocalJSX.SlAvatar & JSXBase.HTMLAttributes<HTMLSlAvatarElement>;
             "sl-badge": LocalJSX.SlBadge & JSXBase.HTMLAttributes<HTMLSlBadgeElement>;
             "sl-button": LocalJSX.SlButton & JSXBase.HTMLAttributes<HTMLSlButtonElement>;
+            "sl-button-group": LocalJSX.SlButtonGroup & JSXBase.HTMLAttributes<HTMLSlButtonGroupElement>;
             "sl-card": LocalJSX.SlCard & JSXBase.HTMLAttributes<HTMLSlCardElement>;
             "sl-checkbox": LocalJSX.SlCheckbox & JSXBase.HTMLAttributes<HTMLSlCheckboxElement>;
             "sl-color-picker": LocalJSX.SlColorPicker & JSXBase.HTMLAttributes<HTMLSlColorPickerElement>;
