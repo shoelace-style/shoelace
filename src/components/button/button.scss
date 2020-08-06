@@ -58,6 +58,12 @@
   margin-right: calc(-1 * var(--sl-spacing-x-small));
 }
 
+.button__label {
+  ::slotted(sl-icon) {
+    vertical-align: -2px;
+  }
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Standard buttons
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -303,12 +309,6 @@
 .button--circle {
   padding-left: 0;
   padding-right: 0;
-
-  .button__label {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
 
   &.button--small {
     width: var(--sl-input-height-small);
