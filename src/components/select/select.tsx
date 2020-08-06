@@ -121,7 +121,7 @@ export class Select {
     requestAnimationFrame(() => this.syncItemsFromValue());
   }
 
-  componentDidUnload() {
+  disconnectedCallback() {
     this.menu.querySelector('slot').removeEventListener('slotchange', this.handleSlotChange);
   }
 

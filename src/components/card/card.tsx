@@ -34,8 +34,9 @@ export class Card {
     this.host.shadowRoot.addEventListener('slotchange', this.updateSlots);
   }
 
-  componentDidUnload() {
+  disconnectedCallback() {
     this.host.shadowRoot.removeEventListener('slotchange', this.updateSlots);
+    console.log('cleanup');
   }
 
   updateSlots() {

@@ -118,7 +118,7 @@ export class Dropdown {
     }
   }
 
-  componentDidUnload() {
+  disconnectedCallback() {
     this.hide();
     this.popover.destroy();
   }

@@ -32,7 +32,7 @@ export class IconButton {
     focusVisible.observe(this.button);
   }
 
-  componentDidUnload() {
+  disconnectedCallback() {
     focusVisible.unobserve(this.button);
   }
 

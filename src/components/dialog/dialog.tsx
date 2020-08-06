@@ -90,7 +90,7 @@ export class Dialog {
     }
   }
 
-  componentDidUnload() {
+  disconnectedCallback() {
     unlockBodyScrolling(this.host);
 
     this.host.shadowRoot.removeEventListener('slotchange', this.updateSlots);

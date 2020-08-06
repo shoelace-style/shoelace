@@ -74,7 +74,7 @@ export class Rating {
     focusVisible.observe(this.rating);
   }
 
-  componentDidUnload() {
+  disconnectedCallback() {
     focusVisible.unobserve(this.rating);
   }
 

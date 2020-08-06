@@ -88,7 +88,7 @@ export class TabGroup {
     this.mutationObserver.observe(this.host, { attributes: true, childList: true, subtree: true });
   }
 
-  componentDidUnload() {
+  disconnectedCallback() {
     this.mutationObserver.disconnect();
     focusVisible.unobserve(this.tabGroup);
     this.resizeObserver.unobserve(this.nav);

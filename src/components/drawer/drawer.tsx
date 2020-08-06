@@ -98,7 +98,7 @@ export class Drawer {
     }
   }
 
-  componentDidUnload() {
+  disconnectedCallback() {
     unlockBodyScrolling(this.host);
 
     this.host.shadowRoot.removeEventListener('slotchange', this.updateSlots);

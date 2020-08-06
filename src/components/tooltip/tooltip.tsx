@@ -114,7 +114,7 @@ export class Tooltip {
     this.syncOptions();
   }
 
-  componentDidUnload() {
+  disconnectedCallback() {
     this.popover.destroy();
 
     this.host.removeEventListener('blur', this.handleBlur, true);

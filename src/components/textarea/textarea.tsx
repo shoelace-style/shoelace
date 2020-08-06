@@ -114,7 +114,7 @@ export class Textarea {
     this.resizeObserver.observe(this.textarea);
   }
 
-  componentDidUnload() {
+  disconnectedCallback() {
     this.resizeObserver.unobserve(this.textarea);
   }
 

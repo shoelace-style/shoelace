@@ -69,7 +69,7 @@ export class Details {
     }
   }
 
-  componentDidUnload() {
+  disconnectedCallback() {
     focusVisible.unobserve(this.details);
   }
 
