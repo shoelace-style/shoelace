@@ -75,9 +75,7 @@ export class Rating {
   }
 
   componentDidUnload() {
-    if (this.rating) {
-      focusVisible.unobserve(this.rating);
-    }
+    focusVisible.unobserve(this.rating);
   }
 
   getValueFromMousePosition(event: MouseEvent) {

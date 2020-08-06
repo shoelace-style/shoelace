@@ -115,7 +115,7 @@ export class Tooltip {
   }
 
   componentDidUnload() {
-    this.popover?.destroy();
+    this.popover.destroy();
 
     this.host.removeEventListener('blur', this.handleBlur, true);
     this.host.removeEventListener('click', this.handleClick, true);
