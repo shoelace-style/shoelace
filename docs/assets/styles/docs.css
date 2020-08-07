@@ -309,6 +309,14 @@ strong {
   padding: 2px 4px;
 }
 
+.markdown-section kbd {
+  font-family: var(--sl-font-mono);
+  font-size: 87.5%;
+  border-radius: var(--sl-border-radius-small);
+  border: solid 1px var(--sl-color-gray-90);
+  padding: 2px 4px;
+}
+
 /* Code blocks */
 .markdown-section pre {
   position: relative;
