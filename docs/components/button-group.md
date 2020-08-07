@@ -106,7 +106,6 @@ Dropdowns can be placed inside button groups as long as the trigger is a `<sl-dr
 <sl-button-group> 
   <sl-button>Button</sl-button>
   <sl-button>Button</sl-button>
-
   <sl-dropdown>
     <sl-button slot="trigger" caret>Dropdown</sl-button>
     <sl-menu>
@@ -115,7 +114,6 @@ Dropdowns can be placed inside button groups as long as the trigger is a `<sl-dr
       <sl-menu-item>Item 3</sl-menu-item>
     </sl-menu>
   </sl-dropdown>
-
 </sl-button-group>
 ```
 
