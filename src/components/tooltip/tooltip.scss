@@ -22,7 +22,7 @@
 }
 
 .tooltip {
-  position: relative;
+  position: absolute;
   max-width: var(--max-width);
   z-index: var(--sl-z-index-tooltip);
   border-radius: var(--sl-tooltip-border-radius);

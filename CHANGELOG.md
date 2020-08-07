@@ -3,6 +3,7 @@
 ## 2.0.0-beta.13
 
 - Fixed a bug where link buttons would have `type="button"`
+- Fixed a bug where button groups with tooltips experienced an odd spacing issue in Safari
 
 ## 2.0.0-beta.12
 
