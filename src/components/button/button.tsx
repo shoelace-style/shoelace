@@ -140,7 +140,7 @@ export class Button {
           'button--pill': this.pill
         }}
         disabled={this.disabled}
-        type={isButton && this.submit ? 'submit' : 'button'}
+        type={isButton ? (this.submit ? 'submit' : 'button') : null}
         name={isButton ? this.name : null}
         value={isButton ? this.value : null}
         href={isLink && this.href}

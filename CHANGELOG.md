@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.0-beta.13
+
+- Fixed a bug where link buttons would have `type="button"`
+
 ## 2.0.0-beta.12
 
 - Added support for `href`, `target`, and `download` to buttons
