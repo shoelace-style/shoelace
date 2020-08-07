@@ -74,11 +74,19 @@ export namespace Components {
          */
         "disabled": boolean;
         /**
+          * Tells the browser to download the linked file as this filename. Only used when `href` is set.
+         */
+        "download": string;
+        /**
+          * When set, the underlying button will be rendered as an `<a>` with this `href` instead of a `<button>`.
+         */
+        "href": string;
+        /**
           * Set to true to draw the button in a loading state.
          */
         "loading": boolean;
         /**
-          * An optional name for the button.
+          * An optional name for the button. Ignored when `href` is set.
          */
         "name": string;
         /**
@@ -98,15 +106,19 @@ export namespace Components {
          */
         "size": 'small' | 'medium' | 'large';
         /**
-          * Indicates if activating the button should submit the form.
+          * Indicates if activating the button should submit the form. Ignored when `href` is set.
          */
         "submit": boolean;
+        /**
+          * Tells the browser where to open the link. Only used when `href` is set.
+         */
+        "target": '_blank' | '_parent' | '_self' | '_top';
         /**
           * The button's type.
          */
         "type": 'default' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text';
         /**
-          * An optional value for the button.
+          * An optional value for the button. Ignored when `href` is set.
          */
         "value": string;
     }
@@ -1237,11 +1249,19 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
+          * Tells the browser to download the linked file as this filename. Only used when `href` is set.
+         */
+        "download"?: string;
+        /**
+          * When set, the underlying button will be rendered as an `<a>` with this `href` instead of a `<button>`.
+         */
+        "href"?: string;
+        /**
           * Set to true to draw the button in a loading state.
          */
         "loading"?: boolean;
         /**
-          * An optional name for the button.
+          * An optional name for the button. Ignored when `href` is set.
          */
         "name"?: string;
         /**
@@ -1261,15 +1281,19 @@ declare namespace LocalJSX {
          */
         "size"?: 'small' | 'medium' | 'large';
         /**
-          * Indicates if activating the button should submit the form.
+          * Indicates if activating the button should submit the form. Ignored when `href` is set.
          */
         "submit"?: boolean;
+        /**
+          * Tells the browser where to open the link. Only used when `href` is set.
+         */
+        "target"?: '_blank' | '_parent' | '_self' | '_top';
         /**
           * The button's type.
          */
         "type"?: 'default' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text';
         /**
-          * An optional value for the button.
+          * An optional value for the button. Ignored when `href` is set.
          */
         "value"?: string;
     }

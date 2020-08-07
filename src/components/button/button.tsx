@@ -40,20 +40,29 @@ export class Button {
   /** Set to true to draw the button in a loading state. */
   @Prop() loading = false;
 
-  /** An optional name for the button. */
-  @Prop() name: string;
-
   /** Set to true to draw a pill-style button with rounded edges. */
   @Prop() pill = false;
 
   /** Set to true to draw a circle button. */
   @Prop() circle = false;
 
-  /** An optional value for the button. */
+  /** Indicates if activating the button should submit the form. Ignored when `href` is set. */
+  @Prop() submit = false;
+
+  /** An optional name for the button. Ignored when `href` is set. */
+  @Prop() name: string;
+
+  /** An optional value for the button. Ignored when `href` is set. */
   @Prop() value: string;
 
-  /** Indicates if activating the button should submit the form. */
-  @Prop() submit = false;
+  /** When set, the underlying button will be rendered as an `<a>` with this `href` instead of a `<button>`. */
+  @Prop() href: string;
+
+  /** Tells the browser where to open the link. Only used when `href` is set. */
+  @Prop() target: '_blank' | '_parent' | '_self' | '_top';
+
+  /** Tells the browser to download the linked file as this filename. Only used when `href` is set. */
+  @Prop() download: string;
 
   /** Emitted when the button loses focus. */
   @Event() slBlur: EventEmitter;
@@ -97,8 +106,12 @@ export class Button {
   }
 
   render() {
+    const isLink = this.href ? true : false;
+    const isButton = !isLink;
+    const Button = isLink ? 'a' : 'button';
+
     return (
-      <button
+      <Button
         ref={el => (this.button = el)}
         part="base"
         class={{
@@ -126,10 +139,14 @@ export class Button {
           'button--loading': this.loading,
           'button--pill': this.pill
         }}
-        name={this.name}
-        value={this.value}
         disabled={this.disabled}
-        type={this.submit ? 'submit' : 'button'}
+        type={isButton && this.submit ? 'submit' : 'button'}
+        name={isButton ? this.name : null}
+        value={isButton ? this.value : null}
+        href={isLink && this.href}
+        target={isLink && this.target ? this.target : null}
+        download={isLink && this.download ? this.download : null}
+        rel={isLink && this.target ? 'noreferrer noopener' : null}
         onBlur={this.handleBlur}
         onFocus={this.handleFocus}
         onClick={this.handleClick}
@@ -159,7 +176,7 @@ export class Button {
         )}
 
         {this.loading && <sl-spinner />}
-      </button>
+      </Button>
     );
   }
 }

@@ -63,6 +63,19 @@ Use the `text` type to create text buttons that share the same size as regular b
 <sl-button type="text" size="large">Text</sl-button>
 ```
 
+### Link Buttons
+
+It's often helpful to have a button that works like a link. This is possible by setting the `href` attribute, which will make the component render an `<a>` under the hood. This gives you all the default link behavior the browser provides (e.g. <kbd>CMD/CTRL/SHIFT + CLICK</kbd>) and exposes the `target` and `download` attributes.
+
+```html preview
+<sl-button href="https://example.com/">Link</sl-button>
+<sl-button href="https://example.com/" target="_blank">New Window</sl-button>
+<sl-button href="/assets/images/wordmark.svg" download="shoelace.svg">Download</sl-button>
+<sl-button href="https://example.com/" disabled>Disabled</sl-button>
+```
+
+?> When a `target` is set, the link will receive `rel="noreferrer noopener"` for [security reasons](https://mathiasbynens.github.io/rel-noopener/).
+
 ### Setting a Custom Width
 
 As expected, buttons can be given a custom width by setting its `width`. This is useful for making buttons span the full width of their container on smaller screens.

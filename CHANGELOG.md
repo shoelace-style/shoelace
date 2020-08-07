@@ -2,6 +2,7 @@
 
 ## 2.0.0-beta.12
 
+- Added support for `href`, `target`, and `download` to buttons
 - Fixed a bug where buttons would have horizontal spacing in Safari
 - Fixed a bug that caused an import resolution error when using Shoelace in a Stencil app
 
