@@ -137,6 +137,11 @@ strong {
   padding: 0 1rem;
 }
 
+.sidebar-nav li {
+  line-height: 1;
+  padding: 0;
+}
+
 .sidebar-nav a {
   color: inherit;
   text-decoration: none;
