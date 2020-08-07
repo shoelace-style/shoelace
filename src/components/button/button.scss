@@ -21,6 +21,7 @@
   transition: var(--sl-transition-fast) background-color, var(--sl-transition-fast) color,
     var(--sl-transition-fast) border, var(--sl-transition-fast) box-shadow;
   cursor: inherit;
+  text-decoration: none;
 
   &::-moz-focus-inner {
     border: 0;

@@ -469,6 +469,64 @@ export namespace Components {
          */
         "value": string;
     }
+    interface SlLinkButton {
+        /**
+          * Set to true to draw the button with a caret for use with dropdowns, popovers, etc.
+         */
+        "caret": boolean;
+        /**
+          * Set to true to draw a circle button.
+         */
+        "circle": boolean;
+        /**
+          * Set to true to disable the button.
+         */
+        "disabled": boolean;
+        /**
+          * An url destination of the button.
+         */
+        "href": string;
+        /**
+          * Set to true to draw the button in a loading state.
+         */
+        "loading": boolean;
+        /**
+          * An optional name for the button.
+         */
+        "name": string;
+        /**
+          * Set to true to draw a pill-style button with rounded edges.
+         */
+        "pill": boolean;
+        /**
+          * Removes focus from the button.
+         */
+        "removeFocus": () => Promise<void>;
+        /**
+          * Sets focus on the button.
+         */
+        "setFocus": () => Promise<void>;
+        /**
+          * The button's size.
+         */
+        "size": 'small' | 'medium' | 'large';
+        /**
+          * Indicates if activating the button should submit the form.
+         */
+        "submit": boolean;
+        /**
+          * Set the browsing context of the link
+         */
+        "target": string;
+        /**
+          * The button's type.
+         */
+        "type": 'default' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text';
+        /**
+          * An optional value for the button.
+         */
+        "value": string;
+    }
     interface SlMenu {
         /**
           * Removes focus from the menu.
@@ -1008,6 +1066,12 @@ declare global {
         prototype: HTMLSlInputElement;
         new (): HTMLSlInputElement;
     };
+    interface HTMLSlLinkButtonElement extends Components.SlLinkButton, HTMLStencilElement {
+    }
+    var HTMLSlLinkButtonElement: {
+        prototype: HTMLSlLinkButtonElement;
+        new (): HTMLSlLinkButtonElement;
+    };
     interface HTMLSlMenuElement extends Components.SlMenu, HTMLStencilElement {
     }
     var HTMLSlMenuElement: {
@@ -1139,6 +1203,7 @@ declare global {
         "sl-icon": HTMLSlIconElement;
         "sl-icon-button": HTMLSlIconButtonElement;
         "sl-input": HTMLSlInputElement;
+        "sl-link-button": HTMLSlLinkButtonElement;
         "sl-menu": HTMLSlMenuElement;
         "sl-menu-divider": HTMLSlMenuDividerElement;
         "sl-menu-item": HTMLSlMenuItemElement;
@@ -1692,6 +1757,64 @@ declare namespace LocalJSX {
          */
         "value"?: string;
     }
+    interface SlLinkButton {
+        /**
+          * Set to true to draw the button with a caret for use with dropdowns, popovers, etc.
+         */
+        "caret"?: boolean;
+        /**
+          * Set to true to draw a circle button.
+         */
+        "circle"?: boolean;
+        /**
+          * Set to true to disable the button.
+         */
+        "disabled"?: boolean;
+        /**
+          * An url destination of the button.
+         */
+        "href"?: string;
+        /**
+          * Set to true to draw the button in a loading state.
+         */
+        "loading"?: boolean;
+        /**
+          * An optional name for the button.
+         */
+        "name"?: string;
+        /**
+          * Emitted when the button loses focus.
+         */
+        "onSlBlur"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the button gains focus.
+         */
+        "onSlFocus"?: (event: CustomEvent<any>) => void;
+        /**
+          * Set to true to draw a pill-style button with rounded edges.
+         */
+        "pill"?: boolean;
+        /**
+          * The button's size.
+         */
+        "size"?: 'small' | 'medium' | 'large';
+        /**
+          * Indicates if activating the button should submit the form.
+         */
+        "submit"?: boolean;
+        /**
+          * Set the browsing context of the link
+         */
+        "target"?: string;
+        /**
+          * The button's type.
+         */
+        "type"?: 'default' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text';
+        /**
+          * An optional value for the button.
+         */
+        "value"?: string;
+    }
     interface SlMenu {
         /**
           * Emitted when the menu loses focus.
@@ -2174,6 +2297,7 @@ declare namespace LocalJSX {
         "sl-icon": SlIcon;
         "sl-icon-button": SlIconButton;
         "sl-input": SlInput;
+        "sl-link-button": SlLinkButton;
         "sl-menu": SlMenu;
         "sl-menu-divider": SlMenuDivider;
         "sl-menu-item": SlMenuItem;
@@ -2215,6 +2339,7 @@ declare module "@stencil/core" {
             "sl-icon": LocalJSX.SlIcon & JSXBase.HTMLAttributes<HTMLSlIconElement>;
             "sl-icon-button": LocalJSX.SlIconButton & JSXBase.HTMLAttributes<HTMLSlIconButtonElement>;
             "sl-input": LocalJSX.SlInput & JSXBase.HTMLAttributes<HTMLSlInputElement>;
+            "sl-link-button": LocalJSX.SlLinkButton & JSXBase.HTMLAttributes<HTMLSlLinkButtonElement>;
             "sl-menu": LocalJSX.SlMenu & JSXBase.HTMLAttributes<HTMLSlMenuElement>;
             "sl-menu-divider": LocalJSX.SlMenuDivider & JSXBase.HTMLAttributes<HTMLSlMenuDividerElement>;
             "sl-menu-item": LocalJSX.SlMenuItem & JSXBase.HTMLAttributes<HTMLSlMenuItemElement>;
