@@ -59,6 +59,18 @@ To allow multiple options to be selected, use the `multiple` attribute.
   <sl-menu-item value="option-4">Option 4</sl-menu-item>
   <sl-menu-item value="option-5">Option 5</sl-menu-item>
   <sl-menu-item value="option-6">Option 6</sl-menu-item>
+  <sl-menu-divider></sl-menu-divider>
+  <sl-menu-item value="option-7">Option 7</sl-menu-item>
+  <sl-menu-item value="option-8">Option 8</sl-menu-item>
+  <sl-menu-item value="option-9">Option 9</sl-menu-item>
+  <sl-menu-divider></sl-menu-divider>
+  <sl-menu-item value="option-10">Option 10</sl-menu-item>
+  <sl-menu-item value="option-11">Option 11</sl-menu-item>
+  <sl-menu-item value="option-12">Option 12</sl-menu-item>
+  <sl-menu-divider></sl-menu-divider>
+  <sl-menu-item value="option-13">Option 13</sl-menu-item>
+  <sl-menu-item value="option-14">Option 14</sl-menu-item>
+  <sl-menu-item value="option-15">Option 15</sl-menu-item>
 </sl-select>
 ```
 

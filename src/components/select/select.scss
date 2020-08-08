@@ -37,3 +37,7 @@
 .select--open .select__icon sl-icon {
   transform: rotate(-180deg);
 }
+
+sl-menu.select__menu::part(base) {
+  max-height: 50vh;
+}
