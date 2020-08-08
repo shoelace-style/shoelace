@@ -15,6 +15,7 @@
 .dropdown__panel {
   position: absolute;
   z-index: var(--sl-z-index-dropdown);
+  max-height: 50vh;
   font-family: var(--sl-font-sans);
   font-size: var(--sl-font-size-medium);
   font-weight: var(--sl-font-weight-normal);
@@ -25,13 +26,10 @@
   box-shadow: var(--sl-shadow-large);
   opacity: 0;
   overflow: auto;
+  overscroll-behavior: none;
   transition: var(--sl-transition-fast) opacity;
 
   &.popover-visible {
     opacity: 1;
-  }
-
-  ::slotted(sl-menu) {
-    max-height: 50vh;
   }
 }

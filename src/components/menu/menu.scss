@@ -6,8 +6,6 @@
 
 .menu {
   padding: var(--sl-spacing-x-small) 0;
-  overflow-y: auto;
-  overscroll-behavior: none;
 
   &:focus {
     outline: none;

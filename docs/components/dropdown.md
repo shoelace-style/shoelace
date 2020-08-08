@@ -15,6 +15,23 @@ Dropdowns are designed to work well with [menus](/components/menu.md) to provide
     <sl-menu-item>Dropdown Item 1</sl-menu-item>
     <sl-menu-item>Dropdown Item 2</sl-menu-item>
     <sl-menu-item>Dropdown Item 3</sl-menu-item>
+    <sl-menu-item>Dropdown Item 4</sl-menu-item>
+    <sl-menu-item>Dropdown Item 5</sl-menu-item>
+    <sl-menu-item>Dropdown Item 6</sl-menu-item>
+    <sl-menu-item>Dropdown Item 7</sl-menu-item>
+    <sl-menu-item>Dropdown Item 8</sl-menu-item>
+    <sl-menu-item>Dropdown Item 9</sl-menu-item>
+    <sl-menu-item>Dropdown Item 10</sl-menu-item>
+    <sl-menu-item>Dropdown Item 11</sl-menu-item>
+    <sl-menu-item>Dropdown Item 12</sl-menu-item>
+    <sl-menu-item>Dropdown Item 13</sl-menu-item>
+    <sl-menu-item>Dropdown Item 14</sl-menu-item>
+    <sl-menu-item>Dropdown Item 15</sl-menu-item>
+    <sl-menu-item>Dropdown Item 16</sl-menu-item>
+    <sl-menu-item>Dropdown Item 17</sl-menu-item>
+    <sl-menu-item>Dropdown Item 18</sl-menu-item>
+    <sl-menu-item>Dropdown Item 19</sl-menu-item>
+    <sl-menu-item>Dropdown Item 20</sl-menu-item>
     <sl-menu-divider></sl-menu-divider>
     <sl-menu-item checked>Checked</sl-menu-item>
     <sl-menu-item disabled>Disabled</sl-menu-item>

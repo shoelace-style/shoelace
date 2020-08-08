@@ -9,10 +9,24 @@ Selects allow you to choose one or more items from a dropdown menu.
   <sl-menu-item value="option-1">Option 1</sl-menu-item>
   <sl-menu-item value="option-2">Option 2</sl-menu-item>
   <sl-menu-item value="option-3">Option 3</sl-menu-item>
-  <sl-menu-divider></sl-menu-divider>
   <sl-menu-item value="option-4">Option 4</sl-menu-item>
   <sl-menu-item value="option-5">Option 5</sl-menu-item>
   <sl-menu-item value="option-6">Option 6</sl-menu-item>
+  <sl-menu-item value="option-7">Option 7</sl-menu-item>
+  <sl-menu-item value="option-8">Option 8</sl-menu-item>
+  <sl-menu-item value="option-9">Option 9</sl-menu-item>
+  <sl-menu-item value="option-10">Option 10</sl-menu-item>
+  <sl-menu-divider></sl-menu-divider>
+  <sl-menu-item value="option-11">Option 11</sl-menu-item>
+  <sl-menu-item value="option-12">Option 12</sl-menu-item>
+  <sl-menu-item value="option-13">Option 13</sl-menu-item>
+  <sl-menu-item value="option-14">Option 14</sl-menu-item>
+  <sl-menu-item value="option-15">Option 15</sl-menu-item>
+  <sl-menu-item value="option-16">Option 16</sl-menu-item>
+  <sl-menu-item value="option-17">Option 17</sl-menu-item>
+  <sl-menu-item value="option-18">Option 18</sl-menu-item>
+  <sl-menu-item value="option-19">Option 19</sl-menu-item>
+  <sl-menu-item value="option-20">Option 20</sl-menu-item>
 </sl-select>
 ```
 
