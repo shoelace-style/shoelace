@@ -1,5 +1,4 @@
 import { Component, Event, EventEmitter, Method, State, h } from '@stencil/core';
-import { scrollIntoView } from '../../utilities/scroll';
 import { getTextContent } from '../../utilities/slot';
 
 /**
@@ -96,12 +95,6 @@ export class Menu {
     this.getItems().map(i => (i.active = i === item));
   }
 
-  scrollItemIntoView(item: HTMLSlMenuItemElement) {
-    if (item) {
-      scrollIntoView(item, this.menu);
-    }
-  }
-
   handleFocus() {
     const item = this.getActiveItem();
     if (!item) {
@@ -170,7 +163,6 @@ export class Menu {
         if (index > items.length - 1) index = items.length - 1;
 
         this.setActiveItem(items[index]);
-        this.scrollItemIntoView(items[index]);
 
         return;
       }

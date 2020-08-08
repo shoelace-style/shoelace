@@ -1,4 +1,5 @@
 import { Component, Element, Event, EventEmitter, Method, Prop, Watch, h } from '@stencil/core';
+import { scrollIntoView } from '../../utilities/scroll';
 import Popover from '../../utilities/popover';
 
 let id = 0;
@@ -187,6 +188,8 @@ export class Dropdown {
   }
 
   handleDocumentKeyDown(event: KeyboardEvent) {
+    const menu = this.getMenu();
+
     // Close when escape is pressed
     if (event.key === 'Escape') {
       this.hide();
@@ -207,17 +210,25 @@ export class Dropdown {
       });
     }
 
-    // Prevent scrolling when certain keys are pressed
+    // Prevent the page from scrolling when certain keys are pressed
     if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
       event.preventDefault();
     }
 
     // If a menu is present, focus on it when certain keys are pressed
-    const menu = this.getMenu();
     if (menu && ['ArrowDown', 'ArrowUp'].includes(event.key)) {
       event.preventDefault();
       menu.setFocus();
-      return;
+    }
+
+    // If a menu is present, ensure the active menu item stays in view when the selection changes
+    if (menu && ['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
+      const menuItems = [...menu.querySelectorAll('sl-menu-item')];
+      const activeItem = menuItems.find(item => item.active);
+
+      if (activeItem) {
+        scrollIntoView(activeItem, this.panel);
+      }
     }
   }
 
