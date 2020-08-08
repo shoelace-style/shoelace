@@ -1,4 +1,4 @@
-import { Component, Prop, h } from '@stencil/core';
+import { Component, Event, EventEmitter, Prop, Watch, h } from '@stencil/core';
 
 /**
  * @since 2.0
@@ -32,6 +32,17 @@ export class MenuItem {
 
   /** Set to true to draw the menu item in a disabled state. */
   @Prop() disabled = false;
+
+  @Watch('active')
+  handleActiveChange() {
+    this.active ? this.slActivate.emit() : this.slDeactivate.emit();
+  }
+
+  /** Emitted when the menu item becomes active. */
+  @Event() slActivate: EventEmitter;
+
+  /** Emitted when the menu item becomes inactive. */
+  @Event() slDeactivate: EventEmitter;
 
   render() {
     return (

@@ -94,6 +94,7 @@ export class Dropdown {
   connectedCallback() {
     this.handleDocumentKeyDown = this.handleDocumentKeyDown.bind(this);
     this.handleDocumentMouseDown = this.handleDocumentMouseDown.bind(this);
+    this.handleMenuItemActivate = this.handleMenuItemActivate.bind(this);
     this.handlePanelSelect = this.handlePanelSelect.bind(this);
     this.handleTriggerKeyDown = this.handleTriggerKeyDown.bind(this);
     this.togglePanel = this.togglePanel.bind(this);
@@ -141,6 +142,7 @@ export class Dropdown {
     this.popover.show();
     this.ignoreOpenWatcher = false;
 
+    this.panel.addEventListener('slActivate', this.handleMenuItemActivate);
     this.panel.addEventListener('slSelect', this.handlePanelSelect);
     document.addEventListener('mousedown', this.handleDocumentMouseDown);
     document.addEventListener('keydown', this.handleDocumentKeyDown);
@@ -163,6 +165,7 @@ export class Dropdown {
     this.popover.hide();
     this.ignoreOpenWatcher = false;
 
+    this.panel.removeEventListener('slActivate', this.handleMenuItemActivate);
     this.panel.removeEventListener('slSelect', this.handlePanelSelect);
     document.removeEventListener('mousedown', this.handleDocumentMouseDown);
     document.removeEventListener('keydown', this.handleDocumentKeyDown);
@@ -220,16 +223,6 @@ export class Dropdown {
       event.preventDefault();
       menu.setFocus();
     }
-
-    // If a menu is present, ensure the active menu item stays in view when the selection changes
-    if (menu && ['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
-      const menuItems = [...menu.querySelectorAll('sl-menu-item')];
-      const activeItem = menuItems.find(item => item.active);
-
-      if (activeItem) {
-        scrollIntoView(activeItem, this.panel);
-      }
-    }
   }
 
   handleDocumentMouseDown(event: MouseEvent) {
@@ -239,6 +232,11 @@ export class Dropdown {
       this.hide();
       return;
     }
+  }
+
+  handleMenuItemActivate(event: CustomEvent) {
+    const item = event.target as HTMLSlMenuItemElement;
+    scrollIntoView(item, this.panel);
   }
 
   handlePanelSelect(event: CustomEvent) {

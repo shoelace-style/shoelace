@@ -1746,6 +1746,14 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
+          * Emitted when the menu item becomes active.
+         */
+        "onSlActivate"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the menu item becomes inactive.
+         */
+        "onSlDeactivate"?: (event: CustomEvent<any>) => void;
+        /**
           * A unique value to store in the menu item.
          */
         "value"?: string;
