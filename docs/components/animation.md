@@ -2,7 +2,7 @@
 
 [component-header:sl-animate]
 
-Animate...
+Animate elements declaratively using the [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API). Select from over 500 baked-in presets or roll your own with custom [keyframe formats](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API/Keyframe_Formats).
 
 ```html preview
 <sl-animation

@@ -1,6 +1,6 @@
+import { IAnimatable } from './models/animatable';
 import { KEYFRAMES } from './animations';
 import { EasingType, EASING_FUNCTIONS } from './easing/easing';
-import { IAnimatable } from './models/animatable';
 
 function createAnimation(element: HTMLElement, context: IAnimatable): Animation {
   const newKeyFrames = context.keyFrames || (context.name && KEYFRAMES[context.name]) || [];
@@ -13,15 +13,7 @@ function createAnimation(element: HTMLElement, context: IAnimatable): Animation 
   return newAnimation;
 }
 
-export function clearPropsWithOptions(context: IAnimatable, options: KeyframeAnimationOptions) {
-  for (const key in options) {
-    if (options.hasOwnProperty(key)) {
-      context[key] = undefined;
-    }
-  }
-}
-
-export function getAnimationOptions(context: IAnimatable): KeyframeAnimationOptions {
+function getAnimationOptions(context: IAnimatable): KeyframeAnimationOptions {
   const animationOptions: KeyframeAnimationOptions = context.options || {};
   if (context.delay !== undefined) animationOptions.delay = context.delay;
   if (context.duration !== undefined) animationOptions.duration = context.duration;
@@ -60,16 +52,16 @@ export class AnimationManager {
     const { element, state } = this;
     const newAnimation = createAnimation(element, state);
 
-    newAnimation.addEventListener('slFinish', this.onFinishAnimation);
-    newAnimation.addEventListener('slCancel', this.onCancelAnimation);
+    newAnimation.addEventListener('finish', this.onFinishAnimation);
+    newAnimation.addEventListener('cancel', this.onCancelAnimation);
 
     return (this.name = newAnimation);
   }
 
   clearAnimation() {
     if (this.name === null) return;
-    this.name.removeEventListener('slFinish', this.onFinishAnimation);
-    this.name.removeEventListener('slCancel', this.onCancelAnimation);
+    this.name.removeEventListener('finish', this.onFinishAnimation);
+    this.name.removeEventListener('cancel', this.onCancelAnimation);
     this.name = null;
   }
 

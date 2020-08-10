@@ -153,7 +153,7 @@ export namespace Components {
          */
         "autoPlay"?: boolean;
         /**
-          * Clears all `KeyframeEffects` caused by this animation and aborts its playback.
+          * Cancels the animation.
          */
         "cancel": () => Promise<void>;
         /**
@@ -185,19 +185,19 @@ export namespace Components {
          */
         "duration": number;
         /**
-          * The rate of the animation's change over time.
+          * The easing effect to use.
          */
-        "easing"?: string;
+        "easing": string;
         /**
           * The number of milliseconds to delay after the end of an animation.
          */
         "endDelay": number;
         /**
-          * Dictates whether the animation's effects should be reflected by the element(s) prior to playing ("backwards"), retained after the animation has completed playing ("forwards"), or both. Defaults to "none".
+          * Defines how the element to which the animation is applied should look when the animation sequence is not actively running, such as before the time specified by iterationStart or after animation's end time.
          */
         "fill"?: FillMode;
         /**
-          * Sets the current playback time to the end of the animation corresponding to the current playback direction.
+          * Sets the playback time to the end of the animation corresponding to the playback direction.
          */
         "finish": () => Promise<void>;
         /**
@@ -227,11 +227,11 @@ export namespace Components {
         /**
           * Describes at what point in the iteration the animation should start.
          */
-        "iterationStart"?: number;
+        "iterationStart": number;
         /**
           * The number of times the animation should repeat. Defaults to `1`, and can also take a value of `Infinity` to make it repeat for as long as the element exists.
          */
-        "iterations": any;
+        "iterations": number;
         /**
           * Keyframes of the animation.
          */
@@ -245,25 +245,21 @@ export namespace Components {
          */
         "options"?: KeyframeAnimationOptions;
         /**
-          * Suspends playback of the animation.
+          * Pauses the animation.
          */
         "pause": () => Promise<void>;
         /**
-          * Starts or resumes playing of an animation.
+          * Starts or resumes the animation.
          */
         "play": () => Promise<void>;
         /**
           * Sets the playback rate of the animation.
          */
-        "playbackRate"?: number;
-        /**
-          * Reverses the playback direction, meaning the animation ends at its beginning.
-         */
-        "reverse": () => Promise<void>;
+        "playbackRate": number;
         /**
           * Sets the scheduled time when an animation's playback should begin.
          */
-        "startTime"?: number;
+        "startTime": number;
     }
     interface SlAvatar {
         /**
@@ -1562,7 +1558,7 @@ declare namespace LocalJSX {
          */
         "duration"?: number;
         /**
-          * The rate of the animation's change over time.
+          * The easing effect to use.
          */
         "easing"?: string;
         /**
@@ -1570,7 +1566,7 @@ declare namespace LocalJSX {
          */
         "endDelay"?: number;
         /**
-          * Dictates whether the animation's effects should be reflected by the element(s) prior to playing ("backwards"), retained after the animation has completed playing ("forwards"), or both. Defaults to "none".
+          * Defines how the element to which the animation is applied should look when the animation sequence is not actively running, such as before the time specified by iterationStart or after animation's end time.
          */
         "fill"?: FillMode;
         /**
@@ -1584,7 +1580,7 @@ declare namespace LocalJSX {
         /**
           * The number of times the animation should repeat. Defaults to `1`, and can also take a value of `Infinity` to make it repeat for as long as the element exists.
          */
-        "iterations"?: any;
+        "iterations"?: number;
         /**
           * Keyframes of the animation.
          */
@@ -1594,15 +1590,15 @@ declare namespace LocalJSX {
          */
         "name"?: AnimationsType;
         /**
-          * This event is sent when the animation is cancelled.
+          * Emitted when the animation is canceled.
          */
         "onSlCancel"?: (event: CustomEvent<HTMLElement>) => void;
         /**
-          * This event is sent when the animation finishes playing.
+          * Emitted when the animation finishes.
          */
         "onSlFinish"?: (event: CustomEvent<HTMLElement>) => void;
         /**
-          * This event is sent when the animation is going to play.
+          * Emitted when the animation starts playing.
          */
         "onSlStart"?: (event: CustomEvent<HTMLElement>) => void;
         /**

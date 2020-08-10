@@ -3,6 +3,16 @@ import { IAnimatableComponent } from './models/animatable';
 import { AnimationsType, getKeyFramesByAnimation } from './animations';
 import { AnimationManager } from './manager';
 
+//
+// TODO:
+//
+// - combine manager and remove utils
+// - reorder watchers and methods
+// - support case-insensitive "infinity" in `iterations`
+// - document and provide CDN link for the Web Animations polyfill (which browsers actually require it?) https://github.com/web-animations/web-animations-js
+// - clean up animation and easing exports
+//
+
 /**
  * @since 2.0
  * @status experimental
@@ -42,7 +52,7 @@ export class Animate implements IAnimatableComponent {
   @Prop({ mutable: true }) duration = 0;
 
   /** Direction of the animation. */
-  @Prop({ mutable: true }) direction?: PlaybackDirection;
+  @Prop({ mutable: true }) direction?: PlaybackDirection = 'normal';
 
   /**
    * Determines how values are combined between this animation and other, separate animations that do not specify their
@@ -50,23 +60,23 @@ export class Animate implements IAnimatableComponent {
    */
   @Prop({ mutable: true }) composite: CompositeOperation = 'replace';
 
-  /** The rate of the animation's change over time. */
-  @Prop({ mutable: true }) easing?: string;
+  /** The easing effect to use. */
+  @Prop({ mutable: true }) easing = 'none';
 
   /**
-   * Dictates whether the animation's effects should be reflected by the element(s) prior to playing ("backwards"),
-   * retained after the animation has completed playing ("forwards"), or both. Defaults to "none".
+   * Defines how the element to which the animation is applied should look when the animation sequence is not actively
+   * running, such as before the time specified by iterationStart or after animation's end time.
    */
-  @Prop({ mutable: true }) fill?: FillMode;
+  @Prop({ mutable: true }) fill?: FillMode = 'none';
 
   /**
    * The number of times the animation should repeat. Defaults to `1`, and can also take a value of `Infinity` to make
    * it repeat for as long as the element exists.
    */
-  @Prop({ mutable: true }) iterations: any = 1;
+  @Prop({ mutable: true }) iterations = 1;
 
   /** Describes at what point in the iteration the animation should start. */
-  @Prop({ mutable: true }) iterationStart?: number;
+  @Prop({ mutable: true }) iterationStart = 0;
 
   /** Determines how values build from iteration to iteration in this animation. */
   @Prop({ mutable: true }) iterationComposite?: IterationCompositeOperation;
@@ -78,13 +88,13 @@ export class Animate implements IAnimatableComponent {
   @Prop() currentTime = 0;
 
   /** Sets the playback rate of the animation. */
-  @Prop() playbackRate?: number;
+  @Prop() playbackRate = 1;
 
   /** Sets the scheduled time when an animation's playback should begin. */
-  @Prop() startTime?: number;
+  @Prop() startTime = 0;
 
   @Watch('name')
-  handleAnimationChange(name: AnimationsType) {
+  handleNameChange(name: AnimationsType) {
     this.keyFrames = getKeyFramesByAnimation(name);
   }
 
@@ -138,43 +148,37 @@ export class Animate implements IAnimatableComponent {
     return Promise.resolve(this.manager.currentAnimation.playState);
   }
 
-  /** This event is sent when the animation is going to play. */
-  @Event({ bubbles: false }) slStart!: EventEmitter<HTMLElement>;
+  /** Emitted when the animation starts playing. */
+  @Event() slStart!: EventEmitter<HTMLElement>;
 
-  /** This event is sent when the animation finishes playing. */
-  @Event({ bubbles: false }) slFinish!: EventEmitter<HTMLElement>;
+  /** Emitted when the animation finishes. */
+  @Event() slFinish!: EventEmitter<HTMLElement>;
 
-  /** This event is sent when the animation is cancelled. */
-  @Event({ bubbles: false }) slCancel!: EventEmitter<HTMLElement>;
+  /** Emitted when the animation is canceled. */
+  @Event() slCancel!: EventEmitter<HTMLElement>;
 
-  /** Clears all `KeyframeEffects` caused by this animation and aborts its playback. */
+  /** Cancels the animation. */
   @Method()
   async cancel(): Promise<void> {
     this.manager.currentAnimation.cancel();
   }
 
-  /** Sets the current playback time to the end of the animation corresponding to the current playback direction. */
+  /** Sets the playback time to the end of the animation corresponding to the playback direction. */
   @Method()
   async finish(): Promise<void> {
     this.manager.currentAnimation.finish();
   }
 
-  /** Suspends playback of the animation. */
+  /** Pauses the animation. */
   @Method()
   async pause(): Promise<void> {
     this.manager.currentAnimation.pause();
   }
 
-  /** Starts or resumes playing of an animation. */
+  /** Starts or resumes the animation. */
   @Method()
   async play(): Promise<void> {
     this.manager.playAnimation();
-  }
-
-  /** Reverses the playback direction, meaning the animation ends at its beginning. */
-  @Method()
-  async reverse(): Promise<void> {
-    this.manager.currentAnimation.reverse();
   }
 
   /** Clear the current animation */
