@@ -180,7 +180,7 @@ strong {
 /* Splash */
 .splash {
   display: flex;
-  padding: 2rem 0;
+  padding-top: 2rem;
 }
 
 .splash-start {
@@ -220,6 +220,11 @@ strong {
   .splash-image {
     display: block;
     max-width: 400px;
+  }
+
+  /* Shields */
+  .splash + p {
+    margin-top: 2rem;
   }
 }
 
