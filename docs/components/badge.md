@@ -5,7 +5,7 @@
 Badges are used to draw attention and display statuses or counts.
 
 ```html preview
-<sl-badge>Badge</sl-icon></sl-badge>
+<sl-badge>Badge</sl-badge>
 ```
 
 ## Examples
@@ -15,7 +15,7 @@ Badges are used to draw attention and display statuses or counts.
 Set the `type` attribute to change the badge's type.
 
 ```html preview
-<sl-badge type="primary">Primary</sl-icon></sl-badge>
+<sl-badge type="primary">Primary</sl-badge>
 <sl-badge type="success">Success</sl-badge>
 <sl-badge type="info">Info</sl-badge>
 <sl-badge type="warning">Warning</sl-badge>
@@ -27,7 +27,7 @@ Set the `type` attribute to change the badge's type.
 Use the `pill` attribute to give badges rounded edges.
 
 ```html preview
-<sl-badge type="primary" pill>Primary</sl-icon></sl-badge>
+<sl-badge type="primary" pill>Primary</sl-badge>
 <sl-badge type="success" pill>Success</sl-badge>
 <sl-badge type="info" pill>Info</sl-badge>
 <sl-badge type="warning" pill>Warning</sl-badge>
@@ -40,7 +40,7 @@ Use the `pulse` attribute to draw attention to the badge with a subtle animation
 
 ```html preview
 <div class="badge-pulse">
-  <sl-badge type="primary" pill pulse>1</sl-icon></sl-badge>
+  <sl-badge type="primary" pill pulse>1</sl-badge>
   <sl-badge type="success" pill pulse>1</sl-badge>
   <sl-badge type="info" pill pulse>1</sl-badge>
   <sl-badge type="warning" pill pulse>1</sl-badge>
