@@ -10,6 +10,7 @@
 - Components
 
   - [Alert](/components/alert.md)
+  - [Animation](/components/animation.md)
   - [Avatar](/components/avatar.md)
   - [Badge](/components/badge.md)
   - [Button](/components/button.md)

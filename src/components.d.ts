@@ -5,6 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { AnimationsType } from "./components/animation/animations";
 export namespace Components {
     interface SlAlert {
         /**
@@ -27,6 +28,242 @@ export namespace Components {
           * The type of alert.
          */
         "type": 'primary' | 'success' | 'info' | 'warning' | 'danger';
+    }
+    interface SlAnimate {
+        /**
+          * Name of the animation to get the keyFrames
+         */
+        "animation"?: AnimationsType;
+        /**
+          * Start the animation when the component is mounted.
+         */
+        "autoPlay"?: boolean;
+        /**
+          * Clears all `KeyframeEffects` caused by this animation and aborts its playback.
+         */
+        "cancel": () => Promise<void>;
+        /**
+          * Clear the current animation
+         */
+        "clear": () => Promise<void>;
+        /**
+          * Determines how values are combined between this animation and other, separate animations that do not specify their own specific composite operation. Defaults to `replace`.
+         */
+        "composite": CompositeOperation;
+        /**
+          * Sets the current time value of the animation in milliseconds, whether running or paused.
+         */
+        "currentTime": number;
+        /**
+          * The number of milliseconds to delay the start of the animation.
+         */
+        "delay": number;
+        /**
+          * Destroy the current animation
+         */
+        "destroy": () => Promise<void>;
+        /**
+          * Direction of the animation.
+         */
+        "direction"?: PlaybackDirection;
+        /**
+          * The number of milliseconds each iteration of the animation takes to complete.
+         */
+        "duration": number;
+        /**
+          * The rate of the animation's change over time.
+         */
+        "easing"?: string;
+        /**
+          * The number of milliseconds to delay after the end of an animation.
+         */
+        "endDelay": number;
+        /**
+          * Dictates whether the animation's effects should be reflected by the element(s) prior to playing ("backwards"), retained after the animation has completed playing ("forwards"), or both. Defaults to "none".
+         */
+        "fill"?: FillMode;
+        /**
+          * Sets the current playback time to the end of the animation corresponding to the current playback direction.
+         */
+        "finish": () => Promise<void>;
+        /**
+          * Returns the current time value of the animation in milliseconds, whether running or paused.
+         */
+        "getCurrentTime": () => Promise<number>;
+        /**
+          * Indicates whether the animation is currently waiting for an asynchronous operation such as initiating playback or pausing a running animation.
+         */
+        "getPending": () => Promise<boolean>;
+        /**
+          * Returns an enumerated value describing the playback state of an animation.
+         */
+        "getPlayState": () => Promise<AnimationPlayState>;
+        /**
+          * Returns the playback rate of the animation.
+         */
+        "getPlaybackRate": () => Promise<number>;
+        /**
+          * Returns the scheduled time when an animation's playback should begin.
+         */
+        "getStartTime": () => Promise<number>;
+        /**
+          * Determines how values build from iteration to iteration in this animation.
+         */
+        "iterationComposite"?: IterationCompositeOperation;
+        /**
+          * Describes at what point in the iteration the animation should start.
+         */
+        "iterationStart"?: number;
+        /**
+          * The number of times the animation should repeat. Defaults to `1`, and can also take a value of `Infinity` to make it repeat for as long as the element exists.
+         */
+        "iterations": any;
+        /**
+          * Keyframes of the animation.
+         */
+        "keyFrames"?: Keyframe[];
+        /**
+          * Default options of the animation.
+         */
+        "options"?: KeyframeAnimationOptions;
+        /**
+          * Suspends playback of the animation.
+         */
+        "pause": () => Promise<void>;
+        /**
+          * Starts or resumes playing of an animation.
+         */
+        "play": () => Promise<void>;
+        /**
+          * Sets the playback rate of the animation.
+         */
+        "playbackRate"?: number;
+        /**
+          * Reverses the playback direction, meaning the animation ends at its beginning.
+         */
+        "reverse": () => Promise<void>;
+        /**
+          * Sets the scheduled time when an animation's playback should begin.
+         */
+        "startTime"?: number;
+    }
+    interface SlAnimation {
+        /**
+          * Start the animation when the component is mounted.
+         */
+        "autoPlay"?: boolean;
+        /**
+          * Clears all `KeyframeEffects` caused by this animation and aborts its playback.
+         */
+        "cancel": () => Promise<void>;
+        /**
+          * Clear the current animation
+         */
+        "clear": () => Promise<void>;
+        /**
+          * Determines how values are combined between this animation and other, separate animations that do not specify their own specific composite operation. Defaults to `replace`.
+         */
+        "composite": CompositeOperation;
+        /**
+          * Sets the current time value of the animation in milliseconds, whether running or paused.
+         */
+        "currentTime": number;
+        /**
+          * The number of milliseconds to delay the start of the animation.
+         */
+        "delay": number;
+        /**
+          * Destroy the current animation
+         */
+        "destroy": () => Promise<void>;
+        /**
+          * Direction of the animation.
+         */
+        "direction"?: PlaybackDirection;
+        /**
+          * The number of milliseconds each iteration of the animation takes to complete.
+         */
+        "duration": number;
+        /**
+          * The rate of the animation's change over time.
+         */
+        "easing"?: string;
+        /**
+          * The number of milliseconds to delay after the end of an animation.
+         */
+        "endDelay": number;
+        /**
+          * Dictates whether the animation's effects should be reflected by the element(s) prior to playing ("backwards"), retained after the animation has completed playing ("forwards"), or both. Defaults to "none".
+         */
+        "fill"?: FillMode;
+        /**
+          * Sets the current playback time to the end of the animation corresponding to the current playback direction.
+         */
+        "finish": () => Promise<void>;
+        /**
+          * Returns the current time value of the animation in milliseconds, whether running or paused.
+         */
+        "getCurrentTime": () => Promise<number>;
+        /**
+          * Indicates whether the animation is currently waiting for an asynchronous operation such as initiating playback or pausing a running animation.
+         */
+        "getPending": () => Promise<boolean>;
+        /**
+          * Returns an enumerated value describing the playback state of an animation.
+         */
+        "getPlayState": () => Promise<AnimationPlayState>;
+        /**
+          * Returns the playback rate of the animation.
+         */
+        "getPlaybackRate": () => Promise<number>;
+        /**
+          * Returns the scheduled time when an animation's playback should begin.
+         */
+        "getStartTime": () => Promise<number>;
+        /**
+          * Determines how values build from iteration to iteration in this animation.
+         */
+        "iterationComposite"?: IterationCompositeOperation;
+        /**
+          * Describes at what point in the iteration the animation should start.
+         */
+        "iterationStart"?: number;
+        /**
+          * The number of times the animation should repeat. Defaults to `1`, and can also take a value of `Infinity` to make it repeat for as long as the element exists.
+         */
+        "iterations": any;
+        /**
+          * Keyframes of the animation.
+         */
+        "keyFrames"?: Keyframe[];
+        /**
+          * Name of the animation to get the keyFrames
+         */
+        "name"?: AnimationsType;
+        /**
+          * Default options of the animation.
+         */
+        "options"?: KeyframeAnimationOptions;
+        /**
+          * Suspends playback of the animation.
+         */
+        "pause": () => Promise<void>;
+        /**
+          * Starts or resumes playing of an animation.
+         */
+        "play": () => Promise<void>;
+        /**
+          * Sets the playback rate of the animation.
+         */
+        "playbackRate"?: number;
+        /**
+          * Reverses the playback direction, meaning the animation ends at its beginning.
+         */
+        "reverse": () => Promise<void>;
+        /**
+          * Sets the scheduled time when an animation's playback should begin.
+         */
+        "startTime"?: number;
     }
     interface SlAvatar {
         /**
@@ -930,6 +1167,18 @@ declare global {
         prototype: HTMLSlAlertElement;
         new (): HTMLSlAlertElement;
     };
+    interface HTMLSlAnimateElement extends Components.SlAnimate, HTMLStencilElement {
+    }
+    var HTMLSlAnimateElement: {
+        prototype: HTMLSlAnimateElement;
+        new (): HTMLSlAnimateElement;
+    };
+    interface HTMLSlAnimationElement extends Components.SlAnimation, HTMLStencilElement {
+    }
+    var HTMLSlAnimationElement: {
+        prototype: HTMLSlAnimationElement;
+        new (): HTMLSlAnimationElement;
+    };
     interface HTMLSlAvatarElement extends Components.SlAvatar, HTMLStencilElement {
     }
     var HTMLSlAvatarElement: {
@@ -1136,6 +1385,8 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "sl-alert": HTMLSlAlertElement;
+        "sl-animate": HTMLSlAnimateElement;
+        "sl-animation": HTMLSlAnimationElement;
         "sl-avatar": HTMLSlAvatarElement;
         "sl-badge": HTMLSlBadgeElement;
         "sl-button": HTMLSlButtonElement;
@@ -1202,6 +1453,170 @@ declare namespace LocalJSX {
           * The type of alert.
          */
         "type"?: 'primary' | 'success' | 'info' | 'warning' | 'danger';
+    }
+    interface SlAnimate {
+        /**
+          * Name of the animation to get the keyFrames
+         */
+        "animation"?: AnimationsType;
+        /**
+          * Start the animation when the component is mounted.
+         */
+        "autoPlay"?: boolean;
+        /**
+          * Determines how values are combined between this animation and other, separate animations that do not specify their own specific composite operation. Defaults to `replace`.
+         */
+        "composite"?: CompositeOperation;
+        /**
+          * Sets the current time value of the animation in milliseconds, whether running or paused.
+         */
+        "currentTime"?: number;
+        /**
+          * The number of milliseconds to delay the start of the animation.
+         */
+        "delay"?: number;
+        /**
+          * Direction of the animation.
+         */
+        "direction"?: PlaybackDirection;
+        /**
+          * The number of milliseconds each iteration of the animation takes to complete.
+         */
+        "duration"?: number;
+        /**
+          * The rate of the animation's change over time.
+         */
+        "easing"?: string;
+        /**
+          * The number of milliseconds to delay after the end of an animation.
+         */
+        "endDelay"?: number;
+        /**
+          * Dictates whether the animation's effects should be reflected by the element(s) prior to playing ("backwards"), retained after the animation has completed playing ("forwards"), or both. Defaults to "none".
+         */
+        "fill"?: FillMode;
+        /**
+          * Determines how values build from iteration to iteration in this animation.
+         */
+        "iterationComposite"?: IterationCompositeOperation;
+        /**
+          * Describes at what point in the iteration the animation should start.
+         */
+        "iterationStart"?: number;
+        /**
+          * The number of times the animation should repeat. Defaults to `1`, and can also take a value of `Infinity` to make it repeat for as long as the element exists.
+         */
+        "iterations"?: any;
+        /**
+          * Keyframes of the animation.
+         */
+        "keyFrames"?: Keyframe[];
+        /**
+          * This event is sent when the animation is cancelled.
+         */
+        "onSlCancel"?: (event: CustomEvent<HTMLElement>) => void;
+        /**
+          * This event is sent when the animation finishes playing.
+         */
+        "onSlFinish"?: (event: CustomEvent<HTMLElement>) => void;
+        /**
+          * This event is sent when the animation is going to play.
+         */
+        "onSlStart"?: (event: CustomEvent<HTMLElement>) => void;
+        /**
+          * Default options of the animation.
+         */
+        "options"?: KeyframeAnimationOptions;
+        /**
+          * Sets the playback rate of the animation.
+         */
+        "playbackRate"?: number;
+        /**
+          * Sets the scheduled time when an animation's playback should begin.
+         */
+        "startTime"?: number;
+    }
+    interface SlAnimation {
+        /**
+          * Start the animation when the component is mounted.
+         */
+        "autoPlay"?: boolean;
+        /**
+          * Determines how values are combined between this animation and other, separate animations that do not specify their own specific composite operation. Defaults to `replace`.
+         */
+        "composite"?: CompositeOperation;
+        /**
+          * Sets the current time value of the animation in milliseconds, whether running or paused.
+         */
+        "currentTime"?: number;
+        /**
+          * The number of milliseconds to delay the start of the animation.
+         */
+        "delay"?: number;
+        /**
+          * Direction of the animation.
+         */
+        "direction"?: PlaybackDirection;
+        /**
+          * The number of milliseconds each iteration of the animation takes to complete.
+         */
+        "duration"?: number;
+        /**
+          * The rate of the animation's change over time.
+         */
+        "easing"?: string;
+        /**
+          * The number of milliseconds to delay after the end of an animation.
+         */
+        "endDelay"?: number;
+        /**
+          * Dictates whether the animation's effects should be reflected by the element(s) prior to playing ("backwards"), retained after the animation has completed playing ("forwards"), or both. Defaults to "none".
+         */
+        "fill"?: FillMode;
+        /**
+          * Determines how values build from iteration to iteration in this animation.
+         */
+        "iterationComposite"?: IterationCompositeOperation;
+        /**
+          * Describes at what point in the iteration the animation should start.
+         */
+        "iterationStart"?: number;
+        /**
+          * The number of times the animation should repeat. Defaults to `1`, and can also take a value of `Infinity` to make it repeat for as long as the element exists.
+         */
+        "iterations"?: any;
+        /**
+          * Keyframes of the animation.
+         */
+        "keyFrames"?: Keyframe[];
+        /**
+          * Name of the animation to get the keyFrames
+         */
+        "name"?: AnimationsType;
+        /**
+          * This event is sent when the animation is cancelled.
+         */
+        "onSlCancel"?: (event: CustomEvent<HTMLElement>) => void;
+        /**
+          * This event is sent when the animation finishes playing.
+         */
+        "onSlFinish"?: (event: CustomEvent<HTMLElement>) => void;
+        /**
+          * This event is sent when the animation is going to play.
+         */
+        "onSlStart"?: (event: CustomEvent<HTMLElement>) => void;
+        /**
+          * Default options of the animation.
+         */
+        "options"?: KeyframeAnimationOptions;
+        /**
+          * Sets the playback rate of the animation.
+         */
+        "playbackRate"?: number;
+        /**
+          * Sets the scheduled time when an animation's playback should begin.
+         */
+        "startTime"?: number;
     }
     interface SlAvatar {
         /**
@@ -2191,6 +2606,8 @@ declare namespace LocalJSX {
     }
     interface IntrinsicElements {
         "sl-alert": SlAlert;
+        "sl-animate": SlAnimate;
+        "sl-animation": SlAnimation;
         "sl-avatar": SlAvatar;
         "sl-badge": SlBadge;
         "sl-button": SlButton;
@@ -2232,6 +2649,8 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "sl-alert": LocalJSX.SlAlert & JSXBase.HTMLAttributes<HTMLSlAlertElement>;
+            "sl-animate": LocalJSX.SlAnimate & JSXBase.HTMLAttributes<HTMLSlAnimateElement>;
+            "sl-animation": LocalJSX.SlAnimation & JSXBase.HTMLAttributes<HTMLSlAnimationElement>;
             "sl-avatar": LocalJSX.SlAvatar & JSXBase.HTMLAttributes<HTMLSlAvatarElement>;
             "sl-badge": LocalJSX.SlBadge & JSXBase.HTMLAttributes<HTMLSlBadgeElement>;
             "sl-button": LocalJSX.SlButton & JSXBase.HTMLAttributes<HTMLSlButtonElement>;
