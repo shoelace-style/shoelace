@@ -1,17 +1,6 @@
-import { h, Component, Element, Prop, Event, EventEmitter, Method, Watch } from '@stencil/core';
-import { IAnimatableComponent } from './models/animatable';
-import { AnimationsType, getKeyFramesByAnimation } from './animations';
-import { AnimationManager } from './manager';
-
-//
-// TODO:
-//
-// - combine manager and remove utils
-// - reorder watchers and methods
-// - support case-insensitive "infinity" in `iterations`
-// - document and provide CDN link for the Web Animations polyfill (which browsers actually require it?) https://github.com/web-animations/web-animations-js
-// - clean up animation and easing exports
-//
+import { Component, Element, Event, EventEmitter, Method, Prop, Watch, h } from '@stencil/core';
+import animations from './animations';
+import easings from './easings';
 
 /**
  * @since 2.0
@@ -24,193 +13,178 @@ import { AnimationManager } from './manager';
   styleUrl: 'animation.scss',
   shadow: true
 })
-export class Animate implements IAnimatableComponent {
-  manager?: AnimationManager = null;
+export class Animate {
+  animation: Animation;
 
-  get container() {
-    return this.host.shadowRoot.querySelector('slot').assignedElements({ flatten: true })[0] as HTMLElement;
+  get element() {
+    const slot = this.host.shadowRoot.querySelector('slot');
+    return slot.assignedElements({ flatten: true })[0] as HTMLElement;
   }
 
   @Element() host: HTMLSlAnimationElement;
 
-  /** Name of the animation to get the keyFrames */
-  @Prop({ reflect: true }) name?: AnimationsType;
-
-  /** Keyframes of the animation. */
-  @Prop({ mutable: true, reflect: true }) keyFrames?: Keyframe[];
-
-  /** Default options of the animation. */
-  @Prop({ mutable: true, reflect: true }) options?: KeyframeAnimationOptions;
+  /** The name of the animation to use. */
+  @Prop() name = 'none';
 
   /** The number of milliseconds to delay the start of the animation. */
-  @Prop({ mutable: true }) delay = 0;
+  @Prop() delay = 0;
 
-  /** The number of milliseconds to delay after the end of an animation. */
-  @Prop({ mutable: true }) endDelay = 0;
+  /** Determines the direction of playback as well as the behavior when reaching the end of an iteration. */
+  @Prop() direction: PlaybackDirection = 'normal';
 
   /** The number of milliseconds each iteration of the animation takes to complete. */
-  @Prop({ mutable: true }) duration = 0;
+  @Prop() duration = 0;
 
-  /** Direction of the animation. */
-  @Prop({ mutable: true }) direction?: PlaybackDirection = 'normal';
+  /** The rate of the animation's change over time. */
+  @Prop() easing = 'linear';
+
+  /** The number of milliseconds to delay after the active period of an animation sequence. */
+  @Prop() endDelay = 0;
+
+  /** Sets how the animation applies styles to its target before and after its execution. */
+  @Prop() fill: FillMode = 'auto';
+
+  /** The number of iterations to run before the animation completes. Defaults to `Infinity`, which loops. */
+  @Prop() iterations: number = Infinity;
+
+  /** The offset at which to start the animation, usually between 0 (start) and 1 (end). */
+  @Prop() iterationStart = 0;
+
+  /** The keyframes to use for the animation. If this is set, `name` will be ignored. */
+  @Prop({ mutable: true }) keyframes: Keyframe[];
 
   /**
-   * Determines how values are combined between this animation and other, separate animations that do not specify their
-   * own specific composite operation. Defaults to `replace`.
+   * Sets the animation's playback rate. The default is `1`, which plays the animation at a normal speed. Setting this
+   * to `2`, for example, will double the animation's speed. A negative value can be used to reverse the animation. This
+   * value can be changed without causing the animation to restart.
    */
-  @Prop({ mutable: true }) composite: CompositeOperation = 'replace';
-
-  /** The easing effect to use. */
-  @Prop({ mutable: true }) easing = 'none';
-
-  /**
-   * Defines how the element to which the animation is applied should look when the animation sequence is not actively
-   * running, such as before the time specified by iterationStart or after animation's end time.
-   */
-  @Prop({ mutable: true }) fill?: FillMode = 'none';
-
-  /**
-   * The number of times the animation should repeat. Defaults to `1`, and can also take a value of `Infinity` to make
-   * it repeat for as long as the element exists.
-   */
-  @Prop({ mutable: true }) iterations = 1;
-
-  /** Describes at what point in the iteration the animation should start. */
-  @Prop({ mutable: true }) iterationStart = 0;
-
-  /** Determines how values build from iteration to iteration in this animation. */
-  @Prop({ mutable: true }) iterationComposite?: IterationCompositeOperation;
-
-  /** Start the animation when the component is mounted. */
-  @Prop({ attribute: 'autoplay', reflect: true }) autoPlay? = false;
-
-  /** Sets the current time value of the animation in milliseconds, whether running or paused. */
-  @Prop() currentTime = 0;
-
-  /** Sets the playback rate of the animation. */
   @Prop() playbackRate = 1;
 
-  /** Sets the scheduled time when an animation's playback should begin. */
-  @Prop() startTime = 0;
+  /** Pauses the animation. The animation will resume when this prop is removed. */
+  @Prop() pause = false;
 
+  // Restart the animation when any of these properties change
+  @Watch('delay')
+  @Watch('direction')
+  @Watch('easing')
+  @Watch('endDelay')
+  @Watch('fill')
+  @Watch('iterations')
+  @Watch('iterationStart')
+  @Watch('keyframes')
   @Watch('name')
-  handleNameChange(name: AnimationsType) {
-    this.keyFrames = getKeyFramesByAnimation(name);
+  handleRestartAnimation() {
+    this.createAnimation();
   }
 
-  @Watch('currentTime')
-  setCurrenTime(newValue: number) {
-    this.manager.currentAnimation.currentTime = newValue;
+  @Watch('pause')
+  handlePauseChange() {
+    this.pause ? this.animation.pause() : this.animation.play();
   }
 
   @Watch('playbackRate')
-  setPlaybackRate(newValue: number) {
-    this.manager.currentAnimation.playbackRate = newValue;
+  handlePlaybackRateChange() {
+    this.animation.playbackRate = this.playbackRate;
   }
-
-  /** Returns the current time value of the animation in milliseconds, whether running or paused. */
-  @Method()
-  async getCurrentTime(): Promise<number> {
-    return Promise.resolve(this.manager.currentAnimation.currentTime);
-  }
-
-  @Watch('startTime')
-  setStartTime(newValue: number) {
-    this.manager.currentAnimation.startTime = newValue;
-  }
-
-  /**
-   * Returns the scheduled time when an animation's playback should begin.
-   */
-  @Method()
-  async getStartTime(): Promise<number> {
-    return Promise.resolve(this.manager.currentAnimation.startTime);
-  }
-
-  /**
-   * Indicates whether the animation is currently waiting for an asynchronous operation such as initiating playback or
-   * pausing a running animation.
-   */
-  @Method()
-  async getPending(): Promise<boolean> {
-    return Promise.resolve(this.manager.currentAnimation.pending);
-  }
-
-  /** Returns the playback rate of the animation. */
-  @Method()
-  async getPlaybackRate(): Promise<number> {
-    return Promise.resolve(this.manager.currentAnimation.playbackRate);
-  }
-
-  /** Returns an enumerated value describing the playback state of an animation. */
-  @Method()
-  async getPlayState(): Promise<AnimationPlayState> {
-    return Promise.resolve(this.manager.currentAnimation.playState);
-  }
-
-  /** Emitted when the animation starts playing. */
-  @Event() slStart!: EventEmitter<HTMLElement>;
-
-  /** Emitted when the animation finishes. */
-  @Event() slFinish!: EventEmitter<HTMLElement>;
 
   /** Emitted when the animation is canceled. */
-  @Event() slCancel!: EventEmitter<HTMLElement>;
+  @Event() slCancel: EventEmitter;
 
-  /** Cancels the animation. */
-  @Method()
-  async cancel(): Promise<void> {
-    this.manager.currentAnimation.cancel();
-  }
+  /** Emitted when the animation finishes. */
+  @Event() slFinish: EventEmitter;
 
-  /** Sets the playback time to the end of the animation corresponding to the playback direction. */
-  @Method()
-  async finish(): Promise<void> {
-    this.manager.currentAnimation.finish();
-  }
-
-  /** Pauses the animation. */
-  @Method()
-  async pause(): Promise<void> {
-    this.manager.currentAnimation.pause();
-  }
-
-  /** Starts or resumes the animation. */
-  @Method()
-  async play(): Promise<void> {
-    this.manager.playAnimation();
-  }
-
-  /** Clear the current animation */
-  @Method()
-  async clear(): Promise<void> {
-    this.manager.clearAnimation();
-  }
-
-  /** Destroy the current animation */
-  @Method()
-  async destroy(): Promise<void> {
-    if (this.manager !== null) {
-      this.manager.destroyAnimation();
-    }
+  connectedCallback() {
+    this.handleAnimationFinish = this.handleAnimationFinish.bind(this);
+    this.handleAnimationCancel = this.handleAnimationCancel.bind(this);
   }
 
   componentDidLoad() {
-    this.manager = new AnimationManager(this);
-    this.manager.setState(this.container, this);
-    this.manager.savedState();
-  }
-
-  componentWillUpdate() {
-    this.manager.setState(this.container, this);
-  }
-
-  componentDidUpdate() {
-    this.manager.savedState();
+    this.createAnimation();
   }
 
   disconnectedCallback() {
-    this.destroy();
+    this.destroyAnimation();
+  }
+
+  handleAnimationFinish() {
+    this.slFinish.emit();
+  }
+
+  handleAnimationCancel() {
+    this.slCancel.emit();
+  }
+
+  createAnimation() {
+    const easing = easings.hasOwnProperty(this.easing) ? easings[this.easing] : this.easing;
+    const keyframes = this.keyframes ? this.keyframes : animations[this.name];
+
+    this.destroyAnimation();
+    this.animation = this.element.animate(keyframes, {
+      delay: this.delay,
+      direction: this.direction,
+      duration: this.duration,
+      easing,
+      endDelay: this.endDelay,
+      fill: this.fill,
+      iterationStart: this.iterationStart,
+      iterations: this.iterations
+    });
+
+    this.animation.addEventListener('cancel', this.handleAnimationCancel);
+    this.animation.addEventListener('finish', this.handleAnimationFinish);
+
+    if (this.pause) {
+      this.animation.pause();
+    }
+  }
+
+  destroyAnimation() {
+    if (this.animation) {
+      this.animation.cancel();
+      this.animation.removeEventListener('cancel', this.handleAnimationCancel);
+      this.animation.removeEventListener('finish', this.handleAnimationFinish);
+      this.animation = null;
+    }
+  }
+
+  /** Clears all KeyframeEffects caused by this animation and aborts its playback. */
+  @Method()
+  async cancel() {
+    try {
+      this.animation.cancel();
+    } catch {}
+  }
+
+  /** Sets the playback time to the end of the animation corresponding to the current playback direction. */
+  @Method()
+  async finish() {
+    try {
+      this.animation.finish();
+    } catch {}
+  }
+
+  /** Gets a list of all supported animation names. */
+  @Method()
+  async getAnimationNames() {
+    return Object.entries(animations).map(([name]) => name);
+  }
+
+  /** Gets a list of all supported easing function names. */
+  @Method()
+  async getEasingNames() {
+    return Object.entries(easings).map(([name]) => name);
+  }
+
+  /** Gets the current time of the animation in milliseconds. */
+  @Method()
+  async getCurrentTime() {
+    return this.animation.currentTime;
+  }
+
+  /** Sets the current time of the animation in milliseconds. */
+  @Method()
+  async setCurrentTime(time: number) {
+    this.animation.currentTime = time;
   }
 
   render() {

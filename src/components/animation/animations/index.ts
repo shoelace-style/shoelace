@@ -1,20 +1,12 @@
-import { ANIMATIONS, AnimationsType } from './common';
-import ANIMATE from './animate';
-import ANIMISTA from './animista';
+import animatecss from './animatecss';
+import animista from './animista';
 
-export const ANIMATION_KEY_ERROR = 'Animation not supported';
-export { ANIMATIONS, AnimationsType };
-export const KEYFRAMES = {
-  [ANIMATIONS.NONE]: [] as Keyframe[],
-  ...ANIMATE,
-  ...ANIMISTA
-} as const;
+const sortObject = (o: any) =>
+  Object.keys(o)
+    .sort()
+    .reduce((r, k) => ((r[k] = o[k]), r), {});
 
-export function getKeyFramesByAnimation(animation: AnimationsType) {
-  const keyFrames = KEYFRAMES[animation];
-  if (keyFrames !== undefined) {
-    return keyFrames;
-  } else {
-    throw new Error(ANIMATION_KEY_ERROR);
-  }
-}
+export default {
+  none: [],
+  ...sortObject({ ...animatecss, ...animista })
+};
