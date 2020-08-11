@@ -15,6 +15,7 @@ import easings from './easings';
 })
 export class Animate {
   animation: Animation;
+  hasStarted = false;
 
   get element() {
     const slot = this.host.shadowRoot.querySelector('slot');
@@ -80,6 +81,11 @@ export class Animate {
   @Watch('pause')
   handlePauseChange() {
     this.pause ? this.animation.pause() : this.animation.play();
+
+    if (!this.pause && !this.hasStarted) {
+      this.hasStarted = true;
+      this.slStart.emit();
+    }
   }
 
   @Watch('playbackRate')
@@ -92,6 +98,9 @@ export class Animate {
 
   /** Emitted when the animation finishes. */
   @Event() slFinish: EventEmitter;
+
+  /** Emitted when the animation starts or restarts. */
+  @Event() slStart: EventEmitter;
 
   connectedCallback() {
     this.handleAnimationFinish = this.handleAnimationFinish.bind(this);
@@ -135,6 +144,9 @@ export class Animate {
 
     if (this.pause) {
       this.animation.pause();
+    } else {
+      this.hasStarted = true;
+      this.slStart.emit();
     }
   }
 
@@ -144,6 +156,7 @@ export class Animate {
       this.animation.removeEventListener('cancel', this.handleAnimationCancel);
       this.animation.removeEventListener('finish', this.handleAnimationFinish);
       this.animation = null;
+      this.hasStarted = false;
     }
   }
 

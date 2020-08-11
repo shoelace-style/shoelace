@@ -1334,6 +1334,10 @@ declare namespace LocalJSX {
          */
         "onSlFinish"?: (event: CustomEvent<any>) => void;
         /**
+          * Emitted when the animation starts or restarts.
+         */
+        "onSlStart"?: (event: CustomEvent<any>) => void;
+        /**
           * Pauses the animation. The animation will resume when this prop is removed.
          */
         "pause"?: boolean;
