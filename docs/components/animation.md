@@ -29,9 +29,9 @@ To animate an element, wrap it in `<sl-animation>` and set a `name` and `duratio
 
 ## Examples
 
-### Sandbox
+### Animations & Easings
 
-This example shows all of the built-in animations and easings. You can also adjust the playback rate.
+This example demonstrates all of the baked-in animations and easings. All animations were generated based on the popular [Animate.css](https://animate.style/) and [Animista](https://animista.net/) projects.
 
 ```html preview
 <div class="animation-sandbox">
@@ -97,6 +97,44 @@ This example shows all of the built-in animations and easings. You can also adju
 </style>
 ```
 
+### Using Intersection Observer
+
+Use an [Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) to control the animation when an element enters or exits the viewport. For example, scroll the box below in and out of your screen. The animation stops when the box exits the viewport and restarts each time it enters the viewport.
+
+```html preview
+<div class="animation-scroll">
+  <sl-animation name="scale-in-center" duration="3000" iterations="1"><div class="box"></div></sl-animation>
+</div>
+
+<script>
+  const container = document.querySelector('.animation-scroll');
+  const animation = container.querySelector('sl-animation');
+  const box = animation.querySelector('.box');
+
+  // Watch for the box to enter and exit the viewport. Note that we're observing the box, not the animation element!
+  const observer = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) {
+      // Start the animation when the box enters the viewport
+      animation.pause = null;
+    } else {
+      // Reset the animation when the box leaves the viewport
+      animation.pause = true;
+      animation.setCurrentTime(0);
+    }
+  });
+  observer.observe(box);
+</script>
+
+<style>
+  .animation-scroll .box {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    background-color: var(--sl-color-primary-50);
+  }  
+</style>
+```
+
 ### Custom Keyframe Formats
 
 Supply your own [keyframe formats](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API/Keyframe_Formats) to build custom animations.
@@ -111,9 +149,8 @@ Supply your own [keyframe formats](https://developer.mozilla.org/en-US/docs/Web/
 <script>
   const animation = document.querySelector('.animation-keyframes sl-animation');
   animation.keyframes = [
-    { opacity: 1, easing: 'ease-out' }, 
-    { opacity: 0.1, easing: 'ease-in' }, 
-    { opacity: 0 }
+    { transform: 'translateY(0) rotateX(0)', transformOrigin: '50% 50%' }, 
+    { transform: 'translateY(-100%) rotateX(-180deg)', transformOrigin: '50% 100%' },
   ];
 </script>
 
