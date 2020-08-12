@@ -9,6 +9,7 @@
 - Fixed a bug where button groups with tooltips experienced an odd spacing issue in Safari
 - Fixed a bug where scrolling in dropdowns/selects didn't work properly on Windows (special thanks to [Trendy](http://github.com/trendy) for helping troubleshoot!)
 - Fixed a bug where selecting a menu item in a dropdown would cause Safari to scroll
+- Fixed a bug where type to select wouldn't accept symbols
 - Moved scrolling logic from `sl-menu` to `sl-dropdown`
 
 ## 2.0.0-beta.12

@@ -168,10 +168,7 @@ export class Menu {
       }
     }
 
-    // Handle type-to-select behavior when non-control characters are entered
-    if (event.key === ' ' || /^[\d\w]$/i.test(event.key)) {
-      this.typeToSelect(event.key);
-    }
+    this.typeToSelect(event.key);
   }
 
   handleMouseDown(event: MouseEvent) {
