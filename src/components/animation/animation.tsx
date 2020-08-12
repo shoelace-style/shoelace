@@ -138,7 +138,7 @@ export class Animate {
       iterationStart: this.iterationStart,
       iterations: this.iterations
     });
-
+    this.animation.playbackRate = this.playbackRate;
     this.animation.addEventListener('cancel', this.handleAnimationCancel);
     this.animation.addEventListener('finish', this.handleAnimationFinish);
 
