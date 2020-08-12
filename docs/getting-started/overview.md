@@ -119,6 +119,7 @@ Special thanks to the following projects and individuals that helped make Shoela
 - Icons are courtesy of [Bootstrap Icons](https://icons.getbootstrap.com/)
 - Illustrations are courtesy of [unDraw](https://undraw.co/)
 - Positioning of menus, tooltips, et al is handled by [Popper.js](https://popper.js.org/)
+- The animation component was inspired by [animatable-component](https://github.com/proyecto26/animatable-component)
 - The Shoelace logo was designed with a single shoelace by [Adam K Olson](https://twitter.com/adamkolson)
 
 ## Previous Versions
