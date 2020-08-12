@@ -34,7 +34,7 @@ export class Animate {
   @Prop() direction: PlaybackDirection = 'normal';
 
   /** The number of milliseconds each iteration of the animation takes to complete. */
-  @Prop() duration = 0;
+  @Prop() duration = 1000;
 
   /** The rate of the animation's change over time. */
   @Prop() easing = 'linear';
