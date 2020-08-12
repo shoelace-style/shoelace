@@ -3,6 +3,7 @@
 ## 2.0.0-beta.13
 
 - Added `slActivate` and `slDeactivate` events to `sl-menu-item`
+- Added experimental `sl-animation` component
 - Fixed a bug where link buttons would have `type="button"`
 - Fixed a bug where button groups with tooltips experienced an odd spacing issue in Safari
 - Fixed a bug where scrolling in dropdowns/selects didn't work properly on Windows (special thanks to [Trendy](http://github.com/trendy) for helping troubleshoot!)
