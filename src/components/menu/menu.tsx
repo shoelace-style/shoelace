@@ -176,7 +176,6 @@ export class Menu {
 
   handleMouseDown(event: MouseEvent) {
     event.preventDefault();
-    this.menu.focus();
   }
 
   handleMouseOver(event: MouseEvent) {
