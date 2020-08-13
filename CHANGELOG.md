@@ -2,7 +2,8 @@
 
 ## 2.0.0-beta.14
 
-- Fixed bug where scrolling dialogs didn't resize properly in Safari
+- Fixed a bug where scrolling dialogs didn't resize properly in Safari
+- Fixed a bug where `slShow` and `slHide` would be emitted twice in some components
 
 ## 2.0.0-beta.13
 
