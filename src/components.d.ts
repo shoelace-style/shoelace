@@ -14,7 +14,7 @@ export namespace Components {
         /**
           * Hides the alert
          */
-        "hide": () => Promise<boolean>;
+        "hide": () => Promise<void>;
         /**
           * Indicates whether or not the alert is open. You can use this in lieu of the show/hide methods.
          */
@@ -22,7 +22,7 @@ export namespace Components {
         /**
           * Shows the alert.
          */
-        "show": () => Promise<boolean>;
+        "show": () => Promise<void>;
         /**
           * The type of alert.
          */
@@ -276,7 +276,7 @@ export namespace Components {
         /**
           * Hides the alert
          */
-        "hide": () => Promise<boolean>;
+        "hide": () => Promise<void>;
         /**
           * Indicates whether or not the details is open. You can use this in lieu of the show/hide methods.
          */
@@ -284,7 +284,7 @@ export namespace Components {
         /**
           * Shows the alert.
          */
-        "show": () => Promise<boolean>;
+        "show": () => Promise<void>;
         /**
           * The summary to show in the details header. If you need to display HTML, use the `summary` slot instead.
          */
@@ -294,7 +294,7 @@ export namespace Components {
         /**
           * Hides the dialog
          */
-        "hide": () => Promise<boolean>;
+        "hide": () => Promise<void>;
         /**
           * The dialog's label as displayed in the header. You should always include a relevant label even when using `no-header`, as it is required for proper accessibility.
          */
@@ -310,7 +310,7 @@ export namespace Components {
         /**
           * Shows the dialog
          */
-        "show": () => Promise<boolean>;
+        "show": () => Promise<void>;
     }
     interface SlDrawer {
         /**
@@ -320,7 +320,7 @@ export namespace Components {
         /**
           * Hides the drawer
          */
-        "hide": () => Promise<boolean>;
+        "hide": () => Promise<void>;
         /**
           * The drawer's label as displayed in the header. You should always include a relevant label even when using `no-header`, as it is required for proper accessibility.
          */
@@ -340,7 +340,7 @@ export namespace Components {
         /**
           * Shows the drawer
          */
-        "show": () => Promise<boolean>;
+        "show": () => Promise<void>;
     }
     interface SlDropdown {
         /**
@@ -358,7 +358,7 @@ export namespace Components {
         /**
           * Hides the dropdown panel
          */
-        "hide": () => Promise<boolean>;
+        "hide": () => Promise<void>;
         /**
           * Indicates whether or not the dropdown is open. You can use this in lieu of the show/hide methods.
          */
@@ -381,7 +381,7 @@ export namespace Components {
         /**
           * Shows the dropdown panel
          */
-        "show": () => Promise<boolean>;
+        "show": () => Promise<void>;
         /**
           * The distance in pixels from which to offset the panel along its trigger.
          */
@@ -963,7 +963,7 @@ export namespace Components {
         /**
           * Shows the tooltip.
          */
-        "hide": () => Promise<boolean>;
+        "hide": () => Promise<void>;
         /**
           * Indicates whether or not the tooltip is open. You can use this in lieu of the show/hide methods.
          */
@@ -986,7 +986,7 @@ export namespace Components {
         /**
           * Shows the tooltip.
          */
-        "show": () => Promise<boolean>;
+        "show": () => Promise<void>;
         /**
           * The distance in pixels from which to offset the tooltip along its target.
          */

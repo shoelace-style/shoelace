@@ -20,6 +20,7 @@ import { Component, Element, Event, EventEmitter, Host, Method, Prop, Watch, h }
 })
 export class Tab {
   alert: HTMLElement;
+  isShowing = false;
 
   @Element() host: HTMLSlAlertElement;
 
@@ -64,28 +65,38 @@ export class Tab {
   /** Shows the alert. */
   @Method()
   async show() {
-    if (this.open) return;
+    // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
+    if (this.isShowing) {
+      return;
+    }
 
     const slShow = this.slShow.emit();
     if (slShow.defaultPrevented) {
-      return false;
+      this.open = false;
+      return;
     }
 
     this.host.hidden = false;
     this.host.clientWidth; // force a reflow
+    this.isShowing = true;
     this.open = true;
   }
 
   /** Hides the alert */
   @Method()
   async hide() {
-    if (!this.open) return;
+    // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
+    if (!this.isShowing) {
+      return;
+    }
 
     const slHide = this.slHide.emit();
     if (slHide.defaultPrevented) {
-      return false;
+      this.open = true;
+      return;
     }
 
+    this.isShowing = false;
     this.open = false;
   }
 

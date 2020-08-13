@@ -26,9 +26,10 @@ let id = 0;
   shadow: true
 })
 export class Drawer {
-  panel: HTMLElement;
-  drawer: HTMLElement;
   componentId = `drawer-${++id}`;
+  drawer: HTMLElement;
+  isShowing = false;
+  panel: HTMLElement;
 
   @Element() host: HTMLSlDrawerElement;
 
@@ -107,16 +108,21 @@ export class Drawer {
   /** Shows the drawer */
   @Method()
   async show() {
-    if (this.open) return;
+    // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
+    if (this.isShowing) {
+      return;
+    }
 
     const slShow = this.slShow.emit();
     if (slShow.defaultPrevented) {
-      return false;
+      this.open = false;
+      return;
     }
 
     this.drawer.hidden = false;
     this.host.clientWidth; // force a reflow
-    requestAnimationFrame(() => (this.open = true));
+    this.isShowing = true;
+    this.open = true;
 
     // Lock body scrolling only if the drawer isn't contained
     if (!this.contained) {
@@ -129,17 +135,21 @@ export class Drawer {
   /** Hides the drawer */
   @Method()
   async hide() {
-    if (!this.open) return;
+    // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
+    if (!this.isShowing) {
+      return;
+    }
 
     const slHide = this.slHide.emit();
     if (slHide.defaultPrevented) {
-      return false;
+      this.open = true;
+      return;
     }
 
+    this.isShowing = false;
     this.open = false;
 
     unlockBodyScrolling(this.host);
-
     document.removeEventListener('focusin', this.handleDocumentFocusIn);
   }
 

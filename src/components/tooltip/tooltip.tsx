@@ -19,6 +19,7 @@ let id = 0;
 })
 export class Tooltip {
   componentId = `tooltip-${++id}`;
+  isShowing = false;
   popover: Popover;
   target: HTMLElement;
   tooltip: any;
@@ -126,29 +127,39 @@ export class Tooltip {
   /** Shows the tooltip. */
   @Method()
   async show() {
-    if (this.open) return;
+    // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
+    if (this.isShowing) {
+      return;
+    }
 
     const slShow = this.slShow.emit();
     if (slShow.defaultPrevented) {
-      return false;
+      this.open = false;
+      return;
     }
 
-    this.popover.show();
+    this.isShowing = true;
     this.open = true;
+    this.popover.show();
   }
 
   /** Shows the tooltip. */
   @Method()
   async hide() {
-    if (!this.open) return;
+    // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
+    if (!this.isShowing) {
+      return;
+    }
 
     const slHide = this.slHide.emit();
     if (slHide.defaultPrevented) {
-      return false;
+      this.open = true;
+      return;
     }
 
-    this.popover.hide();
+    this.isShowing = false;
     this.open = false;
+    this.popover.hide();
   }
 
   getTarget() {

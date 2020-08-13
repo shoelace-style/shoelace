@@ -23,6 +23,7 @@ let id = 0;
 })
 export class Dropdown {
   componentId = `dropdown-${++id}`;
+  isShowing = false;
   panel: HTMLElement;
   popover: Popover;
   trigger: HTMLElement;
@@ -123,11 +124,15 @@ export class Dropdown {
   /** Shows the dropdown panel */
   @Method()
   async show() {
-    if (this.open) return;
+    // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
+    if (this.isShowing) {
+      return;
+    }
 
     const slShow = this.slShow.emit();
     if (slShow.defaultPrevented) {
-      return false;
+      this.open = false;
+      return;
     }
 
     this.panel.addEventListener('slActivate', this.handleMenuItemActivate);
@@ -135,18 +140,23 @@ export class Dropdown {
     document.addEventListener('mousedown', this.handleDocumentMouseDown);
     document.addEventListener('keydown', this.handleDocumentKeyDown);
 
-    this.popover.show();
+    this.isShowing = true;
     this.open = true;
+    this.popover.show();
   }
 
   /** Hides the dropdown panel */
   @Method()
   async hide() {
-    if (!this.open) return;
+    // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
+    if (!this.isShowing) {
+      return;
+    }
 
     const slHide = this.slHide.emit();
     if (slHide.defaultPrevented) {
-      return false;
+      this.open = true;
+      return;
     }
 
     this.panel.removeEventListener('slActivate', this.handleMenuItemActivate);
@@ -154,8 +164,9 @@ export class Dropdown {
     document.removeEventListener('mousedown', this.handleDocumentMouseDown);
     document.removeEventListener('keydown', this.handleDocumentKeyDown);
 
-    this.popover.hide();
+    this.isShowing = false;
     this.open = false;
+    this.popover.hide();
   }
 
   focusOnTrigger() {

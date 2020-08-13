@@ -23,10 +23,11 @@ let id = 0;
   shadow: true
 })
 export class Details {
+  body: HTMLElement;
+  componentId = `details-${++id}`;
   details: HTMLElement;
   header: HTMLElement;
-  componentId = `details-${++id}`;
-  body: HTMLElement;
+  isShowing = false;
 
   /** Indicates whether or not the details is open. You can use this in lieu of the show/hide methods. */
   @Prop({ mutable: true, reflect: true }) open = false;
@@ -76,11 +77,15 @@ export class Details {
   /** Shows the alert. */
   @Method()
   async show() {
-    if (this.open) return;
+    // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
+    if (this.isShowing) {
+      return;
+    }
 
     const slShow = this.slShow.emit();
     if (slShow.defaultPrevented) {
-      return false;
+      this.open = false;
+      return;
     }
 
     if (this.body.scrollHeight === 0) {
@@ -93,17 +98,22 @@ export class Details {
       this.body.style.overflow = 'hidden';
     }
 
+    this.isShowing = true;
     this.open = true;
   }
 
   /** Hides the alert */
   @Method()
   async hide() {
-    if (!this.open) return;
+    // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
+    if (!this.isShowing) {
+      return;
+    }
 
     const slHide = this.slHide.emit();
     if (slHide.defaultPrevented) {
-      return false;
+      this.open = true;
+      return;
     }
 
     // We can't transition out of `height: auto`, so let's set it to the current height first
@@ -115,6 +125,7 @@ export class Details {
       this.body.style.height = '0';
     });
 
+    this.isShowing = false;
     this.open = false;
   }
 

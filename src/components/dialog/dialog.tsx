@@ -27,9 +27,10 @@ let id = 0;
   shadow: true
 })
 export class Dialog {
-  panel: HTMLElement;
-  dialog: HTMLElement;
   componentId = `dialog-${++id}`;
+  dialog: HTMLElement;
+  isShowing = false;
+  panel: HTMLElement;
 
   @Element() host: HTMLSlDialogElement;
 
@@ -99,16 +100,21 @@ export class Dialog {
   /** Shows the dialog */
   @Method()
   async show() {
-    if (this.open) return;
+    // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
+    if (this.isShowing) {
+      return;
+    }
 
     const slShow = this.slShow.emit();
     if (slShow.defaultPrevented) {
-      return false;
+      this.open = false;
+      return;
     }
 
     this.dialog.hidden = false;
     this.host.clientWidth; // force a reflow
-    requestAnimationFrame(() => (this.open = true));
+    this.isShowing = true;
+    this.open = true;
 
     lockBodyScrolling(this.host);
     document.addEventListener('focusin', this.handleDocumentFocusIn);
@@ -117,13 +123,18 @@ export class Dialog {
   /** Hides the dialog */
   @Method()
   async hide() {
-    if (!this.open) return;
+    // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
+    if (!this.isShowing) {
+      return;
+    }
 
     const slHide = this.slHide.emit();
     if (slHide.defaultPrevented) {
-      return false;
+      this.open = true;
+      return;
     }
 
+    this.isShowing = false;
     this.open = false;
 
     unlockBodyScrolling(this.host);
