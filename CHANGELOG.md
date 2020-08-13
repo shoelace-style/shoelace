@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.0-beta.14
+
+- Fixed bug where scrolling dialogs didn't resize properly in Safari
+
 ## 2.0.0-beta.13
 
 - Added `slActivate` and `slDeactivate` events to `sl-menu-item`
