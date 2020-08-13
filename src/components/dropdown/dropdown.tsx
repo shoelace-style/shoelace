@@ -23,9 +23,6 @@ let id = 0;
 })
 export class Dropdown {
   componentId = `dropdown-${++id}`;
-  ignoreMouseEvents = false;
-  ignoreMouseTimeout: any;
-  ignoreOpenWatcher = false;
   panel: HTMLElement;
   popover: Popover;
   trigger: HTMLElement;
@@ -79,9 +76,7 @@ export class Dropdown {
 
   @Watch('open')
   handleOpenChange() {
-    if (!this.ignoreOpenWatcher) {
-      this.open ? this.show() : this.hide();
-    }
+    this.open ? this.show() : this.hide();
   }
 
   @Watch('placement')
@@ -128,47 +123,39 @@ export class Dropdown {
   /** Shows the dropdown panel */
   @Method()
   async show() {
-    this.ignoreOpenWatcher = true;
-    this.open = true;
+    if (this.open) return;
 
     const slShow = this.slShow.emit();
-
     if (slShow.defaultPrevented) {
-      this.open = false;
-      this.ignoreOpenWatcher = false;
-      return;
+      return false;
     }
-
-    this.popover.show();
-    this.ignoreOpenWatcher = false;
 
     this.panel.addEventListener('slActivate', this.handleMenuItemActivate);
     this.panel.addEventListener('slSelect', this.handlePanelSelect);
     document.addEventListener('mousedown', this.handleDocumentMouseDown);
     document.addEventListener('keydown', this.handleDocumentKeyDown);
+
+    this.popover.show();
+    this.open = true;
   }
 
   /** Hides the dropdown panel */
   @Method()
   async hide() {
-    this.ignoreOpenWatcher = true;
-    this.open = false;
+    if (!this.open) return;
 
     const slHide = this.slHide.emit();
-
     if (slHide.defaultPrevented) {
-      this.open = true;
-      this.ignoreOpenWatcher = false;
-      return;
+      return false;
     }
-
-    this.popover.hide();
-    this.ignoreOpenWatcher = false;
 
     this.panel.removeEventListener('slActivate', this.handleMenuItemActivate);
     this.panel.removeEventListener('slSelect', this.handlePanelSelect);
     document.removeEventListener('mousedown', this.handleDocumentMouseDown);
     document.removeEventListener('keydown', this.handleDocumentKeyDown);
+
+    this.popover.hide();
+    this.open = false;
   }
 
   focusOnTrigger() {

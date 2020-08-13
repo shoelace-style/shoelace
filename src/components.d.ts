@@ -358,7 +358,7 @@ export namespace Components {
         /**
           * Hides the dropdown panel
          */
-        "hide": () => Promise<void>;
+        "hide": () => Promise<boolean>;
         /**
           * Indicates whether or not the dropdown is open. You can use this in lieu of the show/hide methods.
          */
@@ -381,7 +381,7 @@ export namespace Components {
         /**
           * Shows the dropdown panel
          */
-        "show": () => Promise<void>;
+        "show": () => Promise<boolean>;
         /**
           * The distance in pixels from which to offset the panel along its trigger.
          */

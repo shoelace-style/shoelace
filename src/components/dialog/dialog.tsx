@@ -99,8 +99,9 @@ export class Dialog {
   /** Shows the dialog */
   @Method()
   async show() {
-    const slShow = this.slShow.emit();
+    if (this.open) return;
 
+    const slShow = this.slShow.emit();
     if (slShow.defaultPrevented) {
       return false;
     }
@@ -116,8 +117,9 @@ export class Dialog {
   /** Hides the dialog */
   @Method()
   async hide() {
-    const slHide = this.slHide.emit();
+    if (!this.open) return;
 
+    const slHide = this.slHide.emit();
     if (slHide.defaultPrevented) {
       return false;
     }

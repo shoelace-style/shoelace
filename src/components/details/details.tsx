@@ -76,8 +76,9 @@ export class Details {
   /** Shows the alert. */
   @Method()
   async show() {
-    const slShow = this.slShow.emit();
+    if (this.open) return;
 
+    const slShow = this.slShow.emit();
     if (slShow.defaultPrevented) {
       return false;
     }
@@ -98,8 +99,9 @@ export class Details {
   /** Hides the alert */
   @Method()
   async hide() {
-    const slHide = this.slHide.emit();
+    if (!this.open) return;
 
+    const slHide = this.slHide.emit();
     if (slHide.defaultPrevented) {
       return false;
     }
