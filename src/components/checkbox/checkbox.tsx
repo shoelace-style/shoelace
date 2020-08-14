@@ -37,10 +37,10 @@ export class Checkbox {
   @Prop() disabled = false;
 
   /** Set to true to draw the checkbox in a checked state. */
-  @Prop({ mutable: true }) checked = false;
+  @Prop({ mutable: true, reflect: true }) checked = false;
 
   /** Set to true to draw the checkbox in an indeterminate state. */
-  @Prop({ mutable: true }) indeterminate = false;
+  @Prop({ mutable: true, reflect: true }) indeterminate = false;
 
   /** Emitted when the control loses focus. */
   @Event() slBlur: EventEmitter;
