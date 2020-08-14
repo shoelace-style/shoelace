@@ -38,7 +38,7 @@ export class Radio {
   @Prop() disabled = false;
 
   /** Set to true to draw the radio in a checked state. */
-  @Prop({ mutable: true }) checked = false;
+  @Prop({ mutable: true, reflect: true }) checked = false;
 
   @Watch('checked')
   handleCheckedChange() {

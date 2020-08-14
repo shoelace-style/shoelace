@@ -1,0 +1,122 @@
+.sl-theme-dark {
+  background: var(--sl-color-gray-10);
+  color: var(--sl-color-gray-80);
+}
+
+/* Sidebar **/
+.sl-theme-dark .sidebar {
+  background: var(--sl-color-gray-10);
+  border-right-color: var(--sl-color-gray-15);
+}
+
+.sl-theme-dark .sidebar li > p {
+  color: var(--sl-color-white);
+  border-bottom-color: var(--sl-color-gray-20);
+}
+
+.sl-theme-dark .sidebar-toggle {
+  background-color: hsla(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 10%, 0.8);
+}
+
+.sl-theme-dark .docsify-pagination-container {
+  border-top-color: var(--sl-color-gray-20) !important;
+}
+
+/* Search */
+.sl-theme-dark .sidebar .search input[type='search'] {
+  background: var(--sl-input-background-color);
+  border-color: var(--sl-input-border-color);
+  color: var(--sl-input-color);
+}
+
+.sl-theme-dark .sidebar .search input[type='search']:hover {
+  border-color: var(--sl-input-border-color-hover);
+}
+
+.sl-theme-dark .sidebar .search input[type='search']:focus {
+  border-color: var(--sl-input-border-color-focus);
+}
+
+.sl-theme-dark .sidebar .clear-button {
+  color: var(--sl-color-gray-30);
+}
+
+.sl-theme-dark .sidebar .clear-button svg circle {
+  fill: currentColor;
+}
+
+/* Content */
+.sl-theme-dark .component-header {
+  border-bottom-color: var(--sl-color-gray-20);
+}
+
+.sl-theme-dark .anchor span {
+  color: var(--sl-color-white);
+}
+
+.sl-theme-dark .markdown-section h2 {
+  border-bottom-color: var(--sl-color-gray-20);
+}
+
+.sl-theme-dark .markdown-section blockquote {
+  border-left-color: var(--sl-color-gray-20);
+}
+
+.sl-theme-dark .markdown-section kbd {
+  border-color: var(--sl-color-gray-20);
+}
+
+/* Tables */
+.sl-theme-dark .markdown-section tr:nth-child(2n) {
+  background: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 13%);
+}
+
+.sl-theme-dark .markdown-section td {
+  border-top-color: var(--sl-color-gray-20);
+  border-bottom-color: var(--sl-color-gray-20);
+}
+
+.sl-theme-dark .markdown-section table .attribute-tooltip {
+  border-bottom-color: var(--sl-color-gray-30);
+}
+
+/* Tips & warnings */
+.sl-theme-dark .markdown-section p.tip,
+.sl-theme-dark .markdown-section p.warn {
+  background-color: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 13%)
+}
+
+.sl-theme-dark .markdown-section p.tip code,
+.sl-theme-dark .markdown-section p.warn code {
+  background-color: var(--sl-color-gray-15);
+}
+
+/* Code blocks */
+.sl-theme-dark .markdown-section pre {
+  background-color: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 13%);
+}
+
+.sl-theme-dark .markdown-section pre > code {
+  color: var(--sl-color-gray-80);
+}
+
+/* Repo buttons */
+.sl-theme-dark  .repo-button {
+  background-color: var(--sl-color-gray-10);
+  border-color: var(--sl-color-gray-25);
+  color: var(--sl-color-gray-80);
+}
+
+.sl-theme-dark .repo-button--github sl-icon {
+  color: var(--sl-color-white);
+}
+
+.sl-theme-dark  .repo-button:hover {
+  background-color: var(--sl-color-gray-15);
+  border: solid 1px var(--sl-color-gray-30);
+}
+
+.sl-theme-dark  .repo-button:focus {
+  border-color: var(--sl-color-primary-50);
+}
+

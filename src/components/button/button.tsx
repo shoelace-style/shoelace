@@ -26,28 +26,28 @@ export class Button {
   @State() hasFocus = false;
 
   /** The button's type. */
-  @Prop() type: 'default' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text' = 'default';
+  @Prop({ reflect: true }) type: 'default' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text' = 'default';
 
   /** The button's size. */
-  @Prop() size: 'small' | 'medium' | 'large' = 'medium';
+  @Prop({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
 
   /** Set to true to draw the button with a caret for use with dropdowns, popovers, etc. */
   @Prop() caret = false;
 
   /** Set to true to disable the button. */
-  @Prop() disabled = false;
+  @Prop({ reflect: true }) disabled = false;
 
   /** Set to true to draw the button in a loading state. */
-  @Prop() loading = false;
+  @Prop({ reflect: true }) loading = false;
 
   /** Set to true to draw a pill-style button with rounded edges. */
-  @Prop() pill = false;
+  @Prop({ reflect: true }) pill = false;
 
   /** Set to true to draw a circle button. */
-  @Prop() circle = false;
+  @Prop({ reflect: true }) circle = false;
 
   /** Indicates if activating the button should submit the form. Ignored when `href` is set. */
-  @Prop() submit = false;
+  @Prop({ reflect: true }) submit = false;
 
   /** An optional name for the button. Ignored when `href` is set. */
   @Prop() name: string;
