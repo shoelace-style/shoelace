@@ -49,7 +49,7 @@
   border: solid 1px var(--sl-color-gray-90);
   border-bottom: none;
   border-radius: 0 !important;
-  margin: 0 !important;
+  margin: 0;
   display: none;
 }
 
@@ -105,4 +105,43 @@
 
 .code-block--expanded .code-block__toggle svg {
   transform: rotate(180deg);
+}
+
+/* Dark theme */
+.sl-theme-dark .code-block {
+  background-color: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 13%);
+}
+
+.sl-theme-dark .code-block__preview {
+  background-color: var(--sl-color-gray-10);
+  border-color: var(--sl-color-gray-20);
+}
+
+.sl-theme-dark .code-block__source {
+  border-color: var(--sl-color-gray-20);
+}
+
+.sl-theme-dark .code-block__resizer {
+  border-left-color: var(--sl-color-gray-20);
+  background-color: var(--sl-color-gray-10);
+  color: var(--sl-color-gray-60);
+}
+
+.sl-theme-dark .code-block__toggle {
+  background-color: var(--sl-color-gray-10);
+  border-color: var(--sl-color-gray-20);
+  color: var(--sl-color-gray-60);
+}
+
+.sl-theme-dark .code-block__toggle:hover,
+.sl-theme-dark .code-block__toggle:active {
+  background-color: var(--sl-color-gray-10);
+  border-color: var(--sl-color-gray-20);
+  color: var(--sl-color-gray-60);
+}
+
+.sl-theme-dark .code-block__toggle:focus {
+  border-color: var(--sl-color-primary-50);
+  background-color: var(--sl-color-primary-10);
+  color: var(--sl-color-primary-50);
 }
