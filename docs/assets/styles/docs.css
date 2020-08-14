@@ -60,11 +60,7 @@ strong {
   padding-left: 1rem;
   padding-right: 2rem;
   margin: 0 1.25rem;
-  transition: var(--sl-transition-fast) color, var(--sl-transition-fast) border, var(--sl-transition-fast) box-shadow;
-}
-
-.sidebar .search input[type='search']:hover {
-  border-color: var(--sl-input-border-color-hover);
+  transition: var(--sl-transition-fast) box-shadow;
 }
 
 .sidebar .search input[type='search']:focus {
@@ -126,15 +122,6 @@ strong {
   height: 2rem;
   border-radius: var(--sl-border-radius-medium);
   padding: .5rem;
-}
-
-.sidebar-toggle:focus {
-  outline: none;
-  box-shadow: var(--sl-focus-ring-box-shadow);
-}
-
-.sidebar-toggle span:last-child {
-  margin-bottom: 0;
 }
 
 @media screen and (max-width: 768px) {
@@ -271,8 +258,8 @@ strong {
   margin: 0;
 }
 
-.docsify-pagination-container {
-  border-top-color: var(--sl-color-gray-90) !important;
+.markdown-section .anchor {
+  color: var(--sl-color-primary-50);
 }
 
 .markdown-section h1,
@@ -345,7 +332,6 @@ strong {
 .markdown-section pre > code {
   display: block;
   background: none;
-  border-radius: 0;
   color: var(--sl-color-gray-30);
   padding: var(--sl-spacing-medium);
   overflow: auto;
@@ -500,11 +486,6 @@ strong {
 
 .markdown-section p.tip:before {
   background-color: var(--sl-color-danger-50);
-}
-
-.markdown-section p.tip code,
-.markdown-section p.warn code {
-  background-color: var(--sl-color-gray-95);
 }
 
 /* Component headers */
