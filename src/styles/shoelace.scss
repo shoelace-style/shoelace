@@ -323,7 +323,7 @@
   --sl-input-color-focus: var(--sl-color-gray-80);
   --sl-input-color-disabled: var(--sl-color-gray-90);
   --sl-input-color-valid: var(--sl-color-success-60);
-  --sl-input-color-invalid: var(--sl-color-danger-40);
+  --sl-input-color-invalid: var(--sl-color-danger-40); 
 
   --sl-input-icon-color: var(--sl-color-gray-40);
   --sl-input-icon-color-hover: var(--sl-color-gray-60);
@@ -352,19 +352,19 @@
   }
 
   // Button
-  sl-button[type='default']::part(base) {
+  sl-button[type="default"]::part(base) {
     background-color: var(--sl-color-gray-10);
     border-color: var(--sl-color-gray-30);
     color: var(--sl-color-gray-60);
   }
 
-  sl-button[type='default']:not([disabled])::part(base):hover {
+  sl-button[type="default"]:not([disabled])::part(base):hover {
     background-color: var(--sl-color-primary-15);
     border-color: var(--sl-color-primary-30);
     color: var(--sl-color-primary-60);
   }
 
-  sl-button[type='default']:not([disabled])::part(base):focus {
+  sl-button[type="default"]:not([disabled])::part(base):focus {
     background-color: var(--sl-color-primary-15);
     border-color: var(--sl-color-primary-30);
     color: var(--sl-color-primary-60);
@@ -372,7 +372,7 @@
       hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha));
   }
 
-  sl-button[type='default']:not([disabled])::part(base):active {
+  sl-button[type="default"]:not([disabled])::part(base):active {
     background-color: var(--sl-color-primary-15);
     border-color: var(--sl-color-primary-40);
     color: var(--sl-color-primary-70);
