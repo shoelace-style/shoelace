@@ -15,7 +15,7 @@
         label: 'Toggle dark mode'
       });
       toggle.classList.add('theme-toggle');
-      
+
       // Set initial theme
       if (isDark) {
         document.body.classList.add('sl-theme-dark');
