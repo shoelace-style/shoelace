@@ -22,16 +22,16 @@ import { Component, Event, EventEmitter, Prop, Watch, h } from '@stencil/core';
 })
 export class MenuItem {
   /** Set to true to draw the item in a checked state. */
-  @Prop() checked = false;
+  @Prop({ reflect: true }) checked = false;
 
   /** Set to true to draw the menu item in an active state. */
-  @Prop() active = false;
+  @Prop({ reflect: true }) active = false;
 
   /** A unique value to store in the menu item. */
-  @Prop() value = '';
+  @Prop({ reflect: true }) value = '';
 
   /** Set to true to draw the menu item in a disabled state. */
-  @Prop() disabled = false;
+  @Prop({ reflect: true }) disabled = false;
 
   @Watch('active')
   handleActiveChange() {
