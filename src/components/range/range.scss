@@ -3,6 +3,7 @@
 :host {
   --thumb-size: 20px;
   --tooltip-offset-y: 10px;
+  --track-color: var(--sl-color-gray-90);
   --track-height: 6px;
 
   display: block;
@@ -23,7 +24,7 @@
     &::-webkit-slider-runnable-track {
       width: 100%;
       height: var(--track-height);
-      background-color: var(--sl-color-gray-90);
+      background-color: var(--track-color);
       border-radius: 3px;
       border: none;
     }
@@ -67,7 +68,7 @@
     &::-moz-range-track {
       width: 100%;
       height: var(--track-height);
-      background-color: var(--sl-color-gray-90);
+      background-color: var(--track-color);
       border-radius: 3px;
       border: none;
     }
