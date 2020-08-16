@@ -20,16 +20,16 @@ export class Tag {
   tag: HTMLElement;
 
   /** The tag's type. */
-  @Prop() type: 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text' = 'primary';
+  @Prop({ reflect: true }) type: 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text' = 'primary';
 
   /** The tag's size. */
-  @Prop() size: 'small' | 'medium' | 'large' = 'medium';
+  @Prop({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
 
   /** Set to true to draw a pill-style tag with rounded edges. */
-  @Prop() pill = false;
+  @Prop({ reflect: true }) pill = false;
 
   /** Set to true to make the tag clearable. */
-  @Prop() clearable = false;
+  @Prop({ reflect: true }) clearable = false;
 
   /** Emitted when the clear button is activated. */
   @Event() slClear: EventEmitter;
