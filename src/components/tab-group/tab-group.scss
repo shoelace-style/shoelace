@@ -1,7 +1,12 @@
 @import 'component';
 @import 'mixins/hide-scrollbar';
 
+/**
+ * @prop --tabs-border-color: The color of the border that separates tabs.
+ */
 :host {
+  --tabs-border-color: var(--sl-color-gray-90);
+
   display: block;
 }
 
@@ -67,7 +72,7 @@
     flex: 1 1 auto;
     position: relative;
     flex-direction: row;
-    border-bottom: solid 2px var(--sl-color-gray-90);
+    border-bottom: solid 2px var(--tabs-border-color);
   }
 
   .tab-group__active-tab-indicator {
@@ -98,7 +103,7 @@
     flex: 1 1 auto;
     position: relative;
     flex-direction: row;
-    border-top: solid 2px var(--sl-color-gray-90);
+    border-top: solid 2px var(--tabs-border-color);
   }
 
   .tab-group__active-tab-indicator {
@@ -125,7 +130,7 @@
   .tab-group__tabs {
     flex: 0 0 auto;
     flex-direction: column;
-    border-right: solid 2px var(--sl-color-gray-90);
+    border-right: solid 2px var(--tabs-border-color);
   }
 
   .tab-group__active-tab-indicator {
@@ -153,7 +158,7 @@
   .tab-group__tabs {
     flex: 0 0 auto;
     flex-direction: column;
-    border-left: solid 2px var(--sl-color-gray-90);
+    border-left: solid 2px var(--tabs-border-color);
   }
 
   .tab-group__active-tab-indicator {
