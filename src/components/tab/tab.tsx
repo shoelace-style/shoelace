@@ -23,13 +23,13 @@ export class Tab {
   @Element() host: HTMLSlTabElement;
 
   /** The name of the tab panel the tab will control. The panel must be located in the same tab group. */
-  @Prop() panel = '';
+  @Prop({ reflect: true }) panel = '';
 
   /** Set to true to draw the tab in an active state. */
-  @Prop() active = false;
+  @Prop({ reflect: true }) active = false;
 
   /** Set to true to draw the tab in a disabled state. */
-  @Prop() disabled = false;
+  @Prop({ reflect: true }) disabled = false;
 
   /** Sets focus to the tab. */
   @Method()
