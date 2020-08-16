@@ -36,7 +36,7 @@
   border: solid var(--sl-input-border-width) var(--sl-input-border-color);
   border-radius: 50%;
   background-color: var(--sl-input-background-color);
-  color: var(--sl-color-white);
+  color: transparent;
   transition: var(--sl-transition-fast) border-color, var(--sl-transition-fast) background-color,
     var(--sl-transition-fast) color, var(--sl-transition-fast) box-shadow;
 
@@ -65,6 +65,7 @@
 
 // Checked
 .radio--checked .radio__control {
+  color: var(--sl-color-white);
   border-color: var(--sl-color-primary-50);
   background-color: var(--sl-color-primary-50);
 }
