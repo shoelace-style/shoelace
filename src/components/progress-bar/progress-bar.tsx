@@ -31,7 +31,7 @@ export class ProgressBar {
         aria-valuenow={this.percentage}
       >
         <div
-          part="base"
+          part="indicator"
           class="progress-bar__indicator"
           style={{
             width: `${this.percentage}%`
