@@ -12,10 +12,12 @@ let id = 0;
  * @slot help-text - Help text that describes how to use the select.
  *
  * @part base - The component's base wrapper.
- * @part input - The select input.
- * @part tags - The container in which multiselect options are rendered.
- * @part icon - The select icon.
  * @part help-text - The select help text.
+ * @part icon - The select icon.
+ * @part input - The select input.
+ * @part menu - The internal <sl-menu> element's base.
+ * @part panel - The internal <sl-dropdown> element's panel.
+ * @part tags - The container in which multiselect options are rendered.
  */
 
 @Component({
@@ -311,6 +313,7 @@ export class Select {
 
         <sl-dropdown
           part="base"
+          exportparts="panel:panel"
           ref={el => (this.dropdown = el)}
           closeOnSelect={!this.multiple}
           containingElement={this.host}
@@ -361,6 +364,8 @@ export class Select {
 
           <sl-menu
             ref={el => (this.menu = el)}
+            part="menu"
+            exportparts="base:menu"
             class="select__menu"
             onSlSelect={this.handleMenuSelect}
             onKeyDown={this.handleMenuKeyDown}
