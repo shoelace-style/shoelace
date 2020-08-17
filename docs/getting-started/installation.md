@@ -83,7 +83,7 @@ Next, import the components you want to use and set the assets directory.
 
 ```js
 import '@shoelace-style/shoelace/dist/shoelace/shoelace.css';
-import { setAssetPath, SlButton, SlDropdown } from '@shoelace-style/shoelace/dist/custom-elements';
+import { setAssetPath, SlButton, SlDropdown } from '@shoelace-style/shoelace';
 
 setAssetPath(document.currentScript.src);
 customElements.define('sl-button', SlButton);
@@ -94,7 +94,7 @@ For convenience, the bundle also exports a `defineCustomElements()` method. When
 
 ```js
 import '@shoelace-style/shoelace/dist/shoelace/shoelace.css';
-import { defineCustomElements, setAssetPath } from '@shoelace-style/shoelace/dist/custom-elements';
+import { defineCustomElements, setAssetPath } from '@shoelace-style/shoelace';
 
 setAssetPath(document.currentScript.src);
 defineCustomElements();
@@ -146,7 +146,7 @@ Next, import the components you want to use and set the assets directory.
 
 ```js
 import '@shoelace-style/shoelace/dist/shoelace/shoelace.css';
-import { setAssetPath, SlButton, SlDropdown } from '@shoelace-style/shoelace/dist/custom-elements';
+import { setAssetPath, SlButton, SlDropdown } from '@shoelace-style/shoelace';
 
 setAssetPath(document.currentScript.src);
 customElements.define('sl-button', SlButton);
@@ -157,7 +157,7 @@ For convenience, the bundle also exports a `defineCustomElements()` method. When
 
 ```js
 import '@shoelace-style/shoelace/dist/shoelace/shoelace.css';
-import { defineCustomElements, setAssetPath } from '@shoelace-style/shoelace/dist/custom-elements';
+import { defineCustomElements, setAssetPath } from '@shoelace-style/shoelace';
 
 setAssetPath(document.currentScript.src);
 defineCustomElements();

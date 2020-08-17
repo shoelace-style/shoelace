@@ -3,11 +3,11 @@
   "version": "2.0.0-beta.13",
   "description": "A forward-thinking library of web components.",
   "main": "dist/index.js",
-  "module": "dist/index.mjs",
   "es2015": "dist/esm/index.mjs",
   "es2017": "dist/esm/index.mjs",
-  "types": "dist/types/index.d.ts",
   "collection": "dist/collection/collection-manifest.json",
+  "module": "dist/custom-elements/index.js",
+  "types": "dist/custom-elements/index.d.ts",
   "collection:main": "dist/collection/index.js",
   "files": [
     "dist/",
