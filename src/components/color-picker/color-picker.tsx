@@ -7,12 +7,17 @@ import { clamp } from '../../utilities/math';
  * @status stable
  *
  * @part base - The component's base wrapper.
+ * @part trigger - The color picker's dropdown trigger.
+ * @part copy-button - The copy button, a <sl-button> element.
  * @part swatches - The container that holds swatches.
  * @part swatch - Each individual swatch.
  * @part grid - The color grid.
  * @part grid-handle - The color grid's handle.
+ * @part hue-slider - The hue slider.
+ * @part opacity-slider - The opacity slider.
  * @part slider - Hue and opacity sliders.
  * @part slider-handle - Hue and opacity slider handles.
+ * @part panel - The internal <sl-dropdown> element's panel.
  * @part preview - The preview color.
  * @part input - The text input.
  * @part copy-button - The copy button.
@@ -607,7 +612,7 @@ export class ColorPicker {
           <div class="color-picker__controls">
             <div class="color-picker__sliders">
               <div
-                part="slider"
+                part="slider hue-slider"
                 class="color-picker__hue color-picker__slider"
                 onMouseDown={this.handleHueDrag}
                 onTouchStart={this.handleHueDrag}
@@ -631,7 +636,7 @@ export class ColorPicker {
 
               {this.opacity && (
                 <div
-                  part="slider"
+                  part="slider opacity-slider"
                   class="color-picker__alpha color-picker__slider color-picker__transparent-bg"
                   onMouseDown={this.handleAlphaDrag}
                   onTouchStart={this.handleAlphaDrag}
@@ -688,7 +693,7 @@ export class ColorPicker {
             />
             <sl-button
               ref={el => (this.copyButton = el)}
-              part="copy-button"
+              exportparts="base:copy-button"
               slot="suffix"
               class="color-picker__copy-button"
               size="small"
@@ -729,6 +734,7 @@ export class ColorPicker {
     return (
       <sl-dropdown
         ref={el => (this.dropdown = el)}
+        exportparts="panel:panel"
         class="color-dropdown"
         aria-disabled={this.disabled}
         containingElement={this.host}
@@ -739,6 +745,7 @@ export class ColorPicker {
       >
         <button
           ref={el => (this.trigger = el)}
+          part="trigger"
           slot="trigger"
           class={{
             'color-dropdown__trigger': true,
