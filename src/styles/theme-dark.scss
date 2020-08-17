@@ -120,26 +120,26 @@
     background-color: var(--sl-color-gray-10);
     border-color: var(--sl-color-gray-30);
     color: var(--sl-color-gray-60);
-  }
 
-  sl-color-picker::part(copy-button):hover {
-    background-color: var(--sl-color-primary-15);
-    border-color: var(--sl-color-primary-30);
-    color: var(--sl-color-primary-60);
-  }
+    &:hover {
+      background-color: var(--sl-color-primary-15);
+      border-color: var(--sl-color-primary-30);
+      color: var(--sl-color-primary-60);
+    }
 
-  sl-color-picker::part(copy-button):focus {
-    background-color: var(--sl-color-primary-15);
-    border-color: var(--sl-color-primary-30);
-    color: var(--sl-color-primary-60);
-    box-shadow: 0 0 0 var(--sl-focus-ring-width)
-      hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha));
-  }
+    &:focus {
+      background-color: var(--sl-color-primary-15);
+      border-color: var(--sl-color-primary-30);
+      color: var(--sl-color-primary-60);
+      box-shadow: 0 0 0 var(--sl-focus-ring-width)
+        hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha));
+    }
 
-  sl-color-picker::part(copy-button):active {
-    background-color: var(--sl-color-primary-15);
-    border-color: var(--sl-color-primary-40);
-    color: var(--sl-color-primary-70);
+    &:active {
+      background-color: var(--sl-color-primary-15);
+      border-color: var(--sl-color-primary-40);
+      color: var(--sl-color-primary-70);
+    }
   }
 
   sl-color-picker::part(panel) {
@@ -195,11 +195,6 @@
     background-color: var(--sl-color-gray-10);
   }
 
-  // Drawer
-  sl-drawer::part(panel) {
-    background-color: var(--sl-color-gray-10);
-  }
-
   // Dropdown
   sl-dropdown::part(panel) {
     background-color: var(--sl-color-gray-10);
@@ -211,13 +206,15 @@
     color: var(--sl-color-gray-60);
   }
 
-  sl-icon-button:not([disabled])::part(base):hover,
-  sl-icon-button:not([disabled])::part(base):focus {
-    color: var(--sl-color-primary-50);
-  }
+  sl-icon-button:not([disabled])::part(base) {
+    &:hover,
+    &:focus {
+      color: var(--sl-color-primary-50);
+    }
 
-  sl-icon-button:not([disabled])::part(base):active {
-    color: var(--sl-color-primary-60);
+    &:active {
+      color: var(--sl-color-primary-60);
+    }
   }
 
   // Menu
@@ -236,6 +233,7 @@
     color: var(--sl-color-primary-50);
   }
 
+  // Menu label
   sl-menu-label::part(base) {
     color: var(--sl-color-gray-40);
   }
