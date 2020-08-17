@@ -98,26 +98,3 @@ Alternatively, you can set them inline directly on the element.
 ```
 
 Not all components expose CSS custom properties. For those that do, they can be found in the component's API documentation.
-
-## Writing a Theme
-
-Customizing Shoelace is fairly easy, but you can take things a step further and create a full-blown theme if you want. A theme is nothing more than a stylesheet that uses the APIs described above to customize Shoelace's design tokens and components.
-
-It's a good practice to include `shoelace.css` in your app and add your theme's stylesheet directly below it. That way, when an update introduces a new design token, your theme will still work with the default design token value.
-
-### Submitting a Theme
-
-**I am very interested in offering well-designed themes to complement this library.** To submit a theme for review, please open an issue on GitHub with the theme attached. Once approved, your theme will be showcased in the project's documentation (that section is coming soon).
-
-Themes that are in high demand include:
-
-- Dark mode ([details](https://github.com/shoelace-style/shoelace/issues/98))
-- High contrast ([details](https://github.com/shoelace-style/shoelace/issues/99))
-
-**I am willing to contribute a minimum of $200 USD to commission each of the themes listed above.** 
-
-Please note the following requirements before submitting a theme.
-
-- Themes must be complete and of high quality
-- Themes must be available under the same open source license as Shoelace
-- If a theme is not original, the derivative work must have a license that is compatible with Shoelace's license

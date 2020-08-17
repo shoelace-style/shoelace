@@ -4,6 +4,7 @@
   - [Installation](/getting-started/installation.md)
   - [Usage](/getting-started/usage.md)
   - [Customizing](/getting-started/customizing.md)
+  - [Themes](/getting-started/themes.md)
   - [Roadmap](/getting-started/roadmap.md)
   - [Community](/getting-started/community.md)
 
