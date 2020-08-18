@@ -8,7 +8,7 @@ import { clamp } from '../../utilities/math';
  *
  * @part base - The component's base wrapper.
  * @part trigger - The color picker's dropdown trigger.
- * @part copy-button - The copy button, a <sl-button> element.
+ * @part copy-button - The copy button.
  * @part swatches - The container that holds swatches.
  * @part swatch - Each individual swatch.
  * @part grid - The color grid.
@@ -17,7 +17,6 @@ import { clamp } from '../../utilities/math';
  * @part opacity-slider - The opacity slider.
  * @part slider - Hue and opacity sliders.
  * @part slider-handle - Hue and opacity slider handles.
- * @part panel - The internal <sl-dropdown> element's panel.
  * @part preview - The preview color.
  * @part input - The text input.
  * @part copy-button - The copy button.
@@ -734,7 +733,6 @@ export class ColorPicker {
     return (
       <sl-dropdown
         ref={el => (this.dropdown = el)}
-        exportparts="panel:panel"
         class="color-dropdown"
         aria-disabled={this.disabled}
         containingElement={this.host}
