@@ -86,6 +86,11 @@
   background-color: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 13%)
 }
 
+.sl-theme-dark .markdown-section p.tip::before,
+.sl-theme-dark .markdown-section p.warn::before {
+  color: var(--sl-color-gray-10);
+}
+
 .sl-theme-dark .markdown-section p.tip code,
 .sl-theme-dark .markdown-section p.warn code {
   background-color: var(--sl-color-gray-15);
