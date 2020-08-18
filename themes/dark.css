@@ -168,6 +168,10 @@
   /* Overlays */
   --sl-overlay-background-color: hsla(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 80%, 0.1);
 
+  /*  Panels */
+  --sl-panel-background-color: var(--sl-color-gray-10);
+  --sl-panel-border-color: var(--sl-color-gray-20);
+
   /* Tooltips */
   --sl-tooltip-background-color: var(--sl-color-gray-80);
   --sl-tooltip-color: var(--sl-color-black);
@@ -221,12 +225,13 @@
   --border-color: var(--sl-color-gray-20);
 }
 
-/* Color picker */
-.sl-theme-dark sl-color-picker::part(base) {
-  background-color: var(--sl-color-gray-10);
-  border-color: var(--sl-color-gray-20);
+/* Checkbox & radio */
+.sl-theme-dark sl-checkbox::part(control),
+.sl-theme-dark sl-radio::part(control) {
+  color: var(--sl-color-gray-10);
 }
 
+/* Color picker */
 .sl-theme-dark sl-color-picker::part(copy-button) {
   background-color: var(--sl-color-gray-10);
   border-color: var(--sl-color-gray-30);
@@ -295,22 +300,6 @@
   border-color: var(--sl-color-gray-20);
 }
 
-/* Dialog */
-.sl-theme-dark sl-dialog::part(panel) {
-  background-color: var(--sl-color-gray-10);
-}
-
-/* Drawer */
-.sl-theme-dark sl-drawer::part(panel) {
-  background-color: var(--sl-color-gray-10);
-}
-
-/* Dropdown */
-.sl-theme-dark sl-dropdown::part(panel) {
-  background-color: var(--sl-color-gray-10);
-  border-color: var(--sl-color-gray-20);
-}
-
 /* Icon button */
 .sl-theme-dark sl-icon-button::part(base) {
   color: var(--sl-color-gray-60);
@@ -323,16 +312,6 @@
 
 .sl-theme-dark sl-icon-button:not([disabled])::part(base):active {
   color: var(--sl-color-primary-60);
-}
-
-/* Menu */
-.sl-theme-dark sl-menu::part(base) {
-  background-color: var(--sl-color-gray-10);
-}
-
-/* Menu divider */
-.sl-theme-dark sl-menu-divider {
-  --color: var(--sl-color-gray-20);
 }
 
 /* Menu item */
@@ -351,6 +330,10 @@
   background-color: var(--sl-color-gray-20);
 }
 
+.sl-theme-dark sl-progress-bar::part(indicator) {
+  color: var(--sl-color-gray-10);
+}
+
 /* Progress ring */
 .sl-theme-dark sl-progress-ring::part(base) {
   --track-color: var(--sl-color-gray-20);
@@ -367,13 +350,10 @@
 }
 
 /* Select */
-.sl-theme-dark sl-select::part(panel) {
-  border-color: var(--sl-color-gray-20);
-  background-color: var(--sl-color-gray-10);
-}
-
-.sl-theme-dark sl-select::part(menu) {
-  background-color: var(--sl-color-gray-10);
+.sl-theme-dark sl-select::part(tag) {
+  background-color: var(--sl-color-info-15);
+  border-color: var(--sl-color-info-30);
+  color: var(--sl-color-info-70);
 }
 
 /* Skeleton */
@@ -389,7 +369,7 @@
 }
 
 .sl-theme-dark sl-switch::part(thumb) {
-  background-color: var(--sl-color-black);
+  background-color: var(--sl-color-gray-10);
 }
 
 /* Tab group */
