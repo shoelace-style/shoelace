@@ -6,6 +6,7 @@
       <li>Works with all frameworks 🧩</li>
       <li>Works with CDNs 🚛</li>
       <li>Fully customizable with CSS 🎨</li>
+      <li>Includes an official dark theme 🌛</li>
       <li>Built with accessibility in mind ♿️</li>
       <li>Open source 😸</li>
     </ul>
@@ -50,7 +51,7 @@ Unfortunately, _framework-specific_ components fail us in a number of ways:
 
 - You can only use them in the framework they're designed for 🔒
 - Their lifespan is limited to that of the framework's ⏳
-- New framework versions can lead to breaking changes, requiring substantial effort to update components 😭
+- New frameworks/versions can lead to breaking changes, requiring substantial effort to update components 😭
 
 Web components solve these problems. They're [supported by all modern browsers](https://caniuse.com/#feat=custom-elementsv1), they're framework-agnostic, and they're [part of the standard](https://developer.mozilla.org/en-US/docs/Web/Web_Components), so we know they'll be supported for many years to come.
 
@@ -58,7 +59,7 @@ This is the technology that Shoelace is built on.
 
 ## What Problem Does This Solve?
 
-Shoelace provides a collection of professionally designed, every day UI components built on a framework-agnostic technology. Why spend hundreds of hours or more building a design system from scratch? Why make a component library that only works with one framework?
+Shoelace provides a collection of professionally designed, every day UI components built on a framework-agnostic technology. Why spend hundreds of hours (or more) building a design system from scratch? Why make a component library that only works with one framework?
 
 With Shoelace, you can:
 
