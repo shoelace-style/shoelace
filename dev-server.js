@@ -48,6 +48,7 @@ app.use(/^\/$/, async (req, res, next) => {
   res.type('html').send(index);
 });
 app.use('/dist', express.static('./dist'));
+app.use('/themes', express.static('./themes'));
 app.use('/', express.static('./docs'));
 app.listen(proxyPort);
 
@@ -69,8 +70,8 @@ setTimeout(() => {
     }
   });
 
-  // Reload when docs change
-  bs.watch('docs/**/*').on('change', async () => {
+  // Reload when docs or themes change
+  bs.watch('./{docs,themes}/**/*').on('change', async () => {
     bs.reload();
   });
 }, 5000);
