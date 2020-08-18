@@ -101,6 +101,10 @@
   color: var(--sl-color-gray-80);
 }
 
+.sl-theme-dark .markdown-section pre .token.comment {
+  color: var(--sl-color-gray-40);
+}
+
 /* Repo buttons */
 .sl-theme-dark  .repo-button {
   background-color: var(--sl-color-gray-10);
