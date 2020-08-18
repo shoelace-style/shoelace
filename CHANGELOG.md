@@ -2,8 +2,20 @@
 
 ## 2.0.0-beta.14
 
+- Added dark theme
+- Added `--sl-panel-background-color` and `--sl-panel-border-color` tokens
+- Added `--tabs-border-color` custom property to `sl-tab-group`
+- Added `--track-color` custom property to `sl-range`
+- Added `tag` part to `sl-select`
+- Updated `package.json` so custom elements imports can be consumed from the root
 - Fixed a bug where scrolling dialogs didn't resize properly in Safari
 - Fixed a bug where `slShow` and `slHide` would be emitted twice in some components
+- Fixed a bug where `custom-elements/index.d.ts` was broken due to an unclosed comment (fixed in Stencil 1.17.3)
+- Fixed bug where inputs were not using border radius tokens
+- Fixed a bug where the text color was being erroneously set in `sl-progress-ring`
+- Fixed a bug where `sl-progress-bar` used the wrong part name internally for `indicator`
+- Removed background color from `sl-menu`
+- Updated to Stencil 1.17.3
 
 ## 2.0.0-beta.13
 
