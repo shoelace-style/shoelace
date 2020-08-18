@@ -5,6 +5,7 @@ docs/assets/icons/sprite.svg
 
 dist/
 docs/dist/
+docs/themes/
 loader/
 temp/
 www/

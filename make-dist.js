@@ -8,6 +8,7 @@ const del = require('del');
     console.log(chalk.cyan('Creating docs distribution 📚\n'));
     await del('./docs/dist');
     await copy('./dist', './docs/dist');
+    await copy('./themes', './docs/themes');
   } catch (err) {
     console.error(err);
   }
