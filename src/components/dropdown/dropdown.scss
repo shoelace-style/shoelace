@@ -20,8 +20,8 @@
   font-size: var(--sl-font-size-medium);
   font-weight: var(--sl-font-weight-normal);
   color: var(--color);
-  background-color: var(--sl-color-white);
-  border: solid 1px var(--sl-color-gray-90);
+  background-color: var(--sl-panel-background-color);
+  border: solid 1px var(--sl-panel-border-color);
   border-radius: var(--sl-border-radius-medium);
   box-shadow: var(--sl-shadow-large);
   opacity: 0;

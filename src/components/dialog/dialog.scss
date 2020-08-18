@@ -32,7 +32,7 @@
   width: var(--width);
   max-width: calc(100% - var(--sl-spacing-xx-large));
   max-height: calc(100% - var(--sl-spacing-xx-large));
-  background-color: var(--sl-color-white);
+  background-color: var(--sl-panel-background-color);
   border-radius: var(--sl-border-radius-medium);
   box-shadow: var(--sl-shadow-x-large);
   opacity: 0;

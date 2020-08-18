@@ -125,7 +125,7 @@ Custom icons can be loaded by setting the `src` attribute. Only SVG images are s
 
 <style>
   .icon-search {
-    border: solid 1px var(--sl-color-gray-90);
+    border: solid 1px var(--sl-panel-border-color);
     border-radius: var(--sl-border-radius-medium);
     padding: var(--sl-spacing-medium);
   }
@@ -178,6 +178,10 @@ Custom icons can be loaded by setting the `src` attribute. Only SVG images are s
   .icon-list-item:hover {
     background-color: var(--sl-color-primary-95);
     color: var(--sl-color-primary-50);
+  }
+
+  .sl-theme-dark .icon-list-item:hover {
+    background-color: var(--sl-color-primary-15);
   }
 
   .icon-list[data-type="outline"] .icon-list-item[data-name$="-fill"] {

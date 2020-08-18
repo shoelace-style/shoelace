@@ -6,7 +6,7 @@ Menu dividers are used to visually group menu items.
 
 ```html preview
 <sl-menu
-  style="max-width: 200px; border: solid 1px var(--sl-color-gray-90); border-radius: var(--sl-border-radius-medium);"
+  style="max-width: 200px; border: solid 1px var(--sl-panel-border-color); border-radius: var(--sl-border-radius-medium);"
 >
   <sl-menu-item value="1">Option 1</sl-menu-item>
   <sl-menu-item value="2">Option 2</sl-menu-item>

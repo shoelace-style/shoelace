@@ -4,12 +4,10 @@
  * @prop --color: The color of the divider.
  */
 :host {
-  --color: var(--sl-color-gray-90);
-
   display: block;
 }
 
 .menu-divider {
-  border-top: solid 1px var(--color);
+  border-top: solid 1px var(--sl-panel-border-color);
   margin: var(--sl-spacing-x-small) 0;
 }
