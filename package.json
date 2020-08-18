@@ -11,7 +11,8 @@
   "collection:main": "dist/collection/index.js",
   "files": [
     "dist/",
-    "loader/"
+    "loader/",
+    "themes/"
   ],
   "repository": {
     "type": "git",
