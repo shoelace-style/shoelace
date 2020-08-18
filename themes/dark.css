@@ -1,0 +1,439 @@
+.sl-theme-dark {
+  /* Theme colors */
+  --sl-color-primary-saturation: 80%;
+  --sl-color-success-saturation: 50%;
+  --sl-color-info-saturation: 10%;
+  --sl-color-warning-saturation: 70%;
+  --sl-color-danger-saturation: 75%;
+  --sl-color-gray-saturation: 10%;
+
+  /*
+   * Color palettes
+   *
+   * Don't change these! They need to be redefined so the browser reevaluates them when scoped below the default theme.
+   * This allows you to apply the theme to a specific element instead of the entire page.
+   *
+   * See: https://stackoverflow.com/questions/52015737/css-scoped-custom-property-ignored-when-used-to-calculate-variable-in-outer-scop
+   */
+  --sl-color-primary-5: hsl(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 5%);
+  --sl-color-primary-10: hsl(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 10%);
+  --sl-color-primary-15: hsl(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 15%);
+  --sl-color-primary-20: hsl(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 20%);
+  --sl-color-primary-25: hsl(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 25%);
+  --sl-color-primary-30: hsl(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 30%);
+  --sl-color-primary-35: hsl(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 35%);
+  --sl-color-primary-40: hsl(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 40%);
+  --sl-color-primary-45: hsl(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 45%);
+  --sl-color-primary-50: hsl(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%);
+  --sl-color-primary-55: hsl(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 55%);
+  --sl-color-primary-60: hsl(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 60%);
+  --sl-color-primary-65: hsl(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 65%);
+  --sl-color-primary-70: hsl(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 70%);
+  --sl-color-primary-75: hsl(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 75%);
+  --sl-color-primary-80: hsl(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 80%);
+  --sl-color-primary-85: hsl(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 85%);
+  --sl-color-primary-90: hsl(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 90%);
+  --sl-color-primary-95: hsl(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 95%);
+  --sl-color-success-5: hsl(var(--sl-color-success-hue), var(--sl-color-success-saturation), 5%);
+  --sl-color-success-10: hsl(var(--sl-color-success-hue), var(--sl-color-success-saturation), 10%);
+  --sl-color-success-15: hsl(var(--sl-color-success-hue), var(--sl-color-success-saturation), 15%);
+  --sl-color-success-20: hsl(var(--sl-color-success-hue), var(--sl-color-success-saturation), 20%);
+  --sl-color-success-25: hsl(var(--sl-color-success-hue), var(--sl-color-success-saturation), 25%);
+  --sl-color-success-30: hsl(var(--sl-color-success-hue), var(--sl-color-success-saturation), 30%);
+  --sl-color-success-35: hsl(var(--sl-color-success-hue), var(--sl-color-success-saturation), 35%);
+  --sl-color-success-40: hsl(var(--sl-color-success-hue), var(--sl-color-success-saturation), 40%);
+  --sl-color-success-45: hsl(var(--sl-color-success-hue), var(--sl-color-success-saturation), 45%);
+  --sl-color-success-50: hsl(var(--sl-color-success-hue), var(--sl-color-success-saturation), 50%);
+  --sl-color-success-55: hsl(var(--sl-color-success-hue), var(--sl-color-success-saturation), 55%);
+  --sl-color-success-60: hsl(var(--sl-color-success-hue), var(--sl-color-success-saturation), 60%);
+  --sl-color-success-65: hsl(var(--sl-color-success-hue), var(--sl-color-success-saturation), 65%);
+  --sl-color-success-70: hsl(var(--sl-color-success-hue), var(--sl-color-success-saturation), 70%);
+  --sl-color-success-75: hsl(var(--sl-color-success-hue), var(--sl-color-success-saturation), 75%);
+  --sl-color-success-80: hsl(var(--sl-color-success-hue), var(--sl-color-success-saturation), 80%);
+  --sl-color-success-85: hsl(var(--sl-color-success-hue), var(--sl-color-success-saturation), 85%);
+  --sl-color-success-90: hsl(var(--sl-color-success-hue), var(--sl-color-success-saturation), 90%);
+  --sl-color-success-95: hsl(var(--sl-color-success-hue), var(--sl-color-success-saturation), 95%);
+  --sl-color-info-5: hsl(var(--sl-color-info-hue), var(--sl-color-info-saturation), 5%);
+  --sl-color-info-10: hsl(var(--sl-color-info-hue), var(--sl-color-info-saturation), 10%);
+  --sl-color-info-15: hsl(var(--sl-color-info-hue), var(--sl-color-info-saturation), 15%);
+  --sl-color-info-20: hsl(var(--sl-color-info-hue), var(--sl-color-info-saturation), 20%);
+  --sl-color-info-25: hsl(var(--sl-color-info-hue), var(--sl-color-info-saturation), 25%);
+  --sl-color-info-30: hsl(var(--sl-color-info-hue), var(--sl-color-info-saturation), 30%);
+  --sl-color-info-35: hsl(var(--sl-color-info-hue), var(--sl-color-info-saturation), 35%);
+  --sl-color-info-40: hsl(var(--sl-color-info-hue), var(--sl-color-info-saturation), 40%);
+  --sl-color-info-45: hsl(var(--sl-color-info-hue), var(--sl-color-info-saturation), 45%);
+  --sl-color-info-50: hsl(var(--sl-color-info-hue), var(--sl-color-info-saturation), 50%);
+  --sl-color-info-55: hsl(var(--sl-color-info-hue), var(--sl-color-info-saturation), 55%);
+  --sl-color-info-60: hsl(var(--sl-color-info-hue), var(--sl-color-info-saturation), 60%);
+  --sl-color-info-65: hsl(var(--sl-color-info-hue), var(--sl-color-info-saturation), 65%);
+  --sl-color-info-70: hsl(var(--sl-color-info-hue), var(--sl-color-info-saturation), 70%);
+  --sl-color-info-75: hsl(var(--sl-color-info-hue), var(--sl-color-info-saturation), 75%);
+  --sl-color-info-80: hsl(var(--sl-color-info-hue), var(--sl-color-info-saturation), 80%);
+  --sl-color-info-85: hsl(var(--sl-color-info-hue), var(--sl-color-info-saturation), 85%);
+  --sl-color-info-90: hsl(var(--sl-color-info-hue), var(--sl-color-info-saturation), 90%);
+  --sl-color-info-95: hsl(var(--sl-color-info-hue), var(--sl-color-info-saturation), 95%);
+  --sl-color-warning-5: hsl(var(--sl-color-warning-hue), var(--sl-color-warning-saturation), 5%);
+  --sl-color-warning-10: hsl(var(--sl-color-warning-hue), var(--sl-color-warning-saturation), 10%);
+  --sl-color-warning-15: hsl(var(--sl-color-warning-hue), var(--sl-color-warning-saturation), 15%);
+  --sl-color-warning-20: hsl(var(--sl-color-warning-hue), var(--sl-color-warning-saturation), 20%);
+  --sl-color-warning-25: hsl(var(--sl-color-warning-hue), var(--sl-color-warning-saturation), 25%);
+  --sl-color-warning-30: hsl(var(--sl-color-warning-hue), var(--sl-color-warning-saturation), 30%);
+  --sl-color-warning-35: hsl(var(--sl-color-warning-hue), var(--sl-color-warning-saturation), 35%);
+  --sl-color-warning-40: hsl(var(--sl-color-warning-hue), var(--sl-color-warning-saturation), 40%);
+  --sl-color-warning-45: hsl(var(--sl-color-warning-hue), var(--sl-color-warning-saturation), 45%);
+  --sl-color-warning-50: hsl(var(--sl-color-warning-hue), var(--sl-color-warning-saturation), 50%);
+  --sl-color-warning-55: hsl(var(--sl-color-warning-hue), var(--sl-color-warning-saturation), 55%);
+  --sl-color-warning-60: hsl(var(--sl-color-warning-hue), var(--sl-color-warning-saturation), 60%);
+  --sl-color-warning-65: hsl(var(--sl-color-warning-hue), var(--sl-color-warning-saturation), 65%);
+  --sl-color-warning-70: hsl(var(--sl-color-warning-hue), var(--sl-color-warning-saturation), 70%);
+  --sl-color-warning-75: hsl(var(--sl-color-warning-hue), var(--sl-color-warning-saturation), 75%);
+  --sl-color-warning-80: hsl(var(--sl-color-warning-hue), var(--sl-color-warning-saturation), 80%);
+  --sl-color-warning-85: hsl(var(--sl-color-warning-hue), var(--sl-color-warning-saturation), 85%);
+  --sl-color-warning-90: hsl(var(--sl-color-warning-hue), var(--sl-color-warning-saturation), 90%);
+  --sl-color-warning-95: hsl(var(--sl-color-warning-hue), var(--sl-color-warning-saturation), 95%);
+  --sl-color-danger-5: hsl(var(--sl-color-danger-hue), var(--sl-color-danger-saturation), 5%);
+  --sl-color-danger-10: hsl(var(--sl-color-danger-hue), var(--sl-color-danger-saturation), 10%);
+  --sl-color-danger-15: hsl(var(--sl-color-danger-hue), var(--sl-color-danger-saturation), 15%);
+  --sl-color-danger-20: hsl(var(--sl-color-danger-hue), var(--sl-color-danger-saturation), 20%);
+  --sl-color-danger-25: hsl(var(--sl-color-danger-hue), var(--sl-color-danger-saturation), 25%);
+  --sl-color-danger-30: hsl(var(--sl-color-danger-hue), var(--sl-color-danger-saturation), 30%);
+  --sl-color-danger-35: hsl(var(--sl-color-danger-hue), var(--sl-color-danger-saturation), 35%);
+  --sl-color-danger-40: hsl(var(--sl-color-danger-hue), var(--sl-color-danger-saturation), 40%);
+  --sl-color-danger-45: hsl(var(--sl-color-danger-hue), var(--sl-color-danger-saturation), 45%);
+  --sl-color-danger-50: hsl(var(--sl-color-danger-hue), var(--sl-color-danger-saturation), 50%);
+  --sl-color-danger-55: hsl(var(--sl-color-danger-hue), var(--sl-color-danger-saturation), 55%);
+  --sl-color-danger-60: hsl(var(--sl-color-danger-hue), var(--sl-color-danger-saturation), 60%);
+  --sl-color-danger-65: hsl(var(--sl-color-danger-hue), var(--sl-color-danger-saturation), 65%);
+  --sl-color-danger-70: hsl(var(--sl-color-danger-hue), var(--sl-color-danger-saturation), 70%);
+  --sl-color-danger-75: hsl(var(--sl-color-danger-hue), var(--sl-color-danger-saturation), 75%);
+  --sl-color-danger-80: hsl(var(--sl-color-danger-hue), var(--sl-color-danger-saturation), 80%);
+  --sl-color-danger-85: hsl(var(--sl-color-danger-hue), var(--sl-color-danger-saturation), 85%);
+  --sl-color-danger-90: hsl(var(--sl-color-danger-hue), var(--sl-color-danger-saturation), 90%);
+  --sl-color-danger-95: hsl(var(--sl-color-danger-hue), var(--sl-color-danger-saturation), 95%);
+  --sl-color-gray-5: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 5%);
+  --sl-color-gray-10: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 10%);
+  --sl-color-gray-15: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 15%);
+  --sl-color-gray-20: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 20%);
+  --sl-color-gray-25: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 25%);
+  --sl-color-gray-30: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 30%);
+  --sl-color-gray-35: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 35%);
+  --sl-color-gray-40: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 40%);
+  --sl-color-gray-45: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 45%);
+  --sl-color-gray-50: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 50%);
+  --sl-color-gray-55: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 55%);
+  --sl-color-gray-60: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 60%);
+  --sl-color-gray-65: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 65%);
+  --sl-color-gray-70: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 70%);
+  --sl-color-gray-75: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 75%);
+  --sl-color-gray-80: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 80%);
+  --sl-color-gray-85: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 85%);
+  --sl-color-gray-90: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 90%);
+  --sl-color-gray-95: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 95%);
+
+  /* Inputs */
+  --sl-input-background-color: var(--sl-color-gray-10);
+  --sl-input-background-color-hover: var(--sl-color-gray-10);
+  --sl-input-background-color-focus: var(--sl-color-gray-10);
+  --sl-input-background-color-disabled: var(--sl-color-gray-15);
+  --sl-input-border-color: var(--sl-color-gray-30);
+  --sl-input-border-color-hover: var(--sl-color-gray-40);
+  --sl-input-border-color-focus: var(--sl-color-primary-50);
+  --sl-input-border-color-disabled: var(--sl-color-gray-80);
+  --sl-input-border-color-valid: var(--sl-color-success-50);
+  --sl-input-border-color-invalid: var(--sl-color-danger-50);
+  --sl-input-font-family: var(--sl-font-sans);
+  --sl-input-font-weight: var(--sl-font-weight-normal);
+  --sl-input-font-size-small: var(--sl-font-size-small);
+  --sl-input-font-size-medium: var(--sl-font-size-medium);
+  --sl-input-font-size-large: var(--sl-font-size-large);
+  --sl-input-letter-spacing: var(--sl-letter-spacing-normal);
+  --sl-input-border-color: var(--sl-color-gray-30);
+  --sl-input-border-color-hover: var(--sl-color-gray-40);
+  --sl-input-border-color-focus: var(--sl-color-primary-60);
+  --sl-input-border-color-disabled: var(--sl-color-gray-30);
+  --sl-input-border-color-valid: var(--sl-color-success-50);
+  --sl-input-border-color-invalid: var(--sl-color-danger-50);
+  --sl-input-color: var(--sl-color-gray-80);
+  --sl-input-color-hover: var(--sl-color-gray-80);
+  --sl-input-color-focus: var(--sl-color-gray-80);
+  --sl-input-color-disabled: var(--sl-color-gray-90);
+  --sl-input-color-valid: var(--sl-color-success-60);
+  --sl-input-color-invalid: var(--sl-color-danger-40);
+  --sl-input-icon-color: var(--sl-color-gray-40);
+  --sl-input-icon-color-hover: var(--sl-color-gray-60);
+  --sl-input-icon-color-focus: var(--sl-color-gray-60);
+  --sl-input-placeholder-color: var(--sl-color-gray-30);
+  --sl-input-placeholder-color-disabled: var(--sl-color-gray-40);
+
+  /* Overlays */
+  --sl-overlay-background-color: hsla(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 80%, 0.1);
+
+  /* Tooltips */
+  --sl-tooltip-background-color: var(--sl-color-gray-80);
+  --sl-tooltip-color: var(--sl-color-black);
+}
+
+/* Alert */
+.sl-theme-dark sl-alert::part(base) {
+  background-color: var(--sl-color-gray-10);
+  border-left-color: var(--sl-color-gray-20);
+  border-right-color: var(--sl-color-gray-20);
+  border-bottom-color: var(--sl-color-gray-20);
+  color: var(--sl-color-gray-80);
+}
+
+/* Avatar */
+.sl-theme-dark sl-avatar::part(base) {
+  background-color: var(--sl-color-gray-30);
+  color: var(--sl-color-gray-70);
+}
+
+/* Button */
+.sl-theme-dark sl-button[type='default']::part(base) {
+  background-color: var(--sl-color-gray-10);
+  border-color: var(--sl-color-gray-30);
+  color: var(--sl-color-gray-60);
+}
+
+.sl-theme-dark sl-button[type='default']:not([disabled])::part(base):hover {
+  background-color: var(--sl-color-primary-15);
+  border-color: var(--sl-color-primary-30);
+  color: var(--sl-color-primary-60);
+}
+
+.sl-theme-dark sl-button[type='default']:not([disabled])::part(base):focus {
+  background-color: var(--sl-color-primary-15);
+  border-color: var(--sl-color-primary-30);
+  color: var(--sl-color-primary-60);
+  box-shadow: 0 0 0 var(--sl-focus-ring-width)
+    hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha));
+}
+
+.sl-theme-dark sl-button[type='default']:not([disabled])::part(base):active {
+  background-color: var(--sl-color-primary-15);
+  border-color: var(--sl-color-primary-40);
+  color: var(--sl-color-primary-70);
+}
+
+/* Card */
+.sl-theme-dark sl-card::part(base) {
+  background-color: var(--sl-color-gray-10);
+  --border-color: var(--sl-color-gray-20);
+}
+
+/* Color picker */
+.sl-theme-dark sl-color-picker::part(base) {
+  background-color: var(--sl-color-gray-10);
+  border-color: var(--sl-color-gray-20);
+}
+
+.sl-theme-dark sl-color-picker::part(copy-button) {
+  background-color: var(--sl-color-gray-10);
+  border-color: var(--sl-color-gray-30);
+  color: var(--sl-color-gray-60);
+}
+
+.sl-theme-dark sl-color-picker::part(copy-button):hover {
+  background-color: var(--sl-color-primary-15);
+  border-color: var(--sl-color-primary-30);
+  color: var(--sl-color-primary-60);
+}
+
+.sl-theme-dark sl-color-picker::part(copy-button):focus {
+  background-color: var(--sl-color-primary-15);
+  border-color: var(--sl-color-primary-30);
+  color: var(--sl-color-primary-60);
+  box-shadow: 0 0 0 var(--sl-focus-ring-width)
+    hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha));
+}
+
+.sl-theme-dark sl-color-picker::part(copy-button):active {
+  background-color: var(--sl-color-primary-15);
+  border-color: var(--sl-color-primary-40);
+  color: var(--sl-color-primary-70);
+}
+
+.sl-theme-dark sl-color-picker::part(panel) {
+  background-color: var(--sl-color-gray-10);
+  border-color: var(--sl-color-gray-20);
+}
+
+.sl-theme-dark sl-color-picker::part(slider-handle) {
+  background-color: var(--sl-color-gray-10);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.25), inset 0 0 0 1px rgba(0, 0, 0, 0.25);
+}
+
+.sl-theme-dark sl-color-picker::part(slider-handle):focus {
+  box-shadow: 0 0 0 1px hsl(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%),
+    var(--sl-focus-ring-box-shadow);
+}
+
+.sl-theme-dark sl-color-picker::part(grid-handle) {
+  border-color: var(--sl-color-gray-10);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.25), inset 0 0 0 1px rgba(255, 255, 255, 0.25);
+}
+
+.sl-theme-dark sl-color-picker::part(grid-handle):focus {
+  box-shadow: 0 0 0 1px hsl(var(--sl-focus-ring-hue), var(--sl-focus-ring-saturation), var(--sl-focus-ring-lightness)),
+    inset 0 0 0 1px hsl(var(--sl-focus-ring-hue), var(--sl-focus-ring-saturation), var(--sl-focus-ring-lightness)),
+    var(--sl-focus-ring-box-shadow);
+}
+
+.sl-theme-dark sl-color-picker::part(preview),
+.sl-theme-dark sl-color-picker::part(opacity-slider),
+.sl-theme-dark sl-color-picker::part(trigger) {
+  background-image: linear-gradient(45deg, #333 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #333 75%),
+    linear-gradient(45deg, transparent 75%, #333 75%), linear-gradient(45deg, #333 25%, transparent 25%);
+}
+
+.sl-theme-dark sl-color-picker::part(swatches) {
+  border-top-color: var(--sl-color-gray-20);
+}
+
+/* Details */
+.sl-theme-dark sl-details::part(base) {
+  border-color: var(--sl-color-gray-20);
+}
+
+/* Dialog */
+.sl-theme-dark sl-dialog::part(panel) {
+  background-color: var(--sl-color-gray-10);
+}
+
+/* Drawer */
+.sl-theme-dark sl-drawer::part(panel) {
+  background-color: var(--sl-color-gray-10);
+}
+
+/* Dropdown */
+.sl-theme-dark sl-dropdown::part(panel) {
+  background-color: var(--sl-color-gray-10);
+  border-color: var(--sl-color-gray-20);
+}
+
+/* Icon button */
+.sl-theme-dark sl-icon-button::part(base) {
+  color: var(--sl-color-gray-60);
+}
+
+.sl-theme-dark sl-icon-button:not([disabled])::part(base):hover,
+.sl-theme-dark sl-icon-button:not([disabled])::part(base):focus {
+  color: var(--sl-color-primary-50);
+}
+
+.sl-theme-dark sl-icon-button:not([disabled])::part(base):active {
+  color: var(--sl-color-primary-60);
+}
+
+/* Menu */
+.sl-theme-dark sl-menu::part(base) {
+  background-color: var(--sl-color-gray-10);
+}
+
+/* Menu divider */
+.sl-theme-dark sl-menu-divider {
+  --color: var(--sl-color-gray-20);
+}
+
+/* Menu item */
+.sl-theme-dark sl-menu-item[active]::part(base) {
+  background-color: var(--sl-color-primary-15);
+  color: var(--sl-color-primary-50);
+}
+
+/* Menu label */
+.sl-theme-dark sl-menu-label::part(base) {
+  color: var(--sl-color-gray-40);
+}
+
+/* Progress bar */
+.sl-theme-dark sl-progress-bar::part(base) {
+  background-color: var(--sl-color-gray-20);
+}
+
+/* Progress ring */
+.sl-theme-dark sl-progress-ring::part(base) {
+  --track-color: var(--sl-color-gray-20);
+}
+
+/* Range */
+.sl-theme-dark sl-range {
+  --track-color: var(--sl-color-gray-20);
+}
+
+/* Rating */
+.sl-theme-dark sl-rating {
+  --symbol-color: var(--sl-color-gray-35);
+}
+
+/* Select */
+.sl-theme-dark sl-select::part(panel) {
+  border-color: var(--sl-color-gray-20);
+  background-color: var(--sl-color-gray-10);
+}
+
+.sl-theme-dark sl-select::part(menu) {
+  background-color: var(--sl-color-gray-10);
+}
+
+/* Skeleton */
+.sl-theme-dark sl-skeleton {
+  --color: var(--sl-color-gray-20);
+  --sheen-color: var(--sl-color-gray-25);
+}
+
+/* Switch */
+.sl-theme-dark sl-switch::part(control) {
+  background-color: var(--sl-color-gray-30);
+  border-color: var(--sl-color-gray-30);
+}
+
+.sl-theme-dark sl-switch::part(thumb) {
+  background-color: var(--sl-color-black);
+}
+
+/* Tab group */
+.sl-theme-dark sl-tab-group::part(tabs) {
+  --tabs-border-color: var(--sl-color-gray-20);
+}
+
+/* Tab */
+.sl-theme-dark sl-tab::part(base) {
+  color: var(--sl-color-gray-60);
+}
+
+.sl-theme-dark sl-tab:not([disabled])::part(base):hover,
+.sl-theme-dark sl-tab[active]::part(base) {
+  color: var(--sl-color-primary-50);
+}
+
+/* Tag */
+.sl-theme-dark sl-tag[type='primary']::part(base) {
+  background-color: var(--sl-color-primary-15);
+  border-color: var(--sl-color-primary-30);
+  color: var(--sl-color-primary-70);
+}
+
+.sl-theme-dark sl-tag[type='success']::part(base) {
+  background-color: var(--sl-color-success-15);
+  border-color: var(--sl-color-success-30);
+  color: var(--sl-color-success-65);
+}
+
+.sl-theme-dark sl-tag[type='info']::part(base) {
+  background-color: var(--sl-color-info-15);
+  border-color: var(--sl-color-info-30);
+  color: var(--sl-color-info-70);
+}
+
+.sl-theme-dark sl-tag[type='warning']::part(base) {
+  background-color: var(--sl-color-warning-15);
+  border-color: var(--sl-color-warning-30);
+  color: var(--sl-color-warning-70);
+}
+
+.sl-theme-dark sl-tag[type='danger']::part(base) {
+  background-color: var(--sl-color-danger-15);
+  border-color: var(--sl-color-danger-30);
+  color: var(--sl-color-danger-75);
+}
