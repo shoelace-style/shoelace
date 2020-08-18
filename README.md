@@ -5,6 +5,7 @@ A forward-thinking library of web components.
 - Works with all frameworks 🧩
 - Works with CDNs 🚛
 - Fully customizable with CSS 🎨
+- Includes an official dark theme 🌛
 - Built with accessibility in mind ♿️
 - Open source 😸
 
