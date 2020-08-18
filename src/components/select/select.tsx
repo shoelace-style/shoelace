@@ -15,8 +15,7 @@ let id = 0;
  * @part help-text - The select help text.
  * @part icon - The select icon.
  * @part input - The select input.
- * @part menu - The internal <sl-menu> element's base.
- * @part panel - The internal <sl-dropdown> element's panel.
+ * @part tag - The multiselect option, a <sl-tag> element.
  * @part tags - The container in which multiselect options are rendered.
  */
 
@@ -240,6 +239,7 @@ export class Select {
       this.displayTags = checkedItems.map(item => {
         return (
           <sl-tag
+            exportparts="base:tag"
             type="info"
             size={this.size}
             pill={this.pill}
@@ -259,7 +259,7 @@ export class Select {
         const total = this.displayTags.length;
         this.displayTags = this.displayTags.slice(0, this.maxTagsVisible);
         this.displayTags.push(
-          <sl-tag type="info" size={this.size}>
+          <sl-tag exportparts="base:tag" type="info" size={this.size}>
             +{total - this.maxTagsVisible}
           </sl-tag>
         );
@@ -313,7 +313,6 @@ export class Select {
 
         <sl-dropdown
           part="base"
-          exportparts="panel:panel"
           ref={el => (this.dropdown = el)}
           closeOnSelect={!this.multiple}
           containingElement={this.host}
@@ -365,7 +364,6 @@ export class Select {
           <sl-menu
             ref={el => (this.menu = el)}
             part="menu"
-            exportparts="base:menu"
             class="select__menu"
             onSlSelect={this.handleMenuSelect}
             onKeyDown={this.handleMenuKeyDown}
