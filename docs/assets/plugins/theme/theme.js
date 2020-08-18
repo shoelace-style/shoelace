@@ -10,10 +10,6 @@
       const noTransitions = Object.assign(document.createElement('style'), {
         textContent: '* { transition: none !important; }'
       });
-      const tooltip = Object.assign(document.createElement('sl-tooltip'), {
-        content: 'Toggle dark mode',
-        placement: 'left'
-      });
       const toggle = Object.assign(document.createElement('sl-icon-button'), {
         name: isDark ? 'sun' : 'moon',
         label: 'Toggle dark mode'
@@ -39,8 +35,7 @@
         });
       });
 
-      tooltip.appendChild(toggle);
-      sidebarToggle.insertAdjacentElement('afterend', tooltip);
+      sidebarToggle.insertAdjacentElement('afterend', toggle);
     });
   });
 })();
