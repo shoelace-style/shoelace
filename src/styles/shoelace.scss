@@ -173,9 +173,9 @@
   --sl-input-border-color-invalid: var(--sl-color-danger-50);
   --sl-input-border-width: 1px;
 
-  --sl-input-border-radius-small: 4px;
-  --sl-input-border-radius-medium: 4px;
-  --sl-input-border-radius-large: 4px;
+  --sl-input-border-radius-small: var(--sl-border-radius-medium);
+  --sl-input-border-radius-medium: var(--sl-border-radius-medium);
+  --sl-input-border-radius-large: var(--sl-border-radius-medium);
 
   --sl-input-font-family: var(--sl-font-sans);
   --sl-input-font-weight: var(--sl-font-weight-normal);
