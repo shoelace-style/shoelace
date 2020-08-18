@@ -24,7 +24,7 @@ Follow [@shoelace_style](https://twitter.com/shoelace_style) on Twitter for gene
 
 **Please avoid using Twitter for support questions.** The community chat is a much better place to share code snippets, screenshots, and other troubleshooting info. You'll have much better luck there, as more users will have a chance to help you.
 
-Oh, and don't forget to tweet Shoelace to your followers!
+Oh, and don't forget to tell your followers about Shoelace!
 
 <sl-button type="primary" href="https://twitter.com/shoelace_style" target="_blank">
   Follow on Twitter
