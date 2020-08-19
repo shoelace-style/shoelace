@@ -110,6 +110,56 @@
   color: var(--sl-color-gray-40);
 }
 
+.sl-theme-dark .markdown-section pre .token.prolog,
+.sl-theme-dark .markdown-section pre .token.doctype,
+.sl-theme-dark .markdown-section pre .token.cdata,
+.sl-theme-dark .markdown-section pre .token.operator {
+  color: var(--sl-color-gray-70);
+}
+
+.sl-theme-dark .markdown-section pre .token.property,
+.sl-theme-dark .markdown-section pre .token.keyword,
+.sl-theme-dark .markdown-section pre .token.tag,
+.sl-theme-dark .markdown-section pre .token.url {
+  color: var(--sl-color-primary-65);
+}
+
+.sl-theme-dark .markdown-section pre .token.symbol,
+.sl-theme-dark .markdown-section pre .token.deleted {
+  color: #f92672;
+}
+
+.sl-theme-dark .markdown-section pre .token.boolean,
+.sl-theme-dark .markdown-section pre .token.constant,
+.sl-theme-dark .markdown-section pre .token.selector,
+.sl-theme-dark .markdown-section pre .token.attr-name,
+.sl-theme-dark .markdown-section pre .token.string,
+.sl-theme-dark .markdown-section pre .token.char,
+.sl-theme-dark .markdown-section pre .token.builtin,
+.sl-theme-dark .markdown-section pre .token.inserted {
+  color: var(--sl-color-success-60);
+}
+
+.sl-theme-dark .markdown-section pre .token.atrule,
+.sl-theme-dark .markdown-section pre .token.attr-value,
+.sl-theme-dark .markdown-section pre .token.number,
+.sl-theme-dark .markdown-section pre .token.variable {
+  color: #c380ff;
+}
+
+.sl-theme-dark .markdown-section pre .token.function,
+.sl-theme-dark .markdown-section pre .token.class-name {
+  color: #ffbb4d;
+}
+
+.sl-theme-dark .markdown-section pre .token.regex {
+  color: #f8bd5b;
+}
+
+.sl-theme-dark .markdown-section pre .token.important {
+  color: #fd495f;
+}
+
 /* Repo buttons */
 .sl-theme-dark  .repo-button {
   background-color: var(--sl-color-gray-10);
