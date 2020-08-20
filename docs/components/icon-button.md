@@ -24,24 +24,6 @@ Icon buttons inherit their parent element's `font-size`.
 <sl-icon-button name="pencil" style="font-size: 2.5rem;"></sl-icon-button>
 ```
 
-### Colors
-
-You can customize icon button's color by styling its `base` part.
-
-```html preview
-<sl-icon-button name="x-circle-fill" class="icon-button-colors"></sl-icon-button>
-
-<style>
-  .icon-button-colors::part(base) {
-    color: tomato;
-  }
-
-  .icon-button-colors::part(base):hover {
-    color: #e64a2e;
-  }
-</style>
-```
-
 ### Icon Button with Tooltip
 
 Wrap a tooltip around an icon button to provide contextual information to the user.
