@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.0-beta.15
+
+- Fixed a bug where the `change` event wasn't updating the value in `sl-input`
+
 ## 2.0.0-beta.14
 
 - Added dark theme

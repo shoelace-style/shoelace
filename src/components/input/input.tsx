@@ -177,6 +177,7 @@ export class Input {
   }
 
   handleChange() {
+    this.value = this.input.value;
     this.slChange.emit();
   }
 
