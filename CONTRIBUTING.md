@@ -6,7 +6,7 @@ Shoelace is an open source project, meaning everyone can use it and contribute t
 
 The [issue tracker](https://github.com/shoelace-style/shoelace/issues) is for bug reports, feature requests, and pull requests.
 
-- Please **do not** use the issue tracker for personal support requests. Please [ask your question](https://stackoverflow.com/questions/ask) on StackOverflow instead.
+- Please **do not** use the issue tracker for personal support requests. Please [join the community chat](https://discord.gg/mg8f26C) or [ask your question](https://stackoverflow.com/questions/ask) on StackOverflow instead.
 - Please **do not** derail, hijack, or troll issues. Keep the discussion on topic and be respectful of others.
 - Please **do not** post comments with "+1" or "👍". Use [reactions](https://github.blog/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/) instead.
 - Please **do** use the issue tracker for feature requests, bug reports, and pull requests.
