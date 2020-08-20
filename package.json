@@ -6,9 +6,9 @@
   "es2015": "dist/esm/index.mjs",
   "es2017": "dist/esm/index.mjs",
   "collection": "dist/collection/collection-manifest.json",
+  "collection:main": "dist/collection/index.js",
   "module": "dist/custom-elements/index.js",
   "types": "dist/custom-elements/index.d.ts",
-  "collection:main": "dist/collection/index.js",
   "files": [
     "dist/",
     "loader/",
