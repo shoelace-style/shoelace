@@ -2,6 +2,8 @@
 
 ## 2.0.0-beta.15
 
+- Added `--width`, `--height`, and `--thumb-size` custom props to `sl-switch`
+- Fixed an `aria-labelledby` attribute typo in a number of components
 - Fixed a bug where the `change` event wasn't updating the value in `sl-input`
 - Fixed a bug where `sl-color-picker` had the wrong border color in the dark theme
 - Fixed a bug where `sl-menu-item` had the wrong color in dark mode when disabled
