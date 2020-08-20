@@ -1,9 +1,13 @@
 @import 'component';
 
+/**
+ * @prop --width: The width of the switch.
+ * @prop --height: The height of the switch.
+ * @prop --thumb-size: The size of the thumb.
+ */
 :host {
   --height: var(--sl-toggle-size);
   --thumb-size: calc(var(--sl-toggle-size) + 4px);
-  --track-border-radius: var(--height);
   --width: calc(var(--height) * 2);
 
   display: inline-block;
@@ -12,7 +16,6 @@
 .switch {
   display: inline-flex;
   align-items: center;
-  width: var(--width);
   font-family: var(--sl-input-font-family);
   font-size: var(--sl-input-font-size-medium);
   font-weight: var(--sl-input-font-weight);
@@ -30,7 +33,7 @@
   height: var(--height);
   background-color: var(--sl-color-gray-80);
   border: solid var(--sl-input-border-width) var(--sl-color-gray-80);
-  border-radius: var(--track-border-radius);
+  border-radius: var(--height);
   transition: var(--sl-transition-fast) border-color, var(--sl-transition-fast) background-color;
 
   .switch__thumb {
