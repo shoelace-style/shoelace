@@ -203,7 +203,7 @@ export class Details {
             id={`${this.componentId}-content`}
             class="details__content"
             role="region"
-            aria-labeledby={`${this.componentId}-header`}
+            aria-labelledby={`${this.componentId}-header`}
           >
             <slot />
           </div>

@@ -228,7 +228,7 @@ export class Drawer {
           aria-modal="true"
           aria-hidden={!this.open}
           aria-label={this.noHeader ? this.label : null}
-          aria-labeledby={!this.noHeader ? `${this.componentId}-title` : null}
+          aria-labelledby={!this.noHeader ? `${this.componentId}-title` : null}
           tabIndex={0}
         >
           {!this.noHeader && (

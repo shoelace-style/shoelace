@@ -296,7 +296,7 @@ export class Dropdown {
           class="dropdown__panel"
           role="menu"
           aria-hidden={!this.open}
-          aria-labeledby={this.componentId}
+          aria-labelledby={this.componentId}
           hidden
         >
           <slot />

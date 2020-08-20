@@ -130,7 +130,7 @@ export class Switch {
             value={this.value}
             checked={this.checked}
             disabled={this.disabled}
-            aria-labeledby={this.labelId}
+            aria-labelledby={this.labelId}
             onClick={this.handleClick}
             onBlur={this.handleBlur}
             onFocus={this.handleFocus}

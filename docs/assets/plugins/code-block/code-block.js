@@ -52,7 +52,7 @@
           pre.id = preId;
           pre.classList.add('code-block__source');
           pre.setAttribute('data-lang', pre.getAttribute('data-lang').replace(/ preview$/, ''));
-          pre.setAttribute('aria-labeledby', toggleId);
+          pre.setAttribute('aria-labelledby', toggleId);
 
           toggle.id = toggleId;
           toggle.type = 'button';
