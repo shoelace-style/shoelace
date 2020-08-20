@@ -320,6 +320,10 @@
   color: var(--sl-color-primary-50);
 }
 
+.sl-theme-dark sl-menu-item[disabled]::part(base) {
+  color: var(--sl-color-gray-40);
+}
+
 /* Menu label */
 .sl-theme-dark sl-menu-label::part(base) {
   color: var(--sl-color-gray-40);
