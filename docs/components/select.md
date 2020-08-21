@@ -95,7 +95,7 @@ Use the `size` attribute to change a select's size.
 Use the `pill` prop to give selects rounded edges.
 
 ```html preview
-<sl-select label="Select one" pill multiple>
+<sl-select pill multiple>
   <sl-menu-item value="option-1">Option 1</sl-menu-item>
   <sl-menu-item value="option-2">Option 2</sl-menu-item>
   <sl-menu-item value="option-3">Option 3</sl-menu-item>
