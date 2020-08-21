@@ -55,7 +55,7 @@ export class Dropdown {
   @Prop() closeOnSelect = true;
 
   /** The dropdown will close when the user interacts outside of this element (e.g. clicking). */
-  @Prop() containingElement: HTMLElement = this.host;
+  @Prop() containingElement: HTMLElement;
 
   /** The distance in pixels from which to offset the panel away from its trigger. */
   @Prop() distance = 2;
@@ -88,6 +88,10 @@ export class Dropdown {
   }
 
   connectedCallback() {
+    if (!this.containingElement) {
+      this.containingElement = this.host;
+    }
+
     this.handleDocumentKeyDown = this.handleDocumentKeyDown.bind(this);
     this.handleDocumentMouseDown = this.handleDocumentMouseDown.bind(this);
     this.handleMenuItemActivate = this.handleMenuItemActivate.bind(this);
