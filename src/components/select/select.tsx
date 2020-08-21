@@ -12,9 +12,12 @@ let id = 0;
  * @slot help-text - Help text that describes how to use the select.
  *
  * @part base - The component's base wrapper.
+ * @part form-control - The form control that wraps the label and the input.
  * @part help-text - The select help text.
  * @part icon - The select icon.
  * @part input - The select input.
+ * @part label - The input label.
+ * @part menu - The select menu, a <sl-menu> element.
  * @part tag - The multiselect option, a <sl-tag> element.
  * @part tags - The container in which multiselect options are rendered.
  */
