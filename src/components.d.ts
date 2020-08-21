@@ -433,6 +433,12 @@ export namespace Components {
          */
         "src": string;
     }
+    interface SlImageComparer {
+        /**
+          * The position of the divider as a percentage.
+         */
+        "position": number;
+    }
     interface SlInput {
         /**
           * The input's autocaptialize attribute.
@@ -1094,6 +1100,12 @@ declare global {
         prototype: HTMLSlIconButtonElement;
         new (): HTMLSlIconButtonElement;
     };
+    interface HTMLSlImageComparerElement extends Components.SlImageComparer, HTMLStencilElement {
+    }
+    var HTMLSlImageComparerElement: {
+        prototype: HTMLSlImageComparerElement;
+        new (): HTMLSlImageComparerElement;
+    };
     interface HTMLSlInputElement extends Components.SlInput, HTMLStencilElement {
     }
     var HTMLSlInputElement: {
@@ -1231,6 +1243,7 @@ declare global {
         "sl-form": HTMLSlFormElement;
         "sl-icon": HTMLSlIconElement;
         "sl-icon-button": HTMLSlIconButtonElement;
+        "sl-image-comparer": HTMLSlImageComparerElement;
         "sl-input": HTMLSlInputElement;
         "sl-menu": HTMLSlMenuElement;
         "sl-menu-divider": HTMLSlMenuDividerElement;
@@ -1740,6 +1753,16 @@ declare namespace LocalJSX {
           * An external URL of an SVG file.
          */
         "src"?: string;
+    }
+    interface SlImageComparer {
+        /**
+          * Emitted when the slider position changes.
+         */
+        "onSlChange"?: (event: CustomEvent<any>) => void;
+        /**
+          * The position of the divider as a percentage.
+         */
+        "position"?: number;
     }
     interface SlInput {
         /**
@@ -2349,6 +2372,7 @@ declare namespace LocalJSX {
         "sl-form": SlForm;
         "sl-icon": SlIcon;
         "sl-icon-button": SlIconButton;
+        "sl-image-comparer": SlImageComparer;
         "sl-input": SlInput;
         "sl-menu": SlMenu;
         "sl-menu-divider": SlMenuDivider;
@@ -2391,6 +2415,7 @@ declare module "@stencil/core" {
             "sl-form": LocalJSX.SlForm & JSXBase.HTMLAttributes<HTMLSlFormElement>;
             "sl-icon": LocalJSX.SlIcon & JSXBase.HTMLAttributes<HTMLSlIconElement>;
             "sl-icon-button": LocalJSX.SlIconButton & JSXBase.HTMLAttributes<HTMLSlIconButtonElement>;
+            "sl-image-comparer": LocalJSX.SlImageComparer & JSXBase.HTMLAttributes<HTMLSlImageComparerElement>;
             "sl-input": LocalJSX.SlInput & JSXBase.HTMLAttributes<HTMLSlInputElement>;
             "sl-menu": LocalJSX.SlMenu & JSXBase.HTMLAttributes<HTMLSlMenuElement>;
             "sl-menu-divider": LocalJSX.SlMenuDivider & JSXBase.HTMLAttributes<HTMLSlMenuDividerElement>;

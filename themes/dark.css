@@ -314,6 +314,13 @@
   color: var(--sl-color-primary-60);
 }
 
+/* Image comparer */
+.sl-theme-dark sl-image-comparer::part(divider),
+.sl-theme-dark sl-image-comparer::part(handle) {
+  background-color: var(--sl-color-gray-10);
+  color: var(--sl-color-gray-60);
+}
+
 /* Menu item */
 .sl-theme-dark sl-menu-item[active]::part(base) {
   background-color: var(--sl-color-primary-15);

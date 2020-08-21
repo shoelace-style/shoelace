@@ -1,0 +1,78 @@
+@import 'component';
+
+/**
+ * @prop --handle-size: The size of the compare handle.
+ */
+:host {
+  --divider-width: 4px;
+  --handle-size: 2.5rem;
+
+  display: block;
+  position: relative;
+}
+
+.image-comparer {
+  max-width: 100%;
+  max-height: 100%;
+  overflow: hidden;
+}
+
+.image-comparer__before {
+  pointer-events: none;
+
+  ::slotted(img) {
+    display: block;
+    max-width: 100% !important;
+    height: auto;
+  }
+}
+
+.image-comparer__after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+
+  ::slotted(img) {
+    display: block;
+    max-width: 100% !important;
+    height: auto;
+  }
+}
+
+.image-comparer__divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  width: var(--divider-width);
+  height: 100%;
+  background-color: var(--sl-color-white);
+  transform: translateX(calc(var(--divider-width) / -2));
+  cursor: ew-resize;
+}
+
+.image-comparer__handle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: calc(50% - (var(--handle-size) / 2));
+  width: var(--handle-size);
+  height: var(--handle-size);
+  background-color: var(--sl-color-white);
+  border-radius: var(--sl-border-radius-circle);
+  font-size: calc(var(--handle-size) * 0.5);
+  color: var(--sl-color-gray-50);
+  cursor: inherit;
+  z-index: 10;
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 1px hsl(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%),
+      var(--sl-focus-ring-box-shadow);
+  }
+}

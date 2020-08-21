@@ -26,6 +26,7 @@
   - [Form](/components/form.md)
   - [Icon](/components/icon.md)
   - [Icon Button](/components/icon-button.md)
+  - [Image Comparer](/components/image-comparer.md)
   - [Input](/components/input.md)
   - [Menu](/components/menu.md)
   - [Menu Divider](/components/menu-divider.md)
