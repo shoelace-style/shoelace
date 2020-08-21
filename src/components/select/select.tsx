@@ -301,6 +301,7 @@ export class Select {
       >
         <label
           part="label"
+          id={this.labelId}
           class={{
             label: true,
             'label--small': this.size === 'small',
@@ -310,6 +311,7 @@ export class Select {
             'label--invalid': this.invalid
           }}
           htmlFor={this.inputId}
+          onClick={this.handleLabelClick}
         >
           {this.label}
         </label>
@@ -349,6 +351,7 @@ export class Select {
             valid={this.valid}
             invalid={this.invalid}
             aria-labelledby={this.labelId}
+            aria-describedby={this.helpTextId}
             onSlFocus={this.handleFocus}
             onSlBlur={this.handleBlur}
             onKeyDown={this.handleKeyDown}
