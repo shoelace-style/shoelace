@@ -16,8 +16,6 @@ import { getTextContent } from '../../utilities/slot';
   shadow: true
 })
 export class Menu {
-  ignoreMouseEvents = false;
-  ignoreMouseTimeout: any;
   menu: HTMLElement;
   typeToSelectString = '';
   typeToSelectTimeout: any;
@@ -118,13 +116,6 @@ export class Menu {
   }
 
   handleKeyDown(event: KeyboardEvent) {
-    // When keying through the menu, if the mouse happens to be hovering over a menu item and the menu scrolls, the
-    // mouseout/mouseover event will fire causing the selection to be different than what the user expects. This gives
-    // us a way to temporarily ignore mouse events while the user is interacting with a keyboard.
-    clearTimeout(this.ignoreMouseTimeout);
-    this.ignoreMouseTimeout = setTimeout(() => (this.ignoreMouseEvents = false), 500);
-    this.ignoreMouseEvents = true;
-
     // Make a selection when pressing enter
     if (event.key === 'Enter') {
       const item = this.getActiveItem();
@@ -179,18 +170,11 @@ export class Menu {
     const target = event.target as HTMLElement;
     const item = target.closest('sl-menu-item');
 
-    if (item && !this.ignoreMouseEvents) {
-      this.setActiveItem(item);
-    }
+    this.setActiveItem(item);
   }
 
-  handleMouseOut(event: MouseEvent) {
-    const target = event.target as HTMLElement;
-    const item = target.closest('sl-menu-item');
-
-    if (item && !this.ignoreMouseEvents) {
-      this.setActiveItem(null);
-    }
+  handleMouseOut() {
+    this.setActiveItem(null);
   }
 
   render() {
