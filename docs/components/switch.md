@@ -5,7 +5,7 @@
 Switches allow the user to toggle an option on or off. 
 
 ```html preview
-<sl-switch style="--width: 100px;">Switch</sl-switch>
+<sl-switch>Switch</sl-switch>
 ```
 
 ?> This component doesn't work with standard forms. Use [`<sl-form>`](/components/form.md) instead.
