@@ -1,10 +1,11 @@
 @import 'component';
 
 /**
+ * @prop --divider-width: The width of the dividing line.
  * @prop --handle-size: The size of the compare handle.
  */
 :host {
-  --divider-width: 4px;
+  --divider-width: 2px;
   --handle-size: 2.5rem;
 
   display: block;
@@ -17,10 +18,12 @@
   overflow: hidden;
 }
 
-.image-comparer__before {
+.image-comparer__before,
+.image-comparer__after {
   pointer-events: none;
 
-  ::slotted(img) {
+  ::slotted(img),
+  ::slotted(svg) {
     display: block;
     max-width: 100% !important;
     height: auto;
@@ -33,13 +36,6 @@
   left: 0;
   height: 100%;
   width: 100%;
-  pointer-events: none;
-
-  ::slotted(img) {
-    display: block;
-    max-width: 100% !important;
-    height: auto;
-  }
 }
 
 .image-comparer__divider {
@@ -52,7 +48,11 @@
   height: 100%;
   background-color: var(--sl-color-white);
   transform: translateX(calc(var(--divider-width) / -2));
-  cursor: ew-resize;
+  cursor: grab;
+
+  &:active {
+    cursor: grabbing;
+  }
 }
 
 .image-comparer__handle {
