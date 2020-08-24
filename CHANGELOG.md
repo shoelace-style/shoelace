@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.0-beta.16
+
+- Fix incorrect `aria-selected` state in `sl-menu-item`
+
 ## 2.0.0-beta.15
 
 - Added `image-comparer` component

@@ -55,9 +55,8 @@ export class MenuItem {
           'menu-item--disabled': this.disabled
         }}
         role="menuitem"
-        aria-checked={this.checked}
         aria-disabled={this.disabled}
-        aria-selected={this.active}
+        aria-selected={this.checked}
       >
         <span part="checked-icon" class="menu-item__check">
           <sl-icon name="check2" />
