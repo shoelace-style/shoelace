@@ -132,7 +132,7 @@ export class ImageComparer {
             ref={el => (this.handle = el)}
             part="handle"
             class="image-comparer__handle"
-            role="slider"
+            role="scrollbar"
             aria-valuenow={this.dividerPosition}
             aria-valuemin="0"
             aria-valuemax="100"
