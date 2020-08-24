@@ -2,6 +2,7 @@
 
 ## 2.0.0-beta.15
 
+- Added `image-comparer` component
 - Added `--width`, `--height`, and `--thumb-size` custom props to `sl-switch`
 - Fixed an `aria-labelledby` attribute typo in a number of components
 - Fixed a bug where the `change` event wasn't updating the value in `sl-input`
