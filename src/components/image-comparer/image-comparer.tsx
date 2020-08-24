@@ -5,6 +5,9 @@ import { clamp } from '../../utilities/math';
  * @since 2.0
  * @status experimental
  *
+ * @slot before - The before image, an `<img>` or `<svg>` element.
+ * @slot after - The after image, an `<img>` or `<svg>` element.
+ *
  * @part base - The component's base wrapper.
  * @part before - The container that holds the "before" image.
  * @part after - The container that holds the "after" image.
