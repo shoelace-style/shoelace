@@ -178,6 +178,14 @@ Vue.config.ignoredElements = [/^sl-/];
 new Vue({ ... });
 ```
 
+### Binding Complex Data
+
+When binding complex data such as objects and arrays, use the `.prop` modifier to make Vue bind them as a property instead of an attribute.
+
+```html
+<sl-color-picker :swatches.prop="mySwatches" />
+```
+
 ### Two-way Binding
 
 One caveat is there's currently [no support for v-model on custom elements](https://github.com/vuejs/vue/issues/7830), but you can still achieve two-way binding manually.
