@@ -6,7 +6,7 @@
 // NOTE:
 //
 // - The popover MUST have at least one property that transitions, otherwise transitionEnd won't fire and the popover
-//   won't be hidden.
+//   won't be hidden. If transitions are delegated to a child element, set the `transitionElement` property accordingly.
 //
 // - When the popover is shown, it's assigned `PopoverOptions.visibleClass`. You can use this class to provide different
 //   transitions for show/hide.
@@ -34,6 +34,7 @@ export default class Popover {
         distance: 0,
         placement: 'bottom-start',
         strategy: 'absolute',
+        transitionElement: this.popover,
         visibleClass: 'popover-visible',
         onAfterShow: () => {},
         onAfterHide: () => {},
@@ -43,6 +44,7 @@ export default class Popover {
     );
 
     this.isVisible = false;
+    this.popover.hidden = true;
     this.popover.classList.remove(this.options.visibleClass);
 
     this.popover.addEventListener('transitionend', this.handleTransitionEnd);
@@ -51,8 +53,8 @@ export default class Popover {
   private handleTransitionEnd(event: TransitionEvent) {
     const target = event.target as HTMLElement;
 
-    // Make sure the transition event originates from from the popover itself
-    if (target === this.popover) {
+    // Make sure the transition event originates from from the correct element, and not one that has bubbled up
+    if (target === this.options.transitionElement) {
       // This is called before the element is hidden so users can do things like reset scroll. It will fire once for
       // every transition property (event.propertyName discloses which property has finished transitioning.
       this.options.onTransitionEnd.call(this, event);
@@ -154,6 +156,7 @@ export interface PopoverOptions {
     | 'left-end';
   skidding?: number;
   strategy?: 'absolute' | 'fixed';
+  transitionElement?: HTMLElement;
   visibleClass?: string;
   onAfterShow?: () => any;
   onAfterHide?: () => any;
