@@ -401,6 +401,20 @@ export namespace Components {
          */
         "submit": () => Promise<void>;
     }
+    interface SlFormatBytes {
+        /**
+          * The locale to use when formatting the number.
+         */
+        "locale": string;
+        /**
+          * The unit to display.
+         */
+        "unit": 'bytes' | 'bits';
+        /**
+          * The number to format in bytes.
+         */
+        "value": number;
+    }
     interface SlIcon {
         /**
           * An alternative description to use for accessibility. If omitted, the name or src will be used to generate it.
@@ -1088,6 +1102,12 @@ declare global {
         prototype: HTMLSlFormElement;
         new (): HTMLSlFormElement;
     };
+    interface HTMLSlFormatBytesElement extends Components.SlFormatBytes, HTMLStencilElement {
+    }
+    var HTMLSlFormatBytesElement: {
+        prototype: HTMLSlFormatBytesElement;
+        new (): HTMLSlFormatBytesElement;
+    };
     interface HTMLSlIconElement extends Components.SlIcon, HTMLStencilElement {
     }
     var HTMLSlIconElement: {
@@ -1241,6 +1261,7 @@ declare global {
         "sl-drawer": HTMLSlDrawerElement;
         "sl-dropdown": HTMLSlDropdownElement;
         "sl-form": HTMLSlFormElement;
+        "sl-format-bytes": HTMLSlFormatBytesElement;
         "sl-icon": HTMLSlIconElement;
         "sl-icon-button": HTMLSlIconButtonElement;
         "sl-image-comparer": HTMLSlImageComparerElement;
@@ -1713,6 +1734,20 @@ declare namespace LocalJSX {
           * Emitted when the form is submitted.
          */
         "onSlSubmit"?: (event: CustomEvent<any>) => void;
+    }
+    interface SlFormatBytes {
+        /**
+          * The locale to use when formatting the number.
+         */
+        "locale"?: string;
+        /**
+          * The unit to display.
+         */
+        "unit"?: 'bytes' | 'bits';
+        /**
+          * The number to format in bytes.
+         */
+        "value"?: number;
     }
     interface SlIcon {
         /**
@@ -2370,6 +2405,7 @@ declare namespace LocalJSX {
         "sl-drawer": SlDrawer;
         "sl-dropdown": SlDropdown;
         "sl-form": SlForm;
+        "sl-format-bytes": SlFormatBytes;
         "sl-icon": SlIcon;
         "sl-icon-button": SlIconButton;
         "sl-image-comparer": SlImageComparer;
@@ -2413,6 +2449,7 @@ declare module "@stencil/core" {
             "sl-drawer": LocalJSX.SlDrawer & JSXBase.HTMLAttributes<HTMLSlDrawerElement>;
             "sl-dropdown": LocalJSX.SlDropdown & JSXBase.HTMLAttributes<HTMLSlDropdownElement>;
             "sl-form": LocalJSX.SlForm & JSXBase.HTMLAttributes<HTMLSlFormElement>;
+            "sl-format-bytes": LocalJSX.SlFormatBytes & JSXBase.HTMLAttributes<HTMLSlFormatBytesElement>;
             "sl-icon": LocalJSX.SlIcon & JSXBase.HTMLAttributes<HTMLSlIconElement>;
             "sl-icon-button": LocalJSX.SlIconButton & JSXBase.HTMLAttributes<HTMLSlIconButtonElement>;
             "sl-image-comparer": LocalJSX.SlImageComparer & JSXBase.HTMLAttributes<HTMLSlImageComparerElement>;

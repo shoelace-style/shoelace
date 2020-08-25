@@ -48,6 +48,9 @@
   - [Textarea](/components/textarea.md)
   - [Tooltip](/components/tooltip.md)
 
+- Utility Components
+  - [Format Bytes](/components/format-bytes.md)
+
 - Design Tokens
   - [Typography](/tokens/typography.md)
   - [Color](/tokens/color.md)
