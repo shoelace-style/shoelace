@@ -6,6 +6,7 @@
 - Add `sl-format-bytes` utility component
 - Add `clearable` and `required` props to `sl-select`
 - Add `slClear` event to `sl-input`
+- Refactored `sl-dropdown` and `sl-tooltip` to use positioner elements so panels/tooltips can be customized easier
 - Fix incorrect `aria-selected` state in `sl-menu-item`
 
 ## 2.0.0-beta.15

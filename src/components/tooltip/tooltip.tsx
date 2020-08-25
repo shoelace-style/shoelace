@@ -21,6 +21,7 @@ export class Tooltip {
   componentId = `tooltip-${++id}`;
   isShowing = false;
   popover: Popover;
+  tooltipPositioner: HTMLElement;
   target: HTMLElement;
   tooltip: any;
 
@@ -96,7 +97,7 @@ export class Tooltip {
     const slot = this.host.shadowRoot.querySelector('slot');
 
     this.target = this.getTarget();
-    this.popover = new Popover(this.target, this.tooltip);
+    this.popover = new Popover(this.target, this.tooltipPositioner);
     this.syncOptions();
 
     this.host.addEventListener('blur', this.handleBlur, true);
@@ -105,7 +106,7 @@ export class Tooltip {
     slot.addEventListener('slotchange', this.handleSlotChange);
 
     // Show on init if open
-    this.tooltip.hidden = !this.open;
+    this.tooltipPositioner.hidden = !this.open;
     if (this.open) {
       this.show();
     }
@@ -219,8 +220,9 @@ export class Tooltip {
   syncOptions() {
     this.popover.setOptions({
       placement: this.placement,
-      skidding: this.skidding,
       distance: this.distance,
+      skidding: this.skidding,
+      transitionElement: this.tooltip,
       onAfterHide: () => this.slAfterHide.emit(),
       onAfterShow: () => this.slAfterShow.emit()
     });
@@ -232,18 +234,20 @@ export class Tooltip {
         <slot aria-describedby={this.componentId} />
 
         {!this.disabled && (
-          <div
-            part="base"
-            ref={el => (this.tooltip = el)}
-            id={this.componentId}
-            class={{
-              tooltip: true,
-              'tooltip--open': this.open
-            }}
-            role="tooltip"
-            aria-hidden={!this.open}
-          >
-            {this.content}
+          <div ref={el => (this.tooltipPositioner = el)} class="tooltip-positioner">
+            <div
+              part="base"
+              ref={el => (this.tooltip = el)}
+              id={this.componentId}
+              class={{
+                tooltip: true,
+                'tooltip--open': this.open
+              }}
+              role="tooltip"
+              aria-hidden={!this.open}
+            >
+              {this.content}
+            </div>
           </div>
         )}
       </Host>
