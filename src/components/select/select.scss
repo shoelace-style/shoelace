@@ -37,3 +37,9 @@
 .select--open .select__icon sl-icon {
   transform: rotate(-180deg);
 }
+
+// Force the input's clear button to show when the select isn't empty. This is important for the `multiple` option, as
+// it doesn't use the input's `value` prop to display the selection.
+.select:not(.select--empty) .select__input::part(clear-button) {
+  visibility: visible;
+}

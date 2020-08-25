@@ -2,6 +2,9 @@
 
 ## 2.0.0-beta.16
 
+- Add `sl-format-bytes` utility component
+- Add `clearable` and `required` props to `sl-select`
+- Add `slClear` event to `sl-input`
 - Fix incorrect `aria-selected` state in `sl-menu-item`
 
 ## 2.0.0-beta.15

@@ -77,6 +77,9 @@ export class Select {
   /** The select's required attribute. */
   @Prop() required: boolean;
 
+  /** Set to true to add a clear button when the select is populated. */
+  @Prop() clearable = false;
+
   /** Set to true to indicate that the user input is valid. */
   @Prop() valid = false;
 
@@ -109,6 +112,7 @@ export class Select {
   connectedCallback() {
     this.handleBlur = this.handleBlur.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
+    this.handleClear = this.handleClear.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleLabelClick = this.handleLabelClick.bind(this);
     this.handleMenuKeyDown = this.handleMenuKeyDown.bind(this);
@@ -154,6 +158,12 @@ export class Select {
     this.hasFocus = true;
     this.slFocus.emit();
     this.input.setSelectionRange(0, 0);
+  }
+
+  handleClear() {
+    this.value = this.multiple ? [] : '';
+    this.syncItemsFromValue();
+    this.dropdown.hide();
   }
 
   handleKeyDown(event: KeyboardEvent) {
@@ -251,7 +261,8 @@ export class Select {
             pill={this.pill}
             clearable
             onClick={event => event.stopPropagation()}
-            onSlClear={() => {
+            onSlClear={event => {
+              event.stopPropagation();
               item.checked = false;
               this.syncValueFromItems();
             }}
@@ -327,6 +338,7 @@ export class Select {
           class={{
             select: true,
             'select--open': this.isOpen,
+            'select--empty': this.value.length === 0,
             'select--focused': this.hasFocus,
             'select--disabled': this.disabled,
             'select--multiple': this.multiple,
@@ -353,11 +365,13 @@ export class Select {
             size={this.size}
             valid={this.valid}
             invalid={this.invalid}
+            clearable={this.clearable}
             required={this.required}
             aria-labelledby={this.labelId}
             aria-describedby={this.helpTextId}
             onSlFocus={this.handleFocus}
             onSlBlur={this.handleBlur}
+            onSlClear={this.handleClear}
             onKeyDown={this.handleKeyDown}
           >
             {this.displayTags.length && (

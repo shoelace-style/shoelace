@@ -735,6 +735,10 @@ export namespace Components {
     }
     interface SlSelect {
         /**
+          * Set to true to add a clear button when the select is populated.
+         */
+        "clearable": boolean;
+        /**
           * Set to true to disable the select control.
          */
         "disabled": boolean;
@@ -1869,6 +1873,10 @@ declare namespace LocalJSX {
          */
         "onSlChange"?: (event: CustomEvent<any>) => void;
         /**
+          * Emitted when the clear button is activated.
+         */
+        "onSlClear"?: (event: CustomEvent<any>) => void;
+        /**
           * Emitted when the control gains focus.
          */
         "onSlFocus"?: (event: CustomEvent<any>) => void;
@@ -2092,6 +2100,10 @@ declare namespace LocalJSX {
         "value"?: number;
     }
     interface SlSelect {
+        /**
+          * Set to true to add a clear button when the select is populated.
+         */
+        "clearable"?: boolean;
         /**
           * Set to true to disable the select control.
          */
