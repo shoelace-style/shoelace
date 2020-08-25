@@ -244,6 +244,10 @@ export namespace Components {
          */
         "format": 'hex' | 'rgb' | 'hsl';
         /**
+          * Enable this option to prevent the panel from being clipped when the component is placed inside a container with `overflow: auto|scroll`.
+         */
+        "hoist": boolean;
+        /**
           * Set to true to render the color picker inline rather than inside a dropdown.
          */
         "inline": boolean;
@@ -359,6 +363,10 @@ export namespace Components {
           * Hides the dropdown panel
          */
         "hide": () => Promise<void>;
+        /**
+          * Enable this option to prevent the panel from being clipped when the component is placed inside a container with `overflow: auto|scroll`.
+         */
+        "hoist": boolean;
         /**
           * Indicates whether or not the dropdown is open. You can use this in lieu of the show/hide methods.
          */
@@ -742,6 +750,10 @@ export namespace Components {
           * Set to true to disable the select control.
          */
         "disabled": boolean;
+        /**
+          * Enable this option to prevent the panel from being clipped when the component is placed inside a container with `overflow: auto|scroll`.
+         */
+        "hoist": boolean;
         /**
           * Set to true to indicate that the user input is invalid.
          */
@@ -1534,6 +1546,10 @@ declare namespace LocalJSX {
          */
         "format"?: 'hex' | 'rgb' | 'hsl';
         /**
+          * Enable this option to prevent the panel from being clipped when the component is placed inside a container with `overflow: auto|scroll`.
+         */
+        "hoist"?: boolean;
+        /**
           * Set to true to render the color picker inline rather than inside a dropdown.
          */
         "inline"?: boolean;
@@ -1697,6 +1713,10 @@ declare namespace LocalJSX {
           * The distance in pixels from which to offset the panel away from its trigger.
          */
         "distance"?: number;
+        /**
+          * Enable this option to prevent the panel from being clipped when the component is placed inside a container with `overflow: auto|scroll`.
+         */
+        "hoist"?: boolean;
         /**
           * Emitted after the dropdown closes and all transitions are complete.
          */
@@ -2108,6 +2128,10 @@ declare namespace LocalJSX {
           * Set to true to disable the select control.
          */
         "disabled"?: boolean;
+        /**
+          * Enable this option to prevent the panel from being clipped when the component is placed inside a container with `overflow: auto|scroll`.
+         */
+        "hoist"?: boolean;
         /**
           * Set to true to indicate that the user input is invalid.
          */

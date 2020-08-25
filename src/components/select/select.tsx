@@ -65,6 +65,12 @@ export class Select {
   /** The select's size. */
   @Prop() size: 'small' | 'medium' | 'large' = 'medium';
 
+  /**
+   * Enable this option to prevent the panel from being clipped when the component is placed inside a container with
+   * `overflow: auto|scroll`.
+   */
+  @Prop() hoist = false;
+
   /** The value of the control. This will be a string or an array depending on `multiple`. */
   @Prop({ mutable: true }) value: string | Array<string> = '';
 
@@ -333,6 +339,7 @@ export class Select {
         <sl-dropdown
           part="base"
           ref={el => (this.dropdown = el)}
+          hoist={this.hoist}
           closeOnSelect={!this.multiple}
           containingElement={this.host}
           class={{

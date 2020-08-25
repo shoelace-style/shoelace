@@ -64,6 +64,12 @@ export class ColorPicker {
   /** Set to true to disable the color picker. */
   @Prop() disabled = false;
 
+  /**
+   * Enable this option to prevent the panel from being clipped when the component is placed inside a container with
+   * `overflow: auto|scroll`.
+   */
+  @Prop() hoist = false;
+
   /** Whether to show the opacity slider. */
   @Prop() opacity = false;
 
@@ -736,6 +742,7 @@ export class ColorPicker {
         class="color-dropdown"
         aria-disabled={this.disabled}
         containingElement={this.host}
+        hoist={this.hoist}
         onSlShow={this.handleDropdownShow}
         onSlAfterShow={this.handleDropdownAfterShow}
         onSlHide={this.handleDropdownHide}

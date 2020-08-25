@@ -33,6 +33,7 @@ export default class Popover {
         skidding: 0,
         distance: 0,
         placement: 'bottom-start',
+        strategy: 'absolute',
         visibleClass: 'popover-visible',
         onAfterShow: () => {},
         onAfterHide: () => {},
@@ -85,6 +86,7 @@ export default class Popover {
 
     this.popper = createPopper(this.anchor, this.popover, {
       placement: this.options.placement,
+      strategy: this.options.strategy,
       modifiers: [
         {
           name: 'flip',
@@ -123,7 +125,8 @@ export default class Popover {
     // Update popper options
     if (this.popper) {
       this.popper.setOptions({
-        placement: this.options.placement
+        placement: this.options.placement,
+        strategy: this.options.strategy
       });
 
       requestAnimationFrame(() => this.popper.update());
@@ -150,6 +153,7 @@ export interface PopoverOptions {
     | 'left-start'
     | 'left-end';
   skidding?: number;
+  strategy?: 'absolute' | 'fixed';
   visibleClass?: string;
   onAfterShow?: () => any;
   onAfterHide?: () => any;

@@ -63,6 +63,12 @@ export class Dropdown {
   /** The distance in pixels from which to offset the panel along its trigger. */
   @Prop() skidding = 0;
 
+  /**
+   * Enable this option to prevent the panel from being clipped when the component is placed inside a container with
+   * `overflow: auto|scroll`.
+   */
+  @Prop() hoist = false;
+
   /** Emitted when the dropdown opens. Calling `event.preventDefault()` will prevent it from being opened. */
   @Event() slShow: EventEmitter;
 
@@ -80,11 +86,17 @@ export class Dropdown {
     this.open ? this.show() : this.hide();
   }
 
-  @Watch('placement')
   @Watch('distance')
+  @Watch('hoist')
+  @Watch('placement')
   @Watch('skidding')
   handlePopoverOptionsChange() {
-    this.popover.setOptions({ placement: this.placement });
+    this.popover.setOptions({
+      strategy: this.hoist ? 'fixed' : 'absolute',
+      placement: this.placement,
+      distance: this.distance,
+      skidding: this.skidding
+    });
   }
 
   connectedCallback() {
@@ -102,9 +114,10 @@ export class Dropdown {
 
   componentDidLoad() {
     this.popover = new Popover(this.trigger, this.panel, {
+      strategy: this.hoist ? 'fixed' : 'absolute',
       placement: this.placement,
-      skidding: this.skidding,
       distance: this.distance,
+      skidding: this.skidding,
       onAfterHide: () => this.slAfterHide.emit(),
       onAfterShow: () => this.slAfterShow.emit(),
       onTransitionEnd: () => {

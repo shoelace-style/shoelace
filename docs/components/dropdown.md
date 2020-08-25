@@ -87,4 +87,38 @@ The offset of the panel along the trigger can be customized using the `skidding`
 </sl-dropdown>
 ```
 
+### Hoisting
+
+Dropdown panels will be clipped if they're inside a container that has `overflow: auto|hidden`. The `hoist` attribute forces the panel to use a fixed positioning strategy, allowing it to break out of the container. In this case, the panel will be positioned relative to its containing block, which is usually the viewport unless an ancestor uses a `transform`, `perspective`, or `filter`. [Refer to this page](https://developer.mozilla.org/en-US/docs/Web/CSS/position#fixed) for more details.
+
+```html preview
+<div class="dropdown-hoist">
+  <sl-dropdown>
+    <sl-button slot="trigger" caret>No Hoist</sl-button>
+    <sl-menu>
+      <sl-menu-item>Item 1</sl-menu-item>
+      <sl-menu-item>Item 2</sl-menu-item>
+      <sl-menu-item>Item 3</sl-menu-item>
+    </sl-menu>
+  </sl-dropdown>
+
+  <sl-dropdown hoist>
+    <sl-button slot="trigger" caret>Hoist</sl-button>
+    <sl-menu>
+      <sl-menu-item>Item 1</sl-menu-item>
+      <sl-menu-item>Item 2</sl-menu-item>
+      <sl-menu-item>Item 3</sl-menu-item>
+    </sl-menu>
+  </sl-dropdown>
+</div>
+
+<style>
+  .dropdown-hoist {
+    border: solid 2px var(--sl-color-gray-80);
+    padding: var(--sl-spacing-medium);
+    overflow: hidden;
+  }
+</style>
+```
+
 [component-metadata:sl-dropdown]

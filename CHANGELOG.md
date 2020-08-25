@@ -2,6 +2,7 @@
 
 ## 2.0.0-beta.16
 
+- Add `hoist` prop to `sl-color-picker`, `sl-dropdown`, and `sl-select` to work around panel clipping
 - Add `sl-format-bytes` utility component
 - Add `clearable` and `required` props to `sl-select`
 - Add `slClear` event to `sl-input`
