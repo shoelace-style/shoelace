@@ -12,24 +12,6 @@ Textareas collect data from the user and allow multiple lines of text.
 
 ## Examples
 
-### Labels
-
-Use the `label` attribute to give the textarea an accessible label.
-
-```html preview
-<sl-textarea label="Comments"></sl-textarea>
-```
-
-### Help Text
-
-Add descriptive help text to a textarea with the `help-text` slot.
-
-```html preview
-<sl-textarea label="Feedback">
-  <div slot="help-text">Please tell us what you think.</div>
-</sl-textarea>
-```
-
 ### Rows
 
 Use the `rows` attribute to change the number of text rows that get shown.
@@ -52,6 +34,36 @@ Use the `disabled` attribute to disable an input.
 
 ```html preview
 <sl-textarea placeholder="Textarea" disabled></sl-textarea>
+```
+
+### Sizes
+
+Use the `size` attribute to change a textarea's size.
+
+```html preview
+<sl-textarea placeholder="Small" size="small"></sl-textarea>
+<br>
+<sl-textarea placeholder="Medium" size="medium"></sl-textarea>
+<br>
+<sl-textarea placeholder="Large" size="large"></sl-textarea>
+```
+
+### Labels
+
+Use the `label` attribute to give the textarea an accessible label.
+
+```html preview
+<sl-textarea label="Comments"></sl-textarea>
+```
+
+### Help Text
+
+Add descriptive help text to a textarea with the `help-text` slot.
+
+```html preview
+<sl-textarea label="Feedback">
+  <div slot="help-text">Please tell us what you think.</div>
+</sl-textarea>
 ```
 
 ### Validation

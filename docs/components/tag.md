@@ -14,7 +14,7 @@ Tags are used as labels to organize things or to indicate a selection.
 
 ## Examples
 
-### Size
+### Sizes
 
 Use the `size` prop to change a tab's size.
 
