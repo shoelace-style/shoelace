@@ -118,6 +118,9 @@ export class Input {
   /** Emitted when the control's value changes. */
   @Event() slChange: EventEmitter;
 
+  /** Emitted when the clear button is activated. */
+  @Event() slClear: EventEmitter;
+
   /** Emitted when the control receives input. */
   @Event() slInput: EventEmitter;
 
@@ -196,13 +199,15 @@ export class Input {
     this.slFocus.emit();
   }
 
-  handleClearClick() {
+  handleClearClick(event: MouseEvent) {
     if (this.input.value !== '') {
       this.input.value = '';
       this.input.dispatchEvent(new window.Event('input', { bubbles: true }));
       this.input.dispatchEvent(new window.Event('change', { bubbles: true }));
     }
 
+    event.stopPropagation();
+    this.slClear.emit();
     this.input.focus();
   }
 
