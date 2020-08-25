@@ -767,6 +767,10 @@ export namespace Components {
          */
         "placeholder": string;
         /**
+          * The select's required attribute.
+         */
+        "required": boolean;
+        /**
           * The select's size.
          */
         "size": 'small' | 'medium' | 'large';
@@ -2132,6 +2136,10 @@ declare namespace LocalJSX {
           * The select's placeholder text.
          */
         "placeholder"?: string;
+        /**
+          * The select's required attribute.
+         */
+        "required"?: boolean;
         /**
           * The select's size.
          */

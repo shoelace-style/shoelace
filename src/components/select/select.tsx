@@ -74,6 +74,9 @@ export class Select {
   /** The select's label. */
   @Prop() label = '';
 
+  /** The select's required attribute. */
+  @Prop() required: boolean;
+
   /** Set to true to indicate that the user input is valid. */
   @Prop() valid = false;
 
@@ -350,6 +353,7 @@ export class Select {
             size={this.size}
             valid={this.valid}
             invalid={this.invalid}
+            required={this.required}
             aria-labelledby={this.labelId}
             aria-describedby={this.helpTextId}
             onSlFocus={this.handleFocus}
