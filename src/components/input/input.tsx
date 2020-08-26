@@ -187,6 +187,14 @@ export class Input {
   handleInput() {
     this.value = this.input.value;
     this.slInput.emit();
+    // check validity
+    if (this.pattern) {
+      if (this.input.checkValidity()) {
+        this.invalid = false;
+      } else {
+        this.invalid = true;
+      }
+    }
   }
 
   handleBlur() {
