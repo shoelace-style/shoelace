@@ -25,7 +25,7 @@ export class Dropdown {
   componentId = `dropdown-${++id}`;
   isShowing = false;
   panel: HTMLElement;
-  panelPositioner: HTMLElement;
+  positioner: HTMLElement;
   popover: Popover;
   trigger: HTMLElement;
 
@@ -114,7 +114,7 @@ export class Dropdown {
   }
 
   componentDidLoad() {
-    this.popover = new Popover(this.trigger, this.panelPositioner, {
+    this.popover = new Popover(this.trigger, this.positioner, {
       strategy: this.hoist ? 'fixed' : 'absolute',
       placement: this.placement,
       distance: this.distance,
@@ -309,9 +309,9 @@ export class Dropdown {
           <slot name="trigger" />
         </span>
 
-        {/* Position the panel with a wrapper, since the popover uses `translate`. This lets us expose the panel so the
-        user can style it without interfering with the position. */}
-        <div ref={el => (this.panelPositioner = el)} class="dropdown__panel-positioner">
+        {/* Position the panel with a wrapper since the popover makes use of `translate`. This let's us add transitions
+        on the panel without interfering with the position. */}
+        <div ref={el => (this.positioner = el)} class="dropdown__positioner">
           <div
             ref={el => (this.panel = el)}
             part="panel"
