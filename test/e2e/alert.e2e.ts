@@ -25,11 +25,11 @@ describe('alert', () => {
     expect(await alertBase.isVisible()).toBe(false);
 
     await alert.callMethod('show');
-    await page.waitFor(500); // wait for transition to end
+    await alertBase.waitForEvent('transitionend');
     expect(await alertBase.isVisible()).toBe(true);
 
     await alert.callMethod('hide');
-    await page.waitFor(500); // wait for transition to end
+    await alertBase.waitForEvent('transitionend');
     expect(await alertBase.isVisible()).toBe(false);
   });
 
@@ -44,12 +44,12 @@ describe('alert', () => {
 
     alert.setAttribute('open', '');
     await page.waitForChanges();
-    await page.waitFor(500); // wait for transition to end
+    await alertBase.waitForEvent('transitionend');
     expect(await alertBase.isVisible()).toBe(true);
 
     alert.removeAttribute('open');
     await page.waitForChanges();
-    await page.waitFor(500); // wait for transition to end
+    await alertBase.waitForEvent('transitionend');
     expect(await alertBase.isVisible()).toBe(false);
   });
 
@@ -58,13 +58,14 @@ describe('alert', () => {
     await page.setContent(testContentStartClosed);
 
     const alert = await page.find('sl-alert');
+    const alertBase = await page.find('sl-alert >>> .alert');
     const slShow = await alert.spyOnEvent('slShow');
     const slAfterShow = await alert.spyOnEvent('slAfterShow');
 
     await alert.callMethod('show');
     expect(slShow).toHaveReceivedEventTimes(1);
 
-    await page.waitFor(500); // wait for transition to end
+    await alertBase.waitForEvent('transitionend');
     expect(slAfterShow).toHaveReceivedEventTimes(1);
   });
 
@@ -73,13 +74,14 @@ describe('alert', () => {
     await page.setContent(testContentStartOpen);
 
     const alert = await page.find('sl-alert');
+    const alertBase = await page.find('sl-alert >>> .alert');
     const slHide = await alert.spyOnEvent('slHide');
     const slAfterHide = await alert.spyOnEvent('slAfterHide');
 
     await alert.callMethod('hide');
     expect(slHide).toHaveReceivedEventTimes(1);
 
-    await page.waitFor(500); // wait for transition to end
+    await alertBase.waitForEvent('transitionend');
     expect(slAfterHide).toHaveReceivedEventTimes(1);
   });
 });

@@ -21,15 +21,16 @@ describe('dialog', () => {
 
     const dialog = await page.find('sl-dialog');
     const dialogBase = await page.find('sl-dialog >>> .dialog');
+    const dialogPanel = await page.find('sl-dialog >>> .dialog__panel');
 
     expect(await dialogBase.isVisible()).toBe(false);
 
     await dialog.callMethod('show');
-    await page.waitFor(500); // wait for transition to end
+    await dialogPanel.waitForEvent('transitionend');
     expect(await dialogBase.isVisible()).toBe(true);
 
     await dialog.callMethod('hide');
-    await page.waitFor(500); // wait for transition to end
+    await dialogPanel.waitForEvent('transitionend');
     expect(await dialogBase.isVisible()).toBe(false);
   });
 
@@ -39,17 +40,18 @@ describe('dialog', () => {
 
     const dialog = await page.find('sl-dialog');
     const dialogBase = await page.find('sl-dialog >>> .dialog');
+    const dialogPanel = await page.find('sl-dialog >>> .dialog__panel');
 
     expect(await dialogBase.isVisible()).toBe(false);
 
     dialog.setAttribute('open', '');
     await page.waitForChanges();
-    await page.waitFor(500); // wait for transition to end
+    await dialogPanel.waitForEvent('transitionend');
     expect(await dialogBase.isVisible()).toBe(true);
 
     dialog.removeAttribute('open');
     await page.waitForChanges();
-    await page.waitFor(500); // wait for transition to end
+    await dialogPanel.waitForEvent('transitionend');
     expect(await dialogBase.isVisible()).toBe(false);
   });
 
@@ -58,13 +60,14 @@ describe('dialog', () => {
     await page.setContent(testContentStartClosed);
 
     const dialog = await page.find('sl-dialog');
+    const dialogPanel = await page.find('sl-dialog >>> .dialog__panel');
     const slShow = await dialog.spyOnEvent('slShow');
     const slAfterShow = await dialog.spyOnEvent('slAfterShow');
 
     await dialog.callMethod('show');
     expect(slShow).toHaveReceivedEventTimes(1);
 
-    await page.waitFor(500); // wait for transition to end
+    await dialogPanel.waitForEvent('transitionend');
     expect(slAfterShow).toHaveReceivedEventTimes(1);
   });
 
@@ -73,13 +76,14 @@ describe('dialog', () => {
     await page.setContent(testContentStartOpen);
 
     const dialog = await page.find('sl-dialog');
+    const dialogPanel = await page.find('sl-dialog >>> .dialog__panel');
     const slHide = await dialog.spyOnEvent('slHide');
     const slAfterHide = await dialog.spyOnEvent('slAfterHide');
 
     await dialog.callMethod('hide');
     expect(slHide).toHaveReceivedEventTimes(1);
 
-    await page.waitFor(500); // wait for transition to end
+    await dialogPanel.waitForEvent('transitionend');
     expect(slAfterHide).toHaveReceivedEventTimes(1);
   });
 

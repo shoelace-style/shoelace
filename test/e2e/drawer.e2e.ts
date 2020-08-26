@@ -21,15 +21,16 @@ describe('drawer', () => {
 
     const drawer = await page.find('sl-drawer');
     const drawerBase = await page.find('sl-drawer >>> .drawer');
+    const drawerPanel = await page.find('sl-drawer >>> .drawer__panel');
 
     expect(await drawerBase.isVisible()).toBe(false);
 
     await drawer.callMethod('show');
-    await page.waitFor(500); // wait for transition to end
+    await drawerPanel.waitForEvent('transitionend');
     expect(await drawerBase.isVisible()).toBe(true);
 
     await drawer.callMethod('hide');
-    await page.waitFor(500); // wait for transition to end
+    await drawerPanel.waitForEvent('transitionend');
     expect(await drawerBase.isVisible()).toBe(false);
   });
 
@@ -39,17 +40,18 @@ describe('drawer', () => {
 
     const drawer = await page.find('sl-drawer');
     const drawerBase = await page.find('sl-drawer >>> .drawer');
+    const drawerPanel = await page.find('sl-drawer >>> .drawer__panel');
 
     expect(await drawerBase.isVisible()).toBe(false);
 
     drawer.setAttribute('open', '');
     await page.waitForChanges();
-    await page.waitFor(500); // wait for transition to end
+    await drawerPanel.waitForEvent('transitionend');
     expect(await drawerBase.isVisible()).toBe(true);
 
     drawer.removeAttribute('open');
     await page.waitForChanges();
-    await page.waitFor(500); // wait for transition to end
+    await drawerPanel.waitForEvent('transitionend');
     expect(await drawerBase.isVisible()).toBe(false);
   });
 
@@ -58,13 +60,14 @@ describe('drawer', () => {
     await page.setContent(testContentStartClosed);
 
     const drawer = await page.find('sl-drawer');
+    const drawerPanel = await page.find('sl-drawer >>> .drawer__panel');
     const slShow = await drawer.spyOnEvent('slShow');
     const slAfterShow = await drawer.spyOnEvent('slAfterShow');
 
     await drawer.callMethod('show');
     expect(slShow).toHaveReceivedEventTimes(1);
 
-    await page.waitFor(500); // wait for transition to end
+    await drawerPanel.waitForEvent('transitionend');
     expect(slAfterShow).toHaveReceivedEventTimes(1);
   });
 
@@ -73,13 +76,14 @@ describe('drawer', () => {
     await page.setContent(testContentStartOpen);
 
     const drawer = await page.find('sl-drawer');
+    const drawerPanel = await page.find('sl-drawer >>> .drawer__panel');
     const slHide = await drawer.spyOnEvent('slHide');
     const slAfterHide = await drawer.spyOnEvent('slAfterHide');
 
     await drawer.callMethod('hide');
     expect(slHide).toHaveReceivedEventTimes(1);
 
-    await page.waitFor(500); // wait for transition to end
+    await drawerPanel.waitForEvent('transitionend');
     expect(slAfterHide).toHaveReceivedEventTimes(1);
   });
 

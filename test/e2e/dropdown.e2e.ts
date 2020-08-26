@@ -29,12 +29,12 @@ describe('dropdown', () => {
     expect(await dropdownPanel.isVisible()).toBe(false);
 
     await dropdown.click();
-    await page.waitFor(500); // wait for transition to end
+    await dropdownPanel.waitForEvent('transitionend');
 
     expect(await dropdownPanel.isVisible()).toBe(true);
 
     await dropdown.click();
-    await page.waitFor(500); // wait for transition to end
+    await dropdownPanel.waitForEvent('transitionend');
 
     expect(await dropdownPanel.isVisible()).toBe(false);
   });
@@ -49,12 +49,12 @@ describe('dropdown', () => {
     expect(await dropdownPanel.isVisible()).toBe(false);
 
     await dropdown.callMethod('show');
-    await page.waitFor(500); // wait for transition to end
+    await dropdownPanel.waitForEvent('transitionend');
 
     expect(await dropdownPanel.isVisible()).toBe(true);
 
     await dropdown.callMethod('hide');
-    await page.waitFor(500); // wait for transition to end
+    await dropdownPanel.waitForEvent('transitionend');
 
     expect(await dropdownPanel.isVisible()).toBe(false);
   });
@@ -70,13 +70,13 @@ describe('dropdown', () => {
 
     dropdown.setAttribute('open', '');
     await page.waitForChanges();
-    await page.waitFor(500); // wait for transition to end
+    await dropdownPanel.waitForEvent('transitionend');
 
     expect(await dropdownPanel.isVisible()).toBe(true);
 
     dropdown.removeAttribute('open');
     await page.waitForChanges();
-    await page.waitFor(500); // wait for transition to end
+    await dropdownPanel.waitForEvent('transitionend');
 
     expect(await dropdownPanel.isVisible()).toBe(false);
   });
@@ -86,13 +86,14 @@ describe('dropdown', () => {
     await page.setContent(testContentStartClosed);
 
     const dropdown = await page.find('sl-dropdown');
+    const dropdownPanel = await page.find('sl-dropdown >>> .dropdown__panel');
     const slShow = await dropdown.spyOnEvent('slShow');
     const slAfterShow = await dropdown.spyOnEvent('slAfterShow');
 
     await dropdown.callMethod('show');
     expect(slShow).toHaveReceivedEventTimes(1);
 
-    await page.waitFor(500); // wait for transition to end
+    await dropdownPanel.waitForEvent('transitionend');
     expect(slAfterShow).toHaveReceivedEventTimes(1);
   });
 
@@ -101,14 +102,14 @@ describe('dropdown', () => {
     await page.setContent(testContentStartOpen);
 
     const dropdown = await page.find('sl-dropdown');
+    const dropdownPanel = await page.find('sl-dropdown >>> .dropdown__panel');
     const slHide = await dropdown.spyOnEvent('slHide');
     const slAfterHide = await dropdown.spyOnEvent('slAfterHide');
 
     await dropdown.callMethod('hide');
     expect(slHide).toHaveReceivedEventTimes(1);
 
-    // hiding seems to require a greater timeout?
-    await page.waitFor(1500); // wait for transition to end
+    await dropdownPanel.waitForEvent('transitionend');
     expect(slAfterHide).toHaveReceivedEventTimes(1);
   });
 
