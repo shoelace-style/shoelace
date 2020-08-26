@@ -187,8 +187,8 @@
   --sl-input-color-hover: var(--sl-color-gray-30);
   --sl-input-color-focus: var(--sl-color-gray-30);
   --sl-input-color-disabled: var(--sl-color-gray-10);
-  --sl-input-color-valid: var(--sl-color-success-40);
-  --sl-input-color-invalid: var(--sl-color-danger-40);
+  --sl-input-color-valid: var(var(--sl-color-gray-30));
+  --sl-input-color-invalid: var(var(--sl-color-gray-30));
 
   --sl-input-icon-color: var(--sl-color-gray-60);
   --sl-input-icon-color-hover: var(--sl-color-gray-40);

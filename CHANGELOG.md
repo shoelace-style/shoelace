@@ -8,6 +8,7 @@
 - Add `slClear` event to `sl-input`
 - Fixed a bug where the `aria-selected` state was incorrect in `sl-menu-item`
 - Fixed a bug where custom properties applied to `sl-tooltip` didn't affect show/hide transitions
+- Fixed a bug where `--sl-input-color-*` custom properties had no affect on `sl-input` and `sl-textarea`
 - Refactored `sl-dropdown` and `sl-tooltip` to use positioner elements so panels/tooltips can be customized easier
 
 ## 2.0.0-beta.15

@@ -26,14 +26,20 @@
   &:hover:not(.input--disabled) {
     background-color: var(--sl-input-background-color-hover);
     border-color: var(--sl-input-border-color-hover);
-    color: var(--sl-input-color-hover);
+
+    .input__control {
+      color: var(--sl-input-color-hover);
+    }
   }
 
   &.input--focused:not(.input--disabled) {
     background-color: var(--sl-input-background-color-focus);
     border-color: var(--sl-input-border-color-focus);
     box-shadow: var(--sl-focus-ring-box-shadow);
-    color: var(--sl-input-color-focus);
+
+    .input__control {
+      color: var(--sl-input-color-focus);
+    }
   }
 
   &.input--disabled {
@@ -52,8 +58,11 @@
   }
 
   &.input--valid:not(.input--disabled) {
-    color: var(--sl-input-color-valid);
     border-color: var(--sl-input-border-color-valid);
+
+    .input__control {
+      color: var(--sl-input-color-valid);
+    }
 
     &.input--focused {
       box-shadow: 0 0 0 var(--sl-focus-ring-width)
@@ -64,6 +73,10 @@
 
   &.input--invalid:not(.input--disabled) {
     border-color: var(--sl-color-danger-50);
+
+    .input__control {
+      color: var(--sl-input-color-invalid);
+    }
 
     &.input--focused {
       box-shadow: 0 0 0 var(--sl-focus-ring-width)

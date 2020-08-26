@@ -24,7 +24,10 @@
   &:hover:not(.textarea--disabled) {
     background-color: var(--sl-input-background-color-hover);
     border-color: var(--sl-input-border-color-hover);
-    color: var(--sl-input-color-hover);
+
+    .textarea__control {
+      color: var(--sl-input-color-hover);
+    }
   }
 
   &.textarea--focused:not(.textarea--disabled) {
@@ -32,16 +35,21 @@
     border-color: var(--sl-input-border-color-focus);
     box-shadow: var(--sl-focus-ring-box-shadow);
     color: var(--sl-input-color-focus);
+
+    .textarea__control {
+      color: var(--sl-input-color-focus);
+    }
   }
 
   &.textarea--disabled {
     background-color: var(--sl-input-background-color-disabled);
     border-color: var(--sl-input-border-color-disabled);
-    color: var(--sl-input-color-disabled);
     opacity: 0.5;
     cursor: not-allowed;
 
     .textarea__control {
+      color: var(--sl-input-color-disabled);
+
       &::placeholder {
         color: var(--sl-input-placeholder-color-disabled);
       }
@@ -49,8 +57,11 @@
   }
 
   &.textarea--valid:not(.textarea--disabled) {
-    color: var(--sl-input-color-valid);
     border-color: var(--sl-input-border-color-valid);
+
+    .textarea__control {
+      color: var(--sl-input-color-valid);
+    }
 
     &.textarea--focused {
       box-shadow: 0 0 0 var(--sl-focus-ring-width)
@@ -61,6 +72,10 @@
 
   &.textarea--invalid:not(.textarea--disabled) {
     border-color: var(--sl-color-danger-50);
+
+    .textarea__control {
+      color: var(--sl-input-color-invalid);
+    }
 
     &.textarea--focused {
       box-shadow: 0 0 0 var(--sl-focus-ring-width)
