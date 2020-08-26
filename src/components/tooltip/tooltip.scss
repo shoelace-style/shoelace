@@ -24,6 +24,7 @@
 .tooltip-positioner {
   position: absolute;
   z-index: var(--sl-z-index-tooltip);
+  pointer-events: none;
 }
 
 .tooltip {
@@ -36,11 +37,13 @@
   line-height: var(--sl-tooltip-line-height);
   color: var(--sl-tooltip-color);
   opacity: 0;
-  transform: scale(0.9);
-  transform-origin: bottom;
-  transition: var(--sl-transition-fast) opacity, var(--sl-transition-fast) transform;
   padding: var(--sl-tooltip-padding);
-  pointer-events: none;
+  transform: scale(0.8);
+  transform-origin: bottom;
+  transition-property: opacity, transform;
+  transition-delay: var(--hide-delay);
+  transition-duration: var(--hide-duration);
+  transition-timing-function: var(--hide-timing-function);
 
   &::after {
     content: '';
@@ -50,9 +53,30 @@
   }
 }
 
-.popover-visible .tooltip {
-  opacity: 1;
-  transform: scale(1);
+.tooltip-positioner {
+  &[data-popper-placement^='top'] .tooltip {
+    transform-origin: bottom;
+  }
+
+  &[data-popper-placement^='bottom'] .tooltip {
+    transform-origin: top;
+  }
+
+  &[data-popper-placement^='left'] .tooltip {
+    transform-origin: right;
+  }
+
+  &[data-popper-placement^='right'] .tooltip {
+    transform-origin: left;
+  }
+
+  &.popover-visible .tooltip {
+    opacity: 1;
+    transform: scale(1);
+    transition-delay: var(--show-delay);
+    transition-duration: var(--show-duration);
+    transition-timing-function: var(--show-timing-function);
+  }
 }
 
 // Arrow + bottom
