@@ -44,7 +44,14 @@
           preview.classList.add('code-block__preview');
           preview.innerHTML = code.textContent;
           preview.innerHTML += `
-            <div class="code-block__resizer">
+            <div
+              class="code-block__resizer"
+              tabindex="0"
+              role="scrollbar"
+              aria-valuenow="0"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            >
               <sl-icon name="grip-horizontal"></sl-icon>
             </div>
           `;
@@ -92,6 +99,7 @@
     // Horizontal resizing
     hook.doneEach(() => {
       [...document.querySelectorAll('.code-block__preview')].map(resizeElement => {
+        const resizer = resizeElement.querySelector('.code-block__resizer');
         let startX;
         let startY;
         let startWidth;
@@ -104,11 +112,10 @@
           startHeight = parseInt(document.defaultView.getComputedStyle(resizeElement).height, 10);
           document.documentElement.addEventListener('mousemove', doDrag, false);
           document.documentElement.addEventListener('mouseup', stopDrag, false);
-          event.preventDefault();
         };
 
         const doDrag = event => {
-          resizeElement.style.width = startWidth + event.clientX - startX + 'px';
+          setWidth(startWidth + event.clientX - startX);
         };
 
         const stopDrag = event => {
@@ -116,7 +123,33 @@
           document.documentElement.removeEventListener('mouseup', stopDrag, false);
         };
 
-        resizeElement.querySelector('.code-block__resizer').addEventListener('mousedown', initDrag);
+        const handleKeyDown = event => {
+          if (['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) {
+            const currentWidth = resizeElement.clientWidth;
+            const maxWidth = resizeElement.parentElement.clientWidth;
+            const incr = event.shiftKey ? 100 : 10;
+
+            event.preventDefault();
+
+            if (event.key === 'ArrowLeft') setWidth(currentWidth - incr);
+            if (event.key === 'ArrowRight') setWidth(currentWidth + incr);
+            if (event.key === 'Home') setWidth(0);
+            if (event.key === 'End') setWidth(maxWidth);
+          }
+        };
+
+        const setWidth = width => {
+          resizeElement.style.width = width + 'px';
+
+          const totalWidth = resizeElement.parentElement.clientWidth;
+          const currentWidth = resizeElement.clientWidth;
+          const valuenow = Math.round((currentWidth / totalWidth) * 100);
+
+          resizer.setAttribute('aria-valuenow', valuenow);
+        };
+
+        resizer.addEventListener('mousedown', initDrag);
+        resizer.addEventListener('keydown', handleKeyDown);
       }, false);
     });
   });
