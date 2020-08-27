@@ -40,5 +40,5 @@ export function getTextContent(slot: HTMLSlotElement): string {
 // Determines whether a slot with the given name exists in an element.
 //
 export function hasSlot(el: HTMLElement, name: string) {
-  return [...el.querySelectorAll('[slot]')].filter((slottedEl: HTMLSlotElement) => slottedEl.slot === name).length > 0;
+  return el.querySelector(`[slot="${name}"]`) !== null;
 }
