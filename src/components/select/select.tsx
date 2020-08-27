@@ -365,6 +365,7 @@ export class Select {
             'select--focused': this.hasFocus,
             'select--disabled': this.disabled,
             'select--multiple': this.multiple,
+            'select--has-tags': this.multiple && this.displayTags.length > 0,
             'select--small': this.size === 'small',
             'select--medium': this.size === 'medium',
             'select--large': this.size === 'large',

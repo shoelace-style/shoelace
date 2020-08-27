@@ -1,6 +1,7 @@
 @import 'component';
 @import 'form-control-label';
 @import 'form-control-help-text';
+@import 'mixins/hide-scrollbar';
 
 :host {
   display: block;
@@ -42,4 +43,28 @@
 // it doesn't use the input's `value` prop to display the selection.
 .select:not(.select--empty) .select__input::part(clear-button) {
   visibility: visible;
+}
+
+// For multiselect, ensure tags don't wrap and can be scrolled when the control's width is smaller than its contents. We
+// also need to make sure the clear button and the chevron icon always show.
+.select--multiple {
+  .select__input::part(input) {
+    flex: 1 1 0;
+  }
+
+  .select__input::part(prefix) {
+    @include hide-scrollbar;
+    flex-shrink: 1;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .select__input::part(clear-button),
+  .select__input::part(suffix) {
+    padding-left: var(--sl-spacing-x-small);
+  }
+
+  &.select--has-tags .select__input::part(input) {
+    margin: 0;
+  }
 }
