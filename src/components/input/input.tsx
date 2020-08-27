@@ -176,10 +176,15 @@ export class Input {
     end: number,
     selectMode: 'select' | 'start' | 'end' | 'preserve' = 'preserve'
   ) {
-    this.input.setRangeText(replacement, start, end, selectMode);
-    this.value = this.input.value;
-    this.slChange.emit();
-    this.slInput.emit();
+    const returnValue = this.input.setRangeText(replacement, start, end, selectMode);
+
+    if (this.value !== this.input.value) {
+      this.value = this.input.value;
+      this.slChange.emit();
+      this.slInput.emit();
+    }
+
+    return returnValue;
   }
 
   handleChange() {
