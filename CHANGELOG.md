@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.0-beta.17
+
+- Fixed a bug where clicking a tag in `sl-select` wouldn't toggle the menu
+- Fixed a bug where options where `sl-select` options weren't always visible or scrollable
+
 ## 2.0.0-beta.16
 
 - Add `hoist` prop to `sl-color-picker`, `sl-dropdown`, and `sl-select` to work around panel clipping
