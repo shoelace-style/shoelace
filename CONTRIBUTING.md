@@ -1,6 +1,6 @@
 # Contributing to Shoelace
 
-Shoelace is an open source project, meaning everyone can use it and contribute to its development. When you join our community, you'll find a friendly group of enthusiasts of all experience levels who are willing to chat about anything and everything related to Shoelace.
+Shoelace is an open source project, meaning everyone can use it and contribute to its development. When you join our community, you'll find a friendly group of enthusiasts at all experience levels who are willing to chat about anything and everything related to Shoelace.
 
 The easiest way to get started contributing is to join the [community chat](https://discord.gg/mg8f26C). This is where we hang out, discuss new ideas, ask for feedback, and more!
 
@@ -9,7 +9,7 @@ A common misconception about contributing to an open source project is that you 
 - Submitting well-written bug reports
 - Submitting feature requests that are within the scope of the project
 - Improving the documentation
-- Responding to users that need help in the [community chat](https://discord.gg/mg8f26C)
+- Responding to users that need help in the community chat
 - Triaging issues on GitHub
 - Being a developer advocate for the project
 - Sponsoring the project financially
