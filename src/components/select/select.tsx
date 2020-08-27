@@ -361,7 +361,7 @@ export class Select {
           class={{
             select: true,
             'select--open': this.isOpen,
-            'select--empty': this.value.length === 0,
+            'select--empty': this.value?.length === 0,
             'select--focused': this.hasFocus,
             'select--disabled': this.disabled,
             'select--multiple': this.multiple,

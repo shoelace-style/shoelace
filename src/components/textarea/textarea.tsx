@@ -224,7 +224,7 @@ export class Textarea {
             // States
             'textarea--disabled': this.disabled,
             'textarea--focused': this.hasFocus,
-            'textarea--empty': this.value.length === 0,
+            'textarea--empty': this.value?.length === 0,
             'textarea--valid': this.valid,
             'textarea--invalid': this.invalid,
 

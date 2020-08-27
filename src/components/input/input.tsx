@@ -264,7 +264,7 @@ export class Input {
             'input--pill': this.pill,
             'input--disabled': this.disabled,
             'input--focused': this.hasFocus,
-            'input--empty': this.value.length === 0,
+            'input--empty': this.value?.length === 0,
             'input--valid': this.valid,
             'input--invalid': this.invalid
           }}
