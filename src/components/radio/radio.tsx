@@ -139,7 +139,6 @@ export class Radio {
           'radio--focused': this.hasFocus
         }}
         htmlFor={this.inputId}
-        role="radio"
         onKeyDown={this.handleKeyDown}
         onMouseDown={this.handleMouseDown}
       >
@@ -162,6 +161,8 @@ export class Radio {
             value={this.value}
             checked={this.checked}
             disabled={this.disabled}
+            role="radio"
+            aria-checked={this.checked}
             aria-labelledby={this.labelId}
             onClick={this.handleClick}
             onBlur={this.handleBlur}

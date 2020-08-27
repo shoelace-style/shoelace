@@ -5,6 +5,7 @@
 - Fixed a bug where clicking a tag in `sl-select` wouldn't toggle the menu
 - Fixed a bug where options where `sl-select` options weren't always visible or scrollable
 - Fixed a bug where setting `null` on `sl-input`, `sl-textarea`, or `sl-select` would throw an error
+- Fixed a bug where `role` was on the wrong element and aria attribute weren't explicit in `sl-checkbox`, `sl-switch`, and `sl-radio`
 - Optimized `hasSlot` utility by using a simpler selector
 
 ## 2.0.0-beta.16

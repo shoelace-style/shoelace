@@ -110,7 +110,6 @@ export class Switch {
       <label
         part="base"
         htmlFor={this.switchId}
-        role="switch"
         class={{
           switch: true,
           'switch--checked': this.checked,
@@ -130,6 +129,8 @@ export class Switch {
             value={this.value}
             checked={this.checked}
             disabled={this.disabled}
+            role="switch"
+            aria-checked={this.checked}
             aria-labelledby={this.labelId}
             onClick={this.handleClick}
             onBlur={this.handleBlur}

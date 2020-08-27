@@ -115,7 +115,6 @@ export class Checkbox {
           'checkbox--indeterminate': this.indeterminate
         }}
         htmlFor={this.inputId}
-        role="checkbox"
         onMouseDown={this.handleMouseDown}
       >
         <span part="control" class="checkbox__control">
@@ -156,6 +155,8 @@ export class Checkbox {
             value={this.value}
             checked={this.checked}
             disabled={this.disabled}
+            role="checkbox"
+            aria-checked={this.checked}
             aria-labelledby={this.labelId}
             onClick={this.handleClick}
             onBlur={this.handleBlur}
