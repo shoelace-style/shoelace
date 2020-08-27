@@ -29,6 +29,10 @@ export class Card {
   @State() hasImage = false;
   @State() hasHeader = false;
 
+  connectedCallback() {
+    this.updateSlots = this.updateSlots.bind(this);
+  }
+
   componentWillLoad() {
     this.updateSlots();
     this.host.shadowRoot.addEventListener('slotchange', this.updateSlots);

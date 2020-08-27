@@ -178,3 +178,13 @@ To expose custom properties for a component, define them in the `:host` block an
   display: inline-block;
 }
 ```
+
+### Conditional Slots
+
+When a component relies on the presence of a slot to do something, don't assume the initial state of the component is its permanent state. Users can add and remove slotted content anytime, and components should be aware of this.
+
+- Create an `updateSlots` method that uses `hasSlot` (imported from `src/utilities/slot.ts`) to check for the required slot(s)
+- Listen on the host element for the `slotchange` event and run `updateSlots`
+- Don't conditionally render any slots — always use `hidden` or `display: none` so the slot exists in the DOM
+
+See the source of card, dialog, or drawer for examples.

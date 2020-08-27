@@ -85,6 +85,7 @@ export class Drawer {
     this.handleDocumentFocusIn = this.handleDocumentFocusIn.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleOverlayClick = this.handleOverlayClick.bind(this);
+    this.updateSlots = this.updateSlots.bind(this);
   }
 
   componentWillLoad() {

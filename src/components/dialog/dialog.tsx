@@ -77,6 +77,7 @@ export class Dialog {
     this.handleTransitionEnd = this.handleTransitionEnd.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleOverlayClick = this.handleOverlayClick.bind(this);
+    this.updateSlots = this.updateSlots.bind(this);
   }
 
   componentWillLoad() {
