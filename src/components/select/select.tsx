@@ -130,17 +130,11 @@ export class Select {
   }
 
   componentDidLoad() {
-    this.menu.querySelector('slot').addEventListener('slotchange', this.handleSlotChange);
     this.resizeObserver = new ResizeObserver(() => this.resizeMenu());
-
     this.reportDuplicateItemValues();
 
     // We need to do an initial sync after the component has rendered, so this will suppress the re-render warning
     requestAnimationFrame(() => this.syncItemsFromValue());
-  }
-
-  disconnectedCallback() {
-    this.menu.querySelector('slot').removeEventListener('slotchange', this.handleSlotChange);
   }
 
   getItemLabel(item: HTMLSlMenuItemElement) {
@@ -416,7 +410,7 @@ export class Select {
             onSlSelect={this.handleMenuSelect}
             onKeyDown={this.handleMenuKeyDown}
           >
-            <slot />
+            <slot onSlotchange={this.handleSlotChange} />
           </sl-menu>
         </sl-dropdown>
 

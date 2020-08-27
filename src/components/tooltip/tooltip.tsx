@@ -94,8 +94,6 @@ export class Tooltip {
   }
 
   componentDidLoad() {
-    const slot = this.host.shadowRoot.querySelector('slot');
-
     this.target = this.getTarget();
     this.popover = new Popover(this.target, this.tooltipPositioner);
     this.syncOptions();
@@ -103,7 +101,6 @@ export class Tooltip {
     this.host.addEventListener('blur', this.handleBlur, true);
     this.host.addEventListener('click', this.handleClick, true);
     this.host.addEventListener('focus', this.handleFocus, true);
-    slot.addEventListener('slotchange', this.handleSlotChange);
 
     // Show on init if open
     this.tooltipPositioner.hidden = !this.open;
@@ -122,7 +119,6 @@ export class Tooltip {
     this.host.removeEventListener('blur', this.handleBlur, true);
     this.host.removeEventListener('click', this.handleClick, true);
     this.host.removeEventListener('focus', this.handleFocus, true);
-    this.host.shadowRoot.querySelector('slot').removeEventListener('slotchange', this.handleSlotChange);
   }
 
   /** Shows the tooltip. */
@@ -231,7 +227,7 @@ export class Tooltip {
   render() {
     return (
       <Host onMouseOver={this.handleMouseOver} onMouseOut={this.handleMouseOut}>
-        <slot aria-describedby={this.componentId} />
+        <slot aria-describedby={this.componentId} onSlotchange={this.handleSlotChange} />
 
         {!this.disabled && (
           <div ref={el => (this.tooltipPositioner = el)} class="tooltip-positioner">
