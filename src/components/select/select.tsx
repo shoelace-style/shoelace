@@ -121,6 +121,7 @@ export class Select {
     this.handleClear = this.handleClear.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleLabelClick = this.handleLabelClick.bind(this);
+    this.handleTagClick = this.handleTagClick.bind(this);
     this.handleMenuKeyDown = this.handleMenuKeyDown.bind(this);
     this.handleMenuHide = this.handleMenuHide.bind(this);
     this.handleMenuShow = this.handleMenuShow.bind(this);
@@ -232,6 +233,21 @@ export class Select {
     this.reportDuplicateItemValues();
   }
 
+  handleTagClick(event: MouseEvent) {
+    // Don't toggle the menu when a tag's clear button is activated
+    const path = event.composedPath() as Array<EventTarget>;
+    const clearButton = path.find(el => {
+      if (el instanceof HTMLElement) {
+        const element = el as HTMLElement;
+        return element.getAttribute('part') === 'clear-button';
+      }
+    });
+
+    if (clearButton) {
+      event.stopPropagation();
+    }
+  }
+
   reportDuplicateItemValues() {
     const items = this.getItems();
 
@@ -266,7 +282,7 @@ export class Select {
             size={this.size}
             pill={this.pill}
             clearable
-            onClick={event => event.stopPropagation()}
+            onClick={this.handleTagClick}
             onSlClear={event => {
               event.stopPropagation();
               item.checked = false;
