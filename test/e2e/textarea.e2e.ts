@@ -94,6 +94,18 @@ describe('textarea', () => {
     expect(slInput).toHaveReceivedEventTimes(1);
   });
 
+  it.only('should change value when text entered', async () => {
+    const page = await newE2EPage();
+    await page.setContent(testContent);
+
+    const textarea = await page.find('sl-textarea');
+    const textareaControl = await page.find('sl-textarea >>> .textarea__control');
+
+    await textareaControl.press('A');
+
+    expect(await textarea.getProperty('value')).toBe('A');
+  });
+
   it('should select all text when select method called', async () => {
     const page = await newE2EPage();
     await page.setContent(testContent);

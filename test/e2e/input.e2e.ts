@@ -94,6 +94,18 @@ describe('input', () => {
     expect(slInput).toHaveReceivedEventTimes(1);
   });
 
+  it('should change value when text entered', async () => {
+    const page = await newE2EPage();
+    await page.setContent(testContent);
+
+    const input = await page.find('sl-input');
+    const inputControl = await page.find('sl-input >>> .input__control');
+
+    await inputControl.press('A');
+
+    expect(await input.getProperty('value')).toBe('A');
+  });
+
   it('should emit slClear when cleared', async () => {
     const page = await newE2EPage();
     await page.setContent(testContent);
