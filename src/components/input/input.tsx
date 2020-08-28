@@ -120,11 +120,6 @@ export class Input {
     this.invalid = !this.input.checkValidity();
   }
 
-  @Watch('invalid')
-  handleInvalidChange() {
-    this.invalid ? this.slInvalid.emit() : this.slValid.emit();
-  }
-
   /** Emitted when the control's value changes. */
   @Event() slChange: EventEmitter;
 
@@ -139,12 +134,6 @@ export class Input {
 
   /** Emitted when the control loses focus. */
   @Event() slBlur: EventEmitter;
-
-  /** Emitted when the value changes and the control is valid. */
-  @Event() slValid: EventEmitter;
-
-  /** Emitted when the value changes and the control is invalid. */
-  @Event() slInvalid: EventEmitter;
 
   connectedCallback() {
     this.handleChange = this.handleChange.bind(this);

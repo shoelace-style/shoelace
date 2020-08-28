@@ -1985,14 +1985,6 @@ declare namespace LocalJSX {
          */
         "onSlInput"?: (event: CustomEvent<any>) => void;
         /**
-          * Emitted when the value changes and the control is invalid.
-         */
-        "onSlInvalid"?: (event: CustomEvent<any>) => void;
-        /**
-          * Emitted when the value changes and the control is valid.
-         */
-        "onSlValid"?: (event: CustomEvent<any>) => void;
-        /**
           * A pattern to validate input against.
          */
         "pattern"?: string;
@@ -2444,14 +2436,6 @@ declare namespace LocalJSX {
           * Emitted when the control receives input.
          */
         "onSlInput"?: (event: CustomEvent<any>) => void;
-        /**
-          * Emitted when the value changes and the control is invalid.
-         */
-        "onSlInvalid"?: (event: CustomEvent<any>) => void;
-        /**
-          * Emitted when the value changes and the control is valid.
-         */
-        "onSlValid"?: (event: CustomEvent<any>) => void;
         /**
           * The textarea's placeholder text.
          */
