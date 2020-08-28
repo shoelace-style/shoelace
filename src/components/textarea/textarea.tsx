@@ -112,17 +112,6 @@ export class Textarea {
     this.invalid = !this.textarea.checkValidity();
   }
 
-  @Watch('invalid')
-  handleInvalidChange() {
-    this.invalid ? this.slInvalid.emit() : this.slValid.emit();
-  }
-
-  /** Emitted when the value changes and the control is valid. */
-  @Event() slValid: EventEmitter;
-
-  /** Emitted when the value changes and the control is invalid. */
-  @Event() slInvalid: EventEmitter;
-
   connectedCallback() {
     this.handleChange = this.handleChange.bind(this);
     this.handleInput = this.handleInput.bind(this);
