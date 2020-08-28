@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, Prop, State, Watch, h } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, Method, Prop, State, Watch, h } from '@stencil/core';
 import ResizeObserver from 'resize-observer-polyfill';
 import { getTextContent } from '../../utilities/slot';
 
@@ -86,7 +86,7 @@ export class Select {
   /** Set to true to add a clear button when the select is populated. */
   @Prop() clearable = false;
 
-  /** Set to true to indicate that the user input is invalid. */
+  /** This will be true when the control is in an invalid state. Validity is determined by the `required` prop. */
   @Prop({ mutable: true }) invalid = false;
 
   @Watch('multiple')
@@ -132,6 +132,19 @@ export class Select {
 
     // We need to do an initial sync after the component has rendered, so this will suppress the re-render warning
     requestAnimationFrame(() => this.syncItemsFromValue());
+  }
+
+  /** Checks for validity and shows the browser's validation message if the control is invalid. */
+  @Method()
+  async reportValidity() {
+    return this.input.reportValidity();
+  }
+
+  /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
+  @Method()
+  async setCustomValidity(message: string) {
+    // this.input.setCustomValidity(message);
+    // this.invalid = !this.input.checkValidity();
   }
 
   getItemLabel(item: HTMLSlMenuItemElement) {

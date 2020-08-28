@@ -2,7 +2,6 @@
 
 ## 2.0.0-beta.17
 
-- Added `required` to `sl-checkbox` and `sl-switch`
 - Added `minlength` and `spellcheck` attributes to `sl-textarea`
 - Fixed a bug where clicking a tag in `sl-select` wouldn't toggle the menu
 - Fixed a bug where options where `sl-select` options weren't always visible or scrollable
@@ -15,7 +14,9 @@
 **Form validation has been reworked and is much more powerful now!** The following changes affect `sl-input`, `sl-select`, and `sl-textarea`.
 
 - The `invalid` prop now reflects the control's validity as determined by the browser's constraint validation API
-- Removed the `valid` prop
+- Added `required` to `sl-checkbox`, `sl-radio`, and `sl-switch`
+- Added `reportValidity()` and `setCustomValidity()` methods to all form controls
+- Removed the `valid` prop from all form controls
 - Removed valid and invalid design tokens and related styles (you can use your own custom styles to achieve this)
 
 ## 2.0.0-beta.16

@@ -218,6 +218,10 @@ export namespace Components {
          */
         "indeterminate": boolean;
         /**
+          * This will be true when the control is in an invalid state. Validity is determined by the `required` prop.
+         */
+        "invalid": boolean;
+        /**
           * The checkbox's name attribute.
          */
         "name": string;
@@ -226,9 +230,17 @@ export namespace Components {
          */
         "removeFocus": () => Promise<void>;
         /**
+          * Checks for validity and shows the browser's validation message if the control is invalid.
+         */
+        "reportValidity": () => Promise<boolean>;
+        /**
           * Set to true to make the checkbox a required field.
          */
         "required": boolean;
+        /**
+          * Sets a custom validation message. If `message` is not empty, the field will be considered invalid.
+         */
+        "setCustomValidity": (message: string) => Promise<void>;
         /**
           * Sets focus on the checkbox.
          */
@@ -487,10 +499,6 @@ export namespace Components {
          */
         "clearable": boolean;
         /**
-          * Sets a custom validation message for the control. When this prop is not an empty string, the browser will assume the control is invalid and show this message as an error when the form is submitted.
-         */
-        "customValidity": string;
-        /**
           * Set to true to disable the input.
          */
         "disabled": boolean;
@@ -499,7 +507,7 @@ export namespace Components {
          */
         "inputmode": 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
         /**
-          * This will be true when the control is in an invalid state. Validity is determined by props such as `type`, `required`, `pattern`, and `customValidity` using the browser's constraint validation API.
+          * This will be true when the control is in an invalid state. Validity is determined by props such as `type`, `required`, `minlength`, `maxlength`, and `pattern` using the browser's constraint validation API.
          */
         "invalid": boolean;
         /**
@@ -558,6 +566,10 @@ export namespace Components {
           * Selects all the text in the input.
          */
         "select": () => Promise<void>;
+        /**
+          * Sets a custom validation message. If `message` is not empty, the field will be considered invalid.
+         */
+        "setCustomValidity": (message: string) => Promise<void>;
         /**
           * Sets focus on the input.
          */
@@ -657,6 +669,10 @@ export namespace Components {
          */
         "disabled": boolean;
         /**
+          * This will be true when the control is in an invalid state. Validity in range inputs is determined by the message provided by the `setCustomValidity` method.
+         */
+        "invalid": boolean;
+        /**
           * The radio's name attribute.
          */
         "name": string;
@@ -664,6 +680,14 @@ export namespace Components {
           * Removes focus from the radio.
          */
         "removeFocus": () => Promise<void>;
+        /**
+          * Checks for validity and shows the browser's validation message if the control is invalid.
+         */
+        "reportValidity": () => Promise<boolean>;
+        /**
+          * Sets a custom validation message. If `message` is not empty, the field will be considered invalid.
+         */
+        "setCustomValidity": (message: string) => Promise<void>;
         /**
           * Sets focus on the radio.
          */
@@ -678,6 +702,10 @@ export namespace Components {
           * Set to true to disable the input.
          */
         "disabled": boolean;
+        /**
+          * This will be true when the control is in an invalid state. Validity in range inputs is determined by the message provided by the `setCustomValidity` method.
+         */
+        "invalid": boolean;
         /**
           * The input's max attribute.
          */
@@ -694,6 +722,10 @@ export namespace Components {
           * Removes focus from the input.
          */
         "removeFocus": () => Promise<void>;
+        /**
+          * Sets a custom validation message. If `message` is not empty, the field will be considered invalid.
+         */
+        "setCustomValidity": (message: string) => Promise<void>;
         /**
           * Sets focus on the input.
          */
@@ -763,7 +795,7 @@ export namespace Components {
          */
         "hoist": boolean;
         /**
-          * Set to true to indicate that the user input is invalid.
+          * This will be true when the control is in an invalid state. Validity is determined by the `required` prop.
          */
         "invalid": boolean;
         /**
@@ -791,9 +823,17 @@ export namespace Components {
          */
         "placeholder": string;
         /**
+          * Checks for validity and shows the browser's validation message if the control is invalid.
+         */
+        "reportValidity": () => Promise<boolean>;
+        /**
           * The select's required attribute.
          */
         "required": boolean;
+        /**
+          * Sets a custom validation message. If `message` is not empty, the field will be considered invalid.
+         */
+        "setCustomValidity": (message: string) => Promise<void>;
         /**
           * The select's size.
          */
@@ -821,6 +861,10 @@ export namespace Components {
          */
         "disabled": boolean;
         /**
+          * This will be true when the control is in an invalid state. Validity is determined by the `required` prop.
+         */
+        "invalid": boolean;
+        /**
           * The switch's name attribute.
          */
         "name": string;
@@ -829,9 +873,17 @@ export namespace Components {
          */
         "removeFocus": () => Promise<void>;
         /**
+          * Checks for validity and shows the browser's validation message if the control is invalid.
+         */
+        "reportValidity": () => Promise<boolean>;
+        /**
           * Set to true to make the switch a required field.
          */
         "required": boolean;
+        /**
+          * Sets a custom validation message. If `message` is not empty, the field will be considered invalid.
+         */
+        "setCustomValidity": (message: string) => Promise<void>;
         /**
           * Sets focus on the switch.
          */
@@ -919,10 +971,6 @@ export namespace Components {
          */
         "autofocus": boolean;
         /**
-          * Sets a custom validation message for the control. When this prop is not an empty string, the browser will assume the control is invalid and show this message as an error when the form is submitted.
-         */
-        "customValidity": string;
-        /**
           * Set to true to disable the textarea.
          */
         "disabled": boolean;
@@ -931,7 +979,7 @@ export namespace Components {
          */
         "inputmode": 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
         /**
-          * This will be true when the control is in an invalid state. Validity is determined by props such as `type`, `required`, `pattern`, and `customValidity` using the browser's constraint validation API.
+          * This will be true when the control is in an invalid state. Validity is determined by props such as `required`, `minlength`, and `maxlength` using the browser's constraint validation API.
          */
         "invalid": boolean;
         /**
@@ -982,6 +1030,10 @@ export namespace Components {
           * Selects all the text in the input.
          */
         "select": () => Promise<void>;
+        /**
+          * Sets a custom validation message. If `message` is not empty, the field will be considered invalid.
+         */
+        "setCustomValidity": (message: string) => Promise<void>;
         /**
           * Sets focus on the textarea.
          */
@@ -1536,6 +1588,10 @@ declare namespace LocalJSX {
          */
         "indeterminate"?: boolean;
         /**
+          * This will be true when the control is in an invalid state. Validity is determined by the `required` prop.
+         */
+        "invalid"?: boolean;
+        /**
           * The checkbox's name attribute.
          */
         "name"?: string;
@@ -1873,10 +1929,6 @@ declare namespace LocalJSX {
          */
         "clearable"?: boolean;
         /**
-          * Sets a custom validation message for the control. When this prop is not an empty string, the browser will assume the control is invalid and show this message as an error when the form is submitted.
-         */
-        "customValidity"?: string;
-        /**
           * Set to true to disable the input.
          */
         "disabled"?: boolean;
@@ -1885,7 +1937,7 @@ declare namespace LocalJSX {
          */
         "inputmode"?: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
         /**
-          * This will be true when the control is in an invalid state. Validity is determined by props such as `type`, `required`, `pattern`, and `customValidity` using the browser's constraint validation API.
+          * This will be true when the control is in an invalid state. Validity is determined by props such as `type`, `required`, `minlength`, `maxlength`, and `pattern` using the browser's constraint validation API.
          */
         "invalid"?: boolean;
         /**
@@ -2055,6 +2107,10 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
+          * This will be true when the control is in an invalid state. Validity in range inputs is determined by the message provided by the `setCustomValidity` method.
+         */
+        "invalid"?: boolean;
+        /**
           * The radio's name attribute.
          */
         "name"?: string;
@@ -2080,6 +2136,10 @@ declare namespace LocalJSX {
           * Set to true to disable the input.
          */
         "disabled"?: boolean;
+        /**
+          * This will be true when the control is in an invalid state. Validity in range inputs is determined by the message provided by the `setCustomValidity` method.
+         */
+        "invalid"?: boolean;
         /**
           * The input's max attribute.
          */
@@ -2165,7 +2225,7 @@ declare namespace LocalJSX {
          */
         "hoist"?: boolean;
         /**
-          * Set to true to indicate that the user input is invalid.
+          * This will be true when the control is in an invalid state. Validity is determined by the `required` prop.
          */
         "invalid"?: boolean;
         /**
@@ -2234,6 +2294,10 @@ declare namespace LocalJSX {
           * Set to true to disable the switch.
          */
         "disabled"?: boolean;
+        /**
+          * This will be true when the control is in an invalid state. Validity is determined by the `required` prop.
+         */
+        "invalid"?: boolean;
         /**
           * The switch's name attribute.
          */
@@ -2337,10 +2401,6 @@ declare namespace LocalJSX {
          */
         "autofocus"?: boolean;
         /**
-          * Sets a custom validation message for the control. When this prop is not an empty string, the browser will assume the control is invalid and show this message as an error when the form is submitted.
-         */
-        "customValidity"?: string;
-        /**
           * Set to true to disable the textarea.
          */
         "disabled"?: boolean;
@@ -2349,7 +2409,7 @@ declare namespace LocalJSX {
          */
         "inputmode"?: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
         /**
-          * This will be true when the control is in an invalid state. Validity is determined by props such as `type`, `required`, `pattern`, and `customValidity` using the browser's constraint validation API.
+          * This will be true when the control is in an invalid state. Validity is determined by props such as `required`, `minlength`, and `maxlength` using the browser's constraint validation API.
          */
         "invalid"?: boolean;
         /**

@@ -86,8 +86,17 @@ To make a field required, use the `required` prop. The form will not be submitte
 <sl-form class="input-validation-required">
   <sl-input name="name" label="Name" required></sl-input>
   <br>
+  <sl-select label="Favorite Pet" required>
+    <sl-menu-item value="birds">Birds</sl-menu-item>
+    <sl-menu-item value="cats">Cats</sl-menu-item>
+    <sl-menu-item value="dogs">Dogs</sl-menu-item>
+    <sl-menu-item value="other">Other</sl-menu-item>
+  </sl-select>
+  <br>
   <sl-textarea name="comment" label="Comment" required></sl-textarea>
   <br>
+  <sl-checkbox required>Check me before submitting</sl-checkbox>
+  <br><br>
   <sl-button type="primary" submit>Submit</sl-button>
 </sl-form>
 
@@ -135,7 +144,7 @@ Some input types will automatically trigger constraints, such as `email` and `ur
 
 ### Custom Validation
 
-To create a custom validation error, use the `customValidity` prop. The form will not be submitted when this prop is set to anything other than an empty string, and its value will be shown by the browser as the error message.
+To create a custom validation error, use the `setCustomValidity` method. The form will not be submitted when this method is called with anything other than an empty string, and its message will be shown by the browser as the error message.
 
 ```html preview
 <sl-form class="input-validation-custom">
@@ -151,9 +160,9 @@ To create a custom validation error, use the `customValidity` prop. The form wil
   form.addEventListener('slSubmit', () => alert('All fields are valid!'));
   input.addEventListener('slInput', () => {
     if (input.value === 'shoelace') {
-      input.customValidity = '';
+      input.setCustomValidity('');
     } else {
-      input.customValidity = 'Hey, you\'re supposed to type \'shoelace\' before submitting this!';
+      input.setCustomValidity('Hey, you\'re supposed to type \'shoelace\' before submitting this!');
     }
   });
 </script>

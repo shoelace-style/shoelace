@@ -102,15 +102,9 @@ export class Input {
 
   /**
    * This will be true when the control is in an invalid state. Validity is determined by props such as `type`,
-   * `required`, `pattern`, and `customValidity` using the browser's constraint validation API.
+   * `required`, `minlength`, `maxlength`, and `pattern` using the browser's constraint validation API.
    */
   @Prop({ mutable: true, reflect: true }) invalid = false;
-
-  /**
-   * Sets a custom validation message for the control. When this prop is not an empty string, the browser will assume
-   * the control is invalid and show this message as an error when the form is submitted.
-   */
-  @Prop() customValidity = '';
 
   /** Set to true to add a clear button when the input is populated. */
   @Prop() clearable = false;
@@ -129,12 +123,6 @@ export class Input {
   @Watch('invalid')
   handleInvalidChange() {
     this.invalid ? this.slInvalid.emit() : this.slValid.emit();
-  }
-
-  @Watch('customValidity')
-  handleCustomValidityChange() {
-    this.input.setCustomValidity(this.customValidity);
-    this.invalid = !this.input.checkValidity();
   }
 
   /** Emitted when the control's value changes. */
@@ -167,10 +155,6 @@ export class Input {
     this.handleClearClick = this.handleClearClick.bind(this);
     this.handleMouseDown = this.handleMouseDown.bind(this);
     this.handlePasswordToggle = this.handlePasswordToggle.bind(this);
-  }
-
-  componentDidLoad() {
-    this.input.setCustomValidity(this.customValidity);
   }
 
   /** Sets focus on the input. */
@@ -222,6 +206,13 @@ export class Input {
   @Method()
   async reportValidity() {
     return this.input.reportValidity();
+  }
+
+  /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
+  @Method()
+  async setCustomValidity(message: string) {
+    this.input.setCustomValidity(message);
+    this.invalid = !this.input.checkValidity();
   }
 
   handleChange() {
