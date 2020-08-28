@@ -154,7 +154,16 @@ export class Textarea {
     end: number,
     selectMode: 'select' | 'start' | 'end' | 'preserve' = 'preserve'
   ) {
-    return this.textarea.setRangeText(replacement, start, end, selectMode);
+    const returnValue = this.textarea.setRangeText(replacement, start, end, selectMode);
+
+    if (this.value !== this.textarea.value) {
+      this.value = this.textarea.value;
+      this.setTextareaHeight();
+      this.slChange.emit();
+      this.slInput.emit();
+    }
+
+    return returnValue;
   }
 
   handleChange() {
