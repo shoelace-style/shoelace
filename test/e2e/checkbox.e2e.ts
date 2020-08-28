@@ -32,7 +32,7 @@ describe('checkbox', () => {
     const checkbox = await page.find('sl-checkbox');
     const otherElement = await page.find('button');
 
-    const slFocus = await checkbox.spyOnEvent('slBlur');
+    const slBlur = await checkbox.spyOnEvent('slBlur');
 
     //give focus
     await checkbox.click();
@@ -40,7 +40,7 @@ describe('checkbox', () => {
     // remove focus by clicking on other element
     await otherElement.click();
 
-    expect(slFocus).toHaveReceivedEventTimes(1);
+    expect(slBlur).toHaveReceivedEventTimes(1);
   });
 
   it('should emit slFocus on setFocus', async () => {

@@ -27,7 +27,7 @@ describe('button', () => {
     const button = await page.find('sl-button');
     const otherElement = await page.find('button');
 
-    const slFocus = await button.spyOnEvent('slBlur');
+    const slBlur = await button.spyOnEvent('slBlur');
 
     //give focus
     await button.click();
@@ -35,7 +35,7 @@ describe('button', () => {
     // remove focus by clicking on other element
     await otherElement.click();
 
-    expect(slFocus).toHaveReceivedEventTimes(1);
+    expect(slBlur).toHaveReceivedEventTimes(1);
   });
 
   it('should emit slFocus on setFocus', async () => {
