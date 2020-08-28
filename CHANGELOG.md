@@ -7,6 +7,7 @@
 - Fixed a bug where setting `null` on `sl-input`, `sl-textarea`, or `sl-select` would throw an error
 - Fixed a bug where `role` was on the wrong element and aria attribute weren't explicit in `sl-checkbox`, `sl-switch`, and `sl-radio`
 - Fixed a bug where dynamically adding/removing a slot wouldn't work as expected in `sl-card`, `sl-dialog`, and `sl-drawer`
+- Fixed a bug where the value wasn't updated and events weren't emitted when using `setRangeText` in `sl-input` and `sl-textarea`
 - Optimized `hasSlot` utility by using a simpler selector
 
 ## 2.0.0-beta.16
