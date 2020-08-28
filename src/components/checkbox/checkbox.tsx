@@ -36,6 +36,9 @@ export class Checkbox {
   /** Set to true to disable the checkbox. */
   @Prop() disabled = false;
 
+  /** Set to true to make the checkbox a required field. */
+  @Prop() required = false;
+
   /** Set to true to draw the checkbox in a checked state. */
   @Prop({ mutable: true, reflect: true }) checked = false;
 
@@ -155,6 +158,7 @@ export class Checkbox {
             value={this.value}
             checked={this.checked}
             disabled={this.disabled}
+            required={this.required}
             role="checkbox"
             aria-checked={this.checked}
             aria-labelledby={this.labelId}

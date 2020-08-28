@@ -188,13 +188,27 @@ export class Form {
       .filter(el => tags.includes(el.tagName.toLowerCase())) as HTMLElement[];
   }
 
-  /** Submits the form. */
+  /**
+   * Submits the form. If all controls are valid, the `slSubmit` event will be emitted and the promise will resolve with
+   * `true`. If any form control is invalid, the promise will resolve with `false` and no event will be emitted.
+   */
   @Method()
   async submit() {
     const formData = await this.getFormData();
     const formControls = await this.getFormControls();
+    const formControlsThatReport = formControls.filter((el: any) => typeof el.reportValidity === 'function') as any;
+
+    for (const el of formControlsThatReport) {
+      const isValid = await el.reportValidity();
+
+      if (!isValid) {
+        return false;
+      }
+    }
 
     this.slSubmit.emit({ formData, formControls });
+
+    return true;
   }
 
   handleClick(event: MouseEvent) {

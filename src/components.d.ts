@@ -226,6 +226,10 @@ export namespace Components {
          */
         "removeFocus": () => Promise<void>;
         /**
+          * Set to true to make the checkbox a required field.
+         */
+        "required": boolean;
+        /**
           * Sets focus on the checkbox.
          */
         "setFocus": () => Promise<void>;
@@ -405,9 +409,9 @@ export namespace Components {
          */
         "getFormData": () => Promise<FormData>;
         /**
-          * Submits the form.
+          * Submits the form. If all controls are valid, the `slSubmit` event will be emitted and the promise will resolve with `true`. If any form control is invalid, the promise will resolve with `false` and no event will be emitted.
          */
-        "submit": () => Promise<void>;
+        "submit": () => Promise<boolean>;
     }
     interface SlFormatBytes {
         /**
@@ -483,6 +487,10 @@ export namespace Components {
          */
         "clearable": boolean;
         /**
+          * Sets a custom validation message for the control. When this prop is not an empty string, the browser will assume the control is invalid and show this message as an error when the form is submitted.
+         */
+        "customValidity": string;
+        /**
           * Set to true to disable the input.
          */
         "disabled": boolean;
@@ -491,7 +499,7 @@ export namespace Components {
          */
         "inputmode": 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
         /**
-          * Set to true to indicate that the user input is invalid.
+          * This will be true when the control is in an invalid state. Validity is determined by props such as `type`, `required`, `pattern`, and `customValidity` using the browser's constraint validation API.
          */
         "invalid": boolean;
         /**
@@ -499,19 +507,19 @@ export namespace Components {
          */
         "label": string;
         /**
-          * The input's max attribute.
+          * The input's maximum value.
          */
         "max": number;
         /**
-          * The input's maxlength attribute.
+          * The maximum length of input that will be considered valid.
          */
         "maxlength": number;
         /**
-          * The input's min attribute.
+          * The input's minimum value.
          */
         "min": number;
         /**
-          * The input's minlength attribute.
+          * The minimum length of input that will be considered valid.
          */
         "minlength": number;
         /**
@@ -519,7 +527,7 @@ export namespace Components {
          */
         "name": string;
         /**
-          * The input's pattern attribute.
+          * A pattern to validate input against.
          */
         "pattern": string;
         /**
@@ -531,7 +539,7 @@ export namespace Components {
          */
         "placeholder": string;
         /**
-          * Set to true for a readonly input.
+          * Set to true to make the input readonly.
          */
         "readonly": boolean;
         /**
@@ -539,7 +547,11 @@ export namespace Components {
          */
         "removeFocus": () => Promise<void>;
         /**
-          * The input's required attribute.
+          * Checks for validity and shows the browser's validation message if the control is invalid.
+         */
+        "reportValidity": () => Promise<boolean>;
+        /**
+          * Set to true to make the checkbox a required field.
          */
         "required": boolean;
         /**
@@ -574,10 +586,6 @@ export namespace Components {
           * The input's type.
          */
         "type": 'email' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'url';
-        /**
-          * Set to true to indicate that the user input is valid.
-         */
-        "valid": boolean;
         /**
           * The input's value attribute.
          */
@@ -791,10 +799,6 @@ export namespace Components {
          */
         "size": 'small' | 'medium' | 'large';
         /**
-          * Set to true to indicate that the user input is valid.
-         */
-        "valid": boolean;
-        /**
           * The value of the control. This will be a string or an array depending on `multiple`.
          */
         "value": string | Array<string>;
@@ -824,6 +828,10 @@ export namespace Components {
           * Removes focus from the switch.
          */
         "removeFocus": () => Promise<void>;
+        /**
+          * Set to true to make the switch a required field.
+         */
+        "required": boolean;
         /**
           * Sets focus on the switch.
          */
@@ -911,6 +919,10 @@ export namespace Components {
          */
         "autofocus": boolean;
         /**
+          * Sets a custom validation message for the control. When this prop is not an empty string, the browser will assume the control is invalid and show this message as an error when the form is submitted.
+         */
+        "customValidity": string;
+        /**
           * Set to true to disable the textarea.
          */
         "disabled": boolean;
@@ -919,7 +931,7 @@ export namespace Components {
          */
         "inputmode": 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
         /**
-          * Set to true to indicate that the user input is invalid.
+          * This will be true when the control is in an invalid state. Validity is determined by props such as `type`, `required`, `pattern`, and `customValidity` using the browser's constraint validation API.
          */
         "invalid": boolean;
         /**
@@ -927,9 +939,13 @@ export namespace Components {
          */
         "label": string;
         /**
-          * The textarea's maxlength attribute.
+          * The maximum length of input that will be considered valid.
          */
         "maxlength": number;
+        /**
+          * The minimum length of input that will be considered valid.
+         */
+        "minlength": number;
         /**
           * The textarea's name attribute.
          */
@@ -946,6 +962,10 @@ export namespace Components {
           * Removes focus fromt the textarea.
          */
         "removeFocus": () => Promise<void>;
+        /**
+          * Checks for validity and shows the browser's validation message if the control is invalid.
+         */
+        "reportValidity": () => Promise<boolean>;
         /**
           * The textarea's required attribute.
          */
@@ -979,9 +999,9 @@ export namespace Components {
          */
         "size": 'small' | 'medium' | 'large';
         /**
-          * Set to true to indicate that the user input is valid.
+          * The textarea's spellcheck attribute.
          */
-        "valid": boolean;
+        "spellcheck": boolean;
         /**
           * The textarea's value attribute.
          */
@@ -1532,6 +1552,10 @@ declare namespace LocalJSX {
          */
         "onSlFocus"?: (event: CustomEvent<any>) => void;
         /**
+          * Set to true to make the checkbox a required field.
+         */
+        "required"?: boolean;
+        /**
           * The checkbox's value attribute.
          */
         "value"?: string;
@@ -1849,6 +1873,10 @@ declare namespace LocalJSX {
          */
         "clearable"?: boolean;
         /**
+          * Sets a custom validation message for the control. When this prop is not an empty string, the browser will assume the control is invalid and show this message as an error when the form is submitted.
+         */
+        "customValidity"?: string;
+        /**
           * Set to true to disable the input.
          */
         "disabled"?: boolean;
@@ -1857,7 +1885,7 @@ declare namespace LocalJSX {
          */
         "inputmode"?: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
         /**
-          * Set to true to indicate that the user input is invalid.
+          * This will be true when the control is in an invalid state. Validity is determined by props such as `type`, `required`, `pattern`, and `customValidity` using the browser's constraint validation API.
          */
         "invalid"?: boolean;
         /**
@@ -1865,19 +1893,19 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
-          * The input's max attribute.
+          * The input's maximum value.
          */
         "max"?: number;
         /**
-          * The input's maxlength attribute.
+          * The maximum length of input that will be considered valid.
          */
         "maxlength"?: number;
         /**
-          * The input's min attribute.
+          * The input's minimum value.
          */
         "min"?: number;
         /**
-          * The input's minlength attribute.
+          * The minimum length of input that will be considered valid.
          */
         "minlength"?: number;
         /**
@@ -1905,7 +1933,15 @@ declare namespace LocalJSX {
          */
         "onSlInput"?: (event: CustomEvent<any>) => void;
         /**
-          * The input's pattern attribute.
+          * Emitted when the value changes and the control is invalid.
+         */
+        "onSlInvalid"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the value changes and the control is valid.
+         */
+        "onSlValid"?: (event: CustomEvent<any>) => void;
+        /**
+          * A pattern to validate input against.
          */
         "pattern"?: string;
         /**
@@ -1917,11 +1953,11 @@ declare namespace LocalJSX {
          */
         "placeholder"?: string;
         /**
-          * Set to true for a readonly input.
+          * Set to true to make the input readonly.
          */
         "readonly"?: boolean;
         /**
-          * The input's required attribute.
+          * Set to true to make the checkbox a required field.
          */
         "required"?: boolean;
         /**
@@ -1940,10 +1976,6 @@ declare namespace LocalJSX {
           * The input's type.
          */
         "type"?: 'email' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'url';
-        /**
-          * Set to true to indicate that the user input is valid.
-         */
-        "valid"?: boolean;
         /**
           * The input's value attribute.
          */
@@ -2181,10 +2213,6 @@ declare namespace LocalJSX {
          */
         "size"?: 'small' | 'medium' | 'large';
         /**
-          * Set to true to indicate that the user input is valid.
-         */
-        "valid"?: boolean;
-        /**
           * The value of the control. This will be a string or an array depending on `multiple`.
          */
         "value"?: string | Array<string>;
@@ -2222,6 +2250,10 @@ declare namespace LocalJSX {
           * Emitted when the control gains focus.
          */
         "onSlFocus"?: (event: CustomEvent<any>) => void;
+        /**
+          * Set to true to make the switch a required field.
+         */
+        "required"?: boolean;
         /**
           * The switch's value attribute.
          */
@@ -2305,6 +2337,10 @@ declare namespace LocalJSX {
          */
         "autofocus"?: boolean;
         /**
+          * Sets a custom validation message for the control. When this prop is not an empty string, the browser will assume the control is invalid and show this message as an error when the form is submitted.
+         */
+        "customValidity"?: string;
+        /**
           * Set to true to disable the textarea.
          */
         "disabled"?: boolean;
@@ -2313,7 +2349,7 @@ declare namespace LocalJSX {
          */
         "inputmode"?: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
         /**
-          * Set to true to indicate that the user input is invalid.
+          * This will be true when the control is in an invalid state. Validity is determined by props such as `type`, `required`, `pattern`, and `customValidity` using the browser's constraint validation API.
          */
         "invalid"?: boolean;
         /**
@@ -2321,9 +2357,13 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
-          * The textarea's maxlength attribute.
+          * The maximum length of input that will be considered valid.
          */
         "maxlength"?: number;
+        /**
+          * The minimum length of input that will be considered valid.
+         */
+        "minlength"?: number;
         /**
           * The textarea's name attribute.
          */
@@ -2344,6 +2384,14 @@ declare namespace LocalJSX {
           * Emitted when the control receives input.
          */
         "onSlInput"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the value changes and the control is invalid.
+         */
+        "onSlInvalid"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the value changes and the control is valid.
+         */
+        "onSlValid"?: (event: CustomEvent<any>) => void;
         /**
           * The textarea's placeholder text.
          */
@@ -2369,9 +2417,9 @@ declare namespace LocalJSX {
          */
         "size"?: 'small' | 'medium' | 'large';
         /**
-          * Set to true to indicate that the user input is valid.
+          * The textarea's spellcheck attribute.
          */
-        "valid"?: boolean;
+        "spellcheck"?: boolean;
         /**
           * The textarea's value attribute.
          */
