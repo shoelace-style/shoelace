@@ -10,6 +10,8 @@ Textareas collect data from the user and allow multiple lines of text.
 
 ?> This component doesn't work with standard forms. Use [`<sl-form>`](/components/form.md) instead.
 
+?> Please refer to the section on [form control validation](/components/form?id=form-control-validation) to learn how to do client-side validation.
+
 ## Examples
 
 ### Rows

@@ -55,33 +55,6 @@
       }
     }
   }
-
-  &.textarea--valid:not(.textarea--disabled) {
-    border-color: var(--sl-input-border-color-valid);
-
-    .textarea__control {
-      color: var(--sl-input-color-valid);
-    }
-
-    &.textarea--focused {
-      box-shadow: 0 0 0 var(--sl-focus-ring-width)
-        hsla(var(--sl-color-success-hue), var(--sl-color-success-saturation), 50%, var(--sl-focus-ring-alpha));
-      border-color: var(--sl-input-border-color-valid);
-    }
-  }
-
-  &.textarea--invalid:not(.textarea--disabled) {
-    border-color: var(--sl-color-danger-50);
-
-    .textarea__control {
-      color: var(--sl-input-color-invalid);
-    }
-
-    &.textarea--focused {
-      box-shadow: 0 0 0 var(--sl-focus-ring-width)
-        hsla(var(--sl-color-danger-hue), var(--sl-color-danger-saturation), 50%, var(--sl-focus-ring-alpha));
-    }
-  }
 }
 
 .textarea__control {

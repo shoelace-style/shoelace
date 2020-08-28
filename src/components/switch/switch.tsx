@@ -35,6 +35,9 @@ export class Switch {
   /** Set to true to disable the switch. */
   @Prop() disabled = false;
 
+  /** Set to true to make the switch a required field. */
+  @Prop() required = false;
+
   /** Set to true to draw the switch in a checked state. */
   @Prop({ mutable: true, reflect: true }) checked = false;
 
@@ -129,6 +132,7 @@ export class Switch {
             value={this.value}
             checked={this.checked}
             disabled={this.disabled}
+            required={this.required}
             role="switch"
             aria-checked={this.checked}
             aria-labelledby={this.labelId}

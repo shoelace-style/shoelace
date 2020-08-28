@@ -64,6 +64,130 @@ This component solves that problem by serializing _both_ Shoelace form controls 
 </script>
 ```
 
-?> Shoelace forms don't make use of `action` and `method` attributes and they don't submit automatically like native forms. To handle submission, you need to listen for the `slSubmit` event as shown in the example above.
+?> Shoelace forms don't make use of `action` and `method` attributes and they don't submit like native forms. To handle submission, you need to listen for the `slSubmit` event as shown in the example above and make an XHR request with the resulting form data.
+
+## Form Control Validation
+
+Client-side validation can be enabled through the browser's [constraint validations API](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation) for many form controls. You can enable it using props such as `required`, `pattern`, `minlength`, `maxlength`, and `customValidity`. As the user interacts with the form control, the `invalid` attribute will reflect its validity based on its current value and the constraints that have been defined.
+
+When a form control is invalid, the containing form will not be submitted. Instead, the browser will show the user a relevant error message.
+
+Form controls that support validation include [`sl-input`](/components/input), [`sl-textarea`](/components/textarea), [`sl-select`](/components/select), and [`sl-checkbox`](/components/checkbox). Not all validation props are available for every component. Refer to each component's documentation to see which validation props it supports.
+
+Note that validity is not checked until the user interacts with the control or its containing form is submitted. This prevents required controls from being rendered as invalid right away, which can result in a poor user experience. If you need this behavior, set the `invalid` attribute initially.
+
+!> Client-side validation can be used to improve the UX of forms, but it is not a replacement for server-side validation. **You should always validate and sanitize user input on the server!**
+
+### Required Fields
+
+To make a field required, use the `required` prop. The form will not be submitted if a required form control is empty.
+
+```html preview
+<sl-form class="input-validation-required">
+  <sl-input name="name" label="Name" required></sl-input>
+  <br>
+  <sl-textarea name="comment" label="Comment" required></sl-textarea>
+  <br>
+  <sl-button type="primary" submit>Submit</sl-button>
+</sl-form>
+
+<script>
+  const form = document.querySelector('.input-validation-required');
+  form.addEventListener('slSubmit', () => alert('All fields are valid!'));
+</script>
+```
+
+### Input Patterns
+
+To restrict a value to a specific [pattern](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/pattern), use the `pattern` attribute. This example only allows the letters A-Z, so the form will not submit if a number or symbol is entered. This only works with `<sl-input>` elements.
+
+```html preview
+<sl-form class="input-validation-pattern">
+  <sl-input name="letters" required label="Letters" pattern="[A-Za-z]+"></sl-input>
+  <br>
+  <sl-button type="primary" submit>Submit</sl-button>
+</sl-form>
+
+<script>
+  const form = document.querySelector('.input-validation-pattern');
+  form.addEventListener('slSubmit', () => alert('All fields are valid!'));
+</script>
+```
+
+### Input Types
+
+Some input types will automatically trigger constraints, such as `email` and `url`.
+
+```html preview
+<sl-form class="input-validation-type">
+  <sl-input type="email" label="Email" placeholder="you@example.com" required></sl-input>
+  <br>
+  <sl-input type="url" label="URL" placeholder="https://example.com/" required></sl-input>
+  <br>
+  <sl-button type="primary" submit>Submit</sl-button>
+</sl-form>
+
+<script>
+  const form = document.querySelector('.input-validation-type');
+  form.addEventListener('slSubmit', () => alert('All fields are valid!'));
+</script>
+```
+
+### Custom Validation
+
+To create a custom validation error, use the `customValidity` prop. The form will not be submitted when this prop is set to anything other than an empty string, and its value will be shown by the browser as the error message.
+
+```html preview
+<sl-form class="input-validation-custom">
+  <sl-input label="Type 'shoelace'" required></sl-input>
+  <br>
+  <sl-button type="primary" submit>Submit</sl-button>
+</sl-form>
+
+<script>
+  const form = document.querySelector('.input-validation-custom');
+  const input = form.querySelector('sl-input');
+
+  form.addEventListener('slSubmit', () => alert('All fields are valid!'));
+  input.addEventListener('slInput', () => {
+    if (input.value === 'shoelace') {
+      input.customValidity = '';
+    } else {
+      input.customValidity = 'Hey, you\'re supposed to type \'shoelace\' before submitting this!';
+    }
+  });
+</script>
+```
+
+### Custom Validation Styles
+
+The `invalid` attribute reflects the form control's validity, so you can style invalid fields using the `[invalid]` selector. The example below demonstrates how you can give erroneous fields a different appearance. Type something other than "shoelace" to demonstrate this.
+
+```html preview
+<sl-input class="custom-input" required pattern="shoelace">
+  <small slot="help-text">Please enter "shoelace" to continue</small>
+</sl-input>
+
+<style>
+  .custom-input[invalid]:not([disabled])::part(label),
+  .custom-input[invalid]:not([disabled])::part(help-text) {
+    color: var(--sl-color-danger-40);
+  }
+
+  .custom-input[invalid]:not([disabled])::part(base) {      
+    border-color: var(--sl-color-danger-50);
+  } 
+
+  .custom-input[invalid] {
+    --focus-ring: 0 0 0 var(--sl-focus-ring-width)
+      hsla(
+        var(--sl-color-danger-hue),
+        var(--sl-color-danger-saturation),
+        var(--sl-focus-ring-lightness),
+        var(--sl-focus-ring-alpha)
+      );
+  }
+</style>
+```
 
 [component-metadata:sl-form]

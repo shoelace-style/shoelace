@@ -13,10 +13,10 @@ let id = 0;
  *
  * @part base - The component's base wrapper.
  * @part form-control - The form control that wraps the label and the input.
- * @part help-text - The select help text.
- * @part icon - The select icon.
- * @part input - The select input.
- * @part label - The input label.
+ * @part help-text - The select's help text.
+ * @part icon - The select's icon.
+ * @part input - The select's input control.
+ * @part label - The select's label.
  * @part menu - The select menu, a <sl-menu> element.
  * @part tag - The multiselect option, a <sl-tag> element.
  * @part tags - The container in which multiselect options are rendered.
@@ -81,16 +81,13 @@ export class Select {
   @Prop() label = '';
 
   /** The select's required attribute. */
-  @Prop() required: boolean;
+  @Prop() required = false;
 
   /** Set to true to add a clear button when the select is populated. */
   @Prop() clearable = false;
 
-  /** Set to true to indicate that the user input is valid. */
-  @Prop() valid = false;
-
   /** Set to true to indicate that the user input is invalid. */
-  @Prop() invalid = false;
+  @Prop({ mutable: true }) invalid = false;
 
   @Watch('multiple')
   handleMultipleChange() {
@@ -325,7 +322,6 @@ export class Select {
         class={{
           'form-control': true,
           'form-control--has-label': this.label.length > 0,
-          'form-control--valid': this.valid,
           'form-control--invalid': this.invalid
         }}
       >
@@ -337,7 +333,6 @@ export class Select {
             'label--small': this.size === 'small',
             'label--medium': this.size === 'medium',
             'label--large': this.size === 'large',
-            'label--valid': this.valid,
             'label--invalid': this.invalid
           }}
           htmlFor={this.inputId}
@@ -381,7 +376,6 @@ export class Select {
             placeholder={this.displayLabel === '' && this.displayTags.length === 0 ? this.placeholder : null}
             readonly={true}
             size={this.size}
-            valid={this.valid}
             invalid={this.invalid}
             clearable={this.clearable}
             required={this.required}
@@ -422,7 +416,6 @@ export class Select {
             'help-text--small': this.size === 'small',
             'help-text--medium': this.size === 'medium',
             'help-text--large': this.size === 'large',
-            'help-text--valid': this.valid,
             'help-text--invalid': this.invalid
           }}
         >
