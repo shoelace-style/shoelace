@@ -46,7 +46,7 @@ describe('select', () => {
     expect(slBlur).toHaveReceivedEventTimes(1);
   });
 
-  it.only('should emit slChange when menu item selected', async () => {
+  it('should emit slChange when menu item selected', async () => {
     const page = await newE2EPage();
     await page.setContent(testContent);
 
@@ -61,7 +61,7 @@ describe('select', () => {
     expect(slChange).toHaveReceivedEventTimes(1);
   });
 
-  it.only('should change value when menu item selected', async () => {
+  it('should change value when menu item selected', async () => {
     const page = await newE2EPage();
     await page.setContent(testContent);
 

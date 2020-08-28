@@ -94,7 +94,7 @@ describe('textarea', () => {
     expect(slInput).toHaveReceivedEventTimes(1);
   });
 
-  it.only('should change value when text entered', async () => {
+  it('should change value when text entered', async () => {
     const page = await newE2EPage();
     await page.setContent(testContent);
 
