@@ -110,4 +110,32 @@ describe('checkbox', () => {
 
     expect(slChange).toHaveReceivedEventTimes(1);
   });
+
+  it('should emit slChange when state changes when checked property set to true', async () => {
+    const page = await newE2EPage();
+    await page.setContent(testContentUnchecked);
+
+    const checkbox = await page.find('sl-checkbox');
+
+    const slChange = await checkbox.spyOnEvent('slChange');
+
+    checkbox.setProperty('checked', true);
+    await page.waitForChanges();
+
+    expect(slChange).toHaveReceivedEventTimes(1);
+  });
+
+  it('should emit slChange when state changes when checked property set to false', async () => {
+    const page = await newE2EPage();
+    await page.setContent(testContentChecked);
+
+    const checkbox = await page.find('sl-checkbox');
+
+    const slChange = await checkbox.spyOnEvent('slChange');
+
+    checkbox.setProperty('checked', false);
+    await page.waitForChanges();
+
+    expect(slChange).toHaveReceivedEventTimes(1);
+  });
 });
