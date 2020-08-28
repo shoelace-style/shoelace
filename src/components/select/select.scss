@@ -19,6 +19,11 @@
     cursor: pointer;
   }
 
+  // Hide the caret since we use a faux readonly technique to prevent user input
+  &::part(input) {
+    caret-color: transparent;
+  }
+
   span[slot='prefix'] {
     margin-left: var(--sl-spacing-xx-small);
 

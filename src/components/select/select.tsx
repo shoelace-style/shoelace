@@ -143,8 +143,7 @@ export class Select {
   /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
   @Method()
   async setCustomValidity(message: string) {
-    // this.input.setCustomValidity(message);
-    // this.invalid = !this.input.checkValidity();
+    this.input.setCustomValidity(message);
   }
 
   getItemLabel(item: HTMLSlMenuItemElement) {
@@ -186,6 +185,10 @@ export class Select {
       event.preventDefault();
       return;
     }
+
+    // Make the input "readonly" without using the `readonly` attribute, since that would prevent the browser's
+    // validation messages from appearing
+    event.preventDefault();
   }
 
   handleLabelClick() {
@@ -308,7 +311,10 @@ export class Select {
         );
       }
 
-      this.displayLabel = '';
+      // With `multiple`, the input uses the display label as its value. If no selection is made, we set it to an empty
+      // string. If items are selected, we use a zero-width space so `required` validation doesn't fail, but nothing is
+      // drawn in the label either. This is a bit ugly, but it gets the job done.
+      this.displayLabel = this.value.length === 0 ? '' : '\u200B';
     } else {
       const checkedItem = items.filter(item => item.value === value[0])[0];
       this.displayLabel = checkedItem ? this.getItemLabel(checkedItem) : '';
@@ -387,7 +393,6 @@ export class Select {
             disabled={this.disabled}
             pill={this.pill}
             placeholder={this.displayLabel === '' && this.displayTags.length === 0 ? this.placeholder : null}
-            readonly={true}
             size={this.size}
             invalid={this.invalid}
             clearable={this.clearable}

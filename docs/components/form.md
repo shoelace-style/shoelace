@@ -86,7 +86,7 @@ To make a field required, use the `required` prop. The form will not be submitte
 <sl-form class="input-validation-required">
   <sl-input name="name" label="Name" required></sl-input>
   <br>
-  <sl-select label="Favorite Pet" required>
+  <sl-select label="Favorite Animal" clearable required>
     <sl-menu-item value="birds">Birds</sl-menu-item>
     <sl-menu-item value="cats">Cats</sl-menu-item>
     <sl-menu-item value="dogs">Dogs</sl-menu-item>
