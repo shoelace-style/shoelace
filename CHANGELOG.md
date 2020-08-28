@@ -11,7 +11,7 @@
 - Fixed a bug where the value wasn't updated and events weren't emitted when using `setRangeText` in `sl-input` and `sl-textarea`
 - Optimized `hasSlot` utility by using a simpler selector
 
-**Form validation has been reworked and is much more powerful now!** The following changes affect `sl-input`, `sl-select`, and `sl-textarea`.
+**Form validation has been reworked and is much more powerful now!**
 
 - The `invalid` prop now reflects the control's validity as determined by the browser's constraint validation API
 - Added `required` to `sl-checkbox`, `sl-radio`, and `sl-switch`
