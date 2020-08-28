@@ -110,4 +110,32 @@ describe('radio', () => {
 
     expect(slChange).toHaveReceivedEventTimes(1);
   });
+
+  it('should emit slChange when state changes when checked property set to true', async () => {
+    const page = await newE2EPage();
+    await page.setContent(testContentUnchecked);
+
+    const radio = await page.find('sl-radio');
+
+    const slChange = await radio.spyOnEvent('slChange');
+
+    radio.setProperty('checked', true);
+    await page.waitForChanges();
+
+    expect(slChange).toHaveReceivedEventTimes(1);
+  });
+
+  it('should emit slChange when state changes when checked property set to false', async () => {
+    const page = await newE2EPage();
+    await page.setContent(testContentChecked);
+
+    const radio = await page.find('sl-radio');
+
+    const slChange = await radio.spyOnEvent('slChange');
+
+    radio.setProperty('checked', false);
+    await page.waitForChanges();
+
+    expect(slChange).toHaveReceivedEventTimes(1);
+  });
 });
