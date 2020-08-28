@@ -67,16 +67,10 @@ export class Textarea {
   @Prop({ reflect: true }) required: boolean;
 
   /**
-   * This will be true when the control is in an invalid state. Validity is determined by props such as `type`,
-   * `required`, `pattern`, and `customValidity` using the browser's constraint validation API.
+   * This will be true when the control is in an invalid state. Validity is determined by props such as `required`,
+   * `minlength`, and `maxlength` using the browser's constraint validation API.
    */
   @Prop({ mutable: true, reflect: true }) invalid = false;
-
-  /**
-   * Sets a custom validation message for the control. When this prop is not an empty string, the browser will assume
-   * the control is invalid and show this message as an error when the form is submitted.
-   */
-  @Prop() customValidity = '';
 
   /** The textarea's autocaptialize attribute. */
   @Prop() autocapitalize: string;
@@ -123,12 +117,6 @@ export class Textarea {
     this.invalid ? this.slInvalid.emit() : this.slValid.emit();
   }
 
-  @Watch('customValidity')
-  handleCustomValidityChange() {
-    this.textarea.setCustomValidity(this.customValidity);
-    this.invalid = !this.textarea.checkValidity();
-  }
-
   /** Emitted when the value changes and the control is valid. */
   @Event() slValid: EventEmitter;
 
@@ -143,7 +131,6 @@ export class Textarea {
   }
 
   componentDidLoad() {
-    this.textarea.setCustomValidity(this.customValidity);
     this.setTextareaHeight();
     this.resizeObserver = new ResizeObserver(() => this.setTextareaHeight());
     this.resizeObserver.observe(this.textarea);
@@ -203,6 +190,13 @@ export class Textarea {
   @Method()
   async reportValidity() {
     return this.textarea.reportValidity();
+  }
+
+  /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
+  @Method()
+  async setCustomValidity(message: string) {
+    this.textarea.setCustomValidity(message);
+    this.invalid = !this.textarea.checkValidity();
   }
 
   handleChange() {

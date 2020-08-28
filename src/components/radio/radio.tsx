@@ -40,6 +40,12 @@ export class Radio {
   /** Set to true to draw the radio in a checked state. */
   @Prop({ mutable: true, reflect: true }) checked = false;
 
+  /**
+   * This will be true when the control is in an invalid state. Validity in range inputs is determined by the message
+   * provided by the `setCustomValidity` method.
+   */
+  @Prop({ mutable: true, reflect: true }) invalid = false;
+
   @Watch('checked')
   handleCheckedChange() {
     if (this.checked) {
@@ -76,6 +82,19 @@ export class Radio {
   @Method()
   async removeFocus() {
     this.input.blur();
+  }
+
+  /** Checks for validity and shows the browser's validation message if the control is invalid. */
+  @Method()
+  async reportValidity() {
+    return this.input.reportValidity();
+  }
+
+  /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
+  @Method()
+  async setCustomValidity(message: string) {
+    this.input.setCustomValidity(message);
+    this.invalid = !this.input.checkValidity();
   }
 
   getAllRadios() {
