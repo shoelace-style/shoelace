@@ -19,20 +19,25 @@ describe('details', () => {
     const page = await newE2EPage();
     await page.setContent(testContentStartClosed);
 
+    const details = await page.find('sl-details');
     const detailsHeader = await page.find('sl-details >>> header');
     const detailsBase = await page.find('sl-details >>> .details__body');
 
     let style = await detailsBase.getComputedStyle();
     expect(style.height).toBe('0px');
 
+    const showEventHappened = details.waitForEvent('slAfterShow');
     await detailsHeader.click();
-    await detailsBase.waitForEvent('transitionend');
+
+    await showEventHappened;
 
     style = await detailsBase.getComputedStyle();
     expect(style.height).not.toBe('0px');
 
+    const hideEventHappened = details.waitForEvent('slAfterHide');
     await detailsHeader.click();
-    await detailsBase.waitForEvent('transitionend');
+
+    await hideEventHappened;
 
     style = await detailsBase.getComputedStyle();
     expect(style.height).toBe('0px');
@@ -48,14 +53,18 @@ describe('details', () => {
     let style = await detailsBase.getComputedStyle();
     expect(style.height).toBe('0px');
 
+    const showEventHappened = details.waitForEvent('slAfterShow');
     await details.callMethod('show');
-    await detailsBase.waitForEvent('transitionend');
+
+    await showEventHappened;
 
     style = await detailsBase.getComputedStyle();
     expect(style.height).not.toBe('0px');
 
+    const hideEventHappened = details.waitForEvent('slAfterHide');
     await details.callMethod('hide');
-    await detailsBase.waitForEvent('transitionend');
+
+    await hideEventHappened;
 
     style = await detailsBase.getComputedStyle();
     expect(style.height).toBe('0px');
@@ -71,16 +80,20 @@ describe('details', () => {
     let style = await detailsBase.getComputedStyle();
     expect(style.height).toBe('0px');
 
+    const showEventHappened = details.waitForEvent('slAfterShow');
     details.setAttribute('open', '');
     await page.waitForChanges();
-    await detailsBase.waitForEvent('transitionend');
+
+    await showEventHappened;
 
     style = await detailsBase.getComputedStyle();
     expect(style.height).not.toBe('0px');
 
+    const hideEventHappened = details.waitForEvent('slAfterHide');
     details.removeAttribute('open');
     await page.waitForChanges();
-    await detailsBase.waitForEvent('transitionend');
+
+    await hideEventHappened;
 
     style = await detailsBase.getComputedStyle();
     expect(style.height).toBe('0px');
@@ -91,14 +104,15 @@ describe('details', () => {
     await page.setContent(testContentStartClosed);
 
     const details = await page.find('sl-details');
-    const detailsBase = await page.find('sl-details >>> .details__body');
     const slShow = await details.spyOnEvent('slShow');
     const slAfterShow = await details.spyOnEvent('slAfterShow');
 
+    const showEventHappened = details.waitForEvent('slAfterShow');
     await details.callMethod('show');
-    expect(slShow).toHaveReceivedEventTimes(1);
 
-    await detailsBase.waitForEvent('transitionend');
+    await showEventHappened;
+
+    expect(slShow).toHaveReceivedEventTimes(1);
     expect(slAfterShow).toHaveReceivedEventTimes(1);
   });
 
@@ -107,14 +121,15 @@ describe('details', () => {
     await page.setContent(testContentStartOpen);
 
     const details = await page.find('sl-details');
-    const detailsBase = await page.find('sl-details >>> .details__body');
     const slHide = await details.spyOnEvent('slHide');
     const slAfterHide = await details.spyOnEvent('slAfterHide');
 
+    const hideEventHappened = details.waitForEvent('slAfterHide');
     await details.callMethod('hide');
-    expect(slHide).toHaveReceivedEventTimes(1);
 
-    await detailsBase.waitForEvent('transitionend');
+    await hideEventHappened;
+
+    expect(slHide).toHaveReceivedEventTimes(1);
     expect(slAfterHide).toHaveReceivedEventTimes(1);
   });
 });

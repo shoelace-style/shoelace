@@ -24,12 +24,18 @@ describe('alert', () => {
 
     expect(await alertBase.isVisible()).toBe(false);
 
+    const showEventHappened = alert.waitForEvent('slAfterShow');
     await alert.callMethod('show');
-    await alertBase.waitForEvent('transitionend');
+
+    await showEventHappened;
+
     expect(await alertBase.isVisible()).toBe(true);
 
+    const hideEventHappened = alert.waitForEvent('slAfterHide');
     await alert.callMethod('hide');
-    await alertBase.waitForEvent('transitionend');
+
+    await hideEventHappened;
+
     expect(await alertBase.isVisible()).toBe(false);
   });
 
@@ -42,14 +48,20 @@ describe('alert', () => {
 
     expect(await alertBase.isVisible()).toBe(false);
 
+    const showEventHappened = alert.waitForEvent('slAfterShow');
     alert.setAttribute('open', '');
     await page.waitForChanges();
-    await alertBase.waitForEvent('transitionend');
+
+    await showEventHappened;
+
     expect(await alertBase.isVisible()).toBe(true);
 
+    const hideEventHappened = alert.waitForEvent('slAfterHide');
     alert.removeAttribute('open');
     await page.waitForChanges();
-    await alertBase.waitForEvent('transitionend');
+
+    await hideEventHappened;
+
     expect(await alertBase.isVisible()).toBe(false);
   });
 
@@ -58,14 +70,15 @@ describe('alert', () => {
     await page.setContent(testContentStartClosed);
 
     const alert = await page.find('sl-alert');
-    const alertBase = await page.find('sl-alert >>> .alert');
     const slShow = await alert.spyOnEvent('slShow');
     const slAfterShow = await alert.spyOnEvent('slAfterShow');
 
+    const showEventHappened = alert.waitForEvent('slAfterShow');
     await alert.callMethod('show');
-    expect(slShow).toHaveReceivedEventTimes(1);
 
-    await alertBase.waitForEvent('transitionend');
+    await showEventHappened;
+
+    expect(slShow).toHaveReceivedEventTimes(1);
     expect(slAfterShow).toHaveReceivedEventTimes(1);
   });
 
@@ -74,14 +87,15 @@ describe('alert', () => {
     await page.setContent(testContentStartOpen);
 
     const alert = await page.find('sl-alert');
-    const alertBase = await page.find('sl-alert >>> .alert');
     const slHide = await alert.spyOnEvent('slHide');
     const slAfterHide = await alert.spyOnEvent('slAfterHide');
 
+    const hideEventHappened = alert.waitForEvent('slAfterHide');
     await alert.callMethod('hide');
-    expect(slHide).toHaveReceivedEventTimes(1);
 
-    await alertBase.waitForEvent('transitionend');
+    await hideEventHappened;
+
+    expect(slHide).toHaveReceivedEventTimes(1);
     expect(slAfterHide).toHaveReceivedEventTimes(1);
   });
 });

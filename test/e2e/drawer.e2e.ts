@@ -21,16 +21,21 @@ describe('drawer', () => {
 
     const drawer = await page.find('sl-drawer');
     const drawerBase = await page.find('sl-drawer >>> .drawer');
-    const drawerPanel = await page.find('sl-drawer >>> .drawer__panel');
 
     expect(await drawerBase.isVisible()).toBe(false);
 
+    const showEventHappened = drawer.waitForEvent('slAfterShow');
     await drawer.callMethod('show');
-    await drawerPanel.waitForEvent('transitionend');
+
+    await showEventHappened;
+
     expect(await drawerBase.isVisible()).toBe(true);
 
+    const hideEventHappened = drawer.waitForEvent('slAfterHide');
     await drawer.callMethod('hide');
-    await drawerPanel.waitForEvent('transitionend');
+
+    await hideEventHappened;
+
     expect(await drawerBase.isVisible()).toBe(false);
   });
 
@@ -40,18 +45,23 @@ describe('drawer', () => {
 
     const drawer = await page.find('sl-drawer');
     const drawerBase = await page.find('sl-drawer >>> .drawer');
-    const drawerPanel = await page.find('sl-drawer >>> .drawer__panel');
 
     expect(await drawerBase.isVisible()).toBe(false);
 
+    const showEventHappened = drawer.waitForEvent('slAfterShow');
     drawer.setAttribute('open', '');
     await page.waitForChanges();
-    await drawerPanel.waitForEvent('transitionend');
+
+    await showEventHappened;
+
     expect(await drawerBase.isVisible()).toBe(true);
 
+    const hideEventHappened = drawer.waitForEvent('slAfterHide');
     drawer.removeAttribute('open');
     await page.waitForChanges();
-    await drawerPanel.waitForEvent('transitionend');
+
+    await hideEventHappened;
+
     expect(await drawerBase.isVisible()).toBe(false);
   });
 
@@ -60,14 +70,15 @@ describe('drawer', () => {
     await page.setContent(testContentStartClosed);
 
     const drawer = await page.find('sl-drawer');
-    const drawerPanel = await page.find('sl-drawer >>> .drawer__panel');
     const slShow = await drawer.spyOnEvent('slShow');
     const slAfterShow = await drawer.spyOnEvent('slAfterShow');
 
+    const showEventHappened = drawer.waitForEvent('slAfterShow');
     await drawer.callMethod('show');
-    expect(slShow).toHaveReceivedEventTimes(1);
 
-    await drawerPanel.waitForEvent('transitionend');
+    await showEventHappened;
+
+    expect(slShow).toHaveReceivedEventTimes(1);
     expect(slAfterShow).toHaveReceivedEventTimes(1);
   });
 
@@ -76,14 +87,15 @@ describe('drawer', () => {
     await page.setContent(testContentStartOpen);
 
     const drawer = await page.find('sl-drawer');
-    const drawerPanel = await page.find('sl-drawer >>> .drawer__panel');
     const slHide = await drawer.spyOnEvent('slHide');
     const slAfterHide = await drawer.spyOnEvent('slAfterHide');
 
+    const hideEventHappened = drawer.waitForEvent('slAfterHide');
     await drawer.callMethod('hide');
-    expect(slHide).toHaveReceivedEventTimes(1);
 
-    await drawerPanel.waitForEvent('transitionend');
+    await hideEventHappened;
+
+    expect(slHide).toHaveReceivedEventTimes(1);
     expect(slAfterHide).toHaveReceivedEventTimes(1);
   });
 

@@ -28,13 +28,15 @@ describe('dropdown', () => {
 
     expect(await dropdownPanel.isVisible()).toBe(false);
 
+    const showEventHappened = dropdown.waitForEvent('slAfterShow');
     await dropdown.click();
-    await dropdownPanel.waitForEvent('transitionend');
+    await showEventHappened;
 
     expect(await dropdownPanel.isVisible()).toBe(true);
 
+    const afterEventHappened = dropdown.waitForEvent('slAfterHide');
     await dropdown.click();
-    await dropdownPanel.waitForEvent('transitionend');
+    await afterEventHappened;
 
     expect(await dropdownPanel.isVisible()).toBe(false);
   });
@@ -48,13 +50,15 @@ describe('dropdown', () => {
 
     expect(await dropdownPanel.isVisible()).toBe(false);
 
+    const showEventHappened = dropdown.waitForEvent('slAfterShow');
     await dropdown.callMethod('show');
-    await dropdownPanel.waitForEvent('transitionend');
+    await showEventHappened;
 
     expect(await dropdownPanel.isVisible()).toBe(true);
 
+    const hideEventHappened = dropdown.waitForEvent('slAfterHide');
     await dropdown.callMethod('hide');
-    await dropdownPanel.waitForEvent('transitionend');
+    await hideEventHappened;
 
     expect(await dropdownPanel.isVisible()).toBe(false);
   });
@@ -68,15 +72,17 @@ describe('dropdown', () => {
 
     expect(await dropdownPanel.isVisible()).toBe(false);
 
+    const showEventHappened = dropdown.waitForEvent('slAfterShow');
     dropdown.setAttribute('open', '');
     await page.waitForChanges();
-    await dropdownPanel.waitForEvent('transitionend');
+    await showEventHappened;
 
     expect(await dropdownPanel.isVisible()).toBe(true);
 
+    const hideEventHappened = dropdown.waitForEvent('slAfterHide');
     dropdown.removeAttribute('open');
     await page.waitForChanges();
-    await dropdownPanel.waitForEvent('transitionend');
+    await hideEventHappened;
 
     expect(await dropdownPanel.isVisible()).toBe(false);
   });
@@ -86,30 +92,33 @@ describe('dropdown', () => {
     await page.setContent(testContentStartClosed);
 
     const dropdown = await page.find('sl-dropdown');
-    const dropdownPanel = await page.find('sl-dropdown >>> .dropdown__panel');
     const slShow = await dropdown.spyOnEvent('slShow');
     const slAfterShow = await dropdown.spyOnEvent('slAfterShow');
 
+    const eventHappened = dropdown.waitForEvent('slAfterShow');
     await dropdown.callMethod('show');
-    expect(slShow).toHaveReceivedEventTimes(1);
 
-    await dropdownPanel.waitForEvent('transitionend');
+    await eventHappened;
+
+    expect(slShow).toHaveReceivedEventTimes(1);
     expect(slAfterShow).toHaveReceivedEventTimes(1);
   });
 
   it('should emit slHide and slAfterHide events when dropdown is closed', async () => {
     const page = await newE2EPage();
     await page.setContent(testContentStartOpen);
+    await page.waitForChanges();
 
     const dropdown = await page.find('sl-dropdown');
-    const dropdownPanel = await page.find('sl-dropdown >>> .dropdown__panel');
     const slHide = await dropdown.spyOnEvent('slHide');
     const slAfterHide = await dropdown.spyOnEvent('slAfterHide');
 
+    const eventHappened = dropdown.waitForEvent('slAfterHide');
     await dropdown.callMethod('hide');
-    expect(slHide).toHaveReceivedEventTimes(1);
 
-    await dropdownPanel.waitForEvent('transitionend');
+    await eventHappened;
+
+    expect(slHide).toHaveReceivedEventTimes(1);
     expect(slAfterHide).toHaveReceivedEventTimes(1);
   });
 
@@ -117,11 +126,15 @@ describe('dropdown', () => {
     const page = await newE2EPage();
     await page.setContent(testContentStartOpen);
 
+    const dropdown = await page.find('sl-dropdown');
     const dropdownPanel = await page.find('sl-dropdown >>> .dropdown__panel');
 
     expect(await dropdownPanel.isVisible()).toBe(true);
 
+    const eventHappened = dropdown.waitForEvent('slAfterHide');
     await dropdownPanel.click();
+
+    await eventHappened;
 
     expect(await dropdownPanel.isVisible()).toBe(false);
   });

@@ -21,16 +21,21 @@ describe('dialog', () => {
 
     const dialog = await page.find('sl-dialog');
     const dialogBase = await page.find('sl-dialog >>> .dialog');
-    const dialogPanel = await page.find('sl-dialog >>> .dialog__panel');
 
     expect(await dialogBase.isVisible()).toBe(false);
 
+    const showEventHappened = dialog.waitForEvent('slAfterShow');
     await dialog.callMethod('show');
-    await dialogPanel.waitForEvent('transitionend');
+
+    await showEventHappened;
+
     expect(await dialogBase.isVisible()).toBe(true);
 
+    const hideEventHappened = dialog.waitForEvent('slAfterHide');
     await dialog.callMethod('hide');
-    await dialogPanel.waitForEvent('transitionend');
+
+    await hideEventHappened;
+
     expect(await dialogBase.isVisible()).toBe(false);
   });
 
@@ -40,18 +45,23 @@ describe('dialog', () => {
 
     const dialog = await page.find('sl-dialog');
     const dialogBase = await page.find('sl-dialog >>> .dialog');
-    const dialogPanel = await page.find('sl-dialog >>> .dialog__panel');
 
     expect(await dialogBase.isVisible()).toBe(false);
 
+    const showEventHappened = dialog.waitForEvent('slAfterShow');
     dialog.setAttribute('open', '');
     await page.waitForChanges();
-    await dialogPanel.waitForEvent('transitionend');
+
+    await showEventHappened;
+
     expect(await dialogBase.isVisible()).toBe(true);
 
+    const hideEventHappened = dialog.waitForEvent('slAfterHide');
     dialog.removeAttribute('open');
     await page.waitForChanges();
-    await dialogPanel.waitForEvent('transitionend');
+
+    await hideEventHappened;
+
     expect(await dialogBase.isVisible()).toBe(false);
   });
 
@@ -60,14 +70,15 @@ describe('dialog', () => {
     await page.setContent(testContentStartClosed);
 
     const dialog = await page.find('sl-dialog');
-    const dialogPanel = await page.find('sl-dialog >>> .dialog__panel');
     const slShow = await dialog.spyOnEvent('slShow');
     const slAfterShow = await dialog.spyOnEvent('slAfterShow');
 
+    const showEventHappened = dialog.waitForEvent('slAfterShow');
     await dialog.callMethod('show');
-    expect(slShow).toHaveReceivedEventTimes(1);
 
-    await dialogPanel.waitForEvent('transitionend');
+    await showEventHappened;
+
+    expect(slShow).toHaveReceivedEventTimes(1);
     expect(slAfterShow).toHaveReceivedEventTimes(1);
   });
 
@@ -76,14 +87,15 @@ describe('dialog', () => {
     await page.setContent(testContentStartOpen);
 
     const dialog = await page.find('sl-dialog');
-    const dialogPanel = await page.find('sl-dialog >>> .dialog__panel');
     const slHide = await dialog.spyOnEvent('slHide');
     const slAfterHide = await dialog.spyOnEvent('slAfterHide');
 
+    const hideEventHappened = dialog.waitForEvent('slAfterHide');
     await dialog.callMethod('hide');
-    expect(slHide).toHaveReceivedEventTimes(1);
 
-    await dialogPanel.waitForEvent('transitionend');
+    await hideEventHappened;
+
+    expect(slHide).toHaveReceivedEventTimes(1);
     expect(slAfterHide).toHaveReceivedEventTimes(1);
   });
 
