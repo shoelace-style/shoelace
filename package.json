@@ -43,7 +43,7 @@
     "@typescript-eslint/eslint-plugin": "^2.28.0",
     "@typescript-eslint/parser": "^2.28.0",
     "bluebird": "^3.7.2",
-    "bootstrap-icons": "^1.0.0-alpha5",
+    "bootstrap-icons": "^1.0.0",
     "browser-sync": "^2.26.7",
     "chalk": "^4.0.0",
     "concurrently": "^5.1.0",
