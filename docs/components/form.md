@@ -4,9 +4,11 @@
 
 Forms collect data that can easily be processed and sent to a server.
 
-All of Shoelace's components make use of the [shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM) to encapsulate markup, styles, and behavior. One caveat of this approach is that native `<form>` elements don't recognize Shoelace form controls.
+All Shoelace's components make use of a [shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM) to encapsulate markup, styles, and behavior. One caveat of this approach is that native `<form>` elements will not recognize Shoelace form controls.
 
-This component solves that problem by serializing _both_ Shoelace form controls and native form controls. The resulting form data is exposed in the `slSubmit` event in a [`FormData`](https://developer.mozilla.org/en-US/docs/Web/API/FormData) object.
+This component solves that problem by serializing _both_ Shoelace form controls and native form controls when the form is submitted. The resulting form data is exposed in the `slSubmit` event as a [`FormData`](https://developer.mozilla.org/en-US/docs/Web/API/FormData) object.
+
+Shoelace forms don't make use of `action` and `method` attributes and they don't submit the same was as native forms. To handle submission, you need to listen for the `slSubmit` event as shown in the example below and make an XHR request with the resulting form data.
 
 ```html preview
 <sl-form class="form-overview">
@@ -28,6 +30,7 @@ This component solves that problem by serializing _both_ Shoelace form controls 
 <script>
   const form = document.querySelector('.form-overview');
 
+  // Watch for the slSubmit event
   form.addEventListener('slSubmit', event => {
     const formData = event.detail.formData;
     let output = '';
@@ -64,13 +67,11 @@ This component solves that problem by serializing _both_ Shoelace form controls 
 </script>
 ```
 
-?> Shoelace forms don't make use of `action` and `method` attributes and they don't submit like native forms. To handle submission, you need to listen for the `slSubmit` event as shown in the example above and make an XHR request with the resulting form data.
-
 ## Form Control Validation
 
-Client-side validation can be enabled through the browser's [constraint validations API](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation) for many form controls. You can enable it using props such as `required`, `pattern`, `minlength`, `maxlength`, and `customValidity`. As the user interacts with the form control, the `invalid` attribute will reflect its validity based on its current value and the constraints that have been defined.
+Client-side validation can be enabled through the browser's [constraint validations API](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation) for many form controls. You can enable it using props such as `required`, `pattern`, `minlength`, and `maxlength`. As the user interacts with the form control, the `invalid` attribute will reflect its validity based on its current value and the constraints that have been defined.
 
-When a form control is invalid, the containing form will not be submitted. Instead, the browser will show the user a relevant error message.
+When a form control is invalid, the containing form will not be submitted. Instead, the browser will show the user a relevant error message. If you don't want to use cilent-side validation, you can suppress this behavior by adding `novalidate` to the `<sl-form>` element.
 
 Form controls that support validation include [`sl-input`](/components/input), [`sl-textarea`](/components/textarea), [`sl-select`](/components/select), and [`sl-checkbox`](/components/checkbox). Not all validation props are available for every component. Refer to each component's documentation to see which validation props it supports.
 
