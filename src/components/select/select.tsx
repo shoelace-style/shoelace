@@ -116,7 +116,10 @@ export class Select {
     this.handleBlur = this.handleBlur.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
     this.handleClear = this.handleClear.bind(this);
+    this.handleCut = this.handleCut.bind(this);
+    this.handlePaste = this.handlePaste.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleKeyUp = this.handleKeyUp.bind(this);
     this.handleLabelClick = this.handleLabelClick.bind(this);
     this.handleTagClick = this.handleTagClick.bind(this);
     this.handleMenuKeyDown = this.handleMenuKeyDown.bind(this);
@@ -186,8 +189,23 @@ export class Select {
       return;
     }
 
-    // Make the input "readonly" without using the `readonly` attribute, since that would prevent the browser's
-    // validation messages from appearing
+    // We can't make the <sl-input> readonly since that will block the browser's validation messages, so this prevents
+    // key presses from modifying the input's value by briefly making it readonly. We don't use `preventDefault()` since
+    // that would block tabbing, shortcuts, etc.
+    const nativeInput = this.input.shadowRoot.querySelector('[part="input"]') as HTMLInputElement;
+    nativeInput.readOnly = true;
+  }
+
+  handleKeyUp() {
+    const nativeInput = this.input.shadowRoot.querySelector('[part="input"]') as HTMLInputElement;
+    nativeInput.readOnly = false;
+  }
+
+  handleCut(event: Event) {
+    event.preventDefault();
+  }
+
+  handlePaste(event: Event) {
     event.preventDefault();
   }
 
@@ -403,6 +421,9 @@ export class Select {
             onSlBlur={this.handleBlur}
             onSlClear={this.handleClear}
             onKeyDown={this.handleKeyDown}
+            onKeyUp={this.handleKeyUp}
+            onCut={this.handleCut}
+            onPaste={this.handlePaste}
           >
             {this.displayTags.length && (
               <span part="tags" slot="prefix" class="select__tags">
