@@ -17,6 +17,7 @@
 - Added `required` to `sl-checkbox`, `sl-select`, and `sl-switch`
 - Added `reportValidity()` and `setCustomValidity()` methods to all form controls
 - Added validation checking for custom and native form controls to `sl-form`
+- Added `novalidate` prop to `sl-form` to disable validation
 - Removed the `valid` prop from all form controls
 - Removed valid and invalid design tokens and related styles (you can use your own custom styles to achieve this)
 
