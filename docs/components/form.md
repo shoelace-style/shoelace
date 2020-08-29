@@ -145,7 +145,7 @@ Some input types will automatically trigger constraints, such as `email` and `ur
 
 ### Custom Validation
 
-To create a custom validation error, use the `setCustomValidity` method. The form will not be submitted when this method is called with anything other than an empty string, and its message will be shown by the browser as the error message. To make the input valid again, call the method again with an empty string as its argument.
+To create a custom validation error, use the `setCustomValidity` method. The form will not be submitted when this method is called with anything other than an empty string, and its message will be shown by the browser as the validation error. To make the input valid again, call the method a second time with an empty string as the argument.
 
 ```html preview
 <sl-form class="input-validation-custom">
@@ -196,6 +196,31 @@ The `invalid` attribute reflects the form control's validity, so you can style i
         var(--sl-focus-ring-lightness),
         var(--sl-focus-ring-alpha)
       );
+  }
+</style>
+```
+
+### Third-party Validation
+
+To opt out of the browser's built-in validation and use your own, add the `novalidate` attribute to the form. This will ignore all constraints and prevent the browser from showing its own warnings when form controls are invalid.
+
+Remember that the `invalid` prop on form controls reflects validity as defined by the [constraint validation API](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation). You can set it initially, but the `invalid` prop will update as the user interacts with the form control. As such, you should not rely on it to set invalid styles using a custom validation library.
+
+Instead, toggle a class or data attribute and target them in your stylesheet as shown below.
+
+```html
+<sl-form novalidate>
+  <sl-input class="invalid"></sl-input>
+  <sl-input data-invalid></sl-input>
+</sl-form>
+
+<style>
+  sl-input.invalid {
+    ...
+  }
+
+  sl-input[data-invalid] {
+    ...
   }
 </style>
 ```
