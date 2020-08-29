@@ -145,7 +145,7 @@ Some input types will automatically trigger constraints, such as `email` and `ur
 
 ### Custom Validation
 
-To create a custom validation error, use the `setCustomValidity` method. The form will not be submitted when this method is called with anything other than an empty string, and its message will be shown by the browser as the error message.
+To create a custom validation error, use the `setCustomValidity` method. The form will not be submitted when this method is called with anything other than an empty string, and its message will be shown by the browser as the error message. To make the input valid again, call the method again with an empty string as its argument.
 
 ```html preview
 <sl-form class="input-validation-custom">
