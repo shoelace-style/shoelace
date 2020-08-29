@@ -421,6 +421,10 @@ export namespace Components {
          */
         "getFormData": () => Promise<FormData>;
         /**
+          * Prevent the form from validating inputs before submitting.
+         */
+        "novalidate": boolean;
+        /**
           * Submits the form. If all controls are valid, the `slSubmit` event will be emitted and the promise will resolve with `true`. If any form control is invalid, the promise will resolve with `false` and no event will be emitted.
          */
         "submit": () => Promise<boolean>;
@@ -1838,6 +1842,10 @@ declare namespace LocalJSX {
         "skidding"?: number;
     }
     interface SlForm {
+        /**
+          * Prevent the form from validating inputs before submitting.
+         */
+        "novalidate"?: boolean;
         /**
           * Emitted when the form is submitted.
          */

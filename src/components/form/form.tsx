@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, Method, h } from '@stencil/core';
+import { Component, Event, EventEmitter, Method, Prop, h } from '@stencil/core';
 
 interface FormControl {
   tag: string;
@@ -24,6 +24,9 @@ interface FormControl {
 export class Form {
   form: HTMLElement;
   formControls: FormControl[];
+
+  /** Prevent the form from validating inputs before submitting. */
+  @Prop() novalidate = false;
 
   /** Emitted when the form is submitted. */
   @Event() slSubmit: EventEmitter;
@@ -198,11 +201,13 @@ export class Form {
     const formControls = await this.getFormControls();
     const formControlsThatReport = formControls.filter((el: any) => typeof el.reportValidity === 'function') as any;
 
-    for (const el of formControlsThatReport) {
-      const isValid = await el.reportValidity();
+    if (!this.novalidate) {
+      for (const el of formControlsThatReport) {
+        const isValid = await el.reportValidity();
 
-      if (!isValid) {
-        return false;
+        if (!isValid) {
+          return false;
+        }
       }
     }
 
