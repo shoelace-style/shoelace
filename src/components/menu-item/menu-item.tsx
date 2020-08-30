@@ -24,7 +24,11 @@ export class MenuItem {
   /** Set to true to draw the item in a checked state. */
   @Prop({ reflect: true }) checked = false;
 
-  /** Set to true to draw the menu item in an active state. */
+  /**
+   * Draws the menu in an active (i.e. or hover/focus), state to indicate the current menu selection. This is used in
+   * lieu of standard :hover and :focus states to prevent concurrent interactions from different devices, such as
+   * focusing with the keyboard and hovering with the mouse.
+   */
   @Prop({ reflect: true }) active = false;
 
   /** A unique value to store in the menu item. */
