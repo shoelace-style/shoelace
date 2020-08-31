@@ -1,5 +1,9 @@
 # Changelog
 
+## Next
+
+- Updated to Stencil 2.0 (you may need to purge `node_modules` and run `npm install` after pulling)
+
 ## 2.0.0-beta.17
 
 - Added `minlength` and `spellcheck` attributes to `sl-textarea`
