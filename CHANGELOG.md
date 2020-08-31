@@ -2,6 +2,7 @@
 
 ## 2.0.0-beta.17
 
+- Added `minlength` and `spellcheck` attributes to `sl-textarea`
 - Fixed a bug where clicking a tag in `sl-select` wouldn't toggle the menu
 - Fixed a bug where options where `sl-select` options weren't always visible or scrollable
 - Fixed a bug where setting `null` on `sl-input`, `sl-textarea`, or `sl-select` would throw an error
@@ -9,6 +10,16 @@
 - Fixed a bug where dynamically adding/removing a slot wouldn't work as expected in `sl-card`, `sl-dialog`, and `sl-drawer`
 - Fixed a bug where the value wasn't updated and events weren't emitted when using `setRangeText` in `sl-input` and `sl-textarea`
 - Optimized `hasSlot` utility by using a simpler selector
+
+**Form validation has been reworked and is much more powerful now!**
+
+- The `invalid` prop now reflects the control's validity as determined by the browser's constraint validation API
+- Added `required` to `sl-checkbox`, `sl-select`, and `sl-switch`
+- Added `reportValidity()` and `setCustomValidity()` methods to all form controls
+- Added validation checking for custom and native form controls to `sl-form`
+- Added `novalidate` prop to `sl-form` to disable validation
+- Removed the `valid` prop from all form controls
+- Removed valid and invalid design tokens and related styles (you can use your own custom styles to achieve this)
 
 ## 2.0.0-beta.16
 

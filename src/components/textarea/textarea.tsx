@@ -31,13 +31,13 @@ export class Textarea {
   @State() hasFocus = false;
 
   /** The textarea's size. */
-  @Prop() size: 'small' | 'medium' | 'large' = 'medium';
+  @Prop({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
 
   /** The textarea's name attribute. */
-  @Prop() name = '';
+  @Prop({ reflect: true }) name = '';
 
   /** The textarea's value attribute. */
-  @Prop({ mutable: true }) value = '';
+  @Prop({ mutable: true, reflect: true }) value = '';
 
   /** The textarea's label. */
   @Prop() label = '';
@@ -45,17 +45,32 @@ export class Textarea {
   /** The textarea's placeholder text. */
   @Prop() placeholder: string;
 
-  /** Set to true to disable the textarea. */
-  @Prop() disabled = false;
-
-  /** Set to true for a readonly textarea. */
-  @Prop() readonly = false;
+  /** The number of rows to display by default. */
+  @Prop() rows = 4;
 
   /** Controls how the textarea can be resized. */
   @Prop() resize: 'none' | 'vertical' | 'auto' = 'vertical';
 
-  /** The textarea's maxlength attribute. */
-  @Prop() maxlength: number;
+  /** Set to true to disable the textarea. */
+  @Prop({ reflect: true }) disabled = false;
+
+  /** Set to true for a readonly textarea. */
+  @Prop({ reflect: true }) readonly = false;
+
+  /** The minimum length of input that will be considered valid. */
+  @Prop({ reflect: true }) minlength: number;
+
+  /** The maximum length of input that will be considered valid. */
+  @Prop({ reflect: true }) maxlength: number;
+
+  /** The textarea's required attribute. */
+  @Prop({ reflect: true }) required: boolean;
+
+  /**
+   * This will be true when the control is in an invalid state. Validity is determined by props such as `required`,
+   * `minlength`, and `maxlength` using the browser's constraint validation API.
+   */
+  @Prop({ mutable: true, reflect: true }) invalid = false;
 
   /** The textarea's autocaptialize attribute. */
   @Prop() autocapitalize: string;
@@ -69,20 +84,11 @@ export class Textarea {
   /** The textarea's autofocus attribute. */
   @Prop() autofocus: boolean;
 
-  /** The textarea's required attribute. */
-  @Prop() required: boolean;
+  /** The textarea's spellcheck attribute. */
+  @Prop() spellcheck: boolean;
 
   /** The textarea's inputmode attribute. */
   @Prop() inputmode: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
-
-  /** Set to true to indicate that the user input is valid. */
-  @Prop() valid = false;
-
-  /** Set to true to indicate that the user input is invalid. */
-  @Prop() invalid = false;
-
-  /** The number of rows to display by default. */
-  @Prop() rows = 4;
 
   /** Emitted when the control's value changes. */
   @Event() slChange: EventEmitter;
@@ -99,6 +105,11 @@ export class Textarea {
   @Watch('rows')
   handleRowsChange() {
     this.setTextareaHeight();
+  }
+
+  @Watch('value')
+  handleValueChange() {
+    this.invalid = !this.textarea.checkValidity();
   }
 
   connectedCallback() {
@@ -164,6 +175,19 @@ export class Textarea {
     }
   }
 
+  /** Checks for validity and shows the browser's validation message if the control is invalid. */
+  @Method()
+  async reportValidity() {
+    return this.textarea.reportValidity();
+  }
+
+  /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
+  @Method()
+  async setCustomValidity(message: string) {
+    this.textarea.setCustomValidity(message);
+    this.invalid = !this.textarea.checkValidity();
+  }
+
   handleChange() {
     this.slChange.emit();
   }
@@ -200,7 +224,6 @@ export class Textarea {
         class={{
           'form-control': true,
           'form-control--has-label': this.label.length > 0,
-          'form-control--valid': this.valid,
           'form-control--invalid': this.invalid
         }}
       >
@@ -211,7 +234,6 @@ export class Textarea {
             'label--small': this.size === 'small',
             'label--medium': this.size === 'medium',
             'label--large': this.size === 'large',
-            'label--valid': this.valid,
             'label--invalid': this.invalid
           }}
           htmlFor={this.textareaId}
@@ -232,7 +254,6 @@ export class Textarea {
             'textarea--disabled': this.disabled,
             'textarea--focused': this.hasFocus,
             'textarea--empty': this.value?.length === 0,
-            'textarea--valid': this.valid,
             'textarea--invalid': this.invalid,
 
             // Modifiers
@@ -251,11 +272,13 @@ export class Textarea {
             disabled={this.disabled}
             readOnly={this.readonly}
             rows={this.rows}
+            minLength={this.minlength}
             maxLength={this.maxlength}
             value={this.value}
             autoCapitalize={this.autocapitalize}
             autoCorrect={this.autocorrect}
             autoFocus={this.autofocus}
+            spellcheck={this.spellcheck}
             required={this.required}
             inputMode={this.inputmode}
             aria-labelledby={this.labelId}
@@ -274,7 +297,6 @@ export class Textarea {
             'help-text--small': this.size === 'small',
             'help-text--medium': this.size === 'medium',
             'help-text--large': this.size === 'large',
-            'help-text--valid': this.valid,
             'help-text--invalid': this.invalid
           }}
         >

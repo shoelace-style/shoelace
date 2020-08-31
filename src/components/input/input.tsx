@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, Method, Prop, State, h } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, Method, Prop, State, Watch, h } from '@stencil/core';
 
 let id = 0;
 
@@ -16,7 +16,7 @@ let id = 0;
  * @part base - The component's base wrapper.
  * @part form-control - The form control that wraps the label and the input.
  * @part label - The input label.
- * @part input - The synthetic input container.
+ * @part input - The input control.
  * @part prefix - The input prefix container.
  * @part clear-button - The clear button.
  * @part password-toggle-button - The password toggle button.
@@ -41,19 +41,19 @@ export class Input {
   @State() isPasswordVisible = false;
 
   /** The input's type. */
-  @Prop() type: 'email' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'url' = 'text';
+  @Prop({ reflect: true }) type: 'email' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'url' = 'text';
 
   /** The input's size. */
-  @Prop() size: 'small' | 'medium' | 'large' = 'medium';
+  @Prop({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
 
   /** The input's name attribute. */
-  @Prop() name = '';
+  @Prop({ reflect: true }) name = '';
 
   /** The input's value attribute. */
-  @Prop({ mutable: true }) value: string = '';
+  @Prop({ mutable: true, reflect: true }) value: string = '';
 
   /** Set to true to draw a pill-style input with rounded edges. */
-  @Prop() pill = false;
+  @Prop({ reflect: true }) pill = false;
 
   /** The input's label. */
   @Prop() label = '';
@@ -62,25 +62,31 @@ export class Input {
   @Prop() placeholder: string;
 
   /** Set to true to disable the input. */
-  @Prop() disabled = false;
+  @Prop({ reflect: true }) disabled = false;
 
-  /** Set to true for a readonly input. */
-  @Prop() readonly = false;
+  /** Set to true to make the input readonly. */
+  @Prop({ reflect: true }) readonly = false;
 
-  /** The input's minlength attribute. */
-  @Prop() minlength: number;
+  /** The minimum length of input that will be considered valid. */
+  @Prop({ reflect: true }) minlength: number;
 
-  /** The input's maxlength attribute. */
-  @Prop() maxlength: number;
+  /** The maximum length of input that will be considered valid. */
+  @Prop({ reflect: true }) maxlength: number;
 
-  /** The input's min attribute. */
-  @Prop() min: number;
+  /** The input's minimum value. */
+  @Prop({ reflect: true }) min: number;
 
-  /** The input's max attribute. */
-  @Prop() max: number;
+  /** The input's maximum value. */
+  @Prop({ reflect: true }) max: number;
 
   /** The input's step attribute. */
-  @Prop() step: number;
+  @Prop({ reflect: true }) step: number;
+
+  /** A pattern to validate input against. */
+  @Prop({ reflect: true }) pattern: string;
+
+  /** Set to true to make the checkbox a required field. */
+  @Prop({ reflect: true }) required: boolean;
 
   /** The input's autocaptialize attribute. */
   @Prop() autocapitalize: string;
@@ -94,11 +100,11 @@ export class Input {
   /** The input's autofocus attribute. */
   @Prop() autofocus: boolean;
 
-  /** The input's pattern attribute. */
-  @Prop() pattern: string;
-
-  /** The input's required attribute. */
-  @Prop() required: boolean;
+  /**
+   * This will be true when the control is in an invalid state. Validity is determined by props such as `type`,
+   * `required`, `minlength`, `maxlength`, and `pattern` using the browser's constraint validation API.
+   */
+  @Prop({ mutable: true, reflect: true }) invalid = false;
 
   /** Set to true to add a clear button when the input is populated. */
   @Prop() clearable = false;
@@ -109,11 +115,10 @@ export class Input {
   /** The input's inputmode attribute. */
   @Prop() inputmode: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
 
-  /** Set to true to indicate that the user input is valid. */
-  @Prop() valid = false;
-
-  /** Set to true to indicate that the user input is invalid. */
-  @Prop() invalid = false;
+  @Watch('value')
+  handleValueChange() {
+    this.invalid = !this.input.checkValidity();
+  }
 
   /** Emitted when the control's value changes. */
   @Event() slChange: EventEmitter;
@@ -133,6 +138,7 @@ export class Input {
   connectedCallback() {
     this.handleChange = this.handleChange.bind(this);
     this.handleInput = this.handleInput.bind(this);
+    this.handleInvalid = this.handleInvalid.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
     this.handleClearClick = this.handleClearClick.bind(this);
@@ -185,6 +191,19 @@ export class Input {
     }
   }
 
+  /** Checks for validity and shows the browser's validation message if the control is invalid. */
+  @Method()
+  async reportValidity() {
+    return this.input.reportValidity();
+  }
+
+  /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
+  @Method()
+  async setCustomValidity(message: string) {
+    this.input.setCustomValidity(message);
+    this.invalid = !this.input.checkValidity();
+  }
+
   handleChange() {
     this.value = this.input.value;
     this.slChange.emit();
@@ -193,6 +212,10 @@ export class Input {
   handleInput() {
     this.value = this.input.value;
     this.slInput.emit();
+  }
+
+  handleInvalid() {
+    this.invalid = true;
   }
 
   handleBlur() {
@@ -237,7 +260,6 @@ export class Input {
         class={{
           'form-control': true,
           'form-control--has-label': this.label.length > 0,
-          'form-control--valid': this.valid,
           'form-control--invalid': this.invalid
         }}
       >
@@ -248,7 +270,6 @@ export class Input {
             'label--small': this.size === 'small',
             'label--medium': this.size === 'medium',
             'label--large': this.size === 'large',
-            'label--valid': this.valid,
             'label--invalid': this.invalid
           }}
           htmlFor={this.inputId}
@@ -271,7 +292,6 @@ export class Input {
             'input--disabled': this.disabled,
             'input--focused': this.hasFocus,
             'input--empty': this.value?.length === 0,
-            'input--valid': this.valid,
             'input--invalid': this.invalid
           }}
           onMouseDown={this.handleMouseDown}
@@ -305,8 +325,10 @@ export class Input {
             inputMode={this.inputmode}
             aria-labelledby={this.labelId}
             aria-describedby={this.helpTextId}
+            aria-invalid={this.invalid}
             onChange={this.handleChange}
             onInput={this.handleInput}
+            onInvalid={this.handleInvalid}
             onFocus={this.handleFocus}
             onBlur={this.handleBlur}
           />
@@ -359,7 +381,6 @@ export class Input {
             'help-text--small': this.size === 'small',
             'help-text--medium': this.size === 'medium',
             'help-text--large': this.size === 'large',
-            'help-text--valid': this.valid,
             'help-text--invalid': this.invalid
           }}
         >

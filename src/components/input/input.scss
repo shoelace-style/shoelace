@@ -2,7 +2,11 @@
 @import 'form-control-label';
 @import 'form-control-help-text';
 
+/**
+ * @prop --focus-ring: The focus ring style to use when the control receives focus, a `box-shadow` property.
+ */
 :host {
+  --focus-ring: var(--sl-focus-ring-box-shadow);
   display: block;
 }
 
@@ -35,7 +39,7 @@
   &.input--focused:not(.input--disabled) {
     background-color: var(--sl-input-background-color-focus);
     border-color: var(--sl-input-border-color-focus);
-    box-shadow: var(--sl-focus-ring-box-shadow);
+    box-shadow: var(--focus-ring);
 
     .input__control {
       color: var(--sl-input-color-focus);
@@ -54,33 +58,6 @@
       &::placeholder {
         color: var(--sl-input-placeholder-color-disabled);
       }
-    }
-  }
-
-  &.input--valid:not(.input--disabled) {
-    border-color: var(--sl-input-border-color-valid);
-
-    .input__control {
-      color: var(--sl-input-color-valid);
-    }
-
-    &.input--focused {
-      box-shadow: 0 0 0 var(--sl-focus-ring-width)
-        hsla(var(--sl-color-success-hue), var(--sl-color-success-saturation), 50%, var(--sl-focus-ring-alpha));
-      border-color: var(--sl-input-border-color-valid);
-    }
-  }
-
-  &.input--invalid:not(.input--disabled) {
-    border-color: var(--sl-color-danger-50);
-
-    .input__control {
-      color: var(--sl-input-color-invalid);
-    }
-
-    &.input--focused {
-      box-shadow: 0 0 0 var(--sl-focus-ring-width)
-        hsla(var(--sl-color-danger-hue), var(--sl-color-danger-saturation), 50%, var(--sl-focus-ring-alpha));
     }
   }
 }

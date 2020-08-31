@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, Prop, State, Watch, h } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, Method, Prop, State, Watch, h } from '@stencil/core';
 import ResizeObserver from 'resize-observer-polyfill';
 import { getTextContent } from '../../utilities/slot';
 
@@ -13,10 +13,10 @@ let id = 0;
  *
  * @part base - The component's base wrapper.
  * @part form-control - The form control that wraps the label and the input.
- * @part help-text - The select help text.
- * @part icon - The select icon.
- * @part input - The select input.
- * @part label - The input label.
+ * @part help-text - The select's help text.
+ * @part icon - The select's icon.
+ * @part input - The select's input control.
+ * @part label - The select's label.
  * @part menu - The select menu, a <sl-menu> element.
  * @part tag - The multiselect option, a <sl-tag> element.
  * @part tags - The container in which multiselect options are rendered.
@@ -81,16 +81,13 @@ export class Select {
   @Prop() label = '';
 
   /** The select's required attribute. */
-  @Prop() required: boolean;
+  @Prop() required = false;
 
   /** Set to true to add a clear button when the select is populated. */
   @Prop() clearable = false;
 
-  /** Set to true to indicate that the user input is valid. */
-  @Prop() valid = false;
-
-  /** Set to true to indicate that the user input is invalid. */
-  @Prop() invalid = false;
+  /** This will be true when the control is in an invalid state. Validity is determined by the `required` prop. */
+  @Prop({ mutable: true }) invalid = false;
 
   @Watch('multiple')
   handleMultipleChange() {
@@ -119,7 +116,10 @@ export class Select {
     this.handleBlur = this.handleBlur.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
     this.handleClear = this.handleClear.bind(this);
+    this.handleCut = this.handleCut.bind(this);
+    this.handlePaste = this.handlePaste.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleKeyUp = this.handleKeyUp.bind(this);
     this.handleLabelClick = this.handleLabelClick.bind(this);
     this.handleTagClick = this.handleTagClick.bind(this);
     this.handleMenuKeyDown = this.handleMenuKeyDown.bind(this);
@@ -135,6 +135,18 @@ export class Select {
 
     // We need to do an initial sync after the component has rendered, so this will suppress the re-render warning
     requestAnimationFrame(() => this.syncItemsFromValue());
+  }
+
+  /** Checks for validity and shows the browser's validation message if the control is invalid. */
+  @Method()
+  async reportValidity() {
+    return this.input.reportValidity();
+  }
+
+  /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
+  @Method()
+  async setCustomValidity(message: string) {
+    this.input.setCustomValidity(message);
   }
 
   getItemLabel(item: HTMLSlMenuItemElement) {
@@ -176,6 +188,25 @@ export class Select {
       event.preventDefault();
       return;
     }
+
+    // We can't make the <sl-input> readonly since that will block the browser's validation messages, so this prevents
+    // key presses from modifying the input's value by briefly making it readonly. We don't use `preventDefault()` since
+    // that would block tabbing, shortcuts, etc.
+    const nativeInput = this.input.shadowRoot.querySelector('[part="input"]') as HTMLInputElement;
+    nativeInput.readOnly = true;
+  }
+
+  handleKeyUp() {
+    const nativeInput = this.input.shadowRoot.querySelector('[part="input"]') as HTMLInputElement;
+    nativeInput.readOnly = false;
+  }
+
+  handleCut(event: Event) {
+    event.preventDefault();
+  }
+
+  handlePaste(event: Event) {
+    event.preventDefault();
   }
 
   handleLabelClick() {
@@ -298,7 +329,10 @@ export class Select {
         );
       }
 
-      this.displayLabel = '';
+      // With `multiple`, the input uses the display label as its value. If no selection is made, we set it to an empty
+      // string. If items are selected, we use a zero-width space so `required` validation doesn't fail, but nothing is
+      // drawn in the label either. This is a bit ugly, but it gets the job done.
+      this.displayLabel = this.value.length === 0 ? '' : '\u200B';
     } else {
       const checkedItem = items.filter(item => item.value === value[0])[0];
       this.displayLabel = checkedItem ? this.getItemLabel(checkedItem) : '';
@@ -325,7 +359,6 @@ export class Select {
         class={{
           'form-control': true,
           'form-control--has-label': this.label.length > 0,
-          'form-control--valid': this.valid,
           'form-control--invalid': this.invalid
         }}
       >
@@ -337,7 +370,6 @@ export class Select {
             'label--small': this.size === 'small',
             'label--medium': this.size === 'medium',
             'label--large': this.size === 'large',
-            'label--valid': this.valid,
             'label--invalid': this.invalid
           }}
           htmlFor={this.inputId}
@@ -379,9 +411,7 @@ export class Select {
             disabled={this.disabled}
             pill={this.pill}
             placeholder={this.displayLabel === '' && this.displayTags.length === 0 ? this.placeholder : null}
-            readonly={true}
             size={this.size}
-            valid={this.valid}
             invalid={this.invalid}
             clearable={this.clearable}
             required={this.required}
@@ -391,6 +421,9 @@ export class Select {
             onSlBlur={this.handleBlur}
             onSlClear={this.handleClear}
             onKeyDown={this.handleKeyDown}
+            onKeyUp={this.handleKeyUp}
+            onCut={this.handleCut}
+            onPaste={this.handlePaste}
           >
             {this.displayTags.length && (
               <span part="tags" slot="prefix" class="select__tags">
@@ -422,7 +455,6 @@ export class Select {
             'help-text--small': this.size === 'small',
             'help-text--medium': this.size === 'medium',
             'help-text--large': this.size === 'large',
-            'help-text--valid': this.valid,
             'help-text--invalid': this.invalid
           }}
         >
