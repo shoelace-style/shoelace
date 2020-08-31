@@ -191,9 +191,9 @@ See the source of card, dialog, or drawer for examples.
 
 ### Form Controls
 
-All form controls that can be validated should:
+Form controls should support validation through the following conventions:
 
-- Have an `invalid` prop that reflects its validity
-- Have a `setCustomValidity()` method so the user can set a custom validation message
-- Have a `reportValidity()` method that reports its validity for form submission
-- Adhere to native attributes such as `required`, `pattern`, `minlength`, `maxlength`, etc. when it makes sense
+- All form controls must an `invalid` prop that reflects its validity
+- All form controls must have a `setCustomValidity()` method so the user can set a custom validation message
+- All form controls must have a `reportValidity()` method that reports its validity during form submission
+- All form controls should mirror their native validation attributes such as `required`, `pattern`, `minlength`, `maxlength`, etc. when possible
