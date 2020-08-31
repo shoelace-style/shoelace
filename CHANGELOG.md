@@ -9,6 +9,7 @@
 - Fixed a bug where `role` was on the wrong element and aria attribute weren't explicit in `sl-checkbox`, `sl-switch`, and `sl-radio`
 - Fixed a bug where dynamically adding/removing a slot wouldn't work as expected in `sl-card`, `sl-dialog`, and `sl-drawer`
 - Fixed a bug where the value wasn't updated and events weren't emitted when using `setRangeText` in `sl-input` and `sl-textarea`
+- Updated `bootstrap-icons` to 1.0.0 with many icons redrawn and improved
 - Optimized `hasSlot` utility by using a simpler selector
 
 **Form validation has been reworked and is much more powerful now!**
