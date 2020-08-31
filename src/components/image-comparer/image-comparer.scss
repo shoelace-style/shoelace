@@ -48,11 +48,7 @@
   height: 100%;
   background-color: var(--sl-color-white);
   transform: translateX(calc(var(--divider-width) / -2));
-  cursor: grab;
-
-  &:active {
-    cursor: grabbing;
-  }
+  cursor: ew-resize;
 }
 
 .image-comparer__handle {
