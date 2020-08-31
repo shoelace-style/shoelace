@@ -1,5 +1,4 @@
 - Getting Started
-
   - [Overview](/)
   - [Installation](/getting-started/installation.md)
   - [Usage](/getting-started/usage.md)
@@ -9,9 +8,7 @@
   - [Community](/getting-started/community.md)
 
 - Components
-
   - [Alert](/components/alert.md)
-  - [Animation](/components/animation.md)
   - [Avatar](/components/avatar.md)
   - [Badge](/components/badge.md)
   - [Button](/components/button.md)
@@ -49,7 +46,9 @@
   - [Tooltip](/components/tooltip.md)
 
 - Utility Components
+  - [Animation](/components/animation.md)
   - [Format Bytes](/components/format-bytes.md)
+  - [Responsive Embed](/components/responsive-embed.md)
 
 - Design Tokens
   - [Typography](/tokens/typography.md)

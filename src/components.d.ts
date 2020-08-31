@@ -785,6 +785,12 @@ export namespace Components {
          */
         "value": number;
     }
+    interface SlResponsiveEmbed {
+        /**
+          * The aspect ratio of the embedded media in the format of `width:height`, e.g. `16:9`, `4:3`, or `1:1`. Ratios not in this format will be ignored.
+         */
+        "aspectRatio": string;
+    }
     interface SlSelect {
         /**
           * Set to true to add a clear button when the select is populated.
@@ -1282,6 +1288,12 @@ declare global {
         prototype: HTMLSlRatingElement;
         new (): HTMLSlRatingElement;
     };
+    interface HTMLSlResponsiveEmbedElement extends Components.SlResponsiveEmbed, HTMLStencilElement {
+    }
+    var HTMLSlResponsiveEmbedElement: {
+        prototype: HTMLSlResponsiveEmbedElement;
+        new (): HTMLSlResponsiveEmbedElement;
+    };
     interface HTMLSlSelectElement extends Components.SlSelect, HTMLStencilElement {
     }
     var HTMLSlSelectElement: {
@@ -1371,6 +1383,7 @@ declare global {
         "sl-radio": HTMLSlRadioElement;
         "sl-range": HTMLSlRangeElement;
         "sl-rating": HTMLSlRatingElement;
+        "sl-responsive-embed": HTMLSlResponsiveEmbedElement;
         "sl-select": HTMLSlSelectElement;
         "sl-skeleton": HTMLSlSkeletonElement;
         "sl-spinner": HTMLSlSpinnerElement;
@@ -2211,6 +2224,12 @@ declare namespace LocalJSX {
          */
         "value"?: number;
     }
+    interface SlResponsiveEmbed {
+        /**
+          * The aspect ratio of the embedded media in the format of `width:height`, e.g. `16:9`, `4:3`, or `1:1`. Ratios not in this format will be ignored.
+         */
+        "aspectRatio"?: string;
+    }
     interface SlSelect {
         /**
           * Set to true to add a clear button when the select is populated.
@@ -2563,6 +2582,7 @@ declare namespace LocalJSX {
         "sl-radio": SlRadio;
         "sl-range": SlRange;
         "sl-rating": SlRating;
+        "sl-responsive-embed": SlResponsiveEmbed;
         "sl-select": SlSelect;
         "sl-skeleton": SlSkeleton;
         "sl-spinner": SlSpinner;
@@ -2607,6 +2627,7 @@ declare module "@stencil/core" {
             "sl-radio": LocalJSX.SlRadio & JSXBase.HTMLAttributes<HTMLSlRadioElement>;
             "sl-range": LocalJSX.SlRange & JSXBase.HTMLAttributes<HTMLSlRangeElement>;
             "sl-rating": LocalJSX.SlRating & JSXBase.HTMLAttributes<HTMLSlRatingElement>;
+            "sl-responsive-embed": LocalJSX.SlResponsiveEmbed & JSXBase.HTMLAttributes<HTMLSlResponsiveEmbedElement>;
             "sl-select": LocalJSX.SlSelect & JSXBase.HTMLAttributes<HTMLSlSelectElement>;
             "sl-skeleton": LocalJSX.SlSkeleton & JSXBase.HTMLAttributes<HTMLSlSkeletonElement>;
             "sl-spinner": LocalJSX.SlSpinner & JSXBase.HTMLAttributes<HTMLSlSpinnerElement>;
