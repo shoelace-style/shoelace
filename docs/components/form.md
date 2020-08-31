@@ -73,7 +73,7 @@ Client-side validation can be enabled through the browser's [constraint validati
 
 When a form control is invalid, the containing form will not be submitted. Instead, the browser will show the user a relevant error message. If you don't want to use cilent-side validation, you can suppress this behavior by adding `novalidate` to the `<sl-form>` element.
 
-Form controls that support validation include [`sl-input`](/components/input), [`sl-textarea`](/components/textarea), [`sl-select`](/components/select), and [`sl-checkbox`](/components/checkbox). Not all validation props are available for every component. Refer to each component's documentation to see which validation props it supports.
+All form controls support validation, but not all validation props are available for every component. Refer to a component's documentation to see which validation props it supports.
 
 Note that validity is not checked until the user interacts with the control or its containing form is submitted. This prevents required controls from being rendered as invalid right away, which can result in a poor user experience. If you need this behavior, set the `invalid` attribute initially.
 
