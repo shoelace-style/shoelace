@@ -17,6 +17,18 @@
   padding: 1.5rem 3.25rem 1.5rem 1.5rem;
 }
 
+/* Block the preview while dragging to prevent iframes from intercepting drag events */
+.code-block__preview--dragging::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: ew-resize;
+}
+
 .code-block__resizer {
   display: flex;
   align-items: center;
