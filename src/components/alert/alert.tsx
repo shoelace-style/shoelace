@@ -18,7 +18,7 @@ import { Component, Element, Event, EventEmitter, Host, Method, Prop, Watch, h }
   styleUrl: 'alert.scss',
   shadow: true
 })
-export class Tab {
+export class Alert {
   alert: HTMLElement;
   isShowing = false;
 
