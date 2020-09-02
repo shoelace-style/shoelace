@@ -243,7 +243,7 @@ export class Dropdown {
   }
 
   handleDocumentMouseDown(event: MouseEvent) {
-    // Close when clicking outside of the close element
+    // Close when clicking outside of the containing element
     const path = event.composedPath() as Array<EventTarget>;
     if (!path.includes(this.containingElement)) {
       this.hide();
