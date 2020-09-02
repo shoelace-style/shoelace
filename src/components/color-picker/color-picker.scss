@@ -175,6 +175,10 @@
   }
 }
 
+.color-picker__copy-button {
+  cursor: copy;
+}
+
 .color-picker__swatches {
   display: grid;
   grid-template-columns: repeat(8, 1fr);

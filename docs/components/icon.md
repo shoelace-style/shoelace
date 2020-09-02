@@ -171,7 +171,7 @@ Custom icons can be loaded by setting the `src` attribute. Only SVG images are s
     width: 2em;
     height: 2em;
     margin: 0 auto;
-    cursor: pointer;
+    cursor: copy;
     transition: var(--sl-transition-medium) all;
   }
 
