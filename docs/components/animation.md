@@ -25,7 +25,7 @@ To animate an element, wrap it in `<sl-animation>` and set a `name` and `duratio
 </style>
 ```
 
-?> The animation will only be applied to the first child element found in `<sl-animation>`.
+?> The animation will be applied only to the first child element found in `<sl-animation>`.
 
 ## Examples
 

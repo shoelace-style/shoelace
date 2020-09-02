@@ -4,7 +4,7 @@ import easings from './easings';
 
 /**
  * @since 2.0
- * @status experimental
+ * @status stable
  *
  * @slot - The element to animate. If multiple elements are to be animated, wrap them in a single container.
  */
@@ -16,11 +16,6 @@ import easings from './easings';
 export class Animate {
   animation: Animation;
   hasStarted = false;
-
-  get element() {
-    const slot = this.host.shadowRoot.querySelector('slot');
-    return slot.assignedElements({ flatten: true })[0] as HTMLElement;
-  }
 
   @Element() host: HTMLSlAnimationElement;
 
@@ -105,6 +100,7 @@ export class Animate {
   connectedCallback() {
     this.handleAnimationFinish = this.handleAnimationFinish.bind(this);
     this.handleAnimationCancel = this.handleAnimationCancel.bind(this);
+    this.handleSlotChange = this.handleSlotChange.bind(this);
   }
 
   componentDidLoad() {
@@ -123,12 +119,23 @@ export class Animate {
     this.slCancel.emit();
   }
 
+  handleSlotChange() {
+    this.destroyAnimation();
+    this.createAnimation();
+  }
+
   createAnimation() {
     const easing = easings.hasOwnProperty(this.easing) ? easings[this.easing] : this.easing;
     const keyframes = this.keyframes ? this.keyframes : animations[this.name];
+    const slot = this.host.shadowRoot.querySelector('slot');
+    const element = slot.assignedElements({ flatten: true })[0] as HTMLElement;
+
+    if (!element) {
+      return;
+    }
 
     this.destroyAnimation();
-    this.animation = this.element.animate(keyframes, {
+    this.animation = element.animate(keyframes, {
       delay: this.delay,
       direction: this.direction,
       duration: this.duration,
@@ -201,6 +208,6 @@ export class Animate {
   }
 
   render() {
-    return <slot />;
+    return <slot onSlotchange={this.handleSlotChange} />;
   }
 }
