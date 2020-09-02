@@ -24,7 +24,7 @@ export function getInnerHTML(slot: HTMLSlotElement): string {
 // string. This is useful because we can't use slot.textContent as an alternative.
 //
 export function getTextContent(slot: HTMLSlotElement): string {
-  const nodes = slot.assignedNodes({ flatten: true });
+  const nodes = slot ? slot.assignedNodes({ flatten: true }) : [];
   let text = '';
 
   [...nodes].map(node => {
