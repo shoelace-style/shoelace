@@ -206,20 +206,15 @@ To opt out of the browser's built-in validation and use your own, add the `noval
 
 Remember that the `invalid` prop on form controls reflects validity as defined by the [constraint validation API](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation). You can set it initially, but the `invalid` prop will update as the user interacts with the form control. As such, you should not rely on it to set invalid styles using a custom validation library.
 
-Instead, toggle a class or data attribute and target them in your stylesheet as shown below.
+Instead, toggle a class and target it in your stylesheet as shown below.
 
 ```html
 <sl-form novalidate>
   <sl-input class="invalid"></sl-input>
-  <sl-input data-invalid></sl-input>
 </sl-form>
 
 <style>
   sl-input.invalid {
-    ...
-  }
-
-  sl-input[data-invalid] {
     ...
   }
 </style>
