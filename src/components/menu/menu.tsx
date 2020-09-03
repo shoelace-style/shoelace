@@ -36,7 +36,6 @@ export class Menu {
     this.handleClick = this.handleClick.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
-    this.handleMouseDown = this.handleMouseDown.bind(this);
     this.handleMouseOver = this.handleMouseOver.bind(this);
     this.handleMouseOut = this.handleMouseOut.bind(this);
   }
@@ -162,10 +161,6 @@ export class Menu {
     this.typeToSelect(event.key);
   }
 
-  handleMouseDown(event: MouseEvent) {
-    event.preventDefault();
-  }
-
   handleMouseOver(event: MouseEvent) {
     const target = event.target as HTMLElement;
     const item = target.closest('sl-menu-item');
@@ -192,7 +187,6 @@ export class Menu {
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
         onKeyDown={this.handleKeyDown}
-        onMouseDown={this.handleMouseDown}
         onMouseOver={this.handleMouseOver}
         onMouseOut={this.handleMouseOut}
       >
