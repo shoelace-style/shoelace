@@ -122,7 +122,7 @@ export class Select {
     this.handleKeyUp = this.handleKeyUp.bind(this);
     this.handleLabelClick = this.handleLabelClick.bind(this);
     this.handleTagClick = this.handleTagClick.bind(this);
-    this.handleMenuKeyDown = this.handleMenuKeyDown.bind(this);
+    this.handleTagKeyDown = this.handleTagKeyDown.bind(this);
     this.handleMenuHide = this.handleMenuHide.bind(this);
     this.handleMenuShow = this.handleMenuShow.bind(this);
     this.handleMenuSelect = this.handleMenuSelect.bind(this);
@@ -179,16 +179,7 @@ export class Select {
     this.dropdown.hide();
   }
 
-  handleKeyDown(event: KeyboardEvent) {
-    const target = event.target as HTMLElement;
-
-    // Open the dropdown when enter is pressed while the input is focused
-    if (!this.isOpen && event.key === 'Enter' && target === this.input) {
-      this.dropdown.show();
-      event.preventDefault();
-      return;
-    }
-
+  handleKeyDown() {
     // We can't make the <sl-input> readonly since that will block the browser's validation messages, so this prevents
     // key presses from modifying the input's value by briefly making it readonly. We don't use `preventDefault()` since
     // that would block tabbing, shortcuts, etc.
@@ -211,15 +202,6 @@ export class Select {
 
   handleLabelClick() {
     this.input.setFocus();
-  }
-
-  handleMenuKeyDown(event: KeyboardEvent) {
-    // Close when escape or tab pressed
-    if (event.key === 'Escape' || event.key === 'Tab') {
-      this.dropdown.hide();
-      event.preventDefault();
-      return;
-    }
   }
 
   handleMenuSelect(event: CustomEvent) {
@@ -273,6 +255,12 @@ export class Select {
     }
   }
 
+  handleTagKeyDown(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      event.stopPropagation();
+    }
+  }
+
   reportDuplicateItemValues() {
     const items = this.getItems();
 
@@ -308,6 +296,7 @@ export class Select {
             pill={this.pill}
             clearable
             onClick={this.handleTagClick}
+            onKeyDown={this.handleTagKeyDown}
             onSlClear={event => {
               event.stopPropagation();
               item.checked = false;
@@ -436,13 +425,7 @@ export class Select {
             </span>
           </sl-input>
 
-          <sl-menu
-            ref={el => (this.menu = el)}
-            part="menu"
-            class="select__menu"
-            onSlSelect={this.handleMenuSelect}
-            onKeyDown={this.handleMenuKeyDown}
-          >
+          <sl-menu ref={el => (this.menu = el)} part="menu" class="select__menu" onSlSelect={this.handleMenuSelect}>
             <slot onSlotchange={this.handleSlotChange} />
           </sl-menu>
         </sl-dropdown>

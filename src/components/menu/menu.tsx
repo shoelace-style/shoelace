@@ -93,11 +93,14 @@ export class Menu {
   }
 
   handleFocus() {
-    const item = this.getActiveItem();
-    if (!item) {
-      this.setActiveItem(this.getItems()[0]);
-    }
     this.slFocus.emit();
+
+    // Activate the first item if no other item is active
+    const activeItem = this.getActiveItem();
+    if (!activeItem) {
+      const items = this.getItems();
+      this.setActiveItem(items[0]);
+    }
   }
 
   handleBlur() {
