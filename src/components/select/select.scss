@@ -15,7 +15,7 @@
   flex: 1 1 auto;
   width: 100%;
 
-  &::part(base) {
+  &:not([disabled])::part(base) {
     cursor: pointer;
   }
 
