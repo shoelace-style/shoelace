@@ -162,12 +162,14 @@ export class Select {
     return Array.isArray(this.value) ? this.value : [this.value];
   }
 
-  handleBlur() {
+  handleBlur(event: CustomEvent) {
+    event.stopPropagation();
     this.hasFocus = false;
     this.slBlur.emit();
   }
 
-  handleFocus() {
+  handleFocus(event: CustomEvent) {
+    event.stopPropagation();
     this.hasFocus = true;
     this.slFocus.emit();
     this.input.setSelectionRange(0, 0);

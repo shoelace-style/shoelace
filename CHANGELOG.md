@@ -4,6 +4,7 @@
 
 - Fixed a bug where swapping an animated element wouldn't restart the animation in `sl-animation`
 - Fixed a bug where the cursor was incorrect when `sl-select` was disabled
+- Fixed a bug where `slBlur` and `slFocus` were emitted twice in `sl-select`
 - Fixed a bug where clicking on `sl-menu` wouldn't focus it
 - Improved keyboard logic in `sl-dropdown`, `sl-menu`, and `sl-select`
 - Updated `sl-animation` to stable
