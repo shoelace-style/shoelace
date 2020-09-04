@@ -406,8 +406,6 @@ export class Select {
             required={this.required}
             aria-labelledby={this.labelId}
             aria-describedby={this.helpTextId}
-            onSlFocus={this.handleFocus}
-            onSlBlur={this.handleBlur}
             onSlClear={this.handleClear}
             onKeyDown={this.handleKeyDown}
             onKeyUp={this.handleKeyUp}
