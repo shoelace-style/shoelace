@@ -68,22 +68,6 @@ Add descriptive help text to a textarea with the `help-text` slot.
 </sl-textarea>
 ```
 
-### Validation
-
-Show a valid or invalid state by setting the `valid` and `invalid` attributes, respectively. Help text can be used to provide feedback for validation and will be styled accordingly.
-
-```html preview
-<sl-textarea label="Valid" valid>
-  <div slot="help-text">This is a valid textarea.</div>
-</sl-textarea>
-
-<br>
-
-<sl-textarea label="Invalid" invalid>
-  <div slot="help-text">This is an invalid textarea.</div>
-</sl-textarea>
-```
-
 ### Prevent Resizing
 
 By default, textareas can be resized vertically by the user. To prevent resizing, set the `resize` attribute to `none`.

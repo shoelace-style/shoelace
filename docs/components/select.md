@@ -156,28 +156,4 @@ Add descriptive help text to an input with the `help-text` slot.
 </sl-select>
 ```
 
-### Validation
-
-Show a valid or invalid state by setting the `valid` and `invalid` attributes, respectively. Help text can be used to provide feedback for validation and will be styled accordingly.
-
-```html preview
-<sl-select placeholder="Valid" valid>
-  <sl-menu-item value="option-1">Option 1</sl-menu-item>
-  <sl-menu-item value="option-2">Option 2</sl-menu-item>
-  <sl-menu-item value="option-3">Option 3</sl-menu-item>
-
-  <div slot="help-text">This is a valid selection!</div>
-</sl-select>
-
-<br>
-
-<sl-select placeholder="Invalid" invalid>
-  <sl-menu-item value="option-1">Option 1</sl-menu-item>
-  <sl-menu-item value="option-2">Option 2</sl-menu-item>
-  <sl-menu-item value="option-3">Option 3</sl-menu-item>
-
-  <div slot="help-text">This is not a valid selection!</div>
-</sl-select>
-```
-
 [component-metadata:sl-select]
