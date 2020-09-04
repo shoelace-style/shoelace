@@ -250,7 +250,6 @@
   border: none;
   cursor: pointer;
   transition: var(--sl-transition-fast) box-shadow;
-  -webkit-appearance: none;
 
   &.color-dropdown__trigger--small {
     width: var(--sl-input-height-small);
