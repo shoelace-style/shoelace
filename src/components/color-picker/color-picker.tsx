@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, Prop, State, Watch, h } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, Method, Prop, State, Watch, h } from '@stencil/core';
 import color from 'color';
 import { clamp } from '../../utilities/math';
 
@@ -33,12 +33,12 @@ export class ColorPicker {
   dropdown: HTMLSlDropdownElement;
   lastValueEmitted: string;
   menu: HTMLElement;
-  textInput: HTMLSlInputElement;
-  trigger: HTMLElement;
+  input: HTMLSlInputElement;
+  trigger: HTMLButtonElement;
 
   @Element() host: HTMLSlColorPickerElement;
 
-  @State() textInputValue = '';
+  @State() inputValue = '';
   @State() hue = 0;
   @State() saturation = 100;
   @State() lightness = 100;
@@ -66,6 +66,12 @@ export class ColorPicker {
 
   /** Set to true to disable the color picker. */
   @Prop() disabled = false;
+
+  /**
+   * This will be true when the control is in an invalid state. Validity is determined by the `setCustomValidity()`
+   * method using the browser's constraint validation API.
+   */
+  @Prop({ mutable: true, reflect: true }) invalid = false;
 
   /**
    * Enable this option to prevent the panel from being clipped when the component is placed inside a container with
@@ -123,13 +129,13 @@ export class ColorPicker {
       const newColor = this.parseColor(newValue);
 
       if (newColor) {
-        this.textInputValue = this.value;
+        this.inputValue = this.value;
         this.hue = newColor.hsla.h;
         this.saturation = newColor.hsla.s;
         this.lightness = newColor.hsla.l;
         this.alpha = newColor.hsla.a * 100;
       } else {
-        this.textInputValue = oldValue;
+        this.inputValue = oldValue;
       }
     }
 
@@ -157,8 +163,8 @@ export class ColorPicker {
     this.handleHueKeyDown = this.handleHueKeyDown.bind(this);
     this.handleLightnessInput = this.handleLightnessInput.bind(this);
     this.handleSaturationInput = this.handleSaturationInput.bind(this);
-    this.handleTextInputChange = this.handleTextInputChange.bind(this);
-    this.handleTextInputKeyDown = this.handleTextInputKeyDown.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleInputKeyDown = this.handleInputKeyDown.bind(this);
   }
 
   componentWillLoad() {
@@ -166,13 +172,46 @@ export class ColorPicker {
       this.setColor(`#ffff`);
     }
 
-    this.textInputValue = this.value;
+    this.inputValue = this.value;
     this.lastValueEmitted = this.value;
     this.syncValues();
   }
 
+  /** Checks for validity and shows the browser's validation message if the control is invalid. */
+  @Method()
+  async reportValidity() {
+    // If the input is invalid, show the dropdown so the browser can focus on it
+    if (!this.inline && this.input.invalid) {
+      // this.dropdown.show();
+      // setTimeout(() => {
+      //   this.input.reportValidity();
+      // }, 300);
+
+      return new Promise(resolve => {
+        this.dropdown.addEventListener(
+          'slAfterShow',
+          () => {
+            this.input.reportValidity();
+            resolve();
+          },
+          { once: true }
+        );
+        this.dropdown.show();
+      });
+    } else {
+      return this.input.reportValidity();
+    }
+  }
+
+  /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
+  @Method()
+  async setCustomValidity(message: string) {
+    await this.input.setCustomValidity(message);
+    this.invalid = this.input.invalid;
+  }
+
   handleCopy() {
-    this.textInput.select().then(() => {
+    this.input.select().then(() => {
       document.execCommand('copy');
       this.copyButton.setFocus();
       this.showCopyCheckmark = true;
@@ -358,7 +397,7 @@ export class ColorPicker {
     }
   }
 
-  handleTextInputChange(event: CustomEvent) {
+  handleInputChange(event: CustomEvent) {
     const target = event.target as HTMLInputElement;
 
     this.setColor(target.value);
@@ -366,11 +405,11 @@ export class ColorPicker {
     event.stopPropagation();
   }
 
-  handleTextInputKeyDown(event: KeyboardEvent) {
+  handleInputKeyDown(event: KeyboardEvent) {
     if (event.key === 'Enter') {
-      this.setColor(this.textInput.value);
-      this.textInput.value = this.value;
-      setTimeout(() => this.textInput.select());
+      this.setColor(this.input.value);
+      this.input.value = this.value;
+      setTimeout(() => this.input.select());
     }
   }
 
@@ -562,17 +601,17 @@ export class ColorPicker {
 
     // Update the value
     if (this.format === 'hsl') {
-      this.textInputValue = this.opacity ? currentColor.hsla.string : currentColor.hsl.string;
+      this.inputValue = this.opacity ? currentColor.hsla.string : currentColor.hsl.string;
     } else if (this.format === 'rgb') {
-      this.textInputValue = this.opacity ? currentColor.rgba.string : currentColor.rgb.string;
+      this.inputValue = this.opacity ? currentColor.rgba.string : currentColor.rgb.string;
     } else {
-      this.textInputValue = this.opacity ? currentColor.hexa : currentColor.hex;
+      this.inputValue = this.opacity ? currentColor.hexa : currentColor.hex;
     }
 
     // Setting this.value will trigger the watcher which parses the new color. We want to bypass that behavior because
     // a) we've already done it in this function and b) conversion/rounding can lead to values changing slightly.
     this.bypassValueParse = true;
-    this.value = this.textInputValue;
+    this.value = this.inputValue;
     this.bypassValueParse = false;
   }
 
@@ -689,16 +728,19 @@ export class ColorPicker {
 
           <div class="color-picker__user-input">
             <sl-input
-              ref={el => (this.textInput = el)}
+              ref={el => (this.input = el)}
               part="input"
               size="small"
               type="text"
               name={this.name}
-              pattern="[a-fA-F\d]+"
-              value={this.textInputValue}
+              autocomplete="off"
+              autocorrect="off"
+              autocapitalize="off"
+              spellcheck="off"
+              value={this.inputValue}
               disabled={this.disabled}
-              onKeyDown={this.handleTextInputKeyDown}
-              onSlChange={this.handleTextInputChange}
+              onKeyDown={this.handleInputKeyDown}
+              onSlChange={this.handleInputChange}
             />
             <sl-button
               ref={el => (this.copyButton = el)}

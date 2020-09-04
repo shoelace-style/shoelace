@@ -268,6 +268,10 @@ export namespace Components {
          */
         "inline": boolean;
         /**
+          * This will be true when the control is in an invalid state. Validity is determined by the `setCustomValidity()` method using the browser's constraint validation API.
+         */
+        "invalid": boolean;
+        /**
           * The input's name attribute.
          */
         "name": string;
@@ -275,6 +279,14 @@ export namespace Components {
           * Whether to show the opacity slider.
          */
         "opacity": boolean;
+        /**
+          * Checks for validity and shows the browser's validation message if the control is invalid.
+         */
+        "reportValidity": () => Promise<unknown>;
+        /**
+          * Sets a custom validation message. If `message` is not empty, the field will be considered invalid.
+         */
+        "setCustomValidity": (message: string) => Promise<void>;
         /**
           * When `inline` is true, this determines the size of the color picker's trigger.
          */
@@ -1654,6 +1666,10 @@ declare namespace LocalJSX {
           * Set to true to render the color picker inline rather than inside a dropdown.
          */
         "inline"?: boolean;
+        /**
+          * This will be true when the control is in an invalid state. Validity is determined by the `setCustomValidity()` method using the browser's constraint validation API.
+         */
+        "invalid"?: boolean;
         /**
           * The input's name attribute.
          */

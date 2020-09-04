@@ -2,12 +2,12 @@
 
 ## Next
 
-- Added `name` prop to `sl-color-picker`
+- Added `name` and `invalid` prop to `sl-color-picker`
+- Added support for form submission and validation to `sl-color-picker`
 - Fixed a bug where swapping an animated element wouldn't restart the animation in `sl-animation`
 - Fixed a bug where the cursor was incorrect when `sl-select` was disabled
 - Fixed a bug where `slBlur` and `slFocus` were emitted twice in `sl-select`
 - Fixed a bug where clicking on `sl-menu` wouldn't focus it
-- Fixed a bug where `sl-color-picker` wasn't submitted with forms
 - Fixed a bug in the popover utility where `onAfterShow` would fire too soon
 - Improved keyboard logic in `sl-dropdown`, `sl-menu`, and `sl-select`
 - Updated `sl-animation` to stable
