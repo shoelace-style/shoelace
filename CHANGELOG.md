@@ -4,6 +4,7 @@
 
 - Added `name` and `invalid` prop to `sl-color-picker`
 - Added support for form submission and validation to `sl-color-picker`
+- Added touch support to demo resizers in the docs
 - Fixed a bug where swapping an animated element wouldn't restart the animation in `sl-animation`
 - Fixed a bug where the cursor was incorrect when `sl-select` was disabled
 - Fixed a bug where `slBlur` and `slFocus` were emitted twice in `sl-select`

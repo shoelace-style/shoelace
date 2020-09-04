@@ -101,28 +101,30 @@
       [...document.querySelectorAll('.code-block__preview')].map(preview => {
         const resizer = preview.querySelector('.code-block__resizer');
         let startX;
-        let startY;
         let startWidth;
-        let startHeight;
 
         const dragStart = event => {
-          startX = event.clientX;
-          startY = event.clientY;
+          startX = event.changedTouches ? event.changedTouches[0].pageX : event.clientX;
           startWidth = parseInt(document.defaultView.getComputedStyle(preview).width, 10);
-          startHeight = parseInt(document.defaultView.getComputedStyle(preview).height, 10);
           preview.classList.add('code-block__preview--dragging');
+          event.preventDefault();
+          resizer.focus();
           document.documentElement.addEventListener('mousemove', dragMove, false);
+          document.documentElement.addEventListener('touchmove', dragMove, false);
           document.documentElement.addEventListener('mouseup', dragStop, false);
+          document.documentElement.addEventListener('touchend', dragStop, false);
         };
 
         const dragMove = event => {
-          setWidth(startWidth + event.clientX - startX);
+          setWidth(startWidth + (event.changedTouches ? event.changedTouches[0].pageX : event.pageX) - startX);
         };
 
         const dragStop = event => {
           preview.classList.remove('code-block__preview--dragging');
           document.documentElement.removeEventListener('mousemove', dragMove, false);
+          document.documentElement.removeEventListener('touchmove', dragMove, false);
           document.documentElement.removeEventListener('mouseup', dragStop, false);
+          document.documentElement.removeEventListener('touchend', dragStop, false);
         };
 
         const handleKeyDown = event => {
@@ -151,6 +153,7 @@
         };
 
         resizer.addEventListener('mousedown', dragStart);
+        resizer.addEventListener('touchstart', dragStart);
         resizer.addEventListener('keydown', handleKeyDown);
       }, false);
     });
