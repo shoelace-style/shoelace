@@ -109,8 +109,8 @@ export class Dropdown {
     this.handleDocumentMouseDown = this.handleDocumentMouseDown.bind(this);
     this.handleMenuItemActivate = this.handleMenuItemActivate.bind(this);
     this.handlePanelSelect = this.handlePanelSelect.bind(this);
+    this.handleTriggerClick = this.handleTriggerClick.bind(this);
     this.handleTriggerKeyDown = this.handleTriggerKeyDown.bind(this);
-    this.togglePanel = this.togglePanel.bind(this);
   }
 
   componentDidLoad() {
@@ -156,8 +156,8 @@ export class Dropdown {
 
     this.panel.addEventListener('slActivate', this.handleMenuItemActivate);
     this.panel.addEventListener('slSelect', this.handlePanelSelect);
-    document.addEventListener('mousedown', this.handleDocumentMouseDown);
     document.addEventListener('keydown', this.handleDocumentKeyDown);
+    document.addEventListener('mousedown', this.handleDocumentMouseDown);
 
     this.isShowing = true;
     this.open = true;
@@ -180,8 +180,8 @@ export class Dropdown {
 
     this.panel.removeEventListener('slActivate', this.handleMenuItemActivate);
     this.panel.removeEventListener('slSelect', this.handlePanelSelect);
+    document.addEventListener('keydown', this.handleDocumentKeyDown);
     document.removeEventListener('mousedown', this.handleDocumentMouseDown);
-    document.removeEventListener('keydown', this.handleDocumentKeyDown);
 
     this.isShowing = false;
     this.open = false;
@@ -208,8 +208,6 @@ export class Dropdown {
   }
 
   handleDocumentKeyDown(event: KeyboardEvent) {
-    const menu = this.getMenu();
-
     // Close when escape is pressed
     if (event.key === 'Escape') {
       this.hide();
@@ -217,9 +215,10 @@ export class Dropdown {
       return;
     }
 
-    // Close when tabbing results in the focus leaving the containing element
+    // Handle tabbing
     if (event.key === 'Tab') {
       setTimeout(() => {
+        // Tabbing outside of the containing element closes the panel
         if (
           document.activeElement &&
           document.activeElement.closest(this.containingElement.tagName.toLowerCase()) !== this.containingElement
@@ -229,21 +228,10 @@ export class Dropdown {
         }
       });
     }
-
-    // Prevent the page from scrolling when certain keys are pressed
-    if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
-      event.preventDefault();
-    }
-
-    // If a menu is present, focus on it when certain keys are pressed
-    if (menu && ['ArrowDown', 'ArrowUp'].includes(event.key)) {
-      event.preventDefault();
-      menu.setFocus();
-    }
   }
 
   handleDocumentMouseDown(event: MouseEvent) {
-    // Close when clicking outside of the close element
+    // Close when clicking outside of the containing element
     const path = event.composedPath() as Array<EventTarget>;
     if (!path.includes(this.containingElement)) {
       this.hide();
@@ -266,25 +254,53 @@ export class Dropdown {
     }
   }
 
+  handleTriggerClick() {
+    this.open ? this.hide() : this.show();
+  }
+
   handleTriggerKeyDown(event: KeyboardEvent) {
-    // Open the panel when pressing down or up while focused on the trigger
-    if (!this.open && ['ArrowDown', 'ArrowUp'].includes(event.key)) {
-      this.show();
-      event.preventDefault();
-      event.stopPropagation();
+    const menu = this.getMenu();
+
+    // Close when escape or tab is pressed
+    if (event.key === 'Escape') {
+      this.hide();
+      this.focusOnTrigger();
+      return;
     }
 
-    // All other keys focus the menu and initiate type-to-select
-    const menu = this.getMenu();
-    if (menu && event.target !== menu) {
+    // When spacebar/enter is pressed, show the panel but don't focus on the menu. This let's the user press the same
+    // key again to hide the menu in case they don't want to make a selection.
+    if ([' ', 'Enter'].includes(event.key)) {
+      event.preventDefault();
+      this.open ? this.hide() : this.show();
+      return;
+    }
+
+    // When up/down is pressed, we make the assumption that the user is familiar with the menu and plans to make a
+    // selection. Rather than toggle the panel, we focus on the menu (if one exists) and activate the first item for
+    // faster navigation.
+    if (['ArrowDown', 'ArrowUp'].includes(event.key)) {
+      event.preventDefault();
+
+      // Show the menu if it's not already open
+      if (!this.open) {
+        this.show();
+      }
+
+      // Focus on the menu, if one exists
+      if (menu) {
+        menu.setFocus();
+        return;
+      }
+    }
+
+    // Other keys bring focus to the menu and initiate type-to-select behavior
+    const ignoredKeys = ['Tab', 'Shift', 'Meta', 'Ctrl', 'Alt'];
+    if (this.open && menu && !ignoredKeys.includes(event.key)) {
       menu.setFocus();
       menu.typeToSelect(event.key);
       return;
     }
-  }
-
-  togglePanel() {
-    this.open ? this.hide() : this.show();
   }
 
   render() {
@@ -303,8 +319,8 @@ export class Dropdown {
           part="trigger"
           class="dropdown__trigger"
           ref={el => (this.trigger = el)}
+          onClick={this.handleTriggerClick}
           onKeyDown={this.handleTriggerKeyDown}
-          onClick={this.togglePanel}
         >
           <slot name="trigger" />
         </span>

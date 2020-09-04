@@ -15,8 +15,13 @@
   flex: 1 1 auto;
   width: 100%;
 
-  &::part(base) {
+  &:not([disabled])::part(base) {
     cursor: pointer;
+  }
+
+  // Hide the caret since we use a faux readonly technique to prevent user input
+  &::part(input) {
+    caret-color: transparent;
   }
 
   span[slot='prefix'] {

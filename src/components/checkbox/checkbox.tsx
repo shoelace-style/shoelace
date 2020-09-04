@@ -36,11 +36,17 @@ export class Checkbox {
   /** Set to true to disable the checkbox. */
   @Prop() disabled = false;
 
+  /** Set to true to make the checkbox a required field. */
+  @Prop() required = false;
+
   /** Set to true to draw the checkbox in a checked state. */
   @Prop({ mutable: true, reflect: true }) checked = false;
 
   /** Set to true to draw the checkbox in an indeterminate state. */
   @Prop({ mutable: true, reflect: true }) indeterminate = false;
+
+  /** This will be true when the control is in an invalid state. Validity is determined by the `required` prop. */
+  @Prop({ mutable: true, reflect: true }) invalid = false;
 
   /** Emitted when the control loses focus. */
   @Event() slBlur: EventEmitter;
@@ -80,6 +86,19 @@ export class Checkbox {
   @Method()
   async removeFocus() {
     this.input.blur();
+  }
+
+  /** Checks for validity and shows the browser's validation message if the control is invalid. */
+  @Method()
+  async reportValidity() {
+    return this.input.reportValidity();
+  }
+
+  /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
+  @Method()
+  async setCustomValidity(message: string) {
+    this.input.setCustomValidity(message);
+    this.invalid = !this.input.checkValidity();
   }
 
   handleClick() {
@@ -155,6 +174,7 @@ export class Checkbox {
             value={this.value}
             checked={this.checked}
             disabled={this.disabled}
+            required={this.required}
             role="checkbox"
             aria-checked={this.checked}
             aria-labelledby={this.labelId}

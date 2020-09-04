@@ -218,6 +218,10 @@ export namespace Components {
          */
         "indeterminate": boolean;
         /**
+          * This will be true when the control is in an invalid state. Validity is determined by the `required` prop.
+         */
+        "invalid": boolean;
+        /**
           * The checkbox's name attribute.
          */
         "name": string;
@@ -225,6 +229,18 @@ export namespace Components {
           * Removes focus from the checkbox.
          */
         "removeFocus": () => Promise<void>;
+        /**
+          * Checks for validity and shows the browser's validation message if the control is invalid.
+         */
+        "reportValidity": () => Promise<boolean>;
+        /**
+          * Set to true to make the checkbox a required field.
+         */
+        "required": boolean;
+        /**
+          * Sets a custom validation message. If `message` is not empty, the field will be considered invalid.
+         */
+        "setCustomValidity": (message: string) => Promise<void>;
         /**
           * Sets focus on the checkbox.
          */
@@ -405,9 +421,13 @@ export namespace Components {
          */
         "getFormData": () => Promise<FormData>;
         /**
-          * Submits the form.
+          * Prevent the form from validating inputs before submitting.
          */
-        "submit": () => Promise<void>;
+        "novalidate": boolean;
+        /**
+          * Submits the form. If all controls are valid, the `slSubmit` event will be emitted and the promise will resolve with `true`. If any form control is invalid, the promise will resolve with `false` and no event will be emitted.
+         */
+        "submit": () => Promise<boolean>;
     }
     interface SlFormatBytes {
         /**
@@ -491,7 +511,7 @@ export namespace Components {
          */
         "inputmode": 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
         /**
-          * Set to true to indicate that the user input is invalid.
+          * This will be true when the control is in an invalid state. Validity is determined by props such as `type`, `required`, `minlength`, `maxlength`, and `pattern` using the browser's constraint validation API.
          */
         "invalid": boolean;
         /**
@@ -499,19 +519,19 @@ export namespace Components {
          */
         "label": string;
         /**
-          * The input's max attribute.
+          * The input's maximum value.
          */
         "max": number;
         /**
-          * The input's maxlength attribute.
+          * The maximum length of input that will be considered valid.
          */
         "maxlength": number;
         /**
-          * The input's min attribute.
+          * The input's minimum value.
          */
         "min": number;
         /**
-          * The input's minlength attribute.
+          * The minimum length of input that will be considered valid.
          */
         "minlength": number;
         /**
@@ -519,7 +539,7 @@ export namespace Components {
          */
         "name": string;
         /**
-          * The input's pattern attribute.
+          * A pattern to validate input against.
          */
         "pattern": string;
         /**
@@ -531,7 +551,7 @@ export namespace Components {
          */
         "placeholder": string;
         /**
-          * Set to true for a readonly input.
+          * Set to true to make the input readonly.
          */
         "readonly": boolean;
         /**
@@ -539,13 +559,21 @@ export namespace Components {
          */
         "removeFocus": () => Promise<void>;
         /**
-          * The input's required attribute.
+          * Checks for validity and shows the browser's validation message if the control is invalid.
+         */
+        "reportValidity": () => Promise<boolean>;
+        /**
+          * Set to true to make the checkbox a required field.
          */
         "required": boolean;
         /**
           * Selects all the text in the input.
          */
         "select": () => Promise<void>;
+        /**
+          * Sets a custom validation message. If `message` is not empty, the field will be considered invalid.
+         */
+        "setCustomValidity": (message: string) => Promise<void>;
         /**
           * Sets focus on the input.
          */
@@ -575,10 +603,6 @@ export namespace Components {
          */
         "type": 'email' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'url';
         /**
-          * Set to true to indicate that the user input is valid.
-         */
-        "valid": boolean;
-        /**
           * The input's value attribute.
          */
         "value": string;
@@ -601,7 +625,7 @@ export namespace Components {
     }
     interface SlMenuItem {
         /**
-          * Set to true to draw the menu item in an active state.
+          * Draws the menu in an active (i.e. or hover/focus), state to indicate the current menu selection. This is used in lieu of standard :hover and :focus states to prevent concurrent interactions from different devices, such as focusing with the keyboard and hovering with the mouse.
          */
         "active": boolean;
         /**
@@ -649,6 +673,10 @@ export namespace Components {
          */
         "disabled": boolean;
         /**
+          * This will be true when the control is in an invalid state. Validity in range inputs is determined by the message provided by the `setCustomValidity` method.
+         */
+        "invalid": boolean;
+        /**
           * The radio's name attribute.
          */
         "name": string;
@@ -656,6 +684,14 @@ export namespace Components {
           * Removes focus from the radio.
          */
         "removeFocus": () => Promise<void>;
+        /**
+          * Checks for validity and shows the browser's validation message if the control is invalid.
+         */
+        "reportValidity": () => Promise<boolean>;
+        /**
+          * Sets a custom validation message. If `message` is not empty, the field will be considered invalid.
+         */
+        "setCustomValidity": (message: string) => Promise<void>;
         /**
           * Sets focus on the radio.
          */
@@ -670,6 +706,10 @@ export namespace Components {
           * Set to true to disable the input.
          */
         "disabled": boolean;
+        /**
+          * This will be true when the control is in an invalid state. Validity in range inputs is determined by the message provided by the `setCustomValidity` method.
+         */
+        "invalid": boolean;
         /**
           * The input's max attribute.
          */
@@ -686,6 +726,10 @@ export namespace Components {
           * Removes focus from the input.
          */
         "removeFocus": () => Promise<void>;
+        /**
+          * Sets a custom validation message. If `message` is not empty, the field will be considered invalid.
+         */
+        "setCustomValidity": (message: string) => Promise<void>;
         /**
           * Sets focus on the input.
          */
@@ -741,6 +785,12 @@ export namespace Components {
          */
         "value": number;
     }
+    interface SlResponsiveEmbed {
+        /**
+          * The aspect ratio of the embedded media in the format of `width:height`, e.g. `16:9`, `4:3`, or `1:1`. Ratios not in this format will be ignored.
+         */
+        "aspectRatio": string;
+    }
     interface SlSelect {
         /**
           * Set to true to add a clear button when the select is populated.
@@ -755,7 +805,7 @@ export namespace Components {
          */
         "hoist": boolean;
         /**
-          * Set to true to indicate that the user input is invalid.
+          * This will be true when the control is in an invalid state. Validity is determined by the `required` prop.
          */
         "invalid": boolean;
         /**
@@ -783,17 +833,21 @@ export namespace Components {
          */
         "placeholder": string;
         /**
+          * Checks for validity and shows the browser's validation message if the control is invalid.
+         */
+        "reportValidity": () => Promise<boolean>;
+        /**
           * The select's required attribute.
          */
         "required": boolean;
         /**
+          * Sets a custom validation message. If `message` is not empty, the field will be considered invalid.
+         */
+        "setCustomValidity": (message: string) => Promise<void>;
+        /**
           * The select's size.
          */
         "size": 'small' | 'medium' | 'large';
-        /**
-          * Set to true to indicate that the user input is valid.
-         */
-        "valid": boolean;
         /**
           * The value of the control. This will be a string or an array depending on `multiple`.
          */
@@ -817,6 +871,10 @@ export namespace Components {
          */
         "disabled": boolean;
         /**
+          * This will be true when the control is in an invalid state. Validity is determined by the `required` prop.
+         */
+        "invalid": boolean;
+        /**
           * The switch's name attribute.
          */
         "name": string;
@@ -824,6 +882,18 @@ export namespace Components {
           * Removes focus from the switch.
          */
         "removeFocus": () => Promise<void>;
+        /**
+          * Checks for validity and shows the browser's validation message if the control is invalid.
+         */
+        "reportValidity": () => Promise<boolean>;
+        /**
+          * Set to true to make the switch a required field.
+         */
+        "required": boolean;
+        /**
+          * Sets a custom validation message. If `message` is not empty, the field will be considered invalid.
+         */
+        "setCustomValidity": (message: string) => Promise<void>;
         /**
           * Sets focus on the switch.
          */
@@ -919,7 +989,7 @@ export namespace Components {
          */
         "inputmode": 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
         /**
-          * Set to true to indicate that the user input is invalid.
+          * This will be true when the control is in an invalid state. Validity is determined by props such as `required`, `minlength`, and `maxlength` using the browser's constraint validation API.
          */
         "invalid": boolean;
         /**
@@ -927,9 +997,13 @@ export namespace Components {
          */
         "label": string;
         /**
-          * The textarea's maxlength attribute.
+          * The maximum length of input that will be considered valid.
          */
         "maxlength": number;
+        /**
+          * The minimum length of input that will be considered valid.
+         */
+        "minlength": number;
         /**
           * The textarea's name attribute.
          */
@@ -947,6 +1021,10 @@ export namespace Components {
          */
         "removeFocus": () => Promise<void>;
         /**
+          * Checks for validity and shows the browser's validation message if the control is invalid.
+         */
+        "reportValidity": () => Promise<boolean>;
+        /**
           * The textarea's required attribute.
          */
         "required": boolean;
@@ -962,6 +1040,10 @@ export namespace Components {
           * Selects all the text in the input.
          */
         "select": () => Promise<void>;
+        /**
+          * Sets a custom validation message. If `message` is not empty, the field will be considered invalid.
+         */
+        "setCustomValidity": (message: string) => Promise<void>;
         /**
           * Sets focus on the textarea.
          */
@@ -979,9 +1061,9 @@ export namespace Components {
          */
         "size": 'small' | 'medium' | 'large';
         /**
-          * Set to true to indicate that the user input is valid.
+          * The textarea's spellcheck attribute.
          */
-        "valid": boolean;
+        "spellcheck": boolean;
         /**
           * The textarea's value attribute.
          */
@@ -1206,6 +1288,12 @@ declare global {
         prototype: HTMLSlRatingElement;
         new (): HTMLSlRatingElement;
     };
+    interface HTMLSlResponsiveEmbedElement extends Components.SlResponsiveEmbed, HTMLStencilElement {
+    }
+    var HTMLSlResponsiveEmbedElement: {
+        prototype: HTMLSlResponsiveEmbedElement;
+        new (): HTMLSlResponsiveEmbedElement;
+    };
     interface HTMLSlSelectElement extends Components.SlSelect, HTMLStencilElement {
     }
     var HTMLSlSelectElement: {
@@ -1295,6 +1383,7 @@ declare global {
         "sl-radio": HTMLSlRadioElement;
         "sl-range": HTMLSlRangeElement;
         "sl-rating": HTMLSlRatingElement;
+        "sl-responsive-embed": HTMLSlResponsiveEmbedElement;
         "sl-select": HTMLSlSelectElement;
         "sl-skeleton": HTMLSlSkeletonElement;
         "sl-spinner": HTMLSlSpinnerElement;
@@ -1516,6 +1605,10 @@ declare namespace LocalJSX {
          */
         "indeterminate"?: boolean;
         /**
+          * This will be true when the control is in an invalid state. Validity is determined by the `required` prop.
+         */
+        "invalid"?: boolean;
+        /**
           * The checkbox's name attribute.
          */
         "name"?: string;
@@ -1531,6 +1624,10 @@ declare namespace LocalJSX {
           * Emitted when the control gains focus.
          */
         "onSlFocus"?: (event: CustomEvent<any>) => void;
+        /**
+          * Set to true to make the checkbox a required field.
+         */
+        "required"?: boolean;
         /**
           * The checkbox's value attribute.
          */
@@ -1759,7 +1856,11 @@ declare namespace LocalJSX {
     }
     interface SlForm {
         /**
-          * Emitted when the form is submitted.
+          * Prevent the form from validating inputs before submitting.
+         */
+        "novalidate"?: boolean;
+        /**
+          * Emitted when the form is submitted. This event will not be emitted if any form control inside of it is in an invalid state, unless the form has the `novalidate` attribute. Note that there is never a need to prevent this event, since it doen't send a GET or POST request like native forms. To "prevent" submission, use a conditional around the XHR request you use to submit the form's data with.
          */
         "onSlSubmit"?: (event: CustomEvent<any>) => void;
     }
@@ -1857,7 +1958,7 @@ declare namespace LocalJSX {
          */
         "inputmode"?: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
         /**
-          * Set to true to indicate that the user input is invalid.
+          * This will be true when the control is in an invalid state. Validity is determined by props such as `type`, `required`, `minlength`, `maxlength`, and `pattern` using the browser's constraint validation API.
          */
         "invalid"?: boolean;
         /**
@@ -1865,19 +1966,19 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
-          * The input's max attribute.
+          * The input's maximum value.
          */
         "max"?: number;
         /**
-          * The input's maxlength attribute.
+          * The maximum length of input that will be considered valid.
          */
         "maxlength"?: number;
         /**
-          * The input's min attribute.
+          * The input's minimum value.
          */
         "min"?: number;
         /**
-          * The input's minlength attribute.
+          * The minimum length of input that will be considered valid.
          */
         "minlength"?: number;
         /**
@@ -1905,7 +2006,7 @@ declare namespace LocalJSX {
          */
         "onSlInput"?: (event: CustomEvent<any>) => void;
         /**
-          * The input's pattern attribute.
+          * A pattern to validate input against.
          */
         "pattern"?: string;
         /**
@@ -1917,11 +2018,11 @@ declare namespace LocalJSX {
          */
         "placeholder"?: string;
         /**
-          * Set to true for a readonly input.
+          * Set to true to make the input readonly.
          */
         "readonly"?: boolean;
         /**
-          * The input's required attribute.
+          * Set to true to make the checkbox a required field.
          */
         "required"?: boolean;
         /**
@@ -1940,10 +2041,6 @@ declare namespace LocalJSX {
           * The input's type.
          */
         "type"?: 'email' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'url';
-        /**
-          * Set to true to indicate that the user input is valid.
-         */
-        "valid"?: boolean;
         /**
           * The input's value attribute.
          */
@@ -1967,7 +2064,7 @@ declare namespace LocalJSX {
     }
     interface SlMenuItem {
         /**
-          * Set to true to draw the menu item in an active state.
+          * Draws the menu in an active (i.e. or hover/focus), state to indicate the current menu selection. This is used in lieu of standard :hover and :focus states to prevent concurrent interactions from different devices, such as focusing with the keyboard and hovering with the mouse.
          */
         "active"?: boolean;
         /**
@@ -2023,6 +2120,10 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
+          * This will be true when the control is in an invalid state. Validity in range inputs is determined by the message provided by the `setCustomValidity` method.
+         */
+        "invalid"?: boolean;
+        /**
           * The radio's name attribute.
          */
         "name"?: string;
@@ -2048,6 +2149,10 @@ declare namespace LocalJSX {
           * Set to true to disable the input.
          */
         "disabled"?: boolean;
+        /**
+          * This will be true when the control is in an invalid state. Validity in range inputs is determined by the message provided by the `setCustomValidity` method.
+         */
+        "invalid"?: boolean;
         /**
           * The input's max attribute.
          */
@@ -2119,6 +2224,12 @@ declare namespace LocalJSX {
          */
         "value"?: number;
     }
+    interface SlResponsiveEmbed {
+        /**
+          * The aspect ratio of the embedded media in the format of `width:height`, e.g. `16:9`, `4:3`, or `1:1`. Ratios not in this format will be ignored.
+         */
+        "aspectRatio"?: string;
+    }
     interface SlSelect {
         /**
           * Set to true to add a clear button when the select is populated.
@@ -2133,7 +2244,7 @@ declare namespace LocalJSX {
          */
         "hoist"?: boolean;
         /**
-          * Set to true to indicate that the user input is invalid.
+          * This will be true when the control is in an invalid state. Validity is determined by the `required` prop.
          */
         "invalid"?: boolean;
         /**
@@ -2181,10 +2292,6 @@ declare namespace LocalJSX {
          */
         "size"?: 'small' | 'medium' | 'large';
         /**
-          * Set to true to indicate that the user input is valid.
-         */
-        "valid"?: boolean;
-        /**
           * The value of the control. This will be a string or an array depending on `multiple`.
          */
         "value"?: string | Array<string>;
@@ -2207,6 +2314,10 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
+          * This will be true when the control is in an invalid state. Validity is determined by the `required` prop.
+         */
+        "invalid"?: boolean;
+        /**
           * The switch's name attribute.
          */
         "name"?: string;
@@ -2222,6 +2333,10 @@ declare namespace LocalJSX {
           * Emitted when the control gains focus.
          */
         "onSlFocus"?: (event: CustomEvent<any>) => void;
+        /**
+          * Set to true to make the switch a required field.
+         */
+        "required"?: boolean;
         /**
           * The switch's value attribute.
          */
@@ -2313,7 +2428,7 @@ declare namespace LocalJSX {
          */
         "inputmode"?: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
         /**
-          * Set to true to indicate that the user input is invalid.
+          * This will be true when the control is in an invalid state. Validity is determined by props such as `required`, `minlength`, and `maxlength` using the browser's constraint validation API.
          */
         "invalid"?: boolean;
         /**
@@ -2321,9 +2436,13 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
-          * The textarea's maxlength attribute.
+          * The maximum length of input that will be considered valid.
          */
         "maxlength"?: number;
+        /**
+          * The minimum length of input that will be considered valid.
+         */
+        "minlength"?: number;
         /**
           * The textarea's name attribute.
          */
@@ -2369,9 +2488,9 @@ declare namespace LocalJSX {
          */
         "size"?: 'small' | 'medium' | 'large';
         /**
-          * Set to true to indicate that the user input is valid.
+          * The textarea's spellcheck attribute.
          */
-        "valid"?: boolean;
+        "spellcheck"?: boolean;
         /**
           * The textarea's value attribute.
          */
@@ -2463,6 +2582,7 @@ declare namespace LocalJSX {
         "sl-radio": SlRadio;
         "sl-range": SlRange;
         "sl-rating": SlRating;
+        "sl-responsive-embed": SlResponsiveEmbed;
         "sl-select": SlSelect;
         "sl-skeleton": SlSkeleton;
         "sl-spinner": SlSpinner;
@@ -2507,6 +2627,7 @@ declare module "@stencil/core" {
             "sl-radio": LocalJSX.SlRadio & JSXBase.HTMLAttributes<HTMLSlRadioElement>;
             "sl-range": LocalJSX.SlRange & JSXBase.HTMLAttributes<HTMLSlRangeElement>;
             "sl-rating": LocalJSX.SlRating & JSXBase.HTMLAttributes<HTMLSlRatingElement>;
+            "sl-responsive-embed": LocalJSX.SlResponsiveEmbed & JSXBase.HTMLAttributes<HTMLSlResponsiveEmbedElement>;
             "sl-select": LocalJSX.SlSelect & JSXBase.HTMLAttributes<HTMLSlSelectElement>;
             "sl-skeleton": LocalJSX.SlSkeleton & JSXBase.HTMLAttributes<HTMLSlSkeletonElement>;
             "sl-spinner": LocalJSX.SlSpinner & JSXBase.HTMLAttributes<HTMLSlSpinnerElement>;

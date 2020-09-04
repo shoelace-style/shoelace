@@ -188,3 +188,12 @@ When a component relies on the presence of a slot to do something, don't assume 
 - Don't conditionally render any slots — always use `hidden` or `display: none` so the slot exists in the DOM
 
 See the source of card, dialog, or drawer for examples.
+
+### Form Controls
+
+Form controls should support validation through the following conventions:
+
+- All form controls must an `invalid` prop that reflects its validity
+- All form controls must have a `setCustomValidity()` method so the user can set a custom validation message
+- All form controls must have a `reportValidity()` method that reports its validity during form submission
+- All form controls should mirror their native validation attributes such as `required`, `pattern`, `minlength`, `maxlength`, etc. when possible

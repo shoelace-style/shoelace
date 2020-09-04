@@ -98,35 +98,37 @@
 
     // Horizontal resizing
     hook.doneEach(() => {
-      [...document.querySelectorAll('.code-block__preview')].map(resizeElement => {
-        const resizer = resizeElement.querySelector('.code-block__resizer');
+      [...document.querySelectorAll('.code-block__preview')].map(preview => {
+        const resizer = preview.querySelector('.code-block__resizer');
         let startX;
         let startY;
         let startWidth;
         let startHeight;
 
-        const initDrag = event => {
+        const dragStart = event => {
           startX = event.clientX;
           startY = event.clientY;
-          startWidth = parseInt(document.defaultView.getComputedStyle(resizeElement).width, 10);
-          startHeight = parseInt(document.defaultView.getComputedStyle(resizeElement).height, 10);
-          document.documentElement.addEventListener('mousemove', doDrag, false);
-          document.documentElement.addEventListener('mouseup', stopDrag, false);
+          startWidth = parseInt(document.defaultView.getComputedStyle(preview).width, 10);
+          startHeight = parseInt(document.defaultView.getComputedStyle(preview).height, 10);
+          preview.classList.add('code-block__preview--dragging');
+          document.documentElement.addEventListener('mousemove', dragMove, false);
+          document.documentElement.addEventListener('mouseup', dragStop, false);
         };
 
-        const doDrag = event => {
+        const dragMove = event => {
           setWidth(startWidth + event.clientX - startX);
         };
 
-        const stopDrag = event => {
-          document.documentElement.removeEventListener('mousemove', doDrag, false);
-          document.documentElement.removeEventListener('mouseup', stopDrag, false);
+        const dragStop = event => {
+          preview.classList.remove('code-block__preview--dragging');
+          document.documentElement.removeEventListener('mousemove', dragMove, false);
+          document.documentElement.removeEventListener('mouseup', dragStop, false);
         };
 
         const handleKeyDown = event => {
           if (['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) {
-            const currentWidth = resizeElement.clientWidth;
-            const maxWidth = resizeElement.parentElement.clientWidth;
+            const currentWidth = preview.clientWidth;
+            const maxWidth = preview.parentElement.clientWidth;
             const incr = event.shiftKey ? 100 : 10;
 
             event.preventDefault();
@@ -139,16 +141,16 @@
         };
 
         const setWidth = width => {
-          resizeElement.style.width = width + 'px';
+          preview.style.width = width + 'px';
 
-          const totalWidth = resizeElement.parentElement.clientWidth;
-          const currentWidth = resizeElement.clientWidth;
+          const totalWidth = preview.parentElement.clientWidth;
+          const currentWidth = preview.clientWidth;
           const valuenow = Math.round((currentWidth / totalWidth) * 100);
 
           resizer.setAttribute('aria-valuenow', valuenow);
         };
 
-        resizer.addEventListener('mousedown', initDrag);
+        resizer.addEventListener('mousedown', dragStart);
         resizer.addEventListener('keydown', handleKeyDown);
       }, false);
     });

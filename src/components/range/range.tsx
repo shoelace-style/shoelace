@@ -32,6 +32,12 @@ export class Range {
   /** Set to true to disable the input. */
   @Prop() disabled = false;
 
+  /**
+   * This will be true when the control is in an invalid state. Validity in range inputs is determined by the message
+   * provided by the `setCustomValidity` method.
+   */
+  @Prop({ mutable: true, reflect: true }) invalid = false;
+
   /** The input's min attribute. */
   @Prop() min = 0;
 
@@ -84,6 +90,13 @@ export class Range {
   @Method()
   async removeFocus() {
     this.input.blur();
+  }
+
+  /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
+  @Method()
+  async setCustomValidity(message: string) {
+    this.input.setCustomValidity(message);
+    this.invalid = !this.input.checkValidity();
   }
 
   handleInput() {

@@ -10,6 +10,8 @@ Inputs collect data from the user.
 
 ?> This component doesn't work with standard forms. Use [`<sl-form>`](/components/form.md) instead.
 
+?> Please refer to the section on [form control validation](/components/form?id=form-control-validation) to learn how to do client-side validation.
+
 ## Examples
 
 ### Placeholders
@@ -114,22 +116,6 @@ Add descriptive help text to an input with the `help-text` slot.
 ```html preview
 <sl-input label="Nickname">
   <div slot="help-text">What would you like people to call you?</div>
-</sl-input>
-```
-
-### Validation
-
-Show a valid or invalid state by setting the `valid` and `invalid` attributes, respectively. Help text can be used to provide feedback for validation and will be styled accordingly.
-
-```html preview
-<sl-input label="Valid" valid>
-  <div slot="help-text">This is a valid input</div>
-</sl-input>
-
-<br>
-
-<sl-input label="Invalid" invalid>
-  <div slot="help-text">This is an invalid input</div>
 </sl-input>
 ```
 
