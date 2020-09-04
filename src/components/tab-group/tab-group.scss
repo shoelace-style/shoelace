@@ -61,9 +61,12 @@
 .tab-group--top {
   flex-direction: column;
 
+  .tab-group__nav-container {
+    order: 1;
+  }
+
   .tab-group__nav {
     display: flex;
-    order: 1;
     overflow-x: auto;
     @include hide-scrollbar();
   }
@@ -92,9 +95,12 @@
 .tab-group--bottom {
   flex-direction: column;
 
+  .tab-group__nav-container {
+    order: 2;
+  }
+
   .tab-group__nav {
     display: flex;
-    order: 2;
     overflow-x: auto;
     @include hide-scrollbar();
   }
@@ -123,7 +129,7 @@
 .tab-group--left {
   flex-direction: row;
 
-  .tab-group__nav {
+  .tab-group__nav-container {
     order: 1;
   }
 
@@ -151,7 +157,7 @@
 .tab-group--right {
   flex-direction: row;
 
-  .tab-group__nav {
+  .tab-group__nav-container {
     order: 2;
   }
 

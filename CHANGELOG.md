@@ -9,6 +9,7 @@
 - Fixed a bug where `slBlur` and `slFocus` were emitted twice in `sl-select`
 - Fixed a bug where clicking on `sl-menu` wouldn't focus it
 - Fixed a bug in the popover utility where `onAfterShow` would fire too soon
+- Fixed a bug where `bottom` and `right` placements didn't render properly in `sl-tab-group`
 - Improved keyboard logic in `sl-dropdown`, `sl-menu`, and `sl-select`
 - Updated `sl-animation` to stable
 - Updated to Stencil 2.0 (you may need to purge `node_modules` and run `npm install` after pulling)
