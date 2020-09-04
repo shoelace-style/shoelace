@@ -198,7 +198,7 @@ export namespace Components {
     }
     interface SlButtonGroup {
         /**
-          * A label to use for the button groups `aria-label` attribute.
+          * A label to use for the button group's `aria-label` attribute.
          */
         "label": string;
     }
@@ -1601,7 +1601,7 @@ declare namespace LocalJSX {
     }
     interface SlButtonGroup {
         /**
-          * A label to use for the button groups `aria-label` attribute.
+          * A label to use for the button group's `aria-label` attribute.
          */
         "label"?: string;
     }

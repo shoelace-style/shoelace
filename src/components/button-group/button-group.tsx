@@ -17,7 +17,7 @@ import { Component, Prop, h } from '@stencil/core';
 export class ButtonGroup {
   buttonGroup: HTMLElement;
 
-  /** A label to use for the button groups `aria-label` attribute. */
+  /** A label to use for the button group's `aria-label` attribute. */
   @Prop() label = '';
 
   connectedCallback() {
