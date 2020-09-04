@@ -268,6 +268,10 @@ export namespace Components {
          */
         "inline": boolean;
         /**
+          * The input's name attribute.
+         */
+        "name": string;
+        /**
           * Whether to show the opacity slider.
          */
         "opacity": boolean;
@@ -1650,6 +1654,10 @@ declare namespace LocalJSX {
           * Set to true to render the color picker inline rather than inside a dropdown.
          */
         "inline"?: boolean;
+        /**
+          * The input's name attribute.
+         */
+        "name"?: string;
         /**
           * Emitted after the color picker closes and all transitions are complete.
          */

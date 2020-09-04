@@ -2,10 +2,12 @@
 
 ## Next
 
+- Added `name` prop to `sl-color-picker`
 - Fixed a bug where swapping an animated element wouldn't restart the animation in `sl-animation`
 - Fixed a bug where the cursor was incorrect when `sl-select` was disabled
 - Fixed a bug where `slBlur` and `slFocus` were emitted twice in `sl-select`
 - Fixed a bug where clicking on `sl-menu` wouldn't focus it
+- Fixed a bug where `sl-color-picker` wasn't submitted with forms
 - Improved keyboard logic in `sl-dropdown`, `sl-menu`, and `sl-select`
 - Updated `sl-animation` to stable
 - Updated to Stencil 2.0 (you may need to purge `node_modules` and run `npm install` after pulling)

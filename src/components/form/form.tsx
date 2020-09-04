@@ -114,6 +114,11 @@ export class Form {
           el.name && el.checked && !el.disabled ? formData.append(el.name, el.value) : null
       },
       {
+        tag: 'sl-color-picker',
+        serialize: (el: HTMLSlCheckboxElement, formData) =>
+          el.name && !el.disabled ? formData.append(el.name, el.value) : null
+      },
+      {
         tag: 'sl-input',
         serialize: (el: HTMLSlInputElement, formData) =>
           el.name && !el.disabled ? formData.append(el.name, el.value) : null,

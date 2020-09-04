@@ -61,6 +61,9 @@ export class ColorPicker {
   /** When `inline` is true, this determines the size of the color picker's trigger. */
   @Prop() size: 'small' | 'medium' | 'large' = 'medium';
 
+  /** The input's name attribute. */
+  @Prop({ reflect: true }) name = '';
+
   /** Set to true to disable the color picker. */
   @Prop() disabled = false;
 
@@ -690,6 +693,7 @@ export class ColorPicker {
               part="input"
               size="small"
               type="text"
+              name={this.name}
               pattern="[a-fA-F\d]+"
               value={this.textInputValue}
               disabled={this.disabled}
