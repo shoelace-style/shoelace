@@ -1,6 +1,6 @@
 # Changelog
 
-## Next
+## 2.0.0-beta.18
 
 - Added `name` and `invalid` prop to `sl-color-picker`
 - Added support for form submission and validation to `sl-color-picker`
