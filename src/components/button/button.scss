@@ -34,6 +34,11 @@
   &[disabled] {
     opacity: 0.5;
     cursor: not-allowed;
+
+    // When disabled, prevent mouse events from bubbling up
+    * {
+      pointer-events: none;
+    }
   }
 
   // Clicks on icons shouldn't prevent the button from gaining focus

@@ -3,6 +3,7 @@
 ## Next
 
 - Added `input`, `label`, `prefix`, `clear-button`, `suffix`, `help-text` exported parts to `sl-select` to make the input customizable
+- Fixed bug where mouse events would bubble up when `sl-button` was disabled, causing tooltips to erroneously appear
 
 ## 2.0.0-beta.18
 
