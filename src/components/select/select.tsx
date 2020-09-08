@@ -15,11 +15,16 @@ let id = 0;
  * @part form-control - The form control that wraps the label and the input.
  * @part help-text - The select's help text.
  * @part icon - The select's icon.
- * @part input - The select's input control.
  * @part label - The select's label.
  * @part menu - The select menu, a <sl-menu> element.
  * @part tag - The multiselect option, a <sl-tag> element.
  * @part tags - The container in which multiselect options are rendered.
+ * @part input - The select's input control, exported from <sl-input>.
+ * @part label - The select's label, exported from <sl-input>.
+ * @part prefix - The select's prefix, exported from <sl-input>.
+ * @part clear-button - The input's clear button, exported from <sl-input>.
+ * @part suffix - The select's suffix, exported from <sl-input>.
+ * @part help-text - The select's help text, exported from <sl-input>.
  */
 
 @Component({
@@ -393,7 +398,7 @@ export class Select {
         >
           <sl-input
             slot="trigger"
-            part="input"
+            exportparts="input, label, prefix, clear-button, suffix, help-text"
             ref={el => (this.input = el)}
             id={this.inputId}
             class="select__input"

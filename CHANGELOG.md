@@ -1,5 +1,9 @@
 # Changelog
 
+## Next
+
+- Added `input`, `label`, `prefix`, `clear-button`, `suffix`, `help-text` exported parts to `sl-select` to make the input customizable
+
 ## 2.0.0-beta.18
 
 - Added `name` and `invalid` prop to `sl-color-picker`
