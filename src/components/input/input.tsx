@@ -229,15 +229,13 @@ export class Input {
   }
 
   handleClearClick(event: MouseEvent) {
-    if (this.input.value !== '') {
-      this.input.value = '';
-      this.input.dispatchEvent(new window.Event('input', { bubbles: true }));
-      this.input.dispatchEvent(new window.Event('change', { bubbles: true }));
-    }
+    this.value = '';
+    this.slClear.emit();
+    this.slInput.emit();
+    this.slChange.emit();
+    this.input.focus();
 
     event.stopPropagation();
-    this.slClear.emit();
-    this.input.focus();
   }
 
   handleMouseDown(event: MouseEvent) {
