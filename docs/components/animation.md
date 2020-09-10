@@ -149,8 +149,10 @@ Supply your own [keyframe formats](https://developer.mozilla.org/en-US/docs/Web/
 <script>
   const animation = document.querySelector('.animation-keyframes sl-animation');
   animation.keyframes = [
-    { transform: 'translateY(0) rotateX(0)', transformOrigin: '50% 50%' }, 
-    { transform: 'translateY(-100%) rotateX(-180deg)', transformOrigin: '50% 100%' },
+    { transform: 'scale(1)', opacity: 1 },
+    { transform: 'scale(.5)', opacity: .5 },
+    { transform: 'scale(.667)', opacity: .667 },
+    { transform: 'scale(.6)', opacity: .6 }
   ];
 </script>
 
