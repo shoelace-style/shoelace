@@ -111,6 +111,7 @@ export class Dropdown {
     this.handlePanelSelect = this.handlePanelSelect.bind(this);
     this.handleTriggerClick = this.handleTriggerClick.bind(this);
     this.handleTriggerKeyDown = this.handleTriggerKeyDown.bind(this);
+    this.handleTriggerKeyUp = this.handleTriggerKeyUp.bind(this);
   }
 
   componentDidLoad() {
@@ -303,6 +304,13 @@ export class Dropdown {
     }
   }
 
+  handleTriggerKeyUp(event: KeyboardEvent) {
+    // Prevent space from triggering a click event in Firefox
+    if (event.key === ' ') {
+      event.preventDefault();
+    }
+  }
+
   render() {
     return (
       <div
@@ -321,6 +329,7 @@ export class Dropdown {
           ref={el => (this.trigger = el)}
           onClick={this.handleTriggerClick}
           onKeyDown={this.handleTriggerKeyDown}
+          onKeyUp={this.handleTriggerKeyUp}
         >
           <slot name="trigger" />
         </span>
