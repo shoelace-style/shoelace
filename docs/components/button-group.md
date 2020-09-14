@@ -179,7 +179,7 @@ Create interactive toolbars with button groups.
 
 <style>
   .button-group-toolbar sl-button-group:not(:last-of-type) {
-    margin-right: .5rem;
+    margin-right: var(--sl-spacing-x-small);
   }
 </style>
 ```
