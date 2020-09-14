@@ -5,6 +5,7 @@
 - Added `input`, `label`, `prefix`, `clear-button`, `suffix`, `help-text` exported parts to `sl-select` to make the input customizable
 - Fixed a bug where mouse events would bubble up when `sl-button` was disabled, causing tooltips to erroneously appear
 - Fixed a bug where pressing space would open and immediately close `sl-dropdown` panels in Firefox
+- Fixed a bug where `sl-tooltip` would throw an error on init
 - Fixed buggy custom keyframes animation example
 - Refactored clear logic in `sl-input`
 

@@ -202,7 +202,7 @@ export class Tooltip {
     const oldTarget = this.target;
     const newTarget = this.getTarget();
 
-    if (newTarget !== oldTarget) {
+    if (oldTarget && newTarget !== oldTarget) {
       oldTarget.removeAttribute('aria-describedby');
       newTarget.setAttribute('aria-describedby', this.componentId);
     }
