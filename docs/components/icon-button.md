@@ -24,6 +24,33 @@ Icon buttons inherit their parent element's `font-size`.
 <sl-icon-button name="pencil" style="font-size: 2.5rem;"></sl-icon-button>
 ```
 
+### Colors
+
+Icon buttons are designed to have a uniform appearance, so their color is not inherited. However, you can still customize them by styling the `base` part.
+
+```html preview
+<div class="icon-button-color">
+  <sl-icon-button name="type-bold"></sl-icon-button>
+  <sl-icon-button name="type-italic"></sl-icon-button>
+  <sl-icon-button name="type-underline"></sl-icon-button>
+</div>
+
+<style>
+  .icon-button-color sl-icon-button::part(base) {
+    color: #b00091;
+  }
+  
+  .icon-button-color sl-icon-button::part(base):hover,
+  .icon-button-color sl-icon-button::part(base):focus {
+    color: #c913aa;
+  }
+
+  .icon-button-color sl-icon-button::part(base):active {
+    color: #960077;
+  }
+</style>
+```
+
 ### Icon Button with Tooltip
 
 Wrap a tooltip around an icon button to provide contextual information to the user.
