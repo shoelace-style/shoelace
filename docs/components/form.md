@@ -71,7 +71,7 @@ Shoelace forms don't make use of `action` and `method` attributes and they don't
 
 Client-side validation can be enabled through the browser's [constraint validations API](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation) for many form controls. You can enable it using props such as `required`, `pattern`, `minlength`, and `maxlength`. As the user interacts with the form control, the `invalid` attribute will reflect its validity based on its current value and the constraints that have been defined.
 
-When a form control is invalid, the containing form will not be submitted. Instead, the browser will show the user a relevant error message. If you don't want to use cilent-side validation, you can suppress this behavior by adding `novalidate` to the `<sl-form>` element.
+When a form control is invalid, the containing form will not be submitted. Instead, the browser will show the user a relevant error message. If you don't want to use client-side validation, you can suppress this behavior by adding `novalidate` to the `<sl-form>` element.
 
 All form controls support validation, but not all validation props are available for every component. Refer to a component's documentation to see which validation props it supports.
 
