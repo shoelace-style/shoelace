@@ -100,7 +100,7 @@ To make the drawer slide in from the bottom, set the `placement` attribute to `b
 
 ### Contained to an Element
 
-By default, the drawer slides out of its [containing block](https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#Identifying_the_containing_block), which is usually the viewport. To make the drawer slide out of its parent element, set this prop and add `position: relative` to the parent.
+By default, the drawer slides out of its [containing block](https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#Identifying_the_containing_block), which is usually the viewport. To make the drawer slide out of its parent element, add the `contained` prop and `position: relative` to the parent.
 
 ```html preview
 <div
