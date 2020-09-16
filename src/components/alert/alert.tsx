@@ -14,7 +14,6 @@ import { Component, Element, Event, EventEmitter, Host, Method, Prop, Watch, h }
  */
 
 const stack = Object.assign(document.createElement('div'), { className: 'sl-toast-stack' });
-stack.dataset.placement = 'top';
 
 @Component({
   tag: 'sl-alert',
@@ -39,8 +38,8 @@ export class Alert {
 
   /**
    * When true, the alert will be shown as a "toast" notification. In this case, the alert will be hoisted to a stack
-   * and removed from the DOM when closed. By storing a reference to the alert element, you can reuse it by calling
-   * `alert.show()` even after it's removed from the DOM.
+   * and removed from the DOM when closed. By storing a reference to the alert, you can reuse it by calling
+   * `alert.show()` even after it has been removed from the DOM.
    */
   @Prop() toast = false;
 
@@ -203,6 +202,8 @@ export class Alert {
             'alert--danger': this.type === 'danger'
           }}
           role="alert"
+          aria-live="assertive"
+          aria-atomic="true"
           aria-hidden={!this.open}
           onMouseMove={this.handleMouseMove}
           onTransitionEnd={this.handleTransitionEnd}

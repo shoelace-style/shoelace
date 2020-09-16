@@ -28,7 +28,7 @@ export namespace Components {
          */
         "show": () => Promise<void>;
         /**
-          * When true, the alert will be shown as a "toast" notification. In this case, the alert will be hoisted to a stack and removed from the DOM when closed. By storing a reference to the alert element, you can reuse it by calling `alert.show()` even after it's removed from the DOM.
+          * When true, the alert will be shown as a "toast" notification. In this case, the alert will be hoisted to a stack and removed from the DOM when closed. By storing a reference to the alert, you can reuse it by calling `alert.show()` even after it has been removed from the DOM.
          */
         "toast": boolean;
         /**
@@ -1451,7 +1451,7 @@ declare namespace LocalJSX {
          */
         "open"?: boolean;
         /**
-          * When true, the alert will be shown as a "toast" notification. In this case, the alert will be hoisted to a stack and removed from the DOM when closed. By storing a reference to the alert element, you can reuse it by calling `alert.show()` even after it's removed from the DOM.
+          * When true, the alert will be shown as a "toast" notification. In this case, the alert will be hoisted to a stack and removed from the DOM when closed. By storing a reference to the alert, you can reuse it by calling `alert.show()` even after it has been removed from the DOM.
          */
         "toast"?: boolean;
         /**
