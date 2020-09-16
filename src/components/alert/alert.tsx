@@ -169,8 +169,7 @@ export class Alert {
     this.host.remove();
 
     // Remove the stack from the DOM when there are no more alerts
-    const openAlerts = [...stack.querySelectorAll('sl-alert')].filter((el: HTMLSlAlertElement) => el.open === true);
-    if (openAlerts.length === 0) {
+    if (stack.querySelector('sl-alert') === null) {
       stack.remove();
     }
   }
