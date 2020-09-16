@@ -12,7 +12,7 @@ export namespace Components {
          */
         "closable": boolean;
         /**
-          * The length of time, in milliseconds, the alert will show before closing itself.
+          * The length of time, in milliseconds, the alert will show before closing itself. If the user interacts with the alert before it closes (e.g. moves the mouse over it), the duration will restart.
          */
         "duration": number;
         /**
@@ -1427,7 +1427,7 @@ declare namespace LocalJSX {
          */
         "closable"?: boolean;
         /**
-          * The length of time, in milliseconds, the alert will show before closing itself.
+          * The length of time, in milliseconds, the alert will show before closing itself. If the user interacts with the alert before it closes (e.g. moves the mouse over it), the duration will restart.
          */
         "duration"?: number;
         /**

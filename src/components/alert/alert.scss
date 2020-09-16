@@ -2,11 +2,13 @@
 
 /**
  * @prop --box-shadow: The alert's box shadow.
- * @prop --toast-spacing: The spacing to use when alerts are stacked as "toast" notifications.
+ * @prop --toast-spacing: The spacing to use when the alert is shown as a toast notification.
+ * @prop --toast-width: The width of the alert when shown as a toast notification.
  */
 :host {
   --box-shadow: none;
-  --stack-spacing: var(--sl-spacing-medium);
+  --toast-spacing: var(--sl-spacing-medium);
+  --toast-width: 28rem;
 
   display: block;
 
@@ -35,10 +37,10 @@
 }
 
 .alert--toast {
-  width: 28rem;
-  max-width: calc(100% - var(--stack-spacing) * 2);
+  width: var(--toast-width);
+  max-width: calc(100% - var(--toast-spacing) * 2);
   box-shadow: var(--sl-shadow-large);
-  margin: var(--stack-spacing);
+  margin: var(--toast-spacing);
 }
 
 .alert--open {

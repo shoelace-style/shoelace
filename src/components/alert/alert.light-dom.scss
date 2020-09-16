@@ -1,49 +1,9 @@
-// :root {
-//   --width: 28rem;
-//   --spacing: var(--sl-spacing-medium);
-// }
-
-// .sl-alert-stack {
-//   position: fixed;
-//   z-index: var(--sl-z-index-toast);
-//   width: var(--width);
-//   max-width: 100%;
-//   max-height: 100%;
-//   overflow: auto;
-//   padding: 0 var(--spacing);
-
-//   sl-alert {
-//     --box-shadow: var(--sl-shadow-large);
-//     margin: var(--spacing) 0;
-//   }
-// }
-
-// .sl-alert-stack[data-placement='top-start'] {
-//   top: 0;
-//   left: 0;
-// }
-
-// .sl-alert-stack[data-placement='top'] {
-//   top: 0;
-//   left: calc(50% - var(--width) / 2);
-// }
-
-// .sl-alert-stack[data-placement='top-end'] {
-//   top: 0;
-//   right: 0;
-// }
-
-// .sl-alert-stack[data-placement='bottom-start'] {
-//   bottom: 0;
-//   left: 0;
-// }
-
-// .sl-alert-stack[data-placement='bottom'] {
-//   bottom: 0;
-//   left: calc(50% - var(--width) / 2);
-// }
-
-// .sl-alert-stack[data-placement='bottom-end'] {
-//   bottom: 0;
-//   right: 0;
-// }
+.sl-toast-stack {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: var(--sl-z-index-toast);
+  max-width: 100%;
+  max-height: 100%;
+  overflow: auto;
+}

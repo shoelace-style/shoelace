@@ -13,7 +13,8 @@ import { Component, Element, Event, EventEmitter, Host, Method, Prop, Watch, h }
  * @part close-button - The close button.
  */
 
-const stack = Object.assign(document.createElement('div'), { className: 'sl-alert-stack' });
+const stack = Object.assign(document.createElement('div'), { className: 'sl-toast-stack' });
+stack.dataset.placement = 'top';
 
 @Component({
   tag: 'sl-alert',
@@ -43,7 +44,10 @@ export class Alert {
    */
   @Prop() toast = false;
 
-  /** The length of time, in milliseconds, the alert will show before closing itself. */
+  /**
+   * The length of time, in milliseconds, the alert will show before closing itself. If the user interacts with the
+   * alert before it closes (e.g. moves the mouse over it), the duration will restart.
+   */
   @Prop() duration = Infinity;
 
   @Watch('open')
@@ -53,12 +57,7 @@ export class Alert {
 
   @Watch('duration')
   handleDurationChange() {
-    clearTimeout(this.autoHideTimeout);
-
-    // Restart the timeout if the duration changes and the alert is open
-    if (this.open && this.duration < Infinity) {
-      this.autoHideTimeout = setTimeout(() => this.hide(), this.duration);
-    }
+    this.restartAutoHide();
   }
 
   /** Emitted when the alert opens. Calling `event.preventDefault()` will prevent it from being opened. */
@@ -75,6 +74,7 @@ export class Alert {
 
   connectedCallback() {
     this.handleCloseClick = this.handleCloseClick.bind(this);
+    this.handleMouseMove = this.handleMouseMove.bind(this);
     this.handleTransitionEnd = this.handleTransitionEnd.bind(this);
   }
 
@@ -93,9 +93,16 @@ export class Alert {
       return;
     }
 
+    if (this.toast) {
+      this.appendToStack();
+    }
+
     const slShow = this.slShow.emit();
     if (slShow.defaultPrevented) {
       this.open = false;
+      if (this.toast) {
+        this.removeFromStack();
+      }
       return;
     }
 
@@ -103,10 +110,6 @@ export class Alert {
     this.host.clientWidth; // force a reflow
     this.isShowing = true;
     this.open = true;
-
-    if (this.toast) {
-      this.appendToStack();
-    }
 
     if (this.duration < Infinity) {
       this.autoHideTimeout = setTimeout(() => this.hide(), this.duration);
@@ -136,18 +139,21 @@ export class Alert {
     this.hide();
   }
 
+  handleMouseMove() {
+    this.restartAutoHide();
+  }
+
   handleTransitionEnd(event: TransitionEvent) {
     const target = event.target as HTMLElement;
 
     // Ensure we only emit one event when the target element is no longer visible
     if (event.propertyName === 'opacity' && target.classList.contains('alert')) {
       this.host.hidden = !this.open;
+      this.open ? this.slAfterShow.emit() : this.slAfterHide.emit();
 
       if (this.toast && !this.open) {
         this.removeFromStack();
       }
-
-      this.open ? this.slAfterShow.emit() : this.slAfterHide.emit();
     }
   }
 
@@ -155,16 +161,6 @@ export class Alert {
     if (!stack.parentElement) {
       document.body.append(stack);
     }
-
-    Object.assign(stack.style, {
-      position: 'fixed',
-      top: '0',
-      right: '0',
-      zIndex: 'var(--sl-z-index-toast)',
-      maxWidth: '100%',
-      maxHeight: '100%',
-      overflow: 'auto'
-    });
 
     stack.clientWidth; // force a reflow
     stack.append(this.host);
@@ -177,6 +173,13 @@ export class Alert {
     const openAlerts = [...stack.querySelectorAll('sl-alert')].filter((el: HTMLSlAlertElement) => el.open === true);
     if (openAlerts.length === 0) {
       stack.remove();
+    }
+  }
+
+  restartAutoHide() {
+    clearTimeout(this.autoHideTimeout);
+    if (this.open && this.duration < Infinity) {
+      this.autoHideTimeout = setTimeout(() => this.hide(), this.duration);
     }
   }
 
@@ -201,6 +204,7 @@ export class Alert {
           }}
           role="alert"
           aria-hidden={!this.open}
+          onMouseMove={this.handleMouseMove}
           onTransitionEnd={this.handleTransitionEnd}
         >
           <span part="icon" class="alert__icon">
