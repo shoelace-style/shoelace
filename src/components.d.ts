@@ -12,6 +12,10 @@ export namespace Components {
          */
         "closable": boolean;
         /**
+          * The length of time, in milliseconds, the alert will show before closing itself.
+         */
+        "duration": number;
+        /**
           * Hides the alert
          */
         "hide": () => Promise<void>;
@@ -19,6 +23,10 @@ export namespace Components {
           * Indicates whether or not the alert is open. You can use this in lieu of the show/hide methods.
          */
         "open": boolean;
+        /**
+          * Determines how the alert will be shown. If this is anything other than `inline`, the alert will be shown in a stack as a "toast" notification. When the alert is shown as a notification, it will be hoisted to a stack and removed from the DOM when hidden. (You can reuse alerts that have been removed by storing a reference to the element.)
+         */
+        "placement": 'inline' | 'top-start' | 'top' | 'top-end' | 'bottom-start' | 'bottom' | 'bottom-end';
         /**
           * Shows the alert.
          */
@@ -1419,6 +1427,10 @@ declare namespace LocalJSX {
          */
         "closable"?: boolean;
         /**
+          * The length of time, in milliseconds, the alert will show before closing itself.
+         */
+        "duration"?: number;
+        /**
           * Emitted after the alert closes and all transitions are complete.
          */
         "onSlAfterHide"?: (event: CustomEvent<any>) => void;
@@ -1438,6 +1450,10 @@ declare namespace LocalJSX {
           * Indicates whether or not the alert is open. You can use this in lieu of the show/hide methods.
          */
         "open"?: boolean;
+        /**
+          * Determines how the alert will be shown. If this is anything other than `inline`, the alert will be shown in a stack as a "toast" notification. When the alert is shown as a notification, it will be hoisted to a stack and removed from the DOM when hidden. (You can reuse alerts that have been removed by storing a reference to the element.)
+         */
+        "placement"?: 'inline' | 'top-start' | 'top' | 'top-end' | 'bottom-start' | 'bottom' | 'bottom-end';
         /**
           * The type of alert.
          */

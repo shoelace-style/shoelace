@@ -13,6 +13,8 @@ import { Component, Element, Event, EventEmitter, Host, Method, Prop, Watch, h }
  * @part close-button - The close button.
  */
 
+const stack = Object.assign(document.createElement('div'), { className: 'sl-alert-stack' });
+
 @Component({
   tag: 'sl-alert',
   styleUrl: 'alert.scss',
@@ -20,6 +22,7 @@ import { Component, Element, Event, EventEmitter, Host, Method, Prop, Watch, h }
 })
 export class Alert {
   alert: HTMLElement;
+  autoHideTimeout: any;
   isShowing = false;
 
   @Element() host: HTMLSlAlertElement;
@@ -33,9 +36,29 @@ export class Alert {
   /** The type of alert. */
   @Prop() type: 'primary' | 'success' | 'info' | 'warning' | 'danger' = 'primary';
 
+  /**
+   * Determines how the alert will be shown. If this is anything other than `inline`, the alert will be shown in a stack
+   * as a "toast" notification. When the alert is shown as a notification, it will be hoisted to a stack and removed
+   * from the DOM when hidden. (You can reuse alerts that have been removed by storing a reference to the element.)
+   */
+  @Prop() placement: 'inline' | 'top-start' | 'top' | 'top-end' | 'bottom-start' | 'bottom' | 'bottom-end' = 'inline';
+
+  /** The length of time, in milliseconds, the alert will show before closing itself. */
+  @Prop() duration = Infinity;
+
   @Watch('open')
   handleOpenChange() {
     this.open ? this.show() : this.hide();
+  }
+
+  @Watch('duration')
+  handleDurationChange() {
+    clearTimeout(this.autoHideTimeout);
+
+    // Restart the timeout if the duration changes and the alert is open
+    if (this.open && this.duration < Infinity) {
+      this.autoHideTimeout = setTimeout(() => this.hide(), this.duration);
+    }
   }
 
   /** Emitted when the alert opens. Calling `event.preventDefault()` will prevent it from being opened. */
@@ -80,6 +103,14 @@ export class Alert {
     this.host.clientWidth; // force a reflow
     this.isShowing = true;
     this.open = true;
+
+    if (this.placement !== 'inline') {
+      this.appendToStack();
+    }
+
+    if (this.duration < Infinity) {
+      this.autoHideTimeout = setTimeout(() => this.hide(), this.duration);
+    }
   }
 
   /** Hides the alert */
@@ -96,6 +127,7 @@ export class Alert {
       return;
     }
 
+    clearTimeout(this.autoHideTimeout);
     this.isShowing = false;
     this.open = false;
   }
@@ -110,7 +142,31 @@ export class Alert {
     // Ensure we only emit one event when the target element is no longer visible
     if (event.propertyName === 'opacity' && target.classList.contains('alert')) {
       this.host.hidden = !this.open;
+
+      if (this.placement !== 'inline' && !this.open) {
+        this.removeFromStack();
+      }
+
       this.open ? this.slAfterShow.emit() : this.slAfterHide.emit();
+    }
+  }
+
+  appendToStack() {
+    if (!stack.parentElement) {
+      document.body.append(stack);
+    }
+
+    stack.dataset.placement = this.placement;
+    stack.append(this.host);
+  }
+
+  removeFromStack() {
+    this.host.remove();
+
+    // Remove the stack from the DOM when there are no more alerts
+    const openAlerts = [...stack.querySelectorAll('sl-alert')].filter((el: HTMLSlAlertElement) => el.open === true);
+    if (openAlerts.length === 0) {
+      stack.remove();
     }
   }
 
@@ -145,7 +201,9 @@ export class Alert {
           </span>
 
           {this.closable && (
-            <sl-icon-button part="close-button" class="alert__close" name="x" onClick={this.handleCloseClick} />
+            <span class="alert__close">
+              <sl-icon-button part="close-button" name="x" onClick={this.handleCloseClick} />
+            </span>
           )}
         </div>
       </Host>
