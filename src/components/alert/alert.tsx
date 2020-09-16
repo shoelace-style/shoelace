@@ -166,6 +166,7 @@ export class Alert {
       overflow: 'auto'
     });
 
+    stack.clientWidth; // force a reflow
     stack.append(this.host);
   }
 
