@@ -24,13 +24,13 @@ export namespace Components {
          */
         "open": boolean;
         /**
-          * Determines how the alert will be shown. If this is anything other than `inline`, the alert will be shown in a stack as a "toast" notification. When the alert is shown as a notification, it will be hoisted to a stack and removed from the DOM when hidden. (You can reuse alerts that have been removed by storing a reference to the element.)
-         */
-        "placement": 'inline' | 'top-start' | 'top' | 'top-end' | 'bottom-start' | 'bottom' | 'bottom-end';
-        /**
           * Shows the alert.
          */
         "show": () => Promise<void>;
+        /**
+          * When true, the alert will be shown as a "toast" notification. In this case, the alert will be hoisted to a stack and removed from the DOM when closed. By storing a reference to the alert element, you can reuse it by calling `alert.show()` even after it's removed from the DOM.
+         */
+        "toast": boolean;
         /**
           * The type of alert.
          */
@@ -1451,9 +1451,9 @@ declare namespace LocalJSX {
          */
         "open"?: boolean;
         /**
-          * Determines how the alert will be shown. If this is anything other than `inline`, the alert will be shown in a stack as a "toast" notification. When the alert is shown as a notification, it will be hoisted to a stack and removed from the DOM when hidden. (You can reuse alerts that have been removed by storing a reference to the element.)
+          * When true, the alert will be shown as a "toast" notification. In this case, the alert will be hoisted to a stack and removed from the DOM when closed. By storing a reference to the alert element, you can reuse it by calling `alert.show()` even after it's removed from the DOM.
          */
-        "placement"?: 'inline' | 'top-start' | 'top' | 'top-end' | 'bottom-start' | 'bottom' | 'bottom-end';
+        "toast"?: boolean;
         /**
           * The type of alert.
          */

@@ -18,31 +18,31 @@ Alerts are designed to be shown dynamically, so you must include the `open` attr
   <sl-button type="warning">Warning</sl-button>
   <sl-button type="danger">Danger</sl-button>
   
-  <sl-alert type="primary" placement="top-end" duration="3000" closable>
+  <sl-alert type="primary" toast duration="3000" closable>
     <sl-icon slot="icon" name="info-circle"></sl-icon>
     <strong>This is super informative</strong><br>
     You can tell by how pretty the alert is.
   </sl-alert>
 
-  <sl-alert type="success" placement="top-end" duration="3000" closable>
+  <sl-alert type="success" toast duration="3000" closable>
     <sl-icon slot="icon" name="check2-circle"></sl-icon>
     <strong>Your changes have been saved</strong><br>
     You can safely exit the app now.
   </sl-alert>
 
-  <sl-alert type="info" placement="top-end" duration="3000" closable>
+  <sl-alert type="info" toast duration="3000" closable>
     <sl-icon slot="icon" name="gear"></sl-icon>
     <strong>Your settings have been updated</strong><br>
     Some settings will take affect the next time you log in.
   </sl-alert>
 
-  <sl-alert type="warning" placement="top-end" duration="3000" closable>
+  <sl-alert type="warning" toast duration="3000" closable>
     <sl-icon slot="icon" name="exclamation-triangle"></sl-icon>
     <strong>Your session has ended</strong><br>
     Please login again to continue.
   </sl-alert>
 
-  <sl-alert type="danger" placement="bottom" duration="3000" closable>
+  <sl-alert type="danger" toast duration="3000" closable>
     <sl-icon slot="icon" name="exclamation-octagon"></sl-icon>
     <strong>Your account has been deleted</strong><br>
     We're very sorry to see you go!

@@ -37,11 +37,11 @@ export class Alert {
   @Prop() type: 'primary' | 'success' | 'info' | 'warning' | 'danger' = 'primary';
 
   /**
-   * Determines how the alert will be shown. If this is anything other than `inline`, the alert will be shown in a stack
-   * as a "toast" notification. When the alert is shown as a notification, it will be hoisted to a stack and removed
-   * from the DOM when hidden. (You can reuse alerts that have been removed by storing a reference to the element.)
+   * When true, the alert will be shown as a "toast" notification. In this case, the alert will be hoisted to a stack
+   * and removed from the DOM when closed. By storing a reference to the alert element, you can reuse it by calling
+   * `alert.show()` even after it's removed from the DOM.
    */
-  @Prop() placement: 'inline' | 'top-start' | 'top' | 'top-end' | 'bottom-start' | 'bottom' | 'bottom-end' = 'inline';
+  @Prop() toast = false;
 
   /** The length of time, in milliseconds, the alert will show before closing itself. */
   @Prop() duration = Infinity;
@@ -104,7 +104,7 @@ export class Alert {
     this.isShowing = true;
     this.open = true;
 
-    if (this.placement !== 'inline') {
+    if (this.toast) {
       this.appendToStack();
     }
 
@@ -143,7 +143,7 @@ export class Alert {
     if (event.propertyName === 'opacity' && target.classList.contains('alert')) {
       this.host.hidden = !this.open;
 
-      if (this.placement !== 'inline' && !this.open) {
+      if (this.toast && !this.open) {
         this.removeFromStack();
       }
 
@@ -156,7 +156,16 @@ export class Alert {
       document.body.append(stack);
     }
 
-    stack.dataset.placement = this.placement;
+    Object.assign(stack.style, {
+      position: 'fixed',
+      top: '0',
+      right: '0',
+      zIndex: 'var(--sl-z-index-toast)',
+      maxWidth: '100%',
+      maxHeight: '100%',
+      overflow: 'auto'
+    });
+
     stack.append(this.host);
   }
 
@@ -180,6 +189,7 @@ export class Alert {
             alert: true,
             'alert--open': this.open,
             'alert--closable': this.closable,
+            'alert--toast': this.toast,
 
             // States
             'alert--primary': this.type === 'primary',
