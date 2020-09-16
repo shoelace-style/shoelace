@@ -1,5 +1,7 @@
 import { Component, Element, Event, EventEmitter, Host, Method, Prop, Watch, h } from '@stencil/core';
 
+const stack = Object.assign(document.createElement('div'), { className: 'sl-toast-stack' });
+
 /**
  * @since 2.0
  * @status stable
@@ -12,8 +14,6 @@ import { Component, Element, Event, EventEmitter, Host, Method, Prop, Watch, h }
  * @part message - The alert message.
  * @part close-button - The close button.
  */
-
-const stack = Object.assign(document.createElement('div'), { className: 'sl-toast-stack' });
 
 @Component({
   tag: 'sl-alert',
@@ -31,17 +31,16 @@ export class Alert {
   @Prop({ mutable: true, reflect: true }) open = false;
 
   /** Set to true to make the alert closable. */
-  @Prop() closable = false;
+  @Prop({ reflect: true }) closable = false;
 
   /** The type of alert. */
-  @Prop() type: 'primary' | 'success' | 'info' | 'warning' | 'danger' = 'primary';
+  @Prop({ reflect: true }) type: 'primary' | 'success' | 'info' | 'warning' | 'danger' = 'primary';
 
   /**
-   * When true, the alert will be shown as a "toast" notification. In this case, the alert will be hoisted to a stack
-   * and removed from the DOM when closed. By storing a reference to the alert, you can reuse it by calling
-   * `alert.show()` even after it has been removed from the DOM.
+   * When true, the alert will be shown as a toast notification. To facilitate this, the alert is appended to the toast
+   * stack the first time it is shown and removed from the DOM when dismissed.
    */
-  @Prop() toast = false;
+  @Prop({ reflect: true }) toast = false;
 
   /**
    * The length of time, in milliseconds, the alert will show before closing itself. If the user interacts with the
@@ -192,8 +191,6 @@ export class Alert {
             'alert--open': this.open,
             'alert--closable': this.closable,
             'alert--toast': this.toast,
-
-            // States
             'alert--primary': this.type === 'primary',
             'alert--success': this.type === 'success',
             'alert--info': this.type === 'info',
