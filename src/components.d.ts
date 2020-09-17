@@ -28,9 +28,9 @@ export namespace Components {
          */
         "show": () => Promise<void>;
         /**
-          * When true, the alert will be shown as a toast notification. To facilitate this, the alert is appended to the toast stack the first time it is shown and removed from the DOM when dismissed.
+          * Displays the alert as a toast notification. This will move the alert out of its position in the DOM and, when dismissed, it will be removed from the DOM completely. By storing a reference to the alert, you can reuse it by calling this method again. The returned promise resolves when the alert is hidden.
          */
-        "toast": boolean;
+        "toast": () => Promise<unknown>;
         /**
           * The type of alert.
          */
@@ -1450,10 +1450,6 @@ declare namespace LocalJSX {
           * Indicates whether or not the alert is open. You can use this in lieu of the show/hide methods.
          */
         "open"?: boolean;
-        /**
-          * When true, the alert will be shown as a toast notification. To facilitate this, the alert is appended to the toast stack the first time it is shown and removed from the DOM when dismissed.
-         */
-        "toast"?: boolean;
         /**
           * The type of alert.
          */

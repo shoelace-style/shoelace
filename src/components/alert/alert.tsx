@@ -37,12 +37,6 @@ export class Alert {
   @Prop({ reflect: true }) type: 'primary' | 'success' | 'info' | 'warning' | 'danger' = 'primary';
 
   /**
-   * When true, the alert will be shown as a toast notification. To facilitate this, the alert is appended to the toast
-   * stack the first time it is shown and removed from the DOM when dismissed.
-   */
-  @Prop({ reflect: true }) toast = false;
-
-  /**
    * The length of time, in milliseconds, the alert will show before closing itself. If the user interacts with the
    * alert before it closes (e.g. moves the mouse over it), the duration will restart.
    */
@@ -91,16 +85,9 @@ export class Alert {
       return;
     }
 
-    if (this.toast) {
-      this.appendToStack();
-    }
-
     const slShow = this.slShow.emit();
     if (slShow.defaultPrevented) {
       this.open = false;
-      if (this.toast) {
-        this.removeFromStack();
-      }
       return;
     }
 
@@ -133,6 +120,38 @@ export class Alert {
     this.open = false;
   }
 
+  /**
+   * Displays the alert as a toast notification. This will move the alert out of its position in the DOM and, when
+   * dismissed, it will be removed from the DOM completely. By storing a reference to the alert, you can reuse it by
+   * calling this method again. The returned promise resolves when the alert is hidden.
+   */
+  @Method()
+  async toast() {
+    return new Promise(resolve => {
+      if (!stack.parentElement) {
+        document.body.append(stack);
+      }
+
+      stack.clientWidth; // force a reflow
+      stack.append(this.host);
+      this.show();
+
+      this.host.addEventListener(
+        'slAfterHide',
+        () => {
+          this.host.remove();
+          resolve();
+
+          // Remove the stack from the DOM when there are no more alerts
+          if (stack.querySelector('sl-alert') === null) {
+            stack.remove();
+          }
+        },
+        { once: true }
+      );
+    });
+  }
+
   handleCloseClick() {
     this.hide();
   }
@@ -148,28 +167,6 @@ export class Alert {
     if (event.propertyName === 'opacity' && target.classList.contains('alert')) {
       this.host.hidden = !this.open;
       this.open ? this.slAfterShow.emit() : this.slAfterHide.emit();
-
-      if (this.toast && !this.open) {
-        this.removeFromStack();
-      }
-    }
-  }
-
-  appendToStack() {
-    if (!stack.parentElement) {
-      document.body.append(stack);
-    }
-
-    stack.clientWidth; // force a reflow
-    stack.append(this.host);
-  }
-
-  removeFromStack() {
-    this.host.remove();
-
-    // Remove the stack from the DOM when there are no more alerts
-    if (stack.querySelector('sl-alert') === null) {
-      stack.remove();
     }
   }
 
@@ -190,7 +187,6 @@ export class Alert {
             alert: true,
             'alert--open': this.open,
             'alert--closable': this.closable,
-            'alert--toast': this.toast,
             'alert--primary': this.type === 'primary',
             'alert--success': this.type === 'success',
             'alert--info': this.type === 'info',
