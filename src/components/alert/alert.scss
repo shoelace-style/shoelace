@@ -1,6 +1,11 @@
 @import 'component';
 
+/**
+ * @prop --box-shadow: The alert's box shadow.
+ */
 :host {
+  --box-shadow: none;
+
   display: block;
 
   &[hidden] {
@@ -16,17 +21,20 @@
   border: solid 1px var(--sl-color-gray-90);
   border-top-width: 3px;
   border-radius: var(--sl-border-radius-medium);
+  box-shadow: var(--box-shadow);
   font-family: var(--sl-font-sans);
   font-size: var(--sl-font-size-small);
   font-weight: var(--sl-font-weight-normal);
   line-height: 1.6;
   color: var(--sl-color-gray-30);
   opacity: 0;
-  transition: var(--sl-transition-medium) opacity ease;
+  transform: scale(0.9);
+  transition: var(--sl-transition-medium) opacity ease, var(--sl-transition-medium) transform ease;
 }
 
 .alert--open {
   opacity: 1;
+  transform: scale(1);
 }
 
 .alert__icon {
@@ -91,5 +99,5 @@
   display: flex;
   align-items: center;
   font-size: var(--sl-font-size-large);
-  padding: 0 var(--sl-spacing-medium);
+  padding-right: var(--sl-spacing-medium);
 }

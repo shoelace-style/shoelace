@@ -1,5 +1,7 @@
 import { Component, Element, Event, EventEmitter, Host, Method, Prop, Watch, h } from '@stencil/core';
 
+const toastStack = Object.assign(document.createElement('div'), { className: 'sl-toast-stack' });
+
 /**
  * @since 2.0
  * @status stable
@@ -20,6 +22,7 @@ import { Component, Element, Event, EventEmitter, Host, Method, Prop, Watch, h }
 })
 export class Alert {
   alert: HTMLElement;
+  autoHideTimeout: any;
   isShowing = false;
 
   @Element() host: HTMLSlAlertElement;
@@ -28,14 +31,25 @@ export class Alert {
   @Prop({ mutable: true, reflect: true }) open = false;
 
   /** Set to true to make the alert closable. */
-  @Prop() closable = false;
+  @Prop({ reflect: true }) closable = false;
 
   /** The type of alert. */
-  @Prop() type: 'primary' | 'success' | 'info' | 'warning' | 'danger' = 'primary';
+  @Prop({ reflect: true }) type: 'primary' | 'success' | 'info' | 'warning' | 'danger' = 'primary';
+
+  /**
+   * The length of time, in milliseconds, the alert will show before closing itself. If the user interacts with the
+   * alert before it closes (e.g. moves the mouse over it), the timer will restart.
+   */
+  @Prop() duration = Infinity;
 
   @Watch('open')
   handleOpenChange() {
     this.open ? this.show() : this.hide();
+  }
+
+  @Watch('duration')
+  handleDurationChange() {
+    this.restartAutoHide();
   }
 
   /** Emitted when the alert opens. Calling `event.preventDefault()` will prevent it from being opened. */
@@ -52,6 +66,7 @@ export class Alert {
 
   connectedCallback() {
     this.handleCloseClick = this.handleCloseClick.bind(this);
+    this.handleMouseMove = this.handleMouseMove.bind(this);
     this.handleTransitionEnd = this.handleTransitionEnd.bind(this);
   }
 
@@ -80,6 +95,10 @@ export class Alert {
     this.host.clientWidth; // force a reflow
     this.isShowing = true;
     this.open = true;
+
+    if (this.duration < Infinity) {
+      this.autoHideTimeout = setTimeout(() => this.hide(), this.duration);
+    }
   }
 
   /** Hides the alert */
@@ -96,12 +115,48 @@ export class Alert {
       return;
     }
 
+    clearTimeout(this.autoHideTimeout);
     this.isShowing = false;
     this.open = false;
   }
 
+  /**
+   * Displays the alert as a toast notification. This will move the alert out of its position in the DOM and, when
+   * dismissed, it will be removed from the DOM completely. By storing a reference to the alert, you can reuse it by
+   * calling this method again. The returned promise will resolve after the alert is hidden.
+   */
+  @Method()
+  async toast() {
+    return new Promise(resolve => {
+      if (!toastStack.parentElement) {
+        document.body.append(toastStack);
+      }
+
+      toastStack.append(this.host);
+      this.show();
+
+      this.host.addEventListener(
+        'slAfterHide',
+        () => {
+          this.host.remove();
+          resolve();
+
+          // Remove the toast stack from the DOM when there are no more alerts
+          if (toastStack.querySelector('sl-alert') === null) {
+            toastStack.remove();
+          }
+        },
+        { once: true }
+      );
+    });
+  }
+
   handleCloseClick() {
     this.hide();
+  }
+
+  handleMouseMove() {
+    this.restartAutoHide();
   }
 
   handleTransitionEnd(event: TransitionEvent) {
@@ -111,6 +166,13 @@ export class Alert {
     if (event.propertyName === 'opacity' && target.classList.contains('alert')) {
       this.host.hidden = !this.open;
       this.open ? this.slAfterShow.emit() : this.slAfterHide.emit();
+    }
+  }
+
+  restartAutoHide() {
+    clearTimeout(this.autoHideTimeout);
+    if (this.open && this.duration < Infinity) {
+      this.autoHideTimeout = setTimeout(() => this.hide(), this.duration);
     }
   }
 
@@ -124,8 +186,6 @@ export class Alert {
             alert: true,
             'alert--open': this.open,
             'alert--closable': this.closable,
-
-            // States
             'alert--primary': this.type === 'primary',
             'alert--success': this.type === 'success',
             'alert--info': this.type === 'info',
@@ -133,7 +193,10 @@ export class Alert {
             'alert--danger': this.type === 'danger'
           }}
           role="alert"
+          aria-live="assertive"
+          aria-atomic="true"
           aria-hidden={!this.open}
+          onMouseMove={this.handleMouseMove}
           onTransitionEnd={this.handleTransitionEnd}
         >
           <span part="icon" class="alert__icon">
@@ -145,7 +208,9 @@ export class Alert {
           </span>
 
           {this.closable && (
-            <sl-icon-button part="close-button" class="alert__close" name="x" onClick={this.handleCloseClick} />
+            <span class="alert__close">
+              <sl-icon-button part="close-button" name="x" onClick={this.handleCloseClick} />
+            </span>
           )}
         </div>
       </Host>

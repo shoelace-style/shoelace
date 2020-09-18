@@ -12,6 +12,10 @@ export namespace Components {
          */
         "closable": boolean;
         /**
+          * The length of time, in milliseconds, the alert will show before closing itself. If the user interacts with the alert before it closes (e.g. moves the mouse over it), the timer will restart.
+         */
+        "duration": number;
+        /**
           * Hides the alert
          */
         "hide": () => Promise<void>;
@@ -23,6 +27,10 @@ export namespace Components {
           * Shows the alert.
          */
         "show": () => Promise<void>;
+        /**
+          * Displays the alert as a toast notification. This will move the alert out of its position in the DOM and, when dismissed, it will be removed from the DOM completely. By storing a reference to the alert, you can reuse it by calling this method again. The returned promise will resolve after the alert is hidden.
+         */
+        "toast": () => Promise<unknown>;
         /**
           * The type of alert.
          */
@@ -1418,6 +1426,10 @@ declare namespace LocalJSX {
           * Set to true to make the alert closable.
          */
         "closable"?: boolean;
+        /**
+          * The length of time, in milliseconds, the alert will show before closing itself. If the user interacts with the alert before it closes (e.g. moves the mouse over it), the timer will restart.
+         */
+        "duration"?: number;
         /**
           * Emitted after the alert closes and all transitions are complete.
          */
