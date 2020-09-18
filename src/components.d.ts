@@ -12,7 +12,7 @@ export namespace Components {
          */
         "closable": boolean;
         /**
-          * The length of time, in milliseconds, the alert will show before closing itself. If the user interacts with the alert before it closes (e.g. moves the mouse over it), the duration will restart.
+          * The length of time, in milliseconds, the alert will show before closing itself. If the user interacts with the alert before it closes (e.g. moves the mouse over it), the timer will restart.
          */
         "duration": number;
         /**
@@ -28,7 +28,7 @@ export namespace Components {
          */
         "show": () => Promise<void>;
         /**
-          * Displays the alert as a toast notification. This will move the alert out of its position in the DOM and, when dismissed, it will be removed from the DOM completely. By storing a reference to the alert, you can reuse it by calling this method again. The returned promise resolves when the alert is hidden.
+          * Displays the alert as a toast notification. This will move the alert out of its position in the DOM and, when dismissed, it will be removed from the DOM completely. By storing a reference to the alert, you can reuse it by calling this method again. The returned promise will resolve after the alert is hidden.
          */
         "toast": () => Promise<unknown>;
         /**
@@ -1427,7 +1427,7 @@ declare namespace LocalJSX {
          */
         "closable"?: boolean;
         /**
-          * The length of time, in milliseconds, the alert will show before closing itself. If the user interacts with the alert before it closes (e.g. moves the mouse over it), the duration will restart.
+          * The length of time, in milliseconds, the alert will show before closing itself. If the user interacts with the alert before it closes (e.g. moves the mouse over it), the timer will restart.
          */
         "duration"?: number;
         /**

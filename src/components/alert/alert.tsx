@@ -1,6 +1,6 @@
 import { Component, Element, Event, EventEmitter, Host, Method, Prop, Watch, h } from '@stencil/core';
 
-const stack = Object.assign(document.createElement('div'), { className: 'sl-toast-stack' });
+const toastStack = Object.assign(document.createElement('div'), { className: 'sl-toast-stack' });
 
 /**
  * @since 2.0
@@ -38,7 +38,7 @@ export class Alert {
 
   /**
    * The length of time, in milliseconds, the alert will show before closing itself. If the user interacts with the
-   * alert before it closes (e.g. moves the mouse over it), the duration will restart.
+   * alert before it closes (e.g. moves the mouse over it), the timer will restart.
    */
   @Prop() duration = Infinity;
 
@@ -123,17 +123,16 @@ export class Alert {
   /**
    * Displays the alert as a toast notification. This will move the alert out of its position in the DOM and, when
    * dismissed, it will be removed from the DOM completely. By storing a reference to the alert, you can reuse it by
-   * calling this method again. The returned promise resolves when the alert is hidden.
+   * calling this method again. The returned promise will resolve after the alert is hidden.
    */
   @Method()
   async toast() {
     return new Promise(resolve => {
-      if (!stack.parentElement) {
-        document.body.append(stack);
+      if (!toastStack.parentElement) {
+        document.body.append(toastStack);
       }
 
-      stack.clientWidth; // force a reflow
-      stack.append(this.host);
+      toastStack.append(this.host);
       this.show();
 
       this.host.addEventListener(
@@ -142,9 +141,9 @@ export class Alert {
           this.host.remove();
           resolve();
 
-          // Remove the stack from the DOM when there are no more alerts
-          if (stack.querySelector('sl-alert') === null) {
-            stack.remove();
+          // Remove the toast stack from the DOM when there are no more alerts
+          if (toastStack.querySelector('sl-alert') === null) {
+            toastStack.remove();
           }
         },
         { once: true }
