@@ -1,8 +1,9 @@
 # Changelog
 
-## Next
+## 2.0.0-beta.19
 
 - Added `input`, `label`, `prefix`, `clear-button`, `suffix`, `help-text` exported parts to `sl-select` to make the input customizable
+- Added toast notifications through the `toast()` method on `sl-alert`
 - Fixed a bug where mouse events would bubble up when `sl-button` was disabled, causing tooltips to erroneously appear
 - Fixed a bug where pressing space would open and immediately close `sl-dropdown` panels in Firefox
 - Fixed a bug where `sl-tooltip` would throw an error on init
