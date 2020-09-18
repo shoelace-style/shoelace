@@ -29,7 +29,7 @@ export class TabGroup {
   body: HTMLElement;
   mutationObserver: MutationObserver;
   nav: HTMLElement;
-  resizeObserver: any;
+  resizeObserver: ResizeObserver;
   tabGroup: HTMLElement;
   tabs: HTMLElement;
 

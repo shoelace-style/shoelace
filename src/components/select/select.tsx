@@ -39,7 +39,7 @@ export class Select {
   labelId = `select-label-${id}`;
   helpTextId = `select-help-text-${id}`;
   menu: HTMLSlMenuElement;
-  resizeObserver: any;
+  resizeObserver: ResizeObserver;
 
   @Element() host: HTMLSlSelectElement;
 

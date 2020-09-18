@@ -25,7 +25,7 @@ export class Textarea {
   textareaId = `textarea-${++id}`;
   labelId = `textarea-label-${id}`;
   helpTextId = `textarea-help-text-${id}`;
-  resizeObserver: any;
+  resizeObserver: ResizeObserver;
   textarea: HTMLTextAreaElement;
 
   @State() hasFocus = false;

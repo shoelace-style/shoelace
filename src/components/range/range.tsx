@@ -18,7 +18,7 @@ import ResizeObserver from 'resize-observer-polyfill';
 export class Range {
   input: HTMLInputElement;
   output: HTMLElement;
-  resizeObserver: any;
+  resizeObserver: ResizeObserver;
 
   @State() hasFocus = false;
   @State() hasTooltip = false;
