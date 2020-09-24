@@ -1,5 +1,9 @@
 # Changelog
 
+## Next
+
+- Added support for dropdowns and non-icon elements to `sl-input`
+
 ## 2.0.0-beta.19
 
 - Added `input`, `label`, `prefix`, `clear-button`, `suffix`, `help-text` exported parts to `sl-select` to make the input customizable

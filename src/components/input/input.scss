@@ -108,7 +108,11 @@
   display: inline-flex;
   flex: 0 0 auto;
   align-items: center;
-  color: var(--sl-input-icon-color);
+  cursor: default;
+
+  ::slotted(sl-icon) {
+    color: var(--sl-input-icon-color);
+  }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

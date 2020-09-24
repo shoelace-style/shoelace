@@ -119,4 +119,45 @@ Add descriptive help text to an input with the `help-text` slot.
 </sl-input>
 ```
 
+### Inputs with Dropdowns
+
+Dropdowns can be used in the `prefix` or `suffix` slot to make inputs more versatile. Make sure to use the `hoist` prop so the dropdown breaks out of the input's overflow.
+
+```html preview
+<div class="input-dropdowns">
+  <sl-input type="tel" label="Phone">
+    <sl-icon slot="prefix" name="telephone"></sl-icon>
+    <sl-dropdown slot="suffix" placement="bottom-end" hoist>
+      <sl-button slot="trigger" caret type="text" size="small">Home</sl-button>
+      <sl-menu>
+        <sl-menu-item checked>Home</sl-menu-item>
+        <sl-menu-item>Mobile</sl-menu-item>
+        <sl-menu-item>Work</sl-menu-item>
+      </sl-menu>
+    </sl-dropdown>
+    <div slot="help-text">
+      Please enter a phone number where we can reach you.
+    </div>
+  </sl-input>
+</div>
+
+<script>
+  const container = document.querySelector('.input-dropdowns');
+  const dropdown = container.querySelector('sl-dropdown');
+  const trigger = dropdown.querySelector('sl-button');
+
+  dropdown.addEventListener('slSelect', event => {
+    const selectedItem = event.detail.item;
+    trigger.textContent = selectedItem.textContent;
+    [...dropdown.querySelectorAll('sl-menu-item')].map(item => item.checked = item === selectedItem);
+  });
+</script>
+
+<style>
+  .input-dropdowns sl-dropdown {
+    margin-right: .25rem;
+  }
+</style>
+```
+
 [component-metadata:sl-input]

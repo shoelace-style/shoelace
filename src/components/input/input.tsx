@@ -142,7 +142,6 @@ export class Input {
     this.handleBlur = this.handleBlur.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
     this.handleClearClick = this.handleClearClick.bind(this);
-    this.handleMouseDown = this.handleMouseDown.bind(this);
     this.handlePasswordToggle = this.handlePasswordToggle.bind(this);
   }
 
@@ -238,15 +237,6 @@ export class Input {
     event.stopPropagation();
   }
 
-  handleMouseDown(event: MouseEvent) {
-    const target = event.target as HTMLElement;
-
-    if (target !== this.input) {
-      event.preventDefault();
-      this.input.focus();
-    }
-  }
-
   handlePasswordToggle() {
     this.isPasswordVisible = !this.isPasswordVisible;
   }
@@ -292,7 +282,6 @@ export class Input {
             'input--empty': this.value?.length === 0,
             'input--invalid': this.invalid
           }}
-          onMouseDown={this.handleMouseDown}
         >
           <span part="prefix" class="input__prefix">
             <slot name="prefix" />
