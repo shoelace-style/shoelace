@@ -220,11 +220,9 @@ export class Dropdown {
     if (event.key === 'Tab') {
       setTimeout(() => {
         // Tabbing outside of the containing element closes the panel
-
-        // If the dropdown is used within a shadow DOM, we need to
-        // obtain the activeElement within that shadowRoot, otherwise
-        // `document.activeElement` will only return the name of the
-        // parent shadow DOM element.
+        //
+        // If the dropdown is used within a shadow DOM, we need to obtain the activeElement within that shadowRoot,
+        // otherwise `document.activeElement` will only return the name of the parent shadow DOM element.
         const activeElement =
           this.containingElement.getRootNode() instanceof ShadowRoot
             ? document.activeElement.shadowRoot?.activeElement
