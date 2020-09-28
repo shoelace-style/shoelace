@@ -3,6 +3,7 @@
 ## Next
 
 - Added support for dropdowns and non-icon elements to `sl-input`
+- Fixed a bug where `sl-progress-ring` rendered incorrectly when zoomed in Safari
 
 ## 2.0.0-beta.19
 

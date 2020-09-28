@@ -18,6 +18,11 @@
   position: relative;
 }
 
+.progress-ring__image {
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+
 .progress-ring__track {
   stroke: var(--track-color);
 }
@@ -25,8 +30,6 @@
 .progress-ring__indicator {
   stroke: var(--indicator-color);
   transition: 0.35s stroke-dashoffset, 0.35s stroke;
-  transform: rotate(-90deg);
-  transform-origin: 50% 50%;
 }
 
 .progress-ring__label {
