@@ -3,7 +3,8 @@
 ## Next
 
 - Added support for dropdowns and non-icon elements to `sl-input`
-- Fixed a bug where `sl-progress-ring` rendered incorrectly when zoomed in Safari
+- Fixed a bug where `sl-progress-ring` rendered incorrectly when zoomed in Safari [#227](https://github.com/shoelace-style/shoelace/issues/227)
+- Fixed a bug where tabbing into slotted elements closes `sl-dropdown` when used in a shadow root [#223](https://github.com/shoelace-style/shoelace/issues/223)
 
 ## 2.0.0-beta.19
 
