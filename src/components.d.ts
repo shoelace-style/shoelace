@@ -473,9 +473,17 @@ export namespace Components {
          */
         "label": string;
         /**
+          * The name of a custom registered icon library.
+         */
+        "library": string;
+        /**
           * The name of the icon to draw.
          */
         "name": string;
+        /**
+          * Registers a custom icon library.
+         */
+        "registerLibrary": (name: string, getPath: (iconName: string) => string) => Promise<void>;
         /**
           * An external URL of an SVG file.
          */
@@ -1919,6 +1927,10 @@ declare namespace LocalJSX {
           * An alternative description to use for accessibility. If omitted, the name or src will be used to generate it.
          */
         "label"?: string;
+        /**
+          * The name of a custom registered icon library.
+         */
+        "library"?: string;
         /**
           * The name of the icon to draw.
          */

@@ -1,7 +1,12 @@
-import { Component, Event, EventEmitter, Prop, State, Watch, getAssetPath, h } from '@stencil/core';
-
+import { Component, Event, EventEmitter, Method, Prop, State, Watch, getAssetPath, h } from '@stencil/core';
 import { requestIcon } from './request';
 
+interface IconLibrary {
+  name: string;
+  getPath: (iconName: string) => string;
+}
+
+const libraries: IconLibrary[] = [];
 const parser = new DOMParser();
 
 /**
@@ -29,6 +34,9 @@ export class Icon {
   /** An alternative description to use for accessibility. If omitted, the name or src will be used to generate it. */
   @Prop() label: string;
 
+  /** The name of a custom registered icon library. */
+  @Prop() library: string;
+
   /** Emitted when the icon has loaded. */
   @Event() slLoad: EventEmitter;
 
@@ -41,8 +49,24 @@ export class Icon {
     this.setIcon();
   }
 
+  connectedCallback() {
+    this.handleLibraryRegistration = this.handleLibraryRegistration.bind(this);
+  }
+
   componentDidLoad() {
     this.setIcon();
+    document.addEventListener('slIconLibraryRegistered', this.handleLibraryRegistration);
+  }
+
+  disconnectedCallback() {
+    document.removeEventListener('slIconLibraryRegistered', this.handleLibraryRegistration);
+  }
+
+  /** Registers a custom icon library. */
+  @Method()
+  async registerLibrary(name: string, getPath: (iconName: string) => string) {
+    libraries.push({ name, getPath });
+    document.dispatchEvent(new CustomEvent('slIconLibraryRegistered', { detail: { name } }));
   }
 
   getLabel() {
@@ -60,21 +84,42 @@ export class Icon {
   }
 
   setIcon() {
-    const url = this.name ? getAssetPath(`./icons/${this.name}.svg`) : this.src;
-    requestIcon(url)
-      .then(source => {
-        const doc = parser.parseFromString(source, 'text/html');
-        const svg = doc.body.querySelector('svg');
+    let url = this.src;
 
-        if (svg) {
-          this.svg = svg.outerHTML;
-          this.slLoad.emit();
-        } else {
-          this.svg = '';
-          this.slError.emit();
-        }
-      })
-      .catch(error => this.slError.emit(error));
+    if (this.library && this.name) {
+      const library = libraries.filter(lib => lib.name === this.library)[0];
+      if (library) {
+        url = library.getPath(this.name);
+      } else {
+        // The library hasn't been registered yet
+        return;
+      }
+    } else if (this.name) {
+      url = getAssetPath(`./icons/${this.name}.svg`);
+    }
+
+    if (url) {
+      requestIcon(url)
+        .then(source => {
+          const doc = parser.parseFromString(source, 'text/html');
+          const svg = doc.body.querySelector('svg');
+
+          if (svg) {
+            this.svg = svg.outerHTML;
+            this.slLoad.emit();
+          } else {
+            this.svg = '';
+            this.slError.emit();
+          }
+        })
+        .catch(error => this.slError.emit(error));
+    }
+  }
+
+  handleLibraryRegistration(event: CustomEvent) {
+    if (event.detail.name === this.library) {
+      this.setIcon();
+    }
   }
 
   render() {
