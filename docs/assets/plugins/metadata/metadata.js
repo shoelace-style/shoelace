@@ -70,7 +70,6 @@
   }
 
   function createMethodsTable(methods) {
-    console.log(methods);
     const table = document.createElement('table');
     table.innerHTML = `
       <thead>
