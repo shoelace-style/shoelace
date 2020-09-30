@@ -46,9 +46,7 @@ export class Avatar {
         part="base"
         class={{
           avatar: true,
-          'avatar--circle': this.shape === 'circle',
-          'avatar--rounded': this.shape === 'rounded',
-          'avatar--square': this.shape === 'square'
+          [`avatar--${this.shape}`]: !!this.shape
         }}
         role="image"
         aria-label={this.alt}
