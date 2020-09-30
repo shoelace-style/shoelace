@@ -186,11 +186,7 @@ export class Alert {
             alert: true,
             'alert--open': this.open,
             'alert--closable': this.closable,
-            'alert--primary': this.type === 'primary',
-            'alert--success': this.type === 'success',
-            'alert--info': this.type === 'info',
-            'alert--warning': this.type === 'warning',
-            'alert--danger': this.type === 'danger'
+            [`alert--${this.type}`]: !!this.type
           }}
           role="alert"
           aria-live="assertive"
