@@ -70,13 +70,14 @@
   }
 
   function createMethodsTable(methods) {
+    console.log(methods);
     const table = document.createElement('table');
     table.innerHTML = `
       <thead>
         <tr>
           <th>Method</th>
           <th>Description</th>
-          <th>Returns</th>
+          <th>Signature</th>
         </tr>
       </thead>
       <tbody>
@@ -86,7 +87,7 @@
         <tr>
           <td><code>${escapeHtml(method.name)}</code></td>
           <td>${escapeHtml(method.docs)}</td>
-          <td><code>${escapeHtml(method.returns.type)}</code></td>
+          <td><code style="white-space: normal;">${escapeHtml(method.signature)}</code></td>
         </tr>
         `
           )
