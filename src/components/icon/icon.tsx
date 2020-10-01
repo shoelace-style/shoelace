@@ -1,13 +1,15 @@
-import { Component, Event, EventEmitter, Method, Prop, State, Watch, getAssetPath, h } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, Method, Prop, State, Watch, getAssetPath, h } from '@stencil/core';
 import { requestIcon } from './request';
 
 interface IconLibrary {
   name: string;
   getPath: (iconName: string) => string;
+  mutate?: (svg: SVGElement) => void;
 }
 
 const libraries: IconLibrary[] = [];
 const parser = new DOMParser();
+let connectedIcons: HTMLSlIconElement[] = [];
 
 /**
  * @since 2.0
@@ -23,6 +25,8 @@ const parser = new DOMParser();
   assetsDirs: ['icons']
 })
 export class Icon {
+  @Element() host: HTMLSlIconElement;
+
   @State() svg: string;
 
   /** The name of the icon to draw. */
@@ -45,28 +49,43 @@ export class Icon {
 
   @Watch('name')
   @Watch('src')
+  @Watch('library')
   handleChange() {
     this.setIcon();
   }
 
   connectedCallback() {
-    this.handleLibraryRegistration = this.handleLibraryRegistration.bind(this);
+    connectedIcons.push(this.host);
   }
 
   componentDidLoad() {
     this.setIcon();
-    document.addEventListener('slIconLibraryRegistered', this.handleLibraryRegistration);
   }
 
   disconnectedCallback() {
-    document.removeEventListener('slIconLibraryRegistered', this.handleLibraryRegistration);
+    connectedIcons = connectedIcons.filter(icon => icon !== this.host);
   }
 
-  /** Registers a custom icon library. */
+  /**
+   * Registers a custom icon library. Calling this method will register the library for all icons. You don't need to
+   * call it more than once for the same library.
+   */
   @Method()
-  async registerLibrary(name: string, getPath: (iconName: string) => string) {
-    libraries.push({ name, getPath });
-    document.dispatchEvent(new CustomEvent('slIconLibraryRegistered', { detail: { name } }));
+  async registerLibrary(name: string, getPath: (iconName: string) => string, mutate: (svg: SVGElement) => void) {
+    libraries.push({ name, getPath, mutate });
+
+    // Redraw connected icons
+    connectedIcons.map(icon => {
+      if (icon.library === name) {
+        icon.redraw();
+      }
+    });
+  }
+
+  /** Fetches the icon and redraws it. Used internally to handle library registrations. */
+  @Method()
+  async redraw() {
+    this.setIcon();
   }
 
   getLabel() {
@@ -84,10 +103,10 @@ export class Icon {
   }
 
   setIcon() {
+    const library = this.library ? libraries.filter(lib => lib.name === this.library)[0] : null;
     let url = this.src;
 
     if (this.library && this.name) {
-      const library = libraries.filter(lib => lib.name === this.library)[0];
       if (library) {
         url = library.getPath(this.name);
       } else {
@@ -104,6 +123,10 @@ export class Icon {
           const doc = parser.parseFromString(source, 'text/html');
           const svg = doc.body.querySelector('svg');
 
+          if (library && typeof library.mutate === 'function') {
+            library.mutate(svg);
+          }
+
           if (svg) {
             this.svg = svg.outerHTML;
             this.slLoad.emit();
@@ -113,12 +136,6 @@ export class Icon {
           }
         })
         .catch(error => this.slError.emit(error));
-    }
-  }
-
-  handleLibraryRegistration(event: CustomEvent) {
-    if (event.detail.name === this.library) {
-      this.setIcon();
     }
   }
 
