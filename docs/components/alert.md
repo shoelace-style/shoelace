@@ -5,19 +5,6 @@
 Alerts are used to display important messages either inline or as toast notifications.
 
 ```html preview
-<div class="icon-reg">
-  <sl-icon library="feather" name="feather"></sl-icon>
-</div>
-
-<script>
-  const container = document.querySelector('.icon-reg');
-  const icon = container.querySelector('sl-icon');
-
-  icon.registerLibrary('feather', name => `https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/icons/${name}.svg`); 
-</script>
-```
-
-```html preview
 <sl-alert open>
   <sl-icon slot="icon" name="info-circle"></sl-icon>
   This is a standard alert. You can customize its content and even the icon.
