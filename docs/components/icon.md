@@ -85,7 +85,7 @@ This example registers a custom icon library named `my-icons` that serves icons 
 
 ### Feather Icons
 
-This example registers and displays a handful of icons from the [Feather Icons](https://feathericons.com/) library using the jsDelivr CDN.
+This example registers the [Feather Icons](https://feathericons.com/) library using the jsDelivr CDN. The registration function maps the name of the icon to its location on the CDN.
 
 ```html preview
 <div class="icon-custom-feather" style="font-size: 24px;">
@@ -111,7 +111,7 @@ This example registers and displays a handful of icons from the [Feather Icons](
 
 ### Heroicons
 
-The following example registers the <a href="https://heroicons.com/" rel="noopener" target="_blank">Heroicons</a> library using the jsDelivr CDN.
+This example registers the [Heroicons](https://heroicons.com/) library using the jsDelivr CDN. The registration function maps the name of the icon to its location on the CDN.
 
 ```html preview
 <div class="icon-custom-heroicons" style="font-size: 24px;">
@@ -138,7 +138,7 @@ The following example registers the <a href="https://heroicons.com/" rel="noopen
 
 ### Ionicons
 
-The following example registers the <a href="https://ionicons.com/" rel="noopener" target="_blank">Ionicons</a> library using the jsDelivr CDN.
+This example registers the [Ionicons](https://ionicons.com/) library using the jsDelivr CDN. The registration function maps the name of the icon to its location on the CDN. This library also requires some SVG mutations due to the way it uses a stylesheet that we're not importing.
 
 ```html preview
 <div class="icon-custom-ionicons" style="font-size: 24px;">
@@ -173,7 +173,7 @@ The following example registers the <a href="https://ionicons.com/" rel="noopene
 
 ### Unicons
 
-The following example registers the <a href="https://iconscout.com/unicons" rel="noopener" target="_blank">Unicons</a> library using the jsDelivr CDN.
+This example registers the [Unicons](https://iconscout.com/unicons) library using the jsDelivr CDN. The registration function maps the name of the icon to its location on the CDN. This library also requires an SVG mutation to set the `fill` to `currentColor`.
 
 ```html preview
 <div class="icon-custom-unicons" style="font-size: 24px;">
