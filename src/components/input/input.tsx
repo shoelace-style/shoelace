@@ -100,6 +100,9 @@ export class Input {
   /** The input's autofocus attribute. */
   @Prop() autofocus: boolean;
 
+  /** Enables spell checking on the input. */
+  @Prop() spellcheck: boolean;
+
   /**
    * This will be true when the control is in an invalid state. Validity is determined by props such as `type`,
    * `required`, `minlength`, `maxlength`, and `pattern` using the browser's constraint validation API.
@@ -307,6 +310,7 @@ export class Input {
             autoComplete={this.autocomplete}
             autoCorrect={this.autocorrect}
             autoFocus={this.autofocus}
+            spellcheck={this.spellcheck}
             pattern={this.pattern}
             required={this.required}
             inputMode={this.inputmode}
