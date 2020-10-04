@@ -85,7 +85,7 @@ export class Input {
   /** A pattern to validate input against. */
   @Prop({ reflect: true }) pattern: string;
 
-  /** Set to true to make the checkbox a required field. */
+  /** Set to true to make the input a required field. */
   @Prop({ reflect: true }) required: boolean;
 
   /** The input's autocaptialize attribute. */
