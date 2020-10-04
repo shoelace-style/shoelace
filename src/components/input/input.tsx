@@ -85,7 +85,7 @@ export class Input {
   /** A pattern to validate input against. */
   @Prop({ reflect: true }) pattern: string;
 
-  /** Set to true to make the checkbox a required field. */
+  /** Set to true to make the input a required field. */
   @Prop({ reflect: true }) required: boolean;
 
   /** The input's autocaptialize attribute. */
@@ -99,6 +99,9 @@ export class Input {
 
   /** The input's autofocus attribute. */
   @Prop() autofocus: boolean;
+
+  /** Enables spell checking on the input. */
+  @Prop() spellcheck: boolean;
 
   /**
    * This will be true when the control is in an invalid state. Validity is determined by props such as `type`,
@@ -307,6 +310,7 @@ export class Input {
             autoComplete={this.autocomplete}
             autoCorrect={this.autocorrect}
             autoFocus={this.autofocus}
+            spellcheck={this.spellcheck}
             pattern={this.pattern}
             required={this.required}
             inputMode={this.inputmode}

@@ -627,6 +627,10 @@ export namespace Components {
          */
         "size": 'small' | 'medium' | 'large';
         /**
+          * Enables spell checking on the input.
+         */
+        "spellcheck": boolean;
+        /**
           * The input's step attribute.
          */
         "step": number;
@@ -2081,6 +2085,10 @@ declare namespace LocalJSX {
           * The input's size.
          */
         "size"?: 'small' | 'medium' | 'large';
+        /**
+          * Enables spell checking on the input.
+         */
+        "spellcheck"?: boolean;
         /**
           * The input's step attribute.
          */

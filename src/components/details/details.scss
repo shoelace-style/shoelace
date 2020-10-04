@@ -18,6 +18,7 @@
 .details {
   border: solid 1px var(--sl-color-gray-90);
   border-radius: var(--sl-border-radius-medium);
+  overflow-anchor: none;
 }
 
 .details--disabled {
