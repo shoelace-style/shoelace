@@ -1,19 +1,27 @@
-# Integrations
+# Rails
 
-## Rails
+## Table of Contents
 
-### Requirements
+- [Requirements](#requirements)
+- [Getting Started](#getting-started)
+  * [NPM Packages](#npm-packages)
+  * [Importing Javascript](#importing-javascript)
+  * [Webpack Config](#webpack-config)
+  * [Adding Pack Tags](#adding-pack-tags)
+- [Additional Resources](#additional-resources)
+
+## Requirements
 
 Currently, this integration has been tested and working with the
 following:
 
-- Rails >= 6
-- Node >= 12.10
-- Webpacker >= 5
+- `Rails >= 6`
+- `Node >= 12.10`
+- `Webpacker >= 5`
 
-### Getting Started
+## Getting Started
 
-#### NPM packages
+### NPM packages
 
 To get started using [Shoelace](https://shoelace.style) with Rails you must first
 install the following packages:
@@ -22,18 +30,18 @@ install the following packages:
 yarn add @shoelace-style/shoelace copy-webpack-plugin
 ```
 
-#### Importing Stylesheets
+### Importing Stylesheets
 
 The next step is to import the Shoelace stylesheets in a file located at
 `app/javascript/stylesheets/application.scss` like so:
 
-```scss
+```css
 /* app/javascript/stylesheets/application.scss */
 
 @import '~@shoelace-style/shoelace/dist/shoelace/shoelace';
 ```
 
-#### Importing Javascript
+### Importing Javascript
 
 After importing the stylesheet, you must now import the Javascript files
 for Shoelace.
@@ -52,9 +60,9 @@ setAssetPath(document.currentScript.src)
 defineCustomElements()
 ```
 
-**NOTE** The above code will import all shoelace web components for convenience. If you would like to selectively import components check out the [Using Webpack](https://shoelace.style/getting-started/installation?id=using-webpack) section of the docs.
+**NOTE:** The above code will import all shoelace web components for convenience. If you would like to selectively import components check out the [Using Webpack](https://shoelace.style/getting-started/installation?id=using-webpack) section of the docs.
 
-#### Webpack Config
+### Webpack Config
 
 Now that we have our stylesheets and javascript setup, we have to add
 Shoelace's icons to the final build output. To do so, we must modify the
@@ -67,6 +75,7 @@ const { environment } = require('@rails/webpacker')
 const path = require('path')
 const CopyPlugin = require('copy-webpack-plugin')
 
+// Adds shoelace icons to Webpack's build process
 environment.plugins.append(
   'CopyPlugin',
   new CopyPlugin({
@@ -83,7 +92,7 @@ environment.plugins.append(
 )
 ```
 
-#### Adding pack tags
+### Adding pack tags
 
 The final step to this process is to add the corresponding `pack_tags` to your `app/views/layouts/application.html.erb` file.
 
@@ -96,8 +105,8 @@ document, like so:
   <head>
     <!-- above tags omitted -->
 
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body><%= yield %></body>
 </html>
@@ -105,9 +114,11 @@ document, like so:
 
 And that's it! You can start using Shoelace Web Components with Rails.
 
-Check out the [Shoelace Documentation](https://shoelace.style/getting-started/usage) for how to use Shoelace.
+Check out the [Shoelace
+Documentation](https://shoelace.style/getting-started/usage) for more
+information on how to use Shoelace Web Components.
 
-### Additional Resources
+## Additional Resources
 
 There is an example repo available to help you get started.
 
