@@ -7,13 +7,14 @@
 
   function runScript(script) {
     const newScript = document.createElement('script');
-    newScript.appendChild(
-      document.createTextNode(`
-      (() => {
-        ${script.innerHTML}
-      })();
-    `)
-    );
+
+    if (script.type === 'module') {
+      newScript.type = 'module';
+      newScript.textContent = script.innerHTML;
+    } else {
+      newScript.appendChild(document.createTextNode(`(() => { ${script.innerHTML} })();`));
+    }
+
     script.parentNode.replaceChild(newScript, script);
   }
 
