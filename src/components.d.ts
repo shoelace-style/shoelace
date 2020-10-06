@@ -599,7 +599,7 @@ export namespace Components {
          */
         "reportValidity": () => Promise<boolean>;
         /**
-          * Set to true to make the checkbox a required field.
+          * Set to true to make the input a required field.
          */
         "required": boolean;
         /**
@@ -2078,7 +2078,7 @@ declare namespace LocalJSX {
          */
         "readonly"?: boolean;
         /**
-          * Set to true to make the checkbox a required field.
+          * Set to true to make the input a required field.
          */
         "required"?: boolean;
         /**
