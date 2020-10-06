@@ -1,15 +1,8 @@
 import { Component, Element, Event, EventEmitter, Method, Prop, State, Watch, getAssetPath, h } from '@stencil/core';
+import { getLibrary, watchIcon, unwatchIcon } from './icon-library';
 import { requestIcon } from './request';
 
-interface IconLibrary {
-  name: string;
-  getPath: (iconName: string) => string;
-  mutate?: (svg: SVGElement) => void;
-}
-
-const libraries: IconLibrary[] = [];
 const parser = new DOMParser();
-let connectedIcons: HTMLSlIconElement[] = [];
 
 /**
  * @since 2.0
@@ -55,7 +48,7 @@ export class Icon {
   }
 
   connectedCallback() {
-    connectedIcons.push(this.host);
+    watchIcon(this.host);
   }
 
   componentDidLoad() {
@@ -63,26 +56,10 @@ export class Icon {
   }
 
   disconnectedCallback() {
-    connectedIcons = connectedIcons.filter(icon => icon !== this.host);
+    unwatchIcon(this.host);
   }
 
-  /**
-   * Registers a custom icon library. Calling this method will register the library for all icons. You don't need to
-   * call it more than once for the same library.
-   */
-  @Method()
-  async registerLibrary(name: string, getPath: (iconName: string) => string, mutate: (svg: SVGElement) => void) {
-    libraries.push({ name, getPath, mutate });
-
-    // Redraw connected icons
-    connectedIcons.map(icon => {
-      if (icon.library === name) {
-        icon.redraw();
-      }
-    });
-  }
-
-  /** Fetches the icon and redraws it. Used internally to handle library registrations. */
+  /** @internal Fetches the icon and redraws it. Used to handle library registrations. */
   @Method()
   async redraw() {
     this.setIcon();
@@ -103,7 +80,7 @@ export class Icon {
   }
 
   setIcon() {
-    const library = this.library ? libraries.filter(lib => lib.name === this.library)[0] : null;
+    const library = getLibrary(this.library);
     let url = this.src;
 
     if (this.library && this.name) {

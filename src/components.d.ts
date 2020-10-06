@@ -480,14 +480,7 @@ export namespace Components {
           * The name of the icon to draw.
          */
         "name": string;
-        /**
-          * Fetches the icon and redraws it. Used internally to handle library registrations.
-         */
         "redraw": () => Promise<void>;
-        /**
-          * Registers a custom icon library. Calling this method will register the library for all icons. You don't need to call it more than once for the same library.
-         */
-        "registerLibrary": (name: string, getPath: (iconName: string) => string, mutate: (svg: SVGElement) => void) => Promise<void>;
         /**
           * An external URL of an SVG file.
          */
