@@ -248,6 +248,7 @@ strong {
 
 .markdown-section {
   max-width: 860px;
+  overflow-anchor: none;
 }
 
 .markdown-section blockquote {
