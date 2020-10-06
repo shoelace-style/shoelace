@@ -736,7 +736,7 @@ export class ColorPicker {
               autocomplete="off"
               autocorrect="off"
               autocapitalize="off"
-              spellcheck="off"
+              spellcheck={false}
               value={this.inputValue}
               disabled={this.disabled}
               onKeyDown={this.handleInputKeyDown}
