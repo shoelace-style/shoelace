@@ -367,4 +367,30 @@ Icons in this library are licensed under the [Apache 2.0 License](https://github
 </div>
 ```
 
+### Customizing the Default Library
+
+Shoelace comes bundled with over 1,100 icons courtesy of the [Bootstrap Icons](https://icons.getbootstrap.com/) project. These are the default icons that display when you use `<sl-icon>` without a `name` attribute. If you prefer to have these icons resolve elsewhere, you can register an icon library with the `default` name and a custom resolver.
+
+This example will load the same set of icons from the jsDelivr CDN instead of your local assets folder.
+
+```html
+<sl-icon-library name="default"></sl-icon-library>
+
+<script>
+  const library = document.querySelector('sl-icon-library[name="default"]');
+  library.resolver = name => `https://cdn.jsdelivr.net/npm/bootstrap-icons@1.0.0/icons/${name}.svg`;
+</script>
+```
+
+Alternatively, you can replace the default icons with a completely different icon set.
+
+```html
+<sl-icon-library name="default"></sl-icon-library>
+
+<script>
+  const library = document.querySelector('sl-icon-library[name="default"]');
+  library.resolver = name => `/my/custom/icons/${name}.svg`;
+</script>
+```
+
 [component-metadata:sl-icon-library]

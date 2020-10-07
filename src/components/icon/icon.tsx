@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, Method, Prop, State, Watch, getAssetPath, h } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, Method, Prop, State, Watch, h } from '@stencil/core';
 import { getLibrary, watchIcon, unwatchIcon } from '../icon-library/icon-library-registry';
 import { requestIcon } from './request';
 
@@ -32,7 +32,7 @@ export class Icon {
   @Prop() label: string;
 
   /** The name of a registered custom icon library. */
-  @Prop() library: string;
+  @Prop() library = 'default';
 
   /** Emitted when the icon has loaded. */
   @Event() slLoad: EventEmitter;
@@ -83,15 +83,8 @@ export class Icon {
     const library = getLibrary(this.library);
     let url = this.src;
 
-    if (this.library && this.name) {
-      if (library) {
-        url = library.resolver(this.name);
-      } else {
-        // The library hasn't been registered yet
-        return;
-      }
-    } else if (this.name) {
-      url = getAssetPath(`./icons/${this.name}.svg`);
+    if (this.name && library) {
+      url = library.resolver(this.name);
     }
 
     if (url) {

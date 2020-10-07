@@ -1,3 +1,5 @@
+import { getAssetPath } from '@stencil/core';
+
 export type IconLibraryResolver = (name: string) => string;
 export type IconLibraryMutator = (svg: SVGElement) => void;
 interface IconLibraryRegistry {
@@ -6,7 +8,12 @@ interface IconLibraryRegistry {
   mutator?: IconLibraryMutator;
 }
 
-let registry: IconLibraryRegistry[] = [];
+let registry: IconLibraryRegistry[] = [
+  {
+    name: 'default',
+    resolver: name => getAssetPath(`./icons/${name}.svg`)
+  }
+];
 let watchedIcons: HTMLSlIconElement[] = [];
 
 export function watchIcon(icon: HTMLSlIconElement) {
