@@ -23,6 +23,7 @@
   - [Form](/components/form.md)
   - [Icon](/components/icon.md)
   - [Icon Button](/components/icon-button.md)
+  - [Icon Library](/components/icon-library.md)
   - [Image Comparer](/components/image-comparer.md)
   - [Input](/components/input.md)
   - [Menu](/components/menu.md)

@@ -5,6 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { IconLibraryMutator, IconLibraryResolver } from "./components/icon-library/icon-library-registry";
 export namespace Components {
     interface SlAlert {
         /**
@@ -473,7 +474,7 @@ export namespace Components {
          */
         "label": string;
         /**
-          * The name of a custom registered icon library.
+          * The name of a registered custom icon library.
          */
         "library": string;
         /**
@@ -496,13 +497,31 @@ export namespace Components {
          */
         "label": string;
         /**
-          * The name of the icon to draw. See the icon component for a full list of icons.
+          * The name of a registered custom icon library.
+         */
+        "library": string;
+        /**
+          * The name of the icon to draw.
          */
         "name": string;
         /**
           * An external URL of an SVG file.
          */
         "src": string;
+    }
+    interface SlIconLibrary {
+        /**
+          * A function that mutates the SVG element before it renders.
+         */
+        "mutator": IconLibraryMutator;
+        /**
+          * The name of the icon library.
+         */
+        "name": string;
+        /**
+          * A function that translates an icon name to a URL where the corresponding SVG file exists The URL can be local or a CORS-enabled endpoint.
+         */
+        "resolver": IconLibraryResolver;
     }
     interface SlImageComparer {
         /**
@@ -1255,6 +1274,12 @@ declare global {
         prototype: HTMLSlIconButtonElement;
         new (): HTMLSlIconButtonElement;
     };
+    interface HTMLSlIconLibraryElement extends Components.SlIconLibrary, HTMLStencilElement {
+    }
+    var HTMLSlIconLibraryElement: {
+        prototype: HTMLSlIconLibraryElement;
+        new (): HTMLSlIconLibraryElement;
+    };
     interface HTMLSlImageComparerElement extends Components.SlImageComparer, HTMLStencilElement {
     }
     var HTMLSlImageComparerElement: {
@@ -1405,6 +1430,7 @@ declare global {
         "sl-format-bytes": HTMLSlFormatBytesElement;
         "sl-icon": HTMLSlIconElement;
         "sl-icon-button": HTMLSlIconButtonElement;
+        "sl-icon-library": HTMLSlIconLibraryElement;
         "sl-image-comparer": HTMLSlImageComparerElement;
         "sl-input": HTMLSlInputElement;
         "sl-menu": HTMLSlMenuElement;
@@ -1929,7 +1955,7 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
-          * The name of a custom registered icon library.
+          * The name of a registered custom icon library.
          */
         "library"?: string;
         /**
@@ -1959,13 +1985,31 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
-          * The name of the icon to draw. See the icon component for a full list of icons.
+          * The name of a registered custom icon library.
+         */
+        "library"?: string;
+        /**
+          * The name of the icon to draw.
          */
         "name"?: string;
         /**
           * An external URL of an SVG file.
          */
         "src"?: string;
+    }
+    interface SlIconLibrary {
+        /**
+          * A function that mutates the SVG element before it renders.
+         */
+        "mutator"?: IconLibraryMutator;
+        /**
+          * The name of the icon library.
+         */
+        "name"?: string;
+        /**
+          * A function that translates an icon name to a URL where the corresponding SVG file exists The URL can be local or a CORS-enabled endpoint.
+         */
+        "resolver"?: IconLibraryResolver;
     }
     interface SlImageComparer {
         /**
@@ -2624,6 +2668,7 @@ declare namespace LocalJSX {
         "sl-format-bytes": SlFormatBytes;
         "sl-icon": SlIcon;
         "sl-icon-button": SlIconButton;
+        "sl-icon-library": SlIconLibrary;
         "sl-image-comparer": SlImageComparer;
         "sl-input": SlInput;
         "sl-menu": SlMenu;
@@ -2669,6 +2714,7 @@ declare module "@stencil/core" {
             "sl-format-bytes": LocalJSX.SlFormatBytes & JSXBase.HTMLAttributes<HTMLSlFormatBytesElement>;
             "sl-icon": LocalJSX.SlIcon & JSXBase.HTMLAttributes<HTMLSlIconElement>;
             "sl-icon-button": LocalJSX.SlIconButton & JSXBase.HTMLAttributes<HTMLSlIconButtonElement>;
+            "sl-icon-library": LocalJSX.SlIconLibrary & JSXBase.HTMLAttributes<HTMLSlIconLibraryElement>;
             "sl-image-comparer": LocalJSX.SlImageComparer & JSXBase.HTMLAttributes<HTMLSlImageComparerElement>;
             "sl-input": LocalJSX.SlInput & JSXBase.HTMLAttributes<HTMLSlInputElement>;
             "sl-menu": LocalJSX.SlMenu & JSXBase.HTMLAttributes<HTMLSlMenuElement>;

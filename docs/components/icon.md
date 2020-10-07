@@ -4,7 +4,7 @@
 
 Icons are symbols that can be used to represent various options within an application.
 
-Shoelace comes bundled with over 1,100 icons courtesy of the [Bootstrap Icons](https://icons.getbootstrap.com/) project. If you prefer, you can also [register custom libraries](#registering-custom-libraries).
+Shoelace comes bundled with over 1,100 icons courtesy of the [Bootstrap Icons](https://icons.getbootstrap.com/) project. If you prefer, you can also register [custom icon libraries](/components/icon-library.md).
 
 Click or tap on an icon below to copy its name and use it like this.
 
@@ -56,166 +56,10 @@ Icons are sized relative to the current font size. To change their size, set the
 
 ### Custom Icons
 
-Custom icons can be loaded individually with the `src` attribute. Only SVG icons are supported.
+Custom icons can be loaded individually with the `src` attribute. Only SVGs on a local or CORS-enabled endpoint are supported. If you're using more than one custom icon, it might make sense to register a [custom icon library](/components/icon-library.md).
 
 ```html preview
 <sl-icon src="/assets/images/shoe.svg" style="font-size: 8rem;"></sl-icon>
-```
-
-## Registering Custom Libraries
-
-You can register custom SVG icon libraries with the `registerIconLibrary()` utility. The import syntax will vary depending on how you're consuming Shoelace.
-
-If you're using the CDN, the import will look like this:
-
-```html
-<!-- The script type must be "module" -->
-<script type="module">
-  import { registerIconLibrary } from 'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%';
-</script>
-```
-
-If you're using a bundler such as webpack or Rollup, the import will look like this:
-
-```js
-import { registerIconLibrary } from '@shoelace-style/shoelace';
-```
-
-Icon libraries can be present locally or on a CORS-enabled CDN. There is no limit to how many libraries you can register and there is no cost associated with registering them, as individual icons are requested only when they're used.
-
-The `registerIconLibrary()` method accepts three arguments: the name of the library, a function that resolves an icon name to a URL, and an optional function that can be used to mutate the SVG element.
-
-Once registered, icons can be displayed using the `library` and `name` attributes.
-
-```html
-<script type="module">
-  import { registerIconLibrary } from 'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%';
-
-  registerIconLibrary('my-icons', name => `/public/icons/${name}.svg`);
-</script>
-
-<!-- Shows the icon located at /public/icons/smile.svg -->
-<sl-icon library="my-icons" name="smile"></sl-icon>
-```
-
-For your convenience, registration functions for a handful of open source icon libraries are demonstrated below.
-
-### Feather Icons
-
-This example registers the [Feather Icons](https://feathericons.com/) library. The registration function maps the name of the icon to its location on the CDN.
-
-```html preview
-<script type="module">
-  // See above for the correct import to use in your application
-  import { registerIconLibrary } from '/dist/shoelace/index.esm.js';
-
-  registerIconLibrary('feather', name => `https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/icons/${name}.svg`); 
-</script>
-
-<div class="icon-custom-feather" style="font-size: 24px;">
-  <sl-icon library="feather" name="feather"></sl-icon>
-  <sl-icon library="feather" name="briefcase"></sl-icon>
-  <sl-icon library="feather" name="pie-chart"></sl-icon>
-  <sl-icon library="feather" name="cloud"></sl-icon>
-  <sl-icon library="feather" name="settings"></sl-icon>
-  <sl-icon library="feather" name="smile"></sl-icon>
-  <sl-icon library="feather" name="map-pin"></sl-icon>
-  <sl-icon library="feather" name="printer"></sl-icon>
-  <sl-icon library="feather" name="search"></sl-icon>
-  <sl-icon library="feather" name="shopping-cart"></sl-icon>
-</div>
-```
-
-### Heroicons
-
-This example registers the [Heroicons](https://heroicons.com/) library. The registration function maps the name of the icon to its location on the CDN.
-
-```html preview
-<script type="module">
-  // See above for the correct import to use in your application
-  import { registerIconLibrary } from '/dist/shoelace/index.esm.js';
-
-  registerIconLibrary('heroicons', name => `https://cdn.jsdelivr.net/npm/heroicons@0.4.2/outline/${name}.svg`); 
-</script>
-
-<div class="icon-custom-heroicons" style="font-size: 24px;">
-  <sl-icon library="heroicons" name="archive"></sl-icon>
-  <sl-icon library="heroicons" name="badge-check"></sl-icon>
-  <sl-icon library="heroicons" name="chat"></sl-icon>
-  <sl-icon library="heroicons" name="cloud"></sl-icon>
-  <sl-icon library="heroicons" name="cog"></sl-icon>
-  <sl-icon library="heroicons" name="document-text"></sl-icon>
-  <sl-icon library="heroicons" name="exclamation"></sl-icon>
-  <sl-icon library="heroicons" name="gift"></sl-icon>
-  <sl-icon library="heroicons" name="puzzle"></sl-icon>
-  <sl-icon library="heroicons" name="volume-up"></sl-icon>
-</div>
-```
-
-
-### Ionicons
-
-This example registers the [Ionicons](https://ionicons.com/) library. The registration function maps the name of the icon to its location on the CDN. This library also requires some SVG mutations due to the way it uses a stylesheet that we're not importing.
-
-```html preview
-<script type="module">
-  // See above for the correct import to use in your application
-  import { registerIconLibrary } from '/dist/shoelace/index.esm.js';
-
-  registerIconLibrary(
-    'ionicons', 
-    name => `https://cdn.jsdelivr.net/npm/ionicons@5.1.2/dist/ionicons/svg/${name}.svg`, 
-    svg => {
-      svg.setAttribute('fill', 'currentColor');
-      svg.setAttribute('stroke', 'currentColor');
-      [...svg.querySelectorAll('.ionicon-fill-none')].map(el => el.setAttribute('fill', 'none'));
-      [...svg.querySelectorAll('.ionicon-stroke-width')].map(el => el.setAttribute('stroke-width', '32px'));
-    }
-  );  
-</script>
-
-<div class="icon-custom-ionicons" style="font-size: 24px;">
-  <sl-icon library="ionicons" name="alarm-outline"></sl-icon>
-  <sl-icon library="ionicons" name="american-football-outline"></sl-icon>
-  <sl-icon library="ionicons" name="attach-outline"></sl-icon>
-  <sl-icon library="ionicons" name="bug-outline"></sl-icon>
-  <sl-icon library="ionicons" name="chatbubble-outline"></sl-icon>
-  <sl-icon library="ionicons" name="flask-outline"></sl-icon>
-  <sl-icon library="ionicons" name="key-outline"></sl-icon>
-  <sl-icon library="ionicons" name="settings-outline"></sl-icon>
-  <sl-icon library="ionicons" name="warning-outline"></sl-icon>
-  <sl-icon library="ionicons" name="wine-outline"></sl-icon>
-</div>
-```
-
-### Unicons
-
-This example registers the [Unicons](https://iconscout.com/unicons) library. The registration function maps the name of the icon to its location on the CDN. This library also requires an SVG mutation to set the `fill` to `currentColor`.
-
-```html preview
-<script type="module">
-  // See above for the correct import to use in your application
-  import { registerIconLibrary } from '/dist/shoelace/index.esm.js';
-
-  registerIconLibrary(
-    'unicons', 
-    name => `https://cdn.jsdelivr.net/npm/@iconscout/unicons@3.0.3/svg/line/${name}.svg`, 
-    svg => svg.setAttribute('fill', 'currentColor')
-  );
-</script>
-
-<div class="icon-custom-unicons" style="font-size: 24px;">
-  <sl-icon library="unicons" name="bag"></sl-icon>
-  <sl-icon library="unicons" name="book-alt"></sl-icon>
-  <sl-icon library="unicons" name="clipboard"></sl-icon>
-  <sl-icon library="unicons" name="smile"></sl-icon>
-  <sl-icon library="unicons" name="envelope"></sl-icon>
-  <sl-icon library="unicons" name="eye"></sl-icon>
-  <sl-icon library="unicons" name="folder"></sl-icon>
-  <sl-icon library="unicons" name="heart"></sl-icon>
-  <sl-icon library="unicons" name="padlock"></sl-icon>
-  <sl-icon library="unicons" name="rocket"></sl-icon>
-</div>
 ```
 
 <!-- Supporting scripts and styles for the search utility -->

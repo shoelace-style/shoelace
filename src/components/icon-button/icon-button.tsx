@@ -16,8 +16,11 @@ import { focusVisible } from '../../utilities/focus-visible';
 export class IconButton {
   button: HTMLButtonElement;
 
-  /** The name of the icon to draw. See the icon component for a full list of icons. */
+  /** The name of the icon to draw. */
   @Prop({ reflect: true }) name: string;
+
+  /** The name of a registered custom icon library. */
+  @Prop({ reflect: true }) library: string;
 
   /** An external URL of an SVG file. */
   @Prop({ reflect: true }) src: string;
@@ -47,7 +50,7 @@ export class IconButton {
         }}
         type="button"
       >
-        <sl-icon name={this.name} src={this.src} label={this.label} />
+        <sl-icon library={this.library} name={this.name} src={this.src} label={this.label} />
       </button>
     );
   }
