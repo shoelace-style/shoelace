@@ -59,3 +59,6 @@
   - [Border Radius](/tokens/border-radius.md)
   - [Transition](/tokens/transition.md)
   - [Z-index](/tokens/z-index.md)
+
+- Tutorials
+  - [Integrating with Rails](/tutorials/integrating-with-rails.md)

@@ -12,6 +12,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Added `spellcheck` prop to `sl-input`
 - Added `sl-icon-library` to allow custom icon library registration
 - Added `library` prop to `sl-icon` and `sl-icon-button`
+- Added "Integrating with Rails" tutorial to the docs, courtesy of [ParamagicDev](https://github.com/ParamagicDev)
 - Fixed a bug where `sl-progress-ring` rendered incorrectly when zoomed in Safari [#227](https://github.com/shoelace-style/shoelace/issues/227)
 - Fixed a bug where tabbing into slotted elements closes `sl-dropdown` when used in a shadow root [#223](https://github.com/shoelace-style/shoelace/issues/223)
 - Fixed a bug where scroll anchoring caused undesirable scrolling when `sl-details` are grouped
