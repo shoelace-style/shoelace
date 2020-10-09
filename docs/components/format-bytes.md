@@ -16,7 +16,7 @@ Formats a number as a human readable bytes value.
   const formatter = container.querySelector('sl-format-bytes');
   const input = container.querySelector('sl-input');
 
-  input.addEventListener('slInput', () => formatter.value = input.value || 0);
+  input.addEventListener('sl-input', () => formatter.value = input.value || 0);
 </script>
 ```
 

@@ -199,7 +199,7 @@ By default, drawers are closed when the user clicks or taps on the overlay. To p
     openButton.addEventListener('click', () => drawer.show());
     closeButton.addEventListener('click', () => drawer.hide());
 
-    drawer.addEventListener('slOverlayDismiss', event => event.preventDefault());
+    drawer.addEventListener('sl-overlay-dismiss', event => event.preventDefault());
   })();
 </script>
 ```

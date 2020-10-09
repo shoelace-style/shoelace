@@ -103,7 +103,7 @@ Custom icons can be loaded individually with the `src` attribute. Only SVGs on a
       });
 
       // Filter as the user types
-      input.addEventListener('slInput', () => {
+      input.addEventListener('sl-input', () => {
         [...list.querySelectorAll('.icon-list-item')].map(item => {
           const filter = input.value.toLowerCase();
           if (filter === '') {
@@ -119,7 +119,7 @@ Custom icons can be loaded individually with the `src` attribute. Only SVGs on a
       const iconType = localStorage.getItem('sl-icon:type') || 'outline';
       select.value = iconType;
       list.setAttribute('data-type', select.value);
-      select.addEventListener('slChange', () => {
+      select.addEventListener('sl-change', () => {
         list.setAttribute('data-type', select.value);
         localStorage.setItem('sl-icon:type', select.value);
       });

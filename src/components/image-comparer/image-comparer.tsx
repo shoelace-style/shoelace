@@ -36,7 +36,7 @@ export class ImageComparer {
   }
 
   /** Emitted when the slider position changes. */
-  @Event() slChange: EventEmitter;
+  @Event({ eventName: 'sl-change' }) slChange: EventEmitter;
 
   connectedCallback() {
     this.dividerPosition = this.position;

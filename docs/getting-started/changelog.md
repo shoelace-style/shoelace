@@ -8,6 +8,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
+- 🚨 BREAKING CHANGE: Transformed all Shoelace events to lowercase ([details](#why-did-event-names-change))
 - Added support for dropdowns and non-icon elements to `sl-input`
 - Added `spellcheck` prop to `sl-input`
 - Added `sl-icon-library` to allow custom icon library registration
@@ -16,6 +17,19 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug where `sl-progress-ring` rendered incorrectly when zoomed in Safari [#227](https://github.com/shoelace-style/shoelace/issues/227)
 - Fixed a bug where tabbing into slotted elements closes `sl-dropdown` when used in a shadow root [#223](https://github.com/shoelace-style/shoelace/issues/223)
 - Fixed a bug where scroll anchoring caused undesirable scrolling when `sl-details` are grouped
+
+### Why did event names change?
+
+Shoelace events were updated to use a lowercase, kebab-style naming convention. Instead of event names such as `slChange` and `slAfterShow`, you'll need to use `sl-change` and `sl-after-show` now.
+
+This change was necessary to address a critical issue in frameworks that use DOM templates with declarative event bindings such as `<sl-button @slChange="handler">`. Due to HTML's case-insensitivity, browsers translate attribute names to lowercase, turning `@slChange` into `@slchange`, making it impossible to listen to `slChange`.
+
+While declarative event binding is a non-standard feature, not supporting it would make Shoelace much harder to use in popular frameworks. To accommodate those users and provide a better developer experience, we decided to change the naming convention while Shoelace is still in beta.
+
+The following pages demonstrate why this change was necessary.
+
+- [This Polymer FAQ from Custom Elements Everywhere](https://custom-elements-everywhere.com/#faq-polymer])
+- [Vue's Event Names documentation](https://vuejs.org/v2/guide/components-custom-events.html#Event-Names)
 
 ## 2.0.0-beta.19
 
@@ -35,7 +49,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Added `sl-responsive-embed` component
 - Fixed a bug where swapping an animated element wouldn't restart the animation in `sl-animation`
 - Fixed a bug where the cursor was incorrect when `sl-select` was disabled
-- Fixed a bug where `slBlur` and `slFocus` were emitted twice in `sl-select`
+- Fixed a bug where `slblur` and `slfocus` were emitted twice in `sl-select`
 - Fixed a bug where clicking on `sl-menu` wouldn't focus it
 - Fixed a bug in the popover utility where `onAfterShow` would fire too soon
 - Fixed a bug where `bottom` and `right` placements didn't render properly in `sl-tab-group`
@@ -72,7 +86,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Add `hoist` prop to `sl-color-picker`, `sl-dropdown`, and `sl-select` to work around panel clipping
 - Add `sl-format-bytes` utility component
 - Add `clearable` and `required` props to `sl-select`
-- Add `slClear` event to `sl-input`
+- Add `slclear` event to `sl-input`
 - Added keyboard support to the preview resizer in the docs
 - Fixed a bug where the `aria-selected` state was incorrect in `sl-menu-item`
 - Fixed a bug where custom properties applied to `sl-tooltip` didn't affect show/hide transitions
@@ -100,7 +114,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Added `tag` part to `sl-select`
 - Updated `package.json` so custom elements imports can be consumed from the root
 - Fixed a bug where scrolling dialogs didn't resize properly in Safari
-- Fixed a bug where `slShow` and `slHide` would be emitted twice in some components
+- Fixed a bug where `slshow` and `slhide` would be emitted twice in some components
 - Fixed a bug where `custom-elements/index.d.ts` was broken due to an unclosed comment (fixed in Stencil 1.17.3)
 - Fixed bug where inputs were not using border radius tokens
 - Fixed a bug where the text color was being erroneously set in `sl-progress-ring`
@@ -110,7 +124,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## 2.0.0-beta.13
 
-- Added `slActivate` and `slDeactivate` events to `sl-menu-item`
+- Added `slactivate` and `sldeactivate` events to `sl-menu-item`
 - Added experimental `sl-animation` component
 - Added shields to documentation
 - Fixed a bug where link buttons would have `type="button"`

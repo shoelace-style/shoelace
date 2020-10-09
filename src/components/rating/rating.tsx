@@ -48,7 +48,7 @@ export class Rating {
   }
 
   /** Emitted when the rating's value changes. */
-  @Event() slChange: EventEmitter;
+  @Event({ eventName: 'sl-change' }) slChange: EventEmitter;
 
   connectedCallback() {
     this.handleClick = this.handleClick.bind(this);

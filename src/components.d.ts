@@ -297,7 +297,7 @@ export namespace Components {
          */
         "setCustomValidity": (message: string) => Promise<void>;
         /**
-          * When `inline` is true, this determines the size of the color picker's trigger.
+          * Determines the size of the color picker's trigger. This has no effect on inline color pickers.
          */
         "size": 'small' | 'medium' | 'large';
         /**
@@ -1468,19 +1468,19 @@ declare namespace LocalJSX {
         /**
           * Emitted after the alert closes and all transitions are complete.
          */
-        "onSlAfterHide"?: (event: CustomEvent<any>) => void;
+        "onSl-after-hide"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted after the alert opens and all transitions are complete.
          */
-        "onSlAfterShow"?: (event: CustomEvent<any>) => void;
+        "onSl-after-show"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the alert closes. Calling `event.preventDefault()` will prevent it from being closed.
          */
-        "onSlHide"?: (event: CustomEvent<any>) => void;
+        "onSl-hide"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the alert opens. Calling `event.preventDefault()` will prevent it from being opened.
          */
-        "onSlShow"?: (event: CustomEvent<any>) => void;
+        "onSl-show"?: (event: CustomEvent<any>) => void;
         /**
           * Indicates whether or not the alert is open. You can use this in lieu of the show/hide methods.
          */
@@ -1534,15 +1534,15 @@ declare namespace LocalJSX {
         /**
           * Emitted when the animation is canceled.
          */
-        "onSlCancel"?: (event: CustomEvent<any>) => void;
+        "onSl-cancel"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the animation finishes.
          */
-        "onSlFinish"?: (event: CustomEvent<any>) => void;
+        "onSl-finish"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the animation starts or restarts.
          */
-        "onSlStart"?: (event: CustomEvent<any>) => void;
+        "onSl-start"?: (event: CustomEvent<any>) => void;
         /**
           * Pauses the animation. The animation will resume when this prop is removed.
          */
@@ -1616,11 +1616,11 @@ declare namespace LocalJSX {
         /**
           * Emitted when the button loses focus.
          */
-        "onSlBlur"?: (event: CustomEvent<any>) => void;
+        "onSl-blur"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the button gains focus.
          */
-        "onSlFocus"?: (event: CustomEvent<any>) => void;
+        "onSl-focus"?: (event: CustomEvent<any>) => void;
         /**
           * Set to true to draw a pill-style button with rounded edges.
          */
@@ -1678,15 +1678,15 @@ declare namespace LocalJSX {
         /**
           * Emitted when the control loses focus.
          */
-        "onSlBlur"?: (event: CustomEvent<any>) => void;
+        "onSl-blur"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the control's checked state changes.
          */
-        "onSlChange"?: (event: CustomEvent<any>) => void;
+        "onSl-change"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the control gains focus.
          */
-        "onSlFocus"?: (event: CustomEvent<any>) => void;
+        "onSl-focus"?: (event: CustomEvent<any>) => void;
         /**
           * Set to true to make the checkbox a required field.
          */
@@ -1724,29 +1724,29 @@ declare namespace LocalJSX {
         /**
           * Emitted after the color picker closes and all transitions are complete.
          */
-        "onSlAfterHide"?: (event: CustomEvent<any>) => void;
+        "onSl-after-hide"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted after the color picker opens and all transitions are complete.
          */
-        "onSlAfterShow"?: (event: CustomEvent<any>) => void;
+        "onSl-after-show"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the color picker's value changes.
          */
-        "onSlChange"?: (event: CustomEvent<any>) => void;
+        "onSl-change"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the color picker closes. Calling `event.preventDefault()` will prevent it from being closed.
          */
-        "onSlHide"?: (event: CustomEvent<any>) => void;
+        "onSl-hide"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the color picker opens. Calling `event.preventDefault()` will prevent it from being opened.
          */
-        "onSlShow"?: (event: CustomEvent<any>) => void;
+        "onSl-show"?: (event: CustomEvent<any>) => void;
         /**
           * Whether to show the opacity slider.
          */
         "opacity"?: boolean;
         /**
-          * When `inline` is true, this determines the size of the color picker's trigger.
+          * Determines the size of the color picker's trigger. This has no effect on inline color pickers.
          */
         "size"?: 'small' | 'medium' | 'large';
         /**
@@ -1770,19 +1770,19 @@ declare namespace LocalJSX {
         /**
           * Emitted after the details closes and all transitions are complete.
          */
-        "onSlAfterHide"?: (event: CustomEvent<any>) => void;
+        "onSl-after-hide"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted after the details opens and all transitions are complete.
          */
-        "onSlAfterShow"?: (event: CustomEvent<any>) => void;
+        "onSl-after-show"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the details closes. Calling `event.preventDefault()` will prevent it from being closed.
          */
-        "onSlHide"?: (event: CustomEvent<any>) => void;
+        "onSl-hide"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the details opens. Calling `event.preventDefault()` will prevent it from being opened.
          */
-        "onSlShow"?: (event: CustomEvent<any>) => void;
+        "onSl-show"?: (event: CustomEvent<any>) => void;
         /**
           * Indicates whether or not the details is open. You can use this in lieu of the show/hide methods.
          */
@@ -1804,23 +1804,23 @@ declare namespace LocalJSX {
         /**
           * Emitted after the dialog closes and all transitions are complete.
          */
-        "onSlAfterHide"?: (event: CustomEvent<any>) => void;
+        "onSl-after-hide"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted after the dialog opens and all transitions are complete.
          */
-        "onSlAfterShow"?: (event: CustomEvent<any>) => void;
+        "onSl-after-show"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the dialog closes. Calling `event.preventDefault()` will prevent it from being closed.
          */
-        "onSlHide"?: (event: CustomEvent<any>) => void;
+        "onSl-hide"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the overlay is clicked. Calling `event.preventDefault()` will prevent the dialog from closing.
          */
-        "onSlOverlayDismiss"?: (event: CustomEvent<any>) => void;
+        "onSl-overlay-dismiss"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the dialog opens. Calling `event.preventDefault()` will prevent it from being opened.
          */
-        "onSlShow"?: (event: CustomEvent<any>) => void;
+        "onSl-show"?: (event: CustomEvent<any>) => void;
         /**
           * Indicates whether or not the dialog is open. You can use this in lieu of the show/hide methods.
          */
@@ -1842,23 +1842,23 @@ declare namespace LocalJSX {
         /**
           * Emitted after the drawer closes and all transitions are complete.
          */
-        "onSlAfterHide"?: (event: CustomEvent<any>) => void;
+        "onSl-after-hide"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted after the drawer opens and all transitions are complete.
          */
-        "onSlAfterShow"?: (event: CustomEvent<any>) => void;
+        "onSl-after-show"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the drawer closes. Calling `event.preventDefault()` will prevent it from being closed.
          */
-        "onSlHide"?: (event: CustomEvent<any>) => void;
+        "onSl-hide"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the overlay is clicked. Calling `event.preventDefault()` will prevent the drawer from closing.
          */
-        "onSlOverlayDismiss"?: (event: CustomEvent<any>) => void;
+        "onSl-overlay-dismiss"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the drawer opens. Calling `event.preventDefault()` will prevent it from being opened.
          */
-        "onSlShow"?: (event: CustomEvent<any>) => void;
+        "onSl-show"?: (event: CustomEvent<any>) => void;
         /**
           * Indicates whether or not the drawer is open. You can use this in lieu of the show/hide methods.
          */
@@ -1888,19 +1888,19 @@ declare namespace LocalJSX {
         /**
           * Emitted after the dropdown closes and all transitions are complete.
          */
-        "onSlAfterHide"?: (event: CustomEvent<any>) => void;
+        "onSl-after-hide"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted after the dropdown opens and all transitions are complete.
          */
-        "onSlAfterShow"?: (event: CustomEvent<any>) => void;
+        "onSl-after-show"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the dropdown closes. Calling `event.preventDefault()` will prevent it from being closed.
          */
-        "onSlHide"?: (event: CustomEvent<any>) => void;
+        "onSl-hide"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the dropdown opens. Calling `event.preventDefault()` will prevent it from being opened.
          */
-        "onSlShow"?: (event: CustomEvent<any>) => void;
+        "onSl-show"?: (event: CustomEvent<any>) => void;
         /**
           * Indicates whether or not the dropdown is open. You can use this in lieu of the show/hide methods.
          */
@@ -1933,7 +1933,7 @@ declare namespace LocalJSX {
         /**
           * Emitted when the form is submitted. This event will not be emitted if any form control inside of it is in an invalid state, unless the form has the `novalidate` attribute. Note that there is never a need to prevent this event, since it doen't send a GET or POST request like native forms. To "prevent" submission, use a conditional around the XHR request you use to submit the form's data with.
          */
-        "onSlSubmit"?: (event: CustomEvent<any>) => void;
+        "onSl-submit"?: (event: CustomEvent<any>) => void;
     }
     interface SlFormatBytes {
         /**
@@ -1965,11 +1965,11 @@ declare namespace LocalJSX {
         /**
           * Emitted when the icon failed to load.
          */
-        "onSlError"?: (event: CustomEvent<any>) => void;
+        "onSl-error"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the icon has loaded.
          */
-        "onSlLoad"?: (event: CustomEvent<any>) => void;
+        "onSl-load"?: (event: CustomEvent<any>) => void;
         /**
           * An external URL of an SVG file.
          */
@@ -2015,7 +2015,7 @@ declare namespace LocalJSX {
         /**
           * Emitted when the slider position changes.
          */
-        "onSlChange"?: (event: CustomEvent<any>) => void;
+        "onSl-change"?: (event: CustomEvent<any>) => void;
         /**
           * The position of the divider as a percentage.
          */
@@ -2081,23 +2081,23 @@ declare namespace LocalJSX {
         /**
           * Emitted when the control loses focus.
          */
-        "onSlBlur"?: (event: CustomEvent<any>) => void;
+        "onSl-blur"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the control's value changes.
          */
-        "onSlChange"?: (event: CustomEvent<any>) => void;
+        "onSl-change"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the clear button is activated.
          */
-        "onSlClear"?: (event: CustomEvent<any>) => void;
+        "onSl-clear"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the control gains focus.
          */
-        "onSlFocus"?: (event: CustomEvent<any>) => void;
+        "onSl-focus"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the control receives input.
          */
-        "onSlInput"?: (event: CustomEvent<any>) => void;
+        "onSl-input"?: (event: CustomEvent<any>) => void;
         /**
           * A pattern to validate input against.
          */
@@ -2147,15 +2147,15 @@ declare namespace LocalJSX {
         /**
           * Emitted when the menu loses focus.
          */
-        "onSlBlur"?: (event: CustomEvent<any>) => void;
+        "onSl-blur"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the menu gains focus.
          */
-        "onSlFocus"?: (event: CustomEvent<any>) => void;
+        "onSl-focus"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when a menu item is selected.
          */
-        "onSlSelect"?: (event: CustomEvent<any>) => void;
+        "onSl-select"?: (event: CustomEvent<any>) => void;
     }
     interface SlMenuDivider {
     }
@@ -2175,11 +2175,11 @@ declare namespace LocalJSX {
         /**
           * Emitted when the menu item becomes active.
          */
-        "onSlActivate"?: (event: CustomEvent<any>) => void;
+        "onSl-activate"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the menu item becomes inactive.
          */
-        "onSlDeactivate"?: (event: CustomEvent<any>) => void;
+        "onSl-deactivate"?: (event: CustomEvent<any>) => void;
         /**
           * A unique value to store in the menu item.
          */
@@ -2227,15 +2227,15 @@ declare namespace LocalJSX {
         /**
           * Emitted when the control loses focus.
          */
-        "onSlBlur"?: (event: CustomEvent<any>) => void;
+        "onSl-blur"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the control's checked state changes.
          */
-        "onSlChange"?: (event: CustomEvent<any>) => void;
+        "onSl-change"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the control gains focus.
          */
-        "onSlFocus"?: (event: CustomEvent<any>) => void;
+        "onSl-focus"?: (event: CustomEvent<any>) => void;
         /**
           * The radio's value attribute.
          */
@@ -2265,15 +2265,15 @@ declare namespace LocalJSX {
         /**
           * Emitted when the control loses focus.
          */
-        "onSlBlur"?: (event: CustomEvent<any>) => void;
+        "onSl-blur"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the control's value changes.
          */
-        "onSlChange"?: (event: CustomEvent<any>) => void;
+        "onSl-change"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the control gains focus.
          */
-        "onSlFocus"?: (event: CustomEvent<any>) => void;
+        "onSl-focus"?: (event: CustomEvent<any>) => void;
         /**
           * The input's step attribute.
          */
@@ -2307,7 +2307,7 @@ declare namespace LocalJSX {
         /**
           * Emitted when the rating's value changes.
          */
-        "onSlChange"?: (event: CustomEvent<any>) => void;
+        "onSl-change"?: (event: CustomEvent<any>) => void;
         /**
           * The minimum increment value allowed by the control.
          */
@@ -2363,15 +2363,15 @@ declare namespace LocalJSX {
         /**
           * Emitted when the control loses focus
          */
-        "onSlBlur"?: (event: CustomEvent<any>) => void;
+        "onSl-blur"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the control's value changes.
          */
-        "onSlChange"?: (event: CustomEvent<any>) => void;
+        "onSl-change"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the control gains focus
          */
-        "onSlFocus"?: (event: CustomEvent<any>) => void;
+        "onSl-focus"?: (event: CustomEvent<any>) => void;
         /**
           * Set to true to draw a pill-style select with rounded edges.
          */
@@ -2421,15 +2421,15 @@ declare namespace LocalJSX {
         /**
           * Emitted when the control loses focus.
          */
-        "onSlBlur"?: (event: CustomEvent<any>) => void;
+        "onSl-blur"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the control's checked state changes.
          */
-        "onSlChange"?: (event: CustomEvent<any>) => void;
+        "onSl-change"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the control gains focus.
          */
-        "onSlFocus"?: (event: CustomEvent<any>) => void;
+        "onSl-focus"?: (event: CustomEvent<any>) => void;
         /**
           * Set to true to make the switch a required field.
          */
@@ -2457,11 +2457,11 @@ declare namespace LocalJSX {
         /**
           * Emitted when a tab is hidden.
          */
-        "onSlTabHide"?: (event: CustomEvent<any>) => void;
+        "onSl-tab-hide"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when a tab is shown.
          */
-        "onSlTabShow"?: (event: CustomEvent<any>) => void;
+        "onSl-tab-show"?: (event: CustomEvent<any>) => void;
         /**
           * The placement of the tabs.
          */
@@ -2485,7 +2485,7 @@ declare namespace LocalJSX {
         /**
           * Emitted when the clear button is activated.
          */
-        "onSlClear"?: (event: CustomEvent<any>) => void;
+        "onSl-clear"?: (event: CustomEvent<any>) => void;
         /**
           * Set to true to draw a pill-style tag with rounded edges.
          */
@@ -2547,19 +2547,19 @@ declare namespace LocalJSX {
         /**
           * Emitted when the control loses focus.
          */
-        "onSlBlur"?: (event: CustomEvent<any>) => void;
+        "onSl-blur"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the control's value changes.
          */
-        "onSlChange"?: (event: CustomEvent<any>) => void;
+        "onSl-change"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the control gains focus.
          */
-        "onSlFocus"?: (event: CustomEvent<any>) => void;
+        "onSl-focus"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the control receives input.
          */
-        "onSlInput"?: (event: CustomEvent<any>) => void;
+        "onSl-input"?: (event: CustomEvent<any>) => void;
         /**
           * The textarea's placeholder text.
          */
@@ -2609,19 +2609,19 @@ declare namespace LocalJSX {
         /**
           * Emitted after the tooltip has hidden and all transitions are complete.
          */
-        "onSlAfterHide"?: (event: CustomEvent<any>) => void;
+        "onSl-after-hide"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted after the tooltip has shown and all transitions are complete.
          */
-        "onSlAfterShow"?: (event: CustomEvent<any>) => void;
+        "onSl-aftershow"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the tooltip begins to hide. Calling `event.preventDefault()` will prevent it from being hidden.
          */
-        "onSlHide"?: (event: CustomEvent<any>) => void;
+        "onSl-hide"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the tooltip begins to show. Calling `event.preventDefault()` will prevent it from being shown.
          */
-        "onSlShow"?: (event: CustomEvent<any>) => void;
+        "onSl-show"?: (event: CustomEvent<any>) => void;
         /**
           * Indicates whether or not the tooltip is open. You can use this in lieu of the show/hide methods.
          */

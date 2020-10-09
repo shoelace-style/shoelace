@@ -146,7 +146,7 @@ Dropdowns can be used in the `prefix` or `suffix` slot to make inputs more versa
   const dropdown = container.querySelector('sl-dropdown');
   const trigger = dropdown.querySelector('sl-button');
 
-  dropdown.addEventListener('slSelect', event => {
+  dropdown.addEventListener('sl-select', event => {
     const selectedItem = event.detail.item;
     trigger.textContent = selectedItem.textContent;
     [...dropdown.querySelectorAll('sl-menu-item')].map(item => item.checked = item === selectedItem);

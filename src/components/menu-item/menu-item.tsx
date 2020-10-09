@@ -43,10 +43,10 @@ export class MenuItem {
   }
 
   /** Emitted when the menu item becomes active. */
-  @Event() slActivate: EventEmitter;
+  @Event({ eventName: 'sl-activate' }) slActivate: EventEmitter;
 
   /** Emitted when the menu item becomes inactive. */
-  @Event() slDeactivate: EventEmitter;
+  @Event({ eventName: 'sl-deactivate' }) slDeactivate: EventEmitter;
 
   render() {
     return (

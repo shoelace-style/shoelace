@@ -33,14 +33,14 @@ Refer to a component's documentation for a complete list of its properties.
 
 ### Events
 
-You can listen for standard events such as `click`, `mouseover`, etc. as you normally would. In addition, some components emit custom events. These work the same way as standard events, but are prefixed with `sl` to prevent collisions with standard events and other libraries.
+You can listen for standard events such as `click`, `mouseover`, etc. as you normally would. In addition, some components emit custom events. These work the same way as standard events, but are prefixed with `sl-` to prevent collisions with standard events and other libraries.
 
 ```html
 <sl-checkbox>Check me</sl-checkbox>
 
 <script>
   const checkbox = document.querySelector('sl-checkbox');
-  checkbox.addEventListener('slChange', event => {
+  checkbox.addEventListener('sl-change', event => {
     console.log(event.target.checked ? 'checked' : 'not checked');
   });
 </script>

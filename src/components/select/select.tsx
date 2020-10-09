@@ -109,13 +109,13 @@ export class Select {
   }
 
   /** Emitted when the control's value changes. */
-  @Event() slChange: EventEmitter;
+  @Event({ eventName: 'sl-change' }) slChange: EventEmitter;
 
   /** Emitted when the control gains focus */
-  @Event() slFocus: EventEmitter;
+  @Event({ eventName: 'sl-focus' }) slFocus: EventEmitter;
 
   /** Emitted when the control loses focus */
-  @Event() slBlur: EventEmitter;
+  @Event({ eventName: 'sl-blur' }) slBlur: EventEmitter;
 
   connectedCallback() {
     this.handleBlur = this.handleBlur.bind(this);
@@ -304,7 +304,7 @@ export class Select {
             clearable
             onClick={this.handleTagClick}
             onKeyDown={this.handleTagKeyDown}
-            onSlClear={event => {
+            onSl-clear={event => {
               event.stopPropagation();
               item.checked = false;
               this.syncValueFromItems();
@@ -393,8 +393,8 @@ export class Select {
             'select--large': this.size === 'large',
             'select--pill': this.pill
           }}
-          onSlShow={this.handleMenuShow}
-          onSlHide={this.handleMenuHide}
+          onSl-show={this.handleMenuShow}
+          onSl-hide={this.handleMenuHide}
         >
           <sl-input
             slot="trigger"
@@ -413,9 +413,9 @@ export class Select {
             required={this.required}
             aria-labelledby={this.labelId}
             aria-describedby={this.helpTextId}
-            onSlFocus={this.handleFocus}
-            onSlBlur={this.handleBlur}
-            onSlClear={this.handleClear}
+            onSl-focus={this.handleFocus}
+            onSl-blur={this.handleBlur}
+            onSl-clear={this.handleClear}
             onKeyDown={this.handleKeyDown}
             onKeyUp={this.handleKeyUp}
             onCut={this.handleCut}
@@ -432,7 +432,7 @@ export class Select {
             </span>
           </sl-input>
 
-          <sl-menu ref={el => (this.menu = el)} part="menu" class="select__menu" onSlSelect={this.handleMenuSelect}>
+          <sl-menu ref={el => (this.menu = el)} part="menu" class="select__menu" onSl-select={this.handleMenuSelect}>
             <slot onSlotchange={this.handleSlotChange} />
           </sl-menu>
         </sl-dropdown>

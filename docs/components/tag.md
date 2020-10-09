@@ -48,7 +48,7 @@ Use the `clearable` attribute to add a clear button to the tag.
 <script>
   const div = document.querySelector('.tags-clearable');
 
-  div.addEventListener('slClear', event => {
+  div.addEventListener('sl-clear', event => {
     const tag = event.target;
     tag.style.opacity = '0';
     setTimeout(() => tag.style.opacity = '1', 2000);

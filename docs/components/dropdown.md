@@ -141,7 +141,7 @@ When dropdowns are used with [menus](/components/menu.md), you can listen for th
   const container = document.querySelector('.dropdown-selection');
   const dropdown = container.querySelector('sl-dropdown');
 
-  dropdown.addEventListener('slSelect', event => {
+  dropdown.addEventListener('sl-select', event => {
     const selectedItem = event.detail.item;
     console.log(selectedItem.value);
   });

@@ -31,7 +31,7 @@ Shoelace forms don't make use of `action` and `method` attributes and they don't
   const form = document.querySelector('.form-overview');
 
   // Watch for the slSubmit event
-  form.addEventListener('slSubmit', event => {
+  form.addEventListener('sl-submit', event => {
     const formData = event.detail.formData;
     let output = '';
 
@@ -69,7 +69,7 @@ Shoelace forms don't make use of `action` and `method` attributes and they don't
 
 ## Form Control Validation
 
-Client-side validation can be enabled through the browser's [constraint validations API](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation) for many form controls. You can enable it using props such as `required`, `pattern`, `minlength`, and `maxlength`. As the user interacts with the form control, the `invalid` attribute will reflect its validity based on its current value and the constraints that have been defined.
+Client-side validation can be enabled through the browser's [Constraint Validation API](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation) for many form controls. You can enable it using props such as `required`, `pattern`, `minlength`, and `maxlength`. As the user interacts with the form control, the `invalid` attribute will reflect its validity based on its current value and the constraints that have been defined.
 
 When a form control is invalid, the containing form will not be submitted. Instead, the browser will show the user a relevant error message. If you don't want to use client-side validation, you can suppress this behavior by adding `novalidate` to the `<sl-form>` element.
 
@@ -103,7 +103,7 @@ To make a field required, use the `required` prop. The form will not be submitte
 
 <script>
   const form = document.querySelector('.input-validation-required');
-  form.addEventListener('slSubmit', () => alert('All fields are valid!'));
+  form.addEventListener('sl-submit', () => alert('All fields are valid!'));
 </script>
 ```
 
@@ -120,7 +120,7 @@ To restrict a value to a specific [pattern](https://developer.mozilla.org/en-US/
 
 <script>
   const form = document.querySelector('.input-validation-pattern');
-  form.addEventListener('slSubmit', () => alert('All fields are valid!'));
+  form.addEventListener('sl-submit', () => alert('All fields are valid!'));
 </script>
 ```
 
@@ -139,7 +139,7 @@ Some input types will automatically trigger constraints, such as `email` and `ur
 
 <script>
   const form = document.querySelector('.input-validation-type');
-  form.addEventListener('slSubmit', () => alert('All fields are valid!'));
+  form.addEventListener('sl-submit', () => alert('All fields are valid!'));
 </script>
 ```
 
@@ -158,8 +158,8 @@ To create a custom validation error, use the `setCustomValidity` method. The for
   const form = document.querySelector('.input-validation-custom');
   const input = form.querySelector('sl-input');
 
-  form.addEventListener('slSubmit', () => alert('All fields are valid!'));
-  input.addEventListener('slInput', () => {
+  form.addEventListener('sl-submit', () => alert('All fields are valid!'));
+  input.addEventListener('sl-input', () => {
     if (input.value === 'shoelace') {
       input.setCustomValidity('');
     } else {
@@ -204,7 +204,7 @@ The `invalid` attribute reflects the form control's validity, so you can style i
 
 To opt out of the browser's built-in validation and use your own, add the `novalidate` attribute to the form. This will ignore all constraints and prevent the browser from showing its own warnings when form controls are invalid.
 
-Remember that the `invalid` prop on form controls reflects validity as defined by the [constraint validation API](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation). You can set it initially, but the `invalid` prop will update as the user interacts with the form control. As such, you should not rely on it to set invalid styles using a custom validation library.
+Remember that the `invalid` prop on form controls reflects validity as defined by the [Constraint Validation API](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation). You can set it initially, but the `invalid` prop will update as the user interacts with the form control. As such, you should not rely on it to set invalid styles using a custom validation library.
 
 Instead, toggle a class and target it in your stylesheet as shown below.
 

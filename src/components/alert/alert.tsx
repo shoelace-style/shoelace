@@ -53,16 +53,16 @@ export class Alert {
   }
 
   /** Emitted when the alert opens. Calling `event.preventDefault()` will prevent it from being opened. */
-  @Event() slShow: EventEmitter;
+  @Event({ eventName: 'sl-show' }) slShow: EventEmitter;
 
   /** Emitted after the alert opens and all transitions are complete. */
-  @Event() slAfterShow: EventEmitter;
+  @Event({ eventName: 'sl-after-show' }) slAfterShow: EventEmitter;
 
   /** Emitted when the alert closes. Calling `event.preventDefault()` will prevent it from being closed. */
-  @Event() slHide: EventEmitter;
+  @Event({ eventName: 'sl-hide' }) slHide: EventEmitter;
 
   /** Emitted after the alert closes and all transitions are complete. */
-  @Event() slAfterHide: EventEmitter;
+  @Event({ eventName: 'sl-after-hide' }) slAfterHide: EventEmitter;
 
   connectedCallback() {
     this.handleCloseClick = this.handleCloseClick.bind(this);
@@ -136,7 +136,7 @@ export class Alert {
       this.show();
 
       this.host.addEventListener(
-        'slAfterHide',
+        'sl-after-hide',
         () => {
           this.host.remove();
           resolve();

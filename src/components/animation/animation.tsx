@@ -89,13 +89,13 @@ export class Animate {
   }
 
   /** Emitted when the animation is canceled. */
-  @Event() slCancel: EventEmitter;
+  @Event({ eventName: 'sl-cancel' }) slCancel: EventEmitter;
 
   /** Emitted when the animation finishes. */
-  @Event() slFinish: EventEmitter;
+  @Event({ eventName: 'sl-finish' }) slFinish: EventEmitter;
 
   /** Emitted when the animation starts or restarts. */
-  @Event() slStart: EventEmitter;
+  @Event({ eventName: 'sl-start' }) slStart: EventEmitter;
 
   connectedCallback() {
     this.handleAnimationFinish = this.handleAnimationFinish.bind(this);

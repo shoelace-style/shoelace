@@ -65,10 +65,10 @@ export class Button {
   @Prop() download: string;
 
   /** Emitted when the button loses focus. */
-  @Event() slBlur: EventEmitter;
+  @Event({ eventName: 'sl-blur' }) slBlur: EventEmitter;
 
   /** Emitted when the button gains focus. */
-  @Event() slFocus: EventEmitter;
+  @Event({ eventName: 'sl-focus' }) slFocus: EventEmitter;
 
   connectedCallback() {
     this.handleBlur = this.handleBlur.bind(this);

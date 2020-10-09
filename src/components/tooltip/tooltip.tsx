@@ -73,16 +73,16 @@ export class Tooltip {
   }
 
   /** Emitted when the tooltip begins to show. Calling `event.preventDefault()` will prevent it from being shown. */
-  @Event() slShow: EventEmitter;
+  @Event({ eventName: 'sl-show' }) slShow: EventEmitter;
 
   /** Emitted after the tooltip has shown and all transitions are complete. */
-  @Event() slAfterShow: EventEmitter;
+  @Event({ eventName: 'sl-aftershow' }) slAfterShow: EventEmitter;
 
   /** Emitted when the tooltip begins to hide. Calling `event.preventDefault()` will prevent it from being hidden. */
-  @Event() slHide: EventEmitter;
+  @Event({ eventName: 'sl-hide' }) slHide: EventEmitter;
 
   /** Emitted after the tooltip has hidden and all transitions are complete. */
-  @Event() slAfterHide: EventEmitter;
+  @Event({ eventName: 'sl-after-hide' }) slAfterHide: EventEmitter;
 
   connectedCallback() {
     this.handleBlur = this.handleBlur.bind(this);

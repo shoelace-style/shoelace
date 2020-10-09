@@ -23,13 +23,13 @@ export class Menu {
   @State() hasFocus = false;
 
   /** Emitted when the menu gains focus. */
-  @Event() slFocus: EventEmitter;
+  @Event({ eventName: 'sl-focus' }) slFocus: EventEmitter;
 
   /** Emitted when the menu loses focus. */
-  @Event() slBlur: EventEmitter;
+  @Event({ eventName: 'sl-blur' }) slBlur: EventEmitter;
 
   /** Emitted when a menu item is selected. */
-  @Event() slSelect: EventEmitter;
+  @Event({ eventName: 'sl-select' }) slSelect: EventEmitter;
 
   connectedCallback() {
     this.handleBlur = this.handleBlur.bind(this);

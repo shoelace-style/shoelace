@@ -26,13 +26,13 @@ export class ButtonGroup {
   }
 
   componentDidLoad() {
-    this.buttonGroup.addEventListener('slFocus', this.handleFocus);
-    this.buttonGroup.addEventListener('slBlur', this.handleBlur);
+    this.buttonGroup.addEventListener('sl-focus', this.handleFocus);
+    this.buttonGroup.addEventListener('sl-blur', this.handleBlur);
   }
 
   disconnectedCallback() {
-    this.buttonGroup.removeEventListener('slFocus', this.handleFocus);
-    this.buttonGroup.removeEventListener('slBlur', this.handleBlur);
+    this.buttonGroup.removeEventListener('sl-focus', this.handleFocus);
+    this.buttonGroup.removeEventListener('sl-blur', this.handleBlur);
   }
 
   handleFocus(event: CustomEvent) {

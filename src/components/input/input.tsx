@@ -124,19 +124,19 @@ export class Input {
   }
 
   /** Emitted when the control's value changes. */
-  @Event() slChange: EventEmitter;
+  @Event({ eventName: 'sl-change' }) slChange: EventEmitter;
 
   /** Emitted when the clear button is activated. */
-  @Event() slClear: EventEmitter;
+  @Event({ eventName: 'sl-clear' }) slClear: EventEmitter;
 
   /** Emitted when the control receives input. */
-  @Event() slInput: EventEmitter;
+  @Event({ eventName: 'sl-input' }) slInput: EventEmitter;
 
   /** Emitted when the control gains focus. */
-  @Event() slFocus: EventEmitter;
+  @Event({ eventName: 'sl-focus' }) slFocus: EventEmitter;
 
   /** Emitted when the control loses focus. */
-  @Event() slBlur: EventEmitter;
+  @Event({ eventName: 'sl-blur' }) slBlur: EventEmitter;
 
   connectedCallback() {
     this.handleChange = this.handleChange.bind(this);

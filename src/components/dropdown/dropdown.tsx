@@ -71,16 +71,16 @@ export class Dropdown {
   @Prop() hoist = false;
 
   /** Emitted when the dropdown opens. Calling `event.preventDefault()` will prevent it from being opened. */
-  @Event() slShow: EventEmitter;
+  @Event({ eventName: 'sl-show' }) slShow: EventEmitter;
 
   /** Emitted after the dropdown opens and all transitions are complete. */
-  @Event() slAfterShow: EventEmitter;
+  @Event({ eventName: 'sl-after-show' }) slAfterShow: EventEmitter;
 
   /** Emitted when the dropdown closes. Calling `event.preventDefault()` will prevent it from being closed. */
-  @Event() slHide: EventEmitter;
+  @Event({ eventName: 'sl-hide' }) slHide: EventEmitter;
 
   /** Emitted after the dropdown closes and all transitions are complete. */
-  @Event() slAfterHide: EventEmitter;
+  @Event({ eventName: 'sl-after-hide' }) slAfterHide: EventEmitter;
 
   @Watch('open')
   handleOpenChange() {
@@ -155,8 +155,8 @@ export class Dropdown {
       return;
     }
 
-    this.panel.addEventListener('slActivate', this.handleMenuItemActivate);
-    this.panel.addEventListener('slSelect', this.handlePanelSelect);
+    this.panel.addEventListener('sl-activate', this.handleMenuItemActivate);
+    this.panel.addEventListener('sl-select', this.handlePanelSelect);
     document.addEventListener('keydown', this.handleDocumentKeyDown);
     document.addEventListener('mousedown', this.handleDocumentMouseDown);
 
@@ -179,8 +179,8 @@ export class Dropdown {
       return;
     }
 
-    this.panel.removeEventListener('slActivate', this.handleMenuItemActivate);
-    this.panel.removeEventListener('slSelect', this.handlePanelSelect);
+    this.panel.removeEventListener('sl-activate', this.handleMenuItemActivate);
+    this.panel.removeEventListener('sl-select', this.handlePanelSelect);
     document.addEventListener('keydown', this.handleDocumentKeyDown);
     document.removeEventListener('mousedown', this.handleDocumentMouseDown);
 

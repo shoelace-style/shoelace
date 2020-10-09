@@ -49,13 +49,13 @@ export class Checkbox {
   @Prop({ mutable: true, reflect: true }) invalid = false;
 
   /** Emitted when the control loses focus. */
-  @Event() slBlur: EventEmitter;
+  @Event({ eventName: 'sl-blur' }) slBlur: EventEmitter;
 
   /** Emitted when the control's checked state changes. */
-  @Event() slChange: EventEmitter;
+  @Event({ eventName: 'sl-change' }) slChange: EventEmitter;
 
   /** Emitted when the control gains focus. */
-  @Event() slFocus: EventEmitter;
+  @Event({ eventName: 'sl-focus' }) slFocus: EventEmitter;
 
   @Watch('checked')
   @Watch('indeterminate')

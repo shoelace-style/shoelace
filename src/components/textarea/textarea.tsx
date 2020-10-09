@@ -91,16 +91,16 @@ export class Textarea {
   @Prop() inputmode: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
 
   /** Emitted when the control's value changes. */
-  @Event() slChange: EventEmitter;
+  @Event({ eventName: 'sl-change' }) slChange: EventEmitter;
 
   /** Emitted when the control receives input. */
-  @Event() slInput: EventEmitter;
+  @Event({ eventName: 'sl-input' }) slInput: EventEmitter;
 
   /** Emitted when the control gains focus. */
-  @Event() slFocus: EventEmitter;
+  @Event({ eventName: 'sl-focus' }) slFocus: EventEmitter;
 
   /** Emitted when the control loses focus. */
-  @Event() slBlur: EventEmitter;
+  @Event({ eventName: 'sl-blur' }) slBlur: EventEmitter;
 
   @Watch('rows')
   handleRowsChange() {

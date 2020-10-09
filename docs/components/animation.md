@@ -73,9 +73,9 @@ This example demonstrates all of the baked-in animations and easings. All animat
     });
   });  
 
-  animationName.addEventListener('slChange', () => animation.name = animationName.value);
-  easingName.addEventListener('slChange', () => animation.easing = easingName.value);
-  playbackRate.addEventListener('slChange', () => animation.playbackRate = playbackRate.value);
+  animationName.addEventListener('sl-change', () => animation.name = animationName.value);
+  easingName.addEventListener('sl-change', () => animation.easing = easingName.value);
+  playbackRate.addEventListener('sl-change', () => animation.playbackRate = playbackRate.value);
   playbackRate.tooltipFormatter = val => `Playback Rate = ${val}`;
 </script>
 

@@ -46,10 +46,10 @@ export class TabGroup {
   }
 
   /** Emitted when a tab is shown. */
-  @Event() slTabShow: EventEmitter;
+  @Event({ eventName: 'sl-tab-show' }) slTabShow: EventEmitter;
 
   /** Emitted when a tab is hidden. */
-  @Event() slTabHide: EventEmitter;
+  @Event({ eventName: 'sl-tab-hide' }) slTabHide: EventEmitter;
 
   connectedCallback() {
     this.handleClick = this.handleClick.bind(this);

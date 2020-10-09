@@ -44,16 +44,16 @@ export class Details {
   }
 
   /** Emitted when the details opens. Calling `event.preventDefault()` will prevent it from being opened. */
-  @Event() slShow: EventEmitter;
+  @Event({ eventName: 'sl-show' }) slShow: EventEmitter;
 
   /** Emitted after the details opens and all transitions are complete. */
-  @Event() slAfterShow: EventEmitter;
+  @Event({ eventName: 'sl-after-show' }) slAfterShow: EventEmitter;
 
   /** Emitted when the details closes. Calling `event.preventDefault()` will prevent it from being closed. */
-  @Event() slHide: EventEmitter;
+  @Event({ eventName: 'sl-hide' }) slHide: EventEmitter;
 
   /** Emitted after the details closes and all transitions are complete. */
-  @Event() slAfterHide: EventEmitter;
+  @Event({ eventName: 'sl-after-hide' }) slAfterHide: EventEmitter;
 
   connectedCallback() {
     this.handleBodyTransitionEnd = this.handleBodyTransitionEnd.bind(this);

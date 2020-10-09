@@ -65,19 +65,19 @@ export class Drawer {
   }
 
   /** Emitted when the drawer opens. Calling `event.preventDefault()` will prevent it from being opened. */
-  @Event() slShow: EventEmitter;
+  @Event({ eventName: 'sl-show' }) slShow: EventEmitter;
 
   /** Emitted after the drawer opens and all transitions are complete. */
-  @Event() slAfterShow: EventEmitter;
+  @Event({ eventName: 'sl-after-show' }) slAfterShow: EventEmitter;
 
   /** Emitted when the drawer closes. Calling `event.preventDefault()` will prevent it from being closed. */
-  @Event() slHide: EventEmitter;
+  @Event({ eventName: 'sl-hide' }) slHide: EventEmitter;
 
   /** Emitted after the drawer closes and all transitions are complete. */
-  @Event() slAfterHide: EventEmitter;
+  @Event({ eventName: 'sl-after-hide' }) slAfterHide: EventEmitter;
 
   /** Emitted when the overlay is clicked. Calling `event.preventDefault()` will prevent the drawer from closing. */
-  @Event() slOverlayDismiss: EventEmitter;
+  @Event({ eventName: 'sl-overlay-dismiss' }) slOverlayDismiss: EventEmitter;
 
   connectedCallback() {
     this.handleCloseClick = this.handleCloseClick.bind(this);

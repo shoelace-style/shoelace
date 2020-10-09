@@ -35,10 +35,10 @@ export class Icon {
   @Prop() library = 'default';
 
   /** Emitted when the icon has loaded. */
-  @Event() slLoad: EventEmitter;
+  @Event({ eventName: 'sl-load' }) slLoad: EventEmitter;
 
   /** Emitted when the icon failed to load. */
-  @Event() slError: EventEmitter;
+  @Event({ eventName: 'sl-error' }) slError: EventEmitter;
 
   @Watch('name')
   @Watch('src')

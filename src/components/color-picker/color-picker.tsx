@@ -58,7 +58,7 @@ export class ColorPicker {
   /** Set to true to render the color picker inline rather than inside a dropdown. */
   @Prop() inline = false;
 
-  /** When `inline` is true, this determines the size of the color picker's trigger. */
+  /** Determines the size of the color picker's trigger. This has no effect on inline color pickers. */
   @Prop() size: 'small' | 'medium' | 'large' = 'medium';
 
   /** The input's name attribute. */
@@ -109,19 +109,19 @@ export class ColorPicker {
   ];
 
   /** Emitted when the color picker's value changes. */
-  @Event() slChange: EventEmitter;
+  @Event({ eventName: 'sl-change' }) slChange: EventEmitter;
 
   /** Emitted when the color picker opens. Calling `event.preventDefault()` will prevent it from being opened. */
-  @Event() slShow: EventEmitter;
+  @Event({ eventName: 'sl-show' }) slShow: EventEmitter;
 
   /** Emitted after the color picker opens and all transitions are complete. */
-  @Event() slAfterShow: EventEmitter;
+  @Event({ eventName: 'sl-after-show' }) slAfterShow: EventEmitter;
 
   /** Emitted when the color picker closes. Calling `event.preventDefault()` will prevent it from being closed. */
-  @Event() slHide: EventEmitter;
+  @Event({ eventName: 'sl-hide' }) slHide: EventEmitter;
 
   /** Emitted after the color picker closes and all transitions are complete. */
-  @Event() slAfterHide: EventEmitter;
+  @Event({ eventName: 'sl-after-hide' }) slAfterHide: EventEmitter;
 
   @Watch('value')
   handleValueChange(newValue: string, oldValue: string) {
@@ -189,7 +189,7 @@ export class ColorPicker {
 
       return new Promise(resolve => {
         this.dropdown.addEventListener(
-          'slAfterShow',
+          'sl-after-show',
           () => {
             this.input.reportValidity();
             resolve();
@@ -740,7 +740,7 @@ export class ColorPicker {
               value={this.inputValue}
               disabled={this.disabled}
               onKeyDown={this.handleInputKeyDown}
-              onSlChange={this.handleInputChange}
+              onSl-change={this.handleInputChange}
             />
             <sl-button
               ref={el => (this.copyButton = el)}
@@ -789,10 +789,10 @@ export class ColorPicker {
         aria-disabled={this.disabled}
         containingElement={this.host}
         hoist={this.hoist}
-        onSlShow={this.handleDropdownShow}
-        onSlAfterShow={this.handleDropdownAfterShow}
-        onSlHide={this.handleDropdownHide}
-        onSlAfterHide={this.handleDropdownAfterHide}
+        onSl-show={this.handleDropdownShow}
+        onSl-after-show={this.handleDropdownAfterShow}
+        onSl-hide={this.handleDropdownHide}
+        onSl-after-hide={this.handleDropdownAfterHide}
       >
         <button
           ref={el => (this.trigger = el)}

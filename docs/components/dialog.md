@@ -103,7 +103,7 @@ By default, dialogs are closed when the user clicks or taps on the overlay. To p
     openButton.addEventListener('click', () => dialog.show());
     closeButton.addEventListener('click', () => dialog.hide());
 
-    dialog.addEventListener('slOverlayDismiss', event => event.preventDefault());
+    dialog.addEventListener('sl-overlay-dismiss', event => event.preventDefault());
   })();
 </script>
 ```

@@ -118,6 +118,14 @@ When designing a component's API, standard properties ("props") are generally us
 
 There are some exceptions to this (e.g. when it significantly improves developer experience), but a good rule of thumbs is "will this need to change based on screen size?" If so, you probably want to use a CSS variable.
 
+### Custom event names
+
+All custom events must start with `sl-` as a namespace. For compatibility with frameworks that utilize DOM templates, custom events must have lowercase, kebab-style names. For example, use `sl-change` instead of `slChange`.
+
+This convention avoids the problem of browsers lowercasing attributes, causing some frameworks to be unable to listen to them. This problem isn't specific to one framework, but [Vue's documentation](https://vuejs.org/v2/guide/components-custom-events.html#Event-Names) provides a good explanation of the problem.
+
+> Additionally, `v-on` event listeners inside DOM templates will be automatically transformed to lowercase (due to HTML’s case-insensitivity), so `v-on:myEvent` would become `v-on:myevent` – making `myEvent` impossible to listen to.
+
 ### When to use a CSS custom property vs. a CSS part
 
 There are two ways to enable customizations for components. One way is with CSS custom properties ("CSS variables"), the other is with CSS parts ("parts").
