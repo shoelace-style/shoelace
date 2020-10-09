@@ -6,7 +6,7 @@ Components with the <sl-badge type="warning" pill>Experimental</sl-badge> badge 
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
-## Next
+## 2.0.0-beta.20
 
 - 🚨 BREAKING CHANGE: Transformed all Shoelace events to lowercase ([details](#why-did-event-names-change))
 - Added support for dropdowns and non-icon elements to `sl-input`
