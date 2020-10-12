@@ -644,7 +644,8 @@ export class ColorPicker {
               class="color-picker__grid-handle"
               style={{
                 top: `${y}%`,
-                left: `${x}%`
+                left: `${x}%`,
+                backgroundColor: `hsla(${this.hue}deg, ${this.saturation}%, ${this.lightness}%)`
               }}
               role="slider"
               aria-label="HSL"
