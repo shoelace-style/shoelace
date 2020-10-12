@@ -66,7 +66,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@popperjs/core": "^2.1.1",
+    "@popperjs/core": "^2.5.3",
     "@stencil/core": "^2.0.3",
     "color": "^3.1.2",
     "resize-observer-polyfill": "^1.5.1"
