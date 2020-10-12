@@ -33,7 +33,7 @@ While declarative event binding is a non-standard feature, not supporting it wou
 
 The following pages demonstrate why this change was necessary.
 
-- [This Polymer FAQ from Custom Elements Everywhere](https://custom-elements-everywhere.com/#faq-polymer])
+- [This Polymer FAQ from Custom Elements Everywhere](https://custom-elements-everywhere.com/#faq-polymer)
 - [Vue's Event Names documentation](https://vuejs.org/v2/guide/components-custom-events.html#Event-Names)
 
 ## 2.0.0-beta.19
