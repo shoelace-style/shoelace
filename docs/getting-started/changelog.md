@@ -8,7 +8,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
-- Improved `sl-color-picker` grid handle size and color
+- Improved `sl-color-picker` grid and slider handles
 - Updated to Popper 2.5.3 to address a fixed position bug in Firefox
 
 ## 2.0.0-beta.20
