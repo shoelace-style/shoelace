@@ -29,12 +29,12 @@ let id = 0;
 export class Dialog {
   componentId = `dialog-${++id}`;
   dialog: HTMLElement;
-  isShowing = false;
   panel: HTMLElement;
 
   @Element() host: HTMLSlDialogElement;
 
   @State() hasFooter = false;
+  @State() isVisible = false;
 
   /** Indicates whether or not the dialog is open. You can use this in lieu of the show/hide methods. */
   @Prop({ mutable: true, reflect: true }) open = false;
@@ -102,7 +102,7 @@ export class Dialog {
   @Method()
   async show() {
     // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
-    if (this.isShowing) {
+    if (this.open) {
       return;
     }
 
@@ -112,9 +112,7 @@ export class Dialog {
       return;
     }
 
-    this.dialog.hidden = false;
-    this.host.clientWidth; // force a reflow
-    this.isShowing = true;
+    this.isVisible = true;
     this.open = true;
 
     lockBodyScrolling(this.host);
@@ -125,7 +123,7 @@ export class Dialog {
   @Method()
   async hide() {
     // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
-    if (!this.isShowing) {
+    if (!this.open) {
       return;
     }
 
@@ -135,7 +133,6 @@ export class Dialog {
       return;
     }
 
-    this.isShowing = false;
     this.open = false;
 
     unlockBodyScrolling(this.host);
@@ -173,7 +170,7 @@ export class Dialog {
 
     // Ensure we only emit one event when the target element is no longer visible
     if (event.propertyName === 'opacity' && target.classList.contains('dialog__panel')) {
-      this.dialog.hidden = !this.open;
+      this.isVisible = this.open;
       this.open ? this.slAfterShow.emit() : this.slAfterHide.emit();
 
       if (this.open) {
@@ -194,11 +191,11 @@ export class Dialog {
         class={{
           dialog: true,
           'dialog--open': this.open,
+          'dialog--visible': this.isVisible,
           'dialog--has-footer': this.hasFooter
         }}
         onKeyDown={this.handleKeyDown}
         onTransitionEnd={this.handleTransitionEnd}
-        hidden
       >
         <div part="overlay" class="dialog__overlay" onClick={this.handleOverlayClick} />
 

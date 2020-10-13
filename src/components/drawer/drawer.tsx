@@ -28,12 +28,12 @@ let id = 0;
 export class Drawer {
   componentId = `drawer-${++id}`;
   drawer: HTMLElement;
-  isShowing = false;
   panel: HTMLElement;
 
   @Element() host: HTMLSlDrawerElement;
 
   @State() hasFooter = false;
+  @State() isVisible = false;
 
   /** Indicates whether or not the drawer is open. You can use this in lieu of the show/hide methods. */
   @Prop({ mutable: true, reflect: true }) open = false;
@@ -110,7 +110,7 @@ export class Drawer {
   @Method()
   async show() {
     // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
-    if (this.isShowing) {
+    if (this.open) {
       return;
     }
 
@@ -120,9 +120,7 @@ export class Drawer {
       return;
     }
 
-    this.drawer.hidden = false;
-    this.host.clientWidth; // force a reflow
-    this.isShowing = true;
+    this.isVisible = true;
     this.open = true;
 
     // Lock body scrolling only if the drawer isn't contained
@@ -137,7 +135,7 @@ export class Drawer {
   @Method()
   async hide() {
     // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
-    if (!this.isShowing) {
+    if (!this.open) {
       return;
     }
 
@@ -147,7 +145,6 @@ export class Drawer {
       return;
     }
 
-    this.isShowing = false;
     this.open = false;
 
     unlockBodyScrolling(this.host);
@@ -186,7 +183,7 @@ export class Drawer {
 
     // Ensure we only emit one event when the target element is no longer visible
     if (event.propertyName === 'transform' && target.classList.contains('drawer__panel')) {
-      this.drawer.hidden = !this.open;
+      this.isVisible = this.open;
       this.open ? this.slAfterShow.emit() : this.slAfterHide.emit();
 
       if (this.open) {
@@ -207,6 +204,7 @@ export class Drawer {
         class={{
           drawer: true,
           'drawer--open': this.open,
+          'drawer--visible': this.isVisible,
           'drawer--top': this.placement === 'top',
           'drawer--right': this.placement === 'right',
           'drawer--bottom': this.placement === 'bottom',
@@ -217,7 +215,6 @@ export class Drawer {
         }}
         onKeyDown={this.handleKeyDown}
         onTransitionEnd={this.handleTransitionEnd}
-        hidden
       >
         <div part="overlay" class="drawer__overlay" onClick={this.handleOverlayClick} />
 

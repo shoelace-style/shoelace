@@ -8,8 +8,9 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
-- Improved `sl-color-picker` grid and slider handles
-- Updated to Popper 2.5.3 to address a fixed position bug in Firefox
+- Fixed a bug where initial transitions didn't show in `sl-dialog` and `sl-drawer` [#247](https://github.com/shoelace-style/shoelace/issues/247)
+- Improved `sl-color-picker` grid and slider handles [#246](https://github.com/shoelace-style/shoelace/issues/246)
+- Updated to Popper 2.5.3 to address a fixed position bug in Firefox 
 
 ## 2.0.0-beta.20
 

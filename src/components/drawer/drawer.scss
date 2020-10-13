@@ -1,4 +1,5 @@
 @import 'component';
+@import 'mixins/visually-hidden';
 
 /**
  * @prop --size: The preferred size of the drawer. This will be applied to the drawer's width or height depending on its
@@ -18,8 +19,8 @@
   pointer-events: none;
   overflow: hidden;
 
-  &[hidden] {
-    display: none;
+  &:not(.drawer--visible) {
+    @include visually-hidden;
   }
 }
 
