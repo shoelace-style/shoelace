@@ -2,7 +2,7 @@
 
 [component-header:sl-dialog]
 
-Dialogs appear above the page and require the user's immediate attention.
+Dialogs, sometimes called "modals", appear above the page and require the user's immediate attention.
 
 ```html preview
 <sl-dialog label="Dialog" class="dialog-overview">
