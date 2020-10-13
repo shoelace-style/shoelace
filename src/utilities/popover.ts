@@ -160,5 +160,5 @@ export interface PopoverOptions {
   visibleClass?: string;
   onAfterShow?: () => any;
   onAfterHide?: () => any;
-  onTransitionEnd?: () => any;
+  onTransitionEnd?: (event: TransitionEvent) => any;
 }
