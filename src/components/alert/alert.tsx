@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, Host, Method, Prop, Watch, h } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, Method, Prop, State, Watch, h } from '@stencil/core';
 
 const toastStack = Object.assign(document.createElement('div'), { className: 'sl-toast-stack' });
 
@@ -23,9 +23,10 @@ const toastStack = Object.assign(document.createElement('div'), { className: 'sl
 export class Alert {
   alert: HTMLElement;
   autoHideTimeout: any;
-  isVisible = false;
 
   @Element() host: HTMLSlAlertElement;
+
+  @State() isVisible = false;
 
   /** Indicates whether or not the alert is open. You can use this in lieu of the show/hide methods. */
   @Prop({ mutable: true, reflect: true }) open = false;
@@ -91,8 +92,6 @@ export class Alert {
       return;
     }
 
-    this.host.hidden = false;
-    this.host.clientWidth; // force a reflow
     this.isVisible = true;
     this.open = true;
 
@@ -116,7 +115,6 @@ export class Alert {
     }
 
     clearTimeout(this.autoHideTimeout);
-    this.isVisible = false;
     this.open = false;
   }
 
@@ -133,7 +131,7 @@ export class Alert {
       }
 
       toastStack.append(this.host);
-      this.show();
+      requestAnimationFrame(() => this.show());
 
       this.host.addEventListener(
         'sl-after-hide',
@@ -164,7 +162,7 @@ export class Alert {
 
     // Ensure we only emit one event when the target element is no longer visible
     if (event.propertyName === 'opacity' && target.classList.contains('alert')) {
-      this.host.hidden = !this.open;
+      this.isVisible = this.open;
       this.open ? this.slAfterShow.emit() : this.slAfterHide.emit();
     }
   }
@@ -178,42 +176,41 @@ export class Alert {
 
   render() {
     return (
-      <Host hidden>
-        <div
-          ref={el => (this.alert = el)}
-          part="base"
-          class={{
-            alert: true,
-            'alert--open': this.open,
-            'alert--closable': this.closable,
-            'alert--primary': this.type === 'primary',
-            'alert--success': this.type === 'success',
-            'alert--info': this.type === 'info',
-            'alert--warning': this.type === 'warning',
-            'alert--danger': this.type === 'danger'
-          }}
-          role="alert"
-          aria-live="assertive"
-          aria-atomic="true"
-          aria-hidden={!this.open}
-          onMouseMove={this.handleMouseMove}
-          onTransitionEnd={this.handleTransitionEnd}
-        >
-          <span part="icon" class="alert__icon">
-            <slot name="icon" />
-          </span>
+      <div
+        ref={el => (this.alert = el)}
+        part="base"
+        class={{
+          alert: true,
+          'alert--open': this.open,
+          'alert--visible': this.isVisible,
+          'alert--closable': this.closable,
+          'alert--primary': this.type === 'primary',
+          'alert--success': this.type === 'success',
+          'alert--info': this.type === 'info',
+          'alert--warning': this.type === 'warning',
+          'alert--danger': this.type === 'danger'
+        }}
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+        aria-hidden={!this.open}
+        onMouseMove={this.handleMouseMove}
+        onTransitionEnd={this.handleTransitionEnd}
+      >
+        <span part="icon" class="alert__icon">
+          <slot name="icon" />
+        </span>
 
-          <span part="message" class="alert__message">
-            <slot />
-          </span>
+        <span part="message" class="alert__message">
+          <slot />
+        </span>
 
-          {this.closable && (
-            <span class="alert__close">
-              <sl-icon-button part="close-button" name="x" onClick={this.handleCloseClick} />
-            </span>
-          )}
-        </div>
-      </Host>
+        {this.closable && (
+          <span class="alert__close">
+            <sl-icon-button part="close-button" name="x" onClick={this.handleCloseClick} />
+          </span>
+        )}
+      </div>
     );
   }
 }

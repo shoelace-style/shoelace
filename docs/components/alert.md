@@ -11,6 +11,8 @@ Alerts are used to display important messages either inline or as toast notifica
 </sl-alert>
 ```
 
+?> Alerts will not be visible if the `open` attribute is not present.
+
 ## Examples
 
 ### Types
@@ -93,7 +95,7 @@ Set the `duration` prop to automatically hide an alert after a period of time. T
 <div class="alert-duration">
   <sl-button type="primary">Show Alert</sl-button>
 
-  <sl-alert type="primary" duration="3000" closable style="margin-top: var(--sl-spacing-medium);">
+  <sl-alert type="primary" duration="3000" closable>
     <sl-icon slot="icon" name="info-circle"></sl-icon>
     This alert will automatically hide itself after three seconds, unless you interact with it.
   </sl-alert>
@@ -106,6 +108,12 @@ Set the `duration` prop to automatically hide an alert after a period of time. T
 
   button.addEventListener('click', () => alert.show());
 </script>
+
+<style>
+  .alert-duration sl-alert {
+    margin-top: var(--sl-spacing-medium);
+  }
+</style>
 ```
 
 ### Toast Notifications

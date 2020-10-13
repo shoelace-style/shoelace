@@ -1,16 +1,14 @@
 @import 'component';
+@import 'mixins/visually-hidden';
 
 /**
  * @prop --box-shadow: The alert's box shadow.
  */
 :host {
-  --box-shadow: none;
+  display: contents;
 
-  display: block;
-
-  &[hidden] {
-    display: none;
-  }
+  // For better DX, we'll reset the margin here so the base part can inherit it
+  margin: 0;
 }
 
 .alert {
@@ -30,6 +28,11 @@
   opacity: 0;
   transform: scale(0.9);
   transition: var(--sl-transition-medium) opacity ease, var(--sl-transition-medium) transform ease;
+  margin: inherit;
+
+  &:not(.alert--visible) {
+    @include visually-hidden;
+  }
 }
 
 .alert--open {
