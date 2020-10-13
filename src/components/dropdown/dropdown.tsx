@@ -23,7 +23,7 @@ let id = 0;
 })
 export class Dropdown {
   componentId = `dropdown-${++id}`;
-  isShowing = false;
+  isVisible = false;
   panel: HTMLElement;
   positioner: HTMLElement;
   popover: Popover;
@@ -145,7 +145,7 @@ export class Dropdown {
   @Method()
   async show() {
     // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
-    if (this.isShowing) {
+    if (this.isVisible) {
       return;
     }
 
@@ -160,7 +160,7 @@ export class Dropdown {
     document.addEventListener('keydown', this.handleDocumentKeyDown);
     document.addEventListener('mousedown', this.handleDocumentMouseDown);
 
-    this.isShowing = true;
+    this.isVisible = true;
     this.open = true;
     this.popover.show();
   }
@@ -169,7 +169,7 @@ export class Dropdown {
   @Method()
   async hide() {
     // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
-    if (!this.isShowing) {
+    if (!this.isVisible) {
       return;
     }
 
@@ -184,7 +184,7 @@ export class Dropdown {
     document.addEventListener('keydown', this.handleDocumentKeyDown);
     document.removeEventListener('mousedown', this.handleDocumentMouseDown);
 
-    this.isShowing = false;
+    this.isVisible = false;
     this.open = false;
     this.popover.hide();
   }

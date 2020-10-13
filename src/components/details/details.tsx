@@ -27,7 +27,7 @@ export class Details {
   componentId = `details-${++id}`;
   details: HTMLElement;
   header: HTMLElement;
-  isShowing = false;
+  isVisible = false;
 
   /** Indicates whether or not the details is open. You can use this in lieu of the show/hide methods. */
   @Prop({ mutable: true, reflect: true }) open = false;
@@ -78,7 +78,7 @@ export class Details {
   @Method()
   async show() {
     // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
-    if (this.isShowing) {
+    if (this.isVisible) {
       return;
     }
 
@@ -98,7 +98,7 @@ export class Details {
       this.body.style.overflow = 'hidden';
     }
 
-    this.isShowing = true;
+    this.isVisible = true;
     this.open = true;
   }
 
@@ -106,7 +106,7 @@ export class Details {
   @Method()
   async hide() {
     // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
-    if (!this.isShowing) {
+    if (!this.isVisible) {
       return;
     }
 
@@ -125,7 +125,7 @@ export class Details {
       this.body.style.height = '0';
     });
 
-    this.isShowing = false;
+    this.isVisible = false;
     this.open = false;
   }
 

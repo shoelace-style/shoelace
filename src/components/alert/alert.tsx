@@ -23,7 +23,7 @@ const toastStack = Object.assign(document.createElement('div'), { className: 'sl
 export class Alert {
   alert: HTMLElement;
   autoHideTimeout: any;
-  isShowing = false;
+  isVisible = false;
 
   @Element() host: HTMLSlAlertElement;
 
@@ -81,7 +81,7 @@ export class Alert {
   @Method()
   async show() {
     // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
-    if (this.isShowing) {
+    if (this.isVisible) {
       return;
     }
 
@@ -93,7 +93,7 @@ export class Alert {
 
     this.host.hidden = false;
     this.host.clientWidth; // force a reflow
-    this.isShowing = true;
+    this.isVisible = true;
     this.open = true;
 
     if (this.duration < Infinity) {
@@ -105,7 +105,7 @@ export class Alert {
   @Method()
   async hide() {
     // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
-    if (!this.isShowing) {
+    if (!this.isVisible) {
       return;
     }
 
@@ -116,7 +116,7 @@ export class Alert {
     }
 
     clearTimeout(this.autoHideTimeout);
-    this.isShowing = false;
+    this.isVisible = false;
     this.open = false;
   }
 
