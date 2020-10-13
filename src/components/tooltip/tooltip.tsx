@@ -19,7 +19,7 @@ let id = 0;
 })
 export class Tooltip {
   componentId = `tooltip-${++id}`;
-  isShowing = false;
+  isVisible = false;
   popover: Popover;
   tooltipPositioner: HTMLElement;
   target: HTMLElement;
@@ -125,7 +125,7 @@ export class Tooltip {
   @Method()
   async show() {
     // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
-    if (this.isShowing) {
+    if (this.isVisible) {
       return;
     }
 
@@ -135,7 +135,7 @@ export class Tooltip {
       return;
     }
 
-    this.isShowing = true;
+    this.isVisible = true;
     this.open = true;
     this.popover.show();
   }
@@ -144,7 +144,7 @@ export class Tooltip {
   @Method()
   async hide() {
     // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
-    if (!this.isShowing) {
+    if (!this.isVisible) {
       return;
     }
 
@@ -154,7 +154,7 @@ export class Tooltip {
       return;
     }
 
-    this.isShowing = false;
+    this.isVisible = false;
     this.open = false;
     this.popover.hide();
   }
