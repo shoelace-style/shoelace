@@ -1933,7 +1933,7 @@ declare namespace LocalJSX {
         /**
           * Emitted when the form is submitted. This event will not be emitted if any form control inside of it is in an invalid state, unless the form has the `novalidate` attribute. Note that there is never a need to prevent this event, since it doen't send a GET or POST request like native forms. To "prevent" submission, use a conditional around the XHR request you use to submit the form's data with.
          */
-        "onSl-submit"?: (event: CustomEvent<any>) => void;
+        "onSl-submit"?: (event: CustomEvent<{ formData: FormData; formControls: HTMLElement[] }>) => void;
     }
     interface SlFormatBytes {
         /**
@@ -2155,7 +2155,7 @@ declare namespace LocalJSX {
         /**
           * Emitted when a menu item is selected.
          */
-        "onSl-select"?: (event: CustomEvent<any>) => void;
+        "onSl-select"?: (event: CustomEvent<{ item: HTMLSlMenuItemElement }>) => void;
     }
     interface SlMenuDivider {
     }
@@ -2457,11 +2457,11 @@ declare namespace LocalJSX {
         /**
           * Emitted when a tab is hidden.
          */
-        "onSl-tab-hide"?: (event: CustomEvent<any>) => void;
+        "onSl-tab-hide"?: (event: CustomEvent<{ name: string }>) => void;
         /**
           * Emitted when a tab is shown.
          */
-        "onSl-tab-show"?: (event: CustomEvent<any>) => void;
+        "onSl-tab-show"?: (event: CustomEvent<{ name: string }>) => void;
         /**
           * The placement of the tabs.
          */

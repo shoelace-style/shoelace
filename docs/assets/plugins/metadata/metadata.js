@@ -58,7 +58,7 @@
         <tr>
           <td><code>${escapeHtml(event.event)}</code></td>
           <td>${escapeHtml(event.docs)}</td>
-          <td><code>CustomEvent&lt;${escapeHtml(event.detail)}&gt;</code></td>
+          <td><code style="white-space: normal;">CustomEvent&lt;${escapeHtml(event.detail)}&gt;</code></td>
         </tr>
         `
           )

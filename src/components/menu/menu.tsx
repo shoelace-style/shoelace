@@ -29,7 +29,7 @@ export class Menu {
   @Event({ eventName: 'sl-blur' }) slBlur: EventEmitter;
 
   /** Emitted when a menu item is selected. */
-  @Event({ eventName: 'sl-select' }) slSelect: EventEmitter;
+  @Event({ eventName: 'sl-select' }) slSelect: EventEmitter<{ item: HTMLSlMenuItemElement }>;
 
   connectedCallback() {
     this.handleBlur = this.handleBlur.bind(this);
