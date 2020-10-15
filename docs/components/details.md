@@ -26,7 +26,7 @@ Use the `disable` attribute to prevent the details from expanding.
 
 ### Grouping Details
 
-Details are designed to function independently, but you can simulate a group or "accordion" where only one is shown at a time by listening for the `slShow` event.
+Details are designed to function independently, but you can simulate a group or "accordion" where only one is shown at a time by listening for the `sl-show` event.
 
 ```html preview
 <div class="details-group-example">

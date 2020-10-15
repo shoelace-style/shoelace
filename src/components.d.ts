@@ -450,7 +450,7 @@ export namespace Components {
          */
         "novalidate": boolean;
         /**
-          * Submits the form. If all controls are valid, the `slSubmit` event will be emitted and the promise will resolve with `true`. If any form control is invalid, the promise will resolve with `false` and no event will be emitted.
+          * Submits the form. If all controls are valid, the `sl-submit` event will be emitted and the promise will resolve with `true`. If any form control is invalid, the promise will resolve with `false` and no event will be emitted.
          */
         "submit": () => Promise<boolean>;
     }

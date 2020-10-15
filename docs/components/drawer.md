@@ -180,7 +180,7 @@ By design, a drawer's height will never exceed 100% of its container. As such, d
 
 ### Ignoring Clicks on the Overlay
 
-By default, drawers are closed when the user clicks or taps on the overlay. To prevent this behavior, cancel the `slOverlayDismiss` event.
+By default, drawers are closed when the user clicks or taps on the overlay. To prevent this behavior, cancel the `sl-overlay-dismiss` event.
 
 ```html preview
 <sl-drawer label="Drawer" class="drawer-no-overlay-dismiss">

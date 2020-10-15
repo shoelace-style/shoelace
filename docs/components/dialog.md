@@ -84,7 +84,7 @@ By design, a dialog's height will never exceed that of the viewport. As such, di
 
 ### Ignoring Clicks on the Overlay
 
-By default, dialogs are closed when the user clicks or taps on the overlay. To prevent this behavior, cancel the `slOverlayDismiss` event.
+By default, dialogs are closed when the user clicks or taps on the overlay. To prevent this behavior, cancel the `sl-overlay-dismiss` event.
 
 ```html preview
 <sl-dialog label="Dialog" class="dialog-no-overlay-dismiss">

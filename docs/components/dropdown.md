@@ -123,7 +123,7 @@ Dropdown panels will be clipped if they're inside a container that has `overflow
 
 ### Getting the Selected Item
 
-When dropdowns are used with [menus](/components/menu.md), you can listen for the `slSelect` event to determine which menu item was selected. The menu item element will be exposed in `event.detail.item`. You can set `value` props to make it easier to identify commands.
+When dropdowns are used with [menus](/components/menu.md), you can listen for the `sl-select` event to determine which menu item was selected. The menu item element will be exposed in `event.detail.item`. You can set `value` props to make it easier to identify commands.
 
 ```html preview
 <div class="dropdown-selection">
