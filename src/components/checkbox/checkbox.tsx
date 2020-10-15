@@ -103,7 +103,7 @@ export class Checkbox {
 
   handleClick() {
     this.checked = this.input.checked;
-    this.indeterminate = this.input.indeterminate;
+    this.indeterminate = false;
   }
 
   handleBlur() {
