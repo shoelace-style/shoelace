@@ -182,11 +182,6 @@ export class ColorPicker {
   async reportValidity() {
     // If the input is invalid, show the dropdown so the browser can focus on it
     if (!this.inline && this.input.invalid) {
-      // this.dropdown.show();
-      // setTimeout(() => {
-      //   this.input.reportValidity();
-      // }, 300);
-
       return new Promise(resolve => {
         this.dropdown.addEventListener(
           'sl-after-show',
