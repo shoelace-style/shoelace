@@ -1,4 +1,5 @@
 import { Component, Element, Event, EventEmitter, Method, Prop, State, Watch, h } from '@stencil/core';
+import { hasSlot } from '../../utilities/slot';
 
 let id = 0;
 
@@ -6,6 +7,7 @@ let id = 0;
  * @since 2.0
  * @status stable
  *
+ * @slot label - The input's label. Alternatively, you can use the label prop.
  * @slot prefix - Used to prepend an icon or similar element to the input.
  * @slot suffix - Used to append an icon or similar element to the input.
  * @slot clear-icon - An icon to use in lieu of the default clear icon.
@@ -38,6 +40,7 @@ export class Input {
   @Element() host: HTMLSlInputElement;
 
   @State() hasFocus = false;
+  @State() hasLabel = false;
   @State() isPasswordVisible = false;
 
   /** The input's type. */
@@ -118,6 +121,11 @@ export class Input {
   /** The input's inputmode attribute. */
   @Prop() inputmode: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
 
+  @Watch('label')
+  handleLabelChange() {
+    this.detectLabel();
+  }
+
   @Watch('value')
   handleValueChange() {
     this.invalid = !this.input.checkValidity();
@@ -139,6 +147,7 @@ export class Input {
   @Event({ eventName: 'sl-blur' }) slBlur: EventEmitter;
 
   connectedCallback() {
+    this.detectLabel = this.detectLabel.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleInput = this.handleInput.bind(this);
     this.handleInvalid = this.handleInvalid.bind(this);
@@ -146,6 +155,10 @@ export class Input {
     this.handleFocus = this.handleFocus.bind(this);
     this.handleClearClick = this.handleClearClick.bind(this);
     this.handlePasswordToggle = this.handlePasswordToggle.bind(this);
+  }
+
+  componentWillLoad() {
+    this.detectLabel();
   }
 
   /** Sets focus on the input. */
@@ -206,6 +219,10 @@ export class Input {
     this.invalid = !this.input.checkValidity();
   }
 
+  detectLabel() {
+    this.hasLabel = this.label.length > 0 || hasSlot(this.host, 'label');
+  }
+
   handleChange() {
     this.value = this.input.value;
     this.slChange.emit();
@@ -250,7 +267,7 @@ export class Input {
         part="form-control"
         class={{
           'form-control': true,
-          'form-control--has-label': this.label.length > 0,
+          'form-control--has-label': this.hasLabel,
           'form-control--invalid': this.invalid
         }}
       >
@@ -265,7 +282,9 @@ export class Input {
           }}
           htmlFor={this.inputId}
         >
-          {this.label}
+          <slot name="label" onSlotchange={this.detectLabel}>
+            {this.label}
+          </slot>
         </label>
 
         <div

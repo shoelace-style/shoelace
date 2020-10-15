@@ -1,4 +1,5 @@
-import { Component, Event, EventEmitter, Method, Prop, State, Watch, h } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, Method, Prop, State, Watch, h } from '@stencil/core';
+import { hasSlot } from '../../utilities/slot';
 import ResizeObserver from 'resize-observer-polyfill';
 
 let id = 0;
@@ -7,6 +8,7 @@ let id = 0;
  * @since 2.0
  * @status stable
  *
+ * @slot label - The textarea's label. Alternatively, you can use the label prop.
  * @slot help-text - Help text that describes how to use the input.
  *
  * @part base - The component's base wrapper.
@@ -28,7 +30,10 @@ export class Textarea {
   resizeObserver: ResizeObserver;
   textarea: HTMLTextAreaElement;
 
+  @Element() host: HTMLSlTextareaElement;
+
   @State() hasFocus = false;
+  @State() hasLabel = false;
 
   /** The textarea's size. */
   @Prop({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
@@ -102,6 +107,11 @@ export class Textarea {
   /** Emitted when the control loses focus. */
   @Event({ eventName: 'sl-blur' }) slBlur: EventEmitter;
 
+  @Watch('label')
+  handleLabelChange() {
+    this.detectLabel();
+  }
+
   @Watch('rows')
   handleRowsChange() {
     this.setTextareaHeight();
@@ -113,10 +123,15 @@ export class Textarea {
   }
 
   connectedCallback() {
+    this.detectLabel = this.detectLabel.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleInput = this.handleInput.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
+  }
+
+  componentWillLoad() {
+    this.detectLabel();
   }
 
   componentDidLoad() {
@@ -188,6 +203,10 @@ export class Textarea {
     this.invalid = !this.textarea.checkValidity();
   }
 
+  detectLabel() {
+    this.hasLabel = this.label.length > 0 || hasSlot(this.host, 'label');
+  }
+
   handleChange() {
     this.slChange.emit();
   }
@@ -223,7 +242,7 @@ export class Textarea {
         part="form-control"
         class={{
           'form-control': true,
-          'form-control--has-label': this.label.length > 0,
+          'form-control--has-label': this.hasLabel,
           'form-control--invalid': this.invalid
         }}
       >
@@ -238,7 +257,9 @@ export class Textarea {
           }}
           htmlFor={this.textareaId}
         >
-          {this.label}
+          <slot name="label" onSlotchange={this.detectLabel}>
+            {this.label}
+          </slot>
         </label>
         <div
           part="base"

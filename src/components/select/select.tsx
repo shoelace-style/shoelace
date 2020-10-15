@@ -1,6 +1,7 @@
 import { Component, Element, Event, EventEmitter, Method, Prop, State, Watch, h } from '@stencil/core';
-import ResizeObserver from 'resize-observer-polyfill';
 import { getTextContent } from '../../utilities/slot';
+import { hasSlot } from '../../utilities/slot';
+import ResizeObserver from 'resize-observer-polyfill';
 
 let id = 0;
 
@@ -9,6 +10,7 @@ let id = 0;
  * @status stable
  *
  * @slot - The select's options in the form of menu items.
+ * @slot label - The select's label. Alternatively, you can use the label prop.
  * @slot help-text - Help text that describes how to use the select.
  *
  * @part base - The component's base wrapper.
@@ -44,6 +46,7 @@ export class Select {
   @Element() host: HTMLSlSelectElement;
 
   @State() hasFocus = false;
+  @State() hasLabel = false;
   @State() isOpen = false;
   @State() items = [];
   @State() displayLabel = '';
@@ -94,6 +97,11 @@ export class Select {
   /** This will be true when the control is in an invalid state. Validity is determined by the `required` prop. */
   @Prop({ mutable: true }) invalid = false;
 
+  @Watch('label')
+  handleLabelChange() {
+    this.detectLabel();
+  }
+
   @Watch('multiple')
   handleMultipleChange() {
     // Cast to array | string based on `this.multiple`
@@ -118,6 +126,7 @@ export class Select {
   @Event({ eventName: 'sl-blur' }) slBlur: EventEmitter;
 
   connectedCallback() {
+    this.detectLabel = this.detectLabel.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
     this.handleClear = this.handleClear.bind(this);
@@ -132,6 +141,10 @@ export class Select {
     this.handleMenuShow = this.handleMenuShow.bind(this);
     this.handleMenuSelect = this.handleMenuSelect.bind(this);
     this.handleSlotChange = this.handleSlotChange.bind(this);
+  }
+
+  componentWillLoad() {
+    this.detectLabel();
   }
 
   componentDidLoad() {
@@ -152,6 +165,10 @@ export class Select {
   @Method()
   async setCustomValidity(message: string) {
     this.input.setCustomValidity(message);
+  }
+
+  detectLabel() {
+    this.hasLabel = this.label.length > 0 || hasSlot(this.host, 'label');
   }
 
   getItemLabel(item: HTMLSlMenuItemElement) {
@@ -354,7 +371,7 @@ export class Select {
         part="form-control"
         class={{
           'form-control': true,
-          'form-control--has-label': this.label.length > 0,
+          'form-control--has-label': this.hasLabel,
           'form-control--invalid': this.invalid
         }}
       >
@@ -371,7 +388,9 @@ export class Select {
           htmlFor={this.inputId}
           onClick={this.handleLabelClick}
         >
-          {this.label}
+          <slot name="label" onSlotchange={this.detectLabel}>
+            {this.label}
+          </slot>
         </label>
 
         <sl-dropdown
