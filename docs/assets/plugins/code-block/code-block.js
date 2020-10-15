@@ -48,10 +48,6 @@
             <div
               class="code-block__resizer"
               tabindex="0"
-              role="scrollbar"
-              aria-valuenow="0"
-              aria-valuemin="0"
-              aria-valuemax="100"
             >
               <sl-icon name="grip-horizontal"></sl-icon>
             </div>
@@ -143,15 +139,7 @@
           }
         };
 
-        const setWidth = width => {
-          preview.style.width = width + 'px';
-
-          const totalWidth = preview.parentElement.clientWidth;
-          const currentWidth = preview.clientWidth;
-          const valuenow = Math.round((currentWidth / totalWidth) * 100);
-
-          resizer.setAttribute('aria-valuenow', valuenow);
-        };
+        const setWidth = width => preview.style.width = width + 'px';
 
         resizer.addEventListener('mousedown', dragStart);
         resizer.addEventListener('touchstart', dragStart);
