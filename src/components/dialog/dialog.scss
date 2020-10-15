@@ -1,5 +1,5 @@
 @import 'component';
-@import 'mixins/visually-hidden';
+@import 'mixins/hidden';
 
 /**
  * @prop --width: The preferred width of the dialog. Note that the dialog will shrink to accommodate smaller screens.
@@ -22,7 +22,7 @@
   z-index: var(--sl-z-index-dialog);
 
   &:not(.dialog--visible) {
-    @include visually-hidden;
+    @include hidden;
   }
 }
 
