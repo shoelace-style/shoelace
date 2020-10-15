@@ -1,6 +1,7 @@
 import { Component, Element, Event, EventEmitter, Method, Prop, State, Watch, h } from '@stencil/core';
 import { lockBodyScrolling, unlockBodyScrolling } from '../../utilities/scroll';
 import { hasSlot } from '../../utilities/slot';
+import Modal from '../../utilities/modal';
 
 let id = 0;
 
@@ -28,6 +29,7 @@ let id = 0;
 export class Drawer {
   componentId = `drawer-${++id}`;
   drawer: HTMLElement;
+  modal: Modal;
   panel: HTMLElement;
 
   @Element() host: HTMLSlDrawerElement;
@@ -82,10 +84,13 @@ export class Drawer {
   connectedCallback() {
     this.handleCloseClick = this.handleCloseClick.bind(this);
     this.handleTransitionEnd = this.handleTransitionEnd.bind(this);
-    this.handleDocumentFocusIn = this.handleDocumentFocusIn.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleOverlayClick = this.handleOverlayClick.bind(this);
     this.updateSlots = this.updateSlots.bind(this);
+
+    this.modal = new Modal(this.host, {
+      onFocusOut: () => (this.contained ? null : this.panel.focus())
+    });
   }
 
   componentWillLoad() {
@@ -125,10 +130,9 @@ export class Drawer {
 
     // Lock body scrolling only if the drawer isn't contained
     if (!this.contained) {
+      this.modal.activate();
       lockBodyScrolling(this.host);
     }
-
-    document.addEventListener('focusin', this.handleDocumentFocusIn);
   }
 
   /** Hides the drawer */
@@ -146,22 +150,13 @@ export class Drawer {
     }
 
     this.open = false;
+    this.modal.deactivate();
 
     unlockBodyScrolling(this.host);
-    document.removeEventListener('focusin', this.handleDocumentFocusIn);
   }
 
   handleCloseClick() {
     this.hide();
-  }
-
-  handleDocumentFocusIn(event: Event) {
-    const target = event.target as HTMLElement;
-
-    // Trap focus only if the drawer is NOT contained
-    if (!this.contained && target.closest('sl-drawer') !== this.host) {
-      this.panel.focus();
-    }
   }
 
   handleKeyDown(event: KeyboardEvent) {
