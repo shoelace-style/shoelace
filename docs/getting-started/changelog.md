@@ -14,6 +14,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug where concurrent active modals (i.e. dialog, drawer) would try to steal focus from each other
 - Improved `sl-color-picker` grid and slider handles [#246](https://github.com/shoelace-style/shoelace/issues/246)
 - Reworked show/hide logic in `sl-alert`, `sl-dialog`, and `sl-drawer` to not use reflow hacks and the `hidden` attribute
+- Reworked slot logic in `sl-card`, `sl-dialog`, and `sl-drawer`
 - Updated to Popper 2.5.3 to address a fixed position bug in Firefox 
 
 ## 2.0.0-beta.20

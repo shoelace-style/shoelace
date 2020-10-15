@@ -86,16 +86,11 @@ export class Drawer {
     this.handleTransitionEnd = this.handleTransitionEnd.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleOverlayClick = this.handleOverlayClick.bind(this);
-    this.updateSlots = this.updateSlots.bind(this);
+    this.handleSlotChange = this.handleSlotChange.bind(this);
 
     this.modal = new Modal(this.host, {
       onFocusOut: () => (this.contained ? null : this.panel.focus())
     });
-  }
-
-  componentWillLoad() {
-    this.updateSlots();
-    this.host.shadowRoot.addEventListener('slotchange', this.updateSlots);
   }
 
   componentDidLoad() {
@@ -107,8 +102,6 @@ export class Drawer {
 
   disconnectedCallback() {
     unlockBodyScrolling(this.host);
-
-    this.host.shadowRoot.removeEventListener('slotchange', this.updateSlots);
   }
 
   /** Shows the drawer */
@@ -173,6 +166,10 @@ export class Drawer {
     }
   }
 
+  handleSlotChange() {
+    this.hasFooter = hasSlot(this.host, 'footer');
+  }
+
   handleTransitionEnd(event: TransitionEvent) {
     const target = event.target as HTMLElement;
 
@@ -185,10 +182,6 @@ export class Drawer {
         this.panel.focus();
       }
     }
-  }
-
-  updateSlots() {
-    this.hasFooter = hasSlot(this.host, 'footer');
   }
 
   render() {
@@ -239,7 +232,7 @@ export class Drawer {
           </div>
 
           <footer part="footer" class="drawer__footer">
-            <slot name="footer" />
+            <slot name="footer" onSlotchange={this.handleSlotChange} />
           </footer>
         </div>
       </div>

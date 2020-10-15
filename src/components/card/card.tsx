@@ -30,19 +30,10 @@ export class Card {
   @State() hasHeader = false;
 
   connectedCallback() {
-    this.updateSlots = this.updateSlots.bind(this);
+    this.handleSlotChange = this.handleSlotChange.bind(this);
   }
 
-  componentWillLoad() {
-    this.updateSlots();
-    this.host.shadowRoot.addEventListener('slotchange', this.updateSlots);
-  }
-
-  disconnectedCallback() {
-    this.host.shadowRoot.removeEventListener('slotchange', this.updateSlots);
-  }
-
-  updateSlots() {
+  handleSlotChange() {
     this.hasFooter = hasSlot(this.host, 'footer');
     this.hasImage = hasSlot(this.host, 'image');
     this.hasHeader = hasSlot(this.host, 'header');
@@ -60,11 +51,11 @@ export class Card {
         }}
       >
         <div part="image" class="card__image">
-          <slot name="image" />
+          <slot name="image" onSlotchange={this.handleSlotChange} />
         </div>
 
         <div part="header" class="card__header">
-          <slot name="header" />
+          <slot name="header" onSlotchange={this.handleSlotChange} />
         </div>
 
         <div part="body" class="card__body">
@@ -72,7 +63,7 @@ export class Card {
         </div>
 
         <div part="footer" class="card__footer">
-          <slot name="footer" />
+          <slot name="footer" onSlotchange={this.handleSlotChange} />
         </div>
       </div>
     );

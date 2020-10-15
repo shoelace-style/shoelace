@@ -189,11 +189,11 @@ To expose custom properties for a component, define them in the `:host` block an
 
 ### Conditional Slots
 
-When a component relies on the presence of a slot to do something, don't assume the initial state of the component is its permanent state. Users can add and remove slotted content anytime, and components should be aware of this.
+When a component relies on the presence of slotted content to do something, don't assume its initial state is permanent. Slotted content can be added or removed any time and components must be aware of this. A good practice to manage this is:
 
-- Create an `updateSlots` method that uses `hasSlot` (imported from `src/utilities/slot.ts`) to check for the required slot(s)
-- Listen on the host element for the `slotchange` event and run `updateSlots`
-- Don't conditionally render any slots — always use `hidden` or `display: none` so the slot exists in the DOM
+- Create a `handleSlotChange` method that uses `hasSlot` (imported from `src/utilities/slot.ts`) to update state variables for the associated slot(s)
+- Add `onSlotchange={this.handleSlotChange}` to the slots you want to watch
+- Never conditionally render `<slot>` elements in a component — always use `hidden` so the slot remains in the DOM and the `slotchange` event can be captured
 
 See the source of card, dialog, or drawer for examples.
 
