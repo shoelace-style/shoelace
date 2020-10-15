@@ -10,6 +10,7 @@ let id = 0;
  * @status stable
  *
  * @slot - The dialog's content.
+ * @slot label - The dialog's label. Alternatively, you can use the label prop.
  * @slot footer - The dialog's footer, usually one or more buttons representing various options.
  *
  * @part base - The component's base wrapper.
@@ -203,8 +204,10 @@ export class Dialog {
           {!this.noHeader && (
             <header part="header" class="dialog__header">
               <span part="title" class="dialog__title" id={`${this.componentId}-title`}>
-                {/* If there's no label, use an invisible character to prevent the heading from collapsing */}
-                {this.label || String.fromCharCode(65279)}
+                <slot name="label">
+                  {/* If there's no label, use an invisible character to prevent the heading from collapsing */}
+                  {this.label || String.fromCharCode(65279)}
+                </slot>
               </span>
               <sl-icon-button part="close-button" class="dialog__close" name="x" onClick={this.handleCloseClick} />
             </header>
