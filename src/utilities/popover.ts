@@ -136,7 +136,7 @@ export default class Popover {
   }
 }
 
-export interface PopoverOptions {
+interface PopoverOptions {
   distance?: number;
   placement?:
     | 'auto'

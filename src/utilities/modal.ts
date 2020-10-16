@@ -1,4 +1,4 @@
-export interface ModalOptions {
+interface ModalOptions {
   onFocusOut?: (event: Event) => any;
 }
 
