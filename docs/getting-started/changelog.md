@@ -10,6 +10,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 - Added `label` slot to `sl-input`, `sl-select`, and `sl-textarea` [#248](https://github.com/shoelace-style/shoelace/issues/248)
 - Added `label` slot to `sl-dialog` and `sl-drawer`
+- Added experimental `sl-include` component
 - Fixed a bug where initial transitions didn't show in `sl-dialog` and `sl-drawer` [#247](https://github.com/shoelace-style/shoelace/issues/247)
 - Fixed a bug where indeterminate checkboxes would maintain the indeterminate state when toggled
 - Fixed a bug where concurrent active modals (i.e. dialog, drawer) would try to steal focus from each other

@@ -529,6 +529,16 @@ export namespace Components {
          */
         "position": number;
     }
+    interface SlInclude {
+        /**
+          * The fetch mode to use.
+         */
+        "mode": 'cors' | 'no-cors' | 'same-origin';
+        /**
+          * The location of the HTML file to include.
+         */
+        "src": string;
+    }
     interface SlInput {
         /**
           * The input's autocaptialize attribute.
@@ -1286,6 +1296,12 @@ declare global {
         prototype: HTMLSlImageComparerElement;
         new (): HTMLSlImageComparerElement;
     };
+    interface HTMLSlIncludeElement extends Components.SlInclude, HTMLStencilElement {
+    }
+    var HTMLSlIncludeElement: {
+        prototype: HTMLSlIncludeElement;
+        new (): HTMLSlIncludeElement;
+    };
     interface HTMLSlInputElement extends Components.SlInput, HTMLStencilElement {
     }
     var HTMLSlInputElement: {
@@ -1432,6 +1448,7 @@ declare global {
         "sl-icon-button": HTMLSlIconButtonElement;
         "sl-icon-library": HTMLSlIconLibraryElement;
         "sl-image-comparer": HTMLSlImageComparerElement;
+        "sl-include": HTMLSlIncludeElement;
         "sl-input": HTMLSlInputElement;
         "sl-menu": HTMLSlMenuElement;
         "sl-menu-divider": HTMLSlMenuDividerElement;
@@ -2020,6 +2037,24 @@ declare namespace LocalJSX {
           * The position of the divider as a percentage.
          */
         "position"?: number;
+    }
+    interface SlInclude {
+        /**
+          * The fetch mode to use.
+         */
+        "mode"?: 'cors' | 'no-cors' | 'same-origin';
+        /**
+          * Emitted when the included file fails to load due to an error.
+         */
+        "onSl-error"?: (event: CustomEvent<{ status: number }>) => void;
+        /**
+          * Emitted when the included file is loaded.
+         */
+        "onSl-load"?: (event: CustomEvent<any>) => void;
+        /**
+          * The location of the HTML file to include.
+         */
+        "src"?: string;
     }
     interface SlInput {
         /**
@@ -2670,6 +2705,7 @@ declare namespace LocalJSX {
         "sl-icon-button": SlIconButton;
         "sl-icon-library": SlIconLibrary;
         "sl-image-comparer": SlImageComparer;
+        "sl-include": SlInclude;
         "sl-input": SlInput;
         "sl-menu": SlMenu;
         "sl-menu-divider": SlMenuDivider;
@@ -2716,6 +2752,7 @@ declare module "@stencil/core" {
             "sl-icon-button": LocalJSX.SlIconButton & JSXBase.HTMLAttributes<HTMLSlIconButtonElement>;
             "sl-icon-library": LocalJSX.SlIconLibrary & JSXBase.HTMLAttributes<HTMLSlIconLibraryElement>;
             "sl-image-comparer": LocalJSX.SlImageComparer & JSXBase.HTMLAttributes<HTMLSlImageComparerElement>;
+            "sl-include": LocalJSX.SlInclude & JSXBase.HTMLAttributes<HTMLSlIncludeElement>;
             "sl-input": LocalJSX.SlInput & JSXBase.HTMLAttributes<HTMLSlInputElement>;
             "sl-menu": LocalJSX.SlMenu & JSXBase.HTMLAttributes<HTMLSlMenuElement>;
             "sl-menu-divider": LocalJSX.SlMenuDivider & JSXBase.HTMLAttributes<HTMLSlMenuDividerElement>;

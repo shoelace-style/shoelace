@@ -49,6 +49,7 @@
 - Utility Components
   - [Animation](/components/animation.md)
   - [Format Bytes](/components/format-bytes.md)
+  - [Include](/components/include.md)
   - [Responsive Embed](/components/responsive-embed.md)
 
 - Design Tokens
