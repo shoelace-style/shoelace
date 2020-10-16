@@ -6,15 +6,17 @@ Components with the <sl-badge type="warning" pill>Experimental</sl-badge> badge 
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
-## Next
+## 2.0.0-beta.21
 
 - Added `label` slot to `sl-input`, `sl-select`, and `sl-textarea` [#248](https://github.com/shoelace-style/shoelace/issues/248)
 - Added `label` slot to `sl-dialog` and `sl-drawer`
 - Added experimental `sl-include` component
+- Added status code to the `sl-error` event in `sl-icon`
 - Fixed a bug where initial transitions didn't show in `sl-dialog` and `sl-drawer` [#247](https://github.com/shoelace-style/shoelace/issues/247)
 - Fixed a bug where indeterminate checkboxes would maintain the indeterminate state when toggled
 - Fixed a bug where concurrent active modals (i.e. dialog, drawer) would try to steal focus from each other
 - Improved `sl-color-picker` grid and slider handles [#246](https://github.com/shoelace-style/shoelace/issues/246)
+- Refactored `sl-icon` request logic and removed unused cache map
 - Reworked show/hide logic in `sl-alert`, `sl-dialog`, and `sl-drawer` to not use reflow hacks and the `hidden` attribute
 - Reworked slot logic in `sl-card`, `sl-dialog`, and `sl-drawer`
 - Updated to Popper 2.5.3 to address a fixed position bug in Firefox 
