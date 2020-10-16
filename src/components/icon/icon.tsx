@@ -38,7 +38,7 @@ export class Icon {
   @Event({ eventName: 'sl-load' }) slLoad: EventEmitter;
 
   /** Emitted when the icon failed to load. */
-  @Event({ eventName: 'sl-error' }) slError: EventEmitter;
+  @Event({ eventName: 'sl-error' }) slError: EventEmitter<{ status?: number }>;
 
   @Watch('name')
   @Watch('src')
@@ -79,7 +79,7 @@ export class Icon {
     return label;
   }
 
-  setIcon() {
+  async setIcon() {
     const library = getLibrary(this.library);
     let url = this.src;
 
@@ -88,9 +88,10 @@ export class Icon {
     }
 
     if (url) {
-      requestIcon(url)
-        .then(source => {
-          const doc = parser.parseFromString(source, 'text/html');
+      try {
+        const file = await requestIcon(url);
+        if (file.ok) {
+          const doc = parser.parseFromString(file.svg, 'text/html');
           const svg = doc.body.querySelector('svg');
 
           if (svg) {
@@ -102,10 +103,12 @@ export class Icon {
             this.slLoad.emit();
           } else {
             this.svg = '';
-            this.slError.emit();
+            this.slError.emit({ status: file.status });
           }
-        })
-        .catch(error => this.slError.emit(error));
+        }
+      } catch {
+        this.slError.emit();
+      }
     }
   }
 

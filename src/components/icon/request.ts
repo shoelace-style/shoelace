@@ -1,30 +1,36 @@
-const cache = new Map<string, string>();
-const requests = new Map<string, Promise<any>>();
+interface IconFile {
+  ok: boolean;
+  status: number;
+  svg: string;
+}
+
+const iconFiles = new Map<string, Promise<IconFile>>();
 
 export const requestIcon = (url: string) => {
-  let req = requests.get(url);
-
-  if (!req) {
-    req = fetch(url).then(async res => {
-      if (res.ok) {
+  if (iconFiles.has(url)) {
+    return iconFiles.get(url);
+  } else {
+    const request = fetch(url).then(async response => {
+      if (response.ok) {
         const div = document.createElement('div');
-        div.innerHTML = await res.text();
-
+        div.innerHTML = await response.text();
         const svg = div.firstElementChild;
-        if (svg && svg.tagName.toLowerCase() === 'svg') {
-          cache.set(url, div.innerHTML);
-          return svg.outerHTML;
-        } else {
-          console.warn(`Invalid SVG icon: ${url}`);
-          return '';
-        }
+
+        return {
+          ok: response.ok,
+          status: response.status,
+          svg: svg && svg.tagName.toLowerCase() === 'svg' ? svg.outerHTML : ''
+        };
       } else {
-        return '';
+        return {
+          ok: response.ok,
+          status: response.status,
+          svg: null
+        };
       }
     });
 
-    requests.set(url, req);
+    iconFiles.set(url, request);
+    return request;
   }
-
-  return req;
 };

@@ -1982,7 +1982,7 @@ declare namespace LocalJSX {
         /**
           * Emitted when the icon failed to load.
          */
-        "onSl-error"?: (event: CustomEvent<any>) => void;
+        "onSl-error"?: (event: CustomEvent<{ status?: number }>) => void;
         /**
           * Emitted when the icon has loaded.
          */
@@ -2046,7 +2046,7 @@ declare namespace LocalJSX {
         /**
           * Emitted when the included file fails to load due to an error.
          */
-        "onSl-error"?: (event: CustomEvent<{ status: number }>) => void;
+        "onSl-error"?: (event: CustomEvent<{ status?: number }>) => void;
         /**
           * Emitted when the included file is loaded.
          */
