@@ -26,7 +26,7 @@ export class Include {
   @Event({ eventName: 'sl-load' }) slLoad: EventEmitter;
 
   /** Emitted when the included file fails to load due to an error. */
-  @Event({ eventName: 'sl-error' }) slError: EventEmitter<{ status: number }>;
+  @Event({ eventName: 'sl-error' }) slError: EventEmitter<{ status?: number }>;
 
   @Watch('src')
   handleSrcChange() {
@@ -38,21 +38,25 @@ export class Include {
   }
 
   async loadSource() {
-    const src = this.src;
-    const file = await requestInclude(src, this.mode);
+    try {
+      const src = this.src;
+      const file = await requestInclude(src, this.mode);
 
-    // If the src changed since the request started do nothing, otherwise we risk overwriting a subsequent response
-    if (src !== this.src) {
-      return;
+      // If the src changed since the request started do nothing, otherwise we risk overwriting a subsequent response
+      if (src !== this.src) {
+        return;
+      }
+
+      if (!file.ok) {
+        this.slError.emit({ status: file.status });
+        return;
+      }
+
+      this.host.innerHTML = file.html;
+      this.slLoad.emit();
+    } catch {
+      this.slError.emit();
     }
-
-    if (!file.ok) {
-      this.slError.emit({ status: file.status });
-      return;
-    }
-
-    this.host.innerHTML = file.html;
-    this.slLoad.emit();
   }
 
   render() {
