@@ -299,7 +299,8 @@
 
         const tags = getDocsTagsObject(data.docsTags);
         if (!tags) {
-          throw new Error(`No metadata tags found for ${tag}`);
+          console.error(`No metadata tags found for ${tag}`);
+          return;
         }
 
         let badgeType = 'info';
