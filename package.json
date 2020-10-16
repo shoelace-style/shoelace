@@ -1,6 +1,6 @@
 {
   "name": "@shoelace-style/shoelace",
-  "version": "2.0.0-beta.20",
+  "version": "2.0.0-beta.21",
   "description": "A forward-thinking library of web components.",
   "main": "dist/index.cjs.js",
   "module": "dist/custom-elements/index.js",
