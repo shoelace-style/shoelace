@@ -1,12 +1,5 @@
 import { Component, Element, Event, EventEmitter, Prop, State, Watch, h } from '@stencil/core';
-
-export interface IncludeFile {
-  ok: boolean;
-  status: number;
-  html: string;
-}
-
-const includeFiles = new Map<string, Promise<IncludeFile>>();
+import { requestInclude } from './request';
 
 /**
  * @since 2.0
@@ -44,25 +37,9 @@ export class Include {
     this.loadSource();
   }
 
-  async requestFile(src: string) {
-    if (includeFiles.has(src)) {
-      return includeFiles.get(src);
-    } else {
-      const request = fetch(src, { mode: this.mode }).then(async response => {
-        return {
-          ok: response.ok,
-          status: response.status,
-          html: await response.text()
-        };
-      });
-      includeFiles.set(src, request);
-      return request;
-    }
-  }
-
   async loadSource() {
     const src = this.src;
-    const file = await this.requestFile(src);
+    const file = await requestInclude(src, this.mode);
 
     // If the src changed since the request started do nothing, otherwise we risk overwriting a subsequent response
     if (src !== this.src) {
