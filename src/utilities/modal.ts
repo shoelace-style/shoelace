@@ -30,7 +30,6 @@ export default class Modal {
   }
 
   handleFocusIn(event: Event) {
-    console.log(this.element);
     const target = event.target as HTMLElement;
     const tagName = this.element.tagName.toLowerCase();
 
