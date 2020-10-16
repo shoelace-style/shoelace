@@ -14,6 +14,6 @@ import { Component, h } from '@stencil/core';
 })
 export class MenuDivider {
   render() {
-    return <div part="base" class="menu-divider" role="separator" />;
+    return <div part="base" class="menu-divider" role="separator" aria-hidden="true" />;
   }
 }
