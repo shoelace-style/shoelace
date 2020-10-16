@@ -298,32 +298,33 @@
         }
 
         const tags = getDocsTagsObject(data.docsTags);
-
-        if (tags && tags.status) {
-          let badgeType = 'info';
-          if (tags.status === 'stable') badgeType = 'primary';
-          if (tags.status === 'experimental') badgeType = 'warning';
-          if (tags.status === 'planned') badgeType = 'info';
-          if (tags.status === 'deprecated') badgeType = 'danger';
-
-          result += `
-            <div class="component-header">
-              <div class="component-header__tag">
-                <code>&lt;${tag}&gt;</code>
-              </div>
-
-              <div class="component-header__info">
-                <sl-badge type="info" pill>
-                  Since ${tags.since || '?'}
-                </sl-badge>
-
-                <sl-badge type="${badgeType}" pill style="text-transform: capitalize;">
-                  ${tags.status}
-                </sl-badge>
-              </div>
-            </div>
-          `;
+        if (!tags) {
+          throw new Error(`No metadata tags found for ${tag}`);
         }
+
+        let badgeType = 'info';
+        if (tags.status === 'stable') badgeType = 'primary';
+        if (tags.status === 'experimental') badgeType = 'warning';
+        if (tags.status === 'planned') badgeType = 'info';
+        if (tags.status === 'deprecated') badgeType = 'danger';
+
+        result += `
+          <div class="component-header">
+            <div class="component-header__tag">
+              <code>&lt;${tag}&gt;</code>
+            </div>
+
+            <div class="component-header__info">
+              <sl-badge type="info" pill>
+                Since ${tags.since || '?'}
+              </sl-badge>
+
+              <sl-badge type="${badgeType}" pill style="text-transform: capitalize;">
+                ${tags.status}
+              </sl-badge>
+            </div>
+          </div>
+        `;
 
         return result.replace(/^ +| +$/gm, '');
       });
