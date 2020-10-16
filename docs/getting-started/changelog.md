@@ -9,6 +9,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 ## Next
 
 - Fix bug where `disabled` could be set when buttons are rendered as links
+- Improved `sl-dropdown` accessibility by attaching `aria-haspopup` and `aria-expanded` to the slotted trigger
 - Removed `console.log` from modal utility
 
 ## 2.0.0-beta.21

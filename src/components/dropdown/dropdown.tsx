@@ -1,5 +1,6 @@
 import { Component, Element, Event, EventEmitter, Method, Prop, Watch, h } from '@stencil/core';
 import { scrollIntoView } from '../../utilities/scroll';
+import { getNearestTabbableElement } from '../../utilities/tabbable';
 import Popover from '../../utilities/popover';
 
 let id = 0;
@@ -22,6 +23,7 @@ let id = 0;
   shadow: true
 })
 export class Dropdown {
+  accessibleTrigger: HTMLElement;
   componentId = `dropdown-${++id}`;
   isVisible = false;
   panel: HTMLElement;
@@ -85,6 +87,7 @@ export class Dropdown {
   @Watch('open')
   handleOpenChange() {
     this.open ? this.show() : this.hide();
+    this.updateAccessibleTrigger();
   }
 
   @Watch('distance')
@@ -112,6 +115,7 @@ export class Dropdown {
     this.handleTriggerClick = this.handleTriggerClick.bind(this);
     this.handleTriggerKeyDown = this.handleTriggerKeyDown.bind(this);
     this.handleTriggerKeyUp = this.handleTriggerKeyUp.bind(this);
+    this.handleTriggerSlotChange = this.handleTriggerSlotChange.bind(this);
   }
 
   componentDidLoad() {
@@ -316,6 +320,31 @@ export class Dropdown {
     }
   }
 
+  handleTriggerSlotChange() {
+    this.updateAccessibleTrigger();
+  }
+
+  //
+  // Slotted triggers can be arbitrary content, but we need to link them to the dropdown panel with `aria-haspopup` and
+  // `aria-expanded`. These must be applied to the "accessible trigger" (the tabbable portion of the trigger element
+  // that gets slotted in) so screen readers will understand them. The accessible trigger could be the slotted element,
+  // a child of the slotted element, or an element in the slotted element's shadow root.
+  //
+  // For example, the accessible trigger of an <sl-button> is a <button> located inside its shadow root.
+  //
+  // To determine this, we assume the first tabbable element in the trigger slot is the "accessible trigger."
+  //
+  updateAccessibleTrigger() {
+    const slot = this.trigger.querySelector('slot') as HTMLSlotElement;
+    const assignedElements = slot.assignedElements({ flatten: true }) as HTMLElement[];
+    const accessibleTrigger = assignedElements.map(getNearestTabbableElement)[0];
+
+    if (accessibleTrigger) {
+      accessibleTrigger.setAttribute('aria-haspopup', 'true');
+      accessibleTrigger.setAttribute('aria-expanded', this.open ? 'true' : 'false');
+    }
+  }
+
   render() {
     return (
       <div
@@ -325,8 +354,6 @@ export class Dropdown {
           dropdown: true,
           'dropdown--open': this.open
         }}
-        aria-expanded={this.open}
-        aria-haspopup="true"
       >
         <span
           part="trigger"
@@ -336,7 +363,7 @@ export class Dropdown {
           onKeyDown={this.handleTriggerKeyDown}
           onKeyUp={this.handleTriggerKeyUp}
         >
-          <slot name="trigger" />
+          <slot name="trigger" onSlotchange={this.handleTriggerSlotChange} />
         </span>
 
         {/* Position the panel with a wrapper since the popover makes use of `translate`. This let's us add transitions
