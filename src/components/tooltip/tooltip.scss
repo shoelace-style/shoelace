@@ -72,7 +72,7 @@
 
   &.popover-visible .tooltip {
     opacity: 1;
-    transform: scale(1);
+    transform: none;
     transition-delay: var(--show-delay);
     transition-duration: var(--show-duration);
     transition-timing-function: var(--show-timing-function);
