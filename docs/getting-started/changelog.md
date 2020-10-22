@@ -8,6 +8,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
+- Added `no-scroll-controls` prop to `sl-tab-group`
 - Fixed a bug where `disabled` could be set when buttons are rendered as links
 - Fixed a bug where hoisted dropdowns would render in the wrong position when place inside an `sl-dialog`
 - Improved `sl-dropdown` accessibility by attaching `aria-haspopup` and `aria-expanded` to the slotted trigger

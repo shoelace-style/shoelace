@@ -993,6 +993,10 @@ export namespace Components {
     }
     interface SlTabGroup {
         /**
+          * Disables the scroll arrows that appear when tabs overflow.
+         */
+        "noScrollControls": boolean;
+        /**
           * The placement of the tabs.
          */
         "placement": 'top' | 'bottom' | 'left' | 'right';
@@ -2481,6 +2485,10 @@ declare namespace LocalJSX {
         "panel"?: string;
     }
     interface SlTabGroup {
+        /**
+          * Disables the scroll arrows that appear when tabs overflow.
+         */
+        "noScrollControls"?: boolean;
         /**
           * Emitted when a tab is hidden.
          */

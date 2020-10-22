@@ -35,14 +35,22 @@ export class TabGroup {
 
   @Element() host: HTMLSlTabGroupElement;
 
-  @State() canScrollHorizontally = false;
+  @State() hasScrollControls = false;
 
   /** The placement of the tabs. */
   @Prop() placement: 'top' | 'bottom' | 'left' | 'right' = 'top';
 
+  /** Disables the scroll arrows that appear when tabs overflow. */
+  @Prop() noScrollControls = false;
+
   @Watch('placement')
   handlePlacementChange() {
     this.syncActiveTabIndicator();
+  }
+
+  @Watch('noScrollControls')
+  handleNoScrollControlsChange() {
+    this.updateScrollControls();
   }
 
   /** Emitted when a tab is shown. */
@@ -71,9 +79,9 @@ export class TabGroup {
 
     focusVisible.observe(this.tabGroup);
 
-    this.resizeObserver = new ResizeObserver(() => this.syncHorizontalScroll());
+    this.resizeObserver = new ResizeObserver(() => this.updateScrollControls());
     this.resizeObserver.observe(this.nav);
-    requestAnimationFrame(() => this.syncHorizontalScroll());
+    requestAnimationFrame(() => this.updateScrollControls());
 
     // Update aria labels if the DOM changes
     this.mutationObserver = new MutationObserver(mutations => {
@@ -189,6 +197,15 @@ export class TabGroup {
     });
   }
 
+  updateScrollControls() {
+    if (this.noScrollControls) {
+      this.hasScrollControls = false;
+    } else {
+      this.hasScrollControls =
+        ['top', 'bottom'].includes(this.placement) && this.nav.scrollWidth > this.nav.clientWidth;
+    }
+  }
+
   setActiveTab(tab: HTMLSlTabElement, emitEvents = true) {
     if (tab && tab !== this.activeTab && !tab.disabled) {
       const previousTab = this.activeTab;
@@ -253,11 +270,6 @@ export class TabGroup {
     }
   }
 
-  syncHorizontalScroll() {
-    this.canScrollHorizontally =
-      ['top', 'bottom'].includes(this.placement) && this.nav.scrollWidth > this.nav.clientWidth;
-  }
-
   render() {
     return (
       <div
@@ -272,13 +284,13 @@ export class TabGroup {
           'tab-group--left': this.placement === 'left',
           'tab-group--right': this.placement === 'right',
 
-          'tab-group--horizontal-scroll': this.canScrollHorizontally
+          'tab-group--has-scroll-controls': this.hasScrollControls
         }}
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
       >
         <div class="tab-group__nav-container">
-          {this.canScrollHorizontally && (
+          {this.hasScrollControls && (
             <sl-icon-button
               class="tab-group__scroll-button tab-group__scroll-button--left"
               name="chevron-left"
@@ -295,7 +307,7 @@ export class TabGroup {
               <slot name="nav" />
             </div>
           </div>
-          {this.canScrollHorizontally && (
+          {this.hasScrollControls && (
             <sl-icon-button
               class="tab-group__scroll-button tab-group__scroll-button--right"
               name="chevron-right"
