@@ -12,6 +12,10 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug where hoisted dropdowns would render in the wrong position when place inside an `sl-dialog`
 - Improved `sl-dropdown` accessibility by attaching `aria-haspopup` and `aria-expanded` to the slotted trigger
 - Removed `console.log` from modal utility
+- 🚨 BREAKING CHANGE: Refactored `sl-menu` and `sl-menu-item` to improve accessibility by using proper focus states
+  - Moved `tabindex` from `sl-menu` to `sl-menu-item`
+  - Removed the `active` prop from `sl-menu-item` because synthetic focus states are bad for accessibility
+  - Removed the `sl-activate` and `sl-deactivate` events from `sl-menu-item` (listen for `focus` and `blur` instead)
 
 ## 2.0.0-beta.21
 

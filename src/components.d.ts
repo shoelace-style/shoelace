@@ -687,10 +687,6 @@ export namespace Components {
     }
     interface SlMenuItem {
         /**
-          * Draws the menu in an active (i.e. or hover/focus), state to indicate the current menu selection. This is used in lieu of standard :hover and :focus states to prevent concurrent interactions from different devices, such as focusing with the keyboard and hovering with the mouse.
-         */
-        "active": boolean;
-        /**
           * Set to true to draw the item in a checked state.
          */
         "checked": boolean;
@@ -698,6 +694,14 @@ export namespace Components {
           * Set to true to draw the menu item in a disabled state.
          */
         "disabled": boolean;
+        /**
+          * Removes focus from the button.
+         */
+        "removeFocus": () => Promise<void>;
+        /**
+          * Sets focus on the button.
+         */
+        "setFocus": () => Promise<void>;
         /**
           * A unique value to store in the menu item.
          */
@@ -2196,10 +2200,6 @@ declare namespace LocalJSX {
     }
     interface SlMenuItem {
         /**
-          * Draws the menu in an active (i.e. or hover/focus), state to indicate the current menu selection. This is used in lieu of standard :hover and :focus states to prevent concurrent interactions from different devices, such as focusing with the keyboard and hovering with the mouse.
-         */
-        "active"?: boolean;
-        /**
           * Set to true to draw the item in a checked state.
          */
         "checked"?: boolean;
@@ -2207,14 +2207,6 @@ declare namespace LocalJSX {
           * Set to true to draw the menu item in a disabled state.
          */
         "disabled"?: boolean;
-        /**
-          * Emitted when the menu item becomes active.
-         */
-        "onSl-activate"?: (event: CustomEvent<any>) => void;
-        /**
-          * Emitted when the menu item becomes inactive.
-         */
-        "onSl-deactivate"?: (event: CustomEvent<any>) => void;
         /**
           * A unique value to store in the menu item.
          */

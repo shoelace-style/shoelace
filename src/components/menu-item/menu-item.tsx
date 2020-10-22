@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, Prop, Watch, h } from '@stencil/core';
+import { Component, Method, Prop, State, h } from '@stencil/core';
 
 /**
  * @since 2.0
@@ -21,15 +21,12 @@ import { Component, Event, EventEmitter, Prop, Watch, h } from '@stencil/core';
   shadow: true
 })
 export class MenuItem {
+  menuItem: HTMLElement;
+
+  @State() hasFocus = false;
+
   /** Set to true to draw the item in a checked state. */
   @Prop({ reflect: true }) checked = false;
-
-  /**
-   * Draws the menu in an active (i.e. or hover/focus), state to indicate the current menu selection. This is used in
-   * lieu of standard :hover and :focus states to prevent concurrent interactions from different devices, such as
-   * focusing with the keyboard and hovering with the mouse.
-   */
-  @Prop({ reflect: true }) active = false;
 
   /** A unique value to store in the menu item. */
   @Prop({ reflect: true }) value = '';
@@ -37,30 +34,60 @@ export class MenuItem {
   /** Set to true to draw the menu item in a disabled state. */
   @Prop({ reflect: true }) disabled = false;
 
-  @Watch('active')
-  handleActiveChange() {
-    this.active ? this.slActivate.emit() : this.slDeactivate.emit();
+  connectedCallback() {
+    this.handleBlur = this.handleBlur.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
+    this.handleMouseOver = this.handleMouseOver.bind(this);
+    this.handleMouseOut = this.handleMouseOut.bind(this);
   }
 
-  /** Emitted when the menu item becomes active. */
-  @Event({ eventName: 'sl-activate' }) slActivate: EventEmitter;
+  /** Sets focus on the button. */
+  @Method()
+  async setFocus() {
+    this.menuItem.focus();
+  }
 
-  /** Emitted when the menu item becomes inactive. */
-  @Event({ eventName: 'sl-deactivate' }) slDeactivate: EventEmitter;
+  /** Removes focus from the button. */
+  @Method()
+  async removeFocus() {
+    this.menuItem.blur();
+  }
+
+  handleBlur() {
+    this.hasFocus = false;
+  }
+
+  handleFocus() {
+    this.hasFocus = true;
+  }
+
+  handleMouseOver() {
+    this.setFocus();
+  }
+
+  handleMouseOut() {
+    this.removeFocus();
+  }
 
   render() {
     return (
       <div
+        ref={el => (this.menuItem = el)}
         part="base"
         class={{
           'menu-item': true,
           'menu-item--checked': this.checked,
-          'menu-item--active': this.active,
-          'menu-item--disabled': this.disabled
+          'menu-item--disabled': this.disabled,
+          'menu-item--focused': this.hasFocus
         }}
         role="menuitem"
         aria-disabled={this.disabled}
         aria-selected={this.checked}
+        tabIndex={!this.disabled ? 0 : null}
+        onFocus={this.handleFocus}
+        onBlur={this.handleBlur}
+        onMouseOver={this.handleMouseOver}
+        onMouseOut={this.handleMouseOut}
       >
         <span part="checked-icon" class="menu-item__check">
           <sl-icon name="check2" />

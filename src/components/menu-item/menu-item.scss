@@ -21,12 +21,14 @@
   white-space: nowrap;
   cursor: pointer;
 
-  &.menu-item--active:not(.menu-item--disabled) {
+  &.menu-item--focused:not(.menu-item--disabled) {
+    outline: none;
     background-color: var(--sl-color-primary-95);
     color: var(--sl-color-primary-50);
   }
 
   &.menu-item--disabled {
+    outline: none;
     color: var(--sl-color-gray-70);
     cursor: not-allowed;
   }

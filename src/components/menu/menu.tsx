@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, Method, State, h } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, Method, State, h } from '@stencil/core';
 import { getTextContent } from '../../utilities/slot';
 
 /**
@@ -20,6 +20,8 @@ export class Menu {
   typeToSelectString = '';
   typeToSelectTimeout: any;
 
+  @Element() host: HTMLSlMenuElement;
+
   @State() hasFocus = false;
 
   /** Emitted when the menu gains focus. */
@@ -32,12 +34,8 @@ export class Menu {
   @Event({ eventName: 'sl-select' }) slSelect: EventEmitter<{ item: HTMLSlMenuItemElement }>;
 
   connectedCallback() {
-    this.handleBlur = this.handleBlur.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    this.handleFocus = this.handleFocus.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
-    this.handleMouseOver = this.handleMouseOver.bind(this);
-    this.handleMouseOut = this.handleMouseOut.bind(this);
   }
 
   /** Sets focus on the menu. */
@@ -65,13 +63,12 @@ export class Menu {
     clearTimeout(this.typeToSelectTimeout);
     this.typeToSelectTimeout = setTimeout(() => (this.typeToSelectString = ''), 750);
     this.typeToSelectString += key.toLowerCase();
-
     const items = this.getItems();
     for (const item of items) {
       const slot = item.shadowRoot.querySelector('slot:not([name])') as HTMLSlotElement;
       const label = getTextContent(slot).toLowerCase().trim();
       if (label.substring(0, this.typeToSelectString.length) === this.typeToSelectString) {
-        items.map(i => (i.active = i === item));
+        item.setFocus();
         break;
       }
     }
@@ -85,27 +82,11 @@ export class Menu {
   }
 
   getActiveItem() {
-    return this.getItems().find(i => i.active);
+    return this.getItems().find(i => i === document.activeElement);
   }
 
-  setActiveItem(item?: HTMLSlMenuItemElement) {
-    this.getItems().map(i => (i.active = i === item));
-  }
-
-  handleFocus() {
-    this.slFocus.emit();
-
-    // Activate the first item if no other item is active
-    const activeItem = this.getActiveItem();
-    if (!activeItem) {
-      const items = this.getItems();
-      this.setActiveItem(items[0]);
-    }
-  }
-
-  handleBlur() {
-    this.setActiveItem();
-    this.slBlur.emit();
+  setActiveItem(item: HTMLSlMenuItemElement) {
+    item.setFocus();
   }
 
   handleClick(event: MouseEvent) {
@@ -164,17 +145,6 @@ export class Menu {
     this.typeToSelect(event.key);
   }
 
-  handleMouseOver(event: MouseEvent) {
-    const target = event.target as HTMLElement;
-    const item = target.closest('sl-menu-item');
-
-    this.setActiveItem(item);
-  }
-
-  handleMouseOut() {
-    this.setActiveItem(null);
-  }
-
   render() {
     return (
       <div
@@ -184,14 +154,9 @@ export class Menu {
           menu: true,
           'menu--has-focus': this.hasFocus
         }}
-        tabIndex={0}
         role="menu"
         onClick={this.handleClick}
-        onFocus={this.handleFocus}
-        onBlur={this.handleBlur}
         onKeyDown={this.handleKeyDown}
-        onMouseOver={this.handleMouseOver}
-        onMouseOut={this.handleMouseOut}
       >
         <slot />
       </div>
