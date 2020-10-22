@@ -222,11 +222,19 @@ export class Dropdown {
 
     // Handle tabbing
     if (event.key === 'Tab') {
+      // Tabbing within an open menu should close the dropdown and refocus the trigger
+      if (this.open && document.activeElement?.tagName.toLowerCase() === 'sl-menu-item') {
+        event.preventDefault();
+        this.hide();
+        this.focusOnTrigger();
+        return;
+      }
+
+      // Tabbing outside of the containing element closes the panel
+      //
+      // If the dropdown is used within a shadow DOM, we need to obtain the activeElement within that shadowRoot,
+      // otherwise `document.activeElement` will only return the name of the parent shadow DOM element.
       setTimeout(() => {
-        // Tabbing outside of the containing element closes the panel
-        //
-        // If the dropdown is used within a shadow DOM, we need to obtain the activeElement within that shadowRoot,
-        // otherwise `document.activeElement` will only return the name of the parent shadow DOM element.
         const activeElement =
           this.containingElement.getRootNode() instanceof ShadowRoot
             ? document.activeElement.shadowRoot?.activeElement
@@ -270,11 +278,14 @@ export class Dropdown {
 
   handleTriggerKeyDown(event: KeyboardEvent) {
     const menu = this.getMenu();
+    const menuItems = menu ? [...menu.querySelectorAll('sl-menu-item')] : null;
+    const firstMenuItem = menuItems[0];
+    const lastMenuItem = menuItems[menuItems.length - 1];
 
     // Close when escape or tab is pressed
     if (event.key === 'Escape') {
-      this.hide();
       this.focusOnTrigger();
+      this.hide();
       return;
     }
 
@@ -297,9 +308,14 @@ export class Dropdown {
         this.show();
       }
 
-      // Focus on the menu, if one exists
-      if (menu) {
-        menu.setFocus();
+      // Focus on a menu item
+      if (event.key === 'ArrowDown' && firstMenuItem) {
+        firstMenuItem.setFocus();
+        return;
+      }
+
+      if (event.key === 'ArrowUp' && lastMenuItem) {
+        lastMenuItem.setFocus();
         return;
       }
     }
