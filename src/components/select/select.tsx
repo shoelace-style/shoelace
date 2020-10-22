@@ -203,12 +203,36 @@ export class Select {
     this.dropdown.hide();
   }
 
-  handleKeyDown() {
+  handleKeyDown(event: KeyboardEvent) {
+    const items = this.getItems();
+    const firstItem = items[0];
+    const lastItem = items[items.length - 1];
+
     // We can't make the <sl-input> readonly since that will block the browser's validation messages, so this prevents
     // key presses from modifying the input's value by briefly making it readonly. We don't use `preventDefault()` since
     // that would block tabbing, shortcuts, etc.
     const nativeInput = this.input.shadowRoot.querySelector('[part="input"]') as HTMLInputElement;
     nativeInput.readOnly = true;
+
+    if (['ArrowDown', 'ArrowUp'].includes(event.key)) {
+      event.preventDefault();
+
+      // Show the menu if it's not already open
+      if (!this.isOpen) {
+        this.dropdown.show();
+      }
+
+      // Focus on a menu item
+      if (event.key === 'ArrowDown' && firstItem) {
+        firstItem.setFocus();
+        return;
+      }
+
+      if (event.key === 'ArrowUp' && lastItem) {
+        lastItem.setFocus();
+        return;
+      }
+    }
   }
 
   handleKeyUp() {

@@ -16,6 +16,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
   - Moved `tabindex` from `sl-menu` to `sl-menu-item`
   - Removed the `active` prop from `sl-menu-item` because synthetic focus states are bad for accessibility
   - Removed the `sl-activate` and `sl-deactivate` events from `sl-menu-item` (listen for `focus` and `blur` instead)
+  - Updated `sl-select` so keyboard navigation still works
 
 ## 2.0.0-beta.21
 
