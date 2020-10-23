@@ -8,16 +8,16 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
-- Added `no-scroll-controls` prop to `sl-tab-group`
-- Fixed a bug where setting `open` initially wouldn't show `sl-dialog` or `sl-drawer`
+- Added `no-scroll-controls` prop to `sl-tab-group` [#253](https://github.com/shoelace-style/shoelace/issues/253)
+- Fixed a bug where setting `open` initially wouldn't show `sl-dialog` or `sl-drawer` [#255](https://github.com/shoelace-style/shoelace/issues/255)
 - Fixed a bug where `disabled` could be set when buttons are rendered as links
-- Fixed a bug where hoisted dropdowns would render in the wrong position when place inside an `sl-dialog`
+- Fixed a bug where hoisted dropdowns would render in the wrong position when place inside an `sl-dialog` [#252](https://github.com/shoelace-style/shoelace/issues/252)
 - Fixed a bug where boolean aria attributes didn't explicitly set `true|false` string values in the DOM
 - Fixed a bug where `aria-describedby` was never set on tooltip targets in `sl-tooltip`
-- Improved `sl-icon-button` accessibility by encouraging proper use of `label` and hiding the internal icon from screen readers
+- Improved `sl-icon-button` accessibility by encouraging proper use of `label` and hiding the internal icon from screen readers [#220](https://github.com/shoelace-style/shoelace/issues/220)
 - Improved `sl-dropdown` accessibility by attaching `aria-haspopup` and `aria-expanded` to the slotted trigger
 - Removed `console.log` from modal utility
-- 🚨 BREAKING CHANGE: Refactored `sl-menu` and `sl-menu-item` to improve accessibility by using proper focus states
+- 🚨 BREAKING CHANGE: Refactored `sl-menu` and `sl-menu-item` to improve accessibility by using proper focus states [#217](https://github.com/shoelace-style/shoelace/issues/217)
   - Moved `tabindex` from `sl-menu` to `sl-menu-item`
   - Removed the `active` prop from `sl-menu-item` because synthetic focus states are bad for accessibility
   - Removed the `sl-activate` and `sl-deactivate` events from `sl-menu-item` (listen for `focus` and `blur` instead)
