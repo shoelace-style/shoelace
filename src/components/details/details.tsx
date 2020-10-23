@@ -181,9 +181,9 @@ export class Details {
           id={`${this.componentId}-header`}
           class="details__header"
           role="button"
-          aria-expanded={this.open}
+          aria-expanded={this.open ? 'true' : 'false'}
           aria-controls={`${this.componentId}-content`}
-          aria-disabled={this.disabled}
+          aria-disabled={this.disabled ? 'true' : 'false'}
           tabIndex={this.disabled ? -1 : 0}
           onClick={this.handleSummaryClick}
           onKeyDown={this.handleSummaryKeyDown}

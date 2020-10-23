@@ -181,7 +181,7 @@ export class Radio {
             checked={this.checked}
             disabled={this.disabled}
             role="radio"
-            aria-checked={this.checked}
+            aria-checked={this.checked ? 'true' : 'false'}
             aria-labelledby={this.labelId}
             onClick={this.handleClick}
             onBlur={this.handleBlur}

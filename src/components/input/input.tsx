@@ -335,7 +335,7 @@ export class Input {
             inputMode={this.inputmode}
             aria-labelledby={this.labelId}
             aria-describedby={this.helpTextId}
-            aria-invalid={this.invalid}
+            aria-invalid={this.invalid ? 'true' : 'false'}
             onChange={this.handleChange}
             onInput={this.handleInput}
             onInvalid={this.handleInvalid}

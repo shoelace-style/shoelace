@@ -623,7 +623,7 @@ export class ColorPicker {
             'color-picker--inline': this.inline,
             'color-picker--disabled': this.disabled
           }}
-          aria-disabled={this.disabled}
+          aria-disabled={this.disabled ? 'true' : 'false'}
         >
           <div
             part="grid"
@@ -782,7 +782,7 @@ export class ColorPicker {
       <sl-dropdown
         ref={el => (this.dropdown = el)}
         class="color-dropdown"
-        aria-disabled={this.disabled}
+        aria-disabled={this.disabled ? 'true' : 'false'}
         containingElement={this.host}
         hoist={this.hoist}
         onSl-show={this.handleDropdownShow}

@@ -213,7 +213,7 @@ export class Drawer {
           class="drawer__panel"
           role="dialog"
           aria-modal="true"
-          aria-hidden={!this.open}
+          aria-hidden={this.open ? 'false' : 'true'}
           aria-label={this.noHeader ? this.label : null}
           aria-labelledby={!this.noHeader ? `${this.componentId}-title` : null}
           tabIndex={0}

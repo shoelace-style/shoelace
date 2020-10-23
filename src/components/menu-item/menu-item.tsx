@@ -81,8 +81,8 @@ export class MenuItem {
           'menu-item--focused': this.hasFocus
         }}
         role="menuitem"
-        aria-disabled={this.disabled}
-        aria-selected={this.checked}
+        aria-disabled={this.disabled ? 'true' : 'false'}
+        aria-checked={this.checked ? 'true' : 'false'}
         tabIndex={!this.disabled ? 0 : null}
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}

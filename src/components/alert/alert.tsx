@@ -193,7 +193,7 @@ export class Alert {
         role="alert"
         aria-live="assertive"
         aria-atomic="true"
-        aria-hidden={!this.open}
+        aria-hidden={this.open ? 'false' : 'true'}
         onMouseMove={this.handleMouseMove}
         onTransitionEnd={this.handleTransitionEnd}
       >

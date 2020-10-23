@@ -12,6 +12,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug where setting `open` initially wouldn't show `sl-dialog` or `sl-drawer`
 - Fixed a bug where `disabled` could be set when buttons are rendered as links
 - Fixed a bug where hoisted dropdowns would render in the wrong position when place inside an `sl-dialog`
+- Fixed a bug where boolean aria attributes didn't explicitly set `true|false` string values in the DOM
 - Improved `sl-dropdown` accessibility by attaching `aria-haspopup` and `aria-expanded` to the slotted trigger
 - Removed `console.log` from modal utility
 - 🚨 BREAKING CHANGE: Refactored `sl-menu` and `sl-menu-item` to improve accessibility by using proper focus states

@@ -240,7 +240,7 @@ export class Tooltip {
                 'tooltip--open': this.open
               }}
               role="tooltip"
-              aria-hidden={!this.open}
+              aria-hidden={this.open ? 'false' : 'true'}
             >
               {this.content}
             </div>

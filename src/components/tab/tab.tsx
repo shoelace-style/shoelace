@@ -58,8 +58,8 @@ export class Tab {
             'tab--disabled': this.disabled
           }}
           role="tab"
-          aria-disabled={this.disabled}
-          aria-selected={this.active}
+          aria-disabled={this.disabled ? 'true' : 'false'}
+          aria-selected={this.active ? 'true' : 'false'}
           tabindex={this.disabled || !this.active ? '-1' : '0'}
         >
           <slot />

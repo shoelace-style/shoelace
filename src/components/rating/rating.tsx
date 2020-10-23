@@ -163,8 +163,8 @@ export class Rating {
           'rating--readonly': this.readonly,
           'rating--disabled': this.disabled
         }}
-        aria-disabled={this.disabled}
-        aria-readonly={this.readonly}
+        aria-disabled={this.disabled ? 'true' : 'false'}
+        aria-readonly={this.readonly ? 'true' : 'false'}
         aria-value={this.value}
         aria-valuemin={0}
         aria-valuemax={this.max}

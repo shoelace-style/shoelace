@@ -31,7 +31,13 @@ export class TabPanel {
     return (
       // If the user didn't provide an ID, we'll set one so we can link tabs and tab panels with aria labels
       <Host id={this.host.id || this.componentId} style={{ display: this.active ? 'block' : 'none' }}>
-        <div part="base" class="tab-panel" role="tabpanel" aria-selected={this.active} aria-hidden={!this.active}>
+        <div
+          part="base"
+          class="tab-panel"
+          role="tabpanel"
+          aria-selected={this.active ? 'true' : 'false'}
+          aria-hidden={this.active ? 'false' : 'true'}
+        >
           <slot />
         </div>
       </Host>

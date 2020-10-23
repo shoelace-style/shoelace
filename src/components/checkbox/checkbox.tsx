@@ -176,7 +176,7 @@ export class Checkbox {
             disabled={this.disabled}
             required={this.required}
             role="checkbox"
-            aria-checked={this.checked}
+            aria-checked={this.checked ? 'true' : 'false'}
             aria-labelledby={this.labelId}
             onClick={this.handleClick}
             onBlur={this.handleBlur}
