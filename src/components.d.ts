@@ -493,7 +493,7 @@ export namespace Components {
          */
         "disabled": boolean;
         /**
-          * A description that gets read by screen readers and other assistive devices. For optimal acessibility, you should always include a label that describes what the icon button does.
+          * A description that gets read by screen readers and other assistive devices. For optimal accessibility, you should always include a label that describes what the icon button does.
          */
         "label": string;
         /**
@@ -2006,7 +2006,7 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
-          * A description that gets read by screen readers and other assistive devices. For optimal acessibility, you should always include a label that describes what the icon button does.
+          * A description that gets read by screen readers and other assistive devices. For optimal accessibility, you should always include a label that describes what the icon button does.
          */
         "label"?: string;
         /**

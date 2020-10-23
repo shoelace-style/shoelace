@@ -26,7 +26,7 @@ export class IconButton {
   @Prop({ reflect: true }) src: string;
 
   /**
-   * A description that gets read by screen readers and other assistive devices. For optimal acessibility, you should
+   * A description that gets read by screen readers and other assistive devices. For optimal accessibility, you should
    * always include a label that describes what the icon button does.
    */
   @Prop({ reflect: true }) label: string;
