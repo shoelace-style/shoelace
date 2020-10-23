@@ -202,8 +202,10 @@ export class Tooltip {
     const oldTarget = this.target;
     const newTarget = this.getTarget();
 
-    if (oldTarget && newTarget !== oldTarget) {
-      oldTarget.removeAttribute('aria-describedby');
+    if (newTarget !== oldTarget) {
+      if (oldTarget) {
+        oldTarget.removeAttribute('aria-describedby');
+      }
       newTarget.setAttribute('aria-describedby', this.componentId);
     }
   }
@@ -227,7 +229,7 @@ export class Tooltip {
   render() {
     return (
       <Host onMouseOver={this.handleMouseOver} onMouseOut={this.handleMouseOut}>
-        <slot aria-describedby={this.componentId} onSlotchange={this.handleSlotChange} />
+        <slot onSlotchange={this.handleSlotChange} />
 
         {!this.disabled && (
           <div ref={el => (this.tooltipPositioner = el)} class="tooltip-positioner">
