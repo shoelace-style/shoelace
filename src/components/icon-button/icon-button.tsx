@@ -25,7 +25,10 @@ export class IconButton {
   /** An external URL of an SVG file. */
   @Prop({ reflect: true }) src: string;
 
-  /** An alternative description to use for accessibility. If omitted, the name or src will be used to generate it. */
+  /**
+   * A description that gets read by screen readers and other assistive devices. For optimal acessibility, you should
+   * always include a label that describes what the icon button does.
+   */
   @Prop({ reflect: true }) label: string;
 
   /** Set to true to disable the button. */
@@ -49,8 +52,9 @@ export class IconButton {
           'icon-button--disabled': this.disabled
         }}
         type="button"
+        aria-label={this.label}
       >
-        <sl-icon library={this.library} name={this.name} src={this.src} label={this.label} />
+        <sl-icon library={this.library} name={this.name} src={this.src} aria-hidden="true" />
       </button>
     );
   }

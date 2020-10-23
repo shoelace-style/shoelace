@@ -7,9 +7,9 @@ Icons buttons are simple, icon-only buttons that can be used for actions and in 
 For a full list of icons that come bundled with Shoelace, refer to the [icon component](/components/icon).
 
 ```html preview
-<sl-icon-button name="gear"></sl-icon-button>
-<sl-icon-button name="sliders"></sl-icon-button>
-<sl-icon-button name="x"></sl-icon-button>
+<sl-icon-button name="gear" label="Settings"></sl-icon-button>
+<sl-icon-button name="sliders" label="Options"></sl-icon-button>
+<sl-icon-button name="x" label="Close"></sl-icon-button>
 ```
 
 ## Examples
@@ -19,9 +19,9 @@ For a full list of icons that come bundled with Shoelace, refer to the [icon com
 Icon buttons inherit their parent element's `font-size`.
 
 ```html preview
-<sl-icon-button name="pencil" style="font-size: 1.5rem;"></sl-icon-button>
-<sl-icon-button name="pencil" style="font-size: 2rem;"></sl-icon-button>
-<sl-icon-button name="pencil" style="font-size: 2.5rem;"></sl-icon-button>
+<sl-icon-button name="pencil" label="Edit" style="font-size: 1.5rem;"></sl-icon-button>
+<sl-icon-button name="pencil" label="Edit" style="font-size: 2rem;"></sl-icon-button>
+<sl-icon-button name="pencil" label="Edit" style="font-size: 2.5rem;"></sl-icon-button>
 ```
 
 ### Colors
@@ -30,9 +30,9 @@ Icon buttons are designed to have a uniform appearance, so their color is not in
 
 ```html preview
 <div class="icon-button-color">
-  <sl-icon-button name="type-bold"></sl-icon-button>
-  <sl-icon-button name="type-italic"></sl-icon-button>
-  <sl-icon-button name="type-underline"></sl-icon-button>
+  <sl-icon-button name="type-bold" label="Bold"></sl-icon-button>
+  <sl-icon-button name="type-italic" label="Italic"></sl-icon-button>
+  <sl-icon-button name="type-underline" label="Underline"></sl-icon-button>
 </div>
 
 <style>
@@ -57,13 +57,13 @@ Wrap a tooltip around an icon button to provide contextual information to the us
 
 ```html preview
 <sl-tooltip content="Settings">
-  <sl-icon-button name="gear"></sl-icon-button>
+  <sl-icon-button name="gear" label="Settings"></sl-icon-button>
 </sl-tooltip>
 ```
 
 ### Disabled
 ```html preview
-<sl-icon-button name="gear" disabled></sl-icon-button>
+<sl-icon-button name="gear" label="Settings" disabled></sl-icon-button>
 ```
 
 [component-metadata:sl-icon-button]
