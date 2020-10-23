@@ -71,7 +71,7 @@ export class Alert {
     this.handleTransitionEnd = this.handleTransitionEnd.bind(this);
   }
 
-  componentDidLoad() {
+  componentWillLoad() {
     // Show on init if open
     if (this.open) {
       this.show();
