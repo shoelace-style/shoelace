@@ -86,7 +86,7 @@ export class Dialog {
     });
   }
 
-  componentDidLoad() {
+  componentWillLoad() {
     // Show on init if open
     if (this.open) {
       this.show();
@@ -101,7 +101,7 @@ export class Dialog {
   @Method()
   async show() {
     // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
-    if (this.open) {
+    if (this.isVisible) {
       return;
     }
 
@@ -122,7 +122,7 @@ export class Dialog {
   @Method()
   async hide() {
     // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
-    if (!this.open) {
+    if (!this.isVisible) {
       return;
     }
 
