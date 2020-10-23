@@ -11,7 +11,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Added `no-scroll-controls` prop to `sl-tab-group` [#253](https://github.com/shoelace-style/shoelace/issues/253)
 - Fixed a bug where setting `open` initially wouldn't show `sl-dialog` or `sl-drawer` [#255](https://github.com/shoelace-style/shoelace/issues/255)
 - Fixed a bug where `disabled` could be set when buttons are rendered as links
-- Fixed a bug where hoisted dropdowns would render in the wrong position when place inside an `sl-dialog` [#252](https://github.com/shoelace-style/shoelace/issues/252)
+- Fixed a bug where hoisted dropdowns would render in the wrong position when placed inside `sl-dialog` [#252](https://github.com/shoelace-style/shoelace/issues/252)
 - Fixed a bug where boolean aria attributes didn't explicitly set `true|false` string values in the DOM
 - Fixed a bug where `aria-describedby` was never set on tooltip targets in `sl-tooltip`
 - Improved `sl-icon-button` accessibility by encouraging proper use of `label` and hiding the internal icon from screen readers [#220](https://github.com/shoelace-style/shoelace/issues/220)
