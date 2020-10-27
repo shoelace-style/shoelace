@@ -90,7 +90,7 @@ export class MenuItem {
         onMouseOut={this.handleMouseOut}
       >
         <span part="checked-icon" class="menu-item__check">
-          <sl-icon name="check2" />
+          <sl-icon name="check2" aria-hidden="true" />
         </span>
 
         <span part="prefix" class="menu-item__prefix">

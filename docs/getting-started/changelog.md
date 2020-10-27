@@ -15,6 +15,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug where boolean aria attributes didn't explicitly set `true|false` string values in the DOM
 - Fixed a bug where `aria-describedby` was never set on tooltip targets in `sl-tooltip`
 - Fixed a bug where setting `position` on `sl-image-comparer` wouldn't update the divider's position
+- Fixed a bug where the check icon was announced to screen readers in `sl-menu-item`
 - Improved `sl-icon-button` accessibility by encouraging proper use of `label` and hiding the internal icon from screen readers [#220](https://github.com/shoelace-style/shoelace/issues/220)
 - Improved `sl-dropdown` accessibility by attaching `aria-haspopup` and `aria-expanded` to the slotted trigger
 - Refactored position logic to remove an unnecessary state variable in `sl-image-comparer`
