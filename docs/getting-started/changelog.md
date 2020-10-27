@@ -24,6 +24,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Improved `sl-icon-button` accessibility by encouraging proper use of `label` and hiding the internal icon from screen readers [#220](https://github.com/shoelace-style/shoelace/issues/220)
 - Improved `sl-dropdown` accessibility by attaching `aria-haspopup` and `aria-expanded` to the slotted trigger
 - Refactored position logic to remove an unnecessary state variable in `sl-image-comparer`
+- Refactored design tokens to use `rem` instead of `px` for input height and spacing [#221](https://github.com/shoelace-style/shoelace/issues/221)
 - Removed `console.log` from modal utility
 - Updated to Stencil 2.1.2
 

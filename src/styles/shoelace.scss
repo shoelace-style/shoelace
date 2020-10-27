@@ -155,9 +155,9 @@
   --sl-button-font-size-large: var(--sl-font-size-medium);
 
   // Inputs
-  --sl-input-height-small: 30px;
-  --sl-input-height-medium: 40px;
-  --sl-input-height-large: 50px;
+  --sl-input-height-small: 1.875rem; // 30px
+  --sl-input-height-medium: 2.5rem; // 40px
+  --sl-input-height-large: 3.125rem; // 50px
 
   --sl-input-background-color: var(--sl-color-white);
   --sl-input-background-color-hover: var(--sl-color-white);
@@ -193,9 +193,9 @@
   --sl-input-placeholder-color: var(--sl-color-gray-60);
   --sl-input-placeholder-color-disabled: var(--sl-color-gray-40);
 
-  --sl-input-spacing-small: 10px;
-  --sl-input-spacing-medium: 12px;
-  --sl-input-spacing-large: 14px;
+  --sl-input-spacing-small: 0.625rem; // 10px
+  --sl-input-spacing-medium: 0.75rem; // 12px
+  --sl-input-spacing-large: 0.875rem; // 14px
 
   // Labels
   --sl-input-label-font-size-small: var(--sl-font-size-small);
@@ -212,7 +212,7 @@
   --sl-input-help-text-color: var(--sl-color-gray-60);
 
   // Toggles (checkboxes, radios, switches)
-  --sl-toggle-size: 16px;
+  --sl-toggle-size: 1rem;
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // Overlay tokens
