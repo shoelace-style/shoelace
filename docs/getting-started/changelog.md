@@ -14,8 +14,10 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug where hoisted dropdowns would render in the wrong position when placed inside `sl-dialog` [#252](https://github.com/shoelace-style/shoelace/issues/252)
 - Fixed a bug where boolean aria attributes didn't explicitly set `true|false` string values in the DOM
 - Fixed a bug where `aria-describedby` was never set on tooltip targets in `sl-tooltip`
+- Fixed a bug where setting `position` on `sl-image-comparer` wouldn't update the divider's position
 - Improved `sl-icon-button` accessibility by encouraging proper use of `label` and hiding the internal icon from screen readers [#220](https://github.com/shoelace-style/shoelace/issues/220)
 - Improved `sl-dropdown` accessibility by attaching `aria-haspopup` and `aria-expanded` to the slotted trigger
+- Refactored position logic to remove an unnecessary state variable in `sl-image-comparer`
 - Removed `console.log` from modal utility
 - 🚨 BREAKING CHANGE: Refactored `sl-menu` and `sl-menu-item` to improve accessibility by using proper focus states [#217](https://github.com/shoelace-style/shoelace/issues/217)
   - Moved `tabindex` from `sl-menu` to `sl-menu-item`

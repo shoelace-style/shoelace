@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, Prop, State, Watch, h } from '@stencil/core';
+import { Component, Event, EventEmitter, Prop, Watch, h } from '@stencil/core';
 import { clamp } from '../../utilities/math';
 
 /**
@@ -25,8 +25,6 @@ export class ImageComparer {
   divider: HTMLElement;
   handle: HTMLElement;
 
-  @State() dividerPosition: number;
-
   /** The position of the divider as a percentage. */
   @Prop({ mutable: true }) position = 50;
 
@@ -39,8 +37,6 @@ export class ImageComparer {
   @Event({ eventName: 'sl-change' }) slChange: EventEmitter;
 
   connectedCallback() {
-    this.dividerPosition = this.position;
-
     this.handleDrag = this.handleDrag.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
   }
@@ -80,7 +76,6 @@ export class ImageComparer {
 
     drag(event, this.base, x => {
       this.position = clamp((x / width) * 100, 0, 100);
-      this.dividerPosition = this.position;
     });
   }
 
@@ -98,7 +93,6 @@ export class ImageComparer {
       newPosition = clamp(newPosition, 0, 100);
 
       this.position = newPosition;
-      this.dividerPosition = newPosition;
     }
   }
 
@@ -114,7 +108,7 @@ export class ImageComparer {
             part="after"
             class="image-comparer__after"
             style={{
-              clipPath: `inset(0 ${100 - this.dividerPosition}% 0 0)`
+              clipPath: `inset(0 ${100 - this.position}% 0 0)`
             }}
           >
             <slot name="after" />
@@ -126,7 +120,7 @@ export class ImageComparer {
           part="divider"
           class="image-comparer__divider"
           style={{
-            left: `${this.dividerPosition}%`
+            left: `${this.position}%`
           }}
           onMouseDown={this.handleDrag}
           onTouchStart={this.handleDrag}
@@ -136,7 +130,7 @@ export class ImageComparer {
             part="handle"
             class="image-comparer__handle"
             role="scrollbar"
-            aria-valuenow={this.dividerPosition}
+            aria-valuenow={this.position}
             aria-valuemin="0"
             aria-valuemax="100"
             tabIndex={0}
