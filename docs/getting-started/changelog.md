@@ -8,6 +8,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
+- Added `sl-theme` utility and updated theming documentation
 - Fixed a bug where `sl-menu-item` wouldn't render properly in the dark theme
 - Improved placeholder contrast in dark theme
 

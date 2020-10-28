@@ -35,6 +35,7 @@
   - [Radio](/components/radio.md)
   - [Range](/components/range.md)
   - [Rating](/components/rating.md)
+  - [Responsive Embed](/components/responsive-embed.md)
   - [Select](/components/select.md)
   - [Skeleton](/components/skeleton.md)
   - [Spinner](/components/spinner.md)
@@ -50,7 +51,7 @@
   - [Animation](/components/animation.md)
   - [Format Bytes](/components/format-bytes.md)
   - [Include](/components/include.md)
-  - [Responsive Embed](/components/responsive-embed.md)
+  - [Theme](/components/theme.md)
 
 - Design Tokens
   - [Typography](/tokens/typography.md)

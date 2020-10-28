@@ -1139,6 +1139,12 @@ export namespace Components {
          */
         "value": string;
     }
+    interface SlTheme {
+        /**
+          * The name of the theme to use. The user is responsible for including the associated stylesheet(s). Supportive themes must adhere to theme guidelines by exposing a class that follows the `sl-theme-{name}` convention.
+         */
+        "name": string;
+    }
     interface SlTooltip {
         /**
           * The tooltip's content.
@@ -1430,6 +1436,12 @@ declare global {
         prototype: HTMLSlTextareaElement;
         new (): HTMLSlTextareaElement;
     };
+    interface HTMLSlThemeElement extends Components.SlTheme, HTMLStencilElement {
+    }
+    var HTMLSlThemeElement: {
+        prototype: HTMLSlThemeElement;
+        new (): HTMLSlThemeElement;
+    };
     interface HTMLSlTooltipElement extends Components.SlTooltip, HTMLStencilElement {
     }
     var HTMLSlTooltipElement: {
@@ -1477,6 +1489,7 @@ declare global {
         "sl-tab-panel": HTMLSlTabPanelElement;
         "sl-tag": HTMLSlTagElement;
         "sl-textarea": HTMLSlTextareaElement;
+        "sl-theme": HTMLSlThemeElement;
         "sl-tooltip": HTMLSlTooltipElement;
     }
 }
@@ -2628,6 +2641,12 @@ declare namespace LocalJSX {
          */
         "value"?: string;
     }
+    interface SlTheme {
+        /**
+          * The name of the theme to use. The user is responsible for including the associated stylesheet(s). Supportive themes must adhere to theme guidelines by exposing a class that follows the `sl-theme-{name}` convention.
+         */
+        "name"?: string;
+    }
     interface SlTooltip {
         /**
           * The tooltip's content.
@@ -2726,6 +2745,7 @@ declare namespace LocalJSX {
         "sl-tab-panel": SlTabPanel;
         "sl-tag": SlTag;
         "sl-textarea": SlTextarea;
+        "sl-theme": SlTheme;
         "sl-tooltip": SlTooltip;
     }
 }
@@ -2773,6 +2793,7 @@ declare module "@stencil/core" {
             "sl-tab-panel": LocalJSX.SlTabPanel & JSXBase.HTMLAttributes<HTMLSlTabPanelElement>;
             "sl-tag": LocalJSX.SlTag & JSXBase.HTMLAttributes<HTMLSlTagElement>;
             "sl-textarea": LocalJSX.SlTextarea & JSXBase.HTMLAttributes<HTMLSlTextareaElement>;
+            "sl-theme": LocalJSX.SlTheme & JSXBase.HTMLAttributes<HTMLSlThemeElement>;
             "sl-tooltip": LocalJSX.SlTooltip & JSXBase.HTMLAttributes<HTMLSlTooltipElement>;
         }
     }
