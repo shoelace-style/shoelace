@@ -9,6 +9,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 ## Next
 
 - Fixed a bug where `sl-menu-item` wouldn't render properly in the dark theme
+- Improved placeholder contrast in dark theme
 
 ## 2.0.0-beta.22
 

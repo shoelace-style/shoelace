@@ -162,8 +162,8 @@
   --sl-input-icon-color: var(--sl-color-gray-40);
   --sl-input-icon-color-hover: var(--sl-color-gray-60);
   --sl-input-icon-color-focus: var(--sl-color-gray-60);
-  --sl-input-placeholder-color: var(--sl-color-gray-30);
-  --sl-input-placeholder-color-disabled: var(--sl-color-gray-40);
+  --sl-input-placeholder-color: var(--sl-color-gray-40);
+  --sl-input-placeholder-color-disabled: var(--sl-color-gray-50);
 
   /* Overlays */
   --sl-overlay-background-color: hsla(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 80%, 0.1);
