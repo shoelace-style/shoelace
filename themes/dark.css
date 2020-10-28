@@ -322,7 +322,7 @@
 }
 
 /* Menu item */
-.sl-theme-dark sl-menu-item[active]::part(base) {
+.sl-theme-dark sl-menu-item::part(base):focus {
   background-color: var(--sl-color-primary-15);
   color: var(--sl-color-primary-50);
 }
