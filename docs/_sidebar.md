@@ -51,6 +51,7 @@
   - [Animation](/components/animation.md)
   - [Format Bytes](/components/format-bytes.md)
   - [Include](/components/include.md)
+  - [Resize Observer](/components/resize-observer.md)
   - [Theme](/components/theme.md)
 
 - Design Tokens
