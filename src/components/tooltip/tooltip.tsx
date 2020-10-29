@@ -114,7 +114,9 @@ export class Tooltip {
   }
 
   disconnectedCallback() {
-    this.popover.destroy();
+    if (this.popper) {
+      this.popover.destroy();
+    }
 
     this.host.removeEventListener('blur', this.handleBlur, true);
     this.host.removeEventListener('click', this.handleClick, true);
