@@ -11,6 +11,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Added `sl-theme` utility and updated theming documentation
 - Fixed a bug where `sl-menu-item` wouldn't render properly in the dark theme
 - Improved placeholder contrast in dark theme
+- Updated Boostrap Icons to 1.1.0
 
 ## 2.0.0-beta.22
 
@@ -111,7 +112,7 @@ The following pages demonstrate why this change was necessary.
 - Fixed a bug where dynamically adding/removing a slot wouldn't work as expected in `sl-card`, `sl-dialog`, and `sl-drawer`
 - Fixed a bug where the value wasn't updated and events weren't emitted when using `setRangeText` in `sl-input` and `sl-textarea`
 - Optimized `hasSlot` utility by using a simpler selector
-- Updated `bootstrap-icons` to 1.0.0 with many icons redrawn and improved
+- Updated Bootstrap Icons to 1.0.0 with many icons redrawn and improved
 - Updated contribution guidelines
 
 **Form validation has been reworked and is much more powerful now!**
