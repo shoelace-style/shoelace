@@ -10,7 +10,7 @@ The resize observer will report changes to the dimensions of the elements it wra
 <div class="resize-observer-overview">
   <sl-resize-observer>
     <div>
-      Resize me and watch the console
+      Resize this box and watch the console 👉
     </div>
   </sl-resize-observer>
 </div>
@@ -27,18 +27,11 @@ The resize observer will report changes to the dimensions of the elements it wra
 <style>
   .resize-observer-overview div {
     display: flex; 
-    width: 12rem;
-    min-height: 12rem;
-    min-width: 12rem;
-    max-width: 100%; 
-    max-height: 50vh;
     border: solid 2px var(--sl-input-border-color); 
-    resize: both; 
-    overflow: auto; 
     align-items: center; 
     justify-content: center;
     text-align: center;
-    padding: 1rem;
+    padding: 4rem 2rem;
   }
 </style>
 ```
