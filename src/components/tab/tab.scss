@@ -17,7 +17,7 @@
   font-weight: var(--sl-font-weight-semibold);
   border-radius: 4px;
   color: var(--sl-color-gray-40);
-  padding: 16px 20px;
+  padding: var(--sl-spacing-medium) var(--sl-spacing-large);
   white-space: nowrap;
   user-select: none;
   cursor: pointer;
@@ -40,6 +40,10 @@
     color: var(--sl-color-primary-50);
   }
 
+  &.tab--closable {
+    padding-right: var(--sl-spacing-small);
+  }
+
   &.tab--disabled {
     opacity: 0.5;
     cursor: not-allowed;
@@ -49,7 +53,6 @@
 .tab__close-button {
   font-size: var(--sl-font-size-large);
   margin-left: var(--sl-spacing-xx-small);
-  margin-right: calc(-1 * var(--sl-spacing-xx-small));
 
   &::part(base) {
     padding: var(--sl-spacing-xxx-small);
