@@ -1,4 +1,4 @@
-import { Component, Element, Host, Method, Prop, h } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, Host, Method, Prop, h } from '@stencil/core';
 
 let id = 0;
 
@@ -28,8 +28,18 @@ export class Tab {
   /** Set to true to draw the tab in an active state. */
   @Prop({ reflect: true }) active = false;
 
+  /** When true, the tab will be rendered with a close icon. */
+  @Prop() closable = false;
+
   /** Set to true to draw the tab in a disabled state. */
   @Prop({ reflect: true }) disabled = false;
+
+  /** Emitted when the tab is closable and the close button is activated. */
+  @Event({ eventName: 'sl-close' }) slClose: EventEmitter;
+
+  connectedCallback() {
+    this.handleCloseClick = this.handleCloseClick.bind(this);
+  }
 
   /** Sets focus to the tab. */
   @Method()
@@ -41,6 +51,10 @@ export class Tab {
   @Method()
   async removeFocus() {
     this.tab.blur();
+  }
+
+  handleCloseClick() {
+    this.slClose.emit();
   }
 
   render() {
@@ -55,6 +69,7 @@ export class Tab {
 
             // States
             'tab--active': this.active,
+            'tab--closable': this.closable,
             'tab--disabled': this.disabled
           }}
           role="tab"
@@ -63,6 +78,15 @@ export class Tab {
           tabindex={this.disabled || !this.active ? '-1' : '0'}
         >
           <slot />
+          {this.closable && (
+            <sl-icon-button
+              name="x"
+              class="tab__close-button"
+              onClick={this.handleCloseClick}
+              tabIndex={-1}
+              aria-hidden="true"
+            />
+          )}
         </div>
       </Host>
     );

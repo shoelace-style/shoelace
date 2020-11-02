@@ -10,6 +10,8 @@
 }
 
 .tab {
+  display: inline-flex;
+  align-items: center;
   font-family: var(--sl-font-sans);
   font-size: var(--sl-font-size-small);
   font-weight: var(--sl-font-weight-semibold);
@@ -41,5 +43,15 @@
   &.tab--disabled {
     opacity: 0.5;
     cursor: not-allowed;
+  }
+}
+
+.tab__close-button {
+  font-size: var(--sl-font-size-large);
+  margin-left: var(--sl-spacing-xx-small);
+  margin-right: calc(-1 * var(--sl-spacing-xx-small));
+
+  &::part(base) {
+    padding: var(--sl-spacing-xxx-small);
   }
 }
