@@ -114,7 +114,7 @@ export class Tooltip {
   }
 
   disconnectedCallback() {
-    if (this.popper) {
+    if (this.popover) {
       this.popover.destroy();
     }
 

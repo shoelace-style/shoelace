@@ -143,7 +143,7 @@ export class Dropdown {
   disconnectedCallback() {
     this.hide();
     
-    if (this.popper) {
+    if (this.popover) {
       this.popover.destroy();
     }
   }
