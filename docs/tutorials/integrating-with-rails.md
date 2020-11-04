@@ -69,6 +69,8 @@ environment.plugins.append(
     ]
   })
 )
+
+module.exports = environment
 ```
 
 ### Adding Pack Tags
