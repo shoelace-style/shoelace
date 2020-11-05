@@ -454,6 +454,9 @@ export class Select {
             invalid={this.invalid}
             clearable={this.clearable}
             required={this.required}
+            autocapitalize="off"
+            autocomplete="off"
+            autocorrect="off"
             aria-labelledby={this.labelId}
             aria-describedby={this.helpTextId}
             onSl-focus={this.handleFocus}

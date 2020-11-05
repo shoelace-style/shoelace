@@ -12,6 +12,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Added experimental `sl-theme` utility and updated theming documentation
 - Added `closable` prop to `sl-tab`
 - Fixed a bug where `sl-menu-item` wouldn't render properly in the dark theme
+- Fixed a bug where `sl-select` would show an autocomplete menu
 - Improved placeholder contrast in dark theme
 - Updated Boostrap Icons to 1.1.0
 
