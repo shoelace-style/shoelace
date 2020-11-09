@@ -50,6 +50,7 @@
 - Utility Components
   - [Animation](/components/animation.md)
   - [Format Bytes](/components/format-bytes.md)
+  - [Format Number](/components/format-number.md)
   - [Include](/components/include.md)
   - [Resize Observer](/components/resize-observer.md)
   - [Theme](/components/theme.md)

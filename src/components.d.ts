@@ -468,6 +468,52 @@ export namespace Components {
          */
         "value": number;
     }
+    interface SlFormatNumber {
+        /**
+          * The currency to use when formatting. Must be an ISO 4217 currency code such as `USD` or `EUR`.
+         */
+        "currency": string;
+        /**
+          * How to display the currency.
+         */
+        "currencyDisplay": 'symbol' | 'narrowSymbol' | 'code' | 'name';
+        /**
+          * The locale to use when formatting the number.
+         */
+        "locale": string;
+        /**
+          * The maximum number of fraction digits to use. Possible values are 0 - 20.
+         */
+        "maximumFractionDigits": number;
+        /**
+          * The maximum number of significant digits to use,. Possible values are 1 - 21.
+         */
+        "maximumSignificantDigits": number;
+        /**
+          * The minimum number of fraction digits to use. Possible values are 0 - 20.
+         */
+        "minimumFractionDigits": number;
+        /**
+          * The minimum number of integer digits to use. Possible values are 1 - 21.
+         */
+        "minimumIntegerDigits": number;
+        /**
+          * The minimum number of significant digits to use. Possible values are 1 - 21.
+         */
+        "minimumSignificantDigits": number;
+        /**
+          * Turns off grouping separators.
+         */
+        "noGrouping": boolean;
+        /**
+          * The formatting style to use.
+         */
+        "type": 'currency' | 'decimal' | 'percent';
+        /**
+          * The number to format in bytes.
+         */
+        "value": number;
+    }
     interface SlIcon {
         /**
           * An alternative description to use for accessibility. If omitted, the name or src will be used to generate it.
@@ -1292,6 +1338,12 @@ declare global {
         prototype: HTMLSlFormatBytesElement;
         new (): HTMLSlFormatBytesElement;
     };
+    interface HTMLSlFormatNumberElement extends Components.SlFormatNumber, HTMLStencilElement {
+    }
+    var HTMLSlFormatNumberElement: {
+        prototype: HTMLSlFormatNumberElement;
+        new (): HTMLSlFormatNumberElement;
+    };
     interface HTMLSlIconElement extends Components.SlIcon, HTMLStencilElement {
     }
     var HTMLSlIconElement: {
@@ -1476,6 +1528,7 @@ declare global {
         "sl-dropdown": HTMLSlDropdownElement;
         "sl-form": HTMLSlFormElement;
         "sl-format-bytes": HTMLSlFormatBytesElement;
+        "sl-format-number": HTMLSlFormatNumberElement;
         "sl-icon": HTMLSlIconElement;
         "sl-icon-button": HTMLSlIconButtonElement;
         "sl-icon-library": HTMLSlIconLibraryElement;
@@ -1995,6 +2048,52 @@ declare namespace LocalJSX {
           * The unit to display.
          */
         "unit"?: 'bytes' | 'bits';
+        /**
+          * The number to format in bytes.
+         */
+        "value"?: number;
+    }
+    interface SlFormatNumber {
+        /**
+          * The currency to use when formatting. Must be an ISO 4217 currency code such as `USD` or `EUR`.
+         */
+        "currency"?: string;
+        /**
+          * How to display the currency.
+         */
+        "currencyDisplay"?: 'symbol' | 'narrowSymbol' | 'code' | 'name';
+        /**
+          * The locale to use when formatting the number.
+         */
+        "locale"?: string;
+        /**
+          * The maximum number of fraction digits to use. Possible values are 0 - 20.
+         */
+        "maximumFractionDigits"?: number;
+        /**
+          * The maximum number of significant digits to use,. Possible values are 1 - 21.
+         */
+        "maximumSignificantDigits"?: number;
+        /**
+          * The minimum number of fraction digits to use. Possible values are 0 - 20.
+         */
+        "minimumFractionDigits"?: number;
+        /**
+          * The minimum number of integer digits to use. Possible values are 1 - 21.
+         */
+        "minimumIntegerDigits"?: number;
+        /**
+          * The minimum number of significant digits to use. Possible values are 1 - 21.
+         */
+        "minimumSignificantDigits"?: number;
+        /**
+          * Turns off grouping separators.
+         */
+        "noGrouping"?: boolean;
+        /**
+          * The formatting style to use.
+         */
+        "type"?: 'currency' | 'decimal' | 'percent';
         /**
           * The number to format in bytes.
          */
@@ -2747,6 +2846,7 @@ declare namespace LocalJSX {
         "sl-dropdown": SlDropdown;
         "sl-form": SlForm;
         "sl-format-bytes": SlFormatBytes;
+        "sl-format-number": SlFormatNumber;
         "sl-icon": SlIcon;
         "sl-icon-button": SlIconButton;
         "sl-icon-library": SlIconLibrary;
@@ -2796,6 +2896,7 @@ declare module "@stencil/core" {
             "sl-dropdown": LocalJSX.SlDropdown & JSXBase.HTMLAttributes<HTMLSlDropdownElement>;
             "sl-form": LocalJSX.SlForm & JSXBase.HTMLAttributes<HTMLSlFormElement>;
             "sl-format-bytes": LocalJSX.SlFormatBytes & JSXBase.HTMLAttributes<HTMLSlFormatBytesElement>;
+            "sl-format-number": LocalJSX.SlFormatNumber & JSXBase.HTMLAttributes<HTMLSlFormatNumberElement>;
             "sl-icon": LocalJSX.SlIcon & JSXBase.HTMLAttributes<HTMLSlIconElement>;
             "sl-icon-button": LocalJSX.SlIconButton & JSXBase.HTMLAttributes<HTMLSlIconButtonElement>;
             "sl-icon-library": LocalJSX.SlIconLibrary & JSXBase.HTMLAttributes<HTMLSlIconLibraryElement>;
