@@ -8,7 +8,7 @@ Formats a number as a human readable bytes value.
 <div class="format-bytes-overview">
   The file is <sl-format-bytes value="1000"></sl-format-bytes> in size.
   <br><br>
-  <sl-input type="number" value="1000" label="Value" style="max-width: 180px;"></sl-input>  
+  <sl-input type="number" value="1000" label="Number to Format" style="max-width: 180px;"></sl-input>  
 </div>
 
 <script>
@@ -21,7 +21,6 @@ Formats a number as a human readable bytes value.
 ```
 
 ## Examples
-
 
 ### Formatting Bytes
 
