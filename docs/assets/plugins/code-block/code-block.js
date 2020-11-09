@@ -49,7 +49,7 @@
               class="code-block__resizer"
               tabindex="0"
             >
-              <sl-icon name="grip-horizontal"></sl-icon>
+              <sl-icon name="grip-vertical"></sl-icon>
             </div>
           `;
 
