@@ -4,7 +4,7 @@
 
 Formats a number using the specified locale and options.
 
-Localization is handled by the browser's built-in [Intl: NumberFormat API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat). As such, there's no need to load language packs or omit those you don't plan on using.
+Localization is handled by the browser's built-in [Intl: NumberFormat API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat) so there's no need to load bulky language packs.
 
 ```html preview
 <div class="format-number-overview">
@@ -43,7 +43,7 @@ Use the `locale` attribute to set the number formatting locale.
 ```html preview
 English: <sl-format-number value="2000" locale="en" minimum-fraction-digits="2"></sl-format-number><br>
 German: <sl-format-number value="2000" locale="de" minimum-fraction-digits="2"></sl-format-number><br>
-Russian: <sl-format-number value="2000" locale="ru" minimum-fraction-digits="2"></sl-format-number><br>
+Russian: <sl-format-number value="2000" locale="ru" minimum-fraction-digits="2"></sl-format-number>
 ```
 
 ### Currency

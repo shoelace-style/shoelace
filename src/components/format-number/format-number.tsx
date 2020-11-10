@@ -10,7 +10,7 @@ import { Component, Prop } from '@stencil/core';
   shadow: true
 })
 export class FormatBytes {
-  /** The number to format in bytes. */
+  /** The number to format. */
   @Prop() value = 0;
 
   /** The locale to use when formatting the number. */
@@ -44,9 +44,7 @@ export class FormatBytes {
   @Prop() maximumSignificantDigits: number;
 
   render() {
-    const number = Number(this.value);
-
-    if (isNaN(number)) {
+    if (isNaN(this.value)) {
       return '';
     }
 
@@ -60,6 +58,6 @@ export class FormatBytes {
       maximumFractionDigits: this.maximumFractionDigits,
       minimumSignificantDigits: this.minimumSignificantDigits,
       maximumSignificantDigits: this.maximumSignificantDigits
-    }).format(number);
+    }).format(this.value);
   }
 }
