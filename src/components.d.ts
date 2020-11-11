@@ -510,7 +510,7 @@ export namespace Components {
          */
         "type": 'currency' | 'decimal' | 'percent';
         /**
-          * The number to format in bytes.
+          * The number to format.
          */
         "value": number;
     }
@@ -2095,7 +2095,7 @@ declare namespace LocalJSX {
          */
         "type"?: 'currency' | 'decimal' | 'percent';
         /**
-          * The number to format in bytes.
+          * The number to format.
          */
         "value"?: number;
     }
