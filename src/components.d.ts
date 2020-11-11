@@ -897,6 +897,24 @@ export namespace Components {
          */
         "value": number;
     }
+    interface SlRelativeTime {
+        /**
+          * The date from which to calculate time from.
+         */
+        "date": Date | string;
+        /**
+          * The formatting style to use.
+         */
+        "format": 'long' | 'short' | 'narrow';
+        /**
+          * The locale to use when formatting the number.
+         */
+        "locale": string;
+        /**
+          * When `auto`, values such as "yesterday" and "tomorrow" will be shown when possible. When `always`, values such as "1 day ago" and "in 1 day" will be shown.
+         */
+        "numeric": 'always' | 'auto';
+    }
     interface SlResizeObserver {
     }
     interface SlResponsiveEmbed {
@@ -1434,6 +1452,12 @@ declare global {
         prototype: HTMLSlRatingElement;
         new (): HTMLSlRatingElement;
     };
+    interface HTMLSlRelativeTimeElement extends Components.SlRelativeTime, HTMLStencilElement {
+    }
+    var HTMLSlRelativeTimeElement: {
+        prototype: HTMLSlRelativeTimeElement;
+        new (): HTMLSlRelativeTimeElement;
+    };
     interface HTMLSlResizeObserverElement extends Components.SlResizeObserver, HTMLStencilElement {
     }
     var HTMLSlResizeObserverElement: {
@@ -1544,6 +1568,7 @@ declare global {
         "sl-radio": HTMLSlRadioElement;
         "sl-range": HTMLSlRangeElement;
         "sl-rating": HTMLSlRatingElement;
+        "sl-relative-time": HTMLSlRelativeTimeElement;
         "sl-resize-observer": HTMLSlResizeObserverElement;
         "sl-responsive-embed": HTMLSlResponsiveEmbedElement;
         "sl-select": HTMLSlSelectElement;
@@ -2477,6 +2502,24 @@ declare namespace LocalJSX {
          */
         "value"?: number;
     }
+    interface SlRelativeTime {
+        /**
+          * The date from which to calculate time from.
+         */
+        "date"?: Date | string;
+        /**
+          * The formatting style to use.
+         */
+        "format"?: 'long' | 'short' | 'narrow';
+        /**
+          * The locale to use when formatting the number.
+         */
+        "locale"?: string;
+        /**
+          * When `auto`, values such as "yesterday" and "tomorrow" will be shown when possible. When `always`, values such as "1 day ago" and "in 1 day" will be shown.
+         */
+        "numeric"?: 'always' | 'auto';
+    }
     interface SlResizeObserver {
         /**
           * Emitted when the element is resized.
@@ -2862,6 +2905,7 @@ declare namespace LocalJSX {
         "sl-radio": SlRadio;
         "sl-range": SlRange;
         "sl-rating": SlRating;
+        "sl-relative-time": SlRelativeTime;
         "sl-resize-observer": SlResizeObserver;
         "sl-responsive-embed": SlResponsiveEmbed;
         "sl-select": SlSelect;
@@ -2912,6 +2956,7 @@ declare module "@stencil/core" {
             "sl-radio": LocalJSX.SlRadio & JSXBase.HTMLAttributes<HTMLSlRadioElement>;
             "sl-range": LocalJSX.SlRange & JSXBase.HTMLAttributes<HTMLSlRangeElement>;
             "sl-rating": LocalJSX.SlRating & JSXBase.HTMLAttributes<HTMLSlRatingElement>;
+            "sl-relative-time": LocalJSX.SlRelativeTime & JSXBase.HTMLAttributes<HTMLSlRelativeTimeElement>;
             "sl-resize-observer": LocalJSX.SlResizeObserver & JSXBase.HTMLAttributes<HTMLSlResizeObserverElement>;
             "sl-responsive-embed": LocalJSX.SlResponsiveEmbed & JSXBase.HTMLAttributes<HTMLSlResponsiveEmbedElement>;
             "sl-select": LocalJSX.SlSelect & JSXBase.HTMLAttributes<HTMLSlSelectElement>;

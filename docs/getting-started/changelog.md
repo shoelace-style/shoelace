@@ -9,6 +9,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 ## Next
 
 - Added `sl-format-number` component
+- Added `sl-relative-time` component
 - Added `closable` prop to `sl-tab`
 - Added experimental `sl-resize-observer` utility
 - Added experimental `sl-theme` utility and updated theming documentation
