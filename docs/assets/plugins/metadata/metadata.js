@@ -217,18 +217,6 @@
     });
   }
 
-  function getShortNumber(value) {
-    const suffixes = ['', 'k', 'm', 'b', 't'];
-    const index = Math.floor(('' + value).length / 3);
-    let shortValue = parseFloat((index !== 0 ? (value / Math.pow(1000, index)) : value).toPrecision(2));
-
-    if (shortValue % 1 !== 0) {
-      shortValue = shortValue.toFixed(1);
-    }
-
-    return shortValue + suffixes[index];
-  }
-
   function getDocsTagsObject(docsTags) {
     let tags = {};
 
@@ -270,14 +258,6 @@
             </a>
           `;
           target.appendChild(buttons);
-        })
-        .then(() => {
-          fetch('https://api.github.com/repos/shoelace-style/shoelace')
-            .then(res => res.json())
-            .then(json => {
-              const count = getShortNumber(json.stargazers_count);
-              [...document.querySelectorAll('.github-star-count')].map(stars => stars.textContent = count);
-            });
         });
     });
 
