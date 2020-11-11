@@ -36,8 +36,13 @@ import { defineCustomElements, setAssetPath } from '@shoelace-style/shoelace'
 
 // ...
 
+const rootUrl = document.currentScript.src.replace(/\/packs.*$/, '')
+
+// Path to the assets folder (should be independent on the current script source path
+// to work correctly in different environments)
+setAssetPath(rootUrl + '/packs/js/')
+
 // This enables all web components for the current page
-setAssetPath(document.currentScript.src)
 defineCustomElements()
 ```
 
