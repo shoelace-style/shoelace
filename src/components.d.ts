@@ -914,6 +914,10 @@ export namespace Components {
           * When `auto`, values such as "yesterday" and "tomorrow" will be shown when possible. When `always`, values such as "1 day ago" and "in 1 day" will be shown.
          */
         "numeric": 'always' | 'auto';
+        /**
+          * Keep the displayed value up to date as time passes.
+         */
+        "sync": boolean;
     }
     interface SlResizeObserver {
     }
@@ -2519,6 +2523,10 @@ declare namespace LocalJSX {
           * When `auto`, values such as "yesterday" and "tomorrow" will be shown when possible. When `always`, values such as "1 day ago" and "in 1 day" will be shown.
          */
         "numeric"?: 'always' | 'auto';
+        /**
+          * Keep the displayed value up to date as time passes.
+         */
+        "sync"?: boolean;
     }
     interface SlResizeObserver {
         /**
