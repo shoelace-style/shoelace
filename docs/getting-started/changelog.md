@@ -6,6 +6,10 @@ Components with the <sl-badge type="warning" pill>Experimental</sl-badge> badge 
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
+## Next
+
+- Fixed a bug where `sl-menu-item` color variable was incorrect [#272](https://github.com/shoelace-style/shoelace/issues/272)
+
 ## 2.0.0-beta.23
 
 - Added `sl-format-number` component
