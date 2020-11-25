@@ -15,7 +15,7 @@ let id = 0;
  *
  * @part base - The component's base wrapper.
  * @part overlay - The overlay.
- * @part panel - The drawer panel (where the drawer and its is rendered).
+ * @part panel - The drawer panel (where the drawer and its content is rendered).
  * @part header - The drawer header.
  * @part title - The drawer title.
  * @part close-button - The close button.

@@ -15,7 +15,7 @@ let id = 0;
  *
  * @part base - The component's base wrapper.
  * @part overlay - The overlay.
- * @part panel - The dialog panel (where the dialog and its is rendered).
+ * @part panel - The dialog panel (where the dialog and its content is rendered).
  * @part header - The dialog header.
  * @part title - The dialog title.
  * @part close-button - The close button.
