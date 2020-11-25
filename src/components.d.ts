@@ -468,6 +468,60 @@ export namespace Components {
          */
         "value": number;
     }
+    interface SlFormatDate {
+        /**
+          * The date/time to format. If not set, the current date and time will be used.
+         */
+        "date": Date | string;
+        /**
+          * The format for displaying the day.
+         */
+        "day": 'numeric' | '2-digit';
+        /**
+          * The format for displaying the era.
+         */
+        "era": 'narrow' | 'short' | 'long';
+        /**
+          * The format for displaying the hour.
+         */
+        "hour": 'numeric' | '2-digit';
+        /**
+          * When set, 24 hour time will always be used.
+         */
+        "hourFormat": 'auto' | '12' | '24';
+        /**
+          * The locale to use when formatting the date/time.
+         */
+        "locale": string;
+        /**
+          * The format for displaying the minute.
+         */
+        "minute": 'numeric' | '2-digit';
+        /**
+          * The format for displaying the month.
+         */
+        "month": 'numeric' | '2-digit' | 'narrow' | 'short' | 'long';
+        /**
+          * The format for displaying the second.
+         */
+        "second": 'numeric' | '2-digit';
+        /**
+          * The time zone to express the time in.
+         */
+        "timeZone": string;
+        /**
+          * The format for displaying the time.
+         */
+        "timeZoneName": 'short' | 'long';
+        /**
+          * The format for displaying the weekday.
+         */
+        "weekday": 'narrow' | 'short' | 'long';
+        /**
+          * The format for displaying the year.
+         */
+        "year": 'numeric' | '2-digit';
+    }
     interface SlFormatNumber {
         /**
           * The currency to use when formatting. Must be an ISO 4217 currency code such as `USD` or `EUR`.
@@ -1360,6 +1414,12 @@ declare global {
         prototype: HTMLSlFormatBytesElement;
         new (): HTMLSlFormatBytesElement;
     };
+    interface HTMLSlFormatDateElement extends Components.SlFormatDate, HTMLStencilElement {
+    }
+    var HTMLSlFormatDateElement: {
+        prototype: HTMLSlFormatDateElement;
+        new (): HTMLSlFormatDateElement;
+    };
     interface HTMLSlFormatNumberElement extends Components.SlFormatNumber, HTMLStencilElement {
     }
     var HTMLSlFormatNumberElement: {
@@ -1556,6 +1616,7 @@ declare global {
         "sl-dropdown": HTMLSlDropdownElement;
         "sl-form": HTMLSlFormElement;
         "sl-format-bytes": HTMLSlFormatBytesElement;
+        "sl-format-date": HTMLSlFormatDateElement;
         "sl-format-number": HTMLSlFormatNumberElement;
         "sl-icon": HTMLSlIconElement;
         "sl-icon-button": HTMLSlIconButtonElement;
@@ -2082,6 +2143,60 @@ declare namespace LocalJSX {
          */
         "value"?: number;
     }
+    interface SlFormatDate {
+        /**
+          * The date/time to format. If not set, the current date and time will be used.
+         */
+        "date"?: Date | string;
+        /**
+          * The format for displaying the day.
+         */
+        "day"?: 'numeric' | '2-digit';
+        /**
+          * The format for displaying the era.
+         */
+        "era"?: 'narrow' | 'short' | 'long';
+        /**
+          * The format for displaying the hour.
+         */
+        "hour"?: 'numeric' | '2-digit';
+        /**
+          * When set, 24 hour time will always be used.
+         */
+        "hourFormat"?: 'auto' | '12' | '24';
+        /**
+          * The locale to use when formatting the date/time.
+         */
+        "locale"?: string;
+        /**
+          * The format for displaying the minute.
+         */
+        "minute"?: 'numeric' | '2-digit';
+        /**
+          * The format for displaying the month.
+         */
+        "month"?: 'numeric' | '2-digit' | 'narrow' | 'short' | 'long';
+        /**
+          * The format for displaying the second.
+         */
+        "second"?: 'numeric' | '2-digit';
+        /**
+          * The time zone to express the time in.
+         */
+        "timeZone"?: string;
+        /**
+          * The format for displaying the time.
+         */
+        "timeZoneName"?: 'short' | 'long';
+        /**
+          * The format for displaying the weekday.
+         */
+        "weekday"?: 'narrow' | 'short' | 'long';
+        /**
+          * The format for displaying the year.
+         */
+        "year"?: 'numeric' | '2-digit';
+    }
     interface SlFormatNumber {
         /**
           * The currency to use when formatting. Must be an ISO 4217 currency code such as `USD` or `EUR`.
@@ -2373,6 +2488,10 @@ declare namespace LocalJSX {
     interface SlMenuLabel {
     }
     interface SlProgressBar {
+        /**
+          * When true, percentage is ignored, the label is hidden, and the progress bar is drawn in an indeterminate state.
+         */
+        "indeterminate"?: boolean;
         /**
           * The progress bar's percentage, 0 to 100.
          */
@@ -2897,6 +3016,7 @@ declare namespace LocalJSX {
         "sl-dropdown": SlDropdown;
         "sl-form": SlForm;
         "sl-format-bytes": SlFormatBytes;
+        "sl-format-date": SlFormatDate;
         "sl-format-number": SlFormatNumber;
         "sl-icon": SlIcon;
         "sl-icon-button": SlIconButton;
@@ -2948,6 +3068,7 @@ declare module "@stencil/core" {
             "sl-dropdown": LocalJSX.SlDropdown & JSXBase.HTMLAttributes<HTMLSlDropdownElement>;
             "sl-form": LocalJSX.SlForm & JSXBase.HTMLAttributes<HTMLSlFormElement>;
             "sl-format-bytes": LocalJSX.SlFormatBytes & JSXBase.HTMLAttributes<HTMLSlFormatBytesElement>;
+            "sl-format-date": LocalJSX.SlFormatDate & JSXBase.HTMLAttributes<HTMLSlFormatDateElement>;
             "sl-format-number": LocalJSX.SlFormatNumber & JSXBase.HTMLAttributes<HTMLSlFormatNumberElement>;
             "sl-icon": LocalJSX.SlIcon & JSXBase.HTMLAttributes<HTMLSlIconElement>;
             "sl-icon-button": LocalJSX.SlIconButton & JSXBase.HTMLAttributes<HTMLSlIconButtonElement>;

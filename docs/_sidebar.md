@@ -50,6 +50,7 @@
 - Utility Components
   - [Animation](/components/animation.md)
   - [Format Bytes](/components/format-bytes.md)
+  - [Format Date](/components/format-date.md)
   - [Format Number](/components/format-number.md)
   - [Include](/components/include.md)
   - [Relative Time](/components/relative-time.md)
