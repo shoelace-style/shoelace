@@ -31,3 +31,21 @@
   transition: 400ms width, 400ms background-color;
   user-select: none;
 }
+
+// Indeterminate
+.progress-bar--indeterminate .progress-bar__indicator {
+  position: absolute;
+  animation: indeterminate 2.5s infinite cubic-bezier(0.37, 0, 0.63, 1);
+}
+
+@keyframes indeterminate {
+  0% {
+    left: -50%;
+    width: 50%;
+  }
+  75%,
+  100% {
+    left: 100%;
+    width: 50%;
+  }
+}

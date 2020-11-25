@@ -811,6 +811,10 @@ export namespace Components {
     }
     interface SlProgressBar {
         /**
+          * When true, percentage is ignored, the label is hidden, and the progress bar is drawn in an indeterminate state.
+         */
+        "indeterminate": boolean;
+        /**
           * The progress bar's percentage, 0 to 100.
          */
         "percentage": number;

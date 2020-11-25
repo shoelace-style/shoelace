@@ -2,7 +2,7 @@
 
 [component-header:sl-progress-bar]
 
-Progress bars are used to show the progress of a determinate operation.
+Progress bars are used to show the status of an ongoing operation.
 
 ```html preview
 <sl-progress-bar percentage="50"></sl-progress-bar>
@@ -47,6 +47,14 @@ Use the default slot to show a label.
     progressBar.textContent = `${percentage}%`;
   });
 </script>
+```
+
+### Indeterminate
+
+The `indeterminate` attribute can be used to inform the user that the operation is pending, but its status cannot currently be determined. In this state, `percentage` is ignored and the label, if present, will not be shown.
+
+```html preview
+<sl-progress-bar indeterminate></sl-progress-bar>
 ```
 
 [component-metadata:sl-progress-bar]

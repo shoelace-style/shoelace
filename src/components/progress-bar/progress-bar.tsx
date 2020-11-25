@@ -20,15 +20,21 @@ export class ProgressBar {
   /** The progress bar's percentage, 0 to 100. */
   @Prop() percentage = 0;
 
+  /** When true, percentage is ignored, the label is hidden, and the progress bar is drawn in an indeterminate state. */
+  @Prop() indeterminate = false;
+
   render() {
     return (
       <div
         part="base"
-        class="progress-bar"
+        class={{
+          'progress-bar': true,
+          'progress-bar--indeterminate': this.indeterminate
+        }}
         role="progressbar"
         aria-valuemin="0"
         aria-valuemax="100"
-        aria-valuenow={this.percentage}
+        aria-valuenow={this.indeterminate ? null : this.percentage}
       >
         <div
           part="indicator"
@@ -37,9 +43,11 @@ export class ProgressBar {
             width: `${this.percentage}%`
           }}
         >
-          <span part="label" class="progress-bar__label">
-            <slot />
-          </span>
+          {!this.indeterminate && (
+            <span part="label" class="progress-bar__label">
+              <slot />
+            </span>
+          )}
         </div>
       </div>
     );
