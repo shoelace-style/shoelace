@@ -9,6 +9,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 ## Next
 
 - Fixed a bug where `sl-menu-item` color variable was incorrect [#272](https://github.com/shoelace-style/shoelace/issues/272)
+- Fixed a bug where `sl-dialog` and `sl-drawer` would emit the `sl-hide` event twice [#275](https://github.com/shoelace-style/shoelace/issues/275)
 
 ## 2.0.0-beta.23
 
@@ -19,7 +20,6 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Added experimental `sl-theme` utility and updated theming documentation
 - Fixed a bug where `sl-menu-item` wouldn't render properly in the dark theme
 - Fixed a bug where `sl-select` would show an autocomplete menu
-- Fixed a bug where `sl-dialog` and `sl-drawer` would emit the `sl-hide` event twice [#275](https://github.com/shoelace-style/shoelace/issues/275)
 - Improved placeholder contrast in dark theme
 - Updated to Boostrap Icons 1.1.0
 - Updated to Stencil 2.3.0
