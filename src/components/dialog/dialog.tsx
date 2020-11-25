@@ -33,6 +33,8 @@ export class Dialog {
   dialog: HTMLElement;
   modal: Modal;
   panel: HTMLElement;
+  willShow = false;
+  willHide = false;
 
   @Element() host: HTMLSlDialogElement;
 
@@ -100,8 +102,7 @@ export class Dialog {
   /** Shows the dialog */
   @Method()
   async show() {
-    // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
-    if (this.isVisible) {
+    if (this.willShow) {
       return;
     }
 
@@ -111,6 +112,7 @@ export class Dialog {
       return;
     }
 
+    this.willShow = true;
     this.isVisible = true;
     this.open = true;
     this.modal.activate();
@@ -121,8 +123,7 @@ export class Dialog {
   /** Hides the dialog */
   @Method()
   async hide() {
-    // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
-    if (!this.isVisible) {
+    if (this.willHide) {
       return;
     }
 
@@ -132,6 +133,7 @@ export class Dialog {
       return;
     }
 
+    this.willHide = true;
     this.open = false;
     this.modal.deactivate();
 
@@ -166,6 +168,8 @@ export class Dialog {
     // Ensure we only emit one event when the target element is no longer visible
     if (event.propertyName === 'opacity' && target.classList.contains('dialog__panel')) {
       this.isVisible = this.open;
+      this.willShow = false;
+      this.willHide = false;
       this.open ? this.slAfterShow.emit() : this.slAfterHide.emit();
 
       if (this.open) {

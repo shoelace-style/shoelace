@@ -32,6 +32,8 @@ export class Drawer {
   drawer: HTMLElement;
   modal: Modal;
   panel: HTMLElement;
+  willShow = false;
+  willHide = false;
 
   @Element() host: HTMLSlDrawerElement;
 
@@ -108,8 +110,7 @@ export class Drawer {
   /** Shows the drawer */
   @Method()
   async show() {
-    // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
-    if (this.isVisible) {
+    if (this.willShow) {
       return;
     }
 
@@ -119,6 +120,7 @@ export class Drawer {
       return;
     }
 
+    this.willShow = true;
     this.isVisible = true;
     this.open = true;
 
@@ -132,8 +134,7 @@ export class Drawer {
   /** Hides the drawer */
   @Method()
   async hide() {
-    // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
-    if (!this.isVisible) {
+    if (this.willHide) {
       return;
     }
 
@@ -143,6 +144,7 @@ export class Drawer {
       return;
     }
 
+    this.willHide = true;
     this.open = false;
     this.modal.deactivate();
 
@@ -177,6 +179,8 @@ export class Drawer {
     // Ensure we only emit one event when the target element is no longer visible
     if (event.propertyName === 'transform' && target.classList.contains('drawer__panel')) {
       this.isVisible = this.open;
+      this.willShow = false;
+      this.willHide = false;
       this.open ? this.slAfterShow.emit() : this.slAfterHide.emit();
 
       if (this.open) {
