@@ -13,6 +13,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Added `--track-color`, `--indicator-color`, and `--label-color` to `sl-progress-bar` [#276](https://github.com/shoelace-style/shoelace/issues/276)
 - Fixed a bug where `sl-menu-item` color variable was incorrect [#272](https://github.com/shoelace-style/shoelace/issues/272)
 - Fixed a bug where `sl-dialog` and `sl-drawer` would emit the `sl-hide` event twice [#275](https://github.com/shoelace-style/shoelace/issues/275)
+- Fixed a bug where calling `event.preventDefault()` on certain form elements wouldn't prevent `sl-form` from submitting [#277](https://github.com/shoelace-style/shoelace/issues/277)
 
 ## 2.0.0-beta.23
 

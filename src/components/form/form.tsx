@@ -75,7 +75,11 @@ export class Form {
         },
         keyDown: event => {
           const target = event.target as HTMLInputElement;
-          if (event.key === 'Enter' && !['checkbox', 'file', 'radio'].includes(target.type)) {
+          if (
+            event.key === 'Enter' &&
+            !event.defaultPrevented &&
+            !['checkbox', 'file', 'radio'].includes(target.type)
+          ) {
             this.submit();
           }
         }
@@ -123,7 +127,7 @@ export class Form {
         serialize: (el: HTMLSlInputElement, formData) =>
           el.name && !el.disabled ? formData.append(el.name, el.value) : null,
         keyDown: event => {
-          if (event.key === 'Enter') {
+          if (event.key === 'Enter' && !event.defaultPrevented) {
             this.submit();
           }
         }
