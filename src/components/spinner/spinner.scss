@@ -6,7 +6,7 @@
  * @prop --stroke-width: The width of the indicator.
  */
 :host {
-  --track-color: transparent;
+  --track-color: var(--sl-color-gray-90);
   --indicator-color: var(--sl-color-primary-50);
   --stroke-width: 2px;
 
@@ -18,8 +18,8 @@
   width: 1em;
   height: 1em;
   border-radius: 50%;
-  border: solid var(--stroke-width) var(--indicator-color);
-  border-bottom-color: var(--track-color);
+  border: solid var(--stroke-width) var(--track-color);
+  border-top-color: var(--indicator-color);
   animation: 1s linear infinite spin;
 }
 

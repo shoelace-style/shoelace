@@ -373,6 +373,11 @@
   --sheen-color: var(--sl-color-gray-25);
 }
 
+/* Spinner */
+.sl-theme-dark sl-spinner {
+  --track-color: var(--sl-color-gray-20);
+}
+
 /* Switch */
 .sl-theme-dark sl-switch::part(control) {
   background-color: var(--sl-color-gray-30);
