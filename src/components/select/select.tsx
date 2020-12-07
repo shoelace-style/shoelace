@@ -1,7 +1,6 @@
 import { Component, Element, Event, EventEmitter, Method, Prop, State, Watch, h } from '@stencil/core';
 import { getTextContent } from '../../utilities/slot';
 import { hasSlot } from '../../utilities/slot';
-import ResizeObserver from 'resize-observer-polyfill';
 
 let id = 0;
 

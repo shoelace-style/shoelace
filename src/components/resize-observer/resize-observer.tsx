@@ -1,5 +1,4 @@
 import { Component, Element, Event, EventEmitter, h } from '@stencil/core';
-import ResizeObserver from 'resize-observer-polyfill';
 
 /**
  * @since 2.0
@@ -18,10 +17,10 @@ export class ResizeObserverUtility {
   @Element() host: HTMLSlResizeObserverElement;
 
   /** Emitted when the element is resized. */
-  @Event({ eventName: 'sl-resize' }) slResize: EventEmitter<ResizeObserverEntry[]>;
+  @Event({ eventName: 'sl-resize' }) slResize: EventEmitter<readonly ResizeObserverEntry[]>;
 
   connectedCallback() {
-    this.resizeObserver = new ResizeObserver(event => this.slResize.emit(event));
+    this.resizeObserver = new ResizeObserver(entries => this.slResize.emit(entries));
     this.handleSlotChange = this.handleSlotChange.bind(this);
   }
 

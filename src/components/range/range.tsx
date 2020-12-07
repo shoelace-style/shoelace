@@ -1,5 +1,4 @@
 import { Component, Event, EventEmitter, Method, Prop, State, h } from '@stencil/core';
-import ResizeObserver from 'resize-observer-polyfill';
 
 /**
  * @since 2.0

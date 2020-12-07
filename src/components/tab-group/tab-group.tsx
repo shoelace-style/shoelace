@@ -2,7 +2,6 @@ import { Component, Element, Event, EventEmitter, Method, Prop, State, Watch, h 
 import { getOffset } from '../../utilities/offset';
 import { scrollIntoView } from '../../utilities/scroll';
 import { focusVisible } from '../../utilities/focus-visible';
-import ResizeObserver from 'resize-observer-polyfill';
 
 /**
  * @since 2.0

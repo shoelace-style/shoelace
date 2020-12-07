@@ -2655,7 +2655,7 @@ declare namespace LocalJSX {
         /**
           * Emitted when the element is resized.
          */
-        "onSl-resize"?: (event: CustomEvent<ResizeObserverEntry[]>) => void;
+        "onSl-resize"?: (event: CustomEvent<readonly ResizeObserverEntry[]>) => void;
     }
     interface SlResponsiveEmbed {
         /**
