@@ -22,7 +22,7 @@
             ${prop.name !== prop.attr && prop.attr !== undefined ? (`
               <br>
               <small>
-                <sl-tooltip content="Use this kebab-case name to set in HTML">
+                <sl-tooltip content="Use this name in your HTML">
                   <code class="attribute-tooltip">${escapeHtml(prop.attr)}</code>
                 </sl-tooltip>
               </small>`
