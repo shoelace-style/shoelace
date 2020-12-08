@@ -22,6 +22,12 @@ export class Include {
   /** The fetch mode to use. */
   @Prop() mode: 'cors' | 'no-cors' | 'same-origin' = 'cors';
 
+  /**
+   * Allows included scripts to be executed. You must ensure the content you're including is trusted, otherwise this
+   * option can lead to XSS vulnerabilities in your app!
+   */
+  @Prop() allowScripts = false;
+
   /** Emitted when the included file is loaded. */
   @Event({ eventName: 'sl-load' }) slLoad: EventEmitter;
 
@@ -35,6 +41,14 @@ export class Include {
 
   componentWillLoad() {
     this.loadSource();
+  }
+
+  executeScript(script: HTMLScriptElement) {
+    // Create a copy of the script and swap it out so the browser executes it
+    const newScript = document.createElement('script');
+    [...script.attributes].map(attr => newScript.setAttribute(attr.name, attr.value));
+    newScript.textContent = script.textContent;
+    script.parentNode.replaceChild(newScript, script);
   }
 
   async loadSource() {
@@ -53,6 +67,11 @@ export class Include {
       }
 
       this.host.innerHTML = file.html;
+
+      if (this.allowScripts) {
+        [...this.host.querySelectorAll('script')].map(script => this.executeScript(script));
+      }
+
       this.slLoad.emit();
     } catch {
       this.slError.emit();

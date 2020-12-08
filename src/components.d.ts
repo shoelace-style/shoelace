@@ -631,6 +631,10 @@ export namespace Components {
     }
     interface SlInclude {
         /**
+          * Allows included scripts to be executed. You must ensure the content you're including is trusted, otherwise this option can lead to XSS vulnerabilities in your app!
+         */
+        "allowScripts": boolean;
+        /**
           * The fetch mode to use.
          */
         "mode": 'cors' | 'no-cors' | 'same-origin';
@@ -2320,6 +2324,10 @@ declare namespace LocalJSX {
         "position"?: number;
     }
     interface SlInclude {
+        /**
+          * Allows included scripts to be executed. You must ensure the content you're including is trusted, otherwise this option can lead to XSS vulnerabilities in your app!
+         */
+        "allowScripts"?: boolean;
         /**
           * The fetch mode to use.
          */
