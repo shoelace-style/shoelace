@@ -9,7 +9,7 @@ interface FormControl {
 
 /**
  * @since 2.0
- * @status experimental
+ * @status stable
  *
  * @slot - The form's content.
  *

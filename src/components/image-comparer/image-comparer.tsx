@@ -3,7 +3,7 @@ import { clamp } from '../../utilities/math';
 
 /**
  * @since 2.0
- * @status experimental
+ * @status stable
  *
  * @slot before - The before image, an `<img>` or `<svg>` element.
  * @slot after - The after image, an `<img>` or `<svg>` element.

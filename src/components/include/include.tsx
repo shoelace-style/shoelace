@@ -3,7 +3,7 @@ import { requestInclude } from './request';
 
 /**
  * @since 2.0
- * @status experimental
+ * @status stable
  */
 
 @Component({

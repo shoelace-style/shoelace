@@ -18,6 +18,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed drag handle orientation in `sl-image-comparer`
 - Restyled `sl-spinner` so the track is visible and the indicator is smaller.
 - Removed `resize-observer-polyfill` in favor of `@types/resize-observer-browser` since all target browsers support `ResizeObserver`
+- Upgraded the status of `sl-form`, `sl-image-comparer`, and `sl-include` from experimental to stable
 
 ## 2.0.0-beta.23
 
