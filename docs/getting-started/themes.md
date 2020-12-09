@@ -48,7 +48,7 @@ Every selector in a theme must be scoped to the theme's class to ensure interope
 
 ### Design Tokens
 
-[Design tokens](http://localhost:4000/#/getting-started/customizing?id=design-tokens) give you a high-level way to customize Shoelace components. You can customize them in your theme as shown below.
+[Design tokens](/getting-started/customizing?id=design-tokens) give you a high-level way to customize Shoelace components. You can customize them in your theme as shown below.
 
 ```css
 .sl-theme-purple-power { 
