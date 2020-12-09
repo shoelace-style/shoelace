@@ -135,7 +135,7 @@ export class ImageComparer {
             aria-valuemax="100"
             tabIndex={0}
           >
-            <sl-icon class="image-comparer__handle-icon" name="grip-horizontal" />
+            <sl-icon class="image-comparer__handle-icon" name="grip-vertical" />
           </div>
         </div>
       </div>
