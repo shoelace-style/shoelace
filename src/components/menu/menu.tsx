@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, Method, State, h } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, Method, h } from '@stencil/core';
 import { getTextContent } from '../../utilities/slot';
 
 /**
@@ -22,34 +22,12 @@ export class Menu {
 
   @Element() host: HTMLSlMenuElement;
 
-  @State() hasFocus = false;
-
-  /** Emitted when the menu gains focus. */
-  @Event({ eventName: 'sl-focus' }) slFocus: EventEmitter;
-
-  /** Emitted when the menu loses focus. */
-  @Event({ eventName: 'sl-blur' }) slBlur: EventEmitter;
-
   /** Emitted when a menu item is selected. */
   @Event({ eventName: 'sl-select' }) slSelect: EventEmitter<{ item: HTMLSlMenuItemElement }>;
 
   connectedCallback() {
     this.handleClick = this.handleClick.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
-  }
-
-  /** Sets focus on the menu. */
-  @Method()
-  async setFocus() {
-    this.hasFocus = true;
-    this.menu.focus();
-  }
-
-  /** Removes focus from the menu. */
-  @Method()
-  async removeFocus() {
-    this.hasFocus = false;
-    this.menu.blur();
   }
 
   /**
@@ -150,13 +128,11 @@ export class Menu {
       <div
         ref={el => (this.menu = el)}
         part="base"
-        class={{
-          menu: true,
-          'menu--has-focus': this.hasFocus
-        }}
+        class="menu"
         role="menu"
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
+        tabIndex={0}
       >
         <slot />
       </div>

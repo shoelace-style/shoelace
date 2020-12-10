@@ -6,6 +6,10 @@ Components with the <sl-badge type="warning" pill>Experimental</sl-badge> badge 
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
+## Next
+
+- Removed `sl-blur` and `sl-focus` events from `sl-menu` since menus can't have focus since 2.0.0-beta.22
+
 ## 2.0.0-beta.24
 
 - Added `sl-format-date` component
