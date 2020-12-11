@@ -11,6 +11,7 @@
   - [Alert](/components/alert.md)
   - [Avatar](/components/avatar.md)
   - [Badge](/components/badge.md)
+  - [Backdrop](/components/backdrop.md)
   - [Button](/components/button.md)
   - [Button Group](/components/button-group.md)
   - [Card](/components/card.md)

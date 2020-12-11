@@ -129,6 +129,28 @@ export namespace Components {
          */
         "shape": 'circle' | 'square' | 'rounded';
     }
+    interface SlBackdrop {
+        /**
+          * By default, the backdrop fills the whole screen (usually the view port). To make the backdrop fill just its parent element, set this prop and add `position: relative` to the parent.
+         */
+        "contained": boolean;
+        /**
+          * Hides the backdrop overlay
+         */
+        "hide": () => Promise<void>;
+        /**
+          * Indicates whether the backdrop should center it's contents. It is centered by default
+         */
+        "isCentered": boolean;
+        /**
+          * Indicates whether or not the backdrop is open. You can use this in lieu of the show/hide methods.
+         */
+        "open": boolean;
+        /**
+          * Shows the backdrop overlay
+         */
+        "show": () => Promise<void>;
+    }
     interface SlBadge {
         /**
           * Set to true to draw a pill-style badge with rounded edges.
@@ -1346,6 +1368,12 @@ declare global {
         prototype: HTMLSlAvatarElement;
         new (): HTMLSlAvatarElement;
     };
+    interface HTMLSlBackdropElement extends Components.SlBackdrop, HTMLStencilElement {
+    }
+    var HTMLSlBackdropElement: {
+        prototype: HTMLSlBackdropElement;
+        new (): HTMLSlBackdropElement;
+    };
     interface HTMLSlBadgeElement extends Components.SlBadge, HTMLStencilElement {
     }
     var HTMLSlBadgeElement: {
@@ -1608,6 +1636,7 @@ declare global {
         "sl-alert": HTMLSlAlertElement;
         "sl-animation": HTMLSlAnimationElement;
         "sl-avatar": HTMLSlAvatarElement;
+        "sl-backdrop": HTMLSlBackdropElement;
         "sl-badge": HTMLSlBadgeElement;
         "sl-button": HTMLSlButtonElement;
         "sl-button-group": HTMLSlButtonGroupElement;
@@ -1767,6 +1796,40 @@ declare namespace LocalJSX {
           * The shape of the avatar.
          */
         "shape"?: 'circle' | 'square' | 'rounded';
+    }
+    interface SlBackdrop {
+        /**
+          * By default, the backdrop fills the whole screen (usually the view port). To make the backdrop fill just its parent element, set this prop and add `position: relative` to the parent.
+         */
+        "contained"?: boolean;
+        /**
+          * Indicates whether the backdrop should center it's contents. It is centered by default
+         */
+        "isCentered"?: boolean;
+        /**
+          * Emitted after the backdrop closes and all transitions are complete.
+         */
+        "onSl-after-hide"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted after the backdrop opens and all transitions are complete.
+         */
+        "onSl-after-show"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the backdrop closes. Calling `event.preventDefault()` will prevent it from being closed.
+         */
+        "onSl-hide"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the overlay is clicked. Calling `event.preventDefault()` will prevent the backdrop from closing.
+         */
+        "onSl-overlay-dismiss"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the backdrop opens. Calling `event.preventDefault()` will prevent it from being opened.
+         */
+        "onSl-show"?: (event: CustomEvent<any>) => void;
+        /**
+          * Indicates whether or not the backdrop is open. You can use this in lieu of the show/hide methods.
+         */
+        "open"?: boolean;
     }
     interface SlBadge {
         /**
@@ -3008,6 +3071,7 @@ declare namespace LocalJSX {
         "sl-alert": SlAlert;
         "sl-animation": SlAnimation;
         "sl-avatar": SlAvatar;
+        "sl-backdrop": SlBackdrop;
         "sl-badge": SlBadge;
         "sl-button": SlButton;
         "sl-button-group": SlButtonGroup;
@@ -3060,6 +3124,7 @@ declare module "@stencil/core" {
             "sl-alert": LocalJSX.SlAlert & JSXBase.HTMLAttributes<HTMLSlAlertElement>;
             "sl-animation": LocalJSX.SlAnimation & JSXBase.HTMLAttributes<HTMLSlAnimationElement>;
             "sl-avatar": LocalJSX.SlAvatar & JSXBase.HTMLAttributes<HTMLSlAvatarElement>;
+            "sl-backdrop": LocalJSX.SlBackdrop & JSXBase.HTMLAttributes<HTMLSlBackdropElement>;
             "sl-badge": LocalJSX.SlBadge & JSXBase.HTMLAttributes<HTMLSlBadgeElement>;
             "sl-button": LocalJSX.SlButton & JSXBase.HTMLAttributes<HTMLSlButtonElement>;
             "sl-button-group": LocalJSX.SlButtonGroup & JSXBase.HTMLAttributes<HTMLSlButtonGroupElement>;
