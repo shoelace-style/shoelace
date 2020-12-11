@@ -49,7 +49,7 @@ Use the `clearable` attribute to make the control clearable.
 Use the `pill` prop to give selects rounded edges.
 
 ```html preview
-<sl-select pill multiple>
+<sl-select pill>
   <sl-menu-item value="option-1">Option 1</sl-menu-item>
   <sl-menu-item value="option-2">Option 2</sl-menu-item>
   <sl-menu-item value="option-3">Option 3</sl-menu-item>
@@ -70,7 +70,7 @@ Use the `disabled` prop to disable a select.
 
 ### Multiple
 
-To allow multiple options to be selected, use the `multiple` attribute. It's a good practice to use `clearable` when this option is enabled.
+To allow multiple options to be selected, use the `multiple` attribute. It's a good practice to use `clearable` when this option is enabled. When using this option, `value` will be an array instead of a string.
 
 ```html preview
 <sl-select placeholder="Select a few" multiple clearable>

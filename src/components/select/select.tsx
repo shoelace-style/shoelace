@@ -13,6 +13,7 @@ let id = 0;
  * @slot help-text - Help text that describes how to use the select.
  *
  * @part base - The component's base wrapper.
+ * @part clear-button - The input's clear button, exported from <sl-input>.
  * @part form-control - The form control that wraps the label and the input.
  * @part help-text - The select's help text.
  * @part icon - The select's icon.
@@ -20,12 +21,6 @@ let id = 0;
  * @part menu - The select menu, a <sl-menu> element.
  * @part tag - The multiselect option, a <sl-tag> element.
  * @part tags - The container in which multiselect options are rendered.
- * @part input - The select's input control, exported from <sl-input>.
- * @part label - The select's label, exported from <sl-input>.
- * @part prefix - The select's prefix, exported from <sl-input>.
- * @part clear-button - The input's clear button, exported from <sl-input>.
- * @part suffix - The select's suffix, exported from <sl-input>.
- * @part help-text - The select's help text, exported from <sl-input>.
  */
 
 @Component({
@@ -34,13 +29,14 @@ let id = 0;
   shadow: true
 })
 export class Select {
+  box: HTMLElement;
   dropdown: HTMLSlDropdownElement;
-  input: HTMLSlInputElement;
   inputId = `select-${++id}`;
   labelId = `select-label-${id}`;
   helpTextId = `select-help-text-${id}`;
   menu: HTMLSlMenuElement;
   resizeObserver: ResizeObserver;
+  select: HTMLSelectElement;
 
   @Element() host: HTMLSlSelectElement;
 
@@ -96,6 +92,13 @@ export class Select {
   /** This will be true when the control is in an invalid state. Validity is determined by the `required` prop. */
   @Prop({ mutable: true }) invalid = false;
 
+  @Watch('disabled')
+  handleDisabledChange() {
+    if (this.disabled && this.isOpen) {
+      this.dropdown.hide();
+    }
+  }
+
   @Watch('label')
   handleLabelChange() {
     this.detectLabel();
@@ -118,28 +121,24 @@ export class Select {
   /** Emitted when the control's value changes. */
   @Event({ eventName: 'sl-change' }) slChange: EventEmitter;
 
-  /** Emitted when the control gains focus */
+  /** Emitted when the control gains focus. */
   @Event({ eventName: 'sl-focus' }) slFocus: EventEmitter;
 
-  /** Emitted when the control loses focus */
+  /** Emitted when the control loses focus. */
   @Event({ eventName: 'sl-blur' }) slBlur: EventEmitter;
 
   connectedCallback() {
     this.detectLabel = this.detectLabel.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
-    this.handleClear = this.handleClear.bind(this);
-    this.handleCut = this.handleCut.bind(this);
-    this.handlePaste = this.handlePaste.bind(this);
+    this.handleClearClick = this.handleClearClick.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
-    this.handleKeyUp = this.handleKeyUp.bind(this);
     this.handleLabelClick = this.handleLabelClick.bind(this);
-    this.handleTagClick = this.handleTagClick.bind(this);
-    this.handleTagKeyDown = this.handleTagKeyDown.bind(this);
     this.handleMenuHide = this.handleMenuHide.bind(this);
     this.handleMenuShow = this.handleMenuShow.bind(this);
     this.handleMenuSelect = this.handleMenuSelect.bind(this);
     this.handleSlotChange = this.handleSlotChange.bind(this);
+    this.handleTagInteraction = this.handleTagInteraction.bind(this);
   }
 
   componentWillLoad() {
@@ -157,13 +156,14 @@ export class Select {
   /** Checks for validity and shows the browser's validation message if the control is invalid. */
   @Method()
   async reportValidity() {
-    return this.input.reportValidity();
+    return this.select.reportValidity();
   }
 
   /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
   @Method()
   async setCustomValidity(message: string) {
-    this.input.setCustomValidity(message);
+    this.select.setCustomValidity(message);
+    this.invalid = !this.select.checkValidity();
   }
 
   detectLabel() {
@@ -183,36 +183,42 @@ export class Select {
     return Array.isArray(this.value) ? this.value : [this.value];
   }
 
-  handleBlur(event: CustomEvent) {
-    event.stopPropagation();
+  handleBlur() {
     this.hasFocus = false;
     this.slBlur.emit();
   }
 
-  handleFocus(event: CustomEvent) {
-    event.stopPropagation();
+  handleFocus() {
     this.hasFocus = true;
     this.slFocus.emit();
-    this.input.setSelectionRange(0, 0);
   }
 
-  handleClear() {
+  handleClearClick(event: MouseEvent) {
+    event.stopPropagation();
     this.value = this.multiple ? [] : '';
     this.syncItemsFromValue();
-    this.dropdown.hide();
   }
 
   handleKeyDown(event: KeyboardEvent) {
+    const target = event.target as HTMLElement;
     const items = this.getItems();
     const firstItem = items[0];
     const lastItem = items[items.length - 1];
 
-    // We can't make the <sl-input> readonly since that will block the browser's validation messages, so this prevents
-    // key presses from modifying the input's value by briefly making it readonly. We don't use `preventDefault()` since
-    // that would block tabbing, shortcuts, etc.
-    const nativeInput = this.input.shadowRoot.querySelector('[part="input"]') as HTMLInputElement;
-    nativeInput.readOnly = true;
+    // Ignore key presses on tags
+    if (target.tagName.toLowerCase() === 'sl-tag') {
+      return;
+    }
 
+    // Tabbing out of the control closes it
+    if (event.key === 'Tab') {
+      if (this.isOpen) {
+        this.dropdown.hide();
+      }
+      return;
+    }
+
+    // Up/down opens the menu
     if (['ArrowDown', 'ArrowUp'].includes(event.key)) {
       event.preventDefault();
 
@@ -232,23 +238,18 @@ export class Select {
         return;
       }
     }
-  }
 
-  handleKeyUp() {
-    const nativeInput = this.input.shadowRoot.querySelector('[part="input"]') as HTMLInputElement;
-    nativeInput.readOnly = false;
-  }
-
-  handleCut(event: Event) {
-    event.preventDefault();
-  }
-
-  handlePaste(event: Event) {
-    event.preventDefault();
+    // All other keys open the menu and initiate type to select
+    if (!this.isOpen) {
+      event.stopPropagation();
+      event.preventDefault();
+      this.dropdown.show();
+      this.menu.typeToSelect(event.key);
+    }
   }
 
   handleLabelClick() {
-    this.input.setFocus();
+    this.box.focus();
   }
 
   handleMenuSelect(event: CustomEvent) {
@@ -279,7 +280,6 @@ export class Select {
   handleMenuHide() {
     this.resizeObserver.unobserve(this.host);
     this.isOpen = false;
-    this.input.setFocus();
   }
 
   handleSlotChange() {
@@ -287,7 +287,7 @@ export class Select {
     this.reportDuplicateItemValues();
   }
 
-  handleTagClick(event: MouseEvent) {
+  handleTagInteraction(event: KeyboardEvent | MouseEvent) {
     // Don't toggle the menu when a tag's clear button is activated
     const path = event.composedPath() as Array<EventTarget>;
     const clearButton = path.find(el => {
@@ -298,12 +298,6 @@ export class Select {
     });
 
     if (clearButton) {
-      event.stopPropagation();
-    }
-  }
-
-  handleTagKeyDown(event: KeyboardEvent) {
-    if (event.key === 'Enter') {
       event.stopPropagation();
     }
   }
@@ -319,7 +313,7 @@ export class Select {
   }
 
   resizeMenu() {
-    this.menu.style.width = `${this.input.clientWidth}px`;
+    this.menu.style.width = `${this.box.clientWidth}px`;
   }
 
   syncItemsFromValue() {
@@ -342,12 +336,14 @@ export class Select {
             size={this.size}
             pill={this.pill}
             clearable
-            onClick={this.handleTagClick}
-            onKeyDown={this.handleTagKeyDown}
+            onClick={this.handleTagInteraction}
+            onKeyDown={this.handleTagInteraction}
             onSl-clear={event => {
               event.stopPropagation();
-              item.checked = false;
-              this.syncValueFromItems();
+              if (!this.disabled) {
+                item.checked = false;
+                this.syncValueFromItems();
+              }
             }}
           >
             {this.getItemLabel(item)}
@@ -357,6 +353,7 @@ export class Select {
 
       if (this.maxTagsVisible > 0 && this.displayTags.length > this.maxTagsVisible) {
         const total = this.displayTags.length;
+        this.displayLabel = '';
         this.displayTags = this.displayTags.slice(0, this.maxTagsVisible);
         this.displayTags.push(
           <sl-tag exportparts="base:tag" type="info" size={this.size}>
@@ -364,11 +361,6 @@ export class Select {
           </sl-tag>
         );
       }
-
-      // With `multiple`, the input uses the display label as its value. If no selection is made, we set it to an empty
-      // string. If items are selected, we use a zero-width space so `required` validation doesn't fail, but nothing is
-      // drawn in the label either. This is a bit ugly, but it gets the job done.
-      this.displayLabel = this.value.length === 0 ? '' : '\u200B';
     } else {
       const checkedItem = items.filter(item => item.value === value[0])[0];
       this.displayLabel = checkedItem ? this.getItemLabel(checkedItem) : '';
@@ -389,6 +381,8 @@ export class Select {
   }
 
   render() {
+    const hasSelection = this.multiple ? this.value.length > 0 : this.value !== '';
+
     return (
       <div
         part="form-control"
@@ -427,55 +421,71 @@ export class Select {
             'select--open': this.isOpen,
             'select--empty': this.value?.length === 0,
             'select--focused': this.hasFocus,
+            'select--clearable': this.clearable,
             'select--disabled': this.disabled,
             'select--multiple': this.multiple,
-            'select--has-tags': this.multiple && this.displayTags.length > 0,
+            'select--has-tags': this.multiple && hasSelection,
+            'select--placeholder-visible': this.displayLabel === '',
             'select--small': this.size === 'small',
             'select--medium': this.size === 'medium',
             'select--large': this.size === 'large',
-            'select--pill': this.pill
+            'select--pill': this.pill,
+            'select--invalid': this.invalid
           }}
           onSl-show={this.handleMenuShow}
           onSl-hide={this.handleMenuHide}
         >
-          <sl-input
+          <div
             slot="trigger"
-            exportparts="input, label, prefix, clear-button, suffix, help-text"
-            ref={el => (this.input = el)}
+            ref={el => (this.box = el)}
             id={this.inputId}
-            class="select__input"
-            name={this.name}
-            value={this.displayLabel}
-            disabled={this.disabled}
-            pill={this.pill}
-            placeholder={this.displayLabel === '' && this.displayTags.length === 0 ? this.placeholder : null}
-            size={this.size}
-            invalid={this.invalid}
-            clearable={this.clearable}
-            required={this.required}
-            autocapitalize="off"
-            autocomplete="off"
-            autocorrect="off"
+            class="select__box"
+            role="combobox"
             aria-labelledby={this.labelId}
             aria-describedby={this.helpTextId}
-            onSl-focus={this.handleFocus}
-            onSl-blur={this.handleBlur}
-            onSl-clear={this.handleClear}
+            aria-haspopup="true"
+            aria-expanded={this.isOpen ? 'true' : 'false'}
+            tabIndex={this.disabled ? -1 : 0}
+            onBlur={this.handleBlur}
+            onFocus={this.handleFocus}
             onKeyDown={this.handleKeyDown}
-            onKeyUp={this.handleKeyUp}
-            onCut={this.handleCut}
-            onPaste={this.handlePaste}
           >
-            {this.displayTags.length && (
-              <span part="tags" slot="prefix" class="select__tags">
-                {this.displayTags}
-              </span>
+            <div class="select__label">
+              {this.displayTags.length ? (
+                <span part="tags" class="select__tags">
+                  {this.displayTags}
+                </span>
+              ) : (
+                this.displayLabel || this.placeholder
+              )}
+            </div>
+
+            {this.clearable && hasSelection && (
+              <sl-icon-button
+                part="clear-button"
+                class="select__clear"
+                name="x-circle"
+                onClick={this.handleClearClick}
+                tabindex="-1"
+              />
             )}
 
-            <span part="icon" slot="suffix" class="select__icon">
+            <span part="icon" class="select__icon">
               <sl-icon name="chevron-down" />
             </span>
-          </sl-input>
+
+            {/* The hidden select tricks the browser's built-in validation so it works like <select> */}
+            <select
+              ref={el => (this.select = el)}
+              class="select__hidden-select"
+              aria-hidden="true"
+              required={this.required}
+              tabIndex={-1}
+            >
+              <option value="" selected={!hasSelection} />
+              <option value="1" selected={hasSelection} />
+            </select>
+          </div>
 
           <sl-menu ref={el => (this.menu = el)} part="menu" class="select__menu" onSl-select={this.handleMenuSelect}>
             <slot onSlotchange={this.handleSlotChange} />

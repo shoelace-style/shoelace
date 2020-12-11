@@ -1,75 +1,230 @@
 @import 'component';
 @import 'form-control-label';
 @import 'form-control-help-text';
+@import 'mixins/hidden';
 @import 'mixins/hide-scrollbar';
 
+/**
+ * @prop --focus-ring: The focus ring style to use when the control receives focus, a `box-shadow` property.
+ */
 :host {
+  --focus-ring: var(--sl-focus-ring-box-shadow);
+
   display: block;
 }
 
 .select {
-  width: 100%;
+  display: block;
 }
 
-.select__input {
-  flex: 1 1 auto;
+.select__box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: start;
+  position: relative;
   width: 100%;
+  font-family: var(--sl-input-font-family);
+  font-weight: var(--sl-input-font-weight);
+  letter-spacing: var(--sl-input-letter-spacing);
+  background-color: var(--sl-input-background-color);
+  border: solid var(--sl-input-border-width) var(--sl-input-border-color);
+  vertical-align: middle;
+  overflow: hidden;
+  transition: var(--sl-transition-fast) color, var(--sl-transition-fast) border, var(--sl-transition-fast) box-shadow;
+  cursor: pointer;
+}
 
-  &:not([disabled])::part(base) {
-    cursor: pointer;
+.select:not(.select--disabled) .select__box:hover {
+  background-color: var(--sl-input-background-color-hover);
+  border-color: var(--sl-input-border-color-hover);
+  color: var(--sl-input-color-hover);
+}
+
+.select:not(.select--disabled) .select__box:focus {
+  background-color: var(--sl-input-background-color-focus);
+  border-color: var(--sl-input-border-color-focus);
+  box-shadow: var(--focus-ring);
+  outline: none;
+  color: var(--sl-input-color-focus);
+}
+
+.select--disabled {
+  .select__box {
+    background-color: var(--sl-input-background-color-disabled);
+    border-color: var(--sl-input-border-color-disabled);
+    color: var(--sl-input-color-disabled);
+    opacity: 0.5;
+    cursor: not-allowed;
+    outline: none;
   }
 
-  // Hide the caret since we use a faux readonly technique to prevent user input
-  &::part(input) {
-    caret-color: transparent;
+  .select__tags,
+  .select__clear {
+    pointer-events: none;
+  }
+}
+
+.select__label {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  user-select: none;
+
+  @include hide-scrollbar;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+.select__clear {
+  flex: 0 0 auto;
+}
+
+.select__icon {
+  flex: 0 0 auto;
+  display: inline-flex;
+  transition: var(--sl-transition-medium) transform ease;
+}
+
+.select--open .select__icon {
+  transform: rotate(-180deg);
+}
+
+// Placeholder
+.select--placeholder-visible .select__label {
+  color: var(--sl-input-placeholder-color);
+}
+
+.select--disabled.select--placeholder-visible .select__label {
+  color: var(--sl-input-placeholder-color-disabled);
+}
+
+// Tags
+.select__tags {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: var(--sl-spacing-xx-small);
+}
+
+// Hidden input (for form control validation to show)
+.select__hidden-select {
+  @include visually-hidden();
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Size modifiers
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+.select--small {
+  .select__box {
+    border-radius: var(--sl-input-border-radius-small);
+    font-size: var(--sl-input-font-size-small);
+    height: var(--sl-input-height-small);
   }
 
-  span[slot='prefix'] {
-    margin-left: var(--sl-spacing-xx-small);
+  .select__label {
+    margin: 0 var(--sl-input-spacing-small);
+  }
 
+  .select__clear {
+    margin-right: var(--sl-input-spacing-small);
+  }
+
+  .select__icon {
+    margin-right: var(--sl-input-spacing-small);
+  }
+
+  .select__tags {
     sl-tag:not(:last-of-type) {
       margin-right: var(--sl-spacing-xx-small);
     }
   }
+
+  &.select--has-tags .select__label {
+    margin-left: 0;
+  }
 }
 
-.select__icon {
-  display: inline-flex;
-}
-.select__icon sl-icon {
-  transition: var(--sl-transition-medium) transform ease;
-}
-
-.select--open .select__icon sl-icon {
-  transform: rotate(-180deg);
-}
-
-// Force the input's clear button to show when the select isn't empty. This is important for the `multiple` option, as
-// it doesn't use the input's `value` prop to display the selection.
-.select:not(.select--empty) .select__input::part(clear-button) {
-  visibility: visible;
-}
-
-// For multiselect, ensure tags don't wrap and can be scrolled when the control's width is smaller than its contents. We
-// also need to make sure the clear button and the chevron icon always show.
-.select--multiple {
-  .select__input::part(input) {
-    flex: 1 1 0;
+.select--medium {
+  .select__box {
+    border-radius: var(--sl-input-border-radius-medium);
+    font-size: var(--sl-input-font-size-medium);
+    height: var(--sl-input-height-medium);
   }
 
-  .select__input::part(prefix) {
-    @include hide-scrollbar;
-    flex-shrink: 1;
-    overflow-x: auto;
-    white-space: nowrap;
+  .select__label {
+    margin: 0 var(--sl-input-spacing-medium);
   }
 
-  .select__input::part(clear-button),
-  .select__input::part(suffix) {
-    padding-left: var(--sl-spacing-x-small);
+  .select__clear {
+    margin-right: var(--sl-input-spacing-medium);
   }
 
-  &.select--has-tags .select__input::part(input) {
-    margin: 0;
+  .select__icon {
+    margin-right: var(--sl-input-spacing-medium);
+  }
+
+  .select__tags {
+    sl-tag:not(:last-of-type) {
+      margin-right: var(--sl-spacing-xx-small);
+    }
+  }
+
+  &.select--has-tags .select__label {
+    margin-left: 0;
+  }
+}
+
+.select--large {
+  .select__box {
+    border-radius: var(--sl-input-border-radius-large);
+    font-size: var(--sl-input-font-size-large);
+    height: var(--sl-input-height-large);
+  }
+
+  .select__label {
+    margin: 0 var(--sl-input-spacing-large);
+  }
+
+  .select__clear {
+    margin-right: var(--sl-input-spacing-large);
+  }
+
+  .select__icon {
+    margin-right: var(--sl-input-spacing-large);
+  }
+
+  .select__tags {
+    sl-tag:not(:last-of-type) {
+      margin-right: var(--sl-spacing-xx-small);
+    }
+  }
+
+  &.select--has-tags .select__label {
+    margin-left: 0;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Pill modifier
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+.select--pill {
+  &.select--small .select__box {
+    border-radius: var(--sl-input-height-small);
+  }
+
+  &.select--medium .select__box {
+    border-radius: var(--sl-input-height-medium);
+  }
+
+  &.select--large .select__box {
+    border-radius: var(--sl-input-height-large);
   }
 }
