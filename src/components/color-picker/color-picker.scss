@@ -297,19 +297,19 @@
   &.color-dropdown__trigger--small {
     width: var(--sl-input-height-small);
     height: var(--sl-input-height-small);
-    border-radius: var(--sl-input-border-radius-small);
+    border-radius: var(--sl-border-radius-circle);
   }
 
   &.color-dropdown__trigger--medium {
     width: var(--sl-input-height-medium);
     height: var(--sl-input-height-medium);
-    border-radius: var(--sl-input-border-radius-medium);
+    border-radius: var(--sl-border-radius-circle);
   }
 
   &.color-dropdown__trigger--large {
     width: var(--sl-input-height-large);
     height: var(--sl-input-height-large);
-    border-radius: var(--sl-input-border-radius-large);
+    border-radius: var(--sl-border-radius-circle);
   }
 
   &::before {
