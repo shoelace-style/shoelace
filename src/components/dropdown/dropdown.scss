@@ -30,6 +30,7 @@
   opacity: 0;
   overflow: auto;
   overscroll-behavior: none;
+  pointer-events: none;
   transform: scale(0.9);
   transition: var(--sl-transition-fast) opacity, var(--sl-transition-fast) transform;
 }
@@ -54,5 +55,6 @@
   &.popover-visible .dropdown__panel {
     opacity: 1;
     transform: none;
+    pointer-events: all;
   }
 }
