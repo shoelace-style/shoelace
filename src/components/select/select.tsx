@@ -31,12 +31,12 @@ let id = 0;
 export class Select {
   box: HTMLElement;
   dropdown: HTMLSlDropdownElement;
+  input: HTMLInputElement;
   inputId = `select-${++id}`;
   labelId = `select-label-${id}`;
   helpTextId = `select-help-text-${id}`;
   menu: HTMLSlMenuElement;
   resizeObserver: ResizeObserver;
-  select: HTMLSelectElement;
 
   @Element() host: HTMLSlSelectElement;
 
@@ -156,14 +156,14 @@ export class Select {
   /** Checks for validity and shows the browser's validation message if the control is invalid. */
   @Method()
   async reportValidity() {
-    return this.select.reportValidity();
+    return this.input.reportValidity();
   }
 
   /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
   @Method()
   async setCustomValidity(message: string) {
-    this.select.setCustomValidity(message);
-    this.invalid = !this.select.checkValidity();
+    this.input.setCustomValidity(message);
+    this.invalid = !this.input.checkValidity();
   }
 
   detectLabel() {
@@ -474,17 +474,18 @@ export class Select {
               <sl-icon name="chevron-down" />
             </span>
 
-            {/* The hidden select tricks the browser's built-in validation so it works like <select> */}
-            <select
-              ref={el => (this.select = el)}
+            {/*
+              The hidden input tricks the browser's built-in validation so it works as expected. We use an input instead
+              of a select because, otherwise, iOS will show a list of options during validation.
+            */}
+            <input
+              ref={el => (this.input = el)}
               class="select__hidden-select"
               aria-hidden="true"
               required={this.required}
+              value={hasSelection ? '1' : ''}
               tabIndex={-1}
-            >
-              <option value="" selected={!hasSelection} />
-              <option value="1" selected={hasSelection} />
-            </select>
+            />
           </div>
 
           <sl-menu ref={el => (this.menu = el)} part="menu" class="select__menu" onSl-select={this.handleMenuSelect}>
