@@ -12,7 +12,7 @@
   --grid-height: 200px;
   --grid-handle-size: 16px;
   --slider-height: 12px;
-  --slider-handle-size: 16px;
+  --slider-handle-size: 14px;
 
   display: inline-block;
 }
@@ -131,11 +131,17 @@
 
 .color-picker__preview {
   flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
-  width: var(--sl-input-height-small);
+  width: 3.125rem;
   height: var(--sl-input-height-small);
-  border-radius: 50%;
-  margin-left: var(--sl-spacing-medium);
+  border: none;
+  border-radius: var(--sl-input-border-radius-small);
+  background: none;
+  margin-left: var(--sl-spacing-small);
+  cursor: copy;
 
   &::before {
     content: '';
@@ -145,8 +151,15 @@
     width: 100%;
     height: 100%;
     border-radius: inherit;
-    background-color: currentColor;
     box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2);
+
+    // We use a custom property in lieu of currentColor because of https://bugs.webkit.org/show_bug.cgi?id=216780
+    background-color: var(--preview-color);
+  }
+
+  &:focus {
+    box-shadow: var(--sl-focus-ring-box-shadow);
+    outline: none;
   }
 }
 
@@ -156,8 +169,42 @@
   left: 0;
   width: 100%;
   height: 100%;
-  border-radius: inherit;
   border: solid 1px rgba(0, 0, 0, 0.125);
+}
+
+.color-picker__copy-feedback {
+  width: calc(var(--sl-input-height-small) / 2);
+  height: calc(var(--sl-input-height-small) / 2);
+  color: white;
+  background-color: rgba(0, 0, 0, 0.33);
+  border-radius: var(--sl-border-radius-circle);
+  opacity: 0;
+
+  &.color-picker__copy-feedback--visible {
+    animation: copied 1s;
+  }
+}
+
+@keyframes copied {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+
+  25% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
 }
 
 .color-picker__user-input {
@@ -170,13 +217,9 @@
   }
 
   sl-button {
-    flex: 0 0 auto;
-    margin-left: var(--sl-spacing-medium);
+    width: 3.125rem;
+    margin-left: var(--sl-spacing-small);
   }
-}
-
-.color-picker__copy-button {
-  cursor: copy;
 }
 
 .color-picker__swatches {
@@ -254,19 +297,19 @@
   &.color-dropdown__trigger--small {
     width: var(--sl-input-height-small);
     height: var(--sl-input-height-small);
-    border-radius: var(--sl-border-radius-circle);
+    border-radius: var(--sl-input-border-radius-small);
   }
 
   &.color-dropdown__trigger--medium {
     width: var(--sl-input-height-medium);
     height: var(--sl-input-height-medium);
-    border-radius: var(--sl-border-radius-circle);
+    border-radius: var(--sl-input-border-radius-medium);
   }
 
   &.color-dropdown__trigger--large {
     width: var(--sl-input-height-large);
     height: var(--sl-input-height-large);
-    border-radius: var(--sl-border-radius-circle);
+    border-radius: var(--sl-input-border-radius-large);
   }
 
   &::before {

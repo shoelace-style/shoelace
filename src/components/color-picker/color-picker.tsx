@@ -8,7 +8,6 @@ import { clamp } from '../../utilities/math';
  *
  * @part base - The component's base wrapper.
  * @part trigger - The color picker's dropdown trigger.
- * @part copy-button - The copy button.
  * @part swatches - The container that holds swatches.
  * @part swatch - Each individual swatch.
  * @part grid - The color grid.
@@ -19,7 +18,7 @@ import { clamp } from '../../utilities/math';
  * @part slider-handle - Hue and opacity slider handles.
  * @part preview - The preview color.
  * @part input - The text input.
- * @part copy-button - The copy button.
+ * @part format-button - The toggle format button.
  */
 
 @Component({
@@ -29,11 +28,11 @@ import { clamp } from '../../utilities/math';
 })
 export class ColorPicker {
   bypassValueParse = false;
-  copyButton: HTMLSlButtonElement;
   dropdown: HTMLSlDropdownElement;
+  input: HTMLSlInputElement;
   lastValueEmitted: string;
   menu: HTMLElement;
-  input: HTMLSlInputElement;
+  previewButton: HTMLButtonElement;
   trigger: HTMLButtonElement;
 
   @Element() host: HTMLSlColorPickerElement;
@@ -43,7 +42,7 @@ export class ColorPicker {
   @State() saturation = 100;
   @State() lightness = 100;
   @State() alpha = 100;
-  @State() showCopyCheckmark = false;
+  @State() showCopyFeedback = false;
 
   /** The current color. */
   @Prop({ mutable: true, reflect: true }) value = '#ffffff';
@@ -53,13 +52,16 @@ export class ColorPicker {
    * respectively. The color picker will always accept user input in any format (including CSS color names) and convert
    * it to the desired format.
    */
-  @Prop() format: 'hex' | 'rgb' | 'hsl' = 'hex';
+  @Prop({ mutable: true }) format: 'hex' | 'rgb' | 'hsl' = 'hex';
 
   /** Set to true to render the color picker inline rather than inside a dropdown. */
   @Prop() inline = false;
 
   /** Determines the size of the color picker's trigger. This has no effect on inline color pickers. */
   @Prop() size: 'small' | 'medium' | 'large' = 'medium';
+
+  /** Removes the format toggle. */
+  @Prop() noToggle = false;
 
   /** The input's name attribute. */
   @Prop({ reflect: true }) name = '';
@@ -123,6 +125,16 @@ export class ColorPicker {
   /** Emitted after the color picker closes and all transitions are complete. */
   @Event({ eventName: 'sl-after-hide' }) slAfterHide: EventEmitter;
 
+  @Watch('format')
+  handleFormatChange() {
+    this.syncValues();
+  }
+
+  @Watch('opacity')
+  handleOpacityChange() {
+    this.alpha = 100;
+  }
+
   @Watch('value')
   handleValueChange(newValue: string, oldValue: string) {
     if (!this.bypassValueParse) {
@@ -150,6 +162,7 @@ export class ColorPicker {
     this.handleAlphaInput = this.handleAlphaInput.bind(this);
     this.handleAlphaKeyDown = this.handleAlphaKeyDown.bind(this);
     this.handleCopy = this.handleCopy.bind(this);
+    this.handleFormatToggle = this.handleFormatToggle.bind(this);
     this.handleDocumentMouseDown = this.handleDocumentMouseDown.bind(this);
     this.handleDrag = this.handleDrag.bind(this);
     this.handleDropdownAfterHide = this.handleDropdownAfterHide.bind(this);
@@ -175,6 +188,35 @@ export class ColorPicker {
     this.inputValue = this.value;
     this.lastValueEmitted = this.value;
     this.syncValues();
+  }
+
+  /** Returns the current value as a string in the specified format. */
+  @Method()
+  async getFormattedValue(format: 'hex' | 'hexa' | 'rgb' | 'rgba' | 'hsl' | 'hsla' = 'hex') {
+    const currentColor = this.parseColor(
+      `hsla(${this.hue}, ${this.saturation}%, ${this.lightness}%, ${this.alpha / 100})`
+    );
+
+    if (!currentColor) {
+      return '';
+    }
+
+    switch (format) {
+      case 'hex':
+        return currentColor.hex;
+      case 'hexa':
+        return currentColor.hexa;
+      case 'rgb':
+        return currentColor.rgb.string;
+      case 'rgba':
+        return currentColor.rgba.string;
+      case 'hsl':
+        return currentColor.hsl.string;
+      case 'hsla':
+        return currentColor.hsla.string;
+      default:
+        return '';
+    }
   }
 
   /** Checks for validity and shows the browser's validation message if the control is invalid. */
@@ -208,10 +250,16 @@ export class ColorPicker {
   handleCopy() {
     this.input.select().then(() => {
       document.execCommand('copy');
-      this.copyButton.setFocus();
-      this.showCopyCheckmark = true;
-      setTimeout(() => (this.showCopyCheckmark = false), 1000);
+      this.previewButton.focus();
+      this.showCopyFeedback = true;
+      this.previewButton.addEventListener('animationend', () => (this.showCopyFeedback = false), { once: true });
     });
+  }
+
+  handleFormatToggle() {
+    const formats = ['hex', 'rgb', 'hsl'];
+    const nextIndex = (formats.indexOf(this.format) + 1) % formats.length;
+    this.format = formats[nextIndex] as 'hex' | 'rgb' | 'hsl';
   }
 
   handleHueInput(event: Event) {
@@ -435,6 +483,7 @@ export class ColorPicker {
   handleDropdownAfterHide(event: CustomEvent) {
     event.stopPropagation();
     this.slAfterHide.emit();
+    this.showCopyFeedback = false;
   }
 
   normalizeColorString(colorString: string) {
@@ -582,6 +631,7 @@ export class ColorPicker {
   }
 
   setLetterCase(string: string) {
+    if (typeof string !== 'string') return '';
     return this.uppercase ? string.toUpperCase() : string.toLowerCase();
   }
 
@@ -713,13 +763,25 @@ export class ColorPicker {
               )}
             </div>
 
-            <div
+            <button
+              ref={el => (this.previewButton = el)}
+              type="button"
               part="preview"
               class="color-picker__preview color-picker__transparent-bg"
               style={{
-                color: `hsla(${this.hue}deg, ${this.saturation}%, ${this.lightness}%, ${this.alpha / 100})`
+                '--preview-color': `hsla(${this.hue}deg, ${this.saturation}%, ${this.lightness}%, ${this.alpha / 100})`
               }}
-            />
+              onClick={this.handleCopy}
+            >
+              <sl-icon
+                name="check"
+                class={{
+                  'color-picker__copy-feedback': true,
+                  'color-picker__copy-feedback--visible': this.showCopyFeedback,
+                  'color-picker__copy-feedback--dark': this.lightness > 50
+                }}
+              />
+            </button>
           </div>
 
           <div class="color-picker__user-input">
@@ -738,17 +800,12 @@ export class ColorPicker {
               onKeyDown={this.handleInputKeyDown}
               onSl-change={this.handleInputChange}
             />
-            <sl-button
-              ref={el => (this.copyButton = el)}
-              exportparts="base:copy-button"
-              slot="suffix"
-              class="color-picker__copy-button"
-              size="small"
-              circle
-              onClick={this.handleCopy}
-            >
-              <sl-icon name={this.showCopyCheckmark ? 'check2' : 'clipboard'} />
-            </sl-button>
+
+            {!this.noToggle && (
+              <sl-button part="format-button" size="small" onClick={this.handleFormatToggle}>
+                {this.setLetterCase(this.format)}
+              </sl-button>
+            )}
           </div>
 
           {this.swatches && (

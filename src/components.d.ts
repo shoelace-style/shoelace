@@ -269,6 +269,10 @@ export namespace Components {
          */
         "format": 'hex' | 'rgb' | 'hsl';
         /**
+          * Returns the current value as a string in the specified format.
+         */
+        "getFormattedValue": (format?: 'hex' | 'hexa' | 'rgb' | 'rgba' | 'hsl' | 'hsla') => Promise<string>;
+        /**
           * Enable this option to prevent the panel from being clipped when the component is placed inside a container with `overflow: auto|scroll`.
          */
         "hoist": boolean;
@@ -284,6 +288,10 @@ export namespace Components {
           * The input's name attribute.
          */
         "name": string;
+        /**
+          * Removes the format toggle.
+         */
+        "noToggle": boolean;
         /**
           * Whether to show the opacity slider.
          */
@@ -1916,6 +1924,10 @@ declare namespace LocalJSX {
          */
         "name"?: string;
         /**
+          * Removes the format toggle.
+         */
+        "noToggle"?: boolean;
+        /**
           * Emitted after the color picker closes and all transitions are complete.
          */
         "onSl-after-hide"?: (event: CustomEvent<any>) => void;
@@ -2689,7 +2701,7 @@ declare namespace LocalJSX {
          */
         "name"?: string;
         /**
-          * Emitted when the control loses focus
+          * Emitted when the control loses focus.
          */
         "onSl-blur"?: (event: CustomEvent<any>) => void;
         /**
@@ -2697,7 +2709,7 @@ declare namespace LocalJSX {
          */
         "onSl-change"?: (event: CustomEvent<any>) => void;
         /**
-          * Emitted when the control gains focus
+          * Emitted when the control gains focus.
          */
         "onSl-focus"?: (event: CustomEvent<any>) => void;
         /**
