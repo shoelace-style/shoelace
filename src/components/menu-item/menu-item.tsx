@@ -37,8 +37,8 @@ export class MenuItem {
   connectedCallback() {
     this.handleBlur = this.handleBlur.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
-    this.handleMouseOver = this.handleMouseOver.bind(this);
-    this.handleMouseOut = this.handleMouseOut.bind(this);
+    this.handleMouseEnter = this.handleMouseEnter.bind(this);
+    this.handleMouseLeave = this.handleMouseLeave.bind(this);
   }
 
   /** Sets focus on the button. */
@@ -61,11 +61,11 @@ export class MenuItem {
     this.hasFocus = true;
   }
 
-  handleMouseOver() {
+  handleMouseEnter() {
     this.setFocus();
   }
 
-  handleMouseOut() {
+  handleMouseLeave() {
     this.removeFocus();
   }
 
@@ -86,8 +86,8 @@ export class MenuItem {
         tabIndex={!this.disabled ? 0 : null}
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
-        onMouseOver={this.handleMouseOver}
-        onMouseOut={this.handleMouseOut}
+        onMouseEnter={this.handleMouseEnter}
+        onMouseLeave={this.handleMouseLeave}
       >
         <span part="checked-icon" class="menu-item__check">
           <sl-icon name="check2" aria-hidden="true" />
