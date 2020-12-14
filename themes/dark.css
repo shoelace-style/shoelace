@@ -232,19 +232,19 @@
 }
 
 /* Color picker */
-.sl-theme-dark sl-color-picker::part(copy-button) {
+.sl-theme-dark sl-color-picker::part(format-button) {
   background-color: var(--sl-color-gray-10);
   border-color: var(--sl-color-gray-30);
   color: var(--sl-color-gray-60);
 }
 
-.sl-theme-dark sl-color-picker::part(copy-button):hover {
+.sl-theme-dark sl-color-picker::part(format-button):hover {
   background-color: var(--sl-color-primary-15);
   border-color: var(--sl-color-primary-30);
   color: var(--sl-color-primary-60);
 }
 
-.sl-theme-dark sl-color-picker::part(copy-button):focus {
+.sl-theme-dark sl-color-picker::part(format-button):focus {
   background-color: var(--sl-color-primary-15);
   border-color: var(--sl-color-primary-30);
   color: var(--sl-color-primary-60);
@@ -252,7 +252,7 @@
     hsla(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%, var(--sl-focus-ring-alpha));
 }
 
-.sl-theme-dark sl-color-picker::part(copy-button):active {
+.sl-theme-dark sl-color-picker::part(format-button):active {
   background-color: var(--sl-color-primary-15);
   border-color: var(--sl-color-primary-40);
   color: var(--sl-color-primary-70);

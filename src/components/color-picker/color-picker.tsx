@@ -18,7 +18,7 @@ import { clamp } from '../../utilities/math';
  * @part slider-handle - Hue and opacity slider handles.
  * @part preview - The preview color.
  * @part input - The text input.
- * @part format-button - The toggle format button.
+ * @part format-button - The toggle format button's base.
  */
 
 @Component({
@@ -802,7 +802,7 @@ export class ColorPicker {
             />
 
             {!this.noToggle && (
-              <sl-button part="format-button" size="small" onClick={this.handleFormatToggle}>
+              <sl-button exportparts="base:format-button" size="small" onClick={this.handleFormatToggle}>
                 {this.setLetterCase(this.format)}
               </sl-button>
             )}
