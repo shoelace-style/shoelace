@@ -4,7 +4,7 @@
 
 Icons are symbols that can be used to represent various options within an application.
 
-Shoelace comes bundled with over 1,100 icons courtesy of the [Bootstrap Icons](https://icons.getbootstrap.com/) project. If you prefer, you can also register [custom icon libraries](/components/icon-library.md).
+Shoelace comes bundled with over 1,200 icons courtesy of the [Bootstrap Icons](https://icons.getbootstrap.com/) project. If you prefer, you can also register [custom icon libraries](/components/icon-library.md).
 
 Click or tap on an icon below to copy its name and use it like this.
 
