@@ -142,6 +142,7 @@ Custom icons can be loaded individually with the `src` attribute. Only SVGs on a
   }
 
   .icon-search-controls sl-select {
+    width: 10rem;
     flex: 0 0 auto;
     margin-left: 1rem;
   }
@@ -202,15 +203,6 @@ Custom icons can be loaded individually with the `src` attribute. Only SVGs on a
   }
 
   @media screen and (max-width: 1000px) {
-    .icon-search-controls {
-      display: block;
-    }
-
-    .icon-search-controls sl-select {
-      margin-left: 0;
-      margin-top: 1rem;
-    }
-
     .icon-list {
       grid-template-columns: repeat(8, 1fr);
     }
