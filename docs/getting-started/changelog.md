@@ -16,6 +16,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug where moving the mouse while `sl-dropdown` is closing would remove focus from the trigger
 - Fixed a bug where `sl-menu-item` didn't set a default color in the dark theme
 - Fixed a bug where `sl-color-picker` preview wouldn't update in Safari
+- Fixed a bug where removing an icon's `name` or `src` wouldn't remove the previously rendered SVG [#285](https://github.com/shoelace-style/shoelace/issues/285)
 - Removed `sl-blur` and `sl-focus` events from `sl-menu` since menus can't have focus as of 2.0.0-beta.22
 - Updated to Bootstrap Icons 1.2.1
 

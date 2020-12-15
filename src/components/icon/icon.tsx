@@ -109,6 +109,9 @@ export class Icon {
       } catch {
         this.slError.emit();
       }
+    } else if (this.svg) {
+      // If we can't resolve a URL and an icon was previously set, remove it
+      this.svg = null;
     }
   }
 
