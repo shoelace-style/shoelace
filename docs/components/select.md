@@ -130,6 +130,37 @@ Use the `size` attribute to change a select's size.
 </sl-select>
 ```
 
+### Selecting Options Programmatically
+
+The `value` prop is bound to the current selection. As the selection changes, so will the value. To programmatically manage the selection, update the `value` property.
+
+```html preview
+<div class="selecting-example">
+  <sl-select placeholder="">
+    <sl-menu-item value="option-1">Option 1</sl-menu-item>
+    <sl-menu-item value="option-2">Option 2</sl-menu-item>
+    <sl-menu-item value="option-3">Option 3</sl-menu-item>
+  </sl-select>
+
+  <br>
+
+  <sl-button data-option="option-1">Set 1</sl-button>
+  <sl-button data-option="option-2">Set 2</sl-button>
+  <sl-button data-option="option-3">Set 3</sl-button>
+</div>
+
+<script>
+  const container = document.querySelector('.selecting-example');
+  const select = container.querySelector('sl-select');
+
+  [...container.querySelectorAll('sl-button')].map(button => {
+    button.addEventListener('click', () => {
+      select.value = button.dataset.option; 
+    });
+  });
+</script>
+```
+
 ### Labels
 
 Use the `label` attribute to give the select an accessible label.
