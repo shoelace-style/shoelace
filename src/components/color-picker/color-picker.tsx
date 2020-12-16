@@ -229,7 +229,7 @@ export class ColorPicker {
           'sl-after-show',
           () => {
             this.input.reportValidity();
-            resolve();
+            resolve(null);
           },
           { once: true }
         );
