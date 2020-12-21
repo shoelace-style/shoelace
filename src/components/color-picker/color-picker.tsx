@@ -61,7 +61,7 @@ export class ColorPicker {
   @Prop() size: 'small' | 'medium' | 'large' = 'medium';
 
   /** Removes the format toggle. */
-  @Prop() noToggle = false;
+  @Prop() noFormatToggle = false;
 
   /** The input's name attribute. */
   @Prop({ reflect: true }) name = '';
@@ -801,7 +801,7 @@ export class ColorPicker {
               onSl-change={this.handleInputChange}
             />
 
-            {!this.noToggle && (
+            {!this.noFormatToggle && (
               <sl-button exportparts="base:format-button" size="small" onClick={this.handleFormatToggle}>
                 {this.setLetterCase(this.format)}
               </sl-button>
