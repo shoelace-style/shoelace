@@ -1,4 +1,5 @@
-import { Component, Event, EventEmitter, Method, Prop, State, h } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, Method, Prop, State, h } from '@stencil/core';
+import { hasSlot } from '../../utilities/slot';
 
 /**
  * @since 2.0
@@ -23,7 +24,12 @@ import { Component, Event, EventEmitter, Method, Prop, State, h } from '@stencil
 export class Button {
   button: HTMLButtonElement;
 
+  @Element() host: HTMLSlButtonElement;
+
   @State() hasFocus = false;
+  @State() hasLabel = false;
+  @State() hasPrefix = false;
+  @State() hasSuffix = false;
 
   /** The button's type. */
   @Prop({ reflect: true }) type: 'default' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text' = 'default';
@@ -74,6 +80,11 @@ export class Button {
     this.handleBlur = this.handleBlur.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handleSlotChange = this.handleSlotChange.bind(this);
+  }
+
+  componentWillLoad() {
+    this.handleSlotChange();
   }
 
   /** Sets focus on the button. */
@@ -86,6 +97,12 @@ export class Button {
   @Method()
   async removeFocus() {
     this.button.blur();
+  }
+
+  handleSlotChange() {
+    this.hasLabel = hasSlot(this.host);
+    this.hasPrefix = hasSlot(this.host, 'prefix');
+    this.hasSuffix = hasSlot(this.host, 'suffix');
   }
 
   handleBlur() {
@@ -137,7 +154,10 @@ export class Button {
           'button--disabled': this.disabled,
           'button--focused': this.hasFocus,
           'button--loading': this.loading,
-          'button--pill': this.pill
+          'button--pill': this.pill,
+          'button--has-label': this.hasLabel,
+          'button--has-prefix': this.hasPrefix,
+          'button--has-suffix': this.hasSuffix
         }}
         disabled={isButton ? this.disabled : null}
         type={isButton ? (this.submit ? 'submit' : 'button') : null}
@@ -152,13 +172,13 @@ export class Button {
         onClick={this.handleClick}
       >
         <span part="prefix" class="button__prefix">
-          <slot name="prefix" />
+          <slot onSlotchange={this.handleSlotChange} name="prefix" />
         </span>
         <span part="label" class="button__label">
-          <slot />
+          <slot onSlotchange={this.handleSlotChange} />
         </span>
         <span part="suffix" class="button__suffix">
-          <slot name="suffix" />
+          <slot onSlotchange={this.handleSlotChange} name="suffix" />
         </span>
         {this.caret && (
           <span part="caret" class="button__caret">

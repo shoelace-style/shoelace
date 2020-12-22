@@ -91,6 +91,24 @@ As expected, buttons can be given a custom width by setting its `width`. This is
 Use the `prefix` and `suffix` slots to add icons.
 
 ```html preview
+<sl-button type="default" size="small">
+  <sl-icon slot="prefix" name="gear"></sl-icon>
+  Settings
+</sl-button>
+
+<sl-button type="default" size="small">
+  <sl-icon slot="suffix" name="arrow-counterclockwise"></sl-icon>
+  Refresh
+</sl-button>
+
+<sl-button type="default" size="small">
+  <sl-icon slot="prefix" name="link-45deg"></sl-icon>
+  <sl-icon slot="suffix" name="box-arrow-up-right"></sl-icon>
+  Open
+</sl-button>
+
+<br><br>
+
 <sl-button type="default">
   <sl-icon slot="prefix" name="gear"></sl-icon>
   Settings
@@ -102,6 +120,24 @@ Use the `prefix` and `suffix` slots to add icons.
 </sl-button>
 
 <sl-button type="default">
+  <sl-icon slot="prefix" name="link-45deg"></sl-icon>
+  <sl-icon slot="suffix" name="box-arrow-up-right"></sl-icon>
+  Open
+</sl-button>
+
+<br><br>
+
+<sl-button type="default" size="large">
+  <sl-icon slot="prefix" name="gear"></sl-icon>
+  Settings
+</sl-button>
+
+<sl-button type="default" size="large">
+  <sl-icon slot="suffix" name="arrow-counterclockwise"></sl-icon>
+  Refresh
+</sl-button>
+
+<sl-button type="default" size="large">
   <sl-icon slot="prefix" name="link-45deg"></sl-icon>
   <sl-icon slot="suffix" name="box-arrow-up-right"></sl-icon>
   Open
@@ -142,6 +178,24 @@ Use the `disabled` prop to disable a button. Clicks will be suppressed until the
 <sl-button type="info" disabled>Info</sl-button>
 <sl-button type="warning" disabled>Warning</sl-button>
 <sl-button type="danger" disabled>Danger</sl-button>
+```
+
+### Split Buttons
+
+Create a split button using a [button group](/components/button-group) and a [dropdown](/components/dropdown).
+
+```html preview
+<sl-button-group> 
+  <sl-button>Save</sl-button>
+  <sl-dropdown placement="bottom-end">
+    <sl-button slot="trigger" caret></sl-button>
+    <sl-menu>
+      <sl-menu-item>Save</sl-menu-item>
+      <sl-menu-item>Save as&hellip;</sl-menu-item>
+      <sl-menu-item>Save all</sl-menu-item>
+    </sl-menu>
+  </sl-dropdown>
+</sl-button-group>
 ```
 
 [component-metadata:sl-button]

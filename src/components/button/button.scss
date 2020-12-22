@@ -19,6 +19,7 @@
   user-select: none;
   white-space: nowrap;
   vertical-align: middle;
+  padding: 0;
   transition: var(--sl-transition-fast) background-color, var(--sl-transition-fast) color,
     var(--sl-transition-fast) border, var(--sl-transition-fast) box-shadow;
   cursor: inherit;
@@ -55,13 +56,13 @@
 }
 
 .button__prefix ::slotted(:first-child) {
-  margin-left: calc(-1 * var(--sl-spacing-x-small));
-  margin-right: var(--sl-spacing-x-small);
+  // margin-left: calc(-1 * var(--sl-spacing-x-small));
+  // margin-right: var(--sl-spacing-x-small);
 }
 
 .button__suffix ::slotted(:last-child) {
-  margin-left: var(--sl-spacing-x-small);
-  margin-right: calc(-1 * var(--sl-spacing-x-small));
+  // margin-left: var(--sl-spacing-x-small);
+  // margin-right: calc(-1 * var(--sl-spacing-x-small));
 }
 
 .button__label {
@@ -264,7 +265,6 @@
   height: var(--sl-input-height-small);
   line-height: calc(var(--sl-input-height-small) - var(--sl-input-border-width) * 2);
   border-radius: var(--sl-input-border-radius-small);
-  padding: 0 var(--sl-spacing-medium);
 }
 
 .button--medium {
@@ -272,7 +272,6 @@
   height: var(--sl-input-height-medium);
   line-height: calc(var(--sl-input-height-medium) - var(--sl-input-border-width) * 2);
   border-radius: var(--sl-input-border-radius-medium);
-  padding: 0 var(--sl-spacing-large);
 }
 
 .button--large {
@@ -280,7 +279,6 @@
   height: var(--sl-input-height-large);
   line-height: calc(var(--sl-input-height-large) - var(--sl-input-border-width) * 2);
   border-radius: var(--sl-input-border-radius-large);
-  padding: 0 var(--sl-spacing-x-large);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -343,8 +341,6 @@
   .button__caret {
     display: flex;
     align-items: center;
-    margin-left: var(--sl-spacing-xx-small);
-    margin-right: calc(-1 * var(--sl-spacing-xx-small));
 
     svg {
       width: 1em;
@@ -388,4 +384,75 @@
   right: 0;
   transform: translateY(-50%) translateX(50%);
   pointer-events: none;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Button spacing
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+.button--has-label {
+  &.button--small .button__label {
+    padding: 0 var(--sl-spacing-small);
+  }
+
+  &.button--medium .button__label {
+    padding: 0 var(--sl-spacing-medium);
+  }
+
+  &.button--large .button__label {
+    padding: 0 var(--sl-spacing-large);
+  }
+}
+
+.button--has-prefix {
+  &.button--small {
+    padding-left: var(--sl-spacing-x-small);
+
+    .button__label {
+      padding-left: var(--sl-spacing-x-small);
+    }
+  }
+
+  &.button--medium {
+    padding-left: var(--sl-spacing-small);
+
+    .button__label {
+      padding-left: var(--sl-spacing-small);
+    }
+  }
+
+  &.button--large {
+    padding-left: var(--sl-spacing-small);
+
+    .button__label {
+      padding-left: var(--sl-spacing-small);
+    }
+  }
+}
+
+.button--has-suffix,
+.button--caret {
+  &.button--small {
+    padding-right: var(--sl-spacing-x-small);
+
+    .button__label {
+      padding-right: var(--sl-spacing-x-small);
+    }
+  }
+
+  &.button--medium {
+    padding-right: var(--sl-spacing-small);
+
+    .button__label {
+      padding-right: var(--sl-spacing-small);
+    }
+  }
+
+  &.button--large {
+    padding-right: var(--sl-spacing-small);
+
+    .button__label {
+      padding-right: var(--sl-spacing-small);
+    }
+  }
 }
