@@ -37,8 +37,28 @@ export function getTextContent(slot: HTMLSlotElement): string {
 }
 
 //
-// Determines whether a slot with the given name exists in an element.
+// Determines whether an element has a slot. If name is specified, the function will look for a corresponding named
+// slot, otherwise it will look for a "default" slot (e.g. a non-empty text node or an element with no slot attribute).
 //
-export function hasSlot(el: HTMLElement, name: string) {
-  return el.querySelector(`[slot="${name}"]`) !== null;
+export function hasSlot(el: HTMLElement, name?: string) {
+  // Look for a named slot
+  if (name) {
+    return el.querySelector(`[slot="${name}"]`) !== null;
+  }
+
+  // Look for a default slot
+  return [...el.childNodes].some(node => {
+    if (node.nodeType === node.TEXT_NODE && node.textContent.trim() !== '') {
+      return true;
+    }
+
+    if (node.nodeType === node.ELEMENT_NODE) {
+      const el = node as HTMLElement;
+      if (!el.hasAttribute('slot')) {
+        return true;
+      }
+    }
+
+    return false;
+  });
 }
