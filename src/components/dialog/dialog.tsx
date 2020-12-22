@@ -89,6 +89,8 @@ export class Dialog {
   }
 
   componentWillLoad() {
+    this.handleSlotChange();
+
     // Show on init if open
     if (this.open) {
       this.show();

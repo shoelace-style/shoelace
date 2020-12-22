@@ -27,6 +27,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug where disabled link buttons didn't appear disabled
 - Improved elevation tokens in dark theme
 - Improved accessibility in `sl-tooltip` by allowing escape to dismiss it [#219](https://github.com/shoelace-style/shoelace/issues/219)
+- Improved slot detection in `sl-card`, `sl-dialog`, and `sl-drawer`
 - Removed `sl-blur` and `sl-focus` events from `sl-menu` since menus can't have focus as of 2.0.0-beta.22
 - Updated `sl-spinner` so the indicator is more obvious 
 - Updated to Bootstrap Icons 1.2.1

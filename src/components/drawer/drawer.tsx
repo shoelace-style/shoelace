@@ -97,6 +97,8 @@ export class Drawer {
   }
 
   componentWillLoad() {
+    this.handleSlotChange();
+
     // Show on init if open
     if (this.open) {
       this.show();

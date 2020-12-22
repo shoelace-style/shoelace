@@ -33,6 +33,10 @@ export class Card {
     this.handleSlotChange = this.handleSlotChange.bind(this);
   }
 
+  componentWillLoad() {
+    this.handleSlotChange();
+  }
+
   handleSlotChange() {
     this.hasFooter = hasSlot(this.host, 'footer');
     this.hasImage = hasSlot(this.host, 'image');
