@@ -100,7 +100,7 @@ Pill buttons are supported through the button's `pill` attribute.
 
 ### Dropdowns in Button Groups
 
-Dropdowns can be placed inside button groups as long as the trigger is a `<sl-dropdown>` element.
+Dropdowns can be placed inside button groups as long as the trigger is a `<sl-button>` element.
 
 ```html preview
 <sl-button-group> 
