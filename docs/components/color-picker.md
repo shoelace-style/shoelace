@@ -22,7 +22,7 @@ Use the `opacity` attribute to enable the opacity slider. When this is enabled, 
 
 Set the color picker's format with the `format` attribute. Valid options include `hex`, `rgb`, and `hsl`. Note that the color picker's input will accept any parsable format (including CSS color names) regardless of this option.
 
-To prevent users from toggling the format themselves, add the `no-toggle` attribute.
+To prevent users from toggling the format themselves, add the `no-format-toggle` attribute.
 
 ```html preview
 <sl-color-picker format="hex" value="#4a90e2"></sl-color-picker>

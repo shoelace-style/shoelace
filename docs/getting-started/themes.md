@@ -12,7 +12,7 @@ To install the dark theme, add the following to the `<head>` section of your app
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/themes/dark.css">
 ```
 
-**Themes must be activated after importing!** You can do this with the [`<sl-theme>`](/components/theme.md) component. Only the contents of `<sl-theme>` will inherit the theme's styles.
+**Themes must be activated after importing!** You can do this with the [`<sl-theme>`](/components/theme.md) component. Only the elements inside of `<sl-theme>` will inherit the theme's styles.
 
 ```html
 <sl-button>Light Mode</sl-button>
@@ -52,10 +52,10 @@ Every selector in a theme must be scoped to the theme's class to ensure interope
 
 ```css
 .sl-theme-purple-power { 
-  --sl-color-primary-hue: 290;
-  --sl-color-primary-saturation: 80%;
-
-  /* more design token customizations here */
+  --sl-color-primary-50: #faf5ff;
+  --sl-color-primary-100: #f3e8ff;
+  --sl-color-primary-200: #e9d5ff;
+  /* ... */
 }
 ```
 

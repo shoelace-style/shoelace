@@ -8,6 +8,13 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
+- 🚨 BREAKING CHANGE: Reworked color tokens
+  - Theme colors are now inspired by Tailwind's professionally-designed color palette
+  - Color token variations now range from 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950
+  - Color token variations were inverted, e.g. 50 is lightest and 950 is darkest
+  - All component styles were adapted to use the new color tokens, but visual changes are subtle
+  - The dark theme was adapted use the new color tokens
+  - HSL is no longer used because it is not perceptually uniform (this may be revisited when all browsers support [LCH colors](https://lea.verou.me/2020/04/lch-colors-in-css-what-why-and-how/))
 - 🚨 BREAKING CHANGE: Refactored `sl-select` to improve accessibility [#216](https://github.com/shoelace-style/shoelace/issues/216)
   - Removed the internal `sl-input` because it was causing problems with a11y and virtual keyboards
   - Removed `input`, `prefix` and `suffix` parts
@@ -17,7 +24,10 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug where `sl-menu-item` didn't set a default color in the dark theme
 - Fixed a bug where `sl-color-picker` preview wouldn't update in Safari
 - Fixed a bug where removing an icon's `name` or `src` wouldn't remove the previously rendered SVG [#285](https://github.com/shoelace-style/shoelace/issues/285)
+- Fixed a bug where disabled link buttons didn't appear disabled
+- Improved elevation tokens in dark theme
 - Removed `sl-blur` and `sl-focus` events from `sl-menu` since menus can't have focus as of 2.0.0-beta.22
+- Updated `sl-spinner` so the indicator is more obvious 
 - Updated to Bootstrap Icons 1.2.1
 
 ## 2.0.0-beta.24

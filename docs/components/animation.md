@@ -19,7 +19,7 @@ To animate an element, wrap it in `<sl-animation>` and set a `name` and `duratio
     display: inline-block;
     width: 100px;
     height: 100px;
-    background-color: var(--sl-color-primary-50);
+    background-color: var(--sl-color-primary-500);
     margin: 1.5rem;
   }
 </style>
@@ -83,7 +83,7 @@ This example demonstrates all of the baked-in animations and easings. All animat
   .animation-sandbox .box {
     width: 100px;
     height: 100px;
-    background-color: var(--sl-color-primary-50);
+    background-color: var(--sl-color-primary-500);
   }
 
   .animation-sandbox .controls {
@@ -130,7 +130,7 @@ Use an [Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/
     display: inline-block;
     width: 100px;
     height: 100px;
-    background-color: var(--sl-color-primary-50);
+    background-color: var(--sl-color-primary-500);
   }  
 </style>
 ```
@@ -160,7 +160,7 @@ Supply your own [keyframe formats](https://developer.mozilla.org/en-US/docs/Web/
   .animation-keyframes .box {
     width: 100px;
     height: 100px;
-    background-color: var(--sl-color-primary-50);
+    background-color: var(--sl-color-primary-500);
   }
 </style>
 ```

@@ -1,25 +1,34 @@
+/* Elevation tokens */
 .sl-theme-dark {
-  background: var(--sl-color-gray-10);
-  color: var(--sl-color-gray-80);
+  --sl-shadow-x-small: 0 1px 0 #6b72800d;
+  --sl-shadow-small: 0 1px 2px #6b72801a;
+  --sl-shadow-medium: 0 2px 4px #6b72801a;
+  --sl-shadow-large: 0 2px 8px #6b72801a;
+  --sl-shadow-x-large: 0 4px 16px #6b72801a;
+}
+
+.sl-theme-dark {
+  background: var(--sl-color-gray-900);
+  color: var(--sl-color-gray-200);
 }
 
 /* Sidebar **/
 .sl-theme-dark .sidebar {
-  background: var(--sl-color-gray-10);
-  border-right-color: var(--sl-color-gray-15);
+  background: var(--sl-color-gray-900);
+  border-right-color: var(--sl-color-gray-900);
 }
 
 .sl-theme-dark .sidebar li > p {
   color: var(--sl-color-white);
-  border-bottom-color: var(--sl-color-gray-20);
+  border-bottom-color: var(--sl-color-gray-800);
 }
 
 .sl-theme-dark .sidebar-toggle {
-  background-color: hsla(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 10%, 0.8);
+  background-color: var(--sl-color-gray-900);
 }
 
 .sl-theme-dark .docsify-pagination-container {
-  border-top-color: var(--sl-color-gray-20) !important;
+  border-top-color: var(--sl-color-gray-800) !important;
 }
 
 /* Search */
@@ -38,7 +47,7 @@
 }
 
 .sl-theme-dark .sidebar .clear-button {
-  color: var(--sl-color-gray-30);
+  color: var(--sl-color-gray-700);
 }
 
 .sl-theme-dark .sidebar .clear-button svg circle {
@@ -47,7 +56,7 @@
 
 /* Content */
 .sl-theme-dark .component-header {
-  border-bottom-color: var(--sl-color-gray-20);
+  border-bottom-color: var(--sl-color-gray-800);
 }
 
 .sl-theme-dark .anchor span {
@@ -55,73 +64,78 @@
 }
 
 .sl-theme-dark .markdown-section h2 {
-  border-bottom-color: var(--sl-color-gray-20);
+  border-bottom-color: var(--sl-color-gray-800);
 }
 
 .sl-theme-dark .markdown-section blockquote {
-  border-left-color: var(--sl-color-gray-20);
+  border-left-color: var(--sl-color-gray-800);
 }
 
 .sl-theme-dark .markdown-section kbd {
-  border-color: var(--sl-color-gray-20);
+  border-color: var(--sl-color-gray-800);
 }
 
 /* Tables */
 .sl-theme-dark .markdown-section tr:nth-child(2n) {
-  background: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 13%);
+  background: var(--sl-color-gray-950);
 }
 
 .sl-theme-dark .markdown-section td {
-  border-top-color: var(--sl-color-gray-20);
-  border-bottom-color: var(--sl-color-gray-20);
+  border-top-color: var(--sl-color-gray-800);
+  border-bottom-color: var(--sl-color-gray-800);
 }
 
 .sl-theme-dark .markdown-section table .attribute-tooltip {
-  border-bottom-color: var(--sl-color-gray-30);
+  border-bottom-color: var(--sl-color-gray-700);
 }
 
 /* Tips & warnings */
 .sl-theme-dark .markdown-section p.tip,
 .sl-theme-dark .markdown-section p.warn {
-  background-color: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 13%)
+  background-color: var(--sl-color-gray-950)
 }
 
 .sl-theme-dark .markdown-section p.tip::before,
 .sl-theme-dark .markdown-section p.warn::before {
-  color: var(--sl-color-gray-10);
+  color: var(--sl-color-gray-900);
 }
 
 .sl-theme-dark .markdown-section p.tip code,
 .sl-theme-dark .markdown-section p.warn code {
-  background-color: var(--sl-color-gray-15);
+  background-color: var(--sl-color-gray-800);
+}
+
+/* Code */
+.sl-theme-dark .markdown-section code {
+  background: var(--sl-color-gray-950);
 }
 
 /* Code blocks */
 .sl-theme-dark .markdown-section pre,
 .sl-theme-dark .code-block__source  {
-  background-color: hsl(var(--sl-color-gray-hue), var(--sl-color-gray-saturation), 13%);
+  background-color: var(--sl-color-gray-800);
 }
 
 .sl-theme-dark .markdown-section pre > code {
-  color: var(--sl-color-gray-80);
+  color: var(--sl-color-gray-200);
 }
 
 .sl-theme-dark .markdown-section pre .token.comment {
-  color: var(--sl-color-gray-40);
+  color: var(--sl-color-gray-600);
 }
 
 .sl-theme-dark .markdown-section pre .token.prolog,
 .sl-theme-dark .markdown-section pre .token.doctype,
 .sl-theme-dark .markdown-section pre .token.cdata,
 .sl-theme-dark .markdown-section pre .token.operator {
-  color: var(--sl-color-gray-70);
+  color: var(--sl-color-gray-300);
 }
 
 .sl-theme-dark .markdown-section pre .token.property,
 .sl-theme-dark .markdown-section pre .token.keyword,
 .sl-theme-dark .markdown-section pre .token.tag,
 .sl-theme-dark .markdown-section pre .token.url {
-  color: var(--sl-color-primary-65);
+  color: var(--sl-color-primary-400);
 }
 
 .sl-theme-dark .markdown-section pre .token.symbol,
@@ -137,7 +151,7 @@
 .sl-theme-dark .markdown-section pre .token.char,
 .sl-theme-dark .markdown-section pre .token.builtin,
 .sl-theme-dark .markdown-section pre .token.inserted {
-  color: var(--sl-color-success-60);
+  color: var(--sl-color-success-400);
 }
 
 .sl-theme-dark .markdown-section pre .token.atrule,
@@ -162,9 +176,9 @@
 
 /* Repo buttons */
 .sl-theme-dark  .repo-button {
-  background-color: var(--sl-color-gray-10);
-  border-color: var(--sl-color-gray-25);
-  color: var(--sl-color-gray-80);
+  background-color: var(--sl-color-gray-900);
+  border-color: var(--sl-color-gray-800);
+  color: var(--sl-color-gray-200);
 }
 
 .sl-theme-dark .repo-button--github sl-icon {
@@ -172,11 +186,11 @@
 }
 
 .sl-theme-dark  .repo-button:hover {
-  background-color: var(--sl-color-gray-15);
-  border: solid 1px var(--sl-color-gray-30);
+  background-color: var(--sl-color-gray-900);
+  border: solid 1px var(--sl-color-gray-700);
 }
 
 .sl-theme-dark  .repo-button:focus {
-  border-color: var(--sl-color-primary-50);
+  border-color: var(--sl-color-primary-500);
 }
 

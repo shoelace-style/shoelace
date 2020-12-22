@@ -14,9 +14,17 @@ To customize a design token, simply override it in your stylesheet using a `:roo
 
 ```css
 :root {
-  /* Changes the primary color to a shade of orange at 90% saturation */
-  --sl-color-primary-hue: 30;
-  --sl-color-primary-saturation: 90%;
+  /* Changes the primary color palette to purple */
+  --sl-color-primary-50: #faf5ff;
+  --sl-color-primary-100: #f3e8ff;
+  --sl-color-primary-200: #e9d5ff;
+  --sl-color-primary-300: #d8b4fe;
+  --sl-color-primary-400: #c084fc;
+  --sl-color-primary-500: #a855f7;
+  --sl-color-primary-600: #9333ea;
+  --sl-color-primary-700: #7e22ce;
+  --sl-color-primary-800: #6b21a8;
+  --sl-color-primary-900: #581c87;
 }
 ```
 

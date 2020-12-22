@@ -14,7 +14,7 @@
   line-height: var(--sl-line-height-normal);
   letter-spacing: var(--sl-letter-spacing-normal);
   text-align: left;
-  color: var(--sl-color-gray-30);
+  color: var(--sl-color-gray-700);
   padding: var(--sl-spacing-xx-small) var(--sl-spacing-x-large);
   transition: var(--sl-transition-fast) fill;
   user-select: none;
@@ -23,13 +23,13 @@
 
   &.menu-item--focused:not(.menu-item--disabled) {
     outline: none;
-    background-color: var(--sl-color-primary-95);
-    color: var(--sl-color-primary-50);
+    background-color: var(--sl-color-primary-50);
+    color: var(--sl-color-primary-500);
   }
 
   &.menu-item--disabled {
     outline: none;
-    color: var(--sl-color-gray-70);
+    color: var(--sl-color-gray-400);
     cursor: not-allowed;
   }
 

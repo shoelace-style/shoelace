@@ -10,13 +10,13 @@
 .border-radius-demo {
   width: 3rem;
   height: 3rem;
-  background: var(--sl-color-primary-50);
+  background: var(--sl-color-primary-500);
 }
 
 /* Transition demo */
 .transition-demo {
   position: relative;
-  background: var(--sl-color-gray-90);
+  background: var(--sl-color-gray-200);
   width: 8rem;
   height: 2rem;
 }
@@ -24,7 +24,7 @@
 .transition-demo::after {
   content: '';
   position: absolute;
-  background-color: var(--sl-color-primary-50);
+  background-color: var(--sl-color-primary-500);
   top: 0;
   left: 0;
   width: 0;
@@ -38,13 +38,13 @@
 }
 
 .sl-theme-dark .transition-demo {
-  background: var(--sl-color-gray-20);
+  background: var(--sl-color-gray-800);
 }
 
 /* Spacing demo */
 .spacing-demo {
   width: 100px;
-  background: var(--sl-color-primary-50);
+  background: var(--sl-color-primary-500);
 }
 
 /* Elevation dmeo */
@@ -56,5 +56,5 @@
 }
 
 .sl-theme-dark .elevation-demo {
-  background-color: var(--sl-color-gray-20);
+  background-color: var(--sl-color-gray-800);
 }

@@ -54,16 +54,15 @@
   width: var(--grid-handle-size);
   height: var(--grid-handle-size);
   border-radius: 50%;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25), inset 0 0 0 1px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
   border: solid 2px white;
   margin-top: calc(var(--grid-handle-size) / -2);
   margin-left: calc(var(--grid-handle-size) / -2);
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 1px hsl(var(--sl-focus-ring-hue), var(--sl-focus-ring-saturation), var(--sl-focus-ring-lightness)),
-      inset 0 0 0 1px hsl(var(--sl-focus-ring-hue), var(--sl-focus-ring-saturation), var(--sl-focus-ring-lightness)),
-      var(--sl-focus-ring-box-shadow);
+    box-shadow: 0 0 0 1px var(--sl-color-primary-500),
+      0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
   }
 }
 
@@ -100,8 +99,8 @@
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 1px hsl(var(--sl-color-primary-hue), var(--sl-color-primary-saturation), 50%),
-      var(--sl-focus-ring-box-shadow);
+    box-shadow: 0 0 0 1px var(--sl-color-primary-500),
+      0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
   }
 }
 
@@ -158,7 +157,7 @@
   }
 
   &:focus {
-    box-shadow: var(--sl-focus-ring-box-shadow);
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
     outline: none;
   }
 }
@@ -227,7 +226,7 @@
   grid-template-columns: repeat(8, 1fr);
   grid-gap: 6px;
   justify-items: center;
-  border-top: solid 1px var(--sl-color-gray-90);
+  border-top: solid 1px var(--sl-color-gray-200);
   padding: var(--sl-spacing-small);
 }
 
@@ -251,7 +250,7 @@
 
   &:focus {
     outline: none;
-    box-shadow: var(--sl-focus-ring-box-shadow);
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
   }
 }
 
@@ -330,11 +329,11 @@
   }
 
   &:focus:not(.color-dropdown__trigger--disabled) {
-    box-shadow: var(--sl-focus-ring-box-shadow);
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
     outline: none;
 
     &::before {
-      box-shadow: inset 0 0 0 1px var(--sl-color-primary-50);
+      box-shadow: inset 0 0 0 1px var(--sl-color-primary-500);
     }
   }
 

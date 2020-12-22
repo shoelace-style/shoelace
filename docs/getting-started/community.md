@@ -18,6 +18,16 @@ Please be respectful of other users and remember that Shoelace is an open source
   Join the Chat
 </sl-button>
 
+
+## Stack Overflow
+
+If you have a specific problem to solve, Stack Overflow is a great place to get feedback from other developers. For best results, try to generalize your question and avoid bloating it with unnecessary or unrelated code.
+
+<sl-button type="primary" href="https://stackoverflow.com/questions/ask?tags=shoelace" target="_blank">
+  Ask a Question
+</sl-button>
+
+
 ## Twitter
 
 Follow [@shoelace_style](https://twitter.com/shoelace_style) on Twitter for general updates and announcements about Shoelace. This is a great place to say "hi" or to share something you're working on. You're also welcome to follow [@claviska](https://twitter.com/claviska), the creator, for tweets about web components, web development, and life.

@@ -4,7 +4,7 @@
  * @prop --focus-ring: The focus ring's box shadow.
  */
 :host {
-  --focus-ring: var(--sl-focus-ring-box-shadow-inset);
+  --focus-ring: inset 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
 
   display: inline-block;
 }
@@ -16,7 +16,7 @@
   font-size: var(--sl-font-size-small);
   font-weight: var(--sl-font-weight-semibold);
   border-radius: 4px;
-  color: var(--sl-color-gray-40);
+  color: var(--sl-color-gray-600);
   padding: var(--sl-spacing-medium) var(--sl-spacing-large);
   white-space: nowrap;
   user-select: none;
@@ -24,7 +24,7 @@
   transition: var(--transition-speed) box-shadow, var(--transition-speed) color;
 
   &:hover:not(.tab--disabled) {
-    color: var(--sl-color-primary-50);
+    color: var(--sl-color-primary-500);
   }
 
   &:focus {
@@ -32,12 +32,12 @@
   }
 
   &:focus:not(.tab--disabled) {
-    color: var(--sl-color-primary-50);
+    color: var(--sl-color-primary-500);
     box-shadow: var(--focus-ring);
   }
 
   &.tab--active:not(.tab--disabled) {
-    color: var(--sl-color-primary-50);
+    color: var(--sl-color-primary-500);
   }
 
   &.tab--closable {

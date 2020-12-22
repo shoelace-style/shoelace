@@ -291,7 +291,7 @@ export namespace Components {
         /**
           * Removes the format toggle.
          */
-        "noToggle": boolean;
+        "noFormatToggle": boolean;
         /**
           * Whether to show the opacity slider.
          */
@@ -1926,7 +1926,7 @@ declare namespace LocalJSX {
         /**
           * Removes the format toggle.
          */
-        "noToggle"?: boolean;
+        "noFormatToggle"?: boolean;
         /**
           * Emitted after the color picker closes and all transitions are complete.
          */

@@ -12,7 +12,7 @@
   border: none;
   border-radius: var(--sl-border-radius-medium);
   font-size: inherit;
-  color: var(--sl-color-gray-50);
+  color: var(--sl-color-gray-500);
   padding: var(--sl-spacing-x-small);
   cursor: pointer;
   transition: var(--sl-transition-medium) color;
@@ -20,11 +20,11 @@
 
   &:hover:not(.icon-button--disabled),
   &:focus:not(.icon-button--disabled) {
-    color: var(--sl-color-primary-50);
+    color: var(--sl-color-primary-500);
   }
 
   &:active:not(.icon-button--disabled) {
-    color: var(--sl-color-primary-40);
+    color: var(--sl-color-primary-600);
   }
 
   &:focus {
@@ -38,5 +38,5 @@
 }
 
 .focus-visible.icon-button:focus {
-  box-shadow: var(--sl-focus-ring-box-shadow);
+  box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
 }

@@ -16,7 +16,7 @@
 }
 
 .details {
-  border: solid 1px var(--sl-color-gray-90);
+  border: solid 1px var(--sl-color-gray-200);
   border-radius: var(--sl-border-radius-medium);
   overflow-anchor: none;
 }
@@ -39,7 +39,7 @@
 }
 
 .focus-visible .details__header:focus {
-  box-shadow: var(--sl-focus-ring-box-shadow);
+  box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
 }
 
 .details--disabled .details__header {

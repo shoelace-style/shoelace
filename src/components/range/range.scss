@@ -3,7 +3,7 @@
 :host {
   --thumb-size: 20px;
   --tooltip-offset-y: 10px;
-  --track-color: var(--sl-color-gray-90);
+  --track-color: var(--sl-color-gray-200);
   --track-height: 6px;
 
   display: block;
@@ -34,8 +34,8 @@
       width: var(--thumb-size);
       height: var(--thumb-size);
       border-radius: 50%;
-      background-color: var(--sl-color-primary-50);
-      border: solid var(--sl-input-border-width) var(--sl-color-primary-50);
+      background-color: var(--sl-color-primary-500);
+      border: solid var(--sl-input-border-width) var(--sl-color-primary-500);
       -webkit-appearance: none;
       margin-top: calc(var(--thumb-size) / -2 + var(--track-height) / 2);
       transition: var(--sl-transition-fast) border-color, var(--sl-transition-fast) background-color,
@@ -44,19 +44,19 @@
     }
 
     &:not(:disabled)::-webkit-slider-thumb:hover {
-      background-color: var(--sl-color-primary-60);
-      border-color: var(--sl-color-primary-60);
+      background-color: var(--sl-color-primary-400);
+      border-color: var(--sl-color-primary-400);
     }
 
     &:not(:disabled):focus::-webkit-slider-thumb {
-      background-color: var(--sl-color-primary-60);
-      border-color: var(--sl-color-primary-60);
-      box-shadow: var(--sl-focus-ring-box-shadow);
+      background-color: var(--sl-color-primary-400);
+      border-color: var(--sl-color-primary-400);
+      box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
     }
 
     &:not(:disabled)::-webkit-slider-thumb:active {
-      background-color: var(--sl-color-primary-40);
-      border-color: var(--sl-color-primary-40);
+      background-color: var(--sl-color-primary-500);
+      border-color: var(--sl-color-primary-500);
       cursor: grabbing;
     }
 
@@ -78,27 +78,27 @@
       height: var(--thumb-size);
       width: var(--thumb-size);
       border-radius: 50%;
-      background-color: var(--sl-color-primary-50);
-      border-color: var(--sl-color-primary-50);
+      background-color: var(--sl-color-primary-500);
+      border-color: var(--sl-color-primary-500);
       transition: var(--sl-transition-fast) border-color, var(--sl-transition-fast) background-color,
         var(--sl-transition-fast) color, var(--sl-transition-fast) box-shadow, var(--sl-transition-fast) transform;
       cursor: pointer;
     }
 
     &:not(:disabled)::-moz-range-thumb:hover {
-      background-color: var(--sl-color-primary-60);
-      border-color: var(--sl-color-primary-60);
+      background-color: var(--sl-color-primary-400);
+      border-color: var(--sl-color-primary-400);
     }
 
     &:not(:disabled):focus::-moz-range-thumb {
-      background-color: var(--sl-color-primary-60);
-      border-color: var(--sl-color-primary-60);
-      box-shadow: var(--sl-focus-ring-box-shadow);
+      background-color: var(--sl-color-primary-400);
+      border-color: var(--sl-color-primary-400);
+      box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
     }
 
     &:not(:disabled)::-moz-range-thumb:active {
-      background-color: var(--sl-color-primary-40);
-      border-color: var(--sl-color-primary-40);
+      background-color: var(--sl-color-primary-600);
+      border-color: var(--sl-color-primary-600);
       cursor: grabbing;
     }
 

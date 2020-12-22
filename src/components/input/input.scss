@@ -6,7 +6,7 @@
  * @prop --focus-ring: The focus ring style to use when the control receives focus, a `box-shadow` property.
  */
 :host {
-  --focus-ring: var(--sl-focus-ring-box-shadow);
+  --focus-ring: 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
   display: block;
 }
 
@@ -90,7 +90,7 @@
   &:-webkit-autofill:focus,
   &:-webkit-autofill:active {
     box-shadow: 0 0 0 var(--sl-input-height-large) var(--sl-input-background-color-hover) inset !important;
-    -webkit-text-fill-color: var(--sl-color-primary-50);
+    -webkit-text-fill-color: var(--sl-color-primary-500);
   }
 
   &::placeholder {

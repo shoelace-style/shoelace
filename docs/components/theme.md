@@ -29,7 +29,7 @@ To use the official dark theme, include its stylesheet per the instructions on t
   <sl-theme name="dark">
 
     <!-- Design tokens used inside <sl-theme> will reflect the theme's colors -->
-    <div style="background-color: var(--sl-color-gray-10); padding: var(--sl-spacing-xx-large);">
+    <div style="background-color: var(--sl-color-gray-900); padding: var(--sl-spacing-xx-large);">
       <!-- These are just some sample components to demonstrate -->
       <sl-dropdown>
         <sl-button slot="trigger" caret>Dropdown</sl-button>

@@ -30,7 +30,7 @@ The width of the spinner can be changed by setting the `--stroke-width` custom p
 
 ### Color
 
-The spinner's color can be changed by setting the `--indicator-color` custom property.
+The spinner's colors can be changed by setting the `--indicator-color` and `--track-color` custom properties.
 
 ```html preview
 <sl-spinner style="font-size: 2rem; --indicator-color: tomato;"></sl-spinner>

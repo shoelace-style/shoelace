@@ -5,8 +5,8 @@
  * @prop --indicator-color: The indicator color.
  */
 :host {
-  --track-color: var(--sl-color-gray-90);
-  --indicator-color: var(--sl-color-primary-50);
+  --track-color: var(--sl-color-gray-200);
+  --indicator-color: var(--sl-color-primary-500);
 
   display: inline-flex;
 }

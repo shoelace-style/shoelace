@@ -180,12 +180,12 @@ Custom icons can be loaded individually with the `src` attribute. Only SVGs on a
   }
 
   .icon-list-item:hover {
-    background-color: var(--sl-color-primary-95);
-    color: var(--sl-color-primary-50);
+    background-color: var(--sl-color-primary-50);
+    color: var(--sl-color-primary-500);
   }
 
   .sl-theme-dark .icon-list-item:hover {
-    background-color: var(--sl-color-primary-15);
+    background-color: var(--sl-color-primary-900);
   }
 
   .icon-list[data-type="outline"] .icon-list-item[data-name$="-fill"] {

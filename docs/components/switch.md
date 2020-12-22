@@ -33,7 +33,7 @@ Use the `disabled` attribute to disable the switch.
 Use the available custom properties to make the switch a different size.
 
 ```html preview
-<sl-switch style="--width: 80px; --height: 30px; --thumb-size: 26px;"></sl-switch>
+<sl-switch style="--width: 80px; --height: 32px; --thumb-size: 26px;"></sl-switch>
 ```
 
 [component-metadata:sl-switch]

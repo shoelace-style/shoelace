@@ -181,21 +181,15 @@ The `invalid` attribute reflects the form control's validity, so you can style i
 <style>
   .custom-input[invalid]:not([disabled])::part(label),
   .custom-input[invalid]:not([disabled])::part(help-text) {
-    color: var(--sl-color-danger-40);
+    color: var(--sl-color-danger-600);
   }
 
   .custom-input[invalid]:not([disabled])::part(base) {      
-    border-color: var(--sl-color-danger-50);
+    border-color: var(--sl-color-danger-500);
   } 
 
   .custom-input[invalid] {
-    --focus-ring: 0 0 0 var(--sl-focus-ring-width)
-      hsla(
-        var(--sl-color-danger-hue),
-        var(--sl-color-danger-saturation),
-        var(--sl-focus-ring-lightness),
-        var(--sl-focus-ring-alpha)
-      );
+    --focus-ring: 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-danger);
   }
 </style>
 ```

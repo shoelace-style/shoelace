@@ -7,7 +7,7 @@
  * @prop --symbol-spacing: The spacing to use around symbols.
  */
 :host {
-  --symbol-color: var(--sl-color-gray-85);
+  --symbol-color: var(--sl-color-gray-300);
   --symbol-color-active: #ffbe00;
   --symbol-size: 1.2rem;
   --symbol-spacing: var(--sl-spacing-xxx-small);
@@ -26,7 +26,7 @@
   }
 
   &.focus-visible:focus {
-    box-shadow: var(--sl-focus-ring-box-shadow);
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
   }
 }
 

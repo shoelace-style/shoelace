@@ -5,7 +5,7 @@
  * @prop --tabs-border-color: The color of the border that separates tabs.
  */
 :host {
-  --tabs-border-color: var(--sl-color-gray-90);
+  --tabs-border-color: var(--sl-color-gray-200);
 
   display: block;
 }
@@ -80,7 +80,7 @@
 
   .tab-group__active-tab-indicator {
     bottom: -2px;
-    border-bottom: solid 2px var(--sl-color-primary-50);
+    border-bottom: solid 2px var(--sl-color-primary-500);
   }
 
   .tab-group__body {
@@ -114,7 +114,7 @@
 
   .tab-group__active-tab-indicator {
     top: calc(-1 * 2px);
-    border-top: solid 2px var(--sl-color-primary-50);
+    border-top: solid 2px var(--sl-color-primary-500);
   }
 
   .tab-group__body {
@@ -141,7 +141,7 @@
 
   .tab-group__active-tab-indicator {
     right: calc(-1 * 2px);
-    border-right: solid 2px var(--sl-color-primary-50);
+    border-right: solid 2px var(--sl-color-primary-500);
   }
 
   .tab-group__body {
@@ -169,7 +169,7 @@
 
   .tab-group__active-tab-indicator {
     left: calc(-1 * 2px);
-    border-left: solid 2px var(--sl-color-primary-50);
+    border-left: solid 2px var(--sl-color-primary-500);
   }
 
   .tab-group__body {
