@@ -88,6 +88,7 @@ export class Tooltip {
     this.handleBlur = this.handleBlur.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleMouseOver = this.handleMouseOver.bind(this);
     this.handleMouseOut = this.handleMouseOut.bind(this);
     this.handleSlotChange = this.handleSlotChange.bind(this);
@@ -186,6 +187,14 @@ export class Tooltip {
     }
   }
 
+  handleKeyDown(event: KeyboardEvent) {
+    // Pressing escape when the target element has focus should dismiss the tooltip
+    if (this.open && event.key === 'Escape') {
+      event.stopPropagation();
+      this.hide();
+    }
+  }
+
   handleMouseOver() {
     if (this.hasTrigger('hover')) {
       this.show();
@@ -228,7 +237,7 @@ export class Tooltip {
 
   render() {
     return (
-      <Host onMouseOver={this.handleMouseOver} onMouseOut={this.handleMouseOut}>
+      <Host onKeyDown={this.handleKeyDown} onMouseOver={this.handleMouseOver} onMouseOut={this.handleMouseOut}>
         <slot onSlotchange={this.handleSlotChange} />
 
         {!this.disabled && (
