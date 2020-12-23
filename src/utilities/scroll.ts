@@ -28,7 +28,8 @@ export function unlockBodyScrolling(lockingEl: HTMLElement) {
 export function scrollIntoView(
   element: HTMLElement,
   container: HTMLElement,
-  direction: 'horizontal' | 'vertical' | 'both' = 'vertical'
+  direction: 'horizontal' | 'vertical' | 'both' = 'vertical',
+  behavior: 'smooth' | 'auto' = 'smooth'
 ) {
   const offset = getOffset(element, container);
   const offsetTop = offset.top + container.scrollTop;
@@ -40,17 +41,17 @@ export function scrollIntoView(
 
   if (direction === 'horizontal' || direction === 'both') {
     if (offsetLeft < minX) {
-      container.scrollTo({ left: offsetLeft, behavior: 'smooth' });
+      container.scrollTo({ left: offsetLeft, behavior });
     } else if (offsetLeft + element.clientWidth > maxX) {
-      container.scrollTo({ left: offsetLeft - container.offsetWidth + element.clientWidth, behavior: 'smooth' });
+      container.scrollTo({ left: offsetLeft - container.offsetWidth + element.clientWidth, behavior });
     }
   }
 
   if (direction === 'vertical' || direction === 'both') {
     if (offsetTop < minY) {
-      container.scrollTo({ top: offsetTop, behavior: 'smooth' });
+      container.scrollTo({ top: offsetTop, behavior });
     } else if (offsetTop + element.clientHeight > maxY) {
-      container.scrollTo({ top: offsetTop - container.offsetHeight + element.clientHeight, behavior: 'smooth' });
+      container.scrollTo({ top: offsetTop - container.offsetHeight + element.clientHeight, behavior });
     }
   }
 }
