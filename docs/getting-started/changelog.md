@@ -35,7 +35,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Refactored internal label + help text logic into a functional component used by `sl-input`, `sl-textarea`, and `sl-select`
 - Removed `sl-blur` and `sl-focus` events from `sl-menu` since menus can't have focus as of 2.0.0-beta.22
 - Updated `sl-spinner` so the indicator is more obvious
-- Updated to Bootstrap Icons 1.2.1
+- Updated to Bootstrap Icons 1.2.2
 
 ## 2.0.0-beta.24
 
