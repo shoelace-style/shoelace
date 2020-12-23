@@ -1,4 +1,5 @@
 import { Component, Element, Event, EventEmitter, Method, Prop, State, Watch, h } from '@stencil/core';
+import FormControl from '../../functional-components/form-control/form-control';
 import { getTextContent } from '../../utilities/slot';
 import { hasSlot } from '../../utilities/slot';
 
@@ -14,7 +15,7 @@ let id = 0;
  *
  * @part base - The component's base wrapper.
  * @part clear-button - The input's clear button, exported from <sl-input>.
- * @part form-control - The form control that wraps the label and the input.
+ * @part form-control - The form control that wraps the label, input, and help text.
  * @part help-text - The select's help text.
  * @part icon - The select's icon.
  * @part label - The select's label.
@@ -41,7 +42,8 @@ export class Select {
   @Element() host: HTMLSlSelectElement;
 
   @State() hasFocus = false;
-  @State() hasLabel = false;
+  @State() hasHelpTextSlot = false;
+  @State() hasLabelSlot = false;
   @State() isOpen = false;
   @State() items = [];
   @State() displayLabel = '';
@@ -80,8 +82,11 @@ export class Select {
   /** Set to true to draw a pill-style select with rounded edges. */
   @Prop() pill = false;
 
-  /** The select's label. */
+  /** The select's label. Alternatively, you can use the label slot. */
   @Prop() label = '';
+
+  /** The select's help text. Alternatively, you can use the help-text slot. */
+  @Prop() helpText = '';
 
   /** The select's required attribute. */
   @Prop() required = false;
@@ -101,7 +106,7 @@ export class Select {
 
   @Watch('label')
   handleLabelChange() {
-    this.detectLabel();
+    this.handleSlotChange();
   }
 
   @Watch('multiple')
@@ -128,7 +133,6 @@ export class Select {
   @Event({ eventName: 'sl-blur' }) slBlur: EventEmitter;
 
   connectedCallback() {
-    this.detectLabel = this.detectLabel.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
     this.handleClearClick = this.handleClearClick.bind(this);
@@ -139,10 +143,12 @@ export class Select {
     this.handleMenuSelect = this.handleMenuSelect.bind(this);
     this.handleSlotChange = this.handleSlotChange.bind(this);
     this.handleTagInteraction = this.handleTagInteraction.bind(this);
+
+    this.host.shadowRoot.addEventListener('slotchange', this.handleSlotChange);
   }
 
   componentWillLoad() {
-    this.detectLabel();
+    this.handleSlotChange();
   }
 
   componentDidLoad() {
@@ -151,6 +157,10 @@ export class Select {
 
     // We need to do an initial sync after the component has rendered, so this will suppress the re-render warning
     requestAnimationFrame(() => this.syncItemsFromValue());
+  }
+
+  disconnectedCallback() {
+    this.host.shadowRoot.removeEventListener('slotchange', this.handleSlotChange);
   }
 
   /** Checks for validity and shows the browser's validation message if the control is invalid. */
@@ -164,10 +174,6 @@ export class Select {
   async setCustomValidity(message: string) {
     this.input.setCustomValidity(message);
     this.invalid = !this.input.checkValidity();
-  }
-
-  detectLabel() {
-    this.hasLabel = this.label.length > 0 || hasSlot(this.host, 'label');
   }
 
   getItemLabel(item: HTMLSlMenuItemElement) {
@@ -283,6 +289,8 @@ export class Select {
   }
 
   handleSlotChange() {
+    this.hasHelpTextSlot = hasSlot(this.host, 'help-text');
+    this.hasLabelSlot = hasSlot(this.host, 'label');
     this.syncItemsFromValue();
     this.reportDuplicateItemValues();
   }
@@ -384,32 +392,17 @@ export class Select {
     const hasSelection = this.multiple ? this.value.length > 0 : this.value !== '';
 
     return (
-      <div
-        part="form-control"
-        class={{
-          'form-control': true,
-          'form-control--has-label': this.hasLabel,
-          'form-control--invalid': this.invalid
-        }}
+      <FormControl
+        inputId={this.inputId}
+        label={this.label}
+        labelId={this.labelId}
+        hasLabelSlot={this.hasLabelSlot}
+        helpTextId={this.helpTextId}
+        helpText={this.helpText}
+        hasHelpTextSlot={this.hasHelpTextSlot}
+        size={this.size}
+        onLabelClick={this.handleLabelClick}
       >
-        <label
-          part="label"
-          id={this.labelId}
-          class={{
-            label: true,
-            'label--small': this.size === 'small',
-            'label--medium': this.size === 'medium',
-            'label--large': this.size === 'large',
-            'label--invalid': this.invalid
-          }}
-          htmlFor={this.inputId}
-          onClick={this.handleLabelClick}
-        >
-          <slot name="label" onSlotchange={this.detectLabel}>
-            {this.label}
-          </slot>
-        </label>
-
         <sl-dropdown
           part="base"
           ref={el => (this.dropdown = el)}
@@ -492,21 +485,7 @@ export class Select {
             <slot onSlotchange={this.handleSlotChange} />
           </sl-menu>
         </sl-dropdown>
-
-        <div
-          part="help-text"
-          id={this.helpTextId}
-          class={{
-            'help-text': true,
-            'help-text--small': this.size === 'small',
-            'help-text--medium': this.size === 'medium',
-            'help-text--large': this.size === 'large',
-            'help-text--invalid': this.invalid
-          }}
-        >
-          <slot name="help-text" />
-        </div>
-      </div>
+      </FormControl>
     );
   }
 }

@@ -52,7 +52,7 @@ Use the `size` attribute to change a textarea's size.
 
 ### Labels
 
-Use the `label` attribute to give the textarea an accessible label.
+Use the `label` attribute to give the textarea an accessible label. For labels that contain HTML, use the `label` slot instead.
 
 ```html preview
 <sl-textarea label="Comments"></sl-textarea>
@@ -60,11 +60,13 @@ Use the `label` attribute to give the textarea an accessible label.
 
 ### Help Text
 
-Add descriptive help text to a textarea with the `help-text` slot.
+Add descriptive help text to a textarea with the `help-text` attribute. For help texts that contain HTML, use the `help-text` slot instead.
 
 ```html preview
-<sl-textarea label="Feedback">
-  <div slot="help-text">Please tell us what you think.</div>
+<sl-textarea 
+  label="Feedback" 
+  help-text="Please tell us what you think."
+>
 </sl-textarea>
 ```
 

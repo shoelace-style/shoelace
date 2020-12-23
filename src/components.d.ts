@@ -677,6 +677,10 @@ export namespace Components {
          */
         "disabled": boolean;
         /**
+          * The input's help text. Alternatively, you can use the help-text slot.
+         */
+        "helpText": string;
+        /**
           * The input's inputmode attribute.
          */
         "inputmode": 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
@@ -685,7 +689,7 @@ export namespace Components {
          */
         "invalid": boolean;
         /**
-          * The input's label.
+          * The input's label. Alternatively, you can use the label slot.
          */
         "label": string;
         /**
@@ -999,6 +1003,10 @@ export namespace Components {
          */
         "disabled": boolean;
         /**
+          * The select's help text. Alternatively, you can use the help-text slot.
+         */
+        "helpText": string;
+        /**
           * Enable this option to prevent the panel from being clipped when the component is placed inside a container with `overflow: auto|scroll`.
          */
         "hoist": boolean;
@@ -1007,7 +1015,7 @@ export namespace Components {
          */
         "invalid": boolean;
         /**
-          * The select's label.
+          * The select's label. Alternatively, you can use the label slot.
          */
         "label": string;
         /**
@@ -1191,6 +1199,10 @@ export namespace Components {
          */
         "disabled": boolean;
         /**
+          * The textarea's help text. Alternatively, you can use the help-text slot.
+         */
+        "helpText": string;
+        /**
           * The textarea's inputmode attribute.
          */
         "inputmode": 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
@@ -1199,7 +1211,7 @@ export namespace Components {
          */
         "invalid": boolean;
         /**
-          * The textarea's label.
+          * The textarea's label. Alternatively, you can use the label slot.
          */
         "label": string;
         /**
@@ -2375,6 +2387,10 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
+          * The input's help text. Alternatively, you can use the help-text slot.
+         */
+        "helpText"?: string;
+        /**
           * The input's inputmode attribute.
          */
         "inputmode"?: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
@@ -2383,7 +2399,7 @@ declare namespace LocalJSX {
          */
         "invalid"?: boolean;
         /**
-          * The input's label.
+          * The input's label. Alternatively, you can use the label slot.
          */
         "label"?: string;
         /**
@@ -2677,6 +2693,10 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
+          * The select's help text. Alternatively, you can use the help-text slot.
+         */
+        "helpText"?: string;
+        /**
           * Enable this option to prevent the panel from being clipped when the component is placed inside a container with `overflow: auto|scroll`.
          */
         "hoist"?: boolean;
@@ -2685,7 +2705,7 @@ declare namespace LocalJSX {
          */
         "invalid"?: boolean;
         /**
-          * The select's label.
+          * The select's label. Alternatively, you can use the label slot.
          */
         "label"?: string;
         /**
@@ -2873,6 +2893,10 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
+          * The textarea's help text. Alternatively, you can use the help-text slot.
+         */
+        "helpText"?: string;
+        /**
           * The textarea's inputmode attribute.
          */
         "inputmode"?: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
@@ -2881,7 +2905,7 @@ declare namespace LocalJSX {
          */
         "invalid"?: boolean;
         /**
-          * The textarea's label.
+          * The textarea's label. Alternatively, you can use the label slot.
          */
         "label"?: string;
         /**

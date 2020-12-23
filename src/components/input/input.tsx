@@ -1,4 +1,5 @@
 import { Component, Element, Event, EventEmitter, Method, Prop, State, Watch, h } from '@stencil/core';
+import FormControl from '../../functional-components/form-control/form-control';
 import { hasSlot } from '../../utilities/slot';
 
 let id = 0;
@@ -13,10 +14,10 @@ let id = 0;
  * @slot clear-icon - An icon to use in lieu of the default clear icon.
  * @slot show-password-icon - An icon to use in lieu of the default show password icon.
  * @slot hide-password-icon - An icon to use in lieu of the default hide password icon.
- * @slot help-text - Help text that describes how to use the input.
+ * @slot help-text - Help text that describes how to use the input. Alternatively, you can use the help-text prop.
  *
  * @part base - The component's base wrapper.
- * @part form-control - The form control that wraps the label and the input.
+ * @part form-control - The form control that wraps the label, input, and help-text.
  * @part label - The input label.
  * @part input - The input control.
  * @part prefix - The input prefix container.
@@ -40,7 +41,8 @@ export class Input {
   @Element() host: HTMLSlInputElement;
 
   @State() hasFocus = false;
-  @State() hasLabel = false;
+  @State() hasHelpTextSlot = false;
+  @State() hasLabelSlot = false;
   @State() isPasswordVisible = false;
 
   /** The input's type. */
@@ -58,8 +60,11 @@ export class Input {
   /** Set to true to draw a pill-style input with rounded edges. */
   @Prop({ reflect: true }) pill = false;
 
-  /** The input's label. */
+  /** The input's label. Alternatively, you can use the label slot. */
   @Prop() label = '';
+
+  /** The input's help text. Alternatively, you can use the help-text slot. */
+  @Prop() helpText = '';
 
   /** The input's placeholder text. */
   @Prop() placeholder: string;
@@ -123,7 +128,7 @@ export class Input {
 
   @Watch('label')
   handleLabelChange() {
-    this.detectLabel();
+    this.handleSlotChange();
   }
 
   @Watch('value')
@@ -147,7 +152,6 @@ export class Input {
   @Event({ eventName: 'sl-blur' }) slBlur: EventEmitter;
 
   connectedCallback() {
-    this.detectLabel = this.detectLabel.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleInput = this.handleInput.bind(this);
     this.handleInvalid = this.handleInvalid.bind(this);
@@ -155,10 +159,17 @@ export class Input {
     this.handleFocus = this.handleFocus.bind(this);
     this.handleClearClick = this.handleClearClick.bind(this);
     this.handlePasswordToggle = this.handlePasswordToggle.bind(this);
+    this.handleSlotChange = this.handleSlotChange.bind(this);
+
+    this.host.shadowRoot.addEventListener('slotchange', this.handleSlotChange);
   }
 
   componentWillLoad() {
-    this.detectLabel();
+    this.handleSlotChange();
+  }
+
+  disconnectedCallback() {
+    this.host.shadowRoot.removeEventListener('slotchange', this.handleSlotChange);
   }
 
   /** Sets focus on the input. */
@@ -219,10 +230,6 @@ export class Input {
     this.invalid = !this.input.checkValidity();
   }
 
-  detectLabel() {
-    this.hasLabel = this.label.length > 0 || hasSlot(this.host, 'label');
-  }
-
   handleChange() {
     this.value = this.input.value;
     this.slChange.emit();
@@ -261,32 +268,23 @@ export class Input {
     this.isPasswordVisible = !this.isPasswordVisible;
   }
 
+  handleSlotChange() {
+    this.hasHelpTextSlot = hasSlot(this.host, 'help-text');
+    this.hasLabelSlot = hasSlot(this.host, 'label');
+  }
+
   render() {
     return (
-      <div
-        part="form-control"
-        class={{
-          'form-control': true,
-          'form-control--has-label': this.hasLabel,
-          'form-control--invalid': this.invalid
-        }}
+      <FormControl
+        inputId={this.inputId}
+        label={this.label}
+        labelId={this.labelId}
+        hasLabelSlot={this.hasLabelSlot}
+        helpTextId={this.helpTextId}
+        helpText={this.helpText}
+        hasHelpTextSlot={this.hasHelpTextSlot}
+        size={this.size}
       >
-        <label
-          part="label"
-          class={{
-            label: true,
-            'label--small': this.size === 'small',
-            'label--medium': this.size === 'medium',
-            'label--large': this.size === 'large',
-            'label--invalid': this.invalid
-          }}
-          htmlFor={this.inputId}
-        >
-          <slot name="label" onSlotchange={this.detectLabel}>
-            {this.label}
-          </slot>
-        </label>
-
         <div
           part="base"
           class={{
@@ -382,21 +380,7 @@ export class Input {
             <slot name="suffix" />
           </span>
         </div>
-
-        <div
-          part="help-text"
-          id={this.helpTextId}
-          class={{
-            'help-text': true,
-            'help-text--small': this.size === 'small',
-            'help-text--medium': this.size === 'medium',
-            'help-text--large': this.size === 'large',
-            'help-text--invalid': this.invalid
-          }}
-        >
-          <slot name="help-text" />
-        </div>
-      </div>
+      </FormControl>
     );
   }
 }

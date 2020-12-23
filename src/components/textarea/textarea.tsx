@@ -1,4 +1,5 @@
 import { Component, Element, Event, EventEmitter, Method, Prop, State, Watch, h } from '@stencil/core';
+import FormControl from '../../functional-components/form-control/form-control';
 import { hasSlot } from '../../utilities/slot';
 
 let id = 0;
@@ -11,7 +12,7 @@ let id = 0;
  * @slot help-text - Help text that describes how to use the input.
  *
  * @part base - The component's base wrapper.
- * @part form-control - The form control that wraps the textarea and label.
+ * @part form-control - The form control that wraps the label, textarea, and help text.
  * @part label - The textarea label.
  * @part textarea - The textarea control.
  * @part help-text - The textarea help text.
@@ -23,7 +24,7 @@ let id = 0;
   shadow: true
 })
 export class Textarea {
-  textareaId = `textarea-${++id}`;
+  inputId = `textarea-${++id}`;
   labelId = `textarea-label-${id}`;
   helpTextId = `textarea-help-text-${id}`;
   resizeObserver: ResizeObserver;
@@ -32,7 +33,8 @@ export class Textarea {
   @Element() host: HTMLSlTextareaElement;
 
   @State() hasFocus = false;
-  @State() hasLabel = false;
+  @State() hasHelpTextSlot = false;
+  @State() hasLabelSlot = false;
 
   /** The textarea's size. */
   @Prop({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
@@ -43,8 +45,11 @@ export class Textarea {
   /** The textarea's value attribute. */
   @Prop({ mutable: true, reflect: true }) value = '';
 
-  /** The textarea's label. */
+  /** The textarea's label. Alternatively, you can use the label slot. */
   @Prop() label = '';
+
+  /** The textarea's help text. Alternatively, you can use the help-text slot. */
+  @Prop() helpText = '';
 
   /** The textarea's placeholder text. */
   @Prop() placeholder: string;
@@ -108,7 +113,7 @@ export class Textarea {
 
   @Watch('label')
   handleLabelChange() {
-    this.detectLabel();
+    this.handleSlotChange();
   }
 
   @Watch('rows')
@@ -122,15 +127,17 @@ export class Textarea {
   }
 
   connectedCallback() {
-    this.detectLabel = this.detectLabel.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleInput = this.handleInput.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
+    this.handleSlotChange = this.handleSlotChange.bind(this);
+
+    this.host.shadowRoot.addEventListener('slotchange', this.handleSlotChange);
   }
 
   componentWillLoad() {
-    this.detectLabel();
+    this.handleSlotChange();
   }
 
   componentDidLoad() {
@@ -141,6 +148,7 @@ export class Textarea {
 
   disconnectedCallback() {
     this.resizeObserver.unobserve(this.textarea);
+    this.host.shadowRoot.removeEventListener('slotchange', this.handleSlotChange);
   }
 
   /** Sets focus on the textarea. */
@@ -202,10 +210,6 @@ export class Textarea {
     this.invalid = !this.textarea.checkValidity();
   }
 
-  detectLabel() {
-    this.hasLabel = this.label.length > 0 || hasSlot(this.host, 'label');
-  }
-
   handleChange() {
     this.slChange.emit();
   }
@@ -226,6 +230,11 @@ export class Textarea {
     this.slFocus.emit();
   }
 
+  handleSlotChange() {
+    this.hasLabelSlot = hasSlot(this.host, 'label');
+    this.hasHelpTextSlot = hasSlot(this.host, 'help-text');
+  }
+
   setTextareaHeight() {
     if (this.resize === 'auto') {
       this.textarea.style.height = 'auto';
@@ -237,29 +246,16 @@ export class Textarea {
 
   render() {
     return (
-      <div
-        part="form-control"
-        class={{
-          'form-control': true,
-          'form-control--has-label': this.hasLabel,
-          'form-control--invalid': this.invalid
-        }}
+      <FormControl
+        inputId={this.inputId}
+        label={this.label}
+        labelId={this.labelId}
+        hasLabelSlot={this.hasLabelSlot}
+        helpTextId={this.helpTextId}
+        helpText={this.helpText}
+        hasHelpTextSlot={this.hasHelpTextSlot}
+        size={this.size}
       >
-        <label
-          part="label"
-          class={{
-            label: true,
-            'label--small': this.size === 'small',
-            'label--medium': this.size === 'medium',
-            'label--large': this.size === 'large',
-            'label--invalid': this.invalid
-          }}
-          htmlFor={this.textareaId}
-        >
-          <slot name="label" onSlotchange={this.detectLabel}>
-            {this.label}
-          </slot>
-        </label>
         <div
           part="base"
           class={{
@@ -285,7 +281,7 @@ export class Textarea {
           <textarea
             part="textarea"
             ref={el => (this.textarea = el)}
-            id={this.textareaId}
+            id={this.inputId}
             class="textarea__control"
             name={this.name}
             placeholder={this.placeholder}
@@ -308,21 +304,7 @@ export class Textarea {
             onBlur={this.handleBlur}
           />
         </div>
-
-        <div
-          part="help-text"
-          id={this.helpTextId}
-          class={{
-            'help-text': true,
-            'help-text--small': this.size === 'small',
-            'help-text--medium': this.size === 'medium',
-            'help-text--large': this.size === 'large',
-            'help-text--invalid': this.invalid
-          }}
-        >
-          <slot name="help-text" />
-        </div>
-      </div>
+      </FormControl>
     );
   }
 }

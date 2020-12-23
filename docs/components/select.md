@@ -163,7 +163,7 @@ The `value` prop is bound to the current selection. As the selection changes, so
 
 ### Labels
 
-Use the `label` attribute to give the select an accessible label.
+Use the `label` attribute to give the select an accessible label. For labels that contain HTML, use the `label` slot instead.
 
 ```html preview
 <sl-select label="Select one">
@@ -175,15 +175,16 @@ Use the `label` attribute to give the select an accessible label.
 
 ### Help Text
 
-Add descriptive help text to an input with the `help-text` slot.
+Add descriptive help text to a select with the `help-text` attribute. For help texts that contain HTML, use the `help-text` slot instead.
 
 ```html preview
-<sl-select label="Experience">
+<sl-select 
+  label="Experience" 
+  help-text="Please tell us your skill level."
+>
   <sl-menu-item value="option-1">Novice</sl-menu-item>
   <sl-menu-item value="option-2">Intermediate</sl-menu-item>
   <sl-menu-item value="option-3">Advanced</sl-menu-item>
-
-  <div slot="help-text">Please tell us your skill level.</div>
 </sl-select>
 ```
 

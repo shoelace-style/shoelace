@@ -1,6 +1,5 @@
 @import 'component';
-@import 'form-control-label';
-@import 'form-control-help-text';
+@import '../../functional-components/form-control/form-control';
 
 :host {
   display: block;

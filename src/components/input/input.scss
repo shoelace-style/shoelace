@@ -1,6 +1,5 @@
 @import 'component';
-@import 'form-control-label';
-@import 'form-control-help-text';
+@import '../../functional-components/form-control/form-control';
 
 /**
  * @prop --focus-ring: The focus ring style to use when the control receives focus, a `box-shadow` property.

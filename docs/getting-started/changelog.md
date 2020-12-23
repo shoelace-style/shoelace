@@ -21,6 +21,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - 🚨 BREAKING CHANGE: Removed `copy-button` part from `sl-color-picker` since copying is now done by clicking the preview
 - Added `getFormattedValue()` method to `sl-color-picker` so you can retrieve the current value in any format
 - Added visual separators between solid buttons in `sl-button-group`
+- Added `help-text` prop to `sl-input`, `sl-textarea`, and `sl-select`
 - Fixed a bug where moving the mouse while `sl-dropdown` is closing would remove focus from the trigger
 - Fixed a bug where `sl-menu-item` didn't set a default color in the dark theme
 - Fixed a bug where `sl-color-picker` preview wouldn't update in Safari
@@ -31,6 +32,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Improved accessibility in `sl-tooltip` by allowing escape to dismiss it [#219](https://github.com/shoelace-style/shoelace/issues/219)
 - Improved slot detection in `sl-card`, `sl-dialog`, and `sl-drawer`
 - Made `@types/resize-observer-browser` a dependency so users don't have to install it manually
+- Refactored internal label + help text logic into a functional component used by `sl-input`, `sl-textarea`, and `sl-select`
 - Removed `sl-blur` and `sl-focus` events from `sl-menu` since menus can't have focus as of 2.0.0-beta.22
 - Updated `sl-spinner` so the indicator is more obvious
 - Updated to Bootstrap Icons 1.2.1
