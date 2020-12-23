@@ -55,16 +55,6 @@
   align-items: center;
 }
 
-.button__prefix ::slotted(:first-child) {
-  // margin-left: calc(-1 * var(--sl-spacing-x-small));
-  // margin-right: var(--sl-spacing-x-small);
-}
-
-.button__suffix ::slotted(:last-child) {
-  // margin-left: var(--sl-spacing-x-small);
-  // margin-right: calc(-1 * var(--sl-spacing-x-small));
-}
-
 .button__label {
   ::slotted(sl-icon) {
     vertical-align: -2px;
