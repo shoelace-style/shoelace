@@ -180,22 +180,4 @@ Use the `disabled` prop to disable a button. Clicks will be suppressed until the
 <sl-button type="danger" disabled>Danger</sl-button>
 ```
 
-### Split Buttons
-
-Create a split button using a [button group](/components/button-group) and a [dropdown](/components/dropdown).
-
-```html preview
-<sl-button-group> 
-  <sl-button>Save</sl-button>
-  <sl-dropdown placement="bottom-end">
-    <sl-button slot="trigger" caret></sl-button>
-    <sl-menu>
-      <sl-menu-item>Save</sl-menu-item>
-      <sl-menu-item>Save as&hellip;</sl-menu-item>
-      <sl-menu-item>Save all</sl-menu-item>
-    </sl-menu>
-  </sl-dropdown>
-</sl-button-group>
-```
-
 [component-metadata:sl-button]

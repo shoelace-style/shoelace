@@ -34,6 +34,16 @@ sl-button-group {
   > sl-dropdown:not(:first-child) > sl-button[slot='trigger'],
   > sl-tooltip:not(:first-child) > sl-button {
     margin-left: calc(-1 * var(--sl-input-border-width));
+
+    // Add a visual separator between solid buttons
+    &:not([type='default'])::part(base):not(:hover):not(:active):not(:focus)::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      border-left: solid 1px #ffffff40;
+    }
   }
 
   // Hover

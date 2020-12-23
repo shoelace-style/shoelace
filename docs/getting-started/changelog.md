@@ -20,6 +20,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
   - Removed `input`, `prefix` and `suffix` parts
 - 🚨 BREAKING CHANGE: Removed `copy-button` part from `sl-color-picker` since copying is now done by clicking the preview
 - Added `getFormattedValue()` method to `sl-color-picker` so you can retrieve the current value in any format
+- Added visual separators between solid buttons in `sl-button-group`
 - Fixed a bug where moving the mouse while `sl-dropdown` is closing would remove focus from the trigger
 - Fixed a bug where `sl-menu-item` didn't set a default color in the dark theme
 - Fixed a bug where `sl-color-picker` preview wouldn't update in Safari

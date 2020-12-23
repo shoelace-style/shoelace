@@ -44,13 +44,21 @@ All button sizes are supported, but avoid mixing sizes within the same button gr
 
 ### Theme Buttons
 
-Theme buttons are supported through the button's `type` attribute. Types can be mixed as needed.
+Theme buttons are supported through the button's `type` attribute.
 
 ```html preview
 <sl-button-group>
   <sl-button type="primary">Left</sl-button>
   <sl-button type="primary">Center</sl-button>
   <sl-button type="primary">Right</sl-button>
+</sl-button-group>
+
+<br><br>
+
+<sl-button-group>
+  <sl-button type="success">Left</sl-button>
+  <sl-button type="success">Center</sl-button>
+  <sl-button type="success">Right</sl-button>
 </sl-button-group>
 
 <br><br>
@@ -64,9 +72,17 @@ Theme buttons are supported through the button's `type` attribute. Types can be 
 <br><br>
 
 <sl-button-group>
-  <sl-button>Create</sl-button>
-  <sl-button>Edit</sl-button>
-  <sl-button type="danger">Destroy</sl-button>
+  <sl-button type="warning">Left</sl-button>
+  <sl-button type="warning">Center</sl-button>
+  <sl-button type="warning">Right</sl-button>
+</sl-button-group>
+
+<br><br>
+
+<sl-button-group>
+  <sl-button type="danger">Left</sl-button>
+  <sl-button type="danger">Center</sl-button>
+  <sl-button type="danger">Right</sl-button>
 </sl-button-group>
 ```
 
@@ -112,6 +128,24 @@ Dropdowns can be placed inside button groups as long as the trigger is a `<sl-bu
       <sl-menu-item>Item 1</sl-menu-item>
       <sl-menu-item>Item 2</sl-menu-item>
       <sl-menu-item>Item 3</sl-menu-item>
+    </sl-menu>
+  </sl-dropdown>
+</sl-button-group>
+```
+
+### Split Buttons
+
+Create a split button using a button and a dropdown.
+
+```html preview
+<sl-button-group> 
+  <sl-button type="primary">Save</sl-button>
+  <sl-dropdown placement="bottom-end">
+    <sl-button slot="trigger" type="primary"caret></sl-button>
+    <sl-menu>
+      <sl-menu-item>Save</sl-menu-item>
+      <sl-menu-item>Save as&hellip;</sl-menu-item>
+      <sl-menu-item>Save all</sl-menu-item>
     </sl-menu>
   </sl-dropdown>
 </sl-button-group>
