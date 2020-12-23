@@ -94,6 +94,7 @@ Use the `placement` attribute to set the preferred placement of the tooltip.
 
   .tooltip-placement-example sl-button {
     float: left;
+    width: 2.5rem;
     margin-right: 0.25rem;
     margin-bottom: 0.25rem;
   }
