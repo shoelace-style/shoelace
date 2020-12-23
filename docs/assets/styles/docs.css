@@ -273,6 +273,10 @@ strong {
   margin: 0 0 1rem 0;
 }
 
+.markdown-section ul ul {
+  margin-bottom: 0;
+}
+
 .docsify-pagination-container {
   border-top-color: var(--sl-color-gray-200) !important;
 }
