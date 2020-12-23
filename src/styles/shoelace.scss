@@ -225,9 +225,9 @@
   --sl-input-placeholder-color: var(--sl-color-gray-400);
   --sl-input-placeholder-color-disabled: var(--sl-color-gray-600);
 
-  --sl-input-spacing-small: 0.625rem; // 10px
-  --sl-input-spacing-medium: 0.75rem; // 12px
-  --sl-input-spacing-large: 0.875rem; // 14px
+  --sl-input-spacing-small: var(--sl-spacing-small);
+  --sl-input-spacing-medium: var(--sl-spacing-medium);
+  --sl-input-spacing-large: var(--sl-spacing-large);
 
   // Labels
   --sl-input-label-font-size-small: var(--sl-font-size-small);
