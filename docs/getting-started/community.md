@@ -2,45 +2,40 @@
 
 Shoelace has a budding community of designers and developers that are building amazing things with web components. We'd love for you to become a part of it!
 
-## Discord
+Please be respectful of other users and remember that Shoelace is an open source project. We'll try to help when we can, but there's no guarantee we'll be able solve your problem. Please manage your expectations and don't forget to contribute back to the conversation when you can!
 
-The [community chat](https://discord.gg/mg8f26C) is open to the public and powered by [Discord](https://discord.com/). This is the best place to:
+## Discussion Forum
 
-- Ask questions
-- Get feedback
+The [discussion forum](https://github.com/shoelace-style/shoelace/discussions) is open to anyone with a GitHub account. This is the best place to:
+
+- Ask for help
+- Share ideas and get feedback
 - Show the community what you're working on
 - Hang out with other designers, developers, and Shoelace users
-- Talk to the creator
 
-Please be respectful of other users and remember that Shoelace is an open source project. We'll try to help when we can, but there's no guarantee we'll be able solve your problem. Please manage your expectations and don't forget to contribute back to the conversation when you can!
+<sl-button type="primary" href="https://github.com/shoelace-style/shoelace/discussions" target="_blank">
+  Join the Discussion
+</sl-button>
+
+## Community Chat
+
+The [community chat](https://discord.gg/mg8f26C) is open to the public and powered by [Discord](https://discord.com/). This is a good place to:
+
+- Ask for help
+- Share ideas and get feedback
+- Show the community what you're working on
+- Hang out with other designers, developers, and Shoelace users
 
 <sl-button type="primary" href="https://discord.gg/mg8f26C" target="_blank">
   Join the Chat
 </sl-button>
 
-
-## Stack Overflow
-
-If you have a specific problem to solve, Stack Overflow is a great place to get feedback from other developers. For best results, try to generalize your question and avoid bloating it with unnecessary or unrelated code.
-
-<sl-button type="primary" href="https://stackoverflow.com/questions/ask?tags=shoelace" target="_blank">
-  Ask a Question
-</sl-button>
-
-
 ## Twitter
 
 Follow [@shoelace_style](https://twitter.com/shoelace_style) on Twitter for general updates and announcements about Shoelace. This is a great place to say "hi" or to share something you're working on. You're also welcome to follow [@claviska](https://twitter.com/claviska), the creator, for tweets about web components, web development, and life.
 
-**Please avoid using Twitter for support questions.** The community chat is a much better place to share code snippets, screenshots, and other troubleshooting info. You'll have much better luck there, as more users will have a chance to help you.
-
-Oh, and don't forget to tell your followers about Shoelace!
+**Please avoid using Twitter for support questions.** The [discussion forum](https://github.com/shoelace-style/shoelace/discussions) is a much better place to share code snippets, screenshots, and other troubleshooting info. You'll have much better luck there, as more users will have a chance to help you.
 
 <sl-button type="primary" href="https://twitter.com/shoelace_style" target="_blank">
   Follow on Twitter
 </sl-button>
-
-<sl-button href="https://twitter.com/intent/tweet?text=Shoelace%20-%20a%20forward%20thinking%20library%20of%20web%20components.%20https%3A%2F%2Fshoelace.style%2F" target="_blank">
-  Send a Tweet
-</sl-button>
-

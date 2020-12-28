@@ -1,4 +1,4 @@
 contact_links:
-  - name: Personal Support
-    url: https://github.com/sponsors/claviska
-    about: Support for issues outside the scope of the library can be obtained via sponsorship.
+  - name: Help & Support
+    url: https://github.com/shoelace-style/shoelace/discussions/categories/help
+    about: Please don't create issues for personal help requests. Instead, ask your question on the discussion forum.
