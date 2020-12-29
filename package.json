@@ -1,7 +1,10 @@
 {
   "name": "@shoelace-style/shoelace",
-  "version": "2.0.0-beta.25",
   "description": "A forward-thinking library of web components.",
+  "version": "2.0.0-beta.25",
+  "homepage": "https://shoelace.style/",
+  "author": "Cory LaViska",
+  "license": "MIT",
   "main": "dist/index.cjs.js",
   "module": "dist/custom-elements/index.js",
   "es2015": "dist/esm/index.js",
@@ -18,6 +21,9 @@
   "repository": {
     "type": "git",
     "url": "git://github.com/shoelace-style/shoelace.git"
+  },
+  "bugs": {
+    "url": "https://github.com/shoelace-style/shoelace/issues"
   },
   "funding": {
     "type": "individual",
@@ -65,7 +71,6 @@
     "typescript": "^4.0.2",
     "workbox-build": "4.3.1"
   },
-  "license": "MIT",
   "dependencies": {
     "@popperjs/core": "^2.5.3",
     "@stencil/core": "^2.3.0",
