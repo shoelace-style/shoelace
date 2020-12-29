@@ -209,7 +209,16 @@ Custom icons can be loaded individually with the `src` attribute. Only SVGs on a
 
     .icon-list-item {
       font-size: 20px;
-    }    
+    }
+
+    .icon-search-controls {
+      display: block;
+    }
+
+    .icon-search-controls sl-select {
+      width: auto;
+      margin: 1rem 0 0 0;
+    }
   }
 
   @media screen and (max-width: 500px) {
