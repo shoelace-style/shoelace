@@ -216,7 +216,9 @@
   }
 
   sl-button {
-    width: 3.125rem;
+    min-width: 3.125rem;
+    max-width: 3.125rem;
+    font-size: 1rem;
     margin-left: var(--sl-spacing-small);
   }
 }

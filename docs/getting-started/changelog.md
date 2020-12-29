@@ -12,6 +12,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
   - Removed ~400 baked-in Animista animations because they were causing ~200KB of bloat (they can still be used with custom keyframes)
   - Reworked animations into a separate module ([`@shoelace-style/animations`](https://github.com/shoelace-style/animations)) so it's more maintainable and animations are sync with the latest version of animate.css
   - Animation and easing names are now camelcase (e.g. `easeInOut` instead of `ease-in-out`)
+- Fixed a bug in `sl-color-picker` where the toggle button was smaller than the preview button in Safari
 
 ## 2.0.0-beta.25
 
