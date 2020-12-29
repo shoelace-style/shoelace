@@ -55,7 +55,7 @@ export namespace Components {
          */
         "duration": number;
         /**
-          * The rate of the animation's change over time.
+          * The easing function to use for the animation. This can be a Shoelace easing function or a custom easing function such as `cubic-bezier(0, 1, .76, 1.14)`.
          */
         "easing": string;
         /**
@@ -95,7 +95,7 @@ export namespace Components {
          */
         "keyframes": Keyframe[];
         /**
-          * The name of the animation to use.
+          * The name of the built-in animation to use. For custom animations, use the `keyframes` prop.
          */
         "name": string;
         /**
@@ -1718,7 +1718,7 @@ declare namespace LocalJSX {
          */
         "duration"?: number;
         /**
-          * The rate of the animation's change over time.
+          * The easing function to use for the animation. This can be a Shoelace easing function or a custom easing function such as `cubic-bezier(0, 1, .76, 1.14)`.
          */
         "easing"?: string;
         /**
@@ -1742,7 +1742,7 @@ declare namespace LocalJSX {
          */
         "keyframes"?: Keyframe[];
         /**
-          * The name of the animation to use.
+          * The name of the built-in animation to use. For custom animations, use the `keyframes` prop.
          */
         "name"?: string;
         /**

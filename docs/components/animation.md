@@ -2,15 +2,15 @@
 
 [component-header:sl-animation]
 
-Animate elements declaratively with over 500 baked-in presets, or roll your own with custom keyframes. Powered by the [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API).
+Animate elements declaratively with nearly 100 baked-in presets, or roll your own with custom keyframes. Powered by the [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API).
 
-To animate an element, wrap it in `<sl-animation>` and set a `name` and `duration`.
+To animate an element, wrap it in `<sl-animation>` and set a `name` and `duration`. Refer to the [properties table](#properties) for additional options.
 
 ```html preview
 <div class="animation-overview">
   <sl-animation name="bounce" duration="2000"><div class="box"></div></sl-animation>
   <sl-animation name="jello" duration="2000"><div class="box"></div></sl-animation>
-  <sl-animation name="heart-beat" duration="2000"><div class="box"></div></sl-animation>
+  <sl-animation name="heartBeat" duration="2000"><div class="box"></div></sl-animation>
   <sl-animation name="flip" duration="2000"><div class="box"></div></sl-animation>
 </div>
 
@@ -31,7 +31,7 @@ To animate an element, wrap it in `<sl-animation>` and set a `name` and `duratio
 
 ### Animations & Easings
 
-This example demonstrates all of the baked-in animations and easings. All animations were generated based on the popular [Animate.css](https://animate.style/) and [Animista](https://animista.net/) projects.
+This example demonstrates all of the baked-in animations and easings. Animations are based on those found in the popular [Animate.css](https://animate.style/) library.
 
 ```html preview
 <div class="animation-sandbox">
@@ -103,7 +103,7 @@ Use an [Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/
 
 ```html preview
 <div class="animation-scroll">
-  <sl-animation name="scale-in-center" duration="3000" iterations="1"><div class="box"></div></sl-animation>
+  <sl-animation name="jackInTheBox" duration="2000" iterations="1"><div class="box"></div></sl-animation>
 </div>
 
 <script>
@@ -149,10 +149,20 @@ Supply your own [keyframe formats](https://developer.mozilla.org/en-US/docs/Web/
 <script>
   const animation = document.querySelector('.animation-keyframes sl-animation');
   animation.keyframes = [
-    { transform: 'scale(1)', opacity: 1 },
-    { transform: 'scale(.5)', opacity: .5 },
-    { transform: 'scale(.667)', opacity: .667 },
-    { transform: 'scale(.6)', opacity: .6 }
+    {
+      offset: 0,
+      easing: 'cubic-bezier(0.250, 0.460, 0.450, 0.940)',
+      fillMode: 'both',
+      transformOrigin: 'center center',
+      transform: 'rotate(0)'
+    },
+    {
+      offset: 1,
+      easing: 'cubic-bezier(0.250, 0.460, 0.450, 0.940)',
+      fillMode: 'both',
+      transformOrigin: 'center center',
+      transform: 'rotate(90deg)'
+    }
   ];
 </script>
 

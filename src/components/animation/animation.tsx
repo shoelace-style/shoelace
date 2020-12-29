@@ -1,6 +1,6 @@
 import { Component, Element, Event, EventEmitter, Method, Prop, Watch, h } from '@stencil/core';
-import animations from './animations';
-import easings from './easings';
+import { animations } from './animations';
+import { easings } from './easings';
 
 /**
  * @since 2.0
@@ -19,7 +19,7 @@ export class Animate {
 
   @Element() host: HTMLSlAnimationElement;
 
-  /** The name of the animation to use. */
+  /** The name of the built-in animation to use. For custom animations, use the `keyframes` prop. */
   @Prop() name = 'none';
 
   /** The number of milliseconds to delay the start of the animation. */
@@ -31,7 +31,10 @@ export class Animate {
   /** The number of milliseconds each iteration of the animation takes to complete. */
   @Prop() duration = 1000;
 
-  /** The rate of the animation's change over time. */
+  /**
+   * The easing function to use for the animation. This can be a Shoelace easing function or a custom easing function
+   * such as `cubic-bezier(0, 1, .76, 1.14)`.
+   */
   @Prop() easing = 'linear';
 
   /** The number of milliseconds to delay after the active period of an animation sequence. */
@@ -125,8 +128,8 @@ export class Animate {
   }
 
   createAnimation() {
-    const easing = easings.hasOwnProperty(this.easing) ? easings[this.easing] : this.easing;
-    const keyframes = this.keyframes ? this.keyframes : animations[this.name];
+    const easing = easings[this.easing] || this.easing;
+    const keyframes: Keyframe[] = this.keyframes ? this.keyframes : animations[this.name];
     const slot = this.host.shadowRoot.querySelector('slot');
     const element = slot.assignedElements({ flatten: true })[0] as HTMLElement;
 
