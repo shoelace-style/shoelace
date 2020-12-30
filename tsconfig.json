@@ -4,7 +4,7 @@
     "allowUnreachableCode": false,
     "declaration": false,
     "experimentalDecorators": true,
-    "lib": ["dom", "es2017", "dom", "dom.iterable"],
+    "lib": ["dom", "es2017", "dom.iterable"],
     "moduleResolution": "node",
     "module": "esnext",
     "target": "es2017",
