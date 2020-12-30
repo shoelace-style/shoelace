@@ -115,6 +115,7 @@ export class Alert {
     }
 
     clearTimeout(this.autoHideTimeout);
+    this.isVisible = false;
     this.open = false;
   }
 
