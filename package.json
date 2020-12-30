@@ -37,7 +37,7 @@
     "make-icons": "node make-icons.js",
     "prettier": "prettier --write --loglevel warn .",
     "postbuild": "npm run make-dist",
-    "prebuild": "npm run prettier && npm run lint && npm run make-icons",
+    "prebuild": "npm run prettier && npm run lint && npm run make-icons && npm run test",
     "serve": "node dev-server.js",
     "start": "concurrently --kill-others \"npm run dev\" \"npm run serve\"",
     "test.watch": "stencil test --spec --e2e --watchAll",
