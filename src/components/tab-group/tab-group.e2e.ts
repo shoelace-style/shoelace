@@ -1,27 +1,25 @@
 import { newE2EPage } from '@stencil/core/testing';
 
-const testContent = `
-<sl-tab-group>
-  <sl-tab slot="nav" panel="general">General</sl-tab>
-  <sl-tab slot="nav" panel="custom">Custom</sl-tab>
-  <sl-tab slot="nav" panel="advanced">Advanced</sl-tab>
-  <sl-tab slot="nav" panel="disabled" disabled>Disabled</sl-tab>
+const testTabGroup = `
+  <sl-tab-group>
+    <sl-tab slot="nav" panel="general">General</sl-tab>
+    <sl-tab slot="nav" panel="custom">Custom</sl-tab>
+    <sl-tab slot="nav" panel="advanced">Advanced</sl-tab>
 
-  <sl-tab-panel name="general">This is the general tab panel.</sl-tab-panel>
-  <sl-tab-panel name="custom">This is the custom tab panel.</sl-tab-panel>
-  <sl-tab-panel name="advanced">This is the advanced tab panel.</sl-tab-panel>
-  <sl-tab-panel name="disabled">This is a disabled tab panel.</sl-tab-panel>
-</sl-tab-group>
+    <sl-tab-panel name="general">This is the general tab panel.</sl-tab-panel>
+    <sl-tab-panel name="custom">This is the custom tab panel.</sl-tab-panel>
+    <sl-tab-panel name="advanced">This is the advanced tab panel.</sl-tab-panel>
+  </sl-tab-group>
 `;
 
-describe('tab group', () => {
+describe('<sl-tab group>', () => {
   it('should only show first panel by default', async () => {
-    const page = await newE2EPage();
-    await page.setContent(testContent);
-
+    const page = await newE2EPage({
+      html: testTabGroup
+    });
     const firstPanelName = 'general';
-
     const firstPanel = await page.find(`sl-tab-panel[name=${firstPanelName}]`);
+
     expect(await firstPanel.isVisible()).toBe(true);
 
     const otherPanels = await page.findAll(`sl-tab-panel:not([name=${firstPanelName}]`);
@@ -31,22 +29,22 @@ describe('tab group', () => {
   });
 
   it('should have first tab activated by default', async () => {
-    const page = await newE2EPage();
-    await page.setContent(testContent);
-
+    const page = await newE2EPage({
+      html: testTabGroup
+    });
     const firstPanelName = 'general';
-
     const tab = await page.find(`sl-tab[panel=${firstPanelName}] >>> .tab`);
+
     expect(tab).toHaveClass('tab--active');
   });
 
   it('should show appropriate panel when tab is selected by clicking', async () => {
-    const page = await newE2EPage();
-    await page.setContent(testContent);
-
+    const page = await newE2EPage({
+      html: testTabGroup
+    });
     const selectedPanelName = 'custom';
-
     const selectedTab = await page.find(`sl-tab[panel=${selectedPanelName}]`);
+
     await selectedTab.click();
 
     const selectedPanel = await page.find(`sl-tab-panel[name=${selectedPanelName}]`);
@@ -59,25 +57,25 @@ describe('tab group', () => {
   });
 
   it('should have appropriate tab activated when selected by clicking', async () => {
-    const page = await newE2EPage();
-    await page.setContent(testContent);
-
+    const page = await newE2EPage({
+      html: testTabGroup
+    });
     const selectedPanelName = 'advanced';
-
     const selectedTab = await page.find(`sl-tab[panel=${selectedPanelName}]`);
+
     await selectedTab.click();
 
     const tab = await page.find(`sl-tab[panel=${selectedPanelName}] >>> .tab`);
     expect(tab).toHaveClass('tab--active');
   });
 
-  it('should show appropriate panel when show method called', async () => {
-    const page = await newE2EPage();
-    await page.setContent(testContent);
-
+  it('should show appropriate panel when show() is called', async () => {
+    const page = await newE2EPage({
+      html: testTabGroup
+    });
     const selectedPanelName = 'custom';
-
     const tabGroup = await page.find('sl-tab-group');
+
     await tabGroup.callMethod('show', selectedPanelName);
 
     const selectedPanel = await page.find(`sl-tab-panel[name=${selectedPanelName}]`);
@@ -87,17 +85,16 @@ describe('tab group', () => {
     expect(tab).toHaveClass('tab--active');
   });
 
-  it('should emit slTabHide and slTabShow events when tab is changed', async () => {
-    const page = await newE2EPage();
-    await page.setContent(testContent);
-
+  it('should emit sl-tab-hide and sl-tab-show events when tab is changed', async () => {
+    const page = await newE2EPage({
+      html: testTabGroup
+    });
     const tabGroup = await page.find('sl-tab-group');
-    const slTabHide = await tabGroup.spyOnEvent('slTabHide');
-    const slTabShow = await tabGroup.spyOnEvent('slTabShow');
-
+    const slTabHide = await tabGroup.spyOnEvent('sl-tab-hide');
+    const slTabShow = await tabGroup.spyOnEvent('sl-tab-show');
     const selectedPanelName = 'advanced';
-
     const selectedTab = await page.find(`sl-tab[panel=${selectedPanelName}]`);
+
     await selectedTab.click();
 
     expect(slTabHide).toHaveReceivedEventTimes(1);
@@ -106,17 +103,16 @@ describe('tab group', () => {
     expect(slTabShow).toHaveReceivedEventDetail({ name: 'advanced' });
   });
 
-  it('should change tab with the show method', async () => {
-    const page = await newE2EPage();
-    await page.setContent(testContent);
-
+  it('should change tabs when show() is called', async () => {
+    const page = await newE2EPage({
+      html: testTabGroup
+    });
     const tabGroup = await page.find('sl-tab-group');
-    const slTabHide = await tabGroup.spyOnEvent('slTabHide');
-    const slTabShow = await tabGroup.spyOnEvent('slTabShow');
-
+    const slTabHide = await tabGroup.spyOnEvent('sl-tab-hide');
+    const slTabShow = await tabGroup.spyOnEvent('sl-tab-show');
     const selectedPanelName = 'advanced';
-
     const selectedTab = await page.find(`sl-tab[panel=${selectedPanelName}]`);
+
     await selectedTab.click();
 
     expect(slTabHide).toHaveReceivedEventTimes(1);

@@ -811,7 +811,7 @@ export namespace Components {
          */
         "setFocus": () => Promise<void>;
         /**
-          * A unique value to store in the menu item.
+          * A unique value to store in the menu item. This can be used as a way to identify menu items when selected.
          */
         "value": string;
     }
@@ -2505,7 +2505,7 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
-          * A unique value to store in the menu item.
+          * A unique value to store in the menu item. This can be used as a way to identify menu items when selected.
          */
         "value"?: string;
     }

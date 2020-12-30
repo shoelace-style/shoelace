@@ -28,7 +28,7 @@ export class MenuItem {
   /** Set to true to draw the item in a checked state. */
   @Prop({ reflect: true }) checked = false;
 
-  /** A unique value to store in the menu item. */
+  /** A unique value to store in the menu item. This can be used as a way to identify menu items when selected. */
   @Prop({ reflect: true }) value = '';
 
   /** Set to true to draw the menu item in a disabled state. */
