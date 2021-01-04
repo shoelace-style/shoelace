@@ -126,7 +126,7 @@ export class Alert {
    */
   @Method()
   async toast() {
-    return new Promise(resolve => {
+    return new Promise<void>(resolve => {
       if (!toastStack.parentElement) {
         document.body.append(toastStack);
       }
