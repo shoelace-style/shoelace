@@ -31,7 +31,7 @@ export namespace Components {
         /**
           * Displays the alert as a toast notification. This will move the alert out of its position in the DOM and, when dismissed, it will be removed from the DOM completely. By storing a reference to the alert, you can reuse it by calling this method again. The returned promise will resolve after the alert is hidden.
          */
-        "toast": () => Promise<unknown>;
+        "toast": () => Promise<void>;
         /**
           * The type of alert.
          */
@@ -299,7 +299,7 @@ export namespace Components {
         /**
           * Checks for validity and shows the browser's validation message if the control is invalid.
          */
-        "reportValidity": () => Promise<unknown>;
+        "reportValidity": () => Promise<boolean | void>;
         /**
           * Sets a custom validation message. If `message` is not empty, the field will be considered invalid.
          */
