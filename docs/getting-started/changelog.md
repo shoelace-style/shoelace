@@ -15,6 +15,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Added initial E2E tests [#169](https://github.com/shoelace-style/shoelace/pull/169)
 - Fixed a bug where `sl-hide` would be emitted twice when closing an alert with `hide()`
 - Fixed a bug in `sl-color-picker` where the toggle button was smaller than the preview button in Safari
+- Fixed a bug in `sl-tab-group` where activating a nested tab group didn't work properly [#299](https://github.com/shoelace-style/shoelace/issues/299)
 
 ## 2.0.0-beta.25
 

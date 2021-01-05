@@ -114,6 +114,7 @@ export class TabGroup {
 
   getAllTabs(includeDisabled = false) {
     const slot = this.tabs.querySelector('slot');
+
     return [...slot.assignedElements()].filter((el: any) => {
       return includeDisabled
         ? el.tagName.toLowerCase() === 'sl-tab'
@@ -135,6 +136,12 @@ export class TabGroup {
   handleClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
     const tab = target.closest('sl-tab');
+    const tabGroup = tab.closest('sl-tab-group');
+
+    // Ensure the target tab is in this tab group
+    if (tabGroup !== this.host) {
+      return false;
+    }
 
     if (tab) {
       this.setActiveTab(tab);
@@ -142,11 +149,17 @@ export class TabGroup {
   }
 
   handleKeyDown(event: KeyboardEvent) {
+    const target = event.target as HTMLElement;
+    const tab = target.closest('sl-tab');
+    const tabGroup = tab.closest('sl-tab-group');
+
+    // Ensure the target tab is in this tab group
+    if (tabGroup !== this.host) {
+      return false;
+    }
+
     // Activate a tab
     if (['Enter', ' '].includes(event.key)) {
-      const target = event.target as HTMLElement;
-      const tab = target.closest('sl-tab');
-
       if (tab) {
         this.setActiveTab(tab);
         event.preventDefault();
