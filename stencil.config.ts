@@ -34,10 +34,6 @@ export const config: Config = {
     {
       type: 'docs-vscode',
       file: './dist/custom-elements.json'
-    },
-    {
-      type: 'www',
-      serviceWorker: undefined // disable service workers
     }
   ],
   plugins: [
