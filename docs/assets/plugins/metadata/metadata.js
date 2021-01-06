@@ -175,32 +175,24 @@
     return table.outerHTML;
   }
 
-  function createDependenciesList(dependencies) {
+  function createDependenciesList(dependencies, dependencyGraph) {
+    const all = [...dependencies];
     const ul = document.createElement('ul');
-    ul.innerHTML = `
-        ${dependencies
-          .map(
-            dependency => `
-              <li><code>${escapeHtml(dependency)}</code></li>
-            `
-          )
-          .join('')}
-    `;
 
-    return ul.outerHTML;
-  }
+    // Gather subdependencies from the dependency graph
+    Object.keys(dependencyGraph).map(key => {
+      dependencyGraph[key].map(subdep => {
+        if (!all.includes(subdep)) {
+          all.push(subdep);
+        }
+      });
+    });
 
-  function createDependentsList(dependents) {
-    const ul = document.createElement('ul');
-    ul.innerHTML = `
-        ${dependents
-          .map(
-            dependent => `
-              <li><code>${escapeHtml(dependent)}</code></li>
-            `
-          )
-          .join('')}
-    `;
+    all.sort().map(dependency => {
+      const li = document.createElement('li');
+      li.innerHTML = `<code>${dependency}</code>`;
+      ul.appendChild(li);
+    });
 
     return ul.outerHTML;
   }
@@ -384,7 +376,7 @@
             This component has the following dependencies. If you're not using the lazy loader, be sure to import and
             register these components in addition to <code>${tag}</code>.
 
-            ${createDependenciesList(data.dependencies)}
+            ${createDependenciesList(data.dependencies, data.dependencyGraph)}
           `;
         }
 
