@@ -16,6 +16,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug where `sl-hide` would be emitted twice when closing an alert with `hide()`
 - Fixed a bug in `sl-color-picker` where the toggle button was smaller than the preview button in Safari
 - Fixed a bug in `sl-tab-group` where activating a nested tab group didn't work properly [#299](https://github.com/shoelace-style/shoelace/issues/299)
+- Updated the docs to show dependencies instead of dependents which is much more useful when working with the custom elements bundle
 
 ## 2.0.0-beta.25
 

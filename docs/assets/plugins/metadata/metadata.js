@@ -175,6 +175,21 @@
     return table.outerHTML;
   }
 
+  function createDependenciesList(dependencies) {
+    const ul = document.createElement('ul');
+    ul.innerHTML = `
+        ${dependencies
+          .map(
+            dependency => `
+              <li><code>${escapeHtml(dependency)}</code></li>
+            `
+          )
+          .join('')}
+    `;
+
+    return ul.outerHTML;
+  }
+
   function createDependentsList(dependents) {
     const ul = document.createElement('ul');
     ul.innerHTML = `
@@ -362,13 +377,14 @@
           `;
         }
 
-        if (data.dependents.length) {
+        if (data.dependencies.length) {
           result += `
-            ## Dependents
+            ## Dependencies
 
-            The following components make use of this component.
+            This component has the following dependencies. If you're not using the lazy loader, be sure to import and
+            register these components in addition to <code>${tag}</code>.
 
-            ${createDependentsList(data.dependents)}
+            ${createDependenciesList(data.dependencies)}
           `;
         }
 
