@@ -10,7 +10,7 @@ let id = 0;
  * @status stable
  *
  * @slot - The drawer's content.
- * @slot label - The dialog's label. Alternatively, you can use the label prop.
+ * @slot label - The drawer's label. Alternatively, you can use the label prop.
  * @slot footer - The drawer's footer, usually one or more buttons representing various options.
  *
  * @part base - The component's base wrapper.
@@ -81,6 +81,12 @@ export class Drawer {
   /** Emitted after the drawer closes and all transitions are complete. */
   @Event({ eventName: 'sl-after-hide' }) slAfterHide: EventEmitter;
 
+  /**
+   * Emitted when the drawer opens and the panel gains focus. Calling `event.preventDefault()` will prevent focus and
+   * allow you to set it on a different element in the drawer, such as an input or button.
+   */
+  @Event({ eventName: 'sl-initial-focus' }) slInitialFocus: EventEmitter;
+
   /** Emitted when the overlay is clicked. Calling `event.preventDefault()` will prevent the drawer from closing. */
   @Event({ eventName: 'sl-overlay-dismiss' }) slOverlayDismiss: EventEmitter;
 
@@ -130,6 +136,16 @@ export class Drawer {
     if (!this.contained) {
       this.modal.activate();
       lockBodyScrolling(this.host);
+    }
+
+    if (this.open) {
+      // Wait for the next frame before setting initial focus so the drawer is technically visible
+      requestAnimationFrame(() => {
+        const slInitialFocus = this.slInitialFocus.emit();
+        if (!slInitialFocus.defaultPrevented) {
+          this.panel.focus({ preventScroll: true });
+        }
+      });
     }
   }
 
@@ -184,10 +200,6 @@ export class Drawer {
       this.willShow = false;
       this.willHide = false;
       this.open ? this.slAfterShow.emit() : this.slAfterHide.emit();
-
-      if (this.open) {
-        this.panel.focus();
-      }
     }
   }
 

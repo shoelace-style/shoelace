@@ -108,4 +108,34 @@ By default, dialogs are closed when the user clicks or taps on the overlay. To p
 </script>
 ```
 
+### Customizing Initial Focus
+
+By default, the dialog's panel will gain focus when opened. To set focus on a different element, listen for the `sl-initial-focus` event.
+
+```html preview
+<sl-dialog label="Dialog" class="dialog-focus">
+  <sl-input placeholder="I will have focus when the dialog is opened"></sl-input>
+  <sl-button slot="footer" type="primary">Close</sl-button>
+</sl-dialog>
+
+<sl-button>Open Dialog</sl-button>
+
+<script>
+  (() => {
+    const dialog = document.querySelector('.dialog-focus');
+    const input = dialog.querySelector('sl-input');
+    const openButton = dialog.nextElementSibling;
+    const closeButton = dialog.querySelector('sl-button[slot="footer"]');
+
+    openButton.addEventListener('click', () => dialog.show());
+    closeButton.addEventListener('click', () => dialog.hide());
+
+    dialog.addEventListener('sl-initial-focus', event => {
+      event.preventDefault();
+      input.setFocus()
+    });
+  })();
+</script>
+```
+
 [component-metadata:sl-dialog]

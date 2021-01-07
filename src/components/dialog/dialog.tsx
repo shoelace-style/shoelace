@@ -73,6 +73,12 @@ export class Dialog {
   /** Emitted after the dialog closes and all transitions are complete. */
   @Event({ eventName: 'sl-after-hide' }) slAfterHide: EventEmitter;
 
+  /**
+   * Emitted when the dialog opens and the panel gains focus. Calling `event.preventDefault()` will prevent focus and
+   * allow you to set it on a different element in the dialog, such as an input or button.
+   */
+  @Event({ eventName: 'sl-initial-focus' }) slInitialFocus: EventEmitter;
+
   /** Emitted when the overlay is clicked. Calling `event.preventDefault()` will prevent the dialog from closing. */
   @Event({ eventName: 'sl-overlay-dismiss' }) slOverlayDismiss: EventEmitter;
 
@@ -120,6 +126,16 @@ export class Dialog {
     this.modal.activate();
 
     lockBodyScrolling(this.host);
+
+    if (this.open) {
+      // Wait for the next frame before setting initial focus so the dialog is technically visible
+      requestAnimationFrame(() => {
+        const slInitialFocus = this.slInitialFocus.emit();
+        if (!slInitialFocus.defaultPrevented) {
+          this.panel.focus({ preventScroll: true });
+        }
+      });
+    }
   }
 
   /** Hides the dialog */
@@ -173,10 +189,6 @@ export class Dialog {
       this.willShow = false;
       this.willHide = false;
       this.open ? this.slAfterShow.emit() : this.slAfterHide.emit();
-
-      if (this.open) {
-        this.panel.focus();
-      }
     }
   }
 

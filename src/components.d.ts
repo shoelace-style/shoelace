@@ -183,7 +183,7 @@ export namespace Components {
         /**
           * Sets focus on the button.
          */
-        "setFocus": () => Promise<void>;
+        "setFocus": (options?: FocusOptions) => Promise<void>;
         /**
           * The button's size.
          */
@@ -253,7 +253,7 @@ export namespace Components {
         /**
           * Sets focus on the checkbox.
          */
-        "setFocus": () => Promise<void>;
+        "setFocus": (options?: FocusOptions) => Promise<void>;
         /**
           * The checkbox's value attribute.
          */
@@ -751,7 +751,7 @@ export namespace Components {
         /**
           * Sets focus on the input.
          */
-        "setFocus": () => Promise<void>;
+        "setFocus": (options?: FocusOptions) => Promise<void>;
         /**
           * Replaces a range of text with a new string.
          */
@@ -809,7 +809,7 @@ export namespace Components {
         /**
           * Sets focus on the button.
          */
-        "setFocus": () => Promise<void>;
+        "setFocus": (options?: FocusOptions) => Promise<void>;
         /**
           * A unique value to store in the menu item. This can be used as a way to identify menu items when selected.
          */
@@ -873,7 +873,7 @@ export namespace Components {
         /**
           * Sets focus on the radio.
          */
-        "setFocus": () => Promise<void>;
+        "setFocus": (options?: FocusOptions) => Promise<void>;
         /**
           * The radio's value attribute.
          */
@@ -911,7 +911,7 @@ export namespace Components {
         /**
           * Sets focus on the input.
          */
-        "setFocus": () => Promise<void>;
+        "setFocus": (options?: FocusOptions) => Promise<void>;
         /**
           * The input's step attribute.
          */
@@ -957,7 +957,7 @@ export namespace Components {
         /**
           * Sets focus on the rating.
          */
-        "setFocus": () => Promise<void>;
+        "setFocus": (options?: FocusOptions) => Promise<void>;
         /**
           * The current rating.
          */
@@ -1103,7 +1103,7 @@ export namespace Components {
         /**
           * Sets focus on the switch.
          */
-        "setFocus": () => Promise<void>;
+        "setFocus": (options?: FocusOptions) => Promise<void>;
         /**
           * The switch's value attribute.
          */
@@ -1133,7 +1133,7 @@ export namespace Components {
         /**
           * Sets focus to the tab.
          */
-        "setFocus": () => Promise<void>;
+        "setFocus": (options?: FocusOptions) => Promise<void>;
     }
     interface SlTabGroup {
         /**
@@ -1265,7 +1265,7 @@ export namespace Components {
         /**
           * Sets focus on the textarea.
          */
-        "setFocus": () => Promise<void>;
+        "setFocus": (options?: FocusOptions) => Promise<void>;
         /**
           * Replaces a range of text with a new string.
          */
@@ -2032,6 +2032,10 @@ declare namespace LocalJSX {
          */
         "onSl-hide"?: (event: CustomEvent<any>) => void;
         /**
+          * Emitted when the dialog opens and the panel gains focus. Calling `event.preventDefault()` will prevent focus and allow you to set it on a different element in the dialog, such as an input or button.
+         */
+        "onSl-initial-focus"?: (event: CustomEvent<any>) => void;
+        /**
           * Emitted when the overlay is clicked. Calling `event.preventDefault()` will prevent the dialog from closing.
          */
         "onSl-overlay-dismiss"?: (event: CustomEvent<any>) => void;
@@ -2069,6 +2073,10 @@ declare namespace LocalJSX {
           * Emitted when the drawer closes. Calling `event.preventDefault()` will prevent it from being closed.
          */
         "onSl-hide"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the drawer opens and the panel gains focus. Calling `event.preventDefault()` will prevent focus and allow you to set it on a different element in the drawer, such as an input or button.
+         */
+        "onSl-initial-focus"?: (event: CustomEvent<any>) => void;
         /**
           * Emitted when the overlay is clicked. Calling `event.preventDefault()` will prevent the drawer from closing.
          */

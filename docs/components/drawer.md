@@ -204,4 +204,36 @@ By default, drawers are closed when the user clicks or taps on the overlay. To p
 </script>
 ```
 
+### Customizing Initial Focus
+
+By default, the drawer's panel will gain focus when opened. To set focus on a different element, listen for the `sl-initial-focus` event.
+
+```html preview
+<sl-drawer label="Drawer" class="drawer-focus">
+  <sl-input placeholder="I will have focus when the drawer is opened"></sl-input>
+  <sl-button slot="footer" type="primary">Close</sl-button>
+</sl-drawer>
+
+<sl-button>Open Drawer</sl-button>
+
+<script>
+  (() => {
+    const drawer = document.querySelector('.drawer-focus');
+    const input = drawer.querySelector('sl-input');
+    const openButton = drawer.nextElementSibling;
+    const closeButton = drawer.querySelector('sl-button[type="primary"]');
+
+    openButton.addEventListener('click', () => drawer.show());
+    closeButton.addEventListener('click', () => drawer.hide());
+
+    drawer.addEventListener('sl-initial-focus', event => {
+      // preventScroll is necessary for the transition to work properly,
+      // otherwise the drawer will appear immediately
+      event.preventDefault();
+      input.setFocus({ preventScroll: true })
+    });    
+  })();
+</script>
+```
+
 [component-metadata:sl-drawer]
