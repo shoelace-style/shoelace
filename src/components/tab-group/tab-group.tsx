@@ -184,7 +184,7 @@ export class TabGroup {
           index = Math.min(tabs.length - 1, index + 1);
         }
 
-        tabs[index].setFocus();
+        tabs[index].setFocus({ preventScroll: true });
 
         if (['top', 'bottom'].includes(this.placement)) {
           scrollIntoView(tabs[index], this.nav, 'horizontal');

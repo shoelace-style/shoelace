@@ -69,8 +69,8 @@ export class Switch {
 
   /** Sets focus on the switch. */
   @Method()
-  async setFocus() {
-    this.input.focus();
+  async setFocus(options?: FocusOptions) {
+    this.input.focus(options);
   }
 
   /** Removes focus from the switch. */

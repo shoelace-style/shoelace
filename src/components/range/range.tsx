@@ -81,8 +81,8 @@ export class Range {
 
   /** Sets focus on the input. */
   @Method()
-  async setFocus() {
-    this.input.focus();
+  async setFocus(options?: FocusOptions) {
+    this.input.focus(options);
   }
 
   /** Removes focus from the input. */

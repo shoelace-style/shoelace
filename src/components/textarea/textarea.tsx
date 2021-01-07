@@ -153,8 +153,8 @@ export class Textarea {
 
   /** Sets focus on the textarea. */
   @Method()
-  async setFocus() {
-    this.textarea.focus();
+  async setFocus(options?: FocusOptions) {
+    this.textarea.focus(options);
   }
 
   /** Removes focus fromt the textarea. */

@@ -43,8 +43,8 @@ export class Tab {
 
   /** Sets focus to the tab. */
   @Method()
-  async setFocus() {
-    this.tab.focus({ preventScroll: true });
+  async setFocus(options?: FocusOptions) {
+    this.tab.focus(options);
   }
 
   /** Removes focus from the tab. */

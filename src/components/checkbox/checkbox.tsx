@@ -78,8 +78,8 @@ export class Checkbox {
 
   /** Sets focus on the checkbox. */
   @Method()
-  async setFocus() {
-    this.input.focus();
+  async setFocus(options?: FocusOptions) {
+    this.input.focus(options);
   }
 
   /** Removes focus from the checkbox. */

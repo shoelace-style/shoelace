@@ -60,8 +60,8 @@ export class Rating {
 
   /** Sets focus on the rating. */
   @Method()
-  async setFocus() {
-    this.rating.focus();
+  async setFocus(options?: FocusOptions) {
+    this.rating.focus(options);
   }
 
   /** Removes focus from the rating. */

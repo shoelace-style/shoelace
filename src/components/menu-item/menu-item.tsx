@@ -43,8 +43,8 @@ export class MenuItem {
 
   /** Sets focus on the button. */
   @Method()
-  async setFocus() {
-    this.menuItem.focus();
+  async setFocus(options?: FocusOptions) {
+    this.menuItem.focus(options);
   }
 
   /** Removes focus from the button. */

@@ -89,8 +89,8 @@ export class Button {
 
   /** Sets focus on the button. */
   @Method()
-  async setFocus() {
-    this.button.focus();
+  async setFocus(options?: FocusOptions) {
+    this.button.focus(options);
   }
 
   /** Removes focus from the button. */

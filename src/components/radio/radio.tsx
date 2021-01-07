@@ -74,8 +74,8 @@ export class Radio {
 
   /** Sets focus on the radio. */
   @Method()
-  async setFocus() {
-    this.input.focus();
+  async setFocus(options?: FocusOptions) {
+    this.input.focus(options);
   }
 
   /** Removes focus from the radio. */
