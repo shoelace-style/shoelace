@@ -41,7 +41,7 @@
     "serve": "node dev-server.js",
     "start": "concurrently --kill-others \"npm run dev\" \"npm run serve\"",
     "test.watch": "stencil test --spec --e2e --watchAll",
-    "test": "stencil test --spec --e2e --coverage",
+    "test": "stencil test --spec --e2e",
     "version": "npm run build"
   },
   "devDependencies": {
