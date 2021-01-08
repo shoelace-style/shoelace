@@ -1,7 +1,10 @@
 import { Component, Element, Event, EventEmitter, Method, Prop, State, Watch, h } from '@stencil/core';
 import { lockBodyScrolling, unlockBodyScrolling } from '../../utilities/scroll';
 import { hasSlot } from '../../utilities/slot';
+import { isPreventScrollSupported } from '../../utilities/support';
 import Modal from '../../utilities/modal';
+
+const hasPreventScroll = isPreventScrollSupported();
 
 let id = 0;
 
@@ -139,13 +142,29 @@ export class Drawer {
     }
 
     if (this.open) {
-      // Wait for the next frame before setting initial focus so the drawer is technically visible
-      requestAnimationFrame(() => {
-        const slInitialFocus = this.slInitialFocus.emit();
-        if (!slInitialFocus.defaultPrevented) {
-          this.panel.focus({ preventScroll: true });
-        }
-      });
+      if (hasPreventScroll) {
+        // Wait for the next frame before setting initial focus so the dialog is technically visible
+        requestAnimationFrame(() => {
+          const slInitialFocus = this.slInitialFocus.emit();
+          if (!slInitialFocus.defaultPrevented) {
+            this.panel.focus({ preventScroll: true });
+          }
+        });
+      } else {
+        // Once Safari supports { preventScroll: true } we can remove this nasty little hack, but until then we need to
+        // wait for the transition to complete before setting focus, otherwise the panel may render in a buggy way its
+        // out of view initially.
+        //
+        // Fiddle: https://jsfiddle.net/g6buoafq/1/
+        // Safari: https://bugs.webkit.org/show_bug.cgi?id=178583
+        //
+        setTimeout(() => {
+          const slInitialFocus = this.slInitialFocus.emit();
+          if (!slInitialFocus.defaultPrevented) {
+            this.panel.focus();
+          }
+        }, 250);
+      }
     }
   }
 
