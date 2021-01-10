@@ -263,7 +263,12 @@ export class Drawer {
                   {this.label || String.fromCharCode(65279)}
                 </slot>
               </span>
-              <sl-icon-button part="close-button" class="drawer__close" name="x" onClick={this.handleCloseClick} />
+              <sl-icon-button
+                exportparts="base:close-button"
+                class="drawer__close"
+                name="x"
+                onClick={this.handleCloseClick}
+              />
             </header>
           )}
 

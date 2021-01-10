@@ -73,7 +73,7 @@ export class Tag {
         </span>
 
         {this.clearable && (
-          <sl-icon-button part="clear-button" name="x" class="tag__clear" onClick={this.handleClearClick} />
+          <sl-icon-button exportparts="base:clear-button" name="x" class="tag__clear" onClick={this.handleClearClick} />
         )}
       </span>
     );

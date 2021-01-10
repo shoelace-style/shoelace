@@ -15,6 +15,7 @@ import { focusVisible } from '../../utilities/focus-visible';
  * @part tabs - The container that wraps the slotted tabs.
  * @part active-tab-indicator - An element that displays the currently selected tab. This is a child of the tabs container.
  * @part body - The tab group body where tab panels are slotted in.
+ * @part scroll-button - The previous and next scroll buttons that appear when tabs are scrollable.
  */
 
 @Component({
@@ -305,6 +306,7 @@ export class TabGroup {
           {this.hasScrollControls && (
             <sl-icon-button
               class="tab-group__scroll-button tab-group__scroll-button--left"
+              exportparts="base:scroll-button"
               name="chevron-left"
               onClick={this.handleScrollLeft}
             />
@@ -322,6 +324,7 @@ export class TabGroup {
           {this.hasScrollControls && (
             <sl-icon-button
               class="tab-group__scroll-button tab-group__scroll-button--right"
+              exportparts="base:scroll-button"
               name="chevron-right"
               onClick={this.handleScrollRight}
             />

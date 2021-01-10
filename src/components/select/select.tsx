@@ -455,7 +455,7 @@ export class Select {
 
             {this.clearable && hasSelection && (
               <sl-icon-button
-                part="clear-button"
+                exportparts="base:clear-button"
                 class="select__clear"
                 name="x-circle"
                 onClick={this.handleClearClick}

@@ -16,9 +16,11 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Added the `FocusOptions` argument to all components that have a `setFocus()` method
 - Added `sl-initial-focus` event to `sl-dialog` and `sl-drawer` so focus can be customized to a specific element
 - Added `close-button` part to `sl-tab` so the close button can be customized
+- Added `scroll-button` part to `sl-tab-group` so the scroll buttons can be customized
 - Fixed a bug where `sl-hide` would be emitted twice when closing an alert with `hide()`
 - Fixed a bug in `sl-color-picker` where the toggle button was smaller than the preview button in Safari
 - Fixed a bug in `sl-tab-group` where activating a nested tab group didn't work properly [#299](https://github.com/shoelace-style/shoelace/issues/299)
+- Fixed a bug in `sl-alert`, `sl-dialog`, `sl-drawer`, `sl-select`, and `sl-tag` where the close button's base wasn't exported so it couldn't be styled
 - Updated the docs to show dependencies instead of dependents which is much more useful when working with the custom elements bundle
 - Updated to Bootstrap Icons 1.3.0
 

@@ -208,7 +208,7 @@ export class Alert {
 
         {this.closable && (
           <span class="alert__close">
-            <sl-icon-button part="close-button" name="x" onClick={this.handleCloseClick} />
+            <sl-icon-button exportparts="base:close-button" name="x" onClick={this.handleCloseClick} />
           </span>
         )}
       </div>
