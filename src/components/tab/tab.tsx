@@ -9,6 +9,7 @@ let id = 0;
  * @slot - The tab's label.
  *
  * @part base - The component's base wrapper.
+ * @part close-button - The close button, which is the icon button's base wrapper.
  */
 
 @Component({
@@ -81,6 +82,7 @@ export class Tab {
           {this.closable && (
             <sl-icon-button
               name="x"
+              exportparts="base:close-button"
               class="tab__close-button"
               onClick={this.handleCloseClick}
               tabIndex={-1}
