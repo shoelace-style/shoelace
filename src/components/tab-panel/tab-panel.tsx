@@ -25,7 +25,7 @@ export class TabPanel {
   @Prop() name = '';
 
   /** When true, the tab panel will be shown. */
-  @Prop() active = false;
+  @Prop({ reflect: true }) active = false;
 
   render() {
     return (
