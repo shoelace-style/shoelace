@@ -147,12 +147,16 @@ export class Dialog {
         // Fiddle: https://jsfiddle.net/g6buoafq/1/
         // Safari: https://bugs.webkit.org/show_bug.cgi?id=178583
         //
-        setTimeout(() => {
-          const slInitialFocus = this.slInitialFocus.emit();
-          if (!slInitialFocus.defaultPrevented) {
-            this.panel.focus();
-          }
-        }, 250);
+        this.dialog.addEventListener(
+          'transitionend',
+          () => {
+            const slInitialFocus = this.slInitialFocus.emit();
+            if (!slInitialFocus.defaultPrevented) {
+              this.panel.focus();
+            }
+          },
+          { once: true }
+        );
       }
     }
   }
