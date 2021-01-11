@@ -125,19 +125,19 @@ describe('<sl-tab group>', () => {
     const page = await newE2EPage({
       html: `
         <sl-tab-group>
-        <sl-tab slot="nav" panel="a">Tab A</sl-tab>
-        <sl-tab slot="nav" panel="b">Tab B</sl-tab>
+          <sl-tab slot="nav" panel="a">Tab A</sl-tab>
+          <sl-tab slot="nav" panel="b">Tab B</sl-tab>
 
-        <sl-tab-panel name="a">
-          <sl-tab-group>
-            <sl-tab slot="nav" panel="c">Tab C</sl-tab>
-            <sl-tab slot="nav" panel="d">Tab D</sl-tab>
-            <sl-tab-panel name="c">Panel C</sl-tab-panel>
-            <sl-tab-panel name="d">Panel D</sl-tab-panel>
-          </sl-tab-group>
-        </sl-tab-panel>
-        <sl-tab-panel name="b">Panel B</sl-tab-panel>
-      </sl-tab-group>
+          <sl-tab-panel name="a">
+            <sl-tab-group>
+              <sl-tab slot="nav" panel="c">Tab C</sl-tab>
+              <sl-tab slot="nav" panel="d">Tab D</sl-tab>
+              <sl-tab-panel name="c">Panel C</sl-tab-panel>
+              <sl-tab-panel name="d">Panel D</sl-tab-panel>
+            </sl-tab-group>
+          </sl-tab-panel>
+          <sl-tab-panel name="b">Panel B</sl-tab-panel>
+        </sl-tab-group>
       `
     });
     const nestedTabGroup = await page.find('sl-tab-group sl-tab-group');
