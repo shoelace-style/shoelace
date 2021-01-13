@@ -18,7 +18,7 @@ export class Badge {
   badge: HTMLElement;
 
   /** The badge's type. */
-  @Prop() type: 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text' = 'primary';
+  @Prop() type: 'primary' | 'success' | 'info' | 'warning' | 'danger' = 'primary';
 
   /** Set to true to draw a pill-style badge with rounded edges. */
   @Prop() pill = false;
@@ -40,7 +40,6 @@ export class Badge {
           'badge--info': this.type === 'info',
           'badge--warning': this.type === 'warning',
           'badge--danger': this.type === 'danger',
-          'badge--text': this.type === 'text',
           'badge--pill': this.pill,
           'badge--pulse': this.pulse
         }}
