@@ -96,14 +96,13 @@ Add the `closable` prop to a tab to show a close button. This example shows how 
 <script>
   const tabGroup = document.querySelector('.tabs-closable');
 
-  tabGroup.addEventListener('sl-close', event => {
+  tabGroup.addEventListener('sl-close', async event => {
     const tab = event.target;
     const panel = tabGroup.querySelector(`sl-tab-panel[name="${tab.panel}"]`);
 
-    // If the tab is active, show the previous tab before removing it
+    // Show the previous tab if the tab is currently active
     if (tab.active) {
-      const previousTab = tab.previousElementSibling;
-      tabGroup.show(previousTab ? previousTab.panel : 'general');
+      tabGroup.show(tab.previousElementSibling.panel);
     }
 
     // Remove the tab + panel

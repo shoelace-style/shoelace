@@ -20,6 +20,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug where `sl-hide` would be emitted twice when closing an alert with `hide()`
 - Fixed a bug in `sl-color-picker` where the toggle button was smaller than the preview button in Safari
 - Fixed a bug in `sl-tab-group` where activating a nested tab group didn't work properly [#299](https://github.com/shoelace-style/shoelace/issues/299)
+- Fixed a bug in `sl-tab-group` where removing tabs would throw an error
 - Fixed a bug in `sl-alert`, `sl-dialog`, `sl-drawer`, `sl-select`, and `sl-tag` where the close button's base wasn't exported so it couldn't be styled
 - Removed `text` type from `sl-badge` as it was erroneously copied and never had styles
 - Updated `sl-tab-group` so the `active` prop is reflected to the attribute

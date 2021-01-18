@@ -64,6 +64,7 @@ export class TabGroup {
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleScrollLeft = this.handleScrollLeft.bind(this);
     this.handleScrollRight = this.handleScrollRight.bind(this);
+    this.syncActiveTabIndicator = this.syncActiveTabIndicator.bind(this);
   }
 
   componentDidLoad() {
@@ -260,6 +261,14 @@ export class TabGroup {
 
   syncActiveTabIndicator() {
     const tab = this.getActiveTab();
+
+    if (tab) {
+      this.activeTabIndicator.style.display = 'block';
+    } else {
+      this.activeTabIndicator.style.display = 'none';
+      return;
+    }
+
     const width = tab.clientWidth;
     const height = tab.clientHeight;
     const offset = getOffset(tab, this.nav);
@@ -318,7 +327,7 @@ export class TabGroup {
                 part="active-tab-indicator"
                 class="tab-group__active-tab-indicator"
               />
-              <slot name="nav" />
+              <slot name="nav" onSlotchange={this.syncActiveTabIndicator} />
             </div>
           </div>
           {this.hasScrollControls && (
@@ -332,7 +341,7 @@ export class TabGroup {
         </div>
 
         <div ref={el => (this.body = el)} part="body" class="tab-group__body">
-          <slot />
+          <slot onSlotchange={this.syncActiveTabIndicator} />
         </div>
       </div>
     );
