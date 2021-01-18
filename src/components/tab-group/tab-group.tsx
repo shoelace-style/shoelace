@@ -137,7 +137,7 @@ export class TabGroup {
   handleClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
     const tab = target.closest('sl-tab');
-    const tabGroup = tab.closest('sl-tab-group');
+    const tabGroup = tab?.closest('sl-tab-group');
 
     // Ensure the target tab is in this tab group
     if (tabGroup !== this.host) {
@@ -152,7 +152,7 @@ export class TabGroup {
   handleKeyDown(event: KeyboardEvent) {
     const target = event.target as HTMLElement;
     const tab = target.closest('sl-tab');
-    const tabGroup = tab.closest('sl-tab-group');
+    const tabGroup = tab?.closest('sl-tab-group');
 
     // Ensure the target tab is in this tab group
     if (tabGroup !== this.host) {
@@ -311,7 +311,7 @@ export class TabGroup {
               onClick={this.handleScrollLeft}
             />
           )}
-          <div ref={el => (this.nav = el)} key="nav" part="nav" class="tab-group__nav" tabindex="-1">
+          <div ref={el => (this.nav = el)} key="nav" part="nav" class="tab-group__nav">
             <div ref={el => (this.tabs = el)} part="tabs" class="tab-group__tabs" role="tablist">
               <div
                 ref={el => (this.activeTabIndicator = el)}
