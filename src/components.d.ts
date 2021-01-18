@@ -141,7 +141,7 @@ export namespace Components {
         /**
           * The badge's type.
          */
-        "type": 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text';
+        "type": 'primary' | 'success' | 'info' | 'warning' | 'danger';
     }
     interface SlButton {
         /**
@@ -1796,7 +1796,7 @@ declare namespace LocalJSX {
         /**
           * The badge's type.
          */
-        "type"?: 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text';
+        "type"?: 'primary' | 'success' | 'info' | 'warning' | 'danger';
     }
     interface SlButton {
         /**
