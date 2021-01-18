@@ -76,6 +76,43 @@ Tabs can be shown on the right by setting `placement` to `right`.
 </sl-tab-group>
 ```
 
+### Closable Tabs
+
+Add the `closable` prop to a tab to show a close button. This example shows how you can dynamically remove tabs from the DOM when the close button is activated.
+
+```html preview
+<sl-tab-group class="tabs-closable">
+  <sl-tab slot="nav" panel="general">General</sl-tab>
+  <sl-tab slot="nav" panel="closable-1" closable>Closable 1</sl-tab>
+  <sl-tab slot="nav" panel="closable-2" closable>Closable 2</sl-tab>
+  <sl-tab slot="nav" panel="closable-3" closable>Closable 3</sl-tab>
+
+  <sl-tab-panel name="general">This is the general tab panel.</sl-tab-panel>
+  <sl-tab-panel name="closable-1">This is the first closable tab panel.</sl-tab-panel>
+  <sl-tab-panel name="closable-2">This is the second closable tab panel.</sl-tab-panel>
+  <sl-tab-panel name="closable-3">This is the third closable tab panel.</sl-tab-panel>
+</sl-tab-group>
+
+<script>
+  const tabGroup = document.querySelector('.tabs-closable');
+
+  tabGroup.addEventListener('sl-close', event => {
+    const tab = event.target;
+    const panel = tabGroup.querySelector(`sl-tab-panel[name="${tab.panel}"]`);
+
+    // If the tab is active, show the previous tab before removing it
+    if (tab.active) {
+      const previousTab = tab.previousElementSibling;
+      tabGroup.show(previousTab ? previousTab.panel : 'general');
+    }
+
+    // Remove the tab + panel
+    tab.remove();
+    panel.remove();
+  });
+</script>
+```
+
 ### Scrolling Tabs
 
 When there are more tabs than horizontal space allows, the nav will be scrollable.
