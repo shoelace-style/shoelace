@@ -6,7 +6,7 @@ Components with the <sl-badge type="warning" pill>Experimental</sl-badge> badge 
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
-## Next
+## 2.0.0-beta.26
 
 - 🚨 BREAKING CHANGE: Fixed animations bloat
   - Removed ~400 baked-in Animista animations because they were causing ~200KB of bloat (they can still be used with custom keyframes)
