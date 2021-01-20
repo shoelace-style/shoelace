@@ -15,16 +15,18 @@
   letter-spacing: var(--sl-letter-spacing-normal);
   text-align: left;
   color: var(--sl-color-gray-700);
+  border-radius: var(--sl-border-radius-medium);
   padding: var(--sl-spacing-xx-small) var(--sl-spacing-x-large);
   transition: var(--sl-transition-fast) fill;
   user-select: none;
   white-space: nowrap;
   cursor: pointer;
+  margin: 0 var(--sl-spacing-x-small);
 
   &.menu-item--focused:not(.menu-item--disabled) {
     outline: none;
-    background-color: var(--sl-color-primary-50);
-    color: var(--sl-color-primary-500);
+    background-color: var(--sl-color-primary-500);
+    color: var(--sl-color-white);
   }
 
   &.menu-item--disabled {

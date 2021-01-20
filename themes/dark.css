@@ -185,8 +185,8 @@
 }
 
 .sl-theme-dark sl-menu-item::part(base):focus {
-  background-color: var(--sl-color-primary-950);
-  color: var(--sl-color-primary-500);
+  background-color: var(--sl-color-primary-600);
+  color: var(--sl-color-white);
 }
 
 .sl-theme-dark sl-menu-item[disabled]::part(base) {
