@@ -8,6 +8,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
+- Fixed a bug in `sl-select` where removing a tag would toggle the dropdown
 - Updated `sl-menu-item` focus styles
 
 ## 2.0.0-beta.26

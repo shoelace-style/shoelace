@@ -301,7 +301,7 @@ export class Select {
     const clearButton = path.find(el => {
       if (el instanceof HTMLElement) {
         const element = el as HTMLElement;
-        return element.getAttribute('part') === 'clear-button';
+        return element.classList.contains('tag__clear');
       }
     });
 
