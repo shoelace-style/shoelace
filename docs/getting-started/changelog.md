@@ -10,6 +10,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 - Fixed a bug in `sl-select` where removing a tag would toggle the dropdown
 - Updated `sl-menu-item` focus styles
+- Updated `sl-select` so tags will wrap when `multiple` is true
 
 ## 2.0.0-beta.26
 
