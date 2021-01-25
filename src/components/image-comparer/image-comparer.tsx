@@ -7,6 +7,7 @@ import { clamp } from '../../utilities/math';
  *
  * @slot before - The before image, an `<img>` or `<svg>` element.
  * @slot after - The after image, an `<img>` or `<svg>` element.
+ * @slot handle-icon - The icon used inside the handle.
  *
  * @part base - The component's base wrapper.
  * @part before - The container that holds the "before" image.
@@ -135,7 +136,9 @@ export class ImageComparer {
             aria-valuemax="100"
             tabIndex={0}
           >
-            <sl-icon class="image-comparer__handle-icon" name="grip-vertical" />
+            <slot name="handle-icon">
+              <sl-icon class="image-comparer__handle-icon" name="grip-vertical" />
+            </slot>
           </div>
         </div>
       </div>
