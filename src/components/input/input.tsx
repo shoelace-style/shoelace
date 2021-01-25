@@ -133,7 +133,8 @@ export class Input {
 
   @Watch('value')
   handleValueChange() {
-    this.invalid = !this.input.checkValidity();
+    // In rare cases, the watcher may be called before render so we need to make sure the input exists
+    this.invalid = this.input ? !this.input.checkValidity() : false;
   }
 
   /** Emitted when the control's value changes. */

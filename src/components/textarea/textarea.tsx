@@ -123,7 +123,8 @@ export class Textarea {
 
   @Watch('value')
   handleValueChange() {
-    this.invalid = !this.textarea.checkValidity();
+    // In rare cases, the watcher may be called before render so we need to make sure the textarea exists
+    this.invalid = this.textarea ? !this.textarea.checkValidity() : false;
   }
 
   connectedCallback() {
