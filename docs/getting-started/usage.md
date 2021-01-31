@@ -141,7 +141,7 @@ Fortunately, there's a utility that will wrap Shoelace components so you can use
 
 ### Wrapping Components
 
-You can use [this utility](https://www.npmjs.com/package/@shoelace-style/react-wrapper) to wrap Shoelace components so they work like like regular React components. To install it, use this command.
+You can use [this utility](https://www.npmjs.com/package/@shoelace-style/react-wrapper) to wrap Shoelace components so they work like regular React components. To install it, use this command.
 
 ```bash
 npm install @shoelace-style/react-wrapper
