@@ -111,6 +111,7 @@ export class Textarea {
   /** Emitted when the control loses focus. */
   @Event({ eventName: 'sl-blur' }) slBlur: EventEmitter;
 
+  @Watch('helpText')
   @Watch('label')
   handleLabelChange() {
     this.handleSlotChange();

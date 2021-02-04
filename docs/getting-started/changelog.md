@@ -9,6 +9,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 ## Next
 
 - Added `handle-icon` slot to `sl-image-comparer` [#311](https://github.com/shoelace-style/shoelace/issues/311)
+- Added `label` and `helpText` props and slots to `sl-range` [#318](https://github.com/shoelace-style/shoelace/issues/318)
 - Fixed a bug in `sl-select` where removing a tag would toggle the dropdown
 - Fixed a bug in `sl-input` and `sl-textarea` where the input might not exist when the value watcher is called [#313](https://github.com/shoelace-style/shoelace/issues/313)
 - Updated `sl-menu-item` focus styles

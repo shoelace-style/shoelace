@@ -126,6 +126,7 @@ export class Input {
   /** The input's inputmode attribute. */
   @Prop() inputmode: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
 
+  @Watch('helpText')
   @Watch('label')
   handleLabelChange() {
     this.handleSlotChange();

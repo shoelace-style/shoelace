@@ -104,6 +104,7 @@ export class Select {
     }
   }
 
+  @Watch('helpText')
   @Watch('label')
   handleLabelChange() {
     this.handleSlotChange();

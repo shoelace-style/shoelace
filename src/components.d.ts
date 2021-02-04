@@ -885,9 +885,17 @@ export namespace Components {
          */
         "disabled": boolean;
         /**
+          * The range's help text. Alternatively, you can use the help-text slot.
+         */
+        "helpText": string;
+        /**
           * This will be true when the control is in an invalid state. Validity in range inputs is determined by the message provided by the `setCustomValidity` method.
          */
         "invalid": boolean;
+        /**
+          * The range's label. Alternatively, you can use the label slot.
+         */
+        "label": string;
         /**
           * The input's max attribute.
          */
@@ -2583,9 +2591,17 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
+          * The range's help text. Alternatively, you can use the help-text slot.
+         */
+        "helpText"?: string;
+        /**
           * This will be true when the control is in an invalid state. Validity in range inputs is determined by the message provided by the `setCustomValidity` method.
          */
         "invalid"?: boolean;
+        /**
+          * The range's label. Alternatively, you can use the label slot.
+         */
+        "label"?: string;
         /**
           * The input's max attribute.
          */

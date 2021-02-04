@@ -1,8 +1,15 @@
-import { Component, Event, EventEmitter, Method, Prop, State, h } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, Method, Prop, State, Watch, h } from '@stencil/core';
+import FormControl from '../../functional-components/form-control/form-control';
+import { hasSlot } from '../../utilities/slot';
+
+let id = 0;
 
 /**
  * @since 2.0
  * @status stable
+ *
+ * @slot label - The input's label. Alternatively, you can use the label prop.
+ * @slot help-text - Help text that describes how to use the input. Alternatively, you can use the help-text prop.
  *
  * @part base - The component's base wrapper.
  * @part input - The native range input.
@@ -17,9 +24,16 @@ import { Component, Event, EventEmitter, Method, Prop, State, h } from '@stencil
 export class Range {
   input: HTMLInputElement;
   output: HTMLElement;
+  inputId = `input-${++id}`;
+  labelId = `input-label-${id}`;
+  helpTextId = `input-help-text-${id}`;
   resizeObserver: ResizeObserver;
 
+  @Element() host: HTMLSlRangeElement;
+
   @State() hasFocus = false;
+  @State() hasHelpTextSlot = false;
+  @State() hasLabelSlot = false;
   @State() hasTooltip = false;
 
   /** The input's name attribute. */
@@ -27,6 +41,12 @@ export class Range {
 
   /** The input's value attribute. */
   @Prop({ mutable: true }) value: number;
+
+  /** The range's label. Alternatively, you can use the label slot. */
+  @Prop() label = '';
+
+  /** The range's help text. Alternatively, you can use the help-text slot. */
+  @Prop() helpText = '';
 
   /** Set to true to disable the input. */
   @Prop() disabled = false;
@@ -52,6 +72,12 @@ export class Range {
   /** A function used to format the tooltip's value. */
   @Prop() tooltipFormatter = (value: number) => value.toString();
 
+  @Watch('label')
+  @Watch('helpText')
+  handleLabelChange() {
+    this.handleSlotChange();
+  }
+
   /** Emitted when the control's value changes. */
   @Event({ eventName: 'sl-change' }) slChange: EventEmitter;
 
@@ -65,18 +91,27 @@ export class Range {
     this.handleInput = this.handleInput.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
+    this.handleSlotChange = this.handleSlotChange.bind(this);
     this.handleTouchStart = this.handleTouchStart.bind(this);
+
+    this.host.shadowRoot.addEventListener('slotchange', this.handleSlotChange);
   }
 
   componentWillLoad() {
     if (this.value === undefined || this.value === null) this.value = this.min;
     if (this.value < this.min) this.value = this.min;
     if (this.value > this.max) this.value = this.max;
+
+    this.handleSlotChange();
   }
 
   componentDidLoad() {
     this.syncTooltip();
     this.resizeObserver = new ResizeObserver(() => this.syncTooltip());
+  }
+
+  disconnectedCallback() {
+    this.host.shadowRoot.removeEventListener('slotchange', this.handleSlotChange);
   }
 
   /** Sets focus on the input. */
@@ -119,6 +154,11 @@ export class Range {
     this.resizeObserver.observe(this.input);
   }
 
+  handleSlotChange() {
+    this.hasHelpTextSlot = hasSlot(this.host, 'help-text');
+    this.hasLabelSlot = hasSlot(this.host, 'label');
+  }
+
   handleTouchStart() {
     this.setFocus();
   }
@@ -137,41 +177,52 @@ export class Range {
 
   render() {
     return (
-      <div
-        part="base"
-        class={{
-          range: true,
-
-          // States
-          'range--disabled': this.disabled,
-          'range--focused': this.hasFocus,
-          'range--tooltip-visible': this.hasTooltip,
-          'range--tooltip-top': this.tooltip === 'top',
-          'range--tooltip-bottom': this.tooltip === 'bottom'
-        }}
-        onTouchStart={this.handleTouchStart}
+      <FormControl
+        inputId={this.inputId}
+        label={this.label}
+        labelId={this.labelId}
+        hasLabelSlot={this.hasLabelSlot}
+        helpTextId={this.helpTextId}
+        helpText={this.helpText}
+        hasHelpTextSlot={this.hasHelpTextSlot}
+        size="medium"
       >
-        <input
-          part="input"
-          ref={el => (this.input = el)}
-          type="range"
-          class="range__control"
-          name={this.name}
-          disabled={this.disabled}
-          min={this.min}
-          max={this.max}
-          step={this.step}
-          value={this.value}
-          onInput={this.handleInput}
-          onFocus={this.handleFocus}
-          onBlur={this.handleBlur}
-        />
-        {this.tooltip !== 'none' && (
-          <output part="tooltip" ref={el => (this.output = el)} class="range__tooltip">
-            {this.tooltipFormatter(this.value)}
-          </output>
-        )}
-      </div>
+        <div
+          part="base"
+          class={{
+            range: true,
+
+            // States
+            'range--disabled': this.disabled,
+            'range--focused': this.hasFocus,
+            'range--tooltip-visible': this.hasTooltip,
+            'range--tooltip-top': this.tooltip === 'top',
+            'range--tooltip-bottom': this.tooltip === 'bottom'
+          }}
+          onTouchStart={this.handleTouchStart}
+        >
+          <input
+            part="input"
+            ref={el => (this.input = el)}
+            type="range"
+            class="range__control"
+            name={this.name}
+            disabled={this.disabled}
+            min={this.min}
+            max={this.max}
+            step={this.step}
+            value={this.value}
+            onInput={this.handleInput}
+            onFocus={this.handleFocus}
+            onBlur={this.handleBlur}
+          />
+          {this.tooltip !== 'none' && (
+            <output part="tooltip" ref={el => (this.output = el)} class="range__tooltip">
+              {this.tooltipFormatter(this.value)}
+            </output>
+          )}
+        </div>
+      </FormControl>
     );
   }
 }

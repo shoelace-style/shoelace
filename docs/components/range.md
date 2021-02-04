@@ -49,4 +49,25 @@ You can change the tooltip's content by setting the `tooltipFormatter` prop to a
 </script>
 ```
 
+### Labels
+
+Use the `label` attribute to give the range an accessible label. For labels that contain HTML, use the `label` slot instead.
+
+```html preview
+<sl-range label="Volume" min="0" max="100"></sl-input>
+```
+
+### Help Text
+
+Add descriptive help text to a range with the `help-text` attribute. For help texts that contain HTML, use the `help-text` slot instead.
+
+```html preview
+<sl-range 
+  label="Volume" 
+  help-text="Controls the volume of the current song."
+  min="0"
+  max="100"
+></sl-input>
+```
+
 [component-metadata:sl-range]
