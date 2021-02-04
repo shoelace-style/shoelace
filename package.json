@@ -79,7 +79,7 @@
   "dependencies": {
     "@popperjs/core": "^2.5.3",
     "@shoelace-style/animations": "^1.0.0",
-    "@stencil/core": "^2.3.0",
+    "@stencil/core": "^2.4.0",
     "@types/resize-observer-browser": "^0.1.4",
     "color": "^3.1.2"
   },

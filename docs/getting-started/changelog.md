@@ -14,6 +14,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug in `sl-input` and `sl-textarea` where the input might not exist when the value watcher is called [#313](https://github.com/shoelace-style/shoelace/issues/313)
 - Updated `sl-menu-item` focus styles
 - Updated `sl-select` so tags will wrap when `multiple` is true
+- Updated to Stencil 2.4.0
 
 ## 2.0.0-beta.26
 
