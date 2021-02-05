@@ -64,6 +64,8 @@ export class Details {
   componentDidLoad() {
     focusVisible.observe(this.details);
 
+    this.body.hidden = !this.open;
+
     // Show on init if open
     if (this.open) {
       this.show();
@@ -87,6 +89,8 @@ export class Details {
       this.open = false;
       return;
     }
+
+    this.body.hidden = false;
 
     if (this.body.scrollHeight === 0) {
       // When the scroll height can't be measured, use auto. This prevents a borked open state when the details is open
@@ -137,6 +141,7 @@ export class Details {
       this.body.style.overflow = this.open ? 'visible' : 'hidden';
       this.body.style.height = this.open ? 'auto' : '0';
       this.open ? this.slAfterShow.emit() : this.slAfterHide.emit();
+      this.body.hidden = !this.open;
     }
   }
 
