@@ -163,5 +163,15 @@ To override it globally, set it in a root block in your stylesheet after `shoela
 }
 ```
 
+### Custom content
+
+Use the `content` slot to pass an element to the tooltip.
+
+```html preview
+<sl-tooltip>
+  <sl-button>Hover me</sl-button>
+  <strong slot="content">Bolded content</strong>
+</sl-tooltip>
+```
 
 [component-metadata:sl-tooltip]
