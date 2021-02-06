@@ -1,4 +1,4 @@
-import { Component, Prop, h } from '@stencil/core';
+import { Component, Prop, h, Listen } from '@stencil/core';
 
 /**
  * @since 2.0
@@ -25,21 +25,13 @@ export class ButtonGroup {
     this.handleBlur = this.handleBlur.bind(this);
   }
 
-  componentDidLoad() {
-    this.buttonGroup.addEventListener('sl-focus', this.handleFocus);
-    this.buttonGroup.addEventListener('sl-blur', this.handleBlur);
-  }
-
-  disconnectedCallback() {
-    this.buttonGroup.removeEventListener('sl-focus', this.handleFocus);
-    this.buttonGroup.removeEventListener('sl-blur', this.handleBlur);
-  }
-
+  @Listen('sl-focus')
   handleFocus(event: CustomEvent) {
     const button = event.target as HTMLElement;
     button.classList.add('sl-focus');
   }
 
+  @Listen('sl-blur')
   handleBlur(event: CustomEvent) {
     const button = event.target as HTMLElement;
     button.classList.remove('sl-focus');
