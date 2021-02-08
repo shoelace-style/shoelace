@@ -11,9 +11,11 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Added `handle-icon` slot to `sl-image-comparer` [#311](https://github.com/shoelace-style/shoelace/issues/311)
 - Added `label` and `helpText` props and slots to `sl-range` [#318](https://github.com/shoelace-style/shoelace/issues/318)
 - Added "Integrating with NextJS" tutorial to the docs, courtesy of [crutchcorn](https://github.com/crutchcorn)
+- Added `content` slot to `sl-tooltip` [#322](https://github.com/shoelace-style/shoelace/pull/322)
 - Fixed a bug in `sl-select` where removing a tag would toggle the dropdown
 - Fixed a bug in `sl-input` and `sl-textarea` where the input might not exist when the value watcher is called [#313](https://github.com/shoelace-style/shoelace/issues/313)
 - Fixed a bug in `sl-details` where hidden elements would receive focus when tabbing [#323](https://github.com/shoelace-style/shoelace/issues/323)
+- Reduced the default line-height for `sl-tooltip`
 - Updated `sl-menu-item` focus styles
 - Updated `sl-select` so tags will wrap when `multiple` is true
 - Updated to Stencil 2.4.0
