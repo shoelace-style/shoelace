@@ -28,7 +28,7 @@ export class Tooltip {
 
   @Element() host: HTMLSlTooltipElement;
 
-  /** The tooltip's content. */
+  /** The tooltip's content. Alternatively, you can use the content slot. */
   @Prop() content = '';
 
   /**
@@ -162,7 +162,11 @@ export class Tooltip {
   }
 
   getTarget() {
-    const target = this.host.querySelector('*:not(style)') as HTMLElement;
+    // Get the first child that isn't a <style> or content slot
+    const target = [...this.host.children].find(
+      el => el.tagName.toLowerCase() !== 'style' && el.getAttribute('slot') !== 'content'
+    ) as HTMLElement;
+
     if (!target) {
       throw new Error('Invalid tooltip target: no child element was found.');
     }

@@ -1303,7 +1303,7 @@ export namespace Components {
     }
     interface SlTooltip {
         /**
-          * The tooltip's content.
+          * The tooltip's content. Alternatively, you can use the content slot.
          */
         "content": string;
         /**
@@ -3001,7 +3001,7 @@ declare namespace LocalJSX {
     }
     interface SlTooltip {
         /**
-          * The tooltip's content.
+          * The tooltip's content. Alternatively, you can use the content slot.
          */
         "content"?: string;
         /**
