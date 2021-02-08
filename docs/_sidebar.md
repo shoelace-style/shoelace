@@ -68,3 +68,4 @@
 
 - Tutorials
   - [Integrating with Rails](/tutorials/integrating-with-rails.md)
+  - [Integrating with NextJS](/tutorials/integrating-with-nextjs.md)
