@@ -8,6 +8,7 @@ let id = 0;
  * @status stable
  *
  * @slot - The tooltip's target element. Only the first element will be used as the target.
+ * @slot content - The tooltip's content. Alternatively, you can use the content prop.
  *
  * @part base - The component's base wrapper.
  */
@@ -253,7 +254,7 @@ export class Tooltip {
               role="tooltip"
               aria-hidden={this.open ? 'false' : 'true'}
             >
-              {this.content}
+              <slot name="content">{this.content}</slot>
             </div>
           </div>
         )}
