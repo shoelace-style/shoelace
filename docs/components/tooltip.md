@@ -163,14 +163,14 @@ To override it globally, set it in a root block in your stylesheet after `shoela
 }
 ```
 
-### Custom content
+### HTML in Tooltips
 
-Use the `content` slot to pass an element to the tooltip.
+Use the `content` slot to create tooltips with HTML content.
 
 ```html preview
 <sl-tooltip>
+  <div slot="content">I'm not <strong>just</strong> a tooltip, I'm a <em>tooltip</em> with HTML!</div>
   <sl-button>Hover me</sl-button>
-  <strong slot="content">Bolded content</strong>
 </sl-tooltip>
 ```
 
