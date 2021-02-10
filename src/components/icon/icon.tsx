@@ -105,6 +105,8 @@ export class Icon {
             this.svg = '';
             this.slError.emit({ status: file.status });
           }
+        } else {
+          this.slError.emit({ status: file.status });
         }
       } catch {
         this.slError.emit();
