@@ -18,7 +18,7 @@ export function observe(el: HTMLElement) {
 
   el.addEventListener('keydown', is);
   el.addEventListener('keyup', is);
-  el.addEventListener('mousedown', isNot);
+  el.addEventListener('blur', isNot);
   el.addEventListener('mousedown', isNot);
 }
 
@@ -28,7 +28,7 @@ export function unobserve(el: HTMLElement) {
   el.classList.remove('focus-visible');
   el.removeEventListener('keydown', is);
   el.removeEventListener('keyup', is);
-  el.removeEventListener('mousedown', isNot);
+  el.removeEventListener('blur', isNot);
   el.removeEventListener('mousedown', isNot);
 }
 

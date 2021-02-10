@@ -77,7 +77,7 @@
       color: var(--sl-color-primary-600);
     }
 
-    &:focus:not(.button--disabled) {
+    &.focus-visible:not(.button--disabled) {
       background-color: var(--sl-color-primary-50);
       border-color: var(--sl-color-primary-300);
       color: var(--sl-color-primary-600);
@@ -102,7 +102,7 @@
       color: var(--sl-color-primary-text);
     }
 
-    &:focus:not(.button--disabled) {
+    &.focus-visible:not(.button--disabled) {
       background-color: var(--sl-color-primary-400);
       border-color: var(--sl-color-primary-400);
       color: var(--sl-color-primary-text);
@@ -127,7 +127,7 @@
       color: var(--sl-color-success-text);
     }
 
-    &:focus:not(.button--disabled) {
+    &.focus-visible:not(.button--disabled) {
       background-color: var(--sl-color-success-400);
       border-color: var(--sl-color-success-400);
       color: var(--sl-color-success-text);
@@ -152,7 +152,7 @@
       color: var(--sl-color-info-text);
     }
 
-    &:focus:not(.button--disabled) {
+    &.focus-visible:not(.button--disabled) {
       background-color: var(--sl-color-info-400);
       border-color: var(--sl-color-info-400);
       color: var(--sl-color-info-text);
@@ -177,7 +177,7 @@
       color: var(--sl-color-warning-text);
     }
 
-    &:focus:not(.button--disabled) {
+    &.focus-visible:not(.button--disabled) {
       background-color: var(--sl-color-warning-400);
       border-color: var(--sl-color-warning-400);
       color: var(--sl-color-warning-text);
@@ -202,7 +202,7 @@
       color: var(--sl-color-danger-text);
     }
 
-    &:focus:not(.button--disabled) {
+    &.focus-visible:not(.button--disabled) {
       background-color: var(--sl-color-danger-400);
       border-color: var(--sl-color-danger-400);
       color: var(--sl-color-danger-text);
@@ -232,7 +232,7 @@
     color: var(--sl-color-primary-400);
   }
 
-  &:focus:not(.button--disabled) {
+  &.focus-visible:not(.button--disabled) {
     background-color: transparent;
     border-color: transparent;
     color: var(--sl-color-primary-400);

@@ -1,5 +1,6 @@
 import { Component, Element, Event, EventEmitter, Method, Prop, State, h } from '@stencil/core';
 import { hasSlot } from '../../utilities/slot';
+import { focusVisible } from '../../utilities/focus-visible';
 
 /**
  * @since 2.0
@@ -81,6 +82,14 @@ export class Button {
     this.handleFocus = this.handleFocus.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleSlotChange = this.handleSlotChange.bind(this);
+  }
+
+  componentDidLoad() {
+    focusVisible.observe(this.button);
+  }
+
+  disconnectedCallback() {
+    focusVisible.unobserve(this.button);
   }
 
   componentWillLoad() {
