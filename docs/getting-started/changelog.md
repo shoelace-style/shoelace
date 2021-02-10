@@ -6,7 +6,7 @@ Components with the <sl-badge type="warning" pill>Experimental</sl-badge> badge 
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
-## Next
+## 2.0.0-beta.27
 
 - Added `handle-icon` slot to `sl-image-comparer` [#311](https://github.com/shoelace-style/shoelace/issues/311)
 - Added `label` and `helpText` props and slots to `sl-range` [#318](https://github.com/shoelace-style/shoelace/issues/318)
