@@ -15,6 +15,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug in `sl-select` where removing a tag would toggle the dropdown
 - Fixed a bug in `sl-input` and `sl-textarea` where the input might not exist when the value watcher is called [#313](https://github.com/shoelace-style/shoelace/issues/313)
 - Fixed a bug in `sl-details` where hidden elements would receive focus when tabbing [#323](https://github.com/shoelace-style/shoelace/issues/323)
+- Fixed a bug in `sl-icon` where `sl-error` would only be emitted for network failures [#326](https://github.com/shoelace-style/shoelace/pull/326)
 - Reduced the default line-height for `sl-tooltip`
 - Updated `sl-menu-item` focus styles
 - Updated `sl-select` so tags will wrap when `multiple` is true
