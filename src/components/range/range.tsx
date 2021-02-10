@@ -1,6 +1,7 @@
 import { Component, Element, Event, EventEmitter, Method, Prop, State, Watch, h } from '@stencil/core';
 import FormControl from '../../functional-components/form-control/form-control';
 import { hasSlot } from '../../utilities/slot';
+import { focusVisible } from '../../utilities/focus-visible';
 
 let id = 0;
 
@@ -108,10 +109,12 @@ export class Range {
   componentDidLoad() {
     this.syncTooltip();
     this.resizeObserver = new ResizeObserver(() => this.syncTooltip());
+    focusVisible.observe(this.input);
   }
 
   disconnectedCallback() {
     this.host.shadowRoot.removeEventListener('slotchange', this.handleSlotChange);
+    focusVisible.unobserve(this.input);
   }
 
   /** Sets focus on the input. */

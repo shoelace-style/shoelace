@@ -7,7 +7,7 @@
 const listeners = new WeakMap();
 
 export function observe(el: HTMLElement) {
-  const keys = ['Tab', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Home', 'End', 'PageDown', 'PageUp'];
+  const keys = ['Tab', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Home', 'End', 'PageDown', 'PageUp', ' '];
   const is = (event: KeyboardEvent) => {
     if (keys.includes(event.key)) {
       el.classList.add('focus-visible');

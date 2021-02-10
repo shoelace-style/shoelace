@@ -72,7 +72,7 @@
   background-color: var(--sl-color-gray-200);
   border-color: var(--sl-color-gray-200);
 
-  .switch__thumb {
+  .switch__input.focus-visible ~ .switch__thumb {
     background-color: var(--sl-color-white);
     border-color: var(--sl-color-primary-500);
     box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
@@ -107,7 +107,7 @@
   background-color: var(--sl-color-primary-400);
   border-color: var(--sl-color-primary-400);
 
-  .switch__thumb {
+  .switch__input.focus-visible ~ .switch__thumb {
     background-color: var(--sl-color-white);
     border-color: var(--sl-color-primary-500);
     box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);

@@ -1,4 +1,5 @@
 import { Component, Event, EventEmitter, Method, Prop, State, Watch, h } from '@stencil/core';
+import { focusVisible } from '../../utilities/focus-visible';
 
 let id = 0;
 
@@ -65,6 +66,14 @@ export class Switch {
     this.handleFocus = this.handleFocus.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleMouseDown = this.handleMouseDown.bind(this);
+  }
+
+  componentDidLoad() {
+    focusVisible.observe(this.input);
+  }
+
+  disconnectedCallback() {
+    focusVisible.unobserve(this.input);
   }
 
   /** Sets focus on the switch. */
@@ -138,11 +147,10 @@ export class Switch {
         onMouseDown={this.handleMouseDown}
       >
         <span part="control" class="switch__control">
-          <span part="thumb" class="switch__thumb" />
-
           <input
             ref={el => (this.input = el)}
             id={this.switchId}
+            class="switch__input"
             type="checkbox"
             name={this.name}
             value={this.value}
@@ -157,6 +165,7 @@ export class Switch {
             onFocus={this.handleFocus}
             onKeyDown={this.handleKeyDown}
           />
+          <span part="thumb" class="switch__thumb" />
         </span>
 
         <span part="label" id={this.labelId} class="switch__label">

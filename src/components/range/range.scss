@@ -49,7 +49,7 @@
       border-color: var(--sl-color-primary-400);
     }
 
-    &:not(:disabled):focus::-webkit-slider-thumb {
+    &:not(:disabled).focus-visible::-webkit-slider-thumb {
       background-color: var(--sl-color-primary-400);
       border-color: var(--sl-color-primary-400);
       box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
@@ -59,6 +59,7 @@
       background-color: var(--sl-color-primary-500);
       border-color: var(--sl-color-primary-500);
       cursor: grabbing;
+      box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
     }
 
     // Firefox
@@ -91,7 +92,7 @@
       border-color: var(--sl-color-primary-400);
     }
 
-    &:not(:disabled):focus::-moz-range-thumb {
+    &:not(:disabled).focus-visible::-moz-range-thumb {
       background-color: var(--sl-color-primary-400);
       border-color: var(--sl-color-primary-400);
       box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
@@ -101,6 +102,7 @@
       background-color: var(--sl-color-primary-600);
       border-color: var(--sl-color-primary-600);
       cursor: grabbing;
+      box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
     }
 
     // States
