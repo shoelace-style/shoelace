@@ -20,11 +20,6 @@ export class ButtonGroup {
   /** A label to use for the button group's `aria-label` attribute. */
   @Prop() label = '';
 
-  connectedCallback() {
-    this.handleFocus = this.handleFocus.bind(this);
-    this.handleBlur = this.handleBlur.bind(this);
-  }
-
   @Listen('sl-focus')
   handleFocus(event: CustomEvent) {
     const button = event.target as HTMLElement;
