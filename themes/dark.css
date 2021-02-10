@@ -71,7 +71,7 @@
   color: var(--sl-color-primary-400);
 }
 
-.sl-theme-dark sl-button[type='default']:not([disabled])::part(base):focus {
+.sl-theme-dark sl-button[type='default']:not([disabled])::part(base).focus-visible {
   background-color: var(--sl-color-primary-950);
   border-color: var(--sl-color-primary-800);
   color: var(--sl-color-primary-400);
@@ -164,7 +164,7 @@
 }
 
 .sl-theme-dark sl-icon-button:not([disabled])::part(base):hover,
-.sl-theme-dark sl-icon-button:not([disabled])::part(base):focus {
+.sl-theme-dark sl-icon-button:not([disabled])::part(base).focus-visible {
   color: var(--sl-color-primary-500);
 }
 
