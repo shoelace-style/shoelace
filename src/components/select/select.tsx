@@ -323,6 +323,7 @@ export class Select {
 
   resizeMenu() {
     this.menu.style.width = `${this.box.clientWidth}px`;
+    this.dropdown.reposition();
   }
 
   syncItemsFromValue() {

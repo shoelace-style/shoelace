@@ -436,6 +436,10 @@ export namespace Components {
     | 'left-start'
     | 'left-end';
         /**
+          * Forces the dropdown's menu to reposition.
+         */
+        "reposition": () => Promise<void>;
+        /**
           * Shows the dropdown panel
          */
         "show": () => Promise<void>;

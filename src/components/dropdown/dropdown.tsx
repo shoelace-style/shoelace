@@ -193,6 +193,16 @@ export class Dropdown {
     this.popover.hide();
   }
 
+  /** Forces the dropdown's menu to reposition. */
+  @Method()
+  async reposition() {
+    if (!this.open) {
+      return;
+    }
+
+    this.popover.reposition();
+  }
+
   focusOnTrigger() {
     const slot = this.trigger.querySelector('slot');
     const trigger = slot.assignedElements({ flatten: true })[0] as any;

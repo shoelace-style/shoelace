@@ -17,6 +17,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Added "Integrating with NextJS" tutorial to the docs, courtesy of [crutchcorn](https://github.com/crutchcorn)
 - Added `content` slot to `sl-tooltip` [#322](https://github.com/shoelace-style/shoelace/pull/322)
 - Fixed a bug in `sl-select` where removing a tag would toggle the dropdown
+- Fixed a bug in `sl-select` where the dropdown menu wouldn't reposition when the box resized [#340](https://github.com/shoelace-style/shoelace/issues/340)
 - Fixed a bug in `sl-input` and `sl-textarea` where the input might not exist when the value watcher is called [#313](https://github.com/shoelace-style/shoelace/issues/313)
 - Fixed a bug in `sl-details` where hidden elements would receive focus when tabbing [#323](https://github.com/shoelace-style/shoelace/issues/323)
 - Fixed a bug in `sl-icon` where `sl-error` would only be emitted for network failures [#326](https://github.com/shoelace-style/shoelace/pull/326)

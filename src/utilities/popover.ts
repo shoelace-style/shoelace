@@ -118,6 +118,10 @@ export default class Popover {
     this.popover.classList.remove(this.options.visibleClass);
   }
 
+  reposition() {
+    this.popper.update();
+  }
+
   setOptions(options: PopoverOptions) {
     this.options = Object.assign(this.options, options);
     this.isVisible
