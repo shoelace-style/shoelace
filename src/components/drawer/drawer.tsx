@@ -246,7 +246,7 @@ export class Drawer {
         onKeyDown={this.handleKeyDown}
         onTransitionEnd={this.handleTransitionEnd}
       >
-        <div part="overlay" class="drawer__overlay" onClick={this.handleOverlayClick} />
+        <div part="overlay" class="drawer__overlay" onClick={this.handleOverlayClick} tabIndex={-1} />
 
         <div
           ref={el => (this.panel = el)}

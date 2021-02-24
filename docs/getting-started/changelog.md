@@ -8,7 +8,8 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
-- Fixed bug where `sl-checkbox`, `sl-radio`, and `sl-switch` controls would shrink with long labels [#325](https://github.com/shoelace-style/shoelace/issues/325)
+- Fixed a bug where `sl-checkbox`, `sl-radio`, and `sl-switch` controls would shrink with long labels [#325](https://github.com/shoelace-style/shoelace/issues/325)
+- Fixed a bug where ignoring clicks and clicking the overlay would prevent the escape key from closing the dialog/drawer [#344](https://github.com/shoelace-style/shoelace/pull/344)
 
 ## 2.0.0-beta.27
 
