@@ -18,7 +18,7 @@
 }
 
 /* Block the preview while dragging to prevent iframes from intercepting drag events */
-.code-block__preview--dragging::after {
+.code-block__preview--dragging:after {
   content: '';
   position: absolute;
   top: 0;

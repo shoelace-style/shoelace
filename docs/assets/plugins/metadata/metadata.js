@@ -1,6 +1,10 @@
 (() => {
   let metadataStore;
 
+  function getAttrName(propName) {
+    return propName.replace(/[A-Z]/g, m => `-${m.toLowerCase()}`).replace(/^-/, '');
+  }
+
   function createPropsTable(props) {
     const table = document.createElement('table');
     table.innerHTML = `
@@ -14,26 +18,30 @@
       </thead>
       <tbody>
         ${props
-          .map(
-            prop => `
-        <tr>
-          <td>
-            <code>${escapeHtml(prop.name)}</code>
-            ${prop.name !== prop.attr && prop.attr !== undefined ? (`
-              <br>
-              <small>
-                <sl-tooltip content="Use this name in your HTML">
-                  <code class="attribute-tooltip">${escapeHtml(prop.attr)}</code>
-                </sl-tooltip>
-              </small>`
-            ) : ''}
-          </td>
-          <td>${escapeHtml(prop.docs)}</td>
-          <td><code style="white-space: normal;">${escapeHtml(prop.type)}</code></td>
-          <td><code style="white-space: normal;">${escapeHtml(prop.default)}</code></td>
-        </tr>
-        `
-          )
+          .map(prop => {
+            const attr = getAttrName(prop.name);
+            return `
+              <tr>
+                <td>
+                  <code>${escapeHtml(prop.name)}</code>
+                  ${
+                    prop.name !== attr
+                      ? `
+                        <br>
+                        <small>
+                          <sl-tooltip content="This is the attribute name">
+                            <code class="attribute-tooltip">${escapeHtml(attr)}</code>
+                          </sl-tooltip>
+                        </small>`
+                      : ''
+                  }
+                </td>
+                <td>${escapeHtml(prop.description)}</td>
+                <td><code style="white-space: normal;">${escapeHtml(prop.type)}</code></td>
+                <td><code style="white-space: normal;">${escapeHtml(prop.defaultValue)}</code></td>
+              </tr>
+          `;
+          })
           .join('')}
       </tbody>
     `;
@@ -48,7 +56,6 @@
         <tr>
           <th>Event</th>
           <th>Description</th>
-          <th>Type</th>
         </tr>
       </thead>
       <tbody>
@@ -56,9 +63,8 @@
           .map(
             event => `
         <tr>
-          <td><code>${escapeHtml(event.event)}</code></td>
-          <td>${escapeHtml(event.docs)}</td>
-          <td><code style="white-space: normal;">CustomEvent&lt;${escapeHtml(event.detail)}&gt;</code></td>
+          <td><code>${escapeHtml(event.name)}</code></td>
+          <td>${escapeHtml(event.description)}</td>
         </tr>
         `
           )
@@ -76,19 +82,29 @@
         <tr>
           <th>Method</th>
           <th>Description</th>
-          <th>Signature</th>
+          <th>Arguments</th>
         </tr>
       </thead>
       <tbody>
         ${methods
           .map(
             method => `
-        <tr>
-          <td><code>${escapeHtml(method.name)}</code></td>
-          <td>${escapeHtml(method.docs)}</td>
-          <td><code style="white-space: normal;">${escapeHtml(method.signature)}</code></td>
-        </tr>
-        `
+              <tr>
+                <td><code>${escapeHtml(method.name)}</code></td>
+                <td>${escapeHtml(method.description)}</td>
+                <td>
+                  ${
+                    method.params.length
+                      ? `
+                        <code style="white-space: normal;">${escapeHtml(
+                          method.params.map(param => `${param.name}: ${param.type}`).join(', ')
+                        )}</code>
+                      `
+                      : ''
+                  }
+                </td>
+              </tr>
+           `
           )
           .join('')}
       </tbody>
@@ -112,7 +128,7 @@
             slot => `
         <tr>
           <td><code>${slot.name ? escapeHtml(slot.name) : '(default)'}</code></td>
-          <td>${escapeHtml(slot.docs)}</td>
+          <td>${escapeHtml(slot.description)}</td>
         </tr>
         `
           )
@@ -138,7 +154,7 @@
             style => `
         <tr>
           <td><code>${escapeHtml(style.name)}</code></td>
-          <td>${escapeHtml(style.docs)}</td>
+          <td>${escapeHtml(style.description)}</td>
         </tr>
         `
           )
@@ -164,7 +180,7 @@
             part => `
         <tr>
           <td><code>${escapeHtml(part.name)}</code></td>
-          <td>${escapeHtml(part.docs)}</td>
+          <td>${escapeHtml(part.description)}</td>
         </tr>
         `
           )
@@ -175,22 +191,29 @@
     return table.outerHTML;
   }
 
-  function createDependenciesList(dependencies, dependencyGraph) {
-    const all = [...dependencies];
+  function createDependenciesList(targetComponent, allComponents) {
     const ul = document.createElement('ul');
+    const dependencies = [];
 
-    // Gather subdependencies from the dependency graph
-    Object.keys(dependencyGraph).map(key => {
-      dependencyGraph[key].map(subdep => {
-        if (!all.includes(subdep)) {
-          all.push(subdep);
+    // Recursively fetch subdependencies
+    function getDependencies(tag) {
+      const component = allComponents.find(c => c.tag === tag);
+      if (!component && !Array.isArray(component.dependencies)) {
+        return [];
+      }
+
+      component.dependencies.map(tag => {
+        if (!dependencies.includes(tag)) {
+          dependencies.push(tag);
         }
+        getDependencies(tag);
       });
-    });
+    }
 
-    all.sort().map(dependency => {
+    getDependencies(targetComponent);
+    dependencies.sort().map(tag => {
       const li = document.createElement('li');
-      li.innerHTML = `<code>${dependency}</code>`;
+      li.innerHTML = `<code>&lt;${tag}&gt;</code>`;
       ul.appendChild(li);
     });
 
@@ -224,48 +247,37 @@
     });
   }
 
-  function getDocsTagsObject(docsTags) {
-    let tags = {};
-
-    for (const tag of docsTags) {
-      tags[tag.name] = tag.text;
-    }
-
-    return tags;
-  }
-
   if (!window.$docsify) {
     throw new Error('Docsify must be loaded before installing this plugin.');
   }
 
   window.$docsify.plugins.push((hook, vm) => {
     hook.mounted(function () {
-      getMetadata()
-        .then(metadata => {
-          const target = document.querySelector('.app-name');
+      getMetadata().then(metadata => {
+        const target = document.querySelector('.app-name');
 
-          // Add version
-          const version = document.createElement('div');
-          version.classList.add('sidebar-version');
-          version.textContent = metadata.version;
-          target.appendChild(version);
+        // Add version
+        const version = document.createElement('div');
+        version.classList.add('sidebar-version');
+        version.textContent = metadata.version;
+        target.appendChild(version);
 
-          // Add repo buttons
-          const buttons = document.createElement('div');
-          buttons.classList.add('sidebar-buttons');
-          buttons.innerHTML = `
+        // Add repo buttons
+        const buttons = document.createElement('div');
+        buttons.classList.add('sidebar-buttons');
+        buttons.innerHTML = `
             <a class="repo-button repo-button--small repo-button--sponsor" href="https://github.com/sponsors/claviska" rel="noopener" target="_blank">
               <sl-icon name="heart"></sl-icon> Sponsor
             </a>
             <a class="repo-button repo-button--small repo-button--github" href="https://github.com/shoelace-style/shoelace/stargazers" rel="noopener" target="_blank">
-              <sl-icon src="/assets/images/github.svg"></sl-icon> <span class="github-star-count">Star</span>
+              <sl-icon name="github"></sl-icon> <span class="github-star-count">Star</span>
             </a>
             <a class="repo-button repo-button--small repo-button--twitter" href="https://twitter.com/shoelace_style" rel="noopener" target="_blank">
-              <sl-icon src="/assets/images/twitter.svg"></sl-icon> Follow
+              <sl-icon name="twitter"></sl-icon> Follow
             </a>
           `;
-          target.appendChild(buttons);
-        });
+        target.appendChild(buttons);
+      });
     });
 
     hook.beforeEach(async function (content, next) {
@@ -276,39 +288,33 @@
 
       // Handle [component-header] tags
       content = content.replace(/\[component-header:([a-z-]+)\]/g, (match, tag) => {
-        const data = metadata.components.filter(data => data.tag === tag)[0];
+        const component = metadata.components.filter(data => data.tag === tag)[0];
         let result = '';
 
-        if (!data) {
+        if (!component) {
           console.error('Component not found in metadata: ' + tag);
           next(content);
         }
 
-        const tags = getDocsTagsObject(data.docsTags);
-        if (!tags) {
-          console.error(`No metadata tags found for ${tag}`);
-          return;
-        }
-
         let badgeType = 'info';
-        if (tags.status === 'stable') badgeType = 'primary';
-        if (tags.status === 'experimental') badgeType = 'warning';
-        if (tags.status === 'planned') badgeType = 'info';
-        if (tags.status === 'deprecated') badgeType = 'danger';
+        if (component.status === 'stable') badgeType = 'primary';
+        if (component.status === 'experimental') badgeType = 'warning';
+        if (component.status === 'planned') badgeType = 'info';
+        if (component.status === 'deprecated') badgeType = 'danger';
 
         result += `
           <div class="component-header">
             <div class="component-header__tag">
-              <code>&lt;${tag}&gt;</code>
+              <code>${component.className} | &lt;${component.tag}&gt;</code>
             </div>
 
             <div class="component-header__info">
               <sl-badge type="info" pill>
-                Since ${tags.since || '?'}
+                Since ${component.since || '?'}
               </sl-badge>
 
               <sl-badge type="${badgeType}" pill style="text-transform: capitalize;">
-                ${tags.status}
+                ${component.status}
               </sl-badge>
             </div>
           </div>
@@ -319,64 +325,64 @@
 
       // Handle [component-metadata] tags
       content = content.replace(/\[component-metadata:([a-z-]+)\]/g, (match, tag) => {
-        const data = metadata.components.filter(data => data.tag === tag)[0];
+        const component = metadata.components.filter(data => data.tag === tag)[0];
         let result = '';
 
-        if (!data) {
+        if (!component) {
           console.error('Component not found in metadata: ' + tag);
           next(content);
         }
 
-        if (data.props.length) {
+        if (component.props.length) {
           result += `
             ## Properties
-            ${createPropsTable(data.props)}
+            ${createPropsTable(component.props)}
           `;
         }
 
-        if (data.events.length) {
+        if (component.events.length) {
           result += `
             ## Events
-            ${createEventsTable(data.events)}
+            ${createEventsTable(component.events)}
           `;
         }
 
-        if (data.methods.length) {
+        if (component.methods.length) {
           result += `
             ## Methods
-            ${createMethodsTable(data.methods)}
+            ${createMethodsTable(component.methods)}
           `;
         }
 
-        if (data.slots.length) {
+        if (component.slots.length) {
           result += `
             ## Slots
-            ${createSlotsTable(data.slots)}
+            ${createSlotsTable(component.slots)}
           `;
         }
 
-        if (data.styles.length) {
+        if (component.cssCustomProperties.length) {
           result += `
             ## CSS Custom Properties
-            ${createCustomPropertiesTable(data.styles)}
+            ${createCustomPropertiesTable(component.cssCustomProperties)}
           `;
         }
 
-        if (data.parts.length) {
+        if (component.parts.length) {
           result += `
             ## CSS Parts
-            ${createPartsTable(data.parts)}
+            ${createPartsTable(component.parts)}
           `;
         }
 
-        if (data.dependencies.length) {
+        if (component.dependencies.length) {
           result += `
             ## Dependencies
 
-            This component has the following dependencies. If you're not using the lazy loader, be sure to import and
-            register these components in addition to <code>${tag}</code>.
+            This component has the following dependencies so, if you're [cherry picking](/getting-started/installation#cherry-picking), 
+            be sure to import these components in addition to <code>&lt;${tag}&gt;</code>.
 
-            ${createDependenciesList(data.dependencies, data.dependencyGraph)}
+            ${createDependenciesList(component.tag, metadata.components)}
           `;
         }
 

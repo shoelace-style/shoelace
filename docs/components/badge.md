@@ -82,8 +82,8 @@ When including badges in menu items, use the `suffix` slot to make sure they're 
 ```html preview
 <sl-menu style="max-width: 240px; border: solid 1px var(--sl-panel-border-color); border-radius: var(--sl-border-radius-medium);">
   <sl-menu-label>Messages</sl-menu-label>
-  <sl-menu-item>Comments <sl-badge slot="suffix" pill>4</sl-badge></sl-menu-item>
-  <sl-menu-item>Replies <sl-badge slot="suffix" pill>12</sl-badge></sl-menu-item>
+  <sl-menu-item>Comments <sl-badge slot="suffix" type="info" pill>4</sl-badge></sl-menu-item>
+  <sl-menu-item>Replies <sl-badge slot="suffix" type="info" pill>12</sl-badge></sl-menu-item>
 </sl-menu>
 ```
 

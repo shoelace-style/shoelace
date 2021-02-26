@@ -29,8 +29,8 @@
 Add the following code to your page.
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/shoelace/shoelace.css">
-<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/shoelace/shoelace.esm.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/themes/base.css">
+<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/all.shoelace.js"></script>
 ```
 
 Now you have access to all of Shoelace's components! Try adding a button:
@@ -102,18 +102,18 @@ Designing, developing, and supporting this library requires a lot of time, effor
 </a>
 
 <a class="repo-button repo-button--github" href="https://github.com/shoelace-style/shoelace/stargazers" rel="noopener" target="_blank">
-  <sl-icon src="/assets/images/github.svg"></sl-icon> <span class="github-star-count">Star</span>
+  <sl-icon name="github"></sl-icon> <span class="github-star-count">Star</span>
 </a>
 
 <a class="repo-button repo-button--twitter" href="https://twitter.com/shoelace_style" rel="noopener" target="_blank">
-  <sl-icon src="/assets/images/twitter.svg"></sl-icon> Follow
+  <sl-icon name="twitter"></sl-icon> Follow
 </a>
 
 ## Attribution
 
 Special thanks to the following projects and individuals that helped make Shoelace possible.
 
-- Components are compiled by [Stencil](https://stenciljs.com/)
+- Components are built with [Shoemaker](https://github.com/shoelace-style/shoemaker)
 - Documentation is powered by [Docsify](https://docsify.js.org/)
 - CDN services are provided by [jsDelivr](https://www.jsdelivr.com/)
 - The default theme is based on color palettes from [Tailwind](https://tailwindcss.com/)

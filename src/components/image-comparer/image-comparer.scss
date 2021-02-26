@@ -1,4 +1,4 @@
-@import 'component';
+@use '../../styles/component';
 
 /**
  * @prop --divider-width: The width of the dividing line.
@@ -8,7 +8,7 @@
   --divider-width: 2px;
   --handle-size: 2.5rem;
 
-  display: block;
+  display: inline-block;
   position: relative;
 }
 

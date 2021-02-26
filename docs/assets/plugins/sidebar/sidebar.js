@@ -8,7 +8,7 @@
       // Move search below the app name
       const appName = document.querySelector('.sidebar .app-name');
       const search = document.querySelector('.sidebar .search');
-      appName.insertAdjacentElement("afterend", search);
-     });
+      appName.insertAdjacentElement('afterend', search);
+    });
   });
 })();

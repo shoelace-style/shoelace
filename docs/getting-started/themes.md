@@ -9,17 +9,15 @@ The default theme is included as part of `shoelace.css` and should always be loa
 To install the dark theme, add the following to the `<head>` section of your app.
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/themes/dark.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/themes/dark.css">
 ```
 
-**Themes must be activated after importing!** You can do this with the [`<sl-theme>`](/components/theme.md) component. Only the elements inside of `<sl-theme>` will inherit the theme's styles.
+**Themes must be activated after importing!** You can do this by adding the `sl-theme-[name]` class to the `<body>` element.
 
 ```html
-<sl-button>Light Mode</sl-button>
-
-<sl-theme name="dark">
-  <sl-button>Dark Mode</sl-button>
-</sl-theme>
+<body class="sl-theme-dark">
+  ...
+</body>
 ```
 
 ### Detecting the User's Color Scheme Preference
@@ -75,7 +73,7 @@ To customize individual components, use the following syntax. Available "parts" 
 
 ## Using a Custom Theme
 
-If a theme adheres to the guidelines above, you can use it by importing the stylesheet and activating it with the [`<sl-theme>`](/components/theme.md) component.
+If a theme adheres to the guidelines above, you can use it by importing the stylesheet and activating it with the `sl-theme-[name]` class.
 
 ```html
 <head>
@@ -83,10 +81,8 @@ If a theme adheres to the guidelines above, you can use it by importing the styl
   <link rel="stylesheet" href="path/to/purple-power.css">
 </head>
 
-<body>
-  <sl-theme name="purple-power">
-    ...
-  </sl-theme>
+<body class="sl-theme-purple-power">
+   ...
 </body>
 ```
 

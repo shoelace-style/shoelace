@@ -46,32 +46,32 @@ This example demonstrates all of the baked-in animations and easings. Animations
   </div>
 </div>
 
-<script>
+<script type="module">
+  import { getAnimationNames, getEasingNames } from '/dist/shoelace.js';
+
   const container = document.querySelector('.animation-sandbox');
   const animation = container.querySelector('sl-animation');
   const animationName = container.querySelector('.controls sl-select:nth-child(1)');
   const easingName = container.querySelector('.controls sl-select:nth-child(2)');
   const playbackRate = container.querySelector('sl-range');
+  const animations = getAnimationNames();
+  const easings = getEasingNames();
 
-  animation.getAnimationNames().then(names => {
-    names.map(name => {
-      const menuItem = Object.assign(document.createElement('sl-menu-item'), {
-        textContent: name,
-        value: name
-      });
-      animationName.appendChild(menuItem);
+  animations.map(name => {
+    const menuItem = Object.assign(document.createElement('sl-menu-item'), {
+      textContent: name,
+      value: name
     });
+    animationName.appendChild(menuItem);
   });
-
-  animation.getEasingNames().then(names => {
-    names.map(name => {
-      const menuItem = Object.assign(document.createElement('sl-menu-item'), {
-        textContent: name,
-        value: name
-      });
-      easingName.appendChild(menuItem);
+  
+  easings.map(name => {
+    const menuItem = Object.assign(document.createElement('sl-menu-item'), {
+      textContent: name,
+      value: name
     });
-  });  
+    easingName.appendChild(menuItem);
+  });
 
   animationName.addEventListener('sl-change', () => animation.name = animationName.value);
   easingName.addEventListener('sl-change', () => animation.easing = easingName.value);

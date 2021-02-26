@@ -1,5 +1,5 @@
-@import 'component';
-@import '../../functional-components/form-control/form-control';
+@use '../../styles/component';
+@use '../../styles/form-control';
 
 :host {
   display: block;

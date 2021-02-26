@@ -6,10 +6,32 @@ Components with the <sl-badge type="warning" pill>Experimental</sl-badge> badge 
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
-## Next
+## 2.0.0-beta.28
 
+**This release includes a major under the hood overhaul of the library and how it's distributed.** Until now, Shoelace was developed with Stencil. This release moves to a lightweight tool called [Shoemaker](https://github.com/shoelace-style/shoemaker), a homegrown utility that provides declarative templating and data binding while reducing the boilerplate required for said features. The base class is open source and less than [200 lines of code](https://github.com/shoelace-style/shoemaker/blob/master/src/shoemaker.ts).
+
+This change in tooling addresses a number of longstanding bugs and limitations. It also gives us more control over the library and build process while streamlining development and maintenance. Instead of two different distributions, Shoelace now offers a single, standards-compliant collection of ES modules. This may affect how you install and use the library, so please refer to the [installation page](/getting-started/installation) for details.
+
+!> Due to the large number of internal changes, I would consider this update to be less stable than previous ones. If you're using Shoelace in a production app, consider holding off until the next beta to allow for more exhaustive testing from the community. Please report any bugs you find on the [issue tracker](https://github.com/shoelace-style/shoelace/issues).
+
+The component API remains the same except for the changes noted below. Thanks for your patience as I work diligently to make Shoelace more stable and future-proof. 🙌
+
+- 🚨 BREAKING: removed the custom elements bundle (you can import ES modules directly)
+- 🚨 BREAKING: removed `getAnimationNames()` and `getEasingNames()` methods from `sl-animation` (you can import them from `utilities/animation.js` instead)
+- 🚨 BREAKING: removed the `sl-icon-library` component since it required imperative initialization (you can import the `registerIconLibrary()` function from `utilities/icon-library.js` instead)
+- 🚨 BREAKING: removed the experimental `sl-theme` component due to limitations (you should set the `sl-theme-[name]` class on the `<body>` instead)
+- 🚨 BREAKING: moved the base stylesheet from `dist/shoelace.css` to `dist/themes/base.css`
+- 🚨 BREAKING: moved `icons` into `assets/icons` to make future assets easier to colocate
+- 🚨 BREAKING: changed `getSymbol` prop in `sl-rating` to `symbol` (it now accepts a string or a function that returns an icon name)
+- 🚨 BREAKING: renamed `setAssetPath()` to `setBasePath()` and added the ability to set the library's base path with a `data-shoelace` attribute (`setBasePath()` is exported from `utilities/base-path.js`)
+- Fixed `min` and `max` types in `sl-input` to allow numbers and strings [#330](https://github.com/shoelace-style/shoelace/issues/330)
 - Fixed a bug where `sl-checkbox`, `sl-radio`, and `sl-switch` controls would shrink with long labels [#325](https://github.com/shoelace-style/shoelace/issues/325)
+- Fixed a bug in `sl-select` where the dropdown menu wouldn't reposition when the box resized [#340](https://github.com/shoelace-style/shoelace/issues/340)
 - Fixed a bug where ignoring clicks and clicking the overlay would prevent the escape key from closing the dialog/drawer [#344](https://github.com/shoelace-style/shoelace/pull/344)
+- Removed the lazy loading dist (importing `shoelace.js` will load and register all components now)
+- Switched from Stencil to Shoemaker
+- Switched to a custom build powered by [esbuild](https://esbuild.github.io/)
+- Updated to Bootstrap Icons 1.4.0
 
 ## 2.0.0-beta.27
 
@@ -18,7 +40,6 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Added "Integrating with NextJS" tutorial to the docs, courtesy of [crutchcorn](https://github.com/crutchcorn)
 - Added `content` slot to `sl-tooltip` [#322](https://github.com/shoelace-style/shoelace/pull/322)
 - Fixed a bug in `sl-select` where removing a tag would toggle the dropdown
-- Fixed a bug in `sl-select` where the dropdown menu wouldn't reposition when the box resized [#340](https://github.com/shoelace-style/shoelace/issues/340)
 - Fixed a bug in `sl-input` and `sl-textarea` where the input might not exist when the value watcher is called [#313](https://github.com/shoelace-style/shoelace/issues/313)
 - Fixed a bug in `sl-details` where hidden elements would receive focus when tabbing [#323](https://github.com/shoelace-style/shoelace/issues/323)
 - Fixed a bug in `sl-icon` where `sl-error` would only be emitted for network failures [#326](https://github.com/shoelace-style/shoelace/pull/326)
@@ -29,7 +50,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## 2.0.0-beta.26
 
-- 🚨 BREAKING CHANGE: Fixed animations bloat
+- 🚨 BREAKING: Fixed animations bloat
   - Removed ~400 baked-in Animista animations because they were causing ~200KB of bloat (they can still be used with custom keyframes)
   - Reworked animations into a separate module ([`@shoelace-style/animations`](https://github.com/shoelace-style/animations)) so it's more maintainable and animations are sync with the latest version of animate.css
   - Animation and easing names are now camelcase (e.g. `easeInOut` instead of `ease-in-out`)
@@ -50,17 +71,17 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## 2.0.0-beta.25
 
-- 🚨 BREAKING CHANGE: Reworked color tokens
+- 🚨 BREAKING: Reworked color tokens
   - Theme colors are now inspired by Tailwind's professionally-designed color palette
   - Color token variations now range from 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950
   - Color token variations were inverted, e.g. 50 is lightest and 950 is darkest
   - All component styles were adapted to use the new color tokens, but visual changes are subtle
   - The dark theme was adapted use the new color tokens
   - HSL is no longer used because it is not perceptually uniform (this may be revisited when all browsers support [LCH colors](https://lea.verou.me/2020/04/lch-colors-in-css-what-why-and-how/))
-- 🚨 BREAKING CHANGE: Refactored `sl-select` to improve accessibility [#216](https://github.com/shoelace-style/shoelace/issues/216)
+- 🚨 BREAKING: Refactored `sl-select` to improve accessibility [#216](https://github.com/shoelace-style/shoelace/issues/216)
   - Removed the internal `sl-input` because it was causing problems with a11y and virtual keyboards
   - Removed `input`, `prefix` and `suffix` parts
-- 🚨 BREAKING CHANGE: Removed `copy-button` part from `sl-color-picker` since copying is now done by clicking the preview
+- 🚨 BREAKING: Removed `copy-button` part from `sl-color-picker` since copying is now done by clicking the preview
 - Added `getFormattedValue()` method to `sl-color-picker` so you can retrieve the current value in any format
 - Added visual separators between solid buttons in `sl-button-group`
 - Added `help-text` prop to `sl-input`, `sl-textarea`, and `sl-select`
@@ -108,7 +129,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## 2.0.0-beta.22
 
-- 🚨 BREAKING CHANGE: Refactored `sl-menu` and `sl-menu-item` to improve accessibility by using proper focus states [#217](https://github.com/shoelace-style/shoelace/issues/217)
+- 🚨 BREAKING: Refactored `sl-menu` and `sl-menu-item` to improve accessibility by using proper focus states [#217](https://github.com/shoelace-style/shoelace/issues/217)
   - Moved `tabindex` from `sl-menu` to `sl-menu-item`
   - Removed the `active` prop from `sl-menu-item` because synthetic focus states are bad for accessibility
   - Removed the `sl-activate` and `sl-deactivate` events from `sl-menu-item` (listen for `focus` and `blur` instead)
@@ -145,7 +166,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## 2.0.0-beta.20
 
-- 🚨 BREAKING CHANGE: Transformed all Shoelace events to lowercase ([details](#why-did-event-names-change))
+- 🚨 BREAKING: Transformed all Shoelace events to lowercase ([details](#why-did-event-names-change))
 - Added support for dropdowns and non-icon elements to `sl-input`
 - Added `spellcheck` prop to `sl-input`
 - Added `sl-icon-library` to allow custom icon library registration

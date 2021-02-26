@@ -36,7 +36,7 @@ sl-button-group {
     margin-left: calc(-1 * var(--sl-input-border-width));
 
     // Add a visual separator between solid buttons
-    &:not([type='default'])::part(base):not(:hover):not(:active):not(:focus)::after {
+    &:not([type='default'])::part(base):not(:hover):not(:active):not(:focus):after {
       content: '';
       position: absolute;
       top: 0;

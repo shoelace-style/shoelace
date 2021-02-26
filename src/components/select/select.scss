@@ -1,7 +1,6 @@
-@import 'component';
-@import '../../functional-components/form-control/form-control';
-@import 'mixins/hidden';
-@import 'mixins/hide-scrollbar';
+@use '../../styles/component';
+@use '../../styles/form-control';
+@use '../../styles/mixins/hide';
 
 /**
  * @prop --focus-ring: The focus ring style to use when the control receives focus, a `box-shadow` property.
@@ -69,7 +68,7 @@
   align-items: center;
   user-select: none;
 
-  @include hide-scrollbar;
+  @include hide.hide-scrollbar;
   overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
@@ -109,7 +108,7 @@
 
 // Hidden input (for form control validation to show)
 .select__hidden-select {
-  @include visually-hidden();
+  @include hide.visually-hidden();
   position: absolute;
   top: 0;
   left: 0;

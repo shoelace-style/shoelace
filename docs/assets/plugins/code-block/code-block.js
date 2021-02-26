@@ -139,7 +139,7 @@
           }
         };
 
-        const setWidth = width => preview.style.width = width + 'px';
+        const setWidth = width => (preview.style.width = width + 'px');
 
         resizer.addEventListener('mousedown', dragStart);
         resizer.addEventListener('touchstart', dragStart);

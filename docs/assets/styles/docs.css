@@ -2,7 +2,9 @@ html {
   box-sizing: border-box;
 }
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: inherit;
 }
 
@@ -40,7 +42,7 @@ strong {
   color: var(--sl-color-gray-400);
   text-align: right;
   padding: 0 var(--sl-spacing-small);
-  margin: -1.25rem 0 .6rem 0;
+  margin: -1.25rem 0 0.6rem 0;
 }
 
 .sidebar-buttons {
@@ -76,7 +78,7 @@ strong {
 .sidebar .input-wrap {
   position: relative;
   width: 100%;
-  padding: 0 .25rem;
+  padding: 0 0.25rem;
 }
 
 .sidebar .clear-button {
@@ -88,7 +90,7 @@ strong {
 }
 
 .sidebar .clear-button svg {
-  transform: scale(.75) !important;
+  transform: scale(0.75) !important;
 }
 
 .sidebar .clear-button:focus {
@@ -101,13 +103,13 @@ strong {
 
 .search .matching-post {
   border-bottom: solid 1px var(--sl-color-gray-500) !important;
-  padding: .25rem 1.5rem;
+  padding: 0.25rem 1.5rem;
 }
 
 .search .matching-post a {
   display: block;
-  border-radius: inherit
-  padding: .5rem;
+  border-radius: inherit;
+  padding: 0.5rem;
 }
 
 .search .matching-post h2 {
@@ -120,13 +122,13 @@ strong {
 
 /* Sidebar toggle */
 .sidebar-toggle {
-  top: .25rem;
-  left: .25rem;
+  top: 0.25rem;
+  left: 0.25rem;
   width: 2rem;
   height: 2rem;
   border-radius: var(--sl-border-radius-medium);
   background-color: var(--sl-color-white);
-  padding: .5rem;
+  padding: 0.5rem;
 }
 
 .sidebar-toggle:focus {
@@ -142,7 +144,7 @@ strong {
   body.close .sidebar-toggle {
     width: 2rem;
     background: none;
-    padding: .5rem;
+    padding: 0.5rem;
   }
 }
 
@@ -160,8 +162,8 @@ strong {
   color: inherit;
   text-decoration: none;
   line-height: 1.5em;
-  padding-top: .25em;
-  padding-bottom: .25em;
+  padding-top: 0.25em;
+  padding-bottom: 0.25em;
 }
 
 .sidebar-nav li.collapse > a,
@@ -172,19 +174,18 @@ strong {
 .sidebar li > p {
   font-weight: var(--sl-font-weight-bold);
   border-bottom: solid 1px var(--sl-color-gray-200);
-  margin: 0 .75rem .5rem 0;
+  margin: 0 0.75rem 0.5rem 0;
 }
 
 .sidebar ul li ul {
-  padding-left: .5rem;
-  margin: 0 .75rem 1.5rem 0;
+  padding-left: 0.5rem;
+  margin: 0 0.75rem 1.5rem 0;
 }
 
 .sidebar ul ul ul {
   padding: 0;
-  margin: 0 0 0 .5rem;
+  margin: 0 0 0 0.5rem;
 }
-
 
 .sidebar ul ul ul li {
   list-style: disc;
@@ -375,7 +376,7 @@ strong {
 }
 
 .namespace {
-  opacity: .7;
+  opacity: 0.7;
 }
 
 .markdown-section pre .token.property,
@@ -559,14 +560,15 @@ strong {
 
 /* Repo buttons */
 html .repo-button {
-  display: inline-block;
-  vertical-align: middle;
+  display: inline-flex;
+  align-items: center;
   background-color: var(--sl-color-white);
   border: solid 1px var(--sl-color-gray-200);
   border-radius: var(--sl-border-radius-medium);
   box-shadow: var(--sl-shadow-x-small);
   font-size: var(--sl-font-size-small);
   font-weight: var(--sl-font-weight-semibold);
+  line-height: 2;
   text-decoration: none;
   color: var(--sl-color-gray-700);
   padding: var(--sl-spacing-xx-small) var(--sl-spacing-small);
@@ -587,14 +589,13 @@ html .repo-button:focus {
 }
 
 html .repo-button:not(:last-of-type) {
-  margin-right: .125rem;
+  margin-right: 0.125rem;
 }
 
 html .repo-button sl-icon {
   position: relative;
-  top: -1px;
   vertical-align: middle;
-  margin-right: 0.125rem;
+  margin-right: 0.35rem;
 }
 
 html .repo-button--small {
@@ -614,7 +615,7 @@ html .repo-button--twitter sl-icon {
   color: #1ea0f2;
 }
 
-body[data-page^="tokens/"] .table-wrapper td:first-child,
-body[data-page^="tokens/"] .table-wrapper td:first-child code {
+body[data-page^='tokens/'] .table-wrapper td:first-child,
+body[data-page^='tokens/'] .table-wrapper td:first-child code {
   white-space: nowrap;
 }

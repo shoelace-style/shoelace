@@ -1,0 +1,34 @@
+// A transition-friendly alternative to `display: none` for hiding content
+@mixin hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  overflow: hidden;
+  pointer-events: none;
+  visibility: hidden; // prevent tab stops and screen reader discovery
+}
+
+// Hides content visually while still making it available to screen readers
+@mixin visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+// Hides the scrollbar
+@mixin hide-scrollbar() {
+  scrollbar-width: none; // Firefox
+  -ms-overflow-style: none; // IE 10+
+
+  // WebKit
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+}

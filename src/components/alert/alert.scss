@@ -1,5 +1,5 @@
-@import 'component';
-@import 'mixins/hidden';
+@use '../../styles/component';
+@use '../../styles/mixins/hide';
 
 /**
  * @prop --box-shadow: The alert's box shadow.
@@ -31,7 +31,7 @@
   margin: inherit;
 
   &:not(.alert--visible) {
-    @include hidden;
+    @include hide.hidden;
   }
 }
 

@@ -1,5 +1,5 @@
-@import 'component';
-@import '../../functional-components/form-control/form-control';
+@use '../../styles/component';
+@use '../../styles/form-control';
 
 :host {
   --thumb-size: 20px;
@@ -139,7 +139,7 @@
   transition: var(--sl-transition-fast) opacity;
   pointer-events: none;
 
-  &::after {
+  &:after {
     content: '';
     position: absolute;
     width: 0;
@@ -157,7 +157,7 @@
 .range--tooltip-top .range__tooltip {
   top: calc(-1 * var(--thumb-size) - var(--tooltip-offset-y));
 
-  &::after {
+  &:after {
     border-top: var(--sl-tooltip-arrow-size) solid var(--sl-tooltip-background-color);
     border-left: var(--sl-tooltip-arrow-size) solid transparent;
     border-right: var(--sl-tooltip-arrow-size) solid transparent;
@@ -169,7 +169,7 @@
 .range--tooltip-bottom .range__tooltip {
   bottom: calc(-1 * var(--thumb-size) - var(--tooltip-offset-y));
 
-  &::after {
+  &:after {
     border-bottom: var(--sl-tooltip-arrow-size) solid var(--sl-tooltip-background-color);
     border-left: var(--sl-tooltip-arrow-size) solid transparent;
     border-right: var(--sl-tooltip-arrow-size) solid transparent;

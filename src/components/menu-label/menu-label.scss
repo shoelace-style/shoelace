@@ -1,4 +1,4 @@
-@import 'component';
+@use '../../styles/component';
 
 :host {
   display: block;
@@ -11,6 +11,6 @@
   line-height: var(--sl-line-height-normal);
   letter-spacing: var(--sl-letter-spacing-normal);
   color: var(--sl-color-gray-400);
-  padding: var(--sl-spacing-xx-small) var(--sl-spacing-x-large);
+  padding: var(--sl-spacing-xx-small) var(--sl-spacing-xx-large);
   user-select: none;
 }

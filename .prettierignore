@@ -1,11 +1,9 @@
-.github
+*.md
 .cache
-.stencil
+.github
 dist
-docs/assets
-docs/**/*.md
-loader
+docs/*.md
+src/components/icon/icons
 node_modules
-src/components/**/readme.md
-src/components.d.ts
 package-lock.json
+tsconfig.json

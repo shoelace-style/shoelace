@@ -1,4 +1,4 @@
-@import 'component';
+@use '../../styles/component';
 
 :host {
   display: inline-block;
@@ -18,7 +18,7 @@
 }
 
 .dropdown__panel {
-  max-height: 50vh;
+  max-height: 75vh;
   font-family: var(--sl-font-sans);
   font-size: var(--sl-font-size-medium);
   font-weight: var(--sl-font-weight-normal);

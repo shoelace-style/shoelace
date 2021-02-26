@@ -23,7 +23,6 @@
   - [Form](/components/form.md)
   - [Icon](/components/icon.md)
   - [Icon Button](/components/icon-button.md)
-  - [Icon Library](/components/icon-library.md)
   - [Image Comparer](/components/image-comparer.md)
   - [Input](/components/input.md)
   - [Menu](/components/menu.md)
@@ -55,7 +54,6 @@
   - [Include](/components/include.md)
   - [Relative Time](/components/relative-time.md)
   - [Resize Observer](/components/resize-observer.md)
-  - [Theme](/components/theme.md)
 
 - Design Tokens
   - [Typography](/tokens/typography.md)

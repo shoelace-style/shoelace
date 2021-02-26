@@ -22,7 +22,7 @@ yarn add @shoelace-style/shoelace @shoelace-style/react-wrapper copy-webpack-plu
 The next step is to import Shoelace's default theme (stylesheet) in your `_app.js` file:
 
 ```css
-@import '~@shoelace-style/shoelace/dist/shoelace/shoelace';
+@import '~@shoelace-style/shoelace/dist/themes/base';
 ```
 
 ### Defining Custom Elements
@@ -40,10 +40,13 @@ function CustomEls({ URL }) {
     if (customEls.current) {
       return;
     }
-    setAssetPath(`${URL}/static/static`);
-    // If you're wanting to selectively import components, replace this line with your own definitions
-    defineCustomElements();
-    // customElements.define("sl-button", SlButton);
+    setBasePath(`${URL}/static/static`);
+
+    // Define the components you intend to use
+    customElements.define("sl-alert", SlAlert);
+    customElements.define("sl-button", SlButton);
+    // ...
+
     customEls.current = true;
   }, [URL, customEls]);
 
@@ -74,7 +77,7 @@ function MyApp({ Component, pageProps, URL }) {
 
 ### Environmental Variable
 
-However, to make the `setAssetsPath` work as-expected, we need to know where the file is hosted. To do this, we need to set [environmental variables](https://nextjs.org/docs/basic-features/environment-variables). Create a `.local.env` file and put the following inside:
+However, to make `setBasePath()` work as-expected, we need to know where the file is hosted. To do this, we need to set [environmental variables](https://nextjs.org/docs/basic-features/environment-variables). Create a `.local.env` file and put the following inside:
 
 ```
 BASE_URL="localhost:3000"
@@ -96,7 +99,7 @@ MyApp.getInitialProps = async (context) => {
 
 ### webpack Config
 
-Next we need to add Shoelace's icons to the final build output. To do this, modify `next.config.js` to look like this.
+Next we need to add Shoelace's assets to the final build output. To do this, modify `next.config.js` to look like this.
 
 ```javascript
 const path = require("path");
@@ -110,9 +113,9 @@ module.exports = {
                     {
                         from: path.resolve(
                             __dirname,
-                            "node_modules/@shoelace-style/shoelace/dist/shoelace/icons"
+                            "node_modules/@shoelace-style/shoelace/dist/assets"
                         ),
-                        to: path.resolve(__dirname, "static/icons"),
+                        to: path.resolve(__dirname, "static/assets"),
                     },
                 ],
             })
@@ -122,7 +125,7 @@ module.exports = {
 };
 ```
 
-?> This will copy the files from `node_modules` into your `static` folder on every development serve or build. You may want to avoid commiting these into your repo. To do so, simply add `static/icons` into your `.gitignore` folder
+?> This will copy the files from `node_modules` into your `static` folder on every development serve or build. You may want to avoid commiting these into your repo. To do so, simply add `static/assets` into your `.gitignore` folder
 
 ## Additional Resources
 

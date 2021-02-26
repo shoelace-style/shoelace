@@ -1,5 +1,5 @@
-@import 'component';
-@import 'mixins/hide-scrollbar';
+@use '../../styles/component';
+@use '../../styles/mixins/hide';
 
 /**
  * @prop --tabs-border-color: The color of the border that separates tabs.
@@ -68,7 +68,7 @@
   .tab-group__nav {
     display: flex;
     overflow-x: auto;
-    @include hide-scrollbar();
+    @include hide.hide-scrollbar();
   }
 
   .tab-group__tabs {
@@ -102,7 +102,7 @@
   .tab-group__nav {
     display: flex;
     overflow-x: auto;
-    @include hide-scrollbar();
+    @include hide.hide-scrollbar();
   }
 
   .tab-group__tabs {

@@ -53,13 +53,7 @@ Use the `disable` attribute to disable the rating.
 ### Custom Icons
 
 ```html preview
-<sl-rating class="rating-hearts" style="--symbol-color-active: #ff4136;"></sl-rating>
-
-<script>
-  const rating = document.querySelector('.rating-hearts');  
-
-  rating.getSymbol = () => '<sl-icon name="heart-fill"></sl-icon>';
-</script>
+<sl-rating symbol="heart-fill" style="--symbol-color-active: #ff4136;"></sl-rating>
 ```
 
 ### Value-based Icons
@@ -70,9 +64,9 @@ Use the `disable` attribute to disable the rating.
 <script>
   const rating = document.querySelector('.rating-emojis');
 
-  rating.getSymbol = (value) => {
+  rating.symbol = (value) => {
     const icons = ['emoji-angry', 'emoji-frown', 'emoji-expressionless', 'emoji-smile', 'emoji-laughing'];
-    return `<sl-icon name="${icons[value - 1]}"></sl-icon>`;
+    return icons[value - 1];
   };
 </script>
 ```

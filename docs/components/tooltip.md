@@ -86,7 +86,7 @@ Use the `placement` attribute to set the preferred placement of the tooltip.
     width: 250px;
   }
 
-  .tooltip-placement-example-row::after {
+  .tooltip-placement-example-row:after {
     content: '';
     display: table;
     clear: both;

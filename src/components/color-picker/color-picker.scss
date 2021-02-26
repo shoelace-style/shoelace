@@ -1,4 +1,4 @@
-@import 'component';
+@use '../../styles/component';
 
 /**
  * @prop --grid-width: The width of the color grid.
@@ -142,7 +142,7 @@
   margin-left: var(--sl-spacing-small);
   cursor: copy;
 
-  &::before {
+  &:before {
     content: '';
     position: absolute;
     top: 0;
@@ -175,7 +175,7 @@
   width: calc(var(--sl-input-height-small) / 2);
   height: calc(var(--sl-input-height-small) / 2);
   color: white;
-  background-color: rgba(0, 0, 0, 0.33);
+  background-color: var(--sl-color-gray-900);
   border-radius: var(--sl-border-radius-circle);
   opacity: 0;
 
@@ -186,22 +186,22 @@
 
 @keyframes copied {
   0% {
-    transform: scale(0.5);
+    transform: scale(0.8);
     opacity: 0;
   }
 
-  25% {
+  30% {
     transform: scale(1.2);
     opacity: 1;
   }
 
-  50% {
-    transform: scale(1);
+  70% {
+    transform: scale(1.2);
     opacity: 1;
   }
 
   100% {
-    transform: scale(1.6);
+    transform: scale(1.4);
     opacity: 0;
   }
 }
@@ -313,7 +313,7 @@
     border-radius: var(--sl-border-radius-circle);
   }
 
-  &::before {
+  &:before {
     content: '';
     position: absolute;
     top: 0;
@@ -334,7 +334,7 @@
     box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
     outline: none;
 
-    &::before {
+    &:before {
       box-shadow: inset 0 0 0 1px var(--sl-color-primary-500);
     }
   }
