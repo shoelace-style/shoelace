@@ -52,7 +52,7 @@
     "concurrently": "^5.3.0",
     "del": "^6.0.0",
     "download": "^8.0.0",
-    "esbuild": "^0.8.50",
+    "esbuild": "^0.8.54",
     "esbuild-plugin-inline-import": "^1.0.0",
     "esbuild-plugin-sass": "^0.3.3",
     "front-matter": "^4.0.2",

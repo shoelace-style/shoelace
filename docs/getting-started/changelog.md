@@ -6,6 +6,11 @@ Components with the <sl-badge type="warning" pill>Experimental</sl-badge> badge 
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
+## Next
+
+- Moved chunk files into a separate folder
+- Updated esbuild to 0.8.54
+
 ## 2.0.0-beta.28
 
 **This release includes a major under the hood overhaul of the library and how it's distributed.** Until now, Shoelace was developed with Stencil. This release moves to a lightweight tool called [Shoemaker](https://github.com/shoelace-style/shoemaker), a homegrown utility that provides declarative templating and data binding while reducing the boilerplate required for said features. The base class is open source and less than [200 lines of code](https://github.com/shoelace-style/shoemaker/blob/master/src/shoemaker.ts).

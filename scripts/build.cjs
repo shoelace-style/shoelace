@@ -45,6 +45,7 @@ execSync('node scripts/make-icons.cjs', { stdio: 'inherit' });
       target: 'es2017',
       entryPoints,
       outdir: './dist',
+      chunkNames: 'chunks/[name].[hash]',
       incremental: options.serve,
       define: {
         // Popper.js expects this to be set
