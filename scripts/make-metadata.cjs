@@ -1,5 +1,5 @@
 //
-// This script runs TypeDoc and uses its output to generate components.json which is used for the docs.
+// This script runs TypeDoc and uses its output to generate metadata files used by the docs
 //
 const chalk = require('chalk');
 const execSync = require('child_process').execSync;
@@ -13,22 +13,29 @@ function getTagName(className) {
   return className.replace(/[A-Z]/g, m => `-${m.toLowerCase()}`).replace(/^-/, '');
 }
 
+// Takes a prop or param and returns type info as a string and, if applicable, an array of possible values
 function getTypeInfo(item) {
+  const values = [];
   let type = item.type.name || '';
 
   if (item.type.type === 'union') {
     const types = item.type.types.map(t => {
       if (t.type === 'literal' || t.type === 'reference') {
+        values.push(t.value);
         type = `'${item.type.types.map(t => t.value).join(`' | '`)}'`;
       }
 
       if (t.type === 'intrinsic') {
+        values.push(t.name);
         type = item.type.types.map(t => t.name).join(' | ');
       }
     });
   }
 
-  return type;
+  return {
+    type,
+    values: values.length ? values : undefined
+  };
 }
 
 // Splits a string of tag text into a { name, description } object
@@ -58,7 +65,7 @@ execSync(
 const data = JSON.parse(fs.readFileSync('.cache/typedoc.json', 'utf8'));
 const modules = data.children;
 const components = modules.filter(module => module.kindString === 'Class');
-const output = {
+const metadata = {
   name: package.name,
   description: package.description,
   version: package.version,
@@ -108,12 +115,13 @@ components.map(async component => {
     .filter(child => child.comment && child.comment.shortText); // only with comments
 
   props.map(prop => {
-    const type = getTypeInfo(prop);
+    const { type, values } = getTypeInfo(prop);
 
     api.props.push({
       name: prop.name,
       description: prop.comment.shortText,
       type,
+      values,
       defaultValue: prop.defaultValue
     });
   });
@@ -127,10 +135,11 @@ components.map(async component => {
     const signature = method.signatures[0];
     const params = Array.isArray(signature.parameters)
       ? signature.parameters.map(param => {
-          const type = getTypeInfo(param);
+          const { type, values } = getTypeInfo(param);
           return {
             name: param.name,
             type,
+            values,
             defaultValue: param.defaultValue
           };
         })
@@ -154,15 +163,36 @@ components.map(async component => {
       .map(tag => api.cssCustomProperties.push({ name: tag.tag, description: tag.description }));
   }
 
-  output.components.push(api);
+  metadata.components.push(api);
 });
 
 // Generate components.json
 (async () => {
   const filename = path.join('./dist/components.json');
-  const outputJson = JSON.stringify(output, null, 2);
+  const json = JSON.stringify(metadata, null, 2);
 
   await mkdirp(path.dirname(filename));
-  fs.writeFileSync(filename, outputJson, 'utf8');
-  console.log(chalk.green(`Successfully generated components.json 🏷\n`));
+  fs.writeFileSync(filename, json, 'utf8');
 })();
+
+// Generate vscode.html-custom-data.json (for IntelliSense)
+(async () => {
+  const filename = path.join('./dist/vscode.html-custom-data.json');
+  const customData = {
+    tags: metadata.components.map(component => ({
+      name: component.tag,
+      description: component.description,
+      attributes: component.props.map(prop => ({
+        name: prop.name,
+        description: prop.description,
+        values: prop.values ? prop.values.map(value => ({ name: value })) : undefined
+      }))
+    }))
+  };
+  const json = JSON.stringify(customData, null, 2);
+
+  await mkdirp(path.dirname(filename));
+  fs.writeFileSync(filename, json, 'utf8');
+})();
+
+console.log(chalk.green(`Successfully generated metadata 🏷\n`));

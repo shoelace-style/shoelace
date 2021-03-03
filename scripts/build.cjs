@@ -92,7 +92,7 @@ execSync('node scripts/make-icons.cjs', { stdio: 'inherit' });
     await copy('./dist', './docs/dist');
   }
 
-  console.log(chalk.green('The build has been generated! 📦'));
+  console.log(chalk.green('The build has finished! 📦'));
 
   if (options.serve) {
     const port = await getPort({

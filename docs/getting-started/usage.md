@@ -108,9 +108,9 @@ For example, `<button>` and `<sl-button>` both have a `type` attribute, but it d
 
 ## Code Completion
 
-Shoelace ships with a `custom-elements.json` file that can be used to describe its components to supportive editors, providing code completion (also known as "code hinting" or "IntelliSense"). To enable this, you need to tell your editor where this file is.
-
 ### VS Code
+
+Shoelace ships with a file called `vscode.html-custom-data.json` that can be used to describe its components to Visual Studio Code. This enables code completion for Shoelace components (also known as "code hinting" or "IntelliSense"). To enable it, you need to tell VS Code where the file is.
 
 1. [Install Shoelace locally](/getting-started/installation.md#local-installation)
 2. Create a folder called `.vscode` at the root of your project
@@ -119,11 +119,15 @@ Shoelace ships with a `custom-elements.json` file that can be used to describe i
 
 ```js
 {
-  "html.customData": ["./node_modules/@shoelace-style/shoelace/dist/custom-elements.json"]
+  "html.customData": ["./node_modules/@shoelace-style/shoelace/dist/vscode.html-custom-data.json"]
 }
 ```
 
-If `settings.json` already exists in your project, simply add the `html.customData` line to the root of the object.
+If `settings.json` already exists, simply add the above line to the root of the object. Note that you may need to restart VS Code for the changes to take affect.
+
+### Other Editors
+
+Most popular editors support custom code completion with a bit of configuration. Please [submit a feature request](https://github.com/shoelace-style/shoelace/issues/new/choose) for your editor of choice. PRs are also welcome!
 
 ## React
 
