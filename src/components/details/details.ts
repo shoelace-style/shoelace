@@ -77,7 +77,7 @@ export default class SlDetails extends Shoemaker {
 
     if (this.body.scrollHeight === 0) {
       // When the scroll height can't be measured, use auto. This prevents a borked open state when the details is open
-      // intiially, but not immediately visible (i.e. in a tab panel).
+      // intitially, but not immediately visible (i.e. in a tab panel).
       this.body.style.height = 'auto';
       this.body.style.overflow = 'visible';
     } else {
