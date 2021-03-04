@@ -303,3 +303,8 @@
 .sl-scroll-lock {
   overflow: hidden !important;
 }
+
+// Prevent FOUC before elements are defined
+:not(:defined) {
+  visibility: hidden;
+}

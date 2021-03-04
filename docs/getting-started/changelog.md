@@ -9,6 +9,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 ## Next
 
 - Added `vscode.html-custom-data.json` to the build to support IntelliSense
+- Added a style to prevent FOUC before components are defined
 - Moved chunk files into a separate folder
 - Updated esbuild to 0.8.54
 
