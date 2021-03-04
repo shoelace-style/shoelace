@@ -59,7 +59,8 @@ function splitText(text) {
 console.log(chalk.cyan('Generating type data with TypeDoc'));
 mkdirp.sync('./.cache');
 execSync(
-  'typedoc --json .cache/typedoc.json --entryPoints src/shoelace.ts --exclude "**/*+(index|.spec|.e2e).ts" --excludeExternals --excludeProtected --excludeInternal'
+  'typedoc --json .cache/typedoc.json --entryPoints src/shoelace.ts --exclude "**/*+(index|.spec|.e2e).ts" --excludeExternals --excludeProtected --excludeInternal',
+  { stdio: 'inherit' }
 );
 
 const data = JSON.parse(fs.readFileSync('.cache/typedoc.json', 'utf8'));
