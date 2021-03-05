@@ -170,10 +170,10 @@ export default class SlRating extends Shoemaker {
         ref=${(el: HTMLElement) => (this.rating = el)}
         part="base"
         class=${classMap({
-      rating: true,
-      'rating--readonly': this.readonly,
-      'rating--disabled': this.disabled
-    })}
+          rating: true,
+          'rating--readonly': this.readonly,
+          'rating--disabled': this.disabled
+        })}
         aria-disabled=${this.disabled ? 'true' : 'false'}
         aria-readonly=${this.readonly ? 'true' : 'false'}
         aria-value=${this.value}
@@ -191,44 +191,44 @@ export default class SlRating extends Shoemaker {
       >
         <span class="rating__symbols rating__symbols--inactive">
           ${counter.map(index => {
-      // Users can click the current value to clear the rating. When this happens, we set this.isHovering to
-      // false to prevent the hover state from confusing them as they move the mouse out of the control. This
-      // extra mouseenter will reinstate it if they happen to mouse over an adjacent symbol.
-      const symbol = typeof this.symbol === 'function' ? this.symbol(index + 1) : this.symbol;
-      return html`
+            // Users can click the current value to clear the rating. When this happens, we set this.isHovering to
+            // false to prevent the hover state from confusing them as they move the mouse out of the control. This
+            // extra mouseenter will reinstate it if they happen to mouse over an adjacent symbol.
+            const symbol = typeof this.symbol === 'function' ? this.symbol(index + 1) : this.symbol;
+            return html`
               <span
                 class=${classMap({
-        rating__symbol: true,
-        'rating__symbol--hover': this.isHovering && Math.ceil(displayValue) === index + 1
-      })}
+                  rating__symbol: true,
+                  'rating__symbol--hover': this.isHovering && Math.ceil(displayValue) === index + 1
+                })}
                 role="presentation"
                 onmouseenter=${this.handleMouseEnter.bind(this)}
               >
                 <sl-icon .name=${symbol}></sl-icon>
               </span>
             `;
-    })}
+          })}
         </span>
 
         <span class="rating__symbols rating__symbols--indicator">
           ${counter.map(index => {
-      const symbol = typeof this.symbol === 'function' ? this.symbol(index + 1) : this.symbol;
-      return html`
+            const symbol = typeof this.symbol === 'function' ? this.symbol(index + 1) : this.symbol;
+            return html`
               <span
                 class=${classMap({
-        rating__symbol: true,
-        'rating__symbol--hover': this.isHovering && Math.ceil(displayValue) === index + 1
-      })}
+                  rating__symbol: true,
+                  'rating__symbol--hover': this.isHovering && Math.ceil(displayValue) === index + 1
+                })}
                 style=${styleMap({
-        clipPath:
-          displayValue > index + 1 ? null : `inset(0 ${100 - ((displayValue - index) / 1) * 100}% 0 0)`
-      })}
+                  clipPath:
+                    displayValue > index + 1 ? null : `inset(0 ${100 - ((displayValue - index) / 1) * 100}% 0 0)`
+                })}
                 role="presentation"
               >
                 <sl-icon .name=${symbol}></sl-icon>
               </span>
             `;
-    })}
+          })}
         </span>
       </div>
     `;
