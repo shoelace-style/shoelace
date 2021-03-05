@@ -60,20 +60,18 @@ export default class SlRating extends Shoemaker {
   }
 
   getValueFromMousePosition(event: MouseEvent) {
-    const containerLeft = this.rating.getBoundingClientRect().left;
-    const containerWidth = this.rating.getBoundingClientRect().width;
-    return clamp(
-      this.roundToPrecision(((event.clientX - containerLeft) / containerWidth) * this.max, this.precision),
-      0,
-      this.max
-    );
+    return this.getValueFromXCoordinate(event.clientX);
   }
 
   getValueFromTouchPosition(event: TouchEvent) {
+    return this.getValueFromXCoordinate(event.touches[0].clientX);
+  }
+
+  private getValueFromXCoordinate(coordinate: number) {
     const containerLeft = this.rating.getBoundingClientRect().left;
     const containerWidth = this.rating.getBoundingClientRect().width;
     return clamp(
-      this.roundToPrecision(((event.touches[0].clientX - containerLeft) / containerWidth) * this.max, this.precision),
+      this.roundToPrecision(((coordinate - containerLeft) / containerWidth) * this.max, this.precision),
       0,
       this.max
     );
