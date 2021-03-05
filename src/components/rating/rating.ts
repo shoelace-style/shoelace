@@ -60,21 +60,31 @@ export default class SlRating extends Shoemaker {
   }
 
   getValueFromMousePosition(event: MouseEvent) {
+    return this.getValueFromXCoordinate(event.clientX);
+  }
+
+  getValueFromTouchPosition(event: TouchEvent) {
+    return this.getValueFromXCoordinate(event.touches[0].clientX);
+  }
+
+  private getValueFromXCoordinate(coordinate: number) {
     const containerLeft = this.rating.getBoundingClientRect().left;
     const containerWidth = this.rating.getBoundingClientRect().width;
     return clamp(
-      this.roundToPrecision(((event.clientX - containerLeft) / containerWidth) * this.max, this.precision),
+      this.roundToPrecision(((coordinate - containerLeft) / containerWidth) * this.max, this.precision),
       0,
       this.max
     );
   }
 
   handleClick(event: MouseEvent) {
+    this.setValue(this.getValueFromMousePosition(event));
+  }
+
+  private setValue(newValue: number) {
     if (this.disabled || this.readonly) {
       return;
     }
-
-    const newValue = this.getValueFromMousePosition(event);
 
     this.value = newValue === this.value ? 0 : newValue;
     this.isHovering = false;
@@ -112,12 +122,28 @@ export default class SlRating extends Shoemaker {
     this.isHovering = true;
   }
 
+  handleTouchStart(event: TouchEvent) {
+    this.hoverValue = this.getValueFromTouchPosition(event);
+  }
+
   handleMouseLeave() {
     this.isHovering = false;
   }
 
+  handleTouchEnd(event: TouchEvent) {
+    this.isHovering = false;
+    this.setValue(this.hoverValue);
+    // cancel touchend event so click does not get called on mobile devices
+    event.preventDefault();
+  }
+
   handleMouseMove(event: MouseEvent) {
     this.hoverValue = this.getValueFromMousePosition(event);
+  }
+
+  handleTouchMove(event: TouchEvent) {
+    this.isHovering = true;
+    this.hoverValue = this.getValueFromTouchPosition(event);
   }
 
   roundToPrecision(numberToRound: number, precision = 0.5) {
@@ -144,10 +170,10 @@ export default class SlRating extends Shoemaker {
         ref=${(el: HTMLElement) => (this.rating = el)}
         part="base"
         class=${classMap({
-          rating: true,
-          'rating--readonly': this.readonly,
-          'rating--disabled': this.disabled
-        })}
+      rating: true,
+      'rating--readonly': this.readonly,
+      'rating--disabled': this.disabled
+    })}
         aria-disabled=${this.disabled ? 'true' : 'false'}
         aria-readonly=${this.readonly ? 'true' : 'false'}
         aria-value=${this.value}
@@ -157,49 +183,52 @@ export default class SlRating extends Shoemaker {
         onclick=${this.handleClick.bind(this)}
         onkeydown=${this.handleKeyDown.bind(this)}
         onmouseenter=${this.handleMouseEnter.bind(this)}
+        ontouchstart=${this.handleTouchStart.bind(this)}
         onmouseleave=${this.handleMouseLeave.bind(this)}
+        ontouchend=${this.handleTouchEnd.bind(this)}
         onmousemove=${this.handleMouseMove.bind(this)}
+        ontouchmove=${this.handleTouchMove.bind(this)}
       >
         <span class="rating__symbols rating__symbols--inactive">
           ${counter.map(index => {
-            // Users can click the current value to clear the rating. When this happens, we set this.isHovering to
-            // false to prevent the hover state from confusing them as they move the mouse out of the control. This
-            // extra mouseenter will reinstate it if they happen to mouse over an adjacent symbol.
-            const symbol = typeof this.symbol === 'function' ? this.symbol(index + 1) : this.symbol;
-            return html`
+      // Users can click the current value to clear the rating. When this happens, we set this.isHovering to
+      // false to prevent the hover state from confusing them as they move the mouse out of the control. This
+      // extra mouseenter will reinstate it if they happen to mouse over an adjacent symbol.
+      const symbol = typeof this.symbol === 'function' ? this.symbol(index + 1) : this.symbol;
+      return html`
               <span
                 class=${classMap({
-                  rating__symbol: true,
-                  'rating__symbol--hover': this.isHovering && Math.ceil(displayValue) === index + 1
-                })}
+        rating__symbol: true,
+        'rating__symbol--hover': this.isHovering && Math.ceil(displayValue) === index + 1
+      })}
                 role="presentation"
                 onmouseenter=${this.handleMouseEnter.bind(this)}
               >
                 <sl-icon .name=${symbol}></sl-icon>
               </span>
             `;
-          })}
+    })}
         </span>
 
         <span class="rating__symbols rating__symbols--indicator">
           ${counter.map(index => {
-            const symbol = typeof this.symbol === 'function' ? this.symbol(index + 1) : this.symbol;
-            return html`
+      const symbol = typeof this.symbol === 'function' ? this.symbol(index + 1) : this.symbol;
+      return html`
               <span
                 class=${classMap({
-                  rating__symbol: true,
-                  'rating__symbol--hover': this.isHovering && Math.ceil(displayValue) === index + 1
-                })}
+        rating__symbol: true,
+        'rating__symbol--hover': this.isHovering && Math.ceil(displayValue) === index + 1
+      })}
                 style=${styleMap({
-                  clipPath:
-                    displayValue > index + 1 ? null : `inset(0 ${100 - ((displayValue - index) / 1) * 100}% 0 0)`
-                })}
+        clipPath:
+          displayValue > index + 1 ? null : `inset(0 ${100 - ((displayValue - index) / 1) * 100}% 0 0)`
+      })}
                 role="presentation"
               >
                 <sl-icon .name=${symbol}></sl-icon>
               </span>
             `;
-          })}
+    })}
         </span>
       </div>
     `;
