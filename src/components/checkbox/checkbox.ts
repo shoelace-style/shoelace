@@ -171,7 +171,7 @@ export class SlCheckbox extends LitElement {
             id=${this.inputId}
             type="checkbox"
             name=${this.name}
-            value=${this.value}
+            .value=${this.value}
             ?checked=${this.checked}
             ?disabled=${this.disabled}
             ?required=${this.required}

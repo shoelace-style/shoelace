@@ -740,7 +740,7 @@ export class SlColorPicker extends LitElement {
             autocorrect="off"
             autocapitalize="off"
             spellcheck="false"
-            value=${this.inputValue}
+            .value=${this.inputValue}
             ?disabled=${this.disabled}
             @keydown=${this.handleInputKeyDown}
             @sl-change=${this.handleInputChange}
