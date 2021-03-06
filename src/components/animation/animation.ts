@@ -20,7 +20,7 @@ export class SlAnimation extends LitElement {
   @queryAsync('slot') defaultSlot: Promise<HTMLSlotElement>;
 
   /** The name of the built-in animation to use. For custom animations, use the `keyframes` prop. */
-  @property({ reflect: true }) name = 'none';
+  @property() name = 'none';
 
   /** The number of milliseconds to delay the start of the animation. */
   @property({ type: Number }) delay = 0;

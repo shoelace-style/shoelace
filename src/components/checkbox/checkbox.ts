@@ -29,7 +29,7 @@ export class SlCheckbox extends LitElement {
   @internalProperty() private hasFocus = false;
 
   /** The checkbox's name attribute. */
-  @property({ reflect: true }) name: string;
+  @property() name: string;
 
   /** The checkbox's value attribute. */
   @property() value: string;

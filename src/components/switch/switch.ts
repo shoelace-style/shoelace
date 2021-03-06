@@ -28,7 +28,7 @@ export class SlSwitch extends LitElement {
   @internalProperty() private hasFocus = false;
 
   /** The switch's name attribute. */
-  @property({ reflect: true }) name: string;
+  @property() name: string;
 
   /** The switch's value attribute. */
   @property() value: string;
