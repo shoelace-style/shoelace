@@ -392,7 +392,7 @@ export class SlDropdown extends LitElement {
           @keydown=${this.handleTriggerKeyDown}
           @keyup=${this.handleTriggerKeyUp}
         >
-          <slot name="trigger" @slotchange=${this.handleTriggerSlotChange} />
+          <slot name="trigger" @slotchange=${this.handleTriggerSlotChange}></slot>
         </span>
 
         <!-- Position the panel with a wrapper since the popover makes use of translate. This let's us add transitions
@@ -405,7 +405,7 @@ export class SlDropdown extends LitElement {
             aria-hidden=${this.open ? 'false' : 'true'}
             aria-labelledby=${this.componentId}
           >
-            <slot />
+            <slot></slot>
           </div>
         </div>
       </div>
