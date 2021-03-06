@@ -43,8 +43,7 @@ export class SlForm extends LitElement {
    * Emitted when the form is submitted. This event will not be emitted if any form control inside of
    * it is in an invalid state, unless the form has the `novalidate` attribute. Note that there is never a need to prevent
    * this event, since it doen't send a GET or POST request like native forms. To "prevent" submission, use a conditional
-   * around the XHR request you use to submit the form's data with. Event details will contain:
-   * `{ formData: FormData; formControls: HTMLElement[] }`
+   * around the XHR request you use to submit the form's data with.
    */
   @event('sl-submit') slSubmit: EventEmitter<{ formData: FormData; formControls: HTMLElement[] }>;
 

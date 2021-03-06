@@ -13,6 +13,7 @@ export class SlResizeObserver extends LitElement {
   private resizeObserver: ResizeObserver;
   private observedElements: HTMLElement[] = [];
 
+  /** Emitted when the element is resized. */
   @event('sl-resize') slResize: EventEmitter<{ entries: ResizeObserverEntry[] }>;
 
   connectedCallback() {

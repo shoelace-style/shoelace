@@ -35,7 +35,7 @@ export class SlIcon extends LitElement {
   /** Emitted when the icon has loaded. */
   @event('sl-load') slLoad: EventEmitter<void>;
 
-  /** Emitted when the icon failed to load. Event details may include: `{ status: number }` */
+  /** Emitted when the icon failed to load.  */
   @event('sl-error') slError: EventEmitter<{ status: number }>;
 
   connectedCallback() {
