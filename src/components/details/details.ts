@@ -34,13 +34,13 @@ export class SlDetails extends LitElement {
   private isVisible = false;
 
   /** Indicates whether or not the details is open. You can use this in lieu of the show/hide methods. */
-  @property({ type: Boolean }) open = false;
+  @property({ type: Boolean, reflect: true }) open = false;
 
   /** The summary to show in the details header. If you need to display HTML, use the `summary` slot instead. */
   @property() summary: string;
 
   /** Disables the details so it can't be toggled. */
-  @property({ type: Boolean }) disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Emitted when the details opens. Calling `event.preventDefault()` will prevent it from being opened. */
   @event('sl-show') slShow: EventEmitter<void>;

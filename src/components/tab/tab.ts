@@ -31,7 +31,7 @@ export class SlTab extends LitElement {
   @property({ type: Boolean, reflect: true }) active = false;
 
   /** Makes the tab closable and shows a close icon. */
-  @property({ type: Boolean, reflect: true }) closable = false;
+  @property({ type: Boolean }) closable = false;
 
   /** Draws the tab in a disabled state. */
   @property({ type: Boolean, reflect: true }) disabled = false;

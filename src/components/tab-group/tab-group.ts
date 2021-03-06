@@ -45,7 +45,7 @@ export class SlTabGroup extends LitElement {
   @property() placement: 'top' | 'bottom' | 'left' | 'right' = 'top';
 
   /** Disables the scroll arrows that appear when tabs overflow. */
-  @property({ attribute: 'no-scroll-controls', type: Boolean, reflect: true }) noScrollControls = false;
+  @property({ attribute: 'no-scroll-controls', type: Boolean }) noScrollControls = false;
 
   /** Emitted when a tab is shown. */
   @event('sl-tab-show') slTabShow: EventEmitter<{ tab: string }>;

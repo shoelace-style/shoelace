@@ -29,7 +29,7 @@ export class SlTag extends LitElement {
   @property({ type: Boolean, reflect: true }) pill = false;
 
   /** Makes the tag clearable. */
-  @property({ type: Boolean, reflect: true }) clearable = false;
+  @property({ type: Boolean }) clearable = false;
 
   /** Emitted when the clear button is activated. */
   @event('sl-clear') slClear: EventEmitter<void>;

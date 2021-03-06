@@ -51,13 +51,13 @@ export class SlTooltip extends LitElement {
     | 'left-end' = 'top';
 
   /** Disables the tooltip so it won't show when triggered. */
-  @property({ type: Boolean }) disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** The distance in pixels from which to offset the tooltip away from its target. */
   @property({ type: Number }) distance = 10;
 
   /** Indicates whether or not the tooltip is open. You can use this in lieu of the show/hide methods. */
-  @property({ type: Boolean }) open = false;
+  @property({ type: Boolean, reflect: true }) open = false;
 
   /** The distance in pixels from which to offset the tooltip along its target. */
   @property({ type: Number }) skidding = 0;

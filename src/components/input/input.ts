@@ -70,10 +70,10 @@ export class SlInput extends LitElement {
   @property({ attribute: 'help-text' }) helpText: string;
 
   /** Adds a clear button when the input is populated. */
-  @property({ type: Boolean, reflect: true }) clearable = false;
+  @property({ type: Boolean }) clearable = false;
 
   /** Adds a password toggle button to password inputs. */
-  @property({ attribute: 'toggle-password', type: Boolean, reflect: true }) togglePassword = false;
+  @property({ attribute: 'toggle-password', type: Boolean }) togglePassword = false;
 
   /** The input's placeholder text. */
   @property() placeholder = '';

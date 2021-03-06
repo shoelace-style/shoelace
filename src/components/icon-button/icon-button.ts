@@ -34,7 +34,7 @@ export class SlIconButton extends LitElement {
   @property() label: string;
 
   /** Disables the button. */
-  @property({ type: Boolean }) disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   firstUpdated() {
     focusVisible.observe(this.button);

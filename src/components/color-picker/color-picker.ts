@@ -59,7 +59,7 @@ export class SlColorPicker extends LitElement {
   @property() format: 'hex' | 'rgb' | 'hsl' = 'hex';
 
   /** Renders the color picker inline rather than inside a dropdown. */
-  @property({ type: Boolean }) inline = false;
+  @property({ type: Boolean, reflect: true }) inline = false;
 
   /** Determines the size of the color picker's trigger. This has no effect on inline color pickers. */
   @property() size: 'small' | 'medium' | 'large' = 'medium';
@@ -71,13 +71,13 @@ export class SlColorPicker extends LitElement {
   @property() name = '';
 
   /** Disables the color picker. */
-  @property({ type: Boolean }) disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /**
    * This will be true when the control is in an invalid state. Validity is determined by the `setCustomValidity()`
    * method using the browser's constraint validation API.
    */
-  @property({ type: Boolean }) invalid = false;
+  @property({ type: Boolean, reflect: true }) invalid = false;
 
   /**
    * Enable this option to prevent the panel from being clipped when the component is placed inside a container with

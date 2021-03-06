@@ -88,7 +88,7 @@ export class SlSelect extends LitElement {
    * Enable this option to prevent the panel from being clipped when the component is placed inside a container with
    * `overflow: auto|scroll`.
    */
-  @property({ type: Boolean, reflect: true }) hoist = false;
+  @property({ type: Boolean }) hoist = false;
 
   /** The value of the control. This will be a string or an array depending on `multiple`. */
   @property() value: string | Array<string> = '';
@@ -106,7 +106,7 @@ export class SlSelect extends LitElement {
   @property({ type: Boolean, reflect: true }) required = false;
 
   /** Adds a clear button when the select is populated. */
-  @property({ type: Boolean, reflect: true }) clearable = false;
+  @property({ type: Boolean }) clearable = false;
 
   /** This will be true when the control is in an invalid state. Validity is determined by the `required` prop. */
   @property({ type: Boolean, reflect: true }) invalid = false;
