@@ -70,7 +70,7 @@ export class SlSelect extends LitElement {
    * The maximum number of tags to show when `multiple` is true. After the maximum, "+n" will be shown to indicate the
    * number of additional items that are selected. Set to -1 to remove the limit.
    */
-  @property({ type: Number }) maxTagsVisible = 3;
+  @property({ attribute: 'max-tags-visible', type: Number }) maxTagsVisible = 3;
 
   /** Disables the select control. */
   @property({ type: Boolean, reflect: true }) disabled = false;
@@ -92,13 +92,16 @@ export class SlSelect extends LitElement {
 
   /** The value of the control. This will be a string or an array depending on `multiple`. */
   @property() value: string | Array<string> = '';
+
   /** Draws a pill-style select with rounded edges. */
   @property({ type: Boolean, reflect: true }) pill = false;
 
   /** The select's label. Alternatively, you can use the label slot. */
   @property() label: string;
+
   /** The select's help text. Alternatively, you can use the help-text slot. */
   @property({ attribute: 'help-text' }) helpText: string;
+
   /** The select's required attribute. */
   @property({ type: Boolean, reflect: true }) required = false;
 

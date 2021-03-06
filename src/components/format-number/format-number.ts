@@ -16,7 +16,7 @@ export class SlFormatNumber extends LitElement {
   @property() type: 'currency' | 'decimal' | 'percent' = 'decimal';
 
   /** Turns off grouping separators. */
-  @property({ type: Boolean }) noGrouping = false;
+  @property({ attribute: 'no-grouping', type: Boolean }) noGrouping = false;
 
   /** The currency to use when formatting. Must be an ISO 4217 currency code such as `USD` or `EUR`. */
   @property() currency = 'USD';

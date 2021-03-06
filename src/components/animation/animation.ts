@@ -38,7 +38,7 @@ export class SlAnimation extends LitElement {
   @property() easing = 'linear';
 
   /** The number of milliseconds to delay after the active period of an animation sequence. */
-  @property({ type: Number }) endDelay = 0;
+  @property({ attribute: 'end-delay', type: Number }) endDelay = 0;
 
   /** Sets how the animation applies styles to its target before and after its execution. */
   @property() fill: FillMode = 'auto';
