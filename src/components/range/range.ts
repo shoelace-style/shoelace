@@ -195,7 +195,7 @@ export class SlRange extends LitElement {
             class="range__control"
             name=${this.name}
             .value=${this.value}
-            ?disabled=${this.disabled ? true : null}
+            ?disabled=${this.disabled}
             min=${ifDefined(this.min)}
             max=${ifDefined(this.max)}
             step=${ifDefined(this.step)}

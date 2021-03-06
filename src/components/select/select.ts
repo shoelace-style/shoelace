@@ -461,7 +461,7 @@ export class SlSelect extends LitElement {
             <input
               class="select__hidden-select"
               aria-hidden="true"
-              required=${this.required ? true : null}
+              ?required=${this.required}
               .value=${hasSelection ? '1' : ''}
               tabindex="-1"
             />
