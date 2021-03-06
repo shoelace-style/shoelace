@@ -1,6 +1,7 @@
 import { LitElement, customElement, html, property, query, unsafeCSS } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
 import { event, EventEmitter } from '../../internal/event';
+import { watch } from '../../internal/watch';
 import styles from 'sass:./details.scss';
 import { focusVisible } from '../../internal/focus-visible';
 
@@ -160,7 +161,8 @@ export class SlDetails extends LitElement {
     }
   }
 
-  watchOpen() {
+  @watch('open')
+  handleOpenChange() {
     this.open ? this.show() : this.hide();
   }
 

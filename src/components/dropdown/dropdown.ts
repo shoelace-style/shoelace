@@ -1,6 +1,7 @@
 import { LitElement, customElement, html, property, query, unsafeCSS } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
 import { event, EventEmitter } from '../../internal/event';
+import { watch } from '../../internal/watch';
 import styles from 'sass:./dropdown.scss';
 import { SlMenu, SlMenuItem } from '../../shoelace';
 import { scrollIntoView } from '../../internal/scroll';
@@ -82,15 +83,6 @@ export class SlDropdown extends LitElement {
 
   /** Emitted after the dropdown closes and all transitions are complete. */
   @event('sl-after-hide') slAfterHide: EventEmitter<void>;
-
-  handlePopoverOptionsChange() {
-    this.popover.setOptions({
-      strategy: this.hoist ? 'fixed' : 'absolute',
-      placement: this.placement,
-      distance: this.distance,
-      skidding: this.skidding
-    });
-  }
 
   connectedCallback() {
     super.connectedCallback();
@@ -209,6 +201,21 @@ export class SlDropdown extends LitElement {
     }
   }
 
+  @watch('distance')
+  @watch('hoist')
+  @watch('placement')
+  @watch('skidding')
+  handlePopoverOptionsChange() {
+    if (this.popover) {
+      this.popover.setOptions({
+        strategy: this.hoist ? 'fixed' : 'absolute',
+        placement: this.placement,
+        distance: this.distance,
+        skidding: this.skidding
+      });
+    }
+  }
+
   handleTriggerClick() {
     this.open ? this.hide() : this.show();
   }
@@ -287,13 +294,15 @@ export class SlDropdown extends LitElement {
   // To determine this, we assume the first tabbable element in the trigger slot is the "accessible trigger."
   //
   updateAccessibleTrigger() {
-    const slot = this.trigger.querySelector('slot') as HTMLSlotElement;
-    const assignedElements = slot.assignedElements({ flatten: true }) as HTMLElement[];
-    const accessibleTrigger = assignedElements.map(getNearestTabbableElement)[0];
+    if (this.trigger) {
+      const slot = this.trigger.querySelector('slot') as HTMLSlotElement;
+      const assignedElements = slot.assignedElements({ flatten: true }) as HTMLElement[];
+      const accessibleTrigger = assignedElements.map(getNearestTabbableElement)[0];
 
-    if (accessibleTrigger) {
-      accessibleTrigger.setAttribute('aria-haspopup', 'true');
-      accessibleTrigger.setAttribute('aria-expanded', this.open ? 'true' : 'false');
+      if (accessibleTrigger) {
+        accessibleTrigger.setAttribute('aria-haspopup', 'true');
+        accessibleTrigger.setAttribute('aria-expanded', this.open ? 'true' : 'false');
+      }
     }
   }
 
@@ -355,24 +364,11 @@ export class SlDropdown extends LitElement {
     this.popover.reposition();
   }
 
-  watchDistance() {
-    this.handlePopoverOptionsChange();
-  }
-  watchHoist() {
-    this.handlePopoverOptionsChange();
-  }
-
-  watchOpen() {
+  @watch('open')
+  handleOpenChange() {
     this.open ? this.show() : this.hide();
+
     this.updateAccessibleTrigger();
-  }
-
-  watchPlacement() {
-    this.handlePopoverOptionsChange();
-  }
-
-  watchSkidding() {
-    this.handlePopoverOptionsChange();
   }
 
   render() {

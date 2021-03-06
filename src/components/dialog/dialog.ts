@@ -1,6 +1,7 @@
 import { LitElement, customElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
 import { event, EventEmitter } from '../../internal/event';
+import { watch } from '../../internal/watch';
 import styles from 'sass:./dialog.scss';
 import { lockBodyScrolling, unlockBodyScrolling } from '../../internal/scroll';
 import { hasSlot } from '../../internal/slot';
@@ -180,6 +181,11 @@ export class SlDialog extends LitElement {
     }
   }
 
+  @watch('open')
+  handleOpenChange() {
+    this.open ? this.show() : this.hide();
+  }
+
   handleOverlayClick() {
     const slOverlayDismiss = this.slOverlayDismiss.emit();
     if (!slOverlayDismiss.defaultPrevented) {
@@ -201,10 +207,6 @@ export class SlDialog extends LitElement {
       this.willHide = false;
       this.open ? this.slAfterShow.emit() : this.slAfterHide.emit();
     }
-  }
-
-  watchOpen() {
-    this.open ? this.show() : this.hide();
   }
 
   render() {
