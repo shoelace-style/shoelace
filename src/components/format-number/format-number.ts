@@ -1,57 +1,43 @@
-import { Shoemaker } from '@shoelace-style/shoemaker';
+import { LitElement, customElement, property } from 'lit-element';
 
 /**
  * @since 2.0
  * @status stable
  */
-export default class SlFormatNumber extends Shoemaker {
-  static tag = 'sl-format-number';
-  static props = [
-    'value',
-    'locale',
-    'type',
-    'noGrouping',
-    'currency',
-    'currencyDisplay',
-    'minimumIntegerDigits',
-    'minimumFractionDigits',
-    'maximumFractionDigits',
-    'minimumSignificantDigits',
-    'maximumSignificantDigits'
-  ];
-
+@customElement('sl-format-number')
+export class SlFormatNumber extends LitElement {
   /** The number to format. */
-  value = 0;
+  @property({ type: Number }) value = 0;
 
   /** The locale to use when formatting the number. */
-  locale: string;
+  @property() locale: string;
 
   /** The formatting style to use. */
-  type: 'currency' | 'decimal' | 'percent' = 'decimal';
+  @property() type: 'currency' | 'decimal' | 'percent' = 'decimal';
 
   /** Turns off grouping separators. */
-  noGrouping = false;
+  @property({ type: Boolean }) noGrouping = false;
 
   /** The currency to use when formatting. Must be an ISO 4217 currency code such as `USD` or `EUR`. */
-  currency = 'USD';
+  @property() currency = 'USD';
 
   /** How to display the currency. */
-  currencyDisplay: 'symbol' | 'narrowSymbol' | 'code' | 'name' = 'symbol';
+  @property({ attribute: 'currency-display' }) currencyDisplay: 'symbol' | 'narrowSymbol' | 'code' | 'name' = 'symbol';
 
   /** The minimum number of integer digits to use. Possible values are 1 - 21. */
-  minimumIntegerDigits: number;
+  @property({ attribute: 'minimum-integer-digits', type: Number }) minimumIntegerDigits: number;
 
   /** The minimum number of fraction digits to use. Possible values are 0 - 20. */
-  minimumFractionDigits: number;
+  @property({ attribute: 'minimum-fraction-digits', type: Number }) minimumFractionDigits: number;
 
   /** The maximum number of fraction digits to use. Possible values are 0 - 20. */
-  maximumFractionDigits: number;
+  @property({ attribute: 'maximum-fraction-digits', type: Number }) maximumFractionDigits: number;
 
   /** The minimum number of significant digits to use. Possible values are 1 - 21. */
-  minimumSignificantDigits: number;
+  @property({ attribute: 'minimum-significant-digits', type: Number }) minimumSignificantDigits: number;
 
   /** The maximum number of significant digits to use,. Possible values are 1 - 21. */
-  maximumSignificantDigits: number;
+  @property({ attribute: 'maximum-significant-digits', type: Number }) maximumSignificantDigits: number;
 
   render() {
     if (isNaN(this.value)) {

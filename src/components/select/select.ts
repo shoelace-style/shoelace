@@ -1,4 +1,15 @@
-import { classMap, html, Hole, Shoemaker } from '@shoelace-style/shoemaker';
+import {
+  LitElement,
+  TemplateResult,
+  customElement,
+  html,
+  internalProperty,
+  property,
+  query,
+  unsafeCSS
+} from 'lit-element';
+import { classMap } from 'lit-html/directives/class-map';
+import { event, EventEmitter } from '../../internal/event';
 import styles from 'sass:./select.scss';
 import { SlDropdown, SlIconButton, SlMenu, SlMenuItem } from '../../shoelace';
 import { renderFormControl } from '../../internal/form-control';
@@ -30,115 +41,124 @@ let id = 0;
  * @part menu - The select menu, a <sl-menu> element.
  * @part tag - The multiselect option, a <sl-tag> element.
  * @part tags - The container in which multiselect options are rendered.
- *
- * @emit sl-change - Emitted when the control's value changes.
- * @emit sl-focus - Emitted when the control gains focus.
- * @emit sl-blur - Emitted when the control loses focus.
  */
-export default class SlSelect extends Shoemaker {
-  static tag = 'sl-select';
-  static props = [
-    'hasFocus',
-    'hasHelpTextSlot',
-    'hasLabelSlot',
-    'isOpen',
-    'items',
-    'displayLabel',
-    'displayTags',
-    'multiple',
-    'maxTagsVisible',
-    'disabled',
-    'name',
-    'placeholder',
-    'size',
-    'hoist',
-    'value',
-    'pill',
-    'label',
-    'helpText',
-    'required',
-    'clearable',
-    'invalid'
-  ];
-  static reflect = ['disabled', 'invalid'];
-  static styles = styles;
+@customElement('sl-select')
+export class SlSelect extends LitElement {
+  static styles = unsafeCSS(styles);
 
-  private displayLabel = '';
-  private displayTags: Hole[] = [];
-  private dropdown: SlDropdown;
-  private hasFocus = false;
-  private hasHelpTextSlot = false;
-  private hasLabelSlot = false;
+  @query('.select') dropdown: SlDropdown;
+  @query('.select__hidden-select') input: HTMLInputElement;
+  @query('.select__menu') menu: SlMenu;
+
   private helpTextId = `select-help-text-${id}`;
-  private input: HTMLInputElement;
   private inputId = `select-${++id}`;
-  private isOpen = false;
   private labelId = `select-label-${id}`;
-  private menu: SlMenu;
   private resizeObserver: ResizeObserver;
 
+  @internalProperty() private hasFocus = false;
+  @internalProperty() private hasHelpTextSlot = false;
+  @internalProperty() private hasLabelSlot = false;
+  @internalProperty() private isOpen = false;
+  @internalProperty() private displayLabel = '';
+  @internalProperty() private displayTags: TemplateResult[] = [];
+
   /** Enables multiselect. With this enabled, value will be an array. */
-  multiple = false;
+  @property({ type: Boolean, reflect: true }) multiple = false;
 
   /**
    * The maximum number of tags to show when `multiple` is true. After the maximum, "+n" will be shown to indicate the
    * number of additional items that are selected. Set to -1 to remove the limit.
    */
-  maxTagsVisible = 3;
+  @property({ type: Number }) maxTagsVisible = 3;
 
   /** Disables the select control. */
-  disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** The select's name. */
-  name = '';
+  @property() name = '';
 
   /** The select's placeholder text. */
-  placeholder = '';
+  @property() placeholder = '';
 
   /** The select's size. */
-  size: 'small' | 'medium' | 'large' = 'medium';
+  @property() size: 'small' | 'medium' | 'large' = 'medium';
 
   /**
    * Enable this option to prevent the panel from being clipped when the component is placed inside a container with
    * `overflow: auto|scroll`.
    */
-  hoist = false;
+  @property({ type: Boolean, reflect: true }) hoist = false;
 
   /** The value of the control. This will be a string or an array depending on `multiple`. */
-  value: string | Array<string> = '';
-
+  @property() value: string | Array<string> = '';
   /** Draws a pill-style select with rounded edges. */
-  pill = false;
+  @property({ type: Boolean, reflect: true }) pill = false;
 
   /** The select's label. Alternatively, you can use the label slot. */
-  label = '';
-
+  @property() label: string;
   /** The select's help text. Alternatively, you can use the help-text slot. */
-  helpText = '';
-
+  @property({ attribute: 'help-text' }) helpText: string;
   /** The select's required attribute. */
-  required = false;
+  @property({ type: Boolean, reflect: true }) required = false;
 
   /** Adds a clear button when the select is populated. */
-  clearable = false;
+  @property({ type: Boolean, reflect: true }) clearable = false;
 
   /** This will be true when the control is in an invalid state. Validity is determined by the `required` prop. */
-  invalid = false;
+  @property({ type: Boolean, reflect: true }) invalid = false;
 
-  onConnect() {
+  /** Emitted when the control's value changes. */
+  @event('sl-change') slChange: EventEmitter<void>;
+
+  /** Emitted when the control gains focus. */
+  @event('sl-focus') slFocus: EventEmitter<void>;
+
+  /** Emitted when the control loses focus. */
+  @event('sl-blur') slBlur: EventEmitter<void>;
+
+  connectedCallback() {
+    super.connectedCallback();
     this.handleSlotChange = this.handleSlotChange.bind(this);
+
     this.shadowRoot!.addEventListener('slotchange', this.handleSlotChange);
     this.handleSlotChange();
   }
 
-  onReady() {
+  firstUpdated() {
     this.resizeObserver = new ResizeObserver(() => this.resizeMenu());
 
     // We need to do an initial sync after the component has rendered, so this will suppress the re-render warning
     requestAnimationFrame(() => this.syncItemsFromValue());
   }
 
-  onDisconnect() {
+  update(changedProps: Map<string, any>) {
+    super.update(changedProps);
+
+    if (changedProps.has('help-text') || changedProps.has('label')) {
+      this.handleSlotChange();
+    }
+
+    if (changedProps.has('multiple')) {
+      // Cast to array | string based on `this.multiple`
+      const value = this.getValueAsArray();
+      this.value = this.multiple ? value : value[0] || '';
+      this.syncItemsFromValue();
+    }
+
+    if (changedProps.has('disabled')) {
+      if (this.disabled && this.isOpen) {
+        this.dropdown.hide();
+      }
+    }
+
+    if (changedProps.has('value')) {
+      this.syncItemsFromValue();
+      this.slChange.emit();
+    }
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
     this.shadowRoot!.removeEventListener('slotchange', this.handleSlotChange);
   }
 
@@ -168,12 +188,12 @@ export default class SlSelect extends Shoemaker {
 
   handleBlur() {
     this.hasFocus = false;
-    this.emit('sl-blur');
+    this.slBlur.emit();
   }
 
   handleFocus() {
     this.hasFocus = true;
-    this.emit('sl-focus');
+    this.slFocus.emit();
   }
 
   handleClearClick(event: MouseEvent) {
@@ -291,7 +311,10 @@ export default class SlSelect extends Shoemaker {
   resizeMenu() {
     const box = this.shadowRoot?.querySelector('.select__box') as HTMLElement;
     this.menu.style.width = `${box.clientWidth}px`;
-    this.dropdown.reposition();
+
+    if (this.dropdown) {
+      this.dropdown.reposition();
+    }
   }
 
   syncItemsFromValue() {
@@ -314,9 +337,9 @@ export default class SlSelect extends Shoemaker {
             size=${this.size}
             pill=${this.pill}
             clearable
-            onclick=${this.handleTagInteraction.bind(this)}
-            onkeydown=${this.handleTagInteraction.bind(this)}
-            onsl-clear=${(event: CustomEvent) => {
+            @click=${this.handleTagInteraction}
+            @keydown=${this.handleTagInteraction}
+            @sl-clear=${(event: CustomEvent) => {
               event.stopPropagation();
               if (!this.disabled) {
                 item.checked = false;
@@ -356,32 +379,6 @@ export default class SlSelect extends Shoemaker {
     }
   }
 
-  watchDisabled() {
-    if (this.disabled && this.isOpen) {
-      this.dropdown.hide();
-    }
-  }
-
-  watchHelpText() {
-    this.handleSlotChange();
-  }
-
-  watchLabel() {
-    this.handleSlotChange();
-  }
-
-  watchMultiple() {
-    // Cast to array | string based on `this.multiple`
-    const value = this.getValueAsArray();
-    this.value = this.multiple ? value : value[0] || '';
-    this.syncItemsFromValue();
-  }
-
-  watchValue() {
-    this.syncItemsFromValue();
-    this.emit('sl-change');
-  }
-
   render() {
     const hasSelection = this.multiple ? this.value.length > 0 : this.value !== '';
 
@@ -400,7 +397,6 @@ export default class SlSelect extends Shoemaker {
       html`
         <sl-dropdown
           part="base"
-          ref=${(el: SlDropdown) => (this.dropdown = el)}
           .hoist=${this.hoist}
           .closeOnSelect=${!this.multiple}
           .containingElement=${this}
@@ -412,7 +408,7 @@ export default class SlSelect extends Shoemaker {
             'select--clearable': this.clearable,
             'select--disabled': this.disabled,
             'select--multiple': this.multiple,
-            'select--has-tags': this.multiple && hasSelection,
+            'select--has-tags': this.multiple && this.displayTags.length > 0,
             'select--placeholder-visible': this.displayLabel === '',
             'select--small': this.size === 'small',
             'select--medium': this.size === 'medium',
@@ -420,8 +416,8 @@ export default class SlSelect extends Shoemaker {
             'select--pill': this.pill,
             'select--invalid': this.invalid
           })}
-          onsl-show=${this.handleMenuShow.bind(this)}
-          onsl-hide=${this.handleMenuHide.bind(this)}
+          @sl-show=${this.handleMenuShow}
+          @sl-hide=${this.handleMenuHide}
         >
           <div
             slot="trigger"
@@ -433,9 +429,9 @@ export default class SlSelect extends Shoemaker {
             aria-haspopup="true"
             aria-expanded=${this.isOpen ? 'true' : 'false'}
             tabindex=${this.disabled ? '-1' : '0'}
-            onblur=${this.handleBlur.bind(this)}
-            onfocus=${this.handleFocus.bind(this)}
-            onkeydown=${this.handleKeyDown.bind(this)}
+            @blur=${this.handleBlur}
+            @focus=${this.handleFocus}
+            @keydown=${this.handleKeyDown}
           >
             <div class="select__label">
               ${this.displayTags.length
@@ -449,20 +445,19 @@ export default class SlSelect extends Shoemaker {
                     exportparts="base:clear-button"
                     class="select__clear"
                     name="x-circle"
-                    onclick=${this.handleClearClick.bind(this)}
+                    @click=${this.handleClearClick}
                     tabindex="-1"
-                  />
+                  ></sl-icon-button>
                 `
               : ''}
 
             <span part="icon" class="select__icon">
-              <sl-icon name="chevron-down" />
+              <sl-icon name="chevron-down"></sl-icon>
             </span>
 
-            <!-- The hidden input tricks the browser's built-in validation so it works as expected. We use an input 
+            <!-- The hidden input tricks the browser's built-in validation so it works as expected. We use an input
             instead of a select because, otherwise, iOS will show a list of options during validation. -->
             <input
-              ref=${(el: HTMLInputElement) => (this.input = el)}
               class="select__hidden-select"
               aria-hidden="true"
               required=${this.required ? true : null}
@@ -471,13 +466,8 @@ export default class SlSelect extends Shoemaker {
             />
           </div>
 
-          <sl-menu
-            ref=${(el: SlMenu) => (this.menu = el)}
-            part="menu"
-            class="select__menu"
-            onsl-select=${this.handleMenuSelect.bind(this)}
-          >
-            <slot onslotchange=${this.handleSlotChange} />
+          <sl-menu part="menu" class="select__menu" @sl-select=${this.handleMenuSelect}>
+            <slot @slotchange=${this.handleSlotChange}></slot>
           </sl-menu>
         </sl-dropdown>
       `

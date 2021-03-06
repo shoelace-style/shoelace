@@ -1,4 +1,5 @@
-import { html, Shoemaker } from '@shoelace-style/shoemaker';
+import { LitElement, customElement, html, query, unsafeCSS } from 'lit-element';
+import { event, EventEmitter } from '../../internal/event';
 import styles from 'sass:./menu.scss';
 import { SlMenuItem } from '../../shoelace';
 import { getTextContent } from '../../internal/slot';
@@ -10,16 +11,18 @@ import { getTextContent } from '../../internal/slot';
  * @slot - The menu's content, including menu items, menu dividers, and menu labels.
  *
  * @part base - The component's base wrapper.
- *
- * @emit sl-select - Emitted when a menu item is selected. Event details will contain: `{ item: SlMenuItem }`
  */
-export default class SlMenu extends Shoemaker {
-  static tag = 'sl-menu';
-  static styles = styles;
+@customElement('sl-menu')
+export class SlMenu extends LitElement {
+  static styles = unsafeCSS(styles);
 
-  private menu: HTMLElement;
+  @query('.menu') menu: HTMLElement;
+
   private typeToSelectString = '';
   private typeToSelectTimeout: any;
+
+  /** Emitted when a menu item is selected. */
+  @event('sl-select') slSelect: EventEmitter<{ item: SlMenuItem }>;
 
   /**
    * Initiates type-to-select logic, which automatically selects an option based on what the user is currently typing.
@@ -62,7 +65,7 @@ export default class SlMenu extends Shoemaker {
     const item = target.closest('sl-menu-item') as SlMenuItem;
 
     if (item && !item.disabled) {
-      this.emit('sl-select', { detail: { item } });
+      this.slSelect.emit({ detail: { item } });
     }
   }
 
@@ -73,7 +76,7 @@ export default class SlMenu extends Shoemaker {
       event.preventDefault();
 
       if (item) {
-        this.emit('sl-select', { detail: { item } });
+        this.slSelect.emit({ detail: { item } });
       }
     }
 
@@ -115,16 +118,8 @@ export default class SlMenu extends Shoemaker {
 
   render() {
     return html`
-      <div
-        ref=${(el: HTMLElement) => (this.menu = el)}
-        part="base"
-        class="menu"
-        role="menu"
-        onclick=${this.handleClick.bind(this)}
-        onkeydown=${this.handleKeyDown.bind(this)}
-        tabindex="0"
-      >
-        <slot />
+      <div part="base" class="menu" role="menu" @click=${this.handleClick} @keydown=${this.handleKeyDown} tabindex="0">
+        <slot></slot>
       </div>
     `;
   }

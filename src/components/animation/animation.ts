@@ -1,4 +1,5 @@
-import { html, Shoemaker } from '@shoelace-style/shoemaker';
+import { LitElement, customElement, html, property, queryAsync, unsafeCSS } from 'lit-element';
+import { event, EventEmitter } from '../../internal/event';
 import styles from 'sass:./animation.scss';
 import { animations } from './animations';
 
@@ -7,95 +8,134 @@ import { animations } from './animations';
  * @status stable
  *
  * @slot - The element to animate. If multiple elements are to be animated, wrap them in a single container.
- *
- * @emit sl-cancel - Emitted when the animation is canceled.
- * @emit sl-finish - Emitted when the animation finishes.
- * @emit sl-start - Emitted when the animation starts or restarts.
  */
-export default class SlAnimation extends Shoemaker {
-  static tag = 'sl-animation';
-  static props = [
-    'name',
-    'delay',
-    'direction',
-    'duration',
-    'easing',
-    'endDelay',
-    'fill',
-    'iterations',
-    'iterationStart',
-    'keyframes',
-    'playbackRate',
-    'pause'
-  ];
-  static reflect = ['name', 'pause'];
-  static styles = styles;
+@customElement('sl-animation')
+export class SlAnimation extends LitElement {
+  static styles = unsafeCSS(styles);
 
   private animation: Animation;
-  private defaultSlot: HTMLSlotElement;
   private hasStarted = false;
 
+  @queryAsync('slot') defaultSlot: Promise<HTMLSlotElement>;
+
   /** The name of the built-in animation to use. For custom animations, use the `keyframes` prop. */
-  name = 'none';
+  @property({ reflect: true }) name = 'none';
 
   /** The number of milliseconds to delay the start of the animation. */
-  delay = 0;
+  @property({ type: Number }) delay = 0;
 
   /** Determines the direction of playback as well as the behavior when reaching the end of an iteration. */
-  direction: PlaybackDirection = 'normal';
+  @property() direction: PlaybackDirection = 'normal';
 
   /** The number of milliseconds each iteration of the animation takes to complete. */
-  duration = 1000;
+  @property({ type: Number }) duration = 1000;
 
   /**
    * The easing function to use for the animation. This can be a Shoelace easing function or a custom easing function
    * such as `cubic-bezier(0, 1, .76, 1.14)`.
    */
-  easing = 'linear';
+  @property() easing = 'linear';
 
   /** The number of milliseconds to delay after the active period of an animation sequence. */
-  endDelay = 0;
+  @property({ type: Number }) endDelay = 0;
 
   /** Sets how the animation applies styles to its target before and after its execution. */
-  fill: FillMode = 'auto';
+  @property() fill: FillMode = 'auto';
 
   /** The number of iterations to run before the animation completes. Defaults to `Infinity`, which loops. */
-  iterations: number = Infinity;
+  @property({ type: Number }) iterations: number = Infinity;
 
   /** The offset at which to start the animation, usually between 0 (start) and 1 (end). */
-  iterationStart = 0;
+  @property({ attribute: 'iteration-start', type: Number }) iterationStart = 0;
 
   /** The keyframes to use for the animation. If this is set, `name` will be ignored. */
-  keyframes: Keyframe[];
+  @property() keyframes: Keyframe[];
 
   /**
    * Sets the animation's playback rate. The default is `1`, which plays the animation at a normal speed. Setting this
    * to `2`, for example, will double the animation's speed. A negative value can be used to reverse the animation. This
    * value can be changed without causing the animation to restart.
    */
-  playbackRate = 1;
+  @property({ attribute: 'playback-rate', type: Number }) playbackRate = 1;
 
   /** Pauses the animation. The animation will resume when this prop is removed. */
-  pause = false;
+  @property({ type: Boolean }) pause = false;
 
-  onReady() {
+  /** Emitted when the animation is canceled. */
+  @event('sl-cancel') slCancel: EventEmitter<void>;
+
+  /** Emitted when the animation finishes. */
+  @event('sl-finish') slFinish: EventEmitter<void>;
+
+  /** Emitted when the animation starts or restarts. */
+  @event('sl-start') slStart: EventEmitter<void>;
+
+  connectedCallback() {
+    super.connectedCallback();
     this.createAnimation();
   }
 
-  onDisconnect() {
+  disconnectedCallback() {
+    super.disconnectedCallback();
     this.destroyAnimation();
   }
 
+  update(changedProps: Map<string, any>) {
+    super.update(changedProps);
+
+    if (changedProps.has('pause')) {
+      this.handlePauseChange();
+    }
+
+    if (changedProps.has('playbackRate')) {
+      this.handlePlaybackRateChange();
+    }
+
+    if (
+      [
+        'name',
+        'delay',
+        'direction',
+        'duration',
+        'easing',
+        'endDelay',
+        'fill',
+        'iterations',
+        'iterationsStart',
+        'keyframes'
+      ].find(prop => changedProps.has(prop))
+    ) {
+      this.createAnimation();
+    }
+  }
+
   handleAnimationFinish() {
-    this.emit('sl-finish');
+    this.slFinish.emit();
   }
 
   handleAnimationCancel() {
-    this.emit('sl-cancel');
+    this.slCancel.emit();
+  }
+
+  handlePauseChange() {
+    if (this.animation) {
+      this.pause ? this.animation.pause() : this.animation.play();
+
+      if (!this.pause && !this.hasStarted) {
+        this.hasStarted = true;
+        this.slStart.emit();
+      }
+
+      return true;
+    } else {
+      return false;
+    }
   }
 
   handlePlaybackRateChange() {
-    this.animation.playbackRate = this.playbackRate;
+    if (this.animation) {
+      this.animation.playbackRate = this.playbackRate;
+    }
   }
 
   handleSlotChange() {
@@ -103,13 +143,14 @@ export default class SlAnimation extends Shoemaker {
     this.createAnimation();
   }
 
-  createAnimation() {
+  async createAnimation() {
     const easing = animations.easings[this.easing] || this.easing;
     const keyframes: Keyframe[] = this.keyframes ? this.keyframes : (animations as any)[this.name];
-    const element = this.defaultSlot.assignedElements({ flatten: true })[0] as HTMLElement;
+    const slot = await this.defaultSlot;
+    const element = slot.assignedElements()[0] as HTMLElement;
 
     if (!element) {
-      return;
+      return false;
     }
 
     this.destroyAnimation();
@@ -131,8 +172,10 @@ export default class SlAnimation extends Shoemaker {
       this.animation.pause();
     } else {
       this.hasStarted = true;
-      this.emit('sl-start');
+      this.slStart.emit();
     }
+
+    return true;
   }
 
   destroyAnimation() {
@@ -142,56 +185,6 @@ export default class SlAnimation extends Shoemaker {
       this.animation.removeEventListener('finish', this.handleAnimationFinish);
       this.hasStarted = false;
     }
-  }
-
-  // Restart the animation when any of these properties change
-  watchDelay() {
-    this.createAnimation();
-  }
-
-  watchDirection() {
-    this.createAnimation();
-  }
-
-  watchEasing() {
-    this.createAnimation();
-  }
-
-  watchEndDelay() {
-    this.createAnimation();
-  }
-
-  watchFill() {
-    this.createAnimation();
-  }
-
-  watchIterations() {
-    this.createAnimation();
-  }
-
-  watchIterationStart() {
-    this.createAnimation();
-  }
-
-  watchKeyframes() {
-    this.createAnimation();
-  }
-
-  watchName() {
-    this.createAnimation();
-  }
-
-  watchPause() {
-    this.pause ? this.animation.pause() : this.animation.play();
-
-    if (!this.pause && !this.hasStarted) {
-      this.hasStarted = true;
-      this.emit('sl-start');
-    }
-  }
-
-  watchPlaybackRate() {
-    this.animation.playbackRate = this.playbackRate;
   }
 
   /** Clears all KeyframeEffects caused by this animation and aborts its playback. */
@@ -219,8 +212,6 @@ export default class SlAnimation extends Shoemaker {
   }
 
   render() {
-    return html`
-      <slot ref=${(el: HTMLSlotElement) => (this.defaultSlot = el)} onslotchange=${this.handleSlotChange.bind(this)} />
-    `;
+    return html` <slot @slotchange=${this.handleSlotChange}></slot> `;
   }
 }

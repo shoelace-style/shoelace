@@ -1,4 +1,4 @@
-import { html, Shoemaker } from '@shoelace-style/shoemaker';
+import { LitElement, customElement, html, unsafeCSS } from 'lit-element';
 import styles from 'sass:./menu-divider.scss';
 
 /**
@@ -9,11 +9,11 @@ import styles from 'sass:./menu-divider.scss';
  *
  * @part base - The component's base wrapper.
  */
-export default class SlMenuDivider extends Shoemaker {
-  static tag = 'sl-menu-divider';
-  static styles = styles;
+@customElement('sl-menu-divider')
+export class SlMenuDivider extends LitElement {
+  static styles = unsafeCSS(styles);
 
   render() {
-    return html` <div part="base" class="menu-divider" role="separator" aria-hidden="true" /> `;
+    return html` <div part="base" class="menu-divider" role="separator" aria-hidden="true"></div> `;
   }
 }

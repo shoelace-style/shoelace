@@ -1,4 +1,4 @@
-import { html, Shoemaker } from '@shoelace-style/shoemaker';
+import { LitElement, customElement, html, unsafeCSS } from 'lit-element';
 import styles from 'sass:./menu-label.scss';
 
 /**
@@ -11,14 +11,14 @@ import styles from 'sass:./menu-label.scss';
  *
  * @part base - The component's base wrapper.
  */
-export default class SlMenuLabel extends Shoemaker {
-  static tag = 'sl-menu-label';
-  static styles = styles;
+@customElement('sl-menu-label')
+export class SlMenuLabel extends LitElement {
+  static styles = unsafeCSS(styles);
 
   render() {
     return html`
       <div part="base" class="menu-label">
-        <slot />
+        <slot></slot>
       </div>
     `;
   }

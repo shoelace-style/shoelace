@@ -1,4 +1,7 @@
-import { classMap, html, Shoemaker } from '@shoelace-style/shoemaker';
+import { LitElement, customElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
+import { classMap } from 'lit-html/directives/class-map';
+import { ifDefined } from 'lit-html/directives/if-defined';
+import { event, EventEmitter } from '../../internal/event';
 import styles from 'sass:./textarea.scss';
 import { renderFormControl } from '../../internal/form-control';
 import { hasSlot } from '../../internal/slot';
@@ -17,131 +20,132 @@ let id = 0;
  * @part label - The textarea label.
  * @part textarea - The textarea control.
  * @part help-text - The textarea help text.
- *
- * @emit sl-change - Emitted when the control's value changes.
- * @emit sl-input - Emitted when the control receives input.
- * @emit sl-focus - Emitted when the control gains focus.
- * @emit sl-blur - Emitted when the control loses focus.
  */
-export default class SlTextarea extends Shoemaker {
-  static tag = 'sl-textarea';
-  static props = [
-    'hasFocus',
-    'hasHelpTextSlot',
-    'hasLabelSlot',
-    'size',
-    'name',
-    'value',
-    'label',
-    'helpText',
-    'placeholder',
-    'rows',
-    'resize',
-    'disabled',
-    'readonly',
-    'minlength',
-    'maxlength',
-    'required',
-    'invalid',
-    'autocapitalize',
-    'autocorrect',
-    'autocomplete',
-    'autofocus',
-    'spellcheck',
-    'inputmode'
-  ];
-  static reflect = ['size', 'pill', 'disabled', 'readonly', 'invalid'];
-  static styles = styles;
+@customElement('sl-textarea')
+export class SlTextarea extends LitElement {
+  static styles = unsafeCSS(styles);
 
-  private hasFocus = false;
-  private hasHelpTextSlot = false;
-  private hasLabelSlot = false;
+  @query('.textarea__control') input: HTMLTextAreaElement;
+
   private helpTextId = `textarea-help-text-${id}`;
-  private input: HTMLTextAreaElement;
   private inputId = `textarea-${++id}`;
   private labelId = `textarea-label-${id}`;
   private resizeObserver: ResizeObserver;
 
+  @internalProperty() private hasFocus = false;
+  @internalProperty() private hasHelpTextSlot = false;
+  @internalProperty() private hasLabelSlot = false;
+
   /** The textarea's size. */
-  size: 'small' | 'medium' | 'large' = 'medium';
+  @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
 
   /** The textarea's name attribute. */
-  name = '';
+  @property() name: string;
 
   /** The textarea's value attribute. */
-  value = '';
+  @property() value = '';
 
   /** The textarea's label. Alternatively, you can use the label slot. */
-  label = '';
+  @property() label: string;
 
   /** The textarea's help text. Alternatively, you can use the help-text slot. */
-  helpText = '';
+  @property({ attribute: 'help-text' }) helpText: string;
 
   /** The textarea's placeholder text. */
-  placeholder = '';
+  @property() placeholder = '';
 
   /** The number of rows to display by default. */
-  rows = 4;
+  @property({ type: Number }) rows = 4;
 
   /** Controls how the textarea can be resized. */
-  resize: 'none' | 'vertical' | 'auto' = 'vertical';
+  @property() resize: 'none' | 'vertical' | 'auto' = 'vertical';
 
   /** Disables the textarea. */
-  disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Makes the textarea readonly. */
-  readonly = false;
+  @property({ type: Boolean, reflect: true }) readonly = false;
 
   /** The minimum length of input that will be considered valid. */
-  minlength: number;
+  @property({ type: Number }) minlength: number;
 
   /** The maximum length of input that will be considered valid. */
-  maxlength: number;
+  @property({ type: Number }) maxlength: number;
 
   /** A pattern to validate input against. */
-  pattern: string;
+  @property() pattern: string;
 
   /** Makes the textarea a required field. */
-  required = false;
+  @property({ type: Boolean, reflect: true }) required = false;
 
   /**
    * This will be true when the control is in an invalid state. Validity is determined by props such as `type`,
    * `required`, `minlength`, and `maxlength` using the browser's constraint validation API.
    */
-  invalid = false;
+  @property({ type: Boolean, reflect: true }) invalid = false;
 
   /** The textarea's autocaptialize attribute. */
-  autocapitalize: string;
+  @property() autocapitalize: string;
 
   /** The textarea's autocorrect attribute. */
-  autocorrect: string;
+  @property() autocorrect: string;
 
   /** The textarea's autocomplete attribute. */
-  autocomplete: string;
+  @property() autocomplete: string;
 
   /** The textarea's autofocus attribute. */
-  autofocus: boolean;
+  @property({ type: Boolean }) autofocus: boolean;
 
   /** Enables spell checking on the textarea. */
-  spellcheck: boolean;
+  @property({ type: Boolean }) spellcheck: boolean;
 
   /** The textarea's inputmode attribute. */
-  inputmode: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
+  @property() inputmode: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
 
-  onConnect() {
+  /** Emitted when the control's value changes. */
+  @event('sl-change') slChange: EventEmitter<void>;
+
+  /** Emitted when the control receives input. */
+  @event('sl-input') slInput: EventEmitter<void>;
+
+  /** Emitted when the control gains focus. */
+  @event('sl-focus') slFocus: EventEmitter<void>;
+
+  /** Emitted when the control loses focus. */
+  @event('sl-blur') slBlur: EventEmitter<void>;
+
+  connectedCallback() {
+    super.connectedCallback();
     this.handleSlotChange = this.handleSlotChange.bind(this);
 
     this.shadowRoot!.addEventListener('slotchange', this.handleSlotChange);
     this.handleSlotChange();
   }
 
-  onReady() {
+  firstUpdated() {
     this.setTextareaHeight();
     this.resizeObserver = new ResizeObserver(() => this.setTextareaHeight());
     this.resizeObserver.observe(this.input);
   }
 
-  onDisconnect() {
+  update(changedProps: Map<string, any>) {
+    super.update(changedProps);
+
+    if (changedProps.has('help-text') || changedProps.has('label')) {
+      this.handleSlotChange();
+    }
+
+    if (changedProps.has('rows')) {
+      this.setTextareaHeight();
+    }
+
+    if (changedProps.has('value')) {
+      this.invalid = !this.input.checkValidity();
+    }
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
     this.resizeObserver.unobserve(this.input);
     this.shadowRoot!.removeEventListener('slotchange', this.handleSlotChange);
   }
@@ -181,14 +185,14 @@ export default class SlTextarea extends Shoemaker {
 
     if (this.value !== this.input.value) {
       this.value = this.input.value;
-      this.emit('sl-input');
+      this.slInput.emit();
     }
 
     if (this.value !== this.input.value) {
       this.value = this.input.value;
       this.setTextareaHeight();
-      this.emit('sl-input');
-      this.emit('sl-change');
+      this.slInput.emit();
+      this.slChange.emit();
     }
   }
 
@@ -205,23 +209,23 @@ export default class SlTextarea extends Shoemaker {
 
   handleChange() {
     this.value = this.input.value;
-    this.emit('sl-change');
+    this.slChange.emit();
   }
 
   handleInput() {
     this.value = this.input.value;
     this.setTextareaHeight();
-    this.emit('sl-input');
+    this.slInput.emit();
   }
 
   handleBlur() {
     this.hasFocus = false;
-    this.emit('sl-blur');
+    this.slBlur.emit();
   }
 
   handleFocus() {
     this.hasFocus = true;
-    this.emit('sl-focus');
+    this.slFocus.emit();
   }
 
   handleSlotChange() {
@@ -236,22 +240,6 @@ export default class SlTextarea extends Shoemaker {
     } else {
       (this.input.style.height as string | undefined) = undefined;
     }
-  }
-
-  watchHelpText() {
-    this.handleSlotChange();
-  }
-
-  watchLabel() {
-    this.handleSlotChange();
-  }
-
-  watchRows() {
-    this.setTextareaHeight();
-  }
-
-  watchValue() {
-    this.invalid = !this.input.checkValidity();
   }
 
   render() {
@@ -285,29 +273,28 @@ export default class SlTextarea extends Shoemaker {
         >
           <textarea
             part="textarea"
-            ref=${(el: HTMLTextAreaElement) => (this.input = el)}
             id=${this.inputId}
             class="textarea__control"
             name=${this.name}
-            placeholder=${this.placeholder}
-            disabled=${this.disabled ? true : null}
-            readonly=${this.readonly ? true : null}
-            rows=${this.rows}
-            minlength=${this.minlength}
-            maxlength=${this.maxlength}
             .value=${this.value}
-            autocapitalize=${this.autocapitalize}
-            autocorrect=${this.autocorrect}
-            autofocus=${this.autofocus}
-            spellcheck=${this.spellcheck}
-            required=${this.required ? true : null}
-            inputmode=${this.inputmode}
+            ?disabled=${this.disabled}
+            ?readonly=${this.readonly}
+            ?required=${this.required}
+            placeholder=${ifDefined(this.placeholder)}
+            rows=${ifDefined(this.rows)}
+            minlength=${ifDefined(this.minlength)}
+            maxlength=${ifDefined(this.maxlength)}
+            autocapitalize=${ifDefined(this.autocapitalize)}
+            autocorrect=${ifDefined(this.autocorrect)}
+            autofocus=${ifDefined(this.autofocus)}
+            spellcheck=${ifDefined(this.spellcheck)}
+            inputmode=${ifDefined(this.inputmode)}
             aria-labelledby=${this.labelId}
-            onchange=${this.handleChange.bind(this)}
-            oninput=${this.handleInput.bind(this)}
-            onfocus=${this.handleFocus.bind(this)}
-            onblur=${this.handleBlur.bind(this)}
-          />
+            @change=${this.handleChange.bind(this)}
+            @input=${this.handleInput.bind(this)}
+            @focus=${this.handleFocus.bind(this)}
+            @blur=${this.handleBlur.bind(this)}
+          ></textarea>
         </div>
       `
     );

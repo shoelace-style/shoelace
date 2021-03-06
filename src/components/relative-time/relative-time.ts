@@ -1,41 +1,49 @@
-import { html, Shoemaker } from '@shoelace-style/shoemaker';
+import { LitElement, customElement, html, internalProperty, property } from 'lit-element';
 
 /**
  * @since 2.0
  * @status stable
  */
-export default class SlRelativeTime extends Shoemaker {
-  static tag = 'sl-relative-time';
-  static props = ['isoTime', 'relativeTime', 'titleTime', 'date', 'locale', 'format', 'numeric', 'sync'];
-
-  private isoTime = '';
-  private relativeTime = '';
-  private titleTime = '';
+@customElement('sl-relative-time')
+export class SlRelativeTime extends LitElement {
   private updateTimeout: any;
 
+  @internalProperty() private isoTime = '';
+  @internalProperty() private relativeTime = '';
+  @internalProperty() private titleTime = '';
+
   /** The date from which to calculate time from. */
-  date: Date | string;
+  @property() date: Date | string;
 
   /** The locale to use when formatting the number. */
-  locale: string;
+  @property() locale: string;
 
   /** The formatting style to use. */
-  format: 'long' | 'short' | 'narrow' = 'long';
+  @property() format: 'long' | 'short' | 'narrow' = 'long';
 
   /**
    * When `auto`, values such as "yesterday" and "tomorrow" will be shown when possible. When `always`, values such as
    * "1 day ago" and "in 1 day" will be shown.
    */
-  numeric: 'always' | 'auto' = 'auto';
+  @property() numeric: 'always' | 'auto' = 'auto';
 
   /** Keep the displayed value up to date as time passes. */
-  sync = false;
+  @property({ type: Boolean }) sync = false;
 
-  onReady() {
+  firstUpdated() {
     this.updateTime();
   }
 
-  onDisconnect() {
+  update(changedProps: Map<string, any>) {
+    super.update(changedProps);
+
+    if (['date', 'locale', 'format', 'numeric', 'sync'].find(prop => changedProps.has(prop))) {
+      this.updateTime();
+    }
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
     clearTimeout(this.updateTimeout);
   }
 
@@ -104,26 +112,6 @@ export default class SlRelativeTime extends Shoemaker {
       }
       this.updateTimeout = setTimeout(() => this.updateTime(), nextInterval);
     }
-  }
-
-  watchDate() {
-    this.updateTime();
-  }
-
-  watchLocale() {
-    this.updateTime();
-  }
-
-  watchFormat() {
-    this.updateTime();
-  }
-
-  watchNumeric() {
-    this.updateTime();
-  }
-
-  watchSync() {
-    this.updateTime();
   }
 
   render() {

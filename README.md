@@ -31,7 +31,7 @@ If that's not what you're trying to do, the [documentation website](https://shoe
 
 ### What are you using to build Shoelace?
 
-Components are built with [Shoemaker](https://github.com/shoelace-style/shoemaker), a lightweight utility that provides an elegant API and reactive data binding. The build is a custom script with bundling powered by [esbuild](https://esbuild.github.io/).
+Components are built with [LitElement](https://lit-element.polymer-project.org/), a custom elements base class that provides an intuitive API and reactive data binding. The build is a custom script with bundling powered by [esbuild](https://esbuild.github.io/).
 
 ### Forking the Repo
 

@@ -1,4 +1,6 @@
-import { classMap, html, Shoemaker } from '@shoelace-style/shoemaker';
+import { LitElement, customElement, html, property, query, unsafeCSS } from 'lit-element';
+import { classMap } from 'lit-html/directives/class-map';
+import { event, EventEmitter } from '../../internal/event';
 import styles from 'sass:./dropdown.scss';
 import { SlMenu, SlMenuItem } from '../../shoelace';
 import { scrollIntoView } from '../../internal/scroll';
@@ -17,33 +19,27 @@ let id = 0;
  * @part base - The component's base wrapper.
  * @part trigger - The container that wraps the trigger.
  * @part panel - The panel that gets shown when the dropdown is open.
- *
- * @emit sl-show - Emitted when the dropdown opens. Calling `event.preventDefault()` will prevent it from being opened.
- * @emit sl-after-show - Emitted after the dropdown opens and all transitions are complete.
- * @emit sl-hide - Emitted when the dropdown closes. Calling `event.preventDefault()` will prevent it from being closed.
- * @emit sl-after-hide - Emitted after the dropdown closes and all transitions are complete.
  */
-export default class SlDropdown extends Shoemaker {
-  static tag = 'sl-dropdown';
-  static props = ['open', 'placement', 'closeOnSelect', 'containingElement', 'distance', 'skidding', 'hoist'];
-  static reflect = ['open'];
-  static styles = styles;
+@customElement('sl-dropdown')
+export class SlDropdown extends LitElement {
+  static styles = unsafeCSS(styles);
+
+  @query('.dropdown__trigger') trigger: HTMLElement;
+  @query('.dropdown__panel') panel: HTMLElement;
+  @query('.dropdown__positioner') positioner: HTMLElement;
 
   private componentId = `dropdown-${++id}`;
   private isVisible = false;
-  private panel: HTMLElement;
-  private positioner: HTMLElement;
   private popover: Popover;
-  private trigger: HTMLElement;
 
   /** Indicates whether or not the dropdown is open. You can use this in lieu of the show/hide methods. */
-  open = false;
+  @property({ type: Boolean }) open = false;
 
   /**
    * The preferred placement of the dropdown panel. Note that the actual placement may vary as needed to keep the panel
    * inside of the viewport.
    */
-  placement:
+  @property() placement:
     | 'top'
     | 'top-start'
     | 'top-end'
@@ -58,22 +54,34 @@ export default class SlDropdown extends Shoemaker {
     | 'left-end' = 'bottom-start';
 
   /** Determines whether the dropdown should hide when a menu item is selected. */
-  closeOnSelect = true;
+  @property({ attribute: 'close-on-select', type: Boolean }) closeOnSelect = true;
 
   /** The dropdown will close when the user interacts outside of this element (e.g. clicking). */
-  containingElement: HTMLElement;
+  @property() containingElement: HTMLElement;
 
   /** The distance in pixels from which to offset the panel away from its trigger. */
-  distance = 2;
+  @property({ type: Number }) distance = 2;
 
   /** The distance in pixels from which to offset the panel along its trigger. */
-  skidding = 0;
+  @property({ type: Number }) skidding = 0;
 
   /**
    * Enable this option to prevent the panel from being clipped when the component is placed inside a container with
    * `overflow: auto|scroll`.
    */
-  hoist = false;
+  @property({ type: Boolean }) hoist = false;
+
+  /** Emitted when the dropdown opens. Calling `event.preventDefault()` will prevent it from being opened. */
+  @event('sl-show') slShow: EventEmitter<void>;
+
+  /** Emitted after the dropdown opens and all transitions are complete. */
+  @event('sl-after-show') slAfterShow: EventEmitter<void>;
+
+  /** Emitted when the dropdown closes. Calling `event.preventDefault()` will prevent it from being closed. */
+  @event('sl-hide') slHide: EventEmitter<void>;
+
+  /** Emitted after the dropdown closes and all transitions are complete. */
+  @event('sl-after-hide') slAfterHide: EventEmitter<void>;
 
   handlePopoverOptionsChange() {
     this.popover.setOptions({
@@ -84,7 +92,8 @@ export default class SlDropdown extends Shoemaker {
     });
   }
 
-  onConnect() {
+  connectedCallback() {
+    super.connectedCallback();
     this.handleMenuItemActivate = this.handleMenuItemActivate.bind(this);
     this.handlePanelSelect = this.handlePanelSelect.bind(this);
     this.handleDocumentKeyDown = this.handleDocumentKeyDown.bind(this);
@@ -95,15 +104,15 @@ export default class SlDropdown extends Shoemaker {
     }
   }
 
-  onReady() {
+  firstUpdated() {
     this.popover = new Popover(this.trigger, this.positioner, {
       strategy: this.hoist ? 'fixed' : 'absolute',
       placement: this.placement,
       distance: this.distance,
       skidding: this.skidding,
       transitionElement: this.panel,
-      onAfterHide: () => this.emit('sl-after-hide'),
-      onAfterShow: () => this.emit('sl-after-show'),
+      onAfterHide: () => this.slAfterHide.emit(),
+      onAfterShow: () => this.slAfterShow.emit(),
       onTransitionEnd: () => {
         if (!this.open) {
           this.panel.scrollTop = 0;
@@ -117,7 +126,8 @@ export default class SlDropdown extends Shoemaker {
     }
   }
 
-  onDisconnect() {
+  disconnectedCallback() {
+    super.disconnectedCallback();
     this.hide();
     this.popover.destroy();
   }
@@ -294,7 +304,7 @@ export default class SlDropdown extends Shoemaker {
       return;
     }
 
-    const slShow = this.emit('sl-show');
+    const slShow = this.slShow.emit();
     if (slShow.defaultPrevented) {
       this.open = false;
       return;
@@ -317,7 +327,7 @@ export default class SlDropdown extends Shoemaker {
       return;
     }
 
-    const slHide = this.emit('sl-hide');
+    const slHide = this.slHide.emit();
     if (slHide.defaultPrevented) {
       this.open = true;
       return;
@@ -378,19 +388,17 @@ export default class SlDropdown extends Shoemaker {
         <span
           part="trigger"
           class="dropdown__trigger"
-          ref=${(el: HTMLElement) => (this.trigger = el)}
-          onclick=${this.handleTriggerClick.bind(this)}
-          onkeydown=${this.handleTriggerKeyDown.bind(this)}
-          onkeyup=${this.handleTriggerKeyUp.bind(this)}
+          @click=${this.handleTriggerClick}
+          @keydown=${this.handleTriggerKeyDown}
+          @keyup=${this.handleTriggerKeyUp}
         >
-          <slot name="trigger" onslotchange=${this.handleTriggerSlotChange.bind(this)} />
+          <slot name="trigger" @slotchange=${this.handleTriggerSlotChange} />
         </span>
 
         <!-- Position the panel with a wrapper since the popover makes use of translate. This let's us add transitions
         on the panel without interfering with the position. -->
-        <div ref=${(el: HTMLElement) => (this.positioner = el)} class="dropdown__positioner">
+        <div class="dropdown__positioner">
           <div
-            ref=${(el: HTMLElement) => (this.panel = el)}
             part="panel"
             class="dropdown__panel"
             role="menu"

@@ -1,22 +1,20 @@
-import { Shoemaker } from '@shoelace-style/shoemaker';
+import { LitElement, customElement, property } from 'lit-element';
 import { formatBytes } from '../../internal/number';
 
 /**
  * @since 2.0
  * @status stable
  */
-export default class SlFormatBytes extends Shoemaker {
-  static tag = 'sl-format-bytes';
-  static props = ['value', 'unit', 'locale'];
-
+@customElement('sl-format-bytes')
+export class SlFormatBytes extends LitElement {
   /** The number to format in bytes. */
-  value = 0;
+  @property({ type: Number }) value = 0;
 
   /** The unit to display. */
-  unit: 'bytes' | 'bits' = 'bytes';
+  @property() unit: 'bytes' | 'bits' = 'bytes';
 
   /** The locale to use when formatting the number. */
-  locale: string;
+  @property() locale: string;
 
   render() {
     return formatBytes(this.value, {

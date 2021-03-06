@@ -1,4 +1,6 @@
-import { classMap, html, Shoemaker } from '@shoelace-style/shoemaker';
+import { LitElement, customElement, html, property, query, unsafeCSS } from 'lit-element';
+import { classMap } from 'lit-html/directives/class-map';
+import { event, EventEmitter } from '../../internal/event';
 import styles from 'sass:./tab.scss';
 
 let id = 0;
@@ -13,29 +15,29 @@ let id = 0;
  *
  * @part base - The component's base wrapper.
  * @part close-button - The close button, which is the icon button's base wrapper.
- *
- * @emit sl-close - Emitted when the tab is closable and the close button is activated.
  */
-export default class SlTab extends Shoemaker {
-  static tag = 'sl-tab';
-  static props = ['panel', 'active', 'closable', 'disabled'];
-  static reflect = ['panel', 'active', 'closable', 'disabled'];
-  static styles = styles;
+@customElement('sl-tab')
+export class SlTab extends LitElement {
+  static styles = unsafeCSS(styles);
+
+  @query('.tab') tab: HTMLElement;
 
   private componentId = `tab-${++id}`;
-  private tab: HTMLElement;
 
   /** The name of the tab panel the tab will control. The panel must be located in the same tab group. */
-  panel = '';
+  @property() panel = '';
 
   /** Draws the tab in an active state. */
-  active = false;
+  @property({ type: Boolean, reflect: true }) active = false;
 
   /** Makes the tab closable and shows a close icon. */
-  closable = false;
+  @property({ type: Boolean, reflect: true }) closable = false;
 
   /** Draws the tab in a disabled state. */
-  disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
+
+  /** Emitted when the tab is closable and the close button is activated. */
+  @event('sl-close') slClose: EventEmitter<void>;
 
   /** Sets focus to the tab. */
   setFocus(options?: FocusOptions) {
@@ -48,7 +50,7 @@ export default class SlTab extends Shoemaker {
   }
 
   handleCloseClick() {
-    this.emit('sl-close');
+    this.slClose.emit();
   }
 
   render() {
@@ -58,7 +60,6 @@ export default class SlTab extends Shoemaker {
     return html`
       <div
         part="base"
-        ref=${(el: HTMLElement) => (this.tab = el)}
         class=${classMap({
           tab: true,
           'tab--active': this.active,
@@ -70,17 +71,17 @@ export default class SlTab extends Shoemaker {
         aria-selected=${this.active ? 'true' : 'false'}
         tabindex=${this.disabled || !this.active ? '-1' : '0'}
       >
-        <slot />
+        <slot></slot>
         ${this.closable
           ? html`
               <sl-icon-button
                 name="x"
                 exportparts="base:close-button"
                 class="tab__close-button"
-                onclick=${this.handleCloseClick.bind(this)}
+                @click=${this.handleCloseClick}
                 tabindex="-1"
                 aria-hidden="true"
-              />
+              ></sl-icon-button>
             `
           : ''}
       </div>

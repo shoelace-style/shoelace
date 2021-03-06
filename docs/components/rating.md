@@ -53,7 +53,12 @@ Use the `disable` attribute to disable the rating.
 ### Custom Icons
 
 ```html preview
-<sl-rating symbol="heart-fill" style="--symbol-color-active: #ff4136;"></sl-rating>
+<sl-rating class="rating-hearts" style="--symbol-color-active: #ff4136;"></sl-rating>
+
+<script>
+  const rating = document.querySelector('.rating-hearts');
+  rating.getSymbol = () => '<sl-icon name="heart-fill"></sl-icon>'; 
+</script>
 ```
 
 ### Value-based Icons

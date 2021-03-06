@@ -1,4 +1,4 @@
-import { html, Shoemaker } from '@shoelace-style/shoemaker';
+import { LitElement, customElement, html, property, query, unsafeCSS } from 'lit-element';
 import styles from 'sass:./responsive-embed.scss';
 
 /**
@@ -7,18 +7,25 @@ import styles from 'sass:./responsive-embed.scss';
  *
  * @part base - The component's base wrapper.
  */
-export default class SlResponsiveEmbed extends Shoemaker {
-  static tag = 'sl-responsive-embed';
-  static props = ['aspectRatio'];
-  static styles = styles;
+@customElement('sl-responsive-embed')
+export class SlResponsiveEmbed extends LitElement {
+  static styles = unsafeCSS(styles);
 
-  private base: HTMLElement;
+  @query('.responsive-embed') base: HTMLElement;
 
   /**
    * The aspect ratio of the embedded media in the format of `width:height`, e.g. `16:9`, `4:3`, or `1:1`. Ratios not in
    * this format will be ignored.
    */
-  aspectRatio = '16:9';
+  @property({ attribute: 'aspect-ratio' }) aspectRatio = '16:9';
+
+  update(changedProps: Map<string, any>) {
+    super.update(changedProps);
+
+    if (changedProps.has('aspectRatio')) {
+      this.updateAspectRatio();
+    }
+  }
 
   updateAspectRatio() {
     const split = this.aspectRatio.split(':');
@@ -28,14 +35,10 @@ export default class SlResponsiveEmbed extends Shoemaker {
     this.base.style.paddingBottom = x && y ? `${(y / x) * 100}%` : '';
   }
 
-  watchAspectRatio() {
-    this.updateAspectRatio();
-  }
-
   render() {
     return html`
-      <div ref=${(el: HTMLElement) => (this.base = el)} part="base" class="responsive-embed">
-        <slot onslotchange=${() => this.updateAspectRatio()} />
+      <div part="base" class="responsive-embed">
+        <slot @slotchange=${() => this.updateAspectRatio()}></slot>
       </div>
     `;
   }

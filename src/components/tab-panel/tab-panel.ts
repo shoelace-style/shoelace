@@ -1,4 +1,4 @@
-import { html, Shoemaker } from '@shoelace-style/shoemaker';
+import { LitElement, customElement, html, property, unsafeCSS } from 'lit-element';
 import styles from 'sass:./tab-panel.scss';
 
 let id = 0;
@@ -11,21 +11,19 @@ let id = 0;
  *
  * @part base - The component's base wrapper.
  */
-export default class SlTabPanel extends Shoemaker {
-  static tag = 'sl-tab-panel';
-  static props = ['name', 'active'];
-  static reflect = ['name', 'active'];
-  static styles = styles;
+@customElement('sl-tab-panel')
+export class SlTabPanel extends LitElement {
+  static styles = unsafeCSS(styles);
 
   private componentId = `tab-panel-${++id}`;
 
   /** The tab panel's name. */
-  name = '';
+  @property() name = '';
 
   /** When true, the tab panel will be shown. */
-  active = false;
+  @property({ type: Boolean, reflect: true }) active = false;
 
-  onReady() {
+  firstUpdated() {
     this.id = this.id || this.componentId;
   }
 
@@ -40,7 +38,7 @@ export default class SlTabPanel extends Shoemaker {
         aria-selected=${this.active ? 'true' : 'false'}
         aria-hidden=${this.active ? 'false' : 'true'}
       >
-        <slot />
+        <slot></slot>
       </div>
     `;
   }

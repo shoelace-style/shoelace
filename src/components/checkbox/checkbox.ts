@@ -1,4 +1,6 @@
-import { classMap, html, Shoemaker } from '@shoelace-style/shoemaker';
+import { LitElement, customElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
+import { classMap } from 'lit-html/directives/class-map';
+import { event, EventEmitter } from '../../internal/event';
 import styles from 'sass:./checkbox.scss';
 
 let id = 0;
@@ -14,44 +16,49 @@ let id = 0;
  * @part checked-icon - The container the wraps the checked icon.
  * @part indeterminate-icon - The container that wraps the indeterminate icon.
  * @part label - The checkbox label.
- *
- * @emit sl-blur - Emitted when the control loses focus.
- * @emit sl-change - Emitted when the control's checked state changes.
- * @emit sl-focus - Emitted when the control gains focus.
  */
-export default class SlCheckbox extends Shoemaker {
-  static tag = 'sl-checkbox';
-  static props = ['hasFocus', 'name', 'value', 'disabled', 'required', 'checked', 'indeterminate', 'invalid'];
-  static reflect = ['checked', 'indeterminate', 'invalid'];
-  static styles = styles;
+@customElement('sl-checkbox')
+export class SlCheckbox extends LitElement {
+  static styles = unsafeCSS(styles);
+
+  @query('input[type="checkbox"]') input: HTMLInputElement;
 
   private inputId = `checkbox-${++id}`;
   private labelId = `checkbox-label-${id}`;
-  private hasFocus = false;
-  private input: HTMLInputElement;
+
+  @internalProperty() private hasFocus = false;
 
   /** The checkbox's name attribute. */
-  name: string;
+  @property({ reflect: true }) name: string;
 
   /** The checkbox's value attribute. */
-  value: string;
+  @property() value: string;
 
   /** Disables the checkbox. */
-  disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Makes the checkbox a required field. */
-  required = false;
+  @property({ type: Boolean, reflect: true }) required = false;
 
   /** Draws the checkbox in a checked state. */
-  checked = false;
+  @property({ type: Boolean, reflect: true }) checked = false;
 
   /** Draws the checkbox in an indeterminate state. */
-  indeterminate = false;
+  @property({ type: Boolean, reflect: true }) indeterminate = false;
 
   /** This will be true when the control is in an invalid state. Validity is determined by the `required` prop. */
-  invalid = false;
+  @property({ type: Boolean, reflect: true }) invalid = false;
 
-  onReady() {
+  /** Emitted when the control loses focus. */
+  @event('sl-blur') slBlur: EventEmitter<void>;
+
+  /** Emitted when the control's checked state changes. */
+  @event('sl-change') slChange: EventEmitter<void>;
+
+  /** Emitted when the control gains focus. */
+  @event('sl-focus') slFocus: EventEmitter<void>;
+
+  firstUpdated() {
     this.input.indeterminate = this.indeterminate;
   }
 
@@ -77,18 +84,18 @@ export default class SlCheckbox extends Shoemaker {
   }
 
   handleClick() {
-    this.checked = this.input.checked;
+    this.checked = !this.checked;
     this.indeterminate = false;
   }
 
   handleBlur() {
     this.hasFocus = false;
-    this.emit('sl-blur');
+    this.slBlur.emit();
   }
 
   handleFocus() {
     this.hasFocus = true;
-    this.emit('sl-focus');
+    this.slFocus.emit();
   }
 
   handleLabelMouseDown(event: MouseEvent) {
@@ -98,16 +105,18 @@ export default class SlCheckbox extends Shoemaker {
   }
 
   handleStateChange() {
-    this.input.checked = this.checked;
-    this.input.indeterminate = this.indeterminate;
-    this.emit('sl-change');
+    if (this.input) {
+      this.input.checked = this.checked;
+      this.input.indeterminate = this.indeterminate;
+      this.slChange.emit();
+    }
   }
 
-  watchChecked() {
+  checkedChanged() {
     this.handleStateChange();
   }
 
-  watchIndeterminate() {
+  indeterminateChanged() {
     this.handleStateChange();
   }
 
@@ -123,7 +132,7 @@ export default class SlCheckbox extends Shoemaker {
           'checkbox--indeterminate': this.indeterminate
         })}
         for=${this.inputId}
-        onmousedown=${this.handleLabelMouseDown.bind(this)}
+        @mousedown=${this.handleLabelMouseDown}
       >
         <span part="control" class="checkbox__control">
           ${this.checked
@@ -159,25 +168,24 @@ export default class SlCheckbox extends Shoemaker {
             : ''}
 
           <input
-            ref=${(el: HTMLInputElement) => (this.input = el)}
             id=${this.inputId}
             type="checkbox"
             name=${this.name}
-            .value=${this.value}
-            checked=${this.checked ? true : null}
-            disabled=${this.disabled ? true : null}
-            required=${this.required ? true : null}
+            value=${this.value}
+            ?checked=${this.checked}
+            ?disabled=${this.disabled}
+            ?required=${this.required}
             role="checkbox"
             aria-checked=${this.checked ? 'true' : 'false'}
             aria-labelledby=${this.labelId}
-            onclick=${this.handleClick.bind(this)}
-            onblur=${this.handleBlur.bind(this)}
-            onfocus=${this.handleFocus.bind(this)}
+            @click=${this.handleClick}
+            @blur=${this.handleBlur}
+            @focus=${this.handleFocus}
           />
         </span>
 
         <span part="label" id=${this.labelId} class="checkbox__label">
-          <slot />
+          <slot></slot>
         </span>
       </label>
     `;

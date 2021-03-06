@@ -1,4 +1,5 @@
-import { classMap, html, Shoemaker } from '@shoelace-style/shoemaker';
+import { LitElement, customElement, html, property, unsafeCSS } from 'lit-element';
+import { classMap } from 'lit-html/directives/class-map';
 import styles from 'sass:./badge.scss';
 
 /**
@@ -9,20 +10,18 @@ import styles from 'sass:./badge.scss';
  *
  * @part base - The base wrapper
  */
-export default class SlBadge extends Shoemaker {
-  static tag = 'sl-badge';
-  static props = ['type', 'pill', 'pulse'];
-  static reflect = ['type', 'pill', 'pulse'];
-  static styles = styles;
+@customElement('sl-badge')
+export class SlBadge extends LitElement {
+  static styles = unsafeCSS(styles);
 
   /** The badge's type. */
-  type: 'primary' | 'success' | 'info' | 'warning' | 'danger' = 'primary';
+  @property({ reflect: true }) type: 'primary' | 'success' | 'info' | 'warning' | 'danger' = 'primary';
 
   /** Draws a pill-style badge with rounded edges. */
-  pill = false;
+  @property({ type: Boolean, reflect: true }) pill = false;
 
   /** Makes the badge pulsate to draw attention. */
-  pulse = false;
+  @property({ type: Boolean, reflect: true }) pulse = false;
 
   render() {
     return html`
@@ -40,7 +39,7 @@ export default class SlBadge extends Shoemaker {
         })}
         role="status"
       >
-        <slot />
+        <slot></slot>
       </span>
     `;
   }

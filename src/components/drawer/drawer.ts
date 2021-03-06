@@ -1,4 +1,6 @@
-import { classMap, html, Shoemaker } from '@shoelace-style/shoemaker';
+import { LitElement, customElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
+import { classMap } from 'lit-html/directives/class-map';
+import { event, EventEmitter } from '../../internal/event';
 import styles from 'sass:./drawer.scss';
 import { lockBodyScrolling, unlockBodyScrolling } from '../../internal/scroll';
 import { hasSlot } from '../../internal/slot';
@@ -27,56 +29,67 @@ let id = 0;
  * @part close-button - The close button.
  * @part body - The drawer body.
  * @part footer - The drawer footer.
- *
- * @emit sl-show - Emitted when the drawer opens. Calling `event.preventDefault()` will prevent it from being opened.
- * @emit sl-after-show - Emitted after the drawer opens and all transitions are complete.
- * @emit sl-hide - Emitted when the drawer closes. Calling `event.preventDefault()` will prevent it from being closed.
- * @emit sl-after-hide - Emitted after the drawer closes and all transitions are complete.
- * @emit sl-initial-focus - Emitted when the drawer opens and the panel gains focus. Calling `event.preventDefault()`
- *  will prevent focus and allow you to set it on a different element in the drawer, such as an input or button.
- * @emit sl-overlay-dismiss - Emitted when the overlay is clicked. Calling `event.preventDefault()` will prevent the
- *  drawer from closing.
  */
-export default class SlDrawer extends Shoemaker {
-  static tag = 'sl-drawer';
-  static props = ['hasFooter', 'isVisible', 'open', 'label', 'placement', 'contained', 'noHeader'];
-  static reflect = ['open'];
-  static styles = styles;
+@customElement('sl-drawer')
+export class SlDrawer extends LitElement {
+  static styles = unsafeCSS(styles);
+
+  @query('.drawer') drawer: HTMLElement;
+  @query('.drawer__panel') panel: HTMLElement;
 
   private componentId = `drawer-${++id}`;
-  private drawer: HTMLElement;
-  private hasFooter = false;
-  private isVisible = false;
   private modal: Modal;
-  private panel: HTMLElement;
   private willShow = false;
   private willHide = false;
 
+  @internalProperty() private hasFooter = false;
+  @internalProperty() private isVisible = false;
+
   /** Indicates whether or not the drawer is open. You can use this in lieu of the show/hide methods. */
-  open = false;
+  @property({ type: Boolean, reflect: true }) open = false;
 
   /**
    * The drawer's label as displayed in the header. You should always include a relevant label even when using
    * `no-header`, as it is required for proper accessibility.
    */
-  label = '';
+  @property({ reflect: true }) label = '';
 
   /** The direction from which the drawer will open. */
-  placement: 'top' | 'right' | 'bottom' | 'left' = 'right';
+  @property({ reflect: true }) placement: 'top' | 'right' | 'bottom' | 'left' = 'right';
 
   /**
    * By default, the drawer slides out of its containing block (usually the viewport). To make the drawer slide out of
    * its parent element, set this prop and add `position: relative` to the parent.
    */
-  contained = false;
+  @property({ type: Boolean, reflect: true }) contained = false;
 
   /**
    * Removes the header. This will also remove the default close button, so please ensure you provide an easy,
    * accessible way for users to dismiss the drawer.
    */
-  noHeader = false;
+  @property({ attribute: 'no-header', type: Boolean, reflect: true }) noHeader = false;
 
-  onConnect() {
+  /** Emitted when the drawer opens. Calling `event.preventDefault()` will prevent it from being opened. */
+  @event('sl-show') slShow: EventEmitter<void>;
+
+  /** Emitted after the drawer opens and all transitions are complete. */
+  @event('sl-after-show') slAfterShow: EventEmitter<void>;
+
+  /** Emitted when the drawer closes. Calling `event.preventDefault()` will prevent it from being closed. */
+  @event('sl-hide') slHide: EventEmitter<void>;
+
+  /** Emitted after the drawer closes and all transitions are complete. */
+  @event('sl-after-hide') slAfterHide: EventEmitter<void>;
+
+  /** Emitted when the drawer opens and the panel gains focus. Calling `event.preventDefault()` will prevent focus and allow you to set it on a different element in the drawer, such as an input or button. */
+  @event('sl-initial-focus') slInitialFocus: EventEmitter<void>;
+
+  /** Emitted when the overlay is clicked. Calling `event.preventDefault()` will prevent the drawer from closing. */
+  @event('sl-overlay-dismiss') slOverlayDismiss: EventEmitter<void>;
+
+  connectedCallback() {
+    super.connectedCallback();
+
     this.modal = new Modal(this, {
       onfocusOut: () => (this.contained ? null : this.panel.focus())
     });
@@ -89,7 +102,8 @@ export default class SlDrawer extends Shoemaker {
     }
   }
 
-  onDisconnect() {
+  disconnectedCallback() {
+    super.disconnectedCallback();
     unlockBodyScrolling(this);
   }
 
@@ -99,7 +113,7 @@ export default class SlDrawer extends Shoemaker {
       return;
     }
 
-    const slShow = this.emit('sl-show');
+    const slShow = this.slShow.emit();
     if (slShow.defaultPrevented) {
       this.open = false;
       return;
@@ -119,7 +133,7 @@ export default class SlDrawer extends Shoemaker {
       if (hasPreventScroll) {
         // Wait for the next frame before setting initial focus so the drawer is technically visible
         requestAnimationFrame(() => {
-          const slInitialFocus = this.emit('sl-initial-focus');
+          const slInitialFocus = this.slInitialFocus.emit();
           if (!slInitialFocus.defaultPrevented) {
             this.panel.focus({ preventScroll: true });
           }
@@ -135,7 +149,7 @@ export default class SlDrawer extends Shoemaker {
         this.drawer.addEventListener(
           'transitionend',
           () => {
-            const slInitialFocus = this.emit('sl-initial-focus');
+            const slInitialFocus = this.slInitialFocus.emit();
             if (!slInitialFocus.defaultPrevented) {
               this.panel.focus();
             }
@@ -152,7 +166,7 @@ export default class SlDrawer extends Shoemaker {
       return;
     }
 
-    const slHide = this.emit('sl-hide');
+    const slHide = this.slHide.emit();
     if (slHide.defaultPrevented) {
       this.open = true;
       return;
@@ -176,8 +190,7 @@ export default class SlDrawer extends Shoemaker {
   }
 
   handleOverlayClick() {
-    const slOverlayDismiss = this.emit('sl-overlay-dismiss');
-
+    const slOverlayDismiss = this.slOverlayDismiss.emit();
     if (!slOverlayDismiss.defaultPrevented) {
       this.hide();
     }
@@ -195,14 +208,13 @@ export default class SlDrawer extends Shoemaker {
       this.isVisible = this.open;
       this.willShow = false;
       this.willHide = false;
-      this.open ? this.emit('sl-after-show') : this.emit('sl-after-hide');
+      this.open ? this.slAfterShow.emit() : this.slAfterHide.emit();
     }
   }
 
   render() {
     return html`
       <div
-        ref=${(el: HTMLElement) => (this.drawer = el)}
         part="base"
         class=${classMap({
           drawer: true,
@@ -216,13 +228,12 @@ export default class SlDrawer extends Shoemaker {
           'drawer--fixed': !this.contained,
           'drawer--has-footer': this.hasFooter
         })}
-        onkeydown=${this.handleKeyDown.bind(this)}
-        ontransitionend=${this.handleTransitionEnd.bind(this)}
+        @keydown=${this.handleKeyDown}
+        @transitionend=${this.handleTransitionEnd}
       >
-        <div part="overlay" class="drawer__overlay" onclick=${this.handleOverlayClick.bind(this)} tabindex="-1" />
+        <div part="overlay" class="drawer__overlay" @click=${this.handleOverlayClick} tabindex="-1"></div>
 
         <div
-          ref=${(el: HTMLElement) => (this.panel = el)}
           part="panel"
           class="drawer__panel"
           role="dialog"
@@ -243,18 +254,18 @@ export default class SlDrawer extends Shoemaker {
                     exportparts="base:close-button"
                     class="drawer__close"
                     name="x"
-                    onclick=${this.handleCloseClick.bind(this)}
-                  />
+                    @click=${this.handleCloseClick}
+                  ></sl-icon-button>
                 </header>
               `
             : ''}
 
           <div part="body" class="drawer__body">
-            <slot />
+            <slot></slot>
           </div>
 
           <footer part="footer" class="drawer__footer">
-            <slot name="footer" onslotchange=${this.handleSlotChange.bind(this)} />
+            <slot name="footer" @slotchange=${this.handleSlotChange}></slot>
           </footer>
         </div>
       </div>

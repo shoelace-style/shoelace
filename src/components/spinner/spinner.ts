@@ -1,4 +1,4 @@
-import { html, Shoemaker } from '@shoelace-style/shoemaker';
+import { LitElement, customElement, html, unsafeCSS } from 'lit-element';
 import styles from 'sass:./spinner.scss';
 
 /**
@@ -7,9 +7,9 @@ import styles from 'sass:./spinner.scss';
  *
  * @part base - The component's base wrapper.
  */
-export default class SlSpinner extends Shoemaker {
-  static tag = 'sl-spinner';
-  static styles = styles;
+@customElement('sl-spinner')
+export class SlSpinner extends LitElement {
+  static styles = unsafeCSS(styles);
 
   render() {
     return html` <span part="base" class="spinner" aria-busy="true" aria-live="polite"></span> `;

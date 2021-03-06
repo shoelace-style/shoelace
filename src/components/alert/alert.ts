@@ -1,4 +1,6 @@
-import { classMap, html, Shoemaker } from '@shoelace-style/shoemaker';
+import { LitElement, customElement, html, internalProperty, property, unsafeCSS } from 'lit-element';
+import { classMap } from 'lit-html/directives/class-map';
+import { event, EventEmitter } from '../../internal/event';
 import styles from 'sass:./alert.scss';
 
 const toastStack = Object.assign(document.createElement('div'), { className: 'sl-toast-stack' });
@@ -16,37 +18,45 @@ const toastStack = Object.assign(document.createElement('div'), { className: 'sl
  * @part icon - The container that wraps the alert icon.
  * @part message - The alert message.
  * @part close-button - The close button.
- *
- * @emit sl-show - Emitted when the alert opens. Calling `event.preventDefault()` will prevent it from being opened.
- * @emit sl-after-show - Emitted after the alert opens and all transitions are complete.
- * @emit sl-hide - Emitted when the alert closes. Calling `event.preventDefault()` will prevent it from being closed.
- * @emit sl-after-hide - Emitted after the alert closes and all transitions are complete.
  */
-export default class SlAlert extends Shoemaker {
-  static tag = 'sl-alert';
-  static props = ['isVisible', 'open', 'closable', 'type', 'duration'];
-  static reflect = ['open', 'type'];
-  static styles = styles;
+@customElement('sl-alert')
+export class SlAlert extends LitElement {
+  static styles = unsafeCSS(styles);
 
   private autoHideTimeout: any;
-  private isVisible = false;
+
+  @internalProperty() private isVisible = false;
 
   /** Indicates whether or not the alert is open. You can use this in lieu of the show/hide methods. */
-  open = false;
+  @property({ type: Boolean, reflect: true }) open = false;
 
   /** Makes the alert closable. */
-  closable = false;
+  @property({ type: Boolean, reflect: true }) closable = false;
 
   /** The type of alert. */
-  type: 'primary' | 'success' | 'info' | 'warning' | 'danger' = 'primary';
+  @property({ reflect: true }) type: 'primary' | 'success' | 'info' | 'warning' | 'danger' = 'primary';
 
   /**
    * The length of time, in milliseconds, the alert will show before closing itself. If the user interacts with
    * the alert before it closes (e.g. moves the mouse over it), the timer will restart. Defaults to `Infinity`.
    */
-  duration = Infinity;
+  @property({ type: Number }) duration = Infinity;
 
-  onConnect() {
+  /** Emitted when the alert opens. Calling `event.preventDefault()` will prevent it from being opened. */
+  @event('sl-show') slShow: EventEmitter<void>;
+
+  /** Emitted after the alert opens and all transitions are complete. */
+  @event('sl-after-show') slAfterShow: EventEmitter<void>;
+
+  /** Emitted when the alert closes. Calling `event.preventDefault()` will prevent it from being closed. */
+  @event('sl-hide') slHide: EventEmitter<void>;
+
+  /** Emitted after the alert closes and all transitions are complete. */
+  @event('sl-after-hide') slAfterHide: EventEmitter<void>;
+
+  connectedCallback() {
+    super.connectedCallback();
+
     // Show on init if open
     if (this.open) {
       this.show();
@@ -60,7 +70,7 @@ export default class SlAlert extends Shoemaker {
       return;
     }
 
-    const slShow = this.emit('sl-show');
+    const slShow = this.slShow.emit();
     if (slShow.defaultPrevented) {
       this.open = false;
       return;
@@ -81,7 +91,7 @@ export default class SlAlert extends Shoemaker {
       return;
     }
 
-    const slHide = this.emit('sl-hide');
+    const slHide = this.slHide.emit();
     if (slHide.defaultPrevented) {
       this.open = true;
       return;
@@ -143,15 +153,15 @@ export default class SlAlert extends Shoemaker {
     // Ensure we only emit one event when the target element is no longer visible
     if (event.propertyName === 'opacity' && target.classList.contains('alert')) {
       this.isVisible = this.open;
-      this.open ? this.emit('sl-after-show') : this.emit('sl-after-hide');
+      this.open ? this.slAfterShow.emit() : this.slAfterHide.emit();
     }
   }
 
-  watchOpen() {
+  openChanged() {
     this.open ? this.show() : this.hide();
   }
 
-  watchDuration() {
+  durationChanged() {
     this.restartAutoHide();
   }
 
@@ -174,21 +184,25 @@ export default class SlAlert extends Shoemaker {
         aria-live="assertive"
         aria-atomic="true"
         aria-hidden=${this.open ? 'false' : 'true'}
-        onmousemove=${this.handleMouseMove.bind(this)}
-        ontransitionend=${this.handleTransitionEnd.bind(this)}
+        @mousemove=${this.handleMouseMove.bind(this)}
+        @transitionend=${this.handleTransitionEnd.bind(this)}
       >
         <span part="icon" class="alert__icon">
-          <slot name="icon" />
+          <slot name="icon"></slot>
         </span>
 
         <span part="message" class="alert__message">
-          <slot />
+          <slot></slot>
         </span>
 
         ${this.closable
           ? html`
               <span class="alert__close">
-                <sl-icon-button exportparts="base:close-button" name="x" onclick=${this.handleCloseClick.bind(this)} />
+                <sl-icon-button
+                  exportparts="base:close-button"
+                  name="x"
+                  @click=${this.handleCloseClick.bind(this)}
+                ></sl-icon-button>
               </span>
             `
           : ''}

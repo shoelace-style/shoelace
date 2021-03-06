@@ -1,4 +1,6 @@
-import { classMap, html, Shoemaker } from '@shoelace-style/shoemaker';
+import { LitElement, customElement, html, property, unsafeCSS } from 'lit-element';
+import { classMap } from 'lit-html/directives/class-map';
+import { event, EventEmitter } from '../../internal/event';
 import styles from 'sass:./tag.scss';
 
 /**
@@ -12,29 +14,28 @@ import styles from 'sass:./tag.scss';
  * @part base - The component's base wrapper.
  * @part content - The tag content.
  * @part clear-button - The clear button.
- *
- * @emit sl-clear - Emitted when the clear button is activated.
  */
-export default class SlTag extends Shoemaker {
-  static tag = 'sl-tag';
-  static props = ['type', 'size', 'pill', 'clearable'];
-  static reflect = ['type', 'size', 'pill', 'clearable'];
-  static styles = styles;
+@customElement('sl-tag')
+export class SlTag extends LitElement {
+  static styles = unsafeCSS(styles);
 
   /** The tag's type. */
-  type: 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text' = 'primary';
+  @property({ reflect: true }) type: 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text' = 'primary';
 
   /** The tag's size. */
-  size: 'small' | 'medium' | 'large' = 'medium';
+  @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
 
   /** Draws a pill-style tag with rounded edges. */
-  pill = false;
+  @property({ type: Boolean, reflect: true }) pill = false;
 
   /** Makes the tag clearable. */
-  clearable = false;
+  @property({ type: Boolean, reflect: true }) clearable = false;
+
+  /** Emitted when the clear button is activated. */
+  @event('sl-clear') slClear: EventEmitter<void>;
 
   handleClearClick() {
-    this.emit('sl-clear');
+    this.slClear.emit();
   }
 
   render() {
@@ -63,7 +64,7 @@ export default class SlTag extends Shoemaker {
         })}
       >
         <span part="content" class="tag__content">
-          <slot />
+          <slot></slot>
         </span>
 
         ${this.clearable
@@ -72,8 +73,8 @@ export default class SlTag extends Shoemaker {
                 exportparts="base:clear-button"
                 name="x"
                 class="tag__clear"
-                onclick=${this.handleClearClick.bind(this)}
-              />
+                @click=${this.handleClearClick}
+              ></sl-icon-button>
             `
           : ''}
       </span>

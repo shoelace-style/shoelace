@@ -1,4 +1,6 @@
-import { classMap, html, Shoemaker } from '@shoelace-style/shoemaker';
+import { LitElement, customElement, html, property, query, unsafeCSS } from 'lit-element';
+import { classMap } from 'lit-html/directives/class-map';
+import { ifDefined } from 'lit-html/directives/if-defined';
 import styles from 'sass:./icon-button.scss';
 import { focusVisible } from '../../internal/focus-visible';
 
@@ -10,53 +12,57 @@ import { focusVisible } from '../../internal/focus-visible';
  *
  * @part base - The component's base wrapper.
  */
-export default class SlIconButton extends Shoemaker {
-  static tag = 'sl-icon-button';
-  static props = ['name', 'library', 'src', 'label', 'disabled'];
-  static reflect = ['disabled'];
-  static styles = styles;
+@customElement('sl-icon-button')
+export class SlIconButton extends LitElement {
+  static styles = unsafeCSS(styles);
 
-  private button: HTMLButtonElement;
+  @query('button') button: HTMLButtonElement;
 
   /** The name of the icon to draw. */
-  name: string;
+  @property() name: string;
 
   /** The name of a registered custom icon library. */
-  library: string;
+  @property() library: string;
 
   /** An external URL of an SVG file. */
-  src: string;
+  @property() src: string;
 
   /**
    * A description that gets read by screen readers and other assistive devices. For optimal accessibility, you should
    * always include a label that describes what the icon button does.
    */
-  label: string;
+  @property() label: string;
 
   /** Disables the button. */
-  disabled = false;
+  @property({ type: Boolean }) disabled = false;
 
-  onReady() {
+  firstUpdated() {
     focusVisible.observe(this.button);
   }
 
   disconnectedCallback() {
+    super.disconnectedCallback();
     focusVisible.unobserve(this.button);
   }
 
   render() {
     return html`
       <button
-        ref=${(el: HTMLButtonElement) => (this.button = el)}
         part="base"
         class=${classMap({
           'icon-button': true,
           'icon-button--disabled': this.disabled
         })}
+        ?disabled=${this.disabled}
         type="button"
         aria-label=${this.label}
       >
-        <sl-icon library=${this.library} name=${this.name} src=${this.src} aria-hidden="true" />
+        <sl-icon
+          name=${ifDefined(this.name)}
+          library=${ifDefined(this.library)}
+          src=${ifDefined(this.src)}
+          aria-hidden="true"
+        ></sl-icon>
       </button>
     `;
   }

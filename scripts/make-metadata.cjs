@@ -98,14 +98,12 @@ components.map(async component => {
     const dependencies = tags.filter(item => item.tag === 'dependency');
     const slots = tags.filter(item => item.tag === 'slot');
     const parts = tags.filter(item => item.tag === 'part');
-    const events = tags.filter(item => item.tag === 'emit');
 
     api.since = tags.find(item => item.tag === 'since').text.trim();
     api.status = tags.find(item => item.tag === 'status').text.trim();
     api.dependencies = dependencies.map(tag => tag.text.trim());
     api.slots = slots.map(tag => splitText(tag.text));
     api.parts = parts.map(tag => splitText(tag.text));
-    api.events = events.map(tag => splitText(tag.text));
   } else {
     console.error(chalk.yellow(`Missing comment block for ${component.name} - skipping metadata`));
   }
@@ -113,6 +111,7 @@ components.map(async component => {
   // Props
   const props = component.children
     .filter(child => child.kindString === 'Property' && !child.flags.isStatic)
+    .filter(child => child.type.name !== 'EventEmitter')
     .filter(child => child.comment && child.comment.shortText); // only with comments
 
   props.map(prop => {
@@ -124,6 +123,24 @@ components.map(async component => {
       type,
       values,
       defaultValue: prop.defaultValue
+    });
+  });
+
+  // Events
+  const events = component.children
+    .filter(child => child.kindString === 'Property' && !child.flags.isStatic)
+    .filter(child => child.type.name === 'EventEmitter')
+    .filter(child => child.comment && child.comment.shortText); // only with comments
+
+  events.map(event => {
+    const decorator = event.decorators.filter(dec => dec.name === 'event')[0];
+    const name = (decorator ? decorator.arguments.eventName : event.name).replace(/['"`]/g, '');
+    const details = event.type.typeArguments.map(arg => arg.name).join(', ');
+
+    api.events.push({
+      name,
+      description: event.comment.shortText,
+      details
     });
   });
 

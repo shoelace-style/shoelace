@@ -1,5 +1,7 @@
-import { html, styleMap, Shoemaker } from '@shoelace-style/shoemaker';
+import { LitElement, customElement, html, property, query, unsafeCSS } from 'lit-element';
+import { styleMap } from 'lit-html/directives/style-map';
 import styles from 'sass:./image-comparer.scss';
+import { event, EventEmitter } from '../../internal/event';
 import { clamp } from '../../internal/math';
 
 /**
@@ -17,19 +19,26 @@ import { clamp } from '../../internal/math';
  * @part after - The container that holds the "after" image.
  * @part divider - The divider that separates the images.
  * @part handle - The handle that the user drags to expose the after image.
- *
- * @emit sl-change - Emitted when the slider position changes.
  */
-export default class SlImageComparer extends Shoemaker {
-  static tag = 'sl-image-comparer';
-  static props = ['position'];
-  static styles = styles;
+@customElement('sl-image-comparer')
+export class SlImageComparer extends LitElement {
+  static styles = unsafeCSS(styles);
 
-  private base: HTMLElement;
-  private handle: HTMLElement;
+  @query('.image-comparer') base: HTMLElement;
+  @query('.image-comparer__handle') handle: HTMLElement;
 
   /** The position of the divider as a percentage. */
-  position = 50;
+  @property({ type: Number, reflect: true }) position = 50;
+
+  @event('sl-change') slChange: EventEmitter<void>;
+
+  update(changedProps: Map<string, any>) {
+    super.update(changedProps);
+
+    if (changedProps.has('position')) {
+      this.slChange.emit();
+    }
+  }
 
   handleDrag(event: any) {
     const { width } = this.base.getBoundingClientRect();
@@ -66,7 +75,7 @@ export default class SlImageComparer extends Shoemaker {
     event.preventDefault();
 
     drag(event, this.base, x => {
-      this.position = clamp((x / width) * 100, 0, 100);
+      this.position = Number(clamp((x / width) * 100, 0, 100).toFixed(2));
     });
   }
 
@@ -87,51 +96,41 @@ export default class SlImageComparer extends Shoemaker {
     }
   }
 
-  watchPosition() {
-    this.emit('sl-change');
-  }
-
   render() {
     return html`
-      <div
-        ref=${(el: HTMLElement) => (this.base = el)}
-        part="base"
-        class="image-comparer"
-        onkeydown=${this.handleKeyDown.bind(this)}
-      >
+      <div part="base" class="image-comparer" @keydown=${this.handleKeyDown}>
         <div class="image-comparer__image">
           <div part="before" class="image-comparer__before">
-            <slot name="before" />
+            <slot name="before"></slot>
           </div>
 
           <div
             part="after"
             class="image-comparer__after"
-            style="${styleMap({ clipPath: `inset(0 ${100 - this.position}% 0 0)` })}"
+            style=${styleMap({ clipPath: `inset(0 ${100 - this.position}% 0 0)` })}
           >
-            <slot name="after" />
+            <slot name="after"></slot>
           </div>
         </div>
 
         <div
           part="divider"
           class="image-comparer__divider"
-          style="${styleMap({ left: this.position + '%' })}"
-          onmousedown=${this.handleDrag.bind(this)}
-          ontouchstart=${this.handleDrag.bind(this)}
+          style=${styleMap({ left: this.position + '%' })}
+          @mousedown=${this.handleDrag}
+          @touchstart=${this.handleDrag}
         >
           <div
-            ref=${(el: HTMLElement) => (this.handle = el)}
             part="handle"
             class="image-comparer__handle"
             role="scrollbar"
-            aria-valuenow="${this.position}"
+            aria-valuenow=${this.position}
             aria-valuemin="0"
             aria-valuemax="100"
             tabindex="0"
           >
             <slot name="handle-icon">
-              <sl-icon class="image-comparer__handle-icon" name="grip-vertical" />
+              <sl-icon class="image-comparer__handle-icon" name="grip-vertical"></sl-icon>
             </slot>
           </div>
         </div>

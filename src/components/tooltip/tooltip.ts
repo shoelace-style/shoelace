@@ -1,4 +1,6 @@
-import { classMap, html, Shoemaker } from '@shoelace-style/shoemaker';
+import { LitElement, customElement, html, property, query, unsafeCSS } from 'lit-element';
+import { classMap } from 'lit-html/directives/class-map';
+import { event, EventEmitter } from '../../internal/event';
 import styles from 'sass:./tooltip.scss';
 import Popover from '../../internal/popover';
 
@@ -12,33 +14,28 @@ let id = 0;
  * @slot content - The tooltip's content. Alternatively, you can use the content prop.
  *
  * @part base - The component's base wrapper.
- *
- * @emit sl-show - Emitted when the tooltip begins to show. Calling `event.preventDefault()` will prevent it from being shown.
- * @emit sl-after-show - Emitted after the tooltip has shown and all transitions are complete.
- * @emit sl-hide - Emitted when the tooltip begins to hide. Calling `event.preventDefault()` will prevent it from being hidden.
- * @emit sl-after-hide - Emitted after the tooltip has hidden and all transitions are complete.
  */
-export default class SlTooltip extends Shoemaker {
-  static tag = 'sl-tooltip';
-  static props = ['content', 'placement', 'disabled', 'distance', 'open', 'skidding', 'trigger'];
-  static reflect = ['disabled', 'open'];
-  static styles = styles;
+@customElement('sl-tooltip')
+export class SlTooltip extends LitElement {
+  static styles = unsafeCSS(styles);
+
+  @query('.tooltip-positioner') positioner: HTMLElement;
+  @query('.tooltip') tooltip: HTMLElement;
 
   private componentId = `tooltip-${++id}`;
-  private isVisible = false;
-  private popover: Popover;
-  private positioner: HTMLElement;
   private target: HTMLElement;
-  private tooltip: HTMLElement;
+  private popover: Popover;
+
+  private isVisible = false;
 
   /** The tooltip's content. Alternatively, you can use the content slot. */
-  content = '';
+  @property() content = '';
 
   /**
    * The preferred placement of the tooltip. Note that the actual placement may vary as needed to keep the tooltip
    * inside of the viewport.
    */
-  placement:
+  @property() placement:
     | 'top'
     | 'top-start'
     | 'top-end'
@@ -53,25 +50,37 @@ export default class SlTooltip extends Shoemaker {
     | 'left-end' = 'top';
 
   /** Disables the tooltip so it won't show when triggered. */
-  disabled = false;
+  @property({ type: Boolean }) disabled = false;
 
   /** The distance in pixels from which to offset the tooltip away from its target. */
-  distance = 10;
+  @property({ type: Number }) distance = 10;
 
   /** Indicates whether or not the tooltip is open. You can use this in lieu of the show/hide methods. */
-  open = false;
+  @property({ type: Boolean }) open = false;
 
   /** The distance in pixels from which to offset the tooltip along its target. */
-  skidding = 0;
+  @property({ type: Number }) skidding = 0;
 
   /**
    * Controls how the tooltip is activated. Possible options include `click`, `hover`, `focus`, and `manual`. Multiple
    * options can be passed by separating them with a space. When manual is used, the tooltip must be activated
    * programmatically.
    */
-  trigger: string = 'hover focus';
+  @property() trigger = 'hover focus';
 
-  onReady() {
+  /** Emitted when the tooltip begins to show. Calling `event.preventDefault()` will prevent it from being shown. */
+  @event('sl-show') slShow: EventEmitter<void>;
+
+  /** Emitted after the tooltip has shown and all transitions are complete. */
+  @event('sl-after-show') slAfterShow: EventEmitter<void>;
+
+  /** Emitted when the tooltip begins to hide. Calling `event.preventDefault()` will prevent it from being hidden. */
+  @event('sl-hide') slHide: EventEmitter<void>;
+
+  /** Emitted after the tooltip has hidden and all transitions are complete. */
+  @event('sl-after-hide') slAfterHide: EventEmitter<void>;
+
+  firstUpdated() {
     this.target = this.getTarget();
     this.popover = new Popover(this.target, this.positioner);
     this.syncOptions();
@@ -90,7 +99,20 @@ export default class SlTooltip extends Shoemaker {
     }
   }
 
-  onDisconnect() {
+  update(changedProps: Map<string, any>) {
+    super.update(changedProps);
+
+    if (['placement', 'disabled', 'distance', 'skidding'].find(prop => changedProps.has(prop))) {
+      this.syncOptions();
+    }
+
+    if (changedProps.has('open')) {
+      this.open ? this.show() : this.hide();
+    }
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
     this.popover.destroy();
     this.removeEventListener('blur', this.handleBlur, true);
     this.removeEventListener('click', this.handleClick, true);
@@ -104,7 +126,7 @@ export default class SlTooltip extends Shoemaker {
       return;
     }
 
-    const slShow = this.emit('sl-show');
+    const slShow = this.slShow.emit();
     if (slShow.defaultPrevented) {
       this.open = false;
       return;
@@ -122,7 +144,7 @@ export default class SlTooltip extends Shoemaker {
       return;
     }
 
-    const slHide = this.emit('sl-hide');
+    const slHide = this.slHide.emit();
     if (slHide.defaultPrevented) {
       this.open = true;
       return;
@@ -202,45 +224,26 @@ export default class SlTooltip extends Shoemaker {
   }
 
   syncOptions() {
-    this.popover.setOptions({
-      placement: this.placement,
-      distance: this.distance,
-      skidding: this.skidding,
-      transitionElement: this.tooltip,
-      onAfterHide: () => this.emit('sl-after-hide'),
-      onAfterShow: () => this.emit('sl-after-show')
-    });
-  }
-
-  watchPlacement() {
-    this.syncOptions();
-  }
-
-  watchDisabled() {
-    this.syncOptions();
-  }
-
-  watchDistance() {
-    this.syncOptions();
-  }
-
-  watchOpen() {
-    this.open ? this.show() : this.hide();
-  }
-
-  watchSkidding() {
-    this.syncOptions();
+    if (this.popover) {
+      this.popover.setOptions({
+        placement: this.placement,
+        distance: this.distance,
+        skidding: this.skidding,
+        transitionElement: this.tooltip,
+        onAfterHide: () => this.slAfterHide.emit(),
+        onAfterShow: () => this.slAfterShow.emit()
+      });
+    }
   }
 
   render() {
     return html`
-      <slot onslotchange=${this.handleSlotChange.bind(this)} />
+      <slot @slotchange=${this.handleSlotChange.bind(this)}></slot>
 
       ${!this.disabled
         ? html`
-            <div ref=${(el: HTMLElement) => (this.positioner = el)} class="tooltip-positioner">
+            <div class="tooltip-positioner">
               <div
-                ref=${(el: HTMLElement) => (this.tooltip = el)}
                 part="base"
                 id=${this.componentId}
                 class=${classMap({

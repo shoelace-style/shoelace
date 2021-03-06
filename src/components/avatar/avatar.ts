@@ -1,4 +1,5 @@
-import { classMap, html, Shoemaker } from '@shoelace-style/shoemaker';
+import { LitElement, customElement, html, internalProperty, property, unsafeCSS } from 'lit-element';
+import { classMap } from 'lit-html/directives/class-map';
 import styles from 'sass:./avatar.scss';
 
 /**
@@ -14,25 +15,23 @@ import styles from 'sass:./avatar.scss';
  * @part initials - The container that wraps the avatar initials.
  * @part image - The avatar image.
  */
-export default class SlAvatar extends Shoemaker {
-  static tag = 'sl-avatar';
-  static props = ['hasError', 'image', 'alt', 'initials', 'shape'];
-  static reflect = ['shape'];
-  static styles = styles;
+@customElement('sl-avatar')
+export class SlAvatar extends LitElement {
+  static styles = unsafeCSS(styles);
 
-  private hasError = false;
+  @internalProperty() private hasError = false;
 
   /** The image source to use for the avatar. */
-  image = '';
+  @property({ reflect: true }) image: string;
 
   /** Alternative text for the image. */
-  alt = '';
+  @property({ reflect: true }) alt: string;
 
   /** Initials to use as a fallback when no image is available (1-2 characters max recommended). */
-  initials = '';
+  @property({ reflect: true }) initials: string;
 
   /** The shape of the avatar. */
-  shape: 'circle' | 'square' | 'rounded' = 'circle';
+  @property({ reflect: true }) shape: 'circle' | 'square' | 'rounded' = 'circle';
 
   render() {
     return html`
@@ -58,7 +57,7 @@ export default class SlAvatar extends Shoemaker {
             `}
         ${this.image && !this.hasError
           ? html`
-              <img part="image" class="avatar__image" src="${this.image}" onerror="${() => (this.hasError = true)}" />
+              <img part="image" class="avatar__image" src="${this.image}" @error="${() => (this.hasError = true)}" />
             `
           : ''}
       </div>
