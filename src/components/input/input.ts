@@ -2,6 +2,7 @@ import { LitElement, customElement, html, internalProperty, property, query, uns
 import { ifDefined } from 'lit-html/directives/if-defined';
 import { classMap } from 'lit-html/directives/class-map';
 import { event, EventEmitter } from '../../internal/event';
+import { watch } from '../../internal/watch';
 import styles from 'sass:./input.scss';
 import { renderFormControl } from '../../internal/form-control';
 import { hasSlot } from '../../internal/slot';
@@ -154,18 +155,6 @@ export class SlInput extends LitElement {
     this.handleSlotChange();
   }
 
-  update(changedProps: Map<string, any>) {
-    super.update(changedProps);
-
-    if (changedProps.has('helpText') || changedProps.has('label')) {
-      this.handleSlotChange();
-    }
-
-    if (changedProps.has('value')) {
-      this.invalid = !this.input.checkValidity();
-    }
-  }
-
   disconnectedCallback() {
     super.disconnectedCallback();
     this.shadowRoot!.removeEventListener('slotchange', this.handleSlotChange);
@@ -260,9 +249,16 @@ export class SlInput extends LitElement {
     this.isPasswordVisible = !this.isPasswordVisible;
   }
 
+  @watch('helpText')
+  @watch('label')
   handleSlotChange() {
     this.hasHelpTextSlot = hasSlot(this, 'help-text');
     this.hasLabelSlot = hasSlot(this, 'label');
+  }
+
+  @watch('value')
+  handleValueChange() {
+    this.invalid = !this.input.checkValidity();
   }
 
   render() {

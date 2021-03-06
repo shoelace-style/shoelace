@@ -1,4 +1,5 @@
 import { LitElement, customElement, html, internalProperty, property } from 'lit-element';
+import { watch } from '../../internal/watch';
 
 /**
  * @since 2.0
@@ -34,19 +35,16 @@ export class SlRelativeTime extends LitElement {
     this.updateTime();
   }
 
-  update(changedProps: Map<string, any>) {
-    super.update(changedProps);
-
-    if (['date', 'locale', 'format', 'numeric', 'sync'].find(prop => changedProps.has(prop))) {
-      this.updateTime();
-    }
-  }
-
   disconnectedCallback() {
     super.disconnectedCallback();
     clearTimeout(this.updateTimeout);
   }
 
+  @watch('date')
+  @watch('locale')
+  @watch('format')
+  @watch('numeric')
+  @watch('sync')
   updateTime() {
     const now = new Date();
     const date = new Date(this.date);

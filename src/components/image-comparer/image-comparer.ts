@@ -2,6 +2,7 @@ import { LitElement, customElement, html, property, query, unsafeCSS } from 'lit
 import { styleMap } from 'lit-html/directives/style-map';
 import styles from 'sass:./image-comparer.scss';
 import { event, EventEmitter } from '../../internal/event';
+import { watch } from '../../internal/watch';
 import { clamp } from '../../internal/math';
 
 /**
@@ -31,14 +32,6 @@ export class SlImageComparer extends LitElement {
   @property({ type: Number, reflect: true }) position = 50;
 
   @event('sl-change') slChange: EventEmitter<void>;
-
-  update(changedProps: Map<string, any>) {
-    super.update(changedProps);
-
-    if (changedProps.has('position')) {
-      this.slChange.emit();
-    }
-  }
 
   handleDrag(event: any) {
     const { width } = this.base.getBoundingClientRect();
@@ -94,6 +87,11 @@ export class SlImageComparer extends LitElement {
 
       this.position = newPosition;
     }
+  }
+
+  @watch('position')
+  handlePositionChange() {
+    this.slChange.emit();
   }
 
   render() {

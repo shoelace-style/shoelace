@@ -1,5 +1,6 @@
 import { LitElement, customElement, html, property, query, unsafeCSS } from 'lit-element';
 import styles from 'sass:./responsive-embed.scss';
+import { watch } from '../../internal/watch';
 
 /**
  * @since 2.0
@@ -19,14 +20,7 @@ export class SlResponsiveEmbed extends LitElement {
    */
   @property({ attribute: 'aspect-ratio' }) aspectRatio = '16:9';
 
-  update(changedProps: Map<string, any>) {
-    super.update(changedProps);
-
-    if (changedProps.has('aspectRatio')) {
-      this.updateAspectRatio();
-    }
-  }
-
+  @watch('aspectRatio')
   updateAspectRatio() {
     const split = this.aspectRatio.split(':');
     const x = parseInt(split[0]);

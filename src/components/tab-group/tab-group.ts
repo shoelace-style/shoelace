@@ -1,6 +1,7 @@
 import { LitElement, customElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
 import { event, EventEmitter } from '../../internal/event';
+import { watch } from '../../internal/watch';
 import styles from 'sass:./tab-group.scss';
 import { SlTab, SlTabPanel } from '../../shoelace';
 import { getOffset } from '../../internal/offset';
@@ -82,18 +83,6 @@ export class SlTabGroup extends LitElement {
       }
     });
     this.mutationObserver.observe(this, { attributes: true, childList: true, subtree: true });
-  }
-
-  update(changedProps: Map<string, any>) {
-    super.update(changedProps);
-
-    if (changedProps.has('placement')) {
-      this.syncActiveTabIndicator();
-    }
-
-    if (changedProps.has('noScrollControls')) {
-      this.updateScrollControls();
-    }
   }
 
   disconnectedCallback() {
@@ -207,6 +196,7 @@ export class SlTabGroup extends LitElement {
     });
   }
 
+  @watch('noScrollControls')
   updateScrollControls() {
     if (this.noScrollControls) {
       this.hasScrollControls = false;
@@ -252,6 +242,7 @@ export class SlTabGroup extends LitElement {
     });
   }
 
+  @watch('placement')
   syncActiveTabIndicator() {
     const tab = this.getActiveTab();
 

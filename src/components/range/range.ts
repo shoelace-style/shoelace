@@ -2,6 +2,7 @@ import { LitElement, customElement, html, internalProperty, property, query, uns
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
 import { event, EventEmitter } from '../../internal/event';
+import { watch } from '../../internal/watch';
 import styles from 'sass:./range.scss';
 import { renderFormControl } from '../../internal/form-control';
 import { hasSlot } from '../../internal/slot';
@@ -98,14 +99,6 @@ export class SlRange extends LitElement {
     this.resizeObserver = new ResizeObserver(() => this.syncTooltip());
   }
 
-  update(changedProps: Map<string, any>) {
-    super.update(changedProps);
-
-    if (changedProps.has('label') || changedProps.has('helpText')) {
-      this.handleSlotChange();
-    }
-  }
-
   disconnectedCallback() {
     super.disconnectedCallback();
     this.shadowRoot!.removeEventListener('slotchange', this.handleSlotChange);
@@ -148,6 +141,8 @@ export class SlRange extends LitElement {
     this.resizeObserver.observe(this.input);
   }
 
+  @watch('label')
+  @watch('helpText')
   handleSlotChange() {
     this.hasHelpTextSlot = hasSlot(this, 'help-text');
     this.hasLabelSlot = hasSlot(this, 'label');

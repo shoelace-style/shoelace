@@ -1,5 +1,6 @@
 import { LitElement, customElement, html, property, queryAsync, unsafeCSS } from 'lit-element';
 import { event, EventEmitter } from '../../internal/event';
+import { watch } from '../../internal/watch';
 import styles from 'sass:./animation.scss';
 import { animations } from './animations';
 
@@ -80,33 +81,18 @@ export class SlAnimation extends LitElement {
     this.destroyAnimation();
   }
 
-  update(changedProps: Map<string, any>) {
-    super.update(changedProps);
-
-    if (changedProps.has('pause')) {
-      this.handlePauseChange();
-    }
-
-    if (changedProps.has('playbackRate')) {
-      this.handlePlaybackRateChange();
-    }
-
-    if (
-      [
-        'name',
-        'delay',
-        'direction',
-        'duration',
-        'easing',
-        'endDelay',
-        'fill',
-        'iterations',
-        'iterationsStart',
-        'keyframes'
-      ].find(prop => changedProps.has(prop))
-    ) {
-      this.createAnimation();
-    }
+  @watch('name')
+  @watch('delay')
+  @watch('direction')
+  @watch('duration')
+  @watch('easing')
+  @watch('endDelay')
+  @watch('fill')
+  @watch('iterations')
+  @watch('iterationsStart')
+  @watch('keyframes')
+  handleAnimationChange() {
+    this.createAnimation();
   }
 
   handleAnimationFinish() {
@@ -117,6 +103,7 @@ export class SlAnimation extends LitElement {
     this.slCancel.emit();
   }
 
+  @watch('pause')
   handlePauseChange() {
     if (this.animation) {
       this.pause ? this.animation.pause() : this.animation.play();
@@ -132,6 +119,7 @@ export class SlAnimation extends LitElement {
     }
   }
 
+  @watch('playbackRate')
   handlePlaybackRateChange() {
     if (this.animation) {
       this.animation.playbackRate = this.playbackRate;

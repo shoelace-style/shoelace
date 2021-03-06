@@ -1,6 +1,7 @@
 import { LitElement, customElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
 import { event, EventEmitter } from '../../internal/event';
+import { watch } from '../../internal/watch';
 import styles from 'sass:./radio.scss';
 
 let id = 0;
@@ -54,18 +55,6 @@ export class SlRadio extends LitElement {
   /** Emitted when the control gains focus. */
   @event('sl-focus') slFocus: EventEmitter<void>;
 
-  update(changedProps: Map<string, any>) {
-    super.update(changedProps);
-
-    if (changedProps.has('checked')) {
-      if (this.checked) {
-        this.getSiblingRadios().map(radio => (radio.checked = false));
-      }
-      this.input.checked = this.checked;
-      this.slChange.emit();
-    }
-  }
-
   /** Sets focus on the radio. */
   setFocus(options?: FocusOptions) {
     this.input.focus(options);
@@ -97,6 +86,17 @@ export class SlRadio extends LitElement {
 
   getSiblingRadios() {
     return this.getAllRadios().filter(radio => radio !== this) as this[];
+  }
+
+  @watch('checked')
+  handleCheckedChange() {
+    if (this.input) {
+      if (this.checked) {
+        this.getSiblingRadios().map(radio => (radio.checked = false));
+      }
+      this.input.checked = this.checked;
+      this.slChange.emit();
+    }
   }
 
   handleClick() {

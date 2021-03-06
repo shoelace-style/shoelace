@@ -1,4 +1,15 @@
 // @event decorator
+//
+// For convenience, all events are composed, cancelable, and bubble. Calling emit() will return the dispatched event.
+//
+// Usage:
+//
+//  @event('sl-change') slChange: EventEmitter<void>;
+//
+// To emit the event:
+//
+//  this.slChange.emit({ detail: ... });
+//
 export function event(eventName?: string) {
   // Legacy TS Decorator
   function legacyEvent(descriptor: PropertyDescriptor, protoOrDescriptor: {}, name: PropertyKey) {

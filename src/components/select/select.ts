@@ -10,6 +10,7 @@ import {
 } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
 import { event, EventEmitter } from '../../internal/event';
+import { watch } from '../../internal/watch';
 import styles from 'sass:./select.scss';
 import { SlDropdown, SlIconButton, SlMenu, SlMenuItem } from '../../shoelace';
 import { renderFormControl } from '../../internal/form-control';
@@ -131,32 +132,6 @@ export class SlSelect extends LitElement {
     requestAnimationFrame(() => this.syncItemsFromValue());
   }
 
-  update(changedProps: Map<string, any>) {
-    super.update(changedProps);
-
-    if (changedProps.has('help-text') || changedProps.has('label')) {
-      this.handleSlotChange();
-    }
-
-    if (changedProps.has('multiple')) {
-      // Cast to array | string based on `this.multiple`
-      const value = this.getValueAsArray();
-      this.value = this.multiple ? value : value[0] || '';
-      this.syncItemsFromValue();
-    }
-
-    if (changedProps.has('disabled')) {
-      if (this.disabled && this.isOpen) {
-        this.dropdown.hide();
-      }
-    }
-
-    if (changedProps.has('value')) {
-      this.syncItemsFromValue();
-      this.slChange.emit();
-    }
-  }
-
   disconnectedCallback() {
     super.disconnectedCallback();
     this.shadowRoot!.removeEventListener('slotchange', this.handleSlotChange);
@@ -191,15 +166,22 @@ export class SlSelect extends LitElement {
     this.slBlur.emit();
   }
 
-  handleFocus() {
-    this.hasFocus = true;
-    this.slFocus.emit();
-  }
-
   handleClearClick(event: MouseEvent) {
     event.stopPropagation();
     this.value = this.multiple ? [] : '';
     this.syncItemsFromValue();
+  }
+
+  @watch('disabled')
+  handleDisabledChange() {
+    if (this.disabled && this.isOpen) {
+      this.dropdown.hide();
+    }
+  }
+
+  handleFocus() {
+    this.hasFocus = true;
+    this.slFocus.emit();
   }
 
   handleKeyDown(event: KeyboardEvent) {
@@ -286,6 +268,16 @@ export class SlSelect extends LitElement {
     this.isOpen = false;
   }
 
+  @watch('multiple')
+  handleMultipleChange() {
+    // Cast to array | string based on `this.multiple`
+    const value = this.getValueAsArray();
+    this.value = this.multiple ? value : value[0] || '';
+    this.syncItemsFromValue();
+  }
+
+  @watch('helpText')
+  @watch('label')
   handleSlotChange() {
     this.hasHelpTextSlot = hasSlot(this, 'help-text');
     this.hasLabelSlot = hasSlot(this, 'label');
@@ -306,6 +298,12 @@ export class SlSelect extends LitElement {
     if (clearButton) {
       event.stopPropagation();
     }
+  }
+
+  @watch('value')
+  handleValueChange() {
+    this.syncItemsFromValue();
+    this.slChange.emit();
   }
 
   resizeMenu() {

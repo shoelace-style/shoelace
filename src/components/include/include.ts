@@ -1,5 +1,6 @@
 import { LitElement, customElement, html, property, unsafeCSS } from 'lit-element';
 import { event, EventEmitter } from '../../internal/event';
+import { watch } from '../../internal/watch';
 import styles from 'sass:./include.scss';
 import { requestInclude } from './request';
 
@@ -34,14 +35,6 @@ export class SlInclude extends LitElement {
     this.loadSource();
   }
 
-  update(changedProps: Map<string, any>) {
-    super.update(changedProps);
-
-    if (changedProps.has('src')) {
-      this.loadSource();
-    }
-  }
-
   executeScript(script: HTMLScriptElement) {
     // Create a copy of the script and swap it out so the browser executes it
     const newScript = document.createElement('script');
@@ -50,6 +43,7 @@ export class SlInclude extends LitElement {
     script.parentNode!.replaceChild(newScript, script);
   }
 
+  @watch('src')
   async loadSource() {
     try {
       const src = this.src;

@@ -1,6 +1,7 @@
 import { LitElement, customElement, html, internalProperty, property, unsafeCSS } from 'lit-element';
 import { unsafeSVG } from 'lit-html/directives/unsafe-svg';
 import { event, EventEmitter } from '../../internal/event';
+import { watch } from '../../internal/watch';
 import styles from 'sass:./icon.scss';
 import { getIconLibrary, watchIcon, unwatchIcon } from './library';
 import { requestIcon } from './request';
@@ -46,14 +47,6 @@ export class SlIcon extends LitElement {
     this.setIcon();
   }
 
-  update(changedProps: Map<string, any>) {
-    if (['name', 'src', 'library'].find(prop => changedProps.has(prop))) {
-      this.setIcon();
-    }
-
-    super.update(changedProps);
-  }
-
   disconnectedCallback() {
     super.disconnectedCallback();
     unwatchIcon(this);
@@ -78,6 +71,9 @@ export class SlIcon extends LitElement {
     this.setIcon();
   }
 
+  @watch('name')
+  @watch('src')
+  @watch('library')
   async setIcon() {
     const library = getIconLibrary(this.library);
     let url = this.src;

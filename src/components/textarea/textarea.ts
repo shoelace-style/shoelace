@@ -2,6 +2,7 @@ import { LitElement, customElement, html, internalProperty, property, query, uns
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
 import { event, EventEmitter } from '../../internal/event';
+import { watch } from '../../internal/watch';
 import styles from 'sass:./textarea.scss';
 import { renderFormControl } from '../../internal/form-control';
 import { hasSlot } from '../../internal/slot';
@@ -128,22 +129,6 @@ export class SlTextarea extends LitElement {
     this.resizeObserver.observe(this.input);
   }
 
-  update(changedProps: Map<string, any>) {
-    super.update(changedProps);
-
-    if (changedProps.has('help-text') || changedProps.has('label')) {
-      this.handleSlotChange();
-    }
-
-    if (changedProps.has('rows')) {
-      this.setTextareaHeight();
-    }
-
-    if (changedProps.has('value')) {
-      this.invalid = !this.input.checkValidity();
-    }
-  }
-
   disconnectedCallback() {
     super.disconnectedCallback();
     this.resizeObserver.unobserve(this.input);
@@ -228,9 +213,25 @@ export class SlTextarea extends LitElement {
     this.slFocus.emit();
   }
 
+  @watch('rows')
+  handleRowsChange() {
+    if (this.input) {
+      this.setTextareaHeight();
+    }
+  }
+
+  @watch('helpText')
+  @watch('label')
   handleSlotChange() {
     this.hasHelpTextSlot = hasSlot(this, 'help-text');
     this.hasLabelSlot = hasSlot(this, 'label');
+  }
+
+  @watch('value')
+  handleValueChange() {
+    if (this.input) {
+      this.invalid = !this.input.checkValidity();
+    }
   }
 
   setTextareaHeight() {

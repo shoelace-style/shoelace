@@ -1,5 +1,6 @@
 import { LitElement, customElement, html, property, query, unsafeCSS } from 'lit-element';
 import styles from 'sass:./progress-ring.scss';
+import { watch } from '../../internal/watch';
 
 /**
  * @since 2.0
@@ -25,16 +26,15 @@ export class SlProgressRing extends LitElement {
   /** The current progress percentage, 0 - 100. */
   @property({ type: Number, reflect: true }) percentage: number;
 
-  update(changedProps: Map<string, any>) {
-    super.update(changedProps);
-
-    if (changedProps.has('percentage')) {
-      this.updateProgress();
-    }
-  }
-
   firstUpdated() {
     this.updateProgress();
+  }
+
+  @watch('percentage')
+  handlePercentageChange() {
+    if (this.indicator) {
+      this.updateProgress();
+    }
   }
 
   updateProgress() {

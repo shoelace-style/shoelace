@@ -1,6 +1,7 @@
 import { LitElement, customElement, html, property, query, unsafeCSS } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
 import { event, EventEmitter } from '../../internal/event';
+import { watch } from '../../internal/watch';
 import styles from 'sass:./tooltip.scss';
 import Popover from '../../internal/popover';
 
@@ -99,18 +100,6 @@ export class SlTooltip extends LitElement {
     }
   }
 
-  update(changedProps: Map<string, any>) {
-    super.update(changedProps);
-
-    if (['placement', 'disabled', 'distance', 'skidding'].find(prop => changedProps.has(prop))) {
-      this.syncOptions();
-    }
-
-    if (changedProps.has('open')) {
-      this.open ? this.show() : this.hide();
-    }
-  }
-
   disconnectedCallback() {
     super.disconnectedCallback();
     this.popover.destroy();
@@ -204,6 +193,19 @@ export class SlTooltip extends LitElement {
     if (this.hasTrigger('hover')) {
       this.hide();
     }
+  }
+
+  @watch('open')
+  handleOpenChange() {
+    this.open ? this.show() : this.hide();
+  }
+
+  @watch('placement')
+  @watch('disabled')
+  @watch('distance')
+  @watch('skidding')
+  handleOptionsChange() {
+    this.syncOptions();
   }
 
   handleSlotChange() {

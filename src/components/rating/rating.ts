@@ -3,6 +3,7 @@ import { classMap } from 'lit-html/directives/class-map';
 import { styleMap } from 'lit-html/directives/style-map';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html';
 import { event, EventEmitter } from '../../internal/event';
+import { watch } from '../../internal/watch';
 import styles from 'sass:./rating.scss';
 import { focusVisible } from '../../internal/focus-visible';
 import { clamp } from '../../internal/math';
@@ -58,14 +59,6 @@ export class SlRating extends LitElement {
 
   firstUpdated() {
     focusVisible.observe(this.rating);
-  }
-
-  update(changedProps: Map<string, any>) {
-    super.update(changedProps);
-
-    if (changedProps.has('value')) {
-      this.slChange.emit();
-    }
   }
 
   disconnectedCallback() {
@@ -132,6 +125,11 @@ export class SlRating extends LitElement {
 
   handleMouseMove(event: MouseEvent) {
     this.hoverValue = this.getValueFromMousePosition(event);
+  }
+
+  @watch('value')
+  handleValueChange() {
+    this.slChange.emit();
   }
 
   roundToPrecision(numberToRound: number, precision = 0.5) {
