@@ -22,6 +22,7 @@ const options = commandLineArgs({
 });
 
 execSync(`rm -rf ./dist`, { stdio: 'inherit' });
+execSync('tsc', { stdio: 'inherit'});
 execSync('node scripts/make-metadata.cjs', { stdio: 'inherit' });
 execSync('node scripts/make-icons.cjs', { stdio: 'inherit' });
 
