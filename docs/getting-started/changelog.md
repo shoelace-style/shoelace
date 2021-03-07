@@ -14,6 +14,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Added `vscode.html-custom-data.json` to the build to support IntelliSense (see [the usage section](/getting-started/usage#code-completion) for details)
 - Added a style to prevent FOUC before components are defined
 - Fixed bug where TypeScript types weren't being generated [#364](https://github.com/shoelace-style/shoelace/pull/364)
+- Improved vertical padding in `sl-tooltip`
 - Moved chunk files into a separate folder
 - Updated esbuild to 0.8.54
 
