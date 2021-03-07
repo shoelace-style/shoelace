@@ -29,7 +29,7 @@
     "url": "https://github.com/sponsors/claviska"
   },
   "scripts": {
-    "start": "node scripts/build.cjs --serve",
+    "start": "node scripts/build.cjs --dev",
     "build": "node scripts/build.cjs",
     "prepublish": "npm run build",
     "prettier": "prettier --write --loglevel warn ."

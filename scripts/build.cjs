@@ -16,13 +16,10 @@ const sass = require('sass');
 const sassPlugin = require('esbuild-plugin-sass');
 const { build } = require('esbuild');
 
-const options = commandLineArgs({
-  name: 'serve',
-  type: Boolean
-});
+const { dev } = commandLineArgs({ name: 'dev', type: Boolean });
 
 execSync(`rm -rf ./dist`, { stdio: 'inherit' });
-execSync('tsc', { stdio: 'inherit' }); // for type declarations
+if (!dev) execSync('tsc', { stdio: 'inherit' }); // for type declarations
 execSync('node scripts/make-metadata.cjs', { stdio: 'inherit' });
 execSync('node scripts/make-icons.cjs', { stdio: 'inherit' });
 
@@ -47,7 +44,7 @@ execSync('node scripts/make-icons.cjs', { stdio: 'inherit' });
       entryPoints,
       outdir: './dist',
       chunkNames: 'chunks/[name].[hash]',
-      incremental: options.serve,
+      incremental: dev,
       define: {
         // Popper.js expects this to be set
         'process.env.NODE_ENV': '"production"'
@@ -89,13 +86,13 @@ execSync('node scripts/make-icons.cjs', { stdio: 'inherit' });
   // Create the docs distribution by copying dist into docs/dist. This is what powers the website. It can't exist in dev
   // because it will conflict with browser sync's routing to the actual dist dir.
   await del('./docs/dist');
-  if (!options.serve) {
+  if (!dev) {
     await copy('./dist', './docs/dist');
   }
 
   console.log(chalk.green('The build has finished! 📦'));
 
-  if (options.serve) {
+  if (dev) {
     const port = await getPort({
       port: getPort.makeRange(4000, 4999)
     });
