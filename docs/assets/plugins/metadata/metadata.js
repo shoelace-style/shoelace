@@ -29,7 +29,7 @@
                       ? `
                         <br>
                         <small>
-                          <sl-tooltip content="This is the attribute name">
+                          <sl-tooltip content="Use this attribute in your HTML">
                             <code class="attribute-tooltip">${escapeHtml(attr)}</code>
                           </sl-tooltip>
                         </small>`
