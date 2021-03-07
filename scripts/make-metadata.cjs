@@ -160,7 +160,7 @@ components.map(async component => {
     const tags = parsed[0] ? parsed[0].tags : [];
     const cssCustomProperties = tags
       .filter(tag => tag.tag === 'prop')
-      .map(tag => api.cssCustomProperties.push({ name: tag.tag, description: tag.description }));
+      .map(tag => api.cssCustomProperties.push({ name: tag.name.slice(0, -1), description: tag.description }));
   }
 
   metadata.components.push(api);
