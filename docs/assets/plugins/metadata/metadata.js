@@ -56,7 +56,7 @@
         <tr>
           <th>Event</th>
           <th>Description</th>
-          <th>Event Details</th>
+          <th>Details</th>
         </tr>
       </thead>
       <tbody>
