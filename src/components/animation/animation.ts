@@ -1,6 +1,5 @@
-import { LitElement, customElement, html, property, queryAsync, unsafeCSS } from 'lit-element';
-import { event, EventEmitter } from '../../internal/event';
-import { watch } from '../../internal/watch';
+import { LitElement, html, property, queryAsync, unsafeCSS } from 'lit-element';
+import { event, EventEmitter, tag, watch } from '../../internal/decorators';
 import styles from 'sass:./animation.scss';
 import { animations } from './animations';
 
@@ -10,7 +9,7 @@ import { animations } from './animations';
  *
  * @slot - The element to animate. If multiple elements are to be animated, wrap them in a single container.
  */
-@customElement('sl-animation')
+@tag('sl-animation')
 export class SlAnimation extends LitElement {
   static styles = unsafeCSS(styles);
 

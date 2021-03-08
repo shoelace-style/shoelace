@@ -1,5 +1,5 @@
-import { LitElement, customElement, html, query, unsafeCSS } from 'lit-element';
-import { event, EventEmitter } from '../../internal/event';
+import { LitElement, html, query, unsafeCSS } from 'lit-element';
+import { event, EventEmitter, tag } from '../../internal/decorators';
 import styles from 'sass:./menu.scss';
 import { SlMenuItem } from '../../shoelace';
 import { getTextContent } from '../../internal/slot';
@@ -12,7 +12,7 @@ import { getTextContent } from '../../internal/slot';
  *
  * @part base - The component's base wrapper.
  */
-@customElement('sl-menu')
+@tag('sl-menu')
 export class SlMenu extends LitElement {
   static styles = unsafeCSS(styles);
 

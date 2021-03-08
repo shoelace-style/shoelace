@@ -1,12 +1,12 @@
-import { LitElement, customElement, html, unsafeCSS } from 'lit-element';
-import { event, EventEmitter } from '../../internal/event';
+import { LitElement, html, unsafeCSS } from 'lit-element';
+import { event, EventEmitter, tag } from '../../internal/decorators';
 import styles from 'sass:./resize-observer.scss';
 
 /**
  * @since 2.0
  * @status experimental
  */
-@customElement('sl-resize-observer')
+@tag('sl-resize-observer')
 export class SlResizeObserver extends LitElement {
   static styles = unsafeCSS(styles);
 

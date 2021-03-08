@@ -1,8 +1,7 @@
-import { LitElement, customElement, html, property, query, unsafeCSS } from 'lit-element';
+import { LitElement, html, property, query, unsafeCSS } from 'lit-element';
 import { styleMap } from 'lit-html/directives/style-map';
+import { event, EventEmitter, tag, watch } from '../../internal/decorators';
 import styles from 'sass:./image-comparer.scss';
-import { event, EventEmitter } from '../../internal/event';
-import { watch } from '../../internal/watch';
 import { clamp } from '../../internal/math';
 
 /**
@@ -21,7 +20,7 @@ import { clamp } from '../../internal/math';
  * @part divider - The divider that separates the images.
  * @part handle - The handle that the user drags to expose the after image.
  */
-@customElement('sl-image-comparer')
+@tag('sl-image-comparer')
 export class SlImageComparer extends LitElement {
   static styles = unsafeCSS(styles);
 

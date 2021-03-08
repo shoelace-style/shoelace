@@ -1,7 +1,6 @@
-import { LitElement, customElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
+import { LitElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
-import { event, EventEmitter } from '../../internal/event';
-import { watch } from '../../internal/watch';
+import { event, EventEmitter, tag, watch } from '../../internal/decorators';
 import styles from 'sass:./tab-group.scss';
 import { SlTab, SlTabPanel } from '../../shoelace';
 import { getOffset } from '../../internal/offset';
@@ -24,7 +23,7 @@ import { focusVisible } from '../../internal/focus-visible';
  * @part body - The tab group body where tab panels are slotted in.
  * @part scroll-button - The previous and next scroll buttons that appear when tabs are scrollable.
  */
-@customElement('sl-tab-group')
+@tag('sl-tab-group')
 export class SlTabGroup extends LitElement {
   static styles = unsafeCSS(styles);
 

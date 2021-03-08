@@ -1,6 +1,6 @@
-import { LitElement, customElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
+import { LitElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
-import { event, EventEmitter } from '../../internal/event';
+import { event, EventEmitter, tag } from '../../internal/decorators';
 import styles from 'sass:./switch.scss';
 
 let id = 0;
@@ -16,7 +16,7 @@ let id = 0;
  * @part thumb - The switch position indicator.
  * @part label - The switch label.
  */
-@customElement('sl-switch')
+@tag('sl-switch')
 export class SlSwitch extends LitElement {
   static styles = unsafeCSS(styles);
 

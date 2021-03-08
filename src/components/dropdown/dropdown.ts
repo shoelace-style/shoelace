@@ -1,7 +1,6 @@
-import { LitElement, customElement, html, property, query, unsafeCSS } from 'lit-element';
+import { LitElement, html, property, query, unsafeCSS } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
-import { event, EventEmitter } from '../../internal/event';
-import { watch } from '../../internal/watch';
+import { event, EventEmitter, tag, watch } from '../../internal/decorators';
 import styles from 'sass:./dropdown.scss';
 import { SlMenu, SlMenuItem } from '../../shoelace';
 import { scrollIntoView } from '../../internal/scroll';
@@ -21,7 +20,7 @@ let id = 0;
  * @part trigger - The container that wraps the trigger.
  * @part panel - The panel that gets shown when the dropdown is open.
  */
-@customElement('sl-dropdown')
+@tag('sl-dropdown')
 export class SlDropdown extends LitElement {
   static styles = unsafeCSS(styles);
 

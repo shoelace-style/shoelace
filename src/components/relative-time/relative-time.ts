@@ -1,11 +1,11 @@
-import { LitElement, customElement, html, internalProperty, property } from 'lit-element';
-import { watch } from '../../internal/watch';
+import { LitElement, html, internalProperty, property } from 'lit-element';
+import { tag, watch } from '../../internal/decorators';
 
 /**
  * @since 2.0
  * @status stable
  */
-@customElement('sl-relative-time')
+@tag('sl-relative-time')
 export class SlRelativeTime extends LitElement {
   private updateTimeout: any;
 

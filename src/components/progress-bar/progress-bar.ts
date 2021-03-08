@@ -1,6 +1,7 @@
-import { LitElement, customElement, html, property, unsafeCSS } from 'lit-element';
+import { LitElement, html, property, unsafeCSS } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
 import { styleMap } from 'lit-html/directives/style-map';
+import { tag } from '../../internal/decorators';
 import styles from 'sass:./progress-bar.scss';
 
 /**
@@ -13,7 +14,7 @@ import styles from 'sass:./progress-bar.scss';
  * @part indicator - The progress bar indicator.
  * @part label - The progress bar label.
  */
-@customElement('sl-progress-bar')
+@tag('sl-progress-bar')
 export class SlProgressBar extends LitElement {
   static styles = unsafeCSS(styles);
 

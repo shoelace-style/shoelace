@@ -1,11 +1,12 @@
-import { LitElement, customElement, property } from 'lit-element';
+import { LitElement, property } from 'lit-element';
+import { tag } from '../../internal/decorators';
 import { formatBytes } from '../../internal/number';
 
 /**
  * @since 2.0
  * @status stable
  */
-@customElement('sl-format-bytes')
+@tag('sl-format-bytes')
 export class SlFormatBytes extends LitElement {
   /** The number to format in bytes. */
   @property({ type: Number }) value = 0;

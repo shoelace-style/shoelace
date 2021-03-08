@@ -1,5 +1,6 @@
-import { LitElement, customElement, html, property, unsafeCSS } from 'lit-element';
+import { LitElement, html, property, unsafeCSS } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
+import { tag } from '../../internal/decorators';
 import styles from 'sass:./badge.scss';
 
 /**
@@ -10,7 +11,7 @@ import styles from 'sass:./badge.scss';
  *
  * @part base - The base wrapper
  */
-@customElement('sl-badge')
+@tag('sl-badge')
 export class SlBadge extends LitElement {
   static styles = unsafeCSS(styles);
 

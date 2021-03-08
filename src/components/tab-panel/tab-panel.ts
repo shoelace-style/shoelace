@@ -1,4 +1,5 @@
-import { LitElement, customElement, html, property, unsafeCSS } from 'lit-element';
+import { LitElement, html, property, unsafeCSS } from 'lit-element';
+import { tag } from '../../internal/decorators';
 import styles from 'sass:./tab-panel.scss';
 
 let id = 0;
@@ -11,7 +12,7 @@ let id = 0;
  *
  * @part base - The component's base wrapper.
  */
-@customElement('sl-tab-panel')
+@tag('sl-tab-panel')
 export class SlTabPanel extends LitElement {
   static styles = unsafeCSS(styles);
 

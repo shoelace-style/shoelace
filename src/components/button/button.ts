@@ -1,6 +1,6 @@
-import { LitElement, customElement, html, internalProperty, property, unsafeCSS } from 'lit-element';
+import { LitElement, html, internalProperty, property, unsafeCSS } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
-import { event, EventEmitter } from '../../internal/event';
+import { event, EventEmitter, tag } from '../../internal/decorators';
 import styles from 'sass:./button.scss';
 import { hasSlot } from '../../internal/slot';
 
@@ -21,7 +21,7 @@ import { hasSlot } from '../../internal/slot';
  * @part suffix - The suffix container.
  * @part caret - The button's caret.
  */
-@customElement('sl-button')
+@tag('sl-button')
 export class SlButton extends LitElement {
   static styles = unsafeCSS(styles);
 

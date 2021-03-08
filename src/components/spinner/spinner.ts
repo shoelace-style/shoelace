@@ -1,4 +1,5 @@
-import { LitElement, customElement, html, unsafeCSS } from 'lit-element';
+import { LitElement, html, unsafeCSS } from 'lit-element';
+import { tag } from '../../internal/decorators';
 import styles from 'sass:./spinner.scss';
 
 /**
@@ -7,7 +8,7 @@ import styles from 'sass:./spinner.scss';
  *
  * @part base - The component's base wrapper.
  */
-@customElement('sl-spinner')
+@tag('sl-spinner')
 export class SlSpinner extends LitElement {
   static styles = unsafeCSS(styles);
 

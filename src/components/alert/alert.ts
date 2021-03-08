@@ -1,6 +1,6 @@
-import { LitElement, customElement, html, internalProperty, property, unsafeCSS } from 'lit-element';
+import { LitElement, html, internalProperty, property, unsafeCSS } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
-import { event, EventEmitter } from '../../internal/event';
+import { event, EventEmitter, tag } from '../../internal/decorators';
 import styles from 'sass:./alert.scss';
 
 const toastStack = Object.assign(document.createElement('div'), { className: 'sl-toast-stack' });
@@ -19,7 +19,7 @@ const toastStack = Object.assign(document.createElement('div'), { className: 'sl
  * @part message - The alert message.
  * @part close-button - The close button.
  */
-@customElement('sl-alert')
+@tag('sl-alert')
 export class SlAlert extends LitElement {
   static styles = unsafeCSS(styles);
 

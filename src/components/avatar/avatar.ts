@@ -1,5 +1,6 @@
-import { LitElement, customElement, html, internalProperty, property, unsafeCSS } from 'lit-element';
+import { LitElement, html, internalProperty, property, unsafeCSS } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
+import { tag } from '../../internal/decorators';
 import styles from 'sass:./avatar.scss';
 
 /**
@@ -15,7 +16,7 @@ import styles from 'sass:./avatar.scss';
  * @part initials - The container that wraps the avatar initials.
  * @part image - The avatar image.
  */
-@customElement('sl-avatar')
+@tag('sl-avatar')
 export class SlAvatar extends LitElement {
   static styles = unsafeCSS(styles);
 

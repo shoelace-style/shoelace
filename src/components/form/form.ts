@@ -1,5 +1,5 @@
-import { LitElement, customElement, html, property, query, unsafeCSS } from 'lit-element';
-import { event, EventEmitter } from '../../internal/event';
+import { LitElement, html, property, query, unsafeCSS } from 'lit-element';
+import { event, EventEmitter, tag } from '../../internal/decorators';
 import styles from 'sass:./form.scss';
 import {
   SlButton,
@@ -28,7 +28,7 @@ interface FormControl {
  *
  * @part base - The component's base wrapper.
  */
-@customElement('sl-form')
+@tag('sl-form')
 export class SlForm extends LitElement {
   static styles = unsafeCSS(styles);
 

@@ -1,4 +1,5 @@
-import { LitElement, customElement, html, unsafeCSS } from 'lit-element';
+import { LitElement, html, unsafeCSS } from 'lit-element';
+import { tag } from '../../internal/decorators';
 import styles from 'sass:./menu-divider.scss';
 
 /**
@@ -9,7 +10,7 @@ import styles from 'sass:./menu-divider.scss';
  *
  * @part base - The component's base wrapper.
  */
-@customElement('sl-menu-divider')
+@tag('sl-menu-divider')
 export class SlMenuDivider extends LitElement {
   static styles = unsafeCSS(styles);
 
