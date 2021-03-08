@@ -60,3 +60,53 @@ export class EventEmitter<T> {
     return event;
   }
 }
+
+// @tag decorator
+//
+// LitElement suggests using their @customElement decorator, but this introduces a side effect that defines the element
+// and breaks tree shaking. We use this alternative to add a defineElement() function to the element instead.
+//
+// Usage:
+//
+//  @tag('sl-button')
+//  class SlButton extends LitElement { ... }
+//
+// To register the element:
+//
+//  import { SlButton } from '@shoelace-style/shoelace';
+//  SlButton.defineElement();
+//
+export function tag(tagName: string) {
+  return (protoOrDescriptor: any): any => {
+    protoOrDescriptor.register = function () {
+      customElements.define(tagName, protoOrDescriptor);
+    };
+  };
+}
+
+// @watch decorator
+//
+// Usage:
+//
+//  @watch('propName') handlePropChange(oldValue, newValue) {
+//    ...
+//  }
+//
+export function watch(propName: string) {
+  return (protoOrDescriptor: any, name: string): any => {
+    const update = protoOrDescriptor.update;
+
+    protoOrDescriptor.update = function (changedProps: Map<string, any>) {
+      if (changedProps.has(propName)) {
+        const oldValue = changedProps.get(propName);
+        const newValue = this[propName];
+
+        if (oldValue !== newValue) {
+          this[name].call(this, oldValue, newValue);
+        }
+      }
+
+      update.call(this, changedProps);
+    };
+  };
+}
