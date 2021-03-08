@@ -22,11 +22,13 @@ export class SlResponsiveEmbed extends LitElement {
 
   @watch('aspectRatio')
   updateAspectRatio() {
-    const split = this.aspectRatio.split(':');
-    const x = parseInt(split[0]);
-    const y = parseInt(split[1]);
+    if (this.base) {
+      const split = this.aspectRatio.split(':');
+      const x = parseInt(split[0]);
+      const y = parseInt(split[1]);
 
-    this.base.style.paddingBottom = x && y ? `${(y / x) * 100}%` : '';
+      this.base.style.paddingBottom = x && y ? `${(y / x) * 100}%` : '';
+    }
   }
 
   render() {
