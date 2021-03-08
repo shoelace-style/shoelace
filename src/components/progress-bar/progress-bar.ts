@@ -1,4 +1,7 @@
-import { classMap, html, styleMap, Shoemaker } from '@shoelace-style/shoemaker';
+import { LitElement, html, property, unsafeCSS } from 'lit-element';
+import { classMap } from 'lit-html/directives/class-map';
+import { styleMap } from 'lit-html/directives/style-map';
+import { tag } from '../../internal/decorators';
 import styles from 'sass:./progress-bar.scss';
 
 /**
@@ -11,16 +14,15 @@ import styles from 'sass:./progress-bar.scss';
  * @part indicator - The progress bar indicator.
  * @part label - The progress bar label.
  */
-export default class SlProgressBar extends Shoemaker {
-  static tag = 'sl-progress-bar';
-  static props = ['percentage', 'indeterminate'];
-  static styles = styles;
+@tag('sl-progress-bar')
+export class SlProgressBar extends LitElement {
+  static styles = unsafeCSS(styles);
 
   /** The progress bar's percentage, 0 to 100. */
-  percentage = 0;
+  @property({ type: Number, reflect: true }) percentage = 0;
 
   /** When true, percentage is ignored, the label is hidden, and the progress bar is drawn in an indeterminate state. */
-  indeterminate = false;
+  @property({ type: Boolean, reflect: true }) indeterminate = false;
 
   render() {
     return html`
@@ -39,7 +41,7 @@ export default class SlProgressBar extends Shoemaker {
           ${!this.indeterminate
             ? html`
                 <span part="label" class="progress-bar__label">
-                  <slot />
+                  <slot></slot>
                 </span>
               `
             : ''}

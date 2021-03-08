@@ -98,7 +98,7 @@ Once your bundler is configured, you'll be able to import Shoelace components an
 import '@shoelace-style/shoelace/dist/shoelace.css';
 import { setBasePath, SlButton, SlIcon, SlInput, SlRating } from '@shoelace-style/shoelace';
 
-// Set the pase path to the folder you copied Shoelace's assets to
+// Set the base path to the folder you copied Shoelace's assets to
 setBasePath('/dist/shoelace');
 
 SlButton.register();

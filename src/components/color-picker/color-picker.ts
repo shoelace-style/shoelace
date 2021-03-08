@@ -1,4 +1,7 @@
-import { classMap, html, styleMap, Shoemaker } from '@shoelace-style/shoemaker';
+import { LitElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
+import { classMap } from 'lit-html/directives/class-map';
+import { styleMap } from 'lit-html/directives/style-map';
+import { event, EventEmitter, tag } from '../../internal/decorators';
 import styles from 'sass:./color-picker.scss';
 import { SlDropdown, SlInput } from '../../shoelace';
 import color from 'color';
@@ -26,98 +29,73 @@ import { clamp } from '../../internal/math';
  * @part preview - The preview color.
  * @part input - The text input.
  * @part format-button - The toggle format button's base.
- *
- * @emit sl-change - Emitted when the color picker's value changes.
- * @emit sl-show - Emitted when the color picker opens. Calling `event.preventDefault()` will prevent it from being opened.
- * @emit sl-after - Emitted after the color picker opens and all transitions are complete.
- * @emit sl-hide - Emitted when the color picker closes. Calling `event.preventDefault()` will prevent it from being closed.
- * @emit sl-after - Emitted after the color picker closes and all transitions are complete.
  */
-export default class SlColorPicker extends Shoemaker {
-  static tag = 'sl-color-picker';
-  static props = [
-    'inputValue',
-    'hue',
-    'saturation',
-    'lightness',
-    'alpha',
-    'showCopyFeedback',
-    'value',
-    'format',
-    'inline',
-    'size',
-    'noFormatToggle',
-    'name',
-    'disabled',
-    'invalid',
-    'hoist',
-    'opacity',
-    'uppercase',
-    'swatches'
-  ];
-  static reflect = ['disabled', 'invalid'];
-  static styles = styles;
+@tag('sl-color-picker')
+export class SlColorPicker extends LitElement {
+  static styles = unsafeCSS(styles);
 
-  private alpha = 100;
+  @query('[part="input"]') input: SlInput;
+  @query('[part="preview"]') previewButton: HTMLButtonElement;
+  @query('.color-dropdown') dropdown: SlDropdown;
+
   private bypassValueParse = false;
-  private dropdown: SlDropdown;
-  private hue = 0;
-  private input: SlInput;
-  private inputValue = '';
   private lastValueEmitted: string;
-  private lightness = 100;
-  private previewButton: HTMLButtonElement;
-  private saturation = 100;
-  private showCopyFeedback = false;
+
+  @internalProperty() private inputValue = '';
+  @internalProperty() private hue = 0;
+  @internalProperty() private saturation = 100;
+  @internalProperty() private lightness = 100;
+  @internalProperty() private alpha = 100;
+  @internalProperty() private showCopyFeedback = false;
 
   /** The current color. */
-  value = '#ffffff';
+  @property() value = '#ffffff';
 
   /**
    * The format to use for the display value. If opacity is enabled, these will translate to HEXA, RGBA, and HSLA
    * respectively. The color picker will always accept user input in any format (including CSS color names) and convert
    * it to the desired format.
    */
-  format: 'hex' | 'rgb' | 'hsl' = 'hex';
+  @property() format: 'hex' | 'rgb' | 'hsl' = 'hex';
 
   /** Renders the color picker inline rather than inside a dropdown. */
-  inline = false;
+  @property({ type: Boolean, reflect: true }) inline = false;
 
   /** Determines the size of the color picker's trigger. This has no effect on inline color pickers. */
-  size: 'small' | 'medium' | 'large' = 'medium';
+  @property() size: 'small' | 'medium' | 'large' = 'medium';
 
   /** Removes the format toggle. */
-  noFormatToggle = false;
+  @property({ attribute: 'no-format-toggle', type: Boolean }) noFormatToggle = false;
 
   /** The input's name attribute. */
-  name = '';
+  @property() name = '';
 
   /** Disables the color picker. */
-  disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /**
    * This will be true when the control is in an invalid state. Validity is determined by the `setCustomValidity()`
    * method using the browser's constraint validation API.
    */
-  invalid = false;
+  @property({ type: Boolean, reflect: true }) invalid = false;
 
   /**
    * Enable this option to prevent the panel from being clipped when the component is placed inside a container with
    * `overflow: auto|scroll`.
    */
-  hoist = false;
+  @property({ type: Boolean }) hoist = false;
 
   /** Whether to show the opacity slider. */
-  opacity = false;
+  @property({ type: Boolean }) opacity = false;
 
   /** By default, the value will be set in lowercase. Set this to true to set it in uppercase instead. */
-  uppercase = false;
+  @property({ type: Boolean }) uppercase = false;
 
   /**
    * An array of predefined color swatches to display. Can include any format the color picker can parse, including
    * HEX(A), RGB(A), HSL(A), and CSS color names.
    */
-  swatches = [
+  @property() swatches = [
     '#d0021b',
     '#f5a623',
     '#f8e71c',
@@ -136,7 +114,24 @@ export default class SlColorPicker extends Shoemaker {
     '#fff'
   ];
 
-  onReady() {
+  /** Emitted when the color picker's value changes. */
+  @event('sl-change') slChange: EventEmitter<void>;
+
+  /** Emitted when the color picker opens. Calling `event.preventDefault()` will prevent it from being opened. */
+  @event('sl-show') slShow: EventEmitter<void>;
+
+  /** Emitted after the color picker opens and all transitions are complete. */
+  @event('sl-after-show') slAfterShow: EventEmitter<void>;
+
+  /** Emitted when the color picker closes. Calling `event.preventDefault()` will prevent it from being closed. */
+  @event('sl-hide') slHide: EventEmitter<void>;
+
+  /** Emitted after the color picker closes and all transitions are complete.   */
+  @event('sl-after-hide') slAfterHide: EventEmitter<void>;
+
+  connectedCallback() {
+    super.connectedCallback();
+
     if (!this.setColor(this.value)) {
       this.setColor(`#ffff`);
     }
@@ -391,22 +386,22 @@ export default class SlColorPicker extends Shoemaker {
 
   handleDropdownShow(event: CustomEvent) {
     event.stopPropagation();
-    this.emit('sl-show');
+    this.slShow.emit();
   }
 
   handleDropdownAfterShow(event: CustomEvent) {
     event.stopPropagation();
-    this.emit('sl-after-show');
+    this.slAfterShow.emit();
   }
 
   handleDropdownHide(event: CustomEvent) {
     event.stopPropagation();
-    this.emit('sl-hide');
+    this.slHide.emit();
   }
 
   handleDropdownAfterHide(event: CustomEvent) {
     event.stopPropagation();
-    this.emit('sl-after-hide');
+    this.slAfterHide.emit();
     this.showCopyFeedback = false;
   }
 
@@ -584,15 +579,15 @@ export default class SlColorPicker extends Shoemaker {
     this.bypassValueParse = false;
   }
 
-  watchFormat() {
+  formatChanged() {
     this.syncValues();
   }
 
-  watchOpacity() {
+  opacityChanged() {
     this.alpha = 100;
   }
 
-  watchValue(newValue: string, oldValue: string) {
+  valueChanged(newValue: string, oldValue: string) {
     if (!this.bypassValueParse) {
       const newColor = this.parseColor(newValue);
 
@@ -608,7 +603,7 @@ export default class SlColorPicker extends Shoemaker {
     }
 
     if (this.value !== this.lastValueEmitted) {
-      this.emit('sl-change');
+      this.slChange.emit();
       this.lastValueEmitted = this.value;
     }
   }
@@ -631,8 +626,8 @@ export default class SlColorPicker extends Shoemaker {
           part="grid"
           class="color-picker__grid"
           style=${styleMap({ backgroundColor: `hsl(${this.hue}deg, 100%, 50%)` })}
-          onmousedown=${this.handleGridDrag.bind(this)}
-          ontouchstart=${this.handleGridDrag.bind(this)}
+          @mousedown=${this.handleGridDrag}
+          @touchstart=${this.handleGridDrag}
         >
           <span
             part="grid-handle"
@@ -648,8 +643,8 @@ export default class SlColorPicker extends Shoemaker {
               this.lightness
             )}%)`}
             tabindex=${this.disabled ? null : '0'}
-            onkeydown=${this.handleGridKeyDown.bind(this)}
-          />
+            @keydown=${this.handleGridKeyDown}
+          ></span>
         </div>
 
         <div class="color-picker__controls">
@@ -657,8 +652,8 @@ export default class SlColorPicker extends Shoemaker {
             <div
               part="slider hue-slider"
               class="color-picker__hue color-picker__slider"
-              onmousedown=${this.handleHueDrag.bind(this)}
-              ontouchstart=${this.handleHueDrag.bind(this)}
+              @mousedown=${this.handleHueDrag}
+              @touchstart=${this.handleHueDrag}
             >
               <span
                 part="slider-handle"
@@ -673,8 +668,8 @@ export default class SlColorPicker extends Shoemaker {
                 aria-valuemax="360"
                 aria-valuenow=${Math.round(this.hue)}
                 tabindex=${this.disabled ? null : 0}
-                onkeydown=${this.handleHueKeyDown.bind(this)}
-              />
+                @keydown=${this.handleHueKeyDown}
+              ></span>
             </div>
 
             ${this.opacity
@@ -682,19 +677,19 @@ export default class SlColorPicker extends Shoemaker {
                   <div
                     part="slider opacity-slider"
                     class="color-picker__alpha color-picker__slider color-picker__transparent-bg"
-                    onmousedown="${this.handleAlphaDrag.bind(this)}"
-                    ontouchstart="${this.handleAlphaDrag.bind(this)}"
+                    @mousedown="${this.handleAlphaDrag}"
+                    @touchstart="${this.handleAlphaDrag}"
                   >
                     <div
                       class="color-picker__alpha-gradient"
                       style=${styleMap({
                         backgroundImage: `linear-gradient(
-                          to right, 
-                          hsl(${this.hue}deg, ${this.saturation}%, ${this.lightness}%, 0%) 0%, 
+                          to right,
+                          hsl(${this.hue}deg, ${this.saturation}%, ${this.lightness}%, 0%) 0%,
                           hsl(${this.hue}deg, ${this.saturation}%, ${this.lightness}%) 100%
                         )`
                       })}
-                    />
+                    ></div>
                     <span
                       part="slider-handle"
                       class="color-picker__slider-handle"
@@ -708,22 +703,21 @@ export default class SlColorPicker extends Shoemaker {
                       aria-valuemax="100"
                       aria-valuenow=${Math.round(this.alpha)}
                       tabindex=${this.disabled ? null : '0'}
-                      onkeydown=${this.handleAlphaKeyDown.bind(this)}
-                    />
+                      @keydown=${this.handleAlphaKeyDown}
+                    ></span>
                   </div>
                 `
               : ''}
           </div>
 
           <button
-            ref=${(el: HTMLButtonElement) => (this.previewButton = el)}
             type="button"
             part="preview"
             class="color-picker__preview color-picker__transparent-bg"
             style=${styleMap({
               '--preview-color': `hsla(${this.hue}deg, ${this.saturation}%, ${this.lightness}%, ${this.alpha / 100})`
             })}
-            onclick=${this.handleCopy.bind(this)}
+            @click=${this.handleCopy}
           >
             <sl-icon
               name="check"
@@ -732,13 +726,12 @@ export default class SlColorPicker extends Shoemaker {
                 'color-picker__copy-feedback--visible': this.showCopyFeedback,
                 'color-picker__copy-feedback--dark': this.lightness > 50
               })}
-            />
+            ></sl-icon>
           </button>
         </div>
 
         <div class="color-picker__user-input">
           <sl-input
-            ref=${(el: SlInput) => (this.input = el)}
             part="input"
             size="small"
             type="text"
@@ -748,14 +741,14 @@ export default class SlColorPicker extends Shoemaker {
             autocapitalize="off"
             spellcheck="false"
             .value=${this.inputValue}
-            disabled=${this.disabled ? true : null}
-            onkeydown=${this.handleInputKeyDown.bind(this)}
-            onsl-change=${this.handleInputChange.bind(this)}
-          />
+            ?disabled=${this.disabled}
+            @keydown=${this.handleInputKeyDown}
+            @sl-change=${this.handleInputChange}
+          ></sl-input>
 
           ${!this.noFormatToggle
             ? html`
-                <sl-button exportparts="base:format-button" size="small" onclick=${this.handleFormatToggle.bind(this)}>
+                <sl-button exportparts="base:format-button" size="small" @click=${this.handleFormatToggle}>
                   ${this.setLetterCase(this.format)}
                 </sl-button>
               `
@@ -773,11 +766,11 @@ export default class SlColorPicker extends Shoemaker {
                       tabindex=${this.disabled ? null : '0'}
                       role="button"
                       aria-label=${swatch}
-                      onclick=${() => !this.disabled && this.setColor(swatch)}
-                      onkeydown=${(event: KeyboardEvent) =>
+                      @click=${() => !this.disabled && this.setColor(swatch)}
+                      @keydown=${(event: KeyboardEvent) =>
                         !this.disabled && event.key === 'Enter' && this.setColor(swatch)}
                     >
-                      <div class="color-picker__swatch-color" style=${styleMap({ backgroundColor: swatch })} />
+                      <div class="color-picker__swatch-color" style=${styleMap({ backgroundColor: swatch })}></div>
                     </div>
                   `;
                 })}
@@ -795,15 +788,14 @@ export default class SlColorPicker extends Shoemaker {
     // Render as a dropdown
     return html`
       <sl-dropdown
-        ref=${(el: SlDropdown) => (this.dropdown = el)}
         class="color-dropdown"
         aria-disabled=${this.disabled ? 'true' : 'false'}
         .containing-element=${this}
         hoist=${this.hoist}
-        onsl-show=${this.handleDropdownShow.bind(this)}
-        onsl-after-show=${this.handleDropdownAfterShow.bind(this)}
-        onsl-hide=${this.handleDropdownHide.bind(this)}
-        onsl-after-hide=${this.handleDropdownAfterHide.bind(this)}
+        @sl-show=${this.handleDropdownShow}
+        @sl-after-show=${this.handleDropdownAfterShow}
+        @sl-hide=${this.handleDropdownHide}
+        @sl-after-hide=${this.handleDropdownAfterHide}
       >
         <button
           part="trigger"
@@ -820,7 +812,7 @@ export default class SlColorPicker extends Shoemaker {
             color: `hsla(${this.hue}deg, ${this.saturation}%, ${this.lightness}%, ${this.alpha / 100})`
           })}
           type="button"
-        />
+        ></button>
         ${colorPicker}
       </sl-dropdown>
     `;

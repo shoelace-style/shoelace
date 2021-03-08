@@ -6,15 +6,22 @@ Components with the <sl-badge type="warning" pill>Experimental</sl-badge> badge 
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
-## Next
+## 2.0.0-beta.29
 
-- Added `vscode.html-custom-data.json` to the build to support IntelliSense
+**This release migrates component implementations from Shoemaker to LitElement.** Due to feedback from the community, Shoelace will rely on a more heavily tested library for component implementations. This gives you a more solid foundation and reduces my maintenance burden. Thank you for all your comments, concerns, and encouragement! Aside from that, everything else from beta.28 still applies plus the following.
+
+- 🚨 BREAKING: removed the `symbol` prop from `sl-rating` and reverted to `getSymbol` for optimal flexibility
+- Added `vscode.html-custom-data.json` to the build to support IntelliSense (see [the usage section](/getting-started/usage#code-completion) for details)
+- Added a base style to prevent FOUC before components are defined
+- Fixed bug where TypeScript types weren't being generated [#364](https://github.com/shoelace-style/shoelace/pull/364)
+- Improved vertical padding in `sl-tooltip`
 - Moved chunk files into a separate folder
+- Reverted menu item active styles
 - Updated esbuild to 0.8.54
 
 ## 2.0.0-beta.28
 
-**This release includes a major under the hood overhaul of the library and how it's distributed.** Until now, Shoelace was developed with Stencil. This release moves to a lightweight tool called [Shoemaker](https://github.com/shoelace-style/shoemaker), a homegrown utility that provides declarative templating and data binding while reducing the boilerplate required for said features. The base class is open source and less than [200 lines of code](https://github.com/shoelace-style/shoemaker/blob/master/src/shoemaker.ts).
+**This release includes a major under the hood overhaul of the library and how it's distributed.** Until now, Shoelace was developed with Stencil. This release moves to a lightweight tool called Shoemaker, a homegrown utility that provides declarative templating and data binding while reducing the boilerplate required for said features.
 
 This change in tooling addresses a number of longstanding bugs and limitations. It also gives us more control over the library and build process while streamlining development and maintenance. Instead of two different distributions, Shoelace now offers a single, standards-compliant collection of ES modules. This may affect how you install and use the library, so please refer to the [installation page](/getting-started/installation) for details.
 

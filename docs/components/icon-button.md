@@ -8,8 +8,6 @@ For a full list of icons that come bundled with Shoelace, refer to the [icon com
 
 ```html preview
 <sl-icon-button name="gear" label="Settings"></sl-icon-button>
-<sl-icon-button name="sliders" label="Options"></sl-icon-button>
-<sl-icon-button name="x" label="Close"></sl-icon-button>
 ```
 
 ## Examples

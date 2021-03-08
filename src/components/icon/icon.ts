@@ -1,4 +1,6 @@
-import { html, Hole, Shoemaker } from '@shoelace-style/shoemaker';
+import { LitElement, html, internalProperty, property, unsafeCSS } from 'lit-element';
+import { unsafeSVG } from 'lit-html/directives/unsafe-svg';
+import { event, EventEmitter, tag, watch } from '../../internal/decorators';
 import styles from 'sass:./icon.scss';
 import { getIconLibrary, watchIcon, unwatchIcon } from './library';
 import { requestIcon } from './request';
@@ -10,38 +12,42 @@ const parser = new DOMParser();
  * @status stable
  *
  * @part base - The component's base wrapper.
- *
- * @emit sl-load - Emitted when the icon has loaded.
- * @emit sl-error - Emitted when the icon failed to load. Event details may include: `{ status: number }`
  */
-export default class SlIcon extends Shoemaker {
-  static tag = 'sl-icon';
-  static props = ['svg', 'name', 'src', 'label', 'library'];
-  static styles = styles;
+@tag('sl-icon')
+export class SlIcon extends LitElement {
+  static styles = unsafeCSS(styles);
 
-  private svg: Hole | string;
+  @internalProperty() private svg = '';
 
   /** The name of the icon to draw. */
-  name: string;
+  @property() name: string;
 
   /** An external URL of an SVG file. */
-  src: string;
+  @property() src: string;
 
   /** An alternative description to use for accessibility. If omitted, the name or src will be used to generate it. */
-  label: string;
+  @property() label: string;
 
   /** The name of a registered custom icon library. */
-  library = 'default';
+  @property() library = 'default';
 
-  onConnect() {
+  /** Emitted when the icon has loaded. */
+  @event('sl-load') slLoad: EventEmitter<void>;
+
+  /** Emitted when the icon failed to load.  */
+  @event('sl-error') slError: EventEmitter<{ status: number }>;
+
+  connectedCallback() {
+    super.connectedCallback();
     watchIcon(this);
   }
 
-  onReady() {
+  firstUpdated() {
     this.setIcon();
   }
 
-  onDisconnect() {
+  disconnectedCallback() {
+    super.disconnectedCallback();
     unwatchIcon(this);
   }
 
@@ -64,6 +70,9 @@ export default class SlIcon extends Shoemaker {
     this.setIcon();
   }
 
+  @watch('name')
+  @watch('src')
+  @watch('library')
   async setIcon() {
     const library = getIconLibrary(this.library);
     let url = this.src;
@@ -84,18 +93,18 @@ export default class SlIcon extends Shoemaker {
               library.mutator(svgEl);
             }
 
-            this.svg = html([svgEl.outerHTML] as any);
-            this.emit('sl-load');
+            this.svg = svgEl.outerHTML;
+            this.slLoad.emit();
           } else {
             this.svg = '';
-            this.emit('sl-error', { detail: { status: file.status } });
+            this.slError.emit({ detail: { status: file.status } });
           }
         } else {
           this.svg = '';
-          this.emit('sl-error', { detail: { status: file.status } });
+          this.slError.emit({ detail: { status: file.status } });
         }
       } catch {
-        this.emit('sl-error');
+        this.slError.emit({ detail: { status: -1 } });
       }
     } else if (this.svg) {
       // If we can't resolve a URL and an icon was previously set, remove it
@@ -103,23 +112,11 @@ export default class SlIcon extends Shoemaker {
     }
   }
 
-  watchName() {
-    this.setIcon();
-  }
-
-  watchSrc() {
-    this.setIcon();
-  }
-
-  watchLibrary() {
-    this.setIcon();
-  }
-
   handleChange() {
     this.setIcon();
   }
 
   render() {
-    return html` <div part="base" class="icon" role="img" aria-label=${this.getLabel()}>${this.svg}</div>`;
+    return html` <div part="base" class="icon" role="img" aria-label=${this.getLabel()}>${unsafeSVG(this.svg)}</div>`;
   }
 }

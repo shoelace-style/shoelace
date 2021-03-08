@@ -1,4 +1,5 @@
-import { html, Shoemaker } from '@shoelace-style/shoemaker';
+import { LitElement, html, property, query, unsafeCSS } from 'lit-element';
+import { tag, watch } from '../../internal/decorators';
 import styles from 'sass:./progress-ring.scss';
 
 /**
@@ -10,28 +11,30 @@ import styles from 'sass:./progress-ring.scss';
  * @part base - The component's base wrapper.
  * @part label - The progress ring label.
  */
-export default class SlProgressRing extends Shoemaker {
-  static tag = 'sl-progress-ring';
-  static props = ['size', 'strokeWidth', 'percentage'];
-  static styles = styles;
+@tag('sl-progress-ring')
+export class SlProgressRing extends LitElement {
+  static styles = unsafeCSS(styles);
 
-  private indicator: SVGCircleElement;
+  @query('.progress-ring__indicator') indicator: SVGCircleElement;
 
   /** The size of the progress ring in pixels. */
-  size = 128;
+  @property({ type: Number }) size = 128;
 
   /** The stroke width of the progress ring in pixels. */
-  strokeWidth = 4;
+  @property({ attribute: 'stroke-width', type: Number }) strokeWidth = 4;
 
   /** The current progress percentage, 0 - 100. */
-  percentage: number;
+  @property({ type: Number, reflect: true }) percentage: number;
 
-  watchPercentage() {
+  firstUpdated() {
     this.updateProgress();
   }
 
-  onReady() {
-    this.updateProgress();
+  @watch('percentage')
+  handlePercentageChange() {
+    if (this.indicator) {
+      this.updateProgress();
+    }
   }
 
   updateProgress() {
@@ -55,10 +58,9 @@ export default class SlProgressRing extends Shoemaker {
             r=${this.size / 2 - this.strokeWidth * 2}
             cx=${this.size / 2}
             cy=${this.size / 2}
-          />
+          ></circle>
 
           <circle
-            ref=${(el: SVGCircleElement) => (this.indicator = el)}
             class="progress-ring__indicator"
             stroke-width="${this.strokeWidth}"
             stroke-linecap="round"
@@ -66,11 +68,11 @@ export default class SlProgressRing extends Shoemaker {
             r=${this.size / 2 - this.strokeWidth * 2}
             cx=${this.size / 2}
             cy=${this.size / 2}
-          />
+          ></circle>
         </svg>
 
         <span part="label" class="progress-ring__label">
-          <slot />
+          <slot></slot>
         </span>
       </div>
     `;

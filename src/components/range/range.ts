@@ -1,4 +1,7 @@
-import { classMap, html, Shoemaker } from '@shoelace-style/shoemaker';
+import { LitElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
+import { classMap } from 'lit-html/directives/class-map';
+import { ifDefined } from 'lit-html/directives/if-defined';
+import { event, EventEmitter, tag, watch } from '../../internal/decorators';
 import styles from 'sass:./range.scss';
 import { renderFormControl } from '../../internal/form-control';
 import { hasSlot } from '../../internal/slot';
@@ -15,81 +18,71 @@ let id = 0;
  * @part base - The component's base wrapper.
  * @part input - The native range input.
  * @part tooltip - The range tooltip.
- *
- * @emit sl-change - Emitted when the control's value changes.
- * @emit sl-blur - Emitted when the control loses focus.
- * @emit sl-focus - Emitted when the control gains focus.
  */
-export default class SlRange extends Shoemaker {
-  static tag = 'sl-range';
-  static props = [
-    'hasFocus',
-    'hasHelpTextSlot',
-    'hasLabelSlot',
-    'hasTooltip',
-    'name',
-    'value',
-    'label',
-    'helpText',
-    'disabled',
-    'invalid',
-    'min',
-    'max',
-    'step',
-    'tooltip',
-    'tooltipFormatter'
-  ];
-  static reflect = ['disabled', 'invalid'];
-  static styles = styles;
+@tag('sl-range')
+export class SlRange extends LitElement {
+  static styles = unsafeCSS(styles);
 
-  private hasFocus = false;
-  private hasHelpTextSlot = false;
-  private hasLabelSlot = false;
-  private hasTooltip = false;
+  @query('.range__control') input: HTMLInputElement;
+  @query('.range__tooltip') output: HTMLOutputElement;
+
   private helpTextId = `input-help-text-${id}`;
-  private input: HTMLInputElement;
   private inputId = `input-${++id}`;
   private labelId = `input-label-${id}`;
-  private output: HTMLElement;
   private resizeObserver: ResizeObserver;
 
+  @internalProperty() private hasFocus = false;
+  @internalProperty() private hasHelpTextSlot = false;
+  @internalProperty() private hasLabelSlot = false;
+  @internalProperty() private hasTooltip = false;
+
   /** The input's name attribute. */
-  name = '';
+  @property() name = '';
 
   /** The input's value attribute. */
-  value: number;
+  @property({ type: Number }) value: number;
 
   /** The range's label. Alternatively, you can use the label slot. */
-  label = '';
+  @property() label = '';
 
   /** The range's help text. Alternatively, you can use the help-text slot. */
-  helpText = '';
+  @property({ attribute: 'help-text' }) helpText = '';
 
   /** Disables the input. */
-  disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /**
    * This will be true when the control is in an invalid state. Validity in range inputs is determined by the message
    * provided by the `setCustomValidity` method.
    */
-  invalid = false;
+  @property({ type: Boolean, reflect: true }) invalid = false;
 
   /** The input's min attribute. */
-  min = 0;
+  @property({ type: Number }) min = 0;
 
   /** The input's max attribute. */
-  max = 100;
+  @property({ type: Number }) max = 100;
 
   /** The input's step attribute. */
-  step = 1;
+  @property({ type: Number }) step = 1;
 
   /** The preferred placedment of the tooltip. */
-  tooltip: 'top' | 'bottom' | 'none' = 'top';
+  @property() tooltip: 'top' | 'bottom' | 'none' = 'top';
 
   /** A function used to format the tooltip's value. */
-  tooltipFormatter = (value: number) => value.toString();
+  @property() tooltipFormatter = (value: number) => value.toString();
 
-  onConnect() {
+  /** Emitted when the control's value changes. */
+  @event('sl-change') slChange: EventEmitter<void>;
+
+  /** Emitted when the control loses focus. */
+  @event('sl-blur') slBlur: EventEmitter<void>;
+
+  /** Emitted when the control gains focus. */
+  @event('sl-focus') slFocus: EventEmitter<void>;
+
+  connectedCallback() {
+    super.connectedCallback();
     this.handleSlotChange = this.handleSlotChange.bind(this);
     this.shadowRoot!.addEventListener('slotchange', this.handleSlotChange);
 
@@ -100,12 +93,13 @@ export default class SlRange extends Shoemaker {
     this.handleSlotChange();
   }
 
-  onReady() {
+  firstUpdated() {
     this.syncTooltip();
     this.resizeObserver = new ResizeObserver(() => this.syncTooltip());
   }
 
-  onDisconnect() {
+  disconnectedCallback() {
+    super.disconnectedCallback();
     this.shadowRoot!.removeEventListener('slotchange', this.handleSlotChange);
   }
 
@@ -127,7 +121,7 @@ export default class SlRange extends Shoemaker {
 
   handleInput() {
     this.value = Number(this.input.value);
-    this.emit('sl-change');
+    this.slChange.emit();
 
     requestAnimationFrame(() => this.syncTooltip());
   }
@@ -135,17 +129,19 @@ export default class SlRange extends Shoemaker {
   handleBlur() {
     this.hasFocus = false;
     this.hasTooltip = false;
-    this.emit('sl-blur');
+    this.slBlur.emit();
     this.resizeObserver.unobserve(this.input);
   }
 
   handleFocus() {
     this.hasFocus = true;
     this.hasTooltip = true;
-    this.emit('sl-focus');
+    this.slFocus.emit();
     this.resizeObserver.observe(this.input);
   }
 
+  @watch('label')
+  @watch('helpText')
   handleSlotChange() {
     this.hasHelpTextSlot = hasSlot(this, 'help-text');
     this.hasLabelSlot = hasSlot(this, 'label');
@@ -165,14 +161,6 @@ export default class SlRange extends Shoemaker {
       this.output.style.transform = `translateX(${x})`;
       this.output.style.marginLeft = `-${tooltipWidth / 2}px`;
     }
-  }
-
-  watchLabel() {
-    this.handleSlotChange();
-  }
-
-  watchHelpText() {
-    this.handleSlotChange();
   }
 
   render() {
@@ -198,29 +186,24 @@ export default class SlRange extends Shoemaker {
             'range--tooltip-top': this.tooltip === 'top',
             'range--tooltip-bottom': this.tooltip === 'bottom'
           })}
-          ontouchstart=${this.handleTouchStart.bind(this)}
+          @touchstart=${this.handleTouchStart.bind(this)}
         >
           <input
             part="input"
-            ref=${(el: HTMLInputElement) => (this.input = el)}
             type="range"
             class="range__control"
             name=${this.name}
-            disabled=${this.disabled ? true : null}
-            min=${this.min}
-            max=${this.max}
-            step=${this.step}
             .value=${this.value}
-            oninput=${this.handleInput.bind(this)}
-            onfocus=${this.handleFocus.bind(this)}
-            onblur=${this.handleBlur.bind(this)}
+            ?disabled=${this.disabled}
+            min=${ifDefined(this.min)}
+            max=${ifDefined(this.max)}
+            step=${ifDefined(this.step)}
+            @input=${this.handleInput.bind(this)}
+            @focus=${this.handleFocus.bind(this)}
+            @blur=${this.handleBlur.bind(this)}
           />
           ${this.tooltip !== 'none'
-            ? html`
-                <output part="tooltip" ref=${(el: HTMLOutputElement) => (this.output = el)} class="range__tooltip">
-                  ${this.tooltipFormatter(this.value)}
-                </output>
-              `
+            ? html` <output part="tooltip" class="range__tooltip"> ${this.tooltipFormatter(this.value)} </output> `
             : ''}
         </div>
       `

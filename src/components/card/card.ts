@@ -1,4 +1,6 @@
-import { classMap, html, Shoemaker } from '@shoelace-style/shoemaker';
+import { LitElement, html, internalProperty, unsafeCSS } from 'lit-element';
+import { classMap } from 'lit-html/directives/class-map';
+import { tag } from '../../internal/decorators';
 import styles from 'sass:./card.scss';
 import { hasSlot } from '../../internal/slot';
 
@@ -17,16 +19,16 @@ import { hasSlot } from '../../internal/slot';
  * @part body - The card's body.
  * @part footer - The card's footer, if present.
  */
-export default class SlCard extends Shoemaker {
-  static tag = 'sl-card';
-  static props = ['hasFooter', 'hasImage', 'hasHeader'];
-  static styles = styles;
+@tag('sl-card')
+export class SlCard extends LitElement {
+  static styles = unsafeCSS(styles);
 
-  private hasFooter = false;
-  private hasImage = false;
-  private hasHeader = false;
+  @internalProperty() private hasFooter = false;
+  @internalProperty() private hasImage = false;
+  @internalProperty() private hasHeader = false;
 
-  onConnect() {
+  connectedCallback() {
+    super.connectedCallback();
     this.handleSlotChange();
   }
 
@@ -48,19 +50,19 @@ export default class SlCard extends Shoemaker {
         })}
       >
         <div part="image" class="card__image">
-          <slot name="image" onslotchange=${this.handleSlotChange.bind(this)} />
+          <slot name="image" onslotchange=${this.handleSlotChange}></slot>
         </div>
 
         <div part="header" class="card__header">
-          <slot name="header" onslotchange=${this.handleSlotChange.bind(this)} />
+          <slot name="header" onslotchange=${this.handleSlotChange}></slot>
         </div>
 
         <div part="body" class="card__body">
-          <slot />
+          <slot></slot>
         </div>
 
         <div part="footer" class="card__footer">
-          <slot name="footer" onslotchange=${this.handleSlotChange.bind(this)} />
+          <slot name="footer" onslotchange=${this.handleSlotChange}></slot>
         </div>
       </div>
     `;

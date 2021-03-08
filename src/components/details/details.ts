@@ -1,4 +1,6 @@
-import { classMap, html, Shoemaker } from '@shoelace-style/shoemaker';
+import { LitElement, html, property, query, unsafeCSS } from 'lit-element';
+import { classMap } from 'lit-html/directives/class-map';
+import { event, EventEmitter, tag, watch } from '../../internal/decorators';
 import styles from 'sass:./details.scss';
 import { focusVisible } from '../../internal/focus-visible';
 
@@ -18,34 +20,40 @@ let id = 0;
  * @part summary - The details summary.
  * @part summary-icon - The expand/collapse summary icon.
  * @part content - The details content.
- *
- * @emit sl-show - Emitted when the details opens. Calling `event.preventDefault()` will prevent it from being opened.
- * @emit after-show - Emitted after the details opens and all transitions are complete.
- * @emit sl-hide - Emitted when the details closes. Calling `event.preventDefault()` will prevent it from being closed.
- * @emit after-hide - Emitted after the details closes and all transitions are complete.
  */
-export default class SlDetails extends Shoemaker {
-  static tag = 'sl-details';
-  static props = ['open', 'summary', 'disabled'];
-  static reflect = ['open', 'disabled'];
-  static styles = styles;
+@tag('sl-details')
+export class SlDetails extends LitElement {
+  static styles = unsafeCSS(styles);
 
-  private body: HTMLElement;
+  @query('.details') details: HTMLElement;
+  @query('.details__header') header: HTMLElement;
+  @query('.details__body') body: HTMLElement;
+
   private componentId = `details-${++id}`;
-  private details: HTMLElement;
-  private header: HTMLElement;
   private isVisible = false;
 
   /** Indicates whether or not the details is open. You can use this in lieu of the show/hide methods. */
-  open = false;
+  @property({ type: Boolean, reflect: true }) open = false;
 
   /** The summary to show in the details header. If you need to display HTML, use the `summary` slot instead. */
-  summary = '';
+  @property() summary: string;
 
   /** Disables the details so it can't be toggled. */
-  disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
-  onReady() {
+  /** Emitted when the details opens. Calling `event.preventDefault()` will prevent it from being opened. */
+  @event('sl-show') slShow: EventEmitter<void>;
+
+  /** Emitted after the details opens and all transitions are complete. */
+  @event('after-show') slAfterShow: EventEmitter<void>;
+
+  /** Emitted when the details closes. Calling `event.preventDefault()` will prevent it from being closed. */
+  @event('sl-hide') slHide: EventEmitter<void>;
+
+  /** Emitted after the details closes and all transitions are complete. */
+  @event('after-hide') slAfterHide: EventEmitter<void>;
+
+  firstUpdated() {
     focusVisible.observe(this.details);
 
     this.body.hidden = !this.open;
@@ -56,7 +64,8 @@ export default class SlDetails extends Shoemaker {
     }
   }
 
-  onDisconnect() {
+  disconnectedCallback() {
+    super.disconnectedCallback();
     focusVisible.unobserve(this.details);
   }
 
@@ -67,7 +76,7 @@ export default class SlDetails extends Shoemaker {
       return;
     }
 
-    const slShow = this.emit('sl-show');
+    const slShow = this.slShow.emit();
     if (slShow.defaultPrevented) {
       this.open = false;
       return;
@@ -96,7 +105,7 @@ export default class SlDetails extends Shoemaker {
       return;
     }
 
-    const slHide = this.emit('sl-hide');
+    const slHide = this.slHide.emit();
     if (slHide.defaultPrevented) {
       this.open = true;
       return;
@@ -122,7 +131,7 @@ export default class SlDetails extends Shoemaker {
     if (event.propertyName === 'height' && target.classList.contains('details__body')) {
       this.body.style.overflow = this.open ? 'visible' : 'hidden';
       this.body.style.height = this.open ? 'auto' : '0';
-      this.open ? this.emit('sl-after-show') : this.emit('sl-after-hide');
+      this.open ? this.slAfterShow.emit() : this.slAfterHide.emit();
       this.body.hidden = !this.open;
     }
   }
@@ -151,14 +160,14 @@ export default class SlDetails extends Shoemaker {
     }
   }
 
-  watchOpen() {
+  @watch('open')
+  handleOpenChange() {
     this.open ? this.show() : this.hide();
   }
 
   render() {
     return html`
       <div
-        ref=${(el: HTMLElement) => (this.details = el)}
         part="base"
         class=${classMap({
           details: true,
@@ -167,7 +176,6 @@ export default class SlDetails extends Shoemaker {
         })}
       >
         <header
-          ref=${(el: HTMLElement) => (this.header = el)}
           part="header"
           id=${`${this.componentId}-header`}
           class="details__header"
@@ -176,23 +184,19 @@ export default class SlDetails extends Shoemaker {
           aria-controls=${`${this.componentId}-content`}
           aria-disabled=${this.disabled ? 'true' : 'false'}
           tabindex=${this.disabled ? '-1' : '0'}
-          onclick=${this.handleSummaryClick.bind(this)}
-          onkeydown=${this.handleSummaryKeyDown.bind(this)}
+          @click=${this.handleSummaryClick}
+          @keydown=${this.handleSummaryKeyDown}
         >
           <div part="summary" class="details__summary">
             <slot name="summary">${this.summary}</slot>
           </div>
 
           <span part="summary-icon" class="details__summary-icon">
-            <sl-icon name="chevron-right" />
+            <sl-icon name="chevron-right"></sl-icon>
           </span>
         </header>
 
-        <div
-          ref=${(el: HTMLElement) => (this.body = el)}
-          class="details__body"
-          ontransitionend=${this.handleBodyTransitionEnd.bind(this)}
-        >
+        <div class="details__body" @transitionend=${this.handleBodyTransitionEnd}>
           <div
             part="content"
             id=${`${this.componentId}-content`}
@@ -200,7 +204,7 @@ export default class SlDetails extends Shoemaker {
             role="region"
             aria-labelledby=${`${this.componentId}-header`}
           >
-            <slot />
+            <slot></slot>
           </div>
         </div>
       </div>

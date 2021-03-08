@@ -29,7 +29,7 @@
                       ? `
                         <br>
                         <small>
-                          <sl-tooltip content="This is the attribute name">
+                          <sl-tooltip content="Use this attribute in your HTML">
                             <code class="attribute-tooltip">${escapeHtml(attr)}</code>
                           </sl-tooltip>
                         </small>`
@@ -56,6 +56,7 @@
         <tr>
           <th>Event</th>
           <th>Description</th>
+          <th>Details</th>
         </tr>
       </thead>
       <tbody>
@@ -65,6 +66,7 @@
         <tr>
           <td><code>${escapeHtml(event.name)}</code></td>
           <td>${escapeHtml(event.description)}</td>
+          <td><code style="white-space: normal;">${escapeHtml(event.details)}</code></td>
         </tr>
         `
           )
@@ -379,7 +381,7 @@
           result += `
             ## Dependencies
 
-            This component has the following dependencies so, if you're [cherry picking](/getting-started/installation#cherry-picking), 
+            This component has the following dependencies so, if you're [cherry picking](/getting-started/installation#cherry-picking),
             be sure to import these components in addition to <code>&lt;${tag}&gt;</code>.
 
             ${createDependenciesList(component.tag, metadata.components)}

@@ -113,7 +113,7 @@ Designing, developing, and supporting this library requires a lot of time, effor
 
 Special thanks to the following projects and individuals that helped make Shoelace possible.
 
-- Components are built with [Shoemaker](https://github.com/shoelace-style/shoemaker)
+- Components are built with [LitElement](https://lit-element.polymer-project.org/)
 - Documentation is powered by [Docsify](https://docsify.js.org/)
 - CDN services are provided by [jsDelivr](https://www.jsdelivr.com/)
 - The default theme is based on color palettes from [Tailwind](https://tailwindcss.com/)

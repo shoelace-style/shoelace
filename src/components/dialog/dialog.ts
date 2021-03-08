@@ -1,4 +1,6 @@
-import { classMap, html, Shoemaker } from '@shoelace-style/shoemaker';
+import { LitElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
+import { classMap } from 'lit-html/directives/class-map';
+import { event, EventEmitter, tag, watch } from '../../internal/decorators';
 import styles from 'sass:./dialog.scss';
 import { lockBodyScrolling, unlockBodyScrolling } from '../../internal/scroll';
 import { hasSlot } from '../../internal/slot';
@@ -27,47 +29,61 @@ let id = 0;
  * @part close-button - The close button.
  * @part body - The dialog body.
  * @part footer - The dialog footer.
- *
- * @emit sl-show - Emitted when the dialog opens. Calling `event.preventDefault()` will prevent it from being opened.
- * @emit sl-after-show - Emitted after the dialog opens and all transitions are complete.
- * @emit sl-hide - Emitted when the dialog closes. Calling `event.preventDefault()` will prevent it from being closed.
- * @emit sl-after-hide - Emitted after the dialog closes and all transitions are complete.
- * @emit sl-initial-focus - Emitted when the dialog opens and the panel gains focus. Calling `event.preventDefault()`
- *  will prevent focus and allow you to set it on a different element in the dialog, such as an input or button.
- * @emit sl-overlay-dismiss - Emitted when the overlay is clicked. Calling `event.preventDefault()` will prevent the
- *  dialog from closing.
  */
-export default class SlDialog extends Shoemaker {
-  static tag = 'sl-dialog';
-  static props = ['hasFooter', 'isVisible', 'open', 'label', 'noHeader'];
-  static reflect = ['open'];
-  static styles = styles;
+@tag('sl-dialog')
+export class SlDialog extends LitElement {
+  static styles = unsafeCSS(styles);
+
+  @query('.dialog') dialog: HTMLElement;
+  @query('.dialog__panel') panel: HTMLElement;
 
   private componentId = `dialog-${++id}`;
-  private dialog: HTMLElement;
-  private hasFooter = false;
-  private isVisible = false;
   private modal: Modal;
-  private panel: HTMLElement;
   private willShow = false;
   private willHide = false;
 
+  @internalProperty() private hasFooter = false;
+  @internalProperty() private isVisible = false;
+
   /** Indicates whether or not the dialog is open. You can use this in lieu of the show/hide methods. */
-  open = false;
+  @property({ type: Boolean, reflect: true }) open = false;
 
   /**
    * The dialog's label as displayed in the header. You should always include a relevant label even when using
    * `no-header`, as it is required for proper accessibility.
    */
-  label = '';
+  @property({ reflect: true }) label = '';
 
   /**
    * Disables the header. This will also remove the default close button, so please ensure you provide an easy,
    * accessible way for users to dismiss the dialog.
    */
-  noHeader = false;
+  @property({ attribute: 'no-header', type: Boolean, reflect: true }) noHeader = false;
 
-  onConnect() {
+  /** Emitted when the dialog opens. Calling `event.preventDefault()` will prevent it from being opened. */
+  @event('sl-show') slShow: EventEmitter<void>;
+
+  /** Emitted after the dialog opens and all transitions are complete. */
+  @event('sl-after-show') slAfterShow: EventEmitter<void>;
+
+  /** Emitted when the dialog closes. Calling `event.preventDefault()` will prevent it from being closed. */
+  @event('sl-hide') slHide: EventEmitter<void>;
+
+  /** Emitted after the dialog closes and all transitions are complete. */
+  @event('sl-after-hide') slAfterHide: EventEmitter<void>;
+
+  /**
+   * Emitted when the dialog opens and the panel gains focus. Calling `event.preventDefault()` will prevent focus and
+   * allow you to set it on a different element in the dialog, such as an input or button.
+   */
+  @event('sl-initial-focus') slInitialFocus: EventEmitter<void>;
+
+  /** Emitted when the overlay is clicked. Calling `event.preventDefault()` will prevent the dialog from closing. */
+  @event('sl-overlay-dismiss') slOverlayDismiss: EventEmitter<void>;
+
+  connectedCallback() {
+    super.connectedCallback();
+
     this.modal = new Modal(this, {
       onfocusOut: () => this.panel.focus()
     });
@@ -80,7 +96,8 @@ export default class SlDialog extends Shoemaker {
     }
   }
 
-  onDisconnect() {
+  disconnectedCallback() {
+    super.disconnectedCallback();
     unlockBodyScrolling(this);
   }
 
@@ -90,7 +107,7 @@ export default class SlDialog extends Shoemaker {
       return;
     }
 
-    const slShow = this.emit('sl-show');
+    const slShow = this.slShow.emit();
     if (slShow.defaultPrevented) {
       this.open = false;
       return;
@@ -107,15 +124,15 @@ export default class SlDialog extends Shoemaker {
       if (hasPreventScroll) {
         // Wait for the next frame before setting initial focus so the dialog is technically visible
         requestAnimationFrame(() => {
-          const slInitialFocus = this.emit('sl-initial-focus');
+          const slInitialFocus = this.slInitialFocus.emit();
           if (!slInitialFocus.defaultPrevented) {
             this.panel.focus({ preventScroll: true });
           }
         });
       } else {
         // Once Safari supports { preventScroll: true } we can remove this nasty little hack, but until then we need to
-        // wait for the transition to complete before setting focus, otherwise the panel may render in a buggy way its
-        // out of view initially.
+        // wait for the transition to complete before setting focus, otherwise the panel may render in a buggy way
+        // that's out of view initially.
         //
         // Fiddle: https://jsfiddle.net/g6buoafq/1/
         // Safari: https://bugs.webkit.org/show_bug.cgi?id=178583
@@ -123,7 +140,7 @@ export default class SlDialog extends Shoemaker {
         this.dialog.addEventListener(
           'transitionend',
           () => {
-            const slInitialFocus = this.emit('sl-initial-focus');
+            const slInitialFocus = this.slInitialFocus.emit();
             if (!slInitialFocus.defaultPrevented) {
               this.panel.focus();
             }
@@ -140,7 +157,7 @@ export default class SlDialog extends Shoemaker {
       return;
     }
 
-    const slHide = this.emit('sl-hide');
+    const slHide = this.slHide.emit();
     if (slHide.defaultPrevented) {
       this.open = true;
       return;
@@ -163,9 +180,13 @@ export default class SlDialog extends Shoemaker {
     }
   }
 
-  handleOverlayClick() {
-    const slOverlayDismiss = this.emit('sl-overlay-dismiss');
+  @watch('open')
+  handleOpenChange() {
+    this.open ? this.show() : this.hide();
+  }
 
+  handleOverlayClick() {
+    const slOverlayDismiss = this.slOverlayDismiss.emit();
     if (!slOverlayDismiss.defaultPrevented) {
       this.hide();
     }
@@ -183,18 +204,13 @@ export default class SlDialog extends Shoemaker {
       this.isVisible = this.open;
       this.willShow = false;
       this.willHide = false;
-      this.open ? this.emit('sl-after-show') : this.emit('sl-after-hide');
+      this.open ? this.slAfterShow.emit() : this.slAfterHide.emit();
     }
-  }
-
-  watchOpen() {
-    this.open ? this.show() : this.hide();
   }
 
   render() {
     return html`
       <div
-        ref=${(el: HTMLElement) => (this.dialog = el)}
         part="base"
         class=${classMap({
           dialog: true,
@@ -202,13 +218,12 @@ export default class SlDialog extends Shoemaker {
           'dialog--visible': this.isVisible,
           'dialog--has-footer': this.hasFooter
         })}
-        onkeydown=${this.handleKeyDown.bind(this)}
-        ontransitionend=${this.handleTransitionEnd.bind(this)}
+        @keydown=${this.handleKeyDown}
+        @transitionend=${this.handleTransitionEnd}
       >
-        <div part="overlay" class="dialog__overlay" onclick=${this.handleOverlayClick.bind(this)} tabindex="-1" />
+        <div part="overlay" class="dialog__overlay" @click=${this.handleOverlayClick} tabindex="-1"></div>
 
         <div
-          ref=${(el: HTMLElement) => (this.panel = el)}
           part="panel"
           class="dialog__panel"
           role="dialog"
@@ -228,18 +243,18 @@ export default class SlDialog extends Shoemaker {
                     exportparts="base:close-button"
                     class="dialog__close"
                     name="x"
-                    onclick="${this.handleCloseClick.bind(this)}"
-                  />
+                    @click="${this.handleCloseClick}"
+                  ></sl-icon-button>
                 </header>
               `
             : ''}
 
           <div part="body" class="dialog__body">
-            <slot />
+            <slot></slot>
           </div>
 
           <footer part="footer" class="dialog__footer">
-            <slot name="footer" onslotchange=${this.handleSlotChange.bind(this)} />
+            <slot name="footer" @slotchange=${this.handleSlotChange}></slot>
           </footer>
         </div>
       </div>

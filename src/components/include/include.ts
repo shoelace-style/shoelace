@@ -1,37 +1,36 @@
-import { html, Shoemaker } from '@shoelace-style/shoemaker';
+import { LitElement, html, property, unsafeCSS } from 'lit-element';
+import { event, EventEmitter, tag, watch } from '../../internal/decorators';
 import styles from 'sass:./include.scss';
 import { requestInclude } from './request';
 
 /**
  * @since 2.0
  * @status stable
- *
- * @emit sl-load - Emitted when the included file is loaded.
- * @emit sl-error - Emitted when the included file fails to load due to an error. Event details will include: `
- * { status: number}`
  */
-export default class SlInclude extends Shoemaker {
-  static tag = 'sl-include';
-  static props = ['html', 'src', 'mode', ' allowScripts'];
-  static styles = styles;
+@tag('sl-include')
+export class SlInclude extends LitElement {
+  static styles = unsafeCSS(styles);
 
   /** The location of the HTML file to include. */
-  src: string;
+  @property() src: string;
 
   /** The fetch mode to use. */
-  mode: 'cors' | 'no-cors' | 'same-origin' = 'cors';
+  @property() mode: 'cors' | 'no-cors' | 'same-origin' = 'cors';
 
   /**
    * Allows included scripts to be executed. You must ensure the content you're including is trusted, otherwise this
    * option can lead to XSS vulnerabilities in your app!
    */
-  allowScripts = false;
+  @property({ attribute: 'allow-scripts', type: Boolean }) allowScripts = false;
 
-  watchSrc() {
-    this.loadSource();
-  }
+  /** Emitted when the included file is loaded. */
+  @event('sl-load') slLoad: EventEmitter<void>;
 
-  onConnect() {
+  /** Emitted when the included file fails to load due to an error. */
+  @event('sl-error') slError: EventEmitter<{ status: number }>;
+
+  connectedCallback() {
+    super.connectedCallback();
     this.loadSource();
   }
 
@@ -43,6 +42,7 @@ export default class SlInclude extends Shoemaker {
     script.parentNode!.replaceChild(newScript, script);
   }
 
+  @watch('src')
   async loadSource() {
     try {
       const src = this.src;
@@ -58,7 +58,7 @@ export default class SlInclude extends Shoemaker {
       }
 
       if (!file.ok) {
-        this.emit('sl-error', { detail: { status: file.status } });
+        this.slError.emit({ detail: { status: file.status } });
         return;
       }
 
@@ -68,13 +68,13 @@ export default class SlInclude extends Shoemaker {
         [...this.querySelectorAll('script')].map(script => this.executeScript(script));
       }
 
-      this.emit('sl-load');
+      this.slLoad.emit();
     } catch {
-      this.emit('sl-error');
+      this.slError.emit({ detail: { status: -1 } });
     }
   }
 
   render() {
-    return html`<slot />`;
+    return html`<slot></slot>`;
   }
 }

@@ -1,4 +1,4 @@
-import Icon from './icon';
+import { SlIcon } from './icon';
 import { getBasePath } from '../../utilities/base-path';
 
 export type IconLibraryResolver = (name: string) => string;
@@ -16,13 +16,13 @@ let registry: IconLibraryRegistry[] = [
     resolver: name => `${getBasePath()}/assets/icons/${name}.svg`
   }
 ];
-let watchedIcons: Icon[] = [];
+let watchedIcons: SlIcon[] = [];
 
-export function watchIcon(icon: Icon) {
+export function watchIcon(icon: SlIcon) {
   watchedIcons.push(icon);
 }
 
-export function unwatchIcon(icon: Icon) {
+export function unwatchIcon(icon: SlIcon) {
   watchedIcons = watchedIcons.filter(el => el !== icon);
 }
 

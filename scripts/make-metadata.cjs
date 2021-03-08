@@ -59,7 +59,8 @@ function splitText(text) {
 console.log(chalk.cyan('Generating type data with TypeDoc'));
 mkdirp.sync('./.cache');
 execSync(
-  'typedoc --json .cache/typedoc.json --entryPoints src/shoelace.ts --exclude "**/*+(index|.spec|.e2e).ts" --excludeExternals --excludeProtected --excludeInternal'
+  'typedoc --json .cache/typedoc.json --entryPoints src/shoelace.ts --exclude "**/*+(index|.spec|.e2e).ts" --excludeExternals --excludeProtected --excludeInternal',
+  { stdio: 'inherit' }
 );
 
 const data = JSON.parse(fs.readFileSync('.cache/typedoc.json', 'utf8'));
@@ -97,14 +98,12 @@ components.map(async component => {
     const dependencies = tags.filter(item => item.tag === 'dependency');
     const slots = tags.filter(item => item.tag === 'slot');
     const parts = tags.filter(item => item.tag === 'part');
-    const events = tags.filter(item => item.tag === 'emit');
 
     api.since = tags.find(item => item.tag === 'since').text.trim();
     api.status = tags.find(item => item.tag === 'status').text.trim();
     api.dependencies = dependencies.map(tag => tag.text.trim());
     api.slots = slots.map(tag => splitText(tag.text));
     api.parts = parts.map(tag => splitText(tag.text));
-    api.events = events.map(tag => splitText(tag.text));
   } else {
     console.error(chalk.yellow(`Missing comment block for ${component.name} - skipping metadata`));
   }
@@ -112,6 +111,7 @@ components.map(async component => {
   // Props
   const props = component.children
     .filter(child => child.kindString === 'Property' && !child.flags.isStatic)
+    .filter(child => child.type.name !== 'EventEmitter')
     .filter(child => child.comment && child.comment.shortText); // only with comments
 
   props.map(prop => {
@@ -123,6 +123,61 @@ components.map(async component => {
       type,
       values,
       defaultValue: prop.defaultValue
+    });
+  });
+
+  // Events
+  const events = component.children
+    .filter(child => child.kindString === 'Property' && !child.flags.isStatic)
+    .filter(child => child.type.name === 'EventEmitter')
+    .filter(child => child.comment && child.comment.shortText); // only with comments
+
+  events.map(event => {
+    const decorator = event.decorators.filter(dec => dec.name === 'event')[0];
+    const name = (decorator ? decorator.arguments.eventName : event.name).replace(/['"`]/g, '');
+
+    // TODO: This logic is used to gather event details in a developer-friendly format. It could be improved as it may
+    // not cover all types yet. The output is used to populate the Events table of each component in the docs.
+    const params = event.type.typeArguments.map(param => {
+      if (param.type === 'intrinsic') {
+        return param.name;
+      }
+
+      if (param.type === 'literal') {
+        return param.value;
+      }
+
+      if (param.type === 'reflection') {
+        return (
+          '{ ' +
+          param.declaration.children
+            .map(child => {
+              if (child.type.type === 'intrinsic' || child.type.type === 'reference') {
+                return `${child.name}: ${child.type.name}`;
+              } else if (child.name) {
+                if (child.type.type === 'array') {
+                  return `${child.name}: ${child.type.elementType.name}[]`;
+                } else {
+                  return `${child.name}: ${child.type.elementType.name} (${child.type.type})`;
+                }
+              } else {
+                return child.type.type;
+              }
+            })
+            .join(', ') +
+          ' }'
+        );
+      }
+
+      return '';
+    });
+
+    const details = params.join(', ');
+
+    api.events.push({
+      name,
+      description: event.comment.shortText,
+      details
     });
   });
 
@@ -160,7 +215,7 @@ components.map(async component => {
     const tags = parsed[0] ? parsed[0].tags : [];
     const cssCustomProperties = tags
       .filter(tag => tag.tag === 'prop')
-      .map(tag => api.cssCustomProperties.push({ name: tag.tag, description: tag.description }));
+      .map(tag => api.cssCustomProperties.push({ name: tag.name.slice(0, -1), description: tag.description }));
   }
 
   metadata.components.push(api);

@@ -1,4 +1,8 @@
-import { classMap, html, styleMap, Shoemaker } from '@shoelace-style/shoemaker';
+import { LitElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
+import { classMap } from 'lit-html/directives/class-map';
+import { styleMap } from 'lit-html/directives/style-map';
+import { unsafeHTML } from 'lit-html/directives/unsafe-html';
+import { event, EventEmitter, tag, watch } from '../../internal/decorators';
 import styles from 'sass:./rating.scss';
 import { focusVisible } from '../../internal/focus-visible';
 import { clamp } from '../../internal/math';
@@ -10,36 +14,37 @@ import { clamp } from '../../internal/math';
  * @dependency sl-icon
  *
  * @part base - The component's base wrapper.
- *
- * @emit sl-change - Emitted when the rating's value changes.
  */
-export default class SlRating extends Shoemaker {
-  static tag = 'sl-rating';
-  static props = ['hoverValue', 'isHovering', 'value', 'max', 'precision', 'readonly', 'disabled', 'symbol'];
-  static reflect = ['readonly', 'disabled'];
-  static styles = styles;
+@tag('sl-rating')
+export class SlRating extends LitElement {
+  static styles = unsafeCSS(styles);
 
-  private hoverValue = 0;
-  private isHovering = false;
-  private rating: HTMLElement;
+  @query('.rating') rating: HTMLElement;
+
+  @internalProperty() private hoverValue = 0;
+  @internalProperty() private isHovering = false;
 
   /** The current rating. */
-  value = 0;
+  @property({ type: Number }) value = 0;
 
   /** The highest rating to show. */
-  max = 5;
+  @property({ type: Number }) max = 5;
 
   /** The minimum increment value allowed by the control. */
-  precision = 1;
+  @property({ type: Number }) precision = 1;
 
   /** Makes the rating readonly. */
-  readonly = false;
+  @property({ type: Boolean, reflect: true }) readonly = false;
 
   /** Disables the rating. */
-  disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** The name of the icon to display as the symbol. */
-  symbol: string | ((value: number) => string) = 'star-fill';
+  // @ts-ignore
+  @property() getSymbol = (value?: number) => '<sl-icon name="star-fill"></sl-icon>';
+
+  /** Emitted when the rating's value changes. */
+  @event('sl-change') slChange: EventEmitter<void>;
 
   /** Sets focus on the rating. */
   setFocus(options?: FocusOptions) {
@@ -51,11 +56,12 @@ export default class SlRating extends Shoemaker {
     this.rating.blur();
   }
 
-  onReady() {
+  firstUpdated() {
     focusVisible.observe(this.rating);
   }
 
-  onDisconnect() {
+  disconnectedCallback() {
+    super.disconnectedCallback();
     focusVisible.unobserve(this.rating);
   }
 
@@ -146,13 +152,14 @@ export default class SlRating extends Shoemaker {
     this.hoverValue = this.getValueFromTouchPosition(event);
   }
 
+  @watch('value')
+  handleValueChange() {
+    this.slChange.emit();
+  }
+
   roundToPrecision(numberToRound: number, precision = 0.5) {
     const multiplier = 1 / precision;
     return Math.ceil(numberToRound * multiplier) / multiplier;
-  }
-
-  watchValue() {
-    this.emit('sl-change');
   }
 
   render() {
@@ -167,7 +174,6 @@ export default class SlRating extends Shoemaker {
 
     return html`
       <div
-        ref=${(el: HTMLElement) => (this.rating = el)}
         part="base"
         class=${classMap({
           rating: true,
@@ -180,21 +186,20 @@ export default class SlRating extends Shoemaker {
         aria-valuemin=${0}
         aria-valuemax=${this.max}
         tabindex=${this.disabled ? '-1' : '0'}
-        onclick=${this.handleClick.bind(this)}
-        onkeydown=${this.handleKeyDown.bind(this)}
-        onmouseenter=${this.handleMouseEnter.bind(this)}
-        ontouchstart=${this.handleTouchStart.bind(this)}
-        onmouseleave=${this.handleMouseLeave.bind(this)}
-        ontouchend=${this.handleTouchEnd.bind(this)}
-        onmousemove=${this.handleMouseMove.bind(this)}
-        ontouchmove=${this.handleTouchMove.bind(this)}
+        @click=${this.handleClick}
+        @keydown=${this.handleKeyDown}
+        @mouseenter=${this.handleMouseEnter}
+        @touchstart=${this.handleTouchStart}
+        @mouseleave=${this.handleMouseLeave}
+        @touchend=${this.handleTouchEnd}
+        @mousemove=${this.handleMouseMove}
+        @touchmove=${this.handleTouchMove}
       >
         <span class="rating__symbols rating__symbols--inactive">
           ${counter.map(index => {
             // Users can click the current value to clear the rating. When this happens, we set this.isHovering to
             // false to prevent the hover state from confusing them as they move the mouse out of the control. This
             // extra mouseenter will reinstate it if they happen to mouse over an adjacent symbol.
-            const symbol = typeof this.symbol === 'function' ? this.symbol(index + 1) : this.symbol;
             return html`
               <span
                 class=${classMap({
@@ -202,9 +207,9 @@ export default class SlRating extends Shoemaker {
                   'rating__symbol--hover': this.isHovering && Math.ceil(displayValue) === index + 1
                 })}
                 role="presentation"
-                onmouseenter=${this.handleMouseEnter.bind(this)}
+                @mouseenter=${this.handleMouseEnter.bind(this)}
               >
-                <sl-icon .name=${symbol}></sl-icon>
+                ${unsafeHTML(this.getSymbol(index + 1))}
               </span>
             `;
           })}
@@ -212,7 +217,6 @@ export default class SlRating extends Shoemaker {
 
         <span class="rating__symbols rating__symbols--indicator">
           ${counter.map(index => {
-            const symbol = typeof this.symbol === 'function' ? this.symbol(index + 1) : this.symbol;
             return html`
               <span
                 class=${classMap({
@@ -221,11 +225,11 @@ export default class SlRating extends Shoemaker {
                 })}
                 style=${styleMap({
                   clipPath:
-                    displayValue > index + 1 ? null : `inset(0 ${100 - ((displayValue - index) / 1) * 100}% 0 0)`
+                    displayValue > index + 1 ? 'none' : `inset(0 ${100 - ((displayValue - index) / 1) * 100}% 0 0)`
                 })}
                 role="presentation"
               >
-                <sl-icon .name=${symbol}></sl-icon>
+                ${unsafeHTML(this.getSymbol(index + 1))}
               </span>
             `;
           })}

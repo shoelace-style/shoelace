@@ -1,25 +1,28 @@
-import { html, Shoemaker } from '@shoelace-style/shoemaker';
+import { LitElement, html, unsafeCSS } from 'lit-element';
+import { event, EventEmitter, tag } from '../../internal/decorators';
 import styles from 'sass:./resize-observer.scss';
 
 /**
  * @since 2.0
  * @status experimental
- *
- * @emit sl-resize - Emitted when the element is resized. Event details will contain:
- * `{ entries: ResizeObserverEntry[] }`
  */
-export default class SlResizeObserver extends Shoemaker {
-  static tag = 'sl-resize-observer';
-  static styles = styles;
+@tag('sl-resize-observer')
+export class SlResizeObserver extends LitElement {
+  static styles = unsafeCSS(styles);
 
   private resizeObserver: ResizeObserver;
   private observedElements: HTMLElement[] = [];
 
-  onReady() {
-    this.resizeObserver = new ResizeObserver(entries => this.emit('sl-resize', { detail: { entries } }));
+  /** Emitted when the element is resized. */
+  @event('sl-resize') slResize: EventEmitter<{ entries: ResizeObserverEntry[] }>;
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.resizeObserver = new ResizeObserver(entries => this.slResize.emit({ detail: { entries } }));
   }
 
-  onDisconnect() {
+  disconnectedCallback() {
+    super.disconnectedCallback();
     this.resizeObserver.disconnect();
   }
 
@@ -39,6 +42,6 @@ export default class SlResizeObserver extends Shoemaker {
   }
 
   render() {
-    return html` <slot onslotchange=${this.handleSlotChange.bind(this)} /> `;
+    return html` <slot @slotchange=${this.handleSlotChange}></slot> `;
   }
 }

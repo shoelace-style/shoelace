@@ -1,65 +1,50 @@
-import { Shoemaker } from '@shoelace-style/shoemaker';
+import { LitElement, property } from 'lit-element';
+import { tag } from '../../internal/decorators';
 
 /**
  * @since 2.0
  * @status stable
  */
-export default class SlFormatDate extends Shoemaker {
-  static tag = 'sl-format-date';
-  static props = [
-    'date',
-    'locale',
-    'weekday',
-    'era',
-    'year',
-    'month',
-    'day',
-    'hour',
-    'minute',
-    'second',
-    'timeZoneName',
-    'timeZone',
-    'hourFormat'
-  ];
-
+@tag('sl-format-date')
+export class SlFormatDate extends LitElement {
   /** The date/time to format. If not set, the current date and time will be used. */
-  date: Date | string = new Date();
+  @property() date: Date | string = new Date();
 
   /** The locale to use when formatting the date/time. */
-  locale: string;
+  @property() locale: string;
 
   /** The format for displaying the weekday. */
-  weekday: 'narrow' | 'short' | 'long';
+  @property() weekday: 'narrow' | 'short' | 'long';
 
   /** The format for displaying the era. */
-  era: 'narrow' | 'short' | 'long';
+  @property() era: 'narrow' | 'short' | 'long';
 
   /** The format for displaying the year. */
-  year: 'numeric' | '2-digit';
+  @property() year: 'numeric' | '2-digit';
 
   /** The format for displaying the month. */
-  month: 'numeric' | '2-digit' | 'narrow' | 'short' | 'long';
+  @property() month: 'numeric' | '2-digit' | 'narrow' | 'short' | 'long';
 
   /** The format for displaying the day. */
-  day: 'numeric' | '2-digit';
+  @property() day: 'numeric' | '2-digit';
 
   /** The format for displaying the hour. */
-  hour: 'numeric' | '2-digit';
+  @property() hour: 'numeric' | '2-digit';
 
   /** The format for displaying the minute. */
-  minute: 'numeric' | '2-digit';
+  @property() minute: 'numeric' | '2-digit';
 
   /** The format for displaying the second. */
-  second: 'numeric' | '2-digit';
+  @property() second: 'numeric' | '2-digit';
 
   /** The format for displaying the time. */
-  timeZoneName: 'short' | 'long';
+  @property({ attribute: 'time-zone-name' }) timeZoneName: 'short' | 'long';
 
   /** The time zone to express the time in. */
-  timeZone: string;
+  @property({ attribute: 'time-zone' }) timeZone: string;
 
   /** When set, 24 hour time will always be used. */
-  hourFormat: 'auto' | '12' | '24' = 'auto';
+  @property({ attribute: 'hour-format' }) hourFormat: 'auto' | '12' | '24' = 'auto';
 
   render() {
     const date = new Date(this.date);

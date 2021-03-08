@@ -15,13 +15,11 @@
   letter-spacing: var(--sl-letter-spacing-normal);
   text-align: left;
   color: var(--sl-color-gray-700);
-  border-radius: var(--sl-border-radius-medium);
   padding: var(--sl-spacing-xx-small) var(--sl-spacing-x-large);
   transition: var(--sl-transition-fast) fill;
   user-select: none;
   white-space: nowrap;
   cursor: pointer;
-  margin: 0 var(--sl-spacing-x-small);
 
   &.menu-item--focused:not(.menu-item--disabled) {
     outline: none;

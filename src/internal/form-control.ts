@@ -1,4 +1,5 @@
-import { classMap, html, Hole } from '@shoelace-style/shoemaker';
+import { html, TemplateResult } from 'lit-element';
+import { classMap } from 'lit-html/directives/class-map';
 
 export interface FormControlProps {
   /** The input id, used to map the input to the label */
@@ -29,9 +30,9 @@ export interface FormControlProps {
   onLabelClick?: (event: MouseEvent) => void;
 }
 
-export const renderFormControl = (props: FormControlProps, input: Hole | string) => {
-  const hasLabel = props.label ? true : props.hasLabelSlot;
-  const hasHelpText = props.helpText ? true : props.hasHelpTextSlot;
+export const renderFormControl = (props: FormControlProps, input: TemplateResult) => {
+  const hasLabel = props.label ? true : !!props.hasLabelSlot;
+  const hasHelpText = props.helpText ? true : !!props.hasHelpTextSlot;
 
   return html`
     <div
@@ -51,7 +52,7 @@ export const renderFormControl = (props: FormControlProps, input: Hole | string)
         class="form-control__label"
         for=${props.inputId}
         aria-hidden=${hasLabel ? 'false' : 'true'}
-        onclick=${(event: MouseEvent) => (props.onLabelClick ? props.onLabelClick(event) : null)}
+        @click=${(event: MouseEvent) => (props.onLabelClick ? props.onLabelClick(event) : null)}
       >
         <slot name="label">${props.label}</slot>
       </label>

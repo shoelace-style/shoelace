@@ -1,4 +1,5 @@
-import { html, Shoemaker } from '@shoelace-style/shoemaker';
+import { LitElement, html, property, query, unsafeCSS } from 'lit-element';
+import { event, EventEmitter, tag } from '../../internal/decorators';
 import styles from 'sass:./form.scss';
 import {
   SlButton,
@@ -26,25 +27,29 @@ interface FormControl {
  * @slot - The form's content.
  *
  * @part base - The component's base wrapper.
- *
- * @emit sl-submit - Emitted when the form is submitted. This event will not be emitted if any form control inside of
- * it is in an invalid state, unless the form has the `novalidate` attribute. Note that there is never a need to prevent
- * this event, since it doen't send a GET or POST request like native forms. To "prevent" submission, use a conditional
- * around the XHR request you use to submit the form's data with. Event details will contain:
- * `{ formData: FormData; formControls: HTMLElement[] }`
  */
-export default class SlForm extends Shoemaker {
-  static tag = 'sl-form';
-  static props = ['novalidate'];
-  static styles = styles;
+@tag('sl-form')
+export class SlForm extends LitElement {
+  static styles = unsafeCSS(styles);
 
-  private form: HTMLElement;
+  @query('.form') form: HTMLElement;
+
   private formControls: FormControl[];
 
   /** Prevent the form from validating inputs before submitting. */
-  novalidate = false;
+  @property({ type: Boolean, reflect: true }) novalidate = false;
 
-  onConnect() {
+  /**
+   * Emitted when the form is submitted. This event will not be emitted if any form control inside of
+   * it is in an invalid state, unless the form has the `novalidate` attribute. Note that there is never a need to prevent
+   * this event, since it doen't send a GET or POST request like native forms. To "prevent" submission, use a conditional
+   * around the XHR request you use to submit the form's data with.
+   */
+  @event('sl-submit') slSubmit: EventEmitter<{ formData: FormData; formControls: HTMLElement[] }>;
+
+  connectedCallback() {
+    super.connectedCallback();
+
     this.formControls = [
       {
         tag: 'button',
@@ -183,9 +188,6 @@ export default class SlForm extends Shoemaker {
           el.name && !el.disabled ? formData.append(el.name, el.value) : null
       }
     ];
-
-    this.handleClick = this.handleClick.bind(this);
-    this.handleKeyDown = this.handleKeyDown.bind(this);
   }
 
   /** Serializes all form controls elements and returns a `FormData` object. */
@@ -230,7 +232,7 @@ export default class SlForm extends Shoemaker {
       }
     }
 
-    this.emit('sl-submit', { detail: { formData, formControls } });
+    this.slSubmit.emit({ detail: { formData, formControls } });
 
     return true;
   }
@@ -271,15 +273,8 @@ export default class SlForm extends Shoemaker {
 
   render() {
     return html`
-      <div
-        ref=${(el: HTMLElement) => (this.form = el)}
-        part="base"
-        class="form"
-        role="form"
-        onclick=${this.handleClick.bind(this)}
-        onkeydown=${this.handleKeyDown.bind(this)}
-      >
-        <slot />
+      <div part="base" class="form" role="form" @click=${this.handleClick} @keydown=${this.handleKeyDown}>
+        <slot></slot>
       </div>
     `;
   }

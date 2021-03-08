@@ -1,4 +1,6 @@
-import { classMap, html, Shoemaker } from '@shoelace-style/shoemaker';
+import { LitElement, html, property, unsafeCSS } from 'lit-element';
+import { classMap } from 'lit-html/directives/class-map';
+import { tag } from '../../internal/decorators';
 import styles from 'sass:./skeleton.scss';
 
 /**
@@ -8,13 +10,12 @@ import styles from 'sass:./skeleton.scss';
  * @part base - The component's base wrapper.
  * @part indicator - The skeleton's indicator which is responsible for its color and animation.
  */
-export default class SlSkeleton extends Shoemaker {
-  static tag = 'sl-skeleton';
-  static props = ['effect'];
-  static styles = styles;
+@tag('sl-skeleton')
+export class SlSkeleton extends LitElement {
+  static styles = unsafeCSS(styles);
 
   /** Determines which effect the skeleton will use. */
-  effect: 'pulse' | 'sheen' | 'none' = 'sheen';
+  @property() effect: 'pulse' | 'sheen' | 'none' = 'sheen';
 
   render() {
     return html`
@@ -28,7 +29,7 @@ export default class SlSkeleton extends Shoemaker {
         aria-busy="true"
         aria-live="polite"
       >
-        <div part="indicator" class="skeleton__indicator" />
+        <div part="indicator" class="skeleton__indicator"></div>
       </div>
     `;
   }

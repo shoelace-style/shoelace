@@ -1,4 +1,6 @@
-import { classMap, html, Shoemaker } from '@shoelace-style/shoemaker';
+import { LitElement, html, internalProperty, property, unsafeCSS } from 'lit-element';
+import { classMap } from 'lit-html/directives/class-map';
+import { event, EventEmitter, tag } from '../../internal/decorators';
 import styles from 'sass:./button.scss';
 import { hasSlot } from '../../internal/slot';
 
@@ -18,80 +20,66 @@ import { hasSlot } from '../../internal/slot';
  * @part label - The button's label.
  * @part suffix - The suffix container.
  * @part caret - The button's caret.
- *
- * @emit sl-blur - Emitted when the button loses focus.
- * @emit sl-focus - Emitted when the button gains focus.
  */
-export default class SlButton extends Shoemaker {
-  static tag = 'sl-button';
-  static props = [
-    'hasFocus',
-    'hasLabel',
-    'hasPrefix',
-    'hasSuffix',
-    'type',
-    'size',
-    'caret',
-    'disabled',
-    'loading',
-    'pill',
-    'circle',
-    'submit',
-    'name',
-    'value',
-    'href',
-    'target',
-    'download'
-  ];
-  static reflect = ['type', 'size', 'caret', 'disabled', 'loading', 'pill', 'circle', 'submit'];
-  static styles = styles;
+@tag('sl-button')
+export class SlButton extends LitElement {
+  static styles = unsafeCSS(styles);
 
-  private button: HTMLButtonElement | HTMLLinkElement;
-  private hasFocus = false;
-  private hasLabel = false;
-  private hasPrefix = false;
-  private hasSuffix = false;
+  button: HTMLButtonElement | HTMLLinkElement;
+
+  @internalProperty() private hasFocus = false;
+  @internalProperty() private hasLabel = false;
+  @internalProperty() private hasPrefix = false;
+  @internalProperty() private hasSuffix = false;
 
   /** The button's type. */
-  type: 'default' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text' = 'default';
+  @property({ reflect: true }) type: 'default' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text' =
+    'default';
 
   /** The button's size. */
-  size: 'small' | 'medium' | 'large' = 'medium';
+  @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
 
   /** Draws the button with a caret for use with dropdowns, popovers, etc. */
-  caret = false;
+  @property({ type: Boolean, reflect: true }) caret = false;
 
   /** Disables the button. */
-  disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Draws the button in a loading state. */
-  loading = false;
+  @property({ type: Boolean, reflect: true }) loading = false;
 
   /** Draws a pill-style button with rounded edges. */
-  pill = false;
+  @property({ type: Boolean, reflect: true }) pill = false;
 
   /** Draws a circle button. */
-  circle = false;
+  @property({ type: Boolean, reflect: true }) circle = false;
 
   /** Indicates if activating the button should submit the form. Ignored when `href` is set. */
-  submit = false;
+  @property({ type: Boolean, reflect: true }) submit = false;
 
   /** An optional name for the button. Ignored when `href` is set. */
-  name: string;
+  @property() name: string;
 
   /** An optional value for the button. Ignored when `href` is set. */
-  value: string;
+  @property() value: string;
 
   /** When set, the underlying button will be rendered as an `<a>` with this `href` instead of a `<button>`. */
-  href: string;
+  @property() href: string;
 
   /** Tells the browser where to open the link. Only used when `href` is set. */
-  target: '_blank' | '_parent' | '_self' | '_top';
+  @property() target: '_blank' | '_parent' | '_self' | '_top';
 
   /** Tells the browser to download the linked file as this filename. Only used when `href` is set. */
-  download: string;
+  @property() download: string;
 
-  onConnect() {
+  /** Emitted when the button loses focus. */
+  @event('sl-blur') slBlur: EventEmitter<void>;
+
+  /** Emitted when the button gains focus. */
+  @event('sl-focus') slFocus: EventEmitter<void>;
+
+  connectedCallback() {
+    super.connectedCallback();
     this.handleSlotChange();
   }
 
@@ -113,12 +101,12 @@ export default class SlButton extends Shoemaker {
 
   handleBlur() {
     this.hasFocus = false;
-    this.emit('sl-blur');
+    this.slBlur.emit();
   }
 
   handleFocus() {
     this.hasFocus = true;
-    this.emit('sl-focus');
+    this.slFocus.emit();
   }
 
   handleClick(event: MouseEvent) {
@@ -133,13 +121,13 @@ export default class SlButton extends Shoemaker {
 
     const interior = html`
       <span part="prefix" class="button__prefix">
-        <slot onslotchange=${this.handleSlotChange.bind(this)} name="prefix" />
+        <slot @slotchange=${this.handleSlotChange} name="prefix"></slot>
       </span>
       <span part="label" class="button__label">
-        <slot onslotchange=${this.handleSlotChange.bind(this)} />
+        <slot @slotchange=${this.handleSlotChange}></slot>
       </span>
       <span part="suffix" class="button__suffix">
-        <slot onslotchange=${this.handleSlotChange.bind(this)} name="suffix" />
+        <slot @slotchange=${this.handleSlotChange} name="suffix"></slot>
       </span>
       ${this.caret
         ? html`
@@ -157,7 +145,7 @@ export default class SlButton extends Shoemaker {
             </span>
           `
         : ''}
-      ${this.loading ? html`<sl-spinner />` : ''}
+      ${this.loading ? html`<sl-spinner></sl-spinner>` : ''}
     `;
 
     const button = html`
@@ -186,13 +174,13 @@ export default class SlButton extends Shoemaker {
           'button--has-prefix': this.hasPrefix,
           'button--has-suffix': this.hasSuffix
         })}
-        disabled=${this.disabled ? true : null}
+        ?disabled=${this.disabled}
         type=${this.submit ? 'submit' : 'button'}
         name=${this.name}
-        value=${this.value}
-        onblur=${this.handleBlur.bind(this)}
-        onfocus=${this.handleFocus.bind(this)}
-        onclick=${this.handleClick.bind(this)}
+        .value=${this.value}
+        @blur=${this.handleBlur}
+        @focus=${this.handleFocus}
+        @click=${this.handleClick}
       >
         ${interior}
       </button>
@@ -228,9 +216,9 @@ export default class SlButton extends Shoemaker {
         target=${this.target ? this.target : null}
         download=${this.download ? this.download : null}
         rel=${this.target ? 'noreferrer noopener' : null}
-        onblur=${this.handleBlur.bind(this)}
-        onfocus=${this.handleFocus.bind(this)}
-        onclick=${this.handleClick.bind(this)}
+        onblur=${this.handleBlur}
+        onfocus=${this.handleFocus}
+        onclick=${this.handleClick}
       >
         ${interior}
       </a>

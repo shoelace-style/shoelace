@@ -1,4 +1,6 @@
-import { classMap, html, Shoemaker } from '@shoelace-style/shoemaker';
+import { LitElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
+import { classMap } from 'lit-html/directives/class-map';
+import { event, EventEmitter, tag, watch } from '../../internal/decorators';
 import styles from 'sass:./radio.scss';
 
 let id = 0;
@@ -13,39 +15,44 @@ let id = 0;
  * @part control - The radio control.
  * @part checked-icon - The container the wraps the checked icon.
  * @part label - The radio label.
- *
- * @emit sl-blur - Emitted when the control loses focus.
- * @emit sl-change - Emitted when the control's checked state changes.
- * @emit sl-focus - Emitted when the control gains focus.
  */
-export default class SlRadio extends Shoemaker {
-  static tag = 'sl-radio';
-  static props = ['hasFocus', 'name', 'value', 'disabled', 'checked', 'invalid'];
-  static reflect = ['checked', 'invalid'];
-  static styles = styles;
+@tag('sl-radio')
+export class SlRadio extends LitElement {
+  static styles = unsafeCSS(styles);
 
-  private hasFocus = false;
+  @query('input[type="radio"]') input: HTMLInputElement;
+
   private inputId = `radio-${++id}`;
   private labelId = `radio-label-${id}`;
-  private input: HTMLInputElement;
+
+  @internalProperty() private hasFocus = false;
 
   /** The radio's name attribute. */
-  name: string;
+  @property() name: string;
 
   /** The radio's value attribute. */
-  value: string;
+  @property() value: string;
 
   /** Disables the radio. */
-  disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Draws the radio in a checked state. */
-  checked = false;
+  @property({ type: Boolean, reflect: true }) checked = false;
 
   /**
    * This will be true when the control is in an invalid state. Validity in range inputs is determined by the message
    * provided by the `setCustomValidity` method.
    */
-  invalid = false;
+  @property({ type: Boolean, reflect: true }) invalid = false;
+
+  /** Emitted when the control loses focus. */
+  @event('sl-blur') slBlur: EventEmitter<void>;
+
+  /** Emitted when the control's checked state changes. */
+  @event('sl-change') slChange: EventEmitter<void>;
+
+  /** Emitted when the control gains focus. */
+  @event('sl-focus') slFocus: EventEmitter<void>;
 
   /** Sets focus on the radio. */
   setFocus(options?: FocusOptions) {
@@ -80,18 +87,29 @@ export default class SlRadio extends Shoemaker {
     return this.getAllRadios().filter(radio => radio !== this) as this[];
   }
 
+  @watch('checked')
+  handleCheckedChange() {
+    if (this.input) {
+      if (this.checked) {
+        this.getSiblingRadios().map(radio => (radio.checked = false));
+      }
+      this.input.checked = this.checked;
+      this.slChange.emit();
+    }
+  }
+
   handleClick() {
-    this.checked = this.input.checked;
+    this.checked = true;
   }
 
   handleBlur() {
     this.hasFocus = false;
-    this.emit('sl-blur');
+    this.slBlur.emit();
   }
 
   handleFocus() {
     this.hasFocus = true;
-    this.emit('sl-focus');
+    this.slFocus.emit();
   }
 
   handleKeyDown(event: KeyboardEvent) {
@@ -116,14 +134,6 @@ export default class SlRadio extends Shoemaker {
     this.input.focus();
   }
 
-  watchChecked() {
-    if (this.checked) {
-      this.getSiblingRadios().map(radio => (radio.checked = false));
-    }
-    this.input.checked = this.checked;
-    this.emit('sl-change');
-  }
-
   render() {
     return html`
       <label
@@ -135,8 +145,8 @@ export default class SlRadio extends Shoemaker {
           'radio--focused': this.hasFocus
         })}
         for=${this.inputId}
-        onkeydown=${this.handleKeyDown.bind(this)}
-        onmousedown=${this.handleMouseDown.bind(this)}
+        @keydown=${this.handleKeyDown}
+        @mousedown=${this.handleMouseDown}
       >
         <span part="control" class="radio__control">
           <span part="checked-icon" class="radio__icon">
@@ -150,24 +160,23 @@ export default class SlRadio extends Shoemaker {
           </span>
 
           <input
-            ref=${(el: HTMLInputElement) => (this.input = el)}
             id=${this.inputId}
             type="radio"
             name=${this.name}
             .value=${this.value}
-            checked=${this.checked ? true : null}
-            disabled=${this.disabled ? true : null}
+            ?checked=${this.checked}
+            ?disabled=${this.disabled}
             role="radio"
             aria-checked=${this.checked ? 'true' : 'false'}
             aria-labelledby=${this.labelId}
-            onclick=${this.handleClick.bind(this)}
-            onblur=${this.handleBlur.bind(this)}
-            onfocus=${this.handleFocus.bind(this)}
+            @click=${this.handleClick}
+            @blur=${this.handleBlur}
+            @focus=${this.handleFocus}
           />
         </span>
 
         <span part="label" id=${this.labelId} class="radio__label">
-          <slot />
+          <slot></slot>
         </span>
       </label>
     `;

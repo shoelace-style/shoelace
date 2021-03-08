@@ -1,4 +1,6 @@
-import { classMap, html, Shoemaker } from '@shoelace-style/shoemaker';
+import { LitElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
+import { classMap } from 'lit-html/directives/class-map';
+import { event, EventEmitter, tag, watch } from '../../internal/decorators';
 import styles from 'sass:./tab-group.scss';
 import { SlTab, SlTabPanel } from '../../shoelace';
 import { getOffset } from '../../internal/offset';
@@ -20,33 +22,37 @@ import { focusVisible } from '../../internal/focus-visible';
  * @part active-tab-indicator - An element that displays the currently selected tab. This is a child of the tabs container.
  * @part body - The tab group body where tab panels are slotted in.
  * @part scroll-button - The previous and next scroll buttons that appear when tabs are scrollable.
- *
- * @emit sl-tab-show - Emitted when a tab is shown. Event details will contain: `{ tab: string }`
- * @emit sl-tab-hide - Emitted when a tab is hidden. Event details will contain: `{ tab: string }`
  */
-export default class SlTabGroup extends Shoemaker {
-  static tag = 'sl-tab-group';
-  static props = ['hasScrollControls', 'placement', 'noScrollControls'];
-  static styles = styles;
+@tag('sl-tab-group')
+export class SlTabGroup extends LitElement {
+  static styles = unsafeCSS(styles);
+
+  @query('.tab-group') tabGroup: HTMLElement;
+  @query('.tab-group__body') body: HTMLElement;
+  @query('.tab-group__nav') nav: HTMLElement;
+  @query('.tab-group__active-tab-indicator') activeTabIndicator: HTMLElement;
 
   private activeTab: SlTab;
-  private activeTabIndicator: HTMLElement;
-  private body: HTMLElement;
-  private hasScrollControls = false;
   private mutationObserver: MutationObserver;
-  private nav: HTMLElement;
-  private panels: SlTabPanel[] = [];
   private resizeObserver: ResizeObserver;
-  private tabGroup: HTMLElement;
   private tabs: SlTab[] = [];
+  private panels: SlTabPanel[] = [];
+
+  @internalProperty() private hasScrollControls = false;
 
   /** The placement of the tabs. */
-  placement: 'top' | 'bottom' | 'left' | 'right' = 'top';
+  @property() placement: 'top' | 'bottom' | 'left' | 'right' = 'top';
 
   /** Disables the scroll arrows that appear when tabs overflow. */
-  noScrollControls = false;
+  @property({ attribute: 'no-scroll-controls', type: Boolean }) noScrollControls = false;
 
-  onReady() {
+  /** Emitted when a tab is shown. */
+  @event('sl-tab-show') slTabShow: EventEmitter<{ tab: string }>;
+
+  /** Emitted when a tab is hidden. */
+  @event('sl-tab-hide') slTabHide: EventEmitter<{ tab: string }>;
+
+  firstUpdated() {
     this.syncTabsAndPanels();
 
     // Set initial tab state when the tabs first become visible
@@ -78,7 +84,7 @@ export default class SlTabGroup extends Shoemaker {
     this.mutationObserver.observe(this, { attributes: true, childList: true, subtree: true });
   }
 
-  onDisconnect() {
+  disconnectedCallback() {
     this.mutationObserver.disconnect();
     focusVisible.unobserve(this.tabGroup);
     this.resizeObserver.unobserve(this.nav);
@@ -189,12 +195,15 @@ export default class SlTabGroup extends Shoemaker {
     });
   }
 
+  @watch('noScrollControls')
   updateScrollControls() {
-    if (this.noScrollControls) {
-      this.hasScrollControls = false;
-    } else {
-      this.hasScrollControls =
-        ['top', 'bottom'].includes(this.placement) && this.nav.scrollWidth > this.nav.clientWidth;
+    if (this.nav) {
+      if (this.noScrollControls) {
+        this.hasScrollControls = false;
+      } else {
+        this.hasScrollControls =
+          ['top', 'bottom'].includes(this.placement) && this.nav.scrollWidth > this.nav.clientWidth;
+      }
     }
   }
 
@@ -215,10 +224,10 @@ export default class SlTabGroup extends Shoemaker {
       // Emit events
       if (emitEvents) {
         if (previousTab) {
-          this.emit('sl-tab-hide', { detail: { name: previousTab.panel } });
+          this.slTabHide.emit({ detail: { name: previousTab.panel } });
         }
 
-        this.emit('sl-tab-show', { detail: { name: this.activeTab.panel } });
+        this.slTabShow.emit({ detail: { name: this.activeTab.panel } });
       }
     }
   }
@@ -234,36 +243,39 @@ export default class SlTabGroup extends Shoemaker {
     });
   }
 
+  @watch('placement')
   syncActiveTabIndicator() {
-    const tab = this.getActiveTab();
+    if (this.activeTabIndicator) {
+      const tab = this.getActiveTab();
 
-    if (tab) {
-      this.activeTabIndicator.style.display = 'block';
-    } else {
-      this.activeTabIndicator.style.display = 'none';
-      return;
-    }
+      if (tab) {
+        this.activeTabIndicator.style.display = 'block';
+      } else {
+        this.activeTabIndicator.style.display = 'none';
+        return;
+      }
 
-    const width = tab.clientWidth;
-    const height = tab.clientHeight;
-    const offset = getOffset(tab, this.nav);
-    const offsetTop = offset.top + this.nav.scrollTop;
-    const offsetLeft = offset.left + this.nav.scrollLeft;
+      const width = tab.clientWidth;
+      const height = tab.clientHeight;
+      const offset = getOffset(tab, this.nav);
+      const offsetTop = offset.top + this.nav.scrollTop;
+      const offsetLeft = offset.left + this.nav.scrollLeft;
 
-    switch (this.placement) {
-      case 'top':
-      case 'bottom':
-        this.activeTabIndicator.style.width = `${width}px`;
-        (this.activeTabIndicator.style.height as string | undefined) = undefined;
-        this.activeTabIndicator.style.transform = `translateX(${offsetLeft}px)`;
-        break;
+      switch (this.placement) {
+        case 'top':
+        case 'bottom':
+          this.activeTabIndicator.style.width = `${width}px`;
+          (this.activeTabIndicator.style.height as string | undefined) = undefined;
+          this.activeTabIndicator.style.transform = `translateX(${offsetLeft}px)`;
+          break;
 
-      case 'left':
-      case 'right':
-        (this.activeTabIndicator.style.width as string | undefined) = undefined;
-        this.activeTabIndicator.style.height = `${height}px`;
-        this.activeTabIndicator.style.transform = `translateY(${offsetTop}px)`;
-        break;
+        case 'left':
+        case 'right':
+          (this.activeTabIndicator.style.width as string | undefined) = undefined;
+          this.activeTabIndicator.style.height = `${height}px`;
+          this.activeTabIndicator.style.transform = `translateY(${offsetTop}px)`;
+          break;
+      }
     }
   }
 
@@ -273,19 +285,10 @@ export default class SlTabGroup extends Shoemaker {
     this.syncActiveTabIndicator();
   }
 
-  watchPlacement() {
-    this.syncActiveTabIndicator();
-  }
-
-  watchNoScrollControls() {
-    this.updateScrollControls();
-  }
-
   render() {
     return html`
       <div
         part="base"
-        ref=${(el: HTMLElement) => (this.tabGroup = el)}
         class=${classMap({
           'tab-group': true,
           'tab-group--top': this.placement === 'top',
@@ -294,8 +297,8 @@ export default class SlTabGroup extends Shoemaker {
           'tab-group--right': this.placement === 'right',
           'tab-group--has-scroll-controls': this.hasScrollControls
         })}
-        onclick=${this.handleClick.bind(this)}
-        onkeydown=${this.handleKeyDown.bind(this)}
+        @click=${this.handleClick}
+        @keydown=${this.handleKeyDown}
       >
         <div class="tab-group__nav-container">
           ${this.hasScrollControls
@@ -304,19 +307,15 @@ export default class SlTabGroup extends Shoemaker {
                   class="tab-group__scroll-button tab-group__scroll-button--left"
                   exportparts="base:scroll-button"
                   name="chevron-left"
-                  onclick=${this.handleScrollLeft.bind(this)}
-                />
+                  @click=${this.handleScrollLeft}
+                ></sl-icon-button>
               `
             : ''}
 
-          <div ref=${(el: HTMLElement) => (this.nav = el)} part="nav" class="tab-group__nav">
+          <div part="nav" class="tab-group__nav">
             <div part="tabs" class="tab-group__tabs" role="tablist">
-              <div
-                ref=${(el: HTMLElement) => (this.activeTabIndicator = el)}
-                part="active-tab-indicator"
-                class="tab-group__active-tab-indicator"
-              />
-              <slot name="nav" onslotchange=${this.syncTabsAndPanels.bind(this)} />
+              <div part="active-tab-indicator" class="tab-group__active-tab-indicator"></div>
+              <slot name="nav" @slotchange=${this.syncTabsAndPanels}></slot>
             </div>
           </div>
 
@@ -326,14 +325,14 @@ export default class SlTabGroup extends Shoemaker {
                   class="tab-group__scroll-button tab-group__scroll-button--right"
                   exportparts="base:scroll-button"
                   name="chevron-right"
-                  onclick=${this.handleScrollRight.bind(this)}
-                />
+                  @click=${this.handleScrollRight}
+                ></sl-icon-button>
               `
             : ''}
         </div>
 
-        <div ref=${(el: HTMLElement) => (this.body = el)} part="body" class="tab-group__body">
-          <slot onslotchange=${this.syncTabsAndPanels.bind(this)} />
+        <div part="body" class="tab-group__body">
+          <slot @slotchange=${this.syncTabsAndPanels}></slot>
         </div>
       </div>
     `;

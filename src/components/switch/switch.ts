@@ -1,4 +1,6 @@
-import { classMap, html, Shoemaker } from '@shoelace-style/shoemaker';
+import { LitElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
+import { classMap } from 'lit-html/directives/class-map';
+import { event, EventEmitter, tag } from '../../internal/decorators';
 import styles from 'sass:./switch.scss';
 
 let id = 0;
@@ -13,39 +15,44 @@ let id = 0;
  * @part control - The switch control.
  * @part thumb - The switch position indicator.
  * @part label - The switch label.
- *
- * @emit sl-blur - Emitted when the control loses focus.
- * @emit sl-change - Emitted when the control's checked state changes.
- * @emit sl-focus - Emitted when the control gains focus.
  */
-export default class SlSwitch extends Shoemaker {
-  static tag = 'sl-switch';
-  static props = ['hasFocus', 'name', 'value', 'disabled', 'required', 'checked', 'invalid'];
-  static reflect = ['disabled', 'checked', 'invalid'];
-  static styles = styles;
+@tag('sl-switch')
+export class SlSwitch extends LitElement {
+  static styles = unsafeCSS(styles);
+
+  @query('input[type="checkbox"]') input: HTMLInputElement;
 
   private switchId = `switch-${++id}`;
   private labelId = `switch-label-${id}`;
-  private input: HTMLInputElement;
-  private hasFocus = false;
+
+  @internalProperty() private hasFocus = false;
 
   /** The switch's name attribute. */
-  name: string;
+  @property() name: string;
 
   /** The switch's value attribute. */
-  value: string;
+  @property() value: string;
 
   /** Disables the switch. */
-  disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Makes the switch a required field. */
-  required = false;
+  @property({ type: Boolean, reflect: true }) required = false;
 
   /** Draws the switch in a checked state. */
-  checked = false;
+  @property({ type: Boolean, reflect: true }) checked = false;
 
   /** This will be true when the control is in an invalid state. Validity is determined by the `required` prop. */
-  invalid = false;
+  @property({ type: Boolean, reflect: true }) invalid = false;
+
+  /** Emitted when the control loses focus. */
+  @event('sl-blur') slBlur: EventEmitter<void>;
+
+  /** Emitted when the control's checked state changes. */
+  @event('sl-change') slChange: EventEmitter<void>;
+
+  /** Emitted when the control gains focus. */
+  @event('sl-focus') slFocus: EventEmitter<void>;
 
   /** Sets focus on the switch. */
   setFocus(options?: FocusOptions) {
@@ -69,17 +76,17 @@ export default class SlSwitch extends Shoemaker {
   }
 
   handleClick() {
-    this.checked = this.input.checked;
+    this.checked = !this.checked;
   }
 
   handleBlur() {
     this.hasFocus = false;
-    this.emit('sl-blur');
+    this.slBlur.emit();
   }
 
   handleFocus() {
     this.hasFocus = true;
-    this.emit('sl-focus');
+    this.slFocus.emit();
   }
 
   handleKeyDown(event: KeyboardEvent) {
@@ -100,9 +107,11 @@ export default class SlSwitch extends Shoemaker {
     this.input.focus();
   }
 
-  watchChecked() {
-    this.input.checked = this.checked;
-    this.emit('sl-change');
+  checkedChanged() {
+    if (this.input) {
+      this.input.checked = this.checked;
+      this.slChange.emit();
+    }
   }
 
   render() {
@@ -116,32 +125,31 @@ export default class SlSwitch extends Shoemaker {
           'switch--disabled': this.disabled,
           'switch--focused': this.hasFocus
         })}
-        onmousedown=${this.handleMouseDown.bind(this)}
+        @mousedown=${this.handleMouseDown}
       >
         <span part="control" class="switch__control">
-          <span part="thumb" class="switch__thumb" />
+          <span part="thumb" class="switch__thumb"></span>
 
           <input
-            ref=${(el: HTMLInputElement) => (this.input = el)}
             id=${this.switchId}
             type="checkbox"
             name=${this.name}
             .value=${this.value}
-            checked=${this.checked ? true : null}
-            disabled=${this.disabled ? true : null}
-            required=${this.required ? true : null}
+            ?checked=${this.checked}
+            ?disabled=${this.disabled}
+            ?required=${this.required}
             role="switch"
             aria-checked=${this.checked ? 'true' : 'false'}
             aria-labelledby=${this.labelId}
-            onclick=${this.handleClick.bind(this)}
-            onblur=${this.handleBlur.bind(this)}
-            onfocus=${this.handleFocus.bind(this)}
-            onkeydown=${this.handleKeyDown.bind(this)}
+            @click=${this.handleClick}
+            @blur=${this.handleBlur}
+            @focus=${this.handleFocus}
+            @keydown=${this.handleKeyDown}
           />
         </span>
 
         <span part="label" id=${this.labelId} class="switch__label">
-          <slot />
+          <slot></slot>
         </span>
       </label>
     `;

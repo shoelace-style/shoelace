@@ -1,4 +1,7 @@
-import { classMap, html, Shoemaker } from '@shoelace-style/shoemaker';
+import { LitElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
+import { ifDefined } from 'lit-html/directives/if-defined';
+import { classMap } from 'lit-html/directives/class-map';
+import { event, EventEmitter, tag, watch } from '../../internal/decorators';
 import styles from 'sass:./input.scss';
 import { renderFormControl } from '../../internal/form-control';
 import { hasSlot } from '../../internal/slot';
@@ -28,148 +31,131 @@ let id = 0;
  * @part password-toggle-button - The password toggle button.
  * @part suffix - The input suffix container.
  * @part help-text - The input help text.
- *
- * @emit sl-change - Emitted when the control's value changes.
- * @emit sl-clear - Emitted when the clear button is activated.
- * @emit sl-input - Emitted when the control receives input.
- * @emit sl-focus - Emitted when the control gains focus.
- * @emit sl-blur - Emitted when the control loses focus.
  */
-export default class SlInput extends Shoemaker {
-  static tag = 'sl-input';
-  static props = [
-    'hasFocus',
-    'hasHelpTextSlot',
-    'hasLabelSlot',
-    'isPasswordVisible',
-    'type',
-    'size',
-    'name',
-    'value',
-    'pill',
-    'label',
-    'helpText',
-    'clearable',
-    'togglePassword',
-    'placeholder',
-    'disabled',
-    'readonly',
-    'minlength',
-    'maxlength',
-    'min',
-    'max',
-    'step',
-    'pattern',
-    'required',
-    'invalid',
-    'autocapitalize',
-    'autocorrect',
-    'autocomplete',
-    'autofocus',
-    'spellcheck',
-    'inputmode'
-  ];
-  static reflect = ['size', 'pill', 'disabled', 'readonly', 'invalid'];
-  static styles = styles;
+@tag('sl-input')
+export class SlInput extends LitElement {
+  static styles = unsafeCSS(styles);
 
-  private hasFocus = false;
-  private hasHelpTextSlot = false;
-  private hasLabelSlot = false;
+  @query('.input__control') input: HTMLInputElement;
+
   private helpTextId = `input-help-text-${id}`;
-  private input: HTMLInputElement;
   private inputId = `input-${++id}`;
-  private isPasswordVisible = false;
   private labelId = `input-label-${id}`;
 
+  @internalProperty() private hasFocus = false;
+  @internalProperty() private hasHelpTextSlot = false;
+  @internalProperty() private hasLabelSlot = false;
+  @internalProperty() private isPasswordVisible = false;
+
   /** The input's type. */
-  type: 'email' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'url' = 'text';
+  @property({ reflect: true }) type: 'email' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'url' = 'text';
 
   /** The input's size. */
-  size: 'small' | 'medium' | 'large' = 'medium';
+  @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
 
   /** The input's name attribute. */
-  name = '';
+  @property() name: string;
 
   /** The input's value attribute. */
-  value = '';
+  @property() value = '';
 
   /** Draws a pill-style input with rounded edges. */
-  pill = false;
+  @property({ type: Boolean, reflect: true }) pill = false;
 
   /** The input's label. Alternatively, you can use the label slot. */
-  label = '';
+  @property() label: string;
 
   /** The input's help text. Alternatively, you can use the help-text slot. */
-  helpText = '';
+  @property({ attribute: 'help-text' }) helpText: string;
 
   /** Adds a clear button when the input is populated. */
-  clearable = false;
+  @property({ type: Boolean }) clearable = false;
 
   /** Adds a password toggle button to password inputs. */
-  togglePassword = false;
+  @property({ attribute: 'toggle-password', type: Boolean }) togglePassword = false;
 
   /** The input's placeholder text. */
-  placeholder = '';
+  @property() placeholder = '';
 
   /** Disables the input. */
-  disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Makes the input readonly. */
-  readonly = false;
+  @property({ type: Boolean, reflect: true }) readonly = false;
 
   /** The minimum length of input that will be considered valid. */
-  minlength: number;
+  @property({ type: Number }) minlength: number;
 
   /** The maximum length of input that will be considered valid. */
-  maxlength: number;
+  @property({ type: Number }) maxlength: number;
 
   /** The input's minimum value. */
-  min: number | string;
+  @property() min: number | string;
 
   /** The input's maximum value. */
-  max: number | string;
+  @property() max: number | string;
 
   /** The input's step attribute. */
-  step: number;
+  @property({ type: Number }) step: number;
 
   /** A pattern to validate input against. */
-  pattern: string;
+  @property() pattern: string;
 
   /** Makes the input a required field. */
-  required = false;
+  @property({ type: Boolean, reflect: true }) required = false;
 
   /**
    * This will be true when the control is in an invalid state. Validity is determined by props such as `type`,
    * `required`, `minlength`, `maxlength`, and `pattern` using the browser's constraint validation API.
    */
-  invalid = false;
+  @property({ type: Boolean, reflect: true }) invalid = false;
 
   /** The input's autocaptialize attribute. */
-  autocapitalize: string;
+  @property() autocapitalize: string;
 
   /** The input's autocorrect attribute. */
-  autocorrect: string;
+  @property() autocorrect: string;
 
   /** The input's autocomplete attribute. */
-  autocomplete: string;
+  @property() autocomplete: string;
 
   /** The input's autofocus attribute. */
-  autofocus: boolean;
+  @property({ type: Boolean }) autofocus: boolean;
 
   /** Enables spell checking on the input. */
-  spellcheck: boolean;
+  @property({ type: Boolean }) spellcheck: boolean;
 
   /** The input's inputmode attribute. */
-  inputmode: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
+  @property() inputmode: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
 
-  onConnect() {
+  /** Emitted when the control's value changes. */
+  @event('sl-change') slChange: EventEmitter<void>;
+
+  /** Emitted when the clear button is activated. */
+  @event('sl-clear') slClear: EventEmitter<void>;
+
+  /** Emitted when the control receives input. */
+  @event('sl-input') slInput: EventEmitter<void>;
+
+  /** Emitted when the control gains focus. */
+  @event('sl-focus') slFocus: EventEmitter<void>;
+
+  /** Emitted when the control loses focus. */
+  @event('sl-blur') slBlur: EventEmitter<void>;
+
+  connectedCallback() {
+    super.connectedCallback();
     this.handleSlotChange = this.handleSlotChange.bind(this);
 
     this.shadowRoot!.addEventListener('slotchange', this.handleSlotChange);
+  }
+
+  firstUpdated() {
     this.handleSlotChange();
   }
 
-  onDisconnect() {
+  disconnectedCallback() {
+    super.disconnectedCallback();
     this.shadowRoot!.removeEventListener('slotchange', this.handleSlotChange);
   }
 
@@ -208,8 +194,8 @@ export default class SlInput extends Shoemaker {
 
     if (this.value !== this.input.value) {
       this.value = this.input.value;
-      this.emit('sl-input');
-      this.emit('sl-change');
+      this.slInput.emit();
+      this.slChange.emit();
     }
   }
 
@@ -226,12 +212,12 @@ export default class SlInput extends Shoemaker {
 
   handleChange() {
     this.value = this.input.value;
-    this.emit('sl-change');
+    this.slChange.emit();
   }
 
   handleInput() {
     this.value = this.input.value;
-    this.emit('sl-input');
+    this.slInput.emit();
   }
 
   handleInvalid() {
@@ -240,19 +226,19 @@ export default class SlInput extends Shoemaker {
 
   handleBlur() {
     this.hasFocus = false;
-    this.emit('sl-blur');
+    this.slBlur.emit();
   }
 
   handleFocus() {
     this.hasFocus = true;
-    this.emit('sl-focus');
+    this.slFocus.emit();
   }
 
   handleClearClick(event: MouseEvent) {
     this.value = '';
-    this.emit('sl-clear');
-    this.emit('sl-input');
-    this.emit('sl-change');
+    this.slClear.emit();
+    this.slInput.emit();
+    this.slChange.emit();
     this.input.focus();
 
     event.stopPropagation();
@@ -262,21 +248,18 @@ export default class SlInput extends Shoemaker {
     this.isPasswordVisible = !this.isPasswordVisible;
   }
 
+  @watch('helpText')
+  @watch('label')
   handleSlotChange() {
     this.hasHelpTextSlot = hasSlot(this, 'help-text');
     this.hasLabelSlot = hasSlot(this, 'label');
   }
 
-  watchHelpText() {
-    this.handleSlotChange();
-  }
-
-  watchLabel() {
-    this.handleSlotChange();
-  }
-
-  watchValue() {
-    this.invalid = !this.input.checkValidity();
+  @watch('value')
+  handleValueChange() {
+    if (this.input) {
+      this.invalid = !this.input.checkValidity();
+    }
   }
 
   render() {
@@ -311,41 +294,40 @@ export default class SlInput extends Shoemaker {
           })}
         >
           <span part="prefix" class="input__prefix">
-            <slot name="prefix" />
+            <slot name="prefix"></slot>
           </span>
 
           <input
             part="input"
-            ref=${(el: HTMLInputElement) => (this.input = el)}
             id=${this.inputId}
             class="input__control"
             type=${this.type === 'password' && this.isPasswordVisible ? 'text' : this.type}
-            name=${this.name}
-            placeholder=${this.placeholder}
-            disabled=${this.disabled ? true : null}
-            readonly=${this.readonly ? true : null}
-            minlength=${this.minlength}
-            maxlength=${this.maxlength}
-            min=${this.min}
-            max=${this.max}
-            step=${this.step}
+            name=${ifDefined(this.name)}
             .value=${this.value}
-            autocapitalize=${this.autocapitalize}
-            autocomplete=${this.autocomplete}
-            autocorrect=${this.autocorrect}
-            autofocus=${this.autofocus}
-            spellcheck=${this.spellcheck}
-            pattern=${this.pattern}
-            required=${this.required ? true : null}
-            inputmode=${this.inputmode}
+            ?disabled=${this.disabled}
+            ?readonly=${this.readonly}
+            ?required=${this.required}
+            placeholder=${ifDefined(this.placeholder)}
+            minlength=${ifDefined(this.minlength)}
+            maxlength=${ifDefined(this.maxlength)}
+            min=${ifDefined(this.min)}
+            max=${ifDefined(this.max)}
+            step=${ifDefined(this.step)}
+            autocapitalize=${ifDefined(this.autocapitalize)}
+            autocomplete=${ifDefined(this.autocomplete)}
+            autocorrect=${ifDefined(this.autocorrect)}
+            autofocus=${ifDefined(this.autofocus)}
+            spellcheck=${ifDefined(this.spellcheck)}
+            pattern=${ifDefined(this.pattern)}
+            inputmode=${ifDefined(this.inputmode)}
             aria-labelledby=${this.labelId}
             aria-describedby=${this.helpTextId}
             aria-invalid=${this.invalid ? 'true' : 'false'}
-            onchange=${this.handleChange.bind(this)}
-            oninput=${this.handleInput.bind(this)}
-            oninvalid=${this.handleInvalid.bind(this)}
-            onfocus=${this.handleFocus.bind(this)}
-            onblur=${this.handleBlur.bind(this)}
+            @change=${this.handleChange}
+            @input=${this.handleInput}
+            @invalid=${this.handleInvalid}
+            @focus=${this.handleFocus}
+            @blur=${this.handleBlur}
           />
 
           ${this.clearable && this.value.length > 0
@@ -354,11 +336,11 @@ export default class SlInput extends Shoemaker {
                   part="clear-button"
                   class="input__clear"
                   type="button"
-                  onclick=${this.handleClearClick.bind(this)}
+                  @click=${this.handleClearClick}
                   tabindex="-1"
                 >
                   <slot name="clear-icon">
-                    <sl-icon name="x-circle" />
+                    <sl-icon name="x-circle"></sl-icon>
                   </slot>
                 </button>
               `
@@ -369,19 +351,19 @@ export default class SlInput extends Shoemaker {
                   part="password-toggle-button"
                   class="input__password-toggle"
                   type="button"
-                  onclick=${this.handlePasswordToggle.bind(this)}
+                  @click=${this.handlePasswordToggle}
                   tabindex="-1"
                 >
                   ${this.isPasswordVisible
                     ? html`
                         <slot name="show-password-icon">
-                          <sl-icon name="eye-slash" />
+                          <sl-icon name="eye-slash"></sl-icon>
                         </slot>
                       `
                     : html`
                         <slot name="hide-password-icon">
                           ${' '}
-                          <sl-icon name="eye" />
+                          <sl-icon name="eye"></sl-icon>
                         </slot>
                       `}
                 </button>
@@ -389,7 +371,7 @@ export default class SlInput extends Shoemaker {
             : ''}
 
           <span part="suffix" class="input__suffix">
-            <slot name="suffix" />
+            <slot name="suffix"></slot>
           </span>
         </div>
       `
