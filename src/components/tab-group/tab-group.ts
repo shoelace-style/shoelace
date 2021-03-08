@@ -197,11 +197,13 @@ export class SlTabGroup extends LitElement {
 
   @watch('noScrollControls')
   updateScrollControls() {
-    if (this.noScrollControls) {
-      this.hasScrollControls = false;
-    } else {
-      this.hasScrollControls =
-        ['top', 'bottom'].includes(this.placement) && this.nav.scrollWidth > this.nav.clientWidth;
+    if (this.nav) {
+      if (this.noScrollControls) {
+        this.hasScrollControls = false;
+      } else {
+        this.hasScrollControls =
+          ['top', 'bottom'].includes(this.placement) && this.nav.scrollWidth > this.nav.clientWidth;
+      }
     }
   }
 
@@ -243,35 +245,37 @@ export class SlTabGroup extends LitElement {
 
   @watch('placement')
   syncActiveTabIndicator() {
-    const tab = this.getActiveTab();
+    if (this.activeTabIndicator) {
+      const tab = this.getActiveTab();
 
-    if (tab) {
-      this.activeTabIndicator.style.display = 'block';
-    } else {
-      this.activeTabIndicator.style.display = 'none';
-      return;
-    }
+      if (tab) {
+        this.activeTabIndicator.style.display = 'block';
+      } else {
+        this.activeTabIndicator.style.display = 'none';
+        return;
+      }
 
-    const width = tab.clientWidth;
-    const height = tab.clientHeight;
-    const offset = getOffset(tab, this.nav);
-    const offsetTop = offset.top + this.nav.scrollTop;
-    const offsetLeft = offset.left + this.nav.scrollLeft;
+      const width = tab.clientWidth;
+      const height = tab.clientHeight;
+      const offset = getOffset(tab, this.nav);
+      const offsetTop = offset.top + this.nav.scrollTop;
+      const offsetLeft = offset.left + this.nav.scrollLeft;
 
-    switch (this.placement) {
-      case 'top':
-      case 'bottom':
-        this.activeTabIndicator.style.width = `${width}px`;
-        (this.activeTabIndicator.style.height as string | undefined) = undefined;
-        this.activeTabIndicator.style.transform = `translateX(${offsetLeft}px)`;
-        break;
+      switch (this.placement) {
+        case 'top':
+        case 'bottom':
+          this.activeTabIndicator.style.width = `${width}px`;
+          (this.activeTabIndicator.style.height as string | undefined) = undefined;
+          this.activeTabIndicator.style.transform = `translateX(${offsetLeft}px)`;
+          break;
 
-      case 'left':
-      case 'right':
-        (this.activeTabIndicator.style.width as string | undefined) = undefined;
-        this.activeTabIndicator.style.height = `${height}px`;
-        this.activeTabIndicator.style.transform = `translateY(${offsetTop}px)`;
-        break;
+        case 'left':
+        case 'right':
+          (this.activeTabIndicator.style.width as string | undefined) = undefined;
+          this.activeTabIndicator.style.height = `${height}px`;
+          this.activeTabIndicator.style.transform = `translateY(${offsetTop}px)`;
+          break;
+      }
     }
   }
 
