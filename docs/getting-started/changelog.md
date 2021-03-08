@@ -12,10 +12,11 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 - 🚨 BREAKING: removed the `symbol` prop from `sl-rating` and reverted to `getSymbol` for optimal flexibility
 - Added `vscode.html-custom-data.json` to the build to support IntelliSense (see [the usage section](/getting-started/usage#code-completion) for details)
-- Added a style to prevent FOUC before components are defined
+- Added a base style to prevent FOUC before components are defined
 - Fixed bug where TypeScript types weren't being generated [#364](https://github.com/shoelace-style/shoelace/pull/364)
 - Improved vertical padding in `sl-tooltip`
 - Moved chunk files into a separate folder
+- Reverted menu item active styles
 - Updated esbuild to 0.8.54
 
 ## 2.0.0-beta.28
