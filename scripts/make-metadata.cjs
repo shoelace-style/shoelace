@@ -135,7 +135,44 @@ components.map(async component => {
   events.map(event => {
     const decorator = event.decorators.filter(dec => dec.name === 'event')[0];
     const name = (decorator ? decorator.arguments.eventName : event.name).replace(/['"`]/g, '');
-    const details = event.type.typeArguments.map(arg => arg.name).join(', ');
+
+    // TODO: This logic is used to gather event details in a developer-friendly format. It could be improved as it may
+    // not cover all types yet. The output is used to populate the Events table of each component in the docs.
+    const params = event.type.typeArguments.map(param => {
+      if (param.type === 'intrinsic') {
+        return param.name;
+      }
+
+      if (param.type === 'literal') {
+        return param.value;
+      }
+
+      if (param.type === 'reflection') {
+        return (
+          '{ ' +
+          param.declaration.children
+            .map(child => {
+              if (child.type.type === 'intrinsic' || child.type.type === 'reference') {
+                return `${child.name}: ${child.type.name}`;
+              } else if (child.name) {
+                if (child.type.type === 'array') {
+                  return `${child.name}: ${child.type.elementType.name}[]`;
+                } else {
+                  return `${child.name}: ${child.type.elementType.name} (${child.type.type})`;
+                }
+              } else {
+                return child.type.type;
+              }
+            })
+            .join(', ') +
+          ' }'
+        );
+      }
+
+      return '';
+    });
+
+    const details = params.join(', ');
 
     api.events.push({
       name,
