@@ -81,7 +81,7 @@ If a component has dependencies, they'll be listed in the "Dependencies" section
 
 Shoelace is distributed as a collection of standard ES modules that [all modern browsers can understand](https://caniuse.com/es6-module). However, importing a lot of modules can result in a lot of HTTP requests and potentially longer load times. Using a CDN can alleviate this, but some users may wish to further optimize their imports with a bundler.
 
-To use Shoelace with a bundler, first install Shoelace as well as your bundler of choice.
+To use Shoelace with a bundler, first install Shoelace along with your bundler of choice.
 
 ```bash
 npm install @shoelace-style/shoelace
