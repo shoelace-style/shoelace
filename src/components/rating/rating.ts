@@ -66,21 +66,31 @@ export default class SlRating extends LitElement {
   }
 
   getValueFromMousePosition(event: MouseEvent) {
+    return this.getValueFromXCoordinate(event.clientX);
+  }
+
+  getValueFromTouchPosition(event: TouchEvent) {
+    return this.getValueFromXCoordinate(event.touches[0].clientX);
+  }
+
+  private getValueFromXCoordinate(coordinate: number) {
     const containerLeft = this.rating.getBoundingClientRect().left;
     const containerWidth = this.rating.getBoundingClientRect().width;
     return clamp(
-      this.roundToPrecision(((event.clientX - containerLeft) / containerWidth) * this.max, this.precision),
+      this.roundToPrecision(((coordinate - containerLeft) / containerWidth) * this.max, this.precision),
       0,
       this.max
     );
   }
 
   handleClick(event: MouseEvent) {
+    this.setValue(this.getValueFromMousePosition(event));
+  }
+
+  private setValue(newValue: number) {
     if (this.disabled || this.readonly) {
       return;
     }
-
-    const newValue = this.getValueFromMousePosition(event);
 
     this.value = newValue === this.value ? 0 : newValue;
     this.isHovering = false;
@@ -118,12 +128,28 @@ export default class SlRating extends LitElement {
     this.isHovering = true;
   }
 
+  handleTouchStart(event: TouchEvent) {
+    this.hoverValue = this.getValueFromTouchPosition(event);
+  }
+
   handleMouseLeave() {
     this.isHovering = false;
   }
 
+  handleTouchEnd(event: TouchEvent) {
+    this.isHovering = false;
+    this.setValue(this.hoverValue);
+    // cancel touchend event so click does not get called on mobile devices
+    event.preventDefault();
+  }
+
   handleMouseMove(event: MouseEvent) {
     this.hoverValue = this.getValueFromMousePosition(event);
+  }
+
+  handleTouchMove(event: TouchEvent) {
+    this.isHovering = true;
+    this.hoverValue = this.getValueFromTouchPosition(event);
   }
 
   @watch('value')
@@ -163,8 +189,11 @@ export default class SlRating extends LitElement {
         @click=${this.handleClick}
         @keydown=${this.handleKeyDown}
         @mouseenter=${this.handleMouseEnter}
+        @touchstart=${this.handleTouchStart}
         @mouseleave=${this.handleMouseLeave}
+        @touchend=${this.handleTouchEnd}
         @mousemove=${this.handleMouseMove}
+        @touchmove=${this.handleTouchMove}
       >
         <span class="rating__symbols rating__symbols--inactive">
           ${counter.map(index => {
