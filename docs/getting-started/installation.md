@@ -109,4 +109,4 @@ SlRating.register();
 // <sl-button>, <sl-icon>, <sl-input>, and <sl-rating> are ready to use!
 ```
 
-Note that you need to register each component manually to add them to the custom element registry. Components aren't automatically registered to prevent bundlers from treeshaking them.
+Note that you need to register each component manually to add them to the custom element registry. This isn't done automatically because it would introduce side effects that break tree shaking.
