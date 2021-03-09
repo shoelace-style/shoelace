@@ -73,7 +73,7 @@ export default class SlRating extends LitElement {
     return this.getValueFromXCoordinate(event.touches[0].clientX);
   }
 
-  private getValueFromXCoordinate(coordinate: number) {
+  getValueFromXCoordinate(coordinate: number) {
     const containerLeft = this.rating.getBoundingClientRect().left;
     const containerWidth = this.rating.getBoundingClientRect().width;
     return clamp(
@@ -87,7 +87,7 @@ export default class SlRating extends LitElement {
     this.setValue(this.getValueFromMousePosition(event));
   }
 
-  private setValue(newValue: number) {
+  setValue(newValue: number) {
     if (this.disabled || this.readonly) {
       return;
     }
@@ -128,28 +128,32 @@ export default class SlRating extends LitElement {
     this.isHovering = true;
   }
 
-  handleTouchStart(event: TouchEvent) {
-    this.hoverValue = this.getValueFromTouchPosition(event);
+  handleMouseMove(event: MouseEvent) {
+    this.hoverValue = this.getValueFromMousePosition(event);
   }
 
   handleMouseLeave() {
     this.isHovering = false;
   }
 
-  handleTouchEnd(event: TouchEvent) {
-    this.isHovering = false;
-    this.setValue(this.hoverValue);
-    // cancel touchend event so click does not get called on mobile devices
-    event.preventDefault();
-  }
+  handleTouchStart(event: TouchEvent) {
+    this.hoverValue = this.getValueFromTouchPosition(event);
 
-  handleMouseMove(event: MouseEvent) {
-    this.hoverValue = this.getValueFromMousePosition(event);
+    // Prevent scrolling when touch is initiated
+    event.preventDefault();
   }
 
   handleTouchMove(event: TouchEvent) {
     this.isHovering = true;
     this.hoverValue = this.getValueFromTouchPosition(event);
+  }
+
+  handleTouchEnd(event: TouchEvent) {
+    this.isHovering = false;
+    this.setValue(this.hoverValue);
+
+    // Prevent click on mobile devices
+    event.preventDefault();
   }
 
   @watch('value')
