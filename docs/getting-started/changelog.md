@@ -6,6 +6,10 @@ Components with the <sl-badge type="warning" pill>Experimental</sl-badge> badge 
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
+## Nexts
+
+- Add touch support to `sl-rating` [#362](https://github.com/shoelace-style/shoelace/pull/362)
+
 ## 2.0.0-beta.30
 
 - Fix default exports for all components so cherry picking works again [#365](https://github.com/shoelace-style/shoelace/issues/365)
