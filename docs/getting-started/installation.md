@@ -34,7 +34,7 @@ Once you've done that, add the following tags to your page. Make sure to update 
 
 Some components rely on assets (icons, images, etc.) and Shoelace needs to know where they're located. For convenience, Shoelace will try to auto-detect the correct location based on the script you've loaded it from. This assumes assets are colocated with `shoelace.js` and will "just work" for most users.
 
-However, if you're [cherry picking](#cherry-picking) or [bundling](#bundling) Shoelace, you'll need to set the base path. You can do this one of two ways. The following examples assumes you're serving Shoelace's `dist` directory from `/scripts/shoelace`.
+However, if you're [cherry picking](#cherry-picking) or [bundling](#bundling) Shoelace, you'll need to set the base path. You can do this one of two ways. The following examples assume you're serving Shoelace's `dist` directory from `/scripts/shoelace`.
 
 ```html
 <!-- Option 1: the data-shoelace attribute -->
