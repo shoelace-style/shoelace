@@ -22,7 +22,7 @@ import { hasSlot } from '../../internal/slot';
  * @part caret - The button's caret.
  */
 @tag('sl-button')
-export class SlButton extends LitElement {
+export default class SlButton extends LitElement {
   static styles = unsafeCSS(styles);
 
   button: HTMLButtonElement | HTMLLinkElement;

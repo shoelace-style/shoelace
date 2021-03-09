@@ -14,7 +14,7 @@ const parser = new DOMParser();
  * @part base - The component's base wrapper.
  */
 @tag('sl-icon')
-export class SlIcon extends LitElement {
+export default class SlIcon extends LitElement {
   static styles = unsafeCSS(styles);
 
   @internalProperty() private svg = '';

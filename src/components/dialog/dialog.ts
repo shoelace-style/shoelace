@@ -31,7 +31,7 @@ let id = 0;
  * @part footer - The dialog footer.
  */
 @tag('sl-dialog')
-export class SlDialog extends LitElement {
+export default class SlDialog extends LitElement {
   static styles = unsafeCSS(styles);
 
   @query('.dialog') dialog: HTMLElement;

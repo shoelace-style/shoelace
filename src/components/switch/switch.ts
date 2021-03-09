@@ -17,7 +17,7 @@ let id = 0;
  * @part label - The switch label.
  */
 @tag('sl-switch')
-export class SlSwitch extends LitElement {
+export default class SlSwitch extends LitElement {
   static styles = unsafeCSS(styles);
 
   @query('input[type="checkbox"]') input: HTMLInputElement;

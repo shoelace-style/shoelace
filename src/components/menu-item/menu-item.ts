@@ -20,7 +20,7 @@ import styles from 'sass:./menu-item.scss';
  * @part suffix - The suffix container.
  */
 @tag('sl-menu-item')
-export class SlMenuItem extends LitElement {
+export default class SlMenuItem extends LitElement {
   static styles = unsafeCSS(styles);
 
   @query('.menu-item') menuItem: HTMLElement;

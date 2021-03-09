@@ -8,7 +8,7 @@ import { requestInclude } from './request';
  * @status stable
  */
 @tag('sl-include')
-export class SlInclude extends LitElement {
+export default class SlInclude extends LitElement {
   static styles = unsafeCSS(styles);
 
   /** The location of the HTML file to include. */

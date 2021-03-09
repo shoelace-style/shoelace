@@ -29,7 +29,7 @@ interface FormControl {
  * @part base - The component's base wrapper.
  */
 @tag('sl-form')
-export class SlForm extends LitElement {
+export default class SlForm extends LitElement {
   static styles = unsafeCSS(styles);
 
   @query('.form') form: HTMLElement;

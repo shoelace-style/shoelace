@@ -13,7 +13,7 @@ let id = 0;
  * @part base - The component's base wrapper.
  */
 @tag('sl-tab-panel')
-export class SlTabPanel extends LitElement {
+export default class SlTabPanel extends LitElement {
   static styles = unsafeCSS(styles);
 
   private componentId = `tab-panel-${++id}`;

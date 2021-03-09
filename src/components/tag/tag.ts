@@ -16,7 +16,7 @@ import styles from 'sass:./tag.scss';
  * @part clear-button - The clear button.
  */
 @tag('sl-tag')
-export class SlTag extends LitElement {
+export default class SlTag extends LitElement {
   static styles = unsafeCSS(styles);
 
   /** The tag's type. */

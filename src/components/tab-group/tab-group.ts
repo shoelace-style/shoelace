@@ -24,7 +24,7 @@ import { focusVisible } from '../../internal/focus-visible';
  * @part scroll-button - The previous and next scroll buttons that appear when tabs are scrollable.
  */
 @tag('sl-tab-group')
-export class SlTabGroup extends LitElement {
+export default class SlTabGroup extends LitElement {
   static styles = unsafeCSS(styles);
 
   @query('.tab-group') tabGroup: HTMLElement;

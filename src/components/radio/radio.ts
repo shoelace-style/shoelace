@@ -17,7 +17,7 @@ let id = 0;
  * @part label - The radio label.
  */
 @tag('sl-radio')
-export class SlRadio extends LitElement {
+export default class SlRadio extends LitElement {
   static styles = unsafeCSS(styles);
 
   @query('input[type="radio"]') input: HTMLInputElement;

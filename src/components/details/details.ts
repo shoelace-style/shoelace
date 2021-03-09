@@ -22,7 +22,7 @@ let id = 0;
  * @part content - The details content.
  */
 @tag('sl-details')
-export class SlDetails extends LitElement {
+export default class SlDetails extends LitElement {
   static styles = unsafeCSS(styles);
 
   @query('.details') details: HTMLElement;

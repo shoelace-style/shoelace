@@ -21,7 +21,7 @@ import { clamp } from '../../internal/math';
  * @part handle - The handle that the user drags to expose the after image.
  */
 @tag('sl-image-comparer')
-export class SlImageComparer extends LitElement {
+export default class SlImageComparer extends LitElement {
   static styles = unsafeCSS(styles);
 
   @query('.image-comparer') base: HTMLElement;

@@ -15,7 +15,7 @@ import styles from 'sass:./progress-bar.scss';
  * @part label - The progress bar label.
  */
 @tag('sl-progress-bar')
-export class SlProgressBar extends LitElement {
+export default class SlProgressBar extends LitElement {
   static styles = unsafeCSS(styles);
 
   /** The progress bar's percentage, 0 to 100. */

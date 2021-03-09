@@ -11,7 +11,7 @@ import styles from 'sass:./menu-divider.scss';
  * @part base - The component's base wrapper.
  */
 @tag('sl-menu-divider')
-export class SlMenuDivider extends LitElement {
+export default class SlMenuDivider extends LitElement {
   static styles = unsafeCSS(styles);
 
   render() {

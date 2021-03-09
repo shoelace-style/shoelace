@@ -6,7 +6,7 @@ import { tag, watch } from '../../internal/decorators';
  * @status stable
  */
 @tag('sl-relative-time')
-export class SlRelativeTime extends LitElement {
+export default class SlRelativeTime extends LitElement {
   private updateTimeout: any;
 
   @internalProperty() private isoTime = '';

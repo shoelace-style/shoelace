@@ -6,6 +6,11 @@ Components with the <sl-badge type="warning" pill>Experimental</sl-badge> badge 
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
+## 2.0.0-beta.30
+
+- Fix default exports for all components [#365](https://github.com/shoelace-style/shoelace/issues/365)
+- Revert FOUC base style because it interferes with some framework and custom element use cases
+
 ## 2.0.0-beta.29
 
 **This release migrates component implementations from Shoemaker to LitElement.** Due to feedback from the community, Shoelace will rely on a more heavily tested library for component implementations. This gives you a more solid foundation and reduces my maintenance burden. Thank you for all your comments, concerns, and encouragement! Aside from that, everything else from beta.28 still applies plus the following.

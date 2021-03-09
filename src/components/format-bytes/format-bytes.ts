@@ -7,7 +7,7 @@ import { formatBytes } from '../../internal/number';
  * @status stable
  */
 @tag('sl-format-bytes')
-export class SlFormatBytes extends LitElement {
+export default class SlFormatBytes extends LitElement {
   /** The number to format in bytes. */
   @property({ type: Number }) value = 0;
 

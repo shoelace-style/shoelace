@@ -9,7 +9,7 @@ import styles from 'sass:./spinner.scss';
  * @part base - The component's base wrapper.
  */
 @tag('sl-spinner')
-export class SlSpinner extends LitElement {
+export default class SlSpinner extends LitElement {
   static styles = unsafeCSS(styles);
 
   render() {

@@ -11,7 +11,7 @@ import styles from 'sass:./skeleton.scss';
  * @part indicator - The skeleton's indicator which is responsible for its color and animation.
  */
 @tag('sl-skeleton')
-export class SlSkeleton extends LitElement {
+export default class SlSkeleton extends LitElement {
   static styles = unsafeCSS(styles);
 
   /** Determines which effect the skeleton will use. */

@@ -7,7 +7,7 @@ import styles from 'sass:./resize-observer.scss';
  * @status experimental
  */
 @tag('sl-resize-observer')
-export class SlResizeObserver extends LitElement {
+export default class SlResizeObserver extends LitElement {
   static styles = unsafeCSS(styles);
 
   private resizeObserver: ResizeObserver;

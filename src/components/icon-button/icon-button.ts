@@ -14,7 +14,7 @@ import { focusVisible } from '../../internal/focus-visible';
  * @part base - The component's base wrapper.
  */
 @tag('sl-icon-button')
-export class SlIconButton extends LitElement {
+export default class SlIconButton extends LitElement {
   static styles = unsafeCSS(styles);
 
   @query('button') button: HTMLButtonElement;

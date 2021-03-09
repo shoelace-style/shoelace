@@ -16,7 +16,7 @@ let id = 0;
  * @part base - The component's base wrapper.
  */
 @tag('sl-tooltip')
-export class SlTooltip extends LitElement {
+export default class SlTooltip extends LitElement {
   static styles = unsafeCSS(styles);
 
   @query('.tooltip-positioner') positioner: HTMLElement;

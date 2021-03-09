@@ -9,7 +9,7 @@ import { tag, watch } from '../../internal/decorators';
  * @part base - The component's base wrapper.
  */
 @tag('sl-responsive-embed')
-export class SlResponsiveEmbed extends LitElement {
+export default class SlResponsiveEmbed extends LitElement {
   static styles = unsafeCSS(styles);
 
   @query('.responsive-embed') base: HTMLElement;

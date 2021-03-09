@@ -20,7 +20,7 @@ const toastStack = Object.assign(document.createElement('div'), { className: 'sl
  * @part close-button - The close button.
  */
 @tag('sl-alert')
-export class SlAlert extends LitElement {
+export default class SlAlert extends LitElement {
   static styles = unsafeCSS(styles);
 
   private autoHideTimeout: any;

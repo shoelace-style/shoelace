@@ -1,4 +1,4 @@
-import { SlIcon } from './icon';
+import { SlIcon } from '../../shoelace';
 import { getBasePath } from '../../utilities/base-path';
 
 export type IconLibraryResolver = (name: string) => string;

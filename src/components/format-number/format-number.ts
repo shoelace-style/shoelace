@@ -6,7 +6,7 @@ import { tag } from '../../internal/decorators';
  * @status stable
  */
 @tag('sl-format-number')
-export class SlFormatNumber extends LitElement {
+export default class SlFormatNumber extends LitElement {
   /** The number to format. */
   @property({ type: Number }) value = 0;
 

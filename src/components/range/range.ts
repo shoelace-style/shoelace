@@ -20,7 +20,7 @@ let id = 0;
  * @part tooltip - The range tooltip.
  */
 @tag('sl-range')
-export class SlRange extends LitElement {
+export default class SlRange extends LitElement {
   static styles = unsafeCSS(styles);
 
   @query('.range__control') input: HTMLInputElement;

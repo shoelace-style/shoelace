@@ -34,7 +34,7 @@ let id = 0;
  * @part tags - The container in which multiselect options are rendered.
  */
 @tag('sl-select')
-export class SlSelect extends LitElement {
+export default class SlSelect extends LitElement {
   static styles = unsafeCSS(styles);
 
   @query('.select') dropdown: SlDropdown;

@@ -17,7 +17,7 @@ import styles from 'sass:./avatar.scss';
  * @part image - The avatar image.
  */
 @tag('sl-avatar')
-export class SlAvatar extends LitElement {
+export default class SlAvatar extends LitElement {
   static styles = unsafeCSS(styles);
 
   @internalProperty() private hasError = false;

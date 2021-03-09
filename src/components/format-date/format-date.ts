@@ -6,7 +6,7 @@ import { tag } from '../../internal/decorators';
  * @status stable
  */
 @tag('sl-format-date')
-export class SlFormatDate extends LitElement {
+export default class SlFormatDate extends LitElement {
   /** The date/time to format. If not set, the current date and time will be used. */
   @property() date: Date | string = new Date();
 

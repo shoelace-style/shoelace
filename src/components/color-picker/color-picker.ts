@@ -31,7 +31,7 @@ import { clamp } from '../../internal/math';
  * @part format-button - The toggle format button's base.
  */
 @tag('sl-color-picker')
-export class SlColorPicker extends LitElement {
+export default class SlColorPicker extends LitElement {
   static styles = unsafeCSS(styles);
 
   @query('[part="input"]') input: SlInput;

@@ -31,7 +31,7 @@ let id = 0;
  * @part footer - The drawer footer.
  */
 @tag('sl-drawer')
-export class SlDrawer extends LitElement {
+export default class SlDrawer extends LitElement {
   static styles = unsafeCSS(styles);
 
   @query('.drawer') drawer: HTMLElement;

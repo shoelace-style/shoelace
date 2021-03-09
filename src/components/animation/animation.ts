@@ -10,7 +10,7 @@ import { animations } from './animations';
  * @slot - The element to animate. If multiple elements are to be animated, wrap them in a single container.
  */
 @tag('sl-animation')
-export class SlAnimation extends LitElement {
+export default class SlAnimation extends LitElement {
   static styles = unsafeCSS(styles);
 
   private animation: Animation;

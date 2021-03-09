@@ -13,7 +13,7 @@ import { getTextContent } from '../../internal/slot';
  * @part base - The component's base wrapper.
  */
 @tag('sl-menu')
-export class SlMenu extends LitElement {
+export default class SlMenu extends LitElement {
   static styles = unsafeCSS(styles);
 
   @query('.menu') menu: HTMLElement;

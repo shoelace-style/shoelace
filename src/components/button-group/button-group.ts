@@ -11,7 +11,7 @@ import styles from 'sass:./button-group.scss';
  * @part base - The component's base wrapper.
  */
 @tag('sl-button-group')
-export class SlButtonGroup extends LitElement {
+export default class SlButtonGroup extends LitElement {
   static styles = unsafeCSS(styles);
 
   /** A label to use for the button group's `aria-label` attribute. */

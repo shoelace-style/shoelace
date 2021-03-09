@@ -12,7 +12,7 @@ import styles from 'sass:./badge.scss';
  * @part base - The base wrapper
  */
 @tag('sl-badge')
-export class SlBadge extends LitElement {
+export default class SlBadge extends LitElement {
   static styles = unsafeCSS(styles);
 
   /** The badge's type. */

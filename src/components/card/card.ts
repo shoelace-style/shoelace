@@ -20,7 +20,7 @@ import { hasSlot } from '../../internal/slot';
  * @part footer - The card's footer, if present.
  */
 @tag('sl-card')
-export class SlCard extends LitElement {
+export default class SlCard extends LitElement {
   static styles = unsafeCSS(styles);
 
   @internalProperty() private hasFooter = false;

@@ -18,7 +18,7 @@ let id = 0;
  * @part label - The checkbox label.
  */
 @tag('sl-checkbox')
-export class SlCheckbox extends LitElement {
+export default class SlCheckbox extends LitElement {
   static styles = unsafeCSS(styles);
 
   @query('input[type="checkbox"]') input: HTMLInputElement;

@@ -16,7 +16,7 @@ import { clamp } from '../../internal/math';
  * @part base - The component's base wrapper.
  */
 @tag('sl-rating')
-export class SlRating extends LitElement {
+export default class SlRating extends LitElement {
   static styles = unsafeCSS(styles);
 
   @query('.rating') rating: HTMLElement;

@@ -22,7 +22,7 @@ let id = 0;
  * @part help-text - The textarea help text.
  */
 @tag('sl-textarea')
-export class SlTextarea extends LitElement {
+export default class SlTextarea extends LitElement {
   static styles = unsafeCSS(styles);
 
   @query('.textarea__control') input: HTMLTextAreaElement;

@@ -33,7 +33,7 @@ let id = 0;
  * @part help-text - The input help text.
  */
 @tag('sl-input')
-export class SlInput extends LitElement {
+export default class SlInput extends LitElement {
   static styles = unsafeCSS(styles);
 
   @query('.input__control') input: HTMLInputElement;

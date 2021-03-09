@@ -21,7 +21,7 @@ let id = 0;
  * @part panel - The panel that gets shown when the dropdown is open.
  */
 @tag('sl-dropdown')
-export class SlDropdown extends LitElement {
+export default class SlDropdown extends LitElement {
   static styles = unsafeCSS(styles);
 
   @query('.dropdown__trigger') trigger: HTMLElement;

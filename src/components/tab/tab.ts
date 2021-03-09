@@ -17,7 +17,7 @@ let id = 0;
  * @part close-button - The close button, which is the icon button's base wrapper.
  */
 @tag('sl-tab')
-export class SlTab extends LitElement {
+export default class SlTab extends LitElement {
   static styles = unsafeCSS(styles);
 
   @query('.tab') tab: HTMLElement;

@@ -12,7 +12,7 @@ import styles from 'sass:./progress-ring.scss';
  * @part label - The progress ring label.
  */
 @tag('sl-progress-ring')
-export class SlProgressRing extends LitElement {
+export default class SlProgressRing extends LitElement {
   static styles = unsafeCSS(styles);
 
   @query('.progress-ring__indicator') indicator: SVGCircleElement;

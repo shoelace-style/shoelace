@@ -13,7 +13,7 @@ import styles from 'sass:./menu-label.scss';
  * @part base - The component's base wrapper.
  */
 @tag('sl-menu-label')
-export class SlMenuLabel extends LitElement {
+export default class SlMenuLabel extends LitElement {
   static styles = unsafeCSS(styles);
 
   render() {
