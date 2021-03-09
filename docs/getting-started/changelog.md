@@ -8,7 +8,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## 2.0.0-beta.30
 
-- Fix default exports for all components [#365](https://github.com/shoelace-style/shoelace/issues/365)
+- Fix default exports for all components so cherry picking works again [#365](https://github.com/shoelace-style/shoelace/issues/365)
 - Revert FOUC base style because it interferes with some framework and custom element use cases
 
 ## 2.0.0-beta.29
