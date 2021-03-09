@@ -23,6 +23,7 @@
   .tab-group__active-tab-indicator {
     position: absolute;
     transition: var(--sl-transition-fast) transform ease, var(--sl-transition-fast) width ease;
+    left: 0;
   }
 
   // Remove the focus ring when the user isn't interacting with a keyboard
