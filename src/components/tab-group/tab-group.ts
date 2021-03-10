@@ -28,8 +28,6 @@ import { styleMap } from 'lit-html/directives/style-map';
 export default class SlTabGroup extends LitElement {
   static styles = unsafeCSS(styles);
 
-  readonly ACTIVE_TAB_INDICATOR_TRANSITION = 'var(--sl-transition-fast) transform ease, var(--sl-transition-fast) width ease';
-
   @query('.tab-group') tabGroup: HTMLElement;
   @query('.tab-group__body') body: HTMLElement;
   @query('.tab-group__nav') nav: HTMLElement;
@@ -297,10 +295,11 @@ export default class SlTabGroup extends LitElement {
   }
 
   stopActiveTabIndicatorTransitionUntilNextFrame() {
+    const transitionValue = this.activeTabIndicator.style.transition;
     this.activeTabIndicator.style.transition = 'none';
 
     requestAnimationFrame(() => {
-      this.activeTabIndicator.style.transition = this.ACTIVE_TAB_INDICATOR_TRANSITION;
+      this.activeTabIndicator.style.transition = transitionValue;
     });
   }
 
@@ -338,14 +337,7 @@ export default class SlTabGroup extends LitElement {
             : ''}
 
           <div part="nav" class="tab-group__nav">
-            <div
-              part="tabs"
-              class="tab-group__tabs"
-              role="tablist"
-              style=${styleMap({
-                transition: `${this.ACTIVE_TAB_INDICATOR_TRANSITION}`
-              })}
-            >
+            <div part="tabs" class="tab-group__tabs" role="tablist">
               <div part="active-tab-indicator" class="tab-group__active-tab-indicator"></div>
               <slot name="nav" @slotchange=${this.syncTabsAndPanels}></slot>
             </div>
