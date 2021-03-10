@@ -6,6 +6,7 @@ import { SlTab, SlTabPanel } from '../../shoelace';
 import { getOffset } from '../../internal/offset';
 import { scrollIntoView } from '../../internal/scroll';
 import { focusVisible } from '../../internal/focus-visible';
+import { styleMap } from 'lit-html/directives/style-map';
 
 /**
  * @since 2.0
@@ -26,6 +27,8 @@ import { focusVisible } from '../../internal/focus-visible';
 @tag('sl-tab-group')
 export default class SlTabGroup extends LitElement {
   static styles = unsafeCSS(styles);
+
+  readonly ACTIVE_TAB_INDICATOR_TRANSITION = 'var(--sl-transition-fast) transform ease, var(--sl-transition-fast) width ease';
 
   @query('.tab-group') tabGroup: HTMLElement;
   @query('.tab-group__body') body: HTMLElement;
@@ -67,7 +70,11 @@ export default class SlTabGroup extends LitElement {
 
     focusVisible.observe(this.tabGroup);
 
-    this.resizeObserver = new ResizeObserver(() => this.updateScrollControls());
+    this.resizeObserver = new ResizeObserver(() => {
+      this.stopActiveTabIndicatorTransitionUntilNextFrame();
+      this.respositionActiveTabIndicator();
+      this.updateScrollControls()
+    });
     this.resizeObserver.observe(this.nav);
     requestAnimationFrame(() => this.updateScrollControls());
 
@@ -255,28 +262,46 @@ export default class SlTabGroup extends LitElement {
         return;
       }
 
-      const width = tab.clientWidth;
-      const height = tab.clientHeight;
-      const offset = getOffset(tab, this.nav);
-      const offsetTop = offset.top + this.nav.scrollTop;
-      const offsetLeft = offset.left + this.nav.scrollLeft;
-
-      switch (this.placement) {
-        case 'top':
-        case 'bottom':
-          this.activeTabIndicator.style.width = `${width}px`;
-          (this.activeTabIndicator.style.height as string | undefined) = undefined;
-          this.activeTabIndicator.style.transform = `translateX(${offsetLeft}px)`;
-          break;
-
-        case 'left':
-        case 'right':
-          (this.activeTabIndicator.style.width as string | undefined) = undefined;
-          this.activeTabIndicator.style.height = `${height}px`;
-          this.activeTabIndicator.style.transform = `translateY(${offsetTop}px)`;
-          break;
-      }
+      this.respositionActiveTabIndicator()
     }
+  }
+
+  respositionActiveTabIndicator() {
+    const currentTab = this.getActiveTab();
+
+    if(!currentTab){
+      return;
+    }
+
+    const width = currentTab.clientWidth;
+    const height = currentTab.clientHeight;
+    const offset = getOffset(currentTab, this.nav);
+    const offsetTop = offset.top + this.nav.scrollTop;
+    const offsetLeft = offset.left + this.nav.scrollLeft;
+
+    switch (this.placement) {
+      case 'top':
+      case 'bottom':
+        this.activeTabIndicator.style.width = `${width}px`;
+        (this.activeTabIndicator.style.height as string | undefined) = undefined;
+        this.activeTabIndicator.style.transform = `translateX(${offsetLeft}px)`;
+        break;
+
+      case 'left':
+      case 'right':
+        (this.activeTabIndicator.style.width as string | undefined) = undefined;
+        this.activeTabIndicator.style.height = `${height}px`;
+        this.activeTabIndicator.style.transform = `translateY(${offsetTop}px)`;
+        break;
+    }
+  }
+
+  stopActiveTabIndicatorTransitionUntilNextFrame() {
+    this.activeTabIndicator.style.transition = 'none';
+
+    requestAnimationFrame(() => {
+      this.activeTabIndicator.style.transition = this.ACTIVE_TAB_INDICATOR_TRANSITION;
+    });
   }
 
   syncTabsAndPanels() {
@@ -313,7 +338,14 @@ export default class SlTabGroup extends LitElement {
             : ''}
 
           <div part="nav" class="tab-group__nav">
-            <div part="tabs" class="tab-group__tabs" role="tablist">
+            <div
+              part="tabs"
+              class="tab-group__tabs"
+              role="tablist"
+              style=${styleMap({
+                transition: `${this.ACTIVE_TAB_INDICATOR_TRANSITION}`
+              })}
+            >
               <div part="active-tab-indicator" class="tab-group__active-tab-indicator"></div>
               <slot name="nav" @slotchange=${this.syncTabsAndPanels}></slot>
             </div>
