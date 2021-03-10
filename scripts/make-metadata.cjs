@@ -152,6 +152,17 @@ components.map(async component => {
           '{ ' +
           param.declaration.children
             .map(child => {
+              // Component exports aren't named, so they appear as "default" in the type data. However, we can use the
+              // id to link them to the right class.
+              if (child.type.name === 'default') {
+                const component = components.find(component => component.id === child.type.id);
+                if (component) {
+                  child.type.name = component.name;
+                } else {
+                  child.type.name = 'unknown';
+                }
+              }
+
               if (child.type.type === 'intrinsic' || child.type.type === 'reference') {
                 return `${child.name}: ${child.type.name}`;
               } else if (child.name) {
