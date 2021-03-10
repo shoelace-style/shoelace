@@ -6,7 +6,7 @@ Components with the <sl-badge type="warning" pill>Experimental</sl-badge> badge 
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
-## Nexts
+## 2.0.0-beta.31
 
 - Add touch support to `sl-rating` [#362](https://github.com/shoelace-style/shoelace/pull/362)
 - Fixed a bug where the `open` attribute on `sl-details` would prevent it from opening [#357](https://github.com/shoelace-style/shoelace/issues/357)
