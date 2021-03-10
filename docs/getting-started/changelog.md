@@ -10,6 +10,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 - Add touch support to `sl-rating` [#362](https://github.com/shoelace-style/shoelace/pull/362)
 - Fixed a bug where the `open` attribute on `sl-details` would prevent it from opening [#357](https://github.com/shoelace-style/shoelace/issues/357)
+- Fixed event detail type parsing so component class names are shown instead of `default`
 
 ## 2.0.0-beta.30
 
