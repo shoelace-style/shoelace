@@ -1,7 +1,7 @@
 import { LitElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
 import { styleMap } from 'lit-html/directives/style-map';
-import { event, EventEmitter, tag } from '../../internal/decorators';
+import { event, EventEmitter, tag, watch } from '../../internal/decorators';
 import styles from 'sass:./color-picker.scss';
 import { SlDropdown, SlInput } from '../../shoelace';
 import color from 'color';
@@ -579,15 +579,18 @@ export default class SlColorPicker extends LitElement {
     this.bypassValueParse = false;
   }
 
-  formatChanged() {
+  @watch('format')
+  handleFormatChange() {
     this.syncValues();
   }
 
-  opacityChanged() {
+  @watch('opacity')
+  handleOpacityChange() {
     this.alpha = 100;
   }
 
-  valueChanged(newValue: string, oldValue: string) {
+  @watch('value')
+  handleValueChange(newValue: string, oldValue: string) {
     if (!this.bypassValueParse) {
       const newColor = this.parseColor(newValue);
 

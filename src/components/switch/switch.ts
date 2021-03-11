@@ -108,7 +108,7 @@ export default class SlSwitch extends LitElement {
   }
 
   @watch('checked')
-  checkedChanged() {
+  handleCheckedChange() {
     if (this.input) {
       this.input.checked = this.checked;
       this.slChange.emit();

@@ -1,6 +1,6 @@
 import { LitElement, html, internalProperty, property, unsafeCSS } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
-import { event, EventEmitter, tag } from '../../internal/decorators';
+import { event, EventEmitter, tag, watch } from '../../internal/decorators';
 import styles from 'sass:./alert.scss';
 
 const toastStack = Object.assign(document.createElement('div'), { className: 'sl-toast-stack' });
@@ -157,11 +157,13 @@ export default class SlAlert extends LitElement {
     }
   }
 
-  openChanged() {
+  @watch('open')
+  handleOpenChange() {
     this.open ? this.show() : this.hide();
   }
 
-  durationChanged() {
+  @watch('duration')
+  handleDurationChange() {
     this.restartAutoHide();
   }
 
