@@ -6,6 +6,7 @@ import { SlTab, SlTabPanel } from '../../shoelace';
 import { getOffset } from '../../internal/offset';
 import { scrollIntoView } from '../../internal/scroll';
 import { focusVisible } from '../../internal/focus-visible';
+import { styleMap } from 'lit-html/directives/style-map';
 
 /**
  * @since 2.0
@@ -67,7 +68,11 @@ export default class SlTabGroup extends LitElement {
 
     focusVisible.observe(this.tabGroup);
 
-    this.resizeObserver = new ResizeObserver(() => this.updateScrollControls());
+    this.resizeObserver = new ResizeObserver(() => {
+      this.stopActiveTabIndicatorTransitionUntilNextFrame();
+      this.respositionActiveTabIndicator();
+      this.updateScrollControls()
+    });
     this.resizeObserver.observe(this.nav);
     requestAnimationFrame(() => this.updateScrollControls());
 
@@ -253,28 +258,47 @@ export default class SlTabGroup extends LitElement {
         return;
       }
 
-      const width = tab.clientWidth;
-      const height = tab.clientHeight;
-      const offset = getOffset(tab, this.nav);
-      const offsetTop = offset.top + this.nav.scrollTop;
-      const offsetLeft = offset.left + this.nav.scrollLeft;
-
-      switch (this.placement) {
-        case 'top':
-        case 'bottom':
-          this.activeTabIndicator.style.width = `${width}px`;
-          (this.activeTabIndicator.style.height as string | undefined) = undefined;
-          this.activeTabIndicator.style.transform = `translateX(${offsetLeft}px)`;
-          break;
-
-        case 'left':
-        case 'right':
-          (this.activeTabIndicator.style.width as string | undefined) = undefined;
-          this.activeTabIndicator.style.height = `${height}px`;
-          this.activeTabIndicator.style.transform = `translateY(${offsetTop}px)`;
-          break;
-      }
+      this.respositionActiveTabIndicator()
     }
+  }
+
+  respositionActiveTabIndicator() {
+    const currentTab = this.getActiveTab();
+
+    if(!currentTab){
+      return;
+    }
+
+    const width = currentTab.clientWidth;
+    const height = currentTab.clientHeight;
+    const offset = getOffset(currentTab, this.nav);
+    const offsetTop = offset.top + this.nav.scrollTop;
+    const offsetLeft = offset.left + this.nav.scrollLeft;
+
+    switch (this.placement) {
+      case 'top':
+      case 'bottom':
+        this.activeTabIndicator.style.width = `${width}px`;
+        (this.activeTabIndicator.style.height as string | undefined) = undefined;
+        this.activeTabIndicator.style.transform = `translateX(${offsetLeft}px)`;
+        break;
+
+      case 'left':
+      case 'right':
+        (this.activeTabIndicator.style.width as string | undefined) = undefined;
+        this.activeTabIndicator.style.height = `${height}px`;
+        this.activeTabIndicator.style.transform = `translateY(${offsetTop}px)`;
+        break;
+    }
+  }
+
+  stopActiveTabIndicatorTransitionUntilNextFrame() {
+    const transitionValue = this.activeTabIndicator.style.transition;
+    this.activeTabIndicator.style.transition = 'none';
+
+    requestAnimationFrame(() => {
+      this.activeTabIndicator.style.transition = transitionValue;
+    });
   }
 
   syncTabsAndPanels() {
