@@ -32,9 +32,7 @@ export default class SlProgressRing extends LitElement {
 
   @watch('percentage')
   handlePercentageChange() {
-    if (this.indicator) {
-      this.updateProgress();
-    }
+    this.updateProgress();
   }
 
   updateProgress() {

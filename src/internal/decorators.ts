@@ -86,6 +86,9 @@ export function tag(tagName: string) {
 
 // @watch decorator
 //
+// Runs when an observed property changes, e.g. @property or @internalProperty. This will only run after the first
+// update, so initial values will not trigger the watch function.
+//
 // Usage:
 //
 //  @watch('propName') handlePropChange(oldValue, newValue) {
@@ -94,10 +97,15 @@ export function tag(tagName: string) {
 //
 export function watch(propName: string) {
   return (protoOrDescriptor: any, name: string): any => {
-    const update = protoOrDescriptor.update;
+    const { firstUpdated, update } = protoOrDescriptor;
+
+    protoOrDescriptor.firstUpdated = function (changedProps: Map<string, any>) {
+      firstUpdated.call(this, changedProps);
+      this.__didFirstUpdate = true;
+    };
 
     protoOrDescriptor.update = function (changedProps: Map<string, any>) {
-      if (changedProps.has(propName)) {
+      if (this.__didFirstUpdate && changedProps.has(propName)) {
         const oldValue = changedProps.get(propName);
         const newValue = this[propName];
 

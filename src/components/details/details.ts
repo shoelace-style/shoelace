@@ -162,9 +162,7 @@ export default class SlDetails extends LitElement {
 
   @watch('open')
   handleOpenChange() {
-    if (this.details) {
-      this.open ? this.show() : this.hide();
-    }
+    this.open ? this.show() : this.hide();
   }
 
   render() {
