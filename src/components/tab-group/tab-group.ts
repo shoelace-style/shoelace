@@ -3,10 +3,9 @@ import { classMap } from 'lit-html/directives/class-map';
 import { event, EventEmitter, tag, watch } from '../../internal/decorators';
 import styles from 'sass:./tab-group.scss';
 import { SlTab, SlTabPanel } from '../../shoelace';
+import { focusVisible } from '../../internal/focus-visible';
 import { getOffset } from '../../internal/offset';
 import { scrollIntoView } from '../../internal/scroll';
-import { focusVisible } from '../../internal/focus-visible';
-import { styleMap } from 'lit-html/directives/style-map';
 
 /**
  * @since 2.0
@@ -31,7 +30,7 @@ export default class SlTabGroup extends LitElement {
   @query('.tab-group') tabGroup: HTMLElement;
   @query('.tab-group__body') body: HTMLElement;
   @query('.tab-group__nav') nav: HTMLElement;
-  @query('.tab-group__active-tab-indicator') activeTabIndicator: HTMLElement;
+  @query('.tab-group__indicator') indicator: HTMLElement;
 
   private activeTab: SlTab;
   private mutationObserver: MutationObserver;
@@ -69,9 +68,9 @@ export default class SlTabGroup extends LitElement {
     focusVisible.observe(this.tabGroup);
 
     this.resizeObserver = new ResizeObserver(() => {
-      this.stopActiveTabIndicatorTransitionUntilNextFrame();
-      this.respositionActiveTabIndicator();
-      this.updateScrollControls()
+      this.preventIndicatorTransition();
+      this.repositionIndicator();
+      this.updateScrollControls();
     });
     this.resizeObserver.observe(this.nav);
     requestAnimationFrame(() => this.updateScrollControls());
@@ -218,7 +217,7 @@ export default class SlTabGroup extends LitElement {
       // Sync active tab and panel
       this.tabs.map(el => (el.active = el === this.activeTab));
       this.panels.map(el => (el.active = el.name === this.activeTab.panel));
-      this.syncActiveTabIndicator();
+      this.syncIndicator();
 
       if (['top', 'bottom'].includes(this.placement)) {
         scrollIntoView(this.activeTab, this.nav, 'horizontal');
@@ -247,25 +246,24 @@ export default class SlTabGroup extends LitElement {
   }
 
   @watch('placement')
-  syncActiveTabIndicator() {
-    if (this.activeTabIndicator) {
+  syncIndicator() {
+    if (this.indicator) {
       const tab = this.getActiveTab();
 
       if (tab) {
-        this.activeTabIndicator.style.display = 'block';
+        this.indicator.style.display = 'block';
+        this.repositionIndicator();
       } else {
-        this.activeTabIndicator.style.display = 'none';
+        this.indicator.style.display = 'none';
         return;
       }
-
-      this.respositionActiveTabIndicator()
     }
   }
 
-  respositionActiveTabIndicator() {
+  repositionIndicator() {
     const currentTab = this.getActiveTab();
 
-    if(!currentTab){
+    if (!currentTab) {
       return;
     }
 
@@ -278,33 +276,35 @@ export default class SlTabGroup extends LitElement {
     switch (this.placement) {
       case 'top':
       case 'bottom':
-        this.activeTabIndicator.style.width = `${width}px`;
-        (this.activeTabIndicator.style.height as string | undefined) = undefined;
-        this.activeTabIndicator.style.transform = `translateX(${offsetLeft}px)`;
+        this.indicator.style.width = `${width}px`;
+        (this.indicator.style.height as string | undefined) = undefined;
+        this.indicator.style.transform = `translateX(${offsetLeft}px)`;
         break;
 
       case 'left':
       case 'right':
-        (this.activeTabIndicator.style.width as string | undefined) = undefined;
-        this.activeTabIndicator.style.height = `${height}px`;
-        this.activeTabIndicator.style.transform = `translateY(${offsetTop}px)`;
+        (this.indicator.style.width as string | undefined) = undefined;
+        this.indicator.style.height = `${height}px`;
+        this.indicator.style.transform = `translateY(${offsetTop}px)`;
         break;
     }
   }
 
-  stopActiveTabIndicatorTransitionUntilNextFrame() {
-    const transitionValue = this.activeTabIndicator.style.transition;
-    this.activeTabIndicator.style.transition = 'none';
+  // In some orientations, when the component is resized, the indicator's position will change causing it to animate
+  // while you resize. Calling this method will prevent the transition from running on resize, which feels more natural.
+  preventIndicatorTransition() {
+    const transitionValue = this.indicator.style.transition;
+    this.indicator.style.transition = 'none';
 
     requestAnimationFrame(() => {
-      this.activeTabIndicator.style.transition = transitionValue;
+      this.indicator.style.transition = transitionValue;
     });
   }
 
   syncTabsAndPanels() {
     this.tabs = this.getAllTabs();
     this.panels = this.getAllPanels();
-    this.syncActiveTabIndicator();
+    this.syncIndicator();
   }
 
   render() {
@@ -336,7 +336,7 @@ export default class SlTabGroup extends LitElement {
 
           <div part="nav" class="tab-group__nav">
             <div part="tabs" class="tab-group__tabs" role="tablist">
-              <div part="active-tab-indicator" class="tab-group__active-tab-indicator"></div>
+              <div part="active-tab-indicator" class="tab-group__indicator"></div>
               <slot name="nav" @slotchange=${this.syncTabsAndPanels}></slot>
             </div>
           </div>

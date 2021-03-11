@@ -8,6 +8,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
+- Fixed a bug where the active tab indicator wouldn't render properly on tabs styled with `flex-end` [#355](https://github.com/shoelace-style/shoelace/issues/355)
 - Improved `@watch` decorator so watch handlers don't run before the first render
 - Removed guards that were added due to previous watch handler behavior
 
