@@ -1,6 +1,6 @@
 import { LitElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
-import { event, EventEmitter, tag } from '../../internal/decorators';
+import { event, EventEmitter, tag, watch } from '../../internal/decorators';
 import styles from 'sass:./checkbox.scss';
 
 let id = 0;
@@ -104,18 +104,12 @@ export default class SlCheckbox extends LitElement {
     this.input.focus();
   }
 
+  @watch('checked')
+  @watch('indeterminate')
   handleStateChange() {
     this.input.checked = this.checked;
     this.input.indeterminate = this.indeterminate;
     this.slChange.emit();
-  }
-
-  checkedChanged() {
-    this.handleStateChange();
-  }
-
-  indeterminateChanged() {
-    this.handleStateChange();
   }
 
   render() {

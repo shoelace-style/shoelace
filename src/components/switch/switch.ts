@@ -1,6 +1,6 @@
 import { LitElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
-import { event, EventEmitter, tag } from '../../internal/decorators';
+import { event, EventEmitter, tag, watch } from '../../internal/decorators';
 import styles from 'sass:./switch.scss';
 
 let id = 0;
@@ -107,6 +107,7 @@ export default class SlSwitch extends LitElement {
     this.input.focus();
   }
 
+  @watch('checked')
   checkedChanged() {
     if (this.input) {
       this.input.checked = this.checked;
