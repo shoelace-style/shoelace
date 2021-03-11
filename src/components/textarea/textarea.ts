@@ -214,9 +214,7 @@ export default class SlTextarea extends LitElement {
 
   @watch('rows')
   handleRowsChange() {
-    if (this.input) {
-      this.setTextareaHeight();
-    }
+    this.setTextareaHeight();
   }
 
   @watch('helpText')
@@ -228,9 +226,7 @@ export default class SlTextarea extends LitElement {
 
   @watch('value')
   handleValueChange() {
-    if (this.input) {
-      this.invalid = !this.input.checkValidity();
-    }
+    this.invalid = !this.input.checkValidity();
   }
 
   setTextareaHeight() {

@@ -89,13 +89,11 @@ export default class SlRadio extends LitElement {
 
   @watch('checked')
   handleCheckedChange() {
-    if (this.input) {
-      if (this.checked) {
-        this.getSiblingRadios().map(radio => (radio.checked = false));
-      }
-      this.input.checked = this.checked;
-      this.slChange.emit();
+    if (this.checked) {
+      this.getSiblingRadios().map(radio => (radio.checked = false));
     }
+    this.input.checked = this.checked;
+    this.slChange.emit();
   }
 
   handleClick() {

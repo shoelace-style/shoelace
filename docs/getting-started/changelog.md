@@ -6,12 +6,16 @@ Components with the <sl-badge type="warning" pill>Experimental</sl-badge> badge 
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
+## Next
+
+- Improved `@watch` decorator so watch handlers don't run before the first render
+- Removed guards that were added due to previous watch handler behavior
+
 ## 2.0.0-beta.31
 
 - Add touch support to `sl-rating` [#362](https://github.com/shoelace-style/shoelace/pull/362)
 - Fixed a bug where the `open` attribute on `sl-details` would prevent it from opening [#357](https://github.com/shoelace-style/shoelace/issues/357)
 - Fixed event detail type parsing so component class names are shown instead of `default`
-- Improved `@watch` decorator so watch handlers don't run before the first render
 
 ## 2.0.0-beta.30
 

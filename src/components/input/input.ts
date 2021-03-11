@@ -257,9 +257,7 @@ export default class SlInput extends LitElement {
 
   @watch('value')
   handleValueChange() {
-    if (this.input) {
-      this.invalid = !this.input.checkValidity();
-    }
+    this.invalid = !this.input.checkValidity();
   }
 
   render() {

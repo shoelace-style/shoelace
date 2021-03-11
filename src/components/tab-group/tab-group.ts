@@ -197,13 +197,11 @@ export default class SlTabGroup extends LitElement {
 
   @watch('noScrollControls')
   updateScrollControls() {
-    if (this.nav) {
-      if (this.noScrollControls) {
-        this.hasScrollControls = false;
-      } else {
-        this.hasScrollControls =
-          ['top', 'bottom'].includes(this.placement) && this.nav.scrollWidth > this.nav.clientWidth;
-      }
+    if (this.noScrollControls) {
+      this.hasScrollControls = false;
+    } else {
+      this.hasScrollControls =
+        ['top', 'bottom'].includes(this.placement) && this.nav.scrollWidth > this.nav.clientWidth;
     }
   }
 

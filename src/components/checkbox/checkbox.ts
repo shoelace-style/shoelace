@@ -105,11 +105,9 @@ export default class SlCheckbox extends LitElement {
   }
 
   handleStateChange() {
-    if (this.input) {
-      this.input.checked = this.checked;
-      this.input.indeterminate = this.indeterminate;
-      this.slChange.emit();
-    }
+    this.input.checked = this.checked;
+    this.input.indeterminate = this.indeterminate;
+    this.slChange.emit();
   }
 
   checkedChanged() {
