@@ -180,3 +180,9 @@ export default class SlRadio extends LitElement {
     `;
   }
 }
+
+    declare global {
+        interface HTMLElementTagNameMap {
+        'sl-radio': SlRadio;
+        }
+    }

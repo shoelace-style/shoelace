@@ -135,3 +135,9 @@ export default class SlImageComparer extends LitElement {
     `;
   }
 }
+
+    declare global {
+        interface HTMLElementTagNameMap {
+        'sl-image-comparer': SlImageComparer;
+        }
+    }

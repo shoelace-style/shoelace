@@ -360,3 +360,9 @@ export default class SlTabGroup extends LitElement {
     `;
   }
 }
+
+    declare global {
+        interface HTMLElementTagNameMap {
+        'sl-tab-group': SlTabGroup;
+        }
+    }

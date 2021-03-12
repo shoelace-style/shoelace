@@ -262,3 +262,9 @@ export default class SlTooltip extends LitElement {
     `;
   }
 }
+
+    declare global {
+        interface HTMLElementTagNameMap {
+        'sl-tooltip': SlTooltip;
+        }
+    }

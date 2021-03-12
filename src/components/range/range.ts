@@ -210,3 +210,9 @@ export default class SlRange extends LitElement {
     );
   }
 }
+
+    declare global {
+        interface HTMLElementTagNameMap {
+        'sl-range': SlRange;
+        }
+    }

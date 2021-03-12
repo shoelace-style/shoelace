@@ -68,3 +68,9 @@ export default class SlCard extends LitElement {
     `;
   }
 }
+
+    declare global {
+        interface HTMLElementTagNameMap {
+        'sl-card': SlCard;
+        }
+    }

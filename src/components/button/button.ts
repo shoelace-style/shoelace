@@ -227,3 +227,9 @@ export default class SlButton extends LitElement {
     return isLink ? link : button;
   }
 }
+
+    declare global {
+        interface HTMLElementTagNameMap {
+        'sl-button': SlButton;
+        }
+    }

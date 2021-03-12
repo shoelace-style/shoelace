@@ -44,3 +44,9 @@ export default class SlTabPanel extends LitElement {
     `;
   }
 }
+
+    declare global {
+        interface HTMLElementTagNameMap {
+        'sl-tab-panel': SlTabPanel;
+        }
+    }
