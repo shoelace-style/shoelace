@@ -81,3 +81,9 @@ export default class SlTag extends LitElement {
     `;
   }
 }
+
+    declare global {
+        interface HTMLElementTagNameMap {
+        'sl-tag': SlTag;
+        }
+    }

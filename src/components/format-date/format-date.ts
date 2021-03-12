@@ -70,3 +70,9 @@ export default class SlFormatDate extends LitElement {
     }).format(date);
   }
 }
+
+    declare global {
+        interface HTMLElementTagNameMap {
+        'sl-format-date': SlFormatDate;
+        }
+    }

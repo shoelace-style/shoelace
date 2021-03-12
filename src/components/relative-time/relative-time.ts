@@ -116,3 +116,9 @@ export default class SlRelativeTime extends LitElement {
     return html` <time datetime=${this.isoTime} title=${this.titleTime}>${this.relativeTime}</time> `;
   }
 }
+
+    declare global {
+        interface HTMLElementTagNameMap {
+        'sl-relative-time': SlRelativeTime;
+        }
+    }

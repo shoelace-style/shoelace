@@ -68,3 +68,9 @@ export default class SlIconButton extends LitElement {
     `;
   }
 }
+
+    declare global {
+        interface HTMLElementTagNameMap {
+        'sl-icon-button': SlIconButton;
+        }
+    }

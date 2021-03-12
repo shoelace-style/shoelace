@@ -76,3 +76,9 @@ export default class SlProgressRing extends LitElement {
     `;
   }
 }
+
+    declare global {
+        interface HTMLElementTagNameMap {
+        'sl-progress-ring': SlProgressRing;
+        }
+    }

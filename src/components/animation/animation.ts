@@ -202,3 +202,9 @@ export default class SlAnimation extends LitElement {
     return html` <slot @slotchange=${this.handleSlotChange}></slot> `;
   }
 }
+
+    declare global {
+        interface HTMLElementTagNameMap {
+        'sl-animation': SlAnimation;
+        }
+    }

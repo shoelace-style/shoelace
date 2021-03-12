@@ -45,3 +45,9 @@ export default class SlResizeObserver extends LitElement {
     return html` <slot @slotchange=${this.handleSlotChange}></slot> `;
   }
 }
+
+    declare global {
+        interface HTMLElementTagNameMap {
+        'sl-resize-observer': SlResizeObserver;
+        }
+    }

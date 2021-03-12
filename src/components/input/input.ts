@@ -376,3 +376,9 @@ export default class SlInput extends LitElement {
     );
   }
 }
+
+    declare global {
+        interface HTMLElementTagNameMap {
+        'sl-input': SlInput;
+        }
+    }

@@ -16,3 +16,9 @@ export default class SlSpinner extends LitElement {
     return html` <span part="base" class="spinner" aria-busy="true" aria-live="polite"></span> `;
   }
 }
+
+    declare global {
+        interface HTMLElementTagNameMap {
+        'sl-spinner': SlSpinner;
+        }
+    }

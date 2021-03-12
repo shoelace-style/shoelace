@@ -24,3 +24,9 @@ export default class SlMenuLabel extends LitElement {
     `;
   }
 }
+
+    declare global {
+        interface HTMLElementTagNameMap {
+        'sl-menu-label': SlMenuLabel;
+        }
+    }

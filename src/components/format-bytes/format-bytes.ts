@@ -24,3 +24,9 @@ export default class SlFormatBytes extends LitElement {
     });
   }
 }
+
+    declare global {
+        interface HTMLElementTagNameMap {
+        'sl-format-bytes': SlFormatBytes;
+        }
+    }

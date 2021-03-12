@@ -120,3 +120,9 @@ export default class SlIcon extends LitElement {
     return html` <div part="base" class="icon" role="img" aria-label=${this.getLabel()}>${unsafeSVG(this.svg)}</div>`;
   }
 }
+
+    declare global {
+        interface HTMLElementTagNameMap {
+        'sl-icon': SlIcon;
+        }
+    }

@@ -465,3 +465,9 @@ export default class SlSelect extends LitElement {
     );
   }
 }
+
+    declare global {
+        interface HTMLElementTagNameMap {
+        'sl-select': SlSelect;
+        }
+    }

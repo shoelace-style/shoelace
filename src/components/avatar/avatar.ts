@@ -65,3 +65,9 @@ export default class SlAvatar extends LitElement {
     `;
   }
 }
+
+    declare global {
+        interface HTMLElementTagNameMap {
+        'sl-avatar': SlAvatar;
+        }
+    }

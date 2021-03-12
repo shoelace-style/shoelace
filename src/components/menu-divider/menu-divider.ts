@@ -18,3 +18,9 @@ export default class SlMenuDivider extends LitElement {
     return html` <div part="base" class="menu-divider" role="separator" aria-hidden="true"></div> `;
   }
 }
+
+    declare global {
+        interface HTMLElementTagNameMap {
+        'sl-menu-divider': SlMenuDivider;
+        }
+    }
