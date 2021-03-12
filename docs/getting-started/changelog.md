@@ -8,6 +8,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
+- Added tag name maps so TypeScript can identify Shoelace elements [#371](https://github.com/shoelace-style/shoelace/pull/371)
 - Fixed a bug where the active tab indicator wouldn't render properly on tabs styled with `flex-end` [#355](https://github.com/shoelace-style/shoelace/issues/355)
 - Fixed a bug where `sl-change` wasn't emitted by `sl-checkbox` or `sl-switch` [#370](https://github.com/shoelace-style/shoelace/issues/370)
 - Fixed a bug where some props weren't being watched correctly in `sl-alert` and `sl-color-picker`
