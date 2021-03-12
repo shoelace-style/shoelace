@@ -157,8 +157,8 @@ export default class SlSwitch extends LitElement {
   }
 }
 
-    declare global {
-        interface HTMLElementTagNameMap {
-        'sl-switch': SlSwitch;
-        }
-    }
+declare global {
+  interface HTMLElementTagNameMap {
+    'sl-switch': SlSwitch;
+  }
+}

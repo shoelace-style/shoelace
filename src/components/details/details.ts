@@ -212,8 +212,8 @@ export default class SlDetails extends LitElement {
   }
 }
 
-    declare global {
-        interface HTMLElementTagNameMap {
-        'sl-details': SlDetails;
-        }
-    }
+declare global {
+  interface HTMLElementTagNameMap {
+    'sl-details': SlDetails;
+  }
+}

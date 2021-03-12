@@ -17,8 +17,8 @@ export default class SlSpinner extends LitElement {
   }
 }
 
-    declare global {
-        interface HTMLElementTagNameMap {
-        'sl-spinner': SlSpinner;
-        }
-    }
+declare global {
+  interface HTMLElementTagNameMap {
+    'sl-spinner': SlSpinner;
+  }
+}

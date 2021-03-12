@@ -101,8 +101,8 @@ export default class SlMenuItem extends LitElement {
   }
 }
 
-    declare global {
-        interface HTMLElementTagNameMap {
-        'sl-menu-item': SlMenuItem;
-        }
-    }
+declare global {
+  interface HTMLElementTagNameMap {
+    'sl-menu-item': SlMenuItem;
+  }
+}

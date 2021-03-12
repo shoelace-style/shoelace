@@ -79,8 +79,8 @@ export default class SlInclude extends LitElement {
   }
 }
 
-    declare global {
-        interface HTMLElementTagNameMap {
-        'sl-include': SlInclude;
-        }
-    }
+declare global {
+  interface HTMLElementTagNameMap {
+    'sl-include': SlInclude;
+  }
+}

@@ -46,8 +46,8 @@ export default class SlResizeObserver extends LitElement {
   }
 }
 
-    declare global {
-        interface HTMLElementTagNameMap {
-        'sl-resize-observer': SlResizeObserver;
-        }
-    }
+declare global {
+  interface HTMLElementTagNameMap {
+    'sl-resize-observer': SlResizeObserver;
+  }
+}

@@ -117,8 +117,8 @@ export default class SlRelativeTime extends LitElement {
   }
 }
 
-    declare global {
-        interface HTMLElementTagNameMap {
-        'sl-relative-time': SlRelativeTime;
-        }
-    }
+declare global {
+  interface HTMLElementTagNameMap {
+    'sl-relative-time': SlRelativeTime;
+  }
+}

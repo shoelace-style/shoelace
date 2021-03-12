@@ -89,8 +89,8 @@ export default class SlTab extends LitElement {
   }
 }
 
-    declare global {
-        interface HTMLElementTagNameMap {
-        'sl-tab': SlTab;
-        }
-    }
+declare global {
+  interface HTMLElementTagNameMap {
+    'sl-tab': SlTab;
+  }
+}

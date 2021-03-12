@@ -71,8 +71,8 @@ export default class SlFormatDate extends LitElement {
   }
 }
 
-    declare global {
-        interface HTMLElementTagNameMap {
-        'sl-format-date': SlFormatDate;
-        }
-    }
+declare global {
+  interface HTMLElementTagNameMap {
+    'sl-format-date': SlFormatDate;
+  }
+}

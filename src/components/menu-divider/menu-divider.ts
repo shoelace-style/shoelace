@@ -19,8 +19,8 @@ export default class SlMenuDivider extends LitElement {
   }
 }
 
-    declare global {
-        interface HTMLElementTagNameMap {
-        'sl-menu-divider': SlMenuDivider;
-        }
-    }
+declare global {
+  interface HTMLElementTagNameMap {
+    'sl-menu-divider': SlMenuDivider;
+  }
+}

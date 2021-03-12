@@ -203,8 +203,8 @@ export default class SlAnimation extends LitElement {
   }
 }
 
-    declare global {
-        interface HTMLElementTagNameMap {
-        'sl-animation': SlAnimation;
-        }
-    }
+declare global {
+  interface HTMLElementTagNameMap {
+    'sl-animation': SlAnimation;
+  }
+}

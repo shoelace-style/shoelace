@@ -297,8 +297,8 @@ export default class SlTextarea extends LitElement {
   }
 }
 
-    declare global {
-        interface HTMLElementTagNameMap {
-        'sl-textarea': SlTextarea;
-        }
-    }
+declare global {
+  interface HTMLElementTagNameMap {
+    'sl-textarea': SlTextarea;
+  }
+}

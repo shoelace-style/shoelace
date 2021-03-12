@@ -184,8 +184,8 @@ export default class SlCheckbox extends LitElement {
   }
 }
 
-    declare global {
-        interface HTMLElementTagNameMap {
-        'sl-checkbox': SlCheckbox;
-        }
-    }
+declare global {
+  interface HTMLElementTagNameMap {
+    'sl-checkbox': SlCheckbox;
+  }
+}

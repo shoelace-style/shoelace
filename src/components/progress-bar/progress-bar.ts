@@ -51,8 +51,8 @@ export default class SlProgressBar extends LitElement {
   }
 }
 
-    declare global {
-        interface HTMLElementTagNameMap {
-        'sl-progress-bar': SlProgressBar;
-        }
-    }
+declare global {
+  interface HTMLElementTagNameMap {
+    'sl-progress-bar': SlProgressBar;
+  }
+}

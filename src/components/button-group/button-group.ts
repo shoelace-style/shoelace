@@ -42,8 +42,8 @@ export default class SlButtonGroup extends LitElement {
   }
 }
 
-    declare global {
-        interface HTMLElementTagNameMap {
-        'sl-button-group': SlButtonGroup;
-        }
-    }
+declare global {
+  interface HTMLElementTagNameMap {
+    'sl-button-group': SlButtonGroup;
+  }
+}

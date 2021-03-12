@@ -408,8 +408,8 @@ export default class SlDropdown extends LitElement {
   }
 }
 
-    declare global {
-        interface HTMLElementTagNameMap {
-        'sl-dropdown': SlDropdown;
-        }
-    }
+declare global {
+  interface HTMLElementTagNameMap {
+    'sl-dropdown': SlDropdown;
+  }
+}

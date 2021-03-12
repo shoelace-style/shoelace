@@ -243,8 +243,8 @@ export default class SlRating extends LitElement {
   }
 }
 
-    declare global {
-        interface HTMLElementTagNameMap {
-        'sl-rating': SlRating;
-        }
-    }
+declare global {
+  interface HTMLElementTagNameMap {
+    'sl-rating': SlRating;
+  }
+}

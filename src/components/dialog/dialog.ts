@@ -262,8 +262,8 @@ export default class SlDialog extends LitElement {
   }
 }
 
-    declare global {
-        interface HTMLElementTagNameMap {
-        'sl-dialog': SlDialog;
-        }
-    }
+declare global {
+  interface HTMLElementTagNameMap {
+    'sl-dialog': SlDialog;
+  }
+}

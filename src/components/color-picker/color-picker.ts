@@ -822,8 +822,8 @@ export default class SlColorPicker extends LitElement {
   }
 }
 
-    declare global {
-        interface HTMLElementTagNameMap {
-        'sl-color-picker': SlColorPicker;
-        }
-    }
+declare global {
+  interface HTMLElementTagNameMap {
+    'sl-color-picker': SlColorPicker;
+  }
+}

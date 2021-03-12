@@ -280,8 +280,8 @@ export default class SlForm extends LitElement {
   }
 }
 
-    declare global {
-        interface HTMLElementTagNameMap {
-        'sl-form': SlForm;
-        }
-    }
+declare global {
+  interface HTMLElementTagNameMap {
+    'sl-form': SlForm;
+  }
+}

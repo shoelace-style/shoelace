@@ -228,8 +228,8 @@ export default class SlButton extends LitElement {
   }
 }
 
-    declare global {
-        interface HTMLElementTagNameMap {
-        'sl-button': SlButton;
-        }
-    }
+declare global {
+  interface HTMLElementTagNameMap {
+    'sl-button': SlButton;
+  }
+}

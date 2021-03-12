@@ -121,8 +121,8 @@ export default class SlIcon extends LitElement {
   }
 }
 
-    declare global {
-        interface HTMLElementTagNameMap {
-        'sl-icon': SlIcon;
-        }
-    }
+declare global {
+  interface HTMLElementTagNameMap {
+    'sl-icon': SlIcon;
+  }
+}

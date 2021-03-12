@@ -46,8 +46,8 @@ export default class SlBadge extends LitElement {
   }
 }
 
-    declare global {
-        interface HTMLElementTagNameMap {
-        'sl-badge': SlBadge;
-        }
-    }
+declare global {
+  interface HTMLElementTagNameMap {
+    'sl-badge': SlBadge;
+  }
+}

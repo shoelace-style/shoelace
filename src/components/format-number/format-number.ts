@@ -59,8 +59,8 @@ export default class SlFormatNumber extends LitElement {
   }
 }
 
-    declare global {
-        interface HTMLElementTagNameMap {
-        'sl-format-number': SlFormatNumber;
-        }
-    }
+declare global {
+  interface HTMLElementTagNameMap {
+    'sl-format-number': SlFormatNumber;
+  }
+}

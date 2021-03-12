@@ -273,8 +273,8 @@ export default class SlDrawer extends LitElement {
   }
 }
 
-    declare global {
-        interface HTMLElementTagNameMap {
-        'sl-drawer': SlDrawer;
-        }
-    }
+declare global {
+  interface HTMLElementTagNameMap {
+    'sl-drawer': SlDrawer;
+  }
+}

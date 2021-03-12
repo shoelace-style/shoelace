@@ -38,8 +38,8 @@ export default class SlResponsiveEmbed extends LitElement {
   }
 }
 
-    declare global {
-        interface HTMLElementTagNameMap {
-        'sl-responsive-embed': SlResponsiveEmbed;
-        }
-    }
+declare global {
+  interface HTMLElementTagNameMap {
+    'sl-responsive-embed': SlResponsiveEmbed;
+  }
+}

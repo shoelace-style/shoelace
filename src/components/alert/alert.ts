@@ -213,8 +213,8 @@ export default class SlAlert extends LitElement {
   }
 }
 
-    declare global {
-        interface HTMLElementTagNameMap {
-        'sl-alert': SlAlert;
-        }
-    }
+declare global {
+  interface HTMLElementTagNameMap {
+    'sl-alert': SlAlert;
+  }
+}
