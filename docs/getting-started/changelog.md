@@ -11,6 +11,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug where link buttons could have incorrect `target`, `download`, and `rel` props
 - Fixed `aria-label` and `aria-labelledby` props in `sl-dialog` and `sl-drawer`
 - Fixed `tabindex` prop in `sl-menu`
+- Fixed a bug in `sl-select` where tags would always render as pills
 
 ## 2.0.0-beta.32
 

@@ -326,7 +326,7 @@ export default class SlSelect extends LitElement {
             exportparts="base:tag"
             type="info"
             size=${this.size}
-            pill=${this.pill}
+            ?pill=${this.pill}
             clearable
             @click=${this.handleTagInteraction}
             @keydown=${this.handleTagInteraction}
