@@ -1,6 +1,7 @@
 import { LitElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
 import { tag } from '../../internal/decorators';
 import { classMap } from 'lit-html/directives/class-map';
+import { ifDefined } from 'lit-html/directives/if-defined';
 import styles from 'sass:./menu-item.scss';
 
 /**
@@ -75,7 +76,7 @@ export default class SlMenuItem extends LitElement {
         role="menuitem"
         aria-disabled=${this.disabled ? 'true' : 'false'}
         aria-checked=${this.checked ? 'true' : 'false'}
-        tabindex=${!this.disabled ? '0' : null}
+        tabindex=${ifDefined(!this.disabled ? '0' : undefined)}
         @focus=${this.handleFocus}
         @blur=${this.handleBlur}
         @mouseenter=${this.handleMouseEnter}

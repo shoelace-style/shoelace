@@ -1,5 +1,6 @@
 import { LitElement, html, internalProperty, property, unsafeCSS } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
+import { ifDefined } from 'lit-html/directives/if-defined';
 import { event, EventEmitter, tag } from '../../internal/decorators';
 import styles from 'sass:./button.scss';
 import { hasSlot } from '../../internal/slot';
@@ -213,9 +214,9 @@ export default class SlButton extends LitElement {
           'button--has-suffix': this.hasSuffix
         })}
         href=${this.href}
-        target=${this.target ? this.target : null}
-        download=${this.download ? this.download : null}
-        rel=${this.target ? 'noreferrer noopener' : null}
+        target=${ifDefined(this.target)}
+        download=${ifDefined(this.download)}
+        rel=${ifDefined(this.target ? 'noreferrer noopener' : undefined)}
         onblur=${this.handleBlur}
         onfocus=${this.handleFocus}
         onclick=${this.handleClick}

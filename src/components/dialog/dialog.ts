@@ -1,5 +1,6 @@
 import { LitElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
+import { ifDefined } from 'lit-html/directives/if-defined';
 import { event, EventEmitter, tag, watch } from '../../internal/decorators';
 import styles from 'sass:./dialog.scss';
 import { lockBodyScrolling, unlockBodyScrolling } from '../../internal/scroll';
@@ -229,8 +230,8 @@ export default class SlDialog extends LitElement {
           role="dialog"
           aria-modal="true"
           aria-hidden=${this.open ? 'false' : 'true'}
-          aria-label=${this.noHeader ? this.label : null}
-          aria-labelledby=${!this.noHeader ? `${this.componentId}-title` : null}
+          aria-label=${ifDefined(this.noHeader ? this.label : undefined)}
+          aria-labelledby=${ifDefined(!this.noHeader ? `${this.componentId}-title` : undefined)}
           tabindex="0"
         >
           ${!this.noHeader
