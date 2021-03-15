@@ -120,9 +120,7 @@ export default class SlSelect extends LitElement {
 
   firstUpdated() {
     this.resizeObserver = new ResizeObserver(() => this.resizeMenu());
-
-    // We need to do an initial sync after the component has rendered, so this will suppress the re-render warning
-    requestAnimationFrame(() => this.syncItemsFromValue());
+    this.syncItemsFromValue();
   }
 
   disconnectedCallback() {
@@ -271,10 +269,13 @@ export default class SlSelect extends LitElement {
 
   @watch('helpText')
   @watch('label')
-  handleSlotChange() {
+  async handleSlotChange() {
     this.hasHelpTextSlot = hasSlot(this, 'help-text');
     this.hasLabelSlot = hasSlot(this, 'label');
-    this.syncItemsFromValue();
+
+    // Wait for items to render before gathering labels otherwise the slot won't exist
+    const items = this.getItems();
+    await Promise.all(items.map(item => item.render)).then(() => this.syncItemsFromValue());
   }
 
   handleTagInteraction(event: KeyboardEvent | MouseEvent) {
