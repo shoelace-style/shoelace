@@ -12,6 +12,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed `aria-label` and `aria-labelledby` props in `sl-dialog` and `sl-drawer`
 - Fixed `tabindex` prop in `sl-menu`
 - Fixed a bug in `sl-select` where tags would always render as pills
+- Fixed a bug in `sl-button` where calling `setFocus()` would throw an error
 
 ## 2.0.0-beta.32
 

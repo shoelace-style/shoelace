@@ -1,4 +1,4 @@
-import { LitElement, html, internalProperty, property, unsafeCSS } from 'lit-element';
+import { LitElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
 import { event, EventEmitter, tag } from '../../internal/decorators';
@@ -26,7 +26,7 @@ import { hasSlot } from '../../internal/slot';
 export default class SlButton extends LitElement {
   static styles = unsafeCSS(styles);
 
-  button: HTMLButtonElement | HTMLLinkElement;
+  @query('.button') button: HTMLButtonElement | HTMLLinkElement;
 
   @internalProperty() private hasFocus = false;
   @internalProperty() private hasLabel = false;
