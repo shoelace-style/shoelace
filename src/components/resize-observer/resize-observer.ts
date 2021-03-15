@@ -18,7 +18,9 @@ export default class SlResizeObserver extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.resizeObserver = new ResizeObserver(entries => this.slResize.emit({ detail: { entries } }));
+    this.resizeObserver = new ResizeObserver((entries: ResizeObserverEntry[]) => {
+      this.slResize.emit({ detail: { entries } });
+    });
   }
 
   disconnectedCallback() {
