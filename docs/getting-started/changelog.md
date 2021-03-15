@@ -6,15 +6,18 @@ Components with the <sl-badge type="warning" pill>Experimental</sl-badge> badge 
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
+## Next
+
+- Fixed a bug where link buttons could have incorrect `target`, `download`, and `rel` props
+- Fixed `aria-label` and `aria-labelledby` props in `sl-dialog` and `sl-drawer`
+- Fixed `tabindex` prop in `sl-menu`
+
 ## 2.0.0-beta.32
 
 - Added tag name maps so TypeScript can identify Shoelace elements [#371](https://github.com/shoelace-style/shoelace/pull/371)
 - Fixed a bug where the active tab indicator wouldn't render properly on tabs styled with `flex-end` [#355](https://github.com/shoelace-style/shoelace/issues/355)
 - Fixed a bug where `sl-change` wasn't emitted by `sl-checkbox` or `sl-switch` [#370](https://github.com/shoelace-style/shoelace/issues/370)
 - Fixed a bug where some props weren't being watched correctly in `sl-alert` and `sl-color-picker`
-- Fixed a bug where link buttons could have incorrect `target`, `download`, and `rel` props
-- Fixed `aria-label` and `aria-labelledby` props in `sl-dialog` and `sl-drawer`
-- Fixed `tabindex` prop in `sl-menu`
 - Improved `@watch` decorator so watch handlers don't run before the first render
 - Removed guards that were added due to previous watch handler behavior
 
