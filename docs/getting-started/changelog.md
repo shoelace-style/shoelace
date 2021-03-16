@@ -11,6 +11,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Added `sl-clear` event to `sl-select`
 - Fixed a bug where dynamically changing menu items in `sl-select` would cause the display label to be blank [#374](https://github.com/shoelace-style/shoelace/discussions/374)
 - Fixed the margin in `sl-menu-label` to align with menu items
+- Fixed a bug where setting the `value` attribute or property on `sl-input` and `sl-textarea` would trigger validation too soon
 
 ## 2.0.0-beta.33
 
