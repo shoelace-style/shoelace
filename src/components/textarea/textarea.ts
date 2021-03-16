@@ -85,7 +85,19 @@ export default class SlTextarea extends LitElement {
   @property({ type: Boolean, reflect: true }) invalid = false;
 
   /** The textarea's autocaptialize attribute. */
-  @property() autocapitalize: string;
+  @property() autocapitalize:
+    | 'off'
+    | 'none'
+    | 'on'
+    | 'sentences'
+    | 'words'
+    | 'characters'
+    | 'off'
+    | 'none'
+    | 'on'
+    | 'sentences'
+    | 'words'
+    | 'characters';
 
   /** The textarea's autocorrect attribute. */
   @property() autocorrect: string;
@@ -283,7 +295,7 @@ export default class SlTextarea extends LitElement {
             maxlength=${ifDefined(this.maxlength)}
             autocapitalize=${ifDefined(this.autocapitalize)}
             autocorrect=${ifDefined(this.autocorrect)}
-            autofocus=${ifDefined(this.autofocus)}
+            ?autofocus=${this.autofocus}
             spellcheck=${ifDefined(this.spellcheck)}
             inputmode=${ifDefined(this.inputmode)}
             aria-labelledby=${this.labelId}

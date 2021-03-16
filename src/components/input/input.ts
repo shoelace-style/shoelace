@@ -111,7 +111,7 @@ export default class SlInput extends LitElement {
   @property({ type: Boolean, reflect: true }) invalid = false;
 
   /** The input's autocaptialize attribute. */
-  @property() autocapitalize: string;
+  @property() autocapitalize: 'off' | 'none' | 'on' | 'sentences' | 'words' | 'characters';
 
   /** The input's autocorrect attribute. */
   @property() autocorrect: string;
@@ -315,7 +315,7 @@ export default class SlInput extends LitElement {
             autocapitalize=${ifDefined(this.autocapitalize)}
             autocomplete=${ifDefined(this.autocomplete)}
             autocorrect=${ifDefined(this.autocorrect)}
-            autofocus=${ifDefined(this.autofocus)}
+            ?autofocus=${this.autofocus}
             spellcheck=${ifDefined(this.spellcheck)}
             pattern=${ifDefined(this.pattern)}
             inputmode=${ifDefined(this.inputmode)}
