@@ -101,6 +101,9 @@ export default class SlSelect extends LitElement {
   /** This will be true when the control is in an invalid state. Validity is determined by the `required` prop. */
   @property({ type: Boolean, reflect: true }) invalid = false;
 
+  /** Emitted when the clear button is activated. */
+  @event('sl-clear') slClear: EventEmitter<void>;
+
   /** Emitted when the control's value changes. */
   @event('sl-change') slChange: EventEmitter<void>;
 
@@ -160,6 +163,7 @@ export default class SlSelect extends LitElement {
   handleClearClick(event: MouseEvent) {
     event.stopPropagation();
     this.value = this.multiple ? [] : '';
+    this.slClear.emit();
     this.syncItemsFromValue();
   }
 
