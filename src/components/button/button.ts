@@ -6,7 +6,6 @@ import styles from 'sass:./button.scss';
 import { hasSlot } from '../../internal/slot';
 
 /**
- * @tag sl-button
  * @since 2.0
  * @status stable
  *
