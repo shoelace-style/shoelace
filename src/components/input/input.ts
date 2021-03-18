@@ -1,7 +1,7 @@
-import { LitElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
+import { LitElement, customElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
 import { ifDefined } from 'lit-html/directives/if-defined';
 import { classMap } from 'lit-html/directives/class-map';
-import { event, EventEmitter, tag, watch } from '../../internal/decorators';
+import { event, EventEmitter, watch } from '../../internal/decorators';
 import styles from 'sass:./input.scss';
 import { renderFormControl } from '../../internal/form-control';
 import { hasSlot } from '../../internal/slot';
@@ -32,7 +32,7 @@ let id = 0;
  * @part suffix - The input suffix container.
  * @part help-text - The input help text.
  */
-@tag('sl-input')
+@customElement('sl-input')
 export default class SlInput extends LitElement {
   static styles = unsafeCSS(styles);
 

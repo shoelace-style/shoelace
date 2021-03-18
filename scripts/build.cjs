@@ -25,10 +25,8 @@ execSync('node scripts/make-icons.cjs', { stdio: 'inherit' });
 
 (async () => {
   const entryPoints = [
-    // The main dist
+    // The whole shebang dist
     './src/shoelace.ts',
-    // The whole shebang
-    './src/all.shoelace.ts',
     // Components
     ...(await glob('./src/components/**/*.ts')),
     // Public utilities

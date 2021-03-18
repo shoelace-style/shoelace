@@ -1,6 +1,6 @@
-import { LitElement, html, property, query, unsafeCSS } from 'lit-element';
+import { LitElement, customElement, html, property, query, unsafeCSS } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
-import { event, EventEmitter, tag, watch } from '../../internal/decorators';
+import { event, EventEmitter, watch } from '../../internal/decorators';
 import styles from 'sass:./tooltip.scss';
 import Popover from '../../internal/popover';
 
@@ -15,7 +15,7 @@ let id = 0;
  *
  * @part base - The component's base wrapper.
  */
-@tag('sl-tooltip')
+@customElement('sl-tooltip')
 export default class SlTooltip extends LitElement {
   static styles = unsafeCSS(styles);
 

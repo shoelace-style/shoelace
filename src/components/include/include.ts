@@ -1,5 +1,5 @@
-import { LitElement, html, property, unsafeCSS } from 'lit-element';
-import { event, EventEmitter, tag, watch } from '../../internal/decorators';
+import { LitElement, customElement, html, property, unsafeCSS } from 'lit-element';
+import { event, EventEmitter, watch } from '../../internal/decorators';
 import styles from 'sass:./include.scss';
 import { requestInclude } from './request';
 
@@ -7,7 +7,7 @@ import { requestInclude } from './request';
  * @since 2.0
  * @status stable
  */
-@tag('sl-include')
+@customElement('sl-include')
 export default class SlInclude extends LitElement {
   static styles = unsafeCSS(styles);
 

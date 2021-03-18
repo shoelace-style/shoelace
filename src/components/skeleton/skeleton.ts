@@ -1,6 +1,5 @@
-import { LitElement, html, property, unsafeCSS } from 'lit-element';
+import { LitElement, customElement, html, property, unsafeCSS } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
-import { tag } from '../../internal/decorators';
 import styles from 'sass:./skeleton.scss';
 
 /**
@@ -10,7 +9,7 @@ import styles from 'sass:./skeleton.scss';
  * @part base - The component's base wrapper.
  * @part indicator - The skeleton's indicator which is responsible for its color and animation.
  */
-@tag('sl-skeleton')
+@customElement('sl-skeleton')
 export default class SlSkeleton extends LitElement {
   static styles = unsafeCSS(styles);
 

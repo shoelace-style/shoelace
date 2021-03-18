@@ -1,8 +1,8 @@
-import { LitElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
+import { LitElement, customElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
 import { styleMap } from 'lit-html/directives/style-map';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html';
-import { event, EventEmitter, tag, watch } from '../../internal/decorators';
+import { event, EventEmitter, watch } from '../../internal/decorators';
 import styles from 'sass:./rating.scss';
 import { focusVisible } from '../../internal/focus-visible';
 import { clamp } from '../../internal/math';
@@ -15,7 +15,7 @@ import { clamp } from '../../internal/math';
  *
  * @part base - The component's base wrapper.
  */
-@tag('sl-rating')
+@customElement('sl-rating')
 export default class SlRating extends LitElement {
   static styles = unsafeCSS(styles);
 

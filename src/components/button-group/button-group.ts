@@ -1,5 +1,4 @@
-import { LitElement, html, property, unsafeCSS } from 'lit-element';
-import { tag } from '../../internal/decorators';
+import { LitElement, customElement, html, property, unsafeCSS } from 'lit-element';
 import styles from 'sass:./button-group.scss';
 
 /**
@@ -10,7 +9,7 @@ import styles from 'sass:./button-group.scss';
  *
  * @part base - The component's base wrapper.
  */
-@tag('sl-button-group')
+@customElement('sl-button-group')
 export default class SlButtonGroup extends LitElement {
   static styles = unsafeCSS(styles);
 

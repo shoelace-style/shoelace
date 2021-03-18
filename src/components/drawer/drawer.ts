@@ -1,7 +1,7 @@
-import { LitElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
+import { LitElement, customElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
-import { event, EventEmitter, tag } from '../../internal/decorators';
+import { event, EventEmitter } from '../../internal/decorators';
 import styles from 'sass:./drawer.scss';
 import { lockBodyScrolling, unlockBodyScrolling } from '../../internal/scroll';
 import { hasSlot } from '../../internal/slot';
@@ -31,7 +31,7 @@ let id = 0;
  * @part body - The drawer body.
  * @part footer - The drawer footer.
  */
-@tag('sl-drawer')
+@customElement('sl-drawer')
 export default class SlDrawer extends LitElement {
   static styles = unsafeCSS(styles);
 

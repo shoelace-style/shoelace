@@ -1,5 +1,4 @@
-import { LitElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
-import { tag } from '../../internal/decorators';
+import { LitElement, customElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
 import styles from 'sass:./menu-item.scss';
@@ -20,7 +19,7 @@ import styles from 'sass:./menu-item.scss';
  * @part label - The menu item label.
  * @part suffix - The suffix container.
  */
-@tag('sl-menu-item')
+@customElement('sl-menu-item')
 export default class SlMenuItem extends LitElement {
   static styles = unsafeCSS(styles);
 

@@ -1,6 +1,15 @@
-import { LitElement, TemplateResult, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
+import {
+  LitElement,
+  customElement,
+  TemplateResult,
+  html,
+  internalProperty,
+  property,
+  query,
+  unsafeCSS
+} from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
-import { event, EventEmitter, tag, watch } from '../../internal/decorators';
+import { event, EventEmitter, watch } from '../../internal/decorators';
 import styles from 'sass:./select.scss';
 import { SlDropdown, SlIconButton, SlMenu, SlMenuItem } from '../../shoelace';
 import { renderFormControl } from '../../internal/form-control';
@@ -33,7 +42,7 @@ let id = 0;
  * @part tag - The multiselect option, a <sl-tag> element.
  * @part tags - The container in which multiselect options are rendered.
  */
-@tag('sl-select')
+@customElement('sl-select')
 export default class SlSelect extends LitElement {
   static styles = unsafeCSS(styles);
 

@@ -69,9 +69,6 @@
     "typescript": "4.1.5",
     "wait-on": "^5.2.1"
   },
-  "sideEffects": [
-    "*.css"
-  ],
   "husky": {
     "hooks": {
       "pre-commit": "npm run prettier"

@@ -1,6 +1,6 @@
-import { LitElement, html, property, unsafeCSS } from 'lit-element';
+import { LitElement, customElement, html, property, unsafeCSS } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
-import { event, EventEmitter, tag } from '../../internal/decorators';
+import { event, EventEmitter } from '../../internal/decorators';
 import styles from 'sass:./tag.scss';
 
 /**
@@ -15,7 +15,7 @@ import styles from 'sass:./tag.scss';
  * @part content - The tag content.
  * @part clear-button - The clear button.
  */
-@tag('sl-tag')
+@customElement('sl-tag')
 export default class SlTag extends LitElement {
   static styles = unsafeCSS(styles);
 

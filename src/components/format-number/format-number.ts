@@ -1,11 +1,10 @@
-import { LitElement, property } from 'lit-element';
-import { tag } from '../../internal/decorators';
+import { LitElement, customElement, property } from 'lit-element';
 
 /**
  * @since 2.0
  * @status stable
  */
-@tag('sl-format-number')
+@customElement('sl-format-number')
 export default class SlFormatNumber extends LitElement {
   /** The number to format. */
   @property({ type: Number }) value = 0;

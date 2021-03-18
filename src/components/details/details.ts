@@ -1,6 +1,6 @@
-import { LitElement, html, property, query, unsafeCSS } from 'lit-element';
+import { LitElement, customElement, html, property, query, unsafeCSS } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
-import { event, EventEmitter, tag, watch } from '../../internal/decorators';
+import { event, EventEmitter, watch } from '../../internal/decorators';
 import styles from 'sass:./details.scss';
 import { focusVisible } from '../../internal/focus-visible';
 
@@ -21,7 +21,7 @@ let id = 0;
  * @part summary-icon - The expand/collapse summary icon.
  * @part content - The details content.
  */
-@tag('sl-details')
+@customElement('sl-details')
 export default class SlDetails extends LitElement {
   static styles = unsafeCSS(styles);
 

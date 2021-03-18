@@ -1,6 +1,6 @@
-import { LitElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
+import { LitElement, customElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
-import { event, EventEmitter, tag, watch } from '../../internal/decorators';
+import { event, EventEmitter, watch } from '../../internal/decorators';
 import styles from 'sass:./radio.scss';
 
 let id = 0;
@@ -16,7 +16,7 @@ let id = 0;
  * @part checked-icon - The container the wraps the checked icon.
  * @part label - The radio label.
  */
-@tag('sl-radio')
+@customElement('sl-radio')
 export default class SlRadio extends LitElement {
   static styles = unsafeCSS(styles);
 

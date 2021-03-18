@@ -1,6 +1,6 @@
-import { LitElement, html, property, query, unsafeCSS } from 'lit-element';
+import { LitElement, customElement, html, property, query, unsafeCSS } from 'lit-element';
 import styles from 'sass:./responsive-embed.scss';
-import { tag, watch } from '../../internal/decorators';
+import { watch } from '../../internal/decorators';
 
 /**
  * @since 2.0
@@ -8,7 +8,7 @@ import { tag, watch } from '../../internal/decorators';
  *
  * @part base - The component's base wrapper.
  */
-@tag('sl-responsive-embed')
+@customElement('sl-responsive-embed')
 export default class SlResponsiveEmbed extends LitElement {
   static styles = unsafeCSS(styles);
 

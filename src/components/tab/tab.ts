@@ -1,6 +1,6 @@
-import { LitElement, html, property, query, unsafeCSS } from 'lit-element';
+import { LitElement, customElement, html, property, query, unsafeCSS } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
-import { event, EventEmitter, tag } from '../../internal/decorators';
+import { event, EventEmitter } from '../../internal/decorators';
 import styles from 'sass:./tab.scss';
 
 let id = 0;
@@ -16,7 +16,7 @@ let id = 0;
  * @part base - The component's base wrapper.
  * @part close-button - The close button, which is the icon button's base wrapper.
  */
-@tag('sl-tab')
+@customElement('sl-tab')
 export default class SlTab extends LitElement {
   static styles = unsafeCSS(styles);
 

@@ -1,7 +1,7 @@
-import { LitElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
+import { LitElement, customElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
-import { event, EventEmitter, tag, watch } from '../../internal/decorators';
+import { event, EventEmitter, watch } from '../../internal/decorators';
 import styles from 'sass:./textarea.scss';
 import { renderFormControl } from '../../internal/form-control';
 import { hasSlot } from '../../internal/slot';
@@ -21,7 +21,7 @@ let id = 0;
  * @part textarea - The textarea control.
  * @part help-text - The textarea help text.
  */
-@tag('sl-textarea')
+@customElement('sl-textarea')
 export default class SlTextarea extends LitElement {
   static styles = unsafeCSS(styles);
 

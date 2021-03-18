@@ -8,7 +8,7 @@ The easiest way to install Shoelace is with the CDN. Just add the following tags
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/themes/base.css">
-<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/all.shoelace.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/shoelace.js"></script>
 ```
 
 Now you can [start using Shoelace!](/getting-started/usage.md)
@@ -27,14 +27,14 @@ Once you've done that, add the following tags to your page. Make sure to update 
 
 ```html
 <link rel="stylesheet" href="/scripts/shoelace/dist/themes/base.css">
-<script type="module" src="/scripts/shoelace/dist/all.shoelace.js"></script>
+<script type="module" src="/scripts/shoelace/dist/shoelace.js"></script>
 ```
 
 ## Setting the Base Path
 
 Some components rely on assets (icons, images, etc.) and Shoelace needs to know where they're located. For convenience, Shoelace will try to auto-detect the correct location based on the script you've loaded it from. This assumes assets are colocated with `shoelace.js` and will "just work" for most users.
 
-However, if you're [cherry picking](#cherry-picking) or [bundling](#bundling) Shoelace, you'll need to set the base path. You can do this one of two ways. The following examples assume you're serving Shoelace's `dist` directory from `/scripts/shoelace`.
+However, if you're [cherry picking](#cherry-picking) or [bundling](#bundling) Shoelace, you'll need to set the base path. You can do this one of two ways. The following example assumes you're serving Shoelace's `dist` directory from `/scripts/shoelace`.
 
 ```html
 <!-- Option 1: the data-shoelace attribute -->
@@ -56,7 +56,7 @@ The previous approach is the _easiest_ way to load Shoelace, but easy isn't alwa
 
 Cherry picking can be done from your local install or [directly from the CDN](https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/). This will limit the number of files the browser has to download and reduce the amount of bytes being transferred. The disadvantage is that you need to load and register each component manually, including its dependencies.
 
-Here's an example that loads only the button component and its dependencies.
+Here's an example that loads only the button component and its dependencies. Again, we're assuming you're serving Shoelace's `dist` directory from `/scripts/shoelace`.
 
 ```html
 <!-- The base stylesheet is always required -->
@@ -66,16 +66,15 @@ Here's an example that loads only the button component and its dependencies.
   import SlButton from '/scripts/shoelace/dist/components/button/button.js';
   import SlSpinner from '/scripts/shoelace/dist/components/spinner/spinner.js';
   
-  SlButton.register();
-  SlSpinner.register(); // spinner is a dependency of button
+  // <sl-button> and <sl-spinner> are ready to use!
 </script>
 ```
 
 If a component has dependencies, they'll be listed in the "Dependencies" section of its documentation. These are always Shoelace components, not third-party libraries. For example, `<sl-button>` requires you to load `<sl-spinner>` because it's used internally for its loading state.
 
-!> Never cherry pick from `all.shoelace.js` or `shoelace.js` as this will cause the browser to load the entire library. Instead, cherry pick from component modules as shown above.
+!> Never cherry pick components or utilities from `shoelace.js` as this will cause the browser to load the entire library. Instead, cherry pick from specific modules as shown above.
 
-!> You may see files named `chunk.[hash].js` in the `dist` directory. Never reference these files directly, as they change from version to version. Instead, import the corresponding component or utility file.
+!> You will see files named `chunk.[hash].js` in the `chunks` directory. Never import these files directly, as they are generated and change from version to version.
 
 ## Bundling
 
@@ -95,18 +94,17 @@ Now it's time to configure your bundler. Configurations vary for each tool, but 
 Once your bundler is configured, you'll be able to import Shoelace components and utilities.
 
 ```js
-import '@shoelace-style/shoelace/dist/shoelace.css';
-import { setBasePath, SlButton, SlIcon, SlInput, SlRating } from '@shoelace-style/shoelace';
+import '@shoelace-style/shoelace/dist/themes/base.css';
+import SlButton from '@shoelace-style/shoelace/dist/components/button/button.js';
+import SlIcon from '@shoelace-style/shoelace/dist/components/icon/icon.js';
+import SlInput from '@shoelace-style/shoelace/dist/components/input/input.js';
+import SlRating from '@shoelace-style/shoelace/dist/components/rating/rating.js';
+import { setBasePath } from '@shoelace-style/shoelace/dist/utilities/base-path.js';
 
 // Set the base path to the folder you copied Shoelace's assets to
 setBasePath('/dist/shoelace');
 
-SlButton.register();
-SlIcon.register();
-SlInput.register();
-SlRating.register();
-
 // <sl-button>, <sl-icon>, <sl-input>, and <sl-rating> are ready to use!
 ```
 
-Note that you need to register each component manually to add them to the custom element registry. This isn't done automatically because it would introduce side effects that break tree shaking.
+!> Component modules include side effects for registration purposes. Because of this, importing directly from `@shoelace-style/shoelace` may result in a larger bundle size than necessary. For optimal tree shaking, always import components and utilities from their respective files as shown above.

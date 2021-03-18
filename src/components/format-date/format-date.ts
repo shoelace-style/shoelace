@@ -1,11 +1,10 @@
-import { LitElement, property } from 'lit-element';
-import { tag } from '../../internal/decorators';
+import { LitElement, customElement, property } from 'lit-element';
 
 /**
  * @since 2.0
  * @status stable
  */
-@tag('sl-format-date')
+@customElement('sl-format-date')
 export default class SlFormatDate extends LitElement {
   /** The date/time to format. If not set, the current date and time will be used. */
   @property() date: Date | string = new Date();

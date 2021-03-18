@@ -1,7 +1,7 @@
-import { LitElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
+import { LitElement, customElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
-import { event, EventEmitter, tag, watch } from '../../internal/decorators';
+import { event, EventEmitter, watch } from '../../internal/decorators';
 import styles from 'sass:./dialog.scss';
 import { lockBodyScrolling, unlockBodyScrolling } from '../../internal/scroll';
 import { hasSlot } from '../../internal/slot';
@@ -31,7 +31,7 @@ let id = 0;
  * @part body - The dialog body.
  * @part footer - The dialog footer.
  */
-@tag('sl-dialog')
+@customElement('sl-dialog')
 export default class SlDialog extends LitElement {
   static styles = unsafeCSS(styles);
 

@@ -1,7 +1,7 @@
-import { LitElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
+import { LitElement, customElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
-import { event, EventEmitter, tag, watch } from '../../internal/decorators';
+import { event, EventEmitter, watch } from '../../internal/decorators';
 import styles from 'sass:./range.scss';
 import { renderFormControl } from '../../internal/form-control';
 import { hasSlot } from '../../internal/slot';
@@ -19,7 +19,7 @@ let id = 0;
  * @part input - The native range input.
  * @part tooltip - The range tooltip.
  */
-@tag('sl-range')
+@customElement('sl-range')
 export default class SlRange extends LitElement {
   static styles = unsafeCSS(styles);
 

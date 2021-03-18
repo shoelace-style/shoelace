@@ -1,6 +1,5 @@
-import { LitElement, html, internalProperty, unsafeCSS } from 'lit-element';
+import { LitElement, customElement, html, internalProperty, unsafeCSS } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
-import { tag } from '../../internal/decorators';
 import styles from 'sass:./card.scss';
 import { hasSlot } from '../../internal/slot';
 
@@ -19,7 +18,7 @@ import { hasSlot } from '../../internal/slot';
  * @part body - The card's body.
  * @part footer - The card's footer, if present.
  */
-@tag('sl-card')
+@customElement('sl-card')
 export default class SlCard extends LitElement {
   static styles = unsafeCSS(styles);
 

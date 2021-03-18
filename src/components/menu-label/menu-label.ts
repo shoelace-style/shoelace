@@ -1,5 +1,4 @@
-import { LitElement, html, unsafeCSS } from 'lit-element';
-import { tag } from '../../internal/decorators';
+import { LitElement, customElement, html, unsafeCSS } from 'lit-element';
 import styles from 'sass:./menu-label.scss';
 
 /**
@@ -12,7 +11,7 @@ import styles from 'sass:./menu-label.scss';
  *
  * @part base - The component's base wrapper.
  */
-@tag('sl-menu-label')
+@customElement('sl-menu-label')
 export default class SlMenuLabel extends LitElement {
   static styles = unsafeCSS(styles);
 

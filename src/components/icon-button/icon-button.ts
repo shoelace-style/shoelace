@@ -1,6 +1,5 @@
-import { LitElement, html, property, query, unsafeCSS } from 'lit-element';
+import { LitElement, customElement, html, property, query, unsafeCSS } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
-import { tag } from '../../internal/decorators';
 import { ifDefined } from 'lit-html/directives/if-defined';
 import styles from 'sass:./icon-button.scss';
 import { focusVisible } from '../../internal/focus-visible';
@@ -13,7 +12,7 @@ import { focusVisible } from '../../internal/focus-visible';
  *
  * @part base - The component's base wrapper.
  */
-@tag('sl-icon-button')
+@customElement('sl-icon-button')
 export default class SlIconButton extends LitElement {
   static styles = unsafeCSS(styles);
 

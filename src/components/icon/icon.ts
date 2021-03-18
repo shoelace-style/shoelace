@@ -1,6 +1,6 @@
-import { LitElement, html, internalProperty, property, unsafeCSS } from 'lit-element';
+import { LitElement, customElement, html, internalProperty, property, unsafeCSS } from 'lit-element';
 import { unsafeSVG } from 'lit-html/directives/unsafe-svg';
-import { event, EventEmitter, tag, watch } from '../../internal/decorators';
+import { event, EventEmitter, watch } from '../../internal/decorators';
 import styles from 'sass:./icon.scss';
 import { getIconLibrary, watchIcon, unwatchIcon } from './library';
 import { requestIcon } from './request';
@@ -13,7 +13,7 @@ const parser = new DOMParser();
  *
  * @part base - The component's base wrapper.
  */
-@tag('sl-icon')
+@customElement('sl-icon')
 export default class SlIcon extends LitElement {
   static styles = unsafeCSS(styles);
 

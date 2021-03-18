@@ -1,7 +1,7 @@
-import { LitElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
+import { LitElement, customElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
 import { styleMap } from 'lit-html/directives/style-map';
-import { event, EventEmitter, tag, watch } from '../../internal/decorators';
+import { event, EventEmitter, watch } from '../../internal/decorators';
 import styles from 'sass:./color-picker.scss';
 import { SlDropdown, SlInput } from '../../shoelace';
 import color from 'color';
@@ -30,7 +30,7 @@ import { clamp } from '../../internal/math';
  * @part input - The text input.
  * @part format-button - The toggle format button's base.
  */
-@tag('sl-color-picker')
+@customElement('sl-color-picker')
 export default class SlColorPicker extends LitElement {
   static styles = unsafeCSS(styles);
 
