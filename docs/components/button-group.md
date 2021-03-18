@@ -141,7 +141,7 @@ Create a split button using a button and a dropdown.
 <sl-button-group> 
   <sl-button type="primary">Save</sl-button>
   <sl-dropdown placement="bottom-end">
-    <sl-button slot="trigger" type="primary"caret></sl-button>
+    <sl-button slot="trigger" type="primary" caret></sl-button>
     <sl-menu>
       <sl-menu-item>Save</sl-menu-item>
       <sl-menu-item>Save as&hellip;</sl-menu-item>
