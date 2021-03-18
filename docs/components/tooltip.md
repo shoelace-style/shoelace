@@ -155,7 +155,7 @@ You can control the size of tooltip arrows by overriding the `--sl-tooltip-arrow
 </div>
 ```
 
-To override it globally, set it in a root block in your stylesheet after `shoelace.css` is loaded.
+To override it globally, set it in a root block in your stylesheet after the Shoelace stylesheet is loaded.
 
 ```css
 :root {

@@ -8,7 +8,7 @@ Shoelace makes use of several design tokens to provide a consistent appearance a
 
 Design tokens offer a high-level way to customize the library with minimal effort. There are no component-specific variables, however, as design tokens are intended to be generic and highly reusable. To customize an individual component, refer to the section entitled [Component parts](#component-parts).
 
-Design tokens are CSS custom properties ("CSS variables") that are defined in the `:root` block of `shoelace.css`. This stylesheet is imported when you install Shoelace, so design tokens are available on your page at that point. Because design tokens are global, they're always prefixed with `--sl` to avoid collisions with other libraries.
+Design tokens are CSS custom properties ("CSS variables") that are defined in the `:root` block of `themes/base.css`. This stylesheet is imported when you install Shoelace, so design tokens are available on your page at that point. Because design tokens are global, they're always prefixed with `--sl` to avoid collisions with other libraries.
 
 To customize a design token, simply override it in your stylesheet using a `:root` block.
 
@@ -28,9 +28,9 @@ To customize a design token, simply override it in your stylesheet using a `:roo
 }
 ```
 
-Many design tokens are described further along in this documentation. For a complete list, refer to `shoelace.scss` in the project's [source code](https://github.com/shoelace-style/shoelace/blob/current/src/styles/shoelace.scss).
+Many design tokens are described further along in this documentation. For a complete list, refer to `themes/base.scss` in the project's [source code](https://github.com/shoelace-style/shoelace/blob/current/src/styles/shoelace.scss).
 
-!> **Never modify variables directly in `shoelace.css`** because your changes will be overwritten when you upgrade the library. Even if you don't plan on upgrading, it's always better to override design tokens in your own stylesheet for better maintainability.
+!> **Never modify variables directly in `themes/base.css`** because your changes will be overwritten when you upgrade the library. Even if you don't plan on upgrading, it's always better to override design tokens in your own stylesheet for better maintainability.
 
 ## Component Parts
 
