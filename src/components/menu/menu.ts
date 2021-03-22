@@ -53,7 +53,7 @@ export default class SlMenu extends LitElement {
   }
 
   getActiveItem() {
-    return this.getItems().find(i => i === document.activeElement);
+    return this.getItems().filter(i => i.shadowRoot!.querySelector('.menu-item--focused'))[0];
   }
 
   setActiveItem(item: SlMenuItem) {
@@ -89,7 +89,7 @@ export default class SlMenu extends LitElement {
     if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
       const items = this.getItems();
       const selectedItem = this.getActiveItem();
-      let index = selectedItem ? items.indexOf(selectedItem) : 0;
+      let index = selectedItem ? items.findIndex(item => item === selectedItem) : 0;
 
       if (items.length) {
         event.preventDefault();
