@@ -82,7 +82,7 @@ export default class SlMenuItem extends LitElement {
         @mouseleave=${this.handleMouseLeave}
       >
         <span part="checked-icon" class="menu-item__check">
-          <sl-icon name="check2" aria-hidden="true"></sl-icon>
+          <sl-icon name="check" aria-hidden="true"></sl-icon>
         </span>
 
         <span part="prefix" class="menu-item__prefix">
