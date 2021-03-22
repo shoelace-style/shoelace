@@ -63,8 +63,11 @@ export class EventEmitter<T> {
 
 // @watch decorator
 //
-// Runs when an observed property changes, e.g. @property or @internalProperty. This will only run after the first
-// update, so initial values will not trigger the watch function.
+// Runs after an observed property changes, e.g. @property or @internalProperty. This will only run after the first
+// update, so initial attribute => property mappings will not trigger the watch handler.
+//
+// Note that changing props in a watch handler *will* trigger a rerender. To make pre-update changes to observed
+// properties, use the `update()` method instead.
 //
 // Usage:
 //
@@ -74,15 +77,10 @@ export class EventEmitter<T> {
 //
 export function watch(propName: string) {
   return (protoOrDescriptor: any, name: string): any => {
-    const { firstUpdated, update } = protoOrDescriptor;
+    const { updated } = protoOrDescriptor;
 
-    protoOrDescriptor.firstUpdated = function (changedProps: Map<string, any>) {
-      firstUpdated.call(this, changedProps);
-      this.__didFirstUpdate = true;
-    };
-
-    protoOrDescriptor.update = function (changedProps: Map<string, any>) {
-      if (this.__didFirstUpdate && changedProps.has(propName)) {
+    protoOrDescriptor.updated = function (changedProps: Map<string, any>) {
+      if (this.__hasBeenUpdated && changedProps.has(propName)) {
         const oldValue = changedProps.get(propName);
         const newValue = this[propName];
 
@@ -91,7 +89,8 @@ export function watch(propName: string) {
         }
       }
 
-      update.call(this, changedProps);
+      updated.call(this, changedProps);
+      this.__hasBeenUpdated = true;
     };
   };
 }

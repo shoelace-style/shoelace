@@ -238,8 +238,7 @@ export default class SlTextarea extends LitElement {
 
   @watch('value')
   handleValueChange() {
-    // Wait for the update to complete before checking the input's validity
-    this.updateComplete.then(() => (this.invalid = !this.input.checkValidity()));
+    this.invalid = !this.input.checkValidity();
   }
 
   setTextareaHeight() {
