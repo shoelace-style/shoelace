@@ -277,13 +277,13 @@ export default class SlTabGroup extends LitElement {
       case 'top':
       case 'bottom':
         this.indicator.style.width = `${width}px`;
-        (this.indicator.style.height as string | undefined) = undefined;
+        this.indicator.style.height = 'auto';
         this.indicator.style.transform = `translateX(${offsetLeft}px)`;
         break;
 
       case 'left':
       case 'right':
-        (this.indicator.style.width as string | undefined) = undefined;
+        this.indicator.style.width = 'auto';
         this.indicator.style.height = `${height}px`;
         this.indicator.style.transform = `translateY(${offsetTop}px)`;
         break;

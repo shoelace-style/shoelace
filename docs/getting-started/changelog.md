@@ -12,6 +12,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug where `sl-alert` wouldn't always transition properly
 - Fixed a bug where using `sl-menu` inside a shadow root would break keyboard selections [#382](https://github.com/shoelace-style/shoelace/issues/382)
 - Fixed a bug where toggling `multiple` in `sl-select` would lead to a stale display label
+- Fixed a bug in `sl-tab-group` where changing `placement` could result in the active tab indicator being drawn a few pixels off
 - Improved `@watch` decorator to run after update instead of during
 - Updated `sl-menu-item` checked icon to `check` instead of `check2`
 
