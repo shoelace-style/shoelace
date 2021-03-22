@@ -329,11 +329,11 @@ export default class SlSelect extends LitElement {
     // Sync checked states
     items.map(item => (item.checked = value.includes(item.value)));
 
-    // Sync display label
+    // Sync display label and tags
     if (this.multiple) {
-      const checkedItems: SlMenuItem[] = [];
-      value.map(val => items.map(item => (item.value === val ? checkedItems.push(item) : null)));
+      const checkedItems = items.filter(item => value.includes(item.value)) as SlMenuItem[];
 
+      this.displayLabel = checkedItems[0] ? this.getItemLabel(checkedItems[0]) : '';
       this.displayTags = checkedItems.map((item: SlMenuItem) => {
         return html`
           <sl-tag
@@ -367,6 +367,7 @@ export default class SlSelect extends LitElement {
       }
     } else {
       const checkedItem = items.filter(item => item.value === value[0])[0];
+
       this.displayLabel = checkedItem ? this.getItemLabel(checkedItem) : '';
       this.displayTags = [];
     }
