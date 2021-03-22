@@ -8,6 +8,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
+- Fixed a bug where `sl-alert` wouldn't always transition properly
 - Fixed a bug where using `sl-menu` inside a shadow root would break keyboard selections [#382](https://github.com/shoelace-style/shoelace/issues/382)
 
 ## 2.0.0-beta.34

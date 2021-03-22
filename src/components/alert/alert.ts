@@ -87,7 +87,7 @@ export default class SlAlert extends LitElement {
   /** Hides the alert */
   hide() {
     // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
-    if (!this.isVisible) {
+    if (!this.open) {
       return;
     }
 
@@ -98,14 +98,13 @@ export default class SlAlert extends LitElement {
     }
 
     clearTimeout(this.autoHideTimeout);
-    this.isVisible = false;
     this.open = false;
   }
 
   /**
-   * Displays the alert as a toast notification. This will move the alert out of its position in the DOM
-   * and, when dismissed, it will be removed from the DOM completely. By storing a reference to the alert, you can reuse
-   * it by calling this method again. The returned promise will resolve after the alert is hidden.
+   * Displays the alert as a toast notification. This will move the alert out of its position in the DOM and, when
+   * dismissed, it will be removed from the DOM completely. By storing a reference to the alert, you can reuse it by
+   * calling this method again. The returned promise will resolve after the alert is hidden.
    */
   async toast() {
     return new Promise<void>(resolve => {
@@ -114,7 +113,12 @@ export default class SlAlert extends LitElement {
       }
 
       toastStack.appendChild(this);
-      requestAnimationFrame(() => this.show());
+
+      // Wait for the toast stack to render
+      requestAnimationFrame(() => {
+        this.clientWidth; // force a reflow for the initial transition
+        this.show();
+      });
 
       this.addEventListener(
         'sl-after-hide',
