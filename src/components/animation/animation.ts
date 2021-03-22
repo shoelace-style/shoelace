@@ -73,6 +73,8 @@ export default class SlAnimation extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     this.createAnimation();
+    this.handleAnimationCancel = this.handleAnimationCancel.bind(this);
+    this.handleAnimationFinish = this.handleAnimationFinish.bind(this);
   }
 
   disconnectedCallback() {
