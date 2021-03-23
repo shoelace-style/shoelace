@@ -6,7 +6,7 @@ Components with the <sl-badge type="warning" pill>Experimental</sl-badge> badge 
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
-## Next
+## 2.0.0-beta.35
 
 - Fixed a bug in `sl-animation` where `sl-cancel` and `sl-finish` events would never fire
 - Fixed a bug where `sl-alert` wouldn't always transition properly
