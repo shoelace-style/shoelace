@@ -11,7 +11,7 @@ The [discussion forum](https://github.com/shoelace-style/shoelace/discussions) i
 - Ask for help
 - Share ideas and get feedback
 - Show the community what you're working on
-- Hang out with other designers, developers, and Shoelace users
+- Learn more about the project, its values, and its roadmap
 
 <sl-button type="primary" href="https://github.com/shoelace-style/shoelace/discussions" target="_blank">
   Join the Discussion
@@ -24,7 +24,7 @@ The [community chat](https://discord.gg/mg8f26C) is open to the public and power
 - Ask for help
 - Share ideas and get feedback
 - Show the community what you're working on
-- Hang out with other designers, developers, and Shoelace users
+- Chat live with other designers, developers, and Shoelace fans
 
 <sl-button type="primary" href="https://discord.gg/mg8f26C" target="_blank">
   Join the Chat

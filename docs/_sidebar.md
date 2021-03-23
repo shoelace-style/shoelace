@@ -4,8 +4,11 @@
   - [Usage](/getting-started/usage.md)
   - [Customizing](/getting-started/customizing.md)
   - [Themes](/getting-started/themes.md)
-  - [Community](/getting-started/community.md)
-  - [Changelog](/getting-started/changelog.md)
+
+- Resources
+  - [Community](/resources/community.md)
+  - [Contributing](/resources/contributing.md)
+  - [Changelog](/resources/changelog.md)
 
 - Components
   - [Alert](/components/alert.md)
@@ -46,7 +49,7 @@
   - [Textarea](/components/textarea.md)
   - [Tooltip](/components/tooltip.md)
 
-- Utility Components
+- Utilities
   - [Animation](/components/animation.md)
   - [Format Bytes](/components/format-bytes.md)
   - [Format Date](/components/format-date.md)
@@ -65,5 +68,5 @@
   - [Z-index](/tokens/z-index.md)
 
 - Tutorials
-  - [Integrating with Rails](/tutorials/integrating-with-rails.md)
   - [Integrating with NextJS](/tutorials/integrating-with-nextjs.md)
+  - [Integrating with Rails](/tutorials/integrating-with-rails.md)
