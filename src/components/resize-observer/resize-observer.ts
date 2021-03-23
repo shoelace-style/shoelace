@@ -4,7 +4,7 @@ import styles from 'sass:./resize-observer.scss';
 
 /**
  * @since 2.0
- * @status experimental
+ * @status stable
  */
 @customElement('sl-resize-observer')
 export default class SlResizeObserver extends LitElement {

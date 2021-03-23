@@ -15,6 +15,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug in `sl-tab-group` where changing `placement` could result in the active tab indicator being drawn a few pixels off
 - Improved `@watch` decorator to run after update instead of during
 - Updated `sl-menu-item` checked icon to `check` instead of `check2`
+- Upgraded the status of `sl-resize-observer` from experimental to stable
 
 ## 2.0.0-beta.34
 
