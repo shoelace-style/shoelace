@@ -243,7 +243,7 @@ export default class SlDropdown extends LitElement {
 
     // When spacebar/enter is pressed, show the panel but don't focus on the menu. This let's the user press the same
     // key again to hide the menu in case they don't want to make a selection.
-    if ([' ', 'Enter'].includes(event.key)) {
+    if (this.focusKeys.includes(event.key)) {
       event.preventDefault();
       this.open ? this.hide() : this.show();
       return;
