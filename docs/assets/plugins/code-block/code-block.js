@@ -31,55 +31,43 @@
 
       [...doc.querySelectorAll('code[class^="lang-"]')].map(code => {
         if (code.classList.contains('preview')) {
-          const codeBlock = document.createElement('div');
-          const preview = document.createElement('div');
           const pre = code.closest('pre');
           const preId = `code-block-preview-${count}`;
-          const toggle = document.createElement('button');
           const toggleId = `code-block-toggle-${count}`;
-
-          wrap(pre, codeBlock);
-
-          codeBlock.classList.add('code-block');
-
-          preview.classList.add('code-block__preview');
-          preview.innerHTML = code.textContent;
-          preview.innerHTML += `
-            <div
-              class="code-block__resizer"
-              tabindex="0"
-            >
-              <sl-icon name="grip-vertical"></sl-icon>
-            </div>
-          `;
 
           pre.id = preId;
           pre.classList.add('code-block__source');
           pre.setAttribute('data-lang', pre.getAttribute('data-lang').replace(/ preview$/, ''));
           pre.setAttribute('aria-labelledby', toggleId);
 
-          toggle.id = toggleId;
-          toggle.type = 'button';
-          toggle.classList.add('code-block__toggle');
-          toggle.setAttribute('aria-expanded', 'false');
-          toggle.setAttribute('aria-controls', preId);
-          toggle.innerHTML = `
-            Source
+          const codeBlock = `
+            <div class="code-block">
+              <div class="code-block__preview">
+                ${code.textContent}
+                <div class="code-block__resizer" tabindex="0">
+                  <sl-icon name="grip-vertical"></sl-icon>
+                </div>
+              </div>
 
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <polyline points="6 9 12 15 18 9"></polyline>
-            </svg>
+              ${pre.outerHTML}
+
+              <div class="code-block__toggle" aria-expanded="false" aria-controls="${preId}">
+                Source
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+            </div>
           `;
 
-          codeBlock.prepend(preview);
-          codeBlock.append(toggle);
+          pre.replaceWith(domParser.parseFromString(codeBlock, 'text/html').body);
 
           count++;
         }
