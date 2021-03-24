@@ -63,7 +63,7 @@ export class EventEmitter<T> {
 
 // @watch decorator
 //
-// Runs after an observed property changes, e.g. @property or @internalProperty. This will only run after the first
+// Runs after an observed property changes, e.g. @property or @state. This will only run after the first
 // update, so initial attribute => property mappings will not trigger the watch handler.
 //
 // Note that changing props in a watch handler *will* trigger a rerender. To make pre-update changes to observed

@@ -1,4 +1,5 @@
-import { LitElement, customElement, html, internalProperty, unsafeCSS } from 'lit-element';
+import { LitElement, html, unsafeCSS } from 'lit';
+import { customElement, state } from 'lit/decorators';
 import { classMap } from 'lit-html/directives/class-map';
 import styles from 'sass:./card.scss';
 import { hasSlot } from '../../internal/slot';
@@ -22,9 +23,9 @@ import { hasSlot } from '../../internal/slot';
 export default class SlCard extends LitElement {
   static styles = unsafeCSS(styles);
 
-  @internalProperty() private hasFooter = false;
-  @internalProperty() private hasImage = false;
-  @internalProperty() private hasHeader = false;
+  @state() private hasFooter = false;
+  @state() private hasImage = false;
+  @state() private hasHeader = false;
 
   connectedCallback() {
     super.connectedCallback();

@@ -1,4 +1,5 @@
-import { LitElement, customElement, html, property, query, unsafeCSS } from 'lit-element';
+import { LitElement, html, unsafeCSS } from 'lit';
+import { customElement, property, query } from 'lit/decorators';
 import { classMap } from 'lit-html/directives/class-map';
 import { event, EventEmitter, watch } from '../../internal/decorators';
 import styles from 'sass:./details.scss';

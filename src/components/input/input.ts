@@ -1,4 +1,5 @@
-import { LitElement, customElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
+import { LitElement, html, unsafeCSS } from 'lit';
+import { customElement, property, query, state } from 'lit/decorators';
 import { ifDefined } from 'lit-html/directives/if-defined';
 import { classMap } from 'lit-html/directives/class-map';
 import { event, EventEmitter, watch } from '../../internal/decorators';
@@ -42,10 +43,10 @@ export default class SlInput extends LitElement {
   private inputId = `input-${++id}`;
   private labelId = `input-label-${id}`;
 
-  @internalProperty() private hasFocus = false;
-  @internalProperty() private hasHelpTextSlot = false;
-  @internalProperty() private hasLabelSlot = false;
-  @internalProperty() private isPasswordVisible = false;
+  @state() private hasFocus = false;
+  @state() private hasHelpTextSlot = false;
+  @state() private hasLabelSlot = false;
+  @state() private isPasswordVisible = false;
 
   /** The input's type. */
   @property({ reflect: true }) type: 'email' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'url' = 'text';

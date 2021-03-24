@@ -1,4 +1,5 @@
-import { LitElement, customElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
+import { LitElement, html, unsafeCSS } from 'lit';
+import { customElement, property, query, state } from 'lit/decorators';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
 import { event, EventEmitter, watch } from '../../internal/decorators';
@@ -32,9 +33,9 @@ export default class SlTextarea extends LitElement {
   private labelId = `textarea-label-${id}`;
   private resizeObserver: ResizeObserver;
 
-  @internalProperty() private hasFocus = false;
-  @internalProperty() private hasHelpTextSlot = false;
-  @internalProperty() private hasLabelSlot = false;
+  @state() private hasFocus = false;
+  @state() private hasHelpTextSlot = false;
+  @state() private hasLabelSlot = false;
 
   /** The textarea's size. */
   @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';

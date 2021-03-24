@@ -1,4 +1,5 @@
-import { LitElement, customElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
+import { LitElement, html, unsafeCSS } from 'lit';
+import { customElement, property, query, state } from 'lit/decorators';
 import { classMap } from 'lit-html/directives/class-map';
 import { styleMap } from 'lit-html/directives/style-map';
 import { event, EventEmitter, watch } from '../../internal/decorators';
@@ -41,12 +42,12 @@ export default class SlColorPicker extends LitElement {
   private bypassValueParse = false;
   private lastValueEmitted: string;
 
-  @internalProperty() private inputValue = '';
-  @internalProperty() private hue = 0;
-  @internalProperty() private saturation = 100;
-  @internalProperty() private lightness = 100;
-  @internalProperty() private alpha = 100;
-  @internalProperty() private showCopyFeedback = false;
+  @state() private inputValue = '';
+  @state() private hue = 0;
+  @state() private saturation = 100;
+  @state() private lightness = 100;
+  @state() private alpha = 100;
+  @state() private showCopyFeedback = false;
 
   /** The current color. */
   @property() value = '#ffffff';

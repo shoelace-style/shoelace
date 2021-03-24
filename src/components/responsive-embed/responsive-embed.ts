@@ -1,4 +1,5 @@
-import { LitElement, customElement, html, property, query, unsafeCSS } from 'lit-element';
+import { LitElement, html, unsafeCSS } from 'lit';
+import { customElement, property, query } from 'lit/decorators';
 import styles from 'sass:./responsive-embed.scss';
 import { watch } from '../../internal/decorators';
 

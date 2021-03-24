@@ -1,13 +1,5 @@
-import {
-  LitElement,
-  customElement,
-  TemplateResult,
-  html,
-  internalProperty,
-  property,
-  query,
-  unsafeCSS
-} from 'lit-element';
+import { LitElement, TemplateResult, html, unsafeCSS } from 'lit';
+import { customElement, property, query, state } from 'lit/decorators';
 import { classMap } from 'lit-html/directives/class-map';
 import { event, EventEmitter, watch } from '../../internal/decorators';
 import styles from 'sass:./select.scss';
@@ -55,12 +47,12 @@ export default class SlSelect extends LitElement {
   private labelId = `select-label-${id}`;
   private resizeObserver: ResizeObserver;
 
-  @internalProperty() private hasFocus = false;
-  @internalProperty() private hasHelpTextSlot = false;
-  @internalProperty() private hasLabelSlot = false;
-  @internalProperty() private isOpen = false;
-  @internalProperty() private displayLabel = '';
-  @internalProperty() private displayTags: TemplateResult[] = [];
+  @state() private hasFocus = false;
+  @state() private hasHelpTextSlot = false;
+  @state() private hasLabelSlot = false;
+  @state() private isOpen = false;
+  @state() private displayLabel = '';
+  @state() private displayTags: TemplateResult[] = [];
 
   /** Enables multiselect. With this enabled, value will be an array. */
   @property({ type: Boolean, reflect: true }) multiple = false;

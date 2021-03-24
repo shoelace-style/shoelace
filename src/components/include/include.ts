@@ -1,4 +1,5 @@
-import { LitElement, customElement, html, property, unsafeCSS } from 'lit-element';
+import { LitElement, html, unsafeCSS } from 'lit';
+import { customElement, property } from 'lit/decorators';
 import { event, EventEmitter, watch } from '../../internal/decorators';
 import styles from 'sass:./include.scss';
 import { requestInclude } from './request';

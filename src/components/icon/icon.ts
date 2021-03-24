@@ -1,4 +1,5 @@
-import { LitElement, customElement, html, internalProperty, property, unsafeCSS } from 'lit-element';
+import { LitElement, html, unsafeCSS } from 'lit';
+import { customElement, property, state } from 'lit/decorators';
 import { unsafeSVG } from 'lit-html/directives/unsafe-svg';
 import { event, EventEmitter, watch } from '../../internal/decorators';
 import styles from 'sass:./icon.scss';
@@ -17,7 +18,7 @@ const parser = new DOMParser();
 export default class SlIcon extends LitElement {
   static styles = unsafeCSS(styles);
 
-  @internalProperty() private svg = '';
+  @state() private svg = '';
 
   /** The name of the icon to draw. */
   @property() name: string;

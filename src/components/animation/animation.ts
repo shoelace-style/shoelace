@@ -1,4 +1,5 @@
-import { LitElement, customElement, html, property, queryAsync, unsafeCSS } from 'lit-element';
+import { LitElement, html, unsafeCSS } from 'lit';
+import { customElement, property, queryAsync } from 'lit/decorators';
 import { event, EventEmitter, watch } from '../../internal/decorators';
 import styles from 'sass:./animation.scss';
 import { animations } from './animations';
@@ -49,7 +50,7 @@ export default class SlAnimation extends LitElement {
   @property({ attribute: 'iteration-start', type: Number }) iterationStart = 0;
 
   /** The keyframes to use for the animation. If this is set, `name` will be ignored. */
-  @property() keyframes: Keyframe[];
+  @property({ attribute: false }) keyframes: Keyframe[];
 
   /**
    * Sets the animation's playback rate. The default is `1`, which plays the animation at a normal speed. Setting this

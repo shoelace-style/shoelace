@@ -1,4 +1,5 @@
-import { LitElement, customElement, html, unsafeCSS } from 'lit-element';
+import { LitElement, html, unsafeCSS } from 'lit';
+import { customElement } from 'lit/decorators';
 import styles from 'sass:./menu-divider.scss';
 
 /**

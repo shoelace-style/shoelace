@@ -1,4 +1,5 @@
-import { LitElement, customElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
+import { LitElement, html, unsafeCSS } from 'lit';
+import { customElement, property, query, state } from 'lit/decorators';
 import { classMap } from 'lit-html/directives/class-map';
 import { event, EventEmitter, watch } from '../../internal/decorators';
 import styles from 'sass:./switch.scss';
@@ -25,7 +26,7 @@ export default class SlSwitch extends LitElement {
   private switchId = `switch-${++id}`;
   private labelId = `switch-label-${id}`;
 
-  @internalProperty() private hasFocus = false;
+  @state() private hasFocus = false;
 
   /** The switch's name attribute. */
   @property() name: string;

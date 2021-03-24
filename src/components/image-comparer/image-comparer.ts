@@ -1,4 +1,5 @@
-import { LitElement, customElement, html, property, query, unsafeCSS } from 'lit-element';
+import { LitElement, html, unsafeCSS } from 'lit';
+import { customElement, property, query } from 'lit/decorators';
 import { styleMap } from 'lit-html/directives/style-map';
 import { event, EventEmitter, watch } from '../../internal/decorators';
 import styles from 'sass:./image-comparer.scss';

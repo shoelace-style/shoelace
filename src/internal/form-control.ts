@@ -1,4 +1,4 @@
-import { html, TemplateResult } from 'lit-element';
+import { html, TemplateResult } from 'lit';
 import { classMap } from 'lit-html/directives/class-map';
 
 export interface FormControlProps {

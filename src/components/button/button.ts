@@ -1,4 +1,5 @@
-import { LitElement, customElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
+import { LitElement, html, unsafeCSS } from 'lit';
+import { customElement, property, query, state } from 'lit/decorators';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
 import { event, EventEmitter } from '../../internal/decorators';
@@ -27,10 +28,10 @@ export default class SlButton extends LitElement {
 
   @query('.button') button: HTMLButtonElement | HTMLLinkElement;
 
-  @internalProperty() private hasFocus = false;
-  @internalProperty() private hasLabel = false;
-  @internalProperty() private hasPrefix = false;
-  @internalProperty() private hasSuffix = false;
+  @state() private hasFocus = false;
+  @state() private hasLabel = false;
+  @state() private hasPrefix = false;
+  @state() private hasSuffix = false;
 
   /** The button's type. */
   @property({ reflect: true }) type: 'default' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text' =

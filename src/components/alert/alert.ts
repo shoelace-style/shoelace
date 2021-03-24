@@ -1,4 +1,5 @@
-import { LitElement, customElement, html, internalProperty, property, unsafeCSS } from 'lit-element';
+import { LitElement, html, unsafeCSS } from 'lit';
+import { customElement, property, state } from 'lit/decorators';
 import { classMap } from 'lit-html/directives/class-map';
 import { event, EventEmitter, watch } from '../../internal/decorators';
 import styles from 'sass:./alert.scss';
@@ -25,7 +26,7 @@ export default class SlAlert extends LitElement {
 
   private autoHideTimeout: any;
 
-  @internalProperty() private isVisible = false;
+  @state() private isVisible = false;
 
   /** Indicates whether or not the alert is open. You can use this in lieu of the show/hide methods. */
   @property({ type: Boolean, reflect: true }) open = false;

@@ -1,4 +1,5 @@
-import { LitElement, customElement, html, property, query, unsafeCSS } from 'lit-element';
+import { LitElement, html, unsafeCSS } from 'lit';
+import { customElement, property, query } from 'lit/decorators';
 import { watch } from '../../internal/decorators';
 import styles from 'sass:./progress-ring.scss';
 

@@ -1,4 +1,5 @@
-import { LitElement, customElement, html, internalProperty, property } from 'lit-element';
+import { LitElement, html } from 'lit';
+import { customElement, property, state } from 'lit/decorators';
 import { watch } from '../../internal/decorators';
 
 /**
@@ -9,9 +10,9 @@ import { watch } from '../../internal/decorators';
 export default class SlRelativeTime extends LitElement {
   private updateTimeout: any;
 
-  @internalProperty() private isoTime = '';
-  @internalProperty() private relativeTime = '';
-  @internalProperty() private titleTime = '';
+  @state() private isoTime = '';
+  @state() private relativeTime = '';
+  @state() private titleTime = '';
 
   /** The date from which to calculate time from. */
   @property() date: Date | string;

@@ -1,4 +1,5 @@
-import { LitElement, customElement, html, internalProperty, property, unsafeCSS } from 'lit-element';
+import { LitElement, html, unsafeCSS } from 'lit';
+import { customElement, property, state } from 'lit/decorators';
 import { classMap } from 'lit-html/directives/class-map';
 import styles from 'sass:./avatar.scss';
 
@@ -19,7 +20,7 @@ import styles from 'sass:./avatar.scss';
 export default class SlAvatar extends LitElement {
   static styles = unsafeCSS(styles);
 
-  @internalProperty() private hasError = false;
+  @state() private hasError = false;
 
   /** The image source to use for the avatar. */
   @property({ reflect: true }) image: string;
@@ -43,7 +44,6 @@ export default class SlAvatar extends LitElement {
           'avatar--rounded': this.shape === 'rounded',
           'avatar--square': this.shape === 'square'
         })}
-        role="image"
         aria-label=${this.alt}
       >
         ${this.initials

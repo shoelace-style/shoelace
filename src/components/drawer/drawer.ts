@@ -1,4 +1,5 @@
-import { LitElement, customElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
+import { LitElement, html, unsafeCSS } from 'lit';
+import { customElement, property, query, state } from 'lit/decorators';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
 import { event, EventEmitter } from '../../internal/decorators';
@@ -43,8 +44,8 @@ export default class SlDrawer extends LitElement {
   private willShow = false;
   private willHide = false;
 
-  @internalProperty() private hasFooter = false;
-  @internalProperty() private isVisible = false;
+  @state() private hasFooter = false;
+  @state() private isVisible = false;
 
   /** Indicates whether or not the drawer is open. You can use this in lieu of the show/hide methods. */
   @property({ type: Boolean, reflect: true }) open = false;

@@ -1,4 +1,5 @@
-import { LitElement, customElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
+import { LitElement, html, unsafeCSS } from 'lit';
+import { customElement, property, query, state } from 'lit/decorators';
 import { classMap } from 'lit-html/directives/class-map';
 import { styleMap } from 'lit-html/directives/style-map';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html';
@@ -21,8 +22,8 @@ export default class SlRating extends LitElement {
 
   @query('.rating') rating: HTMLElement;
 
-  @internalProperty() private hoverValue = 0;
-  @internalProperty() private isHovering = false;
+  @state() private hoverValue = 0;
+  @state() private isHovering = false;
 
   /** The current rating. */
   @property({ type: Number }) value = 0;

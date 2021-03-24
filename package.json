@@ -31,15 +31,15 @@
   "scripts": {
     "start": "node scripts/build.cjs --dev",
     "build": "node scripts/build.cjs",
-    "prepublish": "npm run build",
+    "prepublishOnly": "npm run build",
     "prettier": "prettier --write --loglevel warn ."
   },
   "dependencies": {
     "@popperjs/core": "^2.7.0",
     "@shoelace-style/animations": "^1.1.0",
     "color": "^3.1.3",
-    "lit-element": "^2.4.0",
-    "lit-html": "^1.3.0"
+    "lit": "^2.0.0-pre.1",
+    "lit-html": "^2.0.0-pre.6"
   },
   "devDependencies": {
     "@types/color": "^3.0.1",

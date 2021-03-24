@@ -1,4 +1,5 @@
-import { LitElement, customElement, html, internalProperty, property, query, unsafeCSS } from 'lit-element';
+import { LitElement, html, unsafeCSS } from 'lit';
+import { customElement, property, query, state } from 'lit/decorators';
 import { classMap } from 'lit-html/directives/class-map';
 import { event, EventEmitter, watch } from '../../internal/decorators';
 import styles from 'sass:./tab-group.scss';
@@ -38,7 +39,7 @@ export default class SlTabGroup extends LitElement {
   private tabs: SlTab[] = [];
   private panels: SlTabPanel[] = [];
 
-  @internalProperty() private hasScrollControls = false;
+  @state() private hasScrollControls = false;
 
   /** The placement of the tabs. */
   @property() placement: 'top' | 'bottom' | 'left' | 'right' = 'top';
