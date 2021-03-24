@@ -217,9 +217,9 @@ export default class SlButton extends LitElement {
         target=${ifDefined(this.target)}
         download=${ifDefined(this.download)}
         rel=${ifDefined(this.target ? 'noreferrer noopener' : undefined)}
-        onblur=${this.handleBlur}
-        onfocus=${this.handleFocus}
-        onclick=${this.handleClick}
+        @blur=${this.handleBlur}
+        @focus=${this.handleFocus}
+        @click=${this.handleClick}
       >
         ${interior}
       </a>
