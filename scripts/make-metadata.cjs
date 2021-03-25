@@ -232,9 +232,9 @@ components.map(async component => {
   metadata.components.push(api);
 });
 
-// Generate components.json
+// Generate metadata.json
 (async () => {
-  const filename = path.join('./dist/components.json');
+  const filename = path.join('./dist/metadata.json');
   const json = JSON.stringify(metadata, null, 2);
 
   await mkdirp(path.dirname(filename));

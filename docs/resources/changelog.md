@@ -8,6 +8,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
+- Renamed `components.json` to `metadata.json`
 - Updated to the prerelease versions of LitElement and lit-html
 
 ## 2.0.0-beta.35

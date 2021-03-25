@@ -239,7 +239,7 @@
         return resolve(metadataStore);
       }
 
-      fetch('/dist/components.json')
+      fetch('/dist/metadata.json')
         .then(res => res.json())
         .then(data => {
           metadataStore = data;
