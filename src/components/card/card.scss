@@ -30,7 +30,7 @@
   margin: calc(-1 * var(--border-width));
   overflow: hidden;
 
-  ::slotted(img) {
+  ::part(image) {
     display: block;
     width: 100%;
   }
