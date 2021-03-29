@@ -41,12 +41,12 @@ export default class SlTab extends LitElement {
   @event('sl-close') slClose: EventEmitter<void>;
 
   /** Sets focus to the tab. */
-  setFocus(options?: FocusOptions) {
+  focus(options?: FocusOptions) {
     this.tab.focus(options);
   }
 
   /** Removes focus from the tab. */
-  removeFocus() {
+  blur() {
     this.tab.blur();
   }
 

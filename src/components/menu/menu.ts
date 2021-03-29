@@ -40,7 +40,7 @@ export default class SlMenu extends LitElement {
       const slot = item.shadowRoot!.querySelector('slot:not([name])') as HTMLSlotElement;
       const label = getTextContent(slot).toLowerCase().trim();
       if (label.substring(0, this.typeToSelectString.length) === this.typeToSelectString) {
-        item.setFocus();
+        item.focus();
         break;
       }
     }
@@ -58,7 +58,7 @@ export default class SlMenu extends LitElement {
   }
 
   setActiveItem(item: SlMenuItem) {
-    item.setFocus();
+    item.focus();
   }
 
   handleClick(event: MouseEvent) {

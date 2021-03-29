@@ -211,7 +211,7 @@ By default, the drawer's panel will gain focus when opened. To set focus on a di
 
   drawer.addEventListener('sl-initial-focus', event => {
     event.preventDefault();
-    input.setFocus({ preventScroll: true });
+    input.focus({ preventScroll: true });
   });    
 </script>
 ```

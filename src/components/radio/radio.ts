@@ -56,12 +56,12 @@ export default class SlRadio extends LitElement {
   @event('sl-focus') slFocus: EventEmitter<void>;
 
   /** Sets focus on the radio. */
-  setFocus(options?: FocusOptions) {
+  focus(options?: FocusOptions) {
     this.input.focus(options);
   }
 
   /** Removes focus from the radio. */
-  removeFocus() {
+  blur() {
     this.input.blur();
   }
 
@@ -120,7 +120,7 @@ export default class SlRadio extends LitElement {
       if (index > radios.length - 1) index = 0;
 
       this.getAllRadios().map(radio => (radio.checked = false));
-      radios[index].setFocus();
+      radios[index].focus();
       radios[index].checked = true;
 
       event.preventDefault();

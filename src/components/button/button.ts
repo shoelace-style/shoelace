@@ -84,13 +84,19 @@ export default class SlButton extends LitElement {
     this.handleSlotChange();
   }
 
-  /** setFocus - Sets focus on the button. */
-  setFocus(options?: FocusOptions) {
+  /** Simulates a click on the button. */
+  click() {
+    this.button.focus();
+    this.button.click();
+  }
+
+  /** Sets focus on the button. */
+  focus(options?: FocusOptions) {
     this.button.focus(options);
   }
 
-  /** removeFocus - Removes focus from the button. */
-  removeFocus() {
+  /** Removes focus from the button. */
+  blur() {
     this.button.blur();
   }
 

@@ -148,12 +148,12 @@ export default class SlTextarea extends LitElement {
   }
 
   /** Sets focus on the textarea. */
-  setFocus(options?: FocusOptions) {
+  focus(options?: FocusOptions) {
     this.input.focus(options);
   }
 
   /** Removes focus from the textarea. */
-  removeFocus() {
+  blur() {
     this.input.blur();
   }
 

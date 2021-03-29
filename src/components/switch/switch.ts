@@ -56,12 +56,12 @@ export default class SlSwitch extends LitElement {
   @event('sl-focus') slFocus: EventEmitter<void>;
 
   /** Sets focus on the switch. */
-  setFocus(options?: FocusOptions) {
+  focus(options?: FocusOptions) {
     this.input.focus(options);
   }
 
   /** Removes focus from the switch. */
-  removeFocus() {
+  blur() {
     this.input.blur();
   }
 

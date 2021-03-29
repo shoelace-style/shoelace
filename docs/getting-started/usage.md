@@ -50,14 +50,14 @@ Refer to a component's documentation for a complete list of its custom events.
 
 ### Methods
 
-Some components have methods you can call to trigger various behaviors. For example, you can set focus on a Shoelace input using the `setFocus()` method.
+Some components have methods you can call to trigger various behaviors. For example, you can set focus on a Shoelace input using the `focus()` method.
 
 ```html
 <sl-input></sl-input>
 
 <script>
   const input = document.querySelector('sl-input');
-  input.setFocus();
+  input.focus();
 </script>
 ```
 
@@ -102,7 +102,7 @@ Custom elements cannot have self-closing tags. Similar to `<script>` and `<texta
 
 You might expect similarly named elements to share the same API as native HTML elements. This is not always the case. Shoelace components **are not** designed to be one-to-one replacements for their HTML counterparts.
 
-For example, `<button>` and `<sl-button>` both have a `type` attribute, but it does different things (the former controls whether the button submits a form and the latter controls the button's appearance). Similarly, you can't call `focus()` on a Shoelace input — you need to use the component's `setFocus()` method instead. There are technical reasons for some of these design decisions that are outside the scope of this page.
+For example, `<button>` and `<sl-button>` both have a `type` attribute, but it does different things (the former controls whether the button submits a form and the latter controls the button's appearance). Similarly, you can't call `focus()` on a Shoelace input — you need to use the component's `focus()` method instead. There are technical reasons for some of these design decisions that are outside the scope of this page.
 
 ?> **Don't make assumptions about a component's API!** To prevent unexpected behaviors, please take the time to review the documentation and make sure you understand what each property, method, and event is intended to do.
 
@@ -156,20 +156,20 @@ Now you can "import" Shoelace components as React components! Remember to [insta
 ```js
 import wrapCustomElement from '@shoelace-style/react-wrapper';
 
-const ShoelaceButton = wrapCustomElement('sl-button');
+const SlButton = wrapCustomElement('sl-button');
 
-return <ShoelaceButton type="primary">Click me</ShoelaceButton>;
+return <SlButton type="primary">Click me</SlButton>;
 ```
 
 A reference ("ref") to the underlying custom element is exposed through the `element` property so you can access it directly. This is useful for calling methods.
 
 ```jsx
-<ShoelaceButton 
+<SlButton 
   ref={el => this.button = el} 
-  onClick={() => this.button.element.current.removeFocus()}
+  onClick={() => this.button.element.current.blur()}
 >
   Click me
-</ShoelaceButton>
+</SlButton>
 ```
 
 ## Vue

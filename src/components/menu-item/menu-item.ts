@@ -38,12 +38,12 @@ export default class SlMenuItem extends LitElement {
   @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Sets focus on the button. */
-  setFocus(options?: FocusOptions) {
+  focus(options?: FocusOptions) {
     this.menuItem.focus(options);
   }
 
   /** Removes focus from the button. */
-  removeFocus() {
+  blur() {
     this.menuItem.blur();
   }
 
@@ -56,11 +56,11 @@ export default class SlMenuItem extends LitElement {
   }
 
   handleMouseEnter() {
-    this.setFocus();
+    this.focus();
   }
 
   handleMouseLeave() {
-    this.removeFocus();
+    this.blur();
   }
 
   render() {

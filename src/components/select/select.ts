@@ -210,12 +210,12 @@ export default class SlSelect extends LitElement {
 
       // Focus on a menu item
       if (event.key === 'ArrowDown' && firstItem) {
-        firstItem.setFocus();
+        firstItem.focus();
         return;
       }
 
       if (event.key === 'ArrowUp' && lastItem) {
-        lastItem.setFocus();
+        lastItem.focus();
         return;
       }
     }

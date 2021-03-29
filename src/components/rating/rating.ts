@@ -48,12 +48,12 @@ export default class SlRating extends LitElement {
   @event('sl-change') slChange: EventEmitter<void>;
 
   /** Sets focus on the rating. */
-  setFocus(options?: FocusOptions) {
+  focus(options?: FocusOptions) {
     this.rating.focus(options);
   }
 
   /** Removes focus from the rating. */
-  removeFocus() {
+  blur() {
     this.rating.blur();
   }
 

@@ -64,12 +64,12 @@ export default class SlCheckbox extends LitElement {
   }
 
   /** Sets focus on the checkbox. */
-  setFocus(options?: FocusOptions) {
+  focus(options?: FocusOptions) {
     this.input.focus(options);
   }
 
   /** Removes focus from the checkbox. */
-  removeFocus() {
+  blur() {
     this.input.blur();
   }
 

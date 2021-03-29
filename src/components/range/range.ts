@@ -105,12 +105,12 @@ export default class SlRange extends LitElement {
   }
 
   /** Sets focus on the input. */
-  setFocus(options?: FocusOptions) {
+  focus(options?: FocusOptions) {
     this.input.focus(options);
   }
 
   /** Removes focus from the input. */
-  removeFocus() {
+  blur() {
     this.input.blur();
   }
 
@@ -149,7 +149,7 @@ export default class SlRange extends LitElement {
   }
 
   handleTouchStart() {
-    this.setFocus();
+    this.focus();
   }
 
   syncTooltip() {

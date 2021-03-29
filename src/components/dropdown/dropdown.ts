@@ -127,12 +127,8 @@ export default class SlDropdown extends LitElement {
   focusOnTrigger() {
     const slot = this.trigger.querySelector('slot')!;
     const trigger = slot.assignedElements({ flatten: true })[0] as any;
-    if (trigger) {
-      if (typeof trigger.setFocus === 'function') {
-        trigger.setFocus();
-      } else if (typeof trigger.focus === 'function') {
-        trigger.focus();
-      }
+    if (trigger && typeof trigger.focus === 'function') {
+      trigger.focus();
     }
   }
 
@@ -254,12 +250,12 @@ export default class SlDropdown extends LitElement {
 
       // Focus on a menu item
       if (event.key === 'ArrowDown' && firstMenuItem) {
-        firstMenuItem.setFocus();
+        firstMenuItem.focus();
         return;
       }
 
       if (event.key === 'ArrowUp' && lastMenuItem) {
-        lastMenuItem.setFocus();
+        lastMenuItem.focus();
         return;
       }
     }

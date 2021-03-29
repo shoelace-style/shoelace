@@ -175,7 +175,7 @@ export default class SlTabGroup extends LitElement {
           index = Math.min(this.tabs.length - 1, index + 1);
         }
 
-        this.tabs[index].setFocus({ preventScroll: true });
+        this.tabs[index].focus({ preventScroll: true });
 
         if (['top', 'bottom'].includes(this.placement)) {
           scrollIntoView(this.tabs[index], this.nav, 'horizontal');
