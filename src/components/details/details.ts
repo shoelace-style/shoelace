@@ -54,15 +54,16 @@ export default class SlDetails extends LitElement {
   /** Emitted after the details closes and all transitions are complete. */
   @event('after-hide') slAfterHide: EventEmitter<void>;
 
+  connectedCallback() {
+    super.connectedCallback();
+    this.isVisible = this.open;
+  }
+
   firstUpdated() {
     focusVisible.observe(this.details);
 
     this.body.hidden = !this.open;
-
-    // Show on init if open
-    if (this.open) {
-      this.show();
-    }
+    this.body.style.height = this.open ? 'auto' : '0';
   }
 
   disconnectedCallback() {
