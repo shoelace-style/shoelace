@@ -2,7 +2,7 @@ import { LitElement, html, unsafeCSS } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
-import { event, EventEmitter } from '../../internal/decorators';
+import { event, EventEmitter, watch } from '../../internal/decorators';
 import styles from 'sass:./drawer.scss';
 import { lockBodyScrolling, unlockBodyScrolling } from '../../internal/scroll';
 import { hasSlot } from '../../internal/slot';
@@ -189,6 +189,11 @@ export default class SlDrawer extends LitElement {
     if (event.key === 'Escape') {
       this.hide();
     }
+  }
+
+  @watch('open')
+  handleOpenChange() {
+    this.open ? this.show() : this.hide();
   }
 
   handleOverlayClick() {
