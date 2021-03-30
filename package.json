@@ -45,7 +45,7 @@
     "@types/color": "^3.0.1",
     "@types/resize-observer-browser": "^0.1.5",
     "bluebird": "^3.7.2",
-    "bootstrap-icons": "^1.4.0",
+    "bootstrap-icons": "^1.4.1",
     "browser-sync": "^2.26.14",
     "chalk": "^4.1.0",
     "command-line-args": "^5.1.1",

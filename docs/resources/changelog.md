@@ -12,6 +12,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug where `sl-color-picker` could be opened when disabled
 - Renamed `components.json` to `metadata.json`
 - Updated to the prerelease versions of LitElement and lit-html
+- Updated to Bootstrap Icons 1.4.1
 
 ## 2.0.0-beta.35
 
