@@ -13,14 +13,12 @@ Dialogs, sometimes called "modals", appear above the page and require the user's
 <sl-button>Open Dialog</sl-button>
 
 <script>
-  (() => {
-    const dialog = document.querySelector('.dialog-overview');
-    const openButton = dialog.nextElementSibling;
-    const closeButton = dialog.querySelector('sl-button[slot="footer"]');
+  const dialog = document.querySelector('.dialog-overview');
+  const openButton = dialog.nextElementSibling;
+  const closeButton = dialog.querySelector('sl-button[slot="footer"]');
 
-    openButton.addEventListener('click', () => dialog.show());
-    closeButton.addEventListener('click', () => dialog.hide());
-  })();
+  openButton.addEventListener('click', () => dialog.show());
+  closeButton.addEventListener('click', () => dialog.hide());
 </script>
 ```
 
@@ -45,14 +43,12 @@ Use the `--width` custom property to set the dialog's width.
 <sl-button>Open Dialog</sl-button>
 
 <script>
-  (() => {
-    const dialog = document.querySelector('.dialog-width');
-    const openButton = dialog.nextElementSibling;
-    const closeButton = dialog.querySelector('sl-button[slot="footer"]');
+  const dialog = document.querySelector('.dialog-width');
+  const openButton = dialog.nextElementSibling;
+  const closeButton = dialog.querySelector('sl-button[slot="footer"]');
 
-    openButton.addEventListener('click', () => dialog.show());
-    closeButton.addEventListener('click', () => dialog.hide());
-  })();
+  openButton.addEventListener('click', () => dialog.show());
+  closeButton.addEventListener('click', () => dialog.hide());
 </script>
 ```
 
@@ -71,14 +67,12 @@ By design, a dialog's height will never exceed that of the viewport. As such, di
 <sl-button>Open Dialog</sl-button>
 
 <script>
-  (() => {
-    const dialog = document.querySelector('.dialog-scrolling');
-    const openButton = dialog.nextElementSibling;
-    const closeButton = dialog.querySelector('sl-button[slot="footer"]');
+  const dialog = document.querySelector('.dialog-scrolling');
+  const openButton = dialog.nextElementSibling;
+  const closeButton = dialog.querySelector('sl-button[slot="footer"]');
 
-    openButton.addEventListener('click', () => dialog.show());
-    closeButton.addEventListener('click', () => dialog.hide());
-  })();
+  openButton.addEventListener('click', () => dialog.show());
+  closeButton.addEventListener('click', () => dialog.hide());
 </script>
 ```
 
@@ -95,16 +89,14 @@ By default, dialogs are closed when the user clicks or taps on the overlay. To p
 <sl-button>Open Dialog</sl-button>
 
 <script>
-  (() => {
-    const dialog = document.querySelector('.dialog-no-overlay-dismiss');
-    const openButton = dialog.nextElementSibling;
-    const closeButton = dialog.querySelector('sl-button[slot="footer"]');
+  const dialog = document.querySelector('.dialog-no-overlay-dismiss');
+  const openButton = dialog.nextElementSibling;
+  const closeButton = dialog.querySelector('sl-button[slot="footer"]');
 
-    openButton.addEventListener('click', () => dialog.show());
-    closeButton.addEventListener('click', () => dialog.hide());
+  openButton.addEventListener('click', () => dialog.show());
+  closeButton.addEventListener('click', () => dialog.hide());
 
-    dialog.addEventListener('sl-overlay-dismiss', event => event.preventDefault());
-  })();
+  dialog.addEventListener('sl-overlay-dismiss', event => event.preventDefault());
 </script>
 ```
 
@@ -121,20 +113,18 @@ By default, the dialog's panel will gain focus when opened. To set focus on a di
 <sl-button>Open Dialog</sl-button>
 
 <script>
-  (() => {
-    const dialog = document.querySelector('.dialog-focus');
-    const input = dialog.querySelector('sl-input');
-    const openButton = dialog.nextElementSibling;
-    const closeButton = dialog.querySelector('sl-button[slot="footer"]');
+  const dialog = document.querySelector('.dialog-focus');
+  const input = dialog.querySelector('sl-input');
+  const openButton = dialog.nextElementSibling;
+  const closeButton = dialog.querySelector('sl-button[slot="footer"]');
 
-    openButton.addEventListener('click', () => dialog.show());
-    closeButton.addEventListener('click', () => dialog.hide());
+  openButton.addEventListener('click', () => dialog.show());
+  closeButton.addEventListener('click', () => dialog.hide());
 
-    dialog.addEventListener('sl-initial-focus', event => {
-      event.preventDefault();
-      input.setFocus({ preventScroll: true });
-    });
-  })();
+  dialog.addEventListener('sl-initial-focus', event => {
+    event.preventDefault();
+    input.setFocus({ preventScroll: true });
+  });
 </script>
 ```
 
