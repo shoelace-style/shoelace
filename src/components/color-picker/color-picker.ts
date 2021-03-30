@@ -579,11 +579,12 @@ export default class SlColorPicker extends LitElement {
       this.inputValue = this.opacity ? currentColor.hexa : currentColor.hex;
     }
 
-    // Setting this.value will trigger the watcher which parses the new color. We want to bypass that behavior because
-    // a) we've already done it in this function and b) conversion/rounding can lead to values changing slightly.
+    // Setting this.value will trigger the watcher which parses the new value. We want to bypass that behavior because
+    // we've already parsed the color here and conversion/rounding can lead to values changing slightly. After the next
+    // update, the usual behavior is restored.
     this.bypassValueParse = true;
     this.value = this.inputValue;
-    this.bypassValueParse = false;
+    this.updateComplete.then(() => (this.bypassValueParse = false));
   }
 
   @watch('format')
