@@ -58,7 +58,7 @@ export default class SlDropdown extends LitElement {
   @property({ attribute: 'close-on-select', type: Boolean, reflect: true }) closeOnSelect = true;
 
   /** The dropdown will close when the user interacts outside of this element (e.g. clicking). */
-  @property() containingElement: HTMLElement;
+  @property({ attribute: false }) containingElement: HTMLElement;
 
   /** The distance in pixels from which to offset the panel away from its trigger. */
   @property({ type: Number }) distance = 2;
