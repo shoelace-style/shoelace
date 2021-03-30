@@ -1,6 +1,7 @@
 import { LitElement, html, unsafeCSS } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators';
 import { classMap } from 'lit-html/directives/class-map';
+import { ifDefined } from 'lit-html/directives/if-defined';
 import { styleMap } from 'lit-html/directives/style-map';
 import { event, EventEmitter, watch } from '../../internal/decorators';
 import styles from 'sass:./color-picker.scss';
@@ -96,7 +97,7 @@ export default class SlColorPicker extends LitElement {
    * An array of predefined color swatches to display. Can include any format the color picker can parse, including
    * HEX(A), RGB(A), HSL(A), and CSS color names.
    */
-  @property() swatches = [
+  @property({ attribute: false }) swatches = [
     '#d0021b',
     '#f5a623',
     '#f8e71c',
@@ -127,7 +128,7 @@ export default class SlColorPicker extends LitElement {
   /** Emitted when the color picker closes. Calling `event.preventDefault()` will prevent it from being closed. */
   @event('sl-hide') slHide: EventEmitter<void>;
 
-  /** Emitted after the color picker closes and all transitions are complete.   */
+  /** Emitted after the color picker closes and all transitions are complete. */
   @event('sl-after-hide') slAfterHide: EventEmitter<void>;
 
   connectedCallback() {
@@ -387,7 +388,12 @@ export default class SlColorPicker extends LitElement {
 
   handleDropdownShow(event: CustomEvent) {
     event.stopPropagation();
-    this.slShow.emit();
+
+    if (this.disabled) {
+      event.preventDefault();
+    } else {
+      this.slShow.emit();
+    }
   }
 
   handleDropdownAfterShow(event: CustomEvent) {
@@ -646,7 +652,7 @@ export default class SlColorPicker extends LitElement {
             aria-valuetext=${`hsl(${Math.round(this.hue)}, ${Math.round(this.saturation)}%, ${Math.round(
               this.lightness
             )}%)`}
-            tabindex=${this.disabled ? null : '0'}
+            tabindex=${ifDefined(this.disabled ? undefined : '0')}
             @keydown=${this.handleGridKeyDown}
           ></span>
         </div>
@@ -671,7 +677,7 @@ export default class SlColorPicker extends LitElement {
                 aria-valuemin="0"
                 aria-valuemax="360"
                 aria-valuenow=${Math.round(this.hue)}
-                tabindex=${this.disabled ? null : 0}
+                tabindex=${ifDefined(this.disabled ? undefined : '0')}
                 @keydown=${this.handleHueKeyDown}
               ></span>
             </div>
@@ -706,7 +712,7 @@ export default class SlColorPicker extends LitElement {
                       aria-valuemin="0"
                       aria-valuemax="100"
                       aria-valuenow=${Math.round(this.alpha)}
-                      tabindex=${this.disabled ? null : '0'}
+                      tabindex=${ifDefined(this.disabled ? undefined : '0')}
                       @keydown=${this.handleAlphaKeyDown}
                     ></span>
                   </div>
@@ -767,7 +773,7 @@ export default class SlColorPicker extends LitElement {
                     <div
                       part="swatch"
                       class="color-picker__swatch color-picker__transparent-bg"
-                      tabindex=${this.disabled ? null : '0'}
+                      tabindex=${ifDefined(this.disabled ? undefined : '0')}
                       role="button"
                       aria-label=${swatch}
                       @click=${() => !this.disabled && this.setColor(swatch)}
@@ -795,7 +801,7 @@ export default class SlColorPicker extends LitElement {
         class="color-dropdown"
         aria-disabled=${this.disabled ? 'true' : 'false'}
         .containing-element=${this}
-        hoist=${this.hoist}
+        ?hoist=${this.hoist}
         @sl-show=${this.handleDropdownShow}
         @sl-after-show=${this.handleDropdownAfterShow}
         @sl-hide=${this.handleDropdownHide}
