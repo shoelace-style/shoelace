@@ -8,6 +8,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
+- Fixed a bug where toggling `open` on `sl-drawer` would skip the transition
 - Renamed `components.json` to `metadata.json`
 - Updated to the prerelease versions of LitElement and lit-html
 
