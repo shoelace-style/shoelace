@@ -223,6 +223,9 @@ export default class SlButton extends LitElement {
         target=${ifDefined(this.target)}
         download=${ifDefined(this.download)}
         rel=${ifDefined(this.target ? 'noreferrer noopener' : undefined)}
+        role="button"
+        aria-disabled=${this.disabled ? 'true' : 'false'}
+        tabindex=${this.disabled ? '-1' : '0'}
         @blur=${this.handleBlur}
         @focus=${this.handleFocus}
         @click=${this.handleClick}

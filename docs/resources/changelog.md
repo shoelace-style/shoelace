@@ -6,6 +6,10 @@ Components with the <sl-badge type="warning" pill>Experimental</sl-badge> badge 
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
+## Next
+
+- Improved a11y for disabled buttons that are rendered as links
+
 ## 2.0.0-beta.36
 
 - 🚨 BREAKING: renamed `setFocus()` to `focus()` in button, checkbox, input, menu item, radio, range, rating, select, switch, and tab
@@ -330,7 +334,7 @@ The following pages demonstrate why this change was necessary.
 - Added keyboard support to the preview resizer in the docs
 - Fixed a bug where the `aria-selected` state was incorrect in `sl-menu-item`
 - Fixed a bug where custom properties applied to `sl-tooltip` didn't affect show/hide transitions
-- Fixed a bug where `--sl-input-color-*` custom properties had no affect on `sl-input` and `sl-textarea`
+- Fixed a bug where `--sl-input-color-*` custom properties had no effect on `sl-input` and `sl-textarea`
 - Refactored `sl-dropdown` and `sl-tooltip` to use positioner elements so panels/tooltips can be customized easier
 
 ## 2.0.0-beta.15
