@@ -119,18 +119,6 @@ export default class SlColorPicker extends LitElement {
   /** Emitted when the color picker's value changes. */
   @event('sl-change') slChange: EventEmitter<void>;
 
-  /** Emitted when the color picker opens. Calling `event.preventDefault()` will prevent it from being opened. */
-  @event('sl-show') slShow: EventEmitter<void>;
-
-  /** Emitted after the color picker opens and all transitions are complete. */
-  @event('sl-after-show') slAfterShow: EventEmitter<void>;
-
-  /** Emitted when the color picker closes. Calling `event.preventDefault()` will prevent it from being closed. */
-  @event('sl-hide') slHide: EventEmitter<void>;
-
-  /** Emitted after the color picker closes and all transitions are complete. */
-  @event('sl-after-hide') slAfterHide: EventEmitter<void>;
-
   connectedCallback() {
     super.connectedCallback();
 
@@ -391,24 +379,11 @@ export default class SlColorPicker extends LitElement {
 
     if (this.disabled) {
       event.preventDefault();
-    } else {
-      this.slShow.emit();
     }
-  }
-
-  handleDropdownAfterShow(event: CustomEvent) {
-    event.stopPropagation();
-    this.slAfterShow.emit();
-  }
-
-  handleDropdownHide(event: CustomEvent) {
-    event.stopPropagation();
-    this.slHide.emit();
   }
 
   handleDropdownAfterHide(event: CustomEvent) {
     event.stopPropagation();
-    this.slAfterHide.emit();
     this.showCopyFeedback = false;
   }
 
@@ -804,8 +779,6 @@ export default class SlColorPicker extends LitElement {
         .containing-element=${this}
         ?hoist=${this.hoist}
         @sl-show=${this.handleDropdownShow}
-        @sl-after-show=${this.handleDropdownAfterShow}
-        @sl-hide=${this.handleDropdownHide}
         @sl-after-hide=${this.handleDropdownAfterHide}
       >
         <button
