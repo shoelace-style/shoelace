@@ -375,15 +375,12 @@ export default class SlColorPicker extends LitElement {
   }
 
   handleDropdownShow(event: CustomEvent) {
-    event.stopPropagation();
-
     if (this.disabled) {
       event.preventDefault();
     }
   }
 
-  handleDropdownAfterHide(event: CustomEvent) {
-    event.stopPropagation();
+  handleDropdownAfterHide() {
     this.showCopyFeedback = false;
   }
 
