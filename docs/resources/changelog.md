@@ -22,6 +22,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug where `sl-color-picker` could be opened when disabled
 - Fixed a bug in `sl-color-picker` that caused erratic slider behaviors [#388](https://github.com/shoelace-style/shoelace/issues/388) [#389](https://github.com/shoelace-style/shoelace/issues/389)
 - Fixed a bug where `sl-details` wouldn't always render the correct height when open initially [#357](https://github.com/shoelace-style/shoelace/issues/357)
+- Fixed a bug in `sl-tooltip` where events weren't properly cleaned up on disconnect
 - Renamed `components.json` to `metadata.json`
 - Updated to the prerelease versions of LitElement and lit-html
 - Updated to Bootstrap Icons 1.4.1
