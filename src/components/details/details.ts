@@ -74,7 +74,7 @@ export default class SlDetails extends LitElement {
   /** Shows the alert. */
   show() {
     // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
-    if (this.isVisible) {
+    if (this.isVisible || this.disabled) {
       return;
     }
 
@@ -103,7 +103,7 @@ export default class SlDetails extends LitElement {
   /** Hides the alert */
   hide() {
     // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
-    if (!this.isVisible) {
+    if (!this.isVisible || this.disabled) {
       return;
     }
 
