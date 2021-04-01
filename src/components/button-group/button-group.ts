@@ -15,7 +15,7 @@ export default class SlButtonGroup extends LitElement {
   static styles = unsafeCSS(styles);
 
   /** A label to use for the button group's `aria-label` attribute. */
-  @property() label: string;
+  @property() label = '';
 
   handleFocus(event: CustomEvent) {
     const button = event.target as HTMLElement;
@@ -32,6 +32,7 @@ export default class SlButtonGroup extends LitElement {
       <div
         part="base"
         class="button-group"
+        role="group"
         aria-label=${this.label}
         @focusout=${this.handleBlur}
         @focusin=${this.handleFocus}
