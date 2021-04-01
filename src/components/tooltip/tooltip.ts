@@ -114,6 +114,7 @@ export default class SlTooltip extends LitElement {
   disconnectedCallback() {
     super.disconnectedCallback();
     this.popover.destroy();
+
     this.removeEventListener('blur', this.handleBlur, true);
     this.removeEventListener('focus', this.handleFocus, true);
     this.removeEventListener('click', this.handleClick);
@@ -125,7 +126,7 @@ export default class SlTooltip extends LitElement {
   /** Shows the tooltip. */
   show() {
     // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
-    if (this.isVisible) {
+    if (this.isVisible || this.disabled) {
       return;
     }
 
@@ -215,11 +216,17 @@ export default class SlTooltip extends LitElement {
   }
 
   @watch('placement')
-  @watch('disabled')
   @watch('distance')
   @watch('skidding')
   handleOptionsChange() {
     this.syncOptions();
+  }
+
+  @watch('disabled')
+  handleDisabledChange() {
+    if (this.disabled && this.open) {
+      this.hide();
+    }
   }
 
   handleSlotChange() {
@@ -256,24 +263,20 @@ export default class SlTooltip extends LitElement {
     return html`
       <slot @slotchange=${this.handleSlotChange.bind(this)}></slot>
 
-      ${!this.disabled
-        ? html`
-            <div class="tooltip-positioner">
-              <div
-                part="base"
-                id=${this.componentId}
-                class=${classMap({
-                  tooltip: true,
-                  'tooltip--open': this.open
-                })}
-                role="tooltip"
-                aria-hidden=${this.open ? 'false' : 'true'}
-              >
-                <slot name="content">${this.content}</slot>
-              </div>
-            </div>
-          `
-        : ''}
+      <div class="tooltip-positioner">
+        <div
+          part="base"
+          id=${this.componentId}
+          class=${classMap({
+            tooltip: true,
+            'tooltip--open': this.open
+          })}
+          role="tooltip"
+          aria-hidden=${this.open ? 'false' : 'true'}
+        >
+          <slot name="content">${this.content}</slot>
+        </div>
+      </div>
     `;
   }
 }
