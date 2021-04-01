@@ -86,7 +86,6 @@ export default class SlButton extends LitElement {
 
   /** Simulates a click on the button. */
   click() {
-    this.button.focus();
     this.button.click();
   }
 

@@ -55,6 +55,11 @@ export default class SlRadio extends LitElement {
   /** Emitted when the control gains focus. */
   @event('sl-focus') slFocus: EventEmitter<void>;
 
+  /** Simulates a click on the radio. */
+  click() {
+    this.input.click();
+  }
+
   /** Sets focus on the radio. */
   focus(options?: FocusOptions) {
     this.input.focus(options);

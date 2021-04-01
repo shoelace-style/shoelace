@@ -63,6 +63,11 @@ export default class SlCheckbox extends LitElement {
     this.input.indeterminate = this.indeterminate;
   }
 
+  /** Simulates a click on the checkbox. */
+  click() {
+    this.input.click();
+  }
+
   /** Sets focus on the checkbox. */
   focus(options?: FocusOptions) {
     this.input.focus(options);

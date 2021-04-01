@@ -55,6 +55,11 @@ export default class SlSwitch extends LitElement {
   /** Emitted when the control gains focus. */
   @event('sl-focus') slFocus: EventEmitter<void>;
 
+  /** Simulates a click on the switch. */
+  click() {
+    this.input.click();
+  }
+
   /** Sets focus on the switch. */
   focus(options?: FocusOptions) {
     this.input.focus(options);
