@@ -81,17 +81,28 @@ export default class SlTooltip extends LitElement {
   /** Emitted after the tooltip has hidden and all transitions are complete. */
   @event('sl-after-hide') slAfterHide: EventEmitter<void>;
 
+  connectedCallback() {
+    super.connectedCallback();
+
+    this.handleBlur = this.handleBlur.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleMouseOver = this.handleMouseOver.bind(this);
+    this.handleMouseOut = this.handleMouseOut.bind(this);
+  }
+
   firstUpdated() {
     this.target = this.getTarget();
     this.popover = new Popover(this.target, this.positioner);
     this.syncOptions();
 
-    this.addEventListener('blur', this.handleBlur.bind(this), true);
-    this.addEventListener('click', this.handleClick.bind(this), true);
-    this.addEventListener('focus', this.handleFocus.bind(this), true);
-    this.addEventListener('keydown', this.handleKeyDown.bind(this), true);
-    this.addEventListener('mouseover', this.handleMouseOver.bind(this), true);
-    this.addEventListener('mouseout', this.handleMouseOut.bind(this), true);
+    this.addEventListener('blur', this.handleBlur, true);
+    this.addEventListener('focus', this.handleFocus, true);
+    this.addEventListener('click', this.handleClick);
+    this.addEventListener('keydown', this.handleKeyDown);
+    this.addEventListener('mouseover', this.handleMouseOver);
+    this.addEventListener('mouseout', this.handleMouseOut);
 
     // Show on init if open
     this.positioner.hidden = !this.open;
@@ -104,8 +115,11 @@ export default class SlTooltip extends LitElement {
     super.disconnectedCallback();
     this.popover.destroy();
     this.removeEventListener('blur', this.handleBlur, true);
-    this.removeEventListener('click', this.handleClick, true);
     this.removeEventListener('focus', this.handleFocus, true);
+    this.removeEventListener('click', this.handleClick);
+    this.removeEventListener('keydown', this.handleKeyDown);
+    this.removeEventListener('mouseover', this.handleMouseOver);
+    this.removeEventListener('mouseout', this.handleMouseOut);
   }
 
   /** Shows the tooltip. */
