@@ -46,13 +46,13 @@ export default class SlDetails extends LitElement {
   @event('sl-show') slShow: EventEmitter<void>;
 
   /** Emitted after the details opens and all transitions are complete. */
-  @event('after-show') slAfterShow: EventEmitter<void>;
+  @event('sl-after-show') slAfterShow: EventEmitter<void>;
 
   /** Emitted when the details closes. Calling `event.preventDefault()` will prevent it from being closed. */
   @event('sl-hide') slHide: EventEmitter<void>;
 
   /** Emitted after the details closes and all transitions are complete. */
-  @event('after-hide') slAfterHide: EventEmitter<void>;
+  @event('sl-after-hide') slAfterHide: EventEmitter<void>;
 
   connectedCallback() {
     super.connectedCallback();
