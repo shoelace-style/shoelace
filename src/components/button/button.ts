@@ -59,19 +59,19 @@ export default class SlButton extends LitElement {
   @property({ type: Boolean, reflect: true }) submit = false;
 
   /** An optional name for the button. Ignored when `href` is set. */
-  @property() name: string;
+  @property() name = '';
 
   /** An optional value for the button. Ignored when `href` is set. */
-  @property() value: string;
+  @property() value = '';
 
   /** When set, the underlying button will be rendered as an `<a>` with this `href` instead of a `<button>`. */
-  @property() href: string;
+  @property() href = '';
 
   /** Tells the browser where to open the link. Only used when `href` is set. */
   @property() target: '_blank' | '_parent' | '_self' | '_top';
 
   /** Tells the browser to download the linked file as this filename. Only used when `href` is set. */
-  @property() download: string;
+  @property() download = '';
 
   /** Emitted when the button loses focus. */
   @event('sl-blur') slBlur: EventEmitter<void>;

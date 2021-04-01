@@ -41,16 +41,16 @@ export default class SlTextarea extends LitElement {
   @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
 
   /** The textarea's name attribute. */
-  @property() name: string;
+  @property() name = '';
 
   /** The textarea's value attribute. */
   @property() value = '';
 
   /** The textarea's label. Alternatively, you can use the label slot. */
-  @property() label: string;
+  @property() label = '';
 
   /** The textarea's help text. Alternatively, you can use the help-text slot. */
-  @property({ attribute: 'help-text' }) helpText: string;
+  @property({ attribute: 'help-text' }) helpText = '';
 
   /** The textarea's placeholder text. */
   @property() placeholder = '';

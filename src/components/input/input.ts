@@ -55,7 +55,7 @@ export default class SlInput extends LitElement {
   @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
 
   /** The input's name attribute. */
-  @property() name: string;
+  @property() name = '';
 
   /** The input's value attribute. */
   @property() value = '';
@@ -64,10 +64,10 @@ export default class SlInput extends LitElement {
   @property({ type: Boolean, reflect: true }) pill = false;
 
   /** The input's label. Alternatively, you can use the label slot. */
-  @property() label: string;
+  @property() label = '';
 
   /** The input's help text. Alternatively, you can use the help-text slot. */
-  @property({ attribute: 'help-text' }) helpText: string;
+  @property({ attribute: 'help-text' }) helpText = '';
 
   /** Adds a clear button when the input is populated. */
   @property({ type: Boolean }) clearable = false;

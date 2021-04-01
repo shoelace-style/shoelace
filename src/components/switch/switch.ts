@@ -29,10 +29,10 @@ export default class SlSwitch extends LitElement {
   @state() private hasFocus = false;
 
   /** The switch's name attribute. */
-  @property() name: string;
+  @property() name = '';
 
   /** The switch's value attribute. */
-  @property() value: string;
+  @property() value = '';
 
   /** Disables the switch. */
   @property({ type: Boolean, reflect: true }) disabled = false;

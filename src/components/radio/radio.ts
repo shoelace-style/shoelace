@@ -29,10 +29,10 @@ export default class SlRadio extends LitElement {
   @state() private hasFocus = false;
 
   /** The radio's name attribute. */
-  @property() name: string;
+  @property() name = '';
 
   /** The radio's value attribute. */
-  @property() value: string;
+  @property() value = '';
 
   /** Disables the radio. */
   @property({ type: Boolean, reflect: true }) disabled = false;

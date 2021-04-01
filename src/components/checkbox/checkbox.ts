@@ -30,10 +30,10 @@ export default class SlCheckbox extends LitElement {
   @state() private hasFocus = false;
 
   /** The checkbox's name attribute. */
-  @property() name: string;
+  @property() name = '';
 
   /** The checkbox's value attribute. */
-  @property() value: string;
+  @property() value = '';
 
   /** Disables the checkbox. */
   @property({ type: Boolean, reflect: true }) disabled = false;

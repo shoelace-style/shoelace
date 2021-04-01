@@ -41,7 +41,7 @@ export default class SlRange extends LitElement {
   @property() name = '';
 
   /** The input's value attribute. */
-  @property({ type: Number }) value: number;
+  @property({ type: Number }) value = 0;
 
   /** The range's label. Alternatively, you can use the label slot. */
   @property() label = '';

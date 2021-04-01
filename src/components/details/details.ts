@@ -37,7 +37,7 @@ export default class SlDetails extends LitElement {
   @property({ type: Boolean, reflect: true }) open = false;
 
   /** The summary to show in the details header. If you need to display HTML, use the `summary` slot instead. */
-  @property() summary: string;
+  @property() summary = '';
 
   /** Disables the details so it can't be toggled. */
   @property({ type: Boolean, reflect: true }) disabled = false;

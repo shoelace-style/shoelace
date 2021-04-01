@@ -88,7 +88,7 @@ export default class SlSelect extends LitElement {
   @property({ type: Boolean, reflect: true }) pill = false;
 
   /** The select's label. Alternatively, you can use the label slot. */
-  @property() label: string;
+  @property() label = '';
 
   /** The select's help text. Alternatively, you can use the help-text slot. */
   @property({ attribute: 'help-text' }) helpText: string;

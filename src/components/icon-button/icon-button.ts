@@ -20,19 +20,19 @@ export default class SlIconButton extends LitElement {
   @query('button') button: HTMLButtonElement;
 
   /** The name of the icon to draw. */
-  @property() name: string;
+  @property() name = '';
 
   /** The name of a registered custom icon library. */
-  @property() library: string;
+  @property() library = '';
 
   /** An external URL of an SVG file. */
-  @property() src: string;
+  @property() src = '';
 
   /**
    * A description that gets read by screen readers and other assistive devices. For optimal accessibility, you should
    * always include a label that describes what the icon button does.
    */
-  @property() label: string;
+  @property() label = '';
 
   /** Disables the button. */
   @property({ type: Boolean, reflect: true }) disabled = false;
