@@ -41,19 +41,19 @@ export default class SlTextarea extends LitElement {
   @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
 
   /** The textarea's name attribute. */
-  @property() name = '';
+  @property() name: string;
 
   /** The textarea's value attribute. */
   @property() value = '';
 
   /** The textarea's label. Alternatively, you can use the label slot. */
-  @property() label = '';
+  @property() label: string;
 
   /** The textarea's help text. Alternatively, you can use the help-text slot. */
   @property({ attribute: 'help-text' }) helpText = '';
 
   /** The textarea's placeholder text. */
-  @property() placeholder = '';
+  @property() placeholder: string;
 
   /** The number of rows to display by default. */
   @property({ type: Number }) rows = 4;
@@ -284,7 +284,7 @@ export default class SlTextarea extends LitElement {
             part="textarea"
             id=${this.inputId}
             class="textarea__control"
-            name=${this.name}
+            name=${ifDefined(this.name)}
             .value=${this.value}
             ?disabled=${this.disabled}
             ?readonly=${this.readonly}

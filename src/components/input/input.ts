@@ -55,7 +55,7 @@ export default class SlInput extends LitElement {
   @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
 
   /** The input's name attribute. */
-  @property() name = '';
+  @property() name: string;
 
   /** The input's value attribute. */
   @property() value = '';
@@ -64,7 +64,7 @@ export default class SlInput extends LitElement {
   @property({ type: Boolean, reflect: true }) pill = false;
 
   /** The input's label. Alternatively, you can use the label slot. */
-  @property() label = '';
+  @property() label: string;
 
   /** The input's help text. Alternatively, you can use the help-text slot. */
   @property({ attribute: 'help-text' }) helpText = '';
@@ -76,7 +76,7 @@ export default class SlInput extends LitElement {
   @property({ attribute: 'toggle-password', type: Boolean }) togglePassword = false;
 
   /** The input's placeholder text. */
-  @property() placeholder = '';
+  @property() placeholder: string;
 
   /** Disables the input. */
   @property({ type: Boolean, reflect: true }) disabled = false;

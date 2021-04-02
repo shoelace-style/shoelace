@@ -1,6 +1,7 @@
 import { LitElement, html, unsafeCSS } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators';
 import { classMap } from 'lit-html/directives/class-map';
+import { ifDefined } from 'lit-html/directives/if-defined';
 import { event, EventEmitter, watch } from '../../internal/decorators';
 import styles from 'sass:./radio.scss';
 
@@ -29,10 +30,10 @@ export default class SlRadio extends LitElement {
   @state() private hasFocus = false;
 
   /** The radio's name attribute. */
-  @property() name = '';
+  @property() name: string;
 
   /** The radio's value attribute. */
-  @property() value = '';
+  @property() value: string;
 
   /** Disables the radio. */
   @property({ type: Boolean, reflect: true }) disabled = false;
@@ -166,8 +167,8 @@ export default class SlRadio extends LitElement {
           <input
             id=${this.inputId}
             type="radio"
-            name=${this.name}
-            .value=${this.value}
+            name=${ifDefined(this.name)}
+            value=${ifDefined(this.value)}
             ?checked=${this.checked}
             ?disabled=${this.disabled}
             role="radio"

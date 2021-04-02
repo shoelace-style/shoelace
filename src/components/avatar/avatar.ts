@@ -23,13 +23,13 @@ export default class SlAvatar extends LitElement {
   @state() private hasError = false;
 
   /** The image source to use for the avatar. */
-  @property() image = '';
+  @property() image: string;
 
   /** Alternative text for the image. */
-  @property() alt = '';
+  @property() alt: string;
 
   /** Initials to use as a fallback when no image is available (1-2 characters max recommended). */
-  @property() initials = '';
+  @property() initials: string;
 
   /** The shape of the avatar. */
   @property({ reflect: true }) shape: 'circle' | 'square' | 'rounded' = 'circle';

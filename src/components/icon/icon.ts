@@ -21,13 +21,13 @@ export default class SlIcon extends LitElement {
   @state() private svg = '';
 
   /** The name of the icon to draw. */
-  @property() name = '';
+  @property() name: string;
 
   /** An external URL of an SVG file. */
-  @property() src = '';
+  @property() src: string;
 
   /** An alternative description to use for accessibility. If omitted, the name or src will be used to generate it. */
-  @property() label = '';
+  @property() label: string;
 
   /** The name of a registered custom icon library. */
   @property() library = 'default';

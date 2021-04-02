@@ -20,13 +20,13 @@ export default class SlIconButton extends LitElement {
   @query('button') button: HTMLButtonElement;
 
   /** The name of the icon to draw. */
-  @property() name = '';
+  @property() name: string;
 
   /** The name of a registered custom icon library. */
-  @property() library = '';
+  @property() library: string;
 
   /** An external URL of an SVG file. */
-  @property() src = '';
+  @property() src: string;
 
   /**
    * A description that gets read by screen readers and other assistive devices. For optimal accessibility, you should

@@ -59,19 +59,19 @@ export default class SlButton extends LitElement {
   @property({ type: Boolean, reflect: true }) submit = false;
 
   /** An optional name for the button. Ignored when `href` is set. */
-  @property() name = '';
+  @property() name: string;
 
   /** An optional value for the button. Ignored when `href` is set. */
-  @property() value = '';
+  @property() value: string;
 
   /** When set, the underlying button will be rendered as an `<a>` with this `href` instead of a `<button>`. */
-  @property() href = '';
+  @property() href: string;
 
   /** Tells the browser where to open the link. Only used when `href` is set. */
   @property() target: '_blank' | '_parent' | '_self' | '_top';
 
   /** Tells the browser to download the linked file as this filename. Only used when `href` is set. */
-  @property() download = '';
+  @property() download: string;
 
   /** Emitted when the button loses focus. */
   @event('sl-blur') slBlur: EventEmitter<void>;
@@ -156,7 +156,6 @@ export default class SlButton extends LitElement {
 
     const button = html`
       <button
-        ref=${(el: HTMLButtonElement) => (this.button = el)}
         part="base"
         class=${classMap({
           button: true,
@@ -182,8 +181,8 @@ export default class SlButton extends LitElement {
         })}
         ?disabled=${this.disabled}
         type=${this.submit ? 'submit' : 'button'}
-        name=${this.name}
-        .value=${this.value}
+        name=${ifDefined(this.name)}
+        value=${ifDefined(this.value)}
         @blur=${this.handleBlur}
         @focus=${this.handleFocus}
         @click=${this.handleClick}
@@ -218,7 +217,7 @@ export default class SlButton extends LitElement {
           'button--has-prefix': this.hasPrefix,
           'button--has-suffix': this.hasSuffix
         })}
-        href=${this.href}
+        href=${ifDefined(this.href)}
         target=${ifDefined(this.target)}
         download=${ifDefined(this.download)}
         rel=${ifDefined(this.target ? 'noreferrer noopener' : undefined)}
