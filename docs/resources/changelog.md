@@ -16,6 +16,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Improved a11y for disabled buttons that are rendered as links
 - Improved a11y for `sl-button-group`
 - Removed `sl-show`, `sl-hide`, `sl-after-show`, `sl-after-hide` events from `sl-color-picker` (the color picker's visibility cannot be controlled programmatically so these shouldn't have been exposed; the dropdown events now bubble up so you can listen for those instead)
+- Reworked `sl-button-group` so it doesn't require light DOM styles
 
 ## 2.0.0-beta.36
 

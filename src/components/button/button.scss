@@ -446,3 +446,49 @@
     }
   }
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Button groups support a variety of button types (e.g. buttons with tooltips, buttons as dropdown triggers, etc.).
+// This means buttons aren't always direct descendants of the button group, thus we can't target them with the ::slotted
+// selector. To work around this, the button group component does some magic to add these special classes to buttons and
+// we style them here instead.
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+:host(.sl-button-group__button--first) .button {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+:host(.sl-button-group__button--inner) .button {
+  border-radius: 0;
+}
+
+:host(.sl-button-group__button--last) .button {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+// All except the first
+:host(.sl-button-group__button:not(.sl-button-group__button--first)) {
+  margin-left: calc(-1 * var(--sl-input-border-width));
+}
+
+// Add a visual separator between solid buttons
+:host(.sl-button-group__button:not(.sl-button-group__button--focus, .sl-button-group__button--first, [type='default']):not(:hover, :active, :focus))
+  .button:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  border-left: solid 1px #ffffff40;
+}
+
+// Bump focused buttons up so their focus ring isn't clipped
+:host(.sl-button-group__button--hover) {
+  z-index: 1;
+}
+
+:host(.sl-button-group__button--focus) {
+  z-index: 2;
+}

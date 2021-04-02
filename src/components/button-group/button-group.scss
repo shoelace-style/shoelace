@@ -7,9 +7,4 @@
 .button-group {
   display: flex;
   flex-wrap: nowrap;
-  position: relative;
-}
-
-::slotted(.sl-focus) {
-  z-index: 1;
 }
