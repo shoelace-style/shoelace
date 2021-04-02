@@ -481,7 +481,8 @@
   top: 0;
   left: 0;
   bottom: 0;
-  border-left: solid 1px #ffffff40;
+  border-left: solid 1px #fff4;
+  mix-blend-mode: lighten;
 }
 
 // Bump focused buttons up so their focus ring isn't clipped
