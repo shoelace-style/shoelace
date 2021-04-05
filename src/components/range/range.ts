@@ -4,7 +4,7 @@ import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
 import { event, EventEmitter, watch } from '../../internal/decorators';
 import styles from 'sass:./range.scss';
-import { renderFormControl } from '../../internal/form-control';
+import { getLabelledBy, renderFormControl } from '../../internal/form-control';
 import { hasSlot } from '../../internal/slot';
 
 let id = 0;
@@ -27,8 +27,8 @@ export default class SlRange extends LitElement {
   @query('.range__control') input: HTMLInputElement;
   @query('.range__tooltip') output: HTMLOutputElement;
 
-  private helpTextId = `input-help-text-${id}`;
   private inputId = `input-${++id}`;
+  private helpTextId = `input-help-text-${id}`;
   private labelId = `input-label-${id}`;
   private resizeObserver: ResizeObserver;
 
@@ -194,11 +194,21 @@ export default class SlRange extends LitElement {
             type="range"
             class="range__control"
             name=${this.name}
-            .value=${this.value}
+            .value=${this.value + ''}
             ?disabled=${this.disabled}
             min=${ifDefined(this.min)}
             max=${ifDefined(this.max)}
             step=${ifDefined(this.step)}
+            aria-labelledby=${ifDefined(
+              getLabelledBy({
+                label: this.label,
+                labelId: this.labelId,
+                hasLabelSlot: this.hasLabelSlot,
+                helpText: this.helpText,
+                helpTextId: this.helpTextId,
+                hasHelpTextSlot: this.hasHelpTextSlot
+              })
+            )}
             @input=${this.handleInput.bind(this)}
             @focus=${this.handleFocus.bind(this)}
             @blur=${this.handleBlur.bind(this)}

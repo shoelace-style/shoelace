@@ -4,7 +4,7 @@ import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
 import { event, EventEmitter, watch } from '../../internal/decorators';
 import styles from 'sass:./textarea.scss';
-import { renderFormControl } from '../../internal/form-control';
+import { getLabelledBy, renderFormControl } from '../../internal/form-control';
 import { hasSlot } from '../../internal/slot';
 
 let id = 0;
@@ -28,8 +28,8 @@ export default class SlTextarea extends LitElement {
 
   @query('.textarea__control') input: HTMLTextAreaElement;
 
-  private helpTextId = `textarea-help-text-${id}`;
   private inputId = `textarea-${++id}`;
+  private helpTextId = `textarea-help-text-${id}`;
   private labelId = `textarea-label-${id}`;
   private resizeObserver: ResizeObserver;
 
@@ -298,7 +298,16 @@ export default class SlTextarea extends LitElement {
             ?autofocus=${this.autofocus}
             spellcheck=${ifDefined(this.spellcheck)}
             inputmode=${ifDefined(this.inputmode)}
-            aria-labelledby=${this.labelId}
+            aria-labelledby=${ifDefined(
+              getLabelledBy({
+                label: this.label,
+                labelId: this.labelId,
+                hasLabelSlot: this.hasLabelSlot,
+                helpText: this.helpText,
+                helpTextId: this.helpTextId,
+                hasHelpTextSlot: this.hasHelpTextSlot
+              })
+            )}
             @change=${this.handleChange.bind(this)}
             @input=${this.handleInput.bind(this)}
             @focus=${this.handleFocus.bind(this)}

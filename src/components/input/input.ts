@@ -4,7 +4,7 @@ import { ifDefined } from 'lit-html/directives/if-defined';
 import { classMap } from 'lit-html/directives/class-map';
 import { event, EventEmitter, watch } from '../../internal/decorators';
 import styles from 'sass:./input.scss';
-import { renderFormControl } from '../../internal/form-control';
+import { getLabelledBy, renderFormControl } from '../../internal/form-control';
 import { hasSlot } from '../../internal/slot';
 
 let id = 0;
@@ -39,8 +39,8 @@ export default class SlInput extends LitElement {
 
   @query('.input__control') input: HTMLInputElement;
 
-  private helpTextId = `input-help-text-${id}`;
   private inputId = `input-${++id}`;
+  private helpTextId = `input-help-text-${id}`;
   private labelId = `input-label-${id}`;
 
   @state() private hasFocus = false;
@@ -319,8 +319,16 @@ export default class SlInput extends LitElement {
             spellcheck=${ifDefined(this.spellcheck)}
             pattern=${ifDefined(this.pattern)}
             inputmode=${ifDefined(this.inputmode)}
-            aria-labelledby=${this.labelId}
-            aria-describedby=${this.helpTextId}
+            aria-labelledby=${ifDefined(
+              getLabelledBy({
+                label: this.label,
+                labelId: this.labelId,
+                hasLabelSlot: this.hasLabelSlot,
+                helpText: this.helpText,
+                helpTextId: this.helpTextId,
+                hasHelpTextSlot: this.hasHelpTextSlot
+              })
+            )}
             aria-invalid=${this.invalid ? 'true' : 'false'}
             @change=${this.handleChange}
             @input=${this.handleInput}
