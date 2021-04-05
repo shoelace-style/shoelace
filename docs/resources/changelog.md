@@ -9,6 +9,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 ## Next
 
 - Added `click()` method to `sl-checkbox`, `sl-radio`, and `sl-switch`
+- Added the `activation` prop to `sl-tab-group` to allow for automatic and manual tab activation
 - Fixed a bug in `sl-tooltip` where events weren't properly cleaned up on disconnect
 - Fixed a bug in `sl-tooltip` where they wouldn't display after toggling `disabled` off and on again [#391](https://github.com/shoelace-style/shoelace/issues/391)
 - Fixed a bug in `sl-details` where `show()` and `hide()` would toggle the control when disabled

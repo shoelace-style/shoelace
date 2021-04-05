@@ -162,4 +162,22 @@ When there are more tabs than horizontal space allows, the nav will be scrollabl
 </sl-tab-group>
 ```
 
+### Manual Activation
+
+When focused, keyboard users can press <kbd>Left</kbd> or <kbd>Right</kbd> to select the desired tab. By default, the corresponding tab panel will be shown immediately (automatic activation). You can change this behavior by setting `activation="manual"` which will require the user to press <kbd>Space</kbd> or <kbd>Enter</kbd> before showing the tab panel (manual activation).
+
+```html preview
+<sl-tab-group activation="manual">
+  <sl-tab slot="nav" panel="general">General</sl-tab>
+  <sl-tab slot="nav" panel="custom">Custom</sl-tab>
+  <sl-tab slot="nav" panel="advanced">Advanced</sl-tab>
+  <sl-tab slot="nav" panel="disabled" disabled>Disabled</sl-tab>
+
+  <sl-tab-panel name="general">This is the general tab panel.</sl-tab-panel>
+  <sl-tab-panel name="custom">This is the custom tab panel.</sl-tab-panel>
+  <sl-tab-panel name="advanced">This is the advanced tab panel.</sl-tab-panel>
+  <sl-tab-panel name="disabled">This is a disabled tab panel.</sl-tab-panel>
+</sl-tab-group>
+```
+
 [component-metadata:sl-tab-group]
