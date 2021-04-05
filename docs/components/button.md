@@ -180,4 +180,48 @@ Use the `disabled` prop to disable a button. Clicks will be suppressed until the
 <sl-button type="danger" disabled>Danger</sl-button>
 ```
 
+### Styling Buttons
+
+This example demonstrates how to style buttons using a custom class. This is the recommended approach if you need to add additional variations. To customize an existing variation, modify the selector to target the button's type attribute instead of a class (e.g. `sl-button[type="primary"]`).
+
+```html preview
+<sl-button class="pink">Pink Button</sl-button>
+
+<style>
+  sl-button.pink::part(base) {
+    /* Set design tokens for height and border width */
+    --sl-input-height-medium: 48px;
+    --sl-input-border-width: 4px;
+    
+    border-radius: 0;
+    background-color: #ff1493;
+    border-top-color: #ff7ac1;
+    border-left-color: #ff7ac1;
+    border-bottom-color: #ad005c;
+    border-right-color: #ad005c;
+    color: white;
+    font-size: 1.125rem;
+    box-shadow: 0 2px 10px #0002;
+    transition: var(--sl-transition-medium) transform ease, var(--sl-transition-medium) border ease;
+  }
+
+  sl-button.pink::part(base):hover {
+    transform: scale(1.05) rotate(-1deg);
+  }
+
+  sl-button.pink::part(base):active {
+    border-top-color: #ad005c;
+    border-right-color: #ff7ac1;
+    border-bottom-color: #ff7ac1;
+    border-left-color: #ad005c;
+    transform: scale(1.05) rotate(-1deg) translateY(2px);
+  }
+
+  sl-button.pink::part(base):focus-visible {
+    outline: dashed 2px deeppink;
+    outline-offset: 4px;
+  }
+</style>
+```
+
 [component-metadata:sl-button]
