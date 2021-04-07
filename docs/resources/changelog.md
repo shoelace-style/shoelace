@@ -15,6 +15,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug in `sl-tooltip` where they wouldn't display after toggling `disabled` off and on again [#391](https://github.com/shoelace-style/shoelace/issues/391)
 - Fixed a bug in `sl-details` where `show()` and `hide()` would toggle the control when disabled
 - Fixed a bug in `sl-color-picker` where setting `value` wouldn't update the control
+- Fixed a bug in `sl-tab-group` where tabs that are initially disabled wouldn't receive the indicator on activation [#403](https://github.com/shoelace-style/shoelace/issues/403)
 - Fixed incorrect event names for `sl-after-show` and `sl-after-hide` in `sl-details`
 - Improved a11y for disabled buttons that are rendered as links
 - Improved a11y for `sl-button-group` by adding the correct `role` attribute

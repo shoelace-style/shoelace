@@ -82,14 +82,17 @@ export default class SlTabGroup extends LitElement {
     this.resizeObserver.observe(this.nav);
     requestAnimationFrame(() => this.updateScrollControls());
 
-    // Update aria labels if the DOM changes
     this.mutationObserver = new MutationObserver(mutations => {
+      // Update aria labels when the DOM changes
       if (
-        mutations.some(mutation => {
-          return !['aria-labelledby', 'aria-controls'].includes(mutation.attributeName as string);
-        })
+        mutations.some(mutation => !['aria-labelledby', 'aria-controls'].includes(mutation.attributeName as string))
       ) {
         setTimeout(() => this.setAriaLabels());
+      }
+
+      // Sync tabs when disabled states change
+      if (mutations.some(mutation => mutation.attributeName === 'disabled')) {
+        this.syncTabsAndPanels();
       }
     });
     this.mutationObserver.observe(this, { attributes: true, childList: true, subtree: true });
@@ -312,6 +315,7 @@ export default class SlTabGroup extends LitElement {
     });
   }
 
+  // This stores tabs and panels so we can refer to a cache instead of calling querySelectorAll() multiple times.
   syncTabsAndPanels() {
     this.tabs = this.getAllTabs();
     this.panels = this.getAllPanels();
