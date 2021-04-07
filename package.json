@@ -32,7 +32,8 @@
     "start": "node scripts/build.cjs --dev",
     "build": "node scripts/build.cjs",
     "prepublishOnly": "npm run build",
-    "prettier": "prettier --write --loglevel warn ."
+    "prettier": "prettier --write --loglevel warn .",
+    "create": "node scripts/create-component.cjs"
   },
   "dependencies": {
     "@popperjs/core": "^2.7.0",

@@ -65,6 +65,16 @@ To generate a production build, run the following command.
 npm run build
 ```
 
+### Creating New Components
+
+To scaffold a new component, run the following command, replacing `sl-tag-name` with the desired tag name.
+
+```bash
+npm run create sl-tag-name
+```
+
+This will generate a source file, a stylesheet, and a docs page for you. When you start the dev server, you'll find the new component in the "Components" section of the sidebar.
+
 ### Contributing
 
 Shoelace is an open source project and contributions are encouraged! If you're interesting in contributing, please review the [contribution guidelines](CONTRIBUTING.md) first.

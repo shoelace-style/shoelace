@@ -90,6 +90,16 @@ npm start
 
 After the initial build, a browser will open automatically to a local version of the docs. The documentation is powered by Docsify, which uses raw markdown files to generate pages on the fly.
 
+### Creating New Components
+
+To scaffold a new component, run the following command, replacing `sl-tag-name` with the desired tag name.
+
+```bash
+npm run create sl-tag-name
+```
+
+This will generate a source file, a stylesheet, and a docs page for you. When you start the dev server, you'll find the new component in the "Components" section of the sidebar.
+
 ### Dev Sandbox
 
 Component development occurs _within_ the local docs site. I've found that offering common variations _in the docs_ is more beneficial for users than segmenting demos and code examples into separate tools such as Storybook. This encourages more thorough documentation, streamlines development for maintainers, and simplifies how the project is built. It also reduces installation and startup times significantly.
