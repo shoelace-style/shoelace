@@ -6,7 +6,7 @@ Components with the <sl-badge type="warning" pill>Experimental</sl-badge> badge 
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
-## Next
+## 2.0.0-beta.37
 
 - Added `click()` method to `sl-checkbox`, `sl-radio`, and `sl-switch`
 - Added the `activation` prop to `sl-tab-group` to allow for automatic and manual tab activation
