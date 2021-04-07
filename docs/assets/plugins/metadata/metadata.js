@@ -200,7 +200,7 @@
     // Recursively fetch subdependencies
     function getDependencies(tag) {
       const component = allComponents.find(c => c.tag === tag);
-      if (!component && !Array.isArray(component.dependencies)) {
+      if (!component || !Array.isArray(component.dependencies)) {
         return [];
       }
 
