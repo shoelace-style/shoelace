@@ -570,7 +570,7 @@ export default class SlColorPicker extends LitElement {
   }
 
   @watch('value')
-  handleValueChange(newValue: string, oldValue: string) {
+  handleValueChange(oldValue: string, newValue: string) {
     if (!this.bypassValueParse) {
       const newColor = this.parseColor(newValue);
 
