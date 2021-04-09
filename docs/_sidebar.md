@@ -35,6 +35,7 @@
   - [Progress Bar](/components/progress-bar.md)
   - [Progress Ring](/components/progress-ring.md)
   - [Radio](/components/radio.md)
+  - [Radio Group](/components/radio-group.md)
   - [Range](/components/range.md)
   - [Rating](/components/rating.md)
   - [Responsive Embed](/components/responsive-embed.md)

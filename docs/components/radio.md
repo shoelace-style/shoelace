@@ -4,39 +4,31 @@
 
 Radios allow the user to select one option from a group of many.
 
+Radios are designed to be used with [radio groups](/components/radio-group). As such, all of the examples on this page utilize them to demonstrate their correct usage.
+
 ```html preview
-<sl-radio>Radio</sl-radio>
+<sl-radio-group label="Select an option" no-fieldset>
+  <sl-radio value="1" checked>Option 1</sl-radio>
+  <sl-radio value="2">Option 2</sl-radio>
+  <sl-radio value="3">Option 3</sl-radio>
+</sl-radio-group>
 ```
 
 ?> This component doesn't work with standard forms. Use [`<sl-form>`](/components/form.md) instead.
 
 ## Examples
 
-### Checked
-
-Use the `checked` attribute to activate the radio.
-
-```html preview
-<sl-radio checked>Checked</sl-radio>
-```
-
 ### Disabled
 
-Use the `disabled` attribute to disable the radio.
+Use the `disabled` attribute to disable a radio.
 
 ```html preview
-<sl-radio disabled>Disabled</sl-radio>
-```
-
-### Grouping Radios
-
-Radios are grouped based on their `name` attribute and scoped to the nearest form.
-
-```html preview
-<sl-radio name="option" checked>Option 1</sl-radio><br>
-<sl-radio name="option">Option 2</sl-radio><br>
-<sl-radio name="option">Option 3</sl-radio><br>
-<sl-radio name="option">Option 4</sl-radio>
+<sl-radio-group label="Select an option" no-fieldset>
+  <sl-radio value="1" checked>Option 1</sl-radio>
+  <sl-radio value="2">Option 2</sl-radio>
+  <sl-radio value="3">Option 3</sl-radio>
+  <sl-radio value="4" disabled>Disabled</sl-radio>
+</sl-radio-group>
 ```
 
 [component-metadata:sl-radio]

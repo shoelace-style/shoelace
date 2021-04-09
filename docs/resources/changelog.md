@@ -6,6 +6,11 @@ Components with the <sl-badge type="warning" pill>Experimental</sl-badge> badge 
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
+## Next
+
+- 🚨 BREAKING: `sl-radio` components must be located inside an `sl-radio-group` for proper accessibility [#218](https://github.com/shoelace-style/shoelace/issues/218)
+- Added `sl-radio-group` component [#218](https://github.com/shoelace-style/shoelace/issues/218)
+
 ## 2.0.0-beta.37
 
 - Added `click()` method to `sl-checkbox`, `sl-radio`, and `sl-switch`
