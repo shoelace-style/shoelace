@@ -89,6 +89,11 @@
   cursor: not-allowed;
 }
 
+// When the control isn't checked, hide the circle for Windows High Contrast mode a11y
+.radio:not(.radio--checked) svg circle {
+  opacity: 0;
+}
+
 .radio__label {
   line-height: var(--sl-toggle-size);
   margin-left: 0.5em;
