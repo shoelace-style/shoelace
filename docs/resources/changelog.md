@@ -12,6 +12,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Added `sl-radio-group` component [#218](https://github.com/shoelace-style/shoelace/issues/218)
 - Fixed a bug where `sl-menu-item` prefix and suffix slots wouldn't always receive the correct spacing
 - Improved a11y in `sl-radio` with Windows high contrast mode [#215](https://github.com/shoelace-style/shoelace/issues/215)
+- Improved a11y in `sl-select` by preventing the chevron icon from being announced
 
 ## 2.0.0-beta.37
 

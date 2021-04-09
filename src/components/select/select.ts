@@ -458,7 +458,7 @@ export default class SlSelect extends LitElement {
                 `
               : ''}
 
-            <span part="icon" class="select__icon">
+            <span part="icon" class="select__icon" aria-hidden="true">
               <sl-icon name="chevron-down"></sl-icon>
             </span>
 
