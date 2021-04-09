@@ -4,7 +4,7 @@
 
 Menus provide a list of options for the user to choose from.
 
-Use [menu items](/components/menu-item.md), [menu dividers](/components/menu-divider.md), and [menu labels](/components/menu-label.md) to compose a menu.
+You can use [menu items](/components/menu-item.md), [menu dividers](/components/menu-divider.md), and [menu labels](/components/menu-label.md) to compose a menu.
 
 ```html preview
 <sl-menu style="max-width: 200px; border: solid 1px var(--sl-panel-border-color); border-radius: var(--sl-border-radius-medium);">
@@ -17,5 +17,7 @@ Use [menu items](/components/menu-item.md), [menu dividers](/components/menu-div
   <sl-menu-item value="delete">Delete</sl-menu-item>
 </sl-menu>
 ```
+
+?> Menus are intended for system menus (dropdown menus, select menus, context menus, etc.). They should not be mistaken for navigation menus which serve a different purpose and have a different semantic meaning. If you're building navigation, use `<nav>` and `<a>` elements instead.
 
 [component-metadata:sl-menu]
