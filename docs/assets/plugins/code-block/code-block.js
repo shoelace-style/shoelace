@@ -44,7 +44,7 @@
             <div class="code-block">
               <div class="code-block__preview">
                 ${code.textContent}
-                <div class="code-block__resizer" tabindex="0">
+                <div class="code-block__resizer" role="slider" tabindex="0">
                   <sl-icon name="grip-vertical"></sl-icon>
                 </div>
               </div>
