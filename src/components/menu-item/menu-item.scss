@@ -42,8 +42,8 @@
     display: flex;
     align-items: center;
 
-    ::slotted(:last-child) {
-      margin-right: 0.5em;
+    ::slotted(*) {
+      margin-right: var(--sl-spacing-x-small);
     }
   }
 
@@ -52,8 +52,8 @@
     display: flex;
     align-items: center;
 
-    ::slotted(:first-child) {
-      margin-left: 0.5em;
+    ::slotted(*) {
+      margin-left: var(--sl-spacing-x-small);
     }
   }
 }
