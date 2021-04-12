@@ -25,27 +25,27 @@
 
 .badge--primary {
   background-color: var(--sl-color-primary-500);
-  color: var(--sl-color-white);
+  color: var(--sl-color-primary-text);
 }
 
 .badge--success {
   background-color: var(--sl-color-success-500);
-  color: var(--sl-color-white);
+  color: var(--sl-color-success-text);
 }
 
 .badge--info {
   background-color: var(--sl-color-info-500);
-  color: var(--sl-color-white);
+  color: var(--sl-color-info-text);
 }
 
 .badge--warning {
   background-color: var(--sl-color-warning-500);
-  color: var(--sl-color-white);
+  color: var(--sl-color-warning-text);
 }
 
 .badge--danger {
   background-color: var(--sl-color-danger-500);
-  color: var(--sl-color-white);
+  color: var(--sl-color-danger-text);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
