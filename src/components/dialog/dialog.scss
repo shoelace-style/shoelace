@@ -3,9 +3,15 @@
 
 /**
  * @prop --width: The preferred width of the dialog. Note that the dialog will shrink to accommodate smaller screens.
+ * @prop --header-spacing: The amount of padding to use for the header.
+ * @prop --body-spacing: The amount of padding to use for the body.
+ * @prop --footer-spacing: The amount of padding to use for the footer.
  */
 :host {
   --width: 31rem;
+  --header-spacing: var(--sl-spacing-large);
+  --body-spacing: var(--sl-spacing-large);
+  --footer-spacing: var(--sl-spacing-large);
 
   display: contents;
 }
@@ -67,7 +73,7 @@
   flex: 1 1 auto;
   font-size: var(--sl-font-size-large);
   line-height: var(--sl-line-height-dense);
-  padding: var(--sl-spacing-large);
+  padding: var(--header-spacing);
 }
 
 .dialog__close {
@@ -75,12 +81,12 @@
   display: flex;
   align-items: center;
   font-size: var(--sl-font-size-x-large);
-  padding: 0 var(--sl-spacing-large);
+  padding: 0 var(--header-spacing);
 }
 
 .dialog__body {
   flex: 1 1 auto;
-  padding: var(--sl-spacing-large);
+  padding: var(--body-spacing);
   overflow: auto;
   -webkit-overflow-scrolling: touch;
 }
@@ -88,7 +94,7 @@
 .dialog__footer {
   flex: 0 0 auto;
   text-align: right;
-  padding: var(--sl-spacing-large);
+  padding: var(--footer-spacing);
 
   ::slotted(sl-button:not(:first-of-type)) {
     margin-left: var(--sl-spacing-x-small);

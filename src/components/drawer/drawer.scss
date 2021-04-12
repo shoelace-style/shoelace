@@ -4,9 +4,16 @@
 /**
  * @prop --size: The preferred size of the drawer. This will be applied to the drawer's width or height depending on its
  *   `placement`. Note that the drawer will shrink to accommodate smaller screens.
+ * @prop --header-spacing: The amount of padding to use for the header.
+ * @prop --body-spacing: The amount of padding to use for the body.
+ * @prop --footer-spacing: The amount of padding to use for the footer.
+ *
  */
 :host {
   --size: 25rem;
+  --header-spacing: var(--sl-spacing-large);
+  --body-spacing: var(--sl-spacing-large);
+  --footer-spacing: var(--sl-spacing-large);
 
   display: contents;
 }
@@ -104,7 +111,7 @@
   flex: 1 1 auto;
   font-size: var(--sl-font-size-large);
   line-height: var(--sl-line-height-dense);
-  padding: var(--sl-spacing-large);
+  padding: var(--header-spacing);
 }
 
 .drawer__close {
@@ -112,19 +119,19 @@
   display: flex;
   align-items: center;
   font-size: var(--sl-font-size-x-large);
-  padding: 0 var(--sl-spacing-large);
+  padding: 0 var(--header-spacing);
 }
 
 .drawer__body {
   flex: 1 1 auto;
-  padding: var(--sl-spacing-large);
+  padding: var(--body-spacing);
   overflow: auto;
   -webkit-overflow-scrolling: touch;
 }
 
 .drawer__footer {
   text-align: right;
-  padding: var(--sl-spacing-large);
+  padding: var(--footer-spacing);
 
   ::slotted(sl-button:not(:last-of-type)) {
     margin-right: var(--sl-spacing-x-small);

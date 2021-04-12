@@ -10,6 +10,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 - 🚨 BREAKING: `sl-radio` components must be located inside an `sl-radio-group` for proper accessibility [#218](https://github.com/shoelace-style/shoelace/issues/218)
 - Added `sl-radio-group` component [#218](https://github.com/shoelace-style/shoelace/issues/218)
+- Added `--header-spacing`, `--body-spacing`, and `--footer-spacing` custom properties to `sl-drawer` and `sl-dialog` [#409](https://github.com/shoelace-style/shoelace/issues/409)
 - Fixed a bug where `sl-menu-item` prefix and suffix slots wouldn't always receive the correct spacing
 - Improved a11y in `sl-radio` with Windows high contrast mode [#215](https://github.com/shoelace-style/shoelace/issues/215)
 - Improved a11y in `sl-select` by preventing the chevron icon from being announced
