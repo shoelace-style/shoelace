@@ -66,6 +66,15 @@ export default class SlIcon extends LitElement {
     return label;
   }
 
+  private getUrl(): string {
+    const library = getIconLibrary(this.library);
+    if (this.name && library) {
+      return library.resolver(this.name);
+    } else {
+      return this.src;
+    }
+  }
+
   /** @internal Fetches the icon and redraws it. Used to handle library registrations. */
   redraw() {
     this.setIcon();
@@ -76,16 +85,14 @@ export default class SlIcon extends LitElement {
   @watch('library')
   async setIcon() {
     const library = getIconLibrary(this.library);
-    let url = this.src;
-
-    if (this.name && library) {
-      url = library.resolver(this.name);
-    }
-
+    const url = this.getUrl();
     if (url) {
       try {
         const file = await requestIcon(url)!;
-        if (file.ok) {
+        if (url !== this.getUrl()) {
+          // If the url has changed while fetching the icon, ignore this request.
+          return;
+        } else if (file.ok) {
           const doc = parser.parseFromString(file.svg, 'text/html');
           const svgEl = doc.body.querySelector('svg');
 
