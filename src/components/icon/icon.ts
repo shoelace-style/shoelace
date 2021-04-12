@@ -90,7 +90,7 @@ export default class SlIcon extends LitElement {
       try {
         const file = await requestIcon(url)!;
         if (url !== this.getUrl()) {
-          // If the url has changed while fetching the icon, ignore this request.
+          // If the url has changed while fetching the icon, ignore this request
           return;
         } else if (file.ok) {
           const doc = parser.parseFromString(file.svg, 'text/html');
