@@ -1,4 +1,4 @@
-import { getTabbableElements } from '../utilities/tabbable';
+import { getTabbableElements } from '../internal/tabbable';
 
 let activeModals: HTMLElement[] = [];
 
