@@ -1,27 +1,27 @@
-interface ModalOptions {
-  onfocusOut?: (event: Event) => any;
-}
+import { getTabbableElements } from '../utilities/tabbable';
 
 let activeModals: HTMLElement[] = [];
 
 export default class Modal {
   element: HTMLElement;
-  options: ModalOptions | undefined;
+  tabDirection: 'forward' | 'backward' = 'forward';
 
-  constructor(element: HTMLElement, options?: ModalOptions) {
+  constructor(element: HTMLElement) {
     this.element = element;
-    this.options = options;
     this.handleFocusIn = this.handleFocusIn.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
   }
 
   activate() {
     activeModals.push(this.element);
     document.addEventListener('focusin', this.handleFocusIn);
+    document.addEventListener('keydown', this.handleKeyDown);
   }
 
   deactivate() {
     activeModals = activeModals.filter(modal => modal !== this.element);
     document.removeEventListener('focusin', this.handleFocusIn);
+    document.removeEventListener('keydown', this.handleKeyDown);
   }
 
   isActive() {
@@ -30,12 +30,21 @@ export default class Modal {
   }
 
   handleFocusIn(event: Event) {
-    const target = event.target as HTMLElement;
-    const tagName = this.element.tagName.toLowerCase();
+    const path = event.composedPath();
 
-    // If focus is lost while the modal is active, run the onfocusOut callback
-    if (this.isActive() && target.closest(tagName) !== this.element && typeof this.options?.onfocusOut === 'function') {
-      this.options?.onfocusOut(event);
+    // Trap focus so it doesn't go out of the modal's boundary
+    if (this.isActive() && !path.includes(this.element)) {
+      const tabbableElements = getTabbableElements(this.element);
+      const index = this.tabDirection === 'backward' ? tabbableElements.length - 1 : 0;
+      tabbableElements[index].focus({ preventScroll: true });
+    }
+  }
+
+  handleKeyDown(event: KeyboardEvent) {
+    // Quick hack to determine tab direction
+    if (event.key === 'Tab' && event.shiftKey) {
+      this.tabDirection = 'backward';
+      setTimeout(() => (this.tabDirection = 'forward'));
     }
   }
 }

@@ -13,9 +13,13 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Added `--header-spacing`, `--body-spacing`, and `--footer-spacing` custom properties to `sl-drawer` and `sl-dialog` [#409](https://github.com/shoelace-style/shoelace/issues/409)
 - Fixed a bug where `sl-menu-item` prefix and suffix slots wouldn't always receive the correct spacing
 - Fixed a bug where `sl-badge` used `--sl-color-white` instead of the correct design tokens [#407](https://github.com/shoelace-style/shoelace/issues/407)
+- Fixed a bug in `sl-dialog` and `sl-drawer` where the escape key would cause parent components to close
 - Fixed a race condition bug in `sl-icon` [#410](https://github.com/shoelace-style/shoelace/issues/410)
+- Improved focus trap behavior in `sl-dialog` and `sl-drawer`
+- Improved a11y in `sl-dialog` and `sl-drawer` by restoring focus to trigger on close
 - Improved a11y in `sl-radio` with Windows high contrast mode [#215](https://github.com/shoelace-style/shoelace/issues/215)
 - Improved a11y in `sl-select` by preventing the chevron icon from being announced
+- Internal: removed the `options` argument from the modal utility as focus trapping is now handled internally
 
 ## 2.0.0-beta.37
 

@@ -3,11 +3,11 @@ import { customElement, property, query, state } from 'lit/decorators';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
 import { event, EventEmitter, watch } from '../../internal/decorators';
-import styles from 'sass:./drawer.scss';
 import { lockBodyScrolling, unlockBodyScrolling } from '../../internal/scroll';
 import { hasSlot } from '../../internal/slot';
 import { isPreventScrollSupported } from '../../internal/support';
 import Modal from '../../internal/modal';
+import styles from 'sass:./drawer.scss';
 
 const hasPreventScroll = isPreventScrollSupported();
 
@@ -41,6 +41,7 @@ export default class SlDrawer extends LitElement {
 
   private componentId = `drawer-${++id}`;
   private modal: Modal;
+  private originalTrigger: HTMLElement | null;
   private willShow = false;
   private willHide = false;
 
@@ -92,10 +93,7 @@ export default class SlDrawer extends LitElement {
   connectedCallback() {
     super.connectedCallback();
 
-    this.modal = new Modal(this, {
-      onfocusOut: () => (this.contained ? null : this.panel.focus())
-    });
-
+    this.modal = new Modal(this);
     this.handleSlotChange();
 
     // Show on init if open
@@ -121,6 +119,7 @@ export default class SlDrawer extends LitElement {
       return;
     }
 
+    this.originalTrigger = document.activeElement as HTMLElement;
     this.willShow = true;
     this.isVisible = true;
     this.open = true;
@@ -178,6 +177,12 @@ export default class SlDrawer extends LitElement {
     this.open = false;
     this.modal.deactivate();
 
+    // Restore focus to the original trigger
+    const trigger = this.originalTrigger;
+    if (trigger && typeof trigger.focus === 'function') {
+      setTimeout(() => trigger.focus());
+    }
+
     unlockBodyScrolling(this);
   }
 
@@ -187,6 +192,7 @@ export default class SlDrawer extends LitElement {
 
   handleKeyDown(event: KeyboardEvent) {
     if (event.key === 'Escape') {
+      event.stopPropagation();
       this.hide();
     }
   }
