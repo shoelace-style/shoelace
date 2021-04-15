@@ -18,7 +18,9 @@ export default class SlMenu extends LitElement {
   static styles = unsafeCSS(styles);
 
   @query('.menu') menu: HTMLElement;
+  @query('slot') defaultSlot: HTMLSlotElement;
 
+  private items: SlMenuItem[] = [];
   private typeToSelectString = '';
   private typeToSelectTimeout: any;
 
@@ -35,8 +37,7 @@ export default class SlMenu extends LitElement {
     clearTimeout(this.typeToSelectTimeout);
     this.typeToSelectTimeout = setTimeout(() => (this.typeToSelectString = ''), 750);
     this.typeToSelectString += key.toLowerCase();
-    const items = this.getItems();
-    for (const item of items) {
+    for (const item of this.items) {
       const slot = item.shadowRoot!.querySelector('slot:not([name])') as HTMLSlotElement;
       const label = getTextContent(slot).toLowerCase().trim();
       if (label.substring(0, this.typeToSelectString.length) === this.typeToSelectString) {
@@ -46,15 +47,14 @@ export default class SlMenu extends LitElement {
     }
   }
 
-  getItems() {
-    const slot = this.menu.querySelector('slot')!;
-    return [...slot.assignedElements({ flatten: true })].filter(
-      (el: any) => el.tagName.toLowerCase() === 'sl-menu-item' && !el.disabled
+  syncItems() {
+    this.items = [...this.defaultSlot.assignedElements({ flatten: true })].filter(
+      (el: any) => el instanceof SlMenuItem && !el.disabled
     ) as [SlMenuItem];
   }
 
   getActiveItem() {
-    return this.getItems().filter(i => i.shadowRoot!.querySelector('.menu-item--focused'))[0];
+    return this.items.filter(i => i.shadowRoot!.querySelector('.menu-item--focused'))[0];
   }
 
   setActiveItem(item: SlMenuItem) {
@@ -88,11 +88,10 @@ export default class SlMenu extends LitElement {
 
     // Move the selection when pressing down or up
     if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
-      const items = this.getItems();
       const selectedItem = this.getActiveItem();
-      let index = selectedItem ? items.indexOf(selectedItem) : 0;
+      let index = selectedItem ? this.items.indexOf(selectedItem) : 0;
 
-      if (items.length) {
+      if (this.items.length) {
         event.preventDefault();
 
         if (event.key === 'ArrowDown') {
@@ -102,13 +101,13 @@ export default class SlMenu extends LitElement {
         } else if (event.key === 'Home') {
           index = 0;
         } else if (event.key === 'End') {
-          index = items.length - 1;
+          index = this.items.length - 1;
         }
 
         if (index < 0) index = 0;
-        if (index > items.length - 1) index = items.length - 1;
+        if (index > this.items.length - 1) index = this.items.length - 1;
 
-        this.setActiveItem(items[index]);
+        this.setActiveItem(this.items[index]);
 
         return;
       }
@@ -117,10 +116,14 @@ export default class SlMenu extends LitElement {
     this.typeToSelect(event.key);
   }
 
+  handleSlotChange() {
+    this.syncItems();
+  }
+
   render() {
     return html`
       <div part="base" class="menu" role="menu" @click=${this.handleClick} @keydown=${this.handleKeyDown} tabindex="0">
-        <slot></slot>
+        <slot @slotchange=${this.handleSlotChange}></slot>
       </div>
     `;
   }
