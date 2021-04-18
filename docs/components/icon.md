@@ -445,18 +445,6 @@ This example will load the same set of icons from the jsDelivr CDN instead of yo
 </script>
 ```
 
-Alternatively, you can replace the default icons with a completely different icon set. Just keep in mind that some of the default icons are used by components so you'll want to make sure those names resolve to an appropriate alternative.
-
-```html
-<script type="module">
-  import { registerIconLibrary } from '/shoelace/dist/utilities/icon-library.js';
-
-  registerIconLibrary('default', {
-    name => `/my/custom/icons/${name}.svg`
-  });
-</script>
-```
-
 <!-- Supporting scripts and styles for the search utility -->
 <script>
   fetch('/dist/assets/icons/icons.json')
