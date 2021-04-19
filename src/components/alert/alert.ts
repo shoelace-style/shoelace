@@ -208,6 +208,7 @@ export default class SlAlert extends LitElement {
                 <sl-icon-button
                   exportparts="base:close-button"
                   name="x"
+                  library="system"
                   @click=${this.handleCloseClick.bind(this)}
                 ></sl-icon-button>
               </span>

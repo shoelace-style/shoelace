@@ -452,6 +452,7 @@ export default class SlSelect extends LitElement {
                     exportparts="base:clear-button"
                     class="select__clear"
                     name="x-circle"
+                    library="system"
                     @click=${this.handleClearClick}
                     tabindex="-1"
                   ></sl-icon-button>
@@ -459,7 +460,7 @@ export default class SlSelect extends LitElement {
               : ''}
 
             <span part="icon" class="select__icon" aria-hidden="true">
-              <sl-icon name="chevron-down"></sl-icon>
+              <sl-icon name="chevron-down" library="system"></sl-icon>
             </span>
 
             <!-- The hidden input tricks the browser's built-in validation so it works as expected. We use an input

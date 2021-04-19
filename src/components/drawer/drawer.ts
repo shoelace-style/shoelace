@@ -267,6 +267,7 @@ export default class SlDrawer extends LitElement {
                     exportparts="base:close-button"
                     class="drawer__close"
                     name="x"
+                    library="system"
                     @click=${this.handleCloseClick}
                   ></sl-icon-button>
                 </header>

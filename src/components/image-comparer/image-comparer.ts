@@ -128,7 +128,7 @@ export default class SlImageComparer extends LitElement {
             tabindex="0"
           >
             <slot name="handle-icon">
-              <sl-icon class="image-comparer__handle-icon" name="grip-vertical"></sl-icon>
+              <sl-icon class="image-comparer__handle-icon" name="grip-vertical" library="system"></sl-icon>
             </slot>
           </div>
         </div>

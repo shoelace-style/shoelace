@@ -77,6 +77,7 @@ export default class SlTab extends LitElement {
           ? html`
               <sl-icon-button
                 name="x"
+                library="system"
                 exportparts="base:close-button"
                 class="tab__close-button"
                 @click=${this.handleCloseClick}

@@ -51,7 +51,7 @@ export default class SlAvatar extends LitElement {
           : html`
               <div part="icon" class="avatar__icon">
                 <slot name="icon">
-                  <sl-icon name="person-fill"></sl-icon>
+                  <sl-icon name="person-fill" library="system"></sl-icon>
                 </slot>
               </div>
             `}

@@ -73,6 +73,7 @@ export default class SlTag extends LitElement {
               <sl-icon-button
                 exportparts="base:clear-button"
                 name="x"
+                library="system"
                 class="tag__clear"
                 @click=${this.handleClearClick}
               ></sl-icon-button>

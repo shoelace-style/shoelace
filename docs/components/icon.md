@@ -431,7 +431,7 @@ Icons in this library are licensed under the [Apache 2.0 License](https://github
 
 ### Customizing the Default Library
 
-Shoelace comes bundled with over 1,300 icons courtesy of the [Bootstrap Icons](https://icons.getbootstrap.com/) project. These are the default icons that display when you use `<sl-icon>` without a `name` attribute. If you prefer to have these icons resolve elsewhere, you can register an icon library with the `default` name and a custom resolver.
+Shoelace comes bundled with over 1,300 icons courtesy of the [Bootstrap Icons](https://icons.getbootstrap.com/) project. These are the default icons that display when you use `<sl-icon>` without the `library` attribute. If you prefer to have these icons resolve elsewhere, you can register an icon library with the `default` name and a custom resolver.
 
 This example will load the same set of icons from the jsDelivr CDN instead of your local assets folder.
 
@@ -441,6 +441,24 @@ This example will load the same set of icons from the jsDelivr CDN instead of yo
 
   registerIconLibrary('default', {
     resolver: name => `https://cdn.jsdelivr.net/npm/bootstrap-icons@1.0.0/icons/${name}.svg`
+  });
+</script>
+```
+
+### Customizing the System Library
+
+Shoelace components make use of a special system icon library. This is a small subset of icons that are used internally by various components. The system library does not rely on physical assets. Instead, its icons are hard-coded into the resolver to ensure they're always available even if assets haven't been configured.
+
+Like the default library, the system library can be customized to change the icons Shoelace components use internally. If you choose to do this, it's your responsibility to provide all the icons that are required by components.
+
+```html
+<script type="module">
+  import { registerIconLibrary } from '/shoelace/dist/utilities/icon-library.js';
+
+  registerIconLibrary('system', {
+    // Refer to src/components/icon/library.system.ts for a complete 
+    // list of system icons you should provide
+    resolver: name => `/path/to/custom/icons/${name}.svg`
   });
 </script>
 ```
