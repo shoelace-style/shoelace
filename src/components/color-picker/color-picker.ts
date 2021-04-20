@@ -704,6 +704,7 @@ export default class SlColorPicker extends LitElement {
           >
             <sl-icon
               name="check"
+              library="system"
               class=${classMap({
                 'color-picker__copy-feedback': true,
                 'color-picker__copy-feedback--visible': this.showCopyFeedback,

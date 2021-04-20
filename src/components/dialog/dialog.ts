@@ -251,6 +251,7 @@ export default class SlDialog extends LitElement {
                     exportparts="base:close-button"
                     class="dialog__close"
                     name="x"
+                    library="system"
                     @click="${this.handleCloseClick}"
                   ></sl-icon-button>
                 </header>

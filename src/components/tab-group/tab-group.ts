@@ -344,6 +344,7 @@ export default class SlTabGroup extends LitElement {
                   class="tab-group__scroll-button tab-group__scroll-button--left"
                   exportparts="base:scroll-button"
                   name="chevron-left"
+                  library="system"
                   @click=${this.handleScrollLeft}
                 ></sl-icon-button>
               `
@@ -362,6 +363,7 @@ export default class SlTabGroup extends LitElement {
                   class="tab-group__scroll-button tab-group__scroll-button--right"
                   exportparts="base:scroll-button"
                   name="chevron-right"
+                  library="system"
                   @click=${this.handleScrollRight}
                 ></sl-icon-button>
               `

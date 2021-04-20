@@ -194,7 +194,7 @@ export default class SlDetails extends LitElement {
           </div>
 
           <span part="summary-icon" class="details__summary-icon">
-            <sl-icon name="chevron-right"></sl-icon>
+            <sl-icon name="chevron-right" library="system"></sl-icon>
           </span>
         </header>
 
