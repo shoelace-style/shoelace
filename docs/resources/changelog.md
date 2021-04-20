@@ -8,6 +8,10 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
+- Added the `system` icon library and updated all components to use this instead of the default icon library [#420](https://github.com/shoelace-style/shoelace/issues/420)
+
+## 2.0.0-beta.38
+
 - 🚨 BREAKING: `sl-radio` components must be located inside an `sl-radio-group` for proper accessibility [#218](https://github.com/shoelace-style/shoelace/issues/218)
 - Added `sl-radio-group` component [#218](https://github.com/shoelace-style/shoelace/issues/218)
 - Added `--header-spacing`, `--body-spacing`, and `--footer-spacing` custom properties to `sl-drawer` and `sl-dialog` [#409](https://github.com/shoelace-style/shoelace/issues/409)

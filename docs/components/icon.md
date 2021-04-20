@@ -4,7 +4,7 @@
 
 Icons are symbols that can be used to represent various options within an application.
 
-Shoelace comes bundled with over 1,300 icons courtesy of the [Bootstrap Icons](https://icons.getbootstrap.com/) project. If you prefer, you can also register a [custom icon library](#icon-libraries).
+Shoelace comes bundled with over 1,300 icons courtesy of the [Bootstrap Icons](https://icons.getbootstrap.com/) project. These icons are part of the `default` icon library. If you prefer, you can register [custom icon libraries](#icon-libraries) as well.
 
 Click or tap on an icon below to copy its name and use it like this.
 
@@ -64,9 +64,11 @@ Custom icons can be loaded individually with the `src` attribute. Only SVGs on a
 
 ## Icon Libraries
 
-Shoelace lets you register additional icons to use with the `<sl-icon>` component through icon libraries. The icon files can exist locally or on a CORS-enabled endpoint (e.g. a CDN). There is no limit to how many icon libraries you can register and there is no cost associated with registering them, as individual icons are only requested when they're used.
+You can register additional icons to use with the `<sl-icon>` component through icon libraries. Icon files can exist locally or on a CORS-enabled endpoint (e.g. a CDN). There is no limit to how many icon libraries you can register and there is no cost associated with registering them, as individual icons are only requested when they're used.
 
-To register an icon library, use the `registerIconLibrary()` function that's exported from `utilities/icon-library.js`. At a minimum, you must provide a name and a resolver function. The resolver function translates an icon name to a URL where the corresponding SVG file exists. Refer to the examples below to better understand how it works.
+Shoelace ships with two built-in icon libraries, `default` and `system`. The [default icon library](#customizing-the-default-library) contains all of the icons in the Bootstrap Icons project. The [system icon library](#customizing-the-system-library) contains only a small subset of icons that are used internally by Shoelace components.
+
+To register an additional icon library, use the `registerIconLibrary()` function that's exported from `utilities/icon-library.js`. At a minimum, you must provide a name and a resolver function. The resolver function translates an icon name to a URL where the corresponding SVG file exists. Refer to the examples below to better understand how it works.
 
 If necessary, a mutator function can be used to mutate the SVG element before rendering. This is necessary for some libraries due to the many possible ways SVGs are crafted. For example, icons should ideally inherit the current text color via `currentColor`, so you may need to apply `fill="currentColor` or `stroke="currentColor"` to the SVG element using this function.
 
@@ -431,7 +433,7 @@ Icons in this library are licensed under the [Apache 2.0 License](https://github
 
 ### Customizing the Default Library
 
-Shoelace comes bundled with over 1,300 icons courtesy of the [Bootstrap Icons](https://icons.getbootstrap.com/) project. These are the default icons that display when you use `<sl-icon>` without the `library` attribute. If you prefer to have these icons resolve elsewhere, you can register an icon library with the `default` name and a custom resolver.
+The default icon library contains over 1,300 icons courtesy of the [Bootstrap Icons](https://icons.getbootstrap.com/) project. These are the icons that display when you use `<sl-icon>` without the `library` attribute. If you prefer to have these icons resolve elsewhere or to a different icon library, register an icon library using the `default` name and a custom resolver.
 
 This example will load the same set of icons from the jsDelivr CDN instead of your local assets folder.
 
@@ -447,17 +449,15 @@ This example will load the same set of icons from the jsDelivr CDN instead of yo
 
 ### Customizing the System Library
 
-Shoelace components make use of a special system icon library. This is a small subset of icons that are used internally by various components. The system library does not rely on physical assets. Instead, its icons are hard-coded into the resolver to ensure they're always available even if assets haven't been configured.
+The system library contains only the icons used internally by Shoelace components. Unlike the default icon library, the system library does not rely on physical assets. Instead, its icons are hard-coded as data URIs into the resolver to ensure their availability.
 
-Like the default library, the system library can be customized to change the icons Shoelace components use internally. If you choose to do this, it's your responsibility to provide all the icons that are required by components.
+If you want to change the icons Shoelace uses internally, you can register an icon library using the `system` name and a custom resolver. If you choose to do this, it's your responsibility to provide all of the icons that are required by components. You can reference `src/components/library.system.ts` for a complete list of system icons used by Shoelace.
 
 ```html
 <script type="module">
   import { registerIconLibrary } from '/shoelace/dist/utilities/icon-library.js';
 
   registerIconLibrary('system', {
-    // Refer to src/components/icon/library.system.ts for a complete 
-    // list of system icons you should provide
     resolver: name => `/path/to/custom/icons/${name}.svg`
   });
 </script>

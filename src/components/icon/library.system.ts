@@ -1,10 +1,13 @@
+import type { IconLibrary } from './library';
+
 //
 // System icons are a separate library to ensure they're always available, regardless of how the default icon library is
 // configured or if its icons resolve properly.
 //
-// All Shoelace components should use the system library instead of the default library.
+// All Shoelace components must use the system library instead of the default library. For visual consistency, system
+// icons are a subset of Bootstrap Icons.
 //
-export const icons = {
+const icons = {
   check: `
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
       <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
@@ -65,3 +68,16 @@ export const icons = {
     </svg>
   `
 };
+
+const systemLibrary: IconLibrary = {
+  name: 'system',
+  resolver: (name: keyof typeof icons) => {
+    if (icons[name]) {
+      return `data:image/svg+xml,${encodeURIComponent(icons[name])}`;
+    } else {
+      return '';
+    }
+  }
+};
+
+export default systemLibrary;

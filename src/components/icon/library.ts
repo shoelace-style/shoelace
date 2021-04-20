@@ -1,35 +1,16 @@
 import { SlIcon } from '../../shoelace';
-import { getBasePath } from '../../utilities/base-path';
-import { icons as shoelaceIcons } from './library.system';
+import defaultLibrary from './library.default';
+import systemLibrary from './library.system';
 
 export type IconLibraryResolver = (name: string) => string;
 export type IconLibraryMutator = (svg: SVGElement) => void;
-
-interface IconLibraryRegistry {
+export interface IconLibrary {
   name: string;
   resolver: IconLibraryResolver;
   mutator?: IconLibraryMutator;
 }
 
-let registry: IconLibraryRegistry[] = [
-  // The system library (used internally by components)
-  {
-    name: 'system',
-    resolver: (name: keyof typeof shoelaceIcons) => {
-      if (shoelaceIcons[name]) {
-        return `data:image/svg+xml,${encodeURIComponent(shoelaceIcons[name])}`;
-      } else {
-        return '';
-      }
-    }
-  },
-
-  // Bootstrap Icons
-  {
-    name: 'default',
-    resolver: name => `${getBasePath()}/assets/icons/${name}.svg`
-  }
-];
+let registry: IconLibrary[] = [defaultLibrary, systemLibrary];
 let watchedIcons: SlIcon[] = [];
 
 export function watchIcon(icon: SlIcon) {
