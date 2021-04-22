@@ -28,6 +28,7 @@ export { default as SlMenuItem } from './components/menu-item/menu-item';
 export { default as SlMenuLabel } from './components/menu-label/menu-label';
 export { default as SlProgressBar } from './components/progress-bar/progress-bar';
 export { default as SlProgressRing } from './components/progress-ring/progress-ring';
+export { default as SlQrCode } from './components/qr-code/qr-code';
 export { default as SlRadio } from './components/radio/radio';
 export { default as SlRadioGroup } from './components/radio-group/radio-group';
 export { default as SlRange } from './components/range/range';
