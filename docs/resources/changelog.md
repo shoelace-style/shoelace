@@ -9,6 +9,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 ## Next
 
 - Added the `system` icon library and updated all components to use this instead of the default icon library [#420](https://github.com/shoelace-style/shoelace/issues/420)
+- Updated to esbuild 0.8.57
 - Updated to lit 2.0.0-rc.1 and lit-html 2.0.0-rc.2
 
 ## 2.0.0-beta.38
