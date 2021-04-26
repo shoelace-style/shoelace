@@ -14,7 +14,7 @@ This integration has been tested with the following:
 To get started using Shoelace with NextJS, the following packages must be installed.
 
 ```bash
-yarn add @shoelace-style/shoelace @shoelace-style/react-wrapper copy-webpack-plugin
+yarn add @shoelace-style/shoelace @shoelace-style/react-wrapper copy-webpack-plugin next-compose-plugins next-transpile-modules
 ```
 
 ### Importing the Default Theme
@@ -22,7 +22,7 @@ yarn add @shoelace-style/shoelace @shoelace-style/react-wrapper copy-webpack-plu
 The next step is to import Shoelace's default theme (stylesheet) in your `_app.js` file:
 
 ```css
-@import '~@shoelace-style/shoelace/dist/themes/base';
+import '@shoelace-style/shoelace/dist/themes/base.css';
 ```
 
 ### Defining Custom Elements
@@ -40,12 +40,17 @@ function CustomEls({ URL }) {
     if (customEls.current) {
       return;
     }
-    setBasePath(`${URL}/static/static`);
+    
+    const {
+      setBasePath
+    } = require("@shoelace-style/shoelace/dist/utilities/base-path");
 
-    // Define the components you intend to use
-    customElements.define("sl-alert", SlAlert);
-    customElements.define("sl-button", SlButton);
-    // ...
+    setBasePath(`${URL}/static/static`);
+    
+    // This imports all components
+    require("@shoelace-style/shoelace/dist/shoelace");
+    // If you're wanting to selectively import components, replace this line with your own definitions
+    // require("@shoelace-style/shoelace/dist/components/button/button");
 
     customEls.current = true;
   }, [URL, customEls]);
@@ -104,25 +109,28 @@ Next we need to add Shoelace's assets to the final build output. To do this, mod
 ```javascript
 const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
+const withPlugins = require('next-compose-plugins');
+const withTM = require('next-transpile-modules')(['@shoelace-style/shoelace']);
 
-module.exports = {
-    webpack: (config) => {
-        config.plugins.push(
-            new CopyPlugin({
-                patterns: [
-                    {
-                        from: path.resolve(
-                            __dirname,
-                            "node_modules/@shoelace-style/shoelace/dist/assets"
-                        ),
-                        to: path.resolve(__dirname, "static/assets"),
-                    },
-                ],
-            })
-        );
-        return config;
-    },
-};
+module.exports =
+    withPlugins([withTM], {
+        webpack: (config) => {
+            config.plugins.push(
+                new CopyPlugin({
+                    patterns: [
+                        {
+                            from: path.resolve(
+                                __dirname,
+                                "node_modules/@shoelace-style/shoelace/dist/assets/icons"
+                            ),
+                            to: path.resolve(__dirname, "static/icons"),
+                        },
+                    ],
+                })
+            );
+            return config;
+        },
+    });
 ```
 
 ?> This will copy the files from `node_modules` into your `static` folder on every development serve or build. You may want to avoid commiting these into your repo. To do so, simply add `static/assets` into your `.gitignore` folder
