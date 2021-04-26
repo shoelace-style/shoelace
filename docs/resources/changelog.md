@@ -6,6 +6,10 @@ Components with the <sl-badge type="warning" pill>Experimental</sl-badge> badge 
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
+## Next
+
+- Updated NextJS docs [#434](https://github.com/shoelace-style/shoelace/pull/434)
+
 ## 2.0.0-beta.39
 
 - Added experimental `sl-qr-code` component
