@@ -139,38 +139,50 @@ Event handling can also be cumbersome.
 
 > Because React implements its own synthetic event system, it cannot listen for DOM events coming from Custom Elements without the use of a workaround. Developers will need to reference their Custom Elements using a ref and manually attach event listeners with addEventListener. This makes working with Custom Elements cumbersome.
 
-Fortunately, there's a utility that will wrap Shoelace components so you can use them as if they were React components. 👇
-
-?> If you're starting a new project, consider using [Preact](https://preactjs.com/) as an alternative. It shares the same API as React and [handles custom elements quite well](https://custom-elements-everywhere.com/#preact).
-
-### Wrapping Components
-
-You can use [this utility](https://www.npmjs.com/package/@shoelace-style/react-wrapper) to wrap Shoelace components so they work like regular React components. To install it, use this command.
+Fortunately, there's a package that will let you use Shoelace components as if they were React components. You can install it using this command.
 
 ```bash
-npm install @shoelace-style/react-wrapper
+npm install @shoelace-style/react
 ```
 
-Now you can "import" Shoelace components as React components! Remember to [install Shoelace](/getting-started/installation.md) first, otherwise this won't work.
-
-```js
-import wrapCustomElement from '@shoelace-style/react-wrapper';
-
-const SlButton = wrapCustomElement('sl-button');
-
-return <SlButton type="primary">Click me</SlButton>;
-```
-
-A reference ("ref") to the underlying custom element is exposed through the `element` property so you can access it directly. This is useful for calling methods.
+Include the base theme and any components you want to use in your app.
 
 ```jsx
-<SlButton 
-  ref={el => this.button = el} 
-  onClick={() => this.button.element.current.blur()}
->
-  Click me
-</SlButton>
+import '@shoelace-style/shoelace/dist/themes/base.css';
+
+import SlButton from '@shoelace-style/react/dist/button';
+import SlSpinner from '@shoelace-style/react/dist/spinner';
+
+// ...
+
+const MyComponent = (props) => {
+  return (
+    <SlButton type="primary">
+      Click me
+    </SlButton>
+  )
+};
 ```
+
+### Dependencies
+
+Some components depend on other components internally. For example, `<sl-button>` requires you to load `<sl-spinner>` because it's used internally for its loading state. If a component has dependencies, they'll be listed in the "Dependencies" section of its documentation. These are always Shoelace components, not third-party libraries. 
+
+Since dependencies are just components, you can load them the same way.
+
+```jsx
+import SlButton from '@shoelace-style/react/dist/button';
+import SlSpinner from '@shoelace-style/react/dist/spinner';
+```
+
+However, this may cause your linter to complain (e.g. "SlButton is defined but never used"). If you're not going to use the dependent components in your JSX, you can import them as side effects instead.
+
+```jsx
+import '@shoelace-style/react/dist/button';
+import '@shoelace-style/react/dist/spinner';
+```
+
+This extra step is required for dependencies to ensure they get registered with the browser as custom elements.
 
 ## Vue
 
@@ -202,7 +214,7 @@ One caveat is there's currently [no support for v-model on custom elements](http
 <sl-input :value="name" @input="name = $event.target.value">
 ```
 
-If that's too verbose, you can use a custom directive instead. 👇
+If that's too verbose, you can use a custom directive instead.
 
 ### Using a Custom Directive
 
