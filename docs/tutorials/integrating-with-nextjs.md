@@ -41,15 +41,14 @@ function CustomEls({ URL }) {
       return;
     }
     
-    const {
-      setBasePath
-    } = require("@shoelace-style/shoelace/dist/utilities/base-path");
+    const { setBasePath } = require("@shoelace-style/shoelace/dist/utilities/base-path");
 
     setBasePath(`${URL}/static/static`);
     
     // This imports all components
     require("@shoelace-style/shoelace/dist/shoelace");
-    // If you're wanting to selectively import components, replace this line with your own definitions
+
+    // If you want to selectively import components, replace this line with your own definitions
     // require("@shoelace-style/shoelace/dist/components/button/button");
 
     customEls.current = true;
@@ -95,7 +94,7 @@ MyApp.getInitialProps = async (context) => {
   const URL = process.env.BASE_URL;
 
   return {
-    URL,
+    URL
   };
 };
 ```
@@ -112,31 +111,27 @@ const CopyPlugin = require("copy-webpack-plugin");
 const withPlugins = require('next-compose-plugins');
 const withTM = require('next-transpile-modules')(['@shoelace-style/shoelace']);
 
-module.exports =
-    withPlugins([withTM], {
-        webpack: (config) => {
-            config.plugins.push(
-                new CopyPlugin({
-                    patterns: [
-                        {
-                            from: path.resolve(
-                                __dirname,
-                                "node_modules/@shoelace-style/shoelace/dist/assets/icons"
-                            ),
-                            to: path.resolve(__dirname, "static/icons"),
-                        },
-                    ],
-                })
-            );
-            return config;
-        },
-    });
+module.exports = withPlugins([withTM], {
+  webpack: config => {
+    config.plugins.push(
+      new CopyPlugin({
+        patterns: [
+          {
+            from: path.resolve(__dirname, 'node_modules/@shoelace-style/shoelace/dist/assets/icons'),
+            to: path.resolve(__dirname, 'static/icons')
+          }
+        ]
+      })
+    );
+    return config;
+  }
+});
 ```
 
 ?> This will copy the files from `node_modules` into your `static` folder on every development serve or build. You may want to avoid commiting these into your repo. To do so, simply add `static/assets` into your `.gitignore` folder
 
 ## Additional Resources
 
-- There is a third-party [example repo](https://github.com/crutchcorn/nextjs-shoelace-example), courtesy of [crutchcorn](https://github.com/crutchcorn) available to help you get started.
+- There is a third-party [example repo](https://github.com/crutchcorn/nextjs-shoelace-example), courtesy of [crutchcorn](https://github.com/crutchcorn), available to help you get started.
 
   
