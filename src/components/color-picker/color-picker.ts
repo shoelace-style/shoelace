@@ -40,7 +40,6 @@ export default class SlColorPicker extends LitElement {
   @query('[part="preview"]') previewButton: HTMLButtonElement;
   @query('.color-dropdown') dropdown: SlDropdown;
 
-  private bypassValueParse = false;
   private lastValueEmitted: string;
 
   @state() private inputValue = '';
@@ -551,12 +550,7 @@ export default class SlColorPicker extends LitElement {
       this.inputValue = this.opacity ? currentColor.hexa : currentColor.hex;
     }
 
-    // Setting this.value will trigger the watcher which parses the new value. We want to bypass that behavior because
-    // we've already parsed the color here and conversion/rounding can lead to values changing slightly. After the next
-    // update, the usual behavior is restored.
-    this.bypassValueParse = true;
     this.value = this.inputValue;
-    this.updateComplete.then(() => (this.bypassValueParse = false));
   }
 
   @watch('format')
@@ -571,18 +565,16 @@ export default class SlColorPicker extends LitElement {
 
   @watch('value')
   handleValueChange(oldValue: string, newValue: string) {
-    if (!this.bypassValueParse) {
-      const newColor = this.parseColor(newValue);
+    const newColor = this.parseColor(newValue);
 
-      if (newColor) {
-        this.inputValue = this.value;
-        this.hue = newColor.hsla.h;
-        this.saturation = newColor.hsla.s;
-        this.lightness = newColor.hsla.l;
-        this.alpha = newColor.hsla.a * 100;
-      } else {
-        this.inputValue = oldValue;
-      }
+    if (newColor) {
+      this.inputValue = this.value;
+      this.hue = newColor.hsla.h;
+      this.saturation = newColor.hsla.s;
+      this.lightness = newColor.hsla.l;
+      this.alpha = newColor.hsla.a * 100;
+    } else {
+      this.inputValue = oldValue;
     }
 
     if (this.value !== this.lastValueEmitted) {
