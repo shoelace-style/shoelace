@@ -3,8 +3,8 @@ import { customElement, property, query, state } from 'lit/decorators';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
 import { event, EventEmitter } from '../../internal/decorators';
-import styles from 'sass:./button.scss';
 import { hasSlot } from '../../internal/slot';
+import styles from 'sass:./button.scss';
 
 /**
  * @since 2.0

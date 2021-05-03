@@ -1,8 +1,8 @@
 import { LitElement, html, unsafeCSS } from 'lit';
 import { customElement, state } from 'lit/decorators';
 import { classMap } from 'lit-html/directives/class-map';
-import styles from 'sass:./card.scss';
 import { hasSlot } from '../../internal/slot';
+import styles from 'sass:./card.scss';
 
 /**
  * @since 2.0

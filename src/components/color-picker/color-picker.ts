@@ -4,10 +4,11 @@ import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
 import { styleMap } from 'lit-html/directives/style-map';
 import { event, EventEmitter, watch } from '../../internal/decorators';
-import styles from 'sass:./color-picker.scss';
-import { SlDropdown, SlInput } from '../../shoelace';
-import color from 'color';
 import { clamp } from '../../internal/math';
+import SlDropdown from '../dropdown/dropdown';
+import SlInput from '../input/input';
+import color from 'color';
+import styles from 'sass:./color-picker.scss';
 
 /**
  * @since 2.0

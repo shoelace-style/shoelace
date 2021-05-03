@@ -2,9 +2,9 @@ import { LitElement, html, unsafeCSS } from 'lit';
 import { customElement, property, state } from 'lit/decorators';
 import { unsafeSVG } from 'lit-html/directives/unsafe-svg';
 import { event, EventEmitter, watch } from '../../internal/decorators';
-import styles from 'sass:./icon.scss';
 import { getIconLibrary, watchIcon, unwatchIcon } from './library';
 import { requestIcon } from './request';
+import styles from 'sass:./icon.scss';
 
 const parser = new DOMParser();
 

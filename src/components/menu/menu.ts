@@ -1,9 +1,9 @@
 import { LitElement, html, unsafeCSS } from 'lit';
 import { customElement, query } from 'lit/decorators';
 import { event, EventEmitter } from '../../internal/decorators';
-import styles from 'sass:./menu.scss';
-import { SlMenuItem } from '../../shoelace';
 import { getTextContent } from '../../internal/slot';
+import SlMenuItem from '../menu-item/menu-item';
+import styles from 'sass:./menu.scss';
 
 /**
  * @since 2.0

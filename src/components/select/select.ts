@@ -3,11 +3,14 @@ import { customElement, property, query, state } from 'lit/decorators';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
 import { event, EventEmitter, watch } from '../../internal/decorators';
-import styles from 'sass:./select.scss';
-import { SlDropdown, SlIconButton, SlMenu, SlMenuItem } from '../../shoelace';
 import { getLabelledBy, renderFormControl } from '../../internal/form-control';
 import { getTextContent } from '../../internal/slot';
 import { hasSlot } from '../../internal/slot';
+import SlDropdown from '../dropdown/dropdown';
+import SlIconButton from '../icon-button/icon-button';
+import SlMenu from '../menu/menu';
+import SlMenuItem from '../menu-item/menu-item';
+import styles from 'sass:./select.scss';
 
 let id = 0;
 

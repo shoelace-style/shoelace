@@ -1,18 +1,16 @@
 import { LitElement, html, unsafeCSS } from 'lit';
 import { customElement, property, query } from 'lit/decorators';
 import { event, EventEmitter } from '../../internal/decorators';
+import SlButton from '../button/button';
+import SlCheckbox from '../checkbox/checkbox';
+import SlColorPicker from '../color-picker/color-picker';
+import SlInput from '../input/input';
+import SlRadio from '../radio/radio';
+import SlRange from '../range/range';
+import SlSelect from '../select/select';
+import SlSwitch from '../switch/switch';
+import SlTextarea from '../textarea/textarea';
 import styles from 'sass:./form.scss';
-import {
-  SlButton,
-  SlCheckbox,
-  SlColorPicker,
-  SlInput,
-  SlRadio,
-  SlRange,
-  SlSelect,
-  SlSwitch,
-  SlTextarea
-} from '../../shoelace';
 
 interface FormControl {
   tag: string;

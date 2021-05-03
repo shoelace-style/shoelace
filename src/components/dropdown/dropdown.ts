@@ -2,11 +2,12 @@ import { LitElement, html, unsafeCSS } from 'lit';
 import { customElement, property, query } from 'lit/decorators';
 import { classMap } from 'lit-html/directives/class-map';
 import { event, EventEmitter, watch } from '../../internal/decorators';
-import styles from 'sass:./dropdown.scss';
-import { SlMenu, SlMenuItem } from '../../shoelace';
 import { scrollIntoView } from '../../internal/scroll';
 import { getNearestTabbableElement } from '../../internal/tabbable';
 import Popover from '../../internal/popover';
+import SlMenu from '../menu/menu';
+import SlMenuItem from '../menu-item/menu-item';
+import styles from 'sass:./dropdown.scss';
 
 let id = 0;
 

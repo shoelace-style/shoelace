@@ -2,11 +2,12 @@ import { LitElement, html, unsafeCSS } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators';
 import { classMap } from 'lit-html/directives/class-map';
 import { event, EventEmitter, watch } from '../../internal/decorators';
-import styles from 'sass:./tab-group.scss';
-import { SlTab, SlTabPanel } from '../../shoelace';
 import { focusVisible } from '../../internal/focus-visible';
 import { getOffset } from '../../internal/offset';
 import { scrollIntoView } from '../../internal/scroll';
+import SlTab from '../tab/tab';
+import SlTabPanel from '../tab-panel/tab-panel';
+import styles from 'sass:./tab-group.scss';
 
 /**
  * @since 2.0

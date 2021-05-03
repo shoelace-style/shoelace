@@ -3,9 +3,9 @@ import { customElement, property, query, state } from 'lit/decorators';
 import { ifDefined } from 'lit-html/directives/if-defined';
 import { classMap } from 'lit-html/directives/class-map';
 import { event, EventEmitter, watch } from '../../internal/decorators';
-import styles from 'sass:./input.scss';
 import { getLabelledBy, renderFormControl } from '../../internal/form-control';
 import { hasSlot } from '../../internal/slot';
+import styles from 'sass:./input.scss';
 
 let id = 0;
 

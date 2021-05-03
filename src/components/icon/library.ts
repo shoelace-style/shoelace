@@ -1,4 +1,4 @@
-import { SlIcon } from '../../shoelace';
+import SlIcon from '../icon/icon';
 import defaultLibrary from './library.default';
 import systemLibrary from './library.system';
 

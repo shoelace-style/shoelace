@@ -9,6 +9,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 ## Next
 
 - Fixed a bug where setting properties before an element was defined would render incorrectly [#425](https://github.com/shoelace-style/shoelace/issues/425)
+- Fixed a bug that caused all modules to be imported when cherry picking certain components [#439](https://github.com/shoelace-style/shoelace/issues/439)
 - Improved a11y in `sl-progress-ring`
 - Updated React docs to use [`@shoelace-style/react`](https://github.com/shoelace-style/react)
 - Updated NextJS docs [#434](https://github.com/shoelace-style/shoelace/pull/434)
