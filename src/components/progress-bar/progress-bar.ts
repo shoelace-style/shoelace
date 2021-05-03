@@ -35,7 +35,7 @@ export default class SlProgressBar extends LitElement {
         role="progressbar"
         aria-valuemin="0"
         aria-valuemax="100"
-        aria-valuenow="${this.indeterminate ? null : this.percentage}"
+        aria-valuenow="${this.indeterminate ? '' : this.percentage}"
       >
         <div part="indicator" class="progress-bar__indicator" style=${styleMap({ width: this.percentage + '%' })}>
           ${!this.indeterminate
