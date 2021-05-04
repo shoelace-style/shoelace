@@ -8,6 +8,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
+- 🚨 BREAKING: renamed `sl-responsive-embed` to `sl-responsive-media` and added support for images and videos [#436](https://github.com/shoelace-style/shoelace/issues/436)
 - Fixed a bug where setting properties before an element was defined would render incorrectly [#425](https://github.com/shoelace-style/shoelace/issues/425)
 - Fixed a bug that caused all modules to be imported when cherry picking certain components [#439](https://github.com/shoelace-style/shoelace/issues/439)
 - Improved a11y in `sl-progress-ring`

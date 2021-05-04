@@ -38,7 +38,6 @@
   - [Radio Group](/components/radio-group.md)
   - [Range](/components/range.md)
   - [Rating](/components/rating.md)
-  - [Responsive Embed](/components/responsive-embed.md)
   - [Select](/components/select.md)
   - [Skeleton](/components/skeleton.md)
   - [Spinner](/components/spinner.md)
@@ -59,6 +58,7 @@
   - [QR Code](/components/qr-code.md)
   - [Relative Time](/components/relative-time.md)
   - [Resize Observer](/components/resize-observer.md)
+  - [Responsive Media](/components/responsive-media.md)
 
 - Design Tokens
   - [Typography](/tokens/typography.md)

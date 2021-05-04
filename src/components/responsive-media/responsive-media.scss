@@ -1,0 +1,35 @@
+@use '../../styles/component';
+
+:host {
+  display: block;
+}
+
+.responsive-media {
+  position: relative;
+
+  ::slotted(*) {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
+
+.responsive-media--cover {
+  ::slotted(embed),
+  ::slotted(iframe),
+  ::slotted(img),
+  ::slotted(video) {
+    object-fit: cover !important;
+  }
+}
+
+.responsive-media--contain {
+  ::slotted(embed),
+  ::slotted(iframe),
+  ::slotted(img),
+  ::slotted(video) {
+    object-fit: contain !important;
+  }
+}

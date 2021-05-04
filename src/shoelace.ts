@@ -35,7 +35,7 @@ export { default as SlRange } from './components/range/range';
 export { default as SlRating } from './components/rating/rating';
 export { default as SlRelativeTime } from './components/relative-time/relative-time';
 export { default as SlResizeObserver } from './components/resize-observer/resize-observer';
-export { default as SlResponsiveEmbed } from './components/responsive-embed/responsive-embed';
+export { default as SlResponsiveMedia } from './components/responsive-media/responsive-media';
 export { default as SlSelect } from './components/select/select';
 export { default as SlSkeleton } from './components/skeleton/skeleton';
 export { default as SlSpinner } from './components/spinner/spinner';
