@@ -173,8 +173,6 @@ export default class SlDialog extends LitElement {
     if (trigger && typeof trigger.focus === 'function') {
       setTimeout(() => trigger.focus());
     }
-
-    unlockBodyScrolling(this);
   }
 
   handleCloseClick() {
@@ -213,6 +211,10 @@ export default class SlDialog extends LitElement {
       this.willShow = false;
       this.willHide = false;
       this.open ? this.slAfterShow.emit() : this.slAfterHide.emit();
+
+      if (!this.open) {
+        unlockBodyScrolling(this);
+      }
     }
   }
 

@@ -182,8 +182,6 @@ export default class SlDrawer extends LitElement {
     if (trigger && typeof trigger.focus === 'function') {
       setTimeout(() => trigger.focus());
     }
-
-    unlockBodyScrolling(this);
   }
 
   handleCloseClick() {
@@ -222,6 +220,10 @@ export default class SlDrawer extends LitElement {
       this.willShow = false;
       this.willHide = false;
       this.open ? this.slAfterShow.emit() : this.slAfterHide.emit();
+
+      if (!this.open) {
+        unlockBodyScrolling(this);
+      }
     }
   }
 
