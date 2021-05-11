@@ -12,6 +12,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug where setting properties before an element was defined would render incorrectly [#425](https://github.com/shoelace-style/shoelace/issues/425)
 - Fixed a bug that caused all modules to be imported when cherry picking certain components [#439](https://github.com/shoelace-style/shoelace/issues/439)
 - Fixed a bug where the scrollbar would reposition `sl-dialog` on hide causing it to jump [#424](https://github.com/shoelace-style/shoelace/issues/424)
+- Fixed a bug that prevented the project from being built in a Windows environment
 - Improved a11y in `sl-progress-ring`
 - Updated to Bootstrap Icons 1.5.0
 - Updated React docs to use [`@shoelace-style/react`](https://github.com/shoelace-style/react)
