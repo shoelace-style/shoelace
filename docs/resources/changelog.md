@@ -6,7 +6,7 @@ Components with the <sl-badge type="warning" pill>Experimental</sl-badge> badge 
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
-## Next
+## 2.0.0-beta.40
 
 - 🚨 BREAKING: renamed `sl-responsive-embed` to `sl-responsive-media` and added support for images and videos [#436](https://github.com/shoelace-style/shoelace/issues/436)
 - Fixed a bug where setting properties before an element was defined would render incorrectly [#425](https://github.com/shoelace-style/shoelace/issues/425)
