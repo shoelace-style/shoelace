@@ -14,6 +14,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug where the scrollbar would reposition `sl-dialog` on hide causing it to jump [#424](https://github.com/shoelace-style/shoelace/issues/424)
 - Fixed a bug that prevented the project from being built in a Windows environment
 - Improved a11y in `sl-progress-ring`
+- Removed `src/utilities/index.ts` to prevent tree-shaking confusion (please import utilities directly from their respective modules)
 - Updated to Bootstrap Icons 1.5.0
 - Updated React docs to use [`@shoelace-style/react`](https://github.com/shoelace-style/react)
 - Updated NextJS docs [#434](https://github.com/shoelace-style/shoelace/pull/434)
