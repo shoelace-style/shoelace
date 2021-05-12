@@ -15,6 +15,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug that prevented the project from being built in a Windows environment
 - Improved a11y in `sl-progress-ring`
 - Removed `src/utilities/index.ts` to prevent tree-shaking confusion (please import utilities directly from their respective modules)
+- Removed global `[hidden]` styles so they don't affect anything outside of components
 - Updated to Bootstrap Icons 1.5.0
 - Updated React docs to use [`@shoelace-style/react`](https://github.com/shoelace-style/react)
 - Updated NextJS docs [#434](https://github.com/shoelace-style/shoelace/pull/434)
