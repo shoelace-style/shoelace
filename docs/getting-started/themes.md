@@ -2,7 +2,7 @@
 
 Shoelace ships with a dark theme that complements the default light theme. You can even take things a step further by designing your own custom theme.
 
-The default theme is included as part of `themse/base.css` and should always be loaded first, even if you want to use another theme exclusively. The default theme contains important base tokens and utilities that many components rely on.
+The default theme is included as part of `themes/base.css` and should always be loaded first, even if you want to use another theme exclusively. The default theme contains important base tokens and utilities that many components rely on.
 
 ## Dark Mode
 
