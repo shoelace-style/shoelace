@@ -11,7 +11,7 @@ The easiest way to install Shoelace is with the CDN. Just add the following tags
 <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/shoelace.js"></script>
 ```
 
-Now you can [start using Shoelace!](/getting-started/usage.md)
+Now you can [start using Shoelace!](/getting-started/usage)
 
 ## Local Installation
 

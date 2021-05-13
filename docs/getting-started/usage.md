@@ -112,7 +112,7 @@ For example, `<button>` and `<sl-button>` both have a `type` attribute, but it d
 
 Shoelace ships with a file called `vscode.html-custom-data.json` that can be used to describe its components to Visual Studio Code. This enables code completion for Shoelace components (also known as "code hinting" or "IntelliSense"). To enable it, you need to tell VS Code where the file is.
 
-1. [Install Shoelace locally](/getting-started/installation.md#local-installation)
+1. [Install Shoelace locally](/getting-started/installation#local-installation)
 2. Create a folder called `.vscode` at the root of your project
 3. Create a file inside the folder called `settings.json`
 4. Add the following to the file

@@ -14,7 +14,7 @@ Radios are designed to be used with [radio groups](/components/radio-group). As 
 </sl-radio-group>
 ```
 
-?> This component doesn't work with standard forms. Use [`<sl-form>`](/components/form.md) instead.
+?> This component doesn't work with standard forms. Use [`<sl-form>`](/components/form) instead.
 
 ## Examples
 

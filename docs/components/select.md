@@ -16,7 +16,7 @@ Selects allow you to choose one or more items from a dropdown menu.
 </sl-select>
 ```
 
-?> This component doesn't work with standard forms. Use [`<sl-form>`](/components/form.md) instead.
+?> This component doesn't work with standard forms. Use [`<sl-form>`](/components/form) instead.
 
 ## Examples
 

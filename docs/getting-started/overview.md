@@ -39,7 +39,7 @@ Now you have access to all of Shoelace's components! Try adding a button:
 <sl-button>Click me</sl-button>
 ```
 
-See the [installation instructions](getting-started/installation.md) for more details and other ways to install Shoelace.
+See the [installation instructions](getting-started/installation) for more details and other ways to install Shoelace.
 
 ## New to Web Components?
 

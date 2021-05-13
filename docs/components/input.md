@@ -8,7 +8,7 @@ Inputs collect data from the user.
 <sl-input></sl-input>
 ```
 
-?> This component doesn't work with standard forms. Use [`<sl-form>`](/components/form.md) instead.
+?> This component doesn't work with standard forms. Use [`<sl-form>`](/components/form) instead.
 
 ?> Please refer to the section on [form control validation](/components/form?id=form-control-validation) to learn how to do client-side validation.
 

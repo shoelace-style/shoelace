@@ -8,7 +8,7 @@ Checkboxes allow the user to toggle an option on or off.
 <sl-checkbox>Checkbox</sl-checkbox>
 ```
 
-?> This component doesn't work with standard forms. Use [`<sl-form>`](/components/form.md) instead.
+?> This component doesn't work with standard forms. Use [`<sl-form>`](/components/form) instead.
 
 ## Examples
 

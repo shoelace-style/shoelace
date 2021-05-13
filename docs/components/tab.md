@@ -11,6 +11,6 @@ Tabs are used inside tab groups to represent tab panels.
 <sl-tab disabled>Disabled</sl-tab>
 ```
 
-?> Additional demonstrations can be found in the [tab group examples](/components/tab-group.md).
+?> Additional demonstrations can be found in the [tab group examples](/components/tab-group).
 
 [component-metadata:sl-tab]
