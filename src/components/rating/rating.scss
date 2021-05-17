@@ -1,11 +1,5 @@
 @use '../../styles/component';
 
-/**
- * @prop --symbol-color: The inactive color for symbols.
- * @prop --symbol-color-active: The active color for symbols.
- * @prop --symbol-size: The size of symbols.
- * @prop --symbol-spacing: The spacing to use around symbols.
- */
 :host {
   --symbol-color: var(--sl-color-gray-300);
   --symbol-color-active: #ffbe00;

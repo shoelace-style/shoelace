@@ -13,6 +13,11 @@ import styles from 'sass:./progress-bar.scss';
  * @part base - The component's base wrapper.
  * @part indicator - The progress bar indicator.
  * @part label - The progress bar label.
+ *
+ * @customProperty --height - The progress bar's height.
+ * @customProperty --track-color - The track color.
+ * @customProperty --indicator-color - The indicator color.
+ * @customProperty --label-color - The label color.
  */
 @customElement('sl-progress-bar')
 export default class SlProgressBar extends LitElement {

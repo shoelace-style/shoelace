@@ -1,11 +1,5 @@
 @use '../../styles/component';
 
-/**
- * @prop --hide-duration: The length of the hide transition.
- * @prop --hide-timing-function: The timing function (easing) to use for the hide transition.
- * @prop --show-duration: The length of the show transition.
- * @prop --show-timing-function: The timing function (easing) to use for the show transition.
- */
 :host {
   --hide-duration: var(--sl-transition-medium);
   --hide-timing-function: ease;

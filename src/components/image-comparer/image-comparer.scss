@@ -1,9 +1,5 @@
 @use '../../styles/component';
 
-/**
- * @prop --divider-width: The width of the dividing line.
- * @prop --handle-size: The size of the compare handle.
- */
 :host {
   --divider-width: 2px;
   --handle-size: 2.5rem;

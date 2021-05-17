@@ -31,6 +31,11 @@ let id = 0;
  * @part close-button - The close button.
  * @part body - The dialog body.
  * @part footer - The dialog footer.
+ *
+ * @customProperty --width - The preferred width of the dialog. Note that the dialog will shrink to accommodate smaller screens.
+ * @customProperty --header-spacing - The amount of padding to use for the header.
+ * @customProperty --body-spacing - The amount of padding to use for the body.
+ * @customProperty --footer-spacing - The amount of padding to use for the footer.
  */
 @customElement('sl-dialog')
 export default class SlDialog extends LitElement {

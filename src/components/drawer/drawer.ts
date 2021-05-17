@@ -31,6 +31,12 @@ let id = 0;
  * @part close-button - The close button.
  * @part body - The drawer body.
  * @part footer - The drawer footer.
+ *
+ * @prop --size - The preferred size of the drawer. This will be applied to the drawer's width or height depending on its
+ *   `placement`. Note that the drawer will shrink to accommodate smaller screens.
+ * @prop --header-spacing - The amount of padding to use for the header.
+ * @prop --body-spacing - The amount of padding to use for the body.
+ * @prop --footer-spacing - The amount of padding to use for the footer.
  */
 @customElement('sl-drawer')
 export default class SlDrawer extends LitElement {

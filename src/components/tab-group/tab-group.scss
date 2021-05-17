@@ -1,9 +1,6 @@
 @use '../../styles/component';
 @use '../../styles/mixins/hide';
 
-/**
- * @prop --tabs-border-color: The color of the border that separates tabs.
- */
 :host {
   --tabs-border-color: var(--sl-color-gray-200);
 

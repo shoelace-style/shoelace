@@ -98,12 +98,14 @@ components.map(async component => {
     const dependencies = tags.filter(item => item.tag === 'dependency');
     const slots = tags.filter(item => item.tag === 'slot');
     const parts = tags.filter(item => item.tag === 'part');
+    const customProperties = tags.filter(item => item.tag === 'customproperty');
 
     api.since = tags.find(item => item.tag === 'since').text.trim();
     api.status = tags.find(item => item.tag === 'status').text.trim();
     api.dependencies = dependencies.map(tag => tag.text.trim());
     api.slots = slots.map(tag => splitText(tag.text));
     api.parts = parts.map(tag => splitText(tag.text));
+    api.cssCustomProperties = customProperties.map(tag => splitText(tag.text));
   } else {
     console.error(chalk.yellow(`Missing comment block for ${component.name} - skipping metadata`));
   }
@@ -217,17 +219,6 @@ components.map(async component => {
       params
     });
   });
-
-  // CSS custom properties
-  const stylesheet = path.resolve(path.dirname(api.file), path.parse(api.file).name + '.scss');
-  if (fs.existsSync(stylesheet)) {
-    const styles = fs.readFileSync(stylesheet, 'utf8');
-    const parsed = parse(styles);
-    const tags = parsed[0] ? parsed[0].tags : [];
-    const cssCustomProperties = tags
-      .filter(tag => tag.tag === 'prop')
-      .map(tag => api.cssCustomProperties.push({ name: tag.name.slice(0, -1), description: tag.description }));
-  }
 
   metadata.components.push(api);
 });

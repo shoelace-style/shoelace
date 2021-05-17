@@ -24,6 +24,8 @@ import styles from 'sass:./tab-group.scss';
  * @part active-tab-indicator - An element that displays the currently selected tab. This is a child of the tabs container.
  * @part body - The tab group body where tab panels are slotted in.
  * @part scroll-button - The previous and next scroll buttons that appear when tabs are scrollable.
+ *
+ * @customProperty --tabs-border-color - The color of the border that separates tabs.
  */
 @customElement('sl-tab-group')
 export default class SlTabGroup extends LitElement {

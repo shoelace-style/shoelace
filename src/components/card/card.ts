@@ -18,6 +18,11 @@ import styles from 'sass:./card.scss';
  * @part header - The card's header, if present.
  * @part body - The card's body.
  * @part footer - The card's footer, if present.
+ *
+ * @customProperty --border-color - The card's border color, including borders that occur inside the card.
+ * @customProperty --border-radius - The border radius for card edges.
+ * @customProperty --border-width - The width of card borders.
+ * @customProperty --padding - The padding to use for card sections.*
  */
 @customElement('sl-card')
 export default class SlCard extends LitElement {

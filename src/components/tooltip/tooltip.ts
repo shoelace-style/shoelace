@@ -15,6 +15,14 @@ let id = 0;
  * @slot content - The tooltip's content. Alternatively, you can use the content prop.
  *
  * @part base - The component's base wrapper.
+ *
+ * @customProperty --hide-delay - The amount of time to wait before hiding the tooltip.
+ * @customProperty --hide-duration - The amount of time the hide transition takes to complete.
+ * @customProperty --hide-timing-function - The timing function (easing) to use for the hide transition.
+ * @customProperty --max-width - The maximum width of the tooltip.
+ * @customProperty --show-delay - The amount of time to wait before showing the tooltip.
+ * @customProperty --show-duration - The amount of time the show transition takes to complete.
+ * @customProperty --show-timing-function - The timing function (easing) to use for the show transition.
  */
 @customElement('sl-tooltip')
 export default class SlTooltip extends LitElement {

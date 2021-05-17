@@ -19,6 +19,8 @@ const toastStack = Object.assign(document.createElement('div'), { className: 'sl
  * @part icon - The container that wraps the alert icon.
  * @part message - The alert message.
  * @part close-button - The close button.
+ *
+ * @customProperty --box-shadow - The alert's box shadow.
  */
 @customElement('sl-alert')
 export default class SlAlert extends LitElement {

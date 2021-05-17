@@ -15,6 +15,8 @@ import styles from 'sass:./avatar.scss';
  * @part icon - The container that wraps the avatar icon.
  * @part initials - The container that wraps the avatar initials.
  * @part image - The avatar image.
+ *
+ * @customProperty --size - The size of the avatar.
  */
 @customElement('sl-avatar')
 export default class SlAvatar extends LitElement {

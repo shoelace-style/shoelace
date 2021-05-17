@@ -17,6 +17,10 @@ let id = 0;
  * @part control - The switch control.
  * @part thumb - The switch position indicator.
  * @part label - The switch label.
+ *
+ * @customProperty --width - The width of the switch.
+ * @customProperty --height - The height of the switch.
+ * @customProperty --thumb-size - The size of the thumb.
  */
 @customElement('sl-switch')
 export default class SlSwitch extends LitElement {

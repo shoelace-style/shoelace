@@ -1,10 +1,5 @@
 @use '../../styles/component';
 
-/**
- * @prop --border-radius: The skeleton's border radius.
- * @prop --color: The color of the skeleton.
- * @prop --sheen-color: The sheen color when the skeleton is in its loading state.
- */
 :host {
   --border-radius: var(--sl-border-radius-pill);
   --color: var(--sl-color-gray-200);

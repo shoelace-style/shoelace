@@ -1,9 +1,6 @@
 @use '../../styles/component';
 @use '../../styles/mixins/hide';
 
-/**
- * @prop --box-shadow: The alert's box shadow.
- */
 :host {
   display: contents;
 

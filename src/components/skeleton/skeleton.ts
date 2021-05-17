@@ -9,6 +9,10 @@ import styles from 'sass:./skeleton.scss';
  *
  * @part base - The component's base wrapper.
  * @part indicator - The skeleton's indicator which is responsible for its color and animation.
+ *
+ * @customProperty --border-radius - The skeleton's border radius.
+ * @customProperty --color - The color of the skeleton.
+ * @customProperty --sheen-color - The sheen color when the skeleton is in its loading state.
  */
 @customElement('sl-skeleton')
 export default class SlSkeleton extends LitElement {

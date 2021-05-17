@@ -1,14 +1,6 @@
 @use '../../styles/component';
 @use '../../styles/mixins/hide';
 
-/**
- * @prop --size: The preferred size of the drawer. This will be applied to the drawer's width or height depending on its
- *   `placement`. Note that the drawer will shrink to accommodate smaller screens.
- * @prop --header-spacing: The amount of padding to use for the header.
- * @prop --body-spacing: The amount of padding to use for the body.
- * @prop --footer-spacing: The amount of padding to use for the footer.
- *
- */
 :host {
   --size: 25rem;
   --header-spacing: var(--sl-spacing-large);

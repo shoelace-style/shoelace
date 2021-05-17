@@ -20,6 +20,9 @@ import styles from 'sass:./image-comparer.scss';
  * @part after - The container that holds the "after" image.
  * @part divider - The divider that separates the images.
  * @part handle - The handle that the user drags to expose the after image.
+ *
+ * @customProperty --divider-width - The width of the dividing line.
+ * @customProperty --handle-size - The size of the compare handle.
  */
 @customElement('sl-image-comparer')
 export default class SlImageComparer extends LitElement {

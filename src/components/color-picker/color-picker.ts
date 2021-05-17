@@ -32,6 +32,12 @@ import styles from 'sass:./color-picker.scss';
  * @part preview - The preview color.
  * @part input - The text input.
  * @part format-button - The toggle format button's base.
+ *
+ * @customProperty --grid-width - The width of the color grid.
+ * @customProperty --grid-height - The height of the color grid.
+ * @customProperty --grid-handle-size - The size of the color grid's handle.
+ * @customProperty --slider-height - The height of the hue and alpha sliders.
+ * @customProperty --slider-handle-size - The diameter of the slider's handle.
  */
 @customElement('sl-color-picker')
 export default class SlColorPicker extends LitElement {

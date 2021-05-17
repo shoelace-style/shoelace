@@ -1,12 +1,6 @@
 @use '../../styles/component';
 @use '../../styles/mixins/hide';
 
-/**
- * @prop --width: The preferred width of the dialog. Note that the dialog will shrink to accommodate smaller screens.
- * @prop --header-spacing: The amount of padding to use for the header.
- * @prop --body-spacing: The amount of padding to use for the body.
- * @prop --footer-spacing: The amount of padding to use for the footer.
- */
 :host {
   --width: 31rem;
   --header-spacing: var(--sl-spacing-large);

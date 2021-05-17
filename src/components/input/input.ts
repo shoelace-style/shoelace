@@ -32,6 +32,8 @@ let id = 0;
  * @part password-toggle-button - The password toggle button.
  * @part suffix - The input suffix container.
  * @part help-text - The input help text.
+ *
+ * @prop --focus-ring - The focus ring style to use when the control receives focus, a `box-shadow` property.
  */
 @customElement('sl-input')
 export default class SlInput extends LitElement {

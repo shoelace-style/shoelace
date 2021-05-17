@@ -37,6 +37,8 @@ let id = 0;
  * @part menu - The select menu, a <sl-menu> element.
  * @part tag - The multiselect option, a <sl-tag> element.
  * @part tags - The container in which multiselect options are rendered.
+ *
+ * @customProperty --focus-ring - The focus ring style to use when the control receives focus, a `box-shadow` property.
  */
 @customElement('sl-select')
 export default class SlSelect extends LitElement {

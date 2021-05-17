@@ -1,9 +1,5 @@
 @use '../../styles/component';
 
-/**
- * @prop --track-color: The track color.
- * @prop --indicator-color: The indicator color.
- */
 :host {
   --track-color: var(--sl-color-gray-200);
   --indicator-color: var(--sl-color-primary-500);
