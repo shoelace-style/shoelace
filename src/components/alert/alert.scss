@@ -22,19 +22,11 @@
   font-weight: var(--sl-font-weight-normal);
   line-height: 1.6;
   color: var(--sl-color-gray-700);
-  opacity: 0;
-  transform: scale(0.9);
-  transition: var(--sl-transition-medium) opacity ease, var(--sl-transition-medium) transform ease;
   margin: inherit;
 
-  &:not(.alert--visible) {
-    @include hide.hidden;
+  &[hidden] {
+    display: none;
   }
-}
-
-.alert--open {
-  opacity: 1;
-  transform: none;
 }
 
 .alert__icon {

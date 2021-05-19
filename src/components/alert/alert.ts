@@ -1,10 +1,36 @@
 import { LitElement, html, unsafeCSS } from 'lit';
-import { customElement, property, state } from 'lit/decorators';
+import { customElement, property, query } from 'lit/decorators';
 import { classMap } from 'lit-html/directives/class-map';
 import { event, EventEmitter, watch } from '../../internal/decorators';
+import { animateTo, stopAnimations } from '../../internal/animate';
 import styles from 'sass:./alert.scss';
 
 const toastStack = Object.assign(document.createElement('div'), { className: 'sl-toast-stack' });
+
+//
+// TODO - At the component level, expose `animationSettings` which will work like this:
+//
+//  alert.animationSettings = {
+//    show: {
+//      keyframes: [],
+//      options: {}
+//    },
+//    hide: {
+//      keyframes: [],
+//      options: {}
+//    }
+//  };
+//
+// TODO - To allow users to change the default value for all alerts, export a `setAnimationDefaults()` function. When no
+// animationSettings are provided, we'll use the defaults.
+//
+// TODO - In the changelog, describe why these changes are being made:
+//
+//  - CSS transitions are more easily customizable, but not reliable due to reflow hacks and now knowing which
+//    transition to wait for via transitionend.
+//  - Web Animations API is more reliable at the expense of being harder to customize. However, providing the
+//    setAnimationDefaults() function gives you complete control over individual component animations with one call.
+//
 
 /**
  * @since 2.0
@@ -27,8 +53,9 @@ export default class SlAlert extends LitElement {
   static styles = unsafeCSS(styles);
 
   private autoHideTimeout: any;
+  private hasInitialized = false;
 
-  @state() private isVisible = false;
+  @query('[part="base"]') base: HTMLElement;
 
   /** Indicates whether or not the alert is open. You can use this in lieu of the show/hide methods. */
   @property({ type: Boolean, reflect: true }) open = false;
@@ -57,19 +84,18 @@ export default class SlAlert extends LitElement {
   /** Emitted after the alert closes and all transitions are complete. */
   @event('sl-after-hide') slAfterHide: EventEmitter<void>;
 
-  connectedCallback() {
-    super.connectedCallback();
+  async firstUpdated() {
+    // Set initial visibility
+    this.base.hidden = !this.open;
 
-    // Show on init if open
-    if (this.open) {
-      this.show();
-    }
+    // Set the initialized flag after the first update is complete
+    await this.updateComplete;
+    this.hasInitialized = true;
   }
 
   /** Shows the alert. */
-  show() {
-    // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
-    if (this.isVisible) {
+  async show() {
+    if (!this.hasInitialized) {
       return;
     }
 
@@ -79,18 +105,30 @@ export default class SlAlert extends LitElement {
       return;
     }
 
-    this.isVisible = true;
     this.open = true;
 
     if (this.duration < Infinity) {
-      this.autoHideTimeout = setTimeout(() => this.hide(), this.duration);
+      this.restartAutoHide();
     }
+
+    // Animate in
+    await stopAnimations(this.base);
+    this.base.hidden = false;
+    await animateTo(
+      this.base,
+      [
+        { opacity: 0, transform: 'scale(0.8)' },
+        { opacity: 1, transform: 'scale(1)' }
+      ],
+      { duration: 250 }
+    );
+
+    this.slAfterShow.emit();
   }
 
   /** Hides the alert */
-  hide() {
-    // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
-    if (!this.open) {
+  async hide() {
+    if (!this.hasInitialized) {
       return;
     }
 
@@ -100,8 +138,23 @@ export default class SlAlert extends LitElement {
       return;
     }
 
-    clearTimeout(this.autoHideTimeout);
     this.open = false;
+
+    clearTimeout(this.autoHideTimeout);
+
+    // Animate out
+    await stopAnimations(this.base);
+    await animateTo(
+      this.base,
+      [
+        { opacity: 1, transform: 'scale(1)' },
+        { opacity: 0, transform: 'scale(0.8)' }
+      ],
+      { duration: 250 }
+    );
+    this.base.hidden = true;
+
+    this.slAfterHide.emit();
   }
 
   /**
@@ -154,16 +207,6 @@ export default class SlAlert extends LitElement {
     this.restartAutoHide();
   }
 
-  handleTransitionEnd(event: TransitionEvent) {
-    const target = event.target as HTMLElement;
-
-    // Ensure we only emit one event when the target element is no longer visible
-    if (event.propertyName === 'opacity' && target.classList.contains('alert')) {
-      this.isVisible = this.open;
-      this.open ? this.slAfterShow.emit() : this.slAfterHide.emit();
-    }
-  }
-
   @watch('open')
   handleOpenChange() {
     this.open ? this.show() : this.hide();
@@ -181,7 +224,6 @@ export default class SlAlert extends LitElement {
         class=${classMap({
           alert: true,
           'alert--open': this.open,
-          'alert--visible': this.isVisible,
           'alert--closable': this.closable,
           'alert--primary': this.type === 'primary',
           'alert--success': this.type === 'success',
@@ -194,7 +236,6 @@ export default class SlAlert extends LitElement {
         aria-atomic="true"
         aria-hidden=${this.open ? 'false' : 'true'}
         @mousemove=${this.handleMouseMove.bind(this)}
-        @transitionend=${this.handleTransitionEnd.bind(this)}
       >
         <span part="icon" class="alert__icon">
           <slot name="icon"></slot>
