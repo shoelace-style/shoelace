@@ -20,10 +20,6 @@
   bottom: 0;
   left: 0;
   z-index: var(--sl-z-index-dialog);
-
-  &:not(.dialog--visible) {
-    @include hide.hidden;
-  }
 }
 
 .dialog__panel {
@@ -36,9 +32,6 @@
   background-color: var(--sl-panel-background-color);
   border-radius: var(--sl-border-radius-medium);
   box-shadow: var(--sl-shadow-x-large);
-  opacity: 0;
-  transform: scale(0.8);
-  transition: var(--sl-transition-medium) opacity, var(--sl-transition-medium) transform;
 
   &:focus {
     outline: none;
@@ -106,10 +99,4 @@
   bottom: 0;
   left: 0;
   background-color: var(--sl-overlay-background-color);
-  opacity: 0;
-  transition: var(--sl-transition-medium) opacity;
-}
-
-.dialog--open .dialog__overlay {
-  opacity: 1;
 }

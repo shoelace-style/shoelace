@@ -6,6 +6,19 @@ Components with the <sl-badge type="warning" pill>Experimental</sl-badge> badge 
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
+## Next
+
+This release changes how components animate. In previous versions, CSS transitions were used for most show/hide animations. Transitions are problematic due to the way `transitionend` works. This event fires once _per transition_, and it's impossible to know which transition to look for when users can customize any possible CSS property. Because of this, components previously required the `opacity` property to transition. If a user were to prevent `opacity` from transitioning, the `sl-after-show|hide` events would never emit.
+
+CSS animations, on the other hand, have a more reliable `animationend` event. Alas, we can't use them because `@keyframes` don't cascade and can't be injected into a shadow DOM via CSS.
+
+The most elegant solution I found was to use the [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API), which offers more control over animations at the expense of customizations being done in JavaScript. Fortunately, through the [Animation Registry](/getting-started/customizing#animations), you can customize animations globally and/or per component with a minimal amount of code.
+
+
+- Added the Animation Registry
+- Updated animations for `sl-alert`, `sl-dialog`, ... to use the Animation Registry instead of CSS transitions
+- Improved a11y by respecting `prefers-reduced-motion` for all show/hide animations
+
 ## 2.0.0-beta.40
 
 - 🚨 BREAKING: renamed `sl-responsive-embed` to `sl-responsive-media` and added support for images and videos [#436](https://github.com/shoelace-style/shoelace/issues/436)

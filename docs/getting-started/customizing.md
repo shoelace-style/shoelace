@@ -106,3 +106,51 @@ Alternatively, you can set them inline directly on the element.
 ```
 
 Not all components expose CSS custom properties. For those that do, they can be found in the component's API documentation.
+
+## Animations
+
+Some components use animation, such as when a dialog is shown or hidden. Animations are performed using the [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API) rather than CSS. However, you can still customize them through Shoelace's animation registry. If a component has customizable animations, they'll be listed in the "Animation" section of its documentation.
+
+To customize a default animation, use the `setDefaultAnimation()` method. The function accepts an animation name (found in the component's docs) and an object with `keyframes` and `options`.
+
+This example will make all dialogs use a custom show animation.
+
+```js
+import { setDefaultAnimation } from '/dist/utilities/animation-registry.js';
+
+// Change the default animation for all dialogs
+setDefaultAnimation('dialog.show', {
+  keyframes: [
+    { transform: 'rotate(-10deg) scale(0.5)', opacity: '0' },
+    { transform: 'rotate(0deg) scale(1)', opacity: '1' }
+  ],
+  options: {
+    duration: 500
+  }
+});
+```
+
+If you only want to target a single component, use the `setAnimation()` method instead. This function accepts an element, an animation name, and an object comprised of animation `keyframes` and `options`.
+
+In this example, only the target dialog will use a custom show animation.
+
+```js
+import { setAnimation } from '/dist/utilities/animation-registry.js';
+
+// Change the animation for a single dialog
+const dialog = document.querySelector('#my-dialog');
+
+setAnimation(dialog, 'dialog.show', {
+  keyframes: [
+    { transform: 'rotate(-10deg) scale(0.5)', opacity: '0' },
+    { transform: 'rotate(0deg) scale(1)', opacity: '1' }
+  ],
+  options: {
+    duration: 500
+  }
+});
+```
+
+To learn more about creating Web Animations, refer to the documentation for [`Element.animate()`](https://developer.mozilla.org/en-US/docs/Web/API/Element/animate).
+
+?> Animations respect the users `prefers-reduced-motion` setting. When this setting is enabled, animations will not be played. To disable animations for all users, set `options.duration` to `0`.

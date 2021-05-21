@@ -1,36 +1,12 @@
 import { LitElement, html, unsafeCSS } from 'lit';
 import { customElement, property, query } from 'lit/decorators';
 import { classMap } from 'lit-html/directives/class-map';
-import { event, EventEmitter, watch } from '../../internal/decorators';
 import { animateTo, stopAnimations } from '../../internal/animate';
+import { event, EventEmitter, watch } from '../../internal/decorators';
+import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
 import styles from 'sass:./alert.scss';
 
 const toastStack = Object.assign(document.createElement('div'), { className: 'sl-toast-stack' });
-
-//
-// TODO - At the component level, expose `animationSettings` which will work like this:
-//
-//  alert.animationSettings = {
-//    show: {
-//      keyframes: [],
-//      options: {}
-//    },
-//    hide: {
-//      keyframes: [],
-//      options: {}
-//    }
-//  };
-//
-// TODO - To allow users to change the default value for all alerts, export a `setAnimationDefaults()` function. When no
-// animationSettings are provided, we'll use the defaults.
-//
-// TODO - In the changelog, describe why these changes are being made:
-//
-//  - CSS transitions are more easily customizable, but not reliable due to reflow hacks and now knowing which
-//    transition to wait for via transitionend.
-//  - Web Animations API is more reliable at the expense of being harder to customize. However, providing the
-//    setAnimationDefaults() function gives you complete control over individual component animations with one call.
-//
 
 /**
  * @since 2.0
@@ -47,6 +23,9 @@ const toastStack = Object.assign(document.createElement('div'), { className: 'sl
  * @part close-button - The close button.
  *
  * @customProperty --box-shadow - The alert's box shadow.
+ *
+ * @animation alert.show - The animation to use when showing the alert.
+ * @animation alert.hide - The animation to use when hiding the alert.
  */
 @customElement('sl-alert')
 export default class SlAlert extends LitElement {
@@ -111,17 +90,10 @@ export default class SlAlert extends LitElement {
       this.restartAutoHide();
     }
 
-    // Animate in
     await stopAnimations(this.base);
     this.base.hidden = false;
-    await animateTo(
-      this.base,
-      [
-        { opacity: 0, transform: 'scale(0.8)' },
-        { opacity: 1, transform: 'scale(1)' }
-      ],
-      { duration: 250 }
-    );
+    const animation = getAnimation(this, 'alert.show');
+    await animateTo(this.base, animation.keyframes, animation.options);
 
     this.slAfterShow.emit();
   }
@@ -142,16 +114,9 @@ export default class SlAlert extends LitElement {
 
     clearTimeout(this.autoHideTimeout);
 
-    // Animate out
     await stopAnimations(this.base);
-    await animateTo(
-      this.base,
-      [
-        { opacity: 1, transform: 'scale(1)' },
-        { opacity: 0, transform: 'scale(0.8)' }
-      ],
-      { duration: 250 }
-    );
+    const animation = getAnimation(this, 'alert.hide');
+    await animateTo(this.base, animation.keyframes, animation.options);
     this.base.hidden = true;
 
     this.slAfterHide.emit();
@@ -261,6 +226,22 @@ export default class SlAlert extends LitElement {
     `;
   }
 }
+
+setDefaultAnimation('alert.show', {
+  keyframes: [
+    { opacity: 0, transform: 'scale(0.8)' },
+    { opacity: 1, transform: 'scale(1)' }
+  ],
+  options: { duration: 150 }
+});
+
+setDefaultAnimation('alert.hide', {
+  keyframes: [
+    { opacity: 1, transform: 'scale(1)' },
+    { opacity: 0, transform: 'scale(0.8)' }
+  ],
+  options: { duration: 150 }
+});
 
 declare global {
   interface HTMLElementTagNameMap {

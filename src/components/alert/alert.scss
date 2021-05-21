@@ -23,10 +23,6 @@
   line-height: 1.6;
   color: var(--sl-color-gray-700);
   margin: inherit;
-
-  &[hidden] {
-    display: none;
-  }
 }
 
 .alert__icon {

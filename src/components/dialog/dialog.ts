@@ -2,11 +2,13 @@ import { LitElement, html, unsafeCSS } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
+import { animateTo, stopAnimations } from '../../internal/animate';
 import { event, EventEmitter, watch } from '../../internal/decorators';
 import { lockBodyScrolling, unlockBodyScrolling } from '../../internal/scroll';
 import { hasSlot } from '../../internal/slot';
 import { isPreventScrollSupported } from '../../internal/support';
 import Modal from '../../internal/modal';
+import { setDefaultAnimation, getAnimation } from '../../utilities/animation-registry';
 import styles from 'sass:./dialog.scss';
 
 const hasPreventScroll = isPreventScrollSupported();
@@ -36,6 +38,11 @@ let id = 0;
  * @customProperty --header-spacing - The amount of padding to use for the header.
  * @customProperty --body-spacing - The amount of padding to use for the body.
  * @customProperty --footer-spacing - The amount of padding to use for the footer.
+ *
+ * @animation dialog.show - The animation to use when showing the dialog.
+ * @animation dialog.hide - The animation to use when hiding the dialog.
+ * @animation dialog.overlay.show - The animation to use when showing the dialog's overlay.
+ * @animation dialog.overlay.hide - The animation to use when hiding the dialog's overlay.
  */
 @customElement('sl-dialog')
 export default class SlDialog extends LitElement {
@@ -43,15 +50,14 @@ export default class SlDialog extends LitElement {
 
   @query('.dialog') dialog: HTMLElement;
   @query('.dialog__panel') panel: HTMLElement;
+  @query('.dialog__overlay') overlay: HTMLElement;
 
   private componentId = `dialog-${++id}`;
+  private hasInitialized = false;
   private modal: Modal;
   private originalTrigger: HTMLElement | null;
-  private willShow = false;
-  private willHide = false;
 
   @state() private hasFooter = false;
-  @state() private isVisible = false;
 
   /** Indicates whether or not the dialog is open. You can use this in lieu of the show/hide methods. */
   @property({ type: Boolean, reflect: true }) open = false;
@@ -101,14 +107,23 @@ export default class SlDialog extends LitElement {
     }
   }
 
+  async firstUpdated() {
+    // Set initial visibility
+    this.dialog.hidden = !this.open;
+
+    // Set the initialized flag after the first update is complete
+    await this.updateComplete;
+    this.hasInitialized = true;
+  }
+
   disconnectedCallback() {
     super.disconnectedCallback();
     unlockBodyScrolling(this);
   }
 
   /** Shows the dialog */
-  show() {
-    if (this.willShow) {
+  async show() {
+    if (!this.hasInitialized) {
       return;
     }
 
@@ -119,47 +134,44 @@ export default class SlDialog extends LitElement {
     }
 
     this.originalTrigger = document.activeElement as HTMLElement;
-    this.willShow = true;
-    this.isVisible = true;
     this.open = true;
     this.modal.activate();
 
     lockBodyScrolling(this);
 
-    if (this.open) {
-      if (hasPreventScroll) {
-        // Wait for the next frame before setting initial focus so the dialog is technically visible
-        requestAnimationFrame(() => {
-          const slInitialFocus = this.slInitialFocus.emit();
-          if (!slInitialFocus.defaultPrevented) {
-            this.panel.focus({ preventScroll: true });
-          }
-        });
-      } else {
-        // Once Safari supports { preventScroll: true } we can remove this nasty little hack, but until then we need to
-        // wait for the transition to complete before setting focus, otherwise the panel may render in a buggy way
-        // that's out of view initially.
-        //
-        // Fiddle: https://jsfiddle.net/g6buoafq/1/
-        // Safari: https://bugs.webkit.org/show_bug.cgi?id=178583
-        //
-        this.dialog.addEventListener(
-          'transitionend',
-          () => {
-            const slInitialFocus = this.slInitialFocus.emit();
-            if (!slInitialFocus.defaultPrevented) {
-              this.panel.focus();
-            }
-          },
-          { once: true }
-        );
+    await Promise.all([stopAnimations(this.dialog), stopAnimations(this.overlay)]);
+    this.dialog.hidden = false;
+
+    // Browsers that support el.focus({ preventScroll }) can set initial focus immediately
+    if (hasPreventScroll) {
+      const slInitialFocus = this.slInitialFocus.emit();
+      if (!slInitialFocus.defaultPrevented) {
+        this.panel.focus({ preventScroll: true });
       }
     }
+
+    const panelAnimation = getAnimation(this, 'dialog.show');
+    const overlayAnimation = getAnimation(this, 'dialog.overlay.show');
+    await Promise.all([
+      animateTo(this.panel, panelAnimation.keyframes, panelAnimation.options),
+      animateTo(this.overlay, overlayAnimation.keyframes, overlayAnimation.options)
+    ]);
+
+    // Browsers that don't support el.focus({ preventScroll }) have to wait for the animation to finish before initial
+    // focus to prevent scrolling issues. See: https://caniuse.com/mdn-api_htmlelement_focus_preventscroll_option
+    if (!hasPreventScroll) {
+      const slInitialFocus = this.slInitialFocus.emit();
+      if (!slInitialFocus.defaultPrevented) {
+        this.panel.focus({ preventScroll: true });
+      }
+    }
+
+    this.slAfterShow.emit();
   }
 
   /** Hides the dialog */
-  hide() {
-    if (this.willHide) {
+  async hide() {
+    if (!this.hasInitialized) {
       return;
     }
 
@@ -169,15 +181,27 @@ export default class SlDialog extends LitElement {
       return;
     }
 
-    this.willHide = true;
     this.open = false;
     this.modal.deactivate();
+
+    await Promise.all([stopAnimations(this.dialog), stopAnimations(this.overlay)]);
+    const panelAnimation = getAnimation(this, 'dialog.hide');
+    const overlayAnimation = getAnimation(this, 'dialog.overlay.hide');
+    await Promise.all([
+      animateTo(this.panel, panelAnimation.keyframes, panelAnimation.options),
+      animateTo(this.overlay, overlayAnimation.keyframes, overlayAnimation.options)
+    ]);
+    this.dialog.hidden = true;
+
+    unlockBodyScrolling(this);
 
     // Restore focus to the original trigger
     const trigger = this.originalTrigger;
     if (trigger && typeof trigger.focus === 'function') {
       setTimeout(() => trigger.focus());
     }
+
+    this.slAfterHide.emit();
   }
 
   handleCloseClick() {
@@ -207,22 +231,6 @@ export default class SlDialog extends LitElement {
     this.hasFooter = hasSlot(this, 'footer');
   }
 
-  handleTransitionEnd(event: TransitionEvent) {
-    const target = event.target as HTMLElement;
-
-    // Ensure we only emit one event when the target element is no longer visible
-    if (event.propertyName === 'opacity' && target.classList.contains('dialog__panel')) {
-      this.isVisible = this.open;
-      this.willShow = false;
-      this.willHide = false;
-      this.open ? this.slAfterShow.emit() : this.slAfterHide.emit();
-
-      if (!this.open) {
-        unlockBodyScrolling(this);
-      }
-    }
-  }
-
   render() {
     return html`
       <div
@@ -230,11 +238,9 @@ export default class SlDialog extends LitElement {
         class=${classMap({
           dialog: true,
           'dialog--open': this.open,
-          'dialog--visible': this.isVisible,
           'dialog--has-footer': this.hasFooter
         })}
         @keydown=${this.handleKeyDown}
-        @transitionend=${this.handleTransitionEnd}
       >
         <div part="overlay" class="dialog__overlay" @click=${this.handleOverlayClick} tabindex="-1"></div>
 
@@ -277,6 +283,32 @@ export default class SlDialog extends LitElement {
     `;
   }
 }
+
+setDefaultAnimation('dialog.show', {
+  keyframes: [
+    { opacity: 0, transform: 'scale(0.8)' },
+    { opacity: 1, transform: 'scale(1)' }
+  ],
+  options: { duration: 150 }
+});
+
+setDefaultAnimation('dialog.hide', {
+  keyframes: [
+    { opacity: 1, transform: 'scale(1)' },
+    { opacity: 0, transform: 'scale(0.8)' }
+  ],
+  options: { duration: 150 }
+});
+
+setDefaultAnimation('dialog.overlay.show', {
+  keyframes: [{ opacity: 0 }, { opacity: 1 }],
+  options: { duration: 150 }
+});
+
+setDefaultAnimation('dialog.overlay.hide', {
+  keyframes: [{ opacity: 1 }, { opacity: 0 }],
+  options: { duration: 150 }
+});
 
 declare global {
   interface HTMLElementTagNameMap {

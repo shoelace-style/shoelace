@@ -193,6 +193,32 @@
     return table.outerHTML;
   }
 
+  function createAnimationsTable(animations) {
+    const table = document.createElement('table');
+    table.innerHTML = `
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${animations
+          .map(
+            animation => `
+        <tr>
+          <td><code>${escapeHtml(animation.name)}</code></td>
+          <td>${escapeHtml(animation.description)}</td>
+        </tr>
+        `
+          )
+          .join('')}
+      </tbody>
+    `;
+
+    return table.outerHTML;
+  }
+
   function createDependenciesList(targetComponent, allComponents) {
     const ul = document.createElement('ul');
     const dependencies = [];
@@ -295,7 +321,7 @@
 
         if (!component) {
           console.error('Component not found in metadata: ' + tag);
-          next(content);
+          return next(content);
         }
 
         let badgeType = 'info';
@@ -332,7 +358,7 @@
 
         if (!component) {
           console.error('Component not found in metadata: ' + tag);
-          next(content);
+          return next(content);
         }
 
         if (component.props.length) {
@@ -374,6 +400,15 @@
           result += `
             ## CSS Parts
             ${createPartsTable(component.parts)}
+          `;
+        }
+
+        if (component.animations.length) {
+          result += `
+            ## Animations
+            ${createAnimationsTable(component.animations)}
+
+            Learn how to [customize animations](/getting-started/customizing#animations).
           `;
         }
 

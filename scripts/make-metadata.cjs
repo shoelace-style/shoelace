@@ -99,6 +99,7 @@ components.map(async component => {
     const slots = tags.filter(item => item.tag === 'slot');
     const parts = tags.filter(item => item.tag === 'part');
     const customProperties = tags.filter(item => item.tag === 'customproperty');
+    const animations = tags.filter(item => item.tag === 'animation');
 
     api.since = tags.find(item => item.tag === 'since').text.trim();
     api.status = tags.find(item => item.tag === 'status').text.trim();
@@ -106,6 +107,7 @@ components.map(async component => {
     api.slots = slots.map(tag => splitText(tag.text));
     api.parts = parts.map(tag => splitText(tag.text));
     api.cssCustomProperties = customProperties.map(tag => splitText(tag.text));
+    api.animations = animations.map(tag => splitText(tag.text));
   } else {
     console.error(chalk.yellow(`Missing comment block for ${component.name} - skipping metadata`));
   }

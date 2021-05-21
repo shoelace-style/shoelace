@@ -1,43 +1,47 @@
-export function prefersReducedMotion() {
-  const query = window.matchMedia('(prefers-reduced-motion: reduce)');
-  return query?.matches;
-}
-
 //
-// Performs a finite, keyframe-based animation. Returns a promise that resolves when the animation finishes or cancels.
+// Animates an element using keyframes. Returns a promise that resolves after the animation completes or gets canceled.
 //
-export async function animateTo(
+export function animateTo(
   el: HTMLElement,
   keyframes: Keyframe[] | PropertyIndexedKeyframes,
   options?: KeyframeAnimationOptions
 ) {
   return new Promise(async resolve => {
-    if (options) {
-      if (options.duration === Infinity) {
-        throw new Error('Promise-based animations must be finite.');
-      }
-
-      if (prefersReducedMotion()) {
-        options.duration = 0;
-      }
+    if (options?.duration === Infinity) {
+      throw new Error('Promise-based animations must be finite.');
     }
 
-    const animation = el.animate(keyframes, options);
+    const animation = el.animate(keyframes, {
+      fill: 'both',
+      ...options,
+      duration: prefersReducedMotion() ? 0 : options!.duration
+    });
+
     animation.addEventListener('cancel', resolve, { once: true });
     animation.addEventListener('finish', resolve, { once: true });
   });
 }
 
 //
-// Stops all active animations on the target element. Returns a promise that resolves when all animations are canceled.
+// Tells if the user has enabled the "reduced motion" setting in their browser or OS.
 //
-export async function stopAnimations(el: HTMLElement) {
-  await Promise.all(
-    el.getAnimations().map(animation => {
+export function prefersReducedMotion() {
+  const query = window.matchMedia('(prefers-reduced-motion: reduce)');
+  return query?.matches;
+}
+
+//
+// Stops all active animations on the target element. Returns a promise that resolves after all animations are canceled.
+//
+export function stopAnimations(el: HTMLElement) {
+  return Promise.all(
+    el.getAnimations().map((animation: any) => {
       return new Promise(resolve => {
+        const handleAnimationEvent = requestAnimationFrame(resolve);
+
+        animation.addEventListener('cancel', () => handleAnimationEvent, { once: true });
+        animation.addEventListener('finish', () => handleAnimationEvent, { once: true });
         animation.cancel();
-        animation.addEventListener('cancel', resolve, { once: true });
-        animation.addEventListener('finish', resolve, { once: true });
       });
     })
   );
