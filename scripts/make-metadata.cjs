@@ -116,9 +116,29 @@ components.map(async component => {
 
   props.map(prop => {
     const { type, values } = getTypeInfo(prop);
+    let attribute;
+
+    // Look for an attribute in the @property decorator
+    if (Array.isArray(prop.decorators)) {
+      const decorator = prop.decorators.find(d => d.name === 'property');
+      if (decorator) {
+        try {
+          // We trust TypeDoc <3
+          const options = eval(`(${decorator.arguments.options})`);
+
+          // If an attribute is specified, it will always be a string
+          if (options && typeof options.attribute === 'string') {
+            attribute = options.attribute;
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    }
 
     api.props.push({
       name: prop.name,
+      attribute: attribute,
       description: prop.comment.shortText,
       type,
       values,
