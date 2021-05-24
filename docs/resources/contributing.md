@@ -188,16 +188,25 @@ This convention avoids the problem of browsers lowercasing attributes, causing s
 
 ### CSS Custom Properties
 
-To expose custom properties as part of a component's API, scope them to the `:host` block and use the following syntax for comments so they appear in the generated docs. Do not use the `--sl-` prefix, as that is reserved for design tokens that live in the global scope.
+To expose custom properties as part of a component's API, scope them to the `:host` block.
 
-```css
-/**
- * @prop --color: The component's text color.
- * @prop --background-color: The component's background color. 
- */
+```scss
 :host {
-  --color: white;
-  --background-color: tomato;
+  --color: var(--sl-color-primary-500);
+  --background-color: var(--sl-color-gray-100);
+}
+```
+
+Then use the following syntax for comments so they appear in the generated docs. Do not use the `--sl-` prefix, as that is reserved for design tokens that live in the global scope.
+
+```js
+/**
+ * @customProperty --color: The component's text color.
+ * @customProperty --background-color: The component's background color. 
+ */
+@customElement('sl-example')
+export default class SlExample {
+  // ...
 }
 ```
 

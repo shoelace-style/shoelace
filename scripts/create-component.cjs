@@ -47,8 +47,11 @@ import styles from 'sass:./${tagNameWithoutPrefix}.scss';
  * @slot - The default slot.
  * @slot example - A named slot called example.
  *
- * @part base - The component's base wrapper.
- * @part example - Another part called example.
+ * @part example - An example part.
+ *
+ * @customProperty example - An example custom property
+ *
+ * @animation example - An example animation.
  */
 @customElement('${tagName}')
 export default class ${className} extends LitElement {
@@ -75,9 +78,6 @@ const stylesFile = `src/components/${tagNameWithoutPrefix}/${tagNameWithoutPrefi
 const stylesSource = `
 @use '../../styles/component';
 
-/**
- * @prop --custom-property-here: Description here
- */
 :host {
   display: block;
 }
