@@ -35,7 +35,7 @@ export default class SlQrCode extends LitElement {
   /** The edge radius of each module. Must be between 0 and 0.5. */
   @property({ type: Number }) radius = 0;
 
-  /* The level of error correction to use. */
+  /** The level of error correction to use. */
   @property({ attribute: 'error-correction' }) errorCorrection: 'L' | 'M' | 'Q' | 'H' = 'H';
 
   firstUpdated() {
