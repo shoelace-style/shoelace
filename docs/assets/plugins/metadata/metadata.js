@@ -1,10 +1,6 @@
 (() => {
   let metadataStore;
 
-  function getAttrName(propName) {
-    return propName.replace(/[A-Z]/g, m => `-${m.toLowerCase()}`).replace(/^-/, '');
-  }
-
   function createPropsTable(props) {
     const table = document.createElement('table');
     table.innerHTML = `
@@ -19,18 +15,17 @@
       <tbody>
         ${props
           .map(prop => {
-            const attr = getAttrName(prop.name);
             return `
               <tr>
                 <td>
                   <code>${escapeHtml(prop.name)}</code>
                   ${
-                    prop.name !== attr
+                    prop.attribute && prop.name !== prop.attribute
                       ? `
                         <br>
                         <small>
-                          <sl-tooltip content="Use this attribute in your HTML">
-                            <code class="attribute-tooltip">${escapeHtml(attr)}</code>
+                          <sl-tooltip content="This is the corresponding HTML attribute">
+                            <code class="attribute-tooltip">${escapeHtml(prop.attribute)}</code>
                           </sl-tooltip>
                         </small>`
                       : ''
