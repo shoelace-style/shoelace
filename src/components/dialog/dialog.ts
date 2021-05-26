@@ -289,7 +289,7 @@ setDefaultAnimation('dialog.show', {
     { opacity: 0, transform: 'scale(0.8)' },
     { opacity: 1, transform: 'scale(1)' }
   ],
-  options: { duration: 150 }
+  options: { duration: 250, easing: 'ease' }
 });
 
 setDefaultAnimation('dialog.hide', {
@@ -297,17 +297,17 @@ setDefaultAnimation('dialog.hide', {
     { opacity: 1, transform: 'scale(1)' },
     { opacity: 0, transform: 'scale(0.8)' }
   ],
-  options: { duration: 150 }
+  options: { duration: 250, easing: 'ease' }
 });
 
 setDefaultAnimation('dialog.overlay.show', {
   keyframes: [{ opacity: 0 }, { opacity: 1 }],
-  options: { duration: 150 }
+  options: { duration: 250 }
 });
 
 setDefaultAnimation('dialog.overlay.hide', {
   keyframes: [{ opacity: 1 }, { opacity: 0 }],
-  options: { duration: 150 }
+  options: { duration: 250 }
 });
 
 declare global {
