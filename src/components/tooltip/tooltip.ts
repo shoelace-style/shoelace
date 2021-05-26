@@ -138,12 +138,8 @@ export default class SlTooltip extends LitElement {
   /** Shows the tooltip. */
   async show() {
     // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
-    if (!this.hasInitialized || this.open) {
+    if (!this.hasInitialized || this.open || this.disabled) {
       return;
-    }
-
-    if (this.popover) {
-      this.popover.destroy();
     }
 
     const slShow = this.slShow.emit();
@@ -155,6 +151,10 @@ export default class SlTooltip extends LitElement {
     this.open = true;
 
     await stopAnimations(this.tooltip);
+
+    if (this.popover) {
+      this.popover.destroy();
+    }
 
     this.popover = createPopper(this.target, this.positioner, {
       placement: this.placement,
@@ -201,6 +201,10 @@ export default class SlTooltip extends LitElement {
     const { keyframes, options } = getAnimation(this, 'tooltip.hide');
     await animateTo(this.tooltip, keyframes, options);
     this.tooltip.hidden = true;
+
+    if (this.popover) {
+      this.popover.destroy();
+    }
 
     this.slAfterHide.emit();
   }
