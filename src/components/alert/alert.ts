@@ -232,7 +232,7 @@ setDefaultAnimation('alert.show', {
     { opacity: 0, transform: 'scale(0.8)' },
     { opacity: 1, transform: 'scale(1)' }
   ],
-  options: { duration: 150 }
+  options: { duration: 250, easing: 'ease' }
 });
 
 setDefaultAnimation('alert.hide', {
@@ -240,7 +240,7 @@ setDefaultAnimation('alert.hide', {
     { opacity: 1, transform: 'scale(1)' },
     { opacity: 0, transform: 'scale(0.8)' }
   ],
-  options: { duration: 150 }
+  options: { duration: 250, easing: 'ease' }
 });
 
 declare global {
