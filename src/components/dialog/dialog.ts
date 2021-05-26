@@ -100,11 +100,6 @@ export default class SlDialog extends LitElement {
 
     this.modal = new Modal(this);
     this.handleSlotChange();
-
-    // Show on init if open
-    if (this.open) {
-      this.show();
-    }
   }
 
   async firstUpdated() {
