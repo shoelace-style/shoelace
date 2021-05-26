@@ -2,12 +2,8 @@
 
 :host {
   --max-width: 20rem;
-  --hide-delay: 0s;
-  --hide-duration: 0.125s;
-  --hide-timing-function: ease;
-  --show-delay: 0.125s;
-  --show-duration: 0.125s;
-  --show-timing-function: ease;
+  --hide-delay: 0ms;
+  --show-delay: 150ms;
 
   display: contents;
 }
@@ -27,14 +23,7 @@
   font-weight: var(--sl-tooltip-font-weight);
   line-height: var(--sl-tooltip-line-height);
   color: var(--sl-tooltip-color);
-  opacity: 0;
   padding: var(--sl-tooltip-padding);
-  transform: scale(0.8);
-  transform-origin: bottom;
-  transition-property: opacity, transform;
-  transition-delay: var(--hide-delay);
-  transition-duration: var(--hide-duration);
-  transition-timing-function: var(--hide-timing-function);
 
   &:after {
     content: '';
@@ -59,14 +48,6 @@
 
   &[data-popper-placement^='right'] .tooltip {
     transform-origin: left;
-  }
-
-  &.popover-visible .tooltip {
-    opacity: 1;
-    transform: none;
-    transition-delay: var(--show-delay);
-    transition-duration: var(--show-duration);
-    transition-timing-function: var(--show-timing-function);
   }
 }
 

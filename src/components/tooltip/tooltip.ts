@@ -1,8 +1,10 @@
 import { LitElement, html, unsafeCSS } from 'lit';
 import { customElement, property, query } from 'lit/decorators';
 import { classMap } from 'lit-html/directives/class-map';
+import { animateTo, parseDuration, stopAnimations } from '../../internal/animate';
+import { Instance as PopperInstance, createPopper } from '@popperjs/core/dist/esm';
 import { event, EventEmitter, watch } from '../../internal/decorators';
-import Popover from '../../internal/popover';
+import { setDefaultAnimation, getAnimation } from '../../utilities/animation-registry';
 import styles from 'sass:./tooltip.scss';
 
 let id = 0;
@@ -16,13 +18,12 @@ let id = 0;
  *
  * @part base - The component's base wrapper.
  *
- * @customProperty --hide-delay - The amount of time to wait before hiding the tooltip.
- * @customProperty --hide-duration - The amount of time the hide transition takes to complete.
- * @customProperty --hide-timing-function - The timing function (easing) to use for the hide transition.
  * @customProperty --max-width - The maximum width of the tooltip.
- * @customProperty --show-delay - The amount of time to wait before showing the tooltip.
- * @customProperty --show-duration - The amount of time the show transition takes to complete.
- * @customProperty --show-timing-function - The timing function (easing) to use for the show transition.
+ * @customProperty --hide-delay - The amount of time to wait before hiding the tooltip (hover only).
+ * @customProperty --show-delay - The amount of time to wait before showing the tooltip (hover only).
+ *
+ * @animation tooltip.show - The animation to use when showing the tooltip.
+ * @animation tooltip.hide - The animation to use when hiding the tooltip.
  */
 @customElement('sl-tooltip')
 export default class SlTooltip extends LitElement {
@@ -32,10 +33,10 @@ export default class SlTooltip extends LitElement {
   @query('.tooltip') tooltip: HTMLElement;
 
   private componentId = `tooltip-${++id}`;
+  private hasInitialized = false;
   private target: HTMLElement;
-  private popover: Popover;
-
-  private isVisible = false;
+  private popover: PopperInstance;
+  private hoverTimeout: any;
 
   /** The tooltip's content. Alternatively, you can use the content slot. */
   @property() content = '';
@@ -100,9 +101,8 @@ export default class SlTooltip extends LitElement {
     this.handleMouseOut = this.handleMouseOut.bind(this);
   }
 
-  firstUpdated() {
+  async firstUpdated() {
     this.target = this.getTarget();
-    this.popover = new Popover(this.target, this.positioner);
     this.syncOptions();
 
     this.addEventListener('blur', this.handleBlur, true);
@@ -112,16 +112,20 @@ export default class SlTooltip extends LitElement {
     this.addEventListener('mouseover', this.handleMouseOver);
     this.addEventListener('mouseout', this.handleMouseOut);
 
-    // Show on init if open
-    this.positioner.hidden = !this.open;
-    if (this.open) {
-      this.show();
-    }
+    // Set initial visibility
+    this.tooltip.hidden = !this.open;
+
+    // Set the initialized flag after the first update is complete
+    await this.updateComplete;
+    this.hasInitialized = true;
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    this.popover.destroy();
+
+    if (this.popover) {
+      this.popover.destroy();
+    }
 
     this.removeEventListener('blur', this.handleBlur, true);
     this.removeEventListener('focus', this.handleFocus, true);
@@ -132,10 +136,14 @@ export default class SlTooltip extends LitElement {
   }
 
   /** Shows the tooltip. */
-  show() {
+  async show() {
     // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
-    if (this.isVisible || this.disabled) {
+    if (!this.hasInitialized || this.open) {
       return;
+    }
+
+    if (this.popover) {
+      this.popover.destroy();
     }
 
     const slShow = this.slShow.emit();
@@ -144,15 +152,40 @@ export default class SlTooltip extends LitElement {
       return;
     }
 
-    this.isVisible = true;
     this.open = true;
-    this.popover.show();
+
+    await stopAnimations(this.tooltip);
+
+    this.popover = createPopper(this.target, this.positioner, {
+      placement: this.placement,
+      strategy: 'absolute',
+      modifiers: [
+        {
+          name: 'flip',
+          options: {
+            boundary: 'viewport'
+          }
+        },
+        {
+          name: 'offset',
+          options: {
+            offset: [this.skidding, this.distance]
+          }
+        }
+      ]
+    });
+
+    this.tooltip.hidden = false;
+    const { keyframes, options } = getAnimation(this, 'tooltip.show');
+    await animateTo(this.tooltip, keyframes, options);
+
+    this.slAfterShow.emit();
   }
 
   /** Shows the tooltip. */
-  hide() {
+  async hide() {
     // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
-    if (!this.isVisible) {
+    if (!this.hasInitialized || !this.open) {
       return;
     }
 
@@ -162,9 +195,14 @@ export default class SlTooltip extends LitElement {
       return;
     }
 
-    this.isVisible = false;
     this.open = false;
-    this.popover.hide();
+
+    await stopAnimations(this.tooltip);
+    const { keyframes, options } = getAnimation(this, 'tooltip.hide');
+    await animateTo(this.tooltip, keyframes, options);
+    this.tooltip.hidden = true;
+
+    this.slAfterHide.emit();
   }
 
   getTarget() {
@@ -208,13 +246,17 @@ export default class SlTooltip extends LitElement {
 
   handleMouseOver() {
     if (this.hasTrigger('hover')) {
-      this.show();
+      const delay = parseDuration(getComputedStyle(this).getPropertyValue('--show-delay'));
+      clearTimeout(this.hoverTimeout);
+      this.hoverTimeout = setTimeout(() => this.show(), delay);
     }
   }
 
   handleMouseOut() {
     if (this.hasTrigger('hover')) {
-      this.hide();
+      const delay = parseDuration(getComputedStyle(this).getPropertyValue('--hide-delay'));
+      clearTimeout(this.hoverTimeout);
+      this.hoverTimeout = setTimeout(() => this.hide(), delay);
     }
   }
 
@@ -258,11 +300,21 @@ export default class SlTooltip extends LitElement {
     if (this.popover) {
       this.popover.setOptions({
         placement: this.placement,
-        distance: this.distance,
-        skidding: this.skidding,
-        transitionElement: this.tooltip,
-        onAfterHide: () => this.slAfterHide.emit(),
-        onAfterShow: () => this.slAfterShow.emit()
+        strategy: 'absolute',
+        modifiers: [
+          {
+            name: 'flip',
+            options: {
+              boundary: 'viewport'
+            }
+          },
+          {
+            name: 'offset',
+            options: {
+              offset: [this.skidding, this.distance]
+            }
+          }
+        ]
       });
     }
   }
@@ -288,6 +340,19 @@ export default class SlTooltip extends LitElement {
     `;
   }
 }
+
+setDefaultAnimation('tooltip.show', {
+  keyframes: [{ opacity: 0 }, { opacity: 0, transform: 'scale(0.8)' }, { opacity: 1, transform: 'scale(1)' }],
+  options: { duration: 150, easing: 'ease' }
+});
+
+setDefaultAnimation('tooltip.hide', {
+  keyframes: [
+    { opacity: 1, transform: 'scale(1)' },
+    { opacity: 0, transform: 'scale(0.8)' }
+  ],
+  options: { duration: 150, easing: 'ease' }
+});
 
 declare global {
   interface HTMLElementTagNameMap {
