@@ -45,7 +45,7 @@ export default class SlTabGroup extends LitElement {
   @state() private hasScrollControls = false;
 
   /** The placement of the tabs. */
-  @property() placement: 'top' | 'bottom' | 'left' | 'right' = 'top';
+  @property() placement: 'top' | 'bottom' | 'start' | 'end' = 'top';
 
   /**
    * When set to auto, navigating tabs with the arrow keys will instantly show the corresponding tab panel. When set to
@@ -298,8 +298,8 @@ export default class SlTabGroup extends LitElement {
         this.indicator.style.transform = `translateX(${offsetLeft}px)`;
         break;
 
-      case 'left':
-      case 'right':
+      case 'start':
+      case 'end':
         this.indicator.style.width = 'auto';
         this.indicator.style.height = `${height}px`;
         this.indicator.style.transform = `translateY(${offsetTop}px)`;
@@ -333,8 +333,8 @@ export default class SlTabGroup extends LitElement {
           'tab-group': true,
           'tab-group--top': this.placement === 'top',
           'tab-group--bottom': this.placement === 'bottom',
-          'tab-group--left': this.placement === 'left',
-          'tab-group--right': this.placement === 'right',
+          'tab-group--start': this.placement === 'start',
+          'tab-group--end': this.placement === 'end',
           'tab-group--has-scroll-controls': this.hasScrollControls
         })}
         @click=${this.handleClick}

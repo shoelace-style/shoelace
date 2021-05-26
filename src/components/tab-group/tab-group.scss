@@ -44,11 +44,11 @@
   width: var(--sl-spacing-x-large);
 }
 
-.tab-group__scroll-button--left {
+.tab-group__scroll-button--start {
   left: 0;
 }
 
-.tab-group__scroll-button--right {
+.tab-group__scroll-button--end {
   right: 0;
 }
 
@@ -124,7 +124,7 @@
 // Left
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.tab-group--left {
+.tab-group--start {
   flex-direction: row;
 
   .tab-group__nav-container {
@@ -152,7 +152,7 @@
 // Right
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.tab-group--right {
+.tab-group--end {
   flex-direction: row;
 
   .tab-group__nav-container {

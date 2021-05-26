@@ -40,12 +40,12 @@ Tabs can be shown on the bottom by setting `placement` to `bottom`.
 </sl-tab-group>
 ```
 
-### Tabs on Left
+### Tabs on Start
 
-Tabs can be shown on the left by setting `placement` to `left`.
+Tabs can be shown on the starting side by setting `placement` to `start`.
 
 ```html preview
-<sl-tab-group placement="left">
+<sl-tab-group placement="start">
   <sl-tab slot="nav" panel="general">General</sl-tab>
   <sl-tab slot="nav" panel="custom">Custom</sl-tab>
   <sl-tab slot="nav" panel="advanced">Advanced</sl-tab>
@@ -58,12 +58,12 @@ Tabs can be shown on the left by setting `placement` to `left`.
 </sl-tab-group>
 ```
 
-### Tabs on Right
+### Tabs on End
 
-Tabs can be shown on the right by setting `placement` to `right`.
+Tabs can be shown on the ending side by setting `placement` to `end`.
 
 ```html preview
-<sl-tab-group placement="right">
+<sl-tab-group placement="end">
   <sl-tab slot="nav" panel="general">General</sl-tab>
   <sl-tab slot="nav" panel="custom">Custom</sl-tab>
   <sl-tab slot="nav" panel="advanced">Advanced</sl-tab>
