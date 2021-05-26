@@ -14,9 +14,10 @@ CSS animations, on the other hand, have a more reliable `animationend` event. Al
 
 The most elegant solution I found was to use the [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API), which offers more control over animations at the expense of customizations being done in JavaScript. Fortunately, through the [Animation Registry](/getting-started/customizing#animations), you can customize animations globally and/or per component with a minimal amount of code.
 
-
+- 🚨 BREAKING: changed `left` and `right` placements to `start` and `end` in `sl-drawer`
+- 🚨 BREAKING: changed `left` and `right` placements to `start` and `end` in `sl-tab-group`
 - Added the Animation Registry
-- Updated animations for `sl-alert`, `sl-dialog`, ... to use the Animation Registry instead of CSS transitions
+- Updated animations for `sl-alert`, `sl-dialog`, `sl-drawer` to use the Animation Registry instead of CSS transitions
 - Improved a11y by respecting `prefers-reduced-motion` for all show/hide animations
 
 ## 2.0.0-beta.40
