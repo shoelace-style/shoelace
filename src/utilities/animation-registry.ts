@@ -1,5 +1,5 @@
 interface ElementAnimation {
-  keyframes: Keyframe[] | PropertyIndexedKeyframes;
+  keyframes: Keyframe[];
   options?: KeyframeAnimationOptions;
 }
 
@@ -12,7 +12,7 @@ const customAnimationRegistry = new WeakMap<Element, ElementAnimationMap>();
 
 //
 // Sets a default animation. Components should use the `name.animation` for primary animations and `name.part.animation`
-// for secondary animations, e.g. `alert.show` and `dialog.overlay.show`.
+// for secondary animations, e.g. `dialog.show` and `dialog.overlay.show`. For modifiers, use `drawer.showTop`.
 //
 export function setDefaultAnimation(animationName: string, animation: ElementAnimation) {
   defaultAnimationRegistry.set(animationName, animation);
@@ -31,7 +31,7 @@ export function setAnimation(el: Element, animationName: string, animation: Elem
 }
 
 //
-// Gets an element's custom animation. Falls back to the default animation if no custom one is found.
+// Gets an element's animation. Falls back to the default if no animation is found.
 //
 export function getAnimation(el: Element, animationName: string) {
   const customAnimation = customAnimationRegistry.get(el);
