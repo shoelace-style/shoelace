@@ -47,11 +47,12 @@ import styles from 'sass:./${tagNameWithoutPrefix}.scss';
  * @slot - The default slot.
  * @slot example - A named slot called example.
  *
- * @part example - An example part.
+ * @part base - The component's base wrapper.
  *
  * @customProperty example - An example custom property
  *
- * @animation example - An example animation.
+ * @animation example.show - An example animation.
+ * @animation example.hide - An example animation.
  */
 @customElement('${tagName}')
 export default class ${className} extends LitElement {
