@@ -24,20 +24,20 @@ Drawers slide in from a container to expose additional options and information.
 
 ## Examples
 
-### Slide in From Left
+### Slide in From Start
 
-To make the drawer slide in from the left, set the `placement` attribute to `left`.
+By default, drawers slide in from the end. To make the drawer slide in from the start, set the `placement` attribute to `start`.
 
 ```html preview
-<sl-drawer label="Drawer" placement="left" class="drawer-placement-left">
-  This drawer slides in from the left.
+<sl-drawer label="Drawer" placement="start" class="drawer-placement-start">
+  This drawer slides in from the start.
   <sl-button slot="footer" type="primary">Close</sl-button>
 </sl-drawer>
 
 <sl-button>Open Drawer</sl-button>
 
 <script>
-  const drawer = document.querySelector('.drawer-placement-left');
+  const drawer = document.querySelector('.drawer-placement-start');
   const openButton = drawer.nextElementSibling;
   const closeButton = drawer.querySelector('sl-button[type="primary"]');
 

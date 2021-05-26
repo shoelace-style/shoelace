@@ -17,10 +17,6 @@
   height: 100%;
   pointer-events: none;
   overflow: hidden;
-
-  &:not(.drawer--visible) {
-    @include hide.hidden;
-  }
 }
 
 .drawer--contained {
@@ -58,17 +54,15 @@
   left: 0;
   width: 100%;
   height: var(--size);
-  transform: translate(0, -100%);
 }
 
-.drawer--right .drawer__panel {
+.drawer--end .drawer__panel {
   top: 0;
   right: 0;
   bottom: auto;
   left: auto;
   width: var(--size);
   height: 100%;
-  transform: translate(100%, 0);
 }
 
 .drawer--bottom .drawer__panel {
@@ -78,21 +72,15 @@
   left: 0;
   width: 100%;
   height: var(--size);
-  transform: translate(0, 100%);
 }
 
-.drawer--left .drawer__panel {
+.drawer--start .drawer__panel {
   top: 0;
   right: auto;
   bottom: auto;
   left: 0;
   width: var(--size);
   height: 100%;
-  transform: translate(-100%, 0);
-}
-
-.drawer--open .drawer__panel {
-  transform: translate(0, 0);
 }
 
 .drawer__header {
@@ -142,15 +130,9 @@
   bottom: 0;
   left: 0;
   background-color: var(--sl-overlay-background-color);
-  opacity: 0;
-  transition: var(--sl-transition-medium) opacity;
   pointer-events: all;
 }
 
 .drawer--contained .drawer__overlay {
   position: absolute;
-}
-
-.drawer--open .drawer__overlay {
-  opacity: 1;
 }

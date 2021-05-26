@@ -2,11 +2,14 @@ import { LitElement, html, unsafeCSS } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
+import { animateTo, stopAnimations } from '../../internal/animate';
 import { event, EventEmitter, watch } from '../../internal/decorators';
 import { lockBodyScrolling, unlockBodyScrolling } from '../../internal/scroll';
 import { hasSlot } from '../../internal/slot';
+import { uppercaseFirstLetter } from '../../internal/string';
 import { isPreventScrollSupported } from '../../internal/support';
 import Modal from '../../internal/modal';
+import { setDefaultAnimation, getAnimation } from '../../utilities/animation-registry';
 import styles from 'sass:./drawer.scss';
 
 const hasPreventScroll = isPreventScrollSupported();
@@ -32,11 +35,22 @@ let id = 0;
  * @part body - The drawer body.
  * @part footer - The drawer footer.
  *
- * @customProperty --size - The preferred size of the drawer. This will be applied to the drawer's width or height depending on its
- *   `placement`. Note that the drawer will shrink to accommodate smaller screens.
+ * @customProperty --size - The preferred size of the drawer. This will be applied to the drawer's width or height
+ *   depending on its `placement`. Note that the drawer will shrink to accommodate smaller screens.
  * @customProperty --header-spacing - The amount of padding to use for the header.
  * @customProperty --body-spacing - The amount of padding to use for the body.
  * @customProperty --footer-spacing - The amount of padding to use for the footer.
+ *
+ * @animation drawer.showTop - The animation to use when showing a drawer with `top` placement.
+ * @animation drawer.showEnd - The animation to use when showing a drawer with `end` placement.
+ * @animation drawer.showBottom - The animation to use when showing a drawer with `bottom` placement.
+ * @animation drawer.showStart - The animation to use when showing a drawer with `start` placement.
+ * @animation drawer.hideTop - The animation to use when hiding a drawer with `top` placement.
+ * @animation drawer.hideEnd - The animation to use when hiding a drawer with `end` placement.
+ * @animation drawer.hideBottom - The animation to use when hiding a drawer with `bottom` placement.
+ * @animation drawer.hideStart - The animation to use when hiding a drawer with `start` placement.
+ * @animation drawer.overlay.show - The animation to use when showing the drawer's overlay.
+ * @animation drawer.overlay.hide - The animation to use when hiding the drawer's overlay.
  */
 @customElement('sl-drawer')
 export default class SlDrawer extends LitElement {
@@ -44,15 +58,14 @@ export default class SlDrawer extends LitElement {
 
   @query('.drawer') drawer: HTMLElement;
   @query('.drawer__panel') panel: HTMLElement;
+  @query('.drawer__overlay') overlay: HTMLElement;
 
   private componentId = `drawer-${++id}`;
+  private hasInitialized = false;
   private modal: Modal;
   private originalTrigger: HTMLElement | null;
-  private willShow = false;
-  private willHide = false;
 
   @state() private hasFooter = false;
-  @state() private isVisible = false;
 
   /** Indicates whether or not the drawer is open. You can use this in lieu of the show/hide methods. */
   @property({ type: Boolean, reflect: true }) open = false;
@@ -64,7 +77,7 @@ export default class SlDrawer extends LitElement {
   @property({ reflect: true }) label = '';
 
   /** The direction from which the drawer will open. */
-  @property({ reflect: true }) placement: 'top' | 'right' | 'bottom' | 'left' = 'right';
+  @property({ reflect: true }) placement: 'top' | 'end' | 'bottom' | 'start' = 'end';
 
   /**
    * By default, the drawer slides out of its containing block (usually the viewport). To make the drawer slide out of
@@ -108,14 +121,23 @@ export default class SlDrawer extends LitElement {
     }
   }
 
+  async firstUpdated() {
+    // Set initial visibility
+    this.drawer.hidden = !this.open;
+
+    // Set the initialized flag after the first update is complete
+    await this.updateComplete;
+    this.hasInitialized = true;
+  }
+
   disconnectedCallback() {
     super.disconnectedCallback();
     unlockBodyScrolling(this);
   }
 
   /** Shows the drawer */
-  show() {
-    if (this.willShow) {
+  async show() {
+    if (!this.hasInitialized) {
       return;
     }
 
@@ -126,8 +148,6 @@ export default class SlDrawer extends LitElement {
     }
 
     this.originalTrigger = document.activeElement as HTMLElement;
-    this.willShow = true;
-    this.isVisible = true;
     this.open = true;
 
     // Lock body scrolling only if the drawer isn't contained
@@ -136,40 +156,39 @@ export default class SlDrawer extends LitElement {
       lockBodyScrolling(this);
     }
 
-    if (this.open) {
-      if (hasPreventScroll) {
-        // Wait for the next frame before setting initial focus so the drawer is technically visible
-        requestAnimationFrame(() => {
-          const slInitialFocus = this.slInitialFocus.emit();
-          if (!slInitialFocus.defaultPrevented) {
-            this.panel.focus({ preventScroll: true });
-          }
-        });
-      } else {
-        // Once Safari supports { preventScroll: true } we can remove this nasty little hack, but until then we need to
-        // wait for the transition to complete before setting focus, otherwise the panel may render in a buggy way its
-        // out of view initially.
-        //
-        // Fiddle: https://jsfiddle.net/g6buoafq/1/
-        // Safari: https://bugs.webkit.org/show_bug.cgi?id=178583
-        //
-        this.drawer.addEventListener(
-          'transitionend',
-          () => {
-            const slInitialFocus = this.slInitialFocus.emit();
-            if (!slInitialFocus.defaultPrevented) {
-              this.panel.focus();
-            }
-          },
-          { once: true }
-        );
+    await Promise.all([stopAnimations(this.drawer), stopAnimations(this.overlay)]);
+    this.drawer.hidden = false;
+
+    // Browsers that support el.focus({ preventScroll }) can set initial focus immediately
+    if (hasPreventScroll) {
+      const slInitialFocus = this.slInitialFocus.emit();
+      if (!slInitialFocus.defaultPrevented) {
+        this.panel.focus({ preventScroll: true });
       }
     }
+
+    const panelAnimation = getAnimation(this, `drawer.show${uppercaseFirstLetter(this.placement)}`);
+    const overlayAnimation = getAnimation(this, 'drawer.overlay.show');
+    await Promise.all([
+      animateTo(this.panel, panelAnimation.keyframes, panelAnimation.options),
+      animateTo(this.overlay, overlayAnimation.keyframes, overlayAnimation.options)
+    ]);
+
+    // Browsers that don't support el.focus({ preventScroll }) have to wait for the animation to finish before initial
+    // focus to prevent scrolling issues. See: https://caniuse.com/mdn-api_htmlelement_focus_preventscroll_option
+    if (!hasPreventScroll) {
+      const slInitialFocus = this.slInitialFocus.emit();
+      if (!slInitialFocus.defaultPrevented) {
+        this.panel.focus({ preventScroll: true });
+      }
+    }
+
+    this.slAfterShow.emit();
   }
 
   /** Hides the drawer */
-  hide() {
-    if (this.willHide) {
+  async hide() {
+    if (!this.hasInitialized) {
       return;
     }
 
@@ -179,15 +198,27 @@ export default class SlDrawer extends LitElement {
       return;
     }
 
-    this.willHide = true;
     this.open = false;
     this.modal.deactivate();
+    unlockBodyScrolling(this);
+
+    await Promise.all([stopAnimations(this.drawer), stopAnimations(this.overlay)]);
+    const panelAnimation = getAnimation(this, `drawer.hide${uppercaseFirstLetter(this.placement)}`);
+    const overlayAnimation = getAnimation(this, 'drawer.overlay.hide');
+    await Promise.all([
+      animateTo(this.panel, panelAnimation.keyframes, panelAnimation.options),
+      animateTo(this.overlay, overlayAnimation.keyframes, overlayAnimation.options)
+    ]);
+
+    this.drawer.hidden = true;
 
     // Restore focus to the original trigger
     const trigger = this.originalTrigger;
     if (trigger && typeof trigger.focus === 'function') {
       setTimeout(() => trigger.focus());
     }
+
+    this.slAfterHide.emit();
   }
 
   handleCloseClick() {
@@ -217,22 +248,6 @@ export default class SlDrawer extends LitElement {
     this.hasFooter = hasSlot(this, 'footer');
   }
 
-  handleTransitionEnd(event: TransitionEvent) {
-    const target = event.target as HTMLElement;
-
-    // Ensure we only emit one event when the target element is no longer visible
-    if (event.propertyName === 'transform' && target.classList.contains('drawer__panel')) {
-      this.isVisible = this.open;
-      this.willShow = false;
-      this.willHide = false;
-      this.open ? this.slAfterShow.emit() : this.slAfterHide.emit();
-
-      if (!this.open) {
-        unlockBodyScrolling(this);
-      }
-    }
-  }
-
   render() {
     return html`
       <div
@@ -240,17 +255,15 @@ export default class SlDrawer extends LitElement {
         class=${classMap({
           drawer: true,
           'drawer--open': this.open,
-          'drawer--visible': this.isVisible,
           'drawer--top': this.placement === 'top',
-          'drawer--right': this.placement === 'right',
+          'drawer--end': this.placement === 'end',
           'drawer--bottom': this.placement === 'bottom',
-          'drawer--left': this.placement === 'left',
+          'drawer--start': this.placement === 'start',
           'drawer--contained': this.contained,
           'drawer--fixed': !this.contained,
           'drawer--has-footer': this.hasFooter
         })}
         @keydown=${this.handleKeyDown}
-        @transitionend=${this.handleTransitionEnd}
       >
         <div part="overlay" class="drawer__overlay" @click=${this.handleOverlayClick} tabindex="-1"></div>
 
@@ -294,6 +307,85 @@ export default class SlDrawer extends LitElement {
     `;
   }
 }
+
+// Top
+setDefaultAnimation('drawer.showTop', {
+  keyframes: [
+    { opacity: 0, transform: 'translateY(-100%)' },
+    { opacity: 1, transform: 'translateY(0)' }
+  ],
+  options: { duration: 250, easing: 'ease' }
+});
+
+setDefaultAnimation('drawer.hideTop', {
+  keyframes: [
+    { opacity: 1, transform: 'translateY(0)' },
+    { opacity: 0, transform: 'translateY(-100%)' }
+  ],
+  options: { duration: 250, easing: 'ease' }
+});
+
+// End
+setDefaultAnimation('drawer.showEnd', {
+  keyframes: [
+    { opacity: 0, transform: 'translateX(100%)' },
+    { opacity: 1, transform: 'translateX(0)' }
+  ],
+  options: { duration: 250, easing: 'ease' }
+});
+
+setDefaultAnimation('drawer.hideEnd', {
+  keyframes: [
+    { opacity: 1, transform: 'translateX(0)' },
+    { opacity: 0, transform: 'translateX(100%)' }
+  ],
+  options: { duration: 250, easing: 'ease' }
+});
+
+// Bottom
+setDefaultAnimation('drawer.showBottom', {
+  keyframes: [
+    { opacity: 0, transform: 'translateY(100%)' },
+    { opacity: 1, transform: 'translateY(0)' }
+  ],
+  options: { duration: 250, easing: 'ease' }
+});
+
+setDefaultAnimation('drawer.hideBottom', {
+  keyframes: [
+    { opacity: 1, transform: 'translateY(0)' },
+    { opacity: 0, transform: 'translateY(100%)' }
+  ],
+  options: { duration: 250, easing: 'ease' }
+});
+
+// Start
+setDefaultAnimation('drawer.showStart', {
+  keyframes: [
+    { opacity: 0, transform: 'translateX(-100%)' },
+    { opacity: 1, transform: 'translateX(0)' }
+  ],
+  options: { duration: 250, easing: 'ease' }
+});
+
+setDefaultAnimation('drawer.hideStart', {
+  keyframes: [
+    { opacity: 1, transform: 'translateX(0)' },
+    { opacity: 0, transform: 'translateX(-100%)' }
+  ],
+  options: { duration: 250, easing: 'ease' }
+});
+
+// Overlay
+setDefaultAnimation('drawer.overlay.show', {
+  keyframes: [{ opacity: 0 }, { opacity: 1 }],
+  options: { duration: 250 }
+});
+
+setDefaultAnimation('drawer.overlay.hide', {
+  keyframes: [{ opacity: 1 }, { opacity: 0 }],
+  options: { duration: 250 }
+});
 
 declare global {
   interface HTMLElementTagNameMap {
