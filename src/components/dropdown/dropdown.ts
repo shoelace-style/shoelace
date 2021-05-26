@@ -95,24 +95,27 @@ export default class SlDropdown extends LitElement {
     if (!this.containingElement) {
       this.containingElement = this;
     }
+
+    // Create the popover after render
+    this.updateComplete.then(() => {
+      this.popover = new Popover(this.trigger, this.positioner, {
+        strategy: this.hoist ? 'fixed' : 'absolute',
+        placement: this.placement,
+        distance: this.distance,
+        skidding: this.skidding,
+        transitionElement: this.panel,
+        onAfterHide: () => this.slAfterHide.emit(),
+        onAfterShow: () => this.slAfterShow.emit(),
+        onTransitionEnd: () => {
+          if (!this.open) {
+            this.panel.scrollTop = 0;
+          }
+        }
+      });
+    });
   }
 
   firstUpdated() {
-    this.popover = new Popover(this.trigger, this.positioner, {
-      strategy: this.hoist ? 'fixed' : 'absolute',
-      placement: this.placement,
-      distance: this.distance,
-      skidding: this.skidding,
-      transitionElement: this.panel,
-      onAfterHide: () => this.slAfterHide.emit(),
-      onAfterShow: () => this.slAfterShow.emit(),
-      onTransitionEnd: () => {
-        if (!this.open) {
-          this.panel.scrollTop = 0;
-        }
-      }
-    });
-
     // Show on init if open
     if (this.open) {
       this.show();
