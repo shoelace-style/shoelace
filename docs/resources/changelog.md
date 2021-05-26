@@ -18,7 +18,7 @@ The most elegant solution I found was to use the [Web Animations API](https://de
 - 🚨 BREAKING: changed `left` and `right` placements to `start` and `end` in `sl-tab-group`
 - Added the Animation Registry
 - Fixed a bug where removing `sl-dropdown` from the DOM and adding it back destroyed the popover reference [#443](https://github.com/shoelace-style/shoelace/issues/443)
-- Updated animations for `sl-alert`, `sl-dialog`, `sl-drawer` to use the Animation Registry instead of CSS transitions
+- Updated animations for `sl-alert`, `sl-dialog`, `sl-drawer`, and `sl-dropdown` to use the Animation Registry instead of CSS transitions
 - Improved a11y by respecting `prefers-reduced-motion` for all show/hide animations
 
 ## 2.0.0-beta.40

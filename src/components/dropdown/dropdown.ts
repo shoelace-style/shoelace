@@ -1,10 +1,12 @@
 import { LitElement, html, unsafeCSS } from 'lit';
 import { customElement, property, query } from 'lit/decorators';
 import { classMap } from 'lit-html/directives/class-map';
+import { Instance as PopperInstance, createPopper } from '@popperjs/core/dist/esm';
+import { animateTo, stopAnimations } from '../../internal/animate';
 import { event, EventEmitter, watch } from '../../internal/decorators';
 import { scrollIntoView } from '../../internal/scroll';
 import { getNearestTabbableElement } from '../../internal/tabbable';
-import Popover from '../../internal/popover';
+import { setDefaultAnimation, getAnimation } from '../../utilities/animation-registry';
 import SlMenu from '../menu/menu';
 import SlMenuItem from '../menu-item/menu-item';
 import styles from 'sass:./dropdown.scss';
@@ -21,6 +23,9 @@ let id = 0;
  * @part base - The component's base wrapper.
  * @part trigger - The container that wraps the trigger.
  * @part panel - The panel that gets shown when the dropdown is open.
+ *
+ * @animation dropdown.show - The animation to use when showing the dropdown.
+ * @animation dropdown.hide - The animation to use when hiding the dropdown.
  */
 @customElement('sl-dropdown')
 export default class SlDropdown extends LitElement {
@@ -31,8 +36,8 @@ export default class SlDropdown extends LitElement {
   @query('.dropdown__positioner') positioner: HTMLElement;
 
   private componentId = `dropdown-${++id}`;
-  private isVisible = false;
-  private popover: Popover;
+  private hasInitialized = false;
+  private popover: PopperInstance;
 
   /** Indicates whether or not the dropdown is open. You can use this in lieu of the show/hide methods. */
   @property({ type: Boolean, reflect: true }) open = false;
@@ -76,13 +81,13 @@ export default class SlDropdown extends LitElement {
   /** Emitted when the dropdown opens. Calling `event.preventDefault()` will prevent it from being opened. */
   @event('sl-show') slShow: EventEmitter<void>;
 
-  /** Emitted after the dropdown opens and all transitions are complete. */
+  /** Emitted after the dropdown opens and all animations are complete. */
   @event('sl-after-show') slAfterShow: EventEmitter<void>;
 
   /** Emitted when the dropdown closes. Calling `event.preventDefault()` will prevent it from being closed. */
   @event('sl-hide') slHide: EventEmitter<void>;
 
-  /** Emitted after the dropdown closes and all transitions are complete. */
+  /** Emitted after the dropdown closes and all animations are complete. */
   @event('sl-after-hide') slAfterHide: EventEmitter<void>;
 
   connectedCallback() {
@@ -98,28 +103,34 @@ export default class SlDropdown extends LitElement {
 
     // Create the popover after render
     this.updateComplete.then(() => {
-      this.popover = new Popover(this.trigger, this.positioner, {
-        strategy: this.hoist ? 'fixed' : 'absolute',
+      this.popover = createPopper(this.trigger, this.positioner, {
         placement: this.placement,
-        distance: this.distance,
-        skidding: this.skidding,
-        transitionElement: this.panel,
-        onAfterHide: () => this.slAfterHide.emit(),
-        onAfterShow: () => this.slAfterShow.emit(),
-        onTransitionEnd: () => {
-          if (!this.open) {
-            this.panel.scrollTop = 0;
+        strategy: this.hoist ? 'fixed' : 'absolute',
+        modifiers: [
+          {
+            name: 'flip',
+            options: {
+              boundary: 'viewport'
+            }
+          },
+          {
+            name: 'offset',
+            options: {
+              offset: [this.skidding, this.distance]
+            }
           }
-        }
+        ]
       });
     });
   }
 
-  firstUpdated() {
-    // Show on init if open
-    if (this.open) {
-      this.show();
-    }
+  async firstUpdated() {
+    // Set initial visibility
+    this.panel.hidden = !this.open;
+
+    // Set the initialized flag after the first update is complete
+    await this.updateComplete;
+    this.hasInitialized = true;
   }
 
   disconnectedCallback() {
@@ -208,10 +219,22 @@ export default class SlDropdown extends LitElement {
   handlePopoverOptionsChange() {
     if (this.popover) {
       this.popover.setOptions({
-        strategy: this.hoist ? 'fixed' : 'absolute',
         placement: this.placement,
-        distance: this.distance,
-        skidding: this.skidding
+        strategy: this.hoist ? 'fixed' : 'absolute',
+        modifiers: [
+          {
+            name: 'flip',
+            options: {
+              boundary: 'viewport'
+            }
+          },
+          {
+            name: 'offset',
+            options: {
+              offset: [this.skidding, this.distance]
+            }
+          }
+        ]
       });
     }
   }
@@ -307,9 +330,9 @@ export default class SlDropdown extends LitElement {
   }
 
   /** Shows the dropdown panel */
-  show() {
+  async show() {
     // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
-    if (this.isVisible) {
+    if (!this.hasInitialized) {
       return;
     }
 
@@ -319,20 +342,25 @@ export default class SlDropdown extends LitElement {
       return;
     }
 
+    this.open = true;
+
     this.panel.addEventListener('sl-activate', this.handleMenuItemActivate);
     this.panel.addEventListener('sl-select', this.handlePanelSelect);
     document.addEventListener('keydown', this.handleDocumentKeyDown);
     document.addEventListener('mousedown', this.handleDocumentMouseDown);
 
-    this.isVisible = true;
-    this.open = true;
-    this.popover.show();
+    await stopAnimations(this);
+    this.panel.hidden = false;
+    const { keyframes, options } = getAnimation(this, 'dropdown.show');
+    await animateTo(this.panel, keyframes, options);
+
+    this.slAfterShow.emit();
   }
 
   /** Hides the dropdown panel */
-  hide() {
+  async hide() {
     // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
-    if (!this.isVisible) {
+    if (!this.hasInitialized) {
       return;
     }
 
@@ -342,14 +370,19 @@ export default class SlDropdown extends LitElement {
       return;
     }
 
+    this.open = false;
+
     this.panel.removeEventListener('sl-activate', this.handleMenuItemActivate);
     this.panel.removeEventListener('sl-select', this.handlePanelSelect);
     document.addEventListener('keydown', this.handleDocumentKeyDown);
     document.removeEventListener('mousedown', this.handleDocumentMouseDown);
 
-    this.isVisible = false;
-    this.open = false;
-    this.popover.hide();
+    await stopAnimations(this);
+    const { keyframes, options } = getAnimation(this, 'dropdown.hide');
+    await animateTo(this.panel, keyframes, options);
+    this.panel.hidden = true;
+
+    this.slAfterHide.emit();
   }
 
   /**
@@ -361,7 +394,7 @@ export default class SlDropdown extends LitElement {
       return;
     }
 
-    this.popover.reposition();
+    this.popover.update();
   }
 
   @watch('open')
@@ -391,7 +424,7 @@ export default class SlDropdown extends LitElement {
           <slot name="trigger" @slotchange=${this.handleTriggerSlotChange}></slot>
         </span>
 
-        <!-- Position the panel with a wrapper since the popover makes use of translate. This let's us add transitions
+        <!-- Position the panel with a wrapper since the popover makes use of translate. This let's us add animations
         on the panel without interfering with the position. -->
         <div class="dropdown__positioner">
           <div
@@ -408,6 +441,22 @@ export default class SlDropdown extends LitElement {
     `;
   }
 }
+
+setDefaultAnimation('dropdown.show', {
+  keyframes: [
+    { opacity: 0, transform: 'scale(0.9)' },
+    { opacity: 1, transform: 'scale(1)' }
+  ],
+  options: { duration: 150, easing: 'ease' }
+});
+
+setDefaultAnimation('dropdown.hide', {
+  keyframes: [
+    { opacity: 1, transform: 'scale(1)' },
+    { opacity: 0, transform: 'scale(0.9)' }
+  ],
+  options: { duration: 150, easing: 'ease' }
+});
 
 declare global {
   interface HTMLElementTagNameMap {

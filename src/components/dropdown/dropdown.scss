@@ -27,12 +27,8 @@
   border: solid 1px var(--sl-panel-border-color);
   border-radius: var(--sl-border-radius-medium);
   box-shadow: var(--sl-shadow-large);
-  opacity: 0;
   overflow: auto;
   overscroll-behavior: none;
-  pointer-events: none;
-  transform: scale(0.9);
-  transition: var(--sl-transition-fast) opacity, var(--sl-transition-fast) transform;
 }
 
 .dropdown__positioner {
@@ -50,11 +46,5 @@
 
   &[data-popper-placement^='right'] .dropdown__panel {
     transform-origin: left;
-  }
-
-  &.popover-visible .dropdown__panel {
-    opacity: 1;
-    transform: none;
-    pointer-events: all;
   }
 }
