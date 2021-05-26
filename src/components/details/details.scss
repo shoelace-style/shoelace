@@ -63,16 +63,7 @@
 }
 
 .details__body {
-  height: 0;
   overflow: hidden;
-  transition-property: height;
-  transition-duration: var(--hide-duration);
-  transition-timing-function: var(--hide-timing-function);
-}
-
-.details--open .details__body {
-  transition-duration: var(--show-duration);
-  transition-timing-function: var(--show-timing-function);
 }
 
 .details__content {

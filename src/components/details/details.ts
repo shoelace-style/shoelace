@@ -1,8 +1,10 @@
 import { LitElement, html, unsafeCSS } from 'lit';
 import { customElement, property, query } from 'lit/decorators';
 import { classMap } from 'lit-html/directives/class-map';
+import { animateTo, stopAnimations, shimKeyframesHeightAuto } from '../../internal/animate';
 import { event, EventEmitter, watch } from '../../internal/decorators';
 import { focusVisible } from '../../internal/focus-visible';
+import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
 import styles from 'sass:./details.scss';
 
 let id = 0;
@@ -26,6 +28,9 @@ let id = 0;
  * @customProperty --hide-timing-function - The timing function (easing) to use for the hide transition.
  * @customProperty --show-duration - The length of the show transition.
  * @customProperty --show-timing-function - The timing function (easing) to use for the show transition.
+ *
+ * @animation details.show - The animation to use when showing details. You can use `height: auto` with this animation.
+ * @animation details.hide - The animation to use when hiding details. You can use `height: auto` with this animation.
  */
 @customElement('sl-details')
 export default class SlDetails extends LitElement {
@@ -36,7 +41,7 @@ export default class SlDetails extends LitElement {
   @query('.details__body') body: HTMLElement;
 
   private componentId = `details-${++id}`;
-  private isVisible = false;
+  private hasInitialized = false;
 
   /** Indicates whether or not the details is open. You can use this in lieu of the show/hide methods. */
   @property({ type: Boolean, reflect: true }) open = false;
@@ -59,16 +64,15 @@ export default class SlDetails extends LitElement {
   /** Emitted after the details closes and all transitions are complete. */
   @event('sl-after-hide') slAfterHide: EventEmitter<void>;
 
-  connectedCallback() {
-    super.connectedCallback();
-    this.isVisible = this.open;
-  }
-
-  firstUpdated() {
+  async firstUpdated() {
     focusVisible.observe(this.details);
 
     this.body.hidden = !this.open;
     this.body.style.height = this.open ? 'auto' : '0';
+
+    // Set the initialized flag after the first update is complete
+    await this.updateComplete;
+    this.hasInitialized = true;
   }
 
   disconnectedCallback() {
@@ -77,9 +81,8 @@ export default class SlDetails extends LitElement {
   }
 
   /** Shows the alert. */
-  show() {
-    // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
-    if (this.isVisible || this.disabled) {
+  async show() {
+    if (!this.hasInitialized || this.disabled) {
       return;
     }
 
@@ -89,26 +92,21 @@ export default class SlDetails extends LitElement {
       return;
     }
 
+    await stopAnimations(this);
     this.body.hidden = false;
-
-    if (this.body.scrollHeight === 0) {
-      // When the scroll height can't be measured, use auto. This prevents a borked open state when the details is open
-      // intitially, but not immediately visible (i.e. in a tab panel).
-      this.body.style.height = 'auto';
-      this.body.style.overflow = 'visible';
-    } else {
-      this.body.style.height = `${this.body.scrollHeight}px`;
-      this.body.style.overflow = 'hidden';
-    }
-
-    this.isVisible = true;
     this.open = true;
+
+    const { keyframes, options } = getAnimation(this, 'details.show');
+    await animateTo(this.body, shimKeyframesHeightAuto(keyframes, this.body.scrollHeight), options);
+    this.body.style.height = 'auto';
+
+    this.slAfterShow.emit();
   }
 
   /** Hides the alert */
-  hide() {
+  async hide() {
     // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
-    if (!this.isVisible || this.disabled) {
+    if (!this.hasInitialized || this.disabled) {
       return;
     }
 
@@ -118,29 +116,15 @@ export default class SlDetails extends LitElement {
       return;
     }
 
-    // We can't transition out of `height: auto`, so let's set it to the current height first
-    this.body.style.height = `${this.body.scrollHeight}px`;
-    this.body.style.overflow = 'hidden';
-
-    requestAnimationFrame(() => {
-      this.body.clientWidth; // force a reflow
-      this.body.style.height = '0';
-    });
-
-    this.isVisible = false;
+    await stopAnimations(this);
     this.open = false;
-  }
 
-  handleBodyTransitionEnd(event: TransitionEvent) {
-    const target = event.target as HTMLElement;
+    const { keyframes, options } = getAnimation(this, 'details.hide');
+    await animateTo(this.body, shimKeyframesHeightAuto(keyframes, this.body.scrollHeight), options);
+    this.body.hidden = true;
+    this.body.style.height = 'auto';
 
-    // Ensure we only emit one event when the target element is no longer visible
-    if (event.propertyName === 'height' && target.classList.contains('details__body')) {
-      this.body.style.overflow = this.open ? 'visible' : 'hidden';
-      this.body.style.height = this.open ? 'auto' : '0';
-      this.open ? this.slAfterShow.emit() : this.slAfterHide.emit();
-      this.body.hidden = !this.open;
-    }
+    this.slAfterHide.emit();
   }
 
   handleSummaryClick() {
@@ -203,7 +187,7 @@ export default class SlDetails extends LitElement {
           </span>
         </header>
 
-        <div class="details__body" @transitionend=${this.handleBodyTransitionEnd}>
+        <div class="details__body">
           <div
             part="content"
             id=${`${this.componentId}-content`}
@@ -218,6 +202,22 @@ export default class SlDetails extends LitElement {
     `;
   }
 }
+
+setDefaultAnimation('details.show', {
+  keyframes: [
+    { height: '0', opacity: '0' },
+    { height: 'auto', opacity: '1' }
+  ],
+  options: { duration: 250, easing: 'linear' }
+});
+
+setDefaultAnimation('details.hide', {
+  keyframes: [
+    { height: 'auto', opacity: '1' },
+    { height: '0', opacity: '0' }
+  ],
+  options: { duration: 250, easing: 'linear' }
+});
 
 declare global {
   interface HTMLElementTagNameMap {
