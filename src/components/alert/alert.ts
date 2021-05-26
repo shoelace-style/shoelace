@@ -92,8 +92,8 @@ export default class SlAlert extends LitElement {
 
     await stopAnimations(this.base);
     this.base.hidden = false;
-    const animation = getAnimation(this, 'alert.show');
-    await animateTo(this.base, animation.keyframes, animation.options);
+    const { keyframes, options } = getAnimation(this, 'alert.show');
+    await animateTo(this.base, keyframes, options);
 
     this.slAfterShow.emit();
   }
@@ -115,8 +115,8 @@ export default class SlAlert extends LitElement {
     clearTimeout(this.autoHideTimeout);
 
     await stopAnimations(this.base);
-    const animation = getAnimation(this, 'alert.hide');
-    await animateTo(this.base, animation.keyframes, animation.options);
+    const { keyframes, options } = getAnimation(this, 'alert.hide');
+    await animateTo(this.base, keyframes, options);
     this.base.hidden = true;
 
     this.slAfterHide.emit();
