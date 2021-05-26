@@ -19,8 +19,8 @@ let id = 0;
  * @part base - The component's base wrapper.
  *
  * @customProperty --max-width - The maximum width of the tooltip.
- * @customProperty --hide-delay - The amount of time to wait before hiding the tooltip (hover only).
- * @customProperty --show-delay - The amount of time to wait before showing the tooltip (hover only).
+ * @customProperty --hide-delay - The amount of time to wait before hiding the tooltip when hovering.
+ * @customProperty --show-delay - The amount of time to wait before showing the tooltip when hovering.
  *
  * @animation tooltip.show - The animation to use when showing the tooltip.
  * @animation tooltip.hide - The animation to use when hiding the tooltip.
