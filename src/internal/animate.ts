@@ -19,6 +19,23 @@ export function animateTo(el: HTMLElement, keyframes: Keyframe[], options?: Keyf
 }
 
 //
+// Parses a CSS duration and returns the number of milliseconds.
+//
+export function parseDuration(delay: number | string) {
+  delay = (delay + '').toLowerCase();
+
+  if (delay.indexOf('ms') > -1) {
+    return parseFloat(delay);
+  }
+
+  if (delay.indexOf('s') > -1) {
+    return parseFloat(delay) * 1000;
+  }
+
+  return parseFloat(delay);
+}
+
+//
 // Tells if the user has enabled the "reduced motion" setting in their browser or OS.
 //
 export function prefersReducedMotion() {
