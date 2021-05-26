@@ -82,7 +82,7 @@ export default class SlDetails extends LitElement {
 
   /** Shows the alert. */
   async show() {
-    if (!this.hasInitialized || this.disabled) {
+    if (!this.hasInitialized || this.open || this.disabled) {
       return;
     }
 
@@ -106,7 +106,7 @@ export default class SlDetails extends LitElement {
   /** Hides the alert */
   async hide() {
     // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
-    if (!this.hasInitialized || this.disabled) {
+    if (!this.hasInitialized || !this.open || this.disabled) {
       return;
     }
 

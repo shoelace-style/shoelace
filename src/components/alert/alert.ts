@@ -74,7 +74,7 @@ export default class SlAlert extends LitElement {
 
   /** Shows the alert. */
   async show() {
-    if (!this.hasInitialized) {
+    if (!this.hasInitialized || this.open) {
       return;
     }
 
@@ -100,7 +100,7 @@ export default class SlAlert extends LitElement {
 
   /** Hides the alert */
   async hide() {
-    if (!this.hasInitialized) {
+    if (!this.hasInitialized || !this.open) {
       return;
     }
 

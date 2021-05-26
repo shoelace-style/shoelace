@@ -332,7 +332,7 @@ export default class SlDropdown extends LitElement {
   /** Shows the dropdown panel */
   async show() {
     // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
-    if (!this.hasInitialized) {
+    if (!this.hasInitialized || this.open) {
       return;
     }
 
@@ -360,7 +360,7 @@ export default class SlDropdown extends LitElement {
   /** Hides the dropdown panel */
   async hide() {
     // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
-    if (!this.hasInitialized) {
+    if (!this.hasInitialized || !this.open) {
       return;
     }
 

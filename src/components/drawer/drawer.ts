@@ -132,7 +132,7 @@ export default class SlDrawer extends LitElement {
 
   /** Shows the drawer */
   async show() {
-    if (!this.hasInitialized) {
+    if (!this.hasInitialized || this.open) {
       return;
     }
 
@@ -183,7 +183,7 @@ export default class SlDrawer extends LitElement {
 
   /** Hides the drawer */
   async hide() {
-    if (!this.hasInitialized) {
+    if (!this.hasInitialized || !this.open) {
       return;
     }
 

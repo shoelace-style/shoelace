@@ -118,7 +118,7 @@ export default class SlDialog extends LitElement {
 
   /** Shows the dialog */
   async show() {
-    if (!this.hasInitialized) {
+    if (!this.hasInitialized || this.open) {
       return;
     }
 
@@ -166,7 +166,7 @@ export default class SlDialog extends LitElement {
 
   /** Hides the dialog */
   async hide() {
-    if (!this.hasInitialized) {
+    if (!this.hasInitialized || !this.open) {
       return;
     }
 
