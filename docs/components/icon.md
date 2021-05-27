@@ -500,6 +500,7 @@ If you want to change the icons Shoelace uses internally, you can register an ic
       const loader = container.querySelector('.icon-loader');
       const list = container.querySelector('.icon-list');
       const queue = [];
+      let inputTimeout;
 
       // Generate icons
       icons.map(i => {
@@ -530,15 +531,18 @@ If you want to change the icons Shoelace uses internally, you can register an ic
 
       // Filter as the user types
       input.addEventListener('sl-input', () => {
-        [...list.querySelectorAll('.icon-list-item')].map(item => {
-          const filter = input.value.toLowerCase();
-          if (filter === '') {
-            item.hidden = false;
-          } else {
-            const terms = item.getAttribute('data-terms').toLowerCase();
-            item.hidden = terms.indexOf(filter) < 0;
-          }
-        });
+        clearTimeout(inputTimeout);
+        inputTimeout = setTimeout(() => {
+          [...list.querySelectorAll('.icon-list-item')].map(item => {
+            const filter = input.value.toLowerCase();
+            if (filter === '') {
+              item.hidden = false;
+            } else {
+              const terms = item.getAttribute('data-terms').toLowerCase();
+              item.hidden = terms.indexOf(filter) < 0;
+            }
+          });
+        }, 250);
       });
 
       // Sort by type and remember preference
@@ -557,6 +561,10 @@ If you want to change the icons Shoelace uses internally, you can register an ic
     border: solid 1px var(--sl-panel-border-color);
     border-radius: var(--sl-border-radius-medium);
     padding: var(--sl-spacing-medium);
+  }
+
+  .icon-search [hidden] {
+    display: none;
   }
 
   .icon-search-controls {
