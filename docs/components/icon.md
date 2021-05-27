@@ -237,6 +237,31 @@ Icons in this library are licensed under the [MIT License](https://github.com/ta
 </div>
 ```
 
+### Iconoir
+
+This will register the [Iconoir](https://iconoir.com/) library using the jsDelivr CDN.
+
+Icons in this library are licensed under the [MIT License](https://github.com/lucaburgio/iconoir/blob/master/LICENSE).
+
+```html preview
+<script type="module">
+  import { registerIconLibrary } from '/dist/shoelace.js';
+
+  registerIconLibrary('iconoir', {
+    resolver: name => `https://cdn.jsdelivr.net/gh/lucaburgio/iconoir@latest/icons/${name}.svg`
+  });
+</script>
+
+<div style="font-size: 24px;">
+  <sl-icon library="iconoir" name="check-circled-outline"></sl-icon>
+  <sl-icon library="iconoir" name="drawer"></sl-icon>
+  <sl-icon library="iconoir" name="keyframes"></sl-icon>
+  <sl-icon library="iconoir" name="headset-help"></sl-icon>
+  <sl-icon library="iconoir" name="color-picker"></sl-icon>
+  <sl-icon library="iconoir" name="wifi"></sl-icon>
+</div>
+```
+
 ### Ionicons
 
 This will register the [Ionicons](https://ionicons.com/) library using the jsDelivr CDN. This library has three variations: outline (default), filled (`*-filled`), and sharp (`*-sharp`). A mutator function is required to polyfill a handful of styles we're not including.
@@ -249,7 +274,7 @@ Icons in this library are licensed under the [MIT License](https://github.com/io
 
   registerIconLibrary('ionicons', {
     resolver: name => `https://cdn.jsdelivr.net/npm/ionicons@5.1.2/dist/ionicons/svg/${name}.svg`,
-      mutator: svg => {
+    mutator: svg => {
       svg.setAttribute('fill', 'currentColor');
       svg.setAttribute('stroke', 'currentColor');
       [...svg.querySelectorAll('.ionicon-fill-none')].map(el => el.setAttribute('fill', 'none'));
