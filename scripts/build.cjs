@@ -9,7 +9,7 @@ const del = require('del');
 const esbuild = require('esbuild');
 const execSync = require('child_process').execSync;
 const getPort = require('get-port');
-const glob = require('tiny-glob');
+const glob = require('glob-promise');
 const inlineImportPlugin = require('esbuild-plugin-inline-import');
 const path = require('path');
 const sass = require('sass');
@@ -29,11 +29,11 @@ execSync('node scripts/make-icons.cjs', { stdio: 'inherit' });
     // The whole shebang dist
     './src/shoelace.ts',
     // Components
-    ...(await glob('./src/components/**/*.ts')),
+    ...(await glob('./src/components/**/!(*.test).ts')),
     // Public utilities
-    ...(await glob('./src/utilities/**/*.ts')),
+    ...(await glob('./src/utilities/**/!(*.test).ts')),
     // Theme stylesheets
-    ...(await glob('./src/themes/**/*.ts'))
+    ...(await glob('./src/themes/**/!(*.test).ts'))
   ];
 
   const buildResult = await esbuild
@@ -115,7 +115,7 @@ execSync('node scripts/make-icons.cjs', { stdio: 'inherit' });
     });
 
     // Rebuild and reload when source files change
-    bs.watch(['src/**/*']).on('change', async filename => {
+    bs.watch(['src/**/!(*.test).*']).on('change', async filename => {
       console.log(`Source file changed - ${filename}`);
 
       // NOTE: we don't run TypeDoc on every change because it's quite heavy, so changes to the docs won't be included
