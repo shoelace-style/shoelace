@@ -8,7 +8,17 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
+This release addresses an issue with the `open` prop no longer working in a number of components, as a result of the changes in beta.41. It also removes a small but controversial feature that complicated show/hide logic and led to a poor experience for developers and end users.
+
+There are two ways to show/hide affected components: by calling `show() | hide()` and by toggling the `open` prop. Previously, it was possible to call `event.preventDefault()` in an `sl-show | sl-hide ` handler to stop the component from showing/hiding. The problem becomes obvious when you set `el.open = false`, the event gets canceled, and in the next cycle `el.open` has reverted to `true`. Not only is this unexpected, but it also doesn't play nicely with frameworks. Additionally, this made it impossible to await `show() | hide()` since there was a chance they'd never resolve.
+
+Technical reasons aside, canceling these events seldom led to a good user experience, so the decision was made to no longer allow `sl-show | sl-hide` to be cancelable.
+
+- 🚨 BREAKING: `sl-show` and `sl-hide` events are no longer cancelable
 - Added Iconoir example to the icon docs
+- Changed the `cancelable` default to `false` for the internal `@event` decorator
+- Fixed a bug where toggling `open` stopped working in `sl-alert`, `sl-dialog`, `sl-drawer`, `sl-dropdown`, and `sl-tooltip`
+- Fixed a number of imports that should have been type imports
 
 ## 2.0.0-beta.41
 

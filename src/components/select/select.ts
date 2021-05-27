@@ -6,10 +6,10 @@ import { event, EventEmitter, watch } from '../../internal/decorators';
 import { getLabelledBy, renderFormControl } from '../../internal/form-control';
 import { getTextContent } from '../../internal/slot';
 import { hasSlot } from '../../internal/slot';
-import SlDropdown from '../dropdown/dropdown';
-import SlIconButton from '../icon-button/icon-button';
-import SlMenu from '../menu/menu';
-import SlMenuItem from '../menu-item/menu-item';
+import type SlDropdown from '../dropdown/dropdown';
+import type SlIconButton from '../icon-button/icon-button';
+import type SlMenu from '../menu/menu';
+import type SlMenuItem from '../menu-item/menu-item';
 import styles from 'sass:./select.scss';
 
 let id = 0;
@@ -254,12 +254,7 @@ export default class SlSelect extends LitElement {
     this.syncItemsFromValue();
   }
 
-  handleMenuShow(event: CustomEvent) {
-    if (this.disabled) {
-      event.preventDefault();
-      return;
-    }
-
+  handleMenuShow() {
     this.resizeMenu();
     this.resizeObserver.observe(this);
     this.isOpen = true;
@@ -404,6 +399,7 @@ export default class SlSelect extends LitElement {
           .hoist=${this.hoist}
           .closeOnSelect=${!this.multiple}
           .containingElement=${this}
+          ?disabled=${this.disabled}
           class=${classMap({
             select: true,
             'select--open': this.isOpen,

@@ -1,9 +1,10 @@
 import { LitElement, html, unsafeCSS } from 'lit';
 import { customElement, property, query } from 'lit/decorators';
 import { classMap } from 'lit-html/directives/class-map';
-import { animateTo, parseDuration, stopAnimations } from '../../internal/animate';
 import { Instance as PopperInstance, createPopper } from '@popperjs/core/dist/esm';
+import { animateTo, parseDuration, stopAnimations } from '../../internal/animate';
 import { event, EventEmitter, watch } from '../../internal/decorators';
+import { waitForEvent } from '../../internal/event';
 import { setDefaultAnimation, getAnimation } from '../../utilities/animation-registry';
 import styles from 'sass:./tooltip.scss';
 
@@ -137,76 +138,22 @@ export default class SlTooltip extends LitElement {
 
   /** Shows the tooltip. */
   async show() {
-    // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
-    if (!this.hasInitialized || this.open || this.disabled) {
-      return;
-    }
-
-    const slShow = this.slShow.emit();
-    if (slShow.defaultPrevented) {
-      this.open = false;
+    if (this.open) {
       return;
     }
 
     this.open = true;
-
-    await stopAnimations(this.tooltip);
-
-    if (this.popover) {
-      this.popover.destroy();
-    }
-
-    this.popover = createPopper(this.target, this.positioner, {
-      placement: this.placement,
-      strategy: 'absolute',
-      modifiers: [
-        {
-          name: 'flip',
-          options: {
-            boundary: 'viewport'
-          }
-        },
-        {
-          name: 'offset',
-          options: {
-            offset: [this.skidding, this.distance]
-          }
-        }
-      ]
-    });
-
-    this.tooltip.hidden = false;
-    const { keyframes, options } = getAnimation(this, 'tooltip.show');
-    await animateTo(this.tooltip, keyframes, options);
-
-    this.slAfterShow.emit();
+    return waitForEvent(this, 'sl-after-show');
   }
 
-  /** Shows the tooltip. */
+  /** Hides the tooltip */
   async hide() {
-    // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
-    if (!this.hasInitialized || !this.open) {
-      return;
-    }
-
-    const slHide = this.slHide.emit();
-    if (slHide.defaultPrevented) {
-      this.open = true;
+    if (!this.open) {
       return;
     }
 
     this.open = false;
-
-    await stopAnimations(this.tooltip);
-    const { keyframes, options } = getAnimation(this, 'tooltip.hide');
-    await animateTo(this.tooltip, keyframes, options);
-    this.tooltip.hidden = true;
-
-    if (this.popover) {
-      this.popover.destroy();
-    }
-
-    this.slAfterHide.emit();
+    return waitForEvent(this, 'sl-after-hide');
   }
 
   getTarget() {
@@ -265,8 +212,61 @@ export default class SlTooltip extends LitElement {
   }
 
   @watch('open')
-  handleOpenChange() {
-    this.open ? this.show() : this.hide();
+  async handleOpenChange() {
+    // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
+    if (!this.hasInitialized || this.disabled) {
+      return;
+    }
+
+    if (this.open) {
+      // Show
+      this.slShow.emit();
+
+      await stopAnimations(this.tooltip);
+
+      if (this.popover) {
+        this.popover.destroy();
+      }
+
+      this.popover = createPopper(this.target, this.positioner, {
+        placement: this.placement,
+        strategy: 'absolute',
+        modifiers: [
+          {
+            name: 'flip',
+            options: {
+              boundary: 'viewport'
+            }
+          },
+          {
+            name: 'offset',
+            options: {
+              offset: [this.skidding, this.distance]
+            }
+          }
+        ]
+      });
+
+      this.tooltip.hidden = false;
+      const { keyframes, options } = getAnimation(this, 'tooltip.show');
+      await animateTo(this.tooltip, keyframes, options);
+
+      this.slAfterShow.emit();
+    } else {
+      // Hide
+      this.slHide.emit();
+
+      await stopAnimations(this.tooltip);
+      const { keyframes, options } = getAnimation(this, 'tooltip.hide');
+      await animateTo(this.tooltip, keyframes, options);
+      this.tooltip.hidden = true;
+
+      if (this.popover) {
+        this.popover.destroy();
+      }
+
+      this.slAfterHide.emit();
+    }
   }
 
   @watch('placement')

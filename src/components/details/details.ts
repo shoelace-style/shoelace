@@ -3,6 +3,7 @@ import { customElement, property, query } from 'lit/decorators';
 import { classMap } from 'lit-html/directives/class-map';
 import { animateTo, stopAnimations, shimKeyframesHeightAuto } from '../../internal/animate';
 import { event, EventEmitter, watch } from '../../internal/decorators';
+import { waitForEvent } from '../../internal/event';
 import { focusVisible } from '../../internal/focus-visible';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
 import styles from 'sass:./details.scss';
@@ -52,13 +53,13 @@ export default class SlDetails extends LitElement {
   /** Disables the details so it can't be toggled. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
-  /** Emitted when the details opens. Calling `event.preventDefault()` will prevent it from being opened. */
+  /** Emitted when the details opens. */
   @event('sl-show') slShow: EventEmitter<void>;
 
   /** Emitted after the details opens and all transitions are complete. */
   @event('sl-after-show') slAfterShow: EventEmitter<void>;
 
-  /** Emitted when the details closes. Calling `event.preventDefault()` will prevent it from being closed. */
+  /** Emitted when the details closes. */
   @event('sl-hide') slHide: EventEmitter<void>;
 
   /** Emitted after the details closes and all transitions are complete. */
@@ -80,51 +81,24 @@ export default class SlDetails extends LitElement {
     focusVisible.unobserve(this.details);
   }
 
-  /** Shows the alert. */
+  /** Shows the details. */
   async show() {
-    if (!this.hasInitialized || this.open || this.disabled) {
+    if (this.open) {
       return;
     }
 
-    const slShow = this.slShow.emit();
-    if (slShow.defaultPrevented) {
-      this.open = false;
-      return;
-    }
-
-    await stopAnimations(this);
-    this.body.hidden = false;
     this.open = true;
-
-    const { keyframes, options } = getAnimation(this, 'details.show');
-    await animateTo(this.body, shimKeyframesHeightAuto(keyframes, this.body.scrollHeight), options);
-    this.body.style.height = 'auto';
-
-    this.slAfterShow.emit();
+    return waitForEvent(this, 'sl-after-show');
   }
 
-  /** Hides the alert */
+  /** Hides the details */
   async hide() {
-    // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
-    if (!this.hasInitialized || !this.open || this.disabled) {
+    if (!this.open) {
       return;
     }
 
-    const slHide = this.slHide.emit();
-    if (slHide.defaultPrevented) {
-      this.open = true;
-      return;
-    }
-
-    await stopAnimations(this);
     this.open = false;
-
-    const { keyframes, options } = getAnimation(this, 'details.hide');
-    await animateTo(this.body, shimKeyframesHeightAuto(keyframes, this.body.scrollHeight), options);
-    this.body.hidden = true;
-    this.body.style.height = 'auto';
-
-    this.slAfterHide.emit();
+    return waitForEvent(this, 'sl-after-hide');
   }
 
   handleSummaryClick() {
@@ -152,8 +126,36 @@ export default class SlDetails extends LitElement {
   }
 
   @watch('open')
-  handleOpenChange() {
-    this.open ? this.show() : this.hide();
+  async handleOpenChange() {
+    if (!this.hasInitialized) {
+      return;
+    }
+
+    if (this.open) {
+      // Show
+      this.slShow.emit();
+
+      await stopAnimations(this);
+      this.body.hidden = false;
+
+      const { keyframes, options } = getAnimation(this, 'details.show');
+      await animateTo(this.body, shimKeyframesHeightAuto(keyframes, this.body.scrollHeight), options);
+      this.body.style.height = 'auto';
+
+      this.slAfterShow.emit();
+    } else {
+      // Hide
+      this.slHide.emit();
+
+      await stopAnimations(this);
+
+      const { keyframes, options } = getAnimation(this, 'details.hide');
+      await animateTo(this.body, shimKeyframesHeightAuto(keyframes, this.body.scrollHeight), options);
+      this.body.hidden = true;
+      this.body.style.height = 'auto';
+
+      this.slAfterHide.emit();
+    }
   }
 
   render() {

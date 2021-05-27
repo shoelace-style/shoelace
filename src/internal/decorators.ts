@@ -49,7 +49,7 @@ export class EventEmitter<T> {
       Object.assign(
         {
           bubbles: true,
-          cancelable: true,
+          cancelable: false,
           composed: true,
           detail: {}
         },

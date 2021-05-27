@@ -5,8 +5,8 @@ import { ifDefined } from 'lit-html/directives/if-defined';
 import { styleMap } from 'lit-html/directives/style-map';
 import { event, EventEmitter, watch } from '../../internal/decorators';
 import { clamp } from '../../internal/math';
-import SlDropdown from '../dropdown/dropdown';
-import SlInput from '../input/input';
+import type SlDropdown from '../dropdown/dropdown';
+import type SlInput from '../input/input';
 import color from 'color';
 import styles from 'sass:./color-picker.scss';
 
@@ -377,12 +377,6 @@ export default class SlColorPicker extends LitElement {
       this.setColor(this.input.value);
       this.input.value = this.value;
       setTimeout(() => this.input.select());
-    }
-  }
-
-  handleDropdownShow(event: CustomEvent) {
-    if (this.disabled) {
-      event.preventDefault();
     }
   }
 
@@ -774,8 +768,8 @@ export default class SlColorPicker extends LitElement {
         class="color-dropdown"
         aria-disabled=${this.disabled ? 'true' : 'false'}
         .containing-element=${this}
+        ?disabled=${this.disabled}
         ?hoist=${this.hoist}
-        @sl-show=${this.handleDropdownShow}
         @sl-after-hide=${this.handleDropdownAfterHide}
       >
         <button

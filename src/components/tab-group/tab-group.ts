@@ -5,8 +5,8 @@ import { event, EventEmitter, watch } from '../../internal/decorators';
 import { focusVisible } from '../../internal/focus-visible';
 import { getOffset } from '../../internal/offset';
 import { scrollIntoView } from '../../internal/scroll';
-import SlTab from '../tab/tab';
-import SlTabPanel from '../tab-panel/tab-panel';
+import type SlTab from '../tab/tab';
+import type SlTabPanel from '../tab-panel/tab-panel';
 import styles from 'sass:./tab-group.scss';
 
 /**

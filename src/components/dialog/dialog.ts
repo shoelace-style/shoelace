@@ -4,6 +4,7 @@ import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
 import { animateTo, stopAnimations } from '../../internal/animate';
 import { event, EventEmitter, watch } from '../../internal/decorators';
+import { waitForEvent } from '../../internal/event';
 import { lockBodyScrolling, unlockBodyScrolling } from '../../internal/scroll';
 import { hasSlot } from '../../internal/slot';
 import { isPreventScrollSupported } from '../../internal/support';
@@ -74,13 +75,13 @@ export default class SlDialog extends LitElement {
    */
   @property({ attribute: 'no-header', type: Boolean, reflect: true }) noHeader = false;
 
-  /** Emitted when the dialog opens. Calling `event.preventDefault()` will prevent it from being opened. */
+  /** Emitted when the dialog opens. */
   @event('sl-show') slShow: EventEmitter<void>;
 
   /** Emitted after the dialog opens and all transitions are complete. */
   @event('sl-after-show') slAfterShow: EventEmitter<void>;
 
-  /** Emitted when the dialog closes. Calling `event.preventDefault()` will prevent it from being closed. */
+  /** Emitted when the dialog closes. */
   @event('sl-hide') slHide: EventEmitter<void>;
 
   /** Emitted after the dialog closes and all transitions are complete. */
@@ -116,87 +117,24 @@ export default class SlDialog extends LitElement {
     unlockBodyScrolling(this);
   }
 
-  /** Shows the dialog */
+  /** Shows the dialog. */
   async show() {
-    if (!this.hasInitialized || this.open) {
+    if (this.open) {
       return;
     }
 
-    const slShow = this.slShow.emit();
-    if (slShow.defaultPrevented) {
-      this.open = false;
-      return;
-    }
-
-    this.originalTrigger = document.activeElement as HTMLElement;
     this.open = true;
-    this.modal.activate();
-
-    lockBodyScrolling(this);
-
-    await Promise.all([stopAnimations(this.dialog), stopAnimations(this.overlay)]);
-    this.dialog.hidden = false;
-
-    // Browsers that support el.focus({ preventScroll }) can set initial focus immediately
-    if (hasPreventScroll) {
-      const slInitialFocus = this.slInitialFocus.emit();
-      if (!slInitialFocus.defaultPrevented) {
-        this.panel.focus({ preventScroll: true });
-      }
-    }
-
-    const panelAnimation = getAnimation(this, 'dialog.show');
-    const overlayAnimation = getAnimation(this, 'dialog.overlay.show');
-    await Promise.all([
-      animateTo(this.panel, panelAnimation.keyframes, panelAnimation.options),
-      animateTo(this.overlay, overlayAnimation.keyframes, overlayAnimation.options)
-    ]);
-
-    // Browsers that don't support el.focus({ preventScroll }) have to wait for the animation to finish before initial
-    // focus to prevent scrolling issues. See: https://caniuse.com/mdn-api_htmlelement_focus_preventscroll_option
-    if (!hasPreventScroll) {
-      const slInitialFocus = this.slInitialFocus.emit();
-      if (!slInitialFocus.defaultPrevented) {
-        this.panel.focus({ preventScroll: true });
-      }
-    }
-
-    this.slAfterShow.emit();
+    return waitForEvent(this, 'sl-after-show');
   }
 
   /** Hides the dialog */
   async hide() {
-    if (!this.hasInitialized || !this.open) {
-      return;
-    }
-
-    const slHide = this.slHide.emit();
-    if (slHide.defaultPrevented) {
-      this.open = true;
+    if (!this.open) {
       return;
     }
 
     this.open = false;
-    this.modal.deactivate();
-
-    await Promise.all([stopAnimations(this.dialog), stopAnimations(this.overlay)]);
-    const panelAnimation = getAnimation(this, 'dialog.hide');
-    const overlayAnimation = getAnimation(this, 'dialog.overlay.hide');
-    await Promise.all([
-      animateTo(this.panel, panelAnimation.keyframes, panelAnimation.options),
-      animateTo(this.overlay, overlayAnimation.keyframes, overlayAnimation.options)
-    ]);
-    this.dialog.hidden = true;
-
-    unlockBodyScrolling(this);
-
-    // Restore focus to the original trigger
-    const trigger = this.originalTrigger;
-    if (trigger && typeof trigger.focus === 'function') {
-      setTimeout(() => trigger.focus());
-    }
-
-    this.slAfterHide.emit();
+    return waitForEvent(this, 'sl-after-hide');
   }
 
   handleCloseClick() {
@@ -211,8 +149,71 @@ export default class SlDialog extends LitElement {
   }
 
   @watch('open')
-  handleOpenChange() {
-    this.open ? this.show() : this.hide();
+  async handleOpenChange() {
+    if (!this.hasInitialized) {
+      return;
+    }
+
+    if (this.open) {
+      // Show
+      this.slShow.emit();
+      this.originalTrigger = document.activeElement as HTMLElement;
+      this.modal.activate();
+
+      lockBodyScrolling(this);
+
+      await Promise.all([stopAnimations(this.dialog), stopAnimations(this.overlay)]);
+      this.dialog.hidden = false;
+
+      // Browsers that support el.focus({ preventScroll }) can set initial focus immediately
+      if (hasPreventScroll) {
+        const slInitialFocus = this.slInitialFocus.emit();
+        if (!slInitialFocus.defaultPrevented) {
+          this.panel.focus({ preventScroll: true });
+        }
+      }
+
+      const panelAnimation = getAnimation(this, 'dialog.show');
+      const overlayAnimation = getAnimation(this, 'dialog.overlay.show');
+      await Promise.all([
+        animateTo(this.panel, panelAnimation.keyframes, panelAnimation.options),
+        animateTo(this.overlay, overlayAnimation.keyframes, overlayAnimation.options)
+      ]);
+
+      // Browsers that don't support el.focus({ preventScroll }) have to wait for the animation to finish before initial
+      // focus to prevent scrolling issues. See: https://caniuse.com/mdn-api_htmlelement_focus_preventscroll_option
+      if (!hasPreventScroll) {
+        const slInitialFocus = this.slInitialFocus.emit();
+        if (!slInitialFocus.defaultPrevented) {
+          this.panel.focus({ preventScroll: true });
+        }
+      }
+
+      this.slAfterShow.emit();
+    } else {
+      // Hide
+      this.slHide.emit();
+      this.modal.deactivate();
+
+      await Promise.all([stopAnimations(this.dialog), stopAnimations(this.overlay)]);
+      const panelAnimation = getAnimation(this, 'dialog.hide');
+      const overlayAnimation = getAnimation(this, 'dialog.overlay.hide');
+      await Promise.all([
+        animateTo(this.panel, panelAnimation.keyframes, panelAnimation.options),
+        animateTo(this.overlay, overlayAnimation.keyframes, overlayAnimation.options)
+      ]);
+      this.dialog.hidden = true;
+
+      unlockBodyScrolling(this);
+
+      // Restore focus to the original trigger
+      const trigger = this.originalTrigger;
+      if (trigger && typeof trigger.focus === 'function') {
+        setTimeout(() => trigger.focus());
+      }
+
+      this.slAfterHide.emit();
+    }
   }
 
   handleOverlayClick() {

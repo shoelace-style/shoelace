@@ -4,11 +4,12 @@ import { classMap } from 'lit-html/directives/class-map';
 import { Instance as PopperInstance, createPopper } from '@popperjs/core/dist/esm';
 import { animateTo, stopAnimations } from '../../internal/animate';
 import { event, EventEmitter, watch } from '../../internal/decorators';
+import { waitForEvent } from '../../internal/event';
 import { scrollIntoView } from '../../internal/scroll';
 import { getNearestTabbableElement } from '../../internal/tabbable';
 import { setDefaultAnimation, getAnimation } from '../../utilities/animation-registry';
-import SlMenu from '../menu/menu';
-import SlMenuItem from '../menu-item/menu-item';
+import type SlMenu from '../menu/menu';
+import type SlMenuItem from '../menu-item/menu-item';
 import styles from 'sass:./dropdown.scss';
 
 let id = 0;
@@ -60,6 +61,9 @@ export default class SlDropdown extends LitElement {
     | 'left-start'
     | 'left-end' = 'bottom-start';
 
+  /** Disables the dropdown so the panel will not open. */
+  @property({ type: Boolean }) disabled = false;
+
   /** Determines whether the dropdown should hide when a menu item is selected. */
   @property({ attribute: 'close-on-select', type: Boolean, reflect: true }) closeOnSelect = true;
 
@@ -78,13 +82,13 @@ export default class SlDropdown extends LitElement {
    */
   @property({ type: Boolean }) hoist = false;
 
-  /** Emitted when the dropdown opens. Calling `event.preventDefault()` will prevent it from being opened. */
+  /** Emitted when the dropdown opens. */
   @event('sl-show') slShow: EventEmitter<void>;
 
   /** Emitted after the dropdown opens and all animations are complete. */
   @event('sl-after-show') slAfterShow: EventEmitter<void>;
 
-  /** Emitted when the dropdown closes. Calling `event.preventDefault()` will prevent it from being closed. */
+  /** Emitted when the dropdown closes. */
   @event('sl-hide') slHide: EventEmitter<void>;
 
   /** Emitted after the dropdown closes and all animations are complete. */
@@ -329,60 +333,24 @@ export default class SlDropdown extends LitElement {
     }
   }
 
-  /** Shows the dropdown panel */
+  /** Shows the dropdown panel. */
   async show() {
-    // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
-    if (!this.hasInitialized || this.open) {
-      return;
-    }
-
-    const slShow = this.slShow.emit();
-    if (slShow.defaultPrevented) {
-      this.open = false;
+    if (this.open) {
       return;
     }
 
     this.open = true;
-
-    this.panel.addEventListener('sl-activate', this.handleMenuItemActivate);
-    this.panel.addEventListener('sl-select', this.handlePanelSelect);
-    document.addEventListener('keydown', this.handleDocumentKeyDown);
-    document.addEventListener('mousedown', this.handleDocumentMouseDown);
-
-    await stopAnimations(this);
-    this.panel.hidden = false;
-    const { keyframes, options } = getAnimation(this, 'dropdown.show');
-    await animateTo(this.panel, keyframes, options);
-
-    this.slAfterShow.emit();
+    return waitForEvent(this, 'sl-after-show');
   }
 
   /** Hides the dropdown panel */
   async hide() {
-    // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
-    if (!this.hasInitialized || !this.open) {
-      return;
-    }
-
-    const slHide = this.slHide.emit();
-    if (slHide.defaultPrevented) {
-      this.open = true;
+    if (!this.open) {
       return;
     }
 
     this.open = false;
-
-    this.panel.removeEventListener('sl-activate', this.handleMenuItemActivate);
-    this.panel.removeEventListener('sl-select', this.handlePanelSelect);
-    document.addEventListener('keydown', this.handleDocumentKeyDown);
-    document.removeEventListener('mousedown', this.handleDocumentMouseDown);
-
-    await stopAnimations(this);
-    const { keyframes, options } = getAnimation(this, 'dropdown.hide');
-    await animateTo(this.panel, keyframes, options);
-    this.panel.hidden = true;
-
-    this.slAfterHide.emit();
+    return waitForEvent(this, 'sl-after-hide');
   }
 
   /**
@@ -398,10 +366,42 @@ export default class SlDropdown extends LitElement {
   }
 
   @watch('open')
-  handleOpenChange() {
-    this.open ? this.show() : this.hide();
+  async handleOpenChange() {
+    if (!this.hasInitialized || this.disabled) {
+      return;
+    }
 
     this.updateAccessibleTrigger();
+
+    if (this.open) {
+      // Show
+      this.slShow.emit();
+      this.panel.addEventListener('sl-activate', this.handleMenuItemActivate);
+      this.panel.addEventListener('sl-select', this.handlePanelSelect);
+      document.addEventListener('keydown', this.handleDocumentKeyDown);
+      document.addEventListener('mousedown', this.handleDocumentMouseDown);
+
+      await stopAnimations(this);
+      this.panel.hidden = false;
+      const { keyframes, options } = getAnimation(this, 'dropdown.show');
+      await animateTo(this.panel, keyframes, options);
+
+      this.slAfterShow.emit();
+    } else {
+      // Hide
+      this.slHide.emit();
+      this.panel.removeEventListener('sl-activate', this.handleMenuItemActivate);
+      this.panel.removeEventListener('sl-select', this.handlePanelSelect);
+      document.addEventListener('keydown', this.handleDocumentKeyDown);
+      document.removeEventListener('mousedown', this.handleDocumentMouseDown);
+
+      await stopAnimations(this);
+      const { keyframes, options } = getAnimation(this, 'dropdown.hide');
+      await animateTo(this.panel, keyframes, options);
+      this.panel.hidden = true;
+
+      this.slAfterHide.emit();
+    }
   }
 
   render() {

@@ -2,7 +2,7 @@ import { LitElement, html, unsafeCSS } from 'lit';
 import { customElement, query } from 'lit/decorators';
 import { event, EventEmitter } from '../../internal/decorators';
 import { getTextContent } from '../../internal/slot';
-import SlMenuItem from '../menu-item/menu-item';
+import type SlMenuItem from '../menu-item/menu-item';
 import styles from 'sass:./menu.scss';
 
 /**
@@ -49,7 +49,7 @@ export default class SlMenu extends LitElement {
 
   syncItems() {
     this.items = [...this.defaultSlot.assignedElements({ flatten: true })].filter(
-      (el: any) => el instanceof SlMenuItem && !el.disabled
+      (el: any) => el.tagName.toLowerCase() === 'sl-menu-item' && !el.disabled
     ) as [SlMenuItem];
   }
 

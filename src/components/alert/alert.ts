@@ -3,6 +3,7 @@ import { customElement, property, query } from 'lit/decorators';
 import { classMap } from 'lit-html/directives/class-map';
 import { animateTo, stopAnimations } from '../../internal/animate';
 import { event, EventEmitter, watch } from '../../internal/decorators';
+import { waitForEvent } from '../../internal/event';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
 import styles from 'sass:./alert.scss';
 
@@ -51,13 +52,13 @@ export default class SlAlert extends LitElement {
    */
   @property({ type: Number }) duration = Infinity;
 
-  /** Emitted when the alert opens. Calling `event.preventDefault()` will prevent it from being opened. */
+  /** Emitted when the alert opens. */
   @event('sl-show') slShow: EventEmitter<void>;
 
   /** Emitted after the alert opens and all transitions are complete. */
   @event('sl-after-show') slAfterShow: EventEmitter<void>;
 
-  /** Emitted when the alert closes. Calling `event.preventDefault()` will prevent it from being closed. */
+  /** Emitted when the alert closes. */
   @event('sl-hide') slHide: EventEmitter<void>;
 
   /** Emitted after the alert closes and all transitions are complete. */
@@ -74,52 +75,22 @@ export default class SlAlert extends LitElement {
 
   /** Shows the alert. */
   async show() {
-    if (!this.hasInitialized || this.open) {
-      return;
-    }
-
-    const slShow = this.slShow.emit();
-    if (slShow.defaultPrevented) {
-      this.open = false;
+    if (this.open) {
       return;
     }
 
     this.open = true;
-
-    if (this.duration < Infinity) {
-      this.restartAutoHide();
-    }
-
-    await stopAnimations(this.base);
-    this.base.hidden = false;
-    const { keyframes, options } = getAnimation(this, 'alert.show');
-    await animateTo(this.base, keyframes, options);
-
-    this.slAfterShow.emit();
+    return waitForEvent(this, 'sl-after-show');
   }
 
   /** Hides the alert */
   async hide() {
-    if (!this.hasInitialized || !this.open) {
-      return;
-    }
-
-    const slHide = this.slHide.emit();
-    if (slHide.defaultPrevented) {
-      this.open = true;
+    if (!this.open) {
       return;
     }
 
     this.open = false;
-
-    clearTimeout(this.autoHideTimeout);
-
-    await stopAnimations(this.base);
-    const { keyframes, options } = getAnimation(this, 'alert.hide');
-    await animateTo(this.base, keyframes, options);
-    this.base.hidden = true;
-
-    this.slAfterHide.emit();
+    return waitForEvent(this, 'sl-after-hide');
   }
 
   /**
@@ -173,8 +144,38 @@ export default class SlAlert extends LitElement {
   }
 
   @watch('open')
-  handleOpenChange() {
-    this.open ? this.show() : this.hide();
+  async handleOpenChange() {
+    if (!this.hasInitialized) {
+      return;
+    }
+
+    if (this.open) {
+      // Show
+      this.slShow.emit();
+
+      if (this.duration < Infinity) {
+        this.restartAutoHide();
+      }
+
+      await stopAnimations(this.base);
+      this.base.hidden = false;
+      const { keyframes, options } = getAnimation(this, 'alert.show');
+      await animateTo(this.base, keyframes, options);
+
+      this.slAfterShow.emit();
+    } else {
+      // Hide
+      this.slHide.emit();
+
+      clearTimeout(this.autoHideTimeout);
+
+      await stopAnimations(this.base);
+      const { keyframes, options } = getAnimation(this, 'alert.hide');
+      await animateTo(this.base, keyframes, options);
+      this.base.hidden = true;
+
+      this.slAfterHide.emit();
+    }
   }
 
   @watch('duration')
