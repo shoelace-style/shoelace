@@ -19,6 +19,8 @@ Technical reasons aside, canceling these events seldom led to a good user experi
 - Changed the `cancelable` default to `false` for the internal `@event` decorator
 - Fixed a bug where toggling `open` stopped working in `sl-alert`, `sl-dialog`, `sl-drawer`, `sl-dropdown`, and `sl-tooltip`
 - Fixed a number of imports that should have been type imports
+- Updated Lit to 2.0.0-rc.2
+- Updated esbuild to 0.12.4
 
 ## 2.0.0-beta.41
 
@@ -58,7 +60,7 @@ The most elegant solution I found was to use the [Web Animations API](https://de
 - Added experimental `sl-qr-code` component
 - Added `system` icon library and updated all components to use this instead of the default icon library [#420](https://github.com/shoelace-style/shoelace/issues/420)
 - Updated to esbuild 0.8.57
-- Updated to lit 2.0.0-rc.1 and lit-html 2.0.0-rc.2
+- Updated to Lit 2.0.0-rc.1 and lit-html 2.0.0-rc.2
 
 ## 2.0.0-beta.38
 

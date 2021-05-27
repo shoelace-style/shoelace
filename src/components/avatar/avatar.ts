@@ -1,5 +1,5 @@
 import { LitElement, html, unsafeCSS } from 'lit';
-import { customElement, property, state } from 'lit/decorators';
+import { customElement, property, state } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import styles from 'sass:./avatar.scss';
 

@@ -1,5 +1,5 @@
 import { LitElement, html, unsafeCSS } from 'lit';
-import { customElement, property, query } from 'lit/decorators';
+import { customElement, property, query } from 'lit/decorators.js';
 import { styleMap } from 'lit-html/directives/style-map';
 import { watch } from '../../internal/decorators';
 import QrCreator from 'qr-creator';

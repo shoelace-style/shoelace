@@ -34,7 +34,7 @@ if (fs.existsSync(componentFile)) {
 
 const componentSource = `
 import { LitElement, html, unsafeCSS } from 'lit';
-import { customElement } from 'lit/decorators';
+import { customElement } from 'lit/decorators.js';
 import styles from 'sass:./${tagNameWithoutPrefix}.scss';
 
 /**

@@ -1,5 +1,5 @@
 import { LitElement, html, unsafeCSS } from 'lit';
-import { customElement, property, query } from 'lit/decorators';
+import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { animateTo, stopAnimations, shimKeyframesHeightAuto } from '../../internal/animate';
 import { event, EventEmitter, watch } from '../../internal/decorators';

@@ -1,5 +1,5 @@
 import { LitElement, html, unsafeCSS } from 'lit';
-import { customElement, property, query } from 'lit/decorators';
+import { customElement, property, query } from 'lit/decorators.js';
 import { event, EventEmitter } from '../../internal/decorators';
 import type SlButton from '../button/button';
 import type SlCheckbox from '../checkbox/checkbox';

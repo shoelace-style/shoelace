@@ -1,5 +1,5 @@
 import { LitElement, html, unsafeCSS } from 'lit';
-import { customElement } from 'lit/decorators';
+import { customElement } from 'lit/decorators.js';
 import { event, EventEmitter } from '../../internal/decorators';
 import styles from 'sass:./resize-observer.scss';
 

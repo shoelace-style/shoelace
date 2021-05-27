@@ -1,5 +1,5 @@
 import { LitElement, html, unsafeCSS } from 'lit';
-import { customElement, query } from 'lit/decorators';
+import { customElement, query } from 'lit/decorators.js';
 import { event, EventEmitter } from '../../internal/decorators';
 import { getTextContent } from '../../internal/slot';
 import type SlMenuItem from '../menu-item/menu-item';

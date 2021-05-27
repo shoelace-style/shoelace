@@ -1,5 +1,5 @@
 import { LitElement, html, unsafeCSS } from 'lit';
-import { customElement, property } from 'lit/decorators';
+import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { event, EventEmitter } from '../../internal/decorators';
 import styles from 'sass:./tag.scss';

@@ -1,5 +1,5 @@
 import { LitElement, html, unsafeCSS } from 'lit';
-import { customElement, property, queryAsync } from 'lit/decorators';
+import { customElement, property, queryAsync } from 'lit/decorators.js';
 import { event, EventEmitter, watch } from '../../internal/decorators';
 import { animations } from './animations';
 import styles from 'sass:./animation.scss';
