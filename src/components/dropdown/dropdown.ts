@@ -382,6 +382,7 @@ export default class SlDropdown extends LitElement {
       document.addEventListener('mousedown', this.handleDocumentMouseDown);
 
       await stopAnimations(this);
+      this.popover.update();
       this.panel.hidden = false;
       const { keyframes, options } = getAnimation(this, 'dropdown.show');
       await animateTo(this.panel, keyframes, options);

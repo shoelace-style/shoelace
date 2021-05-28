@@ -19,6 +19,7 @@ Technical reasons aside, canceling these events seldom led to a good user experi
 - Changed the `cancelable` default to `false` for the internal `@event` decorator
 - Fixed a bug where toggling `open` stopped working in `sl-alert`, `sl-dialog`, `sl-drawer`, `sl-dropdown`, and `sl-tooltip`
 - Fixed a bug in `sl-range` where setting a value outside the default `min` or `max` would clamp the value [#448](https://github.com/shoelace-style/shoelace/issues/448)
+- Fixed a bug in `sl-dropdown` where placement wouldn't adjust properly when shown [#447](https://github.com/shoelace-style/shoelace/issues/447)
 - Fixed a number of imports that should have been type imports
 - Updated Lit to 2.0.0-rc.2
 - Updated esbuild to 0.12.4
