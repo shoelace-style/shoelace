@@ -264,6 +264,7 @@ export default class SlInput extends LitElement {
   }
 
   render() {
+    // NOTE - always bind value after min/max, otherwise it will be clamped
     return renderFormControl(
       {
         inputId: this.inputId,
@@ -304,7 +305,6 @@ export default class SlInput extends LitElement {
             class="input__control"
             type=${this.type === 'password' && this.isPasswordVisible ? 'text' : this.type}
             name=${ifDefined(this.name)}
-            .value=${this.value}
             ?disabled=${this.disabled}
             ?readonly=${this.readonly}
             ?required=${this.required}
@@ -314,6 +314,7 @@ export default class SlInput extends LitElement {
             min=${ifDefined(this.min)}
             max=${ifDefined(this.max)}
             step=${ifDefined(this.step)}
+            .value=${this.value}
             autocapitalize=${ifDefined(this.autocapitalize)}
             autocomplete=${ifDefined(this.autocomplete)}
             autocorrect=${ifDefined(this.autocorrect)}

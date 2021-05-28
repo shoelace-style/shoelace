@@ -165,6 +165,7 @@ export default class SlRange extends LitElement {
   }
 
   render() {
+    // NOTE - always bind value after min/max, otherwise it will be clamped
     return renderFormControl(
       {
         inputId: this.inputId,
@@ -193,12 +194,12 @@ export default class SlRange extends LitElement {
             part="input"
             type="range"
             class="range__control"
-            name=${this.name}
-            .value=${this.value + ''}
+            name=${ifDefined(this.name)}
             ?disabled=${this.disabled}
             min=${ifDefined(this.min)}
             max=${ifDefined(this.max)}
             step=${ifDefined(this.step)}
+            .value=${String(this.value)}
             aria-labelledby=${ifDefined(
               getLabelledBy({
                 label: this.label,
