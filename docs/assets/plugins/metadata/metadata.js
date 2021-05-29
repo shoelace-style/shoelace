@@ -94,7 +94,9 @@
                     method.params.length
                       ? `
                         <code style="white-space: normal;">${escapeHtml(
-                          method.params.map(param => `${param.name}: ${param.type}`).join(', ')
+                          method.params
+                            .map(param => `${param.name}${param.isOptional ? '?' : ''}: ${param.type}`)
+                            .join(', ')
                         )}</code>
                       `
                       : ''

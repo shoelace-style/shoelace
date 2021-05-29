@@ -230,6 +230,7 @@ components.map(async component => {
             name: param.name,
             type,
             values,
+            isOptional: param.flags?.isOptional,
             defaultValue: param.defaultValue
           };
         })
