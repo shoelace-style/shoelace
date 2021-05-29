@@ -108,6 +108,29 @@ There is currently no hot module reloading (HMR), as browsers don't provide a wa
 
 For more information about running and building the project locally, refer to `README.md` in the project's root.
 
+### Testing
+
+Shoelace uses [Web Test Runner](https://modern-web.dev/guides/test-runner/getting-started/) for testing. To launch the test runner during development, open a terminal and launch the dev server.
+
+```bash
+npm start
+```
+
+In a second terminal window, launch the test runner.
+
+```bash
+npm run test:watch
+```
+
+Follow the on-screen instructions to work with the test runner. Tests will automatically re-run as you make changes.
+
+To run tests only once, make sure to build the project first.
+
+```bash
+npm run build
+npm run test
+```
+
 ## Best Practices
 
 The following is a non-exhaustive list of conventions, patterns, and best practices we try to follow. As a contributor, we ask that you make a good faith effort to follow them as well. This ensures consistency and maintainability throughout the project.
