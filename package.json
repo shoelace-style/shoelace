@@ -31,7 +31,7 @@
   "scripts": {
     "start": "node scripts/build.cjs --dev",
     "build": "node scripts/build.cjs",
-    "prepublishOnly": "npm run build",
+    "prepublishOnly": "npm run build && npm run test",
     "prettier": "prettier --write --loglevel warn .",
     "create": "node scripts/create-component.cjs",
     "test": "web-test-runner \"src/**/*.test.ts\" --node-resolve --puppeteer",
