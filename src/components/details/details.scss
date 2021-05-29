@@ -1,11 +1,6 @@
 @use '../../styles/component';
 
 :host {
-  --hide-duration: var(--sl-transition-medium);
-  --hide-timing-function: ease;
-  --show-duration: var(--sl-transition-medium);
-  --show-timing-function: ease;
-
   display: block;
 }
 

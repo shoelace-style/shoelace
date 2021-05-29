@@ -25,11 +25,6 @@ let id = 0;
  * @part summary-icon - The expand/collapse summary icon.
  * @part content - The details content.
  *
- * @customProperty --hide-duration - The length of the hide transition.
- * @customProperty --hide-timing-function - The timing function (easing) to use for the hide transition.
- * @customProperty --show-duration - The length of the show transition.
- * @customProperty --show-timing-function - The timing function (easing) to use for the show transition.
- *
  * @animation details.show - The animation to use when showing details. You can use `height: auto` with this animation.
  * @animation details.hide - The animation to use when hiding details. You can use `height: auto` with this animation.
  */
