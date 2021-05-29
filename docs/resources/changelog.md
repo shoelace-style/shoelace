@@ -9,6 +9,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 ## Next
 
 - Added `?` to optional arguments in methods tables
+- Added the `scrollPosition()` method to `sl-textarea` to get/set scroll position
 
 ## 2.0.0-beta.42
 

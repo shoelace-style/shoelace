@@ -162,6 +162,20 @@ export default class SlTextarea extends LitElement {
     return this.input.select();
   }
 
+  /** Gets or sets the textarea's scroll position. */
+  scrollPosition(position?: { top?: number; left?: number }) {
+    if (position) {
+      if (typeof position.top === 'number') this.input.scrollTop = position.top;
+      if (typeof position.left === 'number') this.input.scrollLeft = position.left;
+      return;
+    }
+
+    return {
+      top: this.input.scrollTop,
+      left: this.input.scrollTop
+    };
+  }
+
   /** Sets the start and end positions of the text selection (0-based). */
   setSelectionRange(
     selectionStart: number,
