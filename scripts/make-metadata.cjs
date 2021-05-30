@@ -32,6 +32,18 @@ function getTypeInfo(item) {
     });
   }
 
+  if (item.type.type === 'reflection' && item.type.declaration?.children) {
+    const args = item.type.declaration.children.map(prop => {
+      const name = prop.name;
+      const type = prop.type.name;
+      const isOptional = prop.flags.isOptional === true;
+      return `${name}${isOptional ? '?' : ''}: ${type}`;
+    });
+
+    // Display as an object
+    type += `{ ${args.join(', ')} }`;
+  }
+
   return {
     type,
     values: values.length ? values : undefined
