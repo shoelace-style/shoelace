@@ -10,6 +10,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 - Added `?` to optional arguments in methods tables
 - Added the `scrollPosition()` method to `sl-textarea` to get/set scroll position
+- Fixed a bug in `sl-tab-group` where scrollable tab icons were not displaying correctly
 - Removed `fill: both` from internal animate utility so styles won't "stick" by default [#450](https://github.com/shoelace-style/shoelace/issues/450)
 
 ## 2.0.0-beta.42

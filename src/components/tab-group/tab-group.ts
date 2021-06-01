@@ -202,14 +202,14 @@ export default class SlTabGroup extends LitElement {
     }
   }
 
-  handleScrollLeft() {
+  handleScrollToStart() {
     this.nav.scroll({
       left: this.nav.scrollLeft - this.nav.clientWidth,
       behavior: 'smooth'
     });
   }
 
-  handleScrollRight() {
+  handleScrollToEnd() {
     this.nav.scroll({
       left: this.nav.scrollLeft + this.nav.clientWidth,
       behavior: 'smooth'
@@ -344,11 +344,11 @@ export default class SlTabGroup extends LitElement {
           ${this.hasScrollControls
             ? html`
                 <sl-icon-button
-                  class="tab-group__scroll-button tab-group__scroll-button--left"
+                  class="tab-group__scroll-button tab-group__scroll-button--start"
                   exportparts="base:scroll-button"
                   name="chevron-left"
                   library="system"
-                  @click=${this.handleScrollLeft}
+                  @click=${this.handleScrollToStart}
                 ></sl-icon-button>
               `
             : ''}
@@ -363,11 +363,11 @@ export default class SlTabGroup extends LitElement {
           ${this.hasScrollControls
             ? html`
                 <sl-icon-button
-                  class="tab-group__scroll-button tab-group__scroll-button--right"
+                  class="tab-group__scroll-button tab-group__scroll-button--end"
                   exportparts="base:scroll-button"
                   name="chevron-right"
                   library="system"
-                  @click=${this.handleScrollRight}
+                  @click=${this.handleScrollToEnd}
                 ></sl-icon-button>
               `
             : ''}
