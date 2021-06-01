@@ -8,7 +8,6 @@ export function animateTo(el: HTMLElement, keyframes: Keyframe[], options?: Keyf
     }
 
     const animation = el.animate(keyframes, {
-      fill: 'both',
       ...options,
       duration: prefersReducedMotion() ? 0 : options!.duration
     });
