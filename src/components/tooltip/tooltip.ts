@@ -79,13 +79,13 @@ export default class SlTooltip extends LitElement {
    */
   @property() trigger = 'hover focus';
 
-  /** Emitted when the tooltip begins to show. Calling `event.preventDefault()` will prevent it from being shown. */
+  /** Emitted when the tooltip begins to show. */
   @event('sl-show') slShow: EventEmitter<void>;
 
   /** Emitted after the tooltip has shown and all transitions are complete. */
   @event('sl-after-show') slAfterShow: EventEmitter<void>;
 
-  /** Emitted when the tooltip begins to hide. Calling `event.preventDefault()` will prevent it from being hidden. */
+  /** Emitted when the tooltip begins to hide. */
   @event('sl-hide') slHide: EventEmitter<void>;
 
   /** Emitted after the tooltip has hidden and all transitions are complete. */
