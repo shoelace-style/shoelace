@@ -11,6 +11,8 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Added `?` to optional arguments in methods tables
 - Added the `scrollPosition()` method to `sl-textarea` to get/set scroll position
 - Fixed a bug in `sl-tab-group` where scrollable tab icons were not displaying correctly
+- Fixed a bug in `sl-dialog` and `sl-drawer` where preventing clicks on the overlay no longer worked as described [#452](https://github.com/shoelace-style/shoelace/issues/452)
+- Fixed a bug in `sl-dialog` and `sl-drawer` where setting initial focus no longer worked as described [#453](https://github.com/shoelace-style/shoelace/issues/453)
 - Fixed lifecycle bugs in a number of components [#451](https://github.com/shoelace-style/shoelace/issues/451)
 - Removed `fill: both` from internal animate utility so styles won't "stick" by default [#450](https://github.com/shoelace-style/shoelace/issues/450)
 
