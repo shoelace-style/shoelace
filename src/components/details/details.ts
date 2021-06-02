@@ -60,15 +60,17 @@ export default class SlDetails extends LitElement {
   /** Emitted after the details closes and all transitions are complete. */
   @event('sl-after-hide') slAfterHide: EventEmitter<void>;
 
-  async firstUpdated() {
-    focusVisible.observe(this.details);
+  connectedCallback() {
+    super.connectedCallback();
+    this.updateComplete.then(() => focusVisible.observe(this.details));
+  }
 
+  firstUpdated() {
     this.body.hidden = !this.open;
     this.body.style.height = this.open ? 'auto' : '0';
 
-    // Set the initialized flag after the first update is complete
-    await this.updateComplete;
-    this.hasInitialized = true;
+    // Set the initialized flag after the first render is complete
+    this.updateComplete.then(() => (this.hasInitialized = true));
   }
 
   disconnectedCallback() {

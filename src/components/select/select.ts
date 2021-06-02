@@ -123,18 +123,18 @@ export default class SlSelect extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     this.handleSlotChange = this.handleSlotChange.bind(this);
-
-    this.shadowRoot!.addEventListener('slotchange', this.handleSlotChange);
-    this.handleSlotChange();
-  }
-
-  firstUpdated() {
     this.resizeObserver = new ResizeObserver(() => this.resizeMenu());
-    this.syncItemsFromValue();
+
+    this.updateComplete.then(() => {
+      this.resizeObserver.observe(this);
+      this.shadowRoot!.addEventListener('slotchange', this.handleSlotChange);
+      this.syncItemsFromValue();
+    });
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
+    this.resizeObserver.unobserve(this);
     this.shadowRoot!.removeEventListener('slotchange', this.handleSlotChange);
   }
 
@@ -256,12 +256,10 @@ export default class SlSelect extends LitElement {
 
   handleMenuShow() {
     this.resizeMenu();
-    this.resizeObserver.observe(this);
     this.isOpen = true;
   }
 
   handleMenuHide() {
-    this.resizeObserver.unobserve(this);
     this.isOpen = false;
   }
 

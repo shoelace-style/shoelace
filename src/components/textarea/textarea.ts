@@ -130,15 +130,14 @@ export default class SlTextarea extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     this.handleSlotChange = this.handleSlotChange.bind(this);
-
+    this.resizeObserver = new ResizeObserver(() => this.setTextareaHeight());
     this.shadowRoot!.addEventListener('slotchange', this.handleSlotChange);
     this.handleSlotChange();
-  }
 
-  firstUpdated() {
-    this.setTextareaHeight();
-    this.resizeObserver = new ResizeObserver(() => this.setTextareaHeight());
-    this.resizeObserver.observe(this.input);
+    this.updateComplete.then(() => {
+      this.setTextareaHeight();
+      this.resizeObserver.observe(this.input);
+    });
   }
 
   disconnectedCallback() {

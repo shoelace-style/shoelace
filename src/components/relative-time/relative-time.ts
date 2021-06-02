@@ -32,7 +32,8 @@ export default class SlRelativeTime extends LitElement {
   /** Keep the displayed value up to date as time passes. */
   @property({ type: Boolean }) sync = false;
 
-  firstUpdated() {
+  connectedCallback() {
+    super.connectedCallback();
     this.updateTime();
   }
 

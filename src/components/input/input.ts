@@ -149,12 +149,7 @@ export default class SlInput extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     this.handleSlotChange = this.handleSlotChange.bind(this);
-
     this.shadowRoot!.addEventListener('slotchange', this.handleSlotChange);
-  }
-
-  firstUpdated() {
-    this.handleSlotChange();
   }
 
   disconnectedCallback() {

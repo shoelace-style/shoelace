@@ -37,8 +37,9 @@ export default class SlIconButton extends LitElement {
   /** Disables the button. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
-  firstUpdated() {
-    focusVisible.observe(this.button);
+  connectedCallback() {
+    super.connectedCallback();
+    this.updateComplete.then(() => focusVisible.observe(this.button));
   }
 
   disconnectedCallback() {

@@ -62,8 +62,9 @@ export default class SlRating extends LitElement {
     this.rating.blur();
   }
 
-  firstUpdated() {
-    focusVisible.observe(this.rating);
+  connectedCallback() {
+    super.connectedCallback();
+    this.updateComplete.then(() => focusVisible.observe(this.rating));
   }
 
   disconnectedCallback() {

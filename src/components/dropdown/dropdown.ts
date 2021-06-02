@@ -128,13 +128,12 @@ export default class SlDropdown extends LitElement {
     });
   }
 
-  async firstUpdated() {
+  firstUpdated() {
     // Set initial visibility
     this.panel.hidden = !this.open;
 
-    // Set the initialized flag after the first update is complete
-    await this.updateComplete;
-    this.hasInitialized = true;
+    // Set the initialized flag after the first render is complete
+    this.updateComplete.then(() => (this.hasInitialized = true));
   }
 
   disconnectedCallback() {

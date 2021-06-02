@@ -24,7 +24,8 @@ export default class SlTabPanel extends LitElement {
   /** When true, the tab panel will be shown. */
   @property({ type: Boolean, reflect: true }) active = false;
 
-  firstUpdated() {
+  connectedCallback() {
+    super.connectedCallback();
     this.id = this.id || this.componentId;
   }
 

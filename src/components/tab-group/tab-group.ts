@@ -62,49 +62,49 @@ export default class SlTabGroup extends LitElement {
   /** Emitted when a tab is hidden. */
   @event('sl-tab-hide') slTabHide: EventEmitter<{ tab: string }>;
 
-  firstUpdated() {
-    this.syncTabsAndPanels();
-
-    // Set initial tab state when the tabs first become visible
-    const observer = new IntersectionObserver((entries, observer) => {
-      if (entries[0].intersectionRatio > 0) {
-        this.setAriaLabels();
-        this.setActiveTab(this.getActiveTab() || this.tabs[0], false);
-        observer.unobserve(entries[0].target);
-      }
-    });
-    observer.observe(this);
-
-    focusVisible.observe(this.tabGroup);
+  connectedCallback() {
+    super.connectedCallback();
 
     this.resizeObserver = new ResizeObserver(() => {
       this.preventIndicatorTransition();
       this.repositionIndicator();
       this.updateScrollControls();
     });
-    this.resizeObserver.observe(this.nav);
-    requestAnimationFrame(() => this.updateScrollControls());
 
     this.mutationObserver = new MutationObserver(mutations => {
       // Update aria labels when the DOM changes
-      if (
-        mutations.some(mutation => !['aria-labelledby', 'aria-controls'].includes(mutation.attributeName as string))
-      ) {
+      if (mutations.some(m => !['aria-labelledby', 'aria-controls'].includes(m.attributeName as string))) {
         setTimeout(() => this.setAriaLabels());
       }
 
       // Sync tabs when disabled states change
-      if (mutations.some(mutation => mutation.attributeName === 'disabled')) {
+      if (mutations.some(m => m.attributeName === 'disabled')) {
         this.syncTabsAndPanels();
       }
     });
-    this.mutationObserver.observe(this, { attributes: true, childList: true, subtree: true });
+
+    this.updateComplete.then(() => {
+      this.syncTabsAndPanels();
+      this.mutationObserver.observe(this, { attributes: true, childList: true, subtree: true });
+      this.resizeObserver.observe(this.nav);
+      focusVisible.observe(this.tabGroup);
+
+      // Set initial tab state when the tabs first become visible
+      const intersectionObserver = new IntersectionObserver((entries, observer) => {
+        if (entries[0].intersectionRatio > 0) {
+          this.setAriaLabels();
+          this.setActiveTab(this.getActiveTab() || this.tabs[0], { emitEvents: false });
+          observer.unobserve(entries[0].target);
+        }
+      });
+      intersectionObserver.observe(this.tabGroup);
+    });
   }
 
   disconnectedCallback() {
     this.mutationObserver.disconnect();
-    focusVisible.unobserve(this.tabGroup);
     this.resizeObserver.unobserve(this.nav);
+    focusVisible.unobserve(this.tabGroup);
   }
 
   /** Shows the specified tab panel. */
@@ -112,7 +112,7 @@ export default class SlTabGroup extends LitElement {
     const tab = this.tabs.find(el => el.panel === panel) as SlTab;
 
     if (tab) {
-      this.setActiveTab(tab);
+      this.setActiveTab(tab, { scrollBehavior: 'smooth' });
     }
   }
 
@@ -148,7 +148,7 @@ export default class SlTabGroup extends LitElement {
     }
 
     if (tab) {
-      this.setActiveTab(tab);
+      this.setActiveTab(tab, { scrollBehavior: 'smooth' });
     }
   }
 
@@ -165,7 +165,7 @@ export default class SlTabGroup extends LitElement {
     // Activate a tab
     if (['Enter', ' '].includes(event.key)) {
       if (tab) {
-        this.setActiveTab(tab);
+        this.setActiveTab(tab, { scrollBehavior: 'smooth' });
         event.preventDefault();
       }
     }
@@ -190,7 +190,7 @@ export default class SlTabGroup extends LitElement {
         this.tabs[index].focus({ preventScroll: true });
 
         if (this.activation === 'auto') {
-          this.setActiveTab(this.tabs[index]);
+          this.setActiveTab(this.tabs[index], { scrollBehavior: 'smooth' });
         }
 
         if (['top', 'bottom'].includes(this.placement)) {
@@ -226,7 +226,15 @@ export default class SlTabGroup extends LitElement {
     }
   }
 
-  setActiveTab(tab: SlTab, emitEvents = true) {
+  setActiveTab(tab: SlTab, options?: { emitEvents?: boolean; scrollBehavior?: 'auto' | 'smooth' }) {
+    options = Object.assign(
+      {
+        emitEvents: true,
+        scrollBehavior: 'auto'
+      },
+      options
+    );
+
     if (tab && tab !== this.activeTab && !tab.disabled) {
       const previousTab = this.activeTab;
       this.activeTab = tab;
@@ -237,11 +245,11 @@ export default class SlTabGroup extends LitElement {
       this.syncIndicator();
 
       if (['top', 'bottom'].includes(this.placement)) {
-        scrollIntoView(this.activeTab, this.nav, 'horizontal');
+        scrollIntoView(this.activeTab, this.nav, 'horizontal', options.scrollBehavior);
       }
 
       // Emit events
-      if (emitEvents) {
+      if (options.emitEvents) {
         if (previousTab) {
           this.slTabHide.emit({ detail: { name: previousTab.panel } });
         }

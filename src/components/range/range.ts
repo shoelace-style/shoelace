@@ -85,6 +85,7 @@ export default class SlRange extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     this.handleSlotChange = this.handleSlotChange.bind(this);
+    this.resizeObserver = new ResizeObserver(() => this.syncTooltip());
     this.shadowRoot!.addEventListener('slotchange', this.handleSlotChange);
 
     if (this.value === undefined || this.value === null) this.value = this.min;
@@ -92,15 +93,16 @@ export default class SlRange extends LitElement {
     if (this.value > this.max) this.value = this.max;
 
     this.handleSlotChange();
-  }
 
-  firstUpdated() {
-    this.syncTooltip();
-    this.resizeObserver = new ResizeObserver(() => this.syncTooltip());
+    this.updateComplete.then(() => {
+      this.syncTooltip();
+      this.resizeObserver.observe(this.input);
+    });
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
+    this.resizeObserver.unobserve(this.input);
     this.shadowRoot!.removeEventListener('slotchange', this.handleSlotChange);
   }
 
@@ -131,14 +133,12 @@ export default class SlRange extends LitElement {
     this.hasFocus = false;
     this.hasTooltip = false;
     this.slBlur.emit();
-    this.resizeObserver.unobserve(this.input);
   }
 
   handleFocus() {
     this.hasFocus = true;
     this.hasTooltip = true;
     this.slFocus.emit();
-    this.resizeObserver.observe(this.input);
   }
 
   @watch('label')
