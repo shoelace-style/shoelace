@@ -7,7 +7,6 @@ const fs = require('fs');
 const mkdirp = require('mkdirp');
 const path = require('path');
 const package = require('../package.json');
-const { parse } = require('comment-parser/lib');
 
 function getTagName(className) {
   return className.replace(/[A-Z]/g, m => `-${m.toLowerCase()}`).replace(/^-/, '');
