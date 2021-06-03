@@ -139,7 +139,7 @@ Event handling can also be cumbersome.
 
 > Because React implements its own synthetic event system, it cannot listen for DOM events coming from Custom Elements without the use of a workaround. Developers will need to reference their Custom Elements using a ref and manually attach event listeners with addEventListener. This makes working with Custom Elements cumbersome.
 
-Fortunately, there's a package that will let you use Shoelace components as if they were React components. You can install it using this command.
+Fortunately, there's a package called [@shoelace-style/react](https://www.npmjs.com/package/@shoelace-style/react) that will let you use Shoelace components as if they were React components. You can install it using this command.
 
 ```bash
 npm install @shoelace-style/react
