@@ -32,11 +32,6 @@ export default class SlCard extends LitElement {
   @state() private hasImage = false;
   @state() private hasHeader = false;
 
-  connectedCallback() {
-    super.connectedCallback();
-    this.handleSlotChange();
-  }
-
   handleSlotChange() {
     this.hasFooter = hasSlot(this, 'footer');
     this.hasImage = hasSlot(this, 'image');
@@ -55,11 +50,11 @@ export default class SlCard extends LitElement {
         })}
       >
         <div part="image" class="card__image">
-          <slot name="image" onslotchange=${this.handleSlotChange}></slot>
+          <slot name="image" @slotchange=${this.handleSlotChange}></slot>
         </div>
 
         <div part="header" class="card__header">
-          <slot name="header" onslotchange=${this.handleSlotChange}></slot>
+          <slot name="header" @slotchange=${this.handleSlotChange}></slot>
         </div>
 
         <div part="body" class="card__body">
@@ -67,7 +62,7 @@ export default class SlCard extends LitElement {
         </div>
 
         <div part="footer" class="card__footer">
-          <slot name="footer" onslotchange=${this.handleSlotChange}></slot>
+          <slot name="footer" @slotchange=${this.handleSlotChange}></slot>
         </div>
       </div>
     `;
