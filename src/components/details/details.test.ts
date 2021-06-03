@@ -79,7 +79,7 @@ describe('<sl-details>', () => {
     expect(body.hidden).to.be.true;
   });
 
-  it('should emit sl-show and sl-after-show when adding the open attribute', async () => {
+  it('should emit sl-show and sl-after-show when setting open = true', async () => {
     const el = (await fixture(html`
       <sl-details>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
@@ -103,7 +103,7 @@ describe('<sl-details>', () => {
     expect(body.hidden).to.be.false;
   });
 
-  it('should emit sl-hide and sl-after-hide when removing the open attribute', async () => {
+  it('should emit sl-hide and sl-after-hide when setting open = false', async () => {
     const el = (await fixture(html`
       <sl-details open>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore

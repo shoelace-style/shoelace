@@ -2,25 +2,29 @@ import { expect, fixture, html, waitUntil } from '@open-wc/testing';
 import sinon from 'sinon';
 
 import '../../../dist/shoelace.js';
-import type SlAlert from './alert';
+import type SlDialog from './dialog';
 
-describe('<sl-alert>', () => {
+describe('<sl-dialog>', () => {
   it('should be visible with the open attribute', async () => {
-    const el = await fixture(html` <sl-alert open>I am an alert</sl-alert> `);
+    const el = await fixture(html`
+      <sl-dialog open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sl-dialog>
+    `);
     const base = el.shadowRoot?.querySelector('[part="base"]') as HTMLElement;
 
     expect(base.hidden).to.be.false;
   });
 
   it('should not be visible without the open attribute', async () => {
-    const el = await fixture(html` <sl-alert>I am an alert</sl-alert> `);
+    const el = await fixture(html` <sl-dialog>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sl-dialog> `);
     const base = el.shadowRoot?.querySelector('[part="base"]') as HTMLElement;
 
     expect(base.hidden).to.be.true;
   });
 
   it('should emit sl-show and sl-after-show when calling show()', async () => {
-    const el = (await fixture(html` <sl-alert>I am an alert</sl-alert> `)) as SlAlert;
+    const el = (await fixture(html`
+      <sl-dialog>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sl-dialog>
+    `)) as SlDialog;
     const base = el.shadowRoot?.querySelector('[part="base"]') as HTMLElement;
     const showHandler = sinon.spy();
     const afterShowHandler = sinon.spy();
@@ -38,7 +42,9 @@ describe('<sl-alert>', () => {
   });
 
   it('should emit sl-hide and sl-after-hide when calling hide()', async () => {
-    const el = (await fixture(html` <sl-alert open>I am an alert</sl-alert> `)) as SlAlert;
+    const el = (await fixture(html`
+      <sl-dialog open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sl-dialog>
+    `)) as SlDialog;
     const base = el.shadowRoot?.querySelector('[part="base"]') as HTMLElement;
     const hideHandler = sinon.spy();
     const afterHideHandler = sinon.spy();
@@ -56,7 +62,9 @@ describe('<sl-alert>', () => {
   });
 
   it('should emit sl-show and sl-after-show when setting open = true', async () => {
-    const el = (await fixture(html` <sl-alert>I am an alert</sl-alert> `)) as SlAlert;
+    const el = (await fixture(html`
+      <sl-dialog>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sl-dialog>
+    `)) as SlDialog;
     const base = el.shadowRoot?.querySelector('[part="base"]') as HTMLElement;
     const showHandler = sinon.spy();
     const afterShowHandler = sinon.spy();
@@ -74,7 +82,9 @@ describe('<sl-alert>', () => {
   });
 
   it('should emit sl-hide and sl-after-hide when setting open = false', async () => {
-    const el = (await fixture(html` <sl-alert open>I am an alert</sl-alert> `)) as SlAlert;
+    const el = (await fixture(html`
+      <sl-dialog open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sl-dialog>
+    `)) as SlDialog;
     const base = el.shadowRoot?.querySelector('[part="base"]') as HTMLElement;
     const hideHandler = sinon.spy();
     const afterHideHandler = sinon.spy();
@@ -89,5 +99,34 @@ describe('<sl-alert>', () => {
     expect(hideHandler).to.have.been.calledOnce;
     expect(afterHideHandler).to.have.been.calledOnce;
     expect(base.hidden).to.be.true;
+  });
+
+  it('should not close when sl-overlay-dismiss is prevented', async () => {
+    const el = (await fixture(html`
+      <sl-dialog open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sl-dialog>
+    `)) as SlDialog;
+    const overlay = el.shadowRoot?.querySelector('[part="overlay"]') as HTMLElement;
+
+    el.addEventListener('sl-overlay-dismiss', event => event.preventDefault());
+    overlay.click();
+
+    expect(el.open).to.be.true;
+  });
+
+  it('should allow initial focus to be set', async () => {
+    const el = (await fixture(html` <sl-dialog><input /></sl-dialog> `)) as SlDialog;
+    const input = el.querySelector('input');
+    const initialFocusHandler = sinon.spy(event => {
+      event.preventDefault();
+      input.focus();
+    });
+
+    el.addEventListener('sl-initial-focus', initialFocusHandler);
+    el.show();
+
+    await waitUntil(() => initialFocusHandler.calledOnce);
+
+    expect(initialFocusHandler).to.have.been.calledOnce;
+    expect(document.activeElement).to.equal(input);
   });
 });

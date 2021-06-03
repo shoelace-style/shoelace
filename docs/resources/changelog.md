@@ -10,6 +10,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 - Added `?` to optional arguments in methods tables
 - Added the `scrollPosition()` method to `sl-textarea` to get/set scroll position
+- Added intial tests for `sl-dialog`, `sl-drawer`, `sl-dropdown`, and `sl-tooltip`
 - Fixed a bug in `sl-tab-group` where scrollable tab icons were not displaying correctly
 - Fixed a bug in `sl-dialog` and `sl-drawer` where preventing clicks on the overlay no longer worked as described [#452](https://github.com/shoelace-style/shoelace/issues/452)
 - Fixed a bug in `sl-dialog` and `sl-drawer` where setting initial focus no longer worked as described [#453](https://github.com/shoelace-style/shoelace/issues/453)
@@ -27,6 +28,8 @@ Technical reasons aside, canceling these events seldom led to a good user experi
 
 - 🚨 BREAKING: `sl-show` and `sl-hide` events are no longer cancelable
 - Added Iconoir example to the icon docs
+- Added Web Test Runner
+- Added intial tests for `sl-alert` and `sl-details`
 - Changed the `cancelable` default to `false` for the internal `@event` decorator
 - Fixed a bug where toggling `open` stopped working in `sl-alert`, `sl-dialog`, `sl-drawer`, `sl-dropdown`, and `sl-tooltip`
 - Fixed a bug in `sl-range` where setting a value outside the default `min` or `max` would clamp the value [#448](https://github.com/shoelace-style/shoelace/issues/448)
