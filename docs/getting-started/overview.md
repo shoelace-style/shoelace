@@ -1,20 +1,22 @@
 <div class="splash">
-  <div class="splash-start">
-    <img class="splash-logo" src="/assets/images/wordmark.svg" alt="Shoelace">
-    <p><strong>A forward-thinking library of web components.</strong></p>
-    <ul>
-      <li>Works with all frameworks 🧩</li>
-      <li>Works with CDNs 🚛</li>
-      <li>Fully customizable with CSS 🎨</li>
-      <li>Includes an official dark theme 🌛</li>
-      <li>Built with accessibility in mind ♿️</li>
-      <li>Open source 😸</li>
-    </ul>
-    <p>Designed in New Hampshire by <a href="https://twitter.com/claviska" rel="noopener" target="_blank">Cory LaViska</a>.</p>
-  </div>
-  <div class="splash-end">
-    <img class="splash-image" src="/assets/images/undraw-content-team.svg" alt="Cartoon of people assembling components while standing on a giant laptop.">
-  </div>
+<div class="splash-start">
+<img class="splash-logo" src="/assets/images/wordmark.svg" alt="Shoelace">
+
+**A forward-thinking library of web components.**
+
+- Works with all frameworks 🧩
+- Works with CDNs 🚛
+- Fully customizable with CSS 🎨
+- Includes an official dark theme 🌛
+- Built with accessibility in mind ♿️
+- First-party [React wrappers](/getting-started/usage#react)
+- Open source 😸
+
+Designed in New Hampshire by [Cory LaViska](https://twitter.com/claviska).
+</div>
+<div class="splash-end">
+<img class="splash-image" src="/assets/images/undraw-content-team.svg" alt="Cartoon of people assembling components while standing on a giant laptop.">
+</div>
 </div>
 
 [![jsDelivr](https://data.jsdelivr.com/v1/package/npm/@shoelace-style/shoelace/badge?style=rounded)](https://www.jsdelivr.com/package/npm/@shoelace-style/shoelace)
