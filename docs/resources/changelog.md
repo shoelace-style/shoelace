@@ -6,7 +6,7 @@ Components with the <sl-badge type="warning" pill>Experimental</sl-badge> badge 
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
-## Next
+## 2.0.0-beta.43
 
 - Added `?` to optional arguments in methods tables
 - Added the `scrollPosition()` method to `sl-textarea` to get/set scroll position
