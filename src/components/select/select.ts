@@ -49,6 +49,7 @@ export default class SlSelect extends LitElement {
   @query('.select__menu') menu: SlMenu;
 
   private inputId = `select-${++id}`;
+  private hasInitialized = false;
   private helpTextId = `select-help-text-${id}`;
   private labelId = `select-label-${id}`;
   private resizeObserver: ResizeObserver;
@@ -129,6 +130,7 @@ export default class SlSelect extends LitElement {
       this.resizeObserver.observe(this);
       this.shadowRoot!.addEventListener('slotchange', this.handleSlotChange);
       this.syncItemsFromValue();
+      this.hasInitialized = true;
     });
   }
 
@@ -306,7 +308,10 @@ export default class SlSelect extends LitElement {
   @watch('value')
   handleValueChange() {
     this.syncItemsFromValue();
-    this.slChange.emit();
+
+    if (this.hasInitialized) {
+      this.slChange.emit();
+    }
   }
 
   resizeMenu() {
