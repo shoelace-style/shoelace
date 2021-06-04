@@ -159,6 +159,11 @@ export default class SlSelect extends LitElement {
   }
 
   getValueAsArray() {
+    // Single selects use '' as an empty selection value, so convert this to [] for an empty multi select
+    if (this.multiple && this.value === '') {
+      return [];
+    }
+
     return Array.isArray(this.value) ? this.value : [this.value];
   }
 

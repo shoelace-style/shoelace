@@ -6,6 +6,10 @@ Components with the <sl-badge type="warning" pill>Experimental</sl-badge> badge 
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
+## Next
+
+- Fixed a bug in `sl-select` where no selection with `multiple` resulted in an incorrect value [#457](https://github.com/shoelace-style/shoelace/issues/457)
+
 ## 2.0.0-beta.43
 
 - Added `?` to optional arguments in methods tables
