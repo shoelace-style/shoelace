@@ -392,7 +392,7 @@ export default class SlDropdown extends LitElement {
       this.slHide.emit();
       this.panel.removeEventListener('sl-activate', this.handleMenuItemActivate);
       this.panel.removeEventListener('sl-select', this.handlePanelSelect);
-      document.addEventListener('keydown', this.handleDocumentKeyDown);
+      document.removeEventListener('keydown', this.handleDocumentKeyDown);
       document.removeEventListener('mousedown', this.handleDocumentMouseDown);
 
       await stopAnimations(this);
