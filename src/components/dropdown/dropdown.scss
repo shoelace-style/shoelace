@@ -29,6 +29,11 @@
   box-shadow: var(--sl-shadow-large);
   overflow: auto;
   overscroll-behavior: none;
+  pointer-events: none;
+}
+
+.dropdown--open .dropdown__panel {
+  pointer-events: all;
 }
 
 .dropdown__positioner {

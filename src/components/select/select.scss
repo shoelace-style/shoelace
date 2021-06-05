@@ -35,7 +35,7 @@
   color: var(--sl-input-color-hover);
 }
 
-.select:not(.select--disabled) .select__box:focus {
+.select.select--focused:not(.select--disabled) .select__box {
   background-color: var(--sl-input-background-color-focus);
   border-color: var(--sl-input-border-color-focus);
   box-shadow: var(--focus-ring);

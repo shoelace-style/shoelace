@@ -45,6 +45,7 @@ export default class SlSelect extends LitElement {
   static styles = unsafeCSS(styles);
 
   @query('.select') dropdown: SlDropdown;
+  @query('.select__box') box: SlDropdown;
   @query('.select__hidden-select') input: HTMLInputElement;
   @query('.select__menu') menu: SlMenu;
 
@@ -170,8 +171,11 @@ export default class SlSelect extends LitElement {
   }
 
   handleBlur() {
-    this.hasFocus = false;
-    this.slBlur.emit();
+    // Don't blur if the control is open. We'll move focus back once it closes.
+    if (!this.isOpen) {
+      this.hasFocus = false;
+      this.slBlur.emit();
+    }
   }
 
   handleClearClick(event: MouseEvent) {
@@ -189,8 +193,10 @@ export default class SlSelect extends LitElement {
   }
 
   handleFocus() {
-    this.hasFocus = true;
-    this.slFocus.emit();
+    if (!this.hasFocus) {
+      this.hasFocus = true;
+      this.slFocus.emit();
+    }
   }
 
   handleKeyDown(event: KeyboardEvent) {
@@ -268,6 +274,9 @@ export default class SlSelect extends LitElement {
 
   handleMenuHide() {
     this.isOpen = false;
+
+    // Restore focus on the box after the menu is hidden
+    this.box.focus();
   }
 
   @watch('multiple')
