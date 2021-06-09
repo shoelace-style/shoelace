@@ -30,6 +30,8 @@ Once you've done that, add the following tags to your page. Make sure to update 
 <script type="module" src="/scripts/shoelace/dist/shoelace.js"></script>
 ```
 
+?> For clarity, the docs will usually show imports from `@shoelace-style/shoelace`. If you're not using a module resolver or bundler, you'll need to adjust these paths to point to the folder Shoelace is in.
+
 ## Setting the Base Path
 
 Some components rely on assets (icons, images, etc.) and Shoelace needs to know where they're located. For convenience, Shoelace will try to auto-detect the correct location based on the script you've loaded it from. This assumes assets are colocated with `shoelace.js` and will "just work" for most users.
@@ -56,15 +58,15 @@ The previous approach is the _easiest_ way to load Shoelace, but easy isn't alwa
 
 Cherry picking can be done from your local install or [directly from the CDN](https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/). This will limit the number of files the browser has to download and reduce the amount of bytes being transferred. The disadvantage is that you need to load and register each component manually, including its dependencies.
 
-Here's an example that loads only the button component and its dependencies. Again, we're assuming you're serving Shoelace's `dist` directory from `/scripts/shoelace`.
+Here's an example that loads only the button component and its dependencies. Again, if you're not using a module resolver, you'll need to adjust the path to point to the folder Shoelace is in.
 
 ```html
 <!-- The base stylesheet is always required -->
-<link rel="stylesheet" href="/scripts/shoelace/dist/themes/base.css">
+<link rel="stylesheet" href="@shoelace-style/shoelace/dist/themes/base.css">
 
 <script type="module" data-shoelace="/scripts/shoelace">
-  import SlButton from '/scripts/shoelace/dist/components/button/button.js';
-  import SlSpinner from '/scripts/shoelace/dist/components/spinner/spinner.js';
+  import SlButton from '@shoelace-style/shoelace/dist/components/button/button.js';
+  import SlSpinner from '@shoelace-style/shoelace/dist/components/spinner/spinner.js';
   
   // <sl-button> and <sl-spinner> are ready to use!
 </script>
