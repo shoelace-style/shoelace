@@ -8,6 +8,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
+- Allow `null` to be passed to disable animations in `setDefaultAnimation()` and `setAnimation()`
 - Fixed a bug in `sl-dropdown` where a `keydown` listener wasn't cleaned up properly
 - Fixed a bug in `sl-select` where `sl-blur` was emitted prematurely [#456](https://github.com/shoelace-style/shoelace/issues/456)
 - Fixed a bug in `sl-select` where no selection with `multiple` resulted in an incorrect value [#457](https://github.com/shoelace-style/shoelace/issues/457)

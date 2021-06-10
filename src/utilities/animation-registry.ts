@@ -10,22 +10,26 @@ interface ElementAnimationMap {
 const defaultAnimationRegistry = new Map<String, ElementAnimation>();
 const customAnimationRegistry = new WeakMap<Element, ElementAnimationMap>();
 
+function ensureAnimation(animation: ElementAnimation | null) {
+  return animation ?? { keyframes: [], options: { duration: 0 } };
+}
+
 //
 // Sets a default animation. Components should use the `name.animation` for primary animations and `name.part.animation`
 // for secondary animations, e.g. `dialog.show` and `dialog.overlay.show`. For modifiers, use `drawer.showTop`.
 //
-export function setDefaultAnimation(animationName: string, animation: ElementAnimation) {
-  defaultAnimationRegistry.set(animationName, animation);
+export function setDefaultAnimation(animationName: string, animation: ElementAnimation | null) {
+  defaultAnimationRegistry.set(animationName, ensureAnimation(animation));
 }
 
 //
 // Sets a custom animation for the specified element.
 //
-export function setAnimation(el: Element, animationName: string, animation: ElementAnimation) {
+export function setAnimation(el: Element, animationName: string, animation: ElementAnimation | null) {
   customAnimationRegistry.set(
     el,
     Object.assign({}, customAnimationRegistry.get(el), {
-      [animationName]: animation
+      [animationName]: ensureAnimation(animation)
     })
   );
 }
