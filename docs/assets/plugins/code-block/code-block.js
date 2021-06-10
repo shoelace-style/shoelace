@@ -51,7 +51,7 @@
 
               ${pre.outerHTML}
 
-              <div class="code-block__toggle" aria-expanded="false" aria-controls="${preId}">
+              <button type="button" class="code-block__toggle" aria-expanded="false" aria-controls="${preId}">
                 Source
                 <svg
                   viewBox="0 0 24 24"
@@ -63,7 +63,7 @@
                 >
                   <polyline points="6 9 12 15 18 9"></polyline>
                 </svg>
-              </div>
+              </button>
             </div>
           `;
 
