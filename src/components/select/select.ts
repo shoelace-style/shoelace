@@ -239,8 +239,8 @@ export default class SlSelect extends LitElement {
       }
     }
 
-    // All other keys open the menu and initiate type to select
-    if (!this.isOpen) {
+    // All other "printable" keys open the menu and initiate type to select
+    if (!this.isOpen && event.key.length === 1) {
       event.stopPropagation();
       event.preventDefault();
       this.dropdown.show();
