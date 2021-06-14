@@ -47,7 +47,7 @@ This example demonstrates all of the baked-in animations and easings. Animations
 </div>
 
 <script type="module">
-  import { getAnimationNames, getEasingNames } from '@shoelace-style/shoelace/dist/utilities/animation.js';
+  import { getAnimationNames, getEasingNames } from '/dist/utilities/animation.js';
 
   const container = document.querySelector('.animation-sandbox');
   const animation = container.querySelector('sl-animation');
