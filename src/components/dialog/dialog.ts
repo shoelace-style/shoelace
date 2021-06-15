@@ -54,7 +54,6 @@ export default class SlDialog extends LitElement {
   @query('.dialog__overlay') overlay: HTMLElement;
 
   private componentId = `dialog-${++id}`;
-  private hasInitialized = false;
   private modal: Modal;
   private originalTrigger: HTMLElement | null;
 
@@ -106,9 +105,6 @@ export default class SlDialog extends LitElement {
   firstUpdated() {
     // Set initial visibility
     this.dialog.hidden = !this.open;
-
-    // Set the initialized flag after the first render is complete
-    this.updateComplete.then(() => (this.hasInitialized = true));
   }
 
   disconnectedCallback() {
@@ -147,12 +143,8 @@ export default class SlDialog extends LitElement {
     }
   }
 
-  @watch('open')
+  @watch('open', { waitUntilFirstUpdate: true })
   async handleOpenChange() {
-    if (!this.hasInitialized) {
-      return;
-    }
-
     if (this.open) {
       // Show
       this.slShow.emit();

@@ -97,7 +97,7 @@ export default class SlRadio extends LitElement {
     return this.getAllRadios().filter(radio => radio !== this) as this[];
   }
 
-  @watch('checked')
+  @watch('checked', { waitUntilFirstUpdate: true })
   handleCheckedChange() {
     if (this.checked) {
       this.getSiblingRadios().map(radio => (radio.checked = false));

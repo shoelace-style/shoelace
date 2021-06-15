@@ -14,6 +14,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug in `sl-select` where no selection with `multiple` resulted in an incorrect value [#457](https://github.com/shoelace-style/shoelace/issues/457)
 - Fixed a bug in `sl-select` where `sl-change` was emitted immediately after connecting to the DOM [#458](https://github.com/shoelace-style/shoelace/issues/458)
 - Fixed a bug in `sl-select` where non-printable keys would cause the menu to open
+- Reworked the `@watch` decorator to use `update` instead of `updated` resulting in better performance and flexibility
 
 ## 2.0.0-beta.43
 

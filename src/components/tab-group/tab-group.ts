@@ -216,7 +216,7 @@ export default class SlTabGroup extends LitElement {
     });
   }
 
-  @watch('noScrollControls')
+  @watch('noScrollControls', { waitUntilFirstUpdate: true })
   updateScrollControls() {
     if (this.noScrollControls) {
       this.hasScrollControls = false;
@@ -270,7 +270,7 @@ export default class SlTabGroup extends LitElement {
     });
   }
 
-  @watch('placement')
+  @watch('placement', { waitUntilFirstUpdate: true })
   syncIndicator() {
     if (this.indicator) {
       const tab = this.getActiveTab();

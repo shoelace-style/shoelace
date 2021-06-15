@@ -34,7 +34,7 @@ export default class SlProgressRing extends LitElement {
     this.updateProgress();
   }
 
-  @watch('percentage')
+  @watch('percentage', { waitUntilFirstUpdate: true })
   handlePercentageChange() {
     this.updateProgress();
   }

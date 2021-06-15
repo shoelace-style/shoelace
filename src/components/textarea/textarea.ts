@@ -238,7 +238,7 @@ export default class SlTextarea extends LitElement {
     this.slFocus.emit();
   }
 
-  @watch('rows')
+  @watch('rows', { waitUntilFirstUpdate: true })
   handleRowsChange() {
     this.setTextareaHeight();
   }
@@ -250,7 +250,7 @@ export default class SlTextarea extends LitElement {
     this.hasLabelSlot = hasSlot(this, 'label');
   }
 
-  @watch('value')
+  @watch('value', { waitUntilFirstUpdate: true })
   handleValueChange() {
     this.invalid = !this.input.checkValidity();
   }

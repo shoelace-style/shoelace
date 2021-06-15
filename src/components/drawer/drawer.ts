@@ -62,7 +62,6 @@ export default class SlDrawer extends LitElement {
   @query('.drawer__overlay') overlay: HTMLElement;
 
   private componentId = `drawer-${++id}`;
-  private hasInitialized = false;
   private modal: Modal;
   private originalTrigger: HTMLElement | null;
 
@@ -120,9 +119,6 @@ export default class SlDrawer extends LitElement {
   firstUpdated() {
     // Set initial visibility
     this.drawer.hidden = !this.open;
-
-    // Set the initialized flag after the first render is complete
-    this.updateComplete.then(() => (this.hasInitialized = true));
   }
 
   disconnectedCallback() {
@@ -161,12 +157,8 @@ export default class SlDrawer extends LitElement {
     }
   }
 
-  @watch('open')
+  @watch('open', { waitUntilFirstUpdate: true })
   async handleOpenChange() {
-    if (!this.hasInitialized) {
-      return;
-    }
-
     if (this.open) {
       // Show
       this.slShow.emit();

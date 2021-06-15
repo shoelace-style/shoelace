@@ -34,7 +34,6 @@ export default class SlTooltip extends LitElement {
   @query('.tooltip') tooltip: HTMLElement;
 
   private componentId = `tooltip-${++id}`;
-  private hasInitialized = false;
   private target: HTMLElement;
   private popover: PopperInstance;
   private hoverTimeout: any;
@@ -116,9 +115,6 @@ export default class SlTooltip extends LitElement {
   firstUpdated() {
     // Set initial visibility
     this.tooltip.hidden = !this.open;
-
-    // Set the initialized flag after the first render is complete
-    this.updateComplete.then(() => (this.hasInitialized = true));
   }
 
   disconnectedCallback() {
@@ -210,10 +206,9 @@ export default class SlTooltip extends LitElement {
     }
   }
 
-  @watch('open')
+  @watch('open', { waitUntilFirstUpdate: true })
   async handleOpenChange() {
-    // Prevent subsequent calls to the method, whether manually or triggered by the `open` watcher
-    if (!this.hasInitialized || this.disabled) {
+    if (this.disabled) {
       return;
     }
 

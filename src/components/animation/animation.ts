@@ -93,7 +93,11 @@ export default class SlAnimation extends LitElement {
   @watch('iterations')
   @watch('iterationsStart')
   @watch('keyframes')
-  handleAnimationChange() {
+  async handleAnimationChange() {
+    if (!this.hasUpdated) {
+      return;
+    }
+
     this.createAnimation();
   }
 

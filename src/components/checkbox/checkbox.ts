@@ -111,8 +111,8 @@ export default class SlCheckbox extends LitElement {
     this.input.focus();
   }
 
-  @watch('checked')
-  @watch('indeterminate')
+  @watch('checked', { waitUntilFirstUpdate: true })
+  @watch('indeterminate', { waitUntilFirstUpdate: true })
   handleStateChange() {
     this.input.checked = this.checked;
     this.input.indeterminate = this.indeterminate;

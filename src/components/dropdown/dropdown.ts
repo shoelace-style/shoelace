@@ -37,7 +37,6 @@ export default class SlDropdown extends LitElement {
   @query('.dropdown__positioner') positioner: HTMLElement;
 
   private componentId = `dropdown-${++id}`;
-  private hasInitialized = false;
   private popover: PopperInstance;
 
   /** Indicates whether or not the dropdown is open. You can use this in lieu of the show/hide methods. */
@@ -131,9 +130,6 @@ export default class SlDropdown extends LitElement {
   firstUpdated() {
     // Set initial visibility
     this.panel.hidden = !this.open;
-
-    // Set the initialized flag after the first render is complete
-    this.updateComplete.then(() => (this.hasInitialized = true));
   }
 
   disconnectedCallback() {
@@ -364,9 +360,9 @@ export default class SlDropdown extends LitElement {
     this.popover.update();
   }
 
-  @watch('open')
+  @watch('open', { waitUntilFirstUpdate: true })
   async handleOpenChange() {
-    if (!this.hasInitialized || this.disabled) {
+    if (this.disabled) {
       return;
     }
 

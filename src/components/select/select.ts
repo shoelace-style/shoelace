@@ -50,7 +50,6 @@ export default class SlSelect extends LitElement {
   @query('.select__menu') menu: SlMenu;
 
   private inputId = `select-${++id}`;
-  private hasInitialized = false;
   private helpTextId = `select-help-text-${id}`;
   private labelId = `select-label-${id}`;
   private resizeObserver: ResizeObserver;
@@ -131,7 +130,6 @@ export default class SlSelect extends LitElement {
       this.resizeObserver.observe(this);
       this.shadowRoot!.addEventListener('slotchange', this.handleSlotChange);
       this.syncItemsFromValue();
-      this.hasInitialized = true;
     });
   }
 
@@ -185,7 +183,7 @@ export default class SlSelect extends LitElement {
     this.syncItemsFromValue();
   }
 
-  @watch('disabled')
+  @watch('disabled', { waitUntilFirstUpdate: true })
   handleDisabledChange() {
     if (this.disabled && this.isOpen) {
       this.dropdown.hide();
@@ -279,7 +277,7 @@ export default class SlSelect extends LitElement {
     this.box.focus();
   }
 
-  @watch('multiple')
+  @watch('multiple', { waitUntilFirstUpdate: true })
   handleMultipleChange() {
     // Cast to array | string based on `this.multiple`
     const value = this.getValueAsArray();
@@ -287,8 +285,8 @@ export default class SlSelect extends LitElement {
     this.syncItemsFromValue();
   }
 
-  @watch('helpText')
-  @watch('label')
+  @watch('helpText', { waitUntilFirstUpdate: true })
+  @watch('label', { waitUntilFirstUpdate: true })
   async handleSlotChange() {
     this.hasHelpTextSlot = hasSlot(this, 'help-text');
     this.hasLabelSlot = hasSlot(this, 'label');
@@ -314,13 +312,10 @@ export default class SlSelect extends LitElement {
     }
   }
 
-  @watch('value')
+  @watch('value', { waitUntilFirstUpdate: true })
   handleValueChange() {
     this.syncItemsFromValue();
-
-    if (this.hasInitialized) {
-      this.slChange.emit();
-    }
+    this.slChange.emit();
   }
 
   resizeMenu() {

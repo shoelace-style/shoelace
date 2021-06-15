@@ -92,7 +92,7 @@ export default class SlImageComparer extends LitElement {
     }
   }
 
-  @watch('position')
+  @watch('position', { waitUntilFirstUpdate: true })
   handlePositionChange() {
     this.slChange.emit();
   }

@@ -63,32 +63,41 @@ export class EventEmitter<T> {
 
 // @watch decorator
 //
-// Runs after an observed property changes, e.g. @property or @state.
+// Runs when an observed property changes, e.g. @property or @state, but before the component updates.
 //
-// Note that changing props in a watch handler *will* trigger a rerender. To make pre-update changes to observed
-// properties, use the `update()` method instead.
+// To wait for the update to complete after a change, use `await this.updateComplete` in the handler. To determine if
+// the component has previously been updated/rendered, check `this.hasUpdated` in the handler.
 //
 // Usage:
 //
-//  @watch('propName') handlePropChange(oldValue, newValue) {
+//  @watch('propName')
+//  handlePropChange(oldValue, newValue) {
 //    ...
 //  }
 //
-export function watch(propName: string) {
-  return (protoOrDescriptor: any, name: string): any => {
-    const { updated } = protoOrDescriptor;
+interface WatchOptions {
+  waitUntilFirstUpdate?: boolean;
+}
 
-    protoOrDescriptor.updated = function (changedProps: Map<string, any>) {
+export function watch(propName: string, options?: WatchOptions) {
+  return (protoOrDescriptor: any, name: string): any => {
+    const { update } = protoOrDescriptor;
+
+    options = Object.assign({ waitUntilFirstUpdate: false }, options) as WatchOptions;
+
+    protoOrDescriptor.update = function (changedProps: Map<string, any>) {
       if (changedProps.has(propName)) {
         const oldValue = changedProps.get(propName);
         const newValue = this[propName];
 
         if (oldValue !== newValue) {
-          this[name].call(this, oldValue, newValue);
+          if (!options?.waitUntilFirstUpdate || this.hasUpdated) {
+            this[name].call(this, oldValue, newValue);
+          }
         }
       }
 
-      updated.call(this, changedProps);
+      update.call(this, changedProps);
     };
   };
 }

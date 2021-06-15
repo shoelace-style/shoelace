@@ -33,7 +33,6 @@ export default class SlAlert extends LitElement {
   static styles = unsafeCSS(styles);
 
   private autoHideTimeout: any;
-  private hasInitialized = false;
 
   @query('[part="base"]') base: HTMLElement;
 
@@ -67,9 +66,6 @@ export default class SlAlert extends LitElement {
   firstUpdated() {
     // Set initial visibility
     this.base.hidden = !this.open;
-
-    // Set the initialized flag after the first render is complete
-    this.updateComplete.then(() => (this.hasInitialized = true));
   }
 
   /** Shows the alert. */
@@ -142,12 +138,8 @@ export default class SlAlert extends LitElement {
     this.restartAutoHide();
   }
 
-  @watch('open')
+  @watch('open', { waitUntilFirstUpdate: true })
   async handleOpenChange() {
-    if (!this.hasInitialized) {
-      return;
-    }
-
     if (this.open) {
       // Show
       this.slShow.emit();
@@ -177,7 +169,7 @@ export default class SlAlert extends LitElement {
     }
   }
 
-  @watch('duration')
+  @watch('duration', { waitUntilFirstUpdate: true })
   handleDurationChange() {
     this.restartAutoHide();
   }

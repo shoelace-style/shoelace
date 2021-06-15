@@ -163,7 +163,7 @@ export default class SlRating extends LitElement {
     event.preventDefault();
   }
 
-  @watch('value')
+  @watch('value', { waitUntilFirstUpdate: true })
   handleValueChange() {
     this.slChange.emit();
   }

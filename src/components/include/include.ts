@@ -30,11 +30,6 @@ export default class SlInclude extends LitElement {
   /** Emitted when the included file fails to load due to an error. */
   @event('sl-error') slError: EventEmitter<{ status: number }>;
 
-  connectedCallback() {
-    super.connectedCallback();
-    this.loadSource();
-  }
-
   executeScript(script: HTMLScriptElement) {
     // Create a copy of the script and swap it out so the browser executes it
     const newScript = document.createElement('script');
@@ -44,7 +39,7 @@ export default class SlInclude extends LitElement {
   }
 
   @watch('src')
-  async loadSource() {
+  async handleSrcChange() {
     try {
       const src = this.src;
       const file = await requestInclude(src, this.mode);

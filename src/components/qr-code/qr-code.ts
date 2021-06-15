@@ -49,6 +49,10 @@ export default class SlQrCode extends LitElement {
   @watch('size')
   @watch('value')
   generate() {
+    if (!this.hasUpdated) {
+      return;
+    }
+
     QrCreator.render(
       {
         text: this.value,

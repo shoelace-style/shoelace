@@ -37,7 +37,6 @@ export default class SlDetails extends LitElement {
   @query('.details__body') body: HTMLElement;
 
   private componentId = `details-${++id}`;
-  private hasInitialized = false;
 
   /** Indicates whether or not the details is open. You can use this in lieu of the show/hide methods. */
   @property({ type: Boolean, reflect: true }) open = false;
@@ -68,9 +67,6 @@ export default class SlDetails extends LitElement {
   firstUpdated() {
     this.body.hidden = !this.open;
     this.body.style.height = this.open ? 'auto' : '0';
-
-    // Set the initialized flag after the first render is complete
-    this.updateComplete.then(() => (this.hasInitialized = true));
   }
 
   disconnectedCallback() {
@@ -122,12 +118,8 @@ export default class SlDetails extends LitElement {
     }
   }
 
-  @watch('open')
+  @watch('open', { waitUntilFirstUpdate: true })
   async handleOpenChange() {
-    if (!this.hasInitialized) {
-      return;
-    }
-
     if (this.open) {
       // Show
       this.slShow.emit();
