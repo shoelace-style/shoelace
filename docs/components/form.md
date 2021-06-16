@@ -75,8 +75,6 @@ When a form control is invalid, the containing form will not be submitted. Inste
 
 All form controls support validation, but not all validation props are available for every component. Refer to a component's documentation to see which validation props it supports.
 
-Note that validity is not checked until the user interacts with the control or its containing form is submitted. This prevents required controls from being rendered as invalid right away, which can result in a poor user experience. If you need this behavior, set the `invalid` attribute initially.
-
 !> Client-side validation can be used to improve the UX of forms, but it is not a replacement for server-side validation. **You should always validate and sanitize user input on the server!**
 
 ### Required Fields

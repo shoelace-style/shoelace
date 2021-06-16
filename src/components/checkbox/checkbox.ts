@@ -62,6 +62,7 @@ export default class SlCheckbox extends LitElement {
 
   firstUpdated() {
     this.input.indeterminate = this.indeterminate;
+    this.invalid = !this.input.checkValidity();
   }
 
   /** Simulates a click on the checkbox. */
@@ -116,6 +117,7 @@ export default class SlCheckbox extends LitElement {
   handleStateChange() {
     this.input.checked = this.checked;
     this.input.indeterminate = this.indeterminate;
+    this.invalid = !this.input.checkValidity();
     this.slChange.emit();
   }
 

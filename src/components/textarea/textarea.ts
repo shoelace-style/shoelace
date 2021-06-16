@@ -140,6 +140,10 @@ export default class SlTextarea extends LitElement {
     });
   }
 
+  firstUpdated() {
+    this.invalid = !this.input.checkValidity();
+  }
+
   disconnectedCallback() {
     super.disconnectedCallback();
     this.resizeObserver.unobserve(this.input);

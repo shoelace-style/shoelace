@@ -133,6 +133,10 @@ export default class SlSelect extends LitElement {
     });
   }
 
+  firstUpdated() {
+    this.invalid = !this.input.checkValidity();
+  }
+
   disconnectedCallback() {
     super.disconnectedCallback();
     this.resizeObserver.unobserve(this);
@@ -313,8 +317,10 @@ export default class SlSelect extends LitElement {
   }
 
   @watch('value', { waitUntilFirstUpdate: true })
-  handleValueChange() {
+  async handleValueChange() {
     this.syncItemsFromValue();
+    await this.updateComplete;
+    this.invalid = !this.input.checkValidity();
     this.slChange.emit();
   }
 

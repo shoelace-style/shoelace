@@ -60,6 +60,10 @@ export default class SlSwitch extends LitElement {
   /** Emitted when the control gains focus. */
   @event('sl-focus') slFocus: EventEmitter<void>;
 
+  firstUpdated() {
+    this.invalid = !this.input.checkValidity();
+  }
+
   /** Simulates a click on the switch. */
   click() {
     this.input.click();
@@ -122,6 +126,7 @@ export default class SlSwitch extends LitElement {
   handleCheckedChange() {
     if (this.input) {
       this.input.checked = this.checked;
+      this.invalid = !this.input.checkValidity();
       this.slChange.emit();
     }
   }

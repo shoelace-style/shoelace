@@ -8,12 +8,15 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
+- 🚨 BREAKING: all `invalid` props on form controls now reflect validity before interaction [#455](https://github.com/shoelace-style/shoelace/issues/455)
 - Allow `null` to be passed to disable animations in `setDefaultAnimation()` and `setAnimation()`
+- Fixed a bug in `sl-checkbox` where `invalid` did not update properly
 - Fixed a bug in `sl-dropdown` where a `keydown` listener wasn't cleaned up properly
 - Fixed a bug in `sl-select` where `sl-blur` was emitted prematurely [#456](https://github.com/shoelace-style/shoelace/issues/456)
 - Fixed a bug in `sl-select` where no selection with `multiple` resulted in an incorrect value [#457](https://github.com/shoelace-style/shoelace/issues/457)
 - Fixed a bug in `sl-select` where `sl-change` was emitted immediately after connecting to the DOM [#458](https://github.com/shoelace-style/shoelace/issues/458)
 - Fixed a bug in `sl-select` where non-printable keys would cause the menu to open
+- Fixed a bug in `sl-select` where `invalid` was not always updated properly
 - Reworked the `@watch` decorator to use `update` instead of `updated` resulting in better performance and flexibility
 
 ## 2.0.0-beta.43

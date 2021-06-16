@@ -152,6 +152,10 @@ export default class SlInput extends LitElement {
     this.shadowRoot!.addEventListener('slotchange', this.handleSlotChange);
   }
 
+  firstUpdated() {
+    this.invalid = !this.input.checkValidity();
+  }
+
   disconnectedCallback() {
     super.disconnectedCallback();
     this.shadowRoot!.removeEventListener('slotchange', this.handleSlotChange);
