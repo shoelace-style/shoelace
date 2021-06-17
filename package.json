@@ -29,11 +29,11 @@
     "url": "https://github.com/sponsors/claviska"
   },
   "scripts": {
-    "start": "node scripts/build.cjs --dev",
-    "build": "node scripts/build.cjs",
+    "start": "node scripts/build.js --dev",
+    "build": "node scripts/build.js",
     "prepublishOnly": "npm run build && npm run test",
     "prettier": "prettier --write --loglevel warn .",
-    "create": "node scripts/create-component.cjs",
+    "create": "node scripts/create-component.js",
     "test": "web-test-runner \"src/**/*.test.ts\" --node-resolve --puppeteer",
     "test:watch": "web-test-runner \"src/**/*.test.ts\" --node-resolve --puppeteer --watch"
   },

@@ -1,12 +1,13 @@
 //
 // This script runs TypeDoc and uses its output to generate metadata files used by the docs
 //
-const chalk = require('chalk');
-const execSync = require('child_process').execSync;
-const fs = require('fs');
-const mkdirp = require('mkdirp');
-const path = require('path');
-const package = require('../package.json');
+import chalk from 'chalk';
+import { execSync } from 'child_process';
+import fs from 'fs';
+import mkdirp from 'mkdirp';
+import path from 'path';
+
+const packageData = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
 
 function getTagName(className) {
   return className.replace(/[A-Z]/g, m => `-${m.toLowerCase()}`).replace(/^-/, '');
@@ -78,12 +79,12 @@ const data = JSON.parse(fs.readFileSync('.cache/typedoc.json', 'utf8'));
 const modules = data.children;
 const components = modules.filter(module => module.kindString === 'Class');
 const metadata = {
-  name: package.name,
-  description: package.description,
-  version: package.version,
-  author: package.author,
-  homepage: package.homepage,
-  license: package.license,
+  name: packageData.name,
+  description: packageData.description,
+  version: packageData.version,
+  author: packageData.author,
+  homepage: packageData.homepage,
+  license: packageData.license,
   components: []
 };
 

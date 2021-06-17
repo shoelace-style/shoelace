@@ -1,30 +1,30 @@
 //
 // This script downloads and generates icons and icon metadata.
 //
-const Promise = require('bluebird');
-const promisify = require('util').promisify;
-const chalk = require('chalk');
-const copy = require('recursive-copy');
-const del = require('del');
-const download = require('download');
-const mkdirp = require('mkdirp');
-const fm = require('front-matter');
-const fs = require('fs').promises;
-const glob = promisify(require('glob'));
-const path = require('path');
+import Promise from 'bluebird';
+import chalk from 'chalk';
+import copy from 'recursive-copy';
+import del from 'del';
+import download from 'download';
+import mkdirp from 'mkdirp';
+import fm from 'front-matter';
+import { readFileSync } from 'fs';
+import { stat, readFile, writeFile } from 'fs/promises';
+import glob from 'globby';
+import path from 'path';
 
-const baseDir = path.dirname(__dirname);
 const iconDir = './dist/assets/icons';
+const iconPackageData = JSON.parse(readFileSync('./node_modules/bootstrap-icons/package.json', 'utf8'));
 let numIcons = 0;
 
 (async () => {
   try {
-    const version = require('bootstrap-icons/package').version;
+    const version = iconPackageData.version;
     const srcPath = `./.cache/icons/icons-${version}`;
     const url = `https://github.com/twbs/icons/archive/v${version}.zip`;
 
     try {
-      await fs.stat(`${srcPath}/LICENSE.md`);
+      await stat(`${srcPath}/LICENSE.md`);
       console.log(chalk.cyan('Generating icons from cache'));
     } catch {
       // Download the source from GitHub (since not everything is published to NPM)
@@ -48,7 +48,7 @@ let numIcons = 0;
 
     const metadata = await Promise.map(files, async file => {
       const name = path.basename(file, path.extname(file));
-      const data = fm(await fs.readFile(file, 'utf8')).attributes;
+      const data = fm(await readFile(file, 'utf8')).attributes;
       numIcons++;
 
       return {
@@ -59,7 +59,7 @@ let numIcons = 0;
       };
     });
 
-    await fs.writeFile(path.join(iconDir, 'icons.json'), JSON.stringify(metadata, null, 2), 'utf8');
+    await writeFile(path.join(iconDir, 'icons.json'), JSON.stringify(metadata, null, 2), 'utf8');
 
     console.log(chalk.green(`Successfully processed ${numIcons} icons ✨\n`));
   } catch (err) {

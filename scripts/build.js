@@ -1,28 +1,29 @@
 //
 // Builds the project. To spin up a dev server, pass the --serve flag.
 //
-const bs = require('browser-sync').create();
-const chalk = require('chalk');
-const commandLineArgs = require('command-line-args');
-const copy = require('recursive-copy');
-const del = require('del');
-const esbuild = require('esbuild');
-const execSync = require('child_process').execSync;
-const getPort = require('get-port');
-const glob = require('globby');
-const inlineImportPlugin = require('esbuild-plugin-inline-import');
-const path = require('path');
-const sass = require('sass');
-const sassPlugin = require('esbuild-plugin-sass');
-const { build } = require('esbuild');
+import browserSync from 'browser-sync';
+import chalk from 'chalk';
+import commandLineArgs from 'command-line-args';
+import copy from 'recursive-copy';
+import del from 'del';
+import esbuild from 'esbuild';
+import { execSync } from 'child_process';
+import getPort from 'get-port';
+import glob from 'globby';
+import inlineImportPlugin from 'esbuild-plugin-inline-import';
+import path from 'path';
+import sass from 'sass';
+import sassPlugin from 'esbuild-plugin-sass';
 
+const build = esbuild.build;
+const bs = browserSync.create();
 const { dev } = commandLineArgs({ name: 'dev', type: Boolean });
 
 del.sync('./dist');
 
 if (!dev) execSync('tsc', { stdio: 'inherit' }); // for type declarations
-execSync('node scripts/make-metadata.cjs', { stdio: 'inherit' });
-execSync('node scripts/make-icons.cjs', { stdio: 'inherit' });
+execSync('node scripts/make-metadata.js', { stdio: 'inherit' });
+execSync('node scripts/make-icons.js', { stdio: 'inherit' });
 
 (async () => {
   const entryPoints = [

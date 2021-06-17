@@ -10,6 +10,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 - 🚨 BREAKING: all `invalid` props on form controls now reflect validity before interaction [#455](https://github.com/shoelace-style/shoelace/issues/455)
 - Allow `null` to be passed to disable animations in `setDefaultAnimation()` and `setAnimation()`
+- Converted build scripts to ESM
 - Fixed a bug in `sl-checkbox` where `invalid` did not update properly
 - Fixed a bug in `sl-dropdown` where a `keydown` listener wasn't cleaned up properly
 - Fixed a bug in `sl-select` where `sl-blur` was emitted prematurely [#456](https://github.com/shoelace-style/shoelace/issues/456)
@@ -21,7 +22,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## 2.0.0-beta.43
 
-- Added `?` to optional arguments in methods tables
+- Added `?` to optional arguments in methods tables in the docs
 - Added the `scrollPosition()` method to `sl-textarea` to get/set scroll position
 - Added intial tests for `sl-dialog`, `sl-drawer`, `sl-dropdown`, and `sl-tooltip`
 - Fixed a bug in `sl-tab-group` where scrollable tab icons were not displaying correctly

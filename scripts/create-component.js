@@ -1,17 +1,19 @@
-const args = process.argv.slice(2);
-const chalk = require('chalk');
-const fs = require('fs');
-const mkdirp = require('mkdirp');
-const path = require('path');
+import chalk from 'chalk';
+import fs from 'fs';
+import mkdirp from 'mkdirp';
+import path from 'path';
+import process from 'process';
 
+const args = process.argv.slice(2);
 const tagName = (args[0] + '').toLowerCase().trim();
 const tagNameWithoutPrefix = tagName.replace(/^sl-/, '');
 const className = tagName.replace(/(^\w|-\w)/g, string => string.replace(/-/, '').toUpperCase());
 const readableName = tagNameWithoutPrefix
   .replace(/-/g, ' ')
   .replace(/\w\S*/g, string => string.charAt(0).toUpperCase() + string.substr(1).toLowerCase());
-const version = require('../package.json').version;
-const minorVersion = version.split('.').slice(0, 2).join('.');
+
+const packageData = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
+const minorVersion = packageData.version.split('.').slice(0, 2).join('.');
 
 // Check for tag name
 if (!tagName) {
