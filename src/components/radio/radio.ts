@@ -172,8 +172,8 @@ export default class SlRadio extends LitElement {
             type="radio"
             name=${ifDefined(this.name)}
             value=${ifDefined(this.value)}
-            ?checked=${this.checked}
-            ?disabled=${this.disabled}
+            .checked=${this.checked}
+            .disabled=${this.disabled}
             aria-checked=${this.checked ? 'true' : 'false'}
             aria-disabled=${this.disabled ? 'true' : 'false'}
             aria-labelledby=${this.labelId}

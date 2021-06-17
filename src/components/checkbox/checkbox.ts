@@ -61,7 +61,6 @@ export default class SlCheckbox extends LitElement {
   @event('sl-focus') slFocus: EventEmitter<void>;
 
   firstUpdated() {
-    this.input.indeterminate = this.indeterminate;
     this.invalid = !this.input.checkValidity();
   }
 
@@ -115,8 +114,6 @@ export default class SlCheckbox extends LitElement {
   @watch('checked', { waitUntilFirstUpdate: true })
   @watch('indeterminate', { waitUntilFirstUpdate: true })
   handleStateChange() {
-    this.input.checked = this.checked;
-    this.input.indeterminate = this.indeterminate;
     this.invalid = !this.input.checkValidity();
     this.slChange.emit();
   }
@@ -173,9 +170,10 @@ export default class SlCheckbox extends LitElement {
             type="checkbox"
             name=${ifDefined(this.name)}
             value=${ifDefined(this.value)}
-            ?checked=${this.checked}
-            ?disabled=${this.disabled}
-            ?required=${this.required}
+            .indeterminate=${this.indeterminate}
+            .checked=${this.checked}
+            .disabled=${this.disabled}
+            .required=${this.required}
             role="checkbox"
             aria-checked=${this.checked ? 'true' : 'false'}
             aria-labelledby=${this.labelId}

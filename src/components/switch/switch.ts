@@ -152,9 +152,9 @@ export default class SlSwitch extends LitElement {
             type="checkbox"
             name=${ifDefined(this.name)}
             value=${ifDefined(this.value)}
-            ?checked=${this.checked}
-            ?disabled=${this.disabled}
-            ?required=${this.required}
+            .checked=${this.checked}
+            .disabled=${this.disabled}
+            .required=${this.required}
             role="switch"
             aria-checked=${this.checked ? 'true' : 'false'}
             aria-labelledby=${this.labelId}
