@@ -113,7 +113,6 @@ export default class SlTooltip extends LitElement {
   }
 
   firstUpdated() {
-    // Set initial visibility
     this.tooltip.hidden = !this.open;
   }
 

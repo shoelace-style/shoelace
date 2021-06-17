@@ -128,7 +128,6 @@ export default class SlDropdown extends LitElement {
   }
 
   firstUpdated() {
-    // Set initial visibility
     this.panel.hidden = !this.open;
   }
 

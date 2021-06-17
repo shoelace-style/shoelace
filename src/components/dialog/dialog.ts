@@ -103,7 +103,6 @@ export default class SlDialog extends LitElement {
   }
 
   firstUpdated() {
-    // Set initial visibility
     this.dialog.hidden = !this.open;
   }
 

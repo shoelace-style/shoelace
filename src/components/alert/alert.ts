@@ -64,7 +64,6 @@ export default class SlAlert extends LitElement {
   @event('sl-after-hide') slAfterHide: EventEmitter<void>;
 
   firstUpdated() {
-    // Set initial visibility
     this.base.hidden = !this.open;
   }
 

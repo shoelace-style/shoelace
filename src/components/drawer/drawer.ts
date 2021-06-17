@@ -117,7 +117,6 @@ export default class SlDrawer extends LitElement {
   }
 
   firstUpdated() {
-    // Set initial visibility
     this.drawer.hidden = !this.open;
   }
 
