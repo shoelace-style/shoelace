@@ -187,7 +187,7 @@ export default class SlSelect extends LitElement {
     this.syncItemsFromValue();
   }
 
-  @watch('disabled', { waitUntilFirstUpdate: true })
+  @watch('disabled')
   handleDisabledChange() {
     if (this.disabled && this.isOpen) {
       this.dropdown.hide();
@@ -281,7 +281,7 @@ export default class SlSelect extends LitElement {
     this.box.focus();
   }
 
-  @watch('multiple', { waitUntilFirstUpdate: true })
+  @watch('multiple')
   handleMultipleChange() {
     // Cast to array | string based on `this.multiple`
     const value = this.getValueAsArray();
@@ -289,8 +289,8 @@ export default class SlSelect extends LitElement {
     this.syncItemsFromValue();
   }
 
-  @watch('helpText', { waitUntilFirstUpdate: true })
-  @watch('label', { waitUntilFirstUpdate: true })
+  @watch('helpText')
+  @watch('label')
   async handleSlotChange() {
     this.hasHelpTextSlot = hasSlot(this, 'help-text');
     this.hasLabelSlot = hasSlot(this, 'label');

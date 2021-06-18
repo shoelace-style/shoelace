@@ -35,10 +35,6 @@ export default class SlProgressRing extends LitElement {
   }
 
   @watch('percentage', { waitUntilFirstUpdate: true })
-  handlePercentageChange() {
-    this.updateProgress();
-  }
-
   updateProgress() {
     const radius = this.indicator.r.baseVal.value;
     const circumference = radius * 2 * Math.PI;

@@ -65,8 +65,8 @@ export class EventEmitter<T> {
 //
 // Runs when an observed property changes, e.g. @property or @state, but before the component updates.
 //
-// To wait for the update to complete after a change, use `await this.updateComplete` in the handler. To determine if
-// the component has previously been updated/rendered, check `this.hasUpdated` in the handler.
+// To wait for an update to complete after a change occurs, use `await this.updateComplete` in the handler. To start
+// watching after the initial update/render, use `{ waitUntilFirstUpdate: true }` or `this.hasUpdated` in the handler.
 //
 // Usage:
 //

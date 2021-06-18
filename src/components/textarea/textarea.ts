@@ -242,7 +242,7 @@ export default class SlTextarea extends LitElement {
     this.slFocus.emit();
   }
 
-  @watch('rows', { waitUntilFirstUpdate: true })
+  @watch('rows')
   handleRowsChange() {
     this.setTextareaHeight();
   }
@@ -254,17 +254,21 @@ export default class SlTextarea extends LitElement {
     this.hasLabelSlot = hasSlot(this, 'label');
   }
 
-  @watch('value', { waitUntilFirstUpdate: true })
+  @watch('value')
   handleValueChange() {
-    this.invalid = !this.input.checkValidity();
+    if (this.input) {
+      this.invalid = !this.input.checkValidity();
+    }
   }
 
   setTextareaHeight() {
-    if (this.resize === 'auto') {
-      this.input.style.height = 'auto';
-      this.input.style.height = this.input.scrollHeight + 'px';
-    } else {
-      (this.input.style.height as string | undefined) = undefined;
+    if (this.input) {
+      if (this.resize === 'auto') {
+        this.input.style.height = 'auto';
+        this.input.style.height = this.input.scrollHeight + 'px';
+      } else {
+        (this.input.style.height as string | undefined) = undefined;
+      }
     }
   }
 

@@ -216,13 +216,15 @@ export default class SlTabGroup extends LitElement {
     });
   }
 
-  @watch('noScrollControls', { waitUntilFirstUpdate: true })
+  @watch('noScrollControls')
   updateScrollControls() {
-    if (this.noScrollControls) {
-      this.hasScrollControls = false;
-    } else {
-      this.hasScrollControls =
-        ['top', 'bottom'].includes(this.placement) && this.nav.scrollWidth > this.nav.clientWidth;
+    if (this.nav) {
+      if (this.noScrollControls) {
+        this.hasScrollControls = false;
+      } else {
+        this.hasScrollControls =
+          ['top', 'bottom'].includes(this.placement) && this.nav.scrollWidth > this.nav.clientWidth;
+      }
     }
   }
 
@@ -270,7 +272,7 @@ export default class SlTabGroup extends LitElement {
     });
   }
 
-  @watch('placement', { waitUntilFirstUpdate: true })
+  @watch('placement')
   syncIndicator() {
     if (this.indicator) {
       const tab = this.getActiveTab();

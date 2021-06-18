@@ -168,7 +168,7 @@ export default class SlAlert extends LitElement {
     }
   }
 
-  @watch('duration', { waitUntilFirstUpdate: true })
+  @watch('duration')
   handleDurationChange() {
     this.restartAutoHide();
   }
