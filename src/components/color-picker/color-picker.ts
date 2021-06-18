@@ -554,17 +554,17 @@ export default class SlColorPicker extends LitElement {
     this.value = this.inputValue;
   }
 
-  @watch('format', { waitUntilFirstUpdate: true })
+  @watch('format')
   handleFormatChange() {
     this.syncValues();
   }
 
-  @watch('opacity', { waitUntilFirstUpdate: true })
+  @watch('opacity')
   handleOpacityChange() {
     this.alpha = 100;
   }
 
-  @watch('value', { waitUntilFirstUpdate: true })
+  @watch('value')
   handleValueChange(oldValue: string, newValue: string) {
     const newColor = this.parseColor(newValue);
 
