@@ -33,7 +33,7 @@
     "build": "node scripts/build.js",
     "prepublishOnly": "npm run build && npm run test",
     "prettier": "prettier --write --loglevel warn .",
-    "create": "node scripts/create-component.js",
+    "create": "plop --plopfile scripts/plop/plopfile.cjs",
     "test": "web-test-runner \"src/**/*.test.ts\" --node-resolve --puppeteer",
     "test:watch": "web-test-runner \"src/**/*.test.ts\" --node-resolve --puppeteer --watch"
   },
@@ -66,6 +66,7 @@
     "front-matter": "^4.0.2",
     "get-port": "^5.1.1",
     "husky": "^4.3.8",
+    "plop": "^2.7.4",
     "prettier": "^2.2.1",
     "recursive-copy": "^2.0.11",
     "sass": "^1.32.7",

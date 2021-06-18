@@ -48,6 +48,7 @@
   - [Tag](/components/tag)
   - [Textarea](/components/textarea)
   - [Tooltip](/components/tooltip)
+  <!--plop:component-->
 
 - Utilities
   - [Animation](/components/animation)
