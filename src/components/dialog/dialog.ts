@@ -42,6 +42,7 @@ let id = 0;
  *
  * @animation dialog.show - The animation to use when showing the dialog.
  * @animation dialog.hide - The animation to use when hiding the dialog.
+ * @animation dialog.denyClose - The animation to use when a request to close the dialog is denied.
  * @animation dialog.overlay.show - The animation to use when showing the dialog's overlay.
  * @animation dialog.overlay.hide - The animation to use when hiding the dialog's overlay.
  */
@@ -92,8 +93,12 @@ export default class SlDialog extends LitElement {
    */
   @event('sl-initial-focus') slInitialFocus: EventEmitter<void>;
 
-  /** Emitted when the overlay is clicked. Calling `event.preventDefault()` will prevent the dialog from closing. */
-  @event('sl-overlay-dismiss') slOverlayDismiss: EventEmitter<void>;
+  /**
+   * Emitted when the user attempts to close the dialog by clicking the close button, clicking the overlay, or pressing
+   * the escape key. Calling `event.preventDefault()` will prevent the dialog from closing. Avoid using this unless
+   * closing the dialog will result in destructive behavior such as data loss.
+   */
+  @event('sl-request-close') slRequestClose: EventEmitter<void>;
 
   connectedCallback() {
     super.connectedCallback();
@@ -131,14 +136,21 @@ export default class SlDialog extends LitElement {
     return waitForEvent(this, 'sl-after-hide');
   }
 
-  handleCloseClick() {
+  private requestClose() {
+    const slRequestClose = this.slRequestClose.emit({ cancelable: true });
+    if (slRequestClose.defaultPrevented) {
+      const animation = getAnimation(this, 'dialog.denyClose');
+      animateTo(this.panel, animation.keyframes, animation.options);
+      return;
+    }
+
     this.hide();
   }
 
   handleKeyDown(event: KeyboardEvent) {
     if (event.key === 'Escape') {
       event.stopPropagation();
-      this.hide();
+      this.requestClose();
     }
   }
 
@@ -206,13 +218,6 @@ export default class SlDialog extends LitElement {
     }
   }
 
-  handleOverlayClick() {
-    const slOverlayDismiss = this.slOverlayDismiss.emit({ cancelable: true });
-    if (!slOverlayDismiss.defaultPrevented) {
-      this.hide();
-    }
-  }
-
   handleSlotChange() {
     this.hasFooter = hasSlot(this, 'footer');
   }
@@ -228,7 +233,7 @@ export default class SlDialog extends LitElement {
         })}
         @keydown=${this.handleKeyDown}
       >
-        <div part="overlay" class="dialog__overlay" @click=${this.handleOverlayClick} tabindex="-1"></div>
+        <div part="overlay" class="dialog__overlay" @click=${this.requestClose} tabindex="-1"></div>
 
         <div
           part="panel"
@@ -251,7 +256,7 @@ export default class SlDialog extends LitElement {
                     class="dialog__close"
                     name="x"
                     library="system"
-                    @click="${this.handleCloseClick}"
+                    @click="${this.requestClose}"
                   ></sl-icon-button>
                 </header>
               `
@@ -284,6 +289,11 @@ setDefaultAnimation('dialog.hide', {
     { opacity: 0, transform: 'scale(0.8)' }
   ],
   options: { duration: 250, easing: 'ease' }
+});
+
+setDefaultAnimation('dialog.denyClose', {
+  keyframes: [{ transform: 'scale(1)' }, { transform: 'scale(1.02)' }, { transform: 'scale(1)' }],
+  options: { duration: 250 }
 });
 
 setDefaultAnimation('dialog.overlay.show', {

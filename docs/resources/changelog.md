@@ -8,6 +8,9 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
+- 🚨 BREAKING: removed the `sl-overlay-click` event from `sl-dialog` and `sl-drawer` (use `sl-request-close` instead) [#471](https://github.com/shoelace-style/shoelace/discussions/471)
+- Added `sl-request-close` event to `sl-dialog` and `sl-drawer`
+- Added `dialog.denyClose` and `drawer.denyClose` animations
 - Fixed a bug in `sl-color-picker` where setting `value` immediately wouldn't trigger an update
 
 ## 2.0.0-beta.44

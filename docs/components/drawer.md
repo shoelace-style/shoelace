@@ -164,27 +164,30 @@ By design, a drawer's height will never exceed 100% of its container. As such, d
 </script>
 ```
 
-### Ignoring Clicks on the Overlay
+### Preventing the Drawer from Closing
 
-By default, drawers are closed when the user clicks or taps on the overlay. To prevent this behavior, cancel the `sl-overlay-dismiss` event.
+By default, drawers will close when the user clicks the close button, clicks the overlay, or presses the <kbd>Escape</kbd> key. In most cases, the default behavior is the best behavior in terms of UX. However, there are situations where this may be undesirable, such as when data loss will occur.
+
+To keep the drawer open in such cases, you can cancel the `sl-request-close` event. When canceled, the drawer will remain open and pulse briefly to draw the user's attention to it.
+
 
 ```html preview
-<sl-drawer label="Drawer" class="drawer-no-overlay-dismiss">
-  This drawer will not be closed when you click outside of it.
-  <sl-button slot="footer" type="primary">Close</sl-button>
+<sl-drawer label="Drawer" class="drawer-deny-close">
+  This dialog will not close unless you use the button below.
+  <sl-button slot="footer" type="primary">Save &amp; Close</sl-button>
 </sl-drawer>
 
 <sl-button>Open Drawer</sl-button>
 
 <script>
-  const drawer = document.querySelector('.drawer-no-overlay-dismiss');
+  const drawer = document.querySelector('.drawer-deny-close');
   const openButton = drawer.nextElementSibling;
   const closeButton = drawer.querySelector('sl-button[type="primary"]');
 
   openButton.addEventListener('click', () => drawer.show());
   closeButton.addEventListener('click', () => drawer.hide());
 
-  drawer.addEventListener('sl-overlay-dismiss', event => event.preventDefault());
+  drawer.addEventListener('sl-request-close', event => event.preventDefault());
 </script>
 ```
 

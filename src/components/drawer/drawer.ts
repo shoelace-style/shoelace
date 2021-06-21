@@ -50,6 +50,7 @@ let id = 0;
  * @animation drawer.hideEnd - The animation to use when hiding a drawer with `end` placement.
  * @animation drawer.hideBottom - The animation to use when hiding a drawer with `bottom` placement.
  * @animation drawer.hideStart - The animation to use when hiding a drawer with `start` placement.
+ * @animation drawer.denyClose - The animation to use when a request to close the drawer is denied.
  * @animation drawer.overlay.show - The animation to use when showing the drawer's overlay.
  * @animation drawer.overlay.hide - The animation to use when hiding the drawer's overlay.
  */
@@ -106,8 +107,12 @@ export default class SlDrawer extends LitElement {
   /** Emitted when the drawer opens and the panel gains focus. Calling `event.preventDefault()` will prevent focus and allow you to set it on a different element in the drawer, such as an input or button. */
   @event('sl-initial-focus') slInitialFocus: EventEmitter<void>;
 
-  /** Emitted when the overlay is clicked. Calling `event.preventDefault()` will prevent the drawer from closing. */
-  @event('sl-overlay-dismiss') slOverlayDismiss: EventEmitter<void>;
+  /**
+   * Emitted when the user attempts to close the drawer by clicking the close button, clicking the overlay, or pressing
+   * the escape key. Calling `event.preventDefault()` will prevent the drawer from closing. Avoid using this unless
+   * closing the drawer will result in destructive behavior such as data loss.
+   */
+  @event('sl-request-close') slRequestClose: EventEmitter<void>;
 
   connectedCallback() {
     super.connectedCallback();
@@ -145,14 +150,21 @@ export default class SlDrawer extends LitElement {
     return waitForEvent(this, 'sl-after-hide');
   }
 
-  handleCloseClick() {
+  private requestClose() {
+    const slRequestClose = this.slRequestClose.emit({ cancelable: true });
+    if (slRequestClose.defaultPrevented) {
+      const animation = getAnimation(this, 'drawer.denyClose');
+      animateTo(this.panel, animation.keyframes, animation.options);
+      return;
+    }
+
     this.hide();
   }
 
   handleKeyDown(event: KeyboardEvent) {
     if (event.key === 'Escape') {
       event.stopPropagation();
-      this.hide();
+      this.requestClose();
     }
   }
 
@@ -223,13 +235,6 @@ export default class SlDrawer extends LitElement {
     }
   }
 
-  handleOverlayClick() {
-    const slOverlayDismiss = this.slOverlayDismiss.emit({ cancelable: true });
-    if (!slOverlayDismiss.defaultPrevented) {
-      this.hide();
-    }
-  }
-
   handleSlotChange() {
     this.hasFooter = hasSlot(this, 'footer');
   }
@@ -251,7 +256,7 @@ export default class SlDrawer extends LitElement {
         })}
         @keydown=${this.handleKeyDown}
       >
-        <div part="overlay" class="drawer__overlay" @click=${this.handleOverlayClick} tabindex="-1"></div>
+        <div part="overlay" class="drawer__overlay" @click=${this.requestClose} tabindex="-1"></div>
 
         <div
           part="panel"
@@ -275,7 +280,7 @@ export default class SlDrawer extends LitElement {
                     class="drawer__close"
                     name="x"
                     library="system"
-                    @click=${this.handleCloseClick}
+                    @click=${this.requestClose}
                   ></sl-icon-button>
                 </header>
               `
@@ -360,6 +365,12 @@ setDefaultAnimation('drawer.hideStart', {
     { opacity: 0, transform: 'translateX(-100%)' }
   ],
   options: { duration: 250, easing: 'ease' }
+});
+
+// Deny close
+setDefaultAnimation('drawer.denyClose', {
+  keyframes: [{ transform: 'scale(1)' }, { transform: 'scale(1.01)' }, { transform: 'scale(1)' }],
+  options: { duration: 250 }
 });
 
 // Overlay
