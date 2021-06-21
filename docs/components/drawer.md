@@ -190,7 +190,7 @@ By default, drawers are closed when the user clicks or taps on the overlay. To p
 
 ### Customizing Initial Focus
 
-By default, the drawer's panel will gain focus when opened. To set focus on a different element, listen for the `sl-initial-focus` event.
+By default, the drawer's panel will gain focus when opened. This allows the first tab press to focus on the first tabbable element within the drawer. To set focus on a different element, listen for the `sl-initial-focus` event.
 
 ```html preview
 <sl-drawer label="Drawer" class="drawer-focus">
