@@ -101,13 +101,13 @@ describe('<sl-drawer>', () => {
     expect(base.hidden).to.be.true;
   });
 
-  it('should not close when sl-overlay-dismiss is prevented', async () => {
+  it('should not close when sl-request-close is prevented', async () => {
     const el = (await fixture(html`
       <sl-drawer open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sl-drawer>
     `)) as SlDrawer;
     const overlay = el.shadowRoot?.querySelector('[part="overlay"]') as HTMLElement;
 
-    el.addEventListener('sl-overlay-dismiss', event => event.preventDefault());
+    el.addEventListener('sl-request-close', event => event.preventDefault());
     overlay.click();
 
     expect(el.open).to.be.true;
