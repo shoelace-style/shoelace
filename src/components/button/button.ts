@@ -2,7 +2,7 @@ import { LitElement, html, unsafeCSS } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
-import { event, EventEmitter } from '../../internal/decorators';
+import { emit } from '../../internal/event';
 import { hasSlot } from '../../internal/slot';
 import styles from 'sass:./button.scss';
 
@@ -12,15 +12,18 @@ import styles from 'sass:./button.scss';
  *
  * @dependency sl-spinner
  *
- * @slot - The button's label.
- * @slot prefix - Used to prepend an icon or similar element to the button.
- * @slot suffix - Used to append an icon or similar element to the button.
+ * @event sl-blur Emitted when the button loses focus.
+ * @event sl-focus Emitted when the button gains focus.
  *
- * @part base - The component's base wrapper.
- * @part prefix - The prefix container.
- * @part label - The button's label.
- * @part suffix - The suffix container.
- * @part caret - The button's caret.
+ * @slot default The button's label.
+ * @slot prefix Used to prepend an icon or similar element to the button.
+ * @slot suffix Used to append an icon or similar element to the button.
+ *
+ * @csspart base The component's base wrapper.
+ * @csspart prefix The prefix container.
+ * @csspart label The button's label.
+ * @csspart suffix The suffix container.
+ * @csspart caret The button's caret.
  */
 @customElement('sl-button')
 export default class SlButton extends LitElement {
@@ -73,12 +76,6 @@ export default class SlButton extends LitElement {
   /** Tells the browser to download the linked file as this filename. Only used when `href` is set. */
   @property() download: string;
 
-  /** Emitted when the button loses focus. */
-  @event('sl-blur') slBlur: EventEmitter<void>;
-
-  /** Emitted when the button gains focus. */
-  @event('sl-focus') slFocus: EventEmitter<void>;
-
   connectedCallback() {
     super.connectedCallback();
     this.handleSlotChange();
@@ -99,23 +96,23 @@ export default class SlButton extends LitElement {
     this.button.blur();
   }
 
-  handleSlotChange() {
+  private handleSlotChange() {
     this.hasLabel = hasSlot(this);
     this.hasPrefix = hasSlot(this, 'prefix');
     this.hasSuffix = hasSlot(this, 'suffix');
   }
 
-  handleBlur() {
+  private handleBlur() {
     this.hasFocus = false;
-    this.slBlur.emit();
+    emit(this, 'sl-blur');
   }
 
-  handleFocus() {
+  private handleFocus() {
     this.hasFocus = true;
-    this.slFocus.emit();
+    emit(this, 'sl-focus');
   }
 
-  handleClick(event: MouseEvent) {
+  private handleClick(event: MouseEvent) {
     if (this.disabled || this.loading) {
       event.preventDefault();
       event.stopPropagation();

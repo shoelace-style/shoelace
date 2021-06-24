@@ -2,7 +2,8 @@ import { LitElement, html, unsafeCSS } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { ifDefined } from 'lit-html/directives/if-defined';
 import { classMap } from 'lit-html/directives/class-map';
-import { event, EventEmitter, watch } from '../../internal/decorators';
+import { emit } from '../../internal/event';
+import { watch } from '../../internal/watch';
 import { getLabelledBy, renderFormControl } from '../../internal/form-control';
 import { hasSlot } from '../../internal/slot';
 import styles from 'sass:./input.scss';
@@ -15,25 +16,31 @@ let id = 0;
  *
  * @dependency sl-icon
  *
- * @slot label - The input's label. Alternatively, you can use the label prop.
- * @slot prefix - Used to prepend an icon or similar element to the input.
- * @slot suffix - Used to append an icon or similar element to the input.
- * @slot clear-icon - An icon to use in lieu of the default clear icon.
- * @slot show-password-icon - An icon to use in lieu of the default show password icon.
- * @slot hide-password-icon - An icon to use in lieu of the default hide password icon.
- * @slot help-text - Help text that describes how to use the input. Alternatively, you can use the help-text prop.
+ * @slot label The input's label. Alternatively, you can use the label prop.
+ * @slot prefix Used to prepend an icon or similar element to the input.
+ * @slot suffix Used to append an icon or similar element to the input.
+ * @slot clear-icon An icon to use in lieu of the default clear icon.
+ * @slot show-password-icon An icon to use in lieu of the default show password icon.
+ * @slot hide-password-icon An icon to use in lieu of the default hide password icon.
+ * @slot help-text Help text that describes how to use the input. Alternatively, you can use the help-text prop.
  *
- * @part base - The component's base wrapper.
- * @part form-control - The form control that wraps the label, input, and help-text.
- * @part label - The input label.
- * @part input - The input control.
- * @part prefix - The input prefix container.
- * @part clear-button - The clear button.
- * @part password-toggle-button - The password toggle button.
- * @part suffix - The input suffix container.
- * @part help-text - The input help text.
+ * @event sl-change Emitted when the control's value changes.
+ * @event sl-clear Emitted when the clear button is activated.
+ * @event sl-input Emitted when the control receives input.
+ * @event sl-focus Emitted when the control gains focus.
+ * @event sl-blur Emitted when the control loses focus.
  *
- * @customProperty --focus-ring - The focus ring style to use when the control receives focus, a `box-shadow` property.
+ * @csspart base The component's base wrapper.
+ * @csspart form-control The form control that wraps the label, input, and help-text.
+ * @csspart label The input label.
+ * @csspart input The input control.
+ * @csspart prefix The input prefix container.
+ * @csspart clear-button The clear button.
+ * @csspart password-toggle-button The password toggle button.
+ * @csspart suffix The input suffix container.
+ * @csspart help-text The input help text.
+ *
+ * @cssproperty --focus-ring The focus ring style to use when the control receives focus, a `box-shadow` property.
  */
 @customElement('sl-input')
 export default class SlInput extends LitElement {
@@ -131,21 +138,6 @@ export default class SlInput extends LitElement {
   /** The input's inputmode attribute. */
   @property() inputmode: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
 
-  /** Emitted when the control's value changes. */
-  @event('sl-change') slChange: EventEmitter<void>;
-
-  /** Emitted when the clear button is activated. */
-  @event('sl-clear') slClear: EventEmitter<void>;
-
-  /** Emitted when the control receives input. */
-  @event('sl-input') slInput: EventEmitter<void>;
-
-  /** Emitted when the control gains focus. */
-  @event('sl-focus') slFocus: EventEmitter<void>;
-
-  /** Emitted when the control loses focus. */
-  @event('sl-blur') slBlur: EventEmitter<void>;
-
   connectedCallback() {
     super.connectedCallback();
     this.handleSlotChange = this.handleSlotChange.bind(this);
@@ -196,8 +188,8 @@ export default class SlInput extends LitElement {
 
     if (this.value !== this.input.value) {
       this.value = this.input.value;
-      this.slInput.emit();
-      this.slChange.emit();
+      emit(this, 'sl-input');
+      emit(this, 'sl-change');
     }
   }
 
@@ -214,12 +206,12 @@ export default class SlInput extends LitElement {
 
   handleChange() {
     this.value = this.input.value;
-    this.slChange.emit();
+    emit(this, 'sl-change');
   }
 
   handleInput() {
     this.value = this.input.value;
-    this.slInput.emit();
+    emit(this, 'sl-input');
   }
 
   handleInvalid() {
@@ -228,19 +220,19 @@ export default class SlInput extends LitElement {
 
   handleBlur() {
     this.hasFocus = false;
-    this.slBlur.emit();
+    emit(this, 'sl-blur');
   }
 
   handleFocus() {
     this.hasFocus = true;
-    this.slFocus.emit();
+    emit(this, 'sl-focus');
   }
 
   handleClearClick(event: MouseEvent) {
     this.value = '';
-    this.slClear.emit();
-    this.slInput.emit();
-    this.slChange.emit();
+    emit(this, 'sl-clear');
+    emit(this, 'sl-input');
+    emit(this, 'sl-change');
     this.input.focus();
 
     event.stopPropagation();

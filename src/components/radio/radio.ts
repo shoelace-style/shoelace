@@ -2,7 +2,8 @@ import { LitElement, html, unsafeCSS } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
-import { event, EventEmitter, watch } from '../../internal/decorators';
+import { emit } from '../../internal/event';
+import { watch } from '../../internal/watch';
 import styles from 'sass:./radio.scss';
 
 let id = 0;
@@ -11,12 +12,16 @@ let id = 0;
  * @since 2.0
  * @status stable
  *
- * @slot - The radio's label.
+ * @slot default The radio's label.
  *
- * @part base - The component's base wrapper.
- * @part control - The radio control.
- * @part checked-icon - The container the wraps the checked icon.
- * @part label - The radio label.
+ * @event sl-blur Emitted when the control loses focus.
+ * @event sl-change Emitted when the control's checked state changes.
+ * @event sl-focus Emitted when the control gains focus.
+ *
+ * @csspart base The component's base wrapper.
+ * @csspart control The radio control.
+ * @csspart checked-icon The container the wraps the checked icon.
+ * @csspart label The radio label.
  */
 @customElement('sl-radio')
 export default class SlRadio extends LitElement {
@@ -46,15 +51,6 @@ export default class SlRadio extends LitElement {
    * provided by the `setCustomValidity` method.
    */
   @property({ type: Boolean, reflect: true }) invalid = false;
-
-  /** Emitted when the control loses focus. */
-  @event('sl-blur') slBlur: EventEmitter<void>;
-
-  /** Emitted when the control's checked state changes. */
-  @event('sl-change') slChange: EventEmitter<void>;
-
-  /** Emitted when the control gains focus. */
-  @event('sl-focus') slFocus: EventEmitter<void>;
 
   /** Simulates a click on the radio. */
   click() {
@@ -102,7 +98,7 @@ export default class SlRadio extends LitElement {
     if (this.checked) {
       this.getSiblingRadios().map(radio => (radio.checked = false));
     }
-    this.slChange.emit();
+    emit(this, 'sl-change');
   }
 
   handleClick() {
@@ -111,12 +107,12 @@ export default class SlRadio extends LitElement {
 
   handleBlur() {
     this.hasFocus = false;
-    this.slBlur.emit();
+    emit(this, 'sl-blur');
   }
 
   handleFocus() {
     this.hasFocus = true;
-    this.slFocus.emit();
+    emit(this, 'sl-focus');
   }
 
   handleKeyDown(event: KeyboardEvent) {

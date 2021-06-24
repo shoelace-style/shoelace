@@ -2,7 +2,8 @@ import { LitElement, html, unsafeCSS } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
-import { event, EventEmitter, watch } from '../../internal/decorators';
+import { emit } from '../../internal/event';
+import { watch } from '../../internal/watch';
 import { getLabelledBy, renderFormControl } from '../../internal/form-control';
 import { hasSlot } from '../../internal/slot';
 import styles from 'sass:./textarea.scss';
@@ -13,14 +14,19 @@ let id = 0;
  * @since 2.0
  * @status stable
  *
- * @slot label - The textarea's label. Alternatively, you can use the label prop.
- * @slot help-text - Help text that describes how to use the input.
+ * @slot label The textarea's label. Alternatively, you can use the label prop.
+ * @slot help-text Help text that describes how to use the input.
  *
- * @part base - The component's base wrapper.
- * @part form-control - The form control that wraps the label, textarea, and help text.
- * @part label - The textarea label.
- * @part textarea - The textarea control.
- * @part help-text - The textarea help text.
+ * @event sl-change Emitted when the control's value changes.
+ * @event sl-input Emitted when the control receives input.
+ * @event sl-focus Emitted when the control gains focus.
+ * @event sl-blur Emitted when the control loses focus.
+ *
+ * @csspart base The component's base wrapper.
+ * @csspart form-control The form control that wraps the label, textarea, and help text.
+ * @csspart label The textarea label.
+ * @csspart textarea The textarea control.
+ * @csspart help-text The textarea help text.
  */
 @customElement('sl-textarea')
 export default class SlTextarea extends LitElement {
@@ -115,18 +121,6 @@ export default class SlTextarea extends LitElement {
   /** The textarea's inputmode attribute. */
   @property() inputmode: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
 
-  /** Emitted when the control's value changes. */
-  @event('sl-change') slChange: EventEmitter<void>;
-
-  /** Emitted when the control receives input. */
-  @event('sl-input') slInput: EventEmitter<void>;
-
-  /** Emitted when the control gains focus. */
-  @event('sl-focus') slFocus: EventEmitter<void>;
-
-  /** Emitted when the control loses focus. */
-  @event('sl-blur') slBlur: EventEmitter<void>;
-
   connectedCallback() {
     super.connectedCallback();
     this.handleSlotChange = this.handleSlotChange.bind(this);
@@ -199,14 +193,14 @@ export default class SlTextarea extends LitElement {
 
     if (this.value !== this.input.value) {
       this.value = this.input.value;
-      this.slInput.emit();
+      emit(this, 'sl-input');
     }
 
     if (this.value !== this.input.value) {
       this.value = this.input.value;
       this.setTextareaHeight();
-      this.slInput.emit();
-      this.slChange.emit();
+      emit(this, 'sl-input');
+      emit(this, 'sl-change');
     }
   }
 
@@ -223,23 +217,23 @@ export default class SlTextarea extends LitElement {
 
   handleChange() {
     this.value = this.input.value;
-    this.slChange.emit();
+    emit(this, 'sl-change');
   }
 
   handleInput() {
     this.value = this.input.value;
     this.setTextareaHeight();
-    this.slInput.emit();
+    emit(this, 'sl-input');
   }
 
   handleBlur() {
     this.hasFocus = false;
-    this.slBlur.emit();
+    emit(this, 'sl-blur');
   }
 
   handleFocus() {
     this.hasFocus = true;
-    this.slFocus.emit();
+    emit(this, 'sl-focus');
   }
 
   @watch('rows')

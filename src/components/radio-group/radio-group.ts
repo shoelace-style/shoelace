@@ -7,11 +7,11 @@ import styles from 'sass:./radio-group.scss';
  * @since 2.0
  * @status stable
  *
- * @slot - The default slot where radio controls are placed.
- * @slot label - The radio group label. Required for proper accessibility. Alternatively, you can use the label prop.
+ * @slot default The default slot where radio controls are placed.
+ * @slot label The radio group label. Required for proper accessibility. Alternatively, you can use the label prop.
  *
- * @part base - The component's base wrapper.
- * @part label - The radio group label.
+ * @csspart base The component's base wrapper.
+ * @csspart label The radio group label.
  */
 @customElement('sl-radio-group')
 export default class SlRadioGroup extends LitElement {

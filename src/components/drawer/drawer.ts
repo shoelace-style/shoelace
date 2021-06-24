@@ -3,7 +3,8 @@ import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
 import { animateTo, stopAnimations } from '../../internal/animate';
-import { event, EventEmitter, watch } from '../../internal/decorators';
+import { emit } from '../../internal/event';
+import { watch } from '../../internal/watch';
 import { waitForEvent } from '../../internal/event';
 import { lockBodyScrolling, unlockBodyScrolling } from '../../internal/scroll';
 import { hasSlot } from '../../internal/slot';
@@ -23,36 +24,46 @@ let id = 0;
  *
  * @dependency sl-icon-button
  *
- * @slot - The drawer's content.
- * @slot label - The drawer's label. Alternatively, you can use the label prop.
- * @slot footer - The drawer's footer, usually one or more buttons representing various options.
+ * @slot default The drawer's content.
+ * @slot label The drawer's label. Alternatively, you can use the label prop.
+ * @slot footer The drawer's footer, usually one or more buttons representing various options.
  *
- * @part base - The component's base wrapper.
- * @part overlay - The overlay.
- * @part panel - The drawer panel (where the drawer and its content is rendered).
- * @part header - The drawer header.
- * @part title - The drawer title.
- * @part close-button - The close button.
- * @part body - The drawer body.
- * @part footer - The drawer footer.
+ * @event sl-show Emitted when the drawer opens.
+ * @event sl-after-show Emitted after the drawer opens and all transitions are complete.
+ * @event sl-hide Emitted when the drawer closes.
+ * @event sl-after-hide Emitted after the drawer closes and all transitions are complete.
+ * @event sl-initial-focus Emitted when the drawer opens and the panel gains focus. Calling `event.preventDefault()` will
+ *   prevent focus and allow you to set it on a different element in the drawer, such as an input or button.
+ * @event sl-request-close Emitted when the user attempts to close the drawer by clicking the close button, clicking the
+ *   overlay, or pressing the escape key. Calling `event.preventDefault()` will prevent the drawer from closing. Avoid
+ *   using this unless closing the drawer will result in destructive behavior such as data loss.
  *
- * @customProperty --size - The preferred size of the drawer. This will be applied to the drawer's width or height
+ * @csspart base The component's base wrapper.
+ * @csspart overlay The overlay.
+ * @csspart panel The drawer panel (where the drawer and its content is rendered).
+ * @csspart header The drawer header.
+ * @csspart title The drawer title.
+ * @csspart close-button The close button.
+ * @csspart body The drawer body.
+ * @csspart footer The drawer footer.
+ *
+ * @cssproperty --size The preferred size of the drawer. This will be applied to the drawer's width or height
  *   depending on its `placement`. Note that the drawer will shrink to accommodate smaller screens.
- * @customProperty --header-spacing - The amount of padding to use for the header.
- * @customProperty --body-spacing - The amount of padding to use for the body.
- * @customProperty --footer-spacing - The amount of padding to use for the footer.
+ * @cssproperty --header-spacing The amount of padding to use for the header.
+ * @cssproperty --body-spacing The amount of padding to use for the body.
+ * @cssproperty --footer-spacing The amount of padding to use for the footer.
  *
- * @animation drawer.showTop - The animation to use when showing a drawer with `top` placement.
- * @animation drawer.showEnd - The animation to use when showing a drawer with `end` placement.
- * @animation drawer.showBottom - The animation to use when showing a drawer with `bottom` placement.
- * @animation drawer.showStart - The animation to use when showing a drawer with `start` placement.
- * @animation drawer.hideTop - The animation to use when hiding a drawer with `top` placement.
- * @animation drawer.hideEnd - The animation to use when hiding a drawer with `end` placement.
- * @animation drawer.hideBottom - The animation to use when hiding a drawer with `bottom` placement.
- * @animation drawer.hideStart - The animation to use when hiding a drawer with `start` placement.
- * @animation drawer.denyClose - The animation to use when a request to close the drawer is denied.
- * @animation drawer.overlay.show - The animation to use when showing the drawer's overlay.
- * @animation drawer.overlay.hide - The animation to use when hiding the drawer's overlay.
+ * @animation drawer.showTop The animation to use when showing a drawer with `top` placement.
+ * @animation drawer.showEnd The animation to use when showing a drawer with `end` placement.
+ * @animation drawer.showBottom The animation to use when showing a drawer with `bottom` placement.
+ * @animation drawer.showStart The animation to use when showing a drawer with `start` placement.
+ * @animation drawer.hideTop The animation to use when hiding a drawer with `top` placement.
+ * @animation drawer.hideEnd The animation to use when hiding a drawer with `end` placement.
+ * @animation drawer.hideBottom The animation to use when hiding a drawer with `bottom` placement.
+ * @animation drawer.hideStart The animation to use when hiding a drawer with `start` placement.
+ * @animation drawer.denyClose The animation to use when a request to close the drawer is denied.
+ * @animation drawer.overlay.show The animation to use when showing the drawer's overlay.
+ * @animation drawer.overlay.hide The animation to use when hiding the drawer's overlay.
  */
 @customElement('sl-drawer')
 export default class SlDrawer extends LitElement {
@@ -92,28 +103,6 @@ export default class SlDrawer extends LitElement {
    */
   @property({ attribute: 'no-header', type: Boolean, reflect: true }) noHeader = false;
 
-  /** Emitted when the drawer opens. */
-  @event('sl-show') slShow: EventEmitter<void>;
-
-  /** Emitted after the drawer opens and all transitions are complete. */
-  @event('sl-after-show') slAfterShow: EventEmitter<void>;
-
-  /** Emitted when the drawer closes. */
-  @event('sl-hide') slHide: EventEmitter<void>;
-
-  /** Emitted after the drawer closes and all transitions are complete. */
-  @event('sl-after-hide') slAfterHide: EventEmitter<void>;
-
-  /** Emitted when the drawer opens and the panel gains focus. Calling `event.preventDefault()` will prevent focus and allow you to set it on a different element in the drawer, such as an input or button. */
-  @event('sl-initial-focus') slInitialFocus: EventEmitter<void>;
-
-  /**
-   * Emitted when the user attempts to close the drawer by clicking the close button, clicking the overlay, or pressing
-   * the escape key. Calling `event.preventDefault()` will prevent the drawer from closing. Avoid using this unless
-   * closing the drawer will result in destructive behavior such as data loss.
-   */
-  @event('sl-request-close') slRequestClose: EventEmitter<void>;
-
   connectedCallback() {
     super.connectedCallback();
 
@@ -151,7 +140,7 @@ export default class SlDrawer extends LitElement {
   }
 
   private requestClose() {
-    const slRequestClose = this.slRequestClose.emit({ cancelable: true });
+    const slRequestClose = emit(this, 'sl-request-close', { cancelable: true });
     if (slRequestClose.defaultPrevented) {
       const animation = getAnimation(this, 'drawer.denyClose');
       animateTo(this.panel, animation.keyframes, animation.options);
@@ -172,7 +161,7 @@ export default class SlDrawer extends LitElement {
   async handleOpenChange() {
     if (this.open) {
       // Show
-      this.slShow.emit();
+      emit(this, 'sl-show');
       this.originalTrigger = document.activeElement as HTMLElement;
 
       // Lock body scrolling only if the drawer isn't contained
@@ -186,7 +175,7 @@ export default class SlDrawer extends LitElement {
 
       // Browsers that support el.focus({ preventScroll }) can set initial focus immediately
       if (hasPreventScroll) {
-        const slInitialFocus = this.slInitialFocus.emit({ cancelable: true });
+        const slInitialFocus = emit(this, 'sl-initial-focus', { cancelable: true });
         if (!slInitialFocus.defaultPrevented) {
           this.panel.focus({ preventScroll: true });
         }
@@ -202,16 +191,16 @@ export default class SlDrawer extends LitElement {
       // Browsers that don't support el.focus({ preventScroll }) have to wait for the animation to finish before initial
       // focus to prevent scrolling issues. See: https://caniuse.com/mdn-api_htmlelement_focus_preventscroll_option
       if (!hasPreventScroll) {
-        const slInitialFocus = this.slInitialFocus.emit({ cancelable: true });
+        const slInitialFocus = emit(this, 'sl-initial-focus', { cancelable: true });
         if (!slInitialFocus.defaultPrevented) {
           this.panel.focus({ preventScroll: true });
         }
       }
 
-      this.slAfterShow.emit();
+      emit(this, 'sl-after-show');
     } else {
       // Hide
-      this.slHide.emit();
+      emit(this, 'sl-hide');
       this.modal.deactivate();
       unlockBodyScrolling(this);
 
@@ -231,7 +220,7 @@ export default class SlDrawer extends LitElement {
         setTimeout(() => trigger.focus());
       }
 
-      this.slAfterHide.emit();
+      emit(this, 'sl-after-hide');
     }
   }
 

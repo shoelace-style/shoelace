@@ -2,7 +2,8 @@ import { LitElement, html, unsafeCSS } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
-import { event, EventEmitter, watch } from '../../internal/decorators';
+import { emit } from '../../internal/event';
+import { watch } from '../../internal/watch';
 import styles from 'sass:./checkbox.scss';
 
 let id = 0;
@@ -11,13 +12,17 @@ let id = 0;
  * @since 2.0
  * @status stable
  *
- * @slot - The checkbox's label.
+ * @slot default The checkbox's label.
  *
- * @part base - The component's base wrapper.
- * @part control - The checkbox control.
- * @part checked-icon - The container the wraps the checked icon.
- * @part indeterminate-icon - The container that wraps the indeterminate icon.
- * @part label - The checkbox label.
+ * @event sl-blur Emitted when the control loses focus.
+ * @event sl-change Emitted when the control's checked state changes.
+ * @event sl-focus Emitted when the control gains focus.
+ *
+ * @csspart base The component's base wrapper.
+ * @csspart control The checkbox control.
+ * @csspart checked-icon The container the wraps the checked icon.
+ * @csspart indeterminate-icon The container that wraps the indeterminate icon.
+ * @csspart label The checkbox label.
  */
 @customElement('sl-checkbox')
 export default class SlCheckbox extends LitElement {
@@ -50,15 +55,6 @@ export default class SlCheckbox extends LitElement {
 
   /** This will be true when the control is in an invalid state. Validity is determined by the `required` prop. */
   @property({ type: Boolean, reflect: true }) invalid = false;
-
-  /** Emitted when the control loses focus. */
-  @event('sl-blur') slBlur: EventEmitter<void>;
-
-  /** Emitted when the control's checked state changes. */
-  @event('sl-change') slChange: EventEmitter<void>;
-
-  /** Emitted when the control gains focus. */
-  @event('sl-focus') slFocus: EventEmitter<void>;
 
   firstUpdated() {
     this.invalid = !this.input.checkValidity();
@@ -97,12 +93,12 @@ export default class SlCheckbox extends LitElement {
 
   handleBlur() {
     this.hasFocus = false;
-    this.slBlur.emit();
+    emit(this, 'sl-blur');
   }
 
   handleFocus() {
     this.hasFocus = true;
-    this.slFocus.emit();
+    emit(this, 'sl-focus');
   }
 
   handleLabelMouseDown(event: MouseEvent) {
@@ -115,7 +111,7 @@ export default class SlCheckbox extends LitElement {
   @watch('indeterminate', { waitUntilFirstUpdate: true })
   handleStateChange() {
     this.invalid = !this.input.checkValidity();
-    this.slChange.emit();
+    emit(this, 'sl-change');
   }
 
   render() {

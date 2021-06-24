@@ -3,7 +3,8 @@ import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { styleMap } from 'lit-html/directives/style-map';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html';
-import { event, EventEmitter, watch } from '../../internal/decorators';
+import { emit } from '../../internal/event';
+import { watch } from '../../internal/watch';
 import { focusVisible } from '../../internal/focus-visible';
 import { clamp } from '../../internal/math';
 import styles from 'sass:./rating.scss';
@@ -14,12 +15,14 @@ import styles from 'sass:./rating.scss';
  *
  * @dependency sl-icon
  *
- * @part base - The component's base wrapper.
+ * @event sl-change Emitted when the rating's value changes.
  *
- * @customProperty --symbol-color - The inactive color for symbols.
- * @customProperty --symbol-color-active - The active color for symbols.
- * @customProperty --symbol-size - The size of symbols.
- * @customProperty --symbol-spacing - The spacing to use around symbols.
+ * @csspart base The component's base wrapper.
+ *
+ * @cssproperty --symbol-color The inactive color for symbols.
+ * @cssproperty --symbol-color-active The active color for symbols.
+ * @cssproperty --symbol-size The size of symbols.
+ * @cssproperty --symbol-spacing The spacing to use around symbols.
  */
 @customElement('sl-rating')
 export default class SlRating extends LitElement {
@@ -48,9 +51,6 @@ export default class SlRating extends LitElement {
   /** The name of the icon to display as the symbol. */
   // @ts-ignore
   @property() getSymbol = (value?: number) => '<sl-icon name="star-fill" library="system"></sl-icon>';
-
-  /** Emitted when the rating's value changes. */
-  @event('sl-change') slChange: EventEmitter<void>;
 
   /** Sets focus on the rating. */
   focus(options?: FocusOptions) {
@@ -165,7 +165,7 @@ export default class SlRating extends LitElement {
 
   @watch('value', { waitUntilFirstUpdate: true })
   handleValueChange() {
-    this.slChange.emit();
+    emit(this, 'sl-change');
   }
 
   roundToPrecision(numberToRound: number, precision = 0.5) {

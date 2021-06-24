@@ -3,8 +3,8 @@ import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { Instance as PopperInstance, createPopper } from '@popperjs/core/dist/esm';
 import { animateTo, parseDuration, stopAnimations } from '../../internal/animate';
-import { event, EventEmitter, watch } from '../../internal/decorators';
-import { waitForEvent } from '../../internal/event';
+import { emit, waitForEvent } from '../../internal/event';
+import { watch } from '../../internal/watch';
 import { setDefaultAnimation, getAnimation } from '../../utilities/animation-registry';
 import styles from 'sass:./tooltip.scss';
 
@@ -14,17 +14,22 @@ let id = 0;
  * @since 2.0
  * @status stable
  *
- * @slot - The tooltip's target element. Only the first element will be used as the target.
- * @slot content - The tooltip's content. Alternatively, you can use the content prop.
+ * @slot default The tooltip's target element. Only the first element will be used as the target.
+ * @slot content The tooltip's content. Alternatively, you can use the content prop.
  *
- * @part base - The component's base wrapper.
+ * @event sl-show Emitted when the tooltip begins to show.
+ * @event sl-after-show Emitted after the tooltip has shown and all transitions are complete.
+ * @event sl-hide Emitted when the tooltip begins to hide.
+ * @event sl-after-hide Emitted after the tooltip has hidden and all transitions are complete. *
  *
- * @customProperty --max-width - The maximum width of the tooltip.
- * @customProperty --hide-delay - The amount of time to wait before hiding the tooltip when hovering.
- * @customProperty --show-delay - The amount of time to wait before showing the tooltip when hovering.
+ * @csspart base The component's base wrapper.
  *
- * @animation tooltip.show - The animation to use when showing the tooltip.
- * @animation tooltip.hide - The animation to use when hiding the tooltip.
+ * @cssproperty --max-width The maximum width of the tooltip.
+ * @cssproperty --hide-delay The amount of time to wait before hiding the tooltip when hovering.
+ * @cssproperty --show-delay The amount of time to wait before showing the tooltip when hovering.
+ *
+ * @animation tooltip.show The animation to use when showing the tooltip.
+ * @animation tooltip.hide The animation to use when hiding the tooltip.
  */
 @customElement('sl-tooltip')
 export default class SlTooltip extends LitElement {
@@ -77,18 +82,6 @@ export default class SlTooltip extends LitElement {
    * programmatically.
    */
   @property() trigger = 'hover focus';
-
-  /** Emitted when the tooltip begins to show. */
-  @event('sl-show') slShow: EventEmitter<void>;
-
-  /** Emitted after the tooltip has shown and all transitions are complete. */
-  @event('sl-after-show') slAfterShow: EventEmitter<void>;
-
-  /** Emitted when the tooltip begins to hide. */
-  @event('sl-hide') slHide: EventEmitter<void>;
-
-  /** Emitted after the tooltip has hidden and all transitions are complete. */
-  @event('sl-after-hide') slAfterHide: EventEmitter<void>;
 
   connectedCallback() {
     super.connectedCallback();
@@ -213,7 +206,7 @@ export default class SlTooltip extends LitElement {
 
     if (this.open) {
       // Show
-      this.slShow.emit();
+      emit(this, 'sl-show');
 
       await stopAnimations(this.tooltip);
 
@@ -244,10 +237,10 @@ export default class SlTooltip extends LitElement {
       const { keyframes, options } = getAnimation(this, 'tooltip.show');
       await animateTo(this.tooltip, keyframes, options);
 
-      this.slAfterShow.emit();
+      emit(this, 'sl-after-show');
     } else {
       // Hide
-      this.slHide.emit();
+      emit(this, 'sl-hide');
 
       await stopAnimations(this.tooltip);
       const { keyframes, options } = getAnimation(this, 'tooltip.hide');
@@ -258,7 +251,7 @@ export default class SlTooltip extends LitElement {
         this.popover.destroy();
       }
 
-      this.slAfterHide.emit();
+      emit(this, 'sl-after-hide');
     }
   }
 

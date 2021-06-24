@@ -3,7 +3,8 @@ import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
 import { styleMap } from 'lit-html/directives/style-map';
-import { event, EventEmitter, watch } from '../../internal/decorators';
+import { emit } from '../../internal/event';
+import { watch } from '../../internal/watch';
 import { clamp } from '../../internal/math';
 import type SlDropdown from '../dropdown/dropdown';
 import type SlInput from '../input/input';
@@ -19,25 +20,27 @@ import styles from 'sass:./color-picker.scss';
  * @dependency sl-icon
  * @dependency sl-input
  *
- * @part base - The component's base wrapper.
- * @part trigger - The color picker's dropdown trigger.
- * @part swatches - The container that holds swatches.
- * @part swatch - Each individual swatch.
- * @part grid - The color grid.
- * @part grid-handle - The color grid's handle.
- * @part hue-slider - The hue slider.
- * @part opacity-slider - The opacity slider.
- * @part slider - Hue and opacity sliders.
- * @part slider-handle - Hue and opacity slider handles.
- * @part preview - The preview color.
- * @part input - The text input.
- * @part format-button - The toggle format button's base.
+ * @event sl-change Emitted when the color picker's value changes.
  *
- * @customProperty --grid-width - The width of the color grid.
- * @customProperty --grid-height - The height of the color grid.
- * @customProperty --grid-handle-size - The size of the color grid's handle.
- * @customProperty --slider-height - The height of the hue and alpha sliders.
- * @customProperty --slider-handle-size - The diameter of the slider's handle.
+ * @csspart base The component's base wrapper
+ * @csspart trigger The color picker's dropdown trigger.
+ * @csspart swatches The container that holds swatches.
+ * @csspart swatch Each individual swatch.
+ * @csspart grid The color grid.
+ * @csspart grid-handle The color grid's handle.
+ * @csspart hue-slider The hue slider.
+ * @csspart opacity-slider The opacity slider.
+ * @csspart slider Hue and opacity sliders.
+ * @csspart slider-handle Hue and opacity slider handles.
+ * @csspart preview The preview color.
+ * @csspart input The text input.
+ * @csspart format-button The toggle format button's base.
+ *
+ * @cssproperty --grid-width The width of the color grid.
+ * @cssproperty --grid-height The height of the color grid.
+ * @cssproperty --grid-handle-size The size of the color grid's handle.
+ * @cssproperty --slider-height The height of the hue and alpha sliders.
+ * @cssproperty --slider-handle-size The diameter of the slider's handle.
  */
 @customElement('sl-color-picker')
 export default class SlColorPicker extends LitElement {
@@ -121,9 +124,6 @@ export default class SlColorPicker extends LitElement {
     '#ccc',
     '#fff'
   ];
-
-  /** Emitted when the color picker's value changes. */
-  @event('sl-change') slChange: EventEmitter<void>;
 
   connectedCallback() {
     super.connectedCallback();
@@ -579,7 +579,7 @@ export default class SlColorPicker extends LitElement {
     }
 
     if (this.value !== this.lastValueEmitted) {
-      this.slChange.emit();
+      emit(this, 'sl-change');
       this.lastValueEmitted = this.value;
     }
   }

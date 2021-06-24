@@ -8,7 +8,7 @@ import styles from 'sass:./menu-divider.scss';
  *
  * @dependency sl-menu
  *
- * @part base - The component's base wrapper.
+ * @csspart base The component's base wrapper.
  */
 @customElement('sl-menu-divider')
 export default class SlMenuDivider extends LitElement {

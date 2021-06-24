@@ -1,7 +1,7 @@
 import { LitElement, html, unsafeCSS } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
-import { event, EventEmitter } from '../../internal/decorators';
+import { emit } from '../../internal/event';
 import styles from 'sass:./tag.scss';
 
 /**
@@ -10,11 +10,13 @@ import styles from 'sass:./tag.scss';
  *
  * @dependency sl-icon-button
  *
- * @slot - The tag's content.
+ * @slot default The tag's content.
  *
- * @part base - The component's base wrapper.
- * @part content - The tag content.
- * @part clear-button - The clear button.
+ * @event sl-clear Emitted when the clear button is activated.
+ *
+ * @csspart base The component's base wrapper.
+ * @csspart content The tag content.
+ * @csspart clear-button The clear button.
  */
 @customElement('sl-tag')
 export default class SlTag extends LitElement {
@@ -32,11 +34,8 @@ export default class SlTag extends LitElement {
   /** Makes the tag clearable. */
   @property({ type: Boolean }) clearable = false;
 
-  /** Emitted when the clear button is activated. */
-  @event('sl-clear') slClear: EventEmitter<void>;
-
   handleClearClick() {
-    this.slClear.emit();
+    emit(this, 'sl-clear');
   }
 
   render() {

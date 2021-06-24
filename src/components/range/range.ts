@@ -2,7 +2,8 @@ import { LitElement, html, unsafeCSS } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
-import { event, EventEmitter, watch } from '../../internal/decorators';
+import { emit } from '../../internal/event';
+import { watch } from '../../internal/watch';
 import { getLabelledBy, renderFormControl } from '../../internal/form-control';
 import { hasSlot } from '../../internal/slot';
 import styles from 'sass:./range.scss';
@@ -13,12 +14,16 @@ let id = 0;
  * @since 2.0
  * @status stable
  *
- * @slot label - The input's label. Alternatively, you can use the label prop.
- * @slot help-text - Help text that describes how to use the input. Alternatively, you can use the help-text prop.
+ * @slot label The input's label. Alternatively, you can use the label prop.
+ * @slot help-text Help text that describes how to use the input. Alternatively, you can use the help-text prop.
  *
- * @part base - The component's base wrapper.
- * @part input - The native range input.
- * @part tooltip - The range tooltip.
+ * @event sl-change Emitted when the control's value changes.
+ * @event sl-blur Emitted when the control loses focus.
+ * @event sl-focus Emitted when the control gains focus. *
+ *
+ * @csspart base The component's base wrapper.
+ * @csspart input The native range input.
+ * @csspart tooltip The range tooltip.
  */
 @customElement('sl-range')
 export default class SlRange extends LitElement {
@@ -73,15 +78,6 @@ export default class SlRange extends LitElement {
   /** A function used to format the tooltip's value. */
   @property() tooltipFormatter = (value: number) => value.toString();
 
-  /** Emitted when the control's value changes. */
-  @event('sl-change') slChange: EventEmitter<void>;
-
-  /** Emitted when the control loses focus. */
-  @event('sl-blur') slBlur: EventEmitter<void>;
-
-  /** Emitted when the control gains focus. */
-  @event('sl-focus') slFocus: EventEmitter<void>;
-
   connectedCallback() {
     super.connectedCallback();
     this.handleSlotChange = this.handleSlotChange.bind(this);
@@ -124,7 +120,7 @@ export default class SlRange extends LitElement {
 
   handleInput() {
     this.value = Number(this.input.value);
-    this.slChange.emit();
+    emit(this, 'sl-change');
 
     requestAnimationFrame(() => this.syncTooltip());
   }
@@ -132,13 +128,13 @@ export default class SlRange extends LitElement {
   handleBlur() {
     this.hasFocus = false;
     this.hasTooltip = false;
-    this.slBlur.emit();
+    emit(this, 'sl-blur');
   }
 
   handleFocus() {
     this.hasFocus = true;
     this.hasTooltip = true;
-    this.slFocus.emit();
+    emit(this, 'sl-focus');
   }
 
   @watch('label')

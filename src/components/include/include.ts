@@ -1,12 +1,16 @@
 import { LitElement, html, unsafeCSS } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { event, EventEmitter, watch } from '../../internal/decorators';
+import { emit } from '../../internal/event';
+import { watch } from '../../internal/watch';
 import { requestInclude } from './request';
 import styles from 'sass:./include.scss';
 
 /**
  * @since 2.0
  * @status stable
+ *
+ * @event sl-load Emitted when the included file is loaded.
+ * @event {{ status: number }} sl-error Emitted when the included file fails to load due to an error.
  */
 @customElement('sl-include')
 export default class SlInclude extends LitElement {
@@ -23,12 +27,6 @@ export default class SlInclude extends LitElement {
    * option can lead to XSS vulnerabilities in your app!
    */
   @property({ attribute: 'allow-scripts', type: Boolean }) allowScripts = false;
-
-  /** Emitted when the included file is loaded. */
-  @event('sl-load') slLoad: EventEmitter<void>;
-
-  /** Emitted when the included file fails to load due to an error. */
-  @event('sl-error') slError: EventEmitter<{ status: number }>;
 
   executeScript(script: HTMLScriptElement) {
     // Create a copy of the script and swap it out so the browser executes it
@@ -54,7 +52,7 @@ export default class SlInclude extends LitElement {
       }
 
       if (!file.ok) {
-        this.slError.emit({ detail: { status: file.status } });
+        emit(this, 'sl-error', { detail: { status: file.status } });
         return;
       }
 
@@ -64,9 +62,9 @@ export default class SlInclude extends LitElement {
         [...this.querySelectorAll('script')].map(script => this.executeScript(script));
       }
 
-      this.slLoad.emit();
+      emit(this, 'sl-load');
     } catch {
-      this.slError.emit({ detail: { status: -1 } });
+      emit(this, 'sl-error', { detail: { status: -1 } });
     }
   }
 

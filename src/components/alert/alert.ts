@@ -2,7 +2,8 @@ import { LitElement, html, unsafeCSS } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { animateTo, stopAnimations } from '../../internal/animate';
-import { event, EventEmitter, watch } from '../../internal/decorators';
+import { emit } from '../../internal/event';
+import { watch } from '../../internal/watch';
 import { waitForEvent } from '../../internal/event';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
 import styles from 'sass:./alert.scss';
@@ -15,19 +16,25 @@ const toastStack = Object.assign(document.createElement('div'), { className: 'sl
  *
  * @dependency sl-icon-button
  *
- * @slot - The alert's content.
- * @slot icon - An icon to show in the alert.
+ * @slot default The alert's content.
+ * @slot icon An icon to show in the alert.
  *
- * @part base - The component's base wrapper.
- * @part icon - The container that wraps the alert icon.
- * @part message - The alert message.
- * @part close-button - The close button.
+ * @event sl-show Emitted when the alert opens.
+ * @event sl-after-show Emitted after the alert opens and all transitions are complete.
+ * @event sl-hide Emitted when the alert closes.
+ * @event sl-after-hide Emitted after the alert closes and all transitions are complete.
  *
- * @customProperty --box-shadow - The alert's box shadow.
+ * @csspart base The component's base wrapper.
+ * @csspart icon The container that wraps the alert icon.
+ * @csspart message The alert message.
+ * @csspart close-button The close button.
  *
- * @animation alert.show - The animation to use when showing the alert.
- * @animation alert.hide - The animation to use when hiding the alert.
+ * @cssproperty --box-shadow The alert's box shadow.
+ *
+ * @animation alert.show The animation to use when showing the alert.
+ * @animation alert.hide The animation to use when hiding the alert.
  */
+
 @customElement('sl-alert')
 export default class SlAlert extends LitElement {
   static styles = unsafeCSS(styles);
@@ -50,18 +57,6 @@ export default class SlAlert extends LitElement {
    * the alert before it closes (e.g. moves the mouse over it), the timer will restart. Defaults to `Infinity`.
    */
   @property({ type: Number }) duration = Infinity;
-
-  /** Emitted when the alert opens. */
-  @event('sl-show') slShow: EventEmitter<void>;
-
-  /** Emitted after the alert opens and all transitions are complete. */
-  @event('sl-after-show') slAfterShow: EventEmitter<void>;
-
-  /** Emitted when the alert closes. */
-  @event('sl-hide') slHide: EventEmitter<void>;
-
-  /** Emitted after the alert closes and all transitions are complete. */
-  @event('sl-after-hide') slAfterHide: EventEmitter<void>;
 
   firstUpdated() {
     this.base.hidden = !this.open;
@@ -141,7 +136,7 @@ export default class SlAlert extends LitElement {
   async handleOpenChange() {
     if (this.open) {
       // Show
-      this.slShow.emit();
+      emit(this, 'sl-show');
 
       if (this.duration < Infinity) {
         this.restartAutoHide();
@@ -152,10 +147,10 @@ export default class SlAlert extends LitElement {
       const { keyframes, options } = getAnimation(this, 'alert.show');
       await animateTo(this.base, keyframes, options);
 
-      this.slAfterShow.emit();
+      emit(this, 'sl-after-show');
     } else {
       // Hide
-      this.slHide.emit();
+      emit(this, 'sl-hide');
 
       clearTimeout(this.autoHideTimeout);
 
@@ -164,7 +159,7 @@ export default class SlAlert extends LitElement {
       await animateTo(this.base, keyframes, options);
       this.base.hidden = true;
 
-      this.slAfterHide.emit();
+      emit(this, 'sl-after-hide');
     }
   }
 

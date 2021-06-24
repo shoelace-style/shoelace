@@ -3,7 +3,8 @@ import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
 import { animateTo, stopAnimations } from '../../internal/animate';
-import { event, EventEmitter, watch } from '../../internal/decorators';
+import { emit } from '../../internal/event';
+import { watch } from '../../internal/watch';
 import { waitForEvent } from '../../internal/event';
 import { lockBodyScrolling, unlockBodyScrolling } from '../../internal/scroll';
 import { hasSlot } from '../../internal/slot';
@@ -22,29 +23,39 @@ let id = 0;
  *
  * @dependency sl-icon-button
  *
- * @slot - The dialog's content.
- * @slot label - The dialog's label. Alternatively, you can use the label prop.
- * @slot footer - The dialog's footer, usually one or more buttons representing various options.
+ * @slot default The dialog's content.
+ * @slot label The dialog's label. Alternatively, you can use the label prop.
+ * @slot footer The dialog's footer, usually one or more buttons representing various options.
  *
- * @part base - The component's base wrapper.
- * @part overlay - The overlay.
- * @part panel - The dialog panel (where the dialog and its content is rendered).
- * @part header - The dialog header.
- * @part title - The dialog title.
- * @part close-button - The close button.
- * @part body - The dialog body.
- * @part footer - The dialog footer.
+ * @event sl-show Emitted when the dialog opens.
+ * @event sl-after-show Emitted after the dialog opens and all transitions are complete.
+ * @event sl-hide Emitted when the dialog closes.
+ * @event sl-after-hide Emitted after the dialog closes and all transitions are complete.
+ * @event sl-initial-focus Emitted when the dialog opens and the panel gains focus. Calling `event.preventDefault()`
+ *   will prevent focus and allow you to set it on a different element in the dialog, such as an input or button.
+ * @event sl-request-close Emitted when the user attempts to close the dialog by clicking the close button, clicking the
+ *   overlay, or pressing the escape key. Calling `event.preventDefault()` will prevent the dialog from closing. Avoid
+ *   using this unless closing the dialog will result in destructive behavior such as data loss.
  *
- * @customProperty --width - The preferred width of the dialog. Note that the dialog will shrink to accommodate smaller screens.
- * @customProperty --header-spacing - The amount of padding to use for the header.
- * @customProperty --body-spacing - The amount of padding to use for the body.
- * @customProperty --footer-spacing - The amount of padding to use for the footer.
+ * @csspart base The component's base wrapper.
+ * @csspart overlay The overlay.
+ * @csspart panel The dialog panel (where the dialog and its content is rendered).
+ * @csspart header The dialog header.
+ * @csspart title The dialog title.
+ * @csspart close-button The close button.
+ * @csspart body The dialog body.
+ * @csspart footer The dialog footer.
  *
- * @animation dialog.show - The animation to use when showing the dialog.
- * @animation dialog.hide - The animation to use when hiding the dialog.
- * @animation dialog.denyClose - The animation to use when a request to close the dialog is denied.
- * @animation dialog.overlay.show - The animation to use when showing the dialog's overlay.
- * @animation dialog.overlay.hide - The animation to use when hiding the dialog's overlay.
+ * @cssproperty --width The preferred width of the dialog. Note that the dialog will shrink to accommodate smaller screens.
+ * @cssproperty --header-spacing The amount of padding to use for the header.
+ * @cssproperty --body-spacing The amount of padding to use for the body.
+ * @cssproperty --footer-spacing The amount of padding to use for the footer.
+ *
+ * @animation dialog.show The animation to use when showing the dialog.
+ * @animation dialog.hide The animation to use when hiding the dialog.
+ * @animation dialog.denyClose The animation to use when a request to close the dialog is denied.
+ * @animation dialog.overlay.show The animation to use when showing the dialog's overlay.
+ * @animation dialog.overlay.hide The animation to use when hiding the dialog's overlay.
  */
 @customElement('sl-dialog')
 export default class SlDialog extends LitElement {
@@ -74,31 +85,6 @@ export default class SlDialog extends LitElement {
    * accessible way for users to dismiss the dialog.
    */
   @property({ attribute: 'no-header', type: Boolean, reflect: true }) noHeader = false;
-
-  /** Emitted when the dialog opens. */
-  @event('sl-show') slShow: EventEmitter<void>;
-
-  /** Emitted after the dialog opens and all transitions are complete. */
-  @event('sl-after-show') slAfterShow: EventEmitter<void>;
-
-  /** Emitted when the dialog closes. */
-  @event('sl-hide') slHide: EventEmitter<void>;
-
-  /** Emitted after the dialog closes and all transitions are complete. */
-  @event('sl-after-hide') slAfterHide: EventEmitter<void>;
-
-  /**
-   * Emitted when the dialog opens and the panel gains focus. Calling `event.preventDefault()` will prevent focus and
-   * allow you to set it on a different element in the dialog, such as an input or button.
-   */
-  @event('sl-initial-focus') slInitialFocus: EventEmitter<void>;
-
-  /**
-   * Emitted when the user attempts to close the dialog by clicking the close button, clicking the overlay, or pressing
-   * the escape key. Calling `event.preventDefault()` will prevent the dialog from closing. Avoid using this unless
-   * closing the dialog will result in destructive behavior such as data loss.
-   */
-  @event('sl-request-close') slRequestClose: EventEmitter<void>;
 
   connectedCallback() {
     super.connectedCallback();
@@ -137,7 +123,7 @@ export default class SlDialog extends LitElement {
   }
 
   private requestClose() {
-    const slRequestClose = this.slRequestClose.emit({ cancelable: true });
+    const slRequestClose = emit(this, 'sl-request-close', { cancelable: true });
     if (slRequestClose.defaultPrevented) {
       const animation = getAnimation(this, 'dialog.denyClose');
       animateTo(this.panel, animation.keyframes, animation.options);
@@ -158,7 +144,7 @@ export default class SlDialog extends LitElement {
   async handleOpenChange() {
     if (this.open) {
       // Show
-      this.slShow.emit();
+      emit(this, 'sl-show');
       this.originalTrigger = document.activeElement as HTMLElement;
       this.modal.activate();
 
@@ -169,7 +155,7 @@ export default class SlDialog extends LitElement {
 
       // Browsers that support el.focus({ preventScroll }) can set initial focus immediately
       if (hasPreventScroll) {
-        const slInitialFocus = this.slInitialFocus.emit({ cancelable: true });
+        const slInitialFocus = emit(this, 'sl-initial-focus', { cancelable: true });
         if (!slInitialFocus.defaultPrevented) {
           this.panel.focus({ preventScroll: true });
         }
@@ -185,16 +171,16 @@ export default class SlDialog extends LitElement {
       // Browsers that don't support el.focus({ preventScroll }) have to wait for the animation to finish before initial
       // focus to prevent scrolling issues. See: https://caniuse.com/mdn-api_htmlelement_focus_preventscroll_option
       if (!hasPreventScroll) {
-        const slInitialFocus = this.slInitialFocus.emit({ cancelable: true });
+        const slInitialFocus = emit(this, 'sl-initial-focus', { cancelable: true });
         if (!slInitialFocus.defaultPrevented) {
           this.panel.focus({ preventScroll: true });
         }
       }
 
-      this.slAfterShow.emit();
+      emit(this, 'sl-after-show');
     } else {
       // Hide
-      this.slHide.emit();
+      emit(this, 'sl-hide');
       this.modal.deactivate();
 
       await Promise.all([stopAnimations(this.dialog), stopAnimations(this.overlay)]);
@@ -214,7 +200,7 @@ export default class SlDialog extends LitElement {
         setTimeout(() => trigger.focus());
       }
 
-      this.slAfterHide.emit();
+      emit(this, 'sl-after-hide');
     }
   }
 

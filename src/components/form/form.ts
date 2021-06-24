@@ -1,6 +1,6 @@
 import { LitElement, html, unsafeCSS } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
-import { event, EventEmitter } from '../../internal/decorators';
+import { emit } from '../../internal/event';
 import type SlButton from '../button/button';
 import type SlCheckbox from '../checkbox/checkbox';
 import type SlColorPicker from '../color-picker/color-picker';
@@ -23,9 +23,14 @@ interface FormControl {
  * @since 2.0
  * @status stable
  *
- * @slot - The form's content.
+ * @slot default The form's content.
  *
- * @part base - The component's base wrapper.
+ * @event {{ formData: FormData, formControls: [] }} sl-submit Emitted when the form is submitted. This event will not
+ *   be emitted if any form control inside of it is in an invalid state, unless the form has the `novalidate` attribute.
+ *   Note that there is never a need to prevent this event, since it doen't send a GET or POST request like native
+ *   forms. To "prevent" submission, use a conditional around the XHR request you use to submit the form's data with.
+ *
+ * @csspart base The component's base wrapper.
  */
 @customElement('sl-form')
 export default class SlForm extends LitElement {
@@ -37,14 +42,6 @@ export default class SlForm extends LitElement {
 
   /** Prevent the form from validating inputs before submitting. */
   @property({ type: Boolean, reflect: true }) novalidate = false;
-
-  /**
-   * Emitted when the form is submitted. This event will not be emitted if any form control inside of
-   * it is in an invalid state, unless the form has the `novalidate` attribute. Note that there is never a need to prevent
-   * this event, since it doen't send a GET or POST request like native forms. To "prevent" submission, use a conditional
-   * around the XHR request you use to submit the form's data with.
-   */
-  @event('sl-submit') slSubmit: EventEmitter<{ formData: FormData; formControls: HTMLElement[] }>;
 
   connectedCallback() {
     super.connectedCallback();
@@ -231,7 +228,7 @@ export default class SlForm extends LitElement {
       }
     }
 
-    this.slSubmit.emit({ detail: { formData, formControls } });
+    emit(this, 'sl-submit', { detail: { formData, formControls } });
 
     return true;
   }

@@ -2,7 +2,8 @@ import { LitElement, TemplateResult, html, unsafeCSS } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
-import { event, EventEmitter, watch } from '../../internal/decorators';
+import { emit } from '../../internal/event';
+import { watch } from '../../internal/watch';
 import { getLabelledBy, renderFormControl } from '../../internal/form-control';
 import { getTextContent } from '../../internal/slot';
 import { hasSlot } from '../../internal/slot';
@@ -24,21 +25,26 @@ let id = 0;
  * @dependency sl-menu
  * @dependency sl-tag
  *
- * @slot - The select's options in the form of menu items.
- * @slot label - The select's label. Alternatively, you can use the label prop.
- * @slot help-text - Help text that describes how to use the select.
+ * @slot default The select's options in the form of menu items.
+ * @slot label The select's label. Alternatively, you can use the label prop.
+ * @slot help-text Help text that describes how to use the select.
  *
- * @part base - The component's base wrapper.
- * @part clear-button - The input's clear button, exported from <sl-input>.
- * @part form-control - The form control that wraps the label, input, and help text.
- * @part help-text - The select's help text.
- * @part icon - The select's icon.
- * @part label - The select's label.
- * @part menu - The select menu, a <sl-menu> element.
- * @part tag - The multiselect option, a <sl-tag> element.
- * @part tags - The container in which multiselect options are rendered.
+ * @event sl-clear Emitted when the clear button is activated.
+ * @event sl-change Emitted when the control's value changes.
+ * @event sl-focus Emitted when the control gains focus.
+ * @event l-blur Emitted when the control loses focus.
  *
- * @customProperty --focus-ring - The focus ring style to use when the control receives focus, a `box-shadow` property.
+ * @csspart base The component's base wrapper.
+ * @csspart clear-button The input's clear button, exported from <sl-input>.
+ * @csspart form-control The form control that wraps the label, input, and help text.
+ * @csspart help-text The select's help text.
+ * @csspart icon The select's icon.
+ * @csspart label The select's label.
+ * @csspart menu The select menu, a <sl-menu> element.
+ * @csspart tag The multiselect option, a <sl-tag> element.
+ * @csspart tags The container in which multiselect options are rendered.
+ *
+ * @cssproperty --focus-ring The focus ring style to use when the control receives focus, a `box-shadow` property.
  */
 @customElement('sl-select')
 export default class SlSelect extends LitElement {
@@ -109,18 +115,6 @@ export default class SlSelect extends LitElement {
   /** This will be true when the control is in an invalid state. Validity is determined by the `required` prop. */
   @property({ type: Boolean, reflect: true }) invalid = false;
 
-  /** Emitted when the clear button is activated. */
-  @event('sl-clear') slClear: EventEmitter<void>;
-
-  /** Emitted when the control's value changes. */
-  @event('sl-change') slChange: EventEmitter<void>;
-
-  /** Emitted when the control gains focus. */
-  @event('sl-focus') slFocus: EventEmitter<void>;
-
-  /** Emitted when the control loses focus. */
-  @event('sl-blur') slBlur: EventEmitter<void>;
-
   connectedCallback() {
     super.connectedCallback();
     this.handleSlotChange = this.handleSlotChange.bind(this);
@@ -176,14 +170,14 @@ export default class SlSelect extends LitElement {
     // Don't blur if the control is open. We'll move focus back once it closes.
     if (!this.isOpen) {
       this.hasFocus = false;
-      this.slBlur.emit();
+      emit(this, 'sl-blur');
     }
   }
 
   handleClearClick(event: MouseEvent) {
     event.stopPropagation();
     this.value = this.multiple ? [] : '';
-    this.slClear.emit();
+    emit(this, 'sl-clear');
     this.syncItemsFromValue();
   }
 
@@ -197,7 +191,7 @@ export default class SlSelect extends LitElement {
   handleFocus() {
     if (!this.hasFocus) {
       this.hasFocus = true;
-      this.slFocus.emit();
+      emit(this, 'sl-focus');
     }
   }
 
@@ -321,7 +315,7 @@ export default class SlSelect extends LitElement {
     this.syncItemsFromValue();
     await this.updateComplete;
     this.invalid = !this.input.checkValidity();
-    this.slChange.emit();
+    emit(this, 'sl-change');
   }
 
   resizeMenu() {

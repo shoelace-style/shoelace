@@ -1,8 +1,9 @@
 import { LitElement, html, unsafeCSS } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { styleMap } from 'lit-html/directives/style-map';
-import { event, EventEmitter, watch } from '../../internal/decorators';
 import { clamp } from '../../internal/math';
+import { emit } from '../../internal/event';
+import { watch } from '../../internal/watch';
 import styles from 'sass:./image-comparer.scss';
 
 /**
@@ -11,18 +12,20 @@ import styles from 'sass:./image-comparer.scss';
  *
  * @dependency sl-icon
  *
- * @slot before - The before image, an `<img>` or `<svg>` element.
- * @slot after - The after image, an `<img>` or `<svg>` element.
- * @slot handle-icon - The icon used inside the handle.
+ * @slot before The before image, an `<img>` or `<svg>` element.
+ * @slot after The after image, an `<img>` or `<svg>` element.
+ * @slot handle-icon The icon used inside the handle.
  *
- * @part base - The component's base wrapper.
- * @part before - The container that holds the "before" image.
- * @part after - The container that holds the "after" image.
- * @part divider - The divider that separates the images.
- * @part handle - The handle that the user drags to expose the after image.
+ * @event sl-change Emitted when the position changes.
  *
- * @customProperty --divider-width - The width of the dividing line.
- * @customProperty --handle-size - The size of the compare handle.
+ * @csspart base The component's base wrapper.
+ * @csspart before The container that holds the "before" image.
+ * @csspart after The container that holds the "after" image.
+ * @csspart divider The divider that separates the images.
+ * @csspart handle The handle that the user drags to expose the after image.
+ *
+ * @cssproperty --divider-width The width of the dividing line.
+ * @cssproperty --handle-size The size of the compare handle.
  */
 @customElement('sl-image-comparer')
 export default class SlImageComparer extends LitElement {
@@ -33,8 +36,6 @@ export default class SlImageComparer extends LitElement {
 
   /** The position of the divider as a percentage. */
   @property({ type: Number, reflect: true }) position = 50;
-
-  @event('sl-change') slChange: EventEmitter<void>;
 
   handleDrag(event: any) {
     const { width } = this.base.getBoundingClientRect();
@@ -94,7 +95,7 @@ export default class SlImageComparer extends LitElement {
 
   @watch('position', { waitUntilFirstUpdate: true })
   handlePositionChange() {
-    this.slChange.emit();
+    emit(this, 'sl-change');
   }
 
   render() {

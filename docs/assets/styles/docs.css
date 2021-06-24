@@ -433,6 +433,7 @@ strong {
 
 /* Tables */
 .markdown-section table {
+  display: table;
   margin-bottom: 1.5rem;
 }
 
@@ -446,7 +447,7 @@ strong {
 
 .markdown-section th {
   border: none;
-  font-weight: inherit;
+  font-weight: var(--sl-font-weight-semibold);
   text-align: left;
 }
 
@@ -457,14 +458,8 @@ strong {
   border-right: none;
 }
 
-.markdown-section td code {
+.markdown-section table .nowrap {
   white-space: nowrap;
-}
-
-.markdown-section table .attribute-tooltip {
-  background: none;
-  border-bottom: dashed 1px var(--sl-color-gray-200);
-  cursor: help;
 }
 
 /* Iframes */

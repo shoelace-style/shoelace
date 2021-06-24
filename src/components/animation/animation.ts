@@ -1,6 +1,7 @@
 import { LitElement, html, unsafeCSS } from 'lit';
 import { customElement, property, queryAsync } from 'lit/decorators.js';
-import { event, EventEmitter, watch } from '../../internal/decorators';
+import { emit } from '../../internal/event';
+import { watch } from '../../internal/watch';
 import { animations } from './animations';
 import styles from 'sass:./animation.scss';
 
@@ -8,7 +9,11 @@ import styles from 'sass:./animation.scss';
  * @since 2.0
  * @status stable
  *
- * @slot - The element to animate. If multiple elements are to be animated, wrap them in a single container.
+ * @event sl-cancel Emitted when the animation is canceled.
+ * @event sl-finish Emitted when the animation finishes.
+ * @event sl-start Emitted when the animation starts or restarts.
+ *
+ * @slot default The element to animate. If multiple elements are to be animated, wrap them in a single container.
  */
 @customElement('sl-animation')
 export default class SlAnimation extends LitElement {
@@ -62,15 +67,6 @@ export default class SlAnimation extends LitElement {
   /** Pauses the animation. The animation will resume when this prop is removed. */
   @property({ type: Boolean }) pause = false;
 
-  /** Emitted when the animation is canceled. */
-  @event('sl-cancel') slCancel: EventEmitter<void>;
-
-  /** Emitted when the animation finishes. */
-  @event('sl-finish') slFinish: EventEmitter<void>;
-
-  /** Emitted when the animation starts or restarts. */
-  @event('sl-start') slStart: EventEmitter<void>;
-
   connectedCallback() {
     super.connectedCallback();
     this.createAnimation();
@@ -102,11 +98,11 @@ export default class SlAnimation extends LitElement {
   }
 
   handleAnimationFinish() {
-    this.slFinish.emit();
+    emit(this, 'sl-finish');
   }
 
   handleAnimationCancel() {
-    this.slCancel.emit();
+    emit(this, 'sl-cancel');
   }
 
   @watch('pause')
@@ -116,7 +112,7 @@ export default class SlAnimation extends LitElement {
 
       if (!this.pause && !this.hasStarted) {
         this.hasStarted = true;
-        this.slStart.emit();
+        emit(this, 'sl-start');
       }
 
       return true;
@@ -166,7 +162,7 @@ export default class SlAnimation extends LitElement {
       this.animation.pause();
     } else {
       this.hasStarted = true;
-      this.slStart.emit();
+      emit(this, 'sl-start');
     }
 
     return true;

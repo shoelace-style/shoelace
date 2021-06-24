@@ -2,7 +2,8 @@ import { LitElement, html, unsafeCSS } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { animateTo, stopAnimations, shimKeyframesHeightAuto } from '../../internal/animate';
-import { event, EventEmitter, watch } from '../../internal/decorators';
+import { emit } from '../../internal/event';
+import { watch } from '../../internal/watch';
 import { waitForEvent } from '../../internal/event';
 import { focusVisible } from '../../internal/focus-visible';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
@@ -16,17 +17,22 @@ let id = 0;
  *
  * @dependency sl-icon
  *
- * @slot - The details' content.
- * @slot summary - The details' summary. Alternatively, you can use the summary prop.
+ * @slot default The details' content.
+ * @slot summary The details' summary. Alternatively, you can use the summary prop.
  *
- * @part base - The component's base wrapper.
- * @part header - The summary header.
- * @part summary - The details summary.
- * @part summary-icon - The expand/collapse summary icon.
- * @part content - The details content.
+ * @event sl-show Emitted when the details opens.
+ * @event sl-after-show Emitted after the details opens and all transitions are complete.
+ * @event sl-hide Emitted when the details closes.
+ * @event sl-after-hide Emitted after the details closes and all transitions are complete.
  *
- * @animation details.show - The animation to use when showing details. You can use `height: auto` with this animation.
- * @animation details.hide - The animation to use when hiding details. You can use `height: auto` with this animation.
+ * @csspart base The component's base wrapper.
+ * @csspart header The summary header.
+ * @csspart summary The details summary.
+ * @csspart summary-icon The expand/collapse summary icon.
+ * @csspart content The details content.
+ *
+ * @animation details.show The animation to use when showing details. You can use `height: auto` with this animation.
+ * @animation details.hide The animation to use when hiding details. You can use `height: auto` with this animation.
  */
 @customElement('sl-details')
 export default class SlDetails extends LitElement {
@@ -46,18 +52,6 @@ export default class SlDetails extends LitElement {
 
   /** Disables the details so it can't be toggled. */
   @property({ type: Boolean, reflect: true }) disabled = false;
-
-  /** Emitted when the details opens. */
-  @event('sl-show') slShow: EventEmitter<void>;
-
-  /** Emitted after the details opens and all transitions are complete. */
-  @event('sl-after-show') slAfterShow: EventEmitter<void>;
-
-  /** Emitted when the details closes. */
-  @event('sl-hide') slHide: EventEmitter<void>;
-
-  /** Emitted after the details closes and all transitions are complete. */
-  @event('sl-after-hide') slAfterHide: EventEmitter<void>;
 
   connectedCallback() {
     super.connectedCallback();
@@ -122,7 +116,7 @@ export default class SlDetails extends LitElement {
   async handleOpenChange() {
     if (this.open) {
       // Show
-      this.slShow.emit();
+      emit(this, 'sl-show');
 
       await stopAnimations(this);
       this.body.hidden = false;
@@ -131,10 +125,10 @@ export default class SlDetails extends LitElement {
       await animateTo(this.body, shimKeyframesHeightAuto(keyframes, this.body.scrollHeight), options);
       this.body.style.height = 'auto';
 
-      this.slAfterShow.emit();
+      emit(this, 'sl-after-show');
     } else {
       // Hide
-      this.slHide.emit();
+      emit(this, 'sl-hide');
 
       await stopAnimations(this);
 
@@ -143,7 +137,7 @@ export default class SlDetails extends LitElement {
       this.body.hidden = true;
       this.body.style.height = 'auto';
 
-      this.slAfterHide.emit();
+      emit(this, 'sl-after-hide');
     }
   }
 

@@ -1,19 +1,19 @@
 import { LitElement, html, unsafeCSS } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
-import { watch } from '../../internal/decorators';
+import { watch } from '../../internal/watch';
 import styles from 'sass:./progress-ring.scss';
 
 /**
  * @since 2.0
  * @status stable
  *
- * @slot - A label to show inside the ring.
+ * @slot default A label to show inside the ring.
  *
- * @part base - The component's base wrapper.
- * @part label - The progress ring label.
+ * @csspart base The component's base wrapper.
+ * @csspart label The progress ring label.
  *
- * @customProperty --track-color - The track color.
- * @customProperty --indicator-color - The indicator color.
+ * @cssproperty --track-color The track color.
+ * @cssproperty --indicator-color The indicator color.
  */
 @customElement('sl-progress-ring')
 export default class SlProgressRing extends LitElement {

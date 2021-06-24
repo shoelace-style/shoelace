@@ -25,15 +25,15 @@ let numIcons = 0;
 
     try {
       await stat(`${srcPath}/LICENSE.md`);
-      console.log(chalk.cyan('Generating icons from cache'));
+      console.log('Generating icons from cache');
     } catch {
       // Download the source from GitHub (since not everything is published to NPM)
-      console.log(chalk.cyan(`Downloading and extracting Bootstrap Icons ${version} 📦`));
+      console.log(`Downloading and extracting Bootstrap Icons ${version} 📦`);
       await download(url, './.cache/icons', { extract: true });
     }
 
     // Copy icons
-    console.log(chalk.cyan(`Copying icons and license`));
+    console.log(`Copying icons and license`);
     await del([iconDir]);
     await mkdirp(iconDir);
     await Promise.all([
@@ -43,7 +43,7 @@ let numIcons = 0;
     ]);
 
     // Generate metadata
-    console.log(chalk.cyan(`Generating icon metadata`));
+    console.log(`Generating icon metadata`);
     const files = await glob(`${srcPath}/docs/content/icons/**/*.md`);
 
     const metadata = await Promise.map(files, async file => {
@@ -61,7 +61,7 @@ let numIcons = 0;
 
     await writeFile(path.join(iconDir, 'icons.json'), JSON.stringify(metadata, null, 2), 'utf8');
 
-    console.log(chalk.green(`Successfully processed ${numIcons} icons ✨\n`));
+    console.log(chalk.cyan(`Successfully processed ${numIcons} icons ✨\n`));
   } catch (err) {
     console.error(err);
   }

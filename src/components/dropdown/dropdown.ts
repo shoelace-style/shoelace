@@ -3,7 +3,8 @@ import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { Instance as PopperInstance, createPopper } from '@popperjs/core/dist/esm';
 import { animateTo, stopAnimations } from '../../internal/animate';
-import { event, EventEmitter, watch } from '../../internal/decorators';
+import { emit } from '../../internal/event';
+import { watch } from '../../internal/watch';
 import { waitForEvent } from '../../internal/event';
 import { scrollIntoView } from '../../internal/scroll';
 import { getNearestTabbableElement } from '../../internal/tabbable';
@@ -18,15 +19,20 @@ let id = 0;
  * @since 2.0
  * @status stable
  *
- * @slot trigger - The dropdown's trigger, usually a `<sl-button>` element.
- * @slot - The dropdown's content.
+ * @slot trigger The dropdown's trigger, usually a `<sl-button>` element.
+ * @slot default The dropdown's content.
  *
- * @part base - The component's base wrapper.
- * @part trigger - The container that wraps the trigger.
- * @part panel - The panel that gets shown when the dropdown is open.
+ * @event sl-show Emitted when the dropdown opens.
+ * @event sl-after-show Emitted after the dropdown opens and all animations are complete.
+ * @event sl-hide Emitted when the dropdown closes.
+ * @event sl-after-hide Emitted after the dropdown closes and all animations are complete.*
  *
- * @animation dropdown.show - The animation to use when showing the dropdown.
- * @animation dropdown.hide - The animation to use when hiding the dropdown.
+ * @csspart base The component's base wrapper.
+ * @csspart trigger The container that wraps the trigger.
+ * @csspart panel The panel that gets shown when the dropdown is open.
+ *
+ * @animation dropdown.show The animation to use when showing the dropdown.
+ * @animation dropdown.hide The animation to use when hiding the dropdown.
  */
 @customElement('sl-dropdown')
 export default class SlDropdown extends LitElement {
@@ -80,18 +86,6 @@ export default class SlDropdown extends LitElement {
    * `overflow: auto|scroll`.
    */
   @property({ type: Boolean }) hoist = false;
-
-  /** Emitted when the dropdown opens. */
-  @event('sl-show') slShow: EventEmitter<void>;
-
-  /** Emitted after the dropdown opens and all animations are complete. */
-  @event('sl-after-show') slAfterShow: EventEmitter<void>;
-
-  /** Emitted when the dropdown closes. */
-  @event('sl-hide') slHide: EventEmitter<void>;
-
-  /** Emitted after the dropdown closes and all animations are complete. */
-  @event('sl-after-hide') slAfterHide: EventEmitter<void>;
 
   connectedCallback() {
     super.connectedCallback();
@@ -369,7 +363,7 @@ export default class SlDropdown extends LitElement {
 
     if (this.open) {
       // Show
-      this.slShow.emit();
+      emit(this, 'sl-show');
       this.panel.addEventListener('sl-activate', this.handleMenuItemActivate);
       this.panel.addEventListener('sl-select', this.handlePanelSelect);
       document.addEventListener('keydown', this.handleDocumentKeyDown);
@@ -381,10 +375,10 @@ export default class SlDropdown extends LitElement {
       const { keyframes, options } = getAnimation(this, 'dropdown.show');
       await animateTo(this.panel, keyframes, options);
 
-      this.slAfterShow.emit();
+      emit(this, 'sl-after-show');
     } else {
       // Hide
-      this.slHide.emit();
+      emit(this, 'sl-hide');
       this.panel.removeEventListener('sl-activate', this.handleMenuItemActivate);
       this.panel.removeEventListener('sl-select', this.handlePanelSelect);
       document.removeEventListener('keydown', this.handleDocumentKeyDown);
@@ -395,7 +389,7 @@ export default class SlDropdown extends LitElement {
       await animateTo(this.panel, keyframes, options);
       this.panel.hidden = true;
 
-      this.slAfterHide.emit();
+      emit(this, 'sl-after-hide');
     }
   }
 

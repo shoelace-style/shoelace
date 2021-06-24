@@ -1,7 +1,8 @@
 import { LitElement, html, unsafeCSS } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { unsafeSVG } from 'lit-html/directives/unsafe-svg';
-import { event, EventEmitter, watch } from '../../internal/decorators';
+import { emit } from '../../internal/event';
+import { watch } from '../../internal/watch';
 import { getIconLibrary, watchIcon, unwatchIcon } from './library';
 import { requestIcon } from './request';
 import styles from 'sass:./icon.scss';
@@ -12,7 +13,10 @@ const parser = new DOMParser();
  * @since 2.0
  * @status stable
  *
- * @part base - The component's base wrapper.
+ * @event sl-load Emitted when the icon has loaded.
+ * @event {{ status: number }} sl-error Emitted when the included file fails to load due to an error.
+ *
+ * @csspart base The component's base wrapper.
  */
 @customElement('sl-icon')
 export default class SlIcon extends LitElement {
@@ -31,12 +35,6 @@ export default class SlIcon extends LitElement {
 
   /** The name of a registered custom icon library. */
   @property() library = 'default';
-
-  /** Emitted when the icon has loaded. */
-  @event('sl-load') slLoad: EventEmitter<void>;
-
-  /** Emitted when the icon failed to load.  */
-  @event('sl-error') slError: EventEmitter<{ status: number }>;
 
   connectedCallback() {
     super.connectedCallback();
@@ -102,17 +100,17 @@ export default class SlIcon extends LitElement {
             }
 
             this.svg = svgEl.outerHTML;
-            this.slLoad.emit();
+            emit(this, 'sl-load');
           } else {
             this.svg = '';
-            this.slError.emit({ detail: { status: file.status } });
+            emit(this, 'sl-error', { detail: { status: file.status } });
           }
         } else {
           this.svg = '';
-          this.slError.emit({ detail: { status: file.status } });
+          emit(this, 'sl-error', { detail: { status: file.status } });
         }
       } catch {
-        this.slError.emit({ detail: { status: -1 } });
+        emit(this, 'sl-error', { detail: { status: -1 } });
       }
     } else if (this.svg) {
       // If we can't resolve a URL and an icon was previously set, remove it

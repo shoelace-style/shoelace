@@ -8,21 +8,21 @@ import styles from 'sass:./card.scss';
  * @since 2.0
  * @status stable
  *
- * @slot - The card's body.
- * @slot header - The card's header.
- * @slot footer - The card's footer.
- * @slot image - The card's image.
+ * @slot default The card's body.
+ * @slot header The card's header.
+ * @slot footer The card's footer.
+ * @slot image The card's image.
  *
- * @part base - The component's base wrapper.
- * @part image - The card's image, if present.
- * @part header - The card's header, if present.
- * @part body - The card's body.
- * @part footer - The card's footer, if present.
+ * @csspart base The component's base wrapper.
+ * @csspart image The card's image, if present.
+ * @csspart header The card's header, if present.
+ * @csspart body The card's body.
+ * @csspart footer The card's footer, if present.
  *
- * @customProperty --border-color - The card's border color, including borders that occur inside the card.
- * @customProperty --border-radius - The border radius for card edges.
- * @customProperty --border-width - The width of card borders.
- * @customProperty --padding - The padding to use for card sections.*
+ * @cssproperty --border-color The card's border color, including borders that occur inside the card.
+ * @cssproperty --border-radius The border radius for card edges.
+ * @cssproperty --border-width The width of card borders.
+ * @cssproperty --padding The padding to use for card sections.*
  */
 @customElement('sl-card')
 export default class SlCard extends LitElement {

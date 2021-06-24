@@ -8,16 +8,16 @@ import styles from 'sass:./progress-bar.scss';
  * @since 2.0
  * @status stable
  *
- * @slot - A label to show inside the indicator.
+ * @slot default A label to show inside the indicator.
  *
- * @part base - The component's base wrapper.
- * @part indicator - The progress bar indicator.
- * @part label - The progress bar label.
+ * @csspart base The component's base wrapper.
+ * @csspart indicator The progress bar indicator.
+ * @csspart label The progress bar label.
  *
- * @customProperty --height - The progress bar's height.
- * @customProperty --track-color - The track color.
- * @customProperty --indicator-color - The indicator color.
- * @customProperty --label-color - The label color.
+ * @cssproperty --height The progress bar's height.
+ * @cssproperty --track-color The track color.
+ * @cssproperty --indicator-color The indicator color.
+ * @cssproperty --label-color The label color.
  */
 @customElement('sl-progress-bar')
 export default class SlProgressBar extends LitElement {

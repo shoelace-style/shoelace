@@ -5,15 +5,17 @@ import browserSync from 'browser-sync';
 import chalk from 'chalk';
 import commandLineArgs from 'command-line-args';
 import copy from 'recursive-copy';
+import crypto from 'crypto';
 import del from 'del';
 import esbuild from 'esbuild';
-import { execSync } from 'child_process';
+import fs from 'fs';
 import getPort from 'get-port';
 import glob from 'globby';
 import inlineImportPlugin from 'esbuild-plugin-inline-import';
 import path from 'path';
 import sass from 'sass';
 import sassPlugin from 'esbuild-plugin-sass';
+import { execSync } from 'child_process';
 
 const build = esbuild.build;
 const bs = browserSync.create();
@@ -23,6 +25,7 @@ del.sync('./dist');
 
 if (!dev) execSync('tsc', { stdio: 'inherit' }); // for type declarations
 execSync('node scripts/make-metadata.js', { stdio: 'inherit' });
+execSync('node scripts/make-vscode-data.js', { stdio: 'inherit' });
 execSync('node scripts/make-icons.js', { stdio: 'inherit' });
 
 (async () => {
@@ -83,21 +86,21 @@ execSync('node scripts/make-icons.js', { stdio: 'inherit' });
       process.exit(1);
     });
 
-  // Create the docs distribution by copying dist into docs/dist. This is what powers the website. It can't exist in dev
-  // because it will conflict with browser sync's routing to the actual dist dir.
+  // Create the docs distribution by copying dist into the docs folder. This is what powers the website. It doesn't need
+  // to exist in dev because Browser Sync routes it virtually.
   await del('./docs/dist');
   if (!dev) {
-    await copy('./dist', './docs/dist');
+    await Promise.all([copy('./dist', './docs/dist')]);
   }
 
-  console.log(chalk.green('The build has finished! 📦'));
+  console.log(chalk.green('The build has finished! 📦\n'));
 
   if (dev) {
     const port = await getPort({
       port: getPort.makeRange(4000, 4999)
     });
 
-    console.log(chalk.cyan(`\nLaunching the Shoelace dev server at http://localhost:${port}! 🥾\n`));
+    console.log(chalk.cyan(`Launching the Shoelace dev server at http://localhost:${port}! 🥾\n`));
 
     // Launch browser sync
     bs.init({
@@ -118,11 +121,10 @@ execSync('node scripts/make-icons.js', { stdio: 'inherit' });
     // Rebuild and reload when source files change
     bs.watch(['src/**/!(*.test).*']).on('change', async filename => {
       console.log(`Source file changed - ${filename}`);
-
-      // NOTE: we don't run TypeDoc on every change because it's quite heavy, so changes to the docs won't be included
-      // until the next time the build script runs.
       buildResult
+        // Rebuild and reload
         .rebuild()
+        .then(() => execSync('node scripts/make-metadata.js', { stdio: 'inherit' }))
         .then(() => bs.reload())
         .catch(err => console.error(chalk.red(err)));
     });

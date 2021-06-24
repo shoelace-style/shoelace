@@ -85,10 +85,6 @@
   border-bottom-color: var(--sl-color-gray-800);
 }
 
-.sl-theme-dark .markdown-section table .attribute-tooltip {
-  border-bottom-color: var(--sl-color-gray-700);
-}
-
 /* Tips & warnings */
 .sl-theme-dark .markdown-section p.tip,
 .sl-theme-dark .markdown-section p.warn {

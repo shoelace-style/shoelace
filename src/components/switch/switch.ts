@@ -2,7 +2,8 @@ import { LitElement, html, unsafeCSS } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
-import { event, EventEmitter, watch } from '../../internal/decorators';
+import { emit } from '../../internal/event';
+import { watch } from '../../internal/watch';
 import styles from 'sass:./switch.scss';
 
 let id = 0;
@@ -11,16 +12,20 @@ let id = 0;
  * @since 2.0
  * @status stable
  *
- * @slot - The switch's label.
+ * @slot default The switch's label.
  *
- * @part base - The component's base wrapper.
- * @part control - The switch control.
- * @part thumb - The switch position indicator.
- * @part label - The switch label.
+ * @event sl-blur Emitted when the control loses focus.
+ * @event sl-change Emitted when the control's checked state changes.
+ * @event sl-focus Emitted when the control gains focus.
  *
- * @customProperty --width - The width of the switch.
- * @customProperty --height - The height of the switch.
- * @customProperty --thumb-size - The size of the thumb.
+ * @csspart base The component's base wrapper.
+ * @csspart control The switch control.
+ * @csspart thumb The switch position indicator.
+ * @csspart label The switch label.
+ *
+ * @cssproperty --width The width of the switch.
+ * @cssproperty --height The height of the switch.
+ * @cssproperty --thumb-size The size of the thumb.
  */
 @customElement('sl-switch')
 export default class SlSwitch extends LitElement {
@@ -50,15 +55,6 @@ export default class SlSwitch extends LitElement {
 
   /** This will be true when the control is in an invalid state. Validity is determined by the `required` prop. */
   @property({ type: Boolean, reflect: true }) invalid = false;
-
-  /** Emitted when the control loses focus. */
-  @event('sl-blur') slBlur: EventEmitter<void>;
-
-  /** Emitted when the control's checked state changes. */
-  @event('sl-change') slChange: EventEmitter<void>;
-
-  /** Emitted when the control gains focus. */
-  @event('sl-focus') slFocus: EventEmitter<void>;
 
   firstUpdated() {
     this.invalid = !this.input.checkValidity();
@@ -96,12 +92,12 @@ export default class SlSwitch extends LitElement {
 
   handleBlur() {
     this.hasFocus = false;
-    this.slBlur.emit();
+    emit(this, 'sl-blur');
   }
 
   handleFocus() {
     this.hasFocus = true;
-    this.slFocus.emit();
+    emit(this, 'sl-focus');
   }
 
   handleKeyDown(event: KeyboardEvent) {
@@ -127,7 +123,7 @@ export default class SlSwitch extends LitElement {
     if (this.input) {
       this.input.checked = this.checked;
       this.invalid = !this.input.checkValidity();
-      this.slChange.emit();
+      emit(this, 'sl-change');
     }
   }
 

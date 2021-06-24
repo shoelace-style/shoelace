@@ -7,6 +7,7 @@
       <thead>
         <tr>
           <th>Property</th>
+          <th>Attribute</th>
           <th>Description</th>
           <th>Type</th>
           <th>Default</th>
@@ -17,23 +18,11 @@
           .map(prop => {
             return `
               <tr>
-                <td>
-                  <code>${escapeHtml(prop.name)}</code>
-                  ${
-                    prop.attribute && prop.name !== prop.attribute
-                      ? `
-                        <br>
-                        <small>
-                          <sl-tooltip content="This is the corresponding HTML attribute">
-                            <code class="attribute-tooltip">${escapeHtml(prop.attribute)}</code>
-                          </sl-tooltip>
-                        </small>`
-                      : ''
-                  }
-                </td>
+                <td class="nowrap"><code>${escapeHtml(prop.name)}</code></td>
+                <td class="nowrap">${prop.attribute ? `<code>${escapeHtml(prop.attribute)}</code>` : '-'}</td>
                 <td>${escapeHtml(prop.description)}</td>
-                <td><code style="white-space: normal;">${escapeHtml(prop.type)}</code></td>
-                <td><code style="white-space: normal;">${escapeHtml(prop.defaultValue)}</code></td>
+                <td>${prop.type?.text ? `<code>${escapeHtml(prop.type?.text || '')}</code>` : '-'}</td>
+                <td>${prop.default ? `<code>${escapeHtml(prop.default)}</code>` : '-'}</td>
               </tr>
           `;
           })
@@ -51,7 +40,7 @@
         <tr>
           <th>Event</th>
           <th>Description</th>
-          <th>Details</th>
+          <th>Event Detail</th>
         </tr>
       </thead>
       <tbody>
@@ -59,9 +48,9 @@
           .map(
             event => `
         <tr>
-          <td><code>${escapeHtml(event.name)}</code></td>
+          <td><code class="nowrap">${escapeHtml(event.name)}</code></td>
           <td>${escapeHtml(event.description)}</td>
-          <td><code style="white-space: normal;">${escapeHtml(event.details)}</code></td>
+          <td>${event.type?.text ? `<code>${escapeHtml(event.type?.text)}` : '-'}</td>
         </tr>
         `
           )
@@ -87,19 +76,17 @@
           .map(
             method => `
               <tr>
-                <td><code>${escapeHtml(method.name)}</code></td>
+                <td class="nowrap"><code>${escapeHtml(method.name)}</code></td>
                 <td>${escapeHtml(method.description)}</td>
                 <td>
                   ${
-                    method.params.length
+                    method.parameters?.length
                       ? `
-                        <code style="white-space: normal;">${escapeHtml(
-                          method.params
-                            .map(param => `${param.name}${param.isOptional ? '?' : ''}: ${param.type}`)
-                            .join(', ')
+                        <code>${escapeHtml(
+                          method.parameters.map(param => `${param.name}: ${param.type.text}`).join(', ')
                         )}</code>
                       `
-                      : ''
+                      : '-'
                   }
                 </td>
               </tr>
@@ -126,7 +113,7 @@
           .map(
             slot => `
         <tr>
-          <td><code>${slot.name ? escapeHtml(slot.name) : '(default)'}</code></td>
+          <td class="nowrap"><code>${escapeHtml(slot.name)}</code></td>
           <td>${escapeHtml(slot.description)}</td>
         </tr>
         `
@@ -178,7 +165,7 @@
           .map(
             part => `
         <tr>
-          <td><code>${escapeHtml(part.name)}</code></td>
+          <td class="nowrap"><code>${escapeHtml(part.name)}</code></td>
           <td>${escapeHtml(part.description)}</td>
         </tr>
         `
@@ -204,7 +191,7 @@
           .map(
             animation => `
         <tr>
-          <td><code>${escapeHtml(animation.name)}</code></td>
+          <td class="nowrap"><code>${escapeHtml(animation.name)}</code></td>
           <td>${escapeHtml(animation.description)}</td>
         </tr>
         `
@@ -227,7 +214,7 @@
         return [];
       }
 
-      component.dependencies.map(tag => {
+      component.dependencies?.map(tag => {
         if (!dependencies.includes(tag)) {
           dependencies.push(tag);
         }
@@ -255,6 +242,32 @@
       .replace(/`(.*?)`/g, '<code>$1</code>');
   }
 
+  function getAllComponents(metadata) {
+    const allComponents = [];
+
+    metadata.modules.map(module => {
+      module.exports.find(ex => {
+        if (ex.kind === 'custom-element-definition') {
+          allComponents.push(getComponent(metadata, ex.name));
+        }
+      });
+    });
+
+    return allComponents;
+  }
+
+  function getComponent(metadata, tagName) {
+    const module = metadata.modules.find(module => {
+      return module.exports.find(ex => {
+        return ex.kind === 'custom-element-definition' && ex.name === tagName;
+      });
+    });
+    const component = module?.declarations.find(dec => dec.name === 'default');
+    const tag = module.exports.filter(ex => ex.kind === 'custom-element-definition' && ex.name === tagName)[0]?.name;
+
+    return Object.assign({ tag }, component);
+  }
+
   function getMetadata() {
     return new Promise((resolve, reject) => {
       // Simple caching to prevent multiple XHR requests
@@ -262,7 +275,7 @@
         return resolve(metadataStore);
       }
 
-      fetch('/dist/metadata.json')
+      fetch('/dist/custom-elements.json')
         .then(res => res.json())
         .then(data => {
           metadataStore = data;
@@ -284,7 +297,7 @@
         // Add version
         const version = document.createElement('div');
         version.classList.add('sidebar-version');
-        version.textContent = metadata.version;
+        version.textContent = metadata.package.version;
         target.appendChild(version);
 
         // Add repo buttons
@@ -309,11 +322,11 @@
       const metadata = await getMetadata();
 
       // Replace %VERSION% placeholders
-      content = content.replace(/%VERSION%/g, metadata.version);
+      content = content.replace(/%VERSION%/g, metadata.package.version);
 
       // Handle [component-header] tags
       content = content.replace(/\[component-header:([a-z-]+)\]/g, (match, tag) => {
-        const component = metadata.components.filter(data => data.tag === tag)[0];
+        const component = getComponent(metadata, tag);
         let result = '';
 
         if (!component) {
@@ -350,7 +363,7 @@
 
       // Handle [component-metadata] tags
       content = content.replace(/\[component-metadata:([a-z-]+)\]/g, (match, tag) => {
-        const component = metadata.components.filter(data => data.tag === tag)[0];
+        const component = getComponent(metadata, tag);
         let result = '';
 
         if (!component) {
@@ -358,49 +371,67 @@
           return next(content);
         }
 
-        if (component.props.length) {
+        // Remove members that don't have a description
+        const members = component.members?.filter(member => member.description);
+        const props = members?.filter(prop => {
+          // Look for a corresponding attribute
+          const attribute = component.attributes?.find(attr => attr.fieldName === prop.name);
+          if (attribute) {
+            prop.attribute = attribute.name;
+          }
+
+          return prop.kind === 'field' && prop.privacy !== 'private';
+        });
+
+        // .map(prop => {
+        //   const attribute = component.attributes?.find(attr => attr.fieldName === prop);
+        //   prop.attribute = attribute;
+        // });
+        const methods = members?.filter(prop => prop.kind === 'method' && prop.privacy !== 'private');
+
+        if (props?.length) {
           result += `
             ## Properties
-            ${createPropsTable(component.props)}
+            ${createPropsTable(props)}
           `;
         }
 
-        if (component.events.length) {
+        if (component.events?.length) {
           result += `
             ## Events
             ${createEventsTable(component.events)}
           `;
         }
 
-        if (component.methods.length) {
+        if (methods?.length) {
           result += `
-            ## Methods
-            ${createMethodsTable(component.methods)}
+          ## Methods
+          ${createMethodsTable(methods)}
           `;
         }
 
-        if (component.slots.length) {
+        if (component.slots?.length) {
           result += `
             ## Slots
             ${createSlotsTable(component.slots)}
           `;
         }
 
-        if (component.cssCustomProperties.length) {
+        if (component.cssProperties?.length) {
           result += `
             ## CSS Custom Properties
-            ${createCustomPropertiesTable(component.cssCustomProperties)}
+            ${createCustomPropertiesTable(component.cssProperties)}
           `;
         }
 
-        if (component.parts.length) {
+        if (component.cssParts?.length) {
           result += `
             ## CSS Parts
-            ${createPartsTable(component.parts)}
+            ${createPartsTable(component.cssParts)}
           `;
         }
 
-        if (component.animations.length) {
+        if (component.animations?.length) {
           result += `
             ## Animations
             ${createAnimationsTable(component.animations)}
@@ -409,14 +440,14 @@
           `;
         }
 
-        if (component.dependencies.length) {
+        if (component.dependencies?.length) {
           result += `
             ## Dependencies
 
             This component has the following dependencies so, if you're [cherry picking](/getting-started/installation#cherry-picking),
             be sure to import these components in addition to <code>&lt;${tag}&gt;</code>.
 
-            ${createDependenciesList(component.tag, metadata.components)}
+            ${createDependenciesList(component.tag, getAllComponents(metadata))}
           `;
         }
 

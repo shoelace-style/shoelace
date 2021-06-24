@@ -1,7 +1,7 @@
 import { LitElement, html, unsafeCSS } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
-import { event, EventEmitter } from '../../internal/decorators';
+import { emit } from '../../internal/event';
 import styles from 'sass:./tab.scss';
 
 let id = 0;
@@ -12,12 +12,14 @@ let id = 0;
  *
  * @dependency sl-icon-button
  *
- * @slot - The tab's label.
+ * @slot default The tab's label.
  *
- * @part base - The component's base wrapper.
- * @part close-button - The close button, which is the icon button's base wrapper.
+ * @event sl-close Emitted when the tab is closable and the close button is activated.
  *
- * @customProperty --focus-ring - The focus ring's box shadow.
+ * @csspart base The component's base wrapper.
+ * @csspart close-button The close button, which is the icon button's base wrapper.
+ *
+ * @cssproperty --focus-ring The focus ring's box shadow.
  */
 @customElement('sl-tab')
 export default class SlTab extends LitElement {
@@ -39,9 +41,6 @@ export default class SlTab extends LitElement {
   /** Draws the tab in a disabled state. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
-  /** Emitted when the tab is closable and the close button is activated. */
-  @event('sl-close') slClose: EventEmitter<void>;
-
   /** Sets focus to the tab. */
   focus(options?: FocusOptions) {
     this.tab.focus(options);
@@ -53,7 +52,7 @@ export default class SlTab extends LitElement {
   }
 
   handleCloseClick() {
-    this.slClose.emit();
+    emit(this, 'sl-close');
   }
 
   render() {

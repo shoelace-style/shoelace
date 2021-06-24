@@ -1,6 +1,6 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { watch } from '../../internal/decorators';
+import { watch } from '../../internal/watch';
 
 /**
  * @since 2.0

@@ -1,7 +1,8 @@
 import { LitElement, html, unsafeCSS } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
-import { event, EventEmitter, watch } from '../../internal/decorators';
+import { emit } from '../../internal/event';
+import { watch } from '../../internal/watch';
 import { focusVisible } from '../../internal/focus-visible';
 import { getOffset } from '../../internal/offset';
 import { scrollIntoView } from '../../internal/scroll';
@@ -15,17 +16,20 @@ import styles from 'sass:./tab-group.scss';
  *
  * @dependency sl-icon-button
  *
- * @slot nav - Used for grouping tabs in the tab group.
- * @slot - Used for grouping tab panels in the tab group.
+ * @slot nav Used for grouping tabs in the tab group.
+ * @slot default Used for grouping tab panels in the tab group.
  *
- * @part base - The component's base wrapper.
- * @part nav - The tab group navigation container.
- * @part tabs - The container that wraps the slotted tabs.
- * @part active-tab-indicator - An element that displays the currently selected tab. This is a child of the tabs container.
- * @part body - The tab group body where tab panels are slotted in.
- * @part scroll-button - The previous and next scroll buttons that appear when tabs are scrollable.
+ * @event {{ name: String }} sl-tab-show Emitted when a tab is shown.
+ * @event {{ name: String }} sl-tab-hide Emitted when a tab is hidden.
  *
- * @customProperty --tabs-border-color - The color of the border that separates tabs.
+ * @csspart base The component's base wrapper.
+ * @csspart nav The tab group navigation container.
+ * @csspart tabs The container that wraps the slotted tabs.
+ * @csspart active-tab-indicator An element that displays the currently selected tab. This is a child of the tabs container.
+ * @csspart body The tab group body where tab panels are slotted in.
+ * @csspart scroll-button The previous and next scroll buttons that appear when tabs are scrollable.
+ *
+ * @cssproperty --tabs-border-color The color of the border that separates tabs.
  */
 @customElement('sl-tab-group')
 export default class SlTabGroup extends LitElement {
@@ -55,12 +59,6 @@ export default class SlTabGroup extends LitElement {
 
   /** Disables the scroll arrows that appear when tabs overflow. */
   @property({ attribute: 'no-scroll-controls', type: Boolean }) noScrollControls = false;
-
-  /** Emitted when a tab is shown. */
-  @event('sl-tab-show') slTabShow: EventEmitter<{ tab: string }>;
-
-  /** Emitted when a tab is hidden. */
-  @event('sl-tab-hide') slTabHide: EventEmitter<{ tab: string }>;
 
   connectedCallback() {
     super.connectedCallback();
@@ -253,10 +251,10 @@ export default class SlTabGroup extends LitElement {
       // Emit events
       if (options.emitEvents) {
         if (previousTab) {
-          this.slTabHide.emit({ detail: { name: previousTab.panel } });
+          emit(this, 'sl-tab-hide', { detail: { name: previousTab.panel } });
         }
 
-        this.slTabShow.emit({ detail: { name: this.activeTab.panel } });
+        emit(this, 'sl-tab-show', { detail: { name: this.activeTab.panel } });
       }
     }
   }

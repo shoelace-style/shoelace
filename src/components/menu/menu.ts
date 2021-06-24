@@ -1,6 +1,6 @@
 import { LitElement, html, unsafeCSS } from 'lit';
 import { customElement, query } from 'lit/decorators.js';
-import { event, EventEmitter } from '../../internal/decorators';
+import { emit } from '../../internal/event';
 import { getTextContent } from '../../internal/slot';
 import type SlMenuItem from '../menu-item/menu-item';
 import styles from 'sass:./menu.scss';
@@ -9,9 +9,11 @@ import styles from 'sass:./menu.scss';
  * @since 2.0
  * @status stable
  *
- * @slot - The menu's content, including menu items, menu dividers, and menu labels.
+ * @slot default The menu's content, including menu items, menu dividers, and menu labels.
  *
- * @part base - The component's base wrapper.
+ * @event {{ item: SlMenuItem }} sl-select Emitted when a menu item is selected.
+ *
+ * @csspart base The component's base wrapper.
  */
 @customElement('sl-menu')
 export default class SlMenu extends LitElement {
@@ -23,9 +25,6 @@ export default class SlMenu extends LitElement {
   private items: SlMenuItem[] = [];
   private typeToSelectString = '';
   private typeToSelectTimeout: any;
-
-  /** Emitted when a menu item is selected. */
-  @event('sl-select') slSelect: EventEmitter<{ item: SlMenuItem }>;
 
   /**
    * Initiates type-to-select logic, which automatically selects an option based on what the user is currently typing.
@@ -66,7 +65,7 @@ export default class SlMenu extends LitElement {
     const item = target.closest('sl-menu-item') as SlMenuItem;
 
     if (item && !item.disabled) {
-      this.slSelect.emit({ detail: { item } });
+      emit(this, 'sl-select', { detail: { item } });
     }
   }
 
@@ -77,7 +76,7 @@ export default class SlMenu extends LitElement {
       event.preventDefault();
 
       if (item) {
-        this.slSelect.emit({ detail: { item } });
+        emit(this, 'sl-select', { detail: { item } });
       }
     }
 

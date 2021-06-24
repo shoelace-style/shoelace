@@ -6,11 +6,11 @@ import styles from 'sass:./spinner.scss';
  * @since 2.0
  * @status stable
  *
- * @part base - The component's base wrapper.
+ * @csspart base The component's base wrapper.
  *
- * @customProperty --track-color - The color of the spinner's track.
- * @customProperty --indicator-color - The color of the spinner's indicator.
- * @customProperty --stroke-width - The width of the indicator.
+ * @cssproperty --track-color The color of the spinner's track.
+ * @cssproperty --indicator-color The color of the spinner's indicator.
+ * @cssproperty --stroke-width The width of the indicator.
  */
 @customElement('sl-spinner')
 export default class SlSpinner extends LitElement {

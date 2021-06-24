@@ -1,11 +1,13 @@
 import { LitElement, html, unsafeCSS } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import { event, EventEmitter } from '../../internal/decorators';
+import { emit } from '../../internal/event';
 import styles from 'sass:./resize-observer.scss';
 
 /**
  * @since 2.0
  * @status stable
+ *
+ * @event {{ entries: ResizeObserverEntry[] }} sl-resize Emitted when the element is resized.
  */
 @customElement('sl-resize-observer')
 export default class SlResizeObserver extends LitElement {
@@ -14,13 +16,10 @@ export default class SlResizeObserver extends LitElement {
   private resizeObserver: ResizeObserver;
   private observedElements: HTMLElement[] = [];
 
-  /** Emitted when the element is resized. */
-  @event('sl-resize') slResize: EventEmitter<{ entries: ResizeObserverEntry[] }>;
-
   connectedCallback() {
     super.connectedCallback();
     this.resizeObserver = new ResizeObserver((entries: ResizeObserverEntry[]) => {
-      this.slResize.emit({ detail: { entries } });
+      emit(this, 'sl-resize', { detail: { entries } });
     });
   }
 
