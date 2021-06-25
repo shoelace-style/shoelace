@@ -64,6 +64,14 @@ export default class SlSwitch extends LitElement {
     this.invalid = !this.input.checkValidity();
   }
 
+  updated(changedProps: Map<string, any>) {
+    // Disabled form controls are always valid, so we need to recheck validity when the state changes
+    if (changedProps.get('disabled')) {
+      this.input.disabled = this.disabled;
+      this.invalid = !this.input.checkValidity();
+    }
+  }
+
   /** Simulates a click on the switch. */
   click() {
     this.input.click();

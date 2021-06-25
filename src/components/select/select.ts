@@ -137,6 +137,14 @@ export default class SlSelect extends LitElement {
     this.invalid = !this.input.checkValidity();
   }
 
+  updated(changedProps: Map<string, any>) {
+    // Disabled form controls are always valid, so we need to recheck validity when the state changes
+    if (changedProps.get('disabled')) {
+      this.input.disabled = this.disabled;
+      this.invalid = !this.input.checkValidity();
+    }
+  }
+
   disconnectedCallback() {
     super.disconnectedCallback();
     this.resizeObserver.unobserve(this);
@@ -185,13 +193,6 @@ export default class SlSelect extends LitElement {
     this.value = this.multiple ? [] : '';
     this.slClear.emit();
     this.syncItemsFromValue();
-  }
-
-  @watch('disabled')
-  handleDisabledChange() {
-    if (this.disabled && this.isOpen) {
-      this.dropdown.hide();
-    }
   }
 
   handleFocus() {
@@ -279,6 +280,13 @@ export default class SlSelect extends LitElement {
 
     // Restore focus on the box after the menu is hidden
     this.box.focus();
+  }
+
+  @watch('disabled')
+  async handleDisabledChange() {
+    if (this.disabled && this.isOpen) {
+      this.dropdown.hide();
+    }
   }
 
   @watch('multiple')

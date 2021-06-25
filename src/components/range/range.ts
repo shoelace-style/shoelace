@@ -100,6 +100,14 @@ export default class SlRange extends LitElement {
     });
   }
 
+  updated(changedProps: Map<string, any>) {
+    // Disabled form controls are always valid, so we need to recheck validity when the state changes
+    if (changedProps.get('disabled')) {
+      this.input.disabled = this.disabled;
+      this.invalid = !this.input.checkValidity();
+    }
+  }
+
   disconnectedCallback() {
     super.disconnectedCallback();
     this.resizeObserver.unobserve(this.input);
