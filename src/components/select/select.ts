@@ -186,6 +186,12 @@ export default class SlSelect extends LitElement {
     if (this.disabled && this.isOpen) {
       this.dropdown.hide();
     }
+
+    // Disabled form controls are always valid, so we need to recheck validity when the state changes
+    if (this.input) {
+      this.input.disabled = this.disabled;
+      this.invalid = !this.input.checkValidity();
+    }
   }
 
   handleFocus() {

@@ -20,6 +20,7 @@ The docs have been updated to use `custom-elements.json`. If you're relying on t
 - Added `sl-request-close` event to `sl-dialog` and `sl-drawer`
 - Added `dialog.denyClose` and `drawer.denyClose` animations
 - Fixed a bug in `sl-color-picker` where setting `value` immediately wouldn't trigger an update
+- Fixed a bug that resulted in form controls having incorrect validity when `disabled` was initially set [#473](https://github.com/shoelace-style/shoelace/issues/473)
 - Updated the docs to use the new `custom-elements.json` for component metadata
 
 ## 2.0.0-beta.44

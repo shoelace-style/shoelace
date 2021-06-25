@@ -93,6 +93,11 @@ export default class SlRadio extends LitElement {
     return this.getAllRadios().filter(radio => radio !== this) as this[];
   }
 
+  handleBlur() {
+    this.hasFocus = false;
+    emit(this, 'sl-blur');
+  }
+
   @watch('checked', { waitUntilFirstUpdate: true })
   handleCheckedChange() {
     if (this.checked) {
@@ -105,9 +110,13 @@ export default class SlRadio extends LitElement {
     this.checked = true;
   }
 
-  handleBlur() {
-    this.hasFocus = false;
-    emit(this, 'sl-blur');
+  @watch('disabled')
+  handleDisabledChange() {
+    // Disabled form controls are always valid, so we need to recheck validity when the state changes
+    if (this.input) {
+      this.input.disabled = this.disabled;
+      this.invalid = !this.input.checkValidity();
+    }
   }
 
   handleFocus() {

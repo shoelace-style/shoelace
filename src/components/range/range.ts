@@ -131,6 +131,15 @@ export default class SlRange extends LitElement {
     emit(this, 'sl-blur');
   }
 
+  @watch('disabled')
+  handleDisabledChange() {
+    // Disabled form controls are always valid, so we need to recheck validity when the state changes
+    if (this.input) {
+      this.input.disabled = this.disabled;
+      this.invalid = !this.input.checkValidity();
+    }
+  }
+
   handleFocus() {
     this.hasFocus = true;
     this.hasTooltip = true;

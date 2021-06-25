@@ -86,13 +86,31 @@ export default class SlSwitch extends LitElement {
     this.invalid = !this.input.checkValidity();
   }
 
+  handleBlur() {
+    this.hasFocus = false;
+    emit(this, 'sl-blur');
+  }
+
+  @watch('checked')
+  handleCheckedChange() {
+    if (this.input) {
+      this.input.checked = this.checked;
+      this.invalid = !this.input.checkValidity();
+      emit(this, 'sl-change');
+    }
+  }
+
   handleClick() {
     this.checked = !this.checked;
   }
 
-  handleBlur() {
-    this.hasFocus = false;
-    emit(this, 'sl-blur');
+  @watch('disabled')
+  handleDisabledChange() {
+    // Disabled form controls are always valid, so we need to recheck validity when the state changes
+    if (this.input) {
+      this.input.disabled = this.disabled;
+      this.invalid = !this.input.checkValidity();
+    }
   }
 
   handleFocus() {
@@ -116,15 +134,6 @@ export default class SlSwitch extends LitElement {
     // Prevent clicks on the label from briefly blurring the input
     event.preventDefault();
     this.input.focus();
-  }
-
-  @watch('checked')
-  handleCheckedChange() {
-    if (this.input) {
-      this.input.checked = this.checked;
-      this.invalid = !this.input.checkValidity();
-      emit(this, 'sl-change');
-    }
   }
 
   render() {

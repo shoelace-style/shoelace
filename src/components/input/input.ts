@@ -204,28 +204,14 @@ export default class SlInput extends LitElement {
     this.invalid = !this.input.checkValidity();
   }
 
-  handleChange() {
-    this.value = this.input.value;
-    emit(this, 'sl-change');
-  }
-
-  handleInput() {
-    this.value = this.input.value;
-    emit(this, 'sl-input');
-  }
-
-  handleInvalid() {
-    this.invalid = true;
-  }
-
   handleBlur() {
     this.hasFocus = false;
     emit(this, 'sl-blur');
   }
 
-  handleFocus() {
-    this.hasFocus = true;
-    emit(this, 'sl-focus');
+  handleChange() {
+    this.value = this.input.value;
+    emit(this, 'sl-change');
   }
 
   handleClearClick(event: MouseEvent) {
@@ -236,6 +222,29 @@ export default class SlInput extends LitElement {
     this.input.focus();
 
     event.stopPropagation();
+  }
+
+  @watch('disabled')
+  handleDisabledChange() {
+    // Disabled form controls are always valid, so we need to recheck validity when the state changes
+    if (this.input) {
+      this.input.disabled = this.disabled;
+      this.invalid = !this.input.checkValidity();
+    }
+  }
+
+  handleFocus() {
+    this.hasFocus = true;
+    emit(this, 'sl-focus');
+  }
+
+  handleInput() {
+    this.value = this.input.value;
+    emit(this, 'sl-input');
+  }
+
+  handleInvalid() {
+    this.invalid = true;
   }
 
   handlePasswordToggle() {

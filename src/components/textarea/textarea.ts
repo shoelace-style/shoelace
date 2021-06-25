@@ -215,25 +215,35 @@ export default class SlTextarea extends LitElement {
     this.invalid = !this.input.checkValidity();
   }
 
+  handleBlur() {
+    this.hasFocus = false;
+    emit(this, 'sl-blur');
+  }
+
   handleChange() {
     this.value = this.input.value;
+    this.setTextareaHeight();
     emit(this, 'sl-change');
+  }
+
+  @watch('disabled')
+  handleDisabledChange() {
+    // Disabled form controls are always valid, so we need to recheck validity when the state changes
+    if (this.input) {
+      this.input.disabled = this.disabled;
+      this.invalid = !this.input.checkValidity();
+    }
+  }
+
+  handleFocus() {
+    this.hasFocus = true;
+    emit(this, 'sl-focus');
   }
 
   handleInput() {
     this.value = this.input.value;
     this.setTextareaHeight();
     emit(this, 'sl-input');
-  }
-
-  handleBlur() {
-    this.hasFocus = false;
-    emit(this, 'sl-blur');
-  }
-
-  handleFocus() {
-    this.hasFocus = true;
-    emit(this, 'sl-focus');
   }
 
   @watch('rows')
