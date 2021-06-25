@@ -31,7 +31,6 @@
     "url": "https://github.com/sponsors/claviska"
   },
   "scripts": {
-    "make-metadata": "node scripts/make-metadata.js",
     "start": "node scripts/build.js --dev",
     "build": "node scripts/build.js",
     "prepublishOnly": "npm run build && npm run test",
