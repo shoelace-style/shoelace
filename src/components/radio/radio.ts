@@ -56,14 +56,6 @@ export default class SlRadio extends LitElement {
   /** Emitted when the control gains focus. */
   @event('sl-focus') slFocus: EventEmitter<void>;
 
-  updated(changedProps: Map<string, any>) {
-    // Disabled form controls are always valid, so we need to recheck validity when the state changes
-    if (changedProps.get('disabled')) {
-      this.input.disabled = this.disabled;
-      this.invalid = !this.input.checkValidity();
-    }
-  }
-
   /** Simulates a click on the radio. */
   click() {
     this.input.click();
@@ -105,6 +97,11 @@ export default class SlRadio extends LitElement {
     return this.getAllRadios().filter(radio => radio !== this) as this[];
   }
 
+  handleBlur() {
+    this.hasFocus = false;
+    this.slBlur.emit();
+  }
+
   @watch('checked', { waitUntilFirstUpdate: true })
   handleCheckedChange() {
     if (this.checked) {
@@ -117,9 +114,13 @@ export default class SlRadio extends LitElement {
     this.checked = true;
   }
 
-  handleBlur() {
-    this.hasFocus = false;
-    this.slBlur.emit();
+  @watch('disabled')
+  handleDisabledChange() {
+    // Disabled form controls are always valid, so we need to recheck validity when the state changes
+    if (this.input) {
+      this.input.disabled = this.disabled;
+      this.invalid = !this.input.checkValidity();
+    }
   }
 
   handleFocus() {

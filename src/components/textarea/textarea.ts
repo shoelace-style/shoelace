@@ -144,14 +144,6 @@ export default class SlTextarea extends LitElement {
     this.invalid = !this.input.checkValidity();
   }
 
-  updated(changedProps: Map<string, any>) {
-    // Disabled form controls are always valid, so we need to recheck validity when the state changes
-    if (changedProps.get('disabled')) {
-      this.input.disabled = this.disabled;
-      this.invalid = !this.input.checkValidity();
-    }
-  }
-
   disconnectedCallback() {
     super.disconnectedCallback();
     this.resizeObserver.unobserve(this.input);
@@ -229,25 +221,34 @@ export default class SlTextarea extends LitElement {
     this.invalid = !this.input.checkValidity();
   }
 
+  handleBlur() {
+    this.hasFocus = false;
+    this.slBlur.emit();
+  }
+
   handleChange() {
     this.value = this.input.value;
     this.slChange.emit();
+  }
+
+  @watch('disabled')
+  handleDisabledChange() {
+    // Disabled form controls are always valid, so we need to recheck validity when the state changes
+    if (this.input) {
+      this.input.disabled = this.disabled;
+      this.invalid = !this.input.checkValidity();
+    }
+  }
+
+  handleFocus() {
+    this.hasFocus = true;
+    this.slFocus.emit();
   }
 
   handleInput() {
     this.value = this.input.value;
     this.setTextareaHeight();
     this.slInput.emit();
-  }
-
-  handleBlur() {
-    this.hasFocus = false;
-    this.slBlur.emit();
-  }
-
-  handleFocus() {
-    this.hasFocus = true;
-    this.slFocus.emit();
   }
 
   @watch('rows')

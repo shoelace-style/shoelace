@@ -64,14 +64,6 @@ export default class SlCheckbox extends LitElement {
     this.invalid = !this.input.checkValidity();
   }
 
-  updated(changedProps: Map<string, any>) {
-    // Disabled form controls are always valid, so we need to recheck validity when the state changes
-    if (changedProps.get('disabled')) {
-      this.input.disabled = this.disabled;
-      this.invalid = !this.input.checkValidity();
-    }
-  }
-
   /** Simulates a click on the checkbox. */
   click() {
     this.input.click();
@@ -106,6 +98,15 @@ export default class SlCheckbox extends LitElement {
   handleBlur() {
     this.hasFocus = false;
     this.slBlur.emit();
+  }
+
+  @watch('disabled')
+  handleDisabledChange() {
+    // Disabled form controls are always valid, so we need to recheck validity when the state changes
+    if (this.input) {
+      this.input.disabled = this.disabled;
+      this.invalid = !this.input.checkValidity();
+    }
   }
 
   handleFocus() {
