@@ -31,6 +31,7 @@
     "url": "https://github.com/sponsors/claviska"
   },
   "scripts": {
+    "make-metadata": "node scripts/make-metadata.js",
     "start": "node scripts/build.js --dev",
     "build": "node scripts/build.js",
     "prepublishOnly": "npm run build && npm run test",
@@ -40,7 +41,7 @@
     "test:watch": "web-test-runner \"src/**/*.test.ts\" --node-resolve --puppeteer --watch"
   },
   "dependencies": {
-    "@custom-elements-manifest/analyzer": "^0.3.4",
+    "@custom-elements-manifest/analyzer": "^0.3.5",
     "@popperjs/core": "^2.7.0",
     "@shoelace-style/animations": "^1.1.0",
     "color": "^3.1.3",
