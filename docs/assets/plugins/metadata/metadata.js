@@ -112,11 +112,11 @@
         ${slots
           .map(
             slot => `
-        <tr>
-          <td class="nowrap"><code>${escapeHtml(slot.name)}</code></td>
-          <td>${escapeHtml(slot.description)}</td>
-        </tr>
-        `
+              <tr>
+                <td class="nowrap">${slot.name ? `<code>${escapeHtml(slot.name)}</code>` : '(default)'}</td>
+                <td>${escapeHtml(slot.description)}</td>
+              </tr>
+            `
           )
           .join('')}
       </tbody>
