@@ -17,6 +17,35 @@ export default {
         customElementsManifest.package = { name, description, version, author, homepage, license };
       }
     },
+
+    // Strip dashes from jsDoc comments
+    {
+      name: 'shoelace-jsdoc-dashes',
+      packageLinkPhase({ customElementsManifest, context }) {
+        for (const module of customElementsManifest?.modules) {
+          for (const declaration of module?.declarations) {
+            const items = [
+              declaration.animations,
+              declaration.attributes,
+              declaration.cssParts,
+              declaration.cssProperties,
+              declaration.events,
+              declaration.members,
+              declaration?.members?.flatMap(member => member.parameters),
+              declaration.slots
+            ];
+
+            items.flat().map(item => {
+              // Remove dash prefix and trim whitespace from the description
+              if (item?.description) {
+                item.description = item.description.replace(/^-/, '').trim();
+              }
+            });
+          }
+        }
+      }
+    },
+
     // Parse custom jsDoc tags
     {
       name: 'shoelace-custom-tags',
@@ -42,16 +71,29 @@ export default {
             const parsed = commentParser.parse(customComments + '\n */');
             parsed[0].tags?.map(t => {
               switch (t.tag) {
-                case 'since':
-                case 'status':
-                  classDoc[t.tag] = t.name;
+                // Animations
+                case 'animation':
+                  if (!Array.isArray(classDoc['animations'])) {
+                    classDoc['animations'] = [];
+                  }
+                  classDoc['animations'].push({
+                    name: t.name,
+                    description: t.description
+                  });
                   break;
 
+                // Dependencies
                 case 'dependency':
                   if (!Array.isArray(classDoc['dependencies'])) {
                     classDoc['dependencies'] = [];
                   }
                   classDoc['dependencies'].push(t.name);
+                  break;
+
+                // Value-only metadata tags
+                case 'since':
+                case 'status':
+                  classDoc[t.tag] = t.name;
                   break;
 
                 // All other tags
