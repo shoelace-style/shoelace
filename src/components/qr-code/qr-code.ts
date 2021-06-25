@@ -9,7 +9,7 @@ import styles from 'sass:./qr-code.scss';
  * @since 2.0
  * @status experimental
  *
- * @csspart base The component's base wrapper.
+ * @csspart base - The component's base wrapper.
  */
 @customElement('sl-qr-code')
 export default class SlQrCode extends LitElement {

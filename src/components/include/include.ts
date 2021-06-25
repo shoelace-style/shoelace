@@ -9,8 +9,8 @@ import styles from 'sass:./include.scss';
  * @since 2.0
  * @status stable
  *
- * @event sl-load Emitted when the included file is loaded.
- * @event {{ status: number }} sl-error Emitted when the included file fails to load due to an error.
+ * @event sl-load - Emitted when the included file is loaded.
+ * @event {{ status: number }} sl-error - Emitted when the included file fails to load due to an error.
  */
 @customElement('sl-include')
 export default class SlInclude extends LitElement {

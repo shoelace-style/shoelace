@@ -14,19 +14,19 @@ let id = 0;
  * @since 2.0
  * @status stable
  *
- * @slot label The textarea's label. Alternatively, you can use the label prop.
- * @slot help-text Help text that describes how to use the input.
+ * @slot label - The textarea's label. Alternatively, you can use the label prop.
+ * @slot help-text - Help text that describes how to use the input.
  *
- * @event sl-change Emitted when the control's value changes.
- * @event sl-input Emitted when the control receives input.
- * @event sl-focus Emitted when the control gains focus.
- * @event sl-blur Emitted when the control loses focus.
+ * @event sl-change - Emitted when the control's value changes.
+ * @event sl-input - Emitted when the control receives input.
+ * @event sl-focus - Emitted when the control gains focus.
+ * @event sl-blur - Emitted when the control loses focus.
  *
- * @csspart base The component's base wrapper.
- * @csspart form-control The form control that wraps the label, textarea, and help text.
- * @csspart label The textarea label.
- * @csspart textarea The textarea control.
- * @csspart help-text The textarea help text.
+ * @csspart base - The component's base wrapper.
+ * @csspart form-control - The form control that wraps the label, textarea, and help text.
+ * @csspart label - The textarea label.
+ * @csspart textarea - The textarea control.
+ * @csspart help-text - The textarea help text.
  */
 @customElement('sl-textarea')
 export default class SlTextarea extends LitElement {

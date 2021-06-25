@@ -12,18 +12,18 @@ import styles from 'sass:./button.scss';
  *
  * @dependency sl-spinner
  *
- * @event sl-blur Emitted when the button loses focus.
- * @event sl-focus Emitted when the button gains focus.
+ * @event sl-blur - Emitted when the button loses focus.
+ * @event sl-focus - Emitted when the button gains focus.
  *
- * @slot default The button's label.
- * @slot prefix Used to prepend an icon or similar element to the button.
- * @slot suffix Used to append an icon or similar element to the button.
+ * @slot - The button's label.
+ * @slot prefix - Used to prepend an icon or similar element to the button.
+ * @slot suffix - Used to append an icon or similar element to the button.
  *
- * @csspart base The component's base wrapper.
- * @csspart prefix The prefix container.
- * @csspart label The button's label.
- * @csspart suffix The suffix container.
- * @csspart caret The button's caret.
+ * @csspart base - The component's base wrapper.
+ * @csspart prefix - The prefix container.
+ * @csspart label - The button's label.
+ * @csspart suffix - The suffix container.
+ * @csspart caret - The button's caret.
  */
 @customElement('sl-button')
 export default class SlButton extends LitElement {

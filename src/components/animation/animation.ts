@@ -9,11 +9,11 @@ import styles from 'sass:./animation.scss';
  * @since 2.0
  * @status stable
  *
- * @event sl-cancel Emitted when the animation is canceled.
- * @event sl-finish Emitted when the animation finishes.
- * @event sl-start Emitted when the animation starts or restarts.
+ * @event sl-cancel - Emitted when the animation is canceled.
+ * @event sl-finish - Emitted when the animation finishes.
+ * @event sl-start - Emitted when the animation starts or restarts.
  *
- * @slot default The element to animate. If multiple elements are to be animated, wrap them in a single container.
+ * @slot - The element to animate. If multiple elements are to be animated, wrap them in a single container.
  */
 @customElement('sl-animation')
 export default class SlAnimation extends LitElement {

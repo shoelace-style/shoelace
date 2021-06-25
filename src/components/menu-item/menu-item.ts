@@ -10,15 +10,15 @@ import styles from 'sass:./menu-item.scss';
  *
  * @dependency sl-icon
  *
- * @slot default The menu item's label.
- * @slot prefix Used to prepend an icon or similar element to the menu item.
- * @slot suffix Used to append an icon or similar element to the menu item.
+ * @slot - The menu item's label.
+ * @slot prefix - Used to prepend an icon or similar element to the menu item.
+ * @slot suffix - Used to append an icon or similar element to the menu item.
  *
- * @csspart base The component's base wrapper.
- * @csspart checked-icon The container that wraps the checked icon.
- * @csspart prefix The prefix container.
- * @csspart label The menu item label.
- * @csspart suffix The suffix container.
+ * @csspart base - The component's base wrapper.
+ * @csspart checked-icon - The container that wraps the checked icon.
+ * @csspart prefix - The prefix container.
+ * @csspart label - The menu item label.
+ * @csspart suffix - The suffix container.
  */
 @customElement('sl-menu-item')
 export default class SlMenuItem extends LitElement {

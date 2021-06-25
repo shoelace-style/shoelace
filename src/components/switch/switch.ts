@@ -12,20 +12,20 @@ let id = 0;
  * @since 2.0
  * @status stable
  *
- * @slot default The switch's label.
+ * @slot - The switch's label.
  *
- * @event sl-blur Emitted when the control loses focus.
- * @event sl-change Emitted when the control's checked state changes.
- * @event sl-focus Emitted when the control gains focus.
+ * @event sl-blur - Emitted when the control loses focus.
+ * @event sl-change - Emitted when the control's checked state changes.
+ * @event sl-focus - Emitted when the control gains focus.
  *
- * @csspart base The component's base wrapper.
- * @csspart control The switch control.
- * @csspart thumb The switch position indicator.
- * @csspart label The switch label.
+ * @csspart base - The component's base wrapper.
+ * @csspart control - The switch control.
+ * @csspart thumb - The switch position indicator.
+ * @csspart label - The switch label.
  *
- * @cssproperty --width The width of the switch.
- * @cssproperty --height The height of the switch.
- * @cssproperty --thumb-size The size of the thumb.
+ * @cssproperty --width - The width of the switch.
+ * @cssproperty --height - The height of the switch.
+ * @cssproperty --thumb-size - The size of the thumb.
  */
 @customElement('sl-switch')
 export default class SlSwitch extends LitElement {

@@ -16,20 +16,20 @@ import styles from 'sass:./tab-group.scss';
  *
  * @dependency sl-icon-button
  *
- * @slot nav Used for grouping tabs in the tab group.
- * @slot default Used for grouping tab panels in the tab group.
+ * @slot - Used for grouping tab panels in the tab group.
+ * @slot nav - Used for grouping tabs in the tab group.
  *
- * @event {{ name: String }} sl-tab-show Emitted when a tab is shown.
- * @event {{ name: String }} sl-tab-hide Emitted when a tab is hidden.
+ * @event {{ name: String }} sl-tab-show - Emitted when a tab is shown.
+ * @event {{ name: String }} sl-tab-hide - Emitted when a tab is hidden.
  *
- * @csspart base The component's base wrapper.
- * @csspart nav The tab group navigation container.
- * @csspart tabs The container that wraps the slotted tabs.
- * @csspart active-tab-indicator An element that displays the currently selected tab. This is a child of the tabs container.
- * @csspart body The tab group body where tab panels are slotted in.
- * @csspart scroll-button The previous and next scroll buttons that appear when tabs are scrollable.
+ * @csspart base - The component's base wrapper.
+ * @csspart nav - The tab group navigation container.
+ * @csspart tabs - The container that wraps the slotted tabs.
+ * @csspart active-tab-indicator - An element that displays the currently selected tab. This is a child of the tabs container.
+ * @csspart body - The tab group body where tab panels are slotted in.
+ * @csspart scroll-button - The previous and next scroll buttons that appear when tabs are scrollable.
  *
- * @cssproperty --tabs-border-color The color of the border that separates tabs.
+ * @cssproperty --tabs-border-color - The color of the border that separates tabs.
  */
 @customElement('sl-tab-group')
 export default class SlTabGroup extends LitElement {

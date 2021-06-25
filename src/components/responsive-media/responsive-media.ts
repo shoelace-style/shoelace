@@ -7,7 +7,7 @@ import styles from 'sass:./responsive-media.scss';
  * @since 2.0
  * @status stable
  *
- * @slot default The element to receive the aspect ratio. Should be a replaced element, such as `<img>`, `<iframe>`, or `<video>`.
+ * @slot - The element to receive the aspect ratio. Should be a replaced element, such as `<img>`, `<iframe>`, or `<video>`.
  */
 @customElement('sl-responsive-media')
 export default class SlResponsiveMedia extends LitElement {

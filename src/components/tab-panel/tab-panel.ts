@@ -8,9 +8,9 @@ let id = 0;
  * @since 2.0
  * @status stable
  *
- * @slot default The tab panel's content.
+ * @slot - The tab panel's content.
  *
- * @csspart base The component's base wrapper.
+ * @csspart base - The component's base wrapper.
  */
 @customElement('sl-tab-panel')
 export default class SlTabPanel extends LitElement {

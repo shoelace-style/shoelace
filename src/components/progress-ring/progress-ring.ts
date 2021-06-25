@@ -7,13 +7,13 @@ import styles from 'sass:./progress-ring.scss';
  * @since 2.0
  * @status stable
  *
- * @slot default A label to show inside the ring.
+ * @slot - A label to show inside the ring.
  *
- * @csspart base The component's base wrapper.
- * @csspart label The progress ring label.
+ * @csspart base - The component's base wrapper.
+ * @csspart label - The progress ring label.
  *
- * @cssproperty --track-color The track color.
- * @cssproperty --indicator-color The indicator color.
+ * @cssproperty --track-color - The track color.
+ * @cssproperty --indicator-color - The indicator color.
  */
 @customElement('sl-progress-ring')
 export default class SlProgressRing extends LitElement {

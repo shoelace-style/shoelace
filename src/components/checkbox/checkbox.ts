@@ -12,17 +12,17 @@ let id = 0;
  * @since 2.0
  * @status stable
  *
- * @slot default The checkbox's label.
+ * @slot - The checkbox's label.
  *
- * @event sl-blur Emitted when the control loses focus.
- * @event sl-change Emitted when the control's checked state changes.
- * @event sl-focus Emitted when the control gains focus.
+ * @event sl-blur - Emitted when the control loses focus.
+ * @event sl-change - Emitted when the control's checked state changes.
+ * @event sl-focus - Emitted when the control gains focus.
  *
- * @csspart base The component's base wrapper.
- * @csspart control The checkbox control.
- * @csspart checked-icon The container the wraps the checked icon.
- * @csspart indeterminate-icon The container that wraps the indeterminate icon.
- * @csspart label The checkbox label.
+ * @csspart base - The component's base wrapper.
+ * @csspart control - The checkbox control.
+ * @csspart checked-icon - The container the wraps the checked icon.
+ * @csspart indeterminate-icon - The container that wraps the indeterminate icon.
+ * @csspart label - The checkbox label.
  */
 @customElement('sl-checkbox')
 export default class SlCheckbox extends LitElement {

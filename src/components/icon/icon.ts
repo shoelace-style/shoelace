@@ -13,10 +13,10 @@ const parser = new DOMParser();
  * @since 2.0
  * @status stable
  *
- * @event sl-load Emitted when the icon has loaded.
- * @event {{ status: number }} sl-error Emitted when the included file fails to load due to an error.
+ * @event sl-load - Emitted when the icon has loaded.
+ * @event {{ status: number }} sl-error - Emitted when the included file fails to load due to an error.
  *
- * @csspart base The component's base wrapper.
+ * @csspart base - The component's base wrapper.
  */
 @customElement('sl-icon')
 export default class SlIcon extends LitElement {

@@ -9,11 +9,11 @@ import styles from 'sass:./menu.scss';
  * @since 2.0
  * @status stable
  *
- * @slot default The menu's content, including menu items, menu dividers, and menu labels.
+ * @slot - The menu's content, including menu items, menu dividers, and menu labels.
  *
- * @event {{ item: SlMenuItem }} sl-select Emitted when a menu item is selected.
+ * @event {{ item: SlMenuItem }} sl-select - Emitted when a menu item is selected.
  *
- * @csspart base The component's base wrapper.
+ * @csspart base - The component's base wrapper.
  */
 @customElement('sl-menu')
 export default class SlMenu extends LitElement {

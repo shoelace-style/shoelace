@@ -6,9 +6,9 @@ import styles from 'sass:./button-group.scss';
  * @since 2.0
  * @status stable
  *
- * @slot default One or more `<sl-button>` elements to display in the button group.
+ * @slot - One or more `<sl-button>` elements to display in the button group.
  *
- * @csspart base The component's base wrapper.
+ * @csspart base - The component's base wrapper.
  */
 @customElement('sl-button-group')
 export default class SlButtonGroup extends LitElement {

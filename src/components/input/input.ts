@@ -16,31 +16,31 @@ let id = 0;
  *
  * @dependency sl-icon
  *
- * @slot label The input's label. Alternatively, you can use the label prop.
- * @slot prefix Used to prepend an icon or similar element to the input.
- * @slot suffix Used to append an icon or similar element to the input.
- * @slot clear-icon An icon to use in lieu of the default clear icon.
- * @slot show-password-icon An icon to use in lieu of the default show password icon.
- * @slot hide-password-icon An icon to use in lieu of the default hide password icon.
- * @slot help-text Help text that describes how to use the input. Alternatively, you can use the help-text prop.
+ * @slot label - The input's label. Alternatively, you can use the label prop.
+ * @slot prefix - Used to prepend an icon or similar element to the input.
+ * @slot suffix - Used to append an icon or similar element to the input.
+ * @slot clear-icon - An icon to use in lieu of the default clear icon.
+ * @slot show-password-icon - An icon to use in lieu of the default show password icon.
+ * @slot hide-password-icon - An icon to use in lieu of the default hide password icon.
+ * @slot help-text - Help text that describes how to use the input. Alternatively, you can use the help-text prop.
  *
- * @event sl-change Emitted when the control's value changes.
- * @event sl-clear Emitted when the clear button is activated.
- * @event sl-input Emitted when the control receives input.
- * @event sl-focus Emitted when the control gains focus.
- * @event sl-blur Emitted when the control loses focus.
+ * @event sl-change - Emitted when the control's value changes.
+ * @event sl-clear - Emitted when the clear button is activated.
+ * @event sl-input - Emitted when the control receives input.
+ * @event sl-focus - Emitted when the control gains focus.
+ * @event sl-blur - Emitted when the control loses focus.
  *
- * @csspart base The component's base wrapper.
- * @csspart form-control The form control that wraps the label, input, and help-text.
- * @csspart label The input label.
- * @csspart input The input control.
- * @csspart prefix The input prefix container.
- * @csspart clear-button The clear button.
- * @csspart password-toggle-button The password toggle button.
- * @csspart suffix The input suffix container.
- * @csspart help-text The input help text.
+ * @csspart base - The component's base wrapper.
+ * @csspart form-control - The form control that wraps the label, input, and help-text.
+ * @csspart label - The input label.
+ * @csspart input - The input control.
+ * @csspart prefix - The input prefix container.
+ * @csspart clear-button - The clear button.
+ * @csspart password-toggle-button - The password toggle button.
+ * @csspart suffix - The input suffix container.
+ * @csspart help-text - The input help text.
  *
- * @cssproperty --focus-ring The focus ring style to use when the control receives focus, a `box-shadow` property.
+ * @cssproperty --focus-ring - The focus ring style to use when the control receives focus, a `box-shadow` property.
  */
 @customElement('sl-input')
 export default class SlInput extends LitElement {

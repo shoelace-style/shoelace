@@ -12,16 +12,16 @@ let id = 0;
  * @since 2.0
  * @status stable
  *
- * @slot default The radio's label.
+ * @slot - The radio's label.
  *
- * @event sl-blur Emitted when the control loses focus.
- * @event sl-change Emitted when the control's checked state changes.
- * @event sl-focus Emitted when the control gains focus.
+ * @event sl-blur - Emitted when the control loses focus.
+ * @event sl-change - Emitted when the control's checked state changes.
+ * @event sl-focus - Emitted when the control gains focus.
  *
- * @csspart base The component's base wrapper.
- * @csspart control The radio control.
- * @csspart checked-icon The container the wraps the checked icon.
- * @csspart label The radio label.
+ * @csspart base - The component's base wrapper.
+ * @csspart control - The radio control.
+ * @csspart checked-icon - The container the wraps the checked icon.
+ * @csspart label - The radio label.
  */
 @customElement('sl-radio')
 export default class SlRadio extends LitElement {

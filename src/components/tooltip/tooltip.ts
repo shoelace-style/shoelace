@@ -14,22 +14,22 @@ let id = 0;
  * @since 2.0
  * @status stable
  *
- * @slot default The tooltip's target element. Only the first element will be used as the target.
- * @slot content The tooltip's content. Alternatively, you can use the content prop.
+ * @slot - The tooltip's target element. Only the first element will be used as the target.
+ * @slot content - The tooltip's content. Alternatively, you can use the content prop.
  *
- * @event sl-show Emitted when the tooltip begins to show.
- * @event sl-after-show Emitted after the tooltip has shown and all transitions are complete.
- * @event sl-hide Emitted when the tooltip begins to hide.
- * @event sl-after-hide Emitted after the tooltip has hidden and all transitions are complete. *
+ * @event sl-show - Emitted when the tooltip begins to show.
+ * @event sl-after-show - Emitted after the tooltip has shown and all transitions are complete.
+ * @event sl-hide - Emitted when the tooltip begins to hide.
+ * @event sl-after-hide - Emitted after the tooltip has hidden and all transitions are complete. *
  *
- * @csspart base The component's base wrapper.
+ * @csspart base - The component's base wrapper.
  *
- * @cssproperty --max-width The maximum width of the tooltip.
- * @cssproperty --hide-delay The amount of time to wait before hiding the tooltip when hovering.
- * @cssproperty --show-delay The amount of time to wait before showing the tooltip when hovering.
+ * @cssproperty --max-width - The maximum width of the tooltip.
+ * @cssproperty --hide-delay - The amount of time to wait before hiding the tooltip when hovering.
+ * @cssproperty --show-delay - The amount of time to wait before showing the tooltip when hovering.
  *
- * @animation tooltip.show The animation to use when showing the tooltip.
- * @animation tooltip.hide The animation to use when hiding the tooltip.
+ * @animation tooltip.show - The animation to use when showing the tooltip.
+ * @animation tooltip.hide - The animation to use when hiding the tooltip.
  */
 @customElement('sl-tooltip')
 export default class SlTooltip extends LitElement {

@@ -19,20 +19,20 @@ let id = 0;
  * @since 2.0
  * @status stable
  *
- * @slot trigger The dropdown's trigger, usually a `<sl-button>` element.
- * @slot default The dropdown's content.
+ * @slot - The dropdown's content.
+ * @slot trigger - The dropdown's trigger, usually a `<sl-button>` element.
  *
- * @event sl-show Emitted when the dropdown opens.
- * @event sl-after-show Emitted after the dropdown opens and all animations are complete.
- * @event sl-hide Emitted when the dropdown closes.
- * @event sl-after-hide Emitted after the dropdown closes and all animations are complete.*
+ * @event sl-show - Emitted when the dropdown opens.
+ * @event sl-after-show - Emitted after the dropdown opens and all animations are complete.
+ * @event sl-hide - Emitted when the dropdown closes.
+ * @event sl-after-hide - Emitted after the dropdown closes and all animations are complete.*
  *
- * @csspart base The component's base wrapper.
- * @csspart trigger The container that wraps the trigger.
- * @csspart panel The panel that gets shown when the dropdown is open.
+ * @csspart base - The component's base wrapper.
+ * @csspart trigger - The container that wraps the trigger.
+ * @csspart panel - The panel that gets shown when the dropdown is open.
  *
- * @animation dropdown.show The animation to use when showing the dropdown.
- * @animation dropdown.hide The animation to use when hiding the dropdown.
+ * @animation dropdown.show - The animation to use when showing the dropdown.
+ * @animation dropdown.hide - The animation to use when hiding the dropdown.
  */
 @customElement('sl-dropdown')
 export default class SlDropdown extends LitElement {

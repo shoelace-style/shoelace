@@ -12,20 +12,20 @@ import styles from 'sass:./image-comparer.scss';
  *
  * @dependency sl-icon
  *
- * @slot before The before image, an `<img>` or `<svg>` element.
- * @slot after The after image, an `<img>` or `<svg>` element.
- * @slot handle-icon The icon used inside the handle.
+ * @slot before - The before image, an `<img>` or `<svg>` element.
+ * @slot after - The after image, an `<img>` or `<svg>` element.
+ * @slot handle-icon - The icon used inside the handle.
  *
- * @event sl-change Emitted when the position changes.
+ * @event sl-change - Emitted when the position changes.
  *
- * @csspart base The component's base wrapper.
- * @csspart before The container that holds the "before" image.
- * @csspart after The container that holds the "after" image.
- * @csspart divider The divider that separates the images.
- * @csspart handle The handle that the user drags to expose the after image.
+ * @csspart base - The component's base wrapper.
+ * @csspart before - The container that holds the "before" image.
+ * @csspart after - The container that holds the "after" image.
+ * @csspart divider - The divider that separates the images.
+ * @csspart handle - The handle that the user drags to expose the after image.
  *
- * @cssproperty --divider-width The width of the dividing line.
- * @cssproperty --handle-size The size of the compare handle.
+ * @cssproperty --divider-width - The width of the dividing line.
+ * @cssproperty --handle-size - The size of the compare handle.
  */
 @customElement('sl-image-comparer')
 export default class SlImageComparer extends LitElement {

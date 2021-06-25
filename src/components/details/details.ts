@@ -17,22 +17,22 @@ let id = 0;
  *
  * @dependency sl-icon
  *
- * @slot default The details' content.
- * @slot summary The details' summary. Alternatively, you can use the summary prop.
+ * @slot - The details' content.
+ * @slot summary - The details' summary. Alternatively, you can use the summary prop.
  *
- * @event sl-show Emitted when the details opens.
- * @event sl-after-show Emitted after the details opens and all transitions are complete.
- * @event sl-hide Emitted when the details closes.
- * @event sl-after-hide Emitted after the details closes and all transitions are complete.
+ * @event sl-show - Emitted when the details opens.
+ * @event sl-after-show - Emitted after the details opens and all transitions are complete.
+ * @event sl-hide - Emitted when the details closes.
+ * @event sl-after-hide - Emitted after the details closes and all transitions are complete.
  *
- * @csspart base The component's base wrapper.
- * @csspart header The summary header.
- * @csspart summary The details summary.
- * @csspart summary-icon The expand/collapse summary icon.
- * @csspart content The details content.
+ * @csspart base - The component's base wrapper.
+ * @csspart header - The summary header.
+ * @csspart summary - The details summary.
+ * @csspart summary-icon - The expand/collapse summary icon.
+ * @csspart content - The details content.
  *
- * @animation details.show The animation to use when showing details. You can use `height: auto` with this animation.
- * @animation details.hide The animation to use when hiding details. You can use `height: auto` with this animation.
+ * @animation details.show - The animation to use when showing details. You can use `height: auto` with this animation.
+ * @animation details.hide - The animation to use when hiding details. You can use `height: auto` with this animation.
  */
 @customElement('sl-details')
 export default class SlDetails extends LitElement {

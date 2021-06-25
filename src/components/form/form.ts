@@ -23,14 +23,14 @@ interface FormControl {
  * @since 2.0
  * @status stable
  *
- * @slot default The form's content.
+ * @slot - The form's content.
  *
- * @event {{ formData: FormData, formControls: [] }} sl-submit Emitted when the form is submitted. This event will not
+ * @event {{ formData: FormData, formControls: [] }} sl-submit - Emitted when the form is submitted. This event will not
  *   be emitted if any form control inside of it is in an invalid state, unless the form has the `novalidate` attribute.
  *   Note that there is never a need to prevent this event, since it doen't send a GET or POST request like native
  *   forms. To "prevent" submission, use a conditional around the XHR request you use to submit the form's data with.
  *
- * @csspart base The component's base wrapper.
+ * @csspart base - The component's base wrapper.
  */
 @customElement('sl-form')
 export default class SlForm extends LitElement {

@@ -22,25 +22,25 @@ import styles from 'sass:./color-picker.scss';
  *
  * @event sl-change Emitted when the color picker's value changes.
  *
- * @csspart base The component's base wrapper
- * @csspart trigger The color picker's dropdown trigger.
- * @csspart swatches The container that holds swatches.
- * @csspart swatch Each individual swatch.
- * @csspart grid The color grid.
- * @csspart grid-handle The color grid's handle.
- * @csspart hue-slider The hue slider.
- * @csspart opacity-slider The opacity slider.
- * @csspart slider Hue and opacity sliders.
- * @csspart slider-handle Hue and opacity slider handles.
- * @csspart preview The preview color.
- * @csspart input The text input.
- * @csspart format-button The toggle format button's base.
+ * @csspart base - The component's base wrapper
+ * @csspart trigger - The color picker's dropdown trigger.
+ * @csspart swatches - The container that holds swatches.
+ * @csspart swatch - Each individual swatch.
+ * @csspart grid - The color grid.
+ * @csspart grid-handle - The color grid's handle.
+ * @csspart hue-slider - The hue slider.
+ * @csspart opacity-slider - The opacity slider.
+ * @csspart slider - Hue and opacity sliders.
+ * @csspart slider-handle - Hue and opacity slider handles.
+ * @csspart preview - The preview color.
+ * @csspart input - The text input.
+ * @csspart format-button - The toggle format button's base.
  *
- * @cssproperty --grid-width The width of the color grid.
- * @cssproperty --grid-height The height of the color grid.
- * @cssproperty --grid-handle-size The size of the color grid's handle.
- * @cssproperty --slider-height The height of the hue and alpha sliders.
- * @cssproperty --slider-handle-size The diameter of the slider's handle.
+ * @cssproperty --grid-width - The width of the color grid.
+ * @cssproperty --grid-height - The height of the color grid.
+ * @cssproperty --grid-handle-size - The size of the color grid's handle.
+ * @cssproperty --slider-height - The height of the hue and alpha sliders.
+ * @cssproperty --slider-handle-size - The diameter of the slider's handle.
  */
 @customElement('sl-color-picker')
 export default class SlColorPicker extends LitElement {

@@ -16,23 +16,23 @@ const toastStack = Object.assign(document.createElement('div'), { className: 'sl
  *
  * @dependency sl-icon-button
  *
- * @slot default The alert's content.
- * @slot icon An icon to show in the alert.
+ * @slot - The alert's content.
+ * @slot icon - An icon to show in the alert.
  *
- * @event sl-show Emitted when the alert opens.
- * @event sl-after-show Emitted after the alert opens and all transitions are complete.
- * @event sl-hide Emitted when the alert closes.
- * @event sl-after-hide Emitted after the alert closes and all transitions are complete.
+ * @event sl-show - Emitted when the alert opens.
+ * @event sl-after-show - Emitted after the alert opens and all transitions are complete.
+ * @event sl-hide - Emitted when the alert closes.
+ * @event sl-after-hide - Emitted after the alert closes and all transitions are complete.
  *
- * @csspart base The component's base wrapper.
- * @csspart icon The container that wraps the alert icon.
- * @csspart message The alert message.
- * @csspart close-button The close button.
+ * @csspart base - The component's base wrapper.
+ * @csspart icon - The container that wraps the alert icon.
+ * @csspart message - The alert message.
+ * @csspart close-button - The close button.
  *
- * @cssproperty --box-shadow The alert's box shadow.
+ * @cssproperty --box-shadow - The alert's box shadow.
  *
- * @animation alert.show The animation to use when showing the alert.
- * @animation alert.hide The animation to use when hiding the alert.
+ * @animation alert.show - The animation to use when showing the alert.
+ * @animation alert.hide - The animation to use when hiding the alert.
  */
 
 @customElement('sl-alert')

@@ -15,14 +15,14 @@ import styles from 'sass:./rating.scss';
  *
  * @dependency sl-icon
  *
- * @event sl-change Emitted when the rating's value changes.
+ * @event sl-change - Emitted when the rating's value changes.
  *
- * @csspart base The component's base wrapper.
+ * @csspart base - The component's base wrapper.
  *
- * @cssproperty --symbol-color The inactive color for symbols.
- * @cssproperty --symbol-color-active The active color for symbols.
- * @cssproperty --symbol-size The size of symbols.
- * @cssproperty --symbol-spacing The spacing to use around symbols.
+ * @cssproperty --symbol-color - The inactive color for symbols.
+ * @cssproperty --symbol-color-active - The active color for symbols.
+ * @cssproperty --symbol-size - The size of symbols.
+ * @cssproperty --symbol-spacing - The spacing to use around symbols.
  */
 @customElement('sl-rating')
 export default class SlRating extends LitElement {

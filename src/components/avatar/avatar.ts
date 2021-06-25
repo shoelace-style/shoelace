@@ -9,14 +9,14 @@ import styles from 'sass:./avatar.scss';
  *
  * @dependency sl-icon
  *
- * @slot icon The default icon to use when no image or initials are present.
+ * @slot icon - The default icon to use when no image or initials are present.
  *
- * @csspart base The component's base wrapper.
- * @csspart icon The container that wraps the avatar icon.
- * @csspart initials The container that wraps the avatar initials.
- * @csspart image The avatar image.
+ * @csspart base - The component's base wrapper.
+ * @csspart icon - The container that wraps the avatar icon.
+ * @csspart initials - The container that wraps the avatar initials.
+ * @csspart image - The avatar image.
  *
- * @cssproperty --size The size of the avatar.
+ * @cssproperty --size - The size of the avatar.
  */
 @customElement('sl-avatar')
 export default class SlAvatar extends LitElement {

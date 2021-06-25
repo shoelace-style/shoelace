@@ -11,7 +11,7 @@ import styles from 'sass:./icon-button.scss';
  *
  * @dependency sl-icon
  *
- * @csspart base The component's base wrapper.
+ * @csspart base - The component's base wrapper.
  */
 @customElement('sl-icon-button')
 export default class SlIconButton extends LitElement {

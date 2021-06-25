@@ -7,9 +7,9 @@ import styles from 'sass:./badge.scss';
  * @since 2.0
  * @status stable
  *
- * @slot default The badge's content.
+ * @slot - The badge's content.
  *
- * @csspart base The base wrapper
+ * @csspart base - The base wrapper
  */
 @customElement('sl-badge')
 export default class SlBadge extends LitElement {

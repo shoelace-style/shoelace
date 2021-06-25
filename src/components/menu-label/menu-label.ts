@@ -8,9 +8,9 @@ import styles from 'sass:./menu-label.scss';
  *
  * @dependency sl-menu
  *
- * @slot default The menu label's content.
+ * @slot - The menu label's content.
  *
- * @csspart base The component's base wrapper.
+ * @csspart base - The component's base wrapper.
  */
 @customElement('sl-menu-label')
 export default class SlMenuLabel extends LitElement {

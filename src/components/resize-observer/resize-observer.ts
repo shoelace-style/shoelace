@@ -7,7 +7,7 @@ import styles from 'sass:./resize-observer.scss';
  * @since 2.0
  * @status stable
  *
- * @event {{ entries: ResizeObserverEntry[] }} sl-resize Emitted when the element is resized.
+ * @event {{ entries: ResizeObserverEntry[] }} sl-resize - Emitted when the element is resized.
  */
 @customElement('sl-resize-observer')
 export default class SlResizeObserver extends LitElement {

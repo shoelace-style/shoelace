@@ -10,13 +10,13 @@ import styles from 'sass:./tag.scss';
  *
  * @dependency sl-icon-button
  *
- * @slot default The tag's content.
+ * @slot - The tag's content.
  *
- * @event sl-clear Emitted when the clear button is activated.
+ * @event sl-clear - Emitted when the clear button is activated.
  *
- * @csspart base The component's base wrapper.
- * @csspart content The tag content.
- * @csspart clear-button The clear button.
+ * @csspart base - The component's base wrapper.
+ * @csspart content - The tag content.
+ * @csspart clear-button - The clear button.
  */
 @customElement('sl-tag')
 export default class SlTag extends LitElement {

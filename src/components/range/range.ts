@@ -14,16 +14,16 @@ let id = 0;
  * @since 2.0
  * @status stable
  *
- * @slot label The input's label. Alternatively, you can use the label prop.
- * @slot help-text Help text that describes how to use the input. Alternatively, you can use the help-text prop.
+ * @slot label - The input's label. Alternatively, you can use the label prop.
+ * @slot help-text - Help text that describes how to use the input. Alternatively, you can use the help-text prop.
  *
- * @event sl-change Emitted when the control's value changes.
- * @event sl-blur Emitted when the control loses focus.
- * @event sl-focus Emitted when the control gains focus. *
+ * @event sl-change - Emitted when the control's value changes.
+ * @event sl-blur - Emitted when the control loses focus.
+ * @event sl-focus - Emitted when the control gains focus. *
  *
- * @csspart base The component's base wrapper.
- * @csspart input The native range input.
- * @csspart tooltip The range tooltip.
+ * @csspart base - The component's base wrapper.
+ * @csspart input - The native range input.
+ * @csspart tooltip - The range tooltip.
  */
 @customElement('sl-range')
 export default class SlRange extends LitElement {
