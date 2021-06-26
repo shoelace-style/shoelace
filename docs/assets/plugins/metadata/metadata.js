@@ -209,7 +209,7 @@
 
     // Recursively fetch subdependencies
     function getDependencies(tag) {
-      const component = allComponents.find(c => c.tag === tag);
+      const component = allComponents.find(c => c.tagName === tag);
       if (!component || !Array.isArray(component.dependencies)) {
         return [];
       }
@@ -256,16 +256,18 @@
     return allComponents;
   }
 
-  function getComponent(metadata, tagName) {
+  function getComponent(metadata, tag) {
     const module = metadata.modules.find(module => {
       return module.exports.find(ex => {
-        return ex.kind === 'custom-element-definition' && ex.name === tagName;
+        return ex.kind === 'custom-element-definition' && ex.name === tag;
       });
     });
     const component = module?.declarations.find(dec => dec.name === 'default');
-    const tag = module.exports.filter(ex => ex.kind === 'custom-element-definition' && ex.name === tagName)[0]?.name;
+    const definition = module.exports.filter(ex => ex.kind === 'custom-element-definition' && ex.name === tag)[0];
+    const tagName = definition?.name;
+    const className = definition?.declaration?.name;
 
-    return Object.assign({ tag }, component);
+    return Object.assign({ className, tagName }, component);
   }
 
   function getMetadata() {
@@ -343,7 +345,7 @@
         result += `
           <div class="component-header">
             <div class="component-header__tag">
-              <code>${component.className} | &lt;${component.tag}&gt;</code>
+              <code>&lt;${component.tagName}&gt; | ${component.className}</code>
             </div>
 
             <div class="component-header__info">
@@ -373,6 +375,7 @@
 
         // Remove members that don't have a description
         const members = component.members?.filter(member => member.description);
+        const methods = members?.filter(prop => prop.kind === 'method' && prop.privacy !== 'private');
         const props = members?.filter(prop => {
           // Look for a corresponding attribute
           const attribute = component.attributes?.find(attr => attr.fieldName === prop.name);
@@ -382,12 +385,6 @@
 
           return prop.kind === 'field' && prop.privacy !== 'private';
         });
-
-        // .map(prop => {
-        //   const attribute = component.attributes?.find(attr => attr.fieldName === prop);
-        //   prop.attribute = attribute;
-        // });
-        const methods = members?.filter(prop => prop.kind === 'method' && prop.privacy !== 'private');
 
         if (props?.length) {
           result += `
@@ -447,7 +444,7 @@
             This component has the following dependencies so, if you're [cherry picking](/getting-started/installation#cherry-picking),
             be sure to import these components in addition to <code>&lt;${tag}&gt;</code>.
 
-            ${createDependenciesList(component.tag, getAllComponents(metadata))}
+            ${createDependenciesList(component.tagName, getAllComponents(metadata))}
           `;
         }
 
