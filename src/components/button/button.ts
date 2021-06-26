@@ -96,23 +96,23 @@ export default class SlButton extends LitElement {
     this.button.blur();
   }
 
-  private handleSlotChange() {
+  handleSlotChange() {
     this.hasLabel = hasSlot(this);
     this.hasPrefix = hasSlot(this, 'prefix');
     this.hasSuffix = hasSlot(this, 'suffix');
   }
 
-  private handleBlur() {
+  handleBlur() {
     this.hasFocus = false;
     emit(this, 'sl-blur');
   }
 
-  private handleFocus() {
+  handleFocus() {
     this.hasFocus = true;
     emit(this, 'sl-focus');
   }
 
-  private handleClick(event: MouseEvent) {
+  handleClick(event: MouseEvent) {
     if (this.disabled || this.loading) {
       event.preventDefault();
       event.stopPropagation();

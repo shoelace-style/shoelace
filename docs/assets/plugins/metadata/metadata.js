@@ -373,8 +373,8 @@
           return next(content);
         }
 
-        // Remove members that don't have a description
-        const members = component.members?.filter(member => member.description);
+        // Remove members that are private or don't have a description
+        const members = component.members?.filter(member => member.description && member.privacy !== 'private');
         const methods = members?.filter(prop => prop.kind === 'method' && prop.privacy !== 'private');
         const props = members?.filter(prop => {
           // Look for a corresponding attribute
