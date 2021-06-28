@@ -95,6 +95,11 @@ export default class SlDialog extends LitElement {
 
   firstUpdated() {
     this.dialog.hidden = !this.open;
+
+    if (this.open) {
+      this.modal.activate();
+      lockBodyScrolling(this);
+    }
   }
 
   disconnectedCallback() {

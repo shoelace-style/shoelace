@@ -112,6 +112,11 @@ export default class SlDrawer extends LitElement {
 
   firstUpdated() {
     this.drawer.hidden = !this.open;
+
+    if (this.open && !this.contained) {
+      this.modal.activate();
+      lockBodyScrolling(this);
+    }
   }
 
   disconnectedCallback() {
