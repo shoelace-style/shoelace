@@ -95,13 +95,13 @@ export default class SlDrawer extends LitElement {
    * By default, the drawer slides out of its containing block (usually the viewport). To make the drawer slide out of
    * its parent element, set this prop and add `position: relative` to the parent.
    */
-  @property({ type: Boolean, reflect: true }) contained: false = false;
+  @property({ type: Boolean, reflect: true }) contained: boolean = false;
 
   /**
    * Removes the header. This will also remove the default close button, so please ensure you provide an easy,
    * accessible way for users to dismiss the drawer.
    */
-  @property({ attribute: 'no-header', type: Boolean, reflect: true }) noHeader: false = false;
+  @property({ attribute: 'no-header', type: Boolean, reflect: true }) noHeader: boolean = false;
 
   connectedCallback() {
     super.connectedCallback();
