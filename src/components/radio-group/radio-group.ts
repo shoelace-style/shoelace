@@ -18,10 +18,10 @@ export default class SlRadioGroup extends LitElement {
   static styles = unsafeCSS(styles);
 
   /** The radio group label. Required for proper accessibility. Alternatively, you can use the label slot. */
-  @property() label = '';
+  @property() label: string = '';
 
   /** Hides the fieldset and legend that surrounds the radio group. The label will still be read by screen readers. */
-  @property({ type: Boolean, attribute: 'no-fieldset' }) noFieldset = false;
+  @property({ type: Boolean, attribute: 'no-fieldset' }) noFieldset: boolean = false;
 
   render() {
     return html`

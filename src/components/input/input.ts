@@ -67,31 +67,31 @@ export default class SlInput extends LitElement {
   @property() name: string;
 
   /** The input's value attribute. */
-  @property() value = '';
+  @property() value: string = '';
 
   /** Draws a pill-style input with rounded edges. */
-  @property({ type: Boolean, reflect: true }) pill = false;
+  @property({ type: Boolean, reflect: true }) pill: boolean = false;
 
   /** The input's label. Alternatively, you can use the label slot. */
   @property() label: string;
 
   /** The input's help text. Alternatively, you can use the help-text slot. */
-  @property({ attribute: 'help-text' }) helpText = '';
+  @property({ attribute: 'help-text' }) helpText: string = '';
 
   /** Adds a clear button when the input is populated. */
-  @property({ type: Boolean }) clearable = false;
+  @property({ type: Boolean }) clearable: boolean = false;
 
   /** Adds a password toggle button to password inputs. */
-  @property({ attribute: 'toggle-password', type: Boolean }) togglePassword = false;
+  @property({ attribute: 'toggle-password', type: Boolean }) togglePassword: boolean = false;
 
   /** The input's placeholder text. */
   @property() placeholder: string;
 
   /** Disables the input. */
-  @property({ type: Boolean, reflect: true }) disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled: boolean = false;
 
   /** Makes the input readonly. */
-  @property({ type: Boolean, reflect: true }) readonly = false;
+  @property({ type: Boolean, reflect: true }) readonly: boolean = false;
 
   /** The minimum length of input that will be considered valid. */
   @property({ type: Number }) minlength: number;
@@ -112,13 +112,13 @@ export default class SlInput extends LitElement {
   @property() pattern: string;
 
   /** Makes the input a required field. */
-  @property({ type: Boolean, reflect: true }) required = false;
+  @property({ type: Boolean, reflect: true }) required: boolean = false;
 
   /**
    * This will be true when the control is in an invalid state. Validity is determined by props such as `type`,
    * `required`, `minlength`, `maxlength`, and `pattern` using the browser's constraint validation API.
    */
-  @property({ type: Boolean, reflect: true }) invalid = false;
+  @property({ type: Boolean, reflect: true }) invalid: boolean = false;
 
   /** The input's autocaptialize attribute. */
   @property() autocapitalize: 'off' | 'none' | 'on' | 'sentences' | 'words' | 'characters';

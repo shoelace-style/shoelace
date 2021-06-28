@@ -24,10 +24,10 @@ export default class SlProgressBar extends LitElement {
   static styles = unsafeCSS(styles);
 
   /** The progress bar's percentage, 0 to 100. */
-  @property({ type: Number, reflect: true }) percentage = 0;
+  @property({ type: Number, reflect: true }) percentage: number = 0;
 
   /** When true, percentage is ignored, the label is hidden, and the progress bar is drawn in an indeterminate state. */
-  @property({ type: Boolean, reflect: true }) indeterminate = false;
+  @property({ type: Boolean, reflect: true }) indeterminate: boolean = false;
 
   render() {
     return html`

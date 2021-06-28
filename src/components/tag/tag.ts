@@ -29,10 +29,10 @@ export default class SlTag extends LitElement {
   @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
 
   /** Draws a pill-style tag with rounded edges. */
-  @property({ type: Boolean, reflect: true }) pill = false;
+  @property({ type: Boolean, reflect: true }) pill: false = false;
 
   /** Makes the tag clearable. */
-  @property({ type: Boolean }) clearable = false;
+  @property({ type: Boolean }) clearable: false = false;
 
   handleClearClick() {
     emit(this, 'sl-clear');

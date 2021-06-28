@@ -25,25 +25,25 @@ export default class SlAnimation extends LitElement {
   @queryAsync('slot') defaultSlot: Promise<HTMLSlotElement>;
 
   /** The name of the built-in animation to use. For custom animations, use the `keyframes` prop. */
-  @property() name = 'none';
+  @property() name: string = 'none';
 
   /** The number of milliseconds to delay the start of the animation. */
-  @property({ type: Number }) delay = 0;
+  @property({ type: Number }) delay: number = 0;
 
   /** Determines the direction of playback as well as the behavior when reaching the end of an iteration. */
   @property() direction: PlaybackDirection = 'normal';
 
   /** The number of milliseconds each iteration of the animation takes to complete. */
-  @property({ type: Number }) duration = 1000;
+  @property({ type: Number }) duration: number = 1000;
 
   /**
    * The easing function to use for the animation. This can be a Shoelace easing function or a custom easing function
    * such as `cubic-bezier(0, 1, .76, 1.14)`.
    */
-  @property() easing = 'linear';
+  @property() easing: string = 'linear';
 
   /** The number of milliseconds to delay after the active period of an animation sequence. */
-  @property({ attribute: 'end-delay', type: Number }) endDelay = 0;
+  @property({ attribute: 'end-delay', type: Number }) endDelay: number = 0;
 
   /** Sets how the animation applies styles to its target before and after its execution. */
   @property() fill: FillMode = 'auto';
@@ -52,7 +52,7 @@ export default class SlAnimation extends LitElement {
   @property({ type: Number }) iterations: number = Infinity;
 
   /** The offset at which to start the animation, usually between 0 (start) and 1 (end). */
-  @property({ attribute: 'iteration-start', type: Number }) iterationStart = 0;
+  @property({ attribute: 'iteration-start', type: Number }) iterationStart: number = 0;
 
   /** The keyframes to use for the animation. If this is set, `name` will be ignored. */
   @property({ attribute: false }) keyframes: Keyframe[];
@@ -62,10 +62,10 @@ export default class SlAnimation extends LitElement {
    * to `2`, for example, will double the animation's speed. A negative value can be used to reverse the animation. This
    * value can be changed without causing the animation to restart.
    */
-  @property({ attribute: 'playback-rate', type: Number }) playbackRate = 1;
+  @property({ attribute: 'playback-rate', type: Number }) playbackRate: number = 1;
 
   /** Pauses the animation. The animation will resume when this prop is removed. */
-  @property({ type: Boolean }) pause = false;
+  @property({ type: Boolean }) pause: boolean = false;
 
   connectedCallback() {
     super.connectedCallback();

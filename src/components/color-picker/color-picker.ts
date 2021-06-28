@@ -60,7 +60,7 @@ export default class SlColorPicker extends LitElement {
   @state() private showCopyFeedback = false;
 
   /** The current color. */
-  @property() value = '#ffffff';
+  @property() value: string = '#ffffff';
 
   /**
    * The format to use for the display value. If opacity is enabled, these will translate to HEXA, RGBA, and HSLA
@@ -70,43 +70,43 @@ export default class SlColorPicker extends LitElement {
   @property() format: 'hex' | 'rgb' | 'hsl' = 'hex';
 
   /** Renders the color picker inline rather than inside a dropdown. */
-  @property({ type: Boolean, reflect: true }) inline = false;
+  @property({ type: Boolean, reflect: true }) inline: boolean = false;
 
   /** Determines the size of the color picker's trigger. This has no effect on inline color pickers. */
   @property() size: 'small' | 'medium' | 'large' = 'medium';
 
   /** Removes the format toggle. */
-  @property({ attribute: 'no-format-toggle', type: Boolean }) noFormatToggle = false;
+  @property({ attribute: 'no-format-toggle', type: Boolean }) noFormatToggle: boolean = false;
 
   /** The input's name attribute. */
-  @property() name = '';
+  @property() name: string = '';
 
   /** Disables the color picker. */
-  @property({ type: Boolean, reflect: true }) disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled: boolean = false;
 
   /**
    * This will be true when the control is in an invalid state. Validity is determined by the `setCustomValidity()`
    * method using the browser's constraint validation API.
    */
-  @property({ type: Boolean, reflect: true }) invalid = false;
+  @property({ type: Boolean, reflect: true }) invalid: boolean = false;
 
   /**
    * Enable this option to prevent the panel from being clipped when the component is placed inside a container with
    * `overflow: auto|scroll`.
    */
-  @property({ type: Boolean }) hoist = false;
+  @property({ type: Boolean }) hoist: boolean = false;
 
   /** Whether to show the opacity slider. */
-  @property({ type: Boolean }) opacity = false;
+  @property({ type: Boolean }) opacity: boolean = false;
 
   /** By default, the value will be set in lowercase. Set this to true to set it in uppercase instead. */
-  @property({ type: Boolean }) uppercase = false;
+  @property({ type: Boolean }) uppercase: boolean = false;
 
   /**
    * An array of predefined color swatches to display. Can include any format the color picker can parse, including
    * HEX(A), RGB(A), HSL(A), and CSS color names.
    */
-  @property({ attribute: false }) swatches = [
+  @property({ attribute: false }) swatches: string[] = [
     '#d0021b',
     '#f5a623',
     '#f8e71c',

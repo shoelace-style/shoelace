@@ -45,13 +45,13 @@ export default class SlDetails extends LitElement {
   private componentId = `details-${++id}`;
 
   /** Indicates whether or not the details is open. You can use this in lieu of the show/hide methods. */
-  @property({ type: Boolean, reflect: true }) open = false;
+  @property({ type: Boolean, reflect: true }) open: boolean = false;
 
   /** The summary to show in the details header. If you need to display HTML, use the `summary` slot instead. */
   @property() summary: string;
 
   /** Disables the details so it can't be toggled. */
-  @property({ type: Boolean, reflect: true }) disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled: boolean = false;
 
   connectedCallback() {
     super.connectedCallback();

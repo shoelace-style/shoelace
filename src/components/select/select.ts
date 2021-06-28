@@ -68,22 +68,22 @@ export default class SlSelect extends LitElement {
   @state() private displayTags: TemplateResult[] = [];
 
   /** Enables multiselect. With this enabled, value will be an array. */
-  @property({ type: Boolean, reflect: true }) multiple = false;
+  @property({ type: Boolean, reflect: true }) multiple: boolean = false;
 
   /**
    * The maximum number of tags to show when `multiple` is true. After the maximum, "+n" will be shown to indicate the
    * number of additional items that are selected. Set to -1 to remove the limit.
    */
-  @property({ attribute: 'max-tags-visible', type: Number }) maxTagsVisible = 3;
+  @property({ attribute: 'max-tags-visible', type: Number }) maxTagsVisible: number = 3;
 
   /** Disables the select control. */
-  @property({ type: Boolean, reflect: true }) disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled: boolean = false;
 
   /** The select's name. */
-  @property() name = '';
+  @property() name: string = '';
 
   /** The select's placeholder text. */
-  @property() placeholder = '';
+  @property() placeholder: string = '';
 
   /** The select's size. */
   @property() size: 'small' | 'medium' | 'large' = 'medium';
@@ -92,13 +92,13 @@ export default class SlSelect extends LitElement {
    * Enable this option to prevent the panel from being clipped when the component is placed inside a container with
    * `overflow: auto|scroll`.
    */
-  @property({ type: Boolean }) hoist = false;
+  @property({ type: Boolean }) hoist: boolean = false;
 
   /** The value of the control. This will be a string or an array depending on `multiple`. */
   @property() value: string | Array<string> = '';
 
   /** Draws a pill-style select with rounded edges. */
-  @property({ type: Boolean, reflect: true }) pill = false;
+  @property({ type: Boolean, reflect: true }) pill: boolean = false;
 
   /** The select's label. Alternatively, you can use the label slot. */
   @property() label: string;
@@ -107,13 +107,13 @@ export default class SlSelect extends LitElement {
   @property({ attribute: 'help-text' }) helpText: string;
 
   /** The select's required attribute. */
-  @property({ type: Boolean, reflect: true }) required = false;
+  @property({ type: Boolean, reflect: true }) required: boolean = false;
 
   /** Adds a clear button when the select is populated. */
-  @property({ type: Boolean }) clearable = false;
+  @property({ type: Boolean }) clearable: boolean = false;
 
   /** This will be true when the control is in an invalid state. Validity is determined by the `required` prop. */
-  @property({ type: Boolean, reflect: true }) invalid = false;
+  @property({ type: Boolean, reflect: true }) invalid: boolean = false;
 
   connectedCallback() {
     super.connectedCallback();

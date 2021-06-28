@@ -45,16 +45,16 @@ export default class SlSwitch extends LitElement {
   @property() value: string;
 
   /** Disables the switch. */
-  @property({ type: Boolean, reflect: true }) disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled: boolean = false;
 
   /** Makes the switch a required field. */
-  @property({ type: Boolean, reflect: true }) required = false;
+  @property({ type: Boolean, reflect: true }) required: boolean = false;
 
   /** Draws the switch in a checked state. */
-  @property({ type: Boolean, reflect: true }) checked = false;
+  @property({ type: Boolean, reflect: true }) checked: boolean = false;
 
   /** This will be true when the control is in an invalid state. Validity is determined by the `required` prop. */
-  @property({ type: Boolean, reflect: true }) invalid = false;
+  @property({ type: Boolean, reflect: true }) invalid: boolean = false;
 
   firstUpdated() {
     this.invalid = !this.input.checkValidity();

@@ -44,10 +44,10 @@ export default class SlAlert extends LitElement {
   @query('[part="base"]') base: HTMLElement;
 
   /** Indicates whether or not the alert is open. You can use this in lieu of the show/hide methods. */
-  @property({ type: Boolean, reflect: true }) open = false;
+  @property({ type: Boolean, reflect: true }) open: boolean = false;
 
   /** Makes the alert closable. */
-  @property({ type: Boolean, reflect: true }) closable = false;
+  @property({ type: Boolean, reflect: true }) closable: boolean = false;
 
   /** The type of alert. */
   @property({ reflect: true }) type: 'primary' | 'success' | 'info' | 'warning' | 'danger' = 'primary';
@@ -56,7 +56,7 @@ export default class SlAlert extends LitElement {
    * The length of time, in milliseconds, the alert will show before closing itself. If the user interacts with
    * the alert before it closes (e.g. moves the mouse over it), the timer will restart. Defaults to `Infinity`.
    */
-  @property({ type: Number }) duration = Infinity;
+  @property({ type: Number }) duration: number = Infinity;
 
   firstUpdated() {
     this.base.hidden = !this.open;

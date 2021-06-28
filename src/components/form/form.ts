@@ -41,7 +41,7 @@ export default class SlForm extends LitElement {
   private formControls: FormControl[];
 
   /** Prevent the form from validating inputs before submitting. */
-  @property({ type: Boolean, reflect: true }) novalidate = false;
+  @property({ type: Boolean, reflect: true }) novalidate: boolean = false;
 
   connectedCallback() {
     super.connectedCallback();

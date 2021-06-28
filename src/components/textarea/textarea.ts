@@ -50,28 +50,28 @@ export default class SlTextarea extends LitElement {
   @property() name: string;
 
   /** The textarea's value attribute. */
-  @property() value = '';
+  @property() value: string = '';
 
   /** The textarea's label. Alternatively, you can use the label slot. */
   @property() label: string;
 
   /** The textarea's help text. Alternatively, you can use the help-text slot. */
-  @property({ attribute: 'help-text' }) helpText = '';
+  @property({ attribute: 'help-text' }) helpText: string = '';
 
   /** The textarea's placeholder text. */
   @property() placeholder: string;
 
   /** The number of rows to display by default. */
-  @property({ type: Number }) rows = 4;
+  @property({ type: Number }) rows: number = 4;
 
   /** Controls how the textarea can be resized. */
   @property() resize: 'none' | 'vertical' | 'auto' = 'vertical';
 
   /** Disables the textarea. */
-  @property({ type: Boolean, reflect: true }) disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled: boolean = false;
 
   /** Makes the textarea readonly. */
-  @property({ type: Boolean, reflect: true }) readonly = false;
+  @property({ type: Boolean, reflect: true }) readonly: boolean = false;
 
   /** The minimum length of input that will be considered valid. */
   @property({ type: Number }) minlength: number;
@@ -83,13 +83,13 @@ export default class SlTextarea extends LitElement {
   @property() pattern: string;
 
   /** Makes the textarea a required field. */
-  @property({ type: Boolean, reflect: true }) required = false;
+  @property({ type: Boolean, reflect: true }) required: boolean = false;
 
   /**
    * This will be true when the control is in an invalid state. Validity is determined by props such as `type`,
    * `required`, `minlength`, and `maxlength` using the browser's constraint validation API.
    */
-  @property({ type: Boolean, reflect: true }) invalid = false;
+  @property({ type: Boolean, reflect: true }) invalid: boolean = false;
 
   /** The textarea's autocaptialize attribute. */
   @property() autocapitalize:

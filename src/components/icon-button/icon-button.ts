@@ -32,10 +32,10 @@ export default class SlIconButton extends LitElement {
    * A description that gets read by screen readers and other assistive devices. For optimal accessibility, you should
    * always include a label that describes what the icon button does.
    */
-  @property() label = '';
+  @property() label: string = '';
 
   /** Disables the button. */
-  @property({ type: Boolean, reflect: true }) disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled: boolean = false;
 
   connectedCallback() {
     super.connectedCallback();

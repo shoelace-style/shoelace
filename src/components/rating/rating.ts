@@ -34,23 +34,24 @@ export default class SlRating extends LitElement {
   @state() private isHovering = false;
 
   /** The current rating. */
-  @property({ type: Number }) value = 0;
+  @property({ type: Number }) value: number = 0;
 
   /** The highest rating to show. */
-  @property({ type: Number }) max = 5;
+  @property({ type: Number }) max: number = 5;
 
   /** The minimum increment value allowed by the control. */
-  @property({ type: Number }) precision = 1;
+  @property({ type: Number }) precision: number = 1;
 
   /** Makes the rating readonly. */
-  @property({ type: Boolean, reflect: true }) readonly = false;
+  @property({ type: Boolean, reflect: true }) readonly: boolean = false;
 
   /** Disables the rating. */
-  @property({ type: Boolean, reflect: true }) disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled: boolean = false;
 
   /** The name of the icon to display as the symbol. */
   // @ts-ignore
-  @property() getSymbol = (value?: number) => '<sl-icon name="star-fill" library="system"></sl-icon>';
+  @property() getSymbol: (value: number) => string = (value: number) =>
+    '<sl-icon name="star-fill" library="system"></sl-icon>';
 
   /** Sets focus on the rating. */
   focus(options?: FocusOptions) {

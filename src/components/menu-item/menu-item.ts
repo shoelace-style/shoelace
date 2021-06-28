@@ -29,13 +29,13 @@ export default class SlMenuItem extends LitElement {
   @state() private hasFocus = false;
 
   /** Draws the item in a checked state. */
-  @property({ type: Boolean, reflect: true }) checked = false;
+  @property({ type: Boolean, reflect: true }) checked: boolean = false;
 
   /** A unique value to store in the menu item. This can be used as a way to identify menu items when selected. */
-  @property() value = '';
+  @property() value: string = '';
 
   /** Draws the menu item in a disabled state. */
-  @property({ type: Boolean, reflect: true }) disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled: boolean = false;
 
   /** Sets focus on the button. */
   focus(options?: FocusOptions) {

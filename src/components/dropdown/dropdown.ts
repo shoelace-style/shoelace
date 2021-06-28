@@ -46,7 +46,7 @@ export default class SlDropdown extends LitElement {
   private popover: PopperInstance;
 
   /** Indicates whether or not the dropdown is open. You can use this in lieu of the show/hide methods. */
-  @property({ type: Boolean, reflect: true }) open = false;
+  @property({ type: Boolean, reflect: true }) open: boolean = false;
 
   /**
    * The preferred placement of the dropdown panel. Note that the actual placement may vary as needed to keep the panel
@@ -67,25 +67,25 @@ export default class SlDropdown extends LitElement {
     | 'left-end' = 'bottom-start';
 
   /** Disables the dropdown so the panel will not open. */
-  @property({ type: Boolean }) disabled = false;
+  @property({ type: Boolean }) disabled: boolean = false;
 
   /** Determines whether the dropdown should hide when a menu item is selected. */
-  @property({ attribute: 'close-on-select', type: Boolean, reflect: true }) closeOnSelect = true;
+  @property({ attribute: 'close-on-select', type: Boolean, reflect: true }) closeOnSelect: boolean = true;
 
   /** The dropdown will close when the user interacts outside of this element (e.g. clicking). */
   @property({ attribute: false }) containingElement: HTMLElement;
 
   /** The distance in pixels from which to offset the panel away from its trigger. */
-  @property({ type: Number }) distance = 2;
+  @property({ type: Number }) distance: number = 2;
 
   /** The distance in pixels from which to offset the panel along its trigger. */
-  @property({ type: Number }) skidding = 0;
+  @property({ type: Number }) skidding: number = 0;
 
   /**
    * Enable this option to prevent the panel from being clipped when the component is placed inside a container with
    * `overflow: auto|scroll`.
    */
-  @property({ type: Boolean }) hoist = false;
+  @property({ type: Boolean }) hoist: boolean = false;
 
   connectedCallback() {
     super.connectedCallback();

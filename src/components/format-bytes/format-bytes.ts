@@ -9,7 +9,7 @@ import { formatBytes } from '../../internal/number';
 @customElement('sl-format-bytes')
 export default class SlFormatBytes extends LitElement {
   /** The number to format in bytes. */
-  @property({ type: Number }) value = 0;
+  @property({ type: Number }) value: number = 0;
 
   /** The unit to display. */
   @property() unit: 'bytes' | 'bits' = 'bytes';

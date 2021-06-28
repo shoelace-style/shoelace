@@ -17,7 +17,7 @@ export default class SlButtonGroup extends LitElement {
   @query('slot') defaultSlot: HTMLSlotElement;
 
   /** A label to use for the button group's `aria-label` attribute. */
-  @property() label = '';
+  @property() label: string = '';
 
   handleFocus(event: CustomEvent) {
     const button = findButton(event.target as HTMLElement);

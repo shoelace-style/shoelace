@@ -34,7 +34,7 @@ export default class SlIcon extends LitElement {
   @property() label: string;
 
   /** The name of a registered custom icon library. */
-  @property() library = 'default';
+  @property() library: string = 'default';
 
   connectedCallback() {
     super.connectedCallback();
