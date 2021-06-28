@@ -11,25 +11,18 @@ const metadata = JSON.parse(fs.readFileSync('./dist/custom-elements.json', 'utf8
 
 function getAllComponents() {
   const allComponents = [];
-  const getComponent = tagName => {
-    const module = metadata.modules.find(module => {
-      return module.exports.find(ex => {
-        return ex.kind === 'custom-element-definition' && ex.name === tagName;
-      });
-    });
-
-    const component = module?.declarations.find(dec => dec.name === 'default');
-    const tag = module.exports.filter(ex => ex.kind === 'custom-element-definition' && ex.name === tagName)[0]?.name;
-
-    return Object.assign({ tag }, component);
-  };
 
   metadata.modules.map(module => {
     module.exports.find(ex => {
       if (ex.kind === 'custom-element-definition') {
-        if (typeof ex.name === 'string') {
-          allComponents.push(getComponent(ex.name));
-        }
+        const tagName = ex.name;
+        const className = ex.declaration.name;
+        const component = Object.assign(
+          { className, tagName },
+          module?.declarations.find(dec => dec.name === 'default')
+        );
+
+        allComponents.push(component);
       }
     });
   });
@@ -83,4 +76,4 @@ components.map(component => {
 
 fs.writeFileSync('./dist/vscode.html-custom-data.json', JSON.stringify(vscode, null, 2), 'utf8');
 
-console.log(chalk.cyan(`Successfully generated IntelliSense data for VS Code 🔮\n`));
+console.log(chalk.cyan(`Successfully generated custom data for VS Code 🔮\n`));

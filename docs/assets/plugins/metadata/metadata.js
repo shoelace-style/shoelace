@@ -248,7 +248,14 @@
     metadata.modules.map(module => {
       module.exports.find(ex => {
         if (ex.kind === 'custom-element-definition') {
-          allComponents.push(getComponent(metadata, ex.name));
+          const tagName = ex.name;
+          const className = ex.declaration.name;
+          const component = Object.assign(
+            { className, tagName },
+            module?.declarations.find(dec => dec.name === 'default')
+          );
+
+          allComponents.push(component);
         }
       });
     });
@@ -256,18 +263,8 @@
     return allComponents;
   }
 
-  function getComponent(metadata, tag) {
-    const module = metadata.modules.find(module => {
-      return module.exports.find(ex => {
-        return ex.kind === 'custom-element-definition' && ex.name === tag;
-      });
-    });
-    const component = module?.declarations.find(dec => dec.name === 'default');
-    const definition = module.exports.filter(ex => ex.kind === 'custom-element-definition' && ex.name === tag)[0];
-    const tagName = definition?.name;
-    const className = definition?.declaration?.name;
-
-    return Object.assign({ className, tagName }, component);
+  function getComponent(metadata, tagName) {
+    return getAllComponents(metadata).find(component => (component.tagName = tagName));
   }
 
   function getMetadata() {
