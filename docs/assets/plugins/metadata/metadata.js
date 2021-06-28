@@ -1,5 +1,7 @@
 (() => {
-  let metadataStore;
+  const customElements = fetch('/dist/custom-elements.json')
+    .then(res => res.json())
+    .catch(err => console.error(err));
 
   function createPropsTable(props) {
     const table = document.createElement('table');
@@ -266,58 +268,40 @@
     return getAllComponents(metadata).find(component => component.tagName === tagName);
   }
 
-  function getMetadata() {
-    return new Promise((resolve, reject) => {
-      // Simple caching to prevent multiple XHR requests
-      if (metadataStore) {
-        return resolve(metadataStore);
-      }
-
-      fetch('/dist/custom-elements.json')
-        .then(res => res.json())
-        .then(data => {
-          metadataStore = data;
-          resolve(metadataStore);
-        })
-        .catch(err => console.error(err));
-    });
-  }
-
   if (!window.$docsify) {
     throw new Error('Docsify must be loaded before installing this plugin.');
   }
 
   window.$docsify.plugins.push((hook, vm) => {
-    hook.mounted(function () {
-      getMetadata().then(metadata => {
-        const target = document.querySelector('.app-name');
+    hook.mounted(async function () {
+      const metadata = await customElements;
+      const target = document.querySelector('.app-name');
 
-        // Add version
-        const version = document.createElement('div');
-        version.classList.add('sidebar-version');
-        version.textContent = metadata.package.version;
-        target.appendChild(version);
+      // Add version
+      const version = document.createElement('div');
+      version.classList.add('sidebar-version');
+      version.textContent = metadata.package.version;
+      target.appendChild(version);
 
-        // Add repo buttons
-        const buttons = document.createElement('div');
-        buttons.classList.add('sidebar-buttons');
-        buttons.innerHTML = `
-            <a class="repo-button repo-button--small repo-button--sponsor" href="https://github.com/sponsors/claviska" rel="noopener" target="_blank">
-              <sl-icon name="heart"></sl-icon> Sponsor
-            </a>
-            <a class="repo-button repo-button--small repo-button--github" href="https://github.com/shoelace-style/shoelace/stargazers" rel="noopener" target="_blank">
-              <sl-icon name="github"></sl-icon> <span class="github-star-count">Star</span>
-            </a>
-            <a class="repo-button repo-button--small repo-button--twitter" href="https://twitter.com/shoelace_style" rel="noopener" target="_blank">
-              <sl-icon name="twitter"></sl-icon> Follow
-            </a>
-          `;
-        target.appendChild(buttons);
-      });
+      // Add repo buttons
+      const buttons = document.createElement('div');
+      buttons.classList.add('sidebar-buttons');
+      buttons.innerHTML = `
+          <a class="repo-button repo-button--small repo-button--sponsor" href="https://github.com/sponsors/claviska" rel="noopener" target="_blank">
+            <sl-icon name="heart"></sl-icon> Sponsor
+          </a>
+          <a class="repo-button repo-button--small repo-button--github" href="https://github.com/shoelace-style/shoelace/stargazers" rel="noopener" target="_blank">
+            <sl-icon name="github"></sl-icon> <span class="github-star-count">Star</span>
+          </a>
+          <a class="repo-button repo-button--small repo-button--twitter" href="https://twitter.com/shoelace_style" rel="noopener" target="_blank">
+            <sl-icon name="twitter"></sl-icon> Follow
+          </a>
+        `;
+      target.appendChild(buttons);
     });
 
     hook.beforeEach(async function (content, next) {
-      const metadata = await getMetadata();
+      const metadata = await customElements;
 
       // Replace %VERSION% placeholders
       content = content.replace(/%VERSION%/g, metadata.package.version);
