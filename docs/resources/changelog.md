@@ -8,11 +8,11 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
-This release changes the way component metadata is generated. Previously, TypeDoc was used to generate a very large file with type data for all components. The data was then parsed and converted to an easier-to-consume file called `metadata.json`. Alas, TypeDoc is expensive to run and the metadata format wasn't standard.
+This release changes the way component metadata is generated. Previously, the project used TypeDoc to analyze components and generate a very large file with type data. The data was then parsed and converted to an easier-to-consume file called `metadata.json`. Alas, TypeDoc is expensive to run and the metadata format wasn't standard.
 
 Thanks to an amazing effort by [Pascal Schilp](https://twitter.com/passle_), the world has a simpler, faster way to gather metadata using the [Custom Elements Manifest Analyzer](https://github.com/open-wc/custom-elements-manifest). Not only is this tool faster, but the data follows the evolving `custom-elements.json` format. This is exciting because a standard format for custom elements opens the door for many potential uses, including documentation generation, framework adapters, IDE integrations, third-party uses, and more. [Check out Pascal's great article](https://dev.to/open-wc/introducing-custom-elements-manifest-gkk) for more info about `custom-elements.json` and the new analyzer.
 
-The docs have been updated to use `custom-elements.json`. If you're relying on the old `metadata.json` file for any purpose, this will be a breaking change for you.
+The docs have been updated to use the new `custom-elements.json` file. If you're relying on the old `metadata.json` file for any purpose, this will be a breaking change for you.
 
 - 🚨 BREAKING: removed the `sl-overlay-click` event from `sl-dialog` and `sl-drawer` (use `sl-request-close` instead) [#471](https://github.com/shoelace-style/shoelace/discussions/471)
 - 🚨 BREAKING: removed `metadata.json` (use `custom-elements.json` instead)
