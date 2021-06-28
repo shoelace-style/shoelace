@@ -9,7 +9,7 @@ import mkdirp from 'mkdirp';
 
 const metadata = JSON.parse(fs.readFileSync('./dist/custom-elements.json', 'utf8'));
 
-function getAllComponents(metadata) {
+function getAllComponents() {
   const allComponents = [];
 
   metadata.modules.map(module => {
@@ -29,7 +29,7 @@ function getAllComponents(metadata) {
   return allComponents;
 }
 
-console.log('Generating IntelliSense data for VS Code');
+console.log('Generating custom data for VS Code');
 
 const components = getAllComponents();
 const vscode = { tags: [] };
