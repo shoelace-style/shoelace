@@ -18,34 +18,6 @@ export default {
       }
     },
 
-    // Strip dashes from jsDoc comments
-    {
-      name: 'shoelace-jsdoc-dashes',
-      packageLinkPhase({ customElementsManifest, context }) {
-        for (const module of customElementsManifest?.modules) {
-          for (const declaration of module?.declarations) {
-            const items = [
-              declaration.animations,
-              declaration.attributes,
-              declaration.cssParts,
-              declaration.cssProperties,
-              declaration.events,
-              declaration.members,
-              declaration?.members?.flatMap(member => member.parameters),
-              declaration.slots
-            ];
-
-            items.flat().map(item => {
-              // Remove dash prefix and trim whitespace from the description
-              if (item?.description) {
-                item.description = item.description.replace(/^-/, '').trim();
-              }
-            });
-          }
-        }
-      }
-    },
-
     // Parse custom jsDoc tags
     {
       name: 'shoelace-custom-tags',
