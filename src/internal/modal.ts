@@ -36,7 +36,11 @@ export default class Modal {
     if (this.isActive() && !path.includes(this.element)) {
       const tabbableElements = getTabbableElements(this.element);
       const index = this.tabDirection === 'backward' ? tabbableElements.length - 1 : 0;
-      tabbableElements[index].focus({ preventScroll: true });
+      const el = tabbableElements[index];
+
+      if (typeof el?.focus === 'function') {
+        el.focus({ preventScroll: true });
+      }
     }
   }
 

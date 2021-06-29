@@ -66,13 +66,6 @@ export function getTabbableElements(root: HTMLElement | ShadowRoot) {
     if (root.shadowRoot && root.shadowRoot.mode === 'open') {
       getTabbableElements(root.shadowRoot).map(el => tabbableElements.push(el));
     }
-
-    // Look at slotted elements
-    if (root instanceof HTMLSlotElement) {
-      root.assignedElements().map((slottedEl: HTMLElement) => {
-        getTabbableElements(slottedEl).map(el => tabbableElements.push(el));
-      });
-    }
   }
 
   // Look for tabbable elements in children
