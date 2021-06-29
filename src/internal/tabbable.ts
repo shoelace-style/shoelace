@@ -17,21 +17,6 @@ function isTabbable(el: HTMLElement) {
     return false;
   }
 
-  // Elements with a tabindex other than -1 are tabbable
-  if (el.hasAttribute('tabindex')) {
-    return true;
-  }
-
-  // Elements with a contenteditable attribute are tabbable
-  if (el.hasAttribute('contenteditable') && el.getAttribute('contenteditable') !== 'false') {
-    return true;
-  }
-
-  // Audio and video elements with the controls attribute are tabbable
-  if ((tag === 'audio' || tag === 'video') && el.hasAttribute('controls')) {
-    return true;
-  }
-
   // Radios without a checked attribute are not tabbable
   if (tag === 'input' && el.getAttribute('type') === 'radio' && !el.hasAttribute('checked')) {
     return false;
@@ -42,9 +27,24 @@ function isTabbable(el: HTMLElement) {
     return false;
   }
 
-  // Elements without visibility are not tabbable (calculated last due to performance)
+  // Elements without visibility are not tabbable
   if (window.getComputedStyle(el).visibility === 'hidden') {
     return false;
+  }
+
+  // Audio and video elements with the controls attribute are tabbable
+  if ((tag === 'audio' || tag === 'video') && el.hasAttribute('controls')) {
+    return true;
+  }
+
+  // Elements with a tabindex other than -1 are tabbable
+  if (el.hasAttribute('tabindex')) {
+    return true;
+  }
+
+  // Elements with a contenteditable attribute are tabbable
+  if (el.hasAttribute('contenteditable') && el.getAttribute('contenteditable') !== 'false') {
+    return true;
   }
 
   // At this point, the following elements are considered tabbable
