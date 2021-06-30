@@ -39,6 +39,9 @@
     "test": "web-test-runner \"src/**/*.test.ts\" --node-resolve --puppeteer",
     "test:watch": "web-test-runner \"src/**/*.test.ts\" --node-resolve --puppeteer --watch"
   },
+  "engines": {
+    "node": ">=14"
+  },
   "dependencies": {
     "@popperjs/core": "^2.7.0",
     "@shoelace-style/animations": "^1.1.0",
