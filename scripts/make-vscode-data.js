@@ -5,7 +5,6 @@
 //
 import chalk from 'chalk';
 import fs from 'fs';
-import mkdirp from 'mkdirp';
 
 const metadata = JSON.parse(fs.readFileSync('./dist/custom-elements.json', 'utf8'));
 

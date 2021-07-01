@@ -5,7 +5,6 @@ import browserSync from 'browser-sync';
 import chalk from 'chalk';
 import commandLineArgs from 'command-line-args';
 import copy from 'recursive-copy';
-import crypto from 'crypto';
 import del from 'del';
 import esbuild from 'esbuild';
 import fs from 'fs';
