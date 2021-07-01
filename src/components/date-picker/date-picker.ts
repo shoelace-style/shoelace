@@ -6,7 +6,7 @@ import { CalendarView, CalendarDate, CalendarLocale, CalendarUtils } from '../..
 import { watch } from '../../internal/watch';
 import { emit } from '../../internal/event';
 import type SlDropdown from '../dropdown/dropdown';
-import styles from 'sass:./datepicker.scss';
+import styles from 'sass:./date-picker.scss';
 
 var calendar: CalendarView;
 
@@ -25,15 +25,15 @@ const attributeToDate = (value: string): Date | undefined => {
  *
  * @slot - The default inputs container. Available only when display is 'dropdown'.
  *
- * @csspart trigger-button - The datepicker dropdown's trigger, usually a `<sl-button>` element.
+ * @csspart trigger-button - The date picker dropdown's trigger, usually a `<sl-button>` element.
  *
- * @customProperty --cell-inline-width - Cell width for inline datepicker
- * @customProperty --cell-inline-height - Cell width for inline datepicker
- * @customProperty --cell-dropdown-width - Cell width for dropdown datepicker
- * @customProperty --cell-dropdown-height - Cell width for dropdown datepicker
+ * @customProperty --cell-inline-width - Cell width for inline date picker
+ * @customProperty --cell-inline-height - Cell width for inline date picker
+ * @customProperty --cell-dropdown-width - Cell width for dropdown date picker
+ * @customProperty --cell-dropdown-height - Cell width for dropdown date picker
  */
-@customElement('sl-datepicker')
-export default class SlDatepicker extends LitElement {
+@customElement('sl-date-picker')
+export default class SlDatePicker extends LitElement {
   static styles = unsafeCSS(styles);
 
   private _locale: CalendarLocale;
@@ -374,7 +374,7 @@ export default class SlDatepicker extends LitElement {
 
   private getMonthTableView(): TemplateResult {
     return html`
-      <div class="datepicker-wrap">
+      <div class="date-picker-wrap">
         <div class="grid">
           <table aria-labelledby="${this.month} ${this.year}">
             <tr>
@@ -416,12 +416,12 @@ export default class SlDatepicker extends LitElement {
 
   private getCalendarView(): TemplateResult {
     return html` <div class="header-wrap">
-      <sl-icon class="prev-button" name="chevron-compact-left" @click=${this.prevMonth}></sl-icon>
+      <sl-icon class="prev-button" name="chevron-compact-left" library="system" @click=${this.prevMonth}></sl-icon>
       <div class="header">
         ${this.display === 'inline' ? html`<span class="week">${this.getHeaderView()}</span>` : ''}
         <span class="title"> ${this._locale.getMonthName(this.year, this.month)} ${this.year} </span>
       </div>
-      <sl-icon class="next-button" name="chevron-compact-right" @click=${this.nextMonth}></sl-icon>
+      <sl-icon class="next-button" name="chevron-compact-right" library="system" @click=${this.nextMonth}></sl-icon>
     </div>`;
   }
 
@@ -443,15 +443,15 @@ export default class SlDatepicker extends LitElement {
       </div>
     `;
 
-    // datepicker inline
+    // date picker inline
     if (this.display !== 'dropdown') return datepicker;
     else {
-      // datepicker dropdown
+      // date picker dropdown
       return html`
         <slot></slot>
         <sl-dropdown distance="5" placement="bottom-end" .containing-element=${this}>
           <sl-button exportparts="base:trigger-button" type="default" size="medium" slot="trigger"
-            ><sl-icon name=${this.range ? 'calendar4-range' : 'calendar3'}></sl-icon>
+            ><sl-icon name=${this.range ? 'calendar4-range' : 'calendar3'} library="system"></sl-icon>
           </sl-button>
           ${datepicker}
         </sl-dropdown>
