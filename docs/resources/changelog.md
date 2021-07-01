@@ -6,6 +6,16 @@ Components with the <sl-badge type="warning" pill>Experimental</sl-badge> badge 
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
+## 2.0.0-beta.46
+
+This release improves the developer experience of `<sl-animation>`. Previously, an animation was assumed to be playing unless the `pause` attribute was set. This behavior has been reversed and `pause` has been removed. Now, animations will not play until the new `play` attribute is applied.
+
+This is a lot more intuitive and makes it easier to activate animations imperatively. In addition, the `play` attribute is automatically removed automatically when the animation finishes or cancels, making it easier to restart finite animations. Lastly, the animation's timing is now accessible through the new `currentTime` property instead of `getCurrentTime()` and `setCurrentTime()`.
+
+- 🚨 BREAKING: removed the `pause` prop from `sl-animation` (use the `play` prop to start and stop the animation instead)
+- 🚨 BREAKING: removed `getCurrentTime()` and `setCurrentTime()` from `sl-animation` (use the `currentTime` property instead)
+- Added `currentTime` to `sl-animation` to control the current time without methods
+
 ## 2.0.0-beta.45
 
 This release changes the way component metadata is generated. Previously, the project used TypeDoc to analyze components and generate a very large file with type data. The data was then parsed and converted to an easier-to-consume file called `metadata.json`. Alas, TypeDoc is expensive to run and the metadata format wasn't standard.

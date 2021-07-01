@@ -27,6 +27,12 @@ export default class SlAnimation extends LitElement {
   /** The name of the built-in animation to use. For custom animations, use the `keyframes` prop. */
   @property() name = 'none';
 
+  /**
+   * Plays the animation. When omitted, the animation will be paused. This prop will be automatically removed when the
+   * animation finishes or gets canceled.
+   */
+  @property({ type: Boolean, reflect: true }) play = false;
+
   /** The number of milliseconds to delay the start of the animation. */
   @property({ type: Number }) delay = 0;
 
@@ -64,8 +70,16 @@ export default class SlAnimation extends LitElement {
    */
   @property({ attribute: 'playback-rate', type: Number }) playbackRate = 1;
 
-  /** Pauses the animation. The animation will resume when this prop is removed. */
-  @property({ type: Boolean }) pause = false;
+  /** Gets and sets the current animation time. */
+  get currentTime(): number {
+    return this.animation?.currentTime || 0;
+  }
+
+  set currentTime(time: number) {
+    if (this.animation) {
+      this.animation.currentTime = time;
+    }
+  }
 
   connectedCallback() {
     super.connectedCallback();
@@ -98,22 +112,26 @@ export default class SlAnimation extends LitElement {
   }
 
   handleAnimationFinish() {
+    this.play = false;
+    this.hasStarted = false;
     emit(this, 'sl-finish');
   }
 
   handleAnimationCancel() {
+    this.play = false;
+    this.hasStarted = false;
     emit(this, 'sl-cancel');
   }
 
-  @watch('pause')
-  handlePauseChange() {
+  @watch('play')
+  handlePlayChange() {
     if (this.animation) {
-      this.pause ? this.animation.pause() : this.animation.play();
-
-      if (!this.pause && !this.hasStarted) {
+      if (this.play && !this.hasStarted) {
         this.hasStarted = true;
         emit(this, 'sl-start');
       }
+
+      this.play ? this.animation.play() : this.animation.pause();
 
       return true;
     } else {
@@ -158,11 +176,11 @@ export default class SlAnimation extends LitElement {
     this.animation.addEventListener('cancel', this.handleAnimationCancel);
     this.animation.addEventListener('finish', this.handleAnimationFinish);
 
-    if (this.pause) {
-      this.animation.pause();
-    } else {
+    if (this.play) {
       this.hasStarted = true;
       emit(this, 'sl-start');
+    } else {
+      this.animation.pause();
     }
 
     return true;
@@ -189,16 +207,6 @@ export default class SlAnimation extends LitElement {
     try {
       this.animation.finish();
     } catch {}
-  }
-
-  /** Gets the current time of the animation in milliseconds. */
-  getCurrentTime() {
-    return this.animation.currentTime;
-  }
-
-  /** Sets the current time of the animation in milliseconds. */
-  setCurrentTime(time: number) {
-    this.animation.currentTime = time;
   }
 
   render() {
