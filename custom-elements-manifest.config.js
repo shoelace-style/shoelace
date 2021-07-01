@@ -7,8 +7,6 @@ const { name, description, version, author, homepage, license } = packageData;
 export default {
   globs: ['src/components/**/*.ts'],
   exclude: ['**/*.test.ts'],
-  dev: true,
-  watch: true,
   plugins: [
     // Append package data
     {
