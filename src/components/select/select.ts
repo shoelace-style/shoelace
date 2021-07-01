@@ -415,7 +415,7 @@ export default class SlSelect extends LitElement {
         <sl-dropdown
           part="base"
           .hoist=${this.hoist}
-          .closeOnSelect=${!this.multiple}
+          .stayOpenOnSelect=${this.multiple}
           .containingElement=${this}
           ?disabled=${this.disabled}
           class=${classMap({

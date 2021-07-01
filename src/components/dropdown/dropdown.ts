@@ -25,7 +25,7 @@ let id = 0;
  * @event sl-show - Emitted when the dropdown opens.
  * @event sl-after-show - Emitted after the dropdown opens and all animations are complete.
  * @event sl-hide - Emitted when the dropdown closes.
- * @event sl-after-hide - Emitted after the dropdown closes and all animations are complete.*
+ * @event sl-after-hide - Emitted after the dropdown closes and all animations are complete.
  *
  * @csspart base - The component's base wrapper.
  * @csspart trigger - The container that wraps the trigger.
@@ -69,8 +69,11 @@ export default class SlDropdown extends LitElement {
   /** Disables the dropdown so the panel will not open. */
   @property({ type: Boolean }) disabled = false;
 
-  /** Determines whether the dropdown should hide when a menu item is selected. */
-  @property({ attribute: 'close-on-select', type: Boolean, reflect: true }) closeOnSelect = true;
+  /**
+   * By default, the dropdown is closed when an item is selected. This attribute will keep it open instead. Useful for
+   * controls that allow multiple selections.
+   */
+  @property({ attribute: 'stay-open-on-select', type: Boolean, reflect: true }) stayOpenOnSelect = false;
 
   /** The dropdown will close when the user interacts outside of this element (e.g. clicking). */
   @property({ attribute: false }) containingElement: HTMLElement;
@@ -198,7 +201,7 @@ export default class SlDropdown extends LitElement {
     const target = event.target as HTMLElement;
 
     // Hide the dropdown when a menu item is selected
-    if (this.closeOnSelect && target.tagName.toLowerCase() === 'sl-menu') {
+    if (!this.stayOpenOnSelect && target.tagName.toLowerCase() === 'sl-menu') {
       this.hide();
       this.focusOnTrigger();
     }

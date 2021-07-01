@@ -14,6 +14,7 @@ This is a lot more intuitive and makes it easier to activate animations imperati
 
 - 🚨 BREAKING: removed the `pause` prop from `sl-animation` (use the `play` prop to start and stop the animation instead)
 - 🚨 BREAKING: removed `getCurrentTime()` and `setCurrentTime()` from `sl-animation` (use the `currentTime` property instead)
+- 🚨 BREAKING: removed `closeOnSelect` prop from `sl-dropdown` (use `stayOpenOnSelect` instead)
 - Added `currentTime` to `sl-animation` to control the current time without methods
 
 ## 2.0.0-beta.45
