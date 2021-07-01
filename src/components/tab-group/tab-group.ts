@@ -58,7 +58,7 @@ export default class SlTabGroup extends LitElement {
   @property() activation: 'auto' | 'manual' = 'auto';
 
   /** Disables the scroll arrows that appear when tabs overflow. */
-  @property({ attribute: 'no-scroll-controls', type: Boolean }) noScrollControls: boolean = false;
+  @property({ attribute: 'no-scroll-controls', type: Boolean }) noScrollControls = false;
 
   connectedCallback() {
     super.connectedCallback();

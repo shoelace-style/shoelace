@@ -35,7 +35,7 @@ export default class SlImageComparer extends LitElement {
   @query('.image-comparer__handle') handle: HTMLElement;
 
   /** The position of the divider as a percentage. */
-  @property({ type: Number, reflect: true }) position: number = 50;
+  @property({ type: Number, reflect: true }) position = 50;
 
   handleDrag(event: any) {
     const { width } = this.base.getBoundingClientRect();

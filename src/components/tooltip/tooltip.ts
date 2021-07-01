@@ -44,7 +44,7 @@ export default class SlTooltip extends LitElement {
   private hoverTimeout: any;
 
   /** The tooltip's content. Alternatively, you can use the content slot. */
-  @property() content: string = '';
+  @property() content = '';
 
   /**
    * The preferred placement of the tooltip. Note that the actual placement may vary as needed to keep the tooltip
@@ -65,23 +65,23 @@ export default class SlTooltip extends LitElement {
     | 'left-end' = 'top';
 
   /** Disables the tooltip so it won't show when triggered. */
-  @property({ type: Boolean, reflect: true }) disabled: boolean = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** The distance in pixels from which to offset the tooltip away from its target. */
-  @property({ type: Number }) distance: number = 10;
+  @property({ type: Number }) distance = 10;
 
   /** Indicates whether or not the tooltip is open. You can use this in lieu of the show/hide methods. */
-  @property({ type: Boolean, reflect: true }) open: boolean = false;
+  @property({ type: Boolean, reflect: true }) open = false;
 
   /** The distance in pixels from which to offset the tooltip along its target. */
-  @property({ type: Number }) skidding: number = 0;
+  @property({ type: Number }) skidding = 0;
 
   /**
    * Controls how the tooltip is activated. Possible options include `click`, `hover`, `focus`, and `manual`. Multiple
    * options can be passed by separating them with a space. When manual is used, the tooltip must be activated
    * programmatically.
    */
-  @property() trigger: string = 'hover focus';
+  @property() trigger = 'hover focus';
 
   connectedCallback() {
     super.connectedCallback();

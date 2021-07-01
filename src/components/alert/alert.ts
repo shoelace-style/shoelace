@@ -44,10 +44,10 @@ export default class SlAlert extends LitElement {
   @query('[part="base"]') base: HTMLElement;
 
   /** Indicates whether or not the alert is open. You can use this in lieu of the show/hide methods. */
-  @property({ type: Boolean, reflect: true }) open: boolean = false;
+  @property({ type: Boolean, reflect: true }) open = false;
 
   /** Makes the alert closable. */
-  @property({ type: Boolean, reflect: true }) closable: boolean = false;
+  @property({ type: Boolean, reflect: true }) closable = false;
 
   /** The type of alert. */
   @property({ reflect: true }) type: 'primary' | 'success' | 'info' | 'warning' | 'danger' = 'primary';

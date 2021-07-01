@@ -30,16 +30,16 @@ export default class SlTab extends LitElement {
   private componentId = `tab-${++id}`;
 
   /** The name of the tab panel the tab will control. The panel must be located in the same tab group. */
-  @property() panel: string = '';
+  @property() panel = '';
 
   /** Draws the tab in an active state. */
-  @property({ type: Boolean, reflect: true }) active: boolean = false;
+  @property({ type: Boolean, reflect: true }) active = false;
 
   /** Makes the tab closable and shows a close icon. */
-  @property({ type: Boolean }) closable: boolean = false;
+  @property({ type: Boolean }) closable = false;
 
   /** Draws the tab in a disabled state. */
-  @property({ type: Boolean, reflect: true }) disabled: boolean = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Sets focus to the tab. */
   focus(options?: FocusOptions) {

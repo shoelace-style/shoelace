@@ -43,34 +43,34 @@ export default class SlRange extends LitElement {
   @state() private hasTooltip = false;
 
   /** The input's name attribute. */
-  @property() name: string = '';
+  @property() name = '';
 
   /** The input's value attribute. */
-  @property({ type: Number }) value: number = 0;
+  @property({ type: Number }) value = 0;
 
   /** The range's label. Alternatively, you can use the label slot. */
-  @property() label: string = '';
+  @property() label = '';
 
   /** The range's help text. Alternatively, you can use the help-text slot. */
-  @property({ attribute: 'help-text' }) helpText: string = '';
+  @property({ attribute: 'help-text' }) helpText = '';
 
   /** Disables the input. */
-  @property({ type: Boolean, reflect: true }) disabled: boolean = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /**
    * This will be true when the control is in an invalid state. Validity in range inputs is determined by the message
    * provided by the `setCustomValidity` method.
    */
-  @property({ type: Boolean, reflect: true }) invalid: boolean = false;
+  @property({ type: Boolean, reflect: true }) invalid = false;
 
   /** The input's min attribute. */
-  @property({ type: Number }) min: number = 0;
+  @property({ type: Number }) min = 0;
 
   /** The input's max attribute. */
-  @property({ type: Number }) max: number = 100;
+  @property({ type: Number }) max = 100;
 
   /** The input's step attribute. */
-  @property({ type: Number }) step: number = 1;
+  @property({ type: Number }) step = 1;
 
   /** The preferred placedment of the tooltip. */
   @property() tooltip: 'top' | 'bottom' | 'none' = 'top';

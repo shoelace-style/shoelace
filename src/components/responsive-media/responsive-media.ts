@@ -17,7 +17,7 @@ export default class SlResponsiveMedia extends LitElement {
    * The aspect ratio of the embedded media in the format of `width:height`, e.g. `16:9`, `4:3`, or `1:1`. Ratios not in
    * this format will be ignored.
    */
-  @property({ attribute: 'aspect-ratio' }) aspectRatio: string = '16:9';
+  @property({ attribute: 'aspect-ratio' }) aspectRatio = '16:9';
 
   /** Determines how content will be resized to fit its container. */
   @property() fit: 'cover' | 'contain' = 'cover';

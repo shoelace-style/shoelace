@@ -72,19 +72,19 @@ export default class SlDialog extends LitElement {
   @state() private hasFooter = false;
 
   /** Indicates whether or not the dialog is open. You can use this in lieu of the show/hide methods. */
-  @property({ type: Boolean, reflect: true }) open: boolean = false;
+  @property({ type: Boolean, reflect: true }) open = false;
 
   /**
    * The dialog's label as displayed in the header. You should always include a relevant label even when using
    * `no-header`, as it is required for proper accessibility.
    */
-  @property({ reflect: true }) label: string = '';
+  @property({ reflect: true }) label = '';
 
   /**
    * Disables the header. This will also remove the default close button, so please ensure you provide an easy,
    * accessible way for users to dismiss the dialog.
    */
-  @property({ attribute: 'no-header', type: Boolean, reflect: true }) noHeader: boolean = false;
+  @property({ attribute: 'no-header', type: Boolean, reflect: true }) noHeader = false;
 
   connectedCallback() {
     super.connectedCallback();

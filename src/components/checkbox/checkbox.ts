@@ -42,19 +42,19 @@ export default class SlCheckbox extends LitElement {
   @property() value: string;
 
   /** Disables the checkbox. */
-  @property({ type: Boolean, reflect: true }) disabled: boolean = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Makes the checkbox a required field. */
-  @property({ type: Boolean, reflect: true }) required: boolean = false;
+  @property({ type: Boolean, reflect: true }) required = false;
 
   /** Draws the checkbox in a checked state. */
-  @property({ type: Boolean, reflect: true }) checked: boolean = false;
+  @property({ type: Boolean, reflect: true }) checked = false;
 
   /** Draws the checkbox in an indeterminate state. */
-  @property({ type: Boolean, reflect: true }) indeterminate: boolean = false;
+  @property({ type: Boolean, reflect: true }) indeterminate = false;
 
   /** This will be true when the control is in an invalid state. Validity is determined by the `required` prop. */
-  @property({ type: Boolean, reflect: true }) invalid: boolean = false;
+  @property({ type: Boolean, reflect: true }) invalid = false;
 
   firstUpdated() {
     this.invalid = !this.input.checkValidity();

@@ -80,13 +80,13 @@ export default class SlDrawer extends LitElement {
   @state() private hasFooter = false;
 
   /** Indicates whether or not the drawer is open. You can use this in lieu of the show/hide methods. */
-  @property({ type: Boolean, reflect: true }) open: boolean = false;
+  @property({ type: Boolean, reflect: true }) open = false;
 
   /**
    * The drawer's label as displayed in the header. You should always include a relevant label even when using
    * `no-header`, as it is required for proper accessibility.
    */
-  @property({ reflect: true }) label: string = '';
+  @property({ reflect: true }) label = '';
 
   /** The direction from which the drawer will open. */
   @property({ reflect: true }) placement: 'top' | 'end' | 'bottom' | 'start' = 'end';
@@ -95,13 +95,13 @@ export default class SlDrawer extends LitElement {
    * By default, the drawer slides out of its containing block (usually the viewport). To make the drawer slide out of
    * its parent element, set this prop and add `position: relative` to the parent.
    */
-  @property({ type: Boolean, reflect: true }) contained: boolean = false;
+  @property({ type: Boolean, reflect: true }) contained = false;
 
   /**
    * Removes the header. This will also remove the default close button, so please ensure you provide an easy,
    * accessible way for users to dismiss the drawer.
    */
-  @property({ attribute: 'no-header', type: Boolean, reflect: true }) noHeader: boolean = false;
+  @property({ attribute: 'no-header', type: Boolean, reflect: true }) noHeader = false;
 
   connectedCallback() {
     super.connectedCallback();

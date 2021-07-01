@@ -44,22 +44,22 @@ export default class SlButton extends LitElement {
   @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
 
   /** Draws the button with a caret for use with dropdowns, popovers, etc. */
-  @property({ type: Boolean, reflect: true }) caret: boolean = false;
+  @property({ type: Boolean, reflect: true }) caret = false;
 
   /** Disables the button. */
-  @property({ type: Boolean, reflect: true }) disabled: boolean = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Draws the button in a loading state. */
-  @property({ type: Boolean, reflect: true }) loading: boolean = false;
+  @property({ type: Boolean, reflect: true }) loading = false;
 
   /** Draws a pill-style button with rounded edges. */
-  @property({ type: Boolean, reflect: true }) pill: boolean = false;
+  @property({ type: Boolean, reflect: true }) pill = false;
 
   /** Draws a circle button. */
-  @property({ type: Boolean, reflect: true }) circle: boolean = false;
+  @property({ type: Boolean, reflect: true }) circle = false;
 
   /** Indicates if activating the button should submit the form. Ignored when `href` is set. */
-  @property({ type: Boolean, reflect: true }) submit: boolean = false;
+  @property({ type: Boolean, reflect: true }) submit = false;
 
   /** An optional name for the button. Ignored when `href` is set. */
   @property() name: string;

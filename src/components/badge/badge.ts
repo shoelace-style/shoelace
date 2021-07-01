@@ -19,10 +19,10 @@ export default class SlBadge extends LitElement {
   @property({ reflect: true }) type: 'primary' | 'success' | 'info' | 'warning' | 'danger' = 'primary';
 
   /** Draws a pill-style badge with rounded edges. */
-  @property({ type: Boolean, reflect: true }) pill: boolean = false;
+  @property({ type: Boolean, reflect: true }) pill = false;
 
   /** Makes the badge pulsate to draw attention. */
-  @property({ type: Boolean, reflect: true }) pulse: boolean = false;
+  @property({ type: Boolean, reflect: true }) pulse = false;
 
   render() {
     return html`

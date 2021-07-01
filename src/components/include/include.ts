@@ -26,7 +26,7 @@ export default class SlInclude extends LitElement {
    * Allows included scripts to be executed. You must ensure the content you're including is trusted, otherwise this
    * option can lead to XSS vulnerabilities in your app!
    */
-  @property({ attribute: 'allow-scripts', type: Boolean }) allowScripts: boolean = false;
+  @property({ attribute: 'allow-scripts', type: Boolean }) allowScripts = false;
 
   executeScript(script: HTMLScriptElement) {
     // Create a copy of the script and swap it out so the browser executes it
