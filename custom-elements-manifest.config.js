@@ -28,6 +28,11 @@ export default {
             const customTags = ['animation', 'dependency', 'since', 'status'];
             let customComments = '/**';
 
+            // We only care about custom tags on classes
+            if (!classDoc) {
+              return;
+            }
+
             node.jsDoc?.forEach(jsDoc => {
               jsDoc?.tags?.forEach(tag => {
                 const tagName = tag.tagName.getText();
