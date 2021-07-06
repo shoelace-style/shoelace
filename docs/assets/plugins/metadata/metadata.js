@@ -10,7 +10,7 @@
     table.innerHTML = `
       <thead>
         <tr>
-          <th>Property</th>
+          <th>Name</th>
           <th>Attribute</th>
           <th>Description</th>
           <th>Type</th>
@@ -42,7 +42,7 @@
     table.innerHTML = `
       <thead>
         <tr>
-          <th>Event</th>
+          <th>Name</th>
           <th>Description</th>
           <th>Event Detail</th>
         </tr>
@@ -70,7 +70,7 @@
     table.innerHTML = `
       <thead>
         <tr>
-          <th>Method</th>
+          <th>Name</th>
           <th>Description</th>
           <th>Arguments</th>
         </tr>
@@ -108,7 +108,7 @@
     table.innerHTML = `
       <thead>
         <tr>
-          <th>Slot</th>
+          <th>Name</th>
           <th>Description</th>
         </tr>
       </thead>
@@ -355,7 +355,7 @@
           // Look for a corresponding attribute
           const attribute = component.attributes?.find(attr => attr.fieldName === prop.name);
           if (attribute) {
-            prop.attribute = attribute.name;
+            prop.attribute = attribute.name || attribute.fieldName;
           }
 
           return prop.kind === 'field' && prop.privacy !== 'private';
