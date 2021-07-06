@@ -48,7 +48,7 @@
     "qr-creator": "^1.0.0"
   },
   "devDependencies": {
-    "@custom-elements-manifest/analyzer": "^0.4.1",
+    "@custom-elements-manifest/analyzer": "^0.4.10",
     "@open-wc/testing": "^2.5.33",
     "@types/color": "^3.0.1",
     "@web/dev-server-esbuild": "^0.2.12",
