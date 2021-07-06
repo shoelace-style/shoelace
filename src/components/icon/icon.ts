@@ -14,7 +14,7 @@ const parser = new DOMParser();
  * @status stable
  *
  * @event sl-load - Emitted when the icon has loaded.
- * @event {{ status: number }} sl-error - Emitted when the included file fails to load due to an error.
+ * @event {{ status: number }} sl-error - Emitted when the icon fails to load due to an error.
  *
  * @csspart base - The component's base wrapper.
  */
