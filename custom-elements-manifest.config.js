@@ -22,16 +22,10 @@ export default {
       analyzePhase({ ts, node, moduleDoc, context }) {
         switch (node.kind) {
           case ts.SyntaxKind.ClassDeclaration:
-            const hasDefaultModifier = node?.modifiers?.some(mod => ts.SyntaxKind.DefaultKeyword === mod.kind);
-            const className = hasDefaultModifier ? 'default' : node?.name?.getText();
+            const className = node.name.getText();
             const classDoc = moduleDoc?.declarations?.find(declaration => declaration.name === className);
             const customTags = ['animation', 'dependency', 'since', 'status'];
             let customComments = '/**';
-
-            // We only care about custom tags on classes
-            if (!classDoc) {
-              return;
-            }
 
             node.jsDoc?.forEach(jsDoc => {
               jsDoc?.tags?.forEach(tag => {

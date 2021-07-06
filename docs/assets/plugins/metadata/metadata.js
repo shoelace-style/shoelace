@@ -248,17 +248,10 @@
 
   function getAllComponents(metadata) {
     const allComponents = [];
-
-    metadata.modules.map(module => {
-      module.exports.map(ex => {
-        if (ex.kind === 'custom-element-definition') {
-          const tagName = ex.name;
-          const className = ex.declaration.name;
-          const component = module?.declarations.find(dec => dec.name === 'default');
-
-          if (component) {
-            allComponents.push(Object.assign(component, { className, tagName }));
-          }
+    metadata.modules?.map(module => {
+      module.declarations?.map(declaration => {
+        if (declaration.customElement) {
+          allComponents.push(declaration);
         }
       });
     });
@@ -327,7 +320,7 @@
         result += `
           <div class="component-header">
             <div class="component-header__tag">
-              <code>&lt;${component.tagName}&gt; | ${component.className}</code>
+              <code>&lt;${component.tagName}&gt; | ${component.name}</code>
             </div>
 
             <div class="component-header__info">
