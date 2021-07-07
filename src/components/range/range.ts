@@ -153,8 +153,12 @@ export default class SlRange extends LitElement {
     this.hasLabelSlot = hasSlot(this, 'label');
   }
 
-  handleTouchStart() {
-    this.focus();
+  handleThumbStart() {
+    this.hasTooltip = true;
+  }
+
+  handleThumbEnd() {
+    this.hasTooltip = false;
   }
 
   syncTooltip() {
@@ -193,7 +197,10 @@ export default class SlRange extends LitElement {
             'range--tooltip-top': this.tooltip === 'top',
             'range--tooltip-bottom': this.tooltip === 'bottom'
           })}
-          @touchstart=${this.handleTouchStart}
+          @mousedown=${this.handleThumbStart}
+          @mouseup=${this.handleThumbEnd}
+          @touchstart=${this.handleThumbStart}
+          @touchend=${this.handleThumbEnd}
         >
           <input
             part="input"
