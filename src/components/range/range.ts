@@ -80,7 +80,7 @@ export default class SlRange extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.handleSlotChange = this.handleSlotChange.bind(this);
+    this.handleSlotChange = this.handleSlotChange;
     this.resizeObserver = new ResizeObserver(() => this.syncTooltip());
     this.shadowRoot!.addEventListener('slotchange', this.handleSlotChange);
 
@@ -193,7 +193,7 @@ export default class SlRange extends LitElement {
             'range--tooltip-top': this.tooltip === 'top',
             'range--tooltip-bottom': this.tooltip === 'bottom'
           })}
-          @touchstart=${this.handleTouchStart.bind(this)}
+          @touchstart=${this.handleTouchStart}
         >
           <input
             part="input"
@@ -215,9 +215,9 @@ export default class SlRange extends LitElement {
                 hasHelpTextSlot: this.hasHelpTextSlot
               })
             )}
-            @input=${this.handleInput.bind(this)}
-            @focus=${this.handleFocus.bind(this)}
-            @blur=${this.handleBlur.bind(this)}
+            @input=${this.handleInput}
+            @focus=${this.handleFocus}
+            @blur=${this.handleBlur}
           />
           ${this.tooltip !== 'none'
             ? html` <output part="tooltip" class="range__tooltip"> ${this.tooltipFormatter(this.value)} </output> `
