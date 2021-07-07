@@ -7,7 +7,7 @@ import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import { waitForEvent } from '../../internal/event';
 import { scrollIntoView } from '../../internal/scroll';
-import { getNearestTabbableElement } from '../../internal/tabbable';
+import { getTabbableBoundary } from '../../internal/tabbable';
 import { setDefaultAnimation, getAnimation } from '../../utilities/animation-registry';
 import type SlMenu from '../menu/menu';
 import type SlMenuItem from '../menu-item/menu-item';
@@ -315,7 +315,7 @@ export default class SlDropdown extends LitElement {
     if (this.trigger) {
       const slot = this.trigger.querySelector('slot') as HTMLSlotElement;
       const assignedElements = slot.assignedElements({ flatten: true }) as HTMLElement[];
-      const accessibleTrigger = assignedElements.map(getNearestTabbableElement)[0];
+      const accessibleTrigger = assignedElements.find(el => getTabbableBoundary(el).start);
 
       if (accessibleTrigger) {
         accessibleTrigger.setAttribute('aria-haspopup', 'true');
