@@ -219,7 +219,7 @@ export default class SlRating extends LitElement {
                   'rating__symbol--hover': this.isHovering && Math.ceil(displayValue) === index + 1
                 })}
                 role="presentation"
-                @mouseenter=${this.handleMouseEnter.bind(this)}
+                @mouseenter=${this.handleMouseEnter}
               >
                 ${unsafeHTML(this.getSymbol(index + 1))}
               </span>

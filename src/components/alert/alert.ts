@@ -186,7 +186,7 @@ export default class SlAlert extends LitElement {
         aria-live="assertive"
         aria-atomic="true"
         aria-hidden=${this.open ? 'false' : 'true'}
-        @mousemove=${this.handleMouseMove.bind(this)}
+        @mousemove=${this.handleMouseMove}
       >
         <span part="icon" class="alert__icon">
           <slot name="icon"></slot>
@@ -203,7 +203,7 @@ export default class SlAlert extends LitElement {
                   exportparts="base:close-button"
                   name="x"
                   library="system"
-                  @click=${this.handleCloseClick.bind(this)}
+                  @click=${this.handleCloseClick}
                 ></sl-icon-button>
               </span>
             `

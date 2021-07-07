@@ -311,7 +311,7 @@ export default class SlTooltip extends LitElement {
 
   render() {
     return html`
-      <slot @slotchange=${this.handleSlotChange.bind(this)}></slot>
+      <slot @slotchange=${this.handleSlotChange}></slot>
 
       <div class="tooltip-positioner">
         <div

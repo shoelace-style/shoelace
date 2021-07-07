@@ -333,10 +333,10 @@ export default class SlTextarea extends LitElement {
                 hasHelpTextSlot: this.hasHelpTextSlot
               })
             )}
-            @change=${this.handleChange.bind(this)}
-            @input=${this.handleInput.bind(this)}
-            @focus=${this.handleFocus.bind(this)}
-            @blur=${this.handleBlur.bind(this)}
+            @change=${this.handleChange}
+            @input=${this.handleInput}
+            @focus=${this.handleFocus}
+            @blur=${this.handleBlur}
           ></textarea>
         </div>
       `
