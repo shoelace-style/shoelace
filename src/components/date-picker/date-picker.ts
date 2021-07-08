@@ -23,6 +23,10 @@ const attributeToDate = (value: string): Date | undefined => {
  * @event {{ start: Date, end: Date, range: Date[] }} sl-range-selected - Emitted when a dates range is selected.
  * @event {{ Date }} sl-date-selected - Emitted when a date is selected (start or end).
  *
+ * @dependency sl-dropdown
+ * @dependency sl-button
+ * @dependency sl-icon
+ *
  * @slot - The default inputs container. Available only when display is 'dropdown'.
  *
  * @csspart trigger-button - The date picker dropdown's trigger, usually a `<sl-button>` element.
@@ -42,6 +46,8 @@ export default class SlDatePicker extends LitElement {
   // we use a custom setter to prevent update request from Lit
   // because set a focusable DOM element don't require an update
   set focusedDay(value: Date) {
+    if (this.readonly) return;
+
     if (this.minDate && value < this.minDate) {
       this._focusedDay = this.minDate;
     } else if (this.maxDate && value > this.maxDate) {
@@ -71,15 +77,19 @@ export default class SlDatePicker extends LitElement {
   @state()
   hoveredDay?: Date;
 
+  /** Language for locale date format. */
   @property({ type: String, reflect: true })
   lang: string = 'en-US';
 
+  /** Selected month (MM). */
   @property({ type: Number, reflect: true })
   month: number = new Date().getMonth() + 1;
 
+  /** Selected year (YYY) */
   @property({ type: Number })
   year: number = new Date().getFullYear();
 
+  /** Calendar maximum displayed date (YYY-MM-DD). */
   @property({
     type: Object,
     attribute: 'max-date',
@@ -87,6 +97,7 @@ export default class SlDatePicker extends LitElement {
   })
   maxDate?: Date;
 
+  /** Calendar minimum displayed date (YYY-MM-DD). */
   @property({
     type: Object,
     attribute: 'min-date',
@@ -94,6 +105,7 @@ export default class SlDatePicker extends LitElement {
   })
   minDate?: Date;
 
+  /** Selected start date (YYY-MM-DD). */
   @property({
     type: String,
     attribute: 'start-date',
@@ -102,6 +114,7 @@ export default class SlDatePicker extends LitElement {
   })
   startDate: Date = new Date();
 
+  /** Selected end date (YYY-MM-DD) when rage attribute is set. */
   @property({
     type: Object,
     attribute: 'end-date',
@@ -109,25 +122,38 @@ export default class SlDatePicker extends LitElement {
   })
   endDate?: Date;
 
+  /** Enable date range selection, multiple dates. */
   @property({ type: Boolean })
   range: boolean = false;
 
+  /** Day of the week to start the calendar defaults to 0 (Sunday). */
   @property({ type: Number, attribute: 'first-day-of-week' })
   firstDayOfWeek: number = 0;
 
+  /** Highlight the current day. */
   @property({ type: Boolean })
   today: boolean = false;
 
+  /** Display mode (inline or dropdown). */
   @property({ reflect: true })
   display: 'inline' | 'dropdown' = 'inline';
 
+  /** Display calenendar in read only mode. */
   @property({ type: Boolean })
-  readonly = false;
+  readonly: boolean = false;
 
   @watch('endDate', { waitUntilFirstUpdate: true })
   async handleEndDateChange() {
     await this.updateComplete;
     if (this.display === 'dropdown' && this.range && this.endDate) {
+      this.dropdown.hide();
+    }
+  }
+
+  @watch('startDate', { waitUntilFirstUpdate: true })
+  async handleStartDateChange() {
+    await this.updateComplete;
+    if (this.display === 'dropdown' && !this.range) {
       this.dropdown.hide();
     }
   }
@@ -336,6 +362,7 @@ export default class SlDatePicker extends LitElement {
   }
 
   private isToday(day: CalendarDate): boolean {
+    if (!this.today) return false;
     const today = new Date();
     return CalendarUtils.compare(day, today) === 0;
   }
@@ -426,8 +453,6 @@ export default class SlDatePicker extends LitElement {
   }
 
   render() {
-    // console.log(`render: ${++count}`);
-
     const datepicker = html`
       <div
         class="container"
