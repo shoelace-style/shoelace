@@ -32,7 +32,7 @@ let id = 0;
  * @event sl-clear - Emitted when the clear button is activated.
  * @event sl-change - Emitted when the control's value changes.
  * @event sl-focus - Emitted when the control gains focus.
- * @event l-blur - Emitted when the control loses focus.
+ * @event sl-blur - Emitted when the control loses focus.
  *
  * @csspart base - The component's base wrapper.
  * @csspart clear-button - The input's clear button, exported from <sl-input>.
@@ -231,11 +231,13 @@ export default class SlSelect extends LitElement {
 
       // Focus on a menu item
       if (event.key === 'ArrowDown' && firstItem) {
+        this.menu.setCurrentItem(firstItem);
         firstItem.focus();
         return;
       }
 
       if (event.key === 'ArrowUp' && lastItem) {
+        this.menu.setCurrentItem(lastItem);
         lastItem.focus();
         return;
       }

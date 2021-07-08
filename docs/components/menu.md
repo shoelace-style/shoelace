@@ -4,7 +4,7 @@
 
 Menus provide a list of options for the user to choose from.
 
-You can use [menu items](/components/menu-item), [menu dividers](/components/menu-divider), and [menu labels](/components/menu-label) to compose a menu.
+You can use [menu items](/components/menu-item), [menu dividers](/components/menu-divider), and [menu labels](/components/menu-label) to compose a menu. Menus support keyboard interactions, including type-to-select an option.
 
 ```html preview
 <sl-menu style="max-width: 200px; border: solid 1px var(--sl-panel-border-color); border-radius: var(--sl-border-radius-medium);">

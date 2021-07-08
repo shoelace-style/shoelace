@@ -22,9 +22,42 @@ export default class SlMenu extends LitElement {
   @query('.menu') menu: HTMLElement;
   @query('slot') defaultSlot: HTMLSlotElement;
 
-  private items: SlMenuItem[] = [];
   private typeToSelectString = '';
   private typeToSelectTimeout: any;
+
+  getAllItems(options: { includeDisabled: boolean } = { includeDisabled: true }) {
+    return [...this.defaultSlot.assignedElements({ flatten: true })].filter((el: HTMLElement) => {
+      if (el.getAttribute('role') !== 'menuitem') {
+        return false;
+      }
+
+      if (!options?.includeDisabled && (el as SlMenuItem).disabled) {
+        return false;
+      }
+
+      return true;
+    }) as SlMenuItem[];
+  }
+
+  /**
+   * @internal Gets the current menu item, which is the menu item that has `tabindex="0"` within the roving tab index.
+   * The menu item may or may not have focus, but for keyboard interaction purposes it's considered the "active" item.
+   */
+  getCurrentItem() {
+    return this.getAllItems({ includeDisabled: false }).find(i => i.getAttribute('tabindex') === '0');
+  }
+
+  /**
+   * @internal Sets the current menu item to the specified element. This sets `tabindex="0"` on the target element and
+   * `tabindex="-1"` to all other items. This method must be called prior to setting focus on a menu item.
+   */
+  setCurrentItem(item: SlMenuItem) {
+    const items = this.getAllItems({ includeDisabled: false });
+    let activeItem = item.disabled ? items[0] : item;
+
+    // Update tab indexes
+    items.map(i => i.setAttribute('tabindex', i === activeItem ? '0' : '-1'));
+  }
 
   /**
    * Initiates type-to-select logic, which automatically selects an option based on what the user is currently typing.
@@ -33,10 +66,11 @@ export default class SlMenu extends LitElement {
    * enabling type-to-select when the menu doesn't have focus.
    */
   typeToSelect(key: string) {
+    const items = this.getAllItems({ includeDisabled: false });
     clearTimeout(this.typeToSelectTimeout);
     this.typeToSelectTimeout = setTimeout(() => (this.typeToSelectString = ''), 750);
     this.typeToSelectString += key.toLowerCase();
-    for (const item of this.items) {
+    for (const item of items) {
       const slot = item.shadowRoot!.querySelector('slot:not([name])') as HTMLSlotElement;
       const label = getTextContent(slot).toLowerCase().trim();
       if (label.substring(0, this.typeToSelectString.length) === this.typeToSelectString) {
@@ -44,20 +78,6 @@ export default class SlMenu extends LitElement {
         break;
       }
     }
-  }
-
-  syncItems() {
-    this.items = [...this.defaultSlot.assignedElements({ flatten: true })].filter(
-      (el: any) => el.tagName.toLowerCase() === 'sl-menu-item' && !el.disabled
-    ) as [SlMenuItem];
-  }
-
-  getActiveItem() {
-    return this.items.filter(i => i.shadowRoot!.querySelector('.menu-item--focused'))[0];
-  }
-
-  setActiveItem(item: SlMenuItem) {
-    item.focus();
   }
 
   handleClick(event: MouseEvent) {
@@ -72,11 +92,12 @@ export default class SlMenu extends LitElement {
   handleKeyDown(event: KeyboardEvent) {
     // Make a selection when pressing enter
     if (event.key === 'Enter') {
-      const item = this.getActiveItem();
+      const item = this.getCurrentItem();
       event.preventDefault();
 
       if (item) {
-        emit(this, 'sl-select', { detail: { item } });
+        // Simulate a click to support @click handlers on menu items that also work with the keyboard
+        item.click();
       }
     }
 
@@ -87,10 +108,11 @@ export default class SlMenu extends LitElement {
 
     // Move the selection when pressing down or up
     if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
-      const selectedItem = this.getActiveItem();
-      let index = selectedItem ? this.items.indexOf(selectedItem) : 0;
+      const items = this.getAllItems({ includeDisabled: false });
+      const activeItem = this.getCurrentItem();
+      let index = activeItem ? items.indexOf(activeItem) : 0;
 
-      if (this.items.length) {
+      if (items.length) {
         event.preventDefault();
 
         if (event.key === 'ArrowDown') {
@@ -100,13 +122,14 @@ export default class SlMenu extends LitElement {
         } else if (event.key === 'Home') {
           index = 0;
         } else if (event.key === 'End') {
-          index = this.items.length - 1;
+          index = items.length - 1;
         }
 
         if (index < 0) index = 0;
-        if (index > this.items.length - 1) index = this.items.length - 1;
+        if (index > items.length - 1) index = items.length - 1;
 
-        this.setActiveItem(this.items[index]);
+        this.setCurrentItem(items[index]);
+        items[index].focus();
 
         return;
       }
@@ -115,13 +138,34 @@ export default class SlMenu extends LitElement {
     this.typeToSelect(event.key);
   }
 
+  handleMouseDown(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+
+    if (target.getAttribute('role') === 'menuitem') {
+      this.setCurrentItem(target as SlMenuItem);
+      target.focus();
+    }
+  }
+
   handleSlotChange() {
-    this.syncItems();
+    const items = this.getAllItems({ includeDisabled: false });
+
+    // Reset the roving tab index when the slotted items change
+    if (items.length) {
+      this.setCurrentItem(items[0]);
+    }
   }
 
   render() {
     return html`
-      <div part="base" class="menu" role="menu" @click=${this.handleClick} @keydown=${this.handleKeyDown} tabindex="0">
+      <div
+        part="base"
+        class="menu"
+        role="menu"
+        @click=${this.handleClick}
+        @keydown=${this.handleKeyDown}
+        @mousedown=${this.handleMouseDown}
+      >
         <slot @slotchange=${this.handleSlotChange}></slot>
       </div>
     `;

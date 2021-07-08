@@ -272,11 +272,14 @@ export default class SlDropdown extends LitElement {
 
       // Focus on a menu item
       if (event.key === 'ArrowDown' && firstMenuItem) {
+        const menu = this.getMenu();
+        menu.setCurrentItem(firstMenuItem);
         firstMenuItem.focus();
         return;
       }
 
       if (event.key === 'ArrowUp' && lastMenuItem) {
+        menu.setCurrentItem(lastMenuItem);
         lastMenuItem.focus();
         return;
       }

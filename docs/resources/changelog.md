@@ -17,6 +17,8 @@ This is a lot more intuitive and makes it easier to activate animations imperati
 - 🚨 BREAKING: removed `closeOnSelect` prop from `sl-dropdown` (use `stayOpenOnSelect` instead)
 - Added `currentTime` to `sl-animation` to control the current time without methods
 - Fixed a bug in `sl-range` where the tooltip wasn't showing in Safari [#477](https://github.com/shoelace-style/shoelace/issues/477)
+- Fixed a bug in `sl-menu` where pressing <kbd>Enter</kbd> in a menu didn't work with click handlers
+- Reworked `sl-menu` and `sl-menu-item` to use a roving tab index and improve keyboard accessibility
 - Reworked tabbable logic to be more performant [#466](https://github.com/shoelace-style/shoelace/issues/466)
 
 ## 2.0.0-beta.45

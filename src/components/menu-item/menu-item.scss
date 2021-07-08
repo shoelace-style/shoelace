@@ -21,12 +21,6 @@
   white-space: nowrap;
   cursor: pointer;
 
-  &.menu-item--focused:not(.menu-item--disabled) {
-    outline: none;
-    background-color: var(--sl-color-primary-500);
-    color: var(--sl-color-white);
-  }
-
   &.menu-item--disabled {
     outline: none;
     color: var(--sl-color-gray-400);
@@ -56,6 +50,17 @@
       margin-left: var(--sl-spacing-x-small);
     }
   }
+}
+
+:host(:focus) {
+  outline: none;
+}
+
+:host(:hover:not([aria-disabled='true'])) .menu-item,
+:host(:focus:not([aria-disabled='true'])) .menu-item {
+  outline: none;
+  background-color: var(--sl-color-primary-500);
+  color: var(--sl-color-white);
 }
 
 .menu-item .menu-item__check {

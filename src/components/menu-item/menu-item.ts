@@ -1,7 +1,7 @@
 import { LitElement, html, unsafeCSS } from 'lit';
-import { customElement, property, query, state } from 'lit/decorators.js';
+import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
-import { ifDefined } from 'lit-html/directives/if-defined';
+import { watch } from '../../internal/watch';
 import styles from 'sass:./menu-item.scss';
 
 /**
@@ -26,8 +26,6 @@ export default class SlMenuItem extends LitElement {
 
   @query('.menu-item') menuItem: HTMLElement;
 
-  @state() private hasFocus = false;
-
   /** Draws the item in a checked state. */
   @property({ type: Boolean, reflect: true }) checked = false;
 
@@ -37,30 +35,18 @@ export default class SlMenuItem extends LitElement {
   /** Draws the menu item in a disabled state. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
-  /** Sets focus on the button. */
-  focus(options?: FocusOptions) {
-    this.menuItem.focus(options);
+  firstUpdated() {
+    this.setAttribute('role', 'menuitem');
   }
 
-  /** Removes focus from the button. */
-  blur() {
-    this.menuItem.blur();
+  @watch('checked')
+  handleCheckedChange() {
+    this.setAttribute('aria-checked', String(this.checked));
   }
 
-  handleBlur() {
-    this.hasFocus = false;
-  }
-
-  handleFocus() {
-    this.hasFocus = true;
-  }
-
-  handleMouseEnter() {
-    this.focus();
-  }
-
-  handleMouseLeave() {
-    this.blur();
+  @watch('disabled')
+  handleDisabledChange() {
+    this.setAttribute('aria-disabled', String(this.disabled));
   }
 
   render() {
@@ -70,17 +56,8 @@ export default class SlMenuItem extends LitElement {
         class=${classMap({
           'menu-item': true,
           'menu-item--checked': this.checked,
-          'menu-item--disabled': this.disabled,
-          'menu-item--focused': this.hasFocus
+          'menu-item--disabled': this.disabled
         })}
-        role="menuitem"
-        aria-disabled=${this.disabled ? 'true' : 'false'}
-        aria-checked=${this.checked ? 'true' : 'false'}
-        tabindex=${ifDefined(!this.disabled ? '0' : undefined)}
-        @focus=${this.handleFocus}
-        @blur=${this.handleBlur}
-        @mouseenter=${this.handleMouseEnter}
-        @mouseleave=${this.handleMouseLeave}
       >
         <span part="checked-icon" class="menu-item__check">
           <sl-icon name="check" library="system" aria-hidden="true"></sl-icon>
