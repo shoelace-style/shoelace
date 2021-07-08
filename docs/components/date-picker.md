@@ -149,7 +149,7 @@ To enable multiple selection set the `range` attribute, in this way it is possib
 
 ### Readonly
 
-The `sl-date-picker` component can be displayed as read-only. This mode does not allow date selection, but it is still possible to browse the calendar.
+The `sl-date-picker` component can be displayed as read-only. This mode does not allow date selection.
 
 ```html preview
 <sl-date-picker
@@ -162,14 +162,14 @@ The `sl-date-picker` component can be displayed as read-only. This mode does not
 
 ### Localization
 
-The `sl-date-picker` component is fully localized. This covers date, time, days names and months names. The first day of the week can also be set using the `week-start` attribute.
+The `sl-date-picker` component is fully localized. This covers date, time, days names and months names. The first day of the week can also be set using the `first-day-of-week` attribute.
 
 ```html preview
 <sl-date-picker
   year="2021"
   month="6"
   start-date="2021-06-12"
-  week-start="0"
+  first-day-of-week="1"
   lang="it"
 ></sl-date-picker>
 ```
