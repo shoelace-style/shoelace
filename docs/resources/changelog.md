@@ -12,10 +12,10 @@ This release improves the developer experience of `<sl-animation>`. Previously, 
 
 This is a lot more intuitive and makes it easier to activate animations imperatively. In addition, the `play` attribute is automatically removed automatically when the animation finishes or cancels, making it easier to restart finite animations. Lastly, the animation's timing is now accessible through the new `currentTime` property instead of `getCurrentTime()` and `setCurrentTime()`.
 
-- 🚨 BREAKING: removed the `pause` prop from `sl-animation` (use the `play` prop to start and stop the animation instead)
+- 🚨 BREAKING: removed the `pause` attribute from `sl-animation` (use `play` to start and stop the animation instead)
 - 🚨 BREAKING: removed `getCurrentTime()` and `setCurrentTime()` from `sl-animation` (use the `currentTime` property instead)
-- 🚨 BREAKING: removed `closeOnSelect` prop from `sl-dropdown` (use `stayOpenOnSelect` instead)
-- Added `currentTime` to `sl-animation` to control the current time without methods
+- 🚨 BREAKING: removed the `close-on-select` attribute from `sl-dropdown` (use `stay-open-on-select` instead)
+- Added the `currentTime` property to `sl-animation` to control the current time without methods
 - Fixed a bug in `sl-range` where the tooltip wasn't showing in Safari [#477](https://github.com/shoelace-style/shoelace/issues/477)
 - Fixed a bug in `sl-menu` where pressing <kbd>Enter</kbd> in a menu didn't work with click handlers
 - Reworked `sl-menu` and `sl-menu-item` to use a roving tab index and improve keyboard accessibility
@@ -69,7 +69,7 @@ The docs have been updated to use the new `custom-elements.json` file. If you're
 
 ## 2.0.0-beta.42
 
-This release addresses an issue with the `open` prop no longer working in a number of components, as a result of the changes in beta.41. It also removes a small but controversial feature that complicated show/hide logic and led to a poor experience for developers and end users.
+This release addresses an issue with the `open` attribute no longer working in a number of components, as a result of the changes in beta.41. It also removes a small but controversial feature that complicated show/hide logic and led to a poor experience for developers and end users.
 
 There are two ways to show/hide affected components: by calling `show() | hide()` and by toggling the `open` prop. Previously, it was possible to call `event.preventDefault()` in an `sl-show | sl-hide ` handler to stop the component from showing/hiding. The problem becomes obvious when you set `el.open = false`, the event gets canceled, and in the next cycle `el.open` has reverted to `true`. Not only is this unexpected, but it also doesn't play nicely with frameworks. Additionally, this made it impossible to await `show() | hide()` since there was a chance they'd never resolve.
 
@@ -146,7 +146,7 @@ The most elegant solution I found was to use the [Web Animations API](https://de
 ## 2.0.0-beta.37
 
 - Added `click()` method to `sl-checkbox`, `sl-radio`, and `sl-switch`
-- Added the `activation` prop to `sl-tab-group` to allow for automatic and manual tab activation
+- Added the `activation` attribute to `sl-tab-group` to allow for automatic and manual tab activation
 - Added `npm run create <tag>` script to scaffold new components faster
 - Fixed a bug in `sl-tooltip` where events weren't properly cleaned up on disconnect
 - Fixed a bug in `sl-tooltip` where they wouldn't display after toggling `disabled` off and on again [#391](https://github.com/shoelace-style/shoelace/issues/391)
@@ -205,7 +205,7 @@ From now on, importing a component will register it automatically. The caveat is
 
 - Fixed a bug where link buttons could have incorrect `target`, `download`, and `rel` props
 - Fixed `aria-label` and `aria-labelledby` props in `sl-dialog` and `sl-drawer`
-- Fixed `tabindex` prop in `sl-menu`
+- Fixed `tabindex` attribute in `sl-menu`
 - Fixed a bug in `sl-select` where tags would always render as pills
 - Fixed a bug in `sl-button` where calling `setFocus()` would throw an error
 
@@ -233,7 +233,7 @@ From now on, importing a component will register it automatically. The caveat is
 
 **This release migrates component implementations from Shoemaker to LitElement.** Due to feedback from the community, Shoelace will rely on a more heavily tested library for component implementations. This gives you a more solid foundation and reduces my maintenance burden. Thank you for all your comments, concerns, and encouragement! Aside from that, everything else from beta.28 still applies plus the following.
 
-- 🚨 BREAKING: removed the `symbol` prop from `sl-rating` and reverted to `getSymbol` for optimal flexibility
+- 🚨 BREAKING: removed the `symbol` property from `sl-rating` and reverted to `getSymbol` for optimal flexibility
 - Added `vscode.html-custom-data.json` to the build to support IntelliSense (see [the usage section](/getting-started/usage#code-completion) for details)
 - Added a base style to prevent FOUC before components are defined
 - Fixed bug where TypeScript types weren't being generated [#364](https://github.com/shoelace-style/shoelace/pull/364)
@@ -258,7 +258,7 @@ The component API remains the same except for the changes noted below. Thanks fo
 - 🚨 BREAKING: removed the experimental `sl-theme` component due to limitations (you should set the `sl-theme-[name]` class on the `<body>` instead)
 - 🚨 BREAKING: moved the base stylesheet from `dist/shoelace.css` to `dist/themes/base.css`
 - 🚨 BREAKING: moved `icons` into `assets/icons` to make future assets easier to colocate
-- 🚨 BREAKING: changed `getSymbol` prop in `sl-rating` to `symbol` (it now accepts a string or a function that returns an icon name)
+- 🚨 BREAKING: changed `getSymbol` property in `sl-rating` to `symbol` (it now accepts a string or a function that returns an icon name)
 - 🚨 BREAKING: renamed `setAssetPath()` to `setBasePath()` and added the ability to set the library's base path with a `data-shoelace` attribute (`setBasePath()` is exported from `utilities/base-path.js`)
 - Fixed `min` and `max` types in `sl-input` to allow numbers and strings [#330](https://github.com/shoelace-style/shoelace/issues/330)
 - Fixed a bug where `sl-checkbox`, `sl-radio`, and `sl-switch` controls would shrink with long labels [#325](https://github.com/shoelace-style/shoelace/issues/325)
@@ -301,7 +301,7 @@ The component API remains the same except for the changes noted below. Thanks fo
 - Fixed a bug in `sl-tab-group` where removing tabs would throw an error
 - Fixed a bug in `sl-alert`, `sl-dialog`, `sl-drawer`, `sl-select`, and `sl-tag` where the close button's base wasn't exported so it couldn't be styled
 - Removed `text` type from `sl-badge` as it was erroneously copied and never had styles
-- Updated `sl-tab-group` so the `active` prop is reflected to the attribute
+- Updated `sl-tab-group` so the `active` property is reflected to its attribute
 - Updated the docs to show dependencies instead of dependents which is much more useful when working with the custom elements bundle
 - Updated to Bootstrap Icons 1.3.0
 
@@ -320,7 +320,7 @@ The component API remains the same except for the changes noted below. Thanks fo
 - 🚨 BREAKING: Removed `copy-button` part from `sl-color-picker` since copying is now done by clicking the preview
 - Added `getFormattedValue()` method to `sl-color-picker` so you can retrieve the current value in any format
 - Added visual separators between solid buttons in `sl-button-group`
-- Added `help-text` prop to `sl-input`, `sl-textarea`, and `sl-select`
+- Added `help-text` attribute to `sl-input`, `sl-textarea`, and `sl-select`
 - Fixed a bug where moving the mouse while `sl-dropdown` is closing would remove focus from the trigger
 - Fixed a bug where `sl-menu-item` didn't set a default color in the dark theme
 - Fixed a bug where `sl-color-picker` preview wouldn't update in Safari
@@ -341,7 +341,7 @@ The component API remains the same except for the changes noted below. Thanks fo
 - Added `sl-format-date` component
 - Added `indeterminate` state to `sl-progress-bar` [#274](https://github.com/shoelace-style/shoelace/issues/274)
 - Added `--track-color`, `--indicator-color`, and `--label-color` to `sl-progress-bar` [#276](https://github.com/shoelace-style/shoelace/issues/276)
-- Added `allow-scripts` prop to `sl-include` [#280](https://github.com/shoelace-style/shoelace/issues/280)
+- Added `allow-scripts` attribute to `sl-include` [#280](https://github.com/shoelace-style/shoelace/issues/280)
 - Fixed a bug where `sl-menu-item` color variable was incorrect [#272](https://github.com/shoelace-style/shoelace/issues/272)
 - Fixed a bug where `sl-dialog` and `sl-drawer` would emit the `sl-hide` event twice [#275](https://github.com/shoelace-style/shoelace/issues/275)
 - Fixed a bug where calling `event.preventDefault()` on certain form elements wouldn't prevent `sl-form` from submitting [#277](https://github.com/shoelace-style/shoelace/issues/277)
@@ -354,7 +354,7 @@ The component API remains the same except for the changes noted below. Thanks fo
 
 - Added `sl-format-number` component
 - Added `sl-relative-time` component
-- Added `closable` prop to `sl-tab`
+- Added `closable` attribute to `sl-tab`
 - Added experimental `sl-resize-observer` utility
 - Added experimental `sl-theme` utility and updated theming documentation
 - Fixed a bug where `sl-menu-item` wouldn't render properly in the dark theme
@@ -367,10 +367,10 @@ The component API remains the same except for the changes noted below. Thanks fo
 
 - 🚨 BREAKING: Refactored `sl-menu` and `sl-menu-item` to improve accessibility by using proper focus states [#217](https://github.com/shoelace-style/shoelace/issues/217)
   - Moved `tabindex` from `sl-menu` to `sl-menu-item`
-  - Removed the `active` prop from `sl-menu-item` because synthetic focus states are bad for accessibility
+  - Removed the `active` attribute from `sl-menu-item` because synthetic focus states are bad for accessibility
   - Removed the `sl-activate` and `sl-deactivate` events from `sl-menu-item` (listen for `focus` and `blur` instead)
   - Updated `sl-select` so keyboard navigation still works
-- Added `no-scroll-controls` prop to `sl-tab-group` [#253](https://github.com/shoelace-style/shoelace/issues/253)
+- Added `no-scroll-controls` attribute to `sl-tab-group` [#253](https://github.com/shoelace-style/shoelace/issues/253)
 - Fixed a bug where setting `open` initially wouldn't show `sl-dialog` or `sl-drawer` [#255](https://github.com/shoelace-style/shoelace/issues/255)
 - Fixed a bug where `disabled` could be set when buttons are rendered as links
 - Fixed a bug where hoisted dropdowns would render in the wrong position when placed inside `sl-dialog` [#252](https://github.com/shoelace-style/shoelace/issues/252)
@@ -404,9 +404,9 @@ The component API remains the same except for the changes noted below. Thanks fo
 
 - 🚨 BREAKING: Transformed all Shoelace events to lowercase ([details](#why-did-event-names-change))
 - Added support for dropdowns and non-icon elements to `sl-input`
-- Added `spellcheck` prop to `sl-input`
+- Added `spellcheck` attribute to `sl-input`
 - Added `sl-icon-library` to allow custom icon library registration
-- Added `library` prop to `sl-icon` and `sl-icon-button`
+- Added `library` attribute to `sl-icon` and `sl-icon-button`
 - Added "Integrating with Rails" tutorial to the docs, courtesy of [ParamagicDev](https://github.com/ParamagicDev)
 - Fixed a bug where `sl-progress-ring` rendered incorrectly when zoomed in Safari [#227](https://github.com/shoelace-style/shoelace/issues/227)
 - Fixed a bug where tabbing into slotted elements closes `sl-dropdown` when used in a shadow root [#223](https://github.com/shoelace-style/shoelace/issues/223)
@@ -437,7 +437,7 @@ The following pages demonstrate why this change was necessary.
 
 ## 2.0.0-beta.18
 
-- Added `name` and `invalid` prop to `sl-color-picker`
+- Added `name` and `invalid` attribute to `sl-color-picker`
 - Added support for form submission and validation to `sl-color-picker`
 - Added touch support to demo resizers in the docs
 - Added `sl-responsive-embed` component
@@ -467,20 +467,20 @@ The following pages demonstrate why this change was necessary.
 
 **Form validation has been reworked and is much more powerful now!**
 
-- The `invalid` prop now reflects the control's validity as determined by the browser's constraint validation API
+- The `invalid` attribute now reflects the control's validity as determined by the browser's constraint validation API
 - Added `required` to `sl-checkbox`, `sl-select`, and `sl-switch`
 - Added `reportValidity()` and `setCustomValidity()` methods to all form controls
 - Added validation checking for custom and native form controls to `sl-form`
-- Added `novalidate` prop to `sl-form` to disable validation
-- Removed the `valid` prop from all form controls
+- Added `novalidate` attribute to `sl-form` to disable validation
+- Removed the `valid` attribute from all form controls
 - Removed valid and invalid design tokens and related styles (you can use your own custom styles to achieve this)
 
 ## 2.0.0-beta.16
 
-- Add `hoist` prop to `sl-color-picker`, `sl-dropdown`, and `sl-select` to work around panel clipping
-- Add `sl-format-bytes` utility component
-- Add `clearable` and `required` props to `sl-select`
-- Add `slclear` event to `sl-input`
+- Added `hoist` attribute to `sl-color-picker`, `sl-dropdown`, and `sl-select` to work around panel clipping
+- Added `sl-format-bytes` utility component
+- Added `clearable` and `required` props to `sl-select`
+- Added `slclear` event to `sl-input`
 - Added keyboard support to the preview resizer in the docs
 - Fixed a bug where the `aria-selected` state was incorrect in `sl-menu-item`
 - Fixed a bug where custom properties applied to `sl-tooltip` didn't affect show/hide transitions
@@ -552,7 +552,7 @@ The following pages demonstrate why this change was necessary.
 - Added the icon button component
 - Added the skeleton component
 - Added the `typeToSelect` method to menu so type-to-select behavior can be controlled externally
-- Added the `pulse` prop to badge
+- Added the `pulse` attribute to badge
 - Fixed a bug where hovering over select showed the wrong cursor
 - Fixed a bug where tabbing into a select control would highlight the label
 - Fixed a bug where tabbing out of a select control wouldn't close it
@@ -560,7 +560,7 @@ The following pages demonstrate why this change was necessary.
 - Fixed a bug where type-to-select wasn't working after the first letter
 - Fixed a bug where clicking on menu items and dividers would steal focus from the menu
 - Fix a bug where the color picker wouldn't parse uppercase values
-- Removed `noFooter` prop from dialog and drawer (slot detection is automatic, so the prop is not required)
+- Removed the `no-footer` attribute from dialog and drawer (slot detection is automatic, so the attribute is not required)
 - Removed `close-icon` slot from alert
 - Replaced make-shift icon buttons with `sl-icon-button` in alert, dialog, drawer, and tag
 - Updated Stencil to 1.17.1

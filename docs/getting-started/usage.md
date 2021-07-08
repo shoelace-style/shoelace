@@ -6,19 +6,19 @@ Shoelace components are just regular HTML elements, or "custom elements" to be p
 
 ### Properties
 
-Many components have properties ("props") that can be set using attributes. For example, buttons accept a `size` attribute that dictates the button's size.
+Many components have properties that can be set using attributes. For example, buttons accept a `size` attribute that maps to the `size` property which dictates the button's size.
 
 ```html
 <sl-button size="small">Click me</sl-button>
 ```
 
-Some props are booleans, so they only have true/false values. To activate a boolean prop, add the corresponding attribute without a value.
+Some properties are boolean, so they only have true/false values. To activate a boolean property, add the corresponding attribute without a value.
 
 ```html
 <sl-button disabled>Click me</sl-button>
 ```
 
-In rare cases, a prop may require an array, an object, or a function. For example, to customize the color picker's list of preset swatches, you set the `swatches` prop to an array of colors. This can be done with JavaScript.
+In rare cases, a property may require an array, an object, or a function. For example, to customize the color picker's list of preset swatches, you set the `swatches` property to an array of colors. This can be done with JavaScript.
 
 ```html
 <sl-color-picker></sl-color-picker>
@@ -102,9 +102,9 @@ Custom elements cannot have self-closing tags. Similar to `<script>` and `<texta
 
 You might expect similarly named elements to share the same API as native HTML elements. This is not always the case. Shoelace components **are not** designed to be one-to-one replacements for their HTML counterparts.
 
-For example, `<button>` and `<sl-button>` both have a `type` attribute, but it does different things (the former controls whether the button submits a form and the latter controls the button's appearance). Similarly, you can't call `focus()` on a Shoelace input — you need to use the component's `focus()` method instead. There are technical reasons for some of these design decisions that are outside the scope of this page.
+For example, `<button>` and `<sl-button>` both have a `type` attribute, but it does different things. The former controls whether the button submits a form and the latter controls the button's appearance.
 
-?> **Don't make assumptions about a component's API!** To prevent unexpected behaviors, please take the time to review the documentation and make sure you understand what each property, method, and event is intended to do.
+?> **Don't make assumptions about a component's API!** To prevent unexpected behaviors, please take the time to review the documentation and make sure you understand what each attribute, property, method, and event is intended to do.
 
 ## Code Completion
 

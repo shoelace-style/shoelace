@@ -25,7 +25,7 @@ Use the `type` attribute to set the button's type.
 
 ### Sizes
 
-Use the `size` prop to change a button's size.
+Use the `size` attribute to change a button's size.
 
 ```html preview
 <sl-button size="small">Small</sl-button>
@@ -35,7 +35,7 @@ Use the `size` prop to change a button's size.
 
 ### Pill Buttons
 
-Use the `pill` prop to give buttons rounded edges.
+Use the `pill` attribute to give buttons rounded edges.
 
 ```html preview
 <sl-button size="small" pill>Small</sl-button>
@@ -45,7 +45,7 @@ Use the `pill` prop to give buttons rounded edges.
 
 ### Circle Buttons
 
-Use the `circle` prop to create circular icon buttons.
+Use the `circle` attribute to create circular icon buttons.
 
 ```html preview
 <sl-button type="default" size="small" circle><sl-icon name="gear"></sl-icon></sl-button>
@@ -146,7 +146,7 @@ Use the `prefix` and `suffix` slots to add icons.
 
 ### Caret
 
-Use the `caret` prop to add a dropdown indicator when a button will trigger a dropdown, menu, or popover.
+Use the `caret` attribute to add a dropdown indicator when a button will trigger a dropdown, menu, or popover.
 
 ```html preview
 <sl-button size="small" caret>Small</sl-button>
@@ -156,7 +156,7 @@ Use the `caret` prop to add a dropdown indicator when a button will trigger a dr
 
 ### Loading
 
-Use the `loading` prop to make a button busy. The width will remain the same as before, preventing adjacent elements from moving around. Clicks will be suppressed until the loading state is removed.
+Use the `loading` attribute to make a button busy. The width will remain the same as before, preventing adjacent elements from moving around. Clicks will be suppressed until the loading state is removed.
 
 ```html preview
 <sl-button type="default" loading>Default</sl-button>
@@ -169,7 +169,7 @@ Use the `loading` prop to make a button busy. The width will remain the same as 
 
 ### Disabled
 
-Use the `disabled` prop to disable a button. Clicks will be suppressed until the disabled state is removed.
+Use the `disabled` attribute to disable a button. Clicks will be suppressed until the disabled state is removed.
 
 ```html preview
 <sl-button type="default" disabled>Default</sl-button>

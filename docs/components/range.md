@@ -14,7 +14,7 @@ Ranges allow the user to select a single value within a given range using a slid
 
 ### Disabled
 
-Use the `disabled` prop to disable a slider.
+Use the `disabled` attribute to disable a slider.
 
 ```html preview
 <sl-range min="0" max="100" step="1" disabled></sl-range>
@@ -38,7 +38,7 @@ To disable the tooltip, set `tooltip` to `none`.
 
 ### Custom Tooltip Formatter
 
-You can change the tooltip's content by setting the `tooltipFormatter` prop to a function that accepts the range's value as an argument.
+You can change the tooltip's content by setting the `tooltipFormatter` property to a function that accepts the range's value as an argument.
 
 ```html preview
 <sl-range min="0" max="100" step="1" class="range-with-custom-formatter"></sl-range>

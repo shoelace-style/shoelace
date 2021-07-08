@@ -24,7 +24,7 @@ Use the `placeholder` attribute to add a placeholder.
 
 ### Clearable
 
-Add the `clearable` prop to add a clear button when the input has content.
+Add the `clearable` attribute to add a clear button when the input has content.
 
 ```html preview
 <sl-input placeholder="Clearable" clearable></sl-input>
@@ -32,7 +32,7 @@ Add the `clearable` prop to add a clear button when the input has content.
 
 ### Toggle Password
 
-Add the `toggle-password` prop to add a toggle button that will show the password when activated.
+Add the `toggle-password` attribute to add a toggle button that will show the password when activated.
 
 ```html preview
 <sl-input type="password" placeholder="Password Toggle" size="small" toggle-password></sl-input>
@@ -44,7 +44,7 @@ Add the `toggle-password` prop to add a toggle button that will show the passwor
 
 ### Pill
 
-Use the `pill` prop to give inputs rounded edges.
+Use the `pill` attribute to give inputs rounded edges.
 
 ```html preview
 <sl-input placeholder="Small" size="small" pill></sl-input>

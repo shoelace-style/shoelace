@@ -196,7 +196,7 @@ The `invalid` attribute reflects the form control's validity, so you can style i
 
 To opt out of the browser's built-in validation and use your own, add the `novalidate` attribute to the form. This will ignore all constraints and prevent the browser from showing its own warnings when form controls are invalid.
 
-Remember that the `invalid` prop on form controls reflects validity as defined by the [Constraint Validation API](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation). You can set it initially, but the `invalid` prop will update as the user interacts with the form control. As such, you should not rely on it to set invalid styles using a custom validation library.
+Remember that the `invalid` attribute on form controls reflects validity as defined by the [Constraint Validation API](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation). You can set it initially, but the `invalid` attribute will update as the user interacts with the form control. As such, you should not rely on it to set invalid styles using a custom validation library.
 
 Instead, toggle a class and target it in your stylesheet as shown below.
 

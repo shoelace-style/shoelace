@@ -16,7 +16,7 @@ Tags are used as labels to organize things or to indicate a selection.
 
 ### Sizes
 
-Use the `size` prop to change a tab's size.
+Use the `size` attribute to change a tab's size.
 
 ```html preview
 <sl-tag size="small">Small</sl-tag>
@@ -26,7 +26,7 @@ Use the `size` prop to change a tab's size.
 
 ### Pill
 
-Use the `pill` prop to give tabs rounded edges.
+Use the `pill` attribute to give tabs rounded edges.
 
 ```html preview
 <sl-tag size="small" pill>Small</sl-tag>
