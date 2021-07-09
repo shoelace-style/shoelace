@@ -1,5 +1,6 @@
 import { LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { localize } from '../../internal/i18n';
 
 /**
  * @since 2.0
@@ -7,11 +8,13 @@ import { customElement, property } from 'lit/decorators.js';
  */
 @customElement('sl-format-number')
 export default class SlFormatNumber extends LitElement {
+  private t = localize(this);
+
   /** The number to format. */
   @property({ type: Number }) value = 0;
 
   /** The locale to use when formatting the number. */
-  @property() locale: string;
+  @property() override lang = '';
 
   /** The formatting style to use. */
   @property() type: 'currency' | 'decimal' | 'percent' = 'decimal';
@@ -45,7 +48,7 @@ export default class SlFormatNumber extends LitElement {
       return '';
     }
 
-    return new Intl.NumberFormat(this.locale, {
+    return this.t.formatNumber(this.value, {
       style: this.type,
       currency: this.currency,
       currencyDisplay: this.currencyDisplay,
@@ -55,7 +58,7 @@ export default class SlFormatNumber extends LitElement {
       maximumFractionDigits: this.maximumFractionDigits,
       minimumSignificantDigits: this.minimumSignificantDigits,
       maximumSignificantDigits: this.maximumSignificantDigits
-    }).format(this.value);
+    });
   }
 }
 

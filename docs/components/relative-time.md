@@ -48,14 +48,14 @@ You can change how the time is displayed using the `format` attribute. Note that
 
 ### Localization
 
-Use the `locale` attribute to set the desired locale.
+Use the `lang` attribute to set the desired locale.
 
 ```html preview
-English: <sl-relative-time date="2020-07-15T09:17:00-04:00" locale="en-US"></sl-relative-time><br>
-Chinese: <sl-relative-time date="2020-07-15T09:17:00-04:00" locale="zh-CN"></sl-relative-time><br>
-German: <sl-relative-time date="2020-07-15T09:17:00-04:00" locale="de"></sl-relative-time><br>
-Greek: <sl-relative-time date="2020-07-15T09:17:00-04:00" locale="el"></sl-relative-time><br>
-Russian: <sl-relative-time date="2020-07-15T09:17:00-04:00" locale="ru"></sl-relative-time>
+English: <sl-relative-time date="2020-07-15T09:17:00-04:00" lang="en-US"></sl-relative-time><br>
+Chinese: <sl-relative-time date="2020-07-15T09:17:00-04:00" lang="zh-CN"></sl-relative-time><br>
+German: <sl-relative-time date="2020-07-15T09:17:00-04:00" lang="de"></sl-relative-time><br>
+Greek: <sl-relative-time date="2020-07-15T09:17:00-04:00" lang="el"></sl-relative-time><br>
+Russian: <sl-relative-time date="2020-07-15T09:17:00-04:00" lang="ru"></sl-relative-time>
 ```
 
 [component-metadata:sl-relative-time]

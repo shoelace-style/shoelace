@@ -38,24 +38,24 @@ To get the value as a percent, set the `type` attribute to `percent`.
 
 ### Localization
 
-Use the `locale` attribute to set the number formatting locale.
+Use the `lang` attribute to set the number formatting locale.
 
 ```html preview
-English: <sl-format-number value="2000" locale="en" minimum-fraction-digits="2"></sl-format-number><br>
-German: <sl-format-number value="2000" locale="de" minimum-fraction-digits="2"></sl-format-number><br>
-Russian: <sl-format-number value="2000" locale="ru" minimum-fraction-digits="2"></sl-format-number>
+English: <sl-format-number value="2000" lang="en" minimum-fraction-digits="2"></sl-format-number><br>
+German: <sl-format-number value="2000" lang="de" minimum-fraction-digits="2"></sl-format-number><br>
+Russian: <sl-format-number value="2000" lang="ru" minimum-fraction-digits="2"></sl-format-number>
 ```
 
 ### Currency
 
-To format a number as a monetary value, set the `type` attribute to `currency` and set the `currency` attribute to the desired ISO 4217 currency code. You should also specify `locale` to ensure the the number is formatted correctly for the target locale.
+To format a number as a monetary value, set the `type` attribute to `currency` and set the `currency` attribute to the desired ISO 4217 currency code. You should also specify `lang` to ensure the the number is formatted correctly for the target locale.
 
 ```html preview
-<sl-format-number type="currency" currency="USD" value="2000" locale="en-US"></sl-format-number><br>
-<sl-format-number type="currency" currency="GBP" value="2000" locale="en-GB"></sl-format-number><br>
-<sl-format-number type="currency" currency="EUR" value="2000" locale="de"></sl-format-number><br>
-<sl-format-number type="currency" currency="RUB" value="2000" locale="ru"></sl-format-number><br>
-<sl-format-number type="currency" currency="CNY" value="2000" locale="zh-cn"></sl-format-number>
+<sl-format-number type="currency" currency="USD" value="2000" lang="en-US"></sl-format-number><br>
+<sl-format-number type="currency" currency="GBP" value="2000" lang="en-GB"></sl-format-number><br>
+<sl-format-number type="currency" currency="EUR" value="2000" lang="de"></sl-format-number><br>
+<sl-format-number type="currency" currency="RUB" value="2000" lang="ru"></sl-format-number><br>
+<sl-format-number type="currency" currency="CNY" value="2000" lang="zh-cn"></sl-format-number>
 ```
 
 [component-metadata:sl-format-number]

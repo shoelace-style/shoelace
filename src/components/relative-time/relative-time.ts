@@ -1,6 +1,7 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { watch } from '../../internal/watch';
+import { localize } from '../../internal/i18n';
 
 /**
  * @since 2.0
@@ -9,6 +10,7 @@ import { watch } from '../../internal/watch';
 @customElement('sl-relative-time')
 export default class SlRelativeTime extends LitElement {
   private updateTimeout: any;
+  private t = localize(this);
 
   @state() private isoTime = '';
   @state() private relativeTime = '';
@@ -18,7 +20,7 @@ export default class SlRelativeTime extends LitElement {
   @property() date: Date | string;
 
   /** The locale to use when formatting the number. */
-  @property() locale: string;
+  @property() override lang = '';
 
   /** The formatting style to use. */
   @property() format: 'long' | 'short' | 'narrow' = 'long';
@@ -65,19 +67,19 @@ export default class SlRelativeTime extends LitElement {
     const { unit, value } = availableUnits.find(unit => Math.abs(diff) < unit.max) as any;
 
     this.isoTime = date.toISOString();
-    this.titleTime = new Intl.DateTimeFormat(this.locale, {
+    this.titleTime = this.t.formatDate(date, {
       month: 'long',
       year: 'numeric',
       day: 'numeric',
       hour: 'numeric',
       minute: 'numeric',
       timeZoneName: 'short'
-    }).format(date);
+    });
 
-    this.relativeTime = new Intl.RelativeTimeFormat(this.locale, {
+    this.relativeTime = this.t.formatRelativeTime(Math.round(diff / value), unit, {
       numeric: this.numeric,
       style: this.format
-    }).format(Math.round(diff / value), unit);
+    });
 
     // If sync is enabled, update as time passes
     clearTimeout(this.updateTimeout);

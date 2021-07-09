@@ -53,12 +53,12 @@ By default, the browser will determine whether to use 12-hour or 24-hour time. T
 
 ### Localization
 
-Use the `locale` attribute to set the date/time formatting locale.
+Use the `lang` attribute to set the date/time formatting locale.
 
 ```html preview
-English: <sl-format-date locale="en"></sl-format-date><br>
-French: <sl-format-date locale="fr"></sl-format-date><br>
-Russian: <sl-format-date locale="ru"></sl-format-date><br>
+English: <sl-format-date lang="en"></sl-format-date><br>
+French: <sl-format-date lang="fr"></sl-format-date><br>
+Russian: <sl-format-date lang="ru"></sl-format-date><br>
 ```
 
 [component-metadata:sl-format-date]
