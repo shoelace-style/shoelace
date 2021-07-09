@@ -31,10 +31,10 @@ const attributeToDate = (value: string): Date | undefined => {
  *
  * @csspart trigger-button - The date picker dropdown's trigger, usually a `<sl-button>` element.
  *
- * @customProperty --cell-inline-width - Cell width for inline date picker
- * @customProperty --cell-inline-height - Cell width for inline date picker
- * @customProperty --cell-dropdown-width - Cell width for dropdown date picker
- * @customProperty --cell-dropdown-height - Cell width for dropdown date picker
+ * @cssprop --cell-inline-width - Cell width for inline date picker
+ * @cssprop --cell-inline-height - Cell width for inline date picker
+ * @cssprop --cell-dropdown-width - Cell width for dropdown date picker
+ * @cssprop --cell-dropdown-height - Cell width for dropdown date picker
  */
 @customElement('sl-date-picker')
 export default class SlDatePicker extends LitElement {

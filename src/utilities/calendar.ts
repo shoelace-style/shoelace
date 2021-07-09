@@ -154,10 +154,23 @@ export class CalendarUtils {
     return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate() + days));
   }
 
-  static addMonths(date: Date, months: number): Date {
-    let d = new Date(date);
-    d.setMonth(date.getMonth() + months);
-    return d;
+  static addMonths(date: Date, amount: number, enforceEndOfMonth = true): Date {
+    const totalMonths = date.getMonth() + amount;
+    let year = date.getFullYear() + Math.floor(totalMonths / 12);
+    let month = totalMonths % 12;
+    let day = date.getDate();
+
+    if (month < 0) month = (month + 12) % 12;
+    const maxDayOfMonth = this.getDaysInMonth(year, month);
+
+    if (enforceEndOfMonth) {
+      day = Math.min(maxDayOfMonth, day);
+    } else if (day > maxDayOfMonth) {
+      day = day - maxDayOfMonth;
+      year = year + Math.floor((month + 1) / 12);
+      month = (month + 1) % 12;
+    }
+    return new Date(year, month, day);
   }
 
   static addYears(date: Date, years: number): Date {
