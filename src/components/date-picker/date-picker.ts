@@ -6,6 +6,7 @@ import { CalendarView, CalendarDate, CalendarLocale, CalendarUtils } from '../..
 import { watch } from '../../internal/watch';
 import { emit } from '../../internal/event';
 import type SlDropdown from '../dropdown/dropdown';
+import type SlButton from '../icon-button/icon-button';
 import styles from 'sass:./date-picker.scss';
 
 var calendar: CalendarView;
@@ -40,7 +41,7 @@ const attributeToDate = (value: string): Date | undefined => {
 export default class SlDatePicker extends LitElement {
   static styles = unsafeCSS(styles);
 
-  private _locale: CalendarLocale;
+  private locale: CalendarLocale;
   private _focusedDay: Date;
 
   // we use a custom setter to prevent update request from Lit
@@ -68,11 +69,32 @@ export default class SlDatePicker extends LitElement {
   @queryAll('td.day')
   days: NodeListOf<HTMLTableCellElement>;
 
+  @queryAll('td.month')
+  months: NodeListOf<HTMLTableCellElement>;
+
+  @queryAll('td.year')
+  years: NodeListOf<HTMLTableCellElement>;
+
+  @query('.prev-button')
+  prevButton: SlButton;
+
+  @query('.next-button')
+  nextButton: SlButton;
+
+  @query('.months-button')
+  selectMonthButton: SlButton;
+
+  @query('.years-button')
+  selectYearButton: SlButton;
+
   @state()
   calendarDays: CalendarDate[] = [];
 
   @state()
   isSelectionActive: boolean = false;
+
+  @state()
+  activeView: 'months' | 'years' | 'calendar' = 'calendar';
 
   @state()
   hoveredDay?: Date;
@@ -162,7 +184,7 @@ export default class SlDatePicker extends LitElement {
     super.connectedCallback();
 
     calendar = new CalendarView({ firstDayOfWeek: this.firstDayOfWeek });
-    this._locale = new CalendarLocale(this.firstDayOfWeek, this.lang);
+    this.locale = new CalendarLocale(this.firstDayOfWeek, this.lang);
     this.calendarDays = calendar.createCalendar(this.year, this.month);
 
     if (this.display === 'dropdown') {
@@ -176,10 +198,19 @@ export default class SlDatePicker extends LitElement {
 
   private getDayElement(date: Date): HTMLTableCellElement | undefined {
     if (this.readonly) return;
-
     return [...this.days].find(
-      day => CalendarUtils.compare(CalendarUtils.getDateObject(day.getAttribute('date')!), date) === 0
+      element => CalendarUtils.compare(CalendarUtils.getDateObject(element.getAttribute('date')!), date) === 0
     );
+  }
+
+  private getMonthElement(month: number): HTMLTableCellElement | undefined {
+    if (this.readonly) return;
+    return [...this.months].find(element => element.getAttribute('month')! === month.toString());
+  }
+
+  private getYearElement(year: number): HTMLTableCellElement | undefined {
+    if (this.readonly) return;
+    return [...this.years].find(element => element.getAttribute('year')! === year.toString());
   }
 
   private firstFocusElement() {
@@ -239,18 +270,166 @@ export default class SlDatePicker extends LitElement {
     }
   }
 
+  private handleActiveView(view: string) {
+    if (!this.readonly) {
+      this.activeView = view as any;
+
+      this.updateComplete.then(() => {
+        if (this.activeView === 'months') this.getMonthElement(this.month)!.focus();
+        else if (this.activeView === 'years') this.getYearElement(this.year)!.focus();
+      });
+    }
+  }
+
   private handleDayHover(day: CalendarDate) {
     if (this.range) this.hoveredDay = this.isSelectionActive ? CalendarUtils.getDateObject(day) : undefined;
   }
 
-  private handleKeyboard(e: KeyboardEvent, day: CalendarDate) {
+  private handleMonthClick(month: number) {
+    if (!this.readonly) {
+      const date = CalendarUtils.createDate(this.year, month, this.focusedDay.getDate());
+      this.setDate(date);
+      this.activeView = 'calendar';
+    }
+  }
+
+  private handleYearClick(year: number) {
+    if (!this.readonly) {
+      const date = CalendarUtils.createDate(year, this.month, this.focusedDay.getDate());
+      this.setDate(date);
+      this.activeView = 'calendar';
+    }
+  }
+
+  private handleMonthsNavigation(e: KeyboardEvent, month: number) {
+    const date = new Date(this.year, month - 1, 1);
+
+    let key = e.key;
+    let handled = true;
+
+    if (e.code === 'Space') key = e.code;
+    if (key === 'Tab') {
+      this.prevButton.focus();
+      e.preventDefault();
+      return;
+    }
+
+    // KEYBOARD SUPPORT
+    // Space, Enter: Selects a month, closes the view.
+    // Arrow up: Moves focus three months before the current month.
+    // Arrow down: Moves focus three months after the current month.
+    // Arrow right: Moves focus to the next month.
+    // Arrow left: Moves focus to the previous month.
+    let nextDate: Date;
+    switch (key) {
+      case 'ArrowRight':
+        nextDate = CalendarUtils.addMonths(date, 1);
+        break;
+      case 'ArrowLeft':
+        nextDate = CalendarUtils.addMonths(date, -1);
+        break;
+      case 'ArrowDown':
+        nextDate = CalendarUtils.addMonths(date, 3);
+        break;
+      case 'ArrowUp':
+        nextDate = CalendarUtils.addMonths(date, -3);
+        break;
+      case 'Enter':
+      case 'Space':
+        nextDate = date;
+        break;
+      default:
+        nextDate = new Date();
+        handled = false;
+    }
+
+    if (handled) {
+      e.preventDefault();
+      const nextFocusedDate = CalendarUtils.addDays(nextDate, this.focusedDay.getDate() - 1, true);
+
+      if (!this.isDisabledDate(CalendarUtils.getCalendarDay(nextFocusedDate))) {
+        if (e.key === 'Enter' || e.key === 'Space') {
+          this.setDate(nextFocusedDate);
+          this.activeView = 'calendar';
+          this.updateComplete.then(() => (this.hoveredDay = nextFocusedDate));
+        } else {
+          this.getMonthElement(nextDate.getMonth() + 1)!.focus();
+        }
+      }
+    }
+  }
+
+  private handleYearsNavigation(e: KeyboardEvent, year: number) {
+    const date = new Date(year, this.month - 1, 1);
+
+    let key = e.key;
+    let handled = true;
+
+    if (e.code === 'Space') key = e.code;
+    if (key === 'Tab') {
+      this.prevButton.focus();
+      e.preventDefault();
+      return;
+    }
+
+    // KEYBOARD SUPPORT
+    // Space, Enter: Selects a year, closes the view.
+    // Arrow up: Moves focus three years before the current year.
+    // Arrow down: Moves focus three years after the current year.
+    // Arrow right: Moves focus to the next year.
+    // Arrow left: Moves focus to the previous year.
+    let nextDate: Date;
+    switch (key) {
+      case 'ArrowRight':
+        nextDate = CalendarUtils.addYears(date, 1);
+        break;
+      case 'ArrowLeft':
+        nextDate = CalendarUtils.addYears(date, -1);
+        break;
+      case 'ArrowDown':
+        nextDate = CalendarUtils.addYears(date, 3);
+        break;
+      case 'ArrowUp':
+        nextDate = CalendarUtils.addYears(date, -3);
+        break;
+      case 'Enter':
+      case 'Space':
+        nextDate = date;
+        break;
+      default:
+        nextDate = new Date();
+        handled = false;
+    }
+
+    if (handled) {
+      e.preventDefault();
+      const nextFocusedDate = CalendarUtils.addDays(nextDate, this.focusedDay.getDate() - 1, true);
+
+      if (!this.isDisabledDate(CalendarUtils.getCalendarDay(nextFocusedDate))) {
+        if (e.key === 'Enter' || e.key === 'Space') {
+          this.setDate(nextFocusedDate);
+          this.activeView = 'calendar';
+          this.updateComplete.then(() => (this.hoveredDay = nextFocusedDate));
+        } else {
+          const minYear = this.year - 11;
+          if (nextDate.getFullYear() < minYear || nextDate.getFullYear() > this.year) {
+            this.setDate(nextFocusedDate);
+            this.updateComplete.then(() => this.getYearElement(nextDate.getFullYear())!.focus());
+          } else this.getYearElement(nextDate.getFullYear())!.focus();
+        }
+      }
+    }
+  }
+
+  private handleDaysNavigation(e: KeyboardEvent, day: CalendarDate) {
     const date = CalendarUtils.getDateObject(day);
 
     let key = e.key;
     let handled = true;
 
     if (e.code === 'Space') key = e.code;
-    if (e.key === 'Tab') {
+    if (key === 'Tab') {
+      this.prevButton.focus();
       e.preventDefault();
       return;
     }
@@ -295,6 +474,7 @@ export default class SlDatePicker extends LitElement {
       case 'Space':
         nextDate = date;
         if (this.range) {
+          console.log('rangeeee');
           this.handleRangeSelection(nextDate);
         } else {
           this.startDate = nextDate;
@@ -302,21 +482,45 @@ export default class SlDatePicker extends LitElement {
         }
         break;
       default:
+        nextDate = new Date();
         handled = false;
     }
 
     if (handled) {
       e.preventDefault();
       // prevent keyboard navigation on disabled days
-      const nextFocusedDate = CalendarUtils.getCalendarDay(nextDate!);
+      const nextFocusedDate = CalendarUtils.getCalendarDay(nextDate);
 
       if (!this.isDisabledDate(nextFocusedDate)) {
-        this.setDate(nextDate!);
+        this.setDate(nextDate);
         if (this.range && this.isSelectionActive) {
-          this.hoveredDay = nextDate!;
+          console.log('porco dio range!');
+          this.hoveredDay = nextDate;
         }
       }
     }
+  }
+
+  private handleComponentNavigation(e: KeyboardEvent) {
+    const el = (e.target as HTMLElement).classList;
+
+    if (e.key === 'Tab') {
+      if (el.contains('prev-button')) this.selectMonthButton.focus();
+      else if (el.contains('months-button')) this.selectYearButton.focus();
+      else if (el.contains('years-button')) this.nextButton.focus();
+      else if (el.contains('next-button')) this.getDayElement(this._focusedDay)!.focus();
+      // else if (el.contains('day')) this.prevButton.focus();
+    }
+
+    if (e.key === 'Enter') {
+      (e.target as SlButton).click();
+      this.updateComplete.then(() => {
+        if (el.contains('prev-button')) this.prevButton.focus();
+        if (el.contains('next-button')) this.nextButton.focus();
+      });
+    }
+
+    e.preventDefault();
   }
 
   private setDate(date: Date) {
@@ -332,20 +536,30 @@ export default class SlDatePicker extends LitElement {
     this.updateComplete.then(() => (this.focusedDay = date));
   }
 
-  private prevMonth() {
-    const date = CalendarUtils.prevMonth(this.year, this.month, this.focusedDay.getDate());
+  private prev(e: MouseEvent) {
+    e.preventDefault();
 
-    if (!this.minDate || date.getMonth() >= this.minDate.getMonth()) {
-      if (!this.isSelectionActive) this.setDate(date);
-    } else this.setDate(this.minDate);
+    const date =
+      this.activeView === 'years'
+        ? CalendarUtils.addYears(this.focusedDay, -1)
+        : CalendarUtils.addMonths(this.focusedDay, -1);
+
+    if (this.minDate !== undefined && CalendarUtils.compare(date, this.minDate) === -1) {
+      if (!this.isSelectionActive) this.setDate(this.minDate);
+    } else this.setDate(date);
   }
 
-  private nextMonth() {
-    const date = CalendarUtils.nextMonth(this.year, this.month, this.focusedDay.getDate());
+  private next(e: MouseEvent) {
+    e.preventDefault();
 
-    if (!this.maxDate || date.getMonth() <= this.maxDate.getMonth()) {
-      if (!this.isSelectionActive) this.setDate(date);
-    } else this.setDate(this.maxDate);
+    const date =
+      this.activeView === 'years'
+        ? CalendarUtils.addYears(this.focusedDay, 1)
+        : CalendarUtils.addMonths(this.focusedDay, 1);
+
+    if (this.maxDate !== undefined && CalendarUtils.compare(date, this.maxDate) === 1) {
+      if (!this.isSelectionActive) this.setDate(this.maxDate);
+    } else this.setDate(date);
   }
 
   private isDateInRange(day: CalendarDate) {
@@ -394,18 +608,97 @@ export default class SlDatePicker extends LitElement {
     return result;
   }
 
-  private getHeaderView(): string {
-    if (this.range) return `${this.startDate.getDate()}${this.endDate ? '-' + this.endDate.getDate() : ''}`;
-    else return `${this.startDate.getDate()}`;
+  // private getCalendarHeaderView(): string {
+  //   if (this.range) {
+  //     return `${this.startDate.getDate()}${this.endDate ? '-' + this.endDate.getDate() + ' ' : ''}`;
+  //   } else return `${this.startDate.getDate()} `;
+  // }
+
+  private getCalendarWeekDaysView(): TemplateResult[] {
+    return this.locale.getDayNames().map(name => html`<td class="week-day" aria-label="${name}">${name}</td>`);
   }
 
-  private getMonthTableView(): TemplateResult {
+  private getCalendarMonthsView(): TemplateResult {
+    return html`
+      <div class="grid months">
+        <table>
+          ${this.chunk(this.locale.getMonths(), 3).map(
+            month =>
+              html`<tr>
+                ${repeat(
+                  month,
+                  month => html` <td
+                    tabindex="-1"
+                    month=${month.number}
+                    class=${classMap({
+                      month: true,
+                      selected: this.month === month.number,
+                      disabled: this.isDisabledDate(CalendarUtils.getCalendarDay(new Date(this.year, month.number, 1)))
+                    })}
+                    @click=${() => this.handleMonthClick(month.number)}
+                    @keydown=${(e: KeyboardEvent) => this.handleMonthsNavigation(e, month.number)}
+                  >
+                    ${month.name}
+                  </td>`
+                )}
+              </tr>`
+          )}
+        </table>
+      </div>
+    `;
+  }
+
+  private getCalendarYearsView(): TemplateResult {
+    return html`
+      <div class="grid years">
+        <table>
+          ${this.chunk([...Array(12).keys()].reverse(), 3).map(
+            index =>
+              html`<tr>
+                ${repeat(
+                  index,
+                  index => html` <td
+                    tabindex="-1"
+                    year=${this.year - index}
+                    class=${classMap({
+                      year: true,
+                      selected: this.year === this.year - index,
+                      disabled: this.isDisabledDate(
+                        CalendarUtils.getCalendarDay(new Date(this.year - index, this.month, 1))
+                      )
+                    })}
+                    @click=${() => this.handleYearClick(this.year - index)}
+                    @keydown=${(e: KeyboardEvent) => this.handleYearsNavigation(e, this.year - index)}
+                  >
+                    ${this.year - index}
+                  </td>`
+                )}
+              </tr>`
+          )}
+        </table>
+      </div>
+    `;
+  }
+
+  private getCalendarView(): TemplateResult {
+    switch (this.activeView) {
+      case 'months':
+        return this.getCalendarMonthsView();
+      case 'years':
+        return this.getCalendarYearsView();
+      case 'calendar':
+        return html``;
+    }
+  }
+
+  private getCalendarDaysView(): TemplateResult {
     return html`
       <div class="date-picker-wrap">
-        <div class="grid">
+        ${this.getCalendarView()}
+        <div class=${classMap({ grid: true, hidden: this.activeView !== 'calendar' })}>
           <table aria-labelledby="${this.month} ${this.year}">
             <tr>
-              ${this._locale.getDayNames().map(name => html`<td class="week-day" aria-label="${name}">${name}</td>`)}
+              ${this.getCalendarWeekDaysView()}
             </tr>
             ${this.chunk(this.calendarDays, 7).map(
               week =>
@@ -428,7 +721,7 @@ export default class SlDatePicker extends LitElement {
                       })}
                       @click=${() => this.handleDayClick(day)}
                       @mouseover=${() => this.handleDayHover(day)}
-                      @keydown=${(e: KeyboardEvent) => this.handleKeyboard(e, day)}
+                      @keydown=${(e: KeyboardEvent) => this.handleDaysNavigation(e, day)}
                     >
                       ${day.day}
                     </td>`
@@ -439,17 +732,6 @@ export default class SlDatePicker extends LitElement {
         </div>
       </div>
     `;
-  }
-
-  private getCalendarView(): TemplateResult {
-    return html` <div class="header-wrap">
-      <sl-icon class="prev-button" name="chevron-compact-left" library="system" @click=${this.prevMonth}></sl-icon>
-      <div class="header">
-        ${this.display === 'inline' ? html`<span class="week">${this.getHeaderView()}</span>` : ''}
-        <span class="title"> ${this._locale.getMonthName(this.year, this.month)} ${this.year} </span>
-      </div>
-      <sl-icon class="next-button" name="chevron-compact-right" library="system" @click=${this.nextMonth}></sl-icon>
-    </div>`;
   }
 
   render() {
@@ -464,7 +746,29 @@ export default class SlDatePicker extends LitElement {
         })}
         aria-disabled=${this.readonly ? 'true' : 'false'}
       >
-        ${this.getCalendarView()} ${this.getMonthTableView()}
+        <div class="header-wrap" @keydown=${this.handleComponentNavigation}>
+          ${!this.readonly
+            ? html` <sl-button class="prev-button" type="primary" @click=${this.prev}>
+                <sl-icon library="system" name="chevron-compact-left"></sl-icon>
+              </sl-button>`
+            : ''}
+          <div class="header">
+            <sl-button-group>
+              <sl-button class="months-button" type="primary" @click=${() => this.handleActiveView('months')}>
+                ${this.locale.getMonthName(this.month, 'long')}
+              </sl-button>
+              <sl-button class="years-button" type="primary" @click=${() => this.handleActiveView('years')}>
+                ${this.year}
+              </sl-button>
+            </sl-button-group>
+          </div>
+          ${!this.readonly
+            ? html` <sl-button class="next-button" type="primary" @click=${this.next}>
+                <sl-icon library="system" name="chevron-compact-right"></sl-icon>
+              </sl-button>`
+            : ''}
+        </div>
+        ${this.getCalendarDaysView()}
       </div>
     `;
 
@@ -475,8 +779,8 @@ export default class SlDatePicker extends LitElement {
       return html`
         <slot></slot>
         <sl-dropdown distance="5" placement="bottom-end" .containing-element=${this}>
-          <sl-button exportparts="base:trigger-button" type="default" size="medium" slot="trigger"
-            ><sl-icon name=${this.range ? 'calendar4-range' : 'calendar3'} library="system"></sl-icon>
+          <sl-button exportparts="base:trigger-button" type="default" size="medium" slot="trigger">
+            <sl-icon name=${this.range ? 'calendar4-range' : 'calendar3'} library="system"> </sl-icon>
           </sl-button>
           ${datepicker}
         </sl-dropdown>
