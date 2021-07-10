@@ -22,13 +22,7 @@ export class CalendarView {
   firstDayOfWeek: number;
   disabledDates: CalendarDate[];
 
-  constructor({
-    siblingMonths = true,
-    weekNumbers = true,
-    firstDayOfWeek = 0,
-    disabledDates = []
-  }: CalendarOptions = {}) {
-    this.siblingMonths = siblingMonths;
+  constructor({ weekNumbers = true, firstDayOfWeek = 0, disabledDates = [] }: CalendarOptions = {}) {
     this.weekNumbers = weekNumbers;
     this.firstDayOfWeek = firstDayOfWeek;
     this.disabledDates = disabledDates;
@@ -62,42 +56,37 @@ export class CalendarView {
     // always generates 6 weeks for all months
     // to fill the gap with the days
     // inside nearest months
-    if (this.siblingMonths) {
-      maxDays += 42 - (maxDays + Math.abs(i));
-    }
+    maxDays += 42 - (maxDays + Math.abs(i));
 
     while (i < maxDays) {
       currentDate = i + 1;
       currentDay = ((i < 1 ? 7 + i : i) + firstDay) % 7;
       if (currentDate < 1 || currentDate > lastDate) {
-        if (this.siblingMonths) {
-          if (currentDate < 1) {
-            otherMonth = month - 1;
-            otherYear = year;
-            if (otherMonth < 0) {
-              otherMonth = 11;
-              otherYear--;
-            }
-            currentDate = lastDatePreviousMonth + currentDate;
-          } else if (currentDate > lastDate) {
-            otherMonth = month + 1;
-            otherYear = year;
-            if (otherMonth > 11) {
-              otherMonth = 0;
-              otherYear++;
-            }
-            currentDate = i - lastDate + 1;
+        if (currentDate < 1) {
+          otherMonth = month - 1;
+          otherYear = year;
+          if (otherMonth < 0) {
+            otherMonth = 11;
+            otherYear--;
           }
-
-          if (otherMonth && otherYear) {
-            calendarDate = {
-              day: currentDate,
-              weekDay: currentDay,
-              month: otherMonth + 1,
-              year: otherYear!,
-              siblingMonth: true
-            };
+          currentDate = lastDatePreviousMonth + currentDate;
+        } else if (currentDate > lastDate) {
+          otherMonth = month + 1;
+          otherYear = year;
+          if (otherMonth > 11) {
+            otherMonth = 0;
+            otherYear++;
           }
+          currentDate = i - lastDate + 1;
+        }
+        if (otherMonth !== undefined && otherYear !== undefined) {
+          calendarDate = {
+            day: currentDate,
+            weekDay: currentDay,
+            month: otherMonth + 1,
+            year: otherYear!,
+            siblingMonth: true
+          };
         }
       } else {
         calendarDate = {
@@ -150,43 +139,21 @@ export class CalendarUtils {
     return 0;
   }
 
-  static addDays(date: Date, days: number): Date {
-    return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate() + days));
+  static createDate(year: number, month: number, day: number, enforceEndOfMonth = true) {
+    let date = new Date(year, month - 1, 1);
+    return this.dateAdd(date, 'day', day - 1, enforceEndOfMonth);
+  }
+
+  static addDays(date: Date, amount: number, enforceEndOfMonth = false): Date {
+    return this.dateAdd(date, 'day', amount, enforceEndOfMonth);
   }
 
   static addMonths(date: Date, amount: number, enforceEndOfMonth = true): Date {
-    const totalMonths = date.getMonth() + amount;
-    let year = date.getFullYear() + Math.floor(totalMonths / 12);
-    let month = totalMonths % 12;
-    let day = date.getDate();
-
-    if (month < 0) month = (month + 12) % 12;
-    const maxDayOfMonth = this.getDaysInMonth(year, month);
-
-    if (enforceEndOfMonth) {
-      day = Math.min(maxDayOfMonth, day);
-    } else if (day > maxDayOfMonth) {
-      day = day - maxDayOfMonth;
-      year = year + Math.floor((month + 1) / 12);
-      month = (month + 1) % 12;
-    }
-    return new Date(year, month, day);
+    return this.dateAdd(date, 'month', amount, enforceEndOfMonth);
   }
 
-  static addYears(date: Date, years: number): Date {
-    let d = new Date(date);
-    d.setFullYear(date.getFullYear() + years);
-    return d;
-  }
-
-  static nextMonth(year: number, month: number, day: number): Date {
-    let max = this.getDaysInMonth(year, month);
-    return new Date(year, month, day > max ? 1 : day);
-  }
-
-  static prevMonth(year: number, month: number, day: number): Date {
-    let max = this.getDaysInMonth(year, month - 2);
-    return new Date(year, month - 2, day > max ? 1 : day);
+  static addYears(date: Date, amount: number, enforceEndOfMonth = true): Date {
+    return this.dateAdd(date, 'year', amount, enforceEndOfMonth);
   }
 
   static getStartOfWeek(date: Date, firstDayOfWeek: number = 0): Date {
@@ -213,18 +180,6 @@ export class CalendarUtils {
 
   static getEndOfMonth(date: Date): Date {
     return new Date(date.getFullYear(), date.getMonth() + 1, 0);
-  }
-
-  static setMonth(date: Date, month: number): Date {
-    let d = new Date(date);
-    d.setMonth(month);
-    return d;
-  }
-
-  static setYear(date: Date, year: number): Date {
-    let d = new Date(date);
-    d.setFullYear(year);
-    return d;
   }
 
   static getDaysInMonth(year: number, month: number) {
@@ -332,7 +287,44 @@ export class CalendarUtils {
       return { year, month, day } as CalendarDate;
     } else throw new Error('Invalid date format');
   }
+
+  private static dateAdd(date: Date, type: 'year' | 'month' | 'day', amount: number, enforceEndOfMonth: boolean): Date {
+    let totalMonths = date.getMonth();
+    let totalYears = date.getFullYear();
+    let totalDays = date.getDate();
+
+    switch (type) {
+      case 'year':
+        totalYears += amount;
+        break;
+      case 'month':
+        totalMonths += amount;
+        break;
+      case 'day':
+        totalDays += amount;
+        break;
+    }
+
+    let year = totalYears + Math.floor(totalMonths / 12);
+    let month = totalMonths % 12;
+    let day = totalDays;
+
+    if (month < 0) month = (month + 12) % 12;
+    const maxDayOfMonth = this.getDaysInMonth(year, month);
+
+    if (enforceEndOfMonth) {
+      day = Math.min(maxDayOfMonth, day);
+    } else if (day > maxDayOfMonth) {
+      day = day - maxDayOfMonth;
+      year = year + Math.floor((month + 1) / 12);
+      month = (month + 1) % 12;
+    }
+    return new Date(year, month, day);
+  }
 }
+
+export type DateMonthFormat = 'numeric' | '2-digit' | 'long' | 'short' | 'narrow';
+export type DateDayFormat = 'long' | 'short' | 'narrow';
 
 export class CalendarLocale {
   private _firstDayOfWeek: number;
@@ -343,9 +335,9 @@ export class CalendarLocale {
     this._lang = lang;
   }
 
-  getDayNames = () => {
+  getDayNames = (format: DateDayFormat = 'long') => {
     const days = [...Array(7).keys()].map(d =>
-      new Date(2017, 9, d + 1).toLocaleString(this._lang, { weekday: 'long' }).slice(0, 2)
+      new Date(2017, 9, d + 1).toLocaleString(this._lang, { weekday: format }).slice(0, 2)
     );
 
     for (let i = 6; i > 6 - this._firstDayOfWeek; i--) {
@@ -356,9 +348,16 @@ export class CalendarLocale {
     return days;
   };
 
-  getMonthName(year: number, month: number): string {
-    return new Date(year, month, 0).toLocaleString(this._lang, {
-      month: 'long'
+  getMonthName(month: number, format: DateMonthFormat = 'short'): string {
+    return new Date(2017, month, 0).toLocaleString(this._lang, {
+      month: format
     });
+  }
+
+  getMonths(format: DateMonthFormat = 'short'): Array<{ name: string; number: number }> {
+    return [...Array(12).keys()].map(m => ({
+      name: new Date(2017, m, 1).toLocaleString(this._lang, { month: format }),
+      number: m + 1
+    }));
   }
 }
