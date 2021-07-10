@@ -1,4 +1,4 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
@@ -6,7 +6,7 @@ import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import { getLabelledBy, renderFormControl } from '../../internal/form-control';
 import { hasSlot } from '../../internal/slot';
-import styles from 'sass:./range.scss';
+import styles from './range.styles';
 
 let id = 0;
 
@@ -27,7 +27,7 @@ let id = 0;
  */
 @customElement('sl-range')
 export default class SlRange extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   @query('.range__control') input: HTMLInputElement;
   @query('.range__tooltip') output: HTMLOutputElement;
@@ -153,11 +153,11 @@ export default class SlRange extends LitElement {
     this.hasLabelSlot = hasSlot(this, 'label');
   }
 
-  handleThumbStart() {
+  handleThumbDragStart() {
     this.hasTooltip = true;
   }
 
-  handleThumbEnd() {
+  handleThumbDragEnd() {
     this.hasTooltip = false;
   }
 
@@ -197,10 +197,10 @@ export default class SlRange extends LitElement {
             'range--tooltip-top': this.tooltip === 'top',
             'range--tooltip-bottom': this.tooltip === 'bottom'
           })}
-          @mousedown=${this.handleThumbStart}
-          @mouseup=${this.handleThumbEnd}
-          @touchstart=${this.handleThumbStart}
-          @touchend=${this.handleThumbEnd}
+          @mousedown=${this.handleThumbDragStart}
+          @mouseup=${this.handleThumbDragEnd}
+          @touchstart=${this.handleThumbDragStart}
+          @touchend=${this.handleThumbDragEnd}
         >
           <input
             part="input"

@@ -1,4 +1,4 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
@@ -12,7 +12,7 @@ import { uppercaseFirstLetter } from '../../internal/string';
 import { isPreventScrollSupported } from '../../internal/support';
 import Modal from '../../internal/modal';
 import { setDefaultAnimation, getAnimation } from '../../utilities/animation-registry';
-import styles from 'sass:./drawer.scss';
+import styles from './drawer.styles';
 
 const hasPreventScroll = isPreventScrollSupported();
 
@@ -67,7 +67,7 @@ let id = 0;
  */
 @customElement('sl-drawer')
 export default class SlDrawer extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   @query('.drawer') drawer: HTMLElement;
   @query('.drawer__panel') panel: HTMLElement;

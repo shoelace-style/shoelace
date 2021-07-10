@@ -1,4 +1,4 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { animateTo, stopAnimations, shimKeyframesHeightAuto } from '../../internal/animate';
@@ -7,7 +7,7 @@ import { watch } from '../../internal/watch';
 import { waitForEvent } from '../../internal/event';
 import { focusVisible } from '../../internal/focus-visible';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
-import styles from 'sass:./details.scss';
+import styles from './details.styles';
 
 let id = 0;
 
@@ -36,7 +36,7 @@ let id = 0;
  */
 @customElement('sl-details')
 export default class SlDetails extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   @query('.details') details: HTMLElement;
   @query('.details__header') header: HTMLElement;

@@ -1,7 +1,7 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
-import styles from 'sass:./radio-group.scss';
+import styles from './radio-group.styles';
 
 /**
  * @since 2.0
@@ -15,7 +15,7 @@ import styles from 'sass:./radio-group.scss';
  */
 @customElement('sl-radio-group')
 export default class SlRadioGroup extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   /** The radio group label. Required for proper accessibility. Alternatively, you can use the label slot. */
   @property() label = '';

@@ -1,10 +1,10 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { styleMap } from 'lit-html/directives/style-map';
 import { clamp } from '../../internal/math';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
-import styles from 'sass:./image-comparer.scss';
+import styles from './image-comparer.styles';
 
 /**
  * @since 2.0
@@ -29,7 +29,7 @@ import styles from 'sass:./image-comparer.scss';
  */
 @customElement('sl-image-comparer')
 export default class SlImageComparer extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   @query('.image-comparer') base: HTMLElement;
   @query('.image-comparer__handle') handle: HTMLElement;

@@ -1,6 +1,6 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import styles from 'sass:./tab-panel.scss';
+import styles from './tab-panel.styles';
 
 let id = 0;
 
@@ -14,7 +14,7 @@ let id = 0;
  */
 @customElement('sl-tab-panel')
 export default class SlTabPanel extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   private componentId = `tab-panel-${++id}`;
 

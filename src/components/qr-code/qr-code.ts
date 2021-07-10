@@ -1,9 +1,9 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { styleMap } from 'lit-html/directives/style-map';
 import { watch } from '../../internal/watch';
 import QrCreator from 'qr-creator';
-import styles from 'sass:./qr-code.scss';
+import styles from './qr-code.styles';
 
 /**
  * @since 2.0
@@ -13,7 +13,7 @@ import styles from 'sass:./qr-code.scss';
  */
 @customElement('sl-qr-code')
 export default class SlQrCode extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   @query('canvas') canvas: HTMLElement;
 

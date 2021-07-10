@@ -1,4 +1,4 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
@@ -9,7 +9,7 @@ import { clamp } from '../../internal/math';
 import type SlDropdown from '../dropdown/dropdown';
 import type SlInput from '../input/input';
 import color from 'color';
-import styles from 'sass:./color-picker.scss';
+import styles from './color-picker.styles';
 
 /**
  * @since 2.0
@@ -44,7 +44,7 @@ import styles from 'sass:./color-picker.scss';
  */
 @customElement('sl-color-picker')
 export default class SlColorPicker extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   @query('[part="input"]') input: SlInput;
   @query('[part="preview"]') previewButton: HTMLButtonElement;

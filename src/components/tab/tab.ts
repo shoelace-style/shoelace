@@ -1,8 +1,8 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { emit } from '../../internal/event';
-import styles from 'sass:./tab.scss';
+import styles from './tab.styles';
 
 let id = 0;
 
@@ -23,7 +23,7 @@ let id = 0;
  */
 @customElement('sl-tab')
 export default class SlTab extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   @query('.tab') tab: HTMLElement;
 

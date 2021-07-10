@@ -1,6 +1,6 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
-import styles from 'sass:./button-group.scss';
+import styles from './button-group.styles';
 
 /**
  * @since 2.0
@@ -12,7 +12,7 @@ import styles from 'sass:./button-group.scss';
  */
 @customElement('sl-button-group')
 export default class SlButtonGroup extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   @query('slot') defaultSlot: HTMLSlotElement;
 

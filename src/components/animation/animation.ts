@@ -1,9 +1,9 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property, queryAsync } from 'lit/decorators.js';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import { animations } from './animations';
-import styles from 'sass:./animation.scss';
+import styles from './animation.styles';
 
 /**
  * @since 2.0
@@ -17,7 +17,7 @@ import styles from 'sass:./animation.scss';
  */
 @customElement('sl-animation')
 export default class SlAnimation extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   private animation: Animation;
   private hasStarted = false;

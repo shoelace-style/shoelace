@@ -1,4 +1,4 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { styleMap } from 'lit-html/directives/style-map';
@@ -7,7 +7,7 @@ import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import { focusVisible } from '../../internal/focus-visible';
 import { clamp } from '../../internal/math';
-import styles from 'sass:./rating.scss';
+import styles from './rating.styles';
 
 /**
  * @since 2.0
@@ -26,7 +26,7 @@ import styles from 'sass:./rating.scss';
  */
 @customElement('sl-rating')
 export default class SlRating extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   @query('.rating') rating: HTMLElement;
 

@@ -1,4 +1,4 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { emit } from '../../internal/event';
 import type SlButton from '../button/button';
@@ -10,7 +10,7 @@ import type SlRange from '../range/range';
 import type SlSelect from '../select/select';
 import type SlSwitch from '../switch/switch';
 import type SlTextarea from '../textarea/textarea';
-import styles from 'sass:./form.scss';
+import styles from './form.styles';
 
 interface FormControl {
   tag: string;
@@ -34,7 +34,7 @@ interface FormControl {
  */
 @customElement('sl-form')
 export default class SlForm extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   @query('.form') form: HTMLElement;
 

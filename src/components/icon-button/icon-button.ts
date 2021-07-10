@@ -1,9 +1,9 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
 import { focusVisible } from '../../internal/focus-visible';
-import styles from 'sass:./icon-button.scss';
+import styles from './icon-button.styles';
 
 /**
  * @since 2.0
@@ -15,7 +15,7 @@ import styles from 'sass:./icon-button.scss';
  */
 @customElement('sl-icon-button')
 export default class SlIconButton extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   @query('button') button: HTMLButtonElement;
 

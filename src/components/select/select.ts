@@ -1,4 +1,4 @@
-import { LitElement, TemplateResult, html, unsafeCSS } from 'lit';
+import { LitElement, TemplateResult, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
@@ -11,7 +11,7 @@ import type SlDropdown from '../dropdown/dropdown';
 import type SlIconButton from '../icon-button/icon-button';
 import type SlMenu from '../menu/menu';
 import type SlMenuItem from '../menu-item/menu-item';
-import styles from 'sass:./select.scss';
+import styles from './select.styles';
 
 let id = 0;
 
@@ -48,7 +48,7 @@ let id = 0;
  */
 @customElement('sl-select')
 export default class SlSelect extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   @query('.select') dropdown: SlDropdown;
   @query('.select__box') box: SlDropdown;

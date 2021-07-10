@@ -1,8 +1,8 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { emit } from '../../internal/event';
-import styles from 'sass:./tag.scss';
+import styles from './tag.styles';
 
 /**
  * @since 2.0
@@ -20,7 +20,7 @@ import styles from 'sass:./tag.scss';
  */
 @customElement('sl-tag')
 export default class SlTag extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   /** The tag's type. */
   @property({ reflect: true }) type: 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text' = 'primary';

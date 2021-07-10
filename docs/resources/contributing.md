@@ -213,7 +213,7 @@ This convention avoids the problem of browsers lowercasing attributes, causing s
 
 To expose custom properties as part of a component's API, scope them to the `:host` block.
 
-```scss
+```css
 :host {
   --color: var(--sl-color-primary-500);
   --background-color: var(--sl-color-gray-100);
@@ -248,12 +248,6 @@ CSS variables are scoped to the host element and can be reused throughout the co
 Parts let you target a specific element inside the component's shadow DOM but, by design, you can't target a part's children or siblings. You can _only_ customize the part itself. Use a part when you need to allow a single element inside the component to accept styles.
 
 This convention can be relaxed when the developer experience is greatly improved by not following these suggestions.
-
-### A Note About Sass
-
-The Shoelace _source_ is developed using Sass for the convenience of nested selectors, imports, and tedious things such as color palette generation. By design, Sass variables, color functions, and other preprocessor-specific feaures are not used in the source and will not be accepted in a PR.
-
-Consumers of the library should never need to worry about preprocessing the library.
 
 ### Form Controls
 

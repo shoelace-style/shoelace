@@ -1,4 +1,4 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { animateTo, stopAnimations } from '../../internal/animate';
@@ -6,7 +6,7 @@ import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import { waitForEvent } from '../../internal/event';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
-import styles from 'sass:./alert.scss';
+import styles from './alert.styles';
 
 const toastStack = Object.assign(document.createElement('div'), { className: 'sl-toast-stack' });
 
@@ -37,7 +37,7 @@ const toastStack = Object.assign(document.createElement('div'), { className: 'sl
 
 @customElement('sl-alert')
 export default class SlAlert extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   private autoHideTimeout: any;
 

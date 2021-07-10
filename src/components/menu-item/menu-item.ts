@@ -1,8 +1,8 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { watch } from '../../internal/watch';
-import styles from 'sass:./menu-item.scss';
+import styles from './menu-item.styles';
 
 /**
  * @since 2.0
@@ -22,7 +22,7 @@ import styles from 'sass:./menu-item.scss';
  */
 @customElement('sl-menu-item')
 export default class SlMenuItem extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   @query('.menu-item') menuItem: HTMLElement;
 

@@ -12,6 +12,8 @@ This release improves the developer experience of `<sl-animation>`. Previously, 
 
 This is a lot more intuitive and makes it easier to activate animations imperatively. In addition, the `play` attribute is automatically removed automatically when the animation finishes or cancels, making it easier to restart finite animations. Lastly, the animation's timing is now accessible through the new `currentTime` property instead of `getCurrentTime()` and `setCurrentTime()`.
 
+In addition, Shoelace no longer uses Sass. Component styles now use Lit's template literal styles and theme files use pure CSS.
+
 - 🚨 BREAKING: removed the `pause` attribute from `sl-animation` (use `play` to start and stop the animation instead)
 - 🚨 BREAKING: removed `getCurrentTime()` and `setCurrentTime()` from `sl-animation` (use the `currentTime` property instead)
 - 🚨 BREAKING: removed the `close-on-select` attribute from `sl-dropdown` (use `stay-open-on-select` instead)
@@ -20,6 +22,8 @@ This is a lot more intuitive and makes it easier to activate animations imperati
 - Fixed a bug in `sl-menu` where pressing <kbd>Enter</kbd> in a menu didn't work with click handlers
 - Reworked `sl-menu` and `sl-menu-item` to use a roving tab index and improve keyboard accessibility
 - Reworked tabbable logic to be more performant [#466](https://github.com/shoelace-style/shoelace/issues/466)
+- Switched component stylesheets from Sass to Lit's template literal styles
+- Switched theme stylesheets from Sass to CSS
 
 ## 2.0.0-beta.45
 

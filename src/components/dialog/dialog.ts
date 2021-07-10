@@ -1,4 +1,4 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
@@ -11,7 +11,7 @@ import { hasSlot } from '../../internal/slot';
 import { isPreventScrollSupported } from '../../internal/support';
 import Modal from '../../internal/modal';
 import { setDefaultAnimation, getAnimation } from '../../utilities/animation-registry';
-import styles from 'sass:./dialog.scss';
+import styles from './dialog.styles';
 
 const hasPreventScroll = isPreventScrollSupported();
 
@@ -59,7 +59,7 @@ let id = 0;
  */
 @customElement('sl-dialog')
 export default class SlDialog extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   @query('.dialog') dialog: HTMLElement;
   @query('.dialog__panel') panel: HTMLElement;

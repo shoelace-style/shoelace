@@ -1,4 +1,4 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { Instance as PopperInstance, createPopper } from '@popperjs/core/dist/esm';
@@ -11,7 +11,7 @@ import { getTabbableBoundary } from '../../internal/tabbable';
 import { setDefaultAnimation, getAnimation } from '../../utilities/animation-registry';
 import type SlMenu from '../menu/menu';
 import type SlMenuItem from '../menu-item/menu-item';
-import styles from 'sass:./dropdown.scss';
+import styles from './dropdown.styles';
 
 let id = 0;
 
@@ -36,7 +36,7 @@ let id = 0;
  */
 @customElement('sl-dropdown')
 export default class SlDropdown extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   @query('.dropdown__trigger') trigger: HTMLElement;
   @query('.dropdown__panel') panel: HTMLElement;

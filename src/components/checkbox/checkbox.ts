@@ -1,10 +1,10 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
-import styles from 'sass:./checkbox.scss';
+import styles from './checkbox.styles';
 
 let id = 0;
 
@@ -26,7 +26,7 @@ let id = 0;
  */
 @customElement('sl-checkbox')
 export default class SlCheckbox extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   @query('input[type="checkbox"]') input: HTMLInputElement;
 

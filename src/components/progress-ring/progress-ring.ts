@@ -1,7 +1,7 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { watch } from '../../internal/watch';
-import styles from 'sass:./progress-ring.scss';
+import styles from './progress-ring.styles';
 
 /**
  * @since 2.0
@@ -17,7 +17,7 @@ import styles from 'sass:./progress-ring.scss';
  */
 @customElement('sl-progress-ring')
 export default class SlProgressRing extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   @query('.progress-ring__indicator') indicator: SVGCircleElement;
 

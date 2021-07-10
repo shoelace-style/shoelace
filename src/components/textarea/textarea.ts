@@ -1,4 +1,4 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
@@ -6,7 +6,7 @@ import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import { getLabelledBy, renderFormControl } from '../../internal/form-control';
 import { hasSlot } from '../../internal/slot';
-import styles from 'sass:./textarea.scss';
+import styles from './textarea.styles';
 
 let id = 0;
 
@@ -30,7 +30,7 @@ let id = 0;
  */
 @customElement('sl-textarea')
 export default class SlTextarea extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   @query('.textarea__control') input: HTMLTextAreaElement;
 

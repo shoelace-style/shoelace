@@ -1,9 +1,9 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, query } from 'lit/decorators.js';
 import { emit } from '../../internal/event';
 import { getTextContent } from '../../internal/slot';
 import type SlMenuItem from '../menu-item/menu-item';
-import styles from 'sass:./menu.scss';
+import styles from './menu.styles';
 
 /**
  * @since 2.0
@@ -17,7 +17,7 @@ import styles from 'sass:./menu.scss';
  */
 @customElement('sl-menu')
 export default class SlMenu extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   @query('.menu') menu: HTMLElement;
   @query('slot') defaultSlot: HTMLSlotElement;
