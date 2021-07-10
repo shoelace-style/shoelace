@@ -7,7 +7,31 @@ Generates a [QR code](https://www.qrcode.com/) and renders it using the [Canvas 
 QR codes are useful for providing small pieces of information to users who can quickly scan them with a smartphone. Most smartphones have built-in QR code scanners, so simply pointing the camera at a QR code will decode it and allow the user to visit a website, dial a phone number, read a message, etc.
 
 ```html preview
-<sl-qr-code value="https://shoelace.style/" label="Scan this code to visit Shoelace on the web!"></sl-qr-code>
+<div class="qr-overview">
+  <sl-qr-code value="https://shoelace.style/" label="Scan this code to visit Shoelace on the web!"></sl-qr-code>
+  <br>
+
+  <sl-input maxlength="255" clearable></sl-input>
+</div>
+
+<script>
+  const container = document.querySelector('.qr-overview');
+  const qrCode = container.querySelector('sl-qr-code');
+  const input = container.querySelector('sl-input');
+
+  input.value = qrCode.value;
+  input.addEventListener('sl-input', () => qrCode.value = input.value);
+</script>
+
+<style>
+  .qr-overview {
+    max-width: 256px;
+  }
+
+  .qr-overview sl-input {
+    margin-top: 1rem;
+  }
+</style>
 ```
 
 ## Examples
