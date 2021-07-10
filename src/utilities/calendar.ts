@@ -113,6 +113,8 @@ export class CalendarView {
 
 export class CalendarUtils {
   /**
+   * Quickly compare two dates
+   *
    * @param   dateLeft   Left `CalendarDate` object
    * @param   dateRight  Right `CalendarDate` object
    * @return  Comparison result:
@@ -132,6 +134,28 @@ export class CalendarUtils {
     if (dateLeft.day > dateRight.day) return 1;
 
     return 0;
+  }
+
+  /**
+   * Calculates the difference between two dates (dateLeft - dateRight) in days
+   *
+   * @param   dateLeft   Date object
+   * @param   dateRight  Date object
+   * @return  Days between the dates
+   */
+  static diff(dateLeft: CalendarDate | Date, dateRight: CalendarDate | Date) {
+    if (dateLeft instanceof Date) dateLeft = this.getCalendarDay(dateLeft);
+    if (dateRight instanceof Date) dateRight = this.getCalendarDay(dateRight);
+
+    const dateLeftDate = new Date(
+      Date.UTC(dateLeft.year, dateLeft.month, dateLeft.day, 0, 0, 0, 0)
+    );
+    const dateRightDate = new Date(
+      Date.UTC(dateRight.year, dateRight.month, dateRight.day, 0, 0, 0, 0)
+    );
+    return Math.ceil(
+      (dateLeftDate.getTime() - dateRightDate.getTime()) / 86400000
+    );
   }
 
   static createDate(year: number, month: number, day: number, enforceEndOfMonth = true) {

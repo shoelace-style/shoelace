@@ -99,7 +99,7 @@ export default class SlDatePicker extends LitElement {
   hoveredDay?: Date;
 
   /** Language for locale date format. */
-  @property({ type: String})
+  @property({ type: String })
   lang: string = 'en-US';
 
   /** Selected month (MM). */
@@ -130,7 +130,7 @@ export default class SlDatePicker extends LitElement {
   @property({
     type: String,
     attribute: 'start-date',
-    converter: attributeToDate,
+    converter: attributeToDate
   })
   startDate: Date = new Date();
 
@@ -146,9 +146,13 @@ export default class SlDatePicker extends LitElement {
   @property({ type: Array })
   disabledDates?: Date[];
 
-  /** Enable date range selection, multiple dates. */
+  /** Enable date range selection. */
   @property({ type: Boolean })
   range: boolean = false;
+
+  /** Limit date range selection. */
+  @property({ type: Number, attribute: 'range-max-days' })
+  rangeMaxDays?: number;
 
   /** Day of the week to start the calendar defaults to 0 (Sunday). */
   @property({ type: Number, attribute: 'first-day-of-week' })
@@ -231,7 +235,7 @@ export default class SlDatePicker extends LitElement {
   }
 
   private handleDayClick(day: CalendarDate) {
-    if(!this.isAllowedDate(day)) return;
+    if (!this.isAllowedDate(day)) return;
 
     const date = CalendarUtils.getDateObject(day);
     this.setDate(date);
@@ -247,7 +251,13 @@ export default class SlDatePicker extends LitElement {
   private handleRangeSelection(date: Date) {
     this.isSelectionActive = !this.isSelectionActive;
 
-    // multiple days selection
+    // limit date selection
+    if (!this.isSelectionActive && this.rangeMaxDays) {
+      let diff = CalendarUtils.diff(this.startDate, date);
+      if (Math.abs(diff) > this.rangeMaxDays) this.isSelectionActive = true;
+    }
+
+    // multiple days selection (start)
     if (this.isSelectionActive) {
       this.startDate = date;
       this.hoveredDay = date;
@@ -480,7 +490,7 @@ export default class SlDatePicker extends LitElement {
         if (this.range) {
           this.handleRangeSelection(nextDate);
         } else {
-          if(!this.isAllowedDate(day)) {
+          if (!this.isAllowedDate(day)) {
             e.preventDefault();
             return;
           }
@@ -569,13 +579,18 @@ export default class SlDatePicker extends LitElement {
   }
 
   private isDateInRange(day: CalendarDate) {
-    if (this.range && this.hoveredDay && this.isSelectionActive) {
+    if (this.startDate && this.range && this.hoveredDay && this.isSelectionActive) {
       const date = CalendarUtils.getDateObject(day);
 
-      if (!this.startDate || !this.hoveredDay) return false;
+      if (this.rangeMaxDays) {
+        let diff = CalendarUtils.diff(this.startDate, this.hoveredDay);
+        if (Math.abs(diff) > this.rangeMaxDays) return false;
+      }
+
       if (this.startDate > this.hoveredDay) {
         return date < this.startDate && date > this.hoveredDay;
       }
+
       return date > this.startDate && date < this.hoveredDay;
     }
     return false;
@@ -606,8 +621,8 @@ export default class SlDatePicker extends LitElement {
   }
 
   private isAllowedDate(day: CalendarDate): boolean {
-    if(this.range) return true;
-    if(this.disabledDates?.some(date => CalendarUtils.compare(date, day) === 0)) return false;
+    if (this.range) return true;
+    if (this.disabledDates?.some(date => CalendarUtils.compare(date, day) === 0)) return false;
     return true;
   }
 

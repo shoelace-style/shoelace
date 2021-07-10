@@ -166,6 +166,20 @@ To enable multiple selection set the `range` attribute, in this way it is possib
 ></sl-date-picker>
 ```
 
+### Limit dates selection
+
+Limit date range selection to a number of specified days.
+
+```html preview
+<sl-date-picker
+  year="2021"
+  month="6"
+  start-date="2021-06-12"
+  range-max-days="3"
+  range
+></sl-date-picker>
+```
+
 ### Readonly
 
 The `sl-date-picker` component can be displayed as read-only. This mode does not allow date selection.
