@@ -35,87 +35,87 @@ Display the `sl-date-picker` using the dropdown mode and enable multiple selecti
 ```html preview
 <style>
     sl-icon.calendar {
-        position: absolute;
-        z-index: 1;
-        color: var(--sl-color-primary-500);
-        font-size: 1.5rem;
-        top: 50%;
-        transform: translateY(-50%);
-        right: 55%;
+      position: absolute;
+      z-index: 1;
+      color: var(--sl-color-primary-500);
+      font-size: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 55%;
     }
 
     sl-input::part(base) {
-        width: 160px;
-        height: 38.5px;
-        --sl-input-border-color-focus: var(--sl-input-border-color);
-        --focus-ring: 0 0 0 0 transparent;
+      width: 160px;
+      height: 38.5px;
+      --sl-input-border-color-focus: var(--sl-input-border-color);
+      --focus-ring: 0 0 0 0 transparent;
     }
 
     sl-input::part(base):hover,
     sl-input::part(base):focus,
     sl-input::part(base):active {
-        border-color: var(--sl-input-border-color)
+      border-color: var(--sl-input-border-color)
     }
 
     sl-input.start::part(base) {
-        border-right: none;
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
+      border-right: none;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
     }
 
     sl-input.end::part(base) {
-        border-left: none;
-        border-right: none;
-        border-radius: 0;
+      border-left: none;
+      border-right: none;
+      border-radius: 0;
     }
 
     sl-input.end::part(input) {
-        text-align: left;
-        padding-left: 15px
+      text-align: left;
+      padding-left: 15px
     }
 
     sl-date-picker::part(trigger-button) {
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
     }
 </style>
 
 <sl-date-picker
-    year="2021"
-    month="6"
-    start-date="2021-06-12"
-    display="dropdown"
-    class="datepicker"
-    range>
-    <sl-input class="start" size="medium" readonly placeholder="from"></sl-input>
-    <sl-icon class="calendar" name="arrow-right"></sl-icon>
-    <sl-input class="end" size="medium" readonly placeholder="to"></sl-input>
+  year="2021"
+  month="6"
+  start-date="2021-06-12"
+  display="dropdown"
+  class="datepicker"
+  range>
+  <sl-input class="start" size="medium" readonly placeholder="from"></sl-input>
+  <sl-icon class="calendar" name="arrow-right"></sl-icon>
+  <sl-input class="end" size="medium" readonly placeholder="to"></sl-input>
 </sl-date-picker>
 
 
 <script>
-    const datepicker = document.querySelector('.datepicker');
-    const startDateInput = datepicker.querySelector('.start');
-    const endDateInput = datepicker.querySelector('.end');
+  const datepicker = document.querySelector('.datepicker');
+  const startDateInput = datepicker.querySelector('.start');
+  const endDateInput = datepicker.querySelector('.end');
 
-    datepicker.addEventListener('sl-date-selected', event => {
-      const date = event.detail;
-      startDateInput.value = format(date);
-    });
+  datepicker.addEventListener('sl-date-selected', event => {
+    const date = event.detail;
+    startDateInput.value = format(date);
+  });
 
-    datepicker.addEventListener('sl-range-selected', event => {
-      const date = event.detail;
+  datepicker.addEventListener('sl-range-selected', event => {
+    const date = event.detail;
 
-      startDateInput.value = format(date.start);
-      endDateInput.value = format(date.end);
-    });
+    startDateInput.value = format(date.start);
+    endDateInput.value = format(date.end);
+  });
 
-    function format(value) {
-        var d = value.getDate();
-        var m = value.getMonth() + 1;
-        var y = value.getFullYear();
-        return (d <= 9 ? '0' + d : d) + '.' + (m <= 9 ? '0' + m : m) + '.' + y;
-    }
+  function format(value) {
+    var d = value.getDate();
+    var m = value.getMonth() + 1;
+    var y = value.getFullYear();
+    return (d <= 9 ? '0' + d : d) + '.' + (m <= 9 ? '0' + m : m) + '.' + y;
+  }
 </script>
 ```
 
@@ -132,6 +132,25 @@ Configuring minimum and maximum selectable dates is great for limiting the user 
   min-date="2021-05-06"
   max-date="2021-06-25"
 ></sl-date-picker>
+```
+
+### Disabled dates
+
+Disabled dates can be defined using the property `disabledDates`. These date are not selectable in calendar.
+
+```html preview
+<sl-date-picker
+  class="datepicker-disabled-dates"
+  year="2021"
+  month="5"
+  start-date="2021-05-12"
+  display="inline"
+></sl-date-picker>
+
+<script>
+  const datepicker = document.querySelector('.datepicker-disabled-dates');
+  datepicker.disabledDates = [new Date(2021, 04, 06), new Date(2021, 04, 23)];
+</script>
 ```
 
 ### Multiple dates selection

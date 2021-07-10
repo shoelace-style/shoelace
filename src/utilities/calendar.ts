@@ -8,24 +8,19 @@ export interface CalendarDate {
 }
 
 export interface CalendarOptions {
-  siblingMonths?: boolean;
   weekNumbers?: boolean;
   firstDayOfWeek?: number;
-  disabledDates?: CalendarDate[];
 }
 
 export class CalendarView {
   month: number;
   year: number;
-  siblingMonths: boolean;
   weekNumbers: boolean;
   firstDayOfWeek: number;
-  disabledDates: CalendarDate[];
 
-  constructor({ weekNumbers = true, firstDayOfWeek = 0, disabledDates = [] }: CalendarOptions = {}) {
+  constructor({ weekNumbers = true, firstDayOfWeek = 0 }: CalendarOptions = {}) {
     this.weekNumbers = weekNumbers;
     this.firstDayOfWeek = firstDayOfWeek;
-    this.disabledDates = disabledDates;
   }
 
   createCalendar(year: number, month: number): CalendarDate[] {
@@ -327,20 +322,20 @@ export type DateMonthFormat = 'numeric' | '2-digit' | 'long' | 'short' | 'narrow
 export type DateDayFormat = 'long' | 'short' | 'narrow';
 
 export class CalendarLocale {
-  private _firstDayOfWeek: number;
-  private _lang: string;
+  private firstDayOfWeek: number;
+  private lang: string;
 
   constructor(firstDayOfWeek: number = 0, lang: string = 'en-US') {
-    this._firstDayOfWeek = firstDayOfWeek;
-    this._lang = lang;
+    this.firstDayOfWeek = firstDayOfWeek;
+    this.lang = lang;
   }
 
   getDayNames = (format: DateDayFormat = 'long') => {
     const days = [...Array(7).keys()].map(d =>
-      new Date(2017, 9, d + 1).toLocaleString(this._lang, { weekday: format }).slice(0, 2)
+      new Date(2017, 9, d + 1).toLocaleString(this.lang, { weekday: format }).slice(0, 2)
     );
 
-    for (let i = 6; i > 6 - this._firstDayOfWeek; i--) {
+    for (let i = 6; i > 6 - this.firstDayOfWeek; i--) {
       const day = days.shift();
       if (day) days.push(day);
     }
@@ -349,14 +344,14 @@ export class CalendarLocale {
   };
 
   getMonthName(month: number, format: DateMonthFormat = 'short'): string {
-    return new Date(2017, month, 0).toLocaleString(this._lang, {
+    return new Date(2017, month, 0).toLocaleString(this.lang, {
       month: format
     });
   }
 
   getMonths(format: DateMonthFormat = 'short'): Array<{ name: string; number: number }> {
     return [...Array(12).keys()].map(m => ({
-      name: new Date(2017, m, 1).toLocaleString(this._lang, { month: format }),
+      name: new Date(2017, m, 1).toLocaleString(this.lang, { month: format }),
       number: m + 1
     }));
   }

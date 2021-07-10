@@ -9,8 +9,6 @@ import type SlDropdown from '../dropdown/dropdown';
 import type SlButton from '../icon-button/icon-button';
 import styles from 'sass:./date-picker.scss';
 
-var calendar: CalendarView;
-
 const attributeToDate = (value: string): Date | undefined => {
   if (!value) return;
   const date = CalendarUtils.parseDateFromString(value);
@@ -42,6 +40,7 @@ export default class SlDatePicker extends LitElement {
   static styles = unsafeCSS(styles);
 
   private locale: CalendarLocale;
+  private calendar: CalendarView;
   private _focusedDay: Date;
 
   // we use a custom setter to prevent update request from Lit
@@ -100,11 +99,11 @@ export default class SlDatePicker extends LitElement {
   hoveredDay?: Date;
 
   /** Language for locale date format. */
-  @property({ type: String, reflect: true })
+  @property({ type: String})
   lang: string = 'en-US';
 
   /** Selected month (MM). */
-  @property({ type: Number, reflect: true })
+  @property({ type: Number })
   month: number = new Date().getMonth() + 1;
 
   /** Selected year (YYY) */
@@ -132,7 +131,6 @@ export default class SlDatePicker extends LitElement {
     type: String,
     attribute: 'start-date',
     converter: attributeToDate,
-    reflect: true
   })
   startDate: Date = new Date();
 
@@ -143,6 +141,10 @@ export default class SlDatePicker extends LitElement {
     converter: attributeToDate
   })
   endDate?: Date;
+
+  /** List of not allowed dates. */
+  @property({ type: Array })
+  disabledDates?: Date[];
 
   /** Enable date range selection, multiple dates. */
   @property({ type: Boolean })
@@ -157,7 +159,7 @@ export default class SlDatePicker extends LitElement {
   today: boolean = false;
 
   /** Display mode (inline or dropdown). */
-  @property({ reflect: true })
+  @property({ type: String })
   display: 'inline' | 'dropdown' = 'inline';
 
   /** Display calenendar in read only mode. */
@@ -183,9 +185,9 @@ export default class SlDatePicker extends LitElement {
   connectedCallback() {
     super.connectedCallback();
 
-    calendar = new CalendarView({ firstDayOfWeek: this.firstDayOfWeek });
+    this.calendar = new CalendarView({ firstDayOfWeek: this.firstDayOfWeek });
     this.locale = new CalendarLocale(this.firstDayOfWeek, this.lang);
-    this.calendarDays = calendar.createCalendar(this.year, this.month);
+    this.calendarDays = this.calendar.createCalendar(this.year, this.month);
 
     if (this.display === 'dropdown') {
       this.addEventListener('sl-after-show', () => this.firstFocusElement());
@@ -229,6 +231,8 @@ export default class SlDatePicker extends LitElement {
   }
 
   private handleDayClick(day: CalendarDate) {
+    if(!this.isAllowedDate(day)) return;
+
     const date = CalendarUtils.getDateObject(day);
     this.setDate(date);
 
@@ -474,9 +478,12 @@ export default class SlDatePicker extends LitElement {
       case 'Space':
         nextDate = date;
         if (this.range) {
-          console.log('rangeeee');
           this.handleRangeSelection(nextDate);
         } else {
+          if(!this.isAllowedDate(day)) {
+            e.preventDefault();
+            return;
+          }
           this.startDate = nextDate;
           emit<Date>(this, 'sl-date-selected', { detail: nextDate });
         }
@@ -494,7 +501,6 @@ export default class SlDatePicker extends LitElement {
       if (!this.isDisabledDate(nextFocusedDate)) {
         this.setDate(nextDate);
         if (this.range && this.isSelectionActive) {
-          console.log('porco dio range!');
           this.hoveredDay = nextDate;
         }
       }
@@ -531,7 +537,7 @@ export default class SlDatePicker extends LitElement {
     this.year = date.getFullYear();
 
     if (this.month !== currMonth || this.year !== currYear) {
-      this.calendarDays = calendar.createCalendar(this.year, this.month);
+      this.calendarDays = this.calendar.createCalendar(this.year, this.month);
     }
     this.updateComplete.then(() => (this.focusedDay = date));
   }
@@ -599,6 +605,12 @@ export default class SlDatePicker extends LitElement {
     return CalendarUtils.compare(day, this.minDate) === -1 || CalendarUtils.compare(this.maxDate, day) === -1;
   }
 
+  private isAllowedDate(day: CalendarDate): boolean {
+    if(this.range) return true;
+    if(this.disabledDates?.some(date => CalendarUtils.compare(date, day) === 0)) return false;
+    return true;
+  }
+
   private chunk<T>(array: T[], size: number): T[][] {
     const result = [];
     for (let i = 0; i < array.length; i += size) {
@@ -607,12 +619,6 @@ export default class SlDatePicker extends LitElement {
 
     return result;
   }
-
-  // private getCalendarHeaderView(): string {
-  //   if (this.range) {
-  //     return `${this.startDate.getDate()}${this.endDate ? '-' + this.endDate.getDate() + ' ' : ''}`;
-  //   } else return `${this.startDate.getDate()} `;
-  // }
 
   private getCalendarWeekDaysView(): TemplateResult[] {
     return this.locale.getDayNames().map(name => html`<td class="week-day" aria-label="${name}">${name}</td>`);
@@ -717,6 +723,7 @@ export default class SlDatePicker extends LitElement {
                         disabled: this.isDisabledDate(day),
                         range: this.isDateInRange(day),
                         readonly: this.readonly,
+                        'not-allowed': !this.isAllowedDate(day),
                         'sibling-months': day.siblingMonth!
                       })}
                       @click=${() => this.handleDayClick(day)}

@@ -76,11 +76,15 @@ td {
     outline: none;
   }
 
-  &.disabled {
-    pointer-events: none;
+  &.disabled,
+  &.not-allowed {
     color: var(--sl-color-gray-300);
     background-color: var(--sl-color-gray-100);
     border: none;
+  }
+
+  &.disabled {
+    pointer-events: none;
   }
 
   &.readonly {
