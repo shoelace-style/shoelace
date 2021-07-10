@@ -134,7 +134,7 @@ td {
 
 .inline {
   flex-direction: column;
-  overflow: hidden;
+  overflow-x: hidden;
   border-radius: var(--sl-border-radius-medium);
   border-style: solid;
   border-color: var(--sl-color-gray-300);
@@ -163,7 +163,7 @@ td {
 
       &.next-button::part(base),
       &.prev-button::part(base) {
-        max-width: 30px;
+        width: 30px;
       }
     }
   }
@@ -177,6 +177,7 @@ td {
 .dropdown {
   min-width: max-content;
   flex-direction: column;
+  overflow-x: hidden;
 
   .date-picker-wrap {
     display: inline-grid;
@@ -210,6 +211,11 @@ td {
 
       &.next-button {
         margin-left: 3px;
+      }
+
+      &.next-button::part(base),
+      &.prev-button::part(base) {
+        width: 30px;
       }
     }
   }
