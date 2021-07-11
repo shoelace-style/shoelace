@@ -20,7 +20,7 @@ For best results, use images that share the same dimensions. The slider can be c
 Use the `position` attribute to set the initial position of the slider. This is a percentage from `0` to `100`.
 
 ```html preview
-<sl-image-comparer position="0">
+<sl-image-comparer position="25">
   <img slot="before" src="https://images.unsplash.com/photo-1520903074185-8eca362b3dce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1200&q=80" alt="A person sitting on bricks wearing untied boots.">
   <img slot="after" src="https://images.unsplash.com/photo-1520640023173-50a135e35804?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80" alt="A person sitting on a yellow curb tying shoelaces on a boot.">
 </sl-image-comparer>

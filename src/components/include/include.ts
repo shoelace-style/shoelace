@@ -1,9 +1,9 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import { requestInclude } from './request';
-import styles from 'sass:./include.scss';
+import styles from './include.styles';
 
 /**
  * @since 2.0
@@ -14,7 +14,7 @@ import styles from 'sass:./include.scss';
  */
 @customElement('sl-include')
 export default class SlInclude extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   /** The location of the HTML file to include. */
   @property() src: string;
@@ -26,7 +26,7 @@ export default class SlInclude extends LitElement {
    * Allows included scripts to be executed. You must ensure the content you're including is trusted, otherwise this
    * option can lead to XSS vulnerabilities in your app!
    */
-  @property({ attribute: 'allow-scripts', type: Boolean }) allowScripts: boolean = false;
+  @property({ attribute: 'allow-scripts', type: Boolean }) allowScripts = false;
 
   executeScript(script: HTMLScriptElement) {
     // Create a copy of the script and swap it out so the browser executes it

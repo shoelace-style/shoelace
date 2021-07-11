@@ -1,4 +1,6 @@
 (() => {
+  const isDev = location.hostname === 'localhost';
+  const isNext = location.hostname === 'next.shoelace.style';
   const customElements = fetch('/dist/custom-elements.json')
     .then(res => res.json())
     .catch(err => console.error(err));
@@ -8,7 +10,7 @@
     table.innerHTML = `
       <thead>
         <tr>
-          <th>Property</th>
+          <th>Name</th>
           <th>Attribute</th>
           <th>Description</th>
           <th>Type</th>
@@ -40,7 +42,7 @@
     table.innerHTML = `
       <thead>
         <tr>
-          <th>Event</th>
+          <th>Name</th>
           <th>Description</th>
           <th>Event Detail</th>
         </tr>
@@ -68,7 +70,7 @@
     table.innerHTML = `
       <thead>
         <tr>
-          <th>Method</th>
+          <th>Name</th>
           <th>Description</th>
           <th>Arguments</th>
         </tr>
@@ -106,7 +108,7 @@
     table.innerHTML = `
       <thead>
         <tr>
-          <th>Slot</th>
+          <th>Name</th>
           <th>Description</th>
         </tr>
       </thead>
@@ -246,17 +248,10 @@
 
   function getAllComponents(metadata) {
     const allComponents = [];
-
-    metadata.modules.map(module => {
-      module.exports.map(ex => {
-        if (ex.kind === 'custom-element-definition') {
-          const tagName = ex.name;
-          const className = ex.declaration.name;
-          const component = module?.declarations.find(dec => dec.name === 'default');
-
-          if (component) {
-            allComponents.push(Object.assign(component, { className, tagName }));
-          }
+    metadata.modules?.map(module => {
+      module.declarations?.map(declaration => {
+        if (declaration.customElement) {
+          allComponents.push(declaration);
         }
       });
     });
@@ -280,7 +275,7 @@
       // Add version
       const version = document.createElement('div');
       version.classList.add('sidebar-version');
-      version.textContent = metadata.package.version;
+      version.textContent = isDev ? 'Development' : isNext ? 'Next' : metadata.package.version;
       target.appendChild(version);
 
       // Add repo buttons
@@ -325,7 +320,7 @@
         result += `
           <div class="component-header">
             <div class="component-header__tag">
-              <code>&lt;${component.tagName}&gt; | ${component.className}</code>
+              <code>&lt;${component.tagName}&gt; | ${component.name}</code>
             </div>
 
             <div class="component-header__info">
@@ -360,7 +355,7 @@
           // Look for a corresponding attribute
           const attribute = component.attributes?.find(attr => attr.fieldName === prop.name);
           if (attribute) {
-            prop.attribute = attribute.name;
+            prop.attribute = attribute.name || attribute.fieldName;
           }
 
           return prop.kind === 'field' && prop.privacy !== 'private';

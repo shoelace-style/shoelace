@@ -1,4 +1,4 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { emit } from '../../internal/event';
@@ -8,7 +8,7 @@ import { getOffset } from '../../internal/offset';
 import { scrollIntoView } from '../../internal/scroll';
 import type SlTab from '../tab/tab';
 import type SlTabPanel from '../tab-panel/tab-panel';
-import styles from 'sass:./tab-group.scss';
+import styles from './tab-group.styles';
 
 /**
  * @since 2.0
@@ -33,7 +33,7 @@ import styles from 'sass:./tab-group.scss';
  */
 @customElement('sl-tab-group')
 export default class SlTabGroup extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   @query('.tab-group') tabGroup: HTMLElement;
   @query('.tab-group__body') body: HTMLElement;
@@ -58,7 +58,7 @@ export default class SlTabGroup extends LitElement {
   @property() activation: 'auto' | 'manual' = 'auto';
 
   /** Disables the scroll arrows that appear when tabs overflow. */
-  @property({ attribute: 'no-scroll-controls', type: Boolean }) noScrollControls: boolean = false;
+  @property({ attribute: 'no-scroll-controls', type: Boolean }) noScrollControls = false;
 
   connectedCallback() {
     super.connectedCallback();

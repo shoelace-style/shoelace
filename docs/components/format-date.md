@@ -11,7 +11,7 @@ Localization is handled by the browser's [`Intl.DateTimeFormat` API](https://dev
 <sl-format-date date="2020-07-15T09:17:00-04:00"></sl-format-date>
 ```
 
-The `date` prop determines the date/time to use when formatting. It must be a string that [`Date.parse()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/parse) can interpret or a [`Date`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) object set via JavaScript. If omitted, the current date/time will be assumed.
+The `date` attribute determines the date/time to use when formatting. It must be a string that [`Date.parse()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/parse) can interpret or a [`Date`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) object set via JavaScript. If omitted, the current date/time will be assumed.
 
 ?> When using strings, avoid ambiguous dates such as `03/04/2020` which can be interpreted as March 4 or April 3 depending on the user's browser and locale. Instead, always use a valid [ISO 8601 date time string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/parse#Date_Time_String_Format) to ensure the date will be parsed properly by all clients.
 
@@ -44,7 +44,7 @@ Formatting options are based on those found in the [`Intl.DateTimeFormat` API](h
 
 ### Hour Formatting
 
-By default, the browser will determine whether to use 12-hour or 24-hour time. To force one or the other, set the `hourFormat` prop to `12` or `24`.
+By default, the browser will determine whether to use 12-hour or 24-hour time. To force one or the other, set the `hour-format` attribute to `12` or `24`.
 
 ```html preview
 <sl-format-date hour="numeric" minute="numeric" hour-format="12"></sl-format-date><br>

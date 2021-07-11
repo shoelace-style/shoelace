@@ -1,4 +1,4 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { animateTo, stopAnimations, shimKeyframesHeightAuto } from '../../internal/animate';
@@ -7,7 +7,7 @@ import { watch } from '../../internal/watch';
 import { waitForEvent } from '../../internal/event';
 import { focusVisible } from '../../internal/focus-visible';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
-import styles from 'sass:./details.scss';
+import styles from './details.styles';
 
 let id = 0;
 
@@ -36,7 +36,7 @@ let id = 0;
  */
 @customElement('sl-details')
 export default class SlDetails extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   @query('.details') details: HTMLElement;
   @query('.details__header') header: HTMLElement;
@@ -45,13 +45,13 @@ export default class SlDetails extends LitElement {
   private componentId = `details-${++id}`;
 
   /** Indicates whether or not the details is open. You can use this in lieu of the show/hide methods. */
-  @property({ type: Boolean, reflect: true }) open: boolean = false;
+  @property({ type: Boolean, reflect: true }) open = false;
 
   /** The summary to show in the details header. If you need to display HTML, use the `summary` slot instead. */
   @property() summary: string;
 
   /** Disables the details so it can't be toggled. */
-  @property({ type: Boolean, reflect: true }) disabled: boolean = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   connectedCallback() {
     super.connectedCallback();

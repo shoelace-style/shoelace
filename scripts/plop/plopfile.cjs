@@ -37,7 +37,7 @@ module.exports = function (plop) {
       },
       {
         type: 'add',
-        path: '../../src/components/{{ tagWithoutPrefix tag }}/{{ tagWithoutPrefix tag }}.scss',
+        path: '../../src/components/{{ tagWithoutPrefix tag }}/{{ tagWithoutPrefix tag }}.styles.ts',
         templateFile: 'templates/component/styles.hbs'
       },
       {

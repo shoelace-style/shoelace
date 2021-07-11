@@ -89,7 +89,7 @@ Icons are optional. Simply omit the `icon` slot if you don't want them.
 
 ### Duration
 
-Set the `duration` prop to automatically hide an alert after a period of time. This is useful for alerts that don't require acknowledgement.
+Set the `duration` attribute to automatically hide an alert after a period of time. This is useful for alerts that don't require acknowledgement.
 
 ```html preview
 <div class="alert-duration">
@@ -120,7 +120,7 @@ Set the `duration` prop to automatically hide an alert after a period of time. T
 
 To display an alert as a toast notification, or "toast", create the alert and call its `toast()` method. This will move the alert out of its position in the DOM and into [the toast stack](#the-toast-stack) where it will be shown. Once dismissed, it will be removed from the DOM completely. To reuse a toast, store a reference to it and call `toast()` again later on.
 
-You should always use the `closable` prop so users can dismiss the notification. It's also common to set a reasonable `duration` when the notification doesn't require acknowledgement.
+You should always use the `closable` attribute so users can dismiss the notification. It's also common to set a reasonable `duration` when the notification doesn't require acknowledgement.
 
 ```html preview
 <div class="alert-toast">

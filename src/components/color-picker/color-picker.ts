@@ -1,4 +1,4 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
@@ -9,7 +9,7 @@ import { clamp } from '../../internal/math';
 import type SlDropdown from '../dropdown/dropdown';
 import type SlInput from '../input/input';
 import color from 'color';
-import styles from 'sass:./color-picker.scss';
+import styles from './color-picker.styles';
 
 /**
  * @since 2.0
@@ -44,7 +44,7 @@ import styles from 'sass:./color-picker.scss';
  */
 @customElement('sl-color-picker')
 export default class SlColorPicker extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   @query('[part="input"]') input: SlInput;
   @query('[part="preview"]') previewButton: HTMLButtonElement;
@@ -60,7 +60,7 @@ export default class SlColorPicker extends LitElement {
   @state() private showCopyFeedback = false;
 
   /** The current color. */
-  @property() value: string = '#ffffff';
+  @property() value = '#ffffff';
 
   /**
    * The format to use for the display value. If opacity is enabled, these will translate to HEXA, RGBA, and HSLA
@@ -70,37 +70,37 @@ export default class SlColorPicker extends LitElement {
   @property() format: 'hex' | 'rgb' | 'hsl' = 'hex';
 
   /** Renders the color picker inline rather than inside a dropdown. */
-  @property({ type: Boolean, reflect: true }) inline: boolean = false;
+  @property({ type: Boolean, reflect: true }) inline = false;
 
   /** Determines the size of the color picker's trigger. This has no effect on inline color pickers. */
   @property() size: 'small' | 'medium' | 'large' = 'medium';
 
   /** Removes the format toggle. */
-  @property({ attribute: 'no-format-toggle', type: Boolean }) noFormatToggle: boolean = false;
+  @property({ attribute: 'no-format-toggle', type: Boolean }) noFormatToggle = false;
 
   /** The input's name attribute. */
-  @property() name: string = '';
+  @property() name = '';
 
   /** Disables the color picker. */
-  @property({ type: Boolean, reflect: true }) disabled: boolean = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /**
    * This will be true when the control is in an invalid state. Validity is determined by the `setCustomValidity()`
    * method using the browser's constraint validation API.
    */
-  @property({ type: Boolean, reflect: true }) invalid: boolean = false;
+  @property({ type: Boolean, reflect: true }) invalid = false;
 
   /**
    * Enable this option to prevent the panel from being clipped when the component is placed inside a container with
    * `overflow: auto|scroll`.
    */
-  @property({ type: Boolean }) hoist: boolean = false;
+  @property({ type: Boolean }) hoist = false;
 
   /** Whether to show the opacity slider. */
-  @property({ type: Boolean }) opacity: boolean = false;
+  @property({ type: Boolean }) opacity = false;
 
   /** By default, the value will be set in lowercase. Set this to true to set it in uppercase instead. */
-  @property({ type: Boolean }) uppercase: boolean = false;
+  @property({ type: Boolean }) uppercase = false;
 
   /**
    * An array of predefined color swatches to display. Can include any format the color picker can parse, including

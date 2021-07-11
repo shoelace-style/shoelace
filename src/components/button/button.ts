@@ -1,10 +1,10 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
 import { emit } from '../../internal/event';
 import { hasSlot } from '../../internal/slot';
-import styles from 'sass:./button.scss';
+import styles from './button.styles';
 
 /**
  * @since 2.0
@@ -27,7 +27,7 @@ import styles from 'sass:./button.scss';
  */
 @customElement('sl-button')
 export default class SlButton extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   @query('.button') button: HTMLButtonElement | HTMLLinkElement;
 
@@ -44,22 +44,22 @@ export default class SlButton extends LitElement {
   @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
 
   /** Draws the button with a caret for use with dropdowns, popovers, etc. */
-  @property({ type: Boolean, reflect: true }) caret: boolean = false;
+  @property({ type: Boolean, reflect: true }) caret = false;
 
   /** Disables the button. */
-  @property({ type: Boolean, reflect: true }) disabled: boolean = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Draws the button in a loading state. */
-  @property({ type: Boolean, reflect: true }) loading: boolean = false;
+  @property({ type: Boolean, reflect: true }) loading = false;
 
   /** Draws a pill-style button with rounded edges. */
-  @property({ type: Boolean, reflect: true }) pill: boolean = false;
+  @property({ type: Boolean, reflect: true }) pill = false;
 
   /** Draws a circle button. */
-  @property({ type: Boolean, reflect: true }) circle: boolean = false;
+  @property({ type: Boolean, reflect: true }) circle = false;
 
   /** Indicates if activating the button should submit the form. Ignored when `href` is set. */
-  @property({ type: Boolean, reflect: true }) submit: boolean = false;
+  @property({ type: Boolean, reflect: true }) submit = false;
 
   /** An optional name for the button. Ignored when `href` is set. */
   @property() name: string;

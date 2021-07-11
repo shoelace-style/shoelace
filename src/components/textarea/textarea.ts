@@ -1,4 +1,4 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
@@ -6,7 +6,7 @@ import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import { getLabelledBy, renderFormControl } from '../../internal/form-control';
 import { hasSlot } from '../../internal/slot';
-import styles from 'sass:./textarea.scss';
+import styles from './textarea.styles';
 
 let id = 0;
 
@@ -30,7 +30,7 @@ let id = 0;
  */
 @customElement('sl-textarea')
 export default class SlTextarea extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   @query('.textarea__control') input: HTMLTextAreaElement;
 
@@ -50,28 +50,28 @@ export default class SlTextarea extends LitElement {
   @property() name: string;
 
   /** The textarea's value attribute. */
-  @property() value: string = '';
+  @property() value = '';
 
   /** The textarea's label. Alternatively, you can use the label slot. */
   @property() label: string;
 
   /** The textarea's help text. Alternatively, you can use the help-text slot. */
-  @property({ attribute: 'help-text' }) helpText: string = '';
+  @property({ attribute: 'help-text' }) helpText = '';
 
   /** The textarea's placeholder text. */
   @property() placeholder: string;
 
   /** The number of rows to display by default. */
-  @property({ type: Number }) rows: number = 4;
+  @property({ type: Number }) rows = 4;
 
   /** Controls how the textarea can be resized. */
   @property() resize: 'none' | 'vertical' | 'auto' = 'vertical';
 
   /** Disables the textarea. */
-  @property({ type: Boolean, reflect: true }) disabled: boolean = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Makes the textarea readonly. */
-  @property({ type: Boolean, reflect: true }) readonly: boolean = false;
+  @property({ type: Boolean, reflect: true }) readonly = false;
 
   /** The minimum length of input that will be considered valid. */
   @property({ type: Number }) minlength: number;
@@ -83,13 +83,13 @@ export default class SlTextarea extends LitElement {
   @property() pattern: string;
 
   /** Makes the textarea a required field. */
-  @property({ type: Boolean, reflect: true }) required: boolean = false;
+  @property({ type: Boolean, reflect: true }) required = false;
 
   /**
    * This will be true when the control is in an invalid state. Validity is determined by props such as `type`,
    * `required`, `minlength`, and `maxlength` using the browser's constraint validation API.
    */
-  @property({ type: Boolean, reflect: true }) invalid: boolean = false;
+  @property({ type: Boolean, reflect: true }) invalid = false;
 
   /** The textarea's autocaptialize attribute. */
   @property() autocapitalize:
@@ -333,10 +333,10 @@ export default class SlTextarea extends LitElement {
                 hasHelpTextSlot: this.hasHelpTextSlot
               })
             )}
-            @change=${this.handleChange.bind(this)}
-            @input=${this.handleInput.bind(this)}
-            @focus=${this.handleFocus.bind(this)}
-            @blur=${this.handleBlur.bind(this)}
+            @change=${this.handleChange}
+            @input=${this.handleInput}
+            @focus=${this.handleFocus}
+            @blur=${this.handleBlur}
           ></textarea>
         </div>
       `

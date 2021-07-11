@@ -1,7 +1,7 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { watch } from '../../internal/watch';
-import styles from 'sass:./progress-ring.scss';
+import styles from './progress-ring.styles';
 
 /**
  * @since 2.0
@@ -17,15 +17,15 @@ import styles from 'sass:./progress-ring.scss';
  */
 @customElement('sl-progress-ring')
 export default class SlProgressRing extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   @query('.progress-ring__indicator') indicator: SVGCircleElement;
 
   /** The size of the progress ring in pixels. */
-  @property({ type: Number }) size: number = 128;
+  @property({ type: Number }) size = 128;
 
   /** The stroke width of the progress ring in pixels. */
-  @property({ attribute: 'stroke-width', type: Number }) strokeWidth: number = 4;
+  @property({ attribute: 'stroke-width', type: Number }) strokeWidth = 4;
 
   /** The current progress percentage, 0 - 100. */
   @property({ type: Number, reflect: true }) percentage: number;

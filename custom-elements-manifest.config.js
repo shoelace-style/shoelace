@@ -7,8 +7,6 @@ const { name, description, version, author, homepage, license } = packageData;
 export default {
   globs: ['src/components/**/*.ts'],
   exclude: ['**/*.test.ts'],
-  dev: true,
-  watch: true,
   plugins: [
     // Append package data
     {
@@ -24,8 +22,7 @@ export default {
       analyzePhase({ ts, node, moduleDoc, context }) {
         switch (node.kind) {
           case ts.SyntaxKind.ClassDeclaration:
-            const hasDefaultModifier = node?.modifiers?.some(mod => ts.SyntaxKind.DefaultKeyword === mod.kind);
-            const className = hasDefaultModifier ? 'default' : node?.name?.getText();
+            const className = node.name.getText();
             const classDoc = moduleDoc?.declarations?.find(declaration => declaration.name === className);
             const customTags = ['animation', 'dependency', 'since', 'status'];
             let customComments = '/**';

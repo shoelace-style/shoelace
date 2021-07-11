@@ -1,7 +1,7 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
-import styles from 'sass:./responsive-media.scss';
+import styles from './responsive-media.styles';
 
 /**
  * @since 2.0
@@ -11,13 +11,13 @@ import styles from 'sass:./responsive-media.scss';
  */
 @customElement('sl-responsive-media')
 export default class SlResponsiveMedia extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   /**
    * The aspect ratio of the embedded media in the format of `width:height`, e.g. `16:9`, `4:3`, or `1:1`. Ratios not in
    * this format will be ignored.
    */
-  @property({ attribute: 'aspect-ratio' }) aspectRatio: string = '16:9';
+  @property({ attribute: 'aspect-ratio' }) aspectRatio = '16:9';
 
   /** Determines how content will be resized to fit its container. */
   @property() fit: 'cover' | 'contain' = 'cover';

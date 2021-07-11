@@ -46,7 +46,7 @@ Use the `clearable` attribute to make the control clearable.
 
 ### Pill
 
-Use the `pill` prop to give selects rounded edges.
+Use the `pill` attribute to give selects rounded edges.
 
 ```html preview
 <sl-select pill>
@@ -58,7 +58,7 @@ Use the `pill` prop to give selects rounded edges.
 
 ### Disabled
 
-Use the `disabled` prop to disable a select.
+Use the `disabled` attribute to disable a select.
 
 ```html preview
 <sl-select placeholder="Disabled" disabled>
@@ -132,7 +132,7 @@ Use the `size` attribute to change a select's size.
 
 ### Selecting Options Programmatically
 
-The `value` prop is bound to the current selection. As the selection changes, so will the value. To programmatically manage the selection, update the `value` property.
+The `value` property is bound to the current selection. As the selection changes, so will the value. To programmatically manage the selection, update the `value` property.
 
 ```html preview
 <div class="selecting-example">

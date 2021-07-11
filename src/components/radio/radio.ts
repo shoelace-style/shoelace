@@ -1,10 +1,10 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
-import styles from 'sass:./radio.scss';
+import styles from './radio.styles';
 
 let id = 0;
 
@@ -25,7 +25,7 @@ let id = 0;
  */
 @customElement('sl-radio')
 export default class SlRadio extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   @query('input[type="radio"]') input: HTMLInputElement;
 
@@ -41,16 +41,16 @@ export default class SlRadio extends LitElement {
   @property() value: string;
 
   /** Disables the radio. */
-  @property({ type: Boolean, reflect: true }) disabled: boolean = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Draws the radio in a checked state. */
-  @property({ type: Boolean, reflect: true }) checked: boolean = false;
+  @property({ type: Boolean, reflect: true }) checked = false;
 
   /**
    * This will be true when the control is in an invalid state. Validity in range inputs is determined by the message
    * provided by the `setCustomValidity` method.
    */
-  @property({ type: Boolean, reflect: true }) invalid: boolean = false;
+  @property({ type: Boolean, reflect: true }) invalid = false;
 
   /** Simulates a click on the radio. */
   click() {

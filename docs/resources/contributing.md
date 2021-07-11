@@ -213,7 +213,7 @@ This convention avoids the problem of browsers lowercasing attributes, causing s
 
 To expose custom properties as part of a component's API, scope them to the `:host` block.
 
-```scss
+```css
 :host {
   --color: var(--sl-color-primary-500);
   --background-color: var(--sl-color-gray-100);
@@ -233,9 +233,9 @@ export default class SlExample {
 }
 ```
 
-### When to use a prop vs. a CSS custom property
+### When to use a property vs. a CSS custom property
 
-When designing a component's API, standard properties ("props") are generally used to change the _behavior_ of a component, whereas CSS custom properties ("CSS variables") are used to change the _appearance_ of a component. Remember that props can't respond to media queries, but CSS variables can.
+When designing a component's API, standard properties are generally used to change the _behavior_ of a component, whereas CSS custom properties ("CSS variables") are used to change the _appearance_ of a component. Remember that properties can't respond to media queries, but CSS variables can.
 
 There are some exceptions to this (e.g. when it significantly improves developer experience), but a good rule of thumbs is "will this need to change based on screen size?" If so, you probably want to use a CSS variable.
 
@@ -249,17 +249,11 @@ Parts let you target a specific element inside the component's shadow DOM but, b
 
 This convention can be relaxed when the developer experience is greatly improved by not following these suggestions.
 
-### A Note About Sass
-
-The Shoelace _source_ is developed using Sass for the convenience of nested selectors, imports, and tedious things such as color palette generation. By design, Sass variables, color functions, and other preprocessor-specific feaures are not used in the source and will not be accepted in a PR.
-
-Consumers of the library should never need to worry about preprocessing the library.
-
 ### Form Controls
 
 Form controls should support validation through the following conventions:
 
-- All form controls must have an `invalid` prop that reflects their validity
+- All form controls must have an `invalid` property that reflects their validity
 - All form controls must have a `setCustomValidity()` method so the user can set a custom validation message
 - All form controls must have a `reportValidity()` method that report their validity during form submission
 - All form controls should mirror their native validation attributes such as `required`, `pattern`, `minlength`, `maxlength`, etc. when possible

@@ -1,4 +1,4 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
@@ -6,7 +6,7 @@ import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import { getLabelledBy, renderFormControl } from '../../internal/form-control';
 import { hasSlot } from '../../internal/slot';
-import styles from 'sass:./range.scss';
+import styles from './range.styles';
 
 let id = 0;
 
@@ -27,7 +27,7 @@ let id = 0;
  */
 @customElement('sl-range')
 export default class SlRange extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   @query('.range__control') input: HTMLInputElement;
   @query('.range__tooltip') output: HTMLOutputElement;
@@ -43,34 +43,34 @@ export default class SlRange extends LitElement {
   @state() private hasTooltip = false;
 
   /** The input's name attribute. */
-  @property() name: string = '';
+  @property() name = '';
 
   /** The input's value attribute. */
-  @property({ type: Number }) value: number = 0;
+  @property({ type: Number }) value = 0;
 
   /** The range's label. Alternatively, you can use the label slot. */
-  @property() label: string = '';
+  @property() label = '';
 
   /** The range's help text. Alternatively, you can use the help-text slot. */
-  @property({ attribute: 'help-text' }) helpText: string = '';
+  @property({ attribute: 'help-text' }) helpText = '';
 
   /** Disables the input. */
-  @property({ type: Boolean, reflect: true }) disabled: boolean = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /**
    * This will be true when the control is in an invalid state. Validity in range inputs is determined by the message
    * provided by the `setCustomValidity` method.
    */
-  @property({ type: Boolean, reflect: true }) invalid: boolean = false;
+  @property({ type: Boolean, reflect: true }) invalid = false;
 
   /** The input's min attribute. */
-  @property({ type: Number }) min: number = 0;
+  @property({ type: Number }) min = 0;
 
   /** The input's max attribute. */
-  @property({ type: Number }) max: number = 100;
+  @property({ type: Number }) max = 100;
 
   /** The input's step attribute. */
-  @property({ type: Number }) step: number = 1;
+  @property({ type: Number }) step = 1;
 
   /** The preferred placedment of the tooltip. */
   @property() tooltip: 'top' | 'bottom' | 'none' = 'top';
@@ -80,7 +80,7 @@ export default class SlRange extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.handleSlotChange = this.handleSlotChange.bind(this);
+    this.handleSlotChange = this.handleSlotChange;
     this.resizeObserver = new ResizeObserver(() => this.syncTooltip());
     this.shadowRoot!.addEventListener('slotchange', this.handleSlotChange);
 
@@ -153,8 +153,12 @@ export default class SlRange extends LitElement {
     this.hasLabelSlot = hasSlot(this, 'label');
   }
 
-  handleTouchStart() {
-    this.focus();
+  handleThumbDragStart() {
+    this.hasTooltip = true;
+  }
+
+  handleThumbDragEnd() {
+    this.hasTooltip = false;
   }
 
   syncTooltip() {
@@ -193,7 +197,10 @@ export default class SlRange extends LitElement {
             'range--tooltip-top': this.tooltip === 'top',
             'range--tooltip-bottom': this.tooltip === 'bottom'
           })}
-          @touchstart=${this.handleTouchStart.bind(this)}
+          @mousedown=${this.handleThumbDragStart}
+          @mouseup=${this.handleThumbDragEnd}
+          @touchstart=${this.handleThumbDragStart}
+          @touchend=${this.handleThumbDragEnd}
         >
           <input
             part="input"
@@ -215,9 +222,9 @@ export default class SlRange extends LitElement {
                 hasHelpTextSlot: this.hasHelpTextSlot
               })
             )}
-            @input=${this.handleInput.bind(this)}
-            @focus=${this.handleFocus.bind(this)}
-            @blur=${this.handleBlur.bind(this)}
+            @input=${this.handleInput}
+            @focus=${this.handleFocus}
+            @blur=${this.handleBlur}
           />
           ${this.tooltip !== 'none'
             ? html` <output part="tooltip" class="range__tooltip"> ${this.tooltipFormatter(this.value)} </output> `

@@ -1,10 +1,10 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
-import styles from 'sass:./checkbox.scss';
+import styles from './checkbox.styles';
 
 let id = 0;
 
@@ -26,7 +26,7 @@ let id = 0;
  */
 @customElement('sl-checkbox')
 export default class SlCheckbox extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   @query('input[type="checkbox"]') input: HTMLInputElement;
 
@@ -42,19 +42,19 @@ export default class SlCheckbox extends LitElement {
   @property() value: string;
 
   /** Disables the checkbox. */
-  @property({ type: Boolean, reflect: true }) disabled: boolean = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Makes the checkbox a required field. */
-  @property({ type: Boolean, reflect: true }) required: boolean = false;
+  @property({ type: Boolean, reflect: true }) required = false;
 
   /** Draws the checkbox in a checked state. */
-  @property({ type: Boolean, reflect: true }) checked: boolean = false;
+  @property({ type: Boolean, reflect: true }) checked = false;
 
   /** Draws the checkbox in an indeterminate state. */
-  @property({ type: Boolean, reflect: true }) indeterminate: boolean = false;
+  @property({ type: Boolean, reflect: true }) indeterminate = false;
 
   /** This will be true when the control is in an invalid state. Validity is determined by the `required` prop. */
-  @property({ type: Boolean, reflect: true }) invalid: boolean = false;
+  @property({ type: Boolean, reflect: true }) invalid = false;
 
   firstUpdated() {
     this.invalid = !this.input.checkValidity();

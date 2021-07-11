@@ -1,7 +1,7 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
-import styles from 'sass:./badge.scss';
+import styles from './badge.styles';
 
 /**
  * @since 2.0
@@ -13,16 +13,16 @@ import styles from 'sass:./badge.scss';
  */
 @customElement('sl-badge')
 export default class SlBadge extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   /** The badge's type. */
   @property({ reflect: true }) type: 'primary' | 'success' | 'info' | 'warning' | 'danger' = 'primary';
 
   /** Draws a pill-style badge with rounded edges. */
-  @property({ type: Boolean, reflect: true }) pill: boolean = false;
+  @property({ type: Boolean, reflect: true }) pill = false;
 
   /** Makes the badge pulsate to draw attention. */
-  @property({ type: Boolean, reflect: true }) pulse: boolean = false;
+  @property({ type: Boolean, reflect: true }) pulse = false;
 
   render() {
     return html`
