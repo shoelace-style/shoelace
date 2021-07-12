@@ -11,6 +11,11 @@ import type SlInput from '../input/input';
 import color from 'color';
 import styles from './color-picker.styles';
 
+import '../button/button';
+import '../dropdown/dropdown';
+import '../icon/icon';
+import '../input/input';
+
 /**
  * @since 2.0
  * @status stable

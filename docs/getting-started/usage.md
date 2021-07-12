@@ -164,26 +164,6 @@ const MyComponent = (props) => {
 };
 ```
 
-### Dependencies
-
-Some components depend on other components internally. For example, `<sl-button>` requires you to load `<sl-spinner>` because it's used internally for its loading state. If a component has dependencies, they'll be listed in the "Dependencies" section of its documentation. These are always Shoelace components, not third-party libraries. 
-
-Since dependencies are just components, you can load them the same way.
-
-```jsx
-import SlButton from '@shoelace-style/react/dist/button';
-import SlSpinner from '@shoelace-style/react/dist/spinner';
-```
-
-However, this may cause your linter to complain (e.g. "SlButton is defined but never used"). If you're not going to use the dependent components in your JSX, you can import them as side effects instead.
-
-```jsx
-import '@shoelace-style/react/dist/button';
-import '@shoelace-style/react/dist/spinner';
-```
-
-This extra step is required for dependencies to ensure they get registered with the browser as custom elements.
-
 ## Vue
 
 Vue [plays nice](https://custom-elements-everywhere.com/#vue) with custom elements. You just have to tell it to ignore Shoelace components. This is pretty easy because they all start with `sl-`.

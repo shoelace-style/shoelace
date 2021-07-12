@@ -6,6 +6,8 @@ import { emit } from '../../internal/event';
 import { hasSlot } from '../../internal/slot';
 import styles from './button.styles';
 
+import '../spinner/spinner';
+
 /**
  * @since 2.0
  * @status stable

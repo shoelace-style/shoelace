@@ -8,7 +8,10 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
+This release improves how component dependencies are imported. If you've been cherry picking, you no longer need to import component dependencies manually. This significantly improves developer experience, making Shoelace even easier to use. For transparency, component dependencies will continue to be listed in the docs.
+
 - Added "Reflects" column to the properties table
+- Dependencies are now automatically imported for all components
 
 ## 2.0.0-beta.46
 

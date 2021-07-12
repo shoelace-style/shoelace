@@ -4,6 +4,8 @@ import { classMap } from 'lit-html/directives/class-map';
 import { watch } from '../../internal/watch';
 import styles from './menu-item.styles';
 
+import '../icon/icon';
+
 /**
  * @since 2.0
  * @status stable

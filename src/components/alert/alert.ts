@@ -8,6 +8,8 @@ import { waitForEvent } from '../../internal/event';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
 import styles from './alert.styles';
 
+import '../icon-button/icon-button';
+
 const toastStack = Object.assign(document.createElement('div'), { className: 'sl-toast-stack' });
 
 /**

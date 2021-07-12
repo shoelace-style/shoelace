@@ -8,6 +8,8 @@ import { getLabelledBy, renderFormControl } from '../../internal/form-control';
 import { hasSlot } from '../../internal/slot';
 import styles from './input.styles';
 
+import '../icon/icon';
+
 let id = 0;
 
 /**

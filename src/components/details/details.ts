@@ -9,6 +9,8 @@ import { focusVisible } from '../../internal/focus-visible';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
 import styles from './details.styles';
 
+import '../icon/icon';
+
 let id = 0;
 
 /**

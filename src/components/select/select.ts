@@ -13,6 +13,12 @@ import type SlMenu from '../menu/menu';
 import type SlMenuItem from '../menu-item/menu-item';
 import styles from './select.styles';
 
+import '../dropdown/dropdown';
+import '../icon/icon';
+import '../icon-button/icon-button';
+import '../menu/menu';
+import '../tag/tag';
+
 let id = 0;
 
 /**

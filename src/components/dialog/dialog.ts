@@ -13,6 +13,8 @@ import Modal from '../../internal/modal';
 import { setDefaultAnimation, getAnimation } from '../../utilities/animation-registry';
 import styles from './dialog.styles';
 
+import '../icon-button/icon-button';
+
 const hasPreventScroll = isPreventScrollSupported();
 
 let id = 0;

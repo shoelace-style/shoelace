@@ -4,6 +4,8 @@ import { classMap } from 'lit-html/directives/class-map';
 import { emit } from '../../internal/event';
 import styles from './tag.styles';
 
+import '../icon-button/icon-button';
+
 /**
  * @since 2.0
  * @status stable

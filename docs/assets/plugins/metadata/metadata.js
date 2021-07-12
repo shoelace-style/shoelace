@@ -420,8 +420,7 @@
           result += `
             ## Dependencies
 
-            This component has the following dependencies so, if you're [cherry picking](/getting-started/installation#cherry-picking),
-            be sure to import these components in addition to <code>&lt;${tag}&gt;</code>.
+            This component imports the following dependencies.
 
             ${createDependenciesList(component.tagName, getAllComponents(metadata))}
           `;
