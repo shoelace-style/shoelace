@@ -12,6 +12,7 @@ This release improves how component dependencies are imported. If you've been ch
 
 - Added "Reflects" column to the properties table
 - Dependencies are now automatically imported for all components
+- Improved base path utility logic
 
 ## 2.0.0-beta.46
 
