@@ -71,6 +71,8 @@ Here's an example that loads only the button component. Again, if you're not usi
 </script>
 ```
 
+Some components have dependencies that are automatically imported when you cherry pick. If a component has dependencies, they will be listed in the "Dependencies" section of the component's documentation.
+
 !> Never cherry pick components or utilities from `shoelace.js` as this will cause the browser to load the entire library. Instead, cherry pick from specific modules as shown above.
 
 !> You will see files named `chunk.[hash].js` in the `chunks` directory. Never import these files directly, as they are generated and change from version to version.
