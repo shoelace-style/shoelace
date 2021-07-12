@@ -45,7 +45,7 @@ Display the `sl-date-picker` using the dropdown mode and enable multiple selecti
     }
 
     sl-input::part(base) {
-      width: 160px;
+      width: 125px;
       height: 38.5px;
       --sl-input-border-color-focus: var(--sl-input-border-color);
       --focus-ring: 0 0 0 0 transparent;

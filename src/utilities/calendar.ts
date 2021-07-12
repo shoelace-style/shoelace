@@ -147,15 +147,9 @@ export class CalendarUtils {
     if (dateLeft instanceof Date) dateLeft = this.getCalendarDay(dateLeft);
     if (dateRight instanceof Date) dateRight = this.getCalendarDay(dateRight);
 
-    const dateLeftDate = new Date(
-      Date.UTC(dateLeft.year, dateLeft.month, dateLeft.day, 0, 0, 0, 0)
-    );
-    const dateRightDate = new Date(
-      Date.UTC(dateRight.year, dateRight.month, dateRight.day, 0, 0, 0, 0)
-    );
-    return Math.ceil(
-      (dateLeftDate.getTime() - dateRightDate.getTime()) / 86400000
-    );
+    const dateLeftDate = new Date(Date.UTC(dateLeft.year, dateLeft.month, dateLeft.day, 0, 0, 0, 0));
+    const dateRightDate = new Date(Date.UTC(dateRight.year, dateRight.month, dateRight.day, 0, 0, 0, 0));
+    return Math.ceil((dateLeftDate.getTime() - dateRightDate.getTime()) / 86400000);
   }
 
   static createDate(year: number, month: number, day: number, enforceEndOfMonth = true) {

@@ -620,6 +620,16 @@ export default class SlDatePicker extends LitElement {
     return CalendarUtils.compare(day, this.minDate) === -1 || CalendarUtils.compare(this.maxDate, day) === -1;
   }
 
+  private isDisabledMonth(month: number): boolean {
+    if (!this.minDate || !this.maxDate) return false;
+    return this.minDate.getMonth() > month - 1 || this.maxDate.getMonth() < month - 1;
+  }
+
+  private isDisabledYear(year: number): boolean {
+    if (!this.minDate || !this.maxDate) return false;
+    return this.minDate.getFullYear() > year || this.maxDate.getFullYear() < year;
+  }
+
   private isAllowedDate(day: CalendarDate): boolean {
     if (this.range) return true;
     if (this.disabledDates?.some(date => CalendarUtils.compare(date, day) === 0)) return false;
@@ -654,7 +664,7 @@ export default class SlDatePicker extends LitElement {
                     class=${classMap({
                       month: true,
                       selected: this.month === month.number,
-                      disabled: this.isDisabledDate(CalendarUtils.getCalendarDay(new Date(this.year, month.number, 1)))
+                      disabled: this.isDisabledMonth(month.number)
                     })}
                     @click=${() => this.handleMonthClick(month.number)}
                     @keydown=${(e: KeyboardEvent) => this.handleMonthsNavigation(e, month.number)}
@@ -684,9 +694,7 @@ export default class SlDatePicker extends LitElement {
                     class=${classMap({
                       year: true,
                       selected: this.year === this.year - index,
-                      disabled: this.isDisabledDate(
-                        CalendarUtils.getCalendarDay(new Date(this.year - index, this.month, 1))
-                      )
+                      disabled: this.isDisabledYear(this.year - index)
                     })}
                     @click=${() => this.handleYearClick(this.year - index)}
                     @keydown=${(e: KeyboardEvent) => this.handleYearsNavigation(e, this.year - index)}

@@ -20,10 +20,14 @@ export default css`
     pointer-events: none;
   }
 
+  table {
+    border-spacing: 3px;
+    border-color: #0000;
+  }
+
   td {
     text-align: center;
     vertical-align: middle;
-    border: 1px solid transparent;
     width: var(--cell-inline-width, 2.3rem);
     height: var(--cell-inline-height, 2.3rem);
     font-size: var(--sl-font-size-medium);
@@ -39,24 +43,32 @@ export default css`
   }
 
   td.today {
-    color: var(--sl-color-success-500) !important;
-    background-color: var(--sl-color-success-100) !important;
-    border: 1px solid var(--sl-color-success-500);
+    color: var(--sl-color-success-text) !important;
+    background-color: var(--sl-color-success-400) !important;
+  }
+
+  td.today:focus {
+    border-color: var(--sl-color-success-400) !important;
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-success) !important;
   }
 
   td.start,
   td.end,
-  td.selected,
-  td.sibling-months.selected {
+  td.start.selected,
+  td.end.selected {
     color: var(--sl-color-white) !important;
     background-color: var(--sl-color-primary-500) !important;
-    border: 1px solid var(--sl-color-primary-500);
+  }
+
+  td.selected,
+  td.sibling-months.selected {
+    color: var(--sl-color-primary-500) !important;
+    background-color: var(--sl-color-primary-100) !important;
   }
 
   td.range {
     color: var(--sl-color-primary-500) !important;
     background-color: var(--sl-color-primary-100) !important;
-    border: 1px solid var(--sl-color-primary-500);
   }
 
   td.sibling-months {
@@ -74,24 +86,20 @@ export default css`
     box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
   }
 
-  td.month:hover:not(td.selected),
-  td.year:hover:not(td.selected),
-  td.day:hover:not(td.selected) {
-    color: var(--sl-color-primary-500);
-    background-color: var(--sl-color-primary-100);
-    border: 1px solid var(--sl-color-primary-500);
-    outline: none;
+  td.disabled {
+    pointer-events: none;
   }
 
   td.disabled,
   td.not-allowed {
-    color: var(--sl-color-gray-300);
+    color: var(--sl-color-gray-300) !important;
     background-color: var(--sl-color-gray-100);
-    border: none;
   }
 
-  td.disabled {
-    pointer-events: none;
+  td.not-allowed:focus {
+    color: var(--sl-color-gray-400) !important;
+    border-color: var(--sl-color-gray-400);
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-color-gray-400);
   }
 
   td.readonly {
@@ -125,6 +133,8 @@ export default css`
   .container .grid.months table,
   .container .grid.years table {
     margin: 10px;
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
   }
 
   .container sl-button.months-button,
@@ -134,15 +144,14 @@ export default css`
 
   .container sl-button-group {
     width: 100%;
+    margin-right: 2px;
+    margin-left: 2px;
   }
 
   .inline {
     flex-direction: column;
     overflow-x: hidden;
     border-radius: var(--sl-border-radius-medium);
-    border-style: solid;
-    border-color: var(--sl-color-gray-300);
-    border-width: var(--sl-input-border-width);
     box-shadow: var(--sl-shadow-medium);
   }
 
@@ -176,6 +185,12 @@ export default css`
     flex-grow: 1;
   }
 
+  .inline td.month.selected,
+  .inline td.year.selected {
+    color: var(--sl-color-white) !important;
+    background-color: var(--sl-color-primary-500) !important;
+  }
+
   .dropdown {
     min-width: max-content;
     flex-direction: column;
@@ -192,6 +207,8 @@ export default css`
     flex-grow: 1;
     background: var(--sl-color-primary-100);
     padding: 5px;
+    border-top-left-radius: var(--sl-border-radius-medium);;
+    border-top-right-radius: var(--sl-border-radius-medium);;
     flex-direction: row;
     align-items: center;
     display: flex;
