@@ -1,4 +1,4 @@
-import { LitElement, TemplateResult, html, unsafeCSS } from 'lit';
+import { LitElement, TemplateResult, html } from 'lit';
 import { repeat } from 'lit/directives/repeat.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property, query, queryAll, state } from 'lit/decorators.js';
@@ -7,7 +7,7 @@ import { watch } from '../../internal/watch';
 import { emit } from '../../internal/event';
 import type SlDropdown from '../dropdown/dropdown';
 import type SlButton from '../icon-button/icon-button';
-import styles from 'sass:./date-picker.scss';
+import styles from './date-picker.styles';
 
 const attributeToDate = (value: string): Date | undefined => {
   if (!value) return;
@@ -37,7 +37,7 @@ const attributeToDate = (value: string): Date | undefined => {
  */
 @customElement('sl-date-picker')
 export default class SlDatePicker extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   private locale: CalendarLocale;
   private calendar: CalendarView;
@@ -716,7 +716,7 @@ export default class SlDatePicker extends LitElement {
     return html`
       <div class="date-picker-wrap">
         ${this.getCalendarView()}
-        <div class=${classMap({ grid: true, hidden: this.activeView !== 'calendar' })}>
+        <div class=${classMap({ grid: true, hide: this.activeView !== 'calendar' })}>
           <table aria-labelledby="${this.month} ${this.year}">
             <tr>
               ${this.getCalendarWeekDaysView()}
