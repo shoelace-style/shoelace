@@ -45,6 +45,7 @@ export { default as SlTabPanel } from './components/tab-panel/tab-panel';
 export { default as SlTag } from './components/tag/tag';
 export { default as SlTextarea } from './components/textarea/textarea';
 export { default as SlTooltip } from './components/tooltip/tooltip';
+export { default as SlDatePicker } from './components/date-picker/date-picker';
 /* plop:component */
 
 // Utilities

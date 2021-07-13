@@ -1,7 +1,7 @@
 //
 // Emits a custom event with more convenient defaults.
 //
-export function emit(el: HTMLElement, name: string, options?: CustomEventInit) {
+export function emit<T>(el: HTMLElement, name: string, options?: CustomEventInit<T>) {
   const event = new CustomEvent(
     name,
     Object.assign(

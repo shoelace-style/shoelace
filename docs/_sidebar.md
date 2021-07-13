@@ -23,6 +23,7 @@
   - [Dialog](/components/dialog)
   - [Drawer](/components/drawer)
   - [Dropdown](/components/dropdown)
+  - [Date Picker](/components/date-picker)
   - [Form](/components/form)
   - [Icon](/components/icon)
   - [Icon Button](/components/icon-button)
