@@ -55,6 +55,7 @@ export default class SlColorPicker extends LitElement {
   @query('[part="preview"]') previewButton: HTMLButtonElement;
   @query('.color-dropdown') dropdown: SlDropdown;
 
+  private isSafeValue = false;
   private lastValueEmitted: string;
 
   @state() private inputValue = '';
@@ -538,7 +539,7 @@ export default class SlColorPicker extends LitElement {
     return this.uppercase ? string.toUpperCase() : string.toLowerCase();
   }
 
-  syncValues() {
+  async syncValues() {
     const currentColor = this.parseColor(
       `hsla(${this.hue}, ${this.saturation}%, ${this.lightness}%, ${this.alpha / 100})`
     );
@@ -556,7 +557,13 @@ export default class SlColorPicker extends LitElement {
       this.inputValue = this.opacity ? currentColor.hexa : currentColor.hex;
     }
 
+    // Setting this.value will trigger the watcher which parses the new value. We want to bypass that behavior because
+    // we've already parsed the color here and conversion/rounding can lead to values changing slightly. WHen this
+    // happens, dragging the grid handle becomes jumpy. After the next update, the usual behavior is restored.
+    this.isSafeValue = true;
     this.value = this.inputValue;
+    await this.updateComplete;
+    this.isSafeValue = false;
   }
 
   @watch('format')
@@ -571,16 +578,18 @@ export default class SlColorPicker extends LitElement {
 
   @watch('value')
   handleValueChange(oldValue: string, newValue: string) {
-    const newColor = this.parseColor(newValue);
+    if (!this.isSafeValue) {
+      const newColor = this.parseColor(newValue);
 
-    if (newColor) {
-      this.inputValue = this.value;
-      this.hue = newColor.hsla.h;
-      this.saturation = newColor.hsla.s;
-      this.lightness = newColor.hsla.l;
-      this.alpha = newColor.hsla.a * 100;
-    } else {
-      this.inputValue = oldValue;
+      if (newColor) {
+        this.inputValue = this.value;
+        this.hue = newColor.hsla.h;
+        this.saturation = newColor.hsla.s;
+        this.lightness = newColor.hsla.l;
+        this.alpha = newColor.hsla.a * 100;
+      } else {
+        this.inputValue = oldValue;
+      }
     }
 
     if (this.value !== this.lastValueEmitted) {

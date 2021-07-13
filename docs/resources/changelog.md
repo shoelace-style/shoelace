@@ -14,6 +14,7 @@ This release improves how component dependencies are imported. If you've been ch
 - Dependencies are now automatically imported for all components
 - Fixed a bug where tabbing into `sl-radio-group` would not always focus the checked radio
 - Fixed a bug in component styles that prevented the box sizing reset from being applied
+- Fixed a regression in `sl-color-picker` where dragging the grid handle wasn't smooth
 - Improved base path utility logic
 
 ## 2.0.0-beta.46
