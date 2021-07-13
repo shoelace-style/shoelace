@@ -12,14 +12,12 @@ function getAllComponents() {
   const allComponents = [];
 
   metadata.modules.map(module => {
-    module.exports.map(ex => {
-      if (ex.kind === 'custom-element-definition') {
-        const tagName = ex.name;
-        const className = ex.declaration.name;
-        const component = module?.declarations.find(dec => dec.name === 'default');
+    module.declarations?.map(declaration => {
+      if (declaration.customElement) {
+        const component = declaration;
 
         if (component) {
-          allComponents.push(Object.assign(component, { className, tagName }));
+          allComponents.push(component);
         }
       }
     });
