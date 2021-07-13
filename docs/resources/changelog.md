@@ -29,6 +29,7 @@ In addition, Shoelace no longer uses Sass. Component styles now use Lit's templa
 - Added the `currentTime` property to `sl-animation` to control the current time without methods
 - Fixed a bug in `sl-range` where the tooltip wasn't showing in Safari [#477](https://github.com/shoelace-style/shoelace/issues/477)
 - Fixed a bug in `sl-menu` where pressing <kbd>Enter</kbd> in a menu didn't work with click handlers
+- Fixed a bug in component styles that prevented the box sizing reset from being applied
 - Reworked `sl-menu` and `sl-menu-item` to use a roving tab index and improve keyboard accessibility
 - Reworked tabbable logic to be more performant [#466](https://github.com/shoelace-style/shoelace/issues/466)
 - Switched component stylesheets from Sass to Lit's template literal styles

@@ -4,12 +4,12 @@ export default css`
   :host {
     position: relative;
     box-sizing: border-box;
+  }
 
-    & *,
-    & *:before,
-    & *:after {
-      box-sizing: inherit;
-    }
+  :host *,
+  :host *::before,
+  :host *::after {
+    box-sizing: inherit;
   }
 
   [hidden] {
