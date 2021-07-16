@@ -43,7 +43,7 @@ export function getTextContent(slot: HTMLSlotElement): string {
 export function hasSlot(el: HTMLElement, name?: string) {
   // Look for a named slot
   if (name) {
-    return el.querySelector(`[slot="${name}"]`) !== null;
+    return el.querySelector(`:scope > [slot="${name}"]`) !== null;
   }
 
   // Look for a default slot
