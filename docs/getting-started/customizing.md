@@ -8,7 +8,7 @@ Shoelace makes use of several design tokens to provide a consistent appearance a
 
 Design tokens offer a high-level way to customize the library with minimal effort. There are no component-specific variables, however, as design tokens are intended to be generic and highly reusable. To customize an individual component, refer to the section entitled [Component parts](#component-parts).
 
-Design tokens are CSS custom properties ("CSS variables") that are defined in the `:root` block of `shoelace.css`. This stylesheet is imported when you install Shoelace, so design tokens are available on your page at that point. Because design tokens are global, they're always prefixed with `--sl` to avoid collisions with other libraries.
+Design tokens are CSS custom properties ("CSS variables") that are defined in the `:root` block of `themes/base.css`. This stylesheet is imported when you install Shoelace, so design tokens are available on your page at that point. Because design tokens are global, they're always prefixed with `--sl` to avoid collisions with other libraries.
 
 To customize a design token, simply override it in your stylesheet using a `:root` block.
 
@@ -28,9 +28,9 @@ To customize a design token, simply override it in your stylesheet using a `:roo
 }
 ```
 
-Many design tokens are described further along in this documentation. For a complete list, refer to `shoelace.scss` in the project's [source code](https://github.com/shoelace-style/shoelace/blob/current/src/styles/shoelace.scss).
+Many design tokens are described further along in this documentation. For a complete list, refer to `themes/base.css` in the project's [source code](https://github.com/shoelace-style/shoelace/blob/current/src/styles/shoelace.css).
 
-!> **Never modify variables directly in `shoelace.css`** because your changes will be overwritten when you upgrade the library. Even if you don't plan on upgrading, it's always better to override design tokens in your own stylesheet for better maintainability.
+!> **Never modify variables directly in `themes/base.css`** because your changes will be overwritten when you upgrade the library. Even if you don't plan on upgrading, it's always better to override design tokens in your own stylesheet for better maintainability.
 
 ## Component Parts
 
@@ -106,3 +106,51 @@ Alternatively, you can set them inline directly on the element.
 ```
 
 Not all components expose CSS custom properties. For those that do, they can be found in the component's API documentation.
+
+## Animations
+
+Some components use animation, such as when a dialog is shown or hidden. Animations are performed using the [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API) rather than CSS. However, you can still customize them through Shoelace's animation registry. If a component has customizable animations, they'll be listed in the "Animation" section of its documentation.
+
+To customize a default animation, use the `setDefaultAnimation()` method. The function accepts an animation name (found in the component's docs) and an object with `keyframes` and `options` or `null` to disable the animation.
+
+This example will make all dialogs use a custom show animation.
+
+```js
+import { setDefaultAnimation } from '@shoelace-style/shoelace/dist/utilities/animation-registry.js';
+
+// Change the default animation for all dialogs
+setDefaultAnimation('dialog.show', {
+  keyframes: [
+    { transform: 'rotate(-10deg) scale(0.5)', opacity: '0' },
+    { transform: 'rotate(0deg) scale(1)', opacity: '1' }
+  ],
+  options: {
+    duration: 500
+  }
+});
+```
+
+If you only want to target a single component, use the `setAnimation()` method instead. This function accepts an element, an animation name, and an object comprised of animation `keyframes` and `options`.
+
+In this example, only the target dialog will use a custom show animation.
+
+```js
+import { setAnimation } from '@shoelace-style/shoelace/dist/utilities/animation-registry.js';
+
+// Change the animation for a single dialog
+const dialog = document.querySelector('#my-dialog');
+
+setAnimation(dialog, 'dialog.show', {
+  keyframes: [
+    { transform: 'rotate(-10deg) scale(0.5)', opacity: '0' },
+    { transform: 'rotate(0deg) scale(1)', opacity: '1' }
+  ],
+  options: {
+    duration: 500
+  }
+});
+```
+
+To learn more about creating Web Animations, refer to the documentation for [`Element.animate()`](https://developer.mozilla.org/en-US/docs/Web/API/Element/animate).
+
+?> Animations respect the users `prefers-reduced-motion` setting. When this setting is enabled, animations will not be played. To disable animations for all users, set `options.duration` to `0`.

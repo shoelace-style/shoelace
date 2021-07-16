@@ -31,9 +31,7 @@ If that's not what you're trying to do, the [documentation website](https://shoe
 
 ### What are you using to build Shoelace?
 
-Components are built with [Stencil](https://stenciljs.com/), a compiler that generates standards-based web components. The source code is a combination of TypeScript + JSX (TSX). Stylesheets are written in SCSS.
-
-The build is done through a combination of Stencil's CLI and a handful of custom scripts.
+Components are built with [LitElement](https://lit-element.polymer-project.org/), a custom elements base class that provides an intuitive API and reactive data binding. The build is a custom script with bundling powered by [esbuild](https://esbuild.github.io/).
 
 ### Forking the Repo
 
@@ -50,14 +48,12 @@ npm install
 Once you've cloned the repo, run the following command.
 
 ```bash
-npm run start
+npm start
 ```
 
-This will spin up the Shoelace dev server. Note that the dev server requires ports 4000, 4001, and 4002 to be available.
+This will spin up the Shoelace dev server. After the initial build, a browser will open automatically. There is currently no hot module reloading (HMR), as browser's don't provide a way to reregister custom elements, but most changes to the source will reload the browser automatically.
 
-After the initial build, a browser will open at `http://localhost:4000`.
-
-Hot module reloading (HMR) is enabled for components, so changes will instantly reflect in the browser as you work. The documentation is powered by Docsify, which uses raw markdown files to generate pages. As such, no static files are built for the docs. Unfortunately, changes to _documentation pages_ will trigger a page refresh (no HMR).
+The documentation is powered by Docsify, which uses raw markdown files to generate pages. As such, no static files are built for the docs.
 
 ### Building
 
@@ -66,6 +62,16 @@ To generate a production build, run the following command.
 ```bash
 npm run build
 ```
+
+### Creating New Components
+
+To scaffold a new component, run the following command, replacing `sl-tag-name` with the desired tag name.
+
+```bash
+npm run create sl-tag-name
+```
+
+This will generate a source file, a stylesheet, and a docs page for you. When you start the dev server, you'll find the new component in the "Components" section of the sidebar.
 
 ### Contributing
 

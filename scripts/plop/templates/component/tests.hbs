@@ -1,0 +1,13 @@
+import { expect, fixture, html, waitUntil } from '@open-wc/testing';
+// import sinon from 'sinon';
+
+import '../../../dist/shoelace.js';
+import type {{ properCase tag }} from './{{ tagWithoutPrefix tag }}';
+
+describe('<{{ tag }}>', () => {
+  it('should render a component', async () => {
+    const el = await fixture(html` <{{ tag }}></{{ tag }}> `);
+
+    expect(el).to.exist;
+  });
+});

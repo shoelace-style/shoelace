@@ -4,14 +4,14 @@
 
 Animate elements declaratively with nearly 100 baked-in presets, or roll your own with custom keyframes. Powered by the [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API).
 
-To animate an element, wrap it in `<sl-animation>` and set a `name` and `duration`. Refer to the [properties table](#properties) for additional options.
+To animate an element, wrap it in `<sl-animation>` and set an animation `name`. The animation not start until you add the `play` attribute. Refer to the [properties table](#properties) for a list of all animation options.
 
 ```html preview
 <div class="animation-overview">
-  <sl-animation name="bounce" duration="2000"><div class="box"></div></sl-animation>
-  <sl-animation name="jello" duration="2000"><div class="box"></div></sl-animation>
-  <sl-animation name="heartBeat" duration="2000"><div class="box"></div></sl-animation>
-  <sl-animation name="flip" duration="2000"><div class="box"></div></sl-animation>
+  <sl-animation name="bounce" duration="2000" play><div class="box"></div></sl-animation>
+  <sl-animation name="jello" duration="2000" play><div class="box"></div></sl-animation>
+  <sl-animation name="heartBeat" duration="2000" play><div class="box"></div></sl-animation>
+  <sl-animation name="flip" duration="2000" play><div class="box"></div></sl-animation>
 </div>
 
 <style>
@@ -25,7 +25,7 @@ To animate an element, wrap it in `<sl-animation>` and set a `name` and `duratio
 </style>
 ```
 
-?> The animation will be applied only to the first child element found in `<sl-animation>`.
+?> The animation will only be applied to the first child element found in `<sl-animation>`.
 
 ## Examples
 
@@ -35,7 +35,7 @@ This example demonstrates all of the baked-in animations and easings. Animations
 
 ```html preview
 <div class="animation-sandbox">
-  <sl-animation name="bounce" easing="ease-in-out" duration="2000">
+  <sl-animation name="bounce" easing="ease-in-out" duration="2000" play>
     <div class="box"></div>
   </sl-animation>
 
@@ -46,32 +46,32 @@ This example demonstrates all of the baked-in animations and easings. Animations
   </div>
 </div>
 
-<script>
+<script type="module">
+  import { getAnimationNames, getEasingNames } from '/dist/utilities/animation.js';
+
   const container = document.querySelector('.animation-sandbox');
   const animation = container.querySelector('sl-animation');
   const animationName = container.querySelector('.controls sl-select:nth-child(1)');
   const easingName = container.querySelector('.controls sl-select:nth-child(2)');
   const playbackRate = container.querySelector('sl-range');
+  const animations = getAnimationNames();
+  const easings = getEasingNames();
 
-  animation.getAnimationNames().then(names => {
-    names.map(name => {
-      const menuItem = Object.assign(document.createElement('sl-menu-item'), {
-        textContent: name,
-        value: name
-      });
-      animationName.appendChild(menuItem);
+  animations.map(name => {
+    const menuItem = Object.assign(document.createElement('sl-menu-item'), {
+      textContent: name,
+      value: name
     });
+    animationName.appendChild(menuItem);
   });
-
-  animation.getEasingNames().then(names => {
-    names.map(name => {
-      const menuItem = Object.assign(document.createElement('sl-menu-item'), {
-        textContent: name,
-        value: name
-      });
-      easingName.appendChild(menuItem);
+  
+  easings.map(name => {
+    const menuItem = Object.assign(document.createElement('sl-menu-item'), {
+      textContent: name,
+      value: name
     });
-  });  
+    easingName.appendChild(menuItem);
+  });
 
   animationName.addEventListener('sl-change', () => animation.name = animationName.value);
   easingName.addEventListener('sl-change', () => animation.easing = easingName.value);
@@ -115,11 +115,10 @@ Use an [Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/
   const observer = new IntersectionObserver(entries => {
     if (entries[0].isIntersecting) {
       // Start the animation when the box enters the viewport
-      animation.pause = null;
+      animation.play = true;
     } else {
-      // Reset the animation when the box leaves the viewport
-      animation.pause = true;
-      animation.setCurrentTime(0);
+      animation.play = false;
+      animation.currentTime = 0;
     }
   });
   observer.observe(box);
@@ -141,7 +140,7 @@ Supply your own [keyframe formats](https://developer.mozilla.org/en-US/docs/Web/
 
 ```html preview
 <div class="animation-keyframes">
-  <sl-animation easing="ease-in-out" duration="2000">
+  <sl-animation easing="ease-in-out" duration="2000" play>
     <div class="box"></div>
   </sl-animation>
 </div>
@@ -173,6 +172,28 @@ Supply your own [keyframe formats](https://developer.mozilla.org/en-US/docs/Web/
     background-color: var(--sl-color-primary-500);
   }
 </style>
+```
+
+### Playing Animations on Demand
+
+Animations won't play until you apply the `play` attribute. You can omit it initially, then apply it on demand such as after a user interaction. In this example, the button will animate once every time the button is clicked.
+
+```html preview
+<div class="animation-form">
+  <sl-animation name="rubberBand" duration="1000" iterations="1">
+    <sl-button type="primary">Click me</sl-button>
+  </sl-animation>
+</div>
+
+<script>
+  const container = document.querySelector('.animation-form');
+  const animation = container.querySelector('sl-animation');
+  const button = container.querySelector('sl-button');
+
+  button.addEventListener('click', () => {
+    animation.play = true;
+  });
+</script>
 ```
 
 [component-metadata:sl-animation]

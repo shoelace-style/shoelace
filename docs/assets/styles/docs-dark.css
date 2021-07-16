@@ -85,18 +85,14 @@
   border-bottom-color: var(--sl-color-gray-800);
 }
 
-.sl-theme-dark .markdown-section table .attribute-tooltip {
-  border-bottom-color: var(--sl-color-gray-700);
-}
-
 /* Tips & warnings */
 .sl-theme-dark .markdown-section p.tip,
 .sl-theme-dark .markdown-section p.warn {
-  background-color: var(--sl-color-gray-950)
+  background-color: var(--sl-color-gray-950);
 }
 
-.sl-theme-dark .markdown-section p.tip::before,
-.sl-theme-dark .markdown-section p.warn::before {
+.sl-theme-dark .markdown-section p.tip:before,
+.sl-theme-dark .markdown-section p.warn:before {
   color: var(--sl-color-gray-900);
 }
 
@@ -112,7 +108,7 @@
 
 /* Code blocks */
 .sl-theme-dark .markdown-section pre,
-.sl-theme-dark .code-block__source  {
+.sl-theme-dark .code-block__source {
   background-color: var(--sl-color-gray-800);
 }
 
@@ -175,7 +171,7 @@
 }
 
 /* Repo buttons */
-.sl-theme-dark  .repo-button {
+.sl-theme-dark .repo-button {
   background-color: var(--sl-color-gray-900);
   border-color: var(--sl-color-gray-800);
   color: var(--sl-color-gray-200);
@@ -185,12 +181,11 @@
   color: var(--sl-color-white);
 }
 
-.sl-theme-dark  .repo-button:hover {
+.sl-theme-dark .repo-button:hover {
   background-color: var(--sl-color-gray-900);
   border: solid 1px var(--sl-color-gray-700);
 }
 
-.sl-theme-dark  .repo-button:focus {
+.sl-theme-dark .repo-button:focus {
   border-color: var(--sl-color-primary-500);
 }
-

@@ -8,13 +8,13 @@ Ranges allow the user to select a single value within a given range using a slid
 <sl-range min="0" max="100" step="1"></sl-range>
 ```
 
-?> This component doesn't work with standard forms. Use [`<sl-form>`](/components/form.md) instead.
+?> This component doesn't work with standard forms. Use [`<sl-form>`](/components/form) instead.
 
 ## Examples
 
 ### Disabled
 
-Use the `disabled` prop to disable a slider.
+Use the `disabled` attribute to disable a slider.
 
 ```html preview
 <sl-range min="0" max="100" step="1" disabled></sl-range>
@@ -38,7 +38,7 @@ To disable the tooltip, set `tooltip` to `none`.
 
 ### Custom Tooltip Formatter
 
-You can change the tooltip's content by setting the `tooltipFormatter` prop to a function that accepts the range's value as an argument.
+You can change the tooltip's content by setting the `tooltipFormatter` property to a function that accepts the range's value as an argument.
 
 ```html preview
 <sl-range min="0" max="100" step="1" class="range-with-custom-formatter"></sl-range>
@@ -47,6 +47,27 @@ You can change the tooltip's content by setting the `tooltipFormatter` prop to a
   const range = document.querySelector('.range-with-custom-formatter');
   range.tooltipFormatter = value => `Total - ${value}%`;
 </script>
+```
+
+### Labels
+
+Use the `label` attribute to give the range an accessible label. For labels that contain HTML, use the `label` slot instead.
+
+```html preview
+<sl-range label="Volume" min="0" max="100"></sl-input>
+```
+
+### Help Text
+
+Add descriptive help text to a range with the `help-text` attribute. For help texts that contain HTML, use the `help-text` slot instead.
+
+```html preview
+<sl-range 
+  label="Volume" 
+  help-text="Controls the volume of the current song."
+  min="0"
+  max="100"
+></sl-input>
 ```
 
 [component-metadata:sl-range]

@@ -1,13 +1,13 @@
 .theme-toggle {
   position: fixed;
-  top: .5rem;
-  right: .5rem;
+  top: 0.5rem;
+  right: 0.5rem;
   z-index: 100;
 }
 
 @media screen and (max-width: 768px) {
   .theme-toggle {
-    top: .25rem;
-    right: .25rem;
+    top: 0.25rem;
+    right: 0.25rem;
   }
 }

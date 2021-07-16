@@ -1,39 +1,39 @@
 (() => {
-  let metadataStore;
+  const isDev = location.hostname === 'localhost';
+  const isNext = location.hostname === 'next.shoelace.style';
+  const customElements = fetch('/dist/custom-elements.json')
+    .then(res => res.json())
+    .catch(err => console.error(err));
 
   function createPropsTable(props) {
     const table = document.createElement('table');
     table.innerHTML = `
       <thead>
         <tr>
-          <th>Property</th>
+          <th>Name</th>
+          <th>Attribute</th>
           <th>Description</th>
+          <th>Reflects</th>
           <th>Type</th>
           <th>Default</th>
         </tr>
       </thead>
       <tbody>
         ${props
-          .map(
-            prop => `
-        <tr>
-          <td>
-            <code>${escapeHtml(prop.name)}</code>
-            ${prop.name !== prop.attr && prop.attr !== undefined ? (`
-              <br>
-              <small>
-                <sl-tooltip content="Use this name in your HTML">
-                  <code class="attribute-tooltip">${escapeHtml(prop.attr)}</code>
-                </sl-tooltip>
-              </small>`
-            ) : ''}
-          </td>
-          <td>${escapeHtml(prop.docs)}</td>
-          <td><code style="white-space: normal;">${escapeHtml(prop.type)}</code></td>
-          <td><code style="white-space: normal;">${escapeHtml(prop.default)}</code></td>
-        </tr>
-        `
-          )
+          .map(prop => {
+            return `
+              <tr>
+                <td class="nowrap"><code>${escapeHtml(prop.name)}</code></td>
+                <td class="nowrap">${prop.attribute ? `<code>${escapeHtml(prop.attribute)}</code>` : '-'}</td>
+                <td>${escapeHtml(prop.description)}</td>
+                <td style="text-align: center;">${
+                  prop.reflects ? '<sl-icon label="yes" name="check"></sl-icon>' : ''
+                }</td>
+                <td>${prop.type?.text ? `<code>${escapeHtml(prop.type?.text || '')}</code>` : '-'}</td>
+                <td>${prop.default ? `<code>${escapeHtml(prop.default)}</code>` : '-'}</td>
+              </tr>
+          `;
+          })
           .join('')}
       </tbody>
     `;
@@ -46,9 +46,9 @@
     table.innerHTML = `
       <thead>
         <tr>
-          <th>Event</th>
+          <th>Name</th>
           <th>Description</th>
-          <th>Type</th>
+          <th>Event Detail</th>
         </tr>
       </thead>
       <tbody>
@@ -56,9 +56,9 @@
           .map(
             event => `
         <tr>
-          <td><code>${escapeHtml(event.event)}</code></td>
-          <td>${escapeHtml(event.docs)}</td>
-          <td><code style="white-space: normal;">CustomEvent&lt;${escapeHtml(event.detail)}&gt;</code></td>
+          <td><code class="nowrap">${escapeHtml(event.name)}</code></td>
+          <td>${escapeHtml(event.description)}</td>
+          <td>${event.type?.text ? `<code>${escapeHtml(event.type?.text)}` : '-'}</td>
         </tr>
         `
           )
@@ -74,21 +74,31 @@
     table.innerHTML = `
       <thead>
         <tr>
-          <th>Method</th>
+          <th>Name</th>
           <th>Description</th>
-          <th>Signature</th>
+          <th>Arguments</th>
         </tr>
       </thead>
       <tbody>
         ${methods
           .map(
             method => `
-        <tr>
-          <td><code>${escapeHtml(method.name)}</code></td>
-          <td>${escapeHtml(method.docs)}</td>
-          <td><code style="white-space: normal;">${escapeHtml(method.signature)}</code></td>
-        </tr>
-        `
+              <tr>
+                <td class="nowrap"><code>${escapeHtml(method.name)}</code></td>
+                <td>${escapeHtml(method.description)}</td>
+                <td>
+                  ${
+                    method.parameters?.length
+                      ? `
+                        <code>${escapeHtml(
+                          method.parameters.map(param => `${param.name}: ${param.type.text}`).join(', ')
+                        )}</code>
+                      `
+                      : '-'
+                  }
+                </td>
+              </tr>
+           `
           )
           .join('')}
       </tbody>
@@ -102,7 +112,7 @@
     table.innerHTML = `
       <thead>
         <tr>
-          <th>Slot</th>
+          <th>Name</th>
           <th>Description</th>
         </tr>
       </thead>
@@ -110,11 +120,11 @@
         ${slots
           .map(
             slot => `
-        <tr>
-          <td><code>${slot.name ? escapeHtml(slot.name) : '(default)'}</code></td>
-          <td>${escapeHtml(slot.docs)}</td>
-        </tr>
-        `
+              <tr>
+                <td class="nowrap">${slot.name ? `<code>${escapeHtml(slot.name)}</code>` : '(default)'}</td>
+                <td>${escapeHtml(slot.description)}</td>
+              </tr>
+            `
           )
           .join('')}
       </tbody>
@@ -138,7 +148,7 @@
             style => `
         <tr>
           <td><code>${escapeHtml(style.name)}</code></td>
-          <td>${escapeHtml(style.docs)}</td>
+          <td>${escapeHtml(style.description)}</td>
         </tr>
         `
           )
@@ -163,8 +173,8 @@
           .map(
             part => `
         <tr>
-          <td><code>${escapeHtml(part.name)}</code></td>
-          <td>${escapeHtml(part.docs)}</td>
+          <td class="nowrap"><code>${escapeHtml(part.name)}</code></td>
+          <td>${escapeHtml(part.description)}</td>
         </tr>
         `
           )
@@ -175,22 +185,55 @@
     return table.outerHTML;
   }
 
-  function createDependenciesList(dependencies, dependencyGraph) {
-    const all = [...dependencies];
+  function createAnimationsTable(animations) {
+    const table = document.createElement('table');
+    table.innerHTML = `
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${animations
+          .map(
+            animation => `
+        <tr>
+          <td class="nowrap"><code>${escapeHtml(animation.name)}</code></td>
+          <td>${escapeHtml(animation.description)}</td>
+        </tr>
+        `
+          )
+          .join('')}
+      </tbody>
+    `;
+
+    return table.outerHTML;
+  }
+
+  function createDependenciesList(targetComponent, allComponents) {
     const ul = document.createElement('ul');
+    const dependencies = [];
 
-    // Gather subdependencies from the dependency graph
-    Object.keys(dependencyGraph).map(key => {
-      dependencyGraph[key].map(subdep => {
-        if (!all.includes(subdep)) {
-          all.push(subdep);
+    // Recursively fetch subdependencies
+    function getDependencies(tag) {
+      const component = allComponents.find(c => c.tagName === tag);
+      if (!component || !Array.isArray(component.dependencies)) {
+        return [];
+      }
+
+      component.dependencies?.map(tag => {
+        if (!dependencies.includes(tag)) {
+          dependencies.push(tag);
         }
+        getDependencies(tag);
       });
-    });
+    }
 
-    all.sort().map(dependency => {
+    getDependencies(targetComponent);
+    dependencies.sort().map(tag => {
       const li = document.createElement('li');
-      li.innerHTML = `<code>${dependency}</code>`;
+      li.innerHTML = `<code>&lt;${tag}&gt;</code>`;
       ul.appendChild(li);
     });
 
@@ -207,31 +250,21 @@
       .replace(/`(.*?)`/g, '<code>$1</code>');
   }
 
-  function getMetadata() {
-    return new Promise((resolve, reject) => {
-      // Simple caching to prevent multiple XHR requests
-      if (metadataStore) {
-        return resolve(metadataStore);
-      }
-
-      fetch('/dist/components.json')
-        .then(res => res.json())
-        .then(data => {
-          metadataStore = data;
-          resolve(metadataStore);
-        })
-        .catch(err => console.error(err));
+  function getAllComponents(metadata) {
+    const allComponents = [];
+    metadata.modules?.map(module => {
+      module.declarations?.map(declaration => {
+        if (declaration.customElement) {
+          allComponents.push(declaration);
+        }
+      });
     });
+
+    return allComponents;
   }
 
-  function getDocsTagsObject(docsTags) {
-    let tags = {};
-
-    for (const tag of docsTags) {
-      tags[tag.name] = tag.text;
-    }
-
-    return tags;
+  function getComponent(metadata, tagName) {
+    return getAllComponents(metadata).find(component => component.tagName === tagName);
   }
 
   if (!window.$docsify) {
@@ -239,76 +272,68 @@
   }
 
   window.$docsify.plugins.push((hook, vm) => {
-    hook.mounted(function () {
-      getMetadata()
-        .then(metadata => {
-          const target = document.querySelector('.app-name');
+    hook.mounted(async function () {
+      const metadata = await customElements;
+      const target = document.querySelector('.app-name');
 
-          // Add version
-          const version = document.createElement('div');
-          version.classList.add('sidebar-version');
-          version.textContent = metadata.version;
-          target.appendChild(version);
+      // Add version
+      const version = document.createElement('div');
+      version.classList.add('sidebar-version');
+      version.textContent = isDev ? 'Development' : isNext ? 'Next' : metadata.package.version;
+      target.appendChild(version);
 
-          // Add repo buttons
-          const buttons = document.createElement('div');
-          buttons.classList.add('sidebar-buttons');
-          buttons.innerHTML = `
-            <a class="repo-button repo-button--small repo-button--sponsor" href="https://github.com/sponsors/claviska" rel="noopener" target="_blank">
-              <sl-icon name="heart"></sl-icon> Sponsor
-            </a>
-            <a class="repo-button repo-button--small repo-button--github" href="https://github.com/shoelace-style/shoelace/stargazers" rel="noopener" target="_blank">
-              <sl-icon src="/assets/images/github.svg"></sl-icon> <span class="github-star-count">Star</span>
-            </a>
-            <a class="repo-button repo-button--small repo-button--twitter" href="https://twitter.com/shoelace_style" rel="noopener" target="_blank">
-              <sl-icon src="/assets/images/twitter.svg"></sl-icon> Follow
-            </a>
-          `;
-          target.appendChild(buttons);
-        });
+      // Add repo buttons
+      const buttons = document.createElement('div');
+      buttons.classList.add('sidebar-buttons');
+      buttons.innerHTML = `
+          <a class="repo-button repo-button--small repo-button--sponsor" href="https://github.com/sponsors/claviska" rel="noopener" target="_blank">
+            <sl-icon name="heart"></sl-icon> Sponsor
+          </a>
+          <a class="repo-button repo-button--small repo-button--github" href="https://github.com/shoelace-style/shoelace/stargazers" rel="noopener" target="_blank">
+            <sl-icon name="github"></sl-icon> <span class="github-star-count">Star</span>
+          </a>
+          <a class="repo-button repo-button--small repo-button--twitter" href="https://twitter.com/shoelace_style" rel="noopener" target="_blank">
+            <sl-icon name="twitter"></sl-icon> Follow
+          </a>
+        `;
+      target.appendChild(buttons);
     });
 
     hook.beforeEach(async function (content, next) {
-      const metadata = await getMetadata();
+      const metadata = await customElements;
 
       // Replace %VERSION% placeholders
-      content = content.replace(/%VERSION%/g, metadata.version);
+      content = content.replace(/%VERSION%/g, metadata.package.version);
 
       // Handle [component-header] tags
       content = content.replace(/\[component-header:([a-z-]+)\]/g, (match, tag) => {
-        const data = metadata.components.filter(data => data.tag === tag)[0];
+        const component = getComponent(metadata, tag);
         let result = '';
 
-        if (!data) {
+        if (!component) {
           console.error('Component not found in metadata: ' + tag);
-          next(content);
-        }
-
-        const tags = getDocsTagsObject(data.docsTags);
-        if (!tags) {
-          console.error(`No metadata tags found for ${tag}`);
-          return;
+          return next(content);
         }
 
         let badgeType = 'info';
-        if (tags.status === 'stable') badgeType = 'primary';
-        if (tags.status === 'experimental') badgeType = 'warning';
-        if (tags.status === 'planned') badgeType = 'info';
-        if (tags.status === 'deprecated') badgeType = 'danger';
+        if (component.status === 'stable') badgeType = 'primary';
+        if (component.status === 'experimental') badgeType = 'warning';
+        if (component.status === 'planned') badgeType = 'info';
+        if (component.status === 'deprecated') badgeType = 'danger';
 
         result += `
           <div class="component-header">
             <div class="component-header__tag">
-              <code>&lt;${tag}&gt;</code>
+              <code>&lt;${component.tagName}&gt; | ${component.name}</code>
             </div>
 
             <div class="component-header__info">
               <sl-badge type="info" pill>
-                Since ${tags.since || '?'}
+                Since ${component.since || '?'}
               </sl-badge>
 
               <sl-badge type="${badgeType}" pill style="text-transform: capitalize;">
-                ${tags.status}
+                ${component.status}
               </sl-badge>
             </div>
           </div>
@@ -319,64 +344,85 @@
 
       // Handle [component-metadata] tags
       content = content.replace(/\[component-metadata:([a-z-]+)\]/g, (match, tag) => {
-        const data = metadata.components.filter(data => data.tag === tag)[0];
+        const component = getComponent(metadata, tag);
         let result = '';
 
-        if (!data) {
+        if (!component) {
           console.error('Component not found in metadata: ' + tag);
-          next(content);
+          return next(content);
         }
 
-        if (data.props.length) {
+        // Remove members that are private or don't have a description
+        const members = component.members?.filter(member => member.description && member.privacy !== 'private');
+        const methods = members?.filter(prop => prop.kind === 'method' && prop.privacy !== 'private');
+        const props = members?.filter(prop => {
+          // Look for a corresponding attribute
+          const attribute = component.attributes?.find(attr => attr.fieldName === prop.name);
+          if (attribute) {
+            prop.attribute = attribute.name || attribute.fieldName;
+          }
+
+          return prop.kind === 'field' && prop.privacy !== 'private';
+        });
+
+        if (props?.length) {
           result += `
             ## Properties
-            ${createPropsTable(data.props)}
+            ${createPropsTable(props)}
           `;
         }
 
-        if (data.events.length) {
+        if (component.events?.length) {
           result += `
             ## Events
-            ${createEventsTable(data.events)}
+            ${createEventsTable(component.events)}
           `;
         }
 
-        if (data.methods.length) {
+        if (methods?.length) {
           result += `
-            ## Methods
-            ${createMethodsTable(data.methods)}
+          ## Methods
+          ${createMethodsTable(methods)}
           `;
         }
 
-        if (data.slots.length) {
+        if (component.slots?.length) {
           result += `
             ## Slots
-            ${createSlotsTable(data.slots)}
+            ${createSlotsTable(component.slots)}
           `;
         }
 
-        if (data.styles.length) {
+        if (component.cssProperties?.length) {
           result += `
             ## CSS Custom Properties
-            ${createCustomPropertiesTable(data.styles)}
+            ${createCustomPropertiesTable(component.cssProperties)}
           `;
         }
 
-        if (data.parts.length) {
+        if (component.cssParts?.length) {
           result += `
             ## CSS Parts
-            ${createPartsTable(data.parts)}
+            ${createPartsTable(component.cssParts)}
           `;
         }
 
-        if (data.dependencies.length) {
+        if (component.animations?.length) {
+          result += `
+            ## Animations
+            ${createAnimationsTable(component.animations)}
+
+            Learn how to [customize animations](/getting-started/customizing#animations).
+          `;
+        }
+
+        if (component.dependencies?.length) {
           result += `
             ## Dependencies
 
-            This component has the following dependencies. If you're not using the lazy loader, be sure to import and
-            register these components in addition to <code>${tag}</code>.
+            This component imports the following dependencies.
 
-            ${createDependenciesList(data.dependencies, data.dependencyGraph)}
+            ${createDependenciesList(component.tagName, getAllComponents(metadata))}
           `;
         }
 

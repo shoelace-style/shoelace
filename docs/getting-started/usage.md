@@ -6,19 +6,19 @@ Shoelace components are just regular HTML elements, or "custom elements" to be p
 
 ### Properties
 
-Many components have properties ("props") that can be set using attributes. For example, buttons accept a `size` attribute that dictates the button's size.
+Many components have properties that can be set using attributes. For example, buttons accept a `size` attribute that maps to the `size` property which dictates the button's size.
 
 ```html
 <sl-button size="small">Click me</sl-button>
 ```
 
-Some props are booleans, so they only have true/false values. To activate a boolean prop, add the corresponding attribute without a value.
+Some properties are boolean, so they only have true/false values. To activate a boolean property, add the corresponding attribute without a value.
 
 ```html
 <sl-button disabled>Click me</sl-button>
 ```
 
-In rare cases, a prop may require an array, an object, or a function. For example, to customize the color picker's list of preset swatches, you set the `swatches` prop to an array of colors. This can be done with JavaScript.
+In rare cases, a property may require an array, an object, or a function. For example, to customize the color picker's list of preset swatches, you set the `swatches` property to an array of colors. This can be done with JavaScript.
 
 ```html
 <sl-color-picker></sl-color-picker>
@@ -50,14 +50,14 @@ Refer to a component's documentation for a complete list of its custom events.
 
 ### Methods
 
-Some components have methods you can call to trigger various behaviors. For example, you can set focus on a Shoelace input using the `setFocus()` method.
+Some components have methods you can call to trigger various behaviors. For example, you can set focus on a Shoelace input using the `focus()` method.
 
 ```html
 <sl-input></sl-input>
 
 <script>
   const input = document.querySelector('sl-input');
-  input.setFocus();
+  input.focus();
 </script>
 ```
 
@@ -102,28 +102,32 @@ Custom elements cannot have self-closing tags. Similar to `<script>` and `<texta
 
 You might expect similarly named elements to share the same API as native HTML elements. This is not always the case. Shoelace components **are not** designed to be one-to-one replacements for their HTML counterparts.
 
-For example, `<button>` and `<sl-button>` both have a `type` attribute, but it does different things (the former controls whether the button submits a form and the latter controls the button's appearance). Similarly, you can't call `focus()` on a Shoelace input — you need to use the component's `setFocus()` method instead. There are technical reasons for some of these design decisions that are outside the scope of this page.
+For example, `<button>` and `<sl-button>` both have a `type` attribute, but it does different things. The former controls whether the button submits a form and the latter controls the button's appearance.
 
-?> **Don't make assumptions about a component's API!** To prevent unexpected behaviors, please take the time to review the documentation and make sure you understand what each property, method, and event is intended to do.
+?> **Don't make assumptions about a component's API!** To prevent unexpected behaviors, please take the time to review the documentation and make sure you understand what each attribute, property, method, and event is intended to do.
 
 ## Code Completion
 
-Shoelace ships with a `custom-elements.json` file that can be used to describe its components to supportive editors, providing code completion (also known as "code hinting" or "IntelliSense"). To enable this, you need to tell your editor where this file is.
-
 ### VS Code
 
-1. [Install Shoelace locally](/getting-started/installation.md#local-installation)
+Shoelace ships with a file called `vscode.html-custom-data.json` that can be used to describe its components to Visual Studio Code. This enables code completion for Shoelace components (also known as "code hinting" or "IntelliSense"). To enable it, you need to tell VS Code where the file is.
+
+1. [Install Shoelace locally](/getting-started/installation#local-installation)
 2. Create a folder called `.vscode` at the root of your project
 3. Create a file inside the folder called `settings.json`
 4. Add the following to the file
 
 ```js
 {
-  "html.customData": ["./node_modules/@shoelace-style/shoelace/dist/custom-elements.json"]
+  "html.customData": ["./node_modules/@shoelace-style/shoelace/dist/vscode.html-custom-data.json"]
 }
 ```
 
-If `settings.json` already exists in your project, simply add the `html.customData` line to the root of the object.
+If `settings.json` already exists, simply add the above line to the root of the object. Note that you may need to restart VS Code for the changes to take affect.
+
+### Other Editors
+
+Most popular editors support custom code completion with a bit of configuration. Please [submit a feature request](https://github.com/shoelace-style/shoelace/issues/new/choose) for your editor of choice. PRs are also welcome!
 
 ## React
 
@@ -135,37 +139,29 @@ Event handling can also be cumbersome.
 
 > Because React implements its own synthetic event system, it cannot listen for DOM events coming from Custom Elements without the use of a workaround. Developers will need to reference their Custom Elements using a ref and manually attach event listeners with addEventListener. This makes working with Custom Elements cumbersome.
 
-Fortunately, there's a utility that will wrap Shoelace components so you can use them as if they were React components. 👇
-
-?> If you're starting a new project, consider using [Preact](https://preactjs.com/) as an alternative. It shares the same API as React and [handles custom elements quite well](https://custom-elements-everywhere.com/#preact).
-
-### Wrapping Components
-
-You can use [this utility](https://www.npmjs.com/package/@shoelace-style/react-wrapper) to wrap Shoelace components so they work like like regular React components. To install it, use this command.
+Fortunately, there's a package called [@shoelace-style/react](https://www.npmjs.com/package/@shoelace-style/react) that will let you use Shoelace components as if they were React components. You can install it using this command.
 
 ```bash
-npm install @shoelace-style/react-wrapper
+npm install @shoelace-style/react
 ```
 
-Now you can "import" Shoelace components as React components! Remember to [install Shoelace](/getting-started/installation.md) first, otherwise this won't work.
-
-```js
-import wrapCustomElement from '@shoelace-style/react-wrapper';
-
-const ShoelaceButton = wrapCustomElement('sl-button');
-
-return <ShoelaceButton type="primary">Click me</ShoelaceButton>;
-```
-
-A reference ("ref") to the underlying custom element is exposed through the `element` property so you can access it directly. This is useful for calling methods.
+Include the base theme and any components you want to use in your app.
 
 ```jsx
-<ShoelaceButton 
-  ref={el => this.button = el} 
-  onClick={() => this.button.element.current.removeFocus()}
->
-  Click me
-</ShoelaceButton>
+import '@shoelace-style/shoelace/dist/themes/base.css';
+
+import SlButton from '@shoelace-style/react/dist/button';
+import SlSpinner from '@shoelace-style/react/dist/spinner';
+
+// ...
+
+const MyComponent = (props) => {
+  return (
+    <SlButton type="primary">
+      Click me
+    </SlButton>
+  )
+};
 ```
 
 ## Vue
@@ -198,7 +194,7 @@ One caveat is there's currently [no support for v-model on custom elements](http
 <sl-input :value="name" @input="name = $event.target.value">
 ```
 
-If that's too verbose, you can use a custom directive instead. 👇
+If that's too verbose, you can use a custom directive instead.
 
 ### Using a Custom Directive
 

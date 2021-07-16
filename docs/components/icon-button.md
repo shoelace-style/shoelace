@@ -8,8 +8,6 @@ For a full list of icons that come bundled with Shoelace, refer to the [icon com
 
 ```html preview
 <sl-icon-button name="gear" label="Settings"></sl-icon-button>
-<sl-icon-button name="sliders" label="Options"></sl-icon-button>
-<sl-icon-button name="x" label="Close"></sl-icon-button>
 ```
 
 ## Examples
@@ -62,6 +60,9 @@ Wrap a tooltip around an icon button to provide contextual information to the us
 ```
 
 ### Disabled
+
+Use the `disabled` attribute to disable the icon button.
+
 ```html preview
 <sl-icon-button name="gear" label="Settings" disabled></sl-icon-button>
 ```

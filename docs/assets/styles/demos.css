@@ -21,7 +21,7 @@
   height: 2rem;
 }
 
-.transition-demo::after {
+.transition-demo:after {
   content: '';
   position: absolute;
   background-color: var(--sl-color-primary-500);
@@ -33,7 +33,7 @@
   transition-property: width;
 }
 
-.transition-demo:hover::after {
+.transition-demo:hover:after {
   width: 100%;
 }
 

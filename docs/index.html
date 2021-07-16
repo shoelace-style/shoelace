@@ -12,6 +12,7 @@
       name="viewport"
       content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
     />
+    <meta name="custom-elements-manifest" content="dist/custom-elements.json" />
     <meta property="og:title" content="Shoelace" />
     <meta
       property="og:description"
@@ -20,7 +21,6 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://shoelace.style/" />
     <meta property="og:image" content="https://shoelace.style/assets/images/og-image.png" />
-
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@shoelace_style" />
     <meta name="twitter:creator" content="@claviska" />
@@ -41,9 +41,9 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/touch-icon.png" />
 
     <!-- Import Shoelace -->
-    <link rel="stylesheet" href="/dist/shoelace/shoelace.css" />
-    <link rel="stylesheet" href="/themes/dark.css" />
-    <script type="module" src="/dist/shoelace/shoelace.esm.js"></script>
+    <link rel="stylesheet" href="/dist/themes/base.css" />
+    <link rel="stylesheet" href="/dist/themes/dark.css" />
+    <script type="module" src="/dist/shoelace.js"></script>
   </head>
   <body>
     <div id="app"></div>
@@ -74,7 +74,7 @@
           crossChapter: true,
           crossChapterText: false
         },
-        routerMode: window.ShoelaceDevServer ? 'hash' : 'history',
+        routerMode: location.port ? 'hash' : 'history',
         search: {
           maxAge: 86400000, // Expiration time, the default one day
           paths: 'auto',
@@ -94,6 +94,7 @@
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.19.0/components/prism-bash.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.19.0/components/prism-jsx.min.js"></script>
     <script src="/assets/plugins/code-block/code-block.js"></script>
+    <script src="/assets/plugins/scroll-position/scroll-position.js"></script>
     <script src="/assets/plugins/metadata/metadata.js"></script>
     <script src="/assets/plugins/sidebar/sidebar.js"></script>
     <script src="/assets/plugins/theme/theme.js"></script>

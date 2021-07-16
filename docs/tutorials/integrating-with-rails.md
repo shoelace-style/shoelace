@@ -1,6 +1,6 @@
 # Integrating with Rails
 
-This page explains how to integrate Shoelace with a Rails app. This is a community-maintained document. For questions about this integration, please [ask the community](/getting-started/community).
+This page explains how to integrate Shoelace with a Rails app. This is a community-maintained document. For questions about this integration, please [ask the community](/resources/community).
 
 ## Requirements
 
@@ -23,7 +23,7 @@ yarn add @shoelace-style/shoelace copy-webpack-plugin
 The next step is to import Shoelace's default theme (stylesheet) in `app/javascript/stylesheets/application.scss`.
 
 ```css
-@import '~@shoelace-style/shoelace/dist/shoelace/shoelace';
+@import '~@shoelace-style/shoelace/dist/themes/base';
 ```
 
 ### Importing Required Scripts
@@ -32,25 +32,20 @@ After importing the theme, you'll need to import the JavaScript files for Shoela
 
 ```js
 import '../stylesheets/application.scss'
-import { defineCustomElements, setAssetPath } from '@shoelace-style/shoelace'
+import { setBasePath, SlAlert, SlAnimation, SlButton, ... } from '@shoelace-style/shoelace'
 
 // ...
 
 const rootUrl = document.currentScript.src.replace(/\/packs.*$/, '')
 
-// Path to the assets folder (should be independent on the current script source path
+// Path to the assets folder (should be independent from the current script source path
 // to work correctly in different environments)
-setAssetPath(rootUrl + '/packs/js/')
-
-// This enables all web components for the current page
-defineCustomElements()
+setBasePath(rootUrl + '/packs/js/')
 ```
-
-?> This will import all Shoelace components for convenience. To selectively import components, refer to the [Using webpack](/getting-started/installation?id=using-webpack) section of the docs.
 
 ### webpack Config
 
-Next we need to add Shoelace's icons to the final build output. To do this, modify `config/webpack/environment.js` to look like this.
+Next we need to add Shoelace's assets to the final build output. To do this, modify `config/webpack/environment.js` to look like this.
 
 ```js
 const { environment } = require('@rails/webpacker')
@@ -59,7 +54,7 @@ const { environment } = require('@rails/webpacker')
 const path = require('path')
 const CopyPlugin = require('copy-webpack-plugin')
 
-// Add shoelace icons to webpack's build process
+// Add shoelace assets to webpack's build process
 environment.plugins.append(
   'CopyPlugin',
   new CopyPlugin({
@@ -67,9 +62,9 @@ environment.plugins.append(
       {
         from: path.resolve(
           __dirname,
-          '../../node_modules/@shoelace-style/shoelace/dist/shoelace/icons'
+          '../../node_modules/@shoelace-style/shoelace/dist/assets'
         ),
-        to: path.resolve(__dirname, '../../public/packs/js/icons')
+        to: path.resolve(__dirname, '../../public/packs/js/assets')
       }
     ]
   })

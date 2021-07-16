@@ -86,7 +86,7 @@ Use the `placement` attribute to set the preferred placement of the tooltip.
     width: 250px;
   }
 
-  .tooltip-placement-example-row::after {
+  .tooltip-placement-example-row:after {
     content: '';
     display: table;
     clear: both;
@@ -122,7 +122,7 @@ Set the `trigger` attribute to `click` to toggle the tooltip on click instead of
 
 ### Manual Trigger
 
-Tooltips can be controller programmatically by setting the `trigger` attribute to `manual`. Use the `open` prop to control when the tooltip is shown.
+Tooltips can be controller programmatically by setting the `trigger` attribute to `manual`. Use the `open` attribute to control when the tooltip is shown.
 
 ```html preview
 <sl-button style="margin-right: 4rem;">Toggle Manually</sl-button>
@@ -155,7 +155,7 @@ You can control the size of tooltip arrows by overriding the `--sl-tooltip-arrow
 </div>
 ```
 
-To override it globally, set it in a root block in your stylesheet after `shoelace.css` is loaded.
+To override it globally, set it in a root block in your stylesheet after the Shoelace stylesheet is loaded.
 
 ```css
 :root {
@@ -163,5 +163,15 @@ To override it globally, set it in a root block in your stylesheet after `shoela
 }
 ```
 
+### HTML in Tooltips
+
+Use the `content` slot to create tooltips with HTML content.
+
+```html preview
+<sl-tooltip>
+  <div slot="content">I'm not <strong>just</strong> a tooltip, I'm a <em>tooltip</em> with HTML!</div>
+  <sl-button>Hover me</sl-button>
+</sl-tooltip>
+```
 
 [component-metadata:sl-tooltip]

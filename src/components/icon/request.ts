@@ -28,7 +28,7 @@ export const requestIcon = (url: string) => {
           svg: null
         };
       }
-    });
+    }) as Promise<IconFile>;
 
     iconFiles.set(url, request);
     return request;

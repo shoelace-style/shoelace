@@ -25,7 +25,7 @@ Use the `type` attribute to set the button's type.
 
 ### Sizes
 
-Use the `size` prop to change a button's size.
+Use the `size` attribute to change a button's size.
 
 ```html preview
 <sl-button size="small">Small</sl-button>
@@ -35,7 +35,7 @@ Use the `size` prop to change a button's size.
 
 ### Pill Buttons
 
-Use the `pill` prop to give buttons rounded edges.
+Use the `pill` attribute to give buttons rounded edges.
 
 ```html preview
 <sl-button size="small" pill>Small</sl-button>
@@ -45,7 +45,7 @@ Use the `pill` prop to give buttons rounded edges.
 
 ### Circle Buttons
 
-Use the `circle` prop to create circular icon buttons.
+Use the `circle` attribute to create circular icon buttons.
 
 ```html preview
 <sl-button type="default" size="small" circle><sl-icon name="gear"></sl-icon></sl-button>
@@ -146,7 +146,7 @@ Use the `prefix` and `suffix` slots to add icons.
 
 ### Caret
 
-Use the `caret` prop to add a dropdown indicator when a button will trigger a dropdown, menu, or popover.
+Use the `caret` attribute to add a dropdown indicator when a button will trigger a dropdown, menu, or popover.
 
 ```html preview
 <sl-button size="small" caret>Small</sl-button>
@@ -156,7 +156,7 @@ Use the `caret` prop to add a dropdown indicator when a button will trigger a dr
 
 ### Loading
 
-Use the `loading` prop to make a button busy. The width will remain the same as before, preventing adjacent elements from moving around. Clicks will be suppressed until the loading state is removed.
+Use the `loading` attribute to make a button busy. The width will remain the same as before, preventing adjacent elements from moving around. Clicks will be suppressed until the loading state is removed.
 
 ```html preview
 <sl-button type="default" loading>Default</sl-button>
@@ -169,7 +169,7 @@ Use the `loading` prop to make a button busy. The width will remain the same as 
 
 ### Disabled
 
-Use the `disabled` prop to disable a button. Clicks will be suppressed until the disabled state is removed.
+Use the `disabled` attribute to disable a button. Clicks will be suppressed until the disabled state is removed.
 
 ```html preview
 <sl-button type="default" disabled>Default</sl-button>
@@ -178,6 +178,50 @@ Use the `disabled` prop to disable a button. Clicks will be suppressed until the
 <sl-button type="info" disabled>Info</sl-button>
 <sl-button type="warning" disabled>Warning</sl-button>
 <sl-button type="danger" disabled>Danger</sl-button>
+```
+
+### Styling Buttons
+
+This example demonstrates how to style buttons using a custom class. This is the recommended approach if you need to add additional variations. To customize an existing variation, modify the selector to target the button's type attribute instead of a class (e.g. `sl-button[type="primary"]`).
+
+```html preview
+<sl-button class="pink">Pink Button</sl-button>
+
+<style>
+  sl-button.pink::part(base) {
+    /* Set design tokens for height and border width */
+    --sl-input-height-medium: 48px;
+    --sl-input-border-width: 4px;
+    
+    border-radius: 0;
+    background-color: #ff1493;
+    border-top-color: #ff7ac1;
+    border-left-color: #ff7ac1;
+    border-bottom-color: #ad005c;
+    border-right-color: #ad005c;
+    color: white;
+    font-size: 1.125rem;
+    box-shadow: 0 2px 10px #0002;
+    transition: var(--sl-transition-medium) transform ease, var(--sl-transition-medium) border ease;
+  }
+
+  sl-button.pink::part(base):hover {
+    transform: scale(1.05) rotate(-1deg);
+  }
+
+  sl-button.pink::part(base):active {
+    border-top-color: #ad005c;
+    border-right-color: #ff7ac1;
+    border-bottom-color: #ff7ac1;
+    border-left-color: #ad005c;
+    transform: scale(1.05) rotate(-1deg) translateY(2px);
+  }
+
+  sl-button.pink::part(base):focus-visible {
+    outline: dashed 2px deeppink;
+    outline-offset: 4px;
+  }
+</style>
 ```
 
 [component-metadata:sl-button]

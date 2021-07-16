@@ -75,8 +75,6 @@ When a form control is invalid, the containing form will not be submitted. Inste
 
 All form controls support validation, but not all validation props are available for every component. Refer to a component's documentation to see which validation props it supports.
 
-Note that validity is not checked until the user interacts with the control or its containing form is submitted. This prevents required controls from being rendered as invalid right away, which can result in a poor user experience. If you need this behavior, set the `invalid` attribute initially.
-
 !> Client-side validation can be used to improve the UX of forms, but it is not a replacement for server-side validation. **You should always validate and sanitize user input on the server!**
 
 ### Required Fields
@@ -198,7 +196,7 @@ The `invalid` attribute reflects the form control's validity, so you can style i
 
 To opt out of the browser's built-in validation and use your own, add the `novalidate` attribute to the form. This will ignore all constraints and prevent the browser from showing its own warnings when form controls are invalid.
 
-Remember that the `invalid` prop on form controls reflects validity as defined by the [Constraint Validation API](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation). You can set it initially, but the `invalid` prop will update as the user interacts with the form control. As such, you should not rely on it to set invalid styles using a custom validation library.
+Remember that the `invalid` attribute on form controls reflects validity as defined by the [Constraint Validation API](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation). You can set it initially, but the `invalid` attribute will update as the user interacts with the form control. As such, you should not rely on it to set invalid styles using a custom validation library.
 
 Instead, toggle a class and target it in your stylesheet as shown below.
 

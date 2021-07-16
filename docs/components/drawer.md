@@ -13,40 +13,36 @@ Drawers slide in from a container to expose additional options and information.
 <sl-button>Open Drawer</sl-button>
 
 <script>
-  (() => {
-    const drawer = document.querySelector('.drawer-overview');
-    const openButton = drawer.nextElementSibling;
-    const closeButton = drawer.querySelector('sl-button[type="primary"]');
+  const drawer = document.querySelector('.drawer-overview');
+  const openButton = drawer.nextElementSibling;
+  const closeButton = drawer.querySelector('sl-button[type="primary"]');
 
-    openButton.addEventListener('click', () => drawer.show());
-    closeButton.addEventListener('click', () => drawer.hide());
-  })();
+  openButton.addEventListener('click', () => drawer.show());
+  closeButton.addEventListener('click', () => drawer.hide());
 </script>
 ```
 
 ## Examples
 
-### Slide in From Left
+### Slide in From Start
 
-To make the drawer slide in from the left, set the `placement` attribute to `left`.
+By default, drawers slide in from the end. To make the drawer slide in from the start, set the `placement` attribute to `start`.
 
 ```html preview
-<sl-drawer label="Drawer" placement="left" class="drawer-placement-left">
-  This drawer slides in from the left.
+<sl-drawer label="Drawer" placement="start" class="drawer-placement-start">
+  This drawer slides in from the start.
   <sl-button slot="footer" type="primary">Close</sl-button>
 </sl-drawer>
 
 <sl-button>Open Drawer</sl-button>
 
 <script>
-  (() => {
-    const drawer = document.querySelector('.drawer-placement-left');
-    const openButton = drawer.nextElementSibling;
-    const closeButton = drawer.querySelector('sl-button[type="primary"]');
+  const drawer = document.querySelector('.drawer-placement-start');
+  const openButton = drawer.nextElementSibling;
+  const closeButton = drawer.querySelector('sl-button[type="primary"]');
 
-    openButton.addEventListener('click', () => drawer.show());
-    closeButton.addEventListener('click', () => drawer.hide());
-  })();
+  openButton.addEventListener('click', () => drawer.show());
+  closeButton.addEventListener('click', () => drawer.hide());
 </script>
 ```
 
@@ -63,14 +59,12 @@ To make the drawer slide in from the top, set the `placement` attribute to `top`
 <sl-button>Open Drawer</sl-button>
 
 <script>
-  (() => {
-    const drawer = document.querySelector('.drawer-placement-top');
-    const openButton = drawer.nextElementSibling;
-    const closeButton = drawer.querySelector('sl-button[type="primary"]');
+  const drawer = document.querySelector('.drawer-placement-top');
+  const openButton = drawer.nextElementSibling;
+  const closeButton = drawer.querySelector('sl-button[type="primary"]');
 
-    openButton.addEventListener('click', () => drawer.show());
-    closeButton.addEventListener('click', () => drawer.hide());
-  })();
+  openButton.addEventListener('click', () => drawer.show());
+  closeButton.addEventListener('click', () => drawer.hide());
 </script>
 ```
 
@@ -87,20 +81,18 @@ To make the drawer slide in from the bottom, set the `placement` attribute to `b
 <sl-button>Open Drawer</sl-button>
 
 <script>
-  (() => {
-    const drawer = document.querySelector('.drawer-placement-bottom');
-    const openButton = drawer.nextElementSibling;
-    const closeButton = drawer.querySelector('sl-button[type="primary"]');
+  const drawer = document.querySelector('.drawer-placement-bottom');
+  const openButton = drawer.nextElementSibling;
+  const closeButton = drawer.querySelector('sl-button[type="primary"]');
 
-    openButton.addEventListener('click', () => drawer.show());
-    closeButton.addEventListener('click', () => drawer.hide());
-  })();
+  openButton.addEventListener('click', () => drawer.show());
+  closeButton.addEventListener('click', () => drawer.hide());
 </script>
 ```
 
 ### Contained to an Element
 
-By default, the drawer slides out of its [containing block](https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#Identifying_the_containing_block), which is usually the viewport. To make the drawer slide out of its parent element, add the `contained` prop and `position: relative` to the parent.
+By default, the drawer slides out of its [containing block](https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#Identifying_the_containing_block), which is usually the viewport. To make the drawer slide out of its parent element, add the `contained` attribute and `position: relative` to the parent.
 
 ```html preview
 <div
@@ -117,14 +109,12 @@ By default, the drawer slides out of its [containing block](https://developer.mo
 <sl-button>Open Drawer</sl-button>
 
 <script>
-  (() => {
-    const drawer = document.querySelector('.drawer-contained');
-    const openButton = drawer.parentElement.nextElementSibling;
-    const closeButton = drawer.querySelector('sl-button[type="primary"]');
+  const drawer = document.querySelector('.drawer-contained');
+  const openButton = drawer.parentElement.nextElementSibling;
+  const closeButton = drawer.querySelector('sl-button[type="primary"]');
 
-    openButton.addEventListener('click', () => drawer.show());
-    closeButton.addEventListener('click', () => drawer.hide());
-  })();
+  openButton.addEventListener('click', () => drawer.show());
+  closeButton.addEventListener('click', () => drawer.hide());
 </script>
 ```
 
@@ -141,14 +131,12 @@ Use the `--size` custom property to set the drawer's size. This will be applied 
 <sl-button>Open Drawer</sl-button>
 
 <script>
-  (() => {
-    const drawer = document.querySelector('.drawer-custom-size');
-    const openButton = drawer.nextElementSibling;
-    const closeButton = drawer.querySelector('sl-button[type="primary"]');
+  const drawer = document.querySelector('.drawer-custom-size');
+  const openButton = drawer.nextElementSibling;
+  const closeButton = drawer.querySelector('sl-button[type="primary"]');
 
-    openButton.addEventListener('click', () => drawer.show());
-    closeButton.addEventListener('click', () => drawer.hide());
-  })();
+  openButton.addEventListener('click', () => drawer.show());
+  closeButton.addEventListener('click', () => drawer.hide());
 </script>
 ```
 
@@ -167,46 +155,45 @@ By design, a drawer's height will never exceed 100% of its container. As such, d
 <sl-button>Open Drawer</sl-button>
 
 <script>
-  (() => {
-    const drawer = document.querySelector('.drawer-scrolling');
-    const openButton = drawer.nextElementSibling;
-    const closeButton = drawer.querySelector('sl-button[type="primary"]');
+  const drawer = document.querySelector('.drawer-scrolling');
+  const openButton = drawer.nextElementSibling;
+  const closeButton = drawer.querySelector('sl-button[type="primary"]');
 
-    openButton.addEventListener('click', () => drawer.show());
-    closeButton.addEventListener('click', () => drawer.hide());
-  })();
+  openButton.addEventListener('click', () => drawer.show());
+  closeButton.addEventListener('click', () => drawer.hide());
 </script>
 ```
 
-### Ignoring Clicks on the Overlay
+### Preventing the Drawer from Closing
 
-By default, drawers are closed when the user clicks or taps on the overlay. To prevent this behavior, cancel the `sl-overlay-dismiss` event.
+By default, drawers will close when the user clicks the close button, clicks the overlay, or presses the <kbd>Escape</kbd> key. In most cases, the default behavior is the best behavior in terms of UX. However, there are situations where this may be undesirable, such as when data loss will occur.
+
+To keep the drawer open in such cases, you can cancel the `sl-request-close` event. When canceled, the drawer will remain open and pulse briefly to draw the user's attention to it.
+
 
 ```html preview
-<sl-drawer label="Drawer" class="drawer-no-overlay-dismiss">
-  This drawer will not be closed when you click outside of it.
-  <sl-button slot="footer" type="primary">Close</sl-button>
+<sl-drawer label="Drawer" class="drawer-deny-close">
+  This dialog will not close unless you use the button below.
+  <sl-button slot="footer" type="primary">Save &amp; Close</sl-button>
 </sl-drawer>
 
 <sl-button>Open Drawer</sl-button>
 
 <script>
-  (() => {
-    const drawer = document.querySelector('.drawer-no-overlay-dismiss');
-    const openButton = drawer.nextElementSibling;
-    const closeButton = drawer.querySelector('sl-button[type="primary"]');
+  const drawer = document.querySelector('.drawer-deny-close');
+  const openButton = drawer.nextElementSibling;
+  const closeButton = drawer.querySelector('sl-button[type="primary"]');
 
-    openButton.addEventListener('click', () => drawer.show());
-    closeButton.addEventListener('click', () => drawer.hide());
+  openButton.addEventListener('click', () => drawer.show());
+  closeButton.addEventListener('click', () => drawer.hide());
 
-    drawer.addEventListener('sl-overlay-dismiss', event => event.preventDefault());
-  })();
+  drawer.addEventListener('sl-request-close', event => event.preventDefault());
 </script>
 ```
 
 ### Customizing Initial Focus
 
-By default, the drawer's panel will gain focus when opened. To set focus on a different element, listen for the `sl-initial-focus` event.
+By default, the drawer's panel will gain focus when opened. This allows the first tab press to focus on the first tabbable element within the drawer. To set focus on a different element, listen for and cancel the `sl-initial-focus` event.
 
 ```html preview
 <sl-drawer label="Drawer" class="drawer-focus">
@@ -217,20 +204,18 @@ By default, the drawer's panel will gain focus when opened. To set focus on a di
 <sl-button>Open Drawer</sl-button>
 
 <script>
-  (() => {
-    const drawer = document.querySelector('.drawer-focus');
-    const input = drawer.querySelector('sl-input');
-    const openButton = drawer.nextElementSibling;
-    const closeButton = drawer.querySelector('sl-button[type="primary"]');
+  const drawer = document.querySelector('.drawer-focus');
+  const input = drawer.querySelector('sl-input');
+  const openButton = drawer.nextElementSibling;
+  const closeButton = drawer.querySelector('sl-button[type="primary"]');
 
-    openButton.addEventListener('click', () => drawer.show());
-    closeButton.addEventListener('click', () => drawer.hide());
+  openButton.addEventListener('click', () => drawer.show());
+  closeButton.addEventListener('click', () => drawer.hide());
 
-    drawer.addEventListener('sl-initial-focus', event => {
-      event.preventDefault();
-      input.setFocus({ preventScroll: true });
-    });    
-  })();
+  drawer.addEventListener('sl-initial-focus', event => {
+    event.preventDefault();
+    input.focus({ preventScroll: true });
+  });    
 </script>
 ```
 
