@@ -2,6 +2,7 @@ import { LitElement, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
+import { live } from 'lit-html/directives/live';
 import { styleMap } from 'lit-html/directives/style-map';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
@@ -731,7 +732,7 @@ export default class SlColorPicker extends LitElement {
             autocorrect="off"
             autocapitalize="off"
             spellcheck="false"
-            .value=${this.inputValue}
+            .value=${live(this.inputValue)}
             ?disabled=${this.disabled}
             @keydown=${this.handleInputKeyDown}
             @sl-change=${this.handleInputChange}

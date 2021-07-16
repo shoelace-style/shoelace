@@ -16,6 +16,7 @@ This release improves how component dependencies are imported. If you've been ch
 - Fixed a bug in component styles that prevented the box sizing reset from being applied
 - Fixed a regression in `sl-color-picker` where dragging the grid handle wasn't smooth
 - Fixed a bug where slot detection could incorrecly match against slots of child elements [#481](https://github.com/shoelace-style/shoelace/pull/481)
+- Fixed a bug in `sl-input` where focus would move to the end of the input when typing in Safari [#480](https://github.com/shoelace-style/shoelace/issues/480)
 - Improved base path utility logic
 
 ## 2.0.0-beta.46

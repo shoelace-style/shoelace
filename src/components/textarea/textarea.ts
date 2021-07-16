@@ -3,6 +3,7 @@ import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
 import { emit } from '../../internal/event';
+import { live } from 'lit-html/directives/live';
 import { watch } from '../../internal/watch';
 import { getLabelledBy, renderFormControl } from '../../internal/form-control';
 import { hasSlot } from '../../internal/slot';
@@ -310,7 +311,7 @@ export default class SlTextarea extends LitElement {
             id=${this.inputId}
             class="textarea__control"
             name=${ifDefined(this.name)}
-            .value=${this.value}
+            .value=${live(this.value)}
             ?disabled=${this.disabled}
             ?readonly=${this.readonly}
             ?required=${this.required}

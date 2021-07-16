@@ -2,6 +2,7 @@ import { LitElement, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { ifDefined } from 'lit-html/directives/if-defined';
 import { classMap } from 'lit-html/directives/class-map';
+import { live } from 'lit-html/directives/live';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import { getLabelledBy, renderFormControl } from '../../internal/form-control';
@@ -318,7 +319,7 @@ export default class SlInput extends LitElement {
             min=${ifDefined(this.min)}
             max=${ifDefined(this.max)}
             step=${ifDefined(this.step)}
-            .value=${this.value}
+            .value=${live(this.value)}
             autocapitalize=${ifDefined(this.autocapitalize)}
             autocomplete=${ifDefined(this.autocomplete)}
             autocorrect=${ifDefined(this.autocorrect)}
