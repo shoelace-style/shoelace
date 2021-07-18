@@ -151,7 +151,6 @@ Include the base theme and any components you want to use in your app.
 import '@shoelace-style/shoelace/dist/themes/base.css';
 
 import SlButton from '@shoelace-style/react/dist/button';
-import SlSpinner from '@shoelace-style/react/dist/spinner';
 
 // ...
 
