@@ -72,6 +72,9 @@ export default class SlInput extends LitElement {
   /** The input's value attribute. */
   @property() value = '';
 
+  /** The input's list attribute. */
+  @property() list: string;
+  
   /** Draws a pill-style input with rounded edges. */
   @property({ type: Boolean, reflect: true }) pill = false;
 
@@ -310,6 +313,7 @@ export default class SlInput extends LitElement {
             class="input__control"
             type=${this.type === 'password' && this.isPasswordVisible ? 'text' : this.type}
             name=${ifDefined(this.name)}
+            list=${ifDefined(this.list)}
             ?disabled=${this.disabled}
             ?readonly=${this.readonly}
             ?required=${this.required}
