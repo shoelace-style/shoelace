@@ -25,22 +25,19 @@ export function getBasePath() {
 //
 // Alternatively, you can set the base path manually using the exported setBasePath() function.
 //
-if (!basePath) {
-  const allScripts = [...document.getElementsByTagName('script')] as HTMLScriptElement[];
-  const el = allScripts.find(script => script.hasAttribute('data-shoelace'));
+const scripts = [...document.getElementsByTagName('script')] as HTMLScriptElement[];
+const configScript = scripts.find(script => script.hasAttribute('data-shoelace'));
 
-  if (el) {
-    // Use the data-shoelace attribute
-    setBasePath(el.getAttribute('data-shoelace')!);
-  } else {
-    // Fallback to auto-detection
-    const script = document.querySelector('script[src$="shoelace.js"], script[src$="shoelace.min.js"]');
-    let path = '';
+if (configScript) {
+  // Use the data-shoelace attribute
+  setBasePath(configScript.getAttribute('data-shoelace')!);
+} else {
+  const fallbackScript = scripts.find(s => /shoelace(\.min)?\.js$/.test(s.src));
+  let path = '';
 
-    if (script) {
-      path = script.getAttribute('src')!;
-    }
-
-    setBasePath(path.split('/').slice(0, -1).join('/'));
+  if (fallbackScript) {
+    path = fallbackScript.getAttribute('src')!;
   }
+
+  setBasePath(path.split('/').slice(0, -1).join('/'));
 }

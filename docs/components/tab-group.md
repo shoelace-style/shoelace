@@ -78,7 +78,7 @@ Tabs can be shown on the ending side by setting `placement` to `end`.
 
 ### Closable Tabs
 
-Add the `closable` prop to a tab to show a close button. This example shows how you can dynamically remove tabs from the DOM when the close button is activated.
+Add the `closable` attribute to a tab to show a close button. This example shows how you can dynamically remove tabs from the DOM when the close button is activated.
 
 ```html preview
 <sl-tab-group class="tabs-closable">

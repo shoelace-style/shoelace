@@ -1,4 +1,4 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
@@ -11,7 +11,9 @@ import { hasSlot } from '../../internal/slot';
 import { isPreventScrollSupported } from '../../internal/support';
 import Modal from '../../internal/modal';
 import { setDefaultAnimation, getAnimation } from '../../utilities/animation-registry';
-import styles from 'sass:./dialog.scss';
+import styles from './dialog.styles';
+
+import '../icon-button/icon-button';
 
 const hasPreventScroll = isPreventScrollSupported();
 
@@ -59,7 +61,7 @@ let id = 0;
  */
 @customElement('sl-dialog')
 export default class SlDialog extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   @query('.dialog') dialog: HTMLElement;
   @query('.dialog__panel') panel: HTMLElement;
@@ -72,19 +74,19 @@ export default class SlDialog extends LitElement {
   @state() private hasFooter = false;
 
   /** Indicates whether or not the dialog is open. You can use this in lieu of the show/hide methods. */
-  @property({ type: Boolean, reflect: true }) open: boolean = false;
+  @property({ type: Boolean, reflect: true }) open = false;
 
   /**
    * The dialog's label as displayed in the header. You should always include a relevant label even when using
    * `no-header`, as it is required for proper accessibility.
    */
-  @property({ reflect: true }) label: string = '';
+  @property({ reflect: true }) label = '';
 
   /**
    * Disables the header. This will also remove the default close button, so please ensure you provide an easy,
    * accessible way for users to dismiss the dialog.
    */
-  @property({ attribute: 'no-header', type: Boolean, reflect: true }) noHeader: boolean = false;
+  @property({ attribute: 'no-header', type: Boolean, reflect: true }) noHeader = false;
 
   connectedCallback() {
     super.connectedCallback();

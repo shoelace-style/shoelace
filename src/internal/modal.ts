@@ -1,4 +1,4 @@
-import { getTabbableElements } from '../internal/tabbable';
+import { getTabbableBoundary } from '../internal/tabbable';
 
 let activeModals: HTMLElement[] = [];
 
@@ -34,12 +34,11 @@ export default class Modal {
 
     // Trap focus so it doesn't go out of the modal's boundary
     if (this.isActive() && !path.includes(this.element)) {
-      const tabbableElements = getTabbableElements(this.element);
-      const index = this.tabDirection === 'backward' ? tabbableElements.length - 1 : 0;
-      const el = tabbableElements[index];
+      const { start, end } = getTabbableBoundary(this.element);
+      const target = this.tabDirection === 'forward' ? start : end;
 
-      if (typeof el?.focus === 'function') {
-        el.focus({ preventScroll: true });
+      if (typeof target?.focus === 'function') {
+        target.focus({ preventScroll: true });
       }
     }
   }

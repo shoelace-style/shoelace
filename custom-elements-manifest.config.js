@@ -7,8 +7,6 @@ const { name, description, version, author, homepage, license } = packageData;
 export default {
   globs: ['src/components/**/*.ts'],
   exclude: ['**/*.test.ts'],
-  dev: true,
-  watch: true,
   plugins: [
     // Append package data
     {
@@ -18,42 +16,13 @@ export default {
       }
     },
 
-    // Strip dashes from jsDoc comments
-    {
-      name: 'shoelace-jsdoc-dashes',
-      packageLinkPhase({ customElementsManifest, context }) {
-        for (const module of customElementsManifest?.modules) {
-          for (const declaration of module?.declarations) {
-            const items = [
-              declaration.animations,
-              declaration.attributes,
-              declaration.cssParts,
-              declaration.cssProperties,
-              declaration.events,
-              declaration.members,
-              declaration?.members?.flatMap(member => member.parameters),
-              declaration.slots
-            ];
-
-            items.flat().map(item => {
-              // Remove dash prefix and trim whitespace from the description
-              if (item?.description) {
-                item.description = item.description.replace(/^-/, '').trim();
-              }
-            });
-          }
-        }
-      }
-    },
-
     // Parse custom jsDoc tags
     {
       name: 'shoelace-custom-tags',
       analyzePhase({ ts, node, moduleDoc, context }) {
         switch (node.kind) {
           case ts.SyntaxKind.ClassDeclaration:
-            const hasDefaultModifier = node?.modifiers?.some(mod => ts.SyntaxKind.DefaultKeyword === mod.kind);
-            const className = hasDefaultModifier ? 'default' : node?.name?.getText();
+            const className = node.name.getText();
             const classDoc = moduleDoc?.declarations?.find(declaration => declaration.name === className);
             const customTags = ['animation', 'dependency', 'since', 'status'];
             let customComments = '/**';

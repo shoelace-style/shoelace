@@ -1,4 +1,6 @@
 (() => {
+  const isDev = location.hostname === 'localhost';
+  const isNext = location.hostname === 'next.shoelace.style';
   const customElements = fetch('/dist/custom-elements.json')
     .then(res => res.json())
     .catch(err => console.error(err));
@@ -8,9 +10,10 @@
     table.innerHTML = `
       <thead>
         <tr>
-          <th>Property</th>
+          <th>Name</th>
           <th>Attribute</th>
           <th>Description</th>
+          <th>Reflects</th>
           <th>Type</th>
           <th>Default</th>
         </tr>
@@ -23,6 +26,9 @@
                 <td class="nowrap"><code>${escapeHtml(prop.name)}</code></td>
                 <td class="nowrap">${prop.attribute ? `<code>${escapeHtml(prop.attribute)}</code>` : '-'}</td>
                 <td>${escapeHtml(prop.description)}</td>
+                <td style="text-align: center;">${
+                  prop.reflects ? '<sl-icon label="yes" name="check"></sl-icon>' : ''
+                }</td>
                 <td>${prop.type?.text ? `<code>${escapeHtml(prop.type?.text || '')}</code>` : '-'}</td>
                 <td>${prop.default ? `<code>${escapeHtml(prop.default)}</code>` : '-'}</td>
               </tr>
@@ -40,7 +46,7 @@
     table.innerHTML = `
       <thead>
         <tr>
-          <th>Event</th>
+          <th>Name</th>
           <th>Description</th>
           <th>Event Detail</th>
         </tr>
@@ -68,7 +74,7 @@
     table.innerHTML = `
       <thead>
         <tr>
-          <th>Method</th>
+          <th>Name</th>
           <th>Description</th>
           <th>Arguments</th>
         </tr>
@@ -106,7 +112,7 @@
     table.innerHTML = `
       <thead>
         <tr>
-          <th>Slot</th>
+          <th>Name</th>
           <th>Description</th>
         </tr>
       </thead>
@@ -246,17 +252,10 @@
 
   function getAllComponents(metadata) {
     const allComponents = [];
-
-    metadata.modules.map(module => {
-      module.exports.map(ex => {
-        if (ex.kind === 'custom-element-definition') {
-          const tagName = ex.name;
-          const className = ex.declaration.name;
-          const component = module?.declarations.find(dec => dec.name === 'default');
-
-          if (component) {
-            allComponents.push(Object.assign(component, { className, tagName }));
-          }
+    metadata.modules?.map(module => {
+      module.declarations?.map(declaration => {
+        if (declaration.customElement) {
+          allComponents.push(declaration);
         }
       });
     });
@@ -280,7 +279,7 @@
       // Add version
       const version = document.createElement('div');
       version.classList.add('sidebar-version');
-      version.textContent = metadata.package.version;
+      version.textContent = isDev ? 'Development' : isNext ? 'Next' : metadata.package.version;
       target.appendChild(version);
 
       // Add repo buttons
@@ -325,7 +324,7 @@
         result += `
           <div class="component-header">
             <div class="component-header__tag">
-              <code>&lt;${component.tagName}&gt; | ${component.className}</code>
+              <code>&lt;${component.tagName}&gt; | ${component.name}</code>
             </div>
 
             <div class="component-header__info">
@@ -360,7 +359,7 @@
           // Look for a corresponding attribute
           const attribute = component.attributes?.find(attr => attr.fieldName === prop.name);
           if (attribute) {
-            prop.attribute = attribute.name;
+            prop.attribute = attribute.name || attribute.fieldName;
           }
 
           return prop.kind === 'field' && prop.privacy !== 'private';
@@ -421,8 +420,7 @@
           result += `
             ## Dependencies
 
-            This component has the following dependencies so, if you're [cherry picking](/getting-started/installation#cherry-picking),
-            be sure to import these components in addition to <code>&lt;${tag}&gt;</code>.
+            This component imports the following dependencies.
 
             ${createDependenciesList(component.tagName, getAllComponents(metadata))}
           `;

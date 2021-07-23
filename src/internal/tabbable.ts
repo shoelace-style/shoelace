@@ -51,32 +51,31 @@ function isTabbable(el: HTMLElement) {
   return ['button', 'input', 'select', 'textarea', 'a', 'audio', 'video', 'summary'].includes(tag);
 }
 
-// Locates all tabbable elements within an element. If the target element is tabbable, it will be included in the
-// resulting array. This function will also look in open shadow roots.
-export function getTabbableElements(root: HTMLElement | ShadowRoot) {
-  const tabbableElements: HTMLElement[] = [];
+//
+// Returns the first and last bounding elements that are tabbable. This is more performant than checking every single
+// element because it short-circuits after finding the first and last ones.
+//
+export function getTabbableBoundary(root: HTMLElement | ShadowRoot) {
+  const allElements: HTMLElement[] = [];
 
-  if (root instanceof HTMLElement) {
-    // Is the root element tabbable?
-    if (isTabbable(root)) {
-      tabbableElements.push(root);
+  function walk(el: HTMLElement | ShadowRoot) {
+    if (el instanceof HTMLElement) {
+      allElements.push(el);
+
+      if (el.shadowRoot && el.shadowRoot.mode === 'open') {
+        walk(el.shadowRoot);
+      }
     }
 
-    // Look for tabbable elements in the shadow root
-    if (root.shadowRoot && root.shadowRoot.mode === 'open') {
-      getTabbableElements(root.shadowRoot).map(el => tabbableElements.push(el));
-    }
+    [...el.querySelectorAll('*')].map((e: HTMLElement) => walk(e));
   }
 
-  // Look for tabbable elements in children
-  [...root.querySelectorAll('*')].map((el: HTMLElement) => {
-    getTabbableElements(el).map(el => tabbableElements.push(el));
-  });
+  // Collect all elements including the root
+  walk(root);
 
-  return tabbableElements;
-}
+  // Find the first and last tabbable elements
+  const start = allElements.find(el => isTabbable(el)) || null;
+  const end = allElements.reverse().find(el => isTabbable(el)) || null;
 
-export function getNearestTabbableElement(el: HTMLElement): HTMLElement | null {
-  const tabbableElements = getTabbableElements(el);
-  return tabbableElements.length ? tabbableElements[0] : null;
+  return { start, end };
 }

@@ -1,4 +1,4 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { styleMap } from 'lit-html/directives/style-map';
@@ -7,7 +7,9 @@ import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import { focusVisible } from '../../internal/focus-visible';
 import { clamp } from '../../internal/math';
-import styles from 'sass:./rating.scss';
+import styles from './rating.styles';
+
+import '../icon/icon';
 
 /**
  * @since 2.0
@@ -26,7 +28,7 @@ import styles from 'sass:./rating.scss';
  */
 @customElement('sl-rating')
 export default class SlRating extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   @query('.rating') rating: HTMLElement;
 
@@ -34,19 +36,19 @@ export default class SlRating extends LitElement {
   @state() private isHovering = false;
 
   /** The current rating. */
-  @property({ type: Number }) value: number = 0;
+  @property({ type: Number }) value = 0;
 
   /** The highest rating to show. */
-  @property({ type: Number }) max: number = 5;
+  @property({ type: Number }) max = 5;
 
   /** The minimum increment value allowed by the control. */
-  @property({ type: Number }) precision: number = 1;
+  @property({ type: Number }) precision = 1;
 
   /** Makes the rating readonly. */
-  @property({ type: Boolean, reflect: true }) readonly: boolean = false;
+  @property({ type: Boolean, reflect: true }) readonly = false;
 
   /** Disables the rating. */
-  @property({ type: Boolean, reflect: true }) disabled: boolean = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** The name of the icon to display as the symbol. */
   // @ts-ignore
@@ -219,7 +221,7 @@ export default class SlRating extends LitElement {
                   'rating__symbol--hover': this.isHovering && Math.ceil(displayValue) === index + 1
                 })}
                 role="presentation"
-                @mouseenter=${this.handleMouseEnter.bind(this)}
+                @mouseenter=${this.handleMouseEnter}
               >
                 ${unsafeHTML(this.getSymbol(index + 1))}
               </span>

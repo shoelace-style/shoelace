@@ -1,6 +1,6 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import styles from 'sass:./spinner.scss';
+import styles from './spinner.styles';
 
 /**
  * @since 2.0
@@ -14,7 +14,7 @@ import styles from 'sass:./spinner.scss';
  */
 @customElement('sl-spinner')
 export default class SlSpinner extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   render() {
     return html` <span part="base" class="spinner" aria-busy="true" aria-live="polite"></span> `;

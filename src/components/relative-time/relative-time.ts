@@ -30,7 +30,7 @@ export default class SlRelativeTime extends LitElement {
   @property() numeric: 'always' | 'auto' = 'auto';
 
   /** Keep the displayed value up to date as time passes. */
-  @property({ type: Boolean }) sync: boolean = false;
+  @property({ type: Boolean }) sync = false;
 
   disconnectedCallback() {
     super.disconnectedCallback();

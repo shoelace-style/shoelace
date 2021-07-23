@@ -1,8 +1,10 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { emit } from '../../internal/event';
-import styles from 'sass:./tag.scss';
+import styles from './tag.styles';
+
+import '../icon-button/icon-button';
 
 /**
  * @since 2.0
@@ -20,7 +22,7 @@ import styles from 'sass:./tag.scss';
  */
 @customElement('sl-tag')
 export default class SlTag extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   /** The tag's type. */
   @property({ reflect: true }) type: 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text' = 'primary';
@@ -29,10 +31,10 @@ export default class SlTag extends LitElement {
   @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
 
   /** Draws a pill-style tag with rounded edges. */
-  @property({ type: Boolean, reflect: true }) pill: boolean = false;
+  @property({ type: Boolean, reflect: true }) pill = false;
 
   /** Makes the tag clearable. */
-  @property({ type: Boolean }) clearable: boolean = false;
+  @property({ type: Boolean }) clearable = false;
 
   handleClearClick() {
     emit(this, 'sl-clear');

@@ -1,1 +1,1 @@
-import '../styles/dark.scss';
+import '../styles/dark.css';

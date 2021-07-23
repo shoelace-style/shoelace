@@ -1,4 +1,4 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { animateTo, stopAnimations } from '../../internal/animate';
@@ -6,7 +6,9 @@ import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import { waitForEvent } from '../../internal/event';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
-import styles from 'sass:./alert.scss';
+import styles from './alert.styles';
+
+import '../icon-button/icon-button';
 
 const toastStack = Object.assign(document.createElement('div'), { className: 'sl-toast-stack' });
 
@@ -37,17 +39,17 @@ const toastStack = Object.assign(document.createElement('div'), { className: 'sl
 
 @customElement('sl-alert')
 export default class SlAlert extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   private autoHideTimeout: any;
 
   @query('[part="base"]') base: HTMLElement;
 
   /** Indicates whether or not the alert is open. You can use this in lieu of the show/hide methods. */
-  @property({ type: Boolean, reflect: true }) open: boolean = false;
+  @property({ type: Boolean, reflect: true }) open = false;
 
   /** Makes the alert closable. */
-  @property({ type: Boolean, reflect: true }) closable: boolean = false;
+  @property({ type: Boolean, reflect: true }) closable = false;
 
   /** The type of alert. */
   @property({ reflect: true }) type: 'primary' | 'success' | 'info' | 'warning' | 'danger' = 'primary';
@@ -186,7 +188,7 @@ export default class SlAlert extends LitElement {
         aria-live="assertive"
         aria-atomic="true"
         aria-hidden=${this.open ? 'false' : 'true'}
-        @mousemove=${this.handleMouseMove.bind(this)}
+        @mousemove=${this.handleMouseMove}
       >
         <span part="icon" class="alert__icon">
           <slot name="icon"></slot>
@@ -203,7 +205,7 @@ export default class SlAlert extends LitElement {
                   exportparts="base:close-button"
                   name="x"
                   library="system"
-                  @click=${this.handleCloseClick.bind(this)}
+                  @click=${this.handleCloseClick}
                 ></sl-icon-button>
               </span>
             `

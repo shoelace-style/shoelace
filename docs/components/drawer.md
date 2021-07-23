@@ -92,7 +92,7 @@ To make the drawer slide in from the bottom, set the `placement` attribute to `b
 
 ### Contained to an Element
 
-By default, the drawer slides out of its [containing block](https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#Identifying_the_containing_block), which is usually the viewport. To make the drawer slide out of its parent element, add the `contained` prop and `position: relative` to the parent.
+By default, the drawer slides out of its [containing block](https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#Identifying_the_containing_block), which is usually the viewport. To make the drawer slide out of its parent element, add the `contained` attribute and `position: relative` to the parent.
 
 ```html preview
 <div
@@ -193,7 +193,7 @@ To keep the drawer open in such cases, you can cancel the `sl-request-close` eve
 
 ### Customizing Initial Focus
 
-By default, the drawer's panel will gain focus when opened. This allows the first tab press to focus on the first tabbable element within the drawer. To set focus on a different element, listen for the `sl-initial-focus` event.
+By default, the drawer's panel will gain focus when opened. This allows the first tab press to focus on the first tabbable element within the drawer. To set focus on a different element, listen for and cancel the `sl-initial-focus` event.
 
 ```html preview
 <sl-drawer label="Drawer" class="drawer-focus">

@@ -1,12 +1,10 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import styles from 'sass:./menu-label.scss';
+import styles from './menu-label.styles';
 
 /**
  * @since 2.0
  * @status stable
- *
- * @dependency sl-menu
  *
  * @slot - The menu label's content.
  *
@@ -14,7 +12,7 @@ import styles from 'sass:./menu-label.scss';
  */
 @customElement('sl-menu-label')
 export default class SlMenuLabel extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   render() {
     return html`

@@ -1,12 +1,15 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { ifDefined } from 'lit-html/directives/if-defined';
 import { classMap } from 'lit-html/directives/class-map';
+import { live } from 'lit-html/directives/live';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import { getLabelledBy, renderFormControl } from '../../internal/form-control';
 import { hasSlot } from '../../internal/slot';
-import styles from 'sass:./input.scss';
+import styles from './input.styles';
+
+import '../icon/icon';
 
 let id = 0;
 
@@ -44,7 +47,7 @@ let id = 0;
  */
 @customElement('sl-input')
 export default class SlInput extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   @query('.input__control') input: HTMLInputElement;
 
@@ -67,31 +70,31 @@ export default class SlInput extends LitElement {
   @property() name: string;
 
   /** The input's value attribute. */
-  @property() value: string = '';
+  @property() value = '';
 
   /** Draws a pill-style input with rounded edges. */
-  @property({ type: Boolean, reflect: true }) pill: boolean = false;
+  @property({ type: Boolean, reflect: true }) pill = false;
 
   /** The input's label. Alternatively, you can use the label slot. */
   @property() label: string;
 
   /** The input's help text. Alternatively, you can use the help-text slot. */
-  @property({ attribute: 'help-text' }) helpText: string = '';
+  @property({ attribute: 'help-text' }) helpText = '';
 
   /** Adds a clear button when the input is populated. */
-  @property({ type: Boolean }) clearable: boolean = false;
+  @property({ type: Boolean }) clearable = false;
 
   /** Adds a password toggle button to password inputs. */
-  @property({ attribute: 'toggle-password', type: Boolean }) togglePassword: boolean = false;
+  @property({ attribute: 'toggle-password', type: Boolean }) togglePassword = false;
 
   /** The input's placeholder text. */
   @property() placeholder: string;
 
   /** Disables the input. */
-  @property({ type: Boolean, reflect: true }) disabled: boolean = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Makes the input readonly. */
-  @property({ type: Boolean, reflect: true }) readonly: boolean = false;
+  @property({ type: Boolean, reflect: true }) readonly = false;
 
   /** The minimum length of input that will be considered valid. */
   @property({ type: Number }) minlength: number;
@@ -112,13 +115,13 @@ export default class SlInput extends LitElement {
   @property() pattern: string;
 
   /** Makes the input a required field. */
-  @property({ type: Boolean, reflect: true }) required: boolean = false;
+  @property({ type: Boolean, reflect: true }) required = false;
 
   /**
    * This will be true when the control is in an invalid state. Validity is determined by props such as `type`,
    * `required`, `minlength`, `maxlength`, and `pattern` using the browser's constraint validation API.
    */
-  @property({ type: Boolean, reflect: true }) invalid: boolean = false;
+  @property({ type: Boolean, reflect: true }) invalid = false;
 
   /** The input's autocaptialize attribute. */
   @property() autocapitalize: 'off' | 'none' | 'on' | 'sentences' | 'words' | 'characters';
@@ -316,7 +319,7 @@ export default class SlInput extends LitElement {
             min=${ifDefined(this.min)}
             max=${ifDefined(this.max)}
             step=${ifDefined(this.step)}
-            .value=${this.value}
+            .value=${live(this.value)}
             autocapitalize=${ifDefined(this.autocapitalize)}
             autocomplete=${ifDefined(this.autocomplete)}
             autocorrect=${ifDefined(this.autocorrect)}

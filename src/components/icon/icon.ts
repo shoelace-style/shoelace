@@ -1,11 +1,11 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { unsafeSVG } from 'lit-html/directives/unsafe-svg';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import { getIconLibrary, watchIcon, unwatchIcon } from './library';
 import { requestIcon } from './request';
-import styles from 'sass:./icon.scss';
+import styles from './icon.styles';
 
 const parser = new DOMParser();
 
@@ -14,13 +14,13 @@ const parser = new DOMParser();
  * @status stable
  *
  * @event sl-load - Emitted when the icon has loaded.
- * @event {{ status: number }} sl-error - Emitted when the included file fails to load due to an error.
+ * @event {{ status: number }} sl-error - Emitted when the icon fails to load due to an error.
  *
  * @csspart base - The component's base wrapper.
  */
 @customElement('sl-icon')
 export default class SlIcon extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   @state() private svg = '';
 
@@ -34,7 +34,7 @@ export default class SlIcon extends LitElement {
   @property() label: string;
 
   /** The name of a registered custom icon library. */
-  @property() library: string = 'default';
+  @property() library = 'default';
 
   connectedCallback() {
     super.connectedCallback();

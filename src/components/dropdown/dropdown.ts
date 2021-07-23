@@ -1,4 +1,4 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { Instance as PopperInstance, createPopper } from '@popperjs/core/dist/esm';
@@ -7,11 +7,11 @@ import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import { waitForEvent } from '../../internal/event';
 import { scrollIntoView } from '../../internal/scroll';
-import { getNearestTabbableElement } from '../../internal/tabbable';
+import { getTabbableBoundary } from '../../internal/tabbable';
 import { setDefaultAnimation, getAnimation } from '../../utilities/animation-registry';
 import type SlMenu from '../menu/menu';
 import type SlMenuItem from '../menu-item/menu-item';
-import styles from 'sass:./dropdown.scss';
+import styles from './dropdown.styles';
 
 let id = 0;
 
@@ -25,7 +25,7 @@ let id = 0;
  * @event sl-show - Emitted when the dropdown opens.
  * @event sl-after-show - Emitted after the dropdown opens and all animations are complete.
  * @event sl-hide - Emitted when the dropdown closes.
- * @event sl-after-hide - Emitted after the dropdown closes and all animations are complete.*
+ * @event sl-after-hide - Emitted after the dropdown closes and all animations are complete.
  *
  * @csspart base - The component's base wrapper.
  * @csspart trigger - The container that wraps the trigger.
@@ -36,7 +36,7 @@ let id = 0;
  */
 @customElement('sl-dropdown')
 export default class SlDropdown extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   @query('.dropdown__trigger') trigger: HTMLElement;
   @query('.dropdown__panel') panel: HTMLElement;
@@ -46,7 +46,7 @@ export default class SlDropdown extends LitElement {
   private popover: PopperInstance;
 
   /** Indicates whether or not the dropdown is open. You can use this in lieu of the show/hide methods. */
-  @property({ type: Boolean, reflect: true }) open: boolean = false;
+  @property({ type: Boolean, reflect: true }) open = false;
 
   /**
    * The preferred placement of the dropdown panel. Note that the actual placement may vary as needed to keep the panel
@@ -67,25 +67,28 @@ export default class SlDropdown extends LitElement {
     | 'left-end' = 'bottom-start';
 
   /** Disables the dropdown so the panel will not open. */
-  @property({ type: Boolean }) disabled: boolean = false;
+  @property({ type: Boolean }) disabled = false;
 
-  /** Determines whether the dropdown should hide when a menu item is selected. */
-  @property({ attribute: 'close-on-select', type: Boolean, reflect: true }) closeOnSelect: boolean = true;
+  /**
+   * By default, the dropdown is closed when an item is selected. This attribute will keep it open instead. Useful for
+   * controls that allow multiple selections.
+   */
+  @property({ attribute: 'stay-open-on-select', type: Boolean, reflect: true }) stayOpenOnSelect = false;
 
   /** The dropdown will close when the user interacts outside of this element (e.g. clicking). */
   @property({ attribute: false }) containingElement: HTMLElement;
 
   /** The distance in pixels from which to offset the panel away from its trigger. */
-  @property({ type: Number }) distance: number = 2;
+  @property({ type: Number }) distance = 2;
 
   /** The distance in pixels from which to offset the panel along its trigger. */
-  @property({ type: Number }) skidding: number = 0;
+  @property({ type: Number }) skidding = 0;
 
   /**
    * Enable this option to prevent the panel from being clipped when the component is placed inside a container with
    * `overflow: auto|scroll`.
    */
-  @property({ type: Boolean }) hoist: boolean = false;
+  @property({ type: Boolean }) hoist = false;
 
   connectedCallback() {
     super.connectedCallback();
@@ -198,7 +201,7 @@ export default class SlDropdown extends LitElement {
     const target = event.target as HTMLElement;
 
     // Hide the dropdown when a menu item is selected
-    if (this.closeOnSelect && target.tagName.toLowerCase() === 'sl-menu') {
+    if (!this.stayOpenOnSelect && target.tagName.toLowerCase() === 'sl-menu') {
       this.hide();
       this.focusOnTrigger();
     }
@@ -269,11 +272,14 @@ export default class SlDropdown extends LitElement {
 
       // Focus on a menu item
       if (event.key === 'ArrowDown' && firstMenuItem) {
+        const menu = this.getMenu();
+        menu.setCurrentItem(firstMenuItem);
         firstMenuItem.focus();
         return;
       }
 
       if (event.key === 'ArrowUp' && lastMenuItem) {
+        menu.setCurrentItem(lastMenuItem);
         lastMenuItem.focus();
         return;
       }
@@ -312,7 +318,7 @@ export default class SlDropdown extends LitElement {
     if (this.trigger) {
       const slot = this.trigger.querySelector('slot') as HTMLSlotElement;
       const assignedElements = slot.assignedElements({ flatten: true }) as HTMLElement[];
-      const accessibleTrigger = assignedElements.map(getNearestTabbableElement)[0];
+      const accessibleTrigger = assignedElements.find(el => getTabbableBoundary(el).start);
 
       if (accessibleTrigger) {
         accessibleTrigger.setAttribute('aria-haspopup', 'true');

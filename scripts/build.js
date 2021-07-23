@@ -5,16 +5,12 @@ import browserSync from 'browser-sync';
 import chalk from 'chalk';
 import commandLineArgs from 'command-line-args';
 import copy from 'recursive-copy';
-import crypto from 'crypto';
 import del from 'del';
 import esbuild from 'esbuild';
 import fs from 'fs';
 import getPort from 'get-port';
 import glob from 'globby';
-import inlineImportPlugin from 'esbuild-plugin-inline-import';
 import path from 'path';
-import sass from 'sass';
-import sassPlugin from 'esbuild-plugin-sass';
 import { execSync } from 'child_process';
 
 const build = esbuild.build;
@@ -33,9 +29,9 @@ execSync('node scripts/make-icons.js', { stdio: 'inherit' });
     // The whole shebang dist
     './src/shoelace.ts',
     // Components
-    ...(await glob('./src/components/**/!(*.test).ts')),
+    ...(await glob('./src/components/**/!(*.(style|test)).ts')),
     // Public utilities
-    ...(await glob('./src/utilities/**/!(*.test).ts')),
+    ...(await glob('./src/utilities/**/!(*.(style|test)).ts')),
     // Theme stylesheets
     ...(await glob('./src/themes/**/!(*.test).ts'))
   ];
@@ -54,32 +50,7 @@ execSync('node scripts/make-icons.js', { stdio: 'inherit' });
       },
       bundle: true,
       splitting: true,
-      plugins: [
-        // Run inline style imports through Sass
-        inlineImportPlugin({
-          filter: /^sass:/,
-          transform: async (contents, args) => {
-            return await new Promise((resolve, reject) => {
-              sass.render(
-                {
-                  data: contents,
-                  includePaths: [path.dirname(args.path)]
-                },
-                (err, result) => {
-                  if (err) {
-                    reject(err);
-                    return;
-                  }
-
-                  resolve(result.css.toString());
-                }
-              );
-            });
-          }
-        }),
-        // Run all other stylesheets through Sass
-        sassPlugin()
-      ]
+      plugins: []
     })
     .catch(err => {
       console.error(chalk.red(err));

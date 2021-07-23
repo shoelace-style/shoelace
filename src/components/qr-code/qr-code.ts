@@ -1,9 +1,9 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { styleMap } from 'lit-html/directives/style-map';
 import { watch } from '../../internal/watch';
 import QrCreator from 'qr-creator';
-import styles from 'sass:./qr-code.scss';
+import styles from './qr-code.styles';
 
 /**
  * @since 2.0
@@ -13,27 +13,27 @@ import styles from 'sass:./qr-code.scss';
  */
 @customElement('sl-qr-code')
 export default class SlQrCode extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   @query('canvas') canvas: HTMLElement;
 
   /** The QR code's value. */
-  @property() value: string = '';
+  @property() value = '';
 
   /** The label used when screen readers announce the code. If unspecified, the value will be used. */
-  @property() label: string = '';
+  @property() label = '';
 
   /** The size of the code's overall square in pixels. */
-  @property({ type: Number }) size: number = 128;
+  @property({ type: Number }) size = 128;
 
   /** The fill color. This can be any valid CSS color, but not a CSS custom property. */
-  @property() fill: string = '#000';
+  @property() fill = '#000';
 
   /** The background color. This can be any valid CSS color or `transparent`, but not a CSS custom property. */
-  @property() background: string = '#fff';
+  @property() background = '#fff';
 
   /** The edge radius of each module. Must be between 0 and 0.5. */
-  @property({ type: Number }) radius: number = 0;
+  @property({ type: Number }) radius = 0;
 
   /** The level of error correction to use. */
   @property({ attribute: 'error-correction' }) errorCorrection: 'L' | 'M' | 'Q' | 'H' = 'H';

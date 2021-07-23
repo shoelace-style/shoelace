@@ -1,8 +1,8 @@
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { styleMap } from 'lit-html/directives/style-map';
-import styles from 'sass:./progress-bar.scss';
+import styles from './progress-bar.styles';
 
 /**
  * @since 2.0
@@ -21,13 +21,13 @@ import styles from 'sass:./progress-bar.scss';
  */
 @customElement('sl-progress-bar')
 export default class SlProgressBar extends LitElement {
-  static styles = unsafeCSS(styles);
+  static styles = styles;
 
   /** The progress bar's percentage, 0 to 100. */
-  @property({ type: Number, reflect: true }) percentage: number = 0;
+  @property({ type: Number, reflect: true }) percentage = 0;
 
   /** When true, percentage is ignored, the label is hidden, and the progress bar is drawn in an indeterminate state. */
-  @property({ type: Boolean, reflect: true }) indeterminate: boolean = false;
+  @property({ type: Boolean, reflect: true }) indeterminate = false;
 
   render() {
     return html`

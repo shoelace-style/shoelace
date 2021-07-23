@@ -8,7 +8,7 @@ import { customElement, property } from 'lit/decorators.js';
 @customElement('sl-format-number')
 export default class SlFormatNumber extends LitElement {
   /** The number to format. */
-  @property({ type: Number }) value: number = 0;
+  @property({ type: Number }) value = 0;
 
   /** The locale to use when formatting the number. */
   @property() locale: string;
@@ -17,10 +17,10 @@ export default class SlFormatNumber extends LitElement {
   @property() type: 'currency' | 'decimal' | 'percent' = 'decimal';
 
   /** Turns off grouping separators. */
-  @property({ attribute: 'no-grouping', type: Boolean }) noGrouping: boolean = false;
+  @property({ attribute: 'no-grouping', type: Boolean }) noGrouping = false;
 
   /** The currency to use when formatting. Must be an ISO 4217 currency code such as `USD` or `EUR`. */
-  @property() currency: string = 'USD';
+  @property() currency = 'USD';
 
   /** How to display the currency. */
   @property({ attribute: 'currency-display' }) currencyDisplay: 'symbol' | 'narrowSymbol' | 'code' | 'name' = 'symbol';
