@@ -297,7 +297,10 @@
   overflow: hidden !important;
 }
 
-/* The toast stack */
+/*
+ * The toast stack
+ */
+
 .sl-toast-stack {
   position: fixed;
   top: 0;

@@ -6,6 +6,8 @@ import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import styles from './image-comparer.styles';
 
+import '../icon/icon';
+
 /**
  * @since 2.0
  * @status stable

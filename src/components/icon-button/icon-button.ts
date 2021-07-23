@@ -5,6 +5,8 @@ import { ifDefined } from 'lit-html/directives/if-defined';
 import { focusVisible } from '../../internal/focus-visible';
 import styles from './icon-button.styles';
 
+import '../icon/icon';
+
 /**
  * @since 2.0
  * @status stable

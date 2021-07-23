@@ -6,8 +6,6 @@ import styles from './menu-divider.styles';
  * @since 2.0
  * @status stable
  *
- * @dependency sl-menu
- *
  * @csspart base - The component's base wrapper.
  */
 @customElement('sl-menu-divider')

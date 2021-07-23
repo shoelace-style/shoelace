@@ -230,7 +230,6 @@ export default css`
   }
 
   .color-picker__swatch {
-    flex: 0 0 auto;
     position: relative;
     width: 20px;
     height: 20px;

@@ -6,6 +6,19 @@ Components with the <sl-badge type="warning" pill>Experimental</sl-badge> badge 
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
+## 2.0.0-beta.47
+
+This release improves how component dependencies are imported. If you've been cherry picking, you no longer need to import component dependencies manually. This significantly improves developer experience, making Shoelace even easier to use. For transparency, component dependencies will continue to be listed in the docs.
+
+- Added "Reflects" column to the properties table
+- Dependencies are now automatically imported for all components
+- Fixed a bug where tabbing into `sl-radio-group` would not always focus the checked radio
+- Fixed a bug in component styles that prevented the box sizing reset from being applied
+- Fixed a regression in `sl-color-picker` where dragging the grid handle wasn't smooth
+- Fixed a bug where slot detection could incorrecly match against slots of child elements [#481](https://github.com/shoelace-style/shoelace/pull/481)
+- Fixed a bug in `sl-input` where focus would move to the end of the input when typing in Safari [#480](https://github.com/shoelace-style/shoelace/issues/480)
+- Improved base path utility logic
+
 ## 2.0.0-beta.46
 
 This release improves the developer experience of `<sl-animation>`. Previously, an animation was assumed to be playing unless the `pause` attribute was set. This behavior has been reversed and `pause` has been removed. Now, animations will not play until the new `play` attribute is applied.

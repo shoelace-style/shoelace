@@ -13,6 +13,7 @@
           <th>Name</th>
           <th>Attribute</th>
           <th>Description</th>
+          <th>Reflects</th>
           <th>Type</th>
           <th>Default</th>
         </tr>
@@ -25,6 +26,9 @@
                 <td class="nowrap"><code>${escapeHtml(prop.name)}</code></td>
                 <td class="nowrap">${prop.attribute ? `<code>${escapeHtml(prop.attribute)}</code>` : '-'}</td>
                 <td>${escapeHtml(prop.description)}</td>
+                <td style="text-align: center;">${
+                  prop.reflects ? '<sl-icon label="yes" name="check"></sl-icon>' : ''
+                }</td>
                 <td>${prop.type?.text ? `<code>${escapeHtml(prop.type?.text || '')}</code>` : '-'}</td>
                 <td>${prop.default ? `<code>${escapeHtml(prop.default)}</code>` : '-'}</td>
               </tr>
@@ -416,8 +420,7 @@
           result += `
             ## Dependencies
 
-            This component has the following dependencies so, if you're [cherry picking](/getting-started/installation#cherry-picking),
-            be sure to import these components in addition to <code>&lt;${tag}&gt;</code>.
+            This component imports the following dependencies.
 
             ${createDependenciesList(component.tagName, getAllComponents(metadata))}
           `;

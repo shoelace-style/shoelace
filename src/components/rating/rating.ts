@@ -9,6 +9,8 @@ import { focusVisible } from '../../internal/focus-visible';
 import { clamp } from '../../internal/math';
 import styles from './rating.styles';
 
+import '../icon/icon';
+
 /**
  * @since 2.0
  * @status stable

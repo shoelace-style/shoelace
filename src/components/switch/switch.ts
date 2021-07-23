@@ -2,6 +2,7 @@ import { LitElement, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
+import { live } from 'lit-html/directives/live';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import styles from './switch.styles';
@@ -157,7 +158,7 @@ export default class SlSwitch extends LitElement {
             type="checkbox"
             name=${ifDefined(this.name)}
             value=${ifDefined(this.value)}
-            .checked=${this.checked}
+            .checked=${live(this.checked)}
             .disabled=${this.disabled}
             .required=${this.required}
             role="switch"

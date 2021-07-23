@@ -60,6 +60,9 @@ Wrap a tooltip around an icon button to provide contextual information to the us
 ```
 
 ### Disabled
+
+Use the `disabled` attribute to disable the icon button.
+
 ```html preview
 <sl-icon-button name="gear" label="Settings" disabled></sl-icon-button>
 ```

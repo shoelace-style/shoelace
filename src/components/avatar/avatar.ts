@@ -3,6 +3,8 @@ import { customElement, property, state } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import styles from './avatar.styles';
 
+import '../icon/icon';
+
 /**
  * @since 2.0
  * @status stable

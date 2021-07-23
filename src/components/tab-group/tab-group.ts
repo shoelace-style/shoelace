@@ -10,6 +10,8 @@ import type SlTab from '../tab/tab';
 import type SlTabPanel from '../tab-panel/tab-panel';
 import styles from './tab-group.styles';
 
+import '../icon-button/icon-button';
+
 /**
  * @since 2.0
  * @status stable

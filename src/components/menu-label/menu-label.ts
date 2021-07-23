@@ -6,8 +6,6 @@ import styles from './menu-label.styles';
  * @since 2.0
  * @status stable
  *
- * @dependency sl-menu
- *
  * @slot - The menu label's content.
  *
  * @csspart base - The component's base wrapper.

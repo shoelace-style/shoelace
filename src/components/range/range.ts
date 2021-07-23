@@ -3,6 +3,7 @@ import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
 import { emit } from '../../internal/event';
+import { live } from 'lit-html/directives/live';
 import { watch } from '../../internal/watch';
 import { getLabelledBy, renderFormControl } from '../../internal/form-control';
 import { hasSlot } from '../../internal/slot';
@@ -211,7 +212,7 @@ export default class SlRange extends LitElement {
             min=${ifDefined(this.min)}
             max=${ifDefined(this.max)}
             step=${ifDefined(this.step)}
-            .value=${String(this.value)}
+            .value=${live(String(this.value))}
             aria-labelledby=${ifDefined(
               getLabelledBy({
                 label: this.label,
