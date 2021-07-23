@@ -39,6 +39,12 @@ export default class SlMenu extends LitElement {
     }) as SlMenuItem[];
   }
 
+  getActiveItem() {
+    return this.getAllItems({ includeDisabled: false }).filter(i =>
+      i.shadowRoot!.querySelector('.menu-item--focused')
+    )[0];
+  }
+
   /**
    * @internal Gets the current menu item, which is the menu item that has `tabindex="0"` within the roving tab index.
    * The menu item may or may not have focus, but for keyboard interaction purposes it's considered the "active" item.

@@ -12,6 +12,7 @@
 
 - Components
   - [Alert](/components/alert)
+  - [Autocomplete](/components/autocomplete)
   - [Avatar](/components/avatar)
   - [Badge](/components/badge)
   - [Button](/components/button)
