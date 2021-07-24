@@ -1,5 +1,5 @@
 import { LitElement, html } from 'lit';
-import { customElement, query } from 'lit/decorators.js';
+import { customElement, property, query } from 'lit/decorators.js';
 import { emit } from '../../internal/event';
 import { getTextContent } from '../../internal/slot';
 import type SlMenuItem from '../menu-item/menu-item';
@@ -25,6 +25,9 @@ export default class SlMenu extends LitElement {
   private typeToSelectString = '';
   private typeToSelectTimeout: any;
 
+  /** Enable or disable type-to-select behavior. */
+  @property({ type: Boolean, attribute: 'select-on-type' }) selectOnType = true;
+
   getAllItems(options: { includeDisabled: boolean } = { includeDisabled: true }) {
     return [...this.defaultSlot.assignedElements({ flatten: true })].filter((el: HTMLElement) => {
       if (el.getAttribute('role') !== 'menuitem') {
@@ -40,9 +43,9 @@ export default class SlMenu extends LitElement {
   }
 
   getActiveItem() {
-    return this.getAllItems({ includeDisabled: false }).filter(i =>
-      i.shadowRoot!.querySelector('.menu-item--focused')
-    )[0];
+    const items = this.getAllItems({ includeDisabled: false });
+    const activeItem = this.getCurrentItem();
+    return activeItem ? items.indexOf(activeItem) : -1;
   }
 
   /**
@@ -72,16 +75,18 @@ export default class SlMenu extends LitElement {
    * enabling type-to-select when the menu doesn't have focus.
    */
   typeToSelect(key: string) {
-    const items = this.getAllItems({ includeDisabled: false });
-    clearTimeout(this.typeToSelectTimeout);
-    this.typeToSelectTimeout = setTimeout(() => (this.typeToSelectString = ''), 750);
-    this.typeToSelectString += key.toLowerCase();
-    for (const item of items) {
-      const slot = item.shadowRoot!.querySelector('slot:not([name])') as HTMLSlotElement;
-      const label = getTextContent(slot).toLowerCase().trim();
-      if (label.substring(0, this.typeToSelectString.length) === this.typeToSelectString) {
-        item.focus();
-        break;
+    if (this.selectOnType) {
+      const items = this.getAllItems({ includeDisabled: false });
+      clearTimeout(this.typeToSelectTimeout);
+      this.typeToSelectTimeout = setTimeout(() => (this.typeToSelectString = ''), 750);
+      this.typeToSelectString += key.toLowerCase();
+      for (const item of items) {
+        const slot = item.shadowRoot!.querySelector('slot:not([name])') as HTMLSlotElement;
+        const label = getTextContent(slot).toLowerCase().trim();
+        if (label.substring(0, this.typeToSelectString.length) === this.typeToSelectString) {
+          item.focus();
+          break;
+        }
       }
     }
   }
