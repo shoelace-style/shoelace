@@ -12,6 +12,8 @@ The `sl-autocomplete` component provides suggestions while users type into the s
 
 ### Remote source for suggestions
 
+You can define a remote source to retrieve a list of data.
+
 ```html preview
 <sl-autocomplete
   class="autocomplete-remote"
@@ -41,6 +43,8 @@ The `sl-autocomplete` component provides suggestions while users type into the s
 ```
 
 ### Local source for suggestions
+
+The `sl-autocomplete` works also with local data.
 
 ```html preview
 <sl-autocomplete

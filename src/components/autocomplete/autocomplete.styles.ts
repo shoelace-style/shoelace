@@ -12,7 +12,6 @@ export default css`
     padding: 0;
   }
 
-  sl-menu-item[tabindex='0'] .highlight,
   sl-menu-item:hover .highlight,
   sl-menu-item:focus[tabindex='0'] .highlight {
     color: var(--sl-color-white);
