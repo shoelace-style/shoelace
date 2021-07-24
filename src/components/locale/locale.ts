@@ -2,6 +2,13 @@ import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { createTreeWalker } from '../../internal/walker';
 
+/**
+ * @since 2.X
+ * @status beta
+ *
+ * @slot - The locale's component content.
+ *
+ */
 @customElement('sl-locale')
 export class SlLocale extends LitElement {
   @query('slot')
@@ -45,12 +52,17 @@ export class SlLocale extends LitElement {
 
   handleSlotChanged() {
     for (let el of this.getSlottedElements()) {
-      console.log('found', el);
       this.updateLocale(el, this.lang);
     }
   }
 
   render() {
     return html`<slot @slotchange=${this.handleSlotChanged}></slot>`;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'sl-locale': SlLocale;
   }
 }
