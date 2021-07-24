@@ -4,15 +4,17 @@ import componentStyles from '../../styles/component.styles';
 export default css`
   ${componentStyles}
 
-  .highlight {
+  sl-menu-item .highlight {
     color: var(--sl-color-primary-500);
-  }
-
-  sl-menu-item::part(label).menu-item--focused {
-    background-color: red !important;
   }
 
   sl-menu::part(base) {
     padding: 0;
+  }
+
+  sl-menu-item[tabindex='0'] .highlight,
+  sl-menu-item:hover .highlight,
+  sl-menu-item:focus[tabindex='0'] .highlight {
+    color: var(--sl-color-white);
   }
 `;

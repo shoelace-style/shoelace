@@ -29,13 +29,7 @@ import { unsafeHTML, UnsafeHTMLDirective } from 'lit-html/directives/unsafe-html
  * @event sl-after-hide - Emitted after the dropdown closes and all animations are complete.*
  *
  * @csspart base - The component's base wrapper.
- * @csspart label - The input label.
- * @csspart input - The input control.
- * @csspart clear-button - The clear button.
- * @csspart suffix - The input suffix container.
- * @csspart help-text - The input help text.
  *
- * @cssprop --focus-ring - The focus ring style to use when the control receives focus, a `box-shadow` property.
  */
 @customElement('sl-autocomplete')
 export default class SlAutocomplete extends LitElement {
@@ -43,7 +37,7 @@ export default class SlAutocomplete extends LitElement {
 
   private resizeObserver: ResizeObserver;
   private search: string = '';
-  private firstItem: boolean = false;
+  private lastActiveItemIdex: number = -1;
 
   @query('sl-input') input: HTMLInputElement;
   @query('sl-dropdown') dropdown: SlDropdown;
@@ -126,27 +120,43 @@ export default class SlAutocomplete extends LitElement {
     this.search = item.textContent;
   }
 
+  handleCloseMenu() {
+    this.menu.getCurrentItem()?.setAttribute('tabindex', '-1');
+  }
+
   handleKeyDown(event: KeyboardEvent) {
+    const items = this.menu.getAllItems({ includeDisabled: false });
+
     if (event.target instanceof SlInput) {
       if (event.key === 'ArrowDown') {
         this.dropdown.show();
-        this.menu.getAllItems({ includeDisabled: false })[0].focus();
+        items[0].focus();
+        this.lastActiveItemIdex = 0;
       }
-    }
+    } else if (event.target instanceof SlMenuItem) {
+      const activeItem = this.menu.getActiveItem();
 
-    if (event.target instanceof SlMenuItem) {
-      if (event.key === 'ArrowUp') {
-        const selectedItem = this.menu.getActiveItem();
-        let index = selectedItem ? this.menu.getAllItems().indexOf(selectedItem) : 0;
-        if (index === 0 && this.firstItem) {
-          this.input.focus();
-          this.firstItem = false;
-        } else if (index === 0) this.firstItem = true;
-      } else if (event.key === 'ArrowDown') {
-        this.firstItem = false;
-      } else {
-        const ignoredKeys = ['Tab', 'Shift', 'Meta', 'Ctrl', 'Alt', 'Enter', 'Escape'];
-        if (!ignoredKeys.includes(event.key)) this.input.focus();
+      switch (event.key) {
+        case 'ArrowUp':
+          if (activeItem === 0 && this.lastActiveItemIdex === 0) {
+            this.menu.getCurrentItem()?.setAttribute('tabindex', '-1');
+            this.input.focus();
+          }
+          this.lastActiveItemIdex = activeItem;
+          break;
+        case 'ArrowDown':
+          if (activeItem === items.length - 1 && this.lastActiveItemIdex === items.length - 1) {
+            this.menu.setCurrentItem(items[0]);
+            items[0].focus();
+            this.lastActiveItemIdex = 0;
+          } else {
+            this.lastActiveItemIdex = activeItem;
+          }
+          break;
+        default:
+          const ignoredKeys = ['Tab', 'Shift', 'Meta', 'Ctrl', 'Alt', 'Enter', 'Escape'];
+          if (!ignoredKeys.includes(event.key)) this.input.focus();
+          break;
       }
     }
 
@@ -164,8 +174,6 @@ export default class SlAutocomplete extends LitElement {
       parseInt(getComputedStyle(this.input, null).marginLeft) -
       parseInt(getComputedStyle(this.input, null).marginRight)
     }px`;
-
-    console.log(this.menu.style);
 
     if (this.dropdown) this.dropdown.reposition();
   }
@@ -213,6 +221,7 @@ export default class SlAutocomplete extends LitElement {
         .containing-element=${this}
         ?hoist=${this.hoist}
         @keydown=${this.handleKeyDown}
+        @sl-hide=${this.handleCloseMenu}
       >
         <sl-input
           slot="trigger"
@@ -236,10 +245,10 @@ export default class SlAutocomplete extends LitElement {
           <sl-icon slot="suffix" name="search" library="system"></sl-icon>
         </sl-input>
 
-        <sl-menu @sl-select=${this.handleMenuSelect}>
+        <sl-menu @sl-select=${this.handleMenuSelect} ?select-on-type=${false}>
           ${this.suggestions.length === 0
             ? html`<sl-menu-item disabled>${this.EmptyMessage}</sl-menu-item>`
-            : this.suggestions.map(item => html`<sl-menu-item value="${item.value}">${item.text}</sl-menu-item>`)}
+            : this.suggestions.map(item => html`<sl-menu-item value=${item.value}>${item.text}</sl-menu-item>`)}
         </sl-menu>
       </sl-dropdown>
     `;
