@@ -87,9 +87,6 @@ export default class SlAutocomplete extends LitElement {
   /** Message displayed when no result found. */
   @property({ type: String, attribute: 'empty-message' }) EmptyMessage: string = 'no data found';
 
-  /** Determines if performed searches should be cached. */
-  @property({ type: Boolean, reflect: true }) cache = false;
-
   /** The source property is a function executed on user input. The search result is displayed in the suggestions list. */
   @property()
   source?: (search: string) => Promise<Array<{ text: string | UnsafeHTMLDirective; value: string }>>;
