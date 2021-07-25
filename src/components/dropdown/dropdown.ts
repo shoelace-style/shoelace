@@ -288,7 +288,6 @@ export default class SlDropdown extends LitElement {
     // Other keys bring focus to the menu and initiate type-to-select behavior
     const ignoredKeys = ['Tab', 'Shift', 'Meta', 'Ctrl', 'Alt'];
     if (this.open && menu && !ignoredKeys.includes(event.key)) {
-      // We need to find another way to use the typeSelect event
       menu.typeToSelect(event.key);
       return;
     }
