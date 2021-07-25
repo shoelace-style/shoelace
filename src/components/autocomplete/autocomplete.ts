@@ -12,6 +12,7 @@ import { unsafeHTML, UnsafeHTMLDirective } from 'lit-html/directives/unsafe-html
  * @since 2.X
  * @status beta
  *
+ * @dependency sl-input
  * @dependency sl-icon
  * @dependency sl-dropdown
  * @dependency sl-menu
