@@ -9,6 +9,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 ## Next
 
 - Added a console error that appears when menu items have duplicate values in `sl-select`
+- Fixed a bug in `sl-menu` where pressing <kbd>Enter</kbd> after using type to select would result in the wrong value
 
 ## 2.0.0-beta.47
 
