@@ -305,6 +305,17 @@ export default class SlSelect extends LitElement {
 
     // Wait for items to render before gathering labels otherwise the slot won't exist
     const items = this.getItems();
+
+    // Check for duplicate values in menu items
+    const values: string[] = [];
+    items.map(item => {
+      if (values.includes(item.value)) {
+        console.error(`Duplicate value found in <sl-select> menu item: '${item.value}'`, item);
+      }
+
+      values.push(item.value);
+    });
+
     await Promise.all(items.map(item => item.render)).then(() => this.syncItemsFromValue());
   }
 
