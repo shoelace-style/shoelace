@@ -43,7 +43,7 @@ export default css`
     background-color: var(--sl-color-white);
     border-radius: 50%;
     border: solid var(--sl-input-border-width) var(--sl-input-border-color);
-    transform: translateX(calc(var(--width) / -2 + var(--thumb-size) / 2 - (var(--thumb-size) - var(--height)) / 2));
+    transform: translateX(calc((var(--width) - var(--height)) / -2));
     transition: var(--sl-transition-fast) transform ease, var(--sl-transition-fast) background-color,
       var(--sl-transition-fast) border-color, var(--sl-transition-fast) box-shadow;
   }
@@ -86,7 +86,7 @@ export default css`
   .switch--checked .switch__control .switch__thumb {
     background-color: var(--sl-color-white);
     border-color: var(--sl-color-primary-500);
-    transform: translateX(calc(var(--width) / 2 - var(--thumb-size) / 2 + (var(--thumb-size) - var(--height)) / 2));
+    transform: translateX(calc((var(--width) - var(--height)) / 2));
   }
 
   /* Checked + hover */
