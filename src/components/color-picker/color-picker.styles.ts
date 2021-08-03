@@ -8,8 +8,8 @@ export default css`
     --grid-width: 260px;
     --grid-height: 200px;
     --grid-handle-size: 16px;
-    --slider-height: 12px;
-    --slider-handle-size: 14px;
+    --slider-height: 15px;
+    --slider-handle-size: 17px;
 
     display: inline-block;
   }
@@ -253,9 +253,10 @@ export default css`
   }
 
   .color-picker__transparent-bg {
-    background-image: linear-gradient(45deg, #eee 25%, transparent 25%),
-      linear-gradient(45deg, transparent 75%, #eee 75%), linear-gradient(45deg, transparent 75%, #eee 75%),
-      linear-gradient(45deg, #eee 25%, transparent 25%);
+    background-image: linear-gradient(45deg, var(--sl-color-gray-300) 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, var(--sl-color-gray-300) 75%),
+      linear-gradient(45deg, transparent 75%, var(--sl-color-gray-300) 75%),
+      linear-gradient(45deg, var(--sl-color-gray-300) 25%, transparent 25%);
     background-size: 10px 10px;
     background-position: 0 0, 0 0, -5px -5px, 5px 5px;
   }
