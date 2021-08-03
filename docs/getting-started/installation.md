@@ -65,7 +65,7 @@ Here's an example that loads only the button component. Again, if you're not usi
 <link rel="stylesheet" href="@shoelace-style/shoelace/dist/themes/base.css">
 
 <script type="module" data-shoelace="/scripts/shoelace">
-  import SlButton from '@shoelace-style/shoelace/dist/components/button/button.js';
+  import '@shoelace-style/shoelace/dist/components/button/button.js';
   
   // <sl-button> is ready to use!
 </script>
@@ -96,10 +96,10 @@ Once your bundler is configured, you'll be able to import Shoelace components an
 
 ```js
 import '@shoelace-style/shoelace/dist/themes/base.css';
-import SlButton from '@shoelace-style/shoelace/dist/components/button/button.js';
-import SlIcon from '@shoelace-style/shoelace/dist/components/icon/icon.js';
-import SlInput from '@shoelace-style/shoelace/dist/components/input/input.js';
-import SlRating from '@shoelace-style/shoelace/dist/components/rating/rating.js';
+import '@shoelace-style/shoelace/dist/components/button/button.js';
+import '@shoelace-style/shoelace/dist/components/icon/icon.js';
+import '@shoelace-style/shoelace/dist/components/input/input.js';
+import '@shoelace-style/shoelace/dist/components/rating/rating.js';
 import { setBasePath } from '@shoelace-style/shoelace/dist/utilities/base-path.js';
 
 // Set the base path to the folder you copied Shoelace's assets to
@@ -108,4 +108,4 @@ setBasePath('/dist/shoelace');
 // <sl-button>, <sl-icon>, <sl-input>, and <sl-rating> are ready to use!
 ```
 
-!> Component modules include side effects for registration purposes. Because of this, importing directly from `@shoelace-style/shoelace` may result in a larger bundle size than necessary. For optimal tree shaking, always import components and utilities from their respective files as shown above.
+!> Component modules include side effects for registration purposes. Because of this, importing directly from `@shoelace-style/shoelace` may result in a larger bundle size than necessary. For optimal tree shaking, always cherry pick, i.e. import components and utilities from their respective files, as shown above.
