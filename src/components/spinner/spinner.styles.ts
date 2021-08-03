@@ -5,7 +5,7 @@ export default css`
   ${componentStyles}
 
   :host {
-    --track-color: #0d131e20;
+    --track-color: var(--sl-color-gray-200);
     --indicator-color: var(--sl-color-primary-500);
     --stroke-width: 2px;
 
