@@ -10,6 +10,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 - Added a console error that appears when menu items have duplicate values in `sl-select`
 - Added new color primitives to the base set of design tokens
+- Added `--sl-color-*-1000` swatches to all color palettes
 - Fixed a bug in `sl-menu` where pressing <kbd>Enter</kbd> after using type to select would result in the wrong value
 - Refactored thumb position logic in `sl-switch` [#490](https://github.com/shoelace-style/shoelace/pull/490)
 - Reworked the dark theme to use an inverted token approach instead of light DOM selectors
