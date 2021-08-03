@@ -618,10 +618,6 @@ If you want to change the icons Shoelace uses internally, you can register an ic
     color: var(--sl-color-primary-500);
   }
 
-  .sl-theme-dark .icon-list-item:hover {
-    background-color: var(--sl-color-primary-900);
-  }
-
   .icon-list[data-type="outline"] .icon-list-item[data-name$="-fill"] {
     display: none;
   }
