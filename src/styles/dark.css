@@ -1,6 +1,7 @@
 /**
  * Dark theme
  */
+:host,
 .sl-theme-dark {
   --sl-color-black: #fff;
   --sl-color-white: var(--sl-color-gray-50);
