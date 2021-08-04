@@ -701,7 +701,7 @@ body[data-page^='tokens/'] .table-wrapper td:first-child code {
 .color-palette {
   display: grid;
   grid-template-columns: 200px repeat(11, 1fr);
-  gap: 1rem 0rem;
+  gap: 1rem var(--sl-spacing-xx-small);
   margin: 2rem 0;
 }
 
@@ -723,6 +723,7 @@ body[data-page^='tokens/'] .table-wrapper td:first-child code {
 
 .color-palette__swatch {
   height: 3rem;
+  border-radius: var(--sl-border-radius-small);
 }
 
 @media screen and (max-width: 1200px) {
