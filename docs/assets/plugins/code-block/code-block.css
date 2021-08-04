@@ -6,7 +6,7 @@
 }
 
 .sl-theme-dark .code-block {
-  background-color: var(--sl-color-gray-100);
+  background-color: var(--sl-color-gray-200);
 }
 
 .code-block__preview {

@@ -10,6 +10,7 @@ import esbuild from 'esbuild';
 import fs from 'fs';
 import getPort from 'get-port';
 import glob from 'globby';
+import inlineImportPlugin from 'esbuild-plugin-inline-import';
 import path from 'path';
 import { execSync } from 'child_process';
 
@@ -25,6 +26,14 @@ execSync('node scripts/make-vscode-data.js', { stdio: 'inherit' });
 execSync('node scripts/make-icons.js', { stdio: 'inherit' });
 
 (async () => {
+  async function copyFiles() {
+    // Copy CSS files from src/themes to dist/themes
+    await copy('./src/themes', './dist/themes', {
+      overwrite: true,
+      filter: /\.css$/
+    });
+  }
+
   const entryPoints = [
     // The whole shebang dist
     './src/shoelace.ts',
@@ -50,12 +59,14 @@ execSync('node scripts/make-icons.js', { stdio: 'inherit' });
       },
       bundle: true,
       splitting: true,
-      plugins: []
+      plugins: [inlineImportPlugin()]
     })
     .catch(err => {
       console.error(chalk.red(err));
       process.exit(1);
     });
+
+  await copyFiles();
 
   // Create the docs distribution by copying dist into the docs folder. This is what powers the website. It doesn't need
   // to exist in dev because Browser Sync routes it virtually.
@@ -95,7 +106,19 @@ execSync('node scripts/make-icons.js', { stdio: 'inherit' });
       buildResult
         // Rebuild and reload
         .rebuild()
-        .then(() => execSync('node scripts/make-metadata.js', { stdio: 'inherit' }))
+        .then(async () => {
+          if (/\.css$/.test(filename)) {
+            await copyFiles();
+          }
+        })
+        .then(() => {
+          // Skip metadata when styles are changed
+          if (/(\.css|\.styles\.ts)$/.test(filename)) {
+            return;
+          }
+
+          execSync('node scripts/make-metadata.js', { stdio: 'inherit' });
+        })
         .then(() => bs.reload())
         .catch(err => console.error(chalk.red(err)));
     });

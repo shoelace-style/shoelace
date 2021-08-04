@@ -1,7 +1,7 @@
 :root,
 :host,
 .sl-theme-light {
-  /**
+  /*
    * Color Primitives
    */
 
@@ -301,7 +301,7 @@
   --sl-color-rose-900: #881337;
   --sl-color-rose-1000: #4a0d20;
 
-  /**
+  /*
    * Theme Tokens
    */
 
@@ -370,7 +370,7 @@
   --sl-color-danger-900: var(--sl-color-red-900);
   --sl-color-danger-1000: var(--sl-color-red-1000);
 
-  /**
+  /*
    * Border radius tokens
    */
 
@@ -382,7 +382,7 @@
   --sl-border-radius-circle: 50%;
   --sl-border-radius-pill: 9999px;
 
-  /**
+  /*
    * Elevation tokens
    */
 
@@ -392,7 +392,7 @@
   --sl-shadow-large: 0 2px 8px #0d131e1a;
   --sl-shadow-x-large: 0 4px 16px #0d131e1a;
 
-  /**
+  /*
    * Spacing tokens
    */
 
@@ -407,7 +407,7 @@
   --sl-spacing-xxx-large: 3rem; /* 48px */
   --sl-spacing-xxxx-large: 4.5rem; /* 72px */
 
-  /**
+  /*
    * Transition tokens
    */
 
@@ -417,7 +417,7 @@
   --sl-transition-fast: 150ms;
   --sl-transition-x-fast: 50ms;
 
-  /**
+  /*
    * Typography tokens
    */
 
@@ -454,7 +454,7 @@
   --sl-line-height-normal: 1.8;
   --sl-line-height-loose: 2.2;
 
-  /**
+  /*
    * Form tokens
    */
 
@@ -531,20 +531,20 @@
   /* Toggles (checkboxes, radios, switches) */
   --sl-toggle-size: 1rem;
 
-  /**
+  /*
    * Overlay tokens
    */
 
   --sl-overlay-background-color: #37415180;
 
-  /**
+  /*
    * Panels
    */
 
   --sl-panel-background-color: var(--sl-color-white);
   --sl-panel-border-color: var(--sl-color-gray-200);
 
-  /**
+  /*
    * Tooltip tokens
    */
 
@@ -559,7 +559,7 @@
   --sl-tooltip-arrow-size: 5px;
   --sl-tooltip-arrow-start-end-offset: 8px;
 
-  /**
+  /*
    * Z-index tokens
    */
 

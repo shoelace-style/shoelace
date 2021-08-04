@@ -64,6 +64,7 @@
     "del": "^6.0.0",
     "download": "^8.0.0",
     "esbuild": "^0.12.4",
+    "esbuild-plugin-inline-import": "^1.0.1",
     "front-matter": "^4.0.2",
     "get-port": "^5.1.1",
     "husky": "^4.3.8",
