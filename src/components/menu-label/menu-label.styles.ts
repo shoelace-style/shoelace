@@ -14,7 +14,7 @@ export default css`
     font-weight: var(--sl-font-weight-semibold);
     line-height: var(--sl-line-height-normal);
     letter-spacing: var(--sl-letter-spacing-normal);
-    color: var(--sl-color-gray-400);
+    color: rgb(var(--sl-color-gray-500));
     padding: var(--sl-spacing-xx-small) var(--sl-spacing-x-large);
     user-select: none;
   }

@@ -5,7 +5,7 @@ export default css`
   ${componentStyles}
 
   :host {
-    --tabs-border-color: var(--sl-color-gray-200);
+    --tabs-border-color: rgb(var(--sl-color-gray-200));
 
     display: block;
   }
@@ -90,7 +90,7 @@ export default css`
 
   .tab-group--top .tab-group__indicator {
     bottom: -2px;
-    border-bottom: solid 2px var(--sl-color-primary-500);
+    border-bottom: solid 2px rgb(var(--sl-color-primary-500));
   }
 
   .tab-group--top .tab-group__body {
@@ -132,7 +132,7 @@ export default css`
 
   .tab-group--bottom .tab-group__indicator {
     top: calc(-1 * 2px);
-    border-top: solid 2px var(--sl-color-primary-500);
+    border-top: solid 2px rgb(var(--sl-color-primary-500));
   }
 
   .tab-group--bottom .tab-group__body {
@@ -159,7 +159,7 @@ export default css`
 
   .tab-group--start .tab-group__indicator {
     right: calc(-1 * 2px);
-    border-right: solid 2px var(--sl-color-primary-500);
+    border-right: solid 2px rgb(var(--sl-color-primary-500));
   }
 
   .tab-group--start .tab-group__body {
@@ -187,7 +187,7 @@ export default css`
 
   .tab-group--end .tab-group__indicator {
     left: calc(-1 * 2px);
-    border-left: solid 2px var(--sl-color-primary-500);
+    border-left: solid 2px rgb(var(--sl-color-primary-500));
   }
 
   .tab-group--end .tab-group__body {

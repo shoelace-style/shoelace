@@ -9,7 +9,7 @@ export default css`
   }
 
   .details {
-    border: solid 1px var(--sl-color-gray-200);
+    border: solid 1px rgb(var(--sl-color-gray-200));
     border-radius: var(--sl-border-radius-medium);
     overflow-anchor: none;
   }

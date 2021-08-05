@@ -20,13 +20,13 @@ export default css`
     font-size: var(--sl-font-size-medium);
     font-weight: var(--sl-font-weight-normal);
     color: var(--color);
-    background-color: var(--sl-panel-background-color);
+    background-color: rgb(var(--sl-panel-background-color));
     border-radius: var(--sl-border-radius-medium);
     user-select: none;
   }
 
   .color-picker--inline {
-    border: solid 1px var(--sl-panel-border-color);
+    border: solid 1px rgb(var(--sl-panel-border-color));
     box-shadow: var(--sl-shadow-small);
   }
 
@@ -59,7 +59,7 @@ export default css`
 
   .color-picker__grid-handle:focus {
     outline: none;
-    box-shadow: 0 0 0 1px var(--sl-color-primary-500),
+    box-shadow: 0 0 0 1px rgb(var(--sl-color-primary-500)),
       0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
   }
 
@@ -97,7 +97,7 @@ export default css`
 
   .color-picker__slider-handle:focus {
     outline: none;
-    box-shadow: 0 0 0 1px var(--sl-color-primary-500),
+    box-shadow: 0 0 0 1px rgb(var(--sl-color-primary-500)),
       0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
   }
 
@@ -172,7 +172,7 @@ export default css`
     width: calc(var(--sl-input-height-small) / 2);
     height: calc(var(--sl-input-height-small) / 2);
     color: white;
-    background-color: var(--sl-color-gray-900);
+    background-color: rgb(var(--sl-color-gray-900));
     border-radius: var(--sl-border-radius-circle);
     opacity: 0;
   }
@@ -225,7 +225,7 @@ export default css`
     grid-template-columns: repeat(8, 1fr);
     grid-gap: 6px;
     justify-items: center;
-    border-top: solid 1px var(--sl-color-gray-200);
+    border-top: solid 1px rgb(var(--sl-color-gray-200));
     padding: var(--sl-spacing-small);
   }
 
@@ -253,10 +253,10 @@ export default css`
   }
 
   .color-picker__transparent-bg {
-    background-image: linear-gradient(45deg, var(--sl-color-gray-300) 25%, transparent 25%),
-      linear-gradient(45deg, transparent 75%, var(--sl-color-gray-300) 75%),
-      linear-gradient(45deg, transparent 75%, var(--sl-color-gray-300) 75%),
-      linear-gradient(45deg, var(--sl-color-gray-300) 25%, transparent 25%);
+    background-image: linear-gradient(45deg, rgb(var(--sl-color-gray-300)) 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, rgb(var(--sl-color-gray-300)) 75%),
+      linear-gradient(45deg, transparent 75%, rgb(var(--sl-color-gray-300)) 75%),
+      linear-gradient(45deg, rgb(var(--sl-color-gray-300)) 25%, transparent 25%);
     background-size: 10px 10px;
     background-position: 0 0, 0 0, -5px -5px, 5px 5px;
   }
@@ -335,7 +335,7 @@ export default css`
   }
 
   .color-dropdown__trigger:focus:not(.color-dropdown__trigger--disabled):before {
-    box-shadow: inset 0 0 0 1px var(--sl-color-primary-500);
+    box-shadow: inset 0 0 0 1px rgb(var(--sl-color-primary-500));
   }
 
   .color-dropdown__trigger.color-dropdown__trigger--disabled {

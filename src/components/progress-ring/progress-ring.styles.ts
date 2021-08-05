@@ -5,8 +5,8 @@ export default css`
   ${componentStyles}
 
   :host {
-    --track-color: var(--sl-color-gray-200);
-    --indicator-color: var(--sl-color-primary-500);
+    --track-color: rgb(var(--sl-color-gray-200));
+    --indicator-color: rgb(var(--sl-color-primary-500));
 
     display: inline-flex;
   }

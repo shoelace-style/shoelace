@@ -6,9 +6,9 @@ export default css`
 
   :host {
     --height: 16px;
-    --track-color: var(--sl-color-gray-200);
-    --indicator-color: var(--sl-color-primary-500);
-    --label-color: var(--sl-color-white);
+    --track-color: rgb(var(--sl-color-gray-200));
+    --indicator-color: rgb(var(--sl-color-primary-500));
+    --label-color: rgb(var(--sl-color-white));
 
     display: block;
   }
