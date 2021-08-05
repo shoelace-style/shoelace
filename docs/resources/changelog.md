@@ -8,9 +8,30 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
-- Added a console error that appears when menu items have duplicate values in `sl-select`
+This release adds a variety of new color primitives and changes the way color tokens are consumed. Previously, color tokens were in hexidecimal format. Shoelace now uses an `R G B` format that requires you to use the `rgb()` function in your CSS.
+
+```css
+.example {
+  /* rgb() is required now */
+  color: rgb(var(--sl-color-gray-500));
+}
+```
+
+This is more verbose than before, but it has the advantage of letting you set the alpha channel of any color token.
+
+```css
+.example-with-alpha {
+  /* easily adjust opacity for any color token */
+  color: rgb(var(--sl-color-gray-500) / 50%);
+}
+```
+
+This change applies to all design tokens that implement a color. Refer to the [color tokens](/tokens/color) page for more details.
+
+- 🚨 BREAKING: all design tokens that implement colors have been converted to `R G B` and must be used with the `rgb()` function
 - Added new color primitives to the base set of design tokens
 - Added `--sl-color-*-1000` swatches to all color palettes
+- Added a console error that appears when menu items have duplicate values in `sl-select`
 - Exposed base and dark stylesheets so they can be imported via JavaScript [#438](https://github.com/shoelace-style/shoelace/issues/438)
 - Fixed a bug in `sl-menu` where pressing <kbd>Enter</kbd> after using type to select would result in the wrong value
 - Refactored thumb position logic in `sl-switch` [#490](https://github.com/shoelace-style/shoelace/pull/490)

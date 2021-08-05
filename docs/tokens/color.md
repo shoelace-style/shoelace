@@ -1,8 +1,34 @@
 # Color Tokens
 
-Color tokens help maintain consistent use of color throughout your app. Shoelace provides palettes for theme colors and primitives.
+Color tokens help maintain consistent use of color throughout your app. Shoelace provides palettes for theme colors and primitives that you can use as a foundation for your design system.
 
-To reference a color token in your stylesheet, use the `--sl-color-{name}-{n}` CSS custom property, where `{name}` is the name of the palette and `{n}` is the numeric value of the desired swatch.
+## Usage
+
+Color tokens are referenced using the `--sl-color-{name}-{n}` CSS custom property, where `{name}` is the name of the palette and `{n}` is the numeric value of the desired swatch.
+
+All color tokens are defined as a set of RGB integers, eg. `113 113 122`. CSS doesn't understand this format, however, so you need wrap them in the `rgb()` function.
+
+```css
+.example {
+  color: rgb(var(--sl-color-gray-500));
+}
+```
+
+This may seem a bit verbose, but it gives us a super power — we can adjust the alpha channel of any color token!
+
+## Adjusting the Alpha Channel
+
+By default, color tokens produce an opaque color. With this syntax, you can easily change the alpha channel.
+
+```css
+.example-with-alpha {
+  color: rgb(var(--sl-color-gray-500) / 50%);
+}
+```
+
+The browser evaluates this to `rgb(113 113 122 / 50%)`, where 50% is the alpha value. Note the required `/` delimiter after the color token. Alternatively, you can use a decimal such as 0.5 in lieu of a percentage.
+
+This syntax may not look familiar, but it's perfectly valid per the [CSS Color Module Level 4](https://www.w3.org/TR/css-color-4/#typedef-color) and [well-supported](https://caniuse.com/mdn-css_types_color_space_separated_functional_notation) by modern browsers.
 
 ## Theme Tokens
 
