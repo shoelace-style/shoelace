@@ -78,7 +78,7 @@ You can group avatars with a few lines of CSS.
   }
 
   .avatar-group sl-avatar::part(base) {
-    border: solid 2px rgb(var(--sl-color-white));
+    border: solid 2px rgb(var(--sl-color-empty));
   }
 </style>
 ```

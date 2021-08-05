@@ -40,7 +40,7 @@ export default css`
   .switch__control .switch__thumb {
     width: var(--thumb-size);
     height: var(--thumb-size);
-    background-color: rgb(var(--sl-color-white));
+    background-color: rgb(var(--sl-color-empty));
     border-radius: 50%;
     border: solid var(--sl-input-border-width) rgb(var(--sl-input-border-color));
     transform: translateX(calc((var(--width) - var(--height)) / -2));
@@ -62,7 +62,7 @@ export default css`
     border-color: rgb(var(--sl-color-gray-200));
   }
   .switch:not(.switch--checked):not(.switch--disabled) .switch__control:hover .switch__thumb {
-    background-color: rgb(var(--sl-color-white));
+    background-color: rgb(var(--sl-color-empty));
     border-color: rgb(var(--sl-input-border-color));
   }
 
@@ -73,7 +73,7 @@ export default css`
   }
 
   .switch.switch--focused:not(.switch--checked):not(.switch--disabled) .switch__control .switch__thumb {
-    background-color: rgb(var(--sl-color-white));
+    background-color: rgb(var(--sl-color-empty));
     border-color: rgb(var(--sl-color-primary-500));
     box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
   }
@@ -84,7 +84,7 @@ export default css`
     border-color: rgb(var(--sl-color-primary-500));
   }
   .switch--checked .switch__control .switch__thumb {
-    background-color: rgb(var(--sl-color-white));
+    background-color: rgb(var(--sl-color-empty));
     border-color: rgb(var(--sl-color-primary-500));
     transform: translateX(calc((var(--width) - var(--height)) / 2));
   }
@@ -95,7 +95,7 @@ export default css`
     border-color: rgb(var(--sl-color-primary-400));
   }
   .switch.switch--checked:not(.switch--disabled) .switch__control:hover .switch__thumb {
-    background-color: rgb(var(--sl-color-white));
+    background-color: rgb(var(--sl-color-empty));
     border-color: rgb(var(--sl-color-primary-500));
   }
 
@@ -106,7 +106,7 @@ export default css`
   }
 
   .switch.switch--checked:not(.switch--disabled).switch--focused .switch__control .switch__thumb {
-    background-color: rgb(var(--sl-color-white));
+    background-color: rgb(var(--sl-color-empty));
     border-color: rgb(var(--sl-color-primary-500));
     box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
   }

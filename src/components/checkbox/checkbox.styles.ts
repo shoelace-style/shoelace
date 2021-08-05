@@ -30,7 +30,7 @@ export default css`
     border: solid var(--sl-input-border-width) rgb(var(--sl-input-border-color));
     border-radius: 2px;
     background-color: rgb(var(--sl-input-background-color));
-    color: rgb(var(--sl-color-white));
+    color: rgb(var(--sl-color-empty));
     transition: var(--sl-transition-fast) border-color, var(--sl-transition-fast) background-color,
       var(--sl-transition-fast) color, var(--sl-transition-fast) box-shadow;
   }

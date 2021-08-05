@@ -13,7 +13,7 @@ body {
   font-size: var(--sl-font-size-medium);
   font-weight: var(--sl-font-weight-normal);
   letter-spacing: var(--sl-letter-spacing-normal);
-  background-color: rgb(var(--sl-color-white));
+  background-color: rgb(var(--sl-color-empty));
   color: rgb(var(--sl-color-gray-800));
   line-height: var(--sl-line-height-normal);
 }
@@ -28,7 +28,7 @@ strong {
 
 /* Sidebar */
 .sidebar {
-  background: rgb(var(--sl-color-white));
+  background: rgb(var(--sl-color-empty));
   border-right: solid 1px rgb(var(--sl-color-gray-200));
 }
 
@@ -105,7 +105,7 @@ strong {
 }
 
 .sidebar .clear-button svg path {
-  stroke: rgb(var(--sl-color-white));
+  stroke: rgb(var(--sl-color-empty));
 }
 
 .sidebar .clear-button:focus {
@@ -142,7 +142,7 @@ strong {
   width: 2rem;
   height: 2rem;
   border-radius: var(--sl-border-radius-medium);
-  background-color: rgb(var(--sl-color-white));
+  background-color: rgb(var(--sl-color-empty));
   padding: 0.5rem;
 }
 
@@ -269,7 +269,7 @@ strong {
 }
 
 .anchor span {
-  color: rgb(var(--sl-color-black));
+  color: rgb(var(--sl-color-full));
 }
 
 .markdown-section blockquote {
@@ -514,7 +514,7 @@ strong {
 .markdown-section p.warn:before {
   content: '!';
   border-radius: 100%;
-  color: rgb(var(--sl-color-white));
+  color: rgb(var(--sl-color-empty));
   font-size: 14px;
   font-weight: bold;
   left: -12px;
@@ -590,7 +590,7 @@ strong {
 html .repo-button {
   display: inline-flex;
   align-items: center;
-  background-color: rgb(var(--sl-color-white));
+  background-color: rgb(var(--sl-color-empty));
   border: solid 1px rgb(var(--sl-color-gray-200));
   border-radius: var(--sl-border-radius-medium);
   box-shadow: var(--sl-shadow-x-small);
@@ -691,7 +691,7 @@ body[data-page^='tokens/'] .table-wrapper td:first-child code {
 
 /* Elevation dmeo */
 .elevation-demo {
-  background: rgb(var(--sl-color-white));
+  background: rgb(var(--sl-color-empty));
   border-radius: 3px;
   width: 4rem;
   height: 4rem;
@@ -724,6 +724,10 @@ body[data-page^='tokens/'] .table-wrapper td:first-child code {
 .color-palette__swatch {
   height: 3rem;
   border-radius: var(--sl-border-radius-small);
+}
+
+.color-palette__swatch--border {
+  box-shadow: inset 0 0 0 1px rgb(var(--sl-color-full) / 10%);
 }
 
 @media screen and (max-width: 1200px) {

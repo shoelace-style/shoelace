@@ -3,8 +3,8 @@ import { css } from 'lit';
 export default css`
   :host,
   .sl-theme-dark {
-    --sl-color-black: 255 255 255;
-    --sl-color-white: var(--sl-color-gray-50);
+    --sl-color-full: 255 255 255;
+    --sl-color-empty: var(--sl-color-gray-50);
 
     /* Blue Gray */
     --sl-color-blue-gray-950: 248 250 252;

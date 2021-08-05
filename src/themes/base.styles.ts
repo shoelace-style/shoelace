@@ -8,9 +8,6 @@ export default css`
      * Color Primitives
      */
 
-    --sl-color-black: 0 0 0;
-    --sl-color-white: 255 255 255;
-
     /* Blue Gray */
     --sl-color-blue-gray-50: 248 250 252;
     --sl-color-blue-gray-100: 241 245 249;
@@ -301,6 +298,9 @@ export default css`
      * Theme Tokens
      */
 
+    --sl-color-full: 0 0 0;
+    --sl-color-empty: 255 255 255;
+
     /* Primary */
     --sl-color-primary-50: var(--sl-color-sky-50);
     --sl-color-primary-100: var(--sl-color-sky-100);
@@ -472,9 +472,9 @@ export default css`
     --sl-input-height-medium: 2.5rem; /* 40px */
     --sl-input-height-large: 3.125rem; /* 50px */
 
-    --sl-input-background-color: var(--sl-color-white);
-    --sl-input-background-color-hover: var(--sl-color-white);
-    --sl-input-background-color-focus: var(--sl-color-white);
+    --sl-input-background-color: var(--sl-color-empty);
+    --sl-input-background-color-hover: var(--sl-color-empty);
+    --sl-input-background-color-focus: var(--sl-color-empty);
     --sl-input-background-color-disabled: var(--sl-color-gray-100);
     --sl-input-border-color: var(--sl-color-gray-300);
     --sl-input-border-color-hover: var(--sl-color-gray-400);
@@ -533,7 +533,7 @@ export default css`
      * Panels
      */
 
-    --sl-panel-background-color: var(--sl-color-white);
+    --sl-panel-background-color: var(--sl-color-empty);
     --sl-panel-border-color: var(--sl-color-gray-200);
     /*
      * Tooltip tokens
@@ -541,7 +541,7 @@ export default css`
 
     --sl-tooltip-border-radius: var(--sl-border-radius-medium);
     --sl-tooltip-background-color: var(--sl-color-gray-900);
-    --sl-tooltip-color: var(--sl-color-white);
+    --sl-tooltip-color: var(--sl-color-empty);
     --sl-tooltip-font-family: var(--sl-font-sans);
     --sl-tooltip-font-weight: var(--sl-font-weight-normal);
     --sl-tooltip-font-size: var(--sl-font-size-small);

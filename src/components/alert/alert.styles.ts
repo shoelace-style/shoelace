@@ -15,7 +15,7 @@ export default css`
     position: relative;
     display: flex;
     align-items: stretch;
-    background-color: rgb(var(--sl-color-white));
+    background-color: rgb(var(--sl-color-empty));
     border: solid 1px rgb(var(--sl-color-gray-200));
     border-top-width: 3px;
     border-radius: var(--sl-border-radius-medium);

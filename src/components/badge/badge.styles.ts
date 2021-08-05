@@ -26,27 +26,27 @@ export default css`
   /* Type modifiers */
   .badge--primary {
     background-color: rgb(var(--sl-color-primary-500));
-    color: rgb(var(--sl-color-white));
+    color: rgb(var(--sl-color-empty));
   }
 
   .badge--success {
     background-color: rgb(var(--sl-color-success-500));
-    color: rgb(var(--sl-color-white));
+    color: rgb(var(--sl-color-empty));
   }
 
   .badge--info {
     background-color: rgb(var(--sl-color-info-500));
-    color: rgb(var(--sl-color-white));
+    color: rgb(var(--sl-color-empty));
   }
 
   .badge--warning {
     background-color: rgb(var(--sl-color-warning-500));
-    color: rgb(var(--sl-color-white));
+    color: rgb(var(--sl-color-empty));
   }
 
   .badge--danger {
     background-color: rgb(var(--sl-color-danger-500));
-    color: rgb(var(--sl-color-white));
+    color: rgb(var(--sl-color-empty));
   }
 
   /* Pill modifier */
