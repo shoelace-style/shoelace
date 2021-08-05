@@ -16,9 +16,9 @@ All color tokens are defined as a set of RGB integers, eg. `113 113 122`. CSS do
 
 This may seem a bit verbose, but it gives us a super power — we can adjust the alpha channel of any color token!
 
-## Adjusting the Alpha Channel
+## Adjusting Alpha Channels
 
-By default, color tokens produce an opaque color. With this syntax, you can easily change the alpha channel.
+By default, color tokens produce an opaque color. With this syntax, you can easily adjust alpha channels.
 
 ```css
 .example-with-alpha {
