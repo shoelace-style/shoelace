@@ -19,7 +19,7 @@ body {
 }
 
 a {
-  color: rgb(var(--sl-color-primary-500));
+  color: rgb(var(--sl-color-primary-600));
 }
 
 strong {
@@ -183,7 +183,7 @@ strong {
 
 .sidebar-nav li.collapse > a,
 .sidebar-nav li.active > a {
-  color: rgb(var(--sl-color-primary-500));
+  color: rgb(var(--sl-color-primary-600));
 }
 
 .sidebar li > p {
