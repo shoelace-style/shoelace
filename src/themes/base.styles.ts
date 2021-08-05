@@ -11,13 +11,6 @@ export default css`
     --sl-color-black: 0 0 0;
     --sl-color-white: 255 255 255;
 
-    /* We can probably ditch these now */
-    --sl-color-primary-text: var(--sl-color-white);
-    --sl-color-success-text: var(--sl-color-white);
-    --sl-color-info-text: var(--sl-color-white);
-    --sl-color-warning-text: var(--sl-color-white);
-    --sl-color-danger-text: var(--sl-color-white);
-
     /* Blue Gray */
     --sl-color-blue-gray-50: 248 250 252;
     --sl-color-blue-gray-100: 241 245 249;

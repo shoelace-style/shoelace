@@ -29,6 +29,7 @@ This is more verbose than before, but it has the advantage of letting you set th
 This change applies to all design tokens that implement a color. Refer to the [color tokens](/tokens/color) page for more details.
 
 - 🚨 BREAKING: all design tokens that implement colors have been converted to `R G B` and must be used with the `rgb()` function
+- 🚨 BREAKING: removed `--sl-color-primary|success|warning|info|danger-text` design tokens (use the color scale instead)
 - Added new color primitives to the base set of design tokens
 - Added `--sl-color-*-950` swatches to all color palettes
 - Added a console error that appears when menu items have duplicate values in `sl-select`
