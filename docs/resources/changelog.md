@@ -30,7 +30,7 @@ This change applies to all design tokens that implement a color. Refer to the [c
 
 - 🚨 BREAKING: all design tokens that implement colors have been converted to `R G B` and must be used with the `rgb()` function
 - Added new color primitives to the base set of design tokens
-- Added `--sl-color-*-1000` swatches to all color palettes
+- Added `--sl-color-*-950` swatches to all color palettes
 - Added a console error that appears when menu items have duplicate values in `sl-select`
 - Exposed base and dark stylesheets so they can be imported via JavaScript [#438](https://github.com/shoelace-style/shoelace/issues/438)
 - Fixed a bug in `sl-menu` where pressing <kbd>Enter</kbd> after using type to select would result in the wrong value

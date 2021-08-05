@@ -49,7 +49,7 @@ Theme tokens give you a semantic way to reference colors in your app. The primar
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-primary-700));"></div>700</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-primary-800));"></div>800</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-primary-900));"></div>900</div>
-  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-primary-1000));"></div>1000</div>
+  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-primary-950));"></div>950</div>
 
   <div class="color-palette__name">
     Success<br>
@@ -65,7 +65,7 @@ Theme tokens give you a semantic way to reference colors in your app. The primar
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-success-700));"></div>700</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-success-800));"></div>800</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-success-900));"></div>900</div>
-  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-success-1000));"></div>1000</div>
+  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-success-950));"></div>950</div>
 
   <div class="color-palette__name">
     Info<br>
@@ -81,7 +81,7 @@ Theme tokens give you a semantic way to reference colors in your app. The primar
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-info-700));"></div>700</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-info-800));"></div>800</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-info-900));"></div>900</div>
-  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-info-1000));"></div>1000</div>
+  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-info-950));"></div>950</div>
 
   <div class="color-palette__name">
     Warning<br>
@@ -97,7 +97,7 @@ Theme tokens give you a semantic way to reference colors in your app. The primar
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-warning-700));"></div>700</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-warning-800));"></div>800</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-warning-900));"></div>900</div>
-  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-warning-1000));"></div>1000</div>
+  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-warning-950));"></div>950</div>
 
   <div class="color-palette__name">
     Danger<br>
@@ -113,7 +113,7 @@ Theme tokens give you a semantic way to reference colors in your app. The primar
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-danger-700));"></div>700</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-danger-800));"></div>800</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-danger-900));"></div>900</div>
-  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-danger-1000));"></div>1000</div>
+  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-danger-950));"></div>950</div>
 </div>
 
 ## Primitives
@@ -135,7 +135,7 @@ Additional palettes are provided in the form of color primitives. Use these when
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-blue-gray-700));"></div>700</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-blue-gray-800));"></div>800</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-blue-gray-900));"></div>900</div>
-  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-blue-gray-1000));"></div>1000</div>
+  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-blue-gray-950));"></div>950</div>
 
   <div class="color-palette__name">
     Cool Gray<br>
@@ -151,7 +151,7 @@ Additional palettes are provided in the form of color primitives. Use these when
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-cool-gray-700));"></div>700</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-cool-gray-800));"></div>800</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-cool-gray-900));"></div>900</div>
-  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-cool-gray-1000));"></div>1000</div>
+  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-cool-gray-950));"></div>950</div>
 
   <div class="color-palette__name">
     Gray<br>
@@ -167,7 +167,7 @@ Additional palettes are provided in the form of color primitives. Use these when
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-gray-700));"></div>700</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-gray-800));"></div>800</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-gray-900));"></div>900</div>  
-  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-gray-1000));"></div>1000</div>  
+  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-gray-950));"></div>950</div>  
 
   <div class="color-palette__name">
     True Gray<br>
@@ -183,7 +183,7 @@ Additional palettes are provided in the form of color primitives. Use these when
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-true-gray-700));"></div>700</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-true-gray-800));"></div>800</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-true-gray-900));"></div>900</div>
-  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-true-gray-1000));"></div>1000</div>
+  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-true-gray-950));"></div>950</div>
 
   <div class="color-palette__name">
     Warm Gray<br>
@@ -199,7 +199,7 @@ Additional palettes are provided in the form of color primitives. Use these when
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-warm-gray-700));"></div>700</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-warm-gray-800));"></div>800</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-warm-gray-900));"></div>900</div>
-  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-warm-gray-1000));"></div>1000</div>
+  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-warm-gray-950));"></div>950</div>
 
   <div class="color-palette__name">
     Red<br>
@@ -215,7 +215,7 @@ Additional palettes are provided in the form of color primitives. Use these when
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-red-700));"></div>700</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-red-800));"></div>800</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-red-900));"></div>900</div>
-  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-red-1000));"></div>1000</div>
+  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-red-950));"></div>950</div>
 
   <div class="color-palette__name">
     Orange<br>
@@ -231,7 +231,7 @@ Additional palettes are provided in the form of color primitives. Use these when
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-orange-700));"></div>700</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-orange-800));"></div>800</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-orange-900));"></div>900</div>
-  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-orange-1000));"></div>1000</div>
+  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-orange-950));"></div>950</div>
 
   <div class="color-palette__name">
     Amber<br>
@@ -247,7 +247,7 @@ Additional palettes are provided in the form of color primitives. Use these when
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-amber-700));"></div>700</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-amber-800));"></div>800</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-amber-900));"></div>900</div>
-  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-amber-1000));"></div>1000</div>
+  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-amber-950));"></div>950</div>
 
   <div class="color-palette__name">
     Yellow<br>
@@ -263,7 +263,7 @@ Additional palettes are provided in the form of color primitives. Use these when
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-yellow-700));"></div>700</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-yellow-800));"></div>800</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-yellow-900));"></div>900</div>
-  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-yellow-1000));"></div>1000</div>
+  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-yellow-950));"></div>950</div>
 
   <div class="color-palette__name">
     Lime<br>
@@ -279,7 +279,7 @@ Additional palettes are provided in the form of color primitives. Use these when
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-lime-700));"></div>700</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-lime-800));"></div>800</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-lime-900));"></div>900</div>
-  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-lime-1000));"></div>1000</div>
+  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-lime-950));"></div>950</div>
 
   <div class="color-palette__name">
     Green<br>
@@ -295,7 +295,7 @@ Additional palettes are provided in the form of color primitives. Use these when
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-green-700));"></div>700</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-green-800));"></div>800</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-green-900));"></div>900</div>
-  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-green-1000));"></div>1000</div>
+  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-green-950));"></div>950</div>
 
   <div class="color-palette__name">
     Emerald<br>
@@ -311,7 +311,7 @@ Additional palettes are provided in the form of color primitives. Use these when
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-emerald-700));"></div>700</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-emerald-800));"></div>800</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-emerald-900));"></div>900</div>
-  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-emerald-1000));"></div>1000</div>
+  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-emerald-950));"></div>950</div>
 
   <div class="color-palette__name">
     Teal<br>
@@ -327,7 +327,7 @@ Additional palettes are provided in the form of color primitives. Use these when
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-teal-700));"></div>700</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-teal-800));"></div>800</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-teal-900));"></div>900</div>
-  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-teal-1000));"></div>1000</div>
+  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-teal-950));"></div>950</div>
 
   <div class="color-palette__name">
     Cyan<br>
@@ -343,7 +343,7 @@ Additional palettes are provided in the form of color primitives. Use these when
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-cyan-700));"></div>700</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-cyan-800));"></div>800</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-cyan-900));"></div>900</div>
-  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-cyan-1000));"></div>1000</div>
+  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-cyan-950));"></div>950</div>
 
   <div class="color-palette__name">
     Sky<br>
@@ -359,7 +359,7 @@ Additional palettes are provided in the form of color primitives. Use these when
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-sky-700));"></div>700</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-sky-800));"></div>800</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-sky-900));"></div>900</div>
-  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-sky-1000));"></div>1000</div>
+  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-sky-950));"></div>950</div>
 
   <div class="color-palette__name">
     Blue<br>
@@ -375,7 +375,7 @@ Additional palettes are provided in the form of color primitives. Use these when
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-blue-700));"></div>700</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-blue-800));"></div>800</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-blue-900));"></div>900</div>
-  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-blue-1000));"></div>1000</div>
+  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-blue-950));"></div>950</div>
 
   <div class="color-palette__name">
     Indigo<br>
@@ -391,7 +391,7 @@ Additional palettes are provided in the form of color primitives. Use these when
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-indigo-700));"></div>700</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-indigo-800));"></div>800</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-indigo-900));"></div>900</div>
-  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-indigo-1000));"></div>1000</div>
+  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-indigo-950));"></div>950</div>
 
   <div class="color-palette__name">
     Violet<br>
@@ -407,7 +407,7 @@ Additional palettes are provided in the form of color primitives. Use these when
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-violet-700));"></div>700</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-violet-800));"></div>800</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-violet-900));"></div>900</div>
-  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-violet-1000));"></div>1000</div>
+  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-violet-950));"></div>950</div>
 
   <div class="color-palette__name">
     Purple<br>
@@ -423,7 +423,7 @@ Additional palettes are provided in the form of color primitives. Use these when
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-purple-700));"></div>700</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-purple-800));"></div>800</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-purple-900));"></div>900</div>
-  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-purple-1000));"></div>1000</div>
+  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-purple-950));"></div>950</div>
 
   <div class="color-palette__name">
     Fuchsia<br>
@@ -439,7 +439,7 @@ Additional palettes are provided in the form of color primitives. Use these when
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-fuchsia-700));"></div>700</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-fuchsia-800));"></div>800</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-fuchsia-900));"></div>900</div>
-  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-fuchsia-1000));"></div>1000</div>
+  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-fuchsia-950));"></div>950</div>
 
   <div class="color-palette__name">
     Pink<br>
@@ -455,7 +455,7 @@ Additional palettes are provided in the form of color primitives. Use these when
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-pink-700));"></div>700</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-pink-800));"></div>800</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-pink-900));"></div>900</div>
-  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-pink-1000));"></div>1000</div>
+  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-pink-950));"></div>950</div>
 
   <div class="color-palette__name">
     Rose<br>
@@ -471,6 +471,6 @@ Additional palettes are provided in the form of color primitives. Use these when
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-rose-700));"></div>700</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-rose-800));"></div>800</div>
   <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-rose-900));"></div>900</div>
-  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-rose-1000));"></div>1000</div>
+  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-rose-950));"></div>950</div>
 </div>
 

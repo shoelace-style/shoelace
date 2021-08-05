@@ -4,7 +4,7 @@
   --sl-color-white: var(--sl-color-gray-100);
 
   /* Blue Gray */
-  --sl-color-blue-gray-1000: 248 250 252;
+  --sl-color-blue-gray-950: 248 250 252;
   --sl-color-blue-gray-900: 241 245 249;
   --sl-color-blue-gray-800: 226 232 240;
   --sl-color-blue-gray-700: 203 213 225;
@@ -17,7 +17,7 @@
   --sl-color-blue-gray-50: 10 16 30;
 
   /* Cool Gray */
-  --sl-color-cool-gray-1000: 249 250 251;
+  --sl-color-cool-gray-950: 249 250 251;
   --sl-color-cool-gray-900: 243 244 246;
   --sl-color-cool-gray-800: 229 231 235;
   --sl-color-cool-gray-700: 209 213 219;
@@ -30,7 +30,7 @@
   --sl-color-cool-gray-50: 12 17 29;
 
   /* Gray */
-  --sl-color-gray-1000: 250 250 250;
+  --sl-color-gray-950: 250 250 250;
   --sl-color-gray-900: 244 244 245;
   --sl-color-gray-800: 228 228 231;
   --sl-color-gray-700: 212 212 216;
@@ -43,7 +43,7 @@
   --sl-color-gray-50: 19 19 22;
 
   /* True Gray */
-  --sl-color-true-gray-1000: 250 250 250;
+  --sl-color-true-gray-950: 250 250 250;
   --sl-color-true-gray-900: 245 245 245;
   --sl-color-true-gray-800: 229 229 229;
   --sl-color-true-gray-700: 212 212 212;
@@ -56,7 +56,7 @@
   --sl-color-true-gray-50: 17 17 17;
 
   /* Warm Gray */
-  --sl-color-warm-gray-1000: 250 250 249;
+  --sl-color-warm-gray-950: 250 250 249;
   --sl-color-warm-gray-900: 245 245 244;
   --sl-color-warm-gray-800: 231 229 228;
   --sl-color-warm-gray-700: 214 211 209;
@@ -69,7 +69,7 @@
   --sl-color-warm-gray-50: 19 18 16;
 
   /* Red */
-  --sl-color-red-1000: 254 242 242;
+  --sl-color-red-950: 254 242 242;
   --sl-color-red-900: 254 226 226;
   --sl-color-red-800: 254 202 202;
   --sl-color-red-700: 252 165 165;
@@ -82,7 +82,7 @@
   --sl-color-red-50: 80 20 20;
 
   /* Orange */
-  --sl-color-orange-1000: 255 247 237;
+  --sl-color-orange-950: 255 247 237;
   --sl-color-orange-900: 255 237 213;
   --sl-color-orange-800: 254 215 170;
   --sl-color-orange-700: 253 186 116;
@@ -95,7 +95,7 @@
   --sl-color-orange-50: 82 32 15;
 
   /* Amber */
-  --sl-color-amber-1000: 255 251 235;
+  --sl-color-amber-950: 255 251 235;
   --sl-color-amber-900: 254 243 199;
   --sl-color-amber-800: 253 230 138;
   --sl-color-amber-700: 252 211 77;
@@ -108,7 +108,7 @@
   --sl-color-amber-50: 74 35 11;
 
   /* Yellow */
-  --sl-color-yellow-1000: 254 252 232;
+  --sl-color-yellow-950: 254 252 232;
   --sl-color-yellow-900: 254 249 195;
   --sl-color-yellow-800: 254 240 138;
   --sl-color-yellow-700: 253 224 71;
@@ -121,7 +121,7 @@
   --sl-color-yellow-50: 60 38 11;
 
   /* Lime */
-  --sl-color-lime-1000: 247 254 231;
+  --sl-color-lime-950: 247 254 231;
   --sl-color-lime-900: 236 252 203;
   --sl-color-lime-800: 217 249 157;
   --sl-color-lime-700: 190 242 100;
@@ -134,7 +134,7 @@
   --sl-color-lime-50: 38 57 14;
 
   /* Green */
-  --sl-color-green-1000: 240 253 244;
+  --sl-color-green-950: 240 253 244;
   --sl-color-green-900: 220 252 231;
   --sl-color-green-800: 187 247 208;
   --sl-color-green-700: 134 239 172;
@@ -147,7 +147,7 @@
   --sl-color-green-50: 12 49 27;
 
   /* Emerald */
-  --sl-color-emerald-1000: 236 253 245;
+  --sl-color-emerald-950: 236 253 245;
   --sl-color-emerald-900: 209 250 229;
   --sl-color-emerald-800: 167 243 208;
   --sl-color-emerald-700: 110 231 183;
@@ -160,7 +160,7 @@
   --sl-color-emerald-50: 3 45 34;
 
   /* Teal */
-  --sl-color-teal-1000: 240 253 250;
+  --sl-color-teal-950: 240 253 250;
   --sl-color-teal-900: 204 251 241;
   --sl-color-teal-800: 153 246 228;
   --sl-color-teal-700: 94 234 212;
@@ -173,7 +173,7 @@
   --sl-color-teal-50: 12 46 44;
 
   /* Cyan */
-  --sl-color-cyan-1000: 236 254 255;
+  --sl-color-cyan-950: 236 254 255;
   --sl-color-cyan-900: 207 250 254;
   --sl-color-cyan-800: 165 243 252;
   --sl-color-cyan-700: 103 232 249;
@@ -186,7 +186,7 @@
   --sl-color-cyan-50: 16 52 66;
 
   /* Sky */
-  --sl-color-sky-1000: 240 249 255;
+  --sl-color-sky-950: 240 249 255;
   --sl-color-sky-900: 224 242 254;
   --sl-color-sky-800: 186 230 253;
   --sl-color-sky-700: 125 211 252;
@@ -199,7 +199,7 @@
   --sl-color-sky-50: 11 50 73;
 
   /* Blue */
-  --sl-color-blue-1000: 239 246 255;
+  --sl-color-blue-950: 239 246 255;
   --sl-color-blue-900: 219 234 254;
   --sl-color-blue-800: 191 219 254;
   --sl-color-blue-700: 147 197 253;
@@ -212,7 +212,7 @@
   --sl-color-blue-50: 21 33 73;
 
   /* Indigo */
-  --sl-color-indigo-1000: 238 242 255;
+  --sl-color-indigo-950: 238 242 255;
   --sl-color-indigo-900: 224 231 255;
   --sl-color-indigo-800: 199 210 254;
   --sl-color-indigo-700: 165 180 252;
@@ -225,7 +225,7 @@
   --sl-color-indigo-50: 36 33 84;
 
   /* Violet */
-  --sl-color-violet-1000: 245 243 255;
+  --sl-color-violet-950: 245 243 255;
   --sl-color-violet-900: 237 233 254;
   --sl-color-violet-800: 221 214 254;
   --sl-color-violet-700: 196 181 253;
@@ -238,7 +238,7 @@
   --sl-color-violet-50: 49 21 88;
 
   /* Purple */
-  --sl-color-purple-1000: 250 245 255;
+  --sl-color-purple-950: 250 245 255;
   --sl-color-purple-900: 243 232 255;
   --sl-color-purple-800: 233 213 255;
   --sl-color-purple-700: 216 180 254;
@@ -251,7 +251,7 @@
   --sl-color-purple-50: 47 17 67;
 
   /* Fuchsia */
-  --sl-color-fuchsia-1000: 253 244 255;
+  --sl-color-fuchsia-950: 253 244 255;
   --sl-color-fuchsia-900: 250 232 255;
   --sl-color-fuchsia-800: 245 208 254;
   --sl-color-fuchsia-700: 240 171 252;
@@ -264,7 +264,7 @@
   --sl-color-fuchsia-50: 56 16 58;
 
   /* Pink */
-  --sl-color-pink-1000: 253 242 248;
+  --sl-color-pink-950: 253 242 248;
   --sl-color-pink-900: 252 231 243;
   --sl-color-pink-800: 251 207 232;
   --sl-color-pink-700: 249 168 212;
@@ -277,7 +277,7 @@
   --sl-color-pink-50: 67 14 35;
 
   /* Rose */
-  --sl-color-rose-1000: 255 241 242;
+  --sl-color-rose-950: 255 241 242;
   --sl-color-rose-900: 255 228 230;
   --sl-color-rose-800: 254 205 211;
   --sl-color-rose-700: 253 164 175;
