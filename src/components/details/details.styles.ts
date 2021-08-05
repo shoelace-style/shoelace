@@ -32,7 +32,7 @@ export default css`
   }
 
   .focus-visible .details__header:focus {
-    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-focus-ring-color-primary) / var(--sl-focus-ring-alpha));
   }
 
   .details--disabled .details__header {

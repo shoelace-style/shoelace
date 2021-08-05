@@ -75,7 +75,7 @@ export default css`
   .switch.switch--focused:not(.switch--checked):not(.switch--disabled) .switch__control .switch__thumb {
     background-color: rgb(var(--sl-color-empty));
     border-color: rgb(var(--sl-color-primary-500));
-    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-focus-ring-color-primary) / var(--sl-focus-ring-alpha));
   }
 
   /* Checked */
@@ -108,7 +108,7 @@ export default css`
   .switch.switch--checked:not(.switch--disabled).switch--focused .switch__control .switch__thumb {
     background-color: rgb(var(--sl-color-empty));
     border-color: rgb(var(--sl-color-primary-500));
-    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-focus-ring-color-primary) / var(--sl-focus-ring-alpha));
   }
 
   /* Disabled */

@@ -60,7 +60,7 @@ export default css`
   .color-picker__grid-handle:focus {
     outline: none;
     box-shadow: 0 0 0 1px rgb(var(--sl-color-primary-500)),
-      0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
+      0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-focus-ring-color-primary) / var(--sl-focus-ring-alpha));
   }
 
   .color-picker__controls {
@@ -98,7 +98,7 @@ export default css`
   .color-picker__slider-handle:focus {
     outline: none;
     box-shadow: 0 0 0 1px rgb(var(--sl-color-primary-500)),
-      0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
+      0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-focus-ring-color-primary) / var(--sl-focus-ring-alpha));
   }
 
   .color-picker__hue {
@@ -155,7 +155,7 @@ export default css`
   }
 
   .color-picker__preview:focus {
-    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-focus-ring-color-primary) / var(--sl-focus-ring-alpha));
     outline: none;
   }
 
@@ -249,7 +249,7 @@ export default css`
 
   .color-picker__swatch:focus {
     outline: none;
-    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-focus-ring-color-primary) / var(--sl-focus-ring-alpha));
   }
 
   .color-picker__transparent-bg {
@@ -330,7 +330,7 @@ export default css`
   }
 
   .color-dropdown__trigger:focus:not(.color-dropdown__trigger--disabled) {
-    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-focus-ring-color-primary) / var(--sl-focus-ring-alpha));
     outline: none;
   }
 

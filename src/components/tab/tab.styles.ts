@@ -5,7 +5,8 @@ export default css`
   ${componentStyles}
 
   :host {
-    --focus-ring: inset 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
+    --focus-ring: inset 0 0 0 var(--sl-focus-ring-width)
+      rgb(var(--sl-focus-ring-color-primary) / var(--sl-focus-ring-alpha));
 
     display: inline-block;
   }

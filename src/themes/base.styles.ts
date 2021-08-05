@@ -455,12 +455,13 @@ export default css`
      */
 
     /* Focus ring */
-    --sl-focus-ring-color-primary: #0ea5e954;
-    --sl-focus-ring-color-success: #22c55e54;
-    --sl-focus-ring-color-info: #6b728054;
-    --sl-focus-ring-color-warning: #f59e0b54;
-    --sl-focus-ring-color-danger: #ef444454;
+    --sl-focus-ring-color-primary: var(--sl-color-primary-500);
+    --sl-focus-ring-color-success: var(--sl-color-success-500);
+    --sl-focus-ring-color-info: var(--sl-color-info-500);
+    --sl-focus-ring-color-warning: var(--sl-color-warning-500);
+    --sl-focus-ring-color-danger: var(--sl-color-danger-500);
     --sl-focus-ring-width: 3px;
+    --sl-focus-ring-alpha: 25%;
 
     /* Buttons */
     --sl-button-font-size-small: var(--sl-font-size-x-small);

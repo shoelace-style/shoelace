@@ -72,6 +72,6 @@ export default css`
   .image-comparer__handle:focus {
     outline: none;
     box-shadow: 0 0 0 1px rgb(var(--sl-color-primary-500)),
-      0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
+      0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-focus-ring-color-primary) / var(--sl-focus-ring-alpha));
   }
 `;

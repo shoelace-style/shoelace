@@ -59,7 +59,7 @@ export default css`
   .range__control:not(:disabled):focus::-webkit-slider-thumb {
     background-color: rgb(var(--sl-color-primary-400));
     border-color: rgb(var(--sl-color-primary-400));
-    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-focus-ring-color-primary) / var(--sl-focus-ring-alpha));
   }
 
   .range__control:not(:disabled)::-webkit-slider-thumb:active {
@@ -101,7 +101,7 @@ export default css`
   .range__control:not(:disabled):focus::-moz-range-thumb {
     background-color: rgb(var(--sl-color-primary-400));
     border-color: rgb(var(--sl-color-primary-400));
-    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-focus-ring-color-primary) / var(--sl-focus-ring-alpha));
   }
 
   .range__control:not(:disabled)::-moz-range-thumb:active {
