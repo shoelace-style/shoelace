@@ -18,9 +18,9 @@ To get started using Shoelace with Rails, the following packages must be install
 yarn add @shoelace-style/shoelace copy-webpack-plugin
 ```
 
-### Importing the Default Theme
+### Importing the Base Theme
 
-The next step is to import Shoelace's default theme (stylesheet) in `app/javascript/stylesheets/application.scss`.
+The next step is to import Shoelace's base theme (stylesheet) in `app/javascript/stylesheets/application.scss`.
 
 ```css
 @import '~@shoelace-style/shoelace/dist/themes/base';

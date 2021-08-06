@@ -307,7 +307,7 @@ The component API remains the same except for the changes noted below. Thanks fo
 - 🚨 BREAKING: removed the custom elements bundle (you can import ES modules directly)
 - 🚨 BREAKING: removed `getAnimationNames()` and `getEasingNames()` methods from `sl-animation` (you can import them from `utilities/animation.js` instead)
 - 🚨 BREAKING: removed the `sl-icon-library` component since it required imperative initialization (you can import the `registerIconLibrary()` function from `utilities/icon-library.js` instead)
-- 🚨 BREAKING: removed the experimental `sl-theme` component due to limitations (you should set the `sl-theme-[name]` class on the `<body>` instead)
+- 🚨 BREAKING: removed the experimental `sl-theme` component due to limitations (you should set the `sl-theme-{name}` class on the `<body>` instead)
 - 🚨 BREAKING: moved the base stylesheet from `dist/shoelace.css` to `dist/themes/base.css`
 - 🚨 BREAKING: moved `icons` into `assets/icons` to make future assets easier to colocate
 - 🚨 BREAKING: changed `getSymbol` property in `sl-rating` to `symbol` (it now accepts a string or a function that returns an icon name)
