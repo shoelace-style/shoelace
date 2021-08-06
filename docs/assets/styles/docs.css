@@ -583,13 +583,6 @@ strong {
   line-height: 1.6;
 }
 
-/* Copy button */
-.docsify-copy-code-button {
-  font-size: var(--sl-font-size-small) !important;
-  border-top-right-radius: var(--sl-border-radius-medium) !important;
-  border-bottom-left-radius: var(--sl-border-radius-medium) !important;
-}
-
 /* Repo buttons */
 html .repo-button {
   display: inline-flex;
