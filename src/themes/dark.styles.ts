@@ -3,9 +3,6 @@ import { css } from 'lit';
 export default css`
   :host,
   .sl-theme-dark {
-    --sl-color-0: 255 255 255;
-    --sl-color-1000: var(--sl-color-gray-50);
-
     /* Blue Gray */
     --sl-color-blue-gray-950: 248 250 252;
     --sl-color-blue-gray-900: 241 245 249;
@@ -291,5 +288,9 @@ export default css`
     --sl-color-rose-200: 159 18 57;
     --sl-color-rose-100: 136 19 55;
     --sl-color-rose-50: 74 13 32;
+
+    /* Neutral one-offs */
+    --sl-color-neutral-0: 255 255 255;
+    --sl-color-neutral-1000: var(--sl-color-gray-50);
   }
 `;

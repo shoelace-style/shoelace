@@ -101,6 +101,6 @@ export default css`
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: rgb(var(--sl-overlay-background-color) / 40%);
+    background-color: rgb(var(--sl-overlay-background-color) / var(--sl-overlay-opacity));
   }
 `;

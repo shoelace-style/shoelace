@@ -129,8 +129,8 @@ Theme tokens give you a semantic way to reference colors in your app. The primar
     Black & White<br>
     <code>--sl-color-neutral-<em>{n}</em></code>
   </div>
-  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-0));"></div>0</div>
-  <div class="color-palette__example"><div class="color-palette__swatch color-palette__swatch--border" style="background-color: rgb(var(--sl-color-1000));"></div>1000</div>
+  <div class="color-palette__example"><div class="color-palette__swatch" style="background-color: rgb(var(--sl-color-neutral-0));"></div>0</div>
+  <div class="color-palette__example"><div class="color-palette__swatch color-palette__swatch--border" style="background-color: rgb(var(--sl-color-neutral-1000));"></div>1000</div>
 </div>
 
 ## Primitives

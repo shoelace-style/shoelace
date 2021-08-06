@@ -298,9 +298,6 @@ export default css`
      * Theme Tokens
      */
 
-    --sl-color-0: 0 0 0;
-    --sl-color-1000: 255 255 255;
-
     /* Primary */
     --sl-color-primary-50: var(--sl-color-sky-50);
     --sl-color-primary-100: var(--sl-color-sky-100);
@@ -365,6 +362,8 @@ export default css`
     --sl-color-neutral-800: var(--sl-color-gray-800);
     --sl-color-neutral-900: var(--sl-color-gray-900);
     --sl-color-neutral-950: var(--sl-color-gray-950);
+    --sl-color-neutral-0: 0 0 0;
+    --sl-color-neutral-1000: 255 255 255;
 
     /*
      * Border radius tokens
@@ -382,11 +381,11 @@ export default css`
      * Elevation tokens
      */
 
-    --sl-shadow-x-small: 0 1px 0 #0d131e0d;
-    --sl-shadow-small: 0 1px 2px #0d131e1a;
-    --sl-shadow-medium: 0 2px 4px #0d131e1a;
-    --sl-shadow-large: 0 2px 8px #0d131e1a;
-    --sl-shadow-x-large: 0 4px 16px #0d131e1a;
+    --sl-shadow-x-small: 0 1px 0 rgb(0 0 0 / 5%);
+    --sl-shadow-small: 0 1px 2px rgb(0 0 0 / 9%);
+    --sl-shadow-medium: 0 2px 4px rgb(0 0 0 / 9%);
+    --sl-shadow-large: 0 2px 8px rgb(0 0 0 / 9%);
+    --sl-shadow-x-large: 0 4px 16px rgb(0 0 0 / 9%);
 
     /*
      * Spacing tokens
@@ -473,9 +472,9 @@ export default css`
     --sl-input-height-medium: 2.5rem; /* 40px */
     --sl-input-height-large: 3.125rem; /* 50px */
 
-    --sl-input-background-color: var(--sl-color-1000);
-    --sl-input-background-color-hover: var(--sl-color-1000);
-    --sl-input-background-color-focus: var(--sl-color-1000);
+    --sl-input-background-color: var(--sl-color-neutral-1000);
+    --sl-input-background-color-hover: var(--sl-color-neutral-1000);
+    --sl-input-background-color-focus: var(--sl-color-neutral-1000);
     --sl-input-background-color-disabled: var(--sl-color-neutral-100);
     --sl-input-border-color: var(--sl-color-neutral-300);
     --sl-input-border-color-hover: var(--sl-color-neutral-400);
@@ -528,13 +527,14 @@ export default css`
      * Overlay tokens
      */
 
-    --sl-overlay-background-color: var(--sl-color-blue-gray-900);
+    --sl-overlay-background-color: var(--sl-color-blue-gray-500);
+    --sl-overlay-opacity: 33%;
 
     /*
      * Panels
      */
 
-    --sl-panel-background-color: var(--sl-color-1000);
+    --sl-panel-background-color: var(--sl-color-neutral-1000);
     --sl-panel-border-color: var(--sl-color-neutral-200);
     /*
      * Tooltip tokens
@@ -542,7 +542,7 @@ export default css`
 
     --sl-tooltip-border-radius: var(--sl-border-radius-medium);
     --sl-tooltip-background-color: var(--sl-color-neutral-900);
-    --sl-tooltip-color: var(--sl-color-1000);
+    --sl-tooltip-color: var(--sl-color-neutral-1000);
     --sl-tooltip-font-family: var(--sl-font-sans);
     --sl-tooltip-font-weight: var(--sl-font-weight-normal);
     --sl-tooltip-font-size: var(--sl-font-size-small);
