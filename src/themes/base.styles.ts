@@ -3,7 +3,7 @@ import { css } from 'lit';
 export default css`
   :root,
   :host,
-  .sl-theme-light {
+  .sl-theme-base {
     /*
      * Color Primitives
      */
