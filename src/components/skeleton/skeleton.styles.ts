@@ -6,8 +6,8 @@ export default css`
 
   :host {
     --border-radius: var(--sl-border-radius-pill);
-    --color: rgb(var(--sl-color-gray-200));
-    --sheen-color: rgb(var(--sl-color-gray-300));
+    --color: rgb(var(--sl-color-neutral-200));
+    --sheen-color: rgb(var(--sl-color-neutral-300));
 
     display: block;
     position: relative;

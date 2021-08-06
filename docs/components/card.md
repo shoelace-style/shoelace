@@ -28,7 +28,7 @@ Cards can be used to group related subjects in a container.
   }
 
   .card-overview small {
-    color: rgb(var(--sl-color-gray-500));
+    color: rgb(var(--sl-color-neutral-500));
   }
 
   .card-overview [slot="footer"] {

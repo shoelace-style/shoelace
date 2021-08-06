@@ -6,6 +6,8 @@ The default theme is included as part of `themes/base.css` and should always be 
 
 ## Dark Mode
 
+The dark theme uses an "inverted" color scale, so if you're using design tokens correctly, you'll get a decent dark mode for free.
+
 To install the dark theme, add the following to the `<head>` section of your app.
 
 ```html

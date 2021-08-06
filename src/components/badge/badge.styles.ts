@@ -26,27 +26,27 @@ export default css`
   /* Type modifiers */
   .badge--primary {
     background-color: rgb(var(--sl-color-primary-500));
-    color: rgb(var(--sl-color-empty));
+    color: rgb(var(--sl-color-1000));
   }
 
   .badge--success {
     background-color: rgb(var(--sl-color-success-500));
-    color: rgb(var(--sl-color-empty));
+    color: rgb(var(--sl-color-1000));
   }
 
-  .badge--info {
-    background-color: rgb(var(--sl-color-info-500));
-    color: rgb(var(--sl-color-empty));
+  .badge--neutral {
+    background-color: rgb(var(--sl-color-neutral-500));
+    color: rgb(var(--sl-color-1000));
   }
 
   .badge--warning {
     background-color: rgb(var(--sl-color-warning-500));
-    color: rgb(var(--sl-color-empty));
+    color: rgb(var(--sl-color-1000));
   }
 
   .badge--danger {
     background-color: rgb(var(--sl-color-danger-500));
-    color: rgb(var(--sl-color-empty));
+    color: rgb(var(--sl-color-1000));
   }
 
   /* Pill modifier */
@@ -67,8 +67,8 @@ export default css`
     --pulse-color: rgb(var(--sl-color-success-500));
   }
 
-  .badge--pulse.badge--info {
-    --pulse-color: rgb(var(--sl-color-info-500));
+  .badge--pulse.badge--neutral {
+    --pulse-color: rgb(var(--sl-color-neutral-500));
   }
 
   .badge--pulse.badge--warning {

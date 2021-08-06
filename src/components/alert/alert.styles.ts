@@ -15,8 +15,8 @@ export default css`
     position: relative;
     display: flex;
     align-items: stretch;
-    background-color: rgb(var(--sl-color-empty));
-    border: solid 1px rgb(var(--sl-color-gray-200));
+    background-color: rgb(var(--sl-color-1000));
+    border: solid 1px rgb(var(--sl-color-neutral-200));
     border-top-width: 3px;
     border-radius: var(--sl-border-radius-medium);
     box-shadow: var(--box-shadow);
@@ -24,7 +24,7 @@ export default css`
     font-size: var(--sl-font-size-small);
     font-weight: var(--sl-font-weight-normal);
     line-height: 1.6;
-    color: rgb(var(--sl-color-gray-700));
+    color: rgb(var(--sl-color-neutral-700));
     margin: inherit;
   }
 
@@ -55,12 +55,12 @@ export default css`
     color: rgb(var(--sl-color-success-500));
   }
 
-  .alert--info {
-    border-top-color: rgb(var(--sl-color-info-500));
+  .alert--neutral {
+    border-top-color: rgb(var(--sl-color-neutral-500));
   }
 
-  .alert--info .alert__icon {
-    color: rgb(var(--sl-color-info-500));
+  .alert--neutral .alert__icon {
+    color: rgb(var(--sl-color-neutral-500));
   }
 
   .alert--warning {

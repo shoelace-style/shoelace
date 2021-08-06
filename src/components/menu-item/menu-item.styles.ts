@@ -18,7 +18,7 @@ export default css`
     line-height: var(--sl-line-height-normal);
     letter-spacing: var(--sl-letter-spacing-normal);
     text-align: left;
-    color: rgb(var(--sl-color-gray-700));
+    color: rgb(var(--sl-color-neutral-700));
     padding: var(--sl-spacing-xx-small) var(--sl-spacing-x-large);
     transition: var(--sl-transition-fast) fill;
     user-select: none;
@@ -27,7 +27,7 @@ export default css`
   }
   .menu-item.menu-item--disabled {
     outline: none;
-    color: rgb(var(--sl-color-gray-400));
+    color: rgb(var(--sl-color-neutral-400));
     cursor: not-allowed;
   }
 
@@ -63,7 +63,7 @@ export default css`
   :host(:focus:not([aria-disabled='true'])) .menu-item {
     outline: none;
     background-color: rgb(var(--sl-color-primary-500));
-    color: rgb(var(--sl-color-empty));
+    color: rgb(var(--sl-color-1000));
   }
 
   .menu-item .menu-item__check {

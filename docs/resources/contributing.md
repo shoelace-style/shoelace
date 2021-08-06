@@ -216,7 +216,7 @@ To expose custom properties as part of a component's API, scope them to the `:ho
 ```css
 :host {
   --color: rgb(var(--sl-color-primary-500));
-  --background-color: rgb(var(--sl-color-gray-100));
+  --background-color: rgb(var(--sl-color-neutral-100));
 }
 ```
 

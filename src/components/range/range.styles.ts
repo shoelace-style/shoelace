@@ -9,7 +9,7 @@ export default css`
   :host {
     --thumb-size: 20px;
     --tooltip-offset-y: 10px;
-    --track-color: rgb(var(--sl-color-gray-200));
+    --track-color: rgb(var(--sl-color-neutral-200));
     --track-height: 6px;
 
     display: block;

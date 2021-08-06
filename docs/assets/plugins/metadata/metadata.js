@@ -315,10 +315,10 @@
           return next(content);
         }
 
-        let badgeType = 'info';
+        let badgeType = 'neutral';
         if (component.status === 'stable') badgeType = 'primary';
         if (component.status === 'experimental') badgeType = 'warning';
-        if (component.status === 'planned') badgeType = 'info';
+        if (component.status === 'planned') badgeType = 'neutral';
         if (component.status === 'deprecated') badgeType = 'danger';
 
         result += `
@@ -328,7 +328,7 @@
             </div>
 
             <div class="component-header__info">
-              <sl-badge type="info" pill>
+              <sl-badge type="neutral" pill>
                 Since ${component.since || '?'}
               </sl-badge>
 

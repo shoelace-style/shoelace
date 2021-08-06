@@ -298,8 +298,8 @@ export default css`
      * Theme Tokens
      */
 
-    --sl-color-full: 0 0 0;
-    --sl-color-empty: 255 255 255;
+    --sl-color-0: 0 0 0;
+    --sl-color-1000: 255 255 255;
 
     /* Primary */
     --sl-color-primary-50: var(--sl-color-sky-50);
@@ -327,19 +327,6 @@ export default css`
     --sl-color-success-900: var(--sl-color-green-900);
     --sl-color-success-950: var(--sl-color-green-950);
 
-    /* Info */
-    --sl-color-info-50: var(--sl-color-gray-50);
-    --sl-color-info-100: var(--sl-color-gray-100);
-    --sl-color-info-200: var(--sl-color-gray-200);
-    --sl-color-info-300: var(--sl-color-gray-300);
-    --sl-color-info-400: var(--sl-color-gray-400);
-    --sl-color-info-500: var(--sl-color-gray-500);
-    --sl-color-info-600: var(--sl-color-gray-600);
-    --sl-color-info-700: var(--sl-color-gray-700);
-    --sl-color-info-800: var(--sl-color-gray-800);
-    --sl-color-info-900: var(--sl-color-gray-900);
-    --sl-color-info-950: var(--sl-color-gray-950);
-
     /* Warning */
     --sl-color-warning-50: var(--sl-color-amber-50);
     --sl-color-warning-100: var(--sl-color-amber-100);
@@ -365,6 +352,19 @@ export default css`
     --sl-color-danger-800: var(--sl-color-red-800);
     --sl-color-danger-900: var(--sl-color-red-900);
     --sl-color-danger-950: var(--sl-color-red-950);
+
+    /* Neutral */
+    --sl-color-neutral-50: var(--sl-color-gray-50);
+    --sl-color-neutral-100: var(--sl-color-gray-100);
+    --sl-color-neutral-200: var(--sl-color-gray-200);
+    --sl-color-neutral-300: var(--sl-color-gray-300);
+    --sl-color-neutral-400: var(--sl-color-gray-400);
+    --sl-color-neutral-500: var(--sl-color-gray-500);
+    --sl-color-neutral-600: var(--sl-color-gray-600);
+    --sl-color-neutral-700: var(--sl-color-gray-700);
+    --sl-color-neutral-800: var(--sl-color-gray-800);
+    --sl-color-neutral-900: var(--sl-color-gray-900);
+    --sl-color-neutral-950: var(--sl-color-gray-950);
 
     /*
      * Border radius tokens
@@ -457,7 +457,7 @@ export default css`
     /* Focus ring */
     --sl-focus-ring-color-primary: var(--sl-color-primary-500);
     --sl-focus-ring-color-success: var(--sl-color-success-500);
-    --sl-focus-ring-color-info: var(--sl-color-info-500);
+    --sl-focus-ring-color-neutral: var(--sl-color-neutral-500);
     --sl-focus-ring-color-warning: var(--sl-color-warning-500);
     --sl-focus-ring-color-danger: var(--sl-color-danger-500);
     --sl-focus-ring-width: 3px;
@@ -473,14 +473,14 @@ export default css`
     --sl-input-height-medium: 2.5rem; /* 40px */
     --sl-input-height-large: 3.125rem; /* 50px */
 
-    --sl-input-background-color: var(--sl-color-empty);
-    --sl-input-background-color-hover: var(--sl-color-empty);
-    --sl-input-background-color-focus: var(--sl-color-empty);
-    --sl-input-background-color-disabled: var(--sl-color-gray-100);
-    --sl-input-border-color: var(--sl-color-gray-300);
-    --sl-input-border-color-hover: var(--sl-color-gray-400);
+    --sl-input-background-color: var(--sl-color-1000);
+    --sl-input-background-color-hover: var(--sl-color-1000);
+    --sl-input-background-color-focus: var(--sl-color-1000);
+    --sl-input-background-color-disabled: var(--sl-color-neutral-100);
+    --sl-input-border-color: var(--sl-color-neutral-300);
+    --sl-input-border-color-hover: var(--sl-color-neutral-400);
     --sl-input-border-color-focus: var(--sl-color-primary-500);
-    --sl-input-border-color-disabled: var(--sl-color-gray-300);
+    --sl-input-border-color-disabled: var(--sl-color-neutral-300);
     --sl-input-border-width: 1px;
 
     --sl-input-border-radius-small: var(--sl-border-radius-medium);
@@ -494,15 +494,15 @@ export default css`
     --sl-input-font-size-large: var(--sl-font-size-large);
     --sl-input-letter-spacing: var(--sl-letter-spacing-normal);
 
-    --sl-input-color: var(--sl-color-gray-700);
-    --sl-input-color-hover: var(--sl-color-gray-700);
-    --sl-input-color-focus: var(--sl-color-gray-700);
-    --sl-input-color-disabled: var(--sl-color-gray-900);
-    --sl-input-icon-color: var(--sl-color-gray-400);
-    --sl-input-icon-color-hover: var(--sl-color-gray-600);
-    --sl-input-icon-color-focus: var(--sl-color-gray-600);
-    --sl-input-placeholder-color: var(--sl-color-gray-400);
-    --sl-input-placeholder-color-disabled: var(--sl-color-gray-600);
+    --sl-input-color: var(--sl-color-neutral-700);
+    --sl-input-color-hover: var(--sl-color-neutral-700);
+    --sl-input-color-focus: var(--sl-color-neutral-700);
+    --sl-input-color-disabled: var(--sl-color-neutral-900);
+    --sl-input-icon-color: var(--sl-color-neutral-400);
+    --sl-input-icon-color-hover: var(--sl-color-neutral-600);
+    --sl-input-icon-color-focus: var(--sl-color-neutral-600);
+    --sl-input-placeholder-color: var(--sl-color-neutral-400);
+    --sl-input-placeholder-color-disabled: var(--sl-color-neutral-600);
     --sl-input-spacing-small: var(--sl-spacing-small);
     --sl-input-spacing-medium: var(--sl-spacing-medium);
     --sl-input-spacing-large: var(--sl-spacing-large);
@@ -519,7 +519,7 @@ export default css`
     --sl-input-help-text-font-size-medium: var(--sl-font-size-small);
     --sl-input-help-text-font-size-large: var(--sl-font-size-medium);
 
-    --sl-input-help-text-color: var(--sl-color-gray-400);
+    --sl-input-help-text-color: var(--sl-color-neutral-400);
 
     /* Toggle (checkboxes, radios, switches) */
     --sl-toggle-size: 1rem;
@@ -534,15 +534,15 @@ export default css`
      * Panels
      */
 
-    --sl-panel-background-color: var(--sl-color-empty);
-    --sl-panel-border-color: var(--sl-color-gray-200);
+    --sl-panel-background-color: var(--sl-color-1000);
+    --sl-panel-border-color: var(--sl-color-neutral-200);
     /*
      * Tooltip tokens
      */
 
     --sl-tooltip-border-radius: var(--sl-border-radius-medium);
-    --sl-tooltip-background-color: var(--sl-color-gray-900);
-    --sl-tooltip-color: var(--sl-color-empty);
+    --sl-tooltip-background-color: var(--sl-color-neutral-900);
+    --sl-tooltip-color: var(--sl-color-1000);
     --sl-tooltip-font-family: var(--sl-font-sans);
     --sl-tooltip-font-weight: var(--sl-font-weight-normal);
     --sl-tooltip-font-size: var(--sl-font-size-small);

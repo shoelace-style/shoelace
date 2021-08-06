@@ -13,8 +13,8 @@ body {
   font-size: var(--sl-font-size-medium);
   font-weight: var(--sl-font-weight-normal);
   letter-spacing: var(--sl-letter-spacing-normal);
-  background-color: rgb(var(--sl-color-empty));
-  color: rgb(var(--sl-color-gray-800));
+  background-color: rgb(var(--sl-color-1000));
+  color: rgb(var(--sl-color-neutral-800));
   line-height: var(--sl-line-height-normal);
 }
 
@@ -28,8 +28,8 @@ strong {
 
 /* Sidebar */
 .sidebar {
-  background: rgb(var(--sl-color-empty));
-  border-right: solid 1px rgb(var(--sl-color-gray-200));
+  background: rgb(var(--sl-color-1000));
+  border-right: solid 1px rgb(var(--sl-color-neutral-200));
 }
 
 .sidebar .app-name {
@@ -40,7 +40,7 @@ strong {
 .sidebar-version {
   font-size: var(--sl-font-size-x-small);
   font-weight: var(--sl-font-weight-normal);
-  color: rgb(var(--sl-color-gray-400));
+  color: rgb(var(--sl-color-neutral-400));
   text-align: right;
   padding: 0 var(--sl-spacing-small);
   margin: -1.25rem 0 0.6rem 0;
@@ -66,6 +66,10 @@ strong {
   padding-right: 2rem;
   margin: 0 1.25rem;
   transition: var(--sl-transition-fast) color, var(--sl-transition-fast) border, var(--sl-transition-fast) box-shadow;
+}
+
+.sidebar .search input[type='search']::placeholder {
+  color: rgb(var(--sl-input-placeholder-color));
 }
 
 .sidebar .search input[type='search']:hover {
@@ -101,11 +105,11 @@ strong {
 }
 
 .sidebar .clear-button svg circle {
-  fill: rgb(var(--sl-color-gray-400));
+  fill: rgb(var(--sl-color-neutral-400));
 }
 
 .sidebar .clear-button svg path {
-  stroke: rgb(var(--sl-color-empty));
+  stroke: rgb(var(--sl-color-1000));
 }
 
 .sidebar .clear-button:focus {
@@ -117,7 +121,7 @@ strong {
 }
 
 .search .matching-post {
-  border-bottom: solid 1px rgb(var(--sl-color-gray-500)) !important;
+  border-bottom: solid 1px rgb(var(--sl-color-neutral-500)) !important;
   padding: 0.25rem 1.5rem;
 }
 
@@ -142,7 +146,7 @@ strong {
   width: 2rem;
   height: 2rem;
   border-radius: var(--sl-border-radius-medium);
-  background-color: rgb(var(--sl-color-empty));
+  background-color: rgb(var(--sl-color-1000));
   padding: 0.5rem;
 }
 
@@ -188,7 +192,7 @@ strong {
 
 .sidebar li > p {
   font-weight: var(--sl-font-weight-bold);
-  border-bottom: solid 1px rgb(var(--sl-color-gray-200));
+  border-bottom: solid 1px rgb(var(--sl-color-neutral-200));
   margin: 0 0.75rem 0.5rem 0;
 }
 
@@ -269,12 +273,12 @@ strong {
 }
 
 .anchor span {
-  color: rgb(var(--sl-color-full));
+  color: rgb(var(--sl-color-0));
 }
 
 .markdown-section blockquote {
   position: relative;
-  border-left: solid 4px rgb(var(--sl-color-gray-200));
+  border-left: solid 4px rgb(var(--sl-color-neutral-200));
   font-style: italic;
   padding: 1rem 1.5rem;
   margin: 0 0 1rem 0;
@@ -298,7 +302,7 @@ strong {
 }
 
 .docsify-pagination-container {
-  border-top-color: rgb(var(--sl-color-gray-200)) !important;
+  border-top-color: rgb(var(--sl-color-neutral-200)) !important;
 }
 
 .markdown-section h1,
@@ -317,7 +321,7 @@ strong {
 
 .markdown-section h2 {
   font-size: var(--sl-font-size-x-large);
-  border-bottom: solid 1px rgb(var(--sl-color-gray-200));
+  border-bottom: solid 1px rgb(var(--sl-color-neutral-200));
   margin-top: 2rem;
 }
 
@@ -348,39 +352,39 @@ strong {
 .markdown-section code {
   font-family: var(--sl-font-mono);
   font-size: 87.5%;
-  background-color: rgb(var(--sl-color-gray-50));
+  background-color: rgb(var(--sl-color-neutral-50));
   border-radius: var(--sl-border-radius-small);
   padding: 2px 4px;
 }
 
 .sl-theme-dark .markdown-section code {
-  background-color: rgb(var(--sl-color-gray-100));
+  background-color: rgb(var(--sl-color-neutral-100));
 }
 
 .markdown-section kbd {
   font-family: var(--sl-font-mono);
   font-size: 87.5%;
   border-radius: var(--sl-border-radius-small);
-  border: solid 1px rgb(var(--sl-color-gray-200));
+  border: solid 1px rgb(var(--sl-color-neutral-200));
   padding: 2px 4px;
 }
 
 /* Code blocks */
 .markdown-section pre {
   position: relative;
-  background-color: rgb(var(--sl-color-gray-50));
+  background-color: rgb(var(--sl-color-neutral-50));
   border-radius: var(--sl-border-radius-medium);
 }
 
 .sl-theme-dark .markdown-section pre {
-  background-color: rgb(var(--sl-color-gray-100));
+  background-color: rgb(var(--sl-color-neutral-100));
 }
 
 .markdown-section pre > code {
   display: block;
   background: none;
   border-radius: 0;
-  color: rgb(var(--sl-color-gray-700));
+  color: rgb(var(--sl-color-neutral-700));
   padding: var(--sl-spacing-medium);
   overflow: auto;
   hyphens: none;
@@ -388,18 +392,18 @@ strong {
 }
 
 .markdown-section pre .token.comment {
-  color: rgb(var(--sl-color-gray-400));
+  color: rgb(var(--sl-color-neutral-400));
 }
 
 .markdown-section pre .token.prolog,
 .markdown-section pre .token.doctype,
 .markdown-section pre .token.cdata,
 .markdown-section pre .token.operator {
-  color: rgb(var(--sl-color-gray-600));
+  color: rgb(var(--sl-color-neutral-600));
 }
 
 .markdown-section pre .token.punctuation {
-  color: rgb(var(--sl-color-gray-600));
+  color: rgb(var(--sl-color-neutral-600));
 }
 
 .namespace {
@@ -466,11 +470,11 @@ strong {
 }
 
 .markdown-section tr:nth-child(2n) {
-  background: rgb(var(--sl-color-gray-50));
+  background: rgb(var(--sl-color-neutral-50));
 }
 
 .sl-theme-dark .markdown-section tr:nth-child(2n) {
-  background: rgb(var(--sl-color-gray-100));
+  background: rgb(var(--sl-color-neutral-100));
 }
 
 .markdown-section th {
@@ -480,8 +484,8 @@ strong {
 }
 
 .markdown-section td {
-  border-top: solid 1px rgb(var(--sl-color-gray-200));
-  border-bottom: solid 1px rgb(var(--sl-color-gray-200));
+  border-top: solid 1px rgb(var(--sl-color-neutral-200));
+  border-bottom: solid 1px rgb(var(--sl-color-neutral-200));
   border-left: none;
   border-right: none;
 }
@@ -499,7 +503,7 @@ strong {
 .markdown-section p.tip,
 .markdown-section p.warn {
   position: relative;
-  background-color: rgb(var(--sl-color-gray-50));
+  background-color: rgb(var(--sl-color-neutral-50));
   border-left: solid 4px transparent;
   border-radius: var(--sl-border-radius-medium);
   padding-left: 1.5rem;
@@ -507,14 +511,14 @@ strong {
 
 .sl-theme-dark .markdown-section p.tip,
 .sl-theme-dark .markdown-section p.warn {
-  background-color: rgb(var(--sl-color-gray-100));
+  background-color: rgb(var(--sl-color-neutral-100));
 }
 
 .markdown-section p.tip:before,
 .markdown-section p.warn:before {
   content: '!';
   border-radius: 100%;
-  color: rgb(var(--sl-color-empty));
+  color: rgb(var(--sl-color-1000));
   font-size: 14px;
   font-weight: bold;
   left: -12px;
@@ -544,12 +548,12 @@ strong {
 
 .markdown-section p.tip code,
 .markdown-section p.warn code {
-  background-color: rgb(var(--sl-color-gray-100));
+  background-color: rgb(var(--sl-color-neutral-100));
 }
 
 /* Component headers */
 .component-header {
-  border-bottom: solid 1px rgb(var(--sl-color-gray-200));
+  border-bottom: solid 1px rgb(var(--sl-color-neutral-200));
   padding-bottom: 2rem;
   margin-top: -1rem;
   margin-bottom: 2rem;
@@ -563,7 +567,7 @@ strong {
 
 .component-header__tag code {
   background: none;
-  color: rgb(var(--sl-color-gray-500));
+  color: rgb(var(--sl-color-neutral-500));
   font-size: var(--sl-font-size-large);
   padding: 0;
   margin: 0;
@@ -590,15 +594,15 @@ strong {
 html .repo-button {
   display: inline-flex;
   align-items: center;
-  background-color: rgb(var(--sl-color-empty));
-  border: solid 1px rgb(var(--sl-color-gray-200));
+  background-color: rgb(var(--sl-color-1000));
+  border: solid 1px rgb(var(--sl-color-neutral-200));
   border-radius: var(--sl-border-radius-medium);
   box-shadow: var(--sl-shadow-x-small);
   font-size: var(--sl-font-size-small);
   font-weight: var(--sl-font-weight-semibold);
   line-height: 2;
   text-decoration: none;
-  color: rgb(var(--sl-color-gray-700));
+  color: rgb(var(--sl-color-neutral-700));
   padding: var(--sl-spacing-xx-small) var(--sl-spacing-small);
   margin-bottom: var(--sl-spacing-xx-small);
   transition: 0.25s all;
@@ -606,12 +610,12 @@ html .repo-button {
 
 html .repo-button:hover {
   text-decoration: none;
-  background-color: rgb(var(--sl-color-gray-50));
-  border: solid 1px rgb(var(--sl-color-gray-200));
+  background-color: rgb(var(--sl-color-neutral-50));
+  border: solid 1px rgb(var(--sl-color-neutral-200));
 }
 
 .sl-theme-dark .repo-button:hover {
-  background-color: rgb(var(--sl-color-gray-100));
+  background-color: rgb(var(--sl-color-neutral-100));
 }
 
 html .repo-button:focus {
@@ -640,7 +644,7 @@ html .repo-button--sponsor sl-icon {
 }
 
 html .repo-button--github sl-icon {
-  color: rgb(var(--sl-color-gray-600));
+  color: rgb(var(--sl-color-neutral-600));
 }
 
 html .repo-button--twitter sl-icon {
@@ -662,7 +666,7 @@ body[data-page^='tokens/'] .table-wrapper td:first-child code {
 /* Transition demo */
 .transition-demo {
   position: relative;
-  background: rgb(var(--sl-color-gray-200));
+  background: rgb(var(--sl-color-neutral-200));
   width: 8rem;
   height: 2rem;
 }
@@ -691,7 +695,7 @@ body[data-page^='tokens/'] .table-wrapper td:first-child code {
 
 /* Elevation dmeo */
 .elevation-demo {
-  background: rgb(var(--sl-color-empty));
+  background: rgb(var(--sl-color-1000));
   border-radius: 3px;
   width: 4rem;
   height: 4rem;
@@ -727,7 +731,7 @@ body[data-page^='tokens/'] .table-wrapper td:first-child code {
 }
 
 .color-palette__swatch--border {
-  box-shadow: inset 0 0 0 1px rgb(var(--sl-color-full) / 10%);
+  box-shadow: inset 0 0 0 1px rgb(var(--sl-color-0) / 10%);
 }
 
 @media screen and (max-width: 1200px) {

@@ -17,11 +17,11 @@ export default css`
     position: relative;
     width: var(--size);
     height: var(--size);
-    background-color: rgb(var(--sl-color-gray-400));
+    background-color: rgb(var(--sl-color-neutral-400));
     font-family: var(--sl-font-sans);
     font-size: calc(var(--size) * 0.5);
     font-weight: var(--sl-font-weight-normal);
-    color: rgb(var(--sl-color-empty));
+    color: rgb(var(--sl-color-1000));
     overflow: hidden;
     user-select: none;
     vertical-align: middle;

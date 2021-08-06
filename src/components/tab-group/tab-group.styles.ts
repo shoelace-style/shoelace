@@ -5,7 +5,7 @@ export default css`
   ${componentStyles}
 
   :host {
-    --tabs-border-color: rgb(var(--sl-color-gray-200));
+    --tabs-border-color: rgb(var(--sl-color-neutral-200));
 
     display: block;
   }

@@ -58,7 +58,7 @@ By design, a dialog's height will never exceed that of the viewport. As such, di
 
 ```html preview
 <sl-dialog label="Dialog" class="dialog-scrolling">
-  <div style="height: 150vh; border: dashed 2px rgb(var(--sl-color-gray-200)); padding: 0 1rem;">
+  <div style="height: 150vh; border: dashed 2px rgb(var(--sl-color-neutral-200)); padding: 0 1rem;">
     <p>Scroll down and give it a try! 👇</p>
   </div>
   <sl-button slot="footer" type="primary">Close</sl-button>

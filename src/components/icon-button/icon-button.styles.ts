@@ -16,7 +16,7 @@ export default css`
     border: none;
     border-radius: var(--sl-border-radius-medium);
     font-size: inherit;
-    color: rgb(var(--sl-color-gray-500));
+    color: rgb(var(--sl-color-neutral-500));
     padding: var(--sl-spacing-x-small);
     cursor: pointer;
     transition: var(--sl-transition-medium) color;

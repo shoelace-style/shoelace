@@ -48,7 +48,7 @@ export default css`
     top: 0;
     width: var(--divider-width);
     height: 100%;
-    background-color: rgb(var(--sl-color-empty));
+    background-color: rgb(var(--sl-color-1000));
     transform: translateX(calc(var(--divider-width) / -2));
     cursor: ew-resize;
   }
@@ -61,10 +61,10 @@ export default css`
     top: calc(50% - (var(--handle-size) / 2));
     width: var(--handle-size);
     height: var(--handle-size);
-    background-color: rgb(var(--sl-color-empty));
+    background-color: rgb(var(--sl-color-1000));
     border-radius: var(--sl-border-radius-circle);
     font-size: calc(var(--handle-size) * 0.5);
-    color: rgb(var(--sl-color-gray-500));
+    color: rgb(var(--sl-color-neutral-500));
     cursor: inherit;
     z-index: 10;
   }

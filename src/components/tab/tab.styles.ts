@@ -18,7 +18,7 @@ export default css`
     font-size: var(--sl-font-size-small);
     font-weight: var(--sl-font-weight-semibold);
     border-radius: 4px;
-    color: rgb(var(--sl-color-gray-600));
+    color: rgb(var(--sl-color-neutral-600));
     padding: var(--sl-spacing-medium) var(--sl-spacing-large);
     white-space: nowrap;
     user-select: none;

@@ -39,7 +39,7 @@ export default class SlButton extends LitElement {
   @state() private hasSuffix = false;
 
   /** The button's type. */
-  @property({ reflect: true }) type: 'default' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text' =
+  @property({ reflect: true }) type: 'default' | 'primary' | 'success' | 'neutral' | 'warning' | 'danger' | 'text' =
     'default';
 
   /** The button's size. */
@@ -161,7 +161,7 @@ export default class SlButton extends LitElement {
           'button--default': this.type === 'default',
           'button--primary': this.type === 'primary',
           'button--success': this.type === 'success',
-          'button--info': this.type === 'info',
+          'button--neutral': this.type === 'neutral',
           'button--warning': this.type === 'warning',
           'button--danger': this.type === 'danger',
           'button--text': this.type === 'text',
@@ -199,7 +199,7 @@ export default class SlButton extends LitElement {
           'button--default': this.type === 'default',
           'button--primary': this.type === 'primary',
           'button--success': this.type === 'success',
-          'button--info': this.type === 'info',
+          'button--neutral': this.type === 'neutral',
           'button--warning': this.type === 'warning',
           'button--danger': this.type === 'danger',
           'button--text': this.type === 'text',

@@ -39,10 +39,10 @@ export default css`
     color: rgb(var(--sl-color-success-700));
   }
 
-  .tag--info {
-    background-color: rgb(var(--sl-color-info-100));
-    border-color: rgb(var(--sl-color-info-200));
-    color: rgb(var(--sl-color-info-700));
+  .tag--neutral {
+    background-color: rgb(var(--sl-color-neutral-100));
+    border-color: rgb(var(--sl-color-neutral-200));
+    color: rgb(var(--sl-color-neutral-700));
   }
 
   .tag--warning {

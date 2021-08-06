@@ -172,7 +172,7 @@ export default css`
     width: calc(var(--sl-input-height-small) / 2);
     height: calc(var(--sl-input-height-small) / 2);
     color: white;
-    background-color: rgb(var(--sl-color-gray-900));
+    background-color: rgb(var(--sl-color-neutral-900));
     border-radius: var(--sl-border-radius-circle);
     opacity: 0;
   }
@@ -225,7 +225,7 @@ export default css`
     grid-template-columns: repeat(8, 1fr);
     grid-gap: 6px;
     justify-items: center;
-    border-top: solid 1px rgb(var(--sl-color-gray-200));
+    border-top: solid 1px rgb(var(--sl-color-neutral-200));
     padding: var(--sl-spacing-small);
   }
 
@@ -253,10 +253,10 @@ export default css`
   }
 
   .color-picker__transparent-bg {
-    background-image: linear-gradient(45deg, rgb(var(--sl-color-gray-300)) 25%, transparent 25%),
-      linear-gradient(45deg, transparent 75%, rgb(var(--sl-color-gray-300)) 75%),
-      linear-gradient(45deg, transparent 75%, rgb(var(--sl-color-gray-300)) 75%),
-      linear-gradient(45deg, rgb(var(--sl-color-gray-300)) 25%, transparent 25%);
+    background-image: linear-gradient(45deg, rgb(var(--sl-color-neutral-300)) 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, rgb(var(--sl-color-neutral-300)) 75%),
+      linear-gradient(45deg, transparent 75%, rgb(var(--sl-color-neutral-300)) 75%),
+      linear-gradient(45deg, rgb(var(--sl-color-neutral-300)) 25%, transparent 25%);
     background-size: 10px 10px;
     background-position: 0 0, 0 0, -5px -5px, 5px 5px;
   }
