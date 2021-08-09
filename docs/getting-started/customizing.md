@@ -8,7 +8,7 @@ Shoelace makes use of several design tokens to provide a consistent appearance a
 
 Design tokens offer a high-level way to customize the library with minimal effort. There are no component-specific variables, however, as design tokens are intended to be generic and highly reusable. To customize an individual component, refer to the section entitled [Component Parts](#component-parts).
 
-Design tokens are accessed through CSS custom properties that are defined in `themes/base.css`. The base stylesheet must be imported when you install Shoelace so design tokens are available on your page. Because design tokens live at the page level, they're prefixed with `--sl-` to avoid collisions with other libraries.
+Design tokens are accessed through CSS custom properties that are defined in your theme. Because design tokens live at the page level, they're prefixed with `--sl-` to avoid collisions with other libraries.
 
 To customize a design token, simply override it in your stylesheet using a `:root` block. Here's an example that changes the primary theme to purple based on existing [color primitives](/tokens/color#primitives).
 
@@ -29,9 +29,9 @@ To customize a design token, simply override it in your stylesheet using a `:roo
 }
 ```
 
-Many design tokens are described further along in this documentation. For a complete list, refer to `themes/base.css` in the project's [source code](https://github.com/shoelace-style/shoelace/blob/current/src/styles/shoelace.css).
+Many design tokens are described further along in this documentation. For a complete list, refer to `src/themes/light.styles.ts` in the project's [source code](https://github.com/shoelace-style/shoelace/blob/current/src/themes/base.styles.ts).
 
-!> **Never modify variables directly in `themes/base.css`** because your changes will be overwritten when you upgrade Shoelace. Even if you don't plan on upgrading, it's always better to override design tokens in your own stylesheet for better maintainability.
+!> **Never modify variables directly in `src/themes/light.styles.ts`** because your changes will be overwritten when you upgrade Shoelace. Even if you don't plan on upgrading, it's always better to override design tokens in your own stylesheet for better maintainability.
 
 ## Component Parts
 

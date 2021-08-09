@@ -8,7 +8,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
-This release adds a variety of new color primitives and changes the way color tokens are consumed. Previously, color tokens were in hexidecimal format. Shoelace now uses an `R G B` format that requires you to use the `rgb()` function in your CSS.
+This release improves theming by offering both light and dark themes that can be used autonomously. It also adds a variety of new color primitives and changes the way color tokens are consumed. Previously, color tokens were in hexidecimal format. Now, Shoelace now uses an `R G B` format that requires you to use the `rgb()` function in your CSS.
 
 ```css
 .example {
@@ -17,7 +17,7 @@ This release adds a variety of new color primitives and changes the way color to
 }
 ```
 
-This is more verbose than before, but it has the advantage of letting you set the alpha channel of any color token.
+This is more verbose than previous versions, but it has the advantage of letting you set the alpha channel of any color token.
 
 ```css
 .example-with-alpha {
@@ -33,6 +33,7 @@ This change applies to all design tokens that implement a color. Refer to the [c
 - 🚨 BREAKING: removed `--sl-color-primary|success|warning|info|danger-text` design tokens (use theme or primitive colors instead)
 - 🚨 BREAKING: removed `info` variant from `sl-alert`, `sl-badge`, `sl-button`, and `sl-tag` (use `neutral` instead)
 - 🚨 BREAKING: removed `--sl-color-info-*` design token (use `--sl-color-neutral-*` instead)
+- 🚨 BREAKING: renamed `dist/themes/base.css` to `dist/themes/light.css`
 - Added new color primitives to the base set of design tokens
 - Added `--sl-color-*-950` swatches to all color palettes
 - Added a console error that appears when menu items have duplicate values in `sl-select`

@@ -3,7 +3,7 @@ import { css } from 'lit';
 export default css`
   :root,
   :host,
-  .sl-theme-base {
+  .sl-theme-light {
     /*
      * Color Primitives
      */
@@ -362,6 +362,8 @@ export default css`
     --sl-color-neutral-800: var(--sl-color-gray-800);
     --sl-color-neutral-900: var(--sl-color-gray-900);
     --sl-color-neutral-950: var(--sl-color-gray-950);
+
+    /* Neutral one-offs */
     --sl-color-neutral-0: 0 0 0;
     --sl-color-neutral-1000: 255 255 255;
 

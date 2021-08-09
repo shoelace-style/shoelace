@@ -7,7 +7,7 @@ You can use Shoelace via CDN or by installing it locally.
 The easiest way to install Shoelace is with the CDN. Just add the following tags to your page.
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/themes/base.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/themes/light.css">
 <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/shoelace.js"></script>
 ```
 
@@ -26,7 +26,7 @@ It's up to you to make the source files available to your app. One way to do thi
 Once you've done that, add the following tags to your page. Make sure to update `href` and `src` so they point to the route you created.
 
 ```html
-<link rel="stylesheet" href="/scripts/shoelace/dist/themes/base.css">
+<link rel="stylesheet" href="/scripts/shoelace/dist/themes/light.css">
 <script type="module" src="/scripts/shoelace/dist/shoelace.js"></script>
 ```
 
@@ -62,7 +62,7 @@ Here's an example that loads only the button component. Again, if you're not usi
 
 ```html
 <!-- The base stylesheet is always required -->
-<link rel="stylesheet" href="@shoelace-style/shoelace/dist/themes/base.css">
+<link rel="stylesheet" href="@shoelace-style/shoelace/dist/themes/light.css">
 
 <script type="module" data-shoelace="/scripts/shoelace">
   import '@shoelace-style/shoelace/dist/components/button/button.js';
@@ -95,7 +95,7 @@ Now it's time to configure your bundler. Configurations vary for each tool, but 
 Once your bundler is configured, you'll be able to import Shoelace components and utilities.
 
 ```js
-import '@shoelace-style/shoelace/dist/themes/base.css';
+import '@shoelace-style/shoelace/dist/themes/light.css';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
 import '@shoelace-style/shoelace/dist/components/icon/icon.js';
 import '@shoelace-style/shoelace/dist/components/input/input.js';

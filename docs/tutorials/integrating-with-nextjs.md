@@ -22,7 +22,7 @@ yarn add @shoelace-style/shoelace @shoelace-style/react-wrapper copy-webpack-plu
 The next step is to import Shoelace's base theme (stylesheet) in your `_app.js` file:
 
 ```css
-import '@shoelace-style/shoelace/dist/themes/base.css';
+import '@shoelace-style/shoelace/dist/themes/light.css';
 ```
 
 ### Defining Custom Elements
