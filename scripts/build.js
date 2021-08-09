@@ -19,11 +19,15 @@ const { dev } = commandLineArgs({ name: 'dev', type: Boolean });
 
 del.sync('./dist');
 
-if (!dev) execSync('tsc', { stdio: 'inherit' }); // for type declarations
-execSync('node scripts/make-metadata.js', { stdio: 'inherit' });
-execSync('node scripts/make-vscode-data.js', { stdio: 'inherit' });
-execSync('node scripts/make-css.js', { stdio: 'inherit' });
-execSync('node scripts/make-icons.js', { stdio: 'inherit' });
+try {
+  if (!dev) execSync('tsc', { stdio: 'inherit' }); // for type declarations
+  execSync('node scripts/make-metadata.js', { stdio: 'inherit' });
+  execSync('node scripts/make-vscode-data.js', { stdio: 'inherit' });
+  execSync('node scripts/make-css.js', { stdio: 'inherit' });
+} catch (err) {
+  console.error(chalk.red(err));
+  process.exit(1);
+}
 
 (async () => {
   const entryPoints = [
