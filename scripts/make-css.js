@@ -18,10 +18,20 @@ mkdirp.sync(outdir);
 try {
   files.map(async file => {
     const source = await fs.readFile(file, 'utf8');
-    const css = prettier.format(stripComments(source.match(/export default css`(.*?)`;/s)[1]), { parser: 'css' });
+    const css = source.match(/export default css`(.*?)`;/s)[1];
+
+    // We're currently scraping for CSS with a regex, so we can't use interpolation at the moment
+    if (css.includes('${')) {
+      console.error(
+        chalk.red(`Template literal expressions are not currently supported in theme stylesheets: ${file}`)
+      );
+      process.exit(1);
+    }
+
+    const formattedStyles = prettier.format(stripComments(css), { parser: 'css' });
     const filename = path.basename(file).replace('.styles.ts', '.css');
     const outfile = path.join(outdir, filename);
-    await fs.writeFile(outfile, css, 'utf8');
+    await fs.writeFile(outfile, formattedStyles, 'utf8');
   });
 
   console.log(chalk.cyan(`Successfully generated stylesheets 🎨\n`));
