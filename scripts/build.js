@@ -24,6 +24,7 @@ try {
   execSync('node scripts/make-metadata.js', { stdio: 'inherit' });
   execSync('node scripts/make-vscode-data.js', { stdio: 'inherit' });
   execSync('node scripts/make-css.js', { stdio: 'inherit' });
+  execSync('node scripts/make-icons.js', { stdio: 'inherit' });
 } catch (err) {
   console.error(chalk.red(err));
   process.exit(1);
