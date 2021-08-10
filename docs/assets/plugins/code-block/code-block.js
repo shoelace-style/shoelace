@@ -53,7 +53,7 @@
 
               <div class="code-block__buttons">
                 <button type="button" class="code-block__button code-block__toggle" aria-expanded="false" aria-controls="${preId}">
-                  SOURCE
+                  View Source
                   <svg
                     viewBox="0 0 24 24"
                     fill="none"
@@ -165,12 +165,16 @@
         tags: ['shoelace', 'web components'],
         editors: '100',
         head: `<meta name="viewport" content="width=device-width">`,
-        css_external: `https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@${version}/dist/themes/light.css`,
+        css_external: ``,
         js_external: ``,
         js_module: true,
-        html: html,
+        html:
+          `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@${version}/dist/themes/light.css">\n` +
+          `<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@${version}/dist/shoelace.js"></script>\n` +
+          `\n` +
+          html,
         css: `body {\n  font: 16px sans-serif;\n}`,
-        js: `import 'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@${version}/dist/shoelace.js';`
+        js: ``
       };
 
       const input = document.createElement('input');
