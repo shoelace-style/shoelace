@@ -9,8 +9,9 @@ export default css`
     width: auto;
     cursor: pointer;
   }
-
+  
   .button {
+    position:relative;
     display: inline-flex;
     align-items: stretch;
     justify-content: center;
@@ -27,6 +28,12 @@ export default css`
     transition: var(--sl-transition-fast) background-color, var(--sl-transition-fast) color,
       var(--sl-transition-fast) border, var(--sl-transition-fast) box-shadow;
     cursor: inherit;
+  }
+  .button>sl-ripple{
+    position:absolute;
+    display:block;
+    width:100%;
+    height:100%;
   }
 
   .button::-moz-focus-inner {
@@ -255,12 +262,16 @@ export default css`
    * Size modifiers
    */
 
-  .button--small {
+  .button--small  {
     font-size: var(--sl-button-font-size-small);
     height: var(--sl-input-height-small);
     line-height: calc(var(--sl-input-height-small) - var(--sl-input-border-width) * 2);
     border-radius: var(--sl-input-border-radius-small);
   }
+  .button--small>sl-ripple{
+    border-radius: var(--sl-input-border-radius-small);
+  }
+  
 
   .button--medium {
     font-size: var(--sl-button-font-size-medium);
@@ -268,11 +279,16 @@ export default css`
     line-height: calc(var(--sl-input-height-medium) - var(--sl-input-border-width) * 2);
     border-radius: var(--sl-input-border-radius-medium);
   }
-
+  .button--medium>sl-ripple{
+     border-radius: var(--sl-input-border-radius-medium);
+  }
   .button--large {
     font-size: var(--sl-button-font-size-large);
     height: var(--sl-input-height-large);
     line-height: calc(var(--sl-input-height-large) - var(--sl-input-border-width) * 2);
+    border-radius: var(--sl-input-border-radius-large);
+  }
+  .button--large  >sl-ripple{
     border-radius: var(--sl-input-border-radius-large);
   }
 
@@ -280,15 +296,16 @@ export default css`
    * Pill modifier
    */
 
-  .button--pill.button--small {
+  .button--pill.button--small ,.button--pill.button--small>sl-ripple
+   {
     border-radius: var(--sl-input-height-small);
   }
-
-  .button--pill.button--medium {
-    border-radius: var(--sl-input-height-medium);
+  
+  .button--pill.button--medium, .button--pill.button--medium>sl-ripple {
+      border-radius: var(--sl-input-height-medium);
   }
 
-  .button--pill.button--large {
+  .button--pill.button--large ,.button--pill.button--large>sl-ripple{
     border-radius: var(--sl-input-height-large);
   }
 
@@ -301,17 +318,17 @@ export default css`
     padding-right: 0;
   }
 
-  .button--circle.button--small {
+  .button--circle.button--small ,.button--circle.button--small>sl-ripple {
     width: var(--sl-input-height-small);
     border-radius: 50%;
   }
 
-  .button--circle.button--medium {
+  .button--circle.button--medium ,.button--circle.button--medium>sl-ripple {
     width: var(--sl-input-height-medium);
     border-radius: 50%;
   }
 
-  .button--circle.button--large {
+  .button--circle.button--large ,.button--circle.button--large>sl-ripple {
     width: var(--sl-input-height-large);
     border-radius: 50%;
   }
@@ -374,6 +391,7 @@ export default css`
     position: absolute;
     top: 0;
     right: 0;
+    z-index:2;
     transform: translateY(-50%) translateX(50%);
     pointer-events: none;
   }

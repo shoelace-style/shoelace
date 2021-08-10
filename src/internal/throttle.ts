@@ -1,5 +1,5 @@
 //
-// A lightweight debounce implementation
+// A lightweight debounce implementation 防抖：一个事件如果不听发生，则一定时间内只发生一次
 //
 export function debounce(callback: (...args: [any]) => void, delay: number) {
   let timer: any;

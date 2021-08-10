@@ -12,7 +12,7 @@ import getPort from 'get-port';
 import glob from 'globby';
 import path from 'path';
 import { execSync } from 'child_process';
-
+import babel from 'esbuild-plugin-babel';
 const build = esbuild.build;
 const bs = browserSync.create();
 const { dev } = commandLineArgs({ name: 'dev', type: Boolean });

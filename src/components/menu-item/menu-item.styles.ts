@@ -3,11 +3,12 @@ import componentStyles from '../../styles/component.styles';
 
 export default css`
   ${componentStyles}
-
   :host {
     display: block;
   }
-
+  .ripple-wrap{
+      display: block;
+  }
   .menu-item {
     position: relative;
     display: flex;
@@ -25,6 +26,7 @@ export default css`
     white-space: nowrap;
     cursor: pointer;
   }
+
   .menu-item.menu-item--disabled {
     outline: none;
     color: var(--sl-color-gray-400);

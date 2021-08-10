@@ -5,7 +5,7 @@ import { ifDefined } from 'lit-html/directives/if-defined';
 import { emit } from '../../internal/event';
 import { hasSlot } from '../../internal/slot';
 import styles from './button.styles';
-
+import   '../ripple/ripple';
 import '../spinner/spinner';
 
 /**
@@ -21,7 +21,8 @@ import '../spinner/spinner';
  * @slot prefix - Used to prepend an icon or similar element to the button.
  * @slot suffix - Used to append an icon or similar element to the button.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart ripple - The component's ripple wrapper.
+ * @csspart base - The component's base wrapper:button or Link.
  * @csspart prefix - The prefix container.
  * @csspart label - The button's label.
  * @csspart suffix - The suffix container.
@@ -153,6 +154,7 @@ export default class SlButton extends LitElement {
       ${this.loading ? html`<sl-spinner></sl-spinner>` : ''}
     `;
 
+      
     const button = html`
       <button
         part="base"
@@ -185,7 +187,7 @@ export default class SlButton extends LitElement {
         @blur=${this.handleBlur}
         @focus=${this.handleFocus}
         @click=${this.handleClick}
-      >
+      ><sl-ripple part="ripple" ?disabled=${this.disabled||this.type=='text'}></sl-ripple>
         ${interior}
       </button>
     `;
@@ -226,8 +228,9 @@ export default class SlButton extends LitElement {
         @blur=${this.handleBlur}
         @focus=${this.handleFocus}
         @click=${this.handleClick}
-      >
+      ><sl-ripple part="ripple" ?disabled=${this.disabled||this.type=='text'}></sl-ripple>
         ${interior}
+        
       </a>
     `;
 

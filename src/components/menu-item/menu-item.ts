@@ -5,6 +5,7 @@ import { watch } from '../../internal/watch';
 import styles from './menu-item.styles';
 
 import '../icon/icon';
+import { watchProps } from '../../internal/watchProps';
 
 /**
  * @since 2.0
@@ -41,18 +42,17 @@ export default class SlMenuItem extends LitElement {
     this.setAttribute('role', 'menuitem');
   }
 
-  @watch('checked')
+  @watchProps(['checked','disabled'])
   handleCheckedChange() {
     this.setAttribute('aria-checked', String(this.checked));
-  }
-
-  @watch('disabled')
-  handleDisabledChange() {
     this.setAttribute('aria-disabled', String(this.disabled));
   }
 
+  
+
   render() {
     return html`
+    <sl-ripple class='ripple-wrap' ?disabled=${this.disabled}>
       <div
         part="base"
         class=${classMap({
@@ -61,6 +61,7 @@ export default class SlMenuItem extends LitElement {
           'menu-item--disabled': this.disabled
         })}
       >
+      
         <span part="checked-icon" class="menu-item__check">
           <sl-icon name="check" library="system" aria-hidden="true"></sl-icon>
         </span>
@@ -77,6 +78,7 @@ export default class SlMenuItem extends LitElement {
           <slot name="suffix"></slot>
         </span>
       </div>
+      </sl-ripple>
     `;
   }
 }

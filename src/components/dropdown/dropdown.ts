@@ -12,6 +12,7 @@ import { setDefaultAnimation, getAnimation } from '../../utilities/animation-reg
 import type SlMenu from '../menu/menu';
 import type SlMenuItem from '../menu-item/menu-item';
 import styles from './dropdown.styles';
+import { watchProps } from '../../internal/watchProps';
 
 let id = 0;
 
@@ -207,10 +208,8 @@ export default class SlDropdown extends LitElement {
     }
   }
 
-  @watch('distance')
-  @watch('hoist')
-  @watch('placement')
-  @watch('skidding')
+  
+  @watchProps(['distance','hoist','placement','skidding'])
   handlePopoverOptionsChange() {
     if (this.popover) {
       this.popover.setOptions({
