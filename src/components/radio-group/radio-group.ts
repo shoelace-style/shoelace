@@ -27,14 +27,16 @@ export default class SlRadioGroup extends LitElement {
   @property({ type: Boolean, attribute: 'no-fieldset' }) noFieldset = false;
 
   handleFocusIn() {
-    // When focusing into the fieldset, make sure it lands on the checked radio
-    const checkedRadio = [...this.defaultSlot.assignedElements({ flatten: true })].find(
-      el => el.tagName.toLowerCase() === 'sl-radio' && (el as SlRadio).checked
-    ) as SlRadio;
+    // When tabbing into the fieldset, make sure it lands on the checked radio
+    requestAnimationFrame(() => {
+      const checkedRadio = [...this.defaultSlot.assignedElements({ flatten: true })].find(
+        el => el.tagName.toLowerCase() === 'sl-radio' && (el as SlRadio).checked
+      ) as SlRadio;
 
-    if (checkedRadio) {
-      checkedRadio.focus();
-    }
+      if (checkedRadio) {
+        checkedRadio.focus();
+      }
+    });
   }
 
   render() {
