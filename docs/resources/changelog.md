@@ -29,7 +29,7 @@ This is more verbose than previous versions, but it has the advantage of letting
 This change applies to all design tokens that implement a color. Refer to the [color tokens](/tokens/color) page for more details.
 
 - 🚨 BREAKING: all design tokens that implement colors have been converted to `R G B` and must be used with the `rgb()` function
-- 🚨 BREAKING: removed `--sl-color-black|white` color tokens (use `--sl-color-neutral-1000|full` instead)
+- 🚨 BREAKING: removed `--sl-color-black|white` color tokens (use `--sl-color-neutral-0|1000` instead)
 - 🚨 BREAKING: removed `--sl-color-primary|success|warning|info|danger-text` design tokens (use theme or primitive colors instead)
 - 🚨 BREAKING: removed `info` variant from `sl-alert`, `sl-badge`, `sl-button`, and `sl-tag` (use `neutral` instead)
 - 🚨 BREAKING: removed `--sl-color-info-*` design token (use `--sl-color-neutral-*` instead)
