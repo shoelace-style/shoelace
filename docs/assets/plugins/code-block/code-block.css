@@ -78,36 +78,6 @@
   display: none;
 }
 
-.code-block .docsify-copy-code-button {
-  top: var(--sl-spacing-x-small);
-  right: var(--sl-spacing-x-small);
-  background-color: rgb(var(--sl-color-neutral-500));
-  font-family: var(--sl-font-sans);
-  font-size: var(--sl-font-size-x-small);
-  font-weight: var(--sl-font-weight-semibold);
-  border-radius: var(--sl-border-radius-small);
-  padding: 5px 8px;
-  opacity: 1;
-  cursor: copy;
-}
-
-.code-block .docsify-copy-code-button .label {
-  transition: none;
-}
-
-.code-block .docsify-copy-code-button .error,
-.code-block .docsify-copy-code-button .success {
-  display: none;
-}
-
-.code-block .docsify-copy-code-button:focus {
-  box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-focus-ring-color-neutral) / var(--sl-focus-ring-alpha));
-}
-
-.code-block .docsify-copy-code-button:active {
-  background-color: rgb(var(--sl-color-neutral-600));
-}
-
 .code-block--expanded .code-block__source {
   display: block;
 }
@@ -191,4 +161,50 @@
 
 .code-block--expanded .code-block__toggle svg {
   transform: rotate(180deg);
+}
+
+/* Copy button styles */
+.markdown-section .docsify-copy-code-button {
+  top: 4px;
+  right: 4px;
+  background-color: rgb(var(--sl-color-neutral-500));
+  border-radius: var(--sl-border-radius-medium);
+  font-family: var(--sl-font-sans);
+  font-size: var(--sl-font-size-small);
+  font-weight: var(--sl-font-weight-semibold);
+  user-select: none;
+}
+
+.markdown-section .docsify-copy-code-button.copied {
+  animation: pulse 1.5s;
+  --pulse-color: rgb(var(--sl-color-neutral-500));
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 var(--pulse-color);
+  }
+  70% {
+    box-shadow: 0 0 0 0.5rem transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+.markdown-section .docsify-copy-code-button .label {
+  transition: none;
+}
+
+.markdown-section .docsify-copy-code-button .success,
+.markdown-section .docsify-copy-code-button .error {
+  display: none;
+}
+
+.markdown-section .docsify-copy-code-button:focus {
+  box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-focus-ring-color-neutral) / var(--sl-focus-ring-alpha));
+}
+
+.markdown-section .docsify-copy-code-button:active {
+  background-color: rgb(var(--sl-color-neutral-600));
 }

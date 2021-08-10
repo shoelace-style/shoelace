@@ -194,4 +194,14 @@
       event.target.setAttribute('aria-expanded', codeBlock.classList.contains('code-block--expanded'));
     }
   });
+
+  // Show pulse when copying
+  document.addEventListener('click', event => {
+    const button = event.target.closest('.docsify-copy-code-button');
+
+    if (button) {
+      button.classList.remove('copied');
+      requestAnimationFrame(() => button.classList.add('copied'));
+    }
+  });
 })();
