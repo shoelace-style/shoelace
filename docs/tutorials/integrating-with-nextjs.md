@@ -17,9 +17,9 @@ To get started using Shoelace with NextJS, the following packages must be instal
 yarn add @shoelace-style/shoelace @shoelace-style/react-wrapper copy-webpack-plugin next-compose-plugins next-transpile-modules
 ```
 
-### Importing the Base Theme
+### Importing the Default Theme
 
-The next step is to import Shoelace's base theme (stylesheet) in your `_app.js` file:
+The next step is to import Shoelace's default theme (stylesheet) in your `_app.js` file:
 
 ```css
 import '@shoelace-style/shoelace/dist/themes/light.css';

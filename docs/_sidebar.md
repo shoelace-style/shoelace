@@ -2,8 +2,8 @@
   - [Overview](/)
   - [Installation](/getting-started/installation)
   - [Usage](/getting-started/usage)
-  - [Customizing](/getting-started/customizing)
   - [Themes](/getting-started/themes)
+  - [Customizing](/getting-started/customizing)
 
 - Resources
   - [Community](/resources/community)
