@@ -6,13 +6,13 @@ import type SlSelect from './select';
 
 describe('<sl-select>', () => {
   it('should emit sl-change when the value changes', async () => {
-    const el = (await fixture(html`
+    const el = await fixture<SlSelect>(html`
       <sl-select>
         <sl-menu-item value="option-1">Option 1</sl-menu-item>
         <sl-menu-item value="option-2">Option 2</sl-menu-item>
         <sl-menu-item value="option-3">Option 3</sl-menu-item>
       </sl-select>
-    `)) as SlSelect;
+    `);
     const changeHandler = sinon.spy();
 
     el.addEventListener('sl-change', changeHandler);
