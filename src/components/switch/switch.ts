@@ -123,13 +123,13 @@ export default class SlSwitch extends LitElement {
     if (event.key === 'ArrowLeft') {
       event.preventDefault();
       this.checked = false;
-      // emit(this, 'sl-change');
+      emit(this, 'sl-change');
     }
 
     if (event.key === 'ArrowRight') {
       event.preventDefault();
       this.checked = true;
-      // emit(this, 'sl-change');
+      emit(this, 'sl-change');
     }
   }
 
