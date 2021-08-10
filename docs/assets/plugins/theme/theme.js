@@ -6,6 +6,7 @@
   window.$docsify.plugins.push((hook, vm) => {
     hook.mounted(function () {
       let isDark = localStorage.getItem('theme') === 'sl-theme-dark';
+      const documentElement = document.documentElement;
       const sidebarToggle = document.querySelector('.sidebar-toggle');
       const noTransitions = Object.assign(document.createElement('style'), {
         textContent: '* { transition: none !important; }'
@@ -18,7 +19,7 @@
 
       // Set initial theme
       if (isDark) {
-        document.body.classList.add('sl-theme-dark');
+        documentElement.classList.add('sl-theme-dark');
       }
 
       // Toggle theme
@@ -30,7 +31,7 @@
         // Disable transitions as the theme changes
         document.body.appendChild(noTransitions);
         requestAnimationFrame(() => {
-          document.body.classList.toggle('sl-theme-dark', isDark);
+          documentElement.classList.toggle('sl-theme-dark', isDark);
           requestAnimationFrame(() => document.body.removeChild(noTransitions));
         });
       });

@@ -25,28 +25,28 @@ export default css`
 
   /* Type modifiers */
   .badge--primary {
-    background-color: var(--sl-color-primary-500);
-    color: var(--sl-color-primary-text);
+    background-color: rgb(var(--sl-color-primary-500));
+    color: rgb(var(--sl-color-neutral-1000));
   }
 
   .badge--success {
-    background-color: var(--sl-color-success-500);
-    color: var(--sl-color-success-text);
+    background-color: rgb(var(--sl-color-success-500));
+    color: rgb(var(--sl-color-neutral-1000));
   }
 
-  .badge--info {
-    background-color: var(--sl-color-info-500);
-    color: var(--sl-color-info-text);
+  .badge--neutral {
+    background-color: rgb(var(--sl-color-neutral-500));
+    color: rgb(var(--sl-color-neutral-1000));
   }
 
   .badge--warning {
-    background-color: var(--sl-color-warning-500);
-    color: var(--sl-color-warning-text);
+    background-color: rgb(var(--sl-color-warning-500));
+    color: rgb(var(--sl-color-neutral-1000));
   }
 
   .badge--danger {
-    background-color: var(--sl-color-danger-500);
-    color: var(--sl-color-danger-text);
+    background-color: rgb(var(--sl-color-danger-500));
+    color: rgb(var(--sl-color-neutral-1000));
   }
 
   /* Pill modifier */
@@ -60,23 +60,23 @@ export default css`
   }
 
   .badge--pulse.badge--primary {
-    --pulse-color: var(--sl-color-primary-500);
+    --pulse-color: rgb(var(--sl-color-primary-500));
   }
 
   .badge--pulse.badge--success {
-    --pulse-color: var(--sl-color-success-500);
+    --pulse-color: rgb(var(--sl-color-success-500));
   }
 
-  .badge--pulse.badge--info {
-    --pulse-color: var(--sl-color-info-500);
+  .badge--pulse.badge--neutral {
+    --pulse-color: rgb(var(--sl-color-neutral-500));
   }
 
   .badge--pulse.badge--warning {
-    --pulse-color: var(--sl-color-warning-500);
+    --pulse-color: rgb(var(--sl-color-warning-500));
   }
 
   .badge--pulse.badge--danger {
-    --pulse-color: var(--sl-color-danger-500);
+    --pulse-color: rgb(var(--sl-color-danger-500));
   }
 
   @keyframes pulse {

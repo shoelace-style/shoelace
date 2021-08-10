@@ -114,7 +114,7 @@ Dropdown panels will be clipped if they're inside a container that has `overflow
 
 <style>
   .dropdown-hoist {
-    border: solid 2px var(--sl-panel-border-color);
+    border: solid 2px rgb(var(--sl-panel-border-color));
     padding: var(--sl-spacing-medium);
     overflow: hidden;
   }

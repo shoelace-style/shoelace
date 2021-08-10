@@ -18,7 +18,7 @@ export default css`
     font-family: var(--sl-input-font-family);
     font-size: var(--sl-input-font-size-medium);
     font-weight: var(--sl-input-font-weight);
-    color: var(--sl-input-color);
+    color: rgb(var(--sl-input-color));
     vertical-align: middle;
     cursor: pointer;
   }
@@ -31,8 +31,8 @@ export default css`
     justify-content: center;
     width: var(--width);
     height: var(--height);
-    background-color: var(--sl-color-gray-300);
-    border: solid var(--sl-input-border-width) var(--sl-color-gray-300);
+    background-color: rgb(var(--sl-color-neutral-300));
+    border: solid var(--sl-input-border-width) rgb(var(--sl-color-neutral-300));
     border-radius: var(--height);
     transition: var(--sl-transition-fast) border-color, var(--sl-transition-fast) background-color;
   }
@@ -40,9 +40,9 @@ export default css`
   .switch__control .switch__thumb {
     width: var(--thumb-size);
     height: var(--thumb-size);
-    background-color: var(--sl-color-white);
+    background-color: rgb(var(--sl-color-neutral-1000));
     border-radius: 50%;
-    border: solid var(--sl-input-border-width) var(--sl-input-border-color);
+    border: solid var(--sl-input-border-width) rgb(var(--sl-input-border-color));
     transform: translateX(calc((var(--width) - var(--height)) / -2));
     transition: var(--sl-transition-fast) transform ease, var(--sl-transition-fast) background-color,
       var(--sl-transition-fast) border-color, var(--sl-transition-fast) box-shadow;
@@ -58,57 +58,57 @@ export default css`
 
   /* Hover */
   .switch:not(.switch--checked):not(.switch--disabled) .switch__control:hover {
-    background-color: var(--sl-color-gray-200);
-    border-color: var(--sl-color-gray-200);
+    background-color: rgb(var(--sl-color-neutral-200));
+    border-color: rgb(var(--sl-color-neutral-200));
   }
   .switch:not(.switch--checked):not(.switch--disabled) .switch__control:hover .switch__thumb {
-    background-color: var(--sl-color-white);
-    border-color: var(--sl-input-border-color);
+    background-color: rgb(var(--sl-color-neutral-1000));
+    border-color: rgb(var(--sl-input-border-color));
   }
 
   /* Focus */
   .switch.switch--focused:not(.switch--checked):not(.switch--disabled) .switch__control {
-    background-color: var(--sl-color-gray-200);
-    border-color: var(--sl-color-gray-200);
+    background-color: rgb(var(--sl-color-neutral-200));
+    border-color: rgb(var(--sl-color-neutral-200));
   }
 
   .switch.switch--focused:not(.switch--checked):not(.switch--disabled) .switch__control .switch__thumb {
-    background-color: var(--sl-color-white);
-    border-color: var(--sl-color-primary-500);
-    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
+    background-color: rgb(var(--sl-color-neutral-1000));
+    border-color: rgb(var(--sl-color-primary-500));
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-focus-ring-color-primary) / var(--sl-focus-ring-alpha));
   }
 
   /* Checked */
   .switch--checked .switch__control {
-    background-color: var(--sl-color-primary-500);
-    border-color: var(--sl-color-primary-500);
+    background-color: rgb(var(--sl-color-primary-500));
+    border-color: rgb(var(--sl-color-primary-500));
   }
   .switch--checked .switch__control .switch__thumb {
-    background-color: var(--sl-color-white);
-    border-color: var(--sl-color-primary-500);
+    background-color: rgb(var(--sl-color-neutral-1000));
+    border-color: rgb(var(--sl-color-primary-500));
     transform: translateX(calc((var(--width) - var(--height)) / 2));
   }
 
   /* Checked + hover */
   .switch.switch--checked:not(.switch--disabled) .switch__control:hover {
-    background-color: var(--sl-color-primary-400);
-    border-color: var(--sl-color-primary-400);
+    background-color: rgb(var(--sl-color-primary-400));
+    border-color: rgb(var(--sl-color-primary-400));
   }
   .switch.switch--checked:not(.switch--disabled) .switch__control:hover .switch__thumb {
-    background-color: var(--sl-color-white);
-    border-color: var(--sl-color-primary-500);
+    background-color: rgb(var(--sl-color-neutral-1000));
+    border-color: rgb(var(--sl-color-primary-500));
   }
 
   /* Checked + focus */
   .switch.switch--checked:not(.switch--disabled).switch--focused .switch__control {
-    background-color: var(--sl-color-primary-400);
-    border-color: var(--sl-color-primary-400);
+    background-color: rgb(var(--sl-color-primary-400));
+    border-color: rgb(var(--sl-color-primary-400));
   }
 
   .switch.switch--checked:not(.switch--disabled).switch--focused .switch__control .switch__thumb {
-    background-color: var(--sl-color-white);
-    border-color: var(--sl-color-primary-500);
-    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
+    background-color: rgb(var(--sl-color-neutral-1000));
+    border-color: rgb(var(--sl-color-primary-500));
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-focus-ring-color-primary) / var(--sl-focus-ring-alpha));
   }
 
   /* Disabled */

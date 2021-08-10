@@ -5,7 +5,7 @@ export default css`
   ${componentStyles}
 
   :host {
-    --symbol-color: var(--sl-color-gray-300);
+    --symbol-color: rgb(var(--sl-color-neutral-300));
     --symbol-color-active: #ffbe00;
     --symbol-size: 1.2rem;
     --symbol-spacing: var(--sl-spacing-xxx-small);
@@ -25,7 +25,7 @@ export default css`
   }
 
   .rating.focus-visible:focus {
-    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-focus-ring-color-primary) / var(--sl-focus-ring-alpha));
   }
 
   .rating__symbols {

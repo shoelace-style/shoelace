@@ -8,9 +8,40 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
+This release improves theming by offering both light and dark themes that can be used autonomously. It also adds a variety of new color primitives and changes the way color tokens are consumed. Previously, color tokens were in hexidecimal format. Now, Shoelace now uses an `R G B` format that requires you to use the `rgb()` function in your CSS.
+
+```css
+.example {
+  /* rgb() is required now */
+  color: rgb(var(--sl-color-neutral-500));
+}
+```
+
+This is more verbose than previous versions, but it has the advantage of letting you set the alpha channel of any color token.
+
+```css
+.example-with-alpha {
+  /* easily adjust opacity for any color token */
+  color: rgb(var(--sl-color-neutral-500) / 50%);
+}
+```
+
+This change applies to all design tokens that implement a color. Refer to the [color tokens](/tokens/color) page for more details.
+
+- 🚨 BREAKING: all design tokens that implement colors have been converted to `R G B` and must be used with the `rgb()` function
+- 🚨 BREAKING: removed `--sl-color-black|white` color tokens (use `--sl-color-neutral-1000|full` instead)
+- 🚨 BREAKING: removed `--sl-color-primary|success|warning|info|danger-text` design tokens (use theme or primitive colors instead)
+- 🚨 BREAKING: removed `info` variant from `sl-alert`, `sl-badge`, `sl-button`, and `sl-tag` (use `neutral` instead)
+- 🚨 BREAKING: removed `--sl-color-info-*` design token (use `--sl-color-neutral-*` instead)
+- 🚨 BREAKING: renamed `dist/themes/base.css` to `dist/themes/light.css`
+- Added new color primitives to the base set of design tokens
+- Added `--sl-color-*-950` swatches to all color palettes
 - Added a console error that appears when menu items have duplicate values in `sl-select`
+- Added CodePen link to code examples
+- Exposed base and dark stylesheets so they can be imported via JavaScript [#438](https://github.com/shoelace-style/shoelace/issues/438)
 - Fixed a bug in `sl-menu` where pressing <kbd>Enter</kbd> after using type to select would result in the wrong value
 - Refactored thumb position logic in `sl-switch` [#490](https://github.com/shoelace-style/shoelace/pull/490)
+- Reworked the dark theme to use an inverted token approach instead of light DOM selectors
 
 ## 2.0.0-beta.47
 
@@ -278,7 +309,7 @@ The component API remains the same except for the changes noted below. Thanks fo
 - 🚨 BREAKING: removed the custom elements bundle (you can import ES modules directly)
 - 🚨 BREAKING: removed `getAnimationNames()` and `getEasingNames()` methods from `sl-animation` (you can import them from `utilities/animation.js` instead)
 - 🚨 BREAKING: removed the `sl-icon-library` component since it required imperative initialization (you can import the `registerIconLibrary()` function from `utilities/icon-library.js` instead)
-- 🚨 BREAKING: removed the experimental `sl-theme` component due to limitations (you should set the `sl-theme-[name]` class on the `<body>` instead)
+- 🚨 BREAKING: removed the experimental `sl-theme` component due to limitations (you should set the `sl-theme-{name}` class on the `<body>` instead)
 - 🚨 BREAKING: moved the base stylesheet from `dist/shoelace.css` to `dist/themes/base.css`
 - 🚨 BREAKING: moved `icons` into `assets/icons` to make future assets easier to colocate
 - 🚨 BREAKING: changed `getSymbol` property in `sl-rating` to `symbol` (it now accepts a string or a function that returns an icon name)

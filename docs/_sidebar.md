@@ -2,8 +2,8 @@
   - [Overview](/)
   - [Installation](/getting-started/installation)
   - [Usage](/getting-started/usage)
-  - [Customizing](/getting-started/customizing)
   - [Themes](/getting-started/themes)
+  - [Customizing](/getting-started/customizing)
 
 - Resources
   - [Community](/resources/community)
@@ -34,6 +34,7 @@
   - [Menu Label](/components/menu-label)
   - [Progress Bar](/components/progress-bar)
   - [Progress Ring](/components/progress-ring)
+  - [QR Code](/components/qr-code)
   - [Radio](/components/radio)
   - [Radio Group](/components/radio-group)
   - [Range](/components/range)
@@ -56,7 +57,6 @@
   - [Format Date](/components/format-date)
   - [Format Number](/components/format-number)
   - [Include](/components/include)
-  - [QR Code](/components/qr-code)
   - [Relative Time](/components/relative-time)
   - [Resize Observer](/components/resize-observer)
   - [Responsive Media](/components/responsive-media)

@@ -18,7 +18,7 @@ Use the `type` attribute to set the button's type.
 <sl-button type="default">Default</sl-button>
 <sl-button type="primary">Primary</sl-button>
 <sl-button type="success">Success</sl-button>
-<sl-button type="info">Info</sl-button>
+<sl-button type="neutral">Neutral</sl-button>
 <sl-button type="warning">Warning</sl-button>
 <sl-button type="danger">Danger</sl-button>
 ```
@@ -162,7 +162,7 @@ Use the `loading` attribute to make a button busy. The width will remain the sam
 <sl-button type="default" loading>Default</sl-button>
 <sl-button type="primary" loading>Primary</sl-button>
 <sl-button type="success" loading>Success</sl-button>
-<sl-button type="info" loading>Info</sl-button>
+<sl-button type="neutral" loading>Neutral</sl-button>
 <sl-button type="warning" loading>Warning</sl-button>
 <sl-button type="danger" loading>Danger</sl-button>
 ```
@@ -175,7 +175,7 @@ Use the `disabled` attribute to disable a button. Clicks will be suppressed unti
 <sl-button type="default" disabled>Default</sl-button>
 <sl-button type="primary" disabled>Primary</sl-button>
 <sl-button type="success" disabled>Success</sl-button>
-<sl-button type="info" disabled>Info</sl-button>
+<sl-button type="neutral" disabled>Neutral</sl-button>
 <sl-button type="warning" disabled>Warning</sl-button>
 <sl-button type="danger" disabled>Danger</sl-button>
 ```

@@ -9,7 +9,7 @@ export default css`
   :host {
     --thumb-size: 20px;
     --tooltip-offset-y: 10px;
-    --track-color: var(--sl-color-gray-200);
+    --track-color: rgb(var(--sl-color-neutral-200));
     --track-height: 6px;
 
     display: block;
@@ -42,8 +42,8 @@ export default css`
     width: var(--thumb-size);
     height: var(--thumb-size);
     border-radius: 50%;
-    background-color: var(--sl-color-primary-500);
-    border: solid var(--sl-input-border-width) var(--sl-color-primary-500);
+    background-color: rgb(var(--sl-color-primary-500));
+    border: solid var(--sl-input-border-width) rgb(var(--sl-color-primary-500));
     -webkit-appearance: none;
     margin-top: calc(var(--thumb-size) / -2 + var(--track-height) / 2);
     transition: var(--sl-transition-fast) border-color, var(--sl-transition-fast) background-color,
@@ -52,19 +52,19 @@ export default css`
   }
 
   .range__control:not(:disabled)::-webkit-slider-thumb:hover {
-    background-color: var(--sl-color-primary-400);
-    border-color: var(--sl-color-primary-400);
+    background-color: rgb(var(--sl-color-primary-400));
+    border-color: rgb(var(--sl-color-primary-400));
   }
 
   .range__control:not(:disabled):focus::-webkit-slider-thumb {
-    background-color: var(--sl-color-primary-400);
-    border-color: var(--sl-color-primary-400);
-    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
+    background-color: rgb(var(--sl-color-primary-400));
+    border-color: rgb(var(--sl-color-primary-400));
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-focus-ring-color-primary) / var(--sl-focus-ring-alpha));
   }
 
   .range__control:not(:disabled)::-webkit-slider-thumb:active {
-    background-color: var(--sl-color-primary-500);
-    border-color: var(--sl-color-primary-500);
+    background-color: rgb(var(--sl-color-primary-500));
+    border-color: rgb(var(--sl-color-primary-500));
     cursor: grabbing;
   }
 
@@ -86,27 +86,27 @@ export default css`
     height: var(--thumb-size);
     width: var(--thumb-size);
     border-radius: 50%;
-    background-color: var(--sl-color-primary-500);
-    border-color: var(--sl-color-primary-500);
+    background-color: rgb(var(--sl-color-primary-500));
+    border-color: rgb(var(--sl-color-primary-500));
     transition: var(--sl-transition-fast) border-color, var(--sl-transition-fast) background-color,
       var(--sl-transition-fast) color, var(--sl-transition-fast) box-shadow, var(--sl-transition-fast) transform;
     cursor: pointer;
   }
 
   .range__control:not(:disabled)::-moz-range-thumb:hover {
-    background-color: var(--sl-color-primary-400);
-    border-color: var(--sl-color-primary-400);
+    background-color: rgb(var(--sl-color-primary-400));
+    border-color: rgb(var(--sl-color-primary-400));
   }
 
   .range__control:not(:disabled):focus::-moz-range-thumb {
-    background-color: var(--sl-color-primary-400);
-    border-color: var(--sl-color-primary-400);
-    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
+    background-color: rgb(var(--sl-color-primary-400));
+    border-color: rgb(var(--sl-color-primary-400));
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-focus-ring-color-primary) / var(--sl-focus-ring-alpha));
   }
 
   .range__control:not(:disabled)::-moz-range-thumb:active {
-    background-color: var(--sl-color-primary-600);
-    border-color: var(--sl-color-primary-600);
+    background-color: rgb(var(--sl-color-primary-600));
+    border-color: rgb(var(--sl-color-primary-600));
     cursor: grabbing;
   }
 
@@ -133,12 +133,12 @@ export default css`
     z-index: var(--sl-z-index-tooltip);
     left: 1px;
     border-radius: var(--sl-tooltip-border-radius);
-    background-color: var(--sl-tooltip-background-color);
+    background-color: rgb(var(--sl-tooltip-background-color));
     font-family: var(--sl-tooltip-font-family);
     font-size: var(--sl-tooltip-font-size);
     font-weight: var(--sl-tooltip-font-weight);
     line-height: var(--sl-tooltip-line-height);
-    color: var(--sl-tooltip-color);
+    color: rgb(var(--sl-tooltip-color));
     opacity: 0;
     padding: var(--sl-tooltip-padding);
     transition: var(--sl-transition-fast) opacity;
@@ -164,7 +164,7 @@ export default css`
   }
 
   .range--tooltip-top .range__tooltip:after {
-    border-top: var(--sl-tooltip-arrow-size) solid var(--sl-tooltip-background-color);
+    border-top: var(--sl-tooltip-arrow-size) solid rgb(var(--sl-tooltip-background-color));
     border-left: var(--sl-tooltip-arrow-size) solid transparent;
     border-right: var(--sl-tooltip-arrow-size) solid transparent;
     top: 100%;
@@ -175,7 +175,7 @@ export default css`
     bottom: calc(-1 * var(--thumb-size) - var(--tooltip-offset-y));
   }
   .range--tooltip-bottom .range__tooltip:after {
-    border-bottom: var(--sl-tooltip-arrow-size) solid var(--sl-tooltip-background-color);
+    border-bottom: var(--sl-tooltip-arrow-size) solid rgb(var(--sl-tooltip-background-color));
     border-left: var(--sl-tooltip-arrow-size) solid transparent;
     border-right: var(--sl-tooltip-arrow-size) solid transparent;
     bottom: 100%;

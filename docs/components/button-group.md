@@ -64,9 +64,9 @@ Theme buttons are supported through the button's `type` attribute.
 <br><br>
 
 <sl-button-group>
-  <sl-button type="info">Left</sl-button>
-  <sl-button type="info">Center</sl-button>
-  <sl-button type="info">Right</sl-button>
+  <sl-button type="neutral">Left</sl-button>
+  <sl-button type="neutral">Center</sl-button>
+  <sl-button type="neutral">Right</sl-button>
 </sl-button-group>
 
 <br><br>

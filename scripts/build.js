@@ -19,10 +19,16 @@ const { dev } = commandLineArgs({ name: 'dev', type: Boolean });
 
 del.sync('./dist');
 
-if (!dev) execSync('tsc', { stdio: 'inherit' }); // for type declarations
-execSync('node scripts/make-metadata.js', { stdio: 'inherit' });
-execSync('node scripts/make-vscode-data.js', { stdio: 'inherit' });
-execSync('node scripts/make-icons.js', { stdio: 'inherit' });
+try {
+  if (!dev) execSync('tsc', { stdio: 'inherit' }); // for type declarations
+  execSync('node scripts/make-metadata.js', { stdio: 'inherit' });
+  execSync('node scripts/make-vscode-data.js', { stdio: 'inherit' });
+  execSync('node scripts/make-css.js', { stdio: 'inherit' });
+  execSync('node scripts/make-icons.js', { stdio: 'inherit' });
+} catch (err) {
+  console.error(chalk.red(err));
+  process.exit(1);
+}
 
 (async () => {
   const entryPoints = [
@@ -95,7 +101,20 @@ execSync('node scripts/make-icons.js', { stdio: 'inherit' });
       buildResult
         // Rebuild and reload
         .rebuild()
-        .then(() => execSync('node scripts/make-metadata.js', { stdio: 'inherit' }))
+        .then(async () => {
+          // Rebuild stylesheets when a theme file changes
+          if (/^src\/themes/.test(filename)) {
+            execSync('node scripts/make-css.js', { stdio: 'inherit' });
+          }
+        })
+        .then(() => {
+          // Skip metadata when styles are changed
+          if (/(\.css|\.styles\.ts)$/.test(filename)) {
+            return;
+          }
+
+          execSync('node scripts/make-metadata.js', { stdio: 'inherit' });
+        })
         .then(() => bs.reload())
         .catch(err => console.error(chalk.red(err)));
     });
