@@ -90,6 +90,7 @@ export default class SlCheckbox extends LitElement {
   handleClick() {
     this.checked = !this.checked;
     this.indeterminate = false;
+    emit(this, 'sl-change');
   }
 
   handleBlur() {
@@ -121,7 +122,6 @@ export default class SlCheckbox extends LitElement {
   @watch('indeterminate', { waitUntilFirstUpdate: true })
   handleStateChange() {
     this.invalid = !this.input.checkValidity();
-    emit(this, 'sl-change');
   }
 
   render() {
