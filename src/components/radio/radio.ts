@@ -104,11 +104,11 @@ export default class SlRadio extends LitElement {
     if (this.checked) {
       this.getSiblingRadios().map(radio => (radio.checked = false));
     }
-    emit(this, 'sl-change');
   }
 
   handleClick() {
     this.checked = true;
+    emit(this, 'sl-change');
   }
 
   @watch('disabled')
