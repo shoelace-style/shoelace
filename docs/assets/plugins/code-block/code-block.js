@@ -51,19 +51,27 @@
 
               ${pre.outerHTML}
 
-              <button type="button" class="code-block__toggle" aria-expanded="false" aria-controls="${preId}">
-                Source
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <polyline points="6 9 12 15 18 9"></polyline>
-                </svg>
-              </button>
+              <div class="code-block__buttons">
+                <button type="button" class="code-block__button code-block__toggle" aria-expanded="false" aria-controls="${preId}">
+                  SOURCE
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+
+                <button type="button" class="code-block__button code-block__button--codepen" title="Edit on CodePen">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 138 26" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M80 6h-9v14h9 M114 6h-9 v14h9 M111 13h-6 M77 13h-6 M122 20V6l11 14V6 M22 16.7L33 24l11-7.3V9.3L33 2L22 9.3V16.7z M44 16.7L33 9.3l-11 7.4 M22 9.3l11 7.3 l11-7.3 M33 2v7.3 M33 16.7V24 M88 14h6c2.2 0 4-1.8 4-4s-1.8-4-4-4h-6v14 M15 8c-1.3-1.3-3-2-5-2c-4 0-7 3-7 7s3 7 7 7 c2 0 3.7-0.8 5-2 M64 13c0 4-3 7-7 7h-5V6h5C61 6 64 9 64 13z"/>
+                  </svg>
+                </button>
+              </div>
             </div>
           `;
 
@@ -134,6 +142,47 @@
         resizer.addEventListener('keydown', handleKeyDown);
       }, false);
     });
+  });
+
+  // Open in CodePen
+  document.addEventListener('click', event => {
+    const button = event.target.closest('button');
+
+    if (button?.classList.contains('code-block__button--codepen')) {
+      const codeBlock = button.closest('.code-block');
+      const html = codeBlock.querySelector('.code-block__source > code').textContent;
+      const version = sessionStorage.getItem('sl-version');
+
+      const form = document.createElement('form');
+      form.action = 'https://codepen.io/pen/define';
+      form.method = 'POST';
+      form.target = '_blank';
+
+      // Docs: https://blog.codepen.io/documentation/prefill/
+      const data = {
+        title: '',
+        description: '',
+        tags: ['shoelace', 'web components'],
+        editors: '100',
+        head: `<meta name="viewport" content="width=device-width">`,
+        css_external: `https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@${version}/dist/themes/light.css`,
+        js_external: ``,
+        js_module: true,
+        html: html,
+        css: `body {\n  font: 16px sans-serif;\n}`,
+        js: `import 'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@${version}/dist/shoelace.js';`
+      };
+
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = 'data';
+      input.value = JSON.stringify(data);
+      form.append(input);
+
+      document.body.append(form);
+      form.submit();
+      form.remove();
+    }
   });
 
   // Expand and collapse code blocks

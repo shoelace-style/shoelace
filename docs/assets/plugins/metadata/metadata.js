@@ -282,6 +282,9 @@
       version.textContent = isDev ? 'Development' : isNext ? 'Next' : metadata.package.version;
       target.appendChild(version);
 
+      // Store version for reuse
+      sessionStorage.setItem('sl-version', metadata.package.version);
+
       // Add repo buttons
       const buttons = document.createElement('div');
       buttons.classList.add('sidebar-buttons');
