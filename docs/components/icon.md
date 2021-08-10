@@ -604,7 +604,7 @@ If you want to change the icons Shoelace uses internally, you can register an ic
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border-radius: var(--sl-border-radius-circle);
+    border-radius: var(--sl-border-radius-medium);
     font-size: 24px;
     width: 2em;
     height: 2em;
@@ -615,7 +615,7 @@ If you want to change the icons Shoelace uses internally, you can register an ic
 
   .icon-list-item:hover {
     background-color: rgb(var(--sl-color-primary-50));
-    color: rgb(var(--sl-color-primary-500));
+    color: rgb(var(--sl-color-primary-600));
   }
 
   .icon-list[data-type="outline"] .icon-list-item[data-name$="-fill"] {
