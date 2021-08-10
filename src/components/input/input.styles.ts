@@ -7,7 +7,7 @@ export default css`
   ${formControlStyles}
 
   :host {
-    --focus-ring: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-focus-ring-color-primary) / var(--sl-focus-ring-alpha));
+    --focus-ring: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-primary-500) / var(--sl-focus-ring-alpha));
     display: block;
   }
 

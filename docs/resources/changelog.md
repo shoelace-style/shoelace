@@ -34,6 +34,7 @@ This change applies to all design tokens that implement a color. Refer to the [c
 - 🚨 BREAKING: removed `info` variant from `sl-alert`, `sl-badge`, `sl-button`, and `sl-tag` (use `neutral` instead)
 - 🚨 BREAKING: removed `--sl-color-info-*` design token (use `--sl-color-neutral-*` instead)
 - 🚨 BREAKING: renamed `dist/themes/base.css` to `dist/themes/light.css`
+- 🚨 BREAKING: removed `--sl-focus-ring-color-primary` tokens (use color tokens and `--sl-focus-ring-width|alpha` instead)
 - Added new color primitives to the base set of design tokens
 - Added `--sl-color-*-950` swatches to all color palettes
 - Added a console error that appears when menu items have duplicate values in `sl-select`

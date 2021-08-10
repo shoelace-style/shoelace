@@ -37,7 +37,7 @@ export default css`
   .textarea.textarea--focused:not(.textarea--disabled) {
     background-color: rgb(var(--sl-input-background-color-focus));
     border-color: rgb(var(--sl-input-border-color-focus));
-    box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-focus-ring-color-primary) / var(--sl-focus-ring-alpha));
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-primary-500) / var(--sl-focus-ring-alpha));
     color: rgb(var(--sl-input-color-focus));
   }
 

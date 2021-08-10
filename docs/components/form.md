@@ -187,7 +187,7 @@ The `invalid` attribute reflects the form control's validity, so you can style i
   } 
 
   .custom-input[invalid] {
-    --focus-ring: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-focus-ring-color-danger) / var(--sl-focus-ring-alpha));
+    --focus-ring: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-danger-500) / var(--sl-focus-ring-alpha));
   }
 </style>
 ```

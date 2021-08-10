@@ -80,7 +80,7 @@ strong {
 
 .sidebar .search input[type='search']:focus {
   background-color: rgb(var(--sl-input-background-color-focus));
-  box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-focus-ring-color-primary) / var(--sl-focus-ring-alpha));
+  box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-primary-500) / var(--sl-focus-ring-alpha));
   border-color: rgb(var(--sl-input-border-color-focus));
   color: rgb(var(--sl-input-color-focus));
   outline: none;
@@ -152,7 +152,7 @@ strong {
 
 .sidebar-toggle:focus {
   outline: none;
-  box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-focus-ring-color-primary) / var(--sl-focus-ring-alpha));
+  box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-primary-500) / var(--sl-focus-ring-alpha));
 }
 
 .sidebar-toggle span:last-child {
@@ -614,7 +614,7 @@ html .repo-button:hover {
 html .repo-button:focus {
   outline: none;
   border-color: rgb(var(--sl-color-primary-500));
-  box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-focus-ring-color-primary) / var(--sl-focus-ring-alpha));
+  box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-primary-500) / var(--sl-focus-ring-alpha));
 }
 
 html .repo-button:not(:last-of-type) {

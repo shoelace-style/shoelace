@@ -54,7 +54,7 @@
 .code-block__resizer:focus {
   outline: none;
   box-shadow: 0 0 0 1px rgb(var(--sl-color-primary-400)),
-    0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-focus-ring-color-primary) / var(--sl-focus-ring-alpha));
+    0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-primary-500) / var(--sl-focus-ring-alpha));
   background-color: rgb(var(--sl-color-primary-50));
   color: rgb(var(--sl-color-primary-600));
   z-index: 2;
@@ -141,7 +141,7 @@
   border-right-color: transparent;
   background-color: rgb(var(--sl-color-primary-50));
   box-shadow: 0 0 0 1px rgb(var(--sl-color-primary-400)),
-    0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-focus-ring-color-primary) / var(--sl-focus-ring-alpha));
+    0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-primary-500) / var(--sl-focus-ring-alpha));
   z-index: 2;
 }
 
@@ -208,7 +208,7 @@
 }
 
 .markdown-section .docsify-copy-code-button:focus {
-  box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-focus-ring-color-neutral) / var(--sl-focus-ring-alpha));
+  box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-neutral-500) / var(--sl-focus-ring-alpha));
 }
 
 .markdown-section .docsify-copy-code-button:active {

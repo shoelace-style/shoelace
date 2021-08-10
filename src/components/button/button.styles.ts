@@ -84,7 +84,7 @@ export default css`
     background-color: rgb(var(--sl-color-primary-50));
     border-color: rgb(var(--sl-color-primary-300));
     color: rgb(var(--sl-color-primary-600));
-    box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-focus-ring-color-primary) / 25%);
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-primary-500) / var(--sl-focus-ring-alpha));
   }
 
   .button.button--default:active:not(.button--disabled) {
@@ -110,7 +110,7 @@ export default css`
     background-color: rgb(var(--sl-color-primary-400));
     border-color: rgb(var(--sl-color-primary-400));
     color: rgb(var(--sl-color-neutral-1000));
-    box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-focus-ring-color-primary) / 25%);
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-primary-500) / var(--sl-focus-ring-alpha));
   }
 
   .button.button--primary:active:not(.button--disabled) {
@@ -136,7 +136,7 @@ export default css`
     background-color: rgb(var(--sl-color-success-400));
     border-color: rgb(var(--sl-color-success-400));
     color: rgb(var(--sl-color-neutral-1000));
-    box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-focus-ring-color-success) / 25%);
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-success-500) / var(--sl-focus-ring-alpha));
   }
 
   .button.button--success:active:not(.button--disabled) {
@@ -162,7 +162,7 @@ export default css`
     background-color: rgb(var(--sl-color-neutral-400));
     border-color: rgb(var(--sl-color-neutral-400));
     color: rgb(var(--sl-color-neutral-1000));
-    box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-focus-ring-color-neutral) / 25%);
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-neutral-500) / var(--sl-focus-ring-alpha));
   }
 
   .button.button--neutral:active:not(.button--disabled) {
@@ -187,7 +187,7 @@ export default css`
     background-color: rgb(var(--sl-color-warning-400));
     border-color: rgb(var(--sl-color-warning-400));
     color: rgb(var(--sl-color-neutral-1000));
-    box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-focus-ring-color-warning) / 25%);
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-warning-500) / var(--sl-focus-ring-alpha));
   }
 
   .button.button--warning:active:not(.button--disabled) {
@@ -213,7 +213,7 @@ export default css`
     background-color: rgb(var(--sl-color-danger-400));
     border-color: rgb(var(--sl-color-danger-400));
     color: rgb(var(--sl-color-neutral-1000));
-    box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-focus-ring-color-danger) / 25%);
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-danger-500) / var(--sl-focus-ring-alpha));
   }
 
   .button.button--danger:active:not(.button--disabled) {
@@ -242,7 +242,7 @@ export default css`
     background-color: transparent;
     border-color: transparent;
     color: rgb(var(--sl-color-primary-400));
-    box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-focus-ring-color-primary) / 25%);
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-primary-500) / var(--sl-focus-ring-alpha));
   }
 
   .button--text:active:not(.button--disabled) {
