@@ -19,7 +19,7 @@ import '../icon/icon';
 export default class SlIconButton extends LitElement {
   static styles = styles;
 
-  @query('button') button: HTMLButtonElement|HTMLLinkElement;
+  @query('button') button: HTMLButtonElement | HTMLLinkElement;
 
   /** The name of the icon to draw. */
   @property() name: string;
@@ -70,36 +70,38 @@ export default class SlIconButton extends LitElement {
       ></sl-icon>
     `;
 
-    return isLink ? html`
-    <a
-      ref=${(el: HTMLLinkElement) => (this.button = el)}
-      part="base"
-      class="icon-button"
-      href=${ifDefined(this.href)}
-      target=${ifDefined(this.target)}
-      download=${ifDefined(this.download)}
-      rel=${ifDefined(this.target ? 'noreferrer noopener' : undefined)}
-      role="button"
-      aria-disabled=${this.disabled ? 'true' : 'false'}
-      aria-label="${this.label}"
-      tabindex=${this.disabled ? '-1' : '0'}
-    >
-      ${interior}
-    </a>
-    ` : html`
-      <button
-        part="base"
-        class=${classMap({
-          'icon-button': true,
-          'icon-button--disabled': this.disabled
-        })}
-        ?disabled=${this.disabled}
-        type="button"
-        aria-label=${this.label}
-      >
-        ${interior}
-      </button>
-    `;
+    return isLink
+      ? html`
+          <a
+            ref=${(el: HTMLLinkElement) => (this.button = el)}
+            part="base"
+            class="icon-button"
+            href=${ifDefined(this.href)}
+            target=${ifDefined(this.target)}
+            download=${ifDefined(this.download)}
+            rel=${ifDefined(this.target ? 'noreferrer noopener' : undefined)}
+            role="button"
+            aria-disabled=${this.disabled ? 'true' : 'false'}
+            aria-label="${this.label}"
+            tabindex=${this.disabled ? '-1' : '0'}
+          >
+            ${interior}
+          </a>
+        `
+      : html`
+          <button
+            part="base"
+            class=${classMap({
+              'icon-button': true,
+              'icon-button--disabled': this.disabled
+            })}
+            ?disabled=${this.disabled}
+            type="button"
+            aria-label=${this.label}
+          >
+            ${interior}
+          </button>
+        `;
   }
 }
 
