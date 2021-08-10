@@ -97,12 +97,12 @@ export default class SlSwitch extends LitElement {
     if (this.input) {
       this.input.checked = this.checked;
       this.invalid = !this.input.checkValidity();
-      emit(this, 'sl-change');
     }
   }
 
   handleClick() {
     this.checked = !this.checked;
+    emit(this, 'sl-change');
   }
 
   @watch('disabled')
