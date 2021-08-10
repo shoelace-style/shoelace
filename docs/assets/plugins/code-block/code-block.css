@@ -99,14 +99,15 @@
   background: rgb(var(--sl-color-neutral-1000));
   font: inherit;
   font-size: 0.875rem;
+  text-transform: uppercase;
   color: rgb(var(--sl-color-neutral-600));
-  padding: 0 0.5rem;
+  padding: 0 1rem;
   cursor: pointer;
   transition: none;
 }
 
 .code-block__button--codepen {
-  width: 5rem;
+  width: 6rem;
 }
 
 .code-block__button:first-of-type {
