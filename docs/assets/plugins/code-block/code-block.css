@@ -147,7 +147,6 @@
 
 .code-block__toggle {
   position: relative;
-  z-index: 1;
   display: flex;
   flex: 1 1 auto;
   align-items: center;
