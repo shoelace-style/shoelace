@@ -104,7 +104,6 @@
   color: rgb(var(--sl-color-neutral-600));
   padding: 0 1rem;
   cursor: pointer;
-  transition: none;
 }
 
 .code-block__button:not(:last-of-type) {
@@ -154,7 +153,6 @@
   width: 100%;
   color: rgb(var(--sl-color-neutral-600));
   cursor: pointer;
-  transition: 250ms background-color;
   -webkit-appearance: none;
 }
 
