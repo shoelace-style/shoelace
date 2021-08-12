@@ -202,10 +202,12 @@
   // Show pulse when copying
   document.addEventListener('click', event => {
     const button = event.target.closest('.docsify-copy-code-button');
-
     if (button) {
       button.classList.remove('copied');
-      requestAnimationFrame(() => button.classList.add('copied'));
+      requestAnimationFrame(() => {
+        button.addEventListener('animationend', () => button.classList.remove('copied'), { once: true });
+        button.classList.add('copied');
+      });
     }
   });
 })();

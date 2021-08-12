@@ -179,7 +179,7 @@
 }
 
 .markdown-section .docsify-copy-code-button.copied {
-  animation: pulse 1s;
+  animation: pulse 0.75s;
   --pulse-color: rgb(var(--sl-color-neutral-500));
 }
 
