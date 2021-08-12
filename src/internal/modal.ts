@@ -26,7 +26,7 @@ export default class Modal {
 
   isActive() {
     // The "active" modal is always the most recent one shown
-    return activeModals[activeModals.length - 1] === this.element;
+    return activeModals.length>0&&activeModals[activeModals.length - 1] === this.element;
   }
 
   handleFocusIn(event: Event) {

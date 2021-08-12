@@ -49,6 +49,9 @@ export default class SlButton extends LitElement {
   /** Draws the button with a caret for use with dropdowns, popovers, etc. */
   @property({ type: Boolean, reflect: true }) caret = false;
 
+   /** default ripple animate enabled , false remove ripple animate */
+   @property({ type: Boolean, reflect: true }) rippleed = true;
+
   /** Disables the button. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
@@ -187,7 +190,7 @@ export default class SlButton extends LitElement {
         @blur=${this.handleBlur}
         @focus=${this.handleFocus}
         @click=${this.handleClick}
-      ><sl-ripple part="ripple" ?disabled=${this.disabled||this.type=='text'}></sl-ripple>
+      ><sl-ripple part="ripple" ?disabled=${this.disabled||this.type=='text'||!this.rippleed }></sl-ripple>
         ${interior}
       </button>
     `;
@@ -228,7 +231,7 @@ export default class SlButton extends LitElement {
         @blur=${this.handleBlur}
         @focus=${this.handleFocus}
         @click=${this.handleClick}
-      ><sl-ripple part="ripple" ?disabled=${this.disabled||this.type=='text'}></sl-ripple>
+      ><sl-ripple part="ripple" ?disabled=${this.disabled||this.type=='text'||!this.rippleed}></sl-ripple>
         ${interior}
         
       </a>

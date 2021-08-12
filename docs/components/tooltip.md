@@ -168,8 +168,14 @@ To override it globally, set it in a root block in your stylesheet after the Sho
 Use the `content` slot to create tooltips with HTML content.
 
 ```html preview
-<sl-tooltip>
-  <div slot="content">I'm not <strong>just</strong> a tooltip, I'm a <em>tooltip</em> with HTML!</div>
+<sl-tooltip placement='right-start'>
+  <div slot="content">
+      <div style='width:300px;height:300px;white-space:wrap;'>
+      I'm not <strong>just</strong> a tooltip, I'm a <em>tooltip</em> with HTML!
+      I'm not <strong>just</strong> a tooltip, I'm a <em>tooltip</em> with HTML!
+      I'm not <strong>just</strong> a tooltip, I'm a <em>tooltip</em> with HTML!
+      I'm not <strong>just</strong> a tooltip, I'm a <em>tooltip</em> with HTML!</div>
+  </div>
   <sl-button>Hover me</sl-button>
 </sl-tooltip>
 ```
