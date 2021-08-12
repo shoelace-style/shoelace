@@ -5,6 +5,10 @@
   z-index: 100;
 }
 
+.theme-picker:not(:defined) {
+  display: none;
+}
+
 @media screen and (max-width: 768px) {
   .theme-picker {
     top: 0.5rem;
