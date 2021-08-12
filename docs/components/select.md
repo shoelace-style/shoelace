@@ -188,4 +188,27 @@ Add descriptive help text to a select with the `help-text` attribute. For help t
 </sl-select>
 ```
 
+### Prefix and Suffix
+
+Use the `prefix` or `suffix` slot to add a prefix or suffix to the selected value
+
+```html preview
+<sl-select>
+  <span slot="prefix">Expirience Level</span>
+  <sl-menu-item value="option-1">Novice</sl-menu-item>
+  <sl-menu-item value="option-2">Intermediate</sl-menu-item>
+  <sl-menu-item value="option-3">Advanced</sl-menu-item>
+</sl-select>
+
+<br>
+
+<sl-select>
+  <span slot="prefix">Velocity</span>
+  <sl-menu-item value="option-1">50</sl-menu-item>
+  <sl-menu-item value="option-2">80</sl-menu-item>
+  <sl-menu-item value="option-3">100</sl-menu-item>
+  <span slot="suffix">(Miles per hour)</sl-icon>
+</sl-select>
+```
+
 [component-metadata:sl-select]
