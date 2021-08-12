@@ -12,7 +12,7 @@ Dropdowns are designed to work well with [menus](/components/menu) to provide a 
 <sl-dropdown>
   <sl-button slot="trigger" caret>Dropdown</sl-button>
   <sl-menu>
-    <sl-menu-item>Dropdown Item 1</sl-menu-item>
+    <sl-menu-item id="subItem" >Dropdown Item 1</sl-menu-item>
     <sl-menu-item>Dropdown Item 2</sl-menu-item>
     <sl-menu-item>Dropdown Item 3</sl-menu-item>
     <sl-menu-divider></sl-menu-divider>
@@ -49,10 +49,11 @@ Dropdowns are designed to work well with [menus](/components/menu) to provide a 
          <sl-dropdown id="placementDrop" distance="12" .placement=${position} >
           <sl-button slot="trigger" caret>${position}</sl-button>
           <div style='padding:5px 0; '>
-            <sl-menu id="menu-item" style='width:150px'  @sl-select=${ async(ev)=>{
+            <sl-menu id="menu-item" style='width:250px'  @sl-select=${ async(ev)=>{
               window.lastPostion=ev.detail.item.textContent;
               await document.querySelector('#placementDrop').hide();
               LitRender(renderMenu(window.lastPostion),document.querySelector('#dropDown'));
+                await document.querySelector('#placementDrop').show();
             }}>
                 ${result}
             </sl-menu>

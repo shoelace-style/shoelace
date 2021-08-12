@@ -7,11 +7,26 @@ Tooltips display additional information based on a specific action.
 A tooltip's target is its _first child element_, so you should only wrap one element inside of the tooltip. If you need the tooltip to show up for multiple elements, nest them inside a container first.
 
 Tooltips use `display: contents` so they won't interfere with how elements are positioned in a flex or grid layout.
+Tooltips use `type` attribute to set the tooltips's default style.
 
 ```html preview
-<sl-tooltip content="This is a tooltip">
-  <sl-button>Hover Me</sl-button>
-</sl-tooltip>
+<sl-button-group>
+  <sl-tooltip content="This is a default tooltip" >
+    <sl-button>default</sl-button>
+  </sl-tooltip>
+  <sl-tooltip content="This is a primary tooltip" type='primary'>
+    <sl-button>primary</sl-button>
+  </sl-tooltip>
+  <sl-tooltip content="This is a primary tooltip" type='success'>
+    <sl-button>success</sl-button>
+  </sl-tooltip>
+  <sl-tooltip content="This is a danger tooltip" type='danger'>
+    <sl-button>danger</sl-button>
+  </sl-tooltip>
+  <sl-tooltip content="This is a tooltip2" type='error'>
+    <sl-button>error</sl-button>
+  </sl-tooltip>
+</sl-button-group>
 ```
 
 ## Examples
@@ -169,7 +184,7 @@ Use the `content` slot to create tooltips with HTML content.
 
 ```html preview
 <sl-tooltip placement='right-start'>
-  <div slot="content">
+  <div slot="content" style='color: rgb(var(--sl-color-primary-500))'>
       <div style='width:300px;height:300px;white-space:wrap;'>
       I'm not <strong>just</strong> a tooltip, I'm a <em>tooltip</em> with HTML!
       I'm not <strong>just</strong> a tooltip, I'm a <em>tooltip</em> with HTML!

@@ -29,6 +29,26 @@ export default css`
     color: rgb(var(--sl-tooltip-color));
     padding: var(--sl-tooltip-padding);
   }
+  :host([type=primary]) {
+    --sl-tooltip-background-color:var(--sl-color-primary-500);
+    --sl-tooltip-color: var(--sl-color-neutral-1000);
+  }
+
+  :host([type=success]) {
+    --sl-tooltip-background-color:var(--sl-color-success-500);
+    --sl-tooltip-color: var(--sl-color-neutral-1000);
+  }
+
+  :host([type=warning]) {
+    --sl-tooltip-background-color:var(--sl-color-warning-500);
+    --sl-tooltip-color: var(--sl-color-neutral-1000);
+  }
+  :host([type=danger]) {
+    --sl-tooltip-background-color:var(--sl-color-danger-500);
+    --sl-tooltip-color: var(--sl-color-neutral-1000);
+  }
+
+  
 
   .tooltip:after {
     content: '';

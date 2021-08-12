@@ -23,7 +23,9 @@ let id = 0;
  * @event sl-after-hide - Emitted after the tooltip has hidden and all transitions are complete. *
  *
  * @csspart base - The component's base wrapper.
- *
+ * 
+ * @cssproperty --sl-tooltip-background-color - The background color of  tooltip ,like: 87 83 78
+ * @cssproperty --sl-tooltip-color - The font color of  tooltip ,like: 87 83 78
  * @cssproperty --max-width - The maximum width of the tooltip.
  * @cssproperty --hide-delay - The amount of time to wait before hiding the tooltip when hovering.
  * @cssproperty --show-delay - The amount of time to wait before showing the tooltip when hovering.
@@ -63,6 +65,17 @@ export default class SlTooltip extends LitElement {
     | 'left'
     | 'left-start'
     | 'left-end' = 'top';
+
+  /**
+   *  tooltip theme type .
+   */
+   @property({attribute:true,reflect:true}) type:
+   | 'default'
+   | 'primary'
+   | 'success'
+   | 'warning'
+   | 'danger'
+   = 'default';
 
   /** Disables the tooltip so it won't show when triggered. */
   @property({ type: Boolean, reflect: true }) disabled = false;
