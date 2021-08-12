@@ -6,7 +6,7 @@ import type SlTooltip from './tooltip';
 
 describe('<sl-tooltip>', () => {
   it('should be visible with the open attribute', async () => {
-    const el = await fixture(html`
+    const el = await fixture<SlTooltip>(html`
       <sl-tooltip content="This is a tooltip" open>
         <sl-button>Hover Me</sl-button>
       </sl-tooltip>
@@ -17,7 +17,7 @@ describe('<sl-tooltip>', () => {
   });
 
   it('should not be visible without the open attribute', async () => {
-    const el = await fixture(html`
+    const el = await fixture<SlTooltip>(html`
       <sl-tooltip content="This is a tooltip">
         <sl-button>Hover Me</sl-button>
       </sl-tooltip>
@@ -28,11 +28,11 @@ describe('<sl-tooltip>', () => {
   });
 
   it('should emit sl-show and sl-after-show when calling show()', async () => {
-    const el = (await fixture(html`
+    const el = await fixture<SlTooltip>(html`
       <sl-tooltip content="This is a tooltip">
         <sl-button>Hover Me</sl-button>
       </sl-tooltip>
-    `)) as SlTooltip;
+    `);
     const base = el.shadowRoot?.querySelector('[part="base"]') as HTMLElement;
     const showHandler = sinon.spy();
     const afterShowHandler = sinon.spy();
@@ -50,11 +50,11 @@ describe('<sl-tooltip>', () => {
   });
 
   it('should emit sl-hide and sl-after-hide when calling hide()', async () => {
-    const el = (await fixture(html`
+    const el = await fixture<SlTooltip>(html`
       <sl-tooltip content="This is a tooltip" open>
         <sl-button>Hover Me</sl-button>
       </sl-tooltip>
-    `)) as SlTooltip;
+    `);
     const base = el.shadowRoot?.querySelector('[part="base"]') as HTMLElement;
     const hideHandler = sinon.spy();
     const afterHideHandler = sinon.spy();
@@ -72,11 +72,11 @@ describe('<sl-tooltip>', () => {
   });
 
   it('should emit sl-show and sl-after-show when setting open = true', async () => {
-    const el = (await fixture(html`
+    const el = await fixture<SlTooltip>(html`
       <sl-tooltip content="This is a tooltip">
         <sl-button>Hover Me</sl-button>
       </sl-tooltip>
-    `)) as SlTooltip;
+    `);
     const base = el.shadowRoot?.querySelector('[part="base"]') as HTMLElement;
     const showHandler = sinon.spy();
     const afterShowHandler = sinon.spy();
@@ -94,11 +94,11 @@ describe('<sl-tooltip>', () => {
   });
 
   it('should emit sl-hide and sl-after-hide when setting open = false', async () => {
-    const el = (await fixture(html`
+    const el = await fixture<SlTooltip>(html`
       <sl-tooltip content="This is a tooltip" open>
         <sl-button>Hover Me</sl-button>
       </sl-tooltip>
-    `)) as SlTooltip;
+    `);
     const base = el.shadowRoot?.querySelector('[part="base"]') as HTMLElement;
     const hideHandler = sinon.spy();
     const afterHideHandler = sinon.spy();

@@ -9,7 +9,7 @@ export default css`
   }
 
   .details {
-    border: solid 1px var(--sl-color-gray-200);
+    border: solid 1px rgb(var(--sl-color-neutral-200));
     border-radius: var(--sl-border-radius-medium);
     overflow-anchor: none;
   }
@@ -32,7 +32,7 @@ export default css`
   }
 
   .focus-visible .details__header:focus {
-    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-primary-500) / var(--sl-focus-ring-alpha));
   }
 
   .details--disabled .details__header {

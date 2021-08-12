@@ -145,10 +145,10 @@ Fortunately, there's a package called [@shoelace-style/react](https://www.npmjs.
 npm install @shoelace-style/react
 ```
 
-Include the base theme and any components you want to use in your app.
+Include the default theme and any components you want to use in your app.
 
 ```jsx
-import '@shoelace-style/shoelace/dist/themes/base.css';
+import '@shoelace-style/shoelace/dist/themes/light.css';
 
 import SlButton from '@shoelace-style/react/dist/button';
 

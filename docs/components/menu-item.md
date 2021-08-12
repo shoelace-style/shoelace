@@ -6,7 +6,7 @@ Menu items provide options for the user to pick from in a menu.
 
 ```html preview
 <sl-menu
-  style="max-width: 200px;display:inline-block; border: solid 1px var(--sl-panel-border-color); border-radius: var(--sl-border-radius-medium);"
+  style="max-width: 200px;display:inline-block; border: solid 1px rgb(var(--sl-panel-border-color)); border-radius: var(--sl-border-radius-medium);"
 >
   <sl-menu-item>Option 1</sl-menu-item>
   <sl-menu-item>Option 2</sl-menu-item>

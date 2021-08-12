@@ -37,7 +37,7 @@ Icon buttons are designed to have a uniform appearance, so their color is not in
   .icon-button-color sl-icon-button::part(base) {
     color: #b00091;
   }
-  
+
   .icon-button-color sl-icon-button::part(base):hover,
   .icon-button-color sl-icon-button::part(base):focus {
     color: #c913aa;
@@ -47,6 +47,14 @@ Icon buttons are designed to have a uniform appearance, so their color is not in
     color: #960077;
   }
 </style>
+```
+
+### Link Buttons
+
+Use the `href` attribute to convert the button to a link.
+
+```html preview
+<sl-icon-button name="gear" label="Settings" href="https://example.com" target="_blank"></sl-icon-button>
 ```
 
 ### Icon Button with Tooltip

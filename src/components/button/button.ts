@@ -5,7 +5,7 @@ import { ifDefined } from 'lit-html/directives/if-defined';
 import { emit } from '../../internal/event';
 import { hasSlot } from '../../internal/slot';
 import styles from './button.styles';
-import   '../ripple/ripple';
+
 import '../spinner/spinner';
 
 /**
@@ -21,8 +21,8 @@ import '../spinner/spinner';
  * @slot prefix - Used to prepend an icon or similar element to the button.
  * @slot suffix - Used to append an icon or similar element to the button.
  *
- * @csspart ripple - The component's ripple wrapper.
- * @csspart base - The component's base wrapper:button or Link.
+*  @csspart ripple - The component's ripple wrapper.
+ * @csspart base - The component's base wrapper.
  * @csspart prefix - The prefix container.
  * @csspart label - The button's label.
  * @csspart suffix - The suffix container.
@@ -40,7 +40,7 @@ export default class SlButton extends LitElement {
   @state() private hasSuffix = false;
 
   /** The button's type. */
-  @property({ reflect: true }) type: 'default' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text' =
+  @property({ reflect: true }) type: 'default' | 'primary' | 'success' | 'neutral' | 'warning' | 'danger' | 'text' =
     'default';
 
   /** The button's size. */
@@ -49,10 +49,8 @@ export default class SlButton extends LitElement {
   /** Draws the button with a caret for use with dropdowns, popovers, etc. */
   @property({ type: Boolean, reflect: true }) caret = false;
 
-   /** default ripple animate enabled , false remove ripple animate */
-   @property({ type: Boolean, reflect: true }) rippleed = true;
-
-  /** Disables the button. */
+ /** default ripple animate enabled , false remove ripple animate */
+   @property({ type: Boolean, reflect: true }) rippleed = true;  /** Disables the button. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Draws the button in a loading state. */
@@ -157,87 +155,84 @@ export default class SlButton extends LitElement {
       ${this.loading ? html`<sl-spinner></sl-spinner>` : ''}
     `;
 
-      
-    const button = html`
-      <button
-        part="base"
-        class=${classMap({
-          button: true,
-          'button--default': this.type === 'default',
-          'button--primary': this.type === 'primary',
-          'button--success': this.type === 'success',
-          'button--info': this.type === 'info',
-          'button--warning': this.type === 'warning',
-          'button--danger': this.type === 'danger',
-          'button--text': this.type === 'text',
-          'button--small': this.size === 'small',
-          'button--medium': this.size === 'medium',
-          'button--large': this.size === 'large',
-          'button--caret': this.caret,
-          'button--circle': this.circle,
-          'button--disabled': this.disabled,
-          'button--focused': this.hasFocus,
-          'button--loading': this.loading,
-          'button--pill': this.pill,
-          'button--has-label': this.hasLabel,
-          'button--has-prefix': this.hasPrefix,
-          'button--has-suffix': this.hasSuffix
-        })}
-        ?disabled=${this.disabled}
-        type=${this.submit ? 'submit' : 'button'}
-        name=${ifDefined(this.name)}
-        value=${ifDefined(this.value)}
-        @blur=${this.handleBlur}
-        @focus=${this.handleFocus}
-        @click=${this.handleClick}
-      ><sl-ripple part="ripple" ?disabled=${this.disabled||this.type=='text'||!this.rippleed }></sl-ripple>
-        ${interior}
-      </button>
-    `;
-
-    const link = html`
-      <a
-        ref=${(el: HTMLLinkElement) => (this.button = el)}
-        part="base"
-        class=${classMap({
-          button: true,
-          'button--default': this.type === 'default',
-          'button--primary': this.type === 'primary',
-          'button--success': this.type === 'success',
-          'button--info': this.type === 'info',
-          'button--warning': this.type === 'warning',
-          'button--danger': this.type === 'danger',
-          'button--text': this.type === 'text',
-          'button--small': this.size === 'small',
-          'button--medium': this.size === 'medium',
-          'button--large': this.size === 'large',
-          'button--caret': this.caret,
-          'button--circle': this.circle,
-          'button--disabled': this.disabled,
-          'button--focused': this.hasFocus,
-          'button--loading': this.loading,
-          'button--pill': this.pill,
-          'button--has-label': this.hasLabel,
-          'button--has-prefix': this.hasPrefix,
-          'button--has-suffix': this.hasSuffix
-        })}
-        href=${ifDefined(this.href)}
-        target=${ifDefined(this.target)}
-        download=${ifDefined(this.download)}
-        rel=${ifDefined(this.target ? 'noreferrer noopener' : undefined)}
-        role="button"
-        aria-disabled=${this.disabled ? 'true' : 'false'}
-        tabindex=${this.disabled ? '-1' : '0'}
-        @blur=${this.handleBlur}
-        @focus=${this.handleFocus}
-        @click=${this.handleClick}
-      ><sl-ripple part="ripple" ?disabled=${this.disabled||this.type=='text'||!this.rippleed}></sl-ripple>
-        ${interior}
-        
-      </a>
-    `;
-
-    return isLink ? link : button;
+    return isLink
+      ? html`
+          <a
+            ref=${(el: HTMLLinkElement) => (this.button = el)}
+            part="base"
+            class=${classMap({
+              button: true,
+              'button--default': this.type === 'default',
+              'button--primary': this.type === 'primary',
+              'button--success': this.type === 'success',
+              'button--neutral': this.type === 'neutral',
+              'button--warning': this.type === 'warning',
+              'button--danger': this.type === 'danger',
+              'button--text': this.type === 'text',
+              'button--small': this.size === 'small',
+              'button--medium': this.size === 'medium',
+              'button--large': this.size === 'large',
+              'button--caret': this.caret,
+              'button--circle': this.circle,
+              'button--disabled': this.disabled,
+              'button--focused': this.hasFocus,
+              'button--loading': this.loading,
+              'button--pill': this.pill,
+              'button--has-label': this.hasLabel,
+              'button--has-prefix': this.hasPrefix,
+              'button--has-suffix': this.hasSuffix
+            })}
+            href=${ifDefined(this.href)}
+            target=${ifDefined(this.target)}
+            download=${ifDefined(this.download)}
+            rel=${ifDefined(this.target ? 'noreferrer noopener' : undefined)}
+            role="button"
+            aria-disabled=${this.disabled ? 'true' : 'false'}
+            tabindex=${this.disabled ? '-1' : '0'}
+            @blur=${this.handleBlur}
+            @focus=${this.handleFocus}
+            @click=${this.handleClick}
+          >	<sl-ripple part="ripple" ?disabled=${this.disabled||this.type=='text'||!this.rippleed }></sl-ripple>
+            ${interior}
+          </a>
+        `
+      : html`
+          <button
+            part="base"
+            class=${classMap({
+              button: true,
+              'button--default': this.type === 'default',
+              'button--primary': this.type === 'primary',
+              'button--success': this.type === 'success',
+              'button--neutral': this.type === 'neutral',
+              'button--warning': this.type === 'warning',
+              'button--danger': this.type === 'danger',
+              'button--text': this.type === 'text',
+              'button--small': this.size === 'small',
+              'button--medium': this.size === 'medium',
+              'button--large': this.size === 'large',
+              'button--caret': this.caret,
+              'button--circle': this.circle,
+              'button--disabled': this.disabled,
+              'button--focused': this.hasFocus,
+              'button--loading': this.loading,
+              'button--pill': this.pill,
+              'button--has-label': this.hasLabel,
+              'button--has-prefix': this.hasPrefix,
+              'button--has-suffix': this.hasSuffix
+            })}
+            ?disabled=${this.disabled}
+            type=${this.submit ? 'submit' : 'button'}
+            name=${ifDefined(this.name)}
+            value=${ifDefined(this.value)}
+            @blur=${this.handleBlur}
+            @focus=${this.handleFocus}
+            @click=${this.handleClick}
+          >
+            <sl-ripple part="ripple" ?disabled=${this.disabled||this.type=='text'||!this.rippleed }></sl-ripple>
+			${interior}
+          </button>
+        `;
   }
 }
 

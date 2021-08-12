@@ -6,31 +6,32 @@ Shoelace components can be customized at a high level through design tokens. Thi
 
 Shoelace makes use of several design tokens to provide a consistent appearance across components. You can customize them and use them in your own application with pure CSS — no preprocessor required.
 
-Design tokens offer a high-level way to customize the library with minimal effort. There are no component-specific variables, however, as design tokens are intended to be generic and highly reusable. To customize an individual component, refer to the section entitled [Component parts](#component-parts).
+Design tokens offer a high-level way to customize the library with minimal effort. There are no component-specific variables, however, as design tokens are intended to be generic and highly reusable. To customize an individual component, refer to the section entitled [Component Parts](#component-parts).
 
-Design tokens are CSS custom properties ("CSS variables") that are defined in the `:root` block of `themes/base.css`. This stylesheet is imported when you install Shoelace, so design tokens are available on your page at that point. Because design tokens are global, they're always prefixed with `--sl` to avoid collisions with other libraries.
+Design tokens are accessed through CSS custom properties that are defined in your theme. Because design tokens live at the page level, they're prefixed with `--sl-` to avoid collisions with other libraries.
 
-To customize a design token, simply override it in your stylesheet using a `:root` block.
+To customize a design token, simply override it in your stylesheet using a `:root` block. Here's an example that changes the primary theme to purple based on existing [color primitives](/tokens/color#primitives).
 
 ```css
 :root {
-  /* Changes the primary color palette to purple */
-  --sl-color-primary-50: #faf5ff;
-  --sl-color-primary-100: #f3e8ff;
-  --sl-color-primary-200: #e9d5ff;
-  --sl-color-primary-300: #d8b4fe;
-  --sl-color-primary-400: #c084fc;
-  --sl-color-primary-500: #a855f7;
-  --sl-color-primary-600: #9333ea;
-  --sl-color-primary-700: #7e22ce;
-  --sl-color-primary-800: #6b21a8;
-  --sl-color-primary-900: #581c87;
+  /* Changes the primary theme color to purple using primitives */
+  --sl-color-primary-50: var(--sl-color-purple-50);
+  --sl-color-primary-100: var(--sl-color-purple-100);
+  --sl-color-primary-200: var(--sl-color-purple-200);
+  --sl-color-primary-300: var(--sl-color-purple-300);
+  --sl-color-primary-400: var(--sl-color-purple-400);
+  --sl-color-primary-500: var(--sl-color-purple-500);
+  --sl-color-primary-600: var(--sl-color-purple-600);
+  --sl-color-primary-700: var(--sl-color-purple-700);
+  --sl-color-primary-800: var(--sl-color-purple-800);
+  --sl-color-primary-900: var(--sl-color-purple-900);
+  --sl-color-primary-950: var(--sl-color-purple-950);
 }
 ```
 
-Many design tokens are described further along in this documentation. For a complete list, refer to `themes/base.css` in the project's [source code](https://github.com/shoelace-style/shoelace/blob/current/src/styles/shoelace.css).
+Many design tokens are described further along in this documentation. For a complete list, refer to `src/themes/light.styles.ts` in the project's [source code](https://github.com/shoelace-style/shoelace/blob/current/src/themes/base.styles.ts).
 
-!> **Never modify variables directly in `themes/base.css`** because your changes will be overwritten when you upgrade the library. Even if you don't plan on upgrading, it's always better to override design tokens in your own stylesheet for better maintainability.
+!> **Never modify variables directly in `src/themes/light.styles.ts`** because your changes will be overwritten when you upgrade Shoelace. Even if you don't plan on upgrading, it's always better to override design tokens in your own stylesheet for better maintainability.
 
 ## Component Parts
 
