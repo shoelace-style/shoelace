@@ -63,7 +63,8 @@ export default css`
 
   .select__prefix {
     display: inline-flex;
-    color: rgb(var(--sl-input-help-text-color));
+    align-items: center;
+    color: rgb(var(--sl-input-placeholder-color));
   }
 
   .select__label {
@@ -91,7 +92,8 @@ export default css`
 
   .select__suffix {
     display: inline-flex;
-    color: rgb(var(--sl-input-help-text-color));
+    align-items: center;
+    color: rgb(var(--sl-input-placeholder-color));
   }
 
   .select__icon {
