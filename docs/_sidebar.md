@@ -50,6 +50,7 @@
   - [Textarea](/components/textarea)
   - [Tooltip](/components/tooltip)
   - [Ripple](/components/ripple)
+  - [Org Tree](/components/org-tree)
   <!--plop:component-->
 
 - Utilities

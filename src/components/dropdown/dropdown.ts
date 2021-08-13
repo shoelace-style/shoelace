@@ -208,8 +208,7 @@ export default class SlDropdown extends LitElement {
     }
   }
 
-  
-  @watchProps(['distance','hoist','placement','skidding'])
+  @watchProps(['distance', 'hoist', 'placement', 'skidding'])
   handlePopoverOptionsChange() {
     if (this.popover) {
       this.popover.setOptions({

@@ -5,7 +5,9 @@
 Checkboxes allow the user to toggle an option on or off.
 
 ```html preview
-<sl-checkbox>Checkbox</sl-checkbox>
+<sl-checkbox name='checkbox' checked value='1'>Checkbox o1</sl-checkbox>
+<sl-checkbox name='checkbox' value='2'>Checkbox o2</sl-checkbox>
+<sl-checkbox name='checkbox' value='3'>Checkbox o3 </sl-checkbox>
 ```
 
 ?> This component doesn't work with standard forms. Use [`<sl-form>`](/components/form) instead.

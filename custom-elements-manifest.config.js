@@ -1,5 +1,5 @@
 import fs from 'fs';
-import commentParser from 'comment-parser';
+import * as commentParser from 'comment-parser';
 
 const packageData = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
 const { name, description, version, author, homepage, license } = packageData;

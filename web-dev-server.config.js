@@ -4,8 +4,8 @@ export default {
   open: true,
   watch: true,
   devServer:{
-	   contentBase: path.join(__dirname, 'docs'),
-  }
+	   contentBase: path.join(__dirname, 'docs')
+  },
   appIndex: '/index.html',
   nodeResolve: {
     exportConditions: ['development'],

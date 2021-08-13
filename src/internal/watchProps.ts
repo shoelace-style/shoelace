@@ -15,23 +15,23 @@
 interface WatchOptions {
   waitUntilFirstUpdate?: boolean;
 }
-const containsAny=(changedProps:Map<string,any>, propName:string[])=>{
-  for(let propIN of propName){
-    if(changedProps.has(propIN)){
+const containsAny = (changedProps: Map<string, any>, propName: string[]) => {
+  for (let propIN of propName) {
+    if (changedProps.has(propIN)) {
       return true;
     }
   }
   return false;
-}
+};
 export function watchProps(propName: string[], options?: WatchOptions) {
   return (protoOrDescriptor: any, name: string): any => {
     const { update } = protoOrDescriptor;
     options = Object.assign({ waitUntilFirstUpdate: false }, options) as WatchOptions;
     protoOrDescriptor.update = function (changedProps: Map<string, any>) {
-      if (containsAny(changedProps,propName)) {
-          if (!options?.waitUntilFirstUpdate || this.hasUpdated) {
-            this[name]();
-          }
+      if (containsAny(changedProps, propName)) {
+        if (!options?.waitUntilFirstUpdate || this.hasUpdated) {
+          this[name]();
+        }
       }
       update.call(this, changedProps);
     };

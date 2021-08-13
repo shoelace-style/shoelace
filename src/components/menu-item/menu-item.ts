@@ -1,7 +1,6 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
-import { watch } from '../../internal/watch';
 import styles from './menu-item.styles';
 
 import '../icon/icon';
@@ -42,42 +41,39 @@ export default class SlMenuItem extends LitElement {
     this.setAttribute('role', 'menuitem');
   }
 
-  @watchProps(['checked','disabled'])
+  @watchProps(['checked', 'disabled'])
   handleCheckedChange() {
     this.setAttribute('aria-checked', String(this.checked));
     this.setAttribute('aria-disabled', String(this.disabled));
   }
 
-  
-
   render() {
     return html`
-    <sl-ripple class='ripple-wrap' ?disabled=${this.disabled}>
-      <div
-        part="base"
-        class=${classMap({
-          'menu-item': true,
-          'menu-item--checked': this.checked,
-          'menu-item--disabled': this.disabled
-        })}
-      >
-      
-        <span part="checked-icon" class="menu-item__check">
-          <sl-icon name="check" library="system" aria-hidden="true"></sl-icon>
-        </span>
+      <sl-ripple class="ripple-wrap" ?disabled=${this.disabled}>
+        <div
+          part="base"
+          class=${classMap({
+            'menu-item': true,
+            'menu-item--checked': this.checked,
+            'menu-item--disabled': this.disabled
+          })}
+        >
+          <span part="checked-icon" class="menu-item__check">
+            <sl-icon name="check" library="system" aria-hidden="true"></sl-icon>
+          </span>
 
-        <span part="prefix" class="menu-item__prefix">
-          <slot name="prefix"></slot>
-        </span>
+          <span part="prefix" class="menu-item__prefix">
+            <slot name="prefix"></slot>
+          </span>
 
-        <span part="label" class="menu-item__label">
-          <slot></slot>
-        </span>
+          <span part="label" class="menu-item__label">
+            <slot></slot>
+          </span>
 
-        <span part="suffix" class="menu-item__suffix">
-          <slot name="suffix"></slot>
-        </span>
-      </div>
+          <span part="suffix" class="menu-item__suffix">
+            <slot name="suffix"></slot>
+          </span>
+        </div>
       </sl-ripple>
     `;
   }

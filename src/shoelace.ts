@@ -1,4 +1,4 @@
-import {html,render} from 'lit';
+import { html, render } from 'lit';
 // Components
 export { default as SlAlert } from './components/alert/alert';
 export { default as SlAnimation } from './components/animation/animation';
@@ -47,6 +47,7 @@ export { default as SlTag } from './components/tag/tag';
 export { default as SlTextarea } from './components/textarea/textarea';
 export { default as SlTooltip } from './components/tooltip/tooltip';
 export { default as SlRipple } from './components/ripple/ripple';
+export { default as SlOrgTree } from './components/org-tree/org-tree';
 /* plop:component */
 
 // Utilities
@@ -54,6 +55,5 @@ export * from './utilities/animation';
 export * from './utilities/base-path';
 export * from './utilities/icon-library';
 
-
-(globalThis as any).html=html;
-(globalThis as any).LitRender=render;
+(globalThis as any).html = html;
+(globalThis as any).LitRender = render;

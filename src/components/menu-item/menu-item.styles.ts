@@ -6,8 +6,8 @@ export default css`
   :host {
     display: block;
   }
-  .ripple-wrap{
-      display: block;
+  .ripple-wrap {
+    display: block;
   }
   .menu-item {
     position: relative;

@@ -21,7 +21,7 @@ import '../spinner/spinner';
  * @slot prefix - Used to prepend an icon or similar element to the button.
  * @slot suffix - Used to append an icon or similar element to the button.
  *
-*  @csspart ripple - The component's ripple wrapper.
+ *  @csspart ripple - The component's ripple wrapper.
  * @csspart base - The component's base wrapper.
  * @csspart prefix - The prefix container.
  * @csspart label - The button's label.
@@ -49,8 +49,8 @@ export default class SlButton extends LitElement {
   /** Draws the button with a caret for use with dropdowns, popovers, etc. */
   @property({ type: Boolean, reflect: true }) caret = false;
 
- /** default ripple animate enabled , false remove ripple animate */
-   @property({ type: Boolean, reflect: true }) rippleed = true;  /** Disables the button. */
+  /** default ripple animate enabled , false remove ripple animate */
+  @property({ type: Boolean, reflect: true }) rippleed = true; /** Disables the button. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Draws the button in a loading state. */
@@ -192,7 +192,8 @@ export default class SlButton extends LitElement {
             @blur=${this.handleBlur}
             @focus=${this.handleFocus}
             @click=${this.handleClick}
-          >	<sl-ripple part="ripple" ?disabled=${this.disabled||this.type=='text'||!this.rippleed }></sl-ripple>
+          >
+            <sl-ripple part="ripple" ?disabled=${this.disabled || this.type == 'text' || !this.rippleed}></sl-ripple>
             ${interior}
           </a>
         `
@@ -229,8 +230,8 @@ export default class SlButton extends LitElement {
             @focus=${this.handleFocus}
             @click=${this.handleClick}
           >
-            <sl-ripple part="ripple" ?disabled=${this.disabled||this.type=='text'||!this.rippleed }></sl-ripple>
-			${interior}
+            <sl-ripple part="ripple" ?disabled=${this.disabled || this.type == 'text' || !this.rippleed}></sl-ripple>
+            ${interior}
           </button>
         `;
   }

@@ -1,62 +1,90 @@
 /**
  * 获取原始 相对于window top,left 值
- * @param element 
- * @returns 
+ * @param element
+ * @returns
  */
- function getOffset(element:Element){
-    if (!element.getClientRects().length) {
-        return { top: 0, left: 0 };
-    }
-    const rect = element.getBoundingClientRect();
-    const win = element.ownerDocument.defaultView;
-    return {
-        top: rect.top + (win?win.pageYOffset:0),
-        left: rect.left + (win?win.pageXOffset:0),
-    };
+function getOffset(element: Element) {
+  if (!element.getClientRects().length) {
+    return { top: 0, left: 0 };
+  }
+  const rect = element.getBoundingClientRect();
+  const win = element.ownerDocument.defaultView;
+  return {
+    top: rect.top + (win ? win.pageYOffset : 0),
+    left: rect.left + (win ? win.pageXOffset : 0)
+  };
 }
 /**
  * 获取el 的当前css 属性值
  * @param el DOM元素
- * @param cssProperty 
- * @returns 
+ * @param cssProperty
+ * @returns
  */
-function getCssValue(el:Element,cssProperty:string){
-    const win=document.defaultView?document.defaultView:window;
-    return win.getComputedStyle(el,null).getPropertyValue(cssProperty);
+function getCssValue(el: Element, cssProperty: string) {
+  const win = document.defaultView ? document.defaultView : window;
+  return win.getComputedStyle(el, null).getPropertyValue(cssProperty);
 }
 
 /**
  * 给 DOM 添加 动画class, 返回动画结束promise;
  * @param node  节点
  * @param animation 动画className
- * @param prefix 
+ * @param prefix
  * @returns  返回动画结束promise
  */
-function animateCss(node:Element,animation:string,prefix='animate_'){
-    return new Promise<string>( (resolve)=>{
-        const animationName = `${animation}`;
-        node.classList.add(`${prefix}animated`, animationName);
-        // When the animation ends, we clean the classes and resolve the Promise
-        function handleAnimationEnd(event:Event) {
-          event.stopPropagation();
-          node.classList.remove(`${prefix}animated`, animationName);
-          resolve('Animation ended');
-        } 
-        node.addEventListener('animationend', handleAnimationEnd, {once: true});
-    })
-}
-
-function addEvent(node:Element|Window|Document|DocumentFragment,eventType:string, hanlder:EventListenerObject|EventListener){
-    node.addEventListener(eventType,hanlder);
-    return {
-        dispose:function(){
-            node.removeEventListener(eventType,hanlder)
-        }
+function animateCss(node: Element, animation: string, prefix = 'animate_') {
+  return new Promise<string>(resolve => {
+    const animationName = `${animation}`;
+    node.classList.add(`${prefix}animated`, animationName);
+    // When the animation ends, we clean the classes and resolve the Promise
+    function handleAnimationEnd(event: Event) {
+      event.stopPropagation();
+      node.classList.remove(`${prefix}animated`, animationName);
+      resolve('Animation ended');
     }
+    node.addEventListener('animationend', handleAnimationEnd, { once: true });
+  });
+}
+/**
+ * 给node添加事件
+ * @param node
+ * @param eventType
+ * @param hanlder
+ * @returns  返回一个object ,能够删除node监听
+ */
+function addEvent(
+  node: Element | Window | Document | DocumentFragment,
+  eventType: string,
+  hanlder: EventListenerObject | EventListener
+) {
+  node.addEventListener(eventType, hanlder);
+  return {
+    dispose: function () {
+      node.removeEventListener(eventType, hanlder);
+    }
+  };
 }
 
+/**
+ * node clone 复制（现在因为大量的webcomponent 组件，复制的时候 ，自定义属性是不会复制的，所以导致复制的组件，跟原始组件展示不一样）
+ * @param node
+ * @param deepClone 是否深度clone, 如果undefined 则深度复制
+ */
+function cloneUtils(node: Element, deepClone: boolean = true) {
+  const cloneNode = node.cloneNode(deepClone) as Element;
 
-
-export {
-    getOffset,getCssValue, animateCss,addEvent
+  const iteratorNode = (old: Element, newNode: Element) => {
+    if (deepClone) {
+      const old_children = old.children;
+      if (old_children) {
+        const new_children = newNode.children;
+        for (let i = 0, j = old_children.length; i < j; i++) {
+          iteratorNode(old_children[i], new_children[i]);
+        }
+      }
+    }
+  };
+  iteratorNode(node, cloneNode);
+  return cloneNode;
 }
+export { getOffset, getCssValue, animateCss, addEvent, cloneUtils };
