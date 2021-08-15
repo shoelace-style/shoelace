@@ -72,12 +72,12 @@ function addEvent(
   node: Element | Window | Document | DocumentFragment,
   eventType: string,
   hanlder: EventListenerObject | EventListener,
-  useCapture:boolean=false
+  useCapture: boolean = false
 ) {
-  node.addEventListener(eventType, hanlder,useCapture);
+  node.addEventListener(eventType, hanlder, useCapture);
   return {
     dispose: function () {
-      node.removeEventListener(eventType, hanlder,useCapture);
+      node.removeEventListener(eventType, hanlder, useCapture);
     }
   };
 }
@@ -106,36 +106,36 @@ function cloneUtils(node: Element, deepClone: boolean = true) {
 }
 /**
  * 获取所有直接节点
- * @param node 
+ * @param node
  * @param cssSelector 子节点类型
- * @returns 
+ * @returns
  */
-function getChildrenElement(node:Element,cssSelector:string){
-  return  Array.from(node.children).filter( item =>{
-     return item&&item.matches(cssSelector);
-   })
+function getChildrenElement(node: Element, cssSelector: string) {
+  return Array.from(node.children).filter(item => {
+    return item && item.matches(cssSelector);
+  });
 }
 /**
- * 模拟jquery closest 
- * @param el 
- * @param selector 
- * @returns 
+ * 模拟jquery closest
+ * @param el
+ * @param selector
+ * @returns
  */
-const closest=(el:Node,selector:string):Element|null =>{
-  let node:any=el;
-  if(node.nodeType==Node.TEXT_NODE){
-     node=node.parentNode;
+const closest = (el: Node, selector: string): Element | null => {
+  let node: any = el;
+  if (node.nodeType == Node.TEXT_NODE) {
+    node = node.parentNode;
   }
-  while(node!=null&&node.nodeType==Node.ELEMENT_NODE){
-    if(node.matches(selector)){
+  while (node != null && node.nodeType == Node.ELEMENT_NODE) {
+    if (node.matches(selector)) {
       return node;
-    }else if(node.parentElement==null){
+    } else if (node.parentElement == null) {
       return null;
     }
-    node=node.parentNode;
+    node = node.parentNode;
   }
   return null;
-}
+};
 
 /**
  * 模拟jquery on 事件
@@ -145,21 +145,37 @@ const closest=(el:Node,selector:string):Element|null =>{
  * @param callBack  回调
  * @param userCapture 是否捕获
  * @param context 回调上下文，如果为空，则this 为事件监听的实际节点
- * @returns 
+ * @returns
  */
-function onEvent(node:Element,selector:string,type:string,callBack:EventListener,userCapture=false,context:unknown){
-  const listener=function(e:Event){
-    const target=e.target as Node;
-    const delegateTarget=closest(target,selector);
-    (e as any).delegateTarget=delegateTarget;
-    if(delegateTarget){
-       callBack.call(context||delegateTarget,e);
+function onEvent(
+  node: Element,
+  selector: string,
+  type: string,
+  callBack: EventListener,
+  userCapture = false,
+  context: unknown
+) {
+  const listener = function (e: Event) {
+    const target = e.target as Node;
+    const delegateTarget = closest(target, selector);
+    (e as any).delegateTarget = delegateTarget;
+    if (delegateTarget) {
+      callBack.call(context || delegateTarget, e);
     }
+  };
+  if (type == 'mouseenter' || type == 'mouseleave') {
+    userCapture = true;
   }
-  if(type=='mouseenter'||type=='mouseleave'){
-     userCapture=true;
-  }
-  return addEvent(node,type,listener,userCapture);
+  return addEvent(node, type, listener, userCapture);
 }
-export { getOffset, getCssValue, animateCss,animateToogleCss, addEvent, cloneUtils, getChildrenElement,closest,onEvent };
-
+export {
+  getOffset,
+  getCssValue,
+  animateCss,
+  animateToogleCss,
+  addEvent,
+  cloneUtils,
+  getChildrenElement,
+  closest,
+  onEvent
+};

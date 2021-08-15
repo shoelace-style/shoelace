@@ -17,7 +17,7 @@ import styles from './step.styles';
  *
  * @csspart step-container - The component's base wrapper.
  * @csspart step-content - The component's step content wrapper.
-* @csspart step-icon - The component's step title wrapper.
+ * @csspart step-icon - The component's step title wrapper.
  * @csspart step-title - The component's step title wrapper.
  * @csspart step-description - The component's step description wrapper.
  *
@@ -31,7 +31,7 @@ export default class SlStep extends LitElement {
   /**
    * 图标
    */
-  @property({ type: String, reflect: true }) icon: string ;
+  @property({ type: String, reflect: true }) icon: string;
   /**
    * 描述
    */
@@ -50,38 +50,44 @@ export default class SlStep extends LitElement {
   isCurrentStep() {
     const steps = this.parentSteps;
     if (steps) {
-        return steps.childStep.indexOf(this) === steps.current;
+      return steps.childStep.indexOf(this) === steps.current;
     }
     return false;
-}
+  }
 
-isFinished() {
+  isFinished() {
     const steps = this.parentSteps;
     if (steps) {
-        return steps.childStep.indexOf(this) < steps.current;
+      return steps.childStep.indexOf(this) < steps.current;
     }
     return false;
-}
+  }
 
-get parentSteps():SlSteps {
+  get parentSteps(): SlSteps {
     return this.closest('sl-steps') as SlSteps;
-}
-render() {
-    return html` <div part='step-container'>
-        <div class='tail'></div>
-                <div part='step-icon'>
-                    <span class='step-icon-span' part='step-icon-span'>
-                        <slot name="step-icon"> ${this.icon ? html`<sl-icon library='system' name='${this.icon}'></sl-icon>` : html`<span>${this.index}</span>`}</slot>
-                    </span>
-                </div>
-              <div part='step-content'>
-                  <div part='step-title'>
-                      <slot name="step-title">${this.title}</slot>
-                  </div>
-                    <div part='step-description'><slot name='step-description'>${this.description}</slot></div>
-              </div>
-              <slot></slot>
-    </div> `;
+  }
+  render() {
+    return html`
+      <div part="step-container">
+        <div class="tail"></div>
+        <div part="step-icon">
+          <span class="step-icon-span" part="step-icon-span">
+            <slot name="step-icon">
+              ${this.icon
+                ? html`<sl-icon library="system" name="${this.icon}"></sl-icon>`
+                : html`<span>${this.index}</span>`}</slot
+            >
+          </span>
+        </div>
+        <div part="step-content">
+          <div part="step-title">
+            <slot name="step-title">${this.title}</slot>
+          </div>
+          <div part="step-description"><slot name="step-description">${this.description}</slot></div>
+        </div>
+        <slot></slot>
+      </div>
+    `;
   }
 }
 

@@ -19,47 +19,47 @@ export default class SlCollapse extends LitElement {
   static styles = styles;
   @property({ type: Boolean, reflect: true }) multi = false;
   render() {
-    return html`<div part='base'><slot id='slot'></slot></div> `;
+    return html`<div part="base"><slot id="slot"></slot></div> `;
   }
   get childTabPanel() {
-    return getChildrenElement(this,'sl-ac-panel') as Array<SlAcPanel>;
+    return getChildrenElement(this, 'sl-ac-panel') as Array<SlAcPanel>;
   }
   /**
    * 根据key 查找 子sl-ac-panel
-   * @param key 
-   * @returns 
+   * @param key
+   * @returns
    */
-  findTab(key: string): SlAcPanel|undefined {
-      return this.childTabPanel.find((item) => {
-          return item.key == key;
-      });
+  findTab(key: string): SlAcPanel | undefined {
+    return this.childTabPanel.find(item => {
+      return item.key == key;
+    });
   }
   /**
-   * 获取 在父节点中的 index 
-   * @param tab 
-   * @returns 
+   * 获取 在父节点中的 index
+   * @param tab
+   * @returns
    */
   getTabIndex(tab: SlAcPanel) {
-      const children = this.childTabPanel;
-      return children.indexOf(tab);
+    const children = this.childTabPanel;
+    return children.indexOf(tab);
   }
-  findTabByIndex(index: number): SlAcPanel|null {
-      const children = this.childTabPanel;
-      return index < children.length ? children[index] : null;
+  findTabByIndex(index: number): SlAcPanel | null {
+    const children = this.childTabPanel;
+    return index < children.length ? children[index] : null;
   }
   public get activeTab() {
-      return this.childTabPanel.filter((item) => {
-          return item.active;
-      });
+    return this.childTabPanel.filter(item => {
+      return item.active;
+    });
   }
   public setTabToActive(tab: SlAcPanel, active = false) {
-      if (active && !this.multi) {
-          const tabs = this.activeTab;
-          tabs.forEach((item) => {
-              item.active = false;
-          });
-      }
-      tab.active = active;
+    if (active && !this.multi) {
+      const tabs = this.activeTab;
+      tabs.forEach(item => {
+        item.active = false;
+      });
+    }
+    tab.active = active;
   }
 }
 
