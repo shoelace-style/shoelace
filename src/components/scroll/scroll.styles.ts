@@ -1,7 +1,8 @@
 import { css } from 'lit';
 import componentStyles from '../../styles/component.styles';
-import styleLitcss from './org.litcss.style';
+import styleObject from './scroll.litcss.style';
+
 export default css`
   ${componentStyles}
-  ${styleLitcss}
+  ${styleObject}
 `;

@@ -51,6 +51,10 @@
   - [Tooltip](/components/tooltip)
   - [Ripple](/components/ripple)
   - [Org Tree](/components/org-tree)
+  - [Steps](/components/steps)
+  - [Scroll](/components/scroll)
+  - [Ac Panel](/components/ac-panel)
+  - [Collapse](/components/collapse)
   <!--plop:component-->
 
 - Utilities

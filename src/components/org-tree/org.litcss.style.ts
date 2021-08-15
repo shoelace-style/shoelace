@@ -1,7 +1,6 @@
 import { css } from 'lit';
 export default css`
   :host {
-    display: block;
     display: flex;
   }
   :host([center]) .org-tree-container {

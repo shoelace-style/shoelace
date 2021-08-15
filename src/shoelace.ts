@@ -48,6 +48,12 @@ export { default as SlTextarea } from './components/textarea/textarea';
 export { default as SlTooltip } from './components/tooltip/tooltip';
 export { default as SlRipple } from './components/ripple/ripple';
 export { default as SlOrgTree } from './components/org-tree/org-tree';
+export { default as SlOrgNode } from './components/org-node/org-node';
+export { default as SlSteps } from './components/steps/steps';
+export { default as SlStep } from './components/step/step';
+export { default as SlScroll } from './components/scroll/scroll';
+export { default as SlAcPanel } from './components/ac-panel/ac-panel';
+export { default as SlCollapse } from './components/collapse/collapse';
 /* plop:component */
 
 // Utilities

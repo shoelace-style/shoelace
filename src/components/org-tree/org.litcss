@@ -1,6 +1,6 @@
 :host {
-  display: block;
   display: flex;
+  box-sizing: border-box;
 }
 :host([center]) .org-tree-container {
   margin: 0 auto;
