@@ -70,8 +70,8 @@ export function shimKeyframesHeightAuto(keyframes: Keyframe[], calculatedHeight:
 }
 
 /**
- * 显示动画 
- * 
+ * 显示动画
+ *
  *  await animateTo(this.contentElement,shimKeyframesHeightAuto(this.active ?animate_show:animate_hide,this.active?currentHeight:oldHeight), {
  *   duration: duration,
  *   easing: 'ease'
@@ -85,9 +85,6 @@ export const animate_show = [
  * 隐藏动画
  */
 export const animate_hide = [
-  { opacity: '1', height: 'auto'},
-  { opacity: '0', height: 0,padding:0}
+  { opacity: '1', height: 'auto' },
+  { opacity: '0', height: 0, padding: 0 }
 ];
-
-
-

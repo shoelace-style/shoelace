@@ -15,7 +15,7 @@ const duration = 120;
  *
  * @slot - The content slot.
  * @slot header-extra - header-extra slot ,use for header right icon
- * @slot trigger-icon - slot used  before title 
+ * @slot trigger-icon - slot used  before title
  * @slot header - header title slot
  *
  * @csspart base - The component's base wrapper.
@@ -36,11 +36,13 @@ export default class SlAcPanel extends LitElement {
   @property({ type: String, reflect: true }) header: string;
   renderHeader() {
     return html`<header class="ac-tab-header" part="header" @click=${this._clickHeader}>
-      <slot name='trigger-icon'><sl-icon
-        library="system"
-        exportparts="base:trigger-icon"
-        name="${this.active ? 'chevron-down' : 'chevron-right'}"
-      ></sl-icon></slot>
+      <slot name="trigger-icon"
+        ><sl-icon
+          library="system"
+          exportparts="base:trigger-icon"
+          name="${this.active ? 'chevron-down' : 'chevron-right'}"
+        ></sl-icon
+      ></slot>
       <slot name="header"> <span part="header-span">${this.header}&nbsp;</span></slot>
       <slot name="header-extra"></slot>
     </header>`;
@@ -64,12 +66,16 @@ export default class SlAcPanel extends LitElement {
       if (!event.defaultPrevented) {
         panel.setTabToActive(tab, !tab.active);
         await panel.updateComplete;
-        this.contentElement.style.display='block';
-        const currentHeight=parseInt(getCssValue(this.contentElement,'height'));
-        await animateTo(this.contentElement,shimKeyframesHeightAuto(this.active ?animate_show:animate_hide,currentHeight), {
-          duration: duration,
-          easing: 'ease'
-        })
+        this.contentElement.style.display = 'block';
+        const currentHeight = parseInt(getCssValue(this.contentElement, 'height'));
+        await animateTo(
+          this.contentElement,
+          shimKeyframesHeightAuto(this.active ? animate_show : animate_hide, currentHeight),
+          {
+            duration: duration,
+            easing: 'ease'
+          }
+        );
         this.contentElement.style.removeProperty('display');
         emit(panel, 'tab-change', {
           detail: {

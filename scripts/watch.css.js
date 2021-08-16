@@ -55,21 +55,18 @@ const writeCssToFile = filePath => {
     }
   }, 100);
 };
-[dir,dir2].forEach((dir)=>{
-    const cssFiles = getCssFiles(dir);
-    cssFiles.forEach(filePath => {
-      if (!isFileExisted(filePath + '.style.ts')) {
-        writeCssToFile(filePath);
-      }
-    });
-})
-
-
-
+[dir, dir2].forEach(dir => {
+  const cssFiles = getCssFiles(dir);
+  cssFiles.forEach(filePath => {
+    if (!isFileExisted(filePath + '.style.ts')) {
+      writeCssToFile(filePath);
+    }
+  });
+});
 
 // One-liner for current directory
 chokidar
-  .watch([dir,dir2], {
+  .watch([dir, dir2], {
     ignored: /\.[tj]s$/
   })
   .on('change', path => {
