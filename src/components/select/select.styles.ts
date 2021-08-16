@@ -61,6 +61,12 @@ export default css`
     pointer-events: none;
   }
 
+  .select__prefix {
+    display: inline-flex;
+    align-items: center;
+    color: rgb(var(--sl-input-placeholder-color));
+  }
+
   .select__label {
     flex: 1 1 auto;
     display: flex;
@@ -82,6 +88,12 @@ export default css`
 
   .select__clear {
     flex: 0 0 auto;
+  }
+
+  .select__suffix {
+    display: inline-flex;
+    align-items: center;
+    color: rgb(var(--sl-input-placeholder-color));
   }
 
   .select__icon {
@@ -136,11 +148,19 @@ export default css`
     min-height: var(--sl-input-height-small);
   }
 
+  .select--small .select__prefix ::slotted(*) {
+    margin-left: var(--sl-input-spacing-small);
+  }
+
   .select--small .select__label {
     margin: 0 var(--sl-input-spacing-small);
   }
 
   .select--small .select__clear {
+    margin-right: var(--sl-input-spacing-small);
+  }
+
+  .select--small .select__suffix ::slotted(*) {
     margin-right: var(--sl-input-spacing-small);
   }
 
@@ -171,11 +191,19 @@ export default css`
     min-height: var(--sl-input-height-medium);
   }
 
+  .select--medium .select__prefix ::slotted(*) {
+    margin-left: var(--sl-input-spacing-medium);
+  }
+
   .select--medium .select__label {
     margin: 0 var(--sl-input-spacing-medium);
   }
 
   .select--medium .select__clear {
+    margin-right: var(--sl-input-spacing-medium);
+  }
+
+  .select--medium .select__suffix ::slotted(*) {
     margin-right: var(--sl-input-spacing-medium);
   }
 
@@ -206,11 +234,19 @@ export default css`
     min-height: var(--sl-input-height-large);
   }
 
+  .select--large .select__prefix ::slotted(*) {
+    margin-left: var(--sl-input-spacing-large);
+  }
+
   .select--large .select__label {
     margin: 0 var(--sl-input-spacing-large);
   }
 
   .select--large .select__clear {
+    margin-right: var(--sl-input-spacing-large);
+  }
+
+  .select--large .select__suffix ::slotted(*) {
     margin-right: var(--sl-input-spacing-large);
   }
 
