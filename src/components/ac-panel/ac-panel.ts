@@ -4,16 +4,10 @@ import '../icon/icon';
 import { emit } from '../../internal/event';
 import styles from './ac-panel.styles';
 import SlCollapse from '../collapse/collapse';
-import { animateTo } from '../../internal/animate';
-const fadeIn = [
-  { opacity: '0', scale: 0 },
-  { opacity: '1', scale: 1 }
-];
-const fadeOut = [
-  { opacity: '1', scale: 1 },
-  { opacity: '0', scale: 0 }
-];
-const duration = 160;
+import { animateTo, animate_hide, animate_show, shimKeyframesHeightAuto } from '../../internal/animate';
+import { getCssValue } from '../../utilities/common';
+
+const duration = 120;
 /**
  * @since 2.0
  * @status experimental
@@ -21,6 +15,7 @@ const duration = 160;
  *
  * @slot - The content slot.
  * @slot header-extra - header-extra slot ,use for header right icon
+ * @slot trigger-icon - slot used  before title 
  * @slot header - header title slot
  *
  * @csspart base - The component's base wrapper.
@@ -41,16 +36,21 @@ export default class SlAcPanel extends LitElement {
   @property({ type: String, reflect: true }) header: string;
   renderHeader() {
     return html`<header class="ac-tab-header" part="header" @click=${this._clickHeader}>
-      <sl-icon
+      <slot name='trigger-icon'><sl-icon
         library="system"
         exportparts="base:trigger-icon"
         name="${this.active ? 'chevron-down' : 'chevron-right'}"
-      ></sl-icon>
+      ></sl-icon></slot>
       <slot name="header"> <span part="header-span">${this.header}&nbsp;</span></slot>
       <slot name="header-extra"></slot>
     </header>`;
   }
-
+  render() {
+    return html`<div part="base">
+      ${this.renderHeader()}
+      <div part="content" class="${!this.active ? 'close' : ''}"><slot></slot></div>
+    </div>`;
+  }
   get collapsePane(): SlCollapse | null {
     return this.closest('sl-collapse');
   }
@@ -58,15 +58,19 @@ export default class SlAcPanel extends LitElement {
     const tab = this;
     const panel = this.collapsePane;
     if (panel) {
-      let event = emit(panel, 'sl-before-tab-change', {
+      const event = emit(panel, 'sl-before-tab-change', {
         cancelable: true
       });
       if (!event.defaultPrevented) {
-        await animateTo(this.contentElement, this.active ? fadeOut : fadeIn, {
-          duration: duration,
-          easing: this.active ? 'ease-out' : 'ease-in'
-        });
         panel.setTabToActive(tab, !tab.active);
+        await panel.updateComplete;
+        this.contentElement.style.display='block';
+        const currentHeight=parseInt(getCssValue(this.contentElement,'height'));
+        await animateTo(this.contentElement,shimKeyframesHeightAuto(this.active ?animate_show:animate_hide,currentHeight), {
+          duration: duration,
+          easing: 'ease'
+        })
+        this.contentElement.style.removeProperty('display');
         emit(panel, 'tab-change', {
           detail: {
             tab: tab
@@ -77,12 +81,6 @@ export default class SlAcPanel extends LitElement {
   }
   get contentElement(): HTMLElement {
     return this.renderRoot.querySelector('div[part=content]') as HTMLElement;
-  }
-  render() {
-    return html`<div part="base">
-      ${this.renderHeader()}
-      <div part="content" class="${!this.active ? 'close' : ''}"><slot></slot></div>
-    </div>`;
   }
 }
 

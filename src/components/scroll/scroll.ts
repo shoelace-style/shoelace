@@ -19,11 +19,12 @@ type overflowType = '' | 'hidden';
  *
  * @dependency
  *
- * @event {scrollLeft:number,scrollTop:number,value:number} sl-scroll-y - Emitted when scroll y bar .
- * @event {scrollLeft:number,scrollTop:number,value:number} sl-scroll-x - Emitted when scroll x bar .
- * @event {scrollLeft:number,scrollTop:number} sl-scroll-y-end - Emitted when scroll y bar to end .
- * @event {scrollLeft:number,scrollTop:number} sl-scroll-x-end - Emitted when scroll x bar to end .
- * @event {scrollLeft:number,scrollTop:number} sl-scroll-change - Emitted when scroll  bar change .
+ * @event {{scrollLeft:number,scrollTop:number,value:number}} sl-scroll-y - Emitted when scroll y bar .
+ * @event {{scrollLeft:number,scrollTop:number,value:number}} sl-scroll-x - Emitted when scroll x bar .
+ * @event {{scrollLeft:number,scrollTop:number}} sl-scroll-y-end - Emitted when scroll y bar to end .
+ * @event {{scrollLeft:number,scrollTop:number}} sl-scroll-x-end - Emitted when scroll x bar to end .
+ * @event {{scrollLeft:number,scrollTop:number}} sl-scroll-change - Emitted when scroll  bar change .
+ * @event resize  Emitted when component size  change
  *
  * @slot - The default slot.
  *

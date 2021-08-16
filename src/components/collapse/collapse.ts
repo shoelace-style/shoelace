@@ -7,7 +7,7 @@ import styles from './collapse.styles';
 /**
  * @since 2.0
  * @status experimental
- * @dependency
+ * @dependency sl-icon 
  * @event {{tab:SlAcPanel}} sl-before-tab-change - Emitted before a panel active change.
  * @event {{tab:SlAcPanel}} sl-tab-change - Emitted when a panel active changed.
  * @slot - The default slot.

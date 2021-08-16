@@ -53,8 +53,9 @@
   - [Org Tree](/components/org-tree)
   - [Steps](/components/steps)
   - [Scroll](/components/scroll)
-  - [Ac Panel](/components/ac-panel)
   - [Collapse](/components/collapse)
+  - [Tree](/components/tree)
+  - [Tree Node](/components/tree-node)
   <!--plop:component-->
 
 - Utilities

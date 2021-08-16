@@ -5,6 +5,7 @@ const matchReg = /\.litcss$/;
 const cache = new Map();
 const __dirname = path.resolve();
 const dir = path.resolve(__dirname, 'src/components');
+const dir2 = path.resolve(__dirname, 'src/styles');
 var join = path.join;
 import uglifycss from 'uglifycss';
 import sass from 'node-sass';
@@ -54,17 +55,21 @@ const writeCssToFile = filePath => {
     }
   }, 100);
 };
+[dir,dir2].forEach((dir)=>{
+    const cssFiles = getCssFiles(dir);
+    cssFiles.forEach(filePath => {
+      if (!isFileExisted(filePath + '.style.ts')) {
+        writeCssToFile(filePath);
+      }
+    });
+})
 
-const cssFiles = getCssFiles(dir);
-cssFiles.forEach(filePath => {
-  if (!isFileExisted(filePath + '.style.ts')) {
-    writeCssToFile(filePath);
-  }
-});
+
+
 
 // One-liner for current directory
 chokidar
-  .watch(dir, {
+  .watch([dir,dir2], {
     ignored: /\.[tj]s$/
   })
   .on('change', path => {

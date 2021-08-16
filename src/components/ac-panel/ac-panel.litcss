@@ -2,7 +2,7 @@
   display:block;
   --ac-tab-active-background-color:rgb(var(--sl-primary-color-100));
   --ac-header-color:rgba(0,0,0,.65);
-  --ac-header-font-size:1.4em;
+  --ac-header-font-size:1.2em;
   --ac-header-padding:.3em 0.6em;
   --ac-content-padding:.3em 0.6em;
 }
@@ -19,8 +19,8 @@
   cursor:pointer;
   display:flex;
   align-items:center;
-  >sl-icon{
-    margin-right: .4em;
+  sl-icon{
+    margin-right: var(--ac-panel-icon-margin-right,4px);
   }
 }
 

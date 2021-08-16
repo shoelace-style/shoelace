@@ -42,6 +42,11 @@ module.exports = function (plop) {
       },
       {
         type: 'add',
+        path: '../../src/components/{{ tagWithoutPrefix tag }}/index.style.litcss',
+        template: ``
+      },
+      {
+        type: 'add',
         path: '../../src/components/{{ tagWithoutPrefix tag }}/{{ tagWithoutPrefix tag }}.test.ts',
         templateFile: 'templates/component/tests.hbs'
       },
