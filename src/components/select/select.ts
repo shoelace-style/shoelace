@@ -32,7 +32,9 @@ let id = 0;
  * @dependency sl-tag
  *
  * @slot - The select's options in the form of menu items.
+ * @slot prefix -  The select's prefix.
  * @slot label - The select's label. Alternatively, you can use the label prop.
+ * @slot suffix - The select's suffix.
  * @slot help-text - Help text that describes how to use the select.
  *
  * @event sl-clear - Emitted when the clear button is activated.
@@ -45,7 +47,9 @@ let id = 0;
  * @csspart form-control - The form control that wraps the label, input, and help text.
  * @csspart help-text - The select's help text.
  * @csspart icon - The select's icon.
+ * @csspart prefix - The select's prefix.
  * @csspart label - The select's label.
+ * @csspart suffix - The select's suffix.
  * @csspart menu - The select menu, a <sl-menu> element.
  * @csspart tag - The multiselect option, a <sl-tag> element.
  * @csspart tags - The container in which multiselect options are rendered.
@@ -478,6 +482,10 @@ export default class SlSelect extends LitElement {
             @focus=${this.handleFocus}
             @keydown=${this.handleKeyDown}
           >
+            <span part="prefix" class="select__prefix">
+              <slot name="prefix"></slot>
+            </span>
+
             <div class="select__label">
               ${this.displayTags.length
                 ? html` <span part="tags" class="select__tags"> ${this.displayTags} </span> `
@@ -496,6 +504,10 @@ export default class SlSelect extends LitElement {
                   ></sl-icon-button>
                 `
               : ''}
+
+            <span part="suffix" class="select__suffix">
+              <slot name="suffix"></slot>
+            </span>
 
             <span part="icon" class="select__icon" aria-hidden="true">
               <sl-icon name="chevron-down" library="system"></sl-icon>
