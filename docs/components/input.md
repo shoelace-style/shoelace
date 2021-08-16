@@ -84,18 +84,18 @@ Use the `prefix` and `suffix` slots to add icons.
 
 ```html preview
 <sl-input placeholder="Small" size="small">
-  <sl-icon name="tag" slot="prefix"></sl-icon>
-  <sl-icon name="gear" slot="suffix"></sl-icon>
+  <sl-icon name="house" slot="prefix"></sl-icon>
+  <sl-icon name="chat" slot="suffix"></sl-icon>
 </sl-input>
 <br>
 <sl-input placeholder="Medium" size="medium">
-  <sl-icon name="tag" slot="prefix"></sl-icon>
-  <sl-icon name="gear" slot="suffix"></sl-icon>
+  <sl-icon name="house" slot="prefix"></sl-icon>
+  <sl-icon name="chat" slot="suffix"></sl-icon>
 </sl-input>
 <br>
 <sl-input placeholder="Large" size="large">
-  <sl-icon name="tag" slot="prefix"></sl-icon>
-  <sl-icon name="gear" slot="suffix"></sl-icon>
+  <sl-icon name="house" slot="prefix"></sl-icon>
+  <sl-icon name="chat" slot="suffix"></sl-icon>
 </sl-input>
 ```
 

@@ -188,46 +188,34 @@ Add descriptive help text to a select with the `help-text` attribute. For help t
 </sl-select>
 ```
 
-### Prefix and Suffix
+### Prefix & Suffix Icons
 
-Use the `prefix` or `suffix` slot to add a prefix or suffix to the selected value
+Use the `prefix` and `suffix` slots to add icons.
 
 ```html preview
-<sl-select label="Sort by" class="sort">
-  <sl-menu-item value="name.asc">Name (Asc)</sl-menu-item>
-  <sl-menu-item value="name.desc">Name (Desc)</sl-menu-item>
-  <sl-menu-item value="value.asc">Value (Asc)</sl-menu-item>
-  <sl-menu-item value="value.desc">Value (Desc)</sl-menu-item>
-  <sl-icon name="sort-down" slot="suffix"></sl-icon>
+<sl-select placeholder="Small" size="small">
+  <sl-icon name="house" slot="prefix"></sl-icon>
+  <sl-menu-item value="option-1">Option 1</sl-menu-item>
+  <sl-menu-item value="option-2">Option 2</sl-menu-item>
+  <sl-menu-item value="option-3">Option 3</sl-menu-item>
+  <sl-icon name="chat" slot="suffix"></sl-icon>
 </sl-select>
-
 <br>
-
-<sl-select label="Transaction Price" class="price">
-  <sl-icon name="currency-bitcoin" slot="prefix"></sl-icon>
-  <sl-menu-item value="option-1">0.02</sl-menu-item>
-  <sl-menu-item value="option-2">0.04</sl-menu-item>
-  <sl-menu-item value="option-3">0.06</sl-menu-item>
+<sl-select placeholder="Medium" size="medium">
+  <sl-icon name="house" slot="prefix"></sl-icon>
+  <sl-menu-item value="option-1">Option 1</sl-menu-item>
+  <sl-menu-item value="option-2">Option 2</sl-menu-item>
+  <sl-menu-item value="option-3">Option 3</sl-menu-item>
+  <sl-icon name="chat" slot="suffix"></sl-icon>
 </sl-select>
-
-<style>
-  sl-select.sort sl-icon {
-    font-size: 24px;
-  } 
-
-  sl-select.price sl-icon {
-    font-size: 24px;
-  }   
-</style>
-
-<script>
-  const select = document.querySelector('sl-select.sort');
-  select.addEventListener('sl-change', event => {
-    const icon = select.value.startsWith('name') ? 'sort-alpha-down' : 'sort-numeric-down';
-    const variation = select.value.endsWith('asc') ? '' : '-alt';
-    select.querySelector('sl-icon').name = `${icon}${variation}`;
-  })
-</script>
+<br>
+<sl-select placeholder="Large" size="large">
+  <sl-icon name="house" slot="prefix"></sl-icon>
+  <sl-menu-item value="option-1">Option 1</sl-menu-item>
+  <sl-menu-item value="option-2">Option 2</sl-menu-item>
+  <sl-menu-item value="option-3">Option 3</sl-menu-item>
+  <sl-icon name="chat" slot="suffix"></sl-icon>
+</sl-select>
 ```
 
 [component-metadata:sl-select]
