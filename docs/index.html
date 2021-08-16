@@ -34,7 +34,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/themes/pure.css" />
     <link rel="stylesheet" href="/assets/styles/docs.css" />
     <link rel="stylesheet" href="/assets/plugins/code-block/code-block.css" />
-    <link rel="stylesheet" href="/assets/theme-picker/theme-picker.css" />
+    <link rel="stylesheet" href="/assets/plugins/theme-picker/theme-picker.css" />
     <link rel="icon" href="/assets/images/logo.svg" type="image/x-icon" />
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/touch-icon.png" />
 
@@ -45,7 +45,12 @@
   </head>
   <body>
     <div id="app"></div>
-    <script src="/assets/theme-picker/theme-picker.js"></script>
+    <script>
+      // Set the initial theme to prevent flashing
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = localStorage.getItem('theme') || 'auto';
+      document.documentElement.classList.toggle('sl-theme-dark', theme === 'dark' || (theme === 'auto' && prefersDark));
+    </script>
     <script>
       window.$docsify = {
         alias: {
@@ -94,6 +99,7 @@
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.19.0/components/prism-jsx.min.js"></script>
     <script src="/assets/plugins/code-block/code-block.js"></script>
     <script src="/assets/plugins/scroll-position/scroll-position.js"></script>
+    <script src="/assets/plugins/theme-picker/theme-picker.js"></script>
     <script src="/assets/plugins/metadata/metadata.js"></script>
     <script src="/assets/plugins/sidebar/sidebar.js"></script>
   </body>
