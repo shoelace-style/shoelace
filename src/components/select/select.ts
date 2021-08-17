@@ -35,7 +35,6 @@ let id = 0;
  * @slot prefix - Used to prepend an icon or similar element to the select.
  * @slot suffix - Used to append an icon or similar element to the select.
  * @slot label - The select's label. Alternatively, you can use the label prop.
- * @slot suffix - The select's suffix.
  * @slot help-text - Help text that describes how to use the select.
  *
  * @event sl-clear - Emitted when the clear button is activated.
