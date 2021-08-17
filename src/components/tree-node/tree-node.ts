@@ -1,96 +1,17 @@
-import { html, LitElement, nothing, TemplateResult } from 'lit';
+
+
+import { html, LitElement, nothing } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
-import { cache } from 'lit/directives/cache.js';
-import { animateTo, shimKeyframesHeightAuto } from '../../internal/animate';
+import {cache} from 'lit/directives/cache';
+import '../../components/icon/icon';
 import { customStyle } from '../../internal/customStyle';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
-import { getCssValue } from '../../utilities/common';
-import '../../components/icon/icon';
 import SlTree from '../tree/tree';
+import { DEFAULT_TREE_NODE_RENDER, NodeRenderInterface, TreeNodeData } from './tree-node-util';
 import styles from './tree-node.styles';
 
-const animate_show = [{ height: 0 }, { height: 'auto' }];
-/**
- * 隐藏动画
- */
-const animate_hide = [{ height: 'auto' }, { height: 0 }];
-export type TreeNodeData = {
-  id?: string | number /* ID  */;
-  parentID?: string | number /** 父节点ID**/;
-  name?: string /*节点名称*/;
-  icon?: string /*节点图标 */;
-  close?: boolean /* 是否关闭 */;
-  closeable?: boolean /*false,表示节点不能折叠起来 */;
-
-  [key: string]: unknown /*自定义属性 */;
-  children?: TreeNodeData[] /*下级节点 */;
-  _parent?: TreeNodeData; //上级节点，内部使用
-};
-
-export interface NodeRenderInterface {
-  (data: TreeNodeData): TemplateResult<1>;
-}
-/* 默认树节点渲染器*/
-const defaultNodeRender: NodeRenderInterface = (data: TreeNodeData) => {
-  return html`${data == null ? '' : data.name}`;
-};
-
-/**
- * 判断数据parent 是否包含了findChild
- * @param parent: TreeNodeData
- * @param findChild: TreeNodeData
- */
-export const containsNodeData = (parent: TreeNodeData, findChild: TreeNodeData) => {
-  const iteratorFun = (temp: TreeNodeData, child: TreeNodeData) => {
-    if (temp == child) {
-      return true;
-    }
-    const children = temp.children;
-    if (children) {
-      for (let k of children) {
-        if (iteratorFun(k, child)) {
-          return true;
-        }
-      }
-    }
-    return false;
-  };
-  if (parent == findChild) {
-    return false;
-  }
-  return iteratorFun(parent, findChild);
-};
-export enum NODE_VISTOR_RESULT {
-  EXIST = 1 /**标识遍历到此节点退出 */,
-  CONTINUE = 2 /** 标识不在遍历后续的兄弟节点 */
-}
-export interface NodeVistor {
-  (node: TreeNodeData): NODE_VISTOR_RESULT | unknown;
-}
-/**
- * 遍历 TreeNodeData
- * @param data
- * @param callback
- */
-export const iteratorNodeData = (data: TreeNodeData, callback: NodeVistor) => {
-  let result = callback(data);
-  if (result == NODE_VISTOR_RESULT.EXIST) {
-    return;
-  } else {
-    const children = data.children;
-    if (children) {
-      label: for (let k of children) {
-        result = iteratorNodeData(k, callback);
-        if (result == NODE_VISTOR_RESULT.CONTINUE) {
-          continue label;
-        } else if (result == NODE_VISTOR_RESULT.EXIST) {
-          return;
-        }
-      }
-    }
-  }
-};
+let id = 0;
 
 /**
  * @since 2.0
@@ -98,37 +19,40 @@ export const iteratorNodeData = (data: TreeNodeData, callback: NodeVistor) => {
  *
  * @dependency sl-icon
  *
- * @event {{detail:TreeNodeData}} sl-node-click - Emitted when node name click.
- * @event {{detail:TreeNodeData}} sl-node-before-open - Emitted before node open .
- * @event {{detail:TreeNodeData}} sl-node-before-close - Emitted before node close .
- * @event {{detail:TreeNodeData}} sl-node-before-toogle - Emitted before node state change :open or close.
- * @event {{detail:TreeNodeData}} sl-node-close - Emitted after node state close.
- * @event {{detail:TreeNodeData}} sl-node-open - Emitted after node state opened.
- * @event {{detail:TreeNodeData}} sl-node-toogle - Emitted when node state toogle.
- * 
- *
- *
-
+ * @event {{nodeData:TreeNodeData,node:SlTreeNode}} sl-node-click - Emitted when node name click.
+ * @event {{nodeData:TreeNodeData,node:SlTreeNode}} sl-node-before-open - Emitted before node open .
+ * @event {{nodeData:TreeNodeData,node:SlTreeNode}} sl-node-before-close - Emitted before node close .
+ * @event {{nodeData:TreeNodeData,node:SlTreeNode}} sl-node-before-toogle - Emitted before node state change :open or close.
+ * @event {{nodeData:TreeNodeData,node:SlTreeNode}} sl-node-close - Emitted after node state close.
+ * @event {{nodeData:TreeNodeData,node:SlTreeNode}} sl-node-open - Emitted after node state opened.
+ * @event {{nodeData:TreeNodeData,node:SlTreeNode}} sl-node-toogle - Emitted when node state toogle.
  *
  * @csspart base - The component's base wrapper.
  * @csspart node - The component's node self wrapper.
  * @csspart children - The component's children wrapper.
  * @csspart node_toogle_icon - The component's toogle icon.
- * @csspart node_toogle_icon - The component's toogle icon.
- * @csspart node-span - The component's node render wrapper .
+ * @csspart node-icon - The node icon.
+ * @csspart node-span - The component's node text render wrapper .
  *
- * @cssproperty --example - An example CSS custom property.
+ * @cssproperty --sl-spacing-xx-small - toogle-icon's margin from text .
  */
 @customStyle()
 @customElement('sl-tree-node')
 export default class SlTreeNode extends LitElement {
   static styles = styles;
 
-  /**
-   * 节点数据源
-   */
-  @property({ type: Object })
+   /** tree-node子节点DIV */
+   @query('div[part=children]', true)
+   childTreeNodeElement: HTMLElement;
+   /** 本身node 渲染容器 */
+   @query('div[part=node]', true)
+   treeNodeElement: HTMLElement;
+
+
+  /** 节点数据源 */
+  @property({ type: Object,attribute:false })
   nodeData?: TreeNodeData;
+  private compoentID=`tree-node-${++id}`;
 
   @watch('nodeData')
   _watchOnSetNodeData() {
@@ -143,34 +67,40 @@ export default class SlTreeNode extends LitElement {
       }
     }
   }
-  /**
-   * 绑定树对象
-   */
-  @property({ type: Object })
+
+  /** 绑定树对象 */
+  @property({ type: Object ,attribute:false})
   tree?: SlTree;
 
-  /**
-   * 树节点渲染器
-   */
-  @property({ type: Object })
-  nodeRender: NodeRenderInterface = defaultNodeRender;
+  /** 树节点渲染器 */
+  @property({ type: Object,attribute:false })
+  nodeRender: NodeRenderInterface = DEFAULT_TREE_NODE_RENDER;
 
   private renderChildren() {
-    return html`${cache(
-      !this.isClose && this.nodeData?.children
-        ? this.nodeData.children.map(data => {
-            return html`<sl-tree-node
-              .nodeData=${data}
-              .nodeRender=${this.nodeRender}
-              .tree=${this.tree}
-            ></sl-tree-node>`;
-          })
-        : ''
-    )}`;
+    let levelStr=this.getAttribute('level');
+    let level=1;
+    if(levelStr){
+      level=parseInt(levelStr,10)+1;
+    }
+    return html`${cache(!this.isClose?
+      this.nodeData?.children?.map(data => {
+        return html`<sl-tree-node
+          pID=${this.compoentID}
+          .nodeData=${data}
+          .nodeRender=${this.nodeRender}
+          .tree=${this.tree}
+           level=${level+''}
+           style='--sl-node-level:${level}'
+        ></sl-tree-node>`;
+      }):''
+      )}`;
+    
   }
+  /** 获取直接孩子数量 */
   get subChildSize() {
     return this.nodeData && this.nodeData.children ? this.nodeData.children.length : 0;
   }
+  /** 是否是关闭状 */
   get isClose() {
     return this.nodeData && this.nodeData.close;
   }
@@ -180,40 +110,38 @@ export default class SlTreeNode extends LitElement {
     }
     return html`<div part="base">
       <div part="node">${this.renderNodeData()}</div>
-      <div part="children" class="${this.isClose ? 'close' : 'open'}">${this.renderChildren()}</div>
+      <div part="children" data-flip-key="${this.compoentID}" class="${this.isClose ? 'close' : 'open'}">
+        ${this.renderChildren()}
+      </div>
     </div>`;
   }
-  @query('div[part=children]', true)
-  private childTreeNodeElement: HTMLElement;
-  private async _clickTrigerHander(_event: Event) {
+  private emitEvent(eventType:string,event:Event){
+    return emit(this,eventType,{
+      detail:{
+        nodeData:this.nodeData,
+        node:((event.target as Element).getRootNode() as any).host as SlTreeNode
+      }
+    })
+  }
+ 
+
+  private async _clickTrigerHander(event: Event) {
     if (this.subChildSize > 0) {
       let isClosed = this.nodeData?.close;
-      let custEvent = emit(this, `sl-node-before-${isClosed ? 'open' : 'close'}`, {
-        detail: this.nodeData
-      });
-      let custToogleEvent = emit(this, `sl-node-before-toogle`, {
-        detail: this.nodeData
-      });
+      let custEvent = this.emitEvent(`sl-node-before-${isClosed ? 'open' : 'close'}`,event);
+      let custToogleEvent = this.emitEvent(`sl-node-before-toogle`,event);
       if (!custEvent.defaultPrevented && !custToogleEvent.defaultPrevented) {
-        this.setNodeData('close', !this.nodeData?.close);
+        // const flipping = new Flipping({
+        //    parent:this.renderRoot.querySelector('div[part=base]')as HTMLElement
+        // });
+        // this.childTreeNodeElement.style.display='block';
+        // flipping.read();
+        this.setNodeDataProperty('close', !this.nodeData?.close);
         await this.updateComplete;
-        this.childTreeNodeElement.style.display = 'block';
-        const height = parseInt(getCssValue(this.childTreeNodeElement, 'height'));
-        await animateTo(
-          this.childTreeNodeElement,
-          shimKeyframesHeightAuto(isClosed ? animate_show : animate_hide, height),
-          {
-            duration: 120,
-            easing: 'ease'
-          }
-        );
-        this.childTreeNodeElement.style.removeProperty('display');
-        emit(this, `sl-node-${isClosed ? 'open' : 'close'}`, {
-          detail: this.nodeData
-        });
-        emit(this, `sl-node-toogle`, {
-          detail: this.nodeData
-        });
+        // flipping.flip();
+        // this.childTreeNodeElement.style.removeProperty('display');
+        this.emitEvent( `sl-node-${isClosed ? 'open' : 'close'}`,event);
+        this.emitEvent( `sl-node-toogle`,event);
       }
     }
   }
@@ -241,17 +169,11 @@ export default class SlTreeNode extends LitElement {
     }
     return result;
   }
-  private _clickNodeHandler() {
-    emit(this, 'sl-node-click', {
-      detail: this.nodeData
-    });
+  private _clickNodeHandler(event:Event) {
+    this.emitEvent('sl-node-click',event);
   }
-  /**
-   * 设置节点nodeData 的属性，同时触发DOM更新
-   * @param key 属性
-   * @param value  值
-   */
-  public setNodeData(key: string, value: unknown) {
+  
+  public setNodeDataProperty(key: string, value: unknown) {
     (this.nodeData as any)[key] = value;
     this.requestUpdate();
   }

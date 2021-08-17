@@ -8,7 +8,7 @@ const dir = path.resolve(__dirname, 'src/components');
 const dir2 = path.resolve(__dirname, 'src/styles');
 var join = path.join;
 import uglifycss from 'uglifycss';
-import sass from 'node-sass';
+import sass from 'sass';
 function isFileExisted(filePath) {
   return fs.existsSync(filePath);
 }

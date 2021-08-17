@@ -1,5 +1,5 @@
 import fs from 'fs';
-import * as commentParser from 'comment-parser';
+import commentParser from 'comment-parser';
 
 const packageData = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
 const { name, description, version, author, homepage, license } = packageData;
@@ -8,7 +8,7 @@ export default {
   globs: ['src/components/**/*.ts'],
   exclude: ['**/*.test.ts'],
   plugins: [
-    // Append package data
+    // Append package dataclea
     {
       name: 'shoelace-package-data',
       packageLinkPhase({ customElementsManifest, context }) {
@@ -36,7 +36,6 @@ export default {
                 }
               });
             });
-
             const parsed = commentParser.parse(customComments + '\n */');
             parsed[0].tags?.map(t => {
               switch (t.tag) {

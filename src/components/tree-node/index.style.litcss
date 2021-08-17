@@ -19,27 +19,44 @@
     top:var(--node-icon-top,0);
     color:var(--node-icon-color,inherit );
 }
+//是否text-node 允许选中
+:host([selected]) div[part=node] {
+    cursor: pointer;
+}   
 div[part=base]{
     white-space: nowrap;
 
     div[part=node]{
         display:flex;
+        position: relative;
         align-items: center;
         margin:5px 0;
-    
+        padding-left:calc( var(--sl-node-level,0) * 0.8em);
         sl-icon[part=node-icon]{
             margin-right:var(--sl-spacing-xx-small);
         }
+        transition: background-color ease 0.3ms ;
         div[part=node-span]{
             margin-left:var(--sl-spacing-xx-small);
         }
+        &:hover,&.selected,{
+            background-color: rgb(var(--sl-color-sky-200));
+            &::before{
+                position:absolute;
+                inset:0 auto 0 0;
+                border-left:2px solid rgb( var(--sl-color-blue-500) );
+                content: '';
+            }
+        }
     }
-
-
     div[part=children]{
         display: block;
-        padding-left:var(--sl-spacing-small,0.8em);
+        opacity: 1;
+       // transform: translate(var(--sl-spacing-small,0.8em),0);
+        transition: opacity ease 0.5ms;
         &.close{
+            transition: opacity ease 0.5ms;
+            opacity: 0;
             display: none;
         }
     }

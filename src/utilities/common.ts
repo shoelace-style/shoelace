@@ -128,9 +128,9 @@ const closest = (el: Node, selector: string): Element | null => {
   }
   while (node != null && node.nodeType == Node.ELEMENT_NODE) {
     if (node.matches(selector)) {
-      return node;
+        return node;
     } else if (node.parentElement == null) {
-      return null;
+        return null;
     }
     node = node.parentNode;
   }
@@ -153,7 +153,7 @@ function onEvent(
   type: string,
   callBack: EventListener,
   userCapture = false,
-  context: unknown
+  context?: unknown
 ) {
   const listener = function (e: Event) {
     const target = e.target as Node;

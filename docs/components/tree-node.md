@@ -19,7 +19,8 @@
 }
 ```
 
-## nodeRender 接收nodeData ，返回树节点自定返回数据
+## nodeRender 
+接收nodeData ，返回树节点自定返回数据
 ```javascript
  export interface NodeRenderInterface{
   (data:TreeNodeData):TemplateResult<1>;
@@ -32,34 +33,34 @@
     let rootNode=document.querySelector('#rootNode');
     rootNode.nodeRender=(data)=>{
         const html=window.html;
-        return html`${data.value}`;
+        return html`${data.value} ${data.children&&data.children.length>0? '('+data.children.length+')':''}`;
     };
    
-    rootNode.addEventListener('sl-node-open',(event)=>{
+    rootNode.addEventListener('sl-node-toogle',(event)=>{
+        console.log(event.detail.node.nodeData);
         let openData=localStorage.getItem('tree-data');//存储所有打开的节点
         if(!openData){
             openData=[];
         }else{
             openData=JSON.parse(openData);
         }
-        openData.push(event.detail.value);
-        localStorage.setItem('tree-data',JSON.stringify(openData));
-        console.log(`${event.detail.value}`);
-    });
-    rootNode.addEventListener('sl-node-close',(event)=>{
-        let openData=localStorage.getItem('tree-data');
-        if(!openData){
-            openData=[];
+        const data=event.detail.nodeData;
+        if(data.close){//关闭
+            let index=openData.indexOf(data.value);
+            if(index>=0){
+                openData.splice(index,1);
+            }
         }else{
-            openData=JSON.parse(openData);
-        }
-        let index=openData.indexOf(event.detail.value);
-        if(index>=0){
-            openData.splice(index,1);
+            openData.push(data.value);
         }
         localStorage.setItem('tree-data',JSON.stringify(openData));
-        console.log(`${event.detail.value}`);
+        console.log(JSON.stringify(event.detail.nodeData.value));
     });
+     rootNode.addEventListener('sl-node-click',(event)=>{
+         const el=event.path[0];
+         console.trace('当前点击的tree-node',el);
+         console.log(event.detail.node.nodeData.value);
+     })
   const request = fetch('/assets/examples/tree-node-demo.json').then(response=>response.json()).then((json)=>{
     rootNode.nodeData={
         value:'中国',
