@@ -1,10 +1,10 @@
 //
 // A lightweight debounce implementation 防抖：一个事件如果不听发生，则一定时间内只发生一次
 //
-export function debounce(callback: (...arg:unknown[]) => void, delay: number) {
+export function debounce(callback: (...arg: unknown[]) => void, delay: number) {
   let timer: any;
 
-  return function (this:unknown,...args:unknown[]) {
+  return function (this: unknown, ...args: unknown[]) {
     if (timer) {
       return;
     }
