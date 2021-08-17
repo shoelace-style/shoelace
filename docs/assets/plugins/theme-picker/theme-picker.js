@@ -53,7 +53,7 @@
           <sl-menu-item value="auto">Auto</sl-menu-item>
         </sl-menu>
       `;
-      document.querySelector('.content').prepend(dropdown);
+      document.querySelector('.sidebar-toggle').insertAdjacentElement('afterend', dropdown);
 
       // Listen for selections
       const menu = dropdown.querySelector('sl-menu');
