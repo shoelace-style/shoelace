@@ -63,7 +63,6 @@ Tree 组件，Tree 最重要的是定义数据源`rootNodeData`，渲染函数 `
     let group=document.querySelectorAll('#buttonGroup sl-button');
     for(let k of group){
         k.addEventListener('click',(e)=>{
-            console.trace(e);
             treeDiv.selectMode=e.target.getAttribute('value');
         })
     }
@@ -77,7 +76,6 @@ treeDiv.nodeIDProperty='value';
         return data.value.indexOf(filterString)>=0;
     }
     treeDiv.addEventListener('sl-tree-node-toogle',(event)=>{
-        console.log(event.detail.node.nodeData);
         let openData=localStorage.getItem('tree-data');//存储所有打开的节点
         if(!openData){
             openData=[];
@@ -98,7 +96,7 @@ treeDiv.nodeIDProperty='value';
     });
      treeDiv.addEventListener('sl-tree-node-click',(event)=>{
          const el=event.path[0];
-         console.trace('当前点击的tree-node',el);
+         //console.trace('当前点击的tree-node',el);
          console.log(event.detail.node.nodeData.value);
      })
   const request = fetch('/assets/examples/tree-node-demo.json').then(response=>response.json()).then((json)=>{

@@ -118,7 +118,6 @@ export default class SlTree extends LitElement {
             let tempParent = _parentNode; //
             while (tempParent && !matchNodeSet.has(tempParent)) {
               matchNodeSet.add(tempParent);
-              console.log(tempParent.value);
               tempParent = (tempParent as any)[parentSymobl];
             }
           }
@@ -157,6 +156,11 @@ export default class SlTree extends LitElement {
       }
       this.renderRootNodeData = this.rootNodeData;
     }
+  }
+  constructor(){
+    super();
+    this.handerCheckEvent=this.handerCheckEvent.bind(this);
+    this.handerRadioEvent=this.handerRadioEvent.bind(this);
   }
   /**
    * 获取上级数据源对象
@@ -231,6 +235,7 @@ export default class SlTree extends LitElement {
       'sl-node-open',
       'sl-node-toogle'
     ];
+   
     let div = this.renderRoot.querySelector('div[part]') as HTMLElement;
     for (let eventType of eventArray) {
       onEvent(div, 'sl-tree-node', eventType, handerTreeNode);
@@ -266,7 +271,7 @@ export default class SlTree extends LitElement {
     this.inputChangeHander(inputString);
   }
   private handerCheckEvent(event: Event) {
-    debugger;
+    event.stopPropagation();
     let checked = (event.target as any).checked as boolean;
     if (!Array.isArray(this.checkedKeys)) {
       this.checkedKeys = new Array<string | number | unknown>();
@@ -284,6 +289,7 @@ export default class SlTree extends LitElement {
     });
   }
   private handerRadioEvent(event: Event) {
+    event.stopPropagation();
     let checked = (event.target as any).checked as boolean;
     if (Array.isArray(this.checkedKeys)) {
       this.checkedKeys = this.checkedKeys[0];
@@ -317,17 +323,17 @@ export default class SlTree extends LitElement {
         array.push(
           html`<sl-checkbox
             .nodeData=${node}
-            @sl-change=${this.handerCheckEvent.bind(this)}
+            @sl-change=${this.handerCheckEvent}
             class="selectCheckbox"
             .checked=${typeof node[this.nodeIDProperty] != 'undefined' &&
-            this.checkedKeys.includes(node[this.nodeIDProperty])}
+            (this.checkedKeys as any).includes(node[this.nodeIDProperty])}
           ></sl-checkbox>`
         );
       } else if (this.selectMode == 'radio') {
         array.push(
           html`<sl-radio
             .nodeData=${node}
-            @sl-change=${this.handerRadioEvent.bind(this)}
+            @sl-change=${this.handerRadioEvent}
             class="selectRadio"
             .checked=${typeof node[this.nodeIDProperty] != 'undefined' && this.checkedKeys == node[this.nodeIDProperty]}
           ></sl-radio>`
