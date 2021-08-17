@@ -357,10 +357,6 @@ strong {
   padding: 2px 4px;
 }
 
-.sl-theme-dark .markdown-section code {
-  background-color: rgb(var(--sl-color-neutral-100));
-}
-
 .markdown-section kbd {
   font-family: var(--sl-font-mono);
   font-size: 87.5%;
@@ -374,10 +370,6 @@ strong {
   position: relative;
   background-color: rgb(var(--sl-color-neutral-50));
   border-radius: var(--sl-border-radius-medium);
-}
-
-.sl-theme-dark .markdown-section pre {
-  background-color: rgb(var(--sl-color-neutral-100));
 }
 
 .markdown-section pre > code {
@@ -473,10 +465,6 @@ strong {
   background: rgb(var(--sl-color-neutral-50));
 }
 
-.sl-theme-dark .markdown-section tr:nth-child(2n) {
-  background: rgb(var(--sl-color-neutral-100));
-}
-
 .markdown-section th {
   border: none;
   font-weight: var(--sl-font-weight-semibold);
@@ -507,11 +495,6 @@ strong {
   border-left: solid 4px transparent;
   border-radius: var(--sl-border-radius-medium);
   padding-left: 1.5rem;
-}
-
-.sl-theme-dark .markdown-section p.tip,
-.sl-theme-dark .markdown-section p.warn {
-  background-color: rgb(var(--sl-color-neutral-100));
 }
 
 .markdown-section p.tip:before,
@@ -605,10 +588,6 @@ html .repo-button:hover {
   text-decoration: none;
   background-color: rgb(var(--sl-color-neutral-50));
   border: solid 1px rgb(var(--sl-color-neutral-200));
-}
-
-.sl-theme-dark .repo-button:hover {
-  background-color: rgb(var(--sl-color-neutral-100));
 }
 
 html .repo-button:focus {
