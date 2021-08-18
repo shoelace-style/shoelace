@@ -159,10 +159,6 @@ strong {
   box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-primary-500) / var(--sl-focus-ring-alpha));
 }
 
-.sidebar-toggle span {
-  background-color: rgb(var(--sl-color-primary-600));
-}
-
 .sidebar-toggle span:last-child {
   margin-bottom: 0;
 }
