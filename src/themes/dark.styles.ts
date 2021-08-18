@@ -532,6 +532,7 @@ export default css`
 
     --sl-panel-background-color: var(--sl-color-neutral-1000);
     --sl-panel-border-color: var(--sl-color-neutral-200);
+
     /*
      * Tooltip tokens
      */
