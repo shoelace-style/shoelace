@@ -26,7 +26,7 @@ export default css`
   }
 
   .tab:hover:not(.tab--disabled) {
-    color: rgb(var(--sl-color-primary-500));
+    color: rgb(var(--sl-color-primary-600));
   }
 
   .tab:focus {
@@ -34,12 +34,12 @@ export default css`
   }
 
   .tab:focus:not(.tab--disabled) {
-    color: rgb(var(--sl-color-primary-500));
+    color: rgb(var(--sl-color-primary-600));
     box-shadow: var(--focus-ring);
   }
 
   .tab.tab--active:not(.tab--disabled) {
-    color: rgb(var(--sl-color-primary-500));
+    color: rgb(var(--sl-color-primary-600));
   }
 
   .tab.tab--closable {

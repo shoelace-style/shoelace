@@ -74,40 +74,42 @@ export default css`
 
   .switch.switch--focused:not(.switch--checked):not(.switch--disabled) .switch__control .switch__thumb {
     background-color: rgb(var(--sl-color-neutral-1000));
-    border-color: rgb(var(--sl-color-primary-500));
+    border-color: rgb(var(--sl-color-primary-600));
     box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-primary-500) / var(--sl-focus-ring-alpha));
   }
 
   /* Checked */
   .switch--checked .switch__control {
-    background-color: rgb(var(--sl-color-primary-500));
-    border-color: rgb(var(--sl-color-primary-500));
+    background-color: rgb(var(--sl-color-primary-600));
+    border-color: rgb(var(--sl-color-primary-600));
   }
+
   .switch--checked .switch__control .switch__thumb {
     background-color: rgb(var(--sl-color-neutral-1000));
-    border-color: rgb(var(--sl-color-primary-500));
+    border-color: rgb(var(--sl-color-primary-600));
     transform: translateX(calc((var(--width) - var(--height)) / 2));
   }
 
   /* Checked + hover */
   .switch.switch--checked:not(.switch--disabled) .switch__control:hover {
-    background-color: rgb(var(--sl-color-primary-400));
-    border-color: rgb(var(--sl-color-primary-400));
+    background-color: rgb(var(--sl-color-primary-500));
+    border-color: rgb(var(--sl-color-primary-500));
   }
+
   .switch.switch--checked:not(.switch--disabled) .switch__control:hover .switch__thumb {
     background-color: rgb(var(--sl-color-neutral-1000));
-    border-color: rgb(var(--sl-color-primary-500));
+    border-color: rgb(var(--sl-color-primary-600));
   }
 
   /* Checked + focus */
   .switch.switch--checked:not(.switch--disabled).switch--focused .switch__control {
-    background-color: rgb(var(--sl-color-primary-400));
-    border-color: rgb(var(--sl-color-primary-400));
+    background-color: rgb(var(--sl-color-primary-500));
+    border-color: rgb(var(--sl-color-primary-500));
   }
 
   .switch.switch--checked:not(.switch--disabled).switch--focused .switch__control .switch__thumb {
     background-color: rgb(var(--sl-color-neutral-1000));
-    border-color: rgb(var(--sl-color-primary-500));
+    border-color: rgb(var(--sl-color-primary-600));
     box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-primary-500) / var(--sl-focus-ring-alpha));
   }
 

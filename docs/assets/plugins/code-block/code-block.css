@@ -39,7 +39,7 @@
   bottom: 0;
   width: 1.75rem;
   font-size: 20px;
-  color: rgb(var(--sl-color-neutral-500));
+  color: rgb(var(--sl-color-neutral-600));
   background-color: rgb(var(--sl-color-neutral-1000));
   border-left: solid 1px rgb(var(--sl-color-neutral-200));
   border-top-right-radius: 3px;
@@ -125,7 +125,7 @@
   box-shadow: 0 0 0 1px rgb(var(--sl-color-primary-400));
   border-right-color: transparent;
   background-color: rgb(var(--sl-color-primary-50));
-  color: rgb(var(--sl-color-primary-600));
+  color: rgb(var(--sl-color-primary-700));
   z-index: 1;
 }
 
@@ -178,7 +178,7 @@
 
 .markdown-section .docsify-copy-code-button.copied {
   animation: pulse 0.75s;
-  --pulse-color: rgb(var(--sl-color-neutral-500));
+  --pulse-color: rgb(var(--sl-color-neutral-600));
 }
 
 @keyframes pulse {

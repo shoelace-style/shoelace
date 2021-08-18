@@ -496,7 +496,7 @@ export default css`
     --sl-input-icon-color: var(--sl-color-neutral-400);
     --sl-input-icon-color-hover: var(--sl-color-neutral-600);
     --sl-input-icon-color-focus: var(--sl-color-neutral-600);
-    --sl-input-placeholder-color: var(--sl-color-neutral-400);
+    --sl-input-placeholder-color: var(--sl-color-neutral-500);
     --sl-input-placeholder-color-disabled: var(--sl-color-neutral-600);
     --sl-input-spacing-small: var(--sl-spacing-small);
     --sl-input-spacing-medium: var(--sl-spacing-medium);
@@ -538,7 +538,7 @@ export default css`
      */
 
     --sl-tooltip-border-radius: var(--sl-border-radius-medium);
-    --sl-tooltip-background-color: var(--sl-color-neutral-900);
+    --sl-tooltip-background-color: var(--sl-color-neutral-800);
     --sl-tooltip-color: var(--sl-color-neutral-1000);
     --sl-tooltip-font-family: var(--sl-font-sans);
     --sl-tooltip-font-weight: var(--sl-font-weight-normal);

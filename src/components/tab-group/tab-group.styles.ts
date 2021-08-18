@@ -5,7 +5,8 @@ export default css`
   ${componentStyles}
 
   :host {
-    --tabs-border-color: rgb(var(--sl-color-neutral-200));
+    --track-color: rgb(var(--sl-color-neutral-200));
+    --indicator-color: rgb(var(--sl-color-primary-600));
 
     display: block;
   }
@@ -85,12 +86,12 @@ export default css`
     flex: 1 1 auto;
     position: relative;
     flex-direction: row;
-    border-bottom: solid 2px var(--tabs-border-color);
+    border-bottom: solid 2px var(--track-color);
   }
 
   .tab-group--top .tab-group__indicator {
     bottom: -2px;
-    border-bottom: solid 2px rgb(var(--sl-color-primary-500));
+    border-bottom: solid 2px var(--indicator-color);
   }
 
   .tab-group--top .tab-group__body {
@@ -127,12 +128,12 @@ export default css`
     flex: 1 1 auto;
     position: relative;
     flex-direction: row;
-    border-top: solid 2px var(--tabs-border-color);
+    border-top: solid 2px var(--track-color);
   }
 
   .tab-group--bottom .tab-group__indicator {
     top: calc(-1 * 2px);
-    border-top: solid 2px rgb(var(--sl-color-primary-500));
+    border-top: solid 2px var(--indicator-color);
   }
 
   .tab-group--bottom .tab-group__body {
@@ -154,12 +155,12 @@ export default css`
   .tab-group--start .tab-group__tabs {
     flex: 0 0 auto;
     flex-direction: column;
-    border-right: solid 2px var(--tabs-border-color);
+    border-right: solid 2px var(--track-color);
   }
 
   .tab-group--start .tab-group__indicator {
     right: calc(-1 * 2px);
-    border-right: solid 2px rgb(var(--sl-color-primary-500));
+    border-right: solid 2px var(--indicator-color);
   }
 
   .tab-group--start .tab-group__body {
@@ -182,12 +183,12 @@ export default css`
   .tab-group--end .tab-group__tabs {
     flex: 0 0 auto;
     flex-direction: column;
-    border-left: solid 2px var(--tabs-border-color);
+    border-left: solid 2px var(--track-color);
   }
 
   .tab-group--end .tab-group__indicator {
     left: calc(-1 * 2px);
-    border-left: solid 2px rgb(var(--sl-color-primary-500));
+    border-left: solid 2px var(--indicator-color);
   }
 
   .tab-group--end .tab-group__body {

@@ -70,22 +70,22 @@ export default css`
   /* Checked/indeterminate */
   .checkbox--checked .checkbox__control,
   .checkbox--indeterminate .checkbox__control {
-    border-color: rgb(var(--sl-color-primary-500));
-    background-color: rgb(var(--sl-color-primary-500));
+    border-color: rgb(var(--sl-color-primary-600));
+    background-color: rgb(var(--sl-color-primary-600));
   }
 
   /* Checked/indeterminate + hover */
   .checkbox.checkbox--checked:not(.checkbox--disabled) .checkbox__control:hover,
   .checkbox.checkbox--indeterminate:not(.checkbox--disabled) .checkbox__control:hover {
-    border-color: rgb(var(--sl-color-primary-400));
-    background-color: rgb(var(--sl-color-primary-400));
+    border-color: rgb(var(--sl-color-primary-500));
+    background-color: rgb(var(--sl-color-primary-500));
   }
 
   /* Checked/indeterminate + focus */
   .checkbox.checkbox--checked:not(.checkbox--disabled).checkbox--focused .checkbox__control,
   .checkbox.checkbox--indeterminate:not(.checkbox--disabled).checkbox--focused .checkbox__control {
-    border-color: rgb(var(--sl-color-primary-400));
-    background-color: rgb(var(--sl-color-primary-400));
+    border-color: rgb(var(--sl-color-primary-500));
+    background-color: rgb(var(--sl-color-primary-500));
     box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-primary-500) / var(--sl-focus-ring-alpha));
   }
 

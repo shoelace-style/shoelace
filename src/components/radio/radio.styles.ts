@@ -70,20 +70,20 @@ export default css`
   /* Checked */
   .radio--checked .radio__control {
     color: rgb(var(--sl-color-neutral-1000));
-    border-color: rgb(var(--sl-color-primary-500));
-    background-color: rgb(var(--sl-color-primary-500));
+    border-color: rgb(var(--sl-color-primary-600));
+    background-color: rgb(var(--sl-color-primary-600));
   }
 
   /* Checked + hover */
   .radio.radio--checked:not(.radio--disabled) .radio__control:hover {
-    border-color: rgb(var(--sl-color-primary-400));
-    background-color: rgb(var(--sl-color-primary-400));
+    border-color: rgb(var(--sl-color-primary-500));
+    background-color: rgb(var(--sl-color-primary-500));
   }
 
   /* Checked + focus */
   .radio.radio--checked:not(.radio--disabled).radio--focused .radio__control {
-    border-color: rgb(var(--sl-color-primary-400));
-    background-color: rgb(var(--sl-color-primary-400));
+    border-color: rgb(var(--sl-color-primary-500));
+    background-color: rgb(var(--sl-color-primary-500));
     box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-primary-500) / var(--sl-focus-ring-alpha));
   }
 

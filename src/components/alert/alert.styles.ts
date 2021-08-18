@@ -40,43 +40,43 @@ export default css`
   }
 
   .alert--primary {
-    border-top-color: rgb(var(--sl-color-primary-500));
+    border-top-color: rgb(var(--sl-color-primary-600));
   }
 
   .alert--primary .alert__icon {
-    color: rgb(var(--sl-color-primary-500));
+    color: rgb(var(--sl-color-primary-600));
   }
 
   .alert--success {
-    border-top-color: rgb(var(--sl-color-success-500));
+    border-top-color: rgb(var(--sl-color-success-600));
   }
 
   .alert--success .alert__icon {
-    color: rgb(var(--sl-color-success-500));
+    color: rgb(var(--sl-color-success-600));
   }
 
   .alert--neutral {
-    border-top-color: rgb(var(--sl-color-neutral-500));
+    border-top-color: rgb(var(--sl-color-neutral-600));
   }
 
   .alert--neutral .alert__icon {
-    color: rgb(var(--sl-color-neutral-500));
+    color: rgb(var(--sl-color-neutral-600));
   }
 
   .alert--warning {
-    border-top-color: rgb(var(--sl-color-warning-500));
+    border-top-color: rgb(var(--sl-color-warning-600));
   }
 
   .alert--warning .alert__icon {
-    color: rgb(var(--sl-color-warning-500));
+    color: rgb(var(--sl-color-warning-600));
   }
 
   .alert--danger {
-    border-top-color: rgb(var(--sl-color-danger-500));
+    border-top-color: rgb(var(--sl-color-danger-600));
   }
 
   .alert--danger .alert__icon {
-    color: rgb(var(--sl-color-danger-500));
+    color: rgb(var(--sl-color-danger-600));
   }
 
   .alert__message {

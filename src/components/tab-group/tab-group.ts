@@ -31,7 +31,8 @@ import '../icon-button/icon-button';
  * @csspart body - The tab group body where tab panels are slotted in.
  * @csspart scroll-button - The previous and next scroll buttons that appear when tabs are scrollable.
  *
- * @cssproperty --tabs-border-color - The color of the border that separates tabs.
+ * @cssproperty --indicator-color - The color of the active tab indicator.
+ * @cssproperty --track-color - The color of the indicator's track (i.e. the line that separates tabs from panels).
  */
 @customElement('sl-tab-group')
 export default class SlTabGroup extends LitElement {

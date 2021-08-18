@@ -125,7 +125,7 @@ strong {
 }
 
 .search .matching-post {
-  border-bottom: solid 1px rgb(var(--sl-color-neutral-500)) !important;
+  border-bottom: solid 1px rgb(var(--sl-color-neutral-600)) !important;
   padding: 0.25rem 1.5rem;
 }
 
@@ -157,6 +157,10 @@ strong {
 .sidebar-toggle:focus {
   outline: none;
   box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-primary-500) / var(--sl-focus-ring-alpha));
+}
+
+.sidebar-toggle span {
+  background-color: rgb(var(--sl-color-primary-600));
 }
 
 .sidebar-toggle span:last-child {
@@ -380,7 +384,7 @@ strong {
   display: block;
   background: none;
   border-radius: 0;
-  color: rgb(var(--sl-color-neutral-700));
+  color: rgb(var(--sl-color-neutral-800));
   padding: var(--sl-spacing-medium);
   overflow: auto;
   hyphens: none;
@@ -388,7 +392,7 @@ strong {
 }
 
 .markdown-section pre .token.comment {
-  color: rgb(var(--sl-color-neutral-400));
+  color: rgb(var(--sl-color-neutral-500));
 }
 
 .markdown-section pre .token.prolog,
@@ -518,19 +522,19 @@ strong {
 }
 
 .markdown-section p.warn {
-  border-left-color: rgb(var(--sl-color-primary-500));
+  border-left-color: rgb(var(--sl-color-primary-600));
 }
 
 .markdown-section p.warn:before {
-  background-color: rgb(var(--sl-color-primary-500));
+  background-color: rgb(var(--sl-color-primary-600));
 }
 
 .markdown-section p.tip {
-  border-left-color: rgb(var(--sl-color-danger-500));
+  border-left-color: rgb(var(--sl-color-danger-600));
 }
 
 .markdown-section p.tip:before {
-  background-color: rgb(var(--sl-color-danger-500));
+  background-color: rgb(var(--sl-color-danger-600));
 }
 
 .markdown-section p.tip code,
@@ -554,7 +558,7 @@ strong {
 
 .markdown-section .component-header__tag code {
   background: none;
-  color: rgb(var(--sl-color-neutral-500));
+  color: rgb(var(--sl-color-neutral-600));
   font-size: var(--sl-font-size-large);
   padding: 0;
   margin: 0;
@@ -572,7 +576,7 @@ strong {
 
 /* Repo buttons */
 .repo-button--sponsor sl-icon {
-  color: rgb(var(--sl-color-pink-500));
+  color: rgb(var(--sl-color-pink-600));
 }
 
 .repo-button--github sl-icon {
@@ -580,7 +584,7 @@ strong {
 }
 
 .repo-button--twitter sl-icon {
-  color: rgb(var(--sl-color-sky-500));
+  color: rgb(var(--sl-color-sky-600));
 }
 
 body[data-page^='tokens/'] .table-wrapper td:first-child,
@@ -592,7 +596,7 @@ body[data-page^='tokens/'] .table-wrapper td:first-child code {
 .border-radius-demo {
   width: 3rem;
   height: 3rem;
-  background: rgb(var(--sl-color-primary-500));
+  background: rgb(var(--sl-color-primary-600));
 }
 
 /* Transition demo */
@@ -606,7 +610,7 @@ body[data-page^='tokens/'] .table-wrapper td:first-child code {
 .transition-demo:after {
   content: '';
   position: absolute;
-  background-color: rgb(var(--sl-color-primary-500));
+  background-color: rgb(var(--sl-color-primary-600));
   top: 0;
   left: 0;
   width: 0;
@@ -622,7 +626,7 @@ body[data-page^='tokens/'] .table-wrapper td:first-child code {
 /* Spacing demo */
 .spacing-demo {
   width: 100px;
-  background: rgb(var(--sl-color-primary-500));
+  background: rgb(var(--sl-color-primary-600));
 }
 
 /* Elevation dmeo */

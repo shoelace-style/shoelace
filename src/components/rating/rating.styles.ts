@@ -6,7 +6,7 @@ export default css`
 
   :host {
     --symbol-color: rgb(var(--sl-color-neutral-300));
-    --symbol-color-active: #ffbe00;
+    --symbol-color-active: rgb(var(--sl-color-amber-500));
     --symbol-size: 1.2rem;
     --symbol-spacing: var(--sl-spacing-xxx-small);
 
