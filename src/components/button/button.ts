@@ -156,7 +156,6 @@ export default class SlButton extends LitElement {
     return isLink
       ? html`
           <a
-            ref=${(el: HTMLLinkElement) => (this.button = el)}
             part="base"
             class=${classMap({
               button: true,

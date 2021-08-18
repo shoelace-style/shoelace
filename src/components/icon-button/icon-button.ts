@@ -73,7 +73,6 @@ export default class SlIconButton extends LitElement {
     return isLink
       ? html`
           <a
-            ref=${(el: HTMLLinkElement) => (this.button = el)}
             part="base"
             class="icon-button"
             href=${ifDefined(this.href)}

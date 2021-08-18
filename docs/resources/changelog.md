@@ -48,6 +48,7 @@ This change applies to all design tokens that implement a color. Refer to the [c
 - Exposed base and dark stylesheets so they can be imported via JavaScript [#438](https://github.com/shoelace-style/shoelace/issues/438)
 - Fixed a bug in `sl-menu` where pressing <kbd>Enter</kbd> after using type to select would result in the wrong value
 - Fixed a bug in `sl-radio-group` where clicking a radio button would cause the wrong control to be focused
+- Fixed a bug in `sl-button` and `sl-icon-button` where an unintended `ref` attribute was present
 - Improved contrast throughout all components [#128](https://github.com/shoelace-style/shoelace/issues/128)
 - Refactored thumb position logic in `sl-switch` [#490](https://github.com/shoelace-style/shoelace/pull/490)
 - Reworked the dark theme to use an inverted token approach instead of light DOM selectors
