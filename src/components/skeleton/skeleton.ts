@@ -19,7 +19,7 @@ export default class SlSkeleton extends LitElement {
   static styles = styles;
 
   /** Determines which effect the skeleton will use. */
-  @property() effect: 'pulse' | 'sheen' | 'none' = 'sheen';
+  @property() effect: 'pulse' | 'sheen' | 'none' = 'none';
 
   render() {
     return html`
