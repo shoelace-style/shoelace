@@ -6,18 +6,18 @@ export type TreeNodeData = {
   name?: string /*节点名称*/;
   icon?: string /*节点图标 */;
   close?: boolean /* 是否关闭 */;
-  disable?:boolean /** 是否是disable 状态 ，此时不能选中*/
+  disable?: boolean /** 是否是disable 状态 ，此时不能选中*/;
   closeable?: boolean /*false,表示节点不能折叠起来 */;
   [key: string]: unknown /*自定义属性 */;
   children?: TreeNodeData[] /*下级节点 */;
 };
 /**
- * 节点自定义渲染 
+ * 节点自定义渲染
  * (data: TreeNodeData, index?:number, parentData?:TreeNodeData,): TemplateResult<1>;
  */
 export interface NodeRenderInterface {
   /** data:节点数据源， index: 在上层的顺序号，parentData:父节点数据 */
-  (data: TreeNodeData, index?:number, parentData?:TreeNodeData,): TemplateResult<1>;
+  (data: TreeNodeData, index?: number, parentData?: TreeNodeData): TemplateResult<1>;
 }
 /* 默认树节点渲染器*/
 export const DEFAULT_TREE_NODE_RENDER: NodeRenderInterface = (data: TreeNodeData) => {
@@ -118,58 +118,65 @@ export const cloneTreeNodeData = (data: TreeNodeData, excludePropertiyes: string
   (temp as any).children = [];
   return temp as TreeNodeData;
 };
-type  DataType={
-  [key:string]:unknown;
-}
+type DataType = {
+  [key: string]: unknown;
+};
 /**
  * 将id,parentID 的树节点数据，转化为TreeNodeData。
  * @param list :节点数组列表
  * @param root :根节点,注意根节点id值
  * @param option: 转化参数 ，指定id,parentID 所属属性。
  */
-export const convertListToTreeNodeData=(list:Array<DataType>,root:TreeNodeData, option:{idProp:string,parentIDPro:string,childrenPro:string}={idProp:'id',parentIDPro:'parentID',childrenPro:'children'}):TreeNodeData =>{
-   
-    const idProp=option.idProp;
-    const parentProp=option.parentIDPro;
-    const childProp=option.childrenPro;
+export const convertListToTreeNodeData = (
+  list: Array<DataType>,
+  root: TreeNodeData,
+  option: { idProp: string; parentIDPro: string; childrenPro: string } = {
+    idProp: 'id',
+    parentIDPro: 'parentID',
+    childrenPro: 'children'
+  }
+): TreeNodeData => {
+  const idProp = option.idProp;
+  const parentProp = option.parentIDPro;
+  const childProp = option.childrenPro;
 
-    // const map=new Map(); //key :ID ,value：节点数据
-    const parentMap=new Map<unknown,Array<DataType>>(); //key:parentID, value:子节点列表
-    for(let i=0,j=list.length;i<j;i++){
-        const tempNode=list[i];
-        const idValue=tempNode[idProp];
-        const parentValue=tempNode[parentProp];
-        if(idValue===parentValue){
-          throw new Error(`${tempNode} id,parentID 属性值完全相等，会造成死循环...`);
+  // const map=new Map(); //key :ID ,value：节点数据
+  const parentMap = new Map<unknown, Array<DataType>>(); //key:parentID, value:子节点列表
+  for (let i = 0, j = list.length; i < j; i++) {
+    const tempNode = list[i];
+    const idValue = tempNode[idProp];
+    const parentValue = tempNode[parentProp];
+    if (idValue === parentValue) {
+      throw new Error(`${tempNode} id,parentID 属性值完全相等，会造成死循环...`);
+    }
+    let childArray: Array<DataType>;
+    if (parentMap.has(parentValue)) {
+      childArray = parentMap.get(parentValue) as Array<DataType>;
+    } else {
+      childArray = [];
+      parentMap.set(parentValue, childArray);
+    }
+    childArray.push(tempNode);
+  }
+  let rootChildren = parentMap.get(root[idProp]);
+  if (rootChildren == null) {
+    console.warn(`not found root nodes child nodes. No nodes  ${parentProp}值=${root[idProp]}`);
+  } else {
+    const funIterator = (id: unknown, parentData: DataType) => {
+      let subChild = parentMap.get(id);
+      if (subChild) {
+        let children = parentData[childProp] as DataType[];
+        if (!children) {
+          children = [];
+          parentData[childProp] = children;
         }
-       let childArray:Array<DataType>;
-       if(parentMap.has(parentValue)){
-           childArray=parentMap.get(parentValue)  as Array<DataType>;
-       }else{
-           childArray=[];
-           parentMap.set(parentValue,childArray);
-       }
-       childArray.push(tempNode);
-    }
-    let rootChildren=parentMap.get(root[idProp]);
-    if(rootChildren==null){
-          console.warn(`not found root nodes child nodes. No nodes  ${parentProp}值=${root[idProp]}` );
-    }else {
-      const funIterator=(id:unknown,parentData:DataType)=>{
-          let subChild=parentMap.get(id);
-          if(subChild){
-            let children=parentData[childProp] as DataType[];
-            if(!children){
-              children=[] ;
-              parentData[childProp]=children;
-            }
-            for(let k of subChild){
-              children.push(k);
-              funIterator(k[idProp],k);
-            }
-          }
+        for (let k of subChild) {
+          children.push(k);
+          funIterator(k[idProp], k);
+        }
       }
-      funIterator(root[idProp],root);
-    }
-    return root;
-}
+    };
+    funIterator(root[idProp], root);
+  }
+  return root;
+};

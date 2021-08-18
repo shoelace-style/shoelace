@@ -1,0 +1,36 @@
+{
+  "plugins": [],
+  "recurseDepth": 20,
+  "source": {
+    "include": ["."],
+    "includePattern": ".+\\.js$",
+    "exclude": ["./node_modules"]
+  },
+  "sourceType": "module",
+  "tags": {
+    "allowUnknownTags": true,
+    "dictionaries": ["jsdoc"]
+  },
+  "opts": {
+    "recurse": true,
+    "destination": "./jsdoc"
+  },
+  "templates": {
+    "cleverLinks": false,
+    "monospaceLinks": false,
+    "systemName": "EasyTrack",
+    "footer": "深圳市蓝云软件有限公司",
+    "copyright": "@copyright 2021年",
+    "includeDate": "true",
+    "navType": "vertical",
+    "linenums": "true",
+    "collapseSymbols": "true",
+    "inverseNav": "false",
+    "outputSourceFiles": "true",
+    "outputSourcePath": "true",
+    "dateFormat": "yyyy-mm-dd",
+    "syntaxTheme": "cosmo",
+    "sort": "false",
+    "search": "true"
+  }
+}

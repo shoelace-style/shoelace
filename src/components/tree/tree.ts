@@ -53,7 +53,7 @@ export default class SlTree extends LitElement {
   @property({ reflect: true }) selectMode: 'check' | 'radio' | 'single' | 'none' = 'single';
 
   /** 选中的节点，是否高亮显示 */
-  @property({ attribute:false, type: Boolean }) select_highlight = false;
+  @property({ attribute: false, type: Boolean }) select_highlight = false;
 
   /** 是否显示根节点 */
   @property({ reflect: true, attribute: 'include_root', type: Boolean }) includeRoot = true;
@@ -61,8 +61,8 @@ export default class SlTree extends LitElement {
   /** 当selectMode='check', 选中的时候是否支持级联选择（选中上级，下级自动选中） */
   @property({ reflect: true, attribute: 'check_casecade', type: Boolean }) checkCasecade = true;
 
-   /** 当selectMode='check', 取消某个节点选中，下级节点是否也级联不选中 */
-   @property({ reflect: true, attribute: 'check_off_casecade', type: Boolean }) checkOffCasecade = true;
+  /** 当selectMode='check', 取消某个节点选中，下级节点是否也级联不选中 */
+  @property({ reflect: true, attribute: 'check_off_casecade', type: Boolean }) checkOffCasecade = true;
 
   /** 设置是加载状态 */
   @property({ reflect: true, attribute: 'loading', type: Boolean }) loading = false;
@@ -111,34 +111,34 @@ export default class SlTree extends LitElement {
   real_treeNodeRender = this.nodeRender;
 
   @watch('selectMode')
-  watchSelectModeChange(_oldMode:string,newMode:string){
-    if(newMode=='check'){
-       if(!Array.isArray(this.checkedKeys)){
-         let oldChecked=this.checkedKeys as string;
-         let array=[];
-         if(typeof oldChecked !='undefined'){
-           array.push(oldChecked);
-         }
-         this.checkedKeys=array;
-       }
-    }else if(_oldMode=='check'){
-      if(Array.isArray(this.checkedKeys)&& this.checkedKeys.length>0){
-        let first=this.checkedKeys[0];
-        this.checkedKeys=first;
+  watchSelectModeChange(_oldMode: string, newMode: string) {
+    if (newMode == 'check') {
+      if (!Array.isArray(this.checkedKeys)) {
+        let oldChecked = this.checkedKeys as string;
+        let array = [];
+        if (typeof oldChecked != 'undefined') {
+          array.push(oldChecked);
+        }
+        this.checkedKeys = array;
+      }
+    } else if (_oldMode == 'check') {
+      if (Array.isArray(this.checkedKeys) && this.checkedKeys.length > 0) {
+        let first = this.checkedKeys[0];
+        this.checkedKeys = first;
       }
     }
   }
   @watch('checkedKeys')
-  async watchSelectKeyChange(){
-    let selectKey=this.checkedKeys;
-    if(Array.isArray(selectKey)){
-      (selectKey as Array<unknown>)=[...selectKey];
+  async watchSelectKeyChange() {
+    let selectKey = this.checkedKeys;
+    if (Array.isArray(selectKey)) {
+      (selectKey as Array<unknown>) = [...selectKey];
     }
-    if(this.hasUpdated){
+    if (this.hasUpdated) {
       await this.updateComplete;
-      emit(this,'sl-tree-checkKeys-change',{
-        detail:selectKey
-      })
+      emit(this, 'sl-tree-checkKeys-change', {
+        detail: selectKey
+      });
     }
   }
   /** 实现树内部过滤逻辑 */
@@ -218,15 +218,19 @@ export default class SlTree extends LitElement {
       return html`<slot name="no-data"></slot>`;
     } else {
       if (this.includeRoot) {
-        return this.renderNodeDataTemplate(this.renderRootNodeData,0);
+        return this.renderNodeDataTemplate(this.renderRootNodeData, 0);
       } else {
         const children = this.renderRootNodeData.children;
-        return children ? children.map((item: TreeNodeData,index:number) => this.renderNodeDataTemplate(item,index,this.renderRootNodeData)) : nothing;
+        return children
+          ? children.map((item: TreeNodeData, index: number) =>
+              this.renderNodeDataTemplate(item, index, this.renderRootNodeData)
+            )
+          : nothing;
       }
     }
   }
-  
-  private renderNodeDataTemplate(data: TreeNodeData,index:number,parentData?:TreeNodeData) {
+
+  private renderNodeDataTemplate(data: TreeNodeData, index: number, parentData?: TreeNodeData) {
     const tree = this as SlTree;
     return html`<sl-tree-node
       .customStyle=${(this as any).customStyle}
@@ -247,7 +251,7 @@ export default class SlTree extends LitElement {
         detail: {
           node: node,
           nodeData: nodeData,
-          parentData:node.parentNodeData
+          parentData: node.parentNodeData
         }
       });
     }
@@ -273,17 +277,17 @@ export default class SlTree extends LitElement {
     for (let eventType of eventArray) {
       onEvent(div, 'sl-tree-node', eventType, handerTreeNode);
     }
-    onEvent(div, 'sl-tree-node', 'sl-node-click', (event:CustomEvent)=>{
-       const tree_node=(event.detail.node) as SlTreeNode;
-       if(this.selectMode=='single'&&tree_node.nodeData){
-         this.checkedKeys=tree_node.nodeData[this.nodeIDProperty];
-         emit(this, 'sl-tree-node-select-change', {
+    onEvent(div, 'sl-tree-node', 'sl-node-click', (event: CustomEvent) => {
+      const tree_node = event.detail.node as SlTreeNode;
+      if (this.selectMode == 'single' && tree_node.nodeData) {
+        this.checkedKeys = tree_node.nodeData[this.nodeIDProperty];
+        emit(this, 'sl-tree-node-select-change', {
           detail: {
             node: tree_node,
-            checkKeyKeys:this.checkedKeys
+            checkKeyKeys: this.checkedKeys
           }
         });
-       }
+      }
     });
   }
   render() {
@@ -307,8 +311,8 @@ export default class SlTree extends LitElement {
       <div part="tree-footer"><slot name="footer" @slotchange=${this.slotChangeHandler}></slot></div>
     </div>`;
   }
-  private slotChangeHandler(){
-    this.hasFooter=hasSlot(this,'footer');
+  private slotChangeHandler() {
+    this.hasFooter = hasSlot(this, 'footer');
   }
   private inputChangeHander = debounceWait((inputString: string) => {
     this.filterString = inputString;
@@ -319,97 +323,95 @@ export default class SlTree extends LitElement {
   }
   private async handerCheckEvent(event: Event) {
     let checked = (event.target as any).checked as boolean;
-    let array=this.checkedKeys as Array<unknown>;
+    let array = this.checkedKeys as Array<unknown>;
     let node = this.getClosetTreeNode(event.target as HTMLElement) as SlTreeNode;
     let nodeData = node.nodeData as TreeNodeData;
-    let nodeIDValue=nodeData[this.nodeIDProperty];
+    let nodeIDValue = nodeData[this.nodeIDProperty];
     if (checked && typeof nodeIDValue != 'undefined') {
-        const iteratorSubData=(node:TreeNodeData)=>{
-          let nodeID=node[this.nodeIDProperty];
-          if(typeof nodeID!='undefined'){
-              if(!array.includes(nodeID)){
-                array.push(nodeID);
-              }
+      const iteratorSubData = (node: TreeNodeData) => {
+        let nodeID = node[this.nodeIDProperty];
+        if (typeof nodeID != 'undefined') {
+          if (!array.includes(nodeID)) {
+            array.push(nodeID);
           }
         }
-        if(this.checkCasecade){
-          iteratorNodeData(nodeData,iteratorSubData);
-        }else{
-          iteratorSubData(nodeData);
-        }
-       
-    }else if(typeof nodeIDValue != 'undefined'){
-      const iteratorSubData=(node:TreeNodeData)=>{
-        let nodeID=node[this.nodeIDProperty];
-        if(typeof nodeID!='undefined'){
-          let index=array.indexOf(nodeID);
-          if(index>=0){
-            array.splice(index,1);
-          }
-        }
+      };
+      if (this.checkCasecade) {
+        iteratorNodeData(nodeData, iteratorSubData);
+      } else {
+        iteratorSubData(nodeData);
       }
-      if(this.checkOffCasecade){
-        iteratorNodeData(nodeData,iteratorSubData);
-      }else{
+    } else if (typeof nodeIDValue != 'undefined') {
+      const iteratorSubData = (node: TreeNodeData) => {
+        let nodeID = node[this.nodeIDProperty];
+        if (typeof nodeID != 'undefined') {
+          let index = array.indexOf(nodeID);
+          if (index >= 0) {
+            array.splice(index, 1);
+          }
+        }
+      };
+      if (this.checkOffCasecade) {
+        iteratorNodeData(nodeData, iteratorSubData);
+      } else {
         iteratorSubData(nodeData);
       }
     }
-    this.checkedKeys=[...array];
+    this.checkedKeys = [...array];
     await this.updateComplete;
     emit(this, 'sl-tree-node-select-change', {
       detail: {
         node: node,
-        checkKeyKeys:array
+        checkKeyKeys: array
       }
     });
   }
   private async handerRadioEvent(event: Event) {
     let node = this.getClosetTreeNode(event.target as HTMLElement) as SlTreeNode;
     let checked = (event.target as any).checked as boolean;
-    let tempChecke='';
+    let tempChecke = '';
     if (Array.isArray(this.checkedKeys)) {
-      tempChecke = this.checkedKeys[0] as string ;
+      tempChecke = this.checkedKeys[0] as string;
     }
     let nodeData = node.nodeData as TreeNodeData;
     if (checked && typeof nodeData[this.nodeIDProperty] != 'undefined') {
-       tempChecke= nodeData[this.nodeIDProperty] as string;
-    }else{
-      tempChecke='';
+      tempChecke = nodeData[this.nodeIDProperty] as string;
+    } else {
+      tempChecke = '';
     }
-     this.checkedKeys=tempChecke;
-     await this.updateComplete;
+    this.checkedKeys = tempChecke;
+    await this.updateComplete;
     emit(this, 'sl-tree-node-select-change', {
       detail: {
         node: node,
-        checkKeyKeys:tempChecke
+        checkKeyKeys: tempChecke
       }
     });
   }
 
   @watchProps(['nodeRender', 'selectMode', 'select_highlight', 'checkedKeys'])
   watchNodeRenderChange() {
-    const handerNodeSelect=(event:Event)=>{
-      const node=event.target as HTMLElement;
-      if(node.tagName.toLocaleUpperCase()=='sl-checkbox'||node.tagName.toLocaleUpperCase()=='sl-radio'){
-        return ;
+    const handerNodeSelect = (event: Event) => {
+      const node = event.target as HTMLElement;
+      if (node.tagName.toLocaleUpperCase() == 'sl-checkbox' || node.tagName.toLocaleUpperCase() == 'sl-radio') {
+        return;
       }
-      if(this.selectMode=='check'){
-        let checkBox=node.querySelector(':scope > sl-checkbox')  as SlCheckbox;
-        if(checkBox){
-          checkBox.checked=!checkBox.checked;
-          emit(checkBox,'sl-change');
+      if (this.selectMode == 'check') {
+        let checkBox = node.querySelector(':scope > sl-checkbox') as SlCheckbox;
+        if (checkBox) {
+          checkBox.checked = !checkBox.checked;
+          emit(checkBox, 'sl-change');
         }
-        
-      }else if(this.selectMode=='radio'){
-        let checkBox=node.querySelector(':scope > sl-radio')  as SlRadio;
-        if(checkBox){
-          checkBox.checked=true;
-          emit(checkBox,'sl-change');
+      } else if (this.selectMode == 'radio') {
+        let checkBox = node.querySelector(':scope > sl-radio') as SlRadio;
+        if (checkBox) {
+          checkBox.checked = true;
+          emit(checkBox, 'sl-change');
         }
       }
-    }
-    this.real_treeNodeRender = (node: TreeNodeData,index?:number,parentNodeData?:TreeNodeData) => {
-      const result = this.nodeRender(node,index,parentNodeData);
+    };
+    this.real_treeNodeRender = (node: TreeNodeData, index?: number, parentNodeData?: TreeNodeData) => {
+      const result = this.nodeRender(node, index, parentNodeData);
       const array = [];
       if (this.selectMode == 'check') {
         array.push(
@@ -419,7 +421,8 @@ export default class SlTree extends LitElement {
             class="selectCheckbox"
             .checked=${typeof node[this.nodeIDProperty] != 'undefined' &&
             (this.checkedKeys as Array<unknown>).includes(node[this.nodeIDProperty])}
-          >${result}</sl-checkbox>`
+            >${result}</sl-checkbox
+          >`
         );
       } else if (this.selectMode == 'radio') {
         array.push(
@@ -428,35 +431,36 @@ export default class SlTree extends LitElement {
             @sl-change=${this.handerRadioEvent}
             class="selectRadio"
             .checked=${typeof node[this.nodeIDProperty] != 'undefined' && this.checkedKeys == node[this.nodeIDProperty]}
-          >${result}</sl-radio>`
+            >${result}</sl-radio
+          >`
         );
-      }else{
+      } else {
         array.push(result);
       }
-      return html`<div part='select-part' @click=${handerNodeSelect}>${array}</div>`;
+      return html`<div part="select-part" @click=${handerNodeSelect}>${array}</div>`;
     };
   }
 
   /**
-   *  获取 DOM 最近的TreeNode: 
+   *  获取 DOM 最近的TreeNode:
    * @param el tree shadowRoot 内部元素
-   * @throws when el getRootNode()==document 
+   * @throws when el getRootNode()==document
    */
-   public getClosetTreeNode(el:HTMLElement):SlTreeNode|null{
-    if(el.getRootNode()==document){
+  public getClosetTreeNode(el: HTMLElement): SlTreeNode | null {
+    if (el.getRootNode() == document) {
       throw new Error('el should  in tree ShadowRoot !');
     }
-    if(el instanceof SlTreeNode){
+    if (el instanceof SlTreeNode) {
       return el;
-    }else{
-      let root=el.getRootNode() as ShadowRoot;
+    } else {
+      let root = el.getRootNode() as ShadowRoot;
       let temp;
-      while(root!=null ){
-         temp=root.host;
-         if(temp instanceof SlTreeNode){
-           return temp;
-         }
-         root=temp.getRootNode() as ShadowRoot;
+      while (root != null) {
+        temp = root.host;
+        if (temp instanceof SlTreeNode) {
+          return temp;
+        }
+        root = temp.getRootNode() as ShadowRoot;
       }
     }
     return null;

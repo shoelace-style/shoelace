@@ -8,8 +8,6 @@ import SlTree from '../tree/tree';
 import { DEFAULT_TREE_NODE_RENDER, NodeRenderInterface, TreeNodeData } from './tree-node-util';
 import styles from './tree-node.styles';
 
-
-
 /**
  * @since 2.0
  * @status experimental
@@ -48,7 +46,6 @@ export default class SlTreeNode extends LitElement {
   /** 节点数据源 */
   @property({ type: Object, attribute: false })
   nodeData?: TreeNodeData;
-  
 
   @watch('nodeData')
   _watchOnSetNodeData() {
@@ -72,9 +69,8 @@ export default class SlTreeNode extends LitElement {
   @property({ type: Object, attribute: false })
   nodeRender: NodeRenderInterface = DEFAULT_TREE_NODE_RENDER;
 
-
   /** 父节点数据 */
-  parentNodeData?:TreeNodeData;
+  parentNodeData?: TreeNodeData;
 
   private renderChildren() {
     let levelStr = this.getAttribute('level');
@@ -95,19 +91,20 @@ export default class SlTreeNode extends LitElement {
     //       })
     //     : ''
     // )}`;
-    return html`${!this.isClose? this.nodeData?.children?.map( (data,index)=>{
-       return html`<sl-tree-node
-                 .nodeData=${data}
-                 .parentNodeData=${this.nodeData}
-                 .customStyle=${(this as any).customStyle}
-                 .nodeRender=${this.nodeRender}
-                 .tree=${this.tree}
-                 index=${index}
-                 level=${level + ''}
-                 style="--sl-node-level:${level}"
-              ></sl-tree-node>`;
-    }):''}`;
-  
+    return html`${!this.isClose
+      ? this.nodeData?.children?.map((data, index) => {
+          return html`<sl-tree-node
+            .nodeData=${data}
+            .parentNodeData=${this.nodeData}
+            .customStyle=${(this as any).customStyle}
+            .nodeRender=${this.nodeRender}
+            .tree=${this.tree}
+            index=${index}
+            level=${level + ''}
+            style="--sl-node-level:${level}"
+          ></sl-tree-node>`;
+        })
+      : ''}`;
   }
   /** 获取直接孩子数量 */
   get subChildSize() {
@@ -117,18 +114,18 @@ export default class SlTreeNode extends LitElement {
   get isClose() {
     return this.nodeData && this.nodeData.close;
   }
-  private isTreeNodeSelected(){
-    let tree=this.tree;
-    if(tree&&this.nodeData){
-      let idKey=this.nodeData[tree.nodeIDProperty];
-      if(tree.selectMode=='single'&&tree.checkedKeys==idKey){
+  private isTreeNodeSelected() {
+    let tree = this.tree;
+    if (tree && this.nodeData) {
+      let idKey = this.nodeData[tree.nodeIDProperty];
+      if (tree.selectMode == 'single' && tree.checkedKeys == idKey) {
         return true;
       }
-      if(tree.select_highlight&&tree.selectMode!='none'){
-        if(Array.isArray(tree.checkedKeys)){
+      if (tree.select_highlight && tree.selectMode != 'none') {
+        if (Array.isArray(tree.checkedKeys)) {
           return tree.checkedKeys.includes(idKey);
-        }else{
-          return tree.checkedKeys==idKey;
+        } else {
+          return tree.checkedKeys == idKey;
         }
       }
     }
@@ -139,10 +136,8 @@ export default class SlTreeNode extends LitElement {
       return nothing;
     }
     return html`<div part="base">
-      <div part="node" ?selected=${this.isTreeNodeSelected()} >${this.renderNodeData()}</div>
-      <div part="children"  class="${this.isClose ? 'close' : 'open'}">
-        ${this.renderChildren()}
-      </div>
+      <div part="node" ?selected=${this.isTreeNodeSelected()}>${this.renderNodeData()}</div>
+      <div part="children" class="${this.isClose ? 'close' : 'open'}">${this.renderChildren()}</div>
     </div>`;
   }
   private emitEvent(eventType: string, event: Event) {
@@ -187,11 +182,15 @@ export default class SlTreeNode extends LitElement {
         );
       }
       let indexStr = this.getAttribute('index');
-      let index=0;
-      if(indexStr){
-        index=parseInt(indexStr,10);
+      let index = 0;
+      if (indexStr) {
+        index = parseInt(indexStr, 10);
       }
-      result.push(html`<div part="node-span"  @click=${this._clickNodeHandler}>${this.nodeRender(this.nodeData,index,this.parentNodeData)}</div>`);
+      result.push(
+        html`<div part="node-span" @click=${this._clickNodeHandler}>
+          ${this.nodeRender(this.nodeData, index, this.parentNodeData)}
+        </div>`
+      );
     }
     return result;
   }

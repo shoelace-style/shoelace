@@ -20,7 +20,7 @@ export function customStyle() {
       enumerable: true,
       set(value) {
         const element: LitElement = this;
-        if(this[keyName]!=value){
+        if (this[keyName] != value) {
           this[keyName] = value;
           element.updateComplete.then(() => {
             if ((element as any)[keyCustomStyle] == undefined) {

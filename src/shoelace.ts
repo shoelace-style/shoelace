@@ -63,12 +63,11 @@ export * from './utilities/animation';
 export * from './utilities/base-path';
 export * from './utilities/icon-library';
 
-declare global{
-     interface Window{
-        html:typeof html;
-        LitRender: typeof render;
-     }
-     
+declare global {
+  interface Window {
+    html: typeof html;
+    LitRender: typeof render;
+  }
 }
-(globalThis as any ).html = html;
+(globalThis as any).html = html;
 (globalThis as any).LitRender = render;
