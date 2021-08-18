@@ -21,15 +21,14 @@ div[part=base]{
         padding:var(--tree-body-spacing);
         overflow: auto;
     }
-    &.base-has-footer div[part=footer]{
-        display: block;
+    &.base-has-footer div[part=tree-footer]{
+        display: flex;
     }
-    div[part=footer]{
+    div[part=tree-footer]{
         display:none;
         flex:0 0 auto;
-        display: flex;
         align-items: center;
-        text-align: right;
+        justify-content: flex-end;
         padding: var(--tree-footer-spacing);
     }
 }

@@ -1,6 +1,5 @@
 import { html, LitElement, nothing } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
-import { cache } from 'lit/directives/cache';
 import '../../components/icon/icon';
 import { customStyle } from '../../internal/customStyle';
 import { emit } from '../../internal/event';
@@ -9,7 +8,7 @@ import SlTree from '../tree/tree';
 import { DEFAULT_TREE_NODE_RENDER, NodeRenderInterface, TreeNodeData } from './tree-node-util';
 import styles from './tree-node.styles';
 
-let id = 0;
+
 
 /**
  * @since 2.0
@@ -49,7 +48,7 @@ export default class SlTreeNode extends LitElement {
   /** 节点数据源 */
   @property({ type: Object, attribute: false })
   nodeData?: TreeNodeData;
-  private compoentID = `tree-node-${++id}`;
+  
 
   @watch('nodeData')
   _watchOnSetNodeData() {
@@ -67,11 +66,15 @@ export default class SlTreeNode extends LitElement {
 
   /** 绑定树对象 */
   @property({ type: Object, attribute: false })
-  tree?: SlTree;
+  tree: SlTree;
 
   /** 树节点渲染器 */
   @property({ type: Object, attribute: false })
   nodeRender: NodeRenderInterface = DEFAULT_TREE_NODE_RENDER;
+
+
+  /** 父节点数据 */
+  parentNodeData?:TreeNodeData;
 
   private renderChildren() {
     let levelStr = this.getAttribute('level');
@@ -79,20 +82,32 @@ export default class SlTreeNode extends LitElement {
     if (levelStr) {
       level = parseInt(levelStr, 10) + 1;
     }
-    return html`${cache(
-      !this.isClose
-        ? this.nodeData?.children?.map(data => {
-            return html`<sl-tree-node
-              pID=${this.compoentID}
-              .nodeData=${data}
-              .nodeRender=${this.nodeRender}
-              .tree=${this.tree}
-              level=${level + ''}
-              style="--sl-node-level:${level}"
-            ></sl-tree-node>`;
-          })
-        : ''
-    )}`;
+    // return html`${cache(
+    //   !this.isClose
+    //     ? this.nodeData?.children?.map(data => {
+    //         return html`<sl-tree-node
+    //           .nodeData=${data}
+    //           .nodeRender=${this.nodeRender}
+    //           .tree=${this.tree}
+    //           level=${level + ''}
+    //           style="--sl-node-level:${level}"
+    //         ></sl-tree-node>`;
+    //       })
+    //     : ''
+    // )}`;
+    return html`${!this.isClose? this.nodeData?.children?.map( (data,index)=>{
+       return html`<sl-tree-node
+                 .nodeData=${data}
+                 .parentNodeData=${this.nodeData}
+                 .customStyle=${(this as any).customStyle}
+                 .nodeRender=${this.nodeRender}
+                 .tree=${this.tree}
+                 index=${index}
+                 level=${level + ''}
+                 style="--sl-node-level:${level}"
+              ></sl-tree-node>`;
+    }):''}`;
+  
   }
   /** 获取直接孩子数量 */
   get subChildSize() {
@@ -102,13 +117,30 @@ export default class SlTreeNode extends LitElement {
   get isClose() {
     return this.nodeData && this.nodeData.close;
   }
+  private isTreeNodeSelected(){
+    let tree=this.tree;
+    if(tree&&this.nodeData){
+      let idKey=this.nodeData[tree.nodeIDProperty];
+      if(tree.selectMode=='single'&&tree.checkedKeys==idKey){
+        return true;
+      }
+      if(tree.select_highlight&&tree.selectMode!='none'){
+        if(Array.isArray(tree.checkedKeys)){
+          return tree.checkedKeys.includes(idKey);
+        }else{
+          return tree.checkedKeys==idKey;
+        }
+      }
+    }
+    return false;
+  }
   render() {
     if (!this.nodeData) {
       return nothing;
     }
     return html`<div part="base">
-      <div part="node">${this.renderNodeData()}</div>
-      <div part="children" data-flip-key="${this.compoentID}" class="${this.isClose ? 'close' : 'open'}">
+      <div part="node" ?selected=${this.isTreeNodeSelected()} >${this.renderNodeData()}</div>
+      <div part="children"  class="${this.isClose ? 'close' : 'open'}">
         ${this.renderChildren()}
       </div>
     </div>`;
@@ -121,22 +153,14 @@ export default class SlTreeNode extends LitElement {
       }
     });
   }
-
   private async _clickTrigerHander(event: Event) {
     if (this.subChildSize > 0) {
       let isClosed = this.nodeData?.close;
       let custEvent = this.emitEvent(`sl-node-before-${isClosed ? 'open' : 'close'}`, event);
       let custToogleEvent = this.emitEvent(`sl-node-before-toogle`, event);
       if (!custEvent.defaultPrevented && !custToogleEvent.defaultPrevented) {
-        // const flipping = new Flipping({
-        //    parent:this.renderRoot.querySelector('div[part=base]')as HTMLElement
-        // });
-        // this.childTreeNodeElement.style.display='block';
-        // flipping.read();
         this.setNodeDataProperty('close', !this.nodeData?.close);
         await this.updateComplete;
-        // flipping.flip();
-        // this.childTreeNodeElement.style.removeProperty('display');
         this.emitEvent(`sl-node-${isClosed ? 'open' : 'close'}`, event);
         this.emitEvent(`sl-node-toogle`, event);
       }
@@ -162,7 +186,12 @@ export default class SlTreeNode extends LitElement {
           html`<sl-icon class="node-icon" part="node-icon" name=${this.nodeData.icon} library="system"> </sl-icon>`
         );
       }
-      result.push(html`<div part="node-span" @click=${this._clickNodeHandler}>${this.nodeRender(this.nodeData)}</div>`);
+      let indexStr = this.getAttribute('index');
+      let index=0;
+      if(indexStr){
+        index=parseInt(indexStr,10);
+      }
+      result.push(html`<div part="node-span"  @click=${this._clickNodeHandler}>${this.nodeRender(this.nodeData,index,this.parentNodeData)}</div>`);
     }
     return result;
   }

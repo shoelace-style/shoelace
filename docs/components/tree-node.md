@@ -66,6 +66,22 @@
         value:'中国',
         children:json
     };
+//规范数据， 这个json 源id 不唯一，现在调整下。
+    const setNodeID=(node,parent)=>{
+        if(parent){
+            node.id=parent.id+'/'+node.value;
+        }else{
+            node.id=node.value;
+        }
+        const children=node.children;
+        if(children){
+          for(let k of children){
+            setNodeID(k,node);
+          }
+        }
+    }
+    setNodeID(treeDiv.rootNodeData);
+
     /*遍历恢复 节点收缩状态*/
     const iteratorNodeData=(data,callback)=>{
         callback(data);
@@ -83,7 +99,7 @@
         openData=JSON.parse(openData);
      }
     const callFun=function(tempData){
-       if(openData.indexOf(tempData.value)>=0){
+       if(openData.indexOf(tempData.id)>=0){
            tempData.close=false;
        }
     }

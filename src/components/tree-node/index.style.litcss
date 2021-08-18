@@ -38,8 +38,9 @@ div[part=base]{
         transition: background-color ease 0.3ms ;
         div[part=node-span]{
             margin-left:var(--sl-spacing-xx-small);
+            flex:1 1 auto;
         }
-        &:hover,&.selected,{
+        &:hover,&[selected]{
             background-color: rgb(var(--sl-color-sky-200));
             &::before{
                 position:absolute;
@@ -47,6 +48,12 @@ div[part=base]{
                 border-left:2px solid rgb( var(--sl-color-blue-500) );
                 content: '';
             }
+        }
+        &:hover{
+            background-color: rgb(var(--sl-color-sky-100));
+        }
+        div[part=select-part]{
+            cursor: pointer;
         }
     }
     div[part=children]{

@@ -1,11 +1,15 @@
 import { html, LitElement, nothing, PropertyValues } from 'lit';
 import { classMap } from 'lit-html/directives/class-map';
 import { customElement, property, state } from 'lit/decorators.js';
+import { customStyle } from '../../internal/customStyle';
 import { emit } from '../../internal/event';
 import { hasSlot } from '../../internal/slot';
-import { debounce } from '../../internal/throttle';
+import { debounceWait } from '../../internal/throttle';
+import { watch } from '../../internal/watch';
 import { watchProps } from '../../internal/watchProps';
 import { onEvent } from '../../utilities/common';
+import SlCheckbox from '../checkbox/checkbox';
+import SlRadio from '../radio/radio';
 import SlTreeNode from '../tree-node/tree-node';
 import {
   cloneTreeNodeData,
@@ -22,13 +26,15 @@ import styles from './tree.styles';
  *
  * @dependency
  *
- * @event sl-tree-node-click - Emitted when tree-node-click.
- * @event sl-tree-node-toogle - Emitted when tree-node-state changed.
- * @event sl-tree-node-before-toogle - Emitted before tree-node-state change.
- * @event sl-tree-node-open - Emitted when tree-node-state change to opened.
- * @event sl-tree-node-close - Emitted when tree-node-state change closed.
- * @event sl-tree-node-before-open - Emitted before tree-node-state to open.
- * @event sl-tree-node-before-close - Emitted before tree-node-state to close.
+ * @event {{node: SlTreeNode,nodeData: TreeNodeData, parentData:TreeNodeData}} sl-tree-node-click - Emitted when tree-node-click.
+ * @event {{node: SlTreeNode,nodeData: TreeNodeData, parentData:TreeNodeData}} sl-tree-node-toogle - Emitted when tree-node-state changed.
+ * @event {{node: SlTreeNode,nodeData: TreeNodeData, parentData:TreeNodeData}} sl-tree-node-before-toogle - Emitted before tree-node-state change.
+ * @event {{node: SlTreeNode,nodeData: TreeNodeData, parentData:TreeNodeData}} sl-tree-node-open - Emitted when tree-node-state change to opened.
+ * @event {{node: SlTreeNode,nodeData: TreeNodeData, parentData:TreeNodeData}} sl-tree-node-close - Emitted when tree-node-state change closed.
+ * @event {{node: SlTreeNode,nodeData: TreeNodeData, parentData:TreeNodeData}} sl-tree-node-before-open - Emitted before tree-node-state to open.
+ * @event {{node: SlTreeNode,nodeData: TreeNodeData, parentData:TreeNodeData}} sl-tree-node-before-close - Emitted before tree-node-state to close.
+ * @event {{node:SlTreeNode,checkKeyKeys:checkKeyKeys }} sl-tree-node-select-change - Emitted after tree select node change .
+ * @event {{checkKeyKeys:checkKeyKeys }} sl-tree-checkKeys-change - Emitted when tree checkeys has changed .
  *
  *
  * @slot no-data - slot:when no tree has no data  or rootNodeData is undefined.
@@ -38,18 +44,25 @@ import styles from './tree.styles';
  *
  * @cssproperty --example - An example CSS custom property.
  */
+@customStyle()
 @customElement('sl-tree')
 export default class SlTree extends LitElement {
   static styles = styles;
 
-  /** tree 选中方式 selectMode：支持的值为：check, radio,none 或者 默认（none,表示不支持选中) */
-  @property({ reflect: true }) selectMode: 'check' | 'radio' | 'default' | 'none' = 'default';
+  /** tree 选中方式 selectMode：支持的值为：check, radio,single,none （none,表示不支持选中,single) */
+  @property({ reflect: true }) selectMode: 'check' | 'radio' | 'single' | 'none' = 'single';
 
   /** 选中的节点，是否高亮显示 */
-  @property({ reflect: true, attribute: 'select_highlight', type: Boolean }) select_highlight = false;
+  @property({ attribute:false, type: Boolean }) select_highlight = false;
 
   /** 是否显示根节点 */
   @property({ reflect: true, attribute: 'include_root', type: Boolean }) includeRoot = true;
+
+  /** 当selectMode='check', 选中的时候是否支持级联选择（选中上级，下级自动选中） */
+  @property({ reflect: true, attribute: 'check_casecade', type: Boolean }) checkCasecade = true;
+
+   /** 当selectMode='check', 取消某个节点选中，下级节点是否也级联不选中 */
+   @property({ reflect: true, attribute: 'check_off_casecade', type: Boolean }) checkOffCasecade = true;
 
   /** 设置是加载状态 */
   @property({ reflect: true, attribute: 'loading', type: Boolean }) loading = false;
@@ -58,7 +71,7 @@ export default class SlTree extends LitElement {
   @property({ reflect: true, attribute: false }) checkedKeys?: unknown | Array<unknown>;
 
   /** 树节点过滤 参数，当支持过滤时启用*/
-  @property({ attribute: false }) filterString: string | string[] = '';
+  @property({ attribute: false }) filterString: string | unknown = '';
 
   /** 树内置过滤input 的placeHolder*/
   @property({ attribute: 'filter-input-placeholder' }) filterInputPlaceholder = '';
@@ -68,7 +81,7 @@ export default class SlTree extends LitElement {
   /** 是否支持过滤 */
   @property({ reflect: true, attribute: 'enable-filter', type: Boolean }) enableFilter = false;
 
-  /** 数据ID属性，用于内置选中节点 */
+  /** 数据ID属性，用于内置选中节点 ,默认=id*/
   @property({ attribute: false }) nodeIDProperty = 'id';
 
   /** 节点渲染函数 */
@@ -78,7 +91,7 @@ export default class SlTree extends LitElement {
   @property({ type: Object, attribute: false })
   rootNodeData?: TreeNodeData;
 
-  /** 实际渲染的节点数据 */
+  /** 实际渲染的根节点数据 */
   @state()
   renderRootNodeData?: TreeNodeData;
 
@@ -92,12 +105,42 @@ export default class SlTree extends LitElement {
 
   /** 存储 过滤后真实匹配的TreeNodeData */
   @state()
-  hightLightNodeSet?: Set<TreeNodeData>;
+  matchFilterNodeSet?: Set<TreeNodeData>;
 
   @state()
   real_treeNodeRender = this.nodeRender;
-  //  @watchProps(['nodeRender','selectMode','filter','filterString','filterMethod','rootNodeData'])
 
+  @watch('selectMode')
+  watchSelectModeChange(_oldMode:string,newMode:string){
+    if(newMode=='check'){
+       if(!Array.isArray(this.checkedKeys)){
+         let oldChecked=this.checkedKeys as string;
+         let array=[];
+         if(typeof oldChecked !='undefined'){
+           array.push(oldChecked);
+         }
+         this.checkedKeys=array;
+       }
+    }else if(_oldMode=='check'){
+      if(Array.isArray(this.checkedKeys)&& this.checkedKeys.length>0){
+        let first=this.checkedKeys[0];
+        this.checkedKeys=first;
+      }
+    }
+  }
+  @watch('checkedKeys')
+  async watchSelectKeyChange(){
+    let selectKey=this.checkedKeys;
+    if(Array.isArray(selectKey)){
+      (selectKey as Array<unknown>)=[...selectKey];
+    }
+    if(this.hasUpdated){
+      await this.updateComplete;
+      emit(this,'sl-tree-checkKeys-change',{
+        detail:selectKey
+      })
+    }
+  }
   /** 实现树内部过滤逻辑 */
   @watchProps(['filter', 'filterString', 'filterMethod', 'rootNodeData'])
   doFilter() {
@@ -106,7 +149,7 @@ export default class SlTree extends LitElement {
     if (rootNodeData && this.filterMethod && this.enableFilter) {
       const filterArray = Array.isArray(this.filterString) ? this.filterString : [this.filterString];
       const matchNodeSet = new Set<TreeNodeData>();
-      const hightLightNodeSet = (this.hightLightNodeSet = new Set<TreeNodeData>());
+      const hightLightNodeSet = (this.matchFilterNodeSet = new Set<TreeNodeData>());
       const nodeVistor = (tempData: TreeNodeData, _parentNode: TreeNodeData) => {
         (tempData as any)[parentSymobl] = _parentNode; //给每一节点父节点给值。
         const match = this.filterMethod.apply(treeEl, [tempData, ...filterArray]);
@@ -157,14 +200,14 @@ export default class SlTree extends LitElement {
       this.renderRootNodeData = this.rootNodeData;
     }
   }
-  constructor(){
+  constructor() {
     super();
-    this.handerCheckEvent=this.handerCheckEvent.bind(this);
-    this.handerRadioEvent=this.handerRadioEvent.bind(this);
+    this.handerCheckEvent = this.handerCheckEvent.bind(this);
+    this.handerRadioEvent = this.handerRadioEvent.bind(this);
   }
   /**
-   * 获取上级数据源对象
-   * @data :数据对象
+   * 获取上级数据源
+   * @data :节点数据源
    */
   public getParentNodeData(data: TreeNodeData) {
     return (data as any)[parentSymobl] as TreeNodeData;
@@ -175,46 +218,36 @@ export default class SlTree extends LitElement {
       return html`<slot name="no-data"></slot>`;
     } else {
       if (this.includeRoot) {
-        return this.renderNodeDataTemplate(this.renderRootNodeData);
+        return this.renderNodeDataTemplate(this.renderRootNodeData,0);
       } else {
         const children = this.renderRootNodeData.children;
-        return children ? children.map((item: TreeNodeData) => this.renderNodeDataTemplate(item)) : nothing;
+        return children ? children.map((item: TreeNodeData,index:number) => this.renderNodeDataTemplate(item,index,this.renderRootNodeData)) : nothing;
       }
     }
   }
-
-  private renderNodeDataTemplate(data: TreeNodeData) {
+  
+  private renderNodeDataTemplate(data: TreeNodeData,index:number,parentData?:TreeNodeData) {
     const tree = this as SlTree;
     return html`<sl-tree-node
-      selectMode=${this.selectMode}
+      .customStyle=${(this as any).customStyle}
       .tree=${tree}
       .nodeData=${data}
+      index=${index}
+      .parentNodeData=${parentData}
       .nodeRender=${this.real_treeNodeRender}
     ></sl-tree-node>`;
-  }
-  handSlotChange() {
-    this.hasFooter = hasSlot(this, 'footer');
   }
   private _emitTreeEvent(event: CustomEvent) {
     const node = (event as any).delegateTarget as SlTreeNode;
     if (!event.defaultPrevented) {
       const oldType = event.type;
       const type = oldType.replace('sl-node', 'sl-tree-node');
-      const nodeData = event.detail.nodeData;
-      if (this.enableFilter && this.filterMethod) {
-        const realData = this.nodeCacheMap?.get(nodeData);
-        if (realData) {
-          for (let k in nodeData) {
-            if (k != 'children') {
-              realData[k] = nodeData[k];
-            }
-          }
-        }
-      }
+      const nodeData = node.nodeData;
       emit(this, type, {
         detail: {
           node: node,
-          nodeData: event.detail.nodeData
+          nodeData: nodeData,
+          parentData:node.parentNodeData
         }
       });
     }
@@ -235,11 +268,23 @@ export default class SlTree extends LitElement {
       'sl-node-open',
       'sl-node-toogle'
     ];
-   
+
     let div = this.renderRoot.querySelector('div[part]') as HTMLElement;
     for (let eventType of eventArray) {
       onEvent(div, 'sl-tree-node', eventType, handerTreeNode);
     }
+    onEvent(div, 'sl-tree-node', 'sl-node-click', (event:CustomEvent)=>{
+       const tree_node=(event.detail.node) as SlTreeNode;
+       if(this.selectMode=='single'&&tree_node.nodeData){
+         this.checkedKeys=tree_node.nodeData[this.nodeIDProperty];
+         emit(this, 'sl-tree-node-select-change', {
+          detail: {
+            node: tree_node,
+            checkKeyKeys:this.checkedKeys
+          }
+        });
+       }
+    });
   }
   render() {
     const baseClass = {
@@ -248,8 +293,8 @@ export default class SlTree extends LitElement {
     return html`<div part="base" class=${classMap(baseClass)}>
       ${this.enableFilter
         ? html`<div part="filter">
-            <slot name="filter"
-              ><sl-input
+            <slot name="filter">
+              <sl-input
                 part="filter-input"
                 .placeholder=${this.filterInputPlaceholder}
                 @sl-input=${this.inputFilterHanlder}
@@ -259,75 +304,122 @@ export default class SlTree extends LitElement {
           </div>`
         : ''}
       <div part="tree-body">${this.renderAllTreeNode()}</div>
-      <div part="tree-footer"><slot name="footer"></slot></div>
+      <div part="tree-footer"><slot name="footer" @slotchange=${this.slotChangeHandler}></slot></div>
     </div>`;
   }
-
-  private inputChangeHander = debounce((inputString: string) => {
+  private slotChangeHandler(){
+    this.hasFooter=hasSlot(this,'footer');
+  }
+  private inputChangeHander = debounceWait((inputString: string) => {
     this.filterString = inputString;
-  }, 60);
+  }, 30);
   private inputFilterHanlder(event: Event) {
     var inputString = (event.target as any).value;
     this.inputChangeHander(inputString);
   }
-  private handerCheckEvent(event: Event) {
-    event.stopPropagation();
+  private async handerCheckEvent(event: Event) {
     let checked = (event.target as any).checked as boolean;
-    if (!Array.isArray(this.checkedKeys)) {
-      this.checkedKeys = new Array<string | number | unknown>();
+    let array=this.checkedKeys as Array<unknown>;
+    let node = this.getClosetTreeNode(event.target as HTMLElement) as SlTreeNode;
+    let nodeData = node.nodeData as TreeNodeData;
+    let nodeIDValue=nodeData[this.nodeIDProperty];
+    if (checked && typeof nodeIDValue != 'undefined') {
+        const iteratorSubData=(node:TreeNodeData)=>{
+          let nodeID=node[this.nodeIDProperty];
+          if(typeof nodeID!='undefined'){
+              if(!array.includes(nodeID)){
+                array.push(nodeID);
+              }
+          }
+        }
+        if(this.checkCasecade){
+          iteratorNodeData(nodeData,iteratorSubData);
+        }else{
+          iteratorSubData(nodeData);
+        }
+       
+    }else if(typeof nodeIDValue != 'undefined'){
+      const iteratorSubData=(node:TreeNodeData)=>{
+        let nodeID=node[this.nodeIDProperty];
+        if(typeof nodeID!='undefined'){
+          let index=array.indexOf(nodeID);
+          if(index>=0){
+            array.splice(index,1);
+          }
+        }
+      }
+      if(this.checkOffCasecade){
+        iteratorNodeData(nodeData,iteratorSubData);
+      }else{
+        iteratorSubData(nodeData);
+      }
     }
-    let node = (event.target as any).getRootNode().host as SlTreeNode;
-    let nodeData = (event.target as any)['nodeData'] as TreeNodeData;
-    if (checked && typeof nodeData[this.nodeIDProperty] != 'undefined') {
-      (this.checkedKeys as any).push(nodeData[this.nodeIDProperty]);
-    }
-    emit(this, 'sl-tree-node-check-select', {
+    this.checkedKeys=[...array];
+    await this.updateComplete;
+    emit(this, 'sl-tree-node-select-change', {
       detail: {
         node: node,
-        nodeData: nodeData
+        checkKeyKeys:array
       }
     });
   }
-  private handerRadioEvent(event: Event) {
-    event.stopPropagation();
+  private async handerRadioEvent(event: Event) {
+    let node = this.getClosetTreeNode(event.target as HTMLElement) as SlTreeNode;
     let checked = (event.target as any).checked as boolean;
+    let tempChecke='';
     if (Array.isArray(this.checkedKeys)) {
-      this.checkedKeys = this.checkedKeys[0];
+      tempChecke = this.checkedKeys[0] as string ;
     }
-    let node = (event.target as any).getRootNode().host as SlTreeNode;
-    let nodeData = (event.target as any)['nodeData'] as TreeNodeData;
+    let nodeData = node.nodeData as TreeNodeData;
     if (checked && typeof nodeData[this.nodeIDProperty] != 'undefined') {
-      this.checkedKeys = nodeData[this.nodeIDProperty];
+       tempChecke= nodeData[this.nodeIDProperty] as string;
+    }else{
+      tempChecke='';
     }
-    emit(this, 'sl-tree-node-radio-select', {
+     this.checkedKeys=tempChecke;
+     await this.updateComplete;
+    emit(this, 'sl-tree-node-select-change', {
       detail: {
         node: node,
-        nodeData: nodeData
+        checkKeyKeys:tempChecke
       }
     });
   }
 
   @watchProps(['nodeRender', 'selectMode', 'select_highlight', 'checkedKeys'])
-  doNodeRenderChange() {
-    this.real_treeNodeRender = (node: TreeNodeData) => {
-      const result = this.nodeRender(node);
+  watchNodeRenderChange() {
+    const handerNodeSelect=(event:Event)=>{
+      const node=event.target as HTMLElement;
+      if(node.tagName.toLocaleUpperCase()=='sl-checkbox'||node.tagName.toLocaleUpperCase()=='sl-radio'){
+        return ;
+      }
+      if(this.selectMode=='check'){
+        let checkBox=node.querySelector(':scope > sl-checkbox')  as SlCheckbox;
+        if(checkBox){
+          checkBox.checked=!checkBox.checked;
+          emit(checkBox,'sl-change');
+        }
+        
+      }else if(this.selectMode=='radio'){
+        let checkBox=node.querySelector(':scope > sl-radio')  as SlRadio;
+        if(checkBox){
+          checkBox.checked=true;
+          emit(checkBox,'sl-change');
+        }
+      }
+    }
+    this.real_treeNodeRender = (node: TreeNodeData,index?:number,parentNodeData?:TreeNodeData) => {
+      const result = this.nodeRender(node,index,parentNodeData);
       const array = [];
       if (this.selectMode == 'check') {
-        if (typeof this.checkedKeys != 'undefined') {
-          if (!Array.isArray(this.checkedKeys)) {
-            this.checkedKeys = [];
-          }
-        } else {
-          this.checkedKeys = [];
-        }
         array.push(
           html`<sl-checkbox
             .nodeData=${node}
             @sl-change=${this.handerCheckEvent}
             class="selectCheckbox"
             .checked=${typeof node[this.nodeIDProperty] != 'undefined' &&
-            (this.checkedKeys as any).includes(node[this.nodeIDProperty])}
-          ></sl-checkbox>`
+            (this.checkedKeys as Array<unknown>).includes(node[this.nodeIDProperty])}
+          >${result}</sl-checkbox>`
         );
       } else if (this.selectMode == 'radio') {
         array.push(
@@ -336,12 +428,38 @@ export default class SlTree extends LitElement {
             @sl-change=${this.handerRadioEvent}
             class="selectRadio"
             .checked=${typeof node[this.nodeIDProperty] != 'undefined' && this.checkedKeys == node[this.nodeIDProperty]}
-          ></sl-radio>`
+          >${result}</sl-radio>`
         );
+      }else{
+        array.push(result);
       }
-      array.push(result);
-      return html`<div>${array}</div>`;
+      return html`<div part='select-part' @click=${handerNodeSelect}>${array}</div>`;
     };
+  }
+
+  /**
+   *  获取 DOM 最近的TreeNode: 
+   * @param el tree shadowRoot 内部元素
+   * @throws when el getRootNode()==document 
+   */
+   public getClosetTreeNode(el:HTMLElement):SlTreeNode|null{
+    if(el.getRootNode()==document){
+      throw new Error('el should  in tree ShadowRoot !');
+    }
+    if(el instanceof SlTreeNode){
+      return el;
+    }else{
+      let root=el.getRootNode() as ShadowRoot;
+      let temp;
+      while(root!=null ){
+         temp=root.host;
+         if(temp instanceof SlTreeNode){
+           return temp;
+         }
+         root=temp.getRootNode() as ShadowRoot;
+      }
+    }
+    return null;
   }
 }
 const parentSymobl = Symbol('parent');

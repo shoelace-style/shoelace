@@ -1,5 +1,5 @@
 //
-// A lightweight debounce implementation 防抖：一个事件如果不听发生，则一定时间内只发生一次
+// A lightweight debounce implementation 防抖：一个事件如果不断发生，则一定时间内只发生一次
 //
 export function debounce(callback: (...arg: unknown[]) => void, delay: number) {
   let timer: any;
@@ -12,7 +12,25 @@ export function debounce(callback: (...arg: unknown[]) => void, delay: number) {
     timer = setTimeout(() => (timer = null), delay);
   };
 }
-
+/**
+ * 防抖： 如果一个函数不停发生，则要等一定间隔才允许发生或者执行
+ * @param fn 原始防抖函数
+ * @param wait 
+ * @returns 
+ */
+export function debounceWait(fn: (...arg: unknown[]) => void, wait: number) {
+  let callback = fn;    
+  let timerId:any;
+  return (...args:unknown[]) =>{
+        // 保存作用域
+        let context = this;
+        // 保存参数，例如 event 对象
+        clearTimeout(timerId);        
+        timerId = setTimeout(function() {            
+            callback.apply(context, args);
+        }, wait);
+    }
+}
 //
 // A lightweight throttle implementation
 //
