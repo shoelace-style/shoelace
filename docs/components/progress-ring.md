@@ -33,7 +33,10 @@ To change the color, use the `--track-color` and `--indicator-color` custom prop
 ```html preview
 <sl-progress-ring 
   percentage="50" 
-  style="--track-color: #ffe2c6; --indicator-color: tomato;"
+  style="
+    --track-color: rgb(var(--sl-color-cyan-100)); 
+    --indicator-color: rgb(var(--sl-color-cyan-600));
+  "
 ></sl-progress-ring>
 ```
 
