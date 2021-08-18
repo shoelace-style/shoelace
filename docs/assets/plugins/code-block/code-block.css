@@ -5,10 +5,6 @@
   margin-bottom: 1.5rem;
 }
 
-.sl-theme-dark .code-block {
-  background-color: rgb(var(--sl-color-neutral-200));
-}
-
 .code-block__preview {
   position: relative;
   border: solid 1px rgb(var(--sl-color-neutral-200));
@@ -170,11 +166,13 @@
 .markdown-section .docsify-copy-code-button {
   top: 4px;
   right: 4px;
-  background-color: rgb(var(--sl-color-neutral-500));
+  background-color: rgb(var(--sl-color-neutral-600));
   border-radius: var(--sl-border-radius-medium);
   font-family: var(--sl-font-sans);
-  font-size: var(--sl-font-size-small);
+  font-size: var(--sl-font-size-x-small);
   font-weight: var(--sl-font-weight-semibold);
+  text-transform: uppercase;
+  padding: 8px;
   user-select: none;
 }
 

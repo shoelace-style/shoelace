@@ -22,6 +22,10 @@ a {
   color: rgb(var(--sl-color-primary-600));
 }
 
+a:hover {
+  color: rgb(var(--sl-color-primary-700));
+}
+
 strong {
   font-weight: var(--sl-font-weight-bold);
 }
@@ -567,59 +571,15 @@ strong {
 }
 
 /* Repo buttons */
-html .repo-button {
-  display: inline-flex;
-  align-items: center;
-  background-color: rgb(var(--sl-color-neutral-1000));
-  border: solid 1px rgb(var(--sl-color-neutral-200));
-  border-radius: var(--sl-border-radius-medium);
-  box-shadow: var(--sl-shadow-x-small);
-  font-size: var(--sl-font-size-small);
-  font-weight: var(--sl-font-weight-semibold);
-  line-height: 2;
-  text-decoration: none;
-  color: rgb(var(--sl-color-neutral-700));
-  padding: var(--sl-spacing-xx-small) var(--sl-spacing-small);
-  margin-bottom: var(--sl-spacing-xx-small);
-  transition: 0.25s all;
-}
-
-html .repo-button:hover {
-  text-decoration: none;
-  background-color: rgb(var(--sl-color-neutral-50));
-  border: solid 1px rgb(var(--sl-color-neutral-200));
-}
-
-html .repo-button:focus {
-  outline: none;
-  border-color: rgb(var(--sl-color-primary-500));
-  box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-primary-500) / var(--sl-focus-ring-alpha));
-}
-
-html .repo-button:not(:last-of-type) {
-  margin-right: 0.125rem;
-}
-
-html .repo-button sl-icon {
-  position: relative;
-  vertical-align: middle;
-  margin-right: 0.35rem;
-}
-
-html .repo-button--small {
-  font-size: var(--sl-font-size-x-small);
-  padding: var(--sl-spacing-xxx-small) var(--sl-spacing-x-small);
-}
-
-html .repo-button--sponsor sl-icon {
+.repo-button--sponsor sl-icon {
   color: rgb(var(--sl-color-pink-500));
 }
 
-html .repo-button--github sl-icon {
-  color: rgb(var(--sl-color-neutral-600));
+.repo-button--github sl-icon {
+  color: rgb(var(--sl-color-neutral-700));
 }
 
-html .repo-button--twitter sl-icon {
+.repo-button--twitter sl-icon {
   color: rgb(var(--sl-color-sky-500));
 }
 

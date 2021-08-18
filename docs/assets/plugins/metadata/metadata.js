@@ -289,16 +289,16 @@
       const buttons = document.createElement('div');
       buttons.classList.add('sidebar-buttons');
       buttons.innerHTML = `
-          <a class="repo-button repo-button--small repo-button--sponsor" href="https://github.com/sponsors/claviska" rel="noopener" target="_blank">
-            <sl-icon name="heart"></sl-icon> Sponsor
-          </a>
-          <a class="repo-button repo-button--small repo-button--github" href="https://github.com/shoelace-style/shoelace/stargazers" rel="noopener" target="_blank">
-            <sl-icon name="github"></sl-icon> <span class="github-star-count">Star</span>
-          </a>
-          <a class="repo-button repo-button--small repo-button--twitter" href="https://twitter.com/shoelace_style" rel="noopener" target="_blank">
-            <sl-icon name="twitter"></sl-icon> Follow
-          </a>
-        `;
+        <sl-button size="small" class="repo-button repo-button--sponsor" href="https://github.com/sponsors/claviska" target="_blank">
+          <sl-icon name="heart"></sl-icon> Sponsor
+        </sl-button>
+        <sl-button size="small" class="repo-button repo-button--github" href="https://github.com/shoelace-style/shoelace/stargazers" target="_blank">
+          <sl-icon name="github"></sl-icon> <span class="github-star-count">Star</span>
+        </sl-button>
+        <sl-button size="small" class="repo-button repo-button--twitter" href="https://twitter.com/shoelace_style" target="_blank">
+          <sl-icon name="twitter"></sl-icon> Follow
+        </sl-button>
+      `;
       target.appendChild(buttons);
     });
 
