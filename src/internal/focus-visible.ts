@@ -6,14 +6,29 @@
 //
 const listeners = new WeakMap();
 
-export function observe(el: HTMLElement) {
+interface ObserveOptions {
+  visible: () => void;
+  notVisible: () => void;
+}
+
+export function observe(el: HTMLElement, options?: ObserveOptions) {
   const keys = ['Tab', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Home', 'End', 'PageDown', 'PageUp'];
   const is = (event: KeyboardEvent) => {
     if (keys.includes(event.key)) {
       el.classList.add('focus-visible');
+
+      if (options?.visible) {
+        options.visible();
+      }
     }
   };
-  const isNot = () => el.classList.remove('focus-visible');
+  const isNot = () => {
+    el.classList.remove('focus-visible');
+
+    if (options?.notVisible) {
+      options.notVisible();
+    }
+  };
   listeners.set(el, { is, isNot });
 
   el.addEventListener('keydown', is);

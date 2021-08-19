@@ -2,6 +2,7 @@ import { LitElement, html } from 'lit';
 import { customElement, query } from 'lit/decorators.js';
 import { emit } from '../../internal/event';
 import { getTextContent } from '../../internal/slot';
+import { focusVisible } from '../../internal/focus-visible';
 import type SlMenuItem from '../menu-item/menu-item';
 import styles from './menu.styles';
 
@@ -24,6 +25,19 @@ export default class SlMenu extends LitElement {
 
   private typeToSelectString = '';
   private typeToSelectTimeout: any;
+
+  connectedCallback() {
+    super.connectedCallback();
+    focusVisible.observe(this, {
+      visible: () => this.getAllItems().map(item => item.classList.add('sl-focus-visible')),
+      notVisible: () => this.getAllItems().map(item => item.classList.remove('sl-focus-visible'))
+    });
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    focusVisible.unobserve(this);
+  }
 
   getAllItems(options: { includeDisabled: boolean } = { includeDisabled: true }) {
     return [...this.defaultSlot.assignedElements({ flatten: true })].filter((el: HTMLElement) => {
