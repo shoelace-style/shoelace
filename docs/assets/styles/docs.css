@@ -456,6 +456,16 @@ strong {
 }
 
 /* Tables */
+.table-wrapper {
+  overflow-x: auto;
+}
+
+@media screen and (max-width: 1200px) {
+  .table-wrapper table {
+    min-width: 800px;
+  }
+}
+
 .markdown-section table {
   display: table;
   margin-bottom: 1.5rem;

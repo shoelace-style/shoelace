@@ -435,5 +435,19 @@
 
       next(content);
     });
+
+    // Wrap tables so we can scroll them horizontally when needed
+    hook.doneEach(function () {
+      const content = document.querySelector('.content');
+      const tables = [...content.querySelectorAll('table')];
+
+      tables.map(table => {
+        table.outerHTML = `
+          <div class="table-wrapper">
+            ${table.outerHTML}
+          </div>
+        `;
+      });
+    });
   });
 })();
