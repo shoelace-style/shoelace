@@ -19,7 +19,7 @@ export function observe(el: HTMLElement) {
   el.addEventListener('keydown', is);
   el.addEventListener('keyup', is);
   el.addEventListener('mousedown', isNot);
-  el.addEventListener('mousedown', isNot);
+  el.addEventListener('mouseup', isNot);
 }
 
 export function unobserve(el: HTMLElement) {
@@ -29,7 +29,7 @@ export function unobserve(el: HTMLElement) {
   el.removeEventListener('keydown', is);
   el.removeEventListener('keyup', is);
   el.removeEventListener('mousedown', isNot);
-  el.removeEventListener('mousedown', isNot);
+  el.removeEventListener('mouseup', isNot);
 }
 
 export const focusVisible = {
