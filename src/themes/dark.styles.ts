@@ -514,7 +514,7 @@ export default css`
     --sl-input-help-text-font-size-medium: var(--sl-font-size-small);
     --sl-input-help-text-font-size-large: var(--sl-font-size-medium);
 
-    --sl-input-help-text-color: var(--sl-color-neutral-400);
+    --sl-input-help-text-color: var(--sl-color-neutral-500);
 
     /* Toggle (checkboxes, radios, switches) */
     --sl-toggle-size: 1rem;
