@@ -126,7 +126,7 @@ You should always use the `closable` attribute so users can dismiss the notifica
 <div class="alert-toast">
   <sl-button type="primary">Primary</sl-button>
   <sl-button type="success">Success</sl-button>
-  <sl-button type="neutral">Info</sl-button>
+  <sl-button type="neutral">Neutral</sl-button>
   <sl-button type="warning">Warning</sl-button>
   <sl-button type="danger">Danger</sl-button>
   
