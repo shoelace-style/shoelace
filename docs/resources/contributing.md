@@ -249,6 +249,25 @@ Parts let you target a specific element inside the component's shadow DOM but, b
 
 This convention can be relaxed when the developer experience is greatly improved by not following these suggestions.
 
+### Design Token Color Values
+
+All design tokens that implement a color value must do so in the following `R G B` format for consistency.
+
+```css
+:root {
+  --sl-color-sky-500: 14 165 233;
+}
+```
+
+This format requires the consumer to use the `rgb()` function in their stylesheets, but it also lets them control each token's alpha channel.
+
+```css
+.example {
+  color: rgb(var(--sl-color-sky-500));
+  background-color: rgb(var(--sl-color-sky-500) / 5%); /* 5% opacity */
+}
+```
+
 ### Form Controls
 
 Form controls should support validation through the following conventions:
