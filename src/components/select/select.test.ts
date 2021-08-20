@@ -48,10 +48,7 @@ describe('<sl-select>', () => {
     `)) as SlSelect;
     const selectBox = el.shadowRoot.querySelector('.select__box') as HTMLSelectElement;
     selectBox.focus();
-    const ctrlKeyEvent = new KeyboardEvent('keydown', { key: 'Control' });
-    selectBox.dispatchEvent(ctrlKeyEvent);
-    await aTimeout(100);
-    const rKeyEvent = new KeyboardEvent('keydown', { key: 'r' });
+    const rKeyEvent = new KeyboardEvent('keydown', { key: 'r', ctrlKey: true });
     selectBox.dispatchEvent(rKeyEvent);
     await aTimeout(100);
     expect(selectBox.getAttribute('aria-expanded')).to.equal('false');

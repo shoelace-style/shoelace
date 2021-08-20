@@ -65,7 +65,6 @@ export default class SlSelect extends LitElement {
   private helpTextId = `select-help-text-${id}`;
   private labelId = `select-label-${id}`;
   private resizeObserver: ResizeObserver;
-  private isCtrlKeyPressed = false;
 
   @state() private hasFocus = false;
   @state() private hasHelpTextSlot = false;
@@ -250,25 +249,17 @@ export default class SlSelect extends LitElement {
       }
     }
 
-    // toggling CTRL/Command key state for ctrl + any key commands
-    if (event.key === 'Control' || event.metaKey) {
-      this.isCtrlKeyPressed = true;
+    // don't open the menu when a CTRL/Command key is pressed
+    if (event.ctrlKey || event.metaKey) {
       return;
     }
 
-    // All other "printable" keys open the menu (if not ctrl key is pressed) and initiate type to select
-    if (!this.isOpen && !this.isCtrlKeyPressed && event.key.length === 1) {
+    // All other "printable" keys open the menu and initiate type to select
+    if (!this.isOpen && event.key.length === 1) {
       event.stopPropagation();
       event.preventDefault();
       this.dropdown.show();
       this.menu.typeToSelect(event.key);
-    }
-  }
-
-  handleKeyUp(event: KeyboardEvent) {
-    // toggling CTRL/Command key state for ctrl + any key commands
-    if (event.key === 'Control' || event.metaKey) {
-      this.isCtrlKeyPressed = false;
     }
   }
 
@@ -491,7 +482,6 @@ export default class SlSelect extends LitElement {
             @blur=${this.handleBlur}
             @focus=${this.handleFocus}
             @keydown=${this.handleKeyDown}
-            @keyup=${this.handleKeyUp}
           >
             <div class="select__label">
               ${this.displayTags.length
