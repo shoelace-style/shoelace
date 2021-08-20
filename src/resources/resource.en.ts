@@ -1,3 +1,2 @@
-const  resouce={
-}
+const resouce = {};
 export default resouce;

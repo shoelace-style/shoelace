@@ -41,11 +41,11 @@ try {
     // Theme stylesheets
     ...(await glob('./src/themes/**/!(*.test).ts'))
   ];
-  const resouces=[...(await glob('./src/resources/resource.*.ts'))];
-  const resouceResult=await esbuild.build({
+  const resouces = [...(await glob('./src/resources/!(*.(style|test)).ts'))];
+  const resouceResult = await esbuild.build({
     format: 'esm',
     target: 'es2017',
-    entryPoints:resouces,
+    entryPoints: resouces,
     outdir: './dist/resources',
     chunkNames: '[name]',
     incremental: dev,
@@ -56,7 +56,7 @@ try {
     bundle: true,
     splitting: true,
     plugins: []
-  })
+  });
   const buildResult = await esbuild
     .build({
       format: 'esm',
@@ -133,7 +133,7 @@ try {
         .then(() => bs.reload())
         .catch(err => console.error(chalk.red(err)));
     });
-    bs.watch(['src/resouces/!(*.test).*']).on('change', async filename=>{
+    bs.watch(['src/resouces/!(*.test).*']).on('change', async filename => {
       console.log(`resouce file changed - ${filename}`);
       resouceResult
         // Rebuild and reload
