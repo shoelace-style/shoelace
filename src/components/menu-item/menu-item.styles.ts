@@ -25,6 +25,7 @@ export default css`
     white-space: nowrap;
     cursor: pointer;
   }
+
   .menu-item.menu-item--disabled {
     outline: none;
     color: rgb(var(--sl-color-neutral-400));

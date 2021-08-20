@@ -61,9 +61,13 @@ export default class SlMenuItem extends LitElement {
           'menu-item--disabled': this.disabled
         })}
       >
-        <span part="checked-icon" class="menu-item__check">
-          <sl-icon name="check" library="system" aria-hidden="true"></sl-icon>
-        </span>
+        <sl-icon
+          part="checked-icon"
+          class="menu-item__check"
+          name="check"
+          library="system"
+          aria-hidden="true"
+        ></sl-icon>
 
         <span part="prefix" class="menu-item__prefix">
           <slot name="prefix"></slot>
