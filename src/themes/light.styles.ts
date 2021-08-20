@@ -383,11 +383,11 @@ export default css`
      * Elevation tokens
      */
 
-    --sl-shadow-x-small: 0 1px 0 rgb(0 0 0 / 5%);
-    --sl-shadow-small: 0 1px 2px rgb(0 0 0 / 9%);
-    --sl-shadow-medium: 0 2px 4px rgb(0 0 0 / 9%);
-    --sl-shadow-large: 0 2px 8px rgb(0 0 0 / 9%);
-    --sl-shadow-x-large: 0 4px 16px rgb(0 0 0 / 9%);
+    --sl-shadow-x-small: 0 1px 0 rgb(var(--sl-color-neutral-500) / 10%);
+    --sl-shadow-small: 0 1px 2px rgb(var(--sl-color-neutral-500) / 12%);
+    --sl-shadow-medium: 0 2px 4px rgb(var(--sl-color-neutral-500) / 12%);
+    --sl-shadow-large: 0 2px 8px rgb(var(--sl-color-neutral-500) / 12%);
+    --sl-shadow-x-large: 0 4px 16px rgb(var(--sl-color-neutral-500) / 12%);
 
     /*
      * Spacing tokens

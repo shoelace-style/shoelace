@@ -6,6 +6,11 @@ Components with the <sl-badge type="warning" pill>Experimental</sl-badge> badge 
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
+## Next
+
+- Adjusted elevation tokens to use neutral in light mode and black in dark mode
+- Removed elevation from `sl-color-picker` when rendered inline
+
 ## 2.0.0-beta.48
 
 This release improves theming by offering both light and dark themes that can be used autonomously. It also improves contrast in most components, adds a variety of new color primitives, and changes the way color tokens are consumed. 
