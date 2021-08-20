@@ -27,6 +27,13 @@
     let menuDiv=document.querySelector('#menuDiv');
     let spliter=document.querySelector('#spliter');
     menuDiv.addEventListener('sl-select',(event)=>{
+        menuDiv.querySelectorAll('sl-menu-item').forEach((item)=>{
+            if(event.detail.item==item){
+                item.type='primary';
+            }else{
+                item.type='default';
+            }
+        })
         spliter.splitType=event.detail.item.textContent;
     });
 

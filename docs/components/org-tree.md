@@ -26,7 +26,7 @@
         children: [
         {
             key: '0_0',
-            data: {roleName:'CEO',userName: '王刚'},
+            data: {roleName:'CEO',userName: 'Tang'},
             collapsable:true,
             expanded:false,
             children: [

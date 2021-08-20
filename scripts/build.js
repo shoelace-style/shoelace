@@ -41,7 +41,22 @@ try {
     // Theme stylesheets
     ...(await glob('./src/themes/**/!(*.test).ts'))
   ];
-
+  const resouces=[...(await glob('./src/resources/resource.*.ts'))];
+  const resouceResult=await esbuild.build({
+    format: 'esm',
+    target: 'es2017',
+    entryPoints:resouces,
+    outdir: './dist/resources',
+    chunkNames: '[name]',
+    incremental: dev,
+    define: {
+      // Popper.js expects this to be set
+      'process.env.NODE_ENV': '"production"'
+    },
+    bundle: true,
+    splitting: true,
+    plugins: []
+  })
   const buildResult = await esbuild
     .build({
       format: 'esm',
@@ -115,6 +130,14 @@ try {
 
           execSync('node scripts/make-metadata.js', { stdio: 'inherit' });
         })
+        .then(() => bs.reload())
+        .catch(err => console.error(chalk.red(err)));
+    });
+    bs.watch(['src/resouces/!(*.test).*']).on('change', async filename=>{
+      console.log(`resouce file changed - ${filename}`);
+      resouceResult
+        // Rebuild and reload
+        .rebuild()
         .then(() => bs.reload())
         .catch(err => console.error(chalk.red(err)));
     });

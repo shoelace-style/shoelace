@@ -57,6 +57,7 @@ export { default as SlCollapse } from './components/collapse/collapse';
 export { default as SlTree } from './components/tree/tree';
 export { default as SlTreeNode } from './components/tree-node/tree-node';
 export { default as SlSplitter } from './components/splitter/splitter';
+export { default as SlPageBtn } from './components/page-btn/page-btn';
 /* plop:component */
 
 // Utilities

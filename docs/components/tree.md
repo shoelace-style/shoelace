@@ -2,7 +2,7 @@
 
 [component-header:sl-tree]
 
-Tree 组件，Tree 最重要的是定义数据源`rootNodeData`，渲染函数 `nodeRender`, 选择模式 支持 `check`,`radio`,`single`,`node`
+Tree 组件: 最重要的是定义数据源`rootNodeData`，渲染函数 `nodeRender`, 选择模式 支持 `check`,`radio`,`single`,`node`,内部封装`sl-tree-node`，支持过滤，支持自定义渲染
 
 ### 节点数据源 `nodeData` 
 ```javascript
