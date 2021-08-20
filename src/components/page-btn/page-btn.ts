@@ -73,7 +73,6 @@ export default class SlPageBtn extends LitElement {
     }
   }
   _renderSimple() {
-
     return html`<sl-input
         size="small"
         type="number"
