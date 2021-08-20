@@ -108,9 +108,9 @@ Use the `size` attribute to change a select's size.
 
 ```html preview
 <sl-select placeholder="Small" size="small" multiple>
-  <sl-menu-item value="option-1">Option 1</sl-menu-item>
-  <sl-menu-item value="option-2">Option 2</sl-menu-item>
-  <sl-menu-item value="option-3">Option 3</sl-menu-item>
+  <sl-menu-item size="small" value="option-1">Option 1</sl-menu-item>
+  <sl-menu-item size="small" value="option-2">Option 2</sl-menu-item>
+  <sl-menu-item size="small" value="option-3">Option 3</sl-menu-item>
 </sl-select>
 
 <br>
@@ -124,9 +124,9 @@ Use the `size` attribute to change a select's size.
 <br>
 
 <sl-select placeholder="Large" size="large" multiple>
-  <sl-menu-item value="option-1">Option 1</sl-menu-item>
-  <sl-menu-item value="option-2">Option 2</sl-menu-item>
-  <sl-menu-item value="option-3">Option 3</sl-menu-item>
+  <sl-menu-item size="large" value="option-1">Option 1</sl-menu-item>
+  <sl-menu-item size="large" value="option-2">Option 2</sl-menu-item>
+  <sl-menu-item size="large" value="option-3">Option 3</sl-menu-item>
 </sl-select>
 ```
 

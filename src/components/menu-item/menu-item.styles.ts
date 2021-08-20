@@ -31,6 +31,18 @@ export default css`
     cursor: not-allowed;
   }
 
+  .menu-item.menu-item--small {
+    font-size: var(--sl-font-size-small);
+  }
+
+  .menu-item.menu-item--medium {
+    font-size: var(--sl-font-size-medium);
+  }
+
+  .menu-item.menu-item--large {
+    font-size: var(--sl-font-size-large);
+  }
+
   .menu-item .menu-item__label {
     flex: 1 1 auto;
   }
@@ -74,6 +86,14 @@ export default css`
     visibility: hidden;
     align-items: center;
     font-size: inherit;
+  }
+
+  .menu-item.menu-item--small .menu-item__check {
+    left: 0.7em;
+  }
+
+  .menu-item.menu-item--large .menu-item__check {
+    left: 0.3em;
   }
 
   .menu-item--checked .menu-item__check {

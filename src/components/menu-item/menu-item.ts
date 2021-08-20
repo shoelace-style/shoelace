@@ -37,6 +37,9 @@ export default class SlMenuItem extends LitElement {
   /** Draws the menu item in a disabled state. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
+  /** The menu-item's font size. */
+  @property() size: 'small' | 'medium' | 'large' = 'medium';
+
   firstUpdated() {
     this.setAttribute('role', 'menuitem');
   }
@@ -58,7 +61,10 @@ export default class SlMenuItem extends LitElement {
         class=${classMap({
           'menu-item': true,
           'menu-item--checked': this.checked,
-          'menu-item--disabled': this.disabled
+          'menu-item--disabled': this.disabled,
+          'menu-item--small': this.size === 'small',
+          'menu-item--medium': this.size === 'medium',
+          'menu-item--large': this.size === 'large'
         })}
       >
         <span part="checked-icon" class="menu-item__check">
