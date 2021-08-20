@@ -53,7 +53,7 @@ This change applies to all design tokens that implement a color. Refer to the [c
 - Fixed a bug where clicking on a menu item would persist its hover/focus state
 - Improved contrast throughout all components [#128](https://github.com/shoelace-style/shoelace/issues/128)
 - Refactored thumb position logic in `sl-switch` [#490](https://github.com/shoelace-style/shoelace/pull/490)
-- Reworked the dark theme to use an inverted token approach instead of light DOM selectors
+- Reworked the dark theme to use an inverted + shifted design token approach instead of component-specific selectors
 
 ## 2.0.0-beta.47
 

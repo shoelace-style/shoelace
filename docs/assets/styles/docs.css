@@ -44,7 +44,7 @@ strong {
 .sidebar-version {
   font-size: var(--sl-font-size-x-small);
   font-weight: var(--sl-font-weight-normal);
-  color: rgb(var(--sl-color-neutral-400));
+  color: rgb(var(--sl-color-neutral-500));
   text-align: right;
   padding: 0 var(--sl-spacing-small);
   margin: -1.25rem 0 0.6rem 0;
@@ -307,6 +307,12 @@ strong {
 
 .docsify-pagination-container {
   border-top-color: rgb(var(--sl-color-neutral-200)) !important;
+}
+
+.pagination-item-label,
+.pagination-item-subtitle,
+.pagination-item-title {
+  opacity: 1 !important;
 }
 
 .markdown-section h1,
