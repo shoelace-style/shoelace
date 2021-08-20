@@ -133,8 +133,8 @@ try {
         .then(() => bs.reload())
         .catch(err => console.error(chalk.red(err)));
     });
-    bs.watch(['src/resouces/!(*.test).*']).on('change', async filename => {
-      console.log(`resouce file changed - ${filename}`);
+    bs.watch(['src/resources/!(*.test).*']).on('change', async filename => {
+      console.log(`resource file changed - ${filename}`);
       resouceResult
         // Rebuild and reload
         .rebuild()

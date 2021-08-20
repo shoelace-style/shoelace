@@ -31,8 +31,7 @@ sl-button{
     color:inherit;
     cursor: pointer;
     &[disabled]{
-        cursor: not-allowed;
-        pointer-events: none;
+        cursor: default;
     }
     sl-icon{
         color:  rgb(var(--sl-color-neutral-600));

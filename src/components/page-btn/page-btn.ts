@@ -5,6 +5,7 @@ import { emit } from '../../internal/event';
 import resourceLocal from '../../internal/resourceLocal';
 import { watchProps } from '../../internal/watchProps';
 import { onEvent } from '../../utilities/common';
+import { getResouceValue } from '../../utilities/getResouce';
 import SlButton from '../button/button';
 import '../icon/icon';
 import '../select/select';
@@ -72,6 +73,7 @@ export default class SlPageBtn extends LitElement {
     }
   }
   _renderSimple() {
+
     return html`<sl-input
         size="small"
         type="number"
@@ -139,7 +141,6 @@ export default class SlPageBtn extends LitElement {
   firstUpdated(map: PropertyValues) {
     super.firstUpdated(map);
     let baseDiv = this.renderRoot.querySelector('div[part=base]') as HTMLElement;
-
     this._eventDispose1 = onEvent(baseDiv, 'sl-button[data-page-no]', 'click', async (event: MouseEvent) => {
       let pageNo = ((event as any).delegateTarget as SlButton).getAttribute('data-page-no');
       let tempNo = parseInt(pageNo as string, 10);
@@ -221,20 +222,20 @@ export default class SlPageBtn extends LitElement {
     return html`<div part="base" page-align=${this.align}>
       <slot name="prefix"></slot>
       ${this.total == 0
-        ? html`<div part="no-data"><slot name="no-data">没有数据</slot></div>`
+        ? html`<div part="no-data"><slot name="no-data">${getResouceValue('noData')}</slot></div>`
         : html`
             ${this.showFirst
-              ? html`<sl-tooltip content="第一页"
+              ? html`<sl-tooltip content="${getResouceValue('pageBtn.first')}"
                   ><sl-button size="small" ?disabled=${this.value == 1} data-page-no="first" type="text"
                     ><sl-icon part="first" name="chevron-bar-left"></sl-icon></sl-button
                 ></sl-tooltip>`
               : nothing}
-            <sl-tooltip content="上一页">
+            <sl-tooltip content="${getResouceValue('pageBtn.prev')}">
               <sl-button ?disabled=${this.value == 1} data-page-no="prev" size="small" left type="text"
                 ><sl-icon part="prev" name="chevron-left" ?disabled=${this.value <= 1}></sl-icon></sl-button
             ></sl-tooltip>
             <div part="pageWrap">${this.simple ? this._renderSimple() : this._renderPage()}</div>
-            <sl-tooltip content="下一页"
+            <sl-tooltip content="${getResouceValue('pageBtn.next')}"
               ><sl-button
                 size="small"
                 ?disabled=${this.value + 1 > this.pageCount}
@@ -244,7 +245,7 @@ export default class SlPageBtn extends LitElement {
                 ><sl-icon part="next" name="chevron-right" ?disabled=${this.value <= 1}></sl-icon></sl-button
             ></sl-tooltip>
             ${this.showLast
-              ? html`<sl-tooltip content="最后一页"
+              ? html`<sl-tooltip content="${getResouceValue('pageBtn.last')}"
                   ><sl-button size="small" ?disabled=${this.value == this.pageCount} data-page-no="last" type="text"
                     ><sl-icon part="part" name="chevron-bar-right"></sl-icon></sl-button
                 ></sl-tooltip>`

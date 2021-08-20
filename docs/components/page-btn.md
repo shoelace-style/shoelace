@@ -5,7 +5,7 @@
 A description of the component goes here.
 
 ```html preview
-<sl-page-btn id='page-btn-DIV' total='2000' page-size='20' value='1'></sl-page-btn>
+<sl-page-btn id='page-btn-DIV' total='185' page-size='20' value='1'></sl-page-btn>
 <script >
    let pageBtn=document.querySelector('#page-btn-DIV');
      pageBtn.simple=false;
