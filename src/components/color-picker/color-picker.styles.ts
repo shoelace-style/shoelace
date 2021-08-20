@@ -27,7 +27,6 @@ export default css`
 
   .color-picker--inline {
     border: solid 1px rgb(var(--sl-panel-border-color));
-    box-shadow: var(--sl-shadow-small);
   }
 
   .color-picker__grid {
