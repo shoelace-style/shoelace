@@ -51,6 +51,7 @@ This change applies to all design tokens that implement a color. Refer to the [c
 - Fixed a bug in `sl-button` and `sl-icon-button` where an unintended `ref` attribute was present
 - Fixed a bug in the focus-visible utility that failed to respond to mouseup events
 - Fixed a bug where clicking on a menu item would persist its hover/focus state
+- Fixed a bug in `sl-select` where it would erroneously intercept important keyboard shortcuts [#504](https://github.com/shoelace-style/shoelace/issues/504)
 - Improved contrast throughout all components [#128](https://github.com/shoelace-style/shoelace/issues/128)
 - Refactored thumb position logic in `sl-switch` [#490](https://github.com/shoelace-style/shoelace/pull/490)
 - Reworked the dark theme to use an inverted + shifted design token approach instead of component-specific selectors
