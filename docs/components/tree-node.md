@@ -13,6 +13,7 @@
   icon?: string; /*节点图标 */
   close?: boolean; /* 是否关闭 */
   closeable?: boolean; /*false,表示节点不能折叠起来 */
+  disable?boolean;/** disable ,不能选择状态 ***/
   [key:string]:unknown; /*自定义属性 */
   children?: TreeNodeData[]; /*下级节点 */
   _parent?: TreeNodeData ; //上级节点，内部使用
@@ -46,12 +47,12 @@
         }
         const data=event.detail.nodeData;
         if(data.close){//关闭
-            let index=openData.indexOf(data.value);
+            let index=openData.indexOf(data.id);
             if(index>=0){
                 openData.splice(index,1);
             }
         }else{
-            openData.push(data.value);
+            openData.push(data.id);
         }
         localStorage.setItem('tree-data',JSON.stringify(openData));
         console.log(JSON.stringify(event.detail.nodeData.value));
@@ -80,7 +81,7 @@
           }
         }
     }
-    setNodeID(treeDiv.rootNodeData);
+    setNodeID(rootNode.nodeData);
 
     /*遍历恢复 节点收缩状态*/
     const iteratorNodeData=(data,callback)=>{
@@ -101,6 +102,8 @@
     const callFun=function(tempData){
        if(openData.indexOf(tempData.id)>=0){
            tempData.close=false;
+       }else{
+           //tempData.close=true;
        }
     }
     iteratorNodeData(rootNode.nodeData,callFun);

@@ -42,7 +42,7 @@ module.exports = function (plop) {
       },
       {
         type: 'add',
-        path: '../../src/components/{{ tagWithoutPrefix tag }}/index.style.litcss',
+        path: '../../src/components/{{ tagWithoutPrefix tag }}/index.litcss',
         template: ``
       },
       {

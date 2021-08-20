@@ -1,5 +1,6 @@
 import { css } from 'lit';
 export default css`
+  @charset "UTF-8";
   :host {
     display: block;
   }
@@ -42,11 +43,16 @@ export default css`
     margin-left: var(--sl-spacing-xx-small);
     flex: 1 1 auto;
   }
-  div[part='base'] div[part='node']:hover,
+  div[part='base'] div[part='node'][disabled] {
+    opacity: 0.7;
+    color: rgb var(--sl-color-gray-100);
+  }
+  div[part='base'] div[part='node'][disabled] div[part='node-span'] {
+    cursor: default;
+  }
   div[part='base'] div[part='node'][selected] {
     background-color: rgb(var(--sl-color-sky-200));
   }
-  div[part='base'] div[part='node']:hover::before,
   div[part='base'] div[part='node'][selected]::before {
     position: absolute;
     inset: 0 auto 0 0;
@@ -55,6 +61,21 @@ export default css`
   }
   div[part='base'] div[part='node']:hover {
     background-color: rgb(var(--sl-color-sky-100));
+  }
+  div[part='base'] div[part='node']:hover::before {
+    position: absolute;
+    inset: 0 auto 0 0;
+    border-left: 2px solid rgb(var(--sl-color-blue-500));
+    content: '';
+  }
+  div[part='base'] div[part='node']:hover[disabled] {
+    background-color: rgb(var(--sl-color-gray-100));
+  }
+  div[part='base'] div[part='node']:hover[disabled]::before {
+    border-left: 2px solid rgb(var(--sl-color-gray-500));
+  }
+  div[part='base'] div[part='node'][disabled] div[part='select-part'] {
+    cursor: default;
   }
   div[part='base'] div[part='node'] div[part='select-part'] {
     cursor: pointer;

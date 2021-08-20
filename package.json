@@ -30,7 +30,7 @@
     "url": "https://github.com/sponsors/claviska"
   },
   "scripts": {
-    "jsdoc": "jsdoc -c ./conf.json -t ./node_modules/ink-docstrap/template  -R README.md -r . ",
+    "jsdoc": "npx jsdoc -c ./conf.json -t ./node_modules/ink-docstrap/template --debug -R README.md -r .",
     "css:watch": "node scripts/watch.css.js",
     "start": "node scripts/build.js --dev",
     "build": "node scripts/build.js",

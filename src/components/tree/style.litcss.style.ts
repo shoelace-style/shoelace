@@ -8,7 +8,39 @@ export default css`
   }
   div[part='base'] {
     display: flex;
+    position: relative;
     flex-direction: column;
+  }
+  div[part='base'] .modal {
+    background-color: rgb(var(--sl-overlay-background-color) / var(--sl-overlay-opacity));
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+  }
+  div[part='base'] .loading {
+    position: absolute;
+    left: 50%;
+    top: 3em;
+    width: 3em;
+    height: 3em;
+    margin-left: -1.5em;
+    border-radius: 50%;
+    --track-color: rgb(var(--sl-color-neutral-500) / 15%);
+    --indicator-color: rgb(var(--sl-color-primary-500));
+    --stroke-width: 4px;
+    border: solid var(--stroke-width) var(--track-color);
+    border-top-color: var(--indicator-color);
+    border-right-color: var(--indicator-color);
+    animation: 1s linear infinite spin;
+  }
+  @keyframes spin {
+    0% {
+      transform: rotate(0);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
   div[part='base'] div[part='filter'] {
     flex: 0 0 auto;

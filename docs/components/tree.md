@@ -2,7 +2,7 @@
 
 [component-header:sl-tree]
 
-Tree 组件，Tree 最重要的是定义数据源`rootNodeData`，渲染函数 `nodeRender`, 选择模式 支持 `checkbox`,`radio`,`default`,`node`
+Tree 组件，Tree 最重要的是定义数据源`rootNodeData`，渲染函数 `nodeRender`, 选择模式 支持 `check`,`radio`,`single`,`node`
 
 ### 节点数据源 `nodeData` 
 ```javascript
@@ -13,6 +13,7 @@ Tree 组件，Tree 最重要的是定义数据源`rootNodeData`，渲染函数 `
   icon?: string; /*节点图标 */
   close?: boolean; /* 是否关闭 */
   closeable?: boolean; /*false,表示节点不能折叠起来 */
+  disable?: boolean; /*true,表示节点disble, 不能被选中 */
   [key:string]:unknown; /*自定义属性 */
   children?: TreeNodeData[]; /*下级节点 */
 
@@ -22,8 +23,13 @@ Tree 组件，Tree 最重要的是定义数据源`rootNodeData`，渲染函数 `
 ### 自定义渲染 `nodeRender`
 接收nodeData ，返回树节点自定返回数据
 ```javascript
- export interface NodeRenderInterface{
-  (data:TreeNodeData):TemplateResult<1>;
+/**
+ * 节点自定义渲染
+ * (data: TreeNodeData, index?:number, parentData?:TreeNodeData,): TemplateResult<1>;
+ */
+export interface NodeRenderInterface {
+  /** data:节点数据源， index: 在上层的顺序号，parentData:父节点数据 */
+  (data: TreeNodeData, index?: number, parentData?: TreeNodeData): TemplateResult<1>;
 }
 ```
 
@@ -40,8 +46,49 @@ Tree 组件，Tree 最重要的是定义数据源`rootNodeData`，渲染函数 `
     (data:TreeNodeData, ...searchData:unknown[]):boolean;
   }
 ```
+### 树节点数据遍历器 配合  `iteratorNodeData`,`NodeVistor` 使用
+```javascript
+ /** 节点遍历器  (node: TreeNodeData, index:number=0,parentNode?: TreeNodeData) */
+export interface NodeVistor {
+  /** @node:遍历的节点，paretNode:上级节点,index:同层次顺序号 */
+  (node: TreeNodeData,  parentNode?: TreeNodeData,index?:number)
+}
+interface iteratorNodeDataType {
+  /** data:TreeNodeData, callback:遍历器函数，parentData：上级数据，parentChildrenIndex:data在上级中的顺序  **/
+  (data: TreeNodeData, callback: NodeVistor, parentData?: TreeNodeData,parentChildrenIndex:number=0)=>void;
+} 
 
-
+import {iteratorNodeData} from 'tree-node-util';
+const data=tree.rootNodeData;
+const result=[];
+const callBack=(node,parentNode)=>{
+    if(node.disable){ //收集所有的disable 节点
+        result.push(node);
+    }
+}
+//iteratorNodeData 内部会封装 自动递归子节点
+iteratorNodeData(data,callBack);
+```
+### `tree-node-util` `convertListToTreeNodeData`可以将 数组的{id,parentID，name } 对象转化为TreeNodeData 
+```javascript
+    import {convertListToTreeNodeData} from 'tree-node-util';
+    const array=[{
+        id:10,
+        parentID:0,
+        name:'A',
+    },{
+        id:11,
+        parentID:0,
+        name:'B',
+    },{
+        id:12,
+        parentID:11,
+        name:'B_1',
+    }]
+    const root={id:0,name:root};
+    convertListToTreeNodeData(array,root);
+    //执行后root.children 有两个子节点 `A，B` . `B` 节点有个子节点`B_1`
+```
 
 ```html preview
 <sl-button-group id='buttonGroup'>
@@ -138,14 +185,19 @@ Tree 组件，Tree 最重要的是定义数据源`rootNodeData`，渲染函数 `
   const request = fetch('/assets/examples/tree-node-demo.json').then(response=>response.json()).then((json)=>{
     treeDiv.rootNodeData={
         value:'中国',
+        disable:true,
         children:json
     };
+
     //规范数据， 这个json 源id 不唯一，现在调整下。
     const setNodeID=(node,parent)=>{
         if(parent){
             node.id=parent.id+'/'+node.value;
         }else{
             node.id=node.value;
+        }
+        if(Math.random()>0.5){
+            node.disable=true;
         }
         const children=node.children;
         if(children){
@@ -176,6 +228,8 @@ Tree 组件，Tree 最重要的是定义数据源`rootNodeData`，渲染函数 `
     const callFun=function(tempData){
        if(openData.indexOf(tempData.id)>=0){
            tempData.close=false;
+       }else{
+           //tempData.close=true;
        }
     }
     iteratorNodeData(treeDiv.rootNodeData,callFun);

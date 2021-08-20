@@ -136,7 +136,9 @@ export default class SlTreeNode extends LitElement {
       return nothing;
     }
     return html`<div part="base">
-      <div part="node" ?selected=${this.isTreeNodeSelected()}>${this.renderNodeData()}</div>
+      <div part="node" ?disabled=${Boolean(this.nodeData.disable)} ?selected=${this.isTreeNodeSelected()}>
+        ${this.renderNodeData()}
+      </div>
       <div part="children" class="${this.isClose ? 'close' : 'open'}">${this.renderChildren()}</div>
     </div>`;
   }
@@ -150,7 +152,7 @@ export default class SlTreeNode extends LitElement {
   }
   private async _clickTrigerHander(event: Event) {
     if (this.subChildSize > 0) {
-      let isClosed = this.nodeData?.close;
+      let isClosed = this.isClose;
       let custEvent = this.emitEvent(`sl-node-before-${isClosed ? 'open' : 'close'}`, event);
       let custToogleEvent = this.emitEvent(`sl-node-before-toogle`, event);
       if (!custEvent.defaultPrevented && !custToogleEvent.defaultPrevented) {
@@ -188,7 +190,7 @@ export default class SlTreeNode extends LitElement {
       }
       result.push(
         html`<div part="node-span" @click=${this._clickNodeHandler}>
-          ${this.nodeRender(this.nodeData, index, this.parentNodeData)}
+          ${this.nodeRender.call(this, this.nodeData, index, this.parentNodeData)}
         </div>`
       );
     }

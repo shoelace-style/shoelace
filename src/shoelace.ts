@@ -56,6 +56,7 @@ export { default as SlAcPanel } from './components/ac-panel/ac-panel';
 export { default as SlCollapse } from './components/collapse/collapse';
 export { default as SlTree } from './components/tree/tree';
 export { default as SlTreeNode } from './components/tree-node/tree-node';
+export { default as SlSplitter } from './components/splitter/splitter';
 /* plop:component */
 
 // Utilities

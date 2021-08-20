@@ -53,26 +53,32 @@ export enum NODE_VISTOR_RESULT {
   EXIST = 1 /**标识遍历到此节点退出 */,
   CONTINUE = 2 /** 标识不在遍历后续的兄弟节点 */
 }
-/** 节点遍历器  (node: TreeNodeData, parentNode?: TreeNodeData) */
+/** 节点遍历器  (node: TreeNodeData, index:number=0,parentNode?: TreeNodeData) */
 export interface NodeVistor {
-  /** @node:遍历的节点， paretNode:上级节点 */
-  (node: TreeNodeData, parentNode?: TreeNodeData): NODE_VISTOR_RESULT | unknown;
+  /** @node:遍历的节点，index:同层次顺序号,paretNode:上级节点 */
+  (node: TreeNodeData, parentNode?: TreeNodeData, index?: number): NODE_VISTOR_RESULT | unknown;
 }
 /**
  * 遍历 TreeNodeData
  * @param data 节点数据
- * @param callback  节点遍历器 (node: TreeNodeData, parentNode?: TreeNodeData):unkown
+ * @param callback  节点遍历器 (node: TreeNodeData, parentNode?: TreeNodeData,parentChildrenIndex?:number):unkown
  * @param parentNode:上级节点(根节点不用设置)
  */
-export const iteratorNodeData = (data: TreeNodeData, callback: NodeVistor, parentData?: TreeNodeData) => {
-  let result = callback(data, parentData);
+export const iteratorNodeData = (
+  data: TreeNodeData,
+  callback: NodeVistor,
+  parentData?: TreeNodeData,
+  parentChildrenIndex: number = 0
+) => {
+  let result = callback(data, parentData, parentChildrenIndex);
   if (result == NODE_VISTOR_RESULT.EXIST) {
     return;
   } else {
     const children = data.children;
     if (children) {
-      label: for (let k of children) {
-        result = iteratorNodeData(k, callback, data);
+      label: for (let index = 0, size = children.length; index < size; index++) {
+        let k = children[index];
+        result = iteratorNodeData(k, callback, data, index);
         if (result == NODE_VISTOR_RESULT.CONTINUE) {
           continue label;
         } else if (result == NODE_VISTOR_RESULT.EXIST) {
@@ -83,11 +89,11 @@ export const iteratorNodeData = (data: TreeNodeData, callback: NodeVistor, paren
   }
 };
 /**
- * 节点数据 是否满足匹配条件 : (data: TreeNodeData, ...searchData: unknown[])
+ * 节点过滤器，返回节点是否满足匹配方法  : (data: TreeNodeData, ...searchData: unknown[])
  */
 export interface TreeNodeFilter {
   /**
-   * data:需要匹配的数据，开发者不用去递归孩子数据
+   * data:需要匹配的数据
    */
   (data: TreeNodeData, ...searchData: unknown[]): boolean;
 }
@@ -118,9 +124,8 @@ export const cloneTreeNodeData = (data: TreeNodeData, excludePropertiyes: string
   (temp as any).children = [];
   return temp as TreeNodeData;
 };
-type DataType = {
-  [key: string]: unknown;
-};
+
+type DataType = Record<string, unknown>;
 /**
  * 将id,parentID 的树节点数据，转化为TreeNodeData。
  * @param list :节点数组列表

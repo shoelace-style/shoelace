@@ -56,6 +56,7 @@
   - [Collapse](/components/collapse)
   - [Tree](/components/tree)
   - [Tree Node](/components/tree-node)
+  - [Splitter](/components/splitter)
   <!--plop:component-->
 
 - Utilities

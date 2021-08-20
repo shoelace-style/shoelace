@@ -2,14 +2,13 @@
   "plugins": [],
   "recurseDepth": 20,
   "source": {
-    "include": ["."],
+    "include": ["types"],
     "includePattern": ".+\\.js$",
-    "exclude": ["./node_modules"]
+    "exclude": ["./node_modules", "dist"]
   },
   "sourceType": "module",
   "tags": {
-    "allowUnknownTags": true,
-    "dictionaries": ["jsdoc"]
+    "allowUnknownTags": true
   },
   "opts": {
     "recurse": true,
