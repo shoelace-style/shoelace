@@ -253,6 +253,11 @@ export default class SlSelect extends LitElement {
       }
     }
 
+    // don't open the menu when a CTRL/Command key is pressed
+    if (event.ctrlKey || event.metaKey) {
+      return;
+    }
+
     // All other "printable" keys open the menu and initiate type to select
     if (!this.isOpen && event.key.length === 1) {
       event.stopPropagation();
