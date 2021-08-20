@@ -84,6 +84,11 @@ export default class SlMenu extends LitElement {
     clearTimeout(this.typeToSelectTimeout);
     this.typeToSelectTimeout = setTimeout(() => (this.typeToSelectString = ''), 750);
     this.typeToSelectString += key.toLowerCase();
+
+    // The menu may not have focus, so the focus visible logic may not be triggered. Because we know they're using the
+    // keyboard, we can force the sl-focus-visible class on each item so the selection shows as expected.
+    this.getAllItems().map(item => item.classList.add('sl-focus-visible'));
+
     for (const item of items) {
       const slot = item.shadowRoot!.querySelector('slot:not([name])') as HTMLSlotElement;
       const label = getTextContent(slot).toLowerCase().trim();
