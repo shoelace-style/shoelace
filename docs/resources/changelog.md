@@ -12,7 +12,9 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Adjusted elevation tokens to use neutral in light mode and black in dark mode
 - Adjusted `--sl-overlay-background-color` in dark theme to be black instead of gray
 - Fixed a bug in `sl-color-picker` where the opacity slider wasn't showing the current color
+- Fixed a bug where Edge in Windows would show the native password toggle next to the custom password toggle [#508](https://github.com/shoelace-style/shoelace/issues/508)
 - Improved color picker size
+- Improved input icon contrast
 - Removed elevation from `sl-color-picker` when rendered inline
 
 ## 2.0.0-beta.48
