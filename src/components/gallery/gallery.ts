@@ -73,8 +73,8 @@ export default class SlGallery extends LitElement {
   /** 是否显示 全屏按钮 */
   @property({ type: Boolean, attribute: false }) show_fullscreen = true;
 
-   /** 是否显示 左右切换按钮 */
-   @property({ type: Boolean, attribute: false }) showNavButtons = true;
+  /** 是否显示 左右切换按钮 */
+  @property({ type: Boolean, attribute: false }) showNavButtons = true;
 
   /** 可以通过 全局 left,right 键来调整当前图片 */
   @property({ type: Boolean, attribute: false }) windowKeyEnable = false;
@@ -165,7 +165,7 @@ export default class SlGallery extends LitElement {
   private _loadedOneImage = false;
   /** 渲染 左右切换图片按钮 */
   private renderNavLefAndRight() {
-    return this._loadedOneImage&&this.showNavButtons
+    return this._loadedOneImage && this.showNavButtons
       ? html`
           <button class="nav-button left-nav" part="left-nav" @click=${() => this.goImageByChange(-1)}>
             ${svgLeft}
@@ -305,8 +305,12 @@ export default class SlGallery extends LitElement {
         }
         thumbContainer.style.transform = `translate3d(-${scrollWidth}px,0px, 0px) `;
       } else if (this.thumbPosition == 'left' || this.thumbPosition == 'right') {
-        const silders=this.renderRoot.querySelector('div.image-sliders') as HTMLElement;
-        thumbContainer.style.height =Math.min(parseInt(getCssValue(silders, 'height')),parseInt(getCssValue( silders.parentElement as HTMLElement, 'height')))+'px';
+        const silders = this.renderRoot.querySelector('div.image-sliders') as HTMLElement;
+        thumbContainer.style.height =
+          Math.min(
+            parseInt(getCssValue(silders, 'height')),
+            parseInt(getCssValue(silders.parentElement as HTMLElement, 'height'))
+          ) + 'px';
         let scroll = thumbContainer.scrollHeight - thumbContainer.offsetHeight;
         let scrollHeight = 0;
         if (scroll > 0 && this.thumb_images && this.thumb_images.length > 0) {
