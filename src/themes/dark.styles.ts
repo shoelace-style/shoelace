@@ -524,7 +524,7 @@ export default css`
      * Overlay tokens
      */
 
-    --sl-overlay-background-color: var(--sl-color-blue-gray-500);
+    --sl-overlay-background-color: 0 0 0;
     --sl-overlay-opacity: 33%;
 
     /*
