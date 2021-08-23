@@ -133,6 +133,9 @@ Theme tokens give you a semantic way to reference colors in your app. The primar
   <div class="color-palette__example"><div class="color-palette__swatch color-palette__swatch--border" style="background-color: rgb(var(--sl-color-neutral-1000));"></div>1000</div>
 </div>
 
+?> Looking for an easy way to customize your theme? [Try the color token generator!](https://codepen.io/claviska/full/QWveRgL)
+
+
 ## Primitives
 
 Additional palettes are provided in the form of color primitives. Use these when you need arbitrary colors that don't have semantic meaning. Color primitives are derived from the fantastic [Tailwind color palette](https://tailwindcss.com/docs/customizing-colors).
