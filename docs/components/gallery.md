@@ -43,11 +43,11 @@ Responsive and flexible carousel component with thumbnail support .
 'https://raw.githubusercontent.com/xiaolin/react-image-gallery/master/static/11t.jpg'];
 
    
-// galleryDiv.images= galleryDiv.images.slice(0,4);
+
 galleryDiv.image_datas=galleryDiv.images;
-galleryDiv.imageRender=(image,index)=>{
-    return html`<span> ${image} </span>`;
-};
+// galleryDiv.imageRender=(image,index)=>{
+//     return html`<span> ${image} </span>`;
+// };
 groupDIV.querySelectorAll('sl-button').forEach(item=>{
     item.addEventListener('click',(event)=>{
         galleryDiv.thumbPosition=event.target.textContent;

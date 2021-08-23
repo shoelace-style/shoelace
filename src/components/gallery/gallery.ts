@@ -16,7 +16,7 @@ const svgFullscreen = svg`<svg class="image-gallery-svg" xmlns="http://www.w3.or
  * @since 2.0
  * @status experimental
  *
- * @dependency sl-resize-obersive
+ * @dependency sl-resize-observer
  *
  * @event {{value:number,toValue:number}} sl-gallery-before-change - Emitted when before change the current image index .
  * @event {{value:number}} sl-gallery-change - Emitted current image index changed.
@@ -45,17 +45,17 @@ export default class SlGallery extends LitElement {
 
   /** 图片路径. */
   @property({ type: Array }) images: Array<string>;
-  /** 导航图片路径，如果不设置，默认为images */
+  /** 缩略图图片路径，如果不设置，默认为images */
   @property({ type: Array }) thumb_images?: Array<string>;
   @property({ type: Number }) currentIndex = 0;
 
-  /** 导航图片位置 */
+  /**缩略图显示位置 */
   @property({ type: String, attribute: 'thumb-position' }) thumbPosition: 'bottom' | 'left' | 'top' | 'right' =
     'bottom';
 
-  /** 图片其他数据，显示 */
+  /** 图片对于其他其他数据 */
   @property({ type: Array }) image_datas: Array<unknown> = [];
-  /**图片其他自定义显示  */
+  /**当前图片自定义显示  */
   @property({ type: Object }) imageRender?: (this: SlGallery, image_data: unknown, index: number) => TemplateResult<1>;
 
   /** 是否显示暂停按钮 */
@@ -72,6 +72,9 @@ export default class SlGallery extends LitElement {
   private _intervalTimeID?: number;
   /** 是否显示 全屏按钮 */
   @property({ type: Boolean, attribute: false }) show_fullscreen = true;
+
+   /** 是否显示 左右切换按钮 */
+   @property({ type: Boolean, attribute: false }) showNavButtons = true;
 
   /** 可以通过 全局 left,right 键来调整当前图片 */
   @property({ type: Boolean, attribute: false }) windowKeyEnable = false;
@@ -128,13 +131,13 @@ export default class SlGallery extends LitElement {
     } else if (index < 0) {
       index = this.images.length - 1;
     }
-    const eventResult=emit(this,'sl-gallery-before-change',{
-      detail:{
-        value:this.currentIndex,
-        toValue:index
+    const eventResult = emit(this, 'sl-gallery-before-change', {
+      detail: {
+        value: this.currentIndex,
+        toValue: index
       }
     });
-    if(!eventResult.defaultPrevented){
+    if (!eventResult.defaultPrevented) {
       this.currentIndex = index;
       emit(this, 'sl-gallery-change', {
         detail: {
@@ -162,7 +165,7 @@ export default class SlGallery extends LitElement {
   private _loadedOneImage = false;
   /** 渲染 左右切换图片按钮 */
   private renderNavLefAndRight() {
-    return this._loadedOneImage
+    return this._loadedOneImage&&this.showNavButtons
       ? html`
           <button class="nav-button left-nav" part="left-nav" @click=${() => this.goImageByChange(-1)}>
             ${svgLeft}
@@ -171,7 +174,7 @@ export default class SlGallery extends LitElement {
             ${svgRight}
           </button>
         `
-      : '';
+      : nothing;
   }
 
   /** 渲染 thumbimages */
@@ -195,16 +198,16 @@ export default class SlGallery extends LitElement {
       return html`<div>
         ${!this.layImage || Math.abs(this.currentIndex - index) <= 1
           ? html`<img
-              @load=${(event:Event) => {
+              @load=${(event: Event) => {
                 this._loadedOneImage = true;
-                emit(this,'sl-gallery-image-load',{
-                  detail:{image:event.target as HTMLImageElement}
-                })
+                emit(this, 'sl-gallery-image-load', {
+                  detail: { image: event.target as HTMLImageElement }
+                });
               }}
-              @click=${(event:Event) =>{
-                 emit(this,'sl-gallery-image-click',{
-                  detail:{image:event.target as HTMLImageElement}
-                })
+              @click=${(event: Event) => {
+                emit(this, 'sl-gallery-image-click', {
+                  detail: { image: event.target as HTMLImageElement }
+                });
               }}
               part="images"
               class="image-gallery-image"
@@ -298,18 +301,16 @@ export default class SlGallery extends LitElement {
         let scroll = thumbContainer.scrollWidth - thumbContainer.offsetWidth;
         let scrollWidth = 0;
         if (scroll > 0 && this.thumb_images && this.thumb_images.length > 0) {
-          scrollWidth = scroll / (this.thumb_images.length - 1) * this.currentIndex;
+          scrollWidth = (scroll / (this.thumb_images.length - 1)) * this.currentIndex;
         }
         thumbContainer.style.transform = `translate3d(-${scrollWidth}px,0px, 0px) `;
       } else if (this.thumbPosition == 'left' || this.thumbPosition == 'right') {
-        thumbContainer.style.height = getCssValue(
-          this.renderRoot.querySelector('div.image-sliders') as HTMLElement,
-          'height'
-        );
+        const silders=this.renderRoot.querySelector('div.image-sliders') as HTMLElement;
+        thumbContainer.style.height =Math.min(parseInt(getCssValue(silders, 'height')),parseInt(getCssValue( silders.parentElement as HTMLElement, 'height')))+'px';
         let scroll = thumbContainer.scrollHeight - thumbContainer.offsetHeight;
         let scrollHeight = 0;
         if (scroll > 0 && this.thumb_images && this.thumb_images.length > 0) {
-          scrollHeight = scroll / (this.thumb_images.length - 1) * this.currentIndex;
+          scrollHeight = (scroll / (this.thumb_images.length - 1)) * this.currentIndex;
         }
         thumbContainer.style.transform = `translate3d(0px,-${scrollHeight}px, 0px)`;
       }
