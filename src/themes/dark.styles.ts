@@ -494,7 +494,7 @@ export default css`
     --sl-input-color-hover: var(--sl-color-neutral-700);
     --sl-input-color-focus: var(--sl-color-neutral-700);
     --sl-input-color-disabled: var(--sl-color-neutral-900);
-    --sl-input-icon-color: var(--sl-color-neutral-400);
+    --sl-input-icon-color: var(--sl-color-neutral-500);
     --sl-input-icon-color-hover: var(--sl-color-neutral-600);
     --sl-input-icon-color-focus: var(--sl-color-neutral-600);
     --sl-input-placeholder-color: var(--sl-color-neutral-500);
