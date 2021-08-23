@@ -16,6 +16,8 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Improved color picker size
 - Improved input icon contrast
 - Removed elevation from `sl-color-picker` when rendered inline
+- Updated to Lit 2.0.0-rc.3
+- Updated to lit-html 2.0.0-rc.4
 
 ## 2.0.0-beta.48
 
