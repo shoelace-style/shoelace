@@ -168,36 +168,32 @@ function onEvent(
   }
   return addEvent(node, type, listener, userCapture);
 }
-function exitFullscreen():Promise<any> {
-  const doc=document as any;
-  if(doc.exitFullScreen) {
+function exitFullscreen(): Promise<any> {
+  const doc = document as any;
+  if (doc.exitFullScreen) {
     return doc.exitFullScreen();
-  } else if(doc.mozCancelFullScreen) {
+  } else if (doc.mozCancelFullScreen) {
     return doc.mozCancelFullScreen();
-  } else if(doc.webkitExitFullscreen) {
+  } else if (doc.webkitExitFullscreen) {
     return doc.webkitExitFullscreen();
-  }else {
+  } else {
     return doc.msExitFullscreen();
   }
 }
-function isFullscreen(){
-  const doc=document as any;
-  return  doc.fullscreen || 
-  doc.webkitIsFullScreen ||  
-  doc.webkitFullScreen ||      
-  doc.mozFullScreen ||                         
-  doc.msFullScreen 
+function isFullscreen() {
+  const doc = document as any;
+  return doc.fullscreen || doc.webkitIsFullScreen || doc.webkitFullScreen || doc.mozFullScreen || doc.msFullScreen;
 }
-function fullscreen(el:HTMLElement|Window|Document) :Promise<any>{
-  const ele= el as any;
+function fullscreen(el: HTMLElement | Window | Document): Promise<any> {
+  const ele = el as any;
   if (ele.requestFullscreen) {
-      return ele.requestFullscreen();
+    return ele.requestFullscreen();
   } else if (ele.mozRequestFullScreen) {
-    return  ele.mozRequestFullScreen();
+    return ele.mozRequestFullScreen();
   } else if (ele.webkitRequestFullscreen) {
-    return  ele.webkitRequestFullscreen();
-  } else  {
-    return  ele.msRequestFullscreen();
+    return ele.webkitRequestFullscreen();
+  } else {
+    return ele.msRequestFullscreen();
   }
 }
 
@@ -215,9 +211,3 @@ export {
   exitFullscreen,
   fullscreen
 };
-
-
-
-
-
-

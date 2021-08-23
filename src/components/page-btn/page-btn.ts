@@ -56,9 +56,9 @@ export default class SlPageBtn extends LitElement {
     (_item, value) => 10 + value * 10
   );
   /** 是否显示 直接跳转到第一页 */
-  @property({ type: Boolean, attribute: false}) showFirst = false;
+  @property({ type: Boolean, attribute: false }) showFirst = false;
   /** 是否显示 直接跳转到最后一页 */
-  @property({ type: Boolean,attribute:false }) showLast = false;
+  @property({ type: Boolean, attribute: false }) showLast = false;
   get pageCount() {
     return Math.ceil(this.total / this.pageSize);
   }
@@ -157,22 +157,22 @@ export default class SlPageBtn extends LitElement {
         'sl-change',
         (event: Event) => {
           let el = (event as any).delegateTarget as HTMLElement;
-          const beforeEvent=emit(this,'sl-page-before-change');
-          if(!beforeEvent.defaultPrevented){
+          const beforeEvent = emit(this, 'sl-page-before-change');
+          if (!beforeEvent.defaultPrevented) {
             if (el.matches('sl-select[part=show-size-change]')) {
               this.pageSize = Number((el as any).value);
             } else {
-                this.watchPageChange();
-                let value = (el as any).value;
-                if (isNaN(value)) {
-                  value = 1;
-                }
-                value = Number(value);
-                if (value > this.pageCount) {
-                  value = this.pageCount;
-                }
-                (el as any).value = value;
-                this.value = value;
+              this.watchPageChange();
+              let value = (el as any).value;
+              if (isNaN(value)) {
+                value = 1;
+              }
+              value = Number(value);
+              if (value > this.pageCount) {
+                value = this.pageCount;
+              }
+              (el as any).value = value;
+              this.value = value;
             }
             emit(this, 'sl-page-change', {
               detail: { value: this.value }
@@ -209,8 +209,8 @@ export default class SlPageBtn extends LitElement {
     this.goToPage(result);
   }
   goToPage(pageNo: number) {
-    const event=emit(this,'sl-page-before-change');
-    if(!event.defaultPrevented){
+    const event = emit(this, 'sl-page-before-change');
+    if (!event.defaultPrevented) {
       if (!isNaN(pageNo)) {
         let tempValue = pageNo;
         if (tempValue <= 0) {

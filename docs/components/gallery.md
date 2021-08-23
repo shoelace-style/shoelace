@@ -5,7 +5,9 @@
 Responsive and flexible carousel component with thumbnail support .
 
 ```html preview
-<sl-gallery id='galleryDiv' style='--thumb-image-size:100px;--sl-image-transition-time:340ms;' thumb-position='bottom'></sl-gallery>
+<sl-gallery id='galleryDiv' style='--thumb-image-size:100px;--sl-image-transition-time:340ms;' thumb-position='bottom'>
+    <span >美好的一天</span>
+</sl-gallery>
 <sl-button-group id='groupDIV' style='margin:10 pax'>
     <sl-button type='primary' >bottom</sl-button>
     <sl-button  >top</sl-button>

@@ -76,12 +76,15 @@
     }
     
 }
-
+::slotted(*){
+    position: absolute;
+    color:#FFF;
+    top: 10px;
+    right: 10px;
+}
 .nav-button{
     position: absolute;
-   
     padding:20px 10px;
-   
     transition-property:color ;
     color: #fff;
     transition: all .3s ease-out;
