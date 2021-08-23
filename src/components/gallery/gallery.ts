@@ -1,5 +1,6 @@
 import { LitElement, html, TemplateResult, svg, PropertyValues, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
+import '../../components/resize-observer/resize-observer';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import { addEvent, exitFullscreen, fullscreen, getCssValue, isFullscreen } from '../../utilities/common';
@@ -15,9 +16,12 @@ const svgFullscreen = svg`<svg class="image-gallery-svg" xmlns="http://www.w3.or
  * @since 2.0
  * @status experimental
  *
- * @dependency sl-example
+ * @dependency sl-resize-obersive
  *
- * @event sl-gallery-change - Emitted current image index change.
+ * @event {{value:number,toValue:number}} sl-gallery-before-change - Emitted when before change the current image index .
+ * @event {{value:number}} sl-gallery-change - Emitted current image index changed.
+ * @event {{image:Image}} sl-gallery-image-load - Emitted  image load.
+ * @event {{image:Image}} sl-gallery-image-click - Emitted  image click.
  *
  * @slot - The default slot.
  *
@@ -32,8 +36,8 @@ const svgFullscreen = svg`<svg class="image-gallery-svg" xmlns="http://www.w3.or
  *
  *
  *
- * @cssproperty '--thumb-image-size':100px - thumb-images size.
- * @cssproperty '--sl-image-transition-time':450ms - transition time .
+ * @cssproperty --thumb-image-size -  thumb-images size default 100px .
+ * @cssproperty --sl-image-transition-time: --transition time  default 450ms - .
  */
 @customElement('sl-gallery')
 export default class SlGallery extends LitElement {
@@ -92,29 +96,29 @@ export default class SlGallery extends LitElement {
       }
     }
   }
-  private _windowKeyHander?:{
-    dispose:()=>void
+  private _windowKeyHander?: {
+    dispose: () => void;
   };
   @watch('windowKeyEnable')
-  private keyEnableChange(){
-     this._windowKeyHander?.dispose();
-     this._windowKeyHander=addEvent(this.windowKeyEnable?window:this,'keydown',(event:KeyboardEvent)=>{
-      let change=0;
-      const key=event.key;
-      switch(key){
+  private keyEnableChange() {
+    this._windowKeyHander?.dispose();
+    this._windowKeyHander = addEvent(this.windowKeyEnable ? window : this, 'keydown', (event: KeyboardEvent) => {
+      let change = 0;
+      const key = event.key;
+      switch (key) {
         case 'ArrowRight':
         case 'ArrowDown':
           change++;
-        break;
+          break;
         case 'ArrowUp':
         case 'ArrowLeft':
           change--;
-        break;
+          break;
       }
-      if(change!=0){
+      if (change != 0) {
         this.goImageByChange(change);
       }
-    })
+    });
   }
   /** 根据相对位置调整 当前显示的图片 */
   private goImageByChange(changeNumber: number) {
@@ -124,12 +128,20 @@ export default class SlGallery extends LitElement {
     } else if (index < 0) {
       index = this.images.length - 1;
     }
-    this.currentIndex = index;
-    emit(this, 'sl-gallery-change', {
-      detail: {
-        value: this.currentIndex
+    const eventResult=emit(this,'sl-gallery-before-change',{
+      detail:{
+        value:this.currentIndex,
+        toValue:index
       }
     });
+    if(!eventResult.defaultPrevented){
+      this.currentIndex = index;
+      emit(this, 'sl-gallery-change', {
+        detail: {
+          value: this.currentIndex
+        }
+      });
+    }
   }
   disconnectedCallback() {
     super.disconnectedCallback();
@@ -146,10 +158,11 @@ export default class SlGallery extends LitElement {
       this.thumb_images = [...this.images];
     }
   }
-  private _loadeCurentImage = false;
+  @state()
+  private _loadedOneImage = false;
   /** 渲染 左右切换图片按钮 */
-  renderNavLefAndRight() {
-    return this._loadeCurentImage
+  private renderNavLefAndRight() {
+    return this._loadedOneImage
       ? html`
           <button class="nav-button left-nav" part="left-nav" @click=${() => this.goImageByChange(-1)}>
             ${svgLeft}
@@ -182,9 +195,16 @@ export default class SlGallery extends LitElement {
       return html`<div>
         ${!this.layImage || Math.abs(this.currentIndex - index) <= 1
           ? html`<img
-              @load=${() => {
-                this._loadeCurentImage = true;
-                this.requestUpdate();
+              @load=${(event:Event) => {
+                this._loadedOneImage = true;
+                emit(this,'sl-gallery-image-load',{
+                  detail:{image:event.target as HTMLImageElement}
+                })
+              }}
+              @click=${(event:Event) =>{
+                 emit(this,'sl-gallery-image-click',{
+                  detail:{image:event.target as HTMLImageElement}
+                })
               }}
               part="images"
               class="image-gallery-image"
@@ -227,7 +247,7 @@ export default class SlGallery extends LitElement {
     </div>`;
   }
   private renderPauseButton() {
-    if (!this._loadeCurentImage) {
+    if (!this._loadedOneImage) {
       return nothing;
     }
     return this.show_pause
@@ -244,7 +264,7 @@ export default class SlGallery extends LitElement {
       : '';
   }
   private renderFullScreenButton() {
-    if (!this._loadeCurentImage) {
+    if (!this._loadedOneImage) {
       return nothing;
     }
     return this.show_fullscreen
@@ -276,9 +296,9 @@ export default class SlGallery extends LitElement {
       if (this.thumbPosition == 'bottom' || this.thumbPosition == 'top') {
         thumbContainer.style.height = 'auto';
         let scroll = thumbContainer.scrollWidth - thumbContainer.offsetWidth;
-        let scrollWidth=0;
+        let scrollWidth = 0;
         if (scroll > 0 && this.thumb_images && this.thumb_images.length > 0) {
-           scrollWidth = (scroll / (this.thumb_images.length - 1)) * this.currentIndex;
+          scrollWidth = scroll / (this.thumb_images.length - 1) * this.currentIndex;
         }
         thumbContainer.style.transform = `translate3d(-${scrollWidth}px,0px, 0px) `;
       } else if (this.thumbPosition == 'left' || this.thumbPosition == 'right') {
@@ -287,9 +307,9 @@ export default class SlGallery extends LitElement {
           'height'
         );
         let scroll = thumbContainer.scrollHeight - thumbContainer.offsetHeight;
-        let scrollHeight=0;
+        let scrollHeight = 0;
         if (scroll > 0 && this.thumb_images && this.thumb_images.length > 0) {
-          scrollHeight= (scroll / (this.thumb_images.length - 1)) * this.currentIndex;
+          scrollHeight = scroll / (this.thumb_images.length - 1) * this.currentIndex;
         }
         thumbContainer.style.transform = `translate3d(0px,-${scrollHeight}px, 0px)`;
       }
@@ -311,7 +331,8 @@ export default class SlGallery extends LitElement {
           <slot></slot>
         </div>
         <div part="thumbs" class="thumbs">${this.renderThumbimages()}</div>
-      </div></sl-resize-observer>`;
+      </div></sl-resize-observer
+    >`;
   }
 }
 

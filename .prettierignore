@@ -2,6 +2,7 @@
 *.md
 .cache
 .github
+*.litcss.style.ts
 dist
 docs/*.md
 src/components/icon/icons
