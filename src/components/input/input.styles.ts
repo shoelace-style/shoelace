@@ -239,4 +239,9 @@ export default css`
   .input--empty .input__clear {
     visibility: hidden;
   }
+
+  /* Don't show the browser's password toggle in Edge */
+  ::-ms-reveal {
+    display: none;
+  }
 `;
