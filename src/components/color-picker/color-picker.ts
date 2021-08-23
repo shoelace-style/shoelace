@@ -47,6 +47,7 @@ import '../input/input';
  * @cssproperty --grid-handle-size - The size of the color grid's handle.
  * @cssproperty --slider-height - The height of the hue and alpha sliders.
  * @cssproperty --slider-handle-size - The diameter of the slider's handle.
+ * @cssproperty --swatch-size - The size of each predefined color swatch.
  */
 @customElement('sl-color-picker')
 export default class SlColorPicker extends LitElement {
@@ -725,7 +726,6 @@ export default class SlColorPicker extends LitElement {
         <div class="color-picker__user-input">
           <sl-input
             part="input"
-            size="small"
             type="text"
             name=${this.name}
             autocomplete="off"
@@ -740,7 +740,7 @@ export default class SlColorPicker extends LitElement {
 
           ${!this.noFormatToggle
             ? html`
-                <sl-button exportparts="base:format-button" size="small" @click=${this.handleFormatToggle}>
+                <sl-button exportparts="base:format-button" @click=${this.handleFormatToggle}>
                   ${this.setLetterCase(this.format)}
                 </sl-button>
               `

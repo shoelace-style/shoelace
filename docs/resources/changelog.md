@@ -8,7 +8,11 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
+- Added `--swatch-size` custom property to `sl-color-picker`
 - Adjusted elevation tokens to use neutral in light mode and black in dark mode
+- Adjusted `--sl-overlay-background-color` in dark theme to be black instead of gray
+- Fixed a bug in `sl-color-picker` where the opacity slider wasn't showing the current color
+- Improved color picker size
 - Removed elevation from `sl-color-picker` when rendered inline
 
 ## 2.0.0-beta.48

@@ -5,11 +5,12 @@ export default css`
   ${componentStyles}
 
   :host {
-    --grid-width: 260px;
-    --grid-height: 200px;
+    --grid-width: 300px;
+    --grid-height: 220px;
     --grid-handle-size: 16px;
-    --slider-height: 15px;
-    --slider-handle-size: 17px;
+    --slider-height: 17px;
+    --slider-handle-size: 19px;
+    --swatch-size: 25px;
 
     display: inline-block;
   }
@@ -113,15 +114,13 @@ export default css`
     );
   }
 
-  .color-picker__alpha {
-    .color-picker__alpha-gradient {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border-radius: inherit;
-    }
+  .color-picker__alpha .color-picker__alpha-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
   }
 
   .color-picker__preview {
@@ -130,10 +129,10 @@ export default css`
     align-items: center;
     justify-content: center;
     position: relative;
-    width: 3.125rem;
-    height: var(--sl-input-height-small);
+    width: 3.25rem;
+    height: 2.25rem;
     border: none;
-    border-radius: var(--sl-input-border-radius-small);
+    border-radius: var(--sl-input-border-radius-medium);
     background: none;
     margin-left: var(--sl-spacing-small);
     cursor: copy;
@@ -213,8 +212,8 @@ export default css`
   }
 
   .color-picker__user-input sl-button {
-    min-width: 3.125rem;
-    max-width: 3.125rem;
+    min-width: 3.25rem;
+    max-width: 3.25rem;
     font-size: 1rem;
     margin-left: var(--sl-spacing-small);
   }
@@ -222,7 +221,7 @@ export default css`
   .color-picker__swatches {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
-    grid-gap: 6px;
+    grid-gap: 0.5rem;
     justify-items: center;
     border-top: solid 1px rgb(var(--sl-color-neutral-200));
     padding: var(--sl-spacing-small);
@@ -230,9 +229,9 @@ export default css`
 
   .color-picker__swatch {
     position: relative;
-    width: 20px;
-    height: 20px;
-    border-radius: 2px;
+    width: var(--swatch-size);
+    height: var(--swatch-size);
+    border-radius: var(--sl-border-radius-small);
   }
 
   .color-picker__swatch .color-picker__swatch-color {
