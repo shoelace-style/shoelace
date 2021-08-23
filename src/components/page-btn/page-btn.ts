@@ -15,16 +15,19 @@ import styles from './page-btn.styles';
  * @since 2.0
  * @status experimental
  *
- * @dependency sl-button,sl-select,sl-icon-button
+ * @dependency sl-button,sl-select,sl-icon
  *
- * @event sl-page-change - Emitted when page changed   .
+ * @event sl-page-change - Emitted when current page changed   .
+ * @event sl-page-before-change - Emitted before  page changed,use can defaultPrevented ,then sl-page-change can not be emit    .
  *
- * @slot - The default slot.
- * @slot example - An example slot.
- *
+ * @slot prefix The prefix slot.
+ * @slot no-data - when total=0 to show .
+ * @slot default - tool bar end to show .
+ 
  * @csspart base - The component's base wrapper.
+ * @csspart pageWrap - The component's to page button  wrapper.
  *
- * @cssproperty --example - An example CSS custom property.
+ *
  */
 @resourceLocal()
 @customElement('sl-page-btn')
@@ -53,9 +56,9 @@ export default class SlPageBtn extends LitElement {
     (_item, value) => 10 + value * 10
   );
   /** 是否显示 直接跳转到第一页 */
-  @property({ type: Boolean }) showFirst = false;
+  @property({ type: Boolean, attribute: false}) showFirst = false;
   /** 是否显示 直接跳转到最后一页 */
-  @property({ type: Boolean }) showLast = false;
+  @property({ type: Boolean,attribute:false }) showLast = false;
   get pageCount() {
     return Math.ceil(this.total / this.pageSize);
   }
@@ -148,33 +151,33 @@ export default class SlPageBtn extends LitElement {
       } else {
         this.goToPage(tempNo);
       }
-      emit(this, 'sl-page-change', {
-        detail: { value: this.value }
-      });
       this._eventDispose2 = onEvent(
         baseDiv,
         'sl-input,sl-select[part=show-size-change]',
         'sl-change',
         (event: Event) => {
           let el = (event as any).delegateTarget as HTMLElement;
-          if (el.matches('sl-select[part=show-size-change]')) {
-            this.pageSize = Number((el as any).value);
-          } else {
-            this.watchPageChange();
-            let value = (el as any).value;
-            if (isNaN(value)) {
-              value = 1;
+          const beforeEvent=emit(this,'sl-page-before-change');
+          if(!beforeEvent.defaultPrevented){
+            if (el.matches('sl-select[part=show-size-change]')) {
+              this.pageSize = Number((el as any).value);
+            } else {
+                this.watchPageChange();
+                let value = (el as any).value;
+                if (isNaN(value)) {
+                  value = 1;
+                }
+                value = Number(value);
+                if (value > this.pageCount) {
+                  value = this.pageCount;
+                }
+                (el as any).value = value;
+                this.value = value;
             }
-            value = Number(value);
-            if (value > this.pageCount) {
-              value = this.pageCount;
-            }
-            (el as any).value = value;
-            this.value = value;
+            emit(this, 'sl-page-change', {
+              detail: { value: this.value }
+            });
           }
-          emit(this, 'sl-page-change', {
-            detail: { value: this.value }
-          });
         }
       );
     });
@@ -206,14 +209,20 @@ export default class SlPageBtn extends LitElement {
     this.goToPage(result);
   }
   goToPage(pageNo: number) {
-    if (!isNaN(pageNo)) {
-      let tempValue = pageNo;
-      if (tempValue <= 0) {
-        tempValue = 1;
-      } else if (tempValue > this.pageCount) {
-        tempValue = this.pageCount;
+    const event=emit(this,'sl-page-before-change');
+    if(!event.defaultPrevented){
+      if (!isNaN(pageNo)) {
+        let tempValue = pageNo;
+        if (tempValue <= 0) {
+          tempValue = 1;
+        } else if (tempValue > this.pageCount) {
+          tempValue = this.pageCount;
+        }
+        this.value = tempValue;
+        emit(this, 'sl-page-change', {
+          detail: { value: this.value }
+        });
       }
-      this.value = tempValue;
     }
   }
 

@@ -58,6 +58,7 @@
   - [Tree Node](/components/tree-node)
   - [Splitter](/components/splitter)
   - [Page Btn](/components/page-btn)
+  - [Gallery](/components/gallery)
   <!--plop:component-->
 
 - Utilities
