@@ -54,6 +54,18 @@ Use the `pill` attribute to give inputs rounded edges.
 <sl-input placeholder="Large" size="large" pill></sl-input>
 ```
 
+### Input Types
+
+The `type` attribute controls the type of input the browser renders.
+
+```html preview
+<sl-input type="email" Placeholder="Email"></sl-input>
+<br>
+<sl-input type="number" Placeholder="Number"></sl-input>
+<br>
+<sl-input type="date" Placeholder="Date"></sl-input>
+```
+
 ### Disabled
 
 Use the `disabled` attribute to disable an input.

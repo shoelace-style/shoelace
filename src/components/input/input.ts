@@ -61,7 +61,8 @@ export default class SlInput extends LitElement {
   @state() private isPasswordVisible = false;
 
   /** The input's type. */
-  @property({ reflect: true }) type: 'email' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'url' = 'text';
+  @property({ reflect: true }) type: 'date' | 'email' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'url' =
+    'text';
 
   /** The input's size. */
   @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
