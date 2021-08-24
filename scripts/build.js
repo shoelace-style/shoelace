@@ -87,6 +87,7 @@ try {
       logPrefix: '[shoelace]',
       logFileChanges: true,
       notify: false,
+      single: true,
       server: {
         baseDir: 'docs',
         routes: {
