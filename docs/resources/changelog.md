@@ -52,7 +52,7 @@ This change applies to all design tokens that implement a color. Refer to the [c
 - 🚨 BREAKING: renamed `dist/themes/base.css` to `dist/themes/light.css`
 - 🚨 BREAKING: removed `--sl-focus-ring-color-primary` tokens (use color tokens and `--sl-focus-ring-width|alpha` instead)
 - 🚨 BREAKING: removed `--tabs-border-color` from `sl-tab-group` (use `--track-color` instead)
-- 🚨 BREAKING: changed the default value for `effect` to `none` (use `sheen` to restore the original behavior)
+- 🚨 BREAKING: changed the default value for `effect` to `none` in `sl-skeleton` (use `sheen` to restore the original behavior)
 - Added new color primitives to the base set of design tokens
 - Added `--sl-color-*-950` swatches to all color palettes
 - Added a console error that appears when menu items have duplicate values in `sl-select`
