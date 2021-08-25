@@ -154,6 +154,14 @@ strong {
   padding: 0.5rem;
 }
 
+.sidebar-toggle:hover .sidebar-toggle-button {
+  opacity: 1;
+}
+
+.sidebar-toggle:active .sidebar-toggle-button span {
+  background-color: rgb(var(--sl-color-primary-600));
+}
+
 .sidebar-toggle:focus {
   outline: none;
   box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-primary-500) / var(--sl-focus-ring-alpha));
