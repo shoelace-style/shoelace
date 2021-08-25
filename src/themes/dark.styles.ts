@@ -364,8 +364,8 @@ export default css`
     --sl-color-neutral-950: var(--sl-color-gray-950);
 
     /* Neutral one-offs */
-    --sl-color-neutral-0: 255 255 255;
-    --sl-color-neutral-1000: 24 24 27;
+    --sl-color-neutral-0: 24 24 27;
+    --sl-color-neutral-1000: 255 255 255;
 
     /*
      * Border radius tokens
@@ -469,9 +469,9 @@ export default css`
     --sl-input-height-medium: 2.5rem; /* 40px */
     --sl-input-height-large: 3.125rem; /* 50px */
 
-    --sl-input-background-color: var(--sl-color-neutral-1000);
-    --sl-input-background-color-hover: var(--sl-color-neutral-1000);
-    --sl-input-background-color-focus: var(--sl-color-neutral-1000);
+    --sl-input-background-color: var(--sl-color-neutral-0);
+    --sl-input-background-color-hover: var(--sl-color-neutral-0);
+    --sl-input-background-color-focus: var(--sl-color-neutral-0);
     --sl-input-background-color-disabled: var(--sl-color-neutral-100);
     --sl-input-border-color: var(--sl-color-neutral-300);
     --sl-input-border-color-hover: var(--sl-color-neutral-400);
@@ -531,7 +531,7 @@ export default css`
      * Panels
      */
 
-    --sl-panel-background-color: var(--sl-color-neutral-1000);
+    --sl-panel-background-color: var(--sl-color-neutral-0);
     --sl-panel-border-color: var(--sl-color-neutral-200);
 
     /*
@@ -540,7 +540,7 @@ export default css`
 
     --sl-tooltip-border-radius: var(--sl-border-radius-medium);
     --sl-tooltip-background-color: var(--sl-color-neutral-800);
-    --sl-tooltip-color: var(--sl-color-neutral-1000);
+    --sl-tooltip-color: var(--sl-color-neutral-0);
     --sl-tooltip-font-family: var(--sl-font-sans);
     --sl-tooltip-font-weight: var(--sl-font-weight-normal);
     --sl-tooltip-font-size: var(--sl-font-size-small);

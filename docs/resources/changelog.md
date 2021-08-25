@@ -8,6 +8,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
+- 🚨 BREAKING: fixed a bug where `--sl-color-neutral-0` and `--sl-color-neutral-1000` were inverted (swap them to update)
 - Added `--swatch-size` custom property to `sl-color-picker`
 - Added `date` to `sl-input` as a supported `type`
 - Adjusted elevation tokens to use neutral in light mode and black in dark mode

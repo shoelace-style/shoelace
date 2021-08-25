@@ -64,7 +64,7 @@ export default css`
   :host(.sl-focus-visible:focus:not([aria-disabled='true'])) .menu-item {
     outline: none;
     background-color: rgb(var(--sl-color-primary-600));
-    color: rgb(var(--sl-color-neutral-1000));
+    color: rgb(var(--sl-color-neutral-0));
   }
 
   .menu-item .menu-item__check {

@@ -8,7 +8,7 @@ export default css`
     --height: 16px;
     --track-color: rgb(var(--sl-color-neutral-500) / 20%);
     --indicator-color: rgb(var(--sl-color-primary-600));
-    --label-color: rgb(var(--sl-color-neutral-1000));
+    --label-color: rgb(var(--sl-color-neutral-0));
 
     display: block;
   }

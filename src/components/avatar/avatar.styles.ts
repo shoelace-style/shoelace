@@ -21,7 +21,7 @@ export default css`
     font-family: var(--sl-font-sans);
     font-size: calc(var(--size) * 0.5);
     font-weight: var(--sl-font-weight-normal);
-    color: rgb(var(--sl-color-neutral-1000));
+    color: rgb(var(--sl-color-neutral-0));
     overflow: hidden;
     user-select: none;
     vertical-align: middle;

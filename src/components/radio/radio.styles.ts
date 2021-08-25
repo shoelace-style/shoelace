@@ -69,7 +69,7 @@ export default css`
 
   /* Checked */
   .radio--checked .radio__control {
-    color: rgb(var(--sl-color-neutral-1000));
+    color: rgb(var(--sl-color-neutral-0));
     border-color: rgb(var(--sl-color-primary-600));
     background-color: rgb(var(--sl-color-primary-600));
   }
