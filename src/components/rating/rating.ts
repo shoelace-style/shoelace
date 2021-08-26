@@ -5,7 +5,6 @@ import { styleMap } from 'lit-html/directives/style-map';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
-import { focusVisible } from '../../internal/focus-visible';
 import { clamp } from '../../internal/math';
 import styles from './rating.styles';
 
@@ -63,16 +62,6 @@ export default class SlRating extends LitElement {
   /** Removes focus from the rating. */
   blur() {
     this.rating.blur();
-  }
-
-  connectedCallback() {
-    super.connectedCallback();
-    this.updateComplete.then(() => focusVisible.observe(this.rating));
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    focusVisible.unobserve(this.rating);
   }
 
   getValueFromMousePosition(event: MouseEvent) {

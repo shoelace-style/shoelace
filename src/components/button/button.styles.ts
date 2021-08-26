@@ -1,5 +1,6 @@
 import { css } from 'lit';
 import componentStyles from '../../styles/component.styles';
+import { focusVisibleSelector } from '../../internal/focus-visible';
 
 export default css`
   ${componentStyles}
@@ -80,7 +81,7 @@ export default css`
     color: rgb(var(--sl-color-primary-700));
   }
 
-  .button.button--default:focus:not(.button--disabled) {
+  .button.button--default${focusVisibleSelector}:not(.button--disabled) {
     background-color: rgb(var(--sl-color-primary-50));
     border-color: rgb(var(--sl-color-primary-500));
     color: rgb(var(--sl-color-primary-700));
@@ -106,7 +107,7 @@ export default css`
     color: rgb(var(--sl-color-neutral-0));
   }
 
-  .button.button--primary:focus:not(.button--disabled) {
+  .button.button--primary${focusVisibleSelector}:not(.button--disabled) {
     background-color: rgb(var(--sl-color-primary-500));
     border-color: rgb(var(--sl-color-primary-500));
     color: rgb(var(--sl-color-neutral-0));
@@ -132,7 +133,7 @@ export default css`
     color: rgb(var(--sl-color-neutral-0));
   }
 
-  .button.button--success:focus:not(.button--disabled) {
+  .button.button--success${focusVisibleSelector}:not(.button--disabled) {
     background-color: rgb(var(--sl-color-success-600));
     border-color: rgb(var(--sl-color-success-600));
     color: rgb(var(--sl-color-neutral-0));
@@ -158,7 +159,7 @@ export default css`
     color: rgb(var(--sl-color-neutral-0));
   }
 
-  .button.button--neutral:focus:not(.button--disabled) {
+  .button.button--neutral${focusVisibleSelector}:not(.button--disabled) {
     background-color: rgb(var(--sl-color-neutral-500));
     border-color: rgb(var(--sl-color-neutral-500));
     color: rgb(var(--sl-color-neutral-0));
@@ -183,7 +184,7 @@ export default css`
     color: rgb(var(--sl-color-neutral-0));
   }
 
-  .button.button--warning:focus:not(.button--disabled) {
+  .button.button--warning${focusVisibleSelector}:not(.button--disabled) {
     background-color: rgb(var(--sl-color-warning-500));
     border-color: rgb(var(--sl-color-warning-500));
     color: rgb(var(--sl-color-neutral-0));
@@ -209,7 +210,7 @@ export default css`
     color: rgb(var(--sl-color-neutral-0));
   }
 
-  .button.button--danger:focus:not(.button--disabled) {
+  .button.button--danger${focusVisibleSelector}:not(.button--disabled) {
     background-color: rgb(var(--sl-color-danger-500));
     border-color: rgb(var(--sl-color-danger-500));
     color: rgb(var(--sl-color-neutral-0));
@@ -238,7 +239,7 @@ export default css`
     color: rgb(var(--sl-color-primary-500));
   }
 
-  .button--text:focus:not(.button--disabled) {
+  .button--text${focusVisibleSelector}:not(.button--disabled) {
     background-color: transparent;
     border-color: transparent;
     color: rgb(var(--sl-color-primary-500));

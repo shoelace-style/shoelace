@@ -28,11 +28,6 @@ export default css`
     transition: var(--sl-transition-fast) transform ease, var(--sl-transition-fast) width ease;
   }
 
-  /* Remove the focus ring when the user isn't interacting with a keyboard */
-  .tab-group:not(.focus-visible) ::slotted(sl-tab) {
-    --focus-ring: none;
-  }
-
   .tab-group--has-scroll-controls .tab-group__nav-container {
     position: relative;
     padding: 0 var(--sl-spacing-x-large);

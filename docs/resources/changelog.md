@@ -19,6 +19,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Improved icon contrast in `sl-input`
 - Improved contrast of `sl-switch`
 - Removed elevation from `sl-color-picker` when rendered inline
+- Removed custom `:focus-visible` logic in favor of a directive that outputs `:focus-visible` or `:focus` depending on browser support
 - Updated to Lit 2.0.0-rc.3
 - Updated to lit-html 2.0.0-rc.4
 

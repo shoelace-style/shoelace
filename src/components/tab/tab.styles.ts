@@ -1,12 +1,11 @@
 import { css } from 'lit';
 import componentStyles from '../../styles/component.styles';
+import { focusVisibleSelector } from '../../internal/focus-visible';
 
 export default css`
   ${componentStyles}
 
   :host {
-    --focus-ring: inset 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-primary-500) / var(--sl-focus-ring-alpha));
-
     display: inline-block;
   }
 
@@ -33,9 +32,9 @@ export default css`
     outline: none;
   }
 
-  .tab:focus:not(.tab--disabled) {
+  .tab${focusVisibleSelector}:not(.tab--disabled) {
     color: rgb(var(--sl-color-primary-600));
-    box-shadow: var(--focus-ring);
+    box-shadow: inset 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-primary-500) / var(--sl-focus-ring-alpha));
   }
 
   .tab.tab--active:not(.tab--disabled) {

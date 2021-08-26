@@ -2,7 +2,6 @@ import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
-import { focusVisible } from '../../internal/focus-visible';
 import styles from './icon-button.styles';
 
 import '../icon/icon';
@@ -47,16 +46,6 @@ export default class SlIconButton extends LitElement {
 
   /** Disables the button. */
   @property({ type: Boolean, reflect: true }) disabled = false;
-
-  connectedCallback() {
-    super.connectedCallback();
-    this.updateComplete.then(() => focusVisible.observe(this.button));
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    focusVisible.unobserve(this.button);
-  }
 
   render() {
     const isLink = this.href ? true : false;

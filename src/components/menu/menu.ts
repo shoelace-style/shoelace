@@ -2,7 +2,7 @@ import { LitElement, html } from 'lit';
 import { customElement, query } from 'lit/decorators.js';
 import { emit } from '../../internal/event';
 import { getTextContent } from '../../internal/slot';
-import { focusVisible } from '../../internal/focus-visible';
+import { hasFocusVisible } from '../../internal/focus-visible';
 import type SlMenuItem from '../menu-item/menu-item';
 import styles from './menu.styles';
 
@@ -25,19 +25,6 @@ export default class SlMenu extends LitElement {
 
   private typeToSelectString = '';
   private typeToSelectTimeout: any;
-
-  connectedCallback() {
-    super.connectedCallback();
-    focusVisible.observe(this, {
-      visible: () => this.getAllItems().map(item => item.classList.add('sl-focus-visible')),
-      notVisible: () => this.getAllItems().map(item => item.classList.remove('sl-focus-visible'))
-    });
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    focusVisible.unobserve(this);
-  }
 
   getAllItems(options: { includeDisabled: boolean } = { includeDisabled: true }) {
     return [...this.defaultSlot.assignedElements({ flatten: true })].filter((el: HTMLElement) => {
@@ -85,15 +72,18 @@ export default class SlMenu extends LitElement {
     this.typeToSelectTimeout = setTimeout(() => (this.typeToSelectString = ''), 750);
     this.typeToSelectString += key.toLowerCase();
 
-    // The menu may not have focus, so the focus visible logic may not be triggered. Because we know they're using the
-    // keyboard, we can force the sl-focus-visible class on each item so the selection shows as expected.
-    this.getAllItems().map(item => item.classList.add('sl-focus-visible'));
+    // Restore focus in browsers that don't support :focus-visible when using the keyboard
+    if (!hasFocusVisible) {
+      items.map(item => item.classList.remove('sl-focus-invisible'));
+    }
 
     for (const item of items) {
       const slot = item.shadowRoot!.querySelector('slot:not([name])') as HTMLSlotElement;
       const label = getTextContent(slot).toLowerCase().trim();
       if (label.substring(0, this.typeToSelectString.length) === this.typeToSelectString) {
         this.setCurrentItem(item);
+
+        // Set focus here to force the browser to show :focus-visible styles
         item.focus();
         break;
       }
@@ -106,6 +96,14 @@ export default class SlMenu extends LitElement {
 
     if (item && !item.disabled) {
       emit(this, 'sl-select', { detail: { item } });
+    }
+  }
+
+  handleKeyUp() {
+    // Restore focus in browsers that don't support :focus-visible when using the keyboard
+    if (!hasFocusVisible) {
+      const items = this.getAllItems();
+      items.map(item => item.classList.remove('sl-focus-invisible'));
     }
   }
 
@@ -163,7 +161,11 @@ export default class SlMenu extends LitElement {
 
     if (target.getAttribute('role') === 'menuitem') {
       this.setCurrentItem(target as SlMenuItem);
-      target.focus();
+
+      // Hide focus in browsers that don't support :focus-visible when using the mouse
+      if (!hasFocusVisible) {
+        target.classList.add('sl-focus-invisible');
+      }
     }
   }
 
@@ -184,6 +186,7 @@ export default class SlMenu extends LitElement {
         role="menu"
         @click=${this.handleClick}
         @keydown=${this.handleKeyDown}
+        @keyup=${this.handleKeyUp}
         @mousedown=${this.handleMouseDown}
       >
         <slot @slotchange=${this.handleSlotChange}></slot>

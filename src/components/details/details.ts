@@ -5,7 +5,7 @@ import { animateTo, stopAnimations, shimKeyframesHeightAuto } from '../../intern
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import { waitForEvent } from '../../internal/event';
-import { focusVisible } from '../../internal/focus-visible';
+import { focusVisibleSelector } from '../../internal/focus-visible';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
 import styles from './details.styles';
 
@@ -55,19 +55,9 @@ export default class SlDetails extends LitElement {
   /** Disables the details so it can't be toggled. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
-  connectedCallback() {
-    super.connectedCallback();
-    this.updateComplete.then(() => focusVisible.observe(this.details));
-  }
-
   firstUpdated() {
     this.body.hidden = !this.open;
     this.body.style.height = this.open ? 'auto' : '0';
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    focusVisible.unobserve(this.details);
   }
 
   /** Shows the details. */

@@ -3,7 +3,6 @@ import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
-import { focusVisible } from '../../internal/focus-visible';
 import { getOffset } from '../../internal/offset';
 import { scrollIntoView } from '../../internal/scroll';
 import type SlTab from '../tab/tab';
@@ -88,7 +87,6 @@ export default class SlTabGroup extends LitElement {
       this.syncTabsAndPanels();
       this.mutationObserver.observe(this, { attributes: true, childList: true, subtree: true });
       this.resizeObserver.observe(this.nav);
-      focusVisible.observe(this.tabGroup);
 
       // Set initial tab state when the tabs first become visible
       const intersectionObserver = new IntersectionObserver((entries, observer) => {
@@ -105,7 +103,6 @@ export default class SlTabGroup extends LitElement {
   disconnectedCallback() {
     this.mutationObserver.disconnect();
     this.resizeObserver.unobserve(this.nav);
-    focusVisible.unobserve(this.tabGroup);
   }
 
   /** Shows the specified tab panel. */

@@ -1,5 +1,6 @@
 import { css } from 'lit';
 import componentStyles from '../../styles/component.styles';
+import { focusVisibleSelector } from '../../internal/focus-visible';
 
 export default css`
   ${componentStyles}
@@ -61,7 +62,7 @@ export default css`
   }
 
   :host(:hover:not([aria-disabled='true'])) .menu-item,
-  :host(.sl-focus-visible:focus:not([aria-disabled='true'])) .menu-item {
+  :host(${focusVisibleSelector}:not(.sl-focus-invisible):not([aria-disabled='true'])) .menu-item {
     outline: none;
     background-color: rgb(var(--sl-color-primary-600));
     color: rgb(var(--sl-color-neutral-0));
