@@ -47,15 +47,6 @@
   transition: 250ms background-color;
 }
 
-.code-block__resizer:focus {
-  outline: none;
-  box-shadow: 0 0 0 1px rgb(var(--sl-color-primary-400)),
-    0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-primary-500) / var(--sl-focus-ring-alpha));
-  background-color: rgb(var(--sl-color-primary-50));
-  color: rgb(var(--sl-color-primary-600));
-  z-index: 2;
-}
-
 @media screen and (max-width: 600px) {
   .code-block__preview {
     padding-right: 1.5rem;

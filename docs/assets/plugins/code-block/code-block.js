@@ -44,7 +44,7 @@
             <div class="code-block">
               <div class="code-block__preview">
                 ${code.textContent}
-                <div class="code-block__resizer" role="slider" tabindex="0">
+                <div class="code-block__resizer">
                   <sl-icon name="grip-vertical"></sl-icon>
                 </div>
               </div>
@@ -101,7 +101,6 @@
           startWidth = parseInt(document.defaultView.getComputedStyle(preview).width, 10);
           preview.classList.add('code-block__preview--dragging');
           event.preventDefault();
-          resizer.focus();
           document.documentElement.addEventListener('mousemove', dragMove, false);
           document.documentElement.addEventListener('touchmove', dragMove, false);
           document.documentElement.addEventListener('mouseup', dragStop, false);
