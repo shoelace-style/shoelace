@@ -43,7 +43,7 @@
       const dropdown = document.createElement('sl-dropdown');
       dropdown.classList.add('theme-picker');
       dropdown.innerHTML = `
-        <sl-button size="small" slot="trigger" caret>
+        <sl-button size="small" pill slot="trigger" caret>
           <sl-icon name="sun" label="Select Theme"></sl-icon>
         </sl-button>
         <sl-menu>
