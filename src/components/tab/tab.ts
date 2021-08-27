@@ -20,8 +20,6 @@ let id = 0;
  *
  * @csspart base - The component's base wrapper.
  * @csspart close-button - The close button, which is the icon button's base wrapper.
- *
- * @cssproperty --focus-ring - The focus ring's box shadow.
  */
 @customElement('sl-tab')
 export default class SlTab extends LitElement {

@@ -7,7 +7,6 @@ export default css`
   ${formControlStyles}
 
   :host {
-    --focus-ring: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-primary-500) / var(--sl-focus-ring-alpha));
     display: block;
   }
 
@@ -41,7 +40,7 @@ export default css`
   .input.input--focused:not(.input--disabled) {
     background-color: rgb(var(--sl-input-background-color-focus));
     border-color: rgb(var(--sl-input-border-color-focus));
-    box-shadow: var(--focus-ring);
+    box-shadow: var(--sl-focus-ring);
   }
 
   .input.input--focused:not(.input--disabled) .input__control {

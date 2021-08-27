@@ -7,8 +7,6 @@ export default css`
   ${formControlStyles}
 
   :host {
-    --focus-ring: var(--sl-focus-ring);
-
     display: block;
   }
 
@@ -42,7 +40,7 @@ export default css`
   .select.select--focused:not(.select--disabled) .select__box {
     background-color: rgb(var(--sl-input-background-color-focus));
     border-color: rgb(var(--sl-input-border-color-focus));
-    box-shadow: var(--focus-ring);
+    box-shadow: var(--sl-focus-ring);
     outline: none;
     color: rgb(var(--sl-input-color-focus));
   }
