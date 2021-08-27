@@ -70,7 +70,6 @@ export default class SlImageComparer extends LitElement {
       document.addEventListener('touchend', stop);
     }
 
-    this.handle.focus();
     event.preventDefault();
 
     drag(event, this.base, x => {
