@@ -5,7 +5,6 @@ import { animateTo, stopAnimations, shimKeyframesHeightAuto } from '../../intern
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import { waitForEvent } from '../../internal/event';
-import { focusVisibleSelector } from '../../internal/focus-visible';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
 import styles from './details.styles';
 
