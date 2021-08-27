@@ -1,5 +1,6 @@
 import { css } from 'lit';
 import componentStyles from '../../styles/component.styles';
+import { focusVisibleSelector } from '../../internal/focus-visible';
 
 export default css`
   ${componentStyles}
@@ -57,10 +58,9 @@ export default css`
     margin-left: calc(var(--grid-handle-size) / -2);
   }
 
-  .color-picker__grid-handle:focus {
+  .color-picker__grid-handle${focusVisibleSelector} {
     outline: none;
-    box-shadow: 0 0 0 1px rgb(var(--sl-color-primary-500)),
-      0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-primary-500) / var(--sl-focus-ring-alpha));
+    box-shadow: 0 0 0 1px rgb(var(--sl-color-primary-500)), var(--sl-focus-ring);
   }
 
   .color-picker__controls {
@@ -95,10 +95,9 @@ export default css`
     margin-left: calc(var(--slider-handle-size) / -2);
   }
 
-  .color-picker__slider-handle:focus {
+  .color-picker__slider-handle${focusVisibleSelector} {
     outline: none;
-    box-shadow: 0 0 0 1px rgb(var(--sl-color-primary-500)),
-      0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-primary-500) / var(--sl-focus-ring-alpha));
+    box-shadow: 0 0 0 1px rgb(var(--sl-color-primary-500)), var(--sl-focus-ring);
   }
 
   .color-picker__hue {
@@ -152,8 +151,8 @@ export default css`
     background-color: var(--preview-color);
   }
 
-  .color-picker__preview:focus {
-    box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-primary-500) / var(--sl-focus-ring-alpha));
+  .color-picker__preview${focusVisibleSelector} {
+    box-shadow: var(--sl-focus-ring);
     outline: none;
   }
 
@@ -245,9 +244,9 @@ export default css`
     cursor: pointer;
   }
 
-  .color-picker__swatch:focus {
+  .color-picker__swatch${focusVisibleSelector} {
     outline: none;
-    box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-primary-500) / var(--sl-focus-ring-alpha));
+    box-shadow: var(--sl-focus-ring);
   }
 
   .color-picker__transparent-bg {
@@ -323,16 +322,16 @@ export default css`
     transition: inherit;
   }
 
-  .color-dropdown__trigger:focus {
+  .color-dropdown__trigger${focusVisibleSelector} {
     outline: none;
   }
 
-  .color-dropdown__trigger:focus:not(.color-dropdown__trigger--disabled) {
-    box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-primary-500) / var(--sl-focus-ring-alpha));
+  .color-dropdown__trigger${focusVisibleSelector}:not(.color-dropdown__trigger--disabled) {
+    box-shadow: var(--sl-focus-ring);
     outline: none;
   }
 
-  .color-dropdown__trigger:focus:not(.color-dropdown__trigger--disabled):before {
+  .color-dropdown__trigger${focusVisibleSelector}:not(.color-dropdown__trigger--disabled):before {
     box-shadow: inset 0 0 0 1px rgb(var(--sl-color-primary-500));
   }
 

@@ -26,7 +26,7 @@ export default css`
   }
 
   .rating${focusVisibleSelector} {
-    box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-primary-500) / var(--sl-focus-ring-alpha));
+    box-shadow: var(--sl-focus-ring);
   }
 
   .rating__symbols {

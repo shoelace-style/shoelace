@@ -126,8 +126,7 @@
   border-color: rgb(var(--sl-color-primary-400));
   border-right-color: transparent;
   background-color: rgb(var(--sl-color-primary-50));
-  box-shadow: 0 0 0 1px rgb(var(--sl-color-primary-400)),
-    0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-primary-500) / var(--sl-focus-ring-alpha));
+  box-shadow: 0 0 0 1px rgb(var(--sl-color-primary-400)), var(--sl-focus-ring);
   z-index: 2;
 }
 
@@ -194,7 +193,7 @@
 }
 
 .markdown-section .docsify-copy-code-button:focus {
-  box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-neutral-500) / var(--sl-focus-ring-alpha));
+  box-shadow: 0 0 0 3px rgb(var(--sl-color-neutral-500) / 50%);
 }
 
 .markdown-section .docsify-copy-code-button:active {

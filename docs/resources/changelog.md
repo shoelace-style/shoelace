@@ -11,6 +11,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - 🚨 BREAKING: fixed a bug where `--sl-color-neutral-0` and `--sl-color-neutral-1000` were inverted (swap them to update)
 - Added `--swatch-size` custom property to `sl-color-picker`
 - Added `date` to `sl-input` as a supported `type`
+- Added the `--sl-focus-ring` design token for a more convenient way to apply focus ring styles
 - Adjusted elevation tokens to use neutral in light mode and black in dark mode
 - Adjusted `--sl-overlay-background-color` in dark theme to be black instead of gray
 - Fixed a bug in `sl-color-picker` where the opacity slider wasn't showing the current color
@@ -18,6 +19,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Improved size of `sl-color-picker`
 - Improved icon contrast in `sl-input`
 - Improved contrast of `sl-switch`
+- Improved `:focus-visible` behavior in many components
 - Removed elevation from `sl-color-picker` when rendered inline
 - Removed custom `:focus-visible` logic in favor of a directive that outputs `:focus-visible` or `:focus` depending on browser support
 - Updated to Lit 2.0.0-rc.3
