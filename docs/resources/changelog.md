@@ -16,6 +16,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Adjusted `--sl-overlay-background-color` in dark theme to be black instead of gray
 - Fixed a bug in `sl-color-picker` where the opacity slider wasn't showing the current color
 - Fixed a bug where Edge in Windows would show the native password toggle next to the custom password toggle [#508](https://github.com/shoelace-style/shoelace/issues/508)
+- Fixed a bug where pressing up/down in `sl-tab-group` didn't select the next/previous tab in vertical placements
 - Improved size of `sl-color-picker`
 - Improved icon contrast in `sl-input`
 - Improved contrast of `sl-switch`

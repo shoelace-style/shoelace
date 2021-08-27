@@ -179,9 +179,15 @@ export default class SlTabGroup extends LitElement {
           index = 0;
         } else if (event.key === 'End') {
           index = this.tabs.length - 1;
-        } else if (event.key === 'ArrowLeft') {
+        } else if (
+          (['top', 'bottom'].includes(this.placement) && event.key === 'ArrowLeft') ||
+          (['start', 'end'].includes(this.placement) && event.key === 'ArrowUp')
+        ) {
           index = Math.max(0, index - 1);
-        } else if (event.key === 'ArrowRight') {
+        } else if (
+          (['top', 'bottom'].includes(this.placement) && event.key === 'ArrowRight') ||
+          (['start', 'end'].includes(this.placement) && event.key === 'ArrowDown')
+        ) {
           index = Math.min(this.tabs.length - 1, index + 1);
         }
 
