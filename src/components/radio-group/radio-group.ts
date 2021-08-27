@@ -23,8 +23,8 @@ export default class SlRadioGroup extends LitElement {
   /** The radio group label. Required for proper accessibility. Alternatively, you can use the label slot. */
   @property() label = '';
 
-  /** Hides the fieldset and legend that surrounds the radio group. The label will still be read by screen readers. */
-  @property({ type: Boolean, attribute: 'no-fieldset' }) noFieldset = false;
+  /** Shows the fieldset and legend that surrounds the radio group. */
+  @property({ type: Boolean, attribute: 'fieldset' }) fieldset = false;
 
   handleFocusIn() {
     // When tabbing into the fieldset, make sure it lands on the checked radio
@@ -45,7 +45,7 @@ export default class SlRadioGroup extends LitElement {
         part="base"
         class=${classMap({
           'radio-group': true,
-          'radio-group--no-fieldset': this.noFieldset
+          'radio-group--has-fieldset': this.fieldset
         })}
         role="radiogroup"
         @focusin=${this.handleFocusIn}

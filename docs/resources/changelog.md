@@ -9,6 +9,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 ## Next
 
 - 🚨 BREAKING: fixed a bug where `--sl-color-neutral-0` and `--sl-color-neutral-1000` were inverted (swap them to update)
+- 🚨 BREAKING: removed the `no-fieldset` property from `sl-radio-group` (fieldsets are now hidden by default; use `fieldset` to show them)
 - Added `--swatch-size` custom property to `sl-color-picker`
 - Added `date` to `sl-input` as a supported `type`
 - Added the `--sl-focus-ring` design token for a more convenient way to apply focus ring styles

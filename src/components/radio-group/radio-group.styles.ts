@@ -28,14 +28,14 @@ export default css`
     margin-bottom: var(--sl-spacing-xx-small);
   }
 
-  .radio-group--no-fieldset {
+  .radio-group:not(.radio-group--has-fieldset) {
     border: none;
     padding: 0;
     margin: 0;
     min-width: 0;
   }
 
-  .radio-group--no-fieldset .radio-group__label {
+  .radio-group:not(.radio-group--has-fieldset) .radio-group__label {
     position: absolute;
     width: 0;
     height: 0;
