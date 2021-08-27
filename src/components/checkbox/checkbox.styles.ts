@@ -35,7 +35,7 @@ export default css`
       var(--sl-transition-fast) color, var(--sl-transition-fast) box-shadow;
   }
 
-  .checkbox__control input[type='checkbox'] {
+  input[type='checkbox'] {
     position: absolute;
     opacity: 0;
     padding: 0;
@@ -61,10 +61,10 @@ export default css`
   }
 
   /* Focus */
-  .checkbox.checkbox--focused:not(.checkbox--checked):not(.checkbox--disabled) .checkbox__control {
+  .checkbox:not(.checkbox--checked):not(.checkbox--disabled) input[type='checkbox']:focus-visible ~ .checkbox__control {
     border-color: rgb(var(--sl-input-border-color-focus));
     background-color: rgb(var(--sl-input-background-color-focus));
-    box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-primary-500) / var(--sl-focus-ring-alpha));
+    box-shadow: var(--sl-focus-ring);
   }
 
   /* Checked/indeterminate */
@@ -82,11 +82,11 @@ export default css`
   }
 
   /* Checked/indeterminate + focus */
-  .checkbox.checkbox--checked:not(.checkbox--disabled).checkbox--focused .checkbox__control,
-  .checkbox.checkbox--indeterminate:not(.checkbox--disabled).checkbox--focused .checkbox__control {
+  .checkbox.checkbox--checked:not(.checkbox--disabled) input[type='checkbox']:focus-visible ~ .checkbox__control,
+  .checkbox.checkbox--indeterminate:not(.checkbox--disabled) input[type='checkbox']:focus-visible ~ .checkbox__control {
     border-color: rgb(var(--sl-color-primary-500));
     background-color: rgb(var(--sl-color-primary-500));
-    box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-primary-500) / var(--sl-focus-ring-alpha));
+    box-shadow: var(--sl-focus-ring);
   }
 
   /* Disabled */

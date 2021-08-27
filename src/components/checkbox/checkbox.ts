@@ -112,12 +112,6 @@ export default class SlCheckbox extends LitElement {
     emit(this, 'sl-focus');
   }
 
-  handleLabelMouseDown(event: MouseEvent) {
-    // Prevent clicks on the label from briefly blurring the input
-    event.preventDefault();
-    this.input.focus();
-  }
-
   @watch('checked', { waitUntilFirstUpdate: true })
   @watch('indeterminate', { waitUntilFirstUpdate: true })
   handleStateChange() {
@@ -136,8 +130,24 @@ export default class SlCheckbox extends LitElement {
           'checkbox--indeterminate': this.indeterminate
         })}
         for=${this.inputId}
-        @mousedown=${this.handleLabelMouseDown}
       >
+        <input
+          id=${this.inputId}
+          type="checkbox"
+          name=${ifDefined(this.name)}
+          value=${ifDefined(this.value)}
+          .indeterminate=${live(this.indeterminate)}
+          .checked=${live(this.checked)}
+          .disabled=${this.disabled}
+          .required=${this.required}
+          role="checkbox"
+          aria-checked=${this.checked ? 'true' : 'false'}
+          aria-labelledby=${this.labelId}
+          @click=${this.handleClick}
+          @blur=${this.handleBlur}
+          @focus=${this.handleFocus}
+        />
+
         <span part="control" class="checkbox__control">
           ${this.checked
             ? html`
@@ -170,23 +180,6 @@ export default class SlCheckbox extends LitElement {
                 </span>
               `
             : ''}
-
-          <input
-            id=${this.inputId}
-            type="checkbox"
-            name=${ifDefined(this.name)}
-            value=${ifDefined(this.value)}
-            .indeterminate=${live(this.indeterminate)}
-            .checked=${live(this.checked)}
-            .disabled=${this.disabled}
-            .required=${this.required}
-            role="checkbox"
-            aria-checked=${this.checked ? 'true' : 'false'}
-            aria-labelledby=${this.labelId}
-            @click=${this.handleClick}
-            @blur=${this.handleBlur}
-            @focus=${this.handleFocus}
-          />
         </span>
 
         <span part="label" id=${this.labelId} class="checkbox__label">
