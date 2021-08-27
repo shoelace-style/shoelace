@@ -1,5 +1,6 @@
 import { css } from 'lit';
 import componentStyles from '../../styles/component.styles';
+import { focusVisibleSelector } from '../../internal/focus-visible';
 
 export default css`
   ${componentStyles}
@@ -48,7 +49,7 @@ export default css`
       var(--sl-transition-fast) border-color, var(--sl-transition-fast) box-shadow;
   }
 
-  .switch__control input[type='checkbox'] {
+  .switch__input {
     position: absolute;
     opacity: 0;
     padding: 0;
@@ -68,12 +69,15 @@ export default css`
   }
 
   /* Focus */
-  .switch.switch--focused:not(.switch--checked):not(.switch--disabled) .switch__control {
+  .switch:not(.switch--checked):not(.switch--disabled) .switch__input${focusVisibleSelector} ~ .switch__control {
     background-color: rgb(var(--sl-color-neutral-400));
     border-color: rgb(var(--sl-color-neutral-400));
   }
 
-  .switch.switch--focused:not(.switch--checked):not(.switch--disabled) .switch__control .switch__thumb {
+  .switch:not(.switch--checked):not(.switch--disabled)
+    .switch__input${focusVisibleSelector}
+    ~ .switch__control
+    .switch__thumb {
     background-color: rgb(var(--sl-color-neutral-0));
     border-color: rgb(var(--sl-color-primary-600));
     box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-primary-500) / var(--sl-focus-ring-alpha));
@@ -103,12 +107,15 @@ export default css`
   }
 
   /* Checked + focus */
-  .switch.switch--checked:not(.switch--disabled).switch--focused .switch__control {
+  .switch.switch--checked:not(.switch--disabled) .switch__input${focusVisibleSelector} ~ .switch__control {
     background-color: rgb(var(--sl-color-primary-600));
     border-color: rgb(var(--sl-color-primary-600));
   }
 
-  .switch.switch--checked:not(.switch--disabled).switch--focused .switch__control .switch__thumb {
+  .switch.switch--checked:not(.switch--disabled)
+    .switch__input${focusVisibleSelector}
+    ~ .switch__control
+    .switch__thumb {
     background-color: rgb(var(--sl-color-neutral-0));
     border-color: rgb(var(--sl-color-primary-600));
     box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-primary-500) / var(--sl-focus-ring-alpha));

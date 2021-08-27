@@ -133,6 +133,7 @@ export default class SlCheckbox extends LitElement {
       >
         <input
           id=${this.inputId}
+          class="checkbox__input"
           type="checkbox"
           name=${ifDefined(this.name)}
           value=${ifDefined(this.value)}

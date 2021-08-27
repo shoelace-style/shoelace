@@ -133,12 +133,6 @@ export default class SlSwitch extends LitElement {
     }
   }
 
-  handleMouseDown(event: MouseEvent) {
-    // Prevent clicks on the label from briefly blurring the input
-    event.preventDefault();
-    this.input.focus();
-  }
-
   render() {
     return html`
       <label
@@ -150,27 +144,27 @@ export default class SlSwitch extends LitElement {
           'switch--disabled': this.disabled,
           'switch--focused': this.hasFocus
         })}
-        @mousedown=${this.handleMouseDown}
       >
+        <input
+          id=${this.switchId}
+          class="switch__input"
+          type="checkbox"
+          name=${ifDefined(this.name)}
+          value=${ifDefined(this.value)}
+          .checked=${live(this.checked)}
+          .disabled=${this.disabled}
+          .required=${this.required}
+          role="switch"
+          aria-checked=${this.checked ? 'true' : 'false'}
+          aria-labelledby=${this.labelId}
+          @click=${this.handleClick}
+          @blur=${this.handleBlur}
+          @focus=${this.handleFocus}
+          @keydown=${this.handleKeyDown}
+        />
+
         <span part="control" class="switch__control">
           <span part="thumb" class="switch__thumb"></span>
-
-          <input
-            id=${this.switchId}
-            type="checkbox"
-            name=${ifDefined(this.name)}
-            value=${ifDefined(this.value)}
-            .checked=${live(this.checked)}
-            .disabled=${this.disabled}
-            .required=${this.required}
-            role="switch"
-            aria-checked=${this.checked ? 'true' : 'false'}
-            aria-labelledby=${this.labelId}
-            @click=${this.handleClick}
-            @blur=${this.handleBlur}
-            @focus=${this.handleFocus}
-            @keydown=${this.handleKeyDown}
-          />
         </span>
 
         <span part="label" id=${this.labelId} class="switch__label">
