@@ -88,6 +88,7 @@ export default css`
 
   .select__clear {
     flex: 0 0 auto;
+    width: 1.25em;
   }
 
   .select__suffix {
