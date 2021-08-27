@@ -1,5 +1,6 @@
 import { css } from 'lit';
 import componentStyles from '../../styles/component.styles';
+import { focusVisibleSelector } from '../../internal/focus-visible';
 
 export default css`
   ${componentStyles}
@@ -46,7 +47,7 @@ export default css`
       var(--sl-transition-fast) color, var(--sl-transition-fast) box-shadow;
   }
 
-  .radio__control input[type='radio'] {
+  .radio__input {
     position: absolute;
     opacity: 0;
     padding: 0;
@@ -61,7 +62,7 @@ export default css`
   }
 
   /* Focus */
-  .radio.radio--focused:not(.radio--checked):not(.radio--disabled) .radio__control {
+  .radio:not(.radio--checked):not(.radio--disabled) .radio__input${focusVisibleSelector} ~ .radio__control {
     border-color: rgb(var(--sl-input-border-color-focus));
     background-color: rgb(var(--sl-input-background-color-focus));
     box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-primary-500) / var(--sl-focus-ring-alpha));
@@ -81,7 +82,7 @@ export default css`
   }
 
   /* Checked + focus */
-  .radio.radio--checked:not(.radio--disabled).radio--focused .radio__control {
+  .radio.radio--checked:not(.radio--disabled) .radio__input${focusVisibleSelector} ~ .radio__control {
     border-color: rgb(var(--sl-color-primary-500));
     background-color: rgb(var(--sl-color-primary-500));
     box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-primary-500) / var(--sl-focus-ring-alpha));
