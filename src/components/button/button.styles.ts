@@ -77,20 +77,20 @@ export default css`
 
   .button.button--default:hover:not(.button--disabled) {
     background-color: rgb(var(--sl-color-primary-50));
-    border-color: rgb(var(--sl-color-primary-500));
+    border-color: rgb(var(--sl-color-primary-300));
     color: rgb(var(--sl-color-primary-700));
   }
 
   .button.button--default${focusVisibleSelector}:not(.button--disabled) {
     background-color: rgb(var(--sl-color-primary-50));
-    border-color: rgb(var(--sl-color-primary-500));
+    border-color: rgb(var(--sl-color-primary-400));
     color: rgb(var(--sl-color-primary-700));
     box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-primary-500) / var(--sl-focus-ring-alpha));
   }
 
   .button.button--default:active:not(.button--disabled) {
     background-color: rgb(var(--sl-color-primary-100));
-    border-color: rgb(var(--sl-color-primary-500));
+    border-color: rgb(var(--sl-color-primary-400));
     color: rgb(var(--sl-color-primary-700));
   }
 
