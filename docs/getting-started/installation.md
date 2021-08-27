@@ -7,21 +7,50 @@ You can use Shoelace via CDN or by installing it locally.
 The easiest way to install Shoelace is with the CDN. Just add the following tags to your page.
 
 ```html
+<link rel="stylesheet" media="(prefers-color-scheme:light)" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/themes/light.css">
+<link rel="stylesheet" media="(prefers-color-scheme:dark)"
+      href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/themes/dark.css"
+      onload="document.documentElement.classList.add('sl-theme-dark');">
+<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/shoelace.js"></script>
+```
+
+The `media` attributes ensure that only the user's preferred theme stylesheet loads, and the `onload` attribute sets the appropriate [theme class](/getting-started/themes/) on the `<html>` element.
+
+### Forcing Light or Dark Themes
+
+To force Shoelace to use the light theme, load the light stylesheet only. Since light theme is the default, you don't need to take any further steps.
+
+```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/themes/light.css">
 <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/shoelace.js"></script>
+```
+
+To force the dark theme, set the `sl-theme-dark` class on the `<html>` element and load the dark stylesheet.
+
+```html
+<html class="sl-theme-dark">
+<head>
+  <!-- ... -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/themes/dark.css">
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/shoelace.js"></script>
+</head>
+<body>
+  <!-- ... -->
+</body>
+</html>
 ```
 
 Now you can [start using Shoelace!](/getting-started/usage)
 
 ## Local Installation
 
-If you don't want to use the CDN, you can install Shoelace locally with the following command. 
+If you don't want to use the CDN, you can install Shoelace locally with the following command.
 
 ```bash
 npm install @shoelace-style/shoelace
 ```
 
-It's up to you to make the source files available to your app. One way to do this is to create a route in your app called `/scripts/shoelace` that serves static files from `node_modules/@shoelace-style/shoelace`. 
+It's up to you to make the source files available to your app. One way to do this is to create a route in your app called `/scripts/shoelace` that serves static files from `node_modules/@shoelace-style/shoelace`.
 
 Once you've done that, add the following tags to your page. Make sure to update `href` and `src` so they point to the route you created.
 
@@ -66,7 +95,7 @@ Here's an example that loads only the button component. Again, if you're not usi
 
 <script type="module" data-shoelace="/scripts/shoelace">
   import '@shoelace-style/shoelace/dist/components/button/button.js';
-  
+
   // <sl-button> is ready to use!
 </script>
 ```
