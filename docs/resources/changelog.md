@@ -6,7 +6,11 @@ Components with the <sl-badge type="warning" pill>Experimental</sl-badge> badge 
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
-## Next
+## 2.0.0-beta.49
+
+This release changes the way focus states are applied to elements. In browsers that support [`:focus-visible`](https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible), it will be used. In unsupportive browsers ([currently only Safari](https://caniuse.com/mdn-css_selectors_focus-visible)), `:focus` will be used instead. This means the browser will determine whether a focus ring should be shown based on how the user interacts with the page.
+
+This release also fixes a critical bug in the color scale where `--sl-color-neutral-0` and `--sl-color-neutral-1000` were reversed.
 
 - 🚨 BREAKING: fixed a bug where `--sl-color-neutral-0` and `--sl-color-neutral-1000` were inverted (swap them to update)
 - 🚨 BREAKING: removed the `no-fieldset` property from `sl-radio-group` (fieldsets are now hidden by default; use `fieldset` to show them)
