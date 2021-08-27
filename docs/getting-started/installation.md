@@ -8,12 +8,36 @@ The easiest way to install Shoelace is with the CDN. Just add the following tags
 
 ```html
 <link rel="stylesheet" media="(prefers-color-scheme:light)" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/themes/light.css">
-<link rel="stylesheet" media="(prefers-color-scheme:dark)" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/themes/dark.css">
+<link rel="stylesheet" media="(prefers-color-scheme:dark)"
+      href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/themes/dark.css"
+      onload="document.documentElement.classList.add('sl-theme-dark');">
 <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/shoelace.js"></script>
-<script defer>
-if (matchMedia('(prefers-color-scheme:dark)').matches)
-  document.documentElement.classList.add('sl-theme-dark');
-</script>
+```
+
+The `media` attributes ensure that only the user's preferred theme stylesheet loads, and the `onload` attribute sets the appropriate [theme class](/getting-started/themes/) on the `<html>` element.
+
+### Forcing Light or Dark Themes
+
+To force Shoelace to use the light theme, load the light stylesheet only. Since light theme is the default, you don't need to take any further steps.
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/themes/light.css">
+<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/shoelace.js"></script>
+```
+
+To force the dark theme, set the `sl-theme-dark` class on the `<html>` element and load the dark stylesheet.
+
+```html
+<html class="sl-theme-dark">
+<head>
+  <!-- ... -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/themes/dark.css">
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/shoelace.js"></script>
+</head>
+<body>
+  <!-- ... -->
+</body>
+</html>
 ```
 
 Now you can [start using Shoelace!](/getting-started/usage)
