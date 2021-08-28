@@ -98,4 +98,16 @@ Limit date range selection to a number of specified days.
 ></sl-calendar>
 ```
 
+### Localization
+
+The `sl-calendar` component is fully localized. This covers date, time, days names and months names. The first day of the week can also be set using the `first-day-of-week` attribute.
+
+```html preview
+<sl-calendar
+  start-date="2021-08-12"
+  first-day-of-week="1"
+  lang="it"
+></sl-calendar>
+```
+
 [component-metadata:sl-calendar]

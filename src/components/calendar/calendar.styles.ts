@@ -107,29 +107,20 @@ export default css`
     box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
   }
 
-  td.outside,
-  td.disabled {
-    pointer-events: none;
-  }
-
   td.disabled,
   td.outside {
+    pointer-events: none;
     color: var(--sl-color-gray-300);
     background-color: var(--sl-color-gray-100);
   }
 
+  td.outside:hover,
+  td.outside:focus,
   td.disabled:hover,
   td.disabled:focus {
     border-color: var(--sl-color-gray-300);
-    color: var(--sl-color-gray-500);
+    color: var(--sl-color-gray-300);
     box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-info);
-  }
-
-  td.outside:hover,
-  td.outside:focus {
-    color: var(--sl-color-gray-400);
-    border-color: var(--sl-color-gray-400);
-    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-color-gray-400);
   }
 
   .navigation {
