@@ -295,7 +295,7 @@ export default class SlInput extends LitElement {
             'input--pill': this.pill,
             'input--disabled': this.disabled,
             'input--focused': this.hasFocus,
-            'input--empty': this.value.length === 0,
+            'input--empty': this.value?.length === 0,
             'input--invalid': this.invalid
           })}
         >
@@ -344,7 +344,7 @@ export default class SlInput extends LitElement {
             @blur=${this.handleBlur}
           />
 
-          ${this.clearable && this.value.length > 0
+          ${this.clearable && this.value?.length > 0
             ? html`
                 <button
                   part="clear-button"
