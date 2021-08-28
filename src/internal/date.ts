@@ -48,7 +48,9 @@ export const compareDate = (dateLeft: Date, dateRight: Date) => {
  */
 export const diffDate = (dateLeft: Date, dateRight: Date) => {
   const dateLeftDate = new Date(Date.UTC(dateLeft.getFullYear(), dateLeft.getMonth(), dateLeft.getDate(), 0, 0, 0, 0));
-  const dateRightDate = new Date(Date.UTC(dateRight.getFullYear(), dateRight.getMonth(), dateRight.getDate(), 0, 0, 0, 0));
+  const dateRightDate = new Date(
+    Date.UTC(dateRight.getFullYear(), dateRight.getMonth(), dateRight.getDate(), 0, 0, 0, 0)
+  );
 
   return Math.ceil((dateLeftDate.getTime() - dateRightDate.getTime()) / 86400000);
 };

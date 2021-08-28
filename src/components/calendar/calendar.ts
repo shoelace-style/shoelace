@@ -157,11 +157,11 @@ export default class SlCalendar extends LitElement {
       const selectedDate = parseDate(element.getAttribute('date')!);
       return compareDate(selectedDate, date) === 0;
     });
-  }
+  };
 
   focusDay = (date: Date) => {
     this.getDayElement(date)?.focus();
-  }
+  };
 
   private renderNavigation = (
     calendar: Calendar,
@@ -175,7 +175,8 @@ export default class SlCalendar extends LitElement {
       <div class="navigation">
         <sl-icon library="system" data-action="prev" name="chevron-compact-left" @click=${changeMonth}></sl-icon>
         <select aria-label="month" tabindex="-1" @change=${selectMonth}>
-          ${calendar.getMonthsNames()
+          ${calendar
+            .getMonthsNames()
             .map(item => html`<option value=${item.index} .selected=${month === item.index}>${item.name}</option>`)}
         </select>
         <div class="spinner">
@@ -186,7 +187,7 @@ export default class SlCalendar extends LitElement {
         <sl-icon library="system" data-action="next" name="chevron-compact-right" @click=${changeMonth}></sl-icon>
       </div>
     `;
-  }
+  };
 
   private renderCalendar = (
     calendar: Calendar,
@@ -199,15 +200,8 @@ export default class SlCalendar extends LitElement {
     mouseHover: (e: MouseEvent) => void,
     keyDown: (e: KeyboardEvent) => void
   ) => {
-    const {
-      isToday,
-      isStartDate,
-      isEndDate,
-      isDateInRange,
-      isDisabledDate,
-      isDateOutsideLimits,
-      getDaysNames
-    } = calendar;
+    const { isToday, isStartDate, isEndDate, isDateInRange, isDisabledDate, isDateOutsideLimits, getDaysNames } =
+      calendar;
 
     return html`<div class="calendar">
       <table>
@@ -246,7 +240,7 @@ export default class SlCalendar extends LitElement {
         </tbody>
       </table>
     </div>`;
-  }
+  };
 
   private handleClick = (e: MouseEvent) => {
     const { calendar } = this;

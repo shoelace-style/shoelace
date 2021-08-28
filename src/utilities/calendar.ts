@@ -37,7 +37,7 @@ export class Calendar {
     this.year = date.getFullYear();
   }
 
-  createCalendar = (date: Date | { month: number, year: number }): CalendarDate[] => {
+  createCalendar = (date: Date | { month: number; year: number }): CalendarDate[] => {
     let utcDate: Date;
 
     if (date instanceof Date) {
@@ -126,49 +126,49 @@ export class Calendar {
     this.year = year;
 
     return calendar;
-  }
+  };
 
-  isDateInRange = (date: Date, start: Date, end?: Date): boolean  =>{
+  isDateInRange = (date: Date, start: Date, end?: Date): boolean => {
     if (this.maxRangeLength && end) {
       let days = Math.abs(diffDate(start, end));
       if (days > this.maxRangeLength + 1) return false;
     }
     return isBetween(date, start, end);
-  }
+  };
 
-  isToday = (date: Date): boolean  =>{
+  isToday = (date: Date): boolean => {
     return compareDate(date, new Date()) === 0;
-  }
+  };
 
-  isStartDate = (date: Date): boolean  =>{
+  isStartDate = (date: Date): boolean => {
     return compareDate(date, this.startDate) === 0;
-  }
+  };
 
-  isEndDate = (date: Date): boolean  =>{
+  isEndDate = (date: Date): boolean => {
     if (!this.endDate) return false;
     return compareDate(date, this.endDate) === 0;
-  }
+  };
 
   isDateOutsideLimits = (day: Date): boolean => {
     if (!this.minDate || !this.maxDate) return false;
     return compareDate(day, this.minDate) === -1 || compareDate(this.maxDate, day) === -1;
-  }
+  };
 
   isDisabledMonth = (month: number): boolean => {
     if (!this.minDate || !this.maxDate) return false;
     return this.minDate.getMonth() > month - 1 || this.maxDate.getMonth() < month - 1;
-  }
+  };
 
-  isDisabledYear = (year: number): boolean  =>{
+  isDisabledYear = (year: number): boolean => {
     if (!this.minDate || !this.maxDate) return false;
     return this.minDate.getFullYear() > year || this.maxDate.getFullYear() < year;
-  }
+  };
 
   isDisabledDate = (date: Date): boolean => {
     if (this.disabledDates === undefined) return false;
     if (this.disabledDates?.some(d => compareDate(d, date) === 0)) return true;
     return false;
-  }
+  };
 
   getDaysNames = (): string[] => {
     const days = [...Array(7).keys()].map(d =>
@@ -181,20 +181,20 @@ export class Calendar {
     }
 
     return days;
-  }
+  };
 
   getMonthsNames = (): Array<{ name: string; index: number }> => {
     return [...Array(12).keys()].map(m => ({
       name: new Date(2017, m, 1).toLocaleString(this.locale, { month: this.dateTimeFormat.month }),
       index: m + 1
     }));
-  }
+  };
 
   getMonthName = (month: number): string => {
     return new Date(2021, month, 0).toLocaleString(this.locale, { month: this.dateTimeFormat.month });
-  }
+  };
 
   convertToDate = (date: CalendarDate): Date => {
     return new Date(date.year, date.month - 1, date.day);
-  }
+  };
 }
