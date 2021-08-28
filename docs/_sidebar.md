@@ -53,6 +53,7 @@
 
 - Utilities
   - [Animation](/components/animation)
+  - [Calendar](/components/calendar)
   - [Format Bytes](/components/format-bytes)
   - [Format Date](/components/format-date)
   - [Format Number](/components/format-number)
