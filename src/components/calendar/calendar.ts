@@ -2,6 +2,7 @@ import { LitElement, html } from 'lit';
 import { customElement, property, queryAll, state } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { repeat } from 'lit-html/directives/repeat';
+import { ifDefined } from 'lit-html/directives/if-defined';
 import { Calendar, CalendarDate } from '../../utilities/calendar';
 import { chunk } from '../../internal/array';
 import { emit } from '../../internal/event';
@@ -14,14 +15,10 @@ import {
   parseDate,
   startOfWeek,
   datesRange,
+  attributeToDate,
   diffDate
 } from '../../internal/date';
 import styles from './calendar.styles';
-
-const attributeToDate = (value: string): Date | undefined => {
-  if (!value) return;
-  return parseDate(value);
-};
 
 /**
  * @since 2.X
@@ -177,10 +174,30 @@ export default class SlCalendar extends LitElement {
         <select aria-label="month" tabindex="-1" @change=${selectMonth}>
           ${calendar
             .getMonthsNames()
-            .map(item => html`<option value=${item.index} .selected=${month === item.index}>${item.name}</option>`)}
+            .map(
+              item =>
+                html`<option
+                  value=${item.index}
+                  .disabled=${!this.checkDateLimits({ month: item.index, year })}
+                  .selected=${month === item.index}
+                >
+                  ${item.name}
+                </option>`
+            )}
         </select>
         <div class="spinner">
-          <input type="number" tabindex="-1" aria-label="year" .value=${year.toString()} @input=${changeYear} />
+          <input
+            type="number"
+            min=${this.min?.getFullYear() || 1900}
+            max=${ifDefined(this.max?.getFullYear())}
+            pattern="[0-9]*"
+            inputmode="numeric"
+            tabindex="-1"
+            aria-label="year"
+            .value=${year.toString()}
+            @input=${changeYear}
+            onkeydown="return false"
+          />
           <span class="up" data-action="next" @click=${changeYear}></span>
           <span class="down" data-action="prev" @click=${changeYear}></span>
         </div>
@@ -225,6 +242,8 @@ export default class SlCalendar extends LitElement {
                       day: true,
                       today: highlightToday ? isToday(date) : false,
                       start: isStartDate(date),
+                      'start-range':
+                        isStartDate(date) && ((this.selectionEnable && this.range) || this.end !== undefined),
                       end: isEndDate(date),
                       disabled: disabledDates ? isDisabledDate(date) : false,
                       range: isDateInRange(date, startDate, hoveredDate || endDate),
@@ -430,9 +449,19 @@ export default class SlCalendar extends LitElement {
   private updateCalendar = (date: Date | { month: number; year: number }) => {
     const { calendar } = this;
 
+    if (date instanceof Date)
+      date = {
+        month: date.getMonth() + 1,
+        year: date.getFullYear()
+      };
+
+    // check date boundaries limits
+    if (!this.checkDateLimits(date)) return;
+
+    // create new calendar
     this.dates = calendar.createCalendar(date);
 
-    // emit changes
+    // dispatch events
     if (calendar.month !== this.month) {
       emit<Number>(this, 'sl-calendar-month-changed', { detail: calendar.month });
     }
@@ -440,9 +469,25 @@ export default class SlCalendar extends LitElement {
       emit<Number>(this, 'sl-calendar-year-changed', { detail: calendar.year });
     }
 
-    // update component properties
+    // update internal properties
     this.month = calendar.month;
     this.year = calendar.year;
+  };
+
+  private checkDateLimits = (date: { month: number; year: number }) => {
+    if (
+      (this.min !== undefined && date.year < this.min.getFullYear()) ||
+      (this.min !== undefined && date.month < this.min.getMonth() + 1)
+    )
+      return false;
+
+    if (
+      (this.max !== undefined && date.year > this.max.getFullYear()) ||
+      (this.max !== undefined && date.month > this.max.getMonth() + 1)
+    )
+      return false;
+
+    return true;
   };
 }
 

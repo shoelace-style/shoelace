@@ -35,7 +35,7 @@ export default css`
   .calendar {
     position: relative;
     display: inline-flex;
-    background: var(--sl-color-white);
+    background: var(--sl-input-background-color);
     padding: 0px 10px 5px;
   }
 
@@ -53,6 +53,7 @@ export default css`
     font-size: var(--sl-font-size-medium);
     border-radius: var(--sl-border-radius-medium);
     cursor: pointer;
+    position: relative;
   }
 
   th.week-day {
@@ -84,10 +85,23 @@ export default css`
     background-color: var(--sl-color-primary-500) !important;
   }
 
+  td.start-range {
+    border-radius: 25% 0 0 25%;
+  }
+
+  td.end,
+  td.end.sibling,
+  td.end.sibling {
+    border-radius: 0 25% 25% 0;
+  }
+
   td.range,
   td.sibling.range {
     color: var(--sl-color-primary-500);
     background-color: var(--sl-color-primary-100);
+    border-radius: 0;
+    -webkit-box-shadow: -3px 0 0 var(--sl-color-primary-100), 3px 0 0 var(--sl-color-primary-100);
+    box-shadow: -3px 0 0 var(--sl-color-primary-100), 3px 0 0 var(--sl-color-primary-100);
   }
 
   td.sibling {
@@ -105,6 +119,7 @@ export default css`
     color: var(--sl-color-primary-500);
     border-color: var(--sl-color-primary-300);
     box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
+    z-index: 1;
   }
 
   td.disabled,

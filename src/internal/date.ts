@@ -28,7 +28,7 @@ export const parseDate = (date: string): Date => {
  *          0 (equal)
  *          1 (left > right)
  */
-export const compareDate = (dateLeft: Date, dateRight: Date) => {
+export const compareDate = (dateLeft: Date, dateRight: Date): number => {
   if (dateLeft.getFullYear() < dateRight.getFullYear()) return -1;
   if (dateLeft.getFullYear() > dateRight.getFullYear()) return 1;
   if (dateLeft.getMonth() < dateRight.getMonth()) return -1;
@@ -46,7 +46,7 @@ export const compareDate = (dateLeft: Date, dateRight: Date) => {
  * @param   dateRight  Date object
  * @return  Days between the dates
  */
-export const diffDate = (dateLeft: Date, dateRight: Date) => {
+export const diffDate = (dateLeft: Date, dateRight: Date): number => {
   const dateLeftDate = new Date(Date.UTC(dateLeft.getFullYear(), dateLeft.getMonth(), dateLeft.getDate(), 0, 0, 0, 0));
   const dateRightDate = new Date(
     Date.UTC(dateRight.getFullYear(), dateRight.getMonth(), dateRight.getDate(), 0, 0, 0, 0)
@@ -129,7 +129,7 @@ export const weekNumber = (date: Date): number => {
   return 1 + Math.ceil((firstThursday - target.getTime()) / 604800000);
 };
 
-export const daysInMonth = (year: number, month: number) => {
+export const daysInMonth = (year: number, month: number): number => {
   return new Date(year, month + 1, 0).getDate();
 };
 
@@ -144,6 +144,11 @@ export const datesRange = (start: Date, end: Date): Date[] => {
   days.push(current);
 
   return days;
+};
+
+export const attributeToDate = (value: string): Date | undefined => {
+  if (!value) return;
+  return parseDate(value);
 };
 
 const addToDate = (date: Date, type: 'year' | 'month' | 'day', amount: number, enforceEndOfMonth: boolean): Date => {

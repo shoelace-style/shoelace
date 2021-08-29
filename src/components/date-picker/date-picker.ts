@@ -1,16 +1,11 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { ifDefined } from 'lit-html/directives/if-defined';
-import { parseDate } from '../../internal/date';
+import { attributeToDate } from '../../internal/date';
 import type SlDropdown from '../dropdown/dropdown';
 import type SlCalendar from '../calendar/calendar';
 import '../calendar/calendar';
 import styles from './date-picker.styles';
-
-const attributeToDate = (value: string): Date | undefined => {
-  if (!value) return;
-  return parseDate(value);
-};
 
 /**
  * @since 2.X
