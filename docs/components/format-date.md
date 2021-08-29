@@ -61,4 +61,18 @@ French: <sl-format-date locale="fr"></sl-format-date><br>
 Russian: <sl-format-date locale="ru"></sl-format-date><br>
 ```
 
+### Date operations
+
+The `sl-format-date` component allows you to manipualte dates using the internal `date` library.
+
+```html preview
+Start of month: <sl-format-date date="2020-07-15" locale="ru" class="operation1"></sl-format-date><br>
+Add 14 days: <sl-format-date date="2020-07-15" locale="ru" class="operation2"></sl-format-date>
+
+<script>
+  document.querySelector('sl-format-date.operation1').calculate('start-of-month');
+  document.querySelector('sl-format-date.operation2').calculate('add-days', 14);
+</script>
+```
+
 [component-metadata:sl-format-date]

@@ -1,5 +1,6 @@
 import { LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { startOfMonth, endOfMonth, startOfWeek, endOfWeek, addYears, addMonths, addDays } from '../../internal/date';
 
 /**
  * @since 2.0
@@ -69,6 +70,44 @@ export default class SlFormatDate extends LitElement {
       hour12: hour12
     }).format(date);
   }
+
+  calculate = (
+    actions:
+      | 'start-of-month'
+      | 'end-of-month'
+      | 'start-of-week'
+      | 'end-of-week'
+      | 'add-years'
+      | 'add-months'
+      | 'add-days',
+    value?: number
+  ): void => {
+    const date = new Date(this.date);
+
+    switch (actions) {
+      case 'start-of-month':
+        this.date = startOfMonth(date);
+        break;
+      case 'end-of-month':
+        this.date = endOfMonth(date);
+        break;
+      case 'start-of-week':
+        this.date = startOfWeek(date);
+        break;
+      case 'end-of-week':
+        this.date = endOfWeek(date);
+        break;
+      case 'add-years':
+        this.date = addYears(date, value!);
+        break;
+      case 'add-months':
+        this.date = addMonths(date, value!);
+        break;
+      case 'add-days':
+        this.date = addDays(date, value!);
+        break;
+    }
+  };
 }
 
 declare global {
