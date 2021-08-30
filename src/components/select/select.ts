@@ -274,7 +274,7 @@ export default class SlSelect extends LitElement {
     const item = event.detail.item;
 
     if (this.multiple) {
-      this.value = this.value.includes(item.value)
+      this.value = this.value?.includes(item.value)
         ? (this.value as []).filter(v => v !== item.value)
         : [...this.value, item.value];
     } else {
@@ -423,7 +423,7 @@ export default class SlSelect extends LitElement {
   }
 
   render() {
-    const hasSelection = this.multiple ? this.value.length > 0 : this.value !== '';
+    const hasSelection = this.multiple ? this.value?.length > 0 : this.value !== '';
 
     return renderFormControl(
       {
