@@ -8,6 +8,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
+- Added `--sl-letter-spacing-denser`, `--sl-letter-spacing-looser`, `--sl-line-height-denser`, and `--sl-line-height-looser` design tokens
 - Fixed a bug where form controls would error out when the value was set to `undefined` [#513](https://github.com/shoelace-style/shoelace/pull/513)
 
 ## 2.0.0-beta.49

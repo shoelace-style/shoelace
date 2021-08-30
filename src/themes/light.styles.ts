@@ -442,14 +442,18 @@ export default css`
     --sl-font-weight-bold: 700;
 
     /* Letter spacings */
+    --sl-letter-spacing-denser: -0.03em;
     --sl-letter-spacing-dense: -0.015em;
     --sl-letter-spacing-normal: normal;
     --sl-letter-spacing-loose: 0.075em;
+    --sl-letter-spacing-looser: 0.15em;
 
     /* Line heights */
+    --sl-line-height-denser: 1;
     --sl-line-height-dense: 1.4;
     --sl-line-height-normal: 1.8;
     --sl-line-height-loose: 2.2;
+    --sl-line-height-looser: 2.6;
 
     /*
      * Form tokens
