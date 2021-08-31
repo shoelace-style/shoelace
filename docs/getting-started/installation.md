@@ -50,14 +50,16 @@ If you don't want to use the CDN, you can install Shoelace locally with the foll
 npm install @shoelace-style/shoelace
 ```
 
-It's up to you to make the source files available to your app. One way to do this is to create a route in your app called `/scripts/shoelace` that serves static files from `node_modules/@shoelace-style/shoelace`.
+It's up to you to make the source files available to your app. One way to do this is to create a route in your app called `/shoelace` that serves static files from `node_modules/@shoelace-style/shoelace`.
 
 Once you've done that, add the following tags to your page. Make sure to update `href` and `src` so they point to the route you created.
 
 ```html
-<link rel="stylesheet" href="/scripts/shoelace/dist/themes/light.css">
-<script type="module" src="/scripts/shoelace/dist/shoelace.js"></script>
+<link rel="stylesheet" href="/shoelace/dist/themes/light.css">
+<script type="module" src="/shoelace/dist/shoelace.js"></script>
 ```
+
+Alternatively, [you can use a bundler](#bundling).
 
 ?> For clarity, the docs will usually show imports from `@shoelace-style/shoelace`. If you're not using a module resolver or bundler, you'll need to adjust these paths to point to the folder Shoelace is in.
 
@@ -65,17 +67,17 @@ Once you've done that, add the following tags to your page. Make sure to update 
 
 Some components rely on assets (icons, images, etc.) and Shoelace needs to know where they're located. For convenience, Shoelace will try to auto-detect the correct location based on the script you've loaded it from. This assumes assets are colocated with `shoelace.js` and will "just work" for most users.
 
-However, if you're [cherry picking](#cherry-picking) or [bundling](#bundling) Shoelace, you'll need to set the base path. You can do this one of two ways. The following example assumes you're serving Shoelace's `dist` directory from `/scripts/shoelace`.
+However, if you're [cherry picking](#cherry-picking) or [bundling](#bundling) Shoelace, you'll need to set the base path. You can do this one of two ways.
 
 ```html
 <!-- Option 1: the data-shoelace attribute -->
-<script src="bundle.js" data-shoelace="/scripts/shoelace"></script>
+<script src="bundle.js" data-shoelace="/path/to/shoelace"></script>
 
 <!-- Option 2: the setBasePath() method -->
 <script src="bundle.js"></script>
 <script type="module">
-  import { setBasePath } from '/scripts/shoelace/dist/utilities/base-path.js';
-  setBasePath('/scripts/shoelace');
+  import { setBasePath } from '@shoelace-style/shoelace/dist/utilities/base-path.js';
+  setBasePath('/path/to/shoelace');
 </script>
 ```
 
@@ -93,7 +95,7 @@ Here's an example that loads only the button component. Again, if you're not usi
 <!-- The base stylesheet is always required -->
 <link rel="stylesheet" href="@shoelace-style/shoelace/dist/themes/light.css">
 
-<script type="module" data-shoelace="/scripts/shoelace">
+<script type="module" data-shoelace="/path/to/shoelace">
   import '@shoelace-style/shoelace/dist/components/button/button.js';
 
   // <sl-button> is ready to use!
