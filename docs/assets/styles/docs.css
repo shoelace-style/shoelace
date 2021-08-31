@@ -607,6 +607,13 @@ strong {
   color: rgb(var(--sl-color-sky-600));
 }
 
+@media screen and (max-width: 400px) {
+  .repo-button {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+}
+
 body[data-page^='/tokens/'] .table-wrapper td:first-child,
 body[data-page^='/tokens/'] .table-wrapper td:first-child code {
   white-space: nowrap;
