@@ -14,6 +14,8 @@
   - [Alert](/components/alert)
   - [Avatar](/components/avatar)
   - [Badge](/components/badge)
+  - [Breadcrumb](/components/breadcrumb)
+  - [Breadcrumb Item](/components/breadcrumb-item)
   - [Button](/components/button)
   - [Button Group](/components/button-group)
   - [Card](/components/card)

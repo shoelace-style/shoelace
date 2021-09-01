@@ -3,6 +3,8 @@ export { default as SlAlert } from './components/alert/alert';
 export { default as SlAnimation } from './components/animation/animation';
 export { default as SlAvatar } from './components/avatar/avatar';
 export { default as SlBadge } from './components/badge/badge';
+export { default as SlBreadcrumb } from './components/breadcrumb/breadcrumb';
+export { default as SlBreadcrumbItem } from './components/breadcrumb-item/breadcrumb-item';
 export { default as SlButton } from './components/button/button';
 export { default as SlButtonGroup } from './components/button-group/button-group';
 export { default as SlCard } from './components/card/card';
