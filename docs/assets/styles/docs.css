@@ -604,11 +604,11 @@ strong {
 }
 
 .repo-button--twitter sl-icon {
-  color: rgb(var(--sl-color-sky-600));
+  color: rgb(var(--sl-color-sky-500));
 }
 
 @media screen and (max-width: 400px) {
-  .repo-button {
+  :not(.sidebar-buttons) > .repo-button {
     width: 100%;
     margin-bottom: 1rem;
   }
