@@ -460,8 +460,10 @@ export default css`
      */
 
     /* Focus ring */
+    --sl-focus-ring-color: var(--sl-color-primary-500);
     --sl-focus-ring-width: 3px;
-    --sl-focus-ring-alpha: 33%;
+    --sl-focus-ring-alpha: 40%;
+    --sl-focus-ring: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-focus-ring-color) / var(--sl-focus-ring-alpha));
 
     /* Buttons */
     --sl-button-font-size-small: var(--sl-font-size-x-small);

@@ -8,6 +8,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
+- Added missing `--sl-focus-ring-*` tokens to dark theme
 - Improved visibility of elevations and overlays in dark theme
 - Reduced the size of `<sl-color-picker>` slightly to better accommodate mobile devices
 - Removed `<sl-icon>` dependency from `<sl-color-picker>` and improve copy animation
