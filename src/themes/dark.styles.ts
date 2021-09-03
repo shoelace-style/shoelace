@@ -383,7 +383,7 @@ export default css`
      * Elevation tokens
      */
 
-    --sl-shadow-x-small: 0 1px 0 rgb(0 0 0 / 18%);
+    --sl-shadow-x-small: 0 1px 2px rgb(0 0 0 / 18%);
     --sl-shadow-small: 0 1px 2px rgb(0 0 0 / 24%);
     --sl-shadow-medium: 0 2px 4px rgb(0 0 0 / 24%);
     --sl-shadow-large: 0 2px 8px rgb(0 0 0 / 24%);
