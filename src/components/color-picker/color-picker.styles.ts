@@ -6,11 +6,11 @@ export default css`
   ${componentStyles}
 
   :host {
-    --grid-width: 300px;
-    --grid-height: 220px;
+    --grid-width: 280px;
+    --grid-height: 200px;
     --grid-handle-size: 16px;
-    --slider-height: 17px;
-    --slider-handle-size: 19px;
+    --slider-height: 15px;
+    --slider-handle-size: 17px;
     --swatch-size: 25px;
 
     display: inline-block;
