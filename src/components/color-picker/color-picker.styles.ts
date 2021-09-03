@@ -165,38 +165,19 @@ export default css`
     border: solid 1px rgba(0, 0, 0, 0.125);
   }
 
-  .color-picker__copy-feedback {
-    width: calc(var(--sl-input-height-small) / 2);
-    height: calc(var(--sl-input-height-small) / 2);
-    color: white;
-    background-color: rgb(var(--sl-color-neutral-900));
-    border-radius: var(--sl-border-radius-circle);
-    opacity: 0;
+  .color-picker__preview-color--copied {
+    animation: pulse 0.75s;
   }
 
-  .color-picker__copy-feedback.color-picker__copy-feedback--visible {
-    animation: copied 1s;
-  }
-
-  @keyframes copied {
+  @keyframes pulse {
     0% {
-      transform: scale(0.8);
-      opacity: 0;
+      box-shadow: 0 0 0 0 rgb(var(--sl-focus-ring-color));
     }
-
-    30% {
-      transform: scale(1.2);
-      opacity: 1;
-    }
-
     70% {
-      transform: scale(1.2);
-      opacity: 1;
+      box-shadow: 0 0 0 0.5rem transparent;
     }
-
     100% {
-      transform: scale(1.4);
-      opacity: 0;
+      box-shadow: 0 0 0 0 transparent;
     }
   }
 
