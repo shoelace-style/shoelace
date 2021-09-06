@@ -20,7 +20,7 @@ let id = 0;
  *
  * @event sl-change - Emitted when the control's value changes.
  * @event sl-blur - Emitted when the control loses focus.
- * @event sl-focus - Emitted when the control gains focus. *
+ * @event sl-focus - Emitted when the control gains focus.
  *
  * @csspart base - The component's base wrapper.
  * @csspart input - The native range input.
