@@ -13,6 +13,8 @@ import stripComments from 'strip-css-comments';
 const files = glob.sync('./src/themes/**/*.styles.ts');
 const outdir = './dist/themes';
 
+console.log('Generating stylesheets');
+
 mkdirp.sync(outdir);
 
 try {
@@ -33,8 +35,6 @@ try {
     const outfile = path.join(outdir, filename);
     await fs.writeFile(outfile, formattedStyles, 'utf8');
   });
-
-  console.log(chalk.cyan(`Successfully generated stylesheets 🎨\n`));
 } catch (err) {
   console.error(chalk.red('Error generating styleseheets!'));
   console.error(err);

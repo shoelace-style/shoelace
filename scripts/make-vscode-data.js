@@ -71,5 +71,3 @@ components.map(component => {
 });
 
 fs.writeFileSync('./dist/vscode.html-custom-data.json', JSON.stringify(vscode, null, 2), 'utf8');
-
-console.log(chalk.cyan(`Successfully generated custom data for VS Code 🔮\n`));
