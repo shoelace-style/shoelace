@@ -65,6 +65,11 @@
           <ul class="site-search__results"></ul>
           <div class="site-search__empty">No results found.</div>
         </div>
+        <footer class="site-search__footer">
+          <small><kbd>↑</kbd> <kbd>↓</kbd> navigate</small>
+          <small><kbd>↲</kbd> select</small>
+          <small><kbd>esc</kbd> close</small>
+        </footer>
       </div>
     `;
     document.body.append(siteSearch);
@@ -75,7 +80,7 @@
     const input = siteSearch.querySelector('.site-search__input');
     const results = siteSearch.querySelector('.site-search__results');
     const animationDuration = 150;
-    const searchDebounce = 250;
+    const searchDebounce = 200;
     let isShowing = false;
     let searchTimeout;
     let searchIndex;
@@ -168,17 +173,14 @@
       if (['ArrowDown', 'ArrowUp', 'Home', 'End', 'Enter'].includes(event.key)) {
         event.preventDefault();
 
-        const currentEl = results.querySelector('[aria-selected]');
-        const items = [...results.querySelectorAll('a')];
+        const currentEl = results.querySelector('[aria-selected="true"]');
+        const items = [...results.querySelectorAll('li')];
+        const index = items.indexOf(currentEl);
         let nextEl;
-
-        items.map(item => item.removeAttribute('aria-selected'));
 
         if (items.length === 0) {
           return;
         }
-
-        const index = items.indexOf(currentEl);
 
         switch (event.key) {
           case 'ArrowUp':
@@ -194,14 +196,19 @@
             nextEl = items[items.length - 1];
             break;
           case 'Enter':
-            (currentEl || items[0]).click();
+            currentEl?.querySelector('a')?.click();
             break;
         }
 
-        if (nextEl) {
-          nextEl.setAttribute('aria-selected', 'true');
-          nextEl.scrollIntoView({ block: 'nearest' });
-        }
+        // Update the selected item
+        items.map(item => {
+          if (item === nextEl) {
+            item.setAttribute('aria-selected', 'true');
+            nextEl.scrollIntoView({ block: 'nearest' });
+          } else {
+            item.setAttribute('aria-selected', 'false');
+          }
+        });
 
         return;
       }
@@ -213,7 +220,6 @@
 
         const hasQuery = query.length > 0;
         const matches = hasQuery ? searchIndex.search(query) : [];
-        let id = 0;
 
         let hasResults = hasQuery && matches.length > 0;
         siteSearch.classList.toggle('site-search--has-results', hasQuery && hasResults);
@@ -222,18 +228,32 @@
 
         results.innerHTML = '';
 
-        matches.map(match => {
+        matches.map((match, index) => {
           const page = map[match.ref];
           const li = document.createElement('li');
           const a = document.createElement('a');
+          let icon = 'file-text';
+
+          if (page.url.includes('getting-started/')) icon = 'lightbulb';
+          if (page.url.includes('resources/')) icon = 'book';
+          if (page.url.includes('components/')) icon = 'box';
+          if (page.url.includes('tokens/')) icon = 'palette2';
+          if (page.url.includes('utilities/')) icon = 'wrench';
+          if (page.url.includes('tutorials/')) icon = 'joystick';
 
           a.href = $docsify.routerMode === 'hash' ? `/#/${page.url}` : `/${page.url}`;
           a.innerHTML = `
-            <h3>${page.title}</h3>
-            <small>/${page.url}</small>
+            <div class="site-search__result-icon">
+              <sl-icon name="${icon}"></sl-icon>
+            </div>
+            <div class="site-search__result__details">
+              <h3>${page.title}</h3>
+              <small>${page.url}</small>
+            </div>
           `;
 
-          li.setAttribute('id', `search-result-${id++}`);
+          li.classList.add('site-search__result');
+          li.setAttribute('aria-selected', index === 0 ? 'true' : 'false');
           li.appendChild(a);
           results.appendChild(li);
         });
