@@ -123,7 +123,7 @@ try {
     });
 
     // Reload without rebuilding when the docs change
-    bs.watch(['docs/**/*']).on('change', filename => {
+    bs.watch(['docs/**/*.md']).on('change', filename => {
       console.log(`Docs file changed - ${filename}`);
       execSync('node scripts/make-search.js', { stdio: 'inherit' });
       bs.reload();
