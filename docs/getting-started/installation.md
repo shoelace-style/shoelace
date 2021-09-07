@@ -1,6 +1,6 @@
 # Installation
 
-You can use Shoelace via CDN or by installing it locally.
+You can use Shoelace via CDN or by installing it locally. You can also [cherry pick](#cherry-picking) individual components for faster load times.
 
 ## CDN Installation (Recommended)
 
@@ -13,7 +13,7 @@ The easiest way to install Shoelace is with the CDN. Just add the following tags
 
 ### Dark Theme
 
-If you prefer to use the dark theme instead, this will load all components and the dark theme. Note the `sl-theme-dark` class on the `<html>` element.
+If you prefer to use the dark theme instead, use this. Note the `sl-theme-dark` class on the `<html>` element. [Learn more about the Dark Theme.](/getting-started/themes#dark-theme)
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/themes/light.css">
