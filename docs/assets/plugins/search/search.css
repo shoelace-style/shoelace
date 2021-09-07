@@ -107,6 +107,11 @@ body.site-search-visible {
   margin: 0;
 }
 
+.site-search__results small {
+  display: block;
+  color: rgb(var(--sl-color-neutral-600));
+}
+
 .site-search__result {
   padding: 0;
   margin: 0;
@@ -121,17 +126,12 @@ body.site-search-visible {
 .site-search__result-icon {
   flex: 0 0 auto;
   display: flex;
-  color: rgb(var(--sl-color-neutral-300));
+  color: rgb(var(--sl-color-neutral-400));
   font-size: var(--sl-font-size-x-large);
 }
 
 .site-search__result-description {
   flex: 1 1 auto;
-}
-
-.site-search__results small {
-  display: block;
-  color: rgb(var(--sl-color-neutral-600));
 }
 
 .site-search__empty {

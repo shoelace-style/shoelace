@@ -236,7 +236,7 @@
 
           if (page.url.includes('getting-started/')) icon = 'lightbulb';
           if (page.url.includes('resources/')) icon = 'book';
-          if (page.url.includes('components/')) icon = 'box';
+          if (page.url.includes('components/')) icon = 'puzzle';
           if (page.url.includes('tokens/')) icon = 'palette2';
           if (page.url.includes('utilities/')) icon = 'wrench';
           if (page.url.includes('tutorials/')) icon = 'joystick';
@@ -244,7 +244,7 @@
           a.href = $docsify.routerMode === 'hash' ? `/#/${page.url}` : `/${page.url}`;
           a.innerHTML = `
             <div class="site-search__result-icon">
-              <sl-icon name="${icon}"></sl-icon>
+              <sl-icon name="${icon}" aria-hidden="true"></sl-icon>
             </div>
             <div class="site-search__result__details">
               <h3>${page.title}</h3>

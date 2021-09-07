@@ -123,4 +123,5 @@ Special thanks to the following projects and individuals that help make Shoelace
 - Positioning of menus, tooltips, et al is handled by [Popper.js](https://popper.js.org/)
 - Animations are courtesy of [animate.css](https://animate.style/)
 - QR codes are generated with [qr-creator](https://github.com/nimiq/qr-creator)
+- Search is powered by [Lunr](https://lunrjs.com/)
 - The Shoelace logo was designed with a single shoelace by [Adam K Olson](https://twitter.com/adamkolson)
