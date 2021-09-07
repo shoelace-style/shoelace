@@ -10,6 +10,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 - Added missing `--sl-focus-ring-*` tokens to dark theme
 - Added a subtle elevation to default buttons to make them more easily identifiable
+- Improved the documentation search with a custom plugin powered by [Lunr](https://lunrjs.com/)
 - Improved the `--sl-shadow-x-small` elevation
 - Improved visibility of elevations and overlays in dark theme
 - Reduced the size of `<sl-color-picker>` slightly to better accommodate mobile devices
