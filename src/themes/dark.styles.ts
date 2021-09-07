@@ -531,7 +531,7 @@ export default css`
      */
 
     --sl-overlay-background-color: 0 0 0;
-    --sl-overlay-opacity: 42%;
+    --sl-overlay-opacity: 67%;
 
     /*
      * Panels

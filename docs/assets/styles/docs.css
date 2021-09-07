@@ -249,6 +249,11 @@ strong {
   max-width: 22rem;
 }
 
+.markdown-section .splash-start h1:first-of-type {
+  font-size: var(--sl-font-size-large);
+  margin: 0 0 0.5rem 0;
+}
+
 @media screen and (max-width: 1040px) {
   .splash {
     display: block;
@@ -375,12 +380,14 @@ strong {
   padding: 2px 4px;
 }
 
+kbd,
 .markdown-section kbd {
   font-family: var(--sl-font-mono);
   font-size: 87.5%;
   border-radius: var(--sl-border-radius-small);
   border: solid 1px rgb(var(--sl-color-neutral-200));
-  padding: 2px 4px;
+  box-shadow: var(--sl-shadow-small);
+  padding: 2px 5px;
 }
 
 /* Code blocks */
@@ -705,4 +712,10 @@ body[data-page^='/tokens/'] .table-wrapper td:first-child code {
   .color-palette__name {
     grid-column-start: span 6;
   }
+}
+
+.not-found-image {
+  display: block;
+  max-width: 460px;
+  margin: 2rem 0;
 }
