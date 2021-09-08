@@ -36,7 +36,7 @@ console.log('Generating search index for documentation');
     this.field('c'); // content
 
     files.map((file, index) => {
-      const relativePath = path.relative('./docs', file);
+      const relativePath = path.relative('./docs', file).replace(/\\/g, '/');
       const url = relativePath.replace(/\.md$/, '');
       const filename = path.basename(file);
 
