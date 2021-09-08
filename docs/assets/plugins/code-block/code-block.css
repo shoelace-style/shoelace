@@ -120,7 +120,7 @@
   z-index: 1;
 }
 
-.code-block__button:focus {
+.code-block__button:focus-visible {
   outline: none;
   color: rgb(var(--sl-color-primary-600));
   border-color: rgb(var(--sl-color-primary-400));
@@ -193,7 +193,7 @@
   display: none;
 }
 
-.markdown-section .docsify-copy-code-button:focus {
+.markdown-section .docsify-copy-code-button:focus-visible {
   box-shadow: 0 0 0 3px rgb(var(--sl-color-neutral-500) / 50%);
 }
 
