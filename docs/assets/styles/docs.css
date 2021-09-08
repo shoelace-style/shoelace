@@ -387,7 +387,7 @@ kbd,
   background-color: rgb(var(--sl-color-neutral-100));
   border-radius: var(--sl-border-radius-small);
   border: solid 1px rgb(var(--sl-color-neutral-200));
-  box-shadow: inset 0 1px 1px rgb(var(--sl-color-neutral-0));
+  box-shadow: inset 0 1px 0 rgb(var(--sl-color-neutral-0));
   padding: 2px 5px;
 }
 

@@ -55,6 +55,7 @@ body.site-search-visible {
 
 .site-search__input::part(base) {
   border: none;
+  border-radius: var(--sl-border-radius-large);
 }
 
 .site-search__input:focus-within::part(base) {
