@@ -18,15 +18,15 @@ Font sizes use `rem` units so they scale with the base font size. The pixel valu
 
 | Token                       | Value           | Example                                                           |
 | --------------------------- | --------------- | ----------------------------------------------------------------- |
-| `--sl-font-size-xx-small`   | 0.625rem (10px) | <span style="font-size: var(--sl-font-size-xx-small)">Aa</span>   |
+| `--sl-font-size-2x-small`   | 0.625rem (10px) | <span style="font-size: var(--sl-font-size-2x-small)">Aa</span>   |
 | `--sl-font-size-x-small`    | 0.75rem (12px)  | <span style="font-size: var(--sl-font-size-x-small)">Aa</span>    |
 | `--sl-font-size-small`      | 0.875rem (14px) | <span style="font-size: var(--sl-font-size-small)">Aa</span>      |
 | `--sl-font-size-medium`     | 1rem (16px)     | <span style="font-size: var(--sl-font-size-medium)">Aa</span>     |
 | `--sl-font-size-large`      | 1.25rem (20px)  | <span style="font-size: var(--sl-font-size-large)">Aa</span>      |
 | `--sl-font-size-x-large`    | 1.5rem (24px)   | <span style="font-size: var(--sl-font-size-x-large)">Aa</span>    |
-| `--sl-font-size-xx-large`   | 2.25rem (36px)  | <span style="font-size: var(--sl-font-size-xx-large)">Aa</span>   |
-| `--sl-font-size-xxx-large`  | 3rem (48px)     | <span style="font-size: var(--sl-font-size-xxx-large)">Aa</span>  |
-| `--sl-font-size-xxxx-large` | 4.5rem (72px)   | <span style="font-size: var(--sl-font-size-xxxx-large)">Aa</span> |
+| `--sl-font-size-2x-large`   | 2.25rem (36px)  | <span style="font-size: var(--sl-font-size-2x-large)">Aa</span>   |
+| `--sl-font-size-3x-large`   | 3rem (48px)     | <span style="font-size: var(--sl-font-size-3x-large)">Aa</span>   |
+| `--sl-font-size-4x-large`   | 4.5rem (72px)   | <span style="font-size: var(--sl-font-size-4x-large)">Aa</span>  |
 
 ## Font Weight
 

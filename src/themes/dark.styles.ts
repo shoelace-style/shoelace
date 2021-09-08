@@ -393,16 +393,16 @@ export default css`
      * Spacing tokens
      */
 
-    --sl-spacing-xxx-small: 0.125rem; /* 2px */
-    --sl-spacing-xx-small: 0.25rem; /* 4px */
+    --sl-spacing-3x-small: 0.125rem; /* 2px */
+    --sl-spacing-2x-small: 0.25rem; /* 4px */
     --sl-spacing-x-small: 0.5rem; /* 8px */
     --sl-spacing-small: 0.75rem; /* 12px */
     --sl-spacing-medium: 1rem; /* 16px */
     --sl-spacing-large: 1.25rem; /* 20px */
     --sl-spacing-x-large: 1.75rem; /* 28px */
-    --sl-spacing-xx-large: 2.25rem; /* 36px */
-    --sl-spacing-xxx-large: 3rem; /* 48px */
-    --sl-spacing-xxxx-large: 4.5rem; /* 72px */
+    --sl-spacing-2x-large: 2.25rem; /* 36px */
+    --sl-spacing-3x-large: 3rem; /* 48px */
+    --sl-spacing-4x-large: 4.5rem; /* 72px */
 
     /*
      * Transition tokens
@@ -425,15 +425,15 @@ export default css`
     --sl-font-serif: Georgia, 'Times New Roman', serif;
 
     /* Font sizes */
-    --sl-font-size-xx-small: 0.625rem; /* 10px */
+    --sl-font-size-2x-small: 0.625rem; /* 10px */
     --sl-font-size-x-small: 0.75rem; /* 12px */
     --sl-font-size-small: 0.875rem; /* 14px */
     --sl-font-size-medium: 1rem; /* 16px */
     --sl-font-size-large: 1.25rem; /* 20px */
     --sl-font-size-x-large: 1.5rem; /* 24px */
-    --sl-font-size-xx-large: 2.25rem; /* 36px */
-    --sl-font-size-xxx-large: 3rem; /* 48px */
-    --sl-font-size-xxxx-large: 4.5rem; /* 72px */
+    --sl-font-size-2x-large: 2.25rem; /* 36px */
+    --sl-font-size-3x-large: 3rem; /* 48px */
+    --sl-font-size-4x-large: 4.5rem; /* 72px */
 
     /* Font weights */
     --sl-font-weight-light: 300;
@@ -551,7 +551,7 @@ export default css`
     --sl-tooltip-font-weight: var(--sl-font-weight-normal);
     --sl-tooltip-font-size: var(--sl-font-size-small);
     --sl-tooltip-line-height: var(--sl-line-height-dense);
-    --sl-tooltip-padding: var(--sl-spacing-xx-small) var(--sl-spacing-x-small);
+    --sl-tooltip-padding: var(--sl-spacing-2x-small) var(--sl-spacing-x-small);
     --sl-tooltip-arrow-size: 5px;
     --sl-tooltip-arrow-start-end-offset: 8px;
 

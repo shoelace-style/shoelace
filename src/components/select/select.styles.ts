@@ -120,7 +120,7 @@ export default css`
     align-items: center;
     flex-wrap: wrap;
     justify-content: left;
-    margin-left: var(--sl-spacing-xx-small);
+    margin-left: var(--sl-spacing-2x-small);
   }
 
   /* Hidden input (for form control validation to show) */
@@ -176,7 +176,7 @@ export default css`
   }
 
   .select--small .select__tags sl-tag:not(:last-of-type) {
-    margin-right: var(--sl-spacing-xx-small);
+    margin-right: var(--sl-spacing-2x-small);
   }
 
   .select--small.select--has-tags .select__label {
@@ -219,7 +219,7 @@ export default css`
   }
 
   .select--medium .select__tags sl-tag:not(:last-of-type) {
-    margin-right: var(--sl-spacing-xx-small);
+    margin-right: var(--sl-spacing-2x-small);
   }
 
   .select--medium.select--has-tags .select__label {
@@ -261,7 +261,7 @@ export default css`
   }
 
   .select--large .select__tags sl-tag:not(:last-of-type) {
-    margin-right: var(--sl-spacing-xx-small);
+    margin-right: var(--sl-spacing-2x-small);
   }
 
   .select--large.select--has-tags .select__label {

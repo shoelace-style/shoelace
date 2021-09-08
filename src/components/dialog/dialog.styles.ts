@@ -30,8 +30,8 @@ export default css`
     flex-direction: column;
     z-index: 2;
     width: var(--width);
-    max-width: calc(100% - var(--sl-spacing-xx-large));
-    max-height: calc(100% - var(--sl-spacing-xx-large));
+    max-width: calc(100% - var(--sl-spacing-2x-large));
+    max-height: calc(100% - var(--sl-spacing-2x-large));
     background-color: rgb(var(--sl-panel-background-color));
     border-radius: var(--sl-border-radius-medium);
     box-shadow: var(--sl-shadow-x-large);

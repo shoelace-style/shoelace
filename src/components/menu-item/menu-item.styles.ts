@@ -20,7 +20,7 @@ export default css`
     letter-spacing: var(--sl-letter-spacing-normal);
     text-align: left;
     color: rgb(var(--sl-color-neutral-700));
-    padding: var(--sl-spacing-xx-small) var(--sl-spacing-x-large);
+    padding: var(--sl-spacing-2x-small) var(--sl-spacing-x-large);
     transition: var(--sl-transition-fast) fill;
     user-select: none;
     white-space: nowrap;

@@ -70,8 +70,8 @@ export default css`
   }
 
   .tag--small .tag__clear {
-    margin-left: var(--sl-spacing-xx-small);
-    margin-right: calc(-1 * var(--sl-spacing-xxx-small));
+    margin-left: var(--sl-spacing-2x-small);
+    margin-right: calc(-1 * var(--sl-spacing-3x-small));
   }
 
   .tag--medium {
@@ -83,8 +83,8 @@ export default css`
   }
 
   .tag__clear {
-    margin-left: var(--sl-spacing-xx-small);
-    margin-right: calc(-1 * var(--sl-spacing-xx-small));
+    margin-left: var(--sl-spacing-2x-small);
+    margin-right: calc(-1 * var(--sl-spacing-2x-small));
   }
 
   .tag--large {
@@ -96,7 +96,7 @@ export default css`
   }
 
   .tag__clear {
-    margin-left: var(--sl-spacing-xx-small);
+    margin-left: var(--sl-spacing-2x-small);
     margin-right: calc(-1 * var(--sl-spacing-x-small));
   }
 

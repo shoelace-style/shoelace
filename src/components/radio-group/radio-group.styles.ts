@@ -20,12 +20,12 @@ export default css`
     font-size: var(--sl-input-font-size-medium);
     font-weight: var(--sl-input-font-weight);
     color: rgb(var(--sl-input-color));
-    padding: 0 var(--sl-spacing-xx-small);
+    padding: 0 var(--sl-spacing-2x-small);
   }
 
   ::slotted(sl-radio:not(:last-of-type)) {
     display: block;
-    margin-bottom: var(--sl-spacing-xx-small);
+    margin-bottom: var(--sl-spacing-2x-small);
   }
 
   .radio-group:not(.radio-group--has-fieldset) {

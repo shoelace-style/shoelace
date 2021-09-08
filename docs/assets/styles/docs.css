@@ -339,7 +339,7 @@ strong {
 }
 
 .markdown-section h1 {
-  font-size: var(--sl-font-size-xx-large);
+  font-size: var(--sl-font-size-2x-large);
 }
 
 .markdown-section h2 {
@@ -676,7 +676,7 @@ body[data-page^='/tokens/'] .table-wrapper td:first-child code {
 .color-palette {
   display: grid;
   grid-template-columns: 200px repeat(11, 1fr);
-  gap: 1rem var(--sl-spacing-xx-small);
+  gap: 1rem var(--sl-spacing-2x-small);
   margin: 2rem 0;
 }
 

@@ -15,7 +15,7 @@ export default css`
     line-height: var(--sl-line-height-normal);
     letter-spacing: var(--sl-letter-spacing-normal);
     color: rgb(var(--sl-color-neutral-500));
-    padding: var(--sl-spacing-xx-small) var(--sl-spacing-x-large);
+    padding: var(--sl-spacing-2x-small) var(--sl-spacing-x-large);
     user-select: none;
   }
 `;

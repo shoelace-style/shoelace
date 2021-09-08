@@ -8,6 +8,9 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
+A number of users had trouble counting characters that repeat, so this release improves design token pattern so "t-shirt sizes" are more accessible. For example, `--sl-font-size-xxx-large` has become `--sl-font-size-3x-large`. This change applies to all design tokens that use this scale.
+
+- 🚨 BREAKING: all t-shirt size design tokens now use `2x`, `3x`, `4x` instead of `xx`, `xxx`, `xxxx`
 - Added missing `--sl-focus-ring-*` tokens to dark theme
 - Added a subtle elevation to default buttons to make them more easily identifiable
 - Improved the documentation search with a custom plugin powered by [Lunr](https://lunrjs.com/)
