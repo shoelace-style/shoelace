@@ -12,7 +12,6 @@ A number of users had trouble counting characters that repeat, so this release i
 
 - 🚨 BREAKING: all t-shirt size design tokens now use `2x`, `3x`, `4x` instead of `xx`, `xxx`, `xxxx`
 - Added missing `--sl-focus-ring-*` tokens to dark theme
-- Added a subtle elevation to default buttons to make them more easily identifiable
 - Improved the documentation search with a custom plugin powered by [Lunr](https://lunrjs.com/)
 - Improved the `--sl-shadow-x-small` elevation
 - Improved visibility of elevations and overlays in dark theme
