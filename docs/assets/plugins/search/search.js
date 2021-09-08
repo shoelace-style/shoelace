@@ -59,7 +59,9 @@
             placeholder="Search this site"
             size="large"
             clearable
-          ></sl-input>
+          >
+            <sl-icon slot="prefix" name="search"></sl-icon>
+          </sl-input>
         </header>
         <div class="site-search__body">
           <ul class="site-search__results"></ul>
@@ -219,7 +221,7 @@
         await searchIndex;
 
         const hasQuery = query.length > 0;
-        const matches = hasQuery ? searchIndex.search(query) : [];
+        const matches = hasQuery ? searchIndex.search(`${query}~2`) : [];
 
         let hasResults = hasQuery && matches.length > 0;
         siteSearch.classList.toggle('site-search--has-results', hasQuery && hasResults);
