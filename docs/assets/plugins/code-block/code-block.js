@@ -119,26 +119,10 @@
           document.documentElement.removeEventListener('touchend', dragStop, false);
         };
 
-        const handleKeyDown = event => {
-          if (['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) {
-            const currentWidth = preview.clientWidth;
-            const maxWidth = preview.parentElement.clientWidth;
-            const incr = event.shiftKey ? 100 : 10;
-
-            event.preventDefault();
-
-            if (event.key === 'ArrowLeft') setWidth(currentWidth - incr);
-            if (event.key === 'ArrowRight') setWidth(currentWidth + incr);
-            if (event.key === 'Home') setWidth(0);
-            if (event.key === 'End') setWidth(maxWidth);
-          }
-        };
-
         const setWidth = width => (preview.style.width = width + 'px');
 
         resizer.addEventListener('mousedown', dragStart);
         resizer.addEventListener('touchstart', dragStart);
-        resizer.addEventListener('keydown', handleKeyDown);
       }, false);
     });
   });
