@@ -2,7 +2,7 @@
 <div class="splash-start">
 <img class="splash-logo" src="/assets/images/wordmark.svg" alt="Shoelace">
 
-# A forward-thinking library of web components.
+# <span hidden>Shoelace:</span> A forward-thinking library of web components.
 
 - Works with all frameworks 🧩
 - Works with CDNs 🚛

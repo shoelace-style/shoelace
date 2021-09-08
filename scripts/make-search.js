@@ -3,33 +3,32 @@ import path from 'path';
 import glob from 'globby';
 import lunr from 'lunr';
 
-function getHeadings(markdown, maxLevel = 6) {
-  const headings = [];
-  const lines = markdown.split('\n');
-
-  lines.map(line => {
-    if (line.startsWith('#')) {
-      const level = line.match(/^(#+)/)[0].length;
-      const content = line.replace(/^#+/, '');
-
-      if (level <= maxLevel) {
-        headings.push({ level, content });
-      }
-    }
-  });
-
-  return headings;
-}
-
 console.log('Generating search index for documentation');
 
 (async () => {
-  const files = await glob('./docs/**/*.md');
+  function getHeadings(markdown, maxLevel = 6) {
+    const headings = [];
+    const lines = markdown.split('\n');
 
+    lines.map(line => {
+      if (line.startsWith('#')) {
+        const level = line.match(/^(#+)/)[0].length;
+        const content = line.replace(/^#+/, '');
+
+        if (level <= maxLevel) {
+          headings.push({ level, content });
+        }
+      }
+    });
+
+    return headings;
+  }
+
+  const files = await glob('./docs/**/*.md');
   const map = {};
   const searchIndex = lunr(function () {
     // The search index uses these field names extensively, so shortening them can save some serious bytes. The initial
-    // index file went from 468 KB => 401 KB.
+    // index file went from 468 KB => 401 KB by using single-character names!
     this.ref('id'); // id
     this.field('t', { boost: 10 }); // title
     this.field('h', { boost: 5 }); // headings
