@@ -48,7 +48,7 @@ body.site-search-visible {
 @media screen and (max-width: 1000px) {
   .site-search__panel {
     max-width: 100%;
-    max-height: calc(92vh - 140px); /* allow iOS browser chrome */
+    max-height: calc(92vh - 100px); /* allow iOS browser chrome */
     margin: 4vh var(--sl-spacing-medium);
   }
 }
