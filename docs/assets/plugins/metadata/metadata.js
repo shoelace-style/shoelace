@@ -255,6 +255,9 @@
     metadata.modules?.map(module => {
       module.declarations?.map(declaration => {
         if (declaration.customElement) {
+          // Generate the dist path based on the src path and attach it to the component
+          declaration.path = module.path.replace(/^src\//, 'dist/').replace(/\.ts$/, '.js');
+
           allComponents.push(declaration);
         }
       });
@@ -426,6 +429,41 @@
             This component imports the following dependencies.
 
             ${createDependenciesList(component.tagName, getAllComponents(metadata))}
+          `;
+        }
+
+        if (component.path) {
+          /* prettier-ignore */
+          result += `
+            ## Importing
+
+            <sl-tab-group>
+            <sl-tab slot="nav" panel="cdn" active>CDN</sl-tab>
+            <sl-tab slot="nav" panel="bundler">Bundler</sl-tab>
+            <sl-tab slot="nav" panel="react">React</sl-tab>
+
+            <sl-tab-panel name="cdn">\n
+            To import this component from [the CDN](https://www.jsdelivr.com/package/npm/@shoelace-style/shoelace):
+
+            \`\`\`js
+            import 'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@${metadata.package.version}/${component.path}';
+            \`\`\`
+            </sl-tab-panel>
+
+            <sl-tab-panel name="bundler">\n
+            To import this component using [a bundler](/getting-started/installation#bundling):
+            \`\`\`js
+            import '@shoelace-style/shoelace/${component.path}';
+            \`\`\`
+            </sl-tab-panel>
+
+            <sl-tab-panel name="react">\n
+            To import this component using [\`@shoelace-style/react\`](https://www.npmjs.com/package/@shoelace-style/react):
+            \`\`\`js
+            import '@shoelace-style/react/dist/${component.tagName.replace(/^sl-/, '')}';
+            \`\`\`
+            </sl-tab-panel>
+            </sl-tab-group>
           `;
         }
 
