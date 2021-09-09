@@ -192,7 +192,7 @@
             nextEl = items[Math.min(items.length - 1, index + 1)];
             break;
           case 'Home':
-            nextEl = items[items.length > 0 ? 1 : 0];
+            nextEl = items[0];
             break;
           case 'End':
             nextEl = items[items.length - 1];
