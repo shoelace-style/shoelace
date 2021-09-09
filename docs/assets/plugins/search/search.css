@@ -48,7 +48,7 @@ body.site-search-visible {
 @media screen and (max-width: 1000px) {
   .site-search__panel {
     max-width: 100%;
-    max-height: calc(92vh - 100px); /* allow iOS browser chrome */
+    max-height: calc(92vh - 120px); /* allow iOS browser chrome */
     margin: 4vh var(--sl-spacing-medium);
   }
 }
@@ -153,9 +153,15 @@ body.site-search-visible {
   border-top: solid 1px rgb(var(--sl-color-neutral-200));
   border-bottom-left-radius: inherit;
   border-bottom-right-radius: inherit;
-  padding: var(--sl-spacing-x-small);
+  padding: var(--sl-spacing-small);
 }
 
 .site-search__footer small {
   color: rgb(var(--sl-color-neutral-700));
+}
+
+@media screen and (max-width: 1000px) {
+  .site-search__footer {
+    display: none;
+  }
 }
