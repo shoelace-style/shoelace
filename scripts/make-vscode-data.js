@@ -5,30 +5,13 @@
 //
 import chalk from 'chalk';
 import fs from 'fs';
+import { getAllComponents } from './shared.js';
 
 const metadata = JSON.parse(fs.readFileSync('./dist/custom-elements.json', 'utf8'));
 
-function getAllComponents() {
-  const allComponents = [];
-
-  metadata.modules.map(module => {
-    module.declarations?.map(declaration => {
-      if (declaration.customElement) {
-        const component = declaration;
-
-        if (component) {
-          allComponents.push(component);
-        }
-      }
-    });
-  });
-
-  return allComponents;
-}
-
 console.log('Generating custom data for VS Code');
 
-const components = getAllComponents();
+const components = getAllComponents(metadata);
 const vscode = { tags: [] };
 
 components.map(component => {

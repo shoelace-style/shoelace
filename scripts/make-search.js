@@ -2,6 +2,9 @@ import fs from 'fs';
 import path from 'path';
 import glob from 'globby';
 import lunr from 'lunr';
+import { getAllComponents } from './shared.js';
+
+const metadata = JSON.parse(fs.readFileSync('./dist/custom-elements.json', 'utf8'));
 
 console.log('Generating search index for documentation');
 
@@ -24,6 +27,36 @@ console.log('Generating search index for documentation');
     return headings;
   }
 
+  function getMembers(markdown) {
+    const members = [];
+    const headers = markdown.match(/\[component-header:([a-z-]+)\]/g);
+
+    if (!headers) {
+      return '';
+    }
+
+    headers.map(header => {
+      const tagName = header.match(/\[component-header:([a-z-]+)\]/)[1];
+      const component = getAllComponents(metadata).find(component => component.tagName === tagName);
+
+      if (component) {
+        const fields = ['members', 'cssProperties', 'cssParts', 'slots', 'events'];
+
+        fields.map(field => {
+          if (component[field]) {
+            component[field].map(entry => {
+              if (entry.name) members.push(entry.name);
+              if (entry.description) members.push(entry.description);
+              if (entry.attribute) members.push(entry.attribute);
+            });
+          }
+        });
+      }
+    });
+
+    return members.join(' ');
+  }
+
   const files = await glob('./docs/**/*.md');
   const map = {};
   const searchIndex = lunr(function () {
@@ -32,6 +65,7 @@ console.log('Generating search index for documentation');
     this.ref('id'); // id
     this.field('t', { boost: 10 }); // title
     this.field('h', { boost: 5 }); // headings
+    this.field('m', { boost: 5 }); // members (props, methods, events, etc.)
     this.field('c'); // content
 
     files.map((file, index) => {
@@ -53,8 +87,9 @@ console.log('Generating search index for documentation');
         .filter(heading => heading.level > 1)
         .map(heading => heading.content)
         .join('\n');
+      const members = getMembers(content);
 
-      this.add({ id: index, t: title, h: headings, c: content });
+      this.add({ id: index, t: title, h: headings, m: members, c: content });
 
       map[index] = { title, url };
     });
