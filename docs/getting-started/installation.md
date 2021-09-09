@@ -84,7 +84,6 @@ Cherry picking can be done from your local install or [directly from the CDN](ht
 Here's an example that loads only the button component. Again, if you're not using a module resolver, you'll need to adjust the path to point to the folder Shoelace is in.
 
 ```html
-<!-- The base stylesheet is always required -->
 <link rel="stylesheet" href="@shoelace-style/shoelace/dist/themes/light.css">
 
 <script type="module" data-shoelace="/path/to/shoelace">
