@@ -65,7 +65,7 @@ console.log('Generating search index for documentation');
     this.ref('id'); // id
     this.field('t', { boost: 10 }); // title
     this.field('h', { boost: 5 }); // headings
-    this.field('m', { boost: 5 }); // members (props, methods, events, etc.)
+    this.field('m', { boost: 2 }); // members (props, methods, events, etc.)
     this.field('c'); // content
 
     files.map((file, index) => {
