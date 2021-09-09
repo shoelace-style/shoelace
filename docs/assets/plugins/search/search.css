@@ -45,7 +45,7 @@ body.site-search-visible {
   margin: 10rem auto;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 900px) {
   .site-search__panel {
     max-width: 100%;
     max-height: calc(92vh - 120px); /* allow iOS browser chrome */
@@ -160,7 +160,7 @@ body.site-search-visible {
   color: rgb(var(--sl-color-neutral-700));
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 900px) {
   .site-search__footer {
     display: none;
   }
