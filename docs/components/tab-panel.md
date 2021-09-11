@@ -2,7 +2,7 @@
 
 [component-header:sl-tab-panel]
 
-Tab panels are used inside tab groups to display content.
+Tab panels are used inside [tab groups](/components/tab-group) to display tabbed content.
 
 ```html preview
 <sl-tab-group>
