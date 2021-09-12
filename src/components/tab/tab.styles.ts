@@ -15,7 +15,7 @@ export default css`
     font-family: var(--sl-font-sans);
     font-size: var(--sl-font-size-small);
     font-weight: var(--sl-font-weight-semibold);
-    border-radius: 4px;
+    border-radius: var(--sl-border-radius-medium);
     color: rgb(var(--sl-color-neutral-600));
     padding: var(--sl-spacing-medium) var(--sl-spacing-large);
     white-space: nowrap;
