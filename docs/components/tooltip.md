@@ -165,7 +165,7 @@ To override it globally, set it in a root block in your stylesheet after the Sho
 
 ### HTML in Tooltips
 
-Use the `content` slot to create tooltips with HTML content.
+Use the `content` slot to create tooltips with HTML content. Tooltips are designed only for text and presentational elements. Avoid placing interactive content, such as buttons, links, and form controls, in a tooltip.
 
 ```html preview
 <sl-tooltip>
