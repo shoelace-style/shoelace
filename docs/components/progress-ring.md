@@ -18,9 +18,9 @@ Use the `size` attribute to set the diameter of the progress ring.
 <sl-progress-ring percentage="50" size="200"></sl-progress-ring>
 ```
 
-### Stroke Width
+### Track Width
 
-Use the `stroke-width` attribute to set the width of the progress ring's indicator.
+Use the `track-width` attribute to set the width of the progress ring's track.
 
 ```html preview
 <sl-progress-ring percentage="50" stroke-width="10"></sl-progress-ring>
@@ -34,8 +34,8 @@ To change the color, use the `--track-color` and `--indicator-color` custom prop
 <sl-progress-ring 
   percentage="50" 
   style="
-    --track-color: rgb(var(--sl-color-cyan-100)); 
-    --indicator-color: rgb(var(--sl-color-cyan-600));
+    --track-color: pink; 
+    --indicator-color: deeppink;
   "
 ></sl-progress-ring>
 ```
