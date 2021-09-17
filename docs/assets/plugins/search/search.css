@@ -63,6 +63,10 @@ body.site-search-visible {
   box-shadow: none;
 }
 
+.site-search__input {
+  --sl-input-height-large: 4rem;
+}
+
 .site-search__body {
   flex: 1 1 auto;
   overflow: auto;
@@ -153,7 +157,7 @@ body.site-search-visible {
   border-top: solid 1px rgb(var(--sl-color-neutral-200));
   border-bottom-left-radius: inherit;
   border-bottom-right-radius: inherit;
-  padding: var(--sl-spacing-small);
+  padding: var(--sl-spacing-medium);
 }
 
 .site-search__footer small {
