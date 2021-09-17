@@ -8,7 +8,10 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
+- 🚨 BREAKING: removed `--stroke-width` from `<sl-spinner>` (use `--track-width` instead)
+- Added `--speed` CSS custom property to `<sl-spinner>`
 - Fixed a bug where `<sl-tab>` wasn't using a border radius token [#523](https://github.com/shoelace-style/shoelace/issues/523)
+- Updated `<sl-spinner>` to use an SVG and improved the indicator animation
 
 ## 2.0.0-beta.51
 
