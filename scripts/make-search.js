@@ -70,9 +70,9 @@ console.log('Generating search index for documentation');
 
     files.map((file, index) => {
       const relativePath = path.relative('./docs', file).replace(/\\/g, '/');
+      const relativePathNoExtension = relativePath.split('.').slice(0, -1).join('.');
       const url = relativePath.replace(/\.md$/, '');
       const filename = path.basename(file);
-
       // Ignore certain directories and files
       if (relativePath.startsWith('assets/') || relativePath.startsWith('dist/') || filename === '_sidebar.md') {
         return false;
@@ -80,13 +80,12 @@ console.log('Generating search index for documentation');
 
       const content = fs.readFileSync(file, 'utf8');
       const allHeadings = getHeadings(content, 4);
-      const title =
-        allHeadings.find(heading => heading.level === 1)?.content ||
-        path.basename(path.basename(filename), path.extname(filename));
+      const title = allHeadings.find(heading => heading.level === 1)?.content || '';
       const headings = allHeadings
         .filter(heading => heading.level > 1)
         .map(heading => heading.content)
-        .join('\n');
+        .concat([relativePathNoExtension])
+        .join(' ');
       const members = getMembers(content);
 
       this.add({ id: index, t: title, h: headings, m: members, c: content });
