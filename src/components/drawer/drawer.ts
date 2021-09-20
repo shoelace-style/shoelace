@@ -28,6 +28,7 @@ let id = 0;
  *
  * @slot - The drawer's content.
  * @slot label - The drawer's label. Alternatively, you can use the label prop.
+ * @slot subheader - The drawer's subheader which comes right after the header label and close button.
  * @slot footer - The drawer's footer, usually one or more buttons representing various options.
  *
  * @event sl-show - Emitted when the drawer opens.
@@ -44,6 +45,7 @@ let id = 0;
  * @csspart overlay - The overlay.
  * @csspart panel - The drawer panel (where the drawer and its content is rendered).
  * @csspart header - The drawer header.
+ * @csspart subheader - The drawer subheader.
  * @csspart title - The drawer title.
  * @csspart close-button - The close button.
  * @csspart body - The drawer body.
@@ -52,6 +54,7 @@ let id = 0;
  * @cssproperty --size - The preferred size of the drawer. This will be applied to the drawer's width or height
  *   depending on its `placement`. Note that the drawer will shrink to accommodate smaller screens.
  * @cssproperty --header-spacing - The amount of padding to use for the header.
+ * @cssproperty --subheader-spacing - The amount of padding to use for the subheader.
  * @cssproperty --body-spacing - The amount of padding to use for the body.
  * @cssproperty --footer-spacing - The amount of padding to use for the footer.
  *
@@ -281,6 +284,10 @@ export default class SlDrawer extends LitElement {
                 </header>
               `
             : ''}
+
+          <div part="subheader" class="drawer__subheader">
+            <slot name="subheader" @slotchange=${this.handleSlotChange}></slot>
+          </div>
 
           <div part="body" class="drawer__body">
             <slot></slot>

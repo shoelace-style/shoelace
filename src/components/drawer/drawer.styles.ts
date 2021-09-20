@@ -7,6 +7,7 @@ export default css`
   :host {
     --size: 25rem;
     --header-spacing: var(--sl-spacing-large);
+    --subheader-spacing: var(--sl-spacing-large);
     --body-spacing: var(--sl-spacing-large);
     --footer-spacing: var(--sl-spacing-large);
 
@@ -103,6 +104,10 @@ export default css`
     align-items: center;
     font-size: var(--sl-font-size-x-large);
     padding: 0 var(--header-spacing);
+  }
+
+  .drawer__subheader {
+    padding: var(--header-spacing);
   }
 
   .drawer__body {
