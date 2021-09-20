@@ -83,6 +83,7 @@ export default class SlDrawer extends LitElement {
   private originalTrigger: HTMLElement | null;
 
   @state() private hasFooter = false;
+  @state() private hasSubheader = false;
 
   /** Indicates whether or not the drawer is open. You can use this in lieu of the show/hide methods. */
   @property({ type: Boolean, reflect: true }) open = false;
@@ -236,6 +237,7 @@ export default class SlDrawer extends LitElement {
 
   handleSlotChange() {
     this.hasFooter = hasSlot(this, 'footer');
+    this.hasSubheader = hasSlot(this, 'subheader');
   }
 
   render() {
@@ -251,7 +253,8 @@ export default class SlDrawer extends LitElement {
           'drawer--start': this.placement === 'start',
           'drawer--contained': this.contained,
           'drawer--fixed': !this.contained,
-          'drawer--has-footer': this.hasFooter
+          'drawer--has-footer': this.hasFooter,
+          'drawer--has-subheader': this.hasSubheader
         })}
         @keydown=${this.handleKeyDown}
       >

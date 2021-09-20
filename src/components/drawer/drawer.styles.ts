@@ -110,6 +110,10 @@ export default css`
     padding: var(--header-spacing);
   }
 
+  .drawer:not(.drawer--has-subheader) .drawer__subheader {
+    display: none;
+  }
+
   .drawer__body {
     flex: 1 1 auto;
     padding: var(--body-spacing);
