@@ -35,9 +35,9 @@ export default class SlProgressRing extends LitElement {
         aria-valuemax="100"
         aria-valuenow="${this.percentage}"
       >
-        <svg class="progress-ring__image" style="--percentage: ${this.percentage}; --pi: ${Math.PI.toFixed(10)}">
+        <svg class="progress-ring__image">
           <circle class="progress-ring__track"></circle>
-          <circle class="progress-ring__indicator"></circle>
+          <circle class="progress-ring__indicator" style="--percentage: ${this.percentage / 100};"></circle>
         </svg>
 
         <span part="label" class="progress-ring__label">

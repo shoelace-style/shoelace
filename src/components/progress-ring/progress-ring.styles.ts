@@ -30,7 +30,7 @@ export default css`
   .progress-ring__track,
   .progress-ring__indicator {
     --radius: calc(var(--size) / 2 - var(--track-width) * 2);
-    --circumference: calc(var(--radius) * 2 * var(--pi));
+    --circumference: calc(var(--radius) * 2 * 3.141592654);
 
     fill: none;
     stroke-width: var(--track-width);
@@ -48,7 +48,7 @@ export default css`
     stroke-linecap: round;
     transition: 0.35s stroke-dashoffset;
     stroke-dasharray: var(--circumference) var(--circumference);
-    stroke-dashoffset: calc(var(--circumference) - (var(--percentage) / 100) * var(--circumference));
+    stroke-dashoffset: calc(var(--circumference) - var(--percentage) * var(--circumference));
   }
 
   .progress-ring__label {
