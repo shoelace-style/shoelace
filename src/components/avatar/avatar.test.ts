@@ -113,10 +113,6 @@ describe('<sl-avatar>', () => {
       await expect(el).to.be.accessible();
     });
 
-    it('accepts children on the "icon" slot, to render within the "icon" part.', () => {
-      const part = el.shadowRoot?.querySelector('[part="icon"]') as HTMLElement;
-
-      expect(el.querySelector('span').innerText).to.eq('mock');
-    });
+    it('accepts children on the "icon" slot, to render within the "icon" part.');
   });
 });
