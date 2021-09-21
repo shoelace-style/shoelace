@@ -1,6 +1,6 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
-import { styleMap } from 'lit-html/directives/style-map';
+import { styleMap } from 'lit-html/directives/style-map.js';
 import { watch } from '../../internal/watch';
 import QrCreator from 'qr-creator';
 import styles from './qr-code.styles';

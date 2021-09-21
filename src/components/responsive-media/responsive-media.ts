@@ -1,6 +1,6 @@
 import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { classMap } from 'lit-html/directives/class-map';
+import { classMap } from 'lit-html/directives/class-map.js';
 import styles from './responsive-media.styles';
 
 /**

@@ -1,6 +1,6 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
-import { classMap } from 'lit-html/directives/class-map';
+import { classMap } from 'lit-html/directives/class-map.js';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import { getOffset } from '../../internal/offset';

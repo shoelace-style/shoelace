@@ -17,6 +17,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug in the Remix Icons example where some icons would 404 [#528](https://github.com/shoelace-style/shoelace/issues/528)
 - Updated `<sl-progress-ring>` to use only CSS for styling
 - Updated `<sl-spinner>` to use an SVG and improved the indicator animation
+- Updated to Lit 2.0 and lit-html 2.0
 
 ## 2.0.0-beta.51
 

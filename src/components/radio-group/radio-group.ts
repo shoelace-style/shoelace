@@ -1,6 +1,6 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
-import { classMap } from 'lit-html/directives/class-map';
+import { classMap } from 'lit-html/directives/class-map.js';
 import type SlRadio from '../radio/radio';
 import styles from './radio-group.styles';
 

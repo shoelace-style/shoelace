@@ -1,6 +1,6 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { unsafeSVG } from 'lit-html/directives/unsafe-svg';
+import { unsafeSVG } from 'lit-html/directives/unsafe-svg.js';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import { getIconLibrary, watchIcon, unwatchIcon } from './library';

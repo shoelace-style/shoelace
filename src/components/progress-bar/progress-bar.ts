@@ -1,7 +1,7 @@
 import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { classMap } from 'lit-html/directives/class-map';
-import { styleMap } from 'lit-html/directives/style-map';
+import { classMap } from 'lit-html/directives/class-map.js';
+import { styleMap } from 'lit-html/directives/style-map.js';
 import styles from './progress-bar.styles';
 
 /**
