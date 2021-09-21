@@ -4,7 +4,7 @@ import '../../../dist/shoelace.js';
 import type SlBadge from './badge';
 
 describe('<sl-badge>', () => {
-  let el;
+  let el: SlBadge;
 
   describe('when provided no parameters', async () => {
     before(async () => {
@@ -24,7 +24,7 @@ describe('<sl-badge>', () => {
 
     it('should default to square styling, with the primary color', async () => {
       const part = el.shadowRoot?.querySelector('[part="base"]') as HTMLElement;
-      expect(part.classList.value).to.eq('badge badge--primary');
+      expect(part.classList.value.trim()).to.eq('badge badge--primary');
     });
   });
 
@@ -39,7 +39,7 @@ describe('<sl-badge>', () => {
 
     it('should append the pill class to the classlist to render a pill', async () => {
       const part = el.shadowRoot?.querySelector('[part="base"]') as HTMLElement;
-      expect(part.classList.value).to.eq('badge badge--primary badge--pill');
+      expect(part.classList.value.trim()).to.eq('badge badge--primary badge--pill');
     });
   });
 
@@ -54,14 +54,14 @@ describe('<sl-badge>', () => {
 
     it('should append the pulse class to the classlist to render a pulse', async () => {
       const part = el.shadowRoot?.querySelector('[part="base"]') as HTMLElement;
-      expect(part.classList.value).to.eq('badge badge--primary badge--pulse');
+      expect(part.classList.value.trim()).to.eq('badge badge--primary badge--pulse');
     });
   });
 
   ['primary', 'success', 'neutral', 'warning', 'danger'].forEach(type => {
     describe(`when passed a type attribute ${type}`, () => {
       before(async () => {
-        el = await fixture<SlBadge>(html`<sl-badge type="${type}">Badge</sl-badge>`);
+        el = await fixture<SlBadge>(html`<sl-badge type="${type as any}">Badge</sl-badge>`);
       });
 
       it('should render a component that passes accessibility test', async () => {
@@ -70,7 +70,7 @@ describe('<sl-badge>', () => {
 
       it('should default to square styling, with the primary color', async () => {
         const part = el.shadowRoot?.querySelector('[part="base"]') as HTMLElement;
-        expect(part.classList.value).to.eq(`badge badge--${type}`);
+        expect(part.classList.value.trim()).to.eq(`badge badge--${type}`);
       });
     });
   });
