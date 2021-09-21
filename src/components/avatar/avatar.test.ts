@@ -35,7 +35,7 @@ describe('<sl-avatar>', () => {
        * The image element itself is ancillary, because it's parent container contains the
        * aria-label which dictates what "sl-avatar" is. This also implies that alt text will
        * resolve to "" when not provided and ignored by readers. This is why we use alt="" on
-       * the iamge element to pass accessibility.
+       * the image element to pass accessibility.
        * https://html.spec.whatwg.org/multipage/images.html#ancillary-images
        */
       await expect(el).to.be.accessible();
@@ -45,7 +45,6 @@ describe('<sl-avatar>', () => {
       const part = el.shadowRoot?.querySelector('[part="image"]') as HTMLImageElement;
 
       expect(part.getAttribute('src')).to.eq(image);
-      expect(part.getAttribute('role')).to.eq('presentation');
     });
 
     it('renders the alt attribute in the "base" part', async () => {
@@ -56,7 +55,9 @@ describe('<sl-avatar>', () => {
 
     describe('when an error occurs when attempting to load the image', async () => {
       before(async () => {
-        el = await fixture<SlAvatar>(html`<sl-avatar image="not-an-image-url" alt="${alt}"></sl-avatar>`);
+        el = await fixture<SlAvatar>(
+          html`<sl-avatar image="data:text/plain;not-an-image-url" alt="${alt}"></sl-avatar>`
+        );
       });
 
       it('does not render the "image" part', async () => {
@@ -104,7 +105,18 @@ describe('<sl-avatar>', () => {
   });
 
   describe('when passed a <sl-icon>', async () => {
-    it('passes accessibility test');
-    it('renders a svg inside the "icon" part');
+    before(async () => {
+      el = await fixture<SlAvatar>(html`<sl-avatar><span slot="icon">mock</span></sl-avatar>`);
+    });
+
+    it('passes accessibility test', async () => {
+      await expect(el).to.be.accessible();
+    });
+
+    it('accepts children on the "icon" slot, to render within the "icon" part.', () => {
+      const part = el.shadowRoot?.querySelector('[part="icon"]') as HTMLElement;
+
+      expect(el.querySelector('span').innerText).to.eq('mock');
+    });
   });
 });
