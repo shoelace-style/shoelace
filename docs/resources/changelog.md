@@ -6,10 +6,10 @@ Components with the <sl-badge type="warning" pill>Experimental</sl-badge> badge 
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
-## Next
+## 2.0.0-beta.52
 
-- 🚨 BREAKING: removed `--stroke-width` from `<sl-spinner>` (use the `--track-width` custom property instead)
-- 🚨 BREAKING: removed `size` and `stroke-width` attributes from `<sl-progress-ring>` (use the `--size` and `--track-width` custom properties instead)
+- 🚨 BREAKING: changed the `--stroke-width` custom property of `<sl-spinner>` to `--track-width` for consistency
+- 🚨 BREAKING: removed the `size` and `stroke-width` attributes from `<sl-progress-ring>` so it's fully customizable with CSS (use the `--size` and `--track-width` custom properties instead)
 - Added the `--speed` custom property to `<sl-spinner>`
 - Added the `--size` and `--track-width` custom properties to `<sl-progress-ring>`
 - Added tests for `<sl-badge>` [#530](https://github.com/shoelace-style/shoelace/pull/530)
@@ -17,11 +17,11 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug in the Remix Icons example where some icons would 404 [#528](https://github.com/shoelace-style/shoelace/issues/528)
 - Updated `<sl-progress-ring>` to use only CSS for styling
 - Updated `<sl-spinner>` to use an SVG and improved the indicator animation
-- Updated to Lit 2.0 and lit-html 2.0
+- Updated to Lit 2.0 and lit-html 2.0 🔥
 
 ## 2.0.0-beta.51
 
-A number of users had trouble counting characters that repeat, so this release improves design token pattern so "t-shirt sizes" are more accessible. For example, `--sl-font-size-xxx-large` has become `--sl-font-size-3x-large`. This change applies to all design tokens that use this scale.
+A number of users had trouble counting characters that repeat, so this release improves design token patterns so that "t-shirt sizes" are more accessible. For example, `--sl-font-size-xxx-large` has become `--sl-font-size-3x-large`. This change applies to all design tokens that use this scale.
 
 - 🚨 BREAKING: all t-shirt size design tokens now use `2x`, `3x`, `4x` instead of `xx`, `xxx`, `xxxx`
 - Added missing `--sl-focus-ring-*` tokens to dark theme
@@ -30,7 +30,7 @@ A number of users had trouble counting characters that repeat, so this release i
 - Improved the `--sl-shadow-x-small` elevation
 - Improved visibility of elevations and overlays in dark theme
 - Reduced the size of `<sl-color-picker>` slightly to better accommodate mobile devices
-- Removed `<sl-icon>` dependency from `<sl-color-picker>` and improve copy animation
+- Removed `<sl-icon>` dependency from `<sl-color-picker>` and improved the copy animation
 
 ## 2.0.0-beta.50
 
