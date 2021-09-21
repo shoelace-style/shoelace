@@ -46,7 +46,7 @@ export default css`
   .progress-ring__indicator {
     stroke: var(--indicator-color);
     stroke-linecap: round;
-    transition: 0.35s stroke-dashoffset, 0.35s stroke;
+    transition: 0.35s stroke-dashoffset;
     stroke-dasharray: var(--circumference) var(--circumference);
     stroke-dashoffset: calc(var(--circumference) - (var(--percentage) / 100) * var(--circumference));
   }
