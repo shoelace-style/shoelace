@@ -376,7 +376,6 @@ export default class SlInput extends LitElement {
                       `
                     : html`
                         <slot name="hide-password-icon">
-                          ${' '}
                           <sl-icon name="eye" library="system"></sl-icon>
                         </slot>
                       `}
