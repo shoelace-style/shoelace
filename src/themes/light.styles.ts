@@ -368,7 +368,7 @@ export default css`
     --sl-color-neutral-1000: 0 0 0;
 
     /*
-     * Border radius tokens
+     * Border radii
      */
 
     --sl-border-radius-small: 0.125rem; /* 2px */
@@ -380,7 +380,7 @@ export default css`
     --sl-border-radius-pill: 9999px;
 
     /*
-     * Elevation tokens
+     * Elevation
      */
 
     --sl-shadow-x-small: 0 1px 2px rgb(var(--sl-color-neutral-500) / 6%);
@@ -390,7 +390,7 @@ export default css`
     --sl-shadow-x-large: 0 4px 16px rgb(var(--sl-color-neutral-500) / 12%);
 
     /*
-     * Spacing tokens
+     * Spacings
      */
 
     --sl-spacing-3x-small: 0.125rem; /* 2px */
@@ -405,7 +405,7 @@ export default css`
     --sl-spacing-4x-large: 4.5rem; /* 72px */
 
     /*
-     * Transition tokens
+     * Transitions
      */
 
     --sl-transition-x-slow: 1000ms;
@@ -415,7 +415,7 @@ export default css`
     --sl-transition-x-fast: 50ms;
 
     /*
-     * Typography tokens
+     * Typography
      */
 
     /* Fonts */
@@ -456,10 +456,10 @@ export default css`
     --sl-line-height-looser: 2.6;
 
     /*
-     * Form tokens
+     * Forms
      */
 
-    /* Focus ring */
+    /* Focus rings */
     --sl-focus-ring-color: var(--sl-color-primary-500);
     --sl-focus-ring-width: 3px;
     --sl-focus-ring-alpha: 40%;
@@ -475,9 +475,9 @@ export default css`
     --sl-input-height-medium: 2.5rem; /* 40px */
     --sl-input-height-large: 3.125rem; /* 50px */
 
-    --sl-input-background-color: var(--sl-color-neutral-0);
-    --sl-input-background-color-hover: var(--sl-color-neutral-0);
-    --sl-input-background-color-focus: var(--sl-color-neutral-0);
+    --sl-input-background-color: var(--sl-surface-base);
+    --sl-input-background-color-hover: var(--sl-input-background-color);
+    --sl-input-background-color-focus: var(--sl-input-background-color);
     --sl-input-background-color-disabled: var(--sl-color-neutral-100);
     --sl-input-border-color: var(--sl-color-neutral-300);
     --sl-input-border-color-hover: var(--sl-color-neutral-400);
@@ -523,11 +523,11 @@ export default css`
 
     --sl-input-help-text-color: var(--sl-color-neutral-500);
 
-    /* Toggle (checkboxes, radios, switches) */
+    /* Toggles (checkboxes, radios, switches) */
     --sl-toggle-size: 1rem;
 
     /*
-     * Overlay tokens
+     * Overlays
      */
 
     --sl-overlay-background-color: var(--sl-color-blue-gray-500);
@@ -537,11 +537,19 @@ export default css`
      * Panels
      */
 
-    --sl-panel-background-color: var(--sl-color-neutral-0);
+    --sl-panel-background-color: var(--sl-surface-raised);
     --sl-panel-border-color: var(--sl-color-neutral-200);
 
     /*
-     * Tooltip tokens
+     * Surfaces
+     */
+
+    --sl-surface-base: var(--sl-color-neutral-0); /* body background */
+    --sl-surface-base-alt: var(--sl-color-neutral-50); /* subtle color shift for code blocks, warnings, etc. */
+    --sl-surface-raised: var(--sl-color-neutral-0); /* cards, alerts, dropdowns, dialogs */
+
+    /*
+     * Tooltips
      */
 
     --sl-tooltip-border-radius: var(--sl-border-radius-medium);
@@ -556,7 +564,7 @@ export default css`
     --sl-tooltip-arrow-start-end-offset: 8px;
 
     /*
-     * Z-index tokens
+     * Z-indexes
      */
 
     --sl-z-index-drawer: 700;
