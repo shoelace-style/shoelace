@@ -6,6 +6,12 @@ Components with the <sl-badge type="warning" pill>Experimental</sl-badge> badge 
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
+## Next
+
+- Added initial surface design tokens
+- Added missing background color to `<sl-details>`
+- Modified the color scale to no longer use a luminance shift
+
 ## 2.0.0-beta.52
 
 - 🚨 BREAKING: changed the `--stroke-width` custom property of `<sl-spinner>` to `--track-width` for consistency
