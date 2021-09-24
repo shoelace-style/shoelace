@@ -104,15 +104,21 @@ describe('<sl-avatar>', () => {
     });
   });
 
-  describe('when passed a <sl-icon>', async () => {
+  describe('when passed a <span>, on slot "icon"', async () => {
     before(async () => {
-      el = await fixture<SlAvatar>(html`<sl-avatar><span slot="icon">mock</span></sl-avatar>`);
+      el = await fixture<SlAvatar>(html`<sl-avatar><span slot="icon">random content</span></sl-avatar>`);
     });
 
     it('passes accessibility test', async () => {
       await expect(el).to.be.accessible();
     });
 
-    it('accepts children on the "icon" slot, to render within the "icon" part.');
+    it('should accept as an assigned child in the shadow root', async () => {
+      const slot = el.shadowRoot.querySelector('slot[name=icon]');
+      const childNodes = slot.assignedNodes({ flatten: true });
+
+      expect(childNodes.length).to.eq(1);
+      expect(childNodes[0].innerHTML).to.eq('random content');
+    });
   });
 });
