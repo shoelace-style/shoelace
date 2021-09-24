@@ -19,7 +19,9 @@ describe('<sl-include>', () => {
   });
 
   it('should emit sl-error when content cannot be loaded', async () => {
-    const el = await fixture<SlInclude>(html` <sl-include src="https://404"></sl-include> `);
+    const el = await fixture<SlInclude>(
+      html` <sl-include src="https://jsonplaceholder.typicode.com/not-found"></sl-include> `
+    );
     const loadHandler = sinon.spy();
 
     el.addEventListener('sl-error', loadHandler);
