@@ -30,12 +30,12 @@ describe('<sl-select>', () => {
         <sl-menu-item value="option-3">Option 3</sl-menu-item>
       </sl-select>
     `)) as SlSelect;
-    const selectBox = el.shadowRoot.querySelector('.select__box') as HTMLSelectElement;
-    selectBox.focus();
+    const control = el.shadowRoot.querySelector('.select__control') as HTMLSelectElement;
+    control.focus();
     const rKeyEvent = new KeyboardEvent('keydown', { key: 'r' });
-    selectBox.dispatchEvent(rKeyEvent);
+    control.dispatchEvent(rKeyEvent);
     await aTimeout(100);
-    expect(selectBox.getAttribute('aria-expanded')).to.equal('true');
+    expect(control.getAttribute('aria-expanded')).to.equal('true');
   });
 
   it('should not open the menu when ctrl + R is pressed with sl-select is on focus', async () => {
@@ -46,11 +46,11 @@ describe('<sl-select>', () => {
         <sl-menu-item value="option-3">Option 3</sl-menu-item>
       </sl-select>
     `)) as SlSelect;
-    const selectBox = el.shadowRoot.querySelector('.select__box') as HTMLSelectElement;
-    selectBox.focus();
+    const control = el.shadowRoot.querySelector('.select__control') as HTMLSelectElement;
+    control.focus();
     const rKeyEvent = new KeyboardEvent('keydown', { key: 'r', ctrlKey: true });
-    selectBox.dispatchEvent(rKeyEvent);
+    control.dispatchEvent(rKeyEvent);
     await aTimeout(100);
-    expect(selectBox.getAttribute('aria-expanded')).to.equal('false');
+    expect(control.getAttribute('aria-expanded')).to.equal('false');
   });
 });
