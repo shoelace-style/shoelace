@@ -19,6 +19,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Added the `--speed` custom property to `<sl-spinner>`
 - Added the `--size` and `--track-width` custom properties to `<sl-progress-ring>`
 - Added tests for `<sl-badge>` [#530](https://github.com/shoelace-style/shoelace/pull/530)
+- Changed the default `distance` in `<sl-dropdown>` from `2` to `0`
 - Fixed a bug where `<sl-tab>` wasn't using a border radius token [#523](https://github.com/shoelace-style/shoelace/issues/523)
 - Fixed a bug in the Remix Icons example where some icons would 404 [#528](https://github.com/shoelace-style/shoelace/issues/528)
 - Updated `<sl-progress-ring>` to use only CSS for styling

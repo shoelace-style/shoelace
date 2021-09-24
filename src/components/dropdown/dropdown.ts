@@ -79,7 +79,7 @@ export default class SlDropdown extends LitElement {
   @property({ attribute: false }) containingElement: HTMLElement;
 
   /** The distance in pixels from which to offset the panel away from its trigger. */
-  @property({ type: Number }) distance = 2;
+  @property({ type: Number }) distance = 0;
 
   /** The distance in pixels from which to offset the panel along its trigger. */
   @property({ type: Number }) skidding = 0;
