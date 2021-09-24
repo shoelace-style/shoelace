@@ -4,7 +4,7 @@ import '../../../dist/shoelace.js';
 import type SlAvatar from './avatar';
 
 describe('<sl-avatar>', () => {
-  let el;
+  let el: SlAvatar;
 
   describe('when provided no parameters', async () => {
     before(async () => {
@@ -18,7 +18,7 @@ describe('<sl-avatar>', () => {
     it('should default to circle styling', async () => {
       const part = el.shadowRoot?.querySelector('[part="base"]') as HTMLElement;
       expect(el.getAttribute('shape')).to.eq('circle');
-      expect(part.classList.value).to.eq('avatar avatar--circle');
+      expect(part.classList.value.trim()).to.eq('avatar avatar--circle');
     });
   });
 
@@ -99,7 +99,7 @@ describe('<sl-avatar>', () => {
         const part = el.shadowRoot?.querySelector('[part="base"]') as HTMLElement;
 
         expect(el.getAttribute('shape')).to.eq(shape);
-        expect(part.classList.value).to.eq(`avatar avatar--${shape}`);
+        expect(part.classList.value.trim()).to.eq(`avatar avatar--${shape}`);
       });
     });
   });
