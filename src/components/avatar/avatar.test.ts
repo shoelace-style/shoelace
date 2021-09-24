@@ -114,11 +114,13 @@ describe('<sl-avatar>', () => {
     });
 
     it('should accept as an assigned child in the shadow root', async () => {
-      const slot = el.shadowRoot.querySelector('slot[name=icon]');
+      const slot = <HTMLSlotElement>el.shadowRoot.querySelector('slot[name=icon]');
       const childNodes = slot.assignedNodes({ flatten: true });
 
       expect(childNodes.length).to.eq(1);
-      expect(childNodes[0].innerHTML).to.eq('random content');
+
+      const span = <HTMLElement>childNodes[0];
+      expect(span.innerHTML).to.eq('random content');
     });
   });
 });
