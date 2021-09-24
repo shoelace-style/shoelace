@@ -33,6 +33,19 @@ Use the `size` attribute to change a button's size.
 <sl-button size="large">Large</sl-button>
 ```
 
+### Outline Buttons
+
+Use the `outline` attribute to draw outlined buttons with transparent backgrounds.
+
+```html preview
+<sl-button type="default" outline>Default</sl-button>
+<sl-button type="primary" outline>Primary</sl-button>
+<sl-button type="success" outline>Success</sl-button>
+<sl-button type="neutral" outline>Neutral</sl-button>
+<sl-button type="warning" outline>Warning</sl-button>
+<sl-button type="danger" outline>Danger</sl-button>
+```
+
 ### Pill Buttons
 
 Use the `pill` attribute to give buttons rounded edges.

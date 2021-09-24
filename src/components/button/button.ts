@@ -54,6 +54,9 @@ export default class SlButton extends LitElement {
   /** Draws the button in a loading state. */
   @property({ type: Boolean, reflect: true }) loading = false;
 
+  /** Draws an outlined button. */
+  @property({ type: Boolean, reflect: true }) outline = false;
+
   /** Draws a pill-style button with rounded edges. */
   @property({ type: Boolean, reflect: true }) pill = false;
 
@@ -174,6 +177,8 @@ export default class SlButton extends LitElement {
               'button--disabled': this.disabled,
               'button--focused': this.hasFocus,
               'button--loading': this.loading,
+              'button--standard': !this.outline,
+              'button--outline': this.outline,
               'button--pill': this.pill,
               'button--has-label': this.hasLabel,
               'button--has-prefix': this.hasPrefix,
@@ -213,6 +218,8 @@ export default class SlButton extends LitElement {
               'button--disabled': this.disabled,
               'button--focused': this.hasFocus,
               'button--loading': this.loading,
+              'button--standard': !this.outline,
+              'button--outline': this.outline,
               'button--pill': this.pill,
               'button--has-label': this.hasLabel,
               'button--has-prefix': this.hasPrefix,
