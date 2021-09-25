@@ -44,6 +44,18 @@ Use the `clearable` attribute to make the control clearable.
 </sl-select>
 ```
 
+### Filled Selects
+
+Add the `filled` attribute to draw a filled select.
+
+```html preview
+<sl-select filled>
+  <sl-menu-item value="option-1">Option 1</sl-menu-item>
+  <sl-menu-item value="option-2">Option 2</sl-menu-item>
+  <sl-menu-item value="option-3">Option 3</sl-menu-item>
+</sl-select>
+```
+
 ### Pill
 
 Use the `pill` attribute to give selects rounded edges.

@@ -30,9 +30,17 @@ Use the `placeholder` attribute to add a placeholder.
 <sl-textarea placeholder="Type something"></sl-textarea>
 ```
 
+### Filled Textareas
+
+Add the `filled` attribute to draw a filled textarea.
+
+```html preview
+<sl-textarea placeholder="Type something" filled></sl-textarea>
+```
+
 ### Disabled
 
-Use the `disabled` attribute to disable an input.
+Use the `disabled` attribute to disable a textarea.
 
 ```html preview
 <sl-textarea placeholder="Textarea" disabled></sl-textarea>

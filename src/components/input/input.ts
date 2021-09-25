@@ -71,6 +71,9 @@ export default class SlInput extends LitElement {
   /** The input's value attribute. */
   @property() value = '';
 
+  /** Draws a filled input. */
+  @property({ type: Boolean, reflect: true }) filled = false;
+
   /** Draws a pill-style input with rounded edges. */
   @property({ type: Boolean, reflect: true }) pill = false;
 
@@ -293,6 +296,8 @@ export default class SlInput extends LitElement {
 
             // States
             'input--pill': this.pill,
+            'input--standard': !this.filled,
+            'input--filled': this.filled,
             'input--disabled': this.disabled,
             'input--focused': this.hasFocus,
             'input--empty': this.value?.length === 0,

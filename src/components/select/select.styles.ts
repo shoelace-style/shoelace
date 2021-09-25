@@ -23,21 +23,26 @@ export default css`
     font-family: var(--sl-input-font-family);
     font-weight: var(--sl-input-font-weight);
     letter-spacing: var(--sl-input-letter-spacing);
-    background-color: rgb(var(--sl-input-background-color));
-    border: solid var(--sl-input-border-width) rgb(var(--sl-input-border-color));
     vertical-align: middle;
     overflow: hidden;
     transition: var(--sl-transition-fast) color, var(--sl-transition-fast) border, var(--sl-transition-fast) box-shadow;
     cursor: pointer;
   }
 
-  .select:not(.select--disabled) .select__control:hover {
+  /* Standard selects */
+  .select--standard .select__control {
+    background-color: rgb(var(--sl-input-background-color));
+    border: solid var(--sl-input-border-width) rgb(var(--sl-input-border-color));
+    color: rgb(var(--sl-input-color));
+  }
+
+  .select--standard:not(.select--disabled) .select__control:hover {
     background-color: rgb(var(--sl-input-background-color-hover));
     border-color: rgb(var(--sl-input-border-color-hover));
     color: rgb(var(--sl-input-color-hover));
   }
 
-  .select.select--focused:not(.select--disabled) .select__control {
+  .select--standard.select--focused:not(.select--disabled) .select__control {
     background-color: rgb(var(--sl-input-background-color-focus));
     border-color: rgb(var(--sl-input-border-color-focus));
     box-shadow: var(--sl-focus-ring);
@@ -45,10 +50,30 @@ export default css`
     color: rgb(var(--sl-input-color-focus));
   }
 
-  .select--disabled .select__control {
+  .select--standard.select--disabled .select__control {
     background-color: rgb(var(--sl-input-background-color-disabled));
     border-color: rgb(var(--sl-input-border-color-disabled));
     color: rgb(var(--sl-input-color-disabled));
+    opacity: 0.5;
+    cursor: not-allowed;
+    outline: none;
+  }
+
+  /* Filled selects */
+  .select--filled .select__control {
+    background-color: rgb(var(--sl-color-neutral-100));
+    border: solid 1px rgb(var(--sl-color-neutral-100));
+    color: rgb(var(--sl-input-color));
+  }
+
+  .select--filled.select--focused:not(.select--disabled) .select__control {
+    background-color: rgb(var(--sl-color-neutral-0));
+    border-color: rgb(var(--sl-color-primary-500));
+    box-shadow: var(--sl-focus-ring);
+    outline: none;
+  }
+
+  .select--filled.select--disabled .select__control {
     opacity: 0.5;
     cursor: not-allowed;
     outline: none;

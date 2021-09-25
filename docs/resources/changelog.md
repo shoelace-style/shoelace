@@ -10,7 +10,8 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 - Added initial surface design tokens
 - Added missing background color to `<sl-details>`
-- Added the `outline` attribute to `<sl-button>` for outlined buttons [#522](https://github.com/shoelace-style/shoelace/issues/522)
+- Added the `outline` variation to `<sl-button>` [#522](https://github.com/shoelace-style/shoelace/issues/522)
+- Added the `filled` variation to `<sl-input>`, `<sl-textarea>`, and `<sl-select>` 
 - Added the `control` part to `<sl-select>` so you can target the main control with CSS [#538](https://github.com/shoelace-style/shoelace/issues/538)
 - Changed the default `distance` in `<sl-dropdown>` from `2` to `0` [#538](https://github.com/shoelace-style/shoelace/issues/538)
 - Modified the color scale to no longer use a luminance shift

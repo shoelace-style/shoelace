@@ -43,7 +43,7 @@ let id = 0;
  * @event sl-blur - Emitted when the control loses focus.
  *
  * @csspart base - The component's base wrapper.
- * @csspart clear-button - The input's clear button, exported from <sl-input>.
+ * @csspart clear-button - The clear button.
  * @csspart control - The container that holds the prefix, label, and suffix.
  * @csspart form-control - The form control that wraps the label, input, and help text.
  * @csspart help-text - The select's help text.
@@ -105,6 +105,9 @@ export default class SlSelect extends LitElement {
 
   /** The value of the control. This will be a string or an array depending on `multiple`. */
   @property() value: string | Array<string> = '';
+
+  /** Draws a filled select. */
+  @property({ type: Boolean, reflect: true }) filled = false;
 
   /** Draws a pill-style select with rounded edges. */
   @property({ type: Boolean, reflect: true }) pill = false;
@@ -453,6 +456,8 @@ export default class SlSelect extends LitElement {
             'select--clearable': this.clearable,
             'select--disabled': this.disabled,
             'select--multiple': this.multiple,
+            'select--standard': !this.filled,
+            'select--filled': this.filled,
             'select--has-tags': this.multiple && this.displayTags.length > 0,
             'select--placeholder-visible': this.displayLabel === '',
             'select--small': this.size === 'small',

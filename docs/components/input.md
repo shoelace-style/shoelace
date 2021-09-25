@@ -42,6 +42,14 @@ Add the `toggle-password` attribute to add a toggle button that will show the pa
 <sl-input type="password" placeholder="Password Toggle" size="large" toggle-password></sl-input>
 ```
 
+### Filled Inputs
+
+Add the `filled` attribute to draw a filled input.
+
+```html preview
+<sl-input placeholder="Type something" filled></sl-input>
+```
+
 ### Pill
 
 Use the `pill` attribute to give inputs rounded edges.

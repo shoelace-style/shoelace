@@ -53,6 +53,9 @@ export default class SlTextarea extends LitElement {
   /** The textarea's value attribute. */
   @property() value = '';
 
+  /** Draws a filled textarea. */
+  @property({ type: Boolean, reflect: true }) filled = false;
+
   /** The textarea's label. Alternatively, you can use the label slot. */
   @property() label: string;
 
@@ -297,6 +300,8 @@ export default class SlTextarea extends LitElement {
             'textarea--small': this.size === 'small',
             'textarea--medium': this.size === 'medium',
             'textarea--large': this.size === 'large',
+            'textarea--standard': !this.filled,
+            'textarea--filled': this.filled,
             'textarea--disabled': this.disabled,
             'textarea--focused': this.hasFocus,
             'textarea--empty': this.value?.length === 0,
