@@ -6,6 +6,27 @@ import type SlBreadcrumbItem from './breadcrumb-item';
 describe('<sl-breadcrumb-item>', () => {
   let el: SlBreadcrumbItem;
 
+  describe('when not provided a href attribute', async () => {
+    before(async () => {
+      el = await fixture<SlBreadcrumbItem>(html` <sl-breadcrumb-item>Home</sl-breadcrumb-item> `);
+    });
+
+    it('should render a component that passes accessibility test', async () => {
+      await expect(el).to.be.accessible();
+    });
+
+    it('should hide the seperator from screen readers', async () => {
+      const separator: HTMLSpanElement = el.shadowRoot.querySelector('[part="separator"]');
+      expect(separator).attribute('aria-hidden', 'true');
+    });
+
+    it('should render a HTMLButtonElement as the part "label", with a set type "button"', () => {
+      const button: HTMLButtonElement = el.shadowRoot.querySelector('[part="label"]');
+      expect(button).to.exist;
+      expect(button).attribute('type', 'button');
+    });
+  });
+
   describe('when provided a href attribute', async () => {
     describe('and no target', () => {
       before(async () => {
