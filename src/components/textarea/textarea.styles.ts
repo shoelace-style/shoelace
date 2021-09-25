@@ -76,7 +76,7 @@ export default css`
   }
 
   .textarea--filled.textarea--focused:not(.textarea--disabled) {
-    background-color: rgb(var(--sl-color-neutral-0));
+    background-color: rgb(var(--sl-color-surface-base));
     border-color: rgb(var(--sl-color-primary-500));
     box-shadow: var(--sl-focus-ring);
   }
