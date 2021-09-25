@@ -12,6 +12,83 @@ describe('<sl-breadcrumb-item>', () => {
     expect(el).to.exist;
   });
 
+  describe('when provided a href attribute', async () => {
+    describe('and no target', () => {
+      before(async () => {
+        el = await fixture<SlBreadcrumbItem>(html`
+          <sl-breadcrumb-item href="https://jsonplaceholder.typicode.com/">Home</sl-breadcrumb-item>
+        `);
+      });
+
+      it('should render a component that passes accessibility test', async () => {
+        await expect(el).to.be.accessible();
+      });
+
+      it('should render a HTMLAnchorElement, with the supplied href value', () => {
+        const hyperlink: HTMLAnchorElement = el.shadowRoot.querySelector('a');
+        expect(hyperlink).attribute('href', 'https://jsonplaceholder.typicode.com/');
+      });
+    });
+
+    describe('and target, without rel', () => {
+      before(async () => {
+        el = await fixture<SlBreadcrumbItem>(html`
+          <sl-breadcrumb-item href="https://jsonplaceholder.typicode.com/" target="_blank">Help</sl-breadcrumb-item>
+        `);
+      });
+
+      it('should render a component that passes accessibility test', async () => {
+        await expect(el).to.be.accessible();
+      });
+
+      describe('should render a HTMLAnchorElement', () => {
+        let hyperlink: HTMLAnchorElement;
+
+        before(() => {
+          hyperlink = el.shadowRoot.querySelector('a');
+        });
+
+        it('should use the supplied href value, as the href attribute value', () => {
+          expect(hyperlink).attribute('href', 'https://jsonplaceholder.typicode.com/');
+        });
+
+        it('should default rel attribute to "noreferrer noopener"', () => {
+          expect(hyperlink).attribute('rel', 'noreferrer noopener');
+        });
+      });
+    });
+
+    describe('and target, with rel', () => {
+      before(async () => {
+        el = await fixture<SlBreadcrumbItem>(html`
+          <sl-breadcrumb-item href="https://jsonplaceholder.typicode.com/" target="_blank" rel="alternate"
+            >Help</sl-breadcrumb-item
+          >
+        `);
+      });
+
+      it('should render a component that passes accessibility test', async () => {
+        await expect(el).to.be.accessible();
+      });
+
+      describe('should render a HTMLAnchorElement', () => {
+        let hyperlink: HTMLAnchorElement;
+
+        before(() => {
+          hyperlink = el.shadowRoot.querySelector('a');
+        });
+
+        it('should use the supplied href value, as the href attribute value', () => {
+          expect(hyperlink).attribute('href', 'https://jsonplaceholder.typicode.com/');
+        });
+
+        it('should use the supplied rel value, as the rel attribute value', () => {
+          expect(hyperlink).attribute('rel', 'alternate');
+        });
+      });
+    });
+  });
+
   describe('when provided an element in the slot "prefix" to support prefix icons', async () => {
     before(async () => {
       el = await fixture<SlBreadcrumbItem>(html`
