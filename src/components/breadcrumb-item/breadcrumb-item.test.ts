@@ -6,12 +6,6 @@ import type SlBreadcrumbItem from './breadcrumb-item';
 describe('<sl-breadcrumb-item>', () => {
   let el: SlBreadcrumbItem;
 
-  it('should render a component', async () => {
-    const el = await fixture(html` <sl-breadcrumb-item></sl-breadcrumb-item> `);
-
-    expect(el).to.exist;
-  });
-
   describe('when provided a href attribute', async () => {
     describe('and no target', () => {
       before(async () => {
@@ -109,6 +103,11 @@ describe('<sl-breadcrumb-item>', () => {
 
       expect(childNodes.length).to.eq(1);
     });
+
+    it('should append class "breadcrumb-item--has-prefix" to "base" part', () => {
+      const part = el.shadowRoot?.querySelector('[part="base"]') as HTMLElement;
+      expect(part.classList.value).to.equal('breadcrumb-item breadcrumb-item--has-prefix');
+    });
   });
 
   describe('when provided an element in the slot "suffix" to support suffix icons', async () => {
@@ -130,6 +129,11 @@ describe('<sl-breadcrumb-item>', () => {
       const childNodes = slot.assignedNodes({ flatten: true });
 
       expect(childNodes.length).to.eq(1);
+    });
+
+    it('should append class "breadcrumb-item--has-suffix" to "base" part', () => {
+      const part = el.shadowRoot?.querySelector('[part="base"]') as HTMLElement;
+      expect(part.classList.value).to.equal('breadcrumb-item breadcrumb-item--has-suffix');
     });
   });
 });
