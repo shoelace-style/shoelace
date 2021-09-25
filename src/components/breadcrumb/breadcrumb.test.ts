@@ -80,14 +80,6 @@ describe('<sl-breadcrumb>', () => {
     it('should render a component that passes accessibility test', async () => {
       await expect(el).to.be.accessible();
     });
-
-    it.skip('should accept "prefix" as an assigned child in the shadow root', () => {
-      // TODO: I suspect this test doesn't work because the slot resides inside the breadcrumb-item not the breadcrumb list
-      const slot = <HTMLSlotElement>el.shadowRoot.querySelector('slot[name=prefix]');
-      const childNodes = slot.assignedNodes({ flatten: true });
-
-      expect(childNodes.length).to.eq(1);
-    });
   });
 
   describe('when provided a standard list of el-breadcrumb-item children and an element in the slot "suffix" to support suffix icons', async () => {
@@ -107,14 +99,6 @@ describe('<sl-breadcrumb>', () => {
 
     it('should render a component that passes accessibility test', async () => {
       await expect(el).to.be.accessible();
-    });
-
-    it.skip('should accept "suffix" as an assigned child in the shadow root', () => {
-      // TODO: I suspect this test doesn't work because the slot resides inside the breadcrumb-item not the breadcrumb list
-      const slot = <HTMLSlotElement>el.shadowRoot.querySelector('slot[name=suffix]');
-      const childNodes = slot.assignedNodes({ flatten: true });
-
-      expect(childNodes.length).to.eq(1);
     });
   });
 });
