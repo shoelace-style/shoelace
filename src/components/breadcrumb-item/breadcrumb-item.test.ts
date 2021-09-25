@@ -18,8 +18,8 @@ describe('<sl-breadcrumb-item>', () => {
         await expect(el).to.be.accessible();
       });
 
-      it('should render a HTMLAnchorElement, with the supplied href value', () => {
-        const hyperlink: HTMLAnchorElement = el.shadowRoot.querySelector('a');
+      it('should render a HTMLAnchorElement as the part "label", with the supplied href value', () => {
+        const hyperlink: HTMLAnchorElement = el.shadowRoot.querySelector('[part="label"]');
         expect(hyperlink).attribute('href', 'https://jsonplaceholder.typicode.com/');
       });
     });
@@ -35,11 +35,11 @@ describe('<sl-breadcrumb-item>', () => {
         await expect(el).to.be.accessible();
       });
 
-      describe('should render a HTMLAnchorElement', () => {
+      describe('should render a HTMLAnchorElement as the part "label"', () => {
         let hyperlink: HTMLAnchorElement;
 
         before(() => {
-          hyperlink = el.shadowRoot.querySelector('a');
+          hyperlink = el.shadowRoot.querySelector('[part="label"]');
         });
 
         it('should use the supplied href value, as the href attribute value', () => {
