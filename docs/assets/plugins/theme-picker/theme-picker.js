@@ -47,6 +47,7 @@
           <sl-icon name="sun" label="Select Theme"></sl-icon>
         </sl-button>
         <sl-menu>
+          <sl-menu-label>Toggle <kbd>\\</kbd></sl-menu-label>
           <sl-menu-item value="light">Light</sl-menu-item>
           <sl-menu-item value="dark">Dark</sl-menu-item>
           <sl-menu-divider></sl-menu-divider>
@@ -62,6 +63,19 @@
 
       // Update the theme when the preference changes
       window.matchMedia('(prefers-color-scheme: dark)').addListener(event => setTheme(theme));
+
+      // Toggle themes when pressing backslash
+      document.addEventListener('keydown', event => {
+        if (
+          event.key === '\\' &&
+          !event.composedPath().some(el => ['input', 'textarea'].includes(el?.tagName?.toLowerCase()))
+        ) {
+          event.preventDefault();
+
+          setTheme(isDark() ? 'light' : 'dark');
+          show();
+        }
+      });
 
       // Set the intial theme and sync the UI
       setTheme(theme);
