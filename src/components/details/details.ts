@@ -22,9 +22,9 @@ let id = 0;
  * @slot summary - The details' summary. Alternatively, you can use the summary prop.
  *
  * @event sl-show - Emitted when the details opens.
- * @event sl-after-show - Emitted after the details opens and all transitions are complete.
+ * @event sl-after-show - Emitted after the details opens and all animations are complete.
  * @event sl-hide - Emitted when the details closes.
- * @event sl-after-hide - Emitted after the details closes and all transitions are complete.
+ * @event sl-after-hide - Emitted after the details closes and all animations are complete.
  *
  * @csspart base - The component's base wrapper.
  * @csspart header - The summary header.

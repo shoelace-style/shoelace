@@ -31,9 +31,9 @@ let id = 0;
  * @slot footer - The drawer's footer, usually one or more buttons representing various options.
  *
  * @event sl-show - Emitted when the drawer opens.
- * @event sl-after-show - Emitted after the drawer opens and all transitions are complete.
+ * @event sl-after-show - Emitted after the drawer opens and all animations are complete.
  * @event sl-hide - Emitted when the drawer closes.
- * @event sl-after-hide - Emitted after the drawer closes and all transitions are complete.
+ * @event sl-after-hide - Emitted after the drawer closes and all animations are complete.
  * @event sl-initial-focus - Emitted when the drawer opens and the panel gains focus. Calling `event.preventDefault()` will
  *   prevent focus and allow you to set it on a different element in the drawer, such as an input or button.
  * @event sl-request-close - Emitted when the user attempts to close the drawer by clicking the close button, clicking the
