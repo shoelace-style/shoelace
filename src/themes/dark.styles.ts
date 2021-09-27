@@ -516,6 +516,15 @@ export default css`
     --sl-input-spacing-medium: var(--sl-spacing-medium);
     --sl-input-spacing-large: var(--sl-spacing-large);
 
+    --sl-input-filled-background-color: var(--sl-color-neutral-100);
+    --sl-input-filled-background-color-hover: var(--sl-color-neutral-100);
+    --sl-input-filled-background-color-focus: var(--sl-color-neutral-0);
+    --sl-input-filled-background-color-disabled: var(--sl-color-neutral-100);
+    --sl-input-filled-color: var(--sl-color-neutral-800);
+    --sl-input-filled-color-hover: var(--sl-color-neutral-800);
+    --sl-input-filled-color-focus: var(--sl-color-neutral-700);
+    --sl-input-filled-color-disabled: var(--sl-color-neutral-800);
+
     /* Labels */
     --sl-input-label-font-size-small: var(--sl-font-size-small);
     --sl-input-label-font-size-medium: var(--sl-font-size-medium);

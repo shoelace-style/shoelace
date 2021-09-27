@@ -65,18 +65,22 @@ export default css`
 
   /* Filled inputs */
   .input--filled {
-    background-color: rgb(var(--sl-color-neutral-100));
-    border: solid 1px rgb(var(--sl-color-neutral-100));
+    border: none;
+    background-color: rgb(var(--sl-input-filled-background-color));
     color: rgb(var(--sl-input-color));
   }
 
+  .input--filled:hover:not(.input--disabled) {
+    background-color: rgb(var(--sl-input-filled-background-color-hover));
+  }
+
   .input--filled.input--focused:not(.input--disabled) {
-    background-color: rgb(var(--sl-color-surface-base));
-    border-color: rgb(var(--sl-color-primary-500));
+    background-color: rgb(var(--sl-input-filled-background-color-focus));
     box-shadow: var(--sl-focus-ring);
   }
 
   .input--filled.input--disabled {
+    background-color: rgb(var(--sl-input-filled-background-color-disabled));
     opacity: 0.5;
     cursor: not-allowed;
   }

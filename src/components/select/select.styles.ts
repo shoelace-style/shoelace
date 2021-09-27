@@ -61,22 +61,24 @@ export default css`
 
   /* Filled selects */
   .select--filled .select__control {
-    background-color: rgb(var(--sl-color-neutral-100));
-    border: solid 1px rgb(var(--sl-color-neutral-100));
+    border: none;
+    background-color: rgb(var(--sl-input-filled-background-color));
     color: rgb(var(--sl-input-color));
   }
 
+  .select--filled:hover:not(.select--disabled) .select__control {
+    background-color: rgb(var(--sl-input-filled-background-color-hover));
+  }
+
   .select--filled.select--focused:not(.select--disabled) .select__control {
-    background-color: rgb(var(--sl-color-surface-base));
-    border-color: rgb(var(--sl-color-primary-500));
+    background-color: rgb(var(--sl-input-filled-background-color-focus));
     box-shadow: var(--sl-focus-ring);
-    outline: none;
   }
 
   .select--filled.select--disabled .select__control {
+    background-color: rgb(var(--sl-input-filled-background-color-disabled));
     opacity: 0.5;
     cursor: not-allowed;
-    outline: none;
   }
 
   .select--disabled .select__tags,

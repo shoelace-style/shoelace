@@ -67,21 +67,22 @@ export default css`
 
   /* Filled textareas */
   .textarea--filled {
-    background-color: rgb(var(--sl-color-neutral-100));
-    border: solid 1px rgb(var(--sl-color-neutral-100));
+    border: none;
+    background-color: rgb(var(--sl-input-filled-background-color));
+    color: rgb(var(--sl-input-color));
   }
 
-  .textarea--filled:hover:not(.textarea--disabled) .textarea__control {
-    color: rgb(var(--sl-input-color-hover));
+  .textarea--filled:hover:not(.textarea--disabled) {
+    background-color: rgb(var(--sl-input-filled-background-color-hover));
   }
 
   .textarea--filled.textarea--focused:not(.textarea--disabled) {
-    background-color: rgb(var(--sl-color-surface-base));
-    border-color: rgb(var(--sl-color-primary-500));
+    background-color: rgb(var(--sl-input-filled-background-color-focus));
     box-shadow: var(--sl-focus-ring);
   }
 
   .textarea--filled.textarea--disabled {
+    background-color: rgb(var(--sl-input-filled-background-color-disabled));
     opacity: 0.5;
     cursor: not-allowed;
   }
