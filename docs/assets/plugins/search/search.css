@@ -39,7 +39,7 @@ body.site-search-visible {
   flex-direction: column;
   max-width: 460px;
   max-height: calc(100vh - 20rem);
-  background-color: rgb(var(--sl-surface-raised));
+  background-color: rgb(var(--sl-color-neutral-0));
   border-radius: var(--sl-border-radius-large);
   box-shadow: var(--sl-shadow-x-large);
   margin: 10rem auto;
@@ -104,7 +104,7 @@ body.site-search-visible {
 .site-search__results li[aria-selected='true'] a small,
 .site-search__results li[aria-selected='true'] a sl-icon {
   outline: none;
-  color: rgb(var(--sl-surface-raised));
+  color: rgb(var(--sl-color-neutral-0));
   background-color: rgb(var(--sl-color-primary-600));
 }
 

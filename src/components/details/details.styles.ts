@@ -12,7 +12,7 @@ export default css`
   .details {
     border: solid 1px rgb(var(--sl-color-neutral-200));
     border-radius: var(--sl-border-radius-medium);
-    background-color: rgb(var(--sl-surface-raised));
+    background-color: rgb(var(--sl-color-neutral-0));
     overflow-anchor: none;
   }
 

@@ -290,7 +290,7 @@ strong {
 .markdown-section code {
   font-family: var(--sl-font-mono);
   font-size: 87.5%;
-  background-color: rgb(var(--sl-surface-base-alt));
+  background-color: rgb(var(--sl-color-neutral-50));
   border-radius: var(--sl-border-radius-small);
   padding: 2px 4px;
 }
@@ -302,14 +302,14 @@ kbd,
   background-color: rgb(var(--sl-color-neutral-50));
   border-radius: var(--sl-border-radius-small);
   border: solid 1px rgb(var(--sl-color-neutral-200));
-  box-shadow: inset 0 1px 0 rgb(var(--sl-surface-base));
+  box-shadow: inset 0 1px 0 rgb(var(--sl-color-neutral-0));
   padding: 2px 5px;
 }
 
 /* Code blocks */
 .markdown-section pre {
   position: relative;
-  background-color: rgb(var(--sl-surface-base-alt));
+  background-color: rgb(var(--sl-color-neutral-50));
   border-radius: var(--sl-border-radius-medium);
 }
 
@@ -413,7 +413,7 @@ kbd,
 }
 
 .markdown-section tr:nth-child(2n) {
-  background: rgb(var(--sl-surface-base));
+  background: rgb(var(--sl-color-neutral-50));
 }
 
 .markdown-section th {
@@ -442,7 +442,7 @@ kbd,
 .markdown-section p.tip,
 .markdown-section p.warn {
   position: relative;
-  background-color: rgb(var(--sl-surface-base-alt));
+  background-color: rgb(var(--sl-color-neutral-50));
   border-left: solid 4px transparent;
   border-radius: var(--sl-border-radius-medium);
   padding-left: 1.5rem;

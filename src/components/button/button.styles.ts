@@ -70,7 +70,7 @@ export default css`
 
   /* Default */
   .button--standard.button--default {
-    background-color: rgb(var(--sl-surface-base));
+    background-color: rgb(var(--sl-color-neutral-0));
     border-color: rgb(var(--sl-color-neutral-300));
     color: rgb(var(--sl-color-neutral-700));
   }

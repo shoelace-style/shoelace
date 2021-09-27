@@ -380,7 +380,7 @@ export default css`
     --sl-border-radius-pill: 9999px;
 
     /*
-     * Elevation
+     * Elevations
      */
 
     --sl-shadow-x-small: 0 1px 2px rgb(var(--sl-color-neutral-500) / 6%);
@@ -388,6 +388,13 @@ export default css`
     --sl-shadow-medium: 0 2px 4px rgb(var(--sl-color-neutral-500) / 12%);
     --sl-shadow-large: 0 2px 8px rgb(var(--sl-color-neutral-500) / 12%);
     --sl-shadow-x-large: 0 4px 16px rgb(var(--sl-color-neutral-500) / 12%);
+
+    /*
+     * Surfaces
+     */
+
+    --sl-surface-base: var(--sl-color-neutral-0);
+    --sl-surface-base-alt: var(--sl-color-neutral-0);
 
     /*
      * Spacings
@@ -475,7 +482,7 @@ export default css`
     --sl-input-height-medium: 2.5rem; /* 40px */
     --sl-input-height-large: 3.125rem; /* 50px */
 
-    --sl-input-background-color: var(--sl-surface-base);
+    --sl-input-background-color: var(--sl-color-neutral-0);
     --sl-input-background-color-hover: var(--sl-input-background-color);
     --sl-input-background-color-focus: var(--sl-input-background-color);
     --sl-input-background-color-disabled: var(--sl-color-neutral-100);
@@ -537,16 +544,8 @@ export default css`
      * Panels
      */
 
-    --sl-panel-background-color: var(--sl-surface-raised);
+    --sl-panel-background-color: var(--sl-surface-base-alt);
     --sl-panel-border-color: var(--sl-color-neutral-200);
-
-    /*
-     * Surfaces
-     */
-
-    --sl-surface-base: var(--sl-color-neutral-0); /* body background */
-    --sl-surface-base-alt: var(--sl-color-neutral-50); /* subtle color shift for code blocks, warnings, etc. */
-    --sl-surface-raised: var(--sl-color-neutral-0); /* cards, alerts, dropdowns, dialogs */
 
     /*
      * Tooltips

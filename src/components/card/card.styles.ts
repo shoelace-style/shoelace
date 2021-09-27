@@ -16,7 +16,7 @@ export default css`
   .card {
     display: flex;
     flex-direction: column;
-    background-color: rgb(var(--sl-surface-raised));
+    background-color: rgb(var(--sl-surface-base-alt));
     box-shadow: var(--sl-shadow-x-small);
     border: solid var(--border-width) var(--border-color);
     border-radius: var(--border-radius);
