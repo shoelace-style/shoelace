@@ -16,8 +16,8 @@ export default css`
     display: flex;
     align-items: stretch;
     background-color: rgb(var(--sl-surface-base-alt));
-    border: solid 1px rgb(var(--sl-color-neutral-200));
-    border-top-width: 3px;
+    border: solid var(--sl-panel-border-width) rgb(var(--sl-panel-border-color));
+    border-top-width: calc(var(--sl-panel-border-width) * 3);
     border-radius: var(--sl-border-radius-medium);
     box-shadow: var(--box-shadow);
     font-family: var(--sl-font-sans);

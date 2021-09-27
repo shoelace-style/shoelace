@@ -555,6 +555,7 @@ export default css`
 
     --sl-panel-background-color: var(--sl-surface-base-alt);
     --sl-panel-border-color: var(--sl-color-neutral-200);
+    --sl-panel-border-width: 1px;
 
     /*
      * Tooltips

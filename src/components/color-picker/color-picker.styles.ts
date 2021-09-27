@@ -28,7 +28,7 @@ export default css`
   }
 
   .color-picker--inline {
-    border: solid 1px rgb(var(--sl-panel-border-color));
+    border: solid var(--sl-panel-border-width) rgb(var(--sl-panel-border-color));
   }
 
   .color-picker__grid {

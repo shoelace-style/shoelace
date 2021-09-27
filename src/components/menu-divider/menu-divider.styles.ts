@@ -9,7 +9,7 @@ export default css`
   }
 
   .menu-divider {
-    border-top: solid 1px rgb(var(--sl-panel-border-color));
+    border-top: solid var(--sl-panel-border-width) rgb(var(--sl-panel-border-color));
     margin: var(--sl-spacing-x-small) 0;
   }
 `;

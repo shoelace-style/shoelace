@@ -9,7 +9,7 @@ export default css`
   }
 
   .radio-group {
-    border: solid 1px rgb(var(--sl-panel-border-color));
+    border: solid var(--sl-panel-border-width) rgb(var(--sl-panel-border-color));
     border-radius: var(--sl-border-radius-medium);
     padding: var(--sl-spacing-large);
     padding-top: var(--sl-spacing-x-small);
