@@ -29,6 +29,11 @@ export default css`
     cursor: pointer;
   }
 
+  .select__menu {
+    max-height: 50vh;
+    overflow: auto;
+  }
+
   /* Standard selects */
   .select--standard .select__control {
     background-color: rgb(var(--sl-input-background-color));
