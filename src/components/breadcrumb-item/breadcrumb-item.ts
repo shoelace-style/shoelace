@@ -37,7 +37,7 @@ export default class SlBreadcrumbItem extends LitElement {
   /** Optionally allows the user to determine how the link should talk to the browser.
    * ref: https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types
    */
-  @property() rel: string | undefined;
+  @property() rel: string = 'noreferrer noopener';
 
   handleSlotChange() {
     this.hasPrefix = hasSlot(this, 'prefix');
@@ -46,7 +46,6 @@ export default class SlBreadcrumbItem extends LitElement {
 
   render() {
     const isLink = this.href ? true : false;
-    const rel = this.rel ? this.rel : 'noreferrer noopener';
 
     return html`
       <div
@@ -68,7 +67,7 @@ export default class SlBreadcrumbItem extends LitElement {
                 class="breadcrumb-item__label breadcrumb-item__label--link"
                 href="${this.href}"
                 target="${this.target}"
-                rel=${ifDefined(this.target ? rel : undefined)}
+                rel=${ifDefined(this.target ? this.rel : undefined)}
               >
                 <slot></slot>
               </a>
