@@ -1,8 +1,8 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
-import { ifDefined } from 'lit-html/directives/if-defined.js';
-import { classMap } from 'lit-html/directives/class-map.js';
-import { live } from 'lit-html/directives/live.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { classMap } from 'lit/directives/class-map.js';
+import { live } from 'lit/directives/live.js';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import { getLabelledBy, renderFormControl } from '../../internal/form-control';

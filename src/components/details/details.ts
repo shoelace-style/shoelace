@@ -1,6 +1,6 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
-import { classMap } from 'lit-html/directives/class-map.js';
+import { classMap } from 'lit/directives/class-map.js';
 import { animateTo, stopAnimations, shimKeyframesHeightAuto } from '../../internal/animate';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
