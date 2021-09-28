@@ -34,6 +34,11 @@ export default class SlBreadcrumbItem extends LitElement {
   /** Tells the browser where to open the link. Only used when `href` is set. */
   @property() target: '_blank' | '_parent' | '_self' | '_top';
 
+  /** Optionally allows the user to determine how the link should talk to the browser.
+   * ref: https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types
+   */
+  @property() rel: string = 'noreferrer noopener';
+
   handleSlotChange() {
     this.hasPrefix = hasSlot(this, 'prefix');
     this.hasSuffix = hasSlot(this, 'suffix');
@@ -62,7 +67,7 @@ export default class SlBreadcrumbItem extends LitElement {
                 class="breadcrumb-item__label breadcrumb-item__label--link"
                 href="${this.href}"
                 target="${this.target}"
-                rel=${ifDefined(this.target ? 'noreferrer noopener' : undefined)}
+                rel=${ifDefined(this.target ? this.rel : undefined)}
               >
                 <slot></slot>
               </a>
