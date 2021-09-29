@@ -17,6 +17,7 @@ export default css`
     letter-spacing: var(--sl-letter-spacing-normal);
     line-height: 1;
     border-radius: var(--sl-border-radius-small);
+    border: solid 1px rgb(var(--sl-color-neutral-0));
     white-space: nowrap;
     padding: 3px 6px;
     user-select: none;
