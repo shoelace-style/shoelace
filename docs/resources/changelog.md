@@ -19,6 +19,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Added a border to `<sl-badge>` to improve contrast when drawn on various background colors
 - Changed the default `distance` in `<sl-dropdown>` from `2` to `0` [#538](https://github.com/shoelace-style/shoelace/issues/538)
 - Fixed a bug where `<sl-select>` would be larger than the viewport when it had lots of options [#544](https://github.com/shoelace-style/shoelace/issues/544)
+- Updated the default height of `<sl-progress-bar>` from `16px` to `1rem` and added a subtle shadow to indicate depth
 - Removed the `lit-html` dependency and moved corresponding imports to `lit` [#546](https://github.com/shoelace-style/shoelace/issues/546)
 
 ## 2.0.0-beta.52

@@ -5,7 +5,7 @@ export default css`
   ${componentStyles}
 
   :host {
-    --height: 16px;
+    --height: 1rem;
     --track-color: rgb(var(--sl-color-neutral-500) / 20%);
     --indicator-color: rgb(var(--sl-color-primary-600));
     --label-color: rgb(var(--sl-color-neutral-0));
@@ -18,6 +18,7 @@ export default css`
     background-color: var(--track-color);
     height: var(--height);
     border-radius: var(--sl-border-radius-pill);
+    box-shadow: inset var(--sl-shadow-small);
     overflow: hidden;
   }
 
