@@ -12,6 +12,7 @@ export { default as SlCheckbox } from './components/checkbox/checkbox';
 export { default as SlColorPicker } from './components/color-picker/color-picker';
 export { default as SlDetails } from './components/details/details';
 export { default as SlDialog } from './components/dialog/dialog';
+export { default as SlDivider } from './components/divider/divider';
 export { default as SlDrawer } from './components/drawer/drawer';
 export { default as SlDropdown } from './components/dropdown/dropdown';
 export { default as SlForm } from './components/form/form';
@@ -24,7 +25,6 @@ export { default as SlImageComparer } from './components/image-comparer/image-co
 export { default as SlInclude } from './components/include/include';
 export { default as SlInput } from './components/input/input';
 export { default as SlMenu } from './components/menu/menu';
-export { default as SlMenuDivider } from './components/menu-divider/menu-divider';
 export { default as SlMenuItem } from './components/menu-item/menu-item';
 export { default as SlMenuLabel } from './components/menu-label/menu-label';
 export { default as SlProgressBar } from './components/progress-bar/progress-bar';

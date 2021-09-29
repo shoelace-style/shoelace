@@ -10,7 +10,7 @@ import styles from './menu.styles';
  * @since 2.0
  * @status stable
  *
- * @slot - The menu's content, including menu items, menu dividers, and menu labels.
+ * @slot - The menu's content, including menu items, menu labels, and dividers.
  *
  * @event {{ item: SlMenuItem }} sl-select - Emitted when a menu item is selected.
  *

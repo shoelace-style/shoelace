@@ -9,7 +9,7 @@ Selects allow you to choose one or more items from a dropdown menu.
   <sl-menu-item value="option-1">Option 1</sl-menu-item>
   <sl-menu-item value="option-2">Option 2</sl-menu-item>
   <sl-menu-item value="option-3">Option 3</sl-menu-item>
-  <sl-menu-divider></sl-menu-divider>
+  <sl-divider></sl-divider>
   <sl-menu-item value="option-4">Option 4</sl-menu-item>
   <sl-menu-item value="option-5">Option 5</sl-menu-item>
   <sl-menu-item value="option-6">Option 6</sl-menu-item>
@@ -89,7 +89,7 @@ To allow multiple options to be selected, use the `multiple` attribute. It's a g
   <sl-menu-item value="option-1">Option 1</sl-menu-item>
   <sl-menu-item value="option-2">Option 2</sl-menu-item>
   <sl-menu-item value="option-3">Option 3</sl-menu-item>
-  <sl-menu-divider></sl-menu-divider>
+  <sl-divider></sl-divider>
   <sl-menu-item value="option-4">Option 4</sl-menu-item>
   <sl-menu-item value="option-5">Option 5</sl-menu-item>
   <sl-menu-item value="option-6">Option 6</sl-menu-item>
@@ -98,7 +98,7 @@ To allow multiple options to be selected, use the `multiple` attribute. It's a g
 
 ### Grouping Options
 
-Options can be grouped visually using menu labels and menu dividers.
+Options can be grouped visually using menu labels and dividers.
 
 ```html preview
 <sl-select placeholder="Select one">
@@ -106,7 +106,7 @@ Options can be grouped visually using menu labels and menu dividers.
   <sl-menu-item value="option-1">Option 1</sl-menu-item>
   <sl-menu-item value="option-2">Option 2</sl-menu-item>
   <sl-menu-item value="option-3">Option 3</sl-menu-item>
-  <sl-menu-divider></sl-menu-divider>
+  <sl-divider></sl-divider>
   <sl-menu-label>Group 2</sl-menu-label>
   <sl-menu-item value="option-4">Option 4</sl-menu-item>
   <sl-menu-item value="option-5">Option 5</sl-menu-item>

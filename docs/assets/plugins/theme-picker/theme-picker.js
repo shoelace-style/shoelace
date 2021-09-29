@@ -50,7 +50,7 @@
           <sl-menu-label>Toggle <kbd>\\</kbd></sl-menu-label>
           <sl-menu-item value="light">Light</sl-menu-item>
           <sl-menu-item value="dark">Dark</sl-menu-item>
-          <sl-menu-divider></sl-menu-divider>
+          <sl-divider></sl-divider>
           <sl-menu-item value="auto">Auto</sl-menu-item>
         </sl-menu>
       `;
