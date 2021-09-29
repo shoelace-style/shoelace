@@ -234,7 +234,7 @@ export default css`
 
   /* Default */
   .button--outline.button--default {
-    border-color: rgb(var(--sl-color-neutral-400));
+    border-color: rgb(var(--sl-color-neutral-300));
     color: rgb(var(--sl-color-neutral-700));
   }
 
