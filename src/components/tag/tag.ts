@@ -25,7 +25,7 @@ export default class SlTag extends LitElement {
   static styles = styles;
 
   /** The tag's type. */
-  @property({ reflect: true }) type: 'primary' | 'success' | 'neutral' | 'warning' | 'danger' | 'text' = 'primary';
+  @property({ reflect: true }) type: 'primary' | 'success' | 'neutral' | 'warning' | 'danger' | 'text' = 'neutral';
 
   /** The tag's size. */
   @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
