@@ -2,9 +2,9 @@
 
 [component-header:sl-resize-observer]
 
-Resize observers offer a thin, declarative interface to the [`ResizeObserver API`](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver).
+The Resize Observer component offers a thin, declarative interface to the [`ResizeObserver API`](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver).
 
-The resize observer will report changes to the dimensions of the elements it wraps through the `sl-resize` event. When emitted, a collection of [`ResizeObserverEntry`](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserverEntry) objects will be attached to `event.detail`, containing the target element and information about its dimensions.
+The resize observer will report changes to the dimensions of the elements it wraps through the `sl-resize` event. When emitted, a collection of [`ResizeObserverEntry`](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserverEntry) objects will be attached to `event.detail` that contains the target element and information about its dimensions.
 
 ```html preview
 <div class="resize-observer-overview">
@@ -20,7 +20,7 @@ The resize observer will report changes to the dimensions of the elements it wra
   const resizeObserver = container.querySelector('sl-resize-observer');
 
   resizeObserver.addEventListener('sl-resize', event => {
-    console.log(event);
+    console.log(event.detail);
   });
 </script>
 
