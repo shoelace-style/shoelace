@@ -9,6 +9,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 ## Next
 
 - 🚨 BREAKING: removed `<sl-menu-divider>` (use `<sl-divider>` instead)
+- 🚨 BREAKING: removed `percentage` attribute from `<sl-progress-bar>` and `<sl-progress-ring>` (use `value`) instead
 - Added the `<sl-divider>` component
 - Added `--sl-surface-base` and `--sl-surface-base-alt` as early surface tokens to improve the appearance of alert, card, and panels in dark mode
 - Added the `--sl-panel-border-width` design token

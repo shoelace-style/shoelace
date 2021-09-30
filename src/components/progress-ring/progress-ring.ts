@@ -24,8 +24,8 @@ export default class SlProgressRing extends LitElement {
 
   @state() indicatorOffset: string;
 
-  /** The current progress percentage, 0 - 100. */
-  @property({ type: Number, reflect: true }) percentage: number;
+  /** The current progress, 0 to 100. */
+  @property({ type: Number, reflect: true }) value = 0;
 
   updated(changedProps: Map<string, any>) {
     super.updated(changedProps);
@@ -38,7 +38,7 @@ export default class SlProgressRing extends LitElement {
     if (changedProps.has('percentage')) {
       const radius = parseFloat(getComputedStyle(this.indicator).getPropertyValue('r'));
       const circumference = 2 * Math.PI * radius;
-      const offset = circumference - (this.percentage / 100) * circumference;
+      const offset = circumference - (this.value / 100) * circumference;
 
       this.indicatorOffset = String(offset) + 'px';
     }
@@ -52,8 +52,8 @@ export default class SlProgressRing extends LitElement {
         role="progressbar"
         aria-valuemin="0"
         aria-valuemax="100"
-        aria-valuenow="${this.percentage}"
-        style="--percentage: ${this.percentage / 100}"
+        aria-valuenow="${this.value}"
+        style="--percentage: ${this.value / 100}"
       >
         <svg class="progress-ring__image">
           <circle class="progress-ring__track"></circle>

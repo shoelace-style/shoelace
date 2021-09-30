@@ -5,7 +5,7 @@
 Progress bars are used to show the status of an ongoing operation.
 
 ```html preview
-<sl-progress-bar percentage="50"></sl-progress-bar>
+<sl-progress-bar value="50"></sl-progress-bar>
 ```
 
 ## Examples
@@ -15,7 +15,7 @@ Progress bars are used to show the status of an ongoing operation.
 Use the `--height` custom property to set the progress bar's height.
 
 ```html preview
-<sl-progress-bar percentage="50" style="--height: 6px;"></sl-progress-bar>
+<sl-progress-bar value="50" style="--height: 6px;"></sl-progress-bar>
 ```
 
 ### Labels
@@ -23,7 +23,7 @@ Use the `--height` custom property to set the progress bar's height.
 Use the default slot to show a label.
 
 ```html preview
-<sl-progress-bar percentage="50" class="progress-bar-labels">50%</sl-progress-bar>
+<sl-progress-bar value="50" class="progress-bar-labels">50%</sl-progress-bar>
 
 <br>
 
@@ -36,22 +36,22 @@ Use the default slot to show a label.
   const addButton = subtractButton.nextElementSibling;
 
   addButton.addEventListener('click', () => {
-    const percentage = Math.min(100, progressBar.percentage + 10);
-    progressBar.percentage = percentage;
-    progressBar.textContent = `${percentage}%`;
+    const value = Math.min(100, progressBar.value + 10);
+    progressBar.value = value;
+    progressBar.textContent = `${value}%`;
   });
 
   subtractButton.addEventListener('click', () => {
-    const percentage = Math.max(0, progressBar.percentage - 10)
-    progressBar.percentage = percentage;
-    progressBar.textContent = `${percentage}%`;
+    const value = Math.max(0, progressBar.value - 10)
+    progressBar.value = value;
+    progressBar.textContent = `${value}%`;
   });
 </script>
 ```
 
 ### Indeterminate
 
-The `indeterminate` attribute can be used to inform the user that the operation is pending, but its status cannot currently be determined. In this state, `percentage` is ignored and the label, if present, will not be shown.
+The `indeterminate` attribute can be used to inform the user that the operation is pending, but its status cannot currently be determined. In this state, `value` is ignored and the label, if present, will not be shown.
 
 ```html preview
 <sl-progress-bar indeterminate></sl-progress-bar>
