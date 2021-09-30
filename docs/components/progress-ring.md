@@ -12,10 +12,10 @@ Progress rings are used to show the progress of a determinate operation in a cir
 
 ### Size
 
-Use the `size` attribute to set the diameter of the progress ring.
+Use the `--size` custom property to set the diameter of the progress ring.
 
 ```html preview
-<sl-progress-ring percentage="50" size="200"></sl-progress-ring>
+<sl-progress-ring percentage="50" style="--size: 200px;"></sl-progress-ring>
 ```
 
 ### Track Width
@@ -45,7 +45,7 @@ To change the color, use the `--track-color` and `--indicator-color` custom prop
 Use the default slot to show a label.
 
 ```html preview
-<sl-progress-ring percentage="50" size="200" class="progress-ring-labels" style="margin-bottom: .5rem;">50%</sl-progress-ring>
+<sl-progress-ring percentage="50" class="progress-ring-labels" style="margin-bottom: .5rem;">50%</sl-progress-ring>
 
 <br>
 

@@ -1,5 +1,5 @@
 import { LitElement, html } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
 import styles from './progress-ring.styles';
 
 /**
@@ -22,8 +22,27 @@ export default class SlProgressRing extends LitElement {
 
   @query('.progress-ring__indicator') indicator: SVGCircleElement;
 
+  @state() indicatorOffset: string;
+
   /** The current progress percentage, 0 - 100. */
   @property({ type: Number, reflect: true }) percentage: number;
+
+  updated(changedProps: Map<string, any>) {
+    super.updated(changedProps);
+
+    //
+    // This block is only required for Safari because it doesn't transition the circle when the custom properties
+    // change, possibly because of a mix of pixel + unitless values in the calc() function. It seems like a Safari bug,
+    // but I couldn't pinpoint it so this works around the problem.
+    //
+    if (changedProps.has('percentage')) {
+      const radius = parseFloat(getComputedStyle(this.indicator).getPropertyValue('r'));
+      const circumference = 2 * Math.PI * radius;
+      const offset = circumference - (this.percentage / 100) * circumference;
+
+      this.indicatorOffset = String(offset) + 'px';
+    }
+  }
 
   render() {
     return html`
@@ -34,10 +53,11 @@ export default class SlProgressRing extends LitElement {
         aria-valuemin="0"
         aria-valuemax="100"
         aria-valuenow="${this.percentage}"
+        style="--percentage: ${this.percentage / 100}"
       >
         <svg class="progress-ring__image">
           <circle class="progress-ring__track"></circle>
-          <circle class="progress-ring__indicator" style="--percentage: ${this.percentage / 100};"></circle>
+          <circle class="progress-ring__indicator" style="stroke-dashoffset: ${this.indicatorOffset}"></circle>
         </svg>
 
         <span part="label" class="progress-ring__label">
