@@ -59,6 +59,7 @@
   - [Format Date](/components/format-date)
   - [Format Number](/components/format-number)
   - [Include](/components/include)
+  - [Mutation Observer](/components/mutation-observer)
   - [Relative Time](/components/relative-time)
   - [Resize Observer](/components/resize-observer)
   - [Responsive Media](/components/responsive-media)

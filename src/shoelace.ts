@@ -27,6 +27,7 @@ export { default as SlInput } from './components/input/input';
 export { default as SlMenu } from './components/menu/menu';
 export { default as SlMenuItem } from './components/menu-item/menu-item';
 export { default as SlMenuLabel } from './components/menu-label/menu-label';
+export { default as SlMutationObserver } from './components/mutation-observer/mutation-observer';
 export { default as SlProgressBar } from './components/progress-bar/progress-bar';
 export { default as SlProgressRing } from './components/progress-ring/progress-ring';
 export { default as SlQrCode } from './components/qr-code/qr-code';
