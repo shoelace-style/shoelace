@@ -49,7 +49,7 @@ Use the `separator` slot to change the separator that goes between breadcrumb it
 
 ```html preview
 <sl-breadcrumb>
-  <sl-icon name="dot" slot="separator" id="dotty"></sl-icon>
+  <sl-icon name="dot" slot="separator"></sl-icon>
   <sl-breadcrumb-item>First</sl-breadcrumb-item>
   <sl-breadcrumb-item>Second</sl-breadcrumb-item>
   <sl-breadcrumb-item>Third</sl-breadcrumb-item> 
