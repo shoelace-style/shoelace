@@ -8,6 +8,7 @@ export default css`
   ${formControlStyles}
 
   :host {
+    --indicator-color: rgb(var(--sl-color-primary-600));
     --thumb-size: 20px;
     --tooltip-offset-y: 10px;
     --track-color: rgb(var(--sl-color-neutral-200));
@@ -22,8 +23,9 @@ export default css`
 
   .range__control {
     -webkit-appearance: none;
+    border-radius: 3px;
     width: 100%;
-    height: var(--sl-input-height-medium);
+    height: var(--track-height);
     background: transparent;
     line-height: var(--sl-input-height-medium);
     vertical-align: middle;
@@ -33,7 +35,6 @@ export default css`
   .range__control::-webkit-slider-runnable-track {
     width: 100%;
     height: var(--track-height);
-    background-color: var(--track-color);
     border-radius: 3px;
     border: none;
   }
@@ -72,6 +73,12 @@ export default css`
   /* Firefox */
   .range__control::-moz-focus-outer {
     border: 0;
+  }
+
+  .range__control::-moz-range-progress {
+    background-color: var(--indicator-color);
+    border-radius: 3px;
+    height: var(--track-height);
   }
 
   .range__control::-moz-range-track {
@@ -175,6 +182,7 @@ export default css`
   .range--tooltip-bottom .range__tooltip {
     bottom: calc(-1 * var(--thumb-size) - var(--tooltip-offset-y));
   }
+
   .range--tooltip-bottom .range__tooltip:after {
     border-bottom: var(--sl-tooltip-arrow-size) solid rgb(var(--sl-tooltip-background-color));
     border-left: var(--sl-tooltip-arrow-size) solid transparent;

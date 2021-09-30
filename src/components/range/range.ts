@@ -82,7 +82,7 @@ export default class SlRange extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     this.handleSlotChange = this.handleSlotChange;
-    this.resizeObserver = new ResizeObserver(() => this.syncTooltip());
+    this.resizeObserver = new ResizeObserver(() => this.syncRange());
     this.shadowRoot!.addEventListener('slotchange', this.handleSlotChange);
 
     if (this.value === undefined || this.value === null) this.value = this.min;
@@ -92,7 +92,7 @@ export default class SlRange extends LitElement {
     this.handleSlotChange();
 
     this.updateComplete.then(() => {
-      this.syncTooltip();
+      this.syncRange();
       this.resizeObserver.observe(this.input);
     });
   }
@@ -123,7 +123,7 @@ export default class SlRange extends LitElement {
     this.value = Number(this.input.value);
     emit(this, 'sl-change');
 
-    requestAnimationFrame(() => this.syncTooltip());
+    requestAnimationFrame(() => this.syncRange());
   }
 
   handleBlur() {
@@ -162,16 +162,30 @@ export default class SlRange extends LitElement {
     this.hasTooltip = false;
   }
 
-  syncTooltip() {
+  syncRange(){
+    const percent = Math.max(0, (this.value - this.min) / (this.max - this.min));
+
+    this.syncProgress(percent);
     if (this.tooltip !== 'none') {
-      const percent = Math.max(0, (this.value - this.min) / (this.max - this.min));
-      const inputWidth = this.input.offsetWidth;
-      const tooltipWidth = this.output.offsetWidth;
-      const thumbSize = getComputedStyle(this.input).getPropertyValue('--thumb-size');
-      const x = `calc(${inputWidth * percent}px - calc(calc(${percent} * ${thumbSize}) - calc(${thumbSize} / 2)))`;
-      this.output.style.transform = `translateX(${x})`;
-      this.output.style.marginLeft = `-${tooltipWidth / 2}px`;
+      this.syncTooltip(percent);
     }
+  }
+
+  syncProgress(percent: number) {
+    const trackColor = getComputedStyle(this.input).getPropertyValue('--track-color');
+    const indicatorColor = getComputedStyle(this.input).getPropertyValue('--indicator-color');
+
+    this.input.style.background = `linear-gradient(to right, ${indicatorColor} 0%, ${indicatorColor} ${percent*100}%, ${trackColor} ${percent*100}%, ${trackColor} 100%)`;
+  }
+
+  syncTooltip(percent: number) {
+    const inputWidth = this.input.offsetWidth;
+    const tooltipWidth = this.output.offsetWidth;
+    const thumbSize = getComputedStyle(this.input).getPropertyValue('--thumb-size');
+    const x = `calc(${inputWidth * percent}px - calc(calc(${percent} * ${thumbSize}) - calc(${thumbSize} / 2)))`;
+    
+    this.output.style.transform = `translateX(${x})`;
+    this.output.style.marginLeft = `-${tooltipWidth / 2}px`;
   }
 
   render() {
