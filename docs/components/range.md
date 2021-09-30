@@ -5,7 +5,7 @@
 Ranges allow the user to select a single value within a given range using a slider.
 
 ```html preview
-<sl-range min="0" max="100" step="1"></sl-range>
+<sl-range></sl-range>
 ```
 
 ?> This component doesn't work with standard forms. Use [`<sl-form>`](/components/form) instead.
@@ -34,6 +34,17 @@ To disable the tooltip, set `tooltip` to `none`.
 
 ```html preview
 <sl-range min="0" max="100" step="1" tooltip="none"></sl-range>
+```
+
+### Custom Track Colors
+
+You can customize the active and inactive portions of the track using the `--track-color-active` and `--track-color-inactive` custom properties.
+
+```html preview
+<sl-range style="
+  --track-color-active: rgb(var(--sl-color-primary-600));
+  --track-color-inactive: rgb(var(--sl-color-primary-200));
+"></sl-range>
 ```
 
 ### Custom Tooltip Formatter

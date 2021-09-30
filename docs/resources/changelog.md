@@ -17,6 +17,8 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Added the `filled` variation to `<sl-input>`, `<sl-textarea>`, and `<sl-select>` and supporting design tokens
 - Added the `control` part to `<sl-select>` so you can target the main control with CSS [#538](https://github.com/shoelace-style/shoelace/issues/538)
 - Added a border to `<sl-badge>` to improve contrast when drawn on various background colors
+- Added `--track-color-active` and `--track-color-inactive` custom properties to `<sl-range>` [#550](https://github.com/shoelace-style/shoelace/issues/550)
+- Added the undocumented custom properties `--thumb-size`, `--tooltip-offset`, `--track-height` on `<sl-range>`
 - Changed the default `distance` in `<sl-dropdown>` from `2` to `0` [#538](https://github.com/shoelace-style/shoelace/issues/538)
 - Fixed a bug where `<sl-select>` would be larger than the viewport when it had lots of options [#544](https://github.com/shoelace-style/shoelace/issues/544)
 - Updated the default height of `<sl-progress-bar>` from `16px` to `1rem` and added a subtle shadow to indicate depth

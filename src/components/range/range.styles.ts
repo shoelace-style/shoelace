@@ -9,8 +9,9 @@ export default css`
 
   :host {
     --thumb-size: 20px;
-    --tooltip-offset-y: 10px;
-    --track-color: rgb(var(--sl-color-neutral-200));
+    --tooltip-offset: 10px;
+    --track-color-active: rgb(var(--sl-color-neutral-200));
+    --track-color-inactive: rgb(var(--sl-color-neutral-200));
     --track-height: 6px;
 
     display: block;
@@ -22,8 +23,9 @@ export default css`
 
   .range__control {
     -webkit-appearance: none;
+    border-radius: 3px;
     width: 100%;
-    height: var(--sl-input-height-medium);
+    height: var(--track-height);
     background: transparent;
     line-height: var(--sl-input-height-medium);
     vertical-align: middle;
@@ -33,7 +35,6 @@ export default css`
   .range__control::-webkit-slider-runnable-track {
     width: 100%;
     height: var(--track-height);
-    background-color: var(--track-color);
     border-radius: 3px;
     border: none;
   }
@@ -74,10 +75,16 @@ export default css`
     border: 0;
   }
 
+  .range__control::-moz-range-progress {
+    background-color: var(--track-color-active);
+    border-radius: 3px;
+    height: var(--track-height);
+  }
+
   .range__control::-moz-range-track {
     width: 100%;
     height: var(--track-height);
-    background-color: var(--track-color);
+    background-color: var(--track-color-inactive);
     border-radius: 3px;
     border: none;
   }
@@ -161,7 +168,7 @@ export default css`
 
   /* Tooltip on top */
   .range--tooltip-top .range__tooltip {
-    top: calc(-1 * var(--thumb-size) - var(--tooltip-offset-y));
+    top: calc(-1 * var(--thumb-size) - var(--tooltip-offset));
   }
 
   .range--tooltip-top .range__tooltip:after {
@@ -173,8 +180,9 @@ export default css`
 
   /* Tooltip on bottom */
   .range--tooltip-bottom .range__tooltip {
-    bottom: calc(-1 * var(--thumb-size) - var(--tooltip-offset-y));
+    bottom: calc(-1 * var(--thumb-size) - var(--tooltip-offset));
   }
+
   .range--tooltip-bottom .range__tooltip:after {
     border-bottom: var(--sl-tooltip-arrow-size) solid rgb(var(--sl-tooltip-background-color));
     border-left: var(--sl-tooltip-arrow-size) solid transparent;

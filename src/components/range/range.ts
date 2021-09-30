@@ -25,6 +25,12 @@ let id = 0;
  * @csspart base - The component's base wrapper.
  * @csspart input - The native range input.
  * @csspart tooltip - The range tooltip.
+ *
+ * @cssproperty --thumb-size - The size of the thumb.
+ * @cssproperty --tooltip-offset - The vertical distance the tooltip is offset from the track.
+ * @cssproperty --track-color-active - The color of the portion of the track that represents the current value.
+ * @cssproperty --track-color-inactive: The of the portion of the track that represents the remaining value.
+ * @cssproperty --track-height: The height of the track.
  */
 @customElement('sl-range')
 export default class SlRange extends LitElement {
@@ -82,7 +88,7 @@ export default class SlRange extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     this.handleSlotChange = this.handleSlotChange;
-    this.resizeObserver = new ResizeObserver(() => this.syncTooltip());
+    this.resizeObserver = new ResizeObserver(() => this.syncRange());
     this.shadowRoot!.addEventListener('slotchange', this.handleSlotChange);
 
     if (this.value === undefined || this.value === null) this.value = this.min;
@@ -92,7 +98,7 @@ export default class SlRange extends LitElement {
     this.handleSlotChange();
 
     this.updateComplete.then(() => {
-      this.syncTooltip();
+      this.syncRange();
       this.resizeObserver.observe(this.input);
     });
   }
@@ -123,7 +129,7 @@ export default class SlRange extends LitElement {
     this.value = Number(this.input.value);
     emit(this, 'sl-change');
 
-    requestAnimationFrame(() => this.syncTooltip());
+    requestAnimationFrame(() => this.syncRange());
   }
 
   handleBlur() {
@@ -162,16 +168,30 @@ export default class SlRange extends LitElement {
     this.hasTooltip = false;
   }
 
-  syncTooltip() {
+  syncRange() {
+    const percent = Math.max(0, (this.value - this.min) / (this.max - this.min));
+
+    this.syncProgress(percent);
+
     if (this.tooltip !== 'none') {
-      const percent = Math.max(0, (this.value - this.min) / (this.max - this.min));
-      const inputWidth = this.input.offsetWidth;
-      const tooltipWidth = this.output.offsetWidth;
-      const thumbSize = getComputedStyle(this.input).getPropertyValue('--thumb-size');
-      const x = `calc(${inputWidth * percent}px - calc(calc(${percent} * ${thumbSize}) - calc(${thumbSize} / 2)))`;
-      this.output.style.transform = `translateX(${x})`;
-      this.output.style.marginLeft = `-${tooltipWidth / 2}px`;
+      this.syncTooltip(percent);
     }
+  }
+
+  syncProgress(percent: number) {
+    this.input.style.background = `linear-gradient(to right, var(--track-color-active) 0%, var(--track-color-active) ${
+      percent * 100
+    }%, var(--track-color-inactive) ${percent * 100}%, var(--track-color-inactive) 100%)`;
+  }
+
+  syncTooltip(percent: number) {
+    const inputWidth = this.input.offsetWidth;
+    const tooltipWidth = this.output.offsetWidth;
+    const thumbSize = getComputedStyle(this.input).getPropertyValue('--thumb-size');
+    const x = `calc(${inputWidth * percent}px - calc(calc(${percent} * ${thumbSize}) - calc(${thumbSize} / 2)))`;
+
+    this.output.style.transform = `translateX(${x})`;
+    this.output.style.marginLeft = `-${tooltipWidth / 2}px`;
   }
 
   render() {
