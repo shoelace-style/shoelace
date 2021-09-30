@@ -10,7 +10,8 @@
     table.innerHTML = `
       <thead>
         <tr>
-          <th>Property/Attribute</th>
+          <th>Name</th>
+          <th>Attribute</th>
           <th>Description</th>
           <th>Reflects</th>
           <th>Type</th>
@@ -22,7 +23,9 @@
           .map(prop => {
             return `
               <tr>
-                <td class="nowrap"><code>${escapeHtml(prop.name)}</code></td>
+                <td class="nowrap">
+                  <code>${escapeHtml(prop.name)}</code>
+                </td>
                 <td class="nowrap">${prop.attribute ? `<code>${escapeHtml(prop.attribute)}</code>` : '-'}</td>
                 <td>${escapeHtml(prop.description)}</td>
                 <td style="text-align: center;">${
