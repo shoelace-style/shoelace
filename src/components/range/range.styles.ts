@@ -8,10 +8,10 @@ export default css`
   ${formControlStyles}
 
   :host {
-    --indicator-color: rgb(var(--sl-color-primary-600));
     --thumb-size: 20px;
-    --tooltip-offset-y: 10px;
-    --track-color: rgb(var(--sl-color-neutral-200));
+    --tooltip-offset: 10px;
+    --track-color-active: rgb(var(--sl-color-neutral-200));
+    --track-color-inactive: rgb(var(--sl-color-neutral-200));
     --track-height: 6px;
 
     display: block;
@@ -76,7 +76,7 @@ export default css`
   }
 
   .range__control::-moz-range-progress {
-    background-color: var(--indicator-color);
+    background-color: var(--track-color-active);
     border-radius: 3px;
     height: var(--track-height);
   }
@@ -84,7 +84,7 @@ export default css`
   .range__control::-moz-range-track {
     width: 100%;
     height: var(--track-height);
-    background-color: var(--track-color);
+    background-color: var(--track-color-inactive);
     border-radius: 3px;
     border: none;
   }
@@ -168,7 +168,7 @@ export default css`
 
   /* Tooltip on top */
   .range--tooltip-top .range__tooltip {
-    top: calc(-1 * var(--thumb-size) - var(--tooltip-offset-y));
+    top: calc(-1 * var(--thumb-size) - var(--tooltip-offset));
   }
 
   .range--tooltip-top .range__tooltip:after {
@@ -180,7 +180,7 @@ export default css`
 
   /* Tooltip on bottom */
   .range--tooltip-bottom .range__tooltip {
-    bottom: calc(-1 * var(--thumb-size) - var(--tooltip-offset-y));
+    bottom: calc(-1 * var(--thumb-size) - var(--tooltip-offset));
   }
 
   .range--tooltip-bottom .range__tooltip:after {
