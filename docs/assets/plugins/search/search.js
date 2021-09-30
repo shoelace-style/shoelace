@@ -221,7 +221,12 @@
         await searchIndex;
 
         const hasQuery = query.length > 0;
-        const matches = hasQuery ? searchIndex.search(`${query}~2`) : [];
+        let matches = hasQuery ? searchIndex.search(`${query}`) : [];
+
+        // Fall back to a fuzzy search if no matches are found
+        if (matches.length === 0 && hasQuery) {
+          matches = searchIndex.search(`${query}~2`);
+        }
 
         let hasResults = hasQuery && matches.length > 0;
         siteSearch.classList.toggle('site-search--has-results', hasQuery && hasResults);
