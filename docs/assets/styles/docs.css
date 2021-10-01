@@ -585,6 +585,7 @@ body[data-page^='/tokens/'] .table-wrapper td:first-child code {
   border-radius: 3px;
   width: 4rem;
   height: 4rem;
+  margin: 1rem;
 }
 
 /* Color palettes */
