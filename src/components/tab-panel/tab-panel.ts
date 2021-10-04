@@ -11,6 +11,8 @@ let id = 0;
  * @slot - The tab panel's content.
  *
  * @csspart base - The component's base wrapper.
+ *
+ * @cssproperty --padding - The tab panel's padding.
  */
 @customElement('sl-tab-panel')
 export default class SlTabPanel extends LitElement {

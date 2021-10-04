@@ -229,10 +229,6 @@ strong {
   margin-bottom: 0;
 }
 
-.markdown-section sl-tab-panel::part(base) {
-  padding: var(--sl-spacing-medium) 0;
-}
-
 .docsify-pagination-container {
   border-top-color: rgb(var(--sl-color-neutral-200)) !important;
 }

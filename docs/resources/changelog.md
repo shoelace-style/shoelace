@@ -16,6 +16,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Added `--sl-surface-base` and `--sl-surface-base-alt` as early surface tokens to improve the appearance of alert, card, and panels in dark mode
 - Added the `--sl-panel-border-width` design token
 - Added missing background color to `<sl-details>`
+- ADded the `--padding` custom property to `<sl-tab-panel>`
 - Added the `outline` variation to `<sl-button>` [#522](https://github.com/shoelace-style/shoelace/issues/522)
 - Added the `filled` variation to `<sl-input>`, `<sl-textarea>`, and `<sl-select>` and supporting design tokens
 - Added the `control` part to `<sl-select>` so you can target the main control with CSS [#538](https://github.com/shoelace-style/shoelace/issues/538)

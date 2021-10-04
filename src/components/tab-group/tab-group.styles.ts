@@ -93,6 +93,10 @@ export default css`
     order: 2;
   }
 
+  .tab-group--top ::slotted(sl-tab-panel) {
+    --padding: var(--sl-spacing-medium) 0;
+  }
+
   /*
    * Bottom
    */
@@ -135,6 +139,10 @@ export default css`
     order: 1;
   }
 
+  .tab-group--bottom ::slotted(sl-tab-panel) {
+    --padding: var(--sl-spacing-medium) 0;
+  }
+
   /*
    * Start
    */
@@ -163,6 +171,10 @@ export default css`
     order: 2;
   }
 
+  .tab-group--start ::slotted(sl-tab-panel) {
+    --padding: 0 var(--sl-spacing-medium);
+  }
+
   /*
    * End
    */
@@ -189,5 +201,9 @@ export default css`
   .tab-group--end .tab-group__body {
     flex: 1 1 auto;
     order: 1;
+  }
+
+  .tab-group--end ::slotted(sl-tab-panel) {
+    --padding: 0 var(--sl-spacing-medium);
   }
 `;
