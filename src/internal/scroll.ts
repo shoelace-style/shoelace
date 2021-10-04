@@ -29,7 +29,8 @@ export function scrollIntoView(
   element: HTMLElement,
   container: HTMLElement,
   direction: 'horizontal' | 'vertical' | 'both' = 'vertical',
-  behavior: 'smooth' | 'auto' = 'smooth'
+  behavior: 'smooth' | 'auto' = 'smooth',
+  margin: number = 0
 ) {
   const offset = getOffset(element, container);
   const offsetTop = offset.top + container.scrollTop;
@@ -43,7 +44,7 @@ export function scrollIntoView(
     if (offsetLeft < minX) {
       container.scrollTo({ left: offsetLeft, behavior });
     } else if (offsetLeft + element.clientWidth > maxX) {
-      container.scrollTo({ left: offsetLeft - container.offsetWidth + element.clientWidth, behavior });
+      container.scrollTo({ left: offsetLeft - container.offsetWidth + element.clientWidth + margin, behavior });
     }
   }
 
@@ -51,7 +52,7 @@ export function scrollIntoView(
     if (offsetTop < minY) {
       container.scrollTo({ top: offsetTop, behavior });
     } else if (offsetTop + element.clientHeight > maxY) {
-      container.scrollTo({ top: offsetTop - container.offsetHeight + element.clientHeight, behavior });
+      container.scrollTo({ top: offsetTop - container.offsetHeight + element.clientHeight + margin, behavior });
     }
   }
 }

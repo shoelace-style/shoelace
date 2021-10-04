@@ -1,14 +1,15 @@
 import { LitElement, html } from 'lit';
-import { customElement, property, queryAll, state } from 'lit/decorators.js';
+import { customElement, property, query, queryAll, state } from 'lit/decorators.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { repeat } from 'lit-html/directives/repeat';
-import { ifDefined } from 'lit-html/directives/if-defined';
-import { Calendar, CalendarDate } from '../../utilities/calendar';
+import { isTouchSupported } from '../../internal/support';
 import { chunk } from '../../internal/array';
 import { emit } from '../../internal/event';
+import { Calendar, CalendarDate } from '../../utilities/calendar';
 import {
   addDays,
   addMonths,
+  addYears,
   compareDate,
   endOfWeek,
   isBetween,
@@ -16,9 +17,12 @@ import {
   startOfWeek,
   datesRange,
   attributeToDate,
-  diffDate
+  diffDate,
+  yearsBetween,
+  isBetweenLimit
 } from '../../internal/date';
 import styles from './calendar.styles';
+import { scrollIntoView } from '../../internal/scroll';
 
 /**
  * @since 2.X
@@ -33,6 +37,7 @@ import styles from './calendar.styles';
  *
  * @cssproperty --table-cell-width - Calendar table cell width.
  * @cssproperty --table-cell-height - Calendar table cell height.
+ * @cssproperty --header-navigation-height - Calendar header navigation height.
  */
 @customElement('sl-calendar')
 export default class SlCalendar extends LitElement {
@@ -40,10 +45,13 @@ export default class SlCalendar extends LitElement {
 
   calendar: Calendar;
 
-  private selectionEnable: boolean = false;
+  private isDateSelection: boolean = false;
 
   @state()
-  private hovered?: Date;
+  private isNavigationOpen: boolean = false;
+
+  @state()
+  private hoveredDay?: Date;
 
   @state()
   private dates: CalendarDate[] = [];
@@ -99,7 +107,13 @@ export default class SlCalendar extends LitElement {
   firstDayOfWeek: number = 0;
 
   @queryAll('td.day')
-  days: NodeListOf<HTMLElement>;
+  tableDays: NodeListOf<HTMLElement>;
+
+  @query('select[aria-label="year"]')
+  selectYear: HTMLSelectElement;
+
+  @query('select[aria-label="month"]')
+  selectMonth: HTMLSelectElement;
 
   connectedCallback() {
     const { start, firstDayOfWeek, lang, dateTimeFormat } = this;
@@ -107,6 +121,10 @@ export default class SlCalendar extends LitElement {
     super.connectedCallback();
     this.calendar = new Calendar(firstDayOfWeek, lang, dateTimeFormat);
     this.updateCalendar(start);
+  }
+
+  firstUpdated() {
+    this.focusDay(this.start);
   }
 
   update(changedProps: Map<string, any>) {
@@ -119,38 +137,15 @@ export default class SlCalendar extends LitElement {
     if (changedProps.has('range')) calendar.allowRange = this.range;
     if (changedProps.has('limitRange')) calendar.maxRangeLength = this.limitRange;
     if (changedProps.has('disabledDates')) calendar.disabledDates = this.disabledDates;
+    if (changedProps.has('openNavigation') && changedProps.get('openNavigation')) {
+      this.shadowRoot?.querySelectorAll('select').forEach(item => (item.size = 0));
+    }
 
     super.update(changedProps);
   }
 
-  render() {
-    return html`
-      <div class="header">
-        ${this.renderNavigation(
-          this.calendar,
-          this.month,
-          this.year,
-          this.handleChangeYear,
-          this.handleChangeMonth,
-          this.handleSelectMonth
-        )}
-      </div>
-      ${this.renderCalendar(
-        this.calendar,
-        this.today,
-        this.start,
-        this.end,
-        this.hovered,
-        this.disabledDates,
-        this.handleClick,
-        this.handleHover,
-        this.handleKeyDown
-      )}
-    `;
-  }
-
   getDayElement = (date: Date): HTMLElement | undefined => {
-    return [...this.days].find(element => {
+    return [...this.tableDays].find(element => {
       const selectedDate = parseDate(element.getAttribute('date')!);
       return compareDate(selectedDate, date) === 0;
     });
@@ -160,48 +155,93 @@ export default class SlCalendar extends LitElement {
     this.getDayElement(date)?.focus();
   };
 
+  render() {
+    return html` <div class="container">
+      <div @keydown=${this.handleKeyDown} class=${classMap({ navigation: true, open: this.isNavigationOpen })}>
+        ${this.renderNavigation(
+          this.calendar,
+          this.min,
+          this.max,
+          this.month,
+          this.year,
+          this.handleSelectMonth,
+          this.handleSelectYear,
+          this.updateCalendarMonth
+        )}
+      </div>
+      <div class="calendar">
+        ${this.renderCalendar(
+          this.calendar,
+          this.today,
+          this.dates,
+          this.start,
+          this.end,
+          this.range,
+          this.isDateSelection,
+          this.hoveredDay,
+          this.disabledDates,
+          this.handleDayClick,
+          this.handleDayHover,
+          this.handleKeyDown
+        )}
+      </div>
+    </div>`;
+  }
+
   private renderNavigation = (
     calendar: Calendar,
-    month: number,
-    year: number,
-    changeYear: (e: MouseEvent) => void,
-    changeMonth: (e: MouseEvent) => void,
-    selectMonth: (e: MouseEvent) => void
+    minDate: Date | undefined,
+    maxDate: Date | undefined,
+    currentMonth: number,
+    currentYear: number,
+    selectMonth: (e: MouseEvent) => void,
+    selectYear: (e: MouseEvent) => void,
+    changeMonth: (month: number) => void
   ) => {
     return html`
-      <div class="navigation">
-        <sl-icon library="system" data-action="prev" name="chevron-compact-left" @click=${changeMonth}></sl-icon>
-        <select aria-label="month" tabindex="-1" @change=${selectMonth}>
+      <div class="buttons">
+        <sl-icon
+          library="system"
+          tabindex="-1"
+          name="chevron-compact-left"
+          @click=${() => changeMonth(currentMonth - 1)}
+        ></sl-icon>
+        <div class="button" tabindex="-1" @click=${selectMonth}>${calendar.getMonthName(currentMonth)}</div>
+        <div class="button" tabindex="-1" @click=${selectYear}>${currentYear}</div>
+        <sl-icon
+          library="system"
+          tabindex="-1"
+          name="chevron-compact-right"
+          @click=${() => changeMonth(currentMonth + 1)}
+        ></sl-icon>
+      </div>
+      <div class="dropdowns">
+        <select aria-label="month" @click=${selectMonth} @change=${selectMonth}>
           ${calendar
             .getMonthsNames()
             .map(
-              item =>
+              month =>
                 html`<option
-                  value=${item.index}
-                  .disabled=${!this.checkDateLimits({ month: item.index, year })}
-                  .selected=${month === item.index}
+                  value=${month.index}
+                  .disabled=${!isBetweenLimit({ month: month.index, year: currentYear }, minDate, maxDate)}
+                  .selected=${currentMonth === month.index}
                 >
-                  ${item.name}
+                  ${month.name}
                 </option>`
             )}
         </select>
-        <div class="spinner">
-          <input
-            type="number"
-            min=${this.min?.getFullYear() || 1900}
-            max=${ifDefined(this.max?.getFullYear())}
-            pattern="[0-9]*"
-            inputmode="numeric"
-            tabindex="-1"
-            aria-label="year"
-            .value=${year.toString()}
-            @input=${changeYear}
-            onkeydown="return false"
-          />
-          <span class="up" data-action="next" @click=${changeYear}></span>
-          <span class="down" data-action="prev" @click=${changeYear}></span>
-        </div>
-        <sl-icon library="system" data-action="next" name="chevron-compact-right" @click=${changeMonth}></sl-icon>
+        <select aria-label="year" @click=${selectYear} @change=${selectYear}>
+          ${yearsBetween(minDate || addYears(new Date(), -10), maxDate || addYears(new Date(), 10)).map(
+            year =>
+              html`<option
+                value=${year}
+                .disabled=${!isBetweenLimit({ month: currentMonth, year: year }, minDate, maxDate)}
+                .selected=${currentYear === year}
+              >
+                ${year}
+              </option>`
+          )}
+        </select>
       </div>
     `;
   };
@@ -209,8 +249,11 @@ export default class SlCalendar extends LitElement {
   private renderCalendar = (
     calendar: Calendar,
     highlightToday: boolean,
+    dates: CalendarDate[],
     startDate: Date,
     endDate: Date | undefined,
+    multiple: boolean,
+    selection: boolean,
     hoveredDate: Date | undefined,
     disabledDates: Date[] | undefined,
     mouseClick: (e: MouseEvent) => void,
@@ -220,48 +263,46 @@ export default class SlCalendar extends LitElement {
     const { isToday, isStartDate, isEndDate, isDateInRange, isDisabledDate, isDateOutsideLimits, getDaysNames } =
       calendar;
 
-    return html`<div class="calendar">
-      <table>
-        <thead>
-          <tr>
-            ${repeat(getDaysNames(), day => html`<th class="week-day" aria-label=${day}>${day}</th>`)}
-          </tr>
-        </thead>
-        <tbody @click=${mouseClick} @mouseover=${mouseHover} @keydown=${keyDown}>
-          ${chunk(this.dates, 7).map(
-            week =>
-              html`<tr>
-                ${repeat(week, day => {
-                  const date = calendar.convertToDate(day);
-                  const strDate = [date.getFullYear(), date.getMonth() + 1, date.getDate()].join('-');
+    return html` <table>
+      <thead>
+        <tr>
+          ${repeat(getDaysNames(), day => html`<th class="week-day" aria-label=${day}>${day}</th>`)}
+        </tr>
+      </thead>
+      <tbody @click=${mouseClick} @mouseover=${mouseHover} @keydown=${keyDown}>
+        ${chunk(dates, 7).map(
+          week =>
+            html`<tr>
+              ${repeat(week, day => {
+                const date = calendar.convertToDate(day);
+                const strDate = [date.getFullYear(), date.getMonth() + 1, date.getDate()].join('-');
 
-                  return html` <td
-                    tabindex="-1"
-                    date=${strDate}
-                    class=${classMap({
-                      day: true,
-                      today: highlightToday ? isToday(date) : false,
-                      start: isStartDate(date),
-                      'start-range':
-                        isStartDate(date) && ((this.selectionEnable && this.range) || this.end !== undefined),
-                      end: isEndDate(date),
-                      disabled: disabledDates ? isDisabledDate(date) : false,
-                      range: isDateInRange(date, startDate, hoveredDate || endDate),
-                      outside: isDateOutsideLimits(date),
-                      sibling: day.siblingMonth || false
-                    })}
-                  >
-                    ${day.day}
-                  </td>`;
-                })}
-              </tr>`
-          )}
-        </tbody>
-      </table>
-    </div>`;
+                return html` <td
+                  tabindex="-1"
+                  aria-label="date"
+                  date=${strDate}
+                  class=${classMap({
+                    day: true,
+                    today: highlightToday ? isToday(date) : false,
+                    start: isStartDate(date),
+                    'start-range': isStartDate(date) && ((selection && multiple) || endDate !== undefined),
+                    end: isEndDate(date),
+                    disabled: disabledDates ? isDisabledDate(date) : false,
+                    range: isDateInRange(date, startDate, hoveredDate || endDate),
+                    outside: isDateOutsideLimits(date),
+                    sibling: day.siblingMonth || false
+                  })}
+                >
+                  ${day.day}
+                </td>`;
+              })}
+            </tr>`
+        )}
+      </tbody>
+    </table>`;
   };
 
-  private handleClick = (e: MouseEvent) => {
+  private handleDayClick = (e: MouseEvent) => {
     const { calendar } = this;
     const date = parseDate((e.target as HTMLElement).getAttribute('date')!);
 
@@ -274,20 +315,47 @@ export default class SlCalendar extends LitElement {
     }
   };
 
-  private handleHover = (e: MouseEvent) => {
+  private handleDayHover = (e: MouseEvent) => {
     const date = parseDate((e.target as HTMLElement).getAttribute('date')!);
     this.highlightDates(date);
   };
 
   private handleKeyDown = (e: KeyboardEvent) => {
-    const value = (e.target as HTMLElement).getAttribute('date')!;
-    let date = parseDate(value);
+    const target = e.target as HTMLElement;
 
     let key = e.key;
     if (e.code === 'Space') key = e.code;
 
-    // KEYBOARD SUPPORT
-    // Space, Enter: Selects a date, closes the dialog.
+    // KEYBOARD SUPPORT (header navigation)
+    // Space, Enter: Selects month/year.
+    // Arrow up, Page Up: Moves focus to the previous mounth/year.
+    // Arrow down, Page Down: Moves focus to the next mounth/year.
+    if (this.isNavigationOpen && ['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'Enter'].includes(key)) {
+      let value = Number((target as HTMLSelectElement).value);
+      switch (key) {
+        case 'ArrowDown':
+        case 'PageDown':
+          ++value;
+          break;
+        case 'ArrowUp':
+        case 'PageUp':
+          --value;
+          break;
+        case 'Enter':
+          this.isNavigationOpen = false;
+          break;
+      }
+
+      if (target.getAttribute('aria-label') === 'month') {
+        this.updateCalendarMonth(value);
+      } else this.updateCalendar({ month: this.month, year: value });
+
+      e.preventDefault();
+      return;
+    }
+
+    // KEYBOARD SUPPORT (calendar navigation)
+    // Space, Enter: Selects a date.
     // Arrow up: Moves focus to the same day of the previous week.
     // Arrow down: Moves focus to the same day of the next week.
     // Arrow right: Moves focus to the next day.
@@ -298,7 +366,9 @@ export default class SlCalendar extends LitElement {
     // Page Down: Changes to the next month and sets focus on the same day of the same week.
     const { calendar } = this;
 
+    let date = parseDate(target.getAttribute('date')!);
     let handled = true;
+
     switch (key) {
       case 'ArrowRight':
         date = addDays(date, 1);
@@ -354,43 +424,64 @@ export default class SlCalendar extends LitElement {
     }
   };
 
-  private handleSelectMonth = (e: MouseEvent) => {
-    let newMonth = Number((e.target as HTMLSelectElement).value);
-    this.updateCalendar({ month: newMonth, year: this.year });
-  };
-
-  private handleChangeMonth = (e: MouseEvent) => {
-    const value = (e.target as HTMLElement).dataset.action === 'next' ? 1 : -1;
-
-    let newMonth = this.month + value;
-    let newYear = this.year;
-
-    if (newMonth < 1) {
-      newMonth = 12;
-      newYear -= 1;
-    } else if (newMonth > 12) {
-      newMonth = 1;
-      newYear += 1;
-    }
-
-    this.updateCalendar({ month: newMonth, year: newYear });
-  };
-
-  private handleChangeYear = (e: MouseEvent) => {
-    let newYear: number;
-
-    if (e.target instanceof HTMLInputElement) {
-      newYear = Number(e.target.value);
+  private handleSelectYear = (e: MouseEvent) => {
+    if (e.type === 'change') {
+      // mobile support
+      if (isTouchSupported()) {
+        let index = (e.target as HTMLSelectElement).selectedIndex;
+        this.updateCalendarYear(Number(this.selectYear.options[index].value));
+        return;
+      }
+    } else if (e.target instanceof HTMLOptionElement) {
+      // on mobile this code is never executed
+      this.isNavigationOpen = false;
+      this.updateCalendar({ month: this.month, year: Number(e.target.value) });
+      this.updateComplete.then(() => this.focusDay(this.start));
     } else {
-      const value = (e.target as HTMLElement).dataset.action === 'next' ? 1 : -1;
-      newYear = this.year + value;
+      if (!isTouchSupported()) {
+        this.isNavigationOpen = true;
+        this.selectMonth.disabled = true;
+        this.selectYear.disabled = false;
+        this.selectMonth.size = 0;
+        this.selectYear.size = 2;
+        this.updateComplete.then(() => {
+          scrollIntoView(this.selectYear.querySelector('option:checked')!, this.selectYear, 'vertical', 'smooth', 50);
+        });
+      }
+      this.selectYear.focus();
     }
+  };
 
-    this.updateCalendar({ month: this.month, year: newYear });
+  private handleSelectMonth = (e: MouseEvent) => {
+    if (e.type === 'change') {
+      // mobile support
+      if (isTouchSupported()) {
+        let index = (e.target as HTMLSelectElement).selectedIndex;
+        this.updateCalendarMonth(Number(this.selectMonth.options[index].value));
+        return;
+      }
+    } else if (e.target instanceof HTMLOptionElement) {
+      // on mobile this code is never executed
+      this.isNavigationOpen = false;
+      this.updateCalendarMonth(Number(e.target.value));
+      this.updateComplete.then(() => this.focusDay(this.start));
+    } else {
+      if (!isTouchSupported()) {
+        this.isNavigationOpen = true;
+        this.selectYear.disabled = true;
+        this.selectMonth.disabled = false;
+        this.selectYear.size = 0;
+        this.selectMonth.size = 2;
+        this.updateComplete.then(() => {
+          scrollIntoView(this.selectMonth.querySelector('option:checked')!, this.selectMonth, 'vertical', 'smooth', 50);
+        });
+      }
+      this.selectMonth.focus();
+    }
   };
 
   private handleDateRange = (date: Date) => {
-    if (this.selectionEnable) {
+    if (this.isDateSelection) {
       const { calendar } = this;
       // check selected date:
       // not a disabled date
@@ -403,17 +494,17 @@ export default class SlCalendar extends LitElement {
         if (days > this.limitRange + 1) invalid = true;
       }
       if (invalid) {
-        this.hovered = date;
+        this.hoveredDay = date;
         this.start = date;
         return;
       }
     }
 
-    this.selectionEnable = !this.selectionEnable;
+    this.isDateSelection = !this.isDateSelection;
 
-    if (this.selectionEnable) {
+    if (this.isDateSelection) {
       // start dates selection
-      this.hovered = date;
+      this.hoveredDay = date;
       this.start = date;
       this.end = undefined;
 
@@ -428,7 +519,7 @@ export default class SlCalendar extends LitElement {
         this.start = date;
       } else this.end = date;
 
-      this.hovered = undefined;
+      this.hoveredDay = undefined;
 
       // dates range
       emit<{ start: Date; end: Date; disabled?: Date[]; range: Date[] }>(this, 'sl-calendar-range-selected', {
@@ -443,7 +534,7 @@ export default class SlCalendar extends LitElement {
   };
 
   private highlightDates = (date: Date) => {
-    if (this.range) this.hovered = this.selectionEnable ? date : undefined;
+    if (this.range) this.hoveredDay = this.isDateSelection ? date : undefined;
   };
 
   private updateCalendar = (date: Date | { month: number; year: number }) => {
@@ -456,7 +547,7 @@ export default class SlCalendar extends LitElement {
       };
 
     // check date boundaries limits
-    if (!this.checkDateLimits(date)) return;
+    if (!isBetweenLimit(date, this.min, this.max)) return;
 
     // create new calendar
     this.dates = calendar.createCalendar(date);
@@ -474,20 +565,22 @@ export default class SlCalendar extends LitElement {
     this.year = calendar.year;
   };
 
-  private checkDateLimits = (date: { month: number; year: number }) => {
-    if (
-      (this.min !== undefined && date.year < this.min.getFullYear()) ||
-      (this.min !== undefined && date.month < this.min.getMonth() + 1)
-    )
-      return false;
+  private updateCalendarMonth = (month: number) => {
+    let year = this.year;
+    if (month < 1) {
+      month = 12;
+      year -= 1;
+    } else if (month > 12) {
+      month = 1;
+      year += 1;
+    }
+    this.updateCalendar({ month, year });
+    this.updateComplete.then(() => this.focusDay(this.start));
+  };
 
-    if (
-      (this.max !== undefined && date.year > this.max.getFullYear()) ||
-      (this.max !== undefined && date.month > this.max.getMonth() + 1)
-    )
-      return false;
-
-    return true;
+  private updateCalendarYear = (year: number) => {
+    this.updateCalendar({ month: this.month, year });
+    this.updateComplete.then(() => this.focusDay(this.start));
   };
 }
 

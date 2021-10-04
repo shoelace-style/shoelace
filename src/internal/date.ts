@@ -61,6 +61,12 @@ export const isBetween = (date: Date, min?: Date, max?: Date): boolean => {
   return date > min && date < max;
 };
 
+export const isBetweenLimit = (date: { month: number; year: number }, min?: Date, max?: Date): boolean => {
+  if ((min && date.year < min.getFullYear()) || (min && date.month < min.getMonth() + 1)) return false;
+  if ((max && date.year > max.getFullYear()) || (max && date.month > max.getMonth() + 1)) return false;
+  return true;
+};
+
 export const addDays = (date: Date, amount: number, enforceEndOfMonth = false): Date => {
   return addToDate(date, 'day', amount, enforceEndOfMonth);
 };
@@ -144,6 +150,18 @@ export const datesRange = (start: Date, end: Date): Date[] => {
   days.push(current);
 
   return days;
+};
+
+export const yearsBetween = (start: Date, end: Date) => {
+  let endYear = end.getFullYear();
+  let startYear = start.getFullYear();
+  let years = [];
+
+  for (var i = startYear; i <= endYear; i++) {
+    years.push(startYear);
+    startYear++;
+  }
+  return years;
 };
 
 export const attributeToDate = (value: string): Date | undefined => {
