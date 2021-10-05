@@ -200,20 +200,22 @@ export default class SlCalendar extends LitElement {
   ) => {
     return html`
       <div class="buttons">
-        <sl-icon
-          library="system"
-          tabindex="-1"
-          name="chevron-compact-left"
-          @click=${() => changeMonth(currentMonth - 1)}
-        ></sl-icon>
-        <div class="button" tabindex="-1" @click=${selectMonth}>${calendar.getMonthName(currentMonth)}</div>
-        <div class="button" tabindex="-1" @click=${selectYear}>${currentYear}</div>
-        <sl-icon
-          library="system"
-          tabindex="-1"
-          name="chevron-compact-right"
-          @click=${() => changeMonth(currentMonth + 1)}
-        ></sl-icon>
+        <div class="button" style="margin-left: 3px;" tabindex="-1">
+          <sl-icon library="system" name="chevron-compact-left" @click=${() => changeMonth(currentMonth - 1)}></sl-icon>
+        </div>
+        <div class="button" tabindex="-1" @click=${selectMonth}>
+          <span class="centered">${calendar.getMonthName(currentMonth)}</span>
+        </div>
+        <div class="button" tabindex="-1" @click=${selectYear}>
+          <span class="centered">${currentYear}</span>
+        </div>
+        <div class="button" style="margin-right: 3px;" tabindex="-1">
+          <sl-icon
+            library="system"
+            name="chevron-compact-right"
+            @click=${() => changeMonth(currentMonth + 1)}
+          ></sl-icon>
+        </div>
       </div>
       <div class="dropdowns">
         <select aria-label="month" @click=${selectMonth} @change=${selectMonth}>
@@ -293,7 +295,7 @@ export default class SlCalendar extends LitElement {
                     sibling: day.siblingMonth || false
                   })}
                 >
-                  ${day.day}
+                  <span class="centered">${day.day}</span>
                 </td>`;
               })}
             </tr>`
@@ -302,9 +304,19 @@ export default class SlCalendar extends LitElement {
     </table>`;
   };
 
+  private getElementAttributeDate = (e: MouseEvent | KeyboardEvent): Date => {
+    var date: string | null = '';
+    const target = e.target as HTMLElement;
+
+    if (target instanceof HTMLSpanElement) date = target.parentElement!.getAttribute('date');
+    else if (target instanceof HTMLTableCellElement) date = target.getAttribute('date');
+
+    return parseDate(date!);
+  };
+
   private handleDayClick = (e: MouseEvent) => {
     const { calendar } = this;
-    const date = parseDate((e.target as HTMLElement).getAttribute('date')!);
+    const date = this.getElementAttributeDate(e);
 
     if (calendar.isDateOutsideLimits(date) || calendar.isDisabledDate(date)) return;
     if (this.range) {
@@ -316,7 +328,7 @@ export default class SlCalendar extends LitElement {
   };
 
   private handleDayHover = (e: MouseEvent) => {
-    const date = parseDate((e.target as HTMLElement).getAttribute('date')!);
+    const date = this.getElementAttributeDate(e);
     this.highlightDates(date);
   };
 
@@ -366,7 +378,7 @@ export default class SlCalendar extends LitElement {
     // Page Down: Changes to the next month and sets focus on the same day of the same week.
     const { calendar } = this;
 
-    let date = parseDate(target.getAttribute('date')!);
+    let date = this.getElementAttributeDate(e);
     let handled = true;
 
     switch (key) {

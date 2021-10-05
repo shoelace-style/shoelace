@@ -50,6 +50,11 @@ export default css`
     position: relative;
   }
 
+  .centered {
+    display: inline-block;
+    vertical-align: -moz-middle-with-baseline;
+  }
+
   th.week-day {
     cursor: default;
     font-size: var(--sl-font-size-medium);
@@ -144,9 +149,8 @@ export default css`
 
   .navigation .buttons {
     display: flex;
-    align-items: center;
     height: var(--header-navigation-height);
-    padding: 5px;
+    justify-content: space-between;
   }
 
   .navigation .dropdowns {
@@ -233,40 +237,38 @@ export default css`
   }
 
   .navigation .button {
-    display: flex;
-    justify-content: center;
+    display: inline-block;
+    text-align: center;
     position: relative;
     font-size: var(--sl-font-size-large);
     color: var(--sl-color-white);
     cursor: pointer;
-    border-radius: var(--sl-input-border-radius-medium);
     font-weight: var(--sl-font-weight-light);
-    height: 100%;
-    width: 50%;
-    /* line-height: 42px; */
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 3px;
+    margin-bottom: 3px;
   }
 
   .navigation .button:hover,
-  .navigation .button:focus,
+  .navigation .button:focus {
+    outline: none;
+    background-color: var(--sl-color-primary-400);
+    border-radius: var(--sl-input-border-radius-medium);
+  }
+
   .navigation sl-icon:hover,
   .navigation sl-icon:focus {
     outline: none;
     background-color: var(--sl-color-primary-400);
     border: none;
     box-shadow: none;
+    border-radius: 0;
   }
 
   .navigation sl-icon {
     cursor: pointer;
-    height: 100%;
-    width: 30px;
     border-radius: var(--sl-input-border-radius-medium);
-    position: relative;
-    display: flex;
-    justify-content: center;
-  }
-
-  .navigation sl-icon::part(base) {
-    width: 80%;
+    height: 100%;
   }
 `;
