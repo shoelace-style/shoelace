@@ -291,6 +291,10 @@ strong {
   padding: 2px 4px;
 }
 
+.markdown-section tr:nth-child(2n) code {
+  background-color: rgb(var(--sl-color-neutral-100));
+}
+
 kbd,
 .markdown-section kbd {
   font-family: var(--sl-font-mono);
@@ -427,6 +431,11 @@ kbd,
 
 .markdown-section table .nowrap {
   white-space: nowrap;
+}
+
+.markdown-section table sl-tooltip code {
+  border-bottom: dashed 1px rgb(var(--sl-color-neutral-300));
+  cursor: help;
 }
 
 /* Iframes */
