@@ -37,6 +37,11 @@ export default css`
     transition: var(--sl-transition-fast) --color;
   }
 
+  .breadcrumb-item__label slot {
+    display: inline-block;
+    vertical-align: -moz-middle-with-baseline;
+  }
+
   :host(:not(:last-of-type)) .breadcrumb-item__label {
     color: rgb(var(--sl-color-primary-600));
   }

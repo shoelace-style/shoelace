@@ -13,7 +13,7 @@ export default css`
 
   .button {
     display: inline-flex;
-    align-items: stretch;
+    align-items: center;
     justify-content: center;
     width: 100%;
     border-style: solid;
@@ -401,21 +401,18 @@ export default css`
   .button--small {
     font-size: var(--sl-button-font-size-small);
     height: var(--sl-input-height-small);
-    line-height: calc(var(--sl-input-height-small) - var(--sl-input-border-width) * 2);
     border-radius: var(--sl-input-border-radius-small);
   }
 
   .button--medium {
     font-size: var(--sl-button-font-size-medium);
     height: var(--sl-input-height-medium);
-    line-height: calc(var(--sl-input-height-medium) - var(--sl-input-border-width) * 2);
     border-radius: var(--sl-input-border-radius-medium);
   }
 
   .button--large {
     font-size: var(--sl-button-font-size-large);
     height: var(--sl-input-height-large);
-    line-height: calc(var(--sl-input-height-large) - var(--sl-input-border-width) * 2);
     border-radius: var(--sl-input-border-radius-large);
   }
 
@@ -535,6 +532,11 @@ export default css`
 
   .button--has-label.button--large .button__label {
     padding: 0 var(--sl-spacing-large);
+  }
+
+  .button--has-label .button__label slot {
+    display: inline-block;
+    vertical-align: -moz-middle-with-baseline;
   }
 
   .button--has-prefix.button--small {
