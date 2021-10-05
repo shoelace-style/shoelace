@@ -74,5 +74,6 @@
   - [Z-index](/tokens/z-index)
 
 - Tutorials
+  - [Integrating with Laravel](/tutorials/integrating-with-laravel)
   - [Integrating with NextJS](/tutorials/integrating-with-nextjs)
   - [Integrating with Rails](/tutorials/integrating-with-rails)

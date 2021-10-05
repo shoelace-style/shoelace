@@ -16,6 +16,7 @@ These instructions assume an out-of-the-box [Laravel 8+ install](https://laravel
 Be sure to run `npm install` to install the default Laravel front-end dependencies before installing Shoelace. 
 
 ### Install the Shoelace package
+
 ```bash
 npm install @shoelace-style/shoelace
 ```
@@ -41,16 +42,19 @@ import "@shoelace-style/shoelace/dist/components/menu-item/menu-item.js";
 ```
 
 ### Set the Base Path
-Add the base path to your Shoelace assets (icons, images, etc.) in `/resources/js/boostrap.js`.
+
+Add the base path to your Shoelace assets (icons, images, etc.) in `/resources/js/boostrap.js`. The path must point to the same folder where you copy assets to in the next step.
+
 ```js
 import { setBasePath } from "@shoelace-style/shoelace/dist/utilities/base-path.js";
 setBasePath("/");
 ```
 
 Here's an example `/resources/js/boostrap.js` file, after importing and setting the base path and components.
+
 ```js
 import { setBasePath } from "@shoelace-style/shoelace/dist/utilities/base-path.js";
-setBasePath("/");
+setBasePath("/assets");
 
 import "@shoelace-style/shoelace/dist/components/button/button.js";
 import "@shoelace-style/shoelace/dist/components/dialog/dialog.js";
@@ -61,6 +65,7 @@ import "@shoelace-style/shoelace/dist/components/menu-item/menu-item.js";
 
 
 ### Configure Laravel Mix
+
 [Laravel Mix](https://laravel.com/docs/8.x/mix) is a wrapper around Webpack that simplifies configuration. Mix is used by default for compiling front-end assets in Laravel.
 
 Modify `webpack.mix.js` to add Shoelace's assets to Webpack's build process:
