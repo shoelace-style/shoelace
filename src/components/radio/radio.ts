@@ -136,6 +136,7 @@ export default class SlRadio extends LitElement {
       this.getAllRadios().map(radio => (radio.checked = false));
       radios[index].focus();
       radios[index].checked = true;
+      emit(radios[index], 'sl-change');
 
       event.preventDefault();
     }
