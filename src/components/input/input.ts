@@ -1,7 +1,8 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
-import { ifDefined } from 'lit-html/directives/if-defined';
-import { classMap } from 'lit-html/directives/class-map';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { classMap } from 'lit/directives/class-map.js';
+import { live } from 'lit/directives/live.js';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import { getLabelledBy, renderFormControl } from '../../internal/form-control';
@@ -41,8 +42,6 @@ let id = 0;
  * @csspart password-toggle-button - The password toggle button.
  * @csspart suffix - The input suffix container.
  * @csspart help-text - The input help text.
- *
- * @cssproperty --focus-ring - The focus ring style to use when the control receives focus, a `box-shadow` property.
  */
 @customElement('sl-input')
 export default class SlInput extends LitElement {
@@ -60,7 +59,8 @@ export default class SlInput extends LitElement {
   @state() private isPasswordVisible = false;
 
   /** The input's type. */
-  @property({ reflect: true }) type: 'email' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'url' = 'text';
+  @property({ reflect: true }) type: 'date' | 'email' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'url' =
+    'text';
 
   /** The input's size. */
   @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
@@ -70,6 +70,9 @@ export default class SlInput extends LitElement {
 
   /** The input's value attribute. */
   @property() value = '';
+
+  /** Draws a filled input. */
+  @property({ type: Boolean, reflect: true }) filled = false;
 
   /** Draws a pill-style input with rounded edges. */
   @property({ type: Boolean, reflect: true }) pill = false;
@@ -293,9 +296,11 @@ export default class SlInput extends LitElement {
 
             // States
             'input--pill': this.pill,
+            'input--standard': !this.filled,
+            'input--filled': this.filled,
             'input--disabled': this.disabled,
             'input--focused': this.hasFocus,
-            'input--empty': this.value.length === 0,
+            'input--empty': this.value?.length === 0,
             'input--invalid': this.invalid
           })}
         >
@@ -318,7 +323,7 @@ export default class SlInput extends LitElement {
             min=${ifDefined(this.min)}
             max=${ifDefined(this.max)}
             step=${ifDefined(this.step)}
-            .value=${this.value}
+            .value=${live(this.value)}
             autocapitalize=${ifDefined(this.autocapitalize)}
             autocomplete=${ifDefined(this.autocomplete)}
             autocorrect=${ifDefined(this.autocorrect)}
@@ -344,7 +349,7 @@ export default class SlInput extends LitElement {
             @blur=${this.handleBlur}
           />
 
-          ${this.clearable && this.value.length > 0
+          ${this.clearable && this.value?.length > 0
             ? html`
                 <button
                   part="clear-button"
@@ -376,7 +381,6 @@ export default class SlInput extends LitElement {
                       `
                     : html`
                         <slot name="hide-password-icon">
-                          ${' '}
                           <sl-icon name="eye" library="system"></sl-icon>
                         </slot>
                       `}

@@ -1,8 +1,9 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
-import { classMap } from 'lit-html/directives/class-map';
-import { ifDefined } from 'lit-html/directives/if-defined';
-import { styleMap } from 'lit-html/directives/style-map';
+import { classMap } from 'lit/directives/class-map.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { live } from 'lit/directives/live.js';
+import { styleMap } from 'lit/directives/style-map.js';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import { clamp } from '../../internal/math';
@@ -22,7 +23,6 @@ import '../input/input';
  *
  * @dependency sl-button
  * @dependency sl-dropdown
- * @dependency sl-icon
  * @dependency sl-input
  *
  * @event sl-change Emitted when the color picker's value changes.
@@ -46,6 +46,7 @@ import '../input/input';
  * @cssproperty --grid-handle-size - The size of the color grid's handle.
  * @cssproperty --slider-height - The height of the hue and alpha sliders.
  * @cssproperty --slider-handle-size - The diameter of the slider's handle.
+ * @cssproperty --swatch-size - The size of each predefined color swatch.
  */
 @customElement('sl-color-picker')
 export default class SlColorPicker extends LitElement {
@@ -63,7 +64,6 @@ export default class SlColorPicker extends LitElement {
   @state() private saturation = 100;
   @state() private lightness = 100;
   @state() private alpha = 100;
-  @state() private showCopyFeedback = false;
 
   /** The current color. */
   @property() value = '#ffffff';
@@ -201,8 +201,12 @@ export default class SlColorPicker extends LitElement {
     this.input.select();
     document.execCommand('copy');
     this.previewButton.focus();
-    this.showCopyFeedback = true;
-    this.previewButton.addEventListener('animationend', () => (this.showCopyFeedback = false), { once: true });
+
+    // Show copied animation
+    this.previewButton.classList.add('color-picker__preview-color--copied');
+    this.previewButton.addEventListener('animationend', () =>
+      this.previewButton.classList.remove('color-picker__preview-color--copied')
+    );
   }
 
   handleFormatToggle() {
@@ -386,10 +390,6 @@ export default class SlColorPicker extends LitElement {
     }
   }
 
-  handleDropdownAfterHide() {
-    this.showCopyFeedback = false;
-  }
-
   normalizeColorString(colorString: string) {
     //
     // The color module we're using doesn't parse % values for the alpha channel in RGBA and HSLA. It also doesn't parse
@@ -566,6 +566,10 @@ export default class SlColorPicker extends LitElement {
     this.isSafeValue = false;
   }
 
+  handleAfterHide() {
+    this.previewButton.classList.remove('color-picker__preview-color--copied');
+  }
+
   @watch('format')
   handleFormatChange() {
     this.syncValues();
@@ -708,30 +712,19 @@ export default class SlColorPicker extends LitElement {
               '--preview-color': `hsla(${this.hue}deg, ${this.saturation}%, ${this.lightness}%, ${this.alpha / 100})`
             })}
             @click=${this.handleCopy}
-          >
-            <sl-icon
-              name="check"
-              library="system"
-              class=${classMap({
-                'color-picker__copy-feedback': true,
-                'color-picker__copy-feedback--visible': this.showCopyFeedback,
-                'color-picker__copy-feedback--dark': this.lightness > 50
-              })}
-            ></sl-icon>
-          </button>
+          ></button>
         </div>
 
         <div class="color-picker__user-input">
           <sl-input
             part="input"
-            size="small"
             type="text"
             name=${this.name}
             autocomplete="off"
             autocorrect="off"
             autocapitalize="off"
             spellcheck="false"
-            .value=${this.inputValue}
+            .value=${live(this.inputValue)}
             ?disabled=${this.disabled}
             @keydown=${this.handleInputKeyDown}
             @sl-change=${this.handleInputChange}
@@ -739,7 +732,7 @@ export default class SlColorPicker extends LitElement {
 
           ${!this.noFormatToggle
             ? html`
-                <sl-button exportparts="base:format-button" size="small" @click=${this.handleFormatToggle}>
+                <sl-button exportparts="base:format-button" @click=${this.handleFormatToggle}>
                   ${this.setLetterCase(this.format)}
                 </sl-button>
               `
@@ -784,7 +777,7 @@ export default class SlColorPicker extends LitElement {
         .containing-element=${this}
         ?disabled=${this.disabled}
         ?hoist=${this.hoist}
-        @sl-after-hide=${this.handleDropdownAfterHide}
+        @sl-after-hide=${this.handleAfterHide}
       >
         <button
           part="trigger"

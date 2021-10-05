@@ -17,7 +17,7 @@ Set the `type` attribute to change the badge's type.
 ```html preview
 <sl-badge type="primary">Primary</sl-badge>
 <sl-badge type="success">Success</sl-badge>
-<sl-badge type="info">Info</sl-badge>
+<sl-badge type="neutral">Neutral</sl-badge>
 <sl-badge type="warning">Warning</sl-badge>
 <sl-badge type="danger">Danger</sl-badge>
 ```
@@ -29,7 +29,7 @@ Use the `pill` attribute to give badges rounded edges.
 ```html preview
 <sl-badge type="primary" pill>Primary</sl-badge>
 <sl-badge type="success" pill>Success</sl-badge>
-<sl-badge type="info" pill>Info</sl-badge>
+<sl-badge type="neutral" pill>Neutral</sl-badge>
 <sl-badge type="warning" pill>Warning</sl-badge>
 <sl-badge type="danger" pill>Danger</sl-badge>
 ```
@@ -42,7 +42,7 @@ Use the `pulse` attribute to draw attention to the badge with a subtle animation
 <div class="badge-pulse">
   <sl-badge type="primary" pill pulse>1</sl-badge>
   <sl-badge type="success" pill pulse>1</sl-badge>
-  <sl-badge type="info" pill pulse>1</sl-badge>
+  <sl-badge type="neutral" pill pulse>1</sl-badge>
   <sl-badge type="warning" pill pulse>1</sl-badge>
   <sl-badge type="danger" pill pulse>1</sl-badge>
 </div>
@@ -80,10 +80,10 @@ One of the most common use cases for badges is attaching them to buttons. To mak
 When including badges in menu items, use the `suffix` slot to make sure they're aligned correctly.
 
 ```html preview
-<sl-menu style="max-width: 240px; border: solid 1px var(--sl-panel-border-color); border-radius: var(--sl-border-radius-medium);">
+<sl-menu style="max-width: 240px; border: solid 1px rgb(var(--sl-panel-border-color)); border-radius: var(--sl-border-radius-medium);">
   <sl-menu-label>Messages</sl-menu-label>
-  <sl-menu-item>Comments <sl-badge slot="suffix" type="info" pill>4</sl-badge></sl-menu-item>
-  <sl-menu-item>Replies <sl-badge slot="suffix" type="info" pill>12</sl-badge></sl-menu-item>
+  <sl-menu-item>Comments <sl-badge slot="suffix" type="neutral" pill>4</sl-badge></sl-menu-item>
+  <sl-menu-item>Replies <sl-badge slot="suffix" type="neutral" pill>12</sl-badge></sl-menu-item>
 </sl-menu>
 ```
 

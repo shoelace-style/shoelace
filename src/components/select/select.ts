@@ -1,7 +1,7 @@
 import { LitElement, TemplateResult, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
-import { classMap } from 'lit-html/directives/class-map';
-import { ifDefined } from 'lit-html/directives/if-defined';
+import { classMap } from 'lit/directives/class-map.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import { getLabelledBy, renderFormControl } from '../../internal/form-control';
@@ -32,6 +32,8 @@ let id = 0;
  * @dependency sl-tag
  *
  * @slot - The select's options in the form of menu items.
+ * @slot prefix - Used to prepend an icon or similar element to the select.
+ * @slot suffix - Used to append an icon or similar element to the select.
  * @slot label - The select's label. Alternatively, you can use the label prop.
  * @slot help-text - Help text that describes how to use the select.
  *
@@ -41,23 +43,24 @@ let id = 0;
  * @event sl-blur - Emitted when the control loses focus.
  *
  * @csspart base - The component's base wrapper.
- * @csspart clear-button - The input's clear button, exported from <sl-input>.
+ * @csspart clear-button - The clear button.
+ * @csspart control - The container that holds the prefix, label, and suffix.
  * @csspart form-control - The form control that wraps the label, input, and help text.
  * @csspart help-text - The select's help text.
  * @csspart icon - The select's icon.
+ * @csspart prefix - The select's prefix.
  * @csspart label - The select's label.
+ * @csspart suffix - The select's suffix.
  * @csspart menu - The select menu, a <sl-menu> element.
  * @csspart tag - The multiselect option, a <sl-tag> element.
  * @csspart tags - The container in which multiselect options are rendered.
- *
- * @cssproperty --focus-ring - The focus ring style to use when the control receives focus, a `box-shadow` property.
  */
 @customElement('sl-select')
 export default class SlSelect extends LitElement {
   static styles = styles;
 
   @query('.select') dropdown: SlDropdown;
-  @query('.select__box') box: SlDropdown;
+  @query('.select__control') control: SlDropdown;
   @query('.select__hidden-select') input: HTMLInputElement;
   @query('.select__menu') menu: SlMenu;
 
@@ -102,6 +105,9 @@ export default class SlSelect extends LitElement {
 
   /** The value of the control. This will be a string or an array depending on `multiple`. */
   @property() value: string | Array<string> = '';
+
+  /** Draws a filled select. */
+  @property({ type: Boolean, reflect: true }) filled = false;
 
   /** Draws a pill-style select with rounded edges. */
   @property({ type: Boolean, reflect: true }) pill = false;
@@ -249,6 +255,11 @@ export default class SlSelect extends LitElement {
       }
     }
 
+    // don't open the menu when a CTRL/Command key is pressed
+    if (event.ctrlKey || event.metaKey) {
+      return;
+    }
+
     // All other "printable" keys open the menu and initiate type to select
     if (!this.isOpen && event.key.length === 1) {
       event.stopPropagation();
@@ -259,7 +270,7 @@ export default class SlSelect extends LitElement {
   }
 
   handleLabelClick() {
-    const box = this.shadowRoot?.querySelector('.select__box') as HTMLElement;
+    const box = this.shadowRoot?.querySelector('.select__control') as HTMLElement;
     box.focus();
   }
 
@@ -267,7 +278,7 @@ export default class SlSelect extends LitElement {
     const item = event.detail.item;
 
     if (this.multiple) {
-      this.value = this.value.includes(item.value)
+      this.value = this.value?.includes(item.value)
         ? (this.value as []).filter(v => v !== item.value)
         : [...this.value, item.value];
     } else {
@@ -286,7 +297,7 @@ export default class SlSelect extends LitElement {
     this.isOpen = false;
 
     // Restore focus on the box after the menu is hidden
-    this.box.focus();
+    this.control.focus();
   }
 
   @watch('multiple')
@@ -305,6 +316,17 @@ export default class SlSelect extends LitElement {
 
     // Wait for items to render before gathering labels otherwise the slot won't exist
     const items = this.getItems();
+
+    // Check for duplicate values in menu items
+    const values: string[] = [];
+    items.map(item => {
+      if (values.includes(item.value)) {
+        console.error(`Duplicate value found in <sl-select> menu item: '${item.value}'`, item);
+      }
+
+      values.push(item.value);
+    });
+
     await Promise.all(items.map(item => item.render)).then(() => this.syncItemsFromValue());
   }
 
@@ -333,7 +355,7 @@ export default class SlSelect extends LitElement {
   }
 
   resizeMenu() {
-    const box = this.shadowRoot?.querySelector('.select__box') as HTMLElement;
+    const box = this.shadowRoot?.querySelector('.select__control') as HTMLElement;
     this.menu.style.width = `${box.clientWidth}px`;
 
     if (this.dropdown) {
@@ -357,7 +379,7 @@ export default class SlSelect extends LitElement {
         return html`
           <sl-tag
             exportparts="base:tag"
-            type="info"
+            type="neutral"
             size=${this.size}
             ?pill=${this.pill}
             clearable
@@ -381,7 +403,7 @@ export default class SlSelect extends LitElement {
         this.displayLabel = '';
         this.displayTags = this.displayTags.slice(0, this.maxTagsVisible);
         this.displayTags.push(html`
-          <sl-tag exportparts="base:tag" type="info" size=${this.size}> +${total - this.maxTagsVisible} </sl-tag>
+          <sl-tag exportparts="base:tag" type="neutral" size=${this.size}> +${total - this.maxTagsVisible} </sl-tag>
         `);
       }
     } else {
@@ -405,7 +427,7 @@ export default class SlSelect extends LitElement {
   }
 
   render() {
-    const hasSelection = this.multiple ? this.value.length > 0 : this.value !== '';
+    const hasSelection = this.multiple ? this.value?.length > 0 : this.value !== '';
 
     return renderFormControl(
       {
@@ -434,6 +456,8 @@ export default class SlSelect extends LitElement {
             'select--clearable': this.clearable,
             'select--disabled': this.disabled,
             'select--multiple': this.multiple,
+            'select--standard': !this.filled,
+            'select--filled': this.filled,
             'select--has-tags': this.multiple && this.displayTags.length > 0,
             'select--placeholder-visible': this.displayLabel === '',
             'select--small': this.size === 'small',
@@ -446,9 +470,10 @@ export default class SlSelect extends LitElement {
           @sl-hide=${this.handleMenuHide}
         >
           <div
+            part="control"
             slot="trigger"
             id=${this.inputId}
-            class="select__box"
+            class="select__control"
             role="combobox"
             aria-labelledby=${ifDefined(
               getLabelledBy({
@@ -467,6 +492,10 @@ export default class SlSelect extends LitElement {
             @focus=${this.handleFocus}
             @keydown=${this.handleKeyDown}
           >
+            <span part="prefix" class="select__prefix">
+              <slot name="prefix"></slot>
+            </span>
+
             <div class="select__label">
               ${this.displayTags.length
                 ? html` <span part="tags" class="select__tags"> ${this.displayTags} </span> `
@@ -485,6 +514,10 @@ export default class SlSelect extends LitElement {
                   ></sl-icon-button>
                 `
               : ''}
+
+            <span part="suffix" class="select__suffix">
+              <slot name="suffix"></slot>
+            </span>
 
             <span part="icon" class="select__icon" aria-hidden="true">
               <sl-icon name="chevron-down" library="system"></sl-icon>

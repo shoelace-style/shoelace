@@ -7,8 +7,6 @@ export default css`
   ${formControlStyles}
 
   :host {
-    --focus-ring: 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
-
     display: block;
   }
 
@@ -16,7 +14,7 @@ export default css`
     display: block;
   }
 
-  .select__box {
+  .select__control {
     display: inline-flex;
     align-items: center;
     justify-content: start;
@@ -25,40 +23,78 @@ export default css`
     font-family: var(--sl-input-font-family);
     font-weight: var(--sl-input-font-weight);
     letter-spacing: var(--sl-input-letter-spacing);
-    background-color: var(--sl-input-background-color);
-    border: solid var(--sl-input-border-width) var(--sl-input-border-color);
     vertical-align: middle;
     overflow: hidden;
     transition: var(--sl-transition-fast) color, var(--sl-transition-fast) border, var(--sl-transition-fast) box-shadow;
     cursor: pointer;
   }
 
-  .select:not(.select--disabled) .select__box:hover {
-    background-color: var(--sl-input-background-color-hover);
-    border-color: var(--sl-input-border-color-hover);
-    color: var(--sl-input-color-hover);
+  .select__menu {
+    max-height: 50vh;
+    overflow: auto;
   }
 
-  .select.select--focused:not(.select--disabled) .select__box {
-    background-color: var(--sl-input-background-color-focus);
-    border-color: var(--sl-input-border-color-focus);
-    box-shadow: var(--focus-ring);
+  /* Standard selects */
+  .select--standard .select__control {
+    background-color: rgb(var(--sl-input-background-color));
+    border: solid var(--sl-input-border-width) rgb(var(--sl-input-border-color));
+    color: rgb(var(--sl-input-color));
+  }
+
+  .select--standard:not(.select--disabled) .select__control:hover {
+    background-color: rgb(var(--sl-input-background-color-hover));
+    border-color: rgb(var(--sl-input-border-color-hover));
+    color: rgb(var(--sl-input-color-hover));
+  }
+
+  .select--standard.select--focused:not(.select--disabled) .select__control {
+    background-color: rgb(var(--sl-input-background-color-focus));
+    border-color: rgb(var(--sl-input-border-color-focus));
+    box-shadow: var(--sl-focus-ring);
     outline: none;
-    color: var(--sl-input-color-focus);
+    color: rgb(var(--sl-input-color-focus));
   }
 
-  .select--disabled .select__box {
-    background-color: var(--sl-input-background-color-disabled);
-    border-color: var(--sl-input-border-color-disabled);
-    color: var(--sl-input-color-disabled);
+  .select--standard.select--disabled .select__control {
+    background-color: rgb(var(--sl-input-background-color-disabled));
+    border-color: rgb(var(--sl-input-border-color-disabled));
+    color: rgb(var(--sl-input-color-disabled));
     opacity: 0.5;
     cursor: not-allowed;
     outline: none;
   }
 
+  /* Filled selects */
+  .select--filled .select__control {
+    border: none;
+    background-color: rgb(var(--sl-input-filled-background-color));
+    color: rgb(var(--sl-input-color));
+  }
+
+  .select--filled:hover:not(.select--disabled) .select__control {
+    background-color: rgb(var(--sl-input-filled-background-color-hover));
+  }
+
+  .select--filled.select--focused:not(.select--disabled) .select__control {
+    background-color: rgb(var(--sl-input-filled-background-color-focus));
+    box-shadow: var(--sl-focus-ring);
+  }
+
+  .select--filled.select--disabled .select__control {
+    background-color: rgb(var(--sl-input-filled-background-color-disabled));
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
   .select--disabled .select__tags,
   .select--disabled .select__clear {
     pointer-events: none;
+  }
+
+  .select__prefix {
+    display: inline-flex;
+    align-items: center;
+    color: rgb(var(--sl-input-placeholder-color));
   }
 
   .select__label {
@@ -82,6 +118,13 @@ export default css`
 
   .select__clear {
     flex: 0 0 auto;
+    width: 1.25em;
+  }
+
+  .select__suffix {
+    display: inline-flex;
+    align-items: center;
+    color: rgb(var(--sl-input-placeholder-color));
   }
 
   .select__icon {
@@ -96,11 +139,11 @@ export default css`
 
   /* Placeholder */
   .select--placeholder-visible .select__label {
-    color: var(--sl-input-placeholder-color);
+    color: rgb(var(--sl-input-placeholder-color));
   }
 
   .select--disabled.select--placeholder-visible .select__label {
-    color: var(--sl-input-placeholder-color-disabled);
+    color: rgb(var(--sl-input-placeholder-color-disabled));
   }
 
   /* Tags */
@@ -109,7 +152,7 @@ export default css`
     align-items: center;
     flex-wrap: wrap;
     justify-content: left;
-    margin-left: var(--sl-spacing-xx-small);
+    margin-left: var(--sl-spacing-2x-small);
   }
 
   /* Hidden input (for form control validation to show) */
@@ -130,10 +173,14 @@ export default css`
    */
 
   /* Small */
-  .select--small .select__box {
+  .select--small .select__control {
     border-radius: var(--sl-input-border-radius-small);
     font-size: var(--sl-input-font-size-small);
     min-height: var(--sl-input-height-small);
+  }
+
+  .select--small .select__prefix ::slotted(*) {
+    margin-left: var(--sl-input-spacing-small);
   }
 
   .select--small .select__label {
@@ -141,6 +188,10 @@ export default css`
   }
 
   .select--small .select__clear {
+    margin-right: var(--sl-input-spacing-small);
+  }
+
+  .select--small .select__suffix ::slotted(*) {
     margin-right: var(--sl-input-spacing-small);
   }
 
@@ -157,7 +208,7 @@ export default css`
   }
 
   .select--small .select__tags sl-tag:not(:last-of-type) {
-    margin-right: var(--sl-spacing-xx-small);
+    margin-right: var(--sl-spacing-2x-small);
   }
 
   .select--small.select--has-tags .select__label {
@@ -165,10 +216,14 @@ export default css`
   }
 
   /* Medium */
-  .select--medium .select__box {
+  .select--medium .select__control {
     border-radius: var(--sl-input-border-radius-medium);
     font-size: var(--sl-input-font-size-medium);
     min-height: var(--sl-input-height-medium);
+  }
+
+  .select--medium .select__prefix ::slotted(*) {
+    margin-left: var(--sl-input-spacing-medium);
   }
 
   .select--medium .select__label {
@@ -176,6 +231,10 @@ export default css`
   }
 
   .select--medium .select__clear {
+    margin-right: var(--sl-input-spacing-medium);
+  }
+
+  .select--medium .select__suffix ::slotted(*) {
     margin-right: var(--sl-input-spacing-medium);
   }
 
@@ -192,7 +251,7 @@ export default css`
   }
 
   .select--medium .select__tags sl-tag:not(:last-of-type) {
-    margin-right: var(--sl-spacing-xx-small);
+    margin-right: var(--sl-spacing-2x-small);
   }
 
   .select--medium.select--has-tags .select__label {
@@ -200,10 +259,14 @@ export default css`
   }
 
   /* Large */
-  .select--large .select__box {
+  .select--large .select__control {
     border-radius: var(--sl-input-border-radius-large);
     font-size: var(--sl-input-font-size-large);
     min-height: var(--sl-input-height-large);
+  }
+
+  .select--large .select__prefix ::slotted(*) {
+    margin-left: var(--sl-input-spacing-large);
   }
 
   .select--large .select__label {
@@ -211,6 +274,10 @@ export default css`
   }
 
   .select--large .select__clear {
+    margin-right: var(--sl-input-spacing-large);
+  }
+
+  .select--large .select__suffix ::slotted(*) {
     margin-right: var(--sl-input-spacing-large);
   }
 
@@ -226,7 +293,7 @@ export default css`
   }
 
   .select--large .select__tags sl-tag:not(:last-of-type) {
-    margin-right: var(--sl-spacing-xx-small);
+    margin-right: var(--sl-spacing-2x-small);
   }
 
   .select--large.select--has-tags .select__label {
@@ -236,15 +303,15 @@ export default css`
   /*
    * Pill modifier
    */
-  .select--pill.select--small .select__box {
+  .select--pill.select--small .select__control {
     border-radius: var(--sl-input-height-small);
   }
 
-  .select--pill.select--medium .select__box {
+  .select--pill.select--medium .select__control {
     border-radius: var(--sl-input-height-medium);
   }
 
-  .select--pill.select--large .select__box {
+  .select--pill.select--large .select__control {
     border-radius: var(--sl-input-height-large);
   }
 `;

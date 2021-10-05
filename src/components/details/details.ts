@@ -1,11 +1,10 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
-import { classMap } from 'lit-html/directives/class-map';
+import { classMap } from 'lit/directives/class-map.js';
 import { animateTo, stopAnimations, shimKeyframesHeightAuto } from '../../internal/animate';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import { waitForEvent } from '../../internal/event';
-import { focusVisible } from '../../internal/focus-visible';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
 import styles from './details.styles';
 
@@ -23,9 +22,9 @@ let id = 0;
  * @slot summary - The details' summary. Alternatively, you can use the summary prop.
  *
  * @event sl-show - Emitted when the details opens.
- * @event sl-after-show - Emitted after the details opens and all transitions are complete.
+ * @event sl-after-show - Emitted after the details opens and all animations are complete.
  * @event sl-hide - Emitted when the details closes.
- * @event sl-after-hide - Emitted after the details closes and all transitions are complete.
+ * @event sl-after-hide - Emitted after the details closes and all animations are complete.
  *
  * @csspart base - The component's base wrapper.
  * @csspart header - The summary header.
@@ -55,19 +54,9 @@ export default class SlDetails extends LitElement {
   /** Disables the details so it can't be toggled. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
-  connectedCallback() {
-    super.connectedCallback();
-    this.updateComplete.then(() => focusVisible.observe(this.details));
-  }
-
   firstUpdated() {
     this.body.hidden = !this.open;
     this.body.style.height = this.open ? 'auto' : '0';
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    focusVisible.unobserve(this.details);
   }
 
   /** Shows the details. */

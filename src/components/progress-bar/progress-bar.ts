@@ -1,7 +1,7 @@
 import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { classMap } from 'lit-html/directives/class-map';
-import { styleMap } from 'lit-html/directives/style-map';
+import { classMap } from 'lit/directives/class-map.js';
+import { styleMap } from 'lit/directives/style-map.js';
 import styles from './progress-bar.styles';
 
 /**
@@ -23,8 +23,8 @@ import styles from './progress-bar.styles';
 export default class SlProgressBar extends LitElement {
   static styles = styles;
 
-  /** The progress bar's percentage, 0 to 100. */
-  @property({ type: Number, reflect: true }) percentage = 0;
+  /** The current progress, 0 to 100. */
+  @property({ type: Number, reflect: true }) value = 0;
 
   /** When true, percentage is ignored, the label is hidden, and the progress bar is drawn in an indeterminate state. */
   @property({ type: Boolean, reflect: true }) indeterminate = false;
@@ -40,9 +40,9 @@ export default class SlProgressBar extends LitElement {
         role="progressbar"
         aria-valuemin="0"
         aria-valuemax="100"
-        aria-valuenow="${this.indeterminate ? '' : this.percentage}"
+        aria-valuenow="${this.indeterminate ? '' : this.value}"
       >
-        <div part="indicator" class="progress-bar__indicator" style=${styleMap({ width: this.percentage + '%' })}>
+        <div part="indicator" class="progress-bar__indicator" style=${styleMap({ width: this.value + '%' })}>
           ${!this.indeterminate
             ? html`
                 <span part="label" class="progress-bar__label">

@@ -42,6 +42,14 @@ Add the `toggle-password` attribute to add a toggle button that will show the pa
 <sl-input type="password" placeholder="Password Toggle" size="large" toggle-password></sl-input>
 ```
 
+### Filled Inputs
+
+Add the `filled` attribute to draw a filled input.
+
+```html preview
+<sl-input placeholder="Type something" filled></sl-input>
+```
+
 ### Pill
 
 Use the `pill` attribute to give inputs rounded edges.
@@ -52,6 +60,18 @@ Use the `pill` attribute to give inputs rounded edges.
 <sl-input placeholder="Medium" size="medium" pill></sl-input>
 <br>
 <sl-input placeholder="Large" size="large" pill></sl-input>
+```
+
+### Input Types
+
+The `type` attribute controls the type of input the browser renders.
+
+```html preview
+<sl-input type="email" Placeholder="Email"></sl-input>
+<br>
+<sl-input type="number" Placeholder="Number"></sl-input>
+<br>
+<sl-input type="date" Placeholder="Date"></sl-input>
 ```
 
 ### Disabled
@@ -84,18 +104,18 @@ Use the `prefix` and `suffix` slots to add icons.
 
 ```html preview
 <sl-input placeholder="Small" size="small">
-  <sl-icon name="tag" slot="prefix"></sl-icon>
-  <sl-icon name="gear" slot="suffix"></sl-icon>
+  <sl-icon name="house" slot="prefix"></sl-icon>
+  <sl-icon name="chat" slot="suffix"></sl-icon>
 </sl-input>
 <br>
 <sl-input placeholder="Medium" size="medium">
-  <sl-icon name="tag" slot="prefix"></sl-icon>
-  <sl-icon name="gear" slot="suffix"></sl-icon>
+  <sl-icon name="house" slot="prefix"></sl-icon>
+  <sl-icon name="chat" slot="suffix"></sl-icon>
 </sl-input>
 <br>
 <sl-input placeholder="Large" size="large">
-  <sl-icon name="tag" slot="prefix"></sl-icon>
-  <sl-icon name="gear" slot="suffix"></sl-icon>
+  <sl-icon name="house" slot="prefix"></sl-icon>
+  <sl-icon name="chat" slot="suffix"></sl-icon>
 </sl-input>
 ```
 

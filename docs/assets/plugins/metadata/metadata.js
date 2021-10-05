@@ -23,7 +23,9 @@
           .map(prop => {
             return `
               <tr>
-                <td class="nowrap"><code>${escapeHtml(prop.name)}</code></td>
+                <td class="nowrap">
+                  <code>${escapeHtml(prop.name)}</code>
+                </td>
                 <td class="nowrap">${prop.attribute ? `<code>${escapeHtml(prop.attribute)}</code>` : '-'}</td>
                 <td>${escapeHtml(prop.description)}</td>
                 <td style="text-align: center;">${
@@ -32,7 +34,7 @@
                 <td>${prop.type?.text ? `<code>${escapeHtml(prop.type?.text || '')}</code>` : '-'}</td>
                 <td>${prop.default ? `<code>${escapeHtml(prop.default)}</code>` : '-'}</td>
               </tr>
-          `;
+            `;
           })
           .join('')}
       </tbody>
@@ -55,12 +57,12 @@
         ${events
           .map(
             event => `
-        <tr>
-          <td><code class="nowrap">${escapeHtml(event.name)}</code></td>
-          <td>${escapeHtml(event.description)}</td>
-          <td>${event.type?.text ? `<code>${escapeHtml(event.type?.text)}` : '-'}</td>
-        </tr>
-        `
+              <tr>
+                <td><code class="nowrap">${escapeHtml(event.name)}</code></td>
+                <td>${escapeHtml(event.description)}</td>
+                <td>${event.type?.text ? `<code>${escapeHtml(event.type?.text)}` : '-'}</td>
+              </tr>
+            `
           )
           .join('')}
       </tbody>
@@ -146,11 +148,11 @@
         ${styles
           .map(
             style => `
-        <tr>
-          <td><code>${escapeHtml(style.name)}</code></td>
-          <td>${escapeHtml(style.description)}</td>
-        </tr>
-        `
+              <tr>
+                <td><code>${escapeHtml(style.name)}</code></td>
+                <td>${escapeHtml(style.description)}</td>
+              </tr>
+            `
           )
           .join('')}
       </tbody>
@@ -172,11 +174,11 @@
         ${parts
           .map(
             part => `
-        <tr>
-          <td class="nowrap"><code>${escapeHtml(part.name)}</code></td>
-          <td>${escapeHtml(part.description)}</td>
-        </tr>
-        `
+              <tr>
+                <td class="nowrap"><code>${escapeHtml(part.name)}</code></td>
+                <td>${escapeHtml(part.description)}</td>
+              </tr>
+           `
           )
           .join('')}
       </tbody>
@@ -198,11 +200,11 @@
         ${animations
           .map(
             animation => `
-        <tr>
-          <td class="nowrap"><code>${escapeHtml(animation.name)}</code></td>
-          <td>${escapeHtml(animation.description)}</td>
-        </tr>
-        `
+              <tr>
+                <td class="nowrap"><code>${escapeHtml(animation.name)}</code></td>
+                <td>${escapeHtml(animation.description)}</td>
+              </tr>
+            `
           )
           .join('')}
       </tbody>
@@ -255,6 +257,9 @@
     metadata.modules?.map(module => {
       module.declarations?.map(declaration => {
         if (declaration.customElement) {
+          // Generate the dist path based on the src path and attach it to the component
+          declaration.path = module.path.replace(/^src\//, 'dist/').replace(/\.ts$/, '.js');
+
           allComponents.push(declaration);
         }
       });
@@ -282,20 +287,23 @@
       version.textContent = isDev ? 'Development' : isNext ? 'Next' : metadata.package.version;
       target.appendChild(version);
 
+      // Store version for reuse
+      sessionStorage.setItem('sl-version', metadata.package.version);
+
       // Add repo buttons
       const buttons = document.createElement('div');
       buttons.classList.add('sidebar-buttons');
       buttons.innerHTML = `
-          <a class="repo-button repo-button--small repo-button--sponsor" href="https://github.com/sponsors/claviska" rel="noopener" target="_blank">
-            <sl-icon name="heart"></sl-icon> Sponsor
-          </a>
-          <a class="repo-button repo-button--small repo-button--github" href="https://github.com/shoelace-style/shoelace/stargazers" rel="noopener" target="_blank">
-            <sl-icon name="github"></sl-icon> <span class="github-star-count">Star</span>
-          </a>
-          <a class="repo-button repo-button--small repo-button--twitter" href="https://twitter.com/shoelace_style" rel="noopener" target="_blank">
-            <sl-icon name="twitter"></sl-icon> Follow
-          </a>
-        `;
+        <sl-button size="small" class="repo-button repo-button--sponsor" href="https://github.com/sponsors/claviska" target="_blank">
+          <sl-icon name="heart"></sl-icon> Sponsor
+        </sl-button>
+        <sl-button size="small" class="repo-button repo-button--github" href="https://github.com/shoelace-style/shoelace/stargazers" target="_blank">
+          <sl-icon name="github"></sl-icon> <span class="github-star-count">Star</span>
+        </sl-button>
+        <sl-button size="small" class="repo-button repo-button--twitter" href="https://twitter.com/shoelace_style" target="_blank">
+          <sl-icon name="twitter"></sl-icon> Follow
+        </sl-button>
+      `;
       target.appendChild(buttons);
     });
 
@@ -315,10 +323,10 @@
           return next(content);
         }
 
-        let badgeType = 'info';
+        let badgeType = 'neutral';
         if (component.status === 'stable') badgeType = 'primary';
         if (component.status === 'experimental') badgeType = 'warning';
-        if (component.status === 'planned') badgeType = 'info';
+        if (component.status === 'planned') badgeType = 'neutral';
         if (component.status === 'deprecated') badgeType = 'danger';
 
         result += `
@@ -328,7 +336,7 @@
             </div>
 
             <div class="component-header__info">
-              <sl-badge type="info" pill>
+              <sl-badge type="neutral" pill>
                 Since ${component.since || '?'}
               </sl-badge>
 
@@ -426,11 +434,60 @@
           `;
         }
 
+        if (component.path) {
+          /* prettier-ignore */
+          result += `
+            ## Importing
+
+            <sl-tab-group>
+            <sl-tab slot="nav" panel="cdn" active>CDN</sl-tab>
+            <sl-tab slot="nav" panel="bundler">Bundler</sl-tab>
+            <sl-tab slot="nav" panel="react">React</sl-tab>
+
+            <sl-tab-panel name="cdn">\n
+            To import this component from [the CDN](https://www.jsdelivr.com/package/npm/@shoelace-style/shoelace):
+
+            \`\`\`js
+            import 'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@${metadata.package.version}/${component.path}';
+            \`\`\`
+            </sl-tab-panel>
+
+            <sl-tab-panel name="bundler">\n
+            To import this component using [a bundler](/getting-started/installation#bundling):
+            \`\`\`js
+            import '@shoelace-style/shoelace/${component.path}';
+            \`\`\`
+            </sl-tab-panel>
+
+            <sl-tab-panel name="react">\n
+            To import this component using [\`@shoelace-style/react\`](https://www.npmjs.com/package/@shoelace-style/react):
+            \`\`\`js
+            import '@shoelace-style/react/dist/${component.tagName.replace(/^sl-/, '')}';
+            \`\`\`
+            </sl-tab-panel>
+            </sl-tab-group>
+          `;
+        }
+
         // Strip whitespace so markdown doesn't process things as code blocks
         return result.replace(/^ +| +$/gm, '');
       });
 
       next(content);
+    });
+
+    // Wrap tables so we can scroll them horizontally when needed
+    hook.doneEach(function () {
+      const content = document.querySelector('.content');
+      const tables = [...content.querySelectorAll('table')];
+
+      tables.map(table => {
+        table.outerHTML = `
+          <div class="table-wrapper">
+            ${table.outerHTML}
+          </div>
+        `;
+      });
     });
   });
 })();

@@ -15,10 +15,10 @@ Dropdowns are designed to work well with [menus](/components/menu) to provide a 
     <sl-menu-item>Dropdown Item 1</sl-menu-item>
     <sl-menu-item>Dropdown Item 2</sl-menu-item>
     <sl-menu-item>Dropdown Item 3</sl-menu-item>
-    <sl-menu-divider></sl-menu-divider>
+    <sl-divider></sl-divider>
     <sl-menu-item checked>Checked</sl-menu-item>
     <sl-menu-item disabled>Disabled</sl-menu-item>
-    <sl-menu-divider></sl-menu-divider>
+    <sl-divider></sl-divider>
     <sl-menu-item>
       Prefix
       <sl-icon slot="prefix" name="gift"></sl-icon>
@@ -44,7 +44,7 @@ The preferred placement of the dropdown can be set with the `placement` attribut
     <sl-menu-item>Cut</sl-menu-item>
     <sl-menu-item>Copy</sl-menu-item>
     <sl-menu-item>Paste</sl-menu-item>
-    <sl-menu-divider></sl-menu-divider>
+    <sl-divider></sl-divider>
     <sl-menu-item>Find</sl-menu-item>
     <sl-menu-item>Replace</sl-menu-item>
   </sl-menu>
@@ -62,7 +62,7 @@ The distance from the panel to the trigger can be customized using the `distance
     <sl-menu-item>Cut</sl-menu-item>
     <sl-menu-item>Copy</sl-menu-item>
     <sl-menu-item>Paste</sl-menu-item>
-    <sl-menu-divider></sl-menu-divider>
+    <sl-divider></sl-divider>
     <sl-menu-item>Find</sl-menu-item>
     <sl-menu-item>Replace</sl-menu-item>
   </sl-menu>
@@ -80,7 +80,7 @@ The offset of the panel along the trigger can be customized using the `skidding`
     <sl-menu-item>Cut</sl-menu-item>
     <sl-menu-item>Copy</sl-menu-item>
     <sl-menu-item>Paste</sl-menu-item>
-    <sl-menu-divider></sl-menu-divider>
+    <sl-divider></sl-divider>
     <sl-menu-item>Find</sl-menu-item>
     <sl-menu-item>Replace</sl-menu-item>
   </sl-menu>
@@ -114,7 +114,7 @@ Dropdown panels will be clipped if they're inside a container that has `overflow
 
 <style>
   .dropdown-hoist {
-    border: solid 2px var(--sl-panel-border-color);
+    border: solid 2px rgb(var(--sl-panel-border-color));
     padding: var(--sl-spacing-medium);
     overflow: hidden;
   }

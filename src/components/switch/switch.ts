@@ -1,7 +1,8 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
-import { classMap } from 'lit-html/directives/class-map';
-import { ifDefined } from 'lit-html/directives/if-defined';
+import { classMap } from 'lit/directives/class-map.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { live } from 'lit/directives/live.js';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import styles from './switch.styles';
@@ -96,12 +97,12 @@ export default class SlSwitch extends LitElement {
     if (this.input) {
       this.input.checked = this.checked;
       this.invalid = !this.input.checkValidity();
-      emit(this, 'sl-change');
     }
   }
 
   handleClick() {
     this.checked = !this.checked;
+    emit(this, 'sl-change');
   }
 
   @watch('disabled')
@@ -122,18 +123,14 @@ export default class SlSwitch extends LitElement {
     if (event.key === 'ArrowLeft') {
       event.preventDefault();
       this.checked = false;
+      emit(this, 'sl-change');
     }
 
     if (event.key === 'ArrowRight') {
       event.preventDefault();
       this.checked = true;
+      emit(this, 'sl-change');
     }
-  }
-
-  handleMouseDown(event: MouseEvent) {
-    // Prevent clicks on the label from briefly blurring the input
-    event.preventDefault();
-    this.input.focus();
   }
 
   render() {
@@ -147,27 +144,27 @@ export default class SlSwitch extends LitElement {
           'switch--disabled': this.disabled,
           'switch--focused': this.hasFocus
         })}
-        @mousedown=${this.handleMouseDown}
       >
+        <input
+          id=${this.switchId}
+          class="switch__input"
+          type="checkbox"
+          name=${ifDefined(this.name)}
+          value=${ifDefined(this.value)}
+          .checked=${live(this.checked)}
+          .disabled=${this.disabled}
+          .required=${this.required}
+          role="switch"
+          aria-checked=${this.checked ? 'true' : 'false'}
+          aria-labelledby=${this.labelId}
+          @click=${this.handleClick}
+          @blur=${this.handleBlur}
+          @focus=${this.handleFocus}
+          @keydown=${this.handleKeyDown}
+        />
+
         <span part="control" class="switch__control">
           <span part="thumb" class="switch__thumb"></span>
-
-          <input
-            id=${this.switchId}
-            type="checkbox"
-            name=${ifDefined(this.name)}
-            value=${ifDefined(this.value)}
-            .checked=${this.checked}
-            .disabled=${this.disabled}
-            .required=${this.required}
-            role="switch"
-            aria-checked=${this.checked ? 'true' : 'false'}
-            aria-labelledby=${this.labelId}
-            @click=${this.handleClick}
-            @blur=${this.handleBlur}
-            @focus=${this.handleFocus}
-            @keydown=${this.handleKeyDown}
-          />
         </span>
 
         <span part="label" id=${this.labelId} class="switch__label">

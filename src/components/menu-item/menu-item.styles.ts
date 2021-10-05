@@ -1,5 +1,6 @@
 import { css } from 'lit';
 import componentStyles from '../../styles/component.styles';
+import { focusVisibleSelector } from '../../internal/focus-visible';
 
 export default css`
   ${componentStyles}
@@ -18,16 +19,17 @@ export default css`
     line-height: var(--sl-line-height-normal);
     letter-spacing: var(--sl-letter-spacing-normal);
     text-align: left;
-    color: var(--sl-color-gray-700);
-    padding: var(--sl-spacing-xx-small) var(--sl-spacing-x-large);
+    color: rgb(var(--sl-color-neutral-700));
+    padding: var(--sl-spacing-2x-small) var(--sl-spacing-x-large);
     transition: var(--sl-transition-fast) fill;
     user-select: none;
     white-space: nowrap;
     cursor: pointer;
   }
+
   .menu-item.menu-item--disabled {
     outline: none;
-    color: var(--sl-color-gray-400);
+    color: rgb(var(--sl-color-neutral-400));
     cursor: not-allowed;
   }
 
@@ -60,10 +62,10 @@ export default css`
   }
 
   :host(:hover:not([aria-disabled='true'])) .menu-item,
-  :host(:focus:not([aria-disabled='true'])) .menu-item {
+  :host(${focusVisibleSelector}:not(.sl-focus-invisible):not([aria-disabled='true'])) .menu-item {
     outline: none;
-    background-color: var(--sl-color-primary-500);
-    color: var(--sl-color-white);
+    background-color: rgb(var(--sl-color-primary-600));
+    color: rgb(var(--sl-color-neutral-0));
   }
 
   .menu-item .menu-item__check {

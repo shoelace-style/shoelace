@@ -8,7 +8,7 @@ Included files are asynchronously requested using `window.fetch()`. Requests are
 
 The included content will be inserted into the `<sl-include>` element's default slot so it can be easily accessed and styled through the light DOM.
 
-```html preview
+```html preview no-codepen
 <sl-include src="/assets/examples/include.html"></sl-include>
 ```
 

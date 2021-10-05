@@ -1,6 +1,6 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
-import { classMap } from 'lit-html/directives/class-map';
+import { classMap } from 'lit/directives/class-map.js';
 import { animateTo, stopAnimations } from '../../internal/animate';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
@@ -22,9 +22,9 @@ const toastStack = Object.assign(document.createElement('div'), { className: 'sl
  * @slot icon - An icon to show in the alert.
  *
  * @event sl-show - Emitted when the alert opens.
- * @event sl-after-show - Emitted after the alert opens and all transitions are complete.
+ * @event sl-after-show - Emitted after the alert opens and all animations are complete.
  * @event sl-hide - Emitted when the alert closes.
- * @event sl-after-hide - Emitted after the alert closes and all transitions are complete.
+ * @event sl-after-hide - Emitted after the alert closes and all animations are complete.
  *
  * @csspart base - The component's base wrapper.
  * @csspart icon - The container that wraps the alert icon.
@@ -52,7 +52,7 @@ export default class SlAlert extends LitElement {
   @property({ type: Boolean, reflect: true }) closable = false;
 
   /** The type of alert. */
-  @property({ reflect: true }) type: 'primary' | 'success' | 'info' | 'warning' | 'danger' = 'primary';
+  @property({ reflect: true }) type: 'primary' | 'success' | 'neutral' | 'warning' | 'danger' = 'primary';
 
   /**
    * The length of time, in milliseconds, the alert will show before closing itself. If the user interacts with
@@ -180,7 +180,7 @@ export default class SlAlert extends LitElement {
           'alert--closable': this.closable,
           'alert--primary': this.type === 'primary',
           'alert--success': this.type === 'success',
-          'alert--info': this.type === 'info',
+          'alert--neutral': this.type === 'neutral',
           'alert--warning': this.type === 'warning',
           'alert--danger': this.type === 'danger'
         })}

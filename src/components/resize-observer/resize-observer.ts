@@ -7,6 +7,8 @@ import styles from './resize-observer.styles';
  * @since 2.0
  * @status stable
  *
+ * @slot - One or more elements to watch for resizing.
+ *
  * @event {{ entries: ResizeObserverEntry[] }} sl-resize - Emitted when the element is resized.
  */
 @customElement('sl-resize-observer')

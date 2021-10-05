@@ -5,11 +5,13 @@ export default css`
   ${componentStyles}
 
   :host {
+    --padding: 0;
+
     display: block;
   }
 
   .tab-panel {
     border: solid 1px transparent;
-    padding: 20px 20px;
+    padding: var(--padding);
   }
 `;

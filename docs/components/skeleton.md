@@ -58,18 +58,18 @@ Skeletons try not to be opinionated, as there are endless possibilities for desi
 
 ### Effects
 
-The default effect is `sheen`, which animates a sheen horizontally across the skeleton. There's also `pulse`, which fades the skeleton in and out. To disable animations, use `none`. Effects are intentionally subtle, as they can be distracting otherwise.
+There are two built-in effects, `sheen` and `pulse`. Effects are intentionally subtle, as they can be distracting when used extensively. The default is `none`, which displays a static, non-animated skeleton. 
 
 ```html preview
 <div class="skeleton-effects">
+  <sl-skeleton effect="none"></sl-skeleton>
+  None
+
   <sl-skeleton effect="sheen"></sl-skeleton>
   Sheen
 
   <sl-skeleton effect="pulse"></sl-skeleton>
   Pulse
-
-  <sl-skeleton effect="none"></sl-skeleton>
-  None
 </div>
 
 <style>
@@ -198,7 +198,7 @@ Use the `--border-radius` custom property to make circles, squares, and rectangl
 Set the `--color` and `--sheen-color` custom properties to adjust the skeleton's color.
 
 ```html preview
-<sl-skeleton style="--color: tomato; --sheen-color: #ffb094;"></sl-skeleton>
+<sl-skeleton effect="sheen" style="--color: tomato; --sheen-color: #ffb094;"></sl-skeleton>
 ```
 
 [component-metadata:sl-skeleton]

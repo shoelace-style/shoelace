@@ -1,5 +1,6 @@
 import { css } from 'lit';
 import componentStyles from '../../styles/component.styles';
+import { focusVisibleSelector } from '../../internal/focus-visible';
 
 export default css`
   ${componentStyles}
@@ -9,8 +10,9 @@ export default css`
   }
 
   .details {
-    border: solid 1px var(--sl-color-gray-200);
+    border: solid 1px rgb(var(--sl-color-neutral-200));
     border-radius: var(--sl-border-radius-medium);
+    background-color: rgb(var(--sl-color-neutral-0));
     overflow-anchor: none;
   }
 
@@ -31,15 +33,15 @@ export default css`
     outline: none;
   }
 
-  .focus-visible .details__header:focus {
-    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
+  .details__header${focusVisibleSelector} {
+    box-shadow: var(--sl-focus-ring);
   }
 
   .details--disabled .details__header {
     cursor: not-allowed;
   }
 
-  .details--disabled .details__header:focus {
+  .details--disabled .details__header${focusVisibleSelector} {
     outline: none;
     box-shadow: none;
   }

@@ -385,7 +385,7 @@ Icons in this library are licensed under the [Apache 2.0 License](https://github
 
 ### Remix Icon
 
-This will register the [Remix Icon](https://remixicon.com/) library using the jsDelivr CDN. This library has two variations: line (default) and fill (`*-fill`). It also groups icons by categories, so the name must include the category and icon separated by a slash. A mutator function is required to set the SVG's `fill` to `currentColor`.
+This will register the [Remix Icon](https://remixicon.com/) library using the jsDelivr CDN. This library groups icons by categories, so the name must include the category and icon separated by a slash, as well as the `-line` or `-fill` suffix as needed. A mutator function is required to set the SVG's `fill` to `currentColor`.
 
 Icons in this library are licensed under the [Apache 2.0 License](https://github.com/Remix-Design/RemixIcon/blob/master/License).
 
@@ -395,21 +395,21 @@ Icons in this library are licensed under the [Apache 2.0 License](https://github
 
   registerIconLibrary('remixicon', {
     resolver: name => {
-      const match = name.match(/^(.*?)\/(.*?)(-(fill))?$/);
+      const match = name.match(/^(.*?)\/(.*?)?$/);
       match[1] = match[1].charAt(0).toUpperCase() + match[1].slice(1);
-      return `https://cdn.jsdelivr.net/npm/remixicon@2.5.0/icons/${match[1]}/${match[2]}${match[3] || '-line'}.svg`;
+      return `https://cdn.jsdelivr.net/npm/remixicon@2.5.0/icons/${match[1]}/${match[2]}.svg`;
     },
     mutator: svg => svg.setAttribute('fill', 'currentColor')
   });
 </script>
 
 <div style="font-size: 24px;">
-  <sl-icon library="remixicon" name="business/cloud"></sl-icon>
-  <sl-icon library="remixicon" name="design/brush"></sl-icon>
-  <sl-icon library="remixicon" name="business/pie-chart"></sl-icon>
-  <sl-icon library="remixicon" name="development/bug"></sl-icon>
-  <sl-icon library="remixicon" name="media/image"></sl-icon>
-  <sl-icon library="remixicon" name="system/alert"></sl-icon>
+  <sl-icon library="remixicon" name="business/cloud-line"></sl-icon>
+  <sl-icon library="remixicon" name="design/brush-line"></sl-icon>
+  <sl-icon library="remixicon" name="business/pie-chart-line"></sl-icon>
+  <sl-icon library="remixicon" name="development/bug-line"></sl-icon>
+  <sl-icon library="remixicon" name="media/image-line"></sl-icon>
+  <sl-icon library="remixicon" name="system/alert-line"></sl-icon>
   <br>
   <sl-icon library="remixicon" name="business/cloud-fill"></sl-icon>
   <sl-icon library="remixicon" name="design/brush-fill"></sl-icon>
@@ -558,7 +558,7 @@ If you want to change the icons Shoelace uses internally, you can register an ic
 
 <style>
   .icon-search {
-    border: solid 1px var(--sl-panel-border-color);
+    border: solid 1px rgb(var(--sl-panel-border-color));
     border-radius: var(--sl-border-radius-medium);
     padding: var(--sl-spacing-medium);
   }
@@ -604,7 +604,7 @@ If you want to change the icons Shoelace uses internally, you can register an ic
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border-radius: var(--sl-border-radius-circle);
+    border-radius: var(--sl-border-radius-medium);
     font-size: 24px;
     width: 2em;
     height: 2em;
@@ -614,12 +614,8 @@ If you want to change the icons Shoelace uses internally, you can register an ic
   }
 
   .icon-list-item:hover {
-    background-color: var(--sl-color-primary-50);
-    color: var(--sl-color-primary-500);
-  }
-
-  .sl-theme-dark .icon-list-item:hover {
-    background-color: var(--sl-color-primary-900);
+    background-color: rgb(var(--sl-color-primary-50));
+    color: rgb(var(--sl-color-primary-600));
   }
 
   .icon-list[data-type="outline"] .icon-list-item[data-name$="-fill"] {

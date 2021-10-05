@@ -5,7 +5,8 @@ export default css`
   ${componentStyles}
 
   :host {
-    --tabs-border-color: var(--sl-color-gray-200);
+    --track-color: rgb(var(--sl-color-neutral-200));
+    --indicator-color: rgb(var(--sl-color-primary-600));
 
     display: block;
   }
@@ -25,11 +26,6 @@ export default css`
     position: absolute;
     left: 0;
     transition: var(--sl-transition-fast) transform ease, var(--sl-transition-fast) width ease;
-  }
-
-  /* Remove the focus ring when the user isn't interacting with a keyboard */
-  .tab-group:not(.focus-visible) ::slotted(sl-tab) {
-    --focus-ring: none;
   }
 
   .tab-group--has-scroll-controls .tab-group__nav-container {
@@ -85,16 +81,20 @@ export default css`
     flex: 1 1 auto;
     position: relative;
     flex-direction: row;
-    border-bottom: solid 2px var(--tabs-border-color);
+    border-bottom: solid 2px var(--track-color);
   }
 
   .tab-group--top .tab-group__indicator {
     bottom: -2px;
-    border-bottom: solid 2px var(--sl-color-primary-500);
+    border-bottom: solid 2px var(--indicator-color);
   }
 
   .tab-group--top .tab-group__body {
     order: 2;
+  }
+
+  .tab-group--top ::slotted(sl-tab-panel) {
+    --padding: var(--sl-spacing-medium) 0;
   }
 
   /*
@@ -127,16 +127,20 @@ export default css`
     flex: 1 1 auto;
     position: relative;
     flex-direction: row;
-    border-top: solid 2px var(--tabs-border-color);
+    border-top: solid 2px var(--track-color);
   }
 
   .tab-group--bottom .tab-group__indicator {
     top: calc(-1 * 2px);
-    border-top: solid 2px var(--sl-color-primary-500);
+    border-top: solid 2px var(--indicator-color);
   }
 
   .tab-group--bottom .tab-group__body {
     order: 1;
+  }
+
+  .tab-group--bottom ::slotted(sl-tab-panel) {
+    --padding: var(--sl-spacing-medium) 0;
   }
 
   /*
@@ -154,17 +158,21 @@ export default css`
   .tab-group--start .tab-group__tabs {
     flex: 0 0 auto;
     flex-direction: column;
-    border-right: solid 2px var(--tabs-border-color);
+    border-right: solid 2px var(--track-color);
   }
 
   .tab-group--start .tab-group__indicator {
     right: calc(-1 * 2px);
-    border-right: solid 2px var(--sl-color-primary-500);
+    border-right: solid 2px var(--indicator-color);
   }
 
   .tab-group--start .tab-group__body {
     flex: 1 1 auto;
     order: 2;
+  }
+
+  .tab-group--start ::slotted(sl-tab-panel) {
+    --padding: 0 var(--sl-spacing-medium);
   }
 
   /*
@@ -182,16 +190,20 @@ export default css`
   .tab-group--end .tab-group__tabs {
     flex: 0 0 auto;
     flex-direction: column;
-    border-left: solid 2px var(--tabs-border-color);
+    border-left: solid 2px var(--track-color);
   }
 
   .tab-group--end .tab-group__indicator {
     left: calc(-1 * 2px);
-    border-left: solid 2px var(--sl-color-primary-500);
+    border-left: solid 2px var(--indicator-color);
   }
 
   .tab-group--end .tab-group__body {
     flex: 1 1 auto;
     order: 1;
+  }
+
+  .tab-group--end ::slotted(sl-tab-panel) {
+    --padding: 0 var(--sl-spacing-medium);
   }
 `;

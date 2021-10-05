@@ -96,7 +96,7 @@ By default, the drawer slides out of its [containing block](https://developer.mo
 
 ```html preview
 <div
-  style="position: relative; border: solid 2px var(--sl-panel-border-color); height: 300px; padding: 1rem; margin-bottom: 1rem;"
+  style="position: relative; border: solid 2px rgb(var(--sl-panel-border-color)); height: 300px; padding: 1rem; margin-bottom: 1rem;"
 >
   The drawer will be contained to this box. This content won't shift or be affected in any way when the drawer opens.
 
@@ -146,7 +146,7 @@ By design, a drawer's height will never exceed 100% of its container. As such, d
 
 ```html preview
 <sl-drawer label="Drawer" class="drawer-scrolling">
-  <div style="height: 150vh; border: dashed 2px var(--sl-color-gray-200); padding: 0 1rem;">
+  <div style="height: 150vh; border: dashed 2px rgb(var(--sl-color-neutral-200)); padding: 0 1rem;">
     <p>Scroll down and give it a try! 👇</p>
   </div>
   <sl-button slot="footer" type="primary">Close</sl-button>

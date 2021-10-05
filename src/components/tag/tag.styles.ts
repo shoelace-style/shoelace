@@ -28,33 +28,33 @@ export default css`
    */
 
   .tag--primary {
-    background-color: var(--sl-color-primary-100);
-    border-color: var(--sl-color-primary-200);
-    color: var(--sl-color-primary-700);
+    background-color: rgb(var(--sl-color-primary-50));
+    border-color: rgb(var(--sl-color-primary-200));
+    color: rgb(var(--sl-color-primary-800));
   }
 
   .tag--success {
-    background-color: var(--sl-color-success-100);
-    border-color: var(--sl-color-success-200);
-    color: var(--sl-color-success-700);
+    background-color: rgb(var(--sl-color-success-50));
+    border-color: rgb(var(--sl-color-success-200));
+    color: rgb(var(--sl-color-success-800));
   }
 
-  .tag--info {
-    background-color: var(--sl-color-info-100);
-    border-color: var(--sl-color-info-200);
-    color: var(--sl-color-info-700);
+  .tag--neutral {
+    background-color: rgb(var(--sl-color-neutral-50));
+    border-color: rgb(var(--sl-color-neutral-200));
+    color: rgb(var(--sl-color-neutral-800));
   }
 
   .tag--warning {
-    background-color: var(--sl-color-warning-100);
-    border-color: var(--sl-color-warning-200);
-    color: var(--sl-color-warning-700);
+    background-color: rgb(var(--sl-color-warning-50));
+    border-color: rgb(var(--sl-color-warning-200));
+    color: rgb(var(--sl-color-warning-800));
   }
 
   .tag--danger {
-    background-color: var(--sl-color-danger-100);
-    border-color: var(--sl-color-danger-200);
-    color: var(--sl-color-danger-700);
+    background-color: rgb(var(--sl-color-danger-50));
+    border-color: rgb(var(--sl-color-danger-200));
+    color: rgb(var(--sl-color-danger-800));
   }
 
   /*
@@ -70,8 +70,8 @@ export default css`
   }
 
   .tag--small .tag__clear {
-    margin-left: var(--sl-spacing-xx-small);
-    margin-right: calc(-1 * var(--sl-spacing-xxx-small));
+    margin-left: var(--sl-spacing-2x-small);
+    margin-right: calc(-1 * var(--sl-spacing-3x-small));
   }
 
   .tag--medium {
@@ -83,8 +83,8 @@ export default css`
   }
 
   .tag__clear {
-    margin-left: var(--sl-spacing-xx-small);
-    margin-right: calc(-1 * var(--sl-spacing-xx-small));
+    margin-left: var(--sl-spacing-2x-small);
+    margin-right: calc(-1 * var(--sl-spacing-2x-small));
   }
 
   .tag--large {
@@ -96,7 +96,7 @@ export default css`
   }
 
   .tag__clear {
-    margin-left: var(--sl-spacing-xx-small);
+    margin-left: var(--sl-spacing-2x-small);
     margin-right: calc(-1 * var(--sl-spacing-x-small));
   }
 

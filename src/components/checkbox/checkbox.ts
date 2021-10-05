@@ -1,7 +1,8 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
-import { classMap } from 'lit-html/directives/class-map';
-import { ifDefined } from 'lit-html/directives/if-defined';
+import { classMap } from 'lit/directives/class-map.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { live } from 'lit/directives/live.js';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import styles from './checkbox.styles';
@@ -89,6 +90,7 @@ export default class SlCheckbox extends LitElement {
   handleClick() {
     this.checked = !this.checked;
     this.indeterminate = false;
+    emit(this, 'sl-change');
   }
 
   handleBlur() {
@@ -110,17 +112,10 @@ export default class SlCheckbox extends LitElement {
     emit(this, 'sl-focus');
   }
 
-  handleLabelMouseDown(event: MouseEvent) {
-    // Prevent clicks on the label from briefly blurring the input
-    event.preventDefault();
-    this.input.focus();
-  }
-
   @watch('checked', { waitUntilFirstUpdate: true })
   @watch('indeterminate', { waitUntilFirstUpdate: true })
   handleStateChange() {
     this.invalid = !this.input.checkValidity();
-    emit(this, 'sl-change');
   }
 
   render() {
@@ -135,8 +130,25 @@ export default class SlCheckbox extends LitElement {
           'checkbox--indeterminate': this.indeterminate
         })}
         for=${this.inputId}
-        @mousedown=${this.handleLabelMouseDown}
       >
+        <input
+          id=${this.inputId}
+          class="checkbox__input"
+          type="checkbox"
+          name=${ifDefined(this.name)}
+          value=${ifDefined(this.value)}
+          .indeterminate=${live(this.indeterminate)}
+          .checked=${live(this.checked)}
+          .disabled=${this.disabled}
+          .required=${this.required}
+          role="checkbox"
+          aria-checked=${this.checked ? 'true' : 'false'}
+          aria-labelledby=${this.labelId}
+          @click=${this.handleClick}
+          @blur=${this.handleBlur}
+          @focus=${this.handleFocus}
+        />
+
         <span part="control" class="checkbox__control">
           ${this.checked
             ? html`
@@ -169,23 +181,6 @@ export default class SlCheckbox extends LitElement {
                 </span>
               `
             : ''}
-
-          <input
-            id=${this.inputId}
-            type="checkbox"
-            name=${ifDefined(this.name)}
-            value=${ifDefined(this.value)}
-            .indeterminate=${this.indeterminate}
-            .checked=${this.checked}
-            .disabled=${this.disabled}
-            .required=${this.required}
-            role="checkbox"
-            aria-checked=${this.checked ? 'true' : 'false'}
-            aria-labelledby=${this.labelId}
-            @click=${this.handleClick}
-            @blur=${this.handleBlur}
-            @focus=${this.handleFocus}
-          />
         </span>
 
         <span part="label" id=${this.labelId} class="checkbox__label">

@@ -3,6 +3,7 @@ import commentParser from 'comment-parser';
 
 const packageData = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
 const { name, description, version, author, homepage, license } = packageData;
+const noDash = string => string.replace(/^\s?-/, '').trim();
 
 export default {
   globs: ['src/components/**/*.ts'],
@@ -47,7 +48,7 @@ export default {
                   }
                   classDoc['animations'].push({
                     name: t.name,
-                    description: t.description
+                    description: noDash(t.description)
                   });
                   break;
 

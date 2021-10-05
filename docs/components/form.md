@@ -8,7 +8,7 @@ All Shoelace components make use of a [shadow DOM](https://developer.mozilla.org
 
 This component solves that problem by serializing _both_ Shoelace form controls and native form controls when the form is submitted. The resulting form data is exposed in the `sl-submit` event as a [`FormData`](https://developer.mozilla.org/en-US/docs/Web/API/FormData) object in `event.detail.formData`. You can also find an array of form controls in `event.detail.formControls`.
 
-Shoelace forms don't make use of `action` and `method` attributes and they don't submit the same was as native forms. To handle submission, you need to listen for the `sl-submit` event as shown in the example below and make an XHR request with the resulting form data.
+Shoelace forms don't make use of `action` and `method` attributes and they don't submit the same way as native forms. To handle submission, you need to listen for the `sl-submit` event as shown in the example below and make an XHR request with the resulting form data.
 
 ```html preview
 <sl-form class="form-overview">
@@ -179,15 +179,15 @@ The `invalid` attribute reflects the form control's validity, so you can style i
 <style>
   .custom-input[invalid]:not([disabled])::part(label),
   .custom-input[invalid]:not([disabled])::part(help-text) {
-    color: var(--sl-color-danger-600);
+    color: rgb(var(--sl-color-danger-600));
   }
 
   .custom-input[invalid]:not([disabled])::part(base) {      
-    border-color: var(--sl-color-danger-500);
+    border-color: rgb(var(--sl-color-danger-500));
   } 
 
-  .custom-input[invalid] {
-    --focus-ring: 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-danger);
+  .custom-input[invalid]:focus-within::part(base) {
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-danger-500) / var(--sl-focus-ring-alpha));
   }
 </style>
 ```

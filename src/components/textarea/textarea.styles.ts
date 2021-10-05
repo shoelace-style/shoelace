@@ -19,45 +19,72 @@ export default css`
     font-weight: var(--sl-input-font-weight);
     line-height: var(--sl-line-height-normal);
     letter-spacing: var(--sl-input-letter-spacing);
-    background-color: var(--sl-input-background-color);
-    border: solid var(--sl-input-border-width) var(--sl-input-border-color);
     vertical-align: middle;
-    transition: var(--sl-transition-fast) color, var(--sl-transition-fast) border, var(--sl-transition-fast) box-shadow;
+    transition: var(--sl-transition-fast) color, var(--sl-transition-fast) border, var(--sl-transition-fast) box-shadow,
+      var(--sl-transition-fast) background-color;
     cursor: text;
   }
 
-  .textarea:hover:not(.textarea--disabled) {
-    background-color: var(--sl-input-background-color-hover);
-    border-color: var(--sl-input-border-color-hover);
-  }
-  .textarea:hover:not(.textarea--disabled) .textarea__control {
-    color: var(--sl-input-color-hover);
+  /* Standard textareas */
+  .textarea--standard {
+    background-color: rgb(var(--sl-input-background-color));
+    border: solid var(--sl-input-border-width) rgb(var(--sl-input-border-color));
   }
 
-  .textarea.textarea--focused:not(.textarea--disabled) {
-    background-color: var(--sl-input-background-color-focus);
-    border-color: var(--sl-input-border-color-focus);
-    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
-    color: var(--sl-input-color-focus);
+  .textarea--standard:hover:not(.textarea--disabled) {
+    background-color: rgb(var(--sl-input-background-color-hover));
+    border-color: rgb(var(--sl-input-border-color-hover));
+  }
+  .textarea--standard:hover:not(.textarea--disabled) .textarea__control {
+    color: rgb(var(--sl-input-color-hover));
   }
 
-  .textarea.textarea--focused:not(.textarea--disabled) .textarea__control {
-    color: var(--sl-input-color-focus);
+  .textarea--standard.textarea--focused:not(.textarea--disabled) {
+    background-color: rgb(var(--sl-input-background-color-focus));
+    border-color: rgb(var(--sl-input-border-color-focus));
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-primary-500) / var(--sl-focus-ring-alpha));
+    color: rgb(var(--sl-input-color-focus));
   }
 
-  .textarea.textarea--disabled {
-    background-color: var(--sl-input-background-color-disabled);
-    border-color: var(--sl-input-border-color-disabled);
+  .textarea--standard.textarea--focused:not(.textarea--disabled) .textarea__control {
+    color: rgb(var(--sl-input-color-focus));
+  }
+
+  .textarea--standard.textarea--disabled {
+    background-color: rgb(var(--sl-input-background-color-disabled));
+    border-color: rgb(var(--sl-input-border-color-disabled));
     opacity: 0.5;
     cursor: not-allowed;
   }
 
-  .textarea.textarea--disabled .textarea__control {
-    color: var(--sl-input-color-disabled);
+  .textarea--standard.textarea--disabled .textarea__control {
+    color: rgb(var(--sl-input-color-disabled));
   }
 
-  .textarea.textarea--disabled .textarea__control::placeholder {
-    color: var(--sl-input-placeholder-color-disabled);
+  .textarea--standard.textarea--disabled .textarea__control::placeholder {
+    color: rgb(var(--sl-input-placeholder-color-disabled));
+  }
+
+  /* Filled textareas */
+  .textarea--filled {
+    border: none;
+    background-color: rgb(var(--sl-input-filled-background-color));
+    color: rgb(var(--sl-input-color));
+  }
+
+  .textarea--filled:hover:not(.textarea--disabled) {
+    background-color: rgb(var(--sl-input-filled-background-color-hover));
+  }
+
+  .textarea--filled.textarea--focused:not(.textarea--disabled) {
+    background-color: rgb(var(--sl-input-filled-background-color-focus));
+    box-shadow: var(--sl-focus-ring);
+  }
+
+  .textarea--filled.textarea--disabled {
+    background-color: rgb(var(--sl-input-filled-background-color-disabled));
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 
   .textarea__control {
@@ -66,7 +93,7 @@ export default css`
     font-size: inherit;
     font-weight: inherit;
     line-height: 1.4;
-    color: var(--sl-input-color);
+    color: rgb(var(--sl-input-color));
     border: none;
     background: none;
     box-shadow: none;
@@ -82,7 +109,7 @@ export default css`
   }
 
   .textarea__control::placeholder {
-    color: var(--sl-input-placeholder-color);
+    color: rgb(var(--sl-input-placeholder-color));
     user-select: none;
   }
 

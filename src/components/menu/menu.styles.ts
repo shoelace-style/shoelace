@@ -11,7 +11,8 @@ export default css`
   .menu {
     padding: var(--sl-spacing-x-small) 0;
   }
-  .menu:focus {
-    outline: none;
+
+  ::slotted(sl-divider) {
+    --spacing: var(--sl-spacing-x-small);
   }
 `;

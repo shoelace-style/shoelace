@@ -2,12 +2,12 @@
 <div class="splash-start">
 <img class="splash-logo" src="/assets/images/wordmark.svg" alt="Shoelace">
 
-**A forward-thinking library of web components.**
+# <span hidden>Shoelace:</span> A forward-thinking library of web components.
 
 - Works with all frameworks 🧩
 - Works with CDNs 🚛
 - Fully customizable with CSS 🎨
-- Includes an official dark theme 🌛
+- Includes a dark theme 🌛
 - Built with accessibility in mind ♿️
 - First-party [React wrappers](/getting-started/usage#react)
 - Open source 😸
@@ -19,19 +19,19 @@ Designed in New Hampshire by [Cory LaViska](https://twitter.com/claviska).
 </div>
 </div>
 
-[![jsDelivr](https://data.jsdelivr.com/v1/package/npm/@shoelace-style/shoelace/badge?style=rounded)](https://www.jsdelivr.com/package/npm/@shoelace-style/shoelace)
-[![npm](https://img.shields.io/npm/dw/@shoelace-style/shoelace?label=npm)](https://www.npmjs.com/package/@shoelace-style/shoelace)
-[![License](https://img.shields.io/badge/license-MIT-232323.svg?style=flat)](https://github.com/shoelace-style/shoelace/blob/next/LICENSE.md)<br>
-[![Discord](https://img.shields.io/badge/Discord-Join%20the%20chat-7289da.svg?style=flat&logo=discord)](https://discord.gg/mg8f26C)
-[![Twitter](https://img.shields.io/badge/Twitter-Follow-00acee.svg?style=flat&logo=twitter)](https://twitter.com/shoelace_style)
-[![Sponsor](https://img.shields.io/badge/Sponsor-%E2%9D%A4-232323.svg?style=flat&logo=github)](https://github.com/sponsors/claviska)
+[![jsDelivr](https://data.jsdelivr.com/v1/package/npm/@shoelace-style/shoelace/badge)](https://www.jsdelivr.com/package/npm/@shoelace-style/shoelace)
+[![npm](https://img.shields.io/npm/dw/@shoelace-style/shoelace?label=npm&style=flat-square)](https://www.npmjs.com/package/@shoelace-style/shoelace)
+[![License](https://img.shields.io/badge/license-MIT-232323.svg?style=flat-square)](https://github.com/shoelace-style/shoelace/blob/next/LICENSE.md)<br>
+[![Discord](https://img.shields.io/badge/Discord-Join%20the%20chat-5965f2.svg?style=flat-square&logo=discord&logoColor=white)](https://discord.gg/mg8f26C)
+[![Twitter](https://img.shields.io/badge/Twitter-Follow-00acee.svg?style=flat-square&logo=twitter&logoColor=white)](https://twitter.com/shoelace_style)
+[![Sponsor](https://img.shields.io/badge/GitHub-Code-232323.svg?style=flat-square&logo=github&logoColor=white)](https://github.com/shoelace-style/shoelace)
 
 ## Quick Start
 
 Add the following code to your page.
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/themes/base.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/themes/light.css">
 <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/shoelace.js"></script>
 ```
 
@@ -93,23 +93,21 @@ If you need to support IE11 or pre-Chromium Edge, this library isn't for you. Al
 
 Shoelace is designed in New Hampshire by [Cory LaViska](https://twitter.com/claviska). It's available under the terms of the MIT license.
 
-Designing, developing, and supporting this library requires a lot of time, effort, and skill. I'd like to keep it open source so everyone can use it, but that doesn't provide me with any income. 
-
-**Therefore, if you're using my software to make a profit,** I respectfully ask that you help [fund its development](https://github.com/sponsors/claviska) by becoming a sponsor. There are multiple tiers to choose from with benefits at every level, including prioritized support, bug fixes, feature requests, and advertising.
+Designing, developing, and supporting this library requires a lot of time, effort, and skill. If you're using this software to make a profit, I respectfully ask that you help [fund its development](https://github.com/sponsors/claviska) by becoming a sponsor.
 
 👇 Your support is very much appreciated! 👇
 
-<a class="repo-button repo-button--sponsor" href="https://github.com/sponsors/claviska" rel="noopener" target="_blank">
+<sl-button class="repo-button repo-button--sponsor" href="https://github.com/sponsors/claviska" target="_blank">
   <sl-icon name="heart"></sl-icon> Become a sponsor
-</a>
+</sl-button>
 
-<a class="repo-button repo-button--github" href="https://github.com/shoelace-style/shoelace/stargazers" rel="noopener" target="_blank">
+<sl-button class="repo-button repo-button--github" href="https://github.com/shoelace-style/shoelace/stargazers" target="_blank">
   <sl-icon name="github"></sl-icon> <span class="github-star-count">Star</span>
-</a>
+</sl-button>
 
-<a class="repo-button repo-button--twitter" href="https://twitter.com/shoelace_style" rel="noopener" target="_blank">
+<sl-button class="repo-button repo-button--twitter" href="https://twitter.com/shoelace_style" target="_blank">
   <sl-icon name="twitter"></sl-icon> Follow
-</a>
+</sl-button>
 
 ## Attribution
 
@@ -119,10 +117,11 @@ Special thanks to the following projects and individuals that help make Shoelace
 - Component metadata is generated by the [Custom Elements Manifest Analyzer](https://github.com/open-wc/custom-elements-manifest)
 - Documentation is powered by [Docsify](https://docsify.js.org/)
 - CDN services are provided by [jsDelivr](https://www.jsdelivr.com/)
-- The default theme is based on color palettes from [Tailwind](https://tailwindcss.com/)
+- Color primitives are derived from [Tailwind](https://tailwindcss.com/)
 - Icons are courtesy of [Bootstrap Icons](https://icons.getbootstrap.com/)
 - The homepage illustration is courtesy of [unDraw](https://undraw.co/)
 - Positioning of menus, tooltips, et al is handled by [Popper.js](https://popper.js.org/)
 - Animations are courtesy of [animate.css](https://animate.style/)
 - QR codes are generated with [qr-creator](https://github.com/nimiq/qr-creator)
+- Search is powered by [Lunr](https://lunrjs.com/)
 - The Shoelace logo was designed with a single shoelace by [Adam K Olson](https://twitter.com/adamkolson)

@@ -1,6 +1,6 @@
 # Community
 
-Shoelace has a budding community of designers and developers that are building amazing things with web components. We'd love for you to become a part of it!
+Shoelace has a growing community of designers and developers that are building amazing things with web components. We'd love for you to become a part of it!
 
 Please be respectful of other users and remember that Shoelace is an open source project. We'll try to help when we can, but there's no guarantee we'll be able solve your problem. Please manage your expectations and don't forget to contribute back to the conversation when you can!
 

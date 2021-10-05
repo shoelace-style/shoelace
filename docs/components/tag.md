@@ -7,7 +7,7 @@ Tags are used as labels to organize things or to indicate a selection.
 ```html preview
 <sl-tag type="primary">Primary</sl-tag>
 <sl-tag type="success">Success</sl-tag>
-<sl-tag type="info">Info</sl-tag>
+<sl-tag type="neutral">Neutral</sl-tag>
 <sl-tag type="warning">Warning</sl-tag>
 <sl-tag type="danger">Danger</sl-tag>
 ```

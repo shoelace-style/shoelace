@@ -13,7 +13,7 @@ export default css`
   .form-control--has-label .form-control__label {
     display: inline-block;
     color: var(--sl-input-label-color);
-    margin-bottom: var(--sl-spacing-xxx-small);
+    margin-bottom: var(--sl-spacing-3x-small);
   }
 
   .form-control--has-label.form-control--small .form-control__label {
@@ -31,11 +31,11 @@ export default css`
   /* Help text */
   .form-control--has-help-text .form-control__help-text {
     display: block;
-    color: var(--sl-input-help-text-color);
+    color: rgb(var(--sl-input-help-text-color));
   }
 
   .form-control--has-help-text .form-control__help-text ::slotted(*) {
-    margin-top: var(--sl-spacing-xxx-small);
+    margin-top: var(--sl-spacing-3x-small);
   }
 
   .form-control--has-help-text.form-control--small .form-control__help-text {

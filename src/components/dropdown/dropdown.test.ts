@@ -6,7 +6,7 @@ import type SlDropdown from './dropdown';
 
 describe('<sl-dropdown>', () => {
   it('should be visible with the open attribute', async () => {
-    const el = await fixture(html`
+    const el = await fixture<SlDropdown>(html`
       <sl-dropdown open>
         <sl-button slot="trigger" caret>Toggle</sl-button>
         <sl-menu>
@@ -22,7 +22,7 @@ describe('<sl-dropdown>', () => {
   });
 
   it('should not be visible without the open attribute', async () => {
-    const el = await fixture(html`
+    const el = await fixture<SlDropdown>(html`
       <sl-dropdown>
         <sl-button slot="trigger" caret>Toggle</sl-button>
         <sl-menu>
@@ -38,7 +38,7 @@ describe('<sl-dropdown>', () => {
   });
 
   it('should emit sl-show and sl-after-show when calling show()', async () => {
-    const el = (await fixture(html`
+    const el = await fixture<SlDropdown>(html`
       <sl-dropdown>
         <sl-button slot="trigger" caret>Toggle</sl-button>
         <sl-menu>
@@ -47,7 +47,7 @@ describe('<sl-dropdown>', () => {
           <sl-menu-item>Item 3</sl-menu-item>
         </sl-menu>
       </sl-dropdown>
-    `)) as SlDropdown;
+    `);
     const panel = el.shadowRoot?.querySelector('[part="panel"]') as HTMLElement;
     const showHandler = sinon.spy();
     const afterShowHandler = sinon.spy();
@@ -65,7 +65,7 @@ describe('<sl-dropdown>', () => {
   });
 
   it('should emit sl-hide and sl-after-hide when calling hide()', async () => {
-    const el = (await fixture(html`
+    const el = await fixture<SlDropdown>(html`
       <sl-dropdown open>
         <sl-button slot="trigger" caret>Toggle</sl-button>
         <sl-menu>
@@ -74,7 +74,7 @@ describe('<sl-dropdown>', () => {
           <sl-menu-item>Item 3</sl-menu-item>
         </sl-menu>
       </sl-dropdown>
-    `)) as SlDropdown;
+    `);
     const panel = el.shadowRoot?.querySelector('[part="panel"]') as HTMLElement;
     const hideHandler = sinon.spy();
     const afterHideHandler = sinon.spy();
@@ -92,7 +92,7 @@ describe('<sl-dropdown>', () => {
   });
 
   it('should emit sl-show and sl-after-show when setting open = true', async () => {
-    const el = (await fixture(html`
+    const el = await fixture<SlDropdown>(html`
       <sl-dropdown>
         <sl-button slot="trigger" caret>Toggle</sl-button>
         <sl-menu>
@@ -101,7 +101,7 @@ describe('<sl-dropdown>', () => {
           <sl-menu-item>Item 3</sl-menu-item>
         </sl-menu>
       </sl-dropdown>
-    `)) as SlDropdown;
+    `);
     const panel = el.shadowRoot?.querySelector('[part="panel"]') as HTMLElement;
     const showHandler = sinon.spy();
     const afterShowHandler = sinon.spy();
@@ -119,7 +119,7 @@ describe('<sl-dropdown>', () => {
   });
 
   it('should emit sl-hide and sl-after-hide when setting open = false', async () => {
-    const el = (await fixture(html`
+    const el = await fixture<SlDropdown>(html`
       <sl-dropdown open>
         <sl-button slot="trigger" caret>Toggle</sl-button>
         <sl-menu>
@@ -128,7 +128,7 @@ describe('<sl-dropdown>', () => {
           <sl-menu-item>Item 3</sl-menu-item>
         </sl-menu>
       </sl-dropdown>
-    `)) as SlDropdown;
+    `);
     const panel = el.shadowRoot?.querySelector('[part="panel"]') as HTMLElement;
     const hideHandler = sinon.spy();
     const afterHideHandler = sinon.spy();

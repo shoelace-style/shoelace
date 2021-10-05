@@ -23,7 +23,7 @@ Twitter: [@shoelace_style](https://twitter.com/shoelace_style)
 
 ## Shoemakers 🥾
 
-Shoemakers, or "Shoelace developers," can use this documentation to learn how to build Shoelace from source. You will need Node >= 12.10.0 to build and run the project locally.
+Shoemakers, or "Shoelace developers," can use this documentation to learn how to build Shoelace from source. You will need Node >= 14 to build and run the project locally. It is preferred, but not required, to use npm 7.
 
 **You don't need to do any of this to use Shoelace!** This page is for people who want to contribute to the project, tinker with the source, or create a custom build of Shoelace.
 

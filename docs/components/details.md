@@ -57,7 +57,7 @@ Details are designed to function independently, but you can simulate a group or 
 
 <style>
   .details-group-example sl-details:not(:last-of-type) {
-    margin-bottom: var(--sl-spacing-xx-small);
+    margin-bottom: var(--sl-spacing-2x-small);
   }
 </style>
 ```

@@ -15,16 +15,16 @@ export default css`
     position: relative;
     display: flex;
     align-items: stretch;
-    background-color: var(--sl-color-white);
-    border: solid 1px var(--sl-color-gray-200);
-    border-top-width: 3px;
+    background-color: rgb(var(--sl-surface-base-alt));
+    border: solid var(--sl-panel-border-width) rgb(var(--sl-panel-border-color));
+    border-top-width: calc(var(--sl-panel-border-width) * 3);
     border-radius: var(--sl-border-radius-medium);
     box-shadow: var(--box-shadow);
     font-family: var(--sl-font-sans);
     font-size: var(--sl-font-size-small);
     font-weight: var(--sl-font-weight-normal);
     line-height: 1.6;
-    color: var(--sl-color-gray-700);
+    color: rgb(var(--sl-color-neutral-700));
     margin: inherit;
   }
 
@@ -40,43 +40,43 @@ export default css`
   }
 
   .alert--primary {
-    border-top-color: var(--sl-color-primary-500);
+    border-top-color: rgb(var(--sl-color-primary-600));
   }
 
   .alert--primary .alert__icon {
-    color: var(--sl-color-primary-500);
+    color: rgb(var(--sl-color-primary-600));
   }
 
   .alert--success {
-    border-top-color: var(--sl-color-success-500);
+    border-top-color: rgb(var(--sl-color-success-600));
   }
 
   .alert--success .alert__icon {
-    color: var(--sl-color-success-500);
+    color: rgb(var(--sl-color-success-600));
   }
 
-  .alert--info {
-    border-top-color: var(--sl-color-info-500);
+  .alert--neutral {
+    border-top-color: rgb(var(--sl-color-neutral-600));
   }
 
-  .alert--info .alert__icon {
-    color: var(--sl-color-info-500);
+  .alert--neutral .alert__icon {
+    color: rgb(var(--sl-color-neutral-600));
   }
 
   .alert--warning {
-    border-top-color: var(--sl-color-warning-500);
+    border-top-color: rgb(var(--sl-color-warning-600));
   }
 
   .alert--warning .alert__icon {
-    color: var(--sl-color-warning-500);
+    color: rgb(var(--sl-color-warning-600));
   }
 
   .alert--danger {
-    border-top-color: var(--sl-color-danger-500);
+    border-top-color: rgb(var(--sl-color-danger-600));
   }
 
   .alert--danger .alert__icon {
-    color: var(--sl-color-danger-500);
+    color: rgb(var(--sl-color-danger-600));
   }
 
   .alert__message {

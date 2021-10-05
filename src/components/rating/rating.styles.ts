@@ -1,14 +1,15 @@
 import { css } from 'lit';
 import componentStyles from '../../styles/component.styles';
+import { focusVisibleSelector } from '../../internal/focus-visible';
 
 export default css`
   ${componentStyles}
 
   :host {
-    --symbol-color: var(--sl-color-gray-300);
-    --symbol-color-active: #ffbe00;
+    --symbol-color: rgb(var(--sl-color-neutral-300));
+    --symbol-color-active: rgb(var(--sl-color-amber-500));
     --symbol-size: 1.2rem;
-    --symbol-spacing: var(--sl-spacing-xxx-small);
+    --symbol-spacing: var(--sl-spacing-3x-small);
 
     display: inline-flex;
   }
@@ -24,8 +25,8 @@ export default css`
     outline: none;
   }
 
-  .rating.focus-visible:focus {
-    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
+  .rating${focusVisibleSelector} {
+    box-shadow: var(--sl-focus-ring);
   }
 
   .rating__symbols {

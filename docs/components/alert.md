@@ -36,7 +36,7 @@ Set the `type` attribute to change the alert's type.
 
 <br>
 
-<sl-alert type="info" open>
+<sl-alert type="neutral" open>
   <sl-icon slot="icon" name="gear"></sl-icon>
   <strong>Your settings have been updated</strong><br>
   Settings will take affect on next login.
@@ -126,7 +126,7 @@ You should always use the `closable` attribute so users can dismiss the notifica
 <div class="alert-toast">
   <sl-button type="primary">Primary</sl-button>
   <sl-button type="success">Success</sl-button>
-  <sl-button type="info">Info</sl-button>
+  <sl-button type="neutral">Neutral</sl-button>
   <sl-button type="warning">Warning</sl-button>
   <sl-button type="danger">Danger</sl-button>
   
@@ -142,7 +142,7 @@ You should always use the `closable` attribute so users can dismiss the notifica
     You can safely exit the app now.
   </sl-alert>
 
-  <sl-alert type="info" duration="3000" closable>
+  <sl-alert type="neutral" duration="3000" closable>
     <sl-icon slot="icon" name="gear"></sl-icon>
     <strong>Your settings have been updated</strong><br>
     Settings will take affect on next login.
@@ -164,7 +164,7 @@ You should always use the `closable` attribute so users can dismiss the notifica
 <script>
   const container = document.querySelector('.alert-toast');
 
-  ['primary', 'success', 'info', 'warning', 'danger'].map(type => {
+  ['primary', 'success', 'neutral', 'warning', 'danger'].map(type => {
     const button = container.querySelector(`sl-button[type="${type}"]`);
     const alert = container.querySelector(`sl-alert[type="${type}"]`);
 

@@ -30,9 +30,9 @@ export default css`
     flex-direction: column;
     z-index: 2;
     width: var(--width);
-    max-width: calc(100% - var(--sl-spacing-xx-large));
-    max-height: calc(100% - var(--sl-spacing-xx-large));
-    background-color: var(--sl-panel-background-color);
+    max-width: calc(100% - var(--sl-spacing-2x-large));
+    max-height: calc(100% - var(--sl-spacing-2x-large));
+    background-color: rgb(var(--sl-panel-background-color));
     border-radius: var(--sl-border-radius-medium);
     box-shadow: var(--sl-shadow-x-large);
   }
@@ -101,6 +101,6 @@ export default css`
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: var(--sl-overlay-background-color);
+    background-color: rgb(var(--sl-overlay-background-color) / var(--sl-overlay-opacity));
   }
 `;

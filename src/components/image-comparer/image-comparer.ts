@@ -1,6 +1,6 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
-import { styleMap } from 'lit-html/directives/style-map';
+import { styleMap } from 'lit/directives/style-map.js';
 import { clamp } from '../../internal/math';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
@@ -70,7 +70,6 @@ export default class SlImageComparer extends LitElement {
       document.addEventListener('touchend', stop);
     }
 
-    this.handle.focus();
     event.preventDefault();
 
     drag(event, this.base, x => {

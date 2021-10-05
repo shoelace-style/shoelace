@@ -1,6 +1,6 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
-import { classMap } from 'lit-html/directives/class-map';
+import { classMap } from 'lit/directives/class-map.js';
 import { Instance as PopperInstance, createPopper } from '@popperjs/core/dist/esm';
 import { animateTo, stopAnimations } from '../../internal/animate';
 import { emit } from '../../internal/event';
@@ -79,7 +79,7 @@ export default class SlDropdown extends LitElement {
   @property({ attribute: false }) containingElement: HTMLElement;
 
   /** The distance in pixels from which to offset the panel away from its trigger. */
-  @property({ type: Number }) distance = 2;
+  @property({ type: Number }) distance = 0;
 
   /** The distance in pixels from which to offset the panel along its trigger. */
   @property({ type: Number }) skidding = 0;

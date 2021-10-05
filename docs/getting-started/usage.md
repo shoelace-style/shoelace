@@ -145,13 +145,12 @@ Fortunately, there's a package called [@shoelace-style/react](https://www.npmjs.
 npm install @shoelace-style/react
 ```
 
-Include the base theme and any components you want to use in your app.
+Include the default theme and any components you want to use in your app.
 
 ```jsx
-import '@shoelace-style/shoelace/dist/themes/base.css';
+import '@shoelace-style/shoelace/dist/themes/light.css';
 
 import SlButton from '@shoelace-style/react/dist/button';
-import SlSpinner from '@shoelace-style/react/dist/spinner';
 
 // ...
 
@@ -169,9 +168,14 @@ const MyComponent = (props) => {
 Vue [plays nice](https://custom-elements-everywhere.com/#vue) with custom elements. You just have to tell it to ignore Shoelace components. This is pretty easy because they all start with `sl-`.
 
 ```js
-Vue.config.ignoredElements = [/^sl-/];
+import { createApp } from 'vue';
+import App from './App.vue';
 
-new Vue({ ... });
+const app = createApp(App);
+
+app.config.compilerOptions.isCustomElement = tag => tag.startsWith('sl-');
+
+app.mount('#app');
 ```
 
 ### Binding Complex Data
@@ -198,7 +202,7 @@ If that's too verbose, you can use a custom directive instead.
 
 ### Using a Custom Directive
 
-You can use [this utility](https://www.npmjs.com/package/@shoelace-style/vue-sl-model) to add a custom directive to Vue that will work just like `v-model` but for Shoelace components. To install it, use this command.
+You can use [this utility](https://www.npmjs.com/package/@shoelace-style/vue-sl-model) to add a custom directive that will work just like `v-model` but for Shoelace components. To install it, use this command.
 
 ```bash
 npm install @shoelace-style/vue-sl-model
@@ -208,12 +212,15 @@ Next, import the directive and enable it like this.
 
 ```js
 import ShoelaceModelDirective from '@shoelace-style/vue-sl-model';
+import { createApp } from 'vue';
+import App from './App.vue';
 
-Vue.config.ignoredElements = [/^sl-/];
-Vue.use(ShoelaceModelDirective);
+const app = createApp(App);
+app.use(ShoelaceModelDirective);
 
-// Your init here
-new Vue({ ... });
+app.config.compilerOptions.isCustomElement = tag => tag.startsWith('sl-');
+
+app.mount('#app');
 ```
 
 Now you can use the `v-sl-model` directive to keep your data in sync!

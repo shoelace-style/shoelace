@@ -1,8 +1,9 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
-import { classMap } from 'lit-html/directives/class-map';
-import { ifDefined } from 'lit-html/directives/if-defined';
+import { classMap } from 'lit/directives/class-map.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { emit } from '../../internal/event';
+import { live } from 'lit/directives/live.js';
 import { watch } from '../../internal/watch';
 import { getLabelledBy, renderFormControl } from '../../internal/form-control';
 import { hasSlot } from '../../internal/slot';
@@ -51,6 +52,9 @@ export default class SlTextarea extends LitElement {
 
   /** The textarea's value attribute. */
   @property() value = '';
+
+  /** Draws a filled textarea. */
+  @property({ type: Boolean, reflect: true }) filled = false;
 
   /** The textarea's label. Alternatively, you can use the label slot. */
   @property() label: string;
@@ -296,9 +300,11 @@ export default class SlTextarea extends LitElement {
             'textarea--small': this.size === 'small',
             'textarea--medium': this.size === 'medium',
             'textarea--large': this.size === 'large',
+            'textarea--standard': !this.filled,
+            'textarea--filled': this.filled,
             'textarea--disabled': this.disabled,
             'textarea--focused': this.hasFocus,
-            'textarea--empty': this.value.length === 0,
+            'textarea--empty': this.value?.length === 0,
             'textarea--invalid': this.invalid,
             'textarea--resize-none': this.resize === 'none',
             'textarea--resize-vertical': this.resize === 'vertical',
@@ -310,7 +316,7 @@ export default class SlTextarea extends LitElement {
             id=${this.inputId}
             class="textarea__control"
             name=${ifDefined(this.name)}
-            .value=${this.value}
+            .value=${live(this.value)}
             ?disabled=${this.disabled}
             ?readonly=${this.readonly}
             ?required=${this.required}

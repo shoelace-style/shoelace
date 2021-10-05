@@ -9,7 +9,7 @@ export default css`
   }
 
   .radio-group {
-    border: solid var(--sl-input-border-width) var(--sl-input-border-color);
+    border: solid var(--sl-panel-border-width) rgb(var(--sl-panel-border-color));
     border-radius: var(--sl-border-radius-medium);
     padding: var(--sl-spacing-large);
     padding-top: var(--sl-spacing-x-small);
@@ -19,23 +19,23 @@ export default css`
     font-family: var(--sl-input-font-family);
     font-size: var(--sl-input-font-size-medium);
     font-weight: var(--sl-input-font-weight);
-    color: var(--sl-input-color);
-    padding: 0 var(--sl-spacing-xx-small);
+    color: rgb(var(--sl-input-color));
+    padding: 0 var(--sl-spacing-2x-small);
   }
 
   ::slotted(sl-radio:not(:last-of-type)) {
     display: block;
-    margin-bottom: var(--sl-spacing-xx-small);
+    margin-bottom: var(--sl-spacing-2x-small);
   }
 
-  .radio-group--no-fieldset {
+  .radio-group:not(.radio-group--has-fieldset) {
     border: none;
     padding: 0;
     margin: 0;
     min-width: 0;
   }
 
-  .radio-group--no-fieldset .radio-group__label {
+  .radio-group:not(.radio-group--has-fieldset) .radio-group__label {
     position: absolute;
     width: 0;
     height: 0;

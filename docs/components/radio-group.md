@@ -14,12 +14,12 @@ Radio Groups are used to group multiple radios so they function as a single cont
 
 ## Examples
 
-### Hiding the Fieldset
+### Showing the Fieldset
 
-You can hide the fieldset and legend that wraps the radio group using the `no-fieldset` attribute. In this case, a label is still required for assistive devices to properly identify the control.
+You can show a fieldset and legend that wraps the radio group using the `fieldset` attribute.
 
 ```html preview
-<sl-radio-group label="Select an item" no-fieldset>
+<sl-radio-group label="Select an item" fieldset>
   <sl-radio value="1" checked>Item 1</sl-radio>
   <sl-radio value="2">Item 2</sl-radio>
   <sl-radio value="3">Item 3</sl-radio>

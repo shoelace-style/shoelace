@@ -1,7 +1,7 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
-import { classMap } from 'lit-html/directives/class-map';
-import { ifDefined } from 'lit-html/directives/if-defined';
+import { classMap } from 'lit/directives/class-map.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { animateTo, stopAnimations } from '../../internal/animate';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
@@ -30,9 +30,9 @@ let id = 0;
  * @slot footer - The dialog's footer, usually one or more buttons representing various options.
  *
  * @event sl-show - Emitted when the dialog opens.
- * @event sl-after-show - Emitted after the dialog opens and all transitions are complete.
+ * @event sl-after-show - Emitted after the dialog opens and all animations are complete.
  * @event sl-hide - Emitted when the dialog closes.
- * @event sl-after-hide - Emitted after the dialog closes and all transitions are complete.
+ * @event sl-after-hide - Emitted after the dialog closes and all animations are complete.
  * @event sl-initial-focus - Emitted when the dialog opens and the panel gains focus. Calling `event.preventDefault()`
  *   will prevent focus and allow you to set it on a different element in the dialog, such as an input or button.
  * @event sl-request-close - Emitted when the user attempts to close the dialog by clicking the close button, clicking the

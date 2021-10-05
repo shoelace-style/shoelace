@@ -1,6 +1,6 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
-import { classMap } from 'lit-html/directives/class-map';
+import { classMap } from 'lit/directives/class-map.js';
 import { watch } from '../../internal/watch';
 import styles from './menu-item.styles';
 
@@ -61,9 +61,13 @@ export default class SlMenuItem extends LitElement {
           'menu-item--disabled': this.disabled
         })}
       >
-        <span part="checked-icon" class="menu-item__check">
-          <sl-icon name="check" library="system" aria-hidden="true"></sl-icon>
-        </span>
+        <sl-icon
+          part="checked-icon"
+          class="menu-item__check"
+          name="check"
+          library="system"
+          aria-hidden="true"
+        ></sl-icon>
 
         <span part="prefix" class="menu-item__prefix">
           <slot name="prefix"></slot>

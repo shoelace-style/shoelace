@@ -69,9 +69,9 @@ Use the `disable` attribute to disable the rating.
 <script>
   const rating = document.querySelector('.rating-emojis');
 
-  rating.symbol = (value) => {
+  rating.getSymbol = (value) => {
     const icons = ['emoji-angry', 'emoji-frown', 'emoji-expressionless', 'emoji-smile', 'emoji-laughing'];
-    return icons[value - 1];
+    return `<sl-icon name="${icons[value - 1]}"></sl-icon>`;
   };
 </script>
 ```

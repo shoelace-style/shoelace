@@ -1,7 +1,8 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
-import { classMap } from 'lit-html/directives/class-map';
-import { ifDefined } from 'lit-html/directives/if-defined';
+import { classMap } from 'lit/directives/class-map.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { live } from 'lit/directives/live.js';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import styles from './radio.styles';
@@ -83,7 +84,7 @@ export default class SlRadio extends LitElement {
 
     // Radios must be part of a radio group
     if (!radioGroup) {
-      return [];
+      return [this];
     }
 
     return [...radioGroup.querySelectorAll('sl-radio')].filter((radio: this) => radio.name === this.name) as this[];
@@ -103,11 +104,11 @@ export default class SlRadio extends LitElement {
     if (this.checked) {
       this.getSiblingRadios().map(radio => (radio.checked = false));
     }
-    emit(this, 'sl-change');
   }
 
   handleClick() {
     this.checked = true;
+    emit(this, 'sl-change');
   }
 
   @watch('disabled')
@@ -140,12 +141,6 @@ export default class SlRadio extends LitElement {
     }
   }
 
-  handleMouseDown(event: MouseEvent) {
-    // Prevent clicks on the label from briefly blurring the input
-    event.preventDefault();
-    this.input.focus();
-  }
-
   render() {
     return html`
       <label
@@ -158,8 +153,23 @@ export default class SlRadio extends LitElement {
         })}
         for=${this.inputId}
         @keydown=${this.handleKeyDown}
-        @mousedown=${this.handleMouseDown}
       >
+        <input
+          id=${this.inputId}
+          class="radio__input"
+          type="radio"
+          name=${ifDefined(this.name)}
+          value=${ifDefined(this.value)}
+          .checked=${live(this.checked)}
+          .disabled=${this.disabled}
+          aria-checked=${this.checked ? 'true' : 'false'}
+          aria-disabled=${this.disabled ? 'true' : 'false'}
+          aria-labelledby=${this.labelId}
+          @click=${this.handleClick}
+          @blur=${this.handleBlur}
+          @focus=${this.handleFocus}
+        />
+
         <span part="control" class="radio__control">
           <span part="checked-icon" class="radio__icon">
             <svg viewBox="0 0 16 16">
@@ -170,21 +180,6 @@ export default class SlRadio extends LitElement {
               </g>
             </svg>
           </span>
-
-          <input
-            id=${this.inputId}
-            type="radio"
-            name=${ifDefined(this.name)}
-            value=${ifDefined(this.value)}
-            .checked=${this.checked}
-            .disabled=${this.disabled}
-            aria-checked=${this.checked ? 'true' : 'false'}
-            aria-disabled=${this.disabled ? 'true' : 'false'}
-            aria-labelledby=${this.labelId}
-            @click=${this.handleClick}
-            @blur=${this.handleBlur}
-            @focus=${this.handleFocus}
-          />
         </span>
 
         <span part="label" id=${this.labelId} class="radio__label">

@@ -1,5 +1,6 @@
 import { css } from 'lit';
 import componentStyles from '../../styles/component.styles';
+import { focusVisibleSelector } from '../../internal/focus-visible';
 
 export default css`
   ${componentStyles}
@@ -48,7 +49,7 @@ export default css`
     top: 0;
     width: var(--divider-width);
     height: 100%;
-    background-color: var(--sl-color-white);
+    background-color: rgb(var(--sl-color-neutral-0));
     transform: translateX(calc(var(--divider-width) / -2));
     cursor: ew-resize;
   }
@@ -61,17 +62,16 @@ export default css`
     top: calc(50% - (var(--handle-size) / 2));
     width: var(--handle-size);
     height: var(--handle-size);
-    background-color: var(--sl-color-white);
+    background-color: rgb(var(--sl-color-neutral-0));
     border-radius: var(--sl-border-radius-circle);
     font-size: calc(var(--handle-size) * 0.5);
-    color: var(--sl-color-gray-500);
+    color: rgb(var(--sl-color-neutral-500));
     cursor: inherit;
     z-index: 10;
   }
 
-  .image-comparer__handle:focus {
+  .image-comparer__handle${focusVisibleSelector} {
     outline: none;
-    box-shadow: 0 0 0 1px var(--sl-color-primary-500),
-      0 0 0 var(--sl-focus-ring-width) var(--sl-focus-ring-color-primary);
+    box-shadow: var(--sl-focus-ring);
   }
 `;

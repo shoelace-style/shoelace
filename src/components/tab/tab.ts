@@ -1,6 +1,6 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
-import { classMap } from 'lit-html/directives/class-map';
+import { classMap } from 'lit/directives/class-map.js';
 import { emit } from '../../internal/event';
 import styles from './tab.styles';
 
@@ -20,8 +20,6 @@ let id = 0;
  *
  * @csspart base - The component's base wrapper.
  * @csspart close-button - The close button, which is the icon button's base wrapper.
- *
- * @cssproperty --focus-ring - The focus ring's box shadow.
  */
 @customElement('sl-tab')
 export default class SlTab extends LitElement {

@@ -1,9 +1,8 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
-import { classMap } from 'lit-html/directives/class-map';
+import { classMap } from 'lit/directives/class-map.js';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
-import { focusVisible } from '../../internal/focus-visible';
 import { getOffset } from '../../internal/offset';
 import { scrollIntoView } from '../../internal/scroll';
 import type SlTab from '../tab/tab';
@@ -31,7 +30,8 @@ import '../icon-button/icon-button';
  * @csspart body - The tab group body where tab panels are slotted in.
  * @csspart scroll-button - The previous and next scroll buttons that appear when tabs are scrollable.
  *
- * @cssproperty --tabs-border-color - The color of the border that separates tabs.
+ * @cssproperty --indicator-color - The color of the active tab indicator.
+ * @cssproperty --track-color - The color of the indicator's track (i.e. the line that separates tabs from panels).
  */
 @customElement('sl-tab-group')
 export default class SlTabGroup extends LitElement {
@@ -87,7 +87,6 @@ export default class SlTabGroup extends LitElement {
       this.syncTabsAndPanels();
       this.mutationObserver.observe(this, { attributes: true, childList: true, subtree: true });
       this.resizeObserver.observe(this.nav);
-      focusVisible.observe(this.tabGroup);
 
       // Set initial tab state when the tabs first become visible
       const intersectionObserver = new IntersectionObserver((entries, observer) => {
@@ -104,7 +103,6 @@ export default class SlTabGroup extends LitElement {
   disconnectedCallback() {
     this.mutationObserver.disconnect();
     this.resizeObserver.unobserve(this.nav);
-    focusVisible.unobserve(this.tabGroup);
   }
 
   /** Shows the specified tab panel. */
@@ -181,9 +179,15 @@ export default class SlTabGroup extends LitElement {
           index = 0;
         } else if (event.key === 'End') {
           index = this.tabs.length - 1;
-        } else if (event.key === 'ArrowLeft') {
+        } else if (
+          (['top', 'bottom'].includes(this.placement) && event.key === 'ArrowLeft') ||
+          (['start', 'end'].includes(this.placement) && event.key === 'ArrowUp')
+        ) {
           index = Math.max(0, index - 1);
-        } else if (event.key === 'ArrowRight') {
+        } else if (
+          (['top', 'bottom'].includes(this.placement) && event.key === 'ArrowRight') ||
+          (['start', 'end'].includes(this.placement) && event.key === 'ArrowDown')
+        ) {
           index = Math.min(this.tabs.length - 1, index + 1);
         }
 

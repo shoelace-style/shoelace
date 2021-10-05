@@ -1,6 +1,6 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
-import { classMap } from 'lit-html/directives/class-map';
+import { classMap } from 'lit/directives/class-map.js';
 import type SlRadio from '../radio/radio';
 import styles from './radio-group.styles';
 
@@ -23,18 +23,20 @@ export default class SlRadioGroup extends LitElement {
   /** The radio group label. Required for proper accessibility. Alternatively, you can use the label slot. */
   @property() label = '';
 
-  /** Hides the fieldset and legend that surrounds the radio group. The label will still be read by screen readers. */
-  @property({ type: Boolean, attribute: 'no-fieldset' }) noFieldset = false;
+  /** Shows the fieldset and legend that surrounds the radio group. */
+  @property({ type: Boolean, attribute: 'fieldset' }) fieldset = false;
 
   handleFocusIn() {
-    // When focusing into the fieldset, make sure it lands on the checked radio
-    const checkedRadio = [...this.defaultSlot.assignedElements({ flatten: true })].find(
-      el => el.tagName.toLowerCase() === 'sl-radio' && (el as SlRadio).checked
-    ) as SlRadio;
+    // When tabbing into the fieldset, make sure it lands on the checked radio
+    requestAnimationFrame(() => {
+      const checkedRadio = [...this.defaultSlot.assignedElements({ flatten: true })].find(
+        el => el.tagName.toLowerCase() === 'sl-radio' && (el as SlRadio).checked
+      ) as SlRadio;
 
-    if (checkedRadio) {
-      checkedRadio.focus();
-    }
+      if (checkedRadio) {
+        checkedRadio.focus();
+      }
+    });
   }
 
   render() {
@@ -43,7 +45,7 @@ export default class SlRadioGroup extends LitElement {
         part="base"
         class=${classMap({
           'radio-group': true,
-          'radio-group--no-fieldset': this.noFieldset
+          'radio-group--has-fieldset': this.fieldset
         })}
         role="radiogroup"
         @focusin=${this.handleFocusIn}
