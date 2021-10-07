@@ -6,6 +6,11 @@ Components with the <sl-badge type="warning" pill>Experimental</sl-badge> badge 
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
+## Next
+
+- Added the `disabled` prop to `<sl-resize-observer>`
+- Fixed a bug in `<sl-mutation-observer>` where setting `disabled` initially didn't work
+
 ## 2.0.0-beta.53
 
 - 🚨 BREAKING: removed `<sl-menu-divider>` (use `<sl-divider>` instead)
