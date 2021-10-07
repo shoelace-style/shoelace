@@ -44,7 +44,10 @@ export default class SlMutationObserver extends LitElement {
     this.handleMutation = this.handleMutation.bind(this);
 
     this.mutationObserver = new MutationObserver(this.handleMutation);
-    this.startObserver();
+
+    if (!this.disabled) {
+      this.startObserver();
+    }
   }
 
   disconnectedCallback() {
