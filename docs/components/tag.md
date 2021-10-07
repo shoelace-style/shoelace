@@ -34,21 +34,21 @@ Use the `pill` attribute to give tabs rounded edges.
 <sl-tag size="large" pill>Large</sl-tag>
 ```
 
-### Clearable
+### Removable
 
-Use the `clearable` attribute to add a clear button to the tag.
+Use the `removable` attribute to add a remove button to the tag.
 
 ```html preview
-<div class="tags-clearable">
-  <sl-tag size="small" clearable>Small</sl-tag>
-  <sl-tag size="medium" clearable>Medium</sl-tag>
-  <sl-tag size="large" clearable>Large</sl-tag>
+<div class="tags-removable">
+  <sl-tag size="small" removable>Small</sl-tag>
+  <sl-tag size="medium" removable>Medium</sl-tag>
+  <sl-tag size="large" removable>Large</sl-tag>
 </div>
 
 <script>
-  const div = document.querySelector('.tags-clearable');
+  const div = document.querySelector('.tags-removable');
 
-  div.addEventListener('sl-clear', event => {
+  div.addEventListener('sl-remove', event => {
     const tag = event.target;
     tag.style.opacity = '0';
     setTimeout(() => tag.style.opacity = '1', 2000);
@@ -56,7 +56,7 @@ Use the `clearable` attribute to add a clear button to the tag.
 </script>
 
 <style>
-  .tags-clearable sl-tag {
+  .tags-removable sl-tag {
     transition: var(--sl-transition-medium) opacity;
   }
 </style>

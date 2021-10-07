@@ -14,11 +14,11 @@ import '../icon-button/icon-button';
  *
  * @slot - The tag's content.
  *
- * @event sl-clear - Emitted when the clear button is activated.
+ * @event sl-remove - Emitted when the remove button is activated.
  *
  * @csspart base - The component's base wrapper.
  * @csspart content - The tag content.
- * @csspart clear-button - The clear button.
+ * @csspart remove-button - The remove button.
  */
 @customElement('sl-tag')
 export default class SlTag extends LitElement {
@@ -33,11 +33,11 @@ export default class SlTag extends LitElement {
   /** Draws a pill-style tag with rounded edges. */
   @property({ type: Boolean, reflect: true }) pill = false;
 
-  /** Makes the tag clearable. */
-  @property({ type: Boolean }) clearable = false;
+  /** Makes the tag removable. */
+  @property({ type: Boolean }) removable = false;
 
-  handleClearClick() {
-    emit(this, 'sl-clear');
+  handleRemoveClick() {
+    emit(this, 'sl-remove');
   }
 
   render() {
@@ -62,21 +62,21 @@ export default class SlTag extends LitElement {
 
           // Modifers
           'tag--pill': this.pill,
-          'tag--clearable': this.clearable
+          'tag--removable': this.removable
         })}
       >
         <span part="content" class="tag__content">
           <slot></slot>
         </span>
 
-        ${this.clearable
+        ${this.removable
           ? html`
               <sl-icon-button
-                exportparts="base:clear-button"
+                exportparts="base:remove-button"
                 name="x"
                 library="system"
-                class="tag__clear"
-                @click=${this.handleClearClick}
+                class="tag__remove"
+                @click=${this.handleRemoveClick}
               ></sl-icon-button>
             `
           : ''}

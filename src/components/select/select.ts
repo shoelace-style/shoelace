@@ -51,8 +51,8 @@ let id = 0;
  * @csspart prefix - The select's prefix.
  * @csspart label - The select's label.
  * @csspart suffix - The select's suffix.
- * @csspart menu - The select menu, a <sl-menu> element.
- * @csspart tag - The multiselect option, a <sl-tag> element.
+ * @csspart menu - The select menu, an <sl-menu> element.
+ * @csspart tag - The multiselect option, an <sl-tag> element.
  * @csspart tags - The container in which multiselect options are rendered.
  */
 @customElement('sl-select')
@@ -336,7 +336,7 @@ export default class SlSelect extends LitElement {
     const clearButton = path.find((el: SlIconButton) => {
       if (el instanceof HTMLElement) {
         const element = el as HTMLElement;
-        return element.classList.contains('tag__clear');
+        return element.classList.contains('tag__remove');
       }
       return false;
     });
@@ -382,10 +382,10 @@ export default class SlSelect extends LitElement {
             type="neutral"
             size=${this.size}
             ?pill=${this.pill}
-            clearable
+            removable
             @click=${this.handleTagInteraction}
             @keydown=${this.handleTagInteraction}
-            @sl-clear=${(event: CustomEvent) => {
+            @sl-remove=${(event: CustomEvent) => {
               event.stopPropagation();
               if (!this.disabled) {
                 item.checked = false;

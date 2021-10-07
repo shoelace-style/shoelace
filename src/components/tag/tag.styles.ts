@@ -18,7 +18,7 @@ export default css`
     cursor: default;
   }
 
-  .tag__clear::part(base) {
+  .tag__remove::part(base) {
     color: inherit;
     padding: 0;
   }
@@ -69,7 +69,7 @@ export default css`
     padding: 0 var(--sl-spacing-x-small);
   }
 
-  .tag--small .tag__clear {
+  .tag--small .tag__remove {
     margin-left: var(--sl-spacing-2x-small);
     margin-right: calc(-1 * var(--sl-spacing-3x-small));
   }
@@ -82,7 +82,7 @@ export default css`
     padding: 0 var(--sl-spacing-small);
   }
 
-  .tag__clear {
+  .tag__remove {
     margin-left: var(--sl-spacing-2x-small);
     margin-right: calc(-1 * var(--sl-spacing-2x-small));
   }
@@ -95,7 +95,7 @@ export default css`
     padding: 0 var(--sl-spacing-medium);
   }
 
-  .tag__clear {
+  .tag__remove {
     margin-left: var(--sl-spacing-2x-small);
     margin-right: calc(-1 * var(--sl-spacing-x-small));
   }

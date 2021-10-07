@@ -8,6 +8,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
+- 🚨 BREAKING: renamed the `sl-clear` event to `sl-remove`, the `clear-button` part to `remove-button`, and the `clearable` property to `removable` in `<sl-tag>`
 - Added the `disabled` prop to `<sl-resize-observer>`
 - Fixed a bug in `<sl-mutation-observer>` where setting `disabled` initially didn't work
 
