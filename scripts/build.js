@@ -50,7 +50,6 @@ try {
         // Popper.js expects this to be set
         'process.env.NODE_ENV': '"production"'
       },
-      external: ['@popperjs/core', '@shoelace-style/animations', 'lit', 'qr-creator'],
       bundle: true,
       splitting: true,
       plugins: []
