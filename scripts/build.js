@@ -1,6 +1,3 @@
-//
-// Builds the project. To spin up a dev server, pass the --serve flag.
-//
 import browserSync from 'browser-sync';
 import chalk from 'chalk';
 import commandLineArgs from 'command-line-args';
@@ -13,11 +10,14 @@ import glob from 'globby';
 import path from 'path';
 import { execSync } from 'child_process';
 
+const packageData = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
+const externalDependencies = Object.keys(packageData.dependencies);
+
 const build = esbuild.build;
 const bs = browserSync.create();
 const { dev } = commandLineArgs({ name: 'dev', type: Boolean });
 
-del.sync('./dist');
+del.sync(['./dist', './docs/dist']);
 
 try {
   if (!dev) execSync('tsc', { stdio: 'inherit' }); // for type declarations
@@ -32,22 +32,20 @@ try {
 }
 
 (async () => {
-  const entryPoints = [
-    // The whole shebang dist
-    './src/shoelace.ts',
-    // Components
-    ...(await glob('./src/components/**/!(*.(style|test)).ts')),
-    // Public utilities
-    ...(await glob('./src/utilities/**/!(*.(style|test)).ts')),
-    // Theme stylesheets
-    ...(await glob('./src/themes/**/!(*.test).ts'))
-  ];
-
   const buildResult = await esbuild
     .build({
       format: 'esm',
       target: 'es2017',
-      entryPoints,
+      entryPoints: [
+        // The whole shebang dist
+        './src/shoelace.ts',
+        // Components
+        ...(await glob('./src/components/**/!(*.(style|test)).ts')),
+        // Public utilities
+        ...(await glob('./src/utilities/**/!(*.(style|test)).ts')),
+        // Theme stylesheets
+        ...(await glob('./src/themes/**/!(*.test).ts'))
+      ],
       outdir: './dist',
       chunkNames: 'chunks/[name].[hash]',
       incremental: dev,
@@ -55,6 +53,7 @@ try {
         // Popper.js expects this to be set
         'process.env.NODE_ENV': '"production"'
       },
+      external: dev ? undefined : externalDependencies,
       bundle: true,
       splitting: true,
       plugins: []
@@ -66,13 +65,14 @@ try {
 
   // Create the docs distribution by copying dist into the docs folder. This is what powers the website. It doesn't need
   // to exist in dev because Browser Sync routes it virtually.
-  await del('./docs/dist');
   if (!dev) {
+    await del('./docs/dist');
     await Promise.all([copy('./dist', './docs/dist')]);
   }
 
   console.log(chalk.green('The build has finished! 📦\n'));
 
+  // Dev server
   if (dev) {
     const port = await getPort({
       port: getPort.makeRange(4000, 4999)
@@ -128,8 +128,8 @@ try {
       execSync('node scripts/make-search.js', { stdio: 'inherit' });
       bs.reload();
     });
-
-    // Cleanup on exit
-    process.on('SIGTERM', () => buildResult.rebuild.dispose());
   }
+
+  // Cleanup on exit
+  process.on('SIGTERM', () => buildResult.rebuild.dispose());
 })();
