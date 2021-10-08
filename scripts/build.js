@@ -12,9 +12,13 @@ import getPort from 'get-port';
 import glob from 'globby';
 import path from 'path';
 import { execSync } from 'child_process';
+import { startDevServer } from '@web/dev-server';
+import { esbuildPlugin } from '@web/dev-server-esbuild';
+import chokidar from "chokidar";
 
 const build = esbuild.build;
 const bs = browserSync.create();
+
 const { dev } = commandLineArgs({ name: 'dev', type: Boolean });
 
 del.sync('./dist');
@@ -80,31 +84,44 @@ try {
 
     console.log(chalk.cyan(`Launching the Shoelace dev server at http://localhost:${port}! 🥾\n`));
 
-    // Launch browser sync
-    bs.init({
-      startPath: '/',
-      port,
-      logLevel: 'silent',
-      logPrefix: '[shoelace]',
-      logFileChanges: true,
-      notify: false,
-      single: true,
-      ghostMode: false,
-      server: {
-        baseDir: 'docs',
-        routes: {
-          '/dist': './dist'
-        }
-      }
+    const { webSockets, server } = await startDevServer({
+      config: {
+        port: port,
+        rootDir: process.cwd(),
+        watch: true,
+        nodeResolve: true,
+        appIndex: "dist",
+        plugins: [esbuildPlugin({ ts: true, target: 'auto' })]
+      },
+      readCliArgs: true,
+      readFileConfig: true,
     });
 
+    // Launch browser sync
+    // bs.init({
+    //   startPath: '/',
+    //   port,
+    //   logLevel: 'silent',
+    //   logPrefix: '[shoelace]',
+    //   logFileChanges: true,
+    //   notify: false,
+    //   single: true,
+    //   ghostMode: false,
+    //   server: {
+    //     baseDir: 'docs',
+    //     routes: {
+    //       '/dist': './dist'
+    //     }
+    //   }
+    // });
+
     // Rebuild and reload when source files change
-    bs.watch(['src/**/!(*.test).*']).on('change', async filename => {
-      console.log(`Source file changed - ${filename}`);
+    chokidar.watch(['src/**/!(*.test).*']).on('change', async filename => {
+      console.log(`[WDS]: Source file changed - ${filename}`);
       buildResult
         // Rebuild and reload
         .rebuild()
-        .then(async () => {
+        .then(() => {
           // Rebuild stylesheets when a theme file changes
           if (/^src\/themes/.test(filename)) {
             execSync('node scripts/make-css.js', { stdio: 'inherit' });
@@ -118,18 +135,23 @@ try {
 
           execSync('node scripts/make-metadata.js', { stdio: 'inherit' });
         })
-        .then(() => bs.reload())
+        .then(() => {
+          webSockets.send(`data:text/javascript,window.location.reload();`)
+        })
         .catch(err => console.error(chalk.red(err)));
     });
 
     // Reload without rebuilding when the docs change
-    bs.watch(['docs/**/*.md']).on('change', filename => {
-      console.log(`Docs file changed - ${filename}`);
+    chokidar.watch(['docs/**/*.md']).on('change', filename => {
+      console.log(`[WDS]: Docs file changed - ${filename}`);
       execSync('node scripts/make-search.js', { stdio: 'inherit' });
-      bs.reload();
+      webSockets.send(`data:text/javascript,window.location.reload();`)
     });
 
     // Cleanup on exit
-    process.on('SIGTERM', () => buildResult.rebuild.dispose());
+    process.on('SIGTERM', async () => {
+      buildResult.rebuild.dispose()
+      await server.stop()
+    });
   }
 })();
