@@ -1,23 +1,17 @@
 //
 // Builds the project. To spin up a dev server, pass the --serve flag.
 //
-import browserSync from 'browser-sync';
 import chalk from 'chalk';
 import commandLineArgs from 'command-line-args';
 import copy from 'recursive-copy';
 import del from 'del';
 import esbuild from 'esbuild';
-import fs from 'fs';
 import getPort from 'get-port';
 import glob from 'globby';
-import path from 'path';
 import { execSync } from 'child_process';
 import { startDevServer } from '@web/dev-server';
 import { esbuildPlugin } from '@web/dev-server-esbuild';
 import chokidar from "chokidar";
-
-const build = esbuild.build;
-const bs = browserSync.create();
 
 const { dev } = commandLineArgs({ name: 'dev', type: Boolean });
 
@@ -68,12 +62,9 @@ try {
       process.exit(1);
     });
 
-  // Create the docs distribution by copying dist into the docs folder. This is what powers the website. It doesn't need
-  // to exist in dev because Browser Sync routes it virtually.
-  await del('./docs/dist');
-  if (!dev) {
-    await Promise.all([copy('./dist', './docs/dist')]);
-  }
+  // Always copy since Web Dev Server doesnt use virtual in memory files.
+  await del("./docs/dist")
+  await Promise.all([copy('./dist', './docs/dist')]);
 
   console.log(chalk.green('The build has finished! 📦\n'));
 
@@ -87,37 +78,21 @@ try {
     const { webSockets, server } = await startDevServer({
       config: {
         port: port,
-        rootDir: process.cwd(),
+        rootDir: "./docs",
         watch: true,
         nodeResolve: true,
-        appIndex: "dist",
+        open: true,
+        appIndex: "docs/index.html",
         plugins: [esbuildPlugin({ ts: true, target: 'auto' })]
       },
       readCliArgs: true,
       readFileConfig: true,
     });
 
-    // Launch browser sync
-    // bs.init({
-    //   startPath: '/',
-    //   port,
-    //   logLevel: 'silent',
-    //   logPrefix: '[shoelace]',
-    //   logFileChanges: true,
-    //   notify: false,
-    //   single: true,
-    //   ghostMode: false,
-    //   server: {
-    //     baseDir: 'docs',
-    //     routes: {
-    //       '/dist': './dist'
-    //     }
-    //   }
-    // });
-
     // Rebuild and reload when source files change
     chokidar.watch(['src/**/!(*.test).*']).on('change', async filename => {
       console.log(`[WDS]: Source file changed - ${filename}`);
+      await del('./docs/dist');
       buildResult
         // Rebuild and reload
         .rebuild()
@@ -135,7 +110,8 @@ try {
 
           execSync('node scripts/make-metadata.js', { stdio: 'inherit' });
         })
-        .then(() => {
+        .then(async () => {
+          await Promise.all([copy('./dist', './docs/dist')]);
           webSockets.send(`data:text/javascript,window.location.reload();`)
         })
         .catch(err => console.error(chalk.red(err)));
