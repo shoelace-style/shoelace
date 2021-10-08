@@ -23,8 +23,11 @@ yarn add @shoelace-style/shoelace copy-webpack-plugin
 The next step is to import Shoelace's default theme (stylesheet) in `app/javascript/stylesheets/application.scss`.
 
 ```css
-@import '~@shoelace-style/shoelace/dist/themes/base';
+@import '~@shoelace-style/shoelace/dist/themes/light';
+@import '~@shoelace-style/shoelace/dist/themes/dark'; // Optional dark theme
 ```
+
+Fore more details about themes, please refer to [Theme Basics](/getting-started/themes?id=theme-basics).
 
 ### Importing Required Scripts
 
