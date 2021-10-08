@@ -10,9 +10,6 @@ import glob from 'globby';
 import path from 'path';
 import { execSync } from 'child_process';
 
-const packageData = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
-const externalDependencies = Object.keys(packageData.dependencies);
-
 const build = esbuild.build;
 const bs = browserSync.create();
 const { dev } = commandLineArgs({ name: 'dev', type: Boolean });
@@ -53,7 +50,7 @@ try {
         // Popper.js expects this to be set
         'process.env.NODE_ENV': '"production"'
       },
-      external: dev ? undefined : externalDependencies,
+      external: ['@popperjs/core', '@shoelace-style/animations', 'lit', 'qr-creator'],
       bundle: true,
       splitting: true,
       plugins: []
