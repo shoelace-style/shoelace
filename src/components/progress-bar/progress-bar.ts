@@ -30,13 +30,13 @@ export default class SlProgressBar extends LitElement {
   /** When true, percentage is ignored, the label is hidden, and the progress bar is drawn in an indeterminate state. */
   @property({ type: Boolean, reflect: true }) indeterminate = false;
 
-  /** When set, will place a hoverable title on the progress ring. */
+  /** When set, will place a hoverable title on the progress bar. */
   @property() title: string;
 
-  /** When set, will place a label on the progress ring. */
+  /** When set, will place a label on the progress bar. */
   @property() ariaLabel: string;
 
-  /** When set, will place a labelledby on the progress ring. */
+  /** When set, will place a labelledby on the progress bar. */
   @property() ariaLabelledBy: string;
 
   render() {
