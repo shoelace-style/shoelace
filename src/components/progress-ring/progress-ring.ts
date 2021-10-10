@@ -1,5 +1,6 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import styles from './progress-ring.styles';
 
 /**
@@ -9,7 +10,6 @@ import styles from './progress-ring.styles';
  * @slot - A label to show inside the ring.
  *
  * @csspart base - The component's base wrapper.
- * @csspart label - The progress ring label.
  *
  * @cssproperty --size - The diameter of the progress ring (cannot be a percentage).
  * @cssproperty --track-width - The width of the track.
@@ -26,6 +26,15 @@ export default class SlProgressRing extends LitElement {
 
   /** The current progress, 0 to 100. */
   @property({ type: Number, reflect: true }) value = 0;
+
+  /** When set, will place a hoverable title on the progress ring. */
+  @property() title: string;
+
+  /** When set, will place a label on the progress ring. */
+  @property() ariaLabel: string;
+
+  /** When set, will place a labelledby on the progress ring. */
+  @property() ariaLabelledBy: string;
 
   updated(changedProps: Map<string, any>) {
     super.updated(changedProps);
@@ -50,6 +59,9 @@ export default class SlProgressRing extends LitElement {
         part="base"
         class="progress-ring"
         role="progressbar"
+        title=${ifDefined(this.title)}
+        aria-label=${ifDefined(this.ariaLabel)}
+        aria-labelledby=${ifDefined(this.ariaLabelledBy)}
         aria-valuemin="0"
         aria-valuemax="100"
         aria-valuenow="${this.value}"
@@ -59,10 +71,6 @@ export default class SlProgressRing extends LitElement {
           <circle class="progress-ring__track"></circle>
           <circle class="progress-ring__indicator" style="stroke-dashoffset: ${this.indicatorOffset}"></circle>
         </svg>
-
-        <span part="label" class="progress-ring__label">
-          <slot></slot>
-        </span>
       </div>
     `;
   }
