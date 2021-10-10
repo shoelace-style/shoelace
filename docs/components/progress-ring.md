@@ -20,10 +20,10 @@ Use the `--size` custom property to set the diameter of the progress ring.
 
 ### Track Width
 
-Use the `track-width` attribute to set the width of the progress ring's track.
+Use the `--track-width` custom property to set the width of the progress ring's track.
 
 ```html preview
-<sl-progress-ring value="50" stroke-width="10"></sl-progress-ring>
+<sl-progress-ring value="50" style="--track-width: 10px;"></sl-progress-ring>
 ```
 
 ### Colors
