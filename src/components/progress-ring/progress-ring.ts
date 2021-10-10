@@ -10,6 +10,7 @@ import styles from './progress-ring.styles';
  * @slot - A label to show inside the ring.
  *
  * @csspart base - The component's base wrapper.
+ * @csspart label - The progress ring label.
  *
  * @cssproperty --size - The diameter of the progress ring (cannot be a percentage).
  * @cssproperty --track-width - The width of the track.
@@ -72,6 +73,10 @@ export default class SlProgressRing extends LitElement {
           <circle class="progress-ring__indicator" style="stroke-dashoffset: ${this.indicatorOffset}"></circle>
         </svg>
       </div>
+
+      <span part="label" class="progress-ring__label">
+        <slot></slot>
+      </span>
     `;
   }
 }
