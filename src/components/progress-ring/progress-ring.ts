@@ -72,11 +72,11 @@ export default class SlProgressRing extends LitElement {
           <circle class="progress-ring__track"></circle>
           <circle class="progress-ring__indicator" style="stroke-dashoffset: ${this.indicatorOffset}"></circle>
         </svg>
-      </div>
 
-      <span part="label" class="progress-ring__label">
-        <slot></slot>
-      </span>
+        <span part="label" class="progress-ring__label">
+          <slot></slot>
+        </span>
+      </div>
     `;
   }
 }
