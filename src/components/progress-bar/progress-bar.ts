@@ -1,5 +1,6 @@
 import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import styles from './progress-bar.styles';
@@ -29,6 +30,15 @@ export default class SlProgressBar extends LitElement {
   /** When true, percentage is ignored, the label is hidden, and the progress bar is drawn in an indeterminate state. */
   @property({ type: Boolean, reflect: true }) indeterminate = false;
 
+  /** When set, will place a hoverable title on the progress ring. */
+  @property() title: string;
+
+  /** When set, will place a label on the progress ring. */
+  @property() ariaLabel: string;
+
+  /** When set, will place a labelledby on the progress ring. */
+  @property() ariaLabelledBy: string;
+
   render() {
     return html`
       <div
@@ -38,9 +48,12 @@ export default class SlProgressBar extends LitElement {
           'progress-bar--indeterminate': this.indeterminate
         })}
         role="progressbar"
+        title=${ifDefined(this.title)}
+        aria-label=${ifDefined(this.ariaLabel)}
+        aria-labelledby=${ifDefined(this.ariaLabelledBy)}
         aria-valuemin="0"
         aria-valuemax="100"
-        aria-valuenow="${this.indeterminate ? '' : this.value}"
+        aria-valuenow="${this.indeterminate ? 0 : this.value}"
       >
         <div part="indicator" class="progress-bar__indicator" style=${styleMap({ width: this.value + '%' })}>
           ${!this.indeterminate
