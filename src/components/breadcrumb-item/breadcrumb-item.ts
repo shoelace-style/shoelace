@@ -28,15 +28,16 @@ export default class SlBreadcrumbItem extends LitElement {
   @state() hasPrefix = false;
   @state() hasSuffix = false;
 
-  /** Optional link to direct the user to when the breadcrumb item is activated. */
+  /**
+   * Optional URL to direct the user to when the breadcrumb item is activated. When set, a link will be rendered
+   * internally. When unset, a button will be rendered instead.
+   */
   @property() href: string;
 
   /** Tells the browser where to open the link. Only used when `href` is set. */
   @property() target: '_blank' | '_parent' | '_self' | '_top';
 
-  /** Optionally allows the user to determine how the link should talk to the browser.
-   * ref: https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types
-   */
+  /** The `rel` attribute to use on the link. Only used when `href` is set. */
   @property() rel: string = 'noreferrer noopener';
 
   handleSlotChange() {
