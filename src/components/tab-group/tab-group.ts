@@ -354,7 +354,7 @@ export default class SlTabGroup extends LitElement {
         @click=${this.handleClick}
         @keydown=${this.handleKeyDown}
       >
-        <div class="tab-group__nav-container">
+        <div class="tab-group__nav-container" part="nav-container">
           ${this.hasScrollControls
             ? html`
                 <sl-icon-button
