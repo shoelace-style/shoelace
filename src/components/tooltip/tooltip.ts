@@ -83,6 +83,12 @@ export default class SlTooltip extends LitElement {
    */
   @property() trigger = 'hover focus';
 
+  /**
+   * Enable this option to prevent the tooltip from being clipped when the component is placed inside a container with
+   * `overflow: auto|hidden|scroll`.
+   */
+  @property({ type: Boolean }) hoist = false;
+
   connectedCallback() {
     super.connectedCallback();
     this.handleBlur = this.handleBlur.bind(this);
@@ -216,7 +222,7 @@ export default class SlTooltip extends LitElement {
 
       this.popover = createPopper(this.target, this.positioner, {
         placement: this.placement,
-        strategy: 'absolute',
+        strategy: this.hoist ? 'fixed' : 'absolute',
         modifiers: [
           {
             name: 'flip',
@@ -258,6 +264,7 @@ export default class SlTooltip extends LitElement {
   @watch('placement')
   @watch('distance')
   @watch('skidding')
+  @watch('hoist')
   handleOptionsChange() {
     this.syncOptions();
   }
@@ -290,7 +297,7 @@ export default class SlTooltip extends LitElement {
     if (this.popover) {
       this.popover.setOptions({
         placement: this.placement,
-        strategy: 'absolute',
+        strategy: this.hoist ? 'fixed' : 'absolute',
         modifiers: [
           {
             name: 'flip',
