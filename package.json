@@ -7,7 +7,7 @@
   "license": "MIT",
   "main": "dist/shoelace.js",
   "module": "dist/shoelace.js",
-  "customElements": "dist/custom-elements.json",
+  "customElements": "docs/dist/custom-elements.json",
   "type": "module",
   "types": "dist/shoelace.d.ts",
   "files": [
@@ -30,9 +30,10 @@
     "url": "https://github.com/sponsors/claviska"
   },
   "scripts": {
-    "start": "node scripts/build.js --dev",
-    "build": "node scripts/build.js",
-    "prepublishOnly": "npm run build && npm run test",
+    "start": "node scripts/build.js --dir docs/dist --bundle --serve",
+    "build": "node scripts/build.js --types",
+    "build-docs": "node scripts/build.js --dir docs/dist --bundle",
+    "prepublishOnly": "npm run build && npm run build-docs && npm run test",
     "prettier": "prettier --write --loglevel warn .",
     "create": "plop --plopfile scripts/plop/plopfile.cjs",
     "test": "web-test-runner \"src/**/*.test.ts\" --node-resolve --puppeteer",

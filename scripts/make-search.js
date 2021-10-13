@@ -1,10 +1,12 @@
+import commandLineArgs from 'command-line-args';
 import fs from 'fs';
 import path from 'path';
 import glob from 'globby';
 import lunr from 'lunr';
 import { getAllComponents } from './shared.js';
 
-const metadata = JSON.parse(fs.readFileSync('./dist/custom-elements.json', 'utf8'));
+const { outdir } = commandLineArgs({ name: 'outdir', type: String });
+const metadata = JSON.parse(fs.readFileSync(path.join(outdir, 'custom-elements.json'), 'utf8'));
 
 console.log('Generating search index for documentation');
 

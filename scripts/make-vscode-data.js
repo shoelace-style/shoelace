@@ -4,10 +4,13 @@
 // You must generate dist/custom-elements.json before running this script.
 //
 import chalk from 'chalk';
+import commandLineArgs from 'command-line-args';
 import fs from 'fs';
+import path from 'path';
 import { getAllComponents } from './shared.js';
 
-const metadata = JSON.parse(fs.readFileSync('./dist/custom-elements.json', 'utf8'));
+const { outdir } = commandLineArgs({ name: 'outdir', type: String });
+const metadata = JSON.parse(fs.readFileSync(path.join(outdir, 'custom-elements.json'), 'utf8'));
 
 console.log('Generating custom data for VS Code');
 
@@ -53,4 +56,4 @@ components.map(component => {
   vscode.tags.push({ name, attributes });
 });
 
-fs.writeFileSync('./dist/vscode.html-custom-data.json', JSON.stringify(vscode, null, 2), 'utf8');
+fs.writeFileSync(path.join(outdir, 'vscode.html-custom-data.json'), JSON.stringify(vscode, null, 2), 'utf8');

@@ -2,6 +2,7 @@
 // This script generates stylesheets from all *.styles.ts files in src/themes
 //
 import chalk from 'chalk';
+import commandLineArgs from 'command-line-args';
 import esbuild from 'esbuild';
 import fs from 'fs/promises';
 import glob from 'globby';
@@ -10,12 +11,13 @@ import path from 'path';
 import prettier from 'prettier';
 import stripComments from 'strip-css-comments';
 
+const { outdir } = commandLineArgs({ name: 'outdir', type: String });
 const files = glob.sync('./src/themes/**/*.styles.ts');
-const outdir = './dist/themes';
+const themesDir = path.join(outdir, 'themes');
 
 console.log('Generating stylesheets');
 
-mkdirp.sync(outdir);
+mkdirp.sync(themesDir);
 
 try {
   files.map(async file => {
@@ -32,7 +34,7 @@ try {
 
     const formattedStyles = prettier.format(stripComments(css), { parser: 'css' });
     const filename = path.basename(file).replace('.styles.ts', '.css');
-    const outfile = path.join(outdir, filename);
+    const outfile = path.join(themesDir, filename);
     await fs.writeFile(outfile, formattedStyles, 'utf8');
   });
 } catch (err) {

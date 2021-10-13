@@ -6,6 +6,13 @@ Components with the <sl-badge type="warning" pill>Experimental</sl-badge> badge 
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
+## 2.0.0-beta.56
+
+This release is the second attempt at unbundling dependencies. This will be a breaking change only if your configuration _does not_ support bare module specifiers. CDN users and bundler users will be unaffected, but note the URLs for modules on the CDN must have the `/+esm` now.
+
+- Added the `hoist` attribute to `<sl-tooltip>` [#564](https://github.com/shoelace-style/shoelace/issues/564)
+- Unbundled dependencies and configured external imports to be packaged with bare module specifiers
+
 ## 2.0.0-beta.55
 
 - Revert unbundling due to issues with the CDN not handling bare module specifiers as expected
@@ -17,7 +24,7 @@ Shoelace doesn't have a lot of dependencies, but this release unbundles most of 
 - 🚨 BREAKING: renamed the `sl-clear` event to `sl-remove`, the `clear-button` part to `remove-button`, and the `clearable` property to `removable` in `<sl-tag>`
 - Added the `disabled` prop to `<sl-resize-observer>`
 - Fixed a bug in `<sl-mutation-observer>` where setting `disabled` initially didn't work
-- Unbundled dependencies and configure external imports to use bare module specifiers
+- Unbundled dependencies and configured external imports to be packaged with bare module specifiers
 
 ## 2.0.0-beta.53
 

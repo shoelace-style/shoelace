@@ -3,6 +3,7 @@
 //
 import Promise from 'bluebird';
 import chalk from 'chalk';
+import commandLineArgs from 'command-line-args';
 import copy from 'recursive-copy';
 import del from 'del';
 import download from 'download';
@@ -13,7 +14,9 @@ import { stat, readFile, writeFile } from 'fs/promises';
 import glob from 'globby';
 import path from 'path';
 
-const iconDir = './dist/assets/icons';
+const { outdir } = commandLineArgs({ name: 'outdir', type: String });
+const iconDir = path.join(outdir, '/assets/icons');
+
 const iconPackageData = JSON.parse(readFileSync('./node_modules/bootstrap-icons/package.json', 'utf8'));
 let numIcons = 0;
 
