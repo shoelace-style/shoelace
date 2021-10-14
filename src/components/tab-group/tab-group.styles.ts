@@ -59,11 +59,9 @@ export default css`
     flex-direction: column;
   }
 
-  .tab-group--top .tab-group__nav-container {
-    order: 1;
-  }
-
   .tab-group--top .tab-group__nav {
+    order: 1;
+
     display: flex;
     overflow-x: auto;
 
