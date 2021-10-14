@@ -102,7 +102,10 @@ mkdirp.sync(outdir);
       single: true,
       ghostMode: false,
       server: {
-        baseDir: 'docs'
+        baseDir: 'docs',
+        routes: {
+          '/dist': './dist'
+        }
       }
     });
 

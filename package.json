@@ -7,7 +7,7 @@
   "license": "MIT",
   "main": "dist/shoelace.js",
   "module": "dist/shoelace.js",
-  "customElements": "docs/dist/custom-elements.json",
+  "customElements": "dist/custom-elements.json",
   "type": "module",
   "types": "dist/shoelace.d.ts",
   "files": [
@@ -30,7 +30,7 @@
     "url": "https://github.com/sponsors/claviska"
   },
   "scripts": {
-    "start": "node scripts/build.js --dir docs/dist --bundle --serve",
+    "start": "node scripts/build.js --bundle --serve",
     "build": "node scripts/build.js --types",
     "build-docs": "node scripts/build.js --dir docs/dist --bundle",
     "prepublishOnly": "npm run build && npm run build-docs && npm run test",
