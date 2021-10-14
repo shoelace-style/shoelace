@@ -53,18 +53,18 @@ export default css`
     cursor: pointer;
   }
 
-  .range__control:not(:disabled)::-webkit-slider-thumb:hover {
+  .range__control:enabled::-webkit-slider-thumb:hover {
     background-color: rgb(var(--sl-color-primary-500));
     border-color: rgb(var(--sl-color-primary-500));
   }
 
-  .range__control:not(:disabled)${focusVisibleSelector}::-webkit-slider-thumb {
+  .range__control:enabled${focusVisibleSelector}::-webkit-slider-thumb {
     background-color: rgb(var(--sl-color-primary-500));
     border-color: rgb(var(--sl-color-primary-500));
     box-shadow: var(--sl-focus-ring);
   }
 
-  .range__control:not(:disabled)::-webkit-slider-thumb:active {
+  .range__control:enabled::-webkit-slider-thumb:active {
     background-color: rgb(var(--sl-color-primary-500));
     border-color: rgb(var(--sl-color-primary-500));
     cursor: grabbing;
@@ -101,18 +101,18 @@ export default css`
     cursor: pointer;
   }
 
-  .range__control:not(:disabled)::-moz-range-thumb:hover {
+  .range__control:enabled::-moz-range-thumb:hover {
     background-color: rgb(var(--sl-color-primary-500));
     border-color: rgb(var(--sl-color-primary-500));
   }
 
-  .range__control:not(:disabled)${focusVisibleSelector}::-moz-range-thumb {
+  .range__control:enabled${focusVisibleSelector}::-moz-range-thumb {
     background-color: rgb(var(--sl-color-primary-500));
     border-color: rgb(var(--sl-color-primary-500));
     box-shadow: var(--sl-focus-ring);
   }
 
-  .range__control:not(:disabled)::-moz-range-thumb:active {
+  .range__control:enabled::-moz-range-thumb:active {
     background-color: rgb(var(--sl-color-primary-500));
     border-color: rgb(var(--sl-color-primary-500));
     cursor: grabbing;
