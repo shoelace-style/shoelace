@@ -11,6 +11,9 @@ export default css`
     --label-color: rgb(var(--sl-color-neutral-0));
 
     display: block;
+  }
+
+  .progress-bar {
     position: relative;
     background-color: var(--track-color);
     height: var(--height);
