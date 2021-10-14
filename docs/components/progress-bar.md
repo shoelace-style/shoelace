@@ -20,10 +20,18 @@ Use the `--height` custom property to set the progress bar's height.
 
 ### Labels
 
-Use the default slot to show a label.
+Use the `label` attribute to label the progress bar and tell assistive devices how to announce it.
 
 ```html preview
-<sl-progress-bar value="50" class="progress-bar-labels">50%</sl-progress-bar>
+<sl-progress-bar value="50" label="Upload progress"></sl-progress-bar>
+```
+
+### Showing Values
+
+Use the default slot to show a value.
+
+```html preview
+<sl-progress-bar value="50" class="progress-bar-values">50%</sl-progress-bar>
 
 <br>
 
@@ -31,7 +39,7 @@ Use the default slot to show a label.
 <sl-button circle><sl-icon name="plus"></sl-icon></sl-button>
 
 <script>
-  const progressBar = document.querySelector('.progress-bar-labels');
+  const progressBar = document.querySelector('.progress-bar-values');
   const subtractButton = progressBar.nextElementSibling.nextElementSibling;
   const addButton = subtractButton.nextElementSibling;
 
