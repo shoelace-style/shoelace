@@ -30,14 +30,8 @@ export default class SlProgressBar extends LitElement {
   /** When true, percentage is ignored, the label is hidden, and the progress bar is drawn in an indeterminate state. */
   @property({ type: Boolean, reflect: true }) indeterminate = false;
 
-  /** When set, will place a hoverable title on the progress bar. */
-  @property() title: string;
-
-  /** When set, will place a label on the progress bar. */
-  @property() ariaLabel: string;
-
-  /** When set, will place a labelledby on the progress bar. */
-  @property() ariaLabelledBy: string;
+  /** The progress bar's aria label. */
+  @property() label = 'Progress'; // TODO - i18n
 
   render() {
     return html`
@@ -49,11 +43,10 @@ export default class SlProgressBar extends LitElement {
         })}
         role="progressbar"
         title=${ifDefined(this.title)}
-        aria-label=${ifDefined(this.ariaLabel)}
-        aria-labelledby=${ifDefined(this.ariaLabelledBy)}
+        aria-label=${ifDefined(this.label)}
         aria-valuemin="0"
         aria-valuemax="100"
-        aria-valuenow="${this.indeterminate ? 0 : this.value}"
+        aria-valuenow=${this.indeterminate ? 0 : this.value}
       >
         <div part="indicator" class="progress-bar__indicator" style=${styleMap({ width: this.value + '%' })}>
           ${!this.indeterminate

@@ -7,7 +7,7 @@
   "license": "MIT",
   "main": "dist/shoelace.js",
   "module": "dist/shoelace.js",
-  "customElements": "docs/dist/custom-elements.json",
+  "customElements": "dist/custom-elements.json",
   "type": "module",
   "types": "dist/shoelace.d.ts",
   "files": [

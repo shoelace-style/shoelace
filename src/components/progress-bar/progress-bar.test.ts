@@ -11,8 +11,8 @@ describe('<sl-progress-bar>', () => {
       el = await fixture<SlProgressBar>(html`<sl-progress-bar value="25"></sl-progress-bar>`);
     });
 
-    it('should render a component that does not pass accessibility test.', async () => {
-      await expect(el).not.to.be.accessible();
+    it('should render a component that passes accessibility test.', async () => {
+      await expect(el).to.be.accessible();
     });
   });
 
