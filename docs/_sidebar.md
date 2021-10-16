@@ -54,6 +54,7 @@
   <!--plop:component-->
 
 - Utilities
+  - [Animated Image](/components/animated-image)
   - [Animation](/components/animation)
   - [Format Bytes](/components/format-bytes)
   - [Format Date](/components/format-date)
