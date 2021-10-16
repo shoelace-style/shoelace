@@ -22,9 +22,7 @@ const { bundle, dir, serve, types } = commandLineArgs([
   { name: 'types', type: Boolean }
 ]);
 
-const __dirname = new URL('.', import.meta.url).pathname;
-const rootDir = path.dirname(__dirname);
-const outdir = path.relative(rootDir, dir);
+const outdir = dir;
 
 del.sync(outdir);
 mkdirp.sync(outdir);
