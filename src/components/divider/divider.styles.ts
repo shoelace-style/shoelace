@@ -10,13 +10,17 @@ export default css`
     --spacing: var(--sl-spacing-medium);
   }
 
-  :host(:not([vertical])) {
+  :host(:not([vertical])) .menu-divider {
     display: block;
     border-top: solid var(--width) var(--color);
     margin: var(--spacing) 0;
   }
 
   :host([vertical]) {
+    height: 100%;
+  }
+
+  :host([vertical]) .menu-divider {
     display: inline-block;
     height: 100%;
     border-left: solid var(--width) var(--color);

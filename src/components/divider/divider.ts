@@ -30,7 +30,7 @@ export default class SlDivider extends LitElement {
   }
 
   render() {
-    return html``;
+    return html` <div part="base" class="menu-divider"></div> `;
   }
 }
 
