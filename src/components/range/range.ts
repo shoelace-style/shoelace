@@ -185,13 +185,15 @@ export default class SlRange extends LitElement {
   }
 
   syncTooltip(percent: number) {
-    const inputWidth = this.input.offsetWidth;
-    const tooltipWidth = this.output.offsetWidth;
-    const thumbSize = getComputedStyle(this.input).getPropertyValue('--thumb-size');
-    const x = `calc(${inputWidth * percent}px - calc(calc(${percent} * ${thumbSize}) - calc(${thumbSize} / 2)))`;
+    if (this.output) {
+      const inputWidth = this.input.offsetWidth;
+      const tooltipWidth = this.output.offsetWidth;
+      const thumbSize = getComputedStyle(this.input).getPropertyValue('--thumb-size');
+      const x = `calc(${inputWidth * percent}px - calc(calc(${percent} * ${thumbSize}) - calc(${thumbSize} / 2)))`;
 
-    this.output.style.transform = `translateX(${x})`;
-    this.output.style.marginLeft = `-${tooltipWidth / 2}px`;
+      this.output.style.transform = `translateX(${x})`;
+      this.output.style.marginLeft = `-${tooltipWidth / 2}px`;
+    }
   }
 
   render() {
