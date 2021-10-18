@@ -12,7 +12,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Added `label` attribute to `<sl-progress-bar>` and `<sl-progress-ring>` to improve a11y
 - Fixed a bug where the tooltip would show briefly when clicking a disabled `<sl-range>`
 - Fixed a bug where the `nav` part in `<sl-tab-group>` was on the incorrect element [#563](https://github.com/shoelace-style/shoelace/pull/563)
-- Updated to Bootstrap Icons to 1.6.0
+- Updated to Bootstrap Icons to 1.6.1
 
 ## 2.0.0-beta.57
 
