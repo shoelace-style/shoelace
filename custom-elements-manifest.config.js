@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { parse } from 'comment-parser';
+import commentParser from 'comment-parser';
 
 const packageData = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
 const { name, description, version, author, homepage, license } = packageData;
@@ -38,7 +38,7 @@ export default {
               });
             });
 
-            const parsed = parse(customComments + '\n */');
+            const parsed = commentParser.parse(customComments + '\n */');
             parsed[0].tags?.map(t => {
               switch (t.tag) {
                 // Animations
