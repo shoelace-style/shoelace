@@ -354,7 +354,7 @@ export default class SlTabGroup extends LitElement {
         @click=${this.handleClick}
         @keydown=${this.handleKeyDown}
       >
-        <div class="tab-group__nav-container">
+        <div class="tab-group__nav-container" part="nav">
           ${this.hasScrollControls
             ? html`
                 <sl-icon-button
@@ -367,7 +367,7 @@ export default class SlTabGroup extends LitElement {
               `
             : ''}
 
-          <div part="nav" class="tab-group__nav">
+          <div class="tab-group__nav">
             <div part="tabs" class="tab-group__tabs" role="tablist">
               <div part="active-tab-indicator" class="tab-group__indicator"></div>
               <slot name="nav" @slotchange=${this.syncTabsAndPanels}></slot>
