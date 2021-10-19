@@ -129,7 +129,7 @@ export default class SlRange extends LitElement {
     this.value = Number(this.input.value);
     emit(this, 'sl-change');
 
-    requestAnimationFrame(() => this.syncRange());
+    this.syncRange();
   }
 
   handleBlur() {
@@ -146,7 +146,7 @@ export default class SlRange extends LitElement {
       this.invalid = !this.input.checkValidity();
     }
 
-    requestAnimationFrame(() => this.syncRange());
+    this.syncRange();
   }
 
   @watch('disabled')
