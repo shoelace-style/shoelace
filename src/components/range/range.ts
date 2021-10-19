@@ -29,8 +29,8 @@ let id = 0;
  * @cssproperty --thumb-size - The size of the thumb.
  * @cssproperty --tooltip-offset - The vertical distance the tooltip is offset from the track.
  * @cssproperty --track-color-active - The color of the portion of the track that represents the current value.
- * @cssproperty --track-color-inactive: The of the portion of the track that represents the remaining value.
- * @cssproperty --track-height: The height of the track.
+ * @cssproperty --track-color-inactive - The of the portion of the track that represents the remaining value.
+ * @cssproperty --track-height - The height of the track.
  */
 @customElement('sl-range')
 export default class SlRange extends LitElement {
