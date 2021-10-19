@@ -138,6 +138,17 @@ export default class SlRange extends LitElement {
     emit(this, 'sl-blur');
   }
 
+  @watch('value', { waitUntilFirstUpdate: true })
+  handleValueChange() {
+    this.value = Number(this.value);
+
+    if (this.input) {
+      this.invalid = !this.input.checkValidity();
+    }
+
+    requestAnimationFrame(() => this.syncRange());
+  }
+
   @watch('disabled')
   handleDisabledChange() {
     // Disabled form controls are always valid, so we need to recheck validity when the state changes
