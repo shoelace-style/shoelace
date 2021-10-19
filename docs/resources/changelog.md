@@ -13,6 +13,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug where the tooltip would show briefly when clicking a disabled `<sl-range>`
 - Fixed a bug that caused a console error when `<sl-range>` was used
 - Fixed a bug where the `nav` part in `<sl-tab-group>` was on the incorrect element [#563](https://github.com/shoelace-style/shoelace/pull/563)
+- Fixed a bug where non-integer aspect ratios were calculated incorrectly in `<sl-responsive-media>`
 - Updated to Bootstrap Icons to 1.6.1
 
 ## 2.0.0-beta.57
