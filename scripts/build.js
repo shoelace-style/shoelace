@@ -15,10 +15,11 @@ import { execSync } from 'child_process';
 const build = esbuild.build;
 const bs = browserSync.create();
 
-const { bundle, dir, serve, types } = commandLineArgs([
+const { bundle, copydir, dir, serve, types } = commandLineArgs([
+  { name: 'bundle', type: Boolean },
+  { name: 'copydir', type: String },
   { name: 'dir', type: String, defaultValue: 'dist' },
   { name: 'serve', type: Boolean },
-  { name: 'bundle', type: Boolean },
   { name: 'types', type: Boolean }
 ]);
 
@@ -63,12 +64,8 @@ mkdirp.sync(outdir);
       },
       bundle: true,
       //
-      // We don't bundle certain dependencies in the production build. This ensures the dist ships with bare module
-      // specifiers, allowing end users to optimize better. jsDelivr understands this if you add /+esm to the URL. Note
-      // that we can't bundle packages that don't ship ESM. https://github.com/jsdelivr/jsdelivr/issues/18263
-      //
-      // We still bundle for the dev environment and the docs build since we don't use a CDN for those. Once import maps
-      // are better supported, we can adjust for that and use the same build again. https://caniuse.com/import-maps
+      // We don't bundle certain dependencies in the unbundled build. This ensures we ship bare module specifiers,
+      // allowing end users to better optimize when using a bundler. (Only packages that ship ESM can be external.)
       //
       external: bundle ? undefined : ['@popperjs/core', '@shoelace-style/animations', 'lit', 'qr-creator'],
       splitting: true,
@@ -79,6 +76,12 @@ mkdirp.sync(outdir);
       process.exit(1);
     });
 
+  // Copy the build output to an additional directory
+  if (copydir) {
+    del.sync(copydir);
+    copy(outdir, copydir);
+  }
+
   console.log(chalk.green(`The build has been generated at ${outdir} 📦\n`));
 
   // Dev server
@@ -86,6 +89,9 @@ mkdirp.sync(outdir);
     const port = await getPort({
       port: getPort.makeRange(4000, 4999)
     });
+
+    // Make sure docs/dist is empty since we're serving it virtually
+    del.sync('docs/dist');
 
     console.log(chalk.cyan(`Launching the Shoelace dev server at http://localhost:${port}! 🥾\n`));
 
@@ -113,7 +119,7 @@ mkdirp.sync(outdir);
       buildResult
         // Rebuild and reload
         .rebuild()
-        .then(async () => {
+        .then(() => {
           // Rebuild stylesheets when a theme file changes
           if (/^src\/themes/.test(filename)) {
             execSync(`node scripts/make-css.js --outdir "${outdir}"`, { stdio: 'inherit' });
@@ -127,7 +133,9 @@ mkdirp.sync(outdir);
 
           execSync(`node scripts/make-metadata.js --outdir "${outdir}"`, { stdio: 'inherit' });
         })
-        .then(() => bs.reload())
+        .then(() => {
+          bs.reload();
+        })
         .catch(err => console.error(chalk.red(err)));
     });
 

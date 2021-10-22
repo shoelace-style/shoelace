@@ -31,9 +31,8 @@
   },
   "scripts": {
     "start": "node scripts/build.js --bundle --serve",
-    "build": "node scripts/build.js --types",
-    "build-docs": "node scripts/build.js --dir docs/dist --bundle",
-    "prepublishOnly": "npm run build && npm run build-docs && npm run test",
+    "build": "node scripts/build.js --bundle --types --copydir \"docs/dist\"",
+    "prepublishOnly": "npm run build && npm run test",
     "prettier": "prettier --write --loglevel warn .",
     "create": "plop --plopfile scripts/plop/plopfile.cjs",
     "test": "web-test-runner \"src/**/*.test.ts\" --node-resolve --puppeteer",

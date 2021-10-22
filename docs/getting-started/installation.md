@@ -8,7 +8,7 @@ The easiest way to install Shoelace is with the CDN. Just add the following tags
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/themes/light.css">
-<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/shoelace.js/+esm"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/shoelace.js"></script>
 ```
 
 ### Dark Theme
@@ -17,7 +17,7 @@ If you prefer to use the dark theme instead, use this. Note the `sl-theme-dark` 
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/themes/light.css">
-<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/shoelace.js/+esm"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/shoelace.js"></script>
 ```
 
 ### Light & Dark Theme
@@ -29,7 +29,7 @@ If you want to load the light or dark theme based on the user's `prefers-color-s
 <link rel="stylesheet" media="(prefers-color-scheme:dark)"
       href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/themes/dark.css"
       onload="document.documentElement.classList.add('sl-theme-dark');">
-<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/shoelace.js/+esm"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/shoelace.js"></script>
 ```
 
 Now you can [start using Shoelace!](/getting-started/usage)

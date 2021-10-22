@@ -467,7 +467,7 @@
             To import this component from [the CDN](https://www.jsdelivr.com/package/npm/@shoelace-style/shoelace):
 
             \`\`\`js
-            import 'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@${metadata.package.version}/${component.path}/+esm';
+            import 'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@${metadata.package.version}/${component.path}';
             \`\`\`
             </sl-tab-panel>
 

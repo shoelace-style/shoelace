@@ -6,7 +6,11 @@ Components with the <sl-badge type="warning" pill>Experimental</sl-badge> badge 
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
-## Next
+## 2.0.0-beta.58
+
+This version once again restores the bundled distribution because the unbundled + CDN approach is currently confusing and [not working properly](https://github.com/shoelace-style/shoelace/issues/559#issuecomment-949662331). Unbundling the few dependencies Shoelace has is still a goal of the project, but [this jsDelivr bug](https://github.com/jsdelivr/jsdelivr/issues/18337) needs to be resolved before we can achieve it.
+
+I sincerely apologize for the instability of the last few beta releases as a result of this effort.
 
 - Added experimental `<sl-animated-image>` component
 - Added `label` attribute to `<sl-progress-bar>` and `<sl-progress-ring>` to improve a11y
@@ -15,6 +19,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug where the `nav` part in `<sl-tab-group>` was on the incorrect element [#563](https://github.com/shoelace-style/shoelace/pull/563)
 - Fixed a bug where non-integer aspect ratios were calculated incorrectly in `<sl-responsive-media>`
 - Fixed a bug in `<sl-range>` where setting `value` wouldn't update the active and inactive portion of the track [#572](https://github.com/shoelace-style/shoelace/pull/572)
+- Reverted to publishing the bundled dist and removed `/+esm` links from the docs
 - Updated to Bootstrap Icons to 1.6.1
 
 ## 2.0.0-beta.57
