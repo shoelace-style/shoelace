@@ -598,7 +598,7 @@ export default css`
    * buttons and we style them here instead.
    */
 
-  :host(.sl-button-group__button--first) .button {
+  :host(.sl-button-group__button--first:not(.sl-button-group__button--last)) .button {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
   }
@@ -607,7 +607,7 @@ export default css`
     border-radius: 0;
   }
 
-  :host(.sl-button-group__button--last) .button {
+  :host(.sl-button-group__button--last:not(.sl-button-group__button--first)) .button {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
   }
