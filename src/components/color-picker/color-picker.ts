@@ -13,15 +13,19 @@ import color from 'color';
 import styles from './color-picker.styles';
 
 import '../button/button';
+import '../button-group/button-group';
 import '../dropdown/dropdown';
 import '../icon/icon';
 import '../input/input';
+
+const hasEyeDropper = 'EyeDropper' in window;
 
 /**
  * @since 2.0
  * @status stable
  *
  * @dependency sl-button
+ * @dependency sl-button-group
  * @dependency sl-dropdown
  * @dependency sl-input
  *
@@ -570,6 +574,22 @@ export default class SlColorPicker extends LitElement {
     this.previewButton.classList.remove('color-picker__preview-color--copied');
   }
 
+  handleEyeDropper() {
+    if (!hasEyeDropper) {
+      return;
+    }
+
+    // @ts-ignore
+    const eyeDropper = new EyeDropper();
+
+    eyeDropper
+      .open()
+      .then((colorSelectionResult: any) => this.setColor(colorSelectionResult.sRGBHex))
+      .catch(() => {
+        // The user canceled, do nothing
+      });
+  }
+
   @watch('format')
   handleFormatChange() {
     this.syncValues();
@@ -606,6 +626,7 @@ export default class SlColorPicker extends LitElement {
     const x = this.saturation;
     const y = 100 - this.lightness;
 
+    // TODO - i18n for format, copy, and eye dropper buttons
     const colorPicker = html`
       <div
         part="base"
@@ -708,6 +729,7 @@ export default class SlColorPicker extends LitElement {
             type="button"
             part="preview"
             class="color-picker__preview color-picker__transparent-bg"
+            aria-label="Copy"
             style=${styleMap({
               '--preview-color': `hsla(${this.hue}deg, ${this.saturation}%, ${this.lightness}%, ${this.alpha / 100})`
             })}
@@ -730,13 +752,26 @@ export default class SlColorPicker extends LitElement {
             @sl-change=${this.handleInputChange}
           ></sl-input>
 
-          ${!this.noFormatToggle
-            ? html`
-                <sl-button exportparts="base:format-button" @click=${this.handleFormatToggle}>
-                  ${this.setLetterCase(this.format)}
-                </sl-button>
-              `
-            : ''}
+          <sl-button-group>
+            ${!this.noFormatToggle
+              ? html`
+                  <sl-button
+                    aria-label="Change format"
+                    exportparts="base:format-button"
+                    @click=${this.handleFormatToggle}
+                  >
+                    ${this.setLetterCase(this.format)}
+                  </sl-button>
+                `
+              : ''}
+            ${hasEyeDropper
+              ? html`
+                  <sl-button exportparts="base:eye-dropper-button" @click=${this.handleEyeDropper}>
+                    <sl-icon library="system" name="eyedropper" label="Select a color from the screen"></sl-icon>
+                  </sl-button>
+                `
+              : ''}
+          </sl-button-group>
         </div>
 
         ${this.swatches

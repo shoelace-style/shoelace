@@ -191,11 +191,14 @@ export default css`
     flex: 1 1 auto;
   }
 
+  .color-picker__user-input sl-button-group {
+    margin-left: var(--sl-spacing-small);
+  }
+
   .color-picker__user-input sl-button {
     min-width: 3.25rem;
     max-width: 3.25rem;
     font-size: 1rem;
-    margin-left: var(--sl-spacing-small);
   }
 
   .color-picker__swatches {
