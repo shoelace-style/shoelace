@@ -43,6 +43,7 @@ const hasEyeDropper = 'EyeDropper' in window;
  * @csspart slider-handle - Hue and opacity slider handles.
  * @csspart preview - The preview color.
  * @csspart input - The text input.
+ * @csspart eye-dropper-button - The toggle format button's base.
  * @csspart format-button - The toggle format button's base.
  *
  * @cssproperty --grid-width - The width of the color grid.
