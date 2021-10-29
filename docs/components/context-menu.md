@@ -8,7 +8,7 @@ Context menus are designed to work with [menus](/components/menu) and [menu item
 
 ```html preview
 <sl-context-menu>
-  <div style="height: 200px; background: rgb(var(--sl-color-neutral-100)); display: flex; align-items: center; justify-content: center;">
+  <div style="height: 200px; background: rgb(var(--sl-color-neutral-100)); display: flex; align-items: center; justify-content: center; padding: 1rem;">
     Right-click to activate the context menu
   </div>
 
@@ -33,7 +33,7 @@ The [menu component](/components/menu) emits an `sl-select` event when a menu it
 ```html preview
 <div class="context-menu-selections">
   <sl-context-menu>
-    <div style="height: 200px; background: rgb(var(--sl-color-neutral-100)); display: flex; align-items: center; justify-content: center;">
+    <div style="height: 200px; background: rgb(var(--sl-color-neutral-100)); display: flex; align-items: center; justify-content: center; padding: 1rem;">
       Right-click to activate the context menu
     </div>
 
@@ -80,7 +80,7 @@ The preferred placement of the context menu can be set with the `placement` attr
 
 ```html preview
 <sl-context-menu placement="top-end">
-  <div style="height: 200px; background: rgb(var(--sl-color-neutral-100)); display: flex; align-items: center; justify-content: center;">
+  <div style="height: 200px; background: rgb(var(--sl-color-neutral-100)); display: flex; align-items: center; justify-content: center; padding: 1rem;">
     Right-click to activate the context menu
   </div>
 
