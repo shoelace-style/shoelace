@@ -39,7 +39,7 @@ body.site-search-visible {
   flex-direction: column;
   max-width: 460px;
   max-height: calc(100vh - 20rem);
-  background-color: rgb(var(--sl-color-neutral-0));
+  background-color: rgb(var(--sl-surface-base-alt));
   border-radius: var(--sl-border-radius-large);
   box-shadow: var(--sl-shadow-x-large);
   margin: 10rem auto;
