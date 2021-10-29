@@ -100,28 +100,6 @@ export default class SlDropdown extends LitElement {
     if (!this.containingElement) {
       this.containingElement = this;
     }
-
-    // Create the popover after render
-    this.updateComplete.then(() => {
-      this.popover = createPopper(this.trigger, this.positioner, {
-        placement: this.placement,
-        strategy: this.hoist ? 'fixed' : 'absolute',
-        modifiers: [
-          {
-            name: 'flip',
-            options: {
-              boundary: 'viewport'
-            }
-          },
-          {
-            name: 'offset',
-            options: {
-              offset: [this.skidding, this.distance]
-            }
-          }
-        ]
-      });
-    });
   }
 
   firstUpdated() {
@@ -131,7 +109,6 @@ export default class SlDropdown extends LitElement {
   disconnectedCallback() {
     super.disconnectedCallback();
     this.hide();
-    this.popover.destroy();
   }
 
   focusOnTrigger() {
@@ -207,40 +184,13 @@ export default class SlDropdown extends LitElement {
     }
   }
 
-  @watch('distance')
-  @watch('hoist')
-  @watch('placement')
-  @watch('skidding')
-  handlePopoverOptionsChange() {
-    if (this.popover) {
-      this.popover.setOptions({
-        placement: this.placement,
-        strategy: this.hoist ? 'fixed' : 'absolute',
-        modifiers: [
-          {
-            name: 'flip',
-            options: {
-              boundary: 'viewport'
-            }
-          },
-          {
-            name: 'offset',
-            options: {
-              offset: [this.skidding, this.distance]
-            }
-          }
-        ]
-      });
-    }
-  }
-
   handleTriggerClick() {
     this.open ? this.hide() : this.show();
   }
 
   handleTriggerKeyDown(event: KeyboardEvent) {
     const menu = this.getMenu();
-    const menuItems = menu ? ([...menu.querySelectorAll('sl-menu-item')] as SlMenuItem[]) : [];
+    const menuItems = menu ? menu.getAllItems() : [];
     const firstMenuItem = menuItems[0];
     const lastMenuItem = menuItems[menuItems.length - 1];
 
@@ -262,7 +212,7 @@ export default class SlDropdown extends LitElement {
     // When up/down is pressed, we make the assumption that the user is familiar with the menu and plans to make a
     // selection. Rather than toggle the panel, we focus on the menu (if one exists) and activate the first item for
     // faster navigation.
-    if (['ArrowDown', 'ArrowUp'].includes(event.key)) {
+    if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
       event.preventDefault();
 
       // Show the menu if it's not already open
@@ -271,14 +221,14 @@ export default class SlDropdown extends LitElement {
       }
 
       // Focus on a menu item
-      if (event.key === 'ArrowDown' && firstMenuItem) {
+      if (['ArrowDown', 'Home'].includes(event.key) && firstMenuItem) {
         const menu = this.getMenu();
         menu.setCurrentItem(firstMenuItem);
         firstMenuItem.focus();
         return;
       }
 
-      if (event.key === 'ArrowUp' && lastMenuItem) {
+      if (['ArrowUp', 'End'].includes(event.key) && lastMenuItem) {
         menu.setCurrentItem(lastMenuItem);
         lastMenuItem.focus();
         return;
@@ -327,7 +277,7 @@ export default class SlDropdown extends LitElement {
     }
   }
 
-  /** Shows the dropdown panel. */
+  /** Shows the dropdown panel */
   async show() {
     if (this.open) {
       return;
@@ -352,11 +302,9 @@ export default class SlDropdown extends LitElement {
    * is activated.
    */
   reposition() {
-    if (!this.open) {
-      return;
+    if (this.popover) {
+      this.popover.update();
     }
-
-    this.popover.update();
   }
 
   @watch('open', { waitUntilFirstUpdate: true })
@@ -376,7 +324,26 @@ export default class SlDropdown extends LitElement {
       document.addEventListener('mousedown', this.handleDocumentMouseDown);
 
       await stopAnimations(this);
-      this.popover.update();
+
+      this.popover = createPopper(this.trigger, this.positioner, {
+        placement: this.placement,
+        strategy: this.hoist ? 'fixed' : 'absolute',
+        modifiers: [
+          {
+            name: 'flip',
+            options: {
+              boundary: 'viewport'
+            }
+          },
+          {
+            name: 'offset',
+            options: {
+              offset: [this.skidding, this.distance]
+            }
+          }
+        ]
+      });
+
       this.panel.hidden = false;
       const { keyframes, options } = getAnimation(this, 'dropdown.show');
       await animateTo(this.panel, keyframes, options);
