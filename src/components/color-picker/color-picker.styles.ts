@@ -302,7 +302,7 @@ export default css`
     height: 100%;
     border-radius: inherit;
     background-color: currentColor;
-    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25);
+    box-shadow: inset 0 0 0 1px rgb(var(--sl-color-neutral-1000) / 25%);
     transition: inherit;
   }
 
