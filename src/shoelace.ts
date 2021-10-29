@@ -11,6 +11,7 @@ export { default as SlButtonGroup } from './components/button-group/button-group
 export { default as SlCard } from './components/card/card';
 export { default as SlCheckbox } from './components/checkbox/checkbox';
 export { default as SlColorPicker } from './components/color-picker/color-picker';
+export { default as SlContextMenu } from './components/context-menu/context-menu';
 export { default as SlDetails } from './components/details/details';
 export { default as SlDialog } from './components/dialog/dialog';
 export { default as SlDivider } from './components/divider/divider';

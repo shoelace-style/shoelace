@@ -21,6 +21,7 @@
   - [Card](/components/card)
   - [Checkbox](/components/checkbox)
   - [Color Picker](/components/color-picker)
+  - [Context Menu](/components/context-menu)
   - [Details](/components/details)
   - [Dialog](/components/dialog)
   - [Divider](/components/divider)
