@@ -93,14 +93,20 @@ export default class SlContextMenu extends LitElement {
   }
 
   async handleContextMenu(event: MouseEvent) {
-    event.preventDefault();
+    const target = event.target as HTMLElement;
+    const targetRect = target.getBoundingClientRect();
+    const wrapperRect = this.wrapper.getBoundingClientRect();
     const { offsetX, offsetY } = event;
+    const x = targetRect.left + offsetX - wrapperRect.left;
+    const y = targetRect.top + offsetY - wrapperRect.top;
+
+    event.preventDefault();
 
     if (this.open) {
       await this.hide();
     }
 
-    this.show(offsetX, offsetY);
+    this.show(x, y);
   }
 
   handleDocumentKeyDown(event: KeyboardEvent) {

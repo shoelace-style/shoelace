@@ -2,7 +2,7 @@
 
 [component-header:sl-context-menu]
 
-Context menus offer additional options through a menu that opens at the pointers location, usually triggered by a right-click.
+Context menus offer additional options through a menu that opens at the pointer's location, usually activated by a right-click.
 
 Context menus are designed to work with [menus](/components/menu) and [menu items](/components/menu-item). The menu must include `slot="menu"`. Other content you provide will be part of the context menu's target area.
 
@@ -94,6 +94,47 @@ The preferred placement of the context menu can be set with the `placement` attr
     <sl-menu-item value="delete">Delete</sl-menu-item>
   </sl-menu>
 </sl-context-menu>
+```
+
+### Detecting the Target Item
+
+A single context menu can wrap a number of items. To detect the item that activated the context menu...
+
+TODO
+
+```html preview
+<div class="context-menu-detecting">
+  <sl-context-menu>
+    <ul>
+      <li>Item 1</li>
+      <li>Item 2</li>
+      <li>Item 3</li>
+      <li>Item 4</li>
+      <li>Item 5</li>
+    </ul>
+
+    <sl-menu slot="menu">
+      <sl-menu-item value="cut">Cut</sl-menu-item>
+      <sl-menu-item value="copy">Copy</sl-menu-item>
+      <sl-menu-item value="paste">Paste</sl-menu-item>
+    </sl-menu>
+  </sl-context-menu>
+</div>
+
+<style>
+  .context-menu-detecting ul {
+    max-width: 300px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .context-menu-detecting li {
+    background: rgb(var(--sl-color-neutral-100));
+    padding: .5rem 1rem;
+    margin: 0 0 2px 0;
+  }
+</style>
 ```
 
 [component-metadata:sl-context-menu]
