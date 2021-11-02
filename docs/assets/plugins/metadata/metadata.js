@@ -481,7 +481,7 @@
             <sl-tab-panel name="react">\n
             To import this component using [\`@shoelace-style/react\`](https://www.npmjs.com/package/@shoelace-style/react):
             \`\`\`js
-            import '@shoelace-style/react/dist/${component.tagName.replace(/^sl-/, '')}';
+            import { ${component.name} } from '@shoelace-style/react';
             \`\`\`
             </sl-tab-panel>
             </sl-tab-group>
