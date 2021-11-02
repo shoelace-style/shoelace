@@ -507,7 +507,7 @@ export default class SlSelect extends LitElement {
                   <sl-icon-button
                     exportparts="base:clear-button"
                     class="select__clear"
-                    name="x-circle"
+                    name="x-circle-fill"
                     library="system"
                     @click=${this.handleClearClick}
                     tabindex="-1"
