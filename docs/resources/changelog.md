@@ -11,6 +11,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Added eye dropper to `<sl-color-picker>` when the browser supports the [EyeDropper API](https://wicg.github.io/eyedropper-api/)
 - Fixed a bug in `<sl-button-group>` where buttons groups with only one button would have an incorrect border radius
 - Improved the `<sl-color-picker>` trigger's border in dark mode
+- Updated to Bootstrap Icons to 1.7.0
 - Updated to Lit 2.0.2
 
 ## 2.0.0-beta.58

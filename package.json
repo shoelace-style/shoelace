@@ -52,7 +52,7 @@
     "@web/test-runner": "^0.13.5",
     "@web/test-runner-puppeteer": "^0.10.0",
     "bluebird": "^3.7.2",
-    "bootstrap-icons": "^1.6.1",
+    "bootstrap-icons": "^1.7.0",
     "browser-sync": "^2.26.14",
     "chalk": "^4.1.0",
     "command-line-args": "^5.2.0",
