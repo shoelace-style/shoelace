@@ -1,5 +1,5 @@
 (() => {
-  const version = sessionStorage.getItem('sl-version');
+  const reactVersion = '17.0.2';
   let flavor = localStorage.getItem('flavor') || 'html'; // "html" or "react"
   let count = 1;
 
@@ -8,7 +8,14 @@
   }
 
   function convertModuleLinks(html) {
-    return html.replace(/@shoelace-style\/shoelace/g, `https://cdn.skypack.dev/@shoelace-style/shoelace@${version}`);
+    const version = sessionStorage.getItem('sl-version');
+
+    html = html
+      .replace(/@shoelace-style\/shoelace/g, `https://cdn.skypack.dev/@shoelace-style/shoelace@${version}`)
+      .replace(/from 'react'/g, `from 'https://cdn.skypack.dev/react@${reactVersion}'`)
+      .replace(/from "react"/g, `from "https://cdn.skypack.dev/react@${reactVersion}"`);
+
+    return html;
   }
 
   function getAdjacentExample(name, pre) {
@@ -263,6 +270,7 @@
   // Open in CodePen
   document.addEventListener('click', event => {
     const button = event.target.closest('button');
+    const version = sessionStorage.getItem('sl-version');
 
     if (button?.classList.contains('code-block__button--codepen')) {
       const codeBlock = button.closest('.code-block');
@@ -292,8 +300,13 @@
       if (isReact) {
         htmlTemplate = '<div id="root"></div>';
         jsTemplate =
-          `import React, { useRef } from 'https://cdn.skypack.dev/react@17.0.2';\n` +
-          `import ReactDOM from 'https://cdn.skypack.dev/react-dom@17.0.2';\n` +
+          `import React from 'https://cdn.skypack.dev/react@${reactVersion}';\n` +
+          `import ReactDOM from 'https://cdn.skypack.dev/react-dom@${reactVersion}';\n` +
+          `import { setBasePath } from 'https://cdn.skypack.dev/@shoelace-style/shoelace@${version}/dist/utilities/base-path';\n` +
+          '\n' +
+          `// Set the base path for Shoelace assets\n` +
+          `setBasePath('https://cdn.skypack.dev/@shoelace-style/shoelace@${version}/dist/')\n` +
+          '\n' +
           convertModuleLinks(reactExample) +
           '\n' +
           '\n' +
