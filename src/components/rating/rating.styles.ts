@@ -64,7 +64,8 @@ export default css`
     cursor: default;
   }
 
-  .rating--disabled .rating__symbol--hover .rating--readonly .rating__symbol--hover {
+  .rating--disabled .rating__symbol--hover,
+  .rating--readonly .rating__symbol--hover {
     transform: none;
   }
 

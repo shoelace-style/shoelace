@@ -30,7 +30,7 @@ export default class SlTab extends LitElement {
   private componentId = `tab-${++id}`;
 
   /** The name of the tab panel the tab will control. The panel must be located in the same tab group. */
-  @property() panel = '';
+  @property({ reflect: true }) panel = '';
 
   /** Draws the tab in an active state. */
   @property({ type: Boolean, reflect: true }) active = false;

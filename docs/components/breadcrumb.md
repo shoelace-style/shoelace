@@ -15,6 +15,19 @@ Breadcrumbs are usually placed before a page's main content with the current pag
 </sl-breadcrumb>
 ```
 
+```jsx react
+import { SlBreadcrumb, SlBreadcrumbItem } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlBreadcrumb>
+    <SlBreadcrumbItem>Catalog</SlBreadcrumbItem>
+    <SlBreadcrumbItem>Clothing</SlBreadcrumbItem>
+    <SlBreadcrumbItem>Women's</SlBreadcrumbItem>
+    <SlBreadcrumbItem>Shirts &amp; Tops</SlBreadcrumbItem>
+  </SlBreadcrumb>
+);
+```
+
 ## Examples
 
 ### Breadcrumb Links
@@ -41,6 +54,30 @@ For websites, you'll probably want to use links instead. You can make any breadc
     Web Design
   </sl-breadcrumb-item>
 </sl-breadcrumb>
+```
+
+```jsx react
+import { SlBreadcrumb, SlBreadcrumbItem } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlBreadcrumb>
+    <SlBreadcrumbItem href="https://example.com/home">
+      Homepage
+    </SlBreadcrumbItem>
+
+    <SlBreadcrumbItem href="https://example.com/home/services">
+      Our Services
+    </SlBreadcrumbItem>
+
+    <SlBreadcrumbItem href="https://example.com/home/services/digital">
+      Digital Media
+    </SlBreadcrumbItem>
+
+    <SlBreadcrumbItem href="https://example.com/home/services/digital/web-design">
+      Web Design
+    </SlBreadcrumbItem>
+  </SlBreadcrumb>
+);
 ```
 
 ### Custom Separators
@@ -74,6 +111,40 @@ Use the `separator` slot to change the separator that goes between breadcrumb it
 </sl-breadcrumb>
 ```
 
+```jsx react
+import '@shoelace-style/shoelace/dist/components/icon/icon.js';
+import { SlBreadcrumb, SlBreadcrumbItem, SlIcon } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <>
+    <SlBreadcrumb>
+      <sl-icon name="dot" slot="separator" />
+      <SlBreadcrumbItem>First</SlBreadcrumbItem>
+      <SlBreadcrumbItem>Second</SlBreadcrumbItem>
+      <SlBreadcrumbItem>Third</SlBreadcrumbItem> 
+    </SlBreadcrumb>
+
+    <br />
+
+    <SlBreadcrumb>
+      <sl-icon name="arrow-right" slot="separator" />
+      <SlBreadcrumbItem>First</SlBreadcrumbItem>
+      <SlBreadcrumbItem>Second</SlBreadcrumbItem>
+      <SlBreadcrumbItem>Third</SlBreadcrumbItem> 
+    </SlBreadcrumb>
+
+    <br />
+
+    <SlBreadcrumb>
+      <span slot="separator">/</span>
+      <SlBreadcrumbItem>First</SlBreadcrumbItem>
+      <SlBreadcrumbItem>Second</SlBreadcrumbItem>
+      <SlBreadcrumbItem>Third</SlBreadcrumbItem> 
+    </SlBreadcrumb>
+  </>
+);
+```
+
 ### Prefixes
 
 Use the `prefix` slot to add content before any breadcrumb item.
@@ -89,6 +160,21 @@ Use the `prefix` slot to add content before any breadcrumb item.
 </sl-breadcrumb>
 ```
 
+```jsx react
+import { SlBreadcrumb, SlBreadcrumbItem, SlIcon } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlBreadcrumb>
+    <SlBreadcrumbItem>
+      <sl-icon slot="prefix" name="house"></sl-icon>
+      Home
+    </SlBreadcrumbItem>
+    <SlBreadcrumbItem>Articles</SlBreadcrumbItem>
+    <SlBreadcrumbItem>Traveling</SlBreadcrumbItem>
+  </SlBreadcrumb>
+);
+```
+
 ### Suffixes
 
 Use the `suffix` slot to add content after any breadcrumb item.
@@ -102,6 +188,21 @@ Use the `suffix` slot to add content after any breadcrumb item.
     <sl-icon slot="suffix" name="shield-lock"></sl-icon>
   </sl-breadcrumb-item>
 </sl-breadcrumb>
+```
+
+```jsx react
+import { SlBreadcrumb, SlBreadcrumbItem, SlIcon } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlBreadcrumb>
+    <SlBreadcrumbItem>Documents</SlBreadcrumbItem>
+    <SlBreadcrumbItem>Policies</SlBreadcrumbItem>
+    <SlBreadcrumbItem>
+      Security
+      <SlIcon slot="suffix" name="shield-lock"></SlIcon>
+    </SlBreadcrumbItem>
+  </SlBreadcrumb>
+);
 ```
 
 ### With Dropdowns
@@ -127,6 +228,39 @@ Dropdown menus can be placed in a prefix or suffix slot to provide additional op
     </sl-dropdown>    
   </sl-breadcrumb-item>
 </sl-breadcrumb>
+```
+
+```jsx react
+import { 
+  SlBreadcrumb, 
+  SlBreadcrumbItem, 
+  SlButton,
+  SlDropdown,
+  SlIcon,
+  SlMenu,
+  SlMenuItem
+} from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlBreadcrumb>
+    <SlBreadcrumbItem>Homepage</SlBreadcrumbItem>
+    <SlBreadcrumbItem>Our Services</SlBreadcrumbItem>
+    <SlBreadcrumbItem>Digital Media</SlBreadcrumbItem>
+    <SlBreadcrumbItem>
+      Web Design
+      <SlDropdown slot="suffix">
+        <SlButton slot="trigger" size="small" circle>
+          <SlIcon label="More options" name="three-dots"></SlIcon>
+        </SlButton>
+        <SlMenu>
+          <SlMenuItem checked>Web Design</SlMenuItem>
+          <SlMenuItem>Web Development</SlMenuItem>
+          <SlMenuItem>Marketing</SlMenuItem>
+        </SlMenu>
+      </SlDropdown>    
+    </SlBreadcrumbItem>
+  </SlBreadcrumb>
+);
 ```
 
 [component-metadata:sl-breadcrumb]

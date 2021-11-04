@@ -21,7 +21,7 @@ export default class SlTabPanel extends LitElement {
   private componentId = `tab-panel-${++id}`;
 
   /** The tab panel's name. */
-  @property() name = '';
+  @property({ reflect: true }) name = '';
 
   /** When true, the tab panel will be shown. */
   @property({ type: Boolean, reflect: true }) active = false;

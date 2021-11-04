@@ -52,7 +52,7 @@ export default class SlProgressBar extends LitElement {
           ${!this.indeterminate
             ? html`
                 <span part="label" class="progress-bar__label">
-                  <slot></slot>
+                  <slot>${this.label}</slot>
                 </span>
               `
             : ''}

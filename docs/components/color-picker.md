@@ -8,6 +8,14 @@ Color pickers allow the user to select a color.
 <sl-color-picker></sl-color-picker>
 ```
 
+```jsx react
+import { SlColorPicker } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlColorPicker />
+);
+```
+
 ## Examples
 
 ### Opacity
@@ -16,6 +24,14 @@ Use the `opacity` attribute to enable the opacity slider. When this is enabled, 
 
 ```html preview
 <sl-color-picker opacity></sl-color-picker>
+```
+
+```jsx react
+import { SlColorPicker } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlColorPicker opacity />
+);
 ```
 
 ### Formats
@@ -30,6 +46,18 @@ To prevent users from toggling the format themselves, add the `no-format-toggle`
 <sl-color-picker format="hsl" value="hsl(290, 87%, 47%)"></sl-color-picker>
 ```
 
+```jsx react
+import { SlColorPicker } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <>
+    <SlColorPicker format="hex" value="#4a90e2" />
+    <SlColorPicker format="rgb" value="rgb(80, 227, 194)" />
+    <SlColorPicker format="hsl" value="hsl(290, 87%, 47%)" />
+  </>
+);
+```
+
 ### Sizes
 
 Use the `size` attribute to change the color picker's trigger size.
@@ -40,6 +68,17 @@ Use the `size` attribute to change the color picker's trigger size.
 <sl-color-picker size="large"></sl-color-picker>
 ```
 
+```jsx react
+import { SlColorPicker } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <>
+    <SlColorPicker size="small" />
+    <SlColorPicker size="medium" />
+    <SlColorPicker size="large" />
+  </>
+);
+```
 
 ### Inline
 
@@ -47,6 +86,14 @@ The color picker can be rendered inline instead of in a dropdown using the `inli
 
 ```html preview
 <sl-color-picker inline></sl-color-picker>
+```
+
+```jsx react
+import { SlColorPicker } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlColorPicker inline />
+);
 ```
 
 [component-metadata:sl-color-picker]

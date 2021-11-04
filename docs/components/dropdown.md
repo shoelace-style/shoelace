@@ -31,6 +31,40 @@ Dropdowns are designed to work well with [menus](/components/menu) to provide a 
 </sl-dropdown>
 ```
 
+```jsx react
+import { 
+  SlButton,
+  SlDivider,
+  SlDropdown,
+  SlIcon,
+  SlMenu,
+  SlMenuItem
+} from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlDropdown>
+    <SlButton slot="trigger" caret>Dropdown</SlButton>
+    <SlMenu>
+      <SlMenuItem>Dropdown Item 1</SlMenuItem>
+      <SlMenuItem>Dropdown Item 2</SlMenuItem>
+      <SlMenuItem>Dropdown Item 3</SlMenuItem>
+      <SlDivider />
+      <SlMenuItem checked>Checked</SlMenuItem>
+      <SlMenuItem disabled>Disabled</SlMenuItem>
+      <SlDivider />
+      <SlMenuItem>
+        Prefix
+        <SlIcon slot="prefix" name="gift" />
+      </SlMenuItem>
+      <SlMenuItem>
+        Suffix Icon
+        <SlIcon slot="suffix" name="heart" />
+      </SlMenuItem>
+    </SlMenu>
+  </SlDropdown>  
+);
+```
+
 ## Examples
 
 ### Getting the Selected Item
@@ -60,6 +94,33 @@ When dropdowns are used with [menus](/components/menu), you can listen for the `
 </script>
 ```
 
+```jsx react
+import { 
+  SlButton,
+  SlDropdown,
+  SlMenu,
+  SlMenuItem
+} from '@shoelace-style/shoelace/dist/react';
+
+const App = () => {
+  function handleSelect(event) {
+    const selectedItem = event.detail.item;
+    console.log(selectedItem.value);
+  }
+
+  return (
+    <SlDropdown>
+      <SlButton slot="trigger" caret>Edit</SlButton>
+      <SlMenu onSlSelect={handleSelect}>
+        <SlMenuItem value="cut">Cut</SlMenuItem>
+        <SlMenuItem value="copy">Copy</SlMenuItem>
+        <SlMenuItem value="paste">Paste</SlMenuItem>
+      </SlMenu>
+    </SlDropdown> 
+  );
+};
+```
+
 Alternatively, you can listen for the `click` event on individual menu items. Note that, using this approach, disabled menu items will still emit a `click` event.
 
 ```html preview
@@ -86,6 +147,40 @@ Alternatively, you can listen for the `click` event on individual menu items. No
 </script>
 ```
 
+```jsx react
+import { 
+  SlButton,
+  SlDropdown,
+  SlMenu,
+  SlMenuItem
+} from '@shoelace-style/shoelace/dist/react';
+
+const App = () => {
+  function handleCut() {
+    console.log('cut');
+  }
+
+  function handleCopy() {
+    console.log('copy');
+  }
+
+  function handlePaste() {
+    console.log('paste');
+  }
+
+  return (
+    <SlDropdown>
+      <SlButton slot="trigger" caret>Edit</SlButton>
+      <SlMenu>
+        <SlMenuItem onClick={handleCut}>Cut</SlMenuItem>
+        <SlMenuItem onClick={handleCopy}>Copy</SlMenuItem>
+        <SlMenuItem onClick={handlePaste}>Paste</SlMenuItem>
+      </SlMenu>
+    </SlDropdown> 
+  );
+};
+```
+
 ### Placement
 
 The preferred placement of the dropdown can be set with the `placement` attribute. Note that the actual position may vary to ensure the panel remains in the viewport.
@@ -102,6 +197,30 @@ The preferred placement of the dropdown can be set with the `placement` attribut
     <sl-menu-item>Replace</sl-menu-item>
   </sl-menu>
 </sl-dropdown>
+```
+
+```jsx react
+import { 
+  SlButton,
+  SlDivider,
+  SlDropdown,
+  SlMenu,
+  SlMenuItem
+} from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlDropdown placement="top-start">
+    <SlButton slot="trigger" caret>Edit</SlButton>
+    <SlMenu>
+      <SlMenuItem>Cut</SlMenuItem>
+      <SlMenuItem>Copy</SlMenuItem>
+      <SlMenuItem>Paste</SlMenuItem>
+      <SlDivider />
+      <SlMenuItem>Find</SlMenuItem>
+      <SlMenuItem>Replace</SlMenuItem>
+    </SlMenu>
+  </SlDropdown> 
+);
 ```
 
 ### Distance
@@ -122,6 +241,30 @@ The distance from the panel to the trigger can be customized using the `distance
 </sl-dropdown>
 ```
 
+```jsx react
+import { 
+  SlButton,
+  SlDivider,
+  SlDropdown,
+  SlMenu,
+  SlMenuItem
+} from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlDropdown distance={30}>
+    <SlButton slot="trigger" caret>Edit</SlButton>
+    <SlMenu>
+      <SlMenuItem>Cut</SlMenuItem>
+      <SlMenuItem>Copy</SlMenuItem>
+      <SlMenuItem>Paste</SlMenuItem>
+      <SlDivider />
+      <SlMenuItem>Find</SlMenuItem>
+      <SlMenuItem>Replace</SlMenuItem>
+    </SlMenu>
+  </SlDropdown> 
+);
+```
+
 ### Skidding
 
 The offset of the panel along the trigger can be customized using the `skidding` attribute. This value is specified in pixels.
@@ -138,6 +281,30 @@ The offset of the panel along the trigger can be customized using the `skidding`
     <sl-menu-item>Replace</sl-menu-item>
   </sl-menu>
 </sl-dropdown>
+```
+
+```jsx react
+import { 
+  SlButton,
+  SlDivider,
+  SlDropdown,
+  SlMenu,
+  SlMenuItem
+} from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlDropdown skidding={30}>
+    <SlButton slot="trigger" caret>Edit</SlButton>
+    <SlMenu>
+      <SlMenuItem>Cut</SlMenuItem>
+      <SlMenuItem>Copy</SlMenuItem>
+      <SlMenuItem>Paste</SlMenuItem>
+      <SlDivider />
+      <SlMenuItem>Find</SlMenuItem>
+      <SlMenuItem>Replace</SlMenuItem>
+    </SlMenu>
+  </SlDropdown> 
+);
 ```
 
 ### Hoisting
@@ -172,6 +339,51 @@ Dropdown panels will be clipped if they're inside a container that has `overflow
     overflow: hidden;
   }
 </style>
+```
+
+```jsx react
+import { 
+  SlButton,
+  SlDivider,
+  SlDropdown,
+  SlIcon,
+  SlMenu,
+  SlMenuItem
+} from '@shoelace-style/shoelace/dist/react';
+
+const css = `
+  .dropdown-hoist {
+    border: solid 2px rgb(var(--sl-panel-border-color));
+    padding: var(--sl-spacing-medium);
+    overflow: hidden;
+  }
+`;
+
+const App = () => (
+  <>
+    <div class="dropdown-hoist">
+      <SlDropdown>
+        <SlButton slot="trigger" caret>No Hoist</SlButton>
+        <SlMenu>
+          <SlMenuItem>Item 1</SlMenuItem>
+          <SlMenuItem>Item 2</SlMenuItem>
+          <SlMenuItem>Item 3</SlMenuItem>
+        </SlMenu>
+      </SlDropdown>
+
+      <SlDropdown hoist>
+        <SlButton slot="trigger" caret>Hoist</SlButton>
+        <SlMenu>
+          <SlMenuItem>Item 1</SlMenuItem>
+          <SlMenuItem>Item 2</SlMenuItem>
+          <SlMenuItem>Item 3</SlMenuItem>
+        </SlMenu>
+      </SlDropdown>
+    </div>
+
+    <style>{css}</style>
+  </>
+);
 ```
 
 [component-metadata:sl-dropdown]

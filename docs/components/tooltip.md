@@ -14,6 +14,16 @@ Tooltips use `display: contents` so they won't interfere with how elements are p
 </sl-tooltip>
 ```
 
+```jsx react
+import { SlButton, SlTooltip } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlTooltip content="This is a tooltip">
+    <SlButton>Hover Me</SlButton>
+  </SlTooltip>  
+);
+```
+
 ## Examples
 
 ### Placement
@@ -41,7 +51,7 @@ Use the `placement` attribute to set the preferred placement of the tooltip.
       <sl-button></sl-button>
     </sl-tooltip>
 
-    <sl-tooltip content="right-start" placement="right-start" style="margin-left: 400px;">
+    <sl-tooltip content="right-start" placement="right-start">
       <sl-button></sl-button>
     </sl-tooltip>
   </div>
@@ -99,15 +109,117 @@ Use the `placement` attribute to set the preferred placement of the tooltip.
     margin-bottom: 0.25rem;
   }
 
-  .tooltip-placement-example [placement='top-start'] sl-button,
-  .tooltip-placement-example [placement='bottom-start'] sl-button {
+  .tooltip-placement-example-row:nth-child(1) sl-tooltip:first-child sl-button,
+  .tooltip-placement-example-row:nth-child(5) sl-tooltip:first-child sl-button {
     margin-left: calc(40px + 0.25rem);
   }
 
-  .tooltip-placement-example [placement^='right'] sl-button {
+  .tooltip-placement-example-row:nth-child(2) sl-tooltip:nth-child(2) sl-button,
+  .tooltip-placement-example-row:nth-child(3) sl-tooltip:nth-child(2) sl-button,
+  .tooltip-placement-example-row:nth-child(4) sl-tooltip:nth-child(2) sl-button {
     margin-left: calc((40px * 3) + (0.25rem * 3));
   }
 </style>
+```
+
+```jsx react
+import { SlButton, SlTooltip } from '@shoelace-style/shoelace/dist/react';
+
+const css = `
+  .tooltip-placement-example {
+    width: 250px;
+  }
+
+  .tooltip-placement-example-row:after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+
+  .tooltip-placement-example sl-button {
+    float: left;
+    width: 2.5rem;
+    margin-right: 0.25rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .tooltip-placement-example-row:nth-child(1) sl-tooltip:first-child sl-button,
+  .tooltip-placement-example-row:nth-child(5) sl-tooltip:first-child sl-button {
+    margin-left: calc(40px + 0.25rem);
+  }
+
+  .tooltip-placement-example-row:nth-child(2) sl-tooltip:nth-child(2) sl-button,
+  .tooltip-placement-example-row:nth-child(3) sl-tooltip:nth-child(2) sl-button,
+  .tooltip-placement-example-row:nth-child(4) sl-tooltip:nth-child(2) sl-button {
+    margin-left: calc((40px * 3) + (0.25rem * 3));
+  }
+`;
+
+const App = () => (
+  <>
+    <div className="tooltip-placement-example">
+      <div className="tooltip-placement-example-row">
+        <SlTooltip content="top-start" placement="top-start">
+          <SlButton />
+        </SlTooltip>
+
+        <SlTooltip content="top" placement="top">
+          <SlButton />
+        </SlTooltip>
+
+        <SlTooltip content="top-end" placement="top-end">
+          <SlButton />
+        </SlTooltip>
+      </div>
+
+      <div className="tooltip-placement-example-row">
+        <SlTooltip content="left-start" placement="left-start">
+          <SlButton />
+        </SlTooltip>
+
+        <SlTooltip content="right-start" placement="right-start">
+          <SlButton />
+        </SlTooltip>
+      </div>
+
+      <div className="tooltip-placement-example-row">
+        <SlTooltip content="left" placement="left">
+          <SlButton />
+        </SlTooltip>
+
+        <SlTooltip content="right" placement="right">
+          <SlButton />
+        </SlTooltip>
+      </div>
+
+      <div className="tooltip-placement-example-row">
+        <SlTooltip content="left-end" placement="left-end">
+          <SlButton />
+        </SlTooltip>
+
+        <SlTooltip content="right-end" placement="right-end">
+          <SlButton />
+        </SlTooltip>
+      </div>
+
+      <div className="tooltip-placement-example-row">
+        <SlTooltip content="bottom-start" placement="bottom-start">
+          <SlButton />
+        </SlTooltip>
+
+        <SlTooltip content="bottom" placement="bottom">
+          <SlButton />
+        </SlTooltip>
+
+        <SlTooltip content="bottom-end" placement="bottom-end">
+          <SlButton />
+        </SlTooltip>
+      </div>
+    </div>
+
+    <style>{css}</style>
+  </>
+);
 ```
 
 ### Click Trigger
@@ -118,6 +230,16 @@ Set the `trigger` attribute to `click` to toggle the tooltip on click instead of
 <sl-tooltip content="Click again to dismiss" trigger="click">
   <sl-button>Click to Toggle</sl-button>
 </sl-tooltip>
+```
+
+```jsx react
+import { SlButton, SlTooltip } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlTooltip content="Click again to dismiss" trigger="click">
+    <SlButton>Click to Toggle</SlButton>
+  </SlTooltip>  
+);
 ```
 
 ### Manual Trigger
@@ -139,6 +261,30 @@ Tooltips can be controller programmatically by setting the `trigger` attribute t
 </script>
 ```
 
+```jsx react
+import { useState } from 'react';
+import { SlAvatar, SlButton, SlTooltip } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <SlButton
+        style={{ marginRight: '4rem' }}
+        onClick={() => setOpen(!open)}
+      >
+        Toggle Manually
+      </SlButton>
+
+      <SlTooltip open={open} content="This is an avatar" trigger="manual">
+        <SlAvatar />
+      </SlTooltip>
+    </>
+  );
+};
+```
+
 ### Remove Arrows
 
 You can control the size of tooltip arrows by overriding the `--sl-tooltip-arrow-size` design token.
@@ -155,6 +301,22 @@ You can control the size of tooltip arrows by overriding the `--sl-tooltip-arrow
 </div>
 ```
 
+```jsx react
+import { SlButton, SlTooltip } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <div style={{ '--sl-tooltip-arrow-size': '0' }}>
+    <SlTooltip content="This is a tooltip">
+      <SlButton>Above</SlButton>
+    </SlTooltip>
+
+    <SlTooltip content="This is a tooltip" placement="bottom">
+      <SlButton>Below</SlButton>
+    </SlTooltip>
+  </div>
+);
+```
+
 To override it globally, set it in a root block in your stylesheet after the Shoelace stylesheet is loaded.
 
 ```css
@@ -169,9 +331,26 @@ Use the `content` slot to create tooltips with HTML content. Tooltips are design
 
 ```html preview
 <sl-tooltip>
-  <div slot="content">I'm not <strong>just</strong> a tooltip, I'm a <em>tooltip</em> with HTML!</div>
+  <div slot="content">
+    I'm not <strong>just</strong> a tooltip, I'm a <em>tooltip</em> with HTML!
+  </div>
+  
   <sl-button>Hover me</sl-button>
 </sl-tooltip>
+```
+
+```jsx react
+import { SlButton, SlTooltip } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlTooltip content="This is a tooltip">
+    <div slot="content">
+      I'm not <strong>just</strong> a tooltip, I'm a <em>tooltip</em> with HTML!
+    </div>
+
+    <SlButton>Hover Me</SlButton>
+  </SlTooltip>  
+);
 ```
 
 ### Hoisting
@@ -197,6 +376,35 @@ Tooltips will be clipped if they're inside a container that has `overflow: auto|
     position: relative;
   }
 </style>
+```
+
+```jsx react
+import { SlButton, SlTooltip } from '@shoelace-style/shoelace/dist/react';
+
+const css = `
+  .tooltip-hoist {
+    border: solid 2px rgb(var(--sl-panel-border-color));
+    overflow: hidden;
+    padding: var(--sl-spacing-medium);
+    position: relative;
+  }
+`;
+
+const App = () => (
+  <>
+    <div class="tooltip-hoist">
+      <SlTooltip content="This is a tooltip">
+        <SlButton>No Hoist</SlButton>
+      </SlTooltip>
+
+      <SlTooltip content="This is a tooltip" hoist>
+        <SlButton>Hoist</SlButton>
+      </SlTooltip>
+    </div>
+
+    <style>{css}</style>
+  </>
+);
 ```
 
 [component-metadata:sl-tooltip]

@@ -6,6 +6,14 @@ Components with the <sl-badge type="warning" pill>Experimental</sl-badge> badge 
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
+## Next
+
+- Added React examples and CodePen links to all components
+- Fixed a bug in `<sl-progress-bar>` where the `label` attribute didn't set the label
+- Fixed a bug in `<sl-rating>` that caused disabled and readonly controls to transition on hover
+- The `panel` property of `<sl-tab>` is now reflected
+- The `name` property of `<sl-tab-panel>` is now reflected
+
 ## 2.0.0-beta.59
 
 - Added React wrappers as first-class citizens

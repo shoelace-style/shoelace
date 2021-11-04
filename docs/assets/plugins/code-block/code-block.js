@@ -239,10 +239,6 @@
         .querySelector('.code-block__button--react')
         ?.classList.toggle('code-block__button--selected', flavor === 'react');
     });
-
-    // Expand the code block
-    codeBlock.classList.add('code-block--expanded');
-    codeBlock.querySelector('.code-block__toggle').setAttribute('aria-expanded', 'true');
   });
 
   // Expand and collapse code blocks
@@ -319,6 +315,7 @@
         '\n' +
         'body {\n' +
         '  font: 16px sans-serif;\n' +
+        '  padding: 1rem;\n' +
         '}';
 
       // Docs: https://blog.codepen.io/documentation/prefill/

@@ -12,6 +12,18 @@ Button groups can be used to group related buttons into sections.
 </sl-button-group>
 ```
 
+```jsx react
+import { SlButton, SlButtonGroup } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlButtonGroup>
+    <SlButton>Left</SlButton>
+    <SlButton>Center</SlButton>
+    <SlButton>Right</SlButton>
+  </SlButtonGroup>
+);
+```
+
 ## Examples
 
 ### Button Sizes
@@ -40,6 +52,36 @@ All button sizes are supported, but avoid mixing sizes within the same button gr
   <sl-button size="large">Center</sl-button>
   <sl-button size="large">Right</sl-button>
 </sl-button-group>
+```
+
+```jsx react
+import { SlButton, SlButtonGroup } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <>
+    <SlButtonGroup>
+      <SlButton size="small">Left</SlButton>
+      <SlButton size="small">Center</SlButton>
+      <SlButton size="small">Right</SlButton>
+    </SlButtonGroup>
+
+    <br /><br />
+
+    <SlButtonGroup>
+      <SlButton size="medium">Left</SlButton>
+      <SlButton size="medium">Center</SlButton>
+      <SlButton size="medium">Right</SlButton>
+    </SlButtonGroup>
+
+    <br /><br />
+
+    <SlButtonGroup>
+      <SlButton size="large">Left</SlButton>
+      <SlButton size="large">Center</SlButton>
+      <SlButton size="large">Right</SlButton>
+    </SlButtonGroup>
+  </>
+);
 ```
 
 ### Theme Buttons
@@ -86,6 +128,52 @@ Theme buttons are supported through the button's `type` attribute.
 </sl-button-group>
 ```
 
+```jsx react
+import { SlButton, SlButtonGroup } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <>
+    <SlButtonGroup>
+      <SlButton type="primary">Left</SlButton>
+      <SlButton type="primary">Center</SlButton>
+      <SlButton type="primary">Right</SlButton>
+    </SlButtonGroup>
+
+    <br /><br />
+
+    <SlButtonGroup>
+      <SlButton type="success">Left</SlButton>
+      <SlButton type="success">Center</SlButton>
+      <SlButton type="success">Right</SlButton>
+    </SlButtonGroup>
+
+    <br /><br />
+
+    <SlButtonGroup>
+      <SlButton type="neutral">Left</SlButton>
+      <SlButton type="neutral">Center</SlButton>
+      <SlButton type="neutral">Right</SlButton>
+    </SlButtonGroup>
+
+    <br /><br />
+
+    <SlButtonGroup>
+      <SlButton type="warning">Left</SlButton>
+      <SlButton type="warning">Center</SlButton>
+      <SlButton type="warning">Right</SlButton>
+    </SlButtonGroup>
+
+    <br /><br />
+
+    <SlButtonGroup>
+      <SlButton type="danger">Left</SlButton>
+      <SlButton type="danger">Center</SlButton>
+      <SlButton type="danger">Right</SlButton>
+    </SlButtonGroup>
+  </>
+);
+```
+
 ### Pill Buttons
 
 Pill buttons are supported through the button's `pill` attribute.
@@ -114,6 +202,36 @@ Pill buttons are supported through the button's `pill` attribute.
 </sl-button-group>
 ```
 
+```jsx react
+import { SlButton, SlButtonGroup } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <>
+    <SlButtonGroup>
+      <SlButton size="small" pill>Left</SlButton>
+      <SlButton size="small" pill>Center</SlButton>
+      <SlButton size="small" pill>Right</SlButton>
+    </SlButtonGroup>
+
+    <br /><br />
+
+    <SlButtonGroup>
+      <SlButton size="medium" pill>Left</SlButton>
+      <SlButton size="medium" pill>Center</SlButton>
+      <SlButton size="medium" pill>Right</SlButton>
+    </SlButtonGroup>
+
+    <br /><br />
+
+    <SlButtonGroup>
+      <SlButton size="large" pill>Left</SlButton>
+      <SlButton size="large" pill>Center</SlButton>
+      <SlButton size="large" pill>Right</SlButton>
+    </SlButtonGroup>
+  </>
+);
+```
+
 ### Dropdowns in Button Groups
 
 Dropdowns can be placed inside button groups as long as the trigger is an `<sl-button>` element.
@@ -131,6 +249,31 @@ Dropdowns can be placed inside button groups as long as the trigger is an `<sl-b
     </sl-menu>
   </sl-dropdown>
 </sl-button-group>
+```
+
+```jsx react
+import { 
+  SlButton, 
+  SlButtonGroup,
+  SlDropdown,
+  SlMenu,
+  SlMenuItem,
+} from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlButtonGroup> 
+    <SlButton>Button</SlButton>
+    <SlButton>Button</SlButton>
+    <SlDropdown>
+      <SlButton slot="trigger" caret>Dropdown</SlButton>
+      <SlMenu>
+        <SlMenuItem>Item 1</SlMenuItem>
+        <SlMenuItem>Item 2</SlMenuItem>
+        <SlMenuItem>Item 3</SlMenuItem>
+      </SlMenu>
+    </SlDropdown>
+  </SlButtonGroup>
+);
 ```
 
 ### Split Buttons
@@ -151,6 +294,30 @@ Create a split button using a button and a dropdown.
 </sl-button-group>
 ```
 
+```jsx react
+import { 
+  SlButton, 
+  SlButtonGroup,
+  SlDropdown,
+  SlMenu,
+  SlMenuItem,
+} from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlButtonGroup> 
+    <SlButton type="primary">Save</SlButton>
+    <SlDropdown placement="bottom-end">
+      <SlButton slot="trigger" type="primary" caret></SlButton>
+      <SlMenu>
+        <SlMenuItem>Save</SlMenuItem>
+        <SlMenuItem>Save as&hellip;</SlMenuItem>
+        <SlMenuItem>Save all</SlMenuItem>
+      </SlMenu>
+    </SlDropdown>
+  </SlButtonGroup>
+);
+```
+
 ### Tooltips in Button Groups
 
 Buttons can be wrapped in tooltips to provide more detail when the user interacts with them.
@@ -169,6 +336,32 @@ Buttons can be wrapped in tooltips to provide more detail when the user interact
     <sl-button>Right</sl-button>
   </sl-tooltip>
 </sl-button-group>
+```
+
+```jsx react
+import { 
+  SlButton, 
+  SlButtonGroup,
+  SlTooltip
+} from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <>
+    <SlButtonGroup>
+      <SlTooltip content="I'm on the left">
+        <SlButton>Left</SlButton>
+      </SlTooltip>
+
+      <SlTooltip content="I'm in the middle">
+        <SlButton>Center</SlButton>
+      </SlTooltip>
+
+      <SlTooltip content="I'm on the right">
+        <SlButton>Right</SlButton>
+      </SlTooltip>
+    </SlButtonGroup>
+  </>
+);
 ```
 
 ### Toolbar Example
@@ -216,6 +409,62 @@ Create interactive toolbars with button groups.
     margin-right: var(--sl-spacing-x-small);
   }
 </style>
+```
+
+```jsx react
+import { 
+  SlButton, 
+  SlButtonGroup,
+  SlIcon,
+  SlTooltip
+} from '@shoelace-style/shoelace/dist/react';
+
+const css = `
+  .button-group-toolbar sl-button-group:not(:last-of-type) {
+    margin-right: var(--sl-spacing-x-small);
+  }
+`;
+
+const App = () => (
+  <>
+    <div class="button-group-toolbar">
+      <SlButtonGroup label="History">
+        <SlTooltip content="Undo">
+          <SlButton><SlIcon name="arrow-counterclockwise"></SlIcon></SlButton>
+        </SlTooltip>
+        <SlTooltip content="Redo">
+          <SlButton><SlIcon name="arrow-clockwise"></SlIcon></SlButton>
+        </SlTooltip>
+      </SlButtonGroup>
+
+      <SlButtonGroup label="Formatting">
+        <SlTooltip content="Bold">
+          <SlButton><SlIcon name="type-bold"></SlIcon></SlButton>
+        </SlTooltip>
+        <SlTooltip content="Italic">
+          <SlButton><SlIcon name="type-italic"></SlIcon></SlButton>
+        </SlTooltip>
+        <SlTooltip content="Underline">
+          <SlButton><SlIcon name="type-underline"></SlIcon></SlButton>
+        </SlTooltip>
+      </SlButtonGroup>
+
+      <SlButtonGroup label="Alignment">
+        <SlTooltip content="Align Left">
+          <SlButton><SlIcon name="justify-left"></SlIcon></SlButton>
+        </SlTooltip>
+        <SlTooltip content="Align Center">
+          <SlButton><SlIcon name="justify"></SlIcon></SlButton>
+        </SlTooltip>
+        <SlTooltip content="Align Right">
+          <SlButton><SlIcon name="justify-right"></SlIcon></SlButton>
+        </SlTooltip>
+      </SlButtonGroup>
+    </div>
+
+    <style>{css}</style>
+  </>
+);
 ```
 
 [component-metadata:sl-button-group]

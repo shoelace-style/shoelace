@@ -34,6 +34,38 @@ QR codes are useful for providing small pieces of information to users who can q
 </style>
 ```
 
+```jsx react
+import { useState } from 'react';
+import { SlQrCode, SlInput } from '@shoelace-style/shoelace/dist/react';
+
+const css = `
+  .qr-overview {
+    max-width: 256px;
+  }
+
+  .qr-overview sl-input {
+    margin-top: 1rem;
+  }
+`;
+
+const App = () => {
+  const [value, setValue] = useState('https://shoelace.style/');
+
+  return (
+    <>
+      <div class="qr-overview">
+        <SlQrCode value={value} label="Scan this code to visit Shoelace on the web!" />
+        <br />
+
+        <SlInput maxlength="255" clearable onInput={event => setValue(event.target.value)} />
+      </div>
+
+      <style>{css}</style>
+    </>
+  );
+};
+```
+
 ## Examples
 
 ### Colors
@@ -44,6 +76,14 @@ Use the `fill` and `background` attributes to modify the QR code's colors. You s
 <sl-qr-code value="https://shoelace.style/" fill="deeppink" background="white"></sl-qr-code>
 ```
 
+```jsx react
+import { SlQrCode } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlQrCode value="https://shoelace.style/" fill="deeppink" background="white" />
+);
+```
+
 ### Size
 
 Use the `size` attribute to change the size of the QR code.
@@ -52,12 +92,28 @@ Use the `size` attribute to change the size of the QR code.
 <sl-qr-code value="https://shoelace.style/" size="64"></sl-qr-code>
 ```
 
+```jsx react
+import { SlQrCode } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlQrCode value="https://shoelace.style/" size="64" />
+);
+```
+
 ### Radius
 
 Create a rounded effect with the `radius` attribute.
 
 ```html preview
 <sl-qr-code value="https://shoelace.style/" radius="0.5"></sl-qr-code>
+```
+
+```jsx react
+import { SlQrCode } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlQrCode value="https://shoelace.style/" radius="0.5" />
+);
 ```
 
 ### Error Correction
@@ -79,6 +135,33 @@ QR codes can be rendered with various levels of [error correction](https://www.q
     gap: 1rem;
   }
 </style>
+```
+
+```jsx react
+import { SlQrCode } from '@shoelace-style/shoelace/dist/react';
+
+const css = `
+  .qr-error-correction {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+`;
+
+const App = () => {
+  return (
+    <>
+      <div class="qr-error-correction">
+        <SlQrCode value="https://shoelace.style/" error-correction="L" />
+        <SlQrCode value="https://shoelace.style/" error-correction="M" />
+        <SlQrCode value="https://shoelace.style/" error-correction="Q" />
+        <SlQrCode value="https://shoelace.style/" error-correction="H" />
+      </div>
+
+      <style>{css}</style>
+    </>
+  );
+};
 ```
 
 [component-metadata:sl-qr-code]

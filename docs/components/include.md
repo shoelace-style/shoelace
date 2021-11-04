@@ -8,8 +8,16 @@ Included files are asynchronously requested using `window.fetch()`. Requests are
 
 The included content will be inserted into the `<sl-include>` element's default slot so it can be easily accessed and styled through the light DOM.
 
-```html preview no-codepen
-<sl-include src="/assets/examples/include.html"></sl-include>
+```html preview
+<sl-include src="https://shoelace.style/assets/examples/include.html"></sl-include>
+```
+
+```jsx react
+import { SlInclude } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlInclude src="https://shoelace.style/assets/examples/include.html" />
+);
 ```
 
 ## Examples
@@ -21,7 +29,7 @@ When an include file loads successfully, the `sl-load` event will be emitted. Yo
 If the request fails, the `sl-error` event will be emitted. In this case, `event.detail.status` will contain the resulting HTTP status code of the request, e.g. 404 (not found).
 
 ```html
-<sl-include src="/assets/examples/include.html"></sl-include>
+<sl-include src="https://shoelace.style/assets/examples/include.html"></sl-include>
 
 <script>
   const include = document.querySelector('sl-include');

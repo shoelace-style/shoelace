@@ -11,6 +11,17 @@ Alerts are used to display important messages either inline or as toast notifica
 </sl-alert>
 ```
 
+```jsx react
+import { SlAlert, SlIcon } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlAlert open>
+    <SlIcon slot="icon" name="info-circle" />
+    This is a standard alert. You can customize its content and even the icon.
+  </SlAlert>
+);
+```
+
 ?> Alerts will not be visible if the `open` attribute is not present.
 
 ## Examples
@@ -59,6 +70,52 @@ Set the `type` attribute to change the alert's type.
 </sl-alert>
 ```
 
+```jsx react
+import { SlAlert, SlIcon } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <>
+    <SlAlert type="primary" open>
+      <SlIcon slot="icon" name="info-circle" />
+      <strong>This is super informative</strong><br />
+      You can tell by how pretty the alert is.
+    </SlAlert>
+
+    <br />
+
+    <SlAlert type="success" open>
+      <SlIcon slot="icon" name="check2-circle" />
+      <strong>Your changes have been saved</strong><br />
+      You can safely exit the app now.
+    </SlAlert>
+
+    <br />
+
+    <SlAlert type="neutral" open>
+      <SlIcon slot="icon" name="gear" />
+      <strong>Your settings have been updated</strong><br />
+      Settings will take affect on next login.
+    </SlAlert>
+
+    <br />
+
+    <SlAlert type="warning" open>
+      <SlIcon slot="icon" name="exclamation-triangle" />
+      <strong>Your session has ended</strong><br />
+      Please login again to continue.
+    </SlAlert>
+
+    <br />
+
+    <SlAlert type="danger" open>
+      <SlIcon slot="icon" name="exclamation-octagon" />
+        <strong>Your account has been deleted</strong><br />
+        We're very sorry to see you go!
+    </SlAlert>
+  </>
+);
+```
+
 ### Closable
 
 Add the `closable` attribute to show a close button that will hide the alert.
@@ -77,6 +134,31 @@ Add the `closable` attribute to show a close button that will hide the alert.
 </script>
 ```
 
+```jsx react
+import { useState } from 'react';
+import { SlAlert, SlIcon } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => {
+  const [open, setOpen] = useState(true);
+
+  function handleHide() {
+    setOpen(false);
+    setTimeout(() => setOpen(true), 2000);
+  }
+
+  return (
+    <SlAlert 
+      open={open}
+      closable
+      onSlAfterHide={handleHide}
+    >
+      <SlIcon slot="icon" name="info-circle" />
+      You can close this alert any time!
+    </SlAlert>
+  );
+};
+```
+
 ### Without Icons
 
 Icons are optional. Simply omit the `icon` slot if you don't want them.
@@ -85,6 +167,16 @@ Icons are optional. Simply omit the `icon` slot if you don't want them.
 <sl-alert type="primary" open>
   Nothing fancy here, just a simple alert.
 </sl-alert>
+```
+
+```jsx react
+import { SlAlert } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlAlert type="primary" open>
+    Nothing fancy here, just a simple alert.
+  </SlAlert>
+);
 ```
 
 ### Duration
@@ -114,6 +206,46 @@ Set the `duration` attribute to automatically hide an alert after a period of ti
     margin-top: var(--sl-spacing-medium);
   }
 </style>
+```
+
+```jsx react
+import { useState } from 'react';
+import {
+  SlAlert,
+  SlButton,
+  SlIcon
+} from '@shoelace-style/shoelace/dist/react';
+
+const css = `
+  .alert-duration sl-alert {
+    margin-top: var(--sl-spacing-medium);
+  }
+`;
+
+const App = () => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <div class="alert-duration">
+        <SlButton type="primary" onClick={() => setOpen(true)}>Show Alert</SlButton>
+
+        <SlAlert 
+          type="primary" 
+          duration="3000" 
+          open={open} 
+          closable 
+          onSlAfterHide={() => setOpen(false)}
+        >
+          <SlIcon slot="icon" name="info-circle" />
+          This alert will automatically hide itself after three seconds, unless you interact with it.
+        </SlAlert>
+      </div>
+
+      <style>{css}</style>
+    </>
+  );
+};
 ```
 
 ### Toast Notifications
@@ -171,6 +303,81 @@ You should always use the `closable` attribute so users can dismiss the notifica
     button.addEventListener('click', () => alert.toast());
   });
 </script>
+```
+
+```jsx react
+import { useRef } from 'react';
+import {
+  SlAlert,
+  SlButton,
+  SlIcon
+} from '@shoelace-style/shoelace/dist/react';
+
+function showToast(alert) {
+  alert.toast();
+}
+
+const App = () => {
+  const primary = useRef(null);
+  const success = useRef(null);
+  const neutral = useRef(null);
+  const warning = useRef(null);
+  const danger = useRef(null);
+
+  return (
+    <>
+      <SlButton type="primary" onClick={() => primary.current.toast()}>
+        Primary
+      </SlButton>
+
+      <SlButton type="success" onClick={() => success.current.toast()}>
+        Success
+      </SlButton>
+
+      <SlButton type="neutral" onClick={() => neutral.current.toast()}>
+        Neutral
+      </SlButton>
+
+      <SlButton type="warning" onClick={() => warning.current.toast()}>
+        Warning
+      </SlButton>
+
+      <SlButton type="danger" onClick={() => danger.current.toast()}>
+        Danger
+      </SlButton>
+
+      <SlAlert ref={primary} type="primary" duration="3000" closable>
+        <SlIcon slot="icon" name="info-circle" />
+        <strong>This is super informative</strong><br />
+        You can tell by how pretty the alert is.
+      </SlAlert>
+
+      <SlAlert ref={success} type="success" duration="3000" closable>
+        <SlIcon slot="icon" name="check2-circle" />
+        <strong>Your changes have been saved</strong><br />
+        You can safely exit the app now.
+      </SlAlert>
+
+      <SlAlert ref={neutral} type="neutral" duration="3000" closable>
+        <SlIcon slot="icon" name="gear" />
+        <strong>Your settings have been updated</strong><br />
+        Settings will take affect on next login.
+      </SlAlert>
+
+      <SlAlert ref={warning} type="warning" duration="3000" closable>
+        <SlIcon slot="icon" name="exclamation-triangle" />
+        <strong>Your session has ended</strong><br />
+        Please login again to continue.
+      </SlAlert>
+
+      <SlAlert ref={danger} type="danger" duration="3000" closable>
+        <SlIcon slot="icon" name="exclamation-octagon" />
+        <strong>Your account has been deleted</strong><br />
+        We're very sorry to see you go!
+      </SlAlert>
+    </>
+  );
+};
 ```
 
 ### Creating Toasts Imperatively

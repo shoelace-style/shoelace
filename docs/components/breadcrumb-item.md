@@ -15,6 +15,21 @@ Breadcrumb Items are used inside [breadcrumbs](/components/breadcrumb) to repres
 </sl-breadcrumb>
 ```
 
+```jsx react
+import { SlBreadcrumb, SlBreadcrumbItem, SlIcon } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlBreadcrumb>
+    <SlBreadcrumbItem>
+      <SlIcon slot="prefix" name="house"></SlIcon>
+      Home
+    </SlBreadcrumbItem>
+    <SlBreadcrumbItem>Clothing</SlBreadcrumbItem>
+    <SlBreadcrumbItem>Shirts</SlBreadcrumbItem>
+  </SlBreadcrumb>
+);
+```
+
 ?> Additional demonstrations can be found in the [breadcrumb examples](/components/breadcrumb).
 
 [component-metadata:sl-breadcrumb-item]

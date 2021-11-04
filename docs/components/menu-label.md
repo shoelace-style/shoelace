@@ -20,4 +20,33 @@ Menu labels are used to describe a group of menu items.
 </sl-menu>
 ```
 
+```jsx react
+import { 
+  SlDivider,
+  SlMenu,
+  SlMenuLabel,
+  SlMenuItem
+} from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlMenu 
+    style={{
+      maxWidth: '200px',
+      border: 'solid 1px rgb(var(--sl-panel-border-color))',
+      borderRadius: 'var(--sl-border-radius-medium)'
+    }}
+  >
+    <SlMenuLabel>Fruits</SlMenuLabel>
+    <SlMenuItem value="apple">Apple</SlMenuItem>
+    <SlMenuItem value="banana">Banana</SlMenuItem>
+    <SlMenuItem value="orange">Orange</SlMenuItem>
+    <SlDivider />
+    <SlMenuLabel>Vegetables</SlMenuLabel>
+    <SlMenuItem value="broccoli">Broccoli</SlMenuItem>
+    <SlMenuItem value="carrot">Carrot</SlMenuItem>
+    <SlMenuItem value="zucchini">Zucchini</SlMenuItem>
+  </SlMenu>  
+);
+```
+
 [component-metadata:sl-menu-label]

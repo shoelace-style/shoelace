@@ -20,6 +20,34 @@ Formats a number as a human readable bytes value.
 </script>
 ```
 
+
+```jsx react
+import { useState } from 'react';
+import { 
+  SlButton, 
+  SlFormatBytes, 
+  SlInput 
+} from '@shoelace-style/shoelace/dist/react';
+
+const App = () => {
+  const [value, setValue] = useState(1000);
+
+  return (
+    <>
+      The file is <SlFormatBytes value={value} /> in size.
+      <br /><br />
+      <SlInput 
+        type="number" 
+        value={value}
+        label="Number to Format" 
+        style={{ maxWidth: '180px' }}
+        onSlInput={event => setValue(event.target.value)}
+      />
+    </>
+  );
+};
+```
+
 ## Examples
 
 ### Formatting Bytes
@@ -33,6 +61,20 @@ Set the `value` attribute to a number to get the value in bytes.
 <sl-format-bytes value="1200000000"></sl-format-bytes>
 ```
 
+
+```jsx react
+import { SlFormatBytes } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <>
+    <SlFormatBytes value="12" /><br />
+    <SlFormatBytes value="1200" /><br />
+    <SlFormatBytes value="1200000" /><br />
+    <SlFormatBytes value="1200000000" />
+  </>
+);
+```
+
 ### Formatting Bits
 
 To get the value in bits, set the `unit` attribute to `bits`.
@@ -44,6 +86,19 @@ To get the value in bits, set the `unit` attribute to `bits`.
 <sl-format-bytes value="1200000000" unit="bits"></sl-format-bytes>
 ```
 
+```jsx react
+import { SlFormatBytes } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <>
+    <SlFormatBytes value="12" unit="bits" /><br />
+    <SlFormatBytes value="1200" unit="bits" /><br />
+    <SlFormatBytes value="1200000" unit="bits" /><br />
+    <SlFormatBytes value="1200000000" unit="bits" />
+  </>
+);
+```
+
 ### Localization
 
 Use the `locale` attribute to set the number formatting locale.
@@ -53,6 +108,19 @@ Use the `locale` attribute to set the number formatting locale.
 <sl-format-bytes value="1200" locale="de"></sl-format-bytes><br>
 <sl-format-bytes value="1200000" locale="de"></sl-format-bytes><br>
 <sl-format-bytes value="1200000000" locale="de"></sl-format-bytes>
+```
+
+```jsx react
+import { SlFormatBytes } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <>
+    <SlFormatBytes value="12" locale="de" /><br />
+    <SlFormatBytes value="1200" locale="de" /><br />
+    <SlFormatBytes value="1200000" locale="de" /><br />
+    <SlFormatBytes value="1200000000" locale="de" />
+  </>
+);
 ```
 
 [component-metadata:sl-format-bytes]

@@ -12,6 +12,19 @@ You can slot in any [replaced element](https://developer.mozilla.org/en-US/docs/
 </sl-responsive-media>
 ```
 
+```jsx react
+import { SlResponsiveMedia } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlResponsiveMedia>
+    <img 
+      src="https://images.unsplash.com/photo-1541427468627-a89a96e5ca1d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1800&q=80"
+      alt="A train riding through autumn foliage with mountains in the distance."
+    />
+  </SlResponsiveMedia>
+);
+```
+
 ## Examples
 
 ### Responsive Images
@@ -24,6 +37,19 @@ The following image maintains a `4:3` aspect ratio as its container is resized.
 </sl-responsive-media>
 ```
 
+```jsx react
+import { SlResponsiveMedia } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlResponsiveMedia aspect-ratio="4:3">
+    <img 
+      src="https://images.unsplash.com/photo-1473186578172-c141e6798cf4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1800&q=80" 
+      alt="Two blue chairs on a sandy beach."
+    />
+  </SlResponsiveMedia>
+);
+```
+
 ### Responsive Videos
 
 The following video is embedded using an `iframe` and maintains a `16:9` aspect ratio as its container is resized.
@@ -32,6 +58,16 @@ The following video is embedded using an `iframe` and maintains a `16:9` aspect 
 <sl-responsive-media aspect-ratio="16:9">
   <iframe src="https://player.vimeo.com/video/1053647?title=0&byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 </sl-responsive-media>
+```
+
+```jsx react
+import { SlResponsiveMedia } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlResponsiveMedia aspect-ratio="16:9">
+    <iframe src="https://player.vimeo.com/video/1053647?title=0&byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen />
+  </SlResponsiveMedia>
+);
 ```
 
 [component-metadata:sl-responsive-media]

@@ -36,4 +36,33 @@ The resize observer will report changes to the dimensions of the elements it wra
 </style>
 ```
 
+```jsx react
+import { SlResizeObserver } from '@shoelace-style/shoelace/dist/react';
+
+const css = `
+  .resize-observer-overview div {
+    display: flex; 
+    border: solid 2px rgb(var(--sl-input-border-color)); 
+    align-items: center; 
+    justify-content: center;
+    text-align: center;
+    padding: 4rem 2rem;
+  }
+`;
+
+const App = () => (
+  <>
+    <div className="resize-observer-overview">
+      <SlResizeObserver onSlResize={event => console.log(event.detail)}>
+        <div>
+          Resize this box and watch the console 👉
+        </div>
+      </SlResizeObserver>
+    </div>
+
+    <style>{css}</style>
+  </>
+);
+```
+
 [component-metadata:sl-resize-observer]

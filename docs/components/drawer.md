@@ -22,6 +22,28 @@ Drawers slide in from a container to expose additional options and information.
 </script>
 ```
 
+```jsx react
+import { useState } from 'react';
+import { SlButton, SlDrawer } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <SlDrawer label="Drawer" open={open} onSlAfterHide={() => setOpen(false)}>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        <SlButton slot="footer" type="primary" onClick={() => setOpen(false)}>
+          Close
+        </SlButton>
+      </SlDrawer>
+
+      <SlButton onClick={() => setOpen(true)}>Open Drawer</SlButton>
+    </>
+  );
+};
+```
+
 ## Examples
 
 ### Slide in From Start
@@ -46,6 +68,33 @@ By default, drawers slide in from the end. To make the drawer slide in from the 
 </script>
 ```
 
+```jsx react
+import { useState } from 'react';
+import { SlButton, SlDrawer } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <SlDrawer 
+        label="Drawer" 
+        placement="start" 
+        open={open} 
+        onSlAfterHide={() => setOpen(false)}
+      >
+        This drawer slides in from the start.
+        <SlButton slot="footer" type="primary" onClick={() => setOpen(false)}>
+          Close
+        </SlButton>
+      </SlDrawer>
+
+      <SlButton onClick={() => setOpen(true)}>Open Drawer</SlButton>
+    </>
+  );
+};
+```
+
 ### Slide in From Top
 
 To make the drawer slide in from the top, set the `placement` attribute to `top`.
@@ -68,6 +117,33 @@ To make the drawer slide in from the top, set the `placement` attribute to `top`
 </script>
 ```
 
+```jsx react
+import { useState } from 'react';
+import { SlButton, SlDrawer } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <SlDrawer 
+        label="Drawer" 
+        placement="top" 
+        open={open} 
+        onSlAfterHide={() => setOpen(false)}
+      >
+        This drawer slides in from the top.
+        <SlButton slot="footer" type="primary" onClick={() => setOpen(false)}>
+          Close
+        </SlButton>
+      </SlDrawer>
+
+      <SlButton onClick={() => setOpen(true)}>Open Drawer</SlButton>
+    </>
+  );
+};
+```
+
 ### Slide in From Bottom
 
 To make the drawer slide in from the bottom, set the `placement` attribute to `bottom`.
@@ -88,6 +164,33 @@ To make the drawer slide in from the bottom, set the `placement` attribute to `b
   openButton.addEventListener('click', () => drawer.show());
   closeButton.addEventListener('click', () => drawer.hide());
 </script>
+```
+
+```jsx react
+import { useState } from 'react';
+import { SlButton, SlDrawer } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <SlDrawer 
+        label="Drawer" 
+        placement="bottom" 
+        open={open} 
+        onSlAfterHide={() => setOpen(false)}
+      >
+        This drawer slides in from the bottom.
+        <SlButton slot="footer" type="primary" onClick={() => setOpen(false)}>
+          Close
+        </SlButton>
+      </SlDrawer>
+
+      <SlButton onClick={() => setOpen(true)}>Open Drawer</SlButton>
+    </>
+  );
+};
 ```
 
 ### Contained to an Element
@@ -118,6 +221,47 @@ By default, the drawer slides out of its [containing block](https://developer.mo
 </script>
 ```
 
+```jsx react
+import { useState } from 'react';
+import { SlButton, SlDrawer } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <div
+        style={{
+          position: 'relative',
+          border: 'solid 2px rgb(var(--sl-panel-border-color))',
+          height: '300px',
+          padding: '1rem',
+          marginBottom: '1rem'
+        }}
+      >
+        The drawer will be contained to this box. This content won't shift or be affected in any way when the drawer opens.
+
+        <SlDrawer
+          label="Drawer" 
+          contained 
+          class="drawer-contained" 
+          open={open} 
+          onSlAfterHide={() => setOpen(false)}
+          style={{ '--size': '50%' }}
+        >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          <SlButton slot="footer" type="primary" onClick={() => setOpen(false)}>
+            Close
+          </SlButton>
+        </SlDrawer>
+      </div>
+
+      <SlButton onClick={() => setOpen(true)}>Open Drawer</SlButton>
+    </>
+  );
+};
+```
+
 ### Custom Size
 
 Use the `--size` custom property to set the drawer's size. This will be applied to the drawer's width or height depending on its `placement`.
@@ -138,6 +282,32 @@ Use the `--size` custom property to set the drawer's size. This will be applied 
   openButton.addEventListener('click', () => drawer.show());
   closeButton.addEventListener('click', () => drawer.hide());
 </script>
+```
+
+```jsx react
+import { useState } from 'react';
+import { SlButton, SlDrawer } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <SlDrawer 
+        label="Drawer" 
+        open={open} onSlAfterHide={() => setOpen(false)}
+        style={{ '--size': '50vw' }}
+      >
+        This drawer is always 50% of the viewport.
+        <SlButton slot="footer" type="primary" onClick={() => setOpen(false)}>
+          Close
+        </SlButton>
+      </SlDrawer>
+
+      <SlButton onClick={() => setOpen(true)}>Open Drawer</SlButton>
+    </>
+  );
+};
 ```
 
 ### Scrolling
@@ -164,6 +334,34 @@ By design, a drawer's height will never exceed 100% of its container. As such, d
 </script>
 ```
 
+```jsx react
+import { useState } from 'react';
+import { SlButton, SlDrawer } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <SlDrawer label="Drawer" open={open} onSlAfterHide={() => setOpen(false)}>
+        <div style={{
+          height: '150vh',
+          border: 'dashed 2px rgb(var(--sl-color-neutral-200))',
+          padding: '0 1rem'
+        }}>
+          <p>Scroll down and give it a try! 👇</p>
+        </div>
+        <SlButton slot="footer" type="primary" onClick={() => setOpen(false)}>
+          Close
+        </SlButton>
+      </SlDrawer>
+
+      <SlButton onClick={() => setOpen(true)}>Open Drawer</SlButton>
+    </>
+  );
+};
+```
+
 ### Preventing the Drawer from Closing
 
 By default, drawers will close when the user clicks the close button, clicks the overlay, or presses the <kbd>Escape</kbd> key. In most cases, the default behavior is the best behavior in terms of UX. However, there are situations where this may be undesirable, such as when data loss will occur.
@@ -173,7 +371,7 @@ To keep the drawer open in such cases, you can cancel the `sl-request-close` eve
 
 ```html preview
 <sl-drawer label="Drawer" class="drawer-deny-close">
-  This dialog will not close unless you use the button below.
+  This drawer will not close unless you use the button below.
   <sl-button slot="footer" type="primary">Save &amp; Close</sl-button>
 </sl-drawer>
 
@@ -189,6 +387,33 @@ To keep the drawer open in such cases, you can cancel the `sl-request-close` eve
 
   drawer.addEventListener('sl-request-close', event => event.preventDefault());
 </script>
+```
+
+```jsx react
+import { useState } from 'react';
+import { SlButton, SlDrawer } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <SlDrawer 
+        label="Drawer" 
+        open={open} 
+        onSlRequestClose={event => event.preventDefault()}
+        onSlAfterHide={() => setOpen(false)}
+      >
+        This drawer will not close unless you use the button below.
+        <SlButton slot="footer" type="primary" onClick={() => setOpen(false)}>
+          Save &amp; Close
+        </SlButton>
+      </SlDrawer>
+
+      <SlButton onClick={() => setOpen(true)}>Open Drawer</SlButton>
+    </>
+  );
+};
 ```
 
 ### Customizing Initial Focus
@@ -217,6 +442,43 @@ By default, the drawer's panel will gain focus when opened. This allows the firs
     input.focus({ preventScroll: true });
   });    
 </script>
+```
+
+```jsx react
+import { useRef, useState } from 'react';
+import { 
+  SlButton, 
+  SlDrawer, 
+  SlInput 
+} from '@shoelace-style/shoelace/dist/react';
+
+const App = () => {
+  const input = useRef(null);
+  const [open, setOpen] = useState(false);
+
+  function handleInitialFocus(event) {
+    event.preventDefault();
+    input.current.focus();
+  }
+
+  return (
+    <>
+      <SlDrawer 
+        label="Drawer" 
+        open={open} 
+        onSlInitialFocus={handleInitialFocus}
+        onSlAfterHide={() => setOpen(false)}
+      >
+        <SlInput ref={input} placeholder="I will have focus when the drawer is opened" />
+        <SlButton slot="footer" type="primary" onClick={() => setOpen(false)}>
+          Close
+        </SlButton>
+      </SlDrawer>
+
+      <SlButton onClick={() => setOpen(true)}>Open Drawer</SlButton>
+    </>
+  );
+};
 ```
 
 [component-metadata:sl-drawer]
