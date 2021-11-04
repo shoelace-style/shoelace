@@ -39,6 +39,7 @@
     "test:watch": "web-test-runner \"src/**/*.test.ts\" --node-resolve --puppeteer --watch"
   },
   "dependencies": {
+    "@lit-labs/react": "^1.0.1",
     "@popperjs/core": "^2.7.0",
     "@shoelace-style/animations": "^1.1.0",
     "color": "^3.1.3",
@@ -48,6 +49,7 @@
     "@custom-elements-manifest/analyzer": "^0.4.12",
     "@open-wc/testing": "^2.5.33",
     "@types/color": "^3.0.1",
+    "@types/react": "^17.0.33",
     "@web/dev-server-esbuild": "^0.2.12",
     "@web/test-runner": "^0.13.5",
     "@web/test-runner-puppeteer": "^0.10.0",
@@ -70,6 +72,7 @@
     "mkdirp": "^0.5.5",
     "plop": "^2.7.4",
     "prettier": "^2.2.1",
+    "react": "^17.0.2",
     "recursive-copy": "^2.0.11",
     "sinon": "^11.1.1",
     "strip-css-comments": "^4.1.0",

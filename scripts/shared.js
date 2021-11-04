@@ -5,9 +5,10 @@ export function getAllComponents(metadata) {
     module.declarations?.map(declaration => {
       if (declaration.customElement) {
         const component = declaration;
+        const modulePath = module.path;
 
         if (component) {
-          allComponents.push(component);
+          allComponents.push(Object.assign(component, { modulePath }));
         }
       }
     });

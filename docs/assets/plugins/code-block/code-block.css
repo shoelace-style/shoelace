@@ -61,11 +61,17 @@
   border: solid 1px rgb(var(--sl-color-neutral-200));
   border-bottom: none;
   border-radius: 0 !important;
-  margin: 0;
   display: none;
 }
 
-.code-block--expanded .code-block__source {
+.code-block__source pre {
+  margin: 0;
+}
+
+.code-block--expanded.code-block--show-html .code-block__source--html,
+.code-block--expanded.code-block--show-react .code-block__source--react,
+/* When a code block is expanded but doesn't have a React example, force the HTML example to show */
+.code-block--expanded:not(.code-block--has-react) .code-block__source--html {
   display: block;
 }
 
@@ -95,6 +101,19 @@
 
 .code-block__button:not(:last-of-type) {
   border-right: solid 1px rgb(var(--sl-color-neutral-200));
+}
+
+.code-block__button--html,
+.code-block__button--react {
+  width: 70px;
+  display: flex;
+  place-items: center;
+  justify-content: center;
+}
+
+.code-block__button--selected {
+  font-weight: 700;
+  color: rgb(var(--sl-color-primary-600));
 }
 
 .code-block__button--codepen {

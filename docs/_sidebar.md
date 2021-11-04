@@ -5,6 +5,11 @@
   - [Themes](/getting-started/themes)
   - [Customizing](/getting-started/customizing)
 
+- Frameworks
+  - [React](/frameworks/react)
+  - [Vue](/frameworks/vue)
+  - [Angular](/frameworks/angular)
+
 - Resources
   - [Community](/resources/community)
   - [Contributing](/resources/contributing)

@@ -9,7 +9,7 @@
 - Fully customizable with CSS 🎨
 - Includes a dark theme 🌛
 - Built with accessibility in mind ♿️
-- First-party [React wrappers](/getting-started/usage#react)
+- First-party [React components](/frameworks/react)
 - Open source 😸
 
 Designed in New Hampshire by [Cory LaViska](https://twitter.com/claviska).
@@ -41,7 +41,8 @@ Now you have access to all of Shoelace's components! Try adding a button:
 <sl-button>Click me</sl-button>
 ```
 
-See the [installation instructions](getting-started/installation) for more details and other ways to install Shoelace.
+This will load all of Shoelace's components, but you should probably only load the ones you're actually using. To learn how, or for other ways to install Shoelace, refer to the [installation instructions](getting-started/installation).
+
 
 ## New to Web Components?
 

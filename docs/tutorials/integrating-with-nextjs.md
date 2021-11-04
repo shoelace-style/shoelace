@@ -14,7 +14,7 @@ This integration has been tested with the following:
 To get started using Shoelace with NextJS, the following packages must be installed.
 
 ```bash
-yarn add @shoelace-style/shoelace @shoelace-style/react-wrapper copy-webpack-plugin next-compose-plugins next-transpile-modules
+yarn add @shoelace-style/shoelace @shoelace-style/shoelace copy-webpack-plugin next-compose-plugins next-transpile-modules
 ```
 
 ### Importing the Default Theme

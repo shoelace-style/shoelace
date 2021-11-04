@@ -30,17 +30,19 @@ mkdirp.sync(outdir);
 
 (async () => {
   try {
-    if (types) execSync(`tsc --project . --outdir "${outdir}"`, { stdio: 'inherit' });
     execSync(`node scripts/make-metadata.js --outdir "${outdir}"`, { stdio: 'inherit' });
     execSync(`node scripts/make-search.js --outdir "${outdir}"`, { stdio: 'inherit' });
+    execSync(`node scripts/make-react.js`, { stdio: 'inherit' });
     execSync(`node scripts/make-vscode-data.js --outdir "${outdir}"`, { stdio: 'inherit' });
     execSync(`node scripts/make-css.js --outdir "${outdir}"`, { stdio: 'inherit' });
     execSync(`node scripts/make-icons.js --outdir "${outdir}"`, { stdio: 'inherit' });
+    if (types) execSync(`tsc --project . --outdir "${outdir}"`, { stdio: 'inherit' });
   } catch (err) {
     console.error(chalk.red(err));
     process.exit(1);
   }
 
+  const alwaysExternal = ['@lit-labs/react', 'react'];
   const buildResult = await esbuild
     .build({
       format: 'esm',
@@ -53,13 +55,15 @@ mkdirp.sync(outdir);
         // Public utilities
         ...(await glob('./src/utilities/**/!(*.(style|test)).ts')),
         // Theme stylesheets
-        ...(await glob('./src/themes/**/!(*.test).ts'))
+        ...(await glob('./src/themes/**/!(*.test).ts')),
+        // React wrappers
+        ...(await glob('./src/react/**/*.ts'))
       ],
       outdir,
       chunkNames: 'chunks/[name].[hash]',
       incremental: serve,
       define: {
-        // Popper.js expects this to be set
+        // Popper.js requires this to be set
         'process.env.NODE_ENV': '"production"'
       },
       bundle: true,
@@ -67,7 +71,11 @@ mkdirp.sync(outdir);
       // We don't bundle certain dependencies in the unbundled build. This ensures we ship bare module specifiers,
       // allowing end users to better optimize when using a bundler. (Only packages that ship ESM can be external.)
       //
-      external: bundle ? undefined : ['@popperjs/core', '@shoelace-style/animations', 'lit', 'qr-creator'],
+      // We never bundle React or @lit-labs/react though!
+      //
+      external: bundle
+        ? alwaysExternal
+        : [...alwaysExternal, '@popperjs/core', '@shoelace-style/animations', 'lit', 'qr-creator'],
       splitting: true,
       plugins: []
     })

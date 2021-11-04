@@ -2,7 +2,9 @@
 
 You can use Shoelace via CDN or by installing it locally. You can also [cherry pick](#cherry-picking) individual components for faster load times.
 
-## CDN Installation (Recommended)
+If you're using a framework, make sure to check out the pages for [React](/frameworks/react), [Vue](/frameworks/vue), and [Angular](/frameworks/angular).
+
+## CDN Installation (Easiest)
 
 The easiest way to install Shoelace is with the CDN. Just add the following tags to your page to get all components and the default light theme.
 
@@ -10,6 +12,8 @@ The easiest way to install Shoelace is with the CDN. Just add the following tags
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/themes/light.css">
 <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/shoelace.js"></script>
 ```
+
+?> If you're only using a handful of components, it will be more efficient to [cherry pick](#cherry-picking) the ones you need.
 
 ### Dark Theme
 
@@ -77,7 +81,7 @@ However, if you're [cherry picking](#cherry-picking) or [bundling](#bundling) Sh
 
 ## Cherry Picking
 
-The previous approach is the _easiest_ way to load Shoelace, but easy isn't always efficient. You'll incur the full size of the library even if you only use a handful of components. This is convenient for prototyping, but may result in longer load times in production. To improve this, you can cherry pick the components you need.
+The previous approach is the _easiest_ way to load Shoelace, but easy isn't always efficient. You'll incur the full size of the library even if you only use a handful of components. This is convenient for prototyping or if you're using most of the components, but it may result in longer load times in production. To improve this, you can cherry pick the components you need.
 
 Cherry picking can be done from your local install or [directly from the CDN](https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/). This will limit the number of files the browser has to download and reduce the amount of bytes being transferred. The disadvantage is that you need to load component manually.
 

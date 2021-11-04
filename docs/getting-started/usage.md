@@ -1,10 +1,10 @@
 # Usage
 
-Shoelace components are just regular HTML elements, or "custom elements" to be precise. You can use them like any other element. Each component has detailed documentation that describes its full API, including properties, events, methods, and more.
+Shoelace components are just regular HTML elements, or [custom elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) to be precise. You can use them like any other element. Each component has detailed documentation that describes its full API, including properties, events, methods, and more.
 
-## Web Component Basics
+If you're new to custom elements, often referred to as "web components," this section will familiarize you with how to use them. 
 
-### Properties
+## Properties
 
 Many components have properties that can be set using attributes. For example, buttons accept a `size` attribute that maps to the `size` property which dictates the button's size.
 
@@ -31,7 +31,7 @@ In rare cases, a property may require an array, an object, or a function. For ex
 
 Refer to a component's documentation for a complete list of its properties.
 
-### Events
+## Events
 
 You can listen for standard events such as `click`, `mouseover`, etc. as you normally would. In addition, some components emit custom events. These work the same way as standard events, but are prefixed with `sl-` to prevent collisions with standard events and other libraries.
 
@@ -48,7 +48,7 @@ You can listen for standard events such as `click`, `mouseover`, etc. as you nor
 
 Refer to a component's documentation for a complete list of its custom events.
 
-### Methods
+## Methods
 
 Some components have methods you can call to trigger various behaviors. For example, you can set focus on a Shoelace input using the `focus()` method.
 
@@ -63,7 +63,7 @@ Some components have methods you can call to trigger various behaviors. For exam
 
 Refer to a component's documentation for a complete list of its methods and their arguments.
 
-### Slots
+## Slots
 
 Many components use slots to accept content inside of them. The most common slot is the _default_ slot, which includes any content inside the component that doesn't have a `slot` attribute.
 
@@ -86,7 +86,7 @@ The location of a named slot doesn't matter. You can put it anywhere inside the 
 
 Refer to a component's documentation for a complete list of available slots.
 
-### Don't Use Self-closing Tags
+## Don't Use Self-closing Tags
 
 Custom elements cannot have self-closing tags. Similar to `<script>` and `<textarea>`, you must always include the full closing tag.
 
@@ -98,7 +98,7 @@ Custom elements cannot have self-closing tags. Similar to `<script>` and `<texta
 <sl-input></sl-input>
 ```
 
-### Differences from Native Elements
+## Differences from Native Elements
 
 You might expect similarly named elements to share the same API as native HTML elements. This is not always the case. Shoelace components **are not** designed to be one-to-one replacements for their HTML counterparts.
 
@@ -128,123 +128,3 @@ If `settings.json` already exists, simply add the above line to the root of the 
 ### Other Editors
 
 Most popular editors support custom code completion with a bit of configuration. Please [submit a feature request](https://github.com/shoelace-style/shoelace/issues/new/choose) for your editor of choice. PRs are also welcome!
-
-## React
-
-React [doesn't play nice](https://custom-elements-everywhere.com/#react) with custom elements — it's a bit finicky about props.
-
-> React passes all data to Custom Elements in the form of HTML attributes. For primitive data this is fine, but the system breaks down when passing rich data, like objects or arrays. In these instances you end up with stringified values like `some-attr="[object Object]"` which can't actually be used.
-
-Event handling can also be cumbersome.
-
-> Because React implements its own synthetic event system, it cannot listen for DOM events coming from Custom Elements without the use of a workaround. Developers will need to reference their Custom Elements using a ref and manually attach event listeners with addEventListener. This makes working with Custom Elements cumbersome.
-
-Fortunately, there's a package called [@shoelace-style/react](https://www.npmjs.com/package/@shoelace-style/react) that will let you use Shoelace components as if they were React components. You can install it using this command.
-
-```bash
-npm install @shoelace-style/react
-```
-
-Include the default theme and any components you want to use in your app.
-
-```jsx
-import '@shoelace-style/shoelace/dist/themes/light.css';
-
-import SlButton from '@shoelace-style/react/dist/button';
-
-// ...
-
-const MyComponent = (props) => {
-  return (
-    <SlButton type="primary">
-      Click me
-    </SlButton>
-  )
-};
-```
-
-## Vue
-
-Vue [plays nice](https://custom-elements-everywhere.com/#vue) with custom elements. You just have to tell it to ignore Shoelace components. This is pretty easy because they all start with `sl-`.
-
-```js
-import { createApp } from 'vue';
-import App from './App.vue';
-
-const app = createApp(App);
-
-app.config.compilerOptions.isCustomElement = tag => tag.startsWith('sl-');
-
-app.mount('#app');
-```
-
-### Binding Complex Data
-
-When binding complex data such as objects and arrays, use the `.prop` modifier to make Vue bind them as a property instead of an attribute.
-
-```html
-<sl-color-picker :swatches.prop="mySwatches" />
-```
-
-### Two-way Binding
-
-One caveat is there's currently [no support for v-model on custom elements](https://github.com/vuejs/vue/issues/7830), but you can still achieve two-way binding manually.
-
-```html
-<!-- This doesn't work -->
-<sl-input v-model="name">
-
-<!-- This works, but it's a bit longer -->
-<sl-input :value="name" @input="name = $event.target.value">
-```
-
-If that's too verbose, you can use a custom directive instead.
-
-### Using a Custom Directive
-
-You can use [this utility](https://www.npmjs.com/package/@shoelace-style/vue-sl-model) to add a custom directive that will work just like `v-model` but for Shoelace components. To install it, use this command.
-
-```bash
-npm install @shoelace-style/vue-sl-model
-```
-
-Next, import the directive and enable it like this.
-
-```js
-import ShoelaceModelDirective from '@shoelace-style/vue-sl-model';
-import { createApp } from 'vue';
-import App from './App.vue';
-
-const app = createApp(App);
-app.use(ShoelaceModelDirective);
-
-app.config.compilerOptions.isCustomElement = tag => tag.startsWith('sl-');
-
-app.mount('#app');
-```
-
-Now you can use the `v-sl-model` directive to keep your data in sync!
-
-```html
-<sl-input v-sl-model="name">
-```
-
-## Angular
-
-Angular [plays nice](https://custom-elements-everywhere.com/#angular) with custom elements. Just make sure to apply the custom elements schema as shown below.
-
-```js
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-
-import { AppComponent } from './app.component';
-
-@NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule],
-  providers: [],
-  bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
-})
-export class AppModule {}
-```
