@@ -67,7 +67,8 @@
     table.innerHTML = `
       <thead>
         <tr>
-          <th>Name</th>
+          <th data-flavor="html">Name</th>
+          <th data-flavor="react">React Event</th>
           <th>Description</th>
           <th>Event Detail</th>
         </tr>
@@ -77,7 +78,8 @@
           .map(
             event => `
               <tr>
-                <td><code class="nowrap">${escapeHtml(event.name)}</code></td>
+                <td data-flavor="html"><code class="nowrap">${escapeHtml(event.name)}</code></td>
+                <td data-flavor="react"><code class="nowrap">${escapeHtml(event.reactName)}</code></td>
                 <td>${escapeHtml(event.description)}</td>
                 <td>${event.type?.text ? `<code>${escapeHtml(event.type?.text)}` : '-'}</td>
               </tr>
@@ -398,7 +400,7 @@
             ## Importing
 
             <sl-tab-group>
-            <sl-tab slot="nav" panel="cdn" active>CDN</sl-tab>
+            <sl-tab slot="nav" panel="cdn">CDN</sl-tab>
             <sl-tab slot="nav" panel="bundler">Bundler</sl-tab>
             <sl-tab slot="nav" panel="react">React</sl-tab>
 
@@ -443,8 +445,20 @@
 
         if (methods?.length) {
           result += `
-          ## Methods
-          ${createMethodsTable(methods)}
+            ## Methods
+
+            <p data-flavor="html">
+              Methods can be called by obtaining a reference to the element and calling
+              <code>el.methodName()</code>.
+            </p>
+
+
+            <p data-flavor="react">
+              Methods can be called by obtaining a <code>ref</code> to the element and calling
+              <code>ref.current.methodName()</code>.
+            </p>
+
+            ${createMethodsTable(methods)}
           `;
         }
 

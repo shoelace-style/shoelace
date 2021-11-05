@@ -64,15 +64,12 @@
   display: none;
 }
 
-.code-block__source pre {
-  margin: 0;
+.code-block--expanded .code-block__source {
+  display: block;
 }
 
-.code-block--expanded.code-block--show-html .code-block__source--html,
-.code-block--expanded.code-block--show-react .code-block__source--react,
-/* When a code block is expanded but doesn't have a React example, force the HTML example to show */
-.code-block--expanded:not(.code-block--has-react) .code-block__source--html {
-  display: block;
+.code-block__source pre {
+  margin: 0;
 }
 
 .code-block__buttons {
@@ -220,3 +217,23 @@
   background-color: rgb(var(--sl-color-neutral-600));
   transform: scale(0.92);
 }
+
+/* We can apply data-flavor="html|react" to any element on the page to toggle it when the user's flavor changes */
+body.flavor-html [data-flavor]:not([data-flavor='html']) {
+  display: none;
+}
+
+body.flavor-react [data-flavor]:not([data-flavor='react']) {
+  display: none;
+}
+
+/*
+.code-block--expanded.code-block--show-html .code-block__source--html,
+.code-block--expanded.code-block--show-react .code-block__source--react,
+
+When a code block is expanded but doesn't have a React example, force the HTML example to show
+
+.code-block--expanded:not(.code-block--has-react) .code-block__source--html {
+  display: block;
+}
+*/

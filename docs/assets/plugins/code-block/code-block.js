@@ -1,7 +1,10 @@
 (() => {
   const reactVersion = '17.0.2';
-  let flavor = localStorage.getItem('flavor') || 'html'; // "html" or "react"
+  let flavor = getFlavor();
   let count = 1;
+
+  // Sync flavor UI on page load
+  setFlavor(getFlavor());
 
   if (!window.$docsify) {
     throw new Error('Docsify must be loaded before installing this plugin.');
@@ -43,6 +46,19 @@
     }
 
     script.parentNode.replaceChild(newScript, script);
+  }
+
+  function getFlavor() {
+    return localStorage.getItem('flavor') || 'html';
+  }
+
+  function setFlavor(newFlavor) {
+    flavor = ['html', 'react'].includes(newFlavor) ? newFlavor : 'html';
+    localStorage.setItem('flavor', flavor);
+
+    // Set the flavor class on the body
+    document.body.classList.toggle('flavor-html', flavor === 'html');
+    document.body.classList.toggle('flavor-react', flavor === 'react');
   }
 
   function wrap(el, wrapper) {
@@ -114,7 +130,7 @@
           pre.setAttribute('aria-labelledby', toggleId);
 
           const codeBlock = `
-            <div class="code-block code-block--show-${flavor} ${hasReact ? 'code-block--has-react' : ''}">
+            <div class="code-block">
               <div class="code-block__preview">
                 ${code.textContent}
                 <div class="code-block__resizer">
@@ -122,14 +138,14 @@
                 </div>
               </div>
 
-              <div class="code-block__source code-block__source--html">
+              <div class="code-block__source code-block__source--html" ${hasReact ? 'data-flavor="html"' : ''}>
                 ${pre.outerHTML}
               </div>
 
               ${
                 hasReact
                   ? `
-                <div class="code-block__source code-block__source--react">
+                <div class="code-block__source code-block__source--react" data-flavor="react">
                   ${reactPre.outerHTML}
                 </div>
               `
@@ -220,18 +236,15 @@
     const codeBlock = button?.closest('.code-block');
 
     if (button?.classList.contains('code-block__button--html')) {
-      flavor = 'html';
+      setFlavor('html');
     } else if (button?.classList.contains('code-block__button--react')) {
-      flavor = 'react';
+      setFlavor('react');
     } else {
       return;
     }
 
-    localStorage.setItem('flavor', flavor);
-
+    // Update flavor buttons
     [...document.querySelectorAll('.code-block')].map(codeBlock => {
-      codeBlock.classList.toggle('code-block--show-html', flavor === 'html');
-      codeBlock.classList.toggle('code-block--show-react', flavor === 'react');
       codeBlock
         .querySelector('.code-block__button--html')
         ?.classList.toggle('code-block__button--selected', flavor === 'html');
@@ -306,7 +319,7 @@
           convertModuleLinks(reactExample) +
           '\n' +
           '\n' +
-          'ReactDOM.render(<App />, document.getElementById("root"));';
+          `ReactDOM.render(<App />, document.getElementById('root'));`;
       }
 
       // CSS templates
