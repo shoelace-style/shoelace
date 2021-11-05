@@ -361,7 +361,7 @@ const css = `
 
 const App = () => (
   <>
-    <div class="dropdown-hoist">
+    <div className="dropdown-hoist">
       <SlDropdown>
         <SlButton slot="trigger" caret>No Hoist</SlButton>
         <SlMenu>

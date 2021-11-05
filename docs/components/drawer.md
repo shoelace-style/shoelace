@@ -244,7 +244,6 @@ const App = () => {
         <SlDrawer
           label="Drawer" 
           contained 
-          class="drawer-contained" 
           open={open} 
           onSlAfterHide={() => setOpen(false)}
           style={{ '--size': '50%' }}

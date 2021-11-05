@@ -64,7 +64,7 @@ const css = `
 
 const App = () => (
   <>
-    <SlCard class="card-overview">
+    <SlCard className="card-overview">
       <img 
         slot="image" 
         src="https://images.unsplash.com/photo-1559209172-0ff8f6d49ff7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80" 
@@ -115,7 +115,7 @@ const css = `
 
 const App = () => (
   <>
-    <SlCard class="card-basic">
+    <SlCard className="card-basic">
       This is just a basic card. No image, no header, and no footer. Just your content.
     </SlCard>
 
@@ -185,7 +185,7 @@ const css = `
 
 const App = () => (
   <>
-    <SlCard class="card-header">
+    <SlCard className="card-header">
       <div slot="header">
         Header Title
 
@@ -248,7 +248,7 @@ const css = `
 
 const App = () => (
   <>
-    <SlCard class="card-footer">
+    <SlCard className="card-footer">
       This card has a footer. You can put all sorts of things in it!
 
       <div slot="footer">
@@ -294,7 +294,7 @@ const css = `
 
 const App = () => (
   <>
-    <SlCard class="card-image">
+    <SlCard className="card-image">
       <img 
         slot="image" 
         src="https://images.unsplash.com/photo-1547191783-94d5f8f6d8b1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=80" 

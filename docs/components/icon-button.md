@@ -88,7 +88,7 @@ const css = `
 `;
 
 const App = () => (
-  <div class="icon-button-color">
+  <div className="icon-button-color">
     <SlIconButton name="type-bold" label="Bold" />
     <SlIconButton name="type-italic" label="Italic" />
     <SlIconButton name="type-underline" label="Underline" />

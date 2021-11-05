@@ -205,7 +205,7 @@ const App = () => {
   }
 
   return (
-    <SlTabGroup class="tabs-closable" onSlClose={handleClose}>
+    <SlTabGroup className="tabs-closable" onSlClose={handleClose}>
       <SlTab slot="nav" panel="general">General</SlTab>
       <SlTab slot="nav" panel="closable-1" closable onSlClose={handleClose}>Closable 1</SlTab>
       <SlTab slot="nav" panel="closable-2" closable onSlClose={handleClose}>Closable 2</SlTab>

@@ -227,7 +227,7 @@ const App = () => {
 
   return (
     <>
-      <div class="alert-duration">
+      <div className="alert-duration">
         <SlButton type="primary" onClick={() => setOpen(true)}>Show Alert</SlButton>
 
         <SlAlert 

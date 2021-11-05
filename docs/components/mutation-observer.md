@@ -170,12 +170,12 @@ const App = () => {
 
   return (
     <>
-      <div class="mutation-child-list">
+      <div className="mutation-child-list">
         <SlMutationObserver 
           child-list 
           onSlMutation={event => console.log(event.detail)}
         >
-          <div class="buttons">
+          <div className="buttons">
             <SlButton type="primary" onClick={addButton}>Add button</SlButton>
             {buttonIds.map(id => (
               <SlButton key={id} type="default" onClick={() => removeButton(id)}>

@@ -53,7 +53,7 @@ const App = () => {
 
   return (
     <>
-      <div class="qr-overview">
+      <div className="qr-overview">
         <SlQrCode value={value} label="Scan this code to visit Shoelace on the web!" />
         <br />
 
@@ -151,7 +151,7 @@ const css = `
 const App = () => {
   return (
     <>
-      <div class="qr-error-correction">
+      <div className="qr-error-correction">
         <SlQrCode value="https://shoelace.style/" error-correction="L" />
         <SlQrCode value="https://shoelace.style/" error-correction="M" />
         <SlQrCode value="https://shoelace.style/" error-correction="Q" />

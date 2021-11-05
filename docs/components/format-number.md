@@ -30,7 +30,7 @@ const App = () => {
   const [value, setValue] = useState(1000);
 
   return (
-    <div class="format-number-overview">
+    <>
       <SlFormatNumber value={value} />
       <br /><br />
       <SlInput 
@@ -40,7 +40,7 @@ const App = () => {
         style={{ maxWidth: '180px' }}
         onSlInput={event => setValue(event.target.value)}
       />
-    </div>
+    </>
   );
 };
 ```

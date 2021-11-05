@@ -119,7 +119,7 @@ const App = () => {
 
   return (
     <>
-      <div class="tags-removable">
+      <div className="tags-removable">
         <SlTag size="small" removable onSlRemove={handleRemove}>
           Small
         </SlTag>

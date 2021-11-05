@@ -92,7 +92,7 @@ const css = `
 
 const App = () => (
   <>
-    <div class="skeleton-overview">
+    <div className="skeleton-overview">
       <header>
         <SlSkeleton />
         <SlSkeleton />
@@ -152,7 +152,7 @@ const css = `
 
 const App = () => (
   <>
-    <div class="skeleton-effects">
+    <div className="skeleton-effects">
       <SlSkeleton effect="none" />
       None
 
@@ -223,7 +223,7 @@ const css = `
 
 const App = () => (
   <>
-    <div class="skeleton-paragraphs">
+    <div className="skeleton-paragraphs">
       <SlSkeleton />
       <SlSkeleton />
       <SlSkeleton />
@@ -287,7 +287,7 @@ const css = `
 
 const App = () => (
   <>
-    <div class="skeleton-avatars">
+    <div className="skeleton-avatars">
       <SlSkeleton />
       <SlSkeleton />
       <SlSkeleton />
@@ -387,12 +387,12 @@ const css = `
 
 const App = () => (
   <>
-  <div class="skeleton-shapes">
-    <SlSkeleton class="square" />
-    <SlSkeleton class="circle" />
-    <SlSkeleton class="triangle" />
-    <SlSkeleton class="cross" />
-    <SlSkeleton class="comment" />
+  <div className="skeleton-shapes">
+    <SlSkeleton className="square" />
+    <SlSkeleton className="circle" />
+    <SlSkeleton className="triangle" />
+    <SlSkeleton className="cross" />
+    <SlSkeleton className="comment" />
   </div>
 
     <style>{css}</style>

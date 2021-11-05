@@ -427,7 +427,7 @@ const css = `
 
 const App = () => (
   <>
-    <div class="button-group-toolbar">
+    <div className="button-group-toolbar">
       <SlButtonGroup label="History">
         <SlTooltip content="Undo">
           <SlButton><SlIcon name="arrow-counterclockwise"></SlIcon></SlButton>

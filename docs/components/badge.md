@@ -101,7 +101,7 @@ const css = `
 
 const App = () => (
   <>
-    <div class="badge-pulse">
+    <div className="badge-pulse">
       <SlBadge type="primary" pill pulse>1</SlBadge>
       <SlBadge type="success" pill pulse>1</SlBadge>
       <SlBadge type="neutral" pill pulse>1</SlBadge>
