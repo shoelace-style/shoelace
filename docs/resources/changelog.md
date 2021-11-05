@@ -9,6 +9,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 ## Next
 
 - Added React examples and CodePen links to all components
+- Changed the `attr` in experimental `<sl-mutation-observer>` to require `"*"` instead of `""` to target all attributes
 - Fixed a bug in `<sl-progress-bar>` where the `label` attribute didn't set the label
 - Fixed a bug in `<sl-rating>` that caused disabled and readonly controls to transition on hover
 - The `panel` property of `<sl-tab>` is now reflected

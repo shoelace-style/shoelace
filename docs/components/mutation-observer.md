@@ -8,7 +8,7 @@ The mutation observer will report changes to the content it wraps through the `s
 
 ```html preview
 <div class="mutation-overview">
-  <sl-mutation-observer attr>
+  <sl-mutation-observer attr="type">
     <sl-button type="primary">Click to mutate</sl-button>
   </sl-mutation-observer>
 
@@ -40,6 +40,47 @@ The mutation observer will report changes to the content it wraps through the `s
     }
   </style>
 </div>
+```
+
+```jsx react
+import { useState } from 'react';
+import { SlButton, SlMutationObserver } from '@shoelace-style/shoelace/dist/react';
+
+const css = `
+  .resize-observer-overview div {
+    display: flex; 
+    border: solid 2px rgb(var(--sl-input-border-color)); 
+    align-items: center; 
+    justify-content: center;
+    text-align: center;
+    padding: 4rem 2rem;
+  }
+`;
+
+const types = ['primary', 'success', 'neutral', 'warning', 'danger']; 
+let clicks = 0;
+
+const App = () => {
+  const [type, setType] = useState('primary');
+
+  function handleClick() {
+    clicks++;
+    setType(types[clicks % types.length]);
+  }
+
+  return (
+    <>
+      <SlMutationObserver 
+        attr="*"
+        onSlMutation={event => console.log(event.detail)}
+      >
+        <SlButton type={type} onClick={handleClick}>Click to mutate</SlButton>
+      </SlMutationObserver>
+
+      <style>{css}</style>
+    </>
+  );
+};
 ```
 
 ?> When you create a mutation observer, you must indicate what changes it should respond to by including at least one of `attr`, `child-list`, or `char-data`. If you don't specify at least one of these attributes, no mutation events will be emitted.
@@ -99,6 +140,57 @@ Use the `child-list` attribute to watch for new child elements that are added or
     }
   </style>
 </div>
+```
+
+```jsx react
+import { useState } from 'react';
+import { SlButton, SlMutationObserver } from '@shoelace-style/shoelace/dist/react';
+
+const css = `
+  .mutation-child-list .buttons {
+    display: flex;
+    gap: .25rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+`;
+
+let buttonCount = 0;
+
+const App = () => {
+  const [buttonIds, setButtonIds] = useState([]);
+
+  function addButton() {
+    setButtonIds([...buttonIds, ++buttonCount]);
+  }
+
+  function removeButton(id) {
+    setButtonIds(buttonIds.filter(i => i !== id));
+  }
+
+  return (
+    <>
+      <div class="mutation-child-list">
+        <SlMutationObserver 
+          child-list 
+          onSlMutation={event => console.log(event.detail)}
+        >
+          <div class="buttons">
+            <SlButton type="primary" onClick={addButton}>Add button</SlButton>
+            {buttonIds.map(id => (
+              <SlButton key={id} type="default" onClick={() => removeButton(id)}>
+                {id}
+              </SlButton>
+            ))}
+          </div>
+        </SlMutationObserver>
+      </div>
+
+      👆 Add and remove buttons and watch the console
+      <style>{css}</style>
+    </>
+  );
+};
 ```
 
 [component-metadata:sl-mutation-observer]

@@ -19,8 +19,8 @@ export default class SlMutationObserver extends LitElement {
   private mutationObserver: MutationObserver;
 
   /**
-   * Watches for changes to attributes. If empty, all changes will be reported. To watch only specific attributes,
-   * separate them by a space.
+   * Watches for changes to attributes. If set to *, all changes will be reported. To watch only specific attributes,
+   * separate them by a space, e.g. "class id title".
    */
   @property({ reflect: true }) attr: string;
 
@@ -80,12 +80,15 @@ export default class SlMutationObserver extends LitElement {
   }
 
   startObserver() {
+    const observeAttributes = typeof this.attr === 'string' && this.attr.length > 0;
+    const attributeFilter = observeAttributes && this.attr !== '*' ? this.attr.split(' ') : undefined;
+
     try {
       this.mutationObserver.observe(this, {
         subtree: true,
         childList: this.childList,
-        attributes: typeof this.attr === 'string',
-        attributeFilter: typeof this.attr === 'string' && this.attr.length > 0 ? this.attr.split(' ') : undefined,
+        attributes: observeAttributes,
+        attributeFilter,
         attributeOldValue: this.attrOldValue,
         characterData: this.charData,
         characterDataOldValue: this.charDataOldValue
