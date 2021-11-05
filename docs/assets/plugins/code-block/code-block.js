@@ -156,7 +156,7 @@
                 ${hasReact ? ` ${htmlButton} ${reactButton} ` : ''}
 
                 <button type="button" class="code-block__button code-block__toggle" aria-expanded="false" aria-controls="${preId}">
-                  View Source
+                  Source
                   <svg
                     viewBox="0 0 24 24"
                     fill="none"
