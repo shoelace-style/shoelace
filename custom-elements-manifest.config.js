@@ -1,5 +1,6 @@
 import fs from 'fs';
 import commentParser from 'comment-parser';
+import pascalCase from 'pascal-case';
 
 const packageData = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
 const { name, description, version, author, homepage, license } = packageData;
@@ -79,6 +80,23 @@ export default {
                   });
               }
             });
+        }
+      }
+    },
+
+    {
+      name: 'shoelace-react-event-names',
+      analyzePhase({ ts, node, moduleDoc, context }) {
+        switch (node.kind) {
+          case ts.SyntaxKind.ClassDeclaration:
+            const className = node.name.getText();
+            const classDoc = moduleDoc?.declarations?.find(declaration => declaration.name === className);
+
+            if (classDoc?.events) {
+              classDoc.events.map(event => {
+                event.reactName = `on${pascalCase(event.name)}`;
+              });
+            }
         }
       }
     }
