@@ -88,11 +88,15 @@ const css = `
 `;
 
 const App = () => (
-  <div className="icon-button-color">
-    <SlIconButton name="type-bold" label="Bold" />
-    <SlIconButton name="type-italic" label="Italic" />
-    <SlIconButton name="type-underline" label="Underline" />
-  </div>
+  <>
+    <div className="icon-button-color">
+      <SlIconButton name="type-bold" label="Bold" />
+      <SlIconButton name="type-italic" label="Italic" />
+      <SlIconButton name="type-underline" label="Underline" />
+    </div>
+
+    <style>{css}</style>
+  </>
 );
 ```
 
