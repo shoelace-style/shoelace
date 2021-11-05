@@ -203,9 +203,9 @@ import { SlButton } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <>
-    <SlButton type="default" size="small" style="width: 100%; margin-bottom: 1rem;">Small</SlButton>
-    <SlButton type="default" size="medium" style="width: 100%; margin-bottom: 1rem;">Medium</SlButton>
-    <SlButton type="default" size="large" style="width: 100%;">Large</SlButton>
+    <SlButton type="default" size="small" style={{ width: '100%', marginBottom: '1rem' }}>Small</SlButton>
+    <SlButton type="default" size="medium" style={{ width: '100%', marginBottom: '1rem' }}>Medium</SlButton>
+    <SlButton type="default" size="large" style={{ width: '100%' }}>Large</SlButton>
   </>
 );
 ```

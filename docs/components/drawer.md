@@ -343,11 +343,13 @@ const App = () => {
   return (
     <>
       <SlDrawer label="Drawer" open={open} onSlAfterHide={() => setOpen(false)}>
-        <div style={{
-          height: '150vh',
-          border: 'dashed 2px rgb(var(--sl-color-neutral-200))',
-          padding: '0 1rem'
-        }}>
+        <div 
+          style={{
+            height: '150vh',
+            border: 'dashed 2px rgb(var(--sl-color-neutral-200))',
+            padding: '0 1rem'
+          }}
+        >
           <p>Scroll down and give it a try! 👇</p>
         </div>
         <SlButton slot="footer" type="primary" onClick={() => setOpen(false)}>
