@@ -32,7 +32,7 @@ if (configScript) {
   // Use the data-shoelace attribute
   setBasePath(configScript.getAttribute('data-shoelace')!);
 } else {
-  const fallbackScript = scripts.find(s => /shoelace(\.min)?\.js$/.test(s.src));
+  const fallbackScript = scripts.find(s => /shoelace(\.min)?\.js($|\?)/.test(s.src));
   let path = '';
 
   if (fallbackScript) {
