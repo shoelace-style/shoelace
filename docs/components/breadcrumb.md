@@ -113,7 +113,7 @@ Use the `separator` slot to change the separator that goes between breadcrumb it
 
 ```jsx react
 import '@shoelace-style/shoelace/dist/components/icon/icon.js';
-import { SlBreadcrumb, SlBreadcrumbItem, SlIcon } from '@shoelace-style/shoelace/dist/react';
+import { SlBreadcrumb, SlBreadcrumbItem } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <>
@@ -166,7 +166,7 @@ import { SlBreadcrumb, SlBreadcrumbItem, SlIcon } from '@shoelace-style/shoelace
 const App = () => (
   <SlBreadcrumb>
     <SlBreadcrumbItem>
-      <sl-icon slot="prefix" name="house"></sl-icon>
+      <SlIcon slot="prefix" name="house" />
       Home
     </SlBreadcrumbItem>
     <SlBreadcrumbItem>Articles</SlBreadcrumbItem>
