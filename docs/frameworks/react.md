@@ -20,11 +20,13 @@ import { setBasePath } from '@shoelace-style/shoelace/dist/utilities/base-path';
 setBasePath('https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/');
 ```
 
-?> If you'd rather not use the CDN for assets, you can create a [copy task](https://webpack.js.org/plugins/copy-webpack-plugin/) to copy `node_modules/@shoelace-style/shoelace/dist/assets` into your app's `public` directory. Then you can point the base path to that folder instead.
+?> If you'd rather not use the CDN for assets, you can create a [build task](https://webpack.js.org/plugins/copy-webpack-plugin/) that copies `node_modules/@shoelace-style/shoelace/dist/assets` into your app's `public` directory. Then you can point the base path to that folder instead.
 
 Now you can start using components!
 
-## Importing Components
+## Usage
+
+### Importing Components
 
 Every Shoelace component is available to import as a React component. Note that we're importing the `<SlButton>` _React component_ instead of the `<sl-button>` _custom element_ in the example below.
 
@@ -42,7 +44,7 @@ export default MyComponent;
 
 You can find a copy + paste import for every component at the bottom of each page in the documentation.
 
-## Event Handling
+### Event Handling
 
 Many Shoelace components emit [custom events](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent). For example, the [input component](/components/input) emits the `sl-input` event when it receives input. In React, you can listen for the event using `onSlInput`.
 
@@ -86,3 +88,5 @@ function MyComponent() {
 
 export default MyComponent;
 ```
+
+?> Are you using Shoelace with React? [Help us improve this page!](https://github.com/shoelace-style/shoelace/blob/next/docs/frameworks/react.md)
