@@ -1,6 +1,6 @@
 # React
 
-React [doesn't play nice](https://custom-elements-everywhere.com/#react) with custom elements, so Shoelace offers a React version of its components to provide an idiomatic experience for React users. You can easily toggle between HTML and React examples throughout the documentation.
+Shoelace offers a React version of every component to provide an idiomatic experience for React users. You can easily toggle between HTML and React examples throughout the documentation.
 
 ## Installation
 
