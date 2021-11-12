@@ -114,7 +114,7 @@
       [...doc.querySelectorAll('code[class^="lang-"]')].map(code => {
         if (code.classList.contains('preview')) {
           const pre = code.closest('pre');
-          const preId = `code-block-preview-${count}`;
+          const sourceGroupId = `code-block-source-group-${count}`;
           const toggleId = `code-block-toggle-${count}`;
           const reactPre = getAdjacentExample('react', pre);
           const hasReact = reactPre !== null;
@@ -125,7 +125,6 @@
             }
           ];
 
-          pre.id = preId;
           pre.setAttribute('data-lang', pre.getAttribute('data-lang').replace(/ preview$/, ''));
           pre.setAttribute('aria-labelledby', toggleId);
 
@@ -138,24 +137,26 @@
                 </div>
               </div>
 
-              <div class="code-block__source code-block__source--html" ${hasReact ? 'data-flavor="html"' : ''}>
-                ${pre.outerHTML}
-              </div>
-
-              ${
-                hasReact
-                  ? `
-                <div class="code-block__source code-block__source--react" data-flavor="react">
-                  ${reactPre.outerHTML}
+              <div class="code-block__source-group" id="${sourceGroupId}">
+                <div class="code-block__source code-block__source--html" ${hasReact ? 'data-flavor="html"' : ''}>
+                  ${pre.outerHTML}
                 </div>
-              `
-                  : ''
-              }
+
+                ${
+                  hasReact
+                    ? `
+                  <div class="code-block__source code-block__source--react" data-flavor="react">
+                    ${reactPre.outerHTML}
+                  </div>
+                `
+                    : ''
+                }
+              </div>
 
               <div class="code-block__buttons">
                 ${hasReact ? ` ${htmlButton} ${reactButton} ` : ''}
 
-                <button type="button" class="code-block__button code-block__toggle" aria-expanded="false" aria-controls="${preId}">
+                <button type="button" class="code-block__button code-block__toggle" aria-expanded="false" aria-controls="${sourceGroupId}">
                   Source
                   <svg
                     viewBox="0 0 24 24"
