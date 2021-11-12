@@ -8,6 +8,10 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
+- Improved a11y of `<sl-avatar>` by representing it as an image with an `alt` [#579](https://github.com/shoelace-style/shoelace/issues/579)
+- Improved a11y of the scroll buttons in `<sl-tab-group>`
+- Improved a11y of the close button in `<sl-tab>`
+- Improved a11y of `<sl-tab-panel>` by removing an invalid `aria-selected` attribute [#579](https://github.com/shoelace-style/shoelace/issues/579)
 - Moved `role` from the shadow root to the host element in `<sl-menu>`
 - Removed redundant `role="menu"` in `<sl-dropdown>`
 - Slightly faster animations for showing and hiding `<sl-dropdown>`

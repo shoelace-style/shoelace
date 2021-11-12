@@ -59,6 +59,7 @@ export default class SlTab extends LitElement {
     // If the user didn't provide an ID, we'll set one so we can link tabs and tab panels with aria labels
     this.id = this.id || this.componentId;
 
+    // TODO - i18n close label
     return html`
       <div
         part="base"
@@ -79,11 +80,11 @@ export default class SlTab extends LitElement {
               <sl-icon-button
                 name="x"
                 library="system"
+                label="Close"
                 exportparts="base:close-button"
                 class="tab__close-button"
                 @click=${this.handleCloseClick}
                 tabindex="-1"
-                aria-hidden="true"
               ></sl-icon-button>
             `
           : ''}

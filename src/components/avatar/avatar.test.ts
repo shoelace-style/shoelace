@@ -8,7 +8,7 @@ describe('<sl-avatar>', () => {
 
   describe('when provided no parameters', async () => {
     before(async () => {
-      el = await fixture<SlAvatar>(html` <sl-avatar></sl-avatar> `);
+      el = await fixture<SlAvatar>(html` <sl-avatar alt="Avatar"></sl-avatar> `);
     });
 
     it('passes accessibility test', async () => {
@@ -71,7 +71,7 @@ describe('<sl-avatar>', () => {
   describe('when provided initials parameter', async () => {
     const initials = 'SL';
     before(async () => {
-      el = await fixture<SlAvatar>(html`<sl-avatar initials="${initials}"></sl-avatar>`);
+      el = await fixture<SlAvatar>(html`<sl-avatar initials="${initials}" alt="Avatar"></sl-avatar>`);
     });
 
     it('passes accessibility test', async () => {
@@ -88,7 +88,7 @@ describe('<sl-avatar>', () => {
   ['square', 'rounded', 'circle'].forEach(shape => {
     describe(`when passed a shape attribute ${shape}`, () => {
       before(async () => {
-        el = await fixture<SlAvatar>(html`<sl-avatar shape="${shape}"></sl-avatar>`);
+        el = await fixture<SlAvatar>(html`<sl-avatar shape="${shape as any}" alt="Shaped avatar"></sl-avatar>`);
       });
 
       it('passes accessibility test', async () => {
@@ -106,7 +106,7 @@ describe('<sl-avatar>', () => {
 
   describe('when passed a <span>, on slot "icon"', async () => {
     before(async () => {
-      el = await fixture<SlAvatar>(html`<sl-avatar><span slot="icon">random content</span></sl-avatar>`);
+      el = await fixture<SlAvatar>(html`<sl-avatar alt="Avatar"><span slot="icon">random content</span></sl-avatar>`);
     });
 
     it('passes accessibility test', async () => {

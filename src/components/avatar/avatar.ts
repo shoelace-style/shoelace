@@ -48,12 +48,13 @@ export default class SlAvatar extends LitElement {
           'avatar--rounded': this.shape === 'rounded',
           'avatar--square': this.shape === 'square'
         })}
+        role="img"
         aria-label=${this.alt}
       >
         ${this.initials
           ? html` <div part="initials" class="avatar__initials">${this.initials}</div> `
           : html`
-              <div part="icon" class="avatar__icon">
+              <div part="icon" class="avatar__icon" aria-hidden="true">
                 <slot name="icon">
                   <sl-icon name="person-fill" library="system"></sl-icon>
                 </slot>

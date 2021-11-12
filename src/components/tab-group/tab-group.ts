@@ -339,6 +339,7 @@ export default class SlTabGroup extends LitElement {
     this.syncIndicator();
   }
 
+  // TODO - i18n scroll to start/end labels
   render() {
     return html`
       <div
@@ -362,6 +363,7 @@ export default class SlTabGroup extends LitElement {
                   exportparts="base:scroll-button"
                   name="chevron-left"
                   library="system"
+                  label="Scroll to start"
                   @click=${this.handleScrollToStart}
                 ></sl-icon-button>
               `
@@ -381,6 +383,7 @@ export default class SlTabGroup extends LitElement {
                   exportparts="base:scroll-button"
                   name="chevron-right"
                   library="system"
+                  label="Scroll to end"
                   @click=${this.handleScrollToEnd}
                 ></sl-icon-button>
               `
