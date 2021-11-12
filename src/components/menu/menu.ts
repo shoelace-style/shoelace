@@ -26,6 +26,10 @@ export default class SlMenu extends LitElement {
   private typeToSelectString = '';
   private typeToSelectTimeout: any;
 
+  firstUpdated() {
+    this.setAttribute('role', 'menu');
+  }
+
   getAllItems(options: { includeDisabled: boolean } = { includeDisabled: true }) {
     return [...this.defaultSlot.assignedElements({ flatten: true })].filter((el: HTMLElement) => {
       if (el.getAttribute('role') !== 'menuitem') {
@@ -183,7 +187,6 @@ export default class SlMenu extends LitElement {
       <div
         part="base"
         class="menu"
-        role="menu"
         @click=${this.handleClick}
         @keydown=${this.handleKeyDown}
         @keyup=${this.handleKeyUp}

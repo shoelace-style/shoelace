@@ -425,7 +425,6 @@ export default class SlDropdown extends LitElement {
           <div
             part="panel"
             class="dropdown__panel"
-            role="menu"
             aria-hidden=${this.open ? 'false' : 'true'}
             aria-labelledby=${this.componentId}
           >
