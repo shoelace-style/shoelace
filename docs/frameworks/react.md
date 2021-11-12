@@ -89,4 +89,68 @@ function MyComponent() {
 export default MyComponent;
 ```
 
+## Testing with Jest
+
+Testing with web components can be challenging if your test environment runs in a Node environment (i.e. it doesn't run in a real browser). Fortunately, [Jest](https://jestjs.io/) has made a number of strides to support web components and provide additional browser APIs. However, it's still not a complete replication of a browser environment.
+
+Here are some tips that will help smooth things over if you're having trouble with Jest + Shoelace.
+
+?> If you're looking for a fast, modern testing alternative, consider [Web Test Runner](https://modern-web.dev/docs/test-runner/overview/).
+
+### Upgrade Jest
+
+Jest underwent a major revamp and received support for web components in [version 26.5.0](https://github.com/facebook/jest/blob/main/CHANGELOG.md#2650) when it introduced [JSDOM 16.2.0](https://github.com/jsdom/jsdom/blob/master/Changelog.md#1620). This release also included a number of mocks for built-in browser functions such as `MutationObserver`, `document.createRange`, and others.
+
+If you're using [Create React App](https://reactjs.org/docs/create-a-new-react-app.html#create-react-app), you can update `react-scripts` which will also update Jest.
+
+```
+npm install react-scripts@latest
+```
+
+### Mock Missing APIs
+
+Some components use `window.matchMedia`, but this function isn't supported by JSDOM so you'll need to mock it yourself.
+
+In `src/setupTests.js`, add the following.
+
+```js
+Object.defineProperty(window, 'matchMedia', {
+  writable: true,
+  value: jest.fn().mockImplementation(query => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: jest.fn(), // deprecated
+    removeListener: jest.fn(), // deprecated
+    addEventListener: jest.fn(),
+    removeEventListener: jest.fn(),
+    dispatchEvent: jest.fn(),
+  })),
+});
+```
+
+For more details, refer to Jest's [manual mocking](https://jestjs.io/docs/manual-mocks#mocking-methods-which-are-not-implemented-in-jsdom) documentation.
+
+### Transform ES Modules
+
+ES Modules are a [well-supported browser standard](https://hacks.mozilla.org/2018/03/es-modules-a-cartoon-deep-dive/). This is how Shoelace is distributed, but most React apps expect CommonJS. As a result, you'll probably run into the following error.
+
+```
+Error: Unable to import outside of a module
+```
+
+To fix this, add the following to your `package.json` which tells the transpiler to process Shoelace modules.
+
+```js
+{
+  "jest": {
+    "transformIgnorePatterns": ["node_modules/?!(@shoelace)"]
+  }
+}
+```
+
+These instructions are for apps created via Create React App. If you're using Jest directly, you can add `transformIgnorePatterns` directly into `jest.config.js`.
+
+For more details, refer to Jest's [`transformIgnorePatterns` customization](https://jestjs.io/docs/tutorial-react-native#transformignorepatterns-customization) documentation.
+
 ?> Are you using Shoelace with React? [Help us improve this page!](https://github.com/shoelace-style/shoelace/blob/next/docs/frameworks/react.md)
