@@ -400,12 +400,21 @@
             ## Importing
 
             <sl-tab-group>
-            <sl-tab slot="nav" panel="cdn">CDN</sl-tab>
+            <sl-tab slot="nav" panel="script">Script</sl-tab>
+            <sl-tab slot="nav" panel="import">Import</sl-tab>
             <sl-tab slot="nav" panel="bundler">Bundler</sl-tab>
             <sl-tab slot="nav" panel="react">React</sl-tab>
 
-            <sl-tab-panel name="cdn">\n
-            To cherry pick this component from [the CDN](https://www.jsdelivr.com/package/npm/@shoelace-style/shoelace):
+            <sl-tab-panel name="script">\n
+            To import this component from [the CDN](https://www.jsdelivr.com/package/npm/@shoelace-style/shoelace) using a script tag:
+
+            \`\`\`html
+            <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@${metadata.package.version}/${component.path}"></script>
+            \`\`\`
+            </sl-tab-panel>
+
+            <sl-tab-panel name="import">\n
+            To import this component from [the CDN](https://www.jsdelivr.com/package/npm/@shoelace-style/shoelace) using a JavaScript import:
 
             \`\`\`js
             import 'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@${metadata.package.version}/${component.path}';
