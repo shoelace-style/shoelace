@@ -42,7 +42,7 @@ const MyComponent = () => (
 export default MyComponent;
 ```
 
-You can find a copy + paste import for every component at the bottom of each page in the documentation.
+You can find a copy + paste import for each component in the "importing" section of its documentation.
 
 ### Event Handling
 
