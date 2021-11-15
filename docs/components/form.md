@@ -30,14 +30,11 @@ Shoelace forms don't make use of `action` and `method` attributes and they don't
 <script>
   const form = document.querySelector('.form-overview');
 
-  // Watch for the slSubmit event
   form.addEventListener('sl-submit', event => {
     const formData = event.detail.formData;
     let output = '';
 
-    //
-    // Example 1: Post data to a server and wait for a JSON response
-    //
+    // Post data to a server and wait for a JSON response
     fetch('https://jsonplaceholder.typicode.com/posts', {
       method: 'POST',
       body: formData
@@ -49,20 +46,6 @@ Shoelace forms don't make use of `action` and `method` attributes and they don't
     .catch(error => {
       console.error('Error:', error);
     });
-
-    //
-    // Example 2: Output all form control names + values
-    //
-    for (const entry of formData.entries()) {
-      output += `${entry[0]}: ${entry[1]}\n`;
-    }
-    alert(output);
-
-    //
-    // Example 3: Get all form controls that were serialized as 
-    // an array of HTML elements
-    //
-    console.log(event.detail.formControls);
   });
 </script>
 ```
@@ -78,15 +61,12 @@ import {
 } from '@shoelace-style/shoelace/dist/react';
 
 function handleSubmit(event) {
-  const formData = event.detail.formData;
   let output = '';
 
-  //
-  // Example 1: Post data to a server and wait for a JSON response
-  //
+  // Post data to a server and wait for a JSON response
   fetch('https://jsonplaceholder.typicode.com/posts', {
     method: 'POST',
-    body: formData
+    body: event.detail.formData
   })
   .then(response => response.json())
   .then(result => {
@@ -95,20 +75,6 @@ function handleSubmit(event) {
   .catch(error => {
     console.error('Error:', error);
   });
-
-  //
-  // Example 2: Output all form control names + values
-  //
-  for (const entry of formData.entries()) {
-    output += `${entry[0]}: ${entry[1]}\n`;
-  }
-  alert(output);
-
-  //
-  // Example 3: Get all form controls that were serialized as 
-  // an array of HTML elements
-  //
-  console.log(event.detail.formControls);
 }
 
 const App = () => (
@@ -128,6 +94,79 @@ const App = () => (
     <SlButton submit>Submit</SlButton>
   </SlForm>
 );
+```
+
+## Handling Submissions
+
+### Using Form Data
+
+On submit, a [`FormData`](https://developer.mozilla.org/en-US/docs/Web/API/FormData) object will be attached to `event.detail.formData`. You can use this along with [`fetch()`](https://developer.mozilla.org/en-US/docs/Web/API/fetch) to pass data to the server.
+
+```html preview
+<sl-form class="form-formdata">
+  <sl-input name="name" type="text" label="Name" required></sl-input>
+  <sl-input name="age" type="number" label="Age" required></sl-input>
+  <br>
+  <sl-button submit>Submit</sl-button>
+</sl-form>
+
+<script>
+  const form = document.querySelector('.form-formdata');
+
+  form.addEventListener('sl-submit', event => {
+    fetch('https://jsonplaceholder.typicode.com/posts', {
+      method: 'POST',
+      body: event.detail.formData
+    }).then(res => {
+      console.log(res);
+    }).catch(err => {
+      console.error(err);
+    });
+  });
+</script>
+```
+
+```jsx react
+import {
+  SlButton, 
+  SlForm, 
+  SlInput 
+} from '@shoelace-style/shoelace/dist/react';
+
+const App = () => {
+  function handleSubmit(event) {
+    fetch('https://jsonplaceholder.typicode.com/posts', {
+      method: 'POST',
+      body: event.detail.formData
+    }).then(res => {
+      console.log(res);
+    }).catch(err => {
+      console.error(err);
+    });    
+  }
+
+  return (
+    <SlForm class="form-formdata" onSlSubmit={handleSubmit}>
+      <SlInput name="name" type="text" label="Name" required />
+      <SlInput name="age" type="number" label="Age" required />
+      <br />
+      <SlButton submit>Submit</SlButton>
+    </SlForm>
+  );
+};
+```
+
+### Converting Form Data to JSON
+
+It's sometimes useful to have form values in a plain object or a JSON string. You can convert the submitted `FormData` object to JSON by iterating and placing the name/value pairs in an object.
+
+```js
+form.addEventListener('sl-submit', event => {
+  const json = {};
+  event.detail.formData.forEach((value, key) => (json[key] = value));
+
+  console.log(JSON.stringify(json));
+});
 ```
 
 ## Form Control Validation
