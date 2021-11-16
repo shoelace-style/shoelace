@@ -8,10 +8,12 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
+- Added experimental `<sl-visually-hidden>` component
 - Improved a11y of `<sl-avatar>` by representing it as an image with an `alt` [#579](https://github.com/shoelace-style/shoelace/issues/579)
 - Improved a11y of the scroll buttons in `<sl-tab-group>`
 - Improved a11y of the close button in `<sl-tab>`
 - Improved a11y of `<sl-tab-panel>` by removing an invalid `aria-selected` attribute [#579](https://github.com/shoelace-style/shoelace/issues/579)
+- Improved a11y of `<sl-icon>` by not using a variation of the `name` attribute for labels (use the `label` prop instead)
 - Moved `role` from the shadow root to the host element in `<sl-menu>`
 - Removed redundant `role="menu"` in `<sl-dropdown>`
 - Slightly faster animations for showing and hiding `<sl-dropdown>`
@@ -78,7 +80,7 @@ Shoelace doesn't have a lot of dependencies, but this release unbundles most of 
 ## 2.0.0-beta.53
 
 - 🚨 BREAKING: removed `<sl-menu-divider>` (use `<sl-divider>` instead)
-- 🚨 BREAKING: removed `percentage` attribute from `<sl-progress-bar>` and `<sl-progress-ring>` (use `value`) instead
+- 🚨 BREAKING: removed `percentage` attribute from `<sl-progress-bar>` and `<sl-progress-ring>` (use `value` instead)
 - 🚨 BREAKING: switched the default `type` of `<sl-tag>` from `primary` to `neutral`
 - Added the experimental `<sl-mutation-observer>` component
 - Added the `<sl-divider>` component
