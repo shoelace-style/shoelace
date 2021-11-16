@@ -1,5 +1,6 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
@@ -30,7 +31,7 @@ export default class SlIcon extends LitElement {
   /** An external URL of an SVG file. */
   @property() src: string;
 
-  /** An alternative description to use for accessibility. If omitted, the name or src will be used to generate it. */
+  /** An alternate description to use for accessibility. If omitted, the icon will be ignored by assistive devices. */
   @property() label: string;
 
   /** The name of a registered custom icon library. */
@@ -48,20 +49,6 @@ export default class SlIcon extends LitElement {
   disconnectedCallback() {
     super.disconnectedCallback();
     unwatchIcon(this);
-  }
-
-  getLabel() {
-    let label = '';
-
-    if (this.label) {
-      label = this.label;
-    } else if (this.name) {
-      label = this.name.replace(/-/g, ' ');
-    } else if (this.src) {
-      label = this.src.replace(/.*\//, '').replace(/-/g, ' ').replace(/\.svg/i, '');
-    }
-
-    return label;
   }
 
   private getUrl(): string {
@@ -123,7 +110,17 @@ export default class SlIcon extends LitElement {
   }
 
   render() {
-    return html` <div part="base" class="icon" role="img" aria-label=${this.getLabel()}>${unsafeSVG(this.svg)}</div>`;
+    const hasLabel = typeof this.label === 'string' && this.label.length > 0;
+
+    return html` <div
+      part="base"
+      class="icon"
+      role=${ifDefined(hasLabel ? 'img' : undefined)}
+      aria-label=${ifDefined(hasLabel ? this.label : undefined)}
+      aria-hidden=${ifDefined(hasLabel ? undefined : 'true')}
+    >
+      ${unsafeSVG(this.svg)}
+    </div>`;
   }
 }
 
