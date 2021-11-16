@@ -91,6 +91,7 @@ You can change the appearance and location of the control box by targeting the `
     bottom: 1rem;
     left: 1rem;
     background-color: deeppink;
+    border: none;
     color: white;
   }
 </style>
