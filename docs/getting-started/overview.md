@@ -37,11 +37,11 @@ Add the following code to your page.
 
 Now you have access to all of Shoelace's components! Try adding a button:
 
-```html
+```html preview expanded
 <sl-button>Click me</sl-button>
 ```
 
-This will load all of Shoelace's components, but you should probably only load the ones you're actually using. To learn how, or for other ways to install Shoelace, refer to the [installation instructions](getting-started/installation).
+?> This will load all of Shoelace's components, but you should probably only load the ones you're actually using. To learn how, or for other ways to install Shoelace, refer to the [installation instructions](getting-started/installation).
 
 
 ## New to Web Components?

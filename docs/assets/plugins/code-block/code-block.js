@@ -113,6 +113,7 @@
 
       [...doc.querySelectorAll('code[class^="lang-"]')].map(code => {
         if (code.classList.contains('preview')) {
+          const isExpanded = code.classList.contains('expanded');
           const pre = code.closest('pre');
           const sourceGroupId = `code-block-source-group-${count}`;
           const toggleId = `code-block-toggle-${count}`;
@@ -129,7 +130,7 @@
           pre.setAttribute('aria-labelledby', toggleId);
 
           const codeBlock = `
-            <div class="code-block">
+            <div class="code-block ${isExpanded ? 'code-block--expanded' : ''}">
               <div class="code-block__preview">
                 ${code.textContent}
                 <div class="code-block__resizer">
@@ -156,7 +157,12 @@
               <div class="code-block__buttons">
                 ${hasReact ? ` ${htmlButton} ${reactButton} ` : ''}
 
-                <button type="button" class="code-block__button code-block__toggle" aria-expanded="false" aria-controls="${sourceGroupId}">
+                <button
+                  type="button"
+                  class="code-block__button code-block__toggle"
+                  aria-expanded="${isExpanded ? 'true' : 'false'}"
+                  aria-controls="${sourceGroupId}"
+                >
                   Source
                   <svg
                     viewBox="0 0 24 24"
