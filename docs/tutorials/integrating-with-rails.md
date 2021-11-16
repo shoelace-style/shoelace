@@ -1,6 +1,8 @@
 # Integrating with Rails
 
-This page explains how to integrate Shoelace with a Rails app. This is a community-maintained document. For questions about this integration, please [ask the community](/resources/community).
+This page explains how to integrate Shoelace with a Rails app.
+
+?> This is a community-maintained document. Please [ask the community](/resources/community) if you have questions about this integration. You can also [suggest improvements](https://github.com/shoelace-style/shoelace/blob/next/docs/tutorials/integrating-with-rails.md) to make it better.
 
 ## Requirements
 
