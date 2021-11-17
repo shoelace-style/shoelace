@@ -17,6 +17,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Moved `role` from the shadow root to the host element in `<sl-menu>`
 - Removed redundant `role="menu"` in `<sl-dropdown>`
 - Slightly faster animations for showing and hiding `<sl-dropdown>`
+- Updated to Bootstrap Icons to 1.7.1
 
 ## 2.0.0-beta.60
 
