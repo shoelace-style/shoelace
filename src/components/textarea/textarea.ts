@@ -102,12 +102,6 @@ export default class SlTextarea extends LitElement {
     | 'on'
     | 'sentences'
     | 'words'
-    | 'characters'
-    | 'off'
-    | 'none'
-    | 'on'
-    | 'sentences'
-    | 'words'
     | 'characters';
 
   /** The textarea's autocorrect attribute. */
