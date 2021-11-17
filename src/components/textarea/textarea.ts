@@ -96,13 +96,7 @@ export default class SlTextarea extends LitElement {
   @property({ type: Boolean, reflect: true }) invalid = false;
 
   /** The textarea's autocaptialize attribute. */
-  @property() autocapitalize:
-    | 'off'
-    | 'none'
-    | 'on'
-    | 'sentences'
-    | 'words'
-    | 'characters';
+  @property() autocapitalize: 'off' | 'none' | 'on' | 'sentences' | 'words' | 'characters';
 
   /** The textarea's autocorrect attribute. */
   @property() autocorrect: string;
