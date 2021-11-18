@@ -36,29 +36,29 @@ export default css`
 
   /* Standard selects */
   .select--standard .select__control {
-    background-color: rgb(var(--sl-input-background-color));
-    border: solid var(--sl-input-border-width) rgb(var(--sl-input-border-color));
-    color: rgb(var(--sl-input-color));
+    background-color: var(--sl-input-background-color);
+    border: solid var(--sl-input-border-width) var(--sl-input-border-color);
+    color: var(--sl-input-color);
   }
 
   .select--standard:not(.select--disabled) .select__control:hover {
-    background-color: rgb(var(--sl-input-background-color-hover));
-    border-color: rgb(var(--sl-input-border-color-hover));
-    color: rgb(var(--sl-input-color-hover));
+    background-color: var(--sl-input-background-color-hover);
+    border-color: var(--sl-input-border-color-hover);
+    color: var(--sl-input-color-hover);
   }
 
   .select--standard.select--focused:not(.select--disabled) .select__control {
-    background-color: rgb(var(--sl-input-background-color-focus));
-    border-color: rgb(var(--sl-input-border-color-focus));
+    background-color: var(--sl-input-background-color-focus);
+    border-color: var(--sl-input-border-color-focus);
     box-shadow: var(--sl-focus-ring);
     outline: none;
-    color: rgb(var(--sl-input-color-focus));
+    color: var(--sl-input-color-focus);
   }
 
   .select--standard.select--disabled .select__control {
-    background-color: rgb(var(--sl-input-background-color-disabled));
-    border-color: rgb(var(--sl-input-border-color-disabled));
-    color: rgb(var(--sl-input-color-disabled));
+    background-color: var(--sl-input-background-color-disabled);
+    border-color: var(--sl-input-border-color-disabled);
+    color: var(--sl-input-color-disabled);
     opacity: 0.5;
     cursor: not-allowed;
     outline: none;
@@ -67,21 +67,21 @@ export default css`
   /* Filled selects */
   .select--filled .select__control {
     border: none;
-    background-color: rgb(var(--sl-input-filled-background-color));
-    color: rgb(var(--sl-input-color));
+    background-color: var(--sl-input-filled-background-color);
+    color: var(--sl-input-color);
   }
 
   .select--filled:hover:not(.select--disabled) .select__control {
-    background-color: rgb(var(--sl-input-filled-background-color-hover));
+    background-color: var(--sl-input-filled-background-color-hover);
   }
 
   .select--filled.select--focused:not(.select--disabled) .select__control {
-    background-color: rgb(var(--sl-input-filled-background-color-focus));
+    background-color: var(--sl-input-filled-background-color-focus);
     box-shadow: var(--sl-focus-ring);
   }
 
   .select--filled.select--disabled .select__control {
-    background-color: rgb(var(--sl-input-filled-background-color-disabled));
+    background-color: var(--sl-input-filled-background-color-disabled);
     opacity: 0.5;
     cursor: not-allowed;
   }
@@ -94,7 +94,7 @@ export default css`
   .select__prefix {
     display: inline-flex;
     align-items: center;
-    color: rgb(var(--sl-input-placeholder-color));
+    color: var(--sl-input-placeholder-color);
   }
 
   .select__label {
@@ -124,7 +124,7 @@ export default css`
   .select__suffix {
     display: inline-flex;
     align-items: center;
-    color: rgb(var(--sl-input-placeholder-color));
+    color: var(--sl-input-placeholder-color);
   }
 
   .select__icon {
@@ -139,11 +139,11 @@ export default css`
 
   /* Placeholder */
   .select--placeholder-visible .select__label {
-    color: rgb(var(--sl-input-placeholder-color));
+    color: var(--sl-input-placeholder-color);
   }
 
   .select--disabled.select--placeholder-visible .select__label {
-    color: rgb(var(--sl-input-placeholder-color-disabled));
+    color: var(--sl-input-placeholder-color-disabled);
   }
 
   /* Tags */

@@ -15,7 +15,7 @@ export default css`
     font-family: var(--sl-input-font-family);
     font-size: var(--sl-input-font-size-medium);
     font-weight: var(--sl-input-font-weight);
-    color: rgb(var(--sl-input-color));
+    color: var(--sl-input-color);
     vertical-align: middle;
     cursor: pointer;
   }
@@ -39,9 +39,9 @@ export default css`
     justify-content: center;
     width: var(--sl-toggle-size);
     height: var(--sl-toggle-size);
-    border: solid var(--sl-input-border-width) rgb(var(--sl-input-border-color));
+    border: solid var(--sl-input-border-width) var(--sl-input-border-color);
     border-radius: 50%;
-    background-color: rgb(var(--sl-input-background-color));
+    background-color: var(--sl-input-background-color);
     color: transparent;
     transition: var(--sl-transition-fast) border-color, var(--sl-transition-fast) background-color,
       var(--sl-transition-fast) color, var(--sl-transition-fast) box-shadow;
@@ -57,35 +57,35 @@ export default css`
 
   /* Hover */
   .radio:not(.radio--checked):not(.radio--disabled) .radio__control:hover {
-    border-color: rgb(var(--sl-input-border-color-hover));
-    background-color: rgb(var(--sl-input-background-color-hover));
+    border-color: var(--sl-input-border-color-hover);
+    background-color: var(--sl-input-background-color-hover);
   }
 
   /* Focus */
   .radio:not(.radio--checked):not(.radio--disabled) .radio__input${focusVisibleSelector} ~ .radio__control {
-    border-color: rgb(var(--sl-input-border-color-focus));
-    background-color: rgb(var(--sl-input-background-color-focus));
-    box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-primary-500) / var(--sl-focus-ring-alpha));
+    border-color: var(--sl-input-border-color-focus);
+    background-color: var(--sl-input-background-color-focus);
+    box-shadow: var(--sl-focus-ring);
   }
 
   /* Checked */
   .radio--checked .radio__control {
-    color: rgb(var(--sl-color-neutral-0));
-    border-color: rgb(var(--sl-color-primary-600));
-    background-color: rgb(var(--sl-color-primary-600));
+    color: var(--sl-color-neutral-0);
+    border-color: var(--sl-color-primary-600);
+    background-color: var(--sl-color-primary-600);
   }
 
   /* Checked + hover */
   .radio.radio--checked:not(.radio--disabled) .radio__control:hover {
-    border-color: rgb(var(--sl-color-primary-500));
-    background-color: rgb(var(--sl-color-primary-500));
+    border-color: var(--sl-color-primary-500);
+    background-color: var(--sl-color-primary-500);
   }
 
   /* Checked + focus */
   .radio.radio--checked:not(.radio--disabled) .radio__input${focusVisibleSelector} ~ .radio__control {
-    border-color: rgb(var(--sl-color-primary-500));
-    background-color: rgb(var(--sl-color-primary-500));
-    box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-primary-500) / var(--sl-focus-ring-alpha));
+    border-color: var(--sl-color-primary-500);
+    background-color: var(--sl-color-primary-500);
+    box-shadow: var(--sl-focus-ring);
   }
 
   /* Disabled */

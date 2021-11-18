@@ -15,7 +15,7 @@ export default css`
     font-family: var(--sl-font-sans);
     font-size: var(--sl-font-size-small);
     font-weight: var(--sl-font-weight-semibold);
-    color: rgb(var(--sl-color-neutral-600));
+    color: var(--sl-color-neutral-600);
     line-height: var(--sl-line-height-normal);
     white-space: nowrap;
   }
@@ -38,15 +38,15 @@ export default css`
   }
 
   :host(:not(:last-of-type)) .breadcrumb-item__label {
-    color: rgb(var(--sl-color-primary-600));
+    color: var(--sl-color-primary-600);
   }
 
   :host(:not(:last-of-type)) .breadcrumb-item__label:hover {
-    color: rgb(var(--sl-color-primary-500));
+    color: var(--sl-color-primary-500);
   }
 
   :host(:not(:last-of-type)) .breadcrumb-item__label:active {
-    color: rgb(var(--sl-color-primary-600));
+    color: var(--sl-color-primary-600);
   }
 
   .breadcrumb-item__label${focusVisibleSelector} {

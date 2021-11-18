@@ -151,7 +151,7 @@ You can group avatars with a few lines of CSS.
   }
 
   .avatar-group sl-avatar::part(base) {
-    border: solid 2px rgb(var(--sl-color-neutral-0));
+    border: solid 2px var(--sl-color-neutral-0);
   }
 </style>
 ```
@@ -165,7 +165,7 @@ const css = `
   }
 
   .avatar-group sl-avatar::part(base) {
-    border: solid 2px rgb(var(--sl-color-neutral-0));
+    border: solid 2px var(--sl-color-neutral-0);
   }
 `;
 

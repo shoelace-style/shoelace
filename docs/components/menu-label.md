@@ -6,7 +6,7 @@ Menu labels are used to describe a group of menu items.
 
 ```html preview
 <sl-menu
-  style="max-width: 200px; border: solid 1px rgb(var(--sl-panel-border-color)); border-radius: var(--sl-border-radius-medium);"
+  style="max-width: 200px; border: solid 1px var(--sl-panel-border-color); background: var(--sl-panel-background-color); border-radius: var(--sl-border-radius-medium);"
 >
   <sl-menu-label>Fruits</sl-menu-label>
   <sl-menu-item value="apple">Apple</sl-menu-item>
@@ -32,7 +32,7 @@ const App = () => (
   <SlMenu 
     style={{
       maxWidth: '200px',
-      border: 'solid 1px rgb(var(--sl-panel-border-color))',
+      border: 'solid 1px var(--sl-panel-border-color)',
       borderRadius: 'var(--sl-border-radius-medium)'
     }}
   >

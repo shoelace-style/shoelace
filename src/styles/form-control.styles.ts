@@ -31,7 +31,7 @@ export default css`
   /* Help text */
   .form-control--has-help-text .form-control__help-text {
     display: block;
-    color: rgb(var(--sl-input-help-text-color));
+    color: var(--sl-input-help-text-color);
   }
 
   .form-control--has-help-text .form-control__help-text ::slotted(*) {

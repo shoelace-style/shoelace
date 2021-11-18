@@ -10,8 +10,8 @@ export default css`
   :host {
     --thumb-size: 20px;
     --tooltip-offset: 10px;
-    --track-color-active: rgb(var(--sl-color-neutral-200));
-    --track-color-inactive: rgb(var(--sl-color-neutral-200));
+    --track-color-active: var(--sl-color-neutral-200);
+    --track-color-inactive: var(--sl-color-neutral-200);
     --track-height: 6px;
 
     display: block;
@@ -44,8 +44,8 @@ export default css`
     width: var(--thumb-size);
     height: var(--thumb-size);
     border-radius: 50%;
-    background-color: rgb(var(--sl-color-primary-600));
-    border: solid var(--sl-input-border-width) rgb(var(--sl-color-primary-600));
+    background-color: var(--sl-color-primary-600);
+    border: solid var(--sl-input-border-width) var(--sl-color-primary-600);
     -webkit-appearance: none;
     margin-top: calc(var(--thumb-size) / -2 + var(--track-height) / 2);
     transition: var(--sl-transition-fast) border-color, var(--sl-transition-fast) background-color,
@@ -54,19 +54,19 @@ export default css`
   }
 
   .range__control:enabled::-webkit-slider-thumb:hover {
-    background-color: rgb(var(--sl-color-primary-500));
-    border-color: rgb(var(--sl-color-primary-500));
+    background-color: var(--sl-color-primary-500);
+    border-color: var(--sl-color-primary-500);
   }
 
   .range__control:enabled${focusVisibleSelector}::-webkit-slider-thumb {
-    background-color: rgb(var(--sl-color-primary-500));
-    border-color: rgb(var(--sl-color-primary-500));
+    background-color: var(--sl-color-primary-500);
+    border-color: var(--sl-color-primary-500);
     box-shadow: var(--sl-focus-ring);
   }
 
   .range__control:enabled::-webkit-slider-thumb:active {
-    background-color: rgb(var(--sl-color-primary-500));
-    border-color: rgb(var(--sl-color-primary-500));
+    background-color: var(--sl-color-primary-500);
+    border-color: var(--sl-color-primary-500);
     cursor: grabbing;
   }
 
@@ -94,27 +94,27 @@ export default css`
     height: var(--thumb-size);
     width: var(--thumb-size);
     border-radius: 50%;
-    background-color: rgb(var(--sl-color-primary-600));
-    border-color: rgb(var(--sl-color-primary-600));
+    background-color: var(--sl-color-primary-600);
+    border-color: var(--sl-color-primary-600);
     transition: var(--sl-transition-fast) border-color, var(--sl-transition-fast) background-color,
       var(--sl-transition-fast) color, var(--sl-transition-fast) box-shadow, var(--sl-transition-fast) transform;
     cursor: pointer;
   }
 
   .range__control:enabled::-moz-range-thumb:hover {
-    background-color: rgb(var(--sl-color-primary-500));
-    border-color: rgb(var(--sl-color-primary-500));
+    background-color: var(--sl-color-primary-500);
+    border-color: var(--sl-color-primary-500);
   }
 
   .range__control:enabled${focusVisibleSelector}::-moz-range-thumb {
-    background-color: rgb(var(--sl-color-primary-500));
-    border-color: rgb(var(--sl-color-primary-500));
+    background-color: var(--sl-color-primary-500);
+    border-color: var(--sl-color-primary-500);
     box-shadow: var(--sl-focus-ring);
   }
 
   .range__control:enabled::-moz-range-thumb:active {
-    background-color: rgb(var(--sl-color-primary-500));
-    border-color: rgb(var(--sl-color-primary-500));
+    background-color: var(--sl-color-primary-500);
+    border-color: var(--sl-color-primary-500);
     cursor: grabbing;
   }
 
@@ -141,12 +141,12 @@ export default css`
     z-index: var(--sl-z-index-tooltip);
     left: 1px;
     border-radius: var(--sl-tooltip-border-radius);
-    background-color: rgb(var(--sl-tooltip-background-color));
+    background-color: var(--sl-tooltip-background-color);
     font-family: var(--sl-tooltip-font-family);
     font-size: var(--sl-tooltip-font-size);
     font-weight: var(--sl-tooltip-font-weight);
     line-height: var(--sl-tooltip-line-height);
-    color: rgb(var(--sl-tooltip-color));
+    color: var(--sl-tooltip-color);
     opacity: 0;
     padding: var(--sl-tooltip-padding);
     transition: var(--sl-transition-fast) opacity;
@@ -172,7 +172,7 @@ export default css`
   }
 
   .range--tooltip-top .range__tooltip:after {
-    border-top: var(--sl-tooltip-arrow-size) solid rgb(var(--sl-tooltip-background-color));
+    border-top: var(--sl-tooltip-arrow-size) solid var(--sl-tooltip-background-color);
     border-left: var(--sl-tooltip-arrow-size) solid transparent;
     border-right: var(--sl-tooltip-arrow-size) solid transparent;
     top: 100%;
@@ -184,7 +184,7 @@ export default css`
   }
 
   .range--tooltip-bottom .range__tooltip:after {
-    border-bottom: var(--sl-tooltip-arrow-size) solid rgb(var(--sl-tooltip-background-color));
+    border-bottom: var(--sl-tooltip-arrow-size) solid var(--sl-tooltip-background-color);
     border-left: var(--sl-tooltip-arrow-size) solid transparent;
     border-right: var(--sl-tooltip-arrow-size) solid transparent;
     bottom: 100%;

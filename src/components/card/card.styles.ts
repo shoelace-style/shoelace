@@ -5,7 +5,7 @@ export default css`
   ${componentStyles}
 
   :host {
-    --border-color: rgb(var(--sl-color-neutral-200));
+    --border-color: var(--sl-color-neutral-200);
     --border-radius: var(--sl-border-radius-medium);
     --border-width: 1px;
     --padding: var(--sl-spacing-large);
@@ -16,7 +16,7 @@ export default css`
   .card {
     display: flex;
     flex-direction: column;
-    background-color: rgb(var(--sl-surface-base-alt));
+    background-color: var(--sl-panel-background-color);
     box-shadow: var(--sl-shadow-x-small);
     border: solid var(--border-width) var(--border-color);
     border-radius: var(--border-radius);

@@ -49,7 +49,7 @@ import { SlButton, SlMutationObserver } from '@shoelace-style/shoelace/dist/reac
 const css = `
   .resize-observer-overview div {
     display: flex; 
-    border: solid 2px rgb(var(--sl-input-border-color)); 
+    border: solid 2px var(--sl-input-border-color); 
     align-items: center; 
     justify-content: center;
     text-align: center;

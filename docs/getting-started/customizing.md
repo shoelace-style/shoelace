@@ -46,7 +46,7 @@ Here's an example that modifies buttons with the `tomato-button` class.
 
 <style>
   .tomato-button::part(base) {
-    background: rgb(var(--sl-color-neutral-0));
+    background: var(--sl-color-neutral-0);
     border: solid 1px tomato;
   }
 

@@ -5,7 +5,7 @@ export default css`
   ${componentStyles}
 
   :host {
-    --color: rgb(var(--sl-panel-border-color));
+    --color: var(--sl-panel-border-color);
     --width: var(--sl-panel-border-width);
     --spacing: var(--sl-spacing-medium);
   }

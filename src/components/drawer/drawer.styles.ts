@@ -39,7 +39,7 @@ export default css`
     z-index: 2;
     max-width: 100%;
     max-height: 100%;
-    background-color: rgb(var(--sl-panel-background-color));
+    background-color: var(--sl-panel-background-color);
     box-shadow: var(--sl-shadow-x-large);
     transition: var(--sl-transition-medium) transform;
     overflow: auto;
@@ -132,7 +132,7 @@ export default css`
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: rgb(var(--sl-overlay-background-color) / var(--sl-overlay-opacity));
+    background-color: var(--sl-overlay-background-color);
     pointer-events: all;
   }
 

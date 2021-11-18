@@ -16,7 +16,7 @@ export default css`
     font-size: var(--sl-font-size-small);
     font-weight: var(--sl-font-weight-semibold);
     border-radius: var(--sl-border-radius-medium);
-    color: rgb(var(--sl-color-neutral-600));
+    color: var(--sl-color-neutral-600);
     padding: var(--sl-spacing-medium) var(--sl-spacing-large);
     white-space: nowrap;
     user-select: none;
@@ -25,7 +25,7 @@ export default css`
   }
 
   .tab:hover:not(.tab--disabled) {
-    color: rgb(var(--sl-color-primary-600));
+    color: var(--sl-color-primary-600);
   }
 
   .tab:focus {
@@ -33,12 +33,12 @@ export default css`
   }
 
   .tab${focusVisibleSelector}:not(.tab--disabled) {
-    color: rgb(var(--sl-color-primary-600));
+    color: var(--sl-color-primary-600);
     box-shadow: inset var(--sl-focus-ring);
   }
 
   .tab.tab--active:not(.tab--disabled) {
-    color: rgb(var(--sl-color-primary-600));
+    color: var(--sl-color-primary-600);
   }
 
   .tab.tab--closable {

@@ -107,7 +107,7 @@ By design, a dialog's height will never exceed that of the viewport. As such, di
 
 ```html preview
 <sl-dialog label="Dialog" class="dialog-scrolling">
-  <div style="height: 150vh; border: dashed 2px rgb(var(--sl-color-neutral-200)); padding: 0 1rem;">
+  <div style="height: 150vh; border: dashed 2px var(--sl-color-neutral-200); padding: 0 1rem;">
     <p>Scroll down and give it a try! 👇</p>
   </div>
   <sl-button slot="footer" type="primary">Close</sl-button>
@@ -137,7 +137,7 @@ const App = () => {
       <SlDialog label="Dialog" open={open} onSlAfterHide={() => setOpen(false)}>
         <div style={{
           height: '150vh',
-          border: 'dashed 2px rgb(var(--sl-color-neutral-200))',
+          border: 'dashed 2px var(--sl-color-neutral-200)',
           padding: '0 1rem'
         }}>
           <p>Scroll down and give it a try! 👇</p>
@@ -209,7 +209,7 @@ const App = () => {
 
 ### Customizing Initial Focus
 
-By default, the dialog's panel will gain focus when opened. This allows the first tab press to focus on the first tabbable element within the dialog. To set focus on a different element, listen for and cancel the `sl-initial-focus` event.
+By default, the dialog's panel will gain focus when opened. This allows a subsequent tab press to focus on the first tabbable element within the dialog. To set focus on a different element, listen for and cancel the `sl-initial-focus` event.
 
 ```html preview
 <sl-dialog label="Dialog" class="dialog-focus">

@@ -17,7 +17,7 @@ export default css`
     letter-spacing: var(--sl-letter-spacing-normal);
     line-height: 1;
     border-radius: var(--sl-border-radius-small);
-    border: solid 1px rgb(var(--sl-color-neutral-0));
+    border: solid 1px var(--sl-color-neutral-0);
     white-space: nowrap;
     padding: 3px 6px;
     user-select: none;
@@ -26,28 +26,28 @@ export default css`
 
   /* Type modifiers */
   .badge--primary {
-    background-color: rgb(var(--sl-color-primary-600));
-    color: rgb(var(--sl-color-neutral-0));
+    background-color: var(--sl-color-primary-600);
+    color: var(--sl-color-neutral-0);
   }
 
   .badge--success {
-    background-color: rgb(var(--sl-color-success-600));
-    color: rgb(var(--sl-color-neutral-0));
+    background-color: var(--sl-color-success-600);
+    color: var(--sl-color-neutral-0);
   }
 
   .badge--neutral {
-    background-color: rgb(var(--sl-color-neutral-600));
-    color: rgb(var(--sl-color-neutral-0));
+    background-color: var(--sl-color-neutral-600);
+    color: var(--sl-color-neutral-0);
   }
 
   .badge--warning {
-    background-color: rgb(var(--sl-color-warning-600));
-    color: rgb(var(--sl-color-neutral-0));
+    background-color: var(--sl-color-warning-600);
+    color: var(--sl-color-neutral-0);
   }
 
   .badge--danger {
-    background-color: rgb(var(--sl-color-danger-600));
-    color: rgb(var(--sl-color-neutral-0));
+    background-color: var(--sl-color-danger-600);
+    color: var(--sl-color-neutral-0);
   }
 
   /* Pill modifier */
@@ -61,23 +61,23 @@ export default css`
   }
 
   .badge--pulse.badge--primary {
-    --pulse-color: rgb(var(--sl-color-primary-600));
+    --pulse-color: var(--sl-color-primary-600);
   }
 
   .badge--pulse.badge--success {
-    --pulse-color: rgb(var(--sl-color-success-600));
+    --pulse-color: var(--sl-color-success-600);
   }
 
   .badge--pulse.badge--neutral {
-    --pulse-color: rgb(var(--sl-color-neutral-600));
+    --pulse-color: var(--sl-color-neutral-600);
   }
 
   .badge--pulse.badge--warning {
-    --pulse-color: rgb(var(--sl-color-warning-600));
+    --pulse-color: var(--sl-color-warning-600);
   }
 
   .badge--pulse.badge--danger {
-    --pulse-color: rgb(var(--sl-color-danger-600));
+    --pulse-color: var(--sl-color-danger-600);
   }
 
   @keyframes pulse {

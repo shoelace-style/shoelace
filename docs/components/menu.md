@@ -7,7 +7,7 @@ Menus provide a list of options for the user to choose from.
 You can use [menu items](/components/menu-item), [menu labels](/components/menu-label), and [dividers](/components/divider) to compose a menu. Menus support keyboard interactions, including type-to-select an option.
 
 ```html preview
-<sl-menu style="max-width: 200px; border: solid 1px rgb(var(--sl-panel-border-color)); border-radius: var(--sl-border-radius-medium);">
+<sl-menu style="max-width: 200px; border: solid 1px var(--sl-panel-border-color); background: var(--sl-panel-background-color); border-radius: var(--sl-border-radius-medium);">
   <sl-menu-item value="undo">Undo</sl-menu-item>
   <sl-menu-item value="redo">Redo</sl-menu-item>
   <sl-divider></sl-divider>
@@ -29,7 +29,7 @@ const App = () => (
   <SlMenu 
     style={{
       maxWidth: '200px',
-      border: 'solid 1px rgb(var(--sl-panel-border-color))',
+      border: 'solid 1px var(--sl-panel-border-color)',
       borderRadius: 'var(--sl-border-radius-medium)'
     }}
   >

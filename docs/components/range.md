@@ -91,8 +91,8 @@ You can customize the active and inactive portions of the track using the `--tra
 
 ```html preview
 <sl-range style="
-  --track-color-active: rgb(var(--sl-color-primary-600));
-  --track-color-inactive: rgb(var(--sl-color-primary-200));
+  --track-color-active: var(--sl-color-primary-600);
+  --track-color-inactive: var(--sl-color-primary-100);
 "></sl-range>
 ```
 
@@ -102,8 +102,8 @@ import { SlRange } from '@shoelace-style/shoelace/dist/react';
 const App = () => (
   <SlRange 
     style={{
-      '--track-color-active': 'rgb(var(--sl-color-primary-600))',
-      '--track-color-inactive': 'rgb(var(--sl-color-primary-200))'
+      '--track-color-active': 'var(--sl-color-primary-600)',
+      '--track-color-inactive': 'var(--sl-color-primary-200)'
     }}
   />
 );

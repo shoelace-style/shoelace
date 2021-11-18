@@ -27,62 +27,62 @@ export default css`
 
   /* Standard textareas */
   .textarea--standard {
-    background-color: rgb(var(--sl-input-background-color));
-    border: solid var(--sl-input-border-width) rgb(var(--sl-input-border-color));
+    background-color: var(--sl-input-background-color);
+    border: solid var(--sl-input-border-width) var(--sl-input-border-color);
   }
 
   .textarea--standard:hover:not(.textarea--disabled) {
-    background-color: rgb(var(--sl-input-background-color-hover));
-    border-color: rgb(var(--sl-input-border-color-hover));
+    background-color: var(--sl-input-background-color-hover);
+    border-color: var(--sl-input-border-color-hover);
   }
   .textarea--standard:hover:not(.textarea--disabled) .textarea__control {
-    color: rgb(var(--sl-input-color-hover));
+    color: var(--sl-input-color-hover);
   }
 
   .textarea--standard.textarea--focused:not(.textarea--disabled) {
-    background-color: rgb(var(--sl-input-background-color-focus));
-    border-color: rgb(var(--sl-input-border-color-focus));
-    box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-primary-500) / var(--sl-focus-ring-alpha));
-    color: rgb(var(--sl-input-color-focus));
+    background-color: var(--sl-input-background-color-focus);
+    border-color: var(--sl-input-border-color-focus);
+    box-shadow: var(--sl-focus-ring);
+    color: var(--sl-input-color-focus);
   }
 
   .textarea--standard.textarea--focused:not(.textarea--disabled) .textarea__control {
-    color: rgb(var(--sl-input-color-focus));
+    color: var(--sl-input-color-focus);
   }
 
   .textarea--standard.textarea--disabled {
-    background-color: rgb(var(--sl-input-background-color-disabled));
-    border-color: rgb(var(--sl-input-border-color-disabled));
+    background-color: var(--sl-input-background-color-disabled);
+    border-color: var(--sl-input-border-color-disabled);
     opacity: 0.5;
     cursor: not-allowed;
   }
 
   .textarea--standard.textarea--disabled .textarea__control {
-    color: rgb(var(--sl-input-color-disabled));
+    color: var(--sl-input-color-disabled);
   }
 
   .textarea--standard.textarea--disabled .textarea__control::placeholder {
-    color: rgb(var(--sl-input-placeholder-color-disabled));
+    color: var(--sl-input-placeholder-color-disabled);
   }
 
   /* Filled textareas */
   .textarea--filled {
     border: none;
-    background-color: rgb(var(--sl-input-filled-background-color));
-    color: rgb(var(--sl-input-color));
+    background-color: var(--sl-input-filled-background-color);
+    color: var(--sl-input-color);
   }
 
   .textarea--filled:hover:not(.textarea--disabled) {
-    background-color: rgb(var(--sl-input-filled-background-color-hover));
+    background-color: var(--sl-input-filled-background-color-hover);
   }
 
   .textarea--filled.textarea--focused:not(.textarea--disabled) {
-    background-color: rgb(var(--sl-input-filled-background-color-focus));
+    background-color: var(--sl-input-filled-background-color-focus);
     box-shadow: var(--sl-focus-ring);
   }
 
   .textarea--filled.textarea--disabled {
-    background-color: rgb(var(--sl-input-filled-background-color-disabled));
+    background-color: var(--sl-input-filled-background-color-disabled);
     opacity: 0.5;
     cursor: not-allowed;
   }
@@ -93,7 +93,7 @@ export default css`
     font-size: inherit;
     font-weight: inherit;
     line-height: 1.4;
-    color: rgb(var(--sl-input-color));
+    color: var(--sl-input-color);
     border: none;
     background: none;
     box-shadow: none;
@@ -109,7 +109,7 @@ export default css`
   }
 
   .textarea__control::placeholder {
-    color: rgb(var(--sl-input-placeholder-color));
+    color: var(--sl-input-placeholder-color);
     user-select: none;
   }
 

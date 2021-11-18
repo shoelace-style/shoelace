@@ -9,7 +9,7 @@ export default css`
   }
 
   .radio-group {
-    border: solid var(--sl-panel-border-width) rgb(var(--sl-panel-border-color));
+    border: solid var(--sl-panel-border-width) var(--sl-panel-border-color);
     border-radius: var(--sl-border-radius-medium);
     padding: var(--sl-spacing-large);
     padding-top: var(--sl-spacing-x-small);
@@ -19,7 +19,7 @@ export default css`
     font-family: var(--sl-input-font-family);
     font-size: var(--sl-input-font-size-medium);
     font-weight: var(--sl-input-font-weight);
-    color: rgb(var(--sl-input-color));
+    color: var(--sl-input-color);
     padding: 0 var(--sl-spacing-2x-small);
   }
 

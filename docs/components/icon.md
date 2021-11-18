@@ -79,6 +79,22 @@ const App = () => (
 );
 ```
 
+### Labels
+
+For non-decorative icons, use the `label` attribute to announce it to assistive devices.
+
+```html preview
+<sl-icon name="star-fill" label="Add to favorites"></sl-icon>
+```
+
+```jsx react
+import { SlIcon } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlIcon name="star-fill" label="Add to favorites" />
+);
+```
+
 ### Custom Icons
 
 Custom icons can be loaded individually with the `src` attribute. Only SVGs on a local or CORS-enabled endpoint are supported. If you're using more than one custom icon, it might make sense to register a [custom icon library](#icon-libraries).
@@ -592,7 +608,7 @@ If you want to change the icons Shoelace uses internally, you can register an ic
 
 <style>
   .icon-search {
-    border: solid 1px rgb(var(--sl-panel-border-color));
+    border: solid 1px var(--sl-panel-border-color);
     border-radius: var(--sl-border-radius-medium);
     padding: var(--sl-spacing-medium);
   }
@@ -648,8 +664,8 @@ If you want to change the icons Shoelace uses internally, you can register an ic
   }
 
   .icon-list-item:hover {
-    background-color: rgb(var(--sl-color-primary-50));
-    color: rgb(var(--sl-color-primary-600));
+    background-color: var(--sl-color-primary-50);
+    color: var(--sl-color-primary-600);
   }
 
   .icon-list[data-type="outline"] .icon-list-item[data-name$="-fill"] {

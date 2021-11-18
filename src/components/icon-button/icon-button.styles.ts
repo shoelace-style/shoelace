@@ -17,7 +17,7 @@ export default css`
     border: none;
     border-radius: var(--sl-border-radius-medium);
     font-size: inherit;
-    color: rgb(var(--sl-color-neutral-600));
+    color: var(--sl-color-neutral-600);
     padding: var(--sl-spacing-x-small);
     cursor: pointer;
     transition: var(--sl-transition-medium) color;
@@ -26,11 +26,11 @@ export default css`
 
   .icon-button:hover:not(.icon-button--disabled),
   .icon-button:focus:not(.icon-button--disabled) {
-    color: rgb(var(--sl-color-primary-600));
+    color: var(--sl-color-primary-600);
   }
 
   .icon-button:active:not(.icon-button--disabled) {
-    color: rgb(var(--sl-color-primary-700));
+    color: var(--sl-color-primary-700);
   }
 
   .icon-button:focus {

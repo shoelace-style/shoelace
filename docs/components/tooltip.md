@@ -370,7 +370,7 @@ Tooltips will be clipped if they're inside a container that has `overflow: auto|
 
 <style>
   .tooltip-hoist {
-    border: solid 2px rgb(var(--sl-panel-border-color));
+    border: solid 2px var(--sl-panel-border-color);
     overflow: hidden;
     padding: var(--sl-spacing-medium);
     position: relative;
@@ -383,7 +383,7 @@ import { SlButton, SlTooltip } from '@shoelace-style/shoelace/dist/react';
 
 const css = `
   .tooltip-hoist {
-    border: solid 2px rgb(var(--sl-panel-border-color));
+    border: solid 2px var(--sl-panel-border-color);
     overflow: hidden;
     padding: var(--sl-spacing-medium);
     position: relative;

@@ -1,17 +1,17 @@
 .code-block {
   position: relative;
   border-radius: 3px;
-  background-color: rgb(var(--sl-color-neutral-50));
+  background-color: var(--sl-color-neutral-50);
   margin-bottom: 1.5rem;
 }
 
 .code-block__preview {
   position: relative;
-  border: solid 1px rgb(var(--sl-color-neutral-200));
+  border: solid 1px var(--sl-color-neutral-200);
   border-bottom: none;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
-  background-color: rgb(var(--sl-color-neutral-0));
+  background-color: var(--sl-color-neutral-0);
   min-width: 20rem;
   max-width: 100%;
   padding: 1.5rem 3.25rem 1.5rem 1.5rem;
@@ -39,9 +39,9 @@
   bottom: 0;
   width: 1.75rem;
   font-size: 20px;
-  color: rgb(var(--sl-color-neutral-600));
-  background-color: rgb(var(--sl-color-neutral-0));
-  border-left: solid 1px rgb(var(--sl-color-neutral-200));
+  color: var(--sl-color-neutral-600);
+  background-color: var(--sl-color-neutral-0);
+  border-left: solid 1px var(--sl-color-neutral-200);
   border-top-right-radius: 3px;
   cursor: ew-resize;
   transition: 250ms background-color;
@@ -58,7 +58,7 @@
 }
 
 .code-block__source {
-  border: solid 1px rgb(var(--sl-color-neutral-200));
+  border: solid 1px var(--sl-color-neutral-200);
   border-bottom: none;
   border-radius: 0 !important;
   display: none;
@@ -74,7 +74,7 @@
 
 .code-block__buttons {
   position: relative;
-  border: solid 1px rgb(var(--sl-color-neutral-200));
+  border: solid 1px var(--sl-color-neutral-200);
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
   display: flex;
@@ -86,18 +86,18 @@
   min-width: 2.5rem;
   border: none;
   border-radius: 0;
-  background: rgb(var(--sl-color-neutral-0));
+  background: var(--sl-color-neutral-0);
   font: inherit;
   font-size: 0.7rem;
   font-weight: 500;
   text-transform: uppercase;
-  color: rgb(var(--sl-color-neutral-600));
+  color: var(--sl-color-neutral-600);
   padding: 0 1rem;
   cursor: pointer;
 }
 
 .code-block__button:not(:last-of-type) {
-  border-right: solid 1px rgb(var(--sl-color-neutral-200));
+  border-right: solid 1px var(--sl-color-neutral-200);
 }
 
 .code-block__button--html,
@@ -110,7 +110,7 @@
 
 .code-block__button--selected {
   font-weight: 700;
-  color: rgb(var(--sl-color-primary-600));
+  color: var(--sl-color-primary-600);
 }
 
 .code-block__button--codepen {
@@ -129,20 +129,20 @@
 
 .code-block__button:hover,
 .code-block__button:active {
-  box-shadow: 0 0 0 1px rgb(var(--sl-color-primary-400));
+  box-shadow: 0 0 0 1px var(--sl-color-primary-400);
   border-right-color: transparent;
-  background-color: rgb(var(--sl-color-primary-50));
-  color: rgb(var(--sl-color-primary-700));
+  background-color: var(--sl-color-primary-50);
+  color: var(--sl-color-primary-700);
   z-index: 1;
 }
 
 .code-block__button:focus-visible {
   outline: none;
-  color: rgb(var(--sl-color-primary-600));
-  border-color: rgb(var(--sl-color-primary-400));
+  color: var(--sl-color-primary-600);
+  border-color: var(--sl-color-primary-400);
   border-right-color: transparent;
-  background-color: rgb(var(--sl-color-primary-50));
-  box-shadow: 0 0 0 1px rgb(var(--sl-color-primary-400)), var(--sl-focus-ring);
+  background-color: var(--sl-color-primary-50);
+  box-shadow: 0 0 0 1px var(--sl-color-primary-400), var(--sl-focus-ring);
   z-index: 2;
 }
 
@@ -153,7 +153,7 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  color: rgb(var(--sl-color-neutral-600));
+  color: var(--sl-color-neutral-600);
   cursor: pointer;
   -webkit-appearance: none;
 }
@@ -172,7 +172,7 @@
 .markdown-section .docsify-copy-code-button {
   top: 4px;
   right: 4px;
-  background-color: rgb(var(--sl-color-neutral-600));
+  background-color: var(--sl-color-neutral-500);
   border-radius: var(--sl-border-radius-medium);
   font-family: var(--sl-font-sans);
   font-size: var(--sl-font-size-x-small);
@@ -185,7 +185,7 @@
 
 .markdown-section .docsify-copy-code-button.copied {
   animation: pulse 0.75s;
-  --pulse-color: rgb(var(--sl-color-neutral-600));
+  --pulse-color: var(--sl-color-neutral-600);
 }
 
 @keyframes pulse {
@@ -210,11 +210,11 @@
 }
 
 .markdown-section .docsify-copy-code-button:focus-visible {
-  box-shadow: 0 0 0 3px rgb(var(--sl-color-neutral-500) / 50%);
+  box-shadow: var(--sl-focus-ring);
 }
 
 .markdown-section .docsify-copy-code-button:active {
-  background-color: rgb(var(--sl-color-neutral-600));
+  background-color: var(--sl-color-neutral-600);
   transform: scale(0.92);
 }
 

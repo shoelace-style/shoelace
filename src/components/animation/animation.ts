@@ -13,7 +13,8 @@ import styles from './animation.styles';
  * @event sl-finish - Emitted when the animation finishes.
  * @event sl-start - Emitted when the animation starts or restarts.
  *
- * @slot - The element to animate. If multiple elements are to be animated, wrap them in a single container.
+ * @slot - The element to animate. If multiple elements are to be animated, wrap them in a single container or use
+ * multiple animation elements.
  */
 @customElement('sl-animation')
 export default class SlAnimation extends LitElement {

@@ -384,15 +384,15 @@ The `invalid` attribute reflects the form control's validity, so you can style i
 <style>
   .custom-input[invalid]:not([disabled])::part(label),
   .custom-input[invalid]:not([disabled])::part(help-text) {
-    color: rgb(var(--sl-color-danger-600));
+    color: var(--sl-color-danger-600);
   }
 
   .custom-input[invalid]:not([disabled])::part(base) {      
-    border-color: rgb(var(--sl-color-danger-500));
+    border-color: var(--sl-color-danger-500);
   } 
 
   .custom-input[invalid]:focus-within::part(base) {
-    box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-danger-500) / var(--sl-focus-ring-alpha));
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-color-danger-500);
   }
 </style>
 ```
@@ -403,15 +403,15 @@ import { SlInput } from '@shoelace-style/shoelace/dist/react';
 const css = `
   .custom-input[invalid]:not([disabled])::part(label),
   .custom-input[invalid]:not([disabled])::part(help-text) {
-    color: rgb(var(--sl-color-danger-600));
+    color: var(--sl-color-danger-600);
   }
 
   .custom-input[invalid]:not([disabled])::part(base) {      
-    border-color: rgb(var(--sl-color-danger-500));
+    border-color: var(--sl-color-danger-500);
   } 
 
   .custom-input[invalid]:focus-within::part(base) {
-    box-shadow: 0 0 0 var(--sl-focus-ring-width) rgb(var(--sl-color-danger-500) / var(--sl-focus-ring-alpha));
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-color-danger-500);
   }
 `;
 

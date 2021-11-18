@@ -215,8 +215,8 @@ To expose custom properties as part of a component's API, scope them to the `:ho
 
 ```css
 :host {
-  --color: rgb(var(--sl-color-primary-500));
-  --background-color: rgb(var(--sl-color-neutral-100));
+  --color: var(--sl-color-primary-500);
+  --background-color: var(--sl-color-neutral-100);
 }
 ```
 
@@ -248,25 +248,6 @@ CSS variables are scoped to the host element and can be reused throughout the co
 Parts let you target a specific element inside the component's shadow DOM but, by design, you can't target a part's children or siblings. You can _only_ customize the part itself. Use a part when you need to allow a single element inside the component to accept styles.
 
 This convention can be relaxed when the developer experience is greatly improved by not following these suggestions.
-
-### Design Token Color Values
-
-All design tokens that implement a color value must do so in the following `R G B` format for consistency.
-
-```css
-:root {
-  --sl-color-sky-500: 14 165 233;
-}
-```
-
-This format requires the consumer to use the `rgb()` function in their stylesheets, but it also lets them control each token's alpha channel.
-
-```css
-.example {
-  color: rgb(var(--sl-color-sky-500));
-  background-color: rgb(var(--sl-color-sky-500) / 5%); /* 5% opacity */
-}
-```
 
 ### Form Controls
 

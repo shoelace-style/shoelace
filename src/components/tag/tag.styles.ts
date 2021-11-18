@@ -28,33 +28,33 @@ export default css`
    */
 
   .tag--primary {
-    background-color: rgb(var(--sl-color-primary-50));
-    border-color: rgb(var(--sl-color-primary-200));
-    color: rgb(var(--sl-color-primary-800));
+    background-color: var(--sl-color-primary-50);
+    border-color: var(--sl-color-primary-200);
+    color: var(--sl-color-primary-800);
   }
 
   .tag--success {
-    background-color: rgb(var(--sl-color-success-50));
-    border-color: rgb(var(--sl-color-success-200));
-    color: rgb(var(--sl-color-success-800));
+    background-color: var(--sl-color-success-50);
+    border-color: var(--sl-color-success-200);
+    color: var(--sl-color-success-800);
   }
 
   .tag--neutral {
-    background-color: rgb(var(--sl-color-neutral-50));
-    border-color: rgb(var(--sl-color-neutral-200));
-    color: rgb(var(--sl-color-neutral-800));
+    background-color: var(--sl-color-neutral-50);
+    border-color: var(--sl-color-neutral-200);
+    color: var(--sl-color-neutral-800);
   }
 
   .tag--warning {
-    background-color: rgb(var(--sl-color-warning-50));
-    border-color: rgb(var(--sl-color-warning-200));
-    color: rgb(var(--sl-color-warning-800));
+    background-color: var(--sl-color-warning-50);
+    border-color: var(--sl-color-warning-200);
+    color: var(--sl-color-warning-800);
   }
 
   .tag--danger {
-    background-color: rgb(var(--sl-color-danger-50));
-    border-color: rgb(var(--sl-color-danger-200));
-    color: rgb(var(--sl-color-danger-800));
+    background-color: var(--sl-color-danger-50);
+    border-color: var(--sl-color-danger-200);
+    color: var(--sl-color-danger-800);
   }
 
   /*

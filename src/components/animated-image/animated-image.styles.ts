@@ -34,9 +34,9 @@ export default css`
     font-size: var(--icon-size);
     background: none;
     border: solid 2px currentColor;
-    background-color: rgb(var(--sl-color-neutral-1000) / 50%);
+    background-color: rgb(0 0 0 /50%);
     border-radius: var(--sl-border-radius-circle);
-    color: rgb(var(--sl-color-neutral-0));
+    color: white;
     pointer-events: none;
     transition: var(--sl-transition-fast) opacity;
   }

@@ -21,12 +21,12 @@ export default css`
   .tooltip {
     max-width: var(--max-width);
     border-radius: var(--sl-tooltip-border-radius);
-    background-color: rgb(var(--sl-tooltip-background-color));
+    background-color: var(--sl-tooltip-background-color);
     font-family: var(--sl-tooltip-font-family);
     font-size: var(--sl-tooltip-font-size);
     font-weight: var(--sl-tooltip-font-weight);
     line-height: var(--sl-tooltip-line-height);
-    color: rgb(var(--sl-tooltip-color));
+    color: var(--sl-tooltip-color);
     padding: var(--sl-tooltip-padding);
   }
 
@@ -57,7 +57,7 @@ export default css`
   .tooltip-positioner[data-popper-placement^='bottom'] .tooltip:after {
     bottom: 100%;
     left: calc(50% - var(--sl-tooltip-arrow-size));
-    border-bottom: var(--sl-tooltip-arrow-size) solid rgb(var(--sl-tooltip-background-color));
+    border-bottom: var(--sl-tooltip-arrow-size) solid var(--sl-tooltip-background-color);
     border-left: var(--sl-tooltip-arrow-size) solid transparent;
     border-right: var(--sl-tooltip-arrow-size) solid transparent;
   }
@@ -75,7 +75,7 @@ export default css`
   .tooltip-positioner[data-popper-placement^='top'] .tooltip:after {
     top: 100%;
     left: calc(50% - var(--sl-tooltip-arrow-size));
-    border-top: var(--sl-tooltip-arrow-size) solid rgb(var(--sl-tooltip-background-color));
+    border-top: var(--sl-tooltip-arrow-size) solid var(--sl-tooltip-background-color);
     border-left: var(--sl-tooltip-arrow-size) solid transparent;
     border-right: var(--sl-tooltip-arrow-size) solid transparent;
   }
@@ -93,7 +93,7 @@ export default css`
   .tooltip-positioner[data-popper-placement^='left'] .tooltip:after {
     top: calc(50% - var(--sl-tooltip-arrow-size));
     left: 100%;
-    border-left: var(--sl-tooltip-arrow-size) solid rgb(var(--sl-tooltip-background-color));
+    border-left: var(--sl-tooltip-arrow-size) solid var(--sl-tooltip-background-color);
     border-top: var(--sl-tooltip-arrow-size) solid transparent;
     border-bottom: var(--sl-tooltip-arrow-size) solid transparent;
   }
@@ -111,7 +111,7 @@ export default css`
   .tooltip-positioner[data-popper-placement^='right'] .tooltip:after {
     top: calc(50% - var(--sl-tooltip-arrow-size));
     right: 100%;
-    border-right: var(--sl-tooltip-arrow-size) solid rgb(var(--sl-tooltip-background-color));
+    border-right: var(--sl-tooltip-arrow-size) solid var(--sl-tooltip-background-color);
     border-top: var(--sl-tooltip-arrow-size) solid transparent;
     border-bottom: var(--sl-tooltip-arrow-size) solid transparent;
   }
