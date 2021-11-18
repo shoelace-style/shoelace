@@ -369,7 +369,7 @@ kbd,
 .markdown-section pre .token.attr-value,
 .markdown-section pre .token.number,
 .markdown-section pre .token.variable {
-  color: var(--sl-color-violet-600);
+  color: var(--sl-color-violet-700);
 }
 
 .markdown-section pre .token.function,
