@@ -99,15 +99,15 @@ Designing, developing, and supporting this library requires a lot of time, effor
 👇 Your support is very much appreciated! 👇
 
 <sl-button class="repo-button repo-button--sponsor" href="https://github.com/sponsors/claviska" target="_blank">
-  <sl-icon name="heart"></sl-icon> Become a sponsor
+  <sl-icon slot="prefix" name="heart"></sl-icon> Become a sponsor
 </sl-button>
 
 <sl-button class="repo-button repo-button--github" href="https://github.com/shoelace-style/shoelace/stargazers" target="_blank">
-  <sl-icon name="github"></sl-icon> <span class="github-star-count">Star</span>
+  <sl-icon slot="prefix" name="github"></sl-icon> <span class="github-star-count">Star</span>
 </sl-button>
 
 <sl-button class="repo-button repo-button--twitter" href="https://twitter.com/shoelace_style" target="_blank">
-  <sl-icon name="twitter"></sl-icon> Follow
+  <sl-icon slot="prefix" name="twitter"></sl-icon> Follow
 </sl-button>
 
 ## Attribution
