@@ -43,6 +43,7 @@ Thank you for your help and patience with testing Shoelace. I promise, we're not
 - Removed redundant `role="menu"` in `<sl-dropdown>`
 - Slightly faster animations for showing and hiding `<sl-dropdown>`
 - Updated to Bootstrap Icons to 1.7.1
+- Upgraded the status of `<sl-mutation-observer>` from experimental to stable
 
 ## 2.0.0-beta.60
 

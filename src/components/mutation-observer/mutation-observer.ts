@@ -6,7 +6,7 @@ import styles from './mutation-observer.styles';
 
 /**
  * @since 2.0
- * @status experimental
+ * @status stable
  *
  * @event sl-mutation - Emitted when a mutation occurs.
  *
