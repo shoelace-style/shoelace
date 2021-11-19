@@ -108,6 +108,13 @@ body.site-search-visible {
   background-color: var(--sl-color-primary-600);
 }
 
+.sl-theme-dark .site-search__results li[aria-selected='true'] a,
+.sl-theme-dark .site-search__results li[aria-selected='true'] a small,
+.sl-theme-dark .site-search__results li[aria-selected='true'] a sl-icon {
+  background-color: var(--sl-color-primary-400);
+  color: var(--sl-color-neutral-1000);
+}
+
 .site-search__results h3 {
   font-weight: var(--sl-font-weight-semibold);
   margin: 0;
