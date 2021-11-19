@@ -312,7 +312,7 @@ export default css`
     --sl-color-neutral-950: var(--sl-color-gray-950);
 
     /* Neutral one-offs */
-    --sl-color-neutral-0: hsl(240, 5.9%, 12%);
+    --sl-color-neutral-0: hsl(240, 5.9%, 11%);
     --sl-color-neutral-1000: hsl(0, 0%, 100%);
 
     /*
