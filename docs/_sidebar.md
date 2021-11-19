@@ -12,6 +12,7 @@
 
 - Resources
   - [Community](/resources/community)
+  - [Accessibility](/resources/accessibility)
   - [Contributing](/resources/contributing)
   - [Changelog](/resources/changelog)
 
