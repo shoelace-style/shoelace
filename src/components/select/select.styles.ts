@@ -118,7 +118,20 @@ export default css`
 
   .select__clear {
     flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
     width: 1.25em;
+    font-size: inherit;
+    color: var(--sl-input-icon-color);
+    border: none;
+    background: none;
+    padding: 0;
+    transition: var(--sl-transition-fast) color;
+    cursor: pointer;
+  }
+
+  .select__clear:hover {
+    color: var(--sl-input-icon-color-hover);
   }
 
   .select__suffix {

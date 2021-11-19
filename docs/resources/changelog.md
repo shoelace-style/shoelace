@@ -32,6 +32,7 @@ Thank you for your help and patience with testing Shoelace. I promise, we're not
 - 🚨 BREAKING: removed `--sl-focus-ring-color`, and `--sl-focus-ring-alpha` (use `--sl-focus-ring` instead)
 - 🚨 BREAKING: removed `--sl-surface-base` and `--sl-surface-base-alt` tokens (use the neutral palette instead)
 - Added experimental `<sl-visually-hidden>` component
+- Added `clear-icon` slot to `<sl-select>` [#591](https://github.com/shoelace-style/shoelace/issues/591)
 - Fixed a bug in `<sl-progress-bar>` where the label would show in the default slot
 - Improved the dark theme palette so colors are bolder and don't appear washed out
 - Improved a11y of `<sl-avatar>` by representing it as an image with an `alt` [#579](https://github.com/shoelace-style/shoelace/issues/579)

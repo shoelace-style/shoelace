@@ -34,6 +34,7 @@ let id = 0;
  * @slot - The select's options in the form of menu items.
  * @slot prefix - Used to prepend an icon or similar element to the select.
  * @slot suffix - Used to append an icon or similar element to the select.
+ * @slot clear-icon - An icon to use in lieu of the default clear icon.
  * @slot label - The select's label. Alternatively, you can use the label prop.
  * @slot help-text - Help text that describes how to use the select.
  *
@@ -504,14 +505,17 @@ export default class SlSelect extends LitElement {
 
             ${this.clearable && hasSelection
               ? html`
-                  <sl-icon-button
-                    exportparts="base:clear-button"
+                  <button
+                    part="clear-button"
                     class="select__clear"
-                    name="x-circle-fill"
                     library="system"
                     @click=${this.handleClearClick}
                     tabindex="-1"
-                  ></sl-icon-button>
+                  >
+                    <slot name="clear-icon">
+                      <sl-icon name="x-circle-fill" library="system"></sl-icon>
+                    </slot>
+                  </button>
                 `
               : ''}
 
