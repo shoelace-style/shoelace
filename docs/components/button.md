@@ -190,7 +190,7 @@ const App = () => (
 
 ### Setting a Custom Width
 
-As expected, buttons can be given a custom width by setting its `width`. This is useful for making buttons span the full width of their container on smaller screens.
+As expected, buttons can be given a custom width by setting the `width` attribute. This is useful for making buttons span the full width of their container on smaller screens.
 
 ```html preview
 <sl-button type="default" size="small" style="width: 100%; margin-bottom: 1rem;">Small</sl-button>
