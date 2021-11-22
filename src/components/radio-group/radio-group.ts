@@ -26,6 +26,9 @@ export default class SlRadioGroup extends LitElement {
   /** Shows the fieldset and legend that surrounds the radio group. */
   @property({ type: Boolean, attribute: 'fieldset' }) fieldset = false;
 
+  /** Indicates that a selection is required. */
+  @property({ type: Boolean, reflect: true }) required = false;
+
   handleFocusIn() {
     // When tabbing into the fieldset, make sure it lands on the checked radio
     requestAnimationFrame(() => {
@@ -37,6 +40,26 @@ export default class SlRadioGroup extends LitElement {
         checkedRadio.focus();
       }
     });
+  }
+
+  reportValidity() {
+    const radios = [...(this.defaultSlot.assignedElements({ flatten: true }) as SlRadio[])];
+    let isChecked = true;
+
+    // Set required to true if any of the radio elements are required
+    this.required = this.required || radios.some(el => el.required);
+
+    if (this.required && radios.length > 0) {
+      isChecked = radios.some(el => el.checked);
+
+      if (!isChecked) {
+        radios[0].required = true;
+        // Trigger validity message on first input
+        radios[0].reportValidity();
+      }
+    }
+
+    return isChecked;
   }
 
   render() {

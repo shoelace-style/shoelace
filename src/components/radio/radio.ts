@@ -47,6 +47,9 @@ export default class SlRadio extends LitElement {
   /** Draws the radio in a checked state. */
   @property({ type: Boolean, reflect: true }) checked = false;
 
+  /** Indicates that a selection is required. */
+  @property({ type: Boolean, reflect: true }) required = false;
+
   /**
    * This will be true when the control is in an invalid state. Validity in range inputs is determined by the message
    * provided by the `setCustomValidity` method.
@@ -161,6 +164,7 @@ export default class SlRadio extends LitElement {
           type="radio"
           name=${ifDefined(this.name)}
           value=${ifDefined(this.value)}
+          ?required=${this.required}
           .checked=${live(this.checked)}
           .disabled=${this.disabled}
           aria-checked=${this.checked ? 'true' : 'false'}
