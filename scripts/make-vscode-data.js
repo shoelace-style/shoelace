@@ -18,7 +18,7 @@ const components = getAllComponents(metadata);
 const vscode = { tags: [] };
 
 components.map(component => {
-  const name = component.tag;
+  const name = component.tagName;
   const attributes = component.attributes?.map(attr => {
     const type = attr.type?.text;
     let values = [];
