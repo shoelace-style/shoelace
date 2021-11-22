@@ -46,16 +46,16 @@ export default class SlRadioGroup extends LitElement {
     const radios = [...(this.defaultSlot.assignedElements({ flatten: true }) as SlRadio[])];
     let isChecked = true;
 
-    // Set required to true if any of the radio elements are required
-    this.required = this.required || radios.some(el => el.required);
-
     if (this.required && radios.length > 0) {
       isChecked = radios.some(el => el.checked);
 
       if (!isChecked) {
+        // This is hacky...
         radios[0].required = true;
-        // Trigger validity message on first input
-        radios[0].reportValidity();
+
+        setTimeout(() => {
+          radios[0].reportValidity();
+        }, 0);
       }
     }
 
