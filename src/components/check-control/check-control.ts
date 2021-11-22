@@ -1,5 +1,5 @@
 import { LitElement } from 'lit';
-import { customElement, property, query, state } from 'lit/decorators.js';
+import { property, query, state } from 'lit/decorators.js';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 
@@ -7,38 +7,35 @@ import { watch } from '../../internal/watch';
  * @since 2.0
  * @status draft
  *
- * @slot - The checkcontrol's label.
+ * @slot - The check control's label.
  *
  * @event sl-blur - Emitted when the control loses focus.
  * @event sl-change - Emitted when the control's checked state changes.
  * @event sl-focus - Emitted when the control gains focus.
  *
  * @csspart base - The component's base wrapper.
- * @csspart control - The checkbox control.
- * @csspart label - The checkbox label.
+ * @csspart control - The check control.
+ * @csspart label - The check control label.
  */
 
 export class SlCheckControl extends LitElement {
 
   @state() private hasFocus = false;
 
-  /** The checkbox's name attribute. */
+  /** The check control's name attribute. */
   @property() name: string;
 
-  /** The checkbox's value attribute. */
+  /** The check control's value attribute. */
   @property() value: string;
 
-  /** Disables the checkbox. */
+  /** Disables the check control. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
-  /** Makes the checkbox a required field. */
+  /** Makes the check control a required field. */
   @property({ type: Boolean, reflect: true }) required = false;
 
-  /** Draws the checkbox in a checked state. */
+  /** Draws the check control in a checked state. */
   @property({ type: Boolean, reflect: true }) checked = false;
-
-  /** Draws the checkbox in an indeterminate state. */
-  @property({ type: Boolean, reflect: true }) indeterminate = false;
 
   /** This will be true when the control is in an invalid state. Validity is determined by the `required` prop. */
   @property({ type: Boolean, reflect: true }) invalid = false;
@@ -47,17 +44,17 @@ export class SlCheckControl extends LitElement {
     this.invalid = !this.input.checkValidity();
   }
 
-  /** Simulates a click on the checkbox. */
+  /** Simulates a click on the check control. */
   click() {
     this.input.click();
   }
 
-  /** Sets focus on the checkbox. */
+  /** Sets focus on the check control. */
   focus(options?: FocusOptions) {
     this.input.focus(options);
   }
 
-  /** Removes focus from the checkbox. */
+  /** Removes focus from the check control. */
   blur() {
     this.input.blur();
   }
