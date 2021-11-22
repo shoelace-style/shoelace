@@ -87,13 +87,6 @@ export default class SlRadio extends LitElement {
     emit(this, 'sl-blur');
   }
 
-  @watch('checked', { waitUntilFirstUpdate: true })
-  handleCheckedChange() {
-    if (this.checked) {
-      emit(this, 'sl-change');
-    }
-  }
-
   handleClick() {
     this.checked = true;
     emit(this, 'sl-change');
