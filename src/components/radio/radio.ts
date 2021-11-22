@@ -82,21 +82,6 @@ export default class SlRadio extends LitElement {
     this.invalid = !this.input.checkValidity();
   }
 
-  getAllRadios() {
-    const radioGroup = this.closest('sl-radio-group');
-
-    // Radios must be part of a radio group
-    if (!radioGroup) {
-      return [this];
-    }
-
-    return [...radioGroup.querySelectorAll('sl-radio')].filter((radio: this) => radio.name === this.name) as this[];
-  }
-
-  getSiblingRadios() {
-    return this.getAllRadios().filter(radio => radio !== this) as this[];
-  }
-
   handleBlur() {
     this.hasFocus = false;
     emit(this, 'sl-blur');
@@ -105,7 +90,7 @@ export default class SlRadio extends LitElement {
   @watch('checked', { waitUntilFirstUpdate: true })
   handleCheckedChange() {
     if (this.checked) {
-      this.getSiblingRadios().map(radio => (radio.checked = false));
+      emit(this, 'sl-change');
     }
   }
 
@@ -128,23 +113,6 @@ export default class SlRadio extends LitElement {
     emit(this, 'sl-focus');
   }
 
-  handleKeyDown(event: KeyboardEvent) {
-    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
-      const radios = this.getAllRadios().filter(radio => !radio.disabled);
-      const incr = ['ArrowUp', 'ArrowLeft'].includes(event.key) ? -1 : 1;
-      let index = radios.indexOf(this) + incr;
-      if (index < 0) index = radios.length - 1;
-      if (index > radios.length - 1) index = 0;
-
-      this.getAllRadios().map(radio => (radio.checked = false));
-      radios[index].focus();
-      radios[index].checked = true;
-      emit(radios[index], 'sl-change');
-
-      event.preventDefault();
-    }
-  }
-
   render() {
     return html`
       <label
@@ -156,7 +124,6 @@ export default class SlRadio extends LitElement {
           'radio--focused': this.hasFocus
         })}
         for=${this.inputId}
-        @keydown=${this.handleKeyDown}
       >
         <input
           id=${this.inputId}

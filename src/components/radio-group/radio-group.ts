@@ -29,6 +29,23 @@ export default class SlRadioGroup extends LitElement {
   /** Indicates that a selection is required. */
   @property({ type: Boolean, reflect: true }) required = false;
 
+  constructor() {
+    super();
+    this.addEventListener('sl-change', this.syncRadioButtons);
+  }
+
+  disconnectedCallback() {
+    this.removeEventListener('sl-change', this.syncRadioButtons);
+  }
+
+  syncRadioButtons(ev: CustomEvent) {
+    const currentRadio = ev.target;
+    const radios = this.getAllRadios().filter(el => !el.disabled && el !== currentRadio);
+    radios.forEach(el => {
+      el.checked = false;
+    });
+  }
+
   handleFocusIn() {
     // When tabbing into the fieldset, make sure it lands on the checked radio
     requestAnimationFrame(() => {
@@ -40,6 +57,28 @@ export default class SlRadioGroup extends LitElement {
         checkedRadio.focus();
       }
     });
+  }
+
+  getAllRadios(): SlRadio[] {
+    return [...this.querySelectorAll('sl-radio')];
+  }
+
+  handleKeyDown(event: KeyboardEvent) {
+    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
+      const radios = this.getAllRadios().filter(radio => !radio.disabled);
+      const currentIndex = radios.findIndex(el => el.checked);
+
+      const incr = ['ArrowUp', 'ArrowLeft'].includes(event.key) ? -1 : 1;
+      let index = currentIndex + incr;
+      if (index < 0) index = radios.length - 1;
+      if (index > radios.length - 1) index = 0;
+
+      this.getAllRadios().map(radio => (radio.checked = false));
+      radios[index].focus();
+      radios[index].checked = true;
+
+      event.preventDefault();
+    }
   }
 
   reportValidity() {
@@ -72,6 +111,7 @@ export default class SlRadioGroup extends LitElement {
         })}
         role="radiogroup"
         @focusin=${this.handleFocusIn}
+        @keydown=${this.handleKeyDown}
       >
         <legend part="label" class="radio-group__label">
           <slot name="label">${this.label}</slot>
