@@ -60,9 +60,7 @@ Adding a `required` attribute to `sl-radio-group` will require at least one opti
   <sl-radio value="2" name="foo">Option 2</sl-radio>
   <sl-radio value="3" name="foo">Option 3</sl-radio>
 </sl-radio-group>
-
 <br />
-
 <sl-button class="required-button">Validate Group</sl-button>
 
 <script>
@@ -75,13 +73,20 @@ Adding a `required` attribute to `sl-radio-group` will require at least one opti
 
 ```jsx react
 import { SlRadio, SlRadioGroup } from '@shoelace-style/shoelace/dist/react';
-
+const validateGroup = () => {
+  const group = document.querySelector('sl-radio-group.required-radio-group');
+  group.reportValidity();
+}
 const App = () => (
-  <SlRadioGroup label="Select an option" fieldset>
-    <SlRadio value="1" checked>Option 1</SlRadio>
-    <SlRadio value="2">Option 2</SlRadio>
-    <SlRadio value="3">Option 3</SlRadio>
-  </SlRadioGroup>
+  <>
+    <SlRadioGroup label="Select an option" fieldset required>
+      <SlRadio value="1" checked>Option 1</SlRadio>
+      <SlRadio value="2">Option 2</SlRadio>
+      <SlRadio value="3">Option 3</SlRadio>
+    </SlRadioGroup>
+    <br />
+    <sl-button class="required-button" onClick={()=> validateGroup()}>Validate Group</sl-button>
+  </>
 );
 ```
 
