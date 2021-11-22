@@ -1,6 +1,6 @@
 import { SlCheckControl } from '../check-control/check-control.js';
 import { html } from 'lit';
-import { customElement, property, query, state } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
@@ -21,12 +21,8 @@ let id = 0;
 export default class SlCheckbox extends SlCheckControl {
   static styles = styles;
 
-  @query('input[type="checkbox"]') input: HTMLInputElement;
-
   private inputId = `checkbox-${++id}`;
   private labelId = `checkbox-label-${id}`;
-
-  @state() private hasFocus = false;
 
   /** Draws the checkbox in an indeterminate state. */
   @property({ type: Boolean, reflect: true }) indeterminate = false;

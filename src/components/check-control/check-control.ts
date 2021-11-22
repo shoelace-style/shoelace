@@ -20,7 +20,9 @@ import { watch } from '../../internal/watch';
 
 export class SlCheckControl extends LitElement {
 
-  @state() private hasFocus = false;
+  @query('input[type="checkbox"]') input: HTMLInputElement;
+
+  @state() protected hasFocus = false;
 
   /** The check control's name attribute. */
   @property() name: string;
@@ -68,6 +70,11 @@ export class SlCheckControl extends LitElement {
   setCustomValidity(message: string) {
     this.input.setCustomValidity(message);
     this.invalid = !this.input.checkValidity();
+  }
+
+  handleFocus() {
+    this.hasFocus = true;
+    emit(this, 'sl-focus');
   }
 
   handleBlur() {
