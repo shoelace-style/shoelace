@@ -17,11 +17,32 @@ import styles from './radio-group.styles';
 @customElement('sl-radio-group')
 export default class SlRadioGroup extends LitElement {
   static styles = styles;
+  private _value: string;
 
   @query('slot:not([name])') defaultSlot: HTMLSlotElement;
 
   /** The radio group label. Required for proper accessibility. Alternatively, you can use the label slot. */
   @property() label = '';
+
+  set value(newValue) {
+    const index = this.getAllRadios().findIndex(el => el.value === newValue);
+    const oldValue = this._value;
+
+    if (index > -1) {
+      this.checkRadioByIndex(index);
+      this._value = newValue;
+      this.requestUpdate('value', oldValue);
+    } else {
+      this._value = '';
+      this.deselectAll();
+    }
+  }
+
+  /** The current value of the radio group. */
+  @property()
+  get value() {
+    return this._value;
+  }
 
   /** Shows the fieldset and legend that surrounds the radio group. */
   @property({ type: Boolean, attribute: 'fieldset' }) fieldset = false;
@@ -29,8 +50,7 @@ export default class SlRadioGroup extends LitElement {
   /** Indicates that a selection is required. */
   @property({ type: Boolean, reflect: true }) required = false;
 
-  constructor() {
-    super();
+  connectedCallback() {
     this.addEventListener('sl-change', this.syncRadioButtons);
   }
 
@@ -39,7 +59,7 @@ export default class SlRadioGroup extends LitElement {
   }
 
   syncRadioButtons(event: CustomEvent) {
-    const currentRadio = ev.target;
+    const currentRadio = event.target;
     const radios = this.getAllRadios().filter(el => !el.disabled && el !== currentRadio);
     radios.forEach(el => {
       el.checked = false;
@@ -63,6 +83,23 @@ export default class SlRadioGroup extends LitElement {
     return [...this.querySelectorAll('sl-radio')];
   }
 
+  checkRadioByIndex(index: number): SlRadio[] {
+    const radios = this.deselectAll();
+
+    radios[index].focus();
+    radios[index].checked = true;
+    this._value = radios[index].value;
+
+    return radios;
+  }
+
+  deselectAll(): SlRadio[] {
+    return this.getAllRadios().map(radio => {
+      radio.checked = false;
+      return radio;
+    });
+  }
+
   handleKeyDown(event: KeyboardEvent) {
     if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
       const radios = this.getAllRadios().filter(radio => !radio.disabled);
@@ -73,9 +110,7 @@ export default class SlRadioGroup extends LitElement {
       if (index < 0) index = radios.length - 1;
       if (index > radios.length - 1) index = 0;
 
-      this.getAllRadios().map(radio => (radio.checked = false));
-      radios[index].focus();
-      radios[index].checked = true;
+      this.checkRadioByIndex(index);
 
       event.preventDefault();
     }

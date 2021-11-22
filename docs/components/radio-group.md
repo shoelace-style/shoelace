@@ -42,7 +42,7 @@ You can show a fieldset and legend that wraps the radio group using the `fieldse
 import { SlRadio, SlRadioGroup } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
-  <SlRadioGroup label="Select an option" fieldset>
+  <SlRadioGroup label="Select an option" fieldset value="1">
     <SlRadio value="1" checked>Option 1</SlRadio>
     <SlRadio value="2">Option 2</SlRadio>
     <SlRadio value="3">Option 3</SlRadio>
@@ -62,12 +62,15 @@ Adding a `required` attribute to `sl-radio-group` will require at least one opti
 </sl-radio-group>
 <br />
 <sl-button class="required-button">Validate Group</sl-button>
+<sl-button class="required-reset-button">Reset Group</sl-button>
 
 <script>
   const button = document.querySelector('sl-button.required-button');
+  const resetButton = document.querySelector('sl-button.required-reset-button');
   const group = document.querySelector('sl-radio-group.required-radio-group');
 
-  button.addEventListener('click', ()=> group.reportValidity())
+  button.addEventListener('click', ()=> group.reportValidity());
+  resetButton.addEventListener('click', () => { group.value = ''})
 </script>
 ```
 
