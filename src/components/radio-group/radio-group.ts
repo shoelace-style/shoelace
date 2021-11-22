@@ -38,7 +38,7 @@ export default class SlRadioGroup extends LitElement {
     this.removeEventListener('sl-change', this.syncRadioButtons);
   }
 
-  syncRadioButtons(ev: CustomEvent) {
+  syncRadioButtons(event: CustomEvent) {
     const currentRadio = ev.target;
     const radios = this.getAllRadios().filter(el => !el.disabled && el !== currentRadio);
     radios.forEach(el => {
