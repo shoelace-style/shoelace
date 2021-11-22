@@ -3,7 +3,7 @@ export function getAllComponents(metadata) {
 
   metadata.modules.map(module => {
     module.declarations?.map(declaration => {
-      if (declaration.customElement) {
+      if (declaration.customElement && declaration.tagName) {
         const component = declaration;
         const modulePath = module.path;
 
