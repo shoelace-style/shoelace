@@ -293,6 +293,9 @@
       const htmlExample = codeBlock.querySelector('.code-block__source--html > pre > code')?.textContent;
       const reactExample = codeBlock.querySelector('.code-block__source--react > pre > code')?.textContent;
       const isReact = flavor === 'react' && typeof reactExample === 'string';
+      const theme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const isDark = theme === 'dark' || (theme === 'auto' && prefersDark);
       const editors = isReact ? '0010' : '1000';
       let htmlTemplate = '';
       let jsTemplate = '';
@@ -331,10 +334,14 @@
 
       // CSS templates
       cssTemplate =
-        `@import 'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@${version}/dist/themes/light.css';\n` +
+        `@import 'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@${version}/dist/themes/${
+          isDark ? 'dark' : 'light'
+        }.css';\n` +
         '\n' +
         'body {\n' +
         '  font: 16px sans-serif;\n' +
+        '  background-color: var(--sl-color-neutral-0);\n' +
+        '  color: var(--sl-color-neutral-900);\n' +
         '  padding: 1rem;\n' +
         '}';
 
@@ -345,6 +352,7 @@
         tags: ['shoelace', 'web components'],
         editors,
         head: `<meta name="viewport" content="width=device-width">`,
+        html_classes: `sl-theme-${isDark ? 'dark' : 'light'}`,
         css_external: ``,
         js_external: ``,
         js_module: true,
