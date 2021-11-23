@@ -47,6 +47,9 @@ export default class SlRadio extends LitElement {
   /** Draws the radio in a checked state. */
   @property({ type: Boolean, reflect: true }) checked = false;
 
+  /** Indicates that a selection is required. */
+  @property({ type: Boolean, reflect: true }) required = false;
+
   /**
    * This will be true when the control is in an invalid state. Validity in range inputs is determined by the message
    * provided by the `setCustomValidity` method.
@@ -79,31 +82,9 @@ export default class SlRadio extends LitElement {
     this.invalid = !this.input.checkValidity();
   }
 
-  getAllRadios() {
-    const radioGroup = this.closest('sl-radio-group');
-
-    // Radios must be part of a radio group
-    if (!radioGroup) {
-      return [this];
-    }
-
-    return [...radioGroup.querySelectorAll('sl-radio')].filter((radio: this) => radio.name === this.name) as this[];
-  }
-
-  getSiblingRadios() {
-    return this.getAllRadios().filter(radio => radio !== this) as this[];
-  }
-
   handleBlur() {
     this.hasFocus = false;
     emit(this, 'sl-blur');
-  }
-
-  @watch('checked', { waitUntilFirstUpdate: true })
-  handleCheckedChange() {
-    if (this.checked) {
-      this.getSiblingRadios().map(radio => (radio.checked = false));
-    }
   }
 
   handleClick() {
@@ -125,23 +106,6 @@ export default class SlRadio extends LitElement {
     emit(this, 'sl-focus');
   }
 
-  handleKeyDown(event: KeyboardEvent) {
-    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
-      const radios = this.getAllRadios().filter(radio => !radio.disabled);
-      const incr = ['ArrowUp', 'ArrowLeft'].includes(event.key) ? -1 : 1;
-      let index = radios.indexOf(this) + incr;
-      if (index < 0) index = radios.length - 1;
-      if (index > radios.length - 1) index = 0;
-
-      this.getAllRadios().map(radio => (radio.checked = false));
-      radios[index].focus();
-      radios[index].checked = true;
-      emit(radios[index], 'sl-change');
-
-      event.preventDefault();
-    }
-  }
-
   render() {
     return html`
       <label
@@ -153,7 +117,6 @@ export default class SlRadio extends LitElement {
           'radio--focused': this.hasFocus
         })}
         for=${this.inputId}
-        @keydown=${this.handleKeyDown}
       >
         <input
           id=${this.inputId}
@@ -161,6 +124,7 @@ export default class SlRadio extends LitElement {
           type="radio"
           name=${ifDefined(this.name)}
           value=${ifDefined(this.value)}
+          ?required=${this.required}
           .checked=${live(this.checked)}
           .disabled=${this.disabled}
           aria-checked=${this.checked ? 'true' : 'false'}
