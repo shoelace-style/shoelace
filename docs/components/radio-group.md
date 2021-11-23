@@ -80,6 +80,12 @@ const validateGroup = () => {
   const group = document.querySelector('sl-radio-group.required-radio-group');
   group.reportValidity();
 }
+
+const resetGroup = () => {
+  const group = document.querySelector('sl-radio-group.required-radio-group');
+  group.value = "";
+}
+
 const App = () => (
   <>
     <SlRadioGroup label="Select an option" fieldset required>
@@ -89,6 +95,7 @@ const App = () => (
     </SlRadioGroup>
     <br />
     <sl-button class="required-button" onClick={()=> validateGroup()}>Validate Group</sl-button>
+    <sl-button class="required-button" onClick={()=> resetGroup()}>Reset Group</sl-button>
   </>
 );
 ```
