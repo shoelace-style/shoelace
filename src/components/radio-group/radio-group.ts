@@ -24,6 +24,14 @@ export default class SlRadioGroup extends LitElement {
   /** The radio group label. Required for proper accessibility. Alternatively, you can use the label slot. */
   @property() label = '';
 
+  /** The current value of the radio group. */
+  @property()
+  get value() {
+    if (!this._value) return this.getCurrentValue();
+
+    return this._value;
+  }
+
   set value(newValue) {
     const index = this.getAllRadios().findIndex(el => el.value === newValue);
     const oldValue = this._value;
@@ -36,12 +44,6 @@ export default class SlRadioGroup extends LitElement {
       this._value = '';
       this.deselectAll();
     }
-  }
-
-  /** The current value of the radio group. */
-  @property()
-  get value() {
-    return this._value;
   }
 
   /** Shows the fieldset and legend that surrounds the radio group. */
@@ -64,6 +66,12 @@ export default class SlRadioGroup extends LitElement {
     radios.forEach(el => {
       el.checked = false;
     });
+  }
+
+  getCurrentValue() {
+    const valRadio = this.getAllRadios().filter(el => el.checked);
+    this._value = valRadio.length === 1 ? valRadio[0].value : '';
+    return this._value;
   }
 
   handleFocusIn() {
