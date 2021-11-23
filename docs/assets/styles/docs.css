@@ -346,7 +346,7 @@ kbd,
 .markdown-section pre .token.keyword,
 .markdown-section pre .token.tag,
 .markdown-section pre .token.url {
-  color: var(--sl-color-sky-600);
+  color: var(--sl-color-blue-600);
 }
 
 .markdown-section pre .token.symbol,
