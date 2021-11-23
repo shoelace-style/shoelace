@@ -17,7 +17,7 @@ import styles from './radio-group.styles';
 @customElement('sl-radio-group')
 export default class SlRadioGroup extends LitElement {
   static styles = styles;
-  private _value: string;
+  private _value: string = '';
 
   @query('slot:not([name])') defaultSlot: HTMLSlotElement;
 
