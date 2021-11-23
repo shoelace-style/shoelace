@@ -10,9 +10,9 @@ Furthermore, accessibility doesn’t stop at the component level. Using accessib
 
 My commitment to Shoelace users is this: Everything I develop will be built with accessibility in mind. I will test and improve every component to the best of my ability and knowledge. I will work around upstream issues, such as browser bugs and limitations, to the best of my ability and within reason.
 
-I’m fully aware that I may not get it right every time for every user, so I invite the community to participate in this ongoing effort by submitting [issues](https://github.com/shoelace-style/shoelace/issues?q=is%3Aissue+is%3Aopen+label%3Aa11y), [pull requests](https://github.com/shoelace-style/shoelace/pulls?q=is%3Aopen+is%3Apr+label%3Aa11y), and [discussions](https://github.com/shoelace-style/shoelace/discussions). Many accessibility improvements have already been made as a result of users submitting feedback and suggesting more appropriate alternatives.
+I’m fully aware that I may not get it right every time for every user, so I invite the community to participate in this ongoing effort by submitting [issues](https://github.com/shoelace-style/shoelace/issues?q=is%3Aissue+is%3Aopen+label%3Aa11y), [pull requests](https://github.com/shoelace-style/shoelace/pulls?q=is%3Aopen+is%3Apr+label%3Aa11y), and [discussions](https://github.com/shoelace-style/shoelace/discussions). Many accessibility improvements have already been made thanks to contributors submitting code, feedback, and suggestions.
 
-This is the path forward. Together, we will make Shoelace accessible to as many users as possible.
+This is the path forward. Together, we will continue to make Shoelace accessible to as many users as possible.
 
 — Cory LaViska<br>
 _Creator of Shoelace_

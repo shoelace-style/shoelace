@@ -110,7 +110,7 @@ You will, however, need to maintain your theme more carefully, as new versions o
 
 The built-in dark theme uses an inverted color scale so, if you're using design tokens as intended, you'll get dark mode for free. While this isn't the same as a professionally curated dark theme, it provides an excellent baseline for one and you're encouraged to customize it depending on your needs.
 
-This was achieved by taking the light theme's [color tokens](/tokens/color) and "flipping" the scale so 100 becomes 900, 200 becomes 800, 300 becomes 700, etc. Next, the luminance of each primitive was fine-tuned to avoid true black, which often undesirable in dark themes, and provide a richer experience. The result is a custom dark theme palette that complements the light theme well and makes it easy to offer light and dark variations with minimal effort.
+This was achieved by taking the light theme's [color tokens](/tokens/color) and "flipping" the scale so 100 becomes 900, 200 becomes 800, 300 becomes 700, etc. Next, the luminance of each primitive was fine-tuned to avoid true black, which is often undesirable in dark themes, and provide a richer experience. The result is a custom dark mode palette that complements the light theme well and makes it easy to offer light and dark variations with minimal effort.
 
 To install the dark theme, add the following to the `<head>` section of your page.
 
