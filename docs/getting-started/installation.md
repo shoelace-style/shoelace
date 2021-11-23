@@ -17,7 +17,7 @@ The easiest way to install Shoelace is with the CDN. Just add the following tags
 
 ### Dark Theme
 
-If you prefer to use the dark theme instead, use this. Note the `sl-theme-dark` class on the `<html>` element. [Learn more about the Dark Theme.](/getting-started/themes#dark-theme)
+If you prefer to use the [dark theme](/getting-started/themes#dark-theme) instead, use this code and add `<html class="sl-theme-dark">` to the page.
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/themes/dark.css">
