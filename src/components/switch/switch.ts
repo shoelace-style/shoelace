@@ -14,7 +14,12 @@ let id = 0;
  * @since 2.0
  * @status draft
  *
+ * @slot - The switch's label.
+ *
+ * @csspart base - The component's base wrapper.
+ * @csspart control - The switch control.
  * @csspart thumb - The switch position indicator.
+ * @csspart label - The switch label.
  */
 @customElement('sl-switch')
 export default class SlSwitch extends SlCheckControl {
@@ -29,11 +34,6 @@ export default class SlSwitch extends SlCheckControl {
       this.input.checked = this.checked;
       this.invalid = !this.input.checkValidity();
     }
-  }
-
-  handleClick() {
-    this.checked = !this.checked;
-    emit(this, 'sl-change');
   }
 
   handleKeyDown(event: KeyboardEvent) {

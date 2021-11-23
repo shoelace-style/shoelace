@@ -7,15 +7,9 @@ import { watch } from '../../internal/watch';
  * @since 2.0
  * @status draft
  *
- * @slot - The check control's label.
- *
  * @event sl-blur - Emitted when the control loses focus.
  * @event sl-change - Emitted when the control's checked state changes.
  * @event sl-focus - Emitted when the control gains focus.
- *
- * @csspart base - The component's base wrapper.
- * @csspart control - The check control.
- * @csspart label - The check control label.
  */
 
 export class SlCheckControl extends LitElement {
@@ -44,6 +38,11 @@ export class SlCheckControl extends LitElement {
 
   firstUpdated() {
     this.invalid = !this.input.checkValidity();
+  }
+
+  handleClick() {
+    this.checked = !this.checked;
+    emit(this, 'sl-change');
   }
 
   /** Simulates a click on the check control. */

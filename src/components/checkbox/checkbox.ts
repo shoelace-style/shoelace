@@ -4,7 +4,6 @@ import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
-import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import styles from './checkbox.styles';
 
@@ -14,8 +13,13 @@ let id = 0;
  * @since 2.0
  * @status draft
  *
+ * @slot - The checkbox's label.
+ *
+ * @csspart base - The component's base wrapper.
+ * @csspart control - The checkbox control.
  * @csspart checked-icon - The container the wraps the checked icon.
  * @csspart indeterminate-icon - The container that wraps the indeterminate icon.
+ * @csspart label - The checkbox label.
  */
 @customElement('sl-checkbox')
 export default class SlCheckbox extends SlCheckControl {
@@ -28,9 +32,8 @@ export default class SlCheckbox extends SlCheckControl {
   @property({ type: Boolean, reflect: true }) indeterminate = false;
 
   handleClick() {
-    this.checked = !this.checked;
     this.indeterminate = false;
-    emit(this, 'sl-change');
+    super.handleClick();
   }
 
   @watch('checked', { waitUntilFirstUpdate: true })
