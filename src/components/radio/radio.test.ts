@@ -37,6 +37,23 @@ describe('<sl-radio>', () => {
     expect(el.checked).to.be.true;
   });
 
+  it('should fire sl-change when toggled via keyboard - arrow key', async () => {
+    const radioGroup = await fixture<SlRadioGroup>(html`
+      <sl-radio-group>
+        <sl-radio id="radio-1"></sl-radio>
+        <sl-radio id="radio-2"></sl-radio>
+      </sl-radio-group>
+    `);
+    const radio1: SlRadio = radioGroup.querySelector('sl-radio#radio-1');
+    const radio2: SlRadio = radioGroup.querySelector('sl-radio#radio-2');
+    const input1 = radio1.shadowRoot?.querySelector('input');
+    input1.focus();
+    setTimeout(() => sendKeys({ press: 'ArrowRight' }));
+    const event = await oneEvent(radio2, 'sl-change');
+    expect(event.target).to.equal(radio2);
+    expect(radio2.checked).to.be.true;
+  });
+
   it('should not fire sl-change when checked is set by javascript', async () => {
     const el = await fixture<SlRadio>(html` <sl-radio></sl-radio> `);
     el.addEventListener('sl-change', () => expect.fail('event fired'));

@@ -17,62 +17,14 @@ import styles from './radio-group.styles';
 @customElement('sl-radio-group')
 export default class SlRadioGroup extends LitElement {
   static styles = styles;
-  private _value: string = '';
 
   @query('slot:not([name])') defaultSlot: HTMLSlotElement;
 
   /** The radio group label. Required for proper accessibility. Alternatively, you can use the label slot. */
   @property() label = '';
 
-  /** The current value of the radio group. */
-  @property()
-  get value() {
-    if (!this._value) return this.getCurrentValue();
-
-    return this._value;
-  }
-
-  set value(newValue) {
-    const index = this.getAllRadios().findIndex(el => el.value === newValue);
-    const oldValue = this._value;
-
-    if (index > -1) {
-      this.checkRadioByIndex(index);
-      this._value = newValue;
-      this.requestUpdate('value', oldValue);
-    } else {
-      this._value = '';
-      this.deselectAll();
-    }
-  }
-
   /** Shows the fieldset and legend that surrounds the radio group. */
   @property({ type: Boolean, attribute: 'fieldset' }) fieldset = false;
-
-  /** Indicates that a selection is required. */
-  @property({ type: Boolean, reflect: true }) required = false;
-
-  connectedCallback() {
-    this.addEventListener('sl-change', this.syncRadioButtons);
-  }
-
-  disconnectedCallback() {
-    this.removeEventListener('sl-change', this.syncRadioButtons);
-  }
-
-  syncRadioButtons(event: CustomEvent) {
-    const currentRadio = event.target;
-    const radios = this.getAllRadios().filter(el => !el.disabled && el !== currentRadio);
-    radios.forEach(el => {
-      el.checked = false;
-    });
-  }
-
-  getCurrentValue() {
-    const valRadio = this.getAllRadios().filter(el => el.checked);
-    this._value = valRadio.length === 1 ? valRadio[0].value : '';
-    return this._value;
-  }
 
   handleFocusIn() {
     // When tabbing into the fieldset, make sure it lands on the checked radio
@@ -87,63 +39,6 @@ export default class SlRadioGroup extends LitElement {
     });
   }
 
-  getAllRadios(): SlRadio[] {
-    return [...this.querySelectorAll('sl-radio')];
-  }
-
-  checkRadioByIndex(index: number): SlRadio[] {
-    const radios = this.deselectAll();
-
-    radios[index].focus();
-    radios[index].checked = true;
-    this._value = radios[index].value;
-
-    return radios;
-  }
-
-  deselectAll(): SlRadio[] {
-    return this.getAllRadios().map(radio => {
-      radio.checked = false;
-      return radio;
-    });
-  }
-
-  handleKeyDown(event: KeyboardEvent) {
-    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
-      const radios = this.getAllRadios().filter(radio => !radio.disabled);
-      const currentIndex = radios.findIndex(el => el.checked);
-
-      const incr = ['ArrowUp', 'ArrowLeft'].includes(event.key) ? -1 : 1;
-      let index = currentIndex + incr;
-      if (index < 0) index = radios.length - 1;
-      if (index > radios.length - 1) index = 0;
-
-      this.checkRadioByIndex(index);
-
-      event.preventDefault();
-    }
-  }
-
-  reportValidity() {
-    const radios = [...(this.defaultSlot.assignedElements({ flatten: true }) as SlRadio[])];
-    let isChecked = true;
-
-    if (this.required && radios.length > 0) {
-      isChecked = radios.some(el => el.checked);
-
-      if (!isChecked) {
-        // This is hacky...
-        radios[0].required = true;
-
-        setTimeout(() => {
-          radios[0].reportValidity();
-        }, 0);
-      }
-    }
-
-    return isChecked;
-  }
-
   render() {
     return html`
       <fieldset
@@ -154,7 +49,6 @@ export default class SlRadioGroup extends LitElement {
         })}
         role="radiogroup"
         @focusin=${this.handleFocusIn}
-        @keydown=${this.handleKeyDown}
       >
         <legend part="label" class="radio-group__label">
           <slot name="label">${this.label}</slot>
