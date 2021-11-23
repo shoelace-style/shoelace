@@ -10,7 +10,7 @@ export default css`
     /* Gray */
     --sl-color-gray-50: hsl(240 5.1% 15%);
     --sl-color-gray-100: hsl(240 5.7% 18.2%);
-    --sl-color-gray-200: hsl(240 4.6% 21.5%);
+    --sl-color-gray-200: hsl(240 4.6% 22%);
     --sl-color-gray-300: hsl(240 5% 27.6%);
     --sl-color-gray-400: hsl(240 5% 35.5%);
     --sl-color-gray-500: hsl(240 3.7% 44%);
