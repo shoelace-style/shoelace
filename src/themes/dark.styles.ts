@@ -423,8 +423,8 @@ export default css`
     --sl-input-height-large: 3.125rem; /* 50px */
 
     --sl-input-background-color: var(--sl-color-neutral-0);
-    --sl-input-background-color-hover: var(--sl-color-neutral-0);
-    --sl-input-background-color-focus: var(--sl-color-neutral-0);
+    --sl-input-background-color-hover: var(--sl-input-background-color);
+    --sl-input-background-color-focus: var(--sl-input-background-color);
     --sl-input-background-color-disabled: var(--sl-color-neutral-100);
     --sl-input-border-color: var(--sl-color-neutral-300);
     --sl-input-border-color-hover: var(--sl-color-neutral-400);
@@ -512,7 +512,7 @@ export default css`
     --sl-tooltip-arrow-start-end-offset: 8px;
 
     /*
-     * Z-index tokens
+     * Z-indexes
      */
 
     --sl-z-index-drawer: 700;
