@@ -3,7 +3,6 @@
 //
 import chalk from 'chalk';
 import commandLineArgs from 'command-line-args';
-import esbuild from 'esbuild';
 import fs from 'fs/promises';
 import glob from 'globby';
 import mkdirp from 'mkdirp';

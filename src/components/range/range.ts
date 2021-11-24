@@ -87,7 +87,6 @@ export default class SlRange extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.handleSlotChange = this.handleSlotChange;
     this.resizeObserver = new ResizeObserver(() => this.syncRange());
     this.shadowRoot!.addEventListener('slotchange', this.handleSlotChange);
 

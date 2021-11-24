@@ -1,5 +1,4 @@
 import chalk from 'chalk';
-import commandLineArgs from 'command-line-args';
 import fs from 'fs';
 import del from 'del';
 import mkdirp from 'mkdirp';
@@ -7,7 +6,6 @@ import path from 'path';
 import pascalCase from 'pascal-case';
 import prettier from 'prettier';
 import prettierConfig from '../prettier.config.cjs';
-import { execSync } from 'child_process';
 import { getAllComponents } from './shared.js';
 
 const outdir = path.join('./src/react');

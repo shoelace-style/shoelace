@@ -1,7 +1,6 @@
 //
 // This script runs the Custom Elements Manifest analyzer to generate custom-elements.json
 //
-import chalk from 'chalk';
 import commandLineArgs from 'command-line-args';
 import { execSync } from 'child_process';
 
