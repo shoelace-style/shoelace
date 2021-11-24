@@ -7,7 +7,7 @@ import styles from './qr-code.styles';
 
 /**
  * @since 2.0
- * @status experimental
+ * @status stable
  *
  * @csspart base - The component's base wrapper.
  */

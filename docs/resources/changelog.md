@@ -10,6 +10,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 - CodePen examples will now open in light or dark depending on your current preference
 - Fixed a bug where tag names weren't being generated in `vscode.html-custom-data.json` [#593](https://github.com/shoelace-style/shoelace/pull/593)
+- Upgraded the status of `<sl-qr-code>` from experimental to stable
 
 ## 2.0.0-beta.61
 
