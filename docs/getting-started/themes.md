@@ -1,16 +1,16 @@
 # Themes
 
-Shoelace is designed to be highly customizable through pure CSS. Out of the box, you can choose from a light or dark theme. Alternatively, you can design your own theme from scratch.
+Shoelace is designed to be highly customizable through pure CSS. Out of the box, you can choose from a light or dark theme. Alternatively, you can design your own theme.
 
 A theme is nothing more than a stylesheet that uses the Shoelace API to define design tokens and apply custom styles to components. To create a theme, you will need a decent understanding of CSS, including [CSS Custom Properties](https://developer.mozilla.org/en-US/docs/Web/CSS/--*) and the [`::part` selector](https://developer.mozilla.org/en-US/docs/Web/CSS/::part).
 
-For developers, built-in themes are also available as JavaScript modules that export [Lit CSSResult](https://lit.dev/docs/api/styles/#CSSResult) objects. You can find them in `dist/themes/*.styles.js`.
+?> For component developers, built-in themes are also available as JavaScript modules that export [Lit CSSResult](https://lit.dev/docs/api/styles/#CSSResult) objects. You can find them in `dist/themes/*.styles.js`.
 
 ## Theme Basics
 
-All themes are scoped to classes using the `sl-theme-{name}` convention, where `{name}` is a lowercase, hyphen-delimited value representing the name of the theme. The included light and dark themes use `sl-theme-light` and `sl-theme-dark`, respectively. A custom theme called "Purple Power", for example, would use the `sl-theme-purple-power` class. 
+All themes are scoped to classes using the `sl-theme-{name}` convention, where `{name}` is a lowercase, hyphen-delimited value representing the name of the theme. The included light and dark themes use `sl-theme-light` and `sl-theme-dark`, respectively. A custom theme called "Purple Power", for example, would use a class called `sl-theme-purple-power` 
 
-Every selector must be scoped to the theme's class to ensure interoperability with other themes. You should also scope them to `:host` so they can be imported and applied to custom element shadow roots.
+All selectors must be scoped to the theme's class to ensure interoperability with other themes. You should also scope them to `:host` so they can be imported and applied to custom element shadow roots.
 
 ```css
 :host,
@@ -21,7 +21,7 @@ Every selector must be scoped to the theme's class to ensure interoperability wi
 
 ### Activating Themes
 
-To activate a theme, import it and apply the theme's class to the `<html>` element. This example imports and activates the dark theme, or "dark mode."
+To activate a theme, import it and apply the theme's class to the `<html>` element. This example imports and activates the built-in dark theme.
 
 ```html
 <html class="sl-theme-dark">
@@ -58,13 +58,15 @@ You can activate themes on various containers throughout the page. This example 
 </html>
 ```
 
+It's for this reason that themes must be scoped to specific classes.
+
 ## Creating Themes
 
 There are two ways to create themes. The easiest way is to customize a built-in theme. The advanced way is to create a new theme from scratch. Which method you choose depends on your project's requirements and the amount of effort you're willing to commit to.
 
 ### Customizing a Built-in Theme
 
-The easiest way to customize Shoelace is to override one of the built-in themes. You can do this by importing the light or dark theme as-is, then creating a separate stylesheet that overrides the [design tokens](/getting-started/customizing#design-tokens) and adds [component styles](/getting-started/customizing#component-parts) to your liking. You must import your theme _after_ the built-in theme.
+The easiest way to customize Shoelace is to override one of the built-in themes. You can do this by importing the light or dark theme as-is, then creating a separate stylesheet that overrides [design tokens](/getting-started/customizing#design-tokens) and adds [component styles](/getting-started/customizing#component-parts) to your liking. You must import your theme _after_ the built-in theme.
 
 If you're customizing the light theme, you should scope your styles to the following selectors.
 
@@ -87,7 +89,7 @@ If you're customizing the dark theme, you should scope your styles to the follow
 
 By customizing a built-in theme, you'll maintain a smaller stylesheet containing only the changes you've made. Contrast this to [creating a new theme](#creating-a-new-theme), where you need to explicitly define every design token required by the library. This approach is more "future-proof," as new design tokens that emerge in subsequent versions of Shoelace will be accounted for by the built-in theme.
 
-While this may be easier to maintain, the drawback is that your theme modifies a built-in theme and thus can't be activated independently.
+While this approach is easier to maintain, the drawback is that your theme can't be activated independently — it's tied to the built-in theme you're extending.
 
 ### Creating a New Theme
 
@@ -110,7 +112,7 @@ You will, however, need to maintain your theme more carefully, as new versions o
 
 The built-in dark theme uses an inverted color scale so, if you're using design tokens as intended, you'll get dark mode for free. While this isn't the same as a professionally curated dark theme, it provides an excellent baseline for one and you're encouraged to customize it depending on your needs.
 
-This was achieved by taking the light theme's [color tokens](/tokens/color) and "flipping" the scale so 100 becomes 900, 200 becomes 800, 300 becomes 700, etc. Next, the luminance of each primitive was fine-tuned to avoid true black, which is often undesirable in dark themes, and provide a richer experience. The result is a custom dark mode palette that complements the light theme well and makes it easy to offer light and dark variations with minimal effort.
+The dark theme works by taking the light theme's [color tokens](/tokens/color) and "flipping" the scale so 100 becomes 900, 200 becomes 800, 300 becomes 700, etc. Next, the luminance of each primitive was fine-tuned to avoid true black, which is often undesirable in dark themes, and provide a richer experience. The result is a custom dark palette that complements the light theme and makes it easy to offer light and dark modes with minimal effort.
 
 To install the dark theme, add the following to the `<head>` section of your page.
 
