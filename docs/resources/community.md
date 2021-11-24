@@ -34,7 +34,7 @@ The [community chat](https://discord.gg/mg8f26C) is open to the public and power
 
 ## Stack Overflow
 
-You can post questions on Stack Overflow using [the "shoelace" tag](https://stackoverflow.com/questions/tagged/shoelace). This is a public forum where talented developers answer questions. It's a great way to get help, but it is not maintained or actively monitored by the Shoelace author.
+You can post questions on Stack Overflow using [the "shoelace" tag](https://stackoverflow.com/questions/tagged/shoelace). This is a public forum where talented developers answer questions. It's a great way to get help, but it is not maintained by the Shoelace author.
 
 <sl-button type="primary" href="https://stackoverflow.com/questions/ask?tags=shoelace" target="_blank">
   <sl-icon name="stack-overflow" slot="prefix"></sl-icon>
