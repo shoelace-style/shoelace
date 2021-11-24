@@ -269,6 +269,13 @@ export default class SlTooltip extends LitElement {
     this.syncOptions();
   }
 
+  @watch('content')
+  handleContentChange() {
+    if (this.popover && this.open) {
+      this.popover.update();
+    }
+  }
+
   @watch('disabled')
   handleDisabledChange() {
     if (this.disabled && this.open) {
@@ -331,7 +338,7 @@ export default class SlTooltip extends LitElement {
           role="tooltip"
           aria-hidden=${this.open ? 'false' : 'true'}
         >
-          <slot name="content">${this.content}</slot>
+          <slot name="content" @slotchange=${this.handleContentChange}> ${this.content} </slot>
         </div>
       </div>
     `;
