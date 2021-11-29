@@ -11,6 +11,8 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - CodePen examples will now open in light or dark depending on your current preference
 - Fixed a bug where tag names weren't being generated in `vscode.html-custom-data.json` [#593](https://github.com/shoelace-style/shoelace/pull/593)
 - Fixed a bug in `<sl-tooltip>` where the tooltip wouldn't reposition when content changed
+- Fixed a bug in `<sl-select>` where focusing on a filled control showed the wrong focus ring
+- Updated filled inputs to have the same appearance when focused
 - Updated `color` dependency from 3.1.3 to 4.0.2
 - Upgraded the status of `<sl-qr-code>` from experimental to stable
 ## 2.0.0-beta.61

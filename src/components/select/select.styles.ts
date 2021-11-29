@@ -76,6 +76,7 @@ export default css`
   }
 
   .select--filled.select--focused:not(.select--disabled) .select__control {
+    outline: none;
     background-color: var(--sl-input-filled-background-color-focus);
     box-shadow: var(--sl-focus-ring);
   }
