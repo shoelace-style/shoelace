@@ -131,7 +131,9 @@ export default class SlDropdown extends LitElement {
   disconnectedCallback() {
     super.disconnectedCallback();
     this.hide();
-    this.popover.destroy();
+    if(this.popover) {
+      this.popover.destroy();
+    }
   }
 
   focusOnTrigger() {
