@@ -9,7 +9,7 @@
 - Fully customizable with CSS 🎨
 - Includes a dark theme 🌛
 - Built with accessibility in mind ♿️
-- First-class [React support](/frameworks/react)
+- First-class [React support](/frameworks/react) ⚛️
 - Open source 😸
 
 Designed in New Hampshire by [Cory LaViska](https://twitter.com/claviska).
