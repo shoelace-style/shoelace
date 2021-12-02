@@ -15,12 +15,12 @@ export default class SlFormatBytes extends LitElement {
   @property() unit: 'bytes' | 'bits' = 'bytes';
 
   /** The locale to use when formatting the number. */
-  @property() locale: string;
+  @property() lang: string;
 
   render() {
     return formatBytes(this.value, {
       unit: this.unit,
-      locale: this.locale
+      lang: this.lang
     });
   }
 }

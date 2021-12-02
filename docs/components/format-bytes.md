@@ -101,13 +101,13 @@ const App = () => (
 
 ### Localization
 
-Use the `locale` attribute to set the number formatting locale.
+Use the `lang` attribute to set the number formatting locale.
 
 ```html preview
-<sl-format-bytes value="12" locale="de"></sl-format-bytes><br>
-<sl-format-bytes value="1200" locale="de"></sl-format-bytes><br>
-<sl-format-bytes value="1200000" locale="de"></sl-format-bytes><br>
-<sl-format-bytes value="1200000000" locale="de"></sl-format-bytes>
+<sl-format-bytes value="12" lang="de"></sl-format-bytes><br>
+<sl-format-bytes value="1200" lang="de"></sl-format-bytes><br>
+<sl-format-bytes value="1200000" lang="de"></sl-format-bytes><br>
+<sl-format-bytes value="1200000000" lang="de"></sl-format-bytes>
 ```
 
 ```jsx react
@@ -115,10 +115,10 @@ import { SlFormatBytes } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <>
-    <SlFormatBytes value="12" locale="de" /><br />
-    <SlFormatBytes value="1200" locale="de" /><br />
-    <SlFormatBytes value="1200000" locale="de" /><br />
-    <SlFormatBytes value="1200000000" locale="de" />
+    <SlFormatBytes value="12" lang="de" /><br />
+    <SlFormatBytes value="1200" lang="de" /><br />
+    <SlFormatBytes value="1200000" lang="de" /><br />
+    <SlFormatBytes value="1200000000" lang="de" />
   </>
 );
 ```

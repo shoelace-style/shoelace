@@ -11,7 +11,7 @@ export default class SlFormatNumber extends LitElement {
   @property({ type: Number }) value = 0;
 
   /** The locale to use when formatting the number. */
-  @property() locale: string;
+  @property() lang: string;
 
   /** The formatting style to use. */
   @property() type: 'currency' | 'decimal' | 'percent' = 'decimal';
@@ -45,7 +45,7 @@ export default class SlFormatNumber extends LitElement {
       return '';
     }
 
-    return new Intl.NumberFormat(this.locale, {
+    return new Intl.NumberFormat(this.lang, {
       style: this.type,
       currency: this.currency,
       currencyDisplay: this.currencyDisplay,

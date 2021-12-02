@@ -18,7 +18,7 @@ export default class SlRelativeTime extends LitElement {
   @property() date: Date | string;
 
   /** The locale to use when formatting the number. */
-  @property() locale: string;
+  @property() lang: string;
 
   /** The formatting style to use. */
   @property() format: 'long' | 'short' | 'narrow' = 'long';
@@ -38,7 +38,7 @@ export default class SlRelativeTime extends LitElement {
   }
 
   @watch('date')
-  @watch('locale')
+  @watch('lang')
   @watch('format')
   @watch('numeric')
   @watch('sync')
@@ -65,7 +65,7 @@ export default class SlRelativeTime extends LitElement {
     const { unit, value } = availableUnits.find(unit => Math.abs(diff) < unit.max) as any;
 
     this.isoTime = date.toISOString();
-    this.titleTime = new Intl.DateTimeFormat(this.locale, {
+    this.titleTime = new Intl.DateTimeFormat(this.lang, {
       month: 'long',
       year: 'numeric',
       day: 'numeric',
@@ -74,7 +74,7 @@ export default class SlRelativeTime extends LitElement {
       timeZoneName: 'short'
     }).format(date);
 
-    this.relativeTime = new Intl.RelativeTimeFormat(this.locale, {
+    this.relativeTime = new Intl.RelativeTimeFormat(this.lang, {
       numeric: this.numeric,
       style: this.format
     }).format(Math.round(diff / value), unit);

@@ -11,7 +11,7 @@ export default class SlFormatDate extends LitElement {
   @property() date: Date | string = new Date();
 
   /** The locale to use when formatting the date/time. */
-  @property() locale: string;
+  @property() lang: string;
 
   /** The format for displaying the weekday. */
   @property() weekday: 'narrow' | 'short' | 'long';
@@ -55,7 +55,7 @@ export default class SlFormatDate extends LitElement {
       return;
     }
 
-    return new Intl.DateTimeFormat(this.locale, {
+    return new Intl.DateTimeFormat(this.lang, {
       weekday: this.weekday,
       era: this.era,
       year: this.year,
