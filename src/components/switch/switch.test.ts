@@ -35,16 +35,23 @@ describe('<sl-switch>', () => {
     expect(el.checked).to.be.true;
   });
 
-  // TODO - arrow key doesn't seem to be sending
-  // TODO - test for left arrow too
-  // it('should fire sl-change when toggled with the right arrow', async () => {
-  //   const el = await fixture<SlSwitch>(html` <sl-switch></sl-switch> `);
-  //   el.focus();
-  //   setTimeout(() => sendKeys({ press: 'ArrowRight' }));
-  //   const event = await oneEvent(el, 'sl-change');
-  //   expect(event.target).to.equal(el);
-  //   expect(el.checked).to.be.true;
-  // });
+  it('should fire sl-change when toggled with the right arrow', async () => {
+    const el = await fixture<SlSwitch>(html` <sl-switch></sl-switch> `);
+    el.focus();
+    setTimeout(() => sendKeys({ press: 'ArrowRight' }));
+    const event = await oneEvent(el, 'sl-change');
+    expect(event.target).to.equal(el);
+    expect(el.checked).to.be.true;
+  });
+
+  it('should fire sl-change when toggled with the left arrow', async () => {
+    const el = await fixture<SlSwitch>(html` <sl-switch checked></sl-switch> `);
+    el.focus();
+    setTimeout(() => sendKeys({ press: 'ArrowLeft' }));
+    const event = await oneEvent(el, 'sl-change');
+    expect(event.target).to.equal(el);
+    expect(el.checked).to.be.false;
+  });
 
   it('should not fire sl-change when checked is set by javascript', async () => {
     const el = await fixture<SlSwitch>(html` <sl-switch></sl-switch> `);
