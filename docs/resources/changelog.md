@@ -9,6 +9,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 ## Next
 
 - 🚨 BREAKING: changed the `locale` attribute to `lang` in `<sl-format-bytes>`, `<sl-format-date>`, `<sl-format-number>`, and `<sl-relative-time>` to be consistent with how localization will be handled
+- Added localization support including English and Spanish translations [#419](https://github.com/shoelace-style/shoelace/issues/419)
 - CodePen examples will now open in light or dark depending on your current preference
 - Fixed a bug where tag names weren't being generated in `vscode.html-custom-data.json` [#593](https://github.com/shoelace-style/shoelace/pull/593)
 - Fixed a bug in `<sl-tooltip>` where the tooltip wouldn't reposition when content changed
