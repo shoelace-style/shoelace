@@ -48,6 +48,8 @@ mkdirp.sync(outdir);
         './src/shoelace.ts',
         // Components
         ...(await glob('./src/components/**/!(*.(style|test)).ts')),
+        // Translations
+        ...(await glob('./src/translations/**/*.ts')),
         // Public utilities
         ...(await glob('./src/utilities/**/!(*.(style|test)).ts')),
         // Theme stylesheets

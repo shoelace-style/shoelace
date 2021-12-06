@@ -1,5 +1,5 @@
 import fs from 'fs';
-import commentParser from 'comment-parser';
+import { parse } from 'comment-parser';
 import pascalCase from 'pascal-case';
 
 const packageData = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
@@ -39,7 +39,7 @@ export default {
               });
             });
 
-            const parsed = commentParser.parse(customComments + '\n */');
+            const parsed = parse(customComments + '\n */');
             parsed[0].tags?.map(t => {
               switch (t.tag) {
                 // Animations
