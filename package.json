@@ -35,8 +35,8 @@
     "prepublishOnly": "npm run build && npm run test",
     "prettier": "prettier --write --loglevel warn .",
     "create": "plop --plopfile scripts/plop/plopfile.cjs",
-    "test": "web-test-runner \"src/**/*.test.ts\" --node-resolve --puppeteer",
-    "test:watch": "web-test-runner \"src/**/*.test.ts\" --node-resolve --puppeteer --watch"
+    "test": "web-test-runner \"src/**/*.test.ts\" --node-resolve --playwright --browsers chromium firefox webkit",
+    "test:watch": "web-test-runner \"src/**/*.test.ts\" --node-resolve --playwright --browsers chromium firefox webkit --watch"
   },
   "dependencies": {
     "@lit-labs/react": "^1.0.1",
@@ -54,7 +54,7 @@
     "@types/react": "^17.0.33",
     "@web/dev-server-esbuild": "^0.2.12",
     "@web/test-runner": "^0.13.5",
-    "@web/test-runner-puppeteer": "^0.10.0",
+    "@web/test-runner-playwright": "^0.8.8",
     "bluebird": "^3.7.2",
     "bootstrap-icons": "^1.7.1",
     "browser-sync": "^2.26.14",
