@@ -10,6 +10,7 @@
 - Includes a dark theme 🌛
 - Built with accessibility in mind ♿️
 - First-class [React support](/frameworks/react) ⚛️
+- Built-in localization 💬
 - Open source 😸
 
 Designed in New Hampshire by [Cory LaViska](https://twitter.com/claviska).

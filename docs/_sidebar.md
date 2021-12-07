@@ -4,6 +4,7 @@
   - [Usage](/getting-started/usage)
   - [Themes](/getting-started/themes)
   - [Customizing](/getting-started/customizing)
+  - [Localization](/getting-started/localization)
 
 - Frameworks
   - [React](/frameworks/react)
