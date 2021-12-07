@@ -6,12 +6,12 @@ const translation: Translation = {
   $name: 'Français',
   $dir: 'ltr',
 
-  close: "Fermer",
+  close: 'Fermer',
   copy: 'Copier',
   progress: 'Progrès',
-  scroll_to_end: 'Faire défiler jusqu'à la fin',
-  scroll_to_start: 'Faire défiler jusqu'au début',
-  select_a_color_from_the_screen: "Sélectionnez une couleur à l'écran",
+  scroll_to_end: `Faire défiler jusqu'à la fin`,
+  scroll_to_start: `Faire défiler jusqu'au début`,
+  select_a_color_from_the_screen: `Sélectionnez une couleur à l'écran`,
   toggle_color_format: 'Changer le format de couleur'
 };
 
