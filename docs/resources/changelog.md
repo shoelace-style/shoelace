@@ -8,15 +8,17 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
-- 🚨 BREAKING: changed the `locale` attribute to `lang` in `<sl-format-bytes>`, `<sl-format-date>`, `<sl-format-number>`, and `<sl-relative-time>` to be consistent with how localization will be handled
-- Added localization support including English and Spanish translations [#419](https://github.com/shoelace-style/shoelace/issues/419)
+- 🚨 BREAKING: changed the `locale` attribute to `lang` in `<sl-format-bytes>`, `<sl-format-date>`, `<sl-format-number>`, and `<sl-relative-time>` to be consistent with how localization is handled
+- Added localization support including translations for English, German, German (Switzerland), Spanish, French, Hebrew, Japanese, Dutch, Polish, Portuguese, and Russian translations [#419](https://github.com/shoelace-style/shoelace/issues/419)
 - CodePen examples will now open in light or dark depending on your current preference
 - Fixed a bug where tag names weren't being generated in `vscode.html-custom-data.json` [#593](https://github.com/shoelace-style/shoelace/pull/593)
 - Fixed a bug in `<sl-tooltip>` where the tooltip wouldn't reposition when content changed
 - Fixed a bug in `<sl-select>` where focusing on a filled control showed the wrong focus ring
 - Updated filled inputs to have the same appearance when focused
 - Updated `color` dependency from 3.1.3 to 4.0.2
+- Updated `<sl-format-bytes>`, `<sl-format-date>`, `<sl-format-number>`, and `<sl-relative-time>` to work like other localized components
 - Upgraded the status of `<sl-qr-code>` from experimental to stable
+
 ## 2.0.0-beta.61
 
 This release improves the dark theme by shifting luminance in both directions, slightly condensing the spectrum. This results in richer colors in dark mode. It also reduces theme stylesheet sizes by eliminating superfluous gray palette variations.
