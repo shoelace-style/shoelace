@@ -29,6 +29,7 @@ Shoelace ships with the following translations. The default is English (US), whi
 - `fr` - French
 - `he` - Hebrew
 - `ja` - Japanese
+- `nl` - Dutch
 - `pl` - Polish
 - `pt` - Portuguese
 - `ru` - Russian
