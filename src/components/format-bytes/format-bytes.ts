@@ -1,6 +1,7 @@
 import { LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { formatBytes } from '../../internal/number';
+import { LocalizeController } from '../../utilities/localize';
 
 /**
  * @since 2.0
@@ -8,6 +9,8 @@ import { formatBytes } from '../../internal/number';
  */
 @customElement('sl-format-bytes')
 export default class SlFormatBytes extends LitElement {
+  private localize = new LocalizeController(this);
+
   /** The number to format in bytes. */
   @property({ type: Number }) value = 0;
 
@@ -20,7 +23,7 @@ export default class SlFormatBytes extends LitElement {
   render() {
     return formatBytes(this.value, {
       unit: this.unit,
-      lang: this.lang
+      formatter: num => this.localize.number(num)
     });
   }
 }
