@@ -6,7 +6,7 @@ const translation: Translation = {
   $name: 'Deutsch',
   $dir: 'ltr',
 
-  close: "Schlie\xDFen",
+  close: "Schließen",
   copy: 'Kopieren',
   progress: 'Fortschritt',
   scroll_to_end: 'Zum Ende scrollen',
