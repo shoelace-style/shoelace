@@ -19,6 +19,8 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Updated `color` dependency from 3.1.3 to 4.0.2
 - Updated `<sl-format-bytes>`, `<sl-format-date>`, `<sl-format-number>`, and `<sl-relative-time>` to work like other localized components
 - Upgraded the status of `<sl-qr-code>` from experimental to stable
+- Updated to Bootstrap Icons to 1.7.2
+- Upgraded color to 4.1.0
 
 ## 2.0.0-beta.61
 
