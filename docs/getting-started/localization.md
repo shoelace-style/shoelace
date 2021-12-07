@@ -23,8 +23,10 @@ Through the magic of a mutation observer, changing the `lang` attribute will aut
 Shoelace ships with the following translations. The default is English (US), which also serves as the fallback locale. As such, you do not need to import the English translation.
 
 - `en` - English (US)
+- `de-CH` - German (Switzerland)
 - `de` - German
 - `es` - Spanish (Latin America)
+- `fr` - French
 - `ja` - Japanese
 - `pl` - Polish
 - `pt` - Portuguese
