@@ -3,7 +3,7 @@ import type { Translation } from '../utilities/localize';
 
 const translation: Translation = {
   $code: 'ja',
-  $name: 'Japanese',
+  $name: '日本語',
   $dir: 'ltr',
 
   close: '閉じる',
