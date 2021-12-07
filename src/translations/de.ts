@@ -11,7 +11,7 @@ const translation: Translation = {
   progress: 'Fortschritt',
   scroll_to_end: 'Zum Ende scrollen',
   scroll_to_start: 'Zum Anfang scrollen',
-  select_a_color_from_the_screen: "W\xE4hle eine Farbe vom Bildschirm",
+  select_a_color_from_the_screen: "Wähle eine Farbe vom Bildschirm",
   toggle_color_format: 'Farbformat umschalten'
 };
 
