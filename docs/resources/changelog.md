@@ -14,6 +14,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug where tag names weren't being generated in `vscode.html-custom-data.json` [#593](https://github.com/shoelace-style/shoelace/pull/593)
 - Fixed a bug in `<sl-tooltip>` where the tooltip wouldn't reposition when content changed
 - Fixed a bug in `<sl-select>` where focusing on a filled control showed the wrong focus ring
+- Fixed a bug where setting `value` initially on `<sl-color-picker>` didn't work in React [#602](https://github.com/shoelace-style/shoelace/issues/602)
 - Updated filled inputs to have the same appearance when focused
 - Updated `color` dependency from 3.1.3 to 4.0.2
 - Updated `<sl-format-bytes>`, `<sl-format-date>`, `<sl-format-number>`, and `<sl-relative-time>` to work like other localized components
