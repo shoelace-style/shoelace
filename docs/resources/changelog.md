@@ -6,6 +6,10 @@ Components with the <sl-badge type="warning" pill>Experimental</sl-badge> badge 
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
+## Next
+
+- Fixed bug where setting `tooltipFormatter` on `<sl-range>` in JSX causes React@experimental to error out
+
 ## 2.0.0-beta.62
 
 - 🚨 BREAKING: changed the `locale` attribute to `lang` in `<sl-format-bytes>`, `<sl-format-date>`, `<sl-format-number>`, and `<sl-relative-time>` to be consistent with how localization is handled
