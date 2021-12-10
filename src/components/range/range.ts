@@ -260,7 +260,11 @@ export default class SlRange extends LitElement {
             @blur=${this.handleBlur}
           />
           ${this.tooltip !== 'none' && !this.disabled
-            ? html` <output part="tooltip" class="range__tooltip"> ${this.tooltipFormatter(this.value)} </output> `
+            ? html`
+                <output part="tooltip" class="range__tooltip">
+                  ${typeof this.tooltipFormatter === 'function' ? this.tooltipFormatter(this.value) : this.value}
+                </output>
+              `
             : ''}
         </div>
       `

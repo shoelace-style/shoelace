@@ -8,10 +8,23 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
+- Fixed bug where setting `tooltipFormatter` on `<sl-range>` in JSX causes React@experimental to error out
+
+## 2.0.0-beta.62
+
+- 🚨 BREAKING: changed the `locale` attribute to `lang` in `<sl-format-bytes>`, `<sl-format-date>`, `<sl-format-number>`, and `<sl-relative-time>` to be consistent with how localization is handled
+- Added localization support including translations for English, German, German (Switzerland), Spanish, French, Hebrew, Japanese, Dutch, Polish, Portuguese, and Russian translations [#419](https://github.com/shoelace-style/shoelace/issues/419)
 - CodePen examples will now open in light or dark depending on your current preference
 - Fixed a bug where tag names weren't being generated in `vscode.html-custom-data.json` [#593](https://github.com/shoelace-style/shoelace/pull/593)
 - Fixed a bug in `<sl-tooltip>` where the tooltip wouldn't reposition when content changed
+- Fixed a bug in `<sl-select>` where focusing on a filled control showed the wrong focus ring
+- Fixed a bug where setting `value` initially on `<sl-color-picker>` didn't work in React [#602](https://github.com/shoelace-style/shoelace/issues/602)
+- Updated filled inputs to have the same appearance when focused
+- Updated `color` dependency from 3.1.3 to 4.0.2
+- Updated `<sl-format-bytes>`, `<sl-format-date>`, `<sl-format-number>`, and `<sl-relative-time>` to work like other localized components
 - Upgraded the status of `<sl-qr-code>` from experimental to stable
+- Updated to Bootstrap Icons to 1.7.2
+- Upgraded color to 4.1.0
 
 ## 2.0.0-beta.61
 

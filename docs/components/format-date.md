@@ -97,12 +97,12 @@ const App = () => (
 
 ### Localization
 
-Use the `locale` attribute to set the date/time formatting locale.
+Use the `lang` attribute to set the date/time formatting locale.
 
 ```html preview
-English: <sl-format-date locale="en"></sl-format-date><br>
-French: <sl-format-date locale="fr"></sl-format-date><br>
-Russian: <sl-format-date locale="ru"></sl-format-date>
+English: <sl-format-date lang="en"></sl-format-date><br>
+French: <sl-format-date lang="fr"></sl-format-date><br>
+Russian: <sl-format-date lang="ru"></sl-format-date>
 ```
 
 ```jsx react
@@ -110,9 +110,9 @@ import { SlFormatDate } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <>
-    English: <SlFormatDate locale="en" /><br />
-    French: <SlFormatDate locale="fr" /><br />
-    Russian: <SlFormatDate locale="ru" />
+    English: <SlFormatDate lang="en" /><br />
+    French: <SlFormatDate lang="fr" /><br />
+    Russian: <SlFormatDate lang="ru" />
   </>
 );
 ```

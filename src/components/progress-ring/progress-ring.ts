@@ -1,6 +1,6 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
-import { ifDefined } from 'lit/directives/if-defined.js';
+import { LocalizeController } from '../../utilities/localize';
 import styles from './progress-ring.styles';
 
 /**
@@ -20,6 +20,7 @@ import styles from './progress-ring.styles';
 @customElement('sl-progress-ring')
 export default class SlProgressRing extends LitElement {
   static styles = styles;
+  private localize = new LocalizeController(this);
 
   @query('.progress-ring__indicator') indicator: SVGCircleElement;
 
@@ -28,8 +29,11 @@ export default class SlProgressRing extends LitElement {
   /** The current progress, 0 to 100. */
   @property({ type: Number, reflect: true }) value = 0;
 
-  /** The progress ring's aria label. */
-  @property() label = 'Progress'; // TODO - i18n
+  /** A custom label for the progress ring's aria label. */
+  @property() label: string;
+
+  /** The locale to render the component in. */
+  @property() lang: string;
 
   updated(changedProps: Map<string, any>) {
     super.updated(changedProps);
@@ -54,7 +58,7 @@ export default class SlProgressRing extends LitElement {
         part="base"
         class="progress-ring"
         role="progressbar"
-        aria-label=${ifDefined(this.label)}
+        aria-label=${this.label || this.localize.term('progress')}
         aria-valuemin="0"
         aria-valuemax="100"
         aria-valuenow="${this.value}"

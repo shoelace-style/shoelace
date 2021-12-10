@@ -1,5 +1,6 @@
 import { LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { LocalizeController } from '../../utilities/localize';
 
 /**
  * @since 2.0
@@ -7,11 +8,13 @@ import { customElement, property } from 'lit/decorators.js';
  */
 @customElement('sl-format-date')
 export default class SlFormatDate extends LitElement {
+  private localize = new LocalizeController(this);
+
   /** The date/time to format. If not set, the current date and time will be used. */
   @property() date: Date | string = new Date();
 
   /** The locale to use when formatting the date/time. */
-  @property() locale: string;
+  @property() lang: string;
 
   /** The format for displaying the weekday. */
   @property() weekday: 'narrow' | 'short' | 'long';
@@ -55,7 +58,7 @@ export default class SlFormatDate extends LitElement {
       return;
     }
 
-    return new Intl.DateTimeFormat(this.locale, {
+    return this.localize.date(date, {
       weekday: this.weekday,
       era: this.era,
       year: this.year,
@@ -67,7 +70,7 @@ export default class SlFormatDate extends LitElement {
       timeZoneName: this.timeZoneName,
       timeZone: this.timeZone,
       hour12: hour12
-    }).format(date);
+    });
   }
 }
 

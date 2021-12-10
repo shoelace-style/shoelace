@@ -7,6 +7,7 @@ import { styleMap } from 'lit/directives/style-map.js';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import { clamp } from '../../internal/math';
+import { LocalizeController } from '../../utilities/localize';
 import type SlDropdown from '../dropdown/dropdown';
 import type SlInput from '../input/input';
 import color from 'color';
@@ -56,6 +57,7 @@ const hasEyeDropper = 'EyeDropper' in window;
 @customElement('sl-color-picker')
 export default class SlColorPicker extends LitElement {
   static styles = styles;
+  private localize = new LocalizeController(this);
 
   @query('[part="input"]') input: SlInput;
   @query('[part="preview"]') previewButton: HTMLButtonElement;
@@ -136,9 +138,10 @@ export default class SlColorPicker extends LitElement {
     '#fff'
   ];
 
-  connectedCallback() {
-    super.connectedCallback();
+  /** The locale to render the component in. */
+  @property() lang: string;
 
+  firstUpdated() {
     if (!this.setColor(this.value)) {
       this.setColor(`#ffff`);
     }
@@ -627,7 +630,6 @@ export default class SlColorPicker extends LitElement {
     const x = this.saturation;
     const y = 100 - this.lightness;
 
-    // TODO - i18n for format, copy, and eye dropper buttons
     const colorPicker = html`
       <div
         part="base"
@@ -730,7 +732,7 @@ export default class SlColorPicker extends LitElement {
             type="button"
             part="preview"
             class="color-picker__preview color-picker__transparent-bg"
-            aria-label="Copy"
+            aria-label=${this.localize.term('copy')}
             style=${styleMap({
               '--preview-color': `hsla(${this.hue}deg, ${this.saturation}%, ${this.lightness}%, ${this.alpha / 100})`
             })}
@@ -757,7 +759,7 @@ export default class SlColorPicker extends LitElement {
             ${!this.noFormatToggle
               ? html`
                   <sl-button
-                    aria-label="Change format"
+                    aria-label=${this.localize.term('toggle_color_format')}
                     exportparts="base:format-button"
                     @click=${this.handleFormatToggle}
                   >
@@ -768,7 +770,11 @@ export default class SlColorPicker extends LitElement {
             ${hasEyeDropper
               ? html`
                   <sl-button exportparts="base:eye-dropper-button" @click=${this.handleEyeDropper}>
-                    <sl-icon library="system" name="eyedropper" label="Select a color from the screen"></sl-icon>
+                    <sl-icon
+                      library="system"
+                      name="eyedropper"
+                      label=${this.localize.term('select_a_color_from_the_screen')}
+                    ></sl-icon>
                   </sl-button>
                 `
               : ''}

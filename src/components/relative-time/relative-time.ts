@@ -1,6 +1,6 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { watch } from '../../internal/watch';
+import { LocalizeController } from '../../utilities/localize';
 
 /**
  * @since 2.0
@@ -8,6 +8,7 @@ import { watch } from '../../internal/watch';
  */
 @customElement('sl-relative-time')
 export default class SlRelativeTime extends LitElement {
+  private localize = new LocalizeController(this);
   private updateTimeout: any;
 
   @state() private isoTime = '';
@@ -18,7 +19,7 @@ export default class SlRelativeTime extends LitElement {
   @property() date: Date | string;
 
   /** The locale to use when formatting the number. */
-  @property() locale: string;
+  @property() lang: string;
 
   /** The formatting style to use. */
   @property() format: 'long' | 'short' | 'narrow' = 'long';
@@ -37,23 +38,18 @@ export default class SlRelativeTime extends LitElement {
     clearTimeout(this.updateTimeout);
   }
 
-  @watch('date')
-  @watch('locale')
-  @watch('format')
-  @watch('numeric')
-  @watch('sync')
-  updateTime() {
+  render() {
     const now = new Date();
-    const date = new Date(this.date);
+    const then = new Date(this.date);
 
     // Check for an invalid date
-    if (isNaN(date.getMilliseconds())) {
+    if (isNaN(then.getMilliseconds())) {
       this.relativeTime = '';
       this.isoTime = '';
-      return;
+      return '';
     }
 
-    const diff = +date - +now;
+    const diff = +then - +now;
     const availableUnits = [
       { max: 2760000, value: 60000, unit: 'minute' }, // max 46 minutes
       { max: 72000000, value: 3600000, unit: 'hour' }, // max 20 hours
@@ -64,23 +60,24 @@ export default class SlRelativeTime extends LitElement {
     ];
     const { unit, value } = availableUnits.find(unit => Math.abs(diff) < unit.max) as any;
 
-    this.isoTime = date.toISOString();
-    this.titleTime = new Intl.DateTimeFormat(this.locale, {
+    this.isoTime = then.toISOString();
+    this.titleTime = this.localize.date(then, {
       month: 'long',
       year: 'numeric',
       day: 'numeric',
       hour: 'numeric',
       minute: 'numeric',
       timeZoneName: 'short'
-    }).format(date);
+    });
 
-    this.relativeTime = new Intl.RelativeTimeFormat(this.locale, {
+    this.relativeTime = this.localize.relativeTime(Math.round(diff / value), unit, {
       numeric: this.numeric,
       style: this.format
-    }).format(Math.round(diff / value), unit);
+    });
 
     // If sync is enabled, update as time passes
     clearTimeout(this.updateTimeout);
+
     if (this.sync) {
       // Calculates the number of milliseconds until the next respective unit changes. This ensures that all components
       // update at the same time which is less distracting than updating independently.
@@ -89,7 +86,6 @@ export default class SlRelativeTime extends LitElement {
         const value = units[unit];
         return value - (now.getTime() % value);
       };
-
       let nextInterval: number;
 
       // NOTE: this could be optimized to determine when the next update should actually occur, but the size and cost of
@@ -105,11 +101,10 @@ export default class SlRelativeTime extends LitElement {
         // value it can accept. https://stackoverflow.com/a/3468650/567486
         nextInterval = getTimeUntilNextUnit('day'); // next day
       }
-      this.updateTimeout = setTimeout(() => this.updateTime(), nextInterval);
-    }
-  }
 
-  render() {
+      this.updateTimeout = setTimeout(() => this.requestUpdate(), nextInterval);
+    }
+
     return html` <time datetime=${this.isoTime} title=${this.titleTime}>${this.relativeTime}</time> `;
   }
 }
