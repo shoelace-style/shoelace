@@ -132,7 +132,11 @@ export default class SlTextarea extends LitElement {
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    this.resizeObserver.unobserve(this.input);
+
+    if(this.input) {
+      this.resizeObserver.unobserve(this.input);
+    }
+    
     this.shadowRoot!.removeEventListener('slotchange', this.handleSlotChange);
   }
 
