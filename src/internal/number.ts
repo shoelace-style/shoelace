@@ -5,7 +5,7 @@ export function formatBytes(bytes: number, options: FormatBytesOptions) {
   options = Object.assign(
     {
       unit: 'bytes',
-      locale: undefined
+      formatter: (number: number) => number.toLocaleString()
     },
     options
   );
@@ -20,7 +20,7 @@ export function formatBytes(bytes: number, options: FormatBytesOptions) {
 
   const i = Math.min(Math.floor(Math.log10(bytes) / 3), units.length - 1);
   const num = Number((bytes / Math.pow(1000, i)).toPrecision(3));
-  const numString = num.toLocaleString(options.locale);
+  const numString = options.formatter ? options.formatter(num) : num;
   const prefix = isNegative ? '-' : '';
 
   return `${prefix}${numString} ${units[i]}`;
@@ -28,5 +28,5 @@ export function formatBytes(bytes: number, options: FormatBytesOptions) {
 
 interface FormatBytesOptions {
   unit?: 'bytes' | 'bits';
-  locale?: string;
+  formatter?: (number: number) => string;
 }

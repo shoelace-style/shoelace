@@ -458,7 +458,7 @@ export default css`
 
     --sl-input-filled-background-color: var(--sl-color-neutral-100);
     --sl-input-filled-background-color-hover: var(--sl-color-neutral-100);
-    --sl-input-filled-background-color-focus: var(--sl-color-neutral-0);
+    --sl-input-filled-background-color-focus: var(--sl-color-neutral-100);
     --sl-input-filled-background-color-disabled: var(--sl-color-neutral-100);
     --sl-input-filled-color: var(--sl-color-neutral-800);
     --sl-input-filled-color-hover: var(--sl-color-neutral-800);

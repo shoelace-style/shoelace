@@ -14,7 +14,7 @@ This integration has been tested with the following:
 
 ## Instructions
 
-These instructions assume an out-of-the-box [Laravel 8+ install](https://laravel.com/docs/8.x/installation) that uses [Laravel Mix](https://laravel.com/docs/8.x/mix) to compile assets.
+These instructions assume an out of the box [Laravel 8+ install](https://laravel.com/docs/8.x/installation) that uses [Laravel Mix](https://laravel.com/docs/8.x/mix) to compile assets.
 Be sure to run `npm install` to install the default Laravel front-end dependencies before installing Shoelace. 
 
 ### Install the Shoelace package

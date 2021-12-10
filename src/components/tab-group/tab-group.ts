@@ -5,6 +5,7 @@ import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import { getOffset } from '../../internal/offset';
 import { scrollIntoView } from '../../internal/scroll';
+import { LocalizeController } from '../../utilities/localize';
 import type SlTab from '../tab/tab';
 import type SlTabPanel from '../tab-panel/tab-panel';
 import styles from './tab-group.styles';
@@ -36,6 +37,7 @@ import '../icon-button/icon-button';
 @customElement('sl-tab-group')
 export default class SlTabGroup extends LitElement {
   static styles = styles;
+  private localize = new LocalizeController(this);
 
   @query('.tab-group') tabGroup: HTMLElement;
   @query('.tab-group__body') body: HTMLElement;
@@ -61,6 +63,9 @@ export default class SlTabGroup extends LitElement {
 
   /** Disables the scroll arrows that appear when tabs overflow. */
   @property({ attribute: 'no-scroll-controls', type: Boolean }) noScrollControls = false;
+
+  /** The locale to render the component in. */
+  @property() lang: string;
 
   connectedCallback() {
     super.connectedCallback();
@@ -339,7 +344,6 @@ export default class SlTabGroup extends LitElement {
     this.syncIndicator();
   }
 
-  // TODO - i18n scroll to start/end labels
   render() {
     return html`
       <div
@@ -363,7 +367,7 @@ export default class SlTabGroup extends LitElement {
                   exportparts="base:scroll-button"
                   name="chevron-left"
                   library="system"
-                  label="Scroll to start"
+                  label=${this.localize.term('scroll_to_start')}
                   @click=${this.handleScrollToStart}
                 ></sl-icon-button>
               `
@@ -383,7 +387,7 @@ export default class SlTabGroup extends LitElement {
                   exportparts="base:scroll-button"
                   name="chevron-right"
                   library="system"
-                  label="Scroll to end"
+                  label=${this.localize.term('scroll_to_end')}
                   @click=${this.handleScrollToEnd}
                 ></sl-icon-button>
               `
