@@ -9,6 +9,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 ## Next
 
 - Fixed bug where setting `tooltipFormatter` on `<sl-range>` in JSX causes React@experimental to error out
+- Refactored `<sl-button>` to use Lit's static expressions to reduce code
 
 ## 2.0.0-beta.62
 

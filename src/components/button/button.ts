@@ -1,5 +1,6 @@
-import { LitElement, html } from 'lit';
+import { LitElement } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
+import { html, literal } from 'lit/static-html.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { emit } from '../../internal/event';
@@ -126,116 +127,80 @@ export default class SlButton extends LitElement {
 
   render() {
     const isLink = this.href ? true : false;
+    const tag = isLink ? literal`a` : literal`button`;
 
-    const interior = html`
-      <span part="prefix" class="button__prefix">
-        <slot @slotchange=${this.handleSlotChange} name="prefix"></slot>
-      </span>
-      <span part="label" class="button__label">
-        <slot @slotchange=${this.handleSlotChange}></slot>
-      </span>
-      <span part="suffix" class="button__suffix">
-        <slot @slotchange=${this.handleSlotChange} name="suffix"></slot>
-      </span>
-      ${this.caret
-        ? html`
-            <span part="caret" class="button__caret">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </span>
-          `
-        : ''}
-      ${this.loading ? html`<sl-spinner></sl-spinner>` : ''}
+    return html`
+      <${tag}
+        part="base"
+        class=${classMap({
+          button: true,
+          'button--default': this.type === 'default',
+          'button--primary': this.type === 'primary',
+          'button--success': this.type === 'success',
+          'button--neutral': this.type === 'neutral',
+          'button--warning': this.type === 'warning',
+          'button--danger': this.type === 'danger',
+          'button--text': this.type === 'text',
+          'button--small': this.size === 'small',
+          'button--medium': this.size === 'medium',
+          'button--large': this.size === 'large',
+          'button--caret': this.caret,
+          'button--circle': this.circle,
+          'button--disabled': this.disabled,
+          'button--focused': this.hasFocus,
+          'button--loading': this.loading,
+          'button--standard': !this.outline,
+          'button--outline': this.outline,
+          'button--pill': this.pill,
+          'button--has-label': this.hasLabel,
+          'button--has-prefix': this.hasPrefix,
+          'button--has-suffix': this.hasSuffix
+        })}
+        ?disabled=${ifDefined(isLink ? undefined : this.disabled)}
+        type=${ifDefined(isLink ? undefined : this.submit ? 'submit' : 'button')}
+        name=${ifDefined(isLink ? undefined : this.name)}
+        value=${ifDefined(isLink ? undefined : this.value)}
+        href=${ifDefined(this.href)}
+        target=${ifDefined(this.target)}
+        download=${ifDefined(this.download)}
+        rel=${ifDefined(this.target ? 'noreferrer noopener' : undefined)}
+        role="button"
+        aria-disabled=${this.disabled ? 'true' : 'false'}
+        tabindex=${this.disabled ? '-1' : '0'}
+        @blur=${this.handleBlur}
+        @focus=${this.handleFocus}
+        @click=${this.handleClick}
+      >
+        <span part="prefix" class="button__prefix">
+          <slot @slotchange=${this.handleSlotChange} name="prefix"></slot>
+        </span>
+        <span part="label" class="button__label">
+          <slot @slotchange=${this.handleSlotChange}></slot>
+        </span>
+        <span part="suffix" class="button__suffix">
+          <slot @slotchange=${this.handleSlotChange} name="suffix"></slot>
+        </span>
+        ${
+          this.caret
+            ? html`
+                <span part="caret" class="button__caret">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </span>
+              `
+            : ''
+        }
+        ${this.loading ? html`<sl-spinner></sl-spinner>` : ''}
+      </${tag}>
     `;
-
-    return isLink
-      ? html`
-          <a
-            part="base"
-            class=${classMap({
-              button: true,
-              'button--default': this.type === 'default',
-              'button--primary': this.type === 'primary',
-              'button--success': this.type === 'success',
-              'button--neutral': this.type === 'neutral',
-              'button--warning': this.type === 'warning',
-              'button--danger': this.type === 'danger',
-              'button--text': this.type === 'text',
-              'button--small': this.size === 'small',
-              'button--medium': this.size === 'medium',
-              'button--large': this.size === 'large',
-              'button--caret': this.caret,
-              'button--circle': this.circle,
-              'button--disabled': this.disabled,
-              'button--focused': this.hasFocus,
-              'button--loading': this.loading,
-              'button--standard': !this.outline,
-              'button--outline': this.outline,
-              'button--pill': this.pill,
-              'button--has-label': this.hasLabel,
-              'button--has-prefix': this.hasPrefix,
-              'button--has-suffix': this.hasSuffix
-            })}
-            href=${ifDefined(this.href)}
-            target=${ifDefined(this.target)}
-            download=${ifDefined(this.download)}
-            rel=${ifDefined(this.target ? 'noreferrer noopener' : undefined)}
-            role="button"
-            aria-disabled=${this.disabled ? 'true' : 'false'}
-            tabindex=${this.disabled ? '-1' : '0'}
-            @blur=${this.handleBlur}
-            @focus=${this.handleFocus}
-            @click=${this.handleClick}
-          >
-            ${interior}
-          </a>
-        `
-      : html`
-          <button
-            part="base"
-            class=${classMap({
-              button: true,
-              'button--default': this.type === 'default',
-              'button--primary': this.type === 'primary',
-              'button--success': this.type === 'success',
-              'button--neutral': this.type === 'neutral',
-              'button--warning': this.type === 'warning',
-              'button--danger': this.type === 'danger',
-              'button--text': this.type === 'text',
-              'button--small': this.size === 'small',
-              'button--medium': this.size === 'medium',
-              'button--large': this.size === 'large',
-              'button--caret': this.caret,
-              'button--circle': this.circle,
-              'button--disabled': this.disabled,
-              'button--focused': this.hasFocus,
-              'button--loading': this.loading,
-              'button--standard': !this.outline,
-              'button--outline': this.outline,
-              'button--pill': this.pill,
-              'button--has-label': this.hasLabel,
-              'button--has-prefix': this.hasPrefix,
-              'button--has-suffix': this.hasSuffix
-            })}
-            ?disabled=${this.disabled}
-            type=${this.submit ? 'submit' : 'button'}
-            name=${ifDefined(this.name)}
-            value=${ifDefined(this.value)}
-            @blur=${this.handleBlur}
-            @focus=${this.handleFocus}
-            @click=${this.handleClick}
-          >
-            ${interior}
-          </button>
-        `;
   }
 }
 
