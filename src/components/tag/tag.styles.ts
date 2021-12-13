@@ -24,7 +24,7 @@ export default css`
   }
 
   /*
-   * Type modifiers
+   * Variant modifiers
    */
 
   .tag--primary {

@@ -12,7 +12,7 @@ Shoelace forms don't make use of `action` and `method` attributes and they don't
 
 ```html preview
 <sl-form class="form-overview">
-  <sl-input name="name" type="text" label="Name"></sl-input>
+  <sl-input name="name" variant="text" label="Name"></sl-input>
   <br>
   <sl-select name="favorite" label="Select your favorite">
     <sl-menu-item value="birds">Birds</sl-menu-item>
@@ -79,7 +79,7 @@ function handleSubmit(event) {
 
 const App = () => (
   <SlForm onSlSubmit={handleSubmit}>
-    <SlInput name="name" type="text" label="Name" />
+    <SlInput name="name" variant="text" label="Name" />
     <br />
     <SlSelect name="favorite" label="Select your favorite">
       <SlMenuItem value="birds">Birds</SlMenuItem>
@@ -104,8 +104,8 @@ On submit, a [`FormData`](https://developer.mozilla.org/en-US/docs/Web/API/FormD
 
 ```html preview
 <sl-form class="form-formdata">
-  <sl-input name="name" type="text" label="Name" required></sl-input>
-  <sl-input name="age" type="number" label="Age" required></sl-input>
+  <sl-input name="name" variant="text" label="Name" required></sl-input>
+  <sl-input name="age" variant="number" label="Age" required></sl-input>
   <br>
   <sl-button submit>Submit</sl-button>
 </sl-form>
@@ -147,8 +147,8 @@ const App = () => {
 
   return (
     <SlForm class="form-formdata" onSlSubmit={handleSubmit}>
-      <SlInput name="name" type="text" label="Name" required />
-      <SlInput name="age" type="number" label="Age" required />
+      <SlInput name="name" variant="text" label="Name" required />
+      <SlInput name="age" variant="number" label="Age" required />
       <br />
       <SlButton submit>Submit</SlButton>
     </SlForm>
@@ -198,7 +198,7 @@ To make a field required, use the `required` prop. The form will not be submitte
   <br>
   <sl-checkbox required>Check me before submitting</sl-checkbox>
   <br><br>
-  <sl-button type="primary" submit>Submit</sl-button>
+  <sl-button variant="primary" submit>Submit</sl-button>
 </sl-form>
 
 <script>
@@ -233,7 +233,7 @@ const App = () => (
     <br />
     <SlCheckbox required>Check me before submitting</SlCheckbox>
     <br /><br />
-    <SlButton type="primary" submit>Submit</SlButton>
+    <SlButton variant="primary" submit>Submit</SlButton>
   </SlForm>
 );
 ```
@@ -246,7 +246,7 @@ To restrict a value to a specific [pattern](https://developer.mozilla.org/en-US/
 <sl-form class="input-validation-pattern">
   <sl-input name="letters" required label="Letters" pattern="[A-Za-z]+"></sl-input>
   <br>
-  <sl-button type="primary" submit>Submit</sl-button>
+  <sl-button variant="primary" submit>Submit</sl-button>
 </sl-form>
 
 <script>
@@ -266,7 +266,7 @@ const App = () => (
   <SlForm onSlSubmit={() => alert('All fields are valid!')}>
     <SlInput name="letters" required label="Letters" pattern="[A-Za-z]+" />
     <br />
-    <SlButton type="primary" submit>Submit</SlButton>
+    <SlButton variant="primary" submit>Submit</SlButton>
   </SlForm>
 );
 ```
@@ -277,11 +277,11 @@ Some input types will automatically trigger constraints, such as `email` and `ur
 
 ```html preview
 <sl-form class="input-validation-type">
-  <sl-input type="email" label="Email" placeholder="you@example.com" required></sl-input>
+  <sl-input variant="email" label="Email" placeholder="you@example.com" required></sl-input>
   <br>
-  <sl-input type="url" label="URL" placeholder="https://example.com/" required></sl-input>
+  <sl-input variant="url" label="URL" placeholder="https://example.com/" required></sl-input>
   <br>
-  <sl-button type="primary" submit>Submit</sl-button>
+  <sl-button variant="primary" submit>Submit</sl-button>
 </sl-form>
 
 <script>
@@ -299,11 +299,11 @@ import {
 
 const App = () => (
   <SlForm onSlSubmit={() => alert('All fields are valid!')}>
-    <SlInput type="email" label="Email" placeholder="you@example.com" required />
+    <SlInput variant="email" label="Email" placeholder="you@example.com" required />
     <br />
-    <SlInput type="url" label="URL" placeholder="https://example.com/" required />
+    <SlInput variant="url" label="URL" placeholder="https://example.com/" required />
     <br />
-    <SlButton type="primary" submit>Submit</SlButton>
+    <SlButton variant="primary" submit>Submit</SlButton>
   </SlForm>
 );
 ```
@@ -316,7 +316,7 @@ To create a custom validation error, use the `setCustomValidity` method. The for
 <sl-form class="input-validation-custom">
   <sl-input label="Type 'shoelace'" required></sl-input>
   <br>
-  <sl-button type="primary" submit>Submit</sl-button>
+  <sl-button variant="primary" submit>Submit</sl-button>
 </sl-form>
 
 <script>
@@ -366,7 +366,7 @@ const App = () => {
         onSlInput={handleInput}
       />
       <br />
-      <SlButton type="primary" submit>Submit</SlButton>
+      <SlButton variant="primary" submit>Submit</SlButton>
     </SlForm>
   );
 };

@@ -1,13 +1,14 @@
 # Changelog
 
-Shoelace follows [Semantic Versioning](https://semver.org/). Breaking changes in components with the <sl-badge type="primary" pill>Stable</sl-badge> badge will not be accepted until the next major version. As such, all contributions must consider the project's roadmap and take this into consideration. Features that are deemed no longer necessary will be deprecated but not removed.
+Shoelace follows [Semantic Versioning](https://semver.org/). Breaking changes in components with the <sl-badge variant="primary" pill>Stable</sl-badge> badge will not be accepted until the next major version. As such, all contributions must consider the project's roadmap and take this into consideration. Features that are deemed no longer necessary will be deprecated but not removed.
 
-Components with the <sl-badge type="warning" pill>Experimental</sl-badge> badge should not be used in production. They are made available as release candidates for development and testing purposes. As such, changes to experimental components will not be subject to semantic versioning.
+Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> badge should not be used in production. They are made available as release candidates for development and testing purposes. As such, changes to experimental components will not be subject to semantic versioning.
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
 ## Next
 
+- 🚨 BREAKING: changed the `type` attribute to `variant` in `<sl-alert>`, `<sl-badge>`, `<sl-button>`, and `<sl-tag>` since it's more appropriate and to disambiguate from other `type` attributes
 - 🚨 BREAKING: removed `base` part from `<sl-divider>` to simplify the styling API
 - Fixed bug where setting `tooltipFormatter` on `<sl-range>` in JSX causes React@experimental to error out
 - Refactored `<sl-button>` to use Lit's static expressions to reduce code

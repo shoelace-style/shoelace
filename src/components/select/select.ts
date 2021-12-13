@@ -380,7 +380,7 @@ export default class SlSelect extends LitElement {
         return html`
           <sl-tag
             exportparts="base:tag"
-            type="neutral"
+            variant="neutral"
             size=${this.size}
             ?pill=${this.pill}
             removable
@@ -404,7 +404,7 @@ export default class SlSelect extends LitElement {
         this.displayLabel = '';
         this.displayTags = this.displayTags.slice(0, this.maxTagsVisible);
         this.displayTags.push(html`
-          <sl-tag exportparts="base:tag" type="neutral" size=${this.size}> +${total - this.maxTagsVisible} </sl-tag>
+          <sl-tag exportparts="base:tag" variant="neutral" size=${this.size}> +${total - this.maxTagsVisible} </sl-tag>
         `);
       }
     } else {

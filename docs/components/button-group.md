@@ -90,41 +90,41 @@ Theme buttons are supported through the button's `type` attribute.
 
 ```html preview
 <sl-button-group>
-  <sl-button type="primary">Left</sl-button>
-  <sl-button type="primary">Center</sl-button>
-  <sl-button type="primary">Right</sl-button>
+  <sl-button variant="primary">Left</sl-button>
+  <sl-button variant="primary">Center</sl-button>
+  <sl-button variant="primary">Right</sl-button>
 </sl-button-group>
 
 <br><br>
 
 <sl-button-group>
-  <sl-button type="success">Left</sl-button>
-  <sl-button type="success">Center</sl-button>
-  <sl-button type="success">Right</sl-button>
+  <sl-button variant="success">Left</sl-button>
+  <sl-button variant="success">Center</sl-button>
+  <sl-button variant="success">Right</sl-button>
 </sl-button-group>
 
 <br><br>
 
 <sl-button-group>
-  <sl-button type="neutral">Left</sl-button>
-  <sl-button type="neutral">Center</sl-button>
-  <sl-button type="neutral">Right</sl-button>
+  <sl-button variant="neutral">Left</sl-button>
+  <sl-button variant="neutral">Center</sl-button>
+  <sl-button variant="neutral">Right</sl-button>
 </sl-button-group>
 
 <br><br>
 
 <sl-button-group>
-  <sl-button type="warning">Left</sl-button>
-  <sl-button type="warning">Center</sl-button>
-  <sl-button type="warning">Right</sl-button>
+  <sl-button variant="warning">Left</sl-button>
+  <sl-button variant="warning">Center</sl-button>
+  <sl-button variant="warning">Right</sl-button>
 </sl-button-group>
 
 <br><br>
 
 <sl-button-group>
-  <sl-button type="danger">Left</sl-button>
-  <sl-button type="danger">Center</sl-button>
-  <sl-button type="danger">Right</sl-button>
+  <sl-button variant="danger">Left</sl-button>
+  <sl-button variant="danger">Center</sl-button>
+  <sl-button variant="danger">Right</sl-button>
 </sl-button-group>
 ```
 
@@ -134,41 +134,41 @@ import { SlButton, SlButtonGroup } from '@shoelace-style/shoelace/dist/react';
 const App = () => (
   <>
     <SlButtonGroup>
-      <SlButton type="primary">Left</SlButton>
-      <SlButton type="primary">Center</SlButton>
-      <SlButton type="primary">Right</SlButton>
+      <SlButton variant="primary">Left</SlButton>
+      <SlButton variant="primary">Center</SlButton>
+      <SlButton variant="primary">Right</SlButton>
     </SlButtonGroup>
 
     <br /><br />
 
     <SlButtonGroup>
-      <SlButton type="success">Left</SlButton>
-      <SlButton type="success">Center</SlButton>
-      <SlButton type="success">Right</SlButton>
+      <SlButton variant="success">Left</SlButton>
+      <SlButton variant="success">Center</SlButton>
+      <SlButton variant="success">Right</SlButton>
     </SlButtonGroup>
 
     <br /><br />
 
     <SlButtonGroup>
-      <SlButton type="neutral">Left</SlButton>
-      <SlButton type="neutral">Center</SlButton>
-      <SlButton type="neutral">Right</SlButton>
+      <SlButton variant="neutral">Left</SlButton>
+      <SlButton variant="neutral">Center</SlButton>
+      <SlButton variant="neutral">Right</SlButton>
     </SlButtonGroup>
 
     <br /><br />
 
     <SlButtonGroup>
-      <SlButton type="warning">Left</SlButton>
-      <SlButton type="warning">Center</SlButton>
-      <SlButton type="warning">Right</SlButton>
+      <SlButton variant="warning">Left</SlButton>
+      <SlButton variant="warning">Center</SlButton>
+      <SlButton variant="warning">Right</SlButton>
     </SlButtonGroup>
 
     <br /><br />
 
     <SlButtonGroup>
-      <SlButton type="danger">Left</SlButton>
-      <SlButton type="danger">Center</SlButton>
-      <SlButton type="danger">Right</SlButton>
+      <SlButton variant="danger">Left</SlButton>
+      <SlButton variant="danger">Center</SlButton>
+      <SlButton variant="danger">Right</SlButton>
     </SlButtonGroup>
   </>
 );
@@ -282,9 +282,9 @@ Create a split button using a button and a dropdown.
 
 ```html preview
 <sl-button-group> 
-  <sl-button type="primary">Save</sl-button>
+  <sl-button variant="primary">Save</sl-button>
   <sl-dropdown placement="bottom-end">
-    <sl-button slot="trigger" type="primary" caret></sl-button>
+    <sl-button slot="trigger" variant="primary" caret></sl-button>
     <sl-menu>
       <sl-menu-item>Save</sl-menu-item>
       <sl-menu-item>Save as&hellip;</sl-menu-item>
@@ -305,9 +305,9 @@ import {
 
 const App = () => (
   <SlButtonGroup> 
-    <SlButton type="primary">Save</SlButton>
+    <SlButton variant="primary">Save</SlButton>
     <SlDropdown placement="bottom-end">
-      <SlButton slot="trigger" type="primary" caret></SlButton>
+      <SlButton slot="trigger" variant="primary" caret></SlButton>
       <SlMenu>
         <SlMenuItem>Save</SlMenuItem>
         <SlMenuItem>Save as&hellip;</SlMenuItem>

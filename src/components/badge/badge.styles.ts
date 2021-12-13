@@ -24,7 +24,7 @@ export default css`
     cursor: inherit;
   }
 
-  /* Type modifiers */
+  /* Variant modifiers */
   .badge--primary {
     background-color: var(--sl-color-primary-600);
     color: var(--sl-color-neutral-0);

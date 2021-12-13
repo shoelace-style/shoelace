@@ -39,8 +39,8 @@ export default class SlButton extends LitElement {
   @state() private hasPrefix = false;
   @state() private hasSuffix = false;
 
-  /** The button's type. */
-  @property({ reflect: true }) type: 'default' | 'primary' | 'success' | 'neutral' | 'warning' | 'danger' | 'text' =
+  /** The button's variant. */
+  @property({ reflect: true }) variant: 'default' | 'primary' | 'success' | 'neutral' | 'warning' | 'danger' | 'text' =
     'default';
 
   /** The button's size. */
@@ -134,13 +134,13 @@ export default class SlButton extends LitElement {
         part="base"
         class=${classMap({
           button: true,
-          'button--default': this.type === 'default',
-          'button--primary': this.type === 'primary',
-          'button--success': this.type === 'success',
-          'button--neutral': this.type === 'neutral',
-          'button--warning': this.type === 'warning',
-          'button--danger': this.type === 'danger',
-          'button--text': this.type === 'text',
+          'button--default': this.variant === 'default',
+          'button--primary': this.variant === 'primary',
+          'button--success': this.variant === 'success',
+          'button--neutral': this.variant === 'neutral',
+          'button--warning': this.variant === 'warning',
+          'button--danger': this.variant === 'danger',
+          'button--text': this.variant === 'text',
           'button--small': this.size === 'small',
           'button--medium': this.size === 'medium',
           'button--large': this.size === 'large',

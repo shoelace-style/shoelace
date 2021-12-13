@@ -58,10 +58,10 @@ describe('<sl-badge>', () => {
     });
   });
 
-  ['primary', 'success', 'neutral', 'warning', 'danger'].forEach(type => {
-    describe(`when passed a type attribute ${type}`, () => {
+  ['primary', 'success', 'neutral', 'warning', 'danger'].forEach(variant => {
+    describe(`when passed a variant attribute ${variant}`, () => {
       before(async () => {
-        el = await fixture<SlBadge>(html`<sl-badge type="${type as any}">Badge</sl-badge>`);
+        el = await fixture<SlBadge>(html`<sl-badge variant="${variant as any}">Badge</sl-badge>`);
       });
 
       it('should render a component that passes accessibility test', async () => {
@@ -70,7 +70,7 @@ describe('<sl-badge>', () => {
 
       it('should default to square styling, with the primary color', async () => {
         const part = el.shadowRoot?.querySelector('[part="base"]') as HTMLElement;
-        expect(part.classList.value.trim()).to.eq(`badge badge--${type}`);
+        expect(part.classList.value.trim()).to.eq(`badge badge--${variant}`);
       });
     });
   });

@@ -18,16 +18,16 @@ const App = () => (
 
 ## Examples
 
-### Types
+### Variants
 
-Set the `type` attribute to change the badge's type.
+Set the `variant` attribute to change the badge's variant.
 
 ```html preview
-<sl-badge type="primary">Primary</sl-badge>
-<sl-badge type="success">Success</sl-badge>
-<sl-badge type="neutral">Neutral</sl-badge>
-<sl-badge type="warning">Warning</sl-badge>
-<sl-badge type="danger">Danger</sl-badge>
+<sl-badge variant="primary">Primary</sl-badge>
+<sl-badge variant="success">Success</sl-badge>
+<sl-badge variant="neutral">Neutral</sl-badge>
+<sl-badge variant="warning">Warning</sl-badge>
+<sl-badge variant="danger">Danger</sl-badge>
 ```
 
 ```jsx react
@@ -35,11 +35,11 @@ import { SlBadge } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <>
-    <SlBadge type="primary">Primary</SlBadge>
-    <SlBadge type="success">Success</SlBadge>
-    <SlBadge type="neutral">Neutral</SlBadge>
-    <SlBadge type="warning">Warning</SlBadge>
-    <SlBadge type="danger">Danger</SlBadge>  
+    <SlBadge variant="primary">Primary</SlBadge>
+    <SlBadge variant="success">Success</SlBadge>
+    <SlBadge variant="neutral">Neutral</SlBadge>
+    <SlBadge variant="warning">Warning</SlBadge>
+    <SlBadge variant="danger">Danger</SlBadge>  
   </>
 );
 ```
@@ -49,11 +49,11 @@ const App = () => (
 Use the `pill` attribute to give badges rounded edges.
 
 ```html preview
-<sl-badge type="primary" pill>Primary</sl-badge>
-<sl-badge type="success" pill>Success</sl-badge>
-<sl-badge type="neutral" pill>Neutral</sl-badge>
-<sl-badge type="warning" pill>Warning</sl-badge>
-<sl-badge type="danger" pill>Danger</sl-badge>
+<sl-badge variant="primary" pill>Primary</sl-badge>
+<sl-badge variant="success" pill>Success</sl-badge>
+<sl-badge variant="neutral" pill>Neutral</sl-badge>
+<sl-badge variant="warning" pill>Warning</sl-badge>
+<sl-badge variant="danger" pill>Danger</sl-badge>
 ```
 
 ```jsx react
@@ -61,11 +61,11 @@ import { SlBadge } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <>
-    <SlBadge type="primary" pill>Primary</SlBadge>
-    <SlBadge type="success" pill>Success</SlBadge>
-    <SlBadge type="neutral" pill>Neutral</SlBadge>
-    <SlBadge type="warning" pill>Warning</SlBadge>
-    <SlBadge type="danger" pill>Danger</SlBadge>  
+    <SlBadge variant="primary" pill>Primary</SlBadge>
+    <SlBadge variant="success" pill>Success</SlBadge>
+    <SlBadge variant="neutral" pill>Neutral</SlBadge>
+    <SlBadge variant="warning" pill>Warning</SlBadge>
+    <SlBadge variant="danger" pill>Danger</SlBadge>  
   </>
 );
 ```
@@ -76,11 +76,11 @@ Use the `pulse` attribute to draw attention to the badge with a subtle animation
 
 ```html preview
 <div class="badge-pulse">
-  <sl-badge type="primary" pill pulse>1</sl-badge>
-  <sl-badge type="success" pill pulse>1</sl-badge>
-  <sl-badge type="neutral" pill pulse>1</sl-badge>
-  <sl-badge type="warning" pill pulse>1</sl-badge>
-  <sl-badge type="danger" pill pulse>1</sl-badge>
+  <sl-badge variant="primary" pill pulse>1</sl-badge>
+  <sl-badge variant="success" pill pulse>1</sl-badge>
+  <sl-badge variant="neutral" pill pulse>1</sl-badge>
+  <sl-badge variant="warning" pill pulse>1</sl-badge>
+  <sl-badge variant="danger" pill pulse>1</sl-badge>
 </div>
 
 <style>
@@ -102,11 +102,11 @@ const css = `
 const App = () => (
   <>
     <div className="badge-pulse">
-      <SlBadge type="primary" pill pulse>1</SlBadge>
-      <SlBadge type="success" pill pulse>1</SlBadge>
-      <SlBadge type="neutral" pill pulse>1</SlBadge>
-      <SlBadge type="warning" pill pulse>1</SlBadge>
-      <SlBadge type="danger" pill pulse>1</SlBadge>
+      <SlBadge variant="primary" pill pulse>1</SlBadge>
+      <SlBadge variant="success" pill pulse>1</SlBadge>
+      <SlBadge variant="neutral" pill pulse>1</SlBadge>
+      <SlBadge variant="warning" pill pulse>1</SlBadge>
+      <SlBadge variant="danger" pill pulse>1</SlBadge>
     </div>
 
     <style>{css}</style>
@@ -126,12 +126,12 @@ One of the most common use cases for badges is attaching them to buttons. To mak
 
 <sl-button style="margin-left: 1rem;">
   Warnings
-  <sl-badge type="warning" pill>8</sl-badge>
+  <sl-badge variant="warning" pill>8</sl-badge>
 </sl-button>
 
 <sl-button style="margin-left: 1rem;">
   Errors
-  <sl-badge type="danger" pill>6</sl-badge>
+  <sl-badge variant="danger" pill>6</sl-badge>
 </sl-button>
 ```
 
@@ -147,12 +147,12 @@ const App = () => (
 
     <SlButton style={{ marginLeft: '1rem' }}>
       Warnings
-      <SlBadge type="warning" pill>8</SlBadge>
+      <SlBadge variant="warning" pill>8</SlBadge>
     </SlButton>
 
     <SlButton style={{ marginLeft: '1rem' }}>
       Errors
-      <SlBadge type="danger" pill>6</SlBadge>
+      <SlBadge variant="danger" pill>6</SlBadge>
     </SlButton>
   </>
 );
@@ -165,8 +165,8 @@ When including badges in menu items, use the `suffix` slot to make sure they're 
 ```html preview
 <sl-menu style="max-width: 240px; border: solid 1px var(--sl-panel-border-color); border-radius: var(--sl-border-radius-medium);">
   <sl-menu-label>Messages</sl-menu-label>
-  <sl-menu-item>Comments <sl-badge slot="suffix" type="neutral" pill>4</sl-badge></sl-menu-item>
-  <sl-menu-item>Replies <sl-badge slot="suffix" type="neutral" pill>12</sl-badge></sl-menu-item>
+  <sl-menu-item>Comments <sl-badge slot="suffix" variant="neutral" pill>4</sl-badge></sl-menu-item>
+  <sl-menu-item>Replies <sl-badge slot="suffix" variant="neutral" pill>12</sl-badge></sl-menu-item>
 </sl-menu>
 ```
 
@@ -182,8 +182,8 @@ const App = () => (
     }}
   >
     <SlMenuLabel>Messages</SlMenuLabel>
-    <SlMenuItem>Comments <SlBadge slot="suffix" type="neutral" pill>4</SlBadge></SlMenuItem>
-    <SlMenuItem>Replies <SlBadge slot="suffix" type="neutral" pill>12</SlBadge></SlMenuItem>
+    <SlMenuItem>Comments <SlBadge slot="suffix" variant="neutral" pill>4</SlBadge></SlMenuItem>
+    <SlMenuItem>Replies <SlBadge slot="suffix" variant="neutral" pill>12</SlBadge></SlMenuItem>
   </SlMenu>
 );
 ```

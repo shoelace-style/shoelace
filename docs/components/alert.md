@@ -2,7 +2,7 @@
 
 [component-header:sl-alert]
 
-Alerts are used to display important messages either inline or as toast notifications.
+Alerts are used to display important messages inline or as toast notifications.
 
 ```html preview
 <sl-alert open>
@@ -26,12 +26,12 @@ const App = () => (
 
 ## Examples
 
-### Types
+### Variants
 
-Set the `type` attribute to change the alert's type.
+Set the `variant` attribute to change the alert's variant.
 
 ```html preview
-<sl-alert type="primary" open>
+<sl-alert variant="primary" open>
   <sl-icon slot="icon" name="info-circle"></sl-icon>
   <strong>This is super informative</strong><br>
   You can tell by how pretty the alert is.
@@ -39,7 +39,7 @@ Set the `type` attribute to change the alert's type.
 
 <br>
 
-<sl-alert type="success" open>
+<sl-alert variant="success" open>
   <sl-icon slot="icon" name="check2-circle"></sl-icon>
   <strong>Your changes have been saved</strong><br>
   You can safely exit the app now.
@@ -47,7 +47,7 @@ Set the `type` attribute to change the alert's type.
 
 <br>
 
-<sl-alert type="neutral" open>
+<sl-alert variant="neutral" open>
   <sl-icon slot="icon" name="gear"></sl-icon>
   <strong>Your settings have been updated</strong><br>
   Settings will take affect on next login.
@@ -55,7 +55,7 @@ Set the `type` attribute to change the alert's type.
 
 <br>
 
-<sl-alert type="warning" open>
+<sl-alert variant="warning" open>
   <sl-icon slot="icon" name="exclamation-triangle"></sl-icon>
   <strong>Your session has ended</strong><br>
   Please login again to continue.
@@ -63,7 +63,7 @@ Set the `type` attribute to change the alert's type.
 
 <br>
 
-<sl-alert type="danger" open>
+<sl-alert variant="danger" open>
   <sl-icon slot="icon" name="exclamation-octagon"></sl-icon>
     <strong>Your account has been deleted</strong><br>
     We're very sorry to see you go!
@@ -75,7 +75,7 @@ import { SlAlert, SlIcon } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <>
-    <SlAlert type="primary" open>
+    <SlAlert variant="primary" open>
       <SlIcon slot="icon" name="info-circle" />
       <strong>This is super informative</strong><br />
       You can tell by how pretty the alert is.
@@ -83,7 +83,7 @@ const App = () => (
 
     <br />
 
-    <SlAlert type="success" open>
+    <SlAlert variant="success" open>
       <SlIcon slot="icon" name="check2-circle" />
       <strong>Your changes have been saved</strong><br />
       You can safely exit the app now.
@@ -91,7 +91,7 @@ const App = () => (
 
     <br />
 
-    <SlAlert type="neutral" open>
+    <SlAlert variant="neutral" open>
       <SlIcon slot="icon" name="gear" />
       <strong>Your settings have been updated</strong><br />
       Settings will take affect on next login.
@@ -99,7 +99,7 @@ const App = () => (
 
     <br />
 
-    <SlAlert type="warning" open>
+    <SlAlert variant="warning" open>
       <SlIcon slot="icon" name="exclamation-triangle" />
       <strong>Your session has ended</strong><br />
       Please login again to continue.
@@ -107,7 +107,7 @@ const App = () => (
 
     <br />
 
-    <SlAlert type="danger" open>
+    <SlAlert variant="danger" open>
       <SlIcon slot="icon" name="exclamation-octagon" />
         <strong>Your account has been deleted</strong><br />
         We're very sorry to see you go!
@@ -121,7 +121,7 @@ const App = () => (
 Add the `closable` attribute to show a close button that will hide the alert.
 
 ```html preview
-<sl-alert type="primary" open closable class="alert-closable">
+<sl-alert variant="primary" open closable class="alert-closable">
   <sl-icon slot="icon" name="info-circle"></sl-icon>
   You can close this alert any time!
 </sl-alert>
@@ -164,7 +164,7 @@ const App = () => {
 Icons are optional. Simply omit the `icon` slot if you don't want them.
 
 ```html preview
-<sl-alert type="primary" open>
+<sl-alert variant="primary" open>
   Nothing fancy here, just a simple alert.
 </sl-alert>
 ```
@@ -173,7 +173,7 @@ Icons are optional. Simply omit the `icon` slot if you don't want them.
 import { SlAlert } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
-  <SlAlert type="primary" open>
+  <SlAlert variant="primary" open>
     Nothing fancy here, just a simple alert.
   </SlAlert>
 );
@@ -185,9 +185,9 @@ Set the `duration` attribute to automatically hide an alert after a period of ti
 
 ```html preview
 <div class="alert-duration">
-  <sl-button type="primary">Show Alert</sl-button>
+  <sl-button variant="primary">Show Alert</sl-button>
 
-  <sl-alert type="primary" duration="3000" closable>
+  <sl-alert variant="primary" duration="3000" closable>
     <sl-icon slot="icon" name="info-circle"></sl-icon>
     This alert will automatically hide itself after three seconds, unless you interact with it.
   </sl-alert>
@@ -228,10 +228,10 @@ const App = () => {
   return (
     <>
       <div className="alert-duration">
-        <SlButton type="primary" onClick={() => setOpen(true)}>Show Alert</SlButton>
+        <SlButton variant="primary" onClick={() => setOpen(true)}>Show Alert</SlButton>
 
         <SlAlert 
-          type="primary" 
+          variant="primary" 
           duration="3000" 
           open={open} 
           closable 
@@ -256,37 +256,37 @@ You should always use the `closable` attribute so users can dismiss the notifica
 
 ```html preview
 <div class="alert-toast">
-  <sl-button type="primary">Primary</sl-button>
-  <sl-button type="success">Success</sl-button>
-  <sl-button type="neutral">Neutral</sl-button>
-  <sl-button type="warning">Warning</sl-button>
-  <sl-button type="danger">Danger</sl-button>
+  <sl-button variant="primary">Primary</sl-button>
+  <sl-button variant="success">Success</sl-button>
+  <sl-button variant="neutral">Neutral</sl-button>
+  <sl-button variant="warning">Warning</sl-button>
+  <sl-button variant="danger">Danger</sl-button>
   
-  <sl-alert type="primary" duration="3000" closable>
+  <sl-alert variant="primary" duration="3000" closable>
     <sl-icon slot="icon" name="info-circle"></sl-icon>
     <strong>This is super informative</strong><br>
     You can tell by how pretty the alert is.
   </sl-alert>
 
-  <sl-alert type="success" duration="3000" closable>
+  <sl-alert variant="success" duration="3000" closable>
     <sl-icon slot="icon" name="check2-circle"></sl-icon>
     <strong>Your changes have been saved</strong><br>
     You can safely exit the app now.
   </sl-alert>
 
-  <sl-alert type="neutral" duration="3000" closable>
+  <sl-alert variant="neutral" duration="3000" closable>
     <sl-icon slot="icon" name="gear"></sl-icon>
     <strong>Your settings have been updated</strong><br>
     Settings will take affect on next login.
   </sl-alert>
 
-  <sl-alert type="warning" duration="3000" closable>
+  <sl-alert variant="warning" duration="3000" closable>
     <sl-icon slot="icon" name="exclamation-triangle"></sl-icon>
     <strong>Your session has ended</strong><br>
     Please login again to continue.
   </sl-alert>
 
-  <sl-alert type="danger" duration="3000" closable>
+  <sl-alert variant="danger" duration="3000" closable>
     <sl-icon slot="icon" name="exclamation-octagon"></sl-icon>
     <strong>Your account has been deleted</strong><br>
     We're very sorry to see you go!
@@ -296,9 +296,9 @@ You should always use the `closable` attribute so users can dismiss the notifica
 <script>
   const container = document.querySelector('.alert-toast');
 
-  ['primary', 'success', 'neutral', 'warning', 'danger'].map(type => {
-    const button = container.querySelector(`sl-button[type="${type}"]`);
-    const alert = container.querySelector(`sl-alert[type="${type}"]`);
+  ['primary', 'success', 'neutral', 'warning', 'danger'].map(variant => {
+    const button = container.querySelector(`sl-button[variant="${variant}"]`);
+    const alert = container.querySelector(`sl-alert[variant="${variant}"]`);
 
     button.addEventListener('click', () => alert.toast());
   });
@@ -326,51 +326,51 @@ const App = () => {
 
   return (
     <>
-      <SlButton type="primary" onClick={() => primary.current.toast()}>
+      <SlButton variant="primary" onClick={() => primary.current.toast()}>
         Primary
       </SlButton>
 
-      <SlButton type="success" onClick={() => success.current.toast()}>
+      <SlButton variant="success" onClick={() => success.current.toast()}>
         Success
       </SlButton>
 
-      <SlButton type="neutral" onClick={() => neutral.current.toast()}>
+      <SlButton variant="neutral" onClick={() => neutral.current.toast()}>
         Neutral
       </SlButton>
 
-      <SlButton type="warning" onClick={() => warning.current.toast()}>
+      <SlButton variant="warning" onClick={() => warning.current.toast()}>
         Warning
       </SlButton>
 
-      <SlButton type="danger" onClick={() => danger.current.toast()}>
+      <SlButton variant="danger" onClick={() => danger.current.toast()}>
         Danger
       </SlButton>
 
-      <SlAlert ref={primary} type="primary" duration="3000" closable>
+      <SlAlert ref={primary} variant="primary" duration="3000" closable>
         <SlIcon slot="icon" name="info-circle" />
         <strong>This is super informative</strong><br />
         You can tell by how pretty the alert is.
       </SlAlert>
 
-      <SlAlert ref={success} type="success" duration="3000" closable>
+      <SlAlert ref={success} variant="success" duration="3000" closable>
         <SlIcon slot="icon" name="check2-circle" />
         <strong>Your changes have been saved</strong><br />
         You can safely exit the app now.
       </SlAlert>
 
-      <SlAlert ref={neutral} type="neutral" duration="3000" closable>
+      <SlAlert ref={neutral} variant="neutral" duration="3000" closable>
         <SlIcon slot="icon" name="gear" />
         <strong>Your settings have been updated</strong><br />
         Settings will take affect on next login.
       </SlAlert>
 
-      <SlAlert ref={warning} type="warning" duration="3000" closable>
+      <SlAlert ref={warning} variant="warning" duration="3000" closable>
         <SlIcon slot="icon" name="exclamation-triangle" />
         <strong>Your session has ended</strong><br />
         Please login again to continue.
       </SlAlert>
 
-      <SlAlert ref={danger} type="danger" duration="3000" closable>
+      <SlAlert ref={danger} variant="danger" duration="3000" closable>
         <SlIcon slot="icon" name="exclamation-octagon" />
         <strong>Your account has been deleted</strong><br />
         We're very sorry to see you go!
@@ -386,7 +386,7 @@ For convenience, you can create a utility that emits toast notifications with a 
 
 ```html preview
 <div class="alert-toast-wrapper">
-  <sl-button type="primary">Create Toast</sl-button>
+  <sl-button variant="primary">Create Toast</sl-button>
 </div>
 
 <script>
@@ -402,9 +402,9 @@ For convenience, you can create a utility that emits toast notifications with a 
   }  
 
   // Custom function to emit toast notifications
-  function notify(message, type = 'primary', icon = 'info-circle', duration = 3000) {
+  function notify(message, variant = 'primary', icon = 'info-circle', duration = 3000) {
     const alert = Object.assign(document.createElement('sl-alert'), {
-      type: type,
+      variant,
       closable: true,
       duration: duration,
       innerHTML: `

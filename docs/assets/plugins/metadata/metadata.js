@@ -357,11 +357,11 @@
             </div>
 
             <div class="component-header__info">
-              <sl-badge type="neutral" pill>
+              <sl-badge variant="neutral" pill>
                 Since ${component.since || '?'}
               </sl-badge>
 
-              <sl-badge type="${badgeType}" pill style="text-transform: capitalize;">
+              <sl-badge variant="${badgeType}" pill style="text-transform: capitalize;">
                 ${component.status}
               </sl-badge>
             </div>

@@ -17,7 +17,7 @@ Cards can be used to group related subjects in a container.
   <small>6 weeks old</small>
 
   <div slot="footer">
-    <sl-button type="primary" pill>More Info</sl-button>
+    <sl-button variant="primary" pill>More Info</sl-button>
     <sl-rating></sl-rating>
   </div>
 </sl-card>
@@ -76,7 +76,7 @@ const App = () => (
       <small>6 weeks old</small>
 
       <div slot="footer">
-        <SlButton type="primary" pill>More Info</SlButton>
+        <SlButton variant="primary" pill>More Info</SlButton>
         <SlRating></SlRating>
       </div>
     </SlCard>
@@ -210,7 +210,7 @@ Footers can be used to display actions, summaries, or other relevant content.
 
   <div slot="footer">
     <sl-rating></sl-rating>
-    <sl-button slot="footer" type="primary">Preview</sl-button>
+    <sl-button slot="footer" variant="primary">Preview</sl-button>
   </div>
 </sl-card>
 
@@ -253,7 +253,7 @@ const App = () => (
 
       <div slot="footer">
         <SlRating></SlRating>
-        <SlButton slot="footer" type="primary">Preview</SlButton>
+        <SlButton slot="footer" variant="primary">Preview</SlButton>
       </div>
     </SlCard>
 

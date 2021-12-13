@@ -24,8 +24,8 @@ import '../icon-button/icon-button';
 export default class SlTag extends LitElement {
   static styles = styles;
 
-  /** The tag's type. */
-  @property({ reflect: true }) type: 'primary' | 'success' | 'neutral' | 'warning' | 'danger' | 'text' = 'neutral';
+  /** The tag's variant. */
+  @property({ reflect: true }) variant: 'primary' | 'success' | 'neutral' | 'warning' | 'danger' | 'text' = 'neutral';
 
   /** The tag's size. */
   @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
@@ -48,12 +48,12 @@ export default class SlTag extends LitElement {
           tag: true,
 
           // Types
-          'tag--primary': this.type === 'primary',
-          'tag--success': this.type === 'success',
-          'tag--neutral': this.type === 'neutral',
-          'tag--warning': this.type === 'warning',
-          'tag--danger': this.type === 'danger',
-          'tag--text': this.type === 'text',
+          'tag--primary': this.variant === 'primary',
+          'tag--success': this.variant === 'success',
+          'tag--neutral': this.variant === 'neutral',
+          'tag--warning': this.variant === 'warning',
+          'tag--danger': this.variant === 'danger',
+          'tag--text': this.variant === 'text',
 
           // Sizes
           'tag--small': this.size === 'small',

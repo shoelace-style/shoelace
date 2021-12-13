@@ -34,7 +34,7 @@ Every Shoelace component is available to import as a React component. Note that 
 import { SlButton } from '@shoelace-style/shoelace/dist/react';
 
 const MyComponent = () => (
-  <SlButton type="primary">
+  <SlButton variant="primary">
     Click me
   </SlButton>
 );
