@@ -8,7 +8,7 @@ export default css`
     --track-width: 2px;
     --track-color: rgb(128 128 128 / 25%);
     --indicator-color: var(--sl-color-primary-600);
-    --speed: 2.5s;
+    --speed: 800ms;
 
     display: inline-flex;
     width: 1em;
@@ -39,6 +39,9 @@ export default css`
   .spinner__indicator {
     stroke: var(--indicator-color);
     stroke-linecap: round;
+    /* stroke-dasharray: (2πr x p), (2πr) where p is the percentage to display */
+    stroke-dasharray: calc(2 * 3.141592 * calc(0.5em - var(--track-width) / 2) * 0.75),
+      calc(2 * 3.141592 * calc(0.5em - var(--track-width) / 2));
     transform-origin: 50% 50%;
     transform: rotate(90deg);
     animation: spin var(--speed) linear infinite;
@@ -46,18 +49,11 @@ export default css`
 
   @keyframes spin {
     0% {
-      stroke-dasharray: 0.2em 3em;
       transform: rotate(0deg);
     }
 
-    50% {
-      stroke-dasharray: 2.2em 3em;
-      transform: rotate(450deg);
-    }
-
     100% {
-      stroke-dasharray: 0.2em 3em;
-      transform: rotate(1080deg);
+      transform: rotate(360deg);
     }
   }
 `;

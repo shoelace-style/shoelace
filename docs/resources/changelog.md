@@ -12,6 +12,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - 🚨 BREAKING: removed `base` part from `<sl-divider>` to simplify the styling API
 - Fixed bug where setting `tooltipFormatter` on `<sl-range>` in JSX causes React@experimental to error out
 - Refactored `<sl-button>` to use Lit's static expressions to reduce code
+- Simplified `<sl-spinner>` animation
 
 ## 2.0.0-beta.62
 
