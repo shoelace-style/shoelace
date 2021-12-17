@@ -179,6 +179,12 @@ export default class SlSelect extends LitElement {
     return Array.isArray(this.value) ? this.value : [this.value];
   }
 
+  /** Sets focus on the control. */
+  focus(options?: FocusOptions) {
+    const box = this.shadowRoot?.querySelector('.select__control') as HTMLElement;
+    box.focus(options);
+  }
+
   handleBlur() {
     // Don't blur if the control is open. We'll move focus back once it closes.
     if (!this.isOpen) {
@@ -271,8 +277,7 @@ export default class SlSelect extends LitElement {
   }
 
   handleLabelClick() {
-    const box = this.shadowRoot?.querySelector('.select__control') as HTMLElement;
-    box.focus();
+    this.focus();
   }
 
   handleMenuSelect(event: CustomEvent) {
