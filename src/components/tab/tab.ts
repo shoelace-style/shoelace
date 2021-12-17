@@ -29,7 +29,7 @@ export default class SlTab extends LitElement {
 
   @query('.tab') tab: HTMLElement;
 
-  private componentId = `tab-${++id}`;
+  private componentId = `sl-tab-${++id}`;
 
   /** The name of the tab panel the tab will control. The panel must be located in the same tab group. */
   @property({ reflect: true }) panel = '';

@@ -18,7 +18,7 @@ let id = 0;
 export default class SlTabPanel extends LitElement {
   static styles = styles;
 
-  private componentId = `tab-panel-${++id}`;
+  private componentId = `sl-tab-panel-${++id}`;
 
   /** The tab panel's name. */
   @property({ reflect: true }) name = '';
