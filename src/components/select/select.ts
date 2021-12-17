@@ -181,8 +181,12 @@ export default class SlSelect extends LitElement {
 
   /** Sets focus on the control. */
   focus(options?: FocusOptions) {
-    const box = this.shadowRoot?.querySelector('.select__control') as HTMLElement;
-    box.focus(options);
+    this.control.focus(options);
+  }
+
+  /** Removes focus from the control. */
+  blur() {
+    this.control.blur();
   }
 
   handleBlur() {
@@ -452,7 +456,7 @@ export default class SlSelect extends LitElement {
           part="base"
           .hoist=${this.hoist}
           .stayOpenOnSelect=${this.multiple}
-          .containingElement=${this}
+          .containingElement=${this as HTMLElement}
           ?disabled=${this.disabled}
           class=${classMap({
             select: true,

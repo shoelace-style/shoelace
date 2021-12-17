@@ -10,6 +10,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 - 🚨 BREAKING: changed the `type` attribute to `variant` in `<sl-alert>`, `<sl-badge>`, `<sl-button>`, and `<sl-tag>` since it's more appropriate and to disambiguate from other `type` attributes
 - 🚨 BREAKING: removed `base` part from `<sl-divider>` to simplify the styling API
+- Added `focus()` and `blur()` methods to `<sl-select>` [#625](https://github.com/shoelace-style/shoelace/pull/625)
 - Fixed bug where setting `tooltipFormatter` on `<sl-range>` in JSX causes React@experimental to error out
 - Refactored `<sl-button>` to use Lit's static expressions to reduce code
 - Simplified `<sl-spinner>` animation

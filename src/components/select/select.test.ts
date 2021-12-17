@@ -22,7 +22,7 @@ describe('<sl-select>', () => {
     expect(changeHandler).to.have.been.calledOnce;
   });
 
-  it('should  open the menu when any letter key is pressed with sl-select is on focus', async () => {
+  it('should open the menu when any letter key is pressed with sl-select is on focus', async () => {
     const el = (await fixture(html`
       <sl-select>
         <sl-menu-item value="option-1">Option 1</sl-menu-item>
