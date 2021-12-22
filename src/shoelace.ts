@@ -42,6 +42,7 @@ export { default as SlResponsiveMedia } from './components/responsive-media/resp
 export { default as SlSelect } from './components/select/select';
 export { default as SlSkeleton } from './components/skeleton/skeleton';
 export { default as SlSpinner } from './components/spinner/spinner';
+export { default as SlSplitPanel } from './components/split-panel/split-panel';
 export { default as SlSwitch } from './components/switch/switch';
 export { default as SlTab } from './components/tab/tab';
 export { default as SlTabGroup } from './components/tab-group/tab-group';

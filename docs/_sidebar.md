@@ -58,6 +58,7 @@
   - [Tag](/components/tag)
   - [Textarea](/components/textarea)
   - [Tooltip](/components/tooltip)
+  - [Split Panel](/components/split-panel)
   <!--plop:component-->
 
 - Utilities
