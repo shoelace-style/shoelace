@@ -51,6 +51,7 @@
   - [Select](/components/select)
   - [Skeleton](/components/skeleton)
   - [Spinner](/components/spinner)
+  - [Split Panel](/components/split-panel)
   - [Switch](/components/switch)
   - [Tab Group](/components/tab-group)
   - [Tab](/components/tab)
@@ -58,7 +59,6 @@
   - [Tag](/components/tag)
   - [Textarea](/components/textarea)
   - [Tooltip](/components/tooltip)
-  - [Split Panel](/components/split-panel)
   <!--plop:component-->
 
 - Utilities
