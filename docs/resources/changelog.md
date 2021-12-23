@@ -6,7 +6,7 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
-## Next
+## 2.0.0-beta.63
 
 - 🚨 BREAKING: changed the `type` attribute to `variant` in `<sl-alert>`, `<sl-badge>`, `<sl-button>`, and `<sl-tag>` since it's more appropriate and to disambiguate from other `type` attributes
 - 🚨 BREAKING: removed `base` part from `<sl-divider>` to simplify the styling API
