@@ -137,21 +137,6 @@ When the host element is resized, the fixed panel will maintain its size and the
 </script>
 ```
 
-### Minimum and Maximum Sizes
-
-To set a minimum or maximum size of each panel, use the `--start-min`, `--start-max`, `--end-min`, and `--end-max` custom properties.
-
-```html preview
-<sl-split-panel style="--end-min: 25%; --end-max: 75%;">
-  <div slot="start">
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat, suscipit animi. Exercitationem, modi tenetur, voluptatibus magnam qui excepturi quasi autem et odit, recusandae obcaecati! Quaerat possimus facilis tempora consequatur officia?
-  </div>
-  <div slot="end">
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat, suscipit animi. Exercitationem, modi tenetur, voluptatibus magnam qui excepturi quasi autem et odit, recusandae obcaecati! Quaerat possimus facilis tempora consequatur officia?
-  </div>
-</sl-split-panel>
-```
-
 ### Nested Split Panels
 
 Create complex layouts that can be resized independently by nesting split panels.
@@ -179,7 +164,40 @@ Create complex layouts that can be resized independently by nesting split panels
 You can target the `divider` part to apply CSS properties to the divider. Optionally, you can slot an element into the `handle` slot to show a handle.
 
 ```html preview
-TODO
+<div class="split-panel-custom-divider">
+  <sl-split-panel>
+    <sl-icon slot="handle" name="grip-vertical"></sl-icon>
+    <div slot="start">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat, suscipit animi. Exercitationem, modi tenetur, voluptatibus magnam qui excepturi quasi autem et odit, recusandae obcaecati! Quaerat possimus facilis tempora consequatur officia?
+    </div>
+    <div slot="end">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat, suscipit animi. Exercitationem, modi tenetur, voluptatibus magnam qui excepturi quasi autem et odit, recusandae obcaecati! Quaerat possimus facilis tempora consequatur officia?
+    </div>
+  </sl-split-panel>
+</div>
+
+<style>
+  .split-panel-custom-divider sl-split-panel::part(divider) {
+    background-color: var(--sl-color-pink-600);
+  }
+
+  .split-panel-custom-divider sl-icon {
+    position: absolute;
+    border-radius: var(--sl-border-radius-small);
+    background: var(--sl-color-pink-600);
+    color: var(--sl-color-neutral-0);
+    padding: .5rem .125rem;
+  }
+
+  .split-panel-custom-divider sl-split-panel::part(divider):focus-visible {
+    background-color: var(--sl-color-primary-600);
+  }
+
+  .split-panel-custom-divider sl-split-panel:focus-within sl-icon {
+    background-color: var(--sl-color-primary-600);
+    color: var(--sl-color-neutral-0);
+  }
+</style>
 ```
 
 [component-metadata:sl-split-panel]

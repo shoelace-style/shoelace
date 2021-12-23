@@ -8,6 +8,7 @@ const translation: Translation = {
 
   close: 'Close',
   copy: 'Copy',
+  drag_to_resize: 'Drag to resize',
   progress: 'Progress',
   scroll_to_end: 'Scroll to end',
   scroll_to_start: 'Scroll to start',

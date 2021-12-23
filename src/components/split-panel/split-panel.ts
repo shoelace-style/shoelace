@@ -5,6 +5,7 @@ import { styleMap } from 'lit/directives/style-map.js';
 import { clamp } from '../../internal/math';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
+import { LocalizeController } from '../../utilities/localize';
 import styles from './split-panel.styles';
 
 /**
@@ -14,8 +15,11 @@ import styles from './split-panel.styles';
  * @event sl-reposition - Emitted when the divider is repositioned.
  * @event {{ entries: ResizeObserverEntry[] }} sl-resize - Emitted when the container is resized.
  *
+ * @csspart divider - The divider that separates the start and end panels.
+ *
  * @slot start - The start panel.
  * @slot end - The end panel.
+ * @slot handle - An optional handle to render at the center of the divider.
  *
  * @cssproperty [--divider-width=4px] - The width of the visible divider.
  * @cssproperty [--divider-hit-area=12px] - The invisible area around the divider where dragging can occur.
@@ -24,6 +28,7 @@ import styles from './split-panel.styles';
 export default class SlSplitPanel extends LitElement {
   static styles = styles;
 
+  private localize = new LocalizeController(this);
   private resizeObserver: ResizeObserver;
   private size: number;
 
@@ -75,20 +80,46 @@ export default class SlSplitPanel extends LitElement {
     }
   }
 
-  handleDrag(event: MouseEvent | TouchEvent) {
-    const isMouseEvent = event instanceof MouseEvent;
-    const originalX = isMouseEvent ? event.pageX : event.changedTouches[0].pageX;
-    const originalY = isMouseEvent ? event.pageY : event.changedTouches[0].pageY;
-    const original = this.vertical ? originalY : originalX;
-    const originalPosition = Number(this.position);
+  handleDrag(event: Event) {
+    if (this.disabled) {
+      return;
+    }
 
-    const move = (event: MouseEvent | TouchEvent) => {
-      const isMouseEvent = event instanceof MouseEvent;
-      const currentX = isMouseEvent ? event.pageX : event.changedTouches[0].pageX;
-      const currentY = isMouseEvent ? event.pageY : event.changedTouches[0].pageY;
-      const current = this.vertical ? currentY : currentX;
-      let delta = this.fixed === 'end' ? original - current : current - original;
-      let newPosition = originalPosition + delta;
+    // Prevent text selection when dragging
+    event.preventDefault();
+
+    function drag(container: HTMLElement, onMove: (x: number, y: number) => void) {
+      const move = (event: any) => {
+        const dims = container.getBoundingClientRect();
+        const defaultView = container.ownerDocument.defaultView!;
+        const offsetX = dims.left + defaultView.pageXOffset;
+        const offsetY = dims.top + defaultView.pageYOffset;
+        const x = (event.changedTouches ? event.changedTouches[0].pageX : event.pageX) - offsetX;
+        const y = (event.changedTouches ? event.changedTouches[0].pageY : event.pageY) - offsetY;
+
+        onMove(x, y);
+      };
+
+      const stop = () => {
+        document.removeEventListener('mousemove', move);
+        document.removeEventListener('touchmove', move);
+        document.removeEventListener('mouseup', stop);
+        document.removeEventListener('touchend', stop);
+      };
+
+      document.addEventListener('mousemove', move, { passive: true });
+      document.addEventListener('touchmove', move, { passive: true });
+      document.addEventListener('mouseup', stop);
+      document.addEventListener('touchend', stop);
+    }
+
+    drag(this, (x, y) => {
+      let newPosition = this.vertical ? y : x;
+
+      // Flip for end panels
+      if (this.fixed === 'end') {
+        newPosition = this.size - newPosition;
+      }
 
       // Check snap points
       if (this.snap) {
@@ -110,24 +141,7 @@ export default class SlSplitPanel extends LitElement {
       }
 
       this.position = clamp(newPosition, 0, this.size);
-    };
-
-    const stop = () => {
-      document.removeEventListener('mousemove', move);
-      document.removeEventListener('touchmove', move);
-      document.removeEventListener('mouseup', stop);
-      document.removeEventListener('touchend', stop);
-    };
-
-    if (!this.disabled) {
-      document.addEventListener('mousemove', move);
-      document.addEventListener('touchmove', move);
-      document.addEventListener('mouseup', stop);
-      document.addEventListener('touchend', stop);
-    }
-
-    // Prevent text selection
-    event.preventDefault();
+    });
   }
 
   handleKeyDown(event: KeyboardEvent) {
@@ -197,11 +211,11 @@ export default class SlSplitPanel extends LitElement {
     // TODO - custom divider styles + handle
 
     if (this.fixed === 'end') {
-      start = `1 1 0%`;
+      start = `1 1 auto`;
       end = `0 0 calc((${this.position}px - var(--divider-width) / 2)`;
     } else {
       start = `0 0 calc(${this.position}px - var(--divider-width) / 2)`;
-      end = `1 1 0%`;
+      end = `1 1 auto`;
     }
 
     return html`
@@ -215,12 +229,17 @@ export default class SlSplitPanel extends LitElement {
       </div>
 
       <div
+        part="divider"
         class="divider"
         tabindex=${ifDefined(this.disabled ? undefined : '0')}
+        role="separator"
+        aria-label=${this.localize.term('drag_to_resize')}
         @keydown=${this.handleKeyDown}
         @mousedown=${this.handleDrag}
         @touchstart=${this.handleDrag}
-      ></div>
+      >
+        <slot name="handle"></slot>
+      </div>
 
       <div
         class="end"

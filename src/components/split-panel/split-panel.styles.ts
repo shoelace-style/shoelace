@@ -8,10 +8,6 @@ export default css`
   :host {
     --divider-width: 4px;
     --divider-hit-area: 12px;
-    --start-min: 0%;
-    --start-max: 100%;
-    --end-min: 0%;
-    --end-max: 100%;
 
     display: flex;
   }
@@ -30,8 +26,11 @@ export default css`
   }
 
   .divider {
-    position: relative;
     flex: 0 0 var(--divider-width);
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
     background-color: var(--sl-color-neutral-200);
     z-index: 1;
   }
@@ -49,14 +48,9 @@ export default css`
   }
 
   /* Horizontal */
-  :host(:not([vertical])) .start {
-    min-width: var(--start-min);
-    max-width: var(--start-max);
-  }
-
+  :host(:not([vertical])) .start,
   :host(:not([vertical])) .end {
-    min-width: var(--end-min);
-    max-width: var(--end-max);
+    max-width: 100%;
   }
 
   :host(:not([vertical], [disabled])) .divider {
@@ -64,6 +58,7 @@ export default css`
   }
 
   :host(:not([vertical])) .divider::after {
+    display: flex;
     content: '';
     position: absolute;
     height: 100%;
@@ -76,14 +71,9 @@ export default css`
     flex-direction: column;
   }
 
-  :host([vertical]) .start {
-    min-height: var(--start-min);
-    max-height: var(--start-max);
-  }
-
+  :host([vertical]) .start,
   :host([vertical]) .end {
-    min-height: var(--end-min);
-    max-height: var(--end-max);
+    max-height: 100%;
   }
 
   :host([vertical]:not([disabled])) .divider {
