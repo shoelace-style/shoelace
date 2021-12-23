@@ -142,7 +142,9 @@ Try resizing the example below with each option and notice how the panels respon
 
 ### Min & Max
 
-To set a minimum or maximum size of the primary panel, use the `--min` and `--max` custom properties. Since the secondary panel is flexible, size restrictions can only be applied to the primary panel. This examples shows how you can make both panels be a minimum of 150px using `--min`, `--max`, and the `calc()` function.
+To set a minimum or maximum size of the primary panel, use the `--min` and `--max` custom properties. Since the secondary panel is flexible, size constraints can only be applied to the primary panel (or the `start` panel if a primary panel isn't designated).
+
+This examples demonstrates how you can make both panels be a minimum of 150px using `--min`, `--max`, and the `calc()` function.
 
 ```html preview
 <sl-split-panel style="--min: 150px; --max: calc(100% - 150px);">

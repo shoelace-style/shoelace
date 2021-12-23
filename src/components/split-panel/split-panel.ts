@@ -13,14 +13,14 @@ import styles from './split-panel.styles';
  *
  * @event sl-reposition - Emitted when the divider's position changes.
  *
- * @csspart divider - The divider that separates both panels.
+ * @csspart divider - The divider that separates the primary and secondary panels.
  *
  * @slot start - The start panel.
  * @slot end - The end panel.
  * @slot handle - An optional handle to render at the center of the divider.
  *
  * @cssproperty [--divider-width=4px] - The width of the visible divider.
- * @cssproperty [--divider-hit-area=12px] - The invisible area around the divider where dragging can occur.
+ * @cssproperty [--divider-hit-area=12px] - The invisible region around the divider where dragging can occur.
  * @cssproperty [--min=0] - The minimum allowed size of the primary panel.
  * @cssproperty [--max=100%] - The maximum allowed size of the primary panel.
  */
@@ -48,7 +48,7 @@ export default class SlSplitPanel extends LitElement {
 
   /**
    * When the host element is resized, the primary panel will maintain its size and the other panel will grow or shrink
-   * to fit the remaining space. If no primary panel is set, both panels will resize proportionally when the host
+   * to fit the remaining space. If no primary panel is designated, both panels will resize proportionally when the host
    * element is resized.
    */
   @property() primary: 'start' | 'end';
@@ -197,7 +197,7 @@ export default class SlSplitPanel extends LitElement {
     }
   }
 
-  /** Gets the divider's position as a percentage of the container's size. */
+  /** Gets the divider's position as a percentage of the container's size (0-100). */
   getPositionAsPercentage() {
     if (this.size === 0) {
       return 0;
@@ -206,7 +206,7 @@ export default class SlSplitPanel extends LitElement {
     return (this.position / this.size) * 100;
   }
 
-  /** Sets the divider position as a percentage of the container's size. */
+  /** Sets the divider position as a percentage of the container's size (0-100). */
   setPositionAsPercentage(value: number) {
     this.position = clamp(this.size * (value / 100), 0, this.size);
   }
