@@ -9,6 +9,7 @@ const translation: Translation = {
   close: '閉じる',
   copy: 'コピー',
   progress: '進行',
+  resize: 'サイズ変更',
   scroll_to_end: '最後にスクロールする',
   scroll_to_start: '最初にスクロールする',
   select_a_color_from_the_screen: '画面から色を選択してください',

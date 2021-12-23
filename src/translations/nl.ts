@@ -9,6 +9,7 @@ const translation: Translation = {
   close: 'Sluiten',
   copy: 'Kopiëren',
   progress: 'Voortgang',
+  resize: 'Formaat wijzigen',
   scroll_to_end: 'Scroll naar einde',
   scroll_to_start: 'Scroll naar begin',
   select_a_color_from_the_screen: 'Selecteer een kleur van het scherm',

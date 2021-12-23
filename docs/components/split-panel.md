@@ -2,7 +2,7 @@
 
 [component-header:sl-split-panel]
 
-Split panels display two panels alongside each other, often allowing the user to resize them.
+Split panels display two adjacent panels, allowing the user to reposition them.
 
 ```html preview
 <sl-split-panel>
@@ -19,7 +19,7 @@ Split panels display two panels alongside each other, often allowing the user to
 
 ### Initial Position
 
-To set the initial position of the split in pixels, use the `position` attribute. If you need to set the initial value as a percentage, use the `setPositionPercentage()` method instead.
+To set the initial position in pixels, use the `position` attribute. If you need to set the initial value as a percentage, use the `setPositionAsPercentage()` method instead. If no position is provided, it will default to half of the available space.
 
 ```html preview
 <sl-split-panel position="200">
@@ -34,7 +34,7 @@ To set the initial position of the split in pixels, use the `position` attribute
 
 ### Vertical
 
-Add the `vertical` attribute to render the split panel in a vertical orientation where the start and end panels are stacked.
+Add the `vertical` attribute to render the split panel in a vertical orientation where the start and end panels are stacked. You also need to set a height when using the vertical orientation.
 
 ```html preview
 <sl-split-panel vertical style="height: 400px;">
@@ -49,7 +49,7 @@ Add the `vertical` attribute to render the split panel in a vertical orientation
 
 ### Snapping
 
-To snap panels at specific locations, add the `snap` attribute with one or more space-separated values. Values can be in pixels or percentages. For example, to snap the panel at `100px` and `50%`, use `snap="100px 50%"`. To customize how close the divider must be before snapping, use the `snap-threshold` attribute.
+To snap panels at specific positions while dragging, add the `snap` attribute with one or more space-separated values. Values must be in pixels or percentages. For example, to snap the panel at `100px` and `50%`, use `snap="100px 50%"`. You can also customize how close the divider must be before snapping with the `snap-threshold` attribute.
 
 ```html preview
 <div class="split-panel-snapping">
@@ -94,7 +94,7 @@ To snap panels at specific locations, add the `snap` attribute with one or more 
 
 ### Disabled
 
-Add the `disabled` attribute to prevent the split panel from being resized.
+Add the `disabled` attribute to prevent the split panel from being repositioned.
 
 ```html preview
 <sl-split-panel disabled>
@@ -109,13 +109,13 @@ Add the `disabled` attribute to prevent the split panel from being resized.
 
 ### Setting the Primary Panel
 
-By default, `start` is the primary panel and `end` is the secondary panel. When the host element is resized, the primary panel will maintain its size and the secondary panel will grow or shrink to fit the remaining space. You can change the primary panel using the `primary` attribute.
+By default, both panels will grow or shrink proportionally when the host element is resized. If a primary panel is designated, it will maintain its size and the secondary panel will grow or shrink to fit the remaining space. You can set the primary panel to `start` or `end` using the `primary` attribute.
 
-Try resizing the example below with each option and notice how panels respond.
+Try resizing the example below with each option and notice how the panels respond.
 
 ```html preview
 <div class="split-panel-primary">
-  <sl-split-panel primary="start">
+  <sl-split-panel>
     <div slot="start" style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;">
       Start
     </div>
@@ -124,7 +124,8 @@ Try resizing the example below with each option and notice how panels respond.
     </div>
   </sl-split-panel>
 
-  <sl-select value="start" style="max-width: 200px; margin-top: 1rem;">
+  <sl-select label="Primary Panel" value="" style="max-width: 200px; margin-top: 1rem;">
+    <sl-menu-item value="">None</sl-menu-item>
     <sl-menu-item value="start">Start</sl-menu-item>
     <sl-menu-item value="end">End</sl-menu-item>
   </sl-select>
@@ -156,7 +157,7 @@ To set a minimum or maximum size of the primary panel, use the `--min` and `--ma
 
 ### Nested Split Panels
 
-Create complex layouts that can be resized independently by nesting split panels.
+Create complex layouts that can be repositioned independently by nesting split panels.
 
 ```html preview
 <sl-split-panel>
