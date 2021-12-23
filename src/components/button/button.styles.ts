@@ -48,16 +48,12 @@ export default css`
     pointer-events: none;
   }
 
-  /* Clicks on icons shouldn't prevent the button from gaining focus */
-  .button::slotted(sl-icon) {
-    pointer-events: none;
-  }
-
   .button__prefix,
   .button__suffix {
     flex: 0 0 auto;
     display: flex;
     align-items: center;
+    pointer-events: none;
   }
 
   .button__label ::slotted(sl-icon) {
