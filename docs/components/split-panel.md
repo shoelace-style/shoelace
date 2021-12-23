@@ -107,13 +107,13 @@ Add the `disabled` attribute to prevent the split panel from being resized.
 </sl-split-panel>
 ```
 
-### Setting the Fixed Panel
+### Setting the Primary Panel
 
-When the host element is resized, the fixed panel will maintain its size and the other panel will grow or shrink to fit the remaining space. Try resizing the example below with each option and notice how panels respond.
+When the host element is resized, the primary panel will maintain its size and the other panel will grow or shrink to fit the remaining space. Try resizing the example below with each option and notice how panels respond.
 
 ```html preview
-<div class="split-panel-fixed">
-  <sl-split-panel fixed="start">
+<div class="split-panel-primary">
+  <sl-split-panel primary="start">
     <div slot="start">
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat, suscipit animi. Exercitationem, modi tenetur, voluptatibus magnam qui excepturi quasi autem et odit, recusandae obcaecati! Quaerat possimus facilis tempora consequatur officia?
     </div>
@@ -129,11 +129,11 @@ When the host element is resized, the fixed panel will maintain its size and the
 </div>
 
 <script>
-  const container = document.querySelector('.split-panel-fixed');
+  const container = document.querySelector('.split-panel-primary');
   const splitPanel = container.querySelector('sl-split-panel');
   const select = container.querySelector('sl-select');
 
-  select.addEventListener('sl-change', () => splitPanel.fixed = select.value);
+  select.addEventListener('sl-change', () => splitPanel.primary = select.value);
 </script>
 ```
 

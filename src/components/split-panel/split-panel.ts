@@ -35,7 +35,7 @@ export default class SlSplitPanel extends LitElement {
   @query('.divider') divider: HTMLElement;
 
   /**
-   * The current position of the divider from the fixed panel's edge. Defaults to 50% of the container's intial size.
+   * The current position of the divider from the primary panel's edge. Defaults to 50% of the container's intial size.
    */
   @property({ type: Number, reflect: true }) position: number;
 
@@ -46,10 +46,10 @@ export default class SlSplitPanel extends LitElement {
   @property({ type: Boolean, reflect: true }) disabled = false;
 
   /**
-   * When the host element is resized, the fixed panel will maintain its size and the other panel will grow or shrink to
+   * When the host element is resized, the primary panel will maintain its size and the other panel will grow or shrink to
    * fit the remaining space.
    */
-  @property() fixed: 'start' | 'end' = 'start';
+  @property() primary: 'start' | 'end' = 'start';
 
   /**
    * One or more space-separated values at which the divider should snap. Values can be in pixels or percentages, e.g.
@@ -117,7 +117,7 @@ export default class SlSplitPanel extends LitElement {
       let newPosition = this.vertical ? y : x;
 
       // Flip for end panels
-      if (this.fixed === 'end') {
+      if (this.primary === 'end') {
         newPosition = this.size - newPosition;
       }
 
@@ -210,7 +210,7 @@ export default class SlSplitPanel extends LitElement {
     // TODO - min / max
     // TODO - custom divider styles + handle
 
-    if (this.fixed === 'end') {
+    if (this.primary === 'end') {
       start = `1 1 auto`;
       end = `0 0 calc((${this.position}px - var(--divider-width) / 2)`;
     } else {
