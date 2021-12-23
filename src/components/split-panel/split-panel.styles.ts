@@ -8,21 +8,15 @@ export default css`
   :host {
     --divider-width: 4px;
     --divider-hit-area: 12px;
+    --min: 0%;
+    --max: 100%;
 
-    display: flex;
+    display: grid;
   }
 
   .start,
   .end {
     overflow: hidden;
-  }
-
-  .start {
-    background: var(--sl-color-blue-50);
-  }
-
-  .end {
-    background: var(--sl-color-orange-50);
   }
 
   .divider {
@@ -32,6 +26,7 @@ export default css`
     align-items: center;
     justify-content: center;
     background-color: var(--sl-color-neutral-200);
+    color: var(--sl-color-neutral-900);
     z-index: 1;
   }
 
@@ -41,6 +36,7 @@ export default css`
 
   :host(:not([disabled])) .divider${focusVisibleSelector} {
     background-color: var(--sl-color-primary-600);
+    color: var(--sl-color-neutral-0);
   }
 
   :host([disabled]) .divider {
@@ -48,11 +44,6 @@ export default css`
   }
 
   /* Horizontal */
-  :host(:not([vertical])) .start,
-  :host(:not([vertical])) .end {
-    max-width: 100%;
-  }
-
   :host(:not([vertical], [disabled])) .divider {
     cursor: col-resize;
   }
@@ -69,11 +60,6 @@ export default css`
   /* Vertical */
   :host([vertical]) {
     flex-direction: column;
-  }
-
-  :host([vertical]) .start,
-  :host([vertical]) .end {
-    max-height: 100%;
   }
 
   :host([vertical]:not([disabled])) .divider {

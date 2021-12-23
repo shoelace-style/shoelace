@@ -1,7 +1,6 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { styleMap } from 'lit/directives/style-map.js';
 import { clamp } from '../../internal/math';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
@@ -15,7 +14,7 @@ import styles from './split-panel.styles';
  * @event sl-reposition - Emitted when the divider is repositioned.
  * @event {{ entries: ResizeObserverEntry[] }} sl-resize - Emitted when the container is resized.
  *
- * @csspart divider - The divider that separates the start and end panels.
+ * @csspart divider - The divider that separates both panels.
  *
  * @slot start - The start panel.
  * @slot end - The end panel.
@@ -23,6 +22,8 @@ import styles from './split-panel.styles';
  *
  * @cssproperty [--divider-width=4px] - The width of the visible divider.
  * @cssproperty [--divider-hit-area=12px] - The invisible area around the divider where dragging can occur.
+ * @cssproperty [--min=0] - The minimum allowed size of the primary panel.
+ * @cssproperty [--max=100%] - The maximum allowed size of the primary panel.
  */
 @customElement('sl-split-panel')
 export default class SlSplitPanel extends LitElement {
@@ -156,19 +157,19 @@ export default class SlSplitPanel extends LitElement {
       event.preventDefault();
 
       if ((event.key === 'ArrowLeft' && !this.vertical) || (event.key === 'ArrowUp' && this.vertical)) {
-        newPercentage -= incr;
+        newPercentage -= this.primary === 'end' ? -1 * incr : incr;
       }
 
       if ((event.key === 'ArrowRight' && !this.vertical) || (event.key === 'ArrowDown' && this.vertical)) {
-        newPercentage += incr;
+        newPercentage += this.primary === 'end' ? -1 * incr : incr;
       }
 
       if (event.key === 'Home') {
-        newPercentage = 0;
+        newPercentage = this.primary === 'end' ? 100 : 0;
       }
 
       if (event.key === 'End') {
-        newPercentage = 100;
+        newPercentage = this.primary === 'end' ? 0 : 100;
       }
 
       newPercentage = clamp(newPercentage, 0, 100);
@@ -204,27 +205,28 @@ export default class SlSplitPanel extends LitElement {
   }
 
   render() {
-    let start: string;
-    let end: string;
-
-    // TODO - min / max
-    // TODO - custom divider styles + handle
+    const gridTemplate = this.vertical ? 'gridTemplateRows' : 'gridTemplateColumns';
+    const primary = `
+      clamp(
+        0%,
+        clamp(
+          var(--min),
+          calc(${this.position}px - var(--divider-width) / 2),
+          var(--max)
+        ),
+        calc(100% - var(--divider-width))
+      )
+    `;
+    const secondary = 'auto';
 
     if (this.primary === 'end') {
-      start = `1 1 auto`;
-      end = `0 0 calc((${this.position}px - var(--divider-width) / 2)`;
+      this.style[gridTemplate] = `${secondary} var(--divider-width) ${primary}`;
     } else {
-      start = `0 0 calc(${this.position}px - var(--divider-width) / 2)`;
-      end = `1 1 auto`;
+      this.style[gridTemplate] = `${primary} var(--divider-width) ${secondary}`;
     }
 
     return html`
-      <div
-        class="start"
-        style=${styleMap({
-          flex: start
-        })}
-      >
+      <div class="start">
         <slot name="start"></slot>
       </div>
 
@@ -241,12 +243,7 @@ export default class SlSplitPanel extends LitElement {
         <slot name="handle"></slot>
       </div>
 
-      <div
-        class="end"
-        style=${styleMap({
-          flex: end
-        })}
-      >
+      <div class="end">
         <slot name="end"></slot>
       </div>
     `;
