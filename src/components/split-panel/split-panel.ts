@@ -154,7 +154,7 @@ export default class SlSplitPanel extends LitElement {
       return;
     }
 
-    if (['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) {
+    if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) {
       let newPercentage = this.getPositionAsPercentage();
       let incr = (event.shiftKey ? 10 : 1) * (this.primary === 'end' ? -1 : 1);
 
