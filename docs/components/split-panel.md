@@ -141,7 +141,7 @@ Try resizing the example below with each option and notice how panels respond.
 
 ### Min & Max
 
-To set a minimum or maximum size of the primary panel, use the `--min` and `--max` custom properties. This examples demonstrates how you can ensure both panels are at least 150px wide using the `calc()` function.
+To set a minimum or maximum size of the primary panel, use the `--min` and `--max` custom properties. Since the secondary panel is flexible, size restrictions can only be applied to the primary panel. This examples shows how you can make both panels be a minimum of 150px using `--min`, `--max`, and the `calc()` function.
 
 ```html preview
 <sl-split-panel style="--min: 150px; --max: calc(100% - 150px);">
@@ -194,7 +194,7 @@ You can target the `divider` part to apply CSS properties to the divider. To add
 </div>
 ```
 
-Here's a more elaborate example that changes the divider's color, width, and adds a more obvious handle.
+Here's a more elaborate example that changes the divider's color and width and adds a styled handle.
 
 ```html preview
 <div class="split-panel-handle">
