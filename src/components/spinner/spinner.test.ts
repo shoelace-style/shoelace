@@ -15,11 +15,10 @@ describe('<sl-spinner>', () => {
       await expect(el).to.be.accessible();
     });
 
-    it('should defer updates to screen reader users via aria-live="polite".', async () => {
+    it('should have a role of "status".', async () => {
       // https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions
       const base = el.shadowRoot?.querySelector('[part="base"]') as SVGElement;
-      await expect(base).have.attribute('aria-busy', 'true');
-      await expect(base).have.attribute('aria-live', 'polite');
+      await expect(base).have.attribute('role', 'status');
     });
   });
 });
