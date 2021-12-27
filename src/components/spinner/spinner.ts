@@ -19,7 +19,7 @@ export default class SlSpinner extends LitElement {
 
   render() {
     return html`
-      <svg part="base" class="spinner" aria-busy="true" aria-live="polite">
+      <svg part="base" class="spinner" role="status">
         <circle class="spinner__track"></circle>
         <circle class="spinner__indicator"></circle>
       </svg>

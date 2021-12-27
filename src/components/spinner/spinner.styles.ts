@@ -34,16 +34,13 @@ export default css`
   .spinner__track {
     stroke: var(--track-color);
     transform-origin: 0% 0%;
+    mix-blend-mode: multiply;
   }
 
   .spinner__indicator {
     stroke: var(--indicator-color);
     stroke-linecap: round;
-    /* stroke-dasharray: (2πr x p), (2πr) where p is the percentage to display */
-    stroke-dasharray: calc(2 * 3.141592 * calc(0.5em - var(--track-width) / 2) * 0.75),
-      calc(2 * 3.141592 * calc(0.5em - var(--track-width) / 2));
-    transform-origin: 50% 50%;
-    transform: rotate(90deg);
+    stroke-dasharray: 150% 75%;
     animation: spin var(--speed) linear infinite;
   }
 

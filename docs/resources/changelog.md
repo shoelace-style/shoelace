@@ -6,6 +6,12 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
+## 2.0.0-beta.64
+
+- Added `role="status"` to `<sl-spinner>`
+- Fixed broken spinner animation in Safari [#633](https://github.com/shoelace-style/shoelace/issues/633)
+- Improved `<sl-spinner>` track color when used on various backgrounds
+
 ## 2.0.0-beta.63
 
 - 🚨 BREAKING: changed the `type` attribute to `variant` in `<sl-alert>`, `<sl-badge>`, `<sl-button>`, and `<sl-tag>` since it's more appropriate and to disambiguate from other `type` attributes
