@@ -218,7 +218,7 @@ export default class SlSplitPanel extends LitElement {
         0%,
         clamp(
           var(--min),
-          calc(${this.position}px - var(--divider-width) / 2),
+          ${this.position}px - var(--divider-width) / 2,
           var(--max)
         ),
         calc(100% - var(--divider-width))
