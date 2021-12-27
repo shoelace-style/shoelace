@@ -8,7 +8,7 @@ The mutation observer will report changes to the content it wraps through the `s
 
 ```html preview
 <div class="mutation-overview">
-  <sl-mutation-observer attr="type">
+  <sl-mutation-observer attr="variant">
     <sl-button variant="primary">Click to mutate</sl-button>
   </sl-mutation-observer>
 
@@ -19,13 +19,13 @@ The mutation observer will report changes to the content it wraps through the `s
     const container = document.querySelector('.mutation-overview');
     const mutationObserver = container.querySelector('sl-mutation-observer');
     const button = container.querySelector('sl-button');
-    const types = ['primary', 'success', 'neutral', 'warning', 'danger']; 
+    const variants = ['primary', 'success', 'neutral', 'warning', 'danger']; 
     let clicks = 0;
 
-    // Change the button's type attribute
+    // Change the button's variant attribute
     button.addEventListener('click', () => {
       clicks++;
-      button.setAttribute('type', types[clicks % types.length]);
+      button.setAttribute('variant', variants[clicks % variants.length]);
     });
 
     // Log mutations
@@ -57,15 +57,15 @@ const css = `
   }
 `;
 
-const types = ['primary', 'success', 'neutral', 'warning', 'danger']; 
+const variants = ['primary', 'success', 'neutral', 'warning', 'danger']; 
 let clicks = 0;
 
 const App = () => {
-  const [type, setType] = useState('primary');
+  const [variant, setVariant] = useState('primary');
 
   function handleClick() {
     clicks++;
-    setType(types[clicks % types.length]);
+    setVariant(variants[clicks % variants.length]);
   }
 
   return (
@@ -74,7 +74,7 @@ const App = () => {
         attr="*"
         onSlMutation={event => console.log(event.detail)}
       >
-        <SlButton variant={type} onClick={handleClick}>Click to mutate</SlButton>
+        <SlButton variant={variant} onClick={handleClick}>Click to mutate</SlButton>
       </SlMutationObserver>
 
       <style>{css}</style>
