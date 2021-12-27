@@ -154,22 +154,30 @@ export default class SlSplitPanel extends LitElement {
       return;
     }
 
-    let increment = 0;
-    if (event.key === 'Home') {
-      increment = -100;
-    } else if (event.key === 'End') {
-      increment = 100;
-    } else if ((event.key === 'ArrowLeft' && !this.vertical) || (event.key === 'ArrowUp' && this.vertical)) {
-      increment = -1;
-    } else if ((event.key === 'ArrowRight' && !this.vertical) || (event.key === 'ArrowDown' && this.vertical)) {
-      increment = 1;
-    }
+    if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) {
+      let newPercentage = this.getPositionAsPercentage();
+      let incr = (event.shiftKey ? 10 : 1) * (this.primary === 'end' ? -1 : 1);
 
-    if (increment) {
       event.preventDefault();
-      increment *= (event.shiftKey ? 10 : 1) * (this.primary === 'end' ? -1 : 1);
-      const currentPercentage = this.getPositionAsPercentage();
-      const newPercentage = clamp(currentPercentage + increment, 0, 100);
+
+      if ((event.key === 'ArrowLeft' && !this.vertical) || (event.key === 'ArrowUp' && this.vertical)) {
+        newPercentage -= incr;
+      }
+
+      if ((event.key === 'ArrowRight' && !this.vertical) || (event.key === 'ArrowDown' && this.vertical)) {
+        newPercentage += incr;
+      }
+
+      if (event.key === 'Home') {
+        newPercentage = this.primary === 'end' ? 100 : 0;
+      }
+
+      if (event.key === 'End') {
+        newPercentage = this.primary === 'end' ? 0 : 100;
+      }
+
+      newPercentage = clamp(newPercentage, 0, 100);
+
       this.setPositionAsPercentage(newPercentage);
     }
   }
