@@ -11,6 +11,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Added `role="status"` to `<sl-spinner>`
 - Fixed broken spinner animation in Safari [#633](https://github.com/shoelace-style/shoelace/issues/633)
 - Improved `<sl-spinner>` track color when used on various backgrounds
+- Removed `position: relative` from the common component stylesheet
 
 ## 2.0.0-beta.63
 

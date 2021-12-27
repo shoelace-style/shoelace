@@ -3,7 +3,6 @@ import utilityStyles from '../styles/utility.styles';
 
 export default css`
   :host {
-    position: relative;
     box-sizing: border-box;
   }
 
