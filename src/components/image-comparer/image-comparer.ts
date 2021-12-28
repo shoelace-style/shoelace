@@ -42,16 +42,14 @@ export default class SlImageComparer extends LitElement {
   handleDrag(event: any) {
     const { width } = this.base.getBoundingClientRect();
 
-    function drag(event: any, container: HTMLElement, onMove: (x: number, y: number) => void) {
+    function drag(event: any, container: HTMLElement, onMove: (x: number) => void) {
       const move = (event: any) => {
-        const dims = container.getBoundingClientRect();
-        const defaultView = container.ownerDocument.defaultView!;
-        const offsetX = dims.left + defaultView.pageXOffset;
-        const offsetY = dims.top + defaultView.pageYOffset;
+        const { left } = container.getBoundingClientRect();
+        const { pageXOffset } = container.ownerDocument.defaultView!;
+        const offsetX = left + pageXOffset;
         const x = (event.changedTouches ? event.changedTouches[0].pageX : event.pageX) - offsetX;
-        const y = (event.changedTouches ? event.changedTouches[0].pageY : event.pageY) - offsetY;
 
-        onMove(x, y);
+        onMove(x);
       };
 
       // Move on init
