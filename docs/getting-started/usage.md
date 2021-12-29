@@ -106,6 +106,47 @@ For example, `<button>` and `<sl-button>` both have a `type` attribute, but it d
 
 ?> **Don't make assumptions about a component's API!** To prevent unexpected behaviors, please take the time to review the documentation and make sure you understand what each attribute, property, method, and event is intended to do.
 
+## Waiting for Components to Load
+
+Web components are registered with JavaScript, so depending on how and when you load Shoelace, you may notice a [Flash of Undefined Custom Elements (FOUCE)](https://www.abeautifulsite.net/posts/flash-of-undefined-custom-elements/) when the page loads. There are a few ways to prevent this, all of which are described in the linked article.
+
+Perhaps the best method of prevention is [`customElements.whenDefined()`](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/whenDefined), which returns a promise that resolves when the specified element is registered. You can use this approach to apply a class to the `<body>` that shows the UI as soon as all your custom elements are ready.
+
+```html
+<style>
+  body {
+    opacity: 0;
+  }
+
+  body.ready {
+    opacity: 1;
+    transition: .25s opacity;
+  }
+</style>
+
+<script type="module">
+  await Promise.all([
+    customElements.whenDefined('sl-badge'),
+    customElements.whenDefined('sl-button'),
+    customElements.whenDefined('sl-tag'),
+  ]);
+
+  // Badge, button, and tag are registered now! Add 
+  // the `ready` class so the UI fades in.
+  document.body.classList.add('ready');
+</script>
+```
+
+Another approach is to use the [`:defined`](https://developer.mozilla.org/en-US/docs/Web/CSS/:defined) CSS pseudo-class to "hide" custom elements that haven't been registered yet. You can scope it to specific elements or you can hide all undefined custom elements as shown below.
+
+```css
+:not(:defined) {
+  visibility: hidden;
+}
+```
+
+As soon as a custom element is registered, it will immediately appear with all of its styles, effectively eliminating FOUCE. Note the use of `visibility: hidden` instead of `display: none` to reduce shifting as elements are registered.
+
 ## Code Completion
 
 ### VS Code
