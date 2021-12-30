@@ -66,14 +66,7 @@ export default class SlSplitPanel extends LitElement {
     super.connectedCallback();
     this.resizeObserver = new ResizeObserver(entries => this.handleResize(entries));
     this.updateComplete.then(() => this.resizeObserver.observe(this));
-  }
 
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    this.resizeObserver.unobserve(this);
-  }
-
-  firstUpdated() {
     const { width, height } = this.getBoundingClientRect();
     this.size = this.vertical ? height : width;
 
@@ -82,6 +75,11 @@ export default class SlSplitPanel extends LitElement {
     }
 
     this.positionPercentage = this.getPositionAsPercentage();
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.resizeObserver.unobserve(this);
   }
 
   handleDrag(event: Event) {
