@@ -163,6 +163,7 @@
         <tr>
           <th>Name</th>
           <th>Description</th>
+          <th>Default</th>
         </tr>
       </thead>
       <tbody>
@@ -170,8 +171,9 @@
           .map(
             style => `
               <tr>
-                <td><code>${escapeHtml(style.name)}</code></td>
+                <td class="nowrap"><code>${escapeHtml(style.name)}</code></td>
                 <td>${escapeHtml(style.description)}</td>
+                <td><code>${escapeHtml(style.default)}</code></td>
               </tr>
             `
           )
