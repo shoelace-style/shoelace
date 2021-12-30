@@ -13,14 +13,15 @@ import styles from './split-panel.styles';
  *
  * @event sl-reposition - Emitted when the divider's position changes.
  *
- * @csspart divider - The divider that separates the primary and secondary panels.
+ * @csspart divider - The divider that separates the start and end panels.
  *
  * @slot start - The start panel.
  * @slot end - The end panel.
  * @slot handle - An optional handle to render at the center of the divider.
  *
  * @cssproperty [--divider-width=4px] - The width of the visible divider.
- * @cssproperty [--divider-hit-area=12px] - The invisible region around the divider where dragging can occur.
+ * @cssproperty [--divider-hit-area=12px] - The invisible region around the divider where dragging can occur. This is
+ *  usually wider than the divider to facilitate easier dragging.
  * @cssproperty [--min=0] - The minimum allowed size of the primary panel.
  * @cssproperty [--max=100%] - The maximum allowed size of the primary panel.
  */
@@ -28,28 +29,34 @@ import styles from './split-panel.styles';
 export default class SlSplitPanel extends LitElement {
   static styles = styles;
 
+  private cachedPositionInPixels: number;
   private localize = new LocalizeController(this);
-  private positionPercentage: number;
   private resizeObserver: ResizeObserver;
   private size: number;
 
   @query('.divider') divider: HTMLElement;
 
   /**
-   * The current position of the divider from the primary panel's edge. Defaults to 50% of the container's intial size.
+   * The current position of the divider from the primary panel's edge as a percentage 0-100. Defaults to 50% of the
+   * container's intial size.
    */
-  @property({ type: Number, reflect: true }) position: number;
+  @property({ type: Number, reflect: true }) position = 50;
+
+  /**
+   * The current position of the divider from the primary panel's edge in pixels.
+   */
+  @property({ attribute: 'position-in-pixels', type: Number }) positionInPixels: number;
 
   /** Draws the split panel in a vertical orientation with the start and end panels stacked. */
   @property({ type: Boolean, reflect: true }) vertical = false;
 
-  /** Disables resizing on the split panel. */
+  /** Disables resizing. Note that the position may still change as a result of resizing the host element. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
   /**
-   * When the host element is resized, the primary panel will maintain its size and the other panel will grow or shrink
-   * to fit the remaining space. If no primary panel is designated, both panels will resize proportionally when the host
-   * element is resized.
+   * If no primary panel is designated, both panels will resize proportionally when the host element is resized. If a
+   * primary panel is designated, it will maintain its size and the other panel will grow or shrink as needed when the
+   * host element is resized.
    */
   @property() primary: 'start' | 'end';
 
@@ -67,19 +74,26 @@ export default class SlSplitPanel extends LitElement {
     this.resizeObserver = new ResizeObserver(entries => this.handleResize(entries));
     this.updateComplete.then(() => this.resizeObserver.observe(this));
 
-    const { width, height } = this.getBoundingClientRect();
-    this.size = this.vertical ? height : width;
-
-    if (!this.position) {
-      this.position = this.size / 2;
-    }
-
-    this.positionPercentage = this.getPositionAsPercentage();
+    this.detectSize();
+    this.cachedPositionInPixels = this.percentageToPixels(this.position);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     this.resizeObserver.unobserve(this);
+  }
+
+  private detectSize() {
+    const { width, height } = this.getBoundingClientRect();
+    this.size = this.vertical ? height : width;
+  }
+
+  private percentageToPixels(value: number) {
+    return this.size * (value / 100);
+  }
+
+  private pixelsToPercentage(value: number) {
+    return (value / this.size) * 100;
   }
 
   handleDrag(event: Event) {
@@ -116,11 +130,11 @@ export default class SlSplitPanel extends LitElement {
     }
 
     drag(this, (x, y) => {
-      let newPosition = this.vertical ? y : x;
+      let newPositionInPixels = this.vertical ? y : x;
 
       // Flip for end panels
       if (this.primary === 'end') {
-        newPosition = this.size - newPosition;
+        newPositionInPixels = this.size - newPositionInPixels;
       }
 
       // Check snap points
@@ -136,14 +150,16 @@ export default class SlSplitPanel extends LitElement {
             snapPoint = parseFloat(value);
           }
 
-          if (newPosition >= snapPoint - this.snapThreshold && newPosition <= snapPoint + this.snapThreshold) {
-            newPosition = snapPoint;
+          if (
+            newPositionInPixels >= snapPoint - this.snapThreshold &&
+            newPositionInPixels <= snapPoint + this.snapThreshold
+          ) {
+            newPositionInPixels = snapPoint;
           }
         });
       }
 
-      this.position = clamp(newPosition, 0, this.size);
-      this.positionPercentage = this.getPositionAsPercentage();
+      this.position = clamp(this.pixelsToPercentage(newPositionInPixels), 0, 100);
     });
   }
 
@@ -153,60 +169,51 @@ export default class SlSplitPanel extends LitElement {
     }
 
     if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) {
-      let newPercentage = this.getPositionAsPercentage();
+      let newPosition = this.position;
       let incr = (event.shiftKey ? 10 : 1) * (this.primary === 'end' ? -1 : 1);
 
       event.preventDefault();
 
       if ((event.key === 'ArrowLeft' && !this.vertical) || (event.key === 'ArrowUp' && this.vertical)) {
-        newPercentage -= incr;
+        newPosition -= incr;
       }
 
       if ((event.key === 'ArrowRight' && !this.vertical) || (event.key === 'ArrowDown' && this.vertical)) {
-        newPercentage += incr;
+        newPosition += incr;
       }
 
       if (event.key === 'Home') {
-        newPercentage = this.primary === 'end' ? 100 : 0;
+        newPosition = this.primary === 'end' ? 100 : 0;
       }
 
       if (event.key === 'End') {
-        newPercentage = this.primary === 'end' ? 0 : 100;
+        newPosition = this.primary === 'end' ? 0 : 100;
       }
 
-      newPercentage = clamp(newPercentage, 0, 100);
-
-      this.setPositionAsPercentage(newPercentage);
+      this.position = clamp(newPosition, 0, 100);
     }
   }
 
   @watch('position')
   handlePositionChange() {
+    this.cachedPositionInPixels = this.percentageToPixels(this.position);
+    this.positionInPixels = this.percentageToPixels(this.position);
     emit(this, 'sl-reposition');
+  }
+
+  @watch('positionInPixels')
+  handlePositionInPixelsChange() {
+    this.position = this.pixelsToPercentage(this.positionInPixels);
   }
 
   handleResize(entries: ResizeObserverEntry[]) {
     const { width, height } = entries[0].contentRect;
     this.size = this.vertical ? height : width;
 
-    // Resize proportionally when a primary panel isn't set
-    if (!this.primary && this.positionPercentage) {
-      this.setPositionAsPercentage(this.positionPercentage);
+    // Resize when a primary panel is set
+    if (this.primary && this.cachedPositionInPixels) {
+      this.position = this.pixelsToPercentage(this.cachedPositionInPixels);
     }
-  }
-
-  /** Gets the divider's position as a percentage of the container's size (0-100). */
-  getPositionAsPercentage() {
-    if (this.size === 0) {
-      return 0;
-    }
-
-    return (this.position / this.size) * 100;
-  }
-
-  /** Sets the divider position as a percentage of the container's size (0-100). */
-  setPositionAsPercentage(value: number) {
-    this.position = clamp(this.size * (value / 100), 0, this.size);
   }
 
   render() {
@@ -216,7 +223,7 @@ export default class SlSplitPanel extends LitElement {
         0%,
         clamp(
           var(--min),
-          ${this.position}px - var(--divider-width) / 2,
+          ${this.position}% - var(--divider-width) / 2,
           var(--max)
         ),
         calc(100% - var(--divider-width))

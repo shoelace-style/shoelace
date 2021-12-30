@@ -46,10 +46,25 @@ const App = () => (
 
 ### Initial Position
 
-To set the initial position in pixels, use the `position` attribute. If you need to set the initial value as a percentage, use the `setPositionAsPercentage()` method instead. If no position is provided, it will default to half of the available space.
+To set the initial position, use the `position` attribute. If no position is provided, it will default to 50% of the available space.
 
 ```html preview
-<sl-split-panel position="200">
+<sl-split-panel position="75">
+  <div slot="start" style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;">
+    Start
+  </div>
+  <div slot="end" style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;">
+    End
+  </div>
+</sl-split-panel>
+```
+
+### Initial Position in Pixels
+
+To set the intial position in pixels instead of a percentage, use the `position-in-pixels` attribute.
+
+```html preview
+<sl-split-panel position-in-pixels="150">
   <div slot="start" style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;">
     Start
   </div>
@@ -254,7 +269,7 @@ const App = () => (
 
 ### Disabled
 
-Add the `disabled` attribute to prevent the split panel from being repositioned.
+Add the `disabled` attribute to prevent the divider from being repositioned.
 
 ```html preview
 <sl-split-panel disabled>
@@ -386,9 +401,9 @@ const App = () => {
 
 ### Min & Max
 
-To set a minimum or maximum size of the primary panel, use the `--min` and `--max` custom properties. Since the secondary panel is flexible, size constraints can only be applied to the primary panel (or the `start` panel if a primary panel isn't designated).
+To set a minimum or maximum size of the primary panel, use the `--min` and `--max` custom properties. Since the secondary panel is flexible, size constraints can only be applied to the primary panel. If no primary panel is designated, these constraints will be applied to the `start` panel.
 
-This examples demonstrates how you can make both panels be a minimum of 150px using `--min`, `--max`, and the `calc()` function.
+This examples demonstrates how you can ensure both panels are at least 150px using `--min`, `--max`, and the `calc()` function.
 
 ```html preview
 <sl-split-panel style="--min: 150px; --max: calc(100% - 150px);">
