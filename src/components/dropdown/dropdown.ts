@@ -13,8 +13,6 @@ import type SlMenu from '../menu/menu';
 import type SlMenuItem from '../menu-item/menu-item';
 import styles from './dropdown.styles';
 
-let id = 0;
-
 /**
  * @since 2.0
  * @status stable
@@ -42,7 +40,6 @@ export default class SlDropdown extends LitElement {
   @query('.dropdown__panel') panel: HTMLElement;
   @query('.dropdown__positioner') positioner: HTMLElement;
 
-  private componentId = `dropdown-${++id}`;
   private popover: PopperInstance;
 
   /** Indicates whether or not the dropdown is open. You can use this in lieu of the show/hide methods. */
@@ -406,7 +403,7 @@ export default class SlDropdown extends LitElement {
     return html`
       <div
         part="base"
-        id=${this.componentId}
+        id="dropdown"
         class=${classMap({
           dropdown: true,
           'dropdown--open': this.open
@@ -429,7 +426,7 @@ export default class SlDropdown extends LitElement {
             part="panel"
             class="dropdown__panel"
             aria-hidden=${this.open ? 'false' : 'true'}
-            aria-labelledby=${this.componentId}
+            aria-labelledby="dropdown"
           >
             <slot></slot>
           </div>

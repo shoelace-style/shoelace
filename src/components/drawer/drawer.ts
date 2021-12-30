@@ -18,8 +18,6 @@ import '../icon-button/icon-button';
 
 const hasPreventScroll = isPreventScrollSupported();
 
-let id = 0;
-
 /**
  * @since 2.0
  * @status stable
@@ -75,7 +73,6 @@ export default class SlDrawer extends LitElement {
   @query('.drawer__panel') panel: HTMLElement;
   @query('.drawer__overlay') overlay: HTMLElement;
 
-  private componentId = `drawer-${++id}`;
   private modal: Modal;
   private originalTrigger: HTMLElement | null;
 
@@ -261,14 +258,14 @@ export default class SlDrawer extends LitElement {
           aria-modal="true"
           aria-hidden=${this.open ? 'false' : 'true'}
           aria-label=${ifDefined(this.noHeader ? this.label : undefined)}
-          aria-labelledby=${ifDefined(!this.noHeader ? `${this.componentId}-title` : undefined)}
+          aria-labelledby=${ifDefined(!this.noHeader ? 'title' : undefined)}
           tabindex="0"
         >
           ${!this.noHeader
             ? html`
                 <header part="header" class="drawer__header">
-                  <span part="title" class="drawer__title" id=${`${this.componentId}-title`}>
-                    <!-- If there's no label, use an invisible character to prevent the heading from collapsing -->
+                  <span part="title" class="drawer__title" id="title">
+                    <!-- If there's no label, use an invisible character to prevent the header from collapsing -->
                     <slot name="label"> ${this.label || String.fromCharCode(65279)} </slot>
                   </span>
                   <sl-icon-button

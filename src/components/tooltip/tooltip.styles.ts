@@ -12,6 +12,10 @@ export default css`
     display: contents;
   }
 
+  .tooltip-content {
+    display: contents;
+  }
+
   .tooltip-positioner {
     position: absolute;
     z-index: var(--sl-z-index-tooltip);

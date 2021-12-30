@@ -17,8 +17,6 @@ import '../icon-button/icon-button';
 
 const hasPreventScroll = isPreventScrollSupported();
 
-let id = 0;
-
 /**
  * @since 2.0
  * @status stable
@@ -67,7 +65,6 @@ export default class SlDialog extends LitElement {
   @query('.dialog__panel') panel: HTMLElement;
   @query('.dialog__overlay') overlay: HTMLElement;
 
-  private componentId = `dialog-${++id}`;
   private modal: Modal;
   private originalTrigger: HTMLElement | null;
 
@@ -235,13 +232,13 @@ export default class SlDialog extends LitElement {
           aria-modal="true"
           aria-hidden=${this.open ? 'false' : 'true'}
           aria-label=${ifDefined(this.noHeader ? this.label : undefined)}
-          aria-labelledby=${ifDefined(!this.noHeader ? `${this.componentId}-title` : undefined)}
+          aria-labelledby=${ifDefined(!this.noHeader ? 'title' : undefined)}
           tabindex="0"
         >
           ${!this.noHeader
             ? html`
                 <header part="header" class="dialog__header">
-                  <span part="title" class="dialog__title" id=${`${this.componentId}-title`}>
+                  <span part="title" class="dialog__title" id="title">
                     <slot name="label"> ${this.label || String.fromCharCode(65279)} </slot>
                   </span>
                   <sl-icon-button

@@ -38,7 +38,6 @@ export default class SlTooltip extends LitElement {
   @query('.tooltip-positioner') positioner: HTMLElement;
   @query('.tooltip') tooltip: HTMLElement;
 
-  private componentId = `tooltip-${++id}`;
   private target: HTMLElement;
   private popover: PopperInstance;
   private hoverTimeout: any;
@@ -283,18 +282,6 @@ export default class SlTooltip extends LitElement {
     }
   }
 
-  handleSlotChange() {
-    const oldTarget = this.target;
-    const newTarget = this.getTarget();
-
-    if (newTarget !== oldTarget) {
-      if (oldTarget) {
-        oldTarget.removeAttribute('aria-describedby');
-      }
-      newTarget.setAttribute('aria-describedby', this.componentId);
-    }
-  }
-
   hasTrigger(triggerType: string) {
     const triggers = this.trigger.split(' ');
     return triggers.includes(triggerType);
@@ -325,12 +312,14 @@ export default class SlTooltip extends LitElement {
 
   render() {
     return html`
-      <slot @slotchange=${this.handleSlotChange}></slot>
+      <div class="tooltip-content" aria-described-by="tooltip">
+        <slot></slot>
+      </div>
 
       <div class="tooltip-positioner">
         <div
           part="base"
-          id=${this.componentId}
+          id="tooltip"
           class=${classMap({
             tooltip: true,
             'tooltip--open': this.open
@@ -338,7 +327,7 @@ export default class SlTooltip extends LitElement {
           role="tooltip"
           aria-hidden=${this.open ? 'false' : 'true'}
         >
-          <slot name="content" @slotchange=${this.handleContentChange}> ${this.content} </slot>
+          <slot name="content"> ${this.content} </slot>
         </div>
       </div>
     `;

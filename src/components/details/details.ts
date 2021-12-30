@@ -10,8 +10,6 @@ import styles from './details.styles';
 
 import '../icon/icon';
 
-let id = 0;
-
 /**
  * @since 2.0
  * @status stable
@@ -42,8 +40,6 @@ export default class SlDetails extends LitElement {
   @query('.details') details: HTMLElement;
   @query('.details__header') header: HTMLElement;
   @query('.details__body') body: HTMLElement;
-
-  private componentId = `details-${++id}`;
 
   /** Indicates whether or not the details is open. You can use this in lieu of the show/hide methods. */
   @property({ type: Boolean, reflect: true }) open = false;
@@ -144,11 +140,11 @@ export default class SlDetails extends LitElement {
       >
         <header
           part="header"
-          id=${`${this.componentId}-header`}
+          id="header"
           class="details__header"
           role="button"
           aria-expanded=${this.open ? 'true' : 'false'}
-          aria-controls=${`${this.componentId}-content`}
+          aria-controls="content"
           aria-disabled=${this.disabled ? 'true' : 'false'}
           tabindex=${this.disabled ? '-1' : '0'}
           @click=${this.handleSummaryClick}
@@ -164,13 +160,7 @@ export default class SlDetails extends LitElement {
         </header>
 
         <div class="details__body">
-          <div
-            part="content"
-            id=${`${this.componentId}-content`}
-            class="details__content"
-            role="region"
-            aria-labelledby=${`${this.componentId}-header`}
-          >
+          <div part="content" id="content" class="details__content" role="region" aria-labelledby="header">
             <slot></slot>
           </div>
         </div>
