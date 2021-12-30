@@ -11,7 +11,9 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Added `role="status"` to `<sl-spinner>`
 - Fixed broken spinner animation in Safari [#633](https://github.com/shoelace-style/shoelace/issues/633)
 - Fixed an a11y bug in `<sl-tooltip>` where `aria-describedby` referenced an id in the shadow root
+- Fixed a bug in `<sl-radio>` where tabbing didn't work properly in Firefox [#596](https://github.com/shoelace-style/shoelace/issues/596)
 - Improved `<sl-spinner>` track color when used on various backgrounds
+- Improved a11y in `<sl-radio>` so VoiceOver announces radios properly in a radio group
 - Refactored internal id usage in `<sl-details>`, `<sl-dialog>`, `<sl-drawer>`, and `<sl-dropdow>`
 - Removed `position: relative` from the common component stylesheet
 

@@ -7,8 +7,6 @@ import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import styles from './radio.styles';
 
-let id = 0;
-
 /**
  * @since 2.0
  * @status stable
@@ -30,9 +28,6 @@ export default class SlRadio extends LitElement {
 
   @query('input[type="radio"]') input: HTMLInputElement;
 
-  private inputId = `radio-${++id}`;
-  private labelId = `radio-label-${id}`;
-
   @state() private hasFocus = false;
 
   /** The radio's name attribute. */
@@ -52,6 +47,23 @@ export default class SlRadio extends LitElement {
    * provided by the `setCustomValidity` method.
    */
   @property({ type: Boolean, reflect: true }) invalid = false;
+
+  firstUpdated() {
+    const radios = this.getAllRadios();
+    const checkedRadio = radios.find(radio => radio.checked);
+
+    radios.map(radio => {
+      if (radio.input) {
+        radio.input.tabIndex = -1;
+      }
+    });
+
+    if (checkedRadio) {
+      checkedRadio.input.tabIndex = 0;
+    } else if (radios.length) {
+      radios[0].input.tabIndex = 0;
+    }
+  }
 
   /** Simulates a click on the radio. */
   click() {
@@ -102,7 +114,12 @@ export default class SlRadio extends LitElement {
   @watch('checked', { waitUntilFirstUpdate: true })
   handleCheckedChange() {
     if (this.checked) {
-      this.getSiblingRadios().map(radio => (radio.checked = false));
+      this.input.tabIndex = 0;
+
+      this.getSiblingRadios().map(radio => {
+        radio.input.tabIndex = -1;
+        radio.checked = false;
+      });
     }
   }
 
@@ -133,9 +150,15 @@ export default class SlRadio extends LitElement {
       if (index < 0) index = radios.length - 1;
       if (index > radios.length - 1) index = 0;
 
-      this.getAllRadios().map(radio => (radio.checked = false));
+      this.getAllRadios().map(radio => {
+        radio.checked = false;
+        radio.input.tabIndex = -1;
+      });
+
       radios[index].focus();
       radios[index].checked = true;
+      radios[index].input.tabIndex = 0;
+
       emit(radios[index], 'sl-change');
 
       event.preventDefault();
@@ -143,6 +166,10 @@ export default class SlRadio extends LitElement {
   }
 
   render() {
+    this.setAttribute('role', 'radio');
+    this.setAttribute('aria-checked', this.checked ? 'true' : 'false');
+    this.setAttribute('aria-disabled', this.disabled ? 'true' : 'false');
+
     return html`
       <label
         part="base"
@@ -152,25 +179,20 @@ export default class SlRadio extends LitElement {
           'radio--disabled': this.disabled,
           'radio--focused': this.hasFocus
         })}
-        for=${this.inputId}
         @keydown=${this.handleKeyDown}
       >
         <input
-          id=${this.inputId}
           class="radio__input"
           type="radio"
           name=${ifDefined(this.name)}
           value=${ifDefined(this.value)}
           .checked=${live(this.checked)}
           .disabled=${this.disabled}
-          aria-checked=${this.checked ? 'true' : 'false'}
-          aria-disabled=${this.disabled ? 'true' : 'false'}
-          aria-labelledby=${this.labelId}
+          aria-hidden="true"
           @click=${this.handleClick}
           @blur=${this.handleBlur}
           @focus=${this.handleFocus}
         />
-
         <span part="control" class="radio__control">
           <span part="checked-icon" class="radio__icon">
             <svg viewBox="0 0 16 16">
@@ -183,7 +205,7 @@ export default class SlRadio extends LitElement {
           </span>
         </span>
 
-        <span part="label" id=${this.labelId} class="radio__label">
+        <span part="label" class="radio__label">
           <slot></slot>
         </span>
       </label>
