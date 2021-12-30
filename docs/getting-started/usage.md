@@ -108,9 +108,21 @@ For example, `<button>` and `<sl-button>` both have a `type` attribute, but it d
 
 ## Waiting for Components to Load
 
-Web components are registered with JavaScript, so depending on how and when you load Shoelace, you may notice a [Flash of Undefined Custom Elements (FOUCE)](https://www.abeautifulsite.net/posts/flash-of-undefined-custom-elements/) when the page loads. There are a few ways to prevent this, all of which are described in the linked article.
+Web components are registered with JavaScript, so depending on how and when you load Shoelace, you may notice a [Flash of Undefined Custom Elements (FOUCE)](https://www.abeautifulsite.net/posts/flash-of-undefined-custom-elements/) when the page loads. There are a couple ways to prevent this, both of which are described in the linked article.
 
-Perhaps the best method of prevention is [`customElements.whenDefined()`](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/whenDefined), which returns a promise that resolves when the specified element is registered. You can use this approach to apply a class to the `<body>` that shows the UI as soon as all your custom elements are ready.
+One option is to use the [`:defined`](https://developer.mozilla.org/en-US/docs/Web/CSS/:defined) CSS pseudo-class to "hide" custom elements that haven't been registered yet. You can scope it to specific tags or you can hide all undefined custom elements as shown below.
+
+```css
+:not(:defined) {
+  visibility: hidden;
+}
+```
+
+As soon as a custom element is registered, it will immediately appear with all of its styles, effectively eliminating FOUCE. Note the use of `visibility: hidden` instead of `display: none` to reduce shifting as elements are registered. The drawback to this approach is that custom elements can potentially appear one by one instead of all at the same time.
+
+Another option is to use [`customElements.whenDefined()`](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/whenDefined), which returns a promise that resolves when the specified element gets registered. You'll probably want to use it with [`Promise.allSettled()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/allSettled) in case an element fails to load for some reason.
+
+A clever way to use this method is to hide the `<body>` with `opacity: 0` and add a class that fades it in as soon as all your custom elements are defined.
 
 ```html
 <style>
@@ -125,27 +137,17 @@ Perhaps the best method of prevention is [`customElements.whenDefined()`](https:
 </style>
 
 <script type="module">
-  await Promise.all([
-    customElements.whenDefined('sl-badge'),
+  await Promise.allSettled([
     customElements.whenDefined('sl-button'),
-    customElements.whenDefined('sl-tag'),
+    customElements.whenDefined('sl-card'),
+    customElements.whenDefined('sl-rating')
   ]);
 
-  // Badge, button, and tag are registered now! Add 
+  // Button, card, and rating are registered now! Add
   // the `ready` class so the UI fades in.
   document.body.classList.add('ready');
 </script>
 ```
-
-Another approach is to use the [`:defined`](https://developer.mozilla.org/en-US/docs/Web/CSS/:defined) CSS pseudo-class to "hide" custom elements that haven't been registered yet. You can scope it to specific elements or you can hide all undefined custom elements as shown below.
-
-```css
-:not(:defined) {
-  visibility: hidden;
-}
-```
-
-As soon as a custom element is registered, it will immediately appear with all of its styles, effectively eliminating FOUCE. Note the use of `visibility: hidden` instead of `display: none` to reduce shifting as elements are registered.
 
 ## Code Completion
 
