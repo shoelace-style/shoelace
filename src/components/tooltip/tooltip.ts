@@ -8,8 +8,6 @@ import { watch } from '../../internal/watch';
 import { setDefaultAnimation, getAnimation } from '../../utilities/animation-registry';
 import styles from './tooltip.styles';
 
-let id = 0;
-
 /**
  * @since 2.0
  * @status stable
