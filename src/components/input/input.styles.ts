@@ -243,6 +243,7 @@ export default css`
   .input__password-toggle {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     font-size: inherit;
     color: var(--sl-input-icon-color);
     border: none;
