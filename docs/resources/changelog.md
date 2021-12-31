@@ -8,6 +8,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
+- 🚨 BREAKING: changed the `alt` attribute to `label` in `<sl-avatar>` for consistency with other components
 - Added `role="status"` to `<sl-spinner>`
 - Fixed broken spinner animation in Safari [#633](https://github.com/shoelace-style/shoelace/issues/633)
 - Fixed an a11y bug in `<sl-tooltip>` where `aria-describedby` referenced an id in the shadow root

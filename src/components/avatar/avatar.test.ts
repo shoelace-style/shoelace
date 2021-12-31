@@ -8,7 +8,7 @@ describe('<sl-avatar>', () => {
 
   describe('when provided no parameters', async () => {
     before(async () => {
-      el = await fixture<SlAvatar>(html` <sl-avatar alt="Avatar"></sl-avatar> `);
+      el = await fixture<SlAvatar>(html` <sl-avatar label="Avatar"></sl-avatar> `);
     });
 
     it('passes accessibility test', async () => {
@@ -22,18 +22,18 @@ describe('<sl-avatar>', () => {
     });
   });
 
-  describe('when provided an image and alt parameter', async () => {
+  describe('when provided an image and label parameter', async () => {
     const image =
       'https://images.unsplash.com/photo-1529778873920-4da4926a72c2?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80';
-    const alt = 'Gray tabby kitten looking down';
+    const label = 'Gray tabby kitten looking down';
     before(async () => {
-      el = await fixture<SlAvatar>(html`<sl-avatar image="${image}" alt="${alt}"></sl-avatar>`);
+      el = await fixture<SlAvatar>(html`<sl-avatar image="${image}" label="${label}"></sl-avatar>`);
     });
 
     it('passes accessibility test', async () => {
       /**
        * The image element itself is ancillary, because it's parent container contains the
-       * aria-label which dictates what "sl-avatar" is. This also implies that alt text will
+       * aria-label which dictates what "sl-avatar" is. This also implies that label text will
        * resolve to "" when not provided and ignored by readers. This is why we use alt="" on
        * the image element to pass accessibility.
        * https://html.spec.whatwg.org/multipage/images.html#ancillary-images
@@ -47,17 +47,15 @@ describe('<sl-avatar>', () => {
       expect(part.getAttribute('src')).to.eq(image);
     });
 
-    it('renders the alt attribute in the "base" part', async () => {
+    it('renders the label attribute in the "base" part', async () => {
       const part = el.shadowRoot?.querySelector('[part="base"]') as HTMLElement;
 
-      expect(part.getAttribute('aria-label')).to.eq(alt);
+      expect(part.getAttribute('aria-label')).to.eq(label);
     });
 
     describe('when an error occurs when attempting to load the image', async () => {
       before(async () => {
-        el = await fixture<SlAvatar>(
-          html`<sl-avatar image="data:text/plain;not-an-image-url" alt="${alt}"></sl-avatar>`
-        );
+        el = await fixture<SlAvatar>(html`<sl-avatar image="about:config" label="${label}"></sl-avatar>`);
       });
 
       it('does not render the "image" part', async () => {
@@ -71,7 +69,7 @@ describe('<sl-avatar>', () => {
   describe('when provided initials parameter', async () => {
     const initials = 'SL';
     before(async () => {
-      el = await fixture<SlAvatar>(html`<sl-avatar initials="${initials}" alt="Avatar"></sl-avatar>`);
+      el = await fixture<SlAvatar>(html`<sl-avatar initials="${initials}" label="Avatar"></sl-avatar>`);
     });
 
     it('passes accessibility test', async () => {
@@ -88,7 +86,7 @@ describe('<sl-avatar>', () => {
   ['square', 'rounded', 'circle'].forEach(shape => {
     describe(`when passed a shape attribute ${shape}`, () => {
       before(async () => {
-        el = await fixture<SlAvatar>(html`<sl-avatar shape="${shape as any}" alt="Shaped avatar"></sl-avatar>`);
+        el = await fixture<SlAvatar>(html`<sl-avatar shape="${shape as any}" label="Shaped avatar"></sl-avatar>`);
       });
 
       it('passes accessibility test', async () => {
@@ -106,7 +104,7 @@ describe('<sl-avatar>', () => {
 
   describe('when passed a <span>, on slot "icon"', async () => {
     before(async () => {
-      el = await fixture<SlAvatar>(html`<sl-avatar alt="Avatar"><span slot="icon">random content</span></sl-avatar>`);
+      el = await fixture<SlAvatar>(html`<sl-avatar label="Avatar"><span slot="icon">random content</span></sl-avatar>`);
     });
 
     it('passes accessibility test', async () => {

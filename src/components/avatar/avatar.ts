@@ -29,8 +29,8 @@ export default class SlAvatar extends LitElement {
   /** The image source to use for the avatar. */
   @property() image: string;
 
-  /** Alternative text for the image. */
-  @property() alt: string;
+  /** A label to use to describe the avatar to assistive devices. */
+  @property() label: string;
 
   /** Initials to use as a fallback when no image is available (1-2 characters max recommended). */
   @property() initials: string;
@@ -49,7 +49,7 @@ export default class SlAvatar extends LitElement {
           'avatar--square': this.shape === 'square'
         })}
         role="img"
-        aria-label=${this.alt}
+        aria-label=${this.label}
       >
         ${this.initials
           ? html` <div part="initials" class="avatar__initials">${this.initials}</div> `
