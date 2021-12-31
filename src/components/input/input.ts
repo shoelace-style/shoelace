@@ -143,6 +143,26 @@ export default class SlInput extends LitElement {
   /** The input's inputmode attribute. */
   @property() inputmode: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
 
+  /** Gets or sets the current value as a `Date` object. Only valid when `type` is `date`. */
+  get valueAsDate() {
+    return this.input.valueAsDate as Date;
+  }
+
+  set valueAsDate(newValue: Date) {
+    this.input.valueAsDate = newValue;
+    this.value = this.input.value;
+  }
+
+  /** Gets or sets the current value as a number. */
+  get valueAsNumber() {
+    return this.input.valueAsNumber as number;
+  }
+
+  set valueAsNumber(newValue: number) {
+    this.input.valueAsNumber = newValue;
+    this.value = this.input.value;
+  }
+
   connectedCallback() {
     super.connectedCallback();
     this.handleSlotChange = this.handleSlotChange.bind(this);
