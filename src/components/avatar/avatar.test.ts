@@ -53,21 +53,6 @@ describe('<sl-avatar>', () => {
 
       expect(part.getAttribute('aria-label')).to.eq(label);
     });
-
-    describe('when an error occurs when attempting to load the image', async () => {
-      before(async () => {
-        el = await fixture<SlAvatar>(html`<sl-avatar image="404.gif" label="${label}"></sl-avatar>`);
-
-        // Wait for the 404 to resolve and trigger an update
-        await el.updateComplete;
-      });
-
-      it('does not render the "image" part', async () => {
-        const part = el.shadowRoot?.querySelector('[part="image"]') as HTMLImageElement;
-
-        expect(part).not.to.exist;
-      });
-    });
   });
 
   describe('when provided initials parameter', async () => {
