@@ -155,20 +155,20 @@ export default css`
 
   .input--small .input__control {
     height: calc(var(--sl-input-height-small) - var(--sl-input-border-width) * 2);
-    margin: 0 var(--sl-input-spacing-small);
+    padding: 0 var(--sl-input-spacing-small);
   }
 
   .input--small .input__clear,
   .input--small .input__password-toggle {
-    margin-right: var(--sl-input-spacing-small);
+    width: calc(1em + var(--sl-input-spacing-small) * 2);
   }
 
   .input--small .input__prefix ::slotted(*) {
-    margin-left: var(--sl-input-spacing-small);
+    padding-left: var(--sl-input-spacing-small);
   }
 
   .input--small .input__suffix ::slotted(*) {
-    margin-right: var(--sl-input-spacing-small);
+    padding-right: var(--sl-input-spacing-small);
   }
 
   .input--medium {
@@ -179,20 +179,20 @@ export default css`
 
   .input--medium .input__control {
     height: calc(var(--sl-input-height-medium) - var(--sl-input-border-width) * 2);
-    margin: 0 var(--sl-input-spacing-medium);
+    padding: 0 var(--sl-input-spacing-medium);
   }
 
   .input--medium .input__clear,
   .input--medium .input__password-toggle {
-    margin-right: var(--sl-input-spacing-medium);
+    width: calc(1em + var(--sl-input-spacing-medium) * 2);
   }
 
   .input--medium .input__prefix ::slotted(*) {
-    margin-left: var(--sl-input-spacing-medium);
+    padding-left: var(--sl-input-spacing-medium);
   }
 
   .input--medium .input__suffix ::slotted(*) {
-    margin-right: var(--sl-input-spacing-medium);
+    padding-right: var(--sl-input-spacing-medium);
   }
 
   .input--large {
@@ -203,20 +203,20 @@ export default css`
 
   .input--large .input__control {
     height: calc(var(--sl-input-height-large) - var(--sl-input-border-width) * 2);
-    margin: 0 var(--sl-input-spacing-large);
+    padding: 0 var(--sl-input-spacing-large);
   }
 
   .input--large .input__clear,
   .input--large .input__password-toggle {
-    margin-right: var(--sl-input-spacing-large);
+    width: calc(1em + var(--sl-input-spacing-large) * 2);
   }
 
   .input--large .input__prefix ::slotted(*) {
-    margin-left: var(--sl-input-spacing-large);
+    padding-left: var(--sl-input-spacing-large);
   }
 
   .input--large .input__suffix ::slotted(*) {
-    margin-right: var(--sl-input-spacing-large);
+    padding-right: var(--sl-input-spacing-large);
   }
 
   /*
