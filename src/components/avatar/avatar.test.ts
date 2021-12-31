@@ -55,7 +55,7 @@ describe('<sl-avatar>', () => {
 
     describe('when an error occurs when attempting to load the image', async () => {
       before(async () => {
-        el = await fixture<SlAvatar>(html`<sl-avatar image="about:config" label="${label}"></sl-avatar>`);
+        el = await fixture<SlAvatar>(html`<sl-avatar image="404.gif" label="${label}"></sl-avatar>`);
       });
 
       it('does not render the "image" part', async () => {
