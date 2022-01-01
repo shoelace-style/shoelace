@@ -76,7 +76,7 @@
         }
       });
 
-      // Set the intial theme and sync the UI
+      // Set the initial theme and sync the UI
       setTheme(theme);
     });
   });

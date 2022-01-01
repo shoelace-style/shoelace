@@ -38,7 +38,7 @@ export default class SlSplitPanel extends LitElement {
 
   /**
    * The current position of the divider from the primary panel's edge as a percentage 0-100. Defaults to 50% of the
-   * container's intial size.
+   * container's initial size.
    */
   @property({ type: Number, reflect: true }) position = 50;
 

@@ -33,10 +33,10 @@ try {
 
     const formattedStyles = prettier.format(stripComments(css), { parser: 'css' });
     const filename = path.basename(file).replace('.styles.ts', '.css');
-    const outfile = path.join(themesDir, filename);
-    await fs.writeFile(outfile, formattedStyles, 'utf8');
+    const outFile = path.join(themesDir, filename);
+    await fs.writeFile(outFile, formattedStyles, 'utf8');
   });
 } catch (err) {
-  console.error(chalk.red('Error generating styleseheets!'));
+  console.error(chalk.red('Error generating stylesheets!'));
   console.error(err);
 }

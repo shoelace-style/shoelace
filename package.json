@@ -36,7 +36,8 @@
     "prettier": "prettier --write --loglevel warn .",
     "create": "plop --plopfile scripts/plop/plopfile.cjs",
     "test": "web-test-runner \"src/**/*.test.ts\" --node-resolve --playwright --browsers chromium firefox webkit",
-    "test:watch": "web-test-runner \"src/**/*.test.ts\" --node-resolve --playwright --browsers chromium firefox webkit --watch"
+    "test:watch": "web-test-runner \"src/**/*.test.ts\" --node-resolve --playwright --browsers chromium firefox webkit --watch",
+    "spellcheck": "cspell \"**/*.{js,ts,jsx,tsx,json,html,xml,css,scss,sass,md}\""
   },
   "dependencies": {
     "@lit-labs/react": "^1.0.1",
@@ -62,6 +63,7 @@
     "command-line-args": "^5.2.0",
     "comment-parser": "^1.1.5",
     "concurrently": "^5.3.0",
+    "cspell": "^5.14.0",
     "del": "^6.0.0",
     "download": "^8.0.0",
     "esbuild": "^0.12.4",
@@ -69,10 +71,11 @@
     "get-port": "^5.1.1",
     "globby": "^11.0.4",
     "husky": "^4.3.8",
+    "lint-staged": "^12.1.4",
     "lunr": "^2.3.9",
     "mkdirp": "^0.5.5",
     "plop": "^2.7.4",
-    "prettier": "^2.2.1",
+    "prettier": "^2.5.1",
     "react": "^17.0.2",
     "recursive-copy": "^2.0.11",
     "sinon": "^11.1.1",
@@ -83,7 +86,11 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run prettier"
+      "pre-commit": "lint-staged"
     }
+  },
+  "lint-staged": {
+    "*.{js,ts,jsx,tsx,json,html,xml,css,scss,sass,md}": "cspell --no-must-find-files",
+    "*": "prettier --write --ignore-unknown"
   }
 }

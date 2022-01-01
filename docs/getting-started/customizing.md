@@ -40,9 +40,7 @@ Shoelace components use a [shadow DOM](https://developer.mozilla.org/en-US/docs/
 Here's an example that modifies buttons with the `tomato-button` class.
 
 ```html preview
-<sl-button class="tomato-button">
-  Tomato Button
-</sl-button>
+<sl-button class="tomato-button"> Tomato Button </sl-button>
 
 <style>
   .tomato-button::part(base) {
@@ -51,15 +49,15 @@ Here's an example that modifies buttons with the `tomato-button` class.
   }
 
   .tomato-button::part(base):hover {
-    background: rgba(255, 99, 71, .1);
-  }  
+    background: rgba(255, 99, 71, 0.1);
+  }
 
   .tomato-button::part(base):active {
-    background: rgba(255, 99, 71, .2);
-  }    
+    background: rgba(255, 99, 71, 0.2);
+  }
 
   .tomato-button::part(base):focus-visible {
-    box-shadow: 0 0 0 3px rgba(255, 99, 71, .33);
+    box-shadow: 0 0 0 3px rgba(255, 99, 71, 0.33);
   }
 
   .tomato-button::part(label) {
@@ -74,9 +72,9 @@ At first glance, this approach might seem a bit verbose or even limiting, but it
 
 - The internal structure of a component will likely change as it evolves. By exposing component parts through an API, the internals can be reworked without fear of breaking customizations as long as its parts remain intact.
 
-- It encourages us to think more about how components are designed and how customizations should be allowed before users can take advantage of them. Once we opt a part into the component's API, it's guaranteed to be supported and can't be removed until a major version of the library is released.
+- It encourages us to think more about how components are designed and how customizations should be allowed before users can take advantage of them. Once we opt a part into the component's API, it's guaranteed to be supported and can't be removed until a major version of the library is released.
 
-Most (but not all) components expose parts. You can find them in each component's API documention under the "CSS Parts" section.
+Most (but not all) components expose parts. You can find them in each component's API documentation under the "CSS Parts" section.
 
 ## Custom Properties
 

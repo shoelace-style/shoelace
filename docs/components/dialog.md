@@ -1,3 +1,5 @@
+<!-- cspell:dictionaries lorem-ipsum -->
+
 # Dialog
 
 [component-header:sl-dialog]
@@ -83,12 +85,7 @@ const App = () => {
 
   return (
     <>
-      <SlDialog 
-        label="Dialog" 
-        open={open} 
-        style={{ '--width': '50vw' }} 
-        onSlAfterHide={() => setOpen(false)}
-      >
+      <SlDialog label="Dialog" open={open} style={{ '--width': '50vw' }} onSlAfterHide={() => setOpen(false)}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         <SlButton slot="footer" variant="primary" onClick={() => setOpen(false)}>
           Close
@@ -135,11 +132,13 @@ const App = () => {
   return (
     <>
       <SlDialog label="Dialog" open={open} onSlAfterHide={() => setOpen(false)}>
-        <div style={{
-          height: '150vh',
-          border: 'dashed 2px var(--sl-color-neutral-200)',
-          padding: '0 1rem'
-        }}>
+        <div
+          style={{
+            height: '150vh',
+            border: 'dashed 2px var(--sl-color-neutral-200)',
+            padding: '0 1rem'
+          }}
+        >
           <p>Scroll down and give it a try! 👇</p>
         </div>
 
@@ -189,9 +188,9 @@ const App = () => {
 
   return (
     <>
-      <SlDialog 
-        label="Dialog" 
-        open={open} 
+      <SlDialog
+        label="Dialog"
+        open={open}
         onSlRequestClose={event => event.preventDefault()}
         onSlAfterHide={() => setOpen(false)}
       >
@@ -237,11 +236,7 @@ By default, the dialog's panel will gain focus when opened. This allows a subseq
 
 ```jsx react
 import { useRef, useState } from 'react';
-import { 
-  SlButton, 
-  SlDialog, 
-  SlInput 
-} from '@shoelace-style/shoelace/dist/react';
+import { SlButton, SlDialog, SlInput } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => {
   const input = useRef(null);
@@ -254,12 +249,7 @@ const App = () => {
 
   return (
     <>
-      <SlDialog 
-        label="Dialog" 
-        open={open} 
-        onSlInitialFocus={handleInitialFocus}
-        onSlAfterHide={() => setOpen(false)}
-      >
+      <SlDialog label="Dialog" open={open} onSlInitialFocus={handleInitialFocus} onSlAfterHide={() => setOpen(false)}>
         <SlInput ref={input} placeholder="I will have focus when the dialog is opened" />
         <SlButton slot="footer" variant="primary" onClick={() => setOpen(false)}>
           Close

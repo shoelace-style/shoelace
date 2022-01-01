@@ -61,7 +61,7 @@ To set the initial position, use the `position` attribute. If no position is pro
 
 ### Initial Position in Pixels
 
-To set the intial position in pixels instead of a percentage, use the `position-in-pixels` attribute.
+To set the initial position in pixels instead of a percentage, use the `position-in-pixels` attribute.
 
 ```html preview
 <sl-split-panel position-in-pixels="150">

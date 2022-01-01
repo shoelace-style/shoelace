@@ -3,6 +3,7 @@
     "ms-vscode.vscode-typescript-tslint-plugin",
     "esbenp.prettier-vscode",
     "bierner.lit-html",
-    "bashmish.es6-string-css"
+    "bashmish.es6-string-css",
+    "streetsidesoftware.code-spell-checker"
   ]
 }

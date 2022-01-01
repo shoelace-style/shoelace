@@ -42,16 +42,16 @@ function CustomEls({ URL }) {
     if (customEls.current) {
       return;
     }
-    
-    const { setBasePath } = require("@shoelace-style/shoelace/dist/utilities/base-path");
+
+    const { setBasePath } = require('@shoelace-style/shoelace/dist/utilities/base-path');
 
     setBasePath(`${URL}/static/static`);
-    
+
     // This imports all components
-    require("@shoelace-style/shoelace/dist/shoelace");
+    require('@shoelace-style/shoelace/dist/shoelace');
 
     // If you want to selectively import components, replace this line with your own definitions
-    // require("@shoelace-style/shoelace/dist/components/button/button");
+    // require('@shoelace-style/shoelace/dist/components/button/button');
 
     customEls.current = true;
   }, [URL, customEls]);
@@ -77,7 +77,7 @@ function MyApp({ Component, pageProps, URL }) {
       {process.browser && <CustomEls URL={URL} />}
       <Component {...pageProps} />
     </>
-  )
+  );
 }
 ```
 
@@ -92,7 +92,7 @@ BASE_URL="localhost:3000"
 Then, modify your `MyApp` class in `_app.js` to pass this process environment into your render:
 
 ```javascript
-MyApp.getInitialProps = async (context) => {
+MyApp.getInitialProps = async context => {
   const URL = process.env.BASE_URL;
 
   return {
@@ -108,8 +108,8 @@ MyApp.getInitialProps = async (context) => {
 Next we need to add Shoelace's assets to the final build output. To do this, modify `next.config.js` to look like this.
 
 ```javascript
-const path = require("path");
-const CopyPlugin = require("copy-webpack-plugin");
+const path = require('path');
+const CopyPlugin = require('copy-webpack-plugin');
 const withPlugins = require('next-compose-plugins');
 const withTM = require('next-transpile-modules')(['@shoelace-style/shoelace']);
 
@@ -130,10 +130,8 @@ module.exports = withPlugins([withTM], {
 });
 ```
 
-?> This will copy the files from `node_modules` into your `static` folder on every development serve or build. You may want to avoid commiting these into your repo. To do so, simply add `static/assets` into your `.gitignore` folder
+?> This will copy the files from `node_modules` into your `static` folder on every development serve or build. You may want to avoid committing these into your repo. To do so, simply add `static/assets` into your `.gitignore` folder
 
 ## Additional Resources
 
 - There is a third-party [example repo](https://github.com/crutchcorn/nextjs-shoelace-example), courtesy of [crutchcorn](https://github.com/crutchcorn), available to help you get started.
-
-  

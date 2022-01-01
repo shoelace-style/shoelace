@@ -33,7 +33,7 @@ describe('<sl-breadcrumb>', () => {
     });
   });
 
-  describe('when provided a standard list of el-breadcrumb-item children and an element in the slot "seperator" to support Custom Separators', async () => {
+  describe('when provided a standard list of el-breadcrumb-item children and an element in the slot "separator" to support Custom Separators', async () => {
     before(async () => {
       el = await fixture<SlBreadcrumb>(html`
         <sl-breadcrumb>

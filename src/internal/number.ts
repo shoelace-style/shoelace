@@ -11,7 +11,7 @@ export function formatBytes(bytes: number, options: FormatBytesOptions) {
   );
 
   const byteUnits = ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-  const bitUnits = ['b', 'kbit', 'Mbit', 'Gbit', 'Tbit', 'Pbit', 'Ebit', 'Zbit', 'Ybit'];
+  const bitUnits = ['b', 'kbit', 'Mbit', 'Gbit', 'Tbit', 'Pbit', 'Ebit', 'Zbit', 'Ybit']; // cspell:disable-line
   const units = options.unit === 'bytes' ? byteUnits : bitUnits;
   const isNegative = bytes < 0;
 

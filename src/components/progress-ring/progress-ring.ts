@@ -40,7 +40,7 @@ export default class SlProgressRing extends LitElement {
 
     //
     // This block is only required for Safari because it doesn't transition the circle when the custom properties
-    // change, possibly because of a mix of pixel + unitless values in the calc() function. It seems like a Safari bug,
+    // change, possibly because of a mix of pixel + unit-less values in the calc() function. It seems like a Safari bug,
     // but I couldn't pinpoint it so this works around the problem.
     //
     if (changedProps.has('percentage')) {

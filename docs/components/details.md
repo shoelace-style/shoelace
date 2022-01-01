@@ -1,3 +1,5 @@
+<!-- cspell:dictionaries lorem-ipsum -->
+
 # Details
 
 [component-header:sl-details]
