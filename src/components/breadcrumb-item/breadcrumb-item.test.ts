@@ -15,7 +15,7 @@ describe('<sl-breadcrumb-item>', () => {
       await expect(el).to.be.accessible();
     });
 
-    it('should hide the seperator from screen readers', async () => {
+    it('should hide the separator from screen readers', async () => {
       const separator: HTMLSpanElement = el.shadowRoot.querySelector('[part="separator"]');
       expect(separator).attribute('aria-hidden', 'true');
     });

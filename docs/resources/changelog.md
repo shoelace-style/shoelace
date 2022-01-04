@@ -18,7 +18,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Improved `<sl-spinner>` track color when used on various backgrounds
 - Improved a11y in `<sl-radio>` so VoiceOver announces radios properly in a radio group
 - Improved the API for the experimental `<sl-split-panel>` component by making `position` accept a percentage and adding the `position-in-pixels` attribute
-- Refactored internal id usage in `<sl-details>`, `<sl-dialog>`, `<sl-drawer>`, and `<sl-dropdow>`
+- Refactored internal id usage in `<sl-details>`, `<sl-dialog>`, `<sl-drawer>`, and `<sl-dropdown>`
 - Removed `position: relative` from the common component stylesheet
 
 ## 2.0.0-beta.63
@@ -55,9 +55,9 @@ This release improves the dark theme by shifting luminance in both directions, s
 
 In [beta.48](#_200-beta48), I introduced a change to color tokens that allowed you to access alpha values at the expense of a verbose, non-standard syntax. After considering feedback from the community, I've decided to revert this change so the `rgb()` function is no longer required. Many users reported never using it for alpha, and even more reported having trouble remembering to use `rgb()` and that it was causing more harm than good.
 
-Furthermore, both Safari and Firefox have implemented [`color-mix()`](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color-mix()) behind a flag, so access to alpha channels and other capabilities are coming to the browser soon.
+Furthermore, both Safari and Firefox have implemented [`color-mix()`](<https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color-mix()>) behind a flag, so access to alpha channels and other capabilities are coming to the browser soon.
 
-If you're using color tokens in your own stylesheet, simply remove the `rgb()` to update to this version. 
+If you're using color tokens in your own stylesheet, simply remove the `rgb()` to update to this version.
 
 ```css
 .your-styles {
@@ -231,9 +231,9 @@ This release also fixes a critical bug in the color scale where `--sl-color-neut
 
 ## 2.0.0-beta.48
 
-This release improves theming by offering both light and dark themes that can be used autonomously. It also improves contrast in most components, adds a variety of new color primitives, and changes the way color tokens are consumed. 
+This release improves theming by offering both light and dark themes that can be used autonomously. It also improves contrast in most components, adds a variety of new color primitives, and changes the way color tokens are consumed.
 
-Previously, color tokens were in hexidecimal format. Now, Shoelace now uses an `R G B` format that requires you to use the `rgb()` function in your CSS.
+Previously, color tokens were in hexadecimal format. Now, Shoelace now uses an `R G B` format that requires you to use the `rgb()` function in your CSS.
 
 ```css
 .example {
@@ -288,7 +288,7 @@ This release improves how component dependencies are imported. If you've been ch
 - Fixed a bug where tabbing into `<sl-radio-group>` would not always focus the checked radio
 - Fixed a bug in component styles that prevented the box sizing reset from being applied
 - Fixed a regression in `<sl-color-picker>` where dragging the grid handle wasn't smooth
-- Fixed a bug where slot detection could incorrecly match against slots of child elements [#481](https://github.com/shoelace-style/shoelace/pull/481)
+- Fixed a bug where slot detection could incorrectly match against slots of child elements [#481](https://github.com/shoelace-style/shoelace/pull/481)
 - Fixed a bug in `<sl-input>` where focus would move to the end of the input when typing in Safari [#480](https://github.com/shoelace-style/shoelace/issues/480)
 - Improved base path utility logic
 
@@ -325,7 +325,7 @@ The docs have been updated to use the new `custom-elements.json` file. If you're
 - Added `sl-request-close` event to `<sl-dialog>` and `<sl-drawer>`
 - Added `dialog.denyClose` and `drawer.denyClose` animations
 - Fixed a bug in `<sl-color-picker>` where setting `value` immediately wouldn't trigger an update
-- Fixed a bug in `<sl-dialog>` and `<sl-drawer>` where setting `open` intially didn't set a focus trap
+- Fixed a bug in `<sl-dialog>` and `<sl-drawer>` where setting `open` initially didn't set a focus trap
 - Fixed a bug that resulted in form controls having incorrect validity when `disabled` was initially set [#473](https://github.com/shoelace-style/shoelace/issues/473)
 - Fixed a bug in the docs that caused the metadata file to be requested twice
 - Fixed a bug where tabbing out of a modal would cause the browser to lag [#466](https://github.com/shoelace-style/shoelace/issues/466)
@@ -349,7 +349,7 @@ The docs have been updated to use the new `custom-elements.json` file. If you're
 
 - Added `?` to optional arguments in methods tables in the docs
 - Added the `scrollPosition()` method to `<sl-textarea>` to get/set scroll position
-- Added intial tests for `<sl-dialog>`, `<sl-drawer>`, `<sl-dropdown>`, and `<sl-tooltip>`
+- Added initial tests for `<sl-dialog>`, `<sl-drawer>`, `<sl-dropdown>`, and `<sl-tooltip>`
 - Fixed a bug in `<sl-tab-group>` where scrollable tab icons were not displaying correctly
 - Fixed a bug in `<sl-dialog>` and `<sl-drawer>` where preventing clicks on the overlay no longer worked as described [#452](https://github.com/shoelace-style/shoelace/issues/452)
 - Fixed a bug in `<sl-dialog>` and `<sl-drawer>` where setting initial focus no longer worked as described [#453](https://github.com/shoelace-style/shoelace/issues/453)
@@ -368,7 +368,7 @@ Technical reasons aside, canceling these events seldom led to a good user experi
 - 🚨 BREAKING: `sl-show` and `sl-hide` events are no longer cancelable
 - Added Iconoir example to the icon docs
 - Added Web Test Runner
-- Added intial tests for `<sl-alert>` and `<sl-details>`
+- Added initial tests for `<sl-alert>` and `<sl-details>`
 - Changed the `cancelable` default to `false` for the internal `@event` decorator
 - Fixed a bug where toggling `open` stopped working in `<sl-alert>`, `<sl-dialog>`, `<sl-drawer>`, `<sl-dropdown>`, and `<sl-tooltip>`
 - Fixed a bug in `<sl-range>` where setting a value outside the default `min` or `max` would clamp the value [#448](https://github.com/shoelace-style/shoelace/issues/448)
@@ -579,7 +579,7 @@ The component API remains the same except for the changes noted below. Thanks fo
 - 🚨 BREAKING: Fixed animations bloat
   - Removed ~400 baked-in Animista animations because they were causing ~200KB of bloat (they can still be used with custom keyframes)
   - Reworked animations into a separate module ([`@shoelace-style/animations`](https://github.com/shoelace-style/animations)) so it's more maintainable and animations are sync with the latest version of animate.css
-  - Animation and easing names are now camelcase (e.g. `easeInOut` instead of `ease-in-out`)
+  - Animation and easing names are now camelCase (e.g. `easeInOut` instead of `ease-in-out`)
 - Added initial E2E tests [#169](https://github.com/shoelace-style/shoelace/pull/169)
 - Added the `FocusOptions` argument to all components that have a `setFocus()` method
 - Added `sl-initial-focus` event to `<sl-dialog>` and `<sl-drawer>` so focus can be customized to a specific element
@@ -650,7 +650,7 @@ The component API remains the same except for the changes noted below. Thanks fo
 - Fixed a bug where `<sl-menu-item>` wouldn't render properly in the dark theme
 - Fixed a bug where `<sl-select>` would show an autocomplete menu
 - Improved placeholder contrast in dark theme
-- Updated to Boostrap Icons 1.1.0
+- Updated to Bootstrap Icons 1.1.0
 - Updated to Stencil 2.3.0
 
 ## 2.0.0-beta.22
@@ -688,7 +688,7 @@ The component API remains the same except for the changes noted below. Thanks fo
 - Refactored `<sl-icon>` request logic and removed unused cache map
 - Reworked show/hide logic in `<sl-alert>`, `<sl-dialog>`, and `<sl-drawer>` to not use reflow hacks and the `hidden` attribute
 - Reworked slot logic in `<sl-card>`, `<sl-dialog>`, and `<sl-drawer>`
-- Updated to Popper 2.5.3 to address a fixed position bug in Firefox 
+- Updated to Popper 2.5.3 to address a fixed position bug in Firefox
 
 ## 2.0.0-beta.20
 

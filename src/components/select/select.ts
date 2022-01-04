@@ -53,8 +53,8 @@ let id = 0;
  * @csspart label - The select's label.
  * @csspart suffix - The select's suffix.
  * @csspart menu - The select menu, an <sl-menu> element.
- * @csspart tag - The multiselect option, an <sl-tag> element.
- * @csspart tags - The container in which multiselect options are rendered.
+ * @csspart tag - The multi select option, an <sl-tag> element.
+ * @csspart tags - The container in which multi select options are rendered.
  */
 @customElement('sl-select')
 export default class SlSelect extends LitElement {
@@ -77,7 +77,7 @@ export default class SlSelect extends LitElement {
   @state() private displayLabel = '';
   @state() private displayTags: TemplateResult[] = [];
 
-  /** Enables multiselect. With this enabled, value will be an array. */
+  /** Enables multi select. With this enabled, value will be an array. */
   @property({ type: Boolean, reflect: true }) multiple = false;
 
   /**

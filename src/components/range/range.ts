@@ -79,7 +79,7 @@ export default class SlRange extends LitElement {
   /** The input's step attribute. */
   @property({ type: Number }) step = 1;
 
-  /** The preferred placedment of the tooltip. */
+  /** The preferred placement of the tooltip. */
   @property() tooltip: 'top' | 'bottom' | 'none' = 'top';
 
   /** A function used to format the tooltip's value. */

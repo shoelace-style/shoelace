@@ -1,3 +1,5 @@
+<!-- cspell:dictionaries lorem-ipsum -->
+
 # Drawer
 
 [component-header:sl-drawer]
@@ -77,12 +79,7 @@ const App = () => {
 
   return (
     <>
-      <SlDrawer 
-        label="Drawer" 
-        placement="start" 
-        open={open} 
-        onSlAfterHide={() => setOpen(false)}
-      >
+      <SlDrawer label="Drawer" placement="start" open={open} onSlAfterHide={() => setOpen(false)}>
         This drawer slides in from the start.
         <SlButton slot="footer" variant="primary" onClick={() => setOpen(false)}>
           Close
@@ -126,12 +123,7 @@ const App = () => {
 
   return (
     <>
-      <SlDrawer 
-        label="Drawer" 
-        placement="top" 
-        open={open} 
-        onSlAfterHide={() => setOpen(false)}
-      >
+      <SlDrawer label="Drawer" placement="top" open={open} onSlAfterHide={() => setOpen(false)}>
         This drawer slides in from the top.
         <SlButton slot="footer" variant="primary" onClick={() => setOpen(false)}>
           Close
@@ -175,12 +167,7 @@ const App = () => {
 
   return (
     <>
-      <SlDrawer 
-        label="Drawer" 
-        placement="bottom" 
-        open={open} 
-        onSlAfterHide={() => setOpen(false)}
-      >
+      <SlDrawer label="Drawer" placement="bottom" open={open} onSlAfterHide={() => setOpen(false)}>
         This drawer slides in from the bottom.
         <SlButton slot="footer" variant="primary" onClick={() => setOpen(false)}>
           Close
@@ -239,15 +226,9 @@ const App = () => {
           marginBottom: '1rem'
         }}
       >
-        The drawer will be contained to this box. This content won't shift or be affected in any way when the drawer opens.
-
-        <SlDrawer
-          label="Drawer" 
-          contained 
-          open={open} 
-          onSlAfterHide={() => setOpen(false)}
-          style={{ '--size': '50%' }}
-        >
+        The drawer will be contained to this box. This content won't shift or be affected in any way when the drawer
+        opens.
+        <SlDrawer label="Drawer" contained open={open} onSlAfterHide={() => setOpen(false)} style={{ '--size': '50%' }}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           <SlButton slot="footer" variant="primary" onClick={() => setOpen(false)}>
             Close
@@ -292,11 +273,7 @@ const App = () => {
 
   return (
     <>
-      <SlDrawer 
-        label="Drawer" 
-        open={open} onSlAfterHide={() => setOpen(false)}
-        style={{ '--size': '50vw' }}
-      >
+      <SlDrawer label="Drawer" open={open} onSlAfterHide={() => setOpen(false)} style={{ '--size': '50vw' }}>
         This drawer is always 50% of the viewport.
         <SlButton slot="footer" variant="primary" onClick={() => setOpen(false)}>
           Close
@@ -343,7 +320,7 @@ const App = () => {
   return (
     <>
       <SlDrawer label="Drawer" open={open} onSlAfterHide={() => setOpen(false)}>
-        <div 
+        <div
           style={{
             height: '150vh',
             border: 'dashed 2px var(--sl-color-neutral-200)',
@@ -368,7 +345,6 @@ const App = () => {
 By default, drawers will close when the user clicks the close button, clicks the overlay, or presses the <kbd>Escape</kbd> key. In most cases, the default behavior is the best behavior in terms of UX. However, there are situations where this may be undesirable, such as when data loss will occur.
 
 To keep the drawer open in such cases, you can cancel the `sl-request-close` event. When canceled, the drawer will remain open and pulse briefly to draw the user's attention to it.
-
 
 ```html preview
 <sl-drawer label="Drawer" class="drawer-deny-close">
@@ -399,9 +375,9 @@ const App = () => {
 
   return (
     <>
-      <SlDrawer 
-        label="Drawer" 
-        open={open} 
+      <SlDrawer
+        label="Drawer"
+        open={open}
         onSlRequestClose={event => event.preventDefault()}
         onSlAfterHide={() => setOpen(false)}
       >
@@ -441,17 +417,13 @@ By default, the drawer's panel will gain focus when opened. This allows the firs
   drawer.addEventListener('sl-initial-focus', event => {
     event.preventDefault();
     input.focus({ preventScroll: true });
-  });    
+  });
 </script>
 ```
 
 ```jsx react
 import { useRef, useState } from 'react';
-import { 
-  SlButton, 
-  SlDrawer, 
-  SlInput 
-} from '@shoelace-style/shoelace/dist/react';
+import { SlButton, SlDrawer, SlInput } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => {
   const input = useRef(null);
@@ -464,12 +436,7 @@ const App = () => {
 
   return (
     <>
-      <SlDrawer 
-        label="Drawer" 
-        open={open} 
-        onSlInitialFocus={handleInitialFocus}
-        onSlAfterHide={() => setOpen(false)}
-      >
+      <SlDrawer label="Drawer" open={open} onSlInitialFocus={handleInitialFocus} onSlAfterHide={() => setOpen(false)}>
         <SlInput ref={input} placeholder="I will have focus when the drawer is opened" />
         <SlButton slot="footer" variant="primary" onClick={() => setOpen(false)}>
           Close

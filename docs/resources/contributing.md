@@ -104,7 +104,7 @@ This will generate a source file, a stylesheet, and a docs page for you. When yo
 
 Component development occurs _within_ the local docs site. I've found that offering common variations _in the docs_ is more beneficial for users than segmenting demos and code examples into separate tools such as Storybook. This encourages more thorough documentation, streamlines development for maintainers, and simplifies how the project is built. It also reduces installation and startup times significantly.
 
-There is currently no hot module reloading (HMR), as browsers don't provide a way to unregister custom elements. However, most changes to the source will reload the browser automatically. 
+There is currently no hot module reloading (HMR), as browsers don't provide a way to unregister custom elements. However, most changes to the source will reload the browser automatically.
 
 For more information about running and building the project locally, refer to `README.md` in the project's root.
 
@@ -130,6 +130,14 @@ To run tests only once, make sure to build the project first.
 npm run build
 npm run test
 ```
+
+### Commit Hooks
+
+Shoelace uses [Husky](https://www.npmjs.com/package/husky) and [Lint Staged](https://www.npmjs.com/package/lint-staged) to run formatters and validations automatically on commit. The goal is to identify potential issues before creating a PR. These hooks are automatically configured when you setup this package and install dependencies for development. If the problem is not auto-fixable, then the commit will error and the log will show the issue.
+
+Potential Commit Issues:
+
+- CSpell - We use [cspell](https://www.npmjs.com/package/cspell) to provide spellchecking for code, documentation, comments, and more. These issues cannot be automatically fixed. If a typo is identified but you have verified that the word is spelled correctly, add the word to the `cspell.json`'s `"words"` array in alphabetical order. (The [VS Code CSpell extension](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) will provide IDE support for adding words to the dictionary or fixing spelling errors in-line.)
 
 ## Best Practices
 
@@ -171,7 +179,7 @@ Components should be composable, meaning you can easily reuse them with and with
 
 The `<sl-select>` component, for example, makes use of the dropdown, input, menu, and menu item components. Because it's offloading most of its functionality and styles to lower-level components, the select component remains lightweight and its appearance is consistent with other form controls and menus.
 
-### Component Stucture
+### Component Structure
 
 All components have a host element, which is a reference to the `<sl-*>` element itself. Make sure to always set the host element's `display` property to the appropriate value depending on your needs, as the default is `inline` per the custom element spec.
 
@@ -225,7 +233,7 @@ Then use the following syntax for comments so they appear in the generated docs.
 ```js
 /**
  * @cssproperty --color: The component's text color.
- * @cssproperty --background-color: The component's background color. 
+ * @cssproperty --background-color: The component's background color.
  */
 @customElement('sl-example')
 export default class SlExample {

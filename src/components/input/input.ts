@@ -125,7 +125,7 @@ export default class SlInput extends LitElement {
    */
   @property({ type: Boolean, reflect: true }) invalid = false;
 
-  /** The input's autocaptialize attribute. */
+  /** The input's autocapitalize attribute. */
   @property() autocapitalize: 'off' | 'none' | 'on' | 'sentences' | 'words' | 'characters';
 
   /** The input's autocorrect attribute. */

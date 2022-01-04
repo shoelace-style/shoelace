@@ -583,7 +583,7 @@ body[data-page^='/tokens/'] .table-wrapper td:first-child code {
   background: var(--sl-color-primary-600);
 }
 
-/* Elevation dmeo */
+/* Elevation demo */
 .elevation-demo {
   background: transparent;
   border-radius: 3px;
