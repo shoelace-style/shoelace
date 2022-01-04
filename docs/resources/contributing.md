@@ -131,6 +131,14 @@ npm run build
 npm run test
 ```
 
+### Commit Hooks
+
+Shoelace uses [Husky](https://www.npmjs.com/package/husky) and [Lint Staged](https://www.npmjs.com/package/lint-staged) to run formatters and validations automatically on commit. The goal is to identify potential issues before creating a PR. These hooks are automatically configured when you setup this package and install dependencies for development. If the problem is not auto-fixable, then the commit will error and the log will show the issue.
+
+Potential Commit Issues:
+
+- CSpell - We use [cspell](https://www.npmjs.com/package/cspell) to provide spellchecking for code, documentation, comments, and more. These issues cannot be automatically fixed. If a typo is identified but you have verified that the word is spelled correctly, add the word to the `cspell.json`'s `"words"` array in alphabetical order. (The [VS Code CSpell extension](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) will provide IDE support for adding words to the dictionary or fixing spelling errors in-line.)
+
 ## Best Practices
 
 The following is a non-exhaustive list of conventions, patterns, and best practices we try to follow. As a contributor, we ask that you make a good faith effort to follow them as well. This ensures consistency and maintainability throughout the project.
