@@ -127,7 +127,7 @@ describe('<sl-breadcrumb-item>', () => {
 
     it('should append class "breadcrumb-item--has-prefix" to "base" part', () => {
       const part = el.shadowRoot?.querySelector('[part="base"]') as HTMLElement;
-      expect(part.classList.value).to.equal('breadcrumb-item breadcrumb-item--has-prefix');
+      expect(part.classList.value.trim()).to.equal('breadcrumb-item breadcrumb-item--has-prefix');
     });
   });
 
@@ -154,7 +154,7 @@ describe('<sl-breadcrumb-item>', () => {
 
     it('should append class "breadcrumb-item--has-suffix" to "base" part', () => {
       const part = el.shadowRoot?.querySelector('[part="base"]') as HTMLElement;
-      expect(part.classList.value).to.equal('breadcrumb-item breadcrumb-item--has-suffix');
+      expect(part.classList.value.trim()).to.equal('breadcrumb-item breadcrumb-item--has-suffix');
     });
   });
 });
