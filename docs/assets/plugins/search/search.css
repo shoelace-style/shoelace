@@ -8,6 +8,7 @@ body.site-search-visible {
 
 .sidebar .search-box kbd {
   margin-top: 2px;
+  margin-right: 1rem;
 }
 
 /* Site search */
