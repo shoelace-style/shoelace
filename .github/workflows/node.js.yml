@@ -27,6 +27,4 @@ jobs:
           cache: 'npm'
       - run: npx playwright install-deps
       - run: npm ci
-      - run: npm run build --if-present
-      - run: npm run spellcheck
-      - run: npm test
+      - run: npm run release

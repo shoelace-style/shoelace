@@ -20,6 +20,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Improved the API for the experimental `<sl-split-panel>` component by making `position` accept a percentage and adding the `position-in-pixels` attribute
 - Refactored internal id usage in `<sl-details>`, `<sl-dialog>`, `<sl-drawer>`, and `<sl-dropdown>`
 - Removed `position: relative` from the common component stylesheet
+- Updated all dependencies to latest versions
 
 ## 2.0.0-beta.63
 

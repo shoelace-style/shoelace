@@ -1,7 +1,7 @@
 import commandLineArgs from 'command-line-args';
 import fs from 'fs';
 import path from 'path';
-import glob from 'globby';
+import { globby } from 'globby';
 import lunr from 'lunr';
 import { getAllComponents } from './shared.js';
 
@@ -59,7 +59,7 @@ console.log('Generating search index for documentation');
     return members.join(' ');
   }
 
-  const files = await glob('./docs/**/*.md');
+  const files = await globby('./docs/**/*.md');
   const map = {};
   const searchIndex = lunr(function () {
     // The search index uses these field names extensively, so shortening them can save some serious bytes. The initial
