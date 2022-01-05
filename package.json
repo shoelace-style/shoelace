@@ -32,7 +32,7 @@
   "scripts": {
     "start": "node scripts/build.js --bundle --serve",
     "build": "node scripts/build.js --bundle --types --copydir \"docs/dist\"",
-    "release": "npm run spellcheck && npm run prettier:check && npm run ts-check && npm run test && npm run build",
+    "release": "npm run spellcheck && npm run prettier:check && npm run ts-check && npm run build && npm run test",
     "prepublishOnly": "npm run release",
     "prettier": "prettier --write --loglevel warn .",
     "prettier:check": "prettier --check --loglevel warn .",
