@@ -40,7 +40,7 @@
     "create": "plop --plopfile scripts/plop/plopfile.js",
     "test": "web-test-runner \"src/**/*.test.ts\" --node-resolve --playwright --browsers chromium firefox webkit",
     "test:watch": "web-test-runner \"src/**/*.test.ts\" --node-resolve --playwright --browsers chromium firefox webkit --watch",
-    "spellcheck": "cspell \"**/*.{js,ts,jsx,tsx,json,html,xml,css,scss,sass,md}\"",
+    "spellcheck": "cspell \"**/*.{js,ts,jsx,tsx,json,html,xml,css,scss,sass,md}\" --no-progress",
     "list-outdated-dependencies": "npm-check-updates --format repo --peer",
     "update-dependencies": "npm-check-updates --peer -u && npm install && npm run prettier && npm run release"
   },
