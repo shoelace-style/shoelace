@@ -84,6 +84,10 @@
     "typescript": "^4.2.4",
     "wait-on": "^5.2.1"
   },
+  "engines": {
+    "npm": ">=8.0.0",
+    "node": ">=16.0.0"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
