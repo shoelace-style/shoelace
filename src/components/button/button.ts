@@ -4,7 +4,7 @@ import { html, literal } from 'lit/static-html.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { emit } from '../../internal/event';
-import { hasSlot } from '../../internal/slot';
+import { HasSlotController } from '../../internal/slot';
 import styles from './button.styles';
 
 import '../spinner/spinner';
@@ -34,10 +34,9 @@ export default class SlButton extends LitElement {
 
   @query('.button') button: HTMLButtonElement | HTMLLinkElement;
 
+  private hasSlotController = new HasSlotController(this, ['[default]', 'prefix', 'suffix']);
+
   @state() private hasFocus = false;
-  @state() private hasLabel = false;
-  @state() private hasPrefix = false;
-  @state() private hasSuffix = false;
 
   /** The button's variant. */
   @property({ reflect: true }) variant: 'default' | 'primary' | 'success' | 'neutral' | 'warning' | 'danger' | 'text' =
@@ -82,11 +81,6 @@ export default class SlButton extends LitElement {
   /** Tells the browser to download the linked file as this filename. Only used when `href` is set. */
   @property() download: string;
 
-  connectedCallback() {
-    super.connectedCallback();
-    this.handleSlotChange();
-  }
-
   /** Simulates a click on the button. */
   click() {
     this.button.click();
@@ -100,12 +94,6 @@ export default class SlButton extends LitElement {
   /** Removes focus from the button. */
   blur() {
     this.button.blur();
-  }
-
-  handleSlotChange() {
-    this.hasLabel = hasSlot(this);
-    this.hasPrefix = hasSlot(this, 'prefix');
-    this.hasSuffix = hasSlot(this, 'suffix');
   }
 
   handleBlur() {
@@ -152,9 +140,9 @@ export default class SlButton extends LitElement {
           'button--standard': !this.outline,
           'button--outline': this.outline,
           'button--pill': this.pill,
-          'button--has-label': this.hasLabel,
-          'button--has-prefix': this.hasPrefix,
-          'button--has-suffix': this.hasSuffix
+          'button--has-label': this.hasSlotController.test('[default]'),
+          'button--has-prefix': this.hasSlotController.test('prefix'),
+          'button--has-suffix': this.hasSlotController.test('suffix')
         })}
         ?disabled=${ifDefined(isLink ? undefined : this.disabled)}
         type=${ifDefined(isLink ? undefined : this.submit ? 'submit' : 'button')}
@@ -172,13 +160,13 @@ export default class SlButton extends LitElement {
         @click=${this.handleClick}
       >
         <span part="prefix" class="button__prefix">
-          <slot @slotchange=${this.handleSlotChange} name="prefix"></slot>
+          <slot name="prefix"></slot>
         </span>
         <span part="label" class="button__label">
-          <slot @slotchange=${this.handleSlotChange}></slot>
+          <slot></slot>
         </span>
         <span part="suffix" class="button__suffix">
-          <slot @slotchange=${this.handleSlotChange} name="suffix"></slot>
+          <slot name="suffix"></slot>
         </span>
         ${
           this.caret

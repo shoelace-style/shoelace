@@ -1,7 +1,7 @@
 import { LitElement, html } from 'lit';
-import { customElement, state } from 'lit/decorators.js';
+import { customElement } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { hasSlot } from '../../internal/slot';
+import { HasSlotController } from '../../internal/slot';
 import styles from './card.styles';
 
 /**
@@ -28,15 +28,7 @@ import styles from './card.styles';
 export default class SlCard extends LitElement {
   static styles = styles;
 
-  @state() private hasFooter = false;
-  @state() private hasImage = false;
-  @state() private hasHeader = false;
-
-  handleSlotChange() {
-    this.hasFooter = hasSlot(this, 'footer');
-    this.hasImage = hasSlot(this, 'image');
-    this.hasHeader = hasSlot(this, 'header');
-  }
+  private hasSlotController = new HasSlotController(this, ['footer', 'header', 'image']);
 
   render() {
     return html`
@@ -44,17 +36,17 @@ export default class SlCard extends LitElement {
         part="base"
         class=${classMap({
           card: true,
-          'card--has-footer': this.hasFooter,
-          'card--has-image': this.hasImage,
-          'card--has-header': this.hasHeader
+          'card--has-footer': this.hasSlotController.test('footer'),
+          'card--has-image': this.hasSlotController.test('image'),
+          'card--has-header': this.hasSlotController.test('header')
         })}
       >
         <div part="image" class="card__image">
-          <slot name="image" @slotchange=${this.handleSlotChange}></slot>
+          <slot name="image"></slot>
         </div>
 
         <div part="header" class="card__header">
-          <slot name="header" @slotchange=${this.handleSlotChange}></slot>
+          <slot name="header"></slot>
         </div>
 
         <div part="body" class="card__body">
@@ -62,7 +54,7 @@ export default class SlCard extends LitElement {
         </div>
 
         <div part="footer" class="card__footer">
-          <slot name="footer" @slotchange=${this.handleSlotChange}></slot>
+          <slot name="footer"></slot>
         </div>
       </div>
     `;

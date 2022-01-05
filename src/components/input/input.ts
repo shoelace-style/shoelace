@@ -6,7 +6,7 @@ import { live } from 'lit/directives/live.js';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import { getLabelledBy, renderFormControl } from '../../internal/form-control';
-import { hasSlot } from '../../internal/slot';
+import { HasSlotController } from '../../internal/slot';
 import styles from './input.styles';
 
 import '../icon/icon';
@@ -49,13 +49,12 @@ export default class SlInput extends LitElement {
 
   @query('.input__control') input: HTMLInputElement;
 
+  private hasSlotController = new HasSlotController(this, ['help-text', 'label']);
   private inputId = `input-${++id}`;
   private helpTextId = `input-help-text-${id}`;
   private labelId = `input-label-${id}`;
 
   @state() private hasFocus = false;
-  @state() private hasHelpTextSlot = false;
-  @state() private hasLabelSlot = false;
   @state() private isPasswordVisible = false;
 
   /** The input's type. */
@@ -163,19 +162,8 @@ export default class SlInput extends LitElement {
     this.value = this.input.value;
   }
 
-  connectedCallback() {
-    super.connectedCallback();
-    this.handleSlotChange = this.handleSlotChange.bind(this);
-    this.shadowRoot!.addEventListener('slotchange', this.handleSlotChange);
-  }
-
   firstUpdated() {
     this.invalid = !this.input.checkValidity();
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    this.shadowRoot!.removeEventListener('slotchange', this.handleSlotChange);
   }
 
   /** Sets focus on the input. */
@@ -276,13 +264,6 @@ export default class SlInput extends LitElement {
     this.isPasswordVisible = !this.isPasswordVisible;
   }
 
-  @watch('helpText')
-  @watch('label')
-  handleSlotChange() {
-    this.hasHelpTextSlot = hasSlot(this, 'help-text');
-    this.hasLabelSlot = hasSlot(this, 'label');
-  }
-
   @watch('value')
   handleValueChange() {
     if (this.input) {
@@ -291,16 +272,19 @@ export default class SlInput extends LitElement {
   }
 
   render() {
+    const hasLabelSlot = this.hasSlotController.test('label');
+    const hasHelpTextSlot = this.hasSlotController.test('help-text');
+
     // NOTE - always bind value after min/max, otherwise it will be clamped
     return renderFormControl(
       {
         inputId: this.inputId,
         label: this.label,
         labelId: this.labelId,
-        hasLabelSlot: this.hasLabelSlot,
+        hasLabelSlot,
         helpTextId: this.helpTextId,
         helpText: this.helpText,
-        hasHelpTextSlot: this.hasHelpTextSlot,
+        hasHelpTextSlot,
         size: this.size
       },
       html`
@@ -355,10 +339,10 @@ export default class SlInput extends LitElement {
               getLabelledBy({
                 label: this.label,
                 labelId: this.labelId,
-                hasLabelSlot: this.hasLabelSlot,
+                hasLabelSlot,
                 helpText: this.helpText,
                 helpTextId: this.helpTextId,
-                hasHelpTextSlot: this.hasHelpTextSlot
+                hasHelpTextSlot
               })
             )}
             aria-invalid=${this.invalid ? 'true' : 'false'}

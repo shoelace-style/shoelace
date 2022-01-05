@@ -1,5 +1,5 @@
 import { LitElement, html } from 'lit';
-import { customElement, property, query, state } from 'lit/decorators.js';
+import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { animateTo, stopAnimations } from '../../internal/animate';
@@ -7,7 +7,7 @@ import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import { waitForEvent } from '../../internal/event';
 import { lockBodyScrolling, unlockBodyScrolling } from '../../internal/scroll';
-import { hasSlot } from '../../internal/slot';
+import { HasSlotController } from '../../internal/slot';
 import { uppercaseFirstLetter } from '../../internal/string';
 import { isPreventScrollSupported } from '../../internal/support';
 import Modal from '../../internal/modal';
@@ -73,10 +73,9 @@ export default class SlDrawer extends LitElement {
   @query('.drawer__panel') panel: HTMLElement;
   @query('.drawer__overlay') overlay: HTMLElement;
 
+  private hasSlotController = new HasSlotController(this, ['footer']);
   private modal: Modal;
   private originalTrigger: HTMLElement | null;
-
-  @state() private hasFooter = false;
 
   /** Indicates whether or not the drawer is open. You can use this in lieu of the show/hide methods. */
   @property({ type: Boolean, reflect: true }) open = false;
@@ -104,9 +103,7 @@ export default class SlDrawer extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-
     this.modal = new Modal(this);
-    this.handleSlotChange();
   }
 
   firstUpdated() {
@@ -228,10 +225,6 @@ export default class SlDrawer extends LitElement {
     }
   }
 
-  handleSlotChange() {
-    this.hasFooter = hasSlot(this, 'footer');
-  }
-
   render() {
     return html`
       <div
@@ -245,7 +238,7 @@ export default class SlDrawer extends LitElement {
           'drawer--start': this.placement === 'start',
           'drawer--contained': this.contained,
           'drawer--fixed': !this.contained,
-          'drawer--has-footer': this.hasFooter
+          'drawer--has-footer': this.hasSlotController.test('footer')
         })}
         @keydown=${this.handleKeyDown}
       >
@@ -284,7 +277,7 @@ export default class SlDrawer extends LitElement {
           </div>
 
           <footer part="footer" class="drawer__footer">
-            <slot name="footer" @slotchange=${this.handleSlotChange}></slot>
+            <slot name="footer"></slot>
           </footer>
         </div>
       </div>

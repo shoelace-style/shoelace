@@ -6,7 +6,7 @@ import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import { getLabelledBy, renderFormControl } from '../../internal/form-control';
 import { getTextContent } from '../../internal/slot';
-import { hasSlot } from '../../internal/slot';
+import { HasSlotController } from '../../internal/slot';
 import type SlDropdown from '../dropdown/dropdown';
 import type SlIconButton from '../icon-button/icon-button';
 import type SlMenu from '../menu/menu';
@@ -65,14 +65,13 @@ export default class SlSelect extends LitElement {
   @query('.select__hidden-select') input: HTMLInputElement;
   @query('.select__menu') menu: SlMenu;
 
+  private hasSlotController = new HasSlotController(this, ['help-text', 'label']);
   private inputId = `select-${++id}`;
   private helpTextId = `select-help-text-${id}`;
   private labelId = `select-label-${id}`;
   private resizeObserver: ResizeObserver;
 
   @state() private hasFocus = false;
-  @state() private hasHelpTextSlot = false;
-  @state() private hasLabelSlot = false;
   @state() private isOpen = false;
   @state() private displayLabel = '';
   @state() private displayTags: TemplateResult[] = [];
@@ -130,12 +129,11 @@ export default class SlSelect extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.handleSlotChange = this.handleSlotChange.bind(this);
+    this.handleMenuSlotChange = this.handleMenuSlotChange.bind(this);
     this.resizeObserver = new ResizeObserver(() => this.resizeMenu());
 
     this.updateComplete.then(() => {
       this.resizeObserver.observe(this);
-      this.shadowRoot!.addEventListener('slotchange', this.handleSlotChange);
       this.syncItemsFromValue();
     });
   }
@@ -147,7 +145,6 @@ export default class SlSelect extends LitElement {
   disconnectedCallback() {
     super.disconnectedCallback();
     this.resizeObserver.unobserve(this);
-    this.shadowRoot!.removeEventListener('slotchange', this.handleSlotChange);
   }
 
   /** Checks for validity and shows the browser's validation message if the control is invalid. */
@@ -318,12 +315,7 @@ export default class SlSelect extends LitElement {
     this.syncItemsFromValue();
   }
 
-  @watch('helpText')
-  @watch('label')
-  async handleSlotChange() {
-    this.hasHelpTextSlot = hasSlot(this, 'help-text');
-    this.hasLabelSlot = hasSlot(this, 'label');
-
+  async handleMenuSlotChange() {
     // Wait for items to render before gathering labels otherwise the slot won't exist
     const items = this.getItems();
 
@@ -437,6 +429,8 @@ export default class SlSelect extends LitElement {
   }
 
   render() {
+    const hasLabelSlot = this.hasSlotController.test('label');
+    const hasHelpTextSlot = this.hasSlotController.test('help-text');
     const hasSelection = this.multiple ? this.value?.length > 0 : this.value !== '';
 
     return renderFormControl(
@@ -444,10 +438,10 @@ export default class SlSelect extends LitElement {
         inputId: this.inputId,
         label: this.label,
         labelId: this.labelId,
-        hasLabelSlot: this.hasLabelSlot,
+        hasLabelSlot,
         helpTextId: this.helpTextId,
         helpText: this.helpText,
-        hasHelpTextSlot: this.hasHelpTextSlot,
+        hasHelpTextSlot,
         size: this.size,
         onLabelClick: () => this.handleLabelClick()
       },
@@ -489,10 +483,10 @@ export default class SlSelect extends LitElement {
               getLabelledBy({
                 label: this.label,
                 labelId: this.labelId,
-                hasLabelSlot: this.hasLabelSlot,
+                hasLabelSlot,
                 helpText: this.helpText,
                 helpTextId: this.helpTextId,
-                hasHelpTextSlot: this.hasHelpTextSlot
+                hasHelpTextSlot
               })
             )}
             aria-haspopup="true"
@@ -548,7 +542,7 @@ export default class SlSelect extends LitElement {
           </div>
 
           <sl-menu part="menu" class="select__menu" @sl-select=${this.handleMenuSelect}>
-            <slot @slotchange=${this.handleSlotChange}></slot>
+            <slot @slotchange=${this.handleMenuSlotChange}></slot>
           </sl-menu>
         </sl-dropdown>
       `

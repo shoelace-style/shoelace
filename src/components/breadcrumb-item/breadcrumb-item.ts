@@ -1,8 +1,8 @@
 import { LitElement, html } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { hasSlot } from '../../internal/slot';
+import { HasSlotController } from '../../internal/slot';
 import styles from './breadcrumb-item.styles';
 
 /**
@@ -25,8 +25,7 @@ import styles from './breadcrumb-item.styles';
 export default class SlBreadcrumbItem extends LitElement {
   static styles = styles;
 
-  @state() hasPrefix = false;
-  @state() hasSuffix = false;
+  private hasSlotController = new HasSlotController(this, ['prefix', 'suffix']);
 
   /**
    * Optional URL to direct the user to when the breadcrumb item is activated. When set, a link will be rendered
@@ -40,11 +39,6 @@ export default class SlBreadcrumbItem extends LitElement {
   /** The `rel` attribute to use on the link. Only used when `href` is set. */
   @property() rel: string = 'noreferrer noopener';
 
-  handleSlotChange() {
-    this.hasPrefix = hasSlot(this, 'prefix');
-    this.hasSuffix = hasSlot(this, 'suffix');
-  }
-
   render() {
     const isLink = this.href ? true : false;
 
@@ -53,12 +47,12 @@ export default class SlBreadcrumbItem extends LitElement {
         part="base"
         class=${classMap({
           'breadcrumb-item': true,
-          'breadcrumb-item--has-prefix': this.hasPrefix,
-          'breadcrumb-item--has-suffix': this.hasSuffix
+          'breadcrumb-item--has-prefix': this.hasSlotController.test('prefix'),
+          'breadcrumb-item--has-suffix': this.hasSlotController.test('suffix')
         })}
       >
         <span part="prefix" class="breadcrumb-item__prefix">
-          <slot name="prefix" @slotchange=${this.handleSlotChange}></slot>
+          <slot name="prefix"></slot>
         </span>
 
         ${isLink
@@ -80,7 +74,7 @@ export default class SlBreadcrumbItem extends LitElement {
             `}
 
         <span part="suffix" class="breadcrumb-item__suffix">
-          <slot name="suffix" @slotchange=${this.handleSlotChange}></slot>
+          <slot name="suffix"></slot>
         </span>
 
         <span part="separator" class="breadcrumb-item__separator" aria-hidden="true">

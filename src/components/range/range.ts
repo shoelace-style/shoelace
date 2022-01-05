@@ -6,7 +6,7 @@ import { emit } from '../../internal/event';
 import { live } from 'lit/directives/live.js';
 import { watch } from '../../internal/watch';
 import { getLabelledBy, renderFormControl } from '../../internal/form-control';
-import { hasSlot } from '../../internal/slot';
+import { HasSlotController } from '../../internal/slot';
 import styles from './range.styles';
 
 let id = 0;
@@ -39,14 +39,13 @@ export default class SlRange extends LitElement {
   @query('.range__control') input: HTMLInputElement;
   @query('.range__tooltip') output: HTMLOutputElement;
 
+  private hasSlotController = new HasSlotController(this, ['help-text', 'label']);
   private inputId = `input-${++id}`;
   private helpTextId = `input-help-text-${id}`;
   private labelId = `input-label-${id}`;
   private resizeObserver: ResizeObserver;
 
   @state() private hasFocus = false;
-  @state() private hasHelpTextSlot = false;
-  @state() private hasLabelSlot = false;
   @state() private hasTooltip = false;
 
   /** The input's name attribute. */
@@ -88,13 +87,10 @@ export default class SlRange extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     this.resizeObserver = new ResizeObserver(() => this.syncRange());
-    this.shadowRoot!.addEventListener('slotchange', this.handleSlotChange);
 
     if (this.value === undefined || this.value === null) this.value = this.min;
     if (this.value < this.min) this.value = this.min;
     if (this.value > this.max) this.value = this.max;
-
-    this.handleSlotChange();
 
     this.updateComplete.then(() => {
       this.syncRange();
@@ -105,7 +101,6 @@ export default class SlRange extends LitElement {
   disconnectedCallback() {
     super.disconnectedCallback();
     this.resizeObserver.unobserve(this.input);
-    this.shadowRoot!.removeEventListener('slotchange', this.handleSlotChange);
   }
 
   /** Sets focus on the input. */
@@ -163,13 +158,6 @@ export default class SlRange extends LitElement {
     emit(this, 'sl-focus');
   }
 
-  @watch('label')
-  @watch('helpText')
-  handleSlotChange() {
-    this.hasHelpTextSlot = hasSlot(this, 'help-text');
-    this.hasLabelSlot = hasSlot(this, 'label');
-  }
-
   handleThumbDragStart() {
     this.hasTooltip = true;
   }
@@ -207,16 +195,19 @@ export default class SlRange extends LitElement {
   }
 
   render() {
+    const hasLabelSlot = this.hasSlotController.test('label');
+    const hasHelpTextSlot = this.hasSlotController.test('help-text');
+
     // NOTE - always bind value after min/max, otherwise it will be clamped
     return renderFormControl(
       {
         inputId: this.inputId,
         label: this.label,
         labelId: this.labelId,
-        hasLabelSlot: this.hasLabelSlot,
+        hasLabelSlot,
         helpTextId: this.helpTextId,
         helpText: this.helpText,
-        hasHelpTextSlot: this.hasHelpTextSlot,
+        hasHelpTextSlot,
         size: 'medium'
       },
       html`
@@ -249,10 +240,10 @@ export default class SlRange extends LitElement {
               getLabelledBy({
                 label: this.label,
                 labelId: this.labelId,
-                hasLabelSlot: this.hasLabelSlot,
+                hasLabelSlot,
                 helpText: this.helpText,
                 helpTextId: this.helpTextId,
-                hasHelpTextSlot: this.hasHelpTextSlot
+                hasHelpTextSlot
               })
             )}
             @input=${this.handleInput}

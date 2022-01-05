@@ -19,6 +19,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Improved `<sl-spinner>` track color when used on various backgrounds
 - Improved a11y in `<sl-radio>` so VoiceOver announces radios properly in a radio group
 - Improved the API for the experimental `<sl-split-panel>` component by making `position` accept a percentage and adding the `position-in-pixels` attribute
+- Refactored `<sl-breadcrumb-item>`, `<sl-button>`, `<sl-card>`, `<sl-dialog>`, `<sl-drawer>`, `<sl-input>`, `<sl-range>`, `<sl-select>`, and `<sl-textarea>` to use a Reactive Controller for slot detection
 - Refactored internal id usage in `<sl-details>`, `<sl-dialog>`, `<sl-drawer>`, and `<sl-dropdown>`
 - Removed `position: relative` from the common component stylesheet
 
