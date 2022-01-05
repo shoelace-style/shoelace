@@ -82,6 +82,7 @@
   - [Border Radius](/tokens/border-radius)
   - [Transition](/tokens/transition)
   - [Z-index](/tokens/z-index)
+  - [KBD](/tokens/kbd)
 
 - Tutorials
   - [Integrating with Laravel](/tutorials/integrating-with-laravel)
