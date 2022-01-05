@@ -13,6 +13,9 @@ import styles from './split-panel.styles';
  *
  * @event sl-reposition - Emitted when the divider's position changes.
  *
+ * @csspart start - The start panel.
+ * @csspart end - The end panel.
+ * @csspart panel - Targets both the start and end panels.
  * @csspart divider - The divider that separates the start and end panels.
  *
  * @slot start - The start panel.
@@ -238,7 +241,7 @@ export default class SlSplitPanel extends LitElement {
     }
 
     return html`
-      <div class="start">
+      <div part="panel start" class="start">
         <slot name="start"></slot>
       </div>
 
@@ -255,7 +258,7 @@ export default class SlSplitPanel extends LitElement {
         <slot name="handle"></slot>
       </div>
 
-      <div class="end">
+      <div part="panel end" class="end">
         <slot name="end"></slot>
       </div>
     `;
