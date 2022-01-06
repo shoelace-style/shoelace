@@ -27,4 +27,4 @@ jobs:
           cache: 'npm'
       - run: npx playwright install-deps
       - run: npm ci
-      - run: npm run release
+      - run: npm run verify
