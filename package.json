@@ -44,6 +44,9 @@
     "list-outdated-dependencies": "npm-check-updates --format repo --peer",
     "update-dependencies": "npm-check-updates --peer -u && npm install && npm run prettier && npm run verify"
   },
+  "engines": {
+    "node": ">=14.15.0"
+  },
   "dependencies": {
     "@lit-labs/react": "^1.0.1",
     "@popperjs/core": "^2.11.2",
