@@ -22,6 +22,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Refactored `<sl-breadcrumb-item>`, `<sl-button>`, `<sl-card>`, `<sl-dialog>`, `<sl-drawer>`, `<sl-input>`, `<sl-range>`, `<sl-select>`, and `<sl-textarea>` to use a Reactive Controller for slot detection
 - Refactored internal id usage in `<sl-details>`, `<sl-dialog>`, `<sl-drawer>`, and `<sl-dropdown>`
 - Removed `position: relative` from the common component stylesheet
+- Updated all dependencies to latest versions
 
 ## 2.0.0-beta.63
 

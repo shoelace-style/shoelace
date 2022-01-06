@@ -1,4 +1,4 @@
-module.exports = function (plop) {
+export default function (plop) {
   plop.setHelper('tagWithoutPrefix', tag => tag.replace(/^sl-/, ''));
 
   plop.setHelper('tagToTitle', tag => {
@@ -64,4 +64,4 @@ module.exports = function (plop) {
       }
     ]
   });
-};
+}
