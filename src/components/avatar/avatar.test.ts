@@ -1,5 +1,4 @@
 import { expect, fixture, html } from '@open-wc/testing';
-import { aTimeout } from '@open-wc/testing-helpers';
 
 import '../../../dist/shoelace.js';
 import type SlAvatar from './avatar';
@@ -24,9 +23,8 @@ describe('<sl-avatar>', () => {
   });
 
   describe('when provided an image and label parameter', async () => {
-    const image =
-      'https://images.unsplash.com/photo-1529778873920-4da4926a72c2?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80';
-    const label = 'Gray tabby kitten looking down';
+    const image = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+    const label = 'Small transparent square';
     before(async () => {
       el = await fixture<SlAvatar>(html`<sl-avatar image="${image}" label="${label}"></sl-avatar>`);
     });

@@ -1,12 +1,12 @@
+import fs from 'fs';
 import browserSync from 'browser-sync';
 import chalk from 'chalk';
 import commandLineArgs from 'command-line-args';
 import copy from 'recursive-copy';
 import del from 'del';
 import esbuild from 'esbuild';
-import getPort from 'get-port';
-import glob from 'globby';
-import mkdirp from 'mkdirp';
+import getPort, { portNumbers } from 'get-port';
+import { globby } from 'globby';
 import { execSync } from 'child_process';
 
 const bs = browserSync.create();
@@ -22,7 +22,7 @@ const { bundle, copydir, dir, serve, types } = commandLineArgs([
 const outdir = dir;
 
 del.sync(outdir);
-mkdirp.sync(outdir);
+fs.mkdirSync(outdir, { recursive: true });
 
 (async () => {
   try {
@@ -47,15 +47,15 @@ mkdirp.sync(outdir);
         // The whole shebang
         './src/shoelace.ts',
         // Components
-        ...(await glob('./src/components/**/!(*.(style|test)).ts')),
+        ...(await globby('./src/components/**/!(*.(style|test)).ts')),
         // Translations
-        ...(await glob('./src/translations/**/*.ts')),
+        ...(await globby('./src/translations/**/*.ts')),
         // Public utilities
-        ...(await glob('./src/utilities/**/!(*.(style|test)).ts')),
+        ...(await globby('./src/utilities/**/!(*.(style|test)).ts')),
         // Theme stylesheets
-        ...(await glob('./src/themes/**/!(*.test).ts')),
+        ...(await globby('./src/themes/**/!(*.test).ts')),
         // React wrappers
-        ...(await glob('./src/react/**/*.ts'))
+        ...(await globby('./src/react/**/*.ts'))
       ],
       outdir,
       chunkNames: 'chunks/[name].[hash]',
@@ -93,7 +93,7 @@ mkdirp.sync(outdir);
   // Dev server
   if (serve) {
     const port = await getPort({
-      port: getPort.makeRange(4000, 4999)
+      port: portNumbers(4000, 4999)
     });
 
     // Make sure docs/dist is empty since we're serving it virtually
