@@ -39,7 +39,7 @@ export default class SlRange extends LitElement {
   @query('.range__control') input: HTMLInputElement;
   @query('.range__tooltip') output: HTMLOutputElement;
 
-  private hasSlotController = new HasSlotController(this, ['help-text', 'label']);
+  private hasSlotController = new HasSlotController(this, 'help-text', 'label');
   private inputId = `input-${++id}`;
   private helpTextId = `input-help-text-${id}`;
   private labelId = `input-label-${id}`;

@@ -4,7 +4,7 @@ export class HasSlotController implements ReactiveController {
   host: ReactiveControllerHost & Element;
   slotNames: string[] = [];
 
-  constructor(host: ReactiveControllerHost & Element, slotNames: string[] = []) {
+  constructor(host: ReactiveControllerHost & Element, ...slotNames: string[]) {
     (this.host = host).addController(this);
     this.slotNames = slotNames;
     this.handleSlotChange = this.handleSlotChange.bind(this);

@@ -73,7 +73,7 @@ export default class SlDrawer extends LitElement {
   @query('.drawer__panel') panel: HTMLElement;
   @query('.drawer__overlay') overlay: HTMLElement;
 
-  private hasSlotController = new HasSlotController(this, ['footer']);
+  private hasSlotController = new HasSlotController(this, 'footer');
   private modal: Modal;
   private originalTrigger: HTMLElement | null;
 

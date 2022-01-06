@@ -35,7 +35,7 @@ export default class SlTextarea extends LitElement {
 
   @query('.textarea__control') input: HTMLTextAreaElement;
 
-  private hasSlotController = new HasSlotController(this, ['help-text', 'label']);
+  private hasSlotController = new HasSlotController(this, 'help-text', 'label');
   private inputId = `textarea-${++id}`;
   private helpTextId = `textarea-help-text-${id}`;
   private labelId = `textarea-label-${id}`;

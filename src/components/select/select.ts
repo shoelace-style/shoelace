@@ -65,7 +65,7 @@ export default class SlSelect extends LitElement {
   @query('.select__hidden-select') input: HTMLInputElement;
   @query('.select__menu') menu: SlMenu;
 
-  private hasSlotController = new HasSlotController(this, ['help-text', 'label']);
+  private hasSlotController = new HasSlotController(this, 'help-text', 'label');
   private inputId = `select-${++id}`;
   private helpTextId = `select-help-text-${id}`;
   private labelId = `select-label-${id}`;

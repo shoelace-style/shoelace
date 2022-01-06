@@ -28,7 +28,7 @@ import styles from './card.styles';
 export default class SlCard extends LitElement {
   static styles = styles;
 
-  private hasSlotController = new HasSlotController(this, ['footer', 'header', 'image']);
+  private hasSlotController = new HasSlotController(this, 'footer', 'header', 'image');
 
   render() {
     return html`

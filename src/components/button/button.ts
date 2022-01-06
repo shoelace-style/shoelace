@@ -34,7 +34,7 @@ export default class SlButton extends LitElement {
 
   @query('.button') button: HTMLButtonElement | HTMLLinkElement;
 
-  private hasSlotController = new HasSlotController(this, ['[default]', 'prefix', 'suffix']);
+  private hasSlotController = new HasSlotController(this, '[default]', 'prefix', 'suffix');
 
   @state() private hasFocus = false;
 

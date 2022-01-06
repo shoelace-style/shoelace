@@ -49,7 +49,7 @@ export default class SlInput extends LitElement {
 
   @query('.input__control') input: HTMLInputElement;
 
-  private hasSlotController = new HasSlotController(this, ['help-text', 'label']);
+  private hasSlotController = new HasSlotController(this, 'help-text', 'label');
   private inputId = `input-${++id}`;
   private helpTextId = `input-help-text-${id}`;
   private labelId = `input-label-${id}`;

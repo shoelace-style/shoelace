@@ -25,7 +25,7 @@ import styles from './breadcrumb-item.styles';
 export default class SlBreadcrumbItem extends LitElement {
   static styles = styles;
 
-  private hasSlotController = new HasSlotController(this, ['prefix', 'suffix']);
+  private hasSlotController = new HasSlotController(this, 'prefix', 'suffix');
 
   /**
    * Optional URL to direct the user to when the breadcrumb item is activated. When set, a link will be rendered
