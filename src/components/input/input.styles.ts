@@ -115,6 +115,7 @@ export default css`
   .input__control:-webkit-autofill:active {
     box-shadow: 0 0 0 var(--sl-input-height-large) var(--sl-input-background-color-hover) inset !important;
     -webkit-text-fill-color: var(--sl-color-primary-500);
+    caret-color: var(--sl-input-color);
   }
 
   .input--filled .input__control:-webkit-autofill,
