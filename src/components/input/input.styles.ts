@@ -117,6 +117,13 @@ export default css`
     -webkit-text-fill-color: var(--sl-color-primary-500);
   }
 
+  .input--filled .input__control:-webkit-autofill,
+  .input--filled .input__control:-webkit-autofill:hover,
+  .input--filled .input__control:-webkit-autofill:focus,
+  .input--filled .input__control:-webkit-autofill:active {
+    box-shadow: 0 0 0 var(--sl-input-height-large) var(--sl-input-filled-background-color) inset !important;
+  }
+
   .input__control::placeholder {
     color: var(--sl-input-placeholder-color);
     user-select: none;
