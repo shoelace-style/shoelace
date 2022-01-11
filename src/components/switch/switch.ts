@@ -5,6 +5,7 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
+import { FormSubmitController } from '../../internal/form-control';
 import styles from './switch.styles';
 
 let id = 0;
@@ -34,6 +35,10 @@ export default class SlSwitch extends LitElement {
 
   @query('input[type="checkbox"]') input: HTMLInputElement;
 
+  // @ts-ignore
+  private formSubmitController = new FormSubmitController(this, {
+    value: (control: SlSwitch) => (control.checked ? control.value : undefined)
+  });
   private switchId = `switch-${++id}`;
   private labelId = `switch-label-${id}`;
 

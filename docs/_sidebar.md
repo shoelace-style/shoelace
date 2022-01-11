@@ -4,6 +4,7 @@
   - [Usage](/getting-started/usage)
   - [Themes](/getting-started/themes)
   - [Customizing](/getting-started/customizing)
+  - [Form Controls](/getting-started/form-controls)
   - [Localization](/getting-started/localization)
 
 - Frameworks

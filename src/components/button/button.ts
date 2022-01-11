@@ -4,6 +4,7 @@ import { html, literal } from 'lit/static-html.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { emit } from '../../internal/event';
+import { FormSubmitController } from '../../internal/form-control';
 import { HasSlotController } from '../../internal/slot';
 import styles from './button.styles';
 
@@ -34,6 +35,7 @@ export default class SlButton extends LitElement {
 
   @query('.button') button: HTMLButtonElement | HTMLLinkElement;
 
+  private formSubmitController = new FormSubmitController(this);
   private hasSlotController = new HasSlotController(this, '[default]', 'prefix', 'suffix');
 
   @state() private hasFocus = false;
@@ -63,8 +65,11 @@ export default class SlButton extends LitElement {
   /** Draws a circle button. */
   @property({ type: Boolean, reflect: true }) circle = false;
 
-  /** Indicates if activating the button should submit the form. Ignored when `href` is set. */
-  @property({ type: Boolean, reflect: true }) submit = false;
+  /**
+   * The type of button. When the type is `submit`, the button will submit the surrounding form. Note that the default
+   * value is `button` instead of `submit`, which is opposite of how native `<button>` elements behave.
+   */
+  @property() type: 'button' | 'submit' = 'button';
 
   /** An optional name for the button. Ignored when `href` is set. */
   @property() name: string;
@@ -110,6 +115,11 @@ export default class SlButton extends LitElement {
     if (this.disabled || this.loading) {
       event.preventDefault();
       event.stopPropagation();
+      return;
+    }
+
+    if (this.type === 'submit') {
+      this.formSubmitController.submit();
     }
   }
 
@@ -145,7 +155,7 @@ export default class SlButton extends LitElement {
           'button--has-suffix': this.hasSlotController.test('suffix')
         })}
         ?disabled=${ifDefined(isLink ? undefined : this.disabled)}
-        type=${ifDefined(isLink ? undefined : this.submit ? 'submit' : 'button')}
+        type=${this.type}
         name=${ifDefined(isLink ? undefined : this.name)}
         value=${ifDefined(isLink ? undefined : this.value)}
         href=${ifDefined(this.href)}

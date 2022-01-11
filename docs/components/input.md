@@ -16,9 +16,7 @@ const App = () => (
 );
 ```
 
-?> This component doesn't work with standard forms. Use [`<sl-form>`](/components/form) instead.
-
-?> Please refer to the section on [form control validation](/components/form?id=form-control-validation) to learn how to do client-side validation.
+?> This component works with standard `<form>` elements. Please refer to the section on [form controls](/getting-started/form-controls) to learn more about form submission and client-side validation.
 
 ## Examples
 

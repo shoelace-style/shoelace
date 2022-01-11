@@ -6,6 +6,7 @@ import { emit } from '../../internal/event';
 import { live } from 'lit/directives/live.js';
 import { watch } from '../../internal/watch';
 import { getLabelledBy, renderFormControl } from '../../internal/form-control';
+import { FormSubmitController } from '../../internal/form-control';
 import { HasSlotController } from '../../internal/slot';
 import styles from './textarea.styles';
 
@@ -35,6 +36,8 @@ export default class SlTextarea extends LitElement {
 
   @query('.textarea__control') input: HTMLTextAreaElement;
 
+  // @ts-ignore
+  private formSubmitController = new FormSubmitController(this);
   private hasSlotController = new HasSlotController(this, 'help-text', 'label');
   private inputId = `textarea-${++id}`;
   private helpTextId = `textarea-help-text-${id}`;

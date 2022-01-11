@@ -8,6 +8,8 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
+- 🚨 BREAKING: removed `<sl-form>` because all form components submit with `<form>` now ([learn more](/getting-started/form-controls))
+- 🚨 BREAKING: changed `submit` attribute to `type="submit"` on `<sl-button>`
 - 🚨 BREAKING: changed the `alt` attribute to `label` in `<sl-avatar>` for consistency with other components
 - Added `role="status"` to `<sl-spinner>`
 - Added `valueAsDate` and `valueAsNumber` properties to `<sl-input>` [#570](https://github.com/shoelace-style/shoelace/issues/570)

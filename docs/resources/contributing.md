@@ -251,10 +251,11 @@ This convention can be relaxed when the developer experience is greatly improved
 
 ### Form Controls
 
-Form controls should support validation through the following conventions:
+Form controls should support submission and validation through the following conventions:
 
-- All form controls must have an `invalid` property that reflects their validity
+- All form controls must use `name`, `value`, and `disabled` properties in the same manner as `HTMLInputElement`
 - All form controls must have a `setCustomValidity()` method so the user can set a custom validation message
 - All form controls must have a `reportValidity()` method that report their validity during form submission
+- All form controls must have an `invalid` property that reflects their validity
 - All form controls should mirror their native validation attributes such as `required`, `pattern`, `minlength`, `maxlength`, etc. when possible
-- All form controls must be serialized by `<sl-form>`
+- All form controls must be tested to work with the standard `<form>` element

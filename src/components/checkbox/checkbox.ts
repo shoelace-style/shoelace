@@ -5,6 +5,7 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
+import { FormSubmitController } from '../../internal/form-control';
 import styles from './checkbox.styles';
 
 let id = 0;
@@ -31,6 +32,10 @@ export default class SlCheckbox extends LitElement {
 
   @query('input[type="checkbox"]') input: HTMLInputElement;
 
+  // @ts-ignore
+  private formSubmitController = new FormSubmitController(this, {
+    value: (control: SlCheckbox) => (control.checked ? control.value : undefined)
+  });
   private inputId = `checkbox-${++id}`;
   private labelId = `checkbox-label-${id}`;
 

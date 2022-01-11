@@ -5,6 +5,7 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
+import { FormSubmitController } from '../../internal/form-control';
 import styles from './radio.styles';
 
 /**
@@ -27,6 +28,11 @@ export default class SlRadio extends LitElement {
   static styles = styles;
 
   @query('input[type="radio"]') input: HTMLInputElement;
+
+  // @ts-ignore
+  private formSubmitController = new FormSubmitController(this, {
+    value: (control: SlRadio) => (control.checked ? control.value : undefined)
+  });
 
   @state() private hasFocus = false;
 

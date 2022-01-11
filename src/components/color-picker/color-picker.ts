@@ -7,6 +7,7 @@ import { styleMap } from 'lit/directives/style-map.js';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import { clamp } from '../../internal/math';
+import { FormSubmitController } from '../../internal/form-control';
 import { LocalizeController } from '../../utilities/localize';
 import type SlDropdown from '../dropdown/dropdown';
 import type SlInput from '../input/input';
@@ -57,14 +58,16 @@ const hasEyeDropper = 'EyeDropper' in window;
 @customElement('sl-color-picker')
 export default class SlColorPicker extends LitElement {
   static styles = styles;
-  private localize = new LocalizeController(this);
 
   @query('[part="input"]') input: SlInput;
   @query('[part="preview"]') previewButton: HTMLButtonElement;
   @query('.color-dropdown') dropdown: SlDropdown;
 
+  // @ts-ignore
+  private formSubmitController = new FormSubmitController(this);
   private isSafeValue = false;
   private lastValueEmitted: string;
+  private localize = new LocalizeController(this);
 
   @state() private inputValue = '';
   @state() private hue = 0;

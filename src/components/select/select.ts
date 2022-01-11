@@ -6,6 +6,7 @@ import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import { getLabelledBy, renderFormControl } from '../../internal/form-control';
 import { getTextContent } from '../../internal/slot';
+import { FormSubmitController } from '../../internal/form-control';
 import { HasSlotController } from '../../internal/slot';
 import type SlDropdown from '../dropdown/dropdown';
 import type SlIconButton from '../icon-button/icon-button';
@@ -65,6 +66,8 @@ export default class SlSelect extends LitElement {
   @query('.select__hidden-select') input: HTMLInputElement;
   @query('.select__menu') menu: SlMenu;
 
+  // @ts-ignore
+  private formSubmitController = new FormSubmitController(this);
   private hasSlotController = new HasSlotController(this, 'help-text', 'label');
   private inputId = `select-${++id}`;
   private helpTextId = `select-help-text-${id}`;

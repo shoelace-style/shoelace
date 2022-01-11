@@ -6,6 +6,7 @@ import { emit } from '../../internal/event';
 import { live } from 'lit/directives/live.js';
 import { watch } from '../../internal/watch';
 import { getLabelledBy, renderFormControl } from '../../internal/form-control';
+import { FormSubmitController } from '../../internal/form-control';
 import { HasSlotController } from '../../internal/slot';
 import styles from './range.styles';
 
@@ -39,6 +40,8 @@ export default class SlRange extends LitElement {
   @query('.range__control') input: HTMLInputElement;
   @query('.range__tooltip') output: HTMLOutputElement;
 
+  // @ts-ignore
+  private formSubmitController = new FormSubmitController(this);
   private hasSlotController = new HasSlotController(this, 'help-text', 'label');
   private inputId = `input-${++id}`;
   private helpTextId = `input-help-text-${id}`;

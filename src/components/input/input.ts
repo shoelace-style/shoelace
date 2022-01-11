@@ -5,7 +5,7 @@ import { classMap } from 'lit/directives/class-map.js';
 import { live } from 'lit/directives/live.js';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
-import { getLabelledBy, renderFormControl } from '../../internal/form-control';
+import { FormSubmitController, getLabelledBy, renderFormControl } from '../../internal/form-control';
 import { HasSlotController } from '../../internal/slot';
 import styles from './input.styles';
 
@@ -49,6 +49,8 @@ export default class SlInput extends LitElement {
 
   @query('.input__control') input: HTMLInputElement;
 
+  // @ts-ignore
+  private formSubmitController = new FormSubmitController(this);
   private hasSlotController = new HasSlotController(this, 'help-text', 'label');
   private inputId = `input-${++id}`;
   private helpTextId = `input-help-text-${id}`;
