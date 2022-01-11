@@ -6,7 +6,7 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
-## Next
+## 2.0.0-beta.64
 
 - 🚨 BREAKING: removed `<sl-form>` because all form components submit with `<form>` now ([learn more](/getting-started/form-controls))
 - 🚨 BREAKING: changed `submit` attribute to `type="submit"` on `<sl-button>`
