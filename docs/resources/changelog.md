@@ -18,6 +18,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed an a11y bug in `<sl-tooltip>` where `aria-describedby` referenced an id in the shadow root
 - Fixed a bug in `<sl-radio>` where tabbing didn't work properly in Firefox [#596](https://github.com/shoelace-style/shoelace/issues/596)
 - Fixed a bug in `<sl-input>` where clicking the left/right edge of the control wouldn't focus it
+- Fixed a bug in `<sl-input>` where autofill had strange styles [#644](https://github.com/shoelace-style/shoelace/pull/644)
 - Improved `<sl-spinner>` track color when used on various backgrounds
 - Improved a11y in `<sl-radio>` so VoiceOver announces radios properly in a radio group
 - Improved the API for the experimental `<sl-split-panel>` component by making `position` accept a percentage and adding the `position-in-pixels` attribute
