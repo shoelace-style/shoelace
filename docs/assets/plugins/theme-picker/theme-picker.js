@@ -3,8 +3,8 @@
     throw new Error('Docsify must be loaded before installing this plugin.');
   }
 
-  window.$docsify.plugins.push((hook, vm) => {
-    hook.mounted(function () {
+  window.$docsify.plugins.push(hook => {
+    hook.mounted(() => {
       function getTheme() {
         return localStorage.getItem('theme') || 'auto';
       }
@@ -12,9 +12,8 @@
       function isDark() {
         if (theme === 'auto') {
           return window.matchMedia('(prefers-color-scheme: dark)').matches;
-        } else {
-          return theme === 'dark';
         }
+        return theme === 'dark';
       }
 
       function setTheme(newTheme) {
@@ -62,7 +61,7 @@
       menu.addEventListener('sl-select', event => setTheme(event.detail.item.value));
 
       // Update the theme when the preference changes
-      window.matchMedia('(prefers-color-scheme: dark)').addListener(event => setTheme(theme));
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => setTheme(theme));
 
       // Toggle themes when pressing backslash
       document.addEventListener('keydown', event => {

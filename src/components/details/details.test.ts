@@ -1,8 +1,6 @@
 // cspell:dictionaries lorem-ipsum
 import { expect, fixture, html, waitUntil } from '@open-wc/testing';
 import sinon from 'sinon';
-
-import '../../../dist/shoelace.js';
 import type SlDetails from './details';
 
 describe('<sl-details>', () => {
@@ -14,7 +12,7 @@ describe('<sl-details>', () => {
         consequat.
       </sl-details>
     `);
-    const body = el.shadowRoot?.querySelector('.details__body') as HTMLElement;
+    const body = el.shadowRoot!.querySelector<HTMLElement>('.details__body')!;
 
     expect(body.hidden).to.be.false;
   });
@@ -27,7 +25,7 @@ describe('<sl-details>', () => {
         consequat.
       </sl-details>
     `);
-    const body = el.shadowRoot?.querySelector('.details__body') as HTMLElement;
+    const body = el.shadowRoot!.querySelector<HTMLElement>('.details__body')!;
 
     expect(body.hidden).to.be.true;
   });
@@ -40,13 +38,13 @@ describe('<sl-details>', () => {
         consequat.
       </sl-details>
     `);
-    const body = el.shadowRoot?.querySelector('.details__body') as HTMLElement;
+    const body = el.shadowRoot!.querySelector<HTMLElement>('.details__body')!;
     const showHandler = sinon.spy();
     const afterShowHandler = sinon.spy();
 
     el.addEventListener('sl-show', showHandler);
     el.addEventListener('sl-after-show', afterShowHandler);
-    el.show();
+    void el.show();
 
     await waitUntil(() => showHandler.calledOnce);
     await waitUntil(() => afterShowHandler.calledOnce);
@@ -64,13 +62,13 @@ describe('<sl-details>', () => {
         consequat.
       </sl-details>
     `);
-    const body = el.shadowRoot?.querySelector('.details__body') as HTMLElement;
+    const body = el.shadowRoot!.querySelector<HTMLElement>('.details__body')!;
     const hideHandler = sinon.spy();
     const afterHideHandler = sinon.spy();
 
     el.addEventListener('sl-hide', hideHandler);
     el.addEventListener('sl-after-hide', afterHideHandler);
-    el.hide();
+    void el.hide();
 
     await waitUntil(() => hideHandler.calledOnce);
     await waitUntil(() => afterHideHandler.calledOnce);
@@ -88,7 +86,7 @@ describe('<sl-details>', () => {
         consequat.
       </sl-details>
     `);
-    const body = el.shadowRoot?.querySelector('.details__body') as HTMLElement;
+    const body = el.shadowRoot!.querySelector<HTMLElement>('.details__body')!;
     const showHandler = sinon.spy();
     const afterShowHandler = sinon.spy();
 
@@ -112,7 +110,7 @@ describe('<sl-details>', () => {
         consequat.
       </sl-details>
     `);
-    const body = el.shadowRoot?.querySelector('.details__body') as HTMLElement;
+    const body = el.shadowRoot!.querySelector<HTMLElement>('.details__body')!;
     const hideHandler = sinon.spy();
     const afterHideHandler = sinon.spy();
 

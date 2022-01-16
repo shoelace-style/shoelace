@@ -1,7 +1,7 @@
 import { css } from 'lit';
-import componentStyles from '../../styles/component.styles';
-import formControlStyles from '../../styles/form-control.styles';
-import { focusVisibleSelector } from '../../internal/focus-visible';
+import { focusVisibleSelector } from '~/internal/focus-visible';
+import componentStyles from '~/styles/component.styles';
+import formControlStyles from '~/styles/form-control.styles';
 
 export default css`
   ${componentStyles}

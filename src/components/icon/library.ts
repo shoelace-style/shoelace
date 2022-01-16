@@ -1,6 +1,6 @@
 import defaultLibrary from './library.default';
 import systemLibrary from './library.system';
-import type SlIcon from '../icon/icon';
+import type SlIcon from '~/components/icon/icon';
 
 export type IconLibraryResolver = (name: string) => string;
 export type IconLibraryMutator = (svg: SVGElement) => void;
@@ -22,7 +22,7 @@ export function unwatchIcon(icon: SlIcon) {
 }
 
 export function getIconLibrary(name?: string) {
-  return registry.filter(lib => lib.name === name)[0];
+  return registry.find(lib => lib.name === name);
 }
 
 export function registerIconLibrary(
@@ -37,7 +37,7 @@ export function registerIconLibrary(
   });
 
   // Redraw watched icons
-  watchedIcons.map(icon => {
+  watchedIcons.forEach(icon => {
     if (icon.library === name) {
       icon.redraw();
     }

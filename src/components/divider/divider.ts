@@ -1,7 +1,7 @@
 import { LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { watch } from '../../internal/watch';
 import styles from './divider.styles';
+import { watch } from '~/internal/watch';
 
 /**
  * @since 2.0

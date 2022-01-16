@@ -1,17 +1,15 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
-import { ifDefined } from 'lit/directives/if-defined.js';
 import { classMap } from 'lit/directives/class-map.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
-import { emit } from '../../internal/event';
-import { watch } from '../../internal/watch';
-import { FormSubmitController, getLabelledBy, renderFormControl } from '../../internal/form-control';
-import { HasSlotController } from '../../internal/slot';
 import styles from './input.styles';
-
-import '../icon/icon';
-
-let id = 0;
+import '~/components/icon/icon';
+import { autoIncrement } from '~/internal/autoIncrement';
+import { emit } from '~/internal/event';
+import { FormSubmitController, getLabelledBy, renderFormControl } from '~/internal/form-control';
+import { HasSlotController } from '~/internal/slot';
+import { watch } from '~/internal/watch';
 
 /**
  * @since 2.0
@@ -49,12 +47,13 @@ export default class SlInput extends LitElement {
 
   @query('.input__control') input: HTMLInputElement;
 
-  // @ts-ignore
-  private formSubmitController = new FormSubmitController(this);
-  private hasSlotController = new HasSlotController(this, 'help-text', 'label');
-  private inputId = `input-${++id}`;
-  private helpTextId = `input-help-text-${id}`;
-  private labelId = `input-label-${id}`;
+  // @ts-expect-error -- Controller is currently unused
+  private readonly formSubmitController = new FormSubmitController(this);
+  private readonly hasSlotController = new HasSlotController(this, 'help-text', 'label');
+  private readonly attrId = autoIncrement();
+  private readonly inputId = `input-${this.attrId}`;
+  private readonly helpTextId = `input-help-text-${this.attrId}`;
+  private readonly labelId = `input-label-${this.attrId}`;
 
   @state() private hasFocus = false;
   @state() private isPasswordVisible = false;
@@ -79,7 +78,7 @@ export default class SlInput extends LitElement {
   @property({ type: Boolean, reflect: true }) pill = false;
 
   /** The input's label. Alternatively, you can use the label slot. */
-  @property() label: string;
+  @property() label = '';
 
   /** The input's help text. Alternatively, you can use the help-text slot. */
   @property({ attribute: 'help-text' }) helpText = '';
@@ -146,7 +145,7 @@ export default class SlInput extends LitElement {
 
   /** Gets or sets the current value as a `Date` object. Only valid when `type` is `date`. */
   get valueAsDate() {
-    return this.input.valueAsDate as Date;
+    return this.input.valueAsDate!;
   }
 
   set valueAsDate(newValue: Date) {
@@ -156,7 +155,7 @@ export default class SlInput extends LitElement {
 
   /** Gets or sets the current value as a number. */
   get valueAsNumber() {
-    return this.input.valueAsNumber as number;
+    return this.input.valueAsNumber;
   }
 
   set valueAsNumber(newValue: number) {
@@ -180,7 +179,7 @@ export default class SlInput extends LitElement {
 
   /** Selects all the text in the input. */
   select() {
-    return this.input.select();
+    this.input.select();
   }
 
   /** Sets the start and end positions of the text selection (0-based). */
@@ -189,7 +188,7 @@ export default class SlInput extends LitElement {
     selectionEnd: number,
     selectionDirection: 'forward' | 'backward' | 'none' = 'none'
   ) {
-    return this.input.setSelectionRange(selectionStart, selectionEnd, selectionDirection);
+    this.input.setSelectionRange(selectionStart, selectionEnd, selectionDirection);
   }
 
   /** Replaces a range of text with a new string. */
@@ -239,13 +238,11 @@ export default class SlInput extends LitElement {
     event.stopPropagation();
   }
 
-  @watch('disabled')
+  @watch('disabled', { waitUntilFirstUpdate: true })
   handleDisabledChange() {
     // Disabled form controls are always valid, so we need to recheck validity when the state changes
-    if (this.input) {
-      this.input.disabled = this.disabled;
-      this.invalid = !this.input.checkValidity();
-    }
+    this.input.disabled = this.disabled;
+    this.invalid = !this.input.checkValidity();
   }
 
   handleFocus() {
@@ -266,11 +263,9 @@ export default class SlInput extends LitElement {
     this.isPasswordVisible = !this.isPasswordVisible;
   }
 
-  @watch('value')
+  @watch('value', { waitUntilFirstUpdate: true })
   handleValueChange() {
-    if (this.input) {
-      this.invalid = !this.input.checkValidity();
-    }
+    this.invalid = !this.input.checkValidity();
   }
 
   render() {
@@ -306,7 +301,7 @@ export default class SlInput extends LitElement {
             'input--filled': this.filled,
             'input--disabled': this.disabled,
             'input--focused': this.hasFocus,
-            'input--empty': this.value?.length === 0,
+            'input--empty': this.value.length === 0,
             'input--invalid': this.invalid
           })}
         >
@@ -355,7 +350,7 @@ export default class SlInput extends LitElement {
             @blur=${this.handleBlur}
           />
 
-          ${this.clearable && this.value?.length > 0
+          ${this.clearable && this.value.length > 0
             ? html`
                 <button
                   part="clear-button"

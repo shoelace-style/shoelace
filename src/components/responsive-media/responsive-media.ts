@@ -26,7 +26,7 @@ export default class SlResponsiveMedia extends LitElement {
     const split = this.aspectRatio.split(':');
     const x = parseFloat(split[0]);
     const y = parseFloat(split[1]);
-    const paddingBottom = x && y ? `${(y / x) * 100}%` : '0';
+    const paddingBottom = !isNaN(x) && !isNaN(y) && x > 0 && y > 0 ? `${(y / x) * 100}%` : '0';
 
     return html`
       <div

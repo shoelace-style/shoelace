@@ -1,3 +1,5 @@
+/* global Prism */
+
 (() => {
   const reactVersion = '17.0.2';
   let flavor = getFlavor();
@@ -61,14 +63,9 @@
     document.body.classList.toggle('flavor-react', flavor === 'react');
   }
 
-  function wrap(el, wrapper) {
-    el.parentNode.insertBefore(wrapper, el);
-    wrapper.appendChild(el);
-  }
-
-  window.$docsify.plugins.push((hook, vm) => {
+  window.$docsify.plugins.push(hook => {
     // Convert code blocks to previews
-    hook.afterEach(function (html, next) {
+    hook.afterEach((html, next) => {
       const domParser = new DOMParser();
       const doc = domParser.parseFromString(html, 'text/html');
 
@@ -111,7 +108,7 @@
         </button>
       `;
 
-      [...doc.querySelectorAll('code[class^="lang-"]')].map(code => {
+      [...doc.querySelectorAll('code[class^="lang-"]')].forEach(code => {
         if (code.classList.contains('preview')) {
           const isExpanded = code.classList.contains('expanded');
           const pre = code.closest('pre');
@@ -119,12 +116,6 @@
           const toggleId = `code-block-toggle-${count}`;
           const reactPre = getAdjacentExample('react', pre);
           const hasReact = reactPre !== null;
-          const examples = [
-            {
-              name: 'HTML',
-              codeBlock: pre
-            }
-          ];
 
           pre.setAttribute('data-lang', pre.getAttribute('data-lang').replace(/ preview$/, ''));
           pre.setAttribute('aria-labelledby', toggleId);
@@ -182,7 +173,7 @@
           `;
 
           pre.replaceWith(domParser.parseFromString(codeBlock, 'text/html').body);
-          if (reactPre) reactPre.remove();
+          reactPre?.remove();
 
           count++;
         }
@@ -201,12 +192,12 @@
 
     // Horizontal resizing
     hook.doneEach(() => {
-      [...document.querySelectorAll('.code-block__preview')].map(preview => {
+      [...document.querySelectorAll('.code-block__preview')].forEach(preview => {
         const resizer = preview.querySelector('.code-block__resizer');
         let startX;
         let startWidth;
 
-        const dragStart = event => {
+        function dragStart(event) {
           startX = event.changedTouches ? event.changedTouches[0].pageX : event.clientX;
           startWidth = parseInt(document.defaultView.getComputedStyle(preview).width, 10);
           preview.classList.add('code-block__preview--dragging');
@@ -215,21 +206,23 @@
           document.documentElement.addEventListener('touchmove', dragMove, false);
           document.documentElement.addEventListener('mouseup', dragStop, false);
           document.documentElement.addEventListener('touchend', dragStop, false);
-        };
+        }
 
-        const dragMove = event => {
+        function dragMove(event) {
           setWidth(startWidth + (event.changedTouches ? event.changedTouches[0].pageX : event.pageX) - startX);
-        };
+        }
 
-        const dragStop = event => {
+        function dragStop() {
           preview.classList.remove('code-block__preview--dragging');
           document.documentElement.removeEventListener('mousemove', dragMove, false);
           document.documentElement.removeEventListener('touchmove', dragMove, false);
           document.documentElement.removeEventListener('mouseup', dragStop, false);
           document.documentElement.removeEventListener('touchend', dragStop, false);
-        };
+        }
 
-        const setWidth = width => (preview.style.width = width + 'px');
+        function setWidth(width) {
+          preview.style.width = `${width}px`;
+        }
 
         resizer.addEventListener('mousedown', dragStart);
         resizer.addEventListener('touchstart', dragStart);
@@ -240,7 +233,6 @@
   // Toggle source mode
   document.addEventListener('click', event => {
     const button = event.target.closest('button');
-    const codeBlock = button?.closest('.code-block');
 
     if (button?.classList.contains('code-block__button--html')) {
       setFlavor('html');
@@ -251,7 +243,7 @@
     }
 
     // Update flavor buttons
-    [...document.querySelectorAll('.code-block')].map(codeBlock => {
+    [...document.querySelectorAll('.code-block')].forEach(codeBlock => {
       codeBlock
         .querySelector('.code-block__button--html')
         ?.classList.toggle('code-block__button--selected', flavor === 'html');
@@ -310,8 +302,7 @@
       if (!isReact) {
         htmlTemplate =
           `<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@${version}/dist/shoelace.js"></script>\n` +
-          '\n' +
-          htmlExample;
+          `\n${htmlExample}`;
         jsTemplate = '';
       }
 
@@ -322,13 +313,11 @@
           `import React from 'https://cdn.skypack.dev/react@${reactVersion}';\n` +
           `import ReactDOM from 'https://cdn.skypack.dev/react-dom@${reactVersion}';\n` +
           `import { setBasePath } from 'https://cdn.skypack.dev/@shoelace-style/shoelace@${version}/dist/utilities/base-path';\n` +
-          '\n' +
+          `\n` +
           `// Set the base path for Shoelace assets\n` +
           `setBasePath('https://cdn.skypack.dev/@shoelace-style/shoelace@${version}/dist/')\n` +
-          '\n' +
-          convertModuleLinks(reactExample) +
-          '\n' +
-          '\n' +
+          `\n${convertModuleLinks(reactExample)}\n` +
+          `\n` +
           `ReactDOM.render(<App />, document.getElementById('root'));`;
       }
 

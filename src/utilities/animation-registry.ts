@@ -7,7 +7,7 @@ interface ElementAnimationMap {
   [animationName: string]: ElementAnimation;
 }
 
-const defaultAnimationRegistry = new Map<String, ElementAnimation>();
+const defaultAnimationRegistry = new Map<string, ElementAnimation>();
 const customAnimationRegistry = new WeakMap<Element, ElementAnimationMap>();
 
 function ensureAnimation(animation: ElementAnimation | null) {
@@ -26,12 +26,7 @@ export function setDefaultAnimation(animationName: string, animation: ElementAni
 // Sets a custom animation for the specified element.
 //
 export function setAnimation(el: Element, animationName: string, animation: ElementAnimation | null) {
-  customAnimationRegistry.set(
-    el,
-    Object.assign({}, customAnimationRegistry.get(el), {
-      [animationName]: ensureAnimation(animation)
-    })
-  );
+  customAnimationRegistry.set(el, { ...customAnimationRegistry.get(el), [animationName]: ensureAnimation(animation) });
 }
 
 //
@@ -41,13 +36,13 @@ export function getAnimation(el: Element, animationName: string) {
   const customAnimation = customAnimationRegistry.get(el);
 
   // Check for a custom animation
-  if (customAnimation && customAnimation[animationName]) {
+  if (typeof customAnimation?.[animationName] !== 'undefined') {
     return customAnimation[animationName];
   }
 
   // Check for a default animation
   const defaultAnimation = defaultAnimationRegistry.get(animationName);
-  if (defaultAnimation) {
+  if (typeof defaultAnimation !== 'undefined') {
     return defaultAnimation;
   }
 

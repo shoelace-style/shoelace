@@ -1,10 +1,9 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { watch } from '../../internal/watch';
 import styles from './menu-item.styles';
-
-import '../icon/icon';
+import '~/components/icon/icon';
+import { watch } from '~/internal/watch';
 
 /**
  * @since 2.0
@@ -43,12 +42,12 @@ export default class SlMenuItem extends LitElement {
 
   @watch('checked')
   handleCheckedChange() {
-    this.setAttribute('aria-checked', String(this.checked));
+    this.setAttribute('aria-checked', this.checked ? 'true' : 'false');
   }
 
   @watch('disabled')
   handleDisabledChange() {
-    this.setAttribute('aria-disabled', String(this.disabled));
+    this.setAttribute('aria-disabled', this.disabled ? 'true' : 'false');
   }
 
   render() {

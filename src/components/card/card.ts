@@ -1,8 +1,8 @@
 import { LitElement, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { HasSlotController } from '../../internal/slot';
 import styles from './card.styles';
+import { HasSlotController } from '~/internal/slot';
 
 /**
  * @since 2.0
@@ -28,7 +28,7 @@ import styles from './card.styles';
 export default class SlCard extends LitElement {
   static styles = styles;
 
-  private hasSlotController = new HasSlotController(this, 'footer', 'header', 'image');
+  private readonly hasSlotController = new HasSlotController(this, 'footer', 'header', 'image');
 
   render() {
     return html`

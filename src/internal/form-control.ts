@@ -1,15 +1,16 @@
-import { html, ReactiveController, ReactiveControllerHost, TemplateResult } from 'lit';
+import type { ReactiveController, ReactiveControllerHost, TemplateResult } from 'lit';
+import { html } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import './formdata-event-polyfill';
 
 export interface FormSubmitControllerOptions {
   /** A function that returns the form containing the form control. */
-  form: (input: unknown) => HTMLFormElement;
+  form: (input: unknown) => HTMLFormElement | null;
   /** A function that returns the form control's name, which will be submitted with the form data. */
   name: (input: unknown) => string;
   /** A function that returns the form control's current value. */
-  value: (input: unknown) => any;
+  value: (input: unknown) => unknown | unknown[];
   /** A function that returns the form control's current disabled state. If disabled, the value won't be submitted. */
   disabled: (input: unknown) => boolean;
   /**
@@ -21,38 +22,36 @@ export interface FormSubmitControllerOptions {
 
 export class FormSubmitController implements ReactiveController {
   host?: ReactiveControllerHost & Element;
-  form?: HTMLFormElement;
-  options?: FormSubmitControllerOptions;
+  form?: HTMLFormElement | null;
+  options: FormSubmitControllerOptions;
 
-  constructor(host: ReactiveControllerHost & Element, options?: FormSubmitControllerOptions) {
+  constructor(host: ReactiveControllerHost & Element, options?: Partial<FormSubmitControllerOptions>) {
     (this.host = host).addController(this);
-    this.options = Object.assign(
-      {
-        form: (input: HTMLInputElement) => input.closest('form'),
-        name: (input: HTMLInputElement) => input.name,
-        value: (input: HTMLInputElement) => input.value,
-        disabled: (input: HTMLInputElement) => input.disabled,
-        reportValidity: (input: HTMLInputElement) => {
-          return typeof input.reportValidity === 'function' ? input.reportValidity() : true;
-        }
+    this.options = {
+      form: (input: HTMLInputElement) => input.closest('form'),
+      name: (input: HTMLInputElement) => input.name,
+      value: (input: HTMLInputElement) => input.value,
+      disabled: (input: HTMLInputElement) => input.disabled,
+      reportValidity: (input: HTMLInputElement) => {
+        return typeof input.reportValidity === 'function' ? input.reportValidity() : true;
       },
-      options
-    );
+      ...options
+    };
     this.handleFormData = this.handleFormData.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
   hostConnected() {
-    this.form = this.options?.form(this.host);
+    this.form = this.options.form(this.host);
 
-    if (this.form) {
+    if (typeof this.form !== 'undefined' && this.form !== null) {
       this.form.addEventListener('formdata', this.handleFormData);
       this.form.addEventListener('submit', this.handleFormSubmit);
     }
   }
 
   hostDisconnected() {
-    if (this.form) {
+    if (typeof this.form !== 'undefined' && this.form !== null) {
       this.form.removeEventListener('formdata', this.handleFormData);
       this.form.removeEventListener('submit', this.handleFormSubmit);
       this.form = undefined;
@@ -60,25 +59,32 @@ export class FormSubmitController implements ReactiveController {
   }
 
   handleFormData(event: FormDataEvent) {
-    const disabled = this.options?.disabled(this.host);
-    const name = this.options?.name(this.host);
-    const value = this.options?.value(this.host);
+    const disabled = this.options.disabled(this.host);
+    const name = this.options.name(this.host);
+    const value = this.options.value(this.host);
 
-    if (!disabled && name && value !== undefined) {
+    if (!disabled && typeof name === 'string' && typeof value !== 'undefined') {
       if (Array.isArray(value)) {
-        value.map(val => event.formData.append(name, val));
+        (value as unknown[]).forEach(val => {
+          event.formData.append(name, (val as string | number | boolean).toString());
+        });
       } else {
-        event.formData.append(name, value);
+        event.formData.append(name, (value as string | number | boolean).toString());
       }
     }
   }
 
   handleFormSubmit(event: Event) {
-    const form = this.form;
-    const disabled = this.options?.disabled(this.host);
-    const reportValidity = this.options?.reportValidity;
+    const disabled = this.options.disabled(this.host);
+    const reportValidity = this.options.reportValidity;
 
-    if (form && !form.noValidate && !disabled && reportValidity && !reportValidity(this.host)) {
+    if (
+      typeof this.form !== 'undefined' &&
+      this.form !== null &&
+      !this.form.noValidate &&
+      !disabled &&
+      !reportValidity(this.host)
+    ) {
       event.preventDefault();
       event.stopImmediatePropagation();
     }
@@ -88,7 +94,7 @@ export class FormSubmitController implements ReactiveController {
     // Calling form.submit() seems to bypass the submit event and constraint validation. Instead, we can inject a
     // native submit button into the form, click it, then remove it to simulate a standard form submission.
     const button = document.createElement('button');
-    if (this.form) {
+    if (typeof this.form !== 'undefined' && this.form !== null) {
       button.type = 'submit';
       button.style.position = 'absolute';
       button.style.width = '0';
@@ -104,7 +110,7 @@ export class FormSubmitController implements ReactiveController {
   }
 }
 
-export const renderFormControl = (
+export function renderFormControl(
   props: {
     /** The input id, used to map the input to the label */
     inputId: string;
@@ -134,9 +140,9 @@ export const renderFormControl = (
     onLabelClick?: (event: MouseEvent) => void;
   },
   input: TemplateResult
-) => {
-  const hasLabel = props.label ? true : !!props.hasLabelSlot;
-  const hasHelpText = props.helpText ? true : !!props.hasHelpTextSlot;
+) {
+  const hasLabel = typeof props.label !== 'undefined' ? true : props.hasLabelSlot === true;
+  const hasHelpText = typeof props.helpText !== 'undefined' ? true : props.hasHelpTextSlot === true;
 
   return html`
     <div
@@ -156,7 +162,9 @@ export const renderFormControl = (
         class="form-control__label"
         for=${props.inputId}
         aria-hidden=${hasLabel ? 'false' : 'true'}
-        @click=${(event: MouseEvent) => (props.onLabelClick ? props.onLabelClick(event) : null)}
+        @click=${(event: MouseEvent) => {
+          props.onLabelClick?.(event);
+        }}
       >
         <slot name="label">${props.label}</slot>
       </label>
@@ -173,7 +181,7 @@ export const renderFormControl = (
       </div>
     </div>
   `;
-};
+}
 
 export function getLabelledBy(props: {
   /** The label id, used to map the label to the input */
@@ -195,9 +203,9 @@ export function getLabelledBy(props: {
   hasHelpTextSlot: boolean;
 }) {
   const labelledBy = [
-    props.label || props.hasLabelSlot ? props.labelId : '',
-    props.helpText || props.hasHelpTextSlot ? props.helpTextId : ''
-  ].filter(val => val);
+    props.label.length > 0 ? props.label : props.hasLabelSlot ? props.labelId : '',
+    props.helpText.length > 0 ? props.helpText : props.hasHelpTextSlot ? props.helpTextId : ''
+  ].filter(val => val !== '');
 
-  return labelledBy.join(' ') || undefined;
+  return labelledBy.join(' ');
 }

@@ -1,7 +1,5 @@
 import { expect, fixture, html, waitUntil, aTimeout } from '@open-wc/testing';
 import sinon from 'sinon';
-
-import '../../../dist/shoelace.js';
 import type SlSelect from './select';
 
 describe('<sl-select>', () => {
@@ -23,14 +21,14 @@ describe('<sl-select>', () => {
   });
 
   it('should open the menu when any letter key is pressed with sl-select is on focus', async () => {
-    const el = (await fixture(html`
+    const el = await fixture(html`
       <sl-select>
         <sl-menu-item value="option-1">Option 1</sl-menu-item>
         <sl-menu-item value="option-2">Option 2</sl-menu-item>
         <sl-menu-item value="option-3">Option 3</sl-menu-item>
       </sl-select>
-    `)) as SlSelect;
-    const control = el.shadowRoot.querySelector('.select__control') as HTMLSelectElement;
+    `);
+    const control = el.shadowRoot!.querySelector<HTMLSelectElement>('.select__control')!;
     control.focus();
     const rKeyEvent = new KeyboardEvent('keydown', { key: 'r' });
     control.dispatchEvent(rKeyEvent);
@@ -39,14 +37,14 @@ describe('<sl-select>', () => {
   });
 
   it('should not open the menu when ctrl + R is pressed with sl-select is on focus', async () => {
-    const el = (await fixture(html`
+    const el = await fixture(html`
       <sl-select>
         <sl-menu-item value="option-1">Option 1</sl-menu-item>
         <sl-menu-item value="option-2">Option 2</sl-menu-item>
         <sl-menu-item value="option-3">Option 3</sl-menu-item>
       </sl-select>
-    `)) as SlSelect;
-    const control = el.shadowRoot.querySelector('.select__control') as HTMLSelectElement;
+    `);
+    const control = el.shadowRoot!.querySelector<HTMLSelectElement>('.select__control')!;
     control.focus();
     const rKeyEvent = new KeyboardEvent('keydown', { key: 'r', ctrlKey: true });
     control.dispatchEvent(rKeyEvent);

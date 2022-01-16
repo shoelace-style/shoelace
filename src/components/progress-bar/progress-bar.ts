@@ -1,10 +1,10 @@
 import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { ifDefined } from 'lit/directives/if-defined.js';
 import { classMap } from 'lit/directives/class-map.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { styleMap } from 'lit/directives/style-map.js';
-import { LocalizeController } from '../../utilities/localize';
 import styles from './progress-bar.styles';
+import { LocalizeController } from '~/utilities/localize';
 
 /**
  * @since 2.0
@@ -24,7 +24,7 @@ import styles from './progress-bar.styles';
 @customElement('sl-progress-bar')
 export default class SlProgressBar extends LitElement {
   static styles = styles;
-  private localize = new LocalizeController(this);
+  private readonly localize = new LocalizeController(this);
 
   /** The current progress, 0 to 100. */
   @property({ type: Number, reflect: true }) value = 0;
@@ -33,7 +33,7 @@ export default class SlProgressBar extends LitElement {
   @property({ type: Boolean, reflect: true }) indeterminate = false;
 
   /** A custom label for the progress bar's aria label. */
-  @property() label: string;
+  @property() label = '';
 
   /** The locale to render the component in. */
   @property() lang: string;
@@ -48,12 +48,12 @@ export default class SlProgressBar extends LitElement {
         })}
         role="progressbar"
         title=${ifDefined(this.title)}
-        aria-label=${this.label || this.localize.term('progress')}
+        aria-label=${this.label.length > 0 ? this.label : this.localize.term('progress')}
         aria-valuemin="0"
         aria-valuemax="100"
         aria-valuenow=${this.indeterminate ? 0 : this.value}
       >
-        <div part="indicator" class="progress-bar__indicator" style=${styleMap({ width: this.value + '%' })}>
+        <div part="indicator" class="progress-bar__indicator" style=${styleMap({ width: `${this.value}%` })}>
           ${!this.indeterminate
             ? html`
                 <span part="label" class="progress-bar__label">

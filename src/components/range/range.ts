@@ -2,15 +2,13 @@ import { LitElement, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { emit } from '../../internal/event';
 import { live } from 'lit/directives/live.js';
-import { watch } from '../../internal/watch';
-import { getLabelledBy, renderFormControl } from '../../internal/form-control';
-import { FormSubmitController } from '../../internal/form-control';
-import { HasSlotController } from '../../internal/slot';
 import styles from './range.styles';
-
-let id = 0;
+import { autoIncrement } from '~/internal/autoIncrement';
+import { emit } from '~/internal/event';
+import { FormSubmitController, getLabelledBy, renderFormControl } from '~/internal/form-control';
+import { HasSlotController } from '~/internal/slot';
+import { watch } from '~/internal/watch';
 
 /**
  * @since 2.0
@@ -38,14 +36,15 @@ export default class SlRange extends LitElement {
   static styles = styles;
 
   @query('.range__control') input: HTMLInputElement;
-  @query('.range__tooltip') output: HTMLOutputElement;
+  @query('.range__tooltip') output: HTMLOutputElement | null;
 
-  // @ts-ignore
-  private formSubmitController = new FormSubmitController(this);
-  private hasSlotController = new HasSlotController(this, 'help-text', 'label');
-  private inputId = `input-${++id}`;
-  private helpTextId = `input-help-text-${id}`;
-  private labelId = `input-label-${id}`;
+  // @ts-expect-error -- Controller is currently unused
+  private readonly formSubmitController = new FormSubmitController(this);
+  private readonly hasSlotController = new HasSlotController(this, 'help-text', 'label');
+  private readonly attrId = autoIncrement();
+  private readonly inputId = `input-${this.attrId}`;
+  private readonly helpTextId = `input-help-text-${this.attrId}`;
+  private readonly labelId = `input-label-${this.attrId}`;
   private resizeObserver: ResizeObserver;
 
   @state() private hasFocus = false;
@@ -89,13 +88,21 @@ export default class SlRange extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.resizeObserver = new ResizeObserver(() => this.syncRange());
+    this.resizeObserver = new ResizeObserver(() => {
+      this.syncRange();
+    });
 
-    if (this.value === undefined || this.value === null) this.value = this.min;
-    if (this.value < this.min) this.value = this.min;
-    if (this.value > this.max) this.value = this.max;
+    if (typeof this.value === 'undefined') {
+      this.value = this.min;
+    }
+    if (this.value < this.min) {
+      this.value = this.min;
+    }
+    if (this.value > this.max) {
+      this.value = this.max;
+    }
 
-    this.updateComplete.then(() => {
+    void this.updateComplete.then(() => {
       this.syncRange();
       this.resizeObserver.observe(this.input);
     });
@@ -123,7 +130,7 @@ export default class SlRange extends LitElement {
   }
 
   handleInput() {
-    this.value = Number(this.input.value);
+    this.value = parseFloat(this.input.value);
     emit(this, 'sl-change');
 
     this.syncRange();
@@ -137,22 +144,16 @@ export default class SlRange extends LitElement {
 
   @watch('value', { waitUntilFirstUpdate: true })
   handleValueChange() {
-    this.value = Number(this.value);
-
-    if (this.input) {
-      this.invalid = !this.input.checkValidity();
-    }
+    this.invalid = !this.input.checkValidity();
 
     this.syncRange();
   }
 
-  @watch('disabled')
+  @watch('disabled', { waitUntilFirstUpdate: true })
   handleDisabledChange() {
     // Disabled form controls are always valid, so we need to recheck validity when the state changes
-    if (this.input) {
-      this.input.disabled = this.disabled;
-      this.invalid = !this.input.checkValidity();
-    }
+    this.input.disabled = this.disabled;
+    this.invalid = !this.input.checkValidity();
   }
 
   handleFocus() {
@@ -186,7 +187,7 @@ export default class SlRange extends LitElement {
   }
 
   syncTooltip(percent: number) {
-    if (this.output) {
+    if (this.output !== null) {
       const inputWidth = this.input.offsetWidth;
       const tooltipWidth = this.output.offsetWidth;
       const thumbSize = getComputedStyle(this.input).getPropertyValue('--thumb-size');
@@ -238,7 +239,7 @@ export default class SlRange extends LitElement {
             min=${ifDefined(this.min)}
             max=${ifDefined(this.max)}
             step=${ifDefined(this.step)}
-            .value=${live(String(this.value))}
+            .value=${live(this.value.toString())}
             aria-labelledby=${ifDefined(
               getLabelledBy({
                 label: this.label,

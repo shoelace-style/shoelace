@@ -1,10 +1,14 @@
 import { LitElement, html } from 'lit';
 import { customElement, query } from 'lit/decorators.js';
-import { emit } from '../../internal/event';
-import { getTextContent } from '../../internal/slot';
-import { hasFocusVisible } from '../../internal/focus-visible';
-import type SlMenuItem from '../menu-item/menu-item';
 import styles from './menu.styles';
+import type SlMenuItem from '~/components/menu-item/menu-item';
+import { emit } from '~/internal/event';
+import { hasFocusVisible } from '~/internal/focus-visible';
+import { getTextContent } from '~/internal/slot';
+
+export interface MenuSelectEventDetail {
+  item: SlMenuItem;
+}
 
 /**
  * @since 2.0
@@ -24,7 +28,7 @@ export default class SlMenu extends LitElement {
   @query('slot') defaultSlot: HTMLSlotElement;
 
   private typeToSelectString = '';
-  private typeToSelectTimeout: any;
+  private typeToSelectTimeout: NodeJS.Timeout;
 
   firstUpdated() {
     this.setAttribute('role', 'menu');
@@ -36,7 +40,7 @@ export default class SlMenu extends LitElement {
         return false;
       }
 
-      if (!options?.includeDisabled && (el as SlMenuItem).disabled) {
+      if (!options.includeDisabled && (el as SlMenuItem).disabled) {
         return false;
       }
 
@@ -58,10 +62,12 @@ export default class SlMenu extends LitElement {
    */
   setCurrentItem(item: SlMenuItem) {
     const items = this.getAllItems({ includeDisabled: false });
-    let activeItem = item.disabled ? items[0] : item;
+    const activeItem = item.disabled ? items[0] : item;
 
     // Update tab indexes
-    items.map(i => i.setAttribute('tabindex', i === activeItem ? '0' : '-1'));
+    items.forEach(i => {
+      i.setAttribute('tabindex', i === activeItem ? '0' : '-1');
+    });
   }
 
   /**
@@ -78,13 +84,15 @@ export default class SlMenu extends LitElement {
 
     // Restore focus in browsers that don't support :focus-visible when using the keyboard
     if (!hasFocusVisible) {
-      items.map(item => item.classList.remove('sl-focus-invisible'));
+      items.forEach(item => {
+        item.classList.remove('sl-focus-invisible');
+      });
     }
 
     for (const item of items) {
-      const slot = item.shadowRoot!.querySelector('slot:not([name])') as HTMLSlotElement;
+      const slot = item.shadowRoot?.querySelector<HTMLSlotElement>('slot:not([name])');
       const label = getTextContent(slot).toLowerCase().trim();
-      if (label.substring(0, this.typeToSelectString.length) === this.typeToSelectString) {
+      if (label.startsWith(this.typeToSelectString)) {
         this.setCurrentItem(item);
 
         // Set focus here to force the browser to show :focus-visible styles
@@ -96,9 +104,9 @@ export default class SlMenu extends LitElement {
 
   handleClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
-    const item = target.closest('sl-menu-item') as SlMenuItem;
+    const item = target.closest('sl-menu-item');
 
-    if (item && !item.disabled) {
+    if (item?.disabled === false) {
       emit(this, 'sl-select', { detail: { item } });
     }
   }
@@ -107,7 +115,9 @@ export default class SlMenu extends LitElement {
     // Restore focus in browsers that don't support :focus-visible when using the keyboard
     if (!hasFocusVisible) {
       const items = this.getAllItems();
-      items.map(item => item.classList.remove('sl-focus-invisible'));
+      items.forEach(item => {
+        item.classList.remove('sl-focus-invisible');
+      });
     }
   }
 
@@ -117,10 +127,8 @@ export default class SlMenu extends LitElement {
       const item = this.getCurrentItem();
       event.preventDefault();
 
-      if (item) {
-        // Simulate a click to support @click handlers on menu items that also work with the keyboard
-        item.click();
-      }
+      // Simulate a click to support @click handlers on menu items that also work with the keyboard
+      item?.click();
     }
 
     // Prevent scrolling when space is pressed
@@ -132,9 +140,9 @@ export default class SlMenu extends LitElement {
     if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
       const items = this.getAllItems({ includeDisabled: false });
       const activeItem = this.getCurrentItem();
-      let index = activeItem ? items.indexOf(activeItem) : 0;
+      let index = typeof activeItem !== 'undefined' ? items.indexOf(activeItem) : 0;
 
-      if (items.length) {
+      if (items.length > 0) {
         event.preventDefault();
 
         if (event.key === 'ArrowDown') {
@@ -147,8 +155,12 @@ export default class SlMenu extends LitElement {
           index = items.length - 1;
         }
 
-        if (index < 0) index = 0;
-        if (index > items.length - 1) index = items.length - 1;
+        if (index < 0) {
+          index = 0;
+        }
+        if (index > items.length - 1) {
+          index = items.length - 1;
+        }
 
         this.setCurrentItem(items[index]);
         items[index].focus();
@@ -177,7 +189,7 @@ export default class SlMenu extends LitElement {
     const items = this.getAllItems({ includeDisabled: false });
 
     // Reset the roving tab index when the slotted items change
-    if (items.length) {
+    if (items.length > 0) {
       this.setCurrentItem(items[0]);
     }
   }

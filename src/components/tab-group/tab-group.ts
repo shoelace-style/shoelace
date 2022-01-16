@@ -1,16 +1,15 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { emit } from '../../internal/event';
-import { watch } from '../../internal/watch';
-import { getOffset } from '../../internal/offset';
-import { scrollIntoView } from '../../internal/scroll';
-import { LocalizeController } from '../../utilities/localize';
-import type SlTab from '../tab/tab';
-import type SlTabPanel from '../tab-panel/tab-panel';
 import styles from './tab-group.styles';
-
-import '../icon-button/icon-button';
+import '~/components/icon-button/icon-button';
+import type SlTabPanel from '~/components/tab-panel/tab-panel';
+import type SlTab from '~/components/tab/tab';
+import { emit } from '~/internal/event';
+import { getOffset } from '~/internal/offset';
+import { scrollIntoView } from '~/internal/scroll';
+import { watch } from '~/internal/watch';
+import { LocalizeController } from '~/utilities/localize';
 
 /**
  * @since 2.0
@@ -37,14 +36,14 @@ import '../icon-button/icon-button';
 @customElement('sl-tab-group')
 export default class SlTabGroup extends LitElement {
   static styles = styles;
-  private localize = new LocalizeController(this);
+  private readonly localize = new LocalizeController(this);
 
   @query('.tab-group') tabGroup: HTMLElement;
   @query('.tab-group__body') body: HTMLElement;
   @query('.tab-group__nav') nav: HTMLElement;
   @query('.tab-group__indicator') indicator: HTMLElement;
 
-  private activeTab: SlTab;
+  private activeTab?: SlTab;
   private mutationObserver: MutationObserver;
   private resizeObserver: ResizeObserver;
   private tabs: SlTab[] = [];
@@ -78,8 +77,10 @@ export default class SlTabGroup extends LitElement {
 
     this.mutationObserver = new MutationObserver(mutations => {
       // Update aria labels when the DOM changes
-      if (mutations.some(m => !['aria-labelledby', 'aria-controls'].includes(m.attributeName as string))) {
-        setTimeout(() => this.setAriaLabels());
+      if (mutations.some(m => !['aria-labelledby', 'aria-controls'].includes(m.attributeName!))) {
+        setTimeout(() => {
+          this.setAriaLabels();
+        });
       }
 
       // Sync tabs when disabled states change
@@ -88,7 +89,7 @@ export default class SlTabGroup extends LitElement {
       }
     });
 
-    this.updateComplete.then(() => {
+    void this.updateComplete.then(() => {
       this.syncTabsAndPanels();
       this.mutationObserver.observe(this, { attributes: true, childList: true, subtree: true });
       this.resizeObserver.observe(this.nav);
@@ -97,7 +98,7 @@ export default class SlTabGroup extends LitElement {
       const intersectionObserver = new IntersectionObserver((entries, observer) => {
         if (entries[0].intersectionRatio > 0) {
           this.setAriaLabels();
-          this.setActiveTab(this.getActiveTab() || this.tabs[0], { emitEvents: false });
+          this.setActiveTab(this.getActiveTab() ?? this.tabs[0], { emitEvents: false });
           observer.unobserve(entries[0].target);
         }
       });
@@ -112,28 +113,26 @@ export default class SlTabGroup extends LitElement {
 
   /** Shows the specified tab panel. */
   show(panel: string) {
-    const tab = this.tabs.find(el => el.panel === panel) as SlTab;
+    const tab = this.tabs.find(el => el.panel === panel);
 
-    if (tab) {
+    if (typeof tab !== 'undefined') {
       this.setActiveTab(tab, { scrollBehavior: 'smooth' });
     }
   }
 
   getAllTabs(includeDisabled = false) {
-    const slot = this.shadowRoot!.querySelector('slot[name="nav"]') as HTMLSlotElement;
+    const slot = this.shadowRoot!.querySelector<HTMLSlotElement>('slot[name="nav"]')!;
 
-    return [...slot.assignedElements()].filter((el: any) => {
+    return [...(slot.assignedElements() as SlTab[])].filter(el => {
       return includeDisabled
         ? el.tagName.toLowerCase() === 'sl-tab'
-        : el.tagName.toLowerCase() === 'sl-tab' && !el.disabled;
-    }) as SlTab[];
+        : el.tagName.toLowerCase() === 'sl-tab' && el.disabled;
+    });
   }
 
   getAllPanels() {
     const slot = this.body.querySelector('slot')!;
-    return [...slot.assignedElements()].filter((el: any) => el.tagName.toLowerCase() === 'sl-tab-panel') as [
-      SlTabPanel
-    ];
+    return [...slot.assignedElements()].filter(el => el.tagName.toLowerCase() === 'sl-tab-panel') as [SlTabPanel];
   }
 
   getActiveTab() {
@@ -142,7 +141,7 @@ export default class SlTabGroup extends LitElement {
 
   handleClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
-    const tab = target.closest('sl-tab') as SlTab;
+    const tab = target.closest('sl-tab');
     const tabGroup = tab?.closest('sl-tab-group');
 
     // Ensure the target tab is in this tab group
@@ -150,14 +149,14 @@ export default class SlTabGroup extends LitElement {
       return;
     }
 
-    if (tab) {
+    if (tab !== null) {
       this.setActiveTab(tab, { scrollBehavior: 'smooth' });
     }
   }
 
   handleKeyDown(event: KeyboardEvent) {
     const target = event.target as HTMLElement;
-    const tab = target.closest('sl-tab') as SlTab;
+    const tab = target.closest('sl-tab');
     const tabGroup = tab?.closest('sl-tab-group');
 
     // Ensure the target tab is in this tab group
@@ -167,7 +166,7 @@ export default class SlTabGroup extends LitElement {
 
     // Activate a tab
     if (['Enter', ' '].includes(event.key)) {
-      if (tab) {
+      if (tab !== null) {
         this.setActiveTab(tab, { scrollBehavior: 'smooth' });
         event.preventDefault();
       }
@@ -175,10 +174,10 @@ export default class SlTabGroup extends LitElement {
 
     // Move focus left or right
     if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) {
-      const activeEl = document.activeElement as any;
+      const activeEl = document.activeElement;
 
-      if (activeEl && activeEl.tagName.toLowerCase() === 'sl-tab') {
-        let index = this.tabs.indexOf(activeEl);
+      if (activeEl?.tagName.toLowerCase() === 'sl-tab') {
+        let index = this.tabs.indexOf(activeEl as SlTab);
 
         if (event.key === 'Home') {
           index = 0;
@@ -225,34 +224,34 @@ export default class SlTabGroup extends LitElement {
     });
   }
 
-  @watch('noScrollControls')
+  @watch('noScrollControls', { waitUntilFirstUpdate: true })
   updateScrollControls() {
-    if (this.nav) {
-      if (this.noScrollControls) {
-        this.hasScrollControls = false;
-      } else {
-        this.hasScrollControls =
-          ['top', 'bottom'].includes(this.placement) && this.nav.scrollWidth > this.nav.clientWidth;
-      }
+    if (this.noScrollControls) {
+      this.hasScrollControls = false;
+    } else {
+      this.hasScrollControls =
+        ['top', 'bottom'].includes(this.placement) && this.nav.scrollWidth > this.nav.clientWidth;
     }
   }
 
-  setActiveTab(tab: SlTab, options?: { emitEvents?: boolean; scrollBehavior?: 'auto' | 'smooth' }) {
-    options = Object.assign(
-      {
-        emitEvents: true,
-        scrollBehavior: 'auto'
-      },
-      options
-    );
+  setActiveTab(tab: SlTab | undefined, options?: { emitEvents?: boolean; scrollBehavior?: 'auto' | 'smooth' }) {
+    options = {
+      emitEvents: true,
+      scrollBehavior: 'auto',
+      ...options
+    };
 
-    if (tab && tab !== this.activeTab && !tab.disabled) {
+    if (typeof tab !== 'undefined' && tab !== this.activeTab && !tab.disabled) {
       const previousTab = this.activeTab;
       this.activeTab = tab;
 
       // Sync active tab and panel
-      this.tabs.map(el => (el.active = el === this.activeTab));
-      this.panels.map(el => (el.active = el.name === this.activeTab.panel));
+      this.tabs.forEach(el => {
+        el.active = el === this.activeTab;
+      });
+      this.panels.forEach(el => {
+        el.active = el.name === tab.panel;
+      });
       this.syncIndicator();
 
       if (['top', 'bottom'].includes(this.placement)) {
@@ -260,11 +259,10 @@ export default class SlTabGroup extends LitElement {
       }
 
       // Emit events
-      if (options.emitEvents) {
-        if (previousTab) {
+      if (options.emitEvents === true) {
+        if (typeof previousTab !== 'undefined') {
           emit(this, 'sl-tab-hide', { detail: { name: previousTab.panel } });
         }
-
         emit(this, 'sl-tab-show', { detail: { name: this.activeTab.panel } });
       }
     }
@@ -272,34 +270,31 @@ export default class SlTabGroup extends LitElement {
 
   setAriaLabels() {
     // Link each tab with its corresponding panel
-    this.tabs.map(tab => {
-      const panel = this.panels.find(el => el.name === tab.panel) as SlTabPanel;
-      if (panel) {
-        tab.setAttribute('aria-controls', panel.getAttribute('id') as string);
-        panel.setAttribute('aria-labelledby', tab.getAttribute('id') as string);
+    this.tabs.forEach(tab => {
+      const panel = this.panels.find(el => el.name === tab.panel);
+      if (typeof panel !== 'undefined') {
+        tab.setAttribute('aria-controls', panel.getAttribute('id')!);
+        panel.setAttribute('aria-labelledby', tab.getAttribute('id')!);
       }
     });
   }
 
-  @watch('placement')
+  @watch('placement', { waitUntilFirstUpdate: true })
   syncIndicator() {
-    if (this.indicator) {
-      const tab = this.getActiveTab();
+    const tab = this.getActiveTab();
 
-      if (tab) {
-        this.indicator.style.display = 'block';
-        this.repositionIndicator();
-      } else {
-        this.indicator.style.display = 'none';
-        return;
-      }
+    if (typeof tab !== 'undefined') {
+      this.indicator.style.display = 'block';
+      this.repositionIndicator();
+    } else {
+      this.indicator.style.display = 'none';
     }
   }
 
   repositionIndicator() {
     const currentTab = this.getActiveTab();
 
-    if (!currentTab) {
+    if (typeof currentTab === 'undefined') {
       return;
     }
 
@@ -367,7 +362,7 @@ export default class SlTabGroup extends LitElement {
                   exportparts="base:scroll-button"
                   name="chevron-left"
                   library="system"
-                  label=${this.localize.term('scroll_to_start')}
+                  label=${this.localize.term('scrollToStart')}
                   @click=${this.handleScrollToStart}
                 ></sl-icon-button>
               `
@@ -387,7 +382,7 @@ export default class SlTabGroup extends LitElement {
                   exportparts="base:scroll-button"
                   name="chevron-right"
                   library="system"
-                  label=${this.localize.term('scroll_to_end')}
+                  label=${this.localize.term('scrollToEnd')}
                   @click=${this.handleScrollToEnd}
                 ></sl-icon-button>
               `

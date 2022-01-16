@@ -1,14 +1,12 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { animateTo, stopAnimations } from '../../internal/animate';
-import { emit } from '../../internal/event';
-import { watch } from '../../internal/watch';
-import { waitForEvent } from '../../internal/event';
-import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
 import styles from './alert.styles';
-
-import '../icon-button/icon-button';
+import '~/components/icon-button/icon-button';
+import { animateTo, stopAnimations } from '~/internal/animate';
+import { emit, waitForEvent } from '~/internal/event';
+import { watch } from '~/internal/watch';
+import { getAnimation, setDefaultAnimation } from '~/utilities/animation-registry';
 
 const toastStack = Object.assign(document.createElement('div'), { className: 'sl-toast-stack' });
 
@@ -41,7 +39,7 @@ const toastStack = Object.assign(document.createElement('div'), { className: 'sl
 export default class SlAlert extends LitElement {
   static styles = styles;
 
-  private autoHideTimeout: any;
+  private autoHideTimeout: NodeJS.Timeout;
 
   @query('[part="base"]') base: HTMLElement;
 
@@ -58,7 +56,7 @@ export default class SlAlert extends LitElement {
    * The length of time, in milliseconds, the alert will show before closing itself. If the user interacts with
    * the alert before it closes (e.g. moves the mouse over it), the timer will restart. Defaults to `Infinity`.
    */
-  @property({ type: Number }) duration: number = Infinity;
+  @property({ type: Number }) duration = Infinity;
 
   firstUpdated() {
     this.base.hidden = !this.open;
@@ -67,7 +65,7 @@ export default class SlAlert extends LitElement {
   /** Shows the alert. */
   async show() {
     if (this.open) {
-      return;
+      return undefined;
     }
 
     this.open = true;
@@ -77,7 +75,7 @@ export default class SlAlert extends LitElement {
   /** Hides the alert */
   async hide() {
     if (!this.open) {
-      return;
+      return undefined;
     }
 
     this.open = false;
@@ -91,7 +89,7 @@ export default class SlAlert extends LitElement {
    */
   async toast() {
     return new Promise<void>(resolve => {
-      if (!toastStack.parentElement) {
+      if (toastStack.parentElement === null) {
         document.body.append(toastStack);
       }
 
@@ -99,8 +97,9 @@ export default class SlAlert extends LitElement {
 
       // Wait for the toast stack to render
       requestAnimationFrame(() => {
-        this.clientWidth; // force a reflow for the initial transition
-        this.show();
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions -- force a reflow for the initial transition
+        this.clientWidth;
+        void this.show();
       });
 
       this.addEventListener(
@@ -110,7 +109,7 @@ export default class SlAlert extends LitElement {
           resolve();
 
           // Remove the toast stack from the DOM when there are no more alerts
-          if (!toastStack.querySelector('sl-alert')) {
+          if (toastStack.querySelector('sl-alert') === null) {
             toastStack.remove();
           }
         },
@@ -122,12 +121,14 @@ export default class SlAlert extends LitElement {
   restartAutoHide() {
     clearTimeout(this.autoHideTimeout);
     if (this.open && this.duration < Infinity) {
-      this.autoHideTimeout = setTimeout(() => this.hide(), this.duration);
+      this.autoHideTimeout = setTimeout(() => {
+        void this.hide();
+      }, this.duration);
     }
   }
 
   handleCloseClick() {
-    this.hide();
+    void this.hide();
   }
 
   handleMouseMove() {

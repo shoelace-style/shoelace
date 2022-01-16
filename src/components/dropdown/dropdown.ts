@@ -1,17 +1,17 @@
+import type { Instance as PopperInstance } from '@popperjs/core/dist/esm';
+import { createPopper } from '@popperjs/core/dist/esm';
 import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { Instance as PopperInstance, createPopper } from '@popperjs/core/dist/esm';
-import { animateTo, stopAnimations } from '../../internal/animate';
-import { emit } from '../../internal/event';
-import { watch } from '../../internal/watch';
-import { waitForEvent } from '../../internal/event';
-import { scrollIntoView } from '../../internal/scroll';
-import { getTabbableBoundary } from '../../internal/tabbable';
-import { setDefaultAnimation, getAnimation } from '../../utilities/animation-registry';
-import type SlMenu from '../menu/menu';
-import type SlMenuItem from '../menu-item/menu-item';
 import styles from './dropdown.styles';
+import type SlMenuItem from '~/components/menu-item/menu-item';
+import type SlMenu from '~/components/menu/menu';
+import { animateTo, stopAnimations } from '~/internal/animate';
+import { emit, waitForEvent } from '~/internal/event';
+import { scrollIntoView } from '~/internal/scroll';
+import { getTabbableBoundary } from '~/internal/tabbable';
+import { watch } from '~/internal/watch';
+import { setDefaultAnimation, getAnimation } from '~/utilities/animation-registry';
 
 /**
  * @since 2.0
@@ -40,7 +40,7 @@ export default class SlDropdown extends LitElement {
   @query('.dropdown__panel') panel: HTMLElement;
   @query('.dropdown__positioner') positioner: HTMLElement;
 
-  private popover: PopperInstance;
+  private popover?: PopperInstance;
 
   /** Indicates whether or not the dropdown is open. You can use this in lieu of the show/hide methods. */
   @property({ type: Boolean, reflect: true }) open = false;
@@ -73,7 +73,7 @@ export default class SlDropdown extends LitElement {
   @property({ attribute: 'stay-open-on-select', type: Boolean, reflect: true }) stayOpenOnSelect = false;
 
   /** The dropdown will close when the user interacts outside of this element (e.g. clicking). */
-  @property({ attribute: false }) containingElement: HTMLElement;
+  @property({ attribute: false }) containingElement?: HTMLElement;
 
   /** The distance in pixels from which to offset the panel away from its trigger. */
   @property({ type: Number }) distance = 0;
@@ -94,12 +94,12 @@ export default class SlDropdown extends LitElement {
     this.handleDocumentKeyDown = this.handleDocumentKeyDown.bind(this);
     this.handleDocumentMouseDown = this.handleDocumentMouseDown.bind(this);
 
-    if (!this.containingElement) {
+    if (typeof this.containingElement === 'undefined') {
       this.containingElement = this;
     }
 
     // Create the popover after render
-    this.updateComplete.then(() => {
+    void this.updateComplete.then(() => {
       this.popover = createPopper(this.trigger, this.positioner, {
         placement: this.placement,
         strategy: this.hoist ? 'fixed' : 'absolute',
@@ -127,30 +127,30 @@ export default class SlDropdown extends LitElement {
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    this.hide();
+    void void this.hide();
 
-    if (this.popover) {
-      this.popover.destroy();
-    }
+    this.popover?.destroy();
   }
 
   focusOnTrigger() {
     const slot = this.trigger.querySelector('slot')!;
-    const trigger = slot.assignedElements({ flatten: true })[0] as any;
-    if (trigger && typeof trigger.focus === 'function') {
+    const trigger = slot.assignedElements({ flatten: true })[0] as HTMLElement | undefined;
+    if (typeof trigger?.focus === 'function') {
       trigger.focus();
     }
   }
 
   getMenu() {
     const slot = this.panel.querySelector('slot')!;
-    return slot.assignedElements({ flatten: true }).filter(el => el.tagName.toLowerCase() === 'sl-menu')[0] as SlMenu;
+    return slot.assignedElements({ flatten: true }).find(el => el.tagName.toLowerCase() === 'sl-menu') as
+      | SlMenu
+      | undefined;
   }
 
   handleDocumentKeyDown(event: KeyboardEvent) {
     // Close when escape is pressed
     if (event.key === 'Escape') {
-      this.hide();
+      void this.hide();
       this.focusOnTrigger();
       return;
     }
@@ -160,7 +160,7 @@ export default class SlDropdown extends LitElement {
       // Tabbing within an open menu should close the dropdown and refocus the trigger
       if (this.open && document.activeElement?.tagName.toLowerCase() === 'sl-menu-item') {
         event.preventDefault();
-        this.hide();
+        void this.hide();
         this.focusOnTrigger();
         return;
       }
@@ -171,13 +171,15 @@ export default class SlDropdown extends LitElement {
       // otherwise `document.activeElement` will only return the name of the parent shadow DOM element.
       setTimeout(() => {
         const activeElement =
-          this.containingElement.getRootNode() instanceof ShadowRoot
+          this.containingElement?.getRootNode() instanceof ShadowRoot
             ? document.activeElement?.shadowRoot?.activeElement
             : document.activeElement;
 
-        if (activeElement?.closest(this.containingElement.tagName.toLowerCase()) !== this.containingElement) {
-          this.hide();
-          return;
+        if (
+          typeof this.containingElement === 'undefined' ||
+          activeElement?.closest(this.containingElement.tagName.toLowerCase()) !== this.containingElement
+        ) {
+          void this.hide();
         }
       });
     }
@@ -185,10 +187,9 @@ export default class SlDropdown extends LitElement {
 
   handleDocumentMouseDown(event: MouseEvent) {
     // Close when clicking outside of the containing element
-    const path = event.composedPath() as Array<EventTarget>;
-    if (!path.includes(this.containingElement)) {
-      this.hide();
-      return;
+    const path = event.composedPath();
+    if (typeof this.containingElement !== 'undefined' && !path.includes(this.containingElement)) {
+      void this.hide();
     }
   }
 
@@ -202,7 +203,7 @@ export default class SlDropdown extends LitElement {
 
     // Hide the dropdown when a menu item is selected
     if (!this.stayOpenOnSelect && target.tagName.toLowerCase() === 'sl-menu') {
-      this.hide();
+      void this.hide();
       this.focusOnTrigger();
     }
   }
@@ -212,42 +213,44 @@ export default class SlDropdown extends LitElement {
   @watch('placement')
   @watch('skidding')
   handlePopoverOptionsChange() {
-    if (this.popover) {
-      this.popover.setOptions({
-        placement: this.placement,
-        strategy: this.hoist ? 'fixed' : 'absolute',
-        modifiers: [
-          {
-            name: 'flip',
-            options: {
-              boundary: 'viewport'
-            }
-          },
-          {
-            name: 'offset',
-            options: {
-              offset: [this.skidding, this.distance]
-            }
+    void this.popover?.setOptions({
+      placement: this.placement,
+      strategy: this.hoist ? 'fixed' : 'absolute',
+      modifiers: [
+        {
+          name: 'flip',
+          options: {
+            boundary: 'viewport'
           }
-        ]
-      });
-    }
+        },
+        {
+          name: 'offset',
+          options: {
+            offset: [this.skidding, this.distance]
+          }
+        }
+      ]
+    });
   }
 
   handleTriggerClick() {
-    this.open ? this.hide() : this.show();
+    if (this.open) {
+      void this.hide();
+    } else {
+      void this.show();
+    }
   }
 
   handleTriggerKeyDown(event: KeyboardEvent) {
     const menu = this.getMenu();
-    const menuItems = menu ? ([...menu.querySelectorAll('sl-menu-item')] as SlMenuItem[]) : [];
+    const menuItems = typeof menu !== 'undefined' ? ([...menu.querySelectorAll('sl-menu-item')] as SlMenuItem[]) : [];
     const firstMenuItem = menuItems[0];
     const lastMenuItem = menuItems[menuItems.length - 1];
 
     // Close when escape or tab is pressed
     if (event.key === 'Escape') {
       this.focusOnTrigger();
-      this.hide();
+      void this.hide();
       return;
     }
 
@@ -255,7 +258,7 @@ export default class SlDropdown extends LitElement {
     // key again to hide the menu in case they don't want to make a selection.
     if ([' ', 'Enter'].includes(event.key)) {
       event.preventDefault();
-      this.open ? this.hide() : this.show();
+      this.handleTriggerClick();
       return;
     }
 
@@ -267,19 +270,18 @@ export default class SlDropdown extends LitElement {
 
       // Show the menu if it's not already open
       if (!this.open) {
-        this.show();
+        void this.show();
       }
 
       // Focus on a menu item
-      if (event.key === 'ArrowDown' && firstMenuItem) {
-        const menu = this.getMenu();
-        menu.setCurrentItem(firstMenuItem);
+      if (event.key === 'ArrowDown' && typeof firstMenuItem !== 'undefined') {
+        menu!.setCurrentItem(firstMenuItem);
         firstMenuItem.focus();
         return;
       }
 
-      if (event.key === 'ArrowUp' && lastMenuItem) {
-        menu.setCurrentItem(lastMenuItem);
+      if (event.key === 'ArrowUp' && typeof lastMenuItem !== 'undefined') {
+        menu!.setCurrentItem(lastMenuItem);
         lastMenuItem.focus();
         return;
       }
@@ -287,9 +289,8 @@ export default class SlDropdown extends LitElement {
 
     // Other keys bring focus to the menu and initiate type-to-select behavior
     const ignoredKeys = ['Tab', 'Shift', 'Meta', 'Ctrl', 'Alt'];
-    if (this.open && menu && !ignoredKeys.includes(event.key)) {
-      menu.typeToSelect(event.key);
-      return;
+    if (this.open && !ignoredKeys.includes(event.key)) {
+      menu?.typeToSelect(event.key);
     }
   }
 
@@ -315,22 +316,20 @@ export default class SlDropdown extends LitElement {
   // To determine this, we assume the first tabbable element in the trigger slot is the "accessible trigger."
   //
   updateAccessibleTrigger() {
-    if (this.trigger) {
-      const slot = this.trigger.querySelector('slot') as HTMLSlotElement;
-      const assignedElements = slot.assignedElements({ flatten: true }) as HTMLElement[];
-      const accessibleTrigger = assignedElements.find(el => getTabbableBoundary(el).start);
+    const slot = this.trigger.querySelector('slot')!;
+    const assignedElements = slot.assignedElements({ flatten: true }) as HTMLElement[];
+    const accessibleTrigger = assignedElements.find(el => getTabbableBoundary(el).start);
 
-      if (accessibleTrigger) {
-        accessibleTrigger.setAttribute('aria-haspopup', 'true');
-        accessibleTrigger.setAttribute('aria-expanded', this.open ? 'true' : 'false');
-      }
+    if (typeof accessibleTrigger !== 'undefined') {
+      accessibleTrigger.setAttribute('aria-haspopup', 'true');
+      accessibleTrigger.setAttribute('aria-expanded', this.open ? 'true' : 'false');
     }
   }
 
   /** Shows the dropdown panel. */
   async show() {
     if (this.open) {
-      return;
+      return undefined;
     }
 
     this.open = true;
@@ -340,7 +339,7 @@ export default class SlDropdown extends LitElement {
   /** Hides the dropdown panel */
   async hide() {
     if (!this.open) {
-      return;
+      return undefined;
     }
 
     this.open = false;
@@ -356,7 +355,7 @@ export default class SlDropdown extends LitElement {
       return;
     }
 
-    this.popover.update();
+    void this.popover?.update();
   }
 
   @watch('open', { waitUntilFirstUpdate: true })
@@ -376,7 +375,7 @@ export default class SlDropdown extends LitElement {
       document.addEventListener('mousedown', this.handleDocumentMouseDown);
 
       await stopAnimations(this);
-      this.popover.update();
+      void this.popover?.update();
       this.panel.hidden = false;
       const { keyframes, options } = getAnimation(this, 'dropdown.show');
       await animateTo(this.panel, keyframes, options);

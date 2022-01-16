@@ -1,12 +1,13 @@
+import type { Instance as PopperInstance } from '@popperjs/core/dist/esm';
+import { createPopper } from '@popperjs/core/dist/esm';
 import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { Instance as PopperInstance, createPopper } from '@popperjs/core/dist/esm';
-import { animateTo, parseDuration, stopAnimations } from '../../internal/animate';
-import { emit, waitForEvent } from '../../internal/event';
-import { watch } from '../../internal/watch';
-import { setDefaultAnimation, getAnimation } from '../../utilities/animation-registry';
 import styles from './tooltip.styles';
+import { animateTo, parseDuration, stopAnimations } from '~/internal/animate';
+import { emit, waitForEvent } from '~/internal/event';
+import { watch } from '~/internal/watch';
+import { setDefaultAnimation, getAnimation } from '~/utilities/animation-registry';
 
 /**
  * @since 2.0
@@ -37,8 +38,8 @@ export default class SlTooltip extends LitElement {
   @query('.tooltip') tooltip: HTMLElement;
 
   private target: HTMLElement;
-  private popover: PopperInstance;
-  private hoverTimeout: any;
+  private popover?: PopperInstance;
+  private hoverTimeout: NodeJS.Timeout;
 
   /** The tooltip's content. Alternatively, you can use the content slot. */
   @property() content = '';
@@ -95,7 +96,7 @@ export default class SlTooltip extends LitElement {
     this.handleMouseOver = this.handleMouseOver.bind(this);
     this.handleMouseOut = this.handleMouseOut.bind(this);
 
-    this.updateComplete.then(() => {
+    void this.updateComplete.then(() => {
       this.addEventListener('blur', this.handleBlur, true);
       this.addEventListener('focus', this.handleFocus, true);
       this.addEventListener('click', this.handleClick);
@@ -121,15 +122,13 @@ export default class SlTooltip extends LitElement {
     this.removeEventListener('mouseover', this.handleMouseOver);
     this.removeEventListener('mouseout', this.handleMouseOut);
 
-    if (this.popover) {
-      this.popover.destroy();
-    }
+    this.popover?.destroy();
   }
 
   /** Shows the tooltip. */
   async show() {
     if (this.open) {
-      return;
+      return undefined;
     }
 
     this.open = true;
@@ -139,7 +138,7 @@ export default class SlTooltip extends LitElement {
   /** Hides the tooltip */
   async hide() {
     if (!this.open) {
-      return;
+      return undefined;
     }
 
     this.open = false;
@@ -150,30 +149,34 @@ export default class SlTooltip extends LitElement {
     // Get the first child that isn't a <style> or content slot
     const target = [...this.children].find(
       el => el.tagName.toLowerCase() !== 'style' && el.getAttribute('slot') !== 'content'
-    ) as HTMLElement;
+    );
 
-    if (!target) {
+    if (typeof target === 'undefined') {
       throw new Error('Invalid tooltip target: no child element was found.');
     }
 
-    return target;
+    return target as HTMLElement;
   }
 
   handleBlur() {
     if (this.hasTrigger('focus')) {
-      this.hide();
+      void this.hide();
     }
   }
 
   handleClick() {
     if (this.hasTrigger('click')) {
-      this.open ? this.hide() : this.show();
+      if (this.open) {
+        void this.hide();
+      } else {
+        void this.show();
+      }
     }
   }
 
   handleFocus() {
     if (this.hasTrigger('focus')) {
-      this.show();
+      void this.show();
     }
   }
 
@@ -181,7 +184,7 @@ export default class SlTooltip extends LitElement {
     // Pressing escape when the target element has focus should dismiss the tooltip
     if (this.open && event.key === 'Escape') {
       event.stopPropagation();
-      this.hide();
+      void this.hide();
     }
   }
 
@@ -189,7 +192,7 @@ export default class SlTooltip extends LitElement {
     if (this.hasTrigger('hover')) {
       const delay = parseDuration(getComputedStyle(this).getPropertyValue('--show-delay'));
       clearTimeout(this.hoverTimeout);
-      this.hoverTimeout = setTimeout(() => this.show(), delay);
+      this.hoverTimeout = setTimeout(() => void this.show(), delay);
     }
   }
 
@@ -197,7 +200,7 @@ export default class SlTooltip extends LitElement {
     if (this.hasTrigger('hover')) {
       const delay = parseDuration(getComputedStyle(this).getPropertyValue('--hide-delay'));
       clearTimeout(this.hoverTimeout);
-      this.hoverTimeout = setTimeout(() => this.hide(), delay);
+      this.hoverTimeout = setTimeout(() => void this.hide(), delay);
     }
   }
 
@@ -213,9 +216,7 @@ export default class SlTooltip extends LitElement {
 
       await stopAnimations(this.tooltip);
 
-      if (this.popover) {
-        this.popover.destroy();
-      }
+      this.popover?.destroy();
 
       this.popover = createPopper(this.target, this.positioner, {
         placement: this.placement,
@@ -250,9 +251,7 @@ export default class SlTooltip extends LitElement {
       await animateTo(this.tooltip, keyframes, options);
       this.tooltip.hidden = true;
 
-      if (this.popover) {
-        this.popover.destroy();
-      }
+      this.popover?.destroy();
 
       emit(this, 'sl-after-hide');
     }
@@ -268,15 +267,15 @@ export default class SlTooltip extends LitElement {
 
   @watch('content')
   handleContentChange() {
-    if (this.popover && this.open) {
-      this.popover.update();
+    if (this.open) {
+      void this.popover?.update();
     }
   }
 
   @watch('disabled')
   handleDisabledChange() {
     if (this.disabled && this.open) {
-      this.hide();
+      void this.hide();
     }
   }
 
@@ -286,31 +285,29 @@ export default class SlTooltip extends LitElement {
   }
 
   syncOptions() {
-    if (this.popover) {
-      this.popover.setOptions({
-        placement: this.placement,
-        strategy: this.hoist ? 'fixed' : 'absolute',
-        modifiers: [
-          {
-            name: 'flip',
-            options: {
-              boundary: 'viewport'
-            }
-          },
-          {
-            name: 'offset',
-            options: {
-              offset: [this.skidding, this.distance]
-            }
+    void this.popover?.setOptions({
+      placement: this.placement,
+      strategy: this.hoist ? 'fixed' : 'absolute',
+      modifiers: [
+        {
+          name: 'flip',
+          options: {
+            boundary: 'viewport'
           }
-        ]
-      });
-    }
+        },
+        {
+          name: 'offset',
+          options: {
+            offset: [this.skidding, this.distance]
+          }
+        }
+      ]
+    });
   }
 
   render() {
     return html`
-      <div class="tooltip-content" aria-described-by="tooltip">
+      <div class="tooltip-content" aria-describedby="tooltip">
         <slot></slot>
       </div>
 

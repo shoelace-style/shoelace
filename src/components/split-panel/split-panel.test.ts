@@ -1,8 +1,4 @@
-import { expect, fixture, html, waitUntil } from '@open-wc/testing';
-// import sinon from 'sinon';
-
-import '../../../dist/shoelace.js';
-import type SlSplitPanel from './split-panel';
+import { expect, fixture, html } from '@open-wc/testing';
 
 describe('<sl-split-panel>', () => {
   it('should render a component', async () => {

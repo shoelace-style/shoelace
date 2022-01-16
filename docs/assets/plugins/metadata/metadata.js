@@ -20,7 +20,7 @@
       <tbody>
         ${props
           .map(prop => {
-            const hasAttribute = !!prop.attribute;
+            const hasAttribute = typeof prop.attribute !== 'undefined';
             const isAttributeDifferent = prop.attribute !== prop.name;
             let attributeInfo = '';
 
@@ -244,19 +244,19 @@
     function getDependencies(tag) {
       const component = allComponents.find(c => c.tagName === tag);
       if (!component || !Array.isArray(component.dependencies)) {
-        return [];
+        return;
       }
 
-      component.dependencies?.map(tag => {
-        if (!dependencies.includes(tag)) {
-          dependencies.push(tag);
+      component.dependencies?.forEach(dependentTag => {
+        if (!dependencies.includes(dependentTag)) {
+          dependencies.push(dependentTag);
         }
-        getDependencies(tag);
+        getDependencies(dependentTag);
       });
     }
 
     getDependencies(targetComponent);
-    dependencies.sort().map(tag => {
+    dependencies.sort().forEach(tag => {
       const li = document.createElement('li');
       li.innerHTML = `<code>&lt;${tag}&gt;</code>`;
       ul.appendChild(li);
@@ -266,7 +266,11 @@
   }
 
   function escapeHtml(html) {
-    return (html + '')
+    if (typeof html === 'undefined') {
+      return '';
+    }
+    return html
+      .toString()
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
@@ -277,8 +281,8 @@
 
   function getAllComponents(metadata) {
     const allComponents = [];
-    metadata.modules?.map(module => {
-      module.declarations?.map(declaration => {
+    metadata.modules?.forEach(module => {
+      module.declarations?.forEach(declaration => {
         if (declaration.customElement) {
           // Generate the dist path based on the src path and attach it to the component
           declaration.path = module.path.replace(/^src\//, 'dist/').replace(/\.ts$/, '.js');
@@ -299,8 +303,8 @@
     throw new Error('Docsify must be loaded before installing this plugin.');
   }
 
-  window.$docsify.plugins.push((hook, vm) => {
-    hook.mounted(async function () {
+  window.$docsify.plugins.push(hook => {
+    hook.mounted(async () => {
       const metadata = await customElements;
       const target = document.querySelector('.app-name');
 
@@ -330,7 +334,7 @@
       target.appendChild(buttons);
     });
 
-    hook.beforeEach(async function (content, next) {
+    hook.beforeEach(async (content, next) => {
       const metadata = await customElements;
 
       // Replace %VERSION% placeholders
@@ -342,15 +346,23 @@
         let result = '';
 
         if (!component) {
-          console.error('Component not found in metadata: ' + tag);
+          console.error(`Component not found in metadata: ${tag}`);
           return next(content);
         }
 
         let badgeType = 'neutral';
-        if (component.status === 'stable') badgeType = 'primary';
-        if (component.status === 'experimental') badgeType = 'warning';
-        if (component.status === 'planned') badgeType = 'neutral';
-        if (component.status === 'deprecated') badgeType = 'danger';
+        if (component.status === 'stable') {
+          badgeType = 'primary';
+        }
+        if (component.status === 'experimental') {
+          badgeType = 'warning';
+        }
+        if (component.status === 'planned') {
+          badgeType = 'neutral';
+        }
+        if (component.status === 'deprecated') {
+          badgeType = 'danger';
+        }
 
         result += `
           <div class="component-header">
@@ -379,7 +391,7 @@
         let result = '';
 
         if (!component) {
-          console.error('Component not found in metadata: ' + tag);
+          console.error(`Component not found in metadata: ${tag}`);
           return next(content);
         }
 
@@ -521,11 +533,11 @@
     });
 
     // Wrap tables so we can scroll them horizontally when needed
-    hook.doneEach(function () {
+    hook.doneEach(() => {
       const content = document.querySelector('.content');
       const tables = [...content.querySelectorAll('table')];
 
-      tables.map(table => {
+      tables.forEach(table => {
         table.outerHTML = `
           <div class="table-wrapper">
             ${table.outerHTML}

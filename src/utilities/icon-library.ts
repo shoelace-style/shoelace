@@ -1,1 +1,1 @@
-export { registerIconLibrary, unregisterIconLibrary } from '../components/icon/library';
+export { registerIconLibrary, unregisterIconLibrary } from '~/components/icon/library';

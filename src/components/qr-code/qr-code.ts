@@ -1,9 +1,9 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
-import { watch } from '../../internal/watch';
 import QrCreator from 'qr-creator';
 import styles from './qr-code.styles';
+import { watch } from '~/internal/watch';
 
 /**
  * @since 2.0
@@ -77,7 +77,7 @@ export default class SlQrCode extends LitElement {
           height: `${this.size}px`
         })}
       >
-        <canvas role="img" aria-label=${this.label || this.value}></canvas>
+        <canvas role="img" aria-label=${this.label.length > 0 ? this.label : this.value}></canvas>
       </div>
     `;
   }

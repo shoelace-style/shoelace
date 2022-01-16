@@ -2,15 +2,13 @@ import { LitElement, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { emit } from '../../internal/event';
 import { live } from 'lit/directives/live.js';
-import { watch } from '../../internal/watch';
-import { getLabelledBy, renderFormControl } from '../../internal/form-control';
-import { FormSubmitController } from '../../internal/form-control';
-import { HasSlotController } from '../../internal/slot';
 import styles from './textarea.styles';
-
-let id = 0;
+import { autoIncrement } from '~/internal/autoIncrement';
+import { emit } from '~/internal/event';
+import { FormSubmitController, getLabelledBy, renderFormControl } from '~/internal/form-control';
+import { HasSlotController } from '~/internal/slot';
+import { watch } from '~/internal/watch';
 
 /**
  * @since 2.0
@@ -36,12 +34,13 @@ export default class SlTextarea extends LitElement {
 
   @query('.textarea__control') input: HTMLTextAreaElement;
 
-  // @ts-ignore
-  private formSubmitController = new FormSubmitController(this);
-  private hasSlotController = new HasSlotController(this, 'help-text', 'label');
-  private inputId = `textarea-${++id}`;
-  private helpTextId = `textarea-help-text-${id}`;
-  private labelId = `textarea-label-${id}`;
+  // @ts-expect-error -- Controller is currently unused
+  private readonly formSubmitController = new FormSubmitController(this);
+  private readonly hasSlotController = new HasSlotController(this, 'help-text', 'label');
+  private readonly attrId = autoIncrement();
+  private readonly inputId = `textarea-${this.attrId}`;
+  private readonly helpTextId = `textarea-help-text-${this.attrId}`;
+  private readonly labelId = `textarea-label-${this.attrId}`;
   private resizeObserver: ResizeObserver;
 
   @state() private hasFocus = false;
@@ -59,7 +58,7 @@ export default class SlTextarea extends LitElement {
   @property({ type: Boolean, reflect: true }) filled = false;
 
   /** The textarea's label. Alternatively, you can use the label slot. */
-  @property() label: string;
+  @property() label = '';
 
   /** The textarea's help text. Alternatively, you can use the help-text slot. */
   @property({ attribute: 'help-text' }) helpText = '';
@@ -117,9 +116,11 @@ export default class SlTextarea extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.resizeObserver = new ResizeObserver(() => this.setTextareaHeight());
+    this.resizeObserver = new ResizeObserver(() => {
+      this.setTextareaHeight();
+    });
 
-    this.updateComplete.then(() => {
+    void this.updateComplete.then(() => {
       this.setTextareaHeight();
       this.resizeObserver.observe(this.input);
     });
@@ -146,15 +147,21 @@ export default class SlTextarea extends LitElement {
 
   /** Selects all the text in the textarea. */
   select() {
-    return this.input.select();
+    this.input.select();
   }
 
   /** Gets or sets the textarea's scroll position. */
-  scrollPosition(position?: { top?: number; left?: number }) {
-    if (position) {
-      if (typeof position.top === 'number') this.input.scrollTop = position.top;
-      if (typeof position.left === 'number') this.input.scrollLeft = position.left;
-      return;
+  scrollPosition(position?: { top?: number; left?: number }): void;
+  scrollPosition(): { top: number; left: number };
+  scrollPosition(position?: { top?: number; left?: number }): { top: number; left: number } | undefined {
+    if (typeof position !== 'undefined') {
+      if (typeof position.top === 'number') {
+        this.input.scrollTop = position.top;
+      }
+      if (typeof position.left === 'number') {
+        this.input.scrollLeft = position.left;
+      }
+      return undefined;
     }
 
     return {
@@ -169,7 +176,7 @@ export default class SlTextarea extends LitElement {
     selectionEnd: number,
     selectionDirection: 'forward' | 'backward' | 'none' = 'none'
   ) {
-    return this.input.setSelectionRange(selectionStart, selectionEnd, selectionDirection);
+    this.input.setSelectionRange(selectionStart, selectionEnd, selectionDirection);
   }
 
   /** Replaces a range of text with a new string. */
@@ -216,13 +223,11 @@ export default class SlTextarea extends LitElement {
     emit(this, 'sl-change');
   }
 
-  @watch('disabled')
+  @watch('disabled', { waitUntilFirstUpdate: true })
   handleDisabledChange() {
     // Disabled form controls are always valid, so we need to recheck validity when the state changes
-    if (this.input) {
-      this.input.disabled = this.disabled;
-      this.invalid = !this.input.checkValidity();
-    }
+    this.input.disabled = this.disabled;
+    this.invalid = !this.input.checkValidity();
   }
 
   handleFocus() {
@@ -236,26 +241,22 @@ export default class SlTextarea extends LitElement {
     emit(this, 'sl-input');
   }
 
-  @watch('rows')
+  @watch('rows', { waitUntilFirstUpdate: true })
   handleRowsChange() {
     this.setTextareaHeight();
   }
 
-  @watch('value')
+  @watch('value', { waitUntilFirstUpdate: true })
   handleValueChange() {
-    if (this.input) {
-      this.invalid = !this.input.checkValidity();
-    }
+    this.invalid = !this.input.checkValidity();
   }
 
   setTextareaHeight() {
-    if (this.input) {
-      if (this.resize === 'auto') {
-        this.input.style.height = 'auto';
-        this.input.style.height = this.input.scrollHeight + 'px';
-      } else {
-        (this.input.style.height as string | undefined) = undefined;
-      }
+    if (this.resize === 'auto') {
+      this.input.style.height = 'auto';
+      this.input.style.height = `${this.input.scrollHeight}px`;
+    } else {
+      (this.input.style.height as string | undefined) = undefined;
     }
   }
 
@@ -286,7 +287,7 @@ export default class SlTextarea extends LitElement {
             'textarea--filled': this.filled,
             'textarea--disabled': this.disabled,
             'textarea--focused': this.hasFocus,
-            'textarea--empty': this.value?.length === 0,
+            'textarea--empty': this.value.length === 0,
             'textarea--invalid': this.invalid,
             'textarea--resize-none': this.resize === 'none',
             'textarea--resize-vertical': this.resize === 'vertical',

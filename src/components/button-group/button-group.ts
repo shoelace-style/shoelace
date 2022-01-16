@@ -42,11 +42,11 @@ export default class SlButtonGroup extends LitElement {
   handleSlotChange() {
     const slottedElements = [...this.defaultSlot.assignedElements({ flatten: true })] as HTMLElement[];
 
-    slottedElements.map(el => {
+    slottedElements.forEach(el => {
       const index = slottedElements.indexOf(el);
       const button = findButton(el);
 
-      if (button) {
+      if (button !== null) {
         button.classList.add('sl-button-group__button');
         button.classList.toggle('sl-button-group__button--first', index === 0);
         button.classList.toggle('sl-button-group__button--inner', index > 0 && index < slottedElements.length - 1);
@@ -56,6 +56,7 @@ export default class SlButtonGroup extends LitElement {
   }
 
   render() {
+    // eslint-disable-next-line lit-a11y/mouse-events-have-key-events -- focusout & focusin support bubbling where as focus & blur do not which is necessary here
     return html`
       <div
         part="base"
