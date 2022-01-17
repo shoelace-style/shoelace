@@ -28,7 +28,7 @@ export default class SlMenu extends LitElement {
   @query('slot') defaultSlot: HTMLSlotElement;
 
   private typeToSelectString = '';
-  private typeToSelectTimeout: NodeJS.Timeout;
+  private typeToSelectTimeout: number;
 
   firstUpdated() {
     this.setAttribute('role', 'menu');
@@ -79,14 +79,12 @@ export default class SlMenu extends LitElement {
   typeToSelect(key: string) {
     const items = this.getAllItems({ includeDisabled: false });
     clearTimeout(this.typeToSelectTimeout);
-    this.typeToSelectTimeout = setTimeout(() => (this.typeToSelectString = ''), 750);
+    this.typeToSelectTimeout = window.setTimeout(() => (this.typeToSelectString = ''), 750);
     this.typeToSelectString += key.toLowerCase();
 
     // Restore focus in browsers that don't support :focus-visible when using the keyboard
     if (!hasFocusVisible) {
-      items.forEach(item => {
-        item.classList.remove('sl-focus-invisible');
-      });
+      items.forEach(item => item.classList.remove('sl-focus-invisible'));
     }
 
     for (const item of items) {

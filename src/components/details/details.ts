@@ -75,9 +75,9 @@ export default class SlDetails extends LitElement {
 
   toggleOpen() {
     if (this.open) {
-      void this.hide();
+      this.hide();
     } else {
-      void this.show();
+      this.show();
     }
   }
 
@@ -96,12 +96,12 @@ export default class SlDetails extends LitElement {
 
     if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
       event.preventDefault();
-      void this.hide();
+      this.hide();
     }
 
     if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
       event.preventDefault();
-      void this.show();
+      this.show();
     }
   }
 

@@ -125,11 +125,11 @@ export default class SlDialog extends LitElement {
     const slRequestClose = emit(this, 'sl-request-close', { cancelable: true });
     if (slRequestClose.defaultPrevented) {
       const animation = getAnimation(this, 'dialog.denyClose');
-      void animateTo(this.panel, animation.keyframes, animation.options);
+      animateTo(this.panel, animation.keyframes, animation.options);
       return;
     }
 
-    void this.hide();
+    this.hide();
   }
 
   handleKeyDown(event: KeyboardEvent) {
@@ -196,9 +196,7 @@ export default class SlDialog extends LitElement {
       // Restore focus to the original trigger
       const trigger = this.originalTrigger;
       if (typeof trigger?.focus === 'function') {
-        setTimeout(() => {
-          trigger.focus();
-        });
+        setTimeout(() => trigger.focus());
       }
 
       emit(this, 'sl-after-hide');
@@ -206,6 +204,7 @@ export default class SlDialog extends LitElement {
   }
 
   render() {
+    /* eslint-disable lit-a11y/click-events-have-key-events */
     return html`
       <div
         part="base"
@@ -216,13 +215,7 @@ export default class SlDialog extends LitElement {
         })}
         @keydown=${this.handleKeyDown}
       >
-        <div
-          part="overlay"
-          class="dialog__overlay"
-          @click=${this.requestClose}
-          @keydown=${this.handleKeyDown}
-          tabindex="-1"
-        ></div>
+        <div part="overlay" class="dialog__overlay" @click=${this.requestClose} tabindex="-1"></div>
 
         <div
           part="panel"
@@ -261,6 +254,7 @@ export default class SlDialog extends LitElement {
         </div>
       </div>
     `;
+    /* eslint-enable lit-a11y/click-events-have-key-events */
   }
 }
 

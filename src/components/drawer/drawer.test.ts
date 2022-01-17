@@ -32,7 +32,7 @@ describe('<sl-drawer>', () => {
 
     el.addEventListener('sl-show', showHandler);
     el.addEventListener('sl-after-show', afterShowHandler);
-    void el.show();
+    el.show();
 
     await waitUntil(() => showHandler.calledOnce);
     await waitUntil(() => afterShowHandler.calledOnce);
@@ -52,7 +52,7 @@ describe('<sl-drawer>', () => {
 
     el.addEventListener('sl-hide', hideHandler);
     el.addEventListener('sl-after-hide', afterHideHandler);
-    void el.hide();
+    el.hide();
 
     await waitUntil(() => hideHandler.calledOnce);
     await waitUntil(() => afterHideHandler.calledOnce);
@@ -125,7 +125,7 @@ describe('<sl-drawer>', () => {
     });
 
     el.addEventListener('sl-initial-focus', initialFocusHandler);
-    void el.show();
+    el.show();
 
     await waitUntil(() => initialFocusHandler.calledOnce);
 

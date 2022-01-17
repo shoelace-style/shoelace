@@ -13,11 +13,11 @@
 //  }
 
 import type { LitElement } from 'lit';
-import type { NonUndefined } from 'utility-types';
 
 type UpdateHandler = (prev?: unknown, next?: unknown) => void;
 
-// Mostly copied from utility-types' FunctionKeys type but this uses a specific function signature
+type NonUndefined<A> = A extends undefined ? never : A;
+
 type UpdateHandlerFunctionKeys<T extends object> = {
   [K in keyof T]-?: NonUndefined<T[K]> extends UpdateHandler ? K : never;
 }[keyof T];

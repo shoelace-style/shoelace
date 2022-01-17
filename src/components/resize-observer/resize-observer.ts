@@ -51,9 +51,7 @@ export default class SlResizeObserver extends LitElement {
       const elements = slot.assignedElements({ flatten: true }) as HTMLElement[];
 
       // Unwatch previous elements
-      this.observedElements.forEach(el => {
-        this.resizeObserver.unobserve(el);
-      });
+      this.observedElements.forEach(el => this.resizeObserver.unobserve(el));
       this.observedElements = [];
 
       // Watch new elements

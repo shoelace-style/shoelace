@@ -162,9 +162,7 @@ export function renderFormControl(
         class="form-control__label"
         for=${props.inputId}
         aria-hidden=${hasLabel ? 'false' : 'true'}
-        @click=${(event: MouseEvent) => {
-          props.onLabelClick?.(event);
-        }}
+        @click=${(event: MouseEvent) => props.onLabelClick?.(event)}
       >
         <slot name="label">${props.label}</slot>
       </label>

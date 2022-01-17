@@ -4,7 +4,7 @@ import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
 import styles from './textarea.styles';
-import { autoIncrement } from '~/internal/autoIncrement';
+import { autoIncrement } from '~/internal/auto-increment';
 import { emit } from '~/internal/event';
 import { FormSubmitController, getLabelledBy, renderFormControl } from '~/internal/form-control';
 import { HasSlotController } from '~/internal/slot';
@@ -116,11 +116,9 @@ export default class SlTextarea extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.resizeObserver = new ResizeObserver(() => {
-      this.setTextareaHeight();
-    });
+    this.resizeObserver = new ResizeObserver(() => this.setTextareaHeight());
 
-    void this.updateComplete.then(() => {
+    this.updateComplete.then(() => {
       this.setTextareaHeight();
       this.resizeObserver.observe(this.input);
     });
@@ -151,7 +149,7 @@ export default class SlTextarea extends LitElement {
   }
 
   /** Gets or sets the textarea's scroll position. */
-  scrollPosition(position?: { top?: number; left?: number }): void;
+  scrollPosition(position: { top?: number; left?: number }): void;
   scrollPosition(): { top: number; left: number };
   scrollPosition(position?: { top?: number; left?: number }): { top: number; left: number } | undefined {
     if (typeof position !== 'undefined') {

@@ -4,7 +4,7 @@ import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
 import styles from './range.styles';
-import { autoIncrement } from '~/internal/autoIncrement';
+import { autoIncrement } from '~/internal/auto-increment';
 import { emit } from '~/internal/event';
 import { FormSubmitController, getLabelledBy, renderFormControl } from '~/internal/form-control';
 import { HasSlotController } from '~/internal/slot';
@@ -88,9 +88,7 @@ export default class SlRange extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.resizeObserver = new ResizeObserver(() => {
-      this.syncRange();
-    });
+    this.resizeObserver = new ResizeObserver(() => this.syncRange());
 
     if (typeof this.value === 'undefined') {
       this.value = this.min;
@@ -102,7 +100,7 @@ export default class SlRange extends LitElement {
       this.value = this.max;
     }
 
-    void this.updateComplete.then(() => {
+    this.updateComplete.then(() => {
       this.syncRange();
       this.resizeObserver.observe(this.input);
     });

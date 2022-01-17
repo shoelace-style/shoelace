@@ -24,7 +24,7 @@ const availableUnits: UnitConfig[] = [
 @customElement('sl-relative-time')
 export default class SlRelativeTime extends LitElement {
   private readonly localize = new LocalizeController(this);
-  private updateTimeout: NodeJS.Timeout;
+  private updateTimeout: number;
 
   @state() private isoTime = '';
   @state() private relativeTime = '';
@@ -102,9 +102,7 @@ export default class SlRelativeTime extends LitElement {
         nextInterval = getTimeUntilNextUnit('day'); // next day
       }
 
-      this.updateTimeout = setTimeout(() => {
-        this.requestUpdate();
-      }, nextInterval);
+      this.updateTimeout = window.setTimeout(() => this.requestUpdate(), nextInterval);
     }
 
     return html` <time datetime=${this.isoTime} title=${this.titleTime}>${this.relativeTime}</time> `;

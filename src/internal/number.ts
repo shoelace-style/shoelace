@@ -6,7 +6,7 @@ const numberFormatter = new Intl.NumberFormat();
 export function formatBytes(bytes: number, options: FormatBytesOptions) {
   options = {
     unit: 'bytes',
-    formatter: (number: number) => numberFormatter.format(number),
+    formatter: (num: number) => numberFormatter.format(num),
     ...options
   };
 

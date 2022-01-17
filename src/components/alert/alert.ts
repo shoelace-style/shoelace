@@ -39,7 +39,7 @@ const toastStack = Object.assign(document.createElement('div'), { className: 'sl
 export default class SlAlert extends LitElement {
   static styles = styles;
 
-  private autoHideTimeout: NodeJS.Timeout;
+  private autoHideTimeout: number;
 
   @query('[part="base"]') base: HTMLElement;
 
@@ -99,7 +99,7 @@ export default class SlAlert extends LitElement {
       requestAnimationFrame(() => {
         // eslint-disable-next-line @typescript-eslint/no-unused-expressions -- force a reflow for the initial transition
         this.clientWidth;
-        void this.show();
+        this.show();
       });
 
       this.addEventListener(
@@ -121,14 +121,12 @@ export default class SlAlert extends LitElement {
   restartAutoHide() {
     clearTimeout(this.autoHideTimeout);
     if (this.open && this.duration < Infinity) {
-      this.autoHideTimeout = setTimeout(() => {
-        void this.hide();
-      }, this.duration);
+      this.autoHideTimeout = window.setTimeout(() => this.hide(), this.duration);
     }
   }
 
   handleCloseClick() {
-    void this.hide();
+    this.hide();
   }
 
   handleMouseMove() {

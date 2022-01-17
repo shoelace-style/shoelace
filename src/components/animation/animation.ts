@@ -84,7 +84,7 @@ export default class SlAnimation extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    void this.createAnimation();
+    this.createAnimation();
     this.handleAnimationCancel = this.handleAnimationCancel.bind(this);
     this.handleAnimationFinish = this.handleAnimationFinish.bind(this);
   }
@@ -109,7 +109,7 @@ export default class SlAnimation extends LitElement {
       return;
     }
 
-    void this.createAnimation();
+    this.createAnimation();
   }
 
   handleAnimationFinish() {
@@ -152,7 +152,7 @@ export default class SlAnimation extends LitElement {
 
   handleSlotChange() {
     this.destroyAnimation();
-    void this.createAnimation();
+    this.createAnimation();
   }
 
   async createAnimation() {

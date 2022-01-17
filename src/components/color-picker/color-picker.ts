@@ -161,7 +161,7 @@ export default class SlColorPicker extends LitElement {
 
     this.inputValue = this.value;
     this.lastValueEmitted = this.value;
-    void this.syncValues();
+    this.syncValues();
   }
 
   /** Returns the current value as a string in the specified format. */
@@ -205,7 +205,7 @@ export default class SlColorPicker extends LitElement {
           },
           { once: true }
         );
-        void this.dropdown.show();
+        this.dropdown.show();
       });
     }
     return this.input.reportValidity();
@@ -245,7 +245,7 @@ export default class SlColorPicker extends LitElement {
 
     drag(container, x => {
       this.alpha = clamp((x / width) * 100, 0, 100);
-      void this.syncValues();
+      this.syncValues();
     });
   }
 
@@ -259,7 +259,7 @@ export default class SlColorPicker extends LitElement {
 
     drag(container, x => {
       this.hue = clamp((x / width) * 360, 0, 360);
-      void this.syncValues();
+      this.syncValues();
     });
   }
 
@@ -274,7 +274,7 @@ export default class SlColorPicker extends LitElement {
     drag(grid, (x, y) => {
       this.saturation = clamp((x / width) * 100, 0, 100);
       this.lightness = clamp(100 - (y / height) * 100, 0, 100);
-      void this.syncValues();
+      this.syncValues();
     });
   }
 
@@ -284,25 +284,25 @@ export default class SlColorPicker extends LitElement {
     if (event.key === 'ArrowLeft') {
       event.preventDefault();
       this.alpha = clamp(this.alpha - increment, 0, 100);
-      void this.syncValues();
+      this.syncValues();
     }
 
     if (event.key === 'ArrowRight') {
       event.preventDefault();
       this.alpha = clamp(this.alpha + increment, 0, 100);
-      void this.syncValues();
+      this.syncValues();
     }
 
     if (event.key === 'Home') {
       event.preventDefault();
       this.alpha = 0;
-      void this.syncValues();
+      this.syncValues();
     }
 
     if (event.key === 'End') {
       event.preventDefault();
       this.alpha = 100;
-      void this.syncValues();
+      this.syncValues();
     }
   }
 
@@ -312,25 +312,25 @@ export default class SlColorPicker extends LitElement {
     if (event.key === 'ArrowLeft') {
       event.preventDefault();
       this.hue = clamp(this.hue - increment, 0, 360);
-      void this.syncValues();
+      this.syncValues();
     }
 
     if (event.key === 'ArrowRight') {
       event.preventDefault();
       this.hue = clamp(this.hue + increment, 0, 360);
-      void this.syncValues();
+      this.syncValues();
     }
 
     if (event.key === 'Home') {
       event.preventDefault();
       this.hue = 0;
-      void this.syncValues();
+      this.syncValues();
     }
 
     if (event.key === 'End') {
       event.preventDefault();
       this.hue = 360;
-      void this.syncValues();
+      this.syncValues();
     }
   }
 
@@ -340,25 +340,25 @@ export default class SlColorPicker extends LitElement {
     if (event.key === 'ArrowLeft') {
       event.preventDefault();
       this.saturation = clamp(this.saturation - increment, 0, 100);
-      void this.syncValues();
+      this.syncValues();
     }
 
     if (event.key === 'ArrowRight') {
       event.preventDefault();
       this.saturation = clamp(this.saturation + increment, 0, 100);
-      void this.syncValues();
+      this.syncValues();
     }
 
     if (event.key === 'ArrowUp') {
       event.preventDefault();
       this.lightness = clamp(this.lightness + increment, 0, 100);
-      void this.syncValues();
+      this.syncValues();
     }
 
     if (event.key === 'ArrowDown') {
       event.preventDefault();
       this.lightness = clamp(this.lightness - increment, 0, 100);
-      void this.syncValues();
+      this.syncValues();
     }
   }
 
@@ -374,9 +374,7 @@ export default class SlColorPicker extends LitElement {
     if (event.key === 'Enter') {
       this.setColor(this.input.value);
       this.input.value = this.value;
-      setTimeout(() => {
-        this.input.select();
-      });
+      setTimeout(() => this.input.select());
     }
   }
 
@@ -514,7 +512,7 @@ export default class SlColorPicker extends LitElement {
     this.lightness = newColor.hsla.l;
     this.alpha = this.opacity ? newColor.hsla.a * 100 : 100;
 
-    void this.syncValues();
+    this.syncValues();
 
     return true;
   }
@@ -574,7 +572,7 @@ export default class SlColorPicker extends LitElement {
 
   @watch('format')
   handleFormatChange() {
-    void this.syncValues();
+    this.syncValues();
   }
 
   @watch('opacity')
@@ -800,14 +798,12 @@ export default class SlColorPicker extends LitElement {
           part="trigger"
           slot="trigger"
           class=${classMap({
-            /* eslint-disable @typescript-eslint/naming-convention */
             'color-dropdown__trigger': true,
             'color-dropdown__trigger--disabled': this.disabled,
             'color-dropdown__trigger--small': this.size === 'small',
             'color-dropdown__trigger--medium': this.size === 'medium',
             'color-dropdown__trigger--large': this.size === 'large',
             'color-picker__transparent-bg': true
-            /* eslint-enable @typescript-eslint/naming-convention */
           })}
           style=${styleMap({
             color: `hsla(${this.hue}deg, ${this.saturation}%, ${this.lightness}%, ${this.alpha / 100})`

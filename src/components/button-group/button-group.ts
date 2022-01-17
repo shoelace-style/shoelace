@@ -56,7 +56,7 @@ export default class SlButtonGroup extends LitElement {
   }
 
   render() {
-    // eslint-disable-next-line lit-a11y/mouse-events-have-key-events -- focusout & focusin support bubbling where as focus & blur do not which is necessary here
+    // eslint-disable-next-line lit-a11y/mouse-events-have-key-events -- focusout & focusin support bubbling whereas focus & blur do not which is necessary here
     return html`
       <div
         part="base"

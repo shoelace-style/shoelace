@@ -3,7 +3,7 @@ import { customElement, property, query } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import styles from './image-comparer.styles';
 import '~/components/icon/icon';
-import { autoIncrement } from '~/internal/autoIncrement';
+import { autoIncrement } from '~/internal/auto-increment';
 import { drag } from '~/internal/drag';
 import { emit } from '~/internal/event';
 import { clamp } from '~/internal/math';

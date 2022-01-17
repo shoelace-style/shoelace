@@ -55,10 +55,9 @@ export default class SlRadio extends LitElement {
   @property({ type: Boolean, reflect: true }) invalid = false;
 
   firstUpdated() {
-    const radios = this.getAllRadios();
-    const checkedRadio = radios.find(radio => radio.checked);
-
-    setTimeout(() => {
+    this.updateComplete.then(() => {
+      const radios = this.getAllRadios();
+      const checkedRadio = radios.find(radio => radio.checked);
       radios.forEach(radio => {
         radio.input.tabIndex = -1;
       });

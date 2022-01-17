@@ -4,6 +4,7 @@ import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import styles from './icon-button.styles';
 import '~/components/icon/icon';
+import { isTruthy } from '~/internal/is-truthy';
 
 /**
  * @since 2.0
@@ -66,7 +67,7 @@ export default class SlIconButton extends LitElement {
             href=${ifDefined(this.href)}
             target=${ifDefined(this.target)}
             download=${ifDefined(this.download)}
-            rel=${ifDefined(typeof this.target !== 'undefined' ? 'noreferrer noopener' : undefined)}
+            rel=${ifDefined(isTruthy(this.target) ? 'noreferrer noopener' : undefined)}
             role="button"
             aria-disabled=${this.disabled ? 'true' : 'false'}
             aria-label="${this.label}"

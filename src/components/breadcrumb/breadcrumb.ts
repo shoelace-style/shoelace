@@ -34,9 +34,7 @@ export default class SlBreadcrumb extends LitElement {
 
     // Clone it, remove ids, and slot it
     const clone = separator.cloneNode(true) as HTMLElement;
-    [clone, ...clone.querySelectorAll('[id]')].forEach(el => {
-      el.removeAttribute('id');
-    });
+    [clone, ...clone.querySelectorAll('[id]')].forEach(el => el.removeAttribute('id'));
     clone.slot = 'separator';
 
     return clone;

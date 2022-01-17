@@ -49,6 +49,13 @@ module.exports = {
         '@typescript-eslint/no-unused-expressions': 'error',
         '@typescript-eslint/unbound-method': 'off',
         '@typescript-eslint/no-non-null-assertion': 'off',
+        '@typescript-eslint/no-floating-promises': 'off',
+        '@typescript-eslint/no-misused-promises': [
+          'error',
+          {
+            checksVoidReturn: false
+          }
+        ],
         '@typescript-eslint/consistent-type-assertions': [
           'warn',
           {
@@ -57,6 +64,7 @@ module.exports = {
           }
         ],
         '@typescript-eslint/consistent-type-imports': 'warn',
+        // These are commented out for now as we may want to add them to improve function boundary safety
         // "@typescript-eslint/explicit-function-return-type": [
         //     "error",
         //     {
@@ -67,7 +75,6 @@ module.exports = {
         // "@typescript-eslint/explicit-module-boundary-types": "error",
         '@typescript-eslint/no-base-to-string': 'error',
         '@typescript-eslint/no-confusing-non-null-assertion': 'error',
-        '@typescript-eslint/no-confusing-void-expression': 'error',
         '@typescript-eslint/no-invalid-void-type': 'error',
         '@typescript-eslint/no-require-imports': 'error',
         '@typescript-eslint/no-unnecessary-boolean-literal-compare': 'warn',
@@ -108,6 +115,10 @@ module.exports = {
           {
             selector: 'typeProperty',
             format: ['camelCase', 'PascalCase', 'UPPER_CASE']
+          },
+          {
+            selector: 'objectLiteralProperty',
+            format: null
           }
         ],
         '@typescript-eslint/no-extraneous-class': 'error',

@@ -4,7 +4,7 @@ import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
 import styles from './switch.styles';
-import { autoIncrement } from '~/internal/autoIncrement';
+import { autoIncrement } from '~/internal/auto-increment';
 import { emit } from '~/internal/event';
 import { FormSubmitController } from '~/internal/form-control';
 import { watch } from '~/internal/watch';

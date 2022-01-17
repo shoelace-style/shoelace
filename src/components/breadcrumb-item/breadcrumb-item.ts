@@ -3,6 +3,7 @@ import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import styles from './breadcrumb-item.styles';
+import { isTruthy } from '~/internal/is-truthy';
 import { HasSlotController } from '~/internal/slot';
 
 /**
@@ -62,7 +63,7 @@ export default class SlBreadcrumbItem extends LitElement {
                 class="breadcrumb-item__label breadcrumb-item__label--link"
                 href="${this.href}"
                 target="${this.target}"
-                rel=${ifDefined(typeof this.target !== 'undefined' ? this.rel : undefined)}
+                rel=${ifDefined(isTruthy(this.target) ? this.rel : undefined)}
               >
                 <slot></slot>
               </a>

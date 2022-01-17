@@ -4,10 +4,8 @@ import { pascalCase } from 'pascal-case';
 
 const packageData = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
 const { name, description, version, author, homepage, license } = packageData;
-
-function noDash(string) {
-  return string.replace(/^\s?-/, '').trim();
-}
+// eslint-disable-next-line func-style
+const noDash = string => string.replace(/^\s?-/, '').trim();
 
 export default {
   globs: ['src/components/**/*.ts'],

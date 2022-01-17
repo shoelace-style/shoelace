@@ -35,9 +35,7 @@ export default class SlInclude extends LitElement {
   executeScript(script: HTMLScriptElement) {
     // Create a copy of the script and swap it out so the browser executes it
     const newScript = document.createElement('script');
-    [...script.attributes].forEach(attr => {
-      newScript.setAttribute(attr.name, attr.value);
-    });
+    [...script.attributes].forEach(attr => newScript.setAttribute(attr.name, attr.value));
     newScript.textContent = script.textContent;
     script.parentNode!.replaceChild(newScript, script);
   }
@@ -65,9 +63,7 @@ export default class SlInclude extends LitElement {
       this.innerHTML = file.html;
 
       if (this.allowScripts) {
-        [...this.querySelectorAll('script')].forEach(script => {
-          this.executeScript(script);
-        });
+        [...this.querySelectorAll('script')].forEach(script => this.executeScript(script));
       }
 
       emit(this, 'sl-load');

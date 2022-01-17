@@ -7,6 +7,7 @@ import styles from './button.styles';
 import '~/components/spinner/spinner';
 import { emit } from '~/internal/event';
 import { FormSubmitController } from '~/internal/form-control';
+import { isTruthy } from '~/internal/is-truthy';
 import { HasSlotController } from '~/internal/slot';
 
 /**
@@ -161,7 +162,7 @@ export default class SlButton extends LitElement {
         href=${ifDefined(this.href)}
         target=${ifDefined(this.target)}
         download=${ifDefined(this.download)}
-        rel=${ifDefined(typeof this.target !== 'undefined' ? 'noreferrer noopener' : undefined)}
+        rel=${ifDefined(isTruthy(this.target) ? 'noreferrer noopener' : undefined)}
         role="button"
         aria-disabled=${this.disabled ? 'true' : 'false'}
         tabindex=${this.disabled ? '-1' : '0'}

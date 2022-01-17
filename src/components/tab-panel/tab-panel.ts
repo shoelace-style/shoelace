@@ -1,7 +1,7 @@
 import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import styles from './tab-panel.styles';
-import { autoIncrement } from '~/internal/autoIncrement';
+import { autoIncrement } from '~/internal/auto-increment';
 
 /**
  * @since 2.0

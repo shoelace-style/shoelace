@@ -3,6 +3,7 @@ import { customElement, property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import styles from './avatar.styles';
 import '~/components/icon/icon';
+import { isTruthy } from '~/internal/is-truthy';
 
 /**
  * @since 2.0
@@ -50,7 +51,7 @@ export default class SlAvatar extends LitElement {
         role="img"
         aria-label=${this.label}
       >
-        ${typeof this.initials !== 'undefined'
+        ${isTruthy(this.initials)
           ? html` <div part="initials" class="avatar__initials">${this.initials}</div> `
           : html`
               <div part="icon" class="avatar__icon" aria-hidden="true">
@@ -59,7 +60,7 @@ export default class SlAvatar extends LitElement {
                 </slot>
               </div>
             `}
-        ${typeof this.image !== 'undefined' && !this.hasError
+        ${typeof this.image === 'string' && !this.hasError
           ? html`
               <img
                 part="image"

@@ -3,7 +3,7 @@ import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import styles from './tab.styles';
 import '~/components/icon-button/icon-button';
-import { autoIncrement } from '~/internal/autoIncrement';
+import { autoIncrement } from '~/internal/auto-increment';
 import { emit } from '~/internal/event';
 import { LocalizeController } from '~/utilities/localize';
 

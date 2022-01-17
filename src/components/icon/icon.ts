@@ -47,7 +47,7 @@ export default class SlIcon extends LitElement {
   }
 
   firstUpdated() {
-    void this.setIcon();
+    this.setIcon();
   }
 
   disconnectedCallback() {
@@ -65,7 +65,7 @@ export default class SlIcon extends LitElement {
 
   /** @internal Fetches the icon and redraws it. Used to handle library registrations. */
   redraw() {
-    void this.setIcon();
+    this.setIcon();
   }
 
   @watch('name')
@@ -76,7 +76,7 @@ export default class SlIcon extends LitElement {
     const url = this.getUrl();
     if (typeof url !== 'undefined' && url.length > 0) {
       try {
-        const file = await requestIcon(url)!;
+        const file = await requestIcon(url);
         if (url !== this.getUrl()) {
           // If the url has changed while fetching the icon, ignore this request
           return;
@@ -107,7 +107,7 @@ export default class SlIcon extends LitElement {
   }
 
   handleChange() {
-    void this.setIcon();
+    this.setIcon();
   }
 
   render() {

@@ -39,7 +39,7 @@ export default class SlTooltip extends LitElement {
 
   private target: HTMLElement;
   private popover?: PopperInstance;
-  private hoverTimeout: NodeJS.Timeout;
+  private hoverTimeout: number;
 
   /** The tooltip's content. Alternatively, you can use the content slot. */
   @property() content = '';
@@ -96,7 +96,7 @@ export default class SlTooltip extends LitElement {
     this.handleMouseOver = this.handleMouseOver.bind(this);
     this.handleMouseOut = this.handleMouseOut.bind(this);
 
-    void this.updateComplete.then(() => {
+    this.updateComplete.then(() => {
       this.addEventListener('blur', this.handleBlur, true);
       this.addEventListener('focus', this.handleFocus, true);
       this.addEventListener('click', this.handleClick);
@@ -160,23 +160,23 @@ export default class SlTooltip extends LitElement {
 
   handleBlur() {
     if (this.hasTrigger('focus')) {
-      void this.hide();
+      this.hide();
     }
   }
 
   handleClick() {
     if (this.hasTrigger('click')) {
       if (this.open) {
-        void this.hide();
+        this.hide();
       } else {
-        void this.show();
+        this.show();
       }
     }
   }
 
   handleFocus() {
     if (this.hasTrigger('focus')) {
-      void this.show();
+      this.show();
     }
   }
 
@@ -184,7 +184,7 @@ export default class SlTooltip extends LitElement {
     // Pressing escape when the target element has focus should dismiss the tooltip
     if (this.open && event.key === 'Escape') {
       event.stopPropagation();
-      void this.hide();
+      this.hide();
     }
   }
 
@@ -192,7 +192,7 @@ export default class SlTooltip extends LitElement {
     if (this.hasTrigger('hover')) {
       const delay = parseDuration(getComputedStyle(this).getPropertyValue('--show-delay'));
       clearTimeout(this.hoverTimeout);
-      this.hoverTimeout = setTimeout(() => void this.show(), delay);
+      this.hoverTimeout = window.setTimeout(() => void this.show(), delay);
     }
   }
 
@@ -200,7 +200,7 @@ export default class SlTooltip extends LitElement {
     if (this.hasTrigger('hover')) {
       const delay = parseDuration(getComputedStyle(this).getPropertyValue('--hide-delay'));
       clearTimeout(this.hoverTimeout);
-      this.hoverTimeout = setTimeout(() => void this.hide(), delay);
+      this.hoverTimeout = window.setTimeout(() => void this.hide(), delay);
     }
   }
 
@@ -268,14 +268,14 @@ export default class SlTooltip extends LitElement {
   @watch('content')
   handleContentChange() {
     if (this.open) {
-      void this.popover?.update();
+      this.popover?.update();
     }
   }
 
   @watch('disabled')
   handleDisabledChange() {
     if (this.disabled && this.open) {
-      void this.hide();
+      this.hide();
     }
   }
 
@@ -285,7 +285,7 @@ export default class SlTooltip extends LitElement {
   }
 
   syncOptions() {
-    void this.popover?.setOptions({
+    this.popover?.setOptions({
       placement: this.placement,
       strategy: this.hoist ? 'fixed' : 'absolute',
       modifiers: [

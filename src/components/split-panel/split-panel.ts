@@ -75,12 +75,8 @@ export default class SlSplitPanel extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.resizeObserver = new ResizeObserver(entries => {
-      this.handleResize(entries);
-    });
-    void this.updateComplete.then(() => {
-      this.resizeObserver.observe(this);
-    });
+    this.resizeObserver = new ResizeObserver(entries => this.handleResize(entries));
+    this.updateComplete.then(() => this.resizeObserver.observe(this));
 
     this.detectSize();
     this.cachedPositionInPixels = this.percentageToPixels(this.position);

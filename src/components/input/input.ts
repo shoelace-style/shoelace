@@ -5,7 +5,7 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
 import styles from './input.styles';
 import '~/components/icon/icon';
-import { autoIncrement } from '~/internal/autoIncrement';
+import { autoIncrement } from '~/internal/auto-increment';
 import { emit } from '~/internal/event';
 import { FormSubmitController, getLabelledBy, renderFormControl } from '~/internal/form-control';
 import { HasSlotController } from '~/internal/slot';

@@ -13,7 +13,7 @@ import type SlMenuItem from '~/components/menu-item/menu-item';
 import type SlMenu from '~/components/menu/menu';
 import type { MenuSelectEventDetail } from '~/components/menu/menu';
 import '~/components/tag/tag';
-import { autoIncrement } from '~/internal/autoIncrement';
+import { autoIncrement } from '~/internal/auto-increment';
 import { emit } from '~/internal/event';
 import { FormSubmitController, getLabelledBy, renderFormControl } from '~/internal/form-control';
 import { getTextContent, HasSlotController } from '~/internal/slot';
@@ -132,11 +132,9 @@ export default class SlSelect extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     this.handleMenuSlotChange = this.handleMenuSlotChange.bind(this);
-    this.resizeObserver = new ResizeObserver(() => {
-      this.resizeMenu();
-    });
+    this.resizeObserver = new ResizeObserver(() => this.resizeMenu());
 
-    void this.updateComplete.then(() => {
+    this.updateComplete.then(() => {
       this.resizeObserver.observe(this);
       this.syncItemsFromValue();
     });
@@ -163,7 +161,7 @@ export default class SlSelect extends LitElement {
   }
 
   getItemLabel(item: SlMenuItem) {
-    const slot = item.shadowRoot?.querySelector<HTMLSlotElement>('slot:not([name])');
+    const slot = item.shadowRoot!.querySelector<HTMLSlotElement>('slot:not([name])');
     return getTextContent(slot);
   }
 
@@ -208,7 +206,7 @@ export default class SlSelect extends LitElement {
   @watch('disabled', { waitUntilFirstUpdate: true })
   handleDisabledChange() {
     if (this.disabled && this.isOpen) {
-      void this.dropdown.hide();
+      this.dropdown.hide();
     }
 
     // Disabled form controls are always valid, so we need to recheck validity when the state changes
@@ -237,7 +235,7 @@ export default class SlSelect extends LitElement {
     // Tabbing out of the control closes it
     if (event.key === 'Tab') {
       if (this.isOpen) {
-        void this.dropdown.hide();
+        this.dropdown.hide();
       }
       return;
     }
@@ -248,7 +246,7 @@ export default class SlSelect extends LitElement {
 
       // Show the menu if it's not already open
       if (!this.isOpen) {
-        void this.dropdown.show();
+        this.dropdown.show();
       }
 
       // Focus on a menu item
@@ -274,7 +272,7 @@ export default class SlSelect extends LitElement {
     if (!this.isOpen && event.key.length === 1) {
       event.stopPropagation();
       event.preventDefault();
-      void this.dropdown.show();
+      this.dropdown.show();
       this.menu.typeToSelect(event.key);
     }
   }
@@ -331,9 +329,7 @@ export default class SlSelect extends LitElement {
       values.push(item.value);
     });
 
-    await Promise.all(items.map(item => item.render)).then(() => {
-      this.syncItemsFromValue();
-    });
+    await Promise.all(items.map(item => item.render)).then(() => this.syncItemsFromValue());
   }
 
   handleTagInteraction(event: KeyboardEvent | MouseEvent) {
@@ -444,9 +440,7 @@ export default class SlSelect extends LitElement {
         helpText: this.helpText,
         hasHelpTextSlot,
         size: this.size,
-        onLabelClick: () => {
-          this.handleLabelClick();
-        }
+        onLabelClick: () => this.handleLabelClick()
       },
       html`
         <sl-dropdown

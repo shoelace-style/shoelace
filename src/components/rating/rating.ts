@@ -203,9 +203,7 @@ export default class SlRating extends LitElement {
             return html`
               <span
                 class=${classMap({
-                  // eslint-disable-next-line @typescript-eslint/naming-convention
                   rating__symbol: true,
-                  // eslint-disable-next-line @typescript-eslint/naming-convention
                   'rating__symbol--hover': this.isHovering && Math.ceil(displayValue) === index + 1
                 })}
                 role="presentation"
@@ -222,9 +220,7 @@ export default class SlRating extends LitElement {
             return html`
               <span
                 class=${classMap({
-                  // eslint-disable-next-line @typescript-eslint/naming-convention
                   rating__symbol: true,
-                  // eslint-disable-next-line @typescript-eslint/naming-convention
                   'rating__symbol--hover': this.isHovering && Math.ceil(displayValue) === index + 1
                 })}
                 style=${styleMap({

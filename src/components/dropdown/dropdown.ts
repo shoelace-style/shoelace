@@ -8,6 +8,7 @@ import type SlMenuItem from '~/components/menu-item/menu-item';
 import type SlMenu from '~/components/menu/menu';
 import { animateTo, stopAnimations } from '~/internal/animate';
 import { emit, waitForEvent } from '~/internal/event';
+import { isTruthy } from '~/internal/is-truthy';
 import { scrollIntoView } from '~/internal/scroll';
 import { getTabbableBoundary } from '~/internal/tabbable';
 import { watch } from '~/internal/watch';
@@ -99,7 +100,7 @@ export default class SlDropdown extends LitElement {
     }
 
     // Create the popover after render
-    void this.updateComplete.then(() => {
+    this.updateComplete.then(() => {
       this.popover = createPopper(this.trigger, this.positioner, {
         placement: this.placement,
         strategy: this.hoist ? 'fixed' : 'absolute',
@@ -127,7 +128,7 @@ export default class SlDropdown extends LitElement {
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    void void this.hide();
+    this.hide();
 
     this.popover?.destroy();
   }
@@ -150,7 +151,7 @@ export default class SlDropdown extends LitElement {
   handleDocumentKeyDown(event: KeyboardEvent) {
     // Close when escape is pressed
     if (event.key === 'Escape') {
-      void this.hide();
+      this.hide();
       this.focusOnTrigger();
       return;
     }
@@ -160,7 +161,7 @@ export default class SlDropdown extends LitElement {
       // Tabbing within an open menu should close the dropdown and refocus the trigger
       if (this.open && document.activeElement?.tagName.toLowerCase() === 'sl-menu-item') {
         event.preventDefault();
-        void this.hide();
+        this.hide();
         this.focusOnTrigger();
         return;
       }
@@ -176,10 +177,10 @@ export default class SlDropdown extends LitElement {
             : document.activeElement;
 
         if (
-          typeof this.containingElement === 'undefined' ||
+          !isTruthy(this.containingElement) ||
           activeElement?.closest(this.containingElement.tagName.toLowerCase()) !== this.containingElement
         ) {
-          void this.hide();
+          this.hide();
         }
       });
     }
@@ -188,8 +189,8 @@ export default class SlDropdown extends LitElement {
   handleDocumentMouseDown(event: MouseEvent) {
     // Close when clicking outside of the containing element
     const path = event.composedPath();
-    if (typeof this.containingElement !== 'undefined' && !path.includes(this.containingElement)) {
-      void this.hide();
+    if (isTruthy(this.containingElement) && !path.includes(this.containingElement)) {
+      this.hide();
     }
   }
 
@@ -203,7 +204,7 @@ export default class SlDropdown extends LitElement {
 
     // Hide the dropdown when a menu item is selected
     if (!this.stayOpenOnSelect && target.tagName.toLowerCase() === 'sl-menu') {
-      void this.hide();
+      this.hide();
       this.focusOnTrigger();
     }
   }
@@ -213,7 +214,7 @@ export default class SlDropdown extends LitElement {
   @watch('placement')
   @watch('skidding')
   handlePopoverOptionsChange() {
-    void this.popover?.setOptions({
+    this.popover?.setOptions({
       placement: this.placement,
       strategy: this.hoist ? 'fixed' : 'absolute',
       modifiers: [
@@ -235,22 +236,22 @@ export default class SlDropdown extends LitElement {
 
   handleTriggerClick() {
     if (this.open) {
-      void this.hide();
+      this.hide();
     } else {
-      void this.show();
+      this.show();
     }
   }
 
   handleTriggerKeyDown(event: KeyboardEvent) {
     const menu = this.getMenu();
-    const menuItems = typeof menu !== 'undefined' ? ([...menu.querySelectorAll('sl-menu-item')] as SlMenuItem[]) : [];
+    const menuItems = [...(menu?.querySelectorAll('sl-menu-item') ?? [])] as SlMenuItem[];
     const firstMenuItem = menuItems[0];
     const lastMenuItem = menuItems[menuItems.length - 1];
 
     // Close when escape or tab is pressed
     if (event.key === 'Escape') {
       this.focusOnTrigger();
-      void this.hide();
+      this.hide();
       return;
     }
 
@@ -270,7 +271,7 @@ export default class SlDropdown extends LitElement {
 
       // Show the menu if it's not already open
       if (!this.open) {
-        void this.show();
+        this.show();
       }
 
       // Focus on a menu item
@@ -355,7 +356,7 @@ export default class SlDropdown extends LitElement {
       return;
     }
 
-    void this.popover?.update();
+    this.popover?.update();
   }
 
   @watch('open', { waitUntilFirstUpdate: true })
@@ -375,7 +376,7 @@ export default class SlDropdown extends LitElement {
       document.addEventListener('mousedown', this.handleDocumentMouseDown);
 
       await stopAnimations(this);
-      void this.popover?.update();
+      this.popover?.update();
       this.panel.hidden = false;
       const { keyframes, options } = getAnimation(this, 'dropdown.show');
       await animateTo(this.panel, keyframes, options);

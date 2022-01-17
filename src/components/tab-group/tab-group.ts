@@ -78,9 +78,7 @@ export default class SlTabGroup extends LitElement {
     this.mutationObserver = new MutationObserver(mutations => {
       // Update aria labels when the DOM changes
       if (mutations.some(m => !['aria-labelledby', 'aria-controls'].includes(m.attributeName!))) {
-        setTimeout(() => {
-          this.setAriaLabels();
-        });
+        setTimeout(() => this.setAriaLabels());
       }
 
       // Sync tabs when disabled states change
@@ -89,7 +87,7 @@ export default class SlTabGroup extends LitElement {
       }
     });
 
-    void this.updateComplete.then(() => {
+    this.updateComplete.then(() => {
       this.syncTabsAndPanels();
       this.mutationObserver.observe(this, { attributes: true, childList: true, subtree: true });
       this.resizeObserver.observe(this.nav);

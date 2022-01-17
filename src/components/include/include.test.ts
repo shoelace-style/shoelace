@@ -1,4 +1,4 @@
-import { expect, fixture, html, waitUntil } from '@open-wc/testing';
+import { expect, fixture, html, waitUntil, aTimeout } from '@open-wc/testing';
 import sinon from 'sinon';
 import type SlInclude from './include';
 
@@ -20,12 +20,10 @@ const stubbedFetchResponse: Response = {
   clone: sinon.fake()
 };
 
-function delayResolve(resolveValue: string) {
-  return new Promise<string>(resolve => {
-    setTimeout(() => {
-      resolve(resolveValue);
-    });
-  });
+async function delayResolve(resolveValue: string) {
+  // Delay the fetch response to give time for the event listener to attach
+  await aTimeout(10);
+  return resolveValue;
 }
 
 describe('<sl-include>', () => {
