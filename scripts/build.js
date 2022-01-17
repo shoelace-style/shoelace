@@ -8,8 +8,7 @@ import esbuild from 'esbuild';
 import getPort, { portNumbers } from 'get-port';
 import { globby } from 'globby';
 import { execSync } from 'child_process';
-
-const bs = browserSync.create();
+import open from 'open';
 
 const { bundle, copydir, dir, serve, types } = commandLineArgs([
   { name: 'bundle', type: Boolean },
@@ -92,6 +91,7 @@ fs.mkdirSync(outdir, { recursive: true });
 
   // Dev server
   if (serve) {
+    const bs = browserSync.create();
     const port = await getPort({
       port: portNumbers(4000, 4999)
     });
@@ -99,10 +99,9 @@ fs.mkdirSync(outdir, { recursive: true });
     // Make sure docs/dist is empty since we're serving it virtually
     del.sync('docs/dist');
 
-    console.log(chalk.cyan(`Launching the Shoelace dev server at http://localhost:${port}! 🥾\n`));
-
     // Launch browser sync
     bs.init({
+      open: false,
       startPath: '/',
       port,
       logLevel: 'silent',
@@ -116,8 +115,27 @@ fs.mkdirSync(outdir, { recursive: true });
         routes: {
           '/dist': './dist'
         }
+      },
+      // Configure socketIO to retry forever when disconnected to enable the auto-reattach timeout below to work
+      socket: {
+        socketIoClientConfig: {
+          reconnectionAttempts: Infinity,
+          reconnectionDelay: 500,
+          reconnectionDelayMax: 500,
+          timeout: 1000
+        }
       }
     });
+
+    setTimeout(() => {
+      const url = `http://localhost:${port}`;
+      console.log(chalk.cyan(`Launched the Shoelace dev server at ${url} 🥾\n`));
+      if (Object.keys(bs.sockets.sockets).length === 0) {
+        open(url);
+      } else {
+        bs.reload();
+      }
+    }, 2000);
 
     // Rebuild and reload when source files change
     bs.watch(['src/**/!(*.test).*']).on('change', async filename => {
