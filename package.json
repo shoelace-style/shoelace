@@ -47,7 +47,7 @@
     "update-dependencies": "npm-check-updates --peer -u && npm install && npm run lint:fix && npm run prettier && npm run verify"
   },
   "engines": {
-    "node": ">=14.15.0"
+    "node": ">=14.17.0"
   },
   "dependencies": {
     "@lit-labs/react": "^1.0.1",

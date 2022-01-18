@@ -9,7 +9,7 @@ This page explains how to integrate Shoelace with a [Laravel](https://laravel.co
 This integration has been tested with the following:
 
 - Laravel >= 8
-- Node >= 14
+- Node >= 14.17
 - Laravel Mix >= 6
 
 ## Instructions
