@@ -99,8 +99,7 @@ fs.mkdirSync(outdir, { recursive: true });
     // Make sure docs/dist is empty since we're serving it virtually
     del.sync('docs/dist');
 
-    // Launch browser sync
-    bs.init({
+    const browserSyncConfig = {
       open: false,
       startPath: '/',
       port,
@@ -116,26 +115,33 @@ fs.mkdirSync(outdir, { recursive: true });
           '/dist': './dist'
         }
       },
-      // Configure socketIO to retry forever when disconnected to enable the auto-reattach timeout below to work
       socket: {
         socketIoClientConfig: {
+          // Configure socketIO to retry forever when disconnected to enable the auto-reattach timeout below to work
           reconnectionAttempts: Infinity,
           reconnectionDelay: 500,
           reconnectionDelayMax: 500,
           timeout: 1000
         }
       }
-    });
+    };
 
-    setTimeout(() => {
-      const url = `http://localhost:${port}`;
-      console.log(chalk.cyan(`Launched the Shoelace dev server at ${url} 🥾\n`));
-      if (Object.keys(bs.sockets.sockets).length === 0) {
-        open(url);
-      } else {
-        bs.reload();
-      }
-    }, 2000);
+    // Launch browser sync
+    bs.init(browserSyncConfig, () => {
+      // This init callback gets executed after the server has started
+      const socketIoConfig = browserSyncConfig.socket.socketIoClientConfig;
+      // Wait enough time for any open, detached clients to have a chance to reconnect. This will be used to determine if we reload an existing tab or open a new one.
+      const tabReattachDelay = socketIoConfig.reconnectionDelayMax * 2 + socketIoConfig.timeout;
+      setTimeout(() => {
+        const url = `http://localhost:${port}`;
+        console.log(chalk.cyan(`Launched the Shoelace dev server at ${url} 🥾\n`));
+        if (Object.keys(bs.sockets.sockets).length === 0) {
+          open(url);
+        } else {
+          bs.reload();
+        }
+      }, tabReattachDelay);
+    });
 
     // Rebuild and reload when source files change
     bs.watch(['src/**/!(*.test).*']).on('change', async filename => {
