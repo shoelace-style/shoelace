@@ -1,13 +1,11 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { emit } from '../../internal/event';
-import { LocalizeController } from '../../utilities/localize';
 import styles from './tab.styles';
-
-import '../icon-button/icon-button';
-
-let id = 0;
+import '~/components/icon-button/icon-button';
+import { autoIncrement } from '~/internal/auto-increment';
+import { emit } from '~/internal/event';
+import { LocalizeController } from '~/utilities/localize';
 
 /**
  * @since 2.0
@@ -25,11 +23,12 @@ let id = 0;
 @customElement('sl-tab')
 export default class SlTab extends LitElement {
   static styles = styles;
-  private localize = new LocalizeController(this);
+  private readonly localize = new LocalizeController(this);
 
   @query('.tab') tab: HTMLElement;
 
-  private componentId = `sl-tab-${++id}`;
+  private readonly attrId = autoIncrement();
+  private readonly componentId = `sl-tab-${this.attrId}`;
 
   /** The name of the tab panel the tab will control. The panel must be located in the same tab group. */
   @property({ reflect: true }) panel = '';
@@ -62,7 +61,7 @@ export default class SlTab extends LitElement {
 
   render() {
     // If the user didn't provide an ID, we'll set one so we can link tabs and tab panels with aria labels
-    this.id = this.id || this.componentId;
+    this.id = this.id.length > 0 ? this.id : this.componentId;
 
     return html`
       <div

@@ -1,12 +1,13 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
-import { clamp } from '../../internal/math';
-import { emit } from '../../internal/event';
-import { watch } from '../../internal/watch';
 import styles from './image-comparer.styles';
-
-import '../icon/icon';
+import '~/components/icon/icon';
+import { autoIncrement } from '~/internal/auto-increment';
+import { drag } from '~/internal/drag';
+import { emit } from '~/internal/event';
+import { clamp } from '~/internal/math';
+import { watch } from '~/internal/watch';
 
 /**
  * @since 2.0
@@ -36,42 +37,19 @@ export default class SlImageComparer extends LitElement {
   @query('.image-comparer') base: HTMLElement;
   @query('.image-comparer__handle') handle: HTMLElement;
 
+  private readonly attrId = autoIncrement();
+  private readonly containerId = `comparer-container-${this.attrId}`;
+
   /** The position of the divider as a percentage. */
   @property({ type: Number, reflect: true }) position = 50;
 
-  handleDrag(event: any) {
+  handleDrag(event: Event) {
     const { width } = this.base.getBoundingClientRect();
-
-    function drag(event: any, container: HTMLElement, onMove: (x: number) => void) {
-      const move = (event: any) => {
-        const { left } = container.getBoundingClientRect();
-        const { pageXOffset } = container.ownerDocument.defaultView!;
-        const offsetX = left + pageXOffset;
-        const x = (event.changedTouches ? event.changedTouches[0].pageX : event.pageX) - offsetX;
-
-        onMove(x);
-      };
-
-      // Move on init
-      move(event);
-
-      const stop = () => {
-        document.removeEventListener('mousemove', move);
-        document.removeEventListener('touchmove', move);
-        document.removeEventListener('mouseup', stop);
-        document.removeEventListener('touchend', stop);
-      };
-
-      document.addEventListener('mousemove', move);
-      document.addEventListener('touchmove', move);
-      document.addEventListener('mouseup', stop);
-      document.addEventListener('touchend', stop);
-    }
 
     event.preventDefault();
 
-    drag(event, this.base, x => {
-      this.position = Number(clamp((x / width) * 100, 0, 100).toFixed(2));
+    drag(this.base, x => {
+      this.position = parseFloat(clamp((x / width) * 100, 0, 100).toFixed(2));
     });
   }
 
@@ -82,10 +60,18 @@ export default class SlImageComparer extends LitElement {
 
       event.preventDefault();
 
-      if (event.key === 'ArrowLeft') newPosition = newPosition - incr;
-      if (event.key === 'ArrowRight') newPosition = newPosition + incr;
-      if (event.key === 'Home') newPosition = 0;
-      if (event.key === 'End') newPosition = 100;
+      if (event.key === 'ArrowLeft') {
+        newPosition -= incr;
+      }
+      if (event.key === 'ArrowRight') {
+        newPosition += incr;
+      }
+      if (event.key === 'Home') {
+        newPosition = 0;
+      }
+      if (event.key === 'End') {
+        newPosition = 100;
+      }
       newPosition = clamp(newPosition, 0, 100);
 
       this.position = newPosition;
@@ -99,7 +85,7 @@ export default class SlImageComparer extends LitElement {
 
   render() {
     return html`
-      <div part="base" class="image-comparer" @keydown=${this.handleKeyDown}>
+      <div part="base" class="image-comparer" @keydown=${this.handleKeyDown} id=${this.containerId}>
         <div class="image-comparer__image">
           <div part="before" class="image-comparer__before">
             <slot name="before"></slot>
@@ -117,7 +103,7 @@ export default class SlImageComparer extends LitElement {
         <div
           part="divider"
           class="image-comparer__divider"
-          style=${styleMap({ left: this.position + '%' })}
+          style=${styleMap({ left: `${this.position}%` })}
           @mousedown=${this.handleDrag}
           @touchstart=${this.handleDrag}
         >
@@ -128,6 +114,7 @@ export default class SlImageComparer extends LitElement {
             aria-valuenow=${this.position}
             aria-valuemin="0"
             aria-valuemax="100"
+            aria-controls=${this.containerId}
             tabindex="0"
           >
             <slot name="handle-icon">

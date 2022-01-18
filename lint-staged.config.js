@@ -1,4 +1,5 @@
 export default {
-  '*.{js,ts,jsx,tsx,json,html,xml,css,scss,sass,md}': 'cspell --no-must-find-files',
+  '*.{js,ts,json,html,xml,css,scss,sass,md}': 'cspell --no-must-find-files',
+  'src/**/*.{js,ts}': 'eslint --max-warnings 0 --fix',
   '*': 'prettier --write --ignore-unknown'
 };

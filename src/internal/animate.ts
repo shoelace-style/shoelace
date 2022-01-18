@@ -2,7 +2,7 @@
 // Animates an element using keyframes. Returns a promise that resolves after the animation completes or gets canceled.
 //
 export function animateTo(el: HTMLElement, keyframes: Keyframe[], options?: KeyframeAnimationOptions) {
-  return new Promise(async resolve => {
+  return new Promise(resolve => {
     if (options?.duration === Infinity) {
       throw new Error('Promise-based animations must be finite.');
     }
@@ -21,7 +21,7 @@ export function animateTo(el: HTMLElement, keyframes: Keyframe[], options?: Keyf
 // Parses a CSS duration and returns the number of milliseconds.
 //
 export function parseDuration(delay: number | string) {
-  delay = (delay + '').toLowerCase();
+  delay = delay.toString().toLowerCase();
 
   if (delay.indexOf('ms') > -1) {
     return parseFloat(delay);
@@ -39,7 +39,7 @@ export function parseDuration(delay: number | string) {
 //
 export function prefersReducedMotion() {
   const query = window.matchMedia('(prefers-reduced-motion: reduce)');
-  return query?.matches;
+  return query.matches;
 }
 
 //
@@ -47,7 +47,7 @@ export function prefersReducedMotion() {
 //
 export function stopAnimations(el: HTMLElement) {
   return Promise.all(
-    el.getAnimations().map((animation: any) => {
+    el.getAnimations().map(animation => {
       return new Promise(resolve => {
         const handleAnimationEvent = requestAnimationFrame(resolve);
 
@@ -62,9 +62,8 @@ export function stopAnimations(el: HTMLElement) {
 // We can't animate `height: auto`, but we can calculate the height and shim keyframes by replacing it with the
 // element's scrollHeight before the animation.
 export function shimKeyframesHeightAuto(keyframes: Keyframe[], calculatedHeight: number) {
-  return keyframes.map(keyframe =>
-    Object.assign({}, keyframe, {
-      height: keyframe.height === 'auto' ? `${calculatedHeight}px` : keyframe.height
-    })
-  );
+  return keyframes.map(keyframe => ({
+    ...keyframe,
+    height: keyframe.height === 'auto' ? `${calculatedHeight}px` : keyframe.height
+  }));
 }

@@ -2,11 +2,11 @@ import { LitElement, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
-import { emit } from '../../internal/event';
-import { watch } from '../../internal/watch';
+import styles from './icon.styles';
 import { getIconLibrary, watchIcon, unwatchIcon } from './library';
 import { requestIcon } from './request';
-import styles from './icon.styles';
+import { emit } from '~/internal/event';
+import { watch } from '~/internal/watch';
 
 const parser = new DOMParser();
 
@@ -26,13 +26,17 @@ export default class SlIcon extends LitElement {
   @state() private svg = '';
 
   /** The name of the icon to draw. */
-  @property() name: string;
+  @property() name?: string;
 
-  /** An external URL of an SVG file. */
-  @property() src: string;
+  /**
+   * An external URL of an SVG file.
+   *
+   * WARNING: Be sure you trust the content you are including as it will be executed as code and can result in XSS attacks.
+   */
+  @property() src?: string;
 
   /** An alternate description to use for accessibility. If omitted, the icon will be ignored by assistive devices. */
-  @property() label: string;
+  @property() label = '';
 
   /** The name of a registered custom icon library. */
   @property() library = 'default';
@@ -51,13 +55,12 @@ export default class SlIcon extends LitElement {
     unwatchIcon(this);
   }
 
-  private getUrl(): string {
+  private getUrl() {
     const library = getIconLibrary(this.library);
-    if (this.name && library) {
+    if (typeof this.name !== 'undefined' && typeof library !== 'undefined') {
       return library.resolver(this.name);
-    } else {
-      return this.src;
     }
+    return this.src;
   }
 
   /** @internal Fetches the icon and redraws it. Used to handle library registrations. */
@@ -71,9 +74,9 @@ export default class SlIcon extends LitElement {
   async setIcon() {
     const library = getIconLibrary(this.library);
     const url = this.getUrl();
-    if (url) {
+    if (typeof url !== 'undefined' && url.length > 0) {
       try {
-        const file = await requestIcon(url)!;
+        const file = await requestIcon(url);
         if (url !== this.getUrl()) {
           // If the url has changed while fetching the icon, ignore this request
           return;
@@ -81,10 +84,8 @@ export default class SlIcon extends LitElement {
           const doc = parser.parseFromString(file.svg, 'text/html');
           const svgEl = doc.body.querySelector('svg');
 
-          if (svgEl) {
-            if (library && library.mutator) {
-              library.mutator(svgEl);
-            }
+          if (svgEl !== null) {
+            library?.mutator?.(svgEl);
 
             this.svg = svgEl.outerHTML;
             emit(this, 'sl-load');
@@ -99,7 +100,7 @@ export default class SlIcon extends LitElement {
       } catch {
         emit(this, 'sl-error', { detail: { status: -1 } });
       }
-    } else if (this.svg) {
+    } else if (this.svg.length > 0) {
       // If we can't resolve a URL and an icon was previously set, remove it
       this.svg = '';
     }

@@ -1,11 +1,12 @@
+/* global lunr */
 (() => {
   if (!window.$docsify) {
     throw new Error('Docsify must be loaded before installing this plugin.');
   }
 
-  window.$docsify.plugins.push((hook, vm) => {
+  window.$docsify.plugins.push(hook => {
     // Append the search box to the sidebar
-    hook.mounted(function () {
+    hook.mounted(() => {
       const appName = document.querySelector('.sidebar .app-name');
       const searchBox = document.createElement('div');
       searchBox.classList.add('search-box');
@@ -76,7 +77,6 @@
     `;
     document.body.append(siteSearch);
 
-    const searchButtons = [...document.querySelectorAll('[data-site-search]')];
     const overlay = siteSearch.querySelector('.site-search__overlay');
     const panel = siteSearch.querySelector('.site-search__panel');
     const input = siteSearch.querySelector('.site-search__input');
@@ -89,7 +89,7 @@
     let map;
 
     // Load search data
-    const searchData = fetch('../../../search.json')
+    fetch('../../../search.json')
       .then(res => res.json())
       .then(data => {
         searchIndex = lunr.Index.load(data.searchIndex);
@@ -203,7 +203,7 @@
         }
 
         // Update the selected item
-        items.map(item => {
+        items.forEach(item => {
           if (item === nextEl) {
             item.setAttribute('aria-selected', 'true');
             nextEl.scrollIntoView({ block: 'nearest' });
@@ -211,8 +211,6 @@
             item.setAttribute('aria-selected', 'false');
           }
         });
-
-        return;
       }
     }
 
@@ -228,27 +226,39 @@
           matches = searchIndex.search(`${query}~2`);
         }
 
-        let hasResults = hasQuery && matches.length > 0;
+        const hasResults = hasQuery && matches.length > 0;
         siteSearch.classList.toggle('site-search--has-results', hasQuery && hasResults);
         siteSearch.classList.toggle('site-search--no-results', hasQuery && !hasResults);
         panel.setAttribute('aria-expanded', hasQuery && hasResults ? 'true' : 'false');
 
         results.innerHTML = '';
 
-        matches.map((match, index) => {
+        matches.forEach((match, index) => {
           const page = map[match.ref];
           const li = document.createElement('li');
           const a = document.createElement('a');
           let icon = 'file-text';
 
-          if (page.url.includes('getting-started/')) icon = 'lightbulb';
-          if (page.url.includes('resources/')) icon = 'book';
-          if (page.url.includes('components/')) icon = 'puzzle';
-          if (page.url.includes('tokens/')) icon = 'palette2';
-          if (page.url.includes('utilities/')) icon = 'wrench';
-          if (page.url.includes('tutorials/')) icon = 'joystick';
+          if (page.url.includes('getting-started/')) {
+            icon = 'lightbulb';
+          }
+          if (page.url.includes('resources/')) {
+            icon = 'book';
+          }
+          if (page.url.includes('components/')) {
+            icon = 'puzzle';
+          }
+          if (page.url.includes('tokens/')) {
+            icon = 'palette2';
+          }
+          if (page.url.includes('utilities/')) {
+            icon = 'wrench';
+          }
+          if (page.url.includes('tutorials/')) {
+            icon = 'joystick';
+          }
 
-          a.href = $docsify.routerMode === 'hash' ? `/#/${page.url}` : `/${page.url}`;
+          a.href = window.$docsify.routerMode === 'hash' ? `/#/${page.url}` : `/${page.url}`;
           a.innerHTML = `
             <div class="site-search__result-icon">
               <sl-icon name="${icon}" aria-hidden="true"></sl-icon>

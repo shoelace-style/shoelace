@@ -2,8 +2,8 @@ import { LitElement, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import styles from './avatar.styles';
-
-import '../icon/icon';
+import '~/components/icon/icon';
+import { isTruthy } from '~/internal/is-truthy';
 
 /**
  * @since 2.0
@@ -27,13 +27,13 @@ export default class SlAvatar extends LitElement {
   @state() private hasError = false;
 
   /** The image source to use for the avatar. */
-  @property() image: string;
+  @property() image?: string;
 
   /** A label to use to describe the avatar to assistive devices. */
-  @property() label: string;
+  @property() label = '';
 
   /** Initials to use as a fallback when no image is available (1-2 characters max recommended). */
-  @property() initials: string;
+  @property() initials?: string;
 
   /** The shape of the avatar. */
   @property({ reflect: true }) shape: 'circle' | 'square' | 'rounded' = 'circle';
@@ -51,7 +51,7 @@ export default class SlAvatar extends LitElement {
         role="img"
         aria-label=${this.label}
       >
-        ${this.initials
+        ${isTruthy(this.initials)
           ? html` <div part="initials" class="avatar__initials">${this.initials}</div> `
           : html`
               <div part="icon" class="avatar__icon" aria-hidden="true">
@@ -60,7 +60,7 @@ export default class SlAvatar extends LitElement {
                 </slot>
               </div>
             `}
-        ${this.image && !this.hasError
+        ${typeof this.image === 'string' && !this.hasError
           ? html`
               <img
                 part="image"

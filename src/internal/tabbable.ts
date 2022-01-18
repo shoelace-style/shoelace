@@ -1,4 +1,4 @@
-// Determines if the specified element is tabbable using heuristics inspired by https://github.com/focus-trap/tabbable
+/** Determines if the specified element is tabbable using heuristics inspired by https://github.com/focus-trap/tabbable */
 function isTabbable(el: HTMLElement) {
   const tag = el.tagName.toLowerCase();
 
@@ -23,7 +23,7 @@ function isTabbable(el: HTMLElement) {
   }
 
   // Elements that are hidden have no offsetParent and are not tabbable
-  if (!el.offsetParent) {
+  if (el.offsetParent === null) {
     return false;
   }
 
@@ -51,10 +51,10 @@ function isTabbable(el: HTMLElement) {
   return ['button', 'input', 'select', 'textarea', 'a', 'audio', 'video', 'summary'].includes(tag);
 }
 
-//
-// Returns the first and last bounding elements that are tabbable. This is more performant than checking every single
-// element because it short-circuits after finding the first and last ones.
-//
+/**
+ * Returns the first and last bounding elements that are tabbable. This is more performant than checking every single
+ * element because it short-circuits after finding the first and last ones.
+ */
 export function getTabbableBoundary(root: HTMLElement | ShadowRoot) {
   const allElements: HTMLElement[] = [];
 
@@ -62,20 +62,20 @@ export function getTabbableBoundary(root: HTMLElement | ShadowRoot) {
     if (el instanceof HTMLElement) {
       allElements.push(el);
 
-      if (el.shadowRoot && el.shadowRoot.mode === 'open') {
+      if (el.shadowRoot !== null && el.shadowRoot.mode === 'open') {
         walk(el.shadowRoot);
       }
     }
 
-    [...el.querySelectorAll('*')].map((e: HTMLElement) => walk(e));
+    [...el.querySelectorAll('*')].forEach((e: HTMLElement) => walk(e));
   }
 
   // Collect all elements including the root
   walk(root);
 
   // Find the first and last tabbable elements
-  const start = allElements.find(el => isTabbable(el)) || null;
-  const end = allElements.reverse().find(el => isTabbable(el)) || null;
+  const start = allElements.find(el => isTabbable(el)) ?? null;
+  const end = allElements.reverse().find(el => isTabbable(el)) ?? null;
 
   return { start, end };
 }

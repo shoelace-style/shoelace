@@ -1,7 +1,7 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
-import { LocalizeController } from '../../utilities/localize';
 import styles from './progress-ring.styles';
+import { LocalizeController } from '~/utilities/localize';
 
 /**
  * @since 2.0
@@ -20,7 +20,7 @@ import styles from './progress-ring.styles';
 @customElement('sl-progress-ring')
 export default class SlProgressRing extends LitElement {
   static styles = styles;
-  private localize = new LocalizeController(this);
+  private readonly localize = new LocalizeController(this);
 
   @query('.progress-ring__indicator') indicator: SVGCircleElement;
 
@@ -30,12 +30,12 @@ export default class SlProgressRing extends LitElement {
   @property({ type: Number, reflect: true }) value = 0;
 
   /** A custom label for the progress ring's aria label. */
-  @property() label: string;
+  @property() label = '';
 
   /** The locale to render the component in. */
   @property() lang: string;
 
-  updated(changedProps: Map<string, any>) {
+  updated(changedProps: Map<string, unknown>) {
     super.updated(changedProps);
 
     //
@@ -48,7 +48,7 @@ export default class SlProgressRing extends LitElement {
       const circumference = 2 * Math.PI * radius;
       const offset = circumference - (this.value / 100) * circumference;
 
-      this.indicatorOffset = String(offset) + 'px';
+      this.indicatorOffset = `${offset}px`;
     }
   }
 
@@ -58,7 +58,7 @@ export default class SlProgressRing extends LitElement {
         part="base"
         class="progress-ring"
         role="progressbar"
-        aria-label=${this.label || this.localize.term('progress')}
+        aria-label=${this.label.length > 0 ? this.label : this.localize.term('progress')}
         aria-valuemin="0"
         aria-valuemax="100"
         aria-valuenow="${this.value}"

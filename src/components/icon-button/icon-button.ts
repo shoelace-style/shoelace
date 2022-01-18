@@ -3,8 +3,8 @@ import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import styles from './icon-button.styles';
-
-import '../icon/icon';
+import '~/components/icon/icon';
+import { isTruthy } from '~/internal/is-truthy';
 
 /**
  * @since 2.0
@@ -21,22 +21,22 @@ export default class SlIconButton extends LitElement {
   @query('button') button: HTMLButtonElement | HTMLLinkElement;
 
   /** The name of the icon to draw. */
-  @property() name: string;
+  @property() name?: string;
 
   /** The name of a registered custom icon library. */
-  @property() library: string;
+  @property() library?: string;
 
   /** An external URL of an SVG file. */
-  @property() src: string;
+  @property() src?: string;
 
   /** When set, the underlying button will be rendered as an `<a>` with this `href` instead of a `<button>`. */
-  @property() href: string;
+  @property() href?: string;
 
   /** Tells the browser where to open the link. Only used when `href` is set. */
-  @property() target: '_blank' | '_parent' | '_self' | '_top';
+  @property() target?: '_blank' | '_parent' | '_self' | '_top';
 
   /** Tells the browser to download the linked file as this filename. Only used when `href` is set. */
-  @property() download: string;
+  @property() download?: string;
 
   /**
    * A description that gets read by screen readers and other assistive devices. For optimal accessibility, you should
@@ -48,7 +48,7 @@ export default class SlIconButton extends LitElement {
   @property({ type: Boolean, reflect: true }) disabled = false;
 
   render() {
-    const isLink = this.href ? true : false;
+    const isLink = typeof this.href !== 'undefined';
 
     const interior = html`
       <sl-icon
@@ -67,7 +67,7 @@ export default class SlIconButton extends LitElement {
             href=${ifDefined(this.href)}
             target=${ifDefined(this.target)}
             download=${ifDefined(this.download)}
-            rel=${ifDefined(this.target ? 'noreferrer noopener' : undefined)}
+            rel=${ifDefined(isTruthy(this.target) ? 'noreferrer noopener' : undefined)}
             role="button"
             aria-disabled=${this.disabled ? 'true' : 'false'}
             aria-label="${this.label}"

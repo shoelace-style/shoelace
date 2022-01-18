@@ -1,7 +1,5 @@
-import { expect, fixture, html, waitUntil } from '@open-wc/testing';
+import { expect, fixture, html, waitUntil, aTimeout } from '@open-wc/testing';
 import sinon from 'sinon';
-
-import '../../../dist/shoelace.js';
 import type SlInclude from './include';
 
 const stubbedFetchResponse: Response = {
@@ -22,6 +20,12 @@ const stubbedFetchResponse: Response = {
   clone: sinon.fake()
 };
 
+async function delayResolve(resolveValue: string) {
+  // Delay the fetch response to give time for the event listener to attach
+  await aTimeout(10);
+  return resolveValue;
+}
+
 describe('<sl-include>', () => {
   afterEach(() => {
     sinon.verifyAndRestore();
@@ -32,7 +36,7 @@ describe('<sl-include>', () => {
       ...stubbedFetchResponse,
       ok: true,
       status: 200,
-      text: () => Promise.resolve('"id": 1')
+      text: () => delayResolve('"id": 1')
     });
     const el = await fixture<SlInclude>(html` <sl-include src="/found"></sl-include> `);
     const loadHandler = sinon.spy();
@@ -49,7 +53,7 @@ describe('<sl-include>', () => {
       ...stubbedFetchResponse,
       ok: false,
       status: 404,
-      text: () => Promise.resolve('{}')
+      text: () => delayResolve('{}')
     });
     const el = await fixture<SlInclude>(html` <sl-include src="/not-found"></sl-include> `);
     const loadHandler = sinon.spy();

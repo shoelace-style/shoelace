@@ -32,7 +32,7 @@ fs.mkdirSync(outdir, { recursive: true });
     execSync(`node scripts/make-vscode-data.js --outdir "${outdir}"`, { stdio: 'inherit' });
     execSync(`node scripts/make-css.js --outdir "${outdir}"`, { stdio: 'inherit' });
     execSync(`node scripts/make-icons.js --outdir "${outdir}"`, { stdio: 'inherit' });
-    if (types) execSync(`tsc --project . --outdir "${outdir}"`, { stdio: 'inherit' });
+    if (types) execSync(`tsc --project ./tsconfig.prod.json --outdir "${outdir}"`, { stdio: 'inherit' });
   } catch (err) {
     console.error(chalk.red(err));
     process.exit(1);

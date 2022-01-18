@@ -1,8 +1,6 @@
 // cspell:dictionaries lorem-ipsum
 import { expect, fixture, html, waitUntil } from '@open-wc/testing';
 import sinon from 'sinon';
-
-import '../../../dist/shoelace.js';
 import type SlDialog from './dialog';
 
 describe('<sl-dialog>', () => {
@@ -10,7 +8,7 @@ describe('<sl-dialog>', () => {
     const el = await fixture<SlDialog>(html`
       <sl-dialog open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sl-dialog>
     `);
-    const base = el.shadowRoot?.querySelector('[part="base"]') as HTMLElement;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
 
     expect(base.hidden).to.be.false;
   });
@@ -19,7 +17,7 @@ describe('<sl-dialog>', () => {
     const el = await fixture<SlDialog>(
       html` <sl-dialog>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sl-dialog> `
     );
-    const base = el.shadowRoot?.querySelector('[part="base"]') as HTMLElement;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
 
     expect(base.hidden).to.be.true;
   });
@@ -28,7 +26,7 @@ describe('<sl-dialog>', () => {
     const el = await fixture<SlDialog>(html`
       <sl-dialog>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sl-dialog>
     `);
-    const base = el.shadowRoot?.querySelector('[part="base"]') as HTMLElement;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
     const showHandler = sinon.spy();
     const afterShowHandler = sinon.spy();
 
@@ -48,7 +46,7 @@ describe('<sl-dialog>', () => {
     const el = await fixture<SlDialog>(html`
       <sl-dialog open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sl-dialog>
     `);
-    const base = el.shadowRoot?.querySelector('[part="base"]') as HTMLElement;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
     const hideHandler = sinon.spy();
     const afterHideHandler = sinon.spy();
 
@@ -68,7 +66,7 @@ describe('<sl-dialog>', () => {
     const el = await fixture<SlDialog>(html`
       <sl-dialog>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sl-dialog>
     `);
-    const base = el.shadowRoot?.querySelector('[part="base"]') as HTMLElement;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
     const showHandler = sinon.spy();
     const afterShowHandler = sinon.spy();
 
@@ -88,7 +86,7 @@ describe('<sl-dialog>', () => {
     const el = await fixture<SlDialog>(html`
       <sl-dialog open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sl-dialog>
     `);
-    const base = el.shadowRoot?.querySelector('[part="base"]') as HTMLElement;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
     const hideHandler = sinon.spy();
     const afterHideHandler = sinon.spy();
 
@@ -108,9 +106,11 @@ describe('<sl-dialog>', () => {
     const el = await fixture<SlDialog>(html`
       <sl-dialog open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sl-dialog>
     `);
-    const overlay = el.shadowRoot?.querySelector('[part="overlay"]') as HTMLElement;
+    const overlay = el.shadowRoot!.querySelector<HTMLElement>('[part="overlay"]')!;
 
-    el.addEventListener('sl-request-close', event => event.preventDefault());
+    el.addEventListener('sl-request-close', event => {
+      event.preventDefault();
+    });
     overlay.click();
 
     expect(el.open).to.be.true;
@@ -118,8 +118,8 @@ describe('<sl-dialog>', () => {
 
   it('should allow initial focus to be set', async () => {
     const el = await fixture<SlDialog>(html` <sl-dialog><input /></sl-dialog> `);
-    const input = el.querySelector('input');
-    const initialFocusHandler = sinon.spy(event => {
+    const input = el.querySelector('input')!;
+    const initialFocusHandler = sinon.spy((event: Event) => {
       event.preventDefault();
       input.focus();
     });

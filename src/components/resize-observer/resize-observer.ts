@@ -1,8 +1,8 @@
 import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { emit } from '../../internal/event';
-import { watch } from '../../internal/watch';
 import styles from './resize-observer.styles';
+import { emit } from '~/internal/event';
+import { watch } from '~/internal/watch';
 
 /**
  * @since 2.0
@@ -45,17 +45,17 @@ export default class SlResizeObserver extends LitElement {
   }
 
   startObserver() {
-    const slot = this.shadowRoot!.querySelector('slot')!;
+    const slot = this.shadowRoot!.querySelector('slot');
 
-    if (slot) {
+    if (slot !== null) {
       const elements = slot.assignedElements({ flatten: true }) as HTMLElement[];
 
       // Unwatch previous elements
-      this.observedElements.map(el => this.resizeObserver.unobserve(el));
+      this.observedElements.forEach(el => this.resizeObserver.unobserve(el));
       this.observedElements = [];
 
       // Watch new elements
-      elements.map(el => {
+      elements.forEach(el => {
         this.resizeObserver.observe(el);
         this.observedElements.push(el);
       });

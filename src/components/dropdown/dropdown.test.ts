@@ -1,7 +1,5 @@
 import { expect, fixture, html, waitUntil } from '@open-wc/testing';
 import sinon from 'sinon';
-
-import '../../../dist/shoelace.js';
 import type SlDropdown from './dropdown';
 
 describe('<sl-dropdown>', () => {
@@ -16,7 +14,7 @@ describe('<sl-dropdown>', () => {
         </sl-menu>
       </sl-dropdown>
     `);
-    const panel = el.shadowRoot?.querySelector('[part="panel"]') as HTMLElement;
+    const panel = el.shadowRoot!.querySelector<HTMLElement>('[part="panel"]')!;
 
     expect(panel.hidden).to.be.false;
   });
@@ -32,7 +30,7 @@ describe('<sl-dropdown>', () => {
         </sl-menu>
       </sl-dropdown>
     `);
-    const panel = el.shadowRoot?.querySelector('[part="panel"]') as HTMLElement;
+    const panel = el.shadowRoot!.querySelector<HTMLElement>('[part="panel"]')!;
 
     expect(panel.hidden).to.be.true;
   });
@@ -48,7 +46,7 @@ describe('<sl-dropdown>', () => {
         </sl-menu>
       </sl-dropdown>
     `);
-    const panel = el.shadowRoot?.querySelector('[part="panel"]') as HTMLElement;
+    const panel = el.shadowRoot!.querySelector<HTMLElement>('[part="panel"]')!;
     const showHandler = sinon.spy();
     const afterShowHandler = sinon.spy();
 
@@ -75,7 +73,7 @@ describe('<sl-dropdown>', () => {
         </sl-menu>
       </sl-dropdown>
     `);
-    const panel = el.shadowRoot?.querySelector('[part="panel"]') as HTMLElement;
+    const panel = el.shadowRoot!.querySelector<HTMLElement>('[part="panel"]')!;
     const hideHandler = sinon.spy();
     const afterHideHandler = sinon.spy();
 
@@ -102,7 +100,7 @@ describe('<sl-dropdown>', () => {
         </sl-menu>
       </sl-dropdown>
     `);
-    const panel = el.shadowRoot?.querySelector('[part="panel"]') as HTMLElement;
+    const panel = el.shadowRoot!.querySelector<HTMLElement>('[part="panel"]')!;
     const showHandler = sinon.spy();
     const afterShowHandler = sinon.spy();
 
@@ -129,7 +127,7 @@ describe('<sl-dropdown>', () => {
         </sl-menu>
       </sl-dropdown>
     `);
-    const panel = el.shadowRoot?.querySelector('[part="panel"]') as HTMLElement;
+    const panel = el.shadowRoot!.querySelector<HTMLElement>('[part="panel"]')!;
     const hideHandler = sinon.spy();
     const afterHideHandler = sinon.spy();
 

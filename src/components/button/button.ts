@@ -1,14 +1,14 @@
 import { LitElement } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
-import { html, literal } from 'lit/static-html.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { emit } from '../../internal/event';
-import { FormSubmitController } from '../../internal/form-control';
-import { HasSlotController } from '../../internal/slot';
+import { html, literal } from 'lit/static-html.js';
 import styles from './button.styles';
-
-import '../spinner/spinner';
+import '~/components/spinner/spinner';
+import { emit } from '~/internal/event';
+import { FormSubmitController } from '~/internal/form-control';
+import { isTruthy } from '~/internal/is-truthy';
+import { HasSlotController } from '~/internal/slot';
 
 /**
  * @since 2.0
@@ -35,8 +35,8 @@ export default class SlButton extends LitElement {
 
   @query('.button') button: HTMLButtonElement | HTMLLinkElement;
 
-  private formSubmitController = new FormSubmitController(this);
-  private hasSlotController = new HasSlotController(this, '[default]', 'prefix', 'suffix');
+  private readonly formSubmitController = new FormSubmitController(this);
+  private readonly hasSlotController = new HasSlotController(this, '[default]', 'prefix', 'suffix');
 
   @state() private hasFocus = false;
 
@@ -72,19 +72,19 @@ export default class SlButton extends LitElement {
   @property() type: 'button' | 'submit' = 'button';
 
   /** An optional name for the button. Ignored when `href` is set. */
-  @property() name: string;
+  @property() name?: string;
 
   /** An optional value for the button. Ignored when `href` is set. */
-  @property() value: string;
+  @property() value?: string;
 
   /** When set, the underlying button will be rendered as an `<a>` with this `href` instead of a `<button>`. */
-  @property() href: string;
+  @property() href?: string;
 
   /** Tells the browser where to open the link. Only used when `href` is set. */
-  @property() target: '_blank' | '_parent' | '_self' | '_top';
+  @property() target?: '_blank' | '_parent' | '_self' | '_top';
 
   /** Tells the browser to download the linked file as this filename. Only used when `href` is set. */
-  @property() download: string;
+  @property() download?: string;
 
   /** Simulates a click on the button. */
   click() {
@@ -124,9 +124,10 @@ export default class SlButton extends LitElement {
   }
 
   render() {
-    const isLink = this.href ? true : false;
+    const isLink = typeof this.href !== 'undefined';
     const tag = isLink ? literal`a` : literal`button`;
 
+    /* eslint-disable lit/binding-positions, lit/no-invalid-html */
     return html`
       <${tag}
         part="base"
@@ -161,7 +162,7 @@ export default class SlButton extends LitElement {
         href=${ifDefined(this.href)}
         target=${ifDefined(this.target)}
         download=${ifDefined(this.download)}
-        rel=${ifDefined(this.target ? 'noreferrer noopener' : undefined)}
+        rel=${ifDefined(isTruthy(this.target) ? 'noreferrer noopener' : undefined)}
         role="button"
         aria-disabled=${this.disabled ? 'true' : 'false'}
         tabindex=${this.disabled ? '-1' : '0'}
@@ -199,6 +200,7 @@ export default class SlButton extends LitElement {
         ${this.loading ? html`<sl-spinner></sl-spinner>` : ''}
       </${tag}>
     `;
+    /* eslint-enable lit/binding-positions, lit/no-invalid-html */
   }
 }
 

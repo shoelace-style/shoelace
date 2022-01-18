@@ -1,14 +1,12 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { animateTo, stopAnimations, shimKeyframesHeightAuto } from '../../internal/animate';
-import { emit } from '../../internal/event';
-import { watch } from '../../internal/watch';
-import { waitForEvent } from '../../internal/event';
-import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
 import styles from './details.styles';
-
-import '../icon/icon';
+import '~/components/icon/icon';
+import { animateTo, stopAnimations, shimKeyframesHeightAuto } from '~/internal/animate';
+import { emit, waitForEvent } from '~/internal/event';
+import { watch } from '~/internal/watch';
+import { getAnimation, setDefaultAnimation } from '~/utilities/animation-registry';
 
 /**
  * @since 2.0
@@ -58,7 +56,7 @@ export default class SlDetails extends LitElement {
   /** Shows the details. */
   async show() {
     if (this.open) {
-      return;
+      return undefined;
     }
 
     this.open = true;
@@ -68,16 +66,24 @@ export default class SlDetails extends LitElement {
   /** Hides the details */
   async hide() {
     if (!this.open) {
-      return;
+      return undefined;
     }
 
     this.open = false;
     return waitForEvent(this, 'sl-after-hide');
   }
 
+  toggleOpen() {
+    if (this.open) {
+      this.hide();
+    } else {
+      this.show();
+    }
+  }
+
   handleSummaryClick() {
     if (!this.disabled) {
-      this.open ? this.hide() : this.show();
+      this.toggleOpen();
       this.header.focus();
     }
   }
@@ -85,7 +91,7 @@ export default class SlDetails extends LitElement {
   handleSummaryKeyDown(event: KeyboardEvent) {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
-      this.open ? this.hide() : this.show();
+      this.toggleOpen();
     }
 
     if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {

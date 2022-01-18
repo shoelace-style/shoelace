@@ -85,7 +85,7 @@ npm install
 Once you've cloned the repo, run the following command to spin up the Shoelace dev server.
 
 ```bash
-npm start
+npm run start
 ```
 
 After the initial build, a browser will open automatically to a local version of the docs. The documentation is powered by Docsify, which uses raw markdown files to generate pages on the fly.
@@ -113,7 +113,7 @@ For more information about running and building the project locally, refer to `R
 Shoelace uses [Web Test Runner](https://modern-web.dev/guides/test-runner/getting-started/) for testing. To launch the test runner during development, open a terminal and launch the dev server.
 
 ```bash
-npm start
+npm run start
 ```
 
 In a second terminal window, launch the test runner.
@@ -124,11 +124,18 @@ npm run test:watch
 
 Follow the on-screen instructions to work with the test runner. Tests will automatically re-run as you make changes.
 
-To run tests only once, make sure to build the project first.
+To run all tests only once:
 
 ```bash
-npm run build
 npm run test
+```
+
+To run just one test file:
+
+If the test file is `src/components/breadcrumb-item.test.ts`, then `<nameOfTestFile>` would be `breadcrumb-item`.
+
+```bash
+npm run test -- --group <nameOfTestFile>
 ```
 
 ## Best Practices

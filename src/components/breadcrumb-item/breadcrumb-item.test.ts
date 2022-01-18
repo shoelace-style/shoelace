@@ -1,12 +1,10 @@
 import { expect, fixture, html } from '@open-wc/testing';
-
-import '../../../dist/shoelace.js';
 import type SlBreadcrumbItem from './breadcrumb-item';
 
 describe('<sl-breadcrumb-item>', () => {
   let el: SlBreadcrumbItem;
 
-  describe('when not provided a href attribute', async () => {
+  describe('when not provided a href attribute', () => {
     before(async () => {
       el = await fixture<SlBreadcrumbItem>(html` <sl-breadcrumb-item>Home</sl-breadcrumb-item> `);
     });
@@ -15,19 +13,19 @@ describe('<sl-breadcrumb-item>', () => {
       await expect(el).to.be.accessible();
     });
 
-    it('should hide the separator from screen readers', async () => {
-      const separator: HTMLSpanElement = el.shadowRoot.querySelector('[part="separator"]');
+    it('should hide the separator from screen readers', () => {
+      const separator = el.shadowRoot!.querySelector<HTMLSpanElement>('[part="separator"]');
       expect(separator).attribute('aria-hidden', 'true');
     });
 
     it('should render a HTMLButtonElement as the part "label", with a set type "button"', () => {
-      const button: HTMLButtonElement = el.shadowRoot.querySelector('[part="label"]');
+      const button = el.shadowRoot!.querySelector<HTMLButtonElement>('[part="label"]');
       expect(button).to.exist;
       expect(button).attribute('type', 'button');
     });
   });
 
-  describe('when provided a href attribute', async () => {
+  describe('when provided a href attribute', () => {
     describe('and no target', () => {
       before(async () => {
         el = await fixture<SlBreadcrumbItem>(html`
@@ -40,7 +38,7 @@ describe('<sl-breadcrumb-item>', () => {
       });
 
       it('should render a HTMLAnchorElement as the part "label", with the supplied href value', () => {
-        const hyperlink: HTMLAnchorElement = el.shadowRoot.querySelector('[part="label"]');
+        const hyperlink = el.shadowRoot!.querySelector<HTMLAnchorElement>('[part="label"]');
         expect(hyperlink).attribute('href', 'https://jsonplaceholder.typicode.com/');
       });
     });
@@ -57,10 +55,10 @@ describe('<sl-breadcrumb-item>', () => {
       });
 
       describe('should render a HTMLAnchorElement as the part "label"', () => {
-        let hyperlink: HTMLAnchorElement;
+        let hyperlink: HTMLAnchorElement | null;
 
         before(() => {
-          hyperlink = el.shadowRoot.querySelector('[part="label"]');
+          hyperlink = el.shadowRoot!.querySelector<HTMLAnchorElement>('[part="label"]');
         });
 
         it('should use the supplied href value, as the href attribute value', () => {
@@ -87,10 +85,10 @@ describe('<sl-breadcrumb-item>', () => {
       });
 
       describe('should render a HTMLAnchorElement', () => {
-        let hyperlink: HTMLAnchorElement;
+        let hyperlink: HTMLAnchorElement | null;
 
         before(() => {
-          hyperlink = el.shadowRoot.querySelector('a');
+          hyperlink = el.shadowRoot!.querySelector<HTMLAnchorElement>('a');
         });
 
         it('should use the supplied href value, as the href attribute value', () => {
@@ -104,7 +102,7 @@ describe('<sl-breadcrumb-item>', () => {
     });
   });
 
-  describe('when provided an element in the slot "prefix" to support prefix icons', async () => {
+  describe('when provided an element in the slot "prefix" to support prefix icons', () => {
     before(async () => {
       el = await fixture<SlBreadcrumbItem>(html`
         <sl-breadcrumb-item>
@@ -119,19 +117,19 @@ describe('<sl-breadcrumb-item>', () => {
     });
 
     it('should accept as an assigned child in the shadow root', () => {
-      const slot = <HTMLSlotElement>el.shadowRoot.querySelector('slot[name=prefix]');
+      const slot = el.shadowRoot!.querySelector<HTMLSlotElement>('slot[name=prefix]')!;
       const childNodes = slot.assignedNodes({ flatten: true });
 
       expect(childNodes.length).to.eq(1);
     });
 
     it('should append class "breadcrumb-item--has-prefix" to "base" part', () => {
-      const part = el.shadowRoot?.querySelector('[part="base"]') as HTMLElement;
+      const part = el.shadowRoot!.querySelector('[part="base"]')!;
       expect(part.classList.value.trim()).to.equal('breadcrumb-item breadcrumb-item--has-prefix');
     });
   });
 
-  describe('when provided an element in the slot "suffix" to support suffix icons', async () => {
+  describe('when provided an element in the slot "suffix" to support suffix icons', () => {
     before(async () => {
       el = await fixture<SlBreadcrumbItem>(html`
         <sl-breadcrumb-item>
@@ -146,14 +144,14 @@ describe('<sl-breadcrumb-item>', () => {
     });
 
     it('should accept as an assigned child in the shadow root', () => {
-      const slot = <HTMLSlotElement>el.shadowRoot.querySelector('slot[name=suffix]');
+      const slot = el.shadowRoot!.querySelector<HTMLSlotElement>('slot[name=suffix]')!;
       const childNodes = slot.assignedNodes({ flatten: true });
 
       expect(childNodes.length).to.eq(1);
     });
 
     it('should append class "breadcrumb-item--has-suffix" to "base" part', () => {
-      const part = el.shadowRoot?.querySelector('[part="base"]') as HTMLElement;
+      const part = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
       expect(part.classList.value.trim()).to.equal('breadcrumb-item breadcrumb-item--has-suffix');
     });
   });

@@ -1,7 +1,5 @@
 import { expect, fixture, html, waitUntil } from '@open-wc/testing';
 import sinon from 'sinon';
-
-import '../../../dist/shoelace.js';
 import type SlTooltip from './tooltip';
 
 describe('<sl-tooltip>', () => {
@@ -11,7 +9,7 @@ describe('<sl-tooltip>', () => {
         <sl-button>Hover Me</sl-button>
       </sl-tooltip>
     `);
-    const base = el.shadowRoot?.querySelector('[part="base"]') as HTMLElement;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
 
     expect(base.hidden).to.be.false;
   });
@@ -22,7 +20,7 @@ describe('<sl-tooltip>', () => {
         <sl-button>Hover Me</sl-button>
       </sl-tooltip>
     `);
-    const base = el.shadowRoot?.querySelector('[part="base"]') as HTMLElement;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
 
     expect(base.hidden).to.be.true;
   });
@@ -33,7 +31,7 @@ describe('<sl-tooltip>', () => {
         <sl-button>Hover Me</sl-button>
       </sl-tooltip>
     `);
-    const base = el.shadowRoot?.querySelector('[part="base"]') as HTMLElement;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
     const showHandler = sinon.spy();
     const afterShowHandler = sinon.spy();
 
@@ -55,7 +53,7 @@ describe('<sl-tooltip>', () => {
         <sl-button>Hover Me</sl-button>
       </sl-tooltip>
     `);
-    const base = el.shadowRoot?.querySelector('[part="base"]') as HTMLElement;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
     const hideHandler = sinon.spy();
     const afterHideHandler = sinon.spy();
 
@@ -77,7 +75,7 @@ describe('<sl-tooltip>', () => {
         <sl-button>Hover Me</sl-button>
       </sl-tooltip>
     `);
-    const base = el.shadowRoot?.querySelector('[part="base"]') as HTMLElement;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
     const showHandler = sinon.spy();
     const afterShowHandler = sinon.spy();
 
@@ -99,7 +97,7 @@ describe('<sl-tooltip>', () => {
         <sl-button>Hover Me</sl-button>
       </sl-tooltip>
     `);
-    const base = el.shadowRoot?.querySelector('[part="base"]') as HTMLElement;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
     const hideHandler = sinon.spy();
     const afterHideHandler = sinon.spy();
 

@@ -7,7 +7,7 @@
   // Docsify generates pages dynamically and asynchronously, so when a reload happens, the scroll position can't be
   // be restored immediately. This plugin waits until Docsify loads the page and then restores it.
   //
-  window.$docsify.plugins.push((hook, vm) => {
+  window.$docsify.plugins.push(hook => {
     hook.ready(() => {
       // Restore
       const scrollTop = sessionStorage.getItem('bs-scroll');
@@ -16,7 +16,7 @@
       }
 
       // Remember
-      document.addEventListener('scroll', event => {
+      document.addEventListener('scroll', () => {
         sessionStorage.setItem('bs-scroll', document.documentElement.scrollTop);
       });
     });

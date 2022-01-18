@@ -1,6 +1,21 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { LocalizeController } from '../../utilities/localize';
+import { LocalizeController } from '~/utilities/localize';
+
+interface UnitConfig {
+  max: number;
+  value: number;
+  unit: Intl.RelativeTimeFormatUnit;
+}
+
+const availableUnits: UnitConfig[] = [
+  { max: 2760000, value: 60000, unit: 'minute' }, // max 46 minutes
+  { max: 72000000, value: 3600000, unit: 'hour' }, // max 20 hours
+  { max: 518400000, value: 86400000, unit: 'day' }, // max 6 days
+  { max: 2419200000, value: 604800000, unit: 'week' }, // max 28 days
+  { max: 28512000000, value: 2592000000, unit: 'month' }, // max 11 months
+  { max: Infinity, value: 31536000000, unit: 'year' }
+];
 
 /**
  * @since 2.0
@@ -8,8 +23,8 @@ import { LocalizeController } from '../../utilities/localize';
  */
 @customElement('sl-relative-time')
 export default class SlRelativeTime extends LitElement {
-  private localize = new LocalizeController(this);
-  private updateTimeout: any;
+  private readonly localize = new LocalizeController(this);
+  private updateTimeout: number;
 
   @state() private isoTime = '';
   @state() private relativeTime = '';
@@ -49,16 +64,8 @@ export default class SlRelativeTime extends LitElement {
       return '';
     }
 
-    const diff = +then - +now;
-    const availableUnits = [
-      { max: 2760000, value: 60000, unit: 'minute' }, // max 46 minutes
-      { max: 72000000, value: 3600000, unit: 'hour' }, // max 20 hours
-      { max: 518400000, value: 86400000, unit: 'day' }, // max 6 days
-      { max: 2419200000, value: 604800000, unit: 'week' }, // max 28 days
-      { max: 28512000000, value: 2592000000, unit: 'month' }, // max 11 months
-      { max: Infinity, value: 31536000000, unit: 'year' }
-    ];
-    const { unit, value } = availableUnits.find(unit => Math.abs(diff) < unit.max) as any;
+    const diff = then.getTime() - now.getTime();
+    const { unit, value } = availableUnits.find(singleUnit => Math.abs(diff) < singleUnit.max)!;
 
     this.isoTime = then.toISOString();
     this.titleTime = this.localize.date(then, {
@@ -79,13 +86,6 @@ export default class SlRelativeTime extends LitElement {
     clearTimeout(this.updateTimeout);
 
     if (this.sync) {
-      // Calculates the number of milliseconds until the next respective unit changes. This ensures that all components
-      // update at the same time which is less distracting than updating independently.
-      const getTimeUntilNextUnit = (unit: 'second' | 'minute' | 'hour' | 'day') => {
-        const units = { second: 1000, minute: 60000, hour: 3600000, day: 86400000 };
-        const value = units[unit];
-        return value - (now.getTime() % value);
-      };
       let nextInterval: number;
 
       // NOTE: this could be optimized to determine when the next update should actually occur, but the size and cost of
@@ -102,11 +102,19 @@ export default class SlRelativeTime extends LitElement {
         nextInterval = getTimeUntilNextUnit('day'); // next day
       }
 
-      this.updateTimeout = setTimeout(() => this.requestUpdate(), nextInterval);
+      this.updateTimeout = window.setTimeout(() => this.requestUpdate(), nextInterval);
     }
 
     return html` <time datetime=${this.isoTime} title=${this.titleTime}>${this.relativeTime}</time> `;
   }
+}
+
+// Calculates the number of milliseconds until the next respective unit changes. This ensures that all components
+// update at the same time which is less distracting than updating independently.
+function getTimeUntilNextUnit(unit: 'second' | 'minute' | 'hour' | 'day') {
+  const units = { second: 1000, minute: 60000, hour: 3600000, day: 86400000 };
+  const value = units[unit];
+  return value - (Date.now() % value);
 }
 
 declare global {

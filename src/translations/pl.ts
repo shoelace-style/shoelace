@@ -1,5 +1,5 @@
-import { registerTranslation } from '../utilities/localize';
-import type { Translation } from '../utilities/localize';
+import { registerTranslation } from '~/utilities/localize';
+import type { Translation } from '~/utilities/localize';
 
 const translation: Translation = {
   $code: 'pl',
@@ -10,10 +10,10 @@ const translation: Translation = {
   copy: 'Kopiuj',
   progress: 'Postęp',
   resize: 'Zmień rozmiar',
-  scroll_to_end: 'Przewiń do końca',
-  scroll_to_start: 'Przewiń do początku',
-  select_a_color_from_the_screen: 'Próbkuj z ekranu',
-  toggle_color_format: 'Przełącz format'
+  scrollToEnd: 'Przewiń do końca',
+  scrollToStart: 'Przewiń do początku',
+  selectAColorFromTheScreen: 'Próbkuj z ekranu',
+  toggleColorFormat: 'Przełącz format'
 };
 
 registerTranslation(translation);

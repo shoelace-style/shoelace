@@ -2,8 +2,9 @@ import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { HasSlotController } from '../../internal/slot';
 import styles from './breadcrumb-item.styles';
+import { isTruthy } from '~/internal/is-truthy';
+import { HasSlotController } from '~/internal/slot';
 
 /**
  * @since 2.0
@@ -25,22 +26,22 @@ import styles from './breadcrumb-item.styles';
 export default class SlBreadcrumbItem extends LitElement {
   static styles = styles;
 
-  private hasSlotController = new HasSlotController(this, 'prefix', 'suffix');
+  private readonly hasSlotController = new HasSlotController(this, 'prefix', 'suffix');
 
   /**
    * Optional URL to direct the user to when the breadcrumb item is activated. When set, a link will be rendered
    * internally. When unset, a button will be rendered instead.
    */
-  @property() href: string;
+  @property() href?: string;
 
   /** Tells the browser where to open the link. Only used when `href` is set. */
-  @property() target: '_blank' | '_parent' | '_self' | '_top';
+  @property() target?: '_blank' | '_parent' | '_self' | '_top';
 
   /** The `rel` attribute to use on the link. Only used when `href` is set. */
-  @property() rel: string = 'noreferrer noopener';
+  @property() rel = 'noreferrer noopener';
 
   render() {
-    const isLink = this.href ? true : false;
+    const isLink = typeof this.href !== 'undefined';
 
     return html`
       <div
@@ -62,7 +63,7 @@ export default class SlBreadcrumbItem extends LitElement {
                 class="breadcrumb-item__label breadcrumb-item__label--link"
                 href="${this.href}"
                 target="${this.target}"
-                rel=${ifDefined(this.target ? this.rel : undefined)}
+                rel=${ifDefined(isTruthy(this.target) ? this.rel : undefined)}
               >
                 <slot></slot>
               </a>

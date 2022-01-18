@@ -1,8 +1,8 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import type SlRadio from '../radio/radio';
 import styles from './radio-group.styles';
+import type SlRadio from '~/components/radio/radio';
 
 /**
  * @since 2.0
@@ -29,13 +29,11 @@ export default class SlRadioGroup extends LitElement {
   handleFocusIn() {
     // When tabbing into the fieldset, make sure it lands on the checked radio
     requestAnimationFrame(() => {
-      const checkedRadio = [...this.defaultSlot.assignedElements({ flatten: true })].find(
-        el => el.tagName.toLowerCase() === 'sl-radio' && (el as SlRadio).checked
-      ) as SlRadio;
+      const checkedRadio = [...(this.defaultSlot.assignedElements({ flatten: true }) as SlRadio[])].find(
+        el => el.tagName.toLowerCase() === 'sl-radio' && el.checked
+      );
 
-      if (checkedRadio) {
-        checkedRadio.focus();
-      }
+      checkedRadio?.focus();
     });
   }
 
