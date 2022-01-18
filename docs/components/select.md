@@ -158,7 +158,7 @@ const App = () => (
 
 ### Multiple
 
-To allow multiple options to be selected, use the `multiple` attribute. It's a good practice to use `clearable` when this option is enabled. When using this option, `value` will be an array instead of a string.
+To allow multiple options to be selected, use the `multiple` attribute. It's a good practice to use `clearable` when this option is enabled. When using this option, the `value` property will be an array of strings instead of a string.
 
 ```html preview
 <sl-select placeholder="Select a few" multiple clearable>
@@ -187,6 +187,8 @@ const App = () => (
   </SlSelect>
 );
 ```
+
+?> When using the `multiple` attribute, the `value` property will be an array instead of a string. To set it in your HTML, obtain a reference to the element and set `value` to an array of strings.
 
 ### Grouping Options
 
