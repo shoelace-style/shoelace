@@ -3,10 +3,10 @@ import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
-import { emit } from '../../internal/event';
-import { watch } from '../../internal/watch';
-import { FormSubmitController } from '../../internal/form-control';
 import styles from './radio.styles';
+import { emit } from '~/internal/event';
+import { FormSubmitController } from '~/internal/form-control';
+import { watch } from '~/internal/watch';
 
 /**
  * @since 2.0
@@ -29,8 +29,8 @@ export default class SlRadio extends LitElement {
 
   @query('input[type="radio"]') input: HTMLInputElement;
 
-  // @ts-ignore
-  private formSubmitController = new FormSubmitController(this, {
+  // @ts-expect-error -- Controller is currently unused
+  private readonly formSubmitController = new FormSubmitController(this, {
     value: (control: SlRadio) => (control.checked ? control.value : undefined)
   });
 
@@ -55,20 +55,19 @@ export default class SlRadio extends LitElement {
   @property({ type: Boolean, reflect: true }) invalid = false;
 
   firstUpdated() {
-    const radios = this.getAllRadios();
-    const checkedRadio = radios.find(radio => radio.checked);
-
-    radios.map(radio => {
-      if (radio.input) {
+    this.updateComplete.then(() => {
+      const radios = this.getAllRadios();
+      const checkedRadio = radios.find(radio => radio.checked);
+      radios.forEach(radio => {
         radio.input.tabIndex = -1;
+      });
+
+      if (typeof checkedRadio !== 'undefined') {
+        checkedRadio.input.tabIndex = 0;
+      } else if (radios.length > 0) {
+        radios[0].input.tabIndex = 0;
       }
     });
-
-    if (checkedRadio) {
-      checkedRadio.input.tabIndex = 0;
-    } else if (radios.length) {
-      radios[0].input.tabIndex = 0;
-    }
   }
 
   /** Simulates a click on the radio. */
@@ -101,7 +100,7 @@ export default class SlRadio extends LitElement {
     const radioGroup = this.closest('sl-radio-group');
 
     // Radios must be part of a radio group
-    if (!radioGroup) {
+    if (radioGroup === null) {
       return [this];
     }
 
@@ -109,7 +108,7 @@ export default class SlRadio extends LitElement {
   }
 
   getSiblingRadios() {
-    return this.getAllRadios().filter(radio => radio !== this) as this[];
+    return this.getAllRadios().filter(radio => radio !== this);
   }
 
   handleBlur() {
@@ -122,7 +121,7 @@ export default class SlRadio extends LitElement {
     if (this.checked) {
       this.input.tabIndex = 0;
 
-      this.getSiblingRadios().map(radio => {
+      this.getSiblingRadios().forEach(radio => {
         radio.input.tabIndex = -1;
         radio.checked = false;
       });
@@ -134,13 +133,11 @@ export default class SlRadio extends LitElement {
     emit(this, 'sl-change');
   }
 
-  @watch('disabled')
+  @watch('disabled', { waitUntilFirstUpdate: true })
   handleDisabledChange() {
     // Disabled form controls are always valid, so we need to recheck validity when the state changes
-    if (this.input) {
-      this.input.disabled = this.disabled;
-      this.invalid = !this.input.checkValidity();
-    }
+    this.input.disabled = this.disabled;
+    this.invalid = !this.input.checkValidity();
   }
 
   handleFocus() {
@@ -153,10 +150,14 @@ export default class SlRadio extends LitElement {
       const radios = this.getAllRadios().filter(radio => !radio.disabled);
       const incr = ['ArrowUp', 'ArrowLeft'].includes(event.key) ? -1 : 1;
       let index = radios.indexOf(this) + incr;
-      if (index < 0) index = radios.length - 1;
-      if (index > radios.length - 1) index = 0;
+      if (index < 0) {
+        index = radios.length - 1;
+      }
+      if (index > radios.length - 1) {
+        index = 0;
+      }
 
-      this.getAllRadios().map(radio => {
+      this.getAllRadios().forEach(radio => {
         radio.checked = false;
         radio.input.tabIndex = -1;
       });

@@ -3,12 +3,11 @@ import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
-import { emit } from '../../internal/event';
-import { watch } from '../../internal/watch';
-import { FormSubmitController } from '../../internal/form-control';
 import styles from './switch.styles';
-
-let id = 0;
+import { autoIncrement } from '~/internal/auto-increment';
+import { emit } from '~/internal/event';
+import { FormSubmitController } from '~/internal/form-control';
+import { watch } from '~/internal/watch';
 
 /**
  * @since 2.0
@@ -35,12 +34,13 @@ export default class SlSwitch extends LitElement {
 
   @query('input[type="checkbox"]') input: HTMLInputElement;
 
-  // @ts-ignore
-  private formSubmitController = new FormSubmitController(this, {
+  // @ts-expect-error -- Controller is currently unused
+  private readonly formSubmitController = new FormSubmitController(this, {
     value: (control: SlSwitch) => (control.checked ? control.value : undefined)
   });
-  private switchId = `switch-${++id}`;
-  private labelId = `switch-label-${id}`;
+  private readonly attrId = autoIncrement();
+  private readonly switchId = `switch-${this.attrId}`;
+  private readonly labelId = `switch-label-${this.attrId}`;
 
   @state() private hasFocus = false;
 
@@ -97,12 +97,10 @@ export default class SlSwitch extends LitElement {
     emit(this, 'sl-blur');
   }
 
-  @watch('checked')
+  @watch('checked', { waitUntilFirstUpdate: true })
   handleCheckedChange() {
-    if (this.input) {
-      this.input.checked = this.checked;
-      this.invalid = !this.input.checkValidity();
-    }
+    this.input.checked = this.checked;
+    this.invalid = !this.input.checkValidity();
   }
 
   handleClick() {
@@ -110,13 +108,11 @@ export default class SlSwitch extends LitElement {
     emit(this, 'sl-change');
   }
 
-  @watch('disabled')
+  @watch('disabled', { waitUntilFirstUpdate: true })
   handleDisabledChange() {
     // Disabled form controls are always valid, so we need to recheck validity when the state changes
-    if (this.input) {
-      this.input.disabled = this.disabled;
-      this.invalid = !this.input.checkValidity();
-    }
+    this.input.disabled = this.disabled;
+    this.invalid = !this.input.checkValidity();
   }
 
   handleFocus() {

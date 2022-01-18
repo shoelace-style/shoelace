@@ -1,26 +1,23 @@
-import { LitElement, TemplateResult, html } from 'lit';
+import type { TemplateResult } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { emit } from '../../internal/event';
-import { watch } from '../../internal/watch';
-import { getLabelledBy, renderFormControl } from '../../internal/form-control';
-import { getTextContent } from '../../internal/slot';
-import { FormSubmitController } from '../../internal/form-control';
-import { HasSlotController } from '../../internal/slot';
-import type SlDropdown from '../dropdown/dropdown';
-import type SlIconButton from '../icon-button/icon-button';
-import type SlMenu from '../menu/menu';
-import type SlMenuItem from '../menu-item/menu-item';
 import styles from './select.styles';
-
-import '../dropdown/dropdown';
-import '../icon/icon';
-import '../icon-button/icon-button';
-import '../menu/menu';
-import '../tag/tag';
-
-let id = 0;
+import type SlDropdown from '~/components/dropdown/dropdown';
+import '~/components/dropdown/dropdown';
+import type SlIconButton from '~/components/icon-button/icon-button';
+import '~/components/icon-button/icon-button';
+import '~/components/icon/icon';
+import type SlMenuItem from '~/components/menu-item/menu-item';
+import type SlMenu from '~/components/menu/menu';
+import type { MenuSelectEventDetail } from '~/components/menu/menu';
+import '~/components/tag/tag';
+import { autoIncrement } from '~/internal/auto-increment';
+import { emit } from '~/internal/event';
+import { FormSubmitController, getLabelledBy, renderFormControl } from '~/internal/form-control';
+import { getTextContent, HasSlotController } from '~/internal/slot';
+import { watch } from '~/internal/watch';
 
 /**
  * @since 2.0
@@ -66,12 +63,14 @@ export default class SlSelect extends LitElement {
   @query('.select__hidden-select') input: HTMLInputElement;
   @query('.select__menu') menu: SlMenu;
 
-  // @ts-ignore
-  private formSubmitController = new FormSubmitController(this);
-  private hasSlotController = new HasSlotController(this, 'help-text', 'label');
-  private inputId = `select-${++id}`;
-  private helpTextId = `select-help-text-${id}`;
-  private labelId = `select-label-${id}`;
+  // @ts-expect-error -- Controller is currently unused
+  private readonly formSubmitController = new FormSubmitController(this);
+  private readonly hasSlotController = new HasSlotController(this, 'help-text', 'label');
+  private readonly attrId = autoIncrement();
+  private readonly inputId = `select-${this.attrId}`;
+  private readonly helpTextId = `select-help-text-${this.attrId}`;
+  private readonly labelId = `select-label-${this.attrId}`;
+  private readonly menuId = `select-menu-${this.attrId}`;
   private resizeObserver: ResizeObserver;
 
   @state() private hasFocus = false;
@@ -107,7 +106,7 @@ export default class SlSelect extends LitElement {
   @property({ type: Boolean }) hoist = false;
 
   /** The value of the control. This will be a string or an array depending on `multiple`. */
-  @property() value: string | Array<string> = '';
+  @property() value: string | string[] = '';
 
   /** Draws a filled select. */
   @property({ type: Boolean, reflect: true }) filled = false;
@@ -116,10 +115,10 @@ export default class SlSelect extends LitElement {
   @property({ type: Boolean, reflect: true }) pill = false;
 
   /** The select's label. Alternatively, you can use the label slot. */
-  @property() label: string;
+  @property() label = '';
 
   /** The select's help text. Alternatively, you can use the help-text slot. */
-  @property({ attribute: 'help-text' }) helpText: string;
+  @property({ attribute: 'help-text' }) helpText = '';
 
   /** The select's required attribute. */
   @property({ type: Boolean, reflect: true }) required = false;
@@ -162,7 +161,7 @@ export default class SlSelect extends LitElement {
   }
 
   getItemLabel(item: SlMenuItem) {
-    const slot = item.shadowRoot!.querySelector('slot:not([name])') as HTMLSlotElement;
+    const slot = item.shadowRoot!.querySelector<HTMLSlotElement>('slot:not([name])');
     return getTextContent(slot);
   }
 
@@ -204,17 +203,15 @@ export default class SlSelect extends LitElement {
     this.syncItemsFromValue();
   }
 
-  @watch('disabled')
+  @watch('disabled', { waitUntilFirstUpdate: true })
   handleDisabledChange() {
     if (this.disabled && this.isOpen) {
       this.dropdown.hide();
     }
 
     // Disabled form controls are always valid, so we need to recheck validity when the state changes
-    if (this.input) {
-      this.input.disabled = this.disabled;
-      this.invalid = !this.input.checkValidity();
-    }
+    this.input.disabled = this.disabled;
+    this.invalid = !this.input.checkValidity();
   }
 
   handleFocus() {
@@ -253,13 +250,13 @@ export default class SlSelect extends LitElement {
       }
 
       // Focus on a menu item
-      if (event.key === 'ArrowDown' && firstItem) {
+      if (event.key === 'ArrowDown' && typeof firstItem !== 'undefined') {
         this.menu.setCurrentItem(firstItem);
         firstItem.focus();
         return;
       }
 
-      if (event.key === 'ArrowUp' && lastItem) {
+      if (event.key === 'ArrowUp' && typeof lastItem !== 'undefined') {
         this.menu.setCurrentItem(lastItem);
         lastItem.focus();
         return;
@@ -284,11 +281,11 @@ export default class SlSelect extends LitElement {
     this.focus();
   }
 
-  handleMenuSelect(event: CustomEvent) {
+  handleMenuSelect(event: CustomEvent<MenuSelectEventDetail>) {
     const item = event.detail.item;
 
     if (this.multiple) {
-      this.value = this.value?.includes(item.value)
+      this.value = this.value.includes(item.value)
         ? (this.value as []).filter(v => v !== item.value)
         : [...this.value, item.value];
     } else {
@@ -314,7 +311,7 @@ export default class SlSelect extends LitElement {
   handleMultipleChange() {
     // Cast to array | string based on `this.multiple`
     const value = this.getValueAsArray();
-    this.value = this.multiple ? value : value[0] || '';
+    this.value = this.multiple ? value : value[0] ?? '';
     this.syncItemsFromValue();
   }
 
@@ -324,7 +321,7 @@ export default class SlSelect extends LitElement {
 
     // Check for duplicate values in menu items
     const values: string[] = [];
-    items.map(item => {
+    items.forEach(item => {
       if (values.includes(item.value)) {
         console.error(`Duplicate value found in <sl-select> menu item: '${item.value}'`, item);
       }
@@ -337,7 +334,7 @@ export default class SlSelect extends LitElement {
 
   handleTagInteraction(event: KeyboardEvent | MouseEvent) {
     // Don't toggle the menu when a tag's clear button is activated
-    const path = event.composedPath() as Array<EventTarget>;
+    const path = event.composedPath();
     const clearButton = path.find((el: SlIconButton) => {
       if (el instanceof HTMLElement) {
         const element = el as HTMLElement;
@@ -346,7 +343,7 @@ export default class SlSelect extends LitElement {
       return false;
     });
 
-    if (clearButton) {
+    if (typeof clearButton !== 'undefined') {
       event.stopPropagation();
     }
   }
@@ -360,12 +357,9 @@ export default class SlSelect extends LitElement {
   }
 
   resizeMenu() {
-    const box = this.shadowRoot?.querySelector('.select__control') as HTMLElement;
-    this.menu.style.width = `${box.clientWidth}px`;
+    this.menu.style.width = `${this.control.clientWidth}px`;
 
-    if (this.dropdown) {
-      this.dropdown.reposition();
-    }
+    this.dropdown.reposition();
   }
 
   syncItemsFromValue() {
@@ -377,9 +371,9 @@ export default class SlSelect extends LitElement {
 
     // Sync display label and tags
     if (this.multiple) {
-      const checkedItems = items.filter(item => value.includes(item.value)) as SlMenuItem[];
+      const checkedItems = items.filter(item => value.includes(item.value));
 
-      this.displayLabel = checkedItems[0] ? this.getItemLabel(checkedItems[0]) : '';
+      this.displayLabel = checkedItems.length > 0 ? this.getItemLabel(checkedItems[0]) : '';
       this.displayTags = checkedItems.map((item: SlMenuItem) => {
         return html`
           <sl-tag
@@ -412,9 +406,9 @@ export default class SlSelect extends LitElement {
         `);
       }
     } else {
-      const checkedItem = items.filter(item => item.value === value[0])[0];
+      const checkedItem = items.find(item => item.value === value[0]);
 
-      this.displayLabel = checkedItem ? this.getItemLabel(checkedItem) : '';
+      this.displayLabel = typeof checkedItem !== 'undefined' ? this.getItemLabel(checkedItem) : '';
       this.displayTags = [];
     }
   }
@@ -434,7 +428,7 @@ export default class SlSelect extends LitElement {
   render() {
     const hasLabelSlot = this.hasSlotController.test('label');
     const hasHelpTextSlot = this.hasSlotController.test('help-text');
-    const hasSelection = this.multiple ? this.value?.length > 0 : this.value !== '';
+    const hasSelection = this.multiple ? this.value.length > 0 : this.value !== '';
 
     return renderFormControl(
       {
@@ -458,7 +452,7 @@ export default class SlSelect extends LitElement {
           class=${classMap({
             select: true,
             'select--open': this.isOpen,
-            'select--empty': this.value?.length === 0,
+            'select--empty': this.value.length === 0,
             'select--focused': this.hasFocus,
             'select--clearable': this.clearable,
             'select--disabled': this.disabled,
@@ -494,6 +488,7 @@ export default class SlSelect extends LitElement {
             )}
             aria-haspopup="true"
             aria-expanded=${this.isOpen ? 'true' : 'false'}
+            aria-controls=${this.menuId}
             tabindex=${this.disabled ? '-1' : '0'}
             @blur=${this.handleBlur}
             @focus=${this.handleFocus}
@@ -504,9 +499,11 @@ export default class SlSelect extends LitElement {
             </span>
 
             <div class="select__label">
-              ${this.displayTags.length
+              ${this.displayTags.length > 0
                 ? html` <span part="tags" class="select__tags"> ${this.displayTags} </span> `
-                : this.displayLabel || this.placeholder}
+                : this.displayLabel.length > 0
+                ? this.displayLabel
+                : this.placeholder}
             </div>
 
             ${this.clearable && hasSelection
@@ -544,7 +541,7 @@ export default class SlSelect extends LitElement {
             />
           </div>
 
-          <sl-menu part="menu" class="select__menu" @sl-select=${this.handleMenuSelect}>
+          <sl-menu part="menu" class="select__menu" @sl-select=${this.handleMenuSelect} id=${this.menuId}>
             <slot @slotchange=${this.handleMenuSlotChange}></slot>
           </sl-menu>
         </sl-dropdown>

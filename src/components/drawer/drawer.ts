@@ -2,19 +2,17 @@ import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { animateTo, stopAnimations } from '../../internal/animate';
-import { emit } from '../../internal/event';
-import { watch } from '../../internal/watch';
-import { waitForEvent } from '../../internal/event';
-import { lockBodyScrolling, unlockBodyScrolling } from '../../internal/scroll';
-import { HasSlotController } from '../../internal/slot';
-import { uppercaseFirstLetter } from '../../internal/string';
-import { isPreventScrollSupported } from '../../internal/support';
-import Modal from '../../internal/modal';
-import { setDefaultAnimation, getAnimation } from '../../utilities/animation-registry';
 import styles from './drawer.styles';
-
-import '../icon-button/icon-button';
+import '~/components/icon-button/icon-button';
+import { animateTo, stopAnimations } from '~/internal/animate';
+import { emit, waitForEvent } from '~/internal/event';
+import Modal from '~/internal/modal';
+import { lockBodyScrolling, unlockBodyScrolling } from '~/internal/scroll';
+import { HasSlotController } from '~/internal/slot';
+import { uppercaseFirstLetter } from '~/internal/string';
+import { isPreventScrollSupported } from '~/internal/support';
+import { watch } from '~/internal/watch';
+import { setDefaultAnimation, getAnimation } from '~/utilities/animation-registry';
 
 const hasPreventScroll = isPreventScrollSupported();
 
@@ -73,7 +71,7 @@ export default class SlDrawer extends LitElement {
   @query('.drawer__panel') panel: HTMLElement;
   @query('.drawer__overlay') overlay: HTMLElement;
 
-  private hasSlotController = new HasSlotController(this, 'footer');
+  private readonly hasSlotController = new HasSlotController(this, 'footer');
   private modal: Modal;
   private originalTrigger: HTMLElement | null;
 
@@ -123,7 +121,7 @@ export default class SlDrawer extends LitElement {
   /** Shows the drawer. */
   async show() {
     if (this.open) {
-      return;
+      return undefined;
     }
 
     this.open = true;
@@ -133,7 +131,7 @@ export default class SlDrawer extends LitElement {
   /** Hides the drawer */
   async hide() {
     if (!this.open) {
-      return;
+      return undefined;
     }
 
     this.open = false;
@@ -217,7 +215,7 @@ export default class SlDrawer extends LitElement {
 
       // Restore focus to the original trigger
       const trigger = this.originalTrigger;
-      if (trigger && typeof trigger.focus === 'function') {
+      if (typeof trigger?.focus === 'function') {
         setTimeout(() => trigger.focus());
       }
 
@@ -226,6 +224,7 @@ export default class SlDrawer extends LitElement {
   }
 
   render() {
+    /* eslint-disable lit-a11y/click-events-have-key-events */
     return html`
       <div
         part="base"
@@ -259,7 +258,7 @@ export default class SlDrawer extends LitElement {
                 <header part="header" class="drawer__header">
                   <span part="title" class="drawer__title" id="title">
                     <!-- If there's no label, use an invisible character to prevent the header from collapsing -->
-                    <slot name="label"> ${this.label || String.fromCharCode(65279)} </slot>
+                    <slot name="label"> ${this.label.length > 0 ? this.label : String.fromCharCode(65279)} </slot>
                   </span>
                   <sl-icon-button
                     exportparts="base:close-button"
@@ -282,6 +281,7 @@ export default class SlDrawer extends LitElement {
         </div>
       </div>
     `;
+    /* eslint-enable lit-a11y/click-events-have-key-events */
   }
 }
 

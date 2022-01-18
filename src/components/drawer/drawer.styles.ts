@@ -1,5 +1,5 @@
 import { css } from 'lit';
-import componentStyles from '../../styles/component.styles';
+import componentStyles from '~/styles/component.styles';
 
 export default css`
   ${componentStyles}

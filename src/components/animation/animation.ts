@@ -1,9 +1,9 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, queryAsync } from 'lit/decorators.js';
-import { emit } from '../../internal/event';
-import { watch } from '../../internal/watch';
-import { animations } from './animations';
 import styles from './animation.styles';
+import { animations } from './animations';
+import { emit } from '~/internal/event';
+import { watch } from '~/internal/watch';
 
 /**
  * @since 2.0
@@ -20,7 +20,7 @@ import styles from './animation.styles';
 export default class SlAnimation extends LitElement {
   static styles = styles;
 
-  private animation: Animation;
+  private animation?: Animation;
   private hasStarted = false;
 
   @queryAsync('slot') defaultSlot: Promise<HTMLSlotElement>;
@@ -56,13 +56,13 @@ export default class SlAnimation extends LitElement {
   @property() fill: FillMode = 'auto';
 
   /** The number of iterations to run before the animation completes. Defaults to `Infinity`, which loops. */
-  @property({ type: Number }) iterations: number = Infinity;
+  @property({ type: Number }) iterations = Infinity;
 
   /** The offset at which to start the animation, usually between 0 (start) and 1 (end). */
   @property({ attribute: 'iteration-start', type: Number }) iterationStart = 0;
 
   /** The keyframes to use for the animation. If this is set, `name` will be ignored. */
-  @property({ attribute: false }) keyframes: Keyframe[];
+  @property({ attribute: false }) keyframes?: Keyframe[];
 
   /**
    * Sets the animation's playback rate. The default is `1`, which plays the animation at a normal speed. Setting this
@@ -73,11 +73,11 @@ export default class SlAnimation extends LitElement {
 
   /** Gets and sets the current animation time. */
   get currentTime(): number {
-    return this.animation?.currentTime || 0;
+    return this.animation?.currentTime ?? 0;
   }
 
   set currentTime(time: number) {
-    if (this.animation) {
+    if (typeof this.animation !== 'undefined') {
       this.animation.currentTime = time;
     }
   }
@@ -104,7 +104,7 @@ export default class SlAnimation extends LitElement {
   @watch('iterations')
   @watch('iterationsStart')
   @watch('keyframes')
-  async handleAnimationChange() {
+  handleAnimationChange() {
     if (!this.hasUpdated) {
       return;
     }
@@ -126,23 +126,26 @@ export default class SlAnimation extends LitElement {
 
   @watch('play')
   handlePlayChange() {
-    if (this.animation) {
+    if (typeof this.animation !== 'undefined') {
       if (this.play && !this.hasStarted) {
         this.hasStarted = true;
         emit(this, 'sl-start');
       }
 
-      this.play ? this.animation.play() : this.animation.pause();
+      if (this.play) {
+        this.animation.play();
+      } else {
+        this.animation.pause();
+      }
 
       return true;
-    } else {
-      return false;
     }
+    return false;
   }
 
   @watch('playbackRate')
   handlePlaybackRateChange() {
-    if (this.animation) {
+    if (typeof this.animation !== 'undefined') {
       this.animation.playbackRate = this.playbackRate;
     }
   }
@@ -153,12 +156,13 @@ export default class SlAnimation extends LitElement {
   }
 
   async createAnimation() {
-    const easing = animations.easings[this.easing] || this.easing;
-    const keyframes: Keyframe[] = this.keyframes ? this.keyframes : (animations as any)[this.name];
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- The specified easing may not exist
+    const easing = animations.easings[this.easing] ?? this.easing;
+    const keyframes = this.keyframes ?? (animations as unknown as Partial<Record<string, Keyframe[]>>)[this.name];
     const slot = await this.defaultSlot;
-    const element = slot.assignedElements()[0] as HTMLElement;
+    const element = slot.assignedElements()[0] as HTMLElement | undefined;
 
-    if (!element) {
+    if (typeof element === 'undefined' || typeof keyframes === 'undefined') {
       return false;
     }
 
@@ -188,7 +192,7 @@ export default class SlAnimation extends LitElement {
   }
 
   destroyAnimation() {
-    if (this.animation) {
+    if (typeof this.animation !== 'undefined') {
       this.animation.cancel();
       this.animation.removeEventListener('cancel', this.handleAnimationCancel);
       this.animation.removeEventListener('finish', this.handleAnimationFinish);
@@ -198,16 +202,12 @@ export default class SlAnimation extends LitElement {
 
   /** Clears all KeyframeEffects caused by this animation and aborts its playback. */
   cancel() {
-    try {
-      this.animation.cancel();
-    } catch {}
+    this.animation?.cancel();
   }
 
   /** Sets the playback time to the end of the animation corresponding to the current playback direction. */
   finish() {
-    try {
-      this.animation.finish();
-    } catch {}
+    this.animation?.finish();
   }
 
   render() {

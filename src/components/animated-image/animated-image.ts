@@ -1,10 +1,9 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
-import { watch } from '../../internal/watch';
-import { emit } from '../../internal/event';
 import styles from './animated-image.styles';
-
-import '../icon/icon';
+import '~/components/icon/icon';
+import { emit } from '~/internal/event';
+import { watch } from '~/internal/watch';
 
 /**
  * @since 2.0
@@ -63,7 +62,7 @@ export default class SlAnimatedImage extends LitElement {
   }
 
   @watch('play')
-  async handlePlayChange() {
+  handlePlayChange() {
     // When the animation starts playing, reset the src so it plays from the beginning. Since the src is cached, this
     // won't trigger another request.
     if (this.play) {

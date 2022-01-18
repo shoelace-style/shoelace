@@ -1,10 +1,8 @@
 import { expect, fixture, html } from '@open-wc/testing';
-import '../../../dist/shoelace.js';
-import type SlVisuallyHidden from './visually-hidden';
 
 describe('<sl-visually-hidden>', () => {
   it('should render but not display visually hidden content', async () => {
-    const el = <SlVisuallyHidden>await fixture(html`
+    const el = await fixture(html`
       <sl-visually-hidden>
         <a href="#">Skip to main content</a>
       </sl-visually-hidden>
@@ -20,13 +18,13 @@ describe('<sl-visually-hidden>', () => {
 
   // should show visually hidden content when focused
   it('should show visually hidden content when focused', async () => {
-    const el = <SlVisuallyHidden>await fixture(html`
+    const el = await fixture(html`
       <sl-visually-hidden>
         <a href="#">Skip to main content</a>
       </sl-visually-hidden>
     `);
 
-    const a = el.querySelector('a');
+    const a = el.querySelector('a')!;
     a.focus();
 
     const { width, height, overflow, clipPath } = getComputedStyle(el);

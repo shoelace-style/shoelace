@@ -1,9 +1,8 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import styles from './breadcrumb.styles';
-import type SlBreadcrumbItem from '../breadcrumb-item/breadcrumb-item';
-
-import '../icon/icon';
+import type SlBreadcrumbItem from '~/components/breadcrumb-item/breadcrumb-item';
+import '~/components/icon/icon';
 
 /**
  * @since 2.0
@@ -35,7 +34,7 @@ export default class SlBreadcrumb extends LitElement {
 
     // Clone it, remove ids, and slot it
     const clone = separator.cloneNode(true) as HTMLElement;
-    [clone, ...clone.querySelectorAll('[id]')].map(el => el.removeAttribute('id'));
+    [clone, ...clone.querySelectorAll('[id]')].forEach(el => el.removeAttribute('id'));
     clone.slot = 'separator';
 
     return clone;
@@ -46,10 +45,10 @@ export default class SlBreadcrumb extends LitElement {
       item => item.tagName.toLowerCase() === 'sl-breadcrumb-item'
     ) as SlBreadcrumbItem[];
 
-    items.map((item, index) => {
+    items.forEach((item, index) => {
       // Append separators to each item if they don't already have one
-      const separator = item.querySelector('[slot="separator"]') as HTMLElement;
-      if (!separator) {
+      const separator = item.querySelector('[slot="separator"]');
+      if (separator === null) {
         item.append(this.getSeparator());
       }
 

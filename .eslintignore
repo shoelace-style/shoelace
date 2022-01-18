@@ -1,0 +1,9 @@
+.cache
+docs/dist
+docs/search.json
+docs/**/*.min.js
+dist
+examples
+node_modules
+src/react
+scripts

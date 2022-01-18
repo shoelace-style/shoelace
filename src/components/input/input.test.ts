@@ -1,13 +1,10 @@
-import { expect, fixture, html, waitUntil } from '@open-wc/testing';
-import sinon from 'sinon';
-
-import '../../../dist/shoelace.js';
+import { expect, fixture, html } from '@open-wc/testing';
 import type SlInput from './input';
 
 describe('<sl-input>', () => {
   it('should be disabled with the disabled attribute', async () => {
     const el = await fixture<SlInput>(html` <sl-input disabled></sl-input> `);
-    const input = el.shadowRoot?.querySelector('[part="input"]') as HTMLInputElement;
+    const input = el.shadowRoot!.querySelector<HTMLInputElement>('[part="input"]')!;
 
     expect(input.disabled).to.be.true;
   });

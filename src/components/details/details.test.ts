@@ -1,8 +1,6 @@
 // cspell:dictionaries lorem-ipsum
 import { expect, fixture, html, waitUntil } from '@open-wc/testing';
 import sinon from 'sinon';
-
-import '../../../dist/shoelace.js';
 import type SlDetails from './details';
 
 describe('<sl-details>', () => {
@@ -14,7 +12,7 @@ describe('<sl-details>', () => {
         consequat.
       </sl-details>
     `);
-    const body = el.shadowRoot?.querySelector('.details__body') as HTMLElement;
+    const body = el.shadowRoot!.querySelector<HTMLElement>('.details__body')!;
 
     expect(body.hidden).to.be.false;
   });
@@ -27,7 +25,7 @@ describe('<sl-details>', () => {
         consequat.
       </sl-details>
     `);
-    const body = el.shadowRoot?.querySelector('.details__body') as HTMLElement;
+    const body = el.shadowRoot!.querySelector<HTMLElement>('.details__body')!;
 
     expect(body.hidden).to.be.true;
   });
@@ -40,7 +38,7 @@ describe('<sl-details>', () => {
         consequat.
       </sl-details>
     `);
-    const body = el.shadowRoot?.querySelector('.details__body') as HTMLElement;
+    const body = el.shadowRoot!.querySelector<HTMLElement>('.details__body')!;
     const showHandler = sinon.spy();
     const afterShowHandler = sinon.spy();
 
@@ -64,7 +62,7 @@ describe('<sl-details>', () => {
         consequat.
       </sl-details>
     `);
-    const body = el.shadowRoot?.querySelector('.details__body') as HTMLElement;
+    const body = el.shadowRoot!.querySelector<HTMLElement>('.details__body')!;
     const hideHandler = sinon.spy();
     const afterHideHandler = sinon.spy();
 
@@ -88,7 +86,7 @@ describe('<sl-details>', () => {
         consequat.
       </sl-details>
     `);
-    const body = el.shadowRoot?.querySelector('.details__body') as HTMLElement;
+    const body = el.shadowRoot!.querySelector<HTMLElement>('.details__body')!;
     const showHandler = sinon.spy();
     const afterShowHandler = sinon.spy();
 
@@ -112,7 +110,7 @@ describe('<sl-details>', () => {
         consequat.
       </sl-details>
     `);
-    const body = el.shadowRoot?.querySelector('.details__body') as HTMLElement;
+    const body = el.shadowRoot!.querySelector<HTMLElement>('.details__body')!;
     const hideHandler = sinon.spy();
     const afterHideHandler = sinon.spy();
 
@@ -141,13 +139,13 @@ describe('<sl-details>', () => {
     `);
     const first = el.querySelectorAll('sl-details')[0];
     const second = el.querySelectorAll('sl-details')[1];
-    const firstBody = first.shadowRoot?.querySelector('.details__body');
-    const secondBody = second.shadowRoot?.querySelector('.details__body');
+    const firstBody = first.shadowRoot!.querySelector('.details__body')!;
+    const secondBody = second.shadowRoot!.querySelector('.details__body')!;
 
     await first.show();
     await second.show();
 
-    expect(firstBody!.clientHeight).to.equal(200);
-    expect(secondBody!.clientHeight).to.equal(400);
+    expect(firstBody.clientHeight).to.equal(200);
+    expect(secondBody.clientHeight).to.equal(400);
   });
 });

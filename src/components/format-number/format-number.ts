@@ -1,6 +1,6 @@
 import { LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { LocalizeController } from '../../utilities/localize';
+import { LocalizeController } from '~/utilities/localize';
 
 /**
  * @since 2.0
@@ -8,7 +8,7 @@ import { LocalizeController } from '../../utilities/localize';
  */
 @customElement('sl-format-number')
 export default class SlFormatNumber extends LitElement {
-  private localize = new LocalizeController(this);
+  private readonly localize = new LocalizeController(this);
 
   /** The number to format. */
   @property({ type: Number }) value = 0;

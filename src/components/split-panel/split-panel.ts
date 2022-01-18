@@ -1,11 +1,12 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { clamp } from '../../internal/math';
-import { emit } from '../../internal/event';
-import { watch } from '../../internal/watch';
-import { LocalizeController } from '../../utilities/localize';
 import styles from './split-panel.styles';
+import { drag } from '~/internal/drag';
+import { emit } from '~/internal/event';
+import { clamp } from '~/internal/math';
+import { watch } from '~/internal/watch';
+import { LocalizeController } from '~/utilities/localize';
 
 /**
  * @since 2.0
@@ -33,7 +34,7 @@ export default class SlSplitPanel extends LitElement {
   static styles = styles;
 
   private cachedPositionInPixels: number;
-  private localize = new LocalizeController(this);
+  private readonly localize = new LocalizeController(this);
   private resizeObserver: ResizeObserver;
   private size: number;
 
@@ -61,13 +62,13 @@ export default class SlSplitPanel extends LitElement {
    * primary panel is designated, it will maintain its size and the other panel will grow or shrink as needed when the
    * host element is resized.
    */
-  @property() primary: 'start' | 'end';
+  @property() primary?: 'start' | 'end';
 
   /**
    * One or more space-separated values at which the divider should snap. Values can be in pixels or percentages, e.g.
    * `"100px 50%"`.
    */
-  @property() snap: string;
+  @property() snap?: string;
 
   /** How close the divider must be to a snap point until snapping occurs. */
   @property({ type: Number, attribute: 'snap-threshold' }) snapThreshold = 12;
@@ -107,31 +108,6 @@ export default class SlSplitPanel extends LitElement {
     // Prevent text selection when dragging
     event.preventDefault();
 
-    function drag(container: HTMLElement, onMove: (x: number, y: number) => void) {
-      const move = (event: any) => {
-        const dims = container.getBoundingClientRect();
-        const defaultView = container.ownerDocument.defaultView!;
-        const offsetX = dims.left + defaultView.pageXOffset;
-        const offsetY = dims.top + defaultView.pageYOffset;
-        const x = (event.changedTouches ? event.changedTouches[0].pageX : event.pageX) - offsetX;
-        const y = (event.changedTouches ? event.changedTouches[0].pageY : event.pageY) - offsetY;
-
-        onMove(x, y);
-      };
-
-      const stop = () => {
-        document.removeEventListener('mousemove', move);
-        document.removeEventListener('touchmove', move);
-        document.removeEventListener('mouseup', stop);
-        document.removeEventListener('touchend', stop);
-      };
-
-      document.addEventListener('mousemove', move, { passive: true });
-      document.addEventListener('touchmove', move, { passive: true });
-      document.addEventListener('mouseup', stop);
-      document.addEventListener('touchend', stop);
-    }
-
     drag(this, (x, y) => {
       let newPositionInPixels = this.vertical ? y : x;
 
@@ -141,10 +117,10 @@ export default class SlSplitPanel extends LitElement {
       }
 
       // Check snap points
-      if (this.snap) {
+      if (typeof this.snap !== 'undefined') {
         const snaps = this.snap.split(' ');
 
-        snaps.map(value => {
+        snaps.forEach(value => {
           let snapPoint: number;
 
           if (value.endsWith('%')) {
@@ -173,7 +149,7 @@ export default class SlSplitPanel extends LitElement {
 
     if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) {
       let newPosition = this.position;
-      let incr = (event.shiftKey ? 10 : 1) * (this.primary === 'end' ? -1 : 1);
+      const incr = (event.shiftKey ? 10 : 1) * (this.primary === 'end' ? -1 : 1);
 
       event.preventDefault();
 
@@ -214,7 +190,7 @@ export default class SlSplitPanel extends LitElement {
     this.size = this.vertical ? height : width;
 
     // Resize when a primary panel is set
-    if (this.primary && this.cachedPositionInPixels) {
+    if (typeof this.primary !== 'undefined') {
       this.position = this.pixelsToPercentage(this.cachedPositionInPixels);
     }
   }

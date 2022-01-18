@@ -3,12 +3,11 @@ import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-import { emit } from '../../internal/event';
-import { watch } from '../../internal/watch';
-import { clamp } from '../../internal/math';
 import styles from './rating.styles';
-
-import '../icon/icon';
+import '~/components/icon/icon';
+import { emit } from '~/internal/event';
+import { clamp } from '~/internal/math';
+import { watch } from '~/internal/watch';
 
 /**
  * @since 2.0
@@ -50,9 +49,7 @@ export default class SlRating extends LitElement {
   @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** The name of the icon to display as the symbol. */
-  // @ts-ignore
-  @property() getSymbol: (value: number) => string = (value: number) =>
-    '<sl-icon name="star-fill" library="system"></sl-icon>';
+  @property() getSymbol: (value: number) => string = () => '<sl-icon name="star-fill" library="system"></sl-icon>';
 
   /** Sets focus on the rating. */
   focus(options?: FocusOptions) {
@@ -185,7 +182,7 @@ export default class SlRating extends LitElement {
         })}
         aria-disabled=${this.disabled ? 'true' : 'false'}
         aria-readonly=${this.readonly ? 'true' : 'false'}
-        aria-value=${this.value}
+        aria-valuenow=${this.value}
         aria-valuemin=${0}
         aria-valuemax=${this.max}
         tabindex=${this.disabled ? '-1' : '0'}

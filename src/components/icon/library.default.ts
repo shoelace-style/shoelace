@@ -1,5 +1,5 @@
-import { getBasePath } from '../../utilities/base-path';
 import type { IconLibrary } from './library';
+import { getBasePath } from '~/utilities/base-path';
 
 const library: IconLibrary = {
   name: 'default',

@@ -1,13 +1,10 @@
-import { expect, fixture, html, waitUntil } from '@open-wc/testing';
-import sinon from 'sinon';
-
-import '../../../dist/shoelace.js';
+import { expect, fixture, html } from '@open-wc/testing';
 import type SlTextarea from './textarea';
 
 describe('<sl-textarea>', () => {
   it('should be disabled with the disabled attribute', async () => {
     const el = await fixture<SlTextarea>(html` <sl-textarea disabled></sl-textarea> `);
-    const textarea = el.shadowRoot?.querySelector('[part="textarea"]') as HTMLInputElement;
+    const textarea = el.shadowRoot!.querySelector<HTMLTextAreaElement>('[part="textarea"]')!;
 
     expect(textarea.disabled).to.be.true;
   });

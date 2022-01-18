@@ -1,13 +1,11 @@
 import { expect, fixture, html, oneEvent } from '@open-wc/testing';
 import { sendKeys } from '@web/test-runner-commands';
-
-import '../../../dist/shoelace.js';
 import type SlSwitch from './switch';
 
 describe('<sl-switch>', () => {
   it('should be disabled with the disabled attribute', async () => {
     const el = await fixture<SlSwitch>(html` <sl-switch disabled></sl-switch> `);
-    const input = el.shadowRoot?.querySelector('input');
+    const input = el.shadowRoot!.querySelector<HTMLInputElement>('input')!;
 
     expect(input.disabled).to.be.true;
   });
@@ -20,7 +18,7 @@ describe('<sl-switch>', () => {
 
   it('should fire sl-change when clicked', async () => {
     const el = await fixture<SlSwitch>(html` <sl-switch></sl-switch> `);
-    setTimeout(() => el.shadowRoot?.querySelector('input').click());
+    setTimeout(() => el.shadowRoot!.querySelector('input')!.click());
     const event = await oneEvent(el, 'sl-change');
     expect(event.target).to.equal(el);
     expect(el.checked).to.be.true;

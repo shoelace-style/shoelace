@@ -1,14 +1,12 @@
 import { expect, fixture, html, oneEvent } from '@open-wc/testing';
 import { sendKeys } from '@web/test-runner-commands';
-
-import '../../../dist/shoelace.js';
 import type SlRadio from './radio';
-import type SlRadioGroup from '../radio-group/radio-group';
+import type SlRadioGroup from '~/components/radio-group/radio-group';
 
 describe('<sl-radio>', () => {
   it('should be disabled with the disabled attribute', async () => {
     const el = await fixture<SlRadio>(html` <sl-radio disabled></sl-radio> `);
-    const radio = el.shadowRoot?.querySelector('input');
+    const radio = el.shadowRoot!.querySelector<HTMLInputElement>('input')!;
 
     expect(radio.disabled).to.be.true;
   });
@@ -21,7 +19,7 @@ describe('<sl-radio>', () => {
 
   it('should fire sl-change when clicked', async () => {
     const el = await fixture<SlRadio>(html` <sl-radio></sl-radio> `);
-    setTimeout(() => el.shadowRoot?.querySelector('input').click());
+    setTimeout(() => el.shadowRoot!.querySelector('input')!.click());
     const event = await oneEvent(el, 'sl-change');
     expect(event.target).to.equal(el);
     expect(el.checked).to.be.true;
@@ -29,7 +27,7 @@ describe('<sl-radio>', () => {
 
   it('should fire sl-change when toggled via keyboard - space', async () => {
     const el = await fixture<SlRadio>(html` <sl-radio></sl-radio> `);
-    const input = el.shadowRoot?.querySelector('input');
+    const input = el.shadowRoot!.querySelector<HTMLInputElement>('input')!;
     input.focus();
     setTimeout(() => sendKeys({ press: ' ' }));
     const event = await oneEvent(el, 'sl-change');
@@ -44,9 +42,9 @@ describe('<sl-radio>', () => {
         <sl-radio id="radio-2"></sl-radio>
       </sl-radio-group>
     `);
-    const radio1: SlRadio = radioGroup.querySelector('sl-radio#radio-1');
-    const radio2: SlRadio = radioGroup.querySelector('sl-radio#radio-2');
-    const input1 = radio1.shadowRoot?.querySelector('input');
+    const radio1 = radioGroup.querySelector<SlRadio>('sl-radio#radio-1')!;
+    const radio2 = radioGroup.querySelector<SlRadio>('sl-radio#radio-2')!;
+    const input1 = radio1.shadowRoot!.querySelector<HTMLInputElement>('input')!;
     input1.focus();
     setTimeout(() => sendKeys({ press: 'ArrowRight' }));
     const event = await oneEvent(radio2, 'sl-change');

@@ -1,15 +1,16 @@
-//
-// Serializes a form and returns a plain object. If a form control with the same name appears more than once, the
-// property will be converted to an array.
-//
+/**
+ * Serializes a form and returns a plain object. If a form control with the same name appears more than once, the
+ * property will be converted to an array.
+ */
 export function serialize(form: HTMLFormElement) {
   const formData = new FormData(form);
-  const object: { [key: string]: any } = {};
+  const object: Record<string, unknown> = {};
 
   formData.forEach((value, key) => {
     if (Reflect.has(object, key)) {
-      if (Array.isArray(object[key])) {
-        object[key].push(value);
+      const entry = object[key];
+      if (Array.isArray(entry)) {
+        entry.push(value);
       } else {
         object[key] = [object[key], value];
       }

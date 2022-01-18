@@ -1,8 +1,7 @@
 import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import styles from './tab-panel.styles';
-
-let id = 0;
+import { autoIncrement } from '~/internal/auto-increment';
 
 /**
  * @since 2.0
@@ -18,7 +17,8 @@ let id = 0;
 export default class SlTabPanel extends LitElement {
   static styles = styles;
 
-  private componentId = `sl-tab-panel-${++id}`;
+  private readonly attrId = autoIncrement();
+  private readonly componentId = `sl-tab-panel-${this.attrId}`;
 
   /** The tab panel's name. */
   @property({ reflect: true }) name = '';
@@ -28,7 +28,7 @@ export default class SlTabPanel extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.id = this.id || this.componentId;
+    this.id = this.id.length > 0 ? this.id : this.componentId;
   }
 
   render() {

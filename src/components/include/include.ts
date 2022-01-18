@@ -1,9 +1,9 @@
 import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { emit } from '../../internal/event';
-import { watch } from '../../internal/watch';
-import { requestInclude } from './request';
 import styles from './include.styles';
+import { requestInclude } from './request';
+import { emit } from '~/internal/event';
+import { watch } from '~/internal/watch';
 
 /**
  * @since 2.0
@@ -16,7 +16,11 @@ import styles from './include.styles';
 export default class SlInclude extends LitElement {
   static styles = styles;
 
-  /** The location of the HTML file to include. */
+  /**
+   * The location of the HTML file to include.
+   *
+   * WARNING: Be sure you trust the content you are including as it will be executed as code and can result in XSS attacks.
+   */
   @property() src: string;
 
   /** The fetch mode to use. */
@@ -31,7 +35,7 @@ export default class SlInclude extends LitElement {
   executeScript(script: HTMLScriptElement) {
     // Create a copy of the script and swap it out so the browser executes it
     const newScript = document.createElement('script');
-    [...script.attributes].map(attr => newScript.setAttribute(attr.name, attr.value));
+    [...script.attributes].forEach(attr => newScript.setAttribute(attr.name, attr.value));
     newScript.textContent = script.textContent;
     script.parentNode!.replaceChild(newScript, script);
   }
@@ -47,7 +51,7 @@ export default class SlInclude extends LitElement {
         return;
       }
 
-      if (!file) {
+      if (typeof file === 'undefined') {
         return;
       }
 
@@ -59,7 +63,7 @@ export default class SlInclude extends LitElement {
       this.innerHTML = file.html;
 
       if (this.allowScripts) {
-        [...this.querySelectorAll('script')].map(script => this.executeScript(script));
+        [...this.querySelectorAll('script')].forEach(script => this.executeScript(script));
       }
 
       emit(this, 'sl-load');

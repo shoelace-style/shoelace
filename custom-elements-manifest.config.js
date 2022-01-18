@@ -4,6 +4,7 @@ import { pascalCase } from 'pascal-case';
 
 const packageData = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
 const { name, description, version, author, homepage, license } = packageData;
+// eslint-disable-next-line func-style
 const noDash = string => string.replace(/^\s?-/, '').trim();
 
 export default {
@@ -13,7 +14,7 @@ export default {
     // Append package data
     {
       name: 'shoelace-package-data',
-      packageLinkPhase({ customElementsManifest, context }) {
+      packageLinkPhase({ customElementsManifest }) {
         customElementsManifest.package = { name, description, version, author, homepage, license };
       }
     },
@@ -21,9 +22,9 @@ export default {
     // Parse custom jsDoc tags
     {
       name: 'shoelace-custom-tags',
-      analyzePhase({ ts, node, moduleDoc, context }) {
+      analyzePhase({ ts, node, moduleDoc }) {
         switch (node.kind) {
-          case ts.SyntaxKind.ClassDeclaration:
+          case ts.SyntaxKind.ClassDeclaration: {
             const className = node.name.getText();
             const classDoc = moduleDoc?.declarations?.find(declaration => declaration.name === className);
             const customTags = ['animation', 'dependency', 'since', 'status'];
@@ -39,8 +40,8 @@ export default {
               });
             });
 
-            const parsed = parse(customComments + '\n */');
-            parsed[0].tags?.map(t => {
+            const parsed = parse(`${customComments}\n */`);
+            parsed[0].tags?.forEach(t => {
               switch (t.tag) {
                 // Animations
                 case 'animation':
@@ -80,23 +81,25 @@ export default {
                   });
               }
             });
+          }
         }
       }
     },
 
     {
       name: 'shoelace-react-event-names',
-      analyzePhase({ ts, node, moduleDoc, context }) {
+      analyzePhase({ ts, node, moduleDoc }) {
         switch (node.kind) {
-          case ts.SyntaxKind.ClassDeclaration:
+          case ts.SyntaxKind.ClassDeclaration: {
             const className = node.name.getText();
             const classDoc = moduleDoc?.declarations?.find(declaration => declaration.name === className);
 
             if (classDoc?.events) {
-              classDoc.events.map(event => {
+              classDoc.events.forEach(event => {
                 event.reactName = `on${pascalCase(event.name)}`;
               });
             }
+          }
         }
       }
     }

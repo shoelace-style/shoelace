@@ -6,18 +6,17 @@ interface IncludeFile {
 
 const includeFiles = new Map<string, Promise<IncludeFile>>();
 
-export const requestInclude = async (src: string, mode: 'cors' | 'no-cors' | 'same-origin' = 'cors') => {
+export function requestInclude(src: string, mode: 'cors' | 'no-cors' | 'same-origin' = 'cors'): Promise<IncludeFile> {
   if (includeFiles.has(src)) {
-    return includeFiles.get(src);
-  } else {
-    const request = fetch(src, { mode: mode }).then(async response => {
-      return {
-        ok: response.ok,
-        status: response.status,
-        html: await response.text()
-      };
-    });
-    includeFiles.set(src, request);
-    return request;
+    return includeFiles.get(src)!;
   }
-};
+  const fileDataPromise = fetch(src, { mode: mode }).then(async response => {
+    return {
+      ok: response.ok,
+      status: response.status,
+      html: await response.text()
+    };
+  });
+  includeFiles.set(src, fileDataPromise);
+  return fileDataPromise;
+}

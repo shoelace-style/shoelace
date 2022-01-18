@@ -1,7 +1,7 @@
-import chalk from 'chalk';
 import fs from 'fs';
-import del from 'del';
 import path from 'path';
+import chalk from 'chalk';
+import del from 'del';
 import { pascalCase } from 'pascal-case';
 import prettier from 'prettier';
 import prettierConfig from '../prettier.config.cjs';

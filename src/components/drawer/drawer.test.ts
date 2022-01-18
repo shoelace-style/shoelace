@@ -1,8 +1,6 @@
 // cspell:dictionaries lorem-ipsum
 import { expect, fixture, html, waitUntil } from '@open-wc/testing';
 import sinon from 'sinon';
-
-import '../../../dist/shoelace.js';
 import type SlDrawer from './drawer';
 
 describe('<sl-drawer>', () => {
@@ -10,7 +8,7 @@ describe('<sl-drawer>', () => {
     const el = await fixture<SlDrawer>(html`
       <sl-drawer open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sl-drawer>
     `);
-    const base = el.shadowRoot?.querySelector('[part="base"]') as HTMLElement;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
 
     expect(base.hidden).to.be.false;
   });
@@ -19,7 +17,7 @@ describe('<sl-drawer>', () => {
     const el = await fixture<SlDrawer>(
       html` <sl-drawer>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sl-drawer> `
     );
-    const base = el.shadowRoot?.querySelector('[part="base"]') as HTMLElement;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
 
     expect(base.hidden).to.be.true;
   });
@@ -28,7 +26,7 @@ describe('<sl-drawer>', () => {
     const el = await fixture<SlDrawer>(html`
       <sl-drawer>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sl-drawer>
     `);
-    const base = el.shadowRoot?.querySelector('[part="base"]') as HTMLElement;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
     const showHandler = sinon.spy();
     const afterShowHandler = sinon.spy();
 
@@ -48,7 +46,7 @@ describe('<sl-drawer>', () => {
     const el = await fixture<SlDrawer>(html`
       <sl-drawer open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sl-drawer>
     `);
-    const base = el.shadowRoot?.querySelector('[part="base"]') as HTMLElement;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
     const hideHandler = sinon.spy();
     const afterHideHandler = sinon.spy();
 
@@ -68,7 +66,7 @@ describe('<sl-drawer>', () => {
     const el = await fixture<SlDrawer>(html`
       <sl-drawer>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sl-drawer>
     `);
-    const base = el.shadowRoot?.querySelector('[part="base"]') as HTMLElement;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
     const showHandler = sinon.spy();
     const afterShowHandler = sinon.spy();
 
@@ -88,7 +86,7 @@ describe('<sl-drawer>', () => {
     const el = await fixture<SlDrawer>(html`
       <sl-drawer open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sl-drawer>
     `);
-    const base = el.shadowRoot?.querySelector('[part="base"]') as HTMLElement;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
     const hideHandler = sinon.spy();
     const afterHideHandler = sinon.spy();
 
@@ -108,9 +106,11 @@ describe('<sl-drawer>', () => {
     const el = await fixture<SlDrawer>(html`
       <sl-drawer open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sl-drawer>
     `);
-    const overlay = el.shadowRoot?.querySelector('[part="overlay"]') as HTMLElement;
+    const overlay = el.shadowRoot!.querySelector<HTMLElement>('[part="overlay"]')!;
 
-    el.addEventListener('sl-request-close', event => event.preventDefault());
+    el.addEventListener('sl-request-close', event => {
+      event.preventDefault();
+    });
     overlay.click();
 
     expect(el.open).to.be.true;
@@ -118,8 +118,8 @@ describe('<sl-drawer>', () => {
 
   it('should allow initial focus to be set', async () => {
     const el = await fixture<SlDrawer>(html` <sl-drawer><input /></sl-drawer> `);
-    const input = el.querySelector('input');
-    const initialFocusHandler = sinon.spy(event => {
+    const input = el.querySelector<HTMLInputElement>('input')!;
+    const initialFocusHandler = sinon.spy((event: InputEvent) => {
       event.preventDefault();
       input.focus();
     });

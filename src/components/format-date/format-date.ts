@@ -1,6 +1,6 @@
 import { LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { LocalizeController } from '../../utilities/localize';
+import { LocalizeController } from '~/utilities/localize';
 
 /**
  * @since 2.0
@@ -8,7 +8,7 @@ import { LocalizeController } from '../../utilities/localize';
  */
 @customElement('sl-format-date')
 export default class SlFormatDate extends LitElement {
-  private localize = new LocalizeController(this);
+  private readonly localize = new LocalizeController(this);
 
   /** The date/time to format. If not set, the current date and time will be used. */
   @property() date: Date | string = new Date();
@@ -55,7 +55,7 @@ export default class SlFormatDate extends LitElement {
 
     // Check for an invalid date
     if (isNaN(date.getMilliseconds())) {
-      return;
+      return undefined;
     }
 
     return this.localize.date(date, {

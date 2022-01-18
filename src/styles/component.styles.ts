@@ -1,5 +1,5 @@
 import { css } from 'lit';
-import utilityStyles from '../styles/utility.styles';
+import utilityStyles from '~/styles/utility.styles';
 
 export default css`
   :host {
