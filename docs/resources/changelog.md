@@ -8,7 +8,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
-- Implemented stricter linting to improve consistency and reduce errors, which resulting in many small refactors throughout the codebase [#647](https://github.com/shoelace-style/shoelace/pull/647)
+- Implemented stricter linting to improve consistency and reduce errors, which resulted in many small refactors throughout the codebase [#647](https://github.com/shoelace-style/shoelace/pull/647)
 - Updated minimum Node version to 14.17
 
 ## 2.0.0-beta.64
