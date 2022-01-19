@@ -130,8 +130,11 @@ fs.mkdirSync(outdir, { recursive: true });
     bs.init(browserSyncConfig, () => {
       // This init callback gets executed after the server has started
       const socketIoConfig = browserSyncConfig.socket.socketIoClientConfig;
-      // Wait enough time for any open, detached clients to have a chance to reconnect. This will be used to determine if we reload an existing tab or open a new one.
+
+      // Wait enough time for any open, detached clients to have a chance to reconnect. This will be used to determine
+      // if we reload an existing tab or open a new one.
       const tabReattachDelay = socketIoConfig.reconnectionDelayMax * 2 + socketIoConfig.timeout;
+
       setTimeout(() => {
         const url = `http://localhost:${port}`;
         console.log(chalk.cyan(`Launched the Shoelace dev server at ${url} 🥾\n`));
