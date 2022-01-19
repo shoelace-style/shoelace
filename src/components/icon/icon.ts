@@ -57,7 +57,7 @@ export default class SlIcon extends LitElement {
 
   private getUrl() {
     const library = getIconLibrary(this.library);
-    if (typeof this.name !== 'undefined' && typeof library !== 'undefined') {
+    if (this.name && library) {
       return library.resolver(this.name);
     }
     return this.src;
@@ -74,7 +74,7 @@ export default class SlIcon extends LitElement {
   async setIcon() {
     const library = getIconLibrary(this.library);
     const url = this.getUrl();
-    if (typeof url !== 'undefined' && url.length > 0) {
+    if (url) {
       try {
         const file = await requestIcon(url);
         if (url !== this.getUrl()) {

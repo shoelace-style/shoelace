@@ -149,19 +149,14 @@ export default class SlTextarea extends LitElement {
   }
 
   /** Gets or sets the textarea's scroll position. */
-  scrollPosition(position: { top?: number; left?: number }): void;
-  scrollPosition(): { top: number; left: number };
   scrollPosition(position?: { top?: number; left?: number }): { top: number; left: number } | undefined {
-    if (typeof position !== 'undefined') {
-      if (typeof position.top === 'number') {
-        this.input.scrollTop = position.top;
-      }
-      if (typeof position.left === 'number') {
-        this.input.scrollLeft = position.left;
-      }
-      return undefined;
+    if (position) {
+      if (typeof position.top === 'number') this.input.scrollTop = position.top;
+      if (typeof position.left === 'number') this.input.scrollLeft = position.left;
+      return;
     }
 
+    // eslint-disable-next-line consistent-return
     return {
       top: this.input.scrollTop,
       left: this.input.scrollTop

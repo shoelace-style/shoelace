@@ -44,14 +44,14 @@ export class FormSubmitController implements ReactiveController {
   hostConnected() {
     this.form = this.options.form(this.host);
 
-    if (typeof this.form !== 'undefined' && this.form !== null) {
+    if (this.form) {
       this.form.addEventListener('formdata', this.handleFormData);
       this.form.addEventListener('submit', this.handleFormSubmit);
     }
   }
 
   hostDisconnected() {
-    if (typeof this.form !== 'undefined' && this.form !== null) {
+    if (this.form) {
       this.form.removeEventListener('formdata', this.handleFormData);
       this.form.removeEventListener('submit', this.handleFormSubmit);
       this.form = undefined;
@@ -78,13 +78,7 @@ export class FormSubmitController implements ReactiveController {
     const disabled = this.options.disabled(this.host);
     const reportValidity = this.options.reportValidity;
 
-    if (
-      typeof this.form !== 'undefined' &&
-      this.form !== null &&
-      !this.form.noValidate &&
-      !disabled &&
-      !reportValidity(this.host)
-    ) {
+    if (this.form && !this.form.noValidate && !disabled && !reportValidity(this.host)) {
       event.preventDefault();
       event.stopImmediatePropagation();
     }
@@ -94,7 +88,7 @@ export class FormSubmitController implements ReactiveController {
     // Calling form.submit() seems to bypass the submit event and constraint validation. Instead, we can inject a
     // native submit button into the form, click it, then remove it to simulate a standard form submission.
     const button = document.createElement('button');
-    if (typeof this.form !== 'undefined' && this.form !== null) {
+    if (this.form) {
       button.type = 'submit';
       button.style.position = 'absolute';
       button.style.width = '0';
@@ -141,8 +135,8 @@ export function renderFormControl(
   },
   input: TemplateResult
 ) {
-  const hasLabel = typeof props.label !== 'undefined' ? true : props.hasLabelSlot === true;
-  const hasHelpText = typeof props.helpText !== 'undefined' ? true : props.hasHelpTextSlot === true;
+  const hasLabel = props.label ? true : !!props.hasLabelSlot;
+  const hasHelpText = props.helpText ? true : !!props.hasHelpTextSlot;
 
   return html`
     <div

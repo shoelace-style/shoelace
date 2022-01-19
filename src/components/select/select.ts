@@ -250,13 +250,13 @@ export default class SlSelect extends LitElement {
       }
 
       // Focus on a menu item
-      if (event.key === 'ArrowDown' && typeof firstItem !== 'undefined') {
+      if (event.key === 'ArrowDown') {
         this.menu.setCurrentItem(firstItem);
         firstItem.focus();
         return;
       }
 
-      if (event.key === 'ArrowUp' && typeof lastItem !== 'undefined') {
+      if (event.key === 'ArrowUp') {
         this.menu.setCurrentItem(lastItem);
         lastItem.focus();
         return;
@@ -343,7 +343,7 @@ export default class SlSelect extends LitElement {
       return false;
     });
 
-    if (typeof clearButton !== 'undefined') {
+    if (clearButton) {
       event.stopPropagation();
     }
   }
@@ -408,7 +408,7 @@ export default class SlSelect extends LitElement {
     } else {
       const checkedItem = items.find(item => item.value === value[0]);
 
-      this.displayLabel = typeof checkedItem !== 'undefined' ? this.getItemLabel(checkedItem) : '';
+      this.displayLabel = checkedItem ? this.getItemLabel(checkedItem) : '';
       this.displayTags = [];
     }
   }

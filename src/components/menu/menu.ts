@@ -138,7 +138,7 @@ export default class SlMenu extends LitElement {
     if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
       const items = this.getAllItems({ includeDisabled: false });
       const activeItem = this.getCurrentItem();
-      let index = typeof activeItem !== 'undefined' ? items.indexOf(activeItem) : 0;
+      let index = activeItem ? items.indexOf(activeItem) : 0;
 
       if (items.length > 0) {
         event.preventDefault();

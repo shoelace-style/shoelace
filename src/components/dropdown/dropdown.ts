@@ -8,7 +8,6 @@ import type SlMenuItem from '~/components/menu-item/menu-item';
 import type SlMenu from '~/components/menu/menu';
 import { animateTo, stopAnimations } from '~/internal/animate';
 import { emit, waitForEvent } from '~/internal/event';
-import { isTruthy } from '~/internal/is-truthy';
 import { scrollIntoView } from '~/internal/scroll';
 import { getTabbableBoundary } from '~/internal/tabbable';
 import { watch } from '~/internal/watch';
@@ -95,7 +94,7 @@ export default class SlDropdown extends LitElement {
     this.handleDocumentKeyDown = this.handleDocumentKeyDown.bind(this);
     this.handleDocumentMouseDown = this.handleDocumentMouseDown.bind(this);
 
-    if (typeof this.containingElement === 'undefined') {
+    if (!this.containingElement) {
       this.containingElement = this;
     }
 
@@ -177,7 +176,7 @@ export default class SlDropdown extends LitElement {
             : document.activeElement;
 
         if (
-          !isTruthy(this.containingElement) ||
+          !this.containingElement ||
           activeElement?.closest(this.containingElement.tagName.toLowerCase()) !== this.containingElement
         ) {
           this.hide();
@@ -189,7 +188,7 @@ export default class SlDropdown extends LitElement {
   handleDocumentMouseDown(event: MouseEvent) {
     // Close when clicking outside of the containing element
     const path = event.composedPath();
-    if (isTruthy(this.containingElement) && !path.includes(this.containingElement)) {
+    if (this.containingElement && !path.includes(this.containingElement)) {
       this.hide();
     }
   }
@@ -275,13 +274,13 @@ export default class SlDropdown extends LitElement {
       }
 
       // Focus on a menu item
-      if (event.key === 'ArrowDown' && typeof firstMenuItem !== 'undefined') {
+      if (event.key === 'ArrowDown') {
         menu!.setCurrentItem(firstMenuItem);
         firstMenuItem.focus();
         return;
       }
 
-      if (event.key === 'ArrowUp' && typeof lastMenuItem !== 'undefined') {
+      if (event.key === 'ArrowUp') {
         menu!.setCurrentItem(lastMenuItem);
         lastMenuItem.focus();
         return;
@@ -321,7 +320,7 @@ export default class SlDropdown extends LitElement {
     const assignedElements = slot.assignedElements({ flatten: true }) as HTMLElement[];
     const accessibleTrigger = assignedElements.find(el => getTabbableBoundary(el).start);
 
-    if (typeof accessibleTrigger !== 'undefined') {
+    if (accessibleTrigger) {
       accessibleTrigger.setAttribute('aria-haspopup', 'true');
       accessibleTrigger.setAttribute('aria-expanded', this.open ? 'true' : 'false');
     }

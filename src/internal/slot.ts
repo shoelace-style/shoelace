@@ -45,12 +45,8 @@ export class HasSlotController implements ReactiveController {
 
   handleSlotChange(event: Event) {
     const slot = event.target as HTMLSlotElement;
-    const isSlotNameDefined = typeof slot.name !== 'undefined';
 
-    if (
-      (this.slotNames.includes('[default]') && !isSlotNameDefined) ||
-      (isSlotNameDefined && this.slotNames.includes(slot.name))
-    ) {
+    if ((this.slotNames.includes('[default]') && !slot.name) || (slot.name && this.slotNames.includes(slot.name))) {
       this.host.requestUpdate();
     }
   }
@@ -82,7 +78,7 @@ export function getInnerHTML(slot: HTMLSlotElement): string {
  * string. This is useful because we can't use slot.textContent as an alternative.
  */
 export function getTextContent(slot: HTMLSlotElement | undefined | null): string {
-  if (typeof slot === 'undefined' || slot === null) {
+  if (!slot) {
     return '';
   }
   const nodes = slot.assignedNodes({ flatten: true });

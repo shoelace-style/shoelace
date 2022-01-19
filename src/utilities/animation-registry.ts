@@ -36,13 +36,13 @@ export function getAnimation(el: Element, animationName: string) {
   const customAnimation = customAnimationRegistry.get(el);
 
   // Check for a custom animation
-  if (typeof customAnimation?.[animationName] !== 'undefined') {
+  if (customAnimation?.[animationName]) {
     return customAnimation[animationName];
   }
 
   // Check for a default animation
   const defaultAnimation = defaultAnimationRegistry.get(animationName);
-  if (typeof defaultAnimation !== 'undefined') {
+  if (defaultAnimation) {
     return defaultAnimation;
   }
 

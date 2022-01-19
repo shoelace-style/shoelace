@@ -62,7 +62,7 @@ export default class SlRadio extends LitElement {
         radio.input.tabIndex = -1;
       });
 
-      if (typeof checkedRadio !== 'undefined') {
+      if (checkedRadio) {
         checkedRadio.input.tabIndex = 0;
       } else if (radios.length > 0) {
         radios[0].input.tabIndex = 0;

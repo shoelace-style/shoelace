@@ -20,7 +20,7 @@
       <tbody>
         ${props
           .map(prop => {
-            const hasAttribute = typeof prop.attribute !== 'undefined';
+            const hasAttribute = !!prop.attribute;
             const isAttributeDifferent = prop.attribute !== prop.name;
             let attributeInfo = '';
 
@@ -266,7 +266,7 @@
   }
 
   function escapeHtml(html) {
-    if (typeof html === 'undefined') {
+    if (!html) {
       return '';
     }
     return html

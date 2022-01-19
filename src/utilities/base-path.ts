@@ -28,14 +28,14 @@ export function getBasePath() {
 const scripts = [...document.getElementsByTagName('script')] as HTMLScriptElement[];
 const configScript = scripts.find(script => script.hasAttribute('data-shoelace'));
 
-if (typeof configScript !== 'undefined') {
+if (configScript) {
   // Use the data-shoelace attribute
   setBasePath(configScript.getAttribute('data-shoelace')!);
 } else {
   const fallbackScript = scripts.find(s => /shoelace(\.min)?\.js($|\?)/.test(s.src));
   let path = '';
 
-  if (typeof fallbackScript !== 'undefined') {
+  if (fallbackScript) {
     path = fallbackScript.getAttribute('src')!;
   }
 

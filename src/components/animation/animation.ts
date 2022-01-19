@@ -77,7 +77,7 @@ export default class SlAnimation extends LitElement {
   }
 
   set currentTime(time: number) {
-    if (typeof this.animation !== 'undefined') {
+    if (this.animation) {
       this.animation.currentTime = time;
     }
   }
@@ -126,7 +126,7 @@ export default class SlAnimation extends LitElement {
 
   @watch('play')
   handlePlayChange() {
-    if (typeof this.animation !== 'undefined') {
+    if (this.animation) {
       if (this.play && !this.hasStarted) {
         this.hasStarted = true;
         emit(this, 'sl-start');
@@ -145,7 +145,7 @@ export default class SlAnimation extends LitElement {
 
   @watch('playbackRate')
   handlePlaybackRateChange() {
-    if (typeof this.animation !== 'undefined') {
+    if (this.animation) {
       this.animation.playbackRate = this.playbackRate;
     }
   }
@@ -162,7 +162,7 @@ export default class SlAnimation extends LitElement {
     const slot = await this.defaultSlot;
     const element = slot.assignedElements()[0] as HTMLElement | undefined;
 
-    if (typeof element === 'undefined' || typeof keyframes === 'undefined') {
+    if (!element || !keyframes) {
       return false;
     }
 
@@ -192,7 +192,7 @@ export default class SlAnimation extends LitElement {
   }
 
   destroyAnimation() {
-    if (typeof this.animation !== 'undefined') {
+    if (this.animation) {
       this.animation.cancel();
       this.animation.removeEventListener('cancel', this.handleAnimationCancel);
       this.animation.removeEventListener('finish', this.handleAnimationFinish);

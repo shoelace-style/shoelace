@@ -117,7 +117,7 @@ export default class SlSplitPanel extends LitElement {
       }
 
       // Check snap points
-      if (typeof this.snap !== 'undefined') {
+      if (this.snap) {
         const snaps = this.snap.split(' ');
 
         snaps.forEach(value => {
@@ -190,7 +190,7 @@ export default class SlSplitPanel extends LitElement {
     this.size = this.vertical ? height : width;
 
     // Resize when a primary panel is set
-    if (typeof this.primary !== 'undefined') {
+    if (this.primary) {
       this.position = this.pixelsToPercentage(this.cachedPositionInPixels);
     }
   }

@@ -123,14 +123,7 @@ module.exports = {
         ],
         '@typescript-eslint/no-extraneous-class': 'error',
         '@typescript-eslint/no-parameter-properties': 'error',
-        '@typescript-eslint/strict-boolean-expressions': [
-          'error',
-          {
-            allowString: false,
-            allowNumber: false,
-            allowNullableObject: false
-          }
-        ]
+        '@typescript-eslint/strict-boolean-expressions': 'off'
       }
     },
     {
@@ -145,7 +138,7 @@ module.exports = {
     'no-template-curly-in-string': 'error',
     'array-callback-return': 'error',
     'consistent-return': 'error',
-    curly: 'warn',
+    curly: 'off',
     'default-param-last': 'error',
     eqeqeq: 'error',
     'no-constructor-return': 'error',
@@ -154,7 +147,7 @@ module.exports = {
     'no-extend-native': 'error',
     'no-extra-bind': 'error',
     'no-floating-decimal': 'error',
-    'no-implicit-coercion': 'error',
+    'no-implicit-coercion': 'off',
     'no-implicit-globals': 'error',
     'no-implied-eval': 'error',
     'no-invalid-this': 'error',

@@ -151,7 +151,7 @@ export default class SlTooltip extends LitElement {
       el => el.tagName.toLowerCase() !== 'style' && el.getAttribute('slot') !== 'content'
     );
 
-    if (typeof target === 'undefined') {
+    if (!target) {
       throw new Error('Invalid tooltip target: no child element was found.');
     }
 

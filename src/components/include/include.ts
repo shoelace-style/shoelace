@@ -51,10 +51,6 @@ export default class SlInclude extends LitElement {
         return;
       }
 
-      if (typeof file === 'undefined') {
-        return;
-      }
-
       if (!file.ok) {
         emit(this, 'sl-error', { detail: { status: file.status } });
         return;

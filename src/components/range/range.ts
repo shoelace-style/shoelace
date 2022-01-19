@@ -90,7 +90,7 @@ export default class SlRange extends LitElement {
     super.connectedCallback();
     this.resizeObserver = new ResizeObserver(() => this.syncRange());
 
-    if (typeof this.value === 'undefined') {
+    if (!this.value) {
       this.value = this.min;
     }
     if (this.value < this.min) {
