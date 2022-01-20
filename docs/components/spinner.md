@@ -45,7 +45,7 @@ const App = () => (
 The width of the spinner's track can be changed by setting the `--track-width` custom property.
 
 ```html preview
-<sl-spinner style="font-size: 3rem; --track-width: 6px;"></sl-spinner>
+<sl-spinner style="font-size: 50px; --track-width: 10px;"></sl-spinner>
 ```
 
 ```jsx react
