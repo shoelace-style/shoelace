@@ -29,7 +29,7 @@ export default css`
 
   .progress-ring__track,
   .progress-ring__indicator {
-    --radius: calc(var(--size) / 2 - var(--track-width) * 2);
+    --radius: calc(var(--size) / 2 - var(--track-width) * 0.5);
     --circumference: calc(var(--radius) * 2 * 3.141592654);
 
     fill: none;
