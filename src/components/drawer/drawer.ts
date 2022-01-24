@@ -13,6 +13,7 @@ import { uppercaseFirstLetter } from '~/internal/string';
 import { isPreventScrollSupported } from '~/internal/support';
 import { watch } from '~/internal/watch';
 import { setDefaultAnimation, getAnimation } from '~/utilities/animation-registry';
+import { LocalizeController } from '~/utilities/localize';
 
 const hasPreventScroll = isPreventScrollSupported();
 
@@ -72,6 +73,7 @@ export default class SlDrawer extends LitElement {
   @query('.drawer__overlay') overlay: HTMLElement;
 
   private readonly hasSlotController = new HasSlotController(this, 'footer');
+  private readonly localize = new LocalizeController(this);
   private modal: Modal;
   private originalTrigger: HTMLElement | null;
 
@@ -256,14 +258,15 @@ export default class SlDrawer extends LitElement {
           ${!this.noHeader
             ? html`
                 <header part="header" class="drawer__header">
-                  <span part="title" class="drawer__title" id="title">
+                  <h2 part="title" class="drawer__title" id="title">
                     <!-- If there's no label, use an invisible character to prevent the header from collapsing -->
                     <slot name="label"> ${this.label.length > 0 ? this.label : String.fromCharCode(65279)} </slot>
-                  </span>
+                  </h2>
                   <sl-icon-button
                     exportparts="base:close-button"
                     class="drawer__close"
                     name="x"
+                    label=${this.localize.term('close')}
                     library="system"
                     @click=${this.requestClose}
                   ></sl-icon-button>

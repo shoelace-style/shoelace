@@ -12,6 +12,7 @@ import { HasSlotController } from '~/internal/slot';
 import { isPreventScrollSupported } from '~/internal/support';
 import { watch } from '~/internal/watch';
 import { setDefaultAnimation, getAnimation } from '~/utilities/animation-registry';
+import { LocalizeController } from '~/utilities/localize';
 
 const hasPreventScroll = isPreventScrollSupported();
 
@@ -64,6 +65,7 @@ export default class SlDialog extends LitElement {
   @query('.dialog__overlay') overlay: HTMLElement;
 
   private readonly hasSlotController = new HasSlotController(this, 'footer');
+  private readonly localize = new LocalizeController(this);
   private modal: Modal;
   private originalTrigger: HTMLElement | null;
 
@@ -230,13 +232,14 @@ export default class SlDialog extends LitElement {
           ${!this.noHeader
             ? html`
                 <header part="header" class="dialog__header">
-                  <span part="title" class="dialog__title" id="title">
+                  <h2 part="title" class="dialog__title" id="title">
                     <slot name="label"> ${this.label.length > 0 ? this.label : String.fromCharCode(65279)} </slot>
-                  </span>
+                  </h2>
                   <sl-icon-button
                     exportparts="base:close-button"
                     class="dialog__close"
                     name="x"
+                    label=${this.localize.term('close')}
                     library="system"
                     @click="${this.requestClose}"
                   ></sl-icon-button>

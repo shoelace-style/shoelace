@@ -61,9 +61,11 @@ export default css`
 
   .dialog__title {
     flex: 1 1 auto;
+    font: inherit;
     font-size: var(--sl-font-size-large);
     line-height: var(--sl-line-height-dense);
     padding: var(--header-spacing);
+    margin: 0;
   }
 
   .dialog__close {
