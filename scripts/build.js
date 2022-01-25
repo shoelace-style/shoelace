@@ -29,7 +29,7 @@ fs.mkdirSync(outdir, { recursive: true });
     execSync(`node scripts/make-search.js --outdir "${outdir}"`, { stdio: 'inherit' });
     execSync(`node scripts/make-react.js`, { stdio: 'inherit' });
     execSync(`node scripts/make-vscode-data.js --outdir "${outdir}"`, { stdio: 'inherit' });
-    execSync(`node scripts/make-css.js --outdir "${outdir}"`, { stdio: 'inherit' });
+    execSync(`node scripts/make-themes.js --outdir "${outdir}"`, { stdio: 'inherit' });
     execSync(`node scripts/make-icons.js --outdir "${outdir}"`, { stdio: 'inherit' });
     if (types) execSync(`tsc --project ./tsconfig.prod.json --outdir "${outdir}"`, { stdio: 'inherit' });
   } catch (err) {
@@ -155,7 +155,7 @@ fs.mkdirSync(outdir, { recursive: true });
         .then(() => {
           // Rebuild stylesheets when a theme file changes
           if (/^src\/themes/.test(filename)) {
-            execSync(`node scripts/make-css.js --outdir "${outdir}"`, { stdio: 'inherit' });
+            execSync(`node scripts/make-themes.js --outdir "${outdir}"`, { stdio: 'inherit' });
           }
         })
         .then(() => {
