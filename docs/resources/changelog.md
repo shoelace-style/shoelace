@@ -14,6 +14,8 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Refactored themes so utility styles are no longer injected as `<style>` elements to support stricter CSP rules [#571](https://github.com/shoelace-style/shoelace/issues/571)
 - Restored the nicer animation on `<sl-spinner>` and verified it works in Safari
 - Updated minimum Node version to 14.17
+- Updated Lit to 2.1.2
+- Updated all other dependencies to latest versions
 
 ## 2.0.0-beta.64
 
