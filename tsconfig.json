@@ -10,7 +10,6 @@
             "es2020"
         ],
         "declaration": true,
-        "outDir": "./dist",
         "rootDir": ".",
         "strict": true,
         "strictPropertyInitialization": false,

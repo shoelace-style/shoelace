@@ -1,3 +1,4 @@
+import commandLineArgs from 'command-line-args';
 import fs from 'fs';
 import path from 'path';
 import chalk from 'chalk';
@@ -7,14 +8,16 @@ import prettier from 'prettier';
 import prettierConfig from '../prettier.config.cjs';
 import { getAllComponents } from './shared.js';
 
-const outdir = path.join('./src/react');
+const { outdir } = commandLineArgs({ name: 'outdir', type: String });
+
+const reactDir = path.join('./src/react');
 
 // Clear build directory
-del.sync(outdir);
-fs.mkdirSync(outdir, { recursive: true });
+del.sync(reactDir);
+fs.mkdirSync(reactDir, { recursive: true });
 
 // Fetch component metadata
-const metadata = JSON.parse(fs.readFileSync('./dist/custom-elements.json', 'utf8'));
+const metadata = JSON.parse(fs.readFileSync(path.join(outdir, 'custom-elements.json'), 'utf8'));
 
 // Wrap components
 console.log('Wrapping components for React...');
@@ -24,7 +27,7 @@ const index = [];
 
 components.map(component => {
   const tagWithoutPrefix = component.tagName.replace(/^sl-/, '');
-  const componentDir = path.join(outdir, tagWithoutPrefix);
+  const componentDir = path.join(reactDir, tagWithoutPrefix);
   const componentFile = path.join(componentDir, 'index.ts');
   const importPath = component.modulePath.replace(/^src\//, '').replace(/\.ts$/, '');
 
@@ -58,6 +61,6 @@ components.map(component => {
 });
 
 // Generate the index file
-fs.writeFileSync(path.join(outdir, 'index.ts'), index.join('\n'), 'utf8');
+fs.writeFileSync(path.join(reactDir, 'index.ts'), index.join('\n'), 'utf8');
 
 console.log(chalk.cyan(`\nComponents have been wrapped for React! 📦\n`));

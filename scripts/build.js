@@ -27,7 +27,7 @@ fs.mkdirSync(outdir, { recursive: true });
   try {
     execSync(`node scripts/make-metadata.js --outdir "${outdir}"`, { stdio: 'inherit' });
     execSync(`node scripts/make-search.js --outdir "${outdir}"`, { stdio: 'inherit' });
-    execSync(`node scripts/make-react.js`, { stdio: 'inherit' });
+    execSync(`node scripts/make-react.js --outdir "${outdir}"`, { stdio: 'inherit' });
     execSync(`node scripts/make-vscode-data.js --outdir "${outdir}"`, { stdio: 'inherit' });
     execSync(`node scripts/make-themes.js --outdir "${outdir}"`, { stdio: 'inherit' });
     execSync(`node scripts/make-icons.js --outdir "${outdir}"`, { stdio: 'inherit' });
