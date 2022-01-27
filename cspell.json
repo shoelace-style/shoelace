@@ -38,6 +38,7 @@
     "FOUC",
     "FOUCE",
     "fullscreen",
+    "giga",
     "globby",
     "Grayscale",
     "haspopup",
@@ -69,6 +70,8 @@
     "novalidate",
     "outdir",
     "ParamagicDev",
+    "peta",
+    "petabit",
     "popperjs",
     "progressbar",
     "radiogroup",
@@ -92,6 +95,7 @@
     "tablist",
     "tabpanel",
     "templating",
+    "tera",
     "textareas",
     "transitionend",
     "Triaging",
@@ -107,7 +111,15 @@
     "Webpacker",
     "wordmark"
   ],
-  "ignorePaths": ["package.json", "package-lock.json", ".vscode/**", "src/translations/!(en).ts", "**/*.min.js"],
-  "ignoreRegExpList": ["(^|[^a-z])sl[a-z]*(^|[^a-z])"],
+  "ignorePaths": [
+    "package.json",
+    "package-lock.json",
+    ".vscode/**",
+    "src/translations/!(en).ts",
+    "**/*.min.js"
+  ],
+  "ignoreRegExpList": [
+    "(^|[^a-z])sl[a-z]*(^|[^a-z])"
+  ],
   "useGitignore": true
 }

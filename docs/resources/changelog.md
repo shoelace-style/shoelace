@@ -8,9 +8,11 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
+- 🚨 BREAKING: the `unit` property of `<sl-format-bytes>` has changed to `byte | bit` instead of `bytes | bits`
 - Fixed a bug that caused `<sl-progress-ring>` to render the wrong size when `--track-width` was increased [#656](https://github.com/shoelace-style/shoelace/issues/656)
 - Implemented stricter linting to improve consistency and reduce errors, which resulted in many small refactors throughout the codebase [#647](https://github.com/shoelace-style/shoelace/pull/647)
 - Improved accessibility of `<sl-dialog>` and `<sl-drawer>` by making the title an `<h2>` and adding a label to the close button
+- Refactored `<sl-format-byte>` to use `Intl.NumberFormat` so it supports localization
 - Refactored themes so utility styles are no longer injected as `<style>` elements to support stricter CSP rules [#571](https://github.com/shoelace-style/shoelace/issues/571)
 - Restored the nicer animation on `<sl-spinner>` and verified it works in Safari
 - Updated minimum Node version to 14.17

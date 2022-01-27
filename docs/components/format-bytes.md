@@ -77,13 +77,13 @@ const App = () => (
 
 ### Formatting Bits
 
-To get the value in bits, set the `unit` attribute to `bits`.
+To get the value in bits, set the `unit` attribute to `bit`.
 
 ```html preview
-<sl-format-bytes value="12" unit="bits"></sl-format-bytes><br>
-<sl-format-bytes value="1200" unit="bits"></sl-format-bytes><br>
-<sl-format-bytes value="1200000" unit="bits"></sl-format-bytes><br>
-<sl-format-bytes value="1200000000" unit="bits"></sl-format-bytes>
+<sl-format-bytes value="12" unit="bit"></sl-format-bytes><br>
+<sl-format-bytes value="1200" unit="bit"></sl-format-bytes><br>
+<sl-format-bytes value="1200000" unit="bit"></sl-format-bytes><br>
+<sl-format-bytes value="1200000000" unit="bit"></sl-format-bytes>
 ```
 
 ```jsx react
@@ -91,10 +91,10 @@ import { SlFormatBytes } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <>
-    <SlFormatBytes value="12" unit="bits" /><br />
-    <SlFormatBytes value="1200" unit="bits" /><br />
-    <SlFormatBytes value="1200000" unit="bits" /><br />
-    <SlFormatBytes value="1200000000" unit="bits" />
+    <SlFormatBytes value="12" unit="bit" /><br />
+    <SlFormatBytes value="1200" unit="bit" /><br />
+    <SlFormatBytes value="1200000" unit="bit" /><br />
+    <SlFormatBytes value="1200000000" unit="bit" />
   </>
 );
 ```
