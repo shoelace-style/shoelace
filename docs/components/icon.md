@@ -191,27 +191,27 @@ Icons in this library are licensed under the [Creative Commons 4.0 License](http
 </div>
 ```
 
-### Feather Icons
+### Lucide
 
-This will register the [Feather Icons](https://feathericons.com/) library using the jsDelivr CDN.
+This will register the [Lucide](https://lucide.dev/) icon library using the jsDelivr CDN. This project is a community-maintained fork of the popular [Feather icon library](https://feathericons.com/).
 
-Icons in this library are licensed under the [MIT License](https://github.com/feathericons/feather/blob/master/LICENSE).
+Icons in this library are licensed under the [MIT License](https://github.com/lucide-icons/lucide/blob/master/LICENSE).
 
 ```html preview
 <div style="font-size: 24px;">
-  <sl-icon library="feather" name="feather"></sl-icon>
-  <sl-icon library="feather" name="pie-chart"></sl-icon>
-  <sl-icon library="feather" name="settings"></sl-icon>
-  <sl-icon library="feather" name="map-pin"></sl-icon>
-  <sl-icon library="feather" name="printer"></sl-icon>
-  <sl-icon library="feather" name="shopping-cart"></sl-icon>
+  <sl-icon library="lucide" name="feather"></sl-icon>
+  <sl-icon library="lucide" name="pie-chart"></sl-icon>
+  <sl-icon library="lucide" name="settings"></sl-icon>
+  <sl-icon library="lucide" name="map-pin"></sl-icon>
+  <sl-icon library="lucide" name="printer"></sl-icon>
+  <sl-icon library="lucide" name="shopping-cart"></sl-icon>
 </div>
 
 <script type="module">
   import { registerIconLibrary } from '/dist/utilities/icon-library.js';
 
-  registerIconLibrary('feather', {
-    resolver: name => `https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/icons/${name}.svg`
+  registerIconLibrary('lucide', {
+    resolver: name => `https://cdn.jsdelivr.net/npm/lucide-static@0.16.29/icons/${name}.svg`
   });
 </script>
 ```
