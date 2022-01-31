@@ -2,6 +2,7 @@
 *.md
 .cache
 .github
+cspell.json
 dist
 docs/*.md
 docs/search.json
