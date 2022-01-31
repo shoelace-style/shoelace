@@ -193,7 +193,7 @@ Icons in this library are licensed under the [Creative Commons 4.0 License](http
 
 ### Lucide
 
-This will register the [Lucide](https://lucide.dev/) icon library using the jsDelivr CDN. This project is a community-maintained fork of the popular [Feather icon library](https://feathericons.com/).
+This will register the [Lucide](https://lucide.dev/) icon library using the jsDelivr CDN. This project is a community-maintained fork of the popular [Feather](https://feathericons.com/) icon library.
 
 Icons in this library are licensed under the [MIT License](https://github.com/lucide-icons/lucide/blob/master/LICENSE).
 
