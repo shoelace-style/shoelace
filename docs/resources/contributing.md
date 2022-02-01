@@ -74,7 +74,10 @@ The author reserves the right to reject any PR that's outside the scope of the p
 
 ## Developing
 
-To set up a local dev environment, [fork the repo](https://github.com/shoelace-style/shoelace/fork) on GitHub, clone it locally, and install its dependencies.
+You can either use Gitpod for a dev environement in the cloud (no local setup is needed, everything is done through your browser)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/shoelace-style/shoelace)
+
+Or you can set up a local dev environment, [fork the repo](https://github.com/shoelace-style/shoelace/fork) on GitHub, clone it locally, and install its dependencies.
 
 ```bash
 git clone https://github.com/YOUR_GITHUB_USERNAME/shoelace
