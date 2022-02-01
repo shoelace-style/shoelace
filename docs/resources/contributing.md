@@ -90,6 +90,9 @@ npm run start
 
 After the initial build, a browser will open automatically to a local version of the docs. The documentation is powered by Docsify, which uses raw markdown files to generate pages on the fly.
 
+Alternatively, you can use Gitpod for a dev environment in the cloud (no local setup is needed, everything is done through your browser)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/shoelace-style/shoelace)
+
 ### Creating New Components
 
 To scaffold a new component, run the following command, replacing `sl-tag-name` with the desired tag name.
