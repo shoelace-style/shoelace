@@ -55,7 +55,7 @@ export default class SlDetails extends LitElement {
 
   /** Shows the details. */
   async show() {
-    if (this.open) {
+    if (this.open || this.disabled) {
       return undefined;
     }
 
@@ -65,7 +65,7 @@ export default class SlDetails extends LitElement {
 
   /** Hides the details */
   async hide() {
-    if (!this.open) {
+    if (!this.open || this.disabled) {
       return undefined;
     }
 
@@ -73,17 +73,14 @@ export default class SlDetails extends LitElement {
     return waitForEvent(this, 'sl-after-hide');
   }
 
-  toggleOpen() {
-    if (this.open) {
-      this.hide();
-    } else {
-      this.show();
-    }
-  }
-
   handleSummaryClick() {
     if (!this.disabled) {
-      this.toggleOpen();
+      if (this.open) {
+        this.hide();
+      } else {
+        this.show();
+      }
+
       this.header.focus();
     }
   }
@@ -91,7 +88,12 @@ export default class SlDetails extends LitElement {
   handleSummaryKeyDown(event: KeyboardEvent) {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
-      this.toggleOpen();
+
+      if (this.open) {
+        this.hide();
+      } else {
+        this.show();
+      }
     }
 
     if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
