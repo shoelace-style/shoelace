@@ -2,12 +2,6 @@ tasks:
   - init: npm install && npm run build
     command: npm run start
 
-vscode:
-  extensions:
-    - dbaeumer.vscode-eslint
-    - esbenp.prettier-vscode
-    - streetsidesoftware.code-spell-checker
-
 ports:
   - port: 3001
     onOpen: ignore
