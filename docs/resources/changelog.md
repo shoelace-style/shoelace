@@ -18,6 +18,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Updated Feature icon example to use Lucide
 - Updated minimum Node version to 14.17
 - Updated Lit to 2.1.2
+- Updated to Bootstrap Icons to 1.8.0
 - Updated all other dependencies to latest versions
 
 ## 2.0.0-beta.64
