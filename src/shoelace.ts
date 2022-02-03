@@ -8,6 +8,7 @@ export { default as SlBreadcrumb } from './components/breadcrumb/breadcrumb';
 export { default as SlBreadcrumbItem } from './components/breadcrumb-item/breadcrumb-item';
 export { default as SlButton } from './components/button/button';
 export { default as SlButtonGroup } from './components/button-group/button-group';
+export { default as SlCalendar } from './components/calendar/calendar';
 export { default as SlCard } from './components/card/card';
 export { default as SlCheckbox } from './components/checkbox/checkbox';
 export { default as SlColorPicker } from './components/color-picker/color-picker';

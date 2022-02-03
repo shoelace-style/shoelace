@@ -26,6 +26,7 @@
   - [Breadcrumb Item](/components/breadcrumb-item)
   - [Button](/components/button)
   - [Button Group](/components/button-group)
+  - [Calendar](/components/calendar)
   - [Card](/components/card)
   - [Checkbox](/components/checkbox)
   - [Color Picker](/components/color-picker)
