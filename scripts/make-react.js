@@ -30,10 +30,9 @@ components.map(component => {
   const componentDir = path.join(reactDir, tagWithoutPrefix);
   const componentFile = path.join(componentDir, 'index.ts');
   const importPath = component.modulePath.replace(/^src\//, '').replace(/\.ts$/, '');
+  const events = (component.events || []).map(event => `${event.reactName}: '${event.name}'`).join(',\n');
 
   fs.mkdirSync(componentDir, { recursive: true });
-
-  const events = (component.events || []).map(event => `${`on${pascalCase(event.name)}`}: '${event.name}'`).join(',\n');
 
   const source = prettier.format(
     `
