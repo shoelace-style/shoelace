@@ -1,7 +1,8 @@
-import { expect, fixture, html, waitUntil } from '@open-wc/testing';
+import { expect } from '@open-wc/testing';
 import sinon from 'sinon';
+// eslint-disable-next-line no-restricted-imports
+import { simpleFixture } from '../../testing/setup';
 import type SlButton from './button';
-import { complexFixture, simpleFixture } from '../../testing/setup';
 
 describe('<sl-button>', () => {
 
@@ -107,8 +108,4 @@ describe('<sl-button>', () => {
       expect(el.shadowRoot!.querySelector('button')).not.to.exist;
     });
   });
-
-  describe('click event', async () => {});
-
-
 });
