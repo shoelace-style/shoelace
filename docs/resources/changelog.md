@@ -6,6 +6,10 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
+## 2.0.0-beta.66
+
+- Fixes a bug that prevented types from being shipped
+
 ## 2.0.0-beta.65
 
 - 🚨 BREAKING: the `unit` property of `<sl-format-bytes>` has changed to `byte | bit` instead of `bytes | bits`
