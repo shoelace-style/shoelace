@@ -6,7 +6,7 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
-## Next
+## 2.0.0-beta.65
 
 - 🚨 BREAKING: the `unit` property of `<sl-format-bytes>` has changed to `byte | bit` instead of `bytes | bits`
 - Added `display-label` part to `<sl-select>` [#650](https://github.com/shoelace-style/shoelace/issues/650)
