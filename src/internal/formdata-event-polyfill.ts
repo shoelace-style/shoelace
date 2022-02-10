@@ -91,4 +91,8 @@ function polyfillFormData() {
   });
 }
 
-polyfillFormData();
+if (document.readyState === 'complete') {
+  polyfillFormData();
+} else {
+  window.addEventListener('DOMContentLoaded', () => polyfillFormData());
+}
