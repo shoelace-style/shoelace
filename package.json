@@ -69,7 +69,7 @@
     "@web/dev-server-esbuild": "^0.2.16",
     "@web/test-runner": "^0.13.26",
     "@web/test-runner-playwright": "^0.8.8",
-    "bootstrap-icons": "^1.8.0",
+    "bootstrap-icons": "^1.8.1",
     "browser-sync": "^2.27.7",
     "chalk": "^5.0.0",
     "command-line-args": "^5.2.1",
