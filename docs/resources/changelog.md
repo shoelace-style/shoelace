@@ -6,9 +6,13 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
+## 2.0.0-beta.67
+
+- Fixed a TypeScript config regression introduced in [#647](https://github.com/shoelace-style/shoelace/pull/647) that removed the `rootDir`, breaking the expected build output
+
 ## 2.0.0-beta.66
 
-- Fixes a bug that prevented types from being shipped
+- Attempted to fix a bug that prevented types from being generated in the build
 
 ## 2.0.0-beta.65
 
