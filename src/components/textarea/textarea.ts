@@ -17,8 +17,8 @@ import { watch } from '~/internal/watch';
  * @slot label - The textarea's label. Alternatively, you can use the label prop.
  * @slot help-text - Help text that describes how to use the input.
  *
- * @event sl-change - Emitted when the control's value changes.
- * @event sl-input - Emitted when the control receives input.
+ * @event sl-change - Emitted when an alteration to the control's value is committed by the user.
+ * @event sl-input - Emitted when the control receives input and its value changes.
  * @event sl-focus - Emitted when the control gains focus.
  * @event sl-blur - Emitted when the control loses focus.
  *
