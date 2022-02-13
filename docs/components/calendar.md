@@ -10,20 +10,12 @@ Calendar shows a monthly view of the Gregorian calendar, optionally allowing use
 
 ## Examples
 
-### Month Labels
-
-Month labels can be customized using the `month-labels` attribute. Valid options include `long`, `short`, and `narrow`, `numeric`, and `2-digit`. Note that month names are localized automatically based on the component or document language.
-
-```html preview
-<sl-calendar day-labels="narrow"></sl-calendar>
-```
-
 ### Month & Day Labels
 
 Month and day labels can be customized using the `month-labels` and `day-labels` attributes. Note that month names are localized automatically based on the component's `lang` attribute, falling back to the document language.
 
 ```html preview
-<sl-calendar month-labels="short"></sl-calendar>
+<sl-calendar month-labels="short" day-labels="narrow"></sl-calendar>
 ```
 
 ### Showing Adjacent Dates
