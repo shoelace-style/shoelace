@@ -6,7 +6,6 @@ import '~/components/icon-button/icon-button';
 import type SlTabPanel from '~/components/tab-panel/tab-panel';
 import type SlTab from '~/components/tab/tab';
 import { emit } from '~/internal/event';
-import { getOffset } from '~/internal/offset';
 import { scrollIntoView } from '~/internal/scroll';
 import { watch } from '~/internal/watch';
 import { LocalizeController } from '~/utilities/localize';
@@ -295,23 +294,29 @@ export default class SlTabGroup extends LitElement {
 
     const width = currentTab.clientWidth;
     const height = currentTab.clientHeight;
-    const offset = getOffset(currentTab, this.nav);
-    const offsetTop = offset.top + this.nav.scrollTop;
-    const offsetLeft = offset.left + this.nav.scrollLeft;
+
+    // offsetLeft/offsetTop cannot be used directly here due to a shadow parent issue: https://bugs.chromium.org/p/chromium/issues/detail?id=920069
+    // neither can getBoundingClientRect as it gives invalid values for animating elements
+    const allTabs = this.getAllTabs();
+    const preceedingTabs = allTabs.slice(0, allTabs.indexOf(currentTab))
+    const offset = preceedingTabs.reduce((previous, current) => ({
+      left: previous.left + current.clientWidth,
+      top: previous.top + current.clientHeight
+    }), { left: 0, top: 0 })
 
     switch (this.placement) {
       case 'top':
       case 'bottom':
         this.indicator.style.width = `${width}px`;
         this.indicator.style.height = 'auto';
-        this.indicator.style.transform = `translateX(${offsetLeft}px)`;
+        this.indicator.style.transform = `translateX(${offset.left}px)`;
         break;
 
       case 'start':
       case 'end':
         this.indicator.style.width = 'auto';
         this.indicator.style.height = `${height}px`;
-        this.indicator.style.transform = `translateY(${offsetTop}px)`;
+        this.indicator.style.transform = `translateY(${offset.top}px)`;
         break;
     }
   }
