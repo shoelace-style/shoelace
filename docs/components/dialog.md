@@ -159,10 +159,12 @@ By default, dialogs will close when the user clicks the close button, clicks the
 
 To keep the dialog open in such cases, you can cancel the `sl-request-close` event. When canceled, the dialog will remain open and pulse briefly to draw the user's attention to it.
 
+You can use `event.detail.source` to determine what triggered the request to close. This example prevents the dialog from closing when the overlay is clicked, but allows the close button or <kbd>Escape</kbd> to dismiss it.
+
 ```html preview
 <sl-dialog label="Dialog" class="dialog-deny-close">
-  This dialog will not close unless you use the button below.
-  <sl-button slot="footer" variant="primary">Save &amp; Close</sl-button>
+  This dialog will not close when you click on the overlay.
+  <sl-button slot="footer" variant="primary">Close</sl-button>
 </sl-dialog>
 
 <sl-button>Open Dialog</sl-button>
@@ -170,12 +172,17 @@ To keep the dialog open in such cases, you can cancel the `sl-request-close` eve
 <script>
   const dialog = document.querySelector('.dialog-deny-close');
   const openButton = dialog.nextElementSibling;
-  const saveButton = dialog.querySelector('sl-button[slot="footer"]');
+  const closeButton = dialog.querySelector('sl-button[slot="footer"]');
 
   openButton.addEventListener('click', () => dialog.show());
-  saveButton.addEventListener('click', () => dialog.hide());
+  closeButton.addEventListener('click', () => dialog.hide());
 
-  dialog.addEventListener('sl-request-close', event => event.preventDefault());
+  // Prevent the dialog from closing when the user clicks on the overlay
+  dialog.addEventListener('sl-request-close', event => {
+    if (event.detail.source === 'overlay') {
+      event.preventDefault();
+    }
+  });
 </script>
 ```
 
@@ -186,17 +193,24 @@ import { SlButton, SlDialog } from '@shoelace-style/shoelace/dist/react';
 const App = () => {
   const [open, setOpen] = useState(false);
 
+  // Prevent the dialog from closing when the user clicks on the overlay
+  function handleRequestClose(event) {
+    if (event.detail.source === 'overlay') {
+      event.preventDefault();
+    }
+  }
+
   return (
     <>
       <SlDialog
         label="Dialog"
         open={open}
-        onSlRequestClose={event => event.preventDefault()}
+        onSlRequestClose={handleRequestClose}
         onSlAfterHide={() => setOpen(false)}
       >
-        This dialog will not close unless you use the button below.
+        This dialog will not close when you click on the overlay.
         <SlButton slot="footer" variant="primary" onClick={() => setOpen(false)}>
-          Save &amp; Close
+          Close
         </SlButton>
       </SlDialog>
 

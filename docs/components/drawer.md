@@ -346,10 +346,12 @@ By default, drawers will close when the user clicks the close button, clicks the
 
 To keep the drawer open in such cases, you can cancel the `sl-request-close` event. When canceled, the drawer will remain open and pulse briefly to draw the user's attention to it.
 
+You can use `event.detail.source` to determine what triggered the request to close. This example prevents the drawer from closing when the overlay is clicked, but allows the close button or <kbd>Escape</kbd> to dismiss it.
+
 ```html preview
 <sl-drawer label="Drawer" class="drawer-deny-close">
-  This drawer will not close unless you use the button below.
-  <sl-button slot="footer" variant="primary">Save &amp; Close</sl-button>
+  This drawer will not close when you click on the overlay.
+  <sl-button slot="footer" variant="primary">Close</sl-button>
 </sl-drawer>
 
 <sl-button>Open Drawer</sl-button>
@@ -362,7 +364,13 @@ To keep the drawer open in such cases, you can cancel the `sl-request-close` eve
   openButton.addEventListener('click', () => drawer.show());
   closeButton.addEventListener('click', () => drawer.hide());
 
-  drawer.addEventListener('sl-request-close', event => event.preventDefault());
+  // Prevent the drawer from closing when the user clicks on the overlay
+  drawer.addEventListener('sl-request-close', event => {
+    if (event.detail.source === 'overlay') {
+      event.preventDefault();
+    }
+  });
+
 </script>
 ```
 
@@ -373,15 +381,22 @@ import { SlButton, SlDrawer } from '@shoelace-style/shoelace/dist/react';
 const App = () => {
   const [open, setOpen] = useState(false);
 
+  // Prevent the drawer from closing when the user clicks on the overlay
+  function handleRequestClose(event) {
+    if (event.detail.source === 'overlay') {
+      event.preventDefault();
+    }
+  }
+
   return (
     <>
       <SlDrawer
         label="Drawer"
         open={open}
-        onSlRequestClose={event => event.preventDefault()}
+        onSlRequestClose={handleRequestClose}
         onSlAfterHide={() => setOpen(false)}
       >
-        This drawer will not close unless you use the button below.
+        This drawer will not close when you click on the overlay.
         <SlButton slot="footer" variant="primary" onClick={() => setOpen(false)}>
           Save &amp; Close
         </SlButton>

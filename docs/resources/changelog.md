@@ -8,19 +8,41 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
+- Fixed a bug that caused an error when pressing up/down in `<sl-select>`
+- Fixed a bug that prevented the first/last menu item from receiving focus when pressing up/down in `<sl-dropdown>`
+- Fixed a bug that caused the active tab indicator in `<sl-tab-group>` to render incorrectly when used inside an element that animates [#671](https://github.com/shoelace-style/shoelace/pull/671)
+
+## 2.0.0-beta.68
+
+- Fixed path aliases in generated files so they're relative again [#669](https://github.com/shoelace-style/shoelace/pull/669)
+
+## 2.0.0-beta.67
+
+- Fixed a TypeScript config regression introduced in [#647](https://github.com/shoelace-style/shoelace/pull/647) that removed the `rootDir`, breaking the expected build output
+
+## 2.0.0-beta.66
+
+- Attempted to fix a bug that prevented types from being generated in the build
+
+## 2.0.0-beta.65
+
 - 🚨 BREAKING: the `unit` property of `<sl-format-bytes>` has changed to `byte | bit` instead of `bytes | bits`
 - Added `display-label` part to `<sl-select>` [#650](https://github.com/shoelace-style/shoelace/issues/650)
+- Added `--spacing` CSS custom property to `<sl-divider>` [#664](https://github.com/shoelace-style/shoelace/pull/664)
+- Added `event.detail.source` to the `sl-request-close` event in `<sl-dialog>` and `<sl-drawer>`
 - Fixed a bug that caused `<sl-progress-ring>` to render the wrong size when `--track-width` was increased [#656](https://github.com/shoelace-style/shoelace/issues/656)
 - Fixed a bug that allowed `<sl-details>` to open and close when disabled using a screen reader [#658](https://github.com/shoelace-style/shoelace/issues/658)
+- Fixed a bug in the FormData event polyfill that threw an error in some environments [#666](https://github.com/shoelace-style/shoelace/issues/666)
 - Implemented stricter linting to improve consistency and reduce errors, which resulted in many small refactors throughout the codebase [#647](https://github.com/shoelace-style/shoelace/pull/647)
 - Improved accessibility of `<sl-dialog>` and `<sl-drawer>` by making the title an `<h2>` and adding a label to the close button
+- Improved search results in the documentation
 - Refactored `<sl-format-byte>` to use `Intl.NumberFormat` so it supports localization
 - Refactored themes so utility styles are no longer injected as `<style>` elements to support stricter CSP rules [#571](https://github.com/shoelace-style/shoelace/issues/571)
 - Restored the nicer animation on `<sl-spinner>` and verified it works in Safari
-- Updated Feature icon example to use Lucide
+- Updated Feather icon example to use Lucide  [#657](https://github.com/shoelace-style/shoelace/issues/657)
 - Updated minimum Node version to 14.17
 - Updated Lit to 2.1.2
-- Updated to Bootstrap Icons to 1.8.0
+- Updated to Bootstrap Icons to 1.8.1
 - Updated all other dependencies to latest versions
 
 ## 2.0.0-beta.64

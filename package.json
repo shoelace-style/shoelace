@@ -1,7 +1,7 @@
 {
   "name": "@shoelace-style/shoelace",
   "description": "A forward-thinking library of web components.",
-  "version": "2.0.0-beta.64",
+  "version": "2.0.0-beta.68",
   "homepage": "https://github.com/shoelace-style/shoelace",
   "author": "Cory LaViska",
   "license": "MIT",
@@ -32,7 +32,7 @@
   "scripts": {
     "start": "node scripts/build.js --bundle --serve",
     "build": "node scripts/build.js --bundle --types --copydir \"docs/dist\"",
-    "verify": "npm run prettier:check && npm run lint && npm run ts-check && npm run test && npm run build",
+    "verify": "npm run prettier:check && npm run lint && npm run build && npm run test",
     "prepublishOnly": "npm run verify",
     "prettier": "prettier --write --loglevel warn .",
     "prettier:check": "prettier --check --loglevel warn .",
@@ -40,7 +40,7 @@
     "lint:fix": "npm run lint -- --fix",
     "ts-check": "tsc --noEmit --project ./tsconfig.json",
     "create": "plop --plopfile scripts/plop/plopfile.js",
-    "test": "node scripts/build.js --bundle && web-test-runner",
+    "test": "web-test-runner",
     "test:watch": "web-test-runner --watch",
     "spellcheck": "cspell \"**/*.{js,ts,json,html,css,md}\" --no-progress",
     "list-outdated-dependencies": "npm-check-updates --format repo --peer",
@@ -69,7 +69,7 @@
     "@web/dev-server-esbuild": "^0.2.16",
     "@web/test-runner": "^0.13.26",
     "@web/test-runner-playwright": "^0.8.8",
-    "bootstrap-icons": "^1.8.0",
+    "bootstrap-icons": "^1.8.1",
     "browser-sync": "^2.27.7",
     "chalk": "^5.0.0",
     "command-line-args": "^5.2.1",
@@ -101,6 +101,8 @@
     "sinon": "^13.0.0",
     "strip-css-comments": "^5.0.0",
     "tslib": "^2.3.1",
-    "typescript": "^4.5.5"
+    "ttypescript": "^1.5.13",
+    "typescript": "^4.5.5",
+    "typescript-transform-paths": "^3.3.1"
   }
 }

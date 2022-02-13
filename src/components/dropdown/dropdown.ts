@@ -242,8 +242,8 @@ export default class SlDropdown extends LitElement {
   }
 
   handleTriggerKeyDown(event: KeyboardEvent) {
-    const menu = this.getMenu();
-    const menuItems = [...(menu?.querySelectorAll('sl-menu-item') ?? [])] as SlMenuItem[];
+    const menu = this.getMenu()!;
+    const menuItems = menu.defaultSlot.assignedElements({ flatten: true }) as SlMenuItem[];
     const firstMenuItem = menuItems[0];
     const lastMenuItem = menuItems[menuItems.length - 1];
 
@@ -273,24 +273,24 @@ export default class SlDropdown extends LitElement {
         this.show();
       }
 
-      // Focus on a menu item
-      if (event.key === 'ArrowDown') {
-        menu!.setCurrentItem(firstMenuItem);
-        firstMenuItem.focus();
-        return;
-      }
+      // Focus on the first/last menu item after showing
+      requestAnimationFrame(() => {
+        if (event.key === 'ArrowDown') {
+          menu.setCurrentItem(firstMenuItem);
+          firstMenuItem.focus();
+        }
 
-      if (event.key === 'ArrowUp') {
-        menu!.setCurrentItem(lastMenuItem);
-        lastMenuItem.focus();
-        return;
-      }
+        if (event.key === 'ArrowUp') {
+          menu.setCurrentItem(lastMenuItem);
+          lastMenuItem.focus();
+        }
+      });
     }
 
     // Other keys bring focus to the menu and initiate type-to-select behavior
     const ignoredKeys = ['Tab', 'Shift', 'Meta', 'Ctrl', 'Alt'];
     if (this.open && !ignoredKeys.includes(event.key)) {
-      menu?.typeToSelect(event.key);
+      menu.typeToSelect(event.key);
     }
   }
 
