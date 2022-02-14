@@ -113,7 +113,7 @@ export default class SlDetails extends LitElement {
       // Show
       emit(this, 'sl-show');
 
-      await stopAnimations(this);
+      await stopAnimations(this.body);
       this.body.hidden = false;
 
       const { keyframes, options } = getAnimation(this, 'details.show');
@@ -125,7 +125,7 @@ export default class SlDetails extends LitElement {
       // Hide
       emit(this, 'sl-hide');
 
-      await stopAnimations(this);
+      await stopAnimations(this.body);
 
       const { keyframes, options } = getAnimation(this, 'details.hide');
       await animateTo(this.body, shimKeyframesHeightAuto(keyframes, this.body.scrollHeight), options);
