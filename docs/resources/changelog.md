@@ -14,6 +14,8 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug that prevented the first/last menu item from receiving focus when pressing up/down in `<sl-dropdown>`
 - Fixed a bug that caused the active tab indicator in `<sl-tab-group>` to render incorrectly when used inside an element that animates [#671](https://github.com/shoelace-style/shoelace/pull/671)
 - Fixed a bug that allowed values in `<sl-range>` to be invalid according to its `min|max|step` [#674](https://github.com/shoelace-style/shoelace/issues/674)
+- Updated Lit to 2.1.4
+- Updated all other dependencies to latest versions
 
 ## 2.0.0-beta.68
 
