@@ -8,6 +8,7 @@
   "main": "dist/shoelace.js",
   "module": "dist/shoelace.js",
   "customElements": "dist/custom-elements.json",
+  "web-types": "dist/web-types.json",
   "type": "module",
   "types": "dist/shoelace.d.ts",
   "files": [
@@ -89,6 +90,7 @@
     "get-port": "^6.0.0",
     "globby": "^13.1.0",
     "husky": "^7.0.4",
+    "jsonata": "^1.8.6",
     "lint-staged": "^12.3.2",
     "lunr": "^2.3.9",
     "npm-check-updates": "^12.2.1",
