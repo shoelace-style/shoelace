@@ -234,7 +234,7 @@ export default class SlDropdown extends LitElement {
   }
 
   handleTriggerClick() {
-    if (this.open) {
+    if (this.disabled || this.open) {
       this.hide();
     } else {
       this.show();
