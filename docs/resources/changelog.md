@@ -9,6 +9,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 ## 2.0.0-beta.69
 
 - Added `web-types.json` to improve the dev experience for WebStorm/PHPStorm users [#328](https://github.com/shoelace-style/shoelace/issues/328)
+- Added `tag-base`, `tag-content`, and `tag-remove-button` parts to `<sl-select>` [#682](https://github.com/shoelace-style/shoelace/discussions/682)
 - Fixed a bug that caused an error when pressing up/down in `<sl-select>`
 - Fixed a bug that caused `<sl-details>` to not show when double clicking the summary while open [#662](https://github.com/shoelace-style/shoelace/issues/662)
 - Fixed a bug that prevented the first/last menu item from receiving focus when pressing up/down in `<sl-dropdown>`
