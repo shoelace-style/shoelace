@@ -361,6 +361,7 @@ export default class SlDropdown extends LitElement {
   @watch('open', { waitUntilFirstUpdate: true })
   async handleOpenChange() {
     if (this.disabled) {
+      this.open = false;
       return;
     }
 
