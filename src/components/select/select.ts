@@ -53,6 +53,9 @@ import { watch } from '~/internal/watch';
  * @csspart suffix - The select's suffix.
  * @csspart menu - The select menu, an `<sl-menu>` element.
  * @csspart tag - The multi select option, an `<sl-tag>` element.
+ * @csspart tag-base - The tag's `base` part.
+ * @csspart tag-content - The tag's `content` part.
+ * @csspart tag-remove-button - The tag's `remove-button` part.
  * @csspart tags - The container in which multi select options are rendered.
  */
 @customElement('sl-select')
@@ -378,7 +381,8 @@ export default class SlSelect extends LitElement {
       this.displayTags = checkedItems.map((item: SlMenuItem) => {
         return html`
           <sl-tag
-            exportparts="base:tag"
+            part="tag"
+            exportparts="base:tag-base, content:tag-content, remove-button:tag-remove-button"
             variant="neutral"
             size=${this.size}
             ?pill=${this.pill}

@@ -144,6 +144,11 @@ export default class SlRange extends LitElement {
   handleValueChange() {
     this.invalid = !this.input.checkValidity();
 
+    // The value may have constraints, so we set the native control's value and sync it back to ensure it adhere's to
+    // min, max, and step properly
+    this.input.value = this.value.toString();
+    this.value = parseFloat(this.input.value);
+
     this.syncRange();
   }
 

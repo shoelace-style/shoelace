@@ -464,4 +464,6 @@ const App = () => {
 };
 ```
 
+?> Alternatively, you can add the `autofocus` attribute to any form control to customize initial focus without using JavaScript.
+
 [component-metadata:sl-drawer]

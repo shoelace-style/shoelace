@@ -8,9 +8,22 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
+- Added `tag-base`, `tag-content`, and `tag-remove-button` parts to `<sl-select>` [#682](https://github.com/shoelace-style/shoelace/discussions/682)
+- Added support for focusing elements with `autofocus` when `<sl-dialog>` and `<sl-drawer>` open [#688](https://github.com/shoelace-style/shoelace/issues/688) 
+- Fixed a bug that allowed `<sl-dropdown>` to go into an incorrect state when activating the trigger while disabled [#684](https://github.com/shoelace-style/shoelace/pull/684)
+- Fixed a bug where Safari would sometimes not focus after preventing `sl-initial-focus` [#688](https://github.com/shoelace-style/shoelace/issues/688)
+- Improved the size of the remove button in `<sl-tag>`
+
+## 2.0.0-beta.69
+
+- Added `web-types.json` to improve the dev experience for WebStorm/PHPStorm users [#328](https://github.com/shoelace-style/shoelace/issues/328)
 - Fixed a bug that caused an error when pressing up/down in `<sl-select>`
+- Fixed a bug that caused `<sl-details>` to not show when double clicking the summary while open [#662](https://github.com/shoelace-style/shoelace/issues/662)
 - Fixed a bug that prevented the first/last menu item from receiving focus when pressing up/down in `<sl-dropdown>`
 - Fixed a bug that caused the active tab indicator in `<sl-tab-group>` to render incorrectly when used inside an element that animates [#671](https://github.com/shoelace-style/shoelace/pull/671)
+- Fixed a bug that allowed values in `<sl-range>` to be invalid according to its `min|max|step` [#674](https://github.com/shoelace-style/shoelace/issues/674)
+- Updated Lit to 2.1.4
+- Updated all other dependencies to latest versions
 
 ## 2.0.0-beta.68
 

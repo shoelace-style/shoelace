@@ -96,6 +96,7 @@ export default css`
   }
 
   .tag__remove {
+    font-size: 1.4em;
     margin-left: var(--sl-spacing-2x-small);
     margin-right: calc(-1 * var(--sl-spacing-x-small));
   }

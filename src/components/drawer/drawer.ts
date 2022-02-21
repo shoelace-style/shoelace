@@ -156,6 +156,17 @@ export default class SlDrawer extends LitElement {
     this.hide();
   }
 
+  // Sets focus on the first child element with autofocus, falling back to the panel if one isn't found
+  private setInitialFocus() {
+    const target = this.querySelector('[autofocus]');
+
+    if (target) {
+      (target as HTMLElement).focus({ preventScroll: true });
+    } else {
+      this.panel.focus({ preventScroll: true });
+    }
+  }
+
   handleKeyDown(event: KeyboardEvent) {
     if (event.key === 'Escape') {
       event.stopPropagation();
@@ -181,10 +192,12 @@ export default class SlDrawer extends LitElement {
 
       // Browsers that support el.focus({ preventScroll }) can set initial focus immediately
       if (hasPreventScroll) {
-        const slInitialFocus = emit(this, 'sl-initial-focus', { cancelable: true });
-        if (!slInitialFocus.defaultPrevented) {
-          this.panel.focus({ preventScroll: true });
-        }
+        requestAnimationFrame(() => {
+          const slInitialFocus = emit(this, 'sl-initial-focus', { cancelable: true });
+          if (!slInitialFocus.defaultPrevented) {
+            this.setInitialFocus();
+          }
+        });
       }
 
       const panelAnimation = getAnimation(this, `drawer.show${uppercaseFirstLetter(this.placement)}`);
@@ -197,10 +210,12 @@ export default class SlDrawer extends LitElement {
       // Browsers that don't support el.focus({ preventScroll }) have to wait for the animation to finish before initial
       // focus to prevent scrolling issues. See: https://caniuse.com/mdn-api_htmlelement_focus_preventscroll_option
       if (!hasPreventScroll) {
-        const slInitialFocus = emit(this, 'sl-initial-focus', { cancelable: true });
-        if (!slInitialFocus.defaultPrevented) {
-          this.panel.focus({ preventScroll: true });
-        }
+        requestAnimationFrame(() => {
+          const slInitialFocus = emit(this, 'sl-initial-focus', { cancelable: true });
+          if (!slInitialFocus.defaultPrevented) {
+            this.setInitialFocus();
+          }
+        });
       }
 
       emit(this, 'sl-after-show');
