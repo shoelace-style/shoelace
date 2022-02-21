@@ -122,7 +122,7 @@ export default class SlSelect extends LitElement {
   @property() label = '';
 
   /**
-   * The preferred placement of the dropdown panel. Note that the actual placement may vary as needed to keep the panel
+   * The preferred placement of the select's menu. Note that the actual placement may vary as needed to keep the panel
    * inside of the viewport.
    */
   @property() placement: 'top' | 'bottom' = 'bottom';

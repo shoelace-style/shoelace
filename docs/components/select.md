@@ -396,7 +396,7 @@ const App = () => (
 
 ### Placement
 
-The preferred placement of the dropdown can be set with the `placement` attribute. Note that the actual position may vary to ensure the panel remains in the viewport.
+The preferred placement of the select's menu can be set with the `placement` attribute. Note that the actual position may vary to ensure the panel remains in the viewport. Valid placements are `top` and `bottom`.
 
 ```html preview
 <sl-select placement="top">
