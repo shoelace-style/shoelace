@@ -179,7 +179,7 @@ export default class SlDialog extends LitElement {
       if (!hasPreventScroll) {
         const slInitialFocus = emit(this, 'sl-initial-focus', { cancelable: true });
         if (!slInitialFocus.defaultPrevented) {
-          this.panel.focus({ preventScroll: true });
+          this.panel.focus();
         }
       }
 
