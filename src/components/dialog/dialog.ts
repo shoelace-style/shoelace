@@ -161,10 +161,12 @@ export default class SlDialog extends LitElement {
 
       // Browsers that support el.focus({ preventScroll }) can set initial focus immediately
       if (hasPreventScroll) {
-        const slInitialFocus = emit(this, 'sl-initial-focus', { cancelable: true });
-        if (!slInitialFocus.defaultPrevented) {
-          this.panel.focus({ preventScroll: true });
-        }
+        requestAnimationFrame(() => {
+          const slInitialFocus = emit(this, 'sl-initial-focus', { cancelable: true });
+          if (!slInitialFocus.defaultPrevented) {
+            this.panel.focus({ preventScroll: true });
+          }
+        });
       }
 
       const panelAnimation = getAnimation(this, 'dialog.show');
@@ -177,10 +179,12 @@ export default class SlDialog extends LitElement {
       // Browsers that don't support el.focus({ preventScroll }) have to wait for the animation to finish before initial
       // focus to prevent scrolling issues. See: https://caniuse.com/mdn-api_htmlelement_focus_preventscroll_option
       if (!hasPreventScroll) {
-        const slInitialFocus = emit(this, 'sl-initial-focus', { cancelable: true });
-        if (!slInitialFocus.defaultPrevented) {
-          this.panel.focus();
-        }
+        requestAnimationFrame(() => {
+          const slInitialFocus = emit(this, 'sl-initial-focus', { cancelable: true });
+          if (!slInitialFocus.defaultPrevented) {
+            this.panel.focus();
+          }
+        });
       }
 
       emit(this, 'sl-after-show');

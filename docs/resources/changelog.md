@@ -10,6 +10,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 - Added `tag-base`, `tag-content`, and `tag-remove-button` parts to `<sl-select>` [#682](https://github.com/shoelace-style/shoelace/discussions/682)
 - Fixed a bug that allowed `<sl-dropdown>` to go into an incorrect state when activating the trigger while disabled [#684](https://github.com/shoelace-style/shoelace/pull/684)
+- Fixed a bug where Safari would sometimes not focus after preventing `sl-initial-focus` [#688](https://github.com/shoelace-style/shoelace/issues/688)
 - Improved the size of the remove button in `<sl-tag>`
 
 ## 2.0.0-beta.69
