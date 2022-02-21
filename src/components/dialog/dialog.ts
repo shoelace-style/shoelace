@@ -139,6 +139,17 @@ export default class SlDialog extends LitElement {
     this.hide();
   }
 
+  // Sets focus on the first child element with autofocus, falling back to the panel if one isn't found
+  private setInitialFocus() {
+    const target = this.querySelector('[autofocus]');
+
+    if (target) {
+      (target as HTMLElement).focus({ preventScroll: true });
+    } else {
+      this.panel.focus({ preventScroll: true });
+    }
+  }
+
   handleKeyDown(event: KeyboardEvent) {
     if (event.key === 'Escape') {
       event.stopPropagation();
@@ -164,7 +175,7 @@ export default class SlDialog extends LitElement {
         requestAnimationFrame(() => {
           const slInitialFocus = emit(this, 'sl-initial-focus', { cancelable: true });
           if (!slInitialFocus.defaultPrevented) {
-            this.panel.focus({ preventScroll: true });
+            this.setInitialFocus();
           }
         });
       }
@@ -182,7 +193,7 @@ export default class SlDialog extends LitElement {
         requestAnimationFrame(() => {
           const slInitialFocus = emit(this, 'sl-initial-focus', { cancelable: true });
           if (!slInitialFocus.defaultPrevented) {
-            this.panel.focus();
+            this.setInitialFocus();
           }
         });
       }
