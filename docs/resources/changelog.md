@@ -14,6 +14,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Added Danish translation [#690](https://github.com/shoelace-style/shoelace/pull/690)
 - Fixed a bug that allowed `<sl-dropdown>` to go into an incorrect state when activating the trigger while disabled [#684](https://github.com/shoelace-style/shoelace/pull/684)
 - Fixed a bug where Safari would sometimes not focus after preventing `sl-initial-focus` [#688](https://github.com/shoelace-style/shoelace/issues/688)
+- Fixed a bug where the active tab indicator in `<sl-tab-group>` would be misaligned when using disabled tabs [#695](https://github.com/shoelace-style/shoelace/pull/695)
 - Improved the size of the remove button in `<sl-tag>`
 
 ## 2.0.0-beta.69
