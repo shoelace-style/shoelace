@@ -394,6 +394,33 @@ const App = () => (
 );
 ```
 
+### Placement
+
+The preferred placement of the select's menu can be set with the `placement` attribute. Note that the actual position may vary to ensure the panel remains in the viewport. Valid placements are `top` and `bottom`.
+
+```html preview
+<sl-select placement="top">
+  <sl-menu-item value="option-1">Option 1</sl-menu-item>
+  <sl-menu-item value="option-2">Option 2</sl-menu-item>
+  <sl-menu-item value="option-3">Option 3</sl-menu-item>
+</sl-select>
+```
+
+```jsx react
+import { 
+  SlMenuItem,
+  SlSelect
+} from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlSelect placement="top">
+    <SlMenuItem value="option-1">Option 1</SlMenuItem>
+    <SlMenuItem value="option-2">Option 2</SlMenuItem>
+    <SlMenuItem value="option-3">Option 3</SlMenuItem>
+  </SlDropdown> 
+);
+```
+
 ### Prefix & Suffix Icons
 
 Use the `prefix` and `suffix` slots to add icons.

@@ -121,6 +121,12 @@ export default class SlSelect extends LitElement {
   /** The select's label. Alternatively, you can use the label slot. */
   @property() label = '';
 
+  /**
+   * The preferred placement of the select's menu. Note that the actual placement may vary as needed to keep the panel
+   * inside of the viewport.
+   */
+  @property() placement: 'top' | 'bottom' = 'bottom';
+
   /** The select's help text. Alternatively, you can use the help-text slot. */
   @property({ attribute: 'help-text' }) helpText = '';
 
@@ -451,6 +457,7 @@ export default class SlSelect extends LitElement {
         <sl-dropdown
           part="base"
           .hoist=${this.hoist}
+          .placement=${this.placement}
           .stayOpenOnSelect=${this.multiple}
           .containingElement=${this as HTMLElement}
           ?disabled=${this.disabled}

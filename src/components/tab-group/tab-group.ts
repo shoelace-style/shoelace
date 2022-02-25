@@ -295,9 +295,9 @@ export default class SlTabGroup extends LitElement {
     const width = currentTab.clientWidth;
     const height = currentTab.clientHeight;
 
-    // offsetLeft/offsetTop cannot be used directly here due to a shadow parent issue: https://bugs.chromium.org/p/chromium/issues/detail?id=920069
-    // neither can getBoundingClientRect as it gives invalid values for animating elements
-    const allTabs = this.getAllTabs();
+    // We can't used offsetLeft/offsetTop here due to a shadow parent issue where neither can getBoundingClientRect
+    // because it provides invalid values for animating elements: https://bugs.chromium.org/p/chromium/issues/detail?id=920069
+    const allTabs = this.getAllTabs(true);
     const precedingTabs = allTabs.slice(0, allTabs.indexOf(currentTab));
     const offset = precedingTabs.reduce(
       (previous, current) => ({
