@@ -100,6 +100,8 @@ const App = () => (
 
 ### Custom Icons
 
+You can provide custom icons by passing a function to the `getSymbol` property.
+
 ```html preview
 <sl-rating class="rating-hearts" style="--symbol-color-active: #ff4136;"></sl-rating>
 
@@ -122,6 +124,8 @@ const App = () => (
 ```
 
 ### Value-based Icons
+
+You can also use the `getSymbol` property to render different icons based on value.
 
 ```html preview
 <sl-rating class="rating-emojis"></sl-rating>
