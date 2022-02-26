@@ -1,17 +1,17 @@
 import type { Instance as PopperInstance } from '@popperjs/core/dist/esm';
 import { createPopper } from '@popperjs/core/dist/esm';
-import { LitElement, html } from 'lit';
+import { html, LitElement } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
+import type SlMenuItem from '../../components/menu-item/menu-item';
+import type SlMenu from '../../components/menu/menu';
+import { animateTo, stopAnimations } from '../../internal/animate';
+import { emit, waitForEvent } from '../../internal/event';
+import { scrollIntoView } from '../../internal/scroll';
+import { getTabbableBoundary } from '../../internal/tabbable';
+import { watch } from '../../internal/watch';
+import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
 import styles from './dropdown.styles';
-import type SlMenuItem from '~/components/menu-item/menu-item';
-import type SlMenu from '~/components/menu/menu';
-import { animateTo, stopAnimations } from '~/internal/animate';
-import { emit, waitForEvent } from '~/internal/event';
-import { scrollIntoView } from '~/internal/scroll';
-import { getTabbableBoundary } from '~/internal/tabbable';
-import { watch } from '~/internal/watch';
-import { setDefaultAnimation, getAnimation } from '~/utilities/animation-registry';
 
 /**
  * @since 2.0

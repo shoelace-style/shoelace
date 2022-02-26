@@ -20,19 +20,7 @@ Through the magic of a mutation observer, changing the `lang` attribute will aut
 
 ## Available Translations
 
-Shoelace ships with the following translations. The default is English (US), which also serves as the fallback locale. As such, you do not need to import the English translation.
-
-- `en` - English (US)
-- `de-CH` - German (Switzerland)
-- `de` - German
-- `es` - Spanish (Latin America)
-- `fr` - French
-- `he` - Hebrew
-- `ja` - Japanese
-- `nl` - Dutch
-- `pl` - Polish
-- `pt` - Portuguese
-- `ru` - Russian
+Shoelace ships with a number of translations. The default is English (US), which also serves as the fallback locale. As such, you do not need to import the English translation. To see a list of all available translations in the latest version, [refer to this directory](https://github.com/shoelace-style/shoelace/tree/current/src/translations).
 
 The location of translations depends on how you're consuming Shoelace.
 

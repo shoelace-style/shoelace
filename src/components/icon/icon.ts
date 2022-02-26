@@ -1,12 +1,12 @@
-import { LitElement, html } from 'lit';
+import { html, LitElement } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
+import { emit } from '../../internal/event';
+import { watch } from '../../internal/watch';
 import styles from './icon.styles';
-import { getIconLibrary, watchIcon, unwatchIcon } from './library';
+import { getIconLibrary, unwatchIcon, watchIcon } from './library';
 import { requestIcon } from './request';
-import { emit } from '~/internal/event';
-import { watch } from '~/internal/watch';
 
 const parser = new DOMParser();
 

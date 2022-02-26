@@ -1,18 +1,18 @@
-import { LitElement, html } from 'lit';
+import { html, LitElement } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
+import { animateTo, stopAnimations } from '../../internal/animate';
+import { emit, waitForEvent } from '../../internal/event';
+import Modal from '../../internal/modal';
+import { lockBodyScrolling, unlockBodyScrolling } from '../../internal/scroll';
+import { HasSlotController } from '../../internal/slot';
+import { isPreventScrollSupported } from '../../internal/support';
+import { watch } from '../../internal/watch';
+import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
+import { LocalizeController } from '../../utilities/localize';
+import '../icon-button/icon-button';
 import styles from './dialog.styles';
-import '~/components/icon-button/icon-button';
-import { animateTo, stopAnimations } from '~/internal/animate';
-import { emit, waitForEvent } from '~/internal/event';
-import Modal from '~/internal/modal';
-import { lockBodyScrolling, unlockBodyScrolling } from '~/internal/scroll';
-import { HasSlotController } from '~/internal/slot';
-import { isPreventScrollSupported } from '~/internal/support';
-import { watch } from '~/internal/watch';
-import { setDefaultAnimation, getAnimation } from '~/utilities/animation-registry';
-import { LocalizeController } from '~/utilities/localize';
 
 const hasPreventScroll = isPreventScrollSupported();
 

@@ -64,15 +64,6 @@ module.exports = {
           }
         ],
         '@typescript-eslint/consistent-type-imports': 'warn',
-        // These are commented out for now as we may want to add them to improve function boundary safety
-        // "@typescript-eslint/explicit-function-return-type": [
-        //     "error",
-        //     {
-        //         allowTypedFunctionExpressions: true,
-        //     },
-        // ],
-        // "@typescript-eslint/explicit-member-accessibility": "warn",
-        // "@typescript-eslint/explicit-module-boundary-types": "error",
         '@typescript-eslint/no-base-to-string': 'error',
         '@typescript-eslint/no-confusing-non-null-assertion': 'error',
         '@typescript-eslint/no-invalid-void-type': 'error',
@@ -207,42 +198,11 @@ module.exports = {
         message: "Don't use the Boolean function. Use a strict comparison instead."
       }
     ],
-    'no-restricted-imports': [
-      'warn',
-      {
-        patterns: [
-          {
-            group: ['../*'],
-            message: 'Usage of relative parent imports is not allowed.'
-          }
-        ],
-        paths: [
-          {
-            name: '.',
-            message: 'Usage of local index imports is not allowed.'
-          },
-          {
-            name: './index',
-            message: 'Import from the source file instead.'
-          }
-        ]
-      }
-    ],
     'import/no-duplicates': 'warn',
     'import/order': [
       'warn',
       {
-        groups: ['builtin', 'external', ['parent', 'sibling', 'internal', 'index']],
-        pathGroups: [
-          {
-            pattern: '~/**',
-            group: 'internal'
-          },
-          {
-            pattern: 'dist/**',
-            group: 'external'
-          }
-        ],
+        groups: ['builtin', 'external', 'parent', 'sibling', 'index'],
         alphabetize: {
           order: 'asc',
           caseInsensitive: true

@@ -1,14 +1,14 @@
-import { LitElement, html } from 'lit';
+import { html, LitElement } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
+import { emit } from '../../internal/event';
+import { scrollIntoView } from '../../internal/scroll';
+import { watch } from '../../internal/watch';
+import { LocalizeController } from '../../utilities/localize';
+import '../icon-button/icon-button';
+import type SlTabPanel from '../tab-panel/tab-panel';
+import type SlTab from '../tab/tab';
 import styles from './tab-group.styles';
-import '~/components/icon-button/icon-button';
-import type SlTabPanel from '~/components/tab-panel/tab-panel';
-import type SlTab from '~/components/tab/tab';
-import { emit } from '~/internal/event';
-import { scrollIntoView } from '~/internal/scroll';
-import { watch } from '~/internal/watch';
-import { LocalizeController } from '~/utilities/localize';
 
 /**
  * @since 2.0

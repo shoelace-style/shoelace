@@ -1,10 +1,10 @@
-import { LitElement, html } from 'lit';
+import { html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { styleMap } from 'lit/directives/style-map.js';
+import { LocalizeController } from '../../utilities/localize';
 import styles from './progress-bar.styles';
-import { LocalizeController } from '~/utilities/localize';
 
 /**
  * @since 2.0

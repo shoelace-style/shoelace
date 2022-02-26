@@ -1,8 +1,8 @@
-import { LitElement, html } from 'lit';
+import { html, LitElement } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
+import type SlRadio from '../radio/radio';
 import styles from './radio-group.styles';
-import type SlRadio from '~/components/radio/radio';
 
 /**
  * @since 2.0

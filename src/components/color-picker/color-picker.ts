@@ -1,24 +1,24 @@
 import Color from 'color';
-import { LitElement, html } from 'lit';
+import { html, LitElement } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
 import { styleMap } from 'lit/directives/style-map.js';
+import { drag } from '../../internal/drag';
+import { emit } from '../../internal/event';
+import { FormSubmitController } from '../../internal/form-control';
+import { clamp } from '../../internal/math';
+import { watch } from '../../internal/watch';
+import { LocalizeController } from '../../utilities/localize';
+import '../button-group/button-group';
+import '../button/button';
+import '../dropdown/dropdown';
+import type SlDropdown from '../dropdown/dropdown';
+import '../icon/icon';
+import '../input/input';
+import type SlInput from '../input/input';
 import styles from './color-picker.styles';
-import '~/components/button-group/button-group';
-import '~/components/button/button';
-import type SlDropdown from '~/components/dropdown/dropdown';
-import '~/components/dropdown/dropdown';
-import '~/components/icon/icon';
-import type SlInput from '~/components/input/input';
-import '~/components/input/input';
-import { drag } from '~/internal/drag';
-import { emit } from '~/internal/event';
-import { FormSubmitController } from '~/internal/form-control';
-import { clamp } from '~/internal/math';
-import { watch } from '~/internal/watch';
-import { LocalizeController } from '~/utilities/localize';
 
 const hasEyeDropper = 'EyeDropper' in window;
 

@@ -1,9 +1,9 @@
-import { LitElement, html } from 'lit';
+import { html, LitElement } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
+import { watch } from '../../internal/watch';
+import '../icon/icon';
 import styles from './menu-item.styles';
-import '~/components/icon/icon';
-import { watch } from '~/internal/watch';
 
 /**
  * @since 2.0

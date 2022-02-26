@@ -1,9 +1,9 @@
-import { LitElement, html } from 'lit';
+import { html, LitElement } from 'lit';
 import { customElement, property, queryAsync } from 'lit/decorators.js';
+import { emit } from '../../internal/event';
+import { watch } from '../../internal/watch';
 import styles from './animation.styles';
 import { animations } from './animations';
-import { emit } from '~/internal/event';
-import { watch } from '~/internal/watch';
 
 /**
  * @since 2.0

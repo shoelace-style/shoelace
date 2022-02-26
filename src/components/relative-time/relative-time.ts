@@ -1,6 +1,6 @@
-import { LitElement, html } from 'lit';
+import { html, LitElement } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { LocalizeController } from '~/utilities/localize';
+import { LocalizeController } from '../../utilities/localize';
 
 interface UnitConfig {
   max: number;

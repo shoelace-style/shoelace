@@ -1,4 +1,4 @@
-import { getTabbableBoundary } from '~/internal/tabbable';
+import { getTabbableBoundary } from './tabbable';
 
 let activeModals: HTMLElement[] = [];
 

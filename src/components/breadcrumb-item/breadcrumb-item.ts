@@ -1,9 +1,9 @@
-import { LitElement, html } from 'lit';
+import { html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
+import { HasSlotController } from '../../internal/slot';
 import styles from './breadcrumb-item.styles';
-import { HasSlotController } from '~/internal/slot';
 
 /**
  * @since 2.0
