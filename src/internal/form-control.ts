@@ -2,6 +2,7 @@ import type { ReactiveController, ReactiveControllerHost, TemplateResult } from 
 import { html } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
+import type SlButton from '../components/button/button';
 import './formdata-event-polyfill';
 
 export interface FormSubmitControllerOptions {
@@ -84,11 +85,11 @@ export class FormSubmitController implements ReactiveController {
     }
   }
 
-  submit() {
-    // Calling form.submit() seems to bypass the submit event and constraint validation. Instead, we can inject a
-    // native submit button into the form, click it, then remove it to simulate a standard form submission.
-    const button = document.createElement('button');
+  submit(submitter?: HTMLInputElement | SlButton) {
+    // Calling form.submit() bypasses the submit event and constraint validation. To prevent this, we can inject a
+    // native submit button into the form, "click" it, then remove it to simulate a standard form submission.
     if (this.form) {
+      const button = document.createElement('button');
       button.type = 'submit';
       button.style.position = 'absolute';
       button.style.width = '0';
@@ -97,6 +98,15 @@ export class FormSubmitController implements ReactiveController {
       button.style.clipPath = 'inset(50%)';
       button.style.overflow = 'hidden';
       button.style.whiteSpace = 'nowrap';
+
+      // Pass form override properties through to the temporary button
+      if (submitter) {
+        button.formAction = submitter.formAction;
+        button.formMethod = submitter.formMethod;
+        button.formNoValidate = submitter.formNoValidate;
+        button.formTarget = submitter.formTarget;
+      }
+
       this.form.append(button);
       button.click();
       button.remove();
