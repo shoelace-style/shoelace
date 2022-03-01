@@ -259,8 +259,10 @@ export default class SlInput extends LitElement {
   }
 
   handleKeyDown(event: KeyboardEvent) {
+    const hasModifier = event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
+
     // Pressing enter when focused on an input should submit the form like a native input
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' && !hasModifier) {
       this.formSubmitController.submit();
     }
   }
