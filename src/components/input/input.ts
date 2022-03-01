@@ -47,7 +47,6 @@ export default class SlInput extends LitElement {
 
   @query('.input__control') input: HTMLInputElement;
 
-  // @ts-expect-error -- Controller is currently unused
   private readonly formSubmitController = new FormSubmitController(this);
   private readonly hasSlotController = new HasSlotController(this, 'help-text', 'label');
   private readonly attrId = autoIncrement();
@@ -259,6 +258,13 @@ export default class SlInput extends LitElement {
     this.invalid = true;
   }
 
+  handleKeyDown(event: KeyboardEvent) {
+    // Pressing enter when focused on an input should submit the form like a native input
+    if (event.key === 'Enter') {
+      this.formSubmitController.submit();
+    }
+  }
+
   handlePasswordToggle() {
     this.isPasswordVisible = !this.isPasswordVisible;
   }
@@ -346,6 +352,7 @@ export default class SlInput extends LitElement {
             @change=${this.handleChange}
             @input=${this.handleInput}
             @invalid=${this.handleInvalid}
+            @keydown=${this.handleKeyDown}
             @focus=${this.handleFocus}
             @blur=${this.handleBlur}
           />

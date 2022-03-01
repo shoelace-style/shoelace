@@ -1,4 +1,6 @@
-import { expect, fixture, html } from '@open-wc/testing';
+import { expect, fixture, html, waitUntil } from '@open-wc/testing';
+import { sendKeys } from '@web/test-runner-commands';
+import sinon from 'sinon';
 import type SlInput from './input';
 
 describe('<sl-input>', () => {
@@ -21,12 +23,25 @@ describe('<sl-input>', () => {
     expect(el.invalid).to.be.true;
   });
 
-  it('should be invalid when required and after removing disabled ', async () => {
+  it('should be invalid when required and after removing disabled', async () => {
     const el = await fixture<SlInput>(html` <sl-input disabled required></sl-input> `);
 
     el.disabled = false;
     await el.updateComplete;
 
     expect(el.invalid).to.be.true;
+  });
+
+  it('should submit the form when pressing enter in a form without a submit button', async () => {
+    const form = await fixture<HTMLFormElement>(html` <form><sl-input></sl-input></form> `);
+    const input = form.querySelector('sl-input')!;
+    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+
+    form.addEventListener('submit', submitHandler);
+    input.focus();
+    await sendKeys({ press: 'Enter' });
+    await waitUntil(() => submitHandler.calledOnce);
+
+    expect(submitHandler).to.have.been.calledOnce;
   });
 });

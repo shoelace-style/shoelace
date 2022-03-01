@@ -9,6 +9,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 ## Next
 
 - Added `form`, `formaction`, `formmethod`, `formnovalidate`, and `formtarget` attributes to `<sl-button>` [#699](https://github.com/shoelace-style/shoelace/issues/699)
+- Fixed a bug that prevented forms from submitting when pressing <kbd>Enter</kbd> inside of an `<sl-input>` [#700](https://github.com/shoelace-style/shoelace/issues/700)
 - Improved `autofocus` behavior in Safari for `<sl-dialog>` and `<sl-drawer>` [#693](https://github.com/shoelace-style/shoelace/issues/693)
 - Removed feature detection for `focus({ preventScroll })` since it no longer works in Safari
 - Removed path aliasing and third-party dependencies that it required
