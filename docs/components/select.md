@@ -156,9 +156,89 @@ const App = () => (
 );
 ```
 
+### Setting the Selection
+
+Use the `value` attribute to set the current selection. When users interact with the control, its `value` will update to reflect the newly selected menu item's value. Note that the value must be an array when using the [`multiple`](#multiple) option.
+
+```html preview
+<sl-select value="option-2">
+  <sl-menu-item value="option-1">Option 1</sl-menu-item>
+  <sl-menu-item value="option-2">Option 2</sl-menu-item>
+  <sl-menu-item value="option-3">Option 3</sl-menu-item>
+</sl-select>
+```
+
+```jsx react
+import { SlDivider, SlMenuItem, SlSelect } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlSelect value="option-2">
+    <SlMenuItem value="option-1">Option 1</SlMenuItem>
+    <SlMenuItem value="option-2">Option 2</SlMenuItem>
+    <SlMenuItem value="option-3">Option 3</SlMenuItem>
+  </SlSelect>
+);
+```
+
+### Setting the Selection Imperatively
+
+To programmatically set the selection, update the `value` property as shown below. Note that the value must be an array when using the [`multiple`](#multiple) option.
+
+```html preview
+<div class="selecting-example">
+  <sl-select>
+    <sl-menu-item value="option-1">Option 1</sl-menu-item>
+    <sl-menu-item value="option-2">Option 2</sl-menu-item>
+    <sl-menu-item value="option-3">Option 3</sl-menu-item>
+  </sl-select>
+
+  <br>
+
+  <sl-button data-option="option-1">Set 1</sl-button>
+  <sl-button data-option="option-2">Set 2</sl-button>
+  <sl-button data-option="option-3">Set 3</sl-button>
+</div>
+
+<script>
+  const container = document.querySelector('.selecting-example');
+  const select = container.querySelector('sl-select');
+
+  [...container.querySelectorAll('sl-button')].map(button => {
+    button.addEventListener('click', () => {
+      select.value = button.dataset.option; 
+    });
+  });
+</script>
+```
+
+```jsx react
+import { useState } from 'react';
+import { SlButton, SlMenuItem, SlSelect } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => {
+  const [value, setValue] = useState('option-1');
+
+  return (
+    <>
+      <SlSelect value={value} onSlChange={event => setValue(event.target.value)}>
+        <SlMenuItem value="option-1">Option 1</SlMenuItem>
+        <SlMenuItem value="option-2">Option 2</SlMenuItem>
+        <SlMenuItem value="option-3">Option 3</SlMenuItem>
+      </SlSelect>
+
+      <br />
+
+      <SlButton onClick={() => setValue('option-1')}>Set 1</SlButton>
+      <SlButton onClick={() => setValue('option-2')}>Set 2</SlButton>
+      <SlButton onClick={() => setValue('option-3')}>Set 3</SlButton>
+    </>
+  );
+};
+```
+
 ### Multiple
 
-To allow multiple options to be selected, use the `multiple` attribute. It's a good practice to use `clearable` when this option is enabled. When using this option, the `value` property will be an array of strings instead of a string.
+To allow multiple options to be selected, use the `multiple` attribute. With this option, `value` will be an array of strings instead of a string. It's a good practice to use `clearable` when this option is enabled.
 
 ```html preview
 <sl-select placeholder="Select a few" multiple clearable>
@@ -188,7 +268,7 @@ const App = () => (
 );
 ```
 
-?> When using the `multiple` attribute, the `value` property will be an array instead of a string. To set it in your HTML, obtain a reference to the element and set `value` to an array of strings.
+?> When using the `multiple` option, the value will be an array instead of a string. You may need to [set the selection imperatively](#setting-the-selection-imperatively) unless you're using a framework that supports binding properties declaratively.
 
 ### Grouping Options
 
@@ -282,62 +362,6 @@ const App = () => (
     </SlSelect>
   </>
 );
-```
-
-### Selecting Options Programmatically
-
-The `value` property is bound to the current selection. As the selection changes, so will the value. To programmatically manage the selection, update the `value` property.
-
-```html preview
-<div class="selecting-example">
-  <sl-select>
-    <sl-menu-item value="option-1">Option 1</sl-menu-item>
-    <sl-menu-item value="option-2">Option 2</sl-menu-item>
-    <sl-menu-item value="option-3">Option 3</sl-menu-item>
-  </sl-select>
-
-  <br>
-
-  <sl-button data-option="option-1">Set 1</sl-button>
-  <sl-button data-option="option-2">Set 2</sl-button>
-  <sl-button data-option="option-3">Set 3</sl-button>
-</div>
-
-<script>
-  const container = document.querySelector('.selecting-example');
-  const select = container.querySelector('sl-select');
-
-  [...container.querySelectorAll('sl-button')].map(button => {
-    button.addEventListener('click', () => {
-      select.value = button.dataset.option; 
-    });
-  });
-</script>
-```
-
-```jsx react
-import { useState } from 'react';
-import { SlButton, SlMenuItem, SlSelect } from '@shoelace-style/shoelace/dist/react';
-
-const App = () => {
-  const [value, setValue] = useState('option-1');
-
-  return (
-    <>
-      <SlSelect value={value} onSlChange={event => setValue(event.target.value)}>
-        <SlMenuItem value="option-1">Option 1</SlMenuItem>
-        <SlMenuItem value="option-2">Option 2</SlMenuItem>
-        <SlMenuItem value="option-3">Option 3</SlMenuItem>
-      </SlSelect>
-
-      <br />
-
-      <SlButton onClick={() => setValue('option-1')}>Set 1</SlButton>
-      <SlButton onClick={() => setValue('option-2')}>Set 2</SlButton>
-      <SlButton onClick={() => setValue('option-3')}>Set 3</SlButton>
-    </>
-  );
-};
 ```
 
 ### Labels
