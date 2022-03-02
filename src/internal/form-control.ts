@@ -1,9 +1,9 @@
-import type { ReactiveController, ReactiveControllerHost, TemplateResult } from 'lit';
 import { html } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import type SlButton from '~/components/button/button';
 import './formdata-event-polyfill';
+import type { ReactiveController, ReactiveControllerHost, TemplateResult } from 'lit';
 
 export interface FormSubmitControllerOptions {
   /** A function that returns the form containing the form control. */

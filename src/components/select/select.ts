@@ -1,4 +1,3 @@
-import type { TemplateResult } from 'lit';
 import { html, LitElement } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
@@ -18,6 +17,7 @@ import { FormSubmitController, getLabelledBy, renderFormControl } from '~/intern
 import { getTextContent, HasSlotController } from '~/internal/slot';
 import { watch } from '~/internal/watch';
 import styles from './select.styles';
+import type { TemplateResult } from 'lit';
 
 /**
  * @since 2.0

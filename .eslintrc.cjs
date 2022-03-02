@@ -223,7 +223,7 @@ module.exports = {
     'import/order': [
       'warn',
       {
-        groups: ['builtin', 'external', ['parent', 'internal', 'index'], 'sibling'],
+        groups: ['builtin', 'external', 'internal', 'unknown', 'parent', 'sibling', 'index', 'object', 'type'],
         pathGroups: [
           {
             pattern: '~/**',

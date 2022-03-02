@@ -1,4 +1,3 @@
-import type { Instance as PopperInstance } from '@popperjs/core/dist/esm';
 import { createPopper } from '@popperjs/core/dist/esm';
 import { html, LitElement } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
@@ -8,6 +7,7 @@ import { emit, waitForEvent } from '~/internal/event';
 import { watch } from '~/internal/watch';
 import { getAnimation, setDefaultAnimation } from '~/utilities/animation-registry';
 import styles from './tooltip.styles';
+import type { Instance as PopperInstance } from '@popperjs/core/dist/esm';
 
 /**
  * @since 2.0

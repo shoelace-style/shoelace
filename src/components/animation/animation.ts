@@ -156,7 +156,6 @@ export default class SlAnimation extends LitElement {
   }
 
   async createAnimation() {
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- The specified easing may not exist
     const easing = animations.easings[this.easing] ?? this.easing;
     const keyframes = this.keyframes ?? (animations as unknown as Partial<Record<string, Keyframe[]>>)[this.name];
     const slot = await this.defaultSlot;

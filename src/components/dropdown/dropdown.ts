@@ -1,4 +1,3 @@
-import type { Instance as PopperInstance } from '@popperjs/core/dist/esm';
 import { createPopper } from '@popperjs/core/dist/esm';
 import { html, LitElement } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
@@ -12,6 +11,7 @@ import { getTabbableBoundary } from '~/internal/tabbable';
 import { watch } from '~/internal/watch';
 import { getAnimation, setDefaultAnimation } from '~/utilities/animation-registry';
 import styles from './dropdown.styles';
+import type { Instance as PopperInstance } from '@popperjs/core/dist/esm';
 
 /**
  * @since 2.0
