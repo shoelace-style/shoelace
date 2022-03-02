@@ -144,22 +144,26 @@ export default class SlInput extends LitElement {
 
   /** Gets or sets the current value as a `Date` object. Only valid when `type` is `date`. */
   get valueAsDate() {
-    return this.input.valueAsDate!;
+    return this.input?.valueAsDate ?? null;
   }
 
-  set valueAsDate(newValue: Date) {
-    this.input.valueAsDate = newValue;
-    this.value = this.input.value;
+  set valueAsDate(newValue: Date | null) {
+    this.updateComplete.then(() => {
+      this.input.valueAsDate = newValue;
+      this.value = this.input.value;
+    });
   }
 
   /** Gets or sets the current value as a number. */
   get valueAsNumber() {
-    return this.input.valueAsNumber;
+    return this.input?.valueAsNumber ?? parseFloat(this.value);
   }
 
   set valueAsNumber(newValue: number) {
-    this.input.valueAsNumber = newValue;
-    this.value = this.input.value;
+    this.updateComplete.then(() => {
+      this.input.valueAsNumber = newValue;
+      this.value = this.input.value;
+    });
   }
 
   firstUpdated() {

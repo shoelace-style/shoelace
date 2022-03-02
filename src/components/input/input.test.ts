@@ -44,4 +44,24 @@ describe('<sl-input>', () => {
 
     expect(submitHandler).to.have.been.calledOnce;
   });
+
+  it('should set the value as a date when using valueAsDate', async () => {
+    const el = await fixture<SlInput>(html` <sl-input type="date"></sl-input> `);
+    const today = new Date();
+
+    el.valueAsDate = today;
+    await el.updateComplete;
+
+    expect(el.value).to.equal(today.toISOString().split('T')[0]);
+  });
+
+  it('should set the value as a number when using valueAsNumber', async () => {
+    const el = await fixture<SlInput>(html` <sl-input type="number"></sl-input> `);
+    const num = 12345;
+
+    el.valueAsNumber = num;
+    await el.updateComplete;
+
+    expect(el.value).to.equal(num.toString());
+  });
 });

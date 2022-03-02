@@ -69,7 +69,7 @@ module.exports = {
         '@typescript-eslint/no-invalid-void-type': 'error',
         '@typescript-eslint/no-require-imports': 'error',
         '@typescript-eslint/no-unnecessary-boolean-literal-compare': 'warn',
-        '@typescript-eslint/no-unnecessary-condition': 'warn',
+        '@typescript-eslint/no-unnecessary-condition': 'off',
         '@typescript-eslint/no-unnecessary-qualifier': 'warn',
         '@typescript-eslint/non-nullable-type-assertion-style': 'warn',
         '@typescript-eslint/prefer-for-of': 'warn',
