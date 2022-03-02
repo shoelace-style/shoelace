@@ -1,8 +1,8 @@
 import { html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { emit } from '../../internal/event';
-import '../icon-button/icon-button';
+import '~/components/icon-button/icon-button';
+import { emit } from '~/internal/event';
 import styles from './tag.styles';
 
 /**

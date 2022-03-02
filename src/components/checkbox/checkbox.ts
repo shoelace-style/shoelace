@@ -3,10 +3,10 @@ import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
-import { autoIncrement } from '../../internal/auto-increment';
-import { emit } from '../../internal/event';
-import { FormSubmitController } from '../../internal/form-control';
-import { watch } from '../../internal/watch';
+import { autoIncrement } from '~/internal/auto-increment';
+import { emit } from '~/internal/event';
+import { FormSubmitController } from '~/internal/form-control';
+import { watch } from '~/internal/watch';
 import styles from './checkbox.styles';
 
 /**

@@ -3,9 +3,9 @@ import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
-import { emit } from '../../internal/event';
-import { FormSubmitController } from '../../internal/form-control';
-import { watch } from '../../internal/watch';
+import { emit } from '~/internal/event';
+import { FormSubmitController } from '~/internal/form-control';
+import { watch } from '~/internal/watch';
 import styles from './radio.styles';
 
 /**

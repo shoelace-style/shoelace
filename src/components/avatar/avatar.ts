@@ -1,7 +1,7 @@
 import { html, LitElement } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import '../icon/icon';
+import '~/components/icon/icon';
 import styles from './avatar.styles';
 
 /**

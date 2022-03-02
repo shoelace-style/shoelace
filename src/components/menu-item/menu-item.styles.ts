@@ -1,6 +1,6 @@
 import { css } from 'lit';
-import { focusVisibleSelector } from '../../internal/focus-visible';
-import componentStyles from '../../styles/component.styles';
+import { focusVisibleSelector } from '~/internal/focus-visible';
+import componentStyles from '~/styles/component.styles';
 
 export default css`
   ${componentStyles}

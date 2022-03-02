@@ -1,4 +1,4 @@
-import type SlIcon from '../../components/icon/icon';
+import type SlIcon from '~/components/icon/icon';
 import defaultLibrary from './library.default';
 import systemLibrary from './library.system';
 

@@ -34,7 +34,7 @@ fs.mkdirSync(outdir, { recursive: true });
     execSync(`node scripts/make-icons.js --outdir "${outdir}"`, { stdio: 'inherit' });
     if (types) {
       console.log('Running the TypeScript compiler...');
-      execSync(`tsc --project ./tsconfig.prod.json --outdir "${outdir}"`, { stdio: 'inherit' });
+      execSync(`ttsc --project ./tsconfig.prod.json --outdir "${outdir}"`, { stdio: 'inherit' });
     }
   } catch (err) {
     console.error(chalk.red(err));

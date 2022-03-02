@@ -1,7 +1,7 @@
 import { html, LitElement } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
-import type SlBreadcrumbItem from '../breadcrumb-item/breadcrumb-item';
-import '../icon/icon';
+import type SlBreadcrumbItem from '~/components/breadcrumb-item/breadcrumb-item';
+import '~/components/icon/icon';
 import styles from './breadcrumb.styles';
 
 /**

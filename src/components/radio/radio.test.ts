@@ -1,6 +1,6 @@
 import { expect, fixture, html, oneEvent } from '@open-wc/testing';
 import { sendKeys } from '@web/test-runner-commands';
-import type SlRadioGroup from '../../components/radio-group/radio-group';
+import type SlRadioGroup from '~/components/radio-group/radio-group';
 import type SlRadio from './radio';
 
 describe('<sl-radio>', () => {

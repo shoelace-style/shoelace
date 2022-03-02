@@ -1,11 +1,10 @@
 import { html, LitElement } from 'lit';
 import { customElement, query } from 'lit/decorators.js';
-import type SlMenuItem from '../../components/menu-item/menu-item';
-import { emit } from '../../internal/event';
-import { hasFocusVisible } from '../../internal/focus-visible';
-import { getTextContent } from '../../internal/slot';
+import type SlMenuItem from '~/components/menu-item/menu-item';
+import { emit } from '~/internal/event';
+import { hasFocusVisible } from '~/internal/focus-visible';
+import { getTextContent } from '~/internal/slot';
 import styles from './menu.styles';
-
 export interface MenuSelectEventDetail {
   item: SlMenuItem;
 }

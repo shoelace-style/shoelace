@@ -198,11 +198,42 @@ module.exports = {
         message: "Don't use the Boolean function. Use a strict comparison instead."
       }
     ],
+    'no-restricted-imports': [
+      'warn',
+      {
+        patterns: [
+          {
+            group: ['../*'],
+            message: 'Usage of relative parent imports is not allowed.'
+          }
+        ],
+        paths: [
+          {
+            name: '.',
+            message: 'Usage of local index imports is not allowed.'
+          },
+          {
+            name: './index',
+            message: 'Import from the source file instead.'
+          }
+        ]
+      }
+    ],
     'import/no-duplicates': 'warn',
     'import/order': [
       'warn',
       {
-        groups: ['builtin', 'external', 'parent', 'sibling', 'index'],
+        groups: ['builtin', 'external', ['parent', 'internal', 'index'], 'sibling'],
+        pathGroups: [
+          {
+            pattern: '~/**',
+            group: 'internal'
+          },
+          {
+            pattern: 'dist/**',
+            group: 'external'
+          }
+        ],
         alphabetize: {
           order: 'asc',
           caseInsensitive: true

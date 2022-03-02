@@ -1,10 +1,10 @@
 import { html, LitElement } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { autoIncrement } from '../../internal/auto-increment';
-import { emit } from '../../internal/event';
-import { LocalizeController } from '../../utilities/localize';
-import '../icon-button/icon-button';
+import '~/components/icon-button/icon-button';
+import { autoIncrement } from '~/internal/auto-increment';
+import { emit } from '~/internal/event';
+import { LocalizeController } from '~/utilities/localize';
 import styles from './tab.styles';
 
 /**

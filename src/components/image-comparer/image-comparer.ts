@@ -1,12 +1,12 @@
 import { html, LitElement } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
-import { autoIncrement } from '../../internal/auto-increment';
-import { drag } from '../../internal/drag';
-import { emit } from '../../internal/event';
-import { clamp } from '../../internal/math';
-import { watch } from '../../internal/watch';
-import '../icon/icon';
+import '~/components/icon/icon';
+import { autoIncrement } from '~/internal/auto-increment';
+import { drag } from '~/internal/drag';
+import { emit } from '~/internal/event';
+import { clamp } from '~/internal/math';
+import { watch } from '~/internal/watch';
 import styles from './image-comparer.styles';
 
 /**

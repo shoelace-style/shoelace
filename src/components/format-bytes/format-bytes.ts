@@ -1,6 +1,6 @@
 import { LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { LocalizeController } from '../../utilities/localize';
+import { LocalizeController } from '~/utilities/localize';
 
 /**
 
