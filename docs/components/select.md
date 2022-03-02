@@ -192,7 +192,7 @@ To programmatically set the selection, update the `value` property as shown belo
     <sl-menu-item value="option-3">Option 3</sl-menu-item>
   </sl-select>
 
-  <br>
+  <br />
 
   <sl-button data-option="option-1">Set 1</sl-button>
   <sl-button data-option="option-2">Set 2</sl-button>
@@ -205,7 +205,7 @@ To programmatically set the selection, update the `value` property as shown belo
 
   [...container.querySelectorAll('sl-button')].map(button => {
     button.addEventListener('click', () => {
-      select.value = button.dataset.option; 
+      select.value = button.dataset.option;
     });
   });
 </script>
@@ -317,7 +317,7 @@ Use the `size` attribute to change a select's size.
   <sl-menu-item value="option-3">Option 3</sl-menu-item>
 </sl-select>
 
-<br>
+<br />
 
 <sl-select placeholder="Medium" size="medium" multiple>
   <sl-menu-item value="option-1">Option 1</sl-menu-item>
@@ -325,7 +325,7 @@ Use the `size` attribute to change a select's size.
   <sl-menu-item value="option-3">Option 3</sl-menu-item>
 </sl-select>
 
-<br>
+<br />
 
 <sl-select placeholder="Large" size="large" multiple>
   <sl-menu-item value="option-1">Option 1</sl-menu-item>
@@ -393,10 +393,7 @@ const App = () => (
 Add descriptive help text to a select with the `help-text` attribute. For help texts that contain HTML, use the `help-text` slot instead.
 
 ```html preview
-<sl-select 
-  label="Experience" 
-  help-text="Please tell us your skill level."
->
+<sl-select label="Experience" help-text="Please tell us your skill level.">
   <sl-menu-item value="1">Novice</sl-menu-item>
   <sl-menu-item value="2">Intermediate</sl-menu-item>
   <sl-menu-item value="3">Advanced</sl-menu-item>
@@ -407,10 +404,7 @@ Add descriptive help text to a select with the `help-text` attribute. For help t
 import { SlMenuItem, SlSelect } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
-  <SlSelect 
-    label="Experience"
-    help-text="Please tell us your skill level."
-  >
+  <SlSelect label="Experience" help-text="Please tell us your skill level.">
     <SlMenuItem value="1">Novice</SlMenuItem>
     <SlMenuItem value="2">Intermediate</SlMenuItem>
     <SlMenuItem value="3">Advanced</SlMenuItem>
@@ -431,7 +425,7 @@ The preferred placement of the select's menu can be set with the `placement` att
 ```
 
 ```jsx react
-import { 
+import {
   SlMenuItem,
   SlSelect
 } from '@shoelace-style/shoelace/dist/react';
@@ -441,7 +435,7 @@ const App = () => (
     <SlMenuItem value="option-1">Option 1</SlMenuItem>
     <SlMenuItem value="option-2">Option 2</SlMenuItem>
     <SlMenuItem value="option-3">Option 3</SlMenuItem>
-  </SlDropdown> 
+  </SlDropdown>
 );
 ```
 
@@ -457,7 +451,7 @@ Use the `prefix` and `suffix` slots to add icons.
   <sl-menu-item value="option-3">Option 3</sl-menu-item>
   <sl-icon name="chat" slot="suffix"></sl-icon>
 </sl-select>
-<br>
+<br />
 <sl-select placeholder="Medium" size="medium">
   <sl-icon name="house" slot="prefix"></sl-icon>
   <sl-menu-item value="option-1">Option 1</sl-menu-item>
@@ -465,7 +459,7 @@ Use the `prefix` and `suffix` slots to add icons.
   <sl-menu-item value="option-3">Option 3</sl-menu-item>
   <sl-icon name="chat" slot="suffix"></sl-icon>
 </sl-select>
-<br>
+<br />
 <sl-select placeholder="Large" size="large">
   <sl-icon name="house" slot="prefix"></sl-icon>
   <sl-menu-item value="option-1">Option 1</sl-menu-item>

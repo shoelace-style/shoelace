@@ -20,7 +20,7 @@ import { SlButton, SlTooltip } from '@shoelace-style/shoelace/dist/react';
 const App = () => (
   <SlTooltip content="This is a tooltip">
     <SlButton>Hover Me</SlButton>
-  </SlTooltip>  
+  </SlTooltip>
 );
 ```
 
@@ -238,7 +238,7 @@ import { SlButton, SlTooltip } from '@shoelace-style/shoelace/dist/react';
 const App = () => (
   <SlTooltip content="Click again to dismiss" trigger="click">
     <SlButton>Click to Toggle</SlButton>
-  </SlTooltip>  
+  </SlTooltip>
 );
 ```
 
@@ -270,10 +270,7 @@ const App = () => {
 
   return (
     <>
-      <SlButton
-        style={{ marginRight: '4rem' }}
-        onClick={() => setOpen(!open)}
-      >
+      <SlButton style={{ marginRight: '4rem' }} onClick={() => setOpen(!open)}>
         Toggle Manually
       </SlButton>
 
@@ -331,10 +328,8 @@ Use the `content` slot to create tooltips with HTML content. Tooltips are design
 
 ```html preview
 <sl-tooltip>
-  <div slot="content">
-    I'm not <strong>just</strong> a tooltip, I'm a <em>tooltip</em> with HTML!
-  </div>
-  
+  <div slot="content">I'm not <strong>just</strong> a tooltip, I'm a <em>tooltip</em> with HTML!</div>
+
   <sl-button>Hover me</sl-button>
 </sl-tooltip>
 ```
@@ -349,7 +344,7 @@ const App = () => (
     </div>
 
     <SlButton>Hover Me</SlButton>
-  </SlTooltip>  
+  </SlTooltip>
 );
 ```
 

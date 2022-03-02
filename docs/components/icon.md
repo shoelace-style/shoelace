@@ -75,7 +75,7 @@ const App = () => (
     <SlIcon name="search" />
     <SlIcon name="star" />
     <SlIcon name="trash" />
-  </div>  
+  </div>
 );
 ```
 
@@ -90,9 +90,7 @@ For non-decorative icons, use the `label` attribute to announce it to assistive 
 ```jsx react
 import { SlIcon } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlIcon name="star-fill" label="Add to favorites" />
-);
+const App = () => <SlIcon name="star-fill" label="Add to favorites" />;
 ```
 
 ### Custom Icons
@@ -103,13 +101,10 @@ Custom icons can be loaded individually with the `src` attribute. Only SVGs on a
 <sl-icon src="https://shoelace.style/assets/images/shoe.svg" style="font-size: 8rem;"></sl-icon>
 ```
 
-
 ```jsx react
 import { SlIcon } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlIcon src="https://shoelace.style/assets/images/shoe.svg" style={{ fontSize: '8rem' }}></SlIcon>
-);
+const App = () => <SlIcon src="https://shoelace.style/assets/images/shoe.svg" style={{ fontSize: '8rem' }}></SlIcon>;
 ```
 
 ## Icon Libraries
@@ -163,7 +158,7 @@ Icons in this library are licensed under the [Creative Commons 4.0 License](http
       if (name.substring(0, 4) === 'bxl-') folder = 'logos';
       return `https://cdn.jsdelivr.net/npm/boxicons@2.0.5/svg/${folder}/${name}.svg`;
     },
-    mutator:svg => svg.setAttribute('fill', 'currentColor')
+    mutator: svg => svg.setAttribute('fill', 'currentColor')
   });
 </script>
 
@@ -174,14 +169,14 @@ Icons in this library are licensed under the [Creative Commons 4.0 License](http
   <sl-icon library="boxicons" name="bx-save"></sl-icon>
   <sl-icon library="boxicons" name="bx-server"></sl-icon>
   <sl-icon library="boxicons" name="bx-wine"></sl-icon>
-  <br>
+  <br />
   <sl-icon library="boxicons" name="bxs-bot"></sl-icon>
   <sl-icon library="boxicons" name="bxs-cookie"></sl-icon>
   <sl-icon library="boxicons" name="bxs-joystick"></sl-icon>
   <sl-icon library="boxicons" name="bxs-save"></sl-icon>
   <sl-icon library="boxicons" name="bxs-server"></sl-icon>
   <sl-icon library="boxicons" name="bxs-wine"></sl-icon>
-  <br>
+  <br />
   <sl-icon library="boxicons" name="bxl-apple"></sl-icon>
   <sl-icon library="boxicons" name="bxl-chrome"></sl-icon>
   <sl-icon library="boxicons" name="bxl-edge"></sl-icon>
@@ -245,20 +240,20 @@ Icons in this library are licensed under the [Font Awesome Free License](https:/
   <sl-icon library="fa" name="far-hdd"></sl-icon>
   <sl-icon library="fa" name="far-heart"></sl-icon>
   <sl-icon library="fa" name="far-star"></sl-icon>
-  <br>
+  <br />
   <sl-icon library="fa" name="fas-archive"></sl-icon>
   <sl-icon library="fa" name="fas-book"></sl-icon>
   <sl-icon library="fa" name="fas-chess-knight"></sl-icon>
   <sl-icon library="fa" name="fas-dice"></sl-icon>
   <sl-icon library="fa" name="fas-pizza-slice"></sl-icon>
   <sl-icon library="fa" name="fas-scroll"></sl-icon>
-  <br>
+  <br />
   <sl-icon library="fa" name="fab-apple"></sl-icon>
   <sl-icon library="fa" name="fab-chrome"></sl-icon>
   <sl-icon library="fa" name="fab-edge"></sl-icon>
   <sl-icon library="fa" name="fab-firefox"></sl-icon>
   <sl-icon library="fa" name="fab-opera"></sl-icon>
-  <sl-icon library="fa" name="fab-microsoft"></sl-icon>    
+  <sl-icon library="fa" name="fab-microsoft"></sl-icon>
 </div>
 ```
 
@@ -340,14 +335,14 @@ Icons in this library are licensed under the [MIT License](https://github.com/io
   <sl-icon library="ionicons" name="chatbubble"></sl-icon>
   <sl-icon library="ionicons" name="settings"></sl-icon>
   <sl-icon library="ionicons" name="warning"></sl-icon>
-  <br>
+  <br />
   <sl-icon library="ionicons" name="alarm-outline"></sl-icon>
   <sl-icon library="ionicons" name="american-football-outline"></sl-icon>
   <sl-icon library="ionicons" name="bug-outline"></sl-icon>
   <sl-icon library="ionicons" name="chatbubble-outline"></sl-icon>
   <sl-icon library="ionicons" name="settings-outline"></sl-icon>
   <sl-icon library="ionicons" name="warning-outline"></sl-icon>
-  <br>
+  <br />
   <sl-icon library="ionicons" name="alarm-sharp"></sl-icon>
   <sl-icon library="ionicons" name="american-football-sharp"></sl-icon>
   <sl-icon library="ionicons" name="bug-sharp"></sl-icon>
@@ -380,7 +375,7 @@ Icons in this library are licensed under the [MIT License](https://github.com/mi
   <sl-icon library="jam" name="leaf"></sl-icon>
   <sl-icon library="jam" name="picture"></sl-icon>
   <sl-icon library="jam" name="set-square"></sl-icon>
-  <br>
+  <br />
   <sl-icon library="jam" name="calendar-f"></sl-icon>
   <sl-icon library="jam" name="camera-f"></sl-icon>
   <sl-icon library="jam" name="filter-f"></sl-icon>
@@ -416,14 +411,14 @@ Icons in this library are licensed under the [Apache 2.0 License](https://github
   <sl-icon library="material" name="volume_up"></sl-icon>
   <sl-icon library="material" name="settings"></sl-icon>
   <sl-icon library="material" name="shopping_basket"></sl-icon>
-  <br>
+  <br />
   <sl-icon library="material" name="notifications_round"></sl-icon>
   <sl-icon library="material" name="email_round"></sl-icon>
   <sl-icon library="material" name="delete_round"></sl-icon>
   <sl-icon library="material" name="volume_up_round"></sl-icon>
   <sl-icon library="material" name="settings_round"></sl-icon>
   <sl-icon library="material" name="shopping_basket_round"></sl-icon>
-  <br>
+  <br />
   <sl-icon library="material" name="notifications_sharp"></sl-icon>
   <sl-icon library="material" name="email_sharp"></sl-icon>
   <sl-icon library="material" name="delete_sharp"></sl-icon>
@@ -460,13 +455,13 @@ Icons in this library are licensed under the [Apache 2.0 License](https://github
   <sl-icon library="remixicon" name="development/bug-line"></sl-icon>
   <sl-icon library="remixicon" name="media/image-line"></sl-icon>
   <sl-icon library="remixicon" name="system/alert-line"></sl-icon>
-  <br>
+  <br />
   <sl-icon library="remixicon" name="business/cloud-fill"></sl-icon>
   <sl-icon library="remixicon" name="design/brush-fill"></sl-icon>
   <sl-icon library="remixicon" name="business/pie-chart-fill"></sl-icon>
   <sl-icon library="remixicon" name="development/bug-fill"></sl-icon>
   <sl-icon library="remixicon" name="media/image-fill"></sl-icon>
-  <sl-icon library="remixicon" name="system/alert-fill"></sl-icon>  
+  <sl-icon library="remixicon" name="system/alert-fill"></sl-icon>
 </div>
 ```
 
@@ -483,7 +478,9 @@ Icons in this library are licensed under the [Apache 2.0 License](https://github
   registerIconLibrary('unicons', {
     resolver: name => {
       const match = name.match(/^(.*?)(-s)?$/);
-      return `https://cdn.jsdelivr.net/npm/@iconscout/unicons@3.0.3/svg/${match[2] === '-s' ? 'solid' : 'line'}/${match[1]}.svg`;
+      return `https://cdn.jsdelivr.net/npm/@iconscout/unicons@3.0.3/svg/${match[2] === '-s' ? 'solid' : 'line'}/${
+        match[1]
+      }.svg`;
     },
     mutator: svg => svg.setAttribute('fill', 'currentColor')
   });
@@ -496,12 +493,12 @@ Icons in this library are licensed under the [Apache 2.0 License](https://github
   <sl-icon library="unicons" name="polygon"></sl-icon>
   <sl-icon library="unicons" name="rocket"></sl-icon>
   <sl-icon library="unicons" name="star"></sl-icon>
-  <br>
+  <br />
   <sl-icon library="unicons" name="clock-s"></sl-icon>
   <sl-icon library="unicons" name="graph-bar-s"></sl-icon>
   <sl-icon library="unicons" name="padlock-s"></sl-icon>
   <sl-icon library="unicons" name="polygon-s"></sl-icon>
-  <sl-icon library="unicons" name="rocket-s"></sl-icon>  
+  <sl-icon library="unicons" name="rocket-s"></sl-icon>
   <sl-icon library="unicons" name="star-s"></sl-icon>
 </div>
 ```

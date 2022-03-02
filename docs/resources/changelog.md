@@ -9,6 +9,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 ## Next
 
 - Added `form`, `formaction`, `formmethod`, `formnovalidate`, and `formtarget` attributes to `<sl-button>` [#699](https://github.com/shoelace-style/shoelace/issues/699)
+- Added Prettier and ESLint to markdown files
 - Fixed a bug that prevented forms from submitting when pressing <kbd>Enter</kbd> inside of an `<sl-input>` [#700](https://github.com/shoelace-style/shoelace/issues/700)
 - Improved `autofocus` behavior in Safari for `<sl-dialog>` and `<sl-drawer>` [#693](https://github.com/shoelace-style/shoelace/issues/693)
 - Removed feature detection for `focus({ preventScroll })` since it no longer works in Safari
@@ -16,7 +17,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 ## 2.0.0-beta.70
 
 - Added `tag-base`, `tag-content`, and `tag-remove-button` parts to `<sl-select>` [#682](https://github.com/shoelace-style/shoelace/discussions/682)
-- Added support for focusing elements with `autofocus` when `<sl-dialog>` and `<sl-drawer>` open [#688](https://github.com/shoelace-style/shoelace/issues/688) 
+- Added support for focusing elements with `autofocus` when `<sl-dialog>` and `<sl-drawer>` open [#688](https://github.com/shoelace-style/shoelace/issues/688)
 - Added the `placement` attribute to `<sl-select>` [#687](https://github.com/shoelace-style/shoelace/pull/687)
 - Added Danish translation [#690](https://github.com/shoelace-style/shoelace/pull/690)
 - Fixed a bug that allowed `<sl-dropdown>` to go into an incorrect state when activating the trigger while disabled [#684](https://github.com/shoelace-style/shoelace/pull/684)
@@ -63,7 +64,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Refactored `<sl-format-byte>` to use `Intl.NumberFormat` so it supports localization
 - Refactored themes so utility styles are no longer injected as `<style>` elements to support stricter CSP rules [#571](https://github.com/shoelace-style/shoelace/issues/571)
 - Restored the nicer animation on `<sl-spinner>` and verified it works in Safari
-- Updated Feather icon example to use Lucide  [#657](https://github.com/shoelace-style/shoelace/issues/657)
+- Updated Feather icon example to use Lucide [#657](https://github.com/shoelace-style/shoelace/issues/657)
 - Updated minimum Node version to 14.17
 - Updated Lit to 2.1.2
 - Updated to Bootstrap Icons to 1.8.1

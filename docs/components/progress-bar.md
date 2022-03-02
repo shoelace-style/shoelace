@@ -11,9 +11,7 @@ Progress bars are used to show the status of an ongoing operation.
 ```jsx react
 import { SlProgressBar } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlProgressBar value={50} />
-);
+const App = () => <SlProgressBar value={50} />;
 ```
 
 ## Examples
@@ -29,12 +27,7 @@ Use the `--height` custom property to set the progress bar's height.
 ```jsx react
 import { SlProgressBar } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlProgressBar 
-    value={50}
-    style={{ '--height': '6px' }}
-  />
-);
+const App = () => <SlProgressBar value={50} style={{ '--height': '6px' }} />;
 ```
 
 ### Labels
@@ -48,12 +41,7 @@ Use the `label` attribute to label the progress bar and tell assistive devices h
 ```jsx react
 import { SlProgressBar } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlProgressBar
-    value="50" 
-    label="Upload progress"
-  />
-);
+const App = () => <SlProgressBar value="50" label="Upload progress" />;
 ```
 
 ### Showing Values
@@ -63,7 +51,7 @@ Use the default slot to show a value.
 ```html preview
 <sl-progress-bar value="50" class="progress-bar-values">50%</sl-progress-bar>
 
-<br>
+<br />
 
 <sl-button circle><sl-icon name="dash"></sl-icon></sl-button>
 <sl-button circle><sl-icon name="plus"></sl-icon></sl-button>
@@ -80,7 +68,7 @@ Use the default slot to show a value.
   });
 
   subtractButton.addEventListener('click', () => {
-    const value = Math.max(0, progressBar.value - 10)
+    const value = Math.max(0, progressBar.value - 10);
     progressBar.value = value;
     progressBar.textContent = `${value}%`;
   });
@@ -89,11 +77,7 @@ Use the default slot to show a value.
 
 ```jsx react
 import { useState } from 'react';
-import { 
-  SlButton,
-  SlIcon,
-  SlProgressBar
-} from '@shoelace-style/shoelace/dist/react';
+import { SlButton, SlIcon, SlProgressBar } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => {
   const [value, setValue] = useState(50);
@@ -107,9 +91,7 @@ const App = () => {
 
   return (
     <>
-      <SlProgressBar value={value}>
-        {value}%
-      </SlProgressBar>
+      <SlProgressBar value={value}>{value}%</SlProgressBar>
 
       <br />
 
@@ -136,9 +118,7 @@ The `indeterminate` attribute can be used to inform the user that the operation 
 ```jsx react
 import { SlProgressBar } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlProgressBar indeterminate />
-);
+const App = () => <SlProgressBar indeterminate />;
 ```
 
 [component-metadata:sl-progress-bar]

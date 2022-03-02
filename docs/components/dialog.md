@@ -202,12 +202,7 @@ const App = () => {
 
   return (
     <>
-      <SlDialog
-        label="Dialog"
-        open={open}
-        onSlRequestClose={handleRequestClose}
-        onSlAfterHide={() => setOpen(false)}
-      >
+      <SlDialog label="Dialog" open={open} onSlRequestClose={handleRequestClose} onSlAfterHide={() => setOpen(false)}>
         This dialog will not close when you click on the overlay.
         <SlButton slot="footer" variant="primary" onClick={() => setOpen(false)}>
           Close
@@ -222,7 +217,7 @@ const App = () => {
 
 ### Customizing Initial Focus
 
-By default, the dialog's panel will gain focus when opened. This allows a subsequent tab press to focus on the first tabbable element in the dialog. If you want a different element to have focus, add the `autofocus` attribute to it as shown below. 
+By default, the dialog's panel will gain focus when opened. This allows a subsequent tab press to focus on the first tabbable element in the dialog. If you want a different element to have focus, add the `autofocus` attribute to it as shown below.
 
 ```html preview
 <sl-dialog label="Dialog" class="dialog-focus">

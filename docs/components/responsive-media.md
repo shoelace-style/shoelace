@@ -8,7 +8,10 @@ You can slot in any [replaced element](https://developer.mozilla.org/en-US/docs/
 
 ```html preview
 <sl-responsive-media>
-  <img src="https://images.unsplash.com/photo-1541427468627-a89a96e5ca1d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1800&q=80" alt="A train riding through autumn foliage with mountains in the distance.">
+  <img
+    src="https://images.unsplash.com/photo-1541427468627-a89a96e5ca1d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1800&q=80"
+    alt="A train riding through autumn foliage with mountains in the distance."
+  />
 </sl-responsive-media>
 ```
 
@@ -17,7 +20,7 @@ import { SlResponsiveMedia } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <SlResponsiveMedia>
-    <img 
+    <img
       src="https://images.unsplash.com/photo-1541427468627-a89a96e5ca1d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1800&q=80"
       alt="A train riding through autumn foliage with mountains in the distance."
     />
@@ -33,7 +36,10 @@ The following image maintains a `4:3` aspect ratio as its container is resized.
 
 ```html preview
 <sl-responsive-media aspect-ratio="4:3">
-  <img src="https://images.unsplash.com/photo-1473186578172-c141e6798cf4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1800&q=80" alt="Two blue chairs on a sandy beach.">
+  <img
+    src="https://images.unsplash.com/photo-1473186578172-c141e6798cf4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1800&q=80"
+    alt="Two blue chairs on a sandy beach."
+  />
 </sl-responsive-media>
 ```
 
@@ -42,8 +48,8 @@ import { SlResponsiveMedia } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <SlResponsiveMedia aspect-ratio="4:3">
-    <img 
-      src="https://images.unsplash.com/photo-1473186578172-c141e6798cf4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1800&q=80" 
+    <img
+      src="https://images.unsplash.com/photo-1473186578172-c141e6798cf4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1800&q=80"
       alt="Two blue chairs on a sandy beach."
     />
   </SlResponsiveMedia>
@@ -56,7 +62,12 @@ The following video is embedded using an `iframe` and maintains a `16:9` aspect 
 
 ```html preview
 <sl-responsive-media aspect-ratio="16:9">
-  <iframe src="https://player.vimeo.com/video/1053647?title=0&byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+  <iframe
+    src="https://player.vimeo.com/video/1053647?title=0&byline=0&portrait=0"
+    frameborder="0"
+    allow="autoplay; fullscreen"
+    allowfullscreen
+  ></iframe>
 </sl-responsive-media>
 ```
 
@@ -65,7 +76,12 @@ import { SlResponsiveMedia } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <SlResponsiveMedia aspect-ratio="16:9">
-    <iframe src="https://player.vimeo.com/video/1053647?title=0&byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen />
+    <iframe
+      src="https://player.vimeo.com/video/1053647?title=0&byline=0&portrait=0"
+      frameborder="0"
+      allow="autoplay; fullscreen"
+      allowfullscreen
+    />
   </SlResponsiveMedia>
 );
 ```

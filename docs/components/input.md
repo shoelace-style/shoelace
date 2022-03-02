@@ -11,9 +11,7 @@ Inputs collect data from the user.
 ```jsx react
 import { SlInput } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlInput />
-);
+const App = () => <SlInput />;
 ```
 
 ?> This component works with standard `<form>` elements. Please refer to the section on [form controls](/getting-started/form-controls) to learn more about form submission and client-side validation.
@@ -31,9 +29,7 @@ Use the `placeholder` attribute to add a placeholder.
 ```jsx react
 import { SlInput } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlInput placeholder="Type something" />
-);
+const App = () => <SlInput placeholder="Type something" />;
 ```
 
 ### Clearable
@@ -47,9 +43,7 @@ Add the `clearable` attribute to add a clear button when the input has content.
 ```jsx react
 import { SlInput } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlInput placeholder="Clearable" clearable />
-);
+const App = () => <SlInput placeholder="Clearable" clearable />;
 ```
 
 ### Toggle Password
@@ -58,9 +52,9 @@ Add the `toggle-password` attribute to add a toggle button that will show the pa
 
 ```html preview
 <sl-input type="password" placeholder="Password Toggle" size="small" toggle-password></sl-input>
-<br>
+<br />
 <sl-input type="password" placeholder="Password Toggle" size="medium" toggle-password></sl-input>
-<br>
+<br />
 <sl-input type="password" placeholder="Password Toggle" size="large" toggle-password></sl-input>
 ```
 
@@ -73,7 +67,7 @@ const App = () => (
     <br />
     <SlInput type="password" placeholder="Password Toggle" size="medium" toggle-password />
     <br />
-    <SlInput type="password" placeholder="Password Toggle" size="large" toggle-password />  
+    <SlInput type="password" placeholder="Password Toggle" size="large" toggle-password />
   </>
 );
 ```
@@ -89,9 +83,7 @@ Add the `filled` attribute to draw a filled input.
 ```jsx react
 import { SlInput } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlInput placeholder="Type something" filled />
-);
+const App = () => <SlInput placeholder="Type something" filled />;
 ```
 
 ### Pill
@@ -100,9 +92,9 @@ Use the `pill` attribute to give inputs rounded edges.
 
 ```html preview
 <sl-input placeholder="Small" size="small" pill></sl-input>
-<br>
+<br />
 <sl-input placeholder="Medium" size="medium" pill></sl-input>
-<br>
+<br />
 <sl-input placeholder="Large" size="large" pill></sl-input>
 ```
 
@@ -126,9 +118,9 @@ The `type` attribute controls the type of input the browser renders.
 
 ```html preview
 <sl-input type="email" Placeholder="Email"></sl-input>
-<br>
+<br />
 <sl-input type="number" Placeholder="Number"></sl-input>
-<br>
+<br />
 <sl-input type="date" Placeholder="Date"></sl-input>
 ```
 
@@ -152,9 +144,9 @@ Use the `disabled` attribute to disable an input.
 
 ```html preview
 <sl-input placeholder="Disabled" size="small" disabled></sl-input>
-<br>
+<br />
 <sl-input placeholder="Disabled" size="medium" disabled></sl-input>
-<br>
+<br />
 <sl-input placeholder="Disabled" size="large" disabled></sl-input>
 ```
 
@@ -178,9 +170,9 @@ Use the `size` attribute to change an input's size.
 
 ```html preview
 <sl-input placeholder="Small" size="small"></sl-input>
-<br>
+<br />
 <sl-input placeholder="Medium" size="medium"></sl-input>
-<br>
+<br />
 <sl-input placeholder="Large" size="large"></sl-input>
 ```
 
@@ -207,12 +199,12 @@ Use the `prefix` and `suffix` slots to add icons.
   <sl-icon name="house" slot="prefix"></sl-icon>
   <sl-icon name="chat" slot="suffix"></sl-icon>
 </sl-input>
-<br>
+<br />
 <sl-input placeholder="Medium" size="medium">
   <sl-icon name="house" slot="prefix"></sl-icon>
   <sl-icon name="chat" slot="suffix"></sl-icon>
 </sl-input>
-<br>
+<br />
 <sl-input placeholder="Large" size="large">
   <sl-icon name="house" slot="prefix"></sl-icon>
   <sl-icon name="chat" slot="suffix"></sl-icon>
@@ -253,9 +245,7 @@ Use the `label` attribute to give the input an accessible label. For labels that
 ```jsx react
 import { SlIcon, SlInput } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlInput label="What is your name?" />
-);
+const App = () => <SlInput label="What is your name?" />;
 ```
 
 ### Help Text
@@ -263,21 +253,13 @@ const App = () => (
 Add descriptive help text to an input with the `help-text` attribute. For help texts that contain HTML, use the `help-text` slot instead.
 
 ```html preview
-<sl-input 
-  label="Nickname" 
-  help-text="What would you like people to call you?"
-></sl-input>
+<sl-input label="Nickname" help-text="What would you like people to call you?"></sl-input>
 ```
 
 ```jsx react
 import { SlIcon, SlInput } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlInput 
-    label="Nickname" 
-    help-text="What would you like people to call you?" 
-  />
-);
+const App = () => <SlInput label="Nickname" help-text="What would you like people to call you?" />;
 ```
 
 [component-metadata:sl-input]

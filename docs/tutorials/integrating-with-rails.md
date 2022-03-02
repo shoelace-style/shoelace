@@ -53,11 +53,11 @@ setBasePath(rootUrl + '/packs/js/')
 Next we need to add Shoelace's assets to the final build output. To do this, modify `config/webpack/environment.js` to look like this.
 
 ```js
-const { environment } = require('@rails/webpacker')
+const { environment } = require('@rails/webpacker');
 
 // Shoelace config
-const path = require('path')
-const CopyPlugin = require('copy-webpack-plugin')
+const path = require('path');
+const CopyPlugin = require('copy-webpack-plugin');
 
 // Add shoelace assets to webpack's build process
 environment.plugins.append(
@@ -65,17 +65,14 @@ environment.plugins.append(
   new CopyPlugin({
     patterns: [
       {
-        from: path.resolve(
-          __dirname,
-          '../../node_modules/@shoelace-style/shoelace/dist/assets'
-        ),
+        from: path.resolve(__dirname, '../../node_modules/@shoelace-style/shoelace/dist/assets'),
         to: path.resolve(__dirname, '../../public/packs/js/assets')
       }
     ]
   })
-)
+);
 
-module.exports = environment
+module.exports = environment;
 ```
 
 ### Adding Pack Tags
@@ -88,10 +85,12 @@ The final step is to add the corresponding `pack_tags` to the page. You should h
   <head>
     <!-- ... -->
 
-    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %> <%= javascript_pack_tag
+    'application', 'data-turbolinks-track': 'reload' %>
   </head>
-  <body><%= yield %></body>
+  <body>
+    <%= yield %>
+  </body>
 </html>
 ```
 

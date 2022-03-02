@@ -9,9 +9,7 @@ The resize observer will report changes to the dimensions of the elements it wra
 ```html preview
 <div class="resize-observer-overview">
   <sl-resize-observer>
-    <div>
-      Resize this box and watch the console 👉
-    </div>
+    <div>Resize this box and watch the console 👉</div>
   </sl-resize-observer>
 </div>
 
@@ -26,9 +24,9 @@ The resize observer will report changes to the dimensions of the elements it wra
 
 <style>
   .resize-observer-overview div {
-    display: flex; 
-    border: solid 2px var(--sl-input-border-color); 
-    align-items: center; 
+    display: flex;
+    border: solid 2px var(--sl-input-border-color);
+    align-items: center;
     justify-content: center;
     text-align: center;
     padding: 4rem 2rem;
@@ -54,9 +52,7 @@ const App = () => (
   <>
     <div className="resize-observer-overview">
       <SlResizeObserver onSlResize={event => console.log(event.detail)}>
-        <div>
-          Resize this box and watch the console 👉
-        </div>
+        <div>Resize this box and watch the console 👉</div>
       </SlResizeObserver>
     </div>
 

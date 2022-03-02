@@ -101,7 +101,7 @@ const App = () => (
       <SlSkeleton />
       <SlSkeleton />
       <SlSkeleton />
-    </div>  
+    </div>
 
     <style>{css}</style>
   </>
@@ -112,7 +112,7 @@ const App = () => (
 
 ### Effects
 
-There are two built-in effects, `sheen` and `pulse`. Effects are intentionally subtle, as they can be distracting when used extensively. The default is `none`, which displays a static, non-animated skeleton. 
+There are two built-in effects, `sheen` and `pulse`. Effects are intentionally subtle, as they can be distracting when used extensively. The default is `none`, which displays a static, non-animated skeleton.
 
 ```html preview
 <div class="skeleton-effects">
@@ -155,10 +155,8 @@ const App = () => (
     <div className="skeleton-effects">
       <SlSkeleton effect="none" />
       None
-
       <SlSkeleton effect="sheen" />
       Sheen
-
       <SlSkeleton effect="pulse" />
       Pulse
     </div>
@@ -252,13 +250,13 @@ Set a matching width and height to make a circle, square, or rounded avatar skel
     display: inline-block;
     width: 3rem;
     height: 3rem;
-    margin-right: .5rem;
+    margin-right: 0.5rem;
   }
 
   .skeleton-avatars sl-skeleton:nth-child(1) {
     --border-radius: 0;
   }
-  
+
   .skeleton-avatars sl-skeleton:nth-child(2) {
     --border-radius: var(--sl-border-radius-medium);
   }
@@ -333,7 +331,20 @@ Use the `--border-radius` custom property to make circles, squares, and rectangl
 
   .skeleton-shapes .cross::part(indicator) {
     --border-radius: 0;
-    clip-path: polygon(20% 0%, 0% 20%, 30% 50%, 0% 80%, 20% 100%, 50% 70%, 80% 100%, 100% 80%, 70% 50%, 100% 20%, 80% 0%, 50% 30%);
+    clip-path: polygon(
+      20% 0%,
+      0% 20%,
+      30% 50%,
+      0% 80%,
+      20% 100%,
+      50% 70%,
+      80% 100%,
+      100% 80%,
+      70% 50%,
+      100% 20%,
+      80% 0%,
+      50% 30%
+    );
   }
 
   .skeleton-shapes .comment::part(indicator) {
@@ -342,7 +353,7 @@ Use the `--border-radius` custom property to make circles, squares, and rectangl
   }
 
   .skeleton-shapes sl-skeleton:not(:last-child) {
-    margin-right: .5rem;
+    margin-right: 0.5rem;
   }
 </style>
 ```
@@ -387,13 +398,13 @@ const css = `
 
 const App = () => (
   <>
-  <div className="skeleton-shapes">
-    <SlSkeleton className="square" />
-    <SlSkeleton className="circle" />
-    <SlSkeleton className="triangle" />
-    <SlSkeleton className="cross" />
-    <SlSkeleton className="comment" />
-  </div>
+    <div className="skeleton-shapes">
+      <SlSkeleton className="square" />
+      <SlSkeleton className="circle" />
+      <SlSkeleton className="triangle" />
+      <SlSkeleton className="cross" />
+      <SlSkeleton className="comment" />
+    </div>
 
     <style>{css}</style>
   </>
@@ -428,12 +439,7 @@ const css = `
   }
 `;
 
-const App = () => (
-  <SlSkeleton 
-    effect="sheen" 
-    style={{ '--color': 'tomato', '--sheen-color': '#ffb094' }} 
-  />
-);
+const App = () => <SlSkeleton effect="sheen" style={{ '--color': 'tomato', '--sheen-color': '#ffb094' }} />;
 ```
 
 [component-metadata:sl-skeleton]

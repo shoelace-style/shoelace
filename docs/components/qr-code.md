@@ -9,7 +9,7 @@ QR codes are useful for providing small pieces of information to users who can q
 ```html preview
 <div class="qr-overview">
   <sl-qr-code value="https://shoelace.style/" label="Scan this code to visit Shoelace on the web!"></sl-qr-code>
-  <br>
+  <br />
 
   <sl-input maxlength="255" clearable></sl-input>
 </div>
@@ -20,7 +20,7 @@ QR codes are useful for providing small pieces of information to users who can q
   const input = container.querySelector('sl-input');
 
   input.value = qrCode.value;
-  input.addEventListener('sl-input', () => qrCode.value = input.value);
+  input.addEventListener('sl-input', () => (qrCode.value = input.value));
 </script>
 
 <style>
@@ -79,9 +79,7 @@ Use the `fill` and `background` attributes to modify the QR code's colors. You s
 ```jsx react
 import { SlQrCode } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlQrCode value="https://shoelace.style/" fill="deeppink" background="white" />
-);
+const App = () => <SlQrCode value="https://shoelace.style/" fill="deeppink" background="white" />;
 ```
 
 ### Size
@@ -95,9 +93,7 @@ Use the `size` attribute to change the size of the QR code.
 ```jsx react
 import { SlQrCode } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlQrCode value="https://shoelace.style/" size="64" />
-);
+const App = () => <SlQrCode value="https://shoelace.style/" size="64" />;
 ```
 
 ### Radius
@@ -111,9 +107,7 @@ Create a rounded effect with the `radius` attribute.
 ```jsx react
 import { SlQrCode } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlQrCode value="https://shoelace.style/" radius="0.5" />
-);
+const App = () => <SlQrCode value="https://shoelace.style/" radius="0.5" />;
 ```
 
 ### Error Correction

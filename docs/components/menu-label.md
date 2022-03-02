@@ -21,15 +21,10 @@ Menu labels are used to describe a group of menu items.
 ```
 
 ```jsx react
-import { 
-  SlDivider,
-  SlMenu,
-  SlMenuLabel,
-  SlMenuItem
-} from '@shoelace-style/shoelace/dist/react';
+import { SlDivider, SlMenu, SlMenuLabel, SlMenuItem } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
-  <SlMenu 
+  <SlMenu
     style={{
       maxWidth: '200px',
       border: 'solid 1px var(--sl-panel-border-color)',
@@ -45,7 +40,7 @@ const App = () => (
     <SlMenuItem value="broccoli">Broccoli</SlMenuItem>
     <SlMenuItem value="carrot">Carrot</SlMenuItem>
     <SlMenuItem value="zucchini">Zucchini</SlMenuItem>
-  </SlMenu>  
+  </SlMenu>
 );
 ```
 

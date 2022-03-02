@@ -8,7 +8,7 @@ A theme is nothing more than a stylesheet that uses the Shoelace API to define d
 
 ## Theme Basics
 
-All themes are scoped to classes using the `sl-theme-{name}` convention, where `{name}` is a lowercase, hyphen-delimited value representing the name of the theme. The included light and dark themes use `sl-theme-light` and `sl-theme-dark`, respectively. A custom theme called "Purple Power", for example, would use a class called `sl-theme-purple-power` 
+All themes are scoped to classes using the `sl-theme-{name}` convention, where `{name}` is a lowercase, hyphen-delimited value representing the name of the theme. The included light and dark themes use `sl-theme-light` and `sl-theme-dark`, respectively. A custom theme called "Purple Power", for example, would use a class called `sl-theme-purple-power`
 
 All selectors must be scoped to the theme's class to ensure interoperability with other themes. You should also scope them to `:host` so they can be imported and applied to custom element shadow roots.
 
@@ -26,7 +26,7 @@ To activate a theme, import it and apply the theme's class to the `<html>` eleme
 ```html
 <html class="sl-theme-dark">
   <head>
-    <link rel="stylesheet" href="path/to/shoelace/dist/themes/dark.css">
+    <link rel="stylesheet" href="path/to/shoelace/dist/themes/dark.css" />
   </head>
 
   <body>
@@ -44,15 +44,15 @@ You can activate themes on various containers throughout the page. This example 
 ```html
 <html>
   <head>
-    <link rel="stylesheet" href="path/to/shoelace/dist/themes/light.css">
-    <link rel="stylesheet" href="path/to/shoelace/dist/themes/dark.css">
+    <link rel="stylesheet" href="path/to/shoelace/dist/themes/light.css" />
+    <link rel="stylesheet" href="path/to/shoelace/dist/themes/dark.css" />
   </head>
 
   <body>
     <nav class="sl-theme-dark">
       <!-- dark-themed sidebar -->
     </nav>
-    
+
     <!-- light-themed content -->
   </body>
 </html>
@@ -71,8 +71,8 @@ The easiest way to customize Shoelace is to override one of the built-in themes.
 If you're customizing the light theme, you should scope your styles to the following selectors.
 
 ```css
-:root, 
-:host, 
+:root,
+:host,
 .sl-theme-light {
   /* your custom styles here */
 }
@@ -117,7 +117,7 @@ The dark theme works by taking the light theme's [color tokens](/tokens/color) a
 To install the dark theme, add the following to the `<head>` section of your page.
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/themes/dark.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/themes/dark.css" />
 ```
 
 To activate the theme, apply the `sl-theme-dark` class to the `<html>` element.

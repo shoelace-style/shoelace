@@ -15,9 +15,7 @@ The included content will be inserted into the `<sl-include>` element's default 
 ```jsx react
 import { SlInclude } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlInclude src="https://shoelace.style/assets/examples/include.html" />
-);
+const App = () => <SlInclude src="https://shoelace.style/assets/examples/include.html" />;
 ```
 
 ## Examples
@@ -33,7 +31,7 @@ If the request fails, the `sl-error` event will be emitted. In this case, `event
 
 <script>
   const include = document.querySelector('sl-include');
-  
+
   include.addEventListener('sl-load', () => {
     console.log('Success');
   });

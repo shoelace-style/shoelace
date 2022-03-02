@@ -370,7 +370,6 @@ You can use `event.detail.source` to determine what triggered the request to clo
       event.preventDefault();
     }
   });
-
 </script>
 ```
 
@@ -390,12 +389,7 @@ const App = () => {
 
   return (
     <>
-      <SlDrawer
-        label="Drawer"
-        open={open}
-        onSlRequestClose={handleRequestClose}
-        onSlAfterHide={() => setOpen(false)}
-      >
+      <SlDrawer label="Drawer" open={open} onSlRequestClose={handleRequestClose} onSlAfterHide={() => setOpen(false)}>
         This drawer will not close when you click on the overlay.
         <SlButton slot="footer" variant="primary" onClick={() => setOpen(false)}>
           Save &amp; Close
@@ -410,7 +404,7 @@ const App = () => {
 
 ### Customizing Initial Focus
 
-By default, the drawer's panel will gain focus when opened. This allows a subsequent tab press to focus on the first tabbable element in the drawer. If you want a different element to have focus, add the `autofocus` attribute to it as shown below. 
+By default, the drawer's panel will gain focus when opened. This allows a subsequent tab press to focus on the first tabbable element in the drawer. If you want a different element to have focus, add the `autofocus` attribute to it as shown below.
 
 ```html preview
 <sl-drawer label="Drawer" class="drawer-focus">

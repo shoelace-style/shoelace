@@ -49,18 +49,18 @@ To make a field required, use the `required` prop. The form will not be submitte
 ```html preview
 <form class="input-validation-required">
   <sl-input name="name" label="Name" required></sl-input>
-  <br>
+  <br />
   <sl-select label="Favorite Animal" clearable required>
     <sl-menu-item value="birds">Birds</sl-menu-item>
     <sl-menu-item value="cats">Cats</sl-menu-item>
     <sl-menu-item value="dogs">Dogs</sl-menu-item>
     <sl-menu-item value="other">Other</sl-menu-item>
   </sl-select>
-  <br>
+  <br />
   <sl-textarea name="comment" label="Comment" required></sl-textarea>
-  <br>
+  <br />
   <sl-checkbox required>Check me before submitting</sl-checkbox>
-  <br><br>
+  <br /><br />
   <sl-button type="submit" variant="primary">Submit</sl-button>
 </form>
 
@@ -68,20 +68,13 @@ To make a field required, use the `required` prop. The form will not be submitte
   const form = document.querySelector('.input-validation-required');
   form.addEventListener('submit', event => {
     event.preventDefault();
-    alert('All fields are valid!')
+    alert('All fields are valid!');
   });
 </script>
 ```
 
 ```jsx react
-import { 
-  SlButton,
-  SlCheckbox, 
-  SlInput,
-  SlMenuItem, 
-  SlSelect,
-  SlTextarea
-} from '@shoelace-style/shoelace/dist/react';
+import { SlButton, SlCheckbox, SlInput, SlMenuItem, SlSelect, SlTextarea } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => {
   function handleSubmit(event) {
@@ -103,8 +96,11 @@ const App = () => {
       <SlTextarea name="comment" label="Comment" required></SlTextarea>
       <br />
       <SlCheckbox required>Check me before submitting</SlCheckbox>
-      <br /><br />
-      <SlButton type="submit" variant="primary">Submit</SlButton>
+      <br />
+      <br />
+      <SlButton type="submit" variant="primary">
+        Submit
+      </SlButton>
     </form>
   );
 };
@@ -117,7 +113,7 @@ To restrict a value to a specific [pattern](https://developer.mozilla.org/en-US/
 ```html preview
 <form class="input-validation-pattern">
   <sl-input name="letters" required label="Letters" pattern="[A-Za-z]+"></sl-input>
-  <br>
+  <br />
   <sl-button type="submit" variant="primary">Submit</sl-button>
 </form>
 
@@ -125,7 +121,7 @@ To restrict a value to a specific [pattern](https://developer.mozilla.org/en-US/
   const form = document.querySelector('.input-validation-pattern');
   form.addEventListener('submit', event => {
     event.preventDefault();
-    alert('All fields are valid!')
+    alert('All fields are valid!');
   });
 </script>
 ```
@@ -143,7 +139,9 @@ const App = () => {
     <form onSubmit={handleSubmit}>
       <SlInput name="letters" required label="Letters" pattern="[A-Za-z]+" />
       <br />
-      <SlButton type="submit" variant="primary">Submit</SlButton>
+      <SlButton type="submit" variant="primary">
+        Submit
+      </SlButton>
     </form>
   );
 };
@@ -156,9 +154,9 @@ Some input types will automatically trigger constraints, such as `email` and `ur
 ```html preview
 <form class="input-validation-type">
   <sl-input variant="email" label="Email" placeholder="you@example.com" required></sl-input>
-  <br>
+  <br />
   <sl-input variant="url" label="URL" placeholder="https://example.com/" required></sl-input>
-  <br>
+  <br />
   <sl-button type="submit" variant="primary">Submit</sl-button>
 </form>
 
@@ -166,7 +164,7 @@ Some input types will automatically trigger constraints, such as `email` and `ur
   const form = document.querySelector('.input-validation-type');
   form.addEventListener('submit', event => {
     event.preventDefault();
-    alert('All fields are valid!')
+    alert('All fields are valid!');
   });
 </script>
 ```
@@ -186,7 +184,9 @@ const App = () => {
       <br />
       <SlInput variant="url" label="URL" placeholder="https://example.com/" required />
       <br />
-      <SlButton type="submit" variant="primary">Submit</SlButton>
+      <SlButton type="submit" variant="primary">
+        Submit
+      </SlButton>
     </form>
   );
 };
@@ -199,7 +199,7 @@ To create a custom validation error, use the `setCustomValidity` method. The for
 ```html preview
 <form class="input-validation-custom">
   <sl-input label="Type 'shoelace'" required></sl-input>
-  <br>
+  <br />
   <sl-button type="submit" variant="primary">Submit</sl-button>
 </form>
 
@@ -209,14 +209,14 @@ To create a custom validation error, use the `setCustomValidity` method. The for
 
   form.addEventListener('submit', event => {
     event.preventDefault();
-    alert('All fields are valid!')
+    alert('All fields are valid!');
   });
 
   input.addEventListener('sl-input', () => {
     if (input.value === 'shoelace') {
       input.setCustomValidity('');
     } else {
-      input.setCustomValidity('Hey, you\'re supposed to type \'shoelace\' before submitting this!');
+      input.setCustomValidity("Hey, you're supposed to type 'shoelace' before submitting this!");
     }
   });
 </script>
@@ -236,7 +236,7 @@ const App = () => {
     if (event.target.value === 'shoelace') {
       input.current.setCustomValidity('');
     } else {
-      input.current.setCustomValidity('Hey, you\'re supposed to type \'shoelace\' before submitting this!');
+      input.current.setCustomValidity("Hey, you're supposed to type 'shoelace' before submitting this!");
     }
   }
 
@@ -247,15 +247,11 @@ const App = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <SlInput 
-        ref={input}
-        label="Type 'shoelace'" 
-        required 
-        value={value} 
-        onSlInput={handleInput}
-      />
+      <SlInput ref={input} label="Type 'shoelace'" required value={value} onSlInput={handleInput} />
       <br />
-      <SlButton type="submit" variant="primary">Submit</SlButton>
+      <SlButton type="submit" variant="primary">
+        Submit
+      </SlButton>
     </form>
   );
 };
@@ -276,9 +272,9 @@ The `invalid` attribute reflects the form control's validity, so you can style i
     color: var(--sl-color-danger-600);
   }
 
-  .custom-input[invalid]:not([disabled])::part(base) {      
+  .custom-input[invalid]:not([disabled])::part(base) {
     border-color: var(--sl-color-danger-500);
-  } 
+  }
 
   .custom-input[invalid]:focus-within::part(base) {
     box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-color-danger-500);
@@ -330,7 +326,7 @@ Instead, toggle a class and target it in your stylesheet as shown below.
 
 <style>
   sl-input.invalid {
-    ...
+    ...;
   }
 </style>
 ```

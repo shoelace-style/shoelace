@@ -7,7 +7,9 @@ Menus provide a list of options for the user to choose from.
 You can use [menu items](/components/menu-item), [menu labels](/components/menu-label), and [dividers](/components/divider) to compose a menu. Menus support keyboard interactions, including type-to-select an option.
 
 ```html preview
-<sl-menu style="max-width: 200px; border: solid 1px var(--sl-panel-border-color); background: var(--sl-panel-background-color); border-radius: var(--sl-border-radius-medium);">
+<sl-menu
+  style="max-width: 200px; border: solid 1px var(--sl-panel-border-color); background: var(--sl-panel-background-color); border-radius: var(--sl-border-radius-medium);"
+>
   <sl-menu-item value="undo">Undo</sl-menu-item>
   <sl-menu-item value="redo">Redo</sl-menu-item>
   <sl-divider></sl-divider>
@@ -19,14 +21,10 @@ You can use [menu items](/components/menu-item), [menu labels](/components/menu-
 ```
 
 ```jsx react
-import { 
-  SlDivider,
-  SlMenu,
-  SlMenuItem
-} from '@shoelace-style/shoelace/dist/react';
+import { SlDivider, SlMenu, SlMenuItem } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
-  <SlMenu 
+  <SlMenu
     style={{
       maxWidth: '200px',
       border: 'solid 1px var(--sl-panel-border-color)',
@@ -40,7 +38,7 @@ const App = () => (
     <SlMenuItem value="copy">Copy</SlMenuItem>
     <SlMenuItem value="paste">Paste</SlMenuItem>
     <SlMenuItem value="delete">Delete</SlMenuItem>
-  </SlMenu>  
+  </SlMenu>
 );
 ```
 

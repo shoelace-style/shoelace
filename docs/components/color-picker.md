@@ -11,9 +11,7 @@ Color pickers allow the user to select a color.
 ```jsx react
 import { SlColorPicker } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlColorPicker />
-);
+const App = () => <SlColorPicker />;
 ```
 
 ?> This component works with standard `<form>` elements. Please refer to the section on [form controls](/getting-started/form-controls) to learn more about form submission and client-side validation.
@@ -31,9 +29,7 @@ Use the `opacity` attribute to enable the opacity slider. When this is enabled, 
 ```jsx react
 import { SlColorPicker } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlColorPicker opacity />
-);
+const App = () => <SlColorPicker opacity />;
 ```
 
 ### Formats
@@ -93,9 +89,7 @@ The color picker can be rendered inline instead of in a dropdown using the `inli
 ```jsx react
 import { SlColorPicker } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlColorPicker inline />
-);
+const App = () => <SlColorPicker inline />;
 ```
 
 [component-metadata:sl-color-picker]

@@ -25,10 +25,18 @@ import { SlTab, SlTabGroup, SlTabPanel } from '@shoelace-style/shoelace/dist/rea
 
 const App = () => (
   <SlTabGroup>
-    <SlTab slot="nav" panel="general">General</SlTab>
-    <SlTab slot="nav" panel="custom">Custom</SlTab>
-    <SlTab slot="nav" panel="advanced">Advanced</SlTab>
-    <SlTab slot="nav" panel="disabled" disabled>Disabled</SlTab>
+    <SlTab slot="nav" panel="general">
+      General
+    </SlTab>
+    <SlTab slot="nav" panel="custom">
+      Custom
+    </SlTab>
+    <SlTab slot="nav" panel="advanced">
+      Advanced
+    </SlTab>
+    <SlTab slot="nav" panel="disabled" disabled>
+      Disabled
+    </SlTab>
 
     <SlTabPanel name="general">This is the general tab panel.</SlTabPanel>
     <SlTabPanel name="custom">This is the custom tab panel.</SlTabPanel>
@@ -63,10 +71,18 @@ import { SlTab, SlTabGroup, SlTabPanel } from '@shoelace-style/shoelace/dist/rea
 
 const App = () => (
   <SlTabGroup placement="bottom">
-    <SlTab slot="nav" panel="general">General</SlTab>
-    <SlTab slot="nav" panel="custom">Custom</SlTab>
-    <SlTab slot="nav" panel="advanced">Advanced</SlTab>
-    <SlTab slot="nav" panel="disabled" disabled>Disabled</SlTab>
+    <SlTab slot="nav" panel="general">
+      General
+    </SlTab>
+    <SlTab slot="nav" panel="custom">
+      Custom
+    </SlTab>
+    <SlTab slot="nav" panel="advanced">
+      Advanced
+    </SlTab>
+    <SlTab slot="nav" panel="disabled" disabled>
+      Disabled
+    </SlTab>
 
     <SlTabPanel name="general">This is the general tab panel.</SlTabPanel>
     <SlTabPanel name="custom">This is the custom tab panel.</SlTabPanel>
@@ -94,16 +110,23 @@ Tabs can be shown on the starting side by setting `placement` to `start`.
 </sl-tab-group>
 ```
 
-
 ```jsx react
 import { SlTab, SlTabGroup, SlTabPanel } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <SlTabGroup placement="start">
-    <SlTab slot="nav" panel="general">General</SlTab>
-    <SlTab slot="nav" panel="custom">Custom</SlTab>
-    <SlTab slot="nav" panel="advanced">Advanced</SlTab>
-    <SlTab slot="nav" panel="disabled" disabled>Disabled</SlTab>
+    <SlTab slot="nav" panel="general">
+      General
+    </SlTab>
+    <SlTab slot="nav" panel="custom">
+      Custom
+    </SlTab>
+    <SlTab slot="nav" panel="advanced">
+      Advanced
+    </SlTab>
+    <SlTab slot="nav" panel="disabled" disabled>
+      Disabled
+    </SlTab>
 
     <SlTabPanel name="general">This is the general tab panel.</SlTabPanel>
     <SlTabPanel name="custom">This is the custom tab panel.</SlTabPanel>
@@ -131,16 +154,23 @@ Tabs can be shown on the ending side by setting `placement` to `end`.
 </sl-tab-group>
 ```
 
-
 ```jsx react
 import { SlTab, SlTabGroup, SlTabPanel } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <SlTabGroup placement="end">
-    <SlTab slot="nav" panel="general">General</SlTab>
-    <SlTab slot="nav" panel="custom">Custom</SlTab>
-    <SlTab slot="nav" panel="advanced">Advanced</SlTab>
-    <SlTab slot="nav" panel="disabled" disabled>Disabled</SlTab>
+    <SlTab slot="nav" panel="general">
+      General
+    </SlTab>
+    <SlTab slot="nav" panel="custom">
+      Custom
+    </SlTab>
+    <SlTab slot="nav" panel="advanced">
+      Advanced
+    </SlTab>
+    <SlTab slot="nav" panel="disabled" disabled>
+      Disabled
+    </SlTab>
 
     <SlTabPanel name="general">This is the general tab panel.</SlTabPanel>
     <SlTabPanel name="custom">This is the custom tab panel.</SlTabPanel>
@@ -192,24 +222,32 @@ import { SlTab, SlTabGroup, SlTabPanel } from '@shoelace-style/shoelace/dist/rea
 const App = () => {
   function handleClose(event) {
     //
-    // This is a crude example that removes the tab and its panel from the DOM. 
+    // This is a crude example that removes the tab and its panel from the DOM.
     // There are better ways to manage tab creation/removal in React, but that
     // would significantly complicate the example.
     //
     const tab = event.target;
     const tabGroup = tab.closest('sl-tab-group');
     const tabPanel = tabGroup.querySelector(`[aria-labelledby="${tab.id}"]`);
-    
+
     tab.remove();
     tabPanel.remove();
   }
 
   return (
     <SlTabGroup className="tabs-closable" onSlClose={handleClose}>
-      <SlTab slot="nav" panel="general">General</SlTab>
-      <SlTab slot="nav" panel="closable-1" closable onSlClose={handleClose}>Closable 1</SlTab>
-      <SlTab slot="nav" panel="closable-2" closable onSlClose={handleClose}>Closable 2</SlTab>
-      <SlTab slot="nav" panel="closable-3" closable onSlClose={handleClose}>Closable 3</SlTab>
+      <SlTab slot="nav" panel="general">
+        General
+      </SlTab>
+      <SlTab slot="nav" panel="closable-1" closable onSlClose={handleClose}>
+        Closable 1
+      </SlTab>
+      <SlTab slot="nav" panel="closable-2" closable onSlClose={handleClose}>
+        Closable 2
+      </SlTab>
+      <SlTab slot="nav" panel="closable-3" closable onSlClose={handleClose}>
+        Closable 3
+      </SlTab>
 
       <SlTabPanel name="general">This is the general tab panel.</SlTabPanel>
       <SlTabPanel name="closable-1">This is the first closable tab panel.</SlTabPanel>
@@ -275,26 +313,66 @@ import { SlTab, SlTabGroup, SlTabPanel } from '@shoelace-style/shoelace/dist/rea
 
 const App = () => (
   <SlTabGroup>
-    <SlTab slot="nav" panel="tab-1">Tab 1</SlTab>
-    <SlTab slot="nav" panel="tab-2">Tab 2</SlTab>
-    <SlTab slot="nav" panel="tab-3">Tab 3</SlTab>
-    <SlTab slot="nav" panel="tab-4">Tab 4</SlTab>
-    <SlTab slot="nav" panel="tab-5">Tab 5</SlTab>
-    <SlTab slot="nav" panel="tab-6">Tab 6</SlTab>
-    <SlTab slot="nav" panel="tab-7">Tab 7</SlTab>
-    <SlTab slot="nav" panel="tab-8">Tab 8</SlTab>
-    <SlTab slot="nav" panel="tab-9">Tab 9</SlTab>
-    <SlTab slot="nav" panel="tab-10">Tab 10</SlTab>
-    <SlTab slot="nav" panel="tab-11">Tab 11</SlTab>
-    <SlTab slot="nav" panel="tab-12">Tab 12</SlTab>
-    <SlTab slot="nav" panel="tab-13">Tab 13</SlTab>
-    <SlTab slot="nav" panel="tab-14">Tab 14</SlTab>
-    <SlTab slot="nav" panel="tab-15">Tab 15</SlTab>
-    <SlTab slot="nav" panel="tab-16">Tab 16</SlTab>
-    <SlTab slot="nav" panel="tab-17">Tab 17</SlTab>
-    <SlTab slot="nav" panel="tab-18">Tab 18</SlTab>
-    <SlTab slot="nav" panel="tab-19">Tab 19</SlTab>
-    <SlTab slot="nav" panel="tab-20">Tab 20</SlTab>
+    <SlTab slot="nav" panel="tab-1">
+      Tab 1
+    </SlTab>
+    <SlTab slot="nav" panel="tab-2">
+      Tab 2
+    </SlTab>
+    <SlTab slot="nav" panel="tab-3">
+      Tab 3
+    </SlTab>
+    <SlTab slot="nav" panel="tab-4">
+      Tab 4
+    </SlTab>
+    <SlTab slot="nav" panel="tab-5">
+      Tab 5
+    </SlTab>
+    <SlTab slot="nav" panel="tab-6">
+      Tab 6
+    </SlTab>
+    <SlTab slot="nav" panel="tab-7">
+      Tab 7
+    </SlTab>
+    <SlTab slot="nav" panel="tab-8">
+      Tab 8
+    </SlTab>
+    <SlTab slot="nav" panel="tab-9">
+      Tab 9
+    </SlTab>
+    <SlTab slot="nav" panel="tab-10">
+      Tab 10
+    </SlTab>
+    <SlTab slot="nav" panel="tab-11">
+      Tab 11
+    </SlTab>
+    <SlTab slot="nav" panel="tab-12">
+      Tab 12
+    </SlTab>
+    <SlTab slot="nav" panel="tab-13">
+      Tab 13
+    </SlTab>
+    <SlTab slot="nav" panel="tab-14">
+      Tab 14
+    </SlTab>
+    <SlTab slot="nav" panel="tab-15">
+      Tab 15
+    </SlTab>
+    <SlTab slot="nav" panel="tab-16">
+      Tab 16
+    </SlTab>
+    <SlTab slot="nav" panel="tab-17">
+      Tab 17
+    </SlTab>
+    <SlTab slot="nav" panel="tab-18">
+      Tab 18
+    </SlTab>
+    <SlTab slot="nav" panel="tab-19">
+      Tab 19
+    </SlTab>
+    <SlTab slot="nav" panel="tab-20">
+      Tab 20
+    </SlTab>
 
     <SlTabPanel name="tab-1">Tab panel 1</SlTabPanel>
     <SlTabPanel name="tab-2">Tab panel 2</SlTabPanel>
@@ -343,10 +421,18 @@ import { SlTab, SlTabGroup, SlTabPanel } from '@shoelace-style/shoelace/dist/rea
 
 const App = () => (
   <SlTabGroup activation="manual">
-    <SlTab slot="nav" panel="general">General</SlTab>
-    <SlTab slot="nav" panel="custom">Custom</SlTab>
-    <SlTab slot="nav" panel="advanced">Advanced</SlTab>
-    <SlTab slot="nav" panel="disabled" disabled>Disabled</SlTab>
+    <SlTab slot="nav" panel="general">
+      General
+    </SlTab>
+    <SlTab slot="nav" panel="custom">
+      Custom
+    </SlTab>
+    <SlTab slot="nav" panel="advanced">
+      Advanced
+    </SlTab>
+    <SlTab slot="nav" panel="disabled" disabled>
+      Disabled
+    </SlTab>
 
     <SlTabPanel name="general">This is the general tab panel.</SlTabPanel>
     <SlTabPanel name="custom">This is the custom tab panel.</SlTabPanel>

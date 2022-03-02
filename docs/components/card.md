@@ -6,14 +6,14 @@ Cards can be used to group related subjects in a container.
 
 ```html preview
 <sl-card class="card-overview">
-  <img 
-    slot="image" 
-    src="https://images.unsplash.com/photo-1559209172-0ff8f6d49ff7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80" 
+  <img
+    slot="image"
+    src="https://images.unsplash.com/photo-1559209172-0ff8f6d49ff7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80"
     alt="A kitten sits patiently between a terracotta pot and decorative grasses."
-  >
+  />
 
-  <strong>Mittens</strong><br>
-  This kitten is as cute as he is playful. Bring him home today!<br>
+  <strong>Mittens</strong><br />
+  This kitten is as cute as he is playful. Bring him home today!<br />
   <small>6 weeks old</small>
 
   <div slot="footer">
@@ -31,20 +31,16 @@ Cards can be used to group related subjects in a container.
     color: var(--sl-color-neutral-500);
   }
 
-  .card-overview [slot="footer"] {
-    display: flex; 
-    justify-content: space-between; 
+  .card-overview [slot='footer'] {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
   }
 </style>
 ```
 
 ```jsx react
-import { 
-  SlButton, 
-  SlCard, 
-  SlRating 
-} from '@shoelace-style/shoelace/dist/react';
+import { SlButton, SlCard, SlRating } from '@shoelace-style/shoelace/dist/react';
 
 const css = `
   .card-overview {
@@ -65,18 +61,20 @@ const css = `
 const App = () => (
   <>
     <SlCard className="card-overview">
-      <img 
-        slot="image" 
-        src="https://images.unsplash.com/photo-1559209172-0ff8f6d49ff7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80" 
+      <img
+        slot="image"
+        src="https://images.unsplash.com/photo-1559209172-0ff8f6d49ff7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80"
         alt="A kitten sits patiently between a terracotta pot and decorative grasses."
       />
-
-      <strong>Mittens</strong><br />
-      This kitten is as cute as he is playful. Bring him home today!<br />
+      <strong>Mittens</strong>
+      <br />
+      This kitten is as cute as he is playful. Bring him home today!
+      <br />
       <small>6 weeks old</small>
-
       <div slot="footer">
-        <SlButton variant="primary" pill>More Info</SlButton>
+        <SlButton variant="primary" pill>
+          More Info
+        </SlButton>
         <SlRating></SlRating>
       </div>
     </SlCard>
@@ -144,9 +142,9 @@ Headers can be used to display titles and more.
     max-width: 300px;
   }
 
-  .card-header [slot="header"] {
-    display: flex; 
-    align-items: center; 
+  .card-header [slot='header'] {
+    display: flex;
+    align-items: center;
     justify-content: space-between;
   }
 
@@ -188,10 +186,8 @@ const App = () => (
     <SlCard className="card-header">
       <div slot="header">
         Header Title
-
         <SlIconButton name="gear"></SlIconButton>
       </div>
-
       This card has a header. You can put all sorts of things in it!
     </SlCard>
 
@@ -219,20 +215,16 @@ Footers can be used to display actions, summaries, or other relevant content.
     max-width: 300px;
   }
 
-  .card-footer [slot="footer"] {
-    display: flex; 
-    justify-content: space-between; 
+  .card-footer [slot='footer'] {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
   }
 </style>
 ```
 
 ```jsx react
-import { 
-  SlButton, 
-  SlCard, 
-  SlRating 
-} from '@shoelace-style/shoelace/dist/react';
+import { SlButton, SlCard, SlRating } from '@shoelace-style/shoelace/dist/react';
 
 const css = `
   .card-footer {
@@ -250,10 +242,11 @@ const App = () => (
   <>
     <SlCard className="card-footer">
       This card has a footer. You can put all sorts of things in it!
-
       <div slot="footer">
         <SlRating></SlRating>
-        <SlButton slot="footer" variant="primary">Preview</SlButton>
+        <SlButton slot="footer" variant="primary">
+          Preview
+        </SlButton>
       </div>
     </SlCard>
 
@@ -268,11 +261,11 @@ Cards accept an `image` slot. The image is displayed atop the card and stretches
 
 ```html preview
 <sl-card class="card-image">
-  <img 
-    slot="image" 
-    src="https://images.unsplash.com/photo-1547191783-94d5f8f6d8b1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=80" 
+  <img
+    slot="image"
+    src="https://images.unsplash.com/photo-1547191783-94d5f8f6d8b1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=80"
     alt="A kitten walks towards camera on top of pallet."
-  >
+  />
   This is a kitten, but not just any kitten. This kitten likes walking along pallets.
 </sl-card>
 
@@ -295,9 +288,9 @@ const css = `
 const App = () => (
   <>
     <SlCard className="card-image">
-      <img 
-        slot="image" 
-        src="https://images.unsplash.com/photo-1547191783-94d5f8f6d8b1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=80" 
+      <img
+        slot="image"
+        src="https://images.unsplash.com/photo-1547191783-94d5f8f6d8b1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=80"
         alt="A kitten walks towards camera on top of pallet."
       />
       This is a kitten, but not just any kitten. This kitten likes walking along pallets.

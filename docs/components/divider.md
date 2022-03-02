@@ -11,10 +11,9 @@ Dividers are used to visually separate or group elements.
 ```jsx react
 import { SlDivider } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlDivider />
-);
+const App = () => <SlDivider />;
 ```
+
 ## Examples
 
 ### Width
@@ -28,9 +27,7 @@ Use the `--width` custom property to change the width of the divider.
 ```jsx react
 import { SlDivider } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlDivider style={{ '--width': '4px' }} />
-);
+const App = () => <SlDivider style={{ '--width': '4px' }} />;
 ```
 
 ### Color
@@ -44,9 +41,7 @@ Use the `--color` custom property to change the color of the divider.
 ```jsx react
 import { SlDivider } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlDivider style={{ '--color': 'tomato' }} />
-);
+const App = () => <SlDivider style={{ '--color': 'tomato' }} />;
 ```
 
 ### Spacing
@@ -91,10 +86,10 @@ Add the `vertical` attribute to draw the divider in a vertical orientation. The 
 import { SlDivider } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
-  <div 
-    style={{ 
-      display: 'flex', 
-      alignItems: 'center', 
+  <div
+    style={{
+      display: 'flex',
+      alignItems: 'center',
       height: '2rem'
     }}
   >
@@ -112,7 +107,9 @@ const App = () => (
 Use dividers in [menus](/components/menu) to visually group menu items.
 
 ```html preview
-<sl-menu style="max-width: 200px; border: solid 1px var(--sl-panel-border-color); background: var(--sl-panel-background-color); border-radius: var(--sl-border-radius-medium);">
+<sl-menu
+  style="max-width: 200px; border: solid 1px var(--sl-panel-border-color); background: var(--sl-panel-background-color); border-radius: var(--sl-border-radius-medium);"
+>
   <sl-menu-item value="1">Option 1</sl-menu-item>
   <sl-menu-item value="2">Option 2</sl-menu-item>
   <sl-menu-item value="3">Option 3</sl-menu-item>
@@ -124,14 +121,10 @@ Use dividers in [menus](/components/menu) to visually group menu items.
 ```
 
 ```jsx react
-import { 
-  SlDivider, 
-  SlMenu, 
-  SlMenuItem 
-} from '@shoelace-style/shoelace/dist/react';
+import { SlDivider, SlMenu, SlMenuItem } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
-  <SlMenu 
+  <SlMenu
     style={{
       maxWidth: '200px',
       border: 'solid 1px var(--sl-panel-border-color)',

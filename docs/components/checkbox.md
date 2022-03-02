@@ -11,9 +11,7 @@ Checkboxes allow the user to toggle an option on or off.
 ```jsx react
 import { SlCheckbox } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlCheckbox>Checkbox</SlCheckbox>
-);
+const App = () => <SlCheckbox>Checkbox</SlCheckbox>;
 ```
 
 ?> This component works with standard `<form>` elements. Please refer to the section on [form controls](/getting-started/form-controls) to learn more about form submission and client-side validation.
@@ -31,9 +29,7 @@ Use the `checked` attribute to activate the checkbox.
 ```jsx react
 import { SlCheckbox } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlCheckbox checked>Checked</SlCheckbox>
-);
+const App = () => <SlCheckbox checked>Checked</SlCheckbox>;
 ```
 
 ### Indeterminate
@@ -47,9 +43,7 @@ Use the `indeterminate` attribute to make the checkbox indeterminate.
 ```jsx react
 import { SlCheckbox } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlCheckbox indeterminate>Indeterminate</SlCheckbox>
-);
+const App = () => <SlCheckbox indeterminate>Indeterminate</SlCheckbox>;
 ```
 
 ### Disabled
@@ -63,9 +57,7 @@ Use the `disabled` attribute to disable the checkbox.
 ```jsx react
 import { SlCheckbox } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlCheckbox disabled>Disabled</SlCheckbox>
-);
+const App = () => <SlCheckbox disabled>Disabled</SlCheckbox>;
 ```
 
 [component-metadata:sl-checkbox]

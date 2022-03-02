@@ -5,8 +5,8 @@
 A component for displaying animated GIFs and WEBPs that play and pause on interaction.
 
 ```html preview
-<sl-animated-image 
-  src="https://shoelace.style/assets/images/walk.gif" 
+<sl-animated-image
+  src="https://shoelace.style/assets/images/walk.gif"
   alt="Animation of untied shoes walking on pavement"
 ></sl-animated-image>
 ```
@@ -16,7 +16,7 @@ import { SlAnimatedImage } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <SlAnimatedImage
-    src="https://shoelace.style/assets/images/walk.gif" 
+    src="https://shoelace.style/assets/images/walk.gif"
     alt="Animation of untied shoes walking on pavement"
   />
 );
@@ -31,8 +31,8 @@ const App = () => (
 Both GIF and WEBP images are supported.
 
 ```html preview
-<sl-animated-image 
-  src="https://shoelace.style/assets/images/tie.webp" 
+<sl-animated-image
+  src="https://shoelace.style/assets/images/tie.webp"
   alt="Animation of a shoe being tied"
 ></sl-animated-image>
 ```
@@ -41,10 +41,7 @@ Both GIF and WEBP images are supported.
 import { SlAnimatedImage } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
-  <SlAnimatedImage
-    src="https://shoelace.style/assets/images/tie.webp" 
-    alt="Animation of a shoe being tied"
-  />
+  <SlAnimatedImage src="https://shoelace.style/assets/images/tie.webp" alt="Animation of a shoe being tied" />
 );
 ```
 
@@ -53,8 +50,8 @@ const App = () => (
 To set a custom size, apply a width and/or height to the host element.
 
 ```html preview
-<sl-animated-image 
-  src="https://shoelace.style/assets/images/walk.gif" 
+<sl-animated-image
+  src="https://shoelace.style/assets/images/walk.gif"
   alt="Animation of untied shoes walking on pavement"
   style="width: 150px; height: 200px;"
 >
@@ -66,7 +63,7 @@ import { SlAnimatedImage } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <SlAnimatedImage
-    src="https://shoelace.style/assets/images/walk.gif" 
+    src="https://shoelace.style/assets/images/walk.gif"
     alt="Animation of untied shoes walking on pavement"
     style={{ width: '150px', height: '200px' }}
   />
@@ -78,8 +75,8 @@ const App = () => (
 You can change the appearance and location of the control box by targeting the `control-box` part in your styles.
 
 ```html preview
-<sl-animated-image 
-  src="https://shoelace.style/assets/images/walk.gif" 
+<sl-animated-image
+  src="https://shoelace.style/assets/images/walk.gif"
   alt="Animation of untied shoes walking on pavement"
   class="animated-image-custom-control-box"
 ></sl-animated-image>
@@ -116,7 +113,7 @@ const App = () => (
   <>
     <SlAnimatedImage
       className="animated-image-custom-control-box"
-      src="https://shoelace.style/assets/images/walk.gif" 
+      src="https://shoelace.style/assets/images/walk.gif"
       alt="Animation of untied shoes walking on pavement"
     />
 

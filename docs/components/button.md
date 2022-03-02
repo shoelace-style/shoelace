@@ -11,9 +11,7 @@ Buttons represent actions that are available to the user.
 ```jsx react
 import { SlButton } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlButton>Button</SlButton>
-);
+const App = () => <SlButton>Button</SlButton>;
 ```
 
 ## Examples
@@ -41,7 +39,7 @@ const App = () => (
     <SlButton variant="success">Success</SlButton>
     <SlButton variant="neutral">Neutral</SlButton>
     <SlButton variant="warning">Warning</SlButton>
-    <SlButton variant="danger">Danger</SlButton>  
+    <SlButton variant="danger">Danger</SlButton>
   </>
 );
 ```
@@ -86,12 +84,24 @@ import { SlButton } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <>
-    <SlButton variant="default" outline>Default</SlButton>
-    <SlButton variant="primary" outline>Primary</SlButton>
-    <SlButton variant="success" outline>Success</SlButton>
-    <SlButton variant="neutral" outline>Neutral</SlButton>
-    <SlButton variant="warning" outline>Warning</SlButton>
-    <SlButton variant="danger" outline>Danger</SlButton>
+    <SlButton variant="default" outline>
+      Default
+    </SlButton>
+    <SlButton variant="primary" outline>
+      Primary
+    </SlButton>
+    <SlButton variant="success" outline>
+      Success
+    </SlButton>
+    <SlButton variant="neutral" outline>
+      Neutral
+    </SlButton>
+    <SlButton variant="warning" outline>
+      Warning
+    </SlButton>
+    <SlButton variant="danger" outline>
+      Danger
+    </SlButton>
   </>
 );
 ```
@@ -111,9 +121,15 @@ import { SlButton } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <>
-    <SlButton size="small" pill>Small</SlButton>
-    <SlButton size="medium" pill>Medium</SlButton>
-    <SlButton size="large" pill>Large</SlButton>
+    <SlButton size="small" pill>
+      Small
+    </SlButton>
+    <SlButton size="medium" pill>
+      Medium
+    </SlButton>
+    <SlButton size="large" pill>
+      Large
+    </SlButton>
   </>
 );
 ```
@@ -133,9 +149,15 @@ import { SlButton, SlIcon } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <>
-    <SlButton variant="default" size="small" circle><SlIcon name="gear" /></SlButton>
-    <SlButton variant="default" size="medium" circle><SlIcon name="gear" /></SlButton>
-    <SlButton variant="default" size="large" circle><SlIcon name="gear" /></SlButton>
+    <SlButton variant="default" size="small" circle>
+      <SlIcon name="gear" />
+    </SlButton>
+    <SlButton variant="default" size="medium" circle>
+      <SlIcon name="gear" />
+    </SlButton>
+    <SlButton variant="default" size="large" circle>
+      <SlIcon name="gear" />
+    </SlButton>
   </>
 );
 ```
@@ -155,9 +177,15 @@ import { SlButton } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <>
-    <SlButton variant="text" size="small">Text</SlButton>
-    <SlButton variant="text" size="medium">Text</SlButton>
-    <SlButton variant="text" size="large">Text</SlButton>
+    <SlButton variant="text" size="small">
+      Text
+    </SlButton>
+    <SlButton variant="text" size="medium">
+      Text
+    </SlButton>
+    <SlButton variant="text" size="large">
+      Text
+    </SlButton>
   </>
 );
 ```
@@ -179,9 +207,15 @@ import { SlButton } from '@shoelace-style/shoelace/dist/react';
 const App = () => (
   <>
     <SlButton href="https://example.com/">Link</SlButton>
-    <SlButton href="https://example.com/" target="_blank">New Window</SlButton>
-    <SlButton href="/assets/images/wordmark.svg" download="shoelace.svg">Download</SlButton>
-    <SlButton href="https://example.com/" disabled>Disabled</SlButton>
+    <SlButton href="https://example.com/" target="_blank">
+      New Window
+    </SlButton>
+    <SlButton href="/assets/images/wordmark.svg" download="shoelace.svg">
+      Download
+    </SlButton>
+    <SlButton href="https://example.com/" disabled>
+      Disabled
+    </SlButton>
   </>
 );
 ```
@@ -203,9 +237,15 @@ import { SlButton } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <>
-    <SlButton variant="default" size="small" style={{ width: '100%', marginBottom: '1rem' }}>Small</SlButton>
-    <SlButton variant="default" size="medium" style={{ width: '100%', marginBottom: '1rem' }}>Medium</SlButton>
-    <SlButton variant="default" size="large" style={{ width: '100%' }}>Large</SlButton>
+    <SlButton variant="default" size="small" style={{ width: '100%', marginBottom: '1rem' }}>
+      Small
+    </SlButton>
+    <SlButton variant="default" size="medium" style={{ width: '100%', marginBottom: '1rem' }}>
+      Medium
+    </SlButton>
+    <SlButton variant="default" size="large" style={{ width: '100%' }}>
+      Large
+    </SlButton>
   </>
 );
 ```
@@ -231,7 +271,7 @@ Use the `prefix` and `suffix` slots to add icons.
   Open
 </sl-button>
 
-<br><br>
+<br /><br />
 
 <sl-button variant="default">
   <sl-icon slot="prefix" name="gear"></sl-icon>
@@ -249,7 +289,7 @@ Use the `prefix` and `suffix` slots to add icons.
   Open
 </sl-button>
 
-<br><br>
+<br /><br />
 
 <sl-button variant="default" size="large">
   <sl-icon slot="prefix" name="gear"></sl-icon>
@@ -289,7 +329,8 @@ const App = () => (
       Open
     </SlButton>
 
-    <br /><br/ >
+    <br />
+    <br />
 
     <SlButton variant="default">
       <SlIcon slot="prefix" name="gear"></SlIcon>
@@ -307,7 +348,8 @@ const App = () => (
       Open
     </SlButton>
 
-    <br /><br />
+    <br />
+    <br />
 
     <SlButton variant="default" size="large">
       <SlIcon slot="prefix" name="gear"></SlIcon>
@@ -343,9 +385,15 @@ import { SlButton } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <>
-    <SlButton size="small" caret>Small</SlButton>
-    <SlButton size="medium" caret>Medium</SlButton>
-    <SlButton size="large" caret>Large</SlButton>
+    <SlButton size="small" caret>
+      Small
+    </SlButton>
+    <SlButton size="medium" caret>
+      Medium
+    </SlButton>
+    <SlButton size="large" caret>
+      Large
+    </SlButton>
   </>
 );
 ```
@@ -368,12 +416,24 @@ import { SlButton } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <>
-    <SlButton variant="default" loading>Default</SlButton>
-    <SlButton variant="primary" loading>Primary</SlButton>
-    <SlButton variant="success" loading>Success</SlButton>
-    <SlButton variant="neutral" loading>Neutral</SlButton>
-    <SlButton variant="warning" loading>Warning</SlButton>
-    <SlButton variant="danger" loading>Danger</SlButton>
+    <SlButton variant="default" loading>
+      Default
+    </SlButton>
+    <SlButton variant="primary" loading>
+      Primary
+    </SlButton>
+    <SlButton variant="success" loading>
+      Success
+    </SlButton>
+    <SlButton variant="neutral" loading>
+      Neutral
+    </SlButton>
+    <SlButton variant="warning" loading>
+      Warning
+    </SlButton>
+    <SlButton variant="danger" loading>
+      Danger
+    </SlButton>
   </>
 );
 ```
@@ -396,12 +456,29 @@ import { SlButton } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <>
-    <SlButton variant="default" disabled>Default</SlButton>
-    <SlButton variant="primary" disabled>Primary</SlButton>
-    <SlButton variant="success" disabled>Success</SlButton>
-    <SlButton variant="neutral" disabled>Neutral</SlButton>
-    <SlButton variant="warning" disabled>Warning</SlButton>
-    <SlButton variant="danger" disabled>Danger</SlButton>
+    <SlButton variant="default" disabled>
+      Default
+    </SlButton>
+
+    <SlButton variant="primary" disabled>
+      Primary
+    </SlButton>
+
+    <SlButton variant="success" disabled>
+      Success
+    </SlButton>
+
+    <SlButton variant="neutral" disabled>
+      Neutral
+    </SlButton>
+
+    <SlButton variant="warning" disabled>
+      Warning
+    </SlButton>
+
+    <SlButton variant="danger" disabled>
+      Danger
+    </SlButton>
   </>
 );
 ```
@@ -418,7 +495,7 @@ This example demonstrates how to style buttons using a custom class. This is the
     /* Set design tokens for height and border width */
     --sl-input-height-medium: 48px;
     --sl-input-border-width: 4px;
-    
+
     border-radius: 0;
     background-color: #ff1493;
     border-top-color: #ff7ac1;
