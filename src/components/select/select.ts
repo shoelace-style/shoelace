@@ -520,13 +520,7 @@ export default class SlSelect extends LitElement {
 
             ${this.clearable && hasSelection
               ? html`
-                  <button
-                    part="clear-button"
-                    class="select__clear"
-                    library="system"
-                    @click=${this.handleClearClick}
-                    tabindex="-1"
-                  >
+                  <button part="clear-button" class="select__clear" @click=${this.handleClearClick} tabindex="-1">
                     <slot name="clear-icon">
                       <sl-icon name="x-circle-fill" library="system"></sl-icon>
                     </slot>
