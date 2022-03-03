@@ -78,8 +78,13 @@ export default class SlMenu extends LitElement {
   typeToSelect(key: string) {
     const items = this.getAllItems({ includeDisabled: false });
     clearTimeout(this.typeToSelectTimeout);
-    this.typeToSelectTimeout = window.setTimeout(() => (this.typeToSelectString = ''), 750);
-    this.typeToSelectString += key.toLowerCase();
+    this.typeToSelectTimeout = window.setTimeout(() => (this.typeToSelectString = ''), 1000);
+
+    if (key === 'Backspace') {
+      this.typeToSelectString = this.typeToSelectString.slice(0, -1);
+    } else {
+      this.typeToSelectString += key.toLowerCase();
+    }
 
     // Restore focus in browsers that don't support :focus-visible when using the keyboard
     if (!hasFocusVisible) {

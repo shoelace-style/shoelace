@@ -64,7 +64,7 @@ fs.mkdirSync(outdir, { recursive: true });
       chunkNames: 'chunks/[name].[hash]',
       incremental: serve,
       define: {
-        // Popper.js requires this to be set
+        // Floating UI requires this to be set
         'process.env.NODE_ENV': '"production"'
       },
       bundle: true,
@@ -76,7 +76,7 @@ fs.mkdirSync(outdir, { recursive: true });
       //
       external: bundle
         ? alwaysExternal
-        : [...alwaysExternal, '@popperjs/core', '@shoelace-style/animations', 'lit', 'qr-creator'],
+        : [...alwaysExternal, '@floating-ui/dom', '@shoelace-style/animations', 'lit', 'qr-creator'],
       splitting: true,
       plugins: []
     })

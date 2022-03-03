@@ -124,7 +124,7 @@ Special thanks to the following projects and individuals that help make Shoelace
 - Color primitives are inspired by [Tailwind](https://tailwindcss.com/)
 - Icons are courtesy of [Bootstrap Icons](https://icons.getbootstrap.com/)
 - The homepage illustration is courtesy of [unDraw](https://undraw.co/)
-- Positioning of menus, tooltips, et al is handled by [Popper.js](https://popper.js.org/)
+- Positioning of dropdowns, tooltips, et al is handled by [Floating UI](https://floating-ui.com/)
 - Animations are courtesy of [animate.css](https://animate.style/)
 - QR codes are generated with [qr-creator](https://github.com/nimiq/qr-creator)
 - Search is powered by [Lunr](https://lunrjs.com/)
