@@ -283,7 +283,7 @@ export default class SlSelect extends LitElement {
       event.stopPropagation();
       event.preventDefault();
       this.dropdown.show();
-      this.menu.typeToSelect(event.key);
+      this.menu.typeToSelect(event);
     }
   }
 

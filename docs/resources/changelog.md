@@ -9,6 +9,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 ## Next
 
 - 🚨 BREAKING: removed `checked-icon` part from `<sl-menu-item>` in preparation for parts refactor
+- 🚨 BREAKING: changed the `typeToSelect()` method's argument from `String` to `KeyboardEvent` in `<sl-menu>` to support more advanced key combinations
 - Added `form`, `formaction`, `formmethod`, `formnovalidate`, and `formtarget` attributes to `<sl-button>` [#699](https://github.com/shoelace-style/shoelace/issues/699)
 - Added Prettier and ESLint to markdown files
 - Added background color and border to `<sl-menu>`
