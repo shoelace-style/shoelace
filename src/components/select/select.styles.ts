@@ -34,10 +34,6 @@ export default css`
     overflow: auto;
   }
 
-  .select__menu::part(base) {
-    border: none;
-  }
-
   /* Standard selects */
   .select--standard .select__control {
     background-color: var(--sl-input-background-color);

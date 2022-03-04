@@ -57,7 +57,7 @@ export default class SlMenuItem extends LitElement {
           'menu-item': true,
           'menu-item--checked': this.checked,
           'menu-item--disabled': this.disabled,
-          'menu-item--has-submenu': false
+          'menu-item--has-submenu': false // reserved for future use
         })}
       >
         <span class="menu-item__check">

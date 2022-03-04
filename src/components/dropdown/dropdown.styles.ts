@@ -26,9 +26,6 @@ export default css`
     font-size: var(--sl-font-size-medium);
     font-weight: var(--sl-font-weight-normal);
     color: var(--color);
-    background-color: var(--sl-panel-background-color);
-    border: solid var(--sl-panel-border-width) var(--sl-panel-border-color);
-    border-radius: var(--sl-border-radius-medium);
     box-shadow: var(--sl-shadow-large);
     overflow: auto;
     overscroll-behavior: none;
