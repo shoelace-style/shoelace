@@ -1,7 +1,5 @@
-import { expect } from '@open-wc/testing';
+import { expect, fixture, html } from '@open-wc/testing';
 import sinon from 'sinon';
-// eslint-disable-next-line no-restricted-imports
-import { simpleFixture } from '../../testing/setup';
 import type SlButton from './button';
 
 describe('<sl-button>', () => {
@@ -9,12 +7,12 @@ describe('<sl-button>', () => {
   describe.only('when provided no parameters', () => {
 
     it('passes accessibility test', async () => {
-      const el = await simpleFixture<SlButton>('sl-button', 'Button label');
+      const el = await fixture<SlButton>(html` <sl-button>Button Label</sl-button> `);
       await expect(el).to.be.accessible();
     });
 
     it('default values are set correctly', async () => {
-      const el = await simpleFixture<SlButton>('sl-button', 'Button label');
+      const el = await fixture<SlButton>(html` <sl-button>Button Label</sl-button> `);
 
       expect(el.variant).to.equal('default');
       expect(el.size).to.equal('medium');
@@ -27,18 +25,18 @@ describe('<sl-button>', () => {
     });
 
     it('should render as a <button>', async () => {
-      const el = await simpleFixture<SlButton>('sl-button', 'Button label');
+      const el = await fixture<SlButton>(html` <sl-button>Button Label</sl-button> `);
       expect(el.shadowRoot!.querySelector('button')).to.exist;
       expect(el.shadowRoot!.querySelector('a')).not.to.exist;
     });
 
     it('should not have a spinner present', async () => {
-      const el = await simpleFixture<SlButton>('sl-button', 'Button label');
+      const el = await fixture<SlButton>(html` <sl-button>Button Label</sl-button> `);
       expect(el.shadowRoot!.querySelector('sl-spinner')).not.to.exist;
     });
 
     it('should not have a caret present', async () => {
-      const el = await simpleFixture<SlButton>('sl-button', 'Button label');
+      const el = await fixture<SlButton>(html` <sl-button>Button Label</sl-button> `);
       expect(el.shadowRoot?.querySelector('[part="caret"]')).not .to.exist;
     });
   });
@@ -46,22 +44,22 @@ describe('<sl-button>', () => {
   describe('when disabled', () => {
 
     it('passes accessibility test', async () => {
-      const el = await simpleFixture<SlButton>('sl-button', 'Button label', { disabled: true});
+      const el = await fixture<SlButton>(html` <sl-button disabled>Button Label</sl-button> `);
       await expect(el).to.be.accessible();
     });
 
     it('should disable the native <button> when rendering a <button>', async () => {
-      const el = await simpleFixture<SlButton>('sl-button', 'Button label', { disabled: true});
+      const el = await fixture<SlButton>(html` <sl-button disabled>Button Label</sl-button> `);
       expect(el.shadowRoot!.querySelector('button[disabled]')).to.exist;
     });
 
     it('should not disable the native <a> when rendering an <a>', async () => {
-      const el = await simpleFixture<SlButton>('sl-button', 'Button label', { disabled: true, href: 'some/path'});
+      const el = await fixture<SlButton>(html` <sl-button href="some/path" disabled>Button Label</sl-button> `);
       expect(el.shadowRoot!.querySelector('a[disabled]')).not.to.exist;
     });
 
     it('should not bubble up clicks', async () => {
-      const button = await simpleFixture<SlButton>('sl-button', 'Button label', { disabled: true});
+      const button = await fixture<SlButton>(html` <sl-button disabled>Button Label</sl-button> `);
       const handleClick = sinon.spy();
       button.addEventListener('click', handleClick);
       button.click();
@@ -71,7 +69,7 @@ describe('<sl-button>', () => {
       button.shadowRoot!.querySelector('button')!.click();
       expect(handleClick).not.to.have.been.called;
 
-      const buttonLink = await simpleFixture<SlButton>('sl-button', 'Button label', { disabled: true, href: 'some/path'});
+      const buttonLink = await fixture<SlButton>(html` <sl-button href="some/path" disabled>Button Label</sl-button> `);
       buttonLink.addEventListener('click', handleClick);
       buttonLink.click();
 
@@ -85,7 +83,7 @@ describe('<sl-button>', () => {
   describe('when loading', () => {
 
     it('should have a spinner present', async () => {
-      const el = await simpleFixture<SlButton>('sl-button', 'Button label', { loading: true });
+      const el = await fixture<SlButton>(html` <sl-button loading>Button Label</sl-button> `);
       expect(el.shadowRoot!.querySelector('sl-spinner')).to.exist;
     });
 
@@ -94,7 +92,7 @@ describe('<sl-button>', () => {
   describe('when caret', () => {
 
     it('should have a caret present', async () => {
-      const el = await simpleFixture<SlButton>('sl-button', 'Button label', { caret: true });
+      const el = await fixture<SlButton>(html` <sl-button caret>Button Label</sl-button> `);
       expect(el.shadowRoot!.querySelector('[part="caret"]')).to.exist;
     });
 
@@ -103,7 +101,7 @@ describe('<sl-button>', () => {
   describe('when href is present', () => {
 
     it('should render as an <a>', async () => {
-      const el = await simpleFixture<SlButton>('sl-button', 'Button label', { href: 'some/path' });
+      const el = await fixture<SlButton>(html` <sl-button href="some/path">Button Label</sl-button> `);
       expect(el.shadowRoot!.querySelector('a')).to.exist;
       expect(el.shadowRoot!.querySelector('button')).not.to.exist;
     });
