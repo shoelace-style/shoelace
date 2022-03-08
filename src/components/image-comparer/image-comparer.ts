@@ -2,7 +2,6 @@ import { html, LitElement } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import '~/components/icon/icon';
-import { autoIncrement } from '~/internal/auto-increment';
 import { drag } from '~/internal/drag';
 import { emit } from '~/internal/event';
 import { clamp } from '~/internal/math';
@@ -36,9 +35,6 @@ export default class SlImageComparer extends LitElement {
 
   @query('.image-comparer') base: HTMLElement;
   @query('.image-comparer__handle') handle: HTMLElement;
-
-  private readonly attrId = autoIncrement();
-  private readonly containerId = `comparer-container-${this.attrId}`;
 
   /** The position of the divider as a percentage. */
   @property({ type: Number, reflect: true }) position = 50;
@@ -85,7 +81,7 @@ export default class SlImageComparer extends LitElement {
 
   render() {
     return html`
-      <div part="base" class="image-comparer" @keydown=${this.handleKeyDown} id=${this.containerId}>
+      <div part="base" id="image-comparer" class="image-comparer" @keydown=${this.handleKeyDown}>
         <div class="image-comparer__image">
           <div part="before" class="image-comparer__before">
             <slot name="before"></slot>
@@ -114,7 +110,7 @@ export default class SlImageComparer extends LitElement {
             aria-valuenow=${this.position}
             aria-valuemin="0"
             aria-valuemax="100"
-            aria-controls=${this.containerId}
+            aria-controls="image-comparer"
             tabindex="0"
           >
             <slot name="handle-icon">

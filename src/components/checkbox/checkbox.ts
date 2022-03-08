@@ -3,7 +3,6 @@ import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
-import { autoIncrement } from '~/internal/auto-increment';
 import { emit } from '~/internal/event';
 import { FormSubmitController } from '~/internal/form-control';
 import { watch } from '~/internal/watch';
@@ -35,9 +34,6 @@ export default class SlCheckbox extends LitElement {
   private readonly formSubmitController = new FormSubmitController(this, {
     value: (control: SlCheckbox) => (control.checked ? control.value : undefined)
   });
-  private readonly attrId = autoIncrement();
-  private readonly inputId = `checkbox-${this.attrId}`;
-  private readonly labelId = `checkbox-label-${this.attrId}`;
 
   @state() private hasFocus = false;
 
@@ -132,10 +128,8 @@ export default class SlCheckbox extends LitElement {
           'checkbox--focused': this.hasFocus,
           'checkbox--indeterminate': this.indeterminate
         })}
-        for=${this.inputId}
       >
         <input
-          id=${this.inputId}
           class="checkbox__input"
           type="checkbox"
           name=${ifDefined(this.name)}
@@ -145,7 +139,6 @@ export default class SlCheckbox extends LitElement {
           .disabled=${this.disabled}
           .required=${this.required}
           aria-checked=${this.checked ? 'true' : 'false'}
-          aria-labelledby=${this.labelId}
           @click=${this.handleClick}
           @blur=${this.handleBlur}
           @focus=${this.handleFocus}
@@ -185,7 +178,7 @@ export default class SlCheckbox extends LitElement {
             : ''}
         </span>
 
-        <span part="label" id=${this.labelId} class="checkbox__label">
+        <span part="label" class="checkbox__label">
           <slot></slot>
         </span>
       </label>

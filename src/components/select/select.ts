@@ -1,7 +1,6 @@
 import { html, LitElement } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { ifDefined } from 'lit/directives/if-defined.js';
 import '~/components/dropdown/dropdown';
 import type SlDropdown from '~/components/dropdown/dropdown';
 import '~/components/icon-button/icon-button';
@@ -11,9 +10,8 @@ import type SlMenuItem from '~/components/menu-item/menu-item';
 import type SlMenu from '~/components/menu/menu';
 import type { MenuSelectEventDetail } from '~/components/menu/menu';
 import '~/components/tag/tag';
-import { autoIncrement } from '~/internal/auto-increment';
 import { emit } from '~/internal/event';
-import { FormSubmitController, getLabelledBy, renderFormControl } from '~/internal/form-control';
+import { FormSubmitController } from '~/internal/form-control';
 import { getTextContent, HasSlotController } from '~/internal/slot';
 import { watch } from '~/internal/watch';
 import styles from './select.styles';
@@ -70,11 +68,6 @@ export default class SlSelect extends LitElement {
   // @ts-expect-error -- Controller is currently unused
   private readonly formSubmitController = new FormSubmitController(this);
   private readonly hasSlotController = new HasSlotController(this, 'help-text', 'label');
-  private readonly attrId = autoIncrement();
-  private readonly inputId = `select-${this.attrId}`;
-  private readonly helpTextId = `select-help-text-${this.attrId}`;
-  private readonly labelId = `select-label-${this.attrId}`;
-  private readonly menuId = `select-menu-${this.attrId}`;
   private resizeObserver: ResizeObserver;
 
   @state() private hasFocus = false;
@@ -176,7 +169,7 @@ export default class SlSelect extends LitElement {
   }
 
   getItems() {
-    return [...this.querySelectorAll('sl-menu-item')] as SlMenuItem[];
+    return [...this.querySelectorAll<SlMenuItem>('sl-menu-item')];
   }
 
   getValueAsArray() {
@@ -440,119 +433,134 @@ export default class SlSelect extends LitElement {
     const hasLabelSlot = this.hasSlotController.test('label');
     const hasHelpTextSlot = this.hasSlotController.test('help-text');
     const hasSelection = this.multiple ? this.value.length > 0 : this.value !== '';
+    const hasLabel = this.label ? true : !!hasLabelSlot;
+    const hasHelpText = this.helpText ? true : !!hasHelpTextSlot;
 
-    return renderFormControl(
-      {
-        inputId: this.inputId,
-        label: this.label,
-        labelId: this.labelId,
-        hasLabelSlot,
-        helpTextId: this.helpTextId,
-        helpText: this.helpText,
-        hasHelpTextSlot,
-        size: this.size,
-        onLabelClick: () => this.handleLabelClick()
-      },
-      html`
-        <sl-dropdown
-          part="base"
-          .hoist=${this.hoist}
-          .placement=${this.placement}
-          .stayOpenOnSelect=${this.multiple}
-          .containingElement=${this as HTMLElement}
-          ?disabled=${this.disabled}
-          class=${classMap({
-            select: true,
-            'select--open': this.isOpen,
-            'select--empty': this.value.length === 0,
-            'select--focused': this.hasFocus,
-            'select--clearable': this.clearable,
-            'select--disabled': this.disabled,
-            'select--multiple': this.multiple,
-            'select--standard': !this.filled,
-            'select--filled': this.filled,
-            'select--has-tags': this.multiple && this.displayTags.length > 0,
-            'select--placeholder-visible': this.displayLabel === '',
-            'select--small': this.size === 'small',
-            'select--medium': this.size === 'medium',
-            'select--large': this.size === 'large',
-            'select--pill': this.pill,
-            'select--invalid': this.invalid
-          })}
-          @sl-show=${this.handleMenuShow}
-          @sl-hide=${this.handleMenuHide}
+    return html`
+      <div
+        part="form-control"
+        class=${classMap({
+          'form-control': true,
+          'form-control--small': this.size === 'small',
+          'form-control--medium': this.size === 'medium',
+          'form-control--large': this.size === 'large',
+          'form-control--has-label': hasLabel,
+          'form-control--has-help-text': hasHelpText
+        })}
+      >
+        <label
+          part="label"
+          class="form-control__label"
+          for="input"
+          aria-hidden=${hasLabel ? 'false' : 'true'}
+          @click=${this.handleLabelClick}
         >
-          <div
-            part="control"
-            slot="trigger"
-            id=${this.inputId}
-            class="select__control"
-            role="combobox"
-            aria-labelledby=${ifDefined(
-              getLabelledBy({
-                label: this.label,
-                labelId: this.labelId,
-                hasLabelSlot,
-                helpText: this.helpText,
-                helpTextId: this.helpTextId,
-                hasHelpTextSlot
-              })
-            )}
-            aria-haspopup="true"
-            aria-expanded=${this.isOpen ? 'true' : 'false'}
-            aria-controls=${this.menuId}
-            tabindex=${this.disabled ? '-1' : '0'}
-            @blur=${this.handleBlur}
-            @focus=${this.handleFocus}
-            @keydown=${this.handleKeyDown}
-          >
-            <span part="prefix" class="select__prefix">
-              <slot name="prefix"></slot>
-            </span>
+          <slot name="label">${this.label}</slot>
+        </label>
 
-            <div part="display-label" class="select__label">
-              ${this.displayTags.length > 0
-                ? html` <span part="tags" class="select__tags"> ${this.displayTags} </span> `
-                : this.displayLabel.length > 0
-                ? this.displayLabel
-                : this.placeholder}
+        <div class="form-control__input">
+          <sl-dropdown
+            part="base"
+            .hoist=${this.hoist}
+            .placement=${this.placement}
+            .stayOpenOnSelect=${this.multiple}
+            .containingElement=${this as HTMLElement}
+            ?disabled=${this.disabled}
+            class=${classMap({
+              select: true,
+              'select--open': this.isOpen,
+              'select--empty': this.value.length === 0,
+              'select--focused': this.hasFocus,
+              'select--clearable': this.clearable,
+              'select--disabled': this.disabled,
+              'select--multiple': this.multiple,
+              'select--standard': !this.filled,
+              'select--filled': this.filled,
+              'select--has-tags': this.multiple && this.displayTags.length > 0,
+              'select--placeholder-visible': this.displayLabel === '',
+              'select--small': this.size === 'small',
+              'select--medium': this.size === 'medium',
+              'select--large': this.size === 'large',
+              'select--pill': this.pill,
+              'select--invalid': this.invalid
+            })}
+            @sl-show=${this.handleMenuShow}
+            @sl-hide=${this.handleMenuHide}
+          >
+            <div
+              part="control"
+              slot="trigger"
+              id="input"
+              class="select__control"
+              role="combobox"
+              aria-describedby="help-text"
+              aria-haspopup="true"
+              aria-expanded=${this.isOpen ? 'true' : 'false'}
+              aria-controls="menu"
+              tabindex=${this.disabled ? '-1' : '0'}
+              @blur=${this.handleBlur}
+              @focus=${this.handleFocus}
+              @keydown=${this.handleKeyDown}
+            >
+              <span part="prefix" class="select__prefix">
+                <slot name="prefix"></slot>
+              </span>
+
+              <div part="display-label" class="select__label">
+                ${this.displayTags.length > 0
+                  ? html` <span part="tags" class="select__tags"> ${this.displayTags} </span> `
+                  : this.displayLabel.length > 0
+                  ? this.displayLabel
+                  : this.placeholder}
+              </div>
+
+              ${this.clearable && hasSelection
+                ? html`
+                    <button part="clear-button" class="select__clear" @click=${this.handleClearClick} tabindex="-1">
+                      <slot name="clear-icon">
+                        <sl-icon name="x-circle-fill" library="system"></sl-icon>
+                      </slot>
+                    </button>
+                  `
+                : ''}
+
+              <span part="suffix" class="select__suffix">
+                <slot name="suffix"></slot>
+              </span>
+
+              <span part="icon" class="select__icon" aria-hidden="true">
+                <sl-icon name="chevron-down" library="system"></sl-icon>
+              </span>
+
+              <!-- The hidden input tricks the browser's built-in validation so it works as expected. We use an input
+              instead of a select because, otherwise, iOS will show a list of options during validation. The focus
+              handler is used to move focus to the primary control when it's marked invalid.  -->
+              <input
+                class="select__hidden-select"
+                aria-hidden="true"
+                ?required=${this.required}
+                .value=${hasSelection ? '1' : ''}
+                tabindex="-1"
+                @focus=${() => this.control.focus()}
+              />
             </div>
 
-            ${this.clearable && hasSelection
-              ? html`
-                  <button part="clear-button" class="select__clear" @click=${this.handleClearClick} tabindex="-1">
-                    <slot name="clear-icon">
-                      <sl-icon name="x-circle-fill" library="system"></sl-icon>
-                    </slot>
-                  </button>
-                `
-              : ''}
+            <sl-menu part="menu" id="menu" class="select__menu" @sl-select=${this.handleMenuSelect}>
+              <slot @slotchange=${this.handleMenuSlotChange}></slot>
+            </sl-menu>
+          </sl-dropdown>
+        </div>
 
-            <span part="suffix" class="select__suffix">
-              <slot name="suffix"></slot>
-            </span>
-
-            <span part="icon" class="select__icon" aria-hidden="true">
-              <sl-icon name="chevron-down" library="system"></sl-icon>
-            </span>
-
-            <!-- The hidden input tricks the browser's built-in validation so it works as expected. We use an input
-            instead of a select because, otherwise, iOS will show a list of options during validation. -->
-            <input
-              class="select__hidden-select"
-              aria-hidden="true"
-              ?required=${this.required}
-              .value=${hasSelection ? '1' : ''}
-              tabindex="-1"
-            />
-          </div>
-
-          <sl-menu part="menu" class="select__menu" @sl-select=${this.handleMenuSelect} id=${this.menuId}>
-            <slot @slotchange=${this.handleMenuSlotChange}></slot>
-          </sl-menu>
-        </sl-dropdown>
-      `
-    );
+        <div
+          part="help-text"
+          id="help-text"
+          class="form-control__help-text"
+          aria-hidden=${hasHelpText ? 'false' : 'true'}
+        >
+          <slot name="help-text">${this.helpText}</slot>
+        </div>
+      </div>
+    `;
   }
 }
 

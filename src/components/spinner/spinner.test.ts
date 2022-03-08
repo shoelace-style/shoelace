@@ -9,7 +9,7 @@ describe('<sl-spinner>', () => {
       el = await fixture<SlSpinner>(html` <sl-spinner></sl-spinner> `);
     });
 
-    it('should render a component that passes accessibility test.', async () => {
+    it('should pass accessibility tests', async () => {
       await expect(el).to.be.accessible();
     });
 

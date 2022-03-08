@@ -3,9 +3,8 @@ import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
-import { autoIncrement } from '~/internal/auto-increment';
 import { emit } from '~/internal/event';
-import { FormSubmitController, getLabelledBy, renderFormControl } from '~/internal/form-control';
+import { FormSubmitController } from '~/internal/form-control';
 import { HasSlotController } from '~/internal/slot';
 import { watch } from '~/internal/watch';
 import styles from './range.styles';
@@ -41,10 +40,6 @@ export default class SlRange extends LitElement {
   // @ts-expect-error -- Controller is currently unused
   private readonly formSubmitController = new FormSubmitController(this);
   private readonly hasSlotController = new HasSlotController(this, 'help-text', 'label');
-  private readonly attrId = autoIncrement();
-  private readonly inputId = `input-${this.attrId}`;
-  private readonly helpTextId = `input-help-text-${this.attrId}`;
-  private readonly labelId = `input-label-${this.attrId}`;
   private resizeObserver: ResizeObserver;
 
   @state() private hasFocus = false;
@@ -204,69 +199,76 @@ export default class SlRange extends LitElement {
   render() {
     const hasLabelSlot = this.hasSlotController.test('label');
     const hasHelpTextSlot = this.hasSlotController.test('help-text');
+    const hasLabel = this.label ? true : !!hasLabelSlot;
+    const hasHelpText = this.helpText ? true : !!hasHelpTextSlot;
 
     // NOTE - always bind value after min/max, otherwise it will be clamped
-    return renderFormControl(
-      {
-        inputId: this.inputId,
-        label: this.label,
-        labelId: this.labelId,
-        hasLabelSlot,
-        helpTextId: this.helpTextId,
-        helpText: this.helpText,
-        hasHelpTextSlot,
-        size: 'medium'
-      },
-      html`
-        <div
-          part="base"
-          class=${classMap({
-            range: true,
-            'range--disabled': this.disabled,
-            'range--focused': this.hasFocus,
-            'range--tooltip-visible': this.hasTooltip,
-            'range--tooltip-top': this.tooltip === 'top',
-            'range--tooltip-bottom': this.tooltip === 'bottom'
-          })}
-          @mousedown=${this.handleThumbDragStart}
-          @mouseup=${this.handleThumbDragEnd}
-          @touchstart=${this.handleThumbDragStart}
-          @touchend=${this.handleThumbDragEnd}
-        >
-          <input
-            part="input"
-            type="range"
-            class="range__control"
-            name=${ifDefined(this.name)}
-            ?disabled=${this.disabled}
-            min=${ifDefined(this.min)}
-            max=${ifDefined(this.max)}
-            step=${ifDefined(this.step)}
-            .value=${live(this.value.toString())}
-            aria-labelledby=${ifDefined(
-              getLabelledBy({
-                label: this.label,
-                labelId: this.labelId,
-                hasLabelSlot,
-                helpText: this.helpText,
-                helpTextId: this.helpTextId,
-                hasHelpTextSlot
-              })
-            )}
-            @input=${this.handleInput}
-            @focus=${this.handleFocus}
-            @blur=${this.handleBlur}
-          />
-          ${this.tooltip !== 'none' && !this.disabled
-            ? html`
-                <output part="tooltip" class="range__tooltip">
-                  ${typeof this.tooltipFormatter === 'function' ? this.tooltipFormatter(this.value) : this.value}
-                </output>
-              `
-            : ''}
+    return html`
+      <div
+        part="form-control"
+        class=${classMap({
+          'form-control': true,
+          'form-control--medium': true, // range only has one size
+          'form-control--has-label': hasLabel,
+          'form-control--has-help-text': hasHelpText
+        })}
+      >
+        <label part="label" class="form-control__label" for="input" aria-hidden=${hasLabel ? 'false' : 'true'}>
+          <slot name="label">${this.label}</slot>
+        </label>
+
+        <div class="form-control__input">
+          <div
+            part="base"
+            class=${classMap({
+              range: true,
+              'range--disabled': this.disabled,
+              'range--focused': this.hasFocus,
+              'range--tooltip-visible': this.hasTooltip,
+              'range--tooltip-top': this.tooltip === 'top',
+              'range--tooltip-bottom': this.tooltip === 'bottom'
+            })}
+            @mousedown=${this.handleThumbDragStart}
+            @mouseup=${this.handleThumbDragEnd}
+            @touchstart=${this.handleThumbDragStart}
+            @touchend=${this.handleThumbDragEnd}
+          >
+            <input
+              part="input"
+              id="input"
+              type="range"
+              class="range__control"
+              name=${ifDefined(this.name)}
+              ?disabled=${this.disabled}
+              min=${ifDefined(this.min)}
+              max=${ifDefined(this.max)}
+              step=${ifDefined(this.step)}
+              .value=${live(this.value.toString())}
+              aria-describedby="help-text"
+              @input=${this.handleInput}
+              @focus=${this.handleFocus}
+              @blur=${this.handleBlur}
+            />
+            ${this.tooltip !== 'none' && !this.disabled
+              ? html`
+                  <output part="tooltip" class="range__tooltip">
+                    ${typeof this.tooltipFormatter === 'function' ? this.tooltipFormatter(this.value) : this.value}
+                  </output>
+                `
+              : ''}
+          </div>
         </div>
-      `
-    );
+
+        <div
+          part="help-text"
+          id="help-text"
+          class="form-control__help-text"
+          aria-hidden=${hasHelpText ? 'false' : 'true'}
+        >
+          <slot name="help-text">${this.helpText}</slot>
+        </div>
+      </div>
+    `;
   }
 }
 

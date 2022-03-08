@@ -7,7 +7,12 @@ export default {
   files: 'src/**/*.test.ts',
   concurrentBrowsers: 3,
   nodeResolve: true,
-  plugins: [esbuildPlugin({ ts: true, target: 'auto' })],
+  plugins: [
+    esbuildPlugin({
+      ts: true,
+      target: 'auto'
+    })
+  ],
   browsers: [
     playwrightLauncher({ product: 'chromium' }),
     playwrightLauncher({ product: 'firefox' }),

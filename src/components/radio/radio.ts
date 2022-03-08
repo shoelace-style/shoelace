@@ -104,7 +104,7 @@ export default class SlRadio extends LitElement {
       return [this];
     }
 
-    return [...radioGroup.querySelectorAll('sl-radio')].filter((radio: this) => radio.name === this.name) as this[];
+    return [...radioGroup.querySelectorAll<SlRadio>('sl-radio')].filter((radio: this) => radio.name === this.name);
   }
 
   getSiblingRadios() {

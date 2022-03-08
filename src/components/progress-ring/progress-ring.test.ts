@@ -9,7 +9,7 @@ describe('<sl-progress-ring>', () => {
       el = await fixture<SlProgressRing>(html`<sl-progress-ring value="25"></sl-progress-ring>`);
     });
 
-    it('should render a component that passes accessibility test.', async () => {
+    it('should pass accessibility tests', async () => {
       await expect(el).to.be.accessible();
     });
   });
@@ -24,7 +24,7 @@ describe('<sl-progress-ring>', () => {
       base = el.shadowRoot!.querySelector('[part="base"]')!;
     });
 
-    it('should render a component that passes accessibility test.', async () => {
+    it('should pass accessibility tests', async () => {
       await expect(el).to.be.accessible();
     });
 
@@ -44,7 +44,7 @@ describe('<sl-progress-ring>', () => {
       );
     });
 
-    it('should render a component that passes accessibility test.', async () => {
+    it('should pass accessibility tests', async () => {
       await expect(el).to.be.accessible();
     });
   });
@@ -59,7 +59,7 @@ describe('<sl-progress-ring>', () => {
       );
     });
 
-    it('should render a component that passes accessibility test.', async () => {
+    it('should pass accessibility tests', async () => {
       await expect(el).to.be.accessible();
     });
   });

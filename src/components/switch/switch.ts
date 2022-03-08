@@ -3,7 +3,6 @@ import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
-import { autoIncrement } from '~/internal/auto-increment';
 import { emit } from '~/internal/event';
 import { FormSubmitController } from '~/internal/form-control';
 import { watch } from '~/internal/watch';
@@ -38,9 +37,6 @@ export default class SlSwitch extends LitElement {
   private readonly formSubmitController = new FormSubmitController(this, {
     value: (control: SlSwitch) => (control.checked ? control.value : undefined)
   });
-  private readonly attrId = autoIncrement();
-  private readonly switchId = `switch-${this.attrId}`;
-  private readonly labelId = `switch-label-${this.attrId}`;
 
   @state() private hasFocus = false;
 
@@ -138,7 +134,6 @@ export default class SlSwitch extends LitElement {
     return html`
       <label
         part="base"
-        for=${this.switchId}
         class=${classMap({
           switch: true,
           'switch--checked': this.checked,
@@ -147,7 +142,6 @@ export default class SlSwitch extends LitElement {
         })}
       >
         <input
-          id=${this.switchId}
           class="switch__input"
           type="checkbox"
           name=${ifDefined(this.name)}
@@ -157,7 +151,6 @@ export default class SlSwitch extends LitElement {
           .required=${this.required}
           role="switch"
           aria-checked=${this.checked ? 'true' : 'false'}
-          aria-labelledby=${this.labelId}
           @click=${this.handleClick}
           @blur=${this.handleBlur}
           @focus=${this.handleFocus}
@@ -168,7 +161,7 @@ export default class SlSwitch extends LitElement {
           <span part="thumb" class="switch__thumb"></span>
         </span>
 
-        <span part="label" id=${this.labelId} class="switch__label">
+        <span part="label" class="switch__label">
           <slot></slot>
         </span>
       </label>

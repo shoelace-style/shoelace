@@ -13,13 +13,16 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Added `form`, `formaction`, `formmethod`, `formnovalidate`, and `formtarget` attributes to `<sl-button>` [#699](https://github.com/shoelace-style/shoelace/issues/699)
 - Added Prettier and ESLint to markdown files
 - Added background color and border to `<sl-menu>`
+- Added more tests for `<sl-input>`, `<sl-select>`, and `<sl-textarea>`
 - Fixed a bug that prevented forms from submitting when pressing <kbd>Enter</kbd> inside of an `<sl-input>` [#700](https://github.com/shoelace-style/shoelace/issues/700)
 - Fixed a bug in `<sl-input>` that prevented the `valueAsDate` and `valueAsNumber` properties from working when set before the component was initialized
 - Improved `autofocus` behavior in Safari for `<sl-dialog>` and `<sl-drawer>` [#693](https://github.com/shoelace-style/shoelace/issues/693)
 - Improved type to select logic in `<sl-menu>` so it supports <kbd>Backspace</kbd> and gives users more time before resetting
 - Improved checkmark size and positioning in `<sl-menu-item>`
+- Improved accessibility in form controls that have help text so they're announced correctly in various screen readers
 - Removed feature detection for `focus({ preventScroll })` since it no longer works in Safari
 - Removed the `--sl-tooltip-arrow-start-end-offset` design token
+- Removed the `pattern` attribute from `<sl-textarea>` as it was documented incorrectly and never supported
 - Replaced Popper positioning dependency with Floating UI in `<sl-dropdown>` and `<sl-tooltip>`
 
 ## 2.0.0-beta.70
