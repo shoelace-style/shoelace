@@ -2,7 +2,9 @@ import { expect, fixture, html, elementUpdated } from '@open-wc/testing';
 import type SlFormatBytes from './format-bytes';
 
 describe('<sl-format-bytes>', () => {
+
   describe('defaults ', () => {
+
     it('default properties', async () => {
       const el = await fixture<SlFormatBytes>(html` <sl-format-bytes></sl-format-bytes> `);
 
@@ -14,104 +16,152 @@ describe('<sl-format-bytes>', () => {
   });
 
   describe('bytes', () => {
-    const results = [
-      {
-        value: 12,
-        short: '12 byte',
-        long: '12 bytes',
-        narrow: '12B'
-      },
-      {
-        value: 1200,
-        short: '1.2 kB',
-        long: '1.2 kilobytes',
-        narrow: '1.2kB'
-      },
-      {
-        value: 1200000,
-        short: '1.2 MB',
-        long: '1.2 megabytes',
-        narrow: '1.2MB'
-      },
-      {
-        value: 1200000000,
-        short: '1.2 GB',
-        long: '1.2 gigabytes',
-        narrow: '1.2GB'
-      }
-    ];
 
-    results.forEach(expected => {
-      it('bytes : display formats', async () => {
-        const el = await fixture<SlFormatBytes>(html` <sl-format-bytes></sl-format-bytes> `);
-        // short
-        el.value = expected.value;
-        await elementUpdated(el);
-        expect(el.shadowRoot?.textContent).to.equal(expected.short);
+    it('bytes : short display', async () => {
+      const el = await fixture<SlFormatBytes>(html` <sl-format-bytes></sl-format-bytes> `);
 
-        // long
-        el.display = 'long';
-        el.value = expected.value;
-        await elementUpdated(el);
-        expect(el.shadowRoot?.textContent).to.equal(expected.long);
+      el.value = 12;
+      await elementUpdated(el);
+      // webkit keeps the lit comment in textContent
+      expect(el.shadowRoot?.textContent?.endsWith('12 byte')).to.be.true;
 
-        // narrow
-        el.display = 'narrow';
-        el.value = expected.value;
-        await elementUpdated(el);
-        expect(el.shadowRoot?.textContent).to.equal(expected.narrow);
-      });
+      el.value = 1200;
+      await elementUpdated(el);
+      // webkit keeps the lit comment in textContent
+      expect(el.shadowRoot?.textContent?.endsWith('1.2 kB')).to.be.true;
+
+      el.value = 1200000;
+      await elementUpdated(el);
+      // webkit keeps the lit comment in textContent
+      expect(el.shadowRoot?.textContent?.endsWith('1.2 MB')).to.be.true;
+
+      el.value = 1200000000;
+      await elementUpdated(el);
+      // webkit keeps the lit comment in textContent
+      expect(el.shadowRoot?.textContent?.endsWith('1.2 GB')).to.be.true;
+    });
+
+    it('bytes : long display', async () => {
+      const el = await fixture<SlFormatBytes>(html` <sl-format-bytes display="long"></sl-format-bytes> `);
+
+      el.value = 12;
+      await elementUpdated(el);
+      // webkit keeps the lit comment in textContent
+      expect(el.shadowRoot?.textContent?.endsWith('12 bytes')).to.be.true;
+
+      el.value = 1200;
+      await elementUpdated(el);
+      // webkit keeps the lit comment in textContent
+      expect(el.shadowRoot?.textContent?.endsWith('1.2 kilobytes')).to.be.true;
+
+      el.value = 1200000;
+      await elementUpdated(el);
+      // webkit keeps the lit comment in textContent
+      expect(el.shadowRoot?.textContent?.endsWith('1.2 megabytes')).to.be.true;
+
+      el.value = 1200000000;
+      await elementUpdated(el);
+      // webkit keeps the lit comment in textContent
+      expect(el.shadowRoot?.textContent?.endsWith('1.2 gigabytes')).to.be.true;
+    });
+
+    it('bytes : narrow display', async () => {
+      const el = await fixture<SlFormatBytes>(html` <sl-format-bytes display="narrow"></sl-format-bytes> `);
+
+      el.value = 12;
+      await elementUpdated(el);
+      // webkit keeps the lit comment in textContent
+      expect(el.shadowRoot?.textContent?.endsWith('12B')).to.be.true;
+
+      el.value = 1200;
+      await elementUpdated(el);
+      // webkit keeps the lit comment in textContent
+      expect(el.shadowRoot?.textContent?.endsWith('1.2kB')).to.be.true;
+
+      el.value = 1200000;
+      await elementUpdated(el);
+      // webkit keeps the lit comment in textContent
+      expect(el.shadowRoot?.textContent?.endsWith('1.2MB')).to.be.true;
+
+      el.value = 1200000000;
+      await elementUpdated(el);
+      // webkit keeps the lit comment in textContent
+      expect(el.shadowRoot?.textContent?.endsWith('1.2GB')).to.be.true;
     });
   });
 
   describe('bits', () => {
-    const results = [
-      {
-        value: 12,
-        short: '12 bit',
-        long: '12 bits',
-        narrow: '12bit'
-      },
-      {
-        value: 1200,
-        short: '1.2 kb',
-        long: '1.2 kilobits',
-        narrow: '1.2kb'
-      },
-      {
-        value: 1200000,
-        short: '1.2 Mb',
-        long: '1.2 megabits',
-        narrow: '1.2Mb'
-      },
-      {
-        value: 1200000000,
-        short: '1.2 Gb',
-        long: '1.2 gigabits',
-        narrow: '1.2Gb'
-      }
-    ];
+    it('bits : short display', async () => {
+      const el = await fixture<SlFormatBytes>(html` <sl-format-bytes unit="bit"></sl-format-bytes> `);
 
-    results.forEach(expected => {
-      it('bits : display formats', async () => {
-        const el = await fixture<SlFormatBytes>(html` <sl-format-bytes unit="bit"></sl-format-bytes> `);
-        // short
-        el.value = expected.value;
-        await elementUpdated(el);
-        expect(el.shadowRoot?.textContent).to.equal(expected.short);
+      el.value = 12;
+      await elementUpdated(el);
+      // webkit keeps the lit comment in textContent
+      expect(el.shadowRoot?.textContent?.endsWith('12 bit')).to.be.true;
 
-        // long
-        el.display = 'long';
-        el.value = expected.value;
-        await elementUpdated(el);
-        expect(el.shadowRoot?.textContent).to.equal(expected.long);
+      el.value = 1200;
+      await elementUpdated(el);
+      // webkit keeps the lit comment in textContent
+      expect(el.shadowRoot?.textContent?.endsWith('1.2 kb')).to.be.true;
 
-        // narrow
-        el.display = 'narrow';
-        el.value = expected.value;
-        await elementUpdated(el);
-        expect(el.shadowRoot?.textContent).to.equal(expected.narrow);
-      });
+      el.value = 1200000;
+      await elementUpdated(el);
+      // webkit keeps the lit comment in textContent
+      expect(el.shadowRoot?.textContent?.endsWith('1.2 Mb')).to.be.true;
+
+      el.value = 1200000000;
+      await elementUpdated(el);
+      // webkit keeps the lit comment in textContent
+      expect(el.shadowRoot?.textContent?.endsWith('1.2 Gb')).to.be.true;
+    });
+
+    it('bits : long display', async () => {
+      const el = await fixture<SlFormatBytes>(html` <sl-format-bytes unit="bit" display="long"></sl-format-bytes> `);
+
+      el.value = 12;
+      await elementUpdated(el);
+      // webkit keeps the lit comment in textContent
+      expect(el.shadowRoot?.textContent?.endsWith('12 bits')).to.be.true;
+
+      el.value = 1200;
+      await elementUpdated(el);
+      // webkit keeps the lit comment in textContent
+      expect(el.shadowRoot?.textContent?.endsWith('1.2 kilobits')).to.be.true;
+
+      el.value = 1200000;
+      await elementUpdated(el);
+      // webkit keeps the lit comment in textContent
+      expect(el.shadowRoot?.textContent?.endsWith('1.2 megabits')).to.be.true;
+
+      el.value = 1200000000;
+      await elementUpdated(el);
+      // webkit keeps the lit comment in textContent
+      expect(el.shadowRoot?.textContent?.endsWith('1.2 gigabits')).to.be.true;
+    });
+
+    it('bits : narrow display', async () => {
+      const el = await fixture<SlFormatBytes>(html` <sl-format-bytes unit="bit" display="narrow"></sl-format-bytes> `);
+
+      el.value = 12;
+      await elementUpdated(el);
+      // webkit keeps the lit comment in textContent
+      expect(el.shadowRoot?.textContent?.endsWith('12bit')).to.be.true;
+
+      el.value = 1200;
+      await elementUpdated(el);
+      // webkit keeps the lit comment in textContent
+      expect(el.shadowRoot?.textContent?.endsWith('1.2kb')).to.be.true;
+
+      el.value = 1200000;
+      await elementUpdated(el);
+      // webkit keeps the lit comment in textContent
+      expect(el.shadowRoot?.textContent?.endsWith('1.2Mb')).to.be.true;
+
+      el.value = 1200000000;
+      await elementUpdated(el);
+      // webkit keeps the lit comment in textContent
+      expect(el.shadowRoot?.textContent?.endsWith('1.2Gb')).to.be.true;
     });
   });
+
 });

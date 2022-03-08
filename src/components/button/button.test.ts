@@ -4,7 +4,7 @@ import type SlButton from './button';
 
 describe('<sl-button>', () => {
 
-  describe.only('when provided no parameters', () => {
+  describe('when provided no parameters', () => {
 
     it('passes accessibility test', async () => {
       const el = await fixture<SlButton>(html` <sl-button>Button Label</sl-button> `);
@@ -45,7 +45,7 @@ describe('<sl-button>', () => {
 
     it('passes accessibility test', async () => {
       const el = await fixture<SlButton>(html` <sl-button disabled>Button Label</sl-button> `);
-      await expect(el).to.be.accessible();
+      expect(el).to.be.accessible();
     });
 
     it('should disable the native <button> when rendering a <button>', async () => {
