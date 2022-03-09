@@ -93,10 +93,6 @@ describe('<sl-select>', () => {
     expect(control.getAttribute('aria-expanded')).to.equal('false');
   });
 
-  //
-  // Constraint validation tests
-  //
-
   it('should focus on the custom control when constraint validation occurs', async () => {
     const el = await fixture<HTMLFormElement>(html`
       <form>

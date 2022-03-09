@@ -63,10 +63,6 @@ describe('<sl-input>', () => {
     expect(submitHandler).to.have.been.calledOnce;
   });
 
-  //
-  // Constraint validation tests
-  //
-
   it('should be valid by default', async () => {
     const el = await fixture<SlInput>(html` <sl-input></sl-input> `);
     expect(el.invalid).to.be.false;

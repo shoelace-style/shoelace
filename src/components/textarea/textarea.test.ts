@@ -29,10 +29,6 @@ describe('<sl-textarea>', () => {
     expect(submitHandler).to.have.been.calledOnce;
   });
 
-  //
-  // Constraint validation tests
-  //
-
   it('should be valid by default', async () => {
     const el = await fixture<SlTextarea>(html` <sl-textarea></sl-textarea> `);
 
