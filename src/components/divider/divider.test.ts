@@ -6,7 +6,7 @@ describe('<sl-divider>', () => {
   describe('defaults ', () => {
     it('passes accessibility test', async () => {
       const el = await fixture<SlDivider>(html` <sl-divider></sl-divider> `);
-      expect(el).to.be.accessible();
+      await expect(el).to.be.accessible();
     });
 
     it('default properties', async () => {
@@ -25,7 +25,7 @@ describe('<sl-divider>', () => {
 
       el.vertical = true;
       await elementUpdated(el);
-      
+
       expect(el.getAttribute('aria-orientation')).to.equal('vertical');
     });
   });

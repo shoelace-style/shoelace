@@ -2,6 +2,7 @@ import { expect, fixture, html } from '@open-wc/testing';
 import type SlFormatNumber from './format-number';
 
 describe('<sl-format-number>', () => {
+
   describe('defaults ', () => {
     it('default properties', async () => {
       const el = await fixture<SlFormatNumber>(html` <sl-format-number></sl-format-number> `);
@@ -17,154 +18,150 @@ describe('<sl-format-number>', () => {
       expect(el.maximumFractionDigits).to.be.undefined;
       expect(el.minimumSignificantDigits).to.be.undefined;
       expect(el.maximumSignificantDigits).to.be.undefined;
+
     });
   });
 
   describe('lang property', () => {
-    ['de', 'de-CH', 'fr', 'es', 'he', 'ja', 'nl', 'pl', 'pt', 'ru'].forEach(lang => {
+
+    [ 'de', 'de-CH', 'fr', 'es', 'he', 'ja', 'nl', 'pl', 'pt', 'ru' ].forEach((lang) => {
       it(`number has correct language format: ${lang}`, async () => {
-        const el = await fixture<SlFormatNumber>(
-          html` <sl-format-number value="1000" lang="${lang}"></sl-format-number> `
-        );
-        const expected = new Intl.NumberFormat(lang, { style: 'decimal', useGrouping: true }).format(1000);
+        const el = await fixture<SlFormatNumber>(html` <sl-format-number value="1000" lang="${lang}"></sl-format-date> `);
+        const expected = new Intl.NumberFormat(lang).format(1000);
         expect(el.shadowRoot?.textContent).to.equal(expected);
       });
     });
   });
 
-  describe('type property', () => {
-    ['currency', 'decimal', 'percent'].forEach(type => {
-      it(`number has correct type format: ${type}`, async () => {
-        const el = await fixture<SlFormatNumber>(
-          html` <sl-format-number value="1000" type="${type}"></sl-format-number> `
-        );
-        const expected = new Intl.NumberFormat('en-US', { style: type, currency: 'USD' }).format(1000);
-        expect(el.shadowRoot?.textContent).to.equal(expected);
-      });
-    });
-  });
+  // describe('weekday property', () => {
+  //   const weekdays = [ 'narrow', 'short', 'long'];
+  //   weekdays.forEach((weekdayFormat: 'narrow' | 'short' | 'long') => {
+  //     it(`date has correct weekday format: ${weekdayFormat}`, async () => {
+  //       const el = await fixture<SlFormatDate>(html` <sl-format-date date="${new Date(new Date().getFullYear(), 0, 1)}" weekday="${weekdayFormat}"></sl-format-date> `);
 
-  describe('noGrouping property', () => {
-    it(`number has correct grouping format: no grouping`, async () => {
-      const el = await fixture<SlFormatNumber>(html` <sl-format-number value="1000" no-grouping></sl-format-number> `);
-      const expected = new Intl.NumberFormat('en-US', { useGrouping: false }).format(1000);
-      expect(el.shadowRoot?.textContent).to.equal(expected);
-    });
+  //       const expected = new Intl.DateTimeFormat('en-US', { weekday: weekdayFormat}).format(new Date(new Date().getFullYear(), 0, 1))
+  //       expect(el.shadowRoot?.textContent).to.equal(expected);
+  //     });
+  //   });
+  // });
 
-    it(`number has correct grouping format: grouping`, async () => {
-      const el = await fixture<SlFormatNumber>(html` <sl-format-number value="1000"></sl-format-number> `);
-      const expected = new Intl.NumberFormat('en-US', { useGrouping: true }).format(1000);
-      expect(el.shadowRoot?.textContent).to.equal(expected);
-    });
-  });
+  // describe('era property', () => {
+  //   const eras = [ 'narrow', 'short', 'long'];
+  //   eras.forEach((eraFormat: 'narrow' | 'short' | 'long') => {
+  //     it(`date has correct era format: ${eraFormat}`, async () => {
+  //       const el = await fixture<SlFormatDate>(html` <sl-format-date date="${new Date(new Date().getFullYear(), 0, 1)}" era="${eraFormat}"></sl-format-date> `);
 
-  describe('currency property', () => {
-    ['USD', 'CAD', 'AUD', 'UAH'].forEach(currency => {
-      it(`number has correct type format: ${currency}`, async () => {
-        const el = await fixture<SlFormatNumber>(
-          html` <sl-format-number value="1000" currency="${currency}"></sl-format-number> `
-        );
-        const expected = new Intl.NumberFormat('en-US', { style: 'decimal', currency: currency }).format(1000);
-        expect(el.shadowRoot?.textContent).to.equal(expected);
-      });
-    });
-  });
+  //       const expected = new Intl.DateTimeFormat('en-US', { era: eraFormat}).format(new Date(new Date().getFullYear(), 0, 1))
+  //       expect(el.shadowRoot?.textContent).to.equal(expected);
+  //     });
+  //   });
+  // });
 
-  describe('currencyDisplay property', () => {
-    ['symbol', 'narrowSymbol', 'code', 'name'].forEach(currencyDisplay => {
-      it(`number has correct type format: ${currencyDisplay}`, async () => {
-        const el = await fixture<SlFormatNumber>(
-          html` <sl-format-number value="1000" currency-display="${currencyDisplay}"></sl-format-number> `
-        );
-        const expected = new Intl.NumberFormat('en-US', { style: 'decimal', currencyDisplay: currencyDisplay }).format(
-          1000
-        );
-        expect(el.shadowRoot?.textContent).to.equal(expected);
-      });
-    });
-  });
+  // describe('year property', () => {
+  //   const yearFormats = [ 'numeric', '2-digit'];
+  //   yearFormats.forEach((yearFormat: 'numeric' | '2-digit') => {
+  //     it(`date has correct year format: ${yearFormats}`, async () => {
+  //       const el = await fixture<SlFormatDate>(html` <sl-format-date date="${new Date(new Date().getFullYear(), 0, 1)}" year="${yearFormat}"></sl-format-date> `);
 
-  describe('minimumIntegerDigits property', () => {
-    [4, 5, 6].forEach(minDigits => {
-      it(`number has correct type format: ${minDigits}`, async () => {
-        const el = await fixture<SlFormatNumber>(
-          html` <sl-format-number value="1000" minimum-integer-digits="${minDigits}"></sl-format-number> `
-        );
-        const expected = new Intl.NumberFormat('en-US', {
-          style: 'decimal',
-          currencyDisplay: 'symbol',
-          minimumIntegerDigits: minDigits
-        }).format(1000);
-        expect(el.shadowRoot?.textContent).to.equal(expected);
-      });
-    });
-  });
+  //       const expected = new Intl.DateTimeFormat('en-US', { year: yearFormat}).format(new Date(new Date().getFullYear(), 0, 1))
+  //       expect(el.shadowRoot?.textContent).to.equal(expected);
+  //     });
+  //   });
+  // });
 
-  describe('minimumFractionDigits property', () => {
-    [4, 5, 6].forEach(minFractionDigits => {
-      it(`number has correct type format: ${minFractionDigits}`, async () => {
-        const el = await fixture<SlFormatNumber>(
-          html` <sl-format-number value="1000" minimum-fraction-digits="${minFractionDigits}"></sl-format-number> `
-        );
-        const expected = new Intl.NumberFormat('en-US', {
-          style: 'decimal',
-          currencyDisplay: 'symbol',
-          minimumFractionDigits: minFractionDigits
-        }).format(1000);
-        expect(el.shadowRoot?.textContent).to.equal(expected);
-      });
-    });
-  });
+  // describe('month property', () => {
+  //   const monthFormats = [ 'numeric', '2-digit', 'narrow', 'short', 'long'];
+  //   monthFormats.forEach((monthFormat: 'numeric' | '2-digit' | 'narrow' | 'short' | 'long') => {
+  //     it(`date has correct month format: ${monthFormats}`, async () => {
+  //       const el = await fixture<SlFormatDate>(html` <sl-format-date date="${new Date(new Date().getFullYear(), 0, 1)}" month="${monthFormat}"></sl-format-date> `);
 
-  describe('maximumFractionDigits property', () => {
-    [4, 5, 6].forEach(maxFractionDigits => {
-      it(`number has correct type format: ${maxFractionDigits}`, async () => {
-        const el = await fixture<SlFormatNumber>(
-          html` <sl-format-number value="1000" maximum-fraction-digits="${maxFractionDigits}"></sl-format-number> `
-        );
-        const expected = new Intl.NumberFormat('en-US', {
-          style: 'decimal',
-          currencyDisplay: 'symbol',
-          maximumFractionDigits: maxFractionDigits
-        }).format(1000);
-        expect(el.shadowRoot?.textContent).to.equal(expected);
-      });
-    });
-  });
+  //       const expected = new Intl.DateTimeFormat('en-US', { month: monthFormat}).format(new Date(new Date().getFullYear(), 0, 1))
+  //       expect(el.shadowRoot?.textContent).to.equal(expected);
+  //     });
+  //   });
+  // });
 
-  describe('minimumSignificantDigits property', () => {
-    [4, 5, 6].forEach(minSignificantDigits => {
-      it(`number has correct type format: ${minSignificantDigits}`, async () => {
-        const el = await fixture<SlFormatNumber>(
-          html`
-            <sl-format-number value="1000" minimum-significant-digits="${minSignificantDigits}"></sl-format-number>
-          `
-        );
-        const expected = new Intl.NumberFormat('en-US', {
-          style: 'decimal',
-          currencyDisplay: 'symbol',
-          minimumSignificantDigits: minSignificantDigits
-        }).format(1000);
-        expect(el.shadowRoot?.textContent).to.equal(expected);
-      });
-    });
-  });
+  // describe('day property', () => {
+  //   const dayFormats = [ 'numeric', '2-digit'];
+  //   dayFormats.forEach((dayFormat: 'numeric' | '2-digit') => {
+  //     it(`date has correct day format: ${dayFormats}`, async () => {
+  //       const el = await fixture<SlFormatDate>(html` <sl-format-date date="${new Date(new Date().getFullYear(), 0, 1)}" day="${dayFormat}"></sl-format-date> `);
 
-  describe('maximumSignificantDigits property', () => {
-    [4, 5, 6].forEach(maxSignificantDigits => {
-      it(`number has correct type format: ${maxSignificantDigits}`, async () => {
-        const el = await fixture<SlFormatNumber>(
-          html`
-            <sl-format-number value="1000" maximum-significant-digits="${maxSignificantDigits}"></sl-format-number>
-          `
-        );
-        const expected = new Intl.NumberFormat('en-US', {
-          style: 'decimal',
-          currencyDisplay: 'symbol',
-          maximumSignificantDigits: maxSignificantDigits
-        }).format(1000);
-        expect(el.shadowRoot?.textContent).to.equal(expected);
-      });
-    });
-  });
+  //       const expected = new Intl.DateTimeFormat('en-US', { day: dayFormat}).format(new Date(new Date().getFullYear(), 0, 1))
+  //       expect(el.shadowRoot?.textContent).to.equal(expected);
+  //     });
+  //   });
+  // });
+
+  // describe('hour property', () => {
+  //   const hourFormats = [ 'numeric', '2-digit'];
+  //   hourFormats.forEach((hourFormat: 'numeric' | '2-digit') => {
+  //     it(`date has correct hour format: ${hourFormats}`, async () => {
+  //       const el = await fixture<SlFormatDate>(html` <sl-format-date date="${new Date(new Date().getFullYear(), 0, 1)}" hour="${hourFormat}"></sl-format-date> `);
+
+  //       const expected = new Intl.DateTimeFormat('en-US', { hour: hourFormat}).format(new Date(new Date().getFullYear(), 0, 1))
+  //       expect(el.shadowRoot?.textContent).to.equal(expected);
+  //     });
+  //   });
+  // });
+
+  // describe('minute property', () => {
+  //   const minuteFormats = [ 'numeric', '2-digit'];
+  //   minuteFormats.forEach((minuteFormat: 'numeric' | '2-digit') => {
+  //     it(`date has correct minute format: ${minuteFormats}`, async () => {
+  //       const el = await fixture<SlFormatDate>(html` <sl-format-date date="${new Date(new Date().getFullYear(), 0, 1)}" minute="${minuteFormat}"></sl-format-date> `);
+
+  //       const expected = new Intl.DateTimeFormat('en-US', { minute: minuteFormat}).format(new Date(new Date().getFullYear(), 0, 1))
+  //       expect(el.shadowRoot?.textContent).to.equal(expected);
+  //     });
+  //   });
+  // });
+
+  // describe('second property', () => {
+  //   const secondFormats = [ 'numeric', '2-digit'];
+  //   secondFormats.forEach((secondFormat: 'numeric' | '2-digit') => {
+  //     it(`date has correct second format: ${secondFormats}`, async () => {
+  //       const el = await fixture<SlFormatDate>(html` <sl-format-date date="${new Date(new Date().getFullYear(), 0, 1)}" second="${secondFormat}"></sl-format-date> `);
+
+  //       const expected = new Intl.DateTimeFormat('en-US', { second: secondFormat}).format(new Date(new Date().getFullYear(), 0, 1))
+  //       expect(el.shadowRoot?.textContent).to.equal(expected);
+  //     });
+  //   });
+  // });
+
+  // describe('timeZoneName property', () => {
+  //   const timeZoneNameFormats = [ 'short', 'long'];
+  //   timeZoneNameFormats.forEach((timeZoneNameFormat: 'short' | 'long') => {
+  //     it(`date has correct timeZoneName format: ${timeZoneNameFormats}`, async () => {
+  //       const el = await fixture<SlFormatDate>(html` <sl-format-date date="${new Date(new Date().getFullYear(), 0, 1)}" time-zone-name="${timeZoneNameFormat}"></sl-format-date> `);
+
+  //       const expected = new Intl.DateTimeFormat('en-US', { timeZoneName: timeZoneNameFormat}).format(new Date(new Date().getFullYear(), 0, 1))
+  //       expect(el.shadowRoot?.textContent).to.equal(expected);
+  //     });
+  //   });
+  // });
+
+  // describe('timeZone property', () => {
+  //   const timeZones = [ 'America/New_York', 'America/Los_Angeles', 'Europe/Zurich'];
+  //   timeZones.forEach((timeZone) => {
+  //     it(`date has correct timeZoneName format: ${timeZone}`, async () => {
+  //       const el = await fixture<SlFormatDate>(html` <sl-format-date date="${new Date(new Date().getFullYear(), 0, 1)}" time-zone="${timeZone}"></sl-format-date> `);
+
+  //       const expected = new Intl.DateTimeFormat('en-US', { timeZone: timeZone}).format(new Date(new Date().getFullYear(), 0, 1))
+  //       expect(el.shadowRoot?.textContent).to.equal(expected);
+  //     });
+  //   });
+  // });
+
+  // describe('hourFormat property', () => {
+  //   const hourFormatValues = [ 'auto', '12', '24'];
+  //   hourFormatValues.forEach((hourFormatValue) => {
+  //     it(`date has correct hourFormat format: ${hourFormatValue}`, async () => {
+  //       const el = await fixture<SlFormatDate>(html` <sl-format-date date="${new Date(new Date().getFullYear(), 0, 1)}" hour-format="${hourFormatValue}"></sl-format-date> `);
+
+  //       const expected = new Intl.DateTimeFormat('en-US', { hour12: hourFormatValue === 'auto' ? undefined : hourFormatValue === '12'}).format(new Date(new Date().getFullYear(), 0, 1))
+  //       expect(el.shadowRoot?.textContent).to.equal(expected);
+  //     });
+  //   });
+  // });
 });
