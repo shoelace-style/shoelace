@@ -25,7 +25,7 @@ describe('<sl-button-group>', () => {
 
   describe('slotted button classes', () => {
 
-    it('slotted buttons have the right clases applied depending on their order', async () => {
+    it('slotted buttons have the right classes applied based on their order', async () => {
       const group = await fixture<SlButtonGroup>(html` <sl-button-group>
         <sl-button>Button 1 Label</sl-button>
         <sl-button>Button 2 Label</sl-button>
@@ -36,7 +36,6 @@ describe('<sl-button-group>', () => {
       const hasGroupClass = Array.from(allButtons).every((button) => button.classList.contains('sl-button-group__button'));
       expect(hasGroupClass).to.be.true;
 
-      // first has first class
       expect(allButtons[0]).to.have.class('sl-button-group__button--first');
       expect(allButtons[1]).to.have.class('sl-button-group__button--inner');
       expect(allButtons[2]).to.have.class('sl-button-group__button--last');
