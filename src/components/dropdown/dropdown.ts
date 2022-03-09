@@ -24,7 +24,7 @@ import styles from './dropdown.styles';
  * @event sl-hide - Emitted when the dropdown closes.
  * @event sl-after-hide - Emitted after the dropdown closes and all animations are complete.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  * @csspart trigger - The container that wraps the trigger.
  * @csspart panel - The panel that gets shown when the dropdown is open.
  *

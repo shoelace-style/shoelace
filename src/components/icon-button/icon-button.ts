@@ -11,7 +11,7 @@ import styles from './icon-button.styles';
  *
  * @dependency sl-icon
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  */
 @customElement('sl-icon-button')
 export default class SlIconButton extends LitElement {

@@ -12,7 +12,7 @@ import styles from './progress-bar.styles';
  *
  * @slot - A label to show inside the indicator.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  * @csspart indicator - The progress bar indicator.
  * @csspart label - The progress bar label.
  *

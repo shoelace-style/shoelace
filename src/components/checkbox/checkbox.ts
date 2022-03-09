@@ -18,7 +18,7 @@ import styles from './checkbox.styles';
  * @event sl-change - Emitted when the control's checked state changes.
  * @event sl-focus - Emitted when the control gains focus.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  * @csspart control - The checkbox control.
  * @csspart checked-icon - The container the wraps the checked icon.
  * @csspart indeterminate-icon - The container that wraps the indeterminate icon.

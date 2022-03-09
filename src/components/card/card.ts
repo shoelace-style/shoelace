@@ -13,7 +13,7 @@ import styles from './card.styles';
  * @slot footer - The card's footer.
  * @slot image - The card's image.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  * @csspart image - The card's image, if present.
  * @csspart header - The card's header, if present.
  * @csspart body - The card's body.

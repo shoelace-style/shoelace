@@ -22,7 +22,7 @@ import styles from './button.styles';
  * @slot prefix - Used to prepend an icon or similar element to the button.
  * @slot suffix - Used to append an icon or similar element to the button.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  * @csspart prefix - The prefix container.
  * @csspart label - The button's label.
  * @csspart suffix - The suffix container.

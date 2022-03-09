@@ -20,7 +20,7 @@ import styles from './image-comparer.styles';
  *
  * @event sl-change - Emitted when the position changes.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  * @csspart before - The container that holds the "before" image.
  * @csspart after - The container that holds the "after" image.
  * @csspart divider - The divider that separates the images.

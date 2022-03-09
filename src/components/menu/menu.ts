@@ -17,7 +17,7 @@ export interface MenuSelectEventDetail {
  *
  * @event {{ item: SlMenuItem }} sl-select - Emitted when a menu item is selected.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  */
 @customElement('sl-menu')
 export default class SlMenu extends LitElement {

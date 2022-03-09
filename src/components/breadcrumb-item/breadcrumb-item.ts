@@ -15,7 +15,7 @@ import styles from './breadcrumb-item.styles';
  * @slot separator - The separator to use for the breadcrumb item. This will only change the separator for this item. If
  * you want to change it for all items in the group, set the separator on `<sl-breadcrumb>` instead.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  * @csspart label - The breadcrumb item's label.
  * @csspart prefix - The container that wraps the prefix slot.
  * @csspart suffix - The container that wraps the suffix slot.

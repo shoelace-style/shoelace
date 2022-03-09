@@ -8,6 +8,15 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
+- 🚨 BREAKING: refactored exported parts to ensure composed components and their parts can be targeted via CSS
+  - Refactored the `eye-dropper-button` part and added `eye-dropper-button__base`, `eye-dropper-button__prefix`, `eye-dropper-button__label`, `eye-dropper-button__suffix`, and `eye-dropper-button__caret` parts to `<sl-color-picker>`
+  - Refactored the `format-button` part and added `format-button__base`, `format-button__prefix`, `format-button__label`, `format-button__suffix`, and `format-button__caret` parts to `<sl-color-picker>`
+  - Moved the `close-button` part in `<sl-alert>` to the internal `<sl-icon-button>` and removed the `<span>` that wrapped it
+  - Moved the `close-button` part in `<sl-dialog>` and `<sl-drawer>` to point to the host element and added the `close-button__base` part
+  - Renamed parts in `<sl-select>` from `tag-base` to `tag__base`, `tag-content` to `tag__content`, and `tag-remove-button` to `tag__remove-button`
+  - Moved the `close-button` part in `<sl-tab>` to the internal `<sl-icon-button>` and added the `close-button__base` part
+  - Moved the `scroll-button` part in `<sl-tab-group>` to the internal `<sl-icon-button>` and added the `scroll-button__base`, `scroll-button--start`, and `scroll-button--end` parts
+  - Moved the `remove-button` part in `<sl-tag>` to the internal `<sl-icon-button>` and added the `remove-button__base` part
 - 🚨 BREAKING: removed `checked-icon` part from `<sl-menu-item>` in preparation for parts refactor
 - 🚨 BREAKING: changed the `typeToSelect()` method's argument from `String` to `KeyboardEvent` in `<sl-menu>` to support more advanced key combinations
 - Added `form`, `formaction`, `formmethod`, `formnovalidate`, and `formtarget` attributes to `<sl-button>` [#699](https://github.com/shoelace-style/shoelace/issues/699)

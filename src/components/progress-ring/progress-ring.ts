@@ -9,7 +9,7 @@ import styles from './progress-ring.styles';
  *
  * @slot - A label to show inside the ring.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  * @csspart label - The progress ring label.
  *
  * @cssproperty --size - The diameter of the progress ring (cannot be a percentage).

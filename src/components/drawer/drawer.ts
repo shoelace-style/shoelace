@@ -35,12 +35,13 @@ import styles from './drawer.styles';
  *   `event.preventDefault()` will keep the drawer open. Avoid using this unless closing the drawer will result in
  *   destructive behavior such as data loss.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  * @csspart overlay - The overlay.
  * @csspart panel - The drawer panel (where the drawer and its content is rendered).
  * @csspart header - The drawer header.
  * @csspart title - The drawer title.
  * @csspart close-button - The close button.
+ * @csspart close-button__base - The close button's `base` part.
  * @csspart body - The drawer body.
  * @csspart footer - The drawer footer.
  *
@@ -278,7 +279,8 @@ export default class SlDrawer extends LitElement {
                     <slot name="label"> ${this.label.length > 0 ? this.label : String.fromCharCode(65279)} </slot>
                   </h2>
                   <sl-icon-button
-                    exportparts="base:close-button"
+                    part="close-button"
+                    exportparts="base:close-button__base"
                     class="drawer__close"
                     name="x"
                     label=${this.localize.term('close')}

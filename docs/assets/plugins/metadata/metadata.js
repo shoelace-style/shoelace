@@ -7,6 +7,7 @@
 
   function createPropsTable(props) {
     const table = document.createElement('table');
+    table.classList.add('metadata-table');
     table.innerHTML = `
       <thead>
         <tr>
@@ -64,6 +65,7 @@
 
   function createEventsTable(events) {
     const table = document.createElement('table');
+    table.classList.add('metadata-table');
     table.innerHTML = `
       <thead>
         <tr>
@@ -94,6 +96,7 @@
 
   function createMethodsTable(methods) {
     const table = document.createElement('table');
+    table.classList.add('metadata-table');
     table.innerHTML = `
       <thead>
         <tr>
@@ -132,6 +135,7 @@
 
   function createSlotsTable(slots) {
     const table = document.createElement('table');
+    table.classList.add('metadata-table');
     table.innerHTML = `
       <thead>
         <tr>
@@ -158,6 +162,7 @@
 
   function createCustomPropertiesTable(styles) {
     const table = document.createElement('table');
+    table.classList.add('metadata-table');
     table.innerHTML = `
       <thead>
         <tr>
@@ -186,6 +191,7 @@
 
   function createPartsTable(parts) {
     const table = document.createElement('table');
+    table.classList.add('metadata-table');
     table.innerHTML = `
       <thead>
         <tr>
@@ -212,6 +218,7 @@
 
   function createAnimationsTable(animations) {
     const table = document.createElement('table');
+    table.classList.add('metadata-table');
     table.innerHTML = `
       <thead>
         <tr>
@@ -456,6 +463,8 @@
           result += `
             ## Properties
             ${createPropsTable(props)}
+
+            _Learn more about [properties and attributes](/getting-started/usage#properties)._
           `;
         }
 
@@ -463,6 +472,8 @@
           result += `
             ## Events
             ${createEventsTable(component.events)}
+
+            _Learn more about [listening to events](/getting-started/usage#events)._
           `;
         }
 
@@ -470,18 +481,9 @@
           result += `
             ## Methods
 
-            <p data-flavor="html">
-              Methods can be called by obtaining a reference to the element and calling
-              <code>el.methodName()</code>.
-            </p>
-
-
-            <p data-flavor="react">
-              Methods can be called by obtaining a <code>ref</code> to the element and calling
-              <code>ref.current.methodName()</code>.
-            </p>
-
             ${createMethodsTable(methods)}
+
+            _Learn more about [calling methods](/getting-started/usage#methods)._
           `;
         }
 
@@ -489,6 +491,8 @@
           result += `
             ## Slots
             ${createSlotsTable(component.slots)}
+
+            _Learn more about [using slots](/getting-started/usage#slots)._
           `;
         }
 
@@ -496,6 +500,8 @@
           result += `
             ## CSS Custom Properties
             ${createCustomPropertiesTable(component.cssProperties)}
+
+            _Learn more about [customizing CSS Custom Properties](/getting-started/customizing#custom-properties)._
           `;
         }
 
@@ -503,6 +509,8 @@
           result += `
             ## CSS Parts
             ${createPartsTable(component.cssParts)}
+
+            _Learn more about [customizing CSS Parts](/getting-started/customizing#component-parts)._
           `;
         }
 
@@ -511,7 +519,7 @@
             ## Animations
             ${createAnimationsTable(component.animations)}
 
-            Learn how to [customize animations](/getting-started/customizing#animations).
+            _Learn more about [customizing animations](/getting-started/customizing#animations)._
           `;
         }
 

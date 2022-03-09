@@ -9,7 +9,7 @@ import styles from './tab-panel.styles';
  *
  * @slot - The tab panel's content.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  *
  * @cssproperty --padding - The tab panel's padding.
  */

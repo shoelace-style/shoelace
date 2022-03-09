@@ -20,7 +20,7 @@ import styles from './tooltip.styles';
  * @event sl-hide - Emitted when the tooltip begins to hide.
  * @event sl-after-hide - Emitted after the tooltip has hidden and all animations are complete.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  *
  * @cssproperty --max-width - The maximum width of the tooltip.
  * @cssproperty --hide-delay - The amount of time to wait before hiding the tooltip when hovering.

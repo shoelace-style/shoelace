@@ -13,7 +13,7 @@ import styles from './breadcrumb.styles';
  *
  * @dependency sl-icon
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  */
 @customElement('sl-breadcrumb')
 export default class SlBreadcrumb extends LitElement {

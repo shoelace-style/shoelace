@@ -12,7 +12,7 @@ import styles from './avatar.styles';
  *
  * @slot icon - The default icon to use when no image or initials are present.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  * @csspart icon - The container that wraps the avatar icon.
  * @csspart initials - The container that wraps the avatar initials.
  * @csspart image - The avatar image.

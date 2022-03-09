@@ -18,7 +18,7 @@ import styles from './switch.styles';
  * @event sl-change - Emitted when the control's checked state changes.
  * @event sl-focus - Emitted when the control gains focus.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  * @csspart control - The switch control.
  * @csspart thumb - The switch position indicator.
  * @csspart label - The switch label.

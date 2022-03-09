@@ -11,7 +11,7 @@ import styles from './radio-group.styles';
  * @slot - The default slot where radio controls are placed.
  * @slot label - The radio group label. Required for proper accessibility. Alternatively, you can use the label prop.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  * @csspart label - The radio group label.
  */
 @customElement('sl-radio-group')

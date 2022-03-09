@@ -34,12 +34,13 @@ import styles from './dialog.styles';
  *   `event.preventDefault()` will keep the dialog open. Avoid using this unless closing the dialog will result in
  *   destructive behavior such as data loss.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  * @csspart overlay - The overlay.
  * @csspart panel - The dialog panel (where the dialog and its content is rendered).
  * @csspart header - The dialog header.
  * @csspart title - The dialog title.
  * @csspart close-button - The close button.
+ * @csspart close-button__base - The close button's `base` part.
  * @csspart body - The dialog body.
  * @csspart footer - The dialog footer.
  *
@@ -251,7 +252,8 @@ export default class SlDialog extends LitElement {
                     <slot name="label"> ${this.label.length > 0 ? this.label : String.fromCharCode(65279)} </slot>
                   </h2>
                   <sl-icon-button
-                    exportparts="base:close-button"
+                    part="close-button"
+                    exportparts="base:close-button__base"
                     class="dialog__close"
                     name="x"
                     label=${this.localize.term('close')}

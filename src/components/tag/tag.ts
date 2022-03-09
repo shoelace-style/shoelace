@@ -15,9 +15,10 @@ import styles from './tag.styles';
  *
  * @event sl-remove - Emitted when the remove button is activated.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  * @csspart content - The tag content.
  * @csspart remove-button - The remove button.
+ * @csspart remove-button__base - The remove button's `base` part.
  */
 @customElement('sl-tag')
 export default class SlTag extends LitElement {
@@ -71,7 +72,8 @@ export default class SlTag extends LitElement {
         ${this.removable
           ? html`
               <sl-icon-button
-                exportparts="base:remove-button"
+                part="remove-button"
+                exportparts="base:remove-button__base"
                 name="x"
                 library="system"
                 class="tag__remove"

@@ -28,15 +28,17 @@ export default css`
     margin: inherit;
   }
 
+  .alert:not(.alert--has-icon) .alert__icon,
+  .alert:not(.alert--closable) .alert__close-button {
+    display: none;
+  }
+
   .alert__icon {
     flex: 0 0 auto;
     display: flex;
     align-items: center;
     font-size: var(--sl-font-size-large);
-  }
-
-  .alert__icon ::slotted(*) {
-    margin-left: var(--sl-spacing-large);
+    padding-left: var(--sl-spacing-large);
   }
 
   .alert--primary {
@@ -85,7 +87,7 @@ export default css`
     overflow: hidden;
   }
 
-  .alert__close {
+  .alert__close-button {
     flex: 0 0 auto;
     display: flex;
     align-items: center;

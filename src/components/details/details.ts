@@ -22,7 +22,7 @@ import styles from './details.styles';
  * @event sl-hide - Emitted when the details closes.
  * @event sl-after-hide - Emitted after the details closes and all animations are complete.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  * @csspart header - The summary header.
  * @csspart summary - The details summary.
  * @csspart summary-icon - The expand/collapse summary icon.

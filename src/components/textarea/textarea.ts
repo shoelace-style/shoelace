@@ -21,7 +21,7 @@ import styles from './textarea.styles';
  * @event sl-focus - Emitted when the control gains focus.
  * @event sl-blur - Emitted when the control loses focus.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  * @csspart form-control - The form control that wraps the label, textarea, and help text.
  * @csspart label - The textarea label.
  * @csspart textarea - The textarea control.

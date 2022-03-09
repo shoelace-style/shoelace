@@ -20,7 +20,7 @@ import styles from './range.styles';
  * @event sl-blur - Emitted when the control loses focus.
  * @event sl-focus - Emitted when the control gains focus.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  * @csspart input - The native range input.
  * @csspart tooltip - The range tooltip.
  *

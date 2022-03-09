@@ -9,7 +9,7 @@ import styles from './badge.styles';
  *
  * @slot - The badge's content.
  *
- * @csspart base - The base wrapper
+ * @csspart base - The component's internal wrapper.
  */
 @customElement('sl-badge')
 export default class SlBadge extends LitElement {

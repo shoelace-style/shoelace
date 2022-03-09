@@ -9,7 +9,7 @@ import styles from './qr-code.styles';
  * @since 2.0
  * @status stable
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  */
 @customElement('sl-qr-code')
 export default class SlQrCode extends LitElement {

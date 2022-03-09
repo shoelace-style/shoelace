@@ -39,7 +39,7 @@ import type { TemplateResult } from 'lit';
  * @event sl-focus - Emitted when the control gains focus.
  * @event sl-blur - Emitted when the control loses focus.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  * @csspart clear-button - The clear button.
  * @csspart control - The container that holds the prefix, label, and suffix.
  * @csspart display-label - The label that displays the current selection. Not available when used with `multiple`.
@@ -51,9 +51,9 @@ import type { TemplateResult } from 'lit';
  * @csspart suffix - The select's suffix.
  * @csspart menu - The select menu, an `<sl-menu>` element.
  * @csspart tag - The multi select option, an `<sl-tag>` element.
- * @csspart tag-base - The tag's `base` part.
- * @csspart tag-content - The tag's `content` part.
- * @csspart tag-remove-button - The tag's `remove-button` part.
+ * @csspart tag__base - The tag's `base` part.
+ * @csspart tag__content - The tag's `content` part.
+ * @csspart tag__remove-button - The tag's `remove-button` part.
  * @csspart tags - The container in which multi select options are rendered.
  */
 @customElement('sl-select')
@@ -381,7 +381,11 @@ export default class SlSelect extends LitElement {
         return html`
           <sl-tag
             part="tag"
-            exportparts="base:tag-base, content:tag-content, remove-button:tag-remove-button"
+            exportparts="
+              base:tag__base,
+              content:tag__content,
+              remove-button:tag__remove-button
+            "
             variant="neutral"
             size=${this.size}
             ?pill=${this.pill}
@@ -406,7 +410,18 @@ export default class SlSelect extends LitElement {
         this.displayLabel = '';
         this.displayTags = this.displayTags.slice(0, this.maxTagsVisible);
         this.displayTags.push(html`
-          <sl-tag exportparts="base:tag" variant="neutral" size=${this.size}> +${total - this.maxTagsVisible} </sl-tag>
+          <sl-tag
+            part="tag"
+            exportparts="
+              base:tag__base,
+              content:tag__content,
+              remove-button:tag__remove-button
+            "
+            variant="neutral"
+            size=${this.size}
+          >
+            +${total - this.maxTagsVisible}
+          </sl-tag>
         `);
       }
     } else {

@@ -17,7 +17,7 @@ import styles from './rating.styles';
  *
  * @event sl-change - Emitted when the rating's value changes.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  *
  * @cssproperty --symbol-color - The inactive color for symbols.
  * @cssproperty --symbol-color-active - The active color for symbols.

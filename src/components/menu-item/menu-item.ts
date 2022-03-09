@@ -15,7 +15,7 @@ import styles from './menu-item.styles';
  * @slot prefix - Used to prepend an icon or similar element to the menu item.
  * @slot suffix - Used to append an icon or similar element to the menu item.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  * @csspart prefix - The prefix container.
  * @csspart label - The menu item label.
  * @csspart suffix - The suffix container.
