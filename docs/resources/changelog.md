@@ -25,6 +25,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Added more tests for `<sl-input>`, `<sl-select>`, and `<sl-textarea>`
 - Fixed a bug that prevented forms from submitting when pressing <kbd>Enter</kbd> inside of an `<sl-input>` [#700](https://github.com/shoelace-style/shoelace/issues/700)
 - Fixed a bug in `<sl-input>` that prevented the `valueAsDate` and `valueAsNumber` properties from working when set before the component was initialized
+- Fixed a bug in `<sl-dropdown>` where pressing <kbd>Home</kbd> or <kbd>End</kbd> wouldn't select the first or last menu items, respectively
 - Improved `autofocus` behavior in Safari for `<sl-dialog>` and `<sl-drawer>` [#693](https://github.com/shoelace-style/shoelace/issues/693)
 - Improved type to select logic in `<sl-menu>` so it supports <kbd>Backspace</kbd> and gives users more time before resetting
 - Improved checkmark size and positioning in `<sl-menu-item>`

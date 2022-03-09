@@ -230,7 +230,7 @@ export default class SlDropdown extends LitElement {
     // When up/down is pressed, we make the assumption that the user is familiar with the menu and plans to make a
     // selection. Rather than toggle the panel, we focus on the menu (if one exists) and activate the first item for
     // faster navigation.
-    if (['ArrowDown', 'ArrowUp'].includes(event.key)) {
+    if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
       event.preventDefault();
 
       // Show the menu if it's not already open
@@ -240,12 +240,12 @@ export default class SlDropdown extends LitElement {
 
       // Focus on the first/last menu item after showing
       requestAnimationFrame(() => {
-        if (event.key === 'ArrowDown') {
+        if (event.key === 'ArrowDown' || event.key === 'Home') {
           menu.setCurrentItem(firstMenuItem);
           firstMenuItem.focus();
         }
 
-        if (event.key === 'ArrowUp') {
+        if (event.key === 'ArrowUp' || event.key === 'End') {
           menu.setCurrentItem(lastMenuItem);
           lastMenuItem.focus();
         }
