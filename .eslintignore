@@ -8,5 +8,3 @@ node_modules
 src/react
 scripts
 
-# temporary until the spread directive comes from open-wc
-src/testing/spread.ts
