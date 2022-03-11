@@ -8,9 +8,9 @@ Radios are designed to be used with [radio groups](/components/radio-group). As 
 
 ```html preview
 <sl-radio-group label="Select an option">
-  <sl-radio value="1" checked>Option 1</sl-radio>
-  <sl-radio value="2">Option 2</sl-radio>
-  <sl-radio value="3">Option 3</sl-radio>
+  <sl-radio name="option" value="1" checked>Option 1</sl-radio>
+  <sl-radio name="option" value="2">Option 2</sl-radio>
+  <sl-radio name="option" value="3">Option 3</sl-radio>
 </sl-radio-group>
 ```
 
@@ -19,11 +19,15 @@ import { SlRadio, SlRadioGroup } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <SlRadioGroup label="Select an option">
-    <SlRadio value="1" checked>
+    <SlRadio name="option" value="1" checked>
       Option 1
     </SlRadio>
-    <SlRadio value="2">Option 2</SlRadio>
-    <SlRadio value="3">Option 3</SlRadio>
+    <SlRadio name="option" value="2">
+      Option 2
+    </SlRadio>
+    <SlRadio name="option" value="3">
+      Option 3
+    </SlRadio>
   </SlRadioGroup>
 );
 ```
@@ -38,10 +42,10 @@ Use the `disabled` attribute to disable a radio.
 
 ```html preview
 <sl-radio-group label="Select an option">
-  <sl-radio value="1" checked>Option 1</sl-radio>
-  <sl-radio value="2">Option 2</sl-radio>
-  <sl-radio value="3">Option 3</sl-radio>
-  <sl-radio value="4" disabled>Disabled</sl-radio>
+  <sl-radio name="option" value="1" checked>Option 1</sl-radio>
+  <sl-radio name="option" value="2">Option 2</sl-radio>
+  <sl-radio name="option" value="3">Option 3</sl-radio>
+  <sl-radio name="option" value="4" disabled>Disabled</sl-radio>
 </sl-radio-group>
 ```
 
@@ -50,12 +54,16 @@ import { SlRadio, SlRadioGroup } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <SlRadioGroup label="Select an option">
-    <SlRadio value="1" checked>
+    <SlRadio name="option" value="1" checked>
       Option 1
     </SlRadio>
-    <SlRadio value="2">Option 2</SlRadio>
-    <SlRadio value="3">Option 3</SlRadio>
-    <SlRadio value="4" disabled>
+    <SlRadio name="option" value="2">
+      Option 2
+    </SlRadio>
+    <SlRadio name="option" value="3">
+      Option 3
+    </SlRadio>
+    <SlRadio name="option" value="4" disabled>
       Disabled
     </SlRadio>
   </SlRadioGroup>
