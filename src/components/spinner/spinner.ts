@@ -6,7 +6,7 @@ import styles from './spinner.styles';
  * @since 2.0
  * @status stable
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  *
  * @cssproperty --track-width - The width of the track.
  * @cssproperty --track-color - The color of the track.

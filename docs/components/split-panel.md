@@ -6,10 +6,16 @@ Split panels display two adjacent panels, allowing the user to reposition them.
 
 ```html preview
 <sl-split-panel>
-  <div slot="start" style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;">
+  <div
+    slot="start"
+    style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+  >
     Start
   </div>
-  <div slot="end" style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;">
+  <div
+    slot="end"
+    style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+  >
     End
   </div>
 </sl-split-panel>
@@ -20,22 +26,28 @@ import { SlSplitPanel } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <SlSplitPanel>
-    <div slot="start" style={{
-      height: '200px',
-      background: 'var(--sl-color-neutral-50)',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center'
-    }}>
+    <div
+      slot="start"
+      style={{
+        height: '200px',
+        background: 'var(--sl-color-neutral-50)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}
+    >
       Start
     </div>
-    <div slot="end" style={{
-      height: '200px',
-      background: 'var(--sl-color-neutral-50)',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center'
-    }}>
+    <div
+      slot="end"
+      style={{
+        height: '200px',
+        background: 'var(--sl-color-neutral-50)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}
+    >
       End
     </div>
   </SlSplitPanel>
@@ -50,10 +62,16 @@ To set the initial position, use the `position` attribute. If no position is pro
 
 ```html preview
 <sl-split-panel position="75">
-  <div slot="start" style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;">
+  <div
+    slot="start"
+    style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+  >
     Start
   </div>
-  <div slot="end" style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;">
+  <div
+    slot="end"
+    style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+  >
     End
   </div>
 </sl-split-panel>
@@ -65,10 +83,16 @@ To set the initial position in pixels instead of a percentage, use the `position
 
 ```html preview
 <sl-split-panel position-in-pixels="150">
-  <div slot="start" style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;">
+  <div
+    slot="start"
+    style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+  >
     Start
   </div>
-  <div slot="end" style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;">
+  <div
+    slot="end"
+    style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+  >
     End
   </div>
 </sl-split-panel>
@@ -79,8 +103,8 @@ import { SlSplitPanel } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <SlSplitPanel position="200">
-    <div 
-      slot="start" 
+    <div
+      slot="start"
       style={{
         height: '200px',
         background: 'var(--sl-color-neutral-50)',
@@ -91,8 +115,8 @@ const App = () => (
     >
       Start
     </div>
-    <div 
-      slot="end" 
+    <div
+      slot="end"
       style={{
         height: '200px',
         background: 'var(--sl-color-neutral-50)',
@@ -113,10 +137,16 @@ Add the `vertical` attribute to render the split panel in a vertical orientation
 
 ```html preview
 <sl-split-panel vertical style="height: 400px;">
-  <div slot="start" style="height: 100%; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;">
+  <div
+    slot="start"
+    style="height: 100%; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+  >
     Start
   </div>
-  <div slot="end" style="height: 100%; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;">
+  <div
+    slot="end"
+    style="height: 100%; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+  >
     End
   </div>
 </sl-split-panel>
@@ -127,26 +157,26 @@ import { SlSplitPanel } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <SlSplitPanel vertical style={{ height: '400px' }}>
-    <div 
-      slot="start" 
-      style={{ 
-        height: '100%', 
-        background: 'var(--sl-color-neutral-50)', 
-        display: 'flex', 
+    <div
+      slot="start"
+      style={{
+        height: '100%',
+        background: 'var(--sl-color-neutral-50)',
+        display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center' 
+        justifyContent: 'center'
       }}
     >
       Start
     </div>
-    <div 
+    <div
       slot="end"
-      style={{ 
-        height: '100%', 
-        background: 'var(--sl-color-neutral-50)', 
-        display: 'flex', 
+      style={{
+        height: '100%',
+        background: 'var(--sl-color-neutral-50)',
+        display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center' 
+        justifyContent: 'center'
       }}
     >
       End
@@ -162,10 +192,16 @@ To snap panels at specific positions while dragging, add the `snap` attribute wi
 ```html preview
 <div class="split-panel-snapping">
   <sl-split-panel snap="100px 50%">
-    <div slot="start" style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;">
+    <div
+      slot="start"
+      style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+    >
       Start
     </div>
-    <div slot="end" style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;">
+    <div
+      slot="end"
+      style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+    >
       End
     </div>
   </sl-split-panel>
@@ -233,8 +269,8 @@ const App = () => (
   <>
     <div className="split-panel-snapping">
       <SlSplitPanel snap="100px 50%">
-        <div 
-          slot="start" 
+        <div
+          slot="start"
           style={{
             height: '200px',
             background: 'var(--sl-color-neutral-50)',
@@ -245,8 +281,8 @@ const App = () => (
         >
           Start
         </div>
-        <div 
-          slot="end" 
+        <div
+          slot="end"
           style={{
             height: '200px',
             background: 'var(--sl-color-neutral-50)',
@@ -273,10 +309,16 @@ Add the `disabled` attribute to prevent the divider from being repositioned.
 
 ```html preview
 <sl-split-panel disabled>
-  <div slot="start" style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;">
+  <div
+    slot="start"
+    style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+  >
     Start
   </div>
-  <div slot="end" style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;">
+  <div
+    slot="end"
+    style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+  >
     End
   </div>
 </sl-split-panel>
@@ -287,8 +329,8 @@ import { SlSplitPanel } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <SlSplitPanel disabled>
-    <div 
-      slot="start" 
+    <div
+      slot="start"
       style={{
         height: '200px',
         background: 'var(--sl-color-neutral-50)',
@@ -299,8 +341,8 @@ const App = () => (
     >
       Start
     </div>
-    <div 
-      slot="end" 
+    <div
+      slot="end"
       style={{
         height: '200px',
         background: 'var(--sl-color-neutral-50)',
@@ -324,10 +366,16 @@ Try resizing the example below with each option and notice how the panels respon
 ```html preview
 <div class="split-panel-primary">
   <sl-split-panel>
-    <div slot="start" style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;">
+    <div
+      slot="start"
+      style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+    >
       Start
     </div>
-    <div slot="end" style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;">
+    <div
+      slot="end"
+      style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+    >
       End
     </div>
   </sl-split-panel>
@@ -344,7 +392,7 @@ Try resizing the example below with each option and notice how the panels respon
   const splitPanel = container.querySelector('sl-split-panel');
   const select = container.querySelector('sl-select');
 
-  select.addEventListener('sl-change', () => splitPanel.primary = select.value);
+  select.addEventListener('sl-change', () => (splitPanel.primary = select.value));
 </script>
 ```
 
@@ -358,8 +406,8 @@ const App = () => {
   return (
     <>
       <SlSplitPanel primary={primary}>
-        <div 
-          slot="start" 
+        <div
+          slot="start"
           style={{
             height: '200px',
             background: 'var(--sl-color-neutral-50)',
@@ -370,8 +418,8 @@ const App = () => {
         >
           Start
         </div>
-        <div 
-          slot="end" 
+        <div
+          slot="end"
           style={{
             height: '200px',
             background: 'var(--sl-color-neutral-50)',
@@ -384,16 +432,16 @@ const App = () => {
         </div>
       </SlSplitPanel>
 
-      <SlSelect 
-        label="Primary Panel" 
-        value={primary} 
-        style={{ maxWidth: '200px', marginTop: '1rem' }} 
+      <SlSelect
+        label="Primary Panel"
+        value={primary}
+        style={{ maxWidth: '200px', marginTop: '1rem' }}
         onSlChange={event => setPrimary(event.target.value)}
       >
         <SlMenuItem value="">None</SlMenuItem>
         <SlMenuItem value="start">Start</SlMenuItem>
         <SlMenuItem value="end">End</SlMenuItem>
-      </SlSelect>      
+      </SlSelect>
     </>
   );
 };
@@ -407,10 +455,16 @@ This examples demonstrates how you can ensure both panels are at least 150px usi
 
 ```html preview
 <sl-split-panel style="--min: 150px; --max: calc(100% - 150px);">
-  <div slot="start" style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;">
+  <div
+    slot="start"
+    style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+  >
     Start
   </div>
-  <div slot="end" style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;">
+  <div
+    slot="end"
+    style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+  >
     End
   </div>
 </sl-split-panel>
@@ -421,8 +475,8 @@ import { SlSplitPanel } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <SlSplitPanel style={{ '--min': '150px', '--max': 'calc(100% - 150px)' }}>
-    <div 
-      slot="start" 
+    <div
+      slot="start"
       style={{
         height: '200px',
         background: 'var(--sl-color-neutral-50)',
@@ -433,8 +487,8 @@ const App = () => (
     >
       Start
     </div>
-    <div 
-      slot="end" 
+    <div
+      slot="end"
       style={{
         height: '200px',
         background: 'var(--sl-color-neutral-50)',
@@ -455,18 +509,27 @@ Create complex layouts that can be repositioned independently by nesting split p
 
 ```html preview
 <sl-split-panel>
-  <div slot="start" style="height: 400px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;">
+  <div
+    slot="start"
+    style="height: 400px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+  >
     Start
   </div>
   <div slot="end">
     <sl-split-panel vertical style="height: 400px;">
-      <div slot="start" style="height: 100%; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;">
+      <div
+        slot="start"
+        style="height: 100%; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+      >
         Top
       </div>
-      <div slot="end" style="height: 100%; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;">
+      <div
+        slot="end"
+        style="height: 100%; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+      >
         Bottom
       </div>
-    </sl-split-panel>    
+    </sl-split-panel>
   </div>
 </sl-split-panel>
 ```
@@ -476,8 +539,8 @@ import { SlSplitPanel } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <SlSplitPanel>
-    <div 
-      slot="start" 
+    <div
+      slot="start"
       style={{
         height: '400px',
         background: 'var(--sl-color-neutral-50)',
@@ -490,9 +553,9 @@ const App = () => (
     </div>
     <div slot="end">
       <SlSplitPanel vertical style={{ height: '400px' }}>
-        <div 
-          slot="start" 
-          style={{ 
+        <div
+          slot="start"
+          style={{
             height: '100%',
             background: 'var(--sl-color-neutral-50)',
             display: 'flex',
@@ -502,15 +565,15 @@ const App = () => (
         >
           Start
         </div>
-        <div 
-          slot="end" 
-          style={{ 
+        <div
+          slot="end"
+          style={{
             height: '100%',
             background: 'var(--sl-color-neutral-50)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center'
-          }}      
+          }}
         >
           End
         </div>
@@ -527,10 +590,16 @@ You can target the `divider` part to apply CSS properties to the divider. To add
 ```html preview
 <sl-split-panel style="--divider-width: 20px;">
   <sl-icon slot="handle" name="grip-vertical"></sl-icon>
-  <div slot="start" style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;">
+  <div
+    slot="start"
+    style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+  >
     Start
   </div>
-  <div slot="end" style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;">
+  <div
+    slot="end"
+    style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+  >
     End
   </div>
 </sl-split-panel>
@@ -542,22 +611,28 @@ import { SlSplitPanel, SlIcon } from '@shoelace-style/shoelace/dist/react';
 const App = () => (
   <SlSplitPanel style={{ '--divider-width': '20px' }}>
     <SlIcon slot="handle" name="grip-vertical" />
-    <div slot="start" style={{
-      height: '200px',
-      background: 'var(--sl-color-neutral-50)',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center'
-    }}>
+    <div
+      slot="start"
+      style={{
+        height: '200px',
+        background: 'var(--sl-color-neutral-50)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}
+    >
       Start
     </div>
-    <div slot="end" style={{
-      height: '200px',
-      background: 'var(--sl-color-neutral-50)',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center'
-    }}>
+    <div
+      slot="end"
+      style={{
+        height: '200px',
+        background: 'var(--sl-color-neutral-50)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}
+    >
       End
     </div>
   </SlSplitPanel>
@@ -570,10 +645,16 @@ Here's a more elaborate example that changes the divider's color and width and a
 <div class="split-panel-handle">
   <sl-split-panel>
     <sl-icon slot="handle" name="grip-vertical"></sl-icon>
-    <div slot="start" style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;">
+    <div
+      slot="start"
+      style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+    >
       Start
     </div>
-    <div slot="end" style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;">
+    <div
+      slot="end"
+      style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+    >
       End
     </div>
   </sl-split-panel>
@@ -593,7 +674,7 @@ Here's a more elaborate example that changes the divider's color and width and a
     border-radius: var(--sl-border-radius-small);
     background: var(--sl-color-pink-600);
     color: var(--sl-color-neutral-0);
-    padding: .5rem .125rem;
+    padding: 0.5rem 0.125rem;
   }
 
   .split-panel-handle sl-split-panel::part(divider):focus-visible {
@@ -639,29 +720,35 @@ const css = `
 
 const App = () => (
   <>
-  <div className="split-panel-handle">
-    <SlSplitPanel>
-      <SlIcon slot="handle" name="grip-vertical" />
-      <div slot="start" style={{
-        height: '200px',
-        background: 'var(--sl-color-neutral-50)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }}>
-        Start
-      </div>
-      <div slot="end" style={{
-        height: '200px',
-        background: 'var(--sl-color-neutral-50)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }}>
-        End
-      </div>
-    </SlSplitPanel>
-  </div>
+    <div className="split-panel-handle">
+      <SlSplitPanel>
+        <SlIcon slot="handle" name="grip-vertical" />
+        <div
+          slot="start"
+          style={{
+            height: '200px',
+            background: 'var(--sl-color-neutral-50)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+        >
+          Start
+        </div>
+        <div
+          slot="end"
+          style={{
+            height: '200px',
+            background: 'var(--sl-color-neutral-50)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+        >
+          End
+        </div>
+      </SlSplitPanel>
+    </div>
 
     <style>{css}</style>
   </>

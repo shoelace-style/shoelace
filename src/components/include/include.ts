@@ -1,9 +1,9 @@
-import { LitElement, html } from 'lit';
+import { html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import styles from './include.styles';
-import { requestInclude } from './request';
 import { emit } from '~/internal/event';
 import { watch } from '~/internal/watch';
+import styles from './include.styles';
+import { requestInclude } from './request';
 
 /**
  * @since 2.0

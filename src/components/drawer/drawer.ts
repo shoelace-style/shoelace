@@ -1,8 +1,7 @@
-import { LitElement, html } from 'lit';
+import { html, LitElement } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import styles from './drawer.styles';
 import '~/components/icon-button/icon-button';
 import { animateTo, stopAnimations } from '~/internal/animate';
 import { emit, waitForEvent } from '~/internal/event';
@@ -10,12 +9,10 @@ import Modal from '~/internal/modal';
 import { lockBodyScrolling, unlockBodyScrolling } from '~/internal/scroll';
 import { HasSlotController } from '~/internal/slot';
 import { uppercaseFirstLetter } from '~/internal/string';
-import { isPreventScrollSupported } from '~/internal/support';
 import { watch } from '~/internal/watch';
-import { setDefaultAnimation, getAnimation } from '~/utilities/animation-registry';
+import { getAnimation, setDefaultAnimation } from '~/utilities/animation-registry';
 import { LocalizeController } from '~/utilities/localize';
-
-const hasPreventScroll = isPreventScrollSupported();
+import styles from './drawer.styles';
 
 /**
  * @since 2.0
@@ -31,19 +28,20 @@ const hasPreventScroll = isPreventScrollSupported();
  * @event sl-after-show - Emitted after the drawer opens and all animations are complete.
  * @event sl-hide - Emitted when the drawer closes.
  * @event sl-after-hide - Emitted after the drawer closes and all animations are complete.
- * @event sl-initial-focus - Emitted when the drawer opens and the panel gains focus. Calling `event.preventDefault()` will
- *   prevent focus and allow you to set it on a different element in the drawer, such as an input or button.
+ * @event sl-initial-focus - Emitted when the drawer opens and is ready to receive focus. Calling
+ *   `event.preventDefault()` will prevent focusing and allow you to set it on a different element, such as an input.
  * @event {{ source: 'close-button' | 'keyboard' | 'overlay' }} sl-request-close - Emitted when the user attempts to
  *   close the drawer by clicking the close button, clicking the overlay, or pressing escape. Calling
  *   `event.preventDefault()` will keep the drawer open. Avoid using this unless closing the drawer will result in
  *   destructive behavior such as data loss.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  * @csspart overlay - The overlay.
  * @csspart panel - The drawer panel (where the drawer and its content is rendered).
  * @csspart header - The drawer header.
  * @csspart title - The drawer title.
  * @csspart close-button - The close button.
+ * @csspart close-button__base - The close button's `base` part.
  * @csspart body - The drawer body.
  * @csspart footer - The drawer footer.
  *
@@ -156,17 +154,6 @@ export default class SlDrawer extends LitElement {
     this.hide();
   }
 
-  // Sets focus on the first child element with autofocus, falling back to the panel if one isn't found
-  private setInitialFocus() {
-    const target = this.querySelector('[autofocus]');
-
-    if (target) {
-      (target as HTMLElement).focus({ preventScroll: true });
-    } else {
-      this.panel.focus({ preventScroll: true });
-    }
-  }
-
   handleKeyDown(event: KeyboardEvent) {
     if (event.key === 'Escape') {
       event.stopPropagation();
@@ -187,18 +174,38 @@ export default class SlDrawer extends LitElement {
         lockBodyScrolling(this);
       }
 
+      // When the drawer is shown, Safari will attempt to set focus on whatever element has autofocus. This causes the
+      // drawer's animation to jitter, so we'll temporarily remove the attribute, call `focus({ preventScroll: true })`
+      // ourselves, and add the attribute back afterwards.
+      //
+      // Related: https://github.com/shoelace-style/shoelace/issues/693
+      //
+      const autoFocusTarget = this.querySelector('[autofocus]');
+      if (autoFocusTarget) {
+        autoFocusTarget.removeAttribute('autofocus');
+      }
+
       await Promise.all([stopAnimations(this.drawer), stopAnimations(this.overlay)]);
       this.drawer.hidden = false;
 
-      // Browsers that support el.focus({ preventScroll }) can set initial focus immediately
-      if (hasPreventScroll) {
-        requestAnimationFrame(() => {
-          const slInitialFocus = emit(this, 'sl-initial-focus', { cancelable: true });
-          if (!slInitialFocus.defaultPrevented) {
-            this.setInitialFocus();
+      // Set initial focus
+      requestAnimationFrame(() => {
+        const slInitialFocus = emit(this, 'sl-initial-focus', { cancelable: true });
+
+        if (!slInitialFocus.defaultPrevented) {
+          // Set focus to the autofocus target and restore the attribute
+          if (autoFocusTarget) {
+            (autoFocusTarget as HTMLInputElement).focus({ preventScroll: true });
+          } else {
+            this.panel.focus({ preventScroll: true });
           }
-        });
-      }
+        }
+
+        // Restore the autofocus attribute
+        if (autoFocusTarget) {
+          autoFocusTarget.setAttribute('autofocus', '');
+        }
+      });
 
       const panelAnimation = getAnimation(this, `drawer.show${uppercaseFirstLetter(this.placement)}`);
       const overlayAnimation = getAnimation(this, 'drawer.overlay.show');
@@ -206,17 +213,6 @@ export default class SlDrawer extends LitElement {
         animateTo(this.panel, panelAnimation.keyframes, panelAnimation.options),
         animateTo(this.overlay, overlayAnimation.keyframes, overlayAnimation.options)
       ]);
-
-      // Browsers that don't support el.focus({ preventScroll }) have to wait for the animation to finish before initial
-      // focus to prevent scrolling issues. See: https://caniuse.com/mdn-api_htmlelement_focus_preventscroll_option
-      if (!hasPreventScroll) {
-        requestAnimationFrame(() => {
-          const slInitialFocus = emit(this, 'sl-initial-focus', { cancelable: true });
-          if (!slInitialFocus.defaultPrevented) {
-            this.setInitialFocus();
-          }
-        });
-      }
 
       emit(this, 'sl-after-show');
     } else {
@@ -283,7 +279,8 @@ export default class SlDrawer extends LitElement {
                     <slot name="label"> ${this.label.length > 0 ? this.label : String.fromCharCode(65279)} </slot>
                   </h2>
                   <sl-icon-button
-                    exportparts="base:close-button"
+                    part="close-button"
+                    exportparts="base:close-button__base"
                     class="drawer__close"
                     name="x"
                     label=${this.localize.term('close')}

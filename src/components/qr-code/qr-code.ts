@@ -1,15 +1,15 @@
-import { LitElement, html } from 'lit';
+import { html, LitElement } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import QrCreator from 'qr-creator';
-import styles from './qr-code.styles';
 import { watch } from '~/internal/watch';
+import styles from './qr-code.styles';
 
 /**
  * @since 2.0
  * @status stable
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  */
 @customElement('sl-qr-code')
 export default class SlQrCode extends LitElement {

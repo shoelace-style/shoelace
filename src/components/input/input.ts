@@ -1,15 +1,14 @@
-import { LitElement, html } from 'lit';
+import { html, LitElement } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
-import styles from './input.styles';
 import '~/components/icon/icon';
-import { autoIncrement } from '~/internal/auto-increment';
 import { emit } from '~/internal/event';
-import { FormSubmitController, getLabelledBy, renderFormControl } from '~/internal/form-control';
+import { FormSubmitController } from '~/internal/form-control';
 import { HasSlotController } from '~/internal/slot';
 import { watch } from '~/internal/watch';
+import styles from './input.styles';
 
 /**
  * @since 2.0
@@ -31,7 +30,7 @@ import { watch } from '~/internal/watch';
  * @event sl-focus - Emitted when the control gains focus.
  * @event sl-blur - Emitted when the control loses focus.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  * @csspart form-control - The form control that wraps the label, input, and help-text.
  * @csspart label - The input label.
  * @csspart input - The input control.
@@ -47,13 +46,8 @@ export default class SlInput extends LitElement {
 
   @query('.input__control') input: HTMLInputElement;
 
-  // @ts-expect-error -- Controller is currently unused
   private readonly formSubmitController = new FormSubmitController(this);
   private readonly hasSlotController = new HasSlotController(this, 'help-text', 'label');
-  private readonly attrId = autoIncrement();
-  private readonly inputId = `input-${this.attrId}`;
-  private readonly helpTextId = `input-help-text-${this.attrId}`;
-  private readonly labelId = `input-label-${this.attrId}`;
 
   @state() private hasFocus = false;
   @state() private isPasswordVisible = false;
@@ -145,22 +139,26 @@ export default class SlInput extends LitElement {
 
   /** Gets or sets the current value as a `Date` object. Only valid when `type` is `date`. */
   get valueAsDate() {
-    return this.input.valueAsDate!;
+    return this.input?.valueAsDate ?? null;
   }
 
-  set valueAsDate(newValue: Date) {
-    this.input.valueAsDate = newValue;
-    this.value = this.input.value;
+  set valueAsDate(newValue: Date | null) {
+    this.updateComplete.then(() => {
+      this.input.valueAsDate = newValue;
+      this.value = this.input.value;
+    });
   }
 
   /** Gets or sets the current value as a number. */
   get valueAsNumber() {
-    return this.input.valueAsNumber;
+    return this.input?.valueAsNumber ?? parseFloat(this.value);
   }
 
   set valueAsNumber(newValue: number) {
-    this.input.valueAsNumber = newValue;
-    this.value = this.input.value;
+    this.updateComplete.then(() => {
+      this.input.valueAsNumber = newValue;
+      this.value = this.input.value;
+    });
   }
 
   firstUpdated() {
@@ -259,6 +257,15 @@ export default class SlInput extends LitElement {
     this.invalid = true;
   }
 
+  handleKeyDown(event: KeyboardEvent) {
+    const hasModifier = event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
+
+    // Pressing enter when focused on an input should submit the form like a native input
+    if (event.key === 'Enter' && !hasModifier) {
+      this.formSubmitController.submit();
+    }
+  }
+
   handlePasswordToggle() {
     this.isPasswordVisible = !this.isPasswordVisible;
   }
@@ -271,130 +278,138 @@ export default class SlInput extends LitElement {
   render() {
     const hasLabelSlot = this.hasSlotController.test('label');
     const hasHelpTextSlot = this.hasSlotController.test('help-text');
+    const hasLabel = this.label ? true : !!hasLabelSlot;
+    const hasHelpText = this.helpText ? true : !!hasHelpTextSlot;
 
-    // NOTE - always bind value after min/max, otherwise it will be clamped
-    return renderFormControl(
-      {
-        inputId: this.inputId,
-        label: this.label,
-        labelId: this.labelId,
-        hasLabelSlot,
-        helpTextId: this.helpTextId,
-        helpText: this.helpText,
-        hasHelpTextSlot,
-        size: this.size
-      },
-      html`
-        <div
-          part="base"
-          class=${classMap({
-            input: true,
+    return html`
+      <div
+        part="form-control"
+        class=${classMap({
+          'form-control': true,
+          'form-control--small': this.size === 'small',
+          'form-control--medium': this.size === 'medium',
+          'form-control--large': this.size === 'large',
+          'form-control--has-label': hasLabel,
+          'form-control--has-help-text': hasHelpText
+        })}
+      >
+        <label part="label" class="form-control__label" for="input" aria-hidden=${hasLabel ? 'false' : 'true'}>
+          <slot name="label">${this.label}</slot>
+        </label>
 
-            // Sizes
-            'input--small': this.size === 'small',
-            'input--medium': this.size === 'medium',
-            'input--large': this.size === 'large',
+        <div class="form-control__input">
+          <div
+            part="base"
+            class=${classMap({
+              input: true,
 
-            // States
-            'input--pill': this.pill,
-            'input--standard': !this.filled,
-            'input--filled': this.filled,
-            'input--disabled': this.disabled,
-            'input--focused': this.hasFocus,
-            'input--empty': this.value.length === 0,
-            'input--invalid': this.invalid
-          })}
-        >
-          <span part="prefix" class="input__prefix">
-            <slot name="prefix"></slot>
-          </span>
+              // Sizes
+              'input--small': this.size === 'small',
+              'input--medium': this.size === 'medium',
+              'input--large': this.size === 'large',
 
-          <input
-            part="input"
-            id=${this.inputId}
-            class="input__control"
-            type=${this.type === 'password' && this.isPasswordVisible ? 'text' : this.type}
-            name=${ifDefined(this.name)}
-            ?disabled=${this.disabled}
-            ?readonly=${this.readonly}
-            ?required=${this.required}
-            placeholder=${ifDefined(this.placeholder)}
-            minlength=${ifDefined(this.minlength)}
-            maxlength=${ifDefined(this.maxlength)}
-            min=${ifDefined(this.min)}
-            max=${ifDefined(this.max)}
-            step=${ifDefined(this.step)}
-            .value=${live(this.value)}
-            autocapitalize=${ifDefined(this.autocapitalize)}
-            autocomplete=${ifDefined(this.autocomplete)}
-            autocorrect=${ifDefined(this.autocorrect)}
-            ?autofocus=${this.autofocus}
-            spellcheck=${ifDefined(this.spellcheck)}
-            pattern=${ifDefined(this.pattern)}
-            inputmode=${ifDefined(this.inputmode)}
-            aria-labelledby=${ifDefined(
-              getLabelledBy({
-                label: this.label,
-                labelId: this.labelId,
-                hasLabelSlot,
-                helpText: this.helpText,
-                helpTextId: this.helpTextId,
-                hasHelpTextSlot
-              })
-            )}
-            aria-invalid=${this.invalid ? 'true' : 'false'}
-            @change=${this.handleChange}
-            @input=${this.handleInput}
-            @invalid=${this.handleInvalid}
-            @focus=${this.handleFocus}
-            @blur=${this.handleBlur}
-          />
+              // States
+              'input--pill': this.pill,
+              'input--standard': !this.filled,
+              'input--filled': this.filled,
+              'input--disabled': this.disabled,
+              'input--focused': this.hasFocus,
+              'input--empty': this.value.length === 0,
+              'input--invalid': this.invalid
+            })}
+          >
+            <span part="prefix" class="input__prefix">
+              <slot name="prefix"></slot>
+            </span>
 
-          ${this.clearable && this.value.length > 0
-            ? html`
-                <button
-                  part="clear-button"
-                  class="input__clear"
-                  type="button"
-                  @click=${this.handleClearClick}
-                  tabindex="-1"
-                >
-                  <slot name="clear-icon">
-                    <sl-icon name="x-circle-fill" library="system"></sl-icon>
-                  </slot>
-                </button>
-              `
-            : ''}
-          ${this.togglePassword
-            ? html`
-                <button
-                  part="password-toggle-button"
-                  class="input__password-toggle"
-                  type="button"
-                  @click=${this.handlePasswordToggle}
-                  tabindex="-1"
-                >
-                  ${this.isPasswordVisible
-                    ? html`
-                        <slot name="show-password-icon">
-                          <sl-icon name="eye-slash" library="system"></sl-icon>
-                        </slot>
-                      `
-                    : html`
-                        <slot name="hide-password-icon">
-                          <sl-icon name="eye" library="system"></sl-icon>
-                        </slot>
-                      `}
-                </button>
-              `
-            : ''}
+            <input
+              part="input"
+              id="input"
+              class="input__control"
+              type=${this.type === 'password' && this.isPasswordVisible ? 'text' : this.type}
+              name=${ifDefined(this.name)}
+              ?disabled=${this.disabled}
+              ?readonly=${this.readonly}
+              ?required=${this.required}
+              placeholder=${ifDefined(this.placeholder)}
+              minlength=${ifDefined(this.minlength)}
+              maxlength=${ifDefined(this.maxlength)}
+              min=${ifDefined(this.min)}
+              max=${ifDefined(this.max)}
+              step=${ifDefined(this.step)}
+              .value=${live(this.value)}
+              autocapitalize=${ifDefined(this.autocapitalize)}
+              autocomplete=${ifDefined(this.autocomplete)}
+              autocorrect=${ifDefined(this.autocorrect)}
+              ?autofocus=${this.autofocus}
+              spellcheck=${ifDefined(this.spellcheck)}
+              pattern=${ifDefined(this.pattern)}
+              inputmode=${ifDefined(this.inputmode)}
+              aria-describedby="help-text"
+              aria-invalid=${this.invalid ? 'true' : 'false'}
+              @change=${this.handleChange}
+              @input=${this.handleInput}
+              @invalid=${this.handleInvalid}
+              @keydown=${this.handleKeyDown}
+              @focus=${this.handleFocus}
+              @blur=${this.handleBlur}
+            />
 
-          <span part="suffix" class="input__suffix">
-            <slot name="suffix"></slot>
-          </span>
+            ${this.clearable && this.value.length > 0
+              ? html`
+                  <button
+                    part="clear-button"
+                    class="input__clear"
+                    type="button"
+                    @click=${this.handleClearClick}
+                    tabindex="-1"
+                  >
+                    <slot name="clear-icon">
+                      <sl-icon name="x-circle-fill" library="system"></sl-icon>
+                    </slot>
+                  </button>
+                `
+              : ''}
+            ${this.togglePassword
+              ? html`
+                  <button
+                    part="password-toggle-button"
+                    class="input__password-toggle"
+                    type="button"
+                    @click=${this.handlePasswordToggle}
+                    tabindex="-1"
+                  >
+                    ${this.isPasswordVisible
+                      ? html`
+                          <slot name="show-password-icon">
+                            <sl-icon name="eye-slash" library="system"></sl-icon>
+                          </slot>
+                        `
+                      : html`
+                          <slot name="hide-password-icon">
+                            <sl-icon name="eye" library="system"></sl-icon>
+                          </slot>
+                        `}
+                  </button>
+                `
+              : ''}
+
+            <span part="suffix" class="input__suffix">
+              <slot name="suffix"></slot>
+            </span>
+          </div>
         </div>
-      `
-    );
+
+        <div
+          part="help-text"
+          id="help-text"
+          class="form-control__help-text"
+          aria-hidden=${hasHelpText ? 'false' : 'true'}
+        >
+          <slot name="help-text">${this.helpText}</slot>
+        </div>
+      </div>
+    `;
   }
 }
 

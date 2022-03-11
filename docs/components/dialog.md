@@ -202,12 +202,7 @@ const App = () => {
 
   return (
     <>
-      <SlDialog
-        label="Dialog"
-        open={open}
-        onSlRequestClose={handleRequestClose}
-        onSlAfterHide={() => setOpen(false)}
-      >
+      <SlDialog label="Dialog" open={open} onSlRequestClose={handleRequestClose} onSlAfterHide={() => setOpen(false)}>
         This dialog will not close when you click on the overlay.
         <SlButton slot="footer" variant="primary" onClick={() => setOpen(false)}>
           Close
@@ -222,11 +217,11 @@ const App = () => {
 
 ### Customizing Initial Focus
 
-By default, the dialog's panel will gain focus when opened. This allows a subsequent tab press to focus on the first tabbable element within the dialog. To set focus on a different element, listen for and cancel the `sl-initial-focus` event.
+By default, the dialog's panel will gain focus when opened. This allows a subsequent tab press to focus on the first tabbable element in the dialog. If you want a different element to have focus, add the `autofocus` attribute to it as shown below.
 
 ```html preview
 <sl-dialog label="Dialog" class="dialog-focus">
-  <sl-input placeholder="I will have focus when the dialog is opened"></sl-input>
+  <sl-input autofocus placeholder="I will have focus when the dialog is opened"></sl-input>
   <sl-button slot="footer" variant="primary">Close</sl-button>
 </sl-dialog>
 
@@ -240,31 +235,20 @@ By default, the dialog's panel will gain focus when opened. This allows a subseq
 
   openButton.addEventListener('click', () => dialog.show());
   closeButton.addEventListener('click', () => dialog.hide());
-
-  dialog.addEventListener('sl-initial-focus', event => {
-    event.preventDefault();
-    input.focus({ preventScroll: true });
-  });
 </script>
 ```
 
 ```jsx react
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { SlButton, SlDialog, SlInput } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => {
-  const input = useRef(null);
   const [open, setOpen] = useState(false);
-
-  function handleInitialFocus(event) {
-    event.preventDefault();
-    input.current.focus();
-  }
 
   return (
     <>
-      <SlDialog label="Dialog" open={open} onSlInitialFocus={handleInitialFocus} onSlAfterHide={() => setOpen(false)}>
-        <SlInput ref={input} placeholder="I will have focus when the dialog is opened" />
+      <SlDialog label="Dialog" open={open} onSlAfterHide={() => setOpen(false)}>
+        <SlInput autofocus placeholder="I will have focus when the dialog is opened" />
         <SlButton slot="footer" variant="primary" onClick={() => setOpen(false)}>
           Close
         </SlButton>
@@ -276,6 +260,6 @@ const App = () => {
 };
 ```
 
-?> Alternatively, you can add the `autofocus` attribute to any form control to customize initial focus without using JavaScript.
+?> You can further customize initial focus behavior by canceling the `sl-initial-focus` event and setting focus yourself inside the event handler.
 
 [component-metadata:sl-dialog]

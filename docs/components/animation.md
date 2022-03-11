@@ -41,13 +41,21 @@ const css = `
 const App = () => (
   <>
     <div class="animation-overview">
-      <SlAnimation name="bounce" duration={2000} play><div class="box" /></SlAnimation>
-      <SlAnimation name="jello" duration={2000} play><div class="box" /></SlAnimation>
-      <SlAnimation name="heartBeat" duration={2000} play><div class="box" /></SlAnimation>
-      <SlAnimation name="flip" duration={2000} play><div class="box" /></SlAnimation>
+      <SlAnimation name="bounce" duration={2000} play>
+        <div class="box" />
+      </SlAnimation>
+      <SlAnimation name="jello" duration={2000} play>
+        <div class="box" />
+      </SlAnimation>
+      <SlAnimation name="heartBeat" duration={2000} play>
+        <div class="box" />
+      </SlAnimation>
+      <SlAnimation name="flip" duration={2000} play>
+        <div class="box" />
+      </SlAnimation>
     </div>
 
-    <style>{css}</style> 
+    <style>{css}</style>
   </>
 );
 ```
@@ -91,7 +99,7 @@ This example demonstrates all of the baked-in animations and easings. Animations
     });
     animationName.appendChild(menuItem);
   });
-  
+
   easings.map(name => {
     const menuItem = Object.assign(document.createElement('sl-menu-item'), {
       textContent: name,
@@ -100,9 +108,9 @@ This example demonstrates all of the baked-in animations and easings. Animations
     easingName.appendChild(menuItem);
   });
 
-  animationName.addEventListener('sl-change', () => animation.name = animationName.value);
-  easingName.addEventListener('sl-change', () => animation.easing = easingName.value);
-  playbackRate.addEventListener('sl-input', () => animation.playbackRate = playbackRate.value);
+  animationName.addEventListener('sl-change', () => (animation.name = animationName.value));
+  easingName.addEventListener('sl-change', () => (animation.easing = easingName.value));
+  playbackRate.addEventListener('sl-input', () => (animation.playbackRate = playbackRate.value));
 </script>
 
 <style>
@@ -156,7 +164,7 @@ Use an [Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/
     width: 100px;
     height: 100px;
     background-color: var(--sl-color-primary-600);
-  }  
+  }
 </style>
 ```
 
@@ -182,16 +190,14 @@ const App = () => {
   const box = useRef(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          animation.current.play = true;
-        } else {
-          animation.current.play = false;
-          animation.current.currentTime = 0;
-        }
+    const observer = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        animation.current.play = true;
+      } else {
+        animation.current.play = false;
+        animation.current.currentTime = 0;
       }
-    );
+    });
 
     if (box.current) {
       observer.observe(box.current);
@@ -201,17 +207,12 @@ const App = () => {
   return (
     <>
       <div class="animation-scroll">
-        <SlAnimation
-          ref={animation}
-          name="jackInTheBox" 
-          duration={2000} 
-          iterations={1}
-        >
+        <SlAnimation ref={animation} name="jackInTheBox" duration={2000} iterations={1}>
           <div ref={box} class="box" />
         </SlAnimation>
       </div>
 
-      <style>{css}</style> 
+      <style>{css}</style>
     </>
   );
 };
@@ -271,9 +272,9 @@ const css = `
 const App = () => (
   <>
     <div class="animation-keyframes">
-      <SlAnimation 
-        easing="ease-in-out" 
-        duration={2000} 
+      <SlAnimation
+        easing="ease-in-out"
+        duration={2000}
         play
         keyframes={[
           {
@@ -296,7 +297,7 @@ const App = () => (
       </SlAnimation>
     </div>
 
-    <style>{css}</style> 
+    <style>{css}</style>
   </>
 );
 ```
@@ -332,13 +333,7 @@ const App = () => {
 
   return (
     <div class="animation-form">
-      <SlAnimation 
-        name="rubberBand" 
-        duration={1000} 
-        iterations={1} 
-        play={play}
-        onSlFinish={() => setPlay(false)}
-      >
+      <SlAnimation name="rubberBand" duration={1000} iterations={1} play={play} onSlFinish={() => setPlay(false)}>
         <SlButton variant="primary" onClick={() => setPlay(true)}>
           Click me
         </SlButton>

@@ -1,8 +1,6 @@
-import type { ReactiveController, ReactiveControllerHost, TemplateResult } from 'lit';
-import { html } from 'lit';
-import { classMap } from 'lit/directives/class-map.js';
-import { ifDefined } from 'lit/directives/if-defined.js';
+import type SlButton from '~/components/button/button';
 import './formdata-event-polyfill';
+import type { ReactiveController, ReactiveControllerHost } from 'lit';
 
 export interface FormSubmitControllerOptions {
   /** A function that returns the form containing the form control. */
@@ -84,11 +82,11 @@ export class FormSubmitController implements ReactiveController {
     }
   }
 
-  submit() {
-    // Calling form.submit() seems to bypass the submit event and constraint validation. Instead, we can inject a
-    // native submit button into the form, click it, then remove it to simulate a standard form submission.
-    const button = document.createElement('button');
+  submit(submitter?: HTMLInputElement | SlButton) {
+    // Calling form.submit() bypasses the submit event and constraint validation. To prevent this, we can inject a
+    // native submit button into the form, "click" it, then remove it to simulate a standard form submission.
     if (this.form) {
+      const button = document.createElement('button');
       button.type = 'submit';
       button.style.position = 'absolute';
       button.style.width = '0';
@@ -97,107 +95,18 @@ export class FormSubmitController implements ReactiveController {
       button.style.clipPath = 'inset(50%)';
       button.style.overflow = 'hidden';
       button.style.whiteSpace = 'nowrap';
+
+      // Pass form override properties through to the temporary button
+      if (submitter) {
+        button.formAction = submitter.formAction;
+        button.formMethod = submitter.formMethod;
+        button.formNoValidate = submitter.formNoValidate;
+        button.formTarget = submitter.formTarget;
+      }
+
       this.form.append(button);
       button.click();
       button.remove();
     }
   }
-}
-
-export function renderFormControl(
-  props: {
-    /** The input id, used to map the input to the label */
-    inputId: string;
-
-    /** The size of the form control */
-    size: 'small' | 'medium' | 'large';
-
-    /** The label id, used to map the label to the input */
-    labelId?: string;
-
-    /** The label text (if the label slot isn't used) */
-    label?: string;
-
-    /** Whether or not a label slot has been provided. */
-    hasLabelSlot?: boolean;
-
-    /** The help text id, used to map the input to the help text */
-    helpTextId?: string;
-
-    /** The help text (if the help-text slot isn't used) */
-    helpText?: string;
-
-    /** Whether or not a help text slot has been provided. */
-    hasHelpTextSlot?: boolean;
-
-    /** A function that gets called when the label is clicked. */
-    onLabelClick?: (event: MouseEvent) => void;
-  },
-  input: TemplateResult
-) {
-  const hasLabel = props.label ? true : !!props.hasLabelSlot;
-  const hasHelpText = props.helpText ? true : !!props.hasHelpTextSlot;
-
-  return html`
-    <div
-      part="form-control"
-      class=${classMap({
-        'form-control': true,
-        'form-control--small': props.size === 'small',
-        'form-control--medium': props.size === 'medium',
-        'form-control--large': props.size === 'large',
-        'form-control--has-label': hasLabel,
-        'form-control--has-help-text': hasHelpText
-      })}
-    >
-      <label
-        part="label"
-        id=${ifDefined(props.labelId)}
-        class="form-control__label"
-        for=${props.inputId}
-        aria-hidden=${hasLabel ? 'false' : 'true'}
-        @click=${(event: MouseEvent) => props.onLabelClick?.(event)}
-      >
-        <slot name="label">${props.label}</slot>
-      </label>
-
-      <div class="form-control__input">${html`${input}`}</div>
-
-      <div
-        part="help-text"
-        id=${ifDefined(props.helpTextId)}
-        class="form-control__help-text"
-        aria-hidden=${hasHelpText ? 'false' : 'true'}
-      >
-        <slot name="help-text">${props.helpText}</slot>
-      </div>
-    </div>
-  `;
-}
-
-export function getLabelledBy(props: {
-  /** The label id, used to map the label to the input */
-  labelId: string;
-
-  /** The label text (if the label slot isn't used) */
-  label: string;
-
-  /** Whether or not a label slot has been provided. */
-  hasLabelSlot: boolean;
-
-  /** The help text id, used to map the input to the help text */
-  helpTextId: string;
-
-  /** The help text (if the help-text slot isn't used) */
-  helpText: string;
-
-  /** Whether or not a help text slot has been provided. */
-  hasHelpTextSlot: boolean;
-}) {
-  const labelledBy = [
-    props.label.length > 0 ? props.label : props.hasLabelSlot ? props.labelId : '',
-    props.helpText.length > 0 ? props.helpText : props.hasHelpTextSlot ? props.helpTextId : ''
-  ].filter(val => val !== '');
-
-  return labelledBy.join(' ');
 }

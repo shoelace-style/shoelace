@@ -1,9 +1,9 @@
-import { LitElement, html } from 'lit';
+import { html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import styles from './breadcrumb-item.styles';
 import { HasSlotController } from '~/internal/slot';
+import styles from './breadcrumb-item.styles';
 
 /**
  * @since 2.0
@@ -15,7 +15,7 @@ import { HasSlotController } from '~/internal/slot';
  * @slot separator - The separator to use for the breadcrumb item. This will only change the separator for this item. If
  * you want to change it for all items in the group, set the separator on `<sl-breadcrumb>` instead.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  * @csspart label - The breadcrumb item's label.
  * @csspart prefix - The container that wraps the prefix slot.
  * @csspart suffix - The container that wraps the suffix slot.

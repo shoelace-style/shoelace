@@ -1,7 +1,6 @@
-import { LitElement, html } from 'lit';
+import { html, LitElement } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import styles from './tab-group.styles';
 import '~/components/icon-button/icon-button';
 import type SlTabPanel from '~/components/tab-panel/tab-panel';
 import type SlTab from '~/components/tab/tab';
@@ -9,6 +8,7 @@ import { emit } from '~/internal/event';
 import { scrollIntoView } from '~/internal/scroll';
 import { watch } from '~/internal/watch';
 import { LocalizeController } from '~/utilities/localize';
+import styles from './tab-group.styles';
 
 /**
  * @since 2.0
@@ -22,12 +22,15 @@ import { LocalizeController } from '~/utilities/localize';
  * @event {{ name: String }} sl-tab-show - Emitted when a tab is shown.
  * @event {{ name: String }} sl-tab-hide - Emitted when a tab is hidden.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  * @csspart nav - The tab group navigation container.
  * @csspart tabs - The container that wraps the slotted tabs.
  * @csspart active-tab-indicator - An element that displays the currently selected tab. This is a child of the tabs container.
  * @csspart body - The tab group body where tab panels are slotted in.
  * @csspart scroll-button - The previous and next scroll buttons that appear when tabs are scrollable.
+ * @csspart scroll-button--start - Targets the starting scroll button.
+ * @csspart scroll-button--end - Targets the ending scroll button.
+ * @csspart scroll-button__base - The scroll button's `base` part.
  *
  * @cssproperty --indicator-color - The color of the active tab indicator.
  * @cssproperty --track-color - The color of the indicator's track (i.e. the line that separates tabs from panels).
@@ -361,8 +364,9 @@ export default class SlTabGroup extends LitElement {
           ${this.hasScrollControls
             ? html`
                 <sl-icon-button
+                  part="scroll-button scroll-button--start"
+                  exportparts="base:scroll-button__base"
                   class="tab-group__scroll-button tab-group__scroll-button--start"
-                  exportparts="base:scroll-button"
                   name="chevron-left"
                   library="system"
                   label=${this.localize.term('scrollToStart')}
@@ -381,8 +385,9 @@ export default class SlTabGroup extends LitElement {
           ${this.hasScrollControls
             ? html`
                 <sl-icon-button
+                  part="scroll-button scroll-button--end"
+                  exportparts="base:scroll-button__base"
                   class="tab-group__scroll-button tab-group__scroll-button--end"
-                  exportparts="base:scroll-button"
                   name="chevron-right"
                   library="system"
                   label=${this.localize.term('scrollToEnd')}

@@ -505,8 +505,7 @@
   --sl-tooltip-font-size: var(--sl-font-size-small);
   --sl-tooltip-line-height: var(--sl-line-height-dense);
   --sl-tooltip-padding: var(--sl-spacing-2x-small) var(--sl-spacing-x-small);
-  --sl-tooltip-arrow-size: 5px;
-  --sl-tooltip-arrow-start-end-offset: 8px;
+  --sl-tooltip-arrow-size: 4px;
 
   /*
    * Z-indexes

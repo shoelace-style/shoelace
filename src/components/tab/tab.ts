@@ -1,11 +1,11 @@
-import { LitElement, html } from 'lit';
+import { html, LitElement } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import styles from './tab.styles';
 import '~/components/icon-button/icon-button';
 import { autoIncrement } from '~/internal/auto-increment';
 import { emit } from '~/internal/event';
 import { LocalizeController } from '~/utilities/localize';
+import styles from './tab.styles';
 
 /**
  * @since 2.0
@@ -17,8 +17,9 @@ import { LocalizeController } from '~/utilities/localize';
  *
  * @event sl-close - Emitted when the tab is closable and the close button is activated.
  *
- * @csspart base - The component's base wrapper.
- * @csspart close-button - The close button, which is the icon button's base wrapper.
+ * @csspart base - The component's internal wrapper.
+ * @csspart close-button - The close button.
+ * @csspart close-button__base - The close button's `base` part.
  */
 @customElement('sl-tab')
 export default class SlTab extends LitElement {
@@ -81,10 +82,11 @@ export default class SlTab extends LitElement {
         ${this.closable
           ? html`
               <sl-icon-button
+                part="close-button"
+                exportparts="base:close-button__base"
                 name="x"
                 library="system"
                 label=${this.localize.term('close')}
-                exportparts="base:close-button"
                 class="tab__close-button"
                 @click=${this.handleCloseClick}
                 tabindex="-1"

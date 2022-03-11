@@ -9,7 +9,7 @@ describe('<sl-badge>', () => {
       el = await fixture<SlBadge>(html` <sl-badge>Badge</sl-badge> `);
     });
 
-    it('should render a component that passes accessibility test, with a role of status on the base part.', async () => {
+    it('should pass accessibility tests with a role of status on the base part.', async () => {
       await expect(el).to.be.accessible();
 
       const part = el.shadowRoot!.querySelector('[part="base"]')!;
@@ -31,7 +31,7 @@ describe('<sl-badge>', () => {
       el = await fixture<SlBadge>(html` <sl-badge pill>Badge</sl-badge> `);
     });
 
-    it('should render a component that passes accessibility test', async () => {
+    it('should pass accessibility tests', async () => {
       await expect(el).to.be.accessible();
     });
 
@@ -46,7 +46,7 @@ describe('<sl-badge>', () => {
       el = await fixture<SlBadge>(html` <sl-badge pulse>Badge</sl-badge> `);
     });
 
-    it('should render a component that passes accessibility test', async () => {
+    it('should pass accessibility tests', async () => {
       await expect(el).to.be.accessible();
     });
 
@@ -62,7 +62,7 @@ describe('<sl-badge>', () => {
         el = await fixture<SlBadge>(html`<sl-badge variant="${variant}">Badge</sl-badge>`);
       });
 
-      it('should render a component that passes accessibility test', async () => {
+      it('should pass accessibility tests', async () => {
         await expect(el).to.be.accessible();
       });
 

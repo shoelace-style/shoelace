@@ -1,4 +1,5 @@
 - Getting Started
+
   - [Overview](/)
   - [Installation](/getting-started/installation)
   - [Usage](/getting-started/usage)
@@ -8,17 +9,20 @@
   - [Localization](/getting-started/localization)
 
 - Frameworks
+
   - [React](/frameworks/react)
   - [Vue](/frameworks/vue)
   - [Angular](/frameworks/angular)
 
 - Resources
+
   - [Community](/resources/community)
   - [Accessibility](/resources/accessibility)
   - [Contributing](/resources/contributing)
   - [Changelog](/resources/changelog)
 
 - Components
+
   - [Alert](/components/alert)
   - [Avatar](/components/avatar)
   - [Badge](/components/badge)
@@ -63,6 +67,7 @@
   <!--plop:component-->
 
 - Utilities
+
   - [Animated Image](/components/animated-image)
   - [Animation](/components/animation)
   - [Format Bytes](/components/format-bytes)
@@ -76,6 +81,7 @@
   - [Visually Hidden](/components/visually-hidden)
 
 - Design Tokens
+
   - [Typography](/tokens/typography)
   - [Color](/tokens/color)
   - [Spacing](/tokens/spacing)
@@ -85,6 +91,7 @@
   - [Z-index](/tokens/z-index)
 
 - Tutorials
+
   - [Integrating with Laravel](/tutorials/integrating-with-laravel)
   - [Integrating with NextJS](/tutorials/integrating-with-nextjs)
   - [Integrating with Rails](/tutorials/integrating-with-rails)

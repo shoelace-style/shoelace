@@ -1,9 +1,9 @@
-import { LitElement, html } from 'lit';
+import { html, LitElement } from 'lit';
 import { customElement, property, queryAsync } from 'lit/decorators.js';
-import styles from './animation.styles';
-import { animations } from './animations';
 import { emit } from '~/internal/event';
 import { watch } from '~/internal/watch';
+import styles from './animation.styles';
+import { animations } from './animations';
 
 /**
  * @since 2.0
@@ -156,7 +156,6 @@ export default class SlAnimation extends LitElement {
   }
 
   async createAnimation() {
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- The specified easing may not exist
     const easing = animations.easings[this.easing] ?? this.easing;
     const keyframes = this.keyframes ?? (animations as unknown as Partial<Record<string, Keyframe[]>>)[this.name];
     const slot = await this.defaultSlot;

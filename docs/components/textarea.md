@@ -11,9 +11,7 @@ Textareas collect data from the user and allow multiple lines of text.
 ```jsx react
 import { SlTextarea } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlTextarea />
-);
+const App = () => <SlTextarea />;
 ```
 
 ?> This component works with standard `<form>` elements. Please refer to the section on [form controls](/getting-started/form-controls) to learn more about form submission and client-side validation.
@@ -31,9 +29,7 @@ Use the `rows` attribute to change the number of text rows that get shown.
 ```jsx react
 import { SlTextarea } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlTextarea rows={2} />
-);
+const App = () => <SlTextarea rows={2} />;
 ```
 
 ### Placeholders
@@ -47,9 +43,7 @@ Use the `placeholder` attribute to add a placeholder.
 ```jsx react
 import { SlTextarea } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlTextarea placeholder="Type something" />
-);
+const App = () => <SlTextarea placeholder="Type something" />;
 ```
 
 ### Filled Textareas
@@ -63,9 +57,7 @@ Add the `filled` attribute to draw a filled textarea.
 ```jsx react
 import { SlTextarea } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlTextarea placeholder="Type something" filled />
-);
+const App = () => <SlTextarea placeholder="Type something" filled />;
 ```
 
 ### Disabled
@@ -79,9 +71,7 @@ Use the `disabled` attribute to disable a textarea.
 ```jsx react
 import { SlTextarea } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlTextarea placeholder="Textarea" disabled />
-);
+const App = () => <SlTextarea placeholder="Textarea" disabled />;
 ```
 
 ### Sizes
@@ -90,9 +80,9 @@ Use the `size` attribute to change a textarea's size.
 
 ```html preview
 <sl-textarea placeholder="Small" size="small"></sl-textarea>
-<br>
+<br />
 <sl-textarea placeholder="Medium" size="medium"></sl-textarea>
-<br>
+<br />
 <sl-textarea placeholder="Large" size="large"></sl-textarea>
 ```
 
@@ -121,9 +111,7 @@ Use the `label` attribute to give the textarea an accessible label. For labels t
 ```jsx react
 import { SlTextarea } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlTextarea label="Comments" />
-);
+const App = () => <SlTextarea label="Comments" />;
 ```
 
 ### Help Text
@@ -131,22 +119,13 @@ const App = () => (
 Add descriptive help text to a textarea with the `help-text` attribute. For help texts that contain HTML, use the `help-text` slot instead.
 
 ```html preview
-<sl-textarea 
-  label="Feedback" 
-  help-text="Please tell us what you think."
->
-</sl-textarea>
+<sl-textarea label="Feedback" help-text="Please tell us what you think."> </sl-textarea>
 ```
 
 ```jsx react
 import { SlTextarea } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlTextarea
-    label="Feedback"
-    help-text="Please tell us what you think."
-  />
-);
+const App = () => <SlTextarea label="Feedback" help-text="Please tell us what you think." />;
 ```
 
 ### Prevent Resizing
@@ -160,9 +139,7 @@ By default, textareas can be resized vertically by the user. To prevent resizing
 ```jsx react
 import { SlTextarea } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlTextarea resize="none" />
-);
+const App = () => <SlTextarea resize="none" />;
 ```
 
 ### Expand with Content
@@ -176,9 +153,7 @@ Textareas will automatically resize to expand to fit their content when `resize`
 ```jsx react
 import { SlTextarea } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlTextarea resize="auto" />
-);
+const App = () => <SlTextarea resize="auto" />;
 ```
 
 [component-metadata:sl-textarea]

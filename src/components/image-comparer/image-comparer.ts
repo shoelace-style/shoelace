@@ -1,13 +1,12 @@
-import { LitElement, html } from 'lit';
+import { html, LitElement } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
-import styles from './image-comparer.styles';
 import '~/components/icon/icon';
-import { autoIncrement } from '~/internal/auto-increment';
 import { drag } from '~/internal/drag';
 import { emit } from '~/internal/event';
 import { clamp } from '~/internal/math';
 import { watch } from '~/internal/watch';
+import styles from './image-comparer.styles';
 
 /**
  * @since 2.0
@@ -21,7 +20,7 @@ import { watch } from '~/internal/watch';
  *
  * @event sl-change - Emitted when the position changes.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  * @csspart before - The container that holds the "before" image.
  * @csspart after - The container that holds the "after" image.
  * @csspart divider - The divider that separates the images.
@@ -36,9 +35,6 @@ export default class SlImageComparer extends LitElement {
 
   @query('.image-comparer') base: HTMLElement;
   @query('.image-comparer__handle') handle: HTMLElement;
-
-  private readonly attrId = autoIncrement();
-  private readonly containerId = `comparer-container-${this.attrId}`;
 
   /** The position of the divider as a percentage. */
   @property({ type: Number, reflect: true }) position = 50;
@@ -85,7 +81,7 @@ export default class SlImageComparer extends LitElement {
 
   render() {
     return html`
-      <div part="base" class="image-comparer" @keydown=${this.handleKeyDown} id=${this.containerId}>
+      <div part="base" id="image-comparer" class="image-comparer" @keydown=${this.handleKeyDown}>
         <div class="image-comparer__image">
           <div part="before" class="image-comparer__before">
             <slot name="before"></slot>
@@ -114,7 +110,7 @@ export default class SlImageComparer extends LitElement {
             aria-valuenow=${this.position}
             aria-valuemin="0"
             aria-valuemax="100"
-            aria-controls=${this.containerId}
+            aria-controls="image-comparer"
             tabindex="0"
           >
             <slot name="handle-icon">

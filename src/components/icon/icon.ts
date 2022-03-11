@@ -1,12 +1,12 @@
-import { LitElement, html } from 'lit';
+import { html, LitElement } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
-import styles from './icon.styles';
-import { getIconLibrary, watchIcon, unwatchIcon } from './library';
-import { requestIcon } from './request';
 import { emit } from '~/internal/event';
 import { watch } from '~/internal/watch';
+import styles from './icon.styles';
+import { getIconLibrary, unwatchIcon, watchIcon } from './library';
+import { requestIcon } from './request';
 
 const parser = new DOMParser();
 
@@ -17,7 +17,7 @@ const parser = new DOMParser();
  * @event sl-load - Emitted when the icon has loaded.
  * @event {{ status: number }} sl-error - Emitted when the icon fails to load due to an error.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  */
 @customElement('sl-icon')
 export default class SlIcon extends LitElement {

@@ -3,11 +3,11 @@ import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { html, literal } from 'lit/static-html.js';
-import styles from './button.styles';
 import '~/components/spinner/spinner';
 import { emit } from '~/internal/event';
 import { FormSubmitController } from '~/internal/form-control';
 import { HasSlotController } from '~/internal/slot';
+import styles from './button.styles';
 
 /**
  * @since 2.0
@@ -22,7 +22,7 @@ import { HasSlotController } from '~/internal/slot';
  * @slot prefix - Used to prepend an icon or similar element to the button.
  * @slot suffix - Used to append an icon or similar element to the button.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  * @csspart prefix - The prefix container.
  * @csspart label - The button's label.
  * @csspart suffix - The suffix container.
@@ -34,7 +34,20 @@ export default class SlButton extends LitElement {
 
   @query('.button') button: HTMLButtonElement | HTMLLinkElement;
 
-  private readonly formSubmitController = new FormSubmitController(this);
+  private readonly formSubmitController = new FormSubmitController(this, {
+    form: (input: HTMLInputElement) => {
+      // Buttons support a form attribute that points to an arbitrary form, so if this attribute it set we need to query
+      // the form from the same root using its id
+      if (input.hasAttribute('form')) {
+        const doc = input.getRootNode() as Document | ShadowRoot;
+        const formId = input.getAttribute('form')!;
+        return doc.getElementById(formId) as HTMLFormElement;
+      }
+
+      // Fall back to the closest containing form
+      return input.closest('form');
+    }
+  });
   private readonly hasSlotController = new HasSlotController(this, '[default]', 'prefix', 'suffix');
 
   @state() private hasFocus = false;
@@ -85,6 +98,24 @@ export default class SlButton extends LitElement {
   /** Tells the browser to download the linked file as this filename. Only used when `href` is set. */
   @property() download?: string;
 
+  /**
+   * The "form owner" to associate the button with. If omitted, the closest containing form will be used instead. The
+   * value of this attribute must be an id of a form in the same document or shadow root as the button.
+   */
+  @property() form: string;
+
+  /** Used to override the form owner's `action` attribute. */
+  @property({ attribute: 'formaction' }) formAction: string;
+
+  /** Used to override the form owner's `method` attribute.  */
+  @property({ attribute: 'formmethod' }) formMethod: 'post' | 'get';
+
+  /** Used to override the form owner's `novalidate` attribute. */
+  @property({ attribute: 'formnovalidate', type: Boolean }) formNoValidate: boolean;
+
+  /** Used to override the form owner's `target` attribute. */
+  @property({ attribute: 'formtarget' }) formTarget: '_self' | '_blank' | '_parent' | '_top' | string;
+
   /** Simulates a click on the button. */
   click() {
     this.button.click();
@@ -118,7 +149,7 @@ export default class SlButton extends LitElement {
     }
 
     if (this.type === 'submit') {
-      this.formSubmitController.submit();
+      this.formSubmitController.submit(this);
     }
   }
 

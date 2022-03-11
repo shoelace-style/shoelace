@@ -262,6 +262,24 @@ Parts let you target a specific element inside the component's shadow DOM but, b
 
 This convention can be relaxed when the developer experience is greatly improved by not following these suggestions.
 
+### Naming CSS Parts
+
+While CSS parts can be named [virtually anything](https://www.abeautifulsite.net/posts/valid-names-for-css-parts/), within Shoelace they must use the kebab-case convention and lowercase letters. Modifiers must be delimited by `--` like in BEM. This is useful for allowing users to target parts with various states, such as `my-part--focus`.
+
+When composing elements, use `part` to export the host element and `exportparts` to export its parts.
+
+```js
+render() {
+  return html`
+    <div part="base">
+      <sl-icon part="icon" exportparts="base:icon__base" ...></sl-icon>
+    </div>
+  `;
+}
+```
+
+This results in a consistent, easy to understand structure for parts. In this example, the `icon` part will target the host element and the `icon__base` part will target the icon's `base` part.
+
 ### Form Controls
 
 Form controls should support submission and validation through the following conventions:

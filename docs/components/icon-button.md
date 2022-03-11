@@ -13,9 +13,7 @@ For a full list of icons that come bundled with Shoelace, refer to the [icon com
 ```jsx react
 import { SlIconButton } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlIconButton name="gear" label="Settings" />
-);
+const App = () => <SlIconButton name="gear" label="Settings" />;
 ```
 
 ## Examples
@@ -111,14 +109,7 @@ Use the `href` attribute to convert the button to a link.
 ```jsx react
 import { SlIconButton } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlIconButton 
-    name="gear" 
-    label="Settings" 
-    href="https://example.com" 
-    target="_blank"
-  />
-);
+const App = () => <SlIconButton name="gear" label="Settings" href="https://example.com" target="_blank" />;
 ```
 
 ### Icon Button with Tooltip
@@ -152,9 +143,7 @@ Use the `disabled` attribute to disable the icon button.
 ```jsx react
 import { SlIconButton } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlIconButton name="gear" label="Settings" disabled />
-);
+const App = () => <SlIconButton name="gear" label="Settings" disabled />;
 ```
 
 [component-metadata:sl-icon-button]

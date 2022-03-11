@@ -9,7 +9,7 @@ describe('<sl-avatar>', () => {
       el = await fixture<SlAvatar>(html` <sl-avatar label="Avatar"></sl-avatar> `);
     });
 
-    it('passes accessibility test', async () => {
+    it('should pass accessibility tests', async () => {
       await expect(el).to.be.accessible();
     });
 
@@ -27,7 +27,7 @@ describe('<sl-avatar>', () => {
       el = await fixture<SlAvatar>(html`<sl-avatar image="${image}" label="${label}"></sl-avatar>`);
     });
 
-    it('passes accessibility test', async () => {
+    it('should pass accessibility tests', async () => {
       /**
        * The image element itself is ancillary, because it's parent container contains the
        * aria-label which dictates what "sl-avatar" is. This also implies that label text will
@@ -57,7 +57,7 @@ describe('<sl-avatar>', () => {
       el = await fixture<SlAvatar>(html`<sl-avatar initials="${initials}" label="Avatar"></sl-avatar>`);
     });
 
-    it('passes accessibility test', async () => {
+    it('should pass accessibility tests', async () => {
       await expect(el).to.be.accessible();
     });
 
@@ -74,7 +74,7 @@ describe('<sl-avatar>', () => {
         el = await fixture<SlAvatar>(html`<sl-avatar shape="${shape}" label="Shaped avatar"></sl-avatar>`);
       });
 
-      it('passes accessibility test', async () => {
+      it('should pass accessibility tests', async () => {
         await expect(el).to.be.accessible();
       });
 
@@ -92,7 +92,7 @@ describe('<sl-avatar>', () => {
       el = await fixture<SlAvatar>(html`<sl-avatar label="Avatar"><span slot="icon">random content</span></sl-avatar>`);
     });
 
-    it('passes accessibility test', async () => {
+    it('should pass accessibility tests', async () => {
       await expect(el).to.be.accessible();
     });
 

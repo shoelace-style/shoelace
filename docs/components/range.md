@@ -11,9 +11,7 @@ Ranges allow the user to select a single value within a given range using a slid
 ```jsx react
 import { SlRange } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlRange />
-);
+const App = () => <SlRange />;
 ```
 
 ?> This component works with standard `<form>` elements. Please refer to the section on [form controls](/getting-started/form-controls) to learn more about form submission and client-side validation.
@@ -31,9 +29,7 @@ Use the `min` and `max` attributes to set the range's minimum and maximum values
 ```jsx react
 import { SlRange } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlRange min={0} max={10} step={1} />
-);
+const App = () => <SlRange min={0} max={10} step={1} />;
 ```
 
 ### Disabled
@@ -44,13 +40,10 @@ Use the `disabled` attribute to disable a slider.
 <sl-range disabled></sl-range>
 ```
 
-
 ```jsx react
 import { SlRange } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlRange disabled />
-);
+const App = () => <SlRange disabled />;
 ```
 
 ### Tooltip Placement
@@ -64,9 +57,7 @@ By default, the tooltip is shown on top. Set `tooltip` to `bottom` to show it be
 ```jsx react
 import { SlRange } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlRange tooltip="bottom" />
-);
+const App = () => <SlRange tooltip="bottom" />;
 ```
 
 ### Disable the Tooltip
@@ -80,9 +71,7 @@ To disable the tooltip, set `tooltip` to `none`.
 ```jsx react
 import { SlRange } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlRange tooltip="none" />
-);
+const App = () => <SlRange tooltip="none" />;
 ```
 
 ### Custom Track Colors
@@ -90,17 +79,19 @@ const App = () => (
 You can customize the active and inactive portions of the track using the `--track-color-active` and `--track-color-inactive` custom properties.
 
 ```html preview
-<sl-range style="
+<sl-range
+  style="
   --track-color-active: var(--sl-color-primary-600);
   --track-color-inactive: var(--sl-color-primary-100);
-"></sl-range>
+"
+></sl-range>
 ```
 
 ```jsx react
 import { SlRange } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
-  <SlRange 
+  <SlRange
     style={{
       '--track-color-active': 'var(--sl-color-primary-600)',
       '--track-color-inactive': 'var(--sl-color-primary-200)'
@@ -125,14 +116,7 @@ You can change the tooltip's content by setting the `tooltipFormatter` property 
 ```jsx react
 import { SlRange } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlRange 
-    min={0}
-    max={100}
-    step={1}
-    tooltipFormatter={value => `Total - ${value}%`}
-  />
-);
+const App = () => <SlRange min={0} max={100} step={1} tooltipFormatter={value => `Total - ${value}%`} />;
 ```
 
 ### Labels
@@ -146,9 +130,7 @@ Use the `label` attribute to give the range an accessible label. For labels that
 ```jsx react
 import { SlRange } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlRange label="Volume" min={0} max={100} />
-);
+const App = () => <SlRange label="Volume" min={0} max={100} />;
 ```
 
 ### Help Text
@@ -156,8 +138,8 @@ const App = () => (
 Add descriptive help text to a range with the `help-text` attribute. For help texts that contain HTML, use the `help-text` slot instead.
 
 ```html preview
-<sl-range 
-  label="Volume" 
+<sl-range
+  label="Volume"
   help-text="Controls the volume of the current song."
   min="0"
   max="100"
@@ -167,14 +149,7 @@ Add descriptive help text to a range with the `help-text` attribute. For help te
 ```jsx react
 import { SlRange } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlRange 
-    label="Volume" 
-    help-text="Controls the volume of the current song."
-    min={0}
-    max={100}
-  />
-);
+const App = () => <SlRange label="Volume" help-text="Controls the volume of the current song." min={0} max={100} />;
 ```
 
 [component-metadata:sl-range]

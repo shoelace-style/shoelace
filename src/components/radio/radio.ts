@@ -1,12 +1,12 @@
-import { LitElement, html } from 'lit';
+import { html, LitElement } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
-import styles from './radio.styles';
 import { emit } from '~/internal/event';
 import { FormSubmitController } from '~/internal/form-control';
 import { watch } from '~/internal/watch';
+import styles from './radio.styles';
 
 /**
  * @since 2.0
@@ -18,7 +18,7 @@ import { watch } from '~/internal/watch';
  * @event sl-change - Emitted when the control's checked state changes.
  * @event sl-focus - Emitted when the control gains focus.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  * @csspart control - The radio control.
  * @csspart checked-icon - The container the wraps the checked icon.
  * @csspart label - The radio label.
@@ -104,7 +104,7 @@ export default class SlRadio extends LitElement {
       return [this];
     }
 
-    return [...radioGroup.querySelectorAll('sl-radio')].filter((radio: this) => radio.name === this.name) as this[];
+    return [...radioGroup.querySelectorAll<SlRadio>('sl-radio')].filter((radio: this) => radio.name === this.name);
   }
 
   getSiblingRadios() {

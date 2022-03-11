@@ -437,6 +437,10 @@ kbd,
   cursor: help;
 }
 
+.markdown-section .metadata-table {
+  margin-bottom: 0rem;
+}
+
 /* Iframes */
 .markdown-section iframe {
   border: none;

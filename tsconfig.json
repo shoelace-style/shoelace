@@ -26,7 +26,6 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "useUnknownInCatchVariables": true,
-    "baseUrl": ".",
     "paths": {
       "~/*": [
         "src/*"
@@ -40,7 +39,8 @@
         "transform": "typescript-transform-paths",
         "afterDeclarations": true
       }
-    ]
+    ],
+    "baseUrl": "."
   },
   "include": [
     "src"

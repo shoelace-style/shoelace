@@ -1,9 +1,9 @@
-import { LitElement, html } from 'lit';
+import { html, LitElement } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import styles from './icon-button.styles';
 import '~/components/icon/icon';
+import styles from './icon-button.styles';
 
 /**
  * @since 2.0
@@ -11,7 +11,7 @@ import '~/components/icon/icon';
  *
  * @dependency sl-icon
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  */
 @customElement('sl-icon-button')
 export default class SlIconButton extends LitElement {

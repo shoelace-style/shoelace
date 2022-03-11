@@ -1,14 +1,13 @@
-import { LitElement, html } from 'lit';
+import { html, LitElement } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
-import styles from './textarea.styles';
-import { autoIncrement } from '~/internal/auto-increment';
 import { emit } from '~/internal/event';
-import { FormSubmitController, getLabelledBy, renderFormControl } from '~/internal/form-control';
+import { FormSubmitController } from '~/internal/form-control';
 import { HasSlotController } from '~/internal/slot';
 import { watch } from '~/internal/watch';
+import styles from './textarea.styles';
 
 /**
  * @since 2.0
@@ -22,7 +21,7 @@ import { watch } from '~/internal/watch';
  * @event sl-focus - Emitted when the control gains focus.
  * @event sl-blur - Emitted when the control loses focus.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  * @csspart form-control - The form control that wraps the label, textarea, and help text.
  * @csspart label - The textarea label.
  * @csspart textarea - The textarea control.
@@ -37,10 +36,6 @@ export default class SlTextarea extends LitElement {
   // @ts-expect-error -- Controller is currently unused
   private readonly formSubmitController = new FormSubmitController(this);
   private readonly hasSlotController = new HasSlotController(this, 'help-text', 'label');
-  private readonly attrId = autoIncrement();
-  private readonly inputId = `textarea-${this.attrId}`;
-  private readonly helpTextId = `textarea-help-text-${this.attrId}`;
-  private readonly labelId = `textarea-label-${this.attrId}`;
   private resizeObserver: ResizeObserver;
 
   @state() private hasFocus = false;
@@ -83,9 +78,6 @@ export default class SlTextarea extends LitElement {
 
   /** The maximum length of input that will be considered valid. */
   @property({ type: Number }) maxlength: number;
-
-  /** A pattern to validate input against. */
-  @property() pattern: string;
 
   /** Makes the textarea a required field. */
   @property({ type: Boolean, reflect: true }) required = false;
@@ -256,73 +248,81 @@ export default class SlTextarea extends LitElement {
   render() {
     const hasLabelSlot = this.hasSlotController.test('label');
     const hasHelpTextSlot = this.hasSlotController.test('help-text');
+    const hasLabel = this.label ? true : !!hasLabelSlot;
+    const hasHelpText = this.helpText ? true : !!hasHelpTextSlot;
 
-    return renderFormControl(
-      {
-        inputId: this.inputId,
-        label: this.label,
-        labelId: this.labelId,
-        hasLabelSlot,
-        helpTextId: this.helpTextId,
-        helpText: this.helpText,
-        hasHelpTextSlot,
-        size: this.size
-      },
-      html`
-        <div
-          part="base"
-          class=${classMap({
-            textarea: true,
-            'textarea--small': this.size === 'small',
-            'textarea--medium': this.size === 'medium',
-            'textarea--large': this.size === 'large',
-            'textarea--standard': !this.filled,
-            'textarea--filled': this.filled,
-            'textarea--disabled': this.disabled,
-            'textarea--focused': this.hasFocus,
-            'textarea--empty': this.value.length === 0,
-            'textarea--invalid': this.invalid,
-            'textarea--resize-none': this.resize === 'none',
-            'textarea--resize-vertical': this.resize === 'vertical',
-            'textarea--resize-auto': this.resize === 'auto'
-          })}
-        >
-          <textarea
-            part="textarea"
-            id=${this.inputId}
-            class="textarea__control"
-            name=${ifDefined(this.name)}
-            .value=${live(this.value)}
-            ?disabled=${this.disabled}
-            ?readonly=${this.readonly}
-            ?required=${this.required}
-            placeholder=${ifDefined(this.placeholder)}
-            rows=${ifDefined(this.rows)}
-            minlength=${ifDefined(this.minlength)}
-            maxlength=${ifDefined(this.maxlength)}
-            autocapitalize=${ifDefined(this.autocapitalize)}
-            autocorrect=${ifDefined(this.autocorrect)}
-            ?autofocus=${this.autofocus}
-            spellcheck=${ifDefined(this.spellcheck)}
-            inputmode=${ifDefined(this.inputmode)}
-            aria-labelledby=${ifDefined(
-              getLabelledBy({
-                label: this.label,
-                labelId: this.labelId,
-                hasLabelSlot,
-                helpText: this.helpText,
-                helpTextId: this.helpTextId,
-                hasHelpTextSlot
-              })
-            )}
-            @change=${this.handleChange}
-            @input=${this.handleInput}
-            @focus=${this.handleFocus}
-            @blur=${this.handleBlur}
-          ></textarea>
+    return html`
+      <div
+        part="form-control"
+        class=${classMap({
+          'form-control': true,
+          'form-control--small': this.size === 'small',
+          'form-control--medium': this.size === 'medium',
+          'form-control--large': this.size === 'large',
+          'form-control--has-label': hasLabel,
+          'form-control--has-help-text': hasHelpText
+        })}
+      >
+        <label part="label" class="form-control__label" for="input" aria-hidden=${hasLabel ? 'false' : 'true'}>
+          <slot name="label">${this.label}</slot>
+        </label>
+
+        <div class="form-control__input">
+          <div
+            part="base"
+            class=${classMap({
+              textarea: true,
+              'textarea--small': this.size === 'small',
+              'textarea--medium': this.size === 'medium',
+              'textarea--large': this.size === 'large',
+              'textarea--standard': !this.filled,
+              'textarea--filled': this.filled,
+              'textarea--disabled': this.disabled,
+              'textarea--focused': this.hasFocus,
+              'textarea--empty': this.value.length === 0,
+              'textarea--invalid': this.invalid,
+              'textarea--resize-none': this.resize === 'none',
+              'textarea--resize-vertical': this.resize === 'vertical',
+              'textarea--resize-auto': this.resize === 'auto'
+            })}
+          >
+            <textarea
+              part="textarea"
+              id="input"
+              class="textarea__control"
+              name=${ifDefined(this.name)}
+              .value=${live(this.value)}
+              ?disabled=${this.disabled}
+              ?readonly=${this.readonly}
+              ?required=${this.required}
+              placeholder=${ifDefined(this.placeholder)}
+              rows=${ifDefined(this.rows)}
+              minlength=${ifDefined(this.minlength)}
+              maxlength=${ifDefined(this.maxlength)}
+              autocapitalize=${ifDefined(this.autocapitalize)}
+              autocorrect=${ifDefined(this.autocorrect)}
+              ?autofocus=${this.autofocus}
+              spellcheck=${ifDefined(this.spellcheck)}
+              inputmode=${ifDefined(this.inputmode)}
+              aria-describedby="help-text"
+              @change=${this.handleChange}
+              @input=${this.handleInput}
+              @focus=${this.handleFocus}
+              @blur=${this.handleBlur}
+            ></textarea>
+          </div>
         </div>
-      `
-    );
+
+        <div
+          part="help-text"
+          id="help-text"
+          class="form-control__help-text"
+          aria-hidden=${hasHelpText ? 'false' : 'true'}
+        >
+          <slot name="help-text">${this.helpText}</slot>
+        </div>
+      </div>
+    `;
   }
 }
 

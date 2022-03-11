@@ -8,7 +8,7 @@ import styles from './menu-label.styles';
  *
  * @slot - The menu label's content.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  */
 @customElement('sl-menu-label')
 export default class SlMenuLabel extends LitElement {

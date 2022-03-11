@@ -1,8 +1,8 @@
-import { LitElement, html } from 'lit';
+import { html, LitElement } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
-import styles from './breadcrumb.styles';
 import type SlBreadcrumbItem from '~/components/breadcrumb-item/breadcrumb-item';
 import '~/components/icon/icon';
+import styles from './breadcrumb.styles';
 
 /**
  * @since 2.0
@@ -13,7 +13,7 @@ import '~/components/icon/icon';
  *
  * @dependency sl-icon
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  */
 @customElement('sl-breadcrumb')
 export default class SlBreadcrumb extends LitElement {

@@ -11,9 +11,7 @@ Progress rings are used to show the progress of a determinate operation in a cir
 ```jsx react
 import { SlProgressRing } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlProgressRing value="25" />
-);
+const App = () => <SlProgressRing value="25" />;
 ```
 
 ## Examples
@@ -29,12 +27,7 @@ Use the `--size` custom property to set the diameter of the progress ring.
 ```jsx react
 import { SlProgressRing } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlProgressRing 
-    value="50" 
-    style={{ '--size': '200px' }}
-  />
-);
+const App = () => <SlProgressRing value="50" style={{ '--size': '200px' }} />;
 ```
 
 ### Track Width
@@ -48,12 +41,7 @@ Use the `--track-width` custom property to set the width of the progress ring's 
 ```jsx react
 import { SlProgressRing } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlProgressRing 
-    value="50" 
-    style={{ '--track-width': '10px' }}
-  />
-);
+const App = () => <SlProgressRing value="50" style={{ '--track-width': '10px' }} />;
 ```
 
 ### Colors
@@ -61,8 +49,8 @@ const App = () => (
 To change the color, use the `--track-color` and `--indicator-color` custom properties.
 
 ```html preview
-<sl-progress-ring 
-  value="50" 
+<sl-progress-ring
+  value="50"
   style="
     --track-color: pink; 
     --indicator-color: deeppink;
@@ -74,9 +62,9 @@ To change the color, use the `--track-color` and `--indicator-color` custom prop
 import { SlProgressRing } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
-  <SlProgressRing 
-    value="50" 
-    style={{ 
+  <SlProgressRing
+    value="50"
+    style={{
       '--track-color': 'pink',
       '--indicator-color': 'deeppink'
     }}
@@ -95,12 +83,7 @@ Use the `label` attribute to label the progress ring and tell assistive devices 
 ```jsx react
 import { SlProgressRing } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlProgressRing 
-    value="50" 
-    label="Upload progress"
-  />
-);
+const App = () => <SlProgressRing value="50" label="Upload progress" />;
 ```
 
 ### Showing Values
@@ -110,7 +93,7 @@ Use the default slot to show a label inside the progress ring.
 ```html preview
 <sl-progress-ring value="50" class="progress-ring-values" style="margin-bottom: .5rem;">50%</sl-progress-ring>
 
-<br>
+<br />
 
 <sl-button circle><sl-icon name="dash"></sl-icon></sl-button>
 <sl-button circle><sl-icon name="plus"></sl-icon></sl-button>
@@ -127,7 +110,7 @@ Use the default slot to show a label inside the progress ring.
   });
 
   subtractButton.addEventListener('click', () => {
-    const value = Math.max(0, progressRing.value - 10)
+    const value = Math.max(0, progressRing.value - 10);
     progressRing.value = value;
     progressRing.textContent = `${value}%`;
   });
@@ -136,11 +119,7 @@ Use the default slot to show a label inside the progress ring.
 
 ```jsx react
 import { useState } from 'react';
-import { 
-  SlButton,
-  SlIcon,
-  SlProgressRing
-} from '@shoelace-style/shoelace/dist/react';
+import { SlButton, SlIcon, SlProgressRing } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => {
   const [value, setValue] = useState(50);
@@ -154,10 +133,7 @@ const App = () => {
 
   return (
     <>
-      <SlProgressRing 
-        value={value} 
-        style={{ marginBottom: '.5rem' }}
-      >
+      <SlProgressRing value={value} style={{ marginBottom: '.5rem' }}>
         {value}%
       </SlProgressRing>
 

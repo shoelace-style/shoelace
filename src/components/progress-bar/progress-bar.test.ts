@@ -9,7 +9,7 @@ describe('<sl-progress-bar>', () => {
       el = await fixture<SlProgressBar>(html`<sl-progress-bar value="25"></sl-progress-bar>`);
     });
 
-    it('should render a component that passes accessibility test.', async () => {
+    it('should pass accessibility tests', async () => {
       await expect(el).to.be.accessible();
     });
   });
@@ -26,7 +26,7 @@ describe('<sl-progress-bar>', () => {
       indicator = el.shadowRoot!.querySelector('[part="indicator"]')!;
     });
 
-    it('should render a component that passes accessibility test.', async () => {
+    it('should pass accessibility tests', async () => {
       await expect(el).to.be.accessible();
     });
 
@@ -49,7 +49,7 @@ describe('<sl-progress-bar>', () => {
       base = el.shadowRoot!.querySelector('[part="base"]')!;
     });
 
-    it('should render a component that passes accessibility test.', async () => {
+    it('should pass accessibility tests', async () => {
       await expect(el).to.be.accessible();
     });
 
@@ -65,7 +65,7 @@ describe('<sl-progress-bar>', () => {
       );
     });
 
-    it('should render a component that passes accessibility test.', async () => {
+    it('should pass accessibility tests', async () => {
       await expect(el).to.be.accessible();
     });
   });
@@ -80,7 +80,7 @@ describe('<sl-progress-bar>', () => {
       );
     });
 
-    it('should render a component that passes accessibility test.', async () => {
+    it('should pass accessibility tests', async () => {
       await expect(el).to.be.accessible();
     });
   });

@@ -1,13 +1,12 @@
-import type { Instance as PopperInstance } from '@popperjs/core/dist/esm';
-import { createPopper } from '@popperjs/core/dist/esm';
-import { LitElement, html } from 'lit';
+import { arrow, autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
+import { html, LitElement } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import styles from './tooltip.styles';
 import { animateTo, parseDuration, stopAnimations } from '~/internal/animate';
 import { emit, waitForEvent } from '~/internal/event';
 import { watch } from '~/internal/watch';
-import { setDefaultAnimation, getAnimation } from '~/utilities/animation-registry';
+import { getAnimation, setDefaultAnimation } from '~/utilities/animation-registry';
+import styles from './tooltip.styles';
 
 /**
  * @since 2.0
@@ -21,7 +20,7 @@ import { setDefaultAnimation, getAnimation } from '~/utilities/animation-registr
  * @event sl-hide - Emitted when the tooltip begins to hide.
  * @event sl-after-hide - Emitted after the tooltip has hidden and all animations are complete.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  *
  * @cssproperty --max-width - The maximum width of the tooltip.
  * @cssproperty --hide-delay - The amount of time to wait before hiding the tooltip when hovering.
@@ -36,10 +35,11 @@ export default class SlTooltip extends LitElement {
 
   @query('.tooltip-positioner') positioner: HTMLElement;
   @query('.tooltip') tooltip: HTMLElement;
+  @query('.tooltip__arrow') arrow: HTMLElement;
 
   private target: HTMLElement;
-  private popover?: PopperInstance;
   private hoverTimeout: number;
+  private positionerCleanup: ReturnType<typeof autoUpdate> | undefined;
 
   /** The tooltip's content. Alternatively, you can use the content slot. */
   @property() content = '';
@@ -103,14 +103,18 @@ export default class SlTooltip extends LitElement {
       this.addEventListener('keydown', this.handleKeyDown);
       this.addEventListener('mouseover', this.handleMouseOver);
       this.addEventListener('mouseout', this.handleMouseOut);
-
       this.target = this.getTarget();
-      this.syncOptions();
     });
   }
 
-  firstUpdated() {
+  async firstUpdated() {
     this.tooltip.hidden = !this.open;
+
+    // If the tooltip is visible on init, update its position
+    if (this.open) {
+      await this.updateComplete;
+      this.updatePositioner();
+    }
   }
 
   disconnectedCallback() {
@@ -121,8 +125,7 @@ export default class SlTooltip extends LitElement {
     this.removeEventListener('keydown', this.handleKeyDown);
     this.removeEventListener('mouseover', this.handleMouseOver);
     this.removeEventListener('mouseout', this.handleMouseOut);
-
-    this.popover?.destroy();
+    this.stopPositioner();
   }
 
   /** Shows the tooltip. */
@@ -215,28 +218,7 @@ export default class SlTooltip extends LitElement {
       emit(this, 'sl-show');
 
       await stopAnimations(this.tooltip);
-
-      this.popover?.destroy();
-
-      this.popover = createPopper(this.target, this.positioner, {
-        placement: this.placement,
-        strategy: this.hoist ? 'fixed' : 'absolute',
-        modifiers: [
-          {
-            name: 'flip',
-            options: {
-              boundary: 'viewport'
-            }
-          },
-          {
-            name: 'offset',
-            options: {
-              offset: [this.skidding, this.distance]
-            }
-          }
-        ]
-      });
-
+      this.startPositioner();
       this.tooltip.hidden = false;
       const { keyframes, options } = getAnimation(this, 'tooltip.show');
       await animateTo(this.tooltip, keyframes, options);
@@ -250,26 +232,19 @@ export default class SlTooltip extends LitElement {
       const { keyframes, options } = getAnimation(this, 'tooltip.hide');
       await animateTo(this.tooltip, keyframes, options);
       this.tooltip.hidden = true;
-
-      this.popover?.destroy();
+      this.stopPositioner();
 
       emit(this, 'sl-after-hide');
     }
   }
 
-  @watch('placement')
-  @watch('distance')
-  @watch('skidding')
-  @watch('hoist')
-  handleOptionsChange() {
-    this.syncOptions();
-  }
-
   @watch('content')
-  handleContentChange() {
-    if (this.open) {
-      this.popover?.update();
-    }
+  @watch('distance')
+  @watch('hoist')
+  @watch('placement')
+  @watch('skidding')
+  handleOptionsChange() {
+    this.updatePositioner();
   }
 
   @watch('disabled')
@@ -284,30 +259,63 @@ export default class SlTooltip extends LitElement {
     return triggers.includes(triggerType);
   }
 
-  syncOptions() {
-    this.popover?.setOptions({
+  private startPositioner() {
+    this.stopPositioner();
+    this.updatePositioner();
+    this.positionerCleanup = autoUpdate(this.target, this.positioner, this.updatePositioner.bind(this));
+  }
+
+  private updatePositioner() {
+    if (!this.open || !this.target || !this.positioner) {
+      return;
+    }
+
+    computePosition(this.target, this.positioner, {
       placement: this.placement,
-      strategy: this.hoist ? 'fixed' : 'absolute',
-      modifiers: [
-        {
-          name: 'flip',
-          options: {
-            boundary: 'viewport'
-          }
-        },
-        {
-          name: 'offset',
-          options: {
-            offset: [this.skidding, this.distance]
-          }
-        }
-      ]
+      middleware: [
+        offset({ mainAxis: this.distance, crossAxis: this.skidding }),
+        flip(),
+        shift(),
+        arrow({
+          element: this.arrow,
+          padding: 10 // min distance from the edge
+        })
+      ],
+      strategy: this.hoist ? 'fixed' : 'absolute'
+    }).then(({ x, y, middlewareData, placement }) => {
+      const arrowX = middlewareData.arrow!.x;
+      const arrowY = middlewareData.arrow!.y;
+      const staticSide = { top: 'bottom', right: 'left', bottom: 'top', left: 'right' }[placement.split('-')[0]]!;
+
+      this.positioner.setAttribute('data-placement', placement);
+
+      Object.assign(this.positioner.style, {
+        position: this.hoist ? 'fixed' : 'absolute',
+        left: `${x}px`,
+        top: `${y}px`
+      });
+
+      Object.assign(this.arrow.style, {
+        left: typeof arrowX === 'number' ? `${arrowX}px` : '',
+        top: typeof arrowY === 'number' ? `${arrowY}px` : '',
+        right: '',
+        bottom: '',
+        [staticSide]: 'calc(var(--sl-tooltip-arrow-size) * -1)'
+      });
     });
+  }
+
+  private stopPositioner() {
+    if (this.positionerCleanup) {
+      this.positionerCleanup();
+      this.positionerCleanup = undefined;
+      this.positioner.removeAttribute('data-placement');
+    }
   }
 
   render() {
     return html`
-      <div class="tooltip-content" aria-describedby="tooltip">
+      <div class="tooltip-target" aria-describedby="tooltip">
         <slot></slot>
       </div>
 
@@ -322,7 +330,10 @@ export default class SlTooltip extends LitElement {
           role="tooltip"
           aria-hidden=${this.open ? 'false' : 'true'}
         >
-          <slot name="content"> ${this.content} </slot>
+          <div class="tooltip__arrow"></div>
+          <div class="tooltip__content">
+            <slot name="content"> ${this.content} </slot>
+          </div>
         </div>
       </div>
     `;

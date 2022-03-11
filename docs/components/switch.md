@@ -2,7 +2,7 @@
 
 [component-header:sl-switch]
 
-Switches allow the user to toggle an option on or off. 
+Switches allow the user to toggle an option on or off.
 
 ```html preview
 <sl-switch>Switch</sl-switch>
@@ -11,9 +11,7 @@ Switches allow the user to toggle an option on or off.
 ```jsx react
 import { SlSwitch } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlSwitch>Switch</SlSwitch>
-);
+const App = () => <SlSwitch>Switch</SlSwitch>;
 ```
 
 ?> This component works with standard `<form>` elements. Please refer to the section on [form controls](/getting-started/form-controls) to learn more about form submission and client-side validation.
@@ -31,9 +29,7 @@ Use the `checked` attribute to activate the switch.
 ```jsx react
 import { SlSwitch } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlSwitch checked>Checked</SlSwitch>
-);
+const App = () => <SlSwitch checked>Checked</SlSwitch>;
 ```
 
 ### Disabled
@@ -47,9 +43,7 @@ Use the `disabled` attribute to disable the switch.
 ```jsx react
 import { SlSwitch } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlSwitch disabled>Disabled</SlSwitch>
-);
+const App = () => <SlSwitch disabled>Disabled</SlSwitch>;
 ```
 
 ### Custom Size
@@ -64,12 +58,12 @@ Use the available custom properties to make the switch a different size.
 import { SlSwitch } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
-  <SlSwitch 
+  <SlSwitch
     style={{
       '--width': '80px',
       '--height': '32px',
       '--thumb-size': '26px'
-    }} 
+    }}
   />
 );
 ```

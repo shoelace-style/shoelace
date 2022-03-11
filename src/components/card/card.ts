@@ -1,8 +1,8 @@
-import { LitElement, html } from 'lit';
+import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import styles from './card.styles';
 import { HasSlotController } from '~/internal/slot';
+import styles from './card.styles';
 
 /**
  * @since 2.0
@@ -13,7 +13,7 @@ import { HasSlotController } from '~/internal/slot';
  * @slot footer - The card's footer.
  * @slot image - The card's image.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  * @csspart image - The card's image, if present.
  * @csspart header - The card's header, if present.
  * @csspart body - The card's body.

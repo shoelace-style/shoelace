@@ -1,9 +1,9 @@
-import { LitElement, html } from 'lit';
+import { html, LitElement } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import styles from './menu-item.styles';
 import '~/components/icon/icon';
 import { watch } from '~/internal/watch';
+import styles from './menu-item.styles';
 
 /**
  * @since 2.0
@@ -15,8 +15,7 @@ import { watch } from '~/internal/watch';
  * @slot prefix - Used to prepend an icon or similar element to the menu item.
  * @slot suffix - Used to append an icon or similar element to the menu item.
  *
- * @csspart base - The component's base wrapper.
- * @csspart checked-icon - The container that wraps the checked icon.
+ * @csspart base - The component's internal wrapper.
  * @csspart prefix - The prefix container.
  * @csspart label - The menu item label.
  * @csspart suffix - The suffix container.
@@ -57,16 +56,13 @@ export default class SlMenuItem extends LitElement {
         class=${classMap({
           'menu-item': true,
           'menu-item--checked': this.checked,
-          'menu-item--disabled': this.disabled
+          'menu-item--disabled': this.disabled,
+          'menu-item--has-submenu': false // reserved for future use
         })}
       >
-        <sl-icon
-          part="checked-icon"
-          class="menu-item__check"
-          name="check"
-          library="system"
-          aria-hidden="true"
-        ></sl-icon>
+        <span class="menu-item__check">
+          <sl-icon name="check-lg" library="default" aria-hidden="true"></sl-icon>
+        </span>
 
         <span part="prefix" class="menu-item__prefix">
           <slot name="prefix"></slot>
@@ -78,6 +74,10 @@ export default class SlMenuItem extends LitElement {
 
         <span part="suffix" class="menu-item__suffix">
           <slot name="suffix"></slot>
+        </span>
+
+        <span class="menu-item__chevron">
+          <sl-icon name="chevron-right" library="default" aria-hidden="true"></sl-icon>
         </span>
       </div>
     `;

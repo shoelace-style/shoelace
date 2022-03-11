@@ -12,14 +12,14 @@ The mutation observer will report changes to the content it wraps through the `s
     <sl-button variant="primary">Click to mutate</sl-button>
   </sl-mutation-observer>
 
-  <br>
+  <br />
   👆 Click the button and watch the console
 
   <script>
     const container = document.querySelector('.mutation-overview');
     const mutationObserver = container.querySelector('sl-mutation-observer');
     const button = container.querySelector('sl-button');
-    const variants = ['primary', 'success', 'neutral', 'warning', 'danger']; 
+    const variants = ['primary', 'success', 'neutral', 'warning', 'danger'];
     let clicks = 0;
 
     // Change the button's variant attribute
@@ -57,7 +57,7 @@ const css = `
   }
 `;
 
-const variants = ['primary', 'success', 'neutral', 'warning', 'danger']; 
+const variants = ['primary', 'success', 'neutral', 'warning', 'danger'];
 let clicks = 0;
 
 const App = () => {
@@ -70,11 +70,10 @@ const App = () => {
 
   return (
     <>
-      <SlMutationObserver 
-        attr="*"
-        onSlMutation={event => console.log(event.detail)}
-      >
-        <SlButton variant={variant} onClick={handleClick}>Click to mutate</SlButton>
+      <SlMutationObserver attr="*" onSlMutation={event => console.log(event.detail)}>
+        <SlButton variant={variant} onClick={handleClick}>
+          Click to mutate
+        </SlButton>
       </SlMutationObserver>
 
       <style>{css}</style>
@@ -134,7 +133,7 @@ Use the `child-list` attribute to watch for new child elements that are added or
   <style>
     .mutation-child-list .buttons {
       display: flex;
-      gap: .25rem;
+      gap: 0.25rem;
       flex-wrap: wrap;
       margin-bottom: 1rem;
     }
@@ -171,12 +170,11 @@ const App = () => {
   return (
     <>
       <div className="mutation-child-list">
-        <SlMutationObserver 
-          child-list 
-          onSlMutation={event => console.log(event.detail)}
-        >
+        <SlMutationObserver child-list onSlMutation={event => console.log(event.detail)}>
           <div className="buttons">
-            <SlButton variant="primary" onClick={addButton}>Add button</SlButton>
+            <SlButton variant="primary" onClick={addButton}>
+              Add button
+            </SlButton>
             {buttonIds.map(id => (
               <SlButton key={id} variant="default" onClick={() => removeButton(id)}>
                 {id}
@@ -185,7 +183,6 @@ const App = () => {
           </div>
         </SlMutationObserver>
       </div>
-
       👆 Add and remove buttons and watch the console
       <style>{css}</style>
     </>

@@ -1,7 +1,7 @@
-import { LitElement, html } from 'lit';
+import { html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import styles from './tab-panel.styles';
 import { autoIncrement } from '~/internal/auto-increment';
+import styles from './tab-panel.styles';
 
 /**
  * @since 2.0
@@ -9,7 +9,7 @@ import { autoIncrement } from '~/internal/auto-increment';
  *
  * @slot - The tab panel's content.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  *
  * @cssproperty --padding - The tab panel's padding.
  */

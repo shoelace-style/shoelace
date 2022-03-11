@@ -38,21 +38,13 @@ For websites, you'll probably want to use links instead. You can make any breadc
 
 ```html preview
 <sl-breadcrumb>
-  <sl-breadcrumb-item href="https://example.com/home">
-    Homepage
-  </sl-breadcrumb-item>
+  <sl-breadcrumb-item href="https://example.com/home">Homepage</sl-breadcrumb-item>
 
-  <sl-breadcrumb-item href="https://example.com/home/services">
-    Our Services
-  </sl-breadcrumb-item>
+  <sl-breadcrumb-item href="https://example.com/home/services">Our Services</sl-breadcrumb-item>
 
-  <sl-breadcrumb-item href="https://example.com/home/services/digital">
-    Digital Media
-  </sl-breadcrumb-item>
+  <sl-breadcrumb-item href="https://example.com/home/services/digital">Digital Media</sl-breadcrumb-item>
 
-  <sl-breadcrumb-item href="https://example.com/home/services/digital/web-design">
-    Web Design
-  </sl-breadcrumb-item>
+  <sl-breadcrumb-item href="https://example.com/home/services/digital/web-design">Web Design</sl-breadcrumb-item>
 </sl-breadcrumb>
 ```
 
@@ -61,21 +53,13 @@ import { SlBreadcrumb, SlBreadcrumbItem } from '@shoelace-style/shoelace/dist/re
 
 const App = () => (
   <SlBreadcrumb>
-    <SlBreadcrumbItem href="https://example.com/home">
-      Homepage
-    </SlBreadcrumbItem>
+    <SlBreadcrumbItem href="https://example.com/home">Homepage</SlBreadcrumbItem>
 
-    <SlBreadcrumbItem href="https://example.com/home/services">
-      Our Services
-    </SlBreadcrumbItem>
+    <SlBreadcrumbItem href="https://example.com/home/services">Our Services</SlBreadcrumbItem>
 
-    <SlBreadcrumbItem href="https://example.com/home/services/digital">
-      Digital Media
-    </SlBreadcrumbItem>
+    <SlBreadcrumbItem href="https://example.com/home/services/digital">Digital Media</SlBreadcrumbItem>
 
-    <SlBreadcrumbItem href="https://example.com/home/services/digital/web-design">
-      Web Design
-    </SlBreadcrumbItem>
+    <SlBreadcrumbItem href="https://example.com/home/services/digital/web-design">Web Design</SlBreadcrumbItem>
   </SlBreadcrumb>
 );
 ```
@@ -89,25 +73,25 @@ Use the `separator` slot to change the separator that goes between breadcrumb it
   <sl-icon name="dot" slot="separator"></sl-icon>
   <sl-breadcrumb-item>First</sl-breadcrumb-item>
   <sl-breadcrumb-item>Second</sl-breadcrumb-item>
-  <sl-breadcrumb-item>Third</sl-breadcrumb-item> 
+  <sl-breadcrumb-item>Third</sl-breadcrumb-item>
 </sl-breadcrumb>
 
-<br>
+<br />
 
 <sl-breadcrumb>
   <sl-icon name="arrow-right" slot="separator"></sl-icon>
   <sl-breadcrumb-item>First</sl-breadcrumb-item>
   <sl-breadcrumb-item>Second</sl-breadcrumb-item>
-  <sl-breadcrumb-item>Third</sl-breadcrumb-item> 
+  <sl-breadcrumb-item>Third</sl-breadcrumb-item>
 </sl-breadcrumb>
 
-<br>
+<br />
 
 <sl-breadcrumb>
   <span slot="separator">/</span>
   <sl-breadcrumb-item>First</sl-breadcrumb-item>
   <sl-breadcrumb-item>Second</sl-breadcrumb-item>
-  <sl-breadcrumb-item>Third</sl-breadcrumb-item> 
+  <sl-breadcrumb-item>Third</sl-breadcrumb-item>
 </sl-breadcrumb>
 ```
 
@@ -121,7 +105,7 @@ const App = () => (
       <sl-icon name="dot" slot="separator" />
       <SlBreadcrumbItem>First</SlBreadcrumbItem>
       <SlBreadcrumbItem>Second</SlBreadcrumbItem>
-      <SlBreadcrumbItem>Third</SlBreadcrumbItem> 
+      <SlBreadcrumbItem>Third</SlBreadcrumbItem>
     </SlBreadcrumb>
 
     <br />
@@ -130,7 +114,7 @@ const App = () => (
       <sl-icon name="arrow-right" slot="separator" />
       <SlBreadcrumbItem>First</SlBreadcrumbItem>
       <SlBreadcrumbItem>Second</SlBreadcrumbItem>
-      <SlBreadcrumbItem>Third</SlBreadcrumbItem> 
+      <SlBreadcrumbItem>Third</SlBreadcrumbItem>
     </SlBreadcrumb>
 
     <br />
@@ -139,7 +123,7 @@ const App = () => (
       <span slot="separator">/</span>
       <SlBreadcrumbItem>First</SlBreadcrumbItem>
       <SlBreadcrumbItem>Second</SlBreadcrumbItem>
-      <SlBreadcrumbItem>Third</SlBreadcrumbItem> 
+      <SlBreadcrumbItem>Third</SlBreadcrumbItem>
     </SlBreadcrumb>
   </>
 );
@@ -225,15 +209,15 @@ Dropdown menus can be placed in a prefix or suffix slot to provide additional op
         <sl-menu-item>Web Development</sl-menu-item>
         <sl-menu-item>Marketing</sl-menu-item>
       </sl-menu>
-    </sl-dropdown>    
+    </sl-dropdown>
   </sl-breadcrumb-item>
 </sl-breadcrumb>
 ```
 
 ```jsx react
-import { 
-  SlBreadcrumb, 
-  SlBreadcrumbItem, 
+import {
+  SlBreadcrumb,
+  SlBreadcrumbItem,
   SlButton,
   SlDropdown,
   SlIcon,
@@ -257,7 +241,7 @@ const App = () => (
           <SlMenuItem>Web Development</SlMenuItem>
           <SlMenuItem>Marketing</SlMenuItem>
         </SlMenu>
-      </SlDropdown>    
+      </SlDropdown>
     </SlBreadcrumbItem>
   </SlBreadcrumb>
 );

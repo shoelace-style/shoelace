@@ -1,24 +1,24 @@
 import Color from 'color';
-import { LitElement, html } from 'lit';
+import { html, LitElement } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
 import { styleMap } from 'lit/directives/style-map.js';
-import styles from './color-picker.styles';
 import '~/components/button-group/button-group';
 import '~/components/button/button';
-import type SlDropdown from '~/components/dropdown/dropdown';
 import '~/components/dropdown/dropdown';
+import type SlDropdown from '~/components/dropdown/dropdown';
 import '~/components/icon/icon';
-import type SlInput from '~/components/input/input';
 import '~/components/input/input';
+import type SlInput from '~/components/input/input';
 import { drag } from '~/internal/drag';
 import { emit } from '~/internal/event';
 import { FormSubmitController } from '~/internal/form-control';
 import { clamp } from '~/internal/math';
 import { watch } from '~/internal/watch';
 import { LocalizeController } from '~/utilities/localize';
+import styles from './color-picker.styles';
 
 const hasEyeDropper = 'EyeDropper' in window;
 
@@ -43,7 +43,7 @@ declare const EyeDropper: EyeDropperConstructor;
  *
  * @event sl-change Emitted when the color picker's value changes.
  *
- * @csspart base - The component's base wrapper
+ * @csspart base - The component's internal wrapper.
  * @csspart trigger - The color picker's dropdown trigger.
  * @csspart swatches - The container that holds swatches.
  * @csspart swatch - Each individual swatch.
@@ -55,8 +55,18 @@ declare const EyeDropper: EyeDropperConstructor;
  * @csspart slider-handle - Hue and opacity slider handles.
  * @csspart preview - The preview color.
  * @csspart input - The text input.
- * @csspart eye-dropper-button - The toggle format button's base.
- * @csspart format-button - The toggle format button's base.
+ * @csspart eye-dropper-button - The eye dropper button.
+ * @csspart eye-dropper-button__button - The eye dropper button's `button` part.
+ * @csspart eye-dropper-button__prefix - The eye dropper button's `prefix` part.
+ * @csspart eye-dropper-button__label - The eye dropper button's `label` part.
+ * @csspart eye-dropper-button__button-suffix - The eye dropper button's `suffix` part.
+ * @csspart eye-dropper-button__caret - The eye dropper button's `caret` part.
+ * @csspart format-button - The format button.
+ * @csspart format-button__button - The format button's `button` part.
+ * @csspart format-button__prefix - The format button's `prefix` part.
+ * @csspart format-button__label - The format button's `label` part.
+ * @csspart format-button__button-suffix - The format button's `suffix` part.
+ * @csspart format-button__caret - The format button's `caret` part.
  *
  * @cssproperty --grid-width - The width of the color grid.
  * @cssproperty --grid-height - The height of the color grid.
@@ -732,8 +742,15 @@ export default class SlColorPicker extends LitElement {
             ${!this.noFormatToggle
               ? html`
                   <sl-button
+                    part="format-button"
                     aria-label=${this.localize.term('toggleColorFormat')}
-                    exportparts="base:format-button"
+                    exportparts="
+                      base:format-button__base,
+                      prefix:format-button__prefix,
+                      label:format-button__label,
+                      suffix:format-button__suffix,
+                      caret:format-button__caret
+                    "
                     @click=${this.handleFormatToggle}
                   >
                     ${this.setLetterCase(this.format)}
@@ -742,7 +759,17 @@ export default class SlColorPicker extends LitElement {
               : ''}
             ${hasEyeDropper
               ? html`
-                  <sl-button exportparts="base:eye-dropper-button" @click=${this.handleEyeDropper}>
+                  <sl-button
+                    part="eye-dropper-button"
+                    exportparts="
+                      base:eye-dropper-button__base,
+                      prefix:eye-dropper-button__prefix,
+                      label:eye-dropper-button__label,
+                      suffix:eye-dropper-button__suffix,
+                      caret:eye-dropper-button__caret
+                    "
+                    @click=${this.handleEyeDropper}
+                  >
                     <sl-icon
                       library="system"
                       name="eyedropper"

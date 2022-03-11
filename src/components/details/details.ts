@@ -1,12 +1,12 @@
-import { LitElement, html } from 'lit';
+import { html, LitElement } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import styles from './details.styles';
 import '~/components/icon/icon';
-import { animateTo, stopAnimations, shimKeyframesHeightAuto } from '~/internal/animate';
+import { animateTo, shimKeyframesHeightAuto, stopAnimations } from '~/internal/animate';
 import { emit, waitForEvent } from '~/internal/event';
 import { watch } from '~/internal/watch';
 import { getAnimation, setDefaultAnimation } from '~/utilities/animation-registry';
+import styles from './details.styles';
 
 /**
  * @since 2.0
@@ -22,7 +22,7 @@ import { getAnimation, setDefaultAnimation } from '~/utilities/animation-registr
  * @event sl-hide - Emitted when the details closes.
  * @event sl-after-hide - Emitted after the details closes and all animations are complete.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  * @csspart header - The summary header.
  * @csspart summary - The details summary.
  * @csspart summary-icon - The expand/collapse summary icon.

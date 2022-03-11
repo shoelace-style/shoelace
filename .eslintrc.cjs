@@ -64,21 +64,12 @@ module.exports = {
           }
         ],
         '@typescript-eslint/consistent-type-imports': 'warn',
-        // These are commented out for now as we may want to add them to improve function boundary safety
-        // "@typescript-eslint/explicit-function-return-type": [
-        //     "error",
-        //     {
-        //         allowTypedFunctionExpressions: true,
-        //     },
-        // ],
-        // "@typescript-eslint/explicit-member-accessibility": "warn",
-        // "@typescript-eslint/explicit-module-boundary-types": "error",
         '@typescript-eslint/no-base-to-string': 'error',
         '@typescript-eslint/no-confusing-non-null-assertion': 'error',
         '@typescript-eslint/no-invalid-void-type': 'error',
         '@typescript-eslint/no-require-imports': 'error',
         '@typescript-eslint/no-unnecessary-boolean-literal-compare': 'warn',
-        '@typescript-eslint/no-unnecessary-condition': 'warn',
+        '@typescript-eslint/no-unnecessary-condition': 'off',
         '@typescript-eslint/no-unnecessary-qualifier': 'warn',
         '@typescript-eslint/non-nullable-type-assertion-style': 'warn',
         '@typescript-eslint/prefer-for-of': 'warn',
@@ -232,7 +223,7 @@ module.exports = {
     'import/order': [
       'warn',
       {
-        groups: ['builtin', 'external', ['parent', 'sibling', 'internal', 'index']],
+        groups: ['builtin', 'external', 'internal', 'unknown', 'parent', 'sibling', 'index', 'object', 'type'],
         pathGroups: [
           {
             pattern: '~/**',

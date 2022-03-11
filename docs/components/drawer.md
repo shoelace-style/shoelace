@@ -370,7 +370,6 @@ You can use `event.detail.source` to determine what triggered the request to clo
       event.preventDefault();
     }
   });
-
 </script>
 ```
 
@@ -390,12 +389,7 @@ const App = () => {
 
   return (
     <>
-      <SlDrawer
-        label="Drawer"
-        open={open}
-        onSlRequestClose={handleRequestClose}
-        onSlAfterHide={() => setOpen(false)}
-      >
+      <SlDrawer label="Drawer" open={open} onSlRequestClose={handleRequestClose} onSlAfterHide={() => setOpen(false)}>
         This drawer will not close when you click on the overlay.
         <SlButton slot="footer" variant="primary" onClick={() => setOpen(false)}>
           Save &amp; Close
@@ -410,11 +404,11 @@ const App = () => {
 
 ### Customizing Initial Focus
 
-By default, the drawer's panel will gain focus when opened. This allows the first tab press to focus on the first tabbable element within the drawer. To set focus on a different element, listen for and cancel the `sl-initial-focus` event.
+By default, the drawer's panel will gain focus when opened. This allows a subsequent tab press to focus on the first tabbable element in the drawer. If you want a different element to have focus, add the `autofocus` attribute to it as shown below.
 
 ```html preview
 <sl-drawer label="Drawer" class="drawer-focus">
-  <sl-input placeholder="I will have focus when the drawer is opened"></sl-input>
+  <sl-input autofocus placeholder="I will have focus when the drawer is opened"></sl-input>
   <sl-button slot="footer" variant="primary">Close</sl-button>
 </sl-drawer>
 
@@ -428,31 +422,20 @@ By default, the drawer's panel will gain focus when opened. This allows the firs
 
   openButton.addEventListener('click', () => drawer.show());
   closeButton.addEventListener('click', () => drawer.hide());
-
-  drawer.addEventListener('sl-initial-focus', event => {
-    event.preventDefault();
-    input.focus({ preventScroll: true });
-  });
 </script>
 ```
 
 ```jsx react
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { SlButton, SlDrawer, SlInput } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => {
-  const input = useRef(null);
   const [open, setOpen] = useState(false);
-
-  function handleInitialFocus(event) {
-    event.preventDefault();
-    input.current.focus();
-  }
 
   return (
     <>
-      <SlDrawer label="Drawer" open={open} onSlInitialFocus={handleInitialFocus} onSlAfterHide={() => setOpen(false)}>
-        <SlInput ref={input} placeholder="I will have focus when the drawer is opened" />
+      <SlDrawer label="Drawer" open={open} onSlAfterHide={() => setOpen(false)}>
+        <SlInput autofocus placeholder="I will have focus when the drawer is opened" />
         <SlButton slot="footer" variant="primary" onClick={() => setOpen(false)}>
           Close
         </SlButton>
@@ -464,6 +447,5 @@ const App = () => {
 };
 ```
 
-?> Alternatively, you can add the `autofocus` attribute to any form control to customize initial focus without using JavaScript.
-
+?> You can further customize initial focus behavior by canceling the `sl-initial-focus` event and setting focus yourself inside the event handler.
 [component-metadata:sl-drawer]

@@ -1,7 +1,7 @@
-import { LitElement, html } from 'lit';
+import { html, LitElement } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
-import styles from './progress-ring.styles';
 import { LocalizeController } from '~/utilities/localize';
+import styles from './progress-ring.styles';
 
 /**
  * @since 2.0
@@ -9,7 +9,7 @@ import { LocalizeController } from '~/utilities/localize';
  *
  * @slot - A label to show inside the ring.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  * @csspart label - The progress ring label.
  *
  * @cssproperty --size - The diameter of the progress ring (cannot be a percentage).

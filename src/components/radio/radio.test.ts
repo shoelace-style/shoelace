@@ -1,7 +1,7 @@
 import { expect, fixture, html, oneEvent } from '@open-wc/testing';
 import { sendKeys } from '@web/test-runner-commands';
-import type SlRadio from './radio';
 import type SlRadioGroup from '~/components/radio-group/radio-group';
+import type SlRadio from './radio';
 
 describe('<sl-radio>', () => {
   it('should be disabled with the disabled attribute', async () => {

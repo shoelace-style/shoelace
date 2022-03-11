@@ -1,8 +1,8 @@
-import { LitElement, html } from 'lit';
+import { html, LitElement } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import styles from './radio-group.styles';
 import type SlRadio from '~/components/radio/radio';
+import styles from './radio-group.styles';
 
 /**
  * @since 2.0
@@ -11,7 +11,7 @@ import type SlRadio from '~/components/radio/radio';
  * @slot - The default slot where radio controls are placed.
  * @slot label - The radio group label. Required for proper accessibility. Alternatively, you can use the label prop.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  * @csspart label - The radio group label.
  */
 @customElement('sl-radio-group')

@@ -14,6 +14,7 @@
 - Open source 😸
 
 Designed in New Hampshire by [Cory LaViska](https://twitter.com/claviska).
+
 </div>
 <div class="splash-end">
 <img class="splash-image" src="/assets/images/undraw-content-team.svg" alt="Cartoon of people assembling components while standing on a giant laptop.">
@@ -32,7 +33,7 @@ Designed in New Hampshire by [Cory LaViska](https://twitter.com/claviska).
 Add the following code to your page.
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/themes/light.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/themes/light.css" />
 <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/shoelace.js"></script>
 ```
 
@@ -43,7 +44,6 @@ Now you have access to all of Shoelace's components! Try adding a button:
 ```
 
 ?> This will load all of Shoelace's components, but you should probably only load the ones you're actually using. To learn how, or for other ways to install Shoelace, refer to the [installation instructions](getting-started/installation).
-
 
 ## New to Web Components?
 
@@ -73,11 +73,11 @@ With Shoelace, you can:
 - Incrementally adopt components as needed (no need to ditch your framework)
 - Upgrade or switch frameworks without rebuilding foundational components
 
-If your organization is looking to build a design system, [Shoelace will save you thousands of dollars](https://medium.com/eightshapes-llc/and-you-thought-buttons-were-easy-26eb5b5c1871).* All the foundational components you need are right here, ready to be customized for your brand. And since it's built on web standards, browsers will continue to support it for many years to come.
+If your organization is looking to build a design system, [Shoelace will save you thousands of dollars](https://medium.com/eightshapes-llc/and-you-thought-buttons-were-easy-26eb5b5c1871).\* All the foundational components you need are right here, ready to be customized for your brand. And since it's built on web standards, browsers will continue to support it for many years to come.
 
 Whether you use Shoelace as a starting point for your organization's design system or for a fun personal project, there's no limit to what you can do with it.
 
-<small>*Please consider giving back some of what you save by [supporting this project with a sponsorship](https://github.com/sponsors/claviska).</small>
+<small>\*Please consider giving back some of what you save by [supporting this project with a sponsorship](https://github.com/sponsors/claviska).</small>
 
 ## Browser Support
 
@@ -124,7 +124,7 @@ Special thanks to the following projects and individuals that help make Shoelace
 - Color primitives are inspired by [Tailwind](https://tailwindcss.com/)
 - Icons are courtesy of [Bootstrap Icons](https://icons.getbootstrap.com/)
 - The homepage illustration is courtesy of [unDraw](https://undraw.co/)
-- Positioning of menus, tooltips, et al is handled by [Popper.js](https://popper.js.org/)
+- Positioning of dropdowns, tooltips, et al is handled by [Floating UI](https://floating-ui.com/)
 - Animations are courtesy of [animate.css](https://animate.style/)
 - QR codes are generated with [qr-creator](https://github.com/nimiq/qr-creator)
 - Search is powered by [Lunr](https://lunrjs.com/)

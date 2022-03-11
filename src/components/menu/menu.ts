@@ -1,11 +1,10 @@
-import { LitElement, html } from 'lit';
+import { html, LitElement } from 'lit';
 import { customElement, query } from 'lit/decorators.js';
-import styles from './menu.styles';
 import type SlMenuItem from '~/components/menu-item/menu-item';
 import { emit } from '~/internal/event';
 import { hasFocusVisible } from '~/internal/focus-visible';
 import { getTextContent } from '~/internal/slot';
-
+import styles from './menu.styles';
 export interface MenuSelectEventDetail {
   item: SlMenuItem;
 }
@@ -18,7 +17,7 @@ export interface MenuSelectEventDetail {
  *
  * @event {{ item: SlMenuItem }} sl-select - Emitted when a menu item is selected.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  */
 @customElement('sl-menu')
 export default class SlMenu extends LitElement {
@@ -72,15 +71,24 @@ export default class SlMenu extends LitElement {
 
   /**
    * Initiates type-to-select logic, which automatically selects an option based on what the user is currently typing.
-   * The key passed will be appended to the internal query and the selection will be updated. After a brief period, the
-   * internal query is cleared automatically. This method is intended to be used with the keydown event. Useful for
-   * enabling type-to-select when the menu doesn't have focus.
+   * The event passed will be used to append the appropriate characters to the internal query and the selection will be
+   * updated. After a brief period, the internal query is cleared automatically. This is useful for enabling
+   * type-to-select behavior when the menu doesn't have focus.
    */
-  typeToSelect(key: string) {
+  typeToSelect(event: KeyboardEvent) {
     const items = this.getAllItems({ includeDisabled: false });
     clearTimeout(this.typeToSelectTimeout);
-    this.typeToSelectTimeout = window.setTimeout(() => (this.typeToSelectString = ''), 750);
-    this.typeToSelectString += key.toLowerCase();
+    this.typeToSelectTimeout = window.setTimeout(() => (this.typeToSelectString = ''), 1000);
+
+    if (event.key === 'Backspace') {
+      if (event.metaKey || event.ctrlKey) {
+        this.typeToSelectString = '';
+      } else {
+        this.typeToSelectString = this.typeToSelectString.slice(0, -1);
+      }
+    } else {
+      this.typeToSelectString += event.key.toLowerCase();
+    }
 
     // Restore focus in browsers that don't support :focus-visible when using the keyboard
     if (!hasFocusVisible) {
@@ -167,7 +175,7 @@ export default class SlMenu extends LitElement {
       }
     }
 
-    this.typeToSelect(event.key);
+    this.typeToSelect(event);
   }
 
   handleMouseDown(event: MouseEvent) {

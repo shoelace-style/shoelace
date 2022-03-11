@@ -1,13 +1,13 @@
-import { LitElement, html } from 'lit';
+import { html, LitElement } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-import styles from './rating.styles';
 import '~/components/icon/icon';
 import { emit } from '~/internal/event';
 import { clamp } from '~/internal/math';
 import { watch } from '~/internal/watch';
+import styles from './rating.styles';
 
 /**
  * @since 2.0
@@ -17,7 +17,7 @@ import { watch } from '~/internal/watch';
  *
  * @event sl-change - Emitted when the rating's value changes.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  *
  * @cssproperty --symbol-color - The inactive color for symbols.
  * @cssproperty --symbol-color-active - The active color for symbols.

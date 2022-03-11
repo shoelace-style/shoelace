@@ -1,10 +1,10 @@
-import { LitElement, html } from 'lit';
+import { html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { styleMap } from 'lit/directives/style-map.js';
-import styles from './progress-bar.styles';
 import { LocalizeController } from '~/utilities/localize';
+import styles from './progress-bar.styles';
 
 /**
  * @since 2.0
@@ -12,7 +12,7 @@ import { LocalizeController } from '~/utilities/localize';
  *
  * @slot - A label to show inside the indicator.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  * @csspart indicator - The progress bar indicator.
  * @csspart label - The progress bar label.
  *

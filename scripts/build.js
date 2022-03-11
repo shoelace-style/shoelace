@@ -1,14 +1,14 @@
-import fs from 'fs';
 import browserSync from 'browser-sync';
 import chalk from 'chalk';
+import { execSync } from 'child_process';
 import commandLineArgs from 'command-line-args';
-import copy from 'recursive-copy';
 import del from 'del';
 import esbuild from 'esbuild';
+import fs from 'fs';
 import getPort, { portNumbers } from 'get-port';
 import { globby } from 'globby';
-import { execSync } from 'child_process';
 import open from 'open';
+import copy from 'recursive-copy';
 
 const { bundle, copydir, dir, serve, types } = commandLineArgs([
   { name: 'bundle', type: Boolean },
@@ -64,7 +64,7 @@ fs.mkdirSync(outdir, { recursive: true });
       chunkNames: 'chunks/[name].[hash]',
       incremental: serve,
       define: {
-        // Popper.js requires this to be set
+        // Floating UI requires this to be set
         'process.env.NODE_ENV': '"production"'
       },
       bundle: true,
@@ -76,7 +76,7 @@ fs.mkdirSync(outdir, { recursive: true });
       //
       external: bundle
         ? alwaysExternal
-        : [...alwaysExternal, '@popperjs/core', '@shoelace-style/animations', 'lit', 'qr-creator'],
+        : [...alwaysExternal, '@floating-ui/dom', '@shoelace-style/animations', 'lit', 'qr-creator'],
       splitting: true,
       plugins: []
     })

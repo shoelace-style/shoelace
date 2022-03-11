@@ -5,9 +5,7 @@
 Menu labels are used to describe a group of menu items.
 
 ```html preview
-<sl-menu
-  style="max-width: 200px; border: solid 1px var(--sl-panel-border-color); background: var(--sl-panel-background-color); border-radius: var(--sl-border-radius-medium);"
->
+<sl-menu style="max-width: 200px;">
   <sl-menu-label>Fruits</sl-menu-label>
   <sl-menu-item value="apple">Apple</sl-menu-item>
   <sl-menu-item value="banana">Banana</sl-menu-item>
@@ -21,21 +19,10 @@ Menu labels are used to describe a group of menu items.
 ```
 
 ```jsx react
-import { 
-  SlDivider,
-  SlMenu,
-  SlMenuLabel,
-  SlMenuItem
-} from '@shoelace-style/shoelace/dist/react';
+import { SlDivider, SlMenu, SlMenuLabel, SlMenuItem } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
-  <SlMenu 
-    style={{
-      maxWidth: '200px',
-      border: 'solid 1px var(--sl-panel-border-color)',
-      borderRadius: 'var(--sl-border-radius-medium)'
-    }}
-  >
+  <SlMenu style={{ maxWidth: '200px' }}>
     <SlMenuLabel>Fruits</SlMenuLabel>
     <SlMenuItem value="apple">Apple</SlMenuItem>
     <SlMenuItem value="banana">Banana</SlMenuItem>
@@ -45,7 +32,7 @@ const App = () => (
     <SlMenuItem value="broccoli">Broccoli</SlMenuItem>
     <SlMenuItem value="carrot">Carrot</SlMenuItem>
     <SlMenuItem value="zucchini">Zucchini</SlMenuItem>
-  </SlMenu>  
+  </SlMenu>
 );
 ```
 

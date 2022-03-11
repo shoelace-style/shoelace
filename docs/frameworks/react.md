@@ -33,11 +33,7 @@ Every Shoelace component is available to import as a React component. Note that 
 ```jsx
 import { SlButton } from '@shoelace-style/shoelace/dist/react';
 
-const MyComponent = () => (
-  <SlButton variant="primary">
-    Click me
-  </SlButton>
-);
+const MyComponent = () => <SlButton variant="primary">Click me</SlButton>;
 
 export default MyComponent;
 ```
@@ -57,13 +53,8 @@ import { SlInput } from '@shoelace-style/shoelace/dist/react';
 function MyComponent() {
   const [value, setValue] = useState('');
 
-  return (
-    <SlInput 
-      value={value} 
-      onSlInput={event => setValue(event.target.value)} 
-    />
-  )
-};
+  return <SlInput value={value} onSlInput={event => setValue(event.target.value)} />;
+}
 
 export default MyComponent;
 ```
@@ -78,13 +69,8 @@ import type SlInputElement from '@shoelace-style/shoelace/dist/components/input/
 function MyComponent() {
   const [value, setValue] = useState('');
 
-  return (
-    <SlInput 
-      value={value} 
-      onSlInput={event => setValue((event.target as SlInputElement).value)} 
-    />
-  )
-};
+  return <SlInput value={value} onSlInput={event => setValue((event.target as SlInputElement).value)} />;
+}
 
 export default MyComponent;
 ```
@@ -124,8 +110,8 @@ Object.defineProperty(window, 'matchMedia', {
     removeListener: jest.fn(), // deprecated
     addEventListener: jest.fn(),
     removeEventListener: jest.fn(),
-    dispatchEvent: jest.fn(),
-  })),
+    dispatchEvent: jest.fn()
+  }))
 });
 ```
 

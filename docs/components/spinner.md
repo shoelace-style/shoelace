@@ -11,9 +11,7 @@ Spinners are used to show the progress of an indeterminate operation.
 ```jsx react
 import { SlSpinner } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <SlSpinner />
-);
+const App = () => <SlSpinner />;
 ```
 
 ## Examples
@@ -52,11 +50,11 @@ The width of the spinner's track can be changed by setting the `--track-width` c
 import { SlSpinner } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
-  <SlSpinner 
+  <SlSpinner
     style={{
       fontSize: '3rem',
       '--track-width': '6px'
-    }} 
+    }}
   />
 );
 ```
@@ -73,12 +71,12 @@ The spinner's colors can be changed by setting the `--indicator-color` and `--tr
 import { SlSpinner } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
-  <SlSpinner 
+  <SlSpinner
     style={{
       fontSize: '3rem',
       '--indicator-color': 'deeppink',
       '--track-color': 'pink'
-    }} 
+    }}
   />
 );
 ```

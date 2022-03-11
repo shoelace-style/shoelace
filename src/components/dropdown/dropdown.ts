@@ -1,9 +1,7 @@
-import type { Instance as PopperInstance } from '@popperjs/core/dist/esm';
-import { createPopper } from '@popperjs/core/dist/esm';
-import { LitElement, html } from 'lit';
+import { autoUpdate, computePosition, flip, offset, shift, size } from '@floating-ui/dom';
+import { html, LitElement } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import styles from './dropdown.styles';
 import type SlMenuItem from '~/components/menu-item/menu-item';
 import type SlMenu from '~/components/menu/menu';
 import { animateTo, stopAnimations } from '~/internal/animate';
@@ -11,7 +9,8 @@ import { emit, waitForEvent } from '~/internal/event';
 import { scrollIntoView } from '~/internal/scroll';
 import { getTabbableBoundary } from '~/internal/tabbable';
 import { watch } from '~/internal/watch';
-import { setDefaultAnimation, getAnimation } from '~/utilities/animation-registry';
+import { getAnimation, setDefaultAnimation } from '~/utilities/animation-registry';
+import styles from './dropdown.styles';
 
 /**
  * @since 2.0
@@ -25,7 +24,7 @@ import { setDefaultAnimation, getAnimation } from '~/utilities/animation-registr
  * @event sl-hide - Emitted when the dropdown closes.
  * @event sl-after-hide - Emitted after the dropdown closes and all animations are complete.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  * @csspart trigger - The container that wraps the trigger.
  * @csspart panel - The panel that gets shown when the dropdown is open.
  *
@@ -40,7 +39,7 @@ export default class SlDropdown extends LitElement {
   @query('.dropdown__panel') panel: HTMLElement;
   @query('.dropdown__positioner') positioner: HTMLElement;
 
-  private popover?: PopperInstance;
+  private positionerCleanup: ReturnType<typeof autoUpdate> | undefined;
 
   /** Indicates whether or not the dropdown is open. You can use this in lieu of the show/hide methods. */
   @property({ type: Boolean, reflect: true }) open = false;
@@ -49,7 +48,7 @@ export default class SlDropdown extends LitElement {
    * The preferred placement of the dropdown panel. Note that the actual placement may vary as needed to keep the panel
    * inside of the viewport.
    */
-  @property() placement:
+  @property({ reflect: true }) placement:
     | 'top'
     | 'top-start'
     | 'top-end'
@@ -97,39 +96,22 @@ export default class SlDropdown extends LitElement {
     if (!this.containingElement) {
       this.containingElement = this;
     }
-
-    // Create the popover after render
-    this.updateComplete.then(() => {
-      this.popover = createPopper(this.trigger, this.positioner, {
-        placement: this.placement,
-        strategy: this.hoist ? 'fixed' : 'absolute',
-        modifiers: [
-          {
-            name: 'flip',
-            options: {
-              boundary: 'viewport'
-            }
-          },
-          {
-            name: 'offset',
-            options: {
-              offset: [this.skidding, this.distance]
-            }
-          }
-        ]
-      });
-    });
   }
 
-  firstUpdated() {
+  async firstUpdated() {
     this.panel.hidden = !this.open;
+
+    // If the dropdown is visible on init, update its position
+    if (this.open) {
+      await this.updateComplete;
+      this.startPositioner();
+    }
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     this.hide();
-
-    this.popover?.destroy();
+    this.stopPositioner();
   }
 
   focusOnTrigger() {
@@ -213,24 +195,7 @@ export default class SlDropdown extends LitElement {
   @watch('placement')
   @watch('skidding')
   handlePopoverOptionsChange() {
-    this.popover?.setOptions({
-      placement: this.placement,
-      strategy: this.hoist ? 'fixed' : 'absolute',
-      modifiers: [
-        {
-          name: 'flip',
-          options: {
-            boundary: 'viewport'
-          }
-        },
-        {
-          name: 'offset',
-          options: {
-            offset: [this.skidding, this.distance]
-          }
-        }
-      ]
-    });
+    this.updatePositioner();
   }
 
   handleTriggerClick() {
@@ -265,7 +230,7 @@ export default class SlDropdown extends LitElement {
     // When up/down is pressed, we make the assumption that the user is familiar with the menu and plans to make a
     // selection. Rather than toggle the panel, we focus on the menu (if one exists) and activate the first item for
     // faster navigation.
-    if (['ArrowDown', 'ArrowUp'].includes(event.key)) {
+    if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
       event.preventDefault();
 
       // Show the menu if it's not already open
@@ -275,12 +240,12 @@ export default class SlDropdown extends LitElement {
 
       // Focus on the first/last menu item after showing
       requestAnimationFrame(() => {
-        if (event.key === 'ArrowDown') {
+        if (event.key === 'ArrowDown' || event.key === 'Home') {
           menu.setCurrentItem(firstMenuItem);
           firstMenuItem.focus();
         }
 
-        if (event.key === 'ArrowUp') {
+        if (event.key === 'ArrowUp' || event.key === 'End') {
           menu.setCurrentItem(lastMenuItem);
           lastMenuItem.focus();
         }
@@ -290,7 +255,7 @@ export default class SlDropdown extends LitElement {
     // Other keys bring focus to the menu and initiate type-to-select behavior
     const ignoredKeys = ['Tab', 'Shift', 'Meta', 'Ctrl', 'Alt'];
     if (this.open && !ignoredKeys.includes(event.key)) {
-      menu.typeToSelect(event.key);
+      menu.typeToSelect(event);
     }
   }
 
@@ -351,11 +316,7 @@ export default class SlDropdown extends LitElement {
    * is activated.
    */
   reposition() {
-    if (!this.open) {
-      return;
-    }
-
-    this.popover?.update();
+    this.updatePositioner();
   }
 
   @watch('open', { waitUntilFirstUpdate: true })
@@ -376,7 +337,7 @@ export default class SlDropdown extends LitElement {
       document.addEventListener('mousedown', this.handleDocumentMouseDown);
 
       await stopAnimations(this);
-      this.popover?.update();
+      this.startPositioner();
       this.panel.hidden = false;
       const { keyframes, options } = getAnimation(this, 'dropdown.show');
       await animateTo(this.panel, keyframes, options);
@@ -394,8 +355,57 @@ export default class SlDropdown extends LitElement {
       const { keyframes, options } = getAnimation(this, 'dropdown.hide');
       await animateTo(this.panel, keyframes, options);
       this.panel.hidden = true;
+      this.stopPositioner();
 
       emit(this, 'sl-after-hide');
+    }
+  }
+
+  private startPositioner() {
+    this.stopPositioner();
+    this.updatePositioner();
+    this.positionerCleanup = autoUpdate(this.trigger, this.positioner, this.updatePositioner.bind(this));
+  }
+
+  private updatePositioner() {
+    if (!this.open || !this.trigger || !this.positioner) {
+      return;
+    }
+
+    computePosition(this.trigger, this.positioner, {
+      placement: this.placement,
+      middleware: [
+        offset({ mainAxis: this.distance, crossAxis: this.skidding }),
+        flip(),
+        shift(),
+        size({
+          apply: ({ width, height }) => {
+            // Ensure the panel stays within the viewport when we have lots of menu items
+            Object.assign(this.panel.style, {
+              maxWidth: `${width}px`,
+              maxHeight: `${height}px`
+            });
+          },
+          padding: 8
+        })
+      ],
+      strategy: this.hoist ? 'fixed' : 'absolute'
+    }).then(({ x, y, placement }) => {
+      this.positioner.setAttribute('data-placement', placement);
+
+      Object.assign(this.positioner.style, {
+        position: this.hoist ? 'fixed' : 'absolute',
+        left: `${x}px`,
+        top: `${y}px`
+      });
+    });
+  }
+
+  private stopPositioner() {
+    if (this.positionerCleanup) {
+      this.positionerCleanup();
+      this.positionerCleanup = undefined;
+      this.positioner.removeAttribute('data-placement');
     }
   }
 

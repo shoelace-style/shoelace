@@ -1,12 +1,13 @@
-import { LitElement, html } from 'lit';
+import { html, LitElement } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import styles from './alert.styles';
 import '~/components/icon-button/icon-button';
 import { animateTo, stopAnimations } from '~/internal/animate';
 import { emit, waitForEvent } from '~/internal/event';
+import { HasSlotController } from '~/internal/slot';
 import { watch } from '~/internal/watch';
 import { getAnimation, setDefaultAnimation } from '~/utilities/animation-registry';
+import styles from './alert.styles';
 
 const toastStack = Object.assign(document.createElement('div'), { className: 'sl-toast-stack' });
 
@@ -24,10 +25,11 @@ const toastStack = Object.assign(document.createElement('div'), { className: 'sl
  * @event sl-hide - Emitted when the alert closes.
  * @event sl-after-hide - Emitted after the alert closes and all animations are complete.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  * @csspart icon - The container that wraps the alert icon.
  * @csspart message - The alert message.
  * @csspart close-button - The close button.
+ * @csspart close-button__base - The close button's `base` part.
  *
  * @cssproperty --box-shadow - The alert's box shadow.
  *
@@ -40,6 +42,7 @@ export default class SlAlert extends LitElement {
   static styles = styles;
 
   private autoHideTimeout: number;
+  private readonly hasSlotController = new HasSlotController(this, 'icon', 'suffix');
 
   @query('[part="base"]') base: HTMLElement;
 
@@ -177,6 +180,7 @@ export default class SlAlert extends LitElement {
           alert: true,
           'alert--open': this.open,
           'alert--closable': this.closable,
+          'alert--has-icon': this.hasSlotController.test('icon'),
           'alert--primary': this.variant === 'primary',
           'alert--success': this.variant === 'success',
           'alert--neutral': this.variant === 'neutral',
@@ -199,14 +203,14 @@ export default class SlAlert extends LitElement {
 
         ${this.closable
           ? html`
-              <span class="alert__close">
-                <sl-icon-button
-                  exportparts="base:close-button"
-                  name="x"
-                  library="system"
-                  @click=${this.handleCloseClick}
-                ></sl-icon-button>
-              </span>
+              <sl-icon-button
+                part="close-button"
+                exportparts="base:close-button__base"
+                class="alert__close-button"
+                name="x"
+                library="system"
+                @click=${this.handleCloseClick}
+              ></sl-icon-button>
             `
           : ''}
       </div>

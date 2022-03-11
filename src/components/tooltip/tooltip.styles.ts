@@ -12,7 +12,7 @@ export default css`
     display: contents;
   }
 
-  .tooltip-content {
+  .tooltip-target {
     display: contents;
   }
 
@@ -22,7 +22,23 @@ export default css`
     pointer-events: none;
   }
 
-  .tooltip {
+  .tooltip-positioner[data-placement^='top'] .tooltip {
+    transform-origin: bottom;
+  }
+
+  .tooltip-positioner[data-placement^='bottom'] .tooltip {
+    transform-origin: top;
+  }
+
+  .tooltip-positioner[data-placement^='left'] .tooltip {
+    transform-origin: right;
+  }
+
+  .tooltip-positioner[data-placement^='right'] .tooltip {
+    transform-origin: left;
+  }
+
+  .tooltip__content {
     max-width: var(--max-width);
     border-radius: var(--sl-tooltip-border-radius);
     background-color: var(--sl-tooltip-background-color);
@@ -34,98 +50,12 @@ export default css`
     padding: var(--sl-tooltip-padding);
   }
 
-  .tooltip:after {
-    content: '';
+  .tooltip__arrow {
     position: absolute;
-    width: 0;
-    height: 0;
-  }
-
-  .tooltip-positioner[data-popper-placement^='top'] .tooltip {
-    transform-origin: bottom;
-  }
-
-  .tooltip-positioner[data-popper-placement^='bottom'] .tooltip {
-    transform-origin: top;
-  }
-
-  .tooltip-positioner[data-popper-placement^='left'] .tooltip {
-    transform-origin: right;
-  }
-
-  .tooltip-positioner[data-popper-placement^='right'] .tooltip {
-    transform-origin: left;
-  }
-
-  /* Arrow + bottom */
-  .tooltip-positioner[data-popper-placement^='bottom'] .tooltip:after {
-    bottom: 100%;
-    left: calc(50% - var(--sl-tooltip-arrow-size));
-    border-bottom: var(--sl-tooltip-arrow-size) solid var(--sl-tooltip-background-color);
-    border-left: var(--sl-tooltip-arrow-size) solid transparent;
-    border-right: var(--sl-tooltip-arrow-size) solid transparent;
-  }
-
-  .tooltip-positioner[data-popper-placement='bottom-start'] .tooltip:after {
-    left: var(--sl-tooltip-arrow-start-end-offset);
-  }
-
-  .tooltip-positioner[data-popper-placement='bottom-end'] .tooltip:after {
-    right: var(--sl-tooltip-arrow-start-end-offset);
-    left: auto;
-  }
-
-  /* Arrow + top */
-  .tooltip-positioner[data-popper-placement^='top'] .tooltip:after {
-    top: 100%;
-    left: calc(50% - var(--sl-tooltip-arrow-size));
-    border-top: var(--sl-tooltip-arrow-size) solid var(--sl-tooltip-background-color);
-    border-left: var(--sl-tooltip-arrow-size) solid transparent;
-    border-right: var(--sl-tooltip-arrow-size) solid transparent;
-  }
-
-  .tooltip-positioner[data-popper-placement='top-start'] .tooltip:after {
-    left: var(--sl-tooltip-arrow-start-end-offset);
-  }
-
-  .tooltip-positioner[data-popper-placement='top-end'] .tooltip:after {
-    right: var(--sl-tooltip-arrow-start-end-offset);
-    left: auto;
-  }
-
-  /* Arrow + left */
-  .tooltip-positioner[data-popper-placement^='left'] .tooltip:after {
-    top: calc(50% - var(--sl-tooltip-arrow-size));
-    left: 100%;
-    border-left: var(--sl-tooltip-arrow-size) solid var(--sl-tooltip-background-color);
-    border-top: var(--sl-tooltip-arrow-size) solid transparent;
-    border-bottom: var(--sl-tooltip-arrow-size) solid transparent;
-  }
-
-  .tooltip-positioner[data-popper-placement='left-start'] .tooltip:after {
-    top: var(--sl-tooltip-arrow-start-end-offset);
-  }
-
-  .tooltip-positioner[data-popper-placement='left-end'] .tooltip:after {
-    top: auto;
-    bottom: var(--sl-tooltip-arrow-start-end-offset);
-  }
-
-  /* Arrow + right */
-  .tooltip-positioner[data-popper-placement^='right'] .tooltip:after {
-    top: calc(50% - var(--sl-tooltip-arrow-size));
-    right: 100%;
-    border-right: var(--sl-tooltip-arrow-size) solid var(--sl-tooltip-background-color);
-    border-top: var(--sl-tooltip-arrow-size) solid transparent;
-    border-bottom: var(--sl-tooltip-arrow-size) solid transparent;
-  }
-
-  .tooltip-positioner[data-popper-placement='right-start'] .tooltip:after {
-    top: var(--sl-tooltip-arrow-start-end-offset);
-  }
-
-  .tooltip-positioner[data-popper-placement='right-end'] .tooltip:after {
-    top: auto;
-    bottom: var(--sl-tooltip-arrow-start-end-offset);
+    background: var(--sl-tooltip-background-color);
+    width: calc(var(--sl-tooltip-arrow-size) * 2);
+    height: calc(var(--sl-tooltip-arrow-size) * 2);
+    transform: rotate(45deg);
+    z-index: -1;
   }
 `;

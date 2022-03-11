@@ -1,9 +1,9 @@
-import { LitElement, html } from 'lit';
+import { html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import styles from './tag.styles';
 import '~/components/icon-button/icon-button';
 import { emit } from '~/internal/event';
+import styles from './tag.styles';
 
 /**
  * @since 2.0
@@ -15,9 +15,10 @@ import { emit } from '~/internal/event';
  *
  * @event sl-remove - Emitted when the remove button is activated.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  * @csspart content - The tag content.
  * @csspart remove-button - The remove button.
+ * @csspart remove-button__base - The remove button's `base` part.
  */
 @customElement('sl-tag')
 export default class SlTag extends LitElement {
@@ -71,7 +72,8 @@ export default class SlTag extends LitElement {
         ${this.removable
           ? html`
               <sl-icon-button
-                exportparts="base:remove-button"
+                part="remove-button"
+                exportparts="base:remove-button__base"
                 name="x"
                 library="system"
                 class="tag__remove"

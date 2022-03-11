@@ -1,8 +1,8 @@
-import { LitElement, html } from 'lit';
+import { html, LitElement } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import styles from './avatar.styles';
 import '~/components/icon/icon';
+import styles from './avatar.styles';
 
 /**
  * @since 2.0
@@ -12,7 +12,7 @@ import '~/components/icon/icon';
  *
  * @slot icon - The default icon to use when no image or initials are present.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's internal wrapper.
  * @csspart icon - The container that wraps the avatar icon.
  * @csspart initials - The container that wraps the avatar initials.
  * @csspart image - The avatar image.

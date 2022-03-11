@@ -5,7 +5,7 @@
 Menu items provide options for the user to pick from in a menu.
 
 ```html preview
-<sl-menu style="max-width: 200px; border: solid 1px var(--sl-panel-border-color); background: var(--sl-panel-background-color); border-radius: var(--sl-border-radius-medium);">
+<sl-menu style="max-width: 200px;">
   <sl-menu-item>Option 1</sl-menu-item>
   <sl-menu-item>Option 2</sl-menu-item>
   <sl-menu-item>Option 3</sl-menu-item>
@@ -25,21 +25,10 @@ Menu items provide options for the user to pick from in a menu.
 ```
 
 ```jsx react
-import { 
-  SlDivider,
-  SlIcon,
-  SlMenu,
-  SlMenuItem
-} from '@shoelace-style/shoelace/dist/react';
+import { SlDivider, SlIcon, SlMenu, SlMenuItem } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
-  <SlMenu 
-    style={{
-      maxWidth: '200px',
-      border: 'solid 1px var(--sl-panel-border-color)',
-      borderRadius: 'var(--sl-border-radius-medium)'
-    }}
-  >
+  <SlMenu style={{ maxWidth: '200px' }}>
     <SlMenuItem>Option 1</SlMenuItem>
     <SlMenuItem>Option 2</SlMenuItem>
     <SlMenuItem>Option 3</SlMenuItem>
@@ -55,7 +44,7 @@ const App = () => (
       Suffix Icon
       <SlIcon slot="suffix" name="heart" />
     </SlMenuItem>
-  </SlMenu>  
+  </SlMenu>
 );
 ```
 
@@ -66,7 +55,7 @@ const App = () => (
 Use the `checked` attribute to draw menu items in a checked state.
 
 ```html preview
-<sl-menu style="max-width: 200px; border: solid 1px var(--sl-panel-border-color); background: var(--sl-panel-background-color); border-radius: var(--sl-border-radius-medium);">
+<sl-menu style="max-width: 200px;">
   <sl-menu-item>Option 1</sl-menu-item>
   <sl-menu-item checked>Option 2</sl-menu-item>
   <sl-menu-item>Option 3</sl-menu-item>
@@ -74,23 +63,14 @@ Use the `checked` attribute to draw menu items in a checked state.
 ```
 
 ```jsx react
-import { 
-  SlMenu,
-  SlMenuItem
-} from '@shoelace-style/shoelace/dist/react';
+import { SlMenu, SlMenuItem } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
-  <SlMenu 
-    style={{
-      maxWidth: '200px',
-      border: 'solid 1px var(--sl-panel-border-color)',
-      borderRadius: 'var(--sl-border-radius-medium)'
-    }}
-  >
+  <SlMenu style={{ maxWidth: '200px' }}>
     <SlMenuItem>Option 1</SlMenuItem>
     <SlMenuItem checked>Option 2</SlMenuItem>
     <SlMenuItem>Option 3</SlMenuItem>
-  </SlMenu>  
+  </SlMenu>
 );
 ```
 
@@ -99,7 +79,7 @@ const App = () => (
 Add the `disabled` attribute to disable the menu item so it cannot be selected.
 
 ```html preview
-<sl-menu style="max-width: 200px; border: solid 1px var(--sl-panel-border-color); background: var(--sl-panel-background-color); border-radius: var(--sl-border-radius-medium);">
+<sl-menu style="max-width: 200px;">
   <sl-menu-item>Option 1</sl-menu-item>
   <sl-menu-item disabled>Option 2</sl-menu-item>
   <sl-menu-item>Option 3</sl-menu-item>
@@ -107,23 +87,14 @@ Add the `disabled` attribute to disable the menu item so it cannot be selected.
 ```
 
 ```jsx react
-import { 
-  SlMenu,
-  SlMenuItem
-} from '@shoelace-style/shoelace/dist/react';
+import { SlMenu, SlMenuItem } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
-  <SlMenu 
-    style={{
-      maxWidth: '200px',
-      border: 'solid 1px var(--sl-panel-border-color)',
-      borderRadius: 'var(--sl-border-radius-medium)'
-    }}
-  >
+  <SlMenu style={{ maxWidth: '200px' }}>
     <SlMenuItem>Option 1</SlMenuItem>
     <SlMenuItem disabled>Option 2</SlMenuItem>
     <SlMenuItem>Option 3</SlMenuItem>
-  </SlMenu>  
+  </SlMenu>
 );
 ```
 
@@ -132,7 +103,7 @@ const App = () => (
 Add content to the start and end of menu items using the `prefix` and `suffix` slots.
 
 ```html preview
-<sl-menu style="max-width: 200px; border: solid 1px var(--sl-panel-border-color); background: var(--sl-panel-background-color); border-radius: var(--sl-border-radius-medium);">
+<sl-menu style="max-width: 200px;">
   <sl-menu-item>
     <sl-icon slot="prefix" name="house"></sl-icon>
     Home
@@ -154,22 +125,10 @@ Add content to the start and end of menu items using the `prefix` and `suffix` s
 ```
 
 ```jsx react
-import {
-  SlBadge,
-  SlDivider,
-  SlIcon,
-  SlMenu,
-  SlMenuItem
-} from '@shoelace-style/shoelace/dist/react';
+import { SlBadge, SlDivider, SlIcon, SlMenu, SlMenuItem } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
-  <SlMenu 
-    style={{
-      maxWidth: '200px',
-      border: 'solid 1px var(--sl-panel-border-color)',
-      borderRadius: 'var(--sl-border-radius-medium)'
-    }}
-  >
+  <SlMenu style={{ maxWidth: '200px' }}>
     <SlMenuItem>
       <SlIcon slot="prefix" name="house" />
       Home
@@ -178,7 +137,9 @@ const App = () => (
     <SlMenuItem>
       <SlIcon slot="prefix" name="envelope" />
       Messages
-      <SlBadge slot="suffix" variant="primary" pill>12</SlBadge>
+      <SlBadge slot="suffix" variant="primary" pill>
+        12
+      </SlBadge>
     </SlMenuItem>
 
     <SlDivider />
@@ -187,7 +148,7 @@ const App = () => (
       <SlIcon slot="prefix" name="gear" />
       Settings
     </SlMenuItem>
-  </SlMenu>  
+  </SlMenu>
 );
 ```
 
@@ -196,7 +157,7 @@ const App = () => (
 The `value` attribute can be used to assign a hidden value, such as a unique identifier, to a menu item. When an item is selected, the `sl-select` event will be emitted and a reference to the item will be available at `event.detail.item`. You can use this reference to access the selected item's value, its checked state, and more.
 
 ```html preview
-<sl-menu class="menu-value" style="max-width: 200px; border: solid 1px var(--sl-panel-border-color); background: var(--sl-panel-background-color); border-radius: var(--sl-border-radius-medium);">
+<sl-menu class="menu-value" style="max-width: 200px;">
   <sl-menu-item value="opt-1">Option 1</sl-menu-item>
   <sl-menu-item value="opt-2">Option 2</sl-menu-item>
   <sl-menu-item value="opt-3">Option 3</sl-menu-item>
@@ -218,13 +179,9 @@ The `value` attribute can be used to assign a hidden value, such as a unique ide
 ```
 
 ```jsx react
-import { 
-  SlMenu,
-  SlMenuItem
-} from '@shoelace-style/shoelace/dist/react';
+import { SlMenu, SlMenuItem } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => {
-
   function handleSelect(event) {
     const item = event.detail.item;
 
@@ -236,14 +193,7 @@ const App = () => {
   }
 
   return (
-    <SlMenu 
-      style={{
-        maxWidth: '200px',
-        border: 'solid 1px var(--sl-panel-border-color)',
-        borderRadius: 'var(--sl-border-radius-medium)'
-      }}
-      onSlSelect={handleSelect}
-    >
+    <SlMenu style={{ maxWidth: '200px' }} onSlSelect={handleSelect}>
       <SlMenuItem value="opt-1">Option 1</SlMenuItem>
       <SlMenuItem value="opt-2">Option 2</SlMenuItem>
       <SlMenuItem value="opt-3">Option 3</SlMenuItem>

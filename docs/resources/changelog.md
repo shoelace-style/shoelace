@@ -6,10 +6,39 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
-## Next
+## 2.0.0-beta.71
+
+- 🚨 BREAKING: refactored exported parts to ensure composed components and their parts can be targeted via CSS
+  - Refactored the `eye-dropper-button` part and added `eye-dropper-button__base`, `eye-dropper-button__prefix`, `eye-dropper-button__label`, `eye-dropper-button__suffix`, and `eye-dropper-button__caret` parts to `<sl-color-picker>`
+  - Refactored the `format-button` part and added `format-button__base`, `format-button__prefix`, `format-button__label`, `format-button__suffix`, and `format-button__caret` parts to `<sl-color-picker>`
+  - Moved the `close-button` part in `<sl-alert>` to the internal `<sl-icon-button>` and removed the `<span>` that wrapped it
+  - Moved the `close-button` part in `<sl-dialog>` and `<sl-drawer>` to point to the host element and added the `close-button__base` part
+  - Renamed parts in `<sl-select>` from `tag-base` to `tag__base`, `tag-content` to `tag__content`, and `tag-remove-button` to `tag__remove-button`
+  - Moved the `close-button` part in `<sl-tab>` to the internal `<sl-icon-button>` and added the `close-button__base` part
+  - Moved the `scroll-button` part in `<sl-tab-group>` to the internal `<sl-icon-button>` and added the `scroll-button__base`, `scroll-button--start`, and `scroll-button--end` parts
+  - Moved the `remove-button` part in `<sl-tag>` to the internal `<sl-icon-button>` and added the `remove-button__base` part
+- 🚨 BREAKING: removed `checked-icon` part from `<sl-menu-item>` in preparation for parts refactor
+- 🚨 BREAKING: changed the `typeToSelect()` method's argument from `String` to `KeyboardEvent` in `<sl-menu>` to support more advanced key combinations
+- Added `form`, `formaction`, `formmethod`, `formnovalidate`, and `formtarget` attributes to `<sl-button>` [#699](https://github.com/shoelace-style/shoelace/issues/699)
+- Added Prettier and ESLint to markdown files
+- Added background color and border to `<sl-menu>`
+- Added more tests for `<sl-input>`, `<sl-select>`, and `<sl-textarea>`
+- Fixed a bug that prevented forms from submitting when pressing <kbd>Enter</kbd> inside of an `<sl-input>` [#700](https://github.com/shoelace-style/shoelace/issues/700)
+- Fixed a bug in `<sl-input>` that prevented the `valueAsDate` and `valueAsNumber` properties from working when set before the component was initialized
+- Fixed a bug in `<sl-dropdown>` where pressing <kbd>Home</kbd> or <kbd>End</kbd> wouldn't select the first or last menu items, respectively
+- Improved `autofocus` behavior in Safari for `<sl-dialog>` and `<sl-drawer>` [#693](https://github.com/shoelace-style/shoelace/issues/693)
+- Improved type to select logic in `<sl-menu>` so it supports <kbd>Backspace</kbd> and gives users more time before resetting
+- Improved checkmark size and positioning in `<sl-menu-item>`
+- Improved accessibility in form controls that have help text so they're announced correctly in various screen readers
+- Removed feature detection for `focus({ preventScroll })` since it no longer works in Safari
+- Removed the `--sl-tooltip-arrow-start-end-offset` design token
+- Removed the `pattern` attribute from `<sl-textarea>` as it was documented incorrectly and never supported
+- Replaced Popper positioning dependency with Floating UI in `<sl-dropdown>` and `<sl-tooltip>`
+
+## 2.0.0-beta.70
 
 - Added `tag-base`, `tag-content`, and `tag-remove-button` parts to `<sl-select>` [#682](https://github.com/shoelace-style/shoelace/discussions/682)
-- Added support for focusing elements with `autofocus` when `<sl-dialog>` and `<sl-drawer>` open [#688](https://github.com/shoelace-style/shoelace/issues/688) 
+- Added support for focusing elements with `autofocus` when `<sl-dialog>` and `<sl-drawer>` open [#688](https://github.com/shoelace-style/shoelace/issues/688)
 - Added the `placement` attribute to `<sl-select>` [#687](https://github.com/shoelace-style/shoelace/pull/687)
 - Added Danish translation [#690](https://github.com/shoelace-style/shoelace/pull/690)
 - Fixed a bug that allowed `<sl-dropdown>` to go into an incorrect state when activating the trigger while disabled [#684](https://github.com/shoelace-style/shoelace/pull/684)
@@ -56,7 +85,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Refactored `<sl-format-byte>` to use `Intl.NumberFormat` so it supports localization
 - Refactored themes so utility styles are no longer injected as `<style>` elements to support stricter CSP rules [#571](https://github.com/shoelace-style/shoelace/issues/571)
 - Restored the nicer animation on `<sl-spinner>` and verified it works in Safari
-- Updated Feather icon example to use Lucide  [#657](https://github.com/shoelace-style/shoelace/issues/657)
+- Updated Feather icon example to use Lucide [#657](https://github.com/shoelace-style/shoelace/issues/657)
 - Updated minimum Node version to 14.17
 - Updated Lit to 2.1.2
 - Updated to Bootstrap Icons to 1.8.1

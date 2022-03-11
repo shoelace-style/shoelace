@@ -19,7 +19,9 @@ import { SlRadio, SlRadioGroup } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <SlRadioGroup label="Select an option">
-    <SlRadio value="1" checked>Option 1</SlRadio>
+    <SlRadio value="1" checked>
+      Option 1
+    </SlRadio>
     <SlRadio value="2">Option 2</SlRadio>
     <SlRadio value="3">Option 3</SlRadio>
   </SlRadioGroup>
@@ -48,10 +50,14 @@ import { SlRadio, SlRadioGroup } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <SlRadioGroup label="Select an option">
-    <SlRadio value="1" checked>Option 1</SlRadio>
+    <SlRadio value="1" checked>
+      Option 1
+    </SlRadio>
     <SlRadio value="2">Option 2</SlRadio>
     <SlRadio value="3">Option 3</SlRadio>
-    <SlRadio value="4" disabled>Disabled</SlRadio>
+    <SlRadio value="4" disabled>
+      Disabled
+    </SlRadio>
   </SlRadioGroup>
 );
 ```
