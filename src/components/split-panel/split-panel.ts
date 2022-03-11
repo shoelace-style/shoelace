@@ -185,6 +185,11 @@ export default class SlSplitPanel extends LitElement {
     this.position = this.pixelsToPercentage(this.positionInPixels);
   }
 
+  @watch('vertical')
+  handleVerticalChange() {
+    this.detectSize();
+  }
+
   handleResize(entries: ResizeObserverEntry[]) {
     const { width, height } = entries[0].contentRect;
     this.size = this.vertical ? height : width;
@@ -197,6 +202,7 @@ export default class SlSplitPanel extends LitElement {
 
   render() {
     const gridTemplate = this.vertical ? 'gridTemplateRows' : 'gridTemplateColumns';
+    const gridTemplateAlt = this.vertical ? 'gridTemplateColumns' : 'gridTemplateRows';
     const primary = `
       clamp(
         0%,
@@ -215,6 +221,9 @@ export default class SlSplitPanel extends LitElement {
     } else {
       this.style[gridTemplate] = `${primary} var(--divider-width) ${secondary}`;
     }
+
+    // Unset the alt grid template property
+    this.style[gridTemplateAlt] = '';
 
     return html`
       <div part="panel start" class="start">
