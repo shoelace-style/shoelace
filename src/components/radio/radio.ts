@@ -54,20 +54,9 @@ export default class SlRadio extends LitElement {
    */
   @property({ type: Boolean, reflect: true }) invalid = false;
 
-  firstUpdated() {
-    this.updateComplete.then(() => {
-      const radios = this.getAllRadios();
-      const checkedRadio = radios.find(radio => radio.checked);
-      radios.forEach(radio => {
-        radio.input.tabIndex = -1;
-      });
-
-      if (checkedRadio) {
-        checkedRadio.input.tabIndex = 0;
-      } else if (radios.length > 0) {
-        radios[0].input.tabIndex = 0;
-      }
-    });
+  connectedCallback(): void {
+    super.connectedCallback();
+    this.setAttribute('role', 'radio');
   }
 
   /** Simulates a click on the radio. */
@@ -107,37 +96,33 @@ export default class SlRadio extends LitElement {
     return [...radioGroup.querySelectorAll<SlRadio>('sl-radio')].filter((radio: this) => radio.name === this.name);
   }
 
-  getSiblingRadios() {
-    return this.getAllRadios().filter(radio => radio !== this);
-  }
-
   handleBlur() {
     this.hasFocus = false;
     emit(this, 'sl-blur');
   }
 
-  @watch('checked', { waitUntilFirstUpdate: true })
+  @watch('checked')
   handleCheckedChange() {
-    if (this.checked) {
-      this.input.tabIndex = 0;
+    this.setAttribute('aria-checked', this.checked ? 'true' : 'false');
 
-      this.getSiblingRadios().forEach(radio => {
-        radio.input.tabIndex = -1;
-        radio.checked = false;
-      });
+    if (this.hasUpdated) {
+      emit(this, 'sl-change');
     }
   }
 
   handleClick() {
     this.checked = true;
-    emit(this, 'sl-change');
   }
 
   @watch('disabled', { waitUntilFirstUpdate: true })
   handleDisabledChange() {
+    this.setAttribute('aria-disabled', this.disabled ? 'true' : 'false');
+
     // Disabled form controls are always valid, so we need to recheck validity when the state changes
-    this.input.disabled = this.disabled;
-    this.invalid = !this.input.checkValidity();
+    if (this.hasUpdated) {
+      this.input.disabled = this.disabled;
+      this.invalid = !this.input.checkValidity();
+    }
   }
 
   handleFocus() {
@@ -145,38 +130,7 @@ export default class SlRadio extends LitElement {
     emit(this, 'sl-focus');
   }
 
-  handleKeyDown(event: KeyboardEvent) {
-    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
-      const radios = this.getAllRadios().filter(radio => !radio.disabled);
-      const incr = ['ArrowUp', 'ArrowLeft'].includes(event.key) ? -1 : 1;
-      let index = radios.indexOf(this) + incr;
-      if (index < 0) {
-        index = radios.length - 1;
-      }
-      if (index > radios.length - 1) {
-        index = 0;
-      }
-
-      this.getAllRadios().forEach(radio => {
-        radio.checked = false;
-        radio.input.tabIndex = -1;
-      });
-
-      radios[index].focus();
-      radios[index].checked = true;
-      radios[index].input.tabIndex = 0;
-
-      emit(radios[index], 'sl-change');
-
-      event.preventDefault();
-    }
-  }
-
   render() {
-    this.setAttribute('role', 'radio');
-    this.setAttribute('aria-checked', this.checked ? 'true' : 'false');
-    this.setAttribute('aria-disabled', this.disabled ? 'true' : 'false');
-
     return html`
       <label
         part="base"
@@ -186,7 +140,6 @@ export default class SlRadio extends LitElement {
           'radio--disabled': this.disabled,
           'radio--focused': this.hasFocus
         })}
-        @keydown=${this.handleKeyDown}
       >
         <input
           class="radio__input"
@@ -195,7 +148,6 @@ export default class SlRadio extends LitElement {
           value=${ifDefined(this.value)}
           .checked=${live(this.checked)}
           .disabled=${this.disabled}
-          aria-hidden="true"
           @click=${this.handleClick}
           @blur=${this.handleBlur}
           @focus=${this.handleFocus}

@@ -1,5 +1,6 @@
-import { expect, fixture, html, oneEvent } from '@open-wc/testing';
+import { expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
 import { sendKeys } from '@web/test-runner-commands';
+import sinon from 'sinon';
 import type SlRadioGroup from '~/components/radio-group/radio-group';
 import type SlRadio from './radio';
 
@@ -52,12 +53,33 @@ describe('<sl-radio>', () => {
     expect(radio2.checked).to.be.true;
   });
 
-  it('should not fire sl-change when checked is set by javascript', async () => {
-    const el = await fixture<SlRadio>(html` <sl-radio></sl-radio> `);
-    el.addEventListener('sl-change', () => expect.fail('event fired'));
-    el.checked = true;
-    await el.updateComplete;
-    el.checked = false;
-    await el.updateComplete;
+  describe('when submitting a form', () => {
+    it('should submit the correct value', async () => {
+      const form = await fixture<HTMLFormElement>(html`
+        <form>
+          <sl-radio-group>
+            <sl-radio id="radio-1" name="a" value="1" checked></sl-radio>
+            <sl-radio id="radio-2" name="a" value="2"></sl-radio>
+            <sl-radio id="radio-2" name="a" value="3"></sl-radio>
+          </sl-radio-group>
+          <sl-button type="submit">Submit</sl-button>
+        </form>
+      `);
+      const button = form.querySelector('sl-button')!;
+      const radio = form.querySelectorAll('sl-radio')[1]!;
+      const submitHandler = sinon.spy((event: SubmitEvent) => {
+        formData = new FormData(form);
+        event.preventDefault();
+      });
+      let formData: FormData;
+
+      form.addEventListener('submit', submitHandler);
+      radio.click();
+      button.click();
+
+      await waitUntil(() => submitHandler.calledOnce);
+
+      expect(formData!.get('a')).to.equal('2');
+    });
   });
 });
