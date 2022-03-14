@@ -4,7 +4,7 @@ import styles from './visually-hidden.styles';
 
 /**
  * @since 2.0
- * @status experimental
+ * @status stable
  *
  * @slot - The content you'd like to be visually hidden.
  */
