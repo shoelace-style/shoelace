@@ -164,7 +164,9 @@ export default class SlColorPicker extends LitElement {
   /** The locale to render the component in. */
   @property() lang: string;
 
-  firstUpdated() {
+  connectedCallback() {
+    super.connectedCallback();
+
     if (!this.setColor(this.value)) {
       this.setColor(`#ffff`);
     }

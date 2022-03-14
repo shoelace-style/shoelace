@@ -18,6 +18,14 @@ const App = () => <SlColorPicker />;
 
 ## Examples
 
+### Initial Value
+
+Use the `value` attribute to set an initial value for the color picker.
+
+```html preview
+<sl-color-picker value="#4a90e2"></sl-color-picker>
+```
+
 ### Opacity
 
 Use the `opacity` attribute to enable the opacity slider. When this is enabled, the value will be displayed as HEXA, RGBA, or HSLA based on `format`.
