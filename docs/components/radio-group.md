@@ -5,14 +5,11 @@
 Radio Groups are used to group multiple radios so they function as a single control.
 
 ```html preview
-<form id="a">
-  <sl-radio-group label="Select an option">
-    <sl-radio name="option" value="1" checked>Option 1</sl-radio>
-    <sl-radio name="option" value="2">Option 2</sl-radio>
-    <sl-radio name="option" value="3">Option 3</sl-radio>
-  </sl-radio-group>
-  <sl-button type="submit">Submit</sl-button>
-</form>
+<sl-radio-group label="Select an option">
+  <sl-radio name="option" value="1" checked>Option 1</sl-radio>
+  <sl-radio name="option" value="2">Option 2</sl-radio>
+  <sl-radio name="option" value="3">Option 3</sl-radio>
+</sl-radio-group>
 ```
 
 ```jsx react
