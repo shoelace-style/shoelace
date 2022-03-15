@@ -49,6 +49,7 @@
   - [Progress Ring](/components/progress-ring)
   - [QR Code](/components/qr-code)
   - [Radio](/components/radio)
+  - [Radio Button](/components/radio-button)
   - [Radio Group](/components/radio-group)
   - [Range](/components/range)
   - [Rating](/components/rating)

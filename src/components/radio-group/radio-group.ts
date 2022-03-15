@@ -1,25 +1,33 @@
 import { html, LitElement } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
+import '~/components/button-group/button-group';
 import type SlRadio from '~/components/radio/radio';
-import { emit } from '~/internal/event';
 import styles from './radio-group.styles';
+
+const RADIO_CHILDREN = ['sl-radio', 'sl-radio-button'];
 
 /**
  * @since 2.0
  * @status stable
  *
+ * @dependency sl-button-group
+ *
  * @slot - The default slot where radio controls are placed.
  * @slot label - The radio group label. Required for proper accessibility. Alternatively, you can use the label prop.
  *
  * @csspart base - The component's internal wrapper.
- * @csspart label - The radio group label.
+ * @csspart label - The radio group's label.
+ * @csspart button-group - The button group that wraps radio buttons.
+ * @csspart button-group__base - The button group's `base` part.
  */
 @customElement('sl-radio-group')
 export default class SlRadioGroup extends LitElement {
   static styles = styles;
 
   @query('slot:not([name])') defaultSlot: HTMLSlotElement;
+
+  @state() hasButtonGroup = false;
 
   /** The radio group label. Required for proper accessibility. Alternatively, you can use the label slot. */
   @property() label = '';
@@ -33,14 +41,14 @@ export default class SlRadioGroup extends LitElement {
   }
 
   getAllRadios() {
-    return this.defaultSlot
-      .assignedElements({ flatten: true })
-      .filter(el => el.tagName.toLowerCase() === 'sl-radio') as SlRadio[];
+    return [...this.querySelectorAll(RADIO_CHILDREN.join(','))].filter(el =>
+      RADIO_CHILDREN.includes(el.tagName.toLowerCase())
+    ) as SlRadio[];
   }
 
   handleRadioClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
-    const checkedRadio = target.closest('sl-radio');
+    const checkedRadio = target.closest(RADIO_CHILDREN.map(selector => `${selector}:not([disabled])`).join(','));
 
     if (checkedRadio) {
       const radios = this.getAllRadios();
@@ -73,8 +81,6 @@ export default class SlRadioGroup extends LitElement {
       radios[index].checked = true;
       radios[index].input.tabIndex = 0;
 
-      emit(radios[index], 'sl-change');
-
       event.preventDefault();
     }
   }
@@ -82,6 +88,8 @@ export default class SlRadioGroup extends LitElement {
   handleSlotChange() {
     const radios = this.getAllRadios();
     const checkedRadio = radios.find(radio => radio.checked);
+
+    this.hasButtonGroup = !!radios.find(radio => radio.tagName.toLowerCase() === 'sl-radio-button');
 
     radios.forEach(radio => {
       radio.setAttribute('role', 'radio');
@@ -96,6 +104,10 @@ export default class SlRadioGroup extends LitElement {
   }
 
   render() {
+    const defaultSlot = html`
+      <slot @click=${this.handleRadioClick} @keydown=${this.handleKeyDown} @slotchange=${this.handleSlotChange}></slot>
+    `;
+
     return html`
       <fieldset
         part="base"
@@ -107,11 +119,9 @@ export default class SlRadioGroup extends LitElement {
         <legend part="label" class="radio-group__label">
           <slot name="label">${this.label}</slot>
         </legend>
-        <slot
-          @click=${this.handleRadioClick}
-          @keydown=${this.handleKeyDown}
-          @slotchange=${this.handleSlotChange}
-        ></slot>
+        ${this.hasButtonGroup
+          ? html`<sl-button-group part="button-group">${defaultSlot}</sl-button-group>`
+          : defaultSlot}
       </fieldset>
     `;
   }

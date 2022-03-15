@@ -23,9 +23,9 @@ import styles from './button.styles';
  * @slot suffix - Used to append an icon or similar element to the button.
  *
  * @csspart base - The component's internal wrapper.
- * @csspart prefix - The prefix container.
+ * @csspart prefix - The prefix slot's container.
  * @csspart label - The button's label.
- * @csspart suffix - The suffix container.
+ * @csspart suffix - The suffix slot's container.
  * @csspart caret - The button's caret.
  */
 @customElement('sl-button')

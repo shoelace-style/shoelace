@@ -2,24 +2,23 @@ import { expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
 import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
 import type SlRadioGroup from '~/components/radio-group/radio-group';
-import type SlRadio from './radio';
+import type SlRadioButton from './radio-button';
 
-describe('<sl-radio>', () => {
+describe('<sl-radio-button>', () => {
   it('should be disabled with the disabled attribute', async () => {
-    const el = await fixture<SlRadio>(html` <sl-radio disabled></sl-radio> `);
-    const radio = el.input;
+    const el = await fixture<SlRadioButton>(html` <sl-radio-button disabled></sl-radio-button> `);
 
-    expect(radio.disabled).to.be.true;
+    expect(el.input.disabled).to.be.true;
   });
 
   it('should be valid by default', async () => {
-    const el = await fixture<SlRadio>(html` <sl-radio></sl-radio> `);
+    const el = await fixture<SlRadioButton>(html` <sl-radio-button></sl-radio-button> `);
 
     expect(el.invalid).to.be.false;
   });
 
   it('should fire sl-change when clicked', async () => {
-    const el = await fixture<SlRadio>(html` <sl-radio></sl-radio> `);
+    const el = await fixture<SlRadioButton>(html` <sl-radio-button></sl-radio-button> `);
     setTimeout(() => el.input.click());
     const event = await oneEvent(el, 'sl-change');
     expect(event.target).to.equal(el);
@@ -27,7 +26,7 @@ describe('<sl-radio>', () => {
   });
 
   it('should fire sl-change when toggled via keyboard - space', async () => {
-    const el = await fixture<SlRadio>(html` <sl-radio></sl-radio> `);
+    const el = await fixture<SlRadioButton>(html` <sl-radio-button></sl-radio-button> `);
     el.input.focus();
     setTimeout(() => sendKeys({ press: ' ' }));
     const event = await oneEvent(el, 'sl-change');
@@ -38,12 +37,12 @@ describe('<sl-radio>', () => {
   it('should fire sl-change when toggled via keyboard - arrow key', async () => {
     const radioGroup = await fixture<SlRadioGroup>(html`
       <sl-radio-group>
-        <sl-radio id="radio-1"></sl-radio>
-        <sl-radio id="radio-2"></sl-radio>
+        <sl-radio-button id="radio-1"></sl-radio-button>
+        <sl-radio-button id="radio-2"></sl-radio-button>
       </sl-radio-group>
     `);
-    const radio1 = radioGroup.querySelector<SlRadio>('#radio-1')!;
-    const radio2 = radioGroup.querySelector<SlRadio>('#radio-2')!;
+    const radio1 = radioGroup.querySelector<SlRadioButton>('#radio-1')!;
+    const radio2 = radioGroup.querySelector<SlRadioButton>('#radio-2')!;
     radio1.input.focus();
     setTimeout(() => sendKeys({ press: 'ArrowRight' }));
     const event = await oneEvent(radio2, 'sl-change');
@@ -54,12 +53,12 @@ describe('<sl-radio>', () => {
   it('should not get checked when disabled', async () => {
     const radioGroup = await fixture<SlRadioGroup>(html`
       <sl-radio-group>
-        <sl-radio checked></sl-radio>
-        <sl-radio disabled></sl-radio>
+        <sl-radio-button checked></sl-radio-button>
+        <sl-radio-button disabled></sl-radio-button>
       </sl-radio-group>
     `);
-    const radio1 = radioGroup.querySelector<SlRadio>('sl-radio[checked]')!;
-    const radio2 = radioGroup.querySelector<SlRadio>('sl-radio[disabled]')!;
+    const radio1 = radioGroup.querySelector<SlRadioButton>('sl-radio-button[checked]')!;
+    const radio2 = radioGroup.querySelector<SlRadioButton>('sl-radio-button[disabled]')!;
 
     radio2.click();
     await Promise.all([radio1.updateComplete, radio2.updateComplete]);
@@ -73,15 +72,15 @@ describe('<sl-radio>', () => {
       const form = await fixture<HTMLFormElement>(html`
         <form>
           <sl-radio-group>
-            <sl-radio id="radio-1" name="a" value="1" checked></sl-radio>
-            <sl-radio id="radio-2" name="a" value="2"></sl-radio>
-            <sl-radio id="radio-2" name="a" value="3"></sl-radio>
+            <sl-radio-button id="radio-1" name="a" value="1" checked></sl-radio-button>
+            <sl-radio-button id="radio-2" name="a" value="2"></sl-radio-button>
+            <sl-radio-button id="radio-2" name="a" value="3"></sl-radio-button>
           </sl-radio-group>
           <sl-button type="submit">Submit</sl-button>
         </form>
       `);
       const button = form.querySelector('sl-button')!;
-      const radio = form.querySelectorAll('sl-radio')[1]!;
+      const radio = form.querySelectorAll('sl-radio-button')[1]!;
       const submitHandler = sinon.spy((event: SubmitEvent) => {
         formData = new FormData(form);
         event.preventDefault();

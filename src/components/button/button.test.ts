@@ -126,8 +126,6 @@ describe('<sl-button>', () => {
       const button = el.querySelector<SlButton>('sl-button')!;
       const handleSubmit = sinon.spy((event: SubmitEvent) => event.preventDefault());
 
-      console.log(form, button);
-
       form.addEventListener('submit', handleSubmit);
       button.click();
 
