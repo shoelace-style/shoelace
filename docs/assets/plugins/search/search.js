@@ -219,11 +219,11 @@
         await searchIndex;
 
         const hasQuery = query.length > 0;
-        const searchQuery = query
+        const searchTokens = query
           .split(' ')
           .map((term, index, arr) => `${term}${index === arr.length - 1 ? `* ${term}~1` : '~1'}`)
           .join(' ');
-        const matches = hasQuery ? searchIndex.search(searchQuery) : [];
+        const matches = hasQuery ? searchIndex.search(`${query} ${searchTokens}`) : [];
         const hasResults = hasQuery && matches.length > 0;
         siteSearch.classList.toggle('site-search--has-results', hasQuery && hasResults);
         siteSearch.classList.toggle('site-search--no-results', hasQuery && !hasResults);
