@@ -36,7 +36,7 @@ export default class SlRadioButton extends RadioBase {
   @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
 
   /**
-   * This will be true when the control is in an invalid state. Validity in range inputs is determined by the message
+   * This will be true when the control is in an invalid state. Validity in radio buttons is determined by the message
    * provided by the `setCustomValidity` method.
    */
   @property({ type: Boolean, reflect: true }) invalid = false;
