@@ -17,7 +17,7 @@ import styles from './icon-button.styles';
 export default class SlIconButton extends LitElement {
   static styles = styles;
 
-  @query('button') button: HTMLButtonElement | HTMLLinkElement;
+  @query('.icon-button') button: HTMLButtonElement | HTMLLinkElement;
 
   /** The name of the icon to draw. */
   @property() name?: string;
