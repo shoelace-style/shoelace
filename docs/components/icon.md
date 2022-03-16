@@ -24,7 +24,7 @@ Click or tap on an icon below to copy its name and use it like this.
     </sl-select>
   </div>
   <div class="icon-list"></div>
-  <input type="text" class="icon-copy-input">
+  <input type="text" class="icon-copy-input" aria-hidden="true" tabindex="-1">
 </div>
 
 ## Examples

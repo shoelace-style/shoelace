@@ -364,18 +364,54 @@ You can omit button labels and use icons instead. Make sure to set a `label` att
 
 ```html preview
 <sl-radio-group label="Select an option">
-  <sl-radio-button name="a" value="1" checked>
+  <sl-radio-button name="a" value="angry">
+    <sl-icon name="emoji-angry" label="Angry"></sl-icon>
+  </sl-radio-button>
+
+  <sl-radio-button name="a" value="sad">
     <sl-icon name="emoji-frown" label="Sad"></sl-icon>
   </sl-radio-button>
 
-  <sl-radio-button name="a" value="2">
+  <sl-radio-button name="a" value="neutral" checked>
     <sl-icon name="emoji-neutral" label="Neutral"></sl-icon>
   </sl-radio-button>
 
-  <sl-radio-button name="a" value="3">
+  <sl-radio-button name="a" value="happy">
     <sl-icon name="emoji-smile" label="Happy"></sl-icon>
   </sl-radio-button>
+
+  <sl-radio-button name="a" value="laughing">
+    <sl-icon name="emoji-laughing" label="Laughing"></sl-icon>
+  </sl-radio-button>
 </sl-radio-group>
+```
+
+```jsx react
+import { SlIcon, SlRadioButton, SlRadioGroup } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlRadioGroup label="Select an option">
+    <SlRadioButton name="a" value="angry">
+      <SlIcon name="emoji-angry" label="Angry" />
+    </SlRadioButton>
+
+    <SlRadioButton name="a" value="sad">
+      <SlIcon name="emoji-frown" label="Sad" />
+    </SlRadioButton>
+
+    <SlRadioButton name="a" value="neutral" checked>
+      <SlIcon name="emoji-neutral" label="Neutral" />
+    </SlRadioButton>
+
+    <SlRadioButton name="a" value="happy">
+      <SlIcon name="emoji-smile" label="Happy" />
+    </SlRadioButton>
+
+    <SlRadioButton name="a" value="laughing">
+      <SlIcon name="emoji-laughing" label="Laughing" />
+    </SlRadioButton>
+  </SlRadioGroup>
+);
 ```
 
 [component-metadata:sl-radio-button]

@@ -11,7 +11,7 @@ QR codes are useful for providing small pieces of information to users who can q
   <sl-qr-code value="https://shoelace.style/" label="Scan this code to visit Shoelace on the web!"></sl-qr-code>
   <br />
 
-  <sl-input maxlength="255" clearable></sl-input>
+  <sl-input maxlength="255" clearable label="Value"></sl-input>
 </div>
 
 <script>

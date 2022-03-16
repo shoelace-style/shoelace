@@ -131,7 +131,7 @@ Headers can be used to display titles and more.
   <div slot="header">
     Header Title
 
-    <sl-icon-button name="gear"></sl-icon-button>
+    <sl-icon-button name="gear" label="Settings"></sl-icon-button>
   </div>
 
   This card has a header. You can put all sorts of things in it!

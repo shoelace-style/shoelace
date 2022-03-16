@@ -250,7 +250,7 @@ Tooltips can be controller programmatically by setting the `trigger` attribute t
 <sl-button style="margin-right: 4rem;">Toggle Manually</sl-button>
 
 <sl-tooltip content="This is an avatar" trigger="manual" class="manual-tooltip">
-  <sl-avatar></sl-avatar>
+  <sl-avatar label="User"></sl-avatar>
 </sl-tooltip>
 
 <script>

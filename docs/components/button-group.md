@@ -300,13 +300,15 @@ const App = () => (
 
 ### Split Buttons
 
-Create a split button using a button and a dropdown.
+Create a split button using a button and a dropdown. Use a [visually hidden](/components/visually-hidden) label to ensure the dropdown is accessible to users with assistive devices.
 
 ```html preview
 <sl-button-group>
   <sl-button variant="primary">Save</sl-button>
   <sl-dropdown placement="bottom-end">
-    <sl-button slot="trigger" variant="primary" caret></sl-button>
+    <sl-button slot="trigger" variant="primary" caret>
+      <sl-visually-hidden>More options</sl-visually-hidden>
+    </sl-button>
     <sl-menu>
       <sl-menu-item>Save</sl-menu-item>
       <sl-menu-item>Save as&hellip;</sl-menu-item>
@@ -384,34 +386,34 @@ Create interactive toolbars with button groups.
 <div class="button-group-toolbar">
   <sl-button-group label="History">
     <sl-tooltip content="Undo">
-      <sl-button><sl-icon name="arrow-counterclockwise"></sl-icon></sl-button>
+      <sl-button><sl-icon name="arrow-counterclockwise" label="Undo"></sl-icon></sl-button>
     </sl-tooltip>
     <sl-tooltip content="Redo">
-      <sl-button><sl-icon name="arrow-clockwise"></sl-icon></sl-button>
+      <sl-button><sl-icon name="arrow-clockwise" label="Redo"></sl-icon></sl-button>
     </sl-tooltip>
   </sl-button-group>
 
   <sl-button-group label="Formatting">
     <sl-tooltip content="Bold">
-      <sl-button><sl-icon name="type-bold"></sl-icon></sl-button>
+      <sl-button><sl-icon name="type-bold" label="Bold"></sl-icon></sl-button>
     </sl-tooltip>
     <sl-tooltip content="Italic">
-      <sl-button><sl-icon name="type-italic"></sl-icon></sl-button>
+      <sl-button><sl-icon name="type-italic" label="Italic"></sl-icon></sl-button>
     </sl-tooltip>
     <sl-tooltip content="Underline">
-      <sl-button><sl-icon name="type-underline"></sl-icon></sl-button>
+      <sl-button><sl-icon name="type-underline" label="Underline"></sl-icon></sl-button>
     </sl-tooltip>
   </sl-button-group>
 
   <sl-button-group label="Alignment">
     <sl-tooltip content="Align Left">
-      <sl-button><sl-icon name="justify-left"></sl-icon></sl-button>
+      <sl-button><sl-icon name="justify-left" label="Align Left"></sl-icon></sl-button>
     </sl-tooltip>
     <sl-tooltip content="Align Center">
-      <sl-button><sl-icon name="justify"></sl-icon></sl-button>
+      <sl-button><sl-icon name="justify" label="Align Center"></sl-icon></sl-button>
     </sl-tooltip>
     <sl-tooltip content="Align Right">
-      <sl-button><sl-icon name="justify-right"></sl-icon></sl-button>
+      <sl-button><sl-icon name="justify-right" label="Align Right"></sl-icon></sl-button>
     </sl-tooltip>
   </sl-button-group>
 </div>
