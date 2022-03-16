@@ -10,7 +10,10 @@ import { HasSlotController } from '~/internal/slot';
  * @since 2.0
  * @status stable
  *
+ * @slot - The radio's label.
+ *
  * @event sl-blur - Emitted when the button loses focus.
+ * @event sl-change - Emitted when the button's checked state changes.
  * @event sl-focus - Emitted when the button gains focus.
  *
  * @slot - The button's label.

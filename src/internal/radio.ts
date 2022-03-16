@@ -5,19 +5,12 @@ import { FormSubmitController } from '~/internal/form-control';
 import { watch } from '~/internal/watch';
 
 /**
- * @since 2.0
- * @status stable
- *
- * @slot - The radio's label.
+ * The following events are emitted by the base class. When extending, these comments should be prepended to the
+ * component so they show up in its documentation.
  *
  * @event sl-blur - Emitted when the control loses focus.
  * @event sl-change - Emitted when the control's checked state changes.
  * @event sl-focus - Emitted when the control gains focus.
- *
- * @csspart base - The component's internal wrapper.
- * @csspart control - The radio control.
- * @csspart checked-icon - The container the wraps the checked icon.
- * @csspart label - The radio label.
  */
 export default abstract class RadioBase extends LitElement {
   @query('input[type="radio"], button') input: HTMLInputElement;
