@@ -8,6 +8,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
+- 🚨 BREAKING: removed status from the `sl-error` event payload in `<sl-icon>`
 - Added the experimental `<sl-radio-button>` component
 - Added `button-group` and `button-group__base` parts to `<sl-radio-group>`
 - Fixed a bug that prevented form submission from working as expected in some cases

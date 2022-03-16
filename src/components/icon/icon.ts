@@ -15,7 +15,7 @@ const parser = new DOMParser();
  * @status stable
  *
  * @event sl-load - Emitted when the icon has loaded.
- * @event {{ status: number }} sl-error - Emitted when the icon fails to load due to an error.
+ * @event sl-error - Emitted when the icon fails to load due to an error.
  *
  * @csspart base - The component's internal wrapper.
  */
@@ -86,19 +86,18 @@ export default class SlIcon extends LitElement {
 
           if (svgEl !== null) {
             library?.mutator?.(svgEl);
-
             this.svg = svgEl.outerHTML;
             emit(this, 'sl-load');
           } else {
             this.svg = '';
-            emit(this, 'sl-error', { detail: { status: file.status } });
+            emit(this, 'sl-error');
           }
         } else {
           this.svg = '';
-          emit(this, 'sl-error', { detail: { status: file.status } });
+          emit(this, 'sl-error');
         }
       } catch {
-        emit(this, 'sl-error', { detail: { status: -1 } });
+        emit(this, 'sl-error');
       }
     } else if (this.svg.length > 0) {
       // If we can't resolve a URL and an icon was previously set, remove it
