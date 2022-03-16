@@ -69,11 +69,12 @@ strong {
   opacity: 1;
 }
 
-.sidebar-toggle:active .sidebar-toggle-button span {
+.sidebar-toggle span,
+.sidebar-toggle:active .sidebar-toggle span {
   background-color: var(--sl-color-primary-700);
 }
 
-.sidebar-toggle:focus {
+.sidebar-toggle:focus-visible {
   outline: none;
   box-shadow: var(--sl-focus-ring);
 }
@@ -290,10 +291,6 @@ strong {
   padding: 2px 4px;
 }
 
-.markdown-section tr:nth-child(2n) code {
-  background-color: var(--sl-color-neutral-100);
-}
-
 kbd,
 .markdown-section kbd {
   font-family: var(--sl-font-mono);
@@ -346,7 +343,7 @@ kbd,
 .markdown-section pre .token.keyword,
 .markdown-section pre .token.tag,
 .markdown-section pre .token.url {
-  color: var(--sl-color-blue-700);
+  color: var(--sl-color-sky-700);
 }
 
 .markdown-section pre .token.symbol,
@@ -411,8 +408,9 @@ kbd,
   border: none;
 }
 
+.markdown-section tr,
 .markdown-section tr:nth-child(2n) {
-  background: var(--sl-color-neutral-50);
+  background: none;
 }
 
 .markdown-section th {
@@ -473,19 +471,19 @@ kbd,
 }
 
 .markdown-section p.warn {
-  border-left-color: var(--sl-color-primary-600);
+  border-left-color: var(--sl-color-primary-700);
 }
 
 .markdown-section p.warn:before {
-  background-color: var(--sl-color-primary-600);
+  background-color: var(--sl-color-primary-700);
 }
 
 .markdown-section p.tip {
-  border-left-color: var(--sl-color-danger-600);
+  border-left-color: var(--sl-color-danger-700);
 }
 
 .markdown-section p.tip:before {
-  background-color: var(--sl-color-danger-600);
+  background-color: var(--sl-color-danger-700);
 }
 
 .markdown-section p.tip code,
@@ -554,7 +552,7 @@ body[data-page^='/tokens/'] .table-wrapper td:first-child code {
 .border-radius-demo {
   width: 3rem;
   height: 3rem;
-  background: var(--sl-color-primary-600);
+  background: var(--sl-color-primary-700);
 }
 
 /* Transition demo */
@@ -568,7 +566,7 @@ body[data-page^='/tokens/'] .table-wrapper td:first-child code {
 .transition-demo:after {
   content: '';
   position: absolute;
-  background-color: var(--sl-color-primary-600);
+  background-color: var(--sl-color-primary-700);
   top: 0;
   left: 0;
   width: 0;
@@ -584,7 +582,7 @@ body[data-page^='/tokens/'] .table-wrapper td:first-child code {
 /* Spacing demo */
 .spacing-demo {
   width: 100px;
-  background: var(--sl-color-primary-600);
+  background: var(--sl-color-primary-700);
 }
 
 /* Elevation demo */

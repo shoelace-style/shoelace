@@ -79,37 +79,37 @@ export default css`
     ~ .switch__control
     .switch__thumb {
     background-color: var(--sl-color-neutral-0);
-    border-color: var(--sl-color-primary-600);
+    border-color: var(--sl-color-primary-700);
     box-shadow: var(--sl-focus-ring);
   }
 
   /* Checked */
   .switch--checked .switch__control {
-    background-color: var(--sl-color-primary-600);
-    border-color: var(--sl-color-primary-600);
+    background-color: var(--sl-color-primary-700);
+    border-color: var(--sl-color-primary-700);
   }
 
   .switch--checked .switch__control .switch__thumb {
     background-color: var(--sl-color-neutral-0);
-    border-color: var(--sl-color-primary-600);
+    border-color: var(--sl-color-primary-700);
     transform: translateX(calc((var(--width) - var(--height)) / 2));
   }
 
   /* Checked + hover */
   .switch.switch--checked:not(.switch--disabled) .switch__control:hover {
-    background-color: var(--sl-color-primary-600);
-    border-color: var(--sl-color-primary-600);
+    background-color: var(--sl-color-primary-700);
+    border-color: var(--sl-color-primary-700);
   }
 
   .switch.switch--checked:not(.switch--disabled) .switch__control:hover .switch__thumb {
     background-color: var(--sl-color-neutral-0);
-    border-color: var(--sl-color-primary-600);
+    border-color: var(--sl-color-primary-700);
   }
 
   /* Checked + focus */
   .switch.switch--checked:not(.switch--disabled) .switch__input${focusVisibleSelector} ~ .switch__control {
-    background-color: var(--sl-color-primary-600);
-    border-color: var(--sl-color-primary-600);
+    background-color: var(--sl-color-primary-700);
+    border-color: var(--sl-color-primary-700);
   }
 
   .switch.switch--checked:not(.switch--disabled)
@@ -117,7 +117,7 @@ export default css`
     ~ .switch__control
     .switch__thumb {
     background-color: var(--sl-color-neutral-0);
-    border-color: var(--sl-color-primary-600);
+    border-color: var(--sl-color-primary-700);
     box-shadow: var(--sl-focus-ring);
   }
 

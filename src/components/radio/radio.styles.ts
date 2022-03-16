@@ -71,20 +71,20 @@ export default css`
   /* Checked */
   .radio--checked .radio__control {
     color: var(--sl-color-neutral-0);
-    border-color: var(--sl-color-primary-600);
-    background-color: var(--sl-color-primary-600);
+    border-color: var(--sl-color-primary-700);
+    background-color: var(--sl-color-primary-700);
   }
 
   /* Checked + hover */
   .radio.radio--checked:not(.radio--disabled) .radio__control:hover {
-    border-color: var(--sl-color-primary-500);
-    background-color: var(--sl-color-primary-500);
+    border-color: var(--sl-color-primary-600);
+    background-color: var(--sl-color-primary-600);
   }
 
   /* Checked + focus */
   .radio.radio--checked:not(.radio--disabled) .radio__input${focusVisibleSelector} ~ .radio__control {
-    border-color: var(--sl-color-primary-500);
-    background-color: var(--sl-color-primary-500);
+    border-color: var(--sl-color-primary-600);
+    background-color: var(--sl-color-primary-600);
     box-shadow: var(--sl-focus-ring);
   }
 
