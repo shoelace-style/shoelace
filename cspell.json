@@ -1,6 +1,7 @@
 {
   "version": "0.2",
   "words": [
+    "activedescendant",
     "allowfullscreen",
     "animationend",
     "Animista",
@@ -63,6 +64,7 @@
     "labelledby",
     "Laravel",
     "LaViska",
+    "listbox",
     "litelement",
     "lowercasing",
     "Lucide",
