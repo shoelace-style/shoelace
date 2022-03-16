@@ -510,6 +510,7 @@ export default class SlSelect extends LitElement {
               role="combobox"
               aria-describedby="help-text"
               aria-haspopup="true"
+              aria-disabled=${this.disabled ? 'true' : 'false'}
               aria-expanded=${this.isOpen ? 'true' : 'false'}
               aria-controls="menu"
               tabindex=${this.disabled ? '-1' : '0'}
