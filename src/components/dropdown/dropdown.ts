@@ -2,6 +2,8 @@ import { autoUpdate, computePosition, flip, offset, shift, size } from '@floatin
 import { html, LitElement } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
+import type SlButton from '~/components/button/button';
+import type SlIconButton from '~/components/icon-button/icon-button';
 import type SlMenuItem from '~/components/menu-item/menu-item';
 import type SlMenu from '~/components/menu/menu';
 import { animateTo, stopAnimations } from '~/internal/animate';
@@ -284,10 +286,22 @@ export default class SlDropdown extends LitElement {
     const slot = this.trigger.querySelector('slot')!;
     const assignedElements = slot.assignedElements({ flatten: true }) as HTMLElement[];
     const accessibleTrigger = assignedElements.find(el => getTabbableBoundary(el).start);
+    let target: HTMLElement;
 
     if (accessibleTrigger) {
-      accessibleTrigger.setAttribute('aria-haspopup', 'true');
-      accessibleTrigger.setAttribute('aria-expanded', this.open ? 'true' : 'false');
+      switch (accessibleTrigger.tagName.toLowerCase()) {
+        // Shoelace buttons have to update the internal button so it's announced correctly by screen readers
+        case 'sl-button':
+        case 'sl-icon-button':
+          target = (accessibleTrigger as SlButton | SlIconButton).button;
+          break;
+
+        default:
+          target = accessibleTrigger;
+      }
+
+      target.setAttribute('aria-haspopup', 'true');
+      target.setAttribute('aria-expanded', this.open ? 'true' : 'false');
     }
   }
 
