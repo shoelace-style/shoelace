@@ -18,6 +18,14 @@ export class HasSlotController implements ReactiveController {
 
       if (node.nodeType === node.ELEMENT_NODE) {
         const el = node as HTMLElement;
+        const tagName = el.tagName.toLowerCase();
+
+        // Ignore visually hidden elements since they aren't rendered
+        if (tagName === 'sl-visually-hidden') {
+          return false;
+        }
+
+        // If it doesn't have a slot attribute, it's part of the default slot
         if (!el.hasAttribute('slot')) {
           return true;
         }
