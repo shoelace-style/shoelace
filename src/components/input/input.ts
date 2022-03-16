@@ -361,6 +361,7 @@ export default class SlInput extends LitElement {
                     part="clear-button"
                     class="input__clear"
                     type="button"
+                    aria-hidden="true"
                     @click=${this.handleClearClick}
                     tabindex="-1"
                   >
@@ -376,6 +377,7 @@ export default class SlInput extends LitElement {
                     part="password-toggle-button"
                     class="input__password-toggle"
                     type="button"
+                    aria-hidden="true"
                     @click=${this.handlePasswordToggle}
                     tabindex="-1"
                   >
