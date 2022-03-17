@@ -75,9 +75,6 @@ export default class SlRadioButton extends RadioBase {
         type="button"
         name=${ifDefined(this.name)}
         value=${ifDefined(this.value)}
-        aria-selected=${this.checked ? 'true' : 'false'}
-        aria-disabled=${this.disabled ? 'true' : 'false'}
-        tabindex=${this.disabled ? '-1' : '0'}
         @blur=${this.handleBlur}
         @focus=${this.handleFocus}
         @click=${this.handleClick}
