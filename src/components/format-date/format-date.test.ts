@@ -5,7 +5,7 @@ import type SlFormatDate from './format-date';
 describe('<sl-format-date>', () => {
 
   describe('defaults ', () => {
-    let clock;
+    let clock: any;
 
     beforeEach(() => {
       // fake timer so `new Date()` can be tested
@@ -54,7 +54,8 @@ describe('<sl-format-date>', () => {
     results.forEach((setup) => {
       it(`date has correct language format: ${setup.lang}`, async () => {
         const el = await fixture<SlFormatDate>(html` <sl-format-date date="${new Date(new Date().getFullYear(), 0, 1)}" lang="${setup.lang}"></sl-format-date> `);
-        expect(el.shadowRoot?.textContent).to.equal(setup.result);
+        const innerTimeEl = el.shadowRoot?.querySelector('time');
+        expect(innerTimeEl?.textContent?.trim()).to.equal(setup.result);
       });
     });
   });
@@ -66,7 +67,8 @@ describe('<sl-format-date>', () => {
         const el = await fixture<SlFormatDate>(html` <sl-format-date date="${new Date(new Date().getFullYear(), 0, 1)}" weekday="${weekdayFormat}"></sl-format-date> `);
 
         const expected = new Intl.DateTimeFormat('en-US', { weekday: weekdayFormat}).format(new Date(new Date().getFullYear(), 0, 1))
-        expect(el.shadowRoot?.textContent).to.equal(expected);
+        const innerTimeEl = el.shadowRoot?.querySelector('time');
+        expect(innerTimeEl?.textContent?.trim()).to.equal(expected);
       });
     });
   });
@@ -78,7 +80,8 @@ describe('<sl-format-date>', () => {
         const el = await fixture<SlFormatDate>(html` <sl-format-date date="${new Date(new Date().getFullYear(), 0, 1)}" era="${eraFormat}"></sl-format-date> `);
 
         const expected = new Intl.DateTimeFormat('en-US', { era: eraFormat}).format(new Date(new Date().getFullYear(), 0, 1))
-        expect(el.shadowRoot?.textContent).to.equal(expected);
+        const innerTimeEl = el.shadowRoot?.querySelector('time');
+        expect(innerTimeEl?.textContent?.trim()).to.equal(expected);
       });
     });
   });
@@ -90,7 +93,8 @@ describe('<sl-format-date>', () => {
         const el = await fixture<SlFormatDate>(html` <sl-format-date date="${new Date(new Date().getFullYear(), 0, 1)}" year="${yearFormat}"></sl-format-date> `);
 
         const expected = new Intl.DateTimeFormat('en-US', { year: yearFormat}).format(new Date(new Date().getFullYear(), 0, 1))
-        expect(el.shadowRoot?.textContent).to.equal(expected);
+        const innerTimeEl = el.shadowRoot?.querySelector('time');
+        expect(innerTimeEl?.textContent?.trim()).to.equal(expected);
       });
     });
   });
@@ -102,7 +106,8 @@ describe('<sl-format-date>', () => {
         const el = await fixture<SlFormatDate>(html` <sl-format-date date="${new Date(new Date().getFullYear(), 0, 1)}" month="${monthFormat}"></sl-format-date> `);
 
         const expected = new Intl.DateTimeFormat('en-US', { month: monthFormat}).format(new Date(new Date().getFullYear(), 0, 1))
-        expect(el.shadowRoot?.textContent).to.equal(expected);
+        const innerTimeEl = el.shadowRoot?.querySelector('time');
+        expect(innerTimeEl?.textContent?.trim()).to.equal(expected);
       });
     });
   });
@@ -114,7 +119,8 @@ describe('<sl-format-date>', () => {
         const el = await fixture<SlFormatDate>(html` <sl-format-date date="${new Date(new Date().getFullYear(), 0, 1)}" day="${dayFormat}"></sl-format-date> `);
 
         const expected = new Intl.DateTimeFormat('en-US', { day: dayFormat}).format(new Date(new Date().getFullYear(), 0, 1))
-        expect(el.shadowRoot?.textContent).to.equal(expected);
+        const innerTimeEl = el.shadowRoot?.querySelector('time');
+        expect(innerTimeEl?.textContent?.trim()).to.equal(expected);
       });
     });
   });
@@ -126,7 +132,8 @@ describe('<sl-format-date>', () => {
         const el = await fixture<SlFormatDate>(html` <sl-format-date date="${new Date(new Date().getFullYear(), 0, 1)}" hour="${hourFormat}"></sl-format-date> `);
 
         const expected = new Intl.DateTimeFormat('en-US', { hour: hourFormat}).format(new Date(new Date().getFullYear(), 0, 1))
-        expect(el.shadowRoot?.textContent).to.equal(expected);
+        const innerTimeEl = el.shadowRoot?.querySelector('time');
+        expect(innerTimeEl?.textContent?.trim()).to.equal(expected);
       });
     });
   });
@@ -138,7 +145,8 @@ describe('<sl-format-date>', () => {
         const el = await fixture<SlFormatDate>(html` <sl-format-date date="${new Date(new Date().getFullYear(), 0, 1)}" minute="${minuteFormat}"></sl-format-date> `);
 
         const expected = new Intl.DateTimeFormat('en-US', { minute: minuteFormat}).format(new Date(new Date().getFullYear(), 0, 1))
-        expect(el.shadowRoot?.textContent).to.equal(expected);
+        const innerTimeEl = el.shadowRoot?.querySelector('time');
+        expect(innerTimeEl?.textContent?.trim()).to.equal(expected);
       });
     });
   });
@@ -150,7 +158,8 @@ describe('<sl-format-date>', () => {
         const el = await fixture<SlFormatDate>(html` <sl-format-date date="${new Date(new Date().getFullYear(), 0, 1)}" second="${secondFormat}"></sl-format-date> `);
 
         const expected = new Intl.DateTimeFormat('en-US', { second: secondFormat}).format(new Date(new Date().getFullYear(), 0, 1))
-        expect(el.shadowRoot?.textContent).to.equal(expected);
+        const innerTimeEl = el.shadowRoot?.querySelector('time');
+        expect(innerTimeEl?.textContent?.trim()).to.equal(expected);
       });
     });
   });
@@ -162,7 +171,8 @@ describe('<sl-format-date>', () => {
         const el = await fixture<SlFormatDate>(html` <sl-format-date date="${new Date(new Date().getFullYear(), 0, 1)}" time-zone-name="${timeZoneNameFormat}"></sl-format-date> `);
 
         const expected = new Intl.DateTimeFormat('en-US', { timeZoneName: timeZoneNameFormat}).format(new Date(new Date().getFullYear(), 0, 1))
-        expect(el.shadowRoot?.textContent).to.equal(expected);
+        const innerTimeEl = el.shadowRoot?.querySelector('time');
+        expect(innerTimeEl?.textContent?.trim()).to.equal(expected);
       });
     });
   });
@@ -174,7 +184,8 @@ describe('<sl-format-date>', () => {
         const el = await fixture<SlFormatDate>(html` <sl-format-date date="${new Date(new Date().getFullYear(), 0, 1)}" time-zone="${timeZone}"></sl-format-date> `);
 
         const expected = new Intl.DateTimeFormat('en-US', { timeZone: timeZone}).format(new Date(new Date().getFullYear(), 0, 1))
-        expect(el.shadowRoot?.textContent).to.equal(expected);
+        const innerTimeEl = el.shadowRoot?.querySelector('time');
+        expect(innerTimeEl?.textContent?.trim()).to.equal(expected);
       });
     });
   });
@@ -186,7 +197,8 @@ describe('<sl-format-date>', () => {
         const el = await fixture<SlFormatDate>(html` <sl-format-date date="${new Date(new Date().getFullYear(), 0, 1)}" hour-format="${hourFormatValue}"></sl-format-date> `);
 
         const expected = new Intl.DateTimeFormat('en-US', { hour12: hourFormatValue === 'auto' ? undefined : hourFormatValue === '12'}).format(new Date(new Date().getFullYear(), 0, 1))
-        expect(el.shadowRoot?.textContent).to.equal(expected);
+        const innerTimeEl = el.shadowRoot?.querySelector('time');
+        expect(innerTimeEl?.textContent?.trim()).to.equal(expected);
       });
     });
   });
