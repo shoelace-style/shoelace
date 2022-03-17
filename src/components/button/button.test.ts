@@ -3,9 +3,7 @@ import sinon from 'sinon';
 import type SlButton from './button';
 
 describe('<sl-button>', () => {
-
   describe('when provided no parameters', () => {
-
     it('passes accessibility test', async () => {
       const el = await fixture<SlButton>(html` <sl-button>Button Label</sl-button> `);
       await expect(el).to.be.accessible();
@@ -37,12 +35,11 @@ describe('<sl-button>', () => {
 
     it('should not have a caret present', async () => {
       const el = await fixture<SlButton>(html` <sl-button>Button Label</sl-button> `);
-      expect(el.shadowRoot?.querySelector('[part="caret"]')).not .to.exist;
+      expect(el.shadowRoot?.querySelector('[part="caret"]')).not.to.exist;
     });
   });
 
   describe('when disabled', () => {
-
     it('passes accessibility test', async () => {
       const el = await fixture<SlButton>(html` <sl-button disabled>Button Label</sl-button> `);
       await expect(el).to.be.accessible();
@@ -81,25 +78,20 @@ describe('<sl-button>', () => {
   });
 
   describe('when loading', () => {
-
     it('should have a spinner present', async () => {
       const el = await fixture<SlButton>(html` <sl-button loading>Button Label</sl-button> `);
       expect(el.shadowRoot!.querySelector('sl-spinner')).to.exist;
     });
-
   });
 
   describe('when caret', () => {
-
     it('should have a caret present', async () => {
       const el = await fixture<SlButton>(html` <sl-button caret>Button Label</sl-button> `);
       expect(el.shadowRoot!.querySelector('[part="caret"]')).to.exist;
     });
-
   });
 
   describe('when href is present', () => {
-
     it('should render as an <a>', async () => {
       const el = await fixture<SlButton>(html` <sl-button href="some/path">Button Label</sl-button> `);
       expect(el.shadowRoot!.querySelector('a')).to.exist;

@@ -1,9 +1,9 @@
 /* eslint-disable no-restricted-imports */
 import { elementUpdated, expect, fixture, html, oneEvent } from '@open-wc/testing';
 // import sinon from 'sinon';
+import { registerIconLibrary } from '../../../dist/shoelace.js';
 import type SlIcon from './icon';
 /* @ts-expect-error - Need to switch to path aliases when Web Test Runner's esbuild plugin allows it */
-import { registerIconLibrary } from '../../../dist/shoelace.js';
 
 const testLibraryIcons = {
   'test-icon1': `<svg id="test-icon1">
@@ -16,12 +16,11 @@ const testLibraryIcons = {
 };
 
 describe('<sl-icon>', () => {
-
   before(() => {
     registerIconLibrary('test-library', {
       resolver: (name: keyof typeof testLibraryIcons) => {
         // only for testing a bad request
-        if( name === ('bad-request' as keyof typeof testLibraryIcons)) {
+        if (name === ('bad-request' as keyof typeof testLibraryIcons)) {
           return `data:image/svg+xml`;
         }
 
@@ -62,20 +61,19 @@ describe('<sl-icon>', () => {
     });
 
     it('the icon has the correct default aria attributes', async () => {
-      const el = await fixture<SlIcon>(html` <sl-icon library="system" name="check-lg" ></sl-icon> `);
+      const el = await fixture<SlIcon>(html` <sl-icon library="system" name="check-lg"></sl-icon> `);
       const rootDiv = el.shadowRoot?.querySelector('div.icon');
 
       expect(rootDiv?.getAttribute('role')).to.be.null;
       expect(rootDiv?.getAttribute('aria-label')).to.be.null;
       expect(rootDiv?.getAttribute('aria-hidden')).to.equal('true');
     });
-
   });
 
   describe('when a label is provided', () => {
     it('the icon has the correct default aria attributes', async () => {
       const fakeLabel = 'a label';
-      const el = await fixture<SlIcon>(html` <sl-icon label="${fakeLabel}" library="system" name="check" ></sl-icon> `);
+      const el = await fixture<SlIcon>(html` <sl-icon label="${fakeLabel}" library="system" name="check"></sl-icon> `);
       const rootDiv = el.shadowRoot?.querySelector('div.icon');
 
       expect(rootDiv?.getAttribute('role')).to.equal('img');
@@ -101,7 +99,6 @@ describe('<sl-icon>', () => {
   });
 
   describe('new library', () => {
-
     it('renders icons from the new library and emits sl-load event', async () => {
       const el = await fixture<SlIcon>(html` <sl-icon library="test-library"></sl-icon> `);
       const listener = oneEvent(el, 'sl-load');
@@ -121,7 +118,6 @@ describe('<sl-icon>', () => {
       const svg = el.shadowRoot?.querySelector('svg');
       expect(svg?.getAttribute('fill')).to.equal('currentColor');
     });
-
   });
 
   describe('negative cases', () => {
@@ -180,5 +176,4 @@ describe('<sl-icon>', () => {
 
   //   });
   // });
-
 });

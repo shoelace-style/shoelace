@@ -1,7 +1,5 @@
-/* eslint-disable no-restricted-imports */
 import { expect, fixture, html, waitUntil } from '@open-wc/testing';
 import type SlIconButton from './icon-button';
-
 
 describe('<sl-icon-button>', () => {
   describe('defaults ', () => {
@@ -24,12 +22,13 @@ describe('<sl-icon-button>', () => {
       expect(el.shadowRoot?.querySelector('button')).to.exist;
       expect(el.shadowRoot?.querySelector('a')).not.to.exist;
     });
-
   });
 
   describe('when icon attributes are present', () => {
     it('renders an sl-icon from a library', async () => {
-      const el = await fixture<SlIconButton>(html` <sl-icon-button library="system" name="check-lg"></sl-icon-button> `);
+      const el = await fixture<SlIconButton>(
+        html` <sl-icon-button library="system" name="check-lg"></sl-icon-button> `
+      );
       expect(el.shadowRoot?.querySelector('sl-icon')).to.exist;
     });
 
@@ -41,10 +40,7 @@ describe('<sl-icon-button>', () => {
 
       const internalSlIcon = el.shadowRoot?.querySelector('sl-icon');
 
-      await waitUntil(
-        () => internalSlIcon?.shadowRoot?.querySelector('svg'),
-        'SVG not rendered',
-      );
+      await waitUntil(() => internalSlIcon?.shadowRoot?.querySelector('svg'), 'SVG not rendered');
 
       expect(internalSlIcon).to.exist;
       expect(internalSlIcon?.shadowRoot?.querySelector('svg')).to.exist;
@@ -68,12 +64,16 @@ describe('<sl-icon-button>', () => {
     describe('and target is present', () => {
       ['_blank', '_parent', '_self', '_top'].forEach((target: string) => {
         it(`the anchor target is the provided target: ${target}`, async () => {
-          const el = await fixture<SlIconButton>(html` <sl-icon-button href="some/path" target="${target}"></sl-icon-button> `);
+          const el = await fixture<SlIconButton>(
+            html` <sl-icon-button href="some/path" target="${target}"></sl-icon-button> `
+          );
           expect(el.shadowRoot?.querySelector(`a[target="${target}"]`)).to.exist;
         });
 
         it(`the anchor rel is set to 'noreferrer noopener'`, async () => {
-          const el = await fixture<SlIconButton>(html` <sl-icon-button href="some/path" target="${target}"></sl-icon-button> `);
+          const el = await fixture<SlIconButton>(
+            html` <sl-icon-button href="some/path" target="${target}"></sl-icon-button> `
+          );
           expect(el.shadowRoot?.querySelector(`a[rel="noreferrer noopener"]`)).to.exist;
         });
       });
@@ -82,7 +82,9 @@ describe('<sl-icon-button>', () => {
     describe('and download is present', () => {
       it(`the anchor downlown attribute is the provided download`, async () => {
         const fakeDownload = 'some/path';
-        const el = await fixture<SlIconButton>(html` <sl-icon-button href="some/path" download="${fakeDownload}"></sl-icon-button> `);
+        const el = await fixture<SlIconButton>(
+          html` <sl-icon-button href="some/path" download="${fakeDownload}"></sl-icon-button> `
+        );
 
         expect(el.shadowRoot?.querySelector(`a[download="${fakeDownload}"]`)).to.exist;
       });
@@ -98,7 +100,9 @@ describe('<sl-icon-button>', () => {
 
     it('the internal aria-label attribute is set to the provided label when rendering an anchor', async () => {
       const fakeLabel = 'some label';
-      const el = await fixture<SlIconButton>(html` <sl-icon-button href="some/path" label="${fakeLabel}"></sl-icon-button> `);
+      const el = await fixture<SlIconButton>(
+        html` <sl-icon-button href="some/path" label="${fakeLabel}"></sl-icon-button> `
+      );
       expect(el.shadowRoot?.querySelector(`a[aria-label="${fakeLabel}"]`)).to.exist;
     });
   });
