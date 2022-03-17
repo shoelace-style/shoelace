@@ -9,6 +9,7 @@ const translation: Translation = {
   close: 'Cerrar',
   copy: 'Copiar',
   progress: 'Progreso',
+  remove: 'Eliminar',
   resize: 'Cambiar el tamaño',
   scrollToEnd: 'Desplazarse hasta el final',
   scrollToStart: 'Desplazarse al inicio',

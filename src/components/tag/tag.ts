@@ -3,6 +3,7 @@ import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import '~/components/icon-button/icon-button';
 import { emit } from '~/internal/event';
+import { LocalizeController } from '~/utilities/localize';
 import styles from './tag.styles';
 
 /**
@@ -23,6 +24,7 @@ import styles from './tag.styles';
 @customElement('sl-tag')
 export default class SlTag extends LitElement {
   static styles = styles;
+  private readonly localize = new LocalizeController(this);
 
   /** The tag's variant. */
   @property({ reflect: true }) variant: 'primary' | 'success' | 'neutral' | 'warning' | 'danger' | 'text' = 'neutral';
@@ -76,6 +78,7 @@ export default class SlTag extends LitElement {
                 exportparts="base:remove-button__base"
                 name="x"
                 library="system"
+                label=${this.localize.term('remove')}
                 class="tag__remove"
                 @click=${this.handleRemoveClick}
               ></sl-icon-button>
