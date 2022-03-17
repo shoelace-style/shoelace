@@ -44,8 +44,8 @@ export default css`
     width: var(--thumb-size);
     height: var(--thumb-size);
     border-radius: 50%;
-    background-color: var(--sl-color-primary-700);
-    border: solid var(--sl-input-border-width) var(--sl-color-primary-700);
+    background-color: var(--sl-color-primary-600);
+    border: solid var(--sl-input-border-width) var(--sl-color-primary-600);
     -webkit-appearance: none;
     margin-top: calc(var(--thumb-size) / -2 + var(--track-height) / 2);
     transition: var(--sl-transition-fast) border-color, var(--sl-transition-fast) background-color,
@@ -54,19 +54,19 @@ export default css`
   }
 
   .range__control:enabled::-webkit-slider-thumb:hover {
-    background-color: var(--sl-color-primary-600);
-    border-color: var(--sl-color-primary-600);
+    background-color: var(--sl-color-primary-500);
+    border-color: var(--sl-color-primary-500);
   }
 
   .range__control:enabled${focusVisibleSelector}::-webkit-slider-thumb {
-    background-color: var(--sl-color-primary-600);
-    border-color: var(--sl-color-primary-600);
+    background-color: var(--sl-color-primary-500);
+    border-color: var(--sl-color-primary-500);
     box-shadow: var(--sl-focus-ring);
   }
 
   .range__control:enabled::-webkit-slider-thumb:active {
-    background-color: var(--sl-color-primary-600);
-    border-color: var(--sl-color-primary-600);
+    background-color: var(--sl-color-primary-500);
+    border-color: var(--sl-color-primary-500);
     cursor: grabbing;
   }
 
@@ -94,27 +94,27 @@ export default css`
     height: var(--thumb-size);
     width: var(--thumb-size);
     border-radius: 50%;
-    background-color: var(--sl-color-primary-700);
-    border-color: var(--sl-color-primary-700);
+    background-color: var(--sl-color-primary-600);
+    border-color: var(--sl-color-primary-600);
     transition: var(--sl-transition-fast) border-color, var(--sl-transition-fast) background-color,
       var(--sl-transition-fast) color, var(--sl-transition-fast) box-shadow, var(--sl-transition-fast) transform;
     cursor: pointer;
   }
 
   .range__control:enabled::-moz-range-thumb:hover {
-    background-color: var(--sl-color-primary-600);
-    border-color: var(--sl-color-primary-600);
+    background-color: var(--sl-color-primary-500);
+    border-color: var(--sl-color-primary-500);
   }
 
   .range__control:enabled${focusVisibleSelector}::-moz-range-thumb {
-    background-color: var(--sl-color-primary-600);
-    border-color: var(--sl-color-primary-600);
+    background-color: var(--sl-color-primary-500);
+    border-color: var(--sl-color-primary-500);
     box-shadow: var(--sl-focus-ring);
   }
 
   .range__control:enabled::-moz-range-thumb:active {
-    background-color: var(--sl-color-primary-600);
-    border-color: var(--sl-color-primary-600);
+    background-color: var(--sl-color-primary-500);
+    border-color: var(--sl-color-primary-500);
     cursor: grabbing;
   }
 

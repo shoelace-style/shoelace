@@ -14,13 +14,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug that prevented form submission from working as expected in some cases
 - Fixed a bug that prevented `<sl-split-panel>` from toggling `vertical` properly [#703](https://github.com/shoelace-style/shoelace/issues/703)
 - Fixed a bug that prevented `<sl-color-picker>` from rendering a color initially [#704](https://github.com/shoelace-style/shoelace/issues/704)
-- Improved accessibility throughout the docs
-- Improved contrast in all components to meet the [Level AA](https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html) standard
-- Improved accessibility of `<sl-dropdown>` so the trigger's expanded state is announced correctly
-- Improved accessibility of `<sl-format-date>` but rendering a `<time>` element instead of plain text
-- Improved accessibility of `<sl-select>` so disabled controls announce correct
 - Refactored `<sl-radio>` to move selection logic into `<sl-radio-group>`
-- Updated slot detection logic so it ignores visually hidden elements
 - Upgraded the status of `<sl-visually-hidden>` from experimental to stable
 
 ## 2.0.0-beta.71

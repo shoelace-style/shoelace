@@ -407,7 +407,7 @@
   /* Focus ring */
   --sl-focus-ring-alpha: 45%;
   --sl-focus-ring-width: 3px;
-  --sl-focus-ring: 0 0 0 var(--sl-focus-ring-width) hsl(198.6 93.1% 60% / var(--sl-focus-ring-alpha));
+  --sl-focus-ring: 0 0 0 var(--sl-focus-ring-width) hsl(198.6 88.7% 48.4% / var(--sl-focus-ring-alpha));
 
   /* Buttons */
   --sl-button-font-size-small: var(--sl-font-size-x-small);

@@ -42,43 +42,43 @@ export default css`
   }
 
   .alert--primary {
-    border-top-color: var(--sl-color-primary-700);
+    border-top-color: var(--sl-color-primary-600);
   }
 
   .alert--primary .alert__icon {
-    color: var(--sl-color-primary-700);
+    color: var(--sl-color-primary-600);
   }
 
   .alert--success {
-    border-top-color: var(--sl-color-success-700);
+    border-top-color: var(--sl-color-success-600);
   }
 
   .alert--success .alert__icon {
-    color: var(--sl-color-success-700);
+    color: var(--sl-color-success-600);
   }
 
   .alert--neutral {
-    border-top-color: var(--sl-color-neutral-700);
+    border-top-color: var(--sl-color-neutral-600);
   }
 
   .alert--neutral .alert__icon {
-    color: var(--sl-color-neutral-700);
+    color: var(--sl-color-neutral-600);
   }
 
   .alert--warning {
-    border-top-color: var(--sl-color-warning-700);
+    border-top-color: var(--sl-color-warning-600);
   }
 
   .alert--warning .alert__icon {
-    color: var(--sl-color-warning-700);
+    color: var(--sl-color-warning-600);
   }
 
   .alert--danger {
-    border-top-color: var(--sl-color-danger-700);
+    border-top-color: var(--sl-color-danger-600);
   }
 
   .alert--danger .alert__icon {
-    color: var(--sl-color-danger-700);
+    color: var(--sl-color-danger-600);
   }
 
   .alert__message {

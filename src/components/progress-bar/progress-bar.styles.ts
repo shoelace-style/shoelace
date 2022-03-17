@@ -7,7 +7,7 @@ export default css`
   :host {
     --height: 1rem;
     --track-color: var(--sl-color-neutral-200);
-    --indicator-color: var(--sl-color-primary-700);
+    --indicator-color: var(--sl-color-primary-600);
     --label-color: var(--sl-color-neutral-0);
 
     display: block;

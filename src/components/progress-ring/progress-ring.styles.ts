@@ -8,7 +8,7 @@ export default css`
     --size: 128px;
     --track-width: 4px;
     --track-color: var(--sl-color-neutral-200);
-    --indicator-color: var(--sl-color-primary-700);
+    --indicator-color: var(--sl-color-primary-600);
 
     display: inline-flex;
   }

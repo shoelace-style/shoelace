@@ -25,7 +25,7 @@ export default css`
   }
 
   .tab:hover:not(.tab--disabled) {
-    color: var(--sl-color-primary-700);
+    color: var(--sl-color-primary-600);
   }
 
   .tab:focus {
@@ -37,15 +37,15 @@ export default css`
     box-shadow: inset var(--sl-focus-ring);
   }
 
-  .tab--active:not(.tab--disabled) {
-    color: var(--sl-color-primary-700);
+  .tab.tab--active:not(.tab--disabled) {
+    color: var(--sl-color-primary-600);
   }
 
-  .tab--closable {
+  .tab.tab--closable {
     padding-right: var(--sl-spacing-small);
   }
 
-  .tab--disabled {
+  .tab.tab--disabled {
     opacity: 0.5;
     cursor: not-allowed;
   }

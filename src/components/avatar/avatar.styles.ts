@@ -17,7 +17,7 @@ export default css`
     position: relative;
     width: var(--size);
     height: var(--size);
-    background-color: var(--sl-color-neutral-500);
+    background-color: var(--sl-color-neutral-400);
     font-family: var(--sl-font-sans);
     font-size: calc(var(--size) * 0.5);
     font-weight: var(--sl-font-weight-normal);
