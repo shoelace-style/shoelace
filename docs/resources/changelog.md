@@ -11,6 +11,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - 🚨 BREAKING: removed status from the `sl-error` event payload in `<sl-icon>`
 - Added the experimental `<sl-radio-button>` component
 - Added `button-group` and `button-group__base` parts to `<sl-radio-group>`
+- Added the `label` attribute and slot to `<sl-color-picker>` to improve accessibility with screen readers
 - Fixed a bug that prevented form submission from working as expected in some cases
 - Fixed a bug that prevented `<sl-split-panel>` from toggling `vertical` properly [#703](https://github.com/shoelace-style/shoelace/issues/703)
 - Fixed a bug that prevented `<sl-color-picker>` from rendering a color initially [#704](https://github.com/shoelace-style/shoelace/issues/704)

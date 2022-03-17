@@ -8,6 +8,7 @@ const translation: Translation = {
 
   close: 'Close',
   copy: 'Copy',
+  currentValue: 'Current value',
   progress: 'Progress',
   remove: 'Remove',
   resize: 'Resize',
