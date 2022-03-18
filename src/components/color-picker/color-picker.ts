@@ -12,6 +12,7 @@ import type SlDropdown from '~/components/dropdown/dropdown';
 import '~/components/icon/icon';
 import '~/components/input/input';
 import type SlInput from '~/components/input/input';
+import '~/components/visually-hidden/visually-hidden';
 import { drag } from '~/internal/drag';
 import { emit } from '~/internal/event';
 import { FormSubmitController } from '~/internal/form-control';
@@ -40,6 +41,7 @@ declare const EyeDropper: EyeDropperConstructor;
  * @dependency sl-button-group
  * @dependency sl-dropdown
  * @dependency sl-input
+ * @dependency sl-visually-hidden
  *
  * @slot label - The color picker's label. Alternatively, you can use the label prop.
  *
