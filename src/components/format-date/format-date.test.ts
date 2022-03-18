@@ -241,7 +241,10 @@ describe('<sl-format-date>', () => {
       it(`date has correct timeZoneName format: ${timeZone}`, async () => {
         const el = await fixture<SlFormatDate>(
           html`
-            <sl-format-date .date="${new Date(new Date().getFullYear(), 0, 1)}" time-zone="${timeZone}"></sl-format-date>
+            <sl-format-date
+              .date="${new Date(new Date().getFullYear(), 0, 1)}"
+              time-zone="${timeZone}"
+            ></sl-format-date>
           `
         );
 

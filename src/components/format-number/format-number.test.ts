@@ -136,7 +136,9 @@ describe('<sl-format-number>', () => {
     [4, 5, 6].forEach(minSignificantDigits => {
       it(`number has correct type format: ${minSignificantDigits}`, async () => {
         const el = await fixture<SlFormatNumber>(
-          html` <sl-format-number value="1000" minimum-significant-digits="${minSignificantDigits}"></sl-format-number> `
+          html`
+            <sl-format-number value="1000" minimum-significant-digits="${minSignificantDigits}"></sl-format-number>
+          `
         );
         const expected = new Intl.NumberFormat('en-US', {
           style: 'decimal',
@@ -152,7 +154,9 @@ describe('<sl-format-number>', () => {
     [4, 5, 6].forEach(maxSignificantDigits => {
       it(`number has correct type format: ${maxSignificantDigits}`, async () => {
         const el = await fixture<SlFormatNumber>(
-          html` <sl-format-number value="1000" maximum-significant-digits="${maxSignificantDigits}"></sl-format-number> `
+          html`
+            <sl-format-number value="1000" maximum-significant-digits="${maxSignificantDigits}"></sl-format-number>
+          `
         );
         const expected = new Intl.NumberFormat('en-US', {
           style: 'decimal',
