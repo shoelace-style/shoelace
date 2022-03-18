@@ -1,7 +1,7 @@
 import { LitElement } from 'lit';
 import { property, query, state } from 'lit/decorators.js';
 import { emit } from '~/internal/event';
-import { FormSubmitController } from '~/internal/form-control';
+import { FormSubmitController } from '~/internal/form';
 import { watch } from '~/internal/watch';
 
 /**

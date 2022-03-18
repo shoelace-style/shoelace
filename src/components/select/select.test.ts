@@ -34,7 +34,7 @@ describe('<sl-select>', () => {
         <sl-menu-item value="option-3">Option 3</sl-menu-item>
       </sl-select>
     `);
-    const label = el.shadowRoot!.querySelector('[part="label"]')!;
+    const label = el.shadowRoot!.querySelector('[part="form-control-label"]')!;
     const submitHandler = sinon.spy();
 
     el.addEventListener('sl-focus', submitHandler);

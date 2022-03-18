@@ -19,7 +19,7 @@ describe('<sl-textarea>', () => {
 
   it('should focus the textarea when clicking on the label', async () => {
     const el = await fixture<SlTextarea>(html` <sl-textarea label="Name"></sl-textarea> `);
-    const label = el.shadowRoot!.querySelector('[part="label"]')!;
+    const label = el.shadowRoot!.querySelector('[part="form-control-label"]')!;
     const submitHandler = sinon.spy();
 
     el.addEventListener('sl-focus', submitHandler);

@@ -11,7 +11,7 @@ import type SlMenu from '~/components/menu/menu';
 import type { MenuSelectEventDetail } from '~/components/menu/menu';
 import '~/components/tag/tag';
 import { emit } from '~/internal/event';
-import { FormSubmitController } from '~/internal/form-control';
+import { FormSubmitController } from '~/internal/form';
 import { getTextContent, HasSlotController } from '~/internal/slot';
 import { watch } from '~/internal/watch';
 import styles from './select.styles';
@@ -39,15 +39,16 @@ import type { TemplateResult } from 'lit';
  * @event sl-focus - Emitted when the control gains focus.
  * @event sl-blur - Emitted when the control loses focus.
  *
+ * @csspart form-control - The form control that wraps the label, input, and help-text.
+ * @csspart form-control-label - The label's wrapper.
+ * @csspart form-control-input - The select's wrapper.
+ * @csspart form-control-help-text - The help text's wrapper.
  * @csspart base - The component's internal wrapper.
  * @csspart clear-button - The clear button.
  * @csspart control - The container that holds the prefix, label, and suffix.
  * @csspart display-label - The label that displays the current selection. Not available when used with `multiple`.
- * @csspart form-control - The form control that wraps the label, input, and help text.
- * @csspart help-text - The select's help text.
  * @csspart icon - The select's icon.
  * @csspart prefix - The select's prefix.
- * @csspart label - The select's label.
  * @csspart suffix - The select's suffix.
  * @csspart menu - The select menu, an `<sl-menu>` element.
  * @csspart tag - The multi select option, an `<sl-tag>` element.
@@ -464,7 +465,7 @@ export default class SlSelect extends LitElement {
         })}
       >
         <label
-          part="label"
+          part="form-control-label"
           class="form-control__label"
           for="input"
           aria-hidden=${hasLabel ? 'false' : 'true'}
@@ -473,7 +474,7 @@ export default class SlSelect extends LitElement {
           <slot name="label">${this.label}</slot>
         </label>
 
-        <div class="form-control__input">
+        <div part="form-control-input" class="form-control-input">
           <sl-dropdown
             part="base"
             .hoist=${this.hoist}
@@ -568,7 +569,7 @@ export default class SlSelect extends LitElement {
         </div>
 
         <div
-          part="help-text"
+          part="form-control-help-text"
           id="help-text"
           class="form-control__help-text"
           aria-hidden=${hasHelpText ? 'false' : 'true'}

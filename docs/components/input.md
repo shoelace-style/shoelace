@@ -262,4 +262,31 @@ const App = () => (
 );
 ```
 
+### Customizing Label Position
+
+Use parts to to customize the label's position.
+
+```html preview
+<sl-input class="label-on-left" label="Name"></sl-input><br />
+<sl-input class="label-on-left" label="Email" type="email"></sl-input>
+
+<style>
+  .label-on-left::part(form-control) {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .label-on-left::part(form-control-label) {
+    flex: 0 0 auto;
+    width: 60px;
+    text-align: right;
+  }
+
+  .label-on-left::part(form-control-input) {
+    flex: 1 1 auto;
+  }
+</style>
+```
+
 [component-metadata:sl-input]
