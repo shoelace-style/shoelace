@@ -15,6 +15,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug that prevented form submission from working as expected in some cases
 - Fixed a bug that prevented `<sl-split-panel>` from toggling `vertical` properly [#703](https://github.com/shoelace-style/shoelace/issues/703)
 - Fixed a bug that prevented `<sl-color-picker>` from rendering a color initially [#704](https://github.com/shoelace-style/shoelace/issues/704)
+- Fixed a bug that caused focus trapping to fail when used inside a shadow root [#709](https://github.com/shoelace-style/shoelace/issues/709)
 - Improved accessibility throughout the docs
 - Improved accessibility of `<sl-dropdown>` so the trigger's expanded state is announced correctly
 - Improved accessibility of `<sl-format-date>` but rendering a `<time>` element instead of plain text

@@ -10,18 +10,21 @@ export default class Modal {
     this.element = element;
     this.handleFocusIn = this.handleFocusIn.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleKeyUp = this.handleKeyUp.bind(this);
   }
 
   activate() {
     activeModals.push(this.element);
     document.addEventListener('focusin', this.handleFocusIn);
     document.addEventListener('keydown', this.handleKeyDown);
+    document.addEventListener('keyup', this.handleKeyUp);
   }
 
   deactivate() {
     activeModals = activeModals.filter(modal => modal !== this.element);
     document.removeEventListener('focusin', this.handleFocusIn);
     document.removeEventListener('keydown', this.handleKeyDown);
+    document.removeEventListener('keyup', this.handleKeyUp);
   }
 
   isActive() {
@@ -29,25 +32,33 @@ export default class Modal {
     return activeModals[activeModals.length - 1] === this.element;
   }
 
-  handleFocusIn(event: Event) {
-    const path = event.composedPath();
+  checkFocus() {
+    if (this.isActive()) {
+      if (!this.element.matches(':focus-within')) {
+        const { start, end } = getTabbableBoundary(this.element);
+        const target = this.tabDirection === 'forward' ? start : end;
 
-    // Trap focus so it doesn't go out of the modal's boundary
-    if (this.isActive() && !path.includes(this.element)) {
-      const { start, end } = getTabbableBoundary(this.element);
-      const target = this.tabDirection === 'forward' ? start : end;
-
-      if (typeof target?.focus === 'function') {
-        target.focus({ preventScroll: true });
+        if (typeof target?.focus === 'function') {
+          target.focus({ preventScroll: true });
+        }
       }
     }
   }
 
+  handleFocusIn() {
+    this.checkFocus();
+  }
+
   handleKeyDown(event: KeyboardEvent) {
-    // Quick hack to determine tab direction
     if (event.key === 'Tab' && event.shiftKey) {
       this.tabDirection = 'backward';
-      setTimeout(() => (this.tabDirection = 'forward'));
     }
+
+    // Ensure focus remains trapped after they key is pressed
+    requestAnimationFrame(() => this.checkFocus());
+  }
+
+  handleKeyUp() {
+    this.tabDirection = 'forward';
   }
 }
