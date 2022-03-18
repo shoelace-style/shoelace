@@ -6,7 +6,7 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
-## Next
+## 2.0.0-beta.72
 
 - 🚨 BREAKING: refactored parts in `<sl-input>`, `<sl-range>`, `<sl-select>`, and `<sl-textarea>` to allow you to customize the label and help text position
   - Added `form-control-input` part
