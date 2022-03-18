@@ -96,12 +96,13 @@ export class FormSubmitController implements ReactiveController {
       button.style.overflow = 'hidden';
       button.style.whiteSpace = 'nowrap';
 
-      // Pass form override properties through to the temporary button
+      // Pass form attributes through to the temporary button
       if (submitter) {
-        button.formAction = submitter.formAction;
-        button.formMethod = submitter.formMethod;
-        button.formNoValidate = submitter.formNoValidate;
-        button.formTarget = submitter.formTarget;
+        ['formaction', 'formmethod', 'formnovalidate', 'formtarget'].forEach(attr => {
+          if (submitter.hasAttribute(attr)) {
+            button.setAttribute(attr, submitter.getAttribute(attr)!);
+          }
+        });
       }
 
       this.form.append(button);

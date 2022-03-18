@@ -316,7 +316,7 @@ kbd,
   display: block;
   background: none;
   border-radius: 0;
-  color: var(--sl-color-neutral-800);
+  color: var(--sl-color-neutral-900);
   padding: var(--sl-spacing-medium);
   overflow: auto;
   hyphens: none;
@@ -331,11 +331,11 @@ kbd,
 .markdown-section pre .token.doctype,
 .markdown-section pre .token.cdata,
 .markdown-section pre .token.operator {
-  color: var(--sl-color-neutral-600);
+  color: var(--sl-color-neutral-700);
 }
 
 .markdown-section pre .token.punctuation {
-  color: var(--sl-color-neutral-600);
+  color: var(--sl-color-neutral-700);
 }
 
 .namespace {
@@ -346,12 +346,12 @@ kbd,
 .markdown-section pre .token.keyword,
 .markdown-section pre .token.tag,
 .markdown-section pre .token.url {
-  color: var(--sl-color-blue-600);
+  color: var(--sl-color-sky-800);
 }
 
 .markdown-section pre .token.symbol,
 .markdown-section pre .token.deleted {
-  color: var(--sl-color-pink-600);
+  color: var(--sl-color-pink-700);
 }
 
 .markdown-section pre .token.boolean,
@@ -362,7 +362,7 @@ kbd,
 .markdown-section pre .token.char,
 .markdown-section pre .token.builtin,
 .markdown-section pre .token.inserted {
-  color: var(--sl-color-emerald-600);
+  color: var(--sl-color-emerald-700);
 }
 
 .markdown-section pre .token.atrule,
@@ -375,11 +375,11 @@ kbd,
 .markdown-section pre .token.function,
 .markdown-section pre .token.class-name,
 .markdown-section pre .token.regex {
-  color: var(--sl-color-orange-600);
+  color: var(--sl-color-orange-700);
 }
 
 .markdown-section pre .token.important {
-  color: var(--sl-color-red-600);
+  color: var(--sl-color-red-700);
 }
 
 .markdown-section pre .token.important,

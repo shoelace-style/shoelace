@@ -18,6 +18,34 @@ const App = () => <SlInput />;
 
 ## Examples
 
+### Labels
+
+Use the `label` attribute to give the input an accessible label. For labels that contain HTML, use the `label` slot instead.
+
+```html preview
+<sl-input label="What is your name?"></sl-input>
+```
+
+```jsx react
+import { SlIcon, SlInput } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => <SlInput label="What is your name?" />;
+```
+
+### Help Text
+
+Add descriptive help text to an input with the `help-text` attribute. For help texts that contain HTML, use the `help-text` slot instead.
+
+```html preview
+<sl-input label="Nickname" help-text="What would you like people to call you?"></sl-input>
+```
+
+```jsx react
+import { SlIcon, SlInput } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => <SlInput label="Nickname" help-text="What would you like people to call you?" />;
+```
+
 ### Placeholders
 
 Use the `placeholder` attribute to add a placeholder.
@@ -232,34 +260,6 @@ const App = () => (
     </SlInput>
   </>
 );
-```
-
-### Labels
-
-Use the `label` attribute to give the input an accessible label. For labels that contain HTML, use the `label` slot instead.
-
-```html preview
-<sl-input label="What is your name?"></sl-input>
-```
-
-```jsx react
-import { SlIcon, SlInput } from '@shoelace-style/shoelace/dist/react';
-
-const App = () => <SlInput label="What is your name?" />;
-```
-
-### Help Text
-
-Add descriptive help text to an input with the `help-text` attribute. For help texts that contain HTML, use the `help-text` slot instead.
-
-```html preview
-<sl-input label="Nickname" help-text="What would you like people to call you?"></sl-input>
-```
-
-```jsx react
-import { SlIcon, SlInput } from '@shoelace-style/shoelace/dist/react';
-
-const App = () => <SlInput label="Nickname" help-text="What would you like people to call you?" />;
 ```
 
 [component-metadata:sl-input]

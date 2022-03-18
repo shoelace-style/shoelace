@@ -8,7 +8,9 @@ const translation: Translation = {
 
   close: 'Luk',
   copy: 'Kopier',
+  currentValue: 'Nuværende regerer',
   progress: 'Status',
+  remove: 'Fjerne',
   resize: 'Tipas størrelse',
   scrollToEnd: 'Scroll til slut',
   scrollToStart: 'Scroll til start',

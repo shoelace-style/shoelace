@@ -139,9 +139,17 @@ const App = () => (
 Use the `circle` attribute to create circular icon buttons.
 
 ```html preview
-<sl-button variant="default" size="small" circle><sl-icon name="gear"></sl-icon></sl-button>
-<sl-button variant="default" size="medium" circle><sl-icon name="gear"></sl-icon></sl-button>
-<sl-button variant="default" size="large" circle><sl-icon name="gear"></sl-icon></sl-button>
+<sl-button variant="default" size="small" circle>
+  <sl-icon name="gear" label="Settings"></sl-icon>
+</sl-button>
+
+<sl-button variant="default" size="medium" circle>
+  <sl-icon name="gear" label="Settings"></sl-icon>
+</sl-button>
+
+<sl-button variant="default" size="large" circle>
+  <sl-icon name="gear" label="Settings"></sl-icon>
+</sl-button>
 ```
 
 ```jsx react

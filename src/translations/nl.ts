@@ -8,7 +8,9 @@ const translation: Translation = {
 
   close: 'Sluiten',
   copy: 'Kopiëren',
+  currentValue: 'Huidige waarde',
   progress: 'Voortgang',
+  remove: 'Verwijderen',
   resize: 'Formaat wijzigen',
   scrollToEnd: 'Scroll naar einde',
   scrollToStart: 'Scroll naar begin',

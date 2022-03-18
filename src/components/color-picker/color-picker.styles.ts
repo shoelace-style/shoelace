@@ -31,6 +31,11 @@ export default css`
     border: solid var(--sl-panel-border-width) var(--sl-panel-border-color);
   }
 
+  .color-picker--inline${focusVisibleSelector} {
+    outline: none;
+    box-shadow: 0 0 0 1px var(--sl-color-primary-500), var(--sl-focus-ring);
+  }
+
   .color-picker__grid {
     position: relative;
     height: var(--grid-height);

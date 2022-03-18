@@ -12,6 +12,7 @@ import type SlDropdown from '~/components/dropdown/dropdown';
 import '~/components/icon/icon';
 import '~/components/input/input';
 import type SlInput from '~/components/input/input';
+import '~/components/visually-hidden/visually-hidden';
 import { drag } from '~/internal/drag';
 import { emit } from '~/internal/event';
 import { FormSubmitController } from '~/internal/form-control';
@@ -40,6 +41,9 @@ declare const EyeDropper: EyeDropperConstructor;
  * @dependency sl-button-group
  * @dependency sl-dropdown
  * @dependency sl-input
+ * @dependency sl-visually-hidden
+ *
+ * @slot label - The color picker's label. Alternatively, you can use the label prop.
  *
  * @event sl-change Emitted when the color picker's value changes.
  *
@@ -97,6 +101,9 @@ export default class SlColorPicker extends LitElement {
 
   /** The current color. */
   @property() value = '#ffffff';
+
+  /* The color picker's label. This will not be displayed, but it will be announced by assistive devices. */
+  @property() label = '';
 
   /**
    * The format to use for the display value. If opacity is enabled, these will translate to HEXA, RGBA, and HSLA
@@ -164,7 +171,9 @@ export default class SlColorPicker extends LitElement {
   /** The locale to render the component in. */
   @property() lang: string;
 
-  firstUpdated() {
+  connectedCallback() {
+    super.connectedCallback();
+
     if (!this.setColor(this.value)) {
       this.setColor(`#ffff`);
     }
@@ -625,7 +634,17 @@ export default class SlColorPicker extends LitElement {
           'color-picker--disabled': this.disabled
         })}
         aria-disabled=${this.disabled ? 'true' : 'false'}
+        aria-labelledby="label"
+        tabindex=${this.inline ? '0' : '-1'}
       >
+        ${this.inline
+          ? html`
+              <sl-visually-hidden id="label">
+                <slot name="label">${this.label}</slot>
+              </sl-visually-hidden>
+            `
+          : null}
+
         <div
           part="grid"
           class="color-picker__grid"
@@ -667,7 +686,7 @@ export default class SlColorPicker extends LitElement {
                 aria-orientation="horizontal"
                 aria-valuemin="0"
                 aria-valuemax="360"
-                aria-valuenow=${Math.round(this.hue)}
+                aria-valuenow=${`${Math.round(this.hue)}`}
                 tabindex=${ifDefined(this.disabled ? undefined : '0')}
                 @keydown=${this.handleHueKeyDown}
               ></span>
@@ -734,6 +753,7 @@ export default class SlColorPicker extends LitElement {
             spellcheck="false"
             .value=${live(this.inputValue)}
             ?disabled=${this.disabled}
+            aria-label=${this.localize.term('currentValue')}
             @keydown=${this.handleInputKeyDown}
             @sl-change=${this.handleInputChange}
           ></sl-input>
@@ -836,7 +856,11 @@ export default class SlColorPicker extends LitElement {
             color: `hsla(${this.hue}deg, ${this.saturation}%, ${this.lightness}%, ${this.alpha / 100})`
           })}
           type="button"
-        ></button>
+        >
+          <sl-visually-hidden>
+            <slot name="label">${this.label}</slot>
+          </sl-visually-hidden>
+        </button>
         ${colorPicker}
       </sl-dropdown>
     `;

@@ -262,7 +262,7 @@ const App = () => {
 The `invalid` attribute reflects the form control's validity, so you can style invalid fields using the `[invalid]` selector. The example below demonstrates how you can give erroneous fields a different appearance. Type something other than "shoelace" to demonstrate this.
 
 ```html preview
-<sl-input class="custom-input" required pattern="shoelace">
+<sl-input class="custom-input" label="Type Something" required pattern="shoelace">
   <small slot="help-text">Please enter "shoelace" to continue</small>
 </sl-input>
 

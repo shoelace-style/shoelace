@@ -1,4 +1,4 @@
-import { LitElement } from 'lit';
+import { html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { LocalizeController } from '~/utilities/localize';
 
@@ -58,19 +58,23 @@ export default class SlFormatDate extends LitElement {
       return undefined;
     }
 
-    return this.localize.date(date, {
-      weekday: this.weekday,
-      era: this.era,
-      year: this.year,
-      month: this.month,
-      day: this.day,
-      hour: this.hour,
-      minute: this.minute,
-      second: this.second,
-      timeZoneName: this.timeZoneName,
-      timeZone: this.timeZone,
-      hour12: hour12
-    });
+    return html`
+      <time datetime=${date.toISOString()}>
+        ${this.localize.date(date, {
+          weekday: this.weekday,
+          era: this.era,
+          year: this.year,
+          month: this.month,
+          day: this.day,
+          hour: this.hour,
+          minute: this.minute,
+          second: this.second,
+          timeZoneName: this.timeZoneName,
+          timeZone: this.timeZone,
+          hour12: hour12
+        })}
+      </time>
+    `;
   }
 }
 

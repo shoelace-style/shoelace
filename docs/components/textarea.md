@@ -18,6 +18,34 @@ const App = () => <SlTextarea />;
 
 ## Examples
 
+### Labels
+
+Use the `label` attribute to give the textarea an accessible label. For labels that contain HTML, use the `label` slot instead.
+
+```html preview
+<sl-textarea label="Comments"></sl-textarea>
+```
+
+```jsx react
+import { SlTextarea } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => <SlTextarea label="Comments" />;
+```
+
+### Help Text
+
+Add descriptive help text to a textarea with the `help-text` attribute. For help texts that contain HTML, use the `help-text` slot instead.
+
+```html preview
+<sl-textarea label="Feedback" help-text="Please tell us what you think."> </sl-textarea>
+```
+
+```jsx react
+import { SlTextarea } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => <SlTextarea label="Feedback" help-text="Please tell us what you think." />;
+```
+
 ### Rows
 
 Use the `rows` attribute to change the number of text rows that get shown.
@@ -98,34 +126,6 @@ const App = () => (
     <SlTextarea placeholder="Large" size="large"></SlTextarea>
   </>
 );
-```
-
-### Labels
-
-Use the `label` attribute to give the textarea an accessible label. For labels that contain HTML, use the `label` slot instead.
-
-```html preview
-<sl-textarea label="Comments"></sl-textarea>
-```
-
-```jsx react
-import { SlTextarea } from '@shoelace-style/shoelace/dist/react';
-
-const App = () => <SlTextarea label="Comments" />;
-```
-
-### Help Text
-
-Add descriptive help text to a textarea with the `help-text` attribute. For help texts that contain HTML, use the `help-text` slot instead.
-
-```html preview
-<sl-textarea label="Feedback" help-text="Please tell us what you think."> </sl-textarea>
-```
-
-```jsx react
-import { SlTextarea } from '@shoelace-style/shoelace/dist/react';
-
-const App = () => <SlTextarea label="Feedback" help-text="Please tell us what you think." />;
 ```
 
 ### Prevent Resizing

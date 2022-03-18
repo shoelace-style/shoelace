@@ -8,9 +8,11 @@ const translation: Translation = {
 
   close: 'Close',
   copy: 'Copy',
-  previousMonth: 'Previous Month',
+  currentValue: 'Current value',
   nextMonth: 'Next Month',
+  previousMonth: 'Previous Month',
   progress: 'Progress',
+  remove: 'Remove',
   resize: 'Resize',
   scrollToEnd: 'Scroll to end',
   scrollToStart: 'Scroll to start',

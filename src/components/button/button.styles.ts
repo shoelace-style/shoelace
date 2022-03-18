@@ -26,8 +26,8 @@ export default css`
     white-space: nowrap;
     vertical-align: middle;
     padding: 0;
-    transition: var(--sl-transition-fast) background-color, var(--sl-transition-fast) color,
-      var(--sl-transition-fast) border, var(--sl-transition-fast) box-shadow;
+    transition: var(--sl-transition-x-fast) background-color, var(--sl-transition-x-fast) color,
+      var(--sl-transition-x-fast) border, var(--sl-transition-x-fast) box-shadow;
     cursor: inherit;
   }
 
@@ -235,7 +235,8 @@ export default css`
     color: var(--sl-color-neutral-700);
   }
 
-  .button--outline.button--default:hover:not(.button--disabled) {
+  .button--outline.button--default:hover:not(.button--disabled),
+  .button--outline.button--default.button--checked:not(.button--disabled) {
     border-color: var(--sl-color-primary-600);
     background-color: var(--sl-color-primary-600);
     color: var(--sl-color-neutral-0);
@@ -258,7 +259,8 @@ export default css`
     color: var(--sl-color-primary-600);
   }
 
-  .button--outline.button--primary:hover:not(.button--disabled) {
+  .button--outline.button--primary:hover:not(.button--disabled),
+  .button--outline.button--primary.button--checked:not(.button--disabled) {
     background-color: var(--sl-color-primary-600);
     color: var(--sl-color-neutral-0);
   }
@@ -280,7 +282,8 @@ export default css`
     color: var(--sl-color-success-600);
   }
 
-  .button--outline.button--success:hover:not(.button--disabled) {
+  .button--outline.button--success:hover:not(.button--disabled),
+  .button--outline.button--success.button--checked:not(.button--disabled) {
     background-color: var(--sl-color-success-600);
     color: var(--sl-color-neutral-0);
   }
@@ -302,7 +305,8 @@ export default css`
     color: var(--sl-color-neutral-600);
   }
 
-  .button--outline.button--neutral:hover:not(.button--disabled) {
+  .button--outline.button--neutral:hover:not(.button--disabled),
+  .button--outline.button--neutral.button--checked:not(.button--disabled) {
     background-color: var(--sl-color-neutral-600);
     color: var(--sl-color-neutral-0);
   }
@@ -324,7 +328,8 @@ export default css`
     color: var(--sl-color-warning-600);
   }
 
-  .button--outline.button--warning:hover:not(.button--disabled) {
+  .button--outline.button--warning:hover:not(.button--disabled),
+  .button--outline.button--warning.button--checked:not(.button--disabled) {
     background-color: var(--sl-color-warning-600);
     color: var(--sl-color-neutral-0);
   }
@@ -346,7 +351,8 @@ export default css`
     color: var(--sl-color-danger-600);
   }
 
-  .button--outline.button--danger:hover:not(.button--disabled) {
+  .button--outline.button--danger:hover:not(.button--disabled),
+  .button--outline.button--danger.button--checked:not(.button--disabled) {
     background-color: var(--sl-color-danger-600);
     color: var(--sl-color-neutral-0);
   }

@@ -52,12 +52,21 @@
     siteSearch.hidden = true;
     siteSearch.innerHTML = `
       <div class="site-search__overlay"></div>
-      <div class="site-search__panel">
+      <div
+        id="site-search-panel"
+        class="site-search__panel"
+        role="combobox"
+        aria-expanded="false"
+        aria-owns="site-search-results"
+        aria-activedescendant=""
+      >
         <header class="site-search__header">
           <sl-input
             class="site-search__input"
             type="search"
             placeholder="Search this site"
+            aria-autocomplete="list"
+            aria-controls="site-search-results"
             size="large"
             clearable
           >
@@ -65,7 +74,13 @@
           </sl-input>
         </header>
         <div class="site-search__body">
-          <ul class="site-search__results"></ul>
+          <ul
+            id="site-search-results"
+            class="site-search__results"
+            role="listbox"
+            aria-labelledby="site-search-panel"
+          >
+          </ul>
           <div class="site-search__empty">No results found.</div>
         </div>
         <footer class="site-search__footer">
@@ -100,7 +115,7 @@
       isShowing = true;
       document.body.classList.add('site-search-visible');
       siteSearch.hidden = false;
-      input.focus();
+      requestAnimationFrame(() => input.focus());
       updateResults();
 
       await Promise.all([
@@ -205,6 +220,9 @@
         // Update the selected item
         items.forEach(item => {
           if (item === nextEl) {
+            const a = nextEl.querySelector('a');
+            panel.setAttribute('aria-activedescendant', a.id);
+
             item.setAttribute('aria-selected', 'true');
             nextEl.scrollIntoView({ block: 'nearest' });
           } else {
@@ -219,11 +237,11 @@
         await searchIndex;
 
         const hasQuery = query.length > 0;
-        const searchQuery = query
+        const searchTokens = query
           .split(' ')
           .map((term, index, arr) => `${term}${index === arr.length - 1 ? `* ${term}~1` : '~1'}`)
           .join(' ');
-        const matches = hasQuery ? searchIndex.search(searchQuery) : [];
+        const matches = hasQuery ? searchIndex.search(`${query} ${searchTokens}`) : [];
         const hasResults = hasQuery && matches.length > 0;
         siteSearch.classList.toggle('site-search--has-results', hasQuery && hasResults);
         siteSearch.classList.toggle('site-search--no-results', hasQuery && !hasResults);
@@ -236,6 +254,9 @@
           const li = document.createElement('li');
           const a = document.createElement('a');
           let icon = 'file-text';
+
+          a.setAttribute('role', 'option');
+          a.setAttribute('id', `search-result-item-${match.ref}`);
 
           if (page.url.includes('getting-started/')) {
             icon = 'lightbulb';

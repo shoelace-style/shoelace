@@ -16,20 +16,6 @@ const App = () => <SlProgressBar value={50} />;
 
 ## Examples
 
-### Custom Height
-
-Use the `--height` custom property to set the progress bar's height.
-
-```html preview
-<sl-progress-bar value="50" style="--height: 6px;"></sl-progress-bar>
-```
-
-```jsx react
-import { SlProgressBar } from '@shoelace-style/shoelace/dist/react';
-
-const App = () => <SlProgressBar value={50} style={{ '--height': '6px' }} />;
-```
-
 ### Labels
 
 Use the `label` attribute to label the progress bar and tell assistive devices how to announce it.
@@ -44,6 +30,20 @@ import { SlProgressBar } from '@shoelace-style/shoelace/dist/react';
 const App = () => <SlProgressBar value="50" label="Upload progress" />;
 ```
 
+### Custom Height
+
+Use the `--height` custom property to set the progress bar's height.
+
+```html preview
+<sl-progress-bar value="50" style="--height: 6px;"></sl-progress-bar>
+```
+
+```jsx react
+import { SlProgressBar } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => <SlProgressBar value={50} style={{ '--height': '6px' }} />;
+```
+
 ### Showing Values
 
 Use the default slot to show a value.
@@ -53,8 +53,8 @@ Use the default slot to show a value.
 
 <br />
 
-<sl-button circle><sl-icon name="dash"></sl-icon></sl-button>
-<sl-button circle><sl-icon name="plus"></sl-icon></sl-button>
+<sl-button circle><sl-icon name="dash" label="Decrease"></sl-icon></sl-button>
+<sl-button circle><sl-icon name="plus" label="Increase"></sl-icon></sl-button>
 
 <script>
   const progressBar = document.querySelector('.progress-bar-values');
@@ -96,11 +96,11 @@ const App = () => {
       <br />
 
       <SlButton circle onClick={() => adjustValue(-10)}>
-        <SlIcon name="dash" />
+        <SlIcon name="dash" label="Decrease" />
       </SlButton>
 
       <SlButton circle onClick={() => adjustValue(10)}>
-        <SlIcon name="plus" />
+        <SlIcon name="plus" label="Increase" />
       </SlButton>
     </>
   );

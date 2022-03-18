@@ -132,7 +132,7 @@
   box-shadow: 0 0 0 1px var(--sl-color-primary-400);
   border-right-color: transparent;
   background-color: var(--sl-color-primary-50);
-  color: var(--sl-color-primary-700);
+  color: var(--sl-color-primary-600);
   z-index: 1;
 }
 

@@ -4,7 +4,7 @@ export default function (plop) {
   plop.setHelper('tagToTitle', tag => {
     const withoutPrefix = plop.getHelper('tagWithoutPrefix');
     const titleCase = plop.getHelper('titleCase');
-    return titleCase(withoutPrefix(tag));
+    return titleCase(withoutPrefix(tag).replace(/-/g, ' '));
   });
 
   plop.setGenerator('component', {

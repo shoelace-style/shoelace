@@ -38,4 +38,11 @@ describe('<sl-color-picker>', () => {
 
     expect(opacitySlider).to.exist;
   });
+
+  it('should display a color when an initial value is provided', async () => {
+    const el = await fixture<SlColorPicker>(html` <sl-color-picker value="#000"></sl-color-picker> `);
+    const trigger = el.shadowRoot!.querySelector<HTMLButtonElement>('[part="trigger"]');
+
+    expect(trigger?.style.color).to.equal('rgb(0, 0, 0)');
+  });
 });

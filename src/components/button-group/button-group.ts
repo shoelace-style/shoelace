@@ -2,6 +2,8 @@ import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import styles from './button-group.styles';
 
+const BUTTON_CHILDREN = ['sl-button', 'sl-radio-button'];
+
 /**
  * @since 2.0
  * @status stable
@@ -75,7 +77,7 @@ export default class SlButtonGroup extends LitElement {
 }
 
 function findButton(el: HTMLElement) {
-  return el.tagName.toLowerCase() === 'sl-button' ? el : el.querySelector('sl-button');
+  return BUTTON_CHILDREN.includes(el.tagName.toLowerCase()) ? el : el.querySelector(BUTTON_CHILDREN.join(','));
 }
 
 declare global {

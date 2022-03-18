@@ -6,6 +6,25 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
+## Next
+
+- 🚨 BREAKING: removed status from the `sl-error` event payload in `<sl-icon>`
+- Added the experimental `<sl-radio-button>` component
+- Added `button-group` and `button-group__base` parts to `<sl-radio-group>`
+- Added the `label` attribute and slot to `<sl-color-picker>` to improve accessibility with screen readers
+- Fixed a bug that prevented form submission from working as expected in some cases
+- Fixed a bug that prevented `<sl-split-panel>` from toggling `vertical` properly [#703](https://github.com/shoelace-style/shoelace/issues/703)
+- Fixed a bug that prevented `<sl-color-picker>` from rendering a color initially [#704](https://github.com/shoelace-style/shoelace/issues/704)
+- Fixed a bug that caused focus trapping to fail when used inside a shadow root [#709](https://github.com/shoelace-style/shoelace/issues/709)
+- Improved accessibility throughout the docs
+- Improved accessibility of `<sl-dropdown>` so the trigger's expanded state is announced correctly
+- Improved accessibility of `<sl-format-date>` but rendering a `<time>` element instead of plain text
+- Improved accessibility of `<sl-select>` so disabled controls announce correct
+- Improved accessibility in `<sl-tag>` so remove buttons have labels
+- Refactored `<sl-radio>` to move selection logic into `<sl-radio-group>`
+- Updated slot detection logic so it ignores visually hidden elements
+- Upgraded the status of `<sl-visually-hidden>` from experimental to stable
+
 ## 2.0.0-beta.71
 
 - 🚨 BREAKING: refactored exported parts to ensure composed components and their parts can be targeted via CSS
@@ -117,7 +136,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 - 🚨 BREAKING: changed the `type` attribute to `variant` in `<sl-alert>`, `<sl-badge>`, `<sl-button>`, and `<sl-tag>` since it's more appropriate and to disambiguate from other `type` attributes
 - 🚨 BREAKING: removed `base` part from `<sl-divider>` to simplify the styling API
-- Added experimental `<sl-split-panel>` component
+- Added the experimental `<sl-split-panel>` component
 - Added `focus()` and `blur()` methods to `<sl-select>` [#625](https://github.com/shoelace-style/shoelace/pull/625)
 - Fixed a bug where setting `tooltipFormatter` on `<sl-range>` in JSX causes React@experimental to error out
 - Fixed a bug where clicking on a slotted icon in `<sl-button>` wouldn't submit forms [#626](https://github.com/shoelace-style/shoelace/issues/626)

@@ -63,6 +63,7 @@ The following video is embedded using an `iframe` and maintains a `16:9` aspect 
 ```html preview
 <sl-responsive-media aspect-ratio="16:9">
   <iframe
+    title="Video of the kittens"
     src="https://player.vimeo.com/video/1053647?title=0&byline=0&portrait=0"
     frameborder="0"
     allow="autoplay; fullscreen"
@@ -77,6 +78,7 @@ import { SlResponsiveMedia } from '@shoelace-style/shoelace/dist/react';
 const App = () => (
   <SlResponsiveMedia aspect-ratio="16:9">
     <iframe
+      title="Video of the kittens"
       src="https://player.vimeo.com/video/1053647?title=0&byline=0&portrait=0"
       frameborder="0"
       allow="autoplay; fullscreen"

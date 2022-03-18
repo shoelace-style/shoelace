@@ -107,9 +107,7 @@ const App = () => (
 Use dividers in [menus](/components/menu) to visually group menu items.
 
 ```html preview
-<sl-menu
-  style="max-width: 200px; border: solid 1px var(--sl-panel-border-color); background: var(--sl-panel-background-color); border-radius: var(--sl-border-radius-medium);"
->
+<sl-menu style="max-width: 200px;">
   <sl-menu-item value="1">Option 1</sl-menu-item>
   <sl-menu-item value="2">Option 2</sl-menu-item>
   <sl-menu-item value="3">Option 3</sl-menu-item>
@@ -124,13 +122,7 @@ Use dividers in [menus](/components/menu) to visually group menu items.
 import { SlDivider, SlMenu, SlMenuItem } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
-  <SlMenu
-    style={{
-      maxWidth: '200px',
-      border: 'solid 1px var(--sl-panel-border-color)',
-      borderRadius: 'var(--sl-border-radius-medium)'
-    }}
-  >
+  <SlMenu style={{ maxWidth: '200px' }}>
     <SlMenuItem value="1">Option 1</SlMenuItem>
     <SlMenuItem value="2">Option 2</SlMenuItem>
     <SlMenuItem value="3">Option 3</SlMenuItem>
