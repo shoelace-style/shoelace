@@ -53,7 +53,7 @@ describe('<sl-format-date>', () => {
       it(`date has correct language format: ${setup.lang}`, async () => {
         const el = await fixture<SlFormatDate>(
           html`
-            <sl-format-date date="${new Date(new Date().getFullYear(), 0, 1)}" lang="${setup.lang}"></sl-format-date>
+            <sl-format-date .date="${new Date(new Date().getFullYear(), 0, 1)}" lang="${setup.lang}"></sl-format-date>
           `
         );
         const innerTimeEl = el.shadowRoot?.querySelector('time');
@@ -69,7 +69,7 @@ describe('<sl-format-date>', () => {
         const el = await fixture<SlFormatDate>(
           html`
             <sl-format-date
-              date="${new Date(new Date().getFullYear(), 0, 1)}"
+              .date="${new Date(new Date().getFullYear(), 0, 1)}"
               weekday="${weekdayFormat}"
             ></sl-format-date>
           `
@@ -90,7 +90,7 @@ describe('<sl-format-date>', () => {
       it(`date has correct era format: ${eraFormat}`, async () => {
         const el = await fixture<SlFormatDate>(
           html`
-            <sl-format-date date="${new Date(new Date().getFullYear(), 0, 1)}" era="${eraFormat}"></sl-format-date>
+            <sl-format-date .date="${new Date(new Date().getFullYear(), 0, 1)}" era="${eraFormat}"></sl-format-date>
           `
         );
 
@@ -109,7 +109,7 @@ describe('<sl-format-date>', () => {
       it(`date has correct year format: ${yearFormat}`, async () => {
         const el = await fixture<SlFormatDate>(
           html`
-            <sl-format-date date="${new Date(new Date().getFullYear(), 0, 1)}" year="${yearFormat}"></sl-format-date>
+            <sl-format-date .date="${new Date(new Date().getFullYear(), 0, 1)}" year="${yearFormat}"></sl-format-date>
           `
         );
 
@@ -128,7 +128,7 @@ describe('<sl-format-date>', () => {
       it(`date has correct month format: ${monthFormat}`, async () => {
         const el = await fixture<SlFormatDate>(
           html`
-            <sl-format-date date="${new Date(new Date().getFullYear(), 0, 1)}" month="${monthFormat}"></sl-format-date>
+            <sl-format-date .date="${new Date(new Date().getFullYear(), 0, 1)}" month="${monthFormat}"></sl-format-date>
           `
         );
 
@@ -147,7 +147,7 @@ describe('<sl-format-date>', () => {
       it(`date has correct day format: ${dayFormat}`, async () => {
         const el = await fixture<SlFormatDate>(
           html`
-            <sl-format-date date="${new Date(new Date().getFullYear(), 0, 1)}" day="${dayFormat}"></sl-format-date>
+            <sl-format-date .date="${new Date(new Date().getFullYear(), 0, 1)}" day="${dayFormat}"></sl-format-date>
           `
         );
 
@@ -166,7 +166,7 @@ describe('<sl-format-date>', () => {
       it(`date has correct hour format: ${hourFormat}`, async () => {
         const el = await fixture<SlFormatDate>(
           html`
-            <sl-format-date date="${new Date(new Date().getFullYear(), 0, 1)}" hour="${hourFormat}"></sl-format-date>
+            <sl-format-date .date="${new Date(new Date().getFullYear(), 0, 1)}" hour="${hourFormat}"></sl-format-date>
           `
         );
 
@@ -186,7 +186,7 @@ describe('<sl-format-date>', () => {
         const el = await fixture<SlFormatDate>(
           html`
             <sl-format-date
-              date="${new Date(new Date().getFullYear(), 0, 1)}"
+              .date="${new Date(new Date().getFullYear(), 0, 1)}"
               minute="${minuteFormat}"
             ></sl-format-date>
           `
@@ -208,7 +208,7 @@ describe('<sl-format-date>', () => {
         const el = await fixture<SlFormatDate>(
           html`
             <sl-format-date
-              date="${new Date(new Date().getFullYear(), 0, 1)}"
+              .date="${new Date(new Date().getFullYear(), 0, 1)}"
               second="${secondFormat}"
             ></sl-format-date>
           `
@@ -230,7 +230,7 @@ describe('<sl-format-date>', () => {
         const el = await fixture<SlFormatDate>(
           html`
             <sl-format-date
-              date="${new Date(new Date().getFullYear(), 0, 1)}"
+              .date="${new Date(new Date().getFullYear(), 0, 1)}"
               time-zone-name="${timeZoneNameFormat}"
             ></sl-format-date>
           `
@@ -251,7 +251,7 @@ describe('<sl-format-date>', () => {
       it(`date has correct timeZoneName format: ${timeZone}`, async () => {
         const el = await fixture<SlFormatDate>(
           html`
-            <sl-format-date date="${new Date(new Date().getFullYear(), 0, 1)}" time-zone="${timeZone}"></sl-format-date>
+            <sl-format-date .date="${new Date(new Date().getFullYear(), 0, 1)}" time-zone="${timeZone}"></sl-format-date>
           `
         );
 
@@ -271,7 +271,7 @@ describe('<sl-format-date>', () => {
         const el = await fixture<SlFormatDate>(
           html`
             <sl-format-date
-              date="${new Date(new Date().getFullYear(), 0, 1)}"
+              .date="${new Date(new Date().getFullYear(), 0, 1)}"
               hour-format="${hourFormatValue}"
             ></sl-format-date>
           `

@@ -1,9 +1,9 @@
 /* eslint-disable no-restricted-imports */
 import { elementUpdated, expect, fixture, html, oneEvent } from '@open-wc/testing';
 // import sinon from 'sinon';
+/* @ts-expect-error - Need to switch to path aliases when Web Test Runner's esbuild plugin allows it */
 import { registerIconLibrary } from '../../../dist/shoelace.js';
 import type SlIcon from './icon';
-/* @ts-expect-error - Need to switch to path aliases when Web Test Runner's esbuild plugin allows it */
 
 const testLibraryIcons = {
   'test-icon1': `<svg id="test-icon1">
