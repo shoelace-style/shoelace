@@ -230,7 +230,7 @@ describe('<sl-format-date>', () => {
         const expected = new Intl.DateTimeFormat('en-US', { timeZoneName: timeZoneNameFormat }).format(
           new Date(new Date().getFullYear(), 0, 1)
         );
-        expect(el?.textContent?.trim()).to.equal(expected);
+        expect(el.shadowRoot?.textContent?.trim()).to.equal(expected);
       });
     });
   });
@@ -264,7 +264,7 @@ describe('<sl-format-date>', () => {
           html`
             <sl-format-date
               .date="${new Date(new Date().getFullYear(), 0, 1)}"
-              hour-format="${hourFormatValue}"
+              hour-format="${hourFormatValue as 'auto' | '12' | '24'}"
             ></sl-format-date>
           `
         );
