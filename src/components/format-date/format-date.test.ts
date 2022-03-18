@@ -56,7 +56,7 @@ describe('<sl-format-date>', () => {
             <sl-format-date .date="${new Date(new Date().getFullYear(), 0, 1)}" lang="${setup.lang}"></sl-format-date>
           `
         );
-        expect(el.textContent?.trim()).to.equal(setup.result);
+        expect(el.shadowRoot?.textContent?.trim()).to.equal(setup.result);
       });
     });
   });
@@ -77,7 +77,7 @@ describe('<sl-format-date>', () => {
         const expected = new Intl.DateTimeFormat('en-US', { weekday: weekdayFormat }).format(
           new Date(new Date().getFullYear(), 0, 1)
         );
-        expect(el.textContent?.trim()).to.equal(expected);
+        expect(el.shadowRoot?.textContent?.trim()).to.equal(expected);
       });
     });
   });
@@ -95,7 +95,7 @@ describe('<sl-format-date>', () => {
         const expected = new Intl.DateTimeFormat('en-US', { era: eraFormat }).format(
           new Date(new Date().getFullYear(), 0, 1)
         );
-        expect(el.textContent?.trim()).to.equal(expected);
+        expect(el.shadowRoot?.textContent?.trim()).to.equal(expected);
       });
     });
   });
@@ -113,7 +113,7 @@ describe('<sl-format-date>', () => {
         const expected = new Intl.DateTimeFormat('en-US', { year: yearFormat }).format(
           new Date(new Date().getFullYear(), 0, 1)
         );
-        expect(el.textContent?.trim()).to.equal(expected);
+        expect(el.shadowRoot?.textContent?.trim()).to.equal(expected);
       });
     });
   });
@@ -131,7 +131,7 @@ describe('<sl-format-date>', () => {
         const expected = new Intl.DateTimeFormat('en-US', { month: monthFormat }).format(
           new Date(new Date().getFullYear(), 0, 1)
         );
-        expect(el.textContent?.trim()).to.equal(expected);
+        expect(el.shadowRoot?.textContent?.trim()).to.equal(expected);
       });
     });
   });
@@ -149,7 +149,7 @@ describe('<sl-format-date>', () => {
         const expected = new Intl.DateTimeFormat('en-US', { day: dayFormat }).format(
           new Date(new Date().getFullYear(), 0, 1)
         );
-        expect(el.textContent?.trim()).to.equal(expected);
+        expect(el.shadowRoot?.textContent?.trim()).to.equal(expected);
       });
     });
   });
@@ -167,7 +167,7 @@ describe('<sl-format-date>', () => {
         const expected = new Intl.DateTimeFormat('en-US', { hour: hourFormat }).format(
           new Date(new Date().getFullYear(), 0, 1)
         );
-        expect(el.textContent?.trim()).to.equal(expected);
+        expect(el.shadowRoot?.textContent?.trim()).to.equal(expected);
       });
     });
   });
@@ -188,7 +188,7 @@ describe('<sl-format-date>', () => {
         const expected = new Intl.DateTimeFormat('en-US', { minute: minuteFormat }).format(
           new Date(new Date().getFullYear(), 0, 1)
         );
-        expect(el.textContent?.trim()).to.equal(expected);
+        expect(el.shadowRoot?.textContent?.trim()).to.equal(expected);
       });
     });
   });
@@ -209,7 +209,7 @@ describe('<sl-format-date>', () => {
         const expected = new Intl.DateTimeFormat('en-US', { second: secondFormat }).format(
           new Date(new Date().getFullYear(), 0, 1)
         );
-        expect(el.textContent?.trim()).to.equal(expected);
+        expect(el.shadowRoot?.textContent?.trim()).to.equal(expected);
       });
     });
   });
@@ -248,7 +248,7 @@ describe('<sl-format-date>', () => {
         const expected = new Intl.DateTimeFormat('en-US', { timeZone: timeZone }).format(
           new Date(new Date().getFullYear(), 0, 1)
         );
-        expect(el.textContent?.trim()).to.equal(expected);
+        expect(el.shadowRoot?.textContent?.trim()).to.equal(expected);
       });
     });
   });
@@ -269,7 +269,7 @@ describe('<sl-format-date>', () => {
         const expected = new Intl.DateTimeFormat('en-US', {
           hour12: hourFormatValue === 'auto' ? undefined : hourFormatValue === '12'
         }).format(new Date(new Date().getFullYear(), 0, 1));
-        expect(el.textContent?.trim()).to.equal(expected);
+        expect(el.shadowRoot?.textContent?.trim()).to.equal(expected);
       });
     });
   });
