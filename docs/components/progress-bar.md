@@ -16,20 +16,6 @@ const App = () => <SlProgressBar value={50} />;
 
 ## Examples
 
-### Custom Height
-
-Use the `--height` custom property to set the progress bar's height.
-
-```html preview
-<sl-progress-bar value="50" style="--height: 6px;"></sl-progress-bar>
-```
-
-```jsx react
-import { SlProgressBar } from '@shoelace-style/shoelace/dist/react';
-
-const App = () => <SlProgressBar value={50} style={{ '--height': '6px' }} />;
-```
-
 ### Labels
 
 Use the `label` attribute to label the progress bar and tell assistive devices how to announce it.
@@ -42,6 +28,20 @@ Use the `label` attribute to label the progress bar and tell assistive devices h
 import { SlProgressBar } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => <SlProgressBar value="50" label="Upload progress" />;
+```
+
+### Custom Height
+
+Use the `--height` custom property to set the progress bar's height.
+
+```html preview
+<sl-progress-bar value="50" style="--height: 6px;"></sl-progress-bar>
+```
+
+```jsx react
+import { SlProgressBar } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => <SlProgressBar value={50} style={{ '--height': '6px' }} />;
 ```
 
 ### Showing Values

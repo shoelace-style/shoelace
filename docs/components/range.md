@@ -18,6 +18,39 @@ const App = () => <SlRange />;
 
 ## Examples
 
+### Labels
+
+Use the `label` attribute to give the range an accessible label. For labels that contain HTML, use the `label` slot instead.
+
+```html preview
+<sl-range label="Volume" min="0" max="100"></sl-input>
+```
+
+```jsx react
+import { SlRange } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => <SlRange label="Volume" min={0} max={100} />;
+```
+
+### Help Text
+
+Add descriptive help text to a range with the `help-text` attribute. For help texts that contain HTML, use the `help-text` slot instead.
+
+```html preview
+<sl-range
+  label="Volume"
+  help-text="Controls the volume of the current song."
+  min="0"
+  max="100"
+></sl-input>
+```
+
+```jsx react
+import { SlRange } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => <SlRange label="Volume" help-text="Controls the volume of the current song." min={0} max={100} />;
+```
+
 ### Min, Max, and Step
 
 Use the `min` and `max` attributes to set the range's minimum and maximum values, respectively. The `step` attribute determines the value's interval when increasing and decreasing.
@@ -117,39 +150,6 @@ You can change the tooltip's content by setting the `tooltipFormatter` property 
 import { SlRange } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => <SlRange min={0} max={100} step={1} tooltipFormatter={value => `Total - ${value}%`} />;
-```
-
-### Labels
-
-Use the `label` attribute to give the range an accessible label. For labels that contain HTML, use the `label` slot instead.
-
-```html preview
-<sl-range label="Volume" min="0" max="100"></sl-input>
-```
-
-```jsx react
-import { SlRange } from '@shoelace-style/shoelace/dist/react';
-
-const App = () => <SlRange label="Volume" min={0} max={100} />;
-```
-
-### Help Text
-
-Add descriptive help text to a range with the `help-text` attribute. For help texts that contain HTML, use the `help-text` slot instead.
-
-```html preview
-<sl-range
-  label="Volume"
-  help-text="Controls the volume of the current song."
-  min="0"
-  max="100"
-></sl-input>
-```
-
-```jsx react
-import { SlRange } from '@shoelace-style/shoelace/dist/react';
-
-const App = () => <SlRange label="Volume" help-text="Controls the volume of the current song." min={0} max={100} />;
 ```
 
 [component-metadata:sl-range]

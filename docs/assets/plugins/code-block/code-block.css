@@ -39,7 +39,7 @@
   bottom: 0;
   width: 1.75rem;
   font-size: 20px;
-  color: var(--sl-color-neutral-700);
+  color: var(--sl-color-neutral-600);
   background-color: var(--sl-color-neutral-0);
   border-left: solid 1px var(--sl-color-neutral-200);
   border-top-right-radius: 3px;
@@ -91,7 +91,7 @@
   font-size: 0.7rem;
   font-weight: 500;
   text-transform: uppercase;
-  color: var(--sl-color-neutral-700);
+  color: var(--sl-color-neutral-600);
   padding: 0 1rem;
   cursor: pointer;
 }
@@ -110,7 +110,7 @@
 
 .code-block__button--selected {
   font-weight: 700;
-  color: var(--sl-color-primary-700);
+  color: var(--sl-color-primary-600);
 }
 
 .code-block__button--codepen {
@@ -132,13 +132,13 @@
   box-shadow: 0 0 0 1px var(--sl-color-primary-400);
   border-right-color: transparent;
   background-color: var(--sl-color-primary-50);
-  color: var(--sl-color-primary-700);
+  color: var(--sl-color-primary-600);
   z-index: 1;
 }
 
 .code-block__button:focus-visible {
   outline: none;
-  color: var(--sl-color-primary-700);
+  color: var(--sl-color-primary-600);
   border-color: var(--sl-color-primary-400);
   border-right-color: transparent;
   background-color: var(--sl-color-primary-50);
@@ -153,7 +153,7 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  color: var(--sl-color-neutral-700);
+  color: var(--sl-color-neutral-600);
   cursor: pointer;
   -webkit-appearance: none;
 }
@@ -185,7 +185,7 @@
 
 .markdown-section .docsify-copy-code-button.copied {
   animation: pulse 0.75s;
-  --pulse-color: var(--sl-color-neutral-700);
+  --pulse-color: var(--sl-color-neutral-600);
 }
 
 @keyframes pulse {
@@ -214,7 +214,7 @@
 }
 
 .markdown-section .docsify-copy-code-button:active {
-  background-color: var(--sl-color-neutral-700);
+  background-color: var(--sl-color-neutral-600);
   transform: scale(0.92);
 }
 
