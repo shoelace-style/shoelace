@@ -64,30 +64,32 @@ Icons inherit their color from the current text color. Thus, you can set the `co
 import { SlIcon } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
-  <div style={{ color: '#4a90e2' }}>
-    <SlIcon name="exclamation-triangle"></SlIcon>
-    <SlIcon name="archive"></SlIcon>
-    <SlIcon name="battery-charging"></SlIcon>
-    <SlIcon name="bell"></SlIcon>
-  </div>
-  <div style={{ color: '#9013fe' }}>
-    <SlIcon name="clock"></SlIcon>
-    <SlIcon name="cloud"></SlIcon>
-    <SlIcon name="download"></SlIcon>
-    <SlIcon name="file-earmark"></SlIcon>
-  </div>
-  <div style={{ color: '#417505' }}>
-    <SlIcon name="flag"></SlIcon>
-    <SlIcon name="heart"></SlIcon>
-    <SlIcon name="image"></SlIcon>
-    <SlIcon name="lightning"></SlIcon>
-  </div>
-  <div style={{ color: '#f5a623' }}>
-    <SlIcon name="mic"></SlIcon>
-    <SlIcon name="search"></SlIcon>
-    <SlIcon name="star"></SlIcon>
-    <SlIcon name="trash"></SlIcon>
-  </div>
+  <>
+    <div style={{ color: '#4a90e2' }}>
+      <SlIcon name="exclamation-triangle"></SlIcon>
+      <SlIcon name="archive"></SlIcon>
+      <SlIcon name="battery-charging"></SlIcon>
+      <SlIcon name="bell"></SlIcon>
+    </div>
+    <div style={{ color: '#9013fe' }}>
+      <SlIcon name="clock"></SlIcon>
+      <SlIcon name="cloud"></SlIcon>
+      <SlIcon name="download"></SlIcon>
+      <SlIcon name="file-earmark"></SlIcon>
+    </div>
+    <div style={{ color: '#417505' }}>
+      <SlIcon name="flag"></SlIcon>
+      <SlIcon name="heart"></SlIcon>
+      <SlIcon name="image"></SlIcon>
+      <SlIcon name="lightning"></SlIcon>
+    </div>
+    <div style={{ color: '#f5a623' }}>
+      <SlIcon name="mic"></SlIcon>
+      <SlIcon name="search"></SlIcon>
+      <SlIcon name="star"></SlIcon>
+      <SlIcon name="trash"></SlIcon>
+    </div>
+  </>
 );
 ```
 
