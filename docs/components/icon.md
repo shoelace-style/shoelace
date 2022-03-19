@@ -29,6 +29,37 @@ Click or tap on an icon below to copy its name and use it like this.
 
 ## Examples
 
+### Colors
+
+Icons inherit their color from the current text color. Thus, you can set the `color` property on the `<sl-icon>` element or an ancestor to change the color.
+
+```html preview
+<div style="color: #4a90e2;">
+  <sl-icon name="exclamation-triangle"></sl-icon>
+  <sl-icon name="archive"></sl-icon>
+  <sl-icon name="battery-charging"></sl-icon>
+  <sl-icon name="bell"></sl-icon>
+</div>
+<div style="color: #9013fe;">
+  <sl-icon name="clock"></sl-icon>
+  <sl-icon name="cloud"></sl-icon>
+  <sl-icon name="download"></sl-icon>
+  <sl-icon name="file-earmark"></sl-icon>
+</div>
+<div style="color: #417505;">
+  <sl-icon name="flag"></sl-icon>
+  <sl-icon name="heart"></sl-icon>
+  <sl-icon name="image"></sl-icon>
+  <sl-icon name="lightning"></sl-icon>
+</div>
+<div style="color: #f5a623;">
+  <sl-icon name="mic"></sl-icon>
+  <sl-icon name="search"></sl-icon>
+  <sl-icon name="star"></sl-icon>
+  <sl-icon name="trash"></sl-icon>
+</div>
+```
+
 ### Sizing
 
 Icons are sized relative to the current font size. To change their size, set the `font-size` property on the icon itself or on a parent element as shown below.
