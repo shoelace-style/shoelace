@@ -264,7 +264,7 @@ const App = () => (
 
 ### Customizing Label Position
 
-Use parts to to customize the label's position.
+Use parts to customize the label's position.
 
 ```html preview
 <sl-input class="label-on-left" label="Name"></sl-input><br />
