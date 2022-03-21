@@ -7,6 +7,7 @@ import '~/components/icon-button/icon-button';
 import type SlIconButton from '~/components/icon-button/icon-button';
 import '~/components/icon/icon';
 import type SlMenuItem from '~/components/menu-item/menu-item';
+import '~/components/menu/menu';
 import type SlMenu from '~/components/menu/menu';
 import type { MenuSelectEventDetail } from '~/components/menu/menu';
 import '~/components/tag/tag';
