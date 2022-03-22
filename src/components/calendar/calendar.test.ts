@@ -1,4 +1,4 @@
-import { expect, fixture, html, waitUntil } from '@open-wc/testing';
+import { expect } from '@open-wc/testing';
 
 describe('<sl-calendar>', () => {
   it('should render a component', async () => {
