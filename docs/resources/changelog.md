@@ -6,8 +6,12 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
-## Next
+## 2.0.0-beta.72
 
+- 🚨 BREAKING: refactored parts in `<sl-input>`, `<sl-range>`, `<sl-select>`, and `<sl-textarea>` to allow you to customize the label and help text position
+  - Added `form-control-input` part
+  - Renamed `label` to `form-control-label`
+  - Renamed `help-text` to `form-control-help-text`
 - 🚨 BREAKING: removed status from the `sl-error` event payload in `<sl-icon>`
 - Added the experimental `<sl-radio-button>` component
 - Added `button-group` and `button-group__base` parts to `<sl-radio-group>`

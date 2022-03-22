@@ -5,7 +5,7 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { html, literal } from 'lit/static-html.js';
 import '~/components/spinner/spinner';
 import { emit } from '~/internal/event';
-import { FormSubmitController } from '~/internal/form-control';
+import { FormSubmitController } from '~/internal/form';
 import { HasSlotController } from '~/internal/slot';
 import styles from './button.styles';
 

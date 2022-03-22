@@ -36,6 +36,54 @@ const App = () => (
 
 ## Examples
 
+### Labels
+
+Use the `label` attribute to give the select an accessible label. For labels that contain HTML, use the `label` slot instead.
+
+```html preview
+<sl-select label="Select one">
+  <sl-menu-item value="option-1">Option 1</sl-menu-item>
+  <sl-menu-item value="option-2">Option 2</sl-menu-item>
+  <sl-menu-item value="option-3">Option 3</sl-menu-item>
+</sl-select>
+```
+
+```jsx react
+import { SlMenuItem, SlSelect } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlSelect label="Select one">
+    <SlMenuItem value="option-1">Option 1</SlMenuItem>
+    <SlMenuItem value="option-2">Option 2</SlMenuItem>
+    <SlMenuItem value="option-3">Option 3</SlMenuItem>
+  </SlSelect>
+);
+```
+
+### Help Text
+
+Add descriptive help text to a select with the `help-text` attribute. For help texts that contain HTML, use the `help-text` slot instead.
+
+```html preview
+<sl-select label="Experience" help-text="Please tell us your skill level.">
+  <sl-menu-item value="1">Novice</sl-menu-item>
+  <sl-menu-item value="2">Intermediate</sl-menu-item>
+  <sl-menu-item value="3">Advanced</sl-menu-item>
+</sl-select>
+```
+
+```jsx react
+import { SlMenuItem, SlSelect } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlSelect label="Experience" help-text="Please tell us your skill level.">
+    <SlMenuItem value="1">Novice</SlMenuItem>
+    <SlMenuItem value="2">Intermediate</SlMenuItem>
+    <SlMenuItem value="3">Advanced</SlMenuItem>
+  </SlSelect>
+);
+```
+
 ### Placeholders
 
 Use the `placeholder` attribute to add a placeholder.
@@ -361,54 +409,6 @@ const App = () => (
       <SlMenuItem value="option-3">Option 3</SlMenuItem>
     </SlSelect>
   </>
-);
-```
-
-### Labels
-
-Use the `label` attribute to give the select an accessible label. For labels that contain HTML, use the `label` slot instead.
-
-```html preview
-<sl-select label="Select one">
-  <sl-menu-item value="option-1">Option 1</sl-menu-item>
-  <sl-menu-item value="option-2">Option 2</sl-menu-item>
-  <sl-menu-item value="option-3">Option 3</sl-menu-item>
-</sl-select>
-```
-
-```jsx react
-import { SlMenuItem, SlSelect } from '@shoelace-style/shoelace/dist/react';
-
-const App = () => (
-  <SlSelect label="Select one">
-    <SlMenuItem value="option-1">Option 1</SlMenuItem>
-    <SlMenuItem value="option-2">Option 2</SlMenuItem>
-    <SlMenuItem value="option-3">Option 3</SlMenuItem>
-  </SlSelect>
-);
-```
-
-### Help Text
-
-Add descriptive help text to a select with the `help-text` attribute. For help texts that contain HTML, use the `help-text` slot instead.
-
-```html preview
-<sl-select label="Experience" help-text="Please tell us your skill level.">
-  <sl-menu-item value="1">Novice</sl-menu-item>
-  <sl-menu-item value="2">Intermediate</sl-menu-item>
-  <sl-menu-item value="3">Advanced</sl-menu-item>
-</sl-select>
-```
-
-```jsx react
-import { SlMenuItem, SlSelect } from '@shoelace-style/shoelace/dist/react';
-
-const App = () => (
-  <SlSelect label="Experience" help-text="Please tell us your skill level.">
-    <SlMenuItem value="1">Novice</SlMenuItem>
-    <SlMenuItem value="2">Intermediate</SlMenuItem>
-    <SlMenuItem value="3">Advanced</SlMenuItem>
-  </SlSelect>
 );
 ```
 

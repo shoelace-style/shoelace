@@ -15,7 +15,7 @@ import type SlInput from '~/components/input/input';
 import '~/components/visually-hidden/visually-hidden';
 import { drag } from '~/internal/drag';
 import { emit } from '~/internal/event';
-import { FormSubmitController } from '~/internal/form-control';
+import { FormSubmitController } from '~/internal/form';
 import { clamp } from '~/internal/math';
 import { watch } from '~/internal/watch';
 import { LocalizeController } from '~/utilities/localize';

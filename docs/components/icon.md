@@ -29,6 +29,70 @@ Click or tap on an icon below to copy its name and use it like this.
 
 ## Examples
 
+### Colors
+
+Icons inherit their color from the current text color. Thus, you can set the `color` property on the `<sl-icon>` element or an ancestor to change the color.
+
+```html preview
+<div style="color: #4a90e2;">
+  <sl-icon name="exclamation-triangle"></sl-icon>
+  <sl-icon name="archive"></sl-icon>
+  <sl-icon name="battery-charging"></sl-icon>
+  <sl-icon name="bell"></sl-icon>
+</div>
+<div style="color: #9013fe;">
+  <sl-icon name="clock"></sl-icon>
+  <sl-icon name="cloud"></sl-icon>
+  <sl-icon name="download"></sl-icon>
+  <sl-icon name="file-earmark"></sl-icon>
+</div>
+<div style="color: #417505;">
+  <sl-icon name="flag"></sl-icon>
+  <sl-icon name="heart"></sl-icon>
+  <sl-icon name="image"></sl-icon>
+  <sl-icon name="lightning"></sl-icon>
+</div>
+<div style="color: #f5a623;">
+  <sl-icon name="mic"></sl-icon>
+  <sl-icon name="search"></sl-icon>
+  <sl-icon name="star"></sl-icon>
+  <sl-icon name="trash"></sl-icon>
+</div>
+```
+
+```jsx react
+import { SlIcon } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <>
+    <div style={{ color: '#4a90e2' }}>
+      <SlIcon name="exclamation-triangle"></SlIcon>
+      <SlIcon name="archive"></SlIcon>
+      <SlIcon name="battery-charging"></SlIcon>
+      <SlIcon name="bell"></SlIcon>
+    </div>
+    <div style={{ color: '#9013fe' }}>
+      <SlIcon name="clock"></SlIcon>
+      <SlIcon name="cloud"></SlIcon>
+      <SlIcon name="download"></SlIcon>
+      <SlIcon name="file-earmark"></SlIcon>
+    </div>
+    <div style={{ color: '#417505' }}>
+      <SlIcon name="flag"></SlIcon>
+      <SlIcon name="heart"></SlIcon>
+      <SlIcon name="image"></SlIcon>
+      <SlIcon name="lightning"></SlIcon>
+    </div>
+    <div style={{ color: '#f5a623' }}>
+      <SlIcon name="mic"></SlIcon>
+      <SlIcon name="search"></SlIcon>
+      <SlIcon name="star"></SlIcon>
+      <SlIcon name="trash"></SlIcon>
+    </div>
+  </>
+);
+```
+
 ### Sizing
 
 Icons are sized relative to the current font size. To change their size, set the `font-size` property on the icon itself or on a parent element as shown below.

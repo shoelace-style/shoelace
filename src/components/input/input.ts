@@ -5,7 +5,7 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
 import '~/components/icon/icon';
 import { emit } from '~/internal/event';
-import { FormSubmitController } from '~/internal/form-control';
+import { FormSubmitController } from '~/internal/form';
 import { HasSlotController } from '~/internal/slot';
 import { watch } from '~/internal/watch';
 import styles from './input.styles';
@@ -30,15 +30,16 @@ import styles from './input.styles';
  * @event sl-focus - Emitted when the control gains focus.
  * @event sl-blur - Emitted when the control loses focus.
  *
- * @csspart base - The component's internal wrapper.
  * @csspart form-control - The form control that wraps the label, input, and help-text.
- * @csspart label - The input label.
+ * @csspart form-control-label - The label's wrapper.
+ * @csspart form-control-input - The input's wrapper.
+ * @csspart form-control-help-text - The help text's wrapper.
+ * @csspart base - The component's internal wrapper.
  * @csspart input - The input control.
  * @csspart prefix - The input prefix container.
  * @csspart clear-button - The clear button.
  * @csspart password-toggle-button - The password toggle button.
  * @csspart suffix - The input suffix container.
- * @csspart help-text - The input help text.
  */
 @customElement('sl-input')
 export default class SlInput extends LitElement {
@@ -293,11 +294,16 @@ export default class SlInput extends LitElement {
           'form-control--has-help-text': hasHelpText
         })}
       >
-        <label part="label" class="form-control__label" for="input" aria-hidden=${hasLabel ? 'false' : 'true'}>
+        <label
+          part="form-control-label"
+          class="form-control__label"
+          for="input"
+          aria-hidden=${hasLabel ? 'false' : 'true'}
+        >
           <slot name="label">${this.label}</slot>
         </label>
 
-        <div class="form-control__input">
+        <div part="form-control-input" class="form-control-input">
           <div
             part="base"
             class=${classMap({
@@ -403,7 +409,7 @@ export default class SlInput extends LitElement {
         </div>
 
         <div
-          part="help-text"
+          part="form-control-help-text"
           id="help-text"
           class="form-control__help-text"
           aria-hidden=${hasHelpText ? 'false' : 'true'}
