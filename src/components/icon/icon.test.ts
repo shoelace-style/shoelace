@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-imports */
-import { elementUpdated, expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
+import { elementUpdated, expect, fixture, html, oneEvent } from '@open-wc/testing';
 /* @ts-expect-error - TODO - switch to path aliases when Web Test Runner's esbuild plugin allows it */
 import { registerIconLibrary } from '../../../dist/shoelace.js';
 import type SlIcon from './icon';
