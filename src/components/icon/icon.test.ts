@@ -1,17 +1,20 @@
 /* eslint-disable no-restricted-imports */
-import { elementUpdated, expect, fixture, html, oneEvent } from '@open-wc/testing';
-// import sinon from 'sinon';
-/* @ts-expect-error - Need to switch to path aliases when Web Test Runner's esbuild plugin allows it */
+import { elementUpdated, expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
+/* @ts-expect-error - TODO - switch to path aliases when Web Test Runner's esbuild plugin allows it */
 import { registerIconLibrary } from '../../../dist/shoelace.js';
 import type SlIcon from './icon';
 
 const testLibraryIcons = {
-  'test-icon1': `<svg id="test-icon1">
-  <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"></path>
-  </svg>`,
-  'test-icon2': `<svg id="test-icon2">
-  <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"></path>
-  </svg>`,
+  'test-icon1': `
+    <svg id="test-icon1">
+      <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"></path>
+    </svg>
+  `,
+  'test-icon2': `
+    <svg id="test-icon2">
+    <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"></path>
+    </svg>
+  `,
   'bad-icon': `<div></div>`
 };
 
@@ -82,7 +85,7 @@ describe('<sl-icon>', () => {
     });
   });
 
-  describe('whena valid src is provided', () => {
+  describe('when a valid src is provided', () => {
     it('the svg is rendered', async () => {
       const fakeId = 'test-src';
       const el = await fixture<SlIcon>(html` <sl-icon></sl-icon> `);
@@ -111,7 +114,7 @@ describe('<sl-icon>', () => {
       expect(ev.isTrusted).to.exist;
     });
 
-    it('runs mutators from new library', async () => {
+    it('runs mutator from new library', async () => {
       const el = await fixture<SlIcon>(html` <sl-icon library="test-library" name="test-icon1"></sl-icon> `);
       await elementUpdated(el);
 
@@ -122,8 +125,8 @@ describe('<sl-icon>', () => {
 
   describe('negative cases', () => {
     // using new library so we can test for malformed icons when registered
-    it('svg not rendered with an icon that doesnt exist in the library', async () => {
-      const el = await fixture<SlIcon>(html` <sl-icon library="test-library" name="doesntexist"></sl-icon> `);
+    it("svg not rendered with an icon that doesn't exist in the library", async () => {
+      const el = await fixture<SlIcon>(html` <sl-icon library="test-library" name="does-not-exist"></sl-icon> `);
 
       expect(el.shadowRoot?.querySelector('svg')).to.be.null;
     });
@@ -140,7 +143,7 @@ describe('<sl-icon>', () => {
       expect(ev).to.exist;
     });
 
-    it('emits sl-error when there isnt an svg element in the registered icon', async () => {
+    it("emits sl-error when there isn't an svg element in the registered icon", async () => {
       const el = await fixture<SlIcon>(html` <sl-icon library="test-library"></sl-icon> `);
       const listener = oneEvent(el, 'sl-error');
 
@@ -152,28 +155,4 @@ describe('<sl-icon>', () => {
       expect(ev).to.exist;
     });
   });
-
-  // describe('cached icon request timing', () => {
-  //   it('sl-load event doesnt fire until after firstUpdated, even when the icon is cached', async () => {
-  //     // have to use an icon not used in tests before
-  //     // div in fixture so we can append another icon
-  //     const el = await fixture<SlIcon>(html` <div><sl-icon library="system" name="chevron-down"></sl-icon></div> `);
-
-  //     const newIcon = document.createElement('sl-icon');
-  //     newIcon.library = 'system';
-  //     newIcon.name = 'chevron-down';
-
-  //     let updateCount: number;
-  //     newIcon.updateComplete.then(() => {
-  //       updateCount = updateCount++;
-  //     });
-
-  //     newIcon.addEventListener('sl-load', () => {
-  //       expect(updateCount).to.equal(1);
-  //     });
-
-  //     el.append(newIcon);
-
-  //   });
-  // });
 });
