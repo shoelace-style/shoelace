@@ -1,6 +1,8 @@
 import { expect, fixture, html, waitUntil } from '@open-wc/testing';
 import type SlIconButton from './icon-button';
 
+type LinkTarget = '_self' | '_blank' | '_parent' | '_top';
+
 describe('<sl-icon-button>', () => {
   describe('defaults ', () => {
     it('default properties', async () => {
@@ -62,7 +64,7 @@ describe('<sl-icon-button>', () => {
     });
 
     describe('and target is present', () => {
-      ['_blank', '_parent', '_self', '_top'].forEach((target: string) => {
+      ['_blank', '_parent', '_self', '_top'].forEach((target: LinkTarget) => {
         it(`the anchor target is the provided target: ${target}`, async () => {
           const el = await fixture<SlIconButton>(
             html` <sl-icon-button href="some/path" target="${target}"></sl-icon-button> `
@@ -80,7 +82,7 @@ describe('<sl-icon-button>', () => {
     });
 
     describe('and download is present', () => {
-      it(`the anchor downlown attribute is the provided download`, async () => {
+      it(`the anchor download attribute is the provided download`, async () => {
         const fakeDownload = 'some/path';
         const el = await fixture<SlIconButton>(
           html` <sl-icon-button href="some/path" download="${fakeDownload}"></sl-icon-button> `
