@@ -632,12 +632,13 @@ export default css`
     mix-blend-mode: multiply;
   }
 
-  /* Bump focused buttons up so their focus ring isn't clipped */
+  /* Bump hovered, focused, and checked buttons up so their focus ring isn't clipped */
   :host(.sl-button-group__button--hover) {
     z-index: 1;
   }
 
-  :host(.sl-button-group__button--focus) {
+  :host(.sl-button-group__button--focus),
+  :host(.sl-button-group__button[checked]) {
     z-index: 2;
   }
 `;
