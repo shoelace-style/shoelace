@@ -9,8 +9,9 @@
       "dom.Iterable",
       "es2020"
     ],
+    "baseUrl": ".",
+    "rootDir": "./src",
     "declaration": true,
-    "rootDir": ".",
     "strict": true,
     "strictPropertyInitialization": false,
     "strictFunctionTypes": false,
@@ -25,10 +26,8 @@
     "removeComments": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "useUnknownInCatchVariables": true,
-    "baseUrl": "."
+    "useUnknownInCatchVariables": true
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"],
+  "exclude": ["src/**/*.test.ts"]
 }
