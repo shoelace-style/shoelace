@@ -201,17 +201,7 @@ module.exports = {
     'no-restricted-imports': [
       'warn',
       {
-        patterns: [
-          {
-            group: ['../*'],
-            message: 'Usage of relative parent imports is not allowed.'
-          }
-        ],
         paths: [
-          {
-            name: '.',
-            message: 'Usage of local index imports is not allowed.'
-          },
           {
             name: './index',
             message: 'Import from the source file instead.'
@@ -224,16 +214,6 @@ module.exports = {
       'warn',
       {
         groups: ['builtin', 'external', 'internal', 'unknown', 'parent', 'sibling', 'index', 'object', 'type'],
-        pathGroups: [
-          {
-            pattern: '~/**',
-            group: 'internal'
-          },
-          {
-            pattern: 'dist/**',
-            group: 'external'
-          }
-        ],
         alphabetize: {
           order: 'asc',
           caseInsensitive: true

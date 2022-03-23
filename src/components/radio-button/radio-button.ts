@@ -2,9 +2,9 @@ import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { html } from 'lit/static-html.js';
-import styles from '~/components/button/button.styles';
-import RadioBase from '~/internal/radio';
-import { HasSlotController } from '~/internal/slot';
+import styles from '../../components/button/button.styles';
+import RadioBase from '../../internal/radio';
+import { HasSlotController } from '../../internal/slot';
 
 /**
  * @since 2.0

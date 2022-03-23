@@ -1,9 +1,9 @@
 import { html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import '~/components/icon-button/icon-button';
-import { emit } from '~/internal/event';
-import { LocalizeController } from '~/utilities/localize';
+import '../../components/icon-button/icon-button';
+import { emit } from '../../internal/event';
+import { LocalizeController } from '../../utilities/localize';
 import styles from './tag.styles';
 
 /**

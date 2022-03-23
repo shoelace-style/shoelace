@@ -1,8 +1,8 @@
 import { LitElement } from 'lit';
 import { property, query, state } from 'lit/decorators.js';
-import { emit } from '~/internal/event';
-import { FormSubmitController } from '~/internal/form';
-import { watch } from '~/internal/watch';
+import { emit } from '../internal/event';
+import { FormSubmitController } from '../internal/form';
+import { watch } from '../internal/watch';
 
 /**
  * The following events are emitted by the base class. When extending, these comments should be prepended to the
