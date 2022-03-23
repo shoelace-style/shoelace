@@ -194,7 +194,7 @@ const App = () => {
 
 ### Custom Validation
 
-To create a custom validation error, use the `setCustomValidity` method. The form will not be submitted when this method is called with anything other than an empty string, and its message will be shown by the browser as the validation error. To make the input valid again, call the method a second time with an empty string as the argument.
+To create a custom validation error, pass a non-empty string to the `setCustomValidity()` method. This will override any existing validation constraints. The form will not be submitted when a custom validity is set and the browser will show a validation error when the containing form is submitted. To make the input valid again, call `setCustomValidity()` again with an empty string.
 
 ```html preview
 <form class="input-validation-custom">
@@ -256,6 +256,8 @@ const App = () => {
   );
 };
 ```
+
+?> Custom validation can be applied to any form control that supports the `setCustomValidity()` method. It is not limited to inputs and textareas.
 
 ### Custom Validation Styles
 
