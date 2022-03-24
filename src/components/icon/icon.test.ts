@@ -1,3 +1,4 @@
+/* eslint @typescript-eslint/no-unsafe-call: "off" */
 import { elementUpdated, expect, fixture, html, oneEvent } from '@open-wc/testing';
 import { registerIconLibrary } from '../../../dist/shoelace.js';
 import type SlIcon from './icon';
