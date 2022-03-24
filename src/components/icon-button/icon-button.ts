@@ -2,7 +2,7 @@ import { html, LitElement } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import '../../components/icon/icon';
+import '~/components/icon/icon';
 import styles from './icon-button.styles';
 
 /**

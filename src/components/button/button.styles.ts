@@ -1,6 +1,6 @@
 import { css } from 'lit';
-import { focusVisibleSelector } from '../../internal/focus-visible';
-import componentStyles from '../../styles/component.styles';
+import { focusVisibleSelector } from '~/internal/focus-visible';
+import componentStyles from '~/styles/component.styles';
 
 export default css`
   ${componentStyles}
@@ -632,13 +632,12 @@ export default css`
     mix-blend-mode: multiply;
   }
 
-  /* Bump hovered, focused, and checked buttons up so their focus ring isn't clipped */
+  /* Bump focused buttons up so their focus ring isn't clipped */
   :host(.sl-button-group__button--hover) {
     z-index: 1;
   }
 
-  :host(.sl-button-group__button--focus),
-  :host(.sl-button-group__button[checked]) {
+  :host(.sl-button-group__button--focus) {
     z-index: 2;
   }
 `;

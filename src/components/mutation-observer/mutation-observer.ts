@@ -1,7 +1,7 @@
 import { html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { emit } from '../../internal/event';
-import { watch } from '../../internal/watch';
+import { emit } from '~/internal/event';
+import { watch } from '~/internal/watch';
 import styles from './mutation-observer.styles';
 
 /**

@@ -1,13 +1,13 @@
 import { html, LitElement } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
-import '../../components/icon/icon';
+import type SlBreadcrumbItem from '~/components/breadcrumb-item/breadcrumb-item';
+import '~/components/icon/icon';
 import styles from './breadcrumb.styles';
-import type SlBreadcrumbItem from '../../components/breadcrumb-item/breadcrumb-item';
 
 /**
  * @since 2.0
- *
  * @status stable
+ *
  * @slot - One or more breadcrumb items to display.
  * @slot separator - The separator to use between breadcrumb items.
  *

@@ -1,9 +1,9 @@
 import { html, LitElement } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import '../../components/button-group/button-group';
+import '~/components/button-group/button-group';
+import type SlRadio from '~/components/radio/radio';
 import styles from './radio-group.styles';
-import type SlRadio from '../../components/radio/radio';
 
 const RADIO_CHILDREN = ['sl-radio', 'sl-radio-button'];
 

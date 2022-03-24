@@ -1,7 +1,7 @@
-import { aTimeout, expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
+import { expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
 import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
-import type SlRadioGroup from '../../components/radio-group/radio-group';
+import type SlRadioGroup from '~/components/radio-group/radio-group';
 import type SlRadio from './radio';
 
 describe('<sl-radio>', () => {
@@ -75,7 +75,7 @@ describe('<sl-radio>', () => {
           <sl-radio-group>
             <sl-radio id="radio-1" name="a" value="1" checked></sl-radio>
             <sl-radio id="radio-2" name="a" value="2"></sl-radio>
-            <sl-radio id="radio-3" name="a" value="3"></sl-radio>
+            <sl-radio id="radio-2" name="a" value="3"></sl-radio>
           </sl-radio-group>
           <sl-button type="submit">Submit</sl-button>
         </form>
@@ -95,30 +95,6 @@ describe('<sl-radio>', () => {
       await waitUntil(() => submitHandler.calledOnce);
 
       expect(formData!.get('a')).to.equal('2');
-    });
-
-    it('should show a constraint validation error when setCustomValidity() is called', async () => {
-      const form = await fixture<HTMLFormElement>(html`
-        <form>
-          <sl-radio-group>
-            <sl-radio id="radio-1" name="a" value="1" checked></sl-radio>
-            <sl-radio id="radio-2" name="a" value="2"></sl-radio>
-          </sl-radio-group>
-          <sl-button type="submit">Submit</sl-button>
-        </form>
-      `);
-      const button = form.querySelector('sl-button')!;
-      const radio = form.querySelectorAll('sl-radio')[1]!;
-      const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
-
-      // Submitting the form after setting custom validity should not trigger the handler
-      radio.setCustomValidity('Invalid selection');
-      form.addEventListener('submit', submitHandler);
-      button.click();
-
-      await aTimeout(100);
-
-      expect(submitHandler).to.not.have.been.called;
     });
   });
 });

@@ -1,6 +1,5 @@
-import { aTimeout, expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
+import { expect, fixture, html, oneEvent } from '@open-wc/testing';
 import { sendKeys } from '@web/test-runner-commands';
-import sinon from 'sinon';
 import type SlCheckbox from './checkbox';
 
 describe('<sl-checkbox>', () => {
@@ -42,50 +41,5 @@ describe('<sl-checkbox>', () => {
     await el.updateComplete;
     el.checked = false;
     await el.updateComplete;
-  });
-
-  describe('when submitting a form', () => {
-    it('should submit the correct value', async () => {
-      const form = await fixture<HTMLFormElement>(html`
-        <form>
-          <sl-checkbox name="a" value="1" checked></sl-checkbox>
-          <sl-button type="submit">Submit</sl-button>
-        </form>
-      `);
-      const button = form.querySelector('sl-button')!;
-      const submitHandler = sinon.spy((event: SubmitEvent) => {
-        formData = new FormData(form);
-        event.preventDefault();
-      });
-      let formData: FormData;
-
-      form.addEventListener('submit', submitHandler);
-      button.click();
-
-      await waitUntil(() => submitHandler.calledOnce);
-
-      expect(formData!.get('a')).to.equal('1');
-    });
-
-    it('should show a constraint validation error when setCustomValidity() is called', async () => {
-      const form = await fixture<HTMLFormElement>(html`
-        <form>
-          <sl-checkbox name="a" value="1" checked></sl-checkbox>
-          <sl-button type="submit">Submit</sl-button>
-        </form>
-      `);
-      const button = form.querySelector('sl-button')!;
-      const checkbox = form.querySelector('sl-checkbox')!;
-      const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
-
-      // Submitting the form after setting custom validity should not trigger the handler
-      checkbox.setCustomValidity('Invalid selection');
-      form.addEventListener('submit', submitHandler);
-      button.click();
-
-      await aTimeout(100);
-
-      expect(submitHandler).to.not.have.been.called;
-    });
   });
 });

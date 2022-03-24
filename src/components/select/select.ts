@@ -1,21 +1,21 @@
 import { html, LitElement } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import '../../components/dropdown/dropdown';
-import '../../components/icon-button/icon-button';
-import '../../components/icon/icon';
-import '../../components/menu/menu';
-import '../../components/tag/tag';
-import { emit } from '../../internal/event';
-import { FormSubmitController } from '../../internal/form';
-import { getTextContent, HasSlotController } from '../../internal/slot';
-import { watch } from '../../internal/watch';
+import '~/components/dropdown/dropdown';
+import type SlDropdown from '~/components/dropdown/dropdown';
+import '~/components/icon-button/icon-button';
+import type SlIconButton from '~/components/icon-button/icon-button';
+import '~/components/icon/icon';
+import type SlMenuItem from '~/components/menu-item/menu-item';
+import '~/components/menu/menu';
+import type SlMenu from '~/components/menu/menu';
+import type { MenuSelectEventDetail } from '~/components/menu/menu';
+import '~/components/tag/tag';
+import { emit } from '~/internal/event';
+import { FormSubmitController } from '~/internal/form';
+import { getTextContent, HasSlotController } from '~/internal/slot';
+import { watch } from '~/internal/watch';
 import styles from './select.styles';
-import type SlDropdown from '../../components/dropdown/dropdown';
-import type SlIconButton from '../../components/icon-button/icon-button';
-import type SlMenuItem from '../../components/menu-item/menu-item';
-import type { MenuSelectEventDetail } from '../../components/menu/menu';
-import type SlMenu from '../../components/menu/menu';
 import type { TemplateResult } from 'lit';
 
 /**

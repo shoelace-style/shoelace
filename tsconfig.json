@@ -9,9 +9,8 @@
       "dom.Iterable",
       "es2020"
     ],
-    "baseUrl": ".",
-    "rootDir": "./src",
     "declaration": true,
+    "rootDir": ".",
     "strict": true,
     "strictPropertyInitialization": false,
     "strictFunctionTypes": false,
@@ -26,8 +25,24 @@
     "removeComments": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "useUnknownInCatchVariables": true
+    "useUnknownInCatchVariables": true,
+    "paths": {
+      "~/*": [
+        "src/*"
+      ],
+    },
+    "plugins": [
+      {
+        "transform": "typescript-transform-paths"
+      },
+      {
+        "transform": "typescript-transform-paths",
+        "afterDeclarations": true
+      }
+    ],
+    "baseUrl": "."
   },
-  "include": ["src"],
-  "exclude": ["src/**/*.test.ts"]
+  "include": [
+    "src"
+  ]
 }

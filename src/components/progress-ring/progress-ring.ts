@@ -1,6 +1,6 @@
 import { html, LitElement } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
-import { LocalizeController } from '../../utilities/localize';
+import { LocalizeController } from '~/utilities/localize';
 import styles from './progress-ring.styles';
 
 /**
