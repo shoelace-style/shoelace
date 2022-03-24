@@ -187,12 +187,20 @@ export default class SlTabGroup extends LitElement {
           (['top', 'bottom'].includes(this.placement) && event.key === 'ArrowLeft') ||
           (['start', 'end'].includes(this.placement) && event.key === 'ArrowUp')
         ) {
-          index = Math.max(0, index - 1);
+          index--;
         } else if (
           (['top', 'bottom'].includes(this.placement) && event.key === 'ArrowRight') ||
           (['start', 'end'].includes(this.placement) && event.key === 'ArrowDown')
         ) {
-          index = Math.min(this.tabs.length - 1, index + 1);
+          index++;
+        }
+
+        if (index < 0) {
+          index = this.tabs.length - 1;
+        }
+
+        if (index > this.tabs.length - 1) {
+          index = 0;
         }
 
         this.tabs[index].focus({ preventScroll: true });
