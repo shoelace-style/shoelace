@@ -3,11 +3,11 @@ import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
-import '~/components/icon/icon';
-import { emit } from '~/internal/event';
-import { FormSubmitController } from '~/internal/form';
-import { HasSlotController } from '~/internal/slot';
-import { watch } from '~/internal/watch';
+import '../../components/icon/icon';
+import { emit } from '../../internal/event';
+import { FormSubmitController } from '../../internal/form';
+import { HasSlotController } from '../../internal/slot';
+import { watch } from '../../internal/watch';
 import styles from './input.styles';
 
 /**

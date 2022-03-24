@@ -1,6 +1,5 @@
 import { expect, fixture, html, waitUntil } from '@open-wc/testing';
 import sinon from 'sinon';
-// eslint-disable-next-line no-restricted-imports
 import { serialize } from '../../utilities/form';
 import type SlTextarea from './textarea';
 

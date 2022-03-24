@@ -3,7 +3,7 @@ import { customElement } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
-import RadioBase from '~/internal/radio';
+import RadioBase from '../../internal/radio';
 import styles from './radio.styles';
 
 /**

@@ -1,7 +1,7 @@
 import { expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
 import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
-import type SlRadioGroup from '~/components/radio-group/radio-group';
+import type SlRadioGroup from '../../components/radio-group/radio-group';
 import type SlRadioButton from './radio-button';
 
 describe('<sl-radio-button>', () => {

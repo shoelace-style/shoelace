@@ -3,10 +3,10 @@ import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-import '~/components/icon/icon';
-import { emit } from '~/internal/event';
-import { clamp } from '~/internal/math';
-import { watch } from '~/internal/watch';
+import '../../components/icon/icon';
+import { emit } from '../../internal/event';
+import { clamp } from '../../internal/math';
+import { watch } from '../../internal/watch';
 import styles from './rating.styles';
 
 /**

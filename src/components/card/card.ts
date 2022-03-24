@@ -1,7 +1,7 @@
 import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { HasSlotController } from '~/internal/slot';
+import { HasSlotController } from '../../internal/slot';
 import styles from './card.styles';
 
 /**

@@ -1,5 +1,5 @@
-import type SlButton from '~/components/button/button';
 import './formdata-event-polyfill';
+import type SlButton from '../components/button/button';
 import type { ReactiveController, ReactiveControllerHost } from 'lit';
 
 export interface FormSubmitControllerOptions {
