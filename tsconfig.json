@@ -26,15 +26,6 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "useUnknownInCatchVariables": true,
-    "plugins": [
-      {
-        "transform": "typescript-transform-paths"
-      },
-      {
-        "transform": "typescript-transform-paths",
-        "afterDeclarations": true
-      }
-    ],
     "baseUrl": "."
   },
   "include": [
