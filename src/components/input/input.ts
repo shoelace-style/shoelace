@@ -132,6 +132,12 @@ export default class SlInput extends LitElement {
   /** The input's autofocus attribute. */
   @property({ type: Boolean }) autofocus: boolean;
 
+  /**
+   * The input's enterkeyhint attribute. This can be used to customize the label or icon of the Enter key on virtual
+   * keyboards.
+   */
+  @property() enterkeyhint: 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send';
+
   /** Enables spell checking on the input. */
   @property({ type: Boolean }) spellcheck: boolean;
 
@@ -350,6 +356,7 @@ export default class SlInput extends LitElement {
               ?autofocus=${this.autofocus}
               spellcheck=${ifDefined(this.spellcheck)}
               pattern=${ifDefined(this.pattern)}
+              enterkeyhint=${ifDefined(this.enterkeyhint)}
               inputmode=${ifDefined(this.inputmode)}
               aria-describedby="help-text"
               aria-invalid=${this.invalid ? 'true' : 'false'}

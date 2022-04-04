@@ -101,6 +101,12 @@ export default class SlTextarea extends LitElement {
   /** The textarea's autofocus attribute. */
   @property({ type: Boolean }) autofocus: boolean;
 
+  /**
+   * The input's enterkeyhint attribute. This can be used to customize the label or icon of the Enter key on virtual
+   * keyboards.
+   */
+  @property() enterkeyhint: 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send';
+
   /** Enables spell checking on the textarea. */
   @property({ type: Boolean }) spellcheck: boolean;
 
@@ -309,6 +315,7 @@ export default class SlTextarea extends LitElement {
               autocorrect=${ifDefined(this.autocorrect)}
               ?autofocus=${this.autofocus}
               spellcheck=${ifDefined(this.spellcheck)}
+              enterkeyhint=${ifDefined(this.enterkeyhint)}
               inputmode=${ifDefined(this.inputmode)}
               aria-describedby="help-text"
               @change=${this.handleChange}
