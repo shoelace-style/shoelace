@@ -1,4 +1,5 @@
 import { expect, fixture, html, waitUntil } from '@open-wc/testing';
+import { sendKeys, sendMouse } from '@web/test-runner-commands';
 import sinon from 'sinon';
 import type SlDropdown from './dropdown';
 
@@ -150,14 +151,10 @@ describe('<sl-dropdown>', () => {
         <sl-menu> </sl-menu>
       </sl-dropdown>
     `);
-    const trigger = el.shadowRoot!.querySelector<HTMLElement>('[part="trigger"]')!;
+    const trigger = el.querySelector('sl-button')!;
 
-    trigger.dispatchEvent(
-      new KeyboardEvent('keydown', {
-        key: 'ArrowDown'
-      })
-    );
-
+    trigger.focus();
+    await sendKeys({ press: 'ArrowDown' });
     await el.updateComplete;
 
     expect(el.open).to.be.true;
@@ -173,14 +170,10 @@ describe('<sl-dropdown>', () => {
         </sl-menu>
       </sl-dropdown>
     `);
-    const trigger = el.shadowRoot!.querySelector<HTMLElement>('[part="trigger"]')!;
+    const trigger = el.querySelector('sl-button')!;
 
-    trigger.dispatchEvent(
-      new KeyboardEvent('keydown', {
-        key: 'ArrowDown'
-      })
-    );
-
+    trigger.focus();
+    await sendKeys({ press: 'ArrowDown' });
     await el.updateComplete;
 
     expect(el.open).to.be.true;
@@ -196,14 +189,10 @@ describe('<sl-dropdown>', () => {
         </sl-menu>
       </sl-dropdown>
     `);
-    const trigger = el.shadowRoot!.querySelector<HTMLElement>('[part="trigger"]')!;
+    const trigger = el.querySelector('sl-button')!;
 
-    trigger.dispatchEvent(
-      new KeyboardEvent('keydown', {
-        key: 'Escape'
-      })
-    );
-
+    trigger.focus();
+    await sendKeys({ press: 'Escape' });
     await el.updateComplete;
 
     expect(el.open).to.be.false;
@@ -216,14 +205,10 @@ describe('<sl-dropdown>', () => {
         <div>Some custom content</div>
       </sl-dropdown>
     `);
-    const trigger = el.shadowRoot!.querySelector<HTMLElement>('[part="trigger"]')!;
+    const trigger = el.querySelector('sl-button')!;
 
-    trigger.dispatchEvent(
-      new KeyboardEvent('keydown', {
-        key: 'ArrowDown'
-      })
-    );
-
+    trigger.focus();
+    await sendKeys({ press: 'ArrowDown' });
     await el.updateComplete;
 
     expect(el.open).to.be.false;
@@ -238,14 +223,11 @@ describe('<sl-dropdown>', () => {
         </sl-menu>
       </sl-dropdown>
     `);
-    const trigger = el.shadowRoot!.querySelector<HTMLElement>('[part="trigger"]')!;
+    const trigger = el.querySelector('sl-button')!;
 
-    trigger.dispatchEvent(
-      new KeyboardEvent('keydown', {
-        key: 'Enter'
-      })
-    );
-
+    trigger.focus();
+    await el.updateComplete;
+    await sendKeys({ press: 'Enter' });
     await el.updateComplete;
 
     expect(el.open).to.be.true;
@@ -258,14 +240,11 @@ describe('<sl-dropdown>', () => {
         <div>Some custom content</div>
       </sl-dropdown>
     `);
-    const trigger = el.shadowRoot!.querySelector<HTMLElement>('[part="trigger"]')!;
+    const trigger = el.querySelector('sl-button')!;
 
-    trigger.dispatchEvent(
-      new KeyboardEvent('keydown', {
-        key: 'Enter'
-      })
-    );
-
+    trigger.focus();
+    await el.updateComplete;
+    await sendKeys({ press: 'Enter' });
     await el.updateComplete;
 
     expect(el.open).to.be.true;
@@ -282,12 +261,7 @@ describe('<sl-dropdown>', () => {
       </sl-dropdown>
     `);
 
-    document.body.dispatchEvent(
-      new MouseEvent('mousedown', {
-        bubbles: true
-      })
-    );
-
+    await sendMouse({ type: 'click', position: [0, 0] });
     await el.updateComplete;
 
     expect(el.open).to.be.false;
@@ -302,18 +276,11 @@ describe('<sl-dropdown>', () => {
         </sl-menu>
       </sl-dropdown>
     `);
-    const trigger = el.shadowRoot!.querySelector<HTMLElement>('[part="trigger"]')!;
+    const trigger = el.querySelector('sl-button')!;
 
     trigger.click();
-
     await el.updateComplete;
-
-    document.body.dispatchEvent(
-      new MouseEvent('mousedown', {
-        bubbles: true
-      })
-    );
-
+    await sendMouse({ type: 'click', position: [0, 0] });
     await el.updateComplete;
 
     expect(el.open).to.be.false;

@@ -1,4 +1,5 @@
-import { expect, fixture, html, waitUntil, aTimeout } from '@open-wc/testing';
+import { expect, fixture, html, waitUntil } from '@open-wc/testing';
+import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
 import type SlSelect from './select';
 
@@ -71,9 +72,9 @@ describe('<sl-select>', () => {
     `);
     const control = el.shadowRoot!.querySelector<HTMLSelectElement>('.select__control')!;
     control.focus();
-    const rKeyEvent = new KeyboardEvent('keydown', { key: 'r' });
-    control.dispatchEvent(rKeyEvent);
-    await aTimeout(100);
+    await sendKeys({ press: 'r' });
+    await el.updateComplete;
+
     expect(control.getAttribute('aria-expanded')).to.equal('true');
   });
 
@@ -87,9 +88,10 @@ describe('<sl-select>', () => {
     `);
     const control = el.shadowRoot!.querySelector<HTMLSelectElement>('.select__control')!;
     control.focus();
-    const rKeyEvent = new KeyboardEvent('keydown', { key: 'r', ctrlKey: true });
-    control.dispatchEvent(rKeyEvent);
-    await aTimeout(100);
+    await sendKeys({ down: 'Control' });
+    await sendKeys({ press: 'r' });
+    await sendKeys({ up: 'Control' });
+    await el.updateComplete;
     expect(control.getAttribute('aria-expanded')).to.equal('false');
   });
 
