@@ -161,7 +161,7 @@ module.exports = {
     'no-useless-concat': 'error',
     'no-useless-return': 'warn',
     'prefer-promise-reject-errors': 'error',
-    radix: 'error',
+    radix: 'off',
     'require-await': 'error',
     'wrap-iife': ['warn', 'inside'],
     'no-shadow': 'error',
