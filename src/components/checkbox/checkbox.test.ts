@@ -11,6 +11,16 @@ describe('<sl-checkbox>', () => {
     expect(checkbox.disabled).to.be.true;
   });
 
+  it('should be disabled when disabled property is set', async () => {
+    const el = await fixture<SlCheckbox>(html`<sl-checkbox></sl-checkbox>`);
+    const checkbox = el.shadowRoot!.querySelector('input')!;
+
+    el.disabled = true;
+    await el.updateComplete;
+
+    expect(checkbox.disabled).to.be.true;
+  });
+
   it('should be valid by default', async () => {
     const el = await fixture<SlCheckbox>(html` <sl-checkbox></sl-checkbox> `);
 
@@ -86,6 +96,73 @@ describe('<sl-checkbox>', () => {
       await aTimeout(100);
 
       expect(submitHandler).to.not.have.been.called;
+    });
+  });
+
+  describe('click', () => {
+    it('should click the inner input', async () => {
+      const el = await fixture<SlCheckbox>(html`<sl-checkbox></sl-checkbox>`);
+      const checkbox = el.shadowRoot!.querySelector('input')!;
+      const clickSpy = sinon.spy();
+
+      checkbox.addEventListener('click', clickSpy, { once: true });
+
+      el.click();
+      await el.updateComplete;
+
+      expect(clickSpy.called).to.equal(true);
+      expect(el.checked).to.equal(true);
+    });
+  });
+
+  describe('focus', () => {
+    it('should focus the inner input', async () => {
+      const el = await fixture<SlCheckbox>(html`<sl-checkbox></sl-checkbox>`);
+      const checkbox = el.shadowRoot!.querySelector('input')!;
+      const focusSpy = sinon.spy();
+
+      checkbox.addEventListener('focus', focusSpy, { once: true });
+
+      el.focus();
+      await el.updateComplete;
+
+      expect(focusSpy.called).to.equal(true);
+      expect(el.shadowRoot!.activeElement).to.equal(checkbox);
+    });
+  });
+
+  describe('blur', () => {
+    it('should blur the inner input', async () => {
+      const el = await fixture<SlCheckbox>(html`<sl-checkbox></sl-checkbox>`);
+      const checkbox = el.shadowRoot!.querySelector('input')!;
+      const blurSpy = sinon.spy();
+
+      checkbox.addEventListener('blur', blurSpy, { once: true });
+
+      el.focus();
+      await el.updateComplete;
+
+      el.blur();
+      await el.updateComplete;
+
+      expect(blurSpy.called).to.equal(true);
+      expect(el.shadowRoot!.activeElement).to.equal(null);
+    });
+  });
+
+  describe('indeterminate', () => {
+    it('should render indeterminate icon until checked', async () => {
+      const el = await fixture<SlCheckbox>(html`<sl-checkbox indeterminate></sl-checkbox>`);
+      let indeterminateIcon = el.shadowRoot!.querySelector('[part="indeterminate-icon"]')!;
+
+      expect(indeterminateIcon).not.to.be.null;
+
+      el.click();
+      await el.updateComplete;
+
+      indeterminateIcon = el.shadowRoot!.querySelector('[part="indeterminate-icon"]')!;
+
+      expect(indeterminateIcon).to.be.null;
     });
   });
 });
