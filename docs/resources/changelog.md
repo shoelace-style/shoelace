@@ -18,6 +18,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug that resulted in a console error being thrown on keydown in `<sl-dropdown>` [#719](https://github.com/shoelace-style/shoelace/issues/719)
 - Fixed a bug that prevented `<sl-dropdown>` from being closed when opened initially [#720](https://github.com/shoelace-style/shoelace/issues/720)
 - Fixed a bug that caused the test runner to fail when using a locale other than en-US [#726](https://github.com/shoelace-style/shoelace/issues/726)
+- Improved the timing of `FormSubmitController` listeners so it's not as easy to attach custom listeners that run prematurely [#718](https://github.com/shoelace-style/shoelace/issues/718)
 - Updated `<sl-tab-group>` and `<sl-menu>` to cycle through tabs and menu items instead of stopping at the first/last when using the keyboard
 - Removed path aliasing (again) because it doesn't work with Web Test Runner's esbuild plugin
 
