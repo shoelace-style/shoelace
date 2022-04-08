@@ -68,7 +68,7 @@ To make a field required, use the `required` prop. The form will not be submitte
   <sl-button type="submit" variant="primary">Submit</sl-button>
 </form>
 
-<script>
+<script type="module">
   const form = document.querySelector('.input-validation-required');
   form.addEventListener('submit', event => {
     event.preventDefault();
@@ -121,7 +121,7 @@ To restrict a value to a specific [pattern](https://developer.mozilla.org/en-US/
   <sl-button type="submit" variant="primary">Submit</sl-button>
 </form>
 
-<script>
+<script type="module">
   const form = document.querySelector('.input-validation-pattern');
   form.addEventListener('submit', event => {
     event.preventDefault();
@@ -164,7 +164,7 @@ Some input types will automatically trigger constraints, such as `email` and `ur
   <sl-button type="submit" variant="primary">Submit</sl-button>
 </form>
 
-<script>
+<script type="module">
   const form = document.querySelector('.input-validation-type');
   form.addEventListener('submit', event => {
     event.preventDefault();
@@ -207,7 +207,7 @@ To create a custom validation error, pass a non-empty string to the `setCustomVa
   <sl-button type="submit" variant="primary">Submit</sl-button>
 </form>
 
-<script>
+<script type="module">
   const form = document.querySelector('.input-validation-custom');
   const input = form.querySelector('sl-input');
 
