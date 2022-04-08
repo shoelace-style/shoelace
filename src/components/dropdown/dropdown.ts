@@ -106,12 +106,14 @@ export default class SlDropdown extends LitElement {
     // If the dropdown is visible on init, update its position
     if (this.open) {
       await this.updateComplete;
+      this.addOpenListeners();
       this.startPositioner();
     }
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
+    this.removeOpenListeners();
     this.hide();
     this.stopPositioner();
   }
@@ -338,6 +340,20 @@ export default class SlDropdown extends LitElement {
     this.updatePositioner();
   }
 
+  addOpenListeners() {
+    this.panel.addEventListener('sl-activate', this.handleMenuItemActivate);
+    this.panel.addEventListener('sl-select', this.handlePanelSelect);
+    document.addEventListener('keydown', this.handleDocumentKeyDown);
+    document.addEventListener('mousedown', this.handleDocumentMouseDown);
+  }
+
+  removeOpenListeners() {
+    this.panel.removeEventListener('sl-activate', this.handleMenuItemActivate);
+    this.panel.removeEventListener('sl-select', this.handlePanelSelect);
+    document.removeEventListener('keydown', this.handleDocumentKeyDown);
+    document.removeEventListener('mousedown', this.handleDocumentMouseDown);
+  }
+
   @watch('open', { waitUntilFirstUpdate: true })
   async handleOpenChange() {
     if (this.disabled) {
@@ -350,10 +366,7 @@ export default class SlDropdown extends LitElement {
     if (this.open) {
       // Show
       emit(this, 'sl-show');
-      this.panel.addEventListener('sl-activate', this.handleMenuItemActivate);
-      this.panel.addEventListener('sl-select', this.handlePanelSelect);
-      document.addEventListener('keydown', this.handleDocumentKeyDown);
-      document.addEventListener('mousedown', this.handleDocumentMouseDown);
+      this.addOpenListeners();
 
       await stopAnimations(this);
       this.startPositioner();
@@ -365,10 +378,7 @@ export default class SlDropdown extends LitElement {
     } else {
       // Hide
       emit(this, 'sl-hide');
-      this.panel.removeEventListener('sl-activate', this.handleMenuItemActivate);
-      this.panel.removeEventListener('sl-select', this.handlePanelSelect);
-      document.removeEventListener('keydown', this.handleDocumentKeyDown);
-      document.removeEventListener('mousedown', this.handleDocumentMouseDown);
+      this.removeOpenListeners();
 
       await stopAnimations(this);
       const { keyframes, options } = getAnimation(this, 'dropdown.hide');

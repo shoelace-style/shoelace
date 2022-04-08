@@ -16,6 +16,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug that prevented a number of properties, methods, etc. from being documented in `<sl-radio>` and `<sl-radio-button>`
 - Fixed a bug in `<sl-avatar>` that prevented valid images from showing after an invalid or missing image was provided [#717](https://github.com/shoelace-style/shoelace/issues/717)
 - Fixed a bug that resulted in a console error being thrown on keydown in `<sl-dropdown>` [#719](https://github.com/shoelace-style/shoelace/issues/719)
+- Fixed a bug that prevented `<sl-dropdown>` from being closed when opened initially [#720](https://github.com/shoelace-style/shoelace/issues/720)
 - Updated `<sl-tab-group>` and `<sl-menu>` to cycle through tabs and menu items instead of stopping at the first/last when using the keyboard
 - Removed path aliasing (again) because it doesn't work with Web Test Runner's esbuild plugin
 
