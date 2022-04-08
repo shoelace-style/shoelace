@@ -43,18 +43,15 @@ export class FormSubmitController implements ReactiveController {
     this.form = this.options.form(this.host);
 
     if (this.form) {
-      // We use capturing to bump the order of events up. This doesn't guarantee our logic runs first, but it will run
-      // before normal event listeners which accounts for most use cases. People using capture will need to ensure the
-      // form controls are connected before attaching their listeners.
-      this.form.addEventListener('formdata', this.handleFormData, { capture: true });
-      this.form.addEventListener('submit', this.handleFormSubmit, { capture: true });
+      this.form.addEventListener('formdata', this.handleFormData);
+      this.form.addEventListener('submit', this.handleFormSubmit);
     }
   }
 
   hostDisconnected() {
     if (this.form) {
-      this.form.removeEventListener('formdata', this.handleFormData, { capture: true });
-      this.form.removeEventListener('submit', this.handleFormSubmit, { capture: true });
+      this.form.removeEventListener('formdata', this.handleFormData);
+      this.form.removeEventListener('submit', this.handleFormSubmit);
       this.form = undefined;
     }
   }
