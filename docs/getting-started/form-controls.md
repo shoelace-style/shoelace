@@ -8,7 +8,7 @@ Shoelace solves this problem by using the [`formdata`](https://developer.mozilla
 
 ## A Note About Event Handling
 
-Shoelace uses event listeners to intercept the form's `formdata` and `submit` events. This allows it to inject form data and activate client-side validation as necessary. If you're also using an event listener, this means _you must attach the listener after Shoelace form controls are connected to the DOM_. Otherwise, your logic will run before Shoelace has a chance to inject form data and validate form controls.
+Shoelace uses event listeners to intercept the form's `formdata` and `submit` events. This allows it to inject data and trigger validation as necessary. If you're also attaching an event listener to the form, _you must attach it after Shoelace form controls are connected to the DOM_, otherwise your logic will run before Shoelace has a chance to inject form data and validate form controls.
 
 ## Form Serialization
 
