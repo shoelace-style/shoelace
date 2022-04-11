@@ -250,8 +250,7 @@ describe('<sl-dropdown>', () => {
     expect(el.open).to.be.true;
   });
 
-  // TODO (43081j): This is skipped until #720 is fixed
-  it.skip('should hide when clicked outside container and initially open', async () => {
+  it('should hide when clicked outside container and initially open', async () => {
     const el = await fixture<SlDropdown>(html`
       <sl-dropdown open>
         <sl-button slot="trigger" caret>Toggle</sl-button>
