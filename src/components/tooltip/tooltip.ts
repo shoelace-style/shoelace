@@ -331,7 +331,7 @@ export default class SlTooltip extends LitElement {
           aria-hidden=${this.open ? 'false' : 'true'}
         >
           <div class="tooltip__arrow"></div>
-          <div class="tooltip__content">
+          <div class="tooltip__content" aria-live=${this.open ? 'polite' : 'off'}>
             <slot name="content"> ${this.content} </slot>
           </div>
         </div>
