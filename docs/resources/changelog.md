@@ -6,7 +6,7 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
-## Next
+## 2.0.0-beta.73
 
 - Added `button` part to `<sl-radio-button>`
 - Added custom validity examples and tests to `<sl-checkbox>`, `<sl-radio>`, and `<sl-radio-button>`
