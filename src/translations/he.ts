@@ -6,15 +6,18 @@ const translation: Translation = {
   $name: 'עברית',
   $dir: 'rtl',
 
+  clearEntry: 'נקה קלט',
   close: 'סגור',
   copy: 'העתק',
   currentValue: 'ערך נוכחי',
+  hidePassword: 'הסתר סיסמא',
   progress: 'התקדמות',
   remove: 'לְהַסִיר',
   resize: 'שנה גודל',
   scrollToEnd: 'גלול עד הסוף',
   scrollToStart: 'גלול להתחלה',
   selectAColorFromTheScreen: 'בחור צבע מהמסך',
+  showPassword: 'הראה סיסמה',
   toggleColorFormat: 'החלף פורמט צבע'
 };
 

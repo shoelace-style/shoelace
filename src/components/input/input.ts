@@ -8,6 +8,7 @@ import { emit } from '../../internal/event';
 import { FormSubmitController } from '../../internal/form';
 import { HasSlotController } from '../../internal/slot';
 import { watch } from '../../internal/watch';
+import { LocalizeController } from '../../utilities/localize';
 import styles from './input.styles';
 
 /**
@@ -49,6 +50,7 @@ export default class SlInput extends LitElement {
 
   private readonly formSubmitController = new FormSubmitController(this);
   private readonly hasSlotController = new HasSlotController(this, 'help-text', 'label');
+  private readonly localize = new LocalizeController(this);
 
   @state() private hasFocus = false;
   @state() private isPasswordVisible = false;
@@ -374,7 +376,7 @@ export default class SlInput extends LitElement {
                     part="clear-button"
                     class="input__clear"
                     type="button"
-                    aria-hidden="true"
+                    aria-label=${this.localize.term('clearEntry')}
                     @click=${this.handleClearClick}
                     tabindex="-1"
                   >
@@ -390,7 +392,7 @@ export default class SlInput extends LitElement {
                     part="password-toggle-button"
                     class="input__password-toggle"
                     type="button"
-                    aria-hidden="true"
+                    aria-label=${this.localize.term(this.isPasswordVisible ? 'hidePassword' : 'showPassword')}
                     @click=${this.handlePasswordToggle}
                     tabindex="-1"
                   >
