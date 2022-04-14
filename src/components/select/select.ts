@@ -138,7 +138,6 @@ export default class SlSelect extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.handleMenuSlotChange = this.handleMenuSlotChange.bind(this);
     this.resizeObserver = new ResizeObserver(() => this.resizeMenu());
 
     this.updateComplete.then(() => {
