@@ -6,6 +6,12 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
+## Next
+
+- Added `sl-label-change` event to `<sl-menu-item>`
+- Fixed a bug where updating a menu item's label wouldn't update the display label in `<sl-select>` [#729](https://github.com/shoelace-style/shoelace/issues/729)
+- Improved performance of `<sl-select>` by caching menu items instead of traversing for them each time
+
 ## 2.0.0-beta.73
 
 - Added `button` part to `<sl-radio-button>`

@@ -2,6 +2,8 @@ import { html, LitElement } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import '../../components/icon/icon';
+import { emit } from '../../internal/event';
+import { getTextContent } from '../../internal/slot';
 import { watch } from '../../internal/watch';
 import styles from './menu-item.styles';
 
@@ -10,6 +12,9 @@ import styles from './menu-item.styles';
  * @status stable
  *
  * @dependency sl-icon
+ *
+ * @event sl-label-change - Emitted when the menu item's text label changes. For performance reasons, this event is only
+ *   emitted if the default slot's `slotchange` event is triggered. It will not fire when the label is first set.
  *
  * @slot - The menu item's label.
  * @slot prefix - Used to prepend an icon or similar element to the menu item.
@@ -24,6 +29,9 @@ import styles from './menu-item.styles';
 export default class SlMenuItem extends LitElement {
   static styles = styles;
 
+  private cachedTextLabel: string;
+
+  @query('slot:not([name])') defaultSlot: HTMLSlotElement;
   @query('.menu-item') menuItem: HTMLElement;
 
   /** Draws the item in a checked state. */
@@ -39,6 +47,11 @@ export default class SlMenuItem extends LitElement {
     this.setAttribute('role', 'menuitem');
   }
 
+  /** Returns a text label based on the contents of the menu item's default slot. */
+  getTextLabel() {
+    return getTextContent(this.defaultSlot);
+  }
+
   @watch('checked')
   handleCheckedChange() {
     this.setAttribute('aria-checked', this.checked ? 'true' : 'false');
@@ -47,6 +60,21 @@ export default class SlMenuItem extends LitElement {
   @watch('disabled')
   handleDisabledChange() {
     this.setAttribute('aria-disabled', this.disabled ? 'true' : 'false');
+  }
+
+  handleDefaultSlotChange() {
+    const textLabel = this.getTextLabel();
+
+    // Ignore the first time the label is set
+    if (typeof this.cachedTextLabel === 'undefined') {
+      this.cachedTextLabel = textLabel;
+      return;
+    }
+
+    if (textLabel !== this.cachedTextLabel) {
+      this.cachedTextLabel = textLabel;
+      emit(this, 'sl-label-change');
+    }
   }
 
   render() {
@@ -69,7 +97,7 @@ export default class SlMenuItem extends LitElement {
         </span>
 
         <span part="label" class="menu-item__label">
-          <slot></slot>
+          <slot @slotchange=${this.handleDefaultSlotChange}></slot>
         </span>
 
         <span part="suffix" class="menu-item__suffix">

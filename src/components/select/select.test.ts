@@ -1,4 +1,4 @@
-import { expect, fixture, html, waitUntil } from '@open-wc/testing';
+import { expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
 import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
 import type SlSelect from './select';
@@ -109,5 +109,25 @@ describe('<sl-select>', () => {
     el.requestSubmit();
 
     expect(select.shadowRoot!.activeElement).to.equal(select.control);
+  });
+
+  it('should update the display label when a menu item changes', async () => {
+    const el = await fixture<SlSelect>(html`
+      <sl-select value="option-1">
+        <sl-menu-item value="option-1">Option 1</sl-menu-item>
+        <sl-menu-item value="option-2">Option 2</sl-menu-item>
+        <sl-menu-item value="option-3">Option 3</sl-menu-item>
+      </sl-select>
+    `);
+    const displayLabel = el.shadowRoot!.querySelector('[part="display-label"]')!;
+    const menuItem = el.querySelector('sl-menu-item')!;
+
+    expect(displayLabel.textContent?.trim()).to.equal('Option 1');
+    menuItem.textContent = 'updated';
+
+    await oneEvent(el, 'sl-label-change');
+    await el.updateComplete;
+
+    expect(displayLabel.textContent?.trim()).to.equal('updated');
   });
 });
