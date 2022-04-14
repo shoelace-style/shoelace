@@ -74,7 +74,6 @@ module.exports = {
         '@typescript-eslint/non-nullable-type-assertion-style': 'warn',
         '@typescript-eslint/prefer-for-of': 'warn',
         '@typescript-eslint/prefer-optional-chain': 'warn',
-        '@typescript-eslint/prefer-readonly': 'warn',
         '@typescript-eslint/prefer-ts-expect-error': 'warn',
         '@typescript-eslint/prefer-return-this-type': 'error',
         '@typescript-eslint/prefer-string-starts-ends-with': 'warn',
