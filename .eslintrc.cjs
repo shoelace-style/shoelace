@@ -128,6 +128,7 @@ module.exports = {
   rules: {
     'no-template-curly-in-string': 'error',
     'array-callback-return': 'error',
+    'comma-dangle': 'off',
     'consistent-return': 'error',
     curly: 'off',
     'default-param-last': 'error',
