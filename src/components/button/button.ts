@@ -186,14 +186,14 @@ export default class SlButton extends LitElement {
           'button--has-suffix': this.hasSlotController.test('suffix')
         })}
         ?disabled=${ifDefined(isLink ? undefined : this.disabled)}
-        type=${this.type}
+        type=${ifDefined(isLink ? undefined : this.type)}
         name=${ifDefined(isLink ? undefined : this.name)}
         value=${ifDefined(isLink ? undefined : this.value)}
-        href=${ifDefined(this.href)}
-        target=${ifDefined(this.target)}
-        download=${ifDefined(this.download)}
-        rel=${ifDefined(this.target ? 'noreferrer noopener' : undefined)}
-        role="button"
+        href=${ifDefined(isLink ? this.href : undefined)}
+        target=${ifDefined(isLink ? this.target : undefined)}
+        download=${ifDefined(isLink ? this.download : undefined)}
+        rel=${ifDefined(isLink && this.target ? 'noreferrer noopener' : undefined)}
+        role=${ifDefined(isLink ? undefined : 'button')}
         aria-disabled=${this.disabled ? 'true' : 'false'}
         tabindex=${this.disabled ? '-1' : '0'}
         @blur=${this.handleBlur}

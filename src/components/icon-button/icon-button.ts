@@ -1,8 +1,10 @@
-import { html, LitElement } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
+import { LitElement } from 'lit';
+import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
+import { html, literal } from 'lit/static-html.js';
 import '../../components/icon/icon';
+import { emit } from '../../internal/event';
 import styles from './icon-button.styles';
 
 /**
@@ -11,11 +13,16 @@ import styles from './icon-button.styles';
  *
  * @dependency sl-icon
  *
+ * @event sl-blur - Emitted when the icon button loses focus.
+ * @event sl-focus - Emitted when the icon button gains focus.
+ *
  * @csspart base - The component's internal wrapper.
  */
 @customElement('sl-icon-button')
 export default class SlIconButton extends LitElement {
   static styles = styles;
+
+  @state() private hasFocus = false;
 
   @query('.icon-button') button: HTMLButtonElement | HTMLLinkElement;
 
@@ -46,49 +53,73 @@ export default class SlIconButton extends LitElement {
   /** Disables the button. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
+  /** Simulates a click on the icon button. */
+  click() {
+    this.button.click();
+  }
+
+  /** Sets focus on the icon button. */
+  focus(options?: FocusOptions) {
+    this.button.focus(options);
+  }
+
+  /** Removes focus from the icon button. */
+  blur() {
+    this.button.blur();
+  }
+
+  handleBlur() {
+    this.hasFocus = false;
+    emit(this, 'sl-blur');
+  }
+
+  handleFocus() {
+    this.hasFocus = true;
+    emit(this, 'sl-focus');
+  }
+
+  handleClick(event: MouseEvent) {
+    if (this.disabled) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  }
+
   render() {
     const isLink = this.href ? true : false;
+    const tag = isLink ? literal`a` : literal`button`;
 
-    const interior = html`
-      <sl-icon
-        name=${ifDefined(this.name)}
-        library=${ifDefined(this.library)}
-        src=${ifDefined(this.src)}
-        aria-hidden="true"
-      ></sl-icon>
+    /* eslint-disable lit/binding-positions, lit/no-invalid-html */
+    return html`
+      <${tag}
+        part="base"
+        class=${classMap({
+          'icon-button': true,
+          'icon-button--disabled': !isLink && this.disabled,
+          'icon-button--focused': this.hasFocus
+        })}
+        ?disabled=${ifDefined(isLink ? undefined : this.disabled)}
+        type=${ifDefined(isLink ? undefined : 'button')}
+        href=${ifDefined(isLink ? this.href : undefined)}
+        target=${ifDefined(isLink ? this.target : undefined)}
+        download=${ifDefined(isLink ? this.download : undefined)}
+        rel=${ifDefined(isLink && this.target ? 'noreferrer noopener' : undefined)}
+        role=${ifDefined(isLink ? undefined : 'button')}
+        aria-disabled=${this.disabled ? 'true' : 'false'}
+        aria-label="${this.label}"
+        tabindex=${this.disabled ? '-1' : '0'}
+        @blur=${this.handleBlur}
+        @focus=${this.handleFocus}
+        @click=${this.handleClick}
+      >
+        <sl-icon
+          name=${ifDefined(this.name)}
+          library=${ifDefined(this.library)}
+          src=${ifDefined(this.src)}
+          aria-hidden="true"
+        ></sl-icon>
+      </${tag}>
     `;
-
-    return isLink
-      ? html`
-          <a
-            part="base"
-            class="icon-button"
-            href=${ifDefined(this.href)}
-            target=${ifDefined(this.target)}
-            download=${ifDefined(this.download)}
-            rel=${ifDefined(this.target ? 'noreferrer noopener' : undefined)}
-            role="button"
-            aria-disabled=${this.disabled ? 'true' : 'false'}
-            aria-label="${this.label}"
-            tabindex=${this.disabled ? '-1' : '0'}
-          >
-            ${interior}
-          </a>
-        `
-      : html`
-          <button
-            part="base"
-            class=${classMap({
-              'icon-button': true,
-              'icon-button--disabled': this.disabled
-            })}
-            ?disabled=${this.disabled}
-            type="button"
-            aria-label=${this.label}
-          >
-            ${interior}
-          </button>
-        `;
   }
 }
 
