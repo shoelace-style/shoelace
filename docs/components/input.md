@@ -145,11 +145,11 @@ const App = () => (
 The `type` attribute controls the type of input the browser renders.
 
 ```html preview
-<sl-input type="email" Placeholder="Email"></sl-input>
+<sl-input type="email" placeholder="Email"></sl-input>
 <br />
-<sl-input type="number" Placeholder="Number"></sl-input>
+<sl-input type="number" placeholder="Number"></sl-input>
 <br />
-<sl-input type="date" Placeholder="Date"></sl-input>
+<sl-input type="date" placeholder="Date"></sl-input>
 ```
 
 ```jsx react
@@ -157,11 +157,11 @@ import { SlInput } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <>
-    <SlInput type="email" Placeholder="Email" />
+    <SlInput type="email" placeholder="Email" />
     <br />
-    <SlInput type="number" Placeholder="Number" />
+    <SlInput type="number" placeholder="Number" />
     <br />
-    <SlInput type="date" Placeholder="Date" />
+    <SlInput type="date" placeholder="Date" />
   </>
 );
 ```
