@@ -20,6 +20,7 @@ export interface FormSubmitControllerOptions {
 
 export class FormSubmitController implements ReactiveController {
   host?: ReactiveControllerHost & Element;
+  form?: HTMLFormElement | null;
   options: FormSubmitControllerOptions;
 
   constructor(host: ReactiveControllerHost & Element, options?: Partial<FormSubmitControllerOptions>) {
@@ -39,15 +40,20 @@ export class FormSubmitController implements ReactiveController {
   }
 
   hostConnected() {
-    // We use the capture phase and listen on the document to intercept the event as soon as possible. Otherwise, the
-    // user may attach listeners that run before we have a chance to do validation.
-    document.addEventListener('formdata', this.handleFormData, { capture: true });
-    document.addEventListener('submit', this.handleFormSubmit, { capture: true });
+    this.form = this.options.form(this.host);
+
+    if (this.form) {
+      this.form.addEventListener('formdata', this.handleFormData);
+      this.form.addEventListener('submit', this.handleFormSubmit);
+    }
   }
 
   hostDisconnected() {
-    document.removeEventListener('formdata', this.handleFormData, { capture: true });
-    document.removeEventListener('submit', this.handleFormSubmit, { capture: true });
+    if (this.form) {
+      this.form.removeEventListener('formdata', this.handleFormData);
+      this.form.removeEventListener('submit', this.handleFormSubmit);
+      this.form = undefined;
+    }
   }
 
   handleFormData(event: FormDataEvent) {
@@ -67,11 +73,10 @@ export class FormSubmitController implements ReactiveController {
   }
 
   handleFormSubmit(event: Event) {
-    const form = this.options.form(this.host);
     const disabled = this.options.disabled(this.host);
     const reportValidity = this.options.reportValidity;
 
-    if (event.target === form && !disabled && !form?.noValidate && !reportValidity(this.host)) {
+    if (this.form && !this.form.noValidate && !disabled && !reportValidity(this.host)) {
       event.preventDefault();
       event.stopImmediatePropagation();
     }
@@ -79,11 +84,9 @@ export class FormSubmitController implements ReactiveController {
 
   /** Submits the form, triggering validation and form data injection. */
   submit(submitter?: HTMLInputElement | SlButton) {
-    const form = this.options.form(this.host);
-
-    if (form) {
-      // Calling form.submit() bypasses the submit event and constraint validation. To prevent this, we can inject a
-      // native submit button into the form, "click" it, then remove it to simulate a standard form submission.
+    // Calling form.submit() bypasses the submit event and constraint validation. To prevent this, we can inject a
+    // native submit button into the form, "click" it, then remove it to simulate a standard form submission.
+    if (this.form) {
       const button = document.createElement('button');
       button.type = 'submit';
       button.style.position = 'absolute';
@@ -102,7 +105,7 @@ export class FormSubmitController implements ReactiveController {
         });
       }
 
-      form.append(button);
+      this.form.append(button);
       button.click();
       button.remove();
     }
