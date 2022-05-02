@@ -65,7 +65,7 @@ export default class SlDropdown extends LitElement {
     | 'left-end' = 'bottom-start';
 
   /** Disables the dropdown so the panel will not open. */
-  @property({ type: Boolean }) disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /**
    * By default, the dropdown is closed when an item is selected. This attribute will keep it open instead. Useful for
