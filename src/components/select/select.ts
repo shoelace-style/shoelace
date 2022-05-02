@@ -371,7 +371,7 @@ export default class SlSelect extends LitElement {
     const value = this.getValueAsArray();
 
     // Sync checked states
-    this.menuItems.map(item => (item.checked = value.includes(item.value)));
+    this.menuItems.forEach(item => (item.checked = value.includes(item.value)));
 
     // Sync display label and tags
     if (this.multiple) {
