@@ -26,7 +26,7 @@ export default class SlIcon extends LitElement {
   @state() private svg = '';
 
   /** The name of the icon to draw. */
-  @property() name?: string;
+  @property({ reflect: true }) name?: string;
 
   /**
    * An external URL of an SVG file.
@@ -39,7 +39,7 @@ export default class SlIcon extends LitElement {
   @property() label = '';
 
   /** The name of a registered custom icon library. */
-  @property() library = 'default';
+  @property({ reflect: true }) library = 'default';
 
   connectedCallback() {
     super.connectedCallback();
