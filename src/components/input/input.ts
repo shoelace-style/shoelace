@@ -378,7 +378,7 @@ export default class SlInput extends LitElement {
               @blur=${this.handleBlur}
             />
 
-            ${this.clearable && this.value.length > 0
+            ${this.clearable && !this.disabled && this.value.length > 0
               ? html`
                   <button
                     part="clear-button"
@@ -402,6 +402,7 @@ export default class SlInput extends LitElement {
                     type="button"
                     aria-label=${this.localize.term(this.isPasswordVisible ? 'hidePassword' : 'showPassword')}
                     @click=${this.handlePasswordToggle}
+                    ?disabled=${this.disabled}
                     tabindex="-1"
                   >
                     ${this.isPasswordVisible

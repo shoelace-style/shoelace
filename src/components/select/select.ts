@@ -530,7 +530,7 @@ export default class SlSelect extends LitElement {
                   : this.placeholder}
               </div>
 
-              ${this.clearable && hasSelection
+              ${this.clearable && !this.disabled && hasSelection
                 ? html`
                     <button
                       part="clear-button"

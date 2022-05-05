@@ -262,7 +262,7 @@ export default css`
   }
 
   .input__clear:hover,
-  .input__password-toggle:hover {
+  .input__password-toggle:not([disabled]):hover {
     color: var(--sl-input-icon-color-hover);
   }
 
