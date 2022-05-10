@@ -26,13 +26,21 @@ class FormDataEventPolyfill extends Event {
 class FormDataPolyfill extends FormData {
   private form: HTMLFormElement;
 
-  constructor(form: HTMLFormElement) {
-    super(form);
-    this.form = form;
-    form.dispatchEvent(new FormDataEventPolyfill(this));
+  constructor(form?: HTMLFormElement | null) {
+    if (form) {
+      super(form);
+      this.form = form
+      form.dispatchEvent(new FormDataEventPolyfill(this));
+    } else {
+      super();
+    }
   }
 
   append(name: string, value: any) {
+    if (!this.form) {
+      return super.append(name, value)
+    }
+
     let input = this.form.elements[name as any] as HTMLInputElement;
 
     if (!input) {
