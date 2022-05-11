@@ -1,4 +1,5 @@
 /* eslint-disable */
+// @ts-nocheck
 //
 // Polyfills the formdata event in unsupportive browsers. This is a partial polyfill to support appending custom element
 // form data on submit. The formdata event landed in Safari until 15.1, which is slighly too new to rely on. All other
