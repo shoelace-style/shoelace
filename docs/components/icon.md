@@ -6,7 +6,11 @@ Icons are symbols that can be used to represent various options within an applic
 
 Shoelace comes bundled with over 1,500 icons courtesy of the [Bootstrap Icons](https://icons.getbootstrap.com/) project. These icons are part of the `default` icon library. If you prefer, you can register [custom icon libraries](#icon-libraries) as well.
 
-Click or tap on an icon below to copy its name and use it like this.
+?> If you're not using the CDN, you'll probably need to copy assets and [set the base path](getting-started/installation#setting-the-base-path) so Shoelace knows where to load them from. Otherwise, icons may not appear and you'll see 404 Not Found errors in the dev console.
+
+## Default Icons
+
+All available icons in the `default` icon library are shown below. Click or tap on any icon to copy its name, then you can use it in your HTML like this.
 
 ```html
 <sl-icon name="icon-name-here"></sl-icon>
