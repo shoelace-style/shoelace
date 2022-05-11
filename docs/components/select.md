@@ -318,6 +318,40 @@ const App = () => (
 
 ?> When using the `multiple` option, the value will be an array instead of a string. You may need to [set the selection imperatively](#setting-the-selection-imperatively) unless you're using a framework that supports binding properties declaratively.
 
+### Multiple with locked options
+
+To lock certain items from being deselected, use the `locked` and `disabled` attributes on the `sl-menu-item`.
+
+```html preview
+<sl-select placeholder="Select a few" value="option-1" multiple clearable>
+  <sl-menu-item value="option-1" disabled locked>Option 1</sl-menu-item>
+  <sl-menu-item value="option-2">Option 2</sl-menu-item>
+  <sl-menu-item value="option-3">Option 3</sl-menu-item>
+  <sl-divider></sl-divider>
+  <sl-menu-item value="option-4">Option 4</sl-menu-item>
+  <sl-menu-item value="option-5">Option 5</sl-menu-item>
+  <sl-menu-item value="option-6">Option 6</sl-menu-item>
+</sl-select>
+```
+
+```jsx react
+import { SlDivider, SlMenuItem, SlSelect } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlSelect placeholder="Select a few" multiple clearable>
+    <SlMenuItem value="option-1" disabled locked>
+      Option 1
+    </SlMenuItem>
+    <SlMenuItem value="option-2">Option 2</SlMenuItem>
+    <SlMenuItem value="option-3">Option 3</SlMenuItem>
+    <SlDivider />
+    <SlMenuItem value="option-4">Option 4</SlMenuItem>
+    <SlMenuItem value="option-5">Option 5</SlMenuItem>
+    <SlMenuItem value="option-6">Option 6</SlMenuItem>
+  </SlSelect>
+);
+```
+
 ### Grouping Options
 
 Options can be grouped visually using menu labels and dividers.

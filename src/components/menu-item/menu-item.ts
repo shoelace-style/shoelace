@@ -43,6 +43,9 @@ export default class SlMenuItem extends LitElement {
   /** Draws the menu item in a disabled state. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
+  /** The item is not removable from a sl-select. */
+  @property({ type: Boolean, reflect: true }) locked = false;
+
   firstUpdated() {
     this.setAttribute('role', 'menuitem');
   }

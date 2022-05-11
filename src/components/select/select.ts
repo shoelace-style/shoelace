@@ -196,7 +196,18 @@ export default class SlSelect extends LitElement {
 
   handleClearClick(event: MouseEvent) {
     event.stopPropagation();
-    this.value = this.multiple ? [] : '';
+    if (this.multiple) {
+      const newValue: string[] = [];
+      (this.value as string[]).forEach((element: string) => {
+        if (this.menuItems.find(item => item.value === element)?.locked ?? false) {
+          newValue.push(element);
+        }
+        this.value = newValue;
+      });
+    } else {
+      this.value = '';
+    }
+
     emit(this, 'sl-clear');
     this.syncItemsFromValue();
   }
@@ -390,7 +401,7 @@ export default class SlSelect extends LitElement {
             variant="neutral"
             size=${this.size}
             ?pill=${this.pill}
-            removable
+            ?removable=${!item.locked}
             @click=${this.handleTagInteraction}
             @keydown=${this.handleTagInteraction}
             @sl-remove=${(event: CustomEvent) => {
