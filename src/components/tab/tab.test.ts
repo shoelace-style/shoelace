@@ -83,7 +83,7 @@ describe('<sl-tab>', () => {
     it('should emit close event when close button clicked', async () => {
       const el = await fixture<SlTab>(html` <sl-tab closable>Test</sl-tab> `);
 
-      const closeButton = el.shadowRoot!.querySelector('[part="close-button"]')!;
+      const closeButton = el.shadowRoot!.querySelector<HTMLButtonElement>('[part="close-button"]')!;
       const spy = sinon.spy();
 
       el.addEventListener('sl-close', spy, { once: true });
