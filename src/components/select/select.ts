@@ -450,6 +450,7 @@ export default class SlSelect extends LitElement {
     const hasSelection = this.multiple ? this.value.length > 0 : this.value !== '';
     const hasLabel = this.label ? true : !!hasLabelSlot;
     const hasHelpText = this.helpText ? true : !!hasHelpTextSlot;
+    const hasClearIcon = this.clearable && !this.disabled && hasSelection;
 
     return html`
       <div
@@ -530,7 +531,7 @@ export default class SlSelect extends LitElement {
                   : this.placeholder}
               </div>
 
-              ${this.clearable && hasSelection
+              ${hasClearIcon
                 ? html`
                     <button
                       part="clear-button"

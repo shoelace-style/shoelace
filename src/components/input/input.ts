@@ -297,6 +297,7 @@ export default class SlInput extends LitElement {
     const hasHelpTextSlot = this.hasSlotController.test('help-text');
     const hasLabel = this.label ? true : !!hasLabelSlot;
     const hasHelpText = this.helpText ? true : !!hasHelpTextSlot;
+    const hasClearIcon = this.clearable && !this.disabled && !this.readonly && this.value.length > 0;
 
     return html`
       <div
@@ -378,7 +379,7 @@ export default class SlInput extends LitElement {
               @blur=${this.handleBlur}
             />
 
-            ${this.clearable && this.value.length > 0
+            ${hasClearIcon
               ? html`
                   <button
                     part="clear-button"
@@ -394,7 +395,7 @@ export default class SlInput extends LitElement {
                   </button>
                 `
               : ''}
-            ${this.togglePassword
+            ${this.togglePassword && !this.disabled
               ? html`
                   <button
                     part="password-toggle-button"
