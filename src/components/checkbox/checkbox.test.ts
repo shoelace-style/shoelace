@@ -55,7 +55,7 @@ describe('<sl-checkbox>', () => {
   });
 
   describe('when submitting a form', () => {
-    it('should submit the correct value', async () => {
+    it('should submit the correct value when a value is provided', async () => {
       const form = await fixture<HTMLFormElement>(html`
         <form>
           <sl-checkbox name="a" value="1" checked></sl-checkbox>
@@ -75,6 +75,28 @@ describe('<sl-checkbox>', () => {
       await waitUntil(() => submitHandler.calledOnce);
 
       expect(formData!.get('a')).to.equal('1');
+    });
+
+    it('should submit "on" when no value is provided', async () => {
+      const form = await fixture<HTMLFormElement>(html`
+        <form>
+          <sl-checkbox name="a" checked></sl-checkbox>
+          <sl-button type="submit">Submit</sl-button>
+        </form>
+      `);
+      const button = form.querySelector('sl-button')!;
+      const submitHandler = sinon.spy((event: SubmitEvent) => {
+        formData = new FormData(form);
+        event.preventDefault();
+      });
+      let formData: FormData;
+
+      form.addEventListener('submit', submitHandler);
+      button.click();
+
+      await waitUntil(() => submitHandler.calledOnce);
+
+      expect(formData!.get('a')).to.equal('on');
     });
 
     it('should show a constraint validation error when setCustomValidity() is called', async () => {

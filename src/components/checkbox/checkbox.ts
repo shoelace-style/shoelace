@@ -32,7 +32,7 @@ export default class SlCheckbox extends LitElement {
 
   // @ts-expect-error -- Controller is currently unused
   private readonly formSubmitController = new FormSubmitController(this, {
-    value: (control: SlCheckbox) => (control.checked ? control.value : 'on')
+    value: (control: SlCheckbox) => (control.checked ? control.value || 'on' : undefined)
   });
 
   @state() private hasFocus = false;

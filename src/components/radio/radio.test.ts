@@ -69,7 +69,7 @@ describe('<sl-radio>', () => {
   });
 
   describe('when submitting a form', () => {
-    it('should submit the correct value', async () => {
+    it('should submit the correct value when a value is provided', async () => {
       const form = await fixture<HTMLFormElement>(html`
         <form>
           <sl-radio-group>
@@ -96,6 +96,34 @@ describe('<sl-radio>', () => {
 
       expect(formData!.get('a')).to.equal('2');
     });
+  });
+
+  it('should submit "on" when no value is provided', async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sl-radio-group>
+          <sl-radio id="radio-1" name="a" checked></sl-radio>
+          <sl-radio id="radio-2" name="a"></sl-radio>
+          <sl-radio id="radio-3" name="a"></sl-radio>
+        </sl-radio-group>
+        <sl-button type="submit">Submit</sl-button>
+      </form>
+    `);
+    const button = form.querySelector('sl-button')!;
+    const radio = form.querySelectorAll('sl-radio')[1]!;
+    const submitHandler = sinon.spy((event: SubmitEvent) => {
+      formData = new FormData(form);
+      event.preventDefault();
+    });
+    let formData: FormData;
+
+    form.addEventListener('submit', submitHandler);
+    radio.click();
+    button.click();
+
+    await waitUntil(() => submitHandler.calledOnce);
+
+    expect(formData!.get('a')).to.equal('on');
   });
 
   it('should show a constraint validation error when setCustomValidity() is called', async () => {
