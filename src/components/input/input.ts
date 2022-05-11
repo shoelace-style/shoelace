@@ -58,6 +58,7 @@ export default class SlInput extends LitElement {
   /** The input's type. */
   @property({ reflect: true }) type:
     | 'date'
+    | 'datetime-local'
     | 'email'
     | 'number'
     | 'password'
