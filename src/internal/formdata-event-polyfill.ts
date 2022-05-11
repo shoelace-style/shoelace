@@ -29,7 +29,7 @@ class FormDataPolyfill extends FormData {
   constructor(form?: HTMLFormElement | null) {
     if (form) {
       super(form);
-      this.form = form
+      this.form = form;
       form.dispatchEvent(new FormDataEventPolyfill(this));
     } else {
       super();
@@ -38,7 +38,7 @@ class FormDataPolyfill extends FormData {
 
   append(name: string, value: any) {
     if (!this.form) {
-      return super.append(name, value)
+      return super.append(name, value);
     }
 
     let input = this.form.elements[name as any] as HTMLInputElement;
