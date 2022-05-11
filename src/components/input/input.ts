@@ -337,7 +337,7 @@ export default class SlInput extends LitElement {
               'input--filled': this.filled,
               'input--disabled': this.disabled,
               'input--focused': this.hasFocus,
-              'input--empty': this.value.length === 0,
+              'input--empty': !this.value,
               'input--invalid': this.invalid
             })}
           >
