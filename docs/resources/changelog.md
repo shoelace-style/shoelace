@@ -13,6 +13,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug where updating a menu item's label wouldn't update the display label in `<sl-select>` [#729](https://github.com/shoelace-style/shoelace/issues/729)
 - Fixed a bug where the FormData event polyfill was causing issues with older browsers [#747](https://github.com/shoelace-style/shoelace/issues/747)
 - Fixed a bug that caused a console error when setting `value` to `null` or `undefined` in `<sl-input>`, `<sl-select>`, and `<sl-textarea>` [#751](https://github.com/shoelace-style/shoelace/pull/751)
+- Fixed a bug that caused `<sl-checkbox>` and `<sl-radio>` controls without a `value` to submit as `null` instead of `on` like native inputs [#744](https://github.com/shoelace-style/shoelace/issues/744)
 - Improved behavior of clearable and password toggle buttons in `<sl-input>` and `<sl-select>` [#745](https://github.com/shoelace-style/shoelace/issues/745)
 - Improved performance of `<sl-select>` by caching menu items instead of traversing for them each time
 - Revert form submit logic [#718](https://github.com/shoelace-style/shoelace/issues/718)

@@ -30,7 +30,7 @@ export default class SlRadio extends LitElement {
   @query('.radio__input') input: HTMLInputElement;
 
   protected readonly formSubmitController = new FormSubmitController(this, {
-    value: (control: HTMLInputElement) => (control.checked ? control.value : undefined)
+    value: (control: HTMLInputElement) => (control.checked ? control.value : 'on')
   });
 
   @state() protected hasFocus = false;
