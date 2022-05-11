@@ -485,7 +485,7 @@ export default class SlSelect extends LitElement {
             class=${classMap({
               select: true,
               'select--open': this.isOpen,
-              'select--empty': this.value.length === 0,
+              'select--empty': !this.value,
               'select--focused': this.hasFocus,
               'select--clearable': this.clearable,
               'select--disabled': this.disabled,

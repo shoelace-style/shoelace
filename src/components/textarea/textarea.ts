@@ -291,7 +291,7 @@ export default class SlTextarea extends LitElement {
               'textarea--filled': this.filled,
               'textarea--disabled': this.disabled,
               'textarea--focused': this.hasFocus,
-              'textarea--empty': this.value.length === 0,
+              'textarea--empty': !this.value,
               'textarea--invalid': this.invalid,
               'textarea--resize-none': this.resize === 'none',
               'textarea--resize-vertical': this.resize === 'vertical',
