@@ -202,8 +202,8 @@ export default class SlSelect extends LitElement {
         if (this.menuItems.find(item => item.value === element)?.locked ?? false) {
           newValue.push(element);
         }
-        this.value = newValue;
       });
+      this.value = newValue;
     } else {
       this.value = '';
     }
