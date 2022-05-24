@@ -39,14 +39,20 @@ export default class SlImageComparer extends LitElement {
   /** The position of the divider as a percentage. */
   @property({ type: Number, reflect: true }) position = 50;
 
-  handleDrag(event: Event) {
+  handleDrag(event: PointerEvent) {
     const { width } = this.base.getBoundingClientRect();
 
     event.preventDefault();
 
-    drag(this.base, x => {
-      this.position = parseFloat(clamp((x / width) * 100, 0, 100).toFixed(2));
-    });
+    drag(
+      this.base,
+      x => {
+        this.position = parseFloat(clamp((x / width) * 100, 0, 100).toFixed(2));
+      },
+      {
+        initialEvent: event
+      }
+    );
   }
 
   handleKeyDown(event: KeyboardEvent) {

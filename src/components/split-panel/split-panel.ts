@@ -100,7 +100,7 @@ export default class SlSplitPanel extends LitElement {
     return (value / this.size) * 100;
   }
 
-  handleDrag(event: Event) {
+  handleDrag(event: PointerEvent) {
     if (this.disabled) {
       return;
     }
@@ -108,38 +108,44 @@ export default class SlSplitPanel extends LitElement {
     // Prevent text selection when dragging
     event.preventDefault();
 
-    drag(this, (x, y) => {
-      let newPositionInPixels = this.vertical ? y : x;
+    drag(
+      this,
+      (x, y) => {
+        let newPositionInPixels = this.vertical ? y : x;
 
-      // Flip for end panels
-      if (this.primary === 'end') {
-        newPositionInPixels = this.size - newPositionInPixels;
+        // Flip for end panels
+        if (this.primary === 'end') {
+          newPositionInPixels = this.size - newPositionInPixels;
+        }
+
+        // Check snap points
+        if (this.snap) {
+          const snaps = this.snap.split(' ');
+
+          snaps.forEach(value => {
+            let snapPoint: number;
+
+            if (value.endsWith('%')) {
+              snapPoint = this.size * (parseFloat(value) / 100);
+            } else {
+              snapPoint = parseFloat(value);
+            }
+
+            if (
+              newPositionInPixels >= snapPoint - this.snapThreshold &&
+              newPositionInPixels <= snapPoint + this.snapThreshold
+            ) {
+              newPositionInPixels = snapPoint;
+            }
+          });
+        }
+
+        this.position = clamp(this.pixelsToPercentage(newPositionInPixels), 0, 100);
+      },
+      {
+        initialEvent: event
       }
-
-      // Check snap points
-      if (this.snap) {
-        const snaps = this.snap.split(' ');
-
-        snaps.forEach(value => {
-          let snapPoint: number;
-
-          if (value.endsWith('%')) {
-            snapPoint = this.size * (parseFloat(value) / 100);
-          } else {
-            snapPoint = parseFloat(value);
-          }
-
-          if (
-            newPositionInPixels >= snapPoint - this.snapThreshold &&
-            newPositionInPixels <= snapPoint + this.snapThreshold
-          ) {
-            newPositionInPixels = snapPoint;
-          }
-        });
-      }
-
-      this.position = clamp(this.pixelsToPercentage(newPositionInPixels), 0, 100);
-    });
+    );
   }
 
   handleKeyDown(event: KeyboardEvent) {

@@ -254,7 +254,7 @@ export default class SlColorPicker extends LitElement {
     this.format = formats[nextIndex] as 'hex' | 'rgb' | 'hsl';
   }
 
-  handleAlphaDrag(event: Event) {
+  handleAlphaDrag(event: PointerEvent) {
     const container = this.shadowRoot!.querySelector<HTMLElement>('.color-picker__slider.color-picker__alpha')!;
     const handle = container.querySelector<HTMLElement>('.color-picker__slider-handle')!;
     const { width } = container.getBoundingClientRect();
@@ -262,13 +262,17 @@ export default class SlColorPicker extends LitElement {
     handle.focus();
     event.preventDefault();
 
-    drag(container, x => {
-      this.alpha = clamp((x / width) * 100, 0, 100);
-      this.syncValues();
-    });
+    drag(
+      container,
+      x => {
+        this.alpha = clamp((x / width) * 100, 0, 100);
+        this.syncValues();
+      },
+      { initialEvent: event }
+    );
   }
 
-  handleHueDrag(event: Event) {
+  handleHueDrag(event: PointerEvent) {
     const container = this.shadowRoot!.querySelector<HTMLElement>('.color-picker__slider.color-picker__hue')!;
     const handle = container.querySelector<HTMLElement>('.color-picker__slider-handle')!;
     const { width } = container.getBoundingClientRect();
@@ -276,13 +280,17 @@ export default class SlColorPicker extends LitElement {
     handle.focus();
     event.preventDefault();
 
-    drag(container, x => {
-      this.hue = clamp((x / width) * 360, 0, 360);
-      this.syncValues();
-    });
+    drag(
+      container,
+      x => {
+        this.hue = clamp((x / width) * 360, 0, 360);
+        this.syncValues();
+      },
+      { initialEvent: event }
+    );
   }
 
-  handleGridDrag(event: Event) {
+  handleGridDrag(event: PointerEvent) {
     const grid = this.shadowRoot!.querySelector<HTMLElement>('.color-picker__grid')!;
     const handle = grid.querySelector<HTMLElement>('.color-picker__grid-handle')!;
     const { width, height } = grid.getBoundingClientRect();
@@ -290,11 +298,17 @@ export default class SlColorPicker extends LitElement {
     handle.focus();
     event.preventDefault();
 
-    drag(grid, (x, y) => {
-      this.saturation = clamp((x / width) * 100, 0, 100);
-      this.lightness = clamp(100 - (y / height) * 100, 0, 100);
-      this.syncValues();
-    });
+    drag(
+      grid,
+      (x, y) => {
+        this.saturation = clamp((x / width) * 100, 0, 100);
+        this.lightness = clamp(100 - (y / height) * 100, 0, 100);
+        this.syncValues();
+      },
+      {
+        initialEvent: event
+      }
+    );
   }
 
   handleAlphaKeyDown(event: KeyboardEvent) {
