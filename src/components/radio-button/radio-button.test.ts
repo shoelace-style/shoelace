@@ -20,7 +20,7 @@ describe('<sl-radio-button>', () => {
   it('should fire sl-change when clicked', async () => {
     const el = await fixture<SlRadioButton>(html` <sl-radio-button></sl-radio-button> `);
     setTimeout(() => el.input.click());
-    const event = await oneEvent(el, 'sl-change');
+    const event = (await oneEvent(el, 'sl-change')) as CustomEvent;
     expect(event.target).to.equal(el);
     expect(el.checked).to.be.true;
   });
@@ -29,7 +29,7 @@ describe('<sl-radio-button>', () => {
     const el = await fixture<SlRadioButton>(html` <sl-radio-button></sl-radio-button> `);
     el.input.focus();
     setTimeout(() => sendKeys({ press: ' ' }));
-    const event = await oneEvent(el, 'sl-change');
+    const event = (await oneEvent(el, 'sl-change')) as CustomEvent;
     expect(event.target).to.equal(el);
     expect(el.checked).to.be.true;
   });
@@ -45,7 +45,7 @@ describe('<sl-radio-button>', () => {
     const radio2 = radioGroup.querySelector<SlRadioButton>('#radio-2')!;
     radio1.input.focus();
     setTimeout(() => sendKeys({ press: 'ArrowRight' }));
-    const event = await oneEvent(radio2, 'sl-change');
+    const event = (await oneEvent(radio2, 'sl-change')) as CustomEvent;
     expect(event.target).to.equal(radio2);
     expect(radio2.checked).to.be.true;
   });

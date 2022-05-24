@@ -19,7 +19,7 @@ describe('<sl-switch>', () => {
   it('should fire sl-change when clicked', async () => {
     const el = await fixture<SlSwitch>(html` <sl-switch></sl-switch> `);
     setTimeout(() => el.shadowRoot!.querySelector('input')!.click());
-    const event = await oneEvent(el, 'sl-change');
+    const event = (await oneEvent(el, 'sl-change')) as CustomEvent;
     expect(event.target).to.equal(el);
     expect(el.checked).to.be.true;
   });
@@ -28,7 +28,7 @@ describe('<sl-switch>', () => {
     const el = await fixture<SlSwitch>(html` <sl-switch></sl-switch> `);
     el.focus();
     setTimeout(() => sendKeys({ press: ' ' }));
-    const event = await oneEvent(el, 'sl-change');
+    const event = (await oneEvent(el, 'sl-change')) as CustomEvent;
     expect(event.target).to.equal(el);
     expect(el.checked).to.be.true;
   });
@@ -37,7 +37,7 @@ describe('<sl-switch>', () => {
     const el = await fixture<SlSwitch>(html` <sl-switch></sl-switch> `);
     el.focus();
     setTimeout(() => sendKeys({ press: 'ArrowRight' }));
-    const event = await oneEvent(el, 'sl-change');
+    const event = (await oneEvent(el, 'sl-change')) as CustomEvent;
     expect(event.target).to.equal(el);
     expect(el.checked).to.be.true;
   });
@@ -46,7 +46,7 @@ describe('<sl-switch>', () => {
     const el = await fixture<SlSwitch>(html` <sl-switch checked></sl-switch> `);
     el.focus();
     setTimeout(() => sendKeys({ press: 'ArrowLeft' }));
-    const event = await oneEvent(el, 'sl-change');
+    const event = (await oneEvent(el, 'sl-change')) as CustomEvent;
     expect(event.target).to.equal(el);
     expect(el.checked).to.be.false;
   });

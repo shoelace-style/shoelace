@@ -30,7 +30,7 @@ describe('<sl-checkbox>', () => {
   it('should fire sl-change when clicked', async () => {
     const el = await fixture<SlCheckbox>(html` <sl-checkbox></sl-checkbox> `);
     setTimeout(() => el.shadowRoot!.querySelector('input')!.click());
-    const event = await oneEvent(el, 'sl-change');
+    const event = (await oneEvent(el, 'sl-change')) as CustomEvent;
     expect(event.target).to.equal(el);
     expect(el.checked).to.be.true;
   });
@@ -40,7 +40,7 @@ describe('<sl-checkbox>', () => {
     const input = el.shadowRoot!.querySelector('input')!;
     input.focus();
     setTimeout(() => sendKeys({ press: ' ' }));
-    const event = await oneEvent(el, 'sl-change');
+    const event = (await oneEvent(el, 'sl-change')) as CustomEvent;
     expect(event.target).to.equal(el);
     expect(el.checked).to.be.true;
   });
