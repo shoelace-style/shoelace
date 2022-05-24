@@ -414,8 +414,7 @@ export default class SlDropdown extends LitElement {
               maxWidth: `${availableWidth}px`,
               maxHeight: `${availableHeight}px`
             });
-          },
-          padding: 8
+          }
         })
       ],
       strategy: this.hoist ? 'fixed' : 'absolute'
