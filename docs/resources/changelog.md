@@ -19,6 +19,9 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Revert form submit logic [#718](https://github.com/shoelace-style/shoelace/issues/718)
 - Updated the `disabled` attribute so it reflects in `<sl-dropdown>` [#741](https://github.com/shoelace-style/shoelace/discussions/741)
 - Updated the `name` and `icon` attribute so they reflect in `<sl-icon>` [#742](https://github.com/shoelace-style/shoelace/pull/742)
+- Updated Lit to 2.2.4
+- Updated Bootstrap Icons to 1.8.2
+- Updated all other dependencies to latest versions
 
 ## 2.0.0-beta.73
 

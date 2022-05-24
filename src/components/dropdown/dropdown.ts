@@ -408,11 +408,11 @@ export default class SlDropdown extends LitElement {
         flip(),
         shift(),
         size({
-          apply: ({ width, height }) => {
+          apply: ({ availableWidth, availableHeight }) => {
             // Ensure the panel stays within the viewport when we have lots of menu items
             Object.assign(this.panel.style, {
-              maxWidth: `${width}px`,
-              maxHeight: `${height}px`
+              maxWidth: `${availableWidth}px`,
+              maxHeight: `${availableHeight}px`
             });
           },
           padding: 8
