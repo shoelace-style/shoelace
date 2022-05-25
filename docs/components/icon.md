@@ -533,6 +533,38 @@ Icons in this library are licensed under the [Apache 2.0 License](https://github
 </div>
 ```
 
+## Tabler Icons
+
+This will register the [Tabler Icons](https://tabler-icons.io/) library using the jsDelivr CDN. This library features over 1,950 open source icons.
+
+Icons in this library are licensed under the [MIT License](https://github.com/tabler/tabler-icons/blob/master/LICENSE).
+
+```html preview
+<script type="module">
+  import { registerIconLibrary } from '/dist/utilities/icon-library.js';
+
+  registerIconLibrary('tabler', {
+    resolver: name => `https://cdn.jsdelivr.net/npm/@tabler/icons@1.68.0/icons/${name}.svg`
+  });
+</script>
+
+<div style="font-size: 24px;">
+  <sl-icon library="tabler" name="alert-triangle"></sl-icon>
+  <sl-icon library="tabler" name="arrow-back"></sl-icon>
+  <sl-icon library="tabler" name="at"></sl-icon>
+  <sl-icon library="tabler" name="ball-baseball"></sl-icon>
+  <sl-icon library="tabler" name="cake"></sl-icon>
+  <sl-icon library="tabler" name="files"></sl-icon>
+  <br />
+  <sl-icon library="tabler" name="keyboard"></sl-icon>
+  <sl-icon library="tabler" name="moon"></sl-icon>
+  <sl-icon library="tabler" name="pig"></sl-icon>
+  <sl-icon library="tabler" name="printer"></sl-icon>
+  <sl-icon library="tabler" name="ship"></sl-icon>
+  <sl-icon library="tabler" name="toilet-paper"></sl-icon>
+</div>
+```
+
 ### Unicons
 
 This will register the [Unicons](https://iconscout.com/unicons) library using the jsDelivr CDN. This library has two variations: line (default) and solid (`*-s`). A mutator function is required to set the SVG's `fill` to `currentColor`.
