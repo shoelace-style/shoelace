@@ -161,10 +161,8 @@ export default class SlInput extends LitElement {
   }
 
   set valueAsDate(newValue: Date | null) {
-    this.updateComplete.then(() => {
-      this.input.valueAsDate = newValue;
-      this.value = this.input.value;
-    });
+    this.input.valueAsDate = newValue;
+    this.value = this.input.value;
   }
 
   /** Gets or sets the current value as a number. */
@@ -173,10 +171,8 @@ export default class SlInput extends LitElement {
   }
 
   set valueAsNumber(newValue: number) {
-    this.updateComplete.then(() => {
-      this.input.valueAsNumber = newValue;
-      this.value = this.input.value;
-    });
+    this.input.valueAsNumber = newValue;
+    this.value = this.input.value;
   }
 
   firstUpdated() {
