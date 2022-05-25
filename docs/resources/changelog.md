@@ -10,6 +10,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 - Added `sl-label-change` event to `<sl-menu-item>`
 - Added `blur()`, `click()`, and `focus()` methods as well as `sl-blur` and `sl-focus` events to `<sl-icon-button>` [#730](https://github.com/shoelace-style/shoelace/issues/730)
+- Added Tabler Icons example to icons page
 - Fixed a bug where updating a menu item's label wouldn't update the display label in `<sl-select>` [#729](https://github.com/shoelace-style/shoelace/issues/729)
 - Fixed a bug where the FormData event polyfill was causing issues with older browsers [#747](https://github.com/shoelace-style/shoelace/issues/747)
 - Fixed a bug that caused a console error when setting `value` to `null` or `undefined` in `<sl-input>`, `<sl-select>`, and `<sl-textarea>` [#751](https://github.com/shoelace-style/shoelace/pull/751)
@@ -19,6 +20,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Improved behavior of clearable and password toggle buttons in `<sl-input>` and `<sl-select>` [#745](https://github.com/shoelace-style/shoelace/issues/745)
 - Improved performance of `<sl-select>` by caching menu items instead of traversing for them each time
 - Improved drag utility so initial click/touch events can be accepted [#758](https://github.com/shoelace-style/shoelace/issues/758)
+- Refactored `<sl-menu>` to be more performant by caching menu items on slot change
 - Revert form submit logic [#718](https://github.com/shoelace-style/shoelace/issues/718)
 - Updated the `disabled` attribute so it reflects in `<sl-dropdown>` [#741](https://github.com/shoelace-style/shoelace/discussions/741)
 - Updated the `name` and `icon` attribute so they reflect in `<sl-icon>` [#742](https://github.com/shoelace-style/shoelace/pull/742)
