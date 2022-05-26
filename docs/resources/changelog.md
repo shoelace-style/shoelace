@@ -21,7 +21,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Improved performance of `<sl-select>` by caching menu items instead of traversing for them each time
 - Improved drag utility so initial click/touch events can be accepted [#758](https://github.com/shoelace-style/shoelace/issues/758)
 - Refactored `<sl-menu>` to be more performant by caching menu items on slot change
-- Revert form submit logic [#718](https://github.com/shoelace-style/shoelace/issues/718)
+- Reverted form submit logic [#718](https://github.com/shoelace-style/shoelace/issues/718)
 - Updated the `disabled` attribute so it reflects in `<sl-dropdown>` [#741](https://github.com/shoelace-style/shoelace/discussions/741)
 - Updated the `name` and `icon` attribute so they reflect in `<sl-icon>` [#742](https://github.com/shoelace-style/shoelace/pull/742)
 - Updated Lit to 2.2.4
