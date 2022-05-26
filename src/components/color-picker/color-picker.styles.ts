@@ -39,14 +39,8 @@ export default css`
   .color-picker__grid {
     position: relative;
     height: var(--grid-height);
-    background-image: linear-gradient(
-        to bottom,
-        hsl(0, 0%, 100%) 0%,
-        hsla(0, 0%, 100%, 0) 50%,
-        hsla(0, 0%, 0%, 0) 50%,
-        hsl(0, 0%, 0%) 100%
-      ),
-      linear-gradient(to right, hsl(0, 0%, 50%) 0%, hsla(0, 0%, 50%, 0) 100%);
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%),
+      linear-gradient(to right, #fff 0%, rgba(255, 255, 255, 0) 100%);
     border-top-left-radius: var(--sl-border-radius-medium);
     border-top-right-radius: var(--sl-border-radius-medium);
     cursor: crosshair;
@@ -61,6 +55,12 @@ export default css`
     border: solid 2px white;
     margin-top: calc(var(--grid-handle-size) / -2);
     margin-left: calc(var(--grid-handle-size) / -2);
+    transition: var(--sl-transition-fast) transform;
+  }
+
+  .color-picker__grid-handle--dragging {
+    cursor: none;
+    transform: scale(1.5);
   }
 
   .color-picker__grid-handle${focusVisibleSelector} {
@@ -133,10 +133,10 @@ export default css`
     align-items: center;
     justify-content: center;
     position: relative;
-    width: 3.25rem;
+    width: 2.25rem;
     height: 2.25rem;
     border: none;
-    border-radius: var(--sl-input-border-radius-medium);
+    border-radius: var(--sl-border-radius-circle);
     background: none;
     margin-left: var(--sl-spacing-small);
     cursor: copy;

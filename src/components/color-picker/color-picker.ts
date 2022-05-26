@@ -93,10 +93,12 @@ export default class SlColorPicker extends LitElement {
   private lastValueEmitted: string;
   private readonly localize = new LocalizeController(this);
 
+  @state() private isDraggingGridHandle = false;
   @state() private inputValue = '';
   @state() private hue = 0;
   @state() private saturation = 100;
   @state() private lightness = 100;
+  @state() private brightness = 100;
   @state() private alpha = 100;
 
   /** The current color. */
@@ -211,6 +213,14 @@ export default class SlColorPicker extends LitElement {
     }
   }
 
+  getBrightness(lightness: number) {
+    return clamp(-1 * ((200 * lightness) / (this.saturation - 200)), 0, 100);
+  }
+
+  getLightness(brightness: number) {
+    return clamp(((((200 - this.saturation) * brightness) / 100) * 5) / 10, 0, 100);
+  }
+
   /** Checks for validity and shows the browser's validation message if the control is invalid. */
   reportValidity() {
     // If the input is invalid, show the dropdown so the browser can focus on it
@@ -262,14 +272,13 @@ export default class SlColorPicker extends LitElement {
     handle.focus();
     event.preventDefault();
 
-    drag(
-      container,
-      x => {
+    drag(container, {
+      onMove: x => {
         this.alpha = clamp((x / width) * 100, 0, 100);
         this.syncValues();
       },
-      { initialEvent: event }
-    );
+      initialEvent: event
+    });
   }
 
   handleHueDrag(event: PointerEvent) {
@@ -280,14 +289,13 @@ export default class SlColorPicker extends LitElement {
     handle.focus();
     event.preventDefault();
 
-    drag(
-      container,
-      x => {
+    drag(container, {
+      onMove: x => {
         this.hue = clamp((x / width) * 360, 0, 360);
         this.syncValues();
       },
-      { initialEvent: event }
-    );
+      initialEvent: event
+    });
   }
 
   handleGridDrag(event: PointerEvent) {
@@ -298,17 +306,19 @@ export default class SlColorPicker extends LitElement {
     handle.focus();
     event.preventDefault();
 
-    drag(
-      grid,
-      (x, y) => {
+    this.isDraggingGridHandle = true;
+
+    drag(grid, {
+      onMove: (x, y) => {
         this.saturation = clamp((x / width) * 100, 0, 100);
-        this.lightness = clamp(100 - (y / height) * 100, 0, 100);
+        this.brightness = clamp(100 - (y / height) * 100, 0, 100);
+        this.lightness = this.getLightness(this.brightness);
+
         this.syncValues();
       },
-      {
-        initialEvent: event
-      }
-    );
+      onStop: () => (this.isDraggingGridHandle = false),
+      initialEvent: event
+    });
   }
 
   handleAlphaKeyDown(event: KeyboardEvent) {
@@ -384,13 +394,17 @@ export default class SlColorPicker extends LitElement {
 
     if (event.key === 'ArrowUp') {
       event.preventDefault();
-      this.lightness = clamp(this.lightness + increment, 0, 100);
+      this.brightness = clamp(this.brightness + increment, 0, 100);
+      this.lightness = this.getLightness(this.brightness);
+      console.log(this.lightness, this.brightness);
       this.syncValues();
     }
 
     if (event.key === 'ArrowDown') {
       event.preventDefault();
-      this.lightness = clamp(this.lightness - increment, 0, 100);
+      this.brightness = clamp(this.brightness - increment, 0, 100);
+      this.lightness = this.getLightness(this.brightness);
+      console.log(this.lightness, this.brightness);
       this.syncValues();
     }
   }
@@ -543,6 +557,7 @@ export default class SlColorPicker extends LitElement {
     this.hue = newColor.hsla.h;
     this.saturation = newColor.hsla.s;
     this.lightness = newColor.hsla.l;
+    this.brightness = this.getBrightness(newColor.hsla.l);
     this.alpha = this.opacity ? newColor.hsla.a * 100 : 100;
 
     this.syncValues();
@@ -623,6 +638,7 @@ export default class SlColorPicker extends LitElement {
         this.hue = newColor.hsla.h;
         this.saturation = newColor.hsla.s;
         this.lightness = newColor.hsla.l;
+        this.brightness = this.getBrightness(newColor.hsla.l);
         this.alpha = newColor.hsla.a * 100;
       } else {
         this.inputValue = oldValue;
@@ -636,8 +652,8 @@ export default class SlColorPicker extends LitElement {
   }
 
   render() {
-    const x = this.saturation;
-    const y = 100 - this.lightness;
+    const gridHandleX = this.saturation;
+    const gridHandleY = 100 - this.brightness;
 
     const colorPicker = html`
       <div
@@ -668,10 +684,13 @@ export default class SlColorPicker extends LitElement {
         >
           <span
             part="grid-handle"
-            class="color-picker__grid-handle"
+            class=${classMap({
+              'color-picker__grid-handle': true,
+              'color-picker__grid-handle--dragging': this.isDraggingGridHandle
+            })}
             style=${styleMap({
-              top: `${y}%`,
-              left: `${x}%`,
+              top: `${gridHandleY}%`,
+              left: `${gridHandleX}%`,
               backgroundColor: `hsla(${this.hue}deg, ${this.saturation}%, ${this.lightness}%)`
             })}
             role="application"

@@ -108,9 +108,8 @@ export default class SlSplitPanel extends LitElement {
     // Prevent text selection when dragging
     event.preventDefault();
 
-    drag(
-      this,
-      (x, y) => {
+    drag(this, {
+      onMove: (x, y) => {
         let newPositionInPixels = this.vertical ? y : x;
 
         // Flip for end panels
@@ -142,10 +141,8 @@ export default class SlSplitPanel extends LitElement {
 
         this.position = clamp(this.pixelsToPercentage(newPositionInPixels), 0, 100);
       },
-      {
-        initialEvent: event
-      }
-    );
+      initialEvent: event
+    });
   }
 
   handleKeyDown(event: KeyboardEvent) {

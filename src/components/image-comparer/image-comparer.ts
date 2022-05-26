@@ -44,15 +44,12 @@ export default class SlImageComparer extends LitElement {
 
     event.preventDefault();
 
-    drag(
-      this.base,
-      x => {
+    drag(this.base, {
+      onMove: x => {
         this.position = parseFloat(clamp((x / width) * 100, 0, 100).toFixed(2));
       },
-      {
-        initialEvent: event
-      }
-    );
+      initialEvent: event
+    });
   }
 
   handleKeyDown(event: KeyboardEvent) {
