@@ -127,10 +127,6 @@ export default class SlRadioButton extends LitElement {
     }
   }
 
-  /** The button's variant. */
-  @property({ reflect: true }) variant: 'default' | 'primary' | 'success' | 'neutral' | 'warning' | 'danger' =
-    'default';
-
   /** The button's size. */
   @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
 
@@ -145,12 +141,7 @@ export default class SlRadioButton extends LitElement {
           part="button"
           class=${classMap({
             button: true,
-            'button--default': this.variant === 'default',
-            'button--primary': this.variant === 'primary',
-            'button--success': this.variant === 'success',
-            'button--neutral': this.variant === 'neutral',
-            'button--warning': this.variant === 'warning',
-            'button--danger': this.variant === 'danger',
+            'button--default': true,
             'button--small': this.size === 'small',
             'button--medium': this.size === 'medium',
             'button--large': this.size === 'large',
