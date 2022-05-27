@@ -18,6 +18,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug that caused `<sl-dropdown>` and dependent components to add unexpected padding around the panel [#743](https://github.com/shoelace-style/shoelace/issues/743)
 - Fixed a bug that prevented `valueAsDate` and `valueAsNumber` from updating synchronously [#760](https://github.com/shoelace-style/shoelace/issues/760)
 - Fixed a bug that caused `<sl-menu-item>` to load icons from the default library instead of the system library [#765](https://github.com/shoelace-style/shoelace/issues/765)
+- Fixed a bug in `<sl-input>` that prevented a canceled `keydown` event from submitting the containing form when pressing enter [#764](https://github.com/shoelace-style/shoelace/issues/764)
 - Improved behavior of clearable and password toggle buttons in `<sl-input>` and `<sl-select>` [#745](https://github.com/shoelace-style/shoelace/issues/745)
 - Improved performance of `<sl-select>` by caching menu items instead of traversing for them each time
 - Improved drag utility so initial click/touch events can be accepted [#758](https://github.com/shoelace-style/shoelace/issues/758)

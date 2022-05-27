@@ -274,9 +274,14 @@ export default class SlInput extends LitElement {
   handleKeyDown(event: KeyboardEvent) {
     const hasModifier = event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
 
-    // Pressing enter when focused on an input should submit the form like a native input
+    // Pressing enter when focused on an input should submit the form like a native input, but we wait a tick before
+    // submitting to allow users to cancel the keydown event if they need to
     if (event.key === 'Enter' && !hasModifier) {
-      this.formSubmitController.submit();
+      setTimeout(() => {
+        if (!event.defaultPrevented) {
+          this.formSubmitController.submit();
+        }
+      });
     }
   }
 

@@ -102,5 +102,25 @@ describe('<sl-input>', () => {
 
       expect(submitHandler).to.have.been.calledOnce;
     });
+
+    it('should prevent submission when pressing enter in an input and canceling the keydown event', async () => {
+      const form = await fixture<HTMLFormElement>(html` <form><sl-input></sl-input></form> `);
+      const input = form.querySelector('sl-input')!;
+      const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+      const keydownHandler = sinon.spy((event: KeyboardEvent) => {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+        }
+      });
+
+      form.addEventListener('submit', submitHandler);
+      input.addEventListener('keydown', keydownHandler);
+      input.focus();
+      await sendKeys({ press: 'Enter' });
+      await waitUntil(() => keydownHandler.calledOnce);
+
+      expect(keydownHandler).to.have.been.calledOnce;
+      expect(submitHandler).to.not.have.been.called;
+    });
   });
 });
