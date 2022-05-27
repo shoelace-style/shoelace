@@ -1,8 +1,8 @@
-# Vue 2
+# Vue (version 2)
 
 Vue [plays nice](https://custom-elements-everywhere.com/#vue) with custom elements, so you can use Shoelace in your Vue apps with ease.
 
-?> These instructions are for Vue 2. If you're using Vue 3 or above, please see [Vue instructions](/frameworks/vue).
+!> These instructions are for Vue 2. If you're using Vue 3 or above, please see the [Vue 3 instructions](/frameworks/vue).
 
 ## Installation
 

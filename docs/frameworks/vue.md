@@ -2,7 +2,7 @@
 
 Vue [plays nice](https://custom-elements-everywhere.com/#vue) with custom elements, so you can use Shoelace in your Vue apps with ease.
 
-?> These instructions are for Vue 3 and above. If you're using Vue 2, see [Vue 2 instructions](/frameworks/vue2).
+?> These instructions are for Vue 3 and above. If you're using Vue 2, please see the [Vue 2 instructions](/frameworks/vue-2).
 
 ## Installation
 
@@ -28,10 +28,10 @@ setBasePath('https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dis
 You'll need to tell Vue to ignore Shoelace components. This is pretty easy because they all start with `sl-`.
 
 ```js
-import { fileURLToPath, URL } from 'url'
+import { fileURLToPath, URL } from 'url';
 
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -49,7 +49,7 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   }
-})
+});
 ```
 
 Now you can start using Shoelace components in your app!
@@ -70,11 +70,11 @@ Now you can start using Shoelace components in your app!
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import '@shoelace-style/shoelace/dist/components/qr-code/qr-code.js'
-import '@shoelace-style/shoelace/dist/components/input/input.js'
+import { ref } from 'vue';
+import '@shoelace-style/shoelace/dist/components/qr-code/qr-code.js';
+import '@shoelace-style/shoelace/dist/components/input/input.js';
 
-const qrCode = ref()
+const qrCode = ref();
 </script>
 
 <style>
