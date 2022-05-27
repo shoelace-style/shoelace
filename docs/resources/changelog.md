@@ -6,7 +6,7 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
-## Next
+## 2.0.0-beta.74
 
 - 🚨 BREAKING: reworked focus rings to use outlines instead of box shadows
   - Removed the `--sl-focus-ring-alpha` design token
