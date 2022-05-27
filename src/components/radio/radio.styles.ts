@@ -63,9 +63,8 @@ export default css`
 
   /* Focus */
   .radio:not(.radio--checked):not(.radio--disabled) .radio__input${focusVisibleSelector} ~ .radio__control {
-    border-color: var(--sl-input-border-color-focus);
-    background-color: var(--sl-input-background-color-focus);
-    box-shadow: var(--sl-focus-ring);
+    outline: var(--sl-focus-ring);
+    outline-offset: var(--sl-focus-ring-offset);
   }
 
   /* Checked */
@@ -83,9 +82,8 @@ export default css`
 
   /* Checked + focus */
   .radio.radio--checked:not(.radio--disabled) .radio__input${focusVisibleSelector} ~ .radio__control {
-    border-color: var(--sl-color-primary-500);
-    background-color: var(--sl-color-primary-500);
-    box-shadow: var(--sl-focus-ring);
+    outline: var(--sl-focus-ring);
+    outline-offset: var(--sl-focus-ring-offset);
   }
 
   /* Disabled */

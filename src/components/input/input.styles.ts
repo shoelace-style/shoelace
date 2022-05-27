@@ -41,7 +41,8 @@ export default css`
   .input--standard.input--focused:not(.input--disabled) {
     background-color: var(--sl-input-background-color-focus);
     border-color: var(--sl-input-border-color-focus);
-    box-shadow: var(--sl-focus-ring);
+    outline: var(--sl-focus-ring-style) var(--sl-focus-ring-width) var(--sl-input-focus-ring-color);
+    outline-offset: var(--sl-input-focus-ring-offset);
   }
 
   .input--standard.input--focused:not(.input--disabled) .input__control {
@@ -76,7 +77,8 @@ export default css`
 
   .input--filled.input--focused:not(.input--disabled) {
     background-color: var(--sl-input-filled-background-color-focus);
-    box-shadow: var(--sl-focus-ring);
+    outline: var(--sl-focus-ring);
+    outline-offset: var(--sl-focus-ring-offset);
   }
 
   .input--filled.input--disabled {

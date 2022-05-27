@@ -50,8 +50,8 @@ export default css`
   .select--standard.select--focused:not(.select--disabled) .select__control {
     background-color: var(--sl-input-background-color-focus);
     border-color: var(--sl-input-border-color-focus);
-    box-shadow: var(--sl-focus-ring);
-    outline: none;
+    outline: var(--sl-focus-ring-style) var(--sl-focus-ring-width) var(--sl-input-focus-ring-color);
+    outline-offset: var(--sl-input-focus-ring-offset);
     color: var(--sl-input-color-focus);
   }
 
@@ -76,9 +76,9 @@ export default css`
   }
 
   .select--filled.select--focused:not(.select--disabled) .select__control {
-    outline: none;
     background-color: var(--sl-input-filled-background-color-focus);
-    box-shadow: var(--sl-focus-ring);
+    outline: var(--sl-focus-ring);
+    outline-offset: var(--sl-focus-ring-offset);
   }
 
   .select--filled.select--disabled .select__control {

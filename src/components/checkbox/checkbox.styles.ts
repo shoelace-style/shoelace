@@ -65,9 +65,8 @@ export default css`
   .checkbox:not(.checkbox--checked):not(.checkbox--disabled)
     .checkbox__input${focusVisibleSelector}
     ~ .checkbox__control {
-    border-color: var(--sl-input-border-color-focus);
-    background-color: var(--sl-input-background-color-focus);
-    box-shadow: var(--sl-focus-ring);
+    outline: var(--sl-focus-ring);
+    outline-offset: var(--sl-focus-ring-offset);
   }
 
   /* Checked/indeterminate */
@@ -89,9 +88,8 @@ export default css`
   .checkbox.checkbox--indeterminate:not(.checkbox--disabled)
     .checkbox__input${focusVisibleSelector}
     ~ .checkbox__control {
-    border-color: var(--sl-color-primary-500);
-    background-color: var(--sl-color-primary-500);
-    box-shadow: var(--sl-focus-ring);
+    outline: var(--sl-focus-ring);
+    outline-offset: var(--sl-focus-ring-offset);
   }
 
   /* Disabled */

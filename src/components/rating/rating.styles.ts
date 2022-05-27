@@ -26,7 +26,8 @@ export default css`
   }
 
   .rating${focusVisibleSelector} {
-    box-shadow: var(--sl-focus-ring);
+    outline: var(--sl-focus-ring);
+    outline-offset: var(--sl-focus-ring-offset);
   }
 
   .rating__symbols {

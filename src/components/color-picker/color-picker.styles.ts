@@ -32,8 +32,8 @@ export default css`
   }
 
   .color-picker--inline${focusVisibleSelector} {
-    outline: none;
-    box-shadow: 0 0 0 1px var(--sl-color-primary-500), var(--sl-focus-ring);
+    outline: var(--sl-focus-ring);
+    outline-offset: var(--sl-focus-ring-offset);
   }
 
   .color-picker__grid {
@@ -64,8 +64,7 @@ export default css`
   }
 
   .color-picker__grid-handle${focusVisibleSelector} {
-    outline: none;
-    box-shadow: 0 0 0 1px var(--sl-color-primary-500), var(--sl-focus-ring);
+    outline: var(--sl-focus-ring);
   }
 
   .color-picker__controls {
@@ -101,8 +100,7 @@ export default css`
   }
 
   .color-picker__slider-handle${focusVisibleSelector} {
-    outline: none;
-    box-shadow: 0 0 0 1px var(--sl-color-primary-500), var(--sl-focus-ring);
+    outline: var(--sl-focus-ring);
   }
 
   .color-picker__hue {
@@ -157,8 +155,8 @@ export default css`
   }
 
   .color-picker__preview${focusVisibleSelector} {
-    box-shadow: var(--sl-focus-ring);
-    outline: none;
+    outline: var(--sl-focus-ring);
+    outline-offset: var(--sl-focus-ring-offset);
   }
 
   .color-picker__preview-color {
@@ -234,8 +232,8 @@ export default css`
   }
 
   .color-picker__swatch${focusVisibleSelector} {
-    outline: none;
-    box-shadow: var(--sl-focus-ring);
+    outline: var(--sl-focus-ring);
+    outline-offset: var(--sl-focus-ring-offset);
   }
 
   .color-picker__transparent-bg {
@@ -280,7 +278,6 @@ export default css`
     background-color: transparent;
     border: none;
     cursor: pointer;
-    transition: var(--sl-transition-fast) box-shadow;
   }
 
   .color-dropdown__trigger.color-dropdown__trigger--small {
@@ -311,7 +308,6 @@ export default css`
     border-radius: inherit;
     background-color: currentColor;
     box-shadow: inset 0 0 0 2px var(--sl-input-border-color), inset 0 0 0 4px var(--sl-color-neutral-0);
-    transition: inherit;
   }
 
   .color-dropdown__trigger${focusVisibleSelector} {
@@ -319,12 +315,8 @@ export default css`
   }
 
   .color-dropdown__trigger${focusVisibleSelector}:not(.color-dropdown__trigger--disabled) {
-    box-shadow: var(--sl-focus-ring);
-    outline: none;
-  }
-
-  .color-dropdown__trigger${focusVisibleSelector}:not(.color-dropdown__trigger--disabled):before {
-    box-shadow: inset 0 0 0 1px var(--sl-color-primary-500);
+    outline: var(--sl-focus-ring);
+    outline-offset: var(--sl-focus-ring-offset);
   }
 
   .color-dropdown__trigger.color-dropdown__trigger--disabled {

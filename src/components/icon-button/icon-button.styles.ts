@@ -43,6 +43,7 @@ export default css`
   }
 
   .icon-button${focusVisibleSelector} {
-    box-shadow: var(--sl-focus-ring);
+    outline: var(--sl-focus-ring);
+    outline-offset: var(--sl-focus-ring-offset);
   }
 `;

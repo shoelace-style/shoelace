@@ -74,8 +74,8 @@ strong {
 }
 
 .sidebar-toggle:focus {
-  outline: none;
-  box-shadow: var(--sl-focus-ring);
+  outline: var(--sl-focus-ring);
+  outline-offset: var(--sl-focus-ring-offset);
 }
 
 .sidebar-toggle span:last-child {

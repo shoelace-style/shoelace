@@ -59,9 +59,8 @@ export default css`
   }
 
   .range__control:enabled${focusVisibleSelector}::-webkit-slider-thumb {
-    background-color: var(--sl-color-primary-500);
-    border-color: var(--sl-color-primary-500);
-    box-shadow: var(--sl-focus-ring);
+    outline: var(--sl-focus-ring);
+    outline-offset: var(--sl-focus-ring-offset);
   }
 
   .range__control:enabled::-webkit-slider-thumb:active {
@@ -107,9 +106,8 @@ export default css`
   }
 
   .range__control:enabled${focusVisibleSelector}::-moz-range-thumb {
-    background-color: var(--sl-color-primary-500);
-    border-color: var(--sl-color-primary-500);
-    box-shadow: var(--sl-focus-ring);
+    outline: var(--sl-focus-ring);
+    outline-offset: var(--sl-focus-ring-offset);
   }
 
   .range__control:enabled::-moz-range-thumb:active {

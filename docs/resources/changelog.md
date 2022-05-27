@@ -8,6 +8,10 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
+- 🚨 BREAKING: reworked focus rings to use outlines instead of box shadows
+  - Removed the `--sl-focus-ring-alpha` design token
+  - Refactored `--sl-focus-ring` to be an `outline` property instead of a `box-shadow` property
+  - Added `--sl-focus-ring-color`, `--sl-focus-ring-style`, and `--sl-focus-ring-offset`
 - Added `sl-label-change` event to `<sl-menu-item>`
 - Added `blur()`, `click()`, and `focus()` methods as well as `sl-blur` and `sl-focus` events to `<sl-icon-button>` [#730](https://github.com/shoelace-style/shoelace/issues/730)
 - Added Tabler Icons example to icons page

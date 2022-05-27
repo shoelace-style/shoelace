@@ -49,9 +49,13 @@ export default css`
     color: var(--sl-color-primary-600);
   }
 
-  .breadcrumb-item__label${focusVisibleSelector} {
+  .breadcrumb-item__label:focus {
     outline: none;
-    box-shadow: var(--sl-focus-ring);
+  }
+
+  .breadcrumb-item__label${focusVisibleSelector} {
+    outline: var(--sl-focus-ring);
+    outline-offset: var(--sl-focus-ring-offset);
   }
 
   .breadcrumb-item__prefix,

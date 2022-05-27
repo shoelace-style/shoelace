@@ -42,8 +42,9 @@ export default css`
   .textarea--standard.textarea--focused:not(.textarea--disabled) {
     background-color: var(--sl-input-background-color-focus);
     border-color: var(--sl-input-border-color-focus);
-    box-shadow: var(--sl-focus-ring);
     color: var(--sl-input-color-focus);
+    outline: var(--sl-focus-ring-style) var(--sl-focus-ring-width) var(--sl-input-focus-ring-color);
+    outline-offset: var(--sl-input-focus-ring-offset);
   }
 
   .textarea--standard.textarea--focused:not(.textarea--disabled) .textarea__control {
@@ -78,7 +79,8 @@ export default css`
 
   .textarea--filled.textarea--focused:not(.textarea--disabled) {
     background-color: var(--sl-input-filled-background-color-focus);
-    box-shadow: var(--sl-focus-ring);
+    outline: var(--sl-focus-ring);
+    outline-offset: var(--sl-focus-ring-offset);
   }
 
   .textarea--filled.textarea--disabled {

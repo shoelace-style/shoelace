@@ -34,7 +34,8 @@ export default css`
 
   .tab${focusVisibleSelector}:not(.tab--disabled) {
     color: var(--sl-color-primary-600);
-    box-shadow: inset var(--sl-focus-ring);
+    outline: var(--sl-focus-ring);
+    outline-offset: calc(-1 * var(--sl-focus-ring-width) - var(--sl-focus-ring-offset));
   }
 
   .tab.tab--active:not(.tab--disabled) {
