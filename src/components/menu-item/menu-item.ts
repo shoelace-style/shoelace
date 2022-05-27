@@ -89,7 +89,7 @@ export default class SlMenuItem extends LitElement {
         })}
       >
         <span class="menu-item__check">
-          <sl-icon name="check-lg" library="default" aria-hidden="true"></sl-icon>
+          <sl-icon name="check-lg" library="system" aria-hidden="true"></sl-icon>
         </span>
 
         <span part="prefix" class="menu-item__prefix">
@@ -105,7 +105,7 @@ export default class SlMenuItem extends LitElement {
         </span>
 
         <span class="menu-item__chevron">
-          <sl-icon name="chevron-right" library="default" aria-hidden="true"></sl-icon>
+          <sl-icon name="chevron-right" library="system" aria-hidden="true"></sl-icon>
         </span>
       </div>
     `;
