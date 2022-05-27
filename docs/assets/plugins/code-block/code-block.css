@@ -138,10 +138,6 @@
 
 .code-block__button:focus-visible {
   outline: none;
-  color: var(--sl-color-primary-600);
-  border-color: var(--sl-color-primary-400);
-  border-right-color: transparent;
-  background-color: var(--sl-color-primary-50);
   outline: var(--sl-focus-ring);
   z-index: 2;
 }
