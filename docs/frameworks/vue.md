@@ -2,7 +2,7 @@
 
 Vue [plays nice](https://custom-elements-everywhere.com/#vue) with custom elements, so you can use Shoelace in your Vue apps with ease.
 
-?> These instructions are for Vue 2. If you're using Vue 3, [please help us update this page](https://github.com/shoelace-style/shoelace/blob/next/docs/frameworks/vue.md).
+?> These instructions are for Vue 3 and above. If you're using Vue 2, see [Vue 2 instructions](/frameworks/vue2).
 
 ## Installation
 
@@ -28,19 +28,66 @@ setBasePath('https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dis
 You'll need to tell Vue to ignore Shoelace components. This is pretty easy because they all start with `sl-`.
 
 ```js
-import { createApp } from 'vue';
-import App from './App.vue';
+import { fileURLToPath, URL } from 'url'
 
-const app = createApp(App);
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
 
-app.config.compilerOptions.isCustomElement = tag => tag.startsWith('sl-');
-
-app.mount('#app');
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [
+    vue({
+      template: {
+        compilerOptions: {
+          isCustomElement: tag => tag.startsWith('sl-')
+        }
+      }
+    })
+  ],
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url))
+    }
+  }
+})
 ```
 
 Now you can start using Shoelace components in your app!
 
 ## Usage
+
+### QR code generator example
+
+```vue
+<template>
+  <div class="container">
+    <h1>QR code generator</h1>
+
+    <sl-input maxlength="255" clearable label="Value" v-model="qrCode"></sl-input>
+
+    <sl-qr-code :value="qrCode"></sl-qr-code>
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+import '@shoelace-style/shoelace/dist/components/qr-code/qr-code.js'
+import '@shoelace-style/shoelace/dist/components/input/input.js'
+
+const qrCode = ref()
+</script>
+
+<style>
+.container {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+sl-input {
+  margin: var(--sl-spacing-large) 0;
+}
+</style>
+```
 
 ### Binding Complex Data
 
@@ -48,45 +95,6 @@ When binding complex data such as objects and arrays, use the `.prop` modifier t
 
 ```html
 <sl-color-picker :swatches.prop="mySwatches" />
-```
-
-### Two-way Binding
-
-One caveat is there's currently [no support for v-model on custom elements](https://github.com/vuejs/vue/issues/7830), but you can still achieve two-way binding manually.
-
-```html
-<!-- This doesn't work -->
-<sl-input v-model="name">
-  <!-- This works, but it's a bit longer -->
-  <sl-input :value="name" @input="name = $event.target.value"></sl-input
-></sl-input>
-```
-
-If that's too verbose for your liking, you can use a custom directive instead. [This utility](https://www.npmjs.com/package/@shoelace-style/vue-sl-model) adds a custom directive that will work just like `v-model` but for Shoelace components. To install it, use this command.
-
-```bash
-npm install @shoelace-style/vue-sl-model
-```
-
-Next, import the directive and enable it like this.
-
-```js
-import ShoelaceModelDirective from '@shoelace-style/vue-sl-model';
-import { createApp } from 'vue';
-import App from './App.vue';
-
-const app = createApp(App);
-app.use(ShoelaceModelDirective);
-
-app.config.compilerOptions.isCustomElement = tag => tag.startsWith('sl-');
-
-app.mount('#app');
-```
-
-Now you can use the `v-sl-model` directive to keep your data in sync!
-
-```html
-<sl-input v-sl-model="name"></sl-input>
 ```
 
 ?> Are you using Shoelace with Vue? [Help us improve this page!](https://github.com/shoelace-style/shoelace/blob/next/docs/frameworks/vue.md)
