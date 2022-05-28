@@ -120,7 +120,7 @@ export default css`
   }
 
   .drawer__footer ::slotted(sl-button:not(:last-of-type)) {
-    margin-right: var(--sl-spacing-x-small);
+    margin-inline-end: var(--sl-spacing-x-small);
   }
 
   .drawer:not(.drawer--has-footer) .drawer__footer {

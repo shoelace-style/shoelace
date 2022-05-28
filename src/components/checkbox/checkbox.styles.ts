@@ -100,7 +100,7 @@ export default css`
 
   .checkbox__label {
     line-height: var(--sl-toggle-size);
-    margin-left: 0.5em;
+    margin-inline-start: 0.5em;
     user-select: none;
   }
 `;

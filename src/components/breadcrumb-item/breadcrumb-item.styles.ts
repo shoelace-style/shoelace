@@ -68,12 +68,12 @@ export default css`
 
   .breadcrumb-item--has-prefix .breadcrumb-item__prefix {
     display: inline-flex;
-    margin-right: var(--sl-spacing-x-small);
+    margin-inline-end: var(--sl-spacing-x-small);
   }
 
   .breadcrumb-item--has-suffix .breadcrumb-item__suffix {
     display: inline-flex;
-    margin-left: var(--sl-spacing-x-small);
+    margin-inline-start: var(--sl-spacing-x-small);
   }
 
   :host(:last-of-type) .breadcrumb-item__separator {
