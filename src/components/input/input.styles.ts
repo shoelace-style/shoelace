@@ -41,8 +41,7 @@ export default css`
   .input--standard.input--focused:not(.input--disabled) {
     background-color: var(--sl-input-background-color-focus);
     border-color: var(--sl-input-border-color-focus);
-    outline: var(--sl-focus-ring-style) var(--sl-focus-ring-width) var(--sl-input-focus-ring-color);
-    outline-offset: var(--sl-input-focus-ring-offset);
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-input-focus-ring-color);
   }
 
   .input--standard.input--focused:not(.input--disabled) .input__control {

@@ -50,9 +50,9 @@ export default css`
   .select--standard.select--focused:not(.select--disabled) .select__control {
     background-color: var(--sl-input-background-color-focus);
     border-color: var(--sl-input-border-color-focus);
-    outline: var(--sl-focus-ring-style) var(--sl-focus-ring-width) var(--sl-input-focus-ring-color);
-    outline-offset: var(--sl-input-focus-ring-offset);
     color: var(--sl-input-color-focus);
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-input-focus-ring-color);
+    outline: none;
   }
 
   .select--standard.select--disabled .select__control {
