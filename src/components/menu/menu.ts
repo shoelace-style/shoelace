@@ -28,16 +28,18 @@ export default class SlMenu extends LitElement {
 
   private typeToSelectString = '';
   private typeToSelectTimeout: number;
-  private allItems: SlMenuItem[] = [];
-  private nonDisabledItems: SlMenuItem[] = [];
 
   firstUpdated() {
     this.setAttribute('role', 'menu');
   }
 
-  getAllItems() {
+  getAllItems(options: { includeDisabled: boolean } = { includeDisabled: true }) {
     return [...this.defaultSlot.assignedElements({ flatten: true })].filter((el: HTMLElement) => {
       if (el.getAttribute('role') !== 'menuitem') {
+        return false;
+      }
+
+      if (!options.includeDisabled && (el as SlMenuItem).disabled) {
         return false;
       }
 
@@ -50,7 +52,7 @@ export default class SlMenu extends LitElement {
    * The menu item may or may not have focus, but for keyboard interaction purposes it's considered the "active" item.
    */
   getCurrentItem() {
-    return this.nonDisabledItems.find(i => i.getAttribute('tabindex') === '0');
+    return this.getAllItems({ includeDisabled: false }).find(i => i.getAttribute('tabindex') === '0');
   }
 
   /**
@@ -58,10 +60,11 @@ export default class SlMenu extends LitElement {
    * `tabindex="-1"` to all other items. This method must be called prior to setting focus on a menu item.
    */
   setCurrentItem(item: SlMenuItem) {
-    const activeItem = item.disabled ? this.nonDisabledItems[0] : item;
+    const items = this.getAllItems({ includeDisabled: false });
+    const activeItem = item.disabled ? items[0] : item;
 
     // Update tab indexes
-    this.nonDisabledItems.forEach(i => {
+    items.forEach(i => {
       i.setAttribute('tabindex', i === activeItem ? '0' : '-1');
     });
   }
@@ -73,6 +76,7 @@ export default class SlMenu extends LitElement {
    * type-to-select behavior when the menu doesn't have focus.
    */
   typeToSelect(event: KeyboardEvent) {
+    const items = this.getAllItems({ includeDisabled: false });
     clearTimeout(this.typeToSelectTimeout);
     this.typeToSelectTimeout = window.setTimeout(() => (this.typeToSelectString = ''), 1000);
 
@@ -88,10 +92,10 @@ export default class SlMenu extends LitElement {
 
     // Restore focus in browsers that don't support :focus-visible when using the keyboard
     if (!hasFocusVisible) {
-      this.nonDisabledItems.forEach(item => item.classList.remove('sl-focus-invisible'));
+      items.forEach(item => item.classList.remove('sl-focus-invisible'));
     }
 
-    for (const item of this.nonDisabledItems) {
+    for (const item of items) {
       const slot = item.shadowRoot?.querySelector<HTMLSlotElement>('slot:not([name])');
       const label = getTextContent(slot).toLowerCase().trim();
       if (label.startsWith(this.typeToSelectString)) {
@@ -116,7 +120,8 @@ export default class SlMenu extends LitElement {
   handleKeyUp() {
     // Restore focus in browsers that don't support :focus-visible when using the keyboard
     if (!hasFocusVisible) {
-      this.allItems.forEach(item => {
+      const items = this.getAllItems();
+      items.forEach(item => {
         item.classList.remove('sl-focus-invisible');
       });
     }
@@ -139,10 +144,11 @@ export default class SlMenu extends LitElement {
 
     // Move the selection when pressing down or up
     if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
+      const items = this.getAllItems({ includeDisabled: false });
       const activeItem = this.getCurrentItem();
-      let index = activeItem ? this.nonDisabledItems.indexOf(activeItem) : 0;
+      let index = activeItem ? items.indexOf(activeItem) : 0;
 
-      if (this.nonDisabledItems.length > 0) {
+      if (items.length > 0) {
         event.preventDefault();
 
         if (event.key === 'ArrowDown') {
@@ -152,18 +158,18 @@ export default class SlMenu extends LitElement {
         } else if (event.key === 'Home') {
           index = 0;
         } else if (event.key === 'End') {
-          index = this.nonDisabledItems.length - 1;
+          index = items.length - 1;
         }
 
         if (index < 0) {
-          index = this.nonDisabledItems.length - 1;
+          index = items.length - 1;
         }
-        if (index > this.nonDisabledItems.length - 1) {
+        if (index > items.length - 1) {
           index = 0;
         }
 
-        this.setCurrentItem(this.nonDisabledItems[index]);
-        this.nonDisabledItems[index].focus();
+        this.setCurrentItem(items[index]);
+        items[index].focus();
 
         return;
       }
@@ -186,12 +192,11 @@ export default class SlMenu extends LitElement {
   }
 
   handleSlotChange() {
-    this.allItems = this.getAllItems();
-    this.nonDisabledItems = this.allItems.filter(i => !i.disabled);
+    const items = this.getAllItems({ includeDisabled: false });
 
     // Reset the roving tab index when the slotted items change
-    if (this.nonDisabledItems.length > 0) {
-      this.setCurrentItem(this.nonDisabledItems[0]);
+    if (items.length > 0) {
+      this.setCurrentItem(items[0]);
     }
   }
 
