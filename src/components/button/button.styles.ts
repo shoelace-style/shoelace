@@ -534,9 +534,8 @@ export default css`
    */
 
   :host(.sl-button-group__button--first:not(.sl-button-group__button--last)) .button {
-    border-inline-end-width: 0;
-    /* border-top-right-radius: 0; */
-    /* border-bottom-right-radius: 0; */
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
   }
 
   :host(.sl-button-group__button--inner) .button {
@@ -544,14 +543,13 @@ export default css`
   }
 
   :host(.sl-button-group__button--last:not(.sl-button-group__button--first)) .button {
-    border-start-start-radius: 0;
-    /* border-top-left-radius: 0;
-    border-bottom-left-radius: 0; */
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
   }
 
   /* All except the first */
   :host(.sl-button-group__button:not(.sl-button-group__button--first)) {
-    margin-inline-start: calc(-1 * var(--sl-input-border-width));
+    margin-left: calc(-1 * var(--sl-input-border-width));
   }
 
   /* Add a visual separator between solid buttons */
@@ -562,7 +560,7 @@ export default css`
     top: 0;
     left: 0;
     bottom: 0;
-    border-inline-start-style: solid 1px rgb(128 128 128 / 33%);
+    border-left: solid 1px rgb(128 128 128 / 33%);
     mix-blend-mode: multiply;
   }
 
