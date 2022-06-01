@@ -117,7 +117,13 @@ export default class SlImageComparer extends LitElement {
             tabindex="0"
           >
             <slot name="handle-icon">
-              <sl-icon class="image-comparer__handle-icon" name="grip-vertical" library="system"></sl-icon>
+              <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <g fill="currentColor" fill-rule="nonzero">
+                  <path
+                    d="m21.14 12.55-5.482 4.796c-.646.566-1.658.106-1.658-.753V7a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506h.001ZM2.341 12.55l5.482 4.796c.646.566 1.658.106 1.658-.753V7a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506h-.001Z"
+                  />
+                </g>
+              </svg>
             </slot>
           </div>
         </div>
