@@ -8,7 +8,8 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
-- Fix focus rings for `<sl-input>`, `<sl-select>`, and `<sl-textarea>` in Safari since they don't use `:focus-visible` [#767](https://github.com/shoelace-style/shoelace/issues/767)
+- Fixed focus rings for `<sl-input>`, `<sl-select>`, and `<sl-textarea>` in Safari since they don't use `:focus-visible` [#767](https://github.com/shoelace-style/shoelace/issues/767)
+- Fixed a bug where calling `HTMLFormElement.reportValidity()` would skip Shoelace form controls [#772](https://github.com/shoelace-style/shoelace/issues/772)
 - Revert menu item caching due to regression [#766](https://github.com/shoelace-style/shoelace/issues/766)
 
 ## 2.0.0-beta.74

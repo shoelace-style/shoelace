@@ -123,4 +123,39 @@ describe('<sl-input>', () => {
       expect(submitHandler).to.not.have.been.called;
     });
   });
+
+  describe('when calling HTMLFormElement.reportValidity()', () => {
+    it('should be invalid when the input is empty and form.reportValidity() is called', async () => {
+      const form = await fixture<HTMLFormElement>(html`
+        <form>
+          <sl-input required value=""></sl-input>
+          <sl-button type="submit">Submit</sl-button>
+        </form>
+      `);
+
+      expect(form.reportValidity()).to.be.false;
+    });
+
+    it('should be valid when the input is empty, reportValidity() is called, and the form has novalidate', async () => {
+      const form = await fixture<HTMLFormElement>(html`
+        <form novalidate>
+          <sl-input required value=""></sl-input>
+          <sl-button type="submit">Submit</sl-button>
+        </form>
+      `);
+
+      expect(form.reportValidity()).to.be.true;
+    });
+
+    it('should be invalid when a native input is empty and form.reportValidity() is called', async () => {
+      const form = await fixture<HTMLFormElement>(html`
+        <form>
+          <input required value=""></input>
+          <sl-button type="submit">Submit</sl-button>
+        </form>
+      `);
+
+      expect(form.reportValidity()).to.be.false;
+    });
+  });
 });

@@ -2,6 +2,8 @@ import './formdata-event-polyfill';
 import type SlButton from '../components/button/button';
 import type { ReactiveController, ReactiveControllerHost } from 'lit';
 
+const formOverloads: WeakMap<HTMLFormElement, () => boolean> = new WeakMap();
+
 export interface FormSubmitControllerOptions {
   /** A function that returns the form containing the form control. */
   form: (input: unknown) => HTMLFormElement | null;
@@ -37,6 +39,7 @@ export class FormSubmitController implements ReactiveController {
     };
     this.handleFormData = this.handleFormData.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.reportFormValidity = this.reportFormValidity.bind(this);
   }
 
   hostConnected() {
@@ -45,6 +48,12 @@ export class FormSubmitController implements ReactiveController {
     if (this.form) {
       this.form.addEventListener('formdata', this.handleFormData);
       this.form.addEventListener('submit', this.handleFormSubmit);
+
+      // Overload the form's reportValidity() method so it looks at Shoelace form controls
+      if (!formOverloads.has(this.form)) {
+        formOverloads.set(this.form, this.form.reportValidity);
+        this.form.reportValidity = () => this.reportFormValidity();
+      }
     }
   }
 
@@ -52,6 +61,13 @@ export class FormSubmitController implements ReactiveController {
     if (this.form) {
       this.form.removeEventListener('formdata', this.handleFormData);
       this.form.removeEventListener('submit', this.handleFormSubmit);
+
+      // Remove the overload and restore the original method
+      if (formOverloads.has(this.form)) {
+        this.form.reportValidity = formOverloads.get(this.form)!;
+        formOverloads.delete(this.form);
+      }
+
       this.form = undefined;
     }
   }
@@ -80,6 +96,36 @@ export class FormSubmitController implements ReactiveController {
       event.preventDefault();
       event.stopImmediatePropagation();
     }
+  }
+
+  reportFormValidity() {
+    //
+    // Shoelace form controls work hard to act like regular form controls. They support the Constraint Validation API
+    // and its associated methods such as setCustomValidity() and reportValidity(). However, the HTMLFormElement also
+    // has a reportValidity() method that will trigger validation on all child controls. Since we're not yet using
+    // ElementInternals, we need to overload this method so it looks for any element with the reportValidity() method.
+    //
+    // We preserve the original method in a WeakMap, but we don't call it from the overload because that would trigger
+    // validations in an unexpected order. When the element disconnects, we revert to the original behavior. This won't
+    // be necessary once we can use ElementInternals.
+    //
+    // Note that we're also honoring the form's novalidate attribute.
+    //
+    if (this.form && !this.form.noValidate) {
+      // This seems sloppy, but checking all elements will cover native inputs, Shoelace inputs, and other custom
+      // elements that support the constraint validation API.
+      const elements = this.form.querySelectorAll<HTMLInputElement>('*');
+
+      for (const element of elements) {
+        if (typeof element.reportValidity === 'function') {
+          if (!element.reportValidity()) {
+            return false;
+          }
+        }
+      }
+    }
+
+    return true;
   }
 
   /** Submits the form, triggering validation and form data injection. */
