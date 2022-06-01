@@ -43,7 +43,7 @@ export default css`
   }
 
   .tab.tab--closable {
-    padding-right: var(--sl-spacing-small);
+    padding-inline-end: var(--sl-spacing-small);
   }
 
   .tab.tab--disabled {
@@ -53,7 +53,7 @@ export default css`
 
   .tab__close-button {
     font-size: var(--sl-font-size-large);
-    margin-left: var(--sl-spacing-2x-small);
+    margin-inline-start: var(--sl-spacing-2x-small);
   }
 
   .tab__close-button::part(base) {

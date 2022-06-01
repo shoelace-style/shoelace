@@ -70,7 +70,7 @@ export default css`
   }
 
   .tag--small .tag__remove {
-    margin-left: var(--sl-spacing-2x-small);
+    margin-inline-start: var(--sl-spacing-2x-small);
     margin-right: calc(-1 * var(--sl-spacing-3x-small));
   }
 
@@ -80,11 +80,6 @@ export default css`
     line-height: calc(var(--sl-input-height-medium) - var(--sl-input-border-width) * 2);
     border-radius: var(--sl-input-border-radius-medium);
     padding: 0 var(--sl-spacing-small);
-  }
-
-  .tag__remove {
-    margin-left: var(--sl-spacing-2x-small);
-    margin-right: calc(-1 * var(--sl-spacing-2x-small));
   }
 
   .tag--large {
@@ -97,8 +92,8 @@ export default css`
 
   .tag__remove {
     font-size: 1.4em;
-    margin-left: var(--sl-spacing-2x-small);
-    margin-right: calc(-1 * var(--sl-spacing-x-small));
+    margin-inline-start: var(--sl-spacing-2x-small);
+    margin-inline-end: calc(-1 * var(--sl-spacing-x-small));
   }
 
   /*

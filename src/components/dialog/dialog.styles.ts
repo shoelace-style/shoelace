@@ -90,7 +90,7 @@ export default css`
   }
 
   .dialog__footer ::slotted(sl-button:not(:first-of-type)) {
-    margin-left: var(--sl-spacing-x-small);
+    margin-inline-start: var(--sl-spacing-x-small);
   }
 
   .dialog:not(.dialog--has-footer) .dialog__footer {

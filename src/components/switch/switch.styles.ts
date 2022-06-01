@@ -131,7 +131,7 @@ export default css`
 
   .switch__label {
     line-height: var(--height);
-    margin-left: 0.5em;
+    margin-inline-start: 0.5em;
     user-select: none;
   }
 `;

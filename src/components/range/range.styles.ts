@@ -157,7 +157,7 @@ export default css`
     width: 0;
     height: 0;
     left: 50%;
-    margin-left: calc(-1 * var(--sl-tooltip-arrow-size));
+    margin-inline-start: calc(-1 * var(--sl-tooltip-arrow-size));
   }
 
   .range--tooltip-visible .range__tooltip {
