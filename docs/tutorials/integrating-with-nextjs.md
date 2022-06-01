@@ -55,13 +55,13 @@ function CustomEls({ URL }) {
       return;
     }
 
-    import("@shoelace-style/shoelace/dist/utilities/base-path").then(({setBasePath}) => {
+    import('@shoelace-style/shoelace/dist/utilities/base-path').then(({ setBasePath }) => {
       setBasePath(`${URL}/static/static`);
 
       // This imports all components
-      import("@shoelace-style/shoelace/dist/shoelace");
+      import('@shoelace-style/shoelace/dist/shoelace');
       // If you're wanting to selectively import components, replace this line with your own definitions
-      
+
       // import("@shoelace-style/shoelace/dist/components/button/button");
       customEls.current = true;
     });
@@ -122,9 +122,9 @@ Next we need to add Shoelace's assets to the final build output. To do this, mod
 ```javascript
 import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
-import CopyPlugin from "copy-webpack-plugin";
+import CopyPlugin from 'copy-webpack-plugin';
 import withPlugins from 'next-compose-plugins';
-import withTM from 'next-transpile-modules'
+import withTM from 'next-transpile-modules';
 
 const withTMCompiled = withTM(['@shoelace-style/shoelace']);
 
@@ -133,22 +133,19 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 export default withPlugins([withTMCompiled], {
   // This is required for ESM to work properly with Shoelace
   experimental: { esmExternals: 'loose' },
-  webpack: (config) => {
+  webpack: config => {
     config.plugins.push(
       new CopyPlugin({
         patterns: [
           {
-            from: resolve(
-              __dirname,
-              "node_modules/@shoelace-style/shoelace/dist/assets/icons"
-            ),
-            to: resolve(__dirname, "static/icons"),
-          },
-        ],
+            from: resolve(__dirname, 'node_modules/@shoelace-style/shoelace/dist/assets/icons'),
+            to: resolve(__dirname, 'static/icons')
+          }
+        ]
       })
     );
     return config;
-  },
+  }
 });
 ```
 
