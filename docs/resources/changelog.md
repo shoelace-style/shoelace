@@ -11,6 +11,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed focus rings for `<sl-input>`, `<sl-select>`, and `<sl-textarea>` in Safari since they don't use `:focus-visible` [#767](https://github.com/shoelace-style/shoelace/issues/767)
 - Fixed a bug where calling `HTMLFormElement.reportValidity()` would skip Shoelace form controls [#772](https://github.com/shoelace-style/shoelace/issues/772)
 - Improved the default icon for `<sl-image-comparer>` so it's more intuitive and removed `grip-vertical` from system icon library
+- Improved RTL styles for many components [#768](https://github.com/shoelace-style/shoelace/pull/768)
 - Revert menu item caching due to regression [#766](https://github.com/shoelace-style/shoelace/issues/766)
 
 ## 2.0.0-beta.74
