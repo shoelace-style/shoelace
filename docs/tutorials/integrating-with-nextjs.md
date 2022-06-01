@@ -8,8 +8,9 @@ This page explains how to integrate Shoelace with a NextJS app.
 
 This integration has been tested with the following:
 
-- Node >= 12.10
-- NextJS >= 10.0.5
+- Node: 16.13.1
+- NextJS: 12.1.6
+- Shoelace: 2.0.0-beta.74
 
 ## Instructions
 
@@ -18,6 +19,17 @@ To get started using Shoelace with NextJS, the following packages must be instal
 ```bash
 yarn add @shoelace-style/shoelace @shoelace-style/shoelace copy-webpack-plugin next-compose-plugins next-transpile-modules
 ```
+
+### Enabling ESM
+
+Because Shoelace utilizes ESM, we need to modify our `package.json` to support ESM packages. Simply add the following to
+your root of `package.json`:
+
+```
+"type": "module"
+```
+
+There's one more step to enable ESM in NextJS, but we'll tackle that in our Next configuration modification.
 
 ### Importing the Default Theme
 
@@ -43,17 +55,16 @@ function CustomEls({ URL }) {
       return;
     }
 
-    const { setBasePath } = require('@shoelace-style/shoelace/dist/utilities/base-path');
+    import("@shoelace-style/shoelace/dist/utilities/base-path").then(({setBasePath}) => {
+      setBasePath(`${URL}/static/static`);
 
-    setBasePath(`${URL}/static/static`);
-
-    // This imports all components
-    require('@shoelace-style/shoelace/dist/shoelace');
-
-    // If you want to selectively import components, replace this line with your own definitions
-    // require('@shoelace-style/shoelace/dist/components/button/button');
-
-    customEls.current = true;
+      // This imports all components
+      import("@shoelace-style/shoelace/dist/shoelace");
+      // If you're wanting to selectively import components, replace this line with your own definitions
+      
+      // import("@shoelace-style/shoelace/dist/components/button/button");
+      customEls.current = true;
+    });
   }, [URL, customEls]);
 
   return null;
@@ -72,9 +83,10 @@ While we need to use `useLayoutEffect` for the initial render, NextJS will throw
 
 ```javascript
 function MyApp({ Component, pageProps, URL }) {
+  const isBrowser = typeof window !== 'undefined';
   return (
     <>
-      {process.browser && <CustomEls URL={URL} />}
+      {isBrowser && <CustomEls URL={URL} />}
       <Component {...pageProps} />
     </>
   );
@@ -108,25 +120,35 @@ MyApp.getInitialProps = async context => {
 Next we need to add Shoelace's assets to the final build output. To do this, modify `next.config.js` to look like this.
 
 ```javascript
-const path = require('path');
-const CopyPlugin = require('copy-webpack-plugin');
-const withPlugins = require('next-compose-plugins');
-const withTM = require('next-transpile-modules')(['@shoelace-style/shoelace']);
+import { dirname, resolve } from 'path';
+import { fileURLToPath } from 'url';
+import CopyPlugin from "copy-webpack-plugin";
+import withPlugins from 'next-compose-plugins';
+import withTM from 'next-transpile-modules'
 
-module.exports = withPlugins([withTM], {
-  webpack: config => {
+const withTMCompiled = withTM(['@shoelace-style/shoelace']);
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+export default withPlugins([withTMCompiled], {
+  // This is required for ESM to work properly with Shoelace
+  experimental: { esmExternals: 'loose' },
+  webpack: (config) => {
     config.plugins.push(
       new CopyPlugin({
         patterns: [
           {
-            from: path.resolve(__dirname, 'node_modules/@shoelace-style/shoelace/dist/assets/icons'),
-            to: path.resolve(__dirname, 'static/icons')
-          }
-        ]
+            from: resolve(
+              __dirname,
+              "node_modules/@shoelace-style/shoelace/dist/assets/icons"
+            ),
+            to: resolve(__dirname, "static/icons"),
+          },
+        ],
       })
     );
     return config;
-  }
+  },
 });
 ```
 
