@@ -2,7 +2,7 @@ import './formdata-event-polyfill';
 import type SlButton from '../components/button/button';
 import type { ReactiveController, ReactiveControllerHost } from 'lit';
 
-const formOverloads: WeakMap<HTMLFormElement, () => boolean> = new WeakMap();
+const reportValidityOverloads: WeakMap<HTMLFormElement, () => boolean> = new WeakMap();
 
 export interface FormSubmitControllerOptions {
   /** A function that returns the form containing the form control. */
@@ -50,8 +50,8 @@ export class FormSubmitController implements ReactiveController {
       this.form.addEventListener('submit', this.handleFormSubmit);
 
       // Overload the form's reportValidity() method so it looks at Shoelace form controls
-      if (!formOverloads.has(this.form)) {
-        formOverloads.set(this.form, this.form.reportValidity);
+      if (!reportValidityOverloads.has(this.form)) {
+        reportValidityOverloads.set(this.form, this.form.reportValidity);
         this.form.reportValidity = () => this.reportFormValidity();
       }
     }
@@ -63,9 +63,9 @@ export class FormSubmitController implements ReactiveController {
       this.form.removeEventListener('submit', this.handleFormSubmit);
 
       // Remove the overload and restore the original method
-      if (formOverloads.has(this.form)) {
-        this.form.reportValidity = formOverloads.get(this.form)!;
-        formOverloads.delete(this.form);
+      if (reportValidityOverloads.has(this.form)) {
+        this.form.reportValidity = reportValidityOverloads.get(this.form)!;
+        reportValidityOverloads.delete(this.form);
       }
 
       this.form = undefined;
