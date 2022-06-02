@@ -3,7 +3,7 @@ import type { Translation } from '../utilities/localize';
 
 const translation: Translation = {
   $code: 'fa',
-  $name: 'Persian',
+  $name: 'فارسی',
   $dir: 'rtl',
 
   clearEntry: 'پاک کردن ورودی',
