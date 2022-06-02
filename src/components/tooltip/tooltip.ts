@@ -209,11 +209,7 @@ export default class SlTooltip extends LitElement {
 
   @watch('open', { waitUntilFirstUpdate: true })
   async handleOpenChange() {
-    if (this.disabled) {
-      return;
-    }
-
-    if (this.open) {
+    if (this.open && !this.disabled) {
       // Show
       emit(this, 'sl-show');
 
