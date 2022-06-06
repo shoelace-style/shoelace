@@ -6,7 +6,7 @@ const translation: Translation = {
   $name: 'Deutsch',
   $dir: 'ltr',
 
-  clearEntry: 'Klarer Eintrag',
+  clearEntry: 'Eingabe löschen',
   close: 'Schließen',
   copy: 'Kopieren',
   currentValue: 'Aktueller Wert',
