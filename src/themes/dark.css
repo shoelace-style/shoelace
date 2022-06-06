@@ -1,5 +1,7 @@
 :host,
 .sl-theme-dark {
+  color-scheme: dark;
+
   /*
    * Color Primitives
    */

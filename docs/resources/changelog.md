@@ -9,6 +9,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 ## Next
 
 - Added Persian translation [#774](https://github.com/shoelace-style/shoelace/pull/774)
+- Added `color-scheme` to light and dark themes to improve rendering of browser-provided UI [#776](https://github.com/shoelace-style/shoelace/issues/776)
 - Fixed focus rings for `<sl-input>`, `<sl-select>`, and `<sl-textarea>` in Safari since they don't use `:focus-visible` [#767](https://github.com/shoelace-style/shoelace/issues/767)
 - Fixed a bug where calling `HTMLFormElement.reportValidity()` would skip Shoelace form controls [#772](https://github.com/shoelace-style/shoelace/issues/772)
 - Fixed a bug that prevented `<sl-tooltip>` from closing when disabled [#775](https://github.com/shoelace-style/shoelace/issues/775)
