@@ -7,6 +7,7 @@ import { emit } from '../../internal/event';
 import { FormSubmitController } from '../../internal/form';
 import { HasSlotController } from '../../internal/slot';
 import { watch } from '../../internal/watch';
+import { LocalizeController } from '../../utilities/localize';
 import styles from './range.styles';
 
 /**
@@ -44,6 +45,7 @@ export default class SlRange extends LitElement {
   // @ts-expect-error -- Controller is currently unused
   private readonly formSubmitController = new FormSubmitController(this);
   private readonly hasSlotController = new HasSlotController(this, 'help-text', 'label');
+  private readonly localize = new LocalizeController(this);
   private resizeObserver: ResizeObserver;
 
   @state() private hasFocus = false;
@@ -193,10 +195,19 @@ export default class SlRange extends LitElement {
       const inputWidth = this.input.offsetWidth;
       const tooltipWidth = this.output.offsetWidth;
       const thumbSize = getComputedStyle(this.input).getPropertyValue('--thumb-size');
-      const x = `calc(${inputWidth * percent}px - calc(calc(${percent} * ${thumbSize}) - calc(${thumbSize} / 2)))`;
+      const isRtl = this.localize.dir() === 'rtl';
+      const percentAsWidth = inputWidth * percent;
 
-      this.output.style.transform = `translateX(${x})`;
-      this.output.style.marginLeft = `-${tooltipWidth / 2}px`;
+      // The calculations are used to "guess" where the thumb is located. Since we're using the native range control
+      // under the hood, we don't have access to the thumb's true coordinates. These measurements can be a pixel or two
+      // off depending on the size of the control, thumb, and tooltip dimensions.
+      if (isRtl) {
+        const x = `${inputWidth - percentAsWidth}px + ${percent} * ${thumbSize}`;
+        this.output.style.transform = `translateX(calc((${x} - ${tooltipWidth / 2}px - ${thumbSize} / 2)))`;
+      } else {
+        const x = `${percentAsWidth}px - ${percent} * ${thumbSize}`;
+        this.output.style.transform = `translateX(calc(${x} - ${tooltipWidth / 2}px + ${thumbSize} / 2))`;
+      }
     }
   }
 
