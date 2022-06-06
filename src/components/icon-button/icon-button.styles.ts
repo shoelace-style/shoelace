@@ -46,4 +46,8 @@ export default css`
     outline: var(--sl-focus-ring);
     outline-offset: var(--sl-focus-ring-offset);
   }
+
+  .icon-button__icon {
+    pointer-events: none;
+  }
 `;

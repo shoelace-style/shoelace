@@ -113,6 +113,7 @@ export default class SlIconButton extends LitElement {
         @click=${this.handleClick}
       >
         <sl-icon
+          class="icon-button__icon"
           name=${ifDefined(this.name)}
           library=${ifDefined(this.library)}
           src=${ifDefined(this.src)}
