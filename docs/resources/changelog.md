@@ -18,7 +18,8 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Improved RTL styles for many components [#768](https://github.com/shoelace-style/shoelace/pull/768)
 - Improved base path logic to execute only when `getBasePath()` is first called to better support SSR [#778](https://github.com/shoelace-style/shoelace/issues/778)
 - Improved `DOMParser` instantiation in `<sl-icon>` to better support SSR [#778](https://github.com/shoelace-style/shoelace/issues/778)
-- Revert menu item caching due to regression [#766](https://github.com/shoelace-style/shoelace/issues/766)
+- Reverted menu item caching due to regression [#766](https://github.com/shoelace-style/shoelace/issues/766)
+- Updated Floating UI to 0.5.2
 
 ## 2.0.0-beta.74
 
