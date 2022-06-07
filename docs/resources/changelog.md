@@ -16,6 +16,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug that allowed `<sl-icon-button>` to emit a `click` event when disabled [#781](https://github.com/shoelace-style/shoelace/issues/781)
 - Improved the default icon for `<sl-image-comparer>` so it's more intuitive and removed `grip-vertical` from system icon library
 - Improved RTL styles for many components [#768](https://github.com/shoelace-style/shoelace/pull/768)
+- Improved base path logic to execute only when `getBasePath()` is first called to better support SSR [#778](https://github.com/shoelace-style/shoelace/issues/778)
 - Revert menu item caching due to regression [#766](https://github.com/shoelace-style/shoelace/issues/766)
 
 ## 2.0.0-beta.74
