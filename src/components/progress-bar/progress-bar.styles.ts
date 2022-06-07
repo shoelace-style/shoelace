@@ -45,12 +45,12 @@ export default css`
 
   @keyframes indeterminate {
     0% {
-      left: -50%;
+      inset-inline-start: -50%;
       width: 50%;
     }
     75%,
     100% {
-      left: 100%;
+      inset-inline-start: 100%;
       width: 50%;
     }
   }
