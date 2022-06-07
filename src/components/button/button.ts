@@ -7,6 +7,7 @@ import '../../components/spinner/spinner';
 import { emit } from '../../internal/event';
 import { FormSubmitController } from '../../internal/form';
 import { HasSlotController } from '../../internal/slot';
+import { LocalizeController } from '../../utilities/localize';
 import styles from './button.styles';
 
 /**
@@ -49,6 +50,7 @@ export default class SlButton extends LitElement {
     }
   });
   private readonly hasSlotController = new HasSlotController(this, '[default]', 'prefix', 'suffix');
+  private readonly localize = new LocalizeController(this);
 
   @state() private hasFocus = false;
 
@@ -181,6 +183,7 @@ export default class SlButton extends LitElement {
           'button--standard': !this.outline,
           'button--outline': this.outline,
           'button--pill': this.pill,
+          'button--rtl': this.localize.dir() === 'rtl',
           'button--has-label': this.hasSlotController.test('[default]'),
           'button--has-prefix': this.hasSlotController.test('prefix'),
           'button--has-suffix': this.hasSlotController.test('suffix')

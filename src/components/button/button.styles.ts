@@ -456,6 +456,12 @@ export default css`
     pointer-events: none;
   }
 
+  .button--rtl ::slotted(sl-badge) {
+    right: auto;
+    left: 0;
+    transform: translateY(-50%) translateX(-50%);
+  }
+
   /*
    * Button spacing
    */
