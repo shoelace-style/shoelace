@@ -34,6 +34,7 @@ import type SlTab from '../../components/tab/tab';
  *
  * @cssproperty --indicator-color - The color of the active tab indicator.
  * @cssproperty --track-color - The color of the indicator's track (i.e. the line that separates tabs from panels).
+ * @cssproperty --track-width - The width of the indicator's track (the line that separates tabs from panels).
  */
 @customElement('sl-tab-group')
 export default class SlTabGroup extends LitElement {
@@ -305,6 +306,7 @@ export default class SlTabGroup extends LitElement {
 
     const width = currentTab.clientWidth;
     const height = currentTab.clientHeight;
+    const isRtl = this.localize.dir() === 'rtl';
 
     // We can't used offsetLeft/offsetTop here due to a shadow parent issue where neither can getBoundingClientRect
     // because it provides invalid values for animating elements: https://bugs.chromium.org/p/chromium/issues/detail?id=920069
@@ -323,7 +325,7 @@ export default class SlTabGroup extends LitElement {
       case 'bottom':
         this.indicator.style.width = `${width}px`;
         this.indicator.style.height = 'auto';
-        this.indicator.style.transform = `translateX(${offset.left}px)`;
+        this.indicator.style.transform = isRtl ? `translateX(${-1 * offset.left}px)` : `translateX(${offset.left}px)`;
         break;
 
       case 'start':
@@ -363,6 +365,7 @@ export default class SlTabGroup extends LitElement {
           'tab-group--bottom': this.placement === 'bottom',
           'tab-group--start': this.placement === 'start',
           'tab-group--end': this.placement === 'end',
+          'tab-group--rtl': this.localize.dir() === 'rtl',
           'tab-group--has-scroll-controls': this.hasScrollControls
         })}
         @click=${this.handleClick}
