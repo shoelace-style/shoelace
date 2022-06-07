@@ -8,7 +8,7 @@ import styles from './icon.styles';
 import { getIconLibrary, unwatchIcon, watchIcon } from './library';
 import { requestIcon } from './request';
 
-const parser = new DOMParser();
+let parser: DOMParser;
 
 /**
  * @since 2.0
@@ -74,6 +74,13 @@ export default class SlIcon extends LitElement {
   async setIcon() {
     const library = getIconLibrary(this.library);
     const url = this.getUrl();
+
+    // Create an instance of the DOM parser. We do it here instead of top-level to support SSR while maintaining a
+    // single parser instance for optimal performance.
+    if (!parser) {
+      parser = new DOMParser();
+    }
+
     if (url) {
       try {
         const file = await requestIcon(url);
