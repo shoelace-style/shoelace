@@ -51,6 +51,16 @@ export default css`
     right: 0;
   }
 
+  .tab-group--rtl .tab-group__scroll-button--start {
+    left: auto;
+    right: 0;
+  }
+
+  .tab-group--rtl .tab-group__scroll-button--end {
+    left: 0;
+    right: auto;
+  }
+
   /*
    * Top
    */

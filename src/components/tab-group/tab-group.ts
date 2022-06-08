@@ -176,6 +176,7 @@ export default class SlTabGroup extends LitElement {
     // Move focus left or right
     if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) {
       const activeEl = document.activeElement;
+      const isRtl = this.localize.dir() === 'rtl';
 
       if (activeEl?.tagName.toLowerCase() === 'sl-tab') {
         let index = this.tabs.indexOf(activeEl as SlTab);
@@ -185,12 +186,12 @@ export default class SlTabGroup extends LitElement {
         } else if (event.key === 'End') {
           index = this.tabs.length - 1;
         } else if (
-          (['top', 'bottom'].includes(this.placement) && event.key === 'ArrowLeft') ||
+          (['top', 'bottom'].includes(this.placement) && event.key === (isRtl ? 'ArrowRight' : 'ArrowLeft')) ||
           (['start', 'end'].includes(this.placement) && event.key === 'ArrowUp')
         ) {
           index--;
         } else if (
-          (['top', 'bottom'].includes(this.placement) && event.key === 'ArrowRight') ||
+          (['top', 'bottom'].includes(this.placement) && event.key === (isRtl ? 'ArrowLeft' : 'ArrowRight')) ||
           (['start', 'end'].includes(this.placement) && event.key === 'ArrowDown')
         ) {
           index++;
@@ -221,14 +222,20 @@ export default class SlTabGroup extends LitElement {
 
   handleScrollToStart() {
     this.nav.scroll({
-      left: this.nav.scrollLeft - this.nav.clientWidth,
+      left:
+        this.localize.dir() === 'rtl'
+          ? this.nav.scrollLeft + this.nav.clientWidth
+          : this.nav.scrollLeft - this.nav.clientWidth,
       behavior: 'smooth'
     });
   }
 
   handleScrollToEnd() {
     this.nav.scroll({
-      left: this.nav.scrollLeft + this.nav.clientWidth,
+      left:
+        this.localize.dir() === 'rtl'
+          ? this.nav.scrollLeft - this.nav.clientWidth
+          : this.nav.scrollLeft + this.nav.clientWidth,
       behavior: 'smooth'
     });
   }
@@ -356,6 +363,8 @@ export default class SlTabGroup extends LitElement {
   }
 
   render() {
+    const isRtl = this.localize.dir() === 'rtl';
+
     return html`
       <div
         part="base"
@@ -378,7 +387,7 @@ export default class SlTabGroup extends LitElement {
                   part="scroll-button scroll-button--start"
                   exportparts="base:scroll-button__base"
                   class="tab-group__scroll-button tab-group__scroll-button--start"
-                  name="chevron-left"
+                  name=${isRtl ? 'chevron-right' : 'chevron-left'}
                   library="system"
                   label=${this.localize.term('scrollToStart')}
                   @click=${this.handleScrollToStart}
@@ -399,7 +408,7 @@ export default class SlTabGroup extends LitElement {
                   part="scroll-button scroll-button--end"
                   exportparts="base:scroll-button__base"
                   class="tab-group__scroll-button tab-group__scroll-button--end"
-                  name="chevron-right"
+                  name=${isRtl ? 'chevron-left' : 'chevron-right'}
                   library="system"
                   label=${this.localize.term('scrollToEnd')}
                   @click=${this.handleScrollToEnd}

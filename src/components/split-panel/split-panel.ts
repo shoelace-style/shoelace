@@ -101,6 +101,8 @@ export default class SlSplitPanel extends LitElement {
   }
 
   handleDrag(event: PointerEvent) {
+    const isRtl = this.localize.dir() === 'rtl';
+
     if (this.disabled) {
       return;
     }
@@ -128,6 +130,10 @@ export default class SlSplitPanel extends LitElement {
               snapPoint = this.size * (parseFloat(value) / 100);
             } else {
               snapPoint = parseFloat(value);
+            }
+
+            if (isRtl && !this.vertical) {
+              snapPoint = this.size - snapPoint;
             }
 
             if (
@@ -206,6 +212,7 @@ export default class SlSplitPanel extends LitElement {
   render() {
     const gridTemplate = this.vertical ? 'gridTemplateRows' : 'gridTemplateColumns';
     const gridTemplateAlt = this.vertical ? 'gridTemplateColumns' : 'gridTemplateRows';
+    const isRtl = this.localize.dir() === 'rtl';
     const primary = `
       clamp(
         0%,
@@ -220,9 +227,17 @@ export default class SlSplitPanel extends LitElement {
     const secondary = 'auto';
 
     if (this.primary === 'end') {
-      this.style[gridTemplate] = `${secondary} var(--divider-width) ${primary}`;
+      if (isRtl && !this.vertical) {
+        this.style[gridTemplate] = `${primary} var(--divider-width) ${secondary}`;
+      } else {
+        this.style[gridTemplate] = `${secondary} var(--divider-width) ${primary}`;
+      }
     } else {
-      this.style[gridTemplate] = `${primary} var(--divider-width) ${secondary}`;
+      if (isRtl && !this.vertical) {
+        this.style[gridTemplate] = `${secondary} var(--divider-width) ${primary}`;
+      } else {
+        this.style[gridTemplate] = `${primary} var(--divider-width) ${secondary}`;
+      }
     }
 
     // Unset the alt grid template property
