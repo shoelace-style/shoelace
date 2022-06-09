@@ -11,7 +11,7 @@
 .sl-toast-stack {
   position: fixed;
   top: 0;
-  right: 0;
+  inset-inline-end: 0;
   z-index: var(--sl-z-index-toast);
   width: 28rem;
   max-width: 100%;
