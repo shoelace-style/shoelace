@@ -6,6 +6,10 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
+## Next
+
+- Improved RTL styles for `<sl-button-group>` [#783](https://github.com/shoelace-style/shoelace/issues/783)
+
 ## 2.0.0-beta.75
 
 - Added Persian translation [#774](https://github.com/shoelace-style/shoelace/pull/774)
