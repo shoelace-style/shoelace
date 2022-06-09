@@ -8,6 +8,7 @@ import { scrollIntoView } from '../../internal/scroll';
 import { getTabbableBoundary } from '../../internal/tabbable';
 import { watch } from '../../internal/watch';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
+import { LocalizeController } from '../../utilities/localize';
 import styles from './dropdown.styles';
 import type SlButton from '../../components/button/button';
 import type SlIconButton from '../../components/icon-button/icon-button';
@@ -41,6 +42,7 @@ export default class SlDropdown extends LitElement {
   @query('.dropdown__panel') panel: HTMLElement;
   @query('.dropdown__positioner') positioner: HTMLElement;
 
+  private readonly localize = new LocalizeController(this);
   private positionerCleanup: ReturnType<typeof autoUpdate> | undefined;
 
   /** Indicates whether or not the dropdown is open. You can use this in lieu of the show/hide methods. */
@@ -371,7 +373,7 @@ export default class SlDropdown extends LitElement {
       await stopAnimations(this);
       this.startPositioner();
       this.panel.hidden = false;
-      const { keyframes, options } = getAnimation(this, 'dropdown.show');
+      const { keyframes, options } = getAnimation(this, 'dropdown.show', { dir: this.localize.dir() });
       await animateTo(this.panel, keyframes, options);
 
       emit(this, 'sl-after-show');
@@ -381,7 +383,7 @@ export default class SlDropdown extends LitElement {
       this.removeOpenListeners();
 
       await stopAnimations(this);
-      const { keyframes, options } = getAnimation(this, 'dropdown.hide');
+      const { keyframes, options } = getAnimation(this, 'dropdown.hide', { dir: this.localize.dir() });
       await animateTo(this.panel, keyframes, options);
       this.panel.hidden = true;
       this.stopPositioner();

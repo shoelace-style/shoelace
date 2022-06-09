@@ -129,7 +129,7 @@ export default class SlDialog extends LitElement {
     });
 
     if (slRequestClose.defaultPrevented) {
-      const animation = getAnimation(this, 'dialog.denyClose');
+      const animation = getAnimation(this, 'dialog.denyClose', { dir: this.localize.dir() });
       animateTo(this.panel, animation.keyframes, animation.options);
       return;
     }
@@ -187,8 +187,8 @@ export default class SlDialog extends LitElement {
         }
       });
 
-      const panelAnimation = getAnimation(this, 'dialog.show');
-      const overlayAnimation = getAnimation(this, 'dialog.overlay.show');
+      const panelAnimation = getAnimation(this, 'dialog.show', { dir: this.localize.dir() });
+      const overlayAnimation = getAnimation(this, 'dialog.overlay.show', { dir: this.localize.dir() });
       await Promise.all([
         animateTo(this.panel, panelAnimation.keyframes, panelAnimation.options),
         animateTo(this.overlay, overlayAnimation.keyframes, overlayAnimation.options)
@@ -201,8 +201,8 @@ export default class SlDialog extends LitElement {
       this.modal.deactivate();
 
       await Promise.all([stopAnimations(this.dialog), stopAnimations(this.overlay)]);
-      const panelAnimation = getAnimation(this, 'dialog.hide');
-      const overlayAnimation = getAnimation(this, 'dialog.overlay.hide');
+      const panelAnimation = getAnimation(this, 'dialog.hide', { dir: this.localize.dir() });
+      const overlayAnimation = getAnimation(this, 'dialog.overlay.hide', { dir: this.localize.dir() });
       await Promise.all([
         animateTo(this.panel, panelAnimation.keyframes, panelAnimation.options),
         animateTo(this.overlay, overlayAnimation.keyframes, overlayAnimation.options)

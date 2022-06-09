@@ -7,6 +7,7 @@ import { emit, waitForEvent } from '../../internal/event';
 import { HasSlotController } from '../../internal/slot';
 import { watch } from '../../internal/watch';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
+import { LocalizeController } from '../../utilities/localize';
 import styles from './alert.styles';
 
 const toastStack = Object.assign(document.createElement('div'), { className: 'sl-toast-stack' });
@@ -43,6 +44,7 @@ export default class SlAlert extends LitElement {
 
   private autoHideTimeout: number;
   private readonly hasSlotController = new HasSlotController(this, 'icon', 'suffix');
+  private readonly localize = new LocalizeController(this);
 
   @query('[part="base"]') base: HTMLElement;
 
@@ -148,7 +150,7 @@ export default class SlAlert extends LitElement {
 
       await stopAnimations(this.base);
       this.base.hidden = false;
-      const { keyframes, options } = getAnimation(this, 'alert.show');
+      const { keyframes, options } = getAnimation(this, 'alert.show', { dir: this.localize.dir() });
       await animateTo(this.base, keyframes, options);
 
       emit(this, 'sl-after-show');
@@ -159,7 +161,7 @@ export default class SlAlert extends LitElement {
       clearTimeout(this.autoHideTimeout);
 
       await stopAnimations(this.base);
-      const { keyframes, options } = getAnimation(this, 'alert.hide');
+      const { keyframes, options } = getAnimation(this, 'alert.hide', { dir: this.localize.dir() });
       await animateTo(this.base, keyframes, options);
       this.base.hidden = true;
 

@@ -108,7 +108,7 @@ Not all components expose CSS custom properties. For those that do, they can be 
 
 Some components use animation, such as when a dialog is shown or hidden. Animations are performed using the [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API) rather than CSS. However, you can still customize them through Shoelace's animation registry. If a component has customizable animations, they'll be listed in the "Animation" section of its documentation.
 
-To customize a default animation, use the `setDefaultAnimation()` method. The function accepts an animation name (found in the component's docs) and an object with `keyframes` and `options` or `null` to disable the animation.
+To customize a default animation, use the `setDefaultAnimation()` method. The function accepts an animation name (found in the component's docs) and an object with `keyframes`, and `options` or `null` to disable the animation.
 
 This example will make all dialogs use a custom show animation.
 
@@ -126,6 +126,8 @@ setDefaultAnimation('dialog.show', {
   }
 });
 ```
+
+?> To support RTL languages in your animation, you can pass an additional property called `rtlKeyframes`. This property shares the same type as `keyframes` and will be automatically used when the component's directionality is RTL. If `rtlKeyframes` is not provided, `keyframes` will be used as a fallback.
 
 If you only want to target a single component, use the `setAnimation()` method instead. This function accepts an element, an animation name, and an object comprised of animation `keyframes` and `options`.
 
