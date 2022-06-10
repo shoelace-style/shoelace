@@ -14,7 +14,6 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Improved RTL styles for `<sl-button-group>` [#783](https://github.com/shoelace-style/shoelace/issues/783)
 - Improved RTL styles for the toast stack [#785](https://github.com/shoelace-style/shoelace/issues/785)
 - Improved typings for translations and localized terms
-- Improved the `FormData` event polyfill to use simpler detection logic
 - Upgraded @shoelace-style/localize to 3.0
 
 ## 2.0.0-beta.75
