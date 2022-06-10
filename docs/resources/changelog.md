@@ -13,6 +13,8 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Improved RTL animations for `<sl-drawer>` [#784](https://github.com/shoelace-style/shoelace/issues/784)
 - Improved RTL styles for `<sl-button-group>` [#783](https://github.com/shoelace-style/shoelace/issues/783)
 - Improved RTL styles for the toast stack [#785](https://github.com/shoelace-style/shoelace/issues/785)
+- Improved typings for translations and localized terms
+- Upgraded @shoelace-style/localize to 3.0
 
 ## 2.0.0-beta.75
 
