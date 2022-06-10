@@ -34,6 +34,16 @@ export default css`
     overflow: auto;
   }
 
+  .select__menu::part(base) {
+    border: none;
+  }
+
+  .select::part(panel) {
+    background: var(--sl-panel-background-color);
+    border: solid var(--sl-panel-border-width) var(--sl-panel-border-color);
+    border-radius: var(--sl-border-radius-medium);
+  }
+
   /* Standard selects */
   .select--standard .select__control {
     background-color: var(--sl-input-background-color);
