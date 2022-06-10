@@ -69,26 +69,8 @@ class FormDataPolyfill extends FormData {
   }
 }
 
-function supportsFormDataEvent() {
-  const form = document.createElement('form');
-  let isSupported = false;
-
-  document.body.append(form);
-
-  form.addEventListener('submit', event => {
-    new FormData(event.target as HTMLFormElement);
-    event.preventDefault();
-  });
-
-  form.addEventListener('formdata', () => (isSupported = true));
-  form.dispatchEvent(new Event('submit', { cancelable: true }));
-  form.remove();
-
-  return isSupported;
-}
-
 function polyfillFormData() {
-  if (!window.FormData || supportsFormDataEvent()) {
+  if (!window.FormData || !('FormDataEvent' in window)) {
     return;
   }
 
