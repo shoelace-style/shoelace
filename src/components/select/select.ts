@@ -364,7 +364,7 @@ export default class SlSelect extends LitElement {
 
   resizeMenu() {
     this.menu.style.width = `${this.control.clientWidth}px`;
-    this.dropdown.reposition();
+    requestAnimationFrame(() => this.dropdown.reposition());
   }
 
   syncItemsFromValue() {
