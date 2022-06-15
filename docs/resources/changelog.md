@@ -6,7 +6,7 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
-## Next
+## 2.0.0-beta.76
 
 - Added support for RTL animations in the Animation Registry
 - Fixed a bug where the bottom border of `<sl-select>` could be cut off when the dropdown scrolls
