@@ -451,4 +451,7 @@ declare global {
   interface HTMLElementTagNameMap {
     'sl-input': SlInput;
   }
+  interface Window {
+    InstallTrigger: unknown;
+  }
 }
