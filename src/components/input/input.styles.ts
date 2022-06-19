@@ -280,4 +280,9 @@ export default css`
   ::-ms-reveal {
     display: none;
   }
+
+  /* Don't show the firefox clear icon in Firefox */
+  .hide-firefox-clear-icon {
+    clip-path: inset(0 2em 0 0);
+  }
 `;
