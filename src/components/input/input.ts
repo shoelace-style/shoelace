@@ -299,7 +299,8 @@ export default class SlInput extends LitElement {
     const hasHelpTextSlot = this.hasSlotController.test('help-text');
     const hasLabel = this.label ? true : !!hasLabelSlot;
     const hasHelpText = this.helpText ? true : !!hasHelpTextSlot;
-    const hasClearIcon = this.clearable && !this.disabled && !this.readonly && this.value.length > 0;
+    const hasClearIcon =
+      this.clearable && !this.disabled && !this.readonly && (typeof this.value === 'number' || this.value.length > 0);
 
     return html`
       <div
