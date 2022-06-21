@@ -6,6 +6,13 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
+## Next
+
+- Added styles to required form controls so they show an asterisk next to the label by default
+- Added the `--sl-input-required-content` design token
+- Added the `required` attribute to `<sl-radio-group>` and fixed constraint validation logic to support custom validation
+- Updated the `fieldset` attribute so it reflects in `<sl-radio-group>`
+
 ## 2.0.0-beta.76
 
 - Added support for RTL animations in the Animation Registry
