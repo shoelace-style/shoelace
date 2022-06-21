@@ -3,6 +3,7 @@ import buttonStyles from '../button/button.styles';
 
 export default css`
   ${buttonStyles}
+
   label {
     display: inline-block;
     position: relative;

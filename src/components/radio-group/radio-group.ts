@@ -33,7 +33,10 @@ export default class SlRadioGroup extends LitElement {
   @property() label = '';
 
   /** Shows the fieldset and legend that surrounds the radio group. */
-  @property({ type: Boolean, attribute: 'fieldset' }) fieldset = false;
+  @property({ type: Boolean, attribute: 'fieldset', reflect: true }) fieldset = false;
+
+  /** Ensures a child radio is checked before allowing the containing form to submit. */
+  @property({ type: Boolean, reflect: true }) required = false;
 
   connectedCallback() {
     super.connectedCallback();
@@ -89,7 +92,7 @@ export default class SlRadioGroup extends LitElement {
     const radios = this.getAllRadios();
     const checkedRadio = radios.find(radio => radio.checked);
 
-    this.hasButtonGroup = !!radios.find(radio => radio.tagName.toLowerCase() === 'sl-radio-button');
+    this.hasButtonGroup = radios.some(radio => radio.tagName.toLowerCase() === 'sl-radio-button');
 
     radios.forEach(radio => {
       radio.setAttribute('role', 'radio');
@@ -113,7 +116,8 @@ export default class SlRadioGroup extends LitElement {
         part="base"
         class=${classMap({
           'radio-group': true,
-          'radio-group--has-fieldset': this.fieldset
+          'radio-group--has-fieldset': this.fieldset,
+          'radio-group--required': this.required
         })}
       >
         <legend part="label" class="radio-group__label">

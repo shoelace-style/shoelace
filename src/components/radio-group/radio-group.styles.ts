@@ -44,4 +44,9 @@ export default css`
     overflow: hidden;
     white-space: nowrap;
   }
+
+  .radio-group--required .radio-group__label::after {
+    content: var(--sl-input-required-content);
+    margin-inline-start: -2px;
+  }
 `;
