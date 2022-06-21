@@ -74,8 +74,37 @@ export default class SlRadio extends LitElement {
   }
 
   /** Checks for validity and shows the browser's validation message if the control is invalid. */
-  reportValidity() {
-    return this.input.reportValidity();
+  reportValidity(): boolean {
+    const group = this.closest('sl-radio-group');
+    const allRadios = group?.getAllRadios().filter(radio => !radio.disabled);
+    const isRequired = group?.required;
+    const isChecked = allRadios?.some(radio => radio.checked);
+    const internalRadio = (radio: SlRadio): HTMLInputElement =>
+      radio.shadowRoot!.querySelector<HTMLInputElement>('input[type="radio"]')!;
+
+    // If no radio group or radios are found, skip validation
+    if (!group || !allRadios) {
+      return true;
+    }
+
+    // If the radio group is required but no radios are checked, mark the first internal radio required and report it
+    if (isRequired && !isChecked) {
+      const radio = internalRadio(allRadios[0]);
+      radio.required = true;
+      return radio.reportValidity();
+    }
+
+    // Reset the required state of all internal radios so we can accurately report custom validation messages
+    allRadios.forEach(radio => (internalRadio(radio).required = false));
+
+    // Report custom validation errors
+    for (const radio of allRadios) {
+      if (!internalRadio(radio).reportValidity()) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
   /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
