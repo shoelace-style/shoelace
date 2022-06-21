@@ -103,4 +103,9 @@ export default css`
     margin-inline-start: 0.5em;
     user-select: none;
   }
+
+  :host([required]) .checkbox__label::after {
+    content: var(--sl-input-required-content);
+    margin-inline-start: var(--sl-input-required-content-offset);
+  }
 `;
