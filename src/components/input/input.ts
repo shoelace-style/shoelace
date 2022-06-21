@@ -301,8 +301,6 @@ export default class SlInput extends LitElement {
     const hasHelpText = this.helpText ? true : !!hasHelpTextSlot;
     const hasClearIcon =
       this.clearable && !this.disabled && !this.readonly && (typeof this.value === 'number' || this.value.length > 0);
-    const isFirefox = typeof window.InstallTrigger !== 'undefined';
-    const hideFirefoxClearIcon = isFirefox && (this.type === 'date' || this.type === 'time');
 
     return html`
       <div
@@ -359,10 +357,7 @@ export default class SlInput extends LitElement {
             <input
               part="input"
               id="input"
-              class="${classMap({
-                input__control: true,
-                'hide-firefox-clear-icon': hideFirefoxClearIcon
-              })}"
+              class="input__control"
               type=${this.type === 'password' && this.isPasswordVisible ? 'text' : this.type}
               name=${ifDefined(this.name)}
               ?disabled=${this.disabled}
