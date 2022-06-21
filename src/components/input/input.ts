@@ -340,7 +340,13 @@ export default class SlInput extends LitElement {
               'input--disabled': this.disabled,
               'input--focused': this.hasFocus,
               'input--empty': !this.value,
-              'input--invalid': this.invalid
+              'input--invalid': this.invalid,
+
+              // It's currently impossible to hide Firefox's built-in clear icon when using <input type="date|time">, so
+              // we need this check to apply a clip-path to hide it. I know, I know...user agent sniffing is nasty but
+              // if it fails, we only see a redundant clear icon so nothing important is breaking. The benefits outweigh
+              // the costs for this one. See the discussion at: https://github.com/shoelace-style/shoelace/pull/794
+              'input--is-firefox': navigator.userAgent.includes('Firefox')
             })}
           >
             <span part="prefix" class="input__prefix">

@@ -280,4 +280,10 @@ export default css`
   ::-ms-reveal {
     display: none;
   }
+
+  /** Hide Firefox's clear button on date and time inputs */
+  .input--is-firefox input[type='date'],
+  .input--is-firefox input[type='time'] {
+    clip-path: inset(0 2em 0 0);
+  }
 `;
