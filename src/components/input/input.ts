@@ -161,8 +161,11 @@ export default class SlInput extends LitElement {
   }
 
   set valueAsDate(newValue: Date | null) {
-    this.input.valueAsDate = newValue;
-    this.value = this.input.value;
+    // We use an in-memory input instead of the one in the template because the property can be set before render
+    const input = document.createElement('input');
+    input.type = 'date';
+    input.valueAsDate = newValue;
+    this.value = input.value;
   }
 
   /** Gets or sets the current value as a number. */
@@ -171,8 +174,11 @@ export default class SlInput extends LitElement {
   }
 
   set valueAsNumber(newValue: number) {
-    this.input.valueAsNumber = newValue;
-    this.value = this.input.value;
+    // We use an in-memory input instead of the one in the template because the property can be set before render
+    const input = document.createElement('input');
+    input.type = 'number';
+    input.valueAsNumber = newValue;
+    this.value = input.value;
   }
 
   firstUpdated() {
