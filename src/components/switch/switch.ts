@@ -35,7 +35,9 @@ export default class SlSwitch extends LitElement {
 
   // @ts-expect-error -- Controller is currently unused
   private readonly formSubmitController = new FormSubmitController(this, {
-    value: (control: SlSwitch) => (control.checked ? control.value : undefined)
+    value: (control: SlSwitch) => (control.checked ? control.value : undefined),
+    defaultValue: (control: SlSwitch) => control.input.defaultChecked,
+    setValue: (control: SlSwitch, checked: boolean) => (control.checked = checked)
   });
 
   @state() private hasFocus = false;

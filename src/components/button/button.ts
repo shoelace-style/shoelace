@@ -83,7 +83,7 @@ export default class SlButton extends LitElement {
    * The type of button. When the type is `submit`, the button will submit the surrounding form. Note that the default
    * value is `button` instead of `submit`, which is opposite of how native `<button>` elements behave.
    */
-  @property() type: 'button' | 'submit' = 'button';
+  @property() type: 'button' | 'submit' | 'reset' = 'button';
 
   /** An optional name for the button. Ignored when `href` is set. */
   @property() name?: string;
@@ -152,6 +152,10 @@ export default class SlButton extends LitElement {
 
     if (this.type === 'submit') {
       this.formSubmitController.submit(this);
+    }
+
+    if (this.type === 'reset') {
+      this.formSubmitController.reset(this);
     }
   }
 

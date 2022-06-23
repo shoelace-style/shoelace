@@ -37,7 +37,9 @@ export default class SlRadioButton extends LitElement {
   @query('.hidden-input') hiddenInput: HTMLInputElement;
 
   protected readonly formSubmitController = new FormSubmitController(this, {
-    value: (control: SlRadioButton) => (control.checked ? control.value : undefined)
+    value: (control: SlRadioButton) => (control.checked ? control.value : undefined),
+    defaultValue: (control: SlRadioButton) => control.input.defaultChecked,
+    setValue: (control: SlRadioButton, checked: boolean) => (control.checked = checked)
   });
   private readonly hasSlotController = new HasSlotController(this, '[default]', 'prefix', 'suffix');
 
