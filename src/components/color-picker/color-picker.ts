@@ -94,6 +94,7 @@ export default class SlColorPicker extends LitElement {
   private readonly localize = new LocalizeController(this);
 
   @state() private isDraggingGridHandle = false;
+  @state() private isEmpty = false;
   @state() private inputValue = '';
   @state() private hue = 0;
   @state() private saturation = 100;
@@ -102,7 +103,7 @@ export default class SlColorPicker extends LitElement {
   @state() private alpha = 100;
 
   /** The current color. */
-  @property() value = '#ffffff';
+  @property() value = '';
 
   /* The color picker's label. This will not be displayed, but it will be announced by assistive devices. */
   @property() label = '';
@@ -176,13 +177,16 @@ export default class SlColorPicker extends LitElement {
   connectedCallback() {
     super.connectedCallback();
 
-    if (!this.setColor(this.value)) {
-      this.setColor(`#ffff`);
+    if (this.value) {
+      this.setColor(this.value);
+      this.inputValue = this.value;
+      this.lastValueEmitted = this.value;
+      this.syncValues();
+    } else {
+      this.isEmpty = true;
+      this.inputValue = '';
+      this.lastValueEmitted = '';
     }
-
-    this.inputValue = this.value;
-    this.lastValueEmitted = this.value;
-    this.syncValues();
   }
 
   /** Returns the current value as a string in the specified format. */
@@ -313,7 +317,6 @@ export default class SlColorPicker extends LitElement {
         this.saturation = clamp((x / width) * 100, 0, 100);
         this.brightness = clamp(100 - (y / height) * 100, 0, 100);
         this.lightness = this.getLightness(this.brightness);
-
         this.syncValues();
       },
       onStop: () => (this.isDraggingGridHandle = false),
@@ -396,7 +399,6 @@ export default class SlColorPicker extends LitElement {
       event.preventDefault();
       this.brightness = clamp(this.brightness + increment, 0, 100);
       this.lightness = this.getLightness(this.brightness);
-      console.log(this.lightness, this.brightness);
       this.syncValues();
     }
 
@@ -404,7 +406,6 @@ export default class SlColorPicker extends LitElement {
       event.preventDefault();
       this.brightness = clamp(this.brightness - increment, 0, 100);
       this.lightness = this.getLightness(this.brightness);
-      console.log(this.lightness, this.brightness);
       this.syncValues();
     }
   }
@@ -412,16 +413,25 @@ export default class SlColorPicker extends LitElement {
   handleInputChange(event: CustomEvent) {
     const target = event.target as HTMLInputElement;
 
-    this.setColor(target.value);
-    target.value = this.value;
+    if (this.input.value) {
+      this.setColor(target.value);
+      target.value = this.value;
+    } else {
+      this.value = '';
+    }
+
     event.stopPropagation();
   }
 
   handleInputKeyDown(event: KeyboardEvent) {
     if (event.key === 'Enter') {
-      this.setColor(this.input.value);
-      this.input.value = this.value;
-      setTimeout(() => this.input.select());
+      if (this.input.value) {
+        this.setColor(this.input.value);
+        this.input.value = this.value;
+        setTimeout(() => this.input.select());
+      } else {
+        this.hue = 0;
+      }
     }
   }
 
@@ -618,7 +628,7 @@ export default class SlColorPicker extends LitElement {
       });
   }
 
-  @watch('format')
+  @watch('format', { waitUntilFirstUpdate: true })
   handleFormatChange() {
     this.syncValues();
   }
@@ -630,6 +640,16 @@ export default class SlColorPicker extends LitElement {
 
   @watch('value')
   handleValueChange(oldValue: string | undefined, newValue: string) {
+    this.isEmpty = !newValue;
+
+    if (!newValue) {
+      this.hue = 0;
+      this.saturation = 100;
+      this.brightness = 100;
+      this.lightness = this.getLightness(this.brightness);
+      this.alpha = 100;
+    }
+
     if (!this.isSafeValue && oldValue !== undefined) {
       const newColor = this.parseColor(newValue);
 
@@ -784,7 +804,7 @@ export default class SlColorPicker extends LitElement {
             autocorrect="off"
             autocapitalize="off"
             spellcheck="false"
-            .value=${live(this.inputValue)}
+            .value=${live(this.isEmpty ? '' : this.inputValue)}
             ?disabled=${this.disabled}
             aria-label=${this.localize.term('currentValue')}
             @keydown=${this.handleInputKeyDown}
@@ -883,6 +903,7 @@ export default class SlColorPicker extends LitElement {
             'color-dropdown__trigger--small': this.size === 'small',
             'color-dropdown__trigger--medium': this.size === 'medium',
             'color-dropdown__trigger--large': this.size === 'large',
+            'color-dropdown__trigger--empty': this.isEmpty,
             'color-picker__transparent-bg': true
           })}
           style=${styleMap({

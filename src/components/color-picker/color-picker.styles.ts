@@ -310,6 +310,10 @@ export default css`
     box-shadow: inset 0 0 0 2px var(--sl-input-border-color), inset 0 0 0 4px var(--sl-color-neutral-0);
   }
 
+  .color-dropdown__trigger--empty:before {
+    background-color: transparent;
+  }
+
   .color-dropdown__trigger${focusVisibleSelector} {
     outline: none;
   }

@@ -14,6 +14,8 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Added the `checked-icon` part to `<sl-menu-item>`
 - Fixed a bug where a duplicate clear button showed in Firefox [#791](https://github.com/shoelace-style/shoelace/issues/791)
 - Fixed a bug where setting `valueAsDate` or `valueAsNumber` too early on `<sl-input>` would throw an error [#796](https://github.com/shoelace-style/shoelace/issues/796)
+- Fixed a bug in `<sl-color-picker>` where empty values weren't properly supported [#797](https://github.com/shoelace-style/shoelace/issues/797)
+- Fixed a bug in `<sl-color-picker>` where values were logged to the console when using the keyboard
 - Updated the `fieldset` attribute so it reflects in `<sl-radio-group>`
 
 ## 2.0.0-beta.76
