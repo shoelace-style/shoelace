@@ -95,6 +95,9 @@ export default class SlInput extends LitElement {
   /** Adds a password toggle button to password inputs. */
   @property({ attribute: 'toggle-password', type: Boolean }) togglePassword = false;
 
+  /** Hides the browser's built-in increment/decrement spin buttons for number inputs. */
+  @property({ attribute: 'no-spin-buttons', type: Boolean }) noSpinButtons = false;
+
   /** The input's placeholder text. */
   @property() placeholder: string;
 
@@ -348,6 +351,7 @@ export default class SlInput extends LitElement {
               'input--focused': this.hasFocus,
               'input--empty': !this.value,
               'input--invalid': this.invalid,
+              'input--no-spin-buttons': this.noSpinButtons,
 
               // It's currently impossible to hide Firefox's built-in clear icon when using <input type="date|time">, so
               // we need this check to apply a clip-path to hide it. I know, I know...user agent sniffing is nasty but

@@ -281,9 +281,20 @@ export default css`
     display: none;
   }
 
-  /** Hide Firefox's clear button on date and time inputs */
+  /* Hide Firefox's clear button on date and time inputs */
   .input--is-firefox input[type='date'],
   .input--is-firefox input[type='time'] {
     clip-path: inset(0 2em 0 0);
+  }
+
+  /* Hide the built-in number spinner */
+  .input--no-spin-buttons input[type='number']::-webkit-outer-spin-button,
+  .input--no-spin-buttons input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    display: none;
+  }
+
+  .input--no-spin-buttons input[type='number'] {
+    -moz-appearance: textfield;
   }
 `;
