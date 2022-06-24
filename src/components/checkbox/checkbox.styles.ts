@@ -99,6 +99,7 @@ export default css`
   }
 
   .checkbox__label {
+    color: var(--sl-input-label-color);
     line-height: var(--sl-toggle-size);
     margin-inline-start: 0.5em;
     user-select: none;

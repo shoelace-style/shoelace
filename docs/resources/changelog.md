@@ -19,6 +19,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug in `<sl-color-picker>` where values were logged to the console when using the keyboard
 - Fixed a bug in `<sl-input>` where password controls would try to autocorrect/autocomplete/autocapitalize when the password is visible
 - Fixed label alignment in `<sl-checkbox>` and `<sl-radio>` so they align to the top of the control instead of the center when wrapping
+- Fixed labels in `<sl-checkbox>` and `<sl-radio>` so they use the `--sl-input-label-color` design token
 - Updated the `fieldset` attribute so it reflects in `<sl-radio-group>`
 
 ## 2.0.0-beta.76
