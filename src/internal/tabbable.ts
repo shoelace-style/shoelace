@@ -67,7 +67,7 @@ export function getTabbableBoundary(root: HTMLElement | ShadowRoot) {
       }
     }
 
-    [...el.querySelectorAll('*')].forEach((e: HTMLElement) => walk(e));
+    [...el.children].forEach((e: HTMLElement) => walk(e));
   }
 
   // Collect all elements including the root
