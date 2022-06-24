@@ -380,9 +380,9 @@ export default class SlInput extends LitElement {
               max=${ifDefined(this.max)}
               step=${ifDefined(this.step)}
               .value=${live(this.value)}
-              autocapitalize=${ifDefined(this.autocapitalize)}
-              autocomplete=${ifDefined(this.autocomplete)}
-              autocorrect=${ifDefined(this.autocorrect)}
+              autocapitalize=${ifDefined(this.type === 'password' ? 'off' : this.autocapitalize)}
+              autocomplete=${ifDefined(this.type === 'password' ? 'off' : this.autocomplete)}
+              autocorrect=${ifDefined(this.type === 'password' ? 'off' : this.autocorrect)}
               ?autofocus=${this.autofocus}
               spellcheck=${ifDefined(this.spellcheck)}
               pattern=${ifDefined(this.pattern)}
