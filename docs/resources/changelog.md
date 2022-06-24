@@ -17,6 +17,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug where setting `valueAsDate` or `valueAsNumber` too early on `<sl-input>` would throw an error [#796](https://github.com/shoelace-style/shoelace/issues/796)
 - Fixed a bug in `<sl-color-picker>` where empty values weren't properly supported [#797](https://github.com/shoelace-style/shoelace/issues/797)
 - Fixed a bug in `<sl-color-picker>` where values were logged to the console when using the keyboard
+- Fixed label alignment in `<sl-checkbox>` and `<sl-radio>` so they align to the top of the control instead of the center when wrapping
 - Updated the `fieldset` attribute so it reflects in `<sl-radio-group>`
 
 ## 2.0.0-beta.76

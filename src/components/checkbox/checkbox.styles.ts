@@ -11,7 +11,7 @@ export default css`
 
   .checkbox {
     display: inline-flex;
-    align-items: center;
+    align-items: top;
     font-family: var(--sl-input-font-family);
     font-size: var(--sl-input-font-size-medium);
     font-weight: var(--sl-input-font-weight);
