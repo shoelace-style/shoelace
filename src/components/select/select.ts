@@ -1,12 +1,12 @@
 import { html, LitElement } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { defaultValue } from '../../internal/default-value';
 import '../../components/dropdown/dropdown';
 import '../../components/icon-button/icon-button';
 import '../../components/icon/icon';
 import '../../components/menu/menu';
 import '../../components/tag/tag';
+import { defaultValue } from '../../internal/default-value';
 import { emit } from '../../internal/event';
 import { FormSubmitController } from '../../internal/form';
 import { HasSlotController } from '../../internal/slot';
