@@ -36,7 +36,7 @@ export class FormSubmitController implements ReactiveController {
       form: (input: HTMLInputElement) => input.closest('form'),
       name: (input: HTMLInputElement) => input.name,
       value: (input: HTMLInputElement) => input.value,
-      defaultValue: (input: HTMLInputElement) => input.getAttribute('value'),
+      defaultValue: (input: HTMLInputElement) => input.defaultValue,
       disabled: (input: HTMLInputElement) => input.disabled,
       reportValidity: (input: HTMLInputElement) => {
         return typeof input.reportValidity === 'function' ? input.reportValidity() : true;

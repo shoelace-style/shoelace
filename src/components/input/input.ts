@@ -3,6 +3,7 @@ import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
+import { defaultValue } from '../../internal/default-value';
 import '../../components/icon/icon';
 import { emit } from '../../internal/event';
 import { FormSubmitController } from '../../internal/form';
@@ -76,6 +77,10 @@ export default class SlInput extends LitElement {
 
   /** The input's value attribute. */
   @property() value = '';
+
+  /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
+  @defaultValue()
+  defaultValue = '';
 
   /** Draws a filled input. */
   @property({ type: Boolean, reflect: true }) filled = false;

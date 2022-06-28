@@ -3,7 +3,7 @@ import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
-import { defaultValue } from 'src/internal/default-value';
+import { defaultValue } from '../../internal/default-value';
 import { emit } from '../../internal/event';
 import { FormSubmitController } from '../../internal/form';
 import { watch } from '../../internal/watch';
@@ -34,7 +34,7 @@ export default class SlCheckbox extends LitElement {
   // @ts-expect-error -- Controller is currently unused
   private readonly formSubmitController = new FormSubmitController(this, {
     value: (control: SlCheckbox) => (control.checked ? control.value || 'on' : undefined),
-    defaultValue: () => this.defaultChecked,
+    defaultValue: (control: SlCheckbox) => control.defaultChecked,
     setValue: (control: SlCheckbox, checked: boolean) => (control.checked = checked)
   });
 
@@ -61,6 +61,7 @@ export default class SlCheckbox extends LitElement {
   /** This will be true when the control is in an invalid state. Validity is determined by the `required` prop. */
   @property({ type: Boolean, reflect: true }) invalid = false;
 
+  /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue('checked')
   defaultChecked = false;
 

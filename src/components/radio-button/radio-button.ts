@@ -3,6 +3,7 @@ import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { html } from 'lit/static-html.js';
+import { defaultValue } from '../../internal/default-value';
 import { emit } from '../../internal/event';
 import { FormSubmitController } from '../../internal/form';
 import { HasSlotController } from '../../internal/slot';
@@ -38,7 +39,7 @@ export default class SlRadioButton extends LitElement {
 
   protected readonly formSubmitController = new FormSubmitController(this, {
     value: (control: SlRadioButton) => (control.checked ? control.value : undefined),
-    defaultValue: (control: SlRadioButton) => control.input.defaultChecked,
+    defaultValue: (control: SlRadioButton) => control.defaultChecked,
     setValue: (control: SlRadioButton, checked: boolean) => (control.checked = checked)
   });
   private readonly hasSlotController = new HasSlotController(this, '[default]', 'prefix', 'suffix');
@@ -62,6 +63,10 @@ export default class SlRadioButton extends LitElement {
    * by the `setCustomValidity` method.
    */
   @property({ type: Boolean, reflect: true }) invalid = false;
+
+  /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
+  @defaultValue('checked')
+  defaultChecked = false;
 
   connectedCallback(): void {
     super.connectedCallback();

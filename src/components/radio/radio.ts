@@ -3,6 +3,7 @@ import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
+import { defaultValue } from '../../internal/default-value';
 import { emit } from '../../internal/event';
 import { FormSubmitController } from '../../internal/form';
 import { watch } from '../../internal/watch';
@@ -31,7 +32,7 @@ export default class SlRadio extends LitElement {
 
   protected readonly formSubmitController = new FormSubmitController(this, {
     value: (control: SlRadio) => (control.checked ? control.value || 'on' : undefined),
-    defaultValue: (control: SlRadio) => control.input.defaultChecked,
+    defaultValue: (control: SlRadio) => control.defaultChecked,
     setValue: (control: SlRadio, checked: boolean) => (control.checked = checked)
   });
 
@@ -54,6 +55,10 @@ export default class SlRadio extends LitElement {
    * by the `setCustomValidity` method.
    */
   @property({ type: Boolean, reflect: true }) invalid = false;
+
+  /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
+  @defaultValue('checked')
+  defaultChecked = false;
 
   connectedCallback(): void {
     super.connectedCallback();

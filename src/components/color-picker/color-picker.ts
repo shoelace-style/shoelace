@@ -11,6 +11,7 @@ import '../../components/dropdown/dropdown';
 import '../../components/icon/icon';
 import '../../components/input/input';
 import '../../components/visually-hidden/visually-hidden';
+import { defaultValue } from '../../internal/default-value';
 import { drag } from '../../internal/drag';
 import { emit } from '../../internal/event';
 import { FormSubmitController } from '../../internal/form';
@@ -104,6 +105,10 @@ export default class SlColorPicker extends LitElement {
 
   /** The current color. */
   @property() value = '';
+
+  /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
+  @defaultValue()
+  defaultValue = '';
 
   /* The color picker's label. This will not be displayed, but it will be announced by assistive devices. */
   @property() label = '';
