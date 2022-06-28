@@ -1,5 +1,4 @@
-import { expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
-import sinon from 'sinon';
+import { expect, fixture, html, oneEvent } from '@open-wc/testing';
 import { serialize } from '../../utilities/form';
 import type SlRange from './range';
 
@@ -14,18 +13,6 @@ describe('<sl-range>', () => {
     const input = el.shadowRoot!.querySelector<HTMLInputElement>('[part="input"]')!;
 
     expect(input.disabled).to.be.true;
-  });
-
-  it('should focus the input when clicking on the label', async () => {
-    const el = await fixture<SlRange>(html` <sl-range label="Name"></sl-range> `);
-    const label = el.shadowRoot!.querySelector('[part="form-control-label"]')!;
-    const submitHandler = sinon.spy();
-
-    el.addEventListener('sl-focus', submitHandler);
-    (label as HTMLLabelElement).click();
-    await waitUntil(() => submitHandler.calledOnce);
-
-    expect(submitHandler).to.have.been.calledOnce;
   });
 
   describe('when serializing', () => {
