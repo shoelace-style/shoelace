@@ -70,9 +70,7 @@ export default class SlSelect extends LitElement {
   @query('.select__menu') menu: SlMenu;
 
   // @ts-expect-error -- Controller is currently unused
-  private readonly formSubmitController = new FormSubmitController(this, {
-    defaultValue: (input: SlSelect) => input.getAttribute('value') || ''
-  });
+  private readonly formSubmitController = new FormSubmitController(this);
   private readonly hasSlotController = new HasSlotController(this, 'help-text', 'label');
   private readonly localize = new LocalizeController(this);
   private menuItems: SlMenuItem[] = [];
