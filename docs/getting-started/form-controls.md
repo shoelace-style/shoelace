@@ -65,6 +65,7 @@ To make a field required, use the `required` prop. The form will not be submitte
   <br />
   <sl-checkbox required>Check me before submitting</sl-checkbox>
   <br /><br />
+  <sl-button type="reset" variant="default">Reset</sl-button>
   <sl-button type="submit" variant="primary">Submit</sl-button>
 </form>
 
@@ -118,6 +119,7 @@ To restrict a value to a specific [pattern](https://developer.mozilla.org/en-US/
 <form class="input-validation-pattern">
   <sl-input name="letters" required label="Letters" pattern="[A-Za-z]+"></sl-input>
   <br />
+  <sl-button type="reset" variant="default">Reset</sl-button>
   <sl-button type="submit" variant="primary">Submit</sl-button>
 </form>
 
@@ -161,6 +163,7 @@ Some input types will automatically trigger constraints, such as `email` and `ur
   <br />
   <sl-input variant="url" label="URL" placeholder="https://example.com/" required></sl-input>
   <br />
+  <sl-button type="reset" variant="default">Reset</sl-button>
   <sl-button type="submit" variant="primary">Submit</sl-button>
 </form>
 
@@ -204,6 +207,7 @@ To create a custom validation error, pass a non-empty string to the `setCustomVa
 <form class="input-validation-custom">
   <sl-input label="Type 'shoelace'" required></sl-input>
   <br />
+  <sl-button type="reset" variant="default">Reset</sl-button>
   <sl-button type="submit" variant="primary">Submit</sl-button>
 </form>
 

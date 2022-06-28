@@ -59,4 +59,34 @@ describe('<sl-switch>', () => {
     el.checked = false;
     await el.updateComplete;
   });
+
+  describe('when resetting a form', () => {
+    it('should reset the element to its initial value', async () => {
+      const form = await fixture<HTMLFormElement>(html`
+        <form>
+          <sl-switch name="a" value="1" checked></sl-switch>
+          <sl-button type="reset">Reset</sl-button>
+        </form>
+      `);
+      const button = form.querySelector('sl-button')!;
+      const switchEl = form.querySelector('sl-switch')!;
+      switchEl.checked = false;
+
+      await switchEl.updateComplete;
+      setTimeout(() => button.click());
+
+      await oneEvent(form, 'reset');
+      await switchEl.updateComplete;
+
+      expect(switchEl.checked).to.true;
+
+      switchEl.defaultChecked = false;
+
+      setTimeout(() => button.click());
+      await oneEvent(form, 'reset');
+      await switchEl.updateComplete;
+
+      expect(switchEl.checked).to.false;
+    });
+  });
 });

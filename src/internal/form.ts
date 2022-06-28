@@ -11,6 +11,8 @@ export interface FormSubmitControllerOptions {
   name: (input: unknown) => string;
   /** A function that returns the form control's current value. */
   value: (input: unknown) => unknown | unknown[];
+  /** A function that returns the form control's default value. */
+  defaultValue: (input: unknown) => unknown | unknown[];
   /** A function that returns the form control's current disabled state. If disabled, the value won't be submitted. */
   disabled: (input: unknown) => boolean;
   /**
@@ -18,6 +20,9 @@ export interface FormSubmitControllerOptions {
    * prevent submission and trigger the browser's constraint violation warning.
    */
   reportValidity: (input: unknown) => boolean;
+
+  /** A function that sets the form control's value */
+  setValue: (input: unknown, value: unknown) => void;
 }
 
 export class FormSubmitController implements ReactiveController {
@@ -31,14 +36,19 @@ export class FormSubmitController implements ReactiveController {
       form: (input: HTMLInputElement) => input.closest('form'),
       name: (input: HTMLInputElement) => input.name,
       value: (input: HTMLInputElement) => input.value,
+      defaultValue: (input: HTMLInputElement) => input.defaultValue,
       disabled: (input: HTMLInputElement) => input.disabled,
       reportValidity: (input: HTMLInputElement) => {
         return typeof input.reportValidity === 'function' ? input.reportValidity() : true;
+      },
+      setValue: (input: HTMLInputElement, value: string) => {
+        input.value = value;
       },
       ...options
     };
     this.handleFormData = this.handleFormData.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.handleFormReset = this.handleFormReset.bind(this);
     this.reportFormValidity = this.reportFormValidity.bind(this);
   }
 
@@ -48,6 +58,7 @@ export class FormSubmitController implements ReactiveController {
     if (this.form) {
       this.form.addEventListener('formdata', this.handleFormData);
       this.form.addEventListener('submit', this.handleFormSubmit);
+      this.form.addEventListener('reset', this.handleFormReset);
 
       // Overload the form's reportValidity() method so it looks at Shoelace form controls
       if (!reportValidityOverloads.has(this.form)) {
@@ -61,6 +72,7 @@ export class FormSubmitController implements ReactiveController {
     if (this.form) {
       this.form.removeEventListener('formdata', this.handleFormData);
       this.form.removeEventListener('submit', this.handleFormSubmit);
+      this.form.removeEventListener('reset', this.handleFormReset);
 
       // Remove the overload and restore the original method
       if (reportValidityOverloads.has(this.form)) {
@@ -98,6 +110,10 @@ export class FormSubmitController implements ReactiveController {
     }
   }
 
+  handleFormReset() {
+    this.options.setValue(this.host, this.options.defaultValue(this.host));
+  }
+
   reportFormValidity() {
     //
     // Shoelace form controls work hard to act like regular form controls. They support the Constraint Validation API
@@ -128,13 +144,10 @@ export class FormSubmitController implements ReactiveController {
     return true;
   }
 
-  /** Submits the form, triggering validation and form data injection. */
-  submit(submitter?: HTMLInputElement | SlButton) {
-    // Calling form.submit() bypasses the submit event and constraint validation. To prevent this, we can inject a
-    // native submit button into the form, "click" it, then remove it to simulate a standard form submission.
+  doAction(type: 'submit' | 'reset', invoker?: HTMLInputElement | SlButton) {
     if (this.form) {
       const button = document.createElement('button');
-      button.type = 'submit';
+      button.type = type;
       button.style.position = 'absolute';
       button.style.width = '0';
       button.style.height = '0';
@@ -143,10 +156,10 @@ export class FormSubmitController implements ReactiveController {
       button.style.whiteSpace = 'nowrap';
 
       // Pass form attributes through to the temporary button
-      if (submitter) {
+      if (invoker) {
         ['formaction', 'formmethod', 'formnovalidate', 'formtarget'].forEach(attr => {
-          if (submitter.hasAttribute(attr)) {
-            button.setAttribute(attr, submitter.getAttribute(attr)!);
+          if (invoker.hasAttribute(attr)) {
+            button.setAttribute(attr, invoker.getAttribute(attr)!);
           }
         });
       }
@@ -155,5 +168,17 @@ export class FormSubmitController implements ReactiveController {
       button.click();
       button.remove();
     }
+  }
+
+  /** Resets the form, restoring all the control to their default value */
+  reset(invoker?: HTMLInputElement | SlButton) {
+    this.doAction('reset', invoker);
+  }
+
+  /** Submits the form, triggering validation and form data injection. */
+  submit(invoker?: HTMLInputElement | SlButton) {
+    // Calling form.submit() bypasses the submit event and constraint validation. To prevent this, we can inject a
+    // native submit button into the form, "click" it, then remove it to simulate a standard form submission.
+    this.doAction('submit', invoker);
   }
 }

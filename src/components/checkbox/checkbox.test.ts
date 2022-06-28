@@ -121,6 +121,36 @@ describe('<sl-checkbox>', () => {
     });
   });
 
+  describe('when resetting a form', () => {
+    it('should reset the element to its initial value', async () => {
+      const form = await fixture<HTMLFormElement>(html`
+        <form>
+          <sl-checkbox name="a" value="1" checked></sl-checkbox>
+          <sl-button type="reset">Reset</sl-button>
+        </form>
+      `);
+      const button = form.querySelector('sl-button')!;
+      const checkbox = form.querySelector('sl-checkbox')!;
+      checkbox.checked = false;
+
+      await checkbox.updateComplete;
+      setTimeout(() => button.click());
+
+      await oneEvent(form, 'reset');
+      await checkbox.updateComplete;
+
+      expect(checkbox.checked).to.true;
+
+      checkbox.defaultChecked = false;
+
+      setTimeout(() => button.click());
+      await oneEvent(form, 'reset');
+      await checkbox.updateComplete;
+
+      expect(checkbox.checked).to.false;
+    });
+  });
+
   describe('click', () => {
     it('should click the inner input', async () => {
       const el = await fixture<SlCheckbox>(html`<sl-checkbox></sl-checkbox>`);
