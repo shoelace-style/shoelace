@@ -97,6 +97,38 @@ describe('<sl-radio-button>', () => {
     });
   });
 
+  describe('when resetting a form', () => {
+    it('should reset the element to its initial value', async () => {
+      const form = await fixture<HTMLFormElement>(html`
+        <form>
+          <sl-radio-group>
+            <sl-radio-button id="radio-1" name="a" value="1" checked></sl-radio-button>
+            <sl-radio-button id="radio-2" name="a" value="2"></sl-radio-button>
+            <sl-radio-button id="radio-3" name="a" value="3"></sl-radio-button>
+          </sl-radio-group>
+          <sl-button type="reset">Reset</sl-button>
+        </form>
+      `);
+      const button = form.querySelector('sl-button')!;
+      const radio1: SlRadioButton = form.querySelector('#radio-1')!;
+      const radio2: SlRadioButton = form.querySelector('#radio-2')!;
+
+      radio2.click();
+      await radio2.updateComplete;
+
+      expect(radio2.checked).to.be.true;
+      expect(radio1.checked).to.be.false;
+
+      setTimeout(() => button.click());
+
+      await oneEvent(form, 'reset');
+      await radio1.updateComplete;
+
+      expect(radio1.checked).to.true;
+      expect(radio2.checked).to.false;
+    });
+  });
+
   it('should show a constraint validation error when setCustomValidity() is called', async () => {
     const form = await fixture<HTMLFormElement>(html`
       <form>

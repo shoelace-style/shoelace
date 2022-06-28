@@ -98,6 +98,36 @@ describe('<sl-radio>', () => {
     });
   });
 
+  describe('when resetting a form', () => {
+    it('should reset the element to its initial value', async () => {
+      const form = await fixture<HTMLFormElement>(html`
+        <form>
+          <sl-radio name="a" value="1" checked></sl-radio>
+          <sl-button type="reset">Reset</sl-button>
+        </form>
+      `);
+      const button = form.querySelector('sl-button')!;
+      const radio = form.querySelector('sl-radio')!;
+      radio.checked = false;
+
+      await radio.updateComplete;
+      setTimeout(() => button.click());
+
+      await oneEvent(form, 'reset');
+      await radio.updateComplete;
+
+      expect(radio.checked).to.true;
+
+      radio.defaultChecked = false;
+
+      setTimeout(() => button.click());
+      await oneEvent(form, 'reset');
+      await radio.updateComplete;
+
+      expect(radio.checked).to.false;
+    });
+  });
+
   it('should submit "on" when no value is provided', async () => {
     const form = await fixture<HTMLFormElement>(html`
       <form>

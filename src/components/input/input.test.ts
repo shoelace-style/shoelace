@@ -1,4 +1,4 @@
-import { expect, fixture, html, waitUntil } from '@open-wc/testing';
+import { expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
 import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
 import { serialize } from '../../utilities/form';
@@ -121,6 +121,36 @@ describe('<sl-input>', () => {
 
       expect(keydownHandler).to.have.been.calledOnce;
       expect(submitHandler).to.not.have.been.called;
+    });
+  });
+
+  describe('when resetting a form', () => {
+    it('should reset the element to its initial value', async () => {
+      const form = await fixture<HTMLFormElement>(html`
+        <form>
+          <sl-input name="a" value="test"></sl-input>
+          <sl-button type="reset">Reset</sl-button>
+        </form>
+      `);
+      const button = form.querySelector('sl-button')!;
+      const input = form.querySelector('sl-input')!;
+      input.value = '1234';
+
+      await input.updateComplete;
+
+      setTimeout(() => button.click());
+      await oneEvent(form, 'reset');
+      await input.updateComplete;
+
+      expect(input.value).to.equal('test');
+
+      input.defaultValue = '';
+
+      setTimeout(() => button.click());
+      await oneEvent(form, 'reset');
+      await input.updateComplete;
+
+      expect(input.value).to.equal('');
     });
   });
 

@@ -130,4 +130,33 @@ describe('<sl-select>', () => {
 
     expect(displayLabel.textContent?.trim()).to.equal('updated');
   });
+
+  describe('when resetting a form', () => {
+    it('should reset the element to its initial value', async () => {
+      const form = await fixture<HTMLFormElement>(html`
+        <form>
+          <sl-select value="option-1">
+            <sl-menu-item value="option-1">Option 1</sl-menu-item>
+            <sl-menu-item value="option-2">Option 2</sl-menu-item>
+            <sl-menu-item value="option-3">Option 3</sl-menu-item>
+          </sl-select>
+          <sl-button type="reset">Reset</sl-button>
+        </form>
+      `);
+      const button = form.querySelector('sl-button')!;
+      const select = form.querySelector('sl-select')!;
+      const option2 = form.querySelectorAll('sl-menu-item')![1];
+
+      option2.click();
+      await option2.updateComplete;
+
+      expect(select.value).to.equal('option-2');
+
+      setTimeout(() => button.click());
+      await oneEvent(form, 'reset');
+      await select.updateComplete;
+
+      expect(select.value).to.equal('option-1');
+    });
+  });
 });
