@@ -13,6 +13,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Added the `required` attribute to `<sl-radio-group>` and fixed constraint validation logic to support custom validation
 - Added the `checked-icon` part to `<sl-menu-item>`
 - Added the `no-spin-buttons` attribute to `<sl-input type="number">` [#798](https://github.com/shoelace-style/shoelace/issues/798)
+- Added support for resetting forms using `<sl-button type="reset">` [#799](https://github.com/shoelace-style/shoelace/pull/799)
 - Fixed a bug where a duplicate clear button showed in Firefox [#791](https://github.com/shoelace-style/shoelace/issues/791)
 - Fixed a bug where setting `valueAsDate` or `valueAsNumber` too early on `<sl-input>` would throw an error [#796](https://github.com/shoelace-style/shoelace/issues/796)
 - Fixed a bug in `<sl-color-picker>` where empty values weren't properly supported [#797](https://github.com/shoelace-style/shoelace/issues/797)
