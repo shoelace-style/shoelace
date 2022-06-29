@@ -1,4 +1,5 @@
-import { expect, fixture, html, waitUntil, aTimeout } from '@open-wc/testing';
+import { expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
+import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
 import type SlSelect from './select';
 
@@ -71,9 +72,9 @@ describe('<sl-select>', () => {
     `);
     const control = el.shadowRoot!.querySelector<HTMLSelectElement>('.select__control')!;
     control.focus();
-    const rKeyEvent = new KeyboardEvent('keydown', { key: 'r' });
-    control.dispatchEvent(rKeyEvent);
-    await aTimeout(100);
+    await sendKeys({ press: 'r' });
+    await el.updateComplete;
+
     expect(control.getAttribute('aria-expanded')).to.equal('true');
   });
 
@@ -87,9 +88,10 @@ describe('<sl-select>', () => {
     `);
     const control = el.shadowRoot!.querySelector<HTMLSelectElement>('.select__control')!;
     control.focus();
-    const rKeyEvent = new KeyboardEvent('keydown', { key: 'r', ctrlKey: true });
-    control.dispatchEvent(rKeyEvent);
-    await aTimeout(100);
+    await sendKeys({ down: 'Control' });
+    await sendKeys({ press: 'r' });
+    await sendKeys({ up: 'Control' });
+    await el.updateComplete;
     expect(control.getAttribute('aria-expanded')).to.equal('false');
   });
 
@@ -107,5 +109,54 @@ describe('<sl-select>', () => {
     el.requestSubmit();
 
     expect(select.shadowRoot!.activeElement).to.equal(select.control);
+  });
+
+  it('should update the display label when a menu item changes', async () => {
+    const el = await fixture<SlSelect>(html`
+      <sl-select value="option-1">
+        <sl-menu-item value="option-1">Option 1</sl-menu-item>
+        <sl-menu-item value="option-2">Option 2</sl-menu-item>
+        <sl-menu-item value="option-3">Option 3</sl-menu-item>
+      </sl-select>
+    `);
+    const displayLabel = el.shadowRoot!.querySelector('[part="display-label"]')!;
+    const menuItem = el.querySelector('sl-menu-item')!;
+
+    expect(displayLabel.textContent?.trim()).to.equal('Option 1');
+    menuItem.textContent = 'updated';
+
+    await oneEvent(el, 'sl-label-change');
+    await el.updateComplete;
+
+    expect(displayLabel.textContent?.trim()).to.equal('updated');
+  });
+
+  describe('when resetting a form', () => {
+    it('should reset the element to its initial value', async () => {
+      const form = await fixture<HTMLFormElement>(html`
+        <form>
+          <sl-select value="option-1">
+            <sl-menu-item value="option-1">Option 1</sl-menu-item>
+            <sl-menu-item value="option-2">Option 2</sl-menu-item>
+            <sl-menu-item value="option-3">Option 3</sl-menu-item>
+          </sl-select>
+          <sl-button type="reset">Reset</sl-button>
+        </form>
+      `);
+      const button = form.querySelector('sl-button')!;
+      const select = form.querySelector('sl-select')!;
+      const option2 = form.querySelectorAll('sl-menu-item')![1];
+
+      option2.click();
+      await option2.updateComplete;
+
+      expect(select.value).to.equal('option-2');
+
+      setTimeout(() => button.click());
+      await oneEvent(form, 'reset');
+      await select.updateComplete;
+
+      expect(select.value).to.equal('option-1');
+    });
   });
 });

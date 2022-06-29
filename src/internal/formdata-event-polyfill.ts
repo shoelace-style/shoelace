@@ -1,4 +1,5 @@
 /* eslint-disable */
+// @ts-nocheck
 //
 // Polyfills the formdata event in unsupportive browsers. This is a partial polyfill to support appending custom element
 // form data on submit. The formdata event landed in Safari until 15.1, which is slighly too new to rely on. All other
@@ -26,13 +27,21 @@ class FormDataEventPolyfill extends Event {
 class FormDataPolyfill extends FormData {
   private form: HTMLFormElement;
 
-  constructor(form: HTMLFormElement) {
-    super(form);
-    this.form = form;
-    form.dispatchEvent(new FormDataEventPolyfill(this));
+  constructor(form?: HTMLFormElement | null) {
+    if (form) {
+      super(form);
+      this.form = form;
+      form.dispatchEvent(new FormDataEventPolyfill(this));
+    } else {
+      super();
+    }
   }
 
   append(name: string, value: any) {
+    if (!this.form) {
+      return super.append(name, value);
+    }
+
     let input = this.form.elements[name as any] as HTMLInputElement;
 
     if (!input) {

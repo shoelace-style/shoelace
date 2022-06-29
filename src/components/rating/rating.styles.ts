@@ -1,6 +1,6 @@
 import { css } from 'lit';
-import { focusVisibleSelector } from '~/internal/focus-visible';
-import componentStyles from '~/styles/component.styles';
+import { focusVisibleSelector } from '../../internal/focus-visible';
+import componentStyles from '../../styles/component.styles';
 
 export default css`
   ${componentStyles}
@@ -26,7 +26,8 @@ export default css`
   }
 
   .rating${focusVisibleSelector} {
-    box-shadow: var(--sl-focus-ring);
+    outline: var(--sl-focus-ring);
+    outline-offset: var(--sl-focus-ring-offset);
   }
 
   .rating__symbols {

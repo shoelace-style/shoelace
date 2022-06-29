@@ -4,7 +4,7 @@
 
 Avatars are used to represent a person or object.
 
-Like [images](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img), you should always provide `alt` text for avatars as alternate text for assistive devices.
+By default, a generic icon will be shown. You can personalize avatars by adding custom icons, initials, and images. You should always provide a `label` for assistive devices.
 
 ```html preview
 <sl-avatar label="User avatar"></sl-avatar>
@@ -20,7 +20,7 @@ const App = () => <SlAvatar label="User avatar" />;
 
 ### Images
 
-To use an image for the avatar, set the `image` and `alt` attributes. This will take priority and be shown over initials and icons.
+To use an image for the avatar, set the `image` and `label` attributes. This will take priority and be shown over initials and icons.
 
 ```html preview
 <sl-avatar

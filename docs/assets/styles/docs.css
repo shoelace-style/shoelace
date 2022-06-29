@@ -74,8 +74,8 @@ strong {
 }
 
 .sidebar-toggle:focus {
-  outline: none;
-  box-shadow: var(--sl-focus-ring);
+  outline: var(--sl-focus-ring);
+  outline-offset: var(--sl-focus-ring-offset);
 }
 
 .sidebar-toggle span:last-child {
@@ -290,10 +290,6 @@ strong {
   padding: 2px 4px;
 }
 
-.markdown-section tr:nth-child(2n) code {
-  background-color: var(--sl-color-neutral-100);
-}
-
 kbd,
 .markdown-section kbd {
   font-family: var(--sl-font-mono);
@@ -412,7 +408,7 @@ kbd,
 }
 
 .markdown-section tr:nth-child(2n) {
-  background: var(--sl-color-neutral-50);
+  background: transparent;
 }
 
 .markdown-section th {
@@ -426,6 +422,7 @@ kbd,
   border-bottom: solid 1px var(--sl-color-neutral-200);
   border-left: none;
   border-right: none;
+  padding: 0.75rem 0.5rem;
 }
 
 .markdown-section table .nowrap {

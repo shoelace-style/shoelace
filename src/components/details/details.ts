@@ -1,11 +1,12 @@
 import { html, LitElement } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import '~/components/icon/icon';
-import { animateTo, shimKeyframesHeightAuto, stopAnimations } from '~/internal/animate';
-import { emit, waitForEvent } from '~/internal/event';
-import { watch } from '~/internal/watch';
-import { getAnimation, setDefaultAnimation } from '~/utilities/animation-registry';
+import '../../components/icon/icon';
+import { animateTo, shimKeyframesHeightAuto, stopAnimations } from '../../internal/animate';
+import { emit, waitForEvent } from '../../internal/event';
+import { watch } from '../../internal/watch';
+import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
+import { LocalizeController } from '../../utilities/localize';
 import styles from './details.styles';
 
 /**
@@ -38,6 +39,8 @@ export default class SlDetails extends LitElement {
   @query('.details') details: HTMLElement;
   @query('.details__header') header: HTMLElement;
   @query('.details__body') body: HTMLElement;
+
+  private readonly localize = new LocalizeController(this);
 
   /** Indicates whether or not the details is open. You can use this in lieu of the show/hide methods. */
   @property({ type: Boolean, reflect: true }) open = false;
@@ -116,7 +119,7 @@ export default class SlDetails extends LitElement {
       await stopAnimations(this.body);
       this.body.hidden = false;
 
-      const { keyframes, options } = getAnimation(this, 'details.show');
+      const { keyframes, options } = getAnimation(this, 'details.show', { dir: this.localize.dir() });
       await animateTo(this.body, shimKeyframesHeightAuto(keyframes, this.body.scrollHeight), options);
       this.body.style.height = 'auto';
 
@@ -127,7 +130,7 @@ export default class SlDetails extends LitElement {
 
       await stopAnimations(this.body);
 
-      const { keyframes, options } = getAnimation(this, 'details.hide');
+      const { keyframes, options } = getAnimation(this, 'details.hide', { dir: this.localize.dir() });
       await animateTo(this.body, shimKeyframesHeightAuto(keyframes, this.body.scrollHeight), options);
       this.body.hidden = true;
       this.body.style.height = 'auto';

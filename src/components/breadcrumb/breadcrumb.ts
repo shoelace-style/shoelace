@@ -1,8 +1,9 @@
 import { html, LitElement } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
-import type SlBreadcrumbItem from '~/components/breadcrumb-item/breadcrumb-item';
-import '~/components/icon/icon';
+import '../../components/icon/icon';
+import { LocalizeController } from '../../utilities/localize';
 import styles from './breadcrumb.styles';
+import type SlBreadcrumbItem from '../../components/breadcrumb-item/breadcrumb-item';
 
 /**
  * @since 2.0
@@ -22,6 +23,9 @@ export default class SlBreadcrumb extends LitElement {
   @query('slot') defaultSlot: HTMLSlotElement;
   @query('slot[name="separator"]') separatorSlot: HTMLSlotElement;
 
+  private readonly localize = new LocalizeController(this);
+  private separatorDir = this.localize.dir();
+
   /**
    * The label to use for the breadcrumb control. This will not be shown, but it will be announced by screen readers and
    * other assistive devices.
@@ -35,6 +39,7 @@ export default class SlBreadcrumb extends LitElement {
     // Clone it, remove ids, and slot it
     const clone = separator.cloneNode(true) as HTMLElement;
     [clone, ...clone.querySelectorAll('[id]')].forEach(el => el.removeAttribute('id'));
+    clone.setAttribute('data-default', '');
     clone.slot = 'separator';
 
     return clone;
@@ -49,7 +54,13 @@ export default class SlBreadcrumb extends LitElement {
       // Append separators to each item if they don't already have one
       const separator = item.querySelector('[slot="separator"]');
       if (separator === null) {
+        // No separator exists, add one
         item.append(this.getSeparator());
+      } else if (separator.hasAttribute('data-default')) {
+        // A default separator exists, replace it
+        separator.replaceWith(this.getSeparator());
+      } else {
+        // The user provided a custom separator, leave it alone
       }
 
       // The last breadcrumb item is the "current page"
@@ -62,13 +73,21 @@ export default class SlBreadcrumb extends LitElement {
   }
 
   render() {
+    // We clone the separator and inject them into breadcrumb items, so we need to regenerate the default ones when
+    // directionality changes. We do this by storing the current separator direction, waiting for render, then calling
+    // the function that regenerates them.
+    if (this.separatorDir !== this.localize.dir()) {
+      this.separatorDir = this.localize.dir();
+      this.updateComplete.then(() => this.handleSlotChange());
+    }
+
     return html`
       <nav part="base" class="breadcrumb" aria-label=${this.label}>
         <slot @slotchange=${this.handleSlotChange}></slot>
       </nav>
 
       <slot name="separator" hidden aria-hidden="true">
-        <sl-icon name="chevron-right" library="system"></sl-icon>
+        <sl-icon name=${this.localize.dir() === 'rtl' ? 'chevron-left' : 'chevron-right'} library="system"></sl-icon>
       </slot>
     `;
   }

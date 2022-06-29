@@ -6,6 +6,10 @@ Shoelace solves this problem by using the [`formdata`](https://developer.mozilla
 
 ?> If you're using an older browser that doesn't support the `formdata` event, a lightweight polyfill will be automatically applied to ensure forms submit as expected.
 
+## A Note About Event Handling
+
+Shoelace uses event listeners to intercept the form's `formdata` and `submit` events. This allows it to inject data and trigger validation as necessary. If you're also attaching an event listener to the form, _you must attach it after Shoelace form controls are connected to the DOM_, otherwise your logic will run before Shoelace has a chance to inject form data and validate form controls.
+
 ## Form Serialization
 
 Serialization is just a fancy word for collecting form data. If you're relying on standard form submissions, e.g. `<form action="...">`, you can probably skip this section. However, most modern apps use the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) or a library such as [axios](https://github.com/axios/axios) to submit forms using JavaScript.
@@ -61,10 +65,11 @@ To make a field required, use the `required` prop. The form will not be submitte
   <br />
   <sl-checkbox required>Check me before submitting</sl-checkbox>
   <br /><br />
+  <sl-button type="reset" variant="default">Reset</sl-button>
   <sl-button type="submit" variant="primary">Submit</sl-button>
 </form>
 
-<script>
+<script type="module">
   const form = document.querySelector('.input-validation-required');
   form.addEventListener('submit', event => {
     event.preventDefault();
@@ -114,10 +119,11 @@ To restrict a value to a specific [pattern](https://developer.mozilla.org/en-US/
 <form class="input-validation-pattern">
   <sl-input name="letters" required label="Letters" pattern="[A-Za-z]+"></sl-input>
   <br />
+  <sl-button type="reset" variant="default">Reset</sl-button>
   <sl-button type="submit" variant="primary">Submit</sl-button>
 </form>
 
-<script>
+<script type="module">
   const form = document.querySelector('.input-validation-pattern');
   form.addEventListener('submit', event => {
     event.preventDefault();
@@ -157,10 +163,11 @@ Some input types will automatically trigger constraints, such as `email` and `ur
   <br />
   <sl-input variant="url" label="URL" placeholder="https://example.com/" required></sl-input>
   <br />
+  <sl-button type="reset" variant="default">Reset</sl-button>
   <sl-button type="submit" variant="primary">Submit</sl-button>
 </form>
 
-<script>
+<script type="module">
   const form = document.querySelector('.input-validation-type');
   form.addEventListener('submit', event => {
     event.preventDefault();
@@ -194,16 +201,17 @@ const App = () => {
 
 ### Custom Validation
 
-To create a custom validation error, use the `setCustomValidity` method. The form will not be submitted when this method is called with anything other than an empty string, and its message will be shown by the browser as the validation error. To make the input valid again, call the method a second time with an empty string as the argument.
+To create a custom validation error, pass a non-empty string to the `setCustomValidity()` method. This will override any existing validation constraints. The form will not be submitted when a custom validity is set and the browser will show a validation error when the containing form is submitted. To make the input valid again, call `setCustomValidity()` again with an empty string.
 
 ```html preview
 <form class="input-validation-custom">
   <sl-input label="Type 'shoelace'" required></sl-input>
   <br />
+  <sl-button type="reset" variant="default">Reset</sl-button>
   <sl-button type="submit" variant="primary">Submit</sl-button>
 </form>
 
-<script>
+<script type="module">
   const form = document.querySelector('.input-validation-custom');
   const input = form.querySelector('sl-input');
 
@@ -256,6 +264,8 @@ const App = () => {
   );
 };
 ```
+
+?> Custom validation can be applied to any form control that supports the `setCustomValidity()` method. It is not limited to inputs and textareas.
 
 ### Custom Validation Styles
 

@@ -1,6 +1,6 @@
 import { css } from 'lit';
-import { focusVisibleSelector } from '~/internal/focus-visible';
-import componentStyles from '~/styles/component.styles';
+import { focusVisibleSelector } from '../../internal/focus-visible';
+import componentStyles from '../../styles/component.styles';
 
 export default css`
   ${componentStyles}
@@ -34,7 +34,8 @@ export default css`
   }
 
   .details__header${focusVisibleSelector} {
-    box-shadow: var(--sl-focus-ring);
+    outline: var(--sl-focus-ring);
+    outline-offset: calc(1px + var(--sl-focus-ring-offset));
   }
 
   .details--disabled .details__header {

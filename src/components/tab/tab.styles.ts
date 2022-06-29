@@ -1,6 +1,6 @@
 import { css } from 'lit';
-import { focusVisibleSelector } from '~/internal/focus-visible';
-import componentStyles from '~/styles/component.styles';
+import { focusVisibleSelector } from '../../internal/focus-visible';
+import componentStyles from '../../styles/component.styles';
 
 export default css`
   ${componentStyles}
@@ -34,7 +34,8 @@ export default css`
 
   .tab${focusVisibleSelector}:not(.tab--disabled) {
     color: var(--sl-color-primary-600);
-    box-shadow: inset var(--sl-focus-ring);
+    outline: var(--sl-focus-ring);
+    outline-offset: calc(-1 * var(--sl-focus-ring-width) - var(--sl-focus-ring-offset));
   }
 
   .tab.tab--active:not(.tab--disabled) {
@@ -42,7 +43,7 @@ export default css`
   }
 
   .tab.tab--closable {
-    padding-right: var(--sl-spacing-small);
+    padding-inline-end: var(--sl-spacing-small);
   }
 
   .tab.tab--disabled {
@@ -52,7 +53,7 @@ export default css`
 
   .tab__close-button {
     font-size: var(--sl-font-size-large);
-    margin-left: var(--sl-spacing-2x-small);
+    margin-inline-start: var(--sl-spacing-2x-small);
   }
 
   .tab__close-button::part(base) {

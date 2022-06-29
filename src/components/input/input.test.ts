@@ -1,7 +1,6 @@
-import { expect, fixture, html, waitUntil } from '@open-wc/testing';
+import { expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
 import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
-// eslint-disable-next-line no-restricted-imports
 import { serialize } from '../../utilities/form';
 import type SlInput from './input';
 
@@ -24,7 +23,6 @@ describe('<sl-input>', () => {
       const today = new Date();
 
       el.valueAsDate = today;
-      await el.updateComplete;
 
       expect(el.value).to.equal(today.toISOString().split('T')[0]);
     });
@@ -34,7 +32,6 @@ describe('<sl-input>', () => {
       const num = 12345;
 
       el.valueAsNumber = num;
-      await el.updateComplete;
 
       expect(el.value).to.equal(num.toString());
     });
@@ -104,6 +101,91 @@ describe('<sl-input>', () => {
       await waitUntil(() => submitHandler.calledOnce);
 
       expect(submitHandler).to.have.been.calledOnce;
+    });
+
+    it('should prevent submission when pressing enter in an input and canceling the keydown event', async () => {
+      const form = await fixture<HTMLFormElement>(html` <form><sl-input></sl-input></form> `);
+      const input = form.querySelector('sl-input')!;
+      const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+      const keydownHandler = sinon.spy((event: KeyboardEvent) => {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+        }
+      });
+
+      form.addEventListener('submit', submitHandler);
+      input.addEventListener('keydown', keydownHandler);
+      input.focus();
+      await sendKeys({ press: 'Enter' });
+      await waitUntil(() => keydownHandler.calledOnce);
+
+      expect(keydownHandler).to.have.been.calledOnce;
+      expect(submitHandler).to.not.have.been.called;
+    });
+  });
+
+  describe('when resetting a form', () => {
+    it('should reset the element to its initial value', async () => {
+      const form = await fixture<HTMLFormElement>(html`
+        <form>
+          <sl-input name="a" value="test"></sl-input>
+          <sl-button type="reset">Reset</sl-button>
+        </form>
+      `);
+      const button = form.querySelector('sl-button')!;
+      const input = form.querySelector('sl-input')!;
+      input.value = '1234';
+
+      await input.updateComplete;
+
+      setTimeout(() => button.click());
+      await oneEvent(form, 'reset');
+      await input.updateComplete;
+
+      expect(input.value).to.equal('test');
+
+      input.defaultValue = '';
+
+      setTimeout(() => button.click());
+      await oneEvent(form, 'reset');
+      await input.updateComplete;
+
+      expect(input.value).to.equal('');
+    });
+  });
+
+  describe('when calling HTMLFormElement.reportValidity()', () => {
+    it('should be invalid when the input is empty and form.reportValidity() is called', async () => {
+      const form = await fixture<HTMLFormElement>(html`
+        <form>
+          <sl-input required value=""></sl-input>
+          <sl-button type="submit">Submit</sl-button>
+        </form>
+      `);
+
+      expect(form.reportValidity()).to.be.false;
+    });
+
+    it('should be valid when the input is empty, reportValidity() is called, and the form has novalidate', async () => {
+      const form = await fixture<HTMLFormElement>(html`
+        <form novalidate>
+          <sl-input required value=""></sl-input>
+          <sl-button type="submit">Submit</sl-button>
+        </form>
+      `);
+
+      expect(form.reportValidity()).to.be.true;
+    });
+
+    it('should be invalid when a native input is empty and form.reportValidity() is called', async () => {
+      const form = await fixture<HTMLFormElement>(html`
+        <form>
+          <input required value=""></input>
+          <sl-button type="submit">Submit</sl-button>
+        </form>
+      `);
+
+      expect(form.reportValidity()).to.be.false;
     });
   });
 });

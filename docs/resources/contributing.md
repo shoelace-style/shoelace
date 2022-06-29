@@ -204,7 +204,9 @@ Internally, each component uses the [BEM methodology](http://getbem.com/) for cl
 
 ### Boolean Props
 
-Boolean props should _always_ default to `false`, otherwise there's no way for the user to unset the, without JavaScript. To keep the API as friendly and consistent as possible, use a name like `noHeader` with a default value of `false` instead of `header` with a default value of `true`.
+Boolean props should _always_ default to `false`, otherwise there's no way for the user to unset them using only attributes. To keep the API as friendly and consistent as possible, use a property such as `noHeader` and a corresponding kebab-case attribute such as `no-header`.
+
+When naming boolean props that hide or disable things, prefix them with `no-`, e.g. `no-spin-buttons` and avoid using other verbs such as `hide-` and `disable-` for consistency.
 
 ### Conditional Slots
 

@@ -1,6 +1,4 @@
-/* eslint-disable no-restricted-imports */
 import { elementUpdated, expect, fixture, html, oneEvent } from '@open-wc/testing';
-/* @ts-expect-error - TODO - switch to path aliases when Web Test Runner's esbuild plugin allows it */
 import { registerIconLibrary } from '../../../dist/shoelace.js';
 import type SlIcon from './icon';
 
@@ -48,7 +46,7 @@ describe('<sl-icon>', () => {
 
     it('renders pre-loaded system icons and emits sl-load event', async () => {
       const el = await fixture<SlIcon>(html` <sl-icon library="system"></sl-icon> `);
-      const listener = oneEvent(el, 'sl-load');
+      const listener = oneEvent(el, 'sl-load') as Promise<CustomEvent>;
 
       el.name = 'check-lg';
       const ev = await listener;
@@ -104,7 +102,7 @@ describe('<sl-icon>', () => {
   describe('new library', () => {
     it('renders icons from the new library and emits sl-load event', async () => {
       const el = await fixture<SlIcon>(html` <sl-icon library="test-library"></sl-icon> `);
-      const listener = oneEvent(el, 'sl-load');
+      const listener = oneEvent(el, 'sl-load') as Promise<CustomEvent>;
 
       el.name = 'test-icon1';
       const ev = await listener;
@@ -133,7 +131,7 @@ describe('<sl-icon>', () => {
 
     it('emits sl-error when the file cant be retrieved', async () => {
       const el = await fixture<SlIcon>(html` <sl-icon library="test-library"></sl-icon> `);
-      const listener = oneEvent(el, 'sl-error');
+      const listener = oneEvent(el, 'sl-error') as Promise<CustomEvent>;
 
       el.name = 'bad-request';
       const ev = await listener;
@@ -145,7 +143,7 @@ describe('<sl-icon>', () => {
 
     it("emits sl-error when there isn't an svg element in the registered icon", async () => {
       const el = await fixture<SlIcon>(html` <sl-icon library="test-library"></sl-icon> `);
-      const listener = oneEvent(el, 'sl-error');
+      const listener = oneEvent(el, 'sl-error') as Promise<CustomEvent>;
 
       el.name = 'bad-icon';
       const ev = await listener;

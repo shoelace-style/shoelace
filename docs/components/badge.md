@@ -142,12 +142,12 @@ One of the most common use cases for badges is attaching them to buttons. To mak
   <sl-badge pill>30</sl-badge>
 </sl-button>
 
-<sl-button style="margin-left: 1rem;">
+<sl-button style="margin-inline-start: 1rem;">
   Warnings
   <sl-badge variant="warning" pill>8</sl-badge>
 </sl-button>
 
-<sl-button style="margin-left: 1rem;">
+<sl-button style="margin-inline-start: 1rem;">
   Errors
   <sl-badge variant="danger" pill>6</sl-badge>
 </sl-button>
@@ -163,14 +163,14 @@ const App = () => (
       <SlBadge pill>30</SlBadge>
     </SlButton>
 
-    <SlButton style={{ marginLeft: '1rem' }}>
+    <SlButton style={{ marginInlineStart: '1rem' }}>
       Warnings
       <SlBadge variant="warning" pill>
         8
       </SlBadge>
     </SlButton>
 
-    <SlButton style={{ marginLeft: '1rem' }}>
+    <SlButton style={{ marginInlineStart: '1rem' }}>
       Errors
       <SlBadge variant="danger" pill>
         6

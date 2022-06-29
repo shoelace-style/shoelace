@@ -138,11 +138,7 @@
 
 .code-block__button:focus-visible {
   outline: none;
-  color: var(--sl-color-primary-600);
-  border-color: var(--sl-color-primary-400);
-  border-right-color: transparent;
-  background-color: var(--sl-color-primary-50);
-  box-shadow: 0 0 0 1px var(--sl-color-primary-400), var(--sl-focus-ring);
+  outline: var(--sl-focus-ring);
   z-index: 2;
 }
 
@@ -210,7 +206,8 @@
 }
 
 .markdown-section .docsify-copy-code-button:focus-visible {
-  box-shadow: var(--sl-focus-ring);
+  outline: var(--sl-focus-ring);
+  outline-offset: var(--sl-focus-ring-offset);
 }
 
 .markdown-section .docsify-copy-code-button:active {

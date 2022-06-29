@@ -1,6 +1,6 @@
 import { css } from 'lit';
-import { focusVisibleSelector } from '~/internal/focus-visible';
-import componentStyles from '~/styles/component.styles';
+import { focusVisibleSelector } from '../../internal/focus-visible';
+import componentStyles from '../../styles/component.styles';
 
 export default css`
   ${componentStyles}
@@ -18,7 +18,6 @@ export default css`
     font-weight: var(--sl-font-weight-normal);
     line-height: var(--sl-line-height-normal);
     letter-spacing: var(--sl-letter-spacing-normal);
-    text-align: left;
     color: var(--sl-color-neutral-700);
     padding: var(--sl-spacing-2x-small) var(--sl-spacing-2x-small);
     transition: var(--sl-transition-fast) fill;
@@ -44,7 +43,7 @@ export default css`
   }
 
   .menu-item .menu-item__prefix ::slotted(*) {
-    margin-right: var(--sl-spacing-x-small);
+    margin-inline-end: var(--sl-spacing-x-small);
   }
 
   .menu-item .menu-item__suffix {
@@ -54,7 +53,7 @@ export default css`
   }
 
   .menu-item .menu-item__suffix ::slotted(*) {
-    margin-left: var(--sl-spacing-x-small);
+    margin-inline-start: var(--sl-spacing-x-small);
   }
 
   :host(:focus) {

@@ -3,10 +3,11 @@ import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-import '~/components/icon/icon';
-import { emit } from '~/internal/event';
-import { clamp } from '~/internal/math';
-import { watch } from '~/internal/watch';
+import '../../components/icon/icon';
+import { emit } from '../../internal/event';
+import { clamp } from '../../internal/math';
+import { watch } from '../../internal/watch';
+import { LocalizeController } from '../../utilities/localize';
 import styles from './rating.styles';
 
 /**
@@ -29,6 +30,8 @@ export default class SlRating extends LitElement {
   static styles = styles;
 
   @query('.rating') rating: HTMLElement;
+
+  private readonly localize = new LocalizeController(this);
 
   @state() private hoverValue = 0;
   @state() private isHovering = false;
@@ -70,13 +73,13 @@ export default class SlRating extends LitElement {
   }
 
   getValueFromXCoordinate(coordinate: number) {
-    const containerLeft = this.rating.getBoundingClientRect().left;
-    const containerWidth = this.rating.getBoundingClientRect().width;
-    return clamp(
-      this.roundToPrecision(((coordinate - containerLeft) / containerWidth) * this.max, this.precision),
-      0,
-      this.max
-    );
+    const isRtl = this.localize.dir() === 'rtl';
+    const { left, right, width } = this.rating.getBoundingClientRect();
+    const value = isRtl
+      ? this.roundToPrecision(((right - coordinate) / width) * this.max, this.precision)
+      : this.roundToPrecision(((coordinate - left) / width) * this.max, this.precision);
+
+    return clamp(value, 0, this.max);
   }
 
   handleClick(event: MouseEvent) {
@@ -93,17 +96,20 @@ export default class SlRating extends LitElement {
   }
 
   handleKeyDown(event: KeyboardEvent) {
+    const isLtr = this.localize.dir() === 'ltr';
+    const isRtl = this.localize.dir() === 'rtl';
+
     if (this.disabled || this.readonly) {
       return;
     }
 
-    if (event.key === 'ArrowLeft') {
+    if ((isLtr && event.key === 'ArrowLeft') || (isRtl && event.key === 'ArrowRight')) {
       const decrement = event.shiftKey ? 1 : this.precision;
       this.value = Math.max(0, this.value - decrement);
       event.preventDefault();
     }
 
-    if (event.key === 'ArrowRight') {
+    if ((isLtr && event.key === 'ArrowRight') || (isRtl && event.key === 'ArrowLeft')) {
       const increment = event.shiftKey ? 1 : this.precision;
       this.value = Math.min(this.max, this.value + increment);
       event.preventDefault();
@@ -163,6 +169,7 @@ export default class SlRating extends LitElement {
   }
 
   render() {
+    const isRtl = this.localize.dir() === 'rtl';
     const counter = Array.from(Array(this.max).keys());
     let displayValue = 0;
 
@@ -178,7 +185,8 @@ export default class SlRating extends LitElement {
         class=${classMap({
           rating: true,
           'rating--readonly': this.readonly,
-          'rating--disabled': this.disabled
+          'rating--disabled': this.disabled,
+          'rating--rtl': isRtl
         })}
         aria-disabled=${this.disabled ? 'true' : 'false'}
         aria-readonly=${this.readonly ? 'true' : 'false'}
@@ -225,7 +233,11 @@ export default class SlRating extends LitElement {
                 })}
                 style=${styleMap({
                   clipPath:
-                    displayValue > index + 1 ? 'none' : `inset(0 ${100 - ((displayValue - index) / 1) * 100}% 0 0)`
+                    displayValue > index + 1
+                      ? 'none'
+                      : isRtl
+                      ? `inset(0 0 0 ${100 - ((displayValue - index) / 1) * 100}%)`
+                      : `inset(0 ${100 - ((displayValue - index) / 1) * 100}% 0 0)`
                 })}
                 role="presentation"
               >

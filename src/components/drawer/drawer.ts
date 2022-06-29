@@ -2,16 +2,16 @@ import { html, LitElement } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import '~/components/icon-button/icon-button';
-import { animateTo, stopAnimations } from '~/internal/animate';
-import { emit, waitForEvent } from '~/internal/event';
-import Modal from '~/internal/modal';
-import { lockBodyScrolling, unlockBodyScrolling } from '~/internal/scroll';
-import { HasSlotController } from '~/internal/slot';
-import { uppercaseFirstLetter } from '~/internal/string';
-import { watch } from '~/internal/watch';
-import { getAnimation, setDefaultAnimation } from '~/utilities/animation-registry';
-import { LocalizeController } from '~/utilities/localize';
+import '../../components/icon-button/icon-button';
+import { animateTo, stopAnimations } from '../../internal/animate';
+import { emit, waitForEvent } from '../../internal/event';
+import Modal from '../../internal/modal';
+import { lockBodyScrolling, unlockBodyScrolling } from '../../internal/scroll';
+import { HasSlotController } from '../../internal/slot';
+import { uppercaseFirstLetter } from '../../internal/string';
+import { watch } from '../../internal/watch';
+import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
+import { LocalizeController } from '../../utilities/localize';
 import styles from './drawer.styles';
 
 /**
@@ -146,7 +146,7 @@ export default class SlDrawer extends LitElement {
     });
 
     if (slRequestClose.defaultPrevented) {
-      const animation = getAnimation(this, 'drawer.denyClose');
+      const animation = getAnimation(this, 'drawer.denyClose', { dir: this.localize.dir() });
       animateTo(this.panel, animation.keyframes, animation.options);
       return;
     }
@@ -207,8 +207,10 @@ export default class SlDrawer extends LitElement {
         }
       });
 
-      const panelAnimation = getAnimation(this, `drawer.show${uppercaseFirstLetter(this.placement)}`);
-      const overlayAnimation = getAnimation(this, 'drawer.overlay.show');
+      const panelAnimation = getAnimation(this, `drawer.show${uppercaseFirstLetter(this.placement)}`, {
+        dir: this.localize.dir()
+      });
+      const overlayAnimation = getAnimation(this, 'drawer.overlay.show', { dir: this.localize.dir() });
       await Promise.all([
         animateTo(this.panel, panelAnimation.keyframes, panelAnimation.options),
         animateTo(this.overlay, overlayAnimation.keyframes, overlayAnimation.options)
@@ -222,8 +224,10 @@ export default class SlDrawer extends LitElement {
       unlockBodyScrolling(this);
 
       await Promise.all([stopAnimations(this.drawer), stopAnimations(this.overlay)]);
-      const panelAnimation = getAnimation(this, `drawer.hide${uppercaseFirstLetter(this.placement)}`);
-      const overlayAnimation = getAnimation(this, 'drawer.overlay.hide');
+      const panelAnimation = getAnimation(this, `drawer.hide${uppercaseFirstLetter(this.placement)}`, {
+        dir: this.localize.dir()
+      });
+      const overlayAnimation = getAnimation(this, 'drawer.overlay.hide', { dir: this.localize.dir() });
       await Promise.all([
         animateTo(this.panel, panelAnimation.keyframes, panelAnimation.options),
         animateTo(this.overlay, overlayAnimation.keyframes, overlayAnimation.options)
@@ -255,6 +259,7 @@ export default class SlDrawer extends LitElement {
           'drawer--start': this.placement === 'start',
           'drawer--contained': this.contained,
           'drawer--fixed': !this.contained,
+          'drawer--rtl': this.localize.dir() === 'rtl',
           'drawer--has-footer': this.hasSlotController.test('footer')
         })}
         @keydown=${this.handleKeyDown}
@@ -328,6 +333,10 @@ setDefaultAnimation('drawer.showEnd', {
     { opacity: 0, transform: 'translateX(100%)' },
     { opacity: 1, transform: 'translateX(0)' }
   ],
+  rtlKeyframes: [
+    { opacity: 0, transform: 'translateX(-100%)' },
+    { opacity: 1, transform: 'translateX(0)' }
+  ],
   options: { duration: 250, easing: 'ease' }
 });
 
@@ -335,6 +344,10 @@ setDefaultAnimation('drawer.hideEnd', {
   keyframes: [
     { opacity: 1, transform: 'translateX(0)' },
     { opacity: 0, transform: 'translateX(100%)' }
+  ],
+  rtlKeyframes: [
+    { opacity: 1, transform: 'translateX(0)' },
+    { opacity: 0, transform: 'translateX(-100%)' }
   ],
   options: { duration: 250, easing: 'ease' }
 });
@@ -362,6 +375,10 @@ setDefaultAnimation('drawer.showStart', {
     { opacity: 0, transform: 'translateX(-100%)' },
     { opacity: 1, transform: 'translateX(0)' }
   ],
+  rtlKeyframes: [
+    { opacity: 0, transform: 'translateX(100%)' },
+    { opacity: 1, transform: 'translateX(0)' }
+  ],
   options: { duration: 250, easing: 'ease' }
 });
 
@@ -369,6 +386,10 @@ setDefaultAnimation('drawer.hideStart', {
   keyframes: [
     { opacity: 1, transform: 'translateX(0)' },
     { opacity: 0, transform: 'translateX(-100%)' }
+  ],
+  rtlKeyframes: [
+    { opacity: 1, transform: 'translateX(0)' },
+    { opacity: 0, transform: 'translateX(100%)' }
   ],
   options: { duration: 250, easing: 'ease' }
 });

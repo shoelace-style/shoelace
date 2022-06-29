@@ -29,8 +29,8 @@ If applicable, add screenshots to help explain the bug.
 
 ### Browser / OS
  - OS: [e.g. Mac, Windows]
- - Browser [e.g. Chrome, Firefox, Safari]
- - Browser version [e.g. 22]
+ - Browser: [e.g. Chrome, Firefox, Safari]
+ - Browser version: [e.g. 22]
 
 ### Additional information
 Provide any additional information about the bug here.

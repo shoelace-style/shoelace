@@ -1,6 +1,6 @@
 import { css } from 'lit';
-import { focusVisibleSelector } from '~/internal/focus-visible';
-import componentStyles from '~/styles/component.styles';
+import { focusVisibleSelector } from '../../internal/focus-visible';
+import componentStyles from '../../styles/component.styles';
 
 export default css`
   ${componentStyles}
@@ -49,9 +49,13 @@ export default css`
     color: var(--sl-color-primary-600);
   }
 
-  .breadcrumb-item__label${focusVisibleSelector} {
+  .breadcrumb-item__label:focus {
     outline: none;
-    box-shadow: var(--sl-focus-ring);
+  }
+
+  .breadcrumb-item__label${focusVisibleSelector} {
+    outline: var(--sl-focus-ring);
+    outline-offset: var(--sl-focus-ring-offset);
   }
 
   .breadcrumb-item__prefix,
@@ -64,12 +68,12 @@ export default css`
 
   .breadcrumb-item--has-prefix .breadcrumb-item__prefix {
     display: inline-flex;
-    margin-right: var(--sl-spacing-x-small);
+    margin-inline-end: var(--sl-spacing-x-small);
   }
 
   .breadcrumb-item--has-suffix .breadcrumb-item__suffix {
     display: inline-flex;
-    margin-left: var(--sl-spacing-x-small);
+    margin-inline-start: var(--sl-spacing-x-small);
   }
 
   :host(:last-of-type) .breadcrumb-item__separator {

@@ -1,6 +1,6 @@
 import { css } from 'lit';
-import { focusVisibleSelector } from '~/internal/focus-visible';
-import componentStyles from '~/styles/component.styles';
+import { focusVisibleSelector } from '../../internal/focus-visible';
+import componentStyles from '../../styles/component.styles';
 
 export default css`
   ${componentStyles}
@@ -80,7 +80,8 @@ export default css`
     .switch__thumb {
     background-color: var(--sl-color-neutral-0);
     border-color: var(--sl-color-primary-600);
-    box-shadow: var(--sl-focus-ring);
+    outline: var(--sl-focus-ring);
+    outline-offset: var(--sl-focus-ring-offset);
   }
 
   /* Checked */
@@ -118,7 +119,8 @@ export default css`
     .switch__thumb {
     background-color: var(--sl-color-neutral-0);
     border-color: var(--sl-color-primary-600);
-    box-shadow: var(--sl-focus-ring);
+    outline: var(--sl-focus-ring);
+    outline-offset: var(--sl-focus-ring-offset);
   }
 
   /* Disabled */
@@ -129,7 +131,12 @@ export default css`
 
   .switch__label {
     line-height: var(--height);
-    margin-left: 0.5em;
+    margin-inline-start: 0.5em;
     user-select: none;
+  }
+
+  :host([required]) .switch__label::after {
+    content: var(--sl-input-required-content);
+    margin-inline-start: var(--sl-input-required-content-offset);
   }
 `;

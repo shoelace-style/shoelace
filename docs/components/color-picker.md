@@ -37,7 +37,7 @@ const App = () => <SlColorPicker value="#4a90e2" label="Select a color" />;
 Use the `opacity` attribute to enable the opacity slider. When this is enabled, the value will be displayed as HEXA, RGBA, or HSLA based on `format`.
 
 ```html preview
-<sl-color-picker opacity label="Select a color"></sl-color-picker>
+<sl-color-picker value="#f5a623ff" opacity label="Select a color"></sl-color-picker>
 ```
 
 ```jsx react

@@ -94,110 +94,6 @@ const App = () => (
 );
 ```
 
-### Variants
-
-Use the `variant` attribute to set the button's variant.
-
-```html preview
-<sl-radio-group label="Select an option">
-  <sl-radio-button variant="default" name="option" value="1" checked>Option 1</sl-radio-button>
-  <sl-radio-button variant="default" name="option" value="2">Option 2</sl-radio-button>
-  <sl-radio-button variant="default" name="option" value="3">Option 3</sl-radio-button>
-</sl-radio-group>
-
-<br />
-
-<sl-radio-group label="Select an option">
-  <sl-radio-button variant="primary" name="option" value="1" checked>Option 1</sl-radio-button>
-  <sl-radio-button variant="primary" name="option" value="2">Option 2</sl-radio-button>
-  <sl-radio-button variant="primary" name="option" value="3">Option 3</sl-radio-button>
-</sl-radio-group>
-
-<br />
-
-<sl-radio-group label="Select an option">
-  <sl-radio-button variant="success" name="option" value="1" checked>Option 1</sl-radio-button>
-  <sl-radio-button variant="success" name="option" value="2">Option 2</sl-radio-button>
-  <sl-radio-button variant="success" name="option" value="3">Option 3</sl-radio-button>
-</sl-radio-group>
-
-<br />
-
-<sl-radio-group label="Select an option">
-  <sl-radio-button variant="neutral" name="option" value="1" checked>Option 1</sl-radio-button>
-  <sl-radio-button variant="neutral" name="option" value="2">Option 2</sl-radio-button>
-  <sl-radio-button variant="neutral" name="option" value="3">Option 3</sl-radio-button>
-</sl-radio-group>
-
-<br />
-
-<sl-radio-group label="Select an option">
-  <sl-radio-button variant="warning" name="option" value="1" checked>Option 1</sl-radio-button>
-  <sl-radio-button variant="warning" name="option" value="2">Option 2</sl-radio-button>
-  <sl-radio-button variant="warning" name="option" value="3">Option 3</sl-radio-button>
-</sl-radio-group>
-
-<br />
-
-<sl-radio-group label="Select an option">
-  <sl-radio-button variant="success" name="option" value="1" checked>Option 1</sl-radio-button>
-  <sl-radio-button variant="success" name="option" value="2">Option 2</sl-radio-button>
-  <sl-radio-button variant="success" name="option" value="3">Option 3</sl-radio-button>
-</sl-radio-group>
-```
-
-```jsx react
-import { SlRadioButton, SlRadioGroup } from '@shoelace-style/shoelace/dist/react';
-
-const App = () => (
-  <SlRadioGroup label="Select an option">
-    <SlRadioButton variant="default" name="option" value="1" checked>Option 1</SlRadioButton>
-    <SlRadioButton variant="default" name="option" value="2">Option 2</SlRadioButton>
-    <SlRadioButton variant="default" name="option" value="3">Option 3</SlRadioButton>
-  </SlRadioGroup>
-
-  <br />
-
-  <SlRadioGroup label="Select an option">
-    <SlRadioButton variant="primary" name="option" value="1" checked>Option 1</SlRadioButton>
-    <SlRadioButton variant="primary" name="option" value="2">Option 2</SlRadioButton>
-    <SlRadioButton variant="primary" name="option" value="3">Option 3</SlRadioButton>
-  </SlRadioGroup>
-
-  <br />
-
-  <SlRadioGroup label="Select an option">
-    <SlRadioButton variant="success" name="option" value="1" checked>Option 1</SlRadioButton>
-    <SlRadioButton variant="success" name="option" value="2">Option 2</SlRadioButton>
-    <SlRadioButton variant="success" name="option" value="3">Option 3</SlRadioButton>
-  </SlRadioGroup>
-
-  <br />
-
-  <SlRadioGroup label="Select an option">
-    <SlRadioButton variant="neutral" name="option" value="1" checked>Option 1</SlRadioButton>
-    <SlRadioButton variant="neutral" name="option" value="2">Option 2</SlRadioButton>
-    <SlRadioButton variant="neutral" name="option" value="3">Option 3</SlRadioButton>
-  </SlRadioGroup>
-
-  <br />
-
-  <SlRadioGroup label="Select an option">
-    <SlRadioButton variant="warning" name="option" value="1" checked>Option 1</SlRadioButton>
-    <SlRadioButton variant="warning" name="option" value="2">Option 2</SlRadioButton>
-    <SlRadioButton variant="warning" name="option" value="3">Option 3</SlRadioButton>
-  </SlRadioGroup>
-
-  <br />
-
-  <SlRadioGroup label="Select an option">
-    <SlRadioButton variant="success" name="option" value="1" checked>Option 1</SlRadioButton>
-    <SlRadioButton variant="success" name="option" value="2">Option 2</SlRadioButton>
-    <SlRadioButton variant="success" name="option" value="3">Option 3</SlRadioButton>
-  </SlRadioGroup>
-);
-```
-
 ### Sizes
 
 Use the `size` attribute to change a radio button's size.
@@ -412,6 +308,79 @@ const App = () => (
     </SlRadioButton>
   </SlRadioGroup>
 );
+```
+
+### Custom Validity
+
+Use the `setCustomValidity()` method to set a custom validation message. This will prevent the form from submitting and make the browser display the error message you provide. To clear the error, call this function with an empty string.
+
+```html preview
+<form class="custom-validity">
+  <sl-radio-group label="Select an option">
+    <sl-radio-button name="a" value="1" checked>Not me</sl-radio-button>
+    <sl-radio-button name="a" value="2">Me neither</sl-radio-button>
+    <sl-radio-button name="a" value="3">Choose me</sl-radio-button>
+  </sl-radio-group>
+  <br />
+  <sl-button type="submit" variant="primary">Submit</sl-button>
+</form>
+<script>
+  const form = document.querySelector('.custom-validity');
+  const radioButton = form.querySelectorAll('sl-radio-button')[2];
+  const errorMessage = 'You must choose this option';
+  // Set initial validity as soon as the element is defined
+  customElements.whenDefined('sl-radio-button').then(() => {
+    radioButton.setCustomValidity(errorMessage);
+  });
+  // Update validity when a selection is made
+  form.addEventListener('sl-change', () => {
+    const isValid = radioButton.checked;
+    radioButton.setCustomValidity(isValid ? '' : errorMessage);
+  });
+  // Handle form submit
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    alert('All fields are valid!');
+  });
+</script>
+```
+
+```jsx react
+import { useEffect, useRef } from 'react';
+import { SlButton, SlIcon, SlRadioButton, SlRadioGroup } from '@shoelace-style/shoelace/dist/react';
+const App = () => {
+  const radio = useRef(null);
+  const errorMessage = 'You must choose this option';
+  function handleChange(event) {
+    radio.current.setCustomValidity(radio.current.checked ? '' : errorMessage);
+  }
+  function handleSubmit(event) {
+    event.preventDefault();
+    alert('All fields are valid!');
+  }
+  useEffect(() => {
+    radio.current.setCustomValidity(errorMessage);
+  }, []);
+  return (
+    <form class="custom-validity" onSubmit={handleSubmit}>
+      <SlRadioGroup label="Select an option">
+        <SlRadioButton name="a" value="1" checked onSlChange={handleChange}>
+          Not me
+        </SlRadioButton>
+        <SlRadioButton name="a" value="2" onSlChange={handleChange}>
+          Me neither
+        </SlRadioButton>
+        <SlRadioButton ref={radio} name="a" value="3" onSlChange={handleChange}>
+          Choose me
+        </SlRadioButton>
+      </SlRadioGroup>
+      <br />
+      <SlButton type="submit" variant="primary">
+        Submit
+      </SlButton>
+    </form>
+  );
+};
 ```
 
 [component-metadata:sl-radio-button]

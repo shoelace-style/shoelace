@@ -5,21 +5,22 @@ import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
 import { styleMap } from 'lit/directives/style-map.js';
-import '~/components/button-group/button-group';
-import '~/components/button/button';
-import '~/components/dropdown/dropdown';
-import type SlDropdown from '~/components/dropdown/dropdown';
-import '~/components/icon/icon';
-import '~/components/input/input';
-import type SlInput from '~/components/input/input';
-import '~/components/visually-hidden/visually-hidden';
-import { drag } from '~/internal/drag';
-import { emit } from '~/internal/event';
-import { FormSubmitController } from '~/internal/form';
-import { clamp } from '~/internal/math';
-import { watch } from '~/internal/watch';
-import { LocalizeController } from '~/utilities/localize';
+import '../../components/button-group/button-group';
+import '../../components/button/button';
+import '../../components/dropdown/dropdown';
+import '../../components/icon/icon';
+import '../../components/input/input';
+import '../../components/visually-hidden/visually-hidden';
+import { defaultValue } from '../../internal/default-value';
+import { drag } from '../../internal/drag';
+import { emit } from '../../internal/event';
+import { FormSubmitController } from '../../internal/form';
+import { clamp } from '../../internal/math';
+import { watch } from '../../internal/watch';
+import { LocalizeController } from '../../utilities/localize';
 import styles from './color-picker.styles';
+import type SlDropdown from '../../components/dropdown/dropdown';
+import type SlInput from '../../components/input/input';
 
 const hasEyeDropper = 'EyeDropper' in window;
 
@@ -93,14 +94,21 @@ export default class SlColorPicker extends LitElement {
   private lastValueEmitted: string;
   private readonly localize = new LocalizeController(this);
 
+  @state() private isDraggingGridHandle = false;
+  @state() private isEmpty = false;
   @state() private inputValue = '';
   @state() private hue = 0;
   @state() private saturation = 100;
   @state() private lightness = 100;
+  @state() private brightness = 100;
   @state() private alpha = 100;
 
   /** The current color. */
-  @property() value = '#ffffff';
+  @property() value = '';
+
+  /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
+  @defaultValue()
+  defaultValue = '';
 
   /* The color picker's label. This will not be displayed, but it will be announced by assistive devices. */
   @property() label = '';
@@ -174,13 +182,16 @@ export default class SlColorPicker extends LitElement {
   connectedCallback() {
     super.connectedCallback();
 
-    if (!this.setColor(this.value)) {
-      this.setColor(`#ffff`);
+    if (this.value) {
+      this.setColor(this.value);
+      this.inputValue = this.value;
+      this.lastValueEmitted = this.value;
+      this.syncValues();
+    } else {
+      this.isEmpty = true;
+      this.inputValue = '';
+      this.lastValueEmitted = '';
     }
-
-    this.inputValue = this.value;
-    this.lastValueEmitted = this.value;
-    this.syncValues();
   }
 
   /** Returns the current value as a string in the specified format. */
@@ -209,6 +220,14 @@ export default class SlColorPicker extends LitElement {
       default:
         return '';
     }
+  }
+
+  getBrightness(lightness: number) {
+    return clamp(-1 * ((200 * lightness) / (this.saturation - 200)), 0, 100);
+  }
+
+  getLightness(brightness: number) {
+    return clamp(((((200 - this.saturation) * brightness) / 100) * 5) / 10, 0, 100);
   }
 
   /** Checks for validity and shows the browser's validation message if the control is invalid. */
@@ -254,7 +273,7 @@ export default class SlColorPicker extends LitElement {
     this.format = formats[nextIndex] as 'hex' | 'rgb' | 'hsl';
   }
 
-  handleAlphaDrag(event: Event) {
+  handleAlphaDrag(event: PointerEvent) {
     const container = this.shadowRoot!.querySelector<HTMLElement>('.color-picker__slider.color-picker__alpha')!;
     const handle = container.querySelector<HTMLElement>('.color-picker__slider-handle')!;
     const { width } = container.getBoundingClientRect();
@@ -262,13 +281,16 @@ export default class SlColorPicker extends LitElement {
     handle.focus();
     event.preventDefault();
 
-    drag(container, x => {
-      this.alpha = clamp((x / width) * 100, 0, 100);
-      this.syncValues();
+    drag(container, {
+      onMove: x => {
+        this.alpha = clamp((x / width) * 100, 0, 100);
+        this.syncValues();
+      },
+      initialEvent: event
     });
   }
 
-  handleHueDrag(event: Event) {
+  handleHueDrag(event: PointerEvent) {
     const container = this.shadowRoot!.querySelector<HTMLElement>('.color-picker__slider.color-picker__hue')!;
     const handle = container.querySelector<HTMLElement>('.color-picker__slider-handle')!;
     const { width } = container.getBoundingClientRect();
@@ -276,13 +298,16 @@ export default class SlColorPicker extends LitElement {
     handle.focus();
     event.preventDefault();
 
-    drag(container, x => {
-      this.hue = clamp((x / width) * 360, 0, 360);
-      this.syncValues();
+    drag(container, {
+      onMove: x => {
+        this.hue = clamp((x / width) * 360, 0, 360);
+        this.syncValues();
+      },
+      initialEvent: event
     });
   }
 
-  handleGridDrag(event: Event) {
+  handleGridDrag(event: PointerEvent) {
     const grid = this.shadowRoot!.querySelector<HTMLElement>('.color-picker__grid')!;
     const handle = grid.querySelector<HTMLElement>('.color-picker__grid-handle')!;
     const { width, height } = grid.getBoundingClientRect();
@@ -290,10 +315,17 @@ export default class SlColorPicker extends LitElement {
     handle.focus();
     event.preventDefault();
 
-    drag(grid, (x, y) => {
-      this.saturation = clamp((x / width) * 100, 0, 100);
-      this.lightness = clamp(100 - (y / height) * 100, 0, 100);
-      this.syncValues();
+    this.isDraggingGridHandle = true;
+
+    drag(grid, {
+      onMove: (x, y) => {
+        this.saturation = clamp((x / width) * 100, 0, 100);
+        this.brightness = clamp(100 - (y / height) * 100, 0, 100);
+        this.lightness = this.getLightness(this.brightness);
+        this.syncValues();
+      },
+      onStop: () => (this.isDraggingGridHandle = false),
+      initialEvent: event
     });
   }
 
@@ -370,13 +402,15 @@ export default class SlColorPicker extends LitElement {
 
     if (event.key === 'ArrowUp') {
       event.preventDefault();
-      this.lightness = clamp(this.lightness + increment, 0, 100);
+      this.brightness = clamp(this.brightness + increment, 0, 100);
+      this.lightness = this.getLightness(this.brightness);
       this.syncValues();
     }
 
     if (event.key === 'ArrowDown') {
       event.preventDefault();
-      this.lightness = clamp(this.lightness - increment, 0, 100);
+      this.brightness = clamp(this.brightness - increment, 0, 100);
+      this.lightness = this.getLightness(this.brightness);
       this.syncValues();
     }
   }
@@ -384,16 +418,25 @@ export default class SlColorPicker extends LitElement {
   handleInputChange(event: CustomEvent) {
     const target = event.target as HTMLInputElement;
 
-    this.setColor(target.value);
-    target.value = this.value;
+    if (this.input.value) {
+      this.setColor(target.value);
+      target.value = this.value;
+    } else {
+      this.value = '';
+    }
+
     event.stopPropagation();
   }
 
   handleInputKeyDown(event: KeyboardEvent) {
     if (event.key === 'Enter') {
-      this.setColor(this.input.value);
-      this.input.value = this.value;
-      setTimeout(() => this.input.select());
+      if (this.input.value) {
+        this.setColor(this.input.value);
+        this.input.value = this.value;
+        setTimeout(() => this.input.select());
+      } else {
+        this.hue = 0;
+      }
     }
   }
 
@@ -529,6 +572,7 @@ export default class SlColorPicker extends LitElement {
     this.hue = newColor.hsla.h;
     this.saturation = newColor.hsla.s;
     this.lightness = newColor.hsla.l;
+    this.brightness = this.getBrightness(newColor.hsla.l);
     this.alpha = this.opacity ? newColor.hsla.a * 100 : 100;
 
     this.syncValues();
@@ -589,7 +633,7 @@ export default class SlColorPicker extends LitElement {
       });
   }
 
-  @watch('format')
+  @watch('format', { waitUntilFirstUpdate: true })
   handleFormatChange() {
     this.syncValues();
   }
@@ -601,6 +645,16 @@ export default class SlColorPicker extends LitElement {
 
   @watch('value')
   handleValueChange(oldValue: string | undefined, newValue: string) {
+    this.isEmpty = !newValue;
+
+    if (!newValue) {
+      this.hue = 0;
+      this.saturation = 100;
+      this.brightness = 100;
+      this.lightness = this.getLightness(this.brightness);
+      this.alpha = 100;
+    }
+
     if (!this.isSafeValue && oldValue !== undefined) {
       const newColor = this.parseColor(newValue);
 
@@ -609,6 +663,7 @@ export default class SlColorPicker extends LitElement {
         this.hue = newColor.hsla.h;
         this.saturation = newColor.hsla.s;
         this.lightness = newColor.hsla.l;
+        this.brightness = this.getBrightness(newColor.hsla.l);
         this.alpha = newColor.hsla.a * 100;
       } else {
         this.inputValue = oldValue;
@@ -622,8 +677,8 @@ export default class SlColorPicker extends LitElement {
   }
 
   render() {
-    const x = this.saturation;
-    const y = 100 - this.lightness;
+    const gridHandleX = this.saturation;
+    const gridHandleY = 100 - this.brightness;
 
     const colorPicker = html`
       <div
@@ -654,10 +709,13 @@ export default class SlColorPicker extends LitElement {
         >
           <span
             part="grid-handle"
-            class="color-picker__grid-handle"
+            class=${classMap({
+              'color-picker__grid-handle': true,
+              'color-picker__grid-handle--dragging': this.isDraggingGridHandle
+            })}
             style=${styleMap({
-              top: `${y}%`,
-              left: `${x}%`,
+              top: `${gridHandleY}%`,
+              left: `${gridHandleX}%`,
               backgroundColor: `hsla(${this.hue}deg, ${this.saturation}%, ${this.lightness}%)`
             })}
             role="application"
@@ -751,7 +809,7 @@ export default class SlColorPicker extends LitElement {
             autocorrect="off"
             autocapitalize="off"
             spellcheck="false"
-            .value=${live(this.inputValue)}
+            .value=${live(this.isEmpty ? '' : this.inputValue)}
             ?disabled=${this.disabled}
             aria-label=${this.localize.term('currentValue')}
             @keydown=${this.handleInputKeyDown}
@@ -850,6 +908,7 @@ export default class SlColorPicker extends LitElement {
             'color-dropdown__trigger--small': this.size === 'small',
             'color-dropdown__trigger--medium': this.size === 'medium',
             'color-dropdown__trigger--large': this.size === 'large',
+            'color-dropdown__trigger--empty': this.isEmpty,
             'color-picker__transparent-bg': true
           })}
           style=${styleMap({

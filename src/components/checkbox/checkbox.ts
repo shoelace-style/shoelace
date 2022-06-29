@@ -3,9 +3,10 @@ import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
-import { emit } from '~/internal/event';
-import { FormSubmitController } from '~/internal/form';
-import { watch } from '~/internal/watch';
+import { defaultValue } from '../../internal/default-value';
+import { emit } from '../../internal/event';
+import { FormSubmitController } from '../../internal/form';
+import { watch } from '../../internal/watch';
 import styles from './checkbox.styles';
 
 /**
@@ -32,7 +33,9 @@ export default class SlCheckbox extends LitElement {
 
   // @ts-expect-error -- Controller is currently unused
   private readonly formSubmitController = new FormSubmitController(this, {
-    value: (control: SlCheckbox) => (control.checked ? control.value : undefined)
+    value: (control: SlCheckbox) => (control.checked ? control.value || 'on' : undefined),
+    defaultValue: (control: SlCheckbox) => control.defaultChecked,
+    setValue: (control: SlCheckbox, checked: boolean) => (control.checked = checked)
   });
 
   @state() private hasFocus = false;
@@ -57,6 +60,10 @@ export default class SlCheckbox extends LitElement {
 
   /** This will be true when the control is in an invalid state. Validity is determined by the `required` prop. */
   @property({ type: Boolean, reflect: true }) invalid = false;
+
+  /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
+  @defaultValue('checked')
+  defaultChecked = false;
 
   firstUpdated() {
     this.invalid = !this.input.checkValidity();
@@ -147,33 +154,29 @@ export default class SlCheckbox extends LitElement {
         <span part="control" class="checkbox__control">
           ${this.checked
             ? html`
-                <span part="checked-icon" class="checkbox__icon">
-                  <svg viewBox="0 0 16 16">
-                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
-                      <g stroke="currentColor" stroke-width="2">
-                        <g transform="translate(3.428571, 3.428571)">
-                          <path d="M0,5.71428571 L3.42857143,9.14285714"></path>
-                          <path d="M9.14285714,0 L3.42857143,9.14285714"></path>
-                        </g>
+                <svg part="checked-icon" class="checkbox__icon" viewBox="0 0 16 16">
+                  <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+                    <g stroke="currentColor" stroke-width="2">
+                      <g transform="translate(3.428571, 3.428571)">
+                        <path d="M0,5.71428571 L3.42857143,9.14285714"></path>
+                        <path d="M9.14285714,0 L3.42857143,9.14285714"></path>
                       </g>
                     </g>
-                  </svg>
-                </span>
+                  </g>
+                </svg>
               `
             : ''}
           ${!this.checked && this.indeterminate
             ? html`
-                <span part="indeterminate-icon" class="checkbox__icon">
-                  <svg viewBox="0 0 16 16">
-                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
-                      <g stroke="currentColor" stroke-width="2">
-                        <g transform="translate(2.285714, 6.857143)">
-                          <path d="M10.2857143,1.14285714 L1.14285714,1.14285714"></path>
-                        </g>
+                <svg part="indeterminate-icon" class="checkbox__icon" viewBox="0 0 16 16">
+                  <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+                    <g stroke="currentColor" stroke-width="2">
+                      <g transform="translate(2.285714, 6.857143)">
+                        <path d="M10.2857143,1.14285714 L1.14285714,1.14285714"></path>
                       </g>
                     </g>
-                  </svg>
-                </span>
+                  </g>
+                </svg>
               `
             : ''}
         </span>

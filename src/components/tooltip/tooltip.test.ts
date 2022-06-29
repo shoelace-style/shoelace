@@ -112,4 +112,26 @@ describe('<sl-tooltip>', () => {
     expect(afterHideHandler).to.have.been.calledOnce;
     expect(base.hidden).to.be.true;
   });
+
+  it('should hide the tooltip when tooltip is visible and disabled becomes true', async () => {
+    const el = await fixture<SlTooltip>(html`
+      <sl-tooltip content="This is a tooltip" open>
+        <sl-button>Hover Me</sl-button>
+      </sl-tooltip>
+    `);
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+    const hideHandler = sinon.spy();
+    const afterHideHandler = sinon.spy();
+
+    el.addEventListener('sl-hide', hideHandler);
+    el.addEventListener('sl-after-hide', afterHideHandler);
+    el.disabled = true;
+
+    await waitUntil(() => hideHandler.calledOnce);
+    await waitUntil(() => afterHideHandler.calledOnce);
+
+    expect(hideHandler).to.have.been.calledOnce;
+    expect(afterHideHandler).to.have.been.calledOnce;
+    expect(base.hidden).to.be.true;
+  });
 });

@@ -6,7 +6,11 @@ Icons are symbols that can be used to represent various options within an applic
 
 Shoelace comes bundled with over 1,500 icons courtesy of the [Bootstrap Icons](https://icons.getbootstrap.com/) project. These icons are part of the `default` icon library. If you prefer, you can register [custom icon libraries](#icon-libraries) as well.
 
-Click or tap on an icon below to copy its name and use it like this.
+?> Depending on how you're loading Shoelace, you may need to copy icon assets and/or [set the base path](getting-started/installation#setting-the-base-path) so Shoelace knows where to load them from. Otherwise, icons may not appear and you'll see 404 Not Found errors in the dev console.
+
+## Default Icons
+
+All available icons in the `default` icon library are shown below. Click or tap on any icon to copy its name, then you can use it in your HTML like this.
 
 ```html
 <sl-icon name="icon-name-here"></sl-icon>
@@ -526,6 +530,38 @@ Icons in this library are licensed under the [Apache 2.0 License](https://github
   <sl-icon library="remixicon" name="development/bug-fill"></sl-icon>
   <sl-icon library="remixicon" name="media/image-fill"></sl-icon>
   <sl-icon library="remixicon" name="system/alert-fill"></sl-icon>
+</div>
+```
+
+## Tabler Icons
+
+This will register the [Tabler Icons](https://tabler-icons.io/) library using the jsDelivr CDN. This library features over 1,950 open source icons.
+
+Icons in this library are licensed under the [MIT License](https://github.com/tabler/tabler-icons/blob/master/LICENSE).
+
+```html preview
+<script type="module">
+  import { registerIconLibrary } from '/dist/utilities/icon-library.js';
+
+  registerIconLibrary('tabler', {
+    resolver: name => `https://cdn.jsdelivr.net/npm/@tabler/icons@1.68.0/icons/${name}.svg`
+  });
+</script>
+
+<div style="font-size: 24px;">
+  <sl-icon library="tabler" name="alert-triangle"></sl-icon>
+  <sl-icon library="tabler" name="arrow-back"></sl-icon>
+  <sl-icon library="tabler" name="at"></sl-icon>
+  <sl-icon library="tabler" name="ball-baseball"></sl-icon>
+  <sl-icon library="tabler" name="cake"></sl-icon>
+  <sl-icon library="tabler" name="files"></sl-icon>
+  <br />
+  <sl-icon library="tabler" name="keyboard"></sl-icon>
+  <sl-icon library="tabler" name="moon"></sl-icon>
+  <sl-icon library="tabler" name="pig"></sl-icon>
+  <sl-icon library="tabler" name="printer"></sl-icon>
+  <sl-icon library="tabler" name="ship"></sl-icon>
+  <sl-icon library="tabler" name="toilet-paper"></sl-icon>
 </div>
 ```
 

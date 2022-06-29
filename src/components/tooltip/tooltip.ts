@@ -2,10 +2,11 @@ import { arrow, autoUpdate, computePosition, flip, offset, shift } from '@floati
 import { html, LitElement } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { animateTo, parseDuration, stopAnimations } from '~/internal/animate';
-import { emit, waitForEvent } from '~/internal/event';
-import { watch } from '~/internal/watch';
-import { getAnimation, setDefaultAnimation } from '~/utilities/animation-registry';
+import { animateTo, parseDuration, stopAnimations } from '../../internal/animate';
+import { emit, waitForEvent } from '../../internal/event';
+import { watch } from '../../internal/watch';
+import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
+import { LocalizeController } from '../../utilities/localize';
 import styles from './tooltip.styles';
 
 /**
@@ -39,6 +40,7 @@ export default class SlTooltip extends LitElement {
 
   private target: HTMLElement;
   private hoverTimeout: number;
+  private readonly localize = new LocalizeController(this);
   private positionerCleanup: ReturnType<typeof autoUpdate> | undefined;
 
   /** The tooltip's content. Alternatively, you can use the content slot. */
@@ -209,18 +211,18 @@ export default class SlTooltip extends LitElement {
 
   @watch('open', { waitUntilFirstUpdate: true })
   async handleOpenChange() {
-    if (this.disabled) {
-      return;
-    }
-
     if (this.open) {
+      if (this.disabled) {
+        return;
+      }
+
       // Show
       emit(this, 'sl-show');
 
       await stopAnimations(this.tooltip);
       this.startPositioner();
       this.tooltip.hidden = false;
-      const { keyframes, options } = getAnimation(this, 'tooltip.show');
+      const { keyframes, options } = getAnimation(this, 'tooltip.show', { dir: this.localize.dir() });
       await animateTo(this.tooltip, keyframes, options);
 
       emit(this, 'sl-after-show');
@@ -229,7 +231,7 @@ export default class SlTooltip extends LitElement {
       emit(this, 'sl-hide');
 
       await stopAnimations(this.tooltip);
-      const { keyframes, options } = getAnimation(this, 'tooltip.hide');
+      const { keyframes, options } = getAnimation(this, 'tooltip.hide', { dir: this.localize.dir() });
       await animateTo(this.tooltip, keyframes, options);
       this.tooltip.hidden = true;
       this.stopPositioner();
@@ -331,7 +333,7 @@ export default class SlTooltip extends LitElement {
           aria-hidden=${this.open ? 'false' : 'true'}
         >
           <div class="tooltip__arrow"></div>
-          <div class="tooltip__content">
+          <div class="tooltip__content" aria-live=${this.open ? 'polite' : 'off'}>
             <slot name="content"> ${this.content} </slot>
           </div>
         </div>

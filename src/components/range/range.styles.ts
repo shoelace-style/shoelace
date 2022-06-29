@@ -1,7 +1,7 @@
 import { css } from 'lit';
-import { focusVisibleSelector } from '~/internal/focus-visible';
-import componentStyles from '~/styles/component.styles';
-import formControlStyles from '~/styles/form-control.styles';
+import { focusVisibleSelector } from '../../internal/focus-visible';
+import componentStyles from '../../styles/component.styles';
+import formControlStyles from '../../styles/form-control.styles';
 
 export default css`
   ${componentStyles}
@@ -59,9 +59,8 @@ export default css`
   }
 
   .range__control:enabled${focusVisibleSelector}::-webkit-slider-thumb {
-    background-color: var(--sl-color-primary-500);
-    border-color: var(--sl-color-primary-500);
-    box-shadow: var(--sl-focus-ring);
+    outline: var(--sl-focus-ring);
+    outline-offset: var(--sl-focus-ring-offset);
   }
 
   .range__control:enabled::-webkit-slider-thumb:active {
@@ -107,9 +106,8 @@ export default css`
   }
 
   .range__control:enabled${focusVisibleSelector}::-moz-range-thumb {
-    background-color: var(--sl-color-primary-500);
-    border-color: var(--sl-color-primary-500);
-    box-shadow: var(--sl-focus-ring);
+    outline: var(--sl-focus-ring);
+    outline-offset: var(--sl-focus-ring-offset);
   }
 
   .range__control:enabled::-moz-range-thumb:active {
@@ -159,7 +157,7 @@ export default css`
     width: 0;
     height: 0;
     left: 50%;
-    margin-left: calc(-1 * var(--sl-tooltip-arrow-size));
+    transform: translateX(calc(-1 * var(--sl-tooltip-arrow-size)));
   }
 
   .range--tooltip-visible .range__tooltip {

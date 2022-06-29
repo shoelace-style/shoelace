@@ -3,9 +3,10 @@ import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
-import { emit } from '~/internal/event';
-import { FormSubmitController } from '~/internal/form';
-import { watch } from '~/internal/watch';
+import { defaultValue } from '../../internal/default-value';
+import { emit } from '../../internal/event';
+import { FormSubmitController } from '../../internal/form';
+import { watch } from '../../internal/watch';
 import styles from './switch.styles';
 
 /**
@@ -35,7 +36,9 @@ export default class SlSwitch extends LitElement {
 
   // @ts-expect-error -- Controller is currently unused
   private readonly formSubmitController = new FormSubmitController(this, {
-    value: (control: SlSwitch) => (control.checked ? control.value : undefined)
+    value: (control: SlSwitch) => (control.checked ? control.value : undefined),
+    defaultValue: (control: SlSwitch) => control.defaultChecked,
+    setValue: (control: SlSwitch, checked: boolean) => (control.checked = checked)
   });
 
   @state() private hasFocus = false;
@@ -57,6 +60,10 @@ export default class SlSwitch extends LitElement {
 
   /** This will be true when the control is in an invalid state. Validity is determined by the `required` prop. */
   @property({ type: Boolean, reflect: true }) invalid = false;
+
+  /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
+  @defaultValue('checked')
+  defaultChecked = false;
 
   firstUpdated() {
     this.invalid = !this.input.checkValidity();

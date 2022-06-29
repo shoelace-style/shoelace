@@ -1,6 +1,6 @@
 import { css } from 'lit';
-import { focusVisibleSelector } from '~/internal/focus-visible';
-import componentStyles from '~/styles/component.styles';
+import { focusVisibleSelector } from '../../internal/focus-visible';
+import componentStyles from '../../styles/component.styles';
 
 export default css`
   ${componentStyles}
@@ -11,7 +11,7 @@ export default css`
 
   .radio {
     display: inline-flex;
-    align-items: center;
+    align-items: top;
     font-family: var(--sl-input-font-family);
     font-size: var(--sl-input-font-size-medium);
     font-weight: var(--sl-input-font-weight);
@@ -63,9 +63,8 @@ export default css`
 
   /* Focus */
   .radio:not(.radio--checked):not(.radio--disabled) .radio__input${focusVisibleSelector} ~ .radio__control {
-    border-color: var(--sl-input-border-color-focus);
-    background-color: var(--sl-input-background-color-focus);
-    box-shadow: var(--sl-focus-ring);
+    outline: var(--sl-focus-ring);
+    outline-offset: var(--sl-focus-ring-offset);
   }
 
   /* Checked */
@@ -83,9 +82,8 @@ export default css`
 
   /* Checked + focus */
   .radio.radio--checked:not(.radio--disabled) .radio__input${focusVisibleSelector} ~ .radio__control {
-    border-color: var(--sl-color-primary-500);
-    background-color: var(--sl-color-primary-500);
-    box-shadow: var(--sl-focus-ring);
+    outline: var(--sl-focus-ring);
+    outline-offset: var(--sl-focus-ring-offset);
   }
 
   /* Disabled */
@@ -100,8 +98,9 @@ export default css`
   }
 
   .radio__label {
+    color: var(--sl-input-label-color);
     line-height: var(--sl-toggle-size);
-    margin-left: 0.5em;
+    margin-inline-start: 0.5em;
     user-select: none;
   }
 `;

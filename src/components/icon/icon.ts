@@ -2,13 +2,13 @@ import { html, LitElement } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
-import { emit } from '~/internal/event';
-import { watch } from '~/internal/watch';
+import { emit } from '../../internal/event';
+import { watch } from '../../internal/watch';
 import styles from './icon.styles';
 import { getIconLibrary, unwatchIcon, watchIcon } from './library';
 import { requestIcon } from './request';
 
-const parser = new DOMParser();
+let parser: DOMParser;
 
 /**
  * @since 2.0
@@ -26,7 +26,7 @@ export default class SlIcon extends LitElement {
   @state() private svg = '';
 
   /** The name of the icon to draw. */
-  @property() name?: string;
+  @property({ reflect: true }) name?: string;
 
   /**
    * An external URL of an SVG file.
@@ -39,7 +39,7 @@ export default class SlIcon extends LitElement {
   @property() label = '';
 
   /** The name of a registered custom icon library. */
-  @property() library = 'default';
+  @property({ reflect: true }) library = 'default';
 
   connectedCallback() {
     super.connectedCallback();
@@ -74,6 +74,13 @@ export default class SlIcon extends LitElement {
   async setIcon() {
     const library = getIconLibrary(this.library);
     const url = this.getUrl();
+
+    // Create an instance of the DOM parser. We do it here instead of top-level to support SSR while maintaining a
+    // single parser instance for optimal performance.
+    if (!parser) {
+      parser = new DOMParser();
+    }
+
     if (url) {
       try {
         const file = await requestIcon(url);

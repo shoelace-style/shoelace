@@ -1,11 +1,11 @@
 import { html, LitElement } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { drag } from '~/internal/drag';
-import { emit } from '~/internal/event';
-import { clamp } from '~/internal/math';
-import { watch } from '~/internal/watch';
-import { LocalizeController } from '~/utilities/localize';
+import { drag } from '../../internal/drag';
+import { emit } from '../../internal/event';
+import { clamp } from '../../internal/math';
+import { watch } from '../../internal/watch';
+import { LocalizeController } from '../../utilities/localize';
 import styles from './split-panel.styles';
 
 /**
@@ -100,7 +100,9 @@ export default class SlSplitPanel extends LitElement {
     return (value / this.size) * 100;
   }
 
-  handleDrag(event: Event) {
+  handleDrag(event: PointerEvent) {
+    const isRtl = this.localize.dir() === 'rtl';
+
     if (this.disabled) {
       return;
     }
@@ -108,37 +110,44 @@ export default class SlSplitPanel extends LitElement {
     // Prevent text selection when dragging
     event.preventDefault();
 
-    drag(this, (x, y) => {
-      let newPositionInPixels = this.vertical ? y : x;
+    drag(this, {
+      onMove: (x, y) => {
+        let newPositionInPixels = this.vertical ? y : x;
 
-      // Flip for end panels
-      if (this.primary === 'end') {
-        newPositionInPixels = this.size - newPositionInPixels;
-      }
+        // Flip for end panels
+        if (this.primary === 'end') {
+          newPositionInPixels = this.size - newPositionInPixels;
+        }
 
-      // Check snap points
-      if (this.snap) {
-        const snaps = this.snap.split(' ');
+        // Check snap points
+        if (this.snap) {
+          const snaps = this.snap.split(' ');
 
-        snaps.forEach(value => {
-          let snapPoint: number;
+          snaps.forEach(value => {
+            let snapPoint: number;
 
-          if (value.endsWith('%')) {
-            snapPoint = this.size * (parseFloat(value) / 100);
-          } else {
-            snapPoint = parseFloat(value);
-          }
+            if (value.endsWith('%')) {
+              snapPoint = this.size * (parseFloat(value) / 100);
+            } else {
+              snapPoint = parseFloat(value);
+            }
 
-          if (
-            newPositionInPixels >= snapPoint - this.snapThreshold &&
-            newPositionInPixels <= snapPoint + this.snapThreshold
-          ) {
-            newPositionInPixels = snapPoint;
-          }
-        });
-      }
+            if (isRtl && !this.vertical) {
+              snapPoint = this.size - snapPoint;
+            }
 
-      this.position = clamp(this.pixelsToPercentage(newPositionInPixels), 0, 100);
+            if (
+              newPositionInPixels >= snapPoint - this.snapThreshold &&
+              newPositionInPixels <= snapPoint + this.snapThreshold
+            ) {
+              newPositionInPixels = snapPoint;
+            }
+          });
+        }
+
+        this.position = clamp(this.pixelsToPercentage(newPositionInPixels), 0, 100);
+      },
+      initialEvent: event
     });
   }
 
@@ -203,6 +212,7 @@ export default class SlSplitPanel extends LitElement {
   render() {
     const gridTemplate = this.vertical ? 'gridTemplateRows' : 'gridTemplateColumns';
     const gridTemplateAlt = this.vertical ? 'gridTemplateColumns' : 'gridTemplateRows';
+    const isRtl = this.localize.dir() === 'rtl';
     const primary = `
       clamp(
         0%,
@@ -217,9 +227,17 @@ export default class SlSplitPanel extends LitElement {
     const secondary = 'auto';
 
     if (this.primary === 'end') {
-      this.style[gridTemplate] = `${secondary} var(--divider-width) ${primary}`;
+      if (isRtl && !this.vertical) {
+        this.style[gridTemplate] = `${primary} var(--divider-width) ${secondary}`;
+      } else {
+        this.style[gridTemplate] = `${secondary} var(--divider-width) ${primary}`;
+      }
     } else {
-      this.style[gridTemplate] = `${primary} var(--divider-width) ${secondary}`;
+      if (isRtl && !this.vertical) {
+        this.style[gridTemplate] = `${secondary} var(--divider-width) ${primary}`;
+      } else {
+        this.style[gridTemplate] = `${primary} var(--divider-width) ${secondary}`;
+      }
     }
 
     // Unset the alt grid template property

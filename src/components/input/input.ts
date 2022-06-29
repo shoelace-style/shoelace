@@ -3,11 +3,13 @@ import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
-import '~/components/icon/icon';
-import { emit } from '~/internal/event';
-import { FormSubmitController } from '~/internal/form';
-import { HasSlotController } from '~/internal/slot';
-import { watch } from '~/internal/watch';
+import '../../components/icon/icon';
+import { defaultValue } from '../../internal/default-value';
+import { emit } from '../../internal/event';
+import { FormSubmitController } from '../../internal/form';
+import { HasSlotController } from '../../internal/slot';
+import { watch } from '../../internal/watch';
+import { LocalizeController } from '../../utilities/localize';
 import styles from './input.styles';
 
 /**
@@ -49,13 +51,23 @@ export default class SlInput extends LitElement {
 
   private readonly formSubmitController = new FormSubmitController(this);
   private readonly hasSlotController = new HasSlotController(this, 'help-text', 'label');
+  private readonly localize = new LocalizeController(this);
 
   @state() private hasFocus = false;
   @state() private isPasswordVisible = false;
 
   /** The input's type. */
-  @property({ reflect: true }) type: 'date' | 'email' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'url' =
-    'text';
+  @property({ reflect: true }) type:
+    | 'date'
+    | 'datetime-local'
+    | 'email'
+    | 'number'
+    | 'password'
+    | 'search'
+    | 'tel'
+    | 'text'
+    | 'time'
+    | 'url' = 'text';
 
   /** The input's size. */
   @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
@@ -65,6 +77,10 @@ export default class SlInput extends LitElement {
 
   /** The input's value attribute. */
   @property() value = '';
+
+  /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
+  @defaultValue()
+  defaultValue = '';
 
   /** Draws a filled input. */
   @property({ type: Boolean, reflect: true }) filled = false;
@@ -83,6 +99,9 @@ export default class SlInput extends LitElement {
 
   /** Adds a password toggle button to password inputs. */
   @property({ attribute: 'toggle-password', type: Boolean }) togglePassword = false;
+
+  /** Hides the browser's built-in increment/decrement spin buttons for number inputs. */
+  @property({ attribute: 'no-spin-buttons', type: Boolean }) noSpinButtons = false;
 
   /** The input's placeholder text. */
   @property() placeholder: string;
@@ -132,6 +151,12 @@ export default class SlInput extends LitElement {
   /** The input's autofocus attribute. */
   @property({ type: Boolean }) autofocus: boolean;
 
+  /**
+   * The input's enterkeyhint attribute. This can be used to customize the label or icon of the Enter key on virtual
+   * keyboards.
+   */
+  @property() enterkeyhint: 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send';
+
   /** Enables spell checking on the input. */
   @property({ type: Boolean }) spellcheck: boolean;
 
@@ -144,10 +169,11 @@ export default class SlInput extends LitElement {
   }
 
   set valueAsDate(newValue: Date | null) {
-    this.updateComplete.then(() => {
-      this.input.valueAsDate = newValue;
-      this.value = this.input.value;
-    });
+    // We use an in-memory input instead of the one in the template because the property can be set before render
+    const input = document.createElement('input');
+    input.type = 'date';
+    input.valueAsDate = newValue;
+    this.value = input.value;
   }
 
   /** Gets or sets the current value as a number. */
@@ -156,10 +182,11 @@ export default class SlInput extends LitElement {
   }
 
   set valueAsNumber(newValue: number) {
-    this.updateComplete.then(() => {
-      this.input.valueAsNumber = newValue;
-      this.value = this.input.value;
-    });
+    // We use an in-memory input instead of the one in the template because the property can be set before render
+    const input = document.createElement('input');
+    input.type = 'number';
+    input.valueAsNumber = newValue;
+    this.value = input.value;
   }
 
   firstUpdated() {
@@ -261,9 +288,14 @@ export default class SlInput extends LitElement {
   handleKeyDown(event: KeyboardEvent) {
     const hasModifier = event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
 
-    // Pressing enter when focused on an input should submit the form like a native input
+    // Pressing enter when focused on an input should submit the form like a native input, but we wait a tick before
+    // submitting to allow users to cancel the keydown event if they need to
     if (event.key === 'Enter' && !hasModifier) {
-      this.formSubmitController.submit();
+      setTimeout(() => {
+        if (!event.defaultPrevented) {
+          this.formSubmitController.submit();
+        }
+      });
     }
   }
 
@@ -281,6 +313,8 @@ export default class SlInput extends LitElement {
     const hasHelpTextSlot = this.hasSlotController.test('help-text');
     const hasLabel = this.label ? true : !!hasLabelSlot;
     const hasHelpText = this.helpText ? true : !!hasHelpTextSlot;
+    const hasClearIcon =
+      this.clearable && !this.disabled && !this.readonly && (typeof this.value === 'number' || this.value.length > 0);
 
     return html`
       <div
@@ -320,8 +354,15 @@ export default class SlInput extends LitElement {
               'input--filled': this.filled,
               'input--disabled': this.disabled,
               'input--focused': this.hasFocus,
-              'input--empty': this.value.length === 0,
-              'input--invalid': this.invalid
+              'input--empty': !this.value,
+              'input--invalid': this.invalid,
+              'input--no-spin-buttons': this.noSpinButtons,
+
+              // It's currently impossible to hide Firefox's built-in clear icon when using <input type="date|time">, so
+              // we need this check to apply a clip-path to hide it. I know, I know...user agent sniffing is nasty but
+              // if it fails, we only see a redundant clear icon so nothing important is breaking. The benefits outweigh
+              // the costs for this one. See the discussion at: https://github.com/shoelace-style/shoelace/pull/794
+              'input--is-firefox': navigator.userAgent.includes('Firefox')
             })}
           >
             <span part="prefix" class="input__prefix">
@@ -344,12 +385,13 @@ export default class SlInput extends LitElement {
               max=${ifDefined(this.max)}
               step=${ifDefined(this.step)}
               .value=${live(this.value)}
-              autocapitalize=${ifDefined(this.autocapitalize)}
-              autocomplete=${ifDefined(this.autocomplete)}
-              autocorrect=${ifDefined(this.autocorrect)}
+              autocapitalize=${ifDefined(this.type === 'password' ? 'off' : this.autocapitalize)}
+              autocomplete=${ifDefined(this.type === 'password' ? 'off' : this.autocomplete)}
+              autocorrect=${ifDefined(this.type === 'password' ? 'off' : this.autocorrect)}
               ?autofocus=${this.autofocus}
               spellcheck=${ifDefined(this.spellcheck)}
               pattern=${ifDefined(this.pattern)}
+              enterkeyhint=${ifDefined(this.enterkeyhint)}
               inputmode=${ifDefined(this.inputmode)}
               aria-describedby="help-text"
               aria-invalid=${this.invalid ? 'true' : 'false'}
@@ -361,13 +403,13 @@ export default class SlInput extends LitElement {
               @blur=${this.handleBlur}
             />
 
-            ${this.clearable && this.value.length > 0
+            ${hasClearIcon
               ? html`
                   <button
                     part="clear-button"
                     class="input__clear"
                     type="button"
-                    aria-hidden="true"
+                    aria-label=${this.localize.term('clearEntry')}
                     @click=${this.handleClearClick}
                     tabindex="-1"
                   >
@@ -377,13 +419,13 @@ export default class SlInput extends LitElement {
                   </button>
                 `
               : ''}
-            ${this.togglePassword
+            ${this.togglePassword && !this.disabled
               ? html`
                   <button
                     part="password-toggle-button"
                     class="input__password-toggle"
                     type="button"
-                    aria-hidden="true"
+                    aria-label=${this.localize.term(this.isPasswordVisible ? 'hidePassword' : 'showPassword')}
                     @click=${this.handlePasswordToggle}
                     tabindex="-1"
                   >

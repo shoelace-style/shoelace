@@ -1,8 +1,19 @@
-import { expect, fixture, html } from '@open-wc/testing';
+import { expect, fixture, html, waitUntil } from '@open-wc/testing';
 import sinon from 'sinon';
 import type SlButton from './button';
 
+const variants = ['default', 'primary', 'success', 'neutral', 'warning', 'danger'];
+
 describe('<sl-button>', () => {
+  describe('accessibility tests', () => {
+    variants.forEach(variant => {
+      it(`should be accessible when variant is "${variant}"`, async () => {
+        const el = await fixture<SlButton>(html` <sl-button variant="${variant}"> Button Label </sl-button> `);
+        await expect(el).to.be.accessible();
+      });
+    });
+  });
+
   describe('when provided no parameters', () => {
     it('passes accessibility test', async () => {
       const el = await fixture<SlButton>(html` <sl-button>Button Label</sl-button> `);
@@ -182,6 +193,37 @@ describe('<sl-button>', () => {
       expect(submitter.formMethod).to.equal('get');
       expect(submitter.formTarget).to.equal('_blank');
       expect(submitter.formNoValidate).to.be.true;
+    });
+  });
+
+  describe('when using methods', () => {
+    it('should emit sl-focus and sl-blur when the button is focused and blurred', async () => {
+      const el = await fixture<SlButton>(html` <sl-button>Button</sl-button> `);
+      const focusHandler = sinon.spy();
+      const blurHandler = sinon.spy();
+
+      el.addEventListener('sl-focus', focusHandler);
+      el.addEventListener('sl-blur', blurHandler);
+
+      el.focus();
+      await waitUntil(() => focusHandler.calledOnce);
+
+      el.blur();
+      await waitUntil(() => blurHandler.calledOnce);
+
+      expect(focusHandler).to.have.been.calledOnce;
+      expect(blurHandler).to.have.been.calledOnce;
+    });
+
+    it('should emit a click event when calling click()', async () => {
+      const el = await fixture<SlButton>(html` <sl-button></sl-button> `);
+      const clickHandler = sinon.spy();
+
+      el.addEventListener('click', clickHandler);
+      el.click();
+      await waitUntil(() => clickHandler.calledOnce);
+
+      expect(clickHandler).to.have.been.calledOnce;
     });
   });
 });

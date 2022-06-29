@@ -19,7 +19,7 @@ describe('<sl-switch>', () => {
   it('should fire sl-change when clicked', async () => {
     const el = await fixture<SlSwitch>(html` <sl-switch></sl-switch> `);
     setTimeout(() => el.shadowRoot!.querySelector('input')!.click());
-    const event = await oneEvent(el, 'sl-change');
+    const event = (await oneEvent(el, 'sl-change')) as CustomEvent;
     expect(event.target).to.equal(el);
     expect(el.checked).to.be.true;
   });
@@ -28,7 +28,7 @@ describe('<sl-switch>', () => {
     const el = await fixture<SlSwitch>(html` <sl-switch></sl-switch> `);
     el.focus();
     setTimeout(() => sendKeys({ press: ' ' }));
-    const event = await oneEvent(el, 'sl-change');
+    const event = (await oneEvent(el, 'sl-change')) as CustomEvent;
     expect(event.target).to.equal(el);
     expect(el.checked).to.be.true;
   });
@@ -37,7 +37,7 @@ describe('<sl-switch>', () => {
     const el = await fixture<SlSwitch>(html` <sl-switch></sl-switch> `);
     el.focus();
     setTimeout(() => sendKeys({ press: 'ArrowRight' }));
-    const event = await oneEvent(el, 'sl-change');
+    const event = (await oneEvent(el, 'sl-change')) as CustomEvent;
     expect(event.target).to.equal(el);
     expect(el.checked).to.be.true;
   });
@@ -46,7 +46,7 @@ describe('<sl-switch>', () => {
     const el = await fixture<SlSwitch>(html` <sl-switch checked></sl-switch> `);
     el.focus();
     setTimeout(() => sendKeys({ press: 'ArrowLeft' }));
-    const event = await oneEvent(el, 'sl-change');
+    const event = (await oneEvent(el, 'sl-change')) as CustomEvent;
     expect(event.target).to.equal(el);
     expect(el.checked).to.be.false;
   });
@@ -58,5 +58,35 @@ describe('<sl-switch>', () => {
     await el.updateComplete;
     el.checked = false;
     await el.updateComplete;
+  });
+
+  describe('when resetting a form', () => {
+    it('should reset the element to its initial value', async () => {
+      const form = await fixture<HTMLFormElement>(html`
+        <form>
+          <sl-switch name="a" value="1" checked></sl-switch>
+          <sl-button type="reset">Reset</sl-button>
+        </form>
+      `);
+      const button = form.querySelector('sl-button')!;
+      const switchEl = form.querySelector('sl-switch')!;
+      switchEl.checked = false;
+
+      await switchEl.updateComplete;
+      setTimeout(() => button.click());
+
+      await oneEvent(form, 'reset');
+      await switchEl.updateComplete;
+
+      expect(switchEl.checked).to.true;
+
+      switchEl.defaultChecked = false;
+
+      setTimeout(() => button.click());
+      await oneEvent(form, 'reset');
+      await switchEl.updateComplete;
+
+      expect(switchEl.checked).to.false;
+    });
   });
 });

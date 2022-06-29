@@ -1,6 +1,6 @@
 import { css } from 'lit';
-import { focusVisibleSelector } from '~/internal/focus-visible';
-import componentStyles from '~/styles/component.styles';
+import { focusVisibleSelector } from '../../internal/focus-visible';
+import componentStyles from '../../styles/component.styles';
 
 export default css`
   ${componentStyles}
@@ -32,21 +32,15 @@ export default css`
   }
 
   .color-picker--inline${focusVisibleSelector} {
-    outline: none;
-    box-shadow: 0 0 0 1px var(--sl-color-primary-500), var(--sl-focus-ring);
+    outline: var(--sl-focus-ring);
+    outline-offset: var(--sl-focus-ring-offset);
   }
 
   .color-picker__grid {
     position: relative;
     height: var(--grid-height);
-    background-image: linear-gradient(
-        to bottom,
-        hsl(0, 0%, 100%) 0%,
-        hsla(0, 0%, 100%, 0) 50%,
-        hsla(0, 0%, 0%, 0) 50%,
-        hsl(0, 0%, 0%) 100%
-      ),
-      linear-gradient(to right, hsl(0, 0%, 50%) 0%, hsla(0, 0%, 50%, 0) 100%);
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%),
+      linear-gradient(to right, #fff 0%, rgba(255, 255, 255, 0) 100%);
     border-top-left-radius: var(--sl-border-radius-medium);
     border-top-right-radius: var(--sl-border-radius-medium);
     cursor: crosshair;
@@ -61,11 +55,16 @@ export default css`
     border: solid 2px white;
     margin-top: calc(var(--grid-handle-size) / -2);
     margin-left: calc(var(--grid-handle-size) / -2);
+    transition: var(--sl-transition-fast) transform;
+  }
+
+  .color-picker__grid-handle--dragging {
+    cursor: none;
+    transform: scale(1.5);
   }
 
   .color-picker__grid-handle${focusVisibleSelector} {
-    outline: none;
-    box-shadow: 0 0 0 1px var(--sl-color-primary-500), var(--sl-focus-ring);
+    outline: var(--sl-focus-ring);
   }
 
   .color-picker__controls {
@@ -101,8 +100,7 @@ export default css`
   }
 
   .color-picker__slider-handle${focusVisibleSelector} {
-    outline: none;
-    box-shadow: 0 0 0 1px var(--sl-color-primary-500), var(--sl-focus-ring);
+    outline: var(--sl-focus-ring);
   }
 
   .color-picker__hue {
@@ -133,10 +131,10 @@ export default css`
     align-items: center;
     justify-content: center;
     position: relative;
-    width: 3.25rem;
+    width: 2.25rem;
     height: 2.25rem;
     border: none;
-    border-radius: var(--sl-input-border-radius-medium);
+    border-radius: var(--sl-border-radius-circle);
     background: none;
     margin-left: var(--sl-spacing-small);
     cursor: copy;
@@ -157,8 +155,8 @@ export default css`
   }
 
   .color-picker__preview${focusVisibleSelector} {
-    box-shadow: var(--sl-focus-ring);
-    outline: none;
+    outline: var(--sl-focus-ring);
+    outline-offset: var(--sl-focus-ring-offset);
   }
 
   .color-picker__preview-color {
@@ -234,8 +232,8 @@ export default css`
   }
 
   .color-picker__swatch${focusVisibleSelector} {
-    outline: none;
-    box-shadow: var(--sl-focus-ring);
+    outline: var(--sl-focus-ring);
+    outline-offset: var(--sl-focus-ring-offset);
   }
 
   .color-picker__transparent-bg {
@@ -280,7 +278,6 @@ export default css`
     background-color: transparent;
     border: none;
     cursor: pointer;
-    transition: var(--sl-transition-fast) box-shadow;
   }
 
   .color-dropdown__trigger.color-dropdown__trigger--small {
@@ -311,7 +308,10 @@ export default css`
     border-radius: inherit;
     background-color: currentColor;
     box-shadow: inset 0 0 0 2px var(--sl-input-border-color), inset 0 0 0 4px var(--sl-color-neutral-0);
-    transition: inherit;
+  }
+
+  .color-dropdown__trigger--empty:before {
+    background-color: transparent;
   }
 
   .color-dropdown__trigger${focusVisibleSelector} {
@@ -319,12 +319,8 @@ export default css`
   }
 
   .color-dropdown__trigger${focusVisibleSelector}:not(.color-dropdown__trigger--disabled) {
-    box-shadow: var(--sl-focus-ring);
-    outline: none;
-  }
-
-  .color-dropdown__trigger${focusVisibleSelector}:not(.color-dropdown__trigger--disabled):before {
-    box-shadow: inset 0 0 0 1px var(--sl-color-primary-500);
+    outline: var(--sl-focus-ring);
+    outline-offset: var(--sl-focus-ring-offset);
   }
 
   .color-dropdown__trigger.color-dropdown__trigger--disabled {

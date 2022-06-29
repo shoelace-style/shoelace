@@ -1,4 +1,5 @@
 import { expect, fixture, html, waitUntil } from '@open-wc/testing';
+import { sendKeys, sendMouse } from '@web/test-runner-commands';
 import sinon from 'sinon';
 import type SlDropdown from './dropdown';
 
@@ -141,5 +142,146 @@ describe('<sl-dropdown>', () => {
     expect(hideHandler).to.have.been.calledOnce;
     expect(afterHideHandler).to.have.been.calledOnce;
     expect(panel.hidden).to.be.true;
+  });
+
+  it('should still open on arrow navigation when no menu items', async () => {
+    const el = await fixture<SlDropdown>(html`
+      <sl-dropdown>
+        <sl-button slot="trigger" caret>Toggle</sl-button>
+        <sl-menu> </sl-menu>
+      </sl-dropdown>
+    `);
+    const trigger = el.querySelector('sl-button')!;
+
+    trigger.focus();
+    await sendKeys({ press: 'ArrowDown' });
+    await el.updateComplete;
+
+    expect(el.open).to.be.true;
+  });
+
+  it('should open on arrow navigation', async () => {
+    const el = await fixture<SlDropdown>(html`
+      <sl-dropdown>
+        <sl-button slot="trigger" caret>Toggle</sl-button>
+        <sl-menu>
+          <sl-menu-item>Item 1</sl-menu-item>
+          <sl-menu-item>Item 2</sl-menu-item>
+        </sl-menu>
+      </sl-dropdown>
+    `);
+    const trigger = el.querySelector('sl-button')!;
+
+    trigger.focus();
+    await sendKeys({ press: 'ArrowDown' });
+    await el.updateComplete;
+
+    expect(el.open).to.be.true;
+  });
+
+  it('should close on escape key', async () => {
+    const el = await fixture<SlDropdown>(html`
+      <sl-dropdown open>
+        <sl-button slot="trigger" caret>Toggle</sl-button>
+        <sl-menu>
+          <sl-menu-item>Item 1</sl-menu-item>
+          <sl-menu-item>Item 2</sl-menu-item>
+        </sl-menu>
+      </sl-dropdown>
+    `);
+    const trigger = el.querySelector('sl-button')!;
+
+    trigger.focus();
+    await sendKeys({ press: 'Escape' });
+    await el.updateComplete;
+
+    expect(el.open).to.be.false;
+  });
+
+  it('should not open on arrow navigation when no menu exists', async () => {
+    const el = await fixture<SlDropdown>(html`
+      <sl-dropdown>
+        <sl-button slot="trigger" caret>Toggle</sl-button>
+        <div>Some custom content</div>
+      </sl-dropdown>
+    `);
+    const trigger = el.querySelector('sl-button')!;
+
+    trigger.focus();
+    await sendKeys({ press: 'ArrowDown' });
+    await el.updateComplete;
+
+    expect(el.open).to.be.false;
+  });
+
+  it('should open on enter key', async () => {
+    const el = await fixture<SlDropdown>(html`
+      <sl-dropdown>
+        <sl-button slot="trigger" caret>Toggle</sl-button>
+        <sl-menu>
+          <sl-menu-item>Item 1</sl-menu-item>
+        </sl-menu>
+      </sl-dropdown>
+    `);
+    const trigger = el.querySelector('sl-button')!;
+
+    trigger.focus();
+    await el.updateComplete;
+    await sendKeys({ press: 'Enter' });
+    await el.updateComplete;
+
+    expect(el.open).to.be.true;
+  });
+
+  it('should open on enter key when no menu exists', async () => {
+    const el = await fixture<SlDropdown>(html`
+      <sl-dropdown>
+        <sl-button slot="trigger" caret>Toggle</sl-button>
+        <div>Some custom content</div>
+      </sl-dropdown>
+    `);
+    const trigger = el.querySelector('sl-button')!;
+
+    trigger.focus();
+    await el.updateComplete;
+    await sendKeys({ press: 'Enter' });
+    await el.updateComplete;
+
+    expect(el.open).to.be.true;
+  });
+
+  it('should hide when clicked outside container and initially open', async () => {
+    const el = await fixture<SlDropdown>(html`
+      <sl-dropdown open>
+        <sl-button slot="trigger" caret>Toggle</sl-button>
+        <sl-menu>
+          <sl-menu-item>Item 1</sl-menu-item>
+        </sl-menu>
+      </sl-dropdown>
+    `);
+
+    await sendMouse({ type: 'click', position: [0, 0] });
+    await el.updateComplete;
+
+    expect(el.open).to.be.false;
+  });
+
+  it('should hide when clicked outside container', async () => {
+    const el = await fixture<SlDropdown>(html`
+      <sl-dropdown>
+        <sl-button slot="trigger" caret>Toggle</sl-button>
+        <sl-menu>
+          <sl-menu-item>Item 1</sl-menu-item>
+        </sl-menu>
+      </sl-dropdown>
+    `);
+    const trigger = el.querySelector('sl-button')!;
+
+    trigger.click();
+    await el.updateComplete;
+    await sendMouse({ type: 'click', position: [0, 0] });
+    await el.updateComplete;
+
+    expect(el.open).to.be.false;
   });
 });

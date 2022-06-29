@@ -1,6 +1,6 @@
 import { css } from 'lit';
-import { focusVisibleSelector } from '~/internal/focus-visible';
-import componentStyles from '~/styles/component.styles';
+import { focusVisibleSelector } from '../../internal/focus-visible';
+import componentStyles from '../../styles/component.styles';
 
 export default css`
   ${componentStyles}
@@ -37,6 +37,11 @@ export default css`
 
   .button:focus {
     outline: none;
+  }
+
+  .button${focusVisibleSelector} {
+    outline: var(--sl-focus-ring);
+    outline-offset: var(--sl-focus-ring-offset);
   }
 
   .button--disabled {
@@ -78,13 +83,6 @@ export default css`
     color: var(--sl-color-primary-700);
   }
 
-  .button--standard.button--default${focusVisibleSelector}:not(.button--disabled) {
-    background-color: var(--sl-color-primary-50);
-    border-color: var(--sl-color-primary-400);
-    color: var(--sl-color-primary-700);
-    box-shadow: var(--sl-focus-ring);
-  }
-
   .button--standard.button--default:active:not(.button--disabled) {
     background-color: var(--sl-color-primary-100);
     border-color: var(--sl-color-primary-400);
@@ -102,13 +100,6 @@ export default css`
     background-color: var(--sl-color-primary-500);
     border-color: var(--sl-color-primary-500);
     color: var(--sl-color-neutral-0);
-  }
-
-  .button--standard.button--primary${focusVisibleSelector}:not(.button--disabled) {
-    background-color: var(--sl-color-primary-500);
-    border-color: var(--sl-color-primary-500);
-    color: var(--sl-color-neutral-0);
-    box-shadow: var(--sl-focus-ring);
   }
 
   .button--standard.button--primary:active:not(.button--disabled) {
@@ -130,13 +121,6 @@ export default css`
     color: var(--sl-color-neutral-0);
   }
 
-  .button--standard.button--success${focusVisibleSelector}:not(.button--disabled) {
-    background-color: var(--sl-color-success-600);
-    border-color: var(--sl-color-success-600);
-    color: var(--sl-color-neutral-0);
-    box-shadow: var(--sl-focus-ring);
-  }
-
   .button--standard.button--success:active:not(.button--disabled) {
     background-color: var(--sl-color-success-600);
     border-color: var(--sl-color-success-600);
@@ -154,13 +138,6 @@ export default css`
     background-color: var(--sl-color-neutral-500);
     border-color: var(--sl-color-neutral-500);
     color: var(--sl-color-neutral-0);
-  }
-
-  .button--standard.button--neutral${focusVisibleSelector}:not(.button--disabled) {
-    background-color: var(--sl-color-neutral-500);
-    border-color: var(--sl-color-neutral-500);
-    color: var(--sl-color-neutral-0);
-    box-shadow: var(--sl-focus-ring);
   }
 
   .button--standard.button--neutral:active:not(.button--disabled) {
@@ -181,13 +158,6 @@ export default css`
     color: var(--sl-color-neutral-0);
   }
 
-  .button--standard.button--warning${focusVisibleSelector}:not(.button--disabled) {
-    background-color: var(--sl-color-warning-500);
-    border-color: var(--sl-color-warning-500);
-    color: var(--sl-color-neutral-0);
-    box-shadow: var(--sl-focus-ring);
-  }
-
   .button--standard.button--warning:active:not(.button--disabled) {
     background-color: var(--sl-color-warning-600);
     border-color: var(--sl-color-warning-600);
@@ -205,13 +175,6 @@ export default css`
     background-color: var(--sl-color-danger-500);
     border-color: var(--sl-color-danger-500);
     color: var(--sl-color-neutral-0);
-  }
-
-  .button--standard.button--danger${focusVisibleSelector}:not(.button--disabled) {
-    background-color: var(--sl-color-danger-500);
-    border-color: var(--sl-color-danger-500);
-    color: var(--sl-color-neutral-0);
-    box-shadow: var(--sl-focus-ring);
   }
 
   .button--standard.button--danger:active:not(.button--disabled) {
@@ -242,11 +205,6 @@ export default css`
     color: var(--sl-color-neutral-0);
   }
 
-  .button--outline.button--default${focusVisibleSelector}:not(.button--disabled) {
-    border-color: var(--sl-color-primary-500);
-    box-shadow: var(--sl-focus-ring);
-  }
-
   .button--outline.button--default:active:not(.button--disabled) {
     border-color: var(--sl-color-primary-700);
     background-color: var(--sl-color-primary-700);
@@ -263,11 +221,6 @@ export default css`
   .button--outline.button--primary.button--checked:not(.button--disabled) {
     background-color: var(--sl-color-primary-600);
     color: var(--sl-color-neutral-0);
-  }
-
-  .button--outline.button--primary${focusVisibleSelector}:not(.button--disabled) {
-    border-color: var(--sl-color-primary-500);
-    box-shadow: var(--sl-focus-ring);
   }
 
   .button--outline.button--primary:active:not(.button--disabled) {
@@ -288,11 +241,6 @@ export default css`
     color: var(--sl-color-neutral-0);
   }
 
-  .button--outline.button--success${focusVisibleSelector}:not(.button--disabled) {
-    border-color: var(--sl-color-success-500);
-    box-shadow: var(--sl-focus-ring);
-  }
-
   .button--outline.button--success:active:not(.button--disabled) {
     border-color: var(--sl-color-success-700);
     background-color: var(--sl-color-success-700);
@@ -309,11 +257,6 @@ export default css`
   .button--outline.button--neutral.button--checked:not(.button--disabled) {
     background-color: var(--sl-color-neutral-600);
     color: var(--sl-color-neutral-0);
-  }
-
-  .button--outline.button--neutral${focusVisibleSelector}:not(.button--disabled) {
-    border-color: var(--sl-color-neutral-500);
-    box-shadow: var(--sl-focus-ring);
   }
 
   .button--outline.button--neutral:active:not(.button--disabled) {
@@ -334,11 +277,6 @@ export default css`
     color: var(--sl-color-neutral-0);
   }
 
-  .button--outline.button--warning${focusVisibleSelector}:not(.button--disabled) {
-    border-color: var(--sl-color-warning-500);
-    box-shadow: var(--sl-focus-ring);
-  }
-
   .button--outline.button--warning:active:not(.button--disabled) {
     border-color: var(--sl-color-warning-700);
     background-color: var(--sl-color-warning-700);
@@ -355,11 +293,6 @@ export default css`
   .button--outline.button--danger.button--checked:not(.button--disabled) {
     background-color: var(--sl-color-danger-600);
     color: var(--sl-color-neutral-0);
-  }
-
-  .button--outline.button--danger${focusVisibleSelector}:not(.button--disabled) {
-    border-color: var(--sl-color-danger-500);
-    box-shadow: var(--sl-focus-ring);
   }
 
   .button--outline.button--danger:active:not(.button--disabled) {
@@ -388,7 +321,6 @@ export default css`
     background-color: transparent;
     border-color: transparent;
     color: var(--sl-color-primary-500);
-    box-shadow: var(--sl-focus-ring);
   }
 
   .button--text:active:not(.button--disabled) {
@@ -524,6 +456,12 @@ export default css`
     pointer-events: none;
   }
 
+  .button--rtl ::slotted(sl-badge) {
+    right: auto;
+    left: 0;
+    transform: translateY(-50%) translateX(-50%);
+  }
+
   /*
    * Button spacing
    */
@@ -541,57 +479,57 @@ export default css`
   }
 
   .button--has-prefix.button--small {
-    padding-left: var(--sl-spacing-x-small);
+    padding-inline-start: var(--sl-spacing-x-small);
   }
 
   .button--has-prefix.button--small .button__label {
-    padding-left: var(--sl-spacing-x-small);
+    padding-inline-start: var(--sl-spacing-x-small);
   }
 
   .button--has-prefix.button--medium {
-    padding-left: var(--sl-spacing-small);
+    padding-inline-start: var(--sl-spacing-small);
   }
 
   .button--has-prefix.button--medium .button__label {
-    padding-left: var(--sl-spacing-small);
+    padding-inline-start: var(--sl-spacing-small);
   }
 
   .button--has-prefix.button--large {
-    padding-left: var(--sl-spacing-small);
+    padding-inline-start: var(--sl-spacing-small);
   }
 
   .button--has-prefix.button--large .button__label {
-    padding-left: var(--sl-spacing-small);
+    padding-inline-start: var(--sl-spacing-small);
   }
 
   .button--has-suffix.button--small,
   .button--caret.button--small {
-    padding-right: var(--sl-spacing-x-small);
+    padding-inline-end: var(--sl-spacing-x-small);
   }
 
   .button--has-suffix.button--small .button__label,
   .button--caret.button--small .button__label {
-    padding-right: var(--sl-spacing-x-small);
+    padding-inline-end: var(--sl-spacing-x-small);
   }
 
   .button--has-suffix.button--medium,
   .button--caret.button--medium {
-    padding-right: var(--sl-spacing-small);
+    padding-inline-end: var(--sl-spacing-small);
   }
 
   .button--has-suffix.button--medium .button__label,
   .button--caret.button--medium .button__label {
-    padding-right: var(--sl-spacing-small);
+    padding-inline-end: var(--sl-spacing-small);
   }
 
   .button--has-suffix.button--large,
   .button--caret.button--large {
-    padding-right: var(--sl-spacing-small);
+    padding-inline-end: var(--sl-spacing-small);
   }
 
   .button--has-suffix.button--large .button__label,
   .button--caret.button--large .button__label {
-    padding-right: var(--sl-spacing-small);
+    padding-inline-end: var(--sl-spacing-small);
   }
 
   /*
@@ -602,8 +540,8 @@ export default css`
    */
 
   :host(.sl-button-group__button--first:not(.sl-button-group__button--last)) .button {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
+    border-start-end-radius: 0;
+    border-end-end-radius: 0;
   }
 
   :host(.sl-button-group__button--inner) .button {
@@ -611,13 +549,13 @@ export default css`
   }
 
   :host(.sl-button-group__button--last:not(.sl-button-group__button--first)) .button {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
+    border-start-start-radius: 0;
+    border-end-start-radius: 0;
   }
 
   /* All except the first */
   :host(.sl-button-group__button:not(.sl-button-group__button--first)) {
-    margin-left: calc(-1 * var(--sl-input-border-width));
+    margin-inline-start: calc(-1 * var(--sl-input-border-width));
   }
 
   /* Add a visual separator between solid buttons */
@@ -626,18 +564,19 @@ export default css`
     content: '';
     position: absolute;
     top: 0;
-    left: 0;
+    inset-inline-start: 0;
     bottom: 0;
     border-left: solid 1px rgb(128 128 128 / 33%);
     mix-blend-mode: multiply;
   }
 
-  /* Bump focused buttons up so their focus ring isn't clipped */
+  /* Bump hovered, focused, and checked buttons up so their focus ring isn't clipped */
   :host(.sl-button-group__button--hover) {
     z-index: 1;
   }
 
-  :host(.sl-button-group__button--focus) {
+  :host(.sl-button-group__button--focus),
+  :host(.sl-button-group__button[checked]) {
     z-index: 2;
   }
 `;

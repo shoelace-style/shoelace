@@ -3,10 +3,11 @@ import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { html, literal } from 'lit/static-html.js';
-import '~/components/spinner/spinner';
-import { emit } from '~/internal/event';
-import { FormSubmitController } from '~/internal/form';
-import { HasSlotController } from '~/internal/slot';
+import '../../components/spinner/spinner';
+import { emit } from '../../internal/event';
+import { FormSubmitController } from '../../internal/form';
+import { HasSlotController } from '../../internal/slot';
+import { LocalizeController } from '../../utilities/localize';
 import styles from './button.styles';
 
 /**
@@ -49,6 +50,7 @@ export default class SlButton extends LitElement {
     }
   });
   private readonly hasSlotController = new HasSlotController(this, '[default]', 'prefix', 'suffix');
+  private readonly localize = new LocalizeController(this);
 
   @state() private hasFocus = false;
 
@@ -81,7 +83,7 @@ export default class SlButton extends LitElement {
    * The type of button. When the type is `submit`, the button will submit the surrounding form. Note that the default
    * value is `button` instead of `submit`, which is opposite of how native `<button>` elements behave.
    */
-  @property() type: 'button' | 'submit' = 'button';
+  @property() type: 'button' | 'submit' | 'reset' = 'button';
 
   /** An optional name for the button. Ignored when `href` is set. */
   @property() name?: string;
@@ -151,6 +153,10 @@ export default class SlButton extends LitElement {
     if (this.type === 'submit') {
       this.formSubmitController.submit(this);
     }
+
+    if (this.type === 'reset') {
+      this.formSubmitController.reset(this);
+    }
   }
 
   render() {
@@ -181,19 +187,20 @@ export default class SlButton extends LitElement {
           'button--standard': !this.outline,
           'button--outline': this.outline,
           'button--pill': this.pill,
+          'button--rtl': this.localize.dir() === 'rtl',
           'button--has-label': this.hasSlotController.test('[default]'),
           'button--has-prefix': this.hasSlotController.test('prefix'),
           'button--has-suffix': this.hasSlotController.test('suffix')
         })}
         ?disabled=${ifDefined(isLink ? undefined : this.disabled)}
-        type=${this.type}
+        type=${ifDefined(isLink ? undefined : this.type)}
         name=${ifDefined(isLink ? undefined : this.name)}
         value=${ifDefined(isLink ? undefined : this.value)}
-        href=${ifDefined(this.href)}
-        target=${ifDefined(this.target)}
-        download=${ifDefined(this.download)}
-        rel=${ifDefined(this.target ? 'noreferrer noopener' : undefined)}
-        role="button"
+        href=${ifDefined(isLink ? this.href : undefined)}
+        target=${ifDefined(isLink ? this.target : undefined)}
+        download=${ifDefined(isLink ? this.download : undefined)}
+        rel=${ifDefined(isLink && this.target ? 'noreferrer noopener' : undefined)}
+        role=${ifDefined(isLink ? undefined : 'button')}
         aria-disabled=${this.disabled ? 'true' : 'false'}
         tabindex=${this.disabled ? '-1' : '0'}
         @blur=${this.handleBlur}

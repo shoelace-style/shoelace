@@ -1,4 +1,4 @@
-import { expect, fixture, html, waitUntil } from '@open-wc/testing';
+import { expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
 import sinon from 'sinon';
 import type SlColorPicker from './color-picker';
 
@@ -44,5 +44,35 @@ describe('<sl-color-picker>', () => {
     const trigger = el.shadowRoot!.querySelector<HTMLButtonElement>('[part="trigger"]');
 
     expect(trigger?.style.color).to.equal('rgb(0, 0, 0)');
+  });
+
+  describe('when resetting a form', () => {
+    it('should reset the element to its initial value', async () => {
+      const form = await fixture<HTMLFormElement>(html`
+        <form>
+          <sl-color-picker name="a" value="#FFFFFF"></sl-color-picker>
+          <sl-button type="reset">Reset</sl-button>
+        </form>
+      `);
+      const button = form.querySelector('sl-button')!;
+      const colorPicker = form.querySelector('sl-color-picker')!;
+      colorPicker.value = '#000000';
+
+      await colorPicker.updateComplete;
+
+      setTimeout(() => button.click());
+      await oneEvent(form, 'reset');
+      await colorPicker.updateComplete;
+
+      expect(colorPicker.value).to.equal('#FFFFFF');
+
+      colorPicker.defaultValue = '';
+
+      setTimeout(() => button.click());
+      await oneEvent(form, 'reset');
+      await colorPicker.updateComplete;
+
+      expect(colorPicker.value).to.equal('');
+    });
   });
 });

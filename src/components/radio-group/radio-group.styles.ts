@@ -1,5 +1,5 @@
 import { css } from 'lit';
-import componentStyles from '~/styles/component.styles';
+import componentStyles from '../../styles/component.styles';
 
 export default css`
   ${componentStyles}
@@ -43,5 +43,10 @@ export default css`
     clip-path: inset(50%);
     overflow: hidden;
     white-space: nowrap;
+  }
+
+  .radio-group--required .radio-group__label::after {
+    content: var(--sl-input-required-content);
+    margin-inline-start: -2px;
   }
 `;

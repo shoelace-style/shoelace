@@ -3,10 +3,11 @@ import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
-import { emit } from '~/internal/event';
-import { FormSubmitController } from '~/internal/form';
-import { HasSlotController } from '~/internal/slot';
-import { watch } from '~/internal/watch';
+import { defaultValue } from '../../internal/default-value';
+import { emit } from '../../internal/event';
+import { FormSubmitController } from '../../internal/form';
+import { HasSlotController } from '../../internal/slot';
+import { watch } from '../../internal/watch';
 import styles from './textarea.styles';
 
 /**
@@ -101,11 +102,21 @@ export default class SlTextarea extends LitElement {
   /** The textarea's autofocus attribute. */
   @property({ type: Boolean }) autofocus: boolean;
 
+  /**
+   * The input's enterkeyhint attribute. This can be used to customize the label or icon of the Enter key on virtual
+   * keyboards.
+   */
+  @property() enterkeyhint: 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send';
+
   /** Enables spell checking on the textarea. */
   @property({ type: Boolean }) spellcheck: boolean;
 
   /** The textarea's inputmode attribute. */
   @property() inputmode: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
+
+  /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
+  @defaultValue()
+  defaultValue = '';
 
   connectedCallback() {
     super.connectedCallback();
@@ -285,7 +296,7 @@ export default class SlTextarea extends LitElement {
               'textarea--filled': this.filled,
               'textarea--disabled': this.disabled,
               'textarea--focused': this.hasFocus,
-              'textarea--empty': this.value.length === 0,
+              'textarea--empty': !this.value,
               'textarea--invalid': this.invalid,
               'textarea--resize-none': this.resize === 'none',
               'textarea--resize-vertical': this.resize === 'vertical',
@@ -309,6 +320,7 @@ export default class SlTextarea extends LitElement {
               autocorrect=${ifDefined(this.autocorrect)}
               ?autofocus=${this.autofocus}
               spellcheck=${ifDefined(this.spellcheck)}
+              enterkeyhint=${ifDefined(this.enterkeyhint)}
               inputmode=${ifDefined(this.inputmode)}
               aria-describedby="help-text"
               @change=${this.handleChange}

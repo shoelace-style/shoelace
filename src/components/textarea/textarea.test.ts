@@ -1,6 +1,5 @@
-import { expect, fixture, html, waitUntil } from '@open-wc/testing';
+import { expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
 import sinon from 'sinon';
-// eslint-disable-next-line no-restricted-imports
 import { serialize } from '../../utilities/form';
 import type SlTextarea from './textarea';
 
@@ -70,6 +69,36 @@ describe('<sl-textarea>', () => {
       const form = await fixture<HTMLFormElement>(html` <form><sl-textarea name="a" value="1"></sl-textarea></form> `);
       const json = serialize(form);
       expect(json.a).to.equal('1');
+    });
+  });
+
+  describe('when resetting a form', () => {
+    it('should reset the element to its initial value', async () => {
+      const form = await fixture<HTMLFormElement>(html`
+        <form>
+          <sl-textarea name="a" value="test"></sl-textarea>
+          <sl-button type="reset">Reset</sl-button>
+        </form>
+      `);
+      const button = form.querySelector('sl-button')!;
+      const textarea = form.querySelector('sl-textarea')!;
+      textarea.value = '1234';
+
+      await textarea.updateComplete;
+
+      setTimeout(() => button.click());
+      await oneEvent(form, 'reset');
+      await textarea.updateComplete;
+
+      expect(textarea.value).to.equal('test');
+
+      textarea.defaultValue = '';
+
+      setTimeout(() => button.click());
+      await oneEvent(form, 'reset');
+      await textarea.updateComplete;
+
+      expect(textarea.value).to.equal('');
     });
   });
 });

@@ -1,5 +1,5 @@
 import { css } from 'lit';
-import componentStyles from '~/styles/component.styles';
+import componentStyles from '../../styles/component.styles';
 
 export default css`
   ${componentStyles}
@@ -38,7 +38,7 @@ export default css`
     display: flex;
     align-items: center;
     font-size: var(--sl-font-size-large);
-    padding-left: var(--sl-spacing-large);
+    padding-inline-start: var(--sl-spacing-large);
   }
 
   .alert--primary {
@@ -92,6 +92,6 @@ export default css`
     display: flex;
     align-items: center;
     font-size: var(--sl-font-size-large);
-    padding-right: var(--sl-spacing-medium);
+    padding-inline-end: var(--sl-spacing-medium);
   }
 `;

@@ -1,6 +1,6 @@
 import { css } from 'lit';
-import componentStyles from '~/styles/component.styles';
-import formControlStyles from '~/styles/form-control.styles';
+import componentStyles from '../../styles/component.styles';
+import formControlStyles from '../../styles/form-control.styles';
 
 export default css`
   ${componentStyles}
@@ -41,7 +41,7 @@ export default css`
   .input--standard.input--focused:not(.input--disabled) {
     background-color: var(--sl-input-background-color-focus);
     border-color: var(--sl-input-border-color-focus);
-    box-shadow: var(--sl-focus-ring);
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-input-focus-ring-color);
   }
 
   .input--standard.input--focused:not(.input--disabled) .input__control {
@@ -76,7 +76,8 @@ export default css`
 
   .input--filled.input--focused:not(.input--disabled) {
     background-color: var(--sl-input-filled-background-color-focus);
-    box-shadow: var(--sl-focus-ring);
+    outline: var(--sl-focus-ring);
+    outline-offset: var(--sl-focus-ring-offset);
   }
 
   .input--filled.input--disabled {
@@ -172,11 +173,11 @@ export default css`
   }
 
   .input--small .input__prefix ::slotted(*) {
-    padding-left: var(--sl-input-spacing-small);
+    padding-inline-start: var(--sl-input-spacing-small);
   }
 
   .input--small .input__suffix ::slotted(*) {
-    padding-right: var(--sl-input-spacing-small);
+    padding-inline-end: var(--sl-input-spacing-small);
   }
 
   .input--medium {
@@ -196,11 +197,11 @@ export default css`
   }
 
   .input--medium .input__prefix ::slotted(*) {
-    padding-left: var(--sl-input-spacing-medium);
+    padding-inline-start: var(--sl-input-spacing-medium);
   }
 
   .input--medium .input__suffix ::slotted(*) {
-    padding-right: var(--sl-input-spacing-medium);
+    padding-inline-end: var(--sl-input-spacing-medium);
   }
 
   .input--large {
@@ -220,11 +221,11 @@ export default css`
   }
 
   .input--large .input__prefix ::slotted(*) {
-    padding-left: var(--sl-input-spacing-large);
+    padding-inline-start: var(--sl-input-spacing-large);
   }
 
   .input--large .input__suffix ::slotted(*) {
-    padding-right: var(--sl-input-spacing-large);
+    padding-inline-end: var(--sl-input-spacing-large);
   }
 
   /*
@@ -278,5 +279,22 @@ export default css`
   /* Don't show the browser's password toggle in Edge */
   ::-ms-reveal {
     display: none;
+  }
+
+  /* Hide Firefox's clear button on date and time inputs */
+  .input--is-firefox input[type='date'],
+  .input--is-firefox input[type='time'] {
+    clip-path: inset(0 2em 0 0);
+  }
+
+  /* Hide the built-in number spinner */
+  .input--no-spin-buttons input[type='number']::-webkit-outer-spin-button,
+  .input--no-spin-buttons input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    display: none;
+  }
+
+  .input--no-spin-buttons input[type='number'] {
+    -moz-appearance: textfield;
   }
 `;

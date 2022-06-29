@@ -1,11 +1,11 @@
 import { html, LitElement } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
-import '~/components/icon/icon';
-import { drag } from '~/internal/drag';
-import { emit } from '~/internal/event';
-import { clamp } from '~/internal/math';
-import { watch } from '~/internal/watch';
+import '../../components/icon/icon';
+import { drag } from '../../internal/drag';
+import { emit } from '../../internal/event';
+import { clamp } from '../../internal/math';
+import { watch } from '../../internal/watch';
 import styles from './image-comparer.styles';
 
 /**
@@ -39,13 +39,16 @@ export default class SlImageComparer extends LitElement {
   /** The position of the divider as a percentage. */
   @property({ type: Number, reflect: true }) position = 50;
 
-  handleDrag(event: Event) {
+  handleDrag(event: PointerEvent) {
     const { width } = this.base.getBoundingClientRect();
 
     event.preventDefault();
 
-    drag(this.base, x => {
-      this.position = parseFloat(clamp((x / width) * 100, 0, 100).toFixed(2));
+    drag(this.base, {
+      onMove: x => {
+        this.position = parseFloat(clamp((x / width) * 100, 0, 100).toFixed(2));
+      },
+      initialEvent: event
     });
   }
 
@@ -114,7 +117,13 @@ export default class SlImageComparer extends LitElement {
             tabindex="0"
           >
             <slot name="handle-icon">
-              <sl-icon class="image-comparer__handle-icon" name="grip-vertical" library="system"></sl-icon>
+              <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <g fill="currentColor" fill-rule="nonzero">
+                  <path
+                    d="m21.14 12.55-5.482 4.796c-.646.566-1.658.106-1.658-.753V7a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506h.001ZM2.341 12.55l5.482 4.796c.646.566 1.658.106 1.658-.753V7a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506h-.001Z"
+                  />
+                </g>
+              </svg>
             </slot>
           </div>
         </div>

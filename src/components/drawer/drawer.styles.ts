@@ -1,5 +1,5 @@
 import { css } from 'lit';
-import componentStyles from '~/styles/component.styles';
+import componentStyles from '../../styles/component.styles';
 
 export default css`
   ${componentStyles}
@@ -15,7 +15,7 @@ export default css`
 
   .drawer {
     top: 0;
-    left: 0;
+    inset-inline-start: 0;
     width: 100%;
     height: 100%;
     pointer-events: none;
@@ -52,36 +52,36 @@ export default css`
 
   .drawer--top .drawer__panel {
     top: 0;
-    right: auto;
+    inset-inline-end: auto;
     bottom: auto;
-    left: 0;
+    inset-inline-start: 0;
     width: 100%;
     height: var(--size);
   }
 
   .drawer--end .drawer__panel {
     top: 0;
-    right: 0;
+    inset-inline-end: 0;
     bottom: auto;
-    left: auto;
+    inset-inline-start: auto;
     width: var(--size);
     height: 100%;
   }
 
   .drawer--bottom .drawer__panel {
     top: auto;
-    right: auto;
+    inset-inline-end: auto;
     bottom: 0;
-    left: 0;
+    inset-inline-start: 0;
     width: 100%;
     height: var(--size);
   }
 
   .drawer--start .drawer__panel {
     top: 0;
-    right: auto;
+    inset-inline-end: auto;
     bottom: auto;
-    left: 0;
+    inset-inline-start: 0;
     width: var(--size);
     height: 100%;
   }
@@ -120,7 +120,7 @@ export default css`
   }
 
   .drawer__footer ::slotted(sl-button:not(:last-of-type)) {
-    margin-right: var(--sl-spacing-x-small);
+    margin-inline-end: var(--sl-spacing-x-small);
   }
 
   .drawer:not(.drawer--has-footer) .drawer__footer {

@@ -1,10 +1,19 @@
-interface ElementAnimation {
+export interface ElementAnimation {
   keyframes: Keyframe[];
+  rtlKeyframes?: Keyframe[];
   options?: KeyframeAnimationOptions;
 }
 
-interface ElementAnimationMap {
+export interface ElementAnimationMap {
   [animationName: string]: ElementAnimation;
+}
+
+export interface GetAnimationOptions {
+  /**
+   * The component's directionality. When set to "rtl", `rtlKeyframes` will be preferred over `keyframes` where
+   * available using getAnimation().
+   */
+  dir: string;
 }
 
 const defaultAnimationRegistry = new Map<string, ElementAnimation>();
@@ -12,6 +21,21 @@ const customAnimationRegistry = new WeakMap<Element, ElementAnimationMap>();
 
 function ensureAnimation(animation: ElementAnimation | null) {
   return animation ?? { keyframes: [], options: { duration: 0 } };
+}
+
+//
+// Given an ElementAnimation, this function returns a new ElementAnimation where the keyframes property reflects either
+// keyframes or rtlKeyframes depending on the specified directionality.
+//
+function getLogicalAnimation(animation: ElementAnimation, dir: string) {
+  if (dir.toLowerCase() === 'rtl') {
+    return {
+      keyframes: animation.rtlKeyframes || animation.keyframes,
+      options: animation.options
+    };
+  }
+
+  return animation;
 }
 
 //
@@ -32,18 +56,18 @@ export function setAnimation(el: Element, animationName: string, animation: Elem
 //
 // Gets an element's animation. Falls back to the default if no animation is found.
 //
-export function getAnimation(el: Element, animationName: string) {
+export function getAnimation(el: Element, animationName: string, options: GetAnimationOptions) {
   const customAnimation = customAnimationRegistry.get(el);
 
   // Check for a custom animation
   if (customAnimation?.[animationName]) {
-    return customAnimation[animationName];
+    return getLogicalAnimation(customAnimation[animationName], options.dir);
   }
 
   // Check for a default animation
   const defaultAnimation = defaultAnimationRegistry.get(animationName);
   if (defaultAnimation) {
-    return defaultAnimation;
+    return getLogicalAnimation(defaultAnimation, options.dir);
   }
 
   // Fall back to an empty animation
