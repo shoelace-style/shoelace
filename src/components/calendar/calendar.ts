@@ -1,14 +1,14 @@
 import { LitElement, html } from 'lit';
-import type { TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
+import { generateCalendarGrid, getAllDayNames, getMonthName, isSameDay } from '../../internal/calendar';
+import { emit } from '../../internal/event';
+import { partMap } from '../../internal/part-map';
+import { HasSlotController } from '../../internal/slot';
+import { watch } from '../../internal/watch';
+import { LocalizeController } from '../../utilities/localize';
 import styles from './calendar.styles';
-import { generateCalendarGrid, getAllDayNames, getMonthName, isSameDay } from '~/internal/calendar';
-import { emit } from '~/internal/event';
-import { partMap } from '~/internal/part-map';
-import { HasSlotController } from '~/internal/slot';
-import { watch } from '~/internal/watch';
-import { LocalizeController } from '~/utilities/localize';
+import type { TemplateResult } from 'lit';
 
 export interface RenderDayOptions {
   disabled?: boolean;
