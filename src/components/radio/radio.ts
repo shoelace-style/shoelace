@@ -179,15 +179,13 @@ export default class SlRadio extends LitElement {
           @focus=${this.handleFocus}
         />
         <span part="control" class="radio__control">
-          <span part="checked-icon" class="radio__icon">
-            <svg viewBox="0 0 16 16">
-              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                <g fill="currentColor">
-                  <circle cx="8" cy="8" r="3.42857143"></circle>
-                </g>
+          <svg part="checked-icon" class="radio__icon" viewBox="0 0 16 16">
+            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <g fill="currentColor">
+                <circle cx="8" cy="8" r="3.42857143"></circle>
               </g>
-            </svg>
-          </span>
+            </g>
+          </svg>
         </span>
 
         <span part="label" class="radio__label">
