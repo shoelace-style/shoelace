@@ -17,6 +17,8 @@ export interface Translation extends DefaultTranslation {
   close: string;
   copy: string;
   currentValue: string;
+  nextMonth: 'Next Month';
+  previousMonth: 'Previous Month';
   hidePassword: string;
   progress: string;
   remove: string;
