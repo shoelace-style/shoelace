@@ -4,7 +4,7 @@ Shoelace follows [Semantic Versioning](https://semver.org/). Breaking changes in
 
 Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> badge should not be used in production. They are made available as release candidates for development and testing purposes. As such, changes to experimental components will not be subject to semantic versioning.
 
-Shoelace releases currently do not adhere to a set schedule. New releases are published when a critical mass of relevant changes is accumulated.
+New versions of Shoelace are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.shoelace.style](https://next.shoelace.style).
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
