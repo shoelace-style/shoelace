@@ -72,6 +72,7 @@
 
   - [Animated Image](/components/animated-image)
   - [Animation](/components/animation)
+  - [Drop Handler](/components/drop-handler)
   - [Format Bytes](/components/format-bytes)
   - [Format Date](/components/format-date)
   - [Format Number](/components/format-number)

@@ -15,6 +15,7 @@ export { default as SlDetails } from './components/details/details';
 export { default as SlDialog } from './components/dialog/dialog';
 export { default as SlDivider } from './components/divider/divider';
 export { default as SlDrawer } from './components/drawer/drawer';
+export { default as SlDropHandler } from './components/drop-handler/drop-handler';
 export { default as SlDropdown } from './components/dropdown/dropdown';
 export { default as SlFormatBytes } from './components/format-bytes/format-bytes';
 export { default as SlFormatDate } from './components/format-date/format-date';
