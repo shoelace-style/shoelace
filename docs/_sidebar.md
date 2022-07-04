@@ -38,6 +38,7 @@
   - [Divider](/components/divider)
   - [Drawer](/components/drawer)
   - [Dropdown](/components/dropdown)
+  - [File Item](/components/file-item)
   - [Icon](/components/icon)
   - [Icon Button](/components/icon-button)
   - [Image Comparer](/components/image-comparer)
