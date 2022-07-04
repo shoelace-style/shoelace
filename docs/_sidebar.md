@@ -38,6 +38,7 @@
   - [Divider](/components/divider)
   - [Drawer](/components/drawer)
   - [Dropdown](/components/dropdown)
+  - [File Dropzone](/components/file-dropzone)
   - [File Item](/components/file-item)
   - [Icon](/components/icon)
   - [Icon Button](/components/icon-button)

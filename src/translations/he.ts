@@ -6,20 +6,29 @@ const translation: Translation = {
   $name: 'עברית',
   $dir: 'rtl',
 
+  browseFiles: '',
   clearEntry: 'נקה קלט',
   close: 'סגור',
   copy: 'העתק',
   currentValue: 'ערך נוכחי',
+  dragDrop: '',
+  fileSizeExceeded: '',
+  fileTypeNotAccepted: '',
   hidePassword: 'הסתר סיסמא',
   loading: 'טוען',
+  maxFiles: '',
+  noMultipleFiles: '',
   progress: 'התקדמות',
   remove: 'לְהַסִיר',
   resize: 'שנה גודל',
   scrollToEnd: 'גלול עד הסוף',
   scrollToStart: 'גלול להתחלה',
   selectAColorFromTheScreen: 'בחור צבע מהמסך',
+  serverError: '',
   showPassword: 'הראה סיסמה',
-  toggleColorFormat: 'החלף פורמט צבע'
+  toggleColorFormat: 'החלף פורמט צבע',
+  transferAbort: '',
+  transferError: ''
 };
 
 registerTranslation(translation);

@@ -19,7 +19,7 @@ import { DropEffect } from './library';
  */
 
 @customElement('sl-drop-handler')
-export default class SlDropHandler extends LitElement {
+export default class SLDropHandler extends LitElement {
   /** Controls the feedback (typically visual) the user is given during a drag and drop operation */
   get dropEffect(): DropEffect {
     return this.currentDropEffect;
@@ -108,6 +108,6 @@ export default class SlDropHandler extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-drop-handler': SlDropHandler;
+    'sl-drop-handler': SLDropHandler;
   }
 }

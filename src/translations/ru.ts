@@ -6,20 +6,29 @@ const translation: Translation = {
   $name: 'Русский',
   $dir: 'ltr',
 
+  browseFiles: '',
   clearEntry: 'Очистить запись',
   close: 'Закрыть',
   copy: 'Скопировать',
   currentValue: 'Текущее значение',
+  dragDrop: '',
+  fileSizeExceeded: '',
+  fileTypeNotAccepted: '',
   hidePassword: 'Скрыть пароль',
   loading: 'Загрузка',
+  maxFiles: '',
+  noMultipleFiles: '',
   progress: 'Прогресс',
   remove: 'Удалить',
   resize: 'Изменить размер',
   scrollToEnd: 'Пролистать до конца',
   scrollToStart: 'Пролистать к началу',
   selectAColorFromTheScreen: 'Выберите цвет на экране',
+  serverError: '',
   showPassword: 'Показать пароль',
-  toggleColorFormat: 'Переключить цветовую модель'
+  toggleColorFormat: 'Переключить цветовую модель',
+  transferAbort: '',
+  transferError: ''
 };
 
 registerTranslation(translation);
