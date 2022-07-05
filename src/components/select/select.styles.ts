@@ -14,6 +14,10 @@ export default css`
     display: block;
   }
 
+  .select::part(panel) {
+    overflow: hidden;
+  }
+
   .select__control {
     display: inline-flex;
     align-items: center;
