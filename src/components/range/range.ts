@@ -35,6 +35,7 @@ import styles from './range.styles';
  * @cssproperty --track-color-active - The color of the portion of the track that represents the current value.
  * @cssproperty --track-color-inactive - The of the portion of the track that represents the remaining value.
  * @cssproperty --track-height - The height of the track.
+ * @cssproperty --track-active-offset - The point of origin of the active track.
  */
 @customElement('sl-range')
 export default class SlRange extends LitElement {
@@ -96,9 +97,6 @@ export default class SlRange extends LitElement {
     super.connectedCallback();
     this.resizeObserver = new ResizeObserver(() => this.syncRange());
 
-    if (!this.value) {
-      this.value = this.min;
-    }
     if (this.value < this.min) {
       this.value = this.min;
     }
@@ -190,9 +188,7 @@ export default class SlRange extends LitElement {
   }
 
   syncProgress(percent: number) {
-    this.input.style.background = `linear-gradient(to right, var(--track-color-active) 0%, var(--track-color-active) ${
-      percent * 100
-    }%, var(--track-color-inactive) ${percent * 100}%, var(--track-color-inactive) 100%)`;
+    this.input.style.setProperty('--percent', `${percent * 100}%`);
   }
 
   syncTooltip(percent: number) {

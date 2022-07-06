@@ -133,6 +133,38 @@ const App = () => (
 );
 ```
 
+### Custom Track Offset
+
+You can customize the initial offset of the active track using the `--track-active-offset` custom property.
+
+```html preview
+<sl-range
+  min="-100"
+  max="100"
+  style="
+  --track-color-active: var(--sl-color-primary-600);
+  --track-color-inactive: var(--sl-color-primary-100);
+  --track-active-offset: 50%;
+"
+></sl-range>
+```
+
+```jsx react
+import { SlRange } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlRange
+    min={-100}
+    max={100}
+    style={{
+      '--track-color-active': 'var(--sl-color-primary-600)',
+      '--track-color-inactive': 'var(--sl-color-primary-200)',
+      '--track-active-offset': '50%'
+    }}
+  />
+);
+```
+
 ### Custom Tooltip Formatter
 
 You can change the tooltip's content by setting the `tooltipFormatter` property to a function that accepts the range's value as an argument.
