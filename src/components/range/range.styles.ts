@@ -12,6 +12,7 @@ export default css`
     --tooltip-offset: 10px;
     --track-color-active: var(--sl-color-neutral-200);
     --track-color-inactive: var(--sl-color-neutral-200);
+    --track-active-offset: 0%;
     --track-height: 6px;
 
     display: block;
@@ -22,6 +23,7 @@ export default css`
   }
 
   .range__control {
+    --percent: 0%;
     -webkit-appearance: none;
     border-radius: 3px;
     width: 100%;
@@ -29,6 +31,16 @@ export default css`
     background: transparent;
     line-height: var(--sl-input-height-medium);
     vertical-align: middle;
+
+    background-image: linear-gradient(
+      to right,
+      var(--track-color-inactive) 0%,
+      var(--track-color-inactive) min(var(--percent), var(--track-active-offset)),
+      var(--track-color-active) min(var(--percent), var(--track-active-offset)),
+      var(--track-color-active) max(var(--percent), var(--track-active-offset)),
+      var(--track-color-inactive) max(var(--percent), var(--track-active-offset)),
+      var(--track-color-inactive) 100%
+    );
   }
 
   /* Webkit */
