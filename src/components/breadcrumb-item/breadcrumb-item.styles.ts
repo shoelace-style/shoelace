@@ -1,5 +1,4 @@
 import { css } from 'lit';
-import { focusVisibleSelector } from '../../internal/focus-visible';
 import componentStyles from '../../styles/component.styles';
 
 export default css`
@@ -53,7 +52,7 @@ export default css`
     outline: none;
   }
 
-  .breadcrumb-item__label${focusVisibleSelector} {
+  .breadcrumb-item__label:focus-visible {
     outline: var(--sl-focus-ring);
     outline-offset: var(--sl-focus-ring-offset);
   }

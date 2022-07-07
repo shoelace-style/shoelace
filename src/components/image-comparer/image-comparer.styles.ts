@@ -1,5 +1,4 @@
 import { css } from 'lit';
-import { focusVisibleSelector } from '../../internal/focus-visible';
 import componentStyles from '../../styles/component.styles';
 
 export default css`
@@ -70,7 +69,7 @@ export default css`
     z-index: 10;
   }
 
-  .image-comparer__handle${focusVisibleSelector} {
+  .image-comparer__handle:focus-visible {
     outline: var(--sl-focus-ring);
     outline-offset: var(--sl-focus-ring-offset);
   }

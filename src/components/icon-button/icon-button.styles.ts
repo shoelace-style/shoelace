@@ -1,5 +1,4 @@
 import { css } from 'lit';
-import { focusVisibleSelector } from '../../internal/focus-visible';
 import componentStyles from '../../styles/component.styles';
 
 export default css`
@@ -42,7 +41,7 @@ export default css`
     cursor: not-allowed;
   }
 
-  .icon-button${focusVisibleSelector} {
+  .icon-button:focus-visible {
     outline: var(--sl-focus-ring);
     outline-offset: var(--sl-focus-ring-offset);
   }

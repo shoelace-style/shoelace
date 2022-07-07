@@ -1,5 +1,4 @@
 import { css } from 'lit';
-import { focusVisibleSelector } from '../../internal/focus-visible';
 import componentStyles from '../../styles/component.styles';
 
 export default css`
@@ -39,7 +38,7 @@ export default css`
     outline: none;
   }
 
-  .button${focusVisibleSelector} {
+  .button:focus-visible {
     outline: var(--sl-focus-ring);
     outline-offset: var(--sl-focus-ring-offset);
   }
@@ -317,7 +316,7 @@ export default css`
     color: var(--sl-color-primary-500);
   }
 
-  .button--text${focusVisibleSelector}:not(.button--disabled) {
+  .button--text:focus-visible:not(.button--disabled) {
     background-color: transparent;
     border-color: transparent;
     color: var(--sl-color-primary-500);

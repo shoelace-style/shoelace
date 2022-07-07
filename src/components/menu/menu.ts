@@ -1,7 +1,6 @@
 import { html, LitElement } from 'lit';
 import { customElement, query } from 'lit/decorators.js';
 import { emit } from '../../internal/event';
-import { hasFocusVisible } from '../../internal/focus-visible';
 import { getTextContent } from '../../internal/slot';
 import styles from './menu.styles';
 import type SlMenuItem from '../../components/menu-item/menu-item';
@@ -90,11 +89,6 @@ export default class SlMenu extends LitElement {
       this.typeToSelectString += event.key.toLowerCase();
     }
 
-    // Restore focus in browsers that don't support :focus-visible when using the keyboard
-    if (!hasFocusVisible) {
-      items.forEach(item => item.classList.remove('sl-focus-invisible'));
-    }
-
     for (const item of items) {
       const slot = item.shadowRoot?.querySelector<HTMLSlotElement>('slot:not([name])');
       const label = getTextContent(slot).toLowerCase().trim();
@@ -114,16 +108,6 @@ export default class SlMenu extends LitElement {
 
     if (item?.disabled === false) {
       emit(this, 'sl-select', { detail: { item } });
-    }
-  }
-
-  handleKeyUp() {
-    // Restore focus in browsers that don't support :focus-visible when using the keyboard
-    if (!hasFocusVisible) {
-      const items = this.getAllItems();
-      items.forEach(item => {
-        item.classList.remove('sl-focus-invisible');
-      });
     }
   }
 
@@ -183,11 +167,6 @@ export default class SlMenu extends LitElement {
 
     if (target.getAttribute('role') === 'menuitem') {
       this.setCurrentItem(target as SlMenuItem);
-
-      // Hide focus in browsers that don't support :focus-visible when using the mouse
-      if (!hasFocusVisible) {
-        target.classList.add('sl-focus-invisible');
-      }
     }
   }
 
@@ -207,7 +186,6 @@ export default class SlMenu extends LitElement {
         class="menu"
         @click=${this.handleClick}
         @keydown=${this.handleKeyDown}
-        @keyup=${this.handleKeyUp}
         @mousedown=${this.handleMouseDown}
       >
         <slot @slotchange=${this.handleSlotChange}></slot>

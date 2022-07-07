@@ -1,5 +1,4 @@
 import { css } from 'lit';
-import { focusVisibleSelector } from '../../internal/focus-visible';
 import componentStyles from '../../styles/component.styles';
 
 export default css`
@@ -31,7 +30,7 @@ export default css`
     border: solid var(--sl-panel-border-width) var(--sl-panel-border-color);
   }
 
-  .color-picker--inline${focusVisibleSelector} {
+  .color-picker--inline:focus-visible {
     outline: var(--sl-focus-ring);
     outline-offset: var(--sl-focus-ring-offset);
   }
@@ -63,7 +62,7 @@ export default css`
     transform: scale(1.5);
   }
 
-  .color-picker__grid-handle${focusVisibleSelector} {
+  .color-picker__grid-handle:focus-visible {
     outline: var(--sl-focus-ring);
   }
 
@@ -99,7 +98,7 @@ export default css`
     margin-left: calc(var(--slider-handle-size) / -2);
   }
 
-  .color-picker__slider-handle${focusVisibleSelector} {
+  .color-picker__slider-handle:focus-visible {
     outline: var(--sl-focus-ring);
   }
 
@@ -154,7 +153,7 @@ export default css`
     background-color: var(--preview-color);
   }
 
-  .color-picker__preview${focusVisibleSelector} {
+  .color-picker__preview:focus-visible {
     outline: var(--sl-focus-ring);
     outline-offset: var(--sl-focus-ring-offset);
   }
@@ -231,7 +230,7 @@ export default css`
     cursor: pointer;
   }
 
-  .color-picker__swatch${focusVisibleSelector} {
+  .color-picker__swatch:focus-visible {
     outline: var(--sl-focus-ring);
     outline-offset: var(--sl-focus-ring-offset);
   }
@@ -314,11 +313,11 @@ export default css`
     background-color: transparent;
   }
 
-  .color-dropdown__trigger${focusVisibleSelector} {
+  .color-dropdown__trigger:focus-visible {
     outline: none;
   }
 
-  .color-dropdown__trigger${focusVisibleSelector}:not(.color-dropdown__trigger--disabled) {
+  .color-dropdown__trigger:focus-visible:not(.color-dropdown__trigger--disabled) {
     outline: var(--sl-focus-ring);
     outline-offset: var(--sl-focus-ring-offset);
   }

@@ -1,5 +1,4 @@
 import { css } from 'lit';
-import { focusVisibleSelector } from '../../internal/focus-visible';
 import componentStyles from '../../styles/component.styles';
 import formControlStyles from '../../styles/form-control.styles';
 
@@ -70,7 +69,7 @@ export default css`
     border-color: var(--sl-color-primary-500);
   }
 
-  .range__control:enabled${focusVisibleSelector}::-webkit-slider-thumb {
+  .range__control:enabled:focus-visible::-webkit-slider-thumb {
     outline: var(--sl-focus-ring);
     outline-offset: var(--sl-focus-ring-offset);
   }
@@ -117,7 +116,7 @@ export default css`
     border-color: var(--sl-color-primary-500);
   }
 
-  .range__control:enabled${focusVisibleSelector}::-moz-range-thumb {
+  .range__control:enabled:focus-visible::-moz-range-thumb {
     outline: var(--sl-focus-ring);
     outline-offset: var(--sl-focus-ring-offset);
   }
@@ -129,7 +128,7 @@ export default css`
   }
 
   /* States */
-  .range__control${focusVisibleSelector} {
+  .range__control:focus-visible {
     outline: none;
   }
 
