@@ -90,7 +90,11 @@ console.log('Generating search index for documentation');
         .join(' ');
       const members = getMembers(content);
 
-      this.add({ id: index, t: title, h: headings, m: members, c: content });
+      // Remove markdown code fields from search results. This seems to make search results a bit more accurate and
+      // reduces search.json from ~679 KB to ~455 KB.
+      const prunedContent = content.replace(/```(.*?)```/gs, '');
+
+      this.add({ id: index, t: title, h: headings, m: members, c: prunedContent });
 
       map[index] = { title, url };
     });
