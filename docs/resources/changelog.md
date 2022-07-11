@@ -15,6 +15,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Added the `--track-active-offset` CSS custom property to `<sl-range>` [#806](https://github.com/shoelace-style/shoelace/issues/806)
 - Fixed a bug that caused `<sl-select>` to sometimes have two vertical scrollbars [#814](https://github.com/shoelace-style/shoelace/issues/814)
 - Fixed a bug that caused a gray line to appear between radio buttons [#821](https://github.com/shoelace-style/shoelace/discussions/821)
+- Fixed a bug that caused `<sl-animated-image>` to not render anything when using the `play` attribute initially [#824](https://github.com/shoelace-style/shoelace/issues/824)
 - Removed `:focus-visible` shim now that the last two major versions of Safari support it
 
 ## 2.0.0-beta.77

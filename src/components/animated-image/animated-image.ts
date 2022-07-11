@@ -61,7 +61,7 @@ export default class SlAnimatedImage extends LitElement {
     emit(this, 'sl-error');
   }
 
-  @watch('play')
+  @watch('play', { waitUntilFirstUpdate: true })
   handlePlayChange() {
     // When the animation starts playing, reset the src so it plays from the beginning. Since the src is cached, this
     // won't trigger another request.
