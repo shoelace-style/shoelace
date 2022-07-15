@@ -490,6 +490,20 @@ kbd,
   background-color: var(--sl-color-neutral-100);
 }
 
+/* Sponsorship callouts */
+.sponsor-callout {
+  background: var(--sl-color-warning-100);
+  border-left: solid 3px var(--sl-color-warning-300);
+  border-radius: var(--sl-border-radius-medium);
+  padding: 0.5rem 1.5rem;
+}
+
+@media screen and (max-width: 950px) {
+  .sponsor-callout__secondary-label {
+    display: none;
+  }
+}
+
 /* Component headers */
 .component-header {
   border-bottom: solid 1px var(--sl-color-neutral-200);
