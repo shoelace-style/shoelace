@@ -72,7 +72,7 @@
     "@web/test-runner": "^0.13.31",
     "@web/test-runner-commands": "^0.6.3",
     "@web/test-runner-playwright": "^0.8.9",
-    "bootstrap-icons": "^1.9.0",
+    "bootstrap-icons": "^1.9.1",
     "browser-sync": "^2.27.10",
     "chalk": "^5.0.1",
     "command-line-args": "^5.2.1",
