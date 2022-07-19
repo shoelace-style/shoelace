@@ -460,7 +460,7 @@
             <div class="sponsor-callout">
               <p>
                 Shoelace is designed, developed, and maintained by <a href="https://twitter.com/claviska" target="_blank">Cory LaViska</a>.
-                Please sponsor my work on GitHub! Your support will keep this project alive and growing!
+                Please sponsor my open source work on GitHub. Your support will keep this project alive and growing!
               </p>
 
               <p>
