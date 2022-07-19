@@ -134,4 +134,17 @@ describe('<sl-tooltip>', () => {
     expect(afterHideHandler).to.have.been.calledOnce;
     expect(base.hidden).to.be.true;
   });
+
+  it('should recalculate its target when the slotted element changes', async () => {
+    const el = await fixture<SlTooltip>(html`
+      <sl-tooltip content="This is a tooltip" open>
+        <sl-button>Hover me</sl-button>
+      </sl-tooltip>
+    `);
+
+    el.innerHTML = '<sl-button>New element</sl-button>';
+    await el.updateComplete;
+
+    expect((el as unknown as { target: HTMLElement }).target.innerHTML).to.equal('New element');
+  });
 });

@@ -262,6 +262,10 @@ export default class SlTooltip extends LitElement {
     return triggers.includes(triggerType);
   }
 
+  handleSlotChange() {
+    this.target = this.getTarget();
+  }
+
   private startPositioner() {
     this.stopPositioner();
     this.updatePositioner();
@@ -319,7 +323,7 @@ export default class SlTooltip extends LitElement {
   render() {
     return html`
       <div class="tooltip-target" aria-describedby="tooltip">
-        <slot></slot>
+        <slot @slotchange=${this.handleSlotChange}></slot>
       </div>
 
       <div class="tooltip-positioner">
