@@ -18,7 +18,7 @@ import type SlIconButton from '../../components/icon-button/icon-button';
 import type SlMenuItem from '../../components/menu-item/menu-item';
 import type { MenuSelectEventDetail } from '../../components/menu/menu';
 import type SlMenu from '../../components/menu/menu';
-import type { TemplateResult } from 'lit';
+import type { TemplateResult, CSSResultGroup } from 'lit';
 
 /**
  * @since 2.0
@@ -62,7 +62,7 @@ import type { TemplateResult } from 'lit';
  */
 @customElement('sl-select')
 export default class SlSelect extends LitElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
 
   @query('.select') dropdown: SlDropdown;
   @query('.select__control') control: SlDropdown;

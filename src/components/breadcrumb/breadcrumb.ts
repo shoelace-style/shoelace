@@ -4,6 +4,7 @@ import '../../components/icon/icon';
 import { LocalizeController } from '../../utilities/localize';
 import styles from './breadcrumb.styles';
 import type SlBreadcrumbItem from '../../components/breadcrumb-item/breadcrumb-item';
+import type { CSSResultGroup } from 'lit';
 
 /**
  * @since 2.0
@@ -18,7 +19,7 @@ import type SlBreadcrumbItem from '../../components/breadcrumb-item/breadcrumb-i
  */
 @customElement('sl-breadcrumb')
 export default class SlBreadcrumb extends LitElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
 
   @query('slot') defaultSlot: HTMLSlotElement;
   @query('slot[name="separator"]') separatorSlot: HTMLSlotElement;

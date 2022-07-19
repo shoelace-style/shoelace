@@ -9,6 +9,7 @@ import { clamp } from '../../internal/math';
 import { watch } from '../../internal/watch';
 import { LocalizeController } from '../../utilities/localize';
 import styles from './rating.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
  * @since 2.0
@@ -27,7 +28,7 @@ import styles from './rating.styles';
  */
 @customElement('sl-rating')
 export default class SlRating extends LitElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
 
   @query('.rating') rating: HTMLElement;
 

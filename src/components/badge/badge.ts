@@ -2,6 +2,7 @@ import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import styles from './badge.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
  * @since 2.0
@@ -13,7 +14,7 @@ import styles from './badge.styles';
  */
 @customElement('sl-badge')
 export default class SlBadge extends LitElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
 
   /** The badge's variant. */
   @property({ reflect: true }) variant: 'primary' | 'success' | 'neutral' | 'warning' | 'danger' = 'primary';

@@ -7,6 +7,7 @@ import { clamp } from '../../internal/math';
 import { watch } from '../../internal/watch';
 import { LocalizeController } from '../../utilities/localize';
 import styles from './split-panel.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
  * @since 2.0
@@ -31,7 +32,7 @@ import styles from './split-panel.styles';
  */
 @customElement('sl-split-panel')
 export default class SlSplitPanel extends LitElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
 
   private cachedPositionInPixels: number;
   private readonly localize = new LocalizeController(this);

@@ -4,6 +4,7 @@ import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { HasSlotController } from '../../internal/slot';
 import styles from './breadcrumb-item.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
  * @since 2.0
@@ -23,7 +24,7 @@ import styles from './breadcrumb-item.styles';
  */
 @customElement('sl-breadcrumb-item')
 export default class SlBreadcrumbItem extends LitElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
 
   private readonly hasSlotController = new HasSlotController(this, 'prefix', 'suffix');
 

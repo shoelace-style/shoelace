@@ -13,6 +13,7 @@ import { watch } from '../../internal/watch';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
 import { LocalizeController } from '../../utilities/localize';
 import styles from './drawer.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
  * @since 2.0
@@ -65,7 +66,7 @@ import styles from './drawer.styles';
  */
 @customElement('sl-drawer')
 export default class SlDrawer extends LitElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
 
   @query('.drawer') drawer: HTMLElement;
   @query('.drawer__panel') panel: HTMLElement;

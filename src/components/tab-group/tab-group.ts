@@ -9,6 +9,7 @@ import { LocalizeController } from '../../utilities/localize';
 import styles from './tab-group.styles';
 import type SlTabPanel from '../../components/tab-panel/tab-panel';
 import type SlTab from '../../components/tab/tab';
+import type { CSSResultGroup } from 'lit';
 
 /**
  * @since 2.0
@@ -38,7 +39,7 @@ import type SlTab from '../../components/tab/tab';
  */
 @customElement('sl-tab-group')
 export default class SlTabGroup extends LitElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
   private readonly localize = new LocalizeController(this);
 
   @query('.tab-group') tabGroup: HTMLElement;

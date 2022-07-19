@@ -7,6 +7,7 @@ import { emit } from '../../internal/event';
 import { clamp } from '../../internal/math';
 import { watch } from '../../internal/watch';
 import styles from './image-comparer.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
  * @since 2.0
@@ -31,7 +32,7 @@ import styles from './image-comparer.styles';
  */
 @customElement('sl-image-comparer')
 export default class SlImageComparer extends LitElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
 
   @query('.image-comparer') base: HTMLElement;
   @query('.image-comparer__handle') handle: HTMLElement;

@@ -8,6 +8,7 @@ import { emit } from '../../internal/event';
 import { FormSubmitController } from '../../internal/form';
 import { watch } from '../../internal/watch';
 import styles from './radio.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
  * @since 2.0
@@ -26,7 +27,7 @@ import styles from './radio.styles';
  */
 @customElement('sl-radio')
 export default class SlRadio extends LitElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
 
   @query('.radio__input') input: HTMLInputElement;
 

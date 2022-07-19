@@ -4,6 +4,7 @@ import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import styles from './animation.styles';
 import { animations } from './animations';
+import type { CSSResultGroup } from 'lit';
 
 /**
  * @since 2.0
@@ -18,7 +19,7 @@ import { animations } from './animations';
  */
 @customElement('sl-animation')
 export default class SlAnimation extends LitElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
 
   private animation?: Animation;
   private hasStarted = false;

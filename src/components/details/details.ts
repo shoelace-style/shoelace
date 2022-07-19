@@ -8,6 +8,7 @@ import { watch } from '../../internal/watch';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
 import { LocalizeController } from '../../utilities/localize';
 import styles from './details.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
  * @since 2.0
@@ -34,7 +35,7 @@ import styles from './details.styles';
  */
 @customElement('sl-details')
 export default class SlDetails extends LitElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
 
   @query('.details') details: HTMLElement;
   @query('.details__header') header: HTMLElement;

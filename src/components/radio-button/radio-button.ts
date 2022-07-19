@@ -9,6 +9,7 @@ import { FormSubmitController } from '../../internal/form';
 import { HasSlotController } from '../../internal/slot';
 import { watch } from '../../internal/watch';
 import styles from './radio-button.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
  * @since 2.0
@@ -32,7 +33,7 @@ import styles from './radio-button.styles';
  */
 @customElement('sl-radio-button')
 export default class SlRadioButton extends LitElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
 
   @query('.button') input: HTMLInputElement;
   @query('.hidden-input') hiddenInput: HTMLInputElement;

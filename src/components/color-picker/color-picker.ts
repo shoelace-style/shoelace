@@ -21,6 +21,7 @@ import { LocalizeController } from '../../utilities/localize';
 import styles from './color-picker.styles';
 import type SlDropdown from '../../components/dropdown/dropdown';
 import type SlInput from '../../components/input/input';
+import type { CSSResultGroup } from 'lit';
 
 const hasEyeDropper = 'EyeDropper' in window;
 
@@ -82,7 +83,7 @@ declare const EyeDropper: EyeDropperConstructor;
  */
 @customElement('sl-color-picker')
 export default class SlColorPicker extends LitElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
 
   @query('[part="input"]') input: SlInput;
   @query('[part="preview"]') previewButton: HTMLButtonElement;

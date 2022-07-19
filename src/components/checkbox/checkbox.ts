@@ -8,6 +8,7 @@ import { emit } from '../../internal/event';
 import { FormSubmitController } from '../../internal/form';
 import { watch } from '../../internal/watch';
 import styles from './checkbox.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
  * @since 2.0
@@ -27,7 +28,7 @@ import styles from './checkbox.styles';
  */
 @customElement('sl-checkbox')
 export default class SlCheckbox extends LitElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
 
   @query('input[type="checkbox"]') input: HTMLInputElement;
 

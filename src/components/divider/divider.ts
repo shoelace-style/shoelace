@@ -2,6 +2,7 @@ import { LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { watch } from '../../internal/watch';
 import styles from './divider.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
  * @since 2.0
@@ -13,7 +14,7 @@ import styles from './divider.styles';
  */
 @customElement('sl-divider')
 export default class SlDivider extends LitElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
 
   /** Draws the divider in a vertical orientation. */
   @property({ type: Boolean, reflect: true }) vertical = false;

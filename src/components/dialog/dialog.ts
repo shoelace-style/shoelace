@@ -12,6 +12,7 @@ import { watch } from '../../internal/watch';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
 import { LocalizeController } from '../../utilities/localize';
 import styles from './dialog.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
  * @since 2.0
@@ -57,7 +58,7 @@ import styles from './dialog.styles';
  */
 @customElement('sl-dialog')
 export default class SlDialog extends LitElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
 
   @query('.dialog') dialog: HTMLElement;
   @query('.dialog__panel') panel: HTMLElement;

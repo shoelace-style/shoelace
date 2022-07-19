@@ -8,6 +8,7 @@ import { watch } from '../../internal/watch';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
 import { LocalizeController } from '../../utilities/localize';
 import styles from './tooltip.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
  * @since 2.0
@@ -32,7 +33,7 @@ import styles from './tooltip.styles';
  */
 @customElement('sl-tooltip')
 export default class SlTooltip extends LitElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
 
   @query('.tooltip-positioner') positioner: HTMLElement;
   @query('.tooltip') tooltip: HTMLElement;

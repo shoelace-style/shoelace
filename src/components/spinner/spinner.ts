@@ -1,6 +1,7 @@
 import { LitElement, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import styles from './spinner.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
  * @since 2.0
@@ -15,7 +16,7 @@ import styles from './spinner.styles';
  */
 @customElement('sl-spinner')
 export default class SlSpinner extends LitElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
 
   render() {
     return html`

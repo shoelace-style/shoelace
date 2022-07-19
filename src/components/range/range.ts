@@ -10,6 +10,7 @@ import { HasSlotController } from '../../internal/slot';
 import { watch } from '../../internal/watch';
 import { LocalizeController } from '../../utilities/localize';
 import styles from './range.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
  * @since 2.0
@@ -39,7 +40,7 @@ import styles from './range.styles';
  */
 @customElement('sl-range')
 export default class SlRange extends LitElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
 
   @query('.range__control') input: HTMLInputElement;
   @query('.range__tooltip') output: HTMLOutputElement | null;

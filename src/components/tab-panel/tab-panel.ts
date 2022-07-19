@@ -2,6 +2,7 @@ import { html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { autoIncrement } from '../../internal/auto-increment';
 import styles from './tab-panel.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
  * @since 2.0
@@ -15,7 +16,7 @@ import styles from './tab-panel.styles';
  */
 @customElement('sl-tab-panel')
 export default class SlTabPanel extends LitElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
 
   private readonly attrId = autoIncrement();
   private readonly componentId = `sl-tab-panel-${this.attrId}`;

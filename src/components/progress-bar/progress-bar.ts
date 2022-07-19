@@ -5,6 +5,7 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { LocalizeController } from '../../utilities/localize';
 import styles from './progress-bar.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
  * @since 2.0
@@ -23,7 +24,7 @@ import styles from './progress-bar.styles';
  */
 @customElement('sl-progress-bar')
 export default class SlProgressBar extends LitElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
   private readonly localize = new LocalizeController(this);
 
   /** The current progress, 0 to 100. */

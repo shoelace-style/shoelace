@@ -3,6 +3,7 @@ import { customElement, property } from 'lit/decorators.js';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import styles from './mutation-observer.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
  * @since 2.0
@@ -14,7 +15,7 @@ import styles from './mutation-observer.styles';
  */
 @customElement('sl-mutation-observer')
 export default class SlMutationObserver extends LitElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
 
   private mutationObserver: MutationObserver;
 

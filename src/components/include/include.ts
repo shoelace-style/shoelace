@@ -4,6 +4,7 @@ import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import styles from './include.styles';
 import { requestInclude } from './request';
+import type { CSSResultGroup } from 'lit';
 
 /**
  * @since 2.0
@@ -14,7 +15,7 @@ import { requestInclude } from './request';
  */
 @customElement('sl-include')
 export default class SlInclude extends LitElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
 
   /**
    * The location of the HTML file to include.

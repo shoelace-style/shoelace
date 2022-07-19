@@ -14,6 +14,7 @@ import type SlButton from '../../components/button/button';
 import type SlIconButton from '../../components/icon-button/icon-button';
 import type SlMenuItem from '../../components/menu-item/menu-item';
 import type SlMenu from '../../components/menu/menu';
+import type { CSSResultGroup } from 'lit';
 
 /**
  * @since 2.0
@@ -36,7 +37,7 @@ import type SlMenu from '../../components/menu/menu';
  */
 @customElement('sl-dropdown')
 export default class SlDropdown extends LitElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
 
   @query('.dropdown__trigger') trigger: HTMLElement;
   @query('.dropdown__panel') panel: HTMLElement;

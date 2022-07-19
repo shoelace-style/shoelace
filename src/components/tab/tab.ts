@@ -6,6 +6,7 @@ import { autoIncrement } from '../../internal/auto-increment';
 import { emit } from '../../internal/event';
 import { LocalizeController } from '../../utilities/localize';
 import styles from './tab.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
  * @since 2.0
@@ -23,7 +24,7 @@ import styles from './tab.styles';
  */
 @customElement('sl-tab')
 export default class SlTab extends LitElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
   private readonly localize = new LocalizeController(this);
 
   @query('.tab') tab: HTMLElement;

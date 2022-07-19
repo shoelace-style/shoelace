@@ -3,6 +3,7 @@ import { customElement, property } from 'lit/decorators.js';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import styles from './{{ tagWithoutPrefix tag }}.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
  * @since 2.0
@@ -21,7 +22,7 @@ import styles from './{{ tagWithoutPrefix tag }}.styles';
  */
 @customElement('{{ tag }}')
 export default class {{ properCase tag }} extends LitElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
 
   /** An example property. */
   @property() prop = 'example';
