@@ -14,4 +14,8 @@ export default css`
     border: solid 1px transparent;
     padding: var(--padding);
   }
+
+  .tab-panel:not(.tab-panel--active) {
+    display: none;
+  }
 `;
