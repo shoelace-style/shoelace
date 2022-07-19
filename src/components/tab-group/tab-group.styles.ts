@@ -205,7 +205,7 @@ export default css`
   .tab-group--end .tab-group__tabs {
     flex: 0 0 auto;
     flex-direction: column;
-    border-right: solid var(--track-width) var(--track-color);
+    border-left: solid var(--track-width) var(--track-color);
   }
 
   .tab-group--end .tab-group__indicator {

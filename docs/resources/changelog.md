@@ -11,6 +11,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 ## Next
 
 - Changed the type of component styles from `CSSResult` to `CSSResultGroup` [#828](https://github.com/shoelace-style/shoelace/issues/828)
+- Fixed a bug in `<sl-tab-group>` where the divider was on the wrong side when using `placement="end"`
 - Updated Bootstrap Icons to 1.9.1
 
 ## 2.0.0-beta.78
