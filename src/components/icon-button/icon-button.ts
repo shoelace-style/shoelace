@@ -6,6 +6,7 @@ import { html, literal } from 'lit/static-html.js';
 import '../../components/icon/icon';
 import { emit } from '../../internal/event';
 import styles from './icon-button.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
  * @since 2.0
@@ -20,7 +21,7 @@ import styles from './icon-button.styles';
  */
 @customElement('sl-icon-button')
 export default class SlIconButton extends LitElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
 
   @state() private hasFocus = false;
 

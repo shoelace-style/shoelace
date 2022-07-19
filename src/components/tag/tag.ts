@@ -5,6 +5,7 @@ import '../../components/icon-button/icon-button';
 import { emit } from '../../internal/event';
 import { LocalizeController } from '../../utilities/localize';
 import styles from './tag.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
  * @since 2.0
@@ -23,7 +24,7 @@ import styles from './tag.styles';
  */
 @customElement('sl-tag')
 export default class SlTag extends LitElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
   private readonly localize = new LocalizeController(this);
 
   /** The tag's variant. */

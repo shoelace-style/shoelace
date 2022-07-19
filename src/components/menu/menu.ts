@@ -4,6 +4,7 @@ import { emit } from '../../internal/event';
 import { getTextContent } from '../../internal/slot';
 import styles from './menu.styles';
 import type SlMenuItem from '../../components/menu-item/menu-item';
+import type { CSSResultGroup } from 'lit';
 export interface MenuSelectEventDetail {
   item: SlMenuItem;
 }
@@ -20,7 +21,7 @@ export interface MenuSelectEventDetail {
  */
 @customElement('sl-menu')
 export default class SlMenu extends LitElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
 
   @query('.menu') menu: HTMLElement;
   @query('slot') defaultSlot: HTMLSlotElement;

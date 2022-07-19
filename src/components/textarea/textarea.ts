@@ -9,6 +9,7 @@ import { FormSubmitController } from '../../internal/form';
 import { HasSlotController } from '../../internal/slot';
 import { watch } from '../../internal/watch';
 import styles from './textarea.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
  * @since 2.0
@@ -31,7 +32,7 @@ import styles from './textarea.styles';
  */
 @customElement('sl-textarea')
 export default class SlTextarea extends LitElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
 
   @query('.textarea__control') input: HTMLTextAreaElement;
 

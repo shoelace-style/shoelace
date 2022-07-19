@@ -4,6 +4,7 @@ import { classMap } from 'lit/directives/class-map.js';
 import '../../components/button-group/button-group';
 import styles from './radio-group.styles';
 import type SlRadio from '../../components/radio/radio';
+import type { CSSResultGroup } from 'lit';
 
 const RADIO_CHILDREN = ['sl-radio', 'sl-radio-button'];
 
@@ -23,7 +24,7 @@ const RADIO_CHILDREN = ['sl-radio', 'sl-radio-button'];
  */
 @customElement('sl-radio-group')
 export default class SlRadioGroup extends LitElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
 
   @query('slot:not([name])') defaultSlot: HTMLSlotElement;
 

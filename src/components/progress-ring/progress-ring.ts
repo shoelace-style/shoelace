@@ -2,6 +2,7 @@ import { html, LitElement } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { LocalizeController } from '../../utilities/localize';
 import styles from './progress-ring.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
  * @since 2.0
@@ -19,7 +20,7 @@ import styles from './progress-ring.styles';
  */
 @customElement('sl-progress-ring')
 export default class SlProgressRing extends LitElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
   private readonly localize = new LocalizeController(this);
 
   @query('.progress-ring__indicator') indicator: SVGCircleElement;

@@ -4,6 +4,7 @@ import '../../components/icon/icon';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import styles from './animated-image.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
  * @since 2.0
@@ -23,7 +24,7 @@ import styles from './animated-image.styles';
  */
 @customElement('sl-animated-image')
 export default class SlAnimatedImage extends LitElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
 
   @state() frozenFrame: string;
   @state() isLoaded = false;

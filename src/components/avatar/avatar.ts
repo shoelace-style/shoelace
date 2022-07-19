@@ -4,6 +4,7 @@ import { classMap } from 'lit/directives/class-map.js';
 import '../../components/icon/icon';
 import { watch } from '../../internal/watch';
 import styles from './avatar.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
  * @since 2.0
@@ -22,7 +23,7 @@ import styles from './avatar.styles';
  */
 @customElement('sl-avatar')
 export default class SlAvatar extends LitElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
 
   @state() private hasError = false;
 

@@ -1,6 +1,7 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import styles from './button-group.styles';
+import type { CSSResultGroup } from 'lit';
 
 const BUTTON_CHILDREN = ['sl-button', 'sl-radio-button'];
 
@@ -14,7 +15,7 @@ const BUTTON_CHILDREN = ['sl-button', 'sl-radio-button'];
  */
 @customElement('sl-button-group')
 export default class SlButtonGroup extends LitElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
 
   @query('slot') defaultSlot: HTMLSlotElement;
 

@@ -2,6 +2,7 @@ import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import styles from './responsive-media.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
  * @since 2.0
@@ -11,7 +12,7 @@ import styles from './responsive-media.styles';
  */
 @customElement('sl-responsive-media')
 export default class SlResponsiveMedia extends LitElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
 
   /**
    * The aspect ratio of the embedded media in the format of `width:height`, e.g. `16:9`, `4:3`, or `1:1`. Ratios not in

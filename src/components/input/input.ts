@@ -11,6 +11,7 @@ import { HasSlotController } from '../../internal/slot';
 import { watch } from '../../internal/watch';
 import { LocalizeController } from '../../utilities/localize';
 import styles from './input.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
  * @since 2.0
@@ -45,7 +46,7 @@ import styles from './input.styles';
  */
 @customElement('sl-input')
 export default class SlInput extends LitElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
 
   @query('.input__control') input: HTMLInputElement;
 

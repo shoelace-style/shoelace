@@ -9,6 +9,7 @@ import { FormSubmitController } from '../../internal/form';
 import { HasSlotController } from '../../internal/slot';
 import { LocalizeController } from '../../utilities/localize';
 import styles from './button.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
  * @since 2.0
@@ -31,7 +32,7 @@ import styles from './button.styles';
  */
 @customElement('sl-button')
 export default class SlButton extends LitElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
 
   @query('.button') button: HTMLButtonElement | HTMLLinkElement;
 

@@ -6,6 +6,7 @@ import { emit } from '../../internal/event';
 import { getTextContent } from '../../internal/slot';
 import { watch } from '../../internal/watch';
 import styles from './menu-item.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
  * @since 2.0
@@ -28,7 +29,7 @@ import styles from './menu-item.styles';
  */
 @customElement('sl-menu-item')
 export default class SlMenuItem extends LitElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
 
   private cachedTextLabel: string;
 

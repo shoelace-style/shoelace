@@ -9,6 +9,7 @@ import { watch } from '../../internal/watch';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
 import { LocalizeController } from '../../utilities/localize';
 import styles from './alert.styles';
+import type { CSSResultGroup } from 'lit';
 
 const toastStack = Object.assign(document.createElement('div'), { className: 'sl-toast-stack' });
 
@@ -40,7 +41,7 @@ const toastStack = Object.assign(document.createElement('div'), { className: 'sl
 
 @customElement('sl-alert')
 export default class SlAlert extends LitElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
 
   private autoHideTimeout: number;
   private readonly hasSlotController = new HasSlotController(this, 'icon', 'suffix');

@@ -4,6 +4,7 @@ import { styleMap } from 'lit/directives/style-map.js';
 import QrCreator from 'qr-creator';
 import { watch } from '../../internal/watch';
 import styles from './qr-code.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
  * @since 2.0
@@ -13,7 +14,7 @@ import styles from './qr-code.styles';
  */
 @customElement('sl-qr-code')
 export default class SlQrCode extends LitElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
 
   @query('canvas') canvas: HTMLElement;
 

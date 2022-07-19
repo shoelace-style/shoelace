@@ -3,6 +3,7 @@ import { customElement } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { HasSlotController } from '../../internal/slot';
 import styles from './card.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
  * @since 2.0
@@ -26,7 +27,7 @@ import styles from './card.styles';
  */
 @customElement('sl-card')
 export default class SlCard extends LitElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
 
   private readonly hasSlotController = new HasSlotController(this, 'footer', 'header', 'image');
 
