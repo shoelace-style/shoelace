@@ -19,7 +19,8 @@ export default class SlDivider extends LitElement {
   /** Draws the divider in a vertical orientation. */
   @property({ type: Boolean, reflect: true }) vertical = false;
 
-  firstUpdated() {
+  connectedCallback() {
+    super.connectedCallback();
     this.setAttribute('role', 'separator');
   }
 
