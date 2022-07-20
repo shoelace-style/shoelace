@@ -14,6 +14,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug in `<sl-tab-group>` where the divider was on the wrong side when using `placement="end"`
 - Fixed a bug in `<sl-tab-group>` that caused nested tab groups to scroll when using `placement="start|end"` [#815](https://github.com/shoelace-style/shoelace/issues/815)
 - Updated Bootstrap Icons to 1.9.1
+- Updated Floating UI to 1.0.0
 
 ## 2.0.0-beta.78
 
