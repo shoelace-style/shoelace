@@ -2,6 +2,7 @@ import { html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { autoIncrement } from '../../internal/auto-increment';
+import { watch } from '../../internal/watch';
 import styles from './tab-panel.styles';
 import type { CSSResultGroup } from 'lit';
 
@@ -31,6 +32,12 @@ export default class SlTabPanel extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     this.id = this.id.length > 0 ? this.id : this.componentId;
+    this.setAttribute('role', 'tabpanel');
+  }
+
+  @watch('active')
+  handleActiveChange() {
+    this.setAttribute('aria-hidden', this.active ? 'false' : 'true');
   }
 
   render() {
@@ -41,8 +48,6 @@ export default class SlTabPanel extends LitElement {
           'tab-panel': true,
           'tab-panel--active': this.active
         })}
-        role="tabpanel"
-        aria-hidden=${this.active ? 'false' : 'true'}
       >
         <slot></slot>
       </div>

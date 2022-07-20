@@ -122,14 +122,9 @@ export default class SlTabGroup extends LitElement {
     }
   }
 
-  getAllTabs(includeDisabled = false) {
+  getAllTabs() {
     const slot = this.shadowRoot!.querySelector<HTMLSlotElement>('slot[name="nav"]')!;
-
-    return [...(slot.assignedElements() as SlTab[])].filter(el => {
-      return includeDisabled
-        ? el.tagName.toLowerCase() === 'sl-tab'
-        : el.tagName.toLowerCase() === 'sl-tab' && !el.disabled;
-    });
+    return [...(slot.assignedElements() as SlTab[])].filter(el => el.tagName.toLowerCase() === 'sl-tab');
   }
 
   getAllPanels() {
@@ -318,7 +313,7 @@ export default class SlTabGroup extends LitElement {
 
     // We can't used offsetLeft/offsetTop here due to a shadow parent issue where neither can getBoundingClientRect
     // because it provides invalid values for animating elements: https://bugs.chromium.org/p/chromium/issues/detail?id=920069
-    const allTabs = this.getAllTabs(true);
+    const allTabs = this.getAllTabs();
     const precedingTabs = allTabs.slice(0, allTabs.indexOf(currentTab));
     const offset = precedingTabs.reduce(
       (previous, current) => ({
