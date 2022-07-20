@@ -27,7 +27,7 @@ export default css`
 
   .menu-item.menu-item--disabled {
     outline: none;
-    color: var(--sl-color-neutral-400);
+    opacity: 0.5;
     cursor: not-allowed;
   }
 
@@ -59,8 +59,8 @@ export default css`
     outline: none;
   }
 
-  :host(:hover:not([aria-disabled='true'])) .menu-item,
-  :host(:focus-visible:not(.sl-focus-invisible):not([aria-disabled='true'])) .menu-item {
+  :host(:hover) .menu-item,
+  :host(:focus-visible:not(.sl-focus-invisible)) .menu-item {
     outline: none;
     background-color: var(--sl-color-primary-600);
     color: var(--sl-color-neutral-0);
