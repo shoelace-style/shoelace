@@ -63,7 +63,6 @@ export default class SlRadio extends LitElement {
 
   connectedCallback(): void {
     super.connectedCallback();
-    this.setAttribute('role', 'radio');
   }
 
   /** Simulates a click on the radio. */

@@ -41,7 +41,6 @@ export default class SlRadioGroup extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.setAttribute('role', 'radiogroup');
   }
 
   getAllRadios() {
@@ -96,7 +95,6 @@ export default class SlRadioGroup extends LitElement {
     this.hasButtonGroup = radios.some(radio => radio.tagName.toLowerCase() === 'sl-radio-button');
 
     radios.forEach(radio => {
-      radio.setAttribute('role', 'radio');
       radio.input.tabIndex = -1;
     });
 
@@ -104,6 +102,14 @@ export default class SlRadioGroup extends LitElement {
       checkedRadio.input.tabIndex = 0;
     } else if (radios.length > 0) {
       radios[0].input.tabIndex = 0;
+    }
+
+    if(this.hasButtonGroup) {
+      this.shadowRoot
+        ?.querySelector('sl-button-group')
+        ?.shadowRoot
+        ?.querySelector('.button-group')
+        ?.setAttribute('role', 'radiogroup');
     }
   }
 
@@ -115,6 +121,7 @@ export default class SlRadioGroup extends LitElement {
     return html`
       <fieldset
         part="base"
+        role="${!this.hasButtonGroup ? 'radiogroup' : null}"
         class=${classMap({
           'radio-group': true,
           'radio-group--has-fieldset': this.fieldset,
