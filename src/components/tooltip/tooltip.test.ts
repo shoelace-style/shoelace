@@ -145,6 +145,7 @@ describe('<sl-tooltip>', () => {
     el.innerHTML = '<sl-button>New element</sl-button>';
     await el.updateComplete;
 
-    expect(el.getTarget().textContent).to.equal('New element');
+    // @ts-expect-error - target is a private property
+    expect(el.target.innerHTML).to.equal('New element');
   });
 });
