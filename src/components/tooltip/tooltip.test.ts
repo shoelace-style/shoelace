@@ -145,6 +145,6 @@ describe('<sl-tooltip>', () => {
     el.innerHTML = '<sl-button>New element</sl-button>';
     await el.updateComplete;
 
-    expect((el as unknown as { target: HTMLElement }).target.innerHTML).to.equal('New element');
+    expect(el.getTarget().textContent).to.equal('New element');
   });
 });
