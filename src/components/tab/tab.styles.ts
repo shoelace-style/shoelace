@@ -31,7 +31,7 @@ export default css`
     outline: none;
   }
 
-  .tab:focus-visible:not(.tab--disabled) {
+  .tab:focus-visible {
     color: var(--sl-color-primary-600);
     outline: var(--sl-focus-ring);
     outline-offset: calc(-1 * var(--sl-focus-ring-width) - var(--sl-focus-ring-offset));
