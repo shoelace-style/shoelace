@@ -104,11 +104,10 @@ export default class SlRadioGroup extends LitElement {
       radios[0].input.tabIndex = 0;
     }
 
-    if(this.hasButtonGroup) {
+    if (this.hasButtonGroup) {
       this.shadowRoot
         ?.querySelector('sl-button-group')
-        ?.shadowRoot
-        ?.querySelector('.button-group')
+        ?.shadowRoot?.querySelector('.button-group')
         ?.setAttribute('role', 'radiogroup');
     }
   }
