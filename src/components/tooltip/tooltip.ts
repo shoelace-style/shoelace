@@ -198,7 +198,7 @@ export default class SlTooltip extends LitElement {
     if (this.hasTrigger('hover')) {
       const delay = parseDuration(getComputedStyle(this).getPropertyValue('--show-delay'));
       clearTimeout(this.hoverTimeout);
-      this.hoverTimeout = window.setTimeout(() => void this.show(), delay);
+      this.hoverTimeout = window.setTimeout(() => this.show(), delay);
     }
   }
 
@@ -206,7 +206,7 @@ export default class SlTooltip extends LitElement {
     if (this.hasTrigger('hover')) {
       const delay = parseDuration(getComputedStyle(this).getPropertyValue('--hide-delay'));
       clearTimeout(this.hoverTimeout);
-      this.hoverTimeout = window.setTimeout(() => void this.hide(), delay);
+      this.hoverTimeout = window.setTimeout(() => this.hide(), delay);
     }
   }
 
