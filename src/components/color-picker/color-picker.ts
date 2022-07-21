@@ -392,12 +392,14 @@ export default class SlColorPicker extends LitElement {
     if (event.key === 'ArrowLeft') {
       event.preventDefault();
       this.saturation = clamp(this.saturation - increment, 0, 100);
+      this.lightness = this.getLightness(this.brightness);
       this.syncValues();
     }
 
     if (event.key === 'ArrowRight') {
       event.preventDefault();
       this.saturation = clamp(this.saturation + increment, 0, 100);
+      this.lightness = this.getLightness(this.brightness);
       this.syncValues();
     }
 
