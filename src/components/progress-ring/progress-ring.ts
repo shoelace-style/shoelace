@@ -16,6 +16,7 @@ import type { CSSResultGroup } from 'lit';
  * @cssproperty --size - The diameter of the progress ring (cannot be a percentage).
  * @cssproperty --track-width - The width of the track.
  * @cssproperty --track-color - The color of the track.
+ * @cssproperty --indicator-width - The width of the indicator. Defaults to the track width.
  * @cssproperty --indicator-color - The indicator color.
  */
 @customElement('sl-progress-ring')

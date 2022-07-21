@@ -8,6 +8,7 @@ export default css`
     --size: 128px;
     --track-width: 4px;
     --track-color: var(--sl-color-neutral-200);
+    --indicator-width: var(--track-width);
     --indicator-color: var(--sl-color-primary-600);
 
     display: inline-flex;
@@ -29,11 +30,10 @@ export default css`
 
   .progress-ring__track,
   .progress-ring__indicator {
-    --radius: calc(var(--size) / 2 - var(--track-width) * 0.5);
+    --radius: calc(var(--size) / 2 - max(var(--track-width), var(--indicator-width)) * 0.5);
     --circumference: calc(var(--radius) * 2 * 3.141592654);
 
     fill: none;
-    stroke-width: var(--track-width);
     r: var(--radius);
     cx: calc(var(--size) / 2);
     cy: calc(var(--size) / 2);
@@ -41,10 +41,12 @@ export default css`
 
   .progress-ring__track {
     stroke: var(--track-color);
+    stroke-width: var(--track-width);
   }
 
   .progress-ring__indicator {
     stroke: var(--indicator-color);
+    stroke-width: var(--indicator-width);
     stroke-linecap: round;
     transition: 0.35s stroke-dashoffset;
     stroke-dasharray: var(--circumference) var(--circumference);

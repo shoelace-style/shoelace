@@ -10,6 +10,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
+- Added `--indicator-width` custom property to `<sl-progress-ring>` [#837](https://github.com/shoelace-style/shoelace/issues/837)
 - Changed the type of component styles from `CSSResult` to `CSSResultGroup` [#828](https://github.com/shoelace-style/shoelace/issues/828)
 - Fixed a bug in `<sl-color-picker>` where using <kbd>Left<kbd> and <kbd>Right</kbd> would select the wrong color
 - Fixed a bug in `<sl-tab-group>` where the divider was on the wrong side when using `placement="end"`
@@ -25,7 +26,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 - 🚨 BREAKING: Moved the `checked-icon` and `indeterminate-icon` parts from a wrapper `<span>` to the `<svg>` in `<sl-checkbox>` [#786](https://github.com/shoelace-style/shoelace/issues/786)
 - 🚨 BREAKING: Moved the `checked-icon` part from a wrapper `<span>` to the `<svg>` in `<sl-radio>` [#786](https://github.com/shoelace-style/shoelace/issues/786)
-- Added the `--track-active-offset` CSS custom property to `<sl-range>` [#806](https://github.com/shoelace-style/shoelace/issues/806)
+- Added the `--track-active-offset` custom property to `<sl-range>` [#806](https://github.com/shoelace-style/shoelace/issues/806)
 - Fixed a bug that caused `<sl-select>` to sometimes have two vertical scrollbars [#814](https://github.com/shoelace-style/shoelace/issues/814)
 - Fixed a bug that caused a gray line to appear between radio buttons [#821](https://github.com/shoelace-style/shoelace/discussions/821)
 - Fixed a bug that caused `<sl-animated-image>` to not render anything when using the `play` attribute initially [#824](https://github.com/shoelace-style/shoelace/issues/824)
@@ -223,7 +224,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 - 🚨 BREAKING: the `unit` property of `<sl-format-bytes>` has changed to `byte | bit` instead of `bytes | bits`
 - Added `display-label` part to `<sl-select>` [#650](https://github.com/shoelace-style/shoelace/issues/650)
-- Added `--spacing` CSS custom property to `<sl-divider>` [#664](https://github.com/shoelace-style/shoelace/pull/664)
+- Added `--spacing` custom property to `<sl-divider>` [#664](https://github.com/shoelace-style/shoelace/pull/664)
 - Added `event.detail.source` to the `sl-request-close` event in `<sl-dialog>` and `<sl-drawer>`
 - Fixed a bug that caused `<sl-progress-ring>` to render the wrong size when `--track-width` was increased [#656](https://github.com/shoelace-style/shoelace/issues/656)
 - Fixed a bug that allowed `<sl-details>` to open and close when disabled using a screen reader [#658](https://github.com/shoelace-style/shoelace/issues/658)
