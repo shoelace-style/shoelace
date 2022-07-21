@@ -268,7 +268,7 @@ export default class SlTooltip extends LitElement {
 
   private startPositioner() {
     this.stopPositioner();
-    this.updatePositioner();
+    requestAnimationFrame(() => this.updatePositioner());
     this.positionerCleanup = autoUpdate(this.target, this.positioner, this.updatePositioner.bind(this));
   }
 
