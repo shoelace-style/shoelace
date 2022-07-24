@@ -79,4 +79,17 @@ a `sl-lazy-load` event is emitted.
 <sl-tree-item lazy> Parent Node </sl-tree-item>
 ```
 
+### Indentation size
+
+Use the `--indentation-size` custom property to set the tree item's indentation.
+
+```html preview
+<sl-tree-item style="--indentation-size: 3rem" expanded>
+  Parent Node
+  <sl-tree-item> Child 1 </sl-tree-item>
+  <sl-tree-item> Child 2 </sl-tree-item>
+  <sl-tree-item> Child 3 </sl-tree-item>
+</sl-tree-item>
+```
+
 [component-metadata:sl-tree-item]

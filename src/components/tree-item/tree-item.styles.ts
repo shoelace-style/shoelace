@@ -55,10 +55,11 @@ export default css`
     display: flex;
     align-items: center;
     justify-content: center;
+    box-sizing: content-box;
     color: var(--sl-color-neutral-400);
     padding: var(--sl-spacing-x-small);
-    width: 2rem;
-    height: 2rem;
+    width: 1rem;
+    height: 1rem;
   }
 
   .tree-item__item {
