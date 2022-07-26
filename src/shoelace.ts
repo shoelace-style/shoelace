@@ -51,6 +51,8 @@ export { default as SlTag } from './components/tag/tag';
 export { default as SlTextarea } from './components/textarea/textarea';
 export { default as SlTooltip } from './components/tooltip/tooltip';
 export { default as SlVisuallyHidden } from './components/visually-hidden/visually-hidden';
+export { default as SlTree } from './components/tree/tree';
+export { default as SlTreeItem } from './components/tree-item/tree-item';
 /* plop:component */
 
 // Utilities
