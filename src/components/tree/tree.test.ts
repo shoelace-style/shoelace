@@ -207,78 +207,6 @@ describe('<sl-tree>', () => {
     });
 
     describe('when Enter is pressed', () => {
-      describe('and selection is "none"', () => {
-        describe('and node is expanded', () => {
-          it('should not select the tree item', async () => {
-            // Arrange
-            const parentNode = el.children[2] as SlTreeItem;
-            parentNode.focus();
-            await el.updateComplete;
-
-            // Act
-            await sendKeys({ press: 'Enter' });
-
-            // Assert
-            expect(el).to.have.attribute('tabindex', '-1');
-            expect(parentNode).to.have.attribute('tabindex', '0');
-            expect(parentNode).to.have.attribute('expanded');
-            expect(parentNode).not.to.have.attribute('selected');
-          });
-
-          it('should collapse the tree item', async () => {
-            // Arrange
-            const parentNode = el.children[2] as SlTreeItem;
-            parentNode.expanded = true;
-            parentNode.focus();
-
-            await el.updateComplete;
-
-            // Act
-            await sendKeys({ press: 'Enter' });
-
-            // Assert
-            expect(el).to.have.attribute('tabindex', '-1');
-            expect(parentNode).to.have.attribute('tabindex', '0');
-            expect(parentNode).not.to.have.attribute('expanded');
-          });
-        });
-
-        describe('and node is collapsed', () => {
-          describe('and selection is "none"', () => {
-            it('should not select the tree item', async () => {
-              // Arrange
-              const parentNode = el.children[2] as SlTreeItem;
-              parentNode.focus();
-              await el.updateComplete;
-
-              // Act
-              await sendKeys({ press: 'Enter' });
-
-              // Assert
-              expect(el).to.have.attribute('tabindex', '-1');
-              expect(parentNode).to.have.attribute('tabindex', '0');
-              expect(parentNode).to.have.attribute('expanded');
-              expect(parentNode).not.to.have.attribute('selected');
-            });
-
-            it('should expand the tree item', async () => {
-              // Arrange
-              const parentNode = el.children[2] as SlTreeItem;
-              parentNode.focus();
-              await el.updateComplete;
-
-              // Act
-              await sendKeys({ press: 'Enter' });
-
-              // Assert
-              expect(el).to.have.attribute('tabindex', '-1');
-              expect(parentNode).to.have.attribute('tabindex', '0');
-              expect(parentNode).to.have.attribute('expanded');
-            });
-          });
-        });
-      });
-
       describe('and selection is "single"', () => {
         it('should select only one tree item', async () => {
           // Arrange
@@ -353,25 +281,6 @@ describe('<sl-tree>', () => {
     });
 
     describe('when Space is pressed', () => {
-      describe('and selection is "none"', () => {
-        it('should not select the tree item', async () => {
-          // Arrange
-          el.selection = 'none';
-          const node = el.children[0] as SlTreeItem;
-          node.focus();
-          await el.updateComplete;
-
-          // Act
-          await sendKeys({ press: ' ' });
-
-          // Assert
-          expect(el).to.have.attribute('tabindex', '-1');
-          expect(node).to.have.attribute('tabindex', '0');
-          expect(node).not.to.have.attribute('expanded');
-          expect(node).not.to.have.attribute('selected');
-        });
-      });
-
       describe('and selection is "single"', () => {
         it('should select only one tree item', async () => {
           // Arrange
@@ -484,26 +393,6 @@ describe('<sl-tree>', () => {
     });
 
     describe('when the user clicks on a tree item', () => {
-      describe('and selection is "none"', () => {
-        it('should not select the tree item', async () => {
-          // Arrange
-          const node = el.children[1] as SlTreeItem;
-          const selectedChangeSpy = sinon.spy();
-          el.addEventListener('sl-selected-change', selectedChangeSpy);
-
-          // Act
-          node.focus();
-          node.click();
-          await el.updateComplete;
-
-          // Assert
-          expect(el).to.have.attribute('tabindex', '-1');
-          expect(node).to.have.attribute('tabindex', '0');
-          expect(node).not.to.have.attribute('selected');
-          expect(selectedChangeSpy).not.to.have.been.called;
-        });
-      });
-
       describe('and selection is "single"', () => {
         it('should select only one tree item', async () => {
           // Arrange
@@ -622,13 +511,13 @@ describe('<sl-tree>', () => {
   });
 
   describe('when an tree item gets selected or deselected', () => {
-    it('should emit a `sl-selected-change` event', async () => {
+    it('should emit a `sl-selection-change` event', async () => {
       // Arrange
       el.selection = 'single';
       await el.updateComplete;
 
       const selectedChangeSpy = sinon.spy();
-      el.addEventListener('sl-selected-change', selectedChangeSpy);
+      el.addEventListener('sl-selection-change', selectedChangeSpy);
 
       const node = el.children[0] as SlTreeItem;
 

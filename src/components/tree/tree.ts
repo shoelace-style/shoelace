@@ -3,6 +3,7 @@ import { customElement, property, query } from 'lit/decorators.js';
 import { emit } from 'src/internal/event';
 import { clamp } from 'src/internal/math';
 import { watch } from 'src/internal/watch';
+import { LocalizeController } from '../../utilities/localize';
 import { isTreeItem } from '../tree-item/tree-item';
 import styles from './tree.styles';
 import type SlTreeItem from '../tree-item/tree-item';
@@ -38,12 +39,17 @@ function syncCheckboxes(changedTreeItem: SlTreeItem) {
  * @since 2.0
  * @status experimental
  *
- * @event sl-selected-change - Emitted when an item gets selected or deselected
+ * @event {{ selection: this.selectedItems }} sl-selection-change - Emitted when an item gets selected or deselected
  *
  * @slot - The default slot.
  *
  * @csspart base - The component's internal wrapper.
  *
+ * @cssproperty [--indent-size=var(--sl-spacing-medium)] - The size of the indentation for nested items.
+ * @cssproperty [--indent-guide-color=var(--sl-color-neutral-200)] - The color of the indentation line.
+ * @cssproperty [--indent-guide-offset=0] - The amount of vertical spacing to leave between the top and bottom of the indentation line's starting position.
+ * @cssproperty [--indent-guide-style=solid] - The style of the indentation line, e.g. solid, dotted, dashed.
+ * @cssproperty [--indent-guide-width=0] - The width of the indentation line.
  */
 @customElement('sl-tree')
 export default class SlTree extends LitElement {
@@ -52,14 +58,15 @@ export default class SlTree extends LitElement {
   @query('slot') defaultSlot: HTMLSlotElement;
 
   /** Specifies the selection behavior of the Tree */
-  @property() selection: 'none' | 'single' | 'multiple' | 'leaf' = 'none';
+  @property() selection: 'single' | 'multiple' | 'leaf' = 'single';
 
-  /**
-   * @internal A collection of all the items in the tree, in the order they appear.
-   * The collection is live, it means that it is automatically updated when the underlying document is changed.
-   */
+  //
+  // A collection of all the items in the tree, in the order they appear. The collection is live, meaning it is
+  // automatically updated when the underlying document is changed.
+  //
   private treeItems: HTMLCollectionOf<SlTreeItem> = this.getElementsByTagName('sl-tree-item');
   private lastFocusedItem: SlTreeItem;
+  private readonly localize = new LocalizeController(this);
   private mutationObserver: MutationObserver;
 
   connectedCallback(): void {
@@ -125,8 +132,6 @@ export default class SlTree extends LitElement {
   }
 
   selectItem(selectedItem: SlTreeItem) {
-    if (this.selection === 'none') return;
-
     if (this.selection === 'multiple') {
       selectedItem.selected = !selectedItem.selected;
       if (selectedItem.lazy) {
@@ -141,12 +146,10 @@ export default class SlTree extends LitElement {
       selectedItem.expanded = !selectedItem.expanded;
     }
 
-    emit(this, 'sl-selected-change', { detail: this.selectedItems });
+    emit(this, 'sl-selection-change', { detail: { selection: this.selectedItems } });
   }
 
-  /**
-   * Returns the list of tree items that are selected in the tree
-   */
+  // Returns the list of tree items that are selected in the tree.
   get selectedItems(): SlTreeItem[] {
     const items = [...this.treeItems];
     const isSelected = (item: SlTreeItem) => item.selected;
@@ -171,8 +174,13 @@ export default class SlTree extends LitElement {
   }
 
   handleKeyDown(event: KeyboardEvent) {
-    if (!['ArrowDown', 'ArrowUp', 'ArrowRight', 'ArrowLeft', 'Home', 'End', 'Enter', ' '].includes(event.key)) return;
+    if (!['ArrowDown', 'ArrowUp', 'ArrowRight', 'ArrowLeft', 'Home', 'End', 'Enter', ' '].includes(event.key)) {
+      return;
+    }
+
     const items = this.getFocusableItems();
+    const isLtr = this.localize.dir() === 'ltr';
+    const isRtl = this.localize.dir() === 'rtl';
 
     if (items.length > 0) {
       event.preventDefault();
@@ -188,69 +196,48 @@ export default class SlTree extends LitElement {
       };
 
       if (event.key === 'ArrowDown') {
-        /**
-         * Moves focus to the next node that is focusable without opening or closing a node.
-         */
+        // Moves focus to the next node that is focusable without opening or closing a node.
         focusItemAt(activeItemIndex + 1);
       } else if (event.key === 'ArrowUp') {
-        /**
-         * Moves focus to the next node that is focusable without opening or closing a node.
-         */
+        // Moves focus to the next node that is focusable without opening or closing a node.
         focusItemAt(activeItemIndex - 1);
-      } else if (event.key === 'ArrowRight') {
-        /**
-         * When focus is on a closed node, opens the node; focus does not move.
-         * When focus is on a open node, moves focus to the first child node.
-         * When focus is on an end node (a tree item with no children), does nothing.
-         */
+      } else if ((isLtr && event.key === 'ArrowRight') || (isRtl && event.key === 'ArrowLeft')) {
+        //
+        // When focus is on a closed node, opens the node; focus does not move.
+        // When focus is on a open node, moves focus to the first child node.
+        // When focus is on an end node (a tree item with no children), does nothing.
+        //
         if (!activeItem || activeItem.expanded || (activeItem.isLeaf && !activeItem.lazy)) {
           focusItemAt(activeItemIndex + 1);
         } else {
           toggleExpand(true);
         }
-      } else if (event.key === 'ArrowLeft') {
-        /**
-         * When focus is on an open node, closes the node.
-         * When focus is on a child node that is also either an end node or a closed node, moves focus to its parent node.
-         * When focus is on a closed `tree`, does nothing.
-         */
+      } else if ((isLtr && event.key === 'ArrowLeft') || (isRtl && event.key === 'ArrowRight')) {
+        //
+        // When focus is on an open node, closes the node.
+        // When focus is on a child node that is also either an end node or a closed node, moves focus to its parent node.
+        // When focus is on a closed `tree`, does nothing.
+        //
         if (!activeItem || activeItem.isLeaf || !activeItem.expanded) {
           focusItemAt(activeItemIndex - 1);
         } else {
           toggleExpand(false);
         }
       } else if (event.key === 'Home') {
-        /**
-         * Moves focus to the first node in the tree without opening or closing a node.
-         */
+        // Moves focus to the first node in the tree without opening or closing a node.
         focusItemAt(0);
       } else if (event.key === 'End') {
-        /**
-         * Moves focus to the last node in the tree that is focusable without opening the node.
-         */
+        // Moves focus to the last node in the tree that is focusable without opening the node.
         focusItemAt(items.length - 1);
-      } else if (event.key === 'Enter') {
-        /**
-         * Performs the default action of the currently focused node. For parent nodes, it opens or closes the node.
-         * In single-select trees, if the node has no children, selects the current node if not already selected (which
-         * is the default action).
-         */
-        if (['none', 'leaf'].includes(this.selection) && !activeItem.isLeaf) {
-          toggleExpand(!activeItem.expanded);
-        } else {
-          this.selectItem(activeItem);
-        }
-      } else if (event.key === ' ') {
-        /**
-         * Toggles the selection state of the focused node.
-         */
+      } else if (event.key === 'Enter' || event.key === ' ') {
+        // Selects the focused node.
         this.selectItem(activeItem);
       }
     }
   }
 
-  handleClick(e: Event) {
-    const target = e.target as HTMLElement;
+  handleClick(event: Event) {
+    const target = event.target as HTMLElement;
     const treeItem = target.closest('sl-tree-item')!;
 
     if (!treeItem.disabled) {
@@ -258,8 +245,8 @@ export default class SlTree extends LitElement {
     }
   }
 
-  handleFocusOut = (e: FocusEvent) => {
-    const relatedTarget = e.relatedTarget as HTMLElement;
+  handleFocusOut = (event: FocusEvent) => {
+    const relatedTarget = event.relatedTarget as HTMLElement;
 
     // If the element that got the focus is not in the tree
     if (!relatedTarget || !this.contains(relatedTarget)) {
@@ -267,11 +254,11 @@ export default class SlTree extends LitElement {
     }
   };
 
-  handleFocusIn = (e: FocusEvent) => {
-    const target = e.target as SlTreeItem;
+  handleFocusIn = (event: FocusEvent) => {
+    const target = event.target as SlTreeItem;
 
     // If the tree has been focused, move the focus to the last focused item
-    if (e.target === this) {
+    if (event.target === this) {
       this.focusItem(this.lastFocusedItem || this.treeItems[0]);
     }
 

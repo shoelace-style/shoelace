@@ -26,7 +26,7 @@ describe('<sl-tree-item>', () => {
     expect(leafItem).to.have.attribute('aria-disabled', 'false');
   });
 
-  describe('when contain child tree items', () => {
+  describe('when it contains child tree items', () => {
     it('should set isLeaf to false', () => {
       // Assert
       expect(parentItem.isLeaf).to.be.false;
@@ -156,7 +156,7 @@ describe('<sl-tree-item>', () => {
     });
   });
 
-  describe('when a item is disabled', () => {
+  describe('when the item is disabled', () => {
     it('should update the aria-disabled attribute', async () => {
       // Act
       leafItem.disabled = true;
@@ -173,6 +173,17 @@ describe('<sl-tree-item>', () => {
 
       // Assert
       expect(leafItem.shadowRoot?.querySelector('.tree-item__item')?.part.contains('item--disabled')).to.be.true;
+    });
+  });
+
+  describe('when the item is expanded', () => {
+    it('should set item--expanded part', async () => {
+      // Act
+      leafItem.expanded = true;
+      await leafItem.updateComplete;
+
+      // Assert
+      expect(leafItem.shadowRoot?.querySelector('.tree-item__item')?.part.contains('item--expanded')).to.be.true;
     });
   });
 });

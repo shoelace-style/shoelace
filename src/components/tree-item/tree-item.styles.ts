@@ -7,10 +7,15 @@ export default css`
   :host {
     display: block;
     outline: 0;
+    z-index: 0;
   }
 
   :host(:focus) {
     outline: 0;
+  }
+
+  ::slotted(sl-icon) {
+    margin-inline-end: var(--sl-spacing-x-small);
   }
 
   .tree-item {
@@ -18,12 +23,9 @@ export default css`
     display: flex;
     align-items: stretch;
     flex-direction: column;
-
     color: var(--sl-color-neutral-700);
-
     user-select: none;
     white-space: nowrap;
-    cursor: pointer;
   }
 
   .tree-item__checkbox {
@@ -56,33 +58,46 @@ export default css`
     align-items: center;
     justify-content: center;
     box-sizing: content-box;
-    color: var(--sl-color-neutral-400);
+    color: var(--sl-color-neutral-500);
     padding: var(--sl-spacing-x-small);
     width: 1rem;
     height: 1rem;
+    cursor: pointer;
+  }
+
+  .tree-item__expand-button--visible {
+    cursor: pointer;
   }
 
   .tree-item__item {
     display: flex;
     align-items: center;
-    cursor: pointer;
+    border-inline-start: solid 3px transparent;
   }
 
-  .tree-item__item--disabled {
-    color: var(--sl-color-neutral-400);
+  .tree-item--disabled .tree-item__item {
+    opacity: 0.5;
     outline: none;
     cursor: not-allowed;
+  }
+
+  :host(:not([aria-disabled='true'])) .tree-item__item:hover {
+    background-color: var(--sl-color-neutral-100);
   }
 
   :host(:not([aria-disabled='true']):focus-visible) .tree-item__item {
     outline: var(--sl-focus-ring);
     outline-offset: var(--sl-focus-ring-offset);
+    z-index: 2;
   }
 
-  :host(:not([aria-disabled='true'])) .tree-item__item--selected,
-  :host(:not([aria-disabled='true'])) .tree-item__item:hover,
-  :host(:not([aria-disabled='true'])) .tree-item__item:hover sl-checkbox::part(label) {
-    color: var(--sl-color-primary-600);
+  :host(:not([aria-disabled='true'])) .tree-item--selected .tree-item__item {
+    background-color: var(--sl-color-neutral-100);
+    border-inline-start-color: var(--sl-color-primary-600);
+  }
+
+  :host(:not([aria-disabled='true'])) .tree-item__expand-button {
+    color: var(--sl-color-neutral-600);
   }
 
   .tree-item__label {
@@ -92,6 +107,26 @@ export default css`
   }
 
   .tree-item__children {
-    font-size: calc(1em + var(--indentation-size, var(--sl-spacing-medium)));
+    font-size: calc(1em + var(--indent-size, var(--sl-spacing-medium)));
+  }
+
+  /* Indentation lines */
+  .tree-item__children {
+    position: relative;
+  }
+
+  .tree-item__children::before {
+    content: '';
+    position: absolute;
+    top: var(--indent-guide-offset);
+    bottom: var(--indent-guide-offset);
+    left: calc(1em - (var(--indent-guide-width) / 2) - 1px);
+    border-inline-end: var(--indent-guide-width) var(--indent-guide-style) var(--indent-guide-color);
+    z-index: 1;
+  }
+
+  .tree-item--rtl .tree-item__children::before {
+    left: auto;
+    right: 1em;
   }
 `;

@@ -2,181 +2,259 @@
 
 [component-header:sl-tree]
 
-A tree component allow the user to display a hierarchical list of items, expanding and collapsing the nodes that have nested items.
-The user can select one or more items from the list.
+Trees allow you to display a hierarchical list of selectable [tree items](/components/tree-item). Items with children can be expanded and collapsed as desired by the user.
 
 ```html preview
 <sl-tree>
-  <sl-tree-item expanded>
-    Getting Started
+  <sl-tree-item>
+    Deciduous
+    <sl-tree-item>Birch</sl-tree-item>
     <sl-tree-item>
-      Overview
-      <sl-tree-item>Quick Start</sl-tree-item>
-      <sl-tree-item>New to Web Components?</sl-tree-item>
-      <sl-tree-item>What Problem Does This Solve?</sl-tree-item>
-      <sl-tree-item>Browser Support</sl-tree-item>
-      <sl-tree-item>License</sl-tree-item>
-      <sl-tree-item>Attribution</sl-tree-item>
+      Maple
+      <sl-tree-item>Field maple</sl-tree-item>
+      <sl-tree-item>Red maple</sl-tree-item>
+      <sl-tree-item>Sugar maple</sl-tree-item>
     </sl-tree-item>
-    <sl-tree-item> Installation </sl-tree-item>
-    <sl-tree-item> Usage </sl-tree-item>
+    <sl-tree-item>Oak</sl-tree-item>
   </sl-tree-item>
 
   <sl-tree-item>
-    Frameworks
-    <sl-tree-item> React</sl-tree-item>
-    <sl-tree-item> Vue</sl-tree-item>
-    <sl-tree-item> Angular</sl-tree-item>
+    Coniferous
+    <sl-tree-item>Cedar</sl-tree-item>
+    <sl-tree-item>Pine</sl-tree-item>
+    <sl-tree-item>Spruce</sl-tree-item>
   </sl-tree-item>
 
-  <sl-tree-item disabled> Resources </sl-tree-item>
+  <sl-tree-item>
+    Non-trees
+    <sl-tree-item>Bamboo</sl-tree-item>
+    <sl-tree-item>Cactus</sl-tree-item>
+    <sl-tree-item>Fern</sl-tree-item>
+  </sl-tree-item>
 </sl-tree>
 ```
 
+<!-- prettier-ignore -->
 ```jsx react
 import { SlTree, SlTreeItem } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <SlTree>
-    <SlTreeItem expanded>
-      Getting Started
-      <SlTreeItem> Overview </SlTreeItem>
-      <SlTreeItem> Installation </SlTreeItem>
-      <SlTreeItem> Usage </SlTreeItem>
+    <SlTreeItem>
+      Deciduous
+      <SlTreeItem>Birch</SlTreeItem>
+      <SlTreeItem>
+        Maple
+        <SlTreeItem>Field maple</SlTreeItem>
+        <SlTreeItem>Red maple</SlTreeItem>
+        <SlTreeItem>Sugar maple</SlTreeItem>
+      </SlTreeItem>
+      <SlTreeItem>Oak</SlTreeItem>
     </SlTreeItem>
 
     <SlTreeItem>
-      Frameworks
-      <SlTreeItem> React</SlTreeItem>
-      <SlTreeItem> Vue</SlTreeItem>
-      <SlTreeItem> Angular</SlTreeItem>
+      Coniferous
+      <SlTreeItem>Cedar</SlTreeItem>
+      <SlTreeItem>Pine</SlTreeItem>
+      <SlTreeItem>Spruce</SlTreeItem>
     </SlTreeItem>
 
-    <SlTreeItem disabled> Resources </SlTreeItem>
+    <SlTreeItem>
+      Non-trees
+      <SlTreeItem>Bamboo</SlTreeItem>
+      <SlTreeItem>Cactus</SlTreeItem>
+      <SlTreeItem>Fern</SlTreeItem>
+    </SlTreeItem>
   </SlTree>
 );
 ```
 
 ## Examples
 
-### Selection modes
+### Selection Modes
 
-Use the `selection` attribute to specify the selection behavior of the tree
+Use the `selection` attribute to change the selection behavior of the tree.
 
-- Set `none` (_default_) to disable the selection.
-- Set `single` to allow the selection of a single item.
-- Set `leaf` to allow the selection of a single leaf node. Clicking on a parent node will expand/collapse the node.
+- Set `single` to allow the selection of a single item (default).
 - Set `multiple` to allow the selection of multiple items.
+- Set `leaf` to allow the selection of a single leaf node. Clicking on a parent node will expand/collapse the node.
 
 ```html preview
-<sl-select id="selection-mode" value="none" label="Selection">
-  <sl-menu-item value="none">none</sl-menu-item>
-  <sl-menu-item value="single">single</sl-menu-item>
-  <sl-menu-item value="leaf">leaf</sl-menu-item>
-  <sl-menu-item value="multiple">multiple</sl-menu-item>
+<sl-select id="selection-mode" value="single" label="Selection">
+  <sl-menu-item value="single">Single</sl-menu-item>
+  <sl-menu-item value="multiple">Multiple</sl-menu-item>
+  <sl-menu-item value="leaf">Leaf</sl-menu-item>
 </sl-select>
-<br />
-<sl-tree class="selectable">
-  <sl-tree-item expanded>
-    Parent
-    <sl-tree-item expanded>
-      Parent 1
-      <sl-tree-item> Child 1 </sl-tree-item>
-      <sl-tree-item> Child 2 </sl-tree-item>
-    </sl-tree-item>
 
+<br />
+
+<sl-tree class="tree-selectable">
+  <sl-tree-item>
+    Item 1
     <sl-tree-item>
-      Parent 2
-      <sl-tree-item> Child 1</sl-tree-item>
-      <sl-tree-item> Child 2</sl-tree-item>
-      <sl-tree-item> Child 3</sl-tree-item>
+      Item A
+      <sl-tree-item>Item Z</sl-tree-item>
+      <sl-tree-item>Item Y</sl-tree-item>
+      <sl-tree-item>Item X</sl-tree-item>
     </sl-tree-item>
+    <sl-tree-item>Item B</sl-tree-item>
+    <sl-tree-item>Item C</sl-tree-item>
   </sl-tree-item>
+  <sl-tree-item>Item 2</sl-tree-item>
+  <sl-tree-item>Item 3</sl-tree-item>
 </sl-tree>
-<style>
-  .selectable sl-tree-item::part(item--selected) {
-    color: var(--sl-color-primary-600);
-  }
-</style>
+
 <script>
-  (() => {
-    const selectionMode = document.querySelector('#selection-mode');
-    const treeItem = document.querySelector('.selectable');
-    selectionMode.addEventListener('sl-change', () => {
-      treeItem.selection = selectionMode.value;
-    });
-  })();
+  const selectionMode = document.querySelector('#selection-mode');
+  const tree = document.querySelector('.tree-selectable');
+
+  selectionMode.addEventListener('sl-change', () => {
+    tree.querySelectorAll('sl-tree-item').forEach(item => (item.selected = false));
+    tree.selection = selectionMode.value;
+  });
 </script>
 ```
 
+<!-- prettier-ignore -->
 ```jsx react
 import { SlTree, SlTreeItem } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => {
-  const [selection, setSelection] = useState('none');
+  const [selection, setSelection] = useState('single');
 
   return (
     <>
       <SlSelect label="Selection" value={value} onSlChange={event => setSelection(event.target.value)}>
-        <SlMenuItem value="none">none</SlMenuItem>
         <SlMenuItem value="single">single</SlMenuItem>
-        <SlMenuItem value="leaf">leaf</SlMenuItem>
         <SlMenuItem value="multiple">multiple</SlMenuItem>
+        <SlMenuItem value="leaf">leaf</SlMenuItem>
       </SlSelect>
+
       <br />
-      <SlTree selection={selection} class="selectable">
-        <SlTreeItem expanded>
-          Parent
-          <SlTreeItem expanded>
-            Parent 1<SlTreeItem> Child 1 </SlTreeItem>
-            <SlTreeItem> Child 2 </SlTreeItem>
-          </SlTreeItem>
+
+      <SlTree class="tree-selectable">
+        <SlTreeItem>
+          Item 1
           <SlTreeItem>
-            Parent 2<SlTreeItem> Child 1</SlTreeItem>
-            <SlTreeItem> Child 2</SlTreeItem>
-            <SlTreeItem> Child 3</SlTreeItem>
+            Item A
+            <SlTreeItem>Item Z</SlTreeItem>
+            <SlTreeItem>Item Y</SlTreeItem>
+            <SlTreeItem>Item X</SlTreeItem>
           </SlTreeItem>
+          <SlTreeItem>Item B</SlTreeItem>
+          <SlTreeItem>Item C</SlTreeItem>
         </SlTreeItem>
+        <SlTreeItem>Item 2</SlTreeItem>
+        <SlTreeItem>Item 3</SlTreeItem>
       </SlTree>
     </>
   );
 };
 ```
 
-### Lazy loading
+### Showing Indent Guides
 
-Use the `lazy` attribute on a item to indicate that the content is not yet present and will be loaded later.
-When the user tries to expand the node, the `loading` state is set to `true` and a special event named
-`sl-lazy-load` is emitted to let the loading of the content. The item will remain in a loading state until its content
-is changed.
-
-If you want to disable this behavior, for example after the content has been loaded, it will be sufficient to set
-`lazy` to `false`.
+Indent guides can be drawn by setting `--indent-guide-width`. You can also change the color, offset, and style, using `--indent-guide-color`, `--indent-guide-style`, and `--indent-guide-offset`, respectively.
 
 ```html preview
-<sl-tree>
-  <sl-tree-item lazy> Getting Started </sl-tree-item>
+<sl-tree class="tree-with-lines">
+  <sl-tree-item expanded>
+    Deciduous
+    <sl-tree-item>Birch</sl-tree-item>
+    <sl-tree-item expanded>
+      Maple
+      <sl-tree-item>Field maple</sl-tree-item>
+      <sl-tree-item>Red maple</sl-tree-item>
+      <sl-tree-item>Sugar maple</sl-tree-item>
+    </sl-tree-item>
+    <sl-tree-item>Oak</sl-tree-item>
+  </sl-tree-item>
+
+  <sl-tree-item>
+    Coniferous
+    <sl-tree-item>Cedar</sl-tree-item>
+    <sl-tree-item>Pine</sl-tree-item>
+    <sl-tree-item>Spruce</sl-tree-item>
+  </sl-tree-item>
+
+  <sl-tree-item>
+    Non-trees
+    <sl-tree-item>Bamboo</sl-tree-item>
+    <sl-tree-item>Cactus</sl-tree-item>
+    <sl-tree-item>Fern</sl-tree-item>
+  </sl-tree-item>
+</sl-tree>
+
+<style>
+  .tree-with-lines {
+    --indent-guide-width: 1px;
+  }
+</style>
+```
+
+<!-- prettier-ignore -->
+```jsx react
+import { SlTree, SlTreeItem } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlTree class="tree-with-lines" style={{ '--indent-guide-width': '1px' }}>
+    <SlTreeItem expanded>
+      Deciduous
+      <SlTreeItem>Birch</SlTreeItem>
+      <SlTreeItem expanded>
+        Maple
+        <SlTreeItem>Field maple</SlTreeItem>
+        <SlTreeItem>Red maple</SlTreeItem>
+        <SlTreeItem>Sugar maple</SlTreeItem>
+      </SlTreeItem>
+      <SlTreeItem>Oak</SlTreeItem>
+    </SlTreeItem>
+
+    <SlTreeItem>
+      Coniferous
+      <SlTreeItem>Cedar</SlTreeItem>
+      <SlTreeItem>Pine</SlTreeItem>
+      <SlTreeItem>Spruce</SlTreeItem>
+    </SlTreeItem>
+
+    <SlTreeItem>
+      Non-trees
+      <SlTreeItem>Bamboo</SlTreeItem>
+      <SlTreeItem>Cactus</SlTreeItem>
+      <SlTreeItem>Fern</SlTreeItem>
+    </SlTreeItem>
+  </SlTree>
+);
+```
+
+### Lazy Loading
+
+Use the `lazy` attribute on a tree item to indicate that the content is not yet present and will be loaded later. When the user tries to expand the node, the `loading` state is set to `true` and the `sl-lazy-load` event will be emitted to allow you to load data asynchronously. The item will remain in a loading state until its content is changed.
+
+If you want to disable this behavior after the first load, simply remove the `lazy` attribute and, on the next expand, the existing content will be shown instead.
+
+```html preview
+<sl-tree selection="leaf">
+  <sl-tree-item lazy>Available Trees</sl-tree-item>
 </sl-tree>
 
 <script type="module">
   const lazyItem = document.querySelector('sl-tree-item[lazy]');
-  lazyItem.addEventListener('sl-lazy-load', () => {
-    // Simulate an asynchronous loading
-    setTimeout(() => {
-      const subItems = ['Overview', 'Installation', 'Usage'];
 
-      const fragment = document.createDocumentFragment();
+  lazyItem.addEventListener('sl-lazy-load', () => {
+    // Simulate asynchronous loading
+    setTimeout(() => {
+      const subItems = ['Birch', 'Cedar', 'Maple', 'Pine'];
+
       for (const item of subItems) {
         const treeItem = document.createElement('sl-tree-item');
         treeItem.innerText = item;
-
-        fragment.appendChild(treeItem);
+        lazyItem.append(treeItem);
       }
-      lazyItem.appendChild(fragment);
 
-      // Disable lazy mode since the content has been loaded
+      // Disable lazy mode once the content has been loaded
       lazyItem.lazy = false;
-    }, 2000);
+    }, 1000);
   });
 </script>
 ```
@@ -191,17 +269,17 @@ const App = () => {
   const handleLazyLoad = () => {
     // Simulate asynchronous loading
     setTimeout(() => {
-      setChildItems(['Overview', 'Installation', 'Usage']);
+      setChildItems(['Birch', 'Cedar', 'Maple', 'Pine']);
 
-      // Disable lazy mode since the content has been loaded
+      // Disable lazy mode once the content has been loaded
       setLazy(false);
-    }, 2000);
+    }, 1000);
   };
 
   return (
-    <SlTree>
+    <SlTree selection="leaf">
       <SlTreeItem lazy={lazy} onSlLazyLoad={handleLazyLoad}>
-        Getting Started
+        Available Trees
         {childItems.map(item => (
           <SlTreeItem>{item}</SlTreeItem>
         ))}
@@ -211,133 +289,109 @@ const App = () => {
 };
 ```
 
-### Styling trees
+### With Icons
 
-Using CSS parts is possible to apply custom styles to the tree.
-For example, it is possible to change the hover effect and to highlight the selected item.
-
-```html preview
-<style>
-  .with-custom-style sl-tree-item::part(item) {
-    border-left: 2px solid transparent;
-  }
-
-  .with-custom-style sl-tree-item:not([disabled])::part(item):hover,
-  .with-custom-style sl-tree-item:focus-visible::part(item) {
-    color: var(--sl-color-primary-1000);
-    background-color: var(--sl-color-neutral-200);
-  }
-
-  .with-custom-style sl-tree-item::part(item--selected),
-  .with-custom-style sl-tree-item::part(item--selected):hover,
-  .with-custom-style sl-tree-item:focus-visible::part(item--selected) {
-    color: var(--sl-color-neutral-1000);
-    background-color: var(--sl-color-neutral-100);
-    border-left-color: var(--sl-color-primary-600);
-  }
-</style>
-<sl-tree selection="leaf" class="with-custom-style">
-  <sl-tree-item expanded>
-    Getting Started
-    <sl-tree-item>
-      Overview
-      <sl-tree-item>Quick Start</sl-tree-item>
-      <sl-tree-item>New to Web Components?</sl-tree-item>
-      <sl-tree-item>What Problem Does This Solve?</sl-tree-item>
-      <sl-tree-item>Browser Support</sl-tree-item>
-      <sl-tree-item>License</sl-tree-item>
-      <sl-tree-item>Attribution</sl-tree-item>
-    </sl-tree-item>
-    <sl-tree-item selected> Installation </sl-tree-item>
-    <sl-tree-item> Usage </sl-tree-item>
-  </sl-tree-item>
-
-  <sl-tree-item>
-    Frameworks
-    <sl-tree-item> React</sl-tree-item>
-    <sl-tree-item> Vue</sl-tree-item>
-    <sl-tree-item> Angular</sl-tree-item>
-  </sl-tree-item>
-
-  <sl-tree-item disabled> Resources </sl-tree-item>
-</sl-tree>
-```
-
-### With indentation lines
+Decorative icons can be used before labels to provide hints for each node.
 
 ```html preview
-<style>
-  .with-indentation-lines sl-tree-item[expanded]::part(children) {
-    position: relative;
-  }
-
-  .with-indentation-lines sl-tree-item[expanded]::part(children)::before {
-    content: '';
-    position: absolute;
-    left: 1em;
-    top: var(--sl-spacing-2x-small);
-    bottom: var(--sl-spacing-2x-small);
-    border-right: 1px solid var(--sl-color-neutral-100);
-    transition: 0.2s border-right ease-in-out;
-  }
-
-  .with-indentation-lines sl-tree-item[expanded]::part(children):hover::before {
-    border-right: 1px solid var(--sl-color-neutral-600);
-  }
-</style>
-<sl-tree class="with-indentation-lines">
+<sl-tree class="tree-with-icons">
   <sl-tree-item expanded>
-    Getting Started
+    <sl-icon name="folder"></sl-icon>
+    Root
+
     <sl-tree-item>
-      Overview
-      <sl-tree-item>Quick Start</sl-tree-item>
-      <sl-tree-item>New to Web Components?</sl-tree-item>
-      <sl-tree-item>What Problem Does This Solve?</sl-tree-item>
-      <sl-tree-item>Browser Support</sl-tree-item>
-      <sl-tree-item>License</sl-tree-item>
-      <sl-tree-item>Attribution</sl-tree-item>
+      <sl-icon name="folder"> </sl-icon>
+      Folder 1
+      <sl-tree-item>
+        <sl-icon name="files"></sl-icon>
+        File 1 - 1
+      </sl-tree-item>
+      <sl-tree-item disabled>
+        <sl-icon name="files"></sl-icon>
+        File 1 - 2
+      </sl-tree-item>
+      <sl-tree-item>
+        <sl-icon name="files"></sl-icon>
+        File 1 - 3
+      </sl-tree-item>
     </sl-tree-item>
-    <sl-tree-item> Installation </sl-tree-item>
-    <sl-tree-item> Usage </sl-tree-item>
-  </sl-tree-item>
 
-  <sl-tree-item>
-    Frameworks
-    <sl-tree-item> React</sl-tree-item>
-    <sl-tree-item> Vue</sl-tree-item>
-    <sl-tree-item> Angular</sl-tree-item>
-  </sl-tree-item>
-
-  <sl-tree-item disabled> Resources </sl-tree-item>
-</sl-tree>
-```
-
-### With icons
-
-```html preview
-<style>
-  sl-icon {
-    margin-right: var(--sl-spacing-x-small);
-  }
-</style>
-<sl-tree>
-  <sl-tree-item expanded>
-    <sl-icon name="folder"></sl-icon>Root
-    <sl-tree-item>
-      <sl-icon name="folder"> </sl-icon>Folder 1
-      <sl-tree-item> <sl-icon name="files"></sl-icon>File 1 - 1 </sl-tree-item>
-      <sl-tree-item disabled> <sl-icon name="files"></sl-icon>File 1 - 2 </sl-tree-item>
-      <sl-tree-item> <sl-icon name="files"></sl-icon>File 1 - 3 </sl-tree-item>
-    </sl-tree-item>
     <sl-tree-item>
       <sl-icon name="files"></sl-icon>
       Folder 2
-      <sl-tree-item selected> <sl-icon name="files"></sl-icon>File 2 - 1 </sl-tree-item>
-      <sl-tree-item> <sl-icon name="files"></sl-icon>File 2 - 2 </sl-tree-item>
+      <sl-tree-item>
+        <sl-icon name="files"></sl-icon>
+        File 2 - 1
+      </sl-tree-item>
+      <sl-tree-item>
+        <sl-icon name="files"></sl-icon>
+        File 2 - 2
+      </sl-tree-item>
     </sl-tree-item>
-    <sl-tree-item> <sl-icon name="files"></sl-icon>File 1 </sl-tree-item>
+    <sl-tree-item>
+      <sl-icon name="files"></sl-icon>
+      File 1
+    </sl-tree-item>
   </sl-tree-item>
 </sl-tree>
+```
+
+```jsx react
+import { SlIcon, SlTree, SlTreeItem } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => {
+  const [childItems, setChildItems] = useState([]);
+  const [lazy, setLazy] = useState(true);
+
+  const handleLazyLoad = () => {
+    // Simulate asynchronous loading
+    setTimeout(() => {
+      setChildItems(['Overview', 'Installation', 'Usage']);
+
+      // Disable lazy mode once the content has been loaded
+      setLazy(false);
+    }, 1000);
+  };
+
+  return (
+    <SlTree class="tree-with-icons">
+      <SlTreeItem expanded>
+        <SlIcon name="folder" />
+        Root
+        <SlTreeItem>
+          <SlIcon name="folder" />
+          Folder 1<SlTreeItem>
+            <SlIcon name="files" />
+            File 1 - 1
+          </SlTreeItem>
+          <SlTreeItem disabled>
+            <SlIcon name="files" />
+            File 1 - 2
+          </SlTreeItem>
+          <SlTreeItem>
+            <SlIcon name="files" />
+            File 1 - 3
+          </SlTreeItem>
+        </SlTreeItem>
+        <SlTreeItem>
+          <SlIcon name="files" />
+          Folder 2<SlTreeItem>
+            <SlIcon name="files" />
+            File 2 - 1
+          </SlTreeItem>
+          <SlTreeItem>
+            <SlIcon name="files" />
+            File 2 - 2
+          </SlTreeItem>
+        </SlTreeItem>
+        <SlTreeItem>
+          <SlIcon name="files" />
+          File 1
+        </SlTreeItem>
+      </SlTreeItem>
+    </SlTree>
+  );
+};
 ```
 
 [component-metadata:sl-tree]

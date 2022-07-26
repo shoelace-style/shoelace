@@ -2,94 +2,164 @@
 
 [component-header:sl-tree-item]
 
-A tree item is a hierarchical node of a tree.
+A tree item serves as a hierarchical node that lives inside a [tree](/components/tree).
 
 ```html preview
-<sl-tree-item> Tree node </sl-tree-item>
+<sl-tree>
+  <sl-tree-item>
+    Item 1
+    <sl-tree-item>Item A</sl-tree-item>
+    <sl-tree-item>Item B</sl-tree-item>
+    <sl-tree-item>Item C</sl-tree-item>
+  </sl-tree-item>
+  <sl-tree-item>Item 2</sl-tree-item>
+  <sl-tree-item>Item 3</sl-tree-item>
+</sl-tree>
+```
+
+<!-- prettier-ignore -->
+```jsx react
+import { SlTree, SlTreeItem } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlTree>
+    <SlTreeItem>
+      Item 1
+      <SlTreeItem>Item A</SlTreeItem>
+      <SlTreeItem>Item B</SlTreeItem>
+      <SlTreeItem>Item C</SlTreeItem>
+    </SlTreeItem>
+    <SlTreeItem>Item 2</SlTreeItem>
+    <SlTreeItem>Item 3</SlTreeItem>
+  </SlTree>
+);
 ```
 
 ## Examples
 
 ### Nested tree items
 
-A tree item can contain other items, this allow the user to expand or collapse nested nodes accordingly.
+A tree item can contain other tree items. This allows the node to be expanded or collapsed by the user.
 
 ```html preview
-<sl-tree-item>
-  Parent Node
-  <sl-tree-item> Child 1 </sl-tree-item>
-  <sl-tree-item> Child 2 </sl-tree-item>
-  <sl-tree-item> Child 3 </sl-tree-item>
-</sl-tree-item>
+<sl-tree>
+  <sl-tree-item>
+    Item 1
+    <sl-tree-item>
+      Item A
+      <sl-tree-item>Item Z</sl-tree-item>
+      <sl-tree-item>Item Y</sl-tree-item>
+      <sl-tree-item>Item X</sl-tree-item>
+    </sl-tree-item>
+    <sl-tree-item>Item B</sl-tree-item>
+    <sl-tree-item>Item C</sl-tree-item>
+  </sl-tree-item>
+  <sl-tree-item>Item 2</sl-tree-item>
+  <sl-tree-item>Item 3</sl-tree-item>
+</sl-tree>
 ```
 
-### Expanded
+<!-- prettier-ignore -->
+```jsx react
+import { SlTree, SlTreeItem } from '@shoelace-style/shoelace/dist/react';
 
-Use the `expanded` attribute to display the nested items.
-
-```html preview
-<sl-tree-item expanded>
-  Parent Node
-  <sl-tree-item> Child 1 </sl-tree-item>
-  <sl-tree-item> Child 2 </sl-tree-item>
-  <sl-tree-item> Child 3 </sl-tree-item>
-</sl-tree-item>
+const App = () => (
+  <SlTree>
+    <SlTreeItem>
+      Item 1
+      <SlTreeItem>
+        Item A
+        <SlTreeItem>Item Z</SlTreeItem>
+        <SlTreeItem>Item Y</SlTreeItem>
+        <SlTreeItem>Item X</SlTreeItem>
+      </SlTreeItem>
+      <SlTreeItem>Item B</SlTreeItem>
+      <SlTreeItem>Item C</SlTreeItem>
+    </SlTreeItem>
+    <SlTreeItem>Item 2</SlTreeItem>
+    <SlTreeItem>Item 3</SlTreeItem>
+  </SlTree>
+);
 ```
 
 ### Selected
 
-Use the `selected` attribute to the mark the item as selected.
+Use the `selected` attribute to select a tree item initially.
 
 ```html preview
-<sl-tree-item expanded>
-  Parent Node
-  <sl-tree-item> Child 1 </sl-tree-item>
-  <sl-tree-item selected> Child 2 </sl-tree-item>
-  <sl-tree-item> Child 3 </sl-tree-item>
-</sl-tree-item>
+<sl-tree>
+  <sl-tree-item selected>
+    Item 1
+    <sl-tree-item>Item A</sl-tree-item>
+    <sl-tree-item>Item B</sl-tree-item>
+    <sl-tree-item>Item C</sl-tree-item>
+  </sl-tree-item>
+  <sl-tree-item>Item 2</sl-tree-item>
+  <sl-tree-item>Item 3</sl-tree-item>
+</sl-tree>
 ```
 
-### Selectable
+<!-- prettier-ignore -->
+```jsx react
+import { SlTree, SlTreeItem } from '@shoelace-style/shoelace/dist/react';
 
-Use the `selectable` attribute to display the checkbox.
-
-```html preview
-<sl-tree-item class="selectable" selectable>
-  Parent Node
-  <sl-tree-item selectable> Child 1 </sl-tree-item>
-  <sl-tree-item selectable> Child 2 </sl-tree-item>
-  <sl-tree-item selectable> Child 3 </sl-tree-item>
-</sl-tree-item>
-
-<script>
-  document.querySelector('sl-tree-item.selectable').addEventListener('click', ({ target }) => {
-    if (target.hasAttribute('selectable')) {
-      target.selected = !target.selected;
-    }
-  });
-</script>
+const App = () => (
+  <SlTree>
+    <SlTreeItem selected>
+      Item 1
+      <SlTreeItem>Item A</SlTreeItem>
+      <SlTreeItem>Item B</SlTreeItem>
+      <SlTreeItem>Item C</SlTreeItem>
+    </SlTreeItem>
+    <SlTreeItem>Item 2</SlTreeItem>
+    <SlTreeItem>Item 3</SlTreeItem>
+  </SlTree>
+);
 ```
 
-### Lazy
+### Expanded
 
-Use the `lazy` to specify that the content is not yet loaded. When the user tries to expand the node,
-a `sl-lazy-load` event is emitted.
+Use the `expanded` attribute to expand a tree item initially.
 
 ```html preview
-<sl-tree-item lazy> Parent Node </sl-tree-item>
+<sl-tree>
+  <sl-tree-item expanded>
+    Item 1
+    <sl-tree-item expanded>
+      Item A
+      <sl-tree-item>Item Z</sl-tree-item>
+      <sl-tree-item>Item Y</sl-tree-item>
+      <sl-tree-item>Item X</sl-tree-item>
+    </sl-tree-item>
+    <sl-tree-item>Item B</sl-tree-item>
+    <sl-tree-item>Item C</sl-tree-item>
+  </sl-tree-item>
+  <sl-tree-item>Item 2</sl-tree-item>
+  <sl-tree-item>Item 3</sl-tree-item>
+</sl-tree>
 ```
 
-### Indentation size
+<!-- prettier-ignore -->
+```jsx react
+import { SlTree, SlTreeItem } from '@shoelace-style/shoelace/dist/react';
 
-Use the `--indentation-size` custom property to set the tree item's indentation.
-
-```html preview
-<sl-tree-item style="--indentation-size: 3rem" expanded>
-  Parent Node
-  <sl-tree-item> Child 1 </sl-tree-item>
-  <sl-tree-item> Child 2 </sl-tree-item>
-  <sl-tree-item> Child 3 </sl-tree-item>
-</sl-tree-item>
+const App = () => (
+  <SlTree>
+    <SlTreeItem expanded>
+      Item 1
+      <SlTreeItem expanded>
+        Item A
+        <SlTreeItem>Item Z</SlTreeItem>
+        <SlTreeItem>Item Y</SlTreeItem>
+        <SlTreeItem>Item X</SlTreeItem>
+      </SlTreeItem>
+      <SlTreeItem>Item B</SlTreeItem>
+      <SlTreeItem>Item C</SlTreeItem>
+    </SlTreeItem>
+    <SlTreeItem>Item 2</SlTreeItem>
+    <SlTreeItem>Item 3</SlTreeItem>
+  </SlTree>
+);
 ```
 
 [component-metadata:sl-tree-item]

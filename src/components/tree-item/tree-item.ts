@@ -1,16 +1,16 @@
-import { LocalizeController } from '@shoelace-style/localize';
 import { LitElement, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { live } from 'lit/directives/live.js';
 import { when } from 'lit/directives/when.js';
 import { animateTo, shimKeyframesHeightAuto, stopAnimations } from 'src/internal/animate';
-import { stringMap } from 'src/internal/string';
 import { getAnimation, setDefaultAnimation } from 'src/utilities/animation-registry';
 import '../../components/checkbox/checkbox';
+import '../../components/icon/icon';
 import '../../components/spinner/spinner';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
+import { LocalizeController } from '../../utilities/localize';
 import styles from './tree-item.styles';
 import type { PropertyValueMap } from 'lit';
 
@@ -23,6 +23,7 @@ export function isTreeItem(element: Element) {
  * @status experimental
  *
  * @dependency sl-checkbox
+ * @dependency sl-icon
  * @dependency sl-spinner
  *
  * @event sl-expand - Emitted when the item expands.
@@ -35,13 +36,13 @@ export function isTreeItem(element: Element) {
  *
  * @csspart base - The component's internal wrapper.
  * @csspart item - The item main container.
- * @csspart item--selected - The `selected` state of the main container.
- * @csspart item--disabled - The `disabled` state of the main container.
- * @csspart indentation - The item indentation.
- * @csspart label - The item label.
- * @csspart children - The item children container.
- *
- * @cssproperty --indentation-size - The size of the indentation for nested items. (Default: --sl-spacing-medium)
+ * @csspart item--disabled - Applied when the item is disabled.
+ * @csspart item--expanded - Applied when the item is expanded.
+ * @csspart item--indeterminate - Applied when the selection is indeterminate.
+ * @csspart item--selected - Applied when the item is selected.
+ * @csspart indentation - The item's indentation container.
+ * @csspart label - The item's label.
+ * @csspart children - The item's children container.
  */
 @customElement('sl-tree-item')
 export default class SlTreeItem extends LitElement {
@@ -49,29 +50,22 @@ export default class SlTreeItem extends LitElement {
 
   private readonly localize = new LocalizeController(this);
 
-  /** Expands the item when is set */
+  @state() indeterminate = false;
+  @state() isLeaf = false;
+  @state() loading = false;
+  @state() selectable = false;
+
+  /** Expands the tree item. */
   @property({ type: Boolean, reflect: true }) expanded = false;
 
-  /** Sets the treeitem's selected state */
+  /** Draws the tree item in a selected state. */
   @property({ type: Boolean, reflect: true }) selected = false;
 
-  /** Disables the treeitem */
+  /** Disables the tree item. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
-  /** When set, enables the lazy mode behavior */
+  /** Enables lazy loading behavior. */
   @property({ type: Boolean, reflect: true }) lazy = false;
-
-  /** Shows the checkbox when set */
-  @property({ type: Boolean }) selectable = false;
-
-  /** Draws the checkbox in a indeterminate state. */
-  @state() indeterminate = false;
-
-  /** Specifies whether the node has children nodes */
-  @state() isLeaf = false;
-
-  /** Draws the expand button in a loading state. */
-  @state() loading = false;
 
   @query('slot:not([name])') defaultSlot: HTMLSlotElement;
   @query('slot[name=children]') childrenSlot: HTMLSlotElement;
@@ -173,9 +167,7 @@ export default class SlTreeItem extends LitElement {
     emit(this, 'sl-after-collapse');
   }
 
-  /**
-   * @internal Gets all the nested tree items
-   */
+  // Gets all the nested tree items
   getChildrenItems({ includeDisabled = true }: { includeDisabled?: boolean } = {}): SlTreeItem[] {
     return this.childrenSlot
       ? ([...this.childrenSlot.assignedElements({ flatten: true })].filter(
@@ -184,17 +176,15 @@ export default class SlTreeItem extends LitElement {
       : [];
   }
 
-  /**
-   * @internal Checks whether the item is nested into an item
-   */
+  // Checks whether the item is nested into an item
   private isNestedItem(): boolean {
     const parent = this.parentElement;
     return !!parent && isTreeItem(parent);
   }
 
-  handleToggleExpand(e: Event) {
-    e.preventDefault();
-    e.stopImmediatePropagation();
+  handleToggleExpand(event: Event) {
+    event.preventDefault();
+    event.stopImmediatePropagation();
 
     if (!this.disabled) {
       this.expanded = !this.expanded;
@@ -203,7 +193,6 @@ export default class SlTreeItem extends LitElement {
 
   handleChildrenSlotChange() {
     this.loading = false;
-
     this.isLeaf = this.getChildrenItems().length === 0;
   }
 
@@ -214,28 +203,47 @@ export default class SlTreeItem extends LitElement {
   }
 
   render() {
+    const isRtl = this.localize.dir() === 'rtl';
+
     return html`
-      <div part="base" class="tree-item">
+      <div
+        part="base"
+        class="${classMap({
+          'tree-item': true,
+          'tree-item--selected': this.selected,
+          'tree-item--disabled': this.disabled,
+          'tree-item--leaf': this.isLeaf,
+          'tree-item--rtl': this.localize.dir() === 'rtl'
+        })}"
+      >
         <div
-          class="${classMap({
-            'tree-item__item': true,
-            'tree-item__item--selected': this.selected,
-            'tree-item__item--disabled': this.disabled
-          })}"
-          part="${stringMap({
-            item: true,
-            'item--selected': this.selected,
-            'item--disabled': this.disabled
-          })}"
+          class="tree-item__item"
+          part="
+            item
+            ${this.disabled ? 'item--disabled' : ''}
+            ${this.expanded ? 'item--expanded' : ''}
+            ${this.indeterminate ? 'item--indeterminate' : ''}
+            ${this.selected ? 'item--selected' : ''}
+          "
         >
           <div class="tree-item__indentation" part="indentation"></div>
 
-          <div class="tree-item__expand-button" aria-hidden="true" @click="${this.handleToggleExpand}">
+          <div
+            class=${classMap({
+              'tree-item__expand-button': true,
+              'tree-item__expand-button--visible': !this.loading && (!this.isLeaf || this.lazy)
+            })}
+            aria-hidden="true"
+            @click="${this.handleToggleExpand}"
+          >
             ${when(this.loading, () => html` <sl-spinner></sl-spinner> `)}
             ${when(
               !this.loading && (!this.isLeaf || this.lazy),
               () => html`
-                <sl-icon library="system" name="${this.expanded ? 'chevron-down' : 'chevron-right'}"></sl-icon>
+                <sl-icon
+                  library="system"
+                  name="${this.expanded ? 'chevron-down' : isRtl ? 'chevron-left' : 'chevron-right'}"
+                ></sl-icon>
               `
             )}
           </div>
