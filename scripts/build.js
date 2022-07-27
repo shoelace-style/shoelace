@@ -2,7 +2,7 @@ import browserSync from 'browser-sync';
 import chalk from 'chalk';
 import { execSync } from 'child_process';
 import commandLineArgs from 'command-line-args';
-import del from 'del';
+import { deleteSync } from 'del';
 import esbuild from 'esbuild';
 import fs from 'fs';
 import getPort, { portNumbers } from 'get-port';
@@ -20,7 +20,7 @@ const { bundle, copydir, dir, serve, types } = commandLineArgs([
 
 const outdir = dir;
 
-del.sync(outdir);
+deleteSync(outdir);
 fs.mkdirSync(outdir, { recursive: true });
 
 (async () => {
@@ -87,7 +87,7 @@ fs.mkdirSync(outdir, { recursive: true });
 
   // Copy the build output to an additional directory
   if (copydir) {
-    del.sync(copydir);
+    deleteSync(copydir);
     copy(outdir, copydir);
   }
 
@@ -101,7 +101,7 @@ fs.mkdirSync(outdir, { recursive: true });
     });
 
     // Make sure docs/dist is empty since we're serving it virtually
-    del.sync('docs/dist');
+    deleteSync('docs/dist');
 
     const browserSyncConfig = {
       open: false,

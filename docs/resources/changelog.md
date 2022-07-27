@@ -20,8 +20,11 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug in `<sl-tooltip>` that caused the position to be incorrect on the first show when using `hoist`
 - Improved accessibility of `<sl-tab-group>`, `<sl-tab>`, and `<sl-tab-panel>` to announce better in screen readers and by allowing focus on disabled items
 - Improved accessibility of `<sl-menu>` and `<sl-menu-item>` by allowing focus on disabled items
+- Updated Lit to 2.2.8
+- Update esbuild to 0.14.50
 - Updated Bootstrap Icons to 1.9.1
 - Updated Floating UI to 1.0.0
+- Updated all other dependencies to latest versions
 
 ## 2.0.0-beta.78
 

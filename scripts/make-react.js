@@ -2,7 +2,7 @@ import commandLineArgs from 'command-line-args';
 import fs from 'fs';
 import path from 'path';
 import chalk from 'chalk';
-import del from 'del';
+import { deleteSync } from 'del';
 import { pascalCase } from 'pascal-case';
 import prettier from 'prettier';
 import prettierConfig from '../prettier.config.cjs';
@@ -13,7 +13,7 @@ const { outdir } = commandLineArgs({ name: 'outdir', type: String });
 const reactDir = path.join('./src/react');
 
 // Clear build directory
-del.sync(reactDir);
+deleteSync(reactDir);
 fs.mkdirSync(reactDir, { recursive: true });
 
 // Fetch component metadata
