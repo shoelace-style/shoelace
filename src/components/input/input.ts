@@ -125,8 +125,11 @@ export default class SlInput extends LitElement {
   /** The input's maximum value. */
   @property() max: number | string;
 
-  /** The input's step attribute. */
-  @property({ type: Number }) step: number;
+  /**
+   * Specifies the granularity that the value must adhere to, or the special value `any` which means no stepping is
+   * implied, allowing any numeric value.
+   */
+  @property() step: number | 'any';
 
   /** A pattern to validate input against. */
   @property() pattern: string;
@@ -272,6 +275,14 @@ export default class SlInput extends LitElement {
     this.invalid = !this.input.checkValidity();
   }
 
+  @watch('step', { waitUntilFirstUpdate: true })
+  handleStepChange() {
+    // If step changes, the value may become invalid so we need to recheck after the update. We set the new step
+    // imperatively so we don't have to wait for the next render to report the updated validity.
+    this.input.step = String(this.step);
+    this.invalid = !this.input.checkValidity();
+  }
+
   handleFocus() {
     this.hasFocus = true;
     emit(this, 'sl-focus');
@@ -384,7 +395,7 @@ export default class SlInput extends LitElement {
               maxlength=${ifDefined(this.maxlength)}
               min=${ifDefined(this.min)}
               max=${ifDefined(this.max)}
-              step=${ifDefined(this.step)}
+              step=${ifDefined(this.step as number)}
               .value=${live(this.value)}
               autocapitalize=${ifDefined(this.type === 'password' ? 'off' : this.autocapitalize)}
               autocomplete=${ifDefined(this.type === 'password' ? 'off' : this.autocomplete)}

@@ -12,6 +12,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 - Added `--indicator-width` custom property to `<sl-progress-ring>` [#837](https://github.com/shoelace-style/shoelace/issues/837)
 - Added Swedish translation [#838](https://github.com/shoelace-style/shoelace/pull/838)
+- Added support for `step="any"` for `<sl-input type="number">` [#839](https://github.com/shoelace-style/shoelace/issues/839)
 - Changed the type of component styles from `CSSResult` to `CSSResultGroup` [#828](https://github.com/shoelace-style/shoelace/issues/828)
 - Fixed a bug in `<sl-color-picker>` where using <kbd>Left<kbd> and <kbd>Right</kbd> would select the wrong color
 - Fixed a bug in `<sl-tab-group>` where the divider was on the wrong side when using `placement="end"`
