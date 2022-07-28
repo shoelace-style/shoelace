@@ -1,6 +1,6 @@
 # Localization
 
-Components can be localized by importing the appropriate translation file and setting the desired [`lang` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang) on the `<html>` element. Here's an example that renders Shoelace components in Spanish.
+Components can be localized by importing the appropriate translation file and setting the desired [`lang` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang) and/or [`dir` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/dir) on the `<html>` element. Here's an example that renders Shoelace components in Spanish.
 
 ```html
 <html lang="es">
@@ -57,7 +57,7 @@ If you have any questions, please start a [discussion](https://github.com/shoela
 
 ## Multiple Locales Per Page
 
-You can use a different locale for an individual component by setting its `lang` attribute. Here's a contrived example to demonstrate.
+You can use a different locale for an individual component by setting its `lang` and/or `dir` attributes. Here's a contrived example to demonstrate.
 
 ```html
 <html lang="es">
@@ -70,7 +70,7 @@ You can use a different locale for an individual component by setting its `lang`
 </html>
 ```
 
-For performance reasons, the `lang` attribute must be on the component itself, not on an ancestor element.
+For performance reasons, the `lang` and `dir` attributes must be on the component itself, not on an ancestor element.
 
 ```html
 <html lang="es">
