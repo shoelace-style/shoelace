@@ -5,10 +5,10 @@
 Radio groups are used to group multiple [radios](/components/radio) or [radio buttons](/components/radio-button) so they function as a single form control.
 
 ```html preview
-<sl-radio-group label="Select an option">
-  <sl-radio name="option" value="1" checked>Option 1</sl-radio>
-  <sl-radio name="option" value="2">Option 2</sl-radio>
-  <sl-radio name="option" value="3">Option 3</sl-radio>
+<sl-radio-group label="Select an option" value="1">
+  <sl-radio value="1">Option 1</sl-radio>
+  <sl-radio value="2">Option 2</sl-radio>
+  <sl-radio value="3">Option 3</sl-radio>
 </sl-radio-group>
 ```
 
@@ -16,16 +16,10 @@ Radio groups are used to group multiple [radios](/components/radio) or [radio bu
 import { SlRadio, SlRadioGroup } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
-  <SlRadioGroup label="Select an option">
-    <SlRadio name="option" value="1" checked>
-      Option 1
-    </SlRadio>
-    <SlRadio name="option" value="2">
-      Option 2
-    </SlRadio>
-    <SlRadio name="option" value="3">
-      Option 3
-    </SlRadio>
+  <SlRadioGroup label="Select an option" value="1">
+    <SlRadio value="1">Option 1</SlRadio>
+    <SlRadio value="2">Option 2</SlRadio>
+    <SlRadio value="3">Option 3</SlRadio>
   </SlRadioGroup>
 );
 ```
@@ -37,8 +31,8 @@ const App = () => (
 You can show the fieldset and legend that wraps the radio group using the `fieldset` attribute. If you don't use this option, you should still provide a label so screen readers announce the control correctly.
 
 ```html preview
-<sl-radio-group label="Select an option" fieldset>
-  <sl-radio name="option" value="1" checked>Option 1</sl-radio>
+<sl-radio-group label="Select an option" value="1" fieldset>
+  <sl-radio name="option" value="1">Option 1</sl-radio>
   <sl-radio name="option" value="2">Option 2</sl-radio>
   <sl-radio name="option" value="3">Option 3</sl-radio>
 </sl-radio-group>
@@ -48,8 +42,8 @@ You can show the fieldset and legend that wraps the radio group using the `field
 import { SlRadio, SlRadioGroup } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
-  <SlRadioGroup label="Select an option" fieldset>
-    <SlRadio name="option" value="1" checked>
+  <SlRadioGroup label="Select an option" value="1" fieldset>
+    <SlRadio name="option" value="1">
       Option 1
     </SlRadio>
     <SlRadio name="option" value="2">
@@ -67,8 +61,8 @@ const App = () => (
 [Radio buttons](/components/radio-button) offer an alternate way to display radio controls. In this case, an internal [button group](/components/button-group) is used to group the buttons into a single, cohesive control.
 
 ```html preview
-<sl-radio-group label="Select an option">
-  <sl-radio-button name="option" value="1" checked>Option 1</sl-radio-button>
+<sl-radio-group label="Select an option" value="1">
+  <sl-radio-button name="option" value="1">Option 1</sl-radio-button>
   <sl-radio-button name="option" value="2">Option 2</sl-radio-button>
   <sl-radio-button name="option" value="3">Option 3</sl-radio-button>
 </sl-radio-group>
@@ -78,8 +72,8 @@ const App = () => (
 import { SlRadioButton, SlRadioGroup } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
-  <SlRadioGroup label="Select an option">
-    <SlRadioButton name="option" value="1" checked>
+  <SlRadioGroup label="Select an option" value="1">
+    <SlRadioButton name="option" value="1">
       Option 1
     </SlRadioButton>
     <SlRadioButton name="option" value="2">
