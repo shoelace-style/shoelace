@@ -158,14 +158,15 @@ export default class SlTree extends LitElement {
   }
 
   getFocusableItems() {
+    const collapsedItems = new Set();
     return [...this.treeItems].filter(item => {
-      // Exclude disabled elements
-      if (item.disabled) return false;
-
       // Exclude those whose parent is collapsed or loading
       const parent: SlTreeItem | null | undefined = item.parentElement?.closest('[role=treeitem]');
+      if (parent && (!parent.expanded || parent.loading || collapsedItems.has(parent))) {
+        collapsedItems.add(item);
+      }
 
-      return !parent || (parent.expanded && !parent.loading);
+      return !collapsedItems.has(item);
     });
   }
 
@@ -207,7 +208,7 @@ export default class SlTree extends LitElement {
         // When focus is on a open node, moves focus to the first child node.
         // When focus is on an end node (a tree item with no children), does nothing.
         //
-        if (!activeItem || activeItem.expanded || (activeItem.isLeaf && !activeItem.lazy)) {
+        if (!activeItem || activeItem.disabled || activeItem.expanded || (activeItem.isLeaf && !activeItem.lazy)) {
           focusItemAt(activeItemIndex + 1);
         } else {
           toggleExpand(true);
@@ -218,7 +219,7 @@ export default class SlTree extends LitElement {
         // When focus is on a child node that is also either an end node or a closed node, moves focus to its parent node.
         // When focus is on a closed `tree`, does nothing.
         //
-        if (!activeItem || activeItem.isLeaf || !activeItem.expanded) {
+        if (!activeItem || activeItem.disabled || activeItem.isLeaf || !activeItem.expanded) {
           focusItemAt(activeItemIndex - 1);
         } else {
           toggleExpand(false);
@@ -231,7 +232,9 @@ export default class SlTree extends LitElement {
         focusItemAt(items.length - 1);
       } else if (event.key === 'Enter' || event.key === ' ') {
         // Selects the focused node.
-        this.selectItem(activeItem);
+        if (!activeItem.disabled) {
+          this.selectItem(activeItem);
+        }
       }
     }
   }
