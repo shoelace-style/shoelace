@@ -30,12 +30,6 @@ const RADIO_CHILDREN = ['sl-radio', 'sl-radio-button'];
 export default class SlRadioGroup extends LitElement {
   static styles: CSSResultGroup = styles;
 
-  protected readonly formSubmitController = new FormSubmitController(this, {
-    value: (control: SlRadioGroup) => control.value,
-    defaultValue: () => undefined,
-    setValue: (control: SlRadioGroup, value: string) => (control.value = value)
-  });
-
   @query('slot:not([name])') defaultSlot: HTMLSlotElement;
   @query('.radio-group__validation-input') input: HTMLInputElement;
 
@@ -49,7 +43,7 @@ export default class SlRadioGroup extends LitElement {
   /** The selected value of the control. */
   @property({ reflect: true }) value = '';
 
-  /** The selected value of the control. */
+  /** The name assigned to the radio controls. */
   @property() name = 'option';
 
   /** Shows the fieldset and legend that surrounds the radio group. */
