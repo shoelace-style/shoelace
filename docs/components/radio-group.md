@@ -116,7 +116,7 @@ Use the `setCustomValidity()` method to set a custom validation message. This wi
   // Handle form submit
   form.addEventListener('submit', event => {
     event.preventDefault();
-    // alert('All fields are valid!');
+    alert('All fields are valid!');
   });
 </script>
 ```

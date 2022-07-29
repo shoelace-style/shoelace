@@ -61,6 +61,7 @@ export default class SlRadioGroup extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
+    this.preventInvalidSubmit();
   }
 
   setCustomValidity(message: string) {
@@ -101,6 +102,16 @@ export default class SlRadioGroup extends LitElement {
     if (!validity.valid) {
       this.showNativeErrorMessage();
     }
+  }
+
+  private preventInvalidSubmit() {
+    this.closest('form')?.addEventListener('submit', (e) => {
+      if(this.isInvalid) {
+        this.showNativeErrorMessage();
+        e.preventDefault();
+        e.stopImmediatePropagation();
+      }
+    })
   }
 
   private showNativeErrorMessage() {
