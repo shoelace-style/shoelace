@@ -3,6 +3,7 @@ import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import '../../components/button-group/button-group';
 import styles from './radio-group.styles';
+import type SlRadioButton from '../../components/radio-button/radio-button';
 import type SlRadio from '../../components/radio/radio';
 import type { CSSResultGroup } from 'lit';
 
@@ -50,19 +51,6 @@ export default class SlRadioGroup extends LitElement {
     ) as SlRadio[];
   }
 
-  handleRadioClick(event: MouseEvent) {
-    const target = event.target as HTMLElement;
-    const checkedRadio = target.closest(RADIO_CHILDREN.map(selector => `${selector}:not([disabled])`).join(','));
-
-    if (checkedRadio) {
-      const radios = this.getAllRadios();
-      radios.forEach(radio => {
-        radio.checked = radio === checkedRadio;
-        radio.input.tabIndex = radio === checkedRadio ? 0 : -1;
-      });
-    }
-  }
-
   handleKeyDown(event: KeyboardEvent) {
     if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
       const radios = this.getAllRadios().filter(radio => !radio.disabled);
@@ -89,6 +77,19 @@ export default class SlRadioGroup extends LitElement {
     }
   }
 
+  handleRadioChange(event: CustomEvent) {
+    const target = event.target as SlRadio | SlRadioButton;
+
+    if (RADIO_CHILDREN.includes(target.tagName.toLowerCase())) {
+      if (target.checked) {
+        this.getAllRadios().forEach(radio => {
+          radio.checked = radio === target;
+          radio.input.tabIndex = radio === target ? 0 : -1;
+        });
+      }
+    }
+  }
+
   handleSlotChange() {
     const radios = this.getAllRadios();
     const checkedRadio = radios.find(radio => radio.checked);
@@ -108,9 +109,7 @@ export default class SlRadioGroup extends LitElement {
   }
 
   render() {
-    const defaultSlot = html`
-      <slot @click=${this.handleRadioClick} @keydown=${this.handleKeyDown} @slotchange=${this.handleSlotChange}></slot>
-    `;
+    const defaultSlot = html` <slot @keydown=${this.handleKeyDown} @slotchange=${this.handleSlotChange}></slot> `;
 
     return html`
       <fieldset
@@ -120,6 +119,7 @@ export default class SlRadioGroup extends LitElement {
           'radio-group--has-fieldset': this.fieldset,
           'radio-group--required': this.required
         })}
+        @sl-change=${this.handleRadioChange}
       >
         <legend part="label" class="radio-group__label">
           <slot name="label">${this.label}</slot>
