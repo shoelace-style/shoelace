@@ -2,7 +2,6 @@ import { html, LitElement } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { emit } from 'src/internal/event';
-import { FormSubmitController } from 'src/internal/form';
 import { watch } from 'src/internal/watch';
 import '../../components/button-group/button-group';
 import styles from './radio-group.styles';
@@ -56,6 +55,7 @@ export default class SlRadioGroup extends LitElement {
   handleValueChange() {
     if (this.hasUpdated) {
       emit(this, 'sl-change');
+      this.updateCheckedRadio();
     }
   }
 
@@ -105,13 +105,13 @@ export default class SlRadioGroup extends LitElement {
   }
 
   private preventInvalidSubmit() {
-    this.closest('form')?.addEventListener('submit', (e) => {
-      if(this.isInvalid) {
+    this.closest('form')?.addEventListener('submit', e => {
+      if (this.isInvalid) {
         this.showNativeErrorMessage();
         e.preventDefault();
         e.stopImmediatePropagation();
       }
-    })
+    });
   }
 
   private showNativeErrorMessage() {
@@ -157,15 +157,15 @@ export default class SlRadioGroup extends LitElement {
     this.getAllRadios().forEach(radio => {
       radio.checked = false;
 
-      if(!this.hasButtonGroup) {
+      if (!this.hasButtonGroup) {
         radio.tabIndex = -1;
       }
     });
 
     this.value = radios[index].value;
     radios[index].checked = true;
-    
-    if(!this.hasButtonGroup) {
+
+    if (!this.hasButtonGroup) {
       radios[index].tabIndex = 0;
       radios[index].focus();
     } else {
@@ -186,7 +186,7 @@ export default class SlRadioGroup extends LitElement {
     this.hasButtonGroup = radios.some(radio => radio.tagName.toLowerCase() === 'sl-radio-button');
 
     if (!radios.some(radio => radio.checked)) {
-      if(this.hasButtonGroup) {
+      if (this.hasButtonGroup) {
         const buttonRadio = radios[0].shadowRoot!.querySelector('button')!;
         buttonRadio.tabIndex = 0;
       } else {
@@ -201,6 +201,11 @@ export default class SlRadioGroup extends LitElement {
         buttonGroup.disableRole = true;
       }
     }
+  }
+
+  private updateCheckedRadio() {
+    const radios = this.getAllRadios();
+    radios.forEach(radio => (radio.checked = radio.value === this.value));
   }
 
   render() {
