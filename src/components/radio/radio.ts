@@ -13,7 +13,6 @@ import type { CSSResultGroup } from 'lit';
  * @slot - The radio's label.
  *
  * @event sl-blur - Emitted when the control loses focus.
- * @event sl-change - Emitted when the control's checked state changes.
  * @event sl-focus - Emitted when the control gains focus.
  *
  * @csspart base - The component's internal wrapper.
@@ -27,9 +26,8 @@ export default class SlRadio extends LitElement {
 
   @query('.radio__input') input: HTMLInputElement;
 
-  @state() protected hasFocus = false;
-  
   @state() checked = false;
+  @state() protected hasFocus = false;
 
   /** The radio's name attribute. */
   @property({ reflect: true }) name: string;
@@ -74,9 +72,9 @@ export default class SlRadio extends LitElement {
   }
 
   private addEventListeners() {
-    this.addEventListener('blur', () => this.handleBlur())
-    this.addEventListener('click', () => this.handleClick())
-    this.addEventListener('focus', () => this.handleFocus())
+    this.addEventListener('blur', () => this.handleBlur());
+    this.addEventListener('click', () => this.handleClick());
+    this.addEventListener('focus', () => this.handleFocus());
   }
 
   private setInitialAttributes() {
@@ -109,7 +107,7 @@ export default class SlRadio extends LitElement {
         <span part="label" class="radio__label">
           <slot></slot>
         </span>
-      </label>
+      </span>
     `;
   }
 }
