@@ -35,6 +35,7 @@ export default class SlRadioGroup extends LitElement {
   @state() private hasButtonGroup = false;
   @state() private isInvalid = false;
   @state() private errorMessage = '';
+  @state() private customErrorMessage = '';
 
   /** The radio group label. Required for proper accessibility. Alternatively, you can use the label slot. */
   @property() label = '';
@@ -64,7 +65,8 @@ export default class SlRadioGroup extends LitElement {
     this.preventInvalidSubmit();
   }
 
-  setCustomValidity(message: string) {
+  setCustomValidity(message = '') {
+    this.customErrorMessage = message;
     this.errorMessage = message;
 
     if (!message) {
@@ -77,11 +79,13 @@ export default class SlRadioGroup extends LitElement {
   }
 
   get validity(): ValidityState {
-    const isValid = (this.value && this.required) || !this.required;
-
+    const hasMissingData = !((this.value && this.required) || !this.required);
+    const hasCustomError = this.customErrorMessage !== '';
+    console.log(hasMissingData);
+    
     return {
       badInput: false,
-      customError: false,
+      customError: hasCustomError,
       patternMismatch: false,
       rangeOverflow: false,
       rangeUnderflow: false,
@@ -89,14 +93,16 @@ export default class SlRadioGroup extends LitElement {
       tooLong: false,
       tooShort: false,
       typeMismatch: false,
-      valid: isValid,
-      valueMissing: !isValid
+      valid: hasMissingData || hasCustomError ? false : true,
+      valueMissing: !hasMissingData
     };
   }
 
   reportValidity() {
     const validity = this.validity;
-    this.errorMessage = validity.valid ? '' : this.input.validationMessage;
+    console.log(validity);
+    
+    this.errorMessage = this.customErrorMessage || validity.valid ? '' : this.input.validationMessage;
     this.isInvalid = !validity.valid;
 
     if (!validity.valid) {
@@ -106,8 +112,9 @@ export default class SlRadioGroup extends LitElement {
 
   private preventInvalidSubmit() {
     this.closest('form')?.addEventListener('submit', e => {
+      this.reportValidity();
+
       if (this.isInvalid) {
-        this.showNativeErrorMessage();
         e.preventDefault();
         e.stopImmediatePropagation();
       }

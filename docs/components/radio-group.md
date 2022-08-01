@@ -86,7 +86,60 @@ const App = () => (
 );
 ```
 
-### Custom Validity
+### Validation
+
+Setting the `required` attribute to make selecting a an option mandatory. If a value has not been selected, it will prevent the form from submitting and display an error message.
+
+```html preview
+<form class="validation">
+  <sl-radio-group label="Select an option" required>
+    <sl-radio name="a" value="1">Not me</sl-radio>
+    <sl-radio name="a" value="2">Me neither</sl-radio>
+    <sl-radio name="a" value="3">Choose me</sl-radio>
+  </sl-radio-group>
+  <br />
+  <sl-button type="submit" variant="primary">Submit</sl-button>
+</form>
+<script>
+  const form = document.querySelector('.validation');
+  // Handle form submit
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    alert('All fields are valid!');
+  });
+</script>
+```
+
+```jsx react
+import { SlButton, SlIcon, SlRadio, SlRadioGroup } from '@shoelace-style/shoelace/dist/react';
+const App = () => {
+  function handleSubmit(event) {
+    event.preventDefault();
+    alert('All fields are valid!');
+  }
+  return (
+    <form class="custom-validity" onSubmit={handleSubmit} required>
+      <SlRadioGroup label="Select an option" onSlChange={handleChange}>
+        <SlRadio name="a" value="1">
+          Not me
+        </SlRadio>
+        <SlRadio name="a" value="2">
+          Me neither
+        </SlRadio>
+        <SlRadio name="a" value="3">
+          Choose me
+        </SlRadio>
+      </SlRadioGroup>
+      <br />
+      <SlButton type="submit" variant="primary">
+        Submit
+      </SlButton>
+    </form>
+  );
+};
+```
+
+#### Custom Validity
 
 Use the `setCustomValidity()` method to set a custom validation message. This will prevent the form from submitting and make the browser display the error message you provide. To clear the error, call this function with an empty string.
 
@@ -125,10 +178,10 @@ Use the `setCustomValidity()` method to set a custom validation message. This wi
 import { useEffect, useRef } from 'react';
 import { SlButton, SlIcon, SlRadio, SlRadioGroup } from '@shoelace-style/shoelace/dist/react';
 const App = () => {
-  const radio = useRef(null);
+  const radioGroup = useRef(null);
   const errorMessage = 'You must choose this option';
-  function handleChange(event) {
-    radio.current.setCustomValidity(radio.current.checked ? '' : errorMessage);
+  function handleChange() {
+    radioGroup.current.setCustomValidity(radioGroup.current.value === '3' ? '' : errorMessage);
   }
   function handleSubmit(event) {
     event.preventDefault();
@@ -139,14 +192,14 @@ const App = () => {
   }, []);
   return (
     <form class="custom-validity" onSubmit={handleSubmit}>
-      <SlRadioGroup label="Select an option" value="1">
-        <SlRadio name="a" value="1" onSlChange={handleChange}>
+      <SlRadioGroup ref={radioGroup} label="Select an option" value="1" onSlChange={handleChange}>
+        <SlRadio name="a" value="1">
           Not me
         </SlRadio>
-        <SlRadio name="a" value="2" onSlChange={handleChange}>
+        <SlRadio name="a" value="2">
           Me neither
         </SlRadio>
-        <SlRadio ref={radio} name="a" value="3" onSlChange={handleChange}>
+        <SlRadio name="a" value="3">
           Choose me
         </SlRadio>
       </SlRadioGroup>
