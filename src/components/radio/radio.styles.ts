@@ -8,10 +8,6 @@ export default css`
     display: inline-block;
   }
 
-  :host(:focus-visible) {
-    outline: 0px;
-  }
-
   .radio {
     display: inline-flex;
     align-items: top;
@@ -84,7 +80,7 @@ export default css`
   }
 
   /* Checked + focus */
-  .radio.radio--focused .radio__control {
+  .radio.radio--checked:not(.radio--disabled) .radio__input:focus-visible ~ .radio__control {
     outline: var(--sl-focus-ring);
     outline-offset: var(--sl-focus-ring-offset);
   }
