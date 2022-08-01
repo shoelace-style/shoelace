@@ -20,8 +20,6 @@ const RADIO_CHILDREN = ['sl-radio', 'sl-radio-button'];
  * @slot - The default slot where radio controls are placed.
  * @slot label - The radio group label. Required for proper accessibility. Alternatively, you can use the label prop.
  *
- * @event sl-change - Emitted when the radio group's selected value changes.
- *
  * @csspart base - The component's internal wrapper.
  * @csspart label - The radio group's label.
  * @csspart button-group - The button group that wraps radio buttons.
@@ -83,7 +81,7 @@ export default class SlRadioGroup extends LitElement {
   get validity(): ValidityState {
     const hasMissingData = !((this.value && this.required) || !this.required);
     const hasCustomError = this.customErrorMessage !== '';
-
+    
     return {
       badInput: false,
       customError: hasCustomError,
@@ -101,7 +99,7 @@ export default class SlRadioGroup extends LitElement {
 
   reportValidity() {
     const validity = this.validity;
-
+    
     this.errorMessage = this.customErrorMessage || validity.valid ? '' : this.input.validationMessage;
     this.isInvalid = !validity.valid;
 
