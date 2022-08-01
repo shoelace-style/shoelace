@@ -204,6 +204,7 @@ export default class SlTreeItem extends LitElement {
 
   render() {
     const isRtl = this.localize.dir() === 'rtl';
+    const showExpandButton = !this.loading && (!this.isLeaf || this.lazy);
 
     return html`
       <div
@@ -231,19 +232,21 @@ export default class SlTreeItem extends LitElement {
           <div
             class=${classMap({
               'tree-item__expand-button': true,
-              'tree-item__expand-button--visible': !this.loading && (!this.isLeaf || this.lazy)
+              'tree-item__expand-button--visible': showExpandButton
             })}
             aria-hidden="true"
             @click="${this.handleToggleExpand}"
           >
             ${when(this.loading, () => html` <sl-spinner></sl-spinner> `)}
             ${when(
-              !this.loading && (!this.isLeaf || this.lazy),
+              showExpandButton,
               () => html`
-                <sl-icon
-                  library="system"
-                  name="${this.expanded ? 'chevron-down' : isRtl ? 'chevron-left' : 'chevron-right'}"
-                ></sl-icon>
+                <slot name="${this.expanded ? 'expanded-icon' : 'collapsed-icon'}">
+                  <sl-icon
+                    library="system"
+                    name="${this.expanded ? 'chevron-down' : isRtl ? 'chevron-left' : 'chevron-right'}"
+                  ></sl-icon>
+                </slot>
               `
             )}
           </div>

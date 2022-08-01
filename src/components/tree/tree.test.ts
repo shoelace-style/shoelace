@@ -15,7 +15,11 @@ describe('<sl-tree>', () => {
         <sl-tree-item>
           Parent Node
           <sl-tree-item>Child Node 1</sl-tree-item>
-          <sl-tree-item>Child Node 2</sl-tree-item>
+          <sl-tree-item>
+            Child Node 2
+            <sl-tree-item>Child Node 2 - 1</sl-tree-item>
+            <sl-tree-item>Child Node 2 - 2</sl-tree-item>
+          </sl-tree-item>
         </sl-tree-item>
         <sl-tree-item>Node 3</sl-tree-item>
       </sl-tree>
@@ -30,6 +34,52 @@ describe('<sl-tree>', () => {
 
   it('should pass accessibility tests', async () => {
     await expect(el).to.be.accessible();
+  });
+
+  it('should not focus collapsed nodes', async () => {
+    // Arrange
+    const parentNode = el.children[2] as SlTreeItem;
+    const childNode = parentNode.children[1] as SlTreeItem;
+    childNode.expanded = true;
+    parentNode.expanded = false;
+
+    await el.updateComplete;
+
+    // Act
+    const focusableItems = el.getFocusableItems();
+
+    // Assert
+    expect(focusableItems).to.have.lengthOf(4);
+    expect(focusableItems).not.to.include.all.members([childNode, ...childNode.children]);
+    expect(focusableItems).not.to.include.all.members([...parentNode.children]);
+  });
+
+  describe('when a custom expanded/collapsed icon is provided', () => {
+    beforeEach(async () => {
+      el = await fixture(html`
+        <sl-tree>
+          <div slot="expanded-icon"></div>
+          <div slot="collapsed-icon"></div>
+
+          <sl-tree-item>Node 1</sl-tree-item>
+          <sl-tree-item>Node 2</sl-tree-item>
+        </sl-tree>
+      `);
+    });
+
+    it('should append a clone of the icon in the proper slot of the tree item', async () => {
+      // Arrange
+      await el.updateComplete;
+
+      // Act
+      const treeItems = [...el.querySelectorAll('sl-tree-item')];
+
+      // Assert
+      treeItems.forEach(treeItem => {
+        expect(treeItem.querySelector('div[slot="expanded-icon"]')).to.be.ok;
+        expect(treeItem.querySelector('div[slot="collapsed-icon"]')).to.be.ok;
+      });
+    });
   });
 
   describe('Keyboard navigation', () => {
@@ -275,7 +325,7 @@ describe('<sl-tree>', () => {
           await sendKeys({ press: 'Enter' });
 
           // Assert
-          expect(el.selectedItems.length).to.eq(4);
+          expect(el.selectedItems.length).to.eq(6);
         });
       });
     });

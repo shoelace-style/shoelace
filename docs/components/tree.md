@@ -289,6 +289,81 @@ const App = () => {
 };
 ```
 
+### Custom expanded/collapsed icons
+
+Use the `expanded-icon` or `collapsed-icon` slots to change the expanded and collapsed tree element icons respectively.
+
+```html preview
+<sl-tree selection="leaf">
+  <sl-icon name="plus-square" slot="collapsed-icon"></sl-icon>
+  <sl-icon name="dash-square" slot="expanded-icon"></sl-icon>
+
+  <sl-tree-item>
+    Deciduous
+    <sl-tree-item>Birch</sl-tree-item>
+    <sl-tree-item>
+      Maple
+      <sl-tree-item>Field maple</sl-tree-item>
+      <sl-tree-item>Red maple</sl-tree-item>
+      <sl-tree-item>Sugar maple</sl-tree-item>
+    </sl-tree-item>
+    <sl-tree-item>Oak</sl-tree-item>
+  </sl-tree-item>
+
+  <sl-tree-item>
+    Coniferous
+    <sl-tree-item>Cedar</sl-tree-item>
+    <sl-tree-item>Pine</sl-tree-item>
+    <sl-tree-item>Spruce</sl-tree-item>
+  </sl-tree-item>
+
+  <sl-tree-item>
+    Non-trees
+    <sl-tree-item>Bamboo</sl-tree-item>
+    <sl-tree-item>Cactus</sl-tree-item>
+    <sl-tree-item>Fern</sl-tree-item>
+  </sl-tree-item>
+</sl-tree>
+```
+
+<!-- prettier-ignore -->
+```jsx react
+import { SlTree, SlTreeItem } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlTree>
+    <SlIcon name="plus-square" slot="collapsed-icon"></SlIcon>
+    <SlIcon name="dash-square" slot="expanded-icon"></SlIcon>
+
+    <SlTreeItem>
+      Deciduous
+      <SlTreeItem>Birch</SlTreeItem>
+      <SlTreeItem>
+        Maple
+        <SlTreeItem>Field maple</SlTreeItem>
+        <SlTreeItem>Red maple</SlTreeItem>
+        <SlTreeItem>Sugar maple</SlTreeItem>
+      </SlTreeItem>
+      <SlTreeItem>Oak</SlTreeItem>
+    </SlTreeItem>
+
+    <SlTreeItem>
+      Coniferous
+      <SlTreeItem>Cedar</SlTreeItem>
+      <SlTreeItem>Pine</SlTreeItem>
+      <SlTreeItem>Spruce</SlTreeItem>
+    </SlTreeItem>
+
+    <SlTreeItem>
+      Non-trees
+      <SlTreeItem>Bamboo</SlTreeItem>
+      <SlTreeItem>Cactus</SlTreeItem>
+      <SlTreeItem>Fern</SlTreeItem>
+    </SlTreeItem>
+  </SlTree>
+);
+```
+
 ### With Icons
 
 Decorative icons can be used before labels to provide hints for each node.
@@ -340,19 +415,6 @@ Decorative icons can be used before labels to provide hints for each node.
 import { SlIcon, SlTree, SlTreeItem } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => {
-  const [childItems, setChildItems] = useState([]);
-  const [lazy, setLazy] = useState(true);
-
-  const handleLazyLoad = () => {
-    // Simulate asynchronous loading
-    setTimeout(() => {
-      setChildItems(['Overview', 'Installation', 'Usage']);
-
-      // Disable lazy mode once the content has been loaded
-      setLazy(false);
-    }, 1000);
-  };
-
   return (
     <SlTree class="tree-with-icons">
       <SlTreeItem expanded>

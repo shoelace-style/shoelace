@@ -14,7 +14,7 @@ function syncCheckboxes(changedTreeItem: SlTreeItem) {
 
     if (isTreeItem(parentItem)) {
       const children = parentItem.getChildrenItems({ includeDisabled: false });
-      const allChecked = children.every(item => item.selected);
+      const allChecked = !!children.length && children.every(item => item.selected);
       const allUnchecked = children.every(item => !item.selected && !item.indeterminate);
 
       parentItem.selected = allChecked;
@@ -56,6 +56,8 @@ export default class SlTree extends LitElement {
   static styles = styles;
 
   @query('slot') defaultSlot: HTMLSlotElement;
+  @query('slot[name=expanded-icon]') expandedIconSlot: HTMLSlotElement;
+  @query('slot[name=collapsed-icon]') collapsedIconSlot: HTMLSlotElement;
 
   /** Specifies the selection behavior of the Tree */
   @property() selection: 'single' | 'multiple' | 'leaf' = 'single';
@@ -89,7 +91,48 @@ export default class SlTree extends LitElement {
     this.removeEventListener('focusout', this.handleFocusOut);
   }
 
+  // Generates a clone of the expand icon element to use for each tree item
+  private getExpandButtonIcon(status: 'expanded' | 'collapsed') {
+    const slot = status === 'expanded' ? this.expandedIconSlot : this.collapsedIconSlot;
+    const icon = slot.assignedElements({ flatten: true })[0] as HTMLElement;
+
+    // Clone it, remove ids, and slot it
+    if (icon) {
+      const clone = icon.cloneNode(true) as HTMLElement;
+      [clone, ...clone.querySelectorAll('[id]')].forEach(el => el.removeAttribute('id'));
+      clone.setAttribute('data-default', '');
+      clone.slot = `${status}-icon`;
+
+      return clone;
+    }
+
+    return null;
+  }
+
+  // Initializes new items by setting the `selectable` property and the expanded/collapsed icons if any
+  private initTreeItem = (item: SlTreeItem) => {
+    item.selectable = this.selection === 'multiple';
+
+    ['expanded', 'collapsed']
+      .filter(status => !!this.querySelector(`[slot="${status}-icon"]`))
+      .forEach((status: 'expanded' | 'collapsed') => {
+        const existingIcon = item.querySelector(`[slot="${status}-icon"]`);
+
+        if (existingIcon !== null && !existingIcon.hasAttribute('data-default')) {
+          // The user provided a custom icon, leave it alone
+        } else if (existingIcon === null) {
+          // No separator exists, add one
+          item.append(this.getExpandButtonIcon(status)!);
+        } else if (existingIcon.hasAttribute('data-default')) {
+          // A default separator exists, replace it
+          existingIcon.replaceWith(this.getExpandButtonIcon(status)!);
+        }
+      });
+  };
+
   protected firstUpdated(): void {
+    [...this.treeItems].forEach(this.initTreeItem);
+
     this.mutationObserver.observe(this, { childList: true, subtree: true });
   }
 
@@ -98,14 +141,11 @@ export default class SlTree extends LitElement {
       const addedNodes: SlTreeItem[] = [...mutation.addedNodes].filter(isTreeItem) as SlTreeItem[];
       const removedNodes = [...mutation.removedNodes].filter(isTreeItem) as SlTreeItem[];
 
-      for (const item of addedNodes) {
-        item.selectable = this.selection === 'multiple';
-        syncCheckboxes(item);
-      }
+      addedNodes.forEach(this.initTreeItem);
 
-      // If the focused item has been removed form the DOM, move the focus on the first node
+      // If the focused item has been removed form the DOM, move the focus to the first focusable item
       if (removedNodes.includes(this.lastFocusedItem)) {
-        this.focusItem(this.treeItems[0]);
+        this.focusItem(this.getFocusableItems()[0]);
       }
     }
   };
@@ -281,6 +321,8 @@ export default class SlTree extends LitElement {
     return html`
       <div part="base" class="tree" @click="${this.handleClick}" @keydown="${this.handleKeyDown}">
         <slot></slot>
+        <slot name="expanded-icon" hidden aria-hidden="true"> </slot>
+        <slot name="collapsed-icon" hidden aria-hidden="true"> </slot>
       </div>
     `;
   }
