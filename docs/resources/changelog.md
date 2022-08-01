@@ -17,7 +17,6 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Changed the type of component styles from `CSSResult` to `CSSResultGroup` [#828](https://github.com/shoelace-style/shoelace/issues/828)
 - Fixed a bug in `<sl-color-picker>` where using <kbd>Left<kbd> and <kbd>Right</kbd> would select the wrong color
 - Fixed a bug in `<sl-dropdown>` that caused the position to be incorrect on the first show when using `hoist` [#843](https://github.com/shoelace-style/shoelace/issues/843)
-- Fixed a bug in `<sl-radio-group>` where setting the `checked` property programmatically would allow multiple radios or radio buttons to be checked
 - Fixed a bug in `<sl-tab-group>` where the divider was on the wrong side when using `placement="end"`
 - Fixed a bug in `<sl-tab-group>` that caused nested tab groups to scroll when using `placement="start|end"` [#815](https://github.com/shoelace-style/shoelace/issues/815)
 - Fixed a bug in `<sl-tooltip>` that caused the target to be lost after a slot change [#831](https://github.com/shoelace-style/shoelace/pull/831)

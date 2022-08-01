@@ -89,9 +89,8 @@ describe('<sl-radio-button>', () => {
 
       form.addEventListener('submit', submitHandler);
       radio.click();
-      await radio.updateComplete;
-
       button.click();
+
       await waitUntil(() => submitHandler.calledOnce);
 
       expect(formData!.get('a')).to.equal('2');
