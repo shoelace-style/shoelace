@@ -8,7 +8,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
-## Next
+## 2.0.0-beta.79
 
 - 🚨 BREAKING: improved accessibility of `<sl-radio-group>`, `<sl-radio>`, and `<sl-radio-button>` in screen readers
   - Removed `checked` and `invalid` attributes from `<sl-radio>` and `<sl-radio-button>` (use `value` on `<sl-radio-group>` to set the checked state)
