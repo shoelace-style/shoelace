@@ -81,7 +81,6 @@ export default class SlRadioGroup extends LitElement {
   get validity(): ValidityState {
     const hasMissingData = !((this.value && this.required) || !this.required);
     const hasCustomError = this.customErrorMessage !== '';
-    console.log(hasMissingData);
     
     return {
       badInput: false,
@@ -100,7 +99,6 @@ export default class SlRadioGroup extends LitElement {
 
   reportValidity() {
     const validity = this.validity;
-    console.log(validity);
     
     this.errorMessage = this.customErrorMessage || validity.valid ? '' : this.input.validationMessage;
     this.isInvalid = !validity.valid;
