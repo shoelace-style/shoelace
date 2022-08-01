@@ -85,7 +85,7 @@ export default css`
     background-color: var(--sl-color-neutral-100);
   }
 
-  :host(:not([aria-disabled='true']):focus-visible) .tree-item__item {
+  :host(:focus-visible) .tree-item__item {
     outline: var(--sl-focus-ring);
     outline-offset: var(--sl-focus-ring-offset);
     z-index: 2;
