@@ -395,7 +395,7 @@ export default class SlDropdown extends LitElement {
 
   private startPositioner() {
     this.stopPositioner();
-    requestAnimationFrame(() =>  this.updatePositioner());
+    requestAnimationFrame(() => this.updatePositioner());
     this.positionerCleanup = autoUpdate(this.trigger, this.positioner, this.updatePositioner.bind(this));
   }
 
