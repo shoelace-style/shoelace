@@ -118,14 +118,14 @@ export default class SlTree extends LitElement {
       .forEach((status: 'expanded' | 'collapsed') => {
         const existingIcon = item.querySelector(`[slot="${status}-icon"]`);
 
-        if (existingIcon !== null && !existingIcon.hasAttribute('data-default')) {
-          // The user provided a custom icon, leave it alone
-        } else if (existingIcon === null) {
+        if (existingIcon === null) {
           // No separator exists, add one
           item.append(this.getExpandButtonIcon(status)!);
         } else if (existingIcon.hasAttribute('data-default')) {
           // A default separator exists, replace it
           existingIcon.replaceWith(this.getExpandButtonIcon(status)!);
+        } else {
+          // The user provided a custom icon, leave it alone
         }
       });
   };
