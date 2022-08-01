@@ -88,7 +88,7 @@ const App = () => (
 
 ### Validation
 
-Setting the `required` attribute to make selecting a an option mandatory. If a value has not been selected, it will prevent the form from submitting and display an error message.
+Setting the `required` attribute to make selecting an option mandatory. If a value has not been selected, it will prevent the form from submitting and display an error message.
 
 ```html preview
 <form class="validation">
