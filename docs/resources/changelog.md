@@ -10,11 +10,6 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## 2.0.0-beta.79
 
-- 🚨 BREAKING: improved accessibility of `<sl-radio-group>`, `<sl-radio>`, and `<sl-radio-button>` in screen readers
-  - Removed `checked` and `invalid` attributes from `<sl-radio>` and `<sl-radio-button>` (use `value` on `<sl-radio-group>` to set the checked state)
-  - Removed `click()`, `focus()`, and `blur()` methods from the docs for `<sl-radio>` and `<sl-radio-button>` (you can still use the methods like any other HTML element)
-  - Removed `reportValidity()` and `setCustomValidity()` from `<sl-radio>` and `<sl-radio-button>` (use them on `<sl-radio-group>` instead)
-  - Moved the `sl-change` event from `<sl-radio>` and `<sl-radio-button>` to `<sl-radio-group>`
 - Added experimental `<sl-tree>` and `<sl-tree-item>` components [#823](https://github.com/shoelace-style/shoelace/pull/823)
 - Added `--indicator-width` custom property to `<sl-progress-ring>` [#837](https://github.com/shoelace-style/shoelace/issues/837)
 - Added Swedish translation [#838](https://github.com/shoelace-style/shoelace/pull/838)
