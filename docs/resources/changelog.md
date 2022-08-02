@@ -15,7 +15,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Added Swedish translation [#838](https://github.com/shoelace-style/shoelace/pull/838)
 - Added support for `step="any"` for `<sl-input type="number">` [#839](https://github.com/shoelace-style/shoelace/issues/839)
 - Changed the type of component styles from `CSSResult` to `CSSResultGroup` [#828](https://github.com/shoelace-style/shoelace/issues/828)
-- Fixed a bug in `<sl-color-picker>` where using <kbd>Left<kbd> and <kbd>Right</kbd> would select the wrong color
+- Fixed a bug in `<sl-color-picker>` where using <kbd>Left</kbd> and <kbd>Right</kbd> would select the wrong color
 - Fixed a bug in `<sl-dropdown>` that caused the position to be incorrect on the first show when using `hoist` [#843](https://github.com/shoelace-style/shoelace/issues/843)
 - Fixed a bug in `<sl-tab-group>` where the divider was on the wrong side when using `placement="end"`
 - Fixed a bug in `<sl-tab-group>` that caused nested tab groups to scroll when using `placement="start|end"` [#815](https://github.com/shoelace-style/shoelace/issues/815)
