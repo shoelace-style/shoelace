@@ -93,9 +93,9 @@ Setting the `required` attribute to make selecting an option mandatory. If a val
 ```html preview
 <form class="validation">
   <sl-radio-group label="Select an option" required>
-    <sl-radio name="a" value="1">Not me</sl-radio>
-    <sl-radio name="a" value="2">Me neither</sl-radio>
-    <sl-radio name="a" value="3">Choose me</sl-radio>
+    <sl-radio name="a" value="1">Option 1</sl-radio>
+    <sl-radio name="a" value="2">Option 2</sl-radio>
+    <sl-radio name="a" value="3">Option 3</sl-radio>
   </sl-radio-group>
   <br />
   <sl-button type="submit" variant="primary">Submit</sl-button>
@@ -121,16 +121,16 @@ const App = () => {
   }
 
   return (
-    <form class="custom-validity" onSubmit={handleSubmit} required>
-      <SlRadioGroup label="Select an option" onSlChange={handleChange}>
+    <form class="custom-validity" onSubmit={handleSubmit}>
+      <SlRadioGroup label="Select an option" onSlChange={handleChange} required>
         <SlRadio name="a" value="1">
-          Not me
+          Option 1
         </SlRadio>
         <SlRadio name="a" value="2">
-          Me neither
+          Option 2
         </SlRadio>
         <SlRadio name="a" value="3">
-          Choose me
+          Option 3
         </SlRadio>
       </SlRadioGroup>
       <br />
