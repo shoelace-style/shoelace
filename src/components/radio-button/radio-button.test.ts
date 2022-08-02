@@ -15,7 +15,7 @@ describe('<sl-radio-button>', () => {
 
     radio2.click();
     await Promise.all([radio1.updateComplete, radio2.updateComplete]);
-    
+
     expect(radio1.checked).to.be.true;
     expect(radio2.checked).to.be.false;
   });

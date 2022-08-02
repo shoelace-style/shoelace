@@ -12,7 +12,7 @@ describe('<sl-radio>', () => {
     `);
     const radio1 = radioGroup.querySelector<SlRadio>('#radio-1')!;
     const radio2 = radioGroup.querySelector<SlRadio>('#radio-2')!;
-    
+
     radio2.click();
     await Promise.all([radio1.updateComplete, radio2.updateComplete]);
 

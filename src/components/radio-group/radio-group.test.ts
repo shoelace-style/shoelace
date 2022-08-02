@@ -123,7 +123,7 @@ describe('when submitting a form', () => {
     const radio = form.querySelectorAll('sl-radio')[1]!;
     const submitHandler = sinon.spy((event: SubmitEvent) => {
       formData = new FormData(form);
-      
+
       event.preventDefault();
     });
     let formData: FormData;
@@ -132,7 +132,7 @@ describe('when submitting a form', () => {
     radio.click();
     button.click();
     await waitUntil(() => submitHandler.calledOnce);
-    
+
     expect(formData!.get('a')).to.equal('2');
   });
 });
