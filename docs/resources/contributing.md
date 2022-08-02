@@ -254,6 +254,10 @@ export default class SlExample {
 }
 ```
 
+### Focusing on Disabled Items
+
+When an item within a keyboard navigable set is disabled (e.g. tabs, trees, menu items, etc.), the disabled item _should not_ receive focus via keyboard, click, or tap. It should be skipped just like in operating system menus and in native HTML form controls. There is no exception to this. If a particular item requires focus for assistive devices to provide a good user experience, the item should not be disabled and, upon activation, it should inform the user why the respective action cannot be completed.
+
 ### When to use a property vs. a CSS custom property
 
 When designing a component's API, standard properties are generally used to change the _behavior_ of a component, whereas CSS custom properties ("CSS variables") are used to change the _appearance_ of a component. Remember that properties can't respond to media queries, but CSS variables can.

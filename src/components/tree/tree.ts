@@ -202,6 +202,9 @@ export default class SlTree extends LitElement {
   getFocusableItems() {
     const collapsedItems = new Set();
     return [...this.treeItems].filter(item => {
+      // Exclude disabled elements
+      if (item.disabled) return false;
+
       // Exclude those whose parent is collapsed or loading
       const parent: SlTreeItem | null | undefined = item.parentElement?.closest('[role=treeitem]');
       if (parent && (!parent.expanded || parent.loading || collapsedItems.has(parent))) {
