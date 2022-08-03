@@ -13,14 +13,12 @@ import type { CSSResultGroup } from 'lit';
  * @since 2.0
  * @status stable
  *
- * @slot - The radio's label.
- *
- * @event sl-blur - Emitted when the button loses focus.
- * @event sl-focus - Emitted when the button gains focus.
- *
  * @slot - The button's label.
  * @slot prefix - Used to prepend an icon or similar element to the button.
  * @slot suffix - Used to append an icon or similar element to the button.
+ *
+ * @event sl-blur - Emitted when the button loses focus.
+ * @event sl-focus - Emitted when the button gains focus.
  *
  * @csspart base - The component's internal wrapper.
  * @csspart button - The internal button element.
@@ -39,9 +37,6 @@ export default class SlRadioButton extends LitElement {
 
   @state() protected hasFocus = false;
   @state() checked = false;
-
-  /** The radio's name attribute. */
-  @property({ reflect: true }) name: string;
 
   /** The radio's value attribute. */
   @property() value: string;
@@ -109,7 +104,6 @@ export default class SlRadioButton extends LitElement {
           })}
           aria-disabled=${this.disabled}
           type="button"
-          name=${ifDefined(this.name)}
           value=${ifDefined(this.value)}
           tabindex="${this.checked ? '0' : '-1'}"
           @blur=${this.handleBlur}

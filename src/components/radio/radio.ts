@@ -27,9 +27,6 @@ export default class SlRadio extends LitElement {
   @state() checked = false;
   @state() protected hasFocus = false;
 
-  /** The radio's name attribute. */
-  @property({ reflect: true }) name: string;
-
   /** The radio's value attribute. */
   @property() value: string;
 

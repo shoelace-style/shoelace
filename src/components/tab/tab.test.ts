@@ -65,7 +65,7 @@ describe('<sl-tab>', () => {
   });
 
   describe('blur', () => {
-    it('shoud blur inner div', async () => {
+    it('should blur inner div', async () => {
       const el = await fixture<SlTab>(html` <sl-tab>Test</sl-tab> `);
 
       el.focus();

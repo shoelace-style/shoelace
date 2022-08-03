@@ -10,6 +10,19 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
+This release breaks radio buttons, which is something that needed to happen to solve a longstanding accessibility issue where screen readers announced an incorrect number of radios, e.g. "1 of 1" instead of "1 of 3." Many attempts to solve this without breaking the existing API were made, but none worked across the board. The new implementation upgrades `<sl-radio-group>` to serve as the "form control" while `<sl-radio>` and `<sl-radio-button>` serve as options within the form control.
+
+To upgrade to this version, you will need to rework your radio controls by moving `name` up to the radio group. And instead of setting `checked` to select a specific radio, you can set `value` on the radio group and the checked item will update automatically.
+
+- 🚨 BREAKING: improved accessibility of `<sl-radio-group>` and `<sl-radio>` so they announce properly in all screen readers
+  - Added the `name` attribute to `<sl-radio-group>` and removed it from `<sl-radio>` and `<sl-radio-button>`
+  - Added the `value` attribute to `<sl-radio-group>` (use this to control which radio is checked)
+  - Added the `sl-change` event to `sl-radio-group`
+  - Added `setCustomValidity()` and `reportValidity()` to `<sl-radio-group>`
+  - Removed the `checked` attribute from `<sl-radio>` and `<sl-radio-button>` (use the radio group's `value` attribute instead)
+  - Removed the `sl-change` event from `<sl-radio>` and `<sl-radio-button>` (listen for it on the radio group instead)
+  - Removed the `invalid` attribute from `<sl-radio>` and `<sl-radio-button>`
+  - Removed `setCustomValidity()` and `reportValidity()` from `<sl-radio>` and `<sl-radio-button>` (now available on the radio group)
 - Revert disabled focus behavior in `<sl-tag-group>`, `<sl-menu>`, and `<sl-tree>` to be consistent with native form controls and menus [#845](https://github.com/shoelace-style/shoelace/issues/845)
 
 ## 2.0.0-beta.79

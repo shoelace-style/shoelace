@@ -40,7 +40,6 @@ export default class SlRadioGroup extends LitElement {
   @query('.radio-group__validation-input') input: HTMLInputElement;
 
   @state() private hasButtonGroup = false;
-  @state() private isInvalid = false;
   @state() private errorMessage = '';
   @state() private customErrorMessage = '';
   @state() private defaultValue = '';
@@ -56,6 +55,12 @@ export default class SlRadioGroup extends LitElement {
 
   /** The name assigned to the radio controls. */
   @property() name = 'option';
+
+  /**
+   * This will be true when the control is in an invalid state. Validity is determined by props such as `type`,
+   * `required`, `minlength`, `maxlength`, and `pattern` using the browser's constraint validation API.
+   */
+  @property({ type: Boolean, reflect: true }) invalid = false;
 
   /** Shows the fieldset and legend that surrounds the radio group. */
   @property({ type: Boolean, attribute: 'fieldset', reflect: true }) fieldset = false;
@@ -76,16 +81,16 @@ export default class SlRadioGroup extends LitElement {
     this.defaultValue = this.value;
   }
 
+  /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
   setCustomValidity(message = '') {
     this.customErrorMessage = message;
     this.errorMessage = message;
 
     if (!message) {
-      this.isInvalid = false;
+      this.invalid = false;
     } else {
-      this.isInvalid = true;
+      this.invalid = true;
       this.input.setCustomValidity(message);
-      this.showNativeErrorMessage();
     }
   }
 
@@ -108,17 +113,18 @@ export default class SlRadioGroup extends LitElement {
     };
   }
 
+  /** Checks for validity and shows the browser's validation message if the control is invalid. */
   reportValidity(): boolean {
     const validity = this.validity;
 
     this.errorMessage = this.customErrorMessage || validity.valid ? '' : this.input.validationMessage;
-    this.isInvalid = !validity.valid;
+    this.invalid = !validity.valid;
 
     if (!validity.valid) {
       this.showNativeErrorMessage();
     }
 
-    return !this.isInvalid;
+    return !this.invalid;
   }
 
   private showNativeErrorMessage() {
@@ -185,10 +191,7 @@ export default class SlRadioGroup extends LitElement {
   private handleSlotChange() {
     const radios = this.getAllRadios();
 
-    radios.forEach(radio => {
-      radio.name = this.name;
-      radio.checked = radio.value === this.value;
-    });
+    radios.forEach(radio => (radio.checked = radio.value === this.value));
 
     this.hasButtonGroup = radios.some(radio => radio.tagName.toLowerCase() === 'sl-radio-button');
 
@@ -230,7 +233,7 @@ export default class SlRadioGroup extends LitElement {
         part="base"
         role="radiogroup"
         aria-errormessage="radio-error-message"
-        aria-invalid="${this.isInvalid}"
+        aria-invalid="${this.invalid}"
         class=${classMap({
           'radio-group': true,
           'radio-group--has-fieldset': this.fieldset,
