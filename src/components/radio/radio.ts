@@ -1,5 +1,5 @@
 import { html, LitElement } from 'lit';
-import { customElement, property, query, state } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { emit } from 'src/internal/event';
 import { watch } from '../../internal/watch';
@@ -23,8 +23,6 @@ import type { CSSResultGroup } from 'lit';
 @customElement('sl-radio')
 export default class SlRadio extends LitElement {
   static styles: CSSResultGroup = styles;
-
-  @query('.radio__input') input: HTMLInputElement;
 
   @state() checked = false;
   @state() protected hasFocus = false;
