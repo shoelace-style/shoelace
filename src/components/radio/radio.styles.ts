@@ -64,12 +64,6 @@ export default css`
     background-color: var(--sl-input-background-color-hover);
   }
 
-  /* Focus */
-  .radio:not(.radio--checked):not(.radio--disabled) .radio__input:focus-visible ~ .radio__control {
-    outline: var(--sl-focus-ring);
-    outline-offset: var(--sl-focus-ring-offset);
-  }
-
   /* Checked */
   .radio--checked .radio__control {
     color: var(--sl-color-neutral-0);
@@ -84,7 +78,7 @@ export default css`
   }
 
   /* Checked + focus */
-  .radio.radio--focused .radio__control {
+  :host(:focus-visible) .radio__control {
     outline: var(--sl-focus-ring);
     outline-offset: var(--sl-focus-ring-offset);
   }
