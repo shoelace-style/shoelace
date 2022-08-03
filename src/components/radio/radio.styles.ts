@@ -5,7 +5,7 @@ export default css`
   ${componentStyles}
 
   :host {
-    display: inline-block;
+    display: block;
   }
 
   :host(:focus-visible) {

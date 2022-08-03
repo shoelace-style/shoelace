@@ -24,7 +24,6 @@ export default css`
   }
 
   ::slotted(sl-radio:not(:last-of-type)) {
-    display: block;
     margin-bottom: var(--sl-spacing-2x-small);
   }
 
