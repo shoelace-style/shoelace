@@ -22,7 +22,7 @@ import type { CSSResultGroup } from 'lit';
  * @dependency sl-icon-button
  *
  * @slot - The drawer's content.
- * @slot label - The drawer's label. Alternatively, you can use the label prop.
+ * @slot label - The drawer's label. Alternatively, you can use the `label` attribute.
  * @slot footer - The drawer's footer, usually one or more buttons representing various options.
  *
  * @event sl-show - Emitted when the drawer opens.
@@ -82,7 +82,8 @@ export default class SlDrawer extends LitElement {
 
   /**
    * The drawer's label as displayed in the header. You should always include a relevant label even when using
-   * `no-header`, as it is required for proper accessibility.
+   * `no-header`, as it is required for proper accessibility. If you need to display HTML, you can use the `label` slot
+   * instead.
    */
   @property({ reflect: true }) label = '';
 

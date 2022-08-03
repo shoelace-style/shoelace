@@ -15,8 +15,8 @@ import type { CSSResultGroup } from 'lit';
  * @since 2.0
  * @status stable
  *
- * @slot label - The textarea's label. Alternatively, you can use the label prop.
- * @slot help-text - Help text that describes how to use the input.
+ * @slot label - The textarea's label. Alternatively, you can use the `label` attribute.
+ * @slot help-text - Help text that describes how to use the input. Alternatively, you can use the `help-text` attribute.
  *
  * @event sl-change - Emitted when an alteration to the control's value is committed by the user.
  * @event sl-input - Emitted when the control receives input and its value changes.
@@ -55,10 +55,10 @@ export default class SlTextarea extends LitElement {
   /** Draws a filled textarea. */
   @property({ type: Boolean, reflect: true }) filled = false;
 
-  /** The textarea's label. Alternatively, you can use the label slot. */
+  /** The textarea's label. If you need to display HTML, you can use the `label` slot instead. */
   @property() label = '';
 
-  /** The textarea's help text. Alternatively, you can use the help-text slot. */
+  /** The textarea's help text. If you need to display HTML, you can use the `help-text` slot instead. */
   @property({ attribute: 'help-text' }) helpText = '';
 
   /** The textarea's placeholder text. */

@@ -17,7 +17,7 @@ import type { CSSResultGroup } from 'lit';
  * @dependency sl-icon
  *
  * @slot - The details' content.
- * @slot summary - The details' summary. Alternatively, you can use the summary prop.
+ * @slot summary - The details' summary. Alternatively, you can use the `summary` attribute.
  *
  * @event sl-show - Emitted when the details opens.
  * @event sl-after-show - Emitted after the details opens and all animations are complete.

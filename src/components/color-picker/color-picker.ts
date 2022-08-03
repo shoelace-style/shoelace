@@ -45,7 +45,7 @@ declare const EyeDropper: EyeDropperConstructor;
  * @dependency sl-input
  * @dependency sl-visually-hidden
  *
- * @slot label - The color picker's label. Alternatively, you can use the label prop.
+ * @slot label - The color picker's label. Alternatively, you can use the `label` attribute.
  *
  * @event sl-change Emitted when the color picker's value changes.
  *
@@ -111,7 +111,10 @@ export default class SlColorPicker extends LitElement {
   @defaultValue()
   defaultValue = '';
 
-  /* The color picker's label. This will not be displayed, but it will be announced by assistive devices. */
+  /**
+   * The color picker's label. This will not be displayed, but it will be announced by assistive devices. If you need to
+   * display HTML, you can use the `label` slot` instead.
+   */
   @property() label = '';
 
   /**

@@ -16,8 +16,8 @@ import type { CSSResultGroup } from 'lit';
  * @since 2.0
  * @status stable
  *
- * @slot label - The input's label. Alternatively, you can use the label prop.
- * @slot help-text - Help text that describes how to use the input. Alternatively, you can use the help-text prop.
+ * @slot label - The input's label. Alternatively, you can use the `label` attribute.
+ * @slot help-text - Help text that describes how to use the input. Alternatively, you can use the `help-text` attribute.
  *
  * @event sl-change - Emitted when the control's value changes.
  * @event sl-blur - Emitted when the control loses focus.
@@ -60,10 +60,10 @@ export default class SlRange extends LitElement {
   /** The input's value attribute. */
   @property({ type: Number }) value = 0;
 
-  /** The range's label. Alternatively, you can use the label slot. */
+  /** The range's label. If you need to display HTML, you can use the `label` slot instead. */
   @property() label = '';
 
-  /** The range's help text. Alternatively, you can use the help-text slot. */
+  /** The range's help text. If you need to display HTML, you can use the help-text slot instead. */
   @property({ attribute: 'help-text' }) helpText = '';
 
   /** Disables the input. */

@@ -15,7 +15,7 @@ import type { CSSResultGroup } from 'lit';
  * @status stable
  *
  * @slot - The tooltip's target element. Only the first element will be used as the target.
- * @slot content - The tooltip's content. Alternatively, you can use the content prop.
+ * @slot content - The tooltip's content. Alternatively, you can use the `content` attribute.
  *
  * @event sl-show - Emitted when the tooltip begins to show.
  * @event sl-after-show - Emitted after the tooltip has shown and all animations are complete.
@@ -44,7 +44,7 @@ export default class SlTooltip extends LitElement {
   private readonly localize = new LocalizeController(this);
   private positionerCleanup: ReturnType<typeof autoUpdate> | undefined;
 
-  /** The tooltip's content. Alternatively, you can use the content slot. */
+  /** The tooltip's content. If you need to display HTML, you can use the `content` slot instead. */
   @property() content = '';
 
   /**

@@ -19,13 +19,13 @@ import type { CSSResultGroup } from 'lit';
  *
  * @dependency sl-icon
  *
- * @slot label - The input's label. Alternatively, you can use the label prop.
+ * @slot label - The input's label. Alternatively, you can use the `label` attribute.
  * @slot prefix - Used to prepend an icon or similar element to the input.
  * @slot suffix - Used to append an icon or similar element to the input.
  * @slot clear-icon - An icon to use in lieu of the default clear icon.
  * @slot show-password-icon - An icon to use in lieu of the default show password icon.
  * @slot hide-password-icon - An icon to use in lieu of the default hide password icon.
- * @slot help-text - Help text that describes how to use the input. Alternatively, you can use the help-text prop.
+ * @slot help-text - Help text that describes how to use the input. Alternatively, you can use the `help-text` attribute.
  *
  * @event sl-change - Emitted when an alteration to the control's value is committed by the user.
  * @event sl-clear - Emitted when the clear button is activated.
@@ -89,10 +89,10 @@ export default class SlInput extends LitElement {
   /** Draws a pill-style input with rounded edges. */
   @property({ type: Boolean, reflect: true }) pill = false;
 
-  /** The input's label. Alternatively, you can use the label slot. */
+  /** The input's label. If you need to display HTML, you can use the `label` slot instead. */
   @property() label = '';
 
-  /** The input's help text. Alternatively, you can use the help-text slot. */
+  /** The input's help text. If you need to display HTML, you can use the `help-text` slot instead. */
   @property({ attribute: 'help-text' }) helpText = '';
 
   /** Adds a clear button when the input is populated. */

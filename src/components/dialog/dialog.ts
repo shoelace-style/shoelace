@@ -21,7 +21,7 @@ import type { CSSResultGroup } from 'lit';
  * @dependency sl-icon-button
  *
  * @slot - The dialog's content.
- * @slot label - The dialog's label. Alternatively, you can use the label prop.
+ * @slot label - The dialog's label. Alternatively, you can use the `label` attribute.
  * @slot footer - The dialog's footer, usually one or more buttons representing various options.
  *
  * @event sl-show - Emitted when the dialog opens.
@@ -74,7 +74,8 @@ export default class SlDialog extends LitElement {
 
   /**
    * The dialog's label as displayed in the header. You should always include a relevant label even when using
-   * `no-header`, as it is required for proper accessibility.
+   * `no-header`, as it is required for proper accessibility. If you need to display HTML, you can use the `label` slot
+   * instead.
    */
   @property({ reflect: true }) label = '';
 
