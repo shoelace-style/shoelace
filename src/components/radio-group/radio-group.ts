@@ -10,8 +10,6 @@ import type SlRadio from '../../components/radio/radio';
 import type SlRadioButton from '../radio-button/radio-button';
 import type { CSSResultGroup } from 'lit';
 
-const RADIO_CHILDREN = ['sl-radio', 'sl-radio-button'];
-
 /**
  * @since 2.0
  * @status stable
@@ -134,9 +132,7 @@ export default class SlRadioGroup extends LitElement {
   }
 
   private getAllRadios() {
-    return [...this.querySelectorAll(RADIO_CHILDREN.join(','))].filter(el =>
-      RADIO_CHILDREN.includes(el.tagName.toLowerCase())
-    ) as SlRadio[];
+    return [...this.querySelectorAll<SlRadio | SlRadioButton>('sl-radio, sl-radio-button')];
   }
 
   private handleRadioClick(event: MouseEvent) {
