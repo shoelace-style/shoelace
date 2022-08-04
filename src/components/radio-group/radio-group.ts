@@ -125,12 +125,6 @@ export default class SlRadioGroup extends LitElement {
     return !this.invalid;
   }
 
-  private showNativeErrorMessage() {
-    this.input.hidden = false;
-    this.input.reportValidity();
-    setTimeout(() => (this.input.hidden = true), 10000);
-  }
-
   private getAllRadios() {
     return [...this.querySelectorAll<SlRadio | SlRadioButton>('sl-radio, sl-radio-button')];
   }
@@ -207,6 +201,12 @@ export default class SlRadioGroup extends LitElement {
         buttonGroup.disableRole = true;
       }
     }
+  }
+
+  private showNativeErrorMessage() {
+    this.input.hidden = false;
+    this.input.reportValidity();
+    setTimeout(() => (this.input.hidden = true), 10000);
   }
 
   private updateCheckedRadio() {
