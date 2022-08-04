@@ -74,6 +74,32 @@ const App = () => (
 );
 ```
 
+### Disabling Options
+
+Radios and radio buttons can be disabled by adding the `disabled` attribute to the respective options inside the radio group.
+
+```html preview
+<sl-radio-group label="Select an option" name="a" value="1">
+  <sl-radio value="1">Option 1</sl-radio>
+  <sl-radio value="2" disabled>Option 2</sl-radio>
+  <sl-radio value="3">Option 3</sl-radio>
+</sl-radio-group>
+```
+
+```jsx react
+import { SlRadio, SlRadioGroup } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlRadioGroup label="Select an option" name="a" value="1">
+    <SlRadio value="1">Option 1</SlRadio>
+    <SlRadio value="2" disabled>
+      Option 2
+    </SlRadio>
+    <SlRadio value="3">Option 3</SlRadio>
+  </SlRadioGroup>
+);
+```
+
 ### Validation
 
 Setting the `required` attribute to make selecting an option mandatory. If a value has not been selected, it will prevent the form from submitting and display an error message.

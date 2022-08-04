@@ -35,7 +35,7 @@ const App = () => (
 To set the initial value and checked state, use the `value` attribute on the containing radio group.
 
 ```html preview
-<sl-radio-group label="Select an option" name="a" value="1">
+<sl-radio-group label="Select an option" name="a" value="3">
   <sl-radio value="1">Option 1</sl-radio>
   <sl-radio value="2">Option 2</sl-radio>
   <sl-radio value="3">Option 3</sl-radio>
@@ -46,7 +46,7 @@ To set the initial value and checked state, use the `value` attribute on the con
 import { SlRadio, SlRadioGroup } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
-  <SlRadioGroup label="Select an option" name="a" value="1">
+  <SlRadioGroup label="Select an option" name="a" value="3">
     <SlRadio value="1">Option 1</SlRadio>
     <SlRadio value="2">Option 2</SlRadio>
     <SlRadio value="3">Option 3</SlRadio>
@@ -61,8 +61,8 @@ Use the `disabled` attribute to disable a radio.
 ```html preview
 <sl-radio-group label="Select an option" name="a" value="1">
   <sl-radio value="1">Option 1</sl-radio>
-  <sl-radio value="2">Option 2</sl-radio>
-  <sl-radio value="3" disabled>Option 3</sl-radio>
+  <sl-radio value="2" disabled>Option 2</sl-radio>
+  <sl-radio value="3">Option 3</sl-radio>
 </sl-radio-group>
 ```
 
@@ -72,10 +72,10 @@ import { SlRadio, SlRadioGroup } from '@shoelace-style/shoelace/dist/react';
 const App = () => (
   <SlRadioGroup label="Select an option" name="a" value="1">
     <SlRadio value="1">Option 1</SlRadio>
-    <SlRadio value="2">Option 2</SlRadio>
-    <SlRadio value="3" disabled>
-      Option 3
+    <SlRadio value="2" disabled>
+      Option 2
     </SlRadio>
+    <SlRadio value="3">Option 3</SlRadio>
   </SlRadioGroup>
 );
 ```

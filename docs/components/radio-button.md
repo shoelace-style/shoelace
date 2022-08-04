@@ -59,8 +59,8 @@ Use the `disabled` attribute to disable a radio button.
 ```html preview
 <sl-radio-group label="Select an option" name="a" value="1">
   <sl-radio-button value="1">Option 1</sl-radio-button>
-  <sl-radio-button value="2">Option 2</sl-radio-button>
-  <sl-radio-button value="3" disabled>Option 3</sl-radio-button>
+  <sl-radio-button value="2" disabled>Option 2</sl-radio-button>
+  <sl-radio-button value="3">Option 3</sl-radio-button>
 </sl-radio-group>
 ```
 
@@ -70,10 +70,10 @@ import { SlRadioButton, SlRadioGroup } from '@shoelace-style/shoelace/dist/react
 const App = () => (
   <SlRadioGroup label="Select an option" name="a" value="1">
     <SlRadioButton value="1">Option 1</SlRadioButton>
-    <SlRadioButton value="2">Option 2</SlRadioButton>
-    <SlRadioButton value="3" disabled>
-      Option 3
+    <SlRadioButton value="2" disabled>
+      Option 2
     </SlRadioButton>
+    <SlRadioButton value="3">Option 3</SlRadioButton>
   </SlRadioGroup>
 );
 ```
