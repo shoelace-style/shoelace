@@ -6,10 +6,9 @@ export default css`
 
   :host {
     --arrow-size: 4px;
-    --arrow-color: var(--sl-color-neutral-0);
-    --arrow-shadow: none;
+    --arrow-color: var(--sl-color-neutral-1000);
 
-    display: inline;
+    display: inline-block;
   }
 
   .popup {
@@ -32,7 +31,6 @@ export default css`
     height: calc(var(--arrow-size) * 2);
     transform: rotate(45deg);
     background: var(--arrow-color);
-    box-shadow: var(--arrow-shadow);
     z-index: -1;
   }
 `;
