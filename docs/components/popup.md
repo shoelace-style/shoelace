@@ -100,11 +100,35 @@ A description of the component goes here.
 
 ## Examples
 
-### Fixed Positioning Strategy
+### Placement
+
+TODO
+
+### Distance
+
+TODO
+
+### Skidding
+
+TODO
+
+### Positioning Strategy
 
 By default, an absolute positioning strategy is used. However, if your content is fixed or within a container that has `overflow: auto|hidden`, the popup will be clipped. To work around this, you can switch to the fixed positioning strategy by setting the `strategy` attribute to `fixed`.
 
 The fixed positioning reduces jumpiness when the anchor is fixed and allows the content to break out containers that clip them. When using this strategy, it's important to note that the content will be positioned _relative to its containing block_, which is usually the viewport unless an ancestor uses a `transform`, `perspective`, or `filter`. [Refer to this page](https://developer.mozilla.org/en-US/docs/Web/CSS/position#fixed) for more details.
+
+TODO
+
+### Flip
+
+TODO
+
+### Shift
+
+TODO
+
+### Resize
 
 TODO
 
