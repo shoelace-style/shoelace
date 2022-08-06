@@ -24,7 +24,10 @@ const translation: Translation = {
   scrollToStart: 'Scroll to start',
   selectAColorFromTheScreen: 'Select a color from the screen',
   showPassword: 'Show password',
-  toggleColorFormat: 'Toggle color format'
+  toggleColorFormat: 'Toggle color format',
+  goToCarouselNextSlide: 'Go to next slide in carousel',
+  goToCarouselPreviousSlide: 'Go to previous slide in carousel',
+  goToCarouselSlide: (slide, count) => `Go to slide ${slide} of ${count} in carousel`
 };
 
 registerTranslation(translation);
