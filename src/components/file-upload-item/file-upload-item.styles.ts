@@ -11,7 +11,7 @@ export default css`
     margin: 0;
   }
 
-  .file-item {
+  .file-upload-item {
     position: relative;
     display: flex;
     background-color: var(--sl-panel-background-color);
@@ -25,24 +25,24 @@ export default css`
     margin: inherit;
   }
 
-  .file-item__content {
+  .file-upload-item__content {
     position: relative;
     display: flex;
     flex: 1;
     overflow: hidden;
   }
 
-  .file-item:not(.file-item--has-icon) .file-item__icon,
-  .file-item:not(.file-item--closable) .file-item__close-button {
+  .file-upload-item:not(.file-upload-item--has-icon) .file-upload-item__icon,
+  .file-upload-item:not(.file-upload-item--closable) .file-upload-item__close-button {
     display: none;
   }
 
-  .file-item--is-loading .file-item__icon,
-  .file-item--is-loading .file-item__label {
+  .file-upload-item--is-loading .file-upload-item__icon,
+  .file-upload-item--is-loading .file-upload-item__label {
     visibility: hidden;
   }
 
-  .file-item__icon {
+  .file-upload-item__icon {
     flex: 0 0 auto;
     display: flex;
     align-items: center;
@@ -51,11 +51,11 @@ export default css`
     color: var(--sl-color-primary-600);
   }
 
-  .file-item--has-size .file-item__icon {
+  .file-upload-item--has-size .file-upload-item__icon {
     font-size: var(--sl-font-size-2x-large);
   }
 
-  .file-item__progress-bar__container {
+  .file-upload-item__progress-bar__container {
     inset: 0;
     position: absolute;
     display: flex;
@@ -63,11 +63,11 @@ export default css`
     align-items: center;
   }
 
-  .file-item__progress-bar {
+  .file-upload-item__progress-bar {
     flex: 1;
   }
 
-  .file-item__label {
+  .file-upload-item__label {
     flex: 1 1 auto;
     padding: var(--sl-spacing-large);
     overflow: hidden;
@@ -75,7 +75,7 @@ export default css`
     flex-direction: column;
   }
 
-  .file-item__close-button {
+  .file-upload-item__close-button {
     flex: 0 0 auto;
     display: flex;
     align-items: center;
@@ -83,12 +83,12 @@ export default css`
     padding-right: var(--sl-spacing-medium);
   }
 
-  .file-item--warning {
+  .file-upload-item--warning {
     border-color: var(--sl-color-warning-600);
   }
 
-  .file-item--warning,
-  .file-item--warning .file-item__icon {
+  .file-upload-item--warning,
+  .file-upload-item--warning .file-upload-item__icon {
     color: var(--sl-color-warning-600);
   }
 `;

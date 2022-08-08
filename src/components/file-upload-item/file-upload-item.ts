@@ -8,7 +8,7 @@ import { HasSlotController } from '../../internal/slot';
 import { watch } from '../../internal/watch';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
 import { LocalizeController } from '../../utilities/localize';
-import styles from './file-item.styles';
+import styles from './file-upload-item.styles';
 
 /**
  * @since 2.0
@@ -31,8 +31,8 @@ import styles from './file-item.styles';
  * @csspart label - The file list item's label.
  * @csspart close-button -  The file list item's close button.
  */
-@customElement('sl-file-item')
-export default class SlFileItem extends LitElement {
+@customElement('sl-file-upload-item')
+export default class SlFileUploadItem extends LitElement {
   static styles = styles;
 
   private readonly hasSlotController = new HasSlotController(this, 'icon', 'suffix');
@@ -79,7 +79,7 @@ export default class SlFileItem extends LitElement {
 
       await stopAnimations(this.base);
       this.base.hidden = false;
-      const { keyframes, options } = getAnimation(this, 'file-item.show', { dir: this.localize.dir() });
+      const { keyframes, options } = getAnimation(this, 'file-upload-item.show', { dir: this.localize.dir() });
       await animateTo(this.base, keyframes, options);
 
       emit(this, 'sl-after-show');
@@ -88,7 +88,7 @@ export default class SlFileItem extends LitElement {
       emit(this, 'sl-hide');
 
       await stopAnimations(this.base);
-      const { keyframes, options } = getAnimation(this, 'file-item.hide', { dir: this.localize.dir() });
+      const { keyframes, options } = getAnimation(this, 'file-upload-item.hide', { dir: this.localize.dir() });
       await animateTo(this.base, keyframes, options);
       this.base.hidden = true;
 
@@ -132,30 +132,30 @@ export default class SlFileItem extends LitElement {
       <div
         part="base"
         class=${classMap({
-          'file-item': true,
-          'file-item--hidden': this.hidden,
-          'file-item--closable': this.closable,
-          'file-item--warning': this.warning,
-          'file-item--has-size': this.size,
-          'file-item--is-loading': this.loading,
-          'file-item--has-icon': this.hasSlotController.test('icon')
+          'file-upload-item': true,
+          'file-upload-item--hidden': this.hidden,
+          'file-upload-item--closable': this.closable,
+          'file-upload-item--warning': this.warning,
+          'file-upload-item--has-size': this.size,
+          'file-upload-item--is-loading': this.loading,
+          'file-upload-item--has-icon': this.hasSlotController.test('icon')
         })}
       >
-        <span class="file-item__content">
-          <span part="icon" class="file-item__icon">
+        <span class="file-upload-item__content">
+          <span part="icon" class="file-upload-item__icon">
             <slot name="icon"></slot>
           </span>
 
-          <span part="label" class="file-item__label">
+          <span part="label" class="file-upload-item__label">
             <slot></slot>
             ${this.size ? html`<sl-format-bytes value="${this.size}"></sl-format-bytes>` : ''}
           </span>
 
           ${this.loading
             ? html`
-                <span class="file-item__progress-bar__container">
+                <span class="file-upload-item__progress-bar__container">
                   <sl-progress-bar
-                    class="file-item__progress-bar"
+                    class="file-upload-item__progress-bar"
                     ?indeterminate=${this.progress === undefined}
                     value=${ifDefined(this.progress)}
                     label=${ifDefined(this.label)}
@@ -167,7 +167,7 @@ export default class SlFileItem extends LitElement {
 
         ${this.closable
           ? html`
-              <span class="file-item__close-button" @click=${this.handleCloseClick} @keyup=${this.handleTriggerKeyUp}>
+              <span class="file-upload-item__close-button" @click=${this.handleCloseClick} @keyup=${this.handleTriggerKeyUp}>
                 <slot name="close-button">
                   <sl-icon-button
                     part="close-button"
@@ -184,7 +184,7 @@ export default class SlFileItem extends LitElement {
   }
 }
 
-setDefaultAnimation('file-item.show', {
+setDefaultAnimation('file-upload-item.show', {
   keyframes: [
     { opacity: 0, transform: 'scale(0.8)' },
     { opacity: 1, transform: 'scale(1)' }
@@ -192,7 +192,7 @@ setDefaultAnimation('file-item.show', {
   options: { duration: 250, easing: 'ease' }
 });
 
-setDefaultAnimation('file-item.hide', {
+setDefaultAnimation('file-upload-item.hide', {
   keyframes: [
     { opacity: 1, transform: 'scale(1)' },
     { opacity: 0, transform: 'scale(0.8)' }
@@ -202,6 +202,6 @@ setDefaultAnimation('file-item.hide', {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-file-item': SlFileItem;
+    'sl-file-upload-item': SlFileUploadItem;
   }
 }

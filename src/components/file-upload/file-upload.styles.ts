@@ -12,61 +12,61 @@ export default css`
     display: block;
   }
 
-  .file-dropzone__content {
+  .file-upload__content {
     padding: var(--sl-spacing-medium);
     border: var(--border-width) var(--border-style) var(--sl-color-neutral-300);
     border-radius: var(--border-radius);
   }
 
-  .file-dropzone__content__container {
+  .file-upload__content__container {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: var(--sl-spacing-medium);
   }
 
-  .file-dropzone--dragged .file-dropzone__content {
+  .file-upload--dragged .file-upload__content {
     border-color: var(--sl-color-primary-500);
     background-color: var(--sl-color-primary-100);
   }
 
-  .file-dropzone__content__container__icon {
+  .file-upload__content__container__icon {
     font-size: 7rem;
     color: var(--sl-color-primary-600);
   }
 
-  .file-dropzone--disabled .file-dropzone__content,
-  .file-dropzone--no-drag .file-dropzone__content {
+  .file-upload--disabled .file-upload__content,
+  .file-upload--no-drag .file-upload__content {
     cursor: no-drop;
   }
 
-  .file-dropzone--disabled .file-dropzone__content {
+  .file-upload--disabled .file-upload__content {
     color: var(--sl-color-neutral-500);
   }
 
-  .file-dropzone--disabled .file-dropzone__content__container__icon {
+  .file-upload--disabled .file-upload__content__container__icon {
     color: var(--sl-color-neutral-300);
   }
 
-  .file-dropzone--disabled sl-drop-handler[dragged] .file-dropzone__content,
-  .file-dropzone--no-drag sl-drop-handler[dragged] .file-dropzone__content {
+  .file-upload--disabled sl-drop-handler[dragged] .file-upload__content,
+  .file-upload--no-drag sl-drop-handler[dragged] .file-upload__content {
     border-color: var(--sl-color-neutral-300);
     background-color: unset;
   }
 
-  .file-dropzone__file-items {
+  .file-upload__file-items {
     display: flex;
     flex-direction: column;
     gap: var(--sl-spacing-small);
     margin-top: var(--sl-spacing-medium);
   }
 
-  .file-dropzone--warning .file-dropzone__content {
+  .file-upload--warning .file-upload__content {
     border-color: var(--sl-color-warning-600);
     color: var(--sl-color-warning-600);
   }
 
-  .file-dropzone--warning .file-dropzone__content__container__icon {
+  .file-upload--warning .file-upload__content__container__icon {
     color: var(--sl-color-warning-500);
   }
 `;

@@ -1,9 +1,9 @@
 import { expect, fixture, html } from '@open-wc/testing';
 import sinon from 'sinon';
-import type SlFileItem from '../file-item/file-item';
-import type SlFileDropzone from './file-dropzone';
+import type SlFileUploadItem from '../file-upload-item/file-upload-item';
+import type SlFileUpload from './file-upload';
 
-describe('<sl-file-dropzone>', () => {
+describe('<sl-file-upload>', () => {
   let xhr: sinon.SinonFakeXMLHttpRequestStatic;
   let requests: sinon.SinonFakeXMLHttpRequest[];
 
@@ -16,7 +16,7 @@ describe('<sl-file-dropzone>', () => {
   afterEach(sinon.verifyAndRestore);
 
   it('should render', async () => {
-    const el = await fixture<SlFileDropzone>(html` <sl-file-dropzone> </sl-file-dropzone> `);
+    const el = await fixture<SlFileUpload>(html` <sl-file-upload> </sl-file-upload> `);
     const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
 
     expect(base.hidden).to.be.false;
@@ -24,7 +24,7 @@ describe('<sl-file-dropzone>', () => {
 
   it('should emit an sl-select event when a file was selected in the file dialog', async () => {
     const selectHandler = sinon.spy();
-    const el = await fixture<SlFileDropzone>(html` <sl-file-dropzone> </sl-file-dropzone> `);
+    const el = await fixture<SlFileUpload>(html` <sl-file-upload> </sl-file-upload> `);
 
     el.addEventListener('sl-select', selectHandler);
     el.fileInput.dispatchEvent(new Event('change'));
@@ -36,7 +36,7 @@ describe('<sl-file-dropzone>', () => {
 
   it('should emit an sl-change event when a file was added', async () => {
     const changeHandler = sinon.spy();
-    const el = await fixture<SlFileDropzone>(html` <sl-file-dropzone> </sl-file-dropzone> `);
+    const el = await fixture<SlFileUpload>(html` <sl-file-upload> </sl-file-upload> `);
     const dropzone = el.shadowRoot!.querySelector<HTMLElement>('#dropzone')!;
 
     el.addEventListener('sl-change', changeHandler);
@@ -52,7 +52,7 @@ describe('<sl-file-dropzone>', () => {
 
   it('should not emit an sl-change event when the disabled attribute is true', async () => {
     const changeHandler = sinon.spy();
-    const el = await fixture<SlFileDropzone>(html` <sl-file-dropzone> </sl-file-dropzone> `);
+    const el = await fixture<SlFileUpload>(html` <sl-file-upload> </sl-file-upload> `);
     const dropzone = el.shadowRoot!.querySelector<HTMLElement>('#dropzone')!;
     el.disabled = true;
 
@@ -69,7 +69,7 @@ describe('<sl-file-dropzone>', () => {
 
   it('should render a file item when a file was added', async () => {
     const changeHandler = sinon.spy();
-    const el = await fixture<SlFileDropzone>(html` <sl-file-dropzone> </sl-file-dropzone> `);
+    const el = await fixture<SlFileUpload>(html` <sl-file-upload> </sl-file-upload> `);
     const dropzone = el.shadowRoot!.querySelector<HTMLElement>('#dropzone')!;
     const fileItems = el.shadowRoot!.querySelector<HTMLElement>('#file-items')!;
 
@@ -88,7 +88,7 @@ describe('<sl-file-dropzone>', () => {
 
   it('should not render a file item when the no-file-list attribute is set', async () => {
     const changeHandler = sinon.spy();
-    const el = await fixture<SlFileDropzone>(html` <sl-file-dropzone> </sl-file-dropzone> `);
+    const el = await fixture<SlFileUpload>(html` <sl-file-upload> </sl-file-upload> `);
     const dropzone = el.shadowRoot!.querySelector<HTMLElement>('#dropzone')!;
     const fileItems = el.shadowRoot!.querySelector<HTMLElement>('#file-items')!;
     el.noFileList = true;
@@ -107,7 +107,7 @@ describe('<sl-file-dropzone>', () => {
   });
 
   it('should set a warning when multiple files are dropped', async () => {
-    const el = await fixture<SlFileDropzone>(html` <sl-file-dropzone> </sl-file-dropzone> `);
+    const el = await fixture<SlFileUpload>(html` <sl-file-upload> </sl-file-upload> `);
     const dropzone = el.shadowRoot!.querySelector<HTMLElement>('#dropzone')!;
     const fileItems = el.shadowRoot!.querySelector<HTMLElement>('#file-items')!;
 
@@ -127,7 +127,7 @@ describe('<sl-file-dropzone>', () => {
   });
 
   it('should accept the file if the file size is below the specified max-file-size', async () => {
-    const el = await fixture<SlFileDropzone>(html` <sl-file-dropzone max-file-size="12"> </sl-file-dropzone> `);
+    const el = await fixture<SlFileUpload>(html` <sl-file-upload max-file-size="12"> </sl-file-upload> `);
     const dropzone = el.shadowRoot!.querySelector<HTMLElement>('#dropzone')!;
 
     expect(el.files.length).to.equal(0);
@@ -145,7 +145,7 @@ describe('<sl-file-dropzone>', () => {
   });
 
   it('should not accept the file if the file size exceeds the specified max-file-size', async () => {
-    const el = await fixture<SlFileDropzone>(html` <sl-file-dropzone max-file-size="10"> </sl-file-dropzone> `);
+    const el = await fixture<SlFileUpload>(html` <sl-file-upload max-file-size="10"> </sl-file-upload> `);
     const dropzone = el.shadowRoot!.querySelector<HTMLElement>('#dropzone')!;
 
     expect(el.files.length).to.equal(0);
@@ -163,7 +163,7 @@ describe('<sl-file-dropzone>', () => {
   });
 
   it('should accept the file if the file type is valid', async () => {
-    const el = await fixture<SlFileDropzone>(html` <sl-file-dropzone accept="image/*"> </sl-file-dropzone> `);
+    const el = await fixture<SlFileUpload>(html` <sl-file-upload accept="image/*"> </sl-file-upload> `);
     const dropzone = el.shadowRoot!.querySelector<HTMLElement>('#dropzone')!;
 
     expect(el.files.length).to.equal(0);
@@ -180,7 +180,7 @@ describe('<sl-file-dropzone>', () => {
   });
 
   it('should not accept the file if the file type is not valid', async () => {
-    const el = await fixture<SlFileDropzone>(html` <sl-file-dropzone accept="image/*"> </sl-file-dropzone> `);
+    const el = await fixture<SlFileUpload>(html` <sl-file-upload accept="image/*"> </sl-file-upload> `);
     const dropzone = el.shadowRoot!.querySelector<HTMLElement>('#dropzone')!;
 
     expect(el.files.length).to.equal(0);
@@ -197,7 +197,7 @@ describe('<sl-file-dropzone>', () => {
   });
 
   it('should not set a warning when the max number of files is not yet reached', async () => {
-    const el = await fixture<SlFileDropzone>(html` <sl-file-dropzone multiple max-files="2"> </sl-file-dropzone> `);
+    const el = await fixture<SlFileUpload>(html` <sl-file-upload multiple max-files="2"> </sl-file-upload> `);
     const dropzone = el.shadowRoot!.querySelector<HTMLElement>('#dropzone')!;
 
     expect(el.files.length).to.equal(0);
@@ -229,7 +229,7 @@ describe('<sl-file-dropzone>', () => {
     const testUrl = 'http://testurl';
     expect(requests.length).to.equal(0);
 
-    const el = await fixture<SlFileDropzone>(html` <sl-file-dropzone url="${testUrl}"> </sl-file-dropzone> `);
+    const el = await fixture<SlFileUpload>(html` <sl-file-upload url="${testUrl}"> </sl-file-upload> `);
     const dropzone = el.shadowRoot!.querySelector<HTMLElement>('#dropzone')!;
 
     const file = new File(['foo'], 'dummy.txt');
@@ -249,7 +249,7 @@ describe('<sl-file-dropzone>', () => {
 
     expect(requests.length).to.equal(0);
 
-    const el = await fixture<SlFileDropzone>(html` <sl-file-dropzone> </sl-file-dropzone> `);
+    const el = await fixture<SlFileUpload>(html` <sl-file-upload> </sl-file-upload> `);
     const dropzone = el.shadowRoot!.querySelector<HTMLElement>('#dropzone')!;
     el.addEventListener('sl-load', loadHandler);
 
@@ -269,7 +269,7 @@ describe('<sl-file-dropzone>', () => {
 
     const testUrl = 'http://testurl';
 
-    const el = await fixture<SlFileDropzone>(html` <sl-file-dropzone url="${testUrl}"> </sl-file-dropzone> `);
+    const el = await fixture<SlFileUpload>(html` <sl-file-upload url="${testUrl}"> </sl-file-upload> `);
     const dropzone = el.shadowRoot!.querySelector<HTMLElement>('#dropzone')!;
     el.addEventListener('sl-load', loadHandler);
 
@@ -289,7 +289,7 @@ describe('<sl-file-dropzone>', () => {
 
     const testUrl = 'http://testurl';
 
-    const el = await fixture<SlFileDropzone>(html` <sl-file-dropzone url="${testUrl}"> </sl-file-dropzone> `);
+    const el = await fixture<SlFileUpload>(html` <sl-file-upload url="${testUrl}"> </sl-file-upload> `);
     const dropzone = el.shadowRoot!.querySelector<HTMLElement>('#dropzone')!;
     el.addEventListener('sl-error', errorHandler);
 
@@ -308,8 +308,8 @@ describe('<sl-file-dropzone>', () => {
     const testUrl = 'http://testurl';
     expect(requests.length).to.equal(0);
 
-    const el = await fixture<SlFileDropzone>(
-      html` <sl-file-dropzone url="${testUrl}" method="GET"> </sl-file-dropzone> `
+    const el = await fixture<SlFileUpload>(
+      html` <sl-file-upload url="${testUrl}" method="GET"> </sl-file-upload> `
     );
     const dropzone = el.shadowRoot!.querySelector<HTMLElement>('#dropzone')!;
 
@@ -329,8 +329,8 @@ describe('<sl-file-dropzone>', () => {
     const testUrl = 'http://testurl';
     expect(requests.length).to.equal(0);
 
-    const el = await fixture<SlFileDropzone>(
-      html` <sl-file-dropzone url="${testUrl}" with-credentials> </sl-file-dropzone> `
+    const el = await fixture<SlFileUpload>(
+      html` <sl-file-upload url="${testUrl}" with-credentials> </sl-file-upload> `
     );
     const dropzone = el.shadowRoot!.querySelector<HTMLElement>('#dropzone')!;
 
@@ -351,7 +351,7 @@ describe('<sl-file-dropzone>', () => {
     const testUrl = 'http://testurl';
     expect(requests.length).to.equal(0);
 
-    const el = await fixture<SlFileDropzone>(html` <sl-file-dropzone url="${testUrl}"> </sl-file-dropzone> `);
+    const el = await fixture<SlFileUpload>(html` <sl-file-upload url="${testUrl}"> </sl-file-upload> `);
     el.headers = { 'some-header': 'some-value' };
     const dropzone = el.shadowRoot!.querySelector<HTMLElement>('#dropzone')!;
 
@@ -373,7 +373,7 @@ describe('<sl-file-dropzone>', () => {
     const testUrl = 'http://testurl';
     expect(requests.length).to.equal(0);
 
-    const el = await fixture<SlFileDropzone>(html` <sl-file-dropzone url="${testUrl}"> </sl-file-dropzone> `);
+    const el = await fixture<SlFileUpload>(html` <sl-file-upload url="${testUrl}"> </sl-file-upload> `);
     const dropzone = el.shadowRoot!.querySelector<HTMLElement>('#dropzone')!;
 
     const file = new File(['foo'], 'dummy.txt');
@@ -395,8 +395,8 @@ describe('<sl-file-dropzone>', () => {
     const testUrl = 'http://testurl';
     expect(requests.length).to.equal(0);
 
-    const el = await fixture<SlFileDropzone>(
-      html` <sl-file-dropzone url="${testUrl}" binary-body> </sl-file-dropzone> `
+    const el = await fixture<SlFileUpload>(
+      html` <sl-file-upload url="${testUrl}" binary-body> </sl-file-upload> `
     );
     const dropzone = el.shadowRoot!.querySelector<HTMLElement>('#dropzone')!;
 
@@ -418,7 +418,7 @@ describe('<sl-file-dropzone>', () => {
 
   it('should emit sl-remove when a file is removed', async () => {
     const removeHandler = sinon.spy();
-    const el = await fixture<SlFileDropzone>(html` <sl-file-dropzone closable> </sl-file-dropzone> `);
+    const el = await fixture<SlFileUpload>(html` <sl-file-upload closable> </sl-file-upload> `);
     el.addEventListener('sl-remove', removeHandler);
 
     const file = new File([''], 'dummy.txt');
@@ -426,7 +426,7 @@ describe('<sl-file-dropzone>', () => {
 
     await el.updateComplete;
 
-    const firstFileItem = el.shadowRoot!.querySelector<SlFileItem>('sl-file-item');
+    const firstFileItem = el.shadowRoot!.querySelector<SlFileUploadItem>('sl-file-upload-item');
     await firstFileItem!.updateComplete;
     await firstFileItem!.hide();
 
@@ -434,7 +434,7 @@ describe('<sl-file-dropzone>', () => {
   });
 
   it('should remove the file object when the file item was closed', async () => {
-    const el = await fixture<SlFileDropzone>(html` <sl-file-dropzone closable> </sl-file-dropzone> `);
+    const el = await fixture<SlFileUpload>(html` <sl-file-upload closable> </sl-file-upload> `);
 
     expect(el.files.length).to.equal(0);
     const file = new File([''], 'dummy.txt');
@@ -443,7 +443,7 @@ describe('<sl-file-dropzone>', () => {
     await el.updateComplete;
     expect(el.files.length).to.equal(1);
 
-    const firstFileItem = el.shadowRoot!.querySelector<SlFileItem>('sl-file-item');
+    const firstFileItem = el.shadowRoot!.querySelector<SlFileUploadItem>('sl-file-upload-item');
     await firstFileItem!.updateComplete;
     await firstFileItem!.hide();
 
@@ -455,7 +455,7 @@ describe('<sl-file-dropzone>', () => {
   it('should abort the request when a file is removed while loading', async () => {
     const abortHandler = sinon.spy();
     const testUrl = 'http://testurl';
-    const el = await fixture<SlFileDropzone>(html` <sl-file-dropzone closable url="${testUrl}"> </sl-file-dropzone> `);
+    const el = await fixture<SlFileUpload>(html` <sl-file-upload closable url="${testUrl}"> </sl-file-upload> `);
     const dropzone = el.shadowRoot!.querySelector<HTMLElement>('#dropzone')!;
 
     expect(el.files.length).to.equal(0);
@@ -467,7 +467,7 @@ describe('<sl-file-dropzone>', () => {
 
     await el.updateComplete;
 
-    const firstFileItem = el.shadowRoot!.querySelector<SlFileItem>('sl-file-item');
+    const firstFileItem = el.shadowRoot!.querySelector<SlFileUploadItem>('sl-file-upload-item');
     await firstFileItem!.updateComplete;
     await firstFileItem!.hide();
 
@@ -478,7 +478,7 @@ describe('<sl-file-dropzone>', () => {
 
   it('should set the file to loading until a response is received', async () => {
     const testUrl = 'http://testurl';
-    const el = await fixture<SlFileDropzone>(html` <sl-file-dropzone closable url="${testUrl}"> </sl-file-dropzone> `);
+    const el = await fixture<SlFileUpload>(html` <sl-file-upload closable url="${testUrl}"> </sl-file-upload> `);
     const dropzone = el.shadowRoot!.querySelector<HTMLElement>('#dropzone')!;
 
     expect(el.files.length).to.equal(0);
@@ -497,7 +497,7 @@ describe('<sl-file-dropzone>', () => {
 
   it('should increase the progress while the file is transferred', async () => {
     const testUrl = 'http://testurl';
-    const el = await fixture<SlFileDropzone>(html` <sl-file-dropzone closable url="${testUrl}"> </sl-file-dropzone> `);
+    const el = await fixture<SlFileUpload>(html` <sl-file-upload closable url="${testUrl}"> </sl-file-upload> `);
     const dropzone = el.shadowRoot!.querySelector<HTMLElement>('#dropzone')!;
 
     expect(requests.length).to.equal(0);

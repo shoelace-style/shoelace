@@ -1,19 +1,19 @@
-# File Item
+# File Upload Item
 
-[component-header:sl-file-item]
+[component-header:sl-file-upload-item]
 
 File items represent an uploaded file and provides information about file type, file size etc.
 
 ```html preview
-<sl-file-item>
+<sl-file-upload-item>
   filename_lorem_ipsum.jpg
   <sl-icon name="file-earmark" slot="icon"></sl-icon>
-</sl-file-item>
+</sl-file-upload-item>
 ```
 
 ```jsx react
-import { SlFileItem } from '@sda-se/ocean-design-system/dist/react';
-const App = () => <SlFileItem></SlFileItem>;
+import { SlFileUploadItem } from '@sda-se/ocean-design-system/dist/react';
+const App = () => <SlFileUploadItem></SlFileUploadItem>;
 ```
 
 ## Examples
@@ -23,10 +23,10 @@ const App = () => <SlFileItem></SlFileItem>;
 Add the `closable` attribute to show a close button that will hide the element.
 
 ```html preview
-<sl-file-item closable>
+<sl-file-upload-item closable>
   filename_lorem_ipsum.jpg
   <sl-icon name="file-earmark" slot="icon"></sl-icon>
-</sl-file-item>
+</sl-file-upload-item>
 ```
 
 ### Filesize
@@ -34,10 +34,10 @@ Add the `closable` attribute to show a close button that will hide the element.
 Set the `size` attribute to display the filesize of the item. The [Format Byte Component](/components/format-bytes) is used to convert the given bytes to a human-readable format.
 
 ```html preview
-<sl-file-item size="120000">
+<sl-file-upload-item size="120000">
   filename_lorem_ipsum.jpg
   <sl-icon name="file-earmark" slot="icon"></sl-icon>
-</sl-file-item>
+</sl-file-upload-item>
 ```
 
 ### Custom close button
@@ -45,11 +45,11 @@ Set the `size` attribute to display the filesize of the item. The [Format Byte C
 The close button can be customized by using the `close-button` slot and by styling the `base` part.
 
 ```html preview
-<sl-file-item closable>
+<sl-file-upload-item closable>
   filename_lorem_ipsum.jpg
   <sl-icon-button name="trash" slot="close-button" class="icon-button-color"></sl-icon-button>
   <sl-icon name="file-earmark" slot="icon"></sl-icon>
-</sl-file-item>
+</sl-file-upload-item>
 
 <style>
   .icon-button-color::part(base) {
@@ -72,10 +72,10 @@ The close button can be customized by using the `close-button` slot and by styli
 Show a loading bar by setting the `loading` attribute. Per default this will display a loading bar in an indeterminate state. The height of the element will be determined by whether the `size` attributes is set. This will ensure that the height of the item does not change when the file has finished loading.
 
 ```html preview
-<sl-file-item loading closable size="120000">
+<sl-file-upload-item loading closable size="120000">
   filename_lorem_ipsum.jpg
   <sl-icon name="file-earmark" slot="icon"></sl-icon>
-</sl-file-item>
+</sl-file-upload-item>
 ```
 
 ### Loading progress
@@ -83,10 +83,10 @@ Show a loading bar by setting the `loading` attribute. Per default this will dis
 Set the `progress` attribute to show the loading progress between `0` and `100`.
 
 ```html preview
-<sl-file-item loading progress="40" closable size="120000" class="file-item">
+<sl-file-upload-item loading progress="40" closable size="120000" class="file-item">
   filename_lorem_ipsum.jpg
   <sl-icon name="file-earmark" slot="icon"></sl-icon>
-</sl-file-item>
+</sl-file-upload-item>
 
 <br />
 
@@ -123,10 +123,10 @@ Set the `progress` attribute to show the loading progress between `0` and `100`.
 Use the `label` attribute to label the loading bar and tell assistive devices how to announce it.
 
 ```html preview
-<sl-file-item loading progress="20" label="Uploading File" closable>
+<sl-file-upload-item loading progress="20" label="Uploading File" closable>
   filename_lorem_ipsum.jpg
   <sl-icon name="file-earmark" slot="icon"></sl-icon>
-</sl-file-item>
+</sl-file-upload-item>
 ```
 
 ### Warning
@@ -134,10 +134,10 @@ Use the `label` attribute to label the loading bar and tell assistive devices ho
 Set the `warning` attribute to change the color of the element.
 
 ```html preview
-<sl-file-item warning closable>
+<sl-file-upload-item warning closable>
   File size exceeds 5MB limit
   <sl-icon name="exclamation-triangle" slot="icon"></sl-icon>
-</sl-file-item>
+</sl-file-upload-item>
 ```
 
-[component-metadata:sl-file-item]
+[component-metadata:sl-file-upload-item]

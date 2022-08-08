@@ -1,17 +1,17 @@
-# File Dropzone
+# File Upload
 
-[component-header:sl-file-dropzone]
+[component-header:sl-file-upload]
 
 File Dropzone provides an area where files can be dragged and dropped onto from the Operating System to be uploaded or to be used for other tasks. It also provides a button to open a file dialog and select files from the file system. Per default the File Dropzone shows a list of all selected files below the dropzone.
 
 ```html preview
-<sl-file-dropzone closable max-files="5"></sl-file-dropzone>
+<sl-file-upload closable max-files="5"></sl-file-upload>
 ```
 
 ```jsx react
-import { SlFileDropzone } from '@shoelace-style/shoelace/dist/react';
+import { SlFileUpload } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => <SlFileDropzone closable max-files={5}></SlFileDropzone>;
+const App = () => <SlFileUpload closable max-files={5}></SlFileUpload>;
 ```
 
 ## Examples
@@ -21,13 +21,13 @@ const App = () => <SlFileDropzone closable max-files={5}></SlFileDropzone>;
 Set the `disabled` attribute to disable the dropzone.
 
 ```html preview
-<sl-file-dropzone disabled></sl-file-dropzone>
+<sl-file-upload disabled></sl-file-upload>
 ```
 
 ```jsx react
-import { SlFileDropzone } from '@shoelace-style/shoelace/dist/react';
+import { SlFileUpload } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => <SlFileDropzone disabled></SlFileDropzone>;
+const App = () => <SlFileUpload disabled></SlFileUpload>;
 ```
 
 ### Disabled Drag & Drop
@@ -35,13 +35,13 @@ const App = () => <SlFileDropzone disabled></SlFileDropzone>;
 Set the `no-drag` attribute to disable drag and drop.
 
 ```html preview
-<sl-file-dropzone no-drag></sl-file-dropzone>
+<sl-file-upload no-drag></sl-file-upload>
 ```
 
 ```jsx react
-import { SlFileDropzone } from '@shoelace-style/shoelace/dist/react';
+import { SlFileUpload } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => <SlFileDropzone no-drag></SlFileDropzone>;
+const App = () => <SlFileUpload no-drag></SlFileUpload>;
 ```
 
 ### Closable
@@ -49,13 +49,13 @@ const App = () => <SlFileDropzone no-drag></SlFileDropzone>;
 Set the `closable` attribute to enable closing/removing of a file.
 
 ```html preview
-<sl-file-dropzone closable></sl-file-dropzone>
+<sl-file-upload closable></sl-file-upload>
 ```
 
 ```jsx react
-import { SlFileDropzone } from '@shoelace-style/shoelace/dist/react';
+import { SlFileUpload } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => <SlFileDropzone closable></SlFileDropzone>;
+const App = () => <SlFileUpload closable></SlFileUpload>;
 ```
 
 ### Hide Button
@@ -63,13 +63,13 @@ const App = () => <SlFileDropzone closable></SlFileDropzone>;
 Set the `no-button` attribute to hide the button in the dropzone.
 
 ```html preview
-<sl-file-dropzone no-button></sl-file-dropzone>
+<sl-file-upload no-button></sl-file-upload>
 ```
 
 ```jsx react
-import { SlFileDropzone } from '@shoelace-style/shoelace/dist/react';
+import { SlFileUpload } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => <SlFileDropzone no-button></SlFileDropzone>;
+const App = () => <SlFileUpload no-button></SlFileUpload>;
 ```
 
 ### Button Only
@@ -77,13 +77,13 @@ const App = () => <SlFileDropzone no-button></SlFileDropzone>;
 Set the `button-only` attribute to show only a file input button instead of a dropzone.
 
 ```html preview
-<sl-file-dropzone button-only></sl-file-dropzone>
+<sl-file-upload button-only></sl-file-upload>
 ```
 
 ```jsx react
-import { SlFileDropzone } from '@shoelace-style/shoelace/dist/react';
+import { SlFileUpload } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => <SlFileDropzone button-only></SlFileDropzone>;
+const App = () => <SlFileUpload button-only></SlFileUpload>;
 ```
 
 ### Customizing Labels
@@ -91,20 +91,20 @@ const App = () => <SlFileDropzone button-only></SlFileDropzone>;
 Set the `label` and `button-label` attribute to override the default labels.
 
 ```html preview
-<sl-file-dropzone
+<sl-file-upload
   label="Please combine all documents into one PDF file. The maximum file size is 3MB."
   button-label="Upload your CV or Resume"
-></sl-file-dropzone>
+></sl-file-upload>
 ```
 
 ```jsx react
-import { SlFileDropzone } from '@shoelace-style/shoelace/dist/react';
+import { SlFileUpload } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
-  <SlFileDropzone
+  <SlFileUpload
     label="Please combine all documents into one PDF file. The maximum file size is 3MB."
     button-label="Upload your CV or Resume"
-  ></SlFileDropzone>
+  ></SlFileUpload>
 );
 ```
 
@@ -113,13 +113,13 @@ const App = () => (
 Set the `no-file-list` attribute to hide the file list.
 
 ```html preview
-<sl-file-dropzone no-file-list></sl-file-dropzone>
+<sl-file-upload no-file-list></sl-file-upload>
 ```
 
 ```jsx react
-import { SlDropzone } from '@shoelace-style/shoelace/dist/react';
+import { SlFileUpload } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => <SlDropzone no-file-list></SlDropzone>;
+const App = () => <SlFileUpload no-file-list></SlFileUpload>;
 ```
 
 ### Maximum File Size
@@ -127,13 +127,13 @@ const App = () => <SlDropzone no-file-list></SlDropzone>;
 Set the `max-file-size` attribute to set a maximum file size limit. The user will receive a warning, when the selected file is too large.
 
 ```html preview
-<sl-file-dropzone max-file-size="100"></sl-file-dropzone>
+<sl-file-upload max-file-size="100"></sl-file-upload>
 ```
 
 ```jsx react
-import { SlDropzone } from '@shoelace-style/shoelace/dist/react';
+import { SlFileUpload } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => <SlDropzone max-file-size={100}></SlDropzone>;
+const App = () => <SlFileUpload max-file-size={100}></SlFileUpload>;
 ```
 
 ### Maximum Number of Files
@@ -141,13 +141,13 @@ const App = () => <SlDropzone max-file-size={100}></SlDropzone>;
 Set the `max-files` attribute to limit the number of files that can be added.
 
 ```html preview
-<sl-file-dropzone max-files="2"></sl-file-dropzone>
+<sl-file-upload max-files="2"></sl-file-upload>
 ```
 
 ```jsx react
-import { SlDropzone } from '@shoelace-style/shoelace/dist/react';
+import { SlFileUpload } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => <SlDropzone max-files={2}></SlDropzone>;
+const App = () => <SlFileUpload max-files={2}></SlFileUpload>;
 ```
 
 ### Accepted File Types
@@ -155,13 +155,13 @@ const App = () => <SlDropzone max-files={2}></SlDropzone>;
 Set the `accepted` attribute to set the accepted MIME-Type of the files. This attribute is consistent with the native file input. Visit the [MDN documentation for the accept attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept) for more information.
 
 ```html preview
-<sl-file-dropzone accept="image/*"></sl-file-dropzone>
+<sl-file-upload accept="image/*"></sl-file-upload>
 ```
 
 ```jsx react
-import { SlDropzone } from '@shoelace-style/shoelace/dist/react';
+import { SlFileUpload } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => <SlDropzone accept="image/*"></SlDropzone>;
+const App = () => <SlFileUpload accept="image/*"></SlFileUpload>;
 ```
 
 ### Upload Files
@@ -169,12 +169,12 @@ const App = () => <SlDropzone accept="image/*"></SlDropzone>;
 Set the `url` attribute to upload the files to the specified URL.
 
 ```html preview
-<sl-file-dropzone url="http://localhost:8080"></sl-file-dropzone>
+<sl-file-upload url="http://localhost:8080"></sl-file-upload>
 ```
 
 ```jsx react
-import { SlDropzone } from '@shoelace-style/shoelace/dist/react';
-const App = () => <SlDropzone url="http://localhost:8080"></SlDropzone>;
+import { SlFileUpload } from '@shoelace-style/shoelace/dist/react';
+const App = () => <SlFileUpload url="http://localhost:8080"></SlFileUpload>;
 ```
 
 ### Upload method
@@ -182,13 +182,13 @@ const App = () => <SlDropzone url="http://localhost:8080"></SlDropzone>;
 Set the `method` attribute to set the transfer method.
 
 ```html preview
-<sl-file-dropzone url="http://localhost:8080" method="PUT"></sl-file-dropzone>
+<sl-file-upload url="http://localhost:8080" method="PUT"></sl-file-upload>
 ```
 
 ```jsx react
-import { SlDropzone } from '@shoelace-style/shoelace/dist/react';
+import { SlFileUpload } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => <SlDropzone url="http://localhost:8080" method="PUT"></SlDropzone>;
+const App = () => <SlFileUpload url="http://localhost:8080" method="PUT"></SlFileUpload>;
 ```
 
 ### Upload headers
@@ -196,7 +196,7 @@ const App = () => <SlDropzone url="http://localhost:8080" method="PUT"></SlDropz
 Set the `headers` property to define specific headers to be used for the file transfer.
 
 ```html preview
-<sl-file-dropzone class="dropzone" url="http://localhost:8080"></sl-file-dropzone>
+<sl-file-upload class="dropzone" url="http://localhost:8080"></sl-file-upload>
 
 <script>
   const dropzone = document.querySelector('.dropzone');
@@ -205,11 +205,11 @@ Set the `headers` property to define specific headers to be used for the file tr
 ```
 
 ```jsx react
-import { SlDropzone } from '@shoelace-style/shoelace/dist/react';
+import { SlFileUpload } from '@shoelace-style/shoelace/dist/react';
 
 const headers = { 'My-Awesome-Header': 'header value' };
 
-const App = () => <SlDropzone url="http://localhost:8080" headers={headers}></SlDropzone>;
+const App = () => <SlFileUpload url="http://localhost:8080" headers={headers}></SlFileUpload>;
 ```
 
 ### Custom Icon
@@ -217,18 +217,18 @@ const App = () => <SlDropzone url="http://localhost:8080" headers={headers}></Sl
 Set the `icon` slot to customize the appearance of the icon within the dropzone.
 
 ```html preview
-<sl-file-dropzone>
+<sl-file-upload>
   <sl-qr-code slot="icon" value="https://shoelace.style/"></sl-qr-code>
-</sl-file-dropzone>
+</sl-file-upload>
 ```
 
 ```jsx react
-import { SlDropzone, SlQrCode } from '@shoelace-style/shoelace/dist/react';
+import { SlFileUpload, SlQrCode } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
-  <SlDropzone>
+  <SlFileUpload>
     <SlQrCode slot="icon" value="https://shoelace.style/" />;
-  </SlDropzone>
+  </SlFileUpload>
 );
 ```
 
@@ -237,14 +237,14 @@ const App = () => (
 Set the `content` slot to customize the appearance of the dropzone.
 
 ```html preview
-<sl-file-dropzone>
+<sl-file-upload>
   <sl-card slot="content" class="card-footer">
     This card is a dropzone. You can drag all sorts of things in it!
     <div slot="footer">
       <sl-rating></sl-rating>
     </div>
   </sl-card>
-</sl-file-dropzone>
+</sl-file-upload>
 
 <style>
   .card-footer {
@@ -260,7 +260,7 @@ Set the `content` slot to customize the appearance of the dropzone.
 ```
 
 ```jsx react
-import { SlDropzone, SlCard, SlRating } from '@sda-se/ocean-design-system/dist/react';
+import { SlFileUpload, SlCard, SlRating } from '@sda-se/ocean-design-system/dist/react';
 
 const css = `
   .card-footer {
@@ -276,18 +276,18 @@ const css = `
 
 const App = () => (
   <>
-    <SlDropzone>
+    <SlFileUpload>
       <SlCard slot="content" className="card-footer">
         This card is a dropzone. You can drag all sorts of things in it!
         <div slot="footer">
           <SlRating></SlRating>
         </div>
       </SlCard>
-    </SlDropzone>
+    </SlFileUpload>
 
     <style>{css}</style>
   </>
 );
 ```
 
-[component-metadata:sl-file-dropzone]
+[component-metadata:sl-file-upload]

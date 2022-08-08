@@ -6,7 +6,7 @@ import '../../components/icon/icon';
 import '../../components/progress-bar/progress-bar';
 import { emit } from '../../internal/event';
 import { LocalizeController } from '../../utilities/localize';
-import styles from './file-dropzone.styles';
+import styles from './file-upload.styles';
 import { hasValidFileSize, hasValidFileType, HttpMethod } from './library';
 import type { FileInfo } from './library';
 
@@ -40,8 +40,8 @@ import type { FileInfo } from './library';
  *
  */
 
-@customElement('sl-file-dropzone')
-export default class SlFileDropzone extends LitElement {
+@customElement('sl-file-upload')
+export default class SlFileUpload extends LitElement {
   static styles = styles;
 
   private readonly localize = new LocalizeController(this);
@@ -297,11 +297,11 @@ export default class SlFileDropzone extends LitElement {
       <div
         part="base"
         class=${classMap({
-          'file-dropzone': true,
-          'file-dropzone--disabled': this.disabled,
-          'file-dropzone--warning': !!this.warning,
-          'file-dropzone--dragged': this.isDragover,
-          'file-dropzone--no-drag': this.noDrag
+          'file-upload': true,
+          'file-upload--disabled': this.disabled,
+          'file-upload--warning': !!this.warning,
+          'file-upload--dragged': this.isDragover,
+          'file-upload--no-drag': this.noDrag
         })}
       >
         <input
@@ -317,13 +317,13 @@ export default class SlFileDropzone extends LitElement {
           : html`
               <div id="dropzone" @drop="${this.onDrop}" @dragover="${this.onDragOver}" @dragleave="${this.onDragLeave}">
                 <slot name="content">
-                  <div part="content" class="file-dropzone__content">
-                    <div class="file-dropzone__content__container">
+                  <div part="content" class="file-upload__content">
+                    <div class="file-upload__content__container">
                       <slot name="icon">
                         <sl-icon
                           part="icon"
                           name="cloud-arrow-up"
-                          class="file-dropzone__content__container__icon"
+                          class="file-upload__content__container__icon"
                         ></sl-icon>
                       </slot>
                       ${!this.noDrag ? html` <div>${this.dragDroplabel}</div> ` : ''}
@@ -335,10 +335,10 @@ export default class SlFileDropzone extends LitElement {
             `}
         ${!this.noFileList
           ? html`
-              <div class="file-dropzone__file-items" id="file-items">
+              <div class="file-upload__file-items" id="file-items">
                 ${this.files.map(
                   (fileInfo, index) => html`
-                    <sl-file-item
+                    <sl-file-upload-item
                       size=${fileInfo.accepted ? fileInfo.file.size : nothing}
                       ?warning=${!fileInfo.accepted}
                       ?closable=${fileInfo.accepted ? this.closable : true}
@@ -351,7 +351,7 @@ export default class SlFileDropzone extends LitElement {
                     >
                       ${fileInfo.accepted ? fileInfo.file.name : fileInfo.warning}
                       <sl-icon name=${fileInfo.warning ? 'exclamation-triangle' : 'file-earmark'} slot="icon"></sl-icon>
-                    </sl-file-item>
+                    </sl-file-upload-item>
                   `
                 )}
               </div>
@@ -364,6 +364,6 @@ export default class SlFileDropzone extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-file-dropzone': SlFileDropzone;
+    'sl-file-upload': SlFileUpload;
   }
 }
