@@ -13,7 +13,7 @@ export default css`
   }
 
   .file-upload__label {
-    padding: var(--sl-spacing-medium);
+    padding: var(--sl-spacing-large);
     border: var(--border-width) var(--border-style) var(--sl-color-neutral-300);
     border-radius: var(--border-radius);
   }
@@ -31,7 +31,7 @@ export default css`
   }
 
   .file-upload__label__container__image {
-    font-size: 7rem;
+    height: 6rem;
     color: var(--sl-color-primary-600);
   }
 
