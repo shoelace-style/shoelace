@@ -25,7 +25,7 @@ export default css`
     gap: var(--sl-spacing-medium);
   }
 
-  .file-upload--dragged .file-upload__label {
+  .file-upload--dragged:not(.file-upload--disabled) .file-upload__label {
     border-color: var(--sl-color-primary-500);
     background-color: var(--sl-color-primary-100);
   }
@@ -46,12 +46,6 @@ export default css`
 
   .file-upload--disabled .file-upload__label__container__image {
     color: var(--sl-color-neutral-300);
-  }
-
-  .file-upload--disabled sl-drop-handler[dragged] .file-upload__label,
-  .file-upload--no-drag sl-drop-handler[dragged] .file-upload__label {
-    border-color: var(--sl-color-neutral-300);
-    background-color: unset;
   }
 
   .file-upload__file-items {
