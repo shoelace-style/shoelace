@@ -2,7 +2,6 @@ import { arrow, autoUpdate, computePosition, flip, offset, shift, size } from '@
 import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { watch } from '../../internal/watch';
 import styles from './popup.styles';
 import type { CSSResultGroup } from 'lit';
 
@@ -95,13 +94,12 @@ export default class SlPopup extends LitElement {
     attribute: 'flip-fallback-placement',
     converter: {
       fromAttribute: (value: string) => {
-        console.log(value);
-        return String(value)
+        return value
           .split(' ')
-          .map(p => p.trim());
+          .map(p => p.trim())
+          .filter(p => p !== '');
       },
       toAttribute: (value: []) => {
-        console.log(value);
         return value.join(' ');
       }
     }
@@ -225,30 +223,22 @@ export default class SlPopup extends LitElement {
     });
   }
 
-  @watch('active', { waitUntilFirstUpdate: true })
-  handleActiveChange() {
-    if (this.active) {
-      this.start();
-    } else {
-      this.stop();
-    }
-  }
+  async updated(changedProps: Map<string, unknown>) {
+    super.updated(changedProps);
 
-  @watch('arrow')
-  @watch('boundary')
-  @watch('distance')
-  @watch('flip')
-  @watch('flipFallbackPlacement')
-  @watch('flipFallbackStrategy')
-  @watch('placement')
-  @watch('shift')
-  @watch('resize')
-  @watch('skidding')
-  @watch('strategy')
-  async handlePositionChange() {
-    if (this.hasUpdated && this.active) {
-      await this.updateComplete;
-      this.reposition();
+    if (changedProps.has('active')) {
+      // Start or stop the positioner when active changes
+      if (this.active) {
+        this.start();
+      } else {
+        this.stop();
+      }
+    } else {
+      // All other properties will trigger a reposition when active
+      if (this.active) {
+        await this.updateComplete;
+        this.reposition();
+      }
     }
   }
 
