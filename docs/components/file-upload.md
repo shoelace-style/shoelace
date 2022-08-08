@@ -30,34 +30,6 @@ import { SlFileUpload } from '@shoelace-style/shoelace/dist/react';
 const App = () => <SlFileUpload disabled></SlFileUpload>;
 ```
 
-### Disabled Drag & Drop
-
-Set the `no-drag` attribute to disable drag and drop.
-
-```html preview
-<sl-file-upload no-drag></sl-file-upload>
-```
-
-```jsx react
-import { SlFileUpload } from '@shoelace-style/shoelace/dist/react';
-
-const App = () => <SlFileUpload no-drag></SlFileUpload>;
-```
-
-### Closable
-
-Set the `closable` attribute to enable closing/removing of a file.
-
-```html preview
-<sl-file-upload closable></sl-file-upload>
-```
-
-```jsx react
-import { SlFileUpload } from '@shoelace-style/shoelace/dist/react';
-
-const App = () => <SlFileUpload closable></SlFileUpload>;
-```
-
 ### Hide Button
 
 Set the `no-button` attribute to hide the button in the dropzone.

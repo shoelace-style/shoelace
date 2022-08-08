@@ -66,14 +66,8 @@ export default class SlFileUpload extends LitElement {
   /** If true, shows only a button as a file input */
   @property({ type: Boolean, reflect: true, attribute: 'button-only' }) buttonOnly = false;
 
-  /** If true, disables drag 'n' drop */
-  @property({ type: Boolean, reflect: true, attribute: 'no-drag' }) noDrag = false;
-
   /** If true, no file list will be shown */
   @property({ type: Boolean, reflect: true, attribute: 'no-file-list' }) noFileList = false;
-
-  /** Indicates whether file list items are closable */
-  @property({ type: Boolean, reflect: true }) closable = false;
 
   /** An optional overwrite for the upload label */
   @property() label?: string;
@@ -247,7 +241,7 @@ export default class SlFileUpload extends LitElement {
     this.isDragover = false;
 
     const files = event.dataTransfer?.files;
-    if (!files || this.disabled || this.noDrag) {
+    if (!files || this.disabled) {
       // Abort if no files were transferred, the entire element or drag and drop is disabled
       return;
     }
@@ -300,8 +294,7 @@ export default class SlFileUpload extends LitElement {
           'file-upload': true,
           'file-upload--disabled': this.disabled,
           'file-upload--warning': !!this.warning,
-          'file-upload--dragged': this.isDragover,
-          'file-upload--no-drag': this.noDrag
+          'file-upload--dragged': this.isDragover
         })}
       >
         <input
@@ -326,7 +319,7 @@ export default class SlFileUpload extends LitElement {
                           class="file-upload__label__container__image"
                         ></sl-icon>
                       </slot>
-                      ${!this.noDrag ? html` <div>${this.dragDroplabel}</div> ` : ''}
+                      <div>${this.dragDroplabel}</div>
                       ${!this.noButton ? browseFilesButton : ''}
                     </div>
                   </div>
@@ -341,7 +334,7 @@ export default class SlFileUpload extends LitElement {
                     <sl-file-upload-item
                       size=${fileInfo.accepted ? fileInfo.file.size : nothing}
                       ?warning=${!fileInfo.accepted}
-                      ?closable=${fileInfo.accepted ? this.closable : true}
+                      ?closable=${fileInfo.accepted}
                       ?loading=${fileInfo.loading}
                       progress=${fileInfo.progress}
                       @sl-hide=${(event: CustomEvent) => {
