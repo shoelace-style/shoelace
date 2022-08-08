@@ -94,6 +94,7 @@ Use the `placement` attribute to set the preferred placement of the tooltip.
 <style>
   .tooltip-placement-example {
     width: 250px;
+    margin: 1rem;
   }
 
   .tooltip-placement-example-row:after {
@@ -282,20 +283,14 @@ const App = () => {
 };
 ```
 
-### Remove Arrows
+### Removing Arrows
 
-You can control the size of tooltip arrows by overriding the `--sl-tooltip-arrow-size` design token.
+You can control the size of tooltip arrows by overriding the `--sl-tooltip-arrow-size` design token. To remove them, set the value to `0` as shown below.
 
 ```html preview
-<div style="--sl-tooltip-arrow-size: 0;">
-  <sl-tooltip content="This is a tooltip">
-    <sl-button>Above</sl-button>
-  </sl-tooltip>
-
-  <sl-tooltip content="This is a tooltip" placement="bottom">
-    <sl-button>Below</sl-button>
-  </sl-tooltip>
-</div>
+<sl-tooltip content="This is a tooltip" style="--sl-tooltip-arrow-size: 0;">
+  <sl-button>No Arrow</sl-button>
+</sl-tooltip>
 ```
 
 ```jsx react

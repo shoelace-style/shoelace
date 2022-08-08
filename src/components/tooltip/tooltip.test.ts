@@ -9,7 +9,7 @@ describe('<sl-tooltip>', () => {
         <sl-button>Hover Me</sl-button>
       </sl-tooltip>
     `);
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="body"]')!;
 
     expect(base.hidden).to.be.false;
   });
@@ -20,7 +20,7 @@ describe('<sl-tooltip>', () => {
         <sl-button>Hover Me</sl-button>
       </sl-tooltip>
     `);
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="body"]')!;
 
     expect(base.hidden).to.be.true;
   });
@@ -31,7 +31,7 @@ describe('<sl-tooltip>', () => {
         <sl-button>Hover Me</sl-button>
       </sl-tooltip>
     `);
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="body"]')!;
     const showHandler = sinon.spy();
     const afterShowHandler = sinon.spy();
 
@@ -53,7 +53,7 @@ describe('<sl-tooltip>', () => {
         <sl-button>Hover Me</sl-button>
       </sl-tooltip>
     `);
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="body"]')!;
     const hideHandler = sinon.spy();
     const afterHideHandler = sinon.spy();
 
@@ -75,7 +75,7 @@ describe('<sl-tooltip>', () => {
         <sl-button>Hover Me</sl-button>
       </sl-tooltip>
     `);
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="body"]')!;
     const showHandler = sinon.spy();
     const afterShowHandler = sinon.spy();
 
@@ -97,7 +97,7 @@ describe('<sl-tooltip>', () => {
         <sl-button>Hover Me</sl-button>
       </sl-tooltip>
     `);
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="body"]')!;
     const hideHandler = sinon.spy();
     const afterHideHandler = sinon.spy();
 
@@ -119,7 +119,7 @@ describe('<sl-tooltip>', () => {
         <sl-button>Hover Me</sl-button>
       </sl-tooltip>
     `);
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="body"]')!;
     const hideHandler = sinon.spy();
     const afterHideHandler = sinon.spy();
 
@@ -133,19 +133,5 @@ describe('<sl-tooltip>', () => {
     expect(hideHandler).to.have.been.calledOnce;
     expect(afterHideHandler).to.have.been.calledOnce;
     expect(base.hidden).to.be.true;
-  });
-
-  it('should recalculate its target when the slotted element changes', async () => {
-    const el = await fixture<SlTooltip>(html`
-      <sl-tooltip content="This is a tooltip" open>
-        <sl-button>Hover me</sl-button>
-      </sl-tooltip>
-    `);
-
-    el.innerHTML = '<sl-button>New element</sl-button>';
-    await el.updateComplete;
-
-    // @ts-expect-error - target is a private property
-    expect(el.target.innerHTML).to.equal('New element');
   });
 });
