@@ -108,6 +108,29 @@ const App = () => (
 );
 ```
 
+### Customizing Button
+
+Use the `button` slot to customize the button appearance.
+
+```html preview
+<sl-file-upload>
+  <sl-button variant="danger" slot="button">
+    Custom Button
+  </sl-button>
+</sl-file-upload>
+```
+
+```jsx react
+import { SlFileUpload } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlFileUpload
+    label="Please combine all documents into one PDF file. The maximum file size is 3MB."
+    button-label="Upload your CV or Resume"
+  ></SlFileUpload>
+);
+```
+
 ### No File List
 
 Set the `no-file-list` attribute to hide the file list.

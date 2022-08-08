@@ -20,6 +20,7 @@ import type { FileInfo } from './library';
  *
  * @slot label - The dropzone's label. Alternatively, you can use the image slot and label prop.
  * @slot image - The dropzone's image.
+ * @slot button - The dropzone's button.
  *
  * @event sl-drop - Emitted when dragged files have been dropped on the dropzone area.
  * @event sl-select - Emitted when files have been selected via the file dialog.
@@ -283,14 +284,13 @@ export default class SlFileUpload extends LitElement {
 
   render() {
     const browseFilesButton = html`
-      <sl-button
-        part="button"
-        variant=${this.warning ? 'warning' : 'primary'}
-        ?disabled=${this.disabled}
-        @click="${this.handleBrowseFileClick}"
-      >
-        ${this.buttonLabel ?? this.localize.term('browseFiles')}
-      </sl-button>
+      <div @click="${this.handleBrowseFileClick}">
+        <slot name="button">
+          <sl-button part="button" variant=${this.warning ? 'warning' : 'default'} ?disabled=${this.disabled}>
+            ${this.buttonLabel ?? this.localize.term('browseFiles')}
+          </sl-button>
+        </slot>
+      </div>
     `;
 
     return html`
@@ -350,7 +350,10 @@ export default class SlFileUpload extends LitElement {
                       }}
                     >
                       ${fileInfo.accepted ? fileInfo.file.name : fileInfo.warning}
-                      <sl-icon name=${fileInfo.warning ? 'exclamation-triangle' : 'file-earmark'} slot="image"></sl-icon>
+                      <sl-icon
+                        name=${fileInfo.warning ? 'exclamation-triangle' : 'file-earmark'}
+                        slot="image"
+                      ></sl-icon>
                     </sl-file-upload-item>
                   `
                 )}
