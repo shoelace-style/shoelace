@@ -12,44 +12,44 @@ export default css`
     display: block;
   }
 
-  .file-upload__content {
+  .file-upload__label {
     padding: var(--sl-spacing-medium);
     border: var(--border-width) var(--border-style) var(--sl-color-neutral-300);
     border-radius: var(--border-radius);
   }
 
-  .file-upload__content__container {
+  .file-upload__label__container {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: var(--sl-spacing-medium);
   }
 
-  .file-upload--dragged .file-upload__content {
+  .file-upload--dragged .file-upload__label {
     border-color: var(--sl-color-primary-500);
     background-color: var(--sl-color-primary-100);
   }
 
-  .file-upload__content__container__icon {
+  .file-upload__label__container__image {
     font-size: 7rem;
     color: var(--sl-color-primary-600);
   }
 
-  .file-upload--disabled .file-upload__content,
-  .file-upload--no-drag .file-upload__content {
+  .file-upload--disabled .file-upload__label,
+  .file-upload--no-drag .file-upload__label {
     cursor: no-drop;
   }
 
-  .file-upload--disabled .file-upload__content {
+  .file-upload--disabled .file-upload__label {
     color: var(--sl-color-neutral-500);
   }
 
-  .file-upload--disabled .file-upload__content__container__icon {
+  .file-upload--disabled .file-upload__label__container__image {
     color: var(--sl-color-neutral-300);
   }
 
-  .file-upload--disabled sl-drop-handler[dragged] .file-upload__content,
-  .file-upload--no-drag sl-drop-handler[dragged] .file-upload__content {
+  .file-upload--disabled sl-drop-handler[dragged] .file-upload__label,
+  .file-upload--no-drag sl-drop-handler[dragged] .file-upload__label {
     border-color: var(--sl-color-neutral-300);
     background-color: unset;
   }
@@ -61,12 +61,12 @@ export default css`
     margin-top: var(--sl-spacing-medium);
   }
 
-  .file-upload--warning .file-upload__content {
+  .file-upload--warning .file-upload__label {
     border-color: var(--sl-color-warning-600);
     color: var(--sl-color-warning-600);
   }
 
-  .file-upload--warning .file-upload__content__container__icon {
+  .file-upload--warning .file-upload__label__container__image {
     color: var(--sl-color-warning-500);
   }
 `;

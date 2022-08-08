@@ -18,8 +18,8 @@ import type { FileInfo } from './library';
  * @dependency sl-icon
  * @dependency sl-icon-button
  *
- * @slot content - The dropzone's content. Alternatively, you can use the icon slot and label prop.
- * @slot icon - The dropzone's icon.
+ * @slot label - The dropzone's label. Alternatively, you can use the image slot and label prop.
+ * @slot image - The dropzone's image.
  *
  * @event sl-drop - Emitted when dragged files have been dropped on the dropzone area.
  * @event sl-select - Emitted when files have been selected via the file dialog.
@@ -30,8 +30,8 @@ import type { FileInfo } from './library';
  * @event {{ file: FileInfo }} sl-remove - Emitted when a file was removed
  *
  * @csspart base - The component's internal wrapper.
- * @csspart content - The dropzone container.
- * @csspart icon - The dropzone icon.
+ * @csspart label - The dropzone container.
+ * @csspart image - The dropzone image.
  * @csspart button - The dropzone button.
  *
  * @cssproperty --border-radius - The border radius of the dropzone borders.
@@ -316,14 +316,14 @@ export default class SlFileUpload extends LitElement {
           ? browseFilesButton
           : html`
               <div id="dropzone" @drop="${this.onDrop}" @dragover="${this.onDragOver}" @dragleave="${this.onDragLeave}">
-                <slot name="content">
-                  <div part="content" class="file-upload__content">
-                    <div class="file-upload__content__container">
-                      <slot name="icon">
+                <slot name="label">
+                  <div part="label" class="file-upload__label">
+                    <div class="file-upload__label__container">
+                      <slot name="image">
                         <sl-icon
-                          part="icon"
+                          part="image"
                           name="cloud-arrow-up"
-                          class="file-upload__content__container__icon"
+                          class="file-upload__label__container__image"
                         ></sl-icon>
                       </slot>
                       ${!this.noDrag ? html` <div>${this.dragDroplabel}</div> ` : ''}
