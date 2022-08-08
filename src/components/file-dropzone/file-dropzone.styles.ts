@@ -25,7 +25,7 @@ export default css`
     gap: var(--sl-spacing-medium);
   }
 
-  sl-drop-handler[dragged] .file-dropzone__content {
+  .file-dropzone--dragged .file-dropzone__content {
     border-color: var(--sl-color-primary-500);
     background-color: var(--sl-color-primary-100);
   }

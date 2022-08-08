@@ -49,6 +49,9 @@ export default class SlFileDropzone extends LitElement {
   /** Internal property to show a warning in the dropzone */
   @state() warning?: string;
 
+  /** Indicates whether a file is currently dragged over the dropzone */
+  @state() isDragover: boolean = false;
+
   @query('#file-input') fileInput: HTMLInputElement;
 
   @property() files: FileInfo[] = [];
@@ -223,8 +226,26 @@ export default class SlFileDropzone extends LitElement {
     Object.values(fileList).forEach(file => this.addFile(file));
   }
 
-  onDrop(event: CustomEvent<{ dataTransfer: { files: FileList } }>) {
-    const files = event.detail.dataTransfer?.files;
+  onDragLeave(): void {
+    this.isDragover = false;
+  }
+
+  onDragOver(event: DragEvent): void {
+    event.preventDefault();
+
+    if (!event.dataTransfer) {
+      // Abort if no files are dragged
+      return;
+    }
+
+    this.isDragover = true;
+  }
+
+  onDrop(event: DragEvent) {
+    event.preventDefault();
+    this.isDragover = false;
+
+    const files = event.dataTransfer?.files;
     if (!files || this.disabled || this.noDrag) {
       // Abort if no files were transferred, the entire element or drag and drop is disabled
       return;
@@ -279,6 +300,7 @@ export default class SlFileDropzone extends LitElement {
           'file-dropzone': true,
           'file-dropzone--disabled': this.disabled,
           'file-dropzone--warning': !!this.warning,
+          'file-dropzone--dragged': this.isDragover,
           'file-dropzone--no-drag': this.noDrag
         })}
       >
@@ -293,7 +315,7 @@ export default class SlFileDropzone extends LitElement {
         ${this.buttonOnly
           ? browseFilesButton
           : html`
-              <sl-drop-handler id="dropzone" @sl-drop="${this.onDrop}">
+              <div id="dropzone" @drop="${this.onDrop}" @dragover="${this.onDragOver}" @dragleave="${this.onDragLeave}">
                 <slot name="content">
                   <div part="content" class="file-dropzone__content">
                     <div class="file-dropzone__content__container">
@@ -309,7 +331,7 @@ export default class SlFileDropzone extends LitElement {
                     </div>
                   </div>
                 </slot>
-              </sl-drop-handler>
+              </div>
             `}
         ${!this.noFileList
           ? html`
