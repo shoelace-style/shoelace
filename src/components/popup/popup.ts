@@ -2,12 +2,16 @@ import { arrow, autoUpdate, computePosition, flip, offset, shift, size } from '@
 import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
+import { emit } from '../../internal/event';
 import styles from './popup.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
  * @since 2.0
  * @status experimental
+ *
+ * @event sl-reposition - Emitted when the popup is repositioned. This event can fire a lot, so avoid putting expensive
+ *  operations in your listener or consider debouncing it.
  *
  * @slot - The popup's content.
  * @slot anchor - The element the popup will be anchored to.
@@ -24,8 +28,9 @@ import type { CSSResultGroup } from 'lit';
 export default class SlPopup extends LitElement {
   static styles: CSSResultGroup = styles;
 
-  @query('.popup') popup: HTMLElement;
-  @query('.popup__arrow') arrowEl: HTMLElement;
+  /** A reference to the internal popup container. Useful for animating and styling the popup with JavaScript. */
+  @query('.popup') public popup: HTMLElement;
+  @query('.popup__arrow') private arrowEl: HTMLElement;
 
   private anchor: HTMLElement | null;
   private cleanup: ReturnType<typeof autoUpdate> | undefined;
@@ -69,7 +74,7 @@ export default class SlPopup extends LitElement {
   /**
    * Attaches an arrow to the popup. The arrow's size and color can be customized using the `--arrow-size` and
    * `--arrow-color` custom properties. For additional customizations, you can also target the arrow using
-   * `::part(arrow) in your stylesheet.
+   * `::part(arrow)` in your stylesheet.
    */
   @property({ type: Boolean }) arrow = false;
 
@@ -193,6 +198,13 @@ export default class SlPopup extends LitElement {
     await this.stop();
 
     this.anchor = this.querySelector<HTMLElement>('[slot="anchor"]');
+
+    // If the anchor is a <slot>, we'll use the first assigned element as the target since slots use `display: contents`
+    // and positioning can't be calculated on them
+    if (this.anchor instanceof HTMLSlotElement) {
+      this.anchor = this.anchor.assignedElements({ flatten: true })[0] as HTMLElement;
+    }
+
     if (!this.anchor) {
       throw new Error('Invalid anchor element: no child with slot="anchor" was found.');
     }
@@ -339,6 +351,8 @@ export default class SlPopup extends LitElement {
         });
       }
     });
+
+    emit(this, 'sl-reposition');
   }
 
   render() {
