@@ -7,7 +7,7 @@ A description of the component goes here.
 ```html preview
 <div class="popup-overview">
   <sl-popup placement="top" active>
-    <span slot="anchor">This is the anchor</span>
+    <span slot="anchor"></span>
     <div class="box"></div>
   </sl-popup>
 
@@ -64,7 +64,10 @@ A description of the component goes here.
     margin: calc(50px + 1rem);
   }
 
-  .popup-overview [slot='anchor'] {
+  .popup-overview span[slot='anchor'] {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
     border: dashed 2px var(--sl-color-neutral-200);
     padding: 0.5rem;
   }
