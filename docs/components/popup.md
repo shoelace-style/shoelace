@@ -61,7 +61,6 @@ A description of the component goes here.
 <style>
   .popup-overview sl-popup {
     --arrow-color: var(--sl-color-primary-600);
-    margin: calc(50px + 1rem);
   }
 
   .popup-overview span[slot='anchor'] {
@@ -69,7 +68,7 @@ A description of the component goes here.
     width: 150px;
     height: 150px;
     border: dashed 2px var(--sl-color-neutral-200);
-    padding: 0.5rem;
+    margin: 50px;
   }
 
   .popup-overview .box {

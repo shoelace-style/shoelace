@@ -8,7 +8,7 @@ export default css`
     --arrow-size: 4px;
     --arrow-color: var(--sl-color-neutral-1000);
 
-    display: inline-block;
+    display: contents;
   }
 
   .popup {

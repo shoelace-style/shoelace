@@ -24,7 +24,7 @@ import type { CSSResultGroup } from 'lit';
 export default class SlPopup extends LitElement {
   static styles: CSSResultGroup = styles;
 
-  @query('.popup') popupEl: HTMLElement;
+  @query('.popup') popup: HTMLElement;
   @query('.popup__arrow') arrowEl: HTMLElement;
 
   private anchor: HTMLElement | null;
@@ -206,7 +206,7 @@ export default class SlPopup extends LitElement {
       return;
     }
 
-    this.cleanup = autoUpdate(this.anchor, this.popupEl, () => {
+    this.cleanup = autoUpdate(this.anchor, this.popup, () => {
       this.reposition();
     });
   }
@@ -292,7 +292,7 @@ export default class SlPopup extends LitElement {
           padding: this.resizePadding,
           apply: ({ availableWidth, availableHeight }) => {
             // Ensure the panel stays within the viewport when we have lots of menu items
-            Object.assign(this.popupEl.style, {
+            Object.assign(this.popup.style, {
               maxWidth: `${availableWidth}px`,
               maxHeight: `${availableHeight}px`
             });
@@ -301,7 +301,7 @@ export default class SlPopup extends LitElement {
       );
     } else {
       // Unset max-width/max-height when we're no longer using this middleware
-      Object.assign(this.popupEl.style, { maxWidth: '', maxHeight: '' });
+      Object.assign(this.popup.style, { maxWidth: '', maxHeight: '' });
     }
 
     // Finally, we add an arrow
@@ -314,14 +314,14 @@ export default class SlPopup extends LitElement {
       );
     }
 
-    computePosition(this.anchor, this.popupEl, {
+    computePosition(this.anchor, this.popup, {
       placement: this.placement,
       middleware,
       strategy: this.strategy
     }).then(({ x, y, middlewareData, placement }) => {
       const staticSide = { top: 'bottom', right: 'left', bottom: 'top', left: 'right' }[placement.split('-')[0]]!;
 
-      Object.assign(this.popupEl.style, {
+      Object.assign(this.popup.style, {
         left: `${x}px`,
         top: `${y}px`
       });
