@@ -23,11 +23,11 @@ import styles from './file-upload-item.styles';
  * @event sl-after-hide - Emitted after the item closes and all animations are complete.
  *
  * @slot - The file list item's label.
- * @slot icon - The file list item's icon.
+ * @slot image - The file list item's image.
  * @slot close-button - The file list item's close button.
  *
  * @csspart base - The component's internal wrapper.
- * @csspart icon - The file list item's icon.
+ * @csspart image - The file list item's image.
  * @csspart label - The file list item's label.
  * @csspart close-button -  The file list item's close button.
  */
@@ -35,7 +35,7 @@ import styles from './file-upload-item.styles';
 export default class SlFileUploadItem extends LitElement {
   static styles = styles;
 
-  private readonly hasSlotController = new HasSlotController(this, 'icon', 'suffix');
+  private readonly hasSlotController = new HasSlotController(this, 'image', 'suffix');
   private readonly localize = new LocalizeController(this);
 
   @query('[part="base"]') base: HTMLElement;
@@ -138,17 +138,19 @@ export default class SlFileUploadItem extends LitElement {
           'file-upload-item--warning': this.warning,
           'file-upload-item--has-size': this.size,
           'file-upload-item--is-loading': this.loading,
-          'file-upload-item--has-icon': this.hasSlotController.test('icon')
+          'file-upload-item--has-image': this.hasSlotController.test('image')
         })}
       >
         <span class="file-upload-item__content">
-          <span part="icon" class="file-upload-item__icon">
-            <slot name="icon"></slot>
+          <span part="image" class="file-upload-item__image">
+            <slot name="image"></slot>
           </span>
 
           <span part="label" class="file-upload-item__label">
             <slot></slot>
-            ${this.size ? html`<sl-format-bytes value="${this.size}"></sl-format-bytes>` : ''}
+            ${this.size
+              ? html`<sl-format-bytes value="${this.size}" class="file-upload-item__label__size"></sl-format-bytes>`
+              : ''}
           </span>
 
           ${this.loading
@@ -167,7 +169,11 @@ export default class SlFileUploadItem extends LitElement {
 
         ${this.closable
           ? html`
-              <span class="file-upload-item__close-button" @click=${this.handleCloseClick} @keyup=${this.handleTriggerKeyUp}>
+              <span
+                class="file-upload-item__close-button"
+                @click=${this.handleCloseClick}
+                @keyup=${this.handleTriggerKeyUp}
+              >
                 <slot name="close-button">
                   <sl-icon-button
                     part="close-button"

@@ -350,7 +350,7 @@ export default class SlFileUpload extends LitElement {
                       }}
                     >
                       ${fileInfo.accepted ? fileInfo.file.name : fileInfo.warning}
-                      <sl-icon name=${fileInfo.warning ? 'exclamation-triangle' : 'file-earmark'} slot="icon"></sl-icon>
+                      <sl-icon name=${fileInfo.warning ? 'exclamation-triangle' : 'file-earmark'} slot="image"></sl-icon>
                     </sl-file-upload-item>
                   `
                 )}

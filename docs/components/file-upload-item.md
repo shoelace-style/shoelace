@@ -7,7 +7,7 @@ File items represent an uploaded file and provides information about file type, 
 ```html preview
 <sl-file-upload-item>
   filename_lorem_ipsum.jpg
-  <sl-icon name="file-earmark" slot="icon"></sl-icon>
+  <sl-icon name="file-earmark" slot="image"></sl-icon>
 </sl-file-upload-item>
 ```
 
@@ -25,7 +25,7 @@ Add the `closable` attribute to show a close button that will hide the element.
 ```html preview
 <sl-file-upload-item closable>
   filename_lorem_ipsum.jpg
-  <sl-icon name="file-earmark" slot="icon"></sl-icon>
+  <sl-icon name="file-earmark" slot="image"></sl-icon>
 </sl-file-upload-item>
 ```
 
@@ -36,7 +36,7 @@ Set the `size` attribute to display the filesize of the item. The [Format Byte C
 ```html preview
 <sl-file-upload-item size="120000">
   filename_lorem_ipsum.jpg
-  <sl-icon name="file-earmark" slot="icon"></sl-icon>
+  <sl-icon name="file-earmark" slot="image"></sl-icon>
 </sl-file-upload-item>
 ```
 
@@ -48,7 +48,7 @@ The close button can be customized by using the `close-button` slot and by styli
 <sl-file-upload-item closable>
   filename_lorem_ipsum.jpg
   <sl-icon-button name="trash" slot="close-button" class="icon-button-color"></sl-icon-button>
-  <sl-icon name="file-earmark" slot="icon"></sl-icon>
+  <sl-icon name="file-earmark" slot="image"></sl-icon>
 </sl-file-upload-item>
 
 <style>
@@ -74,7 +74,7 @@ Show a loading bar by setting the `loading` attribute. Per default this will dis
 ```html preview
 <sl-file-upload-item loading closable size="120000">
   filename_lorem_ipsum.jpg
-  <sl-icon name="file-earmark" slot="icon"></sl-icon>
+  <sl-icon name="file-earmark" slot="image"></sl-icon>
 </sl-file-upload-item>
 ```
 
@@ -85,7 +85,7 @@ Set the `progress` attribute to show the loading progress between `0` and `100`.
 ```html preview
 <sl-file-upload-item loading progress="40" closable size="120000" class="file-item">
   filename_lorem_ipsum.jpg
-  <sl-icon name="file-earmark" slot="icon"></sl-icon>
+  <sl-icon name="file-earmark" slot="image"></sl-icon>
 </sl-file-upload-item>
 
 <br />
@@ -125,7 +125,7 @@ Use the `label` attribute to label the loading bar and tell assistive devices ho
 ```html preview
 <sl-file-upload-item loading progress="20" label="Uploading File" closable>
   filename_lorem_ipsum.jpg
-  <sl-icon name="file-earmark" slot="icon"></sl-icon>
+  <sl-icon name="file-earmark" slot="image"></sl-icon>
 </sl-file-upload-item>
 ```
 
@@ -136,7 +136,7 @@ Set the `warning` attribute to change the color of the element.
 ```html preview
 <sl-file-upload-item warning closable>
   File size exceeds 5MB limit
-  <sl-icon name="exclamation-triangle" slot="icon"></sl-icon>
+  <sl-icon name="exclamation-triangle" slot="image"></sl-icon>
 </sl-file-upload-item>
 ```
 
