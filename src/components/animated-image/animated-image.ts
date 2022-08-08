@@ -1,8 +1,8 @@
 import { html, LitElement } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
-import '../../components/icon/icon';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
+import '../icon/icon';
 import styles from './animated-image.styles';
 import type { CSSResultGroup } from 'lit';
 

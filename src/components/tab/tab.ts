@@ -1,11 +1,11 @@
 import { html, LitElement } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import '../../components/icon-button/icon-button';
 import { autoIncrement } from '../../internal/auto-increment';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import { LocalizeController } from '../../utilities/localize';
+import '../icon-button/icon-button';
 import styles from './tab.styles';
 import type { CSSResultGroup } from 'lit';
 

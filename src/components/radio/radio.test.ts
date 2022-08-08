@@ -1,5 +1,5 @@
 import { expect, fixture, html } from '@open-wc/testing';
-import type SlRadioGroup from '../../components/radio-group/radio-group';
+import type SlRadioGroup from '../radio-group/radio-group';
 import type SlRadio from './radio';
 
 describe('<sl-radio>', () => {

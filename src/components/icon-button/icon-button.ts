@@ -3,8 +3,8 @@ import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { html, literal } from 'lit/static-html.js';
-import '../../components/icon/icon';
 import { emit } from '../../internal/event';
+import '../icon/icon';
 import styles from './icon-button.styles';
 import type { CSSResultGroup } from 'lit';
 

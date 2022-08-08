@@ -3,7 +3,7 @@ import { customElement, query } from 'lit/decorators.js';
 import { emit } from '../../internal/event';
 import { getTextContent } from '../../internal/slot';
 import styles from './menu.styles';
-import type SlMenuItem from '../../components/menu-item/menu-item';
+import type SlMenuItem from '../menu-item/menu-item';
 import type { CSSResultGroup } from 'lit';
 export interface MenuSelectEventDetail {
   item: SlMenuItem;

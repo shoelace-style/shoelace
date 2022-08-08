@@ -1,10 +1,10 @@
 import { html, LitElement } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import '../../components/icon/icon';
 import { emit } from '../../internal/event';
 import { getTextContent } from '../../internal/slot';
 import { watch } from '../../internal/watch';
+import '../icon/icon';
 import styles from './menu-item.styles';
 import type { CSSResultGroup } from 'lit';
 

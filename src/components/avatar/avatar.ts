@@ -1,8 +1,8 @@
 import { html, LitElement } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import '../../components/icon/icon';
 import { watch } from '../../internal/watch';
+import '../icon/icon';
 import styles from './avatar.styles';
 import type { CSSResultGroup } from 'lit';
 

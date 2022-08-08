@@ -5,12 +5,12 @@ import { live } from 'lit/directives/live.js';
 import { when } from 'lit/directives/when.js';
 import { animateTo, shimKeyframesHeightAuto, stopAnimations } from 'src/internal/animate';
 import { getAnimation, setDefaultAnimation } from 'src/utilities/animation-registry';
-import '../../components/checkbox/checkbox';
-import '../../components/icon/icon';
-import '../../components/spinner/spinner';
 import { emit } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import { LocalizeController } from '../../utilities/localize';
+import '../checkbox/checkbox';
+import '../icon/icon';
+import '../spinner/spinner';
 import styles from './tree-item.styles';
 import type { PropertyValueMap } from 'lit';
 

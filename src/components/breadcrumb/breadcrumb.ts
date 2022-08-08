@@ -1,9 +1,9 @@
 import { html, LitElement } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
-import '../../components/icon/icon';
 import { LocalizeController } from '../../utilities/localize';
+import '../icon/icon';
 import styles from './breadcrumb.styles';
-import type SlBreadcrumbItem from '../../components/breadcrumb-item/breadcrumb-item';
+import type SlBreadcrumbItem from '../breadcrumb-item/breadcrumb-item';
 import type { CSSResultGroup } from 'lit';
 
 /**

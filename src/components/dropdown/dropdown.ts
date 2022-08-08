@@ -10,10 +10,10 @@ import { watch } from '../../internal/watch';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
 import { LocalizeController } from '../../utilities/localize';
 import styles from './dropdown.styles';
-import type SlButton from '../../components/button/button';
-import type SlIconButton from '../../components/icon-button/icon-button';
-import type SlMenuItem from '../../components/menu-item/menu-item';
-import type SlMenu from '../../components/menu/menu';
+import type SlButton from '../button/button';
+import type SlIconButton from '../icon-button/icon-button';
+import type SlMenuItem from '../menu-item/menu-item';
+import type SlMenu from '../menu/menu';
 import type { CSSResultGroup } from 'lit';
 
 /**

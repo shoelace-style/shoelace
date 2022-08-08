@@ -7,12 +7,15 @@ import { emit, waitForEvent } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
 import { LocalizeController } from '../../utilities/localize';
+import '../popup/popup';
 import styles from './tooltip.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
  * @since 2.0
  * @status stable
+ *
+ * @dependency sl-popup
  *
  * @slot - The tooltip's target element. Only the first element will be used as the target.
  * @slot content - The tooltip's content. Alternatively, you can use the `content` attribute.
