@@ -68,6 +68,7 @@ export default css`
 
   .menu-item .menu-item__check,
   .menu-item .menu-item__chevron {
+    flex: 0 0 auto;
     display: flex;
     align-items: center;
     justify-content: center;

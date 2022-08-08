@@ -23,6 +23,7 @@ To upgrade to this version, you will need to rework your radio controls by movin
   - Removed the `sl-change` event from `<sl-radio>` and `<sl-radio-button>` (listen for it on the radio group instead)
   - Removed the `invalid` attribute from `<sl-radio>` and `<sl-radio-button>`
   - Removed `setCustomValidity()` and `reportValidity()` from `<sl-radio>` and `<sl-radio-button>` (now available on the radio group)
+- Fixed a bug where menu items weren't always aligned correctly
 - Revert disabled focus behavior in `<sl-tag-group>`, `<sl-menu>`, and `<sl-tree>` to be consistent with native form controls and menus [#845](https://github.com/shoelace-style/shoelace/issues/845)
 
 ## 2.0.0-beta.79
