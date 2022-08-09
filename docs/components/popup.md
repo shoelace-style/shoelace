@@ -1038,7 +1038,7 @@ Scroll the container to see auto-size in action.
 ```html preview
 <div class="popup-auto-size">
   <div class="overflow">
-    <sl-popup placement="bottom" auto-size auto-size-padding="10" active>
+    <sl-popup placement="bottom" auto-size active>
       <span slot="anchor"></span>
       <div class="box"></div>
     </sl-popup>
