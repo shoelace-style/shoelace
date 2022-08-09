@@ -9,9 +9,9 @@ describe('<sl-tooltip>', () => {
         <sl-button>Hover Me</sl-button>
       </sl-tooltip>
     `);
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="body"]')!;
+    const body = el.shadowRoot!.querySelector<HTMLElement>('[part="body"]')!;
 
-    expect(base.hidden).to.be.false;
+    expect(body.hidden).to.be.false;
   });
 
   it('should not be visible without the open attribute', async () => {
@@ -20,9 +20,9 @@ describe('<sl-tooltip>', () => {
         <sl-button>Hover Me</sl-button>
       </sl-tooltip>
     `);
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="body"]')!;
+    const body = el.shadowRoot!.querySelector<HTMLElement>('[part="body"]')!;
 
-    expect(base.hidden).to.be.true;
+    expect(body.hidden).to.be.true;
   });
 
   it('should emit sl-show and sl-after-show when calling show()', async () => {
@@ -31,7 +31,7 @@ describe('<sl-tooltip>', () => {
         <sl-button>Hover Me</sl-button>
       </sl-tooltip>
     `);
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="body"]')!;
+    const body = el.shadowRoot!.querySelector<HTMLElement>('[part="body"]')!;
     const showHandler = sinon.spy();
     const afterShowHandler = sinon.spy();
 
@@ -44,7 +44,7 @@ describe('<sl-tooltip>', () => {
 
     expect(showHandler).to.have.been.calledOnce;
     expect(afterShowHandler).to.have.been.calledOnce;
-    expect(base.hidden).to.be.false;
+    expect(body.hidden).to.be.false;
   });
 
   it('should emit sl-hide and sl-after-hide when calling hide()', async () => {
@@ -53,7 +53,7 @@ describe('<sl-tooltip>', () => {
         <sl-button>Hover Me</sl-button>
       </sl-tooltip>
     `);
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="body"]')!;
+    const body = el.shadowRoot!.querySelector<HTMLElement>('[part="body"]')!;
     const hideHandler = sinon.spy();
     const afterHideHandler = sinon.spy();
 
@@ -66,7 +66,7 @@ describe('<sl-tooltip>', () => {
 
     expect(hideHandler).to.have.been.calledOnce;
     expect(afterHideHandler).to.have.been.calledOnce;
-    expect(base.hidden).to.be.true;
+    expect(body.hidden).to.be.true;
   });
 
   it('should emit sl-show and sl-after-show when setting open = true', async () => {
@@ -75,7 +75,7 @@ describe('<sl-tooltip>', () => {
         <sl-button>Hover Me</sl-button>
       </sl-tooltip>
     `);
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="body"]')!;
+    const body = el.shadowRoot!.querySelector<HTMLElement>('[part="body"]')!;
     const showHandler = sinon.spy();
     const afterShowHandler = sinon.spy();
 
@@ -88,7 +88,7 @@ describe('<sl-tooltip>', () => {
 
     expect(showHandler).to.have.been.calledOnce;
     expect(afterShowHandler).to.have.been.calledOnce;
-    expect(base.hidden).to.be.false;
+    expect(body.hidden).to.be.false;
   });
 
   it('should emit sl-hide and sl-after-hide when setting open = false', async () => {
@@ -97,7 +97,7 @@ describe('<sl-tooltip>', () => {
         <sl-button>Hover Me</sl-button>
       </sl-tooltip>
     `);
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="body"]')!;
+    const body = el.shadowRoot!.querySelector<HTMLElement>('[part="body"]')!;
     const hideHandler = sinon.spy();
     const afterHideHandler = sinon.spy();
 
@@ -110,7 +110,7 @@ describe('<sl-tooltip>', () => {
 
     expect(hideHandler).to.have.been.calledOnce;
     expect(afterHideHandler).to.have.been.calledOnce;
-    expect(base.hidden).to.be.true;
+    expect(body.hidden).to.be.true;
   });
 
   it('should hide the tooltip when tooltip is visible and disabled becomes true', async () => {
@@ -119,7 +119,7 @@ describe('<sl-tooltip>', () => {
         <sl-button>Hover Me</sl-button>
       </sl-tooltip>
     `);
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="body"]')!;
+    const body = el.shadowRoot!.querySelector<HTMLElement>('[part="body"]')!;
     const hideHandler = sinon.spy();
     const afterHideHandler = sinon.spy();
 
@@ -132,6 +132,18 @@ describe('<sl-tooltip>', () => {
 
     expect(hideHandler).to.have.been.calledOnce;
     expect(afterHideHandler).to.have.been.calledOnce;
-    expect(base.hidden).to.be.true;
+    expect(body.hidden).to.be.true;
+  });
+
+  it('should show when open initially', async () => {
+    const el = await fixture<SlTooltip>(html`
+      <sl-tooltip content="This is a tooltip" open>
+        <sl-button>Hover Me</sl-button>
+      </sl-tooltip>
+    `);
+    const body = el.shadowRoot!.querySelector<HTMLElement>('[part="body"]')!;
+    await el.updateComplete;
+
+    expect(body.hidden).to.be.false;
   });
 });

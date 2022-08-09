@@ -111,12 +111,12 @@ export default class SlTooltip extends LitElement {
     });
   }
 
-  async firstUpdated() {
+  firstUpdated() {
     this.body.hidden = !this.open;
 
     // If the tooltip is visible on init, update its position
     if (this.open) {
-      await this.updateComplete;
+      this.popup.active = true;
       this.popup.reposition();
     }
   }
