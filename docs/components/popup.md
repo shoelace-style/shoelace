@@ -112,8 +112,8 @@ Popups are inactive and hidden until the `active` attribute is applied. Removing
     <div class="box"></div>
   </sl-popup>
 
-  <br>
-  <sl-switch checked>Active</sl-range>
+  <br />
+  <sl-switch checked>Active</sl-switch>
 </div>
 
 <style>
