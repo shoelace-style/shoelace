@@ -360,10 +360,10 @@ Tooltips will be clipped if they're inside a container that has `overflow: auto|
 
 <style>
   .tooltip-hoist {
+    position: relative;
     border: solid 2px var(--sl-panel-border-color);
     overflow: hidden;
     padding: var(--sl-spacing-medium);
-    position: relative;
   }
 </style>
 ```
