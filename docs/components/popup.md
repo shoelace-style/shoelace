@@ -4,9 +4,9 @@
 
 Popup is a utility that lets you declaratively anchor "popup" containers to another element.
 
-This component's name is inspired by [`<popup>`](https://github.com/MicrosoftEdge/MSEdgeExplainers/blob/main/Popup/explainer.md). It uses [Floating UI](https://floating-ui.com/) under the hood to provide a well-tested, lightweight, powerful, and fully declarative positioning utility for tooltips, dropdowns, and more.
+This component's name is inspired by [`<popup>`](https://github.com/MicrosoftEdge/MSEdgeExplainers/blob/main/Popup/explainer.md). It uses [Floating UI](https://floating-ui.com/) under the hood to provide a well-tested, lightweight, and fully declarative positioning utility for tooltips, dropdowns, and more.
 
-The popup's preferred placement, distance, and skidding (offset) can be configured using attributes. An arrow that points to the anchor can also be shown and customized to your liking. Additional positioning options are described in more detail below.
+The popup's preferred placement, distance, and skidding (offset) can be configured using attributes. An arrow that points to the anchor can be shown and customized to your liking. Additional positioning options are available and described in more detail below.
 
 ```html preview
 <div class="popup-overview">
@@ -70,9 +70,10 @@ The popup's preferred placement, distance, and skidding (offset) can be configur
   }
 
   .popup-overview .box {
-    width: 50px;
+    width: 100px;
     height: 50px;
     background: var(--sl-color-primary-600);
+    border-radius: var(--sl-border-radius-medium);
   }
 
   .popup-overview-options {
@@ -125,9 +126,10 @@ Popups are inactive and hidden until the `active` attribute is applied. Removing
   }
 
   .popup-active .box {
-    width: 50px;
+    width: 100px;
     height: 50px;
     background: var(--sl-color-primary-600);
+    border-radius: var(--sl-border-radius-medium);
   }
 </style>
 
@@ -177,9 +179,10 @@ Use the `placement` attribute to tell the popup the preferred placement of the p
   }
 
   .popup-placement .box {
-    width: 50px;
+    width: 100px;
     height: 50px;
     background: var(--sl-color-primary-600);
+    border-radius: var(--sl-border-radius-medium);
   }
 
   .popup-placement sl-select {
@@ -220,9 +223,10 @@ Use the `distance` attribute to change the distance between the popup and its an
   }
 
   .popup-distance .box {
-    width: 50px;
+    width: 100px;
     height: 50px;
     background: var(--sl-color-primary-600);
+    border-radius: var(--sl-border-radius-medium);
   }
 
   .popup-distance sl-range {
@@ -263,9 +267,10 @@ The `skidding` attribute is similar to `distance`, but instead allows you to off
   }
 
   .popup-skidding .box {
-    width: 50px;
+    width: 100px;
     height: 50px;
     background: var(--sl-color-primary-600);
+    border-radius: var(--sl-border-radius-medium);
   }
 
   .popup-skidding sl-range {
@@ -311,9 +316,10 @@ Add an arrow to your popup with the `arrow` attribute. It's usually a good idea 
   }
 
   .popup-arrow .box {
-    width: 50px;
+    width: 100px;
     height: 50px;
     background: var(--sl-color-primary-600);
+    border-radius: var(--sl-border-radius-medium);
   }
 </style>
 
@@ -365,9 +371,10 @@ Toggle the switch and scroll the container to see the difference.
   }
 
   .popup-strategy .box {
-    width: 50px;
+    width: 100px;
     height: 50px;
     background: var(--sl-color-primary-600);
+    border-radius: var(--sl-border-radius-medium);
   }
 
   .popup-strategy sl-switch {
@@ -417,9 +424,10 @@ Scroll the container to see how the popup flips to prevent clipping.
   }
 
   .popup-flip .box {
-    width: 50px;
+    width: 100px;
     height: 50px;
     background: var(--sl-color-primary-600);
+    border-radius: var(--sl-border-radius-medium);
   }
 </style>
 ```
@@ -461,6 +469,7 @@ Toggle the switch to see the difference.
     width: 300px;
     height: 50px;
     background: var(--sl-color-primary-600);
+    border-radius: var(--sl-border-radius-medium);
   }
 </style>
 
@@ -516,6 +525,7 @@ Scroll the container to see auto-size in action.
     width: 100%;
     height: 100%;
     background: var(--sl-color-primary-600);
+    border-radius: var(--sl-border-radius-medium);
   }
 </style>
 ```
