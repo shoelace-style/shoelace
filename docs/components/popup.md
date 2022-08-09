@@ -97,6 +97,124 @@ The popup's preferred placement, distance, and skidding (offset) can be configur
 </style>
 ```
 
+```jsx react
+import { useState } from 'react';
+import { SlPopup, SlSelect, SlMenuItem, SlInput, SlSwitch } from '@shoelace-style/shoelace/dist/react';
+
+const css = `
+  .popup-overview sl-popup {
+    --arrow-color: var(--sl-color-primary-600);
+  }
+
+  .popup-overview span[slot='anchor'] {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    border: dashed 2px var(--sl-color-neutral-600);
+    margin: 50px;
+  }
+
+  .popup-overview .box {
+    width: 100px;
+    height: 50px;
+    background: var(--sl-color-primary-600);
+    border-radius: var(--sl-border-radius-medium);
+  }
+
+  .popup-overview-options {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    gap: 1rem;
+  }
+
+  .popup-overview-options sl-select {
+    width: 160px;
+  }
+
+  .popup-overview-options sl-input {
+    width: 100px;
+  }
+
+  .popup-overview-options + .popup-overview-options {
+    margin-top: 1rem;
+  }
+`;
+
+const App = () => {
+  const [placement, setPlacement] = useState('top');
+  const [distance, setDistance] = useState(0);
+  const [skidding, setSkidding] = useState(0);
+  const [active, setActive] = useState(true);
+  const [arrow, setArrow] = useState(false);
+
+  return (
+    <>
+      <div className="popup-overview">
+        <SlPopup
+          placement={placement}
+          active={active || null}
+          distance={distance}
+          skidding={skidding}
+          arrow={arrow || null}
+        >
+          <span slot="anchor" />
+          <div className="box" />
+        </SlPopup>
+
+        <div className="popup-overview-options">
+          <SlSelect
+            label="Placement"
+            name="placement"
+            value={placement}
+            className="popup-overview-select"
+            onSlChange={event => setPlacement(event.target.value)}
+          >
+            <SlMenuItem value="top">top</SlMenuItem>
+            <SlMenuItem value="top-start">top-start</SlMenuItem>
+            <SlMenuItem value="top-end">top-end</SlMenuItem>
+            <SlMenuItem value="bottom">bottom</SlMenuItem>
+            <SlMenuItem value="bottom-start">bottom-start</SlMenuItem>
+            <SlMenuItem value="bottom-end">bottom-end</SlMenuItem>
+            <SlMenuItem value="right">right</SlMenuItem>
+            <SlMenuItem value="right-start">right-start</SlMenuItem>
+            <SlMenuItem value="right-end">right-end</SlMenuItem>
+            <SlMenuItem value="left">left</SlMenuItem>
+            <SlMenuItem value="left-start">left-start</SlMenuItem>
+            <SlMenuItem value="left-end">left-end</SlMenuItem>
+          </SlSelect>
+          <SlInput
+            type="number"
+            name="distance"
+            label="distance"
+            value={distance}
+            onSlInput={event => setDistance(event.target.value)}
+          />
+          <SlInput
+            type="number"
+            name="skidding"
+            label="Skidding"
+            value={distance}
+            onSlInput={event => setSkidding(event.target.value)}
+          />
+        </div>
+
+        <div className="popup-overview-options">
+          <SlSwitch checked={active} onSlChange={event => setActive(event.target.checked)}>
+            Active
+          </SlSwitch>
+          <SlSwitch checked={arrow} onSlChange={event => setArrow(event.target.checked)}>
+            Arrow
+          </SlSwitch>
+        </div>
+      </div>
+
+      <style>{css}</style>
+    </>
+  );
+};
+```
+
 ?> A popup's anchor should never be styled with `display: contents` since the coordinates will not be eligible for calculation. However, if the anchor is a `<slot>` element, popup will use the first assigned element as the anchor. This behavior allows other components to pass anchors through more easily via composition.
 
 ## Examples
@@ -140,6 +258,50 @@ Popups are inactive and hidden until the `active` attribute is applied. Removing
 
   active.addEventListener('sl-change', () => (popup.active = active.checked));
 </script>
+```
+
+```jsx react
+import { useState } from 'react';
+import { SlPopup, SlSwitch } from '@shoelace-style/shoelace/dist/react';
+
+const css = `
+  .popup-active span[slot='anchor'] {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    border: dashed 2px var(--sl-color-neutral-600);
+    margin: 50px;
+  }
+
+  .popup-active .box {
+    width: 100px;
+    height: 50px;
+    background: var(--sl-color-primary-600);
+    border-radius: var(--sl-border-radius-medium);
+  }
+`;
+
+const App = () => {
+  const [active, setActive] = useState(true);
+
+  return (
+    <>
+      <div className="popup-active">
+        <SlPopup placement="top" active={active}>
+          <span slot="anchor" />
+          <div className="box" />
+        </SlPopup>
+
+        <br />
+        <SlSwitch checked={active} onSlChange={event => setActive(event.target.checked)}>
+          Active
+        </SlSwitch>
+      </div>
+
+      <style>{css}</style>
+    </>
+  );
+};
 ```
 
 ### Placement
@@ -199,6 +361,64 @@ Use the `placement` attribute to tell the popup the preferred placement of the p
 </script>
 ```
 
+```jsx react
+import { useState } from 'react';
+import { SlPopup, SlSelect, SlMenuItem } from '@shoelace-style/shoelace/dist/react';
+
+const css = `
+  .popup-placement span[slot='anchor'] {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    border: dashed 2px var(--sl-color-neutral-600);
+    margin: 50px;
+  }
+
+  .popup-placement .box {
+    width: 100px;
+    height: 50px;
+    background: var(--sl-color-primary-600);
+    border-radius: var(--sl-border-radius-medium);
+  }
+
+  .popup-placement sl-select {
+    max-width: 280px;
+  }
+`;
+
+const App = () => {
+  const [placement, setPlacement] = useState('top');
+
+  return (
+    <div className="popup-active">
+      <div className="popup-placement">
+        <SlPopup placement={placement} active>
+          <span slot="anchor" />
+          <div className="box" />
+        </SlPopup>
+
+        <SlSelect label="Placement" value={placement} onSlChange={event => setPlacement(event.target.value)}>
+          <SlMenuItem value="top">top</SlMenuItem>
+          <SlMenuItem value="top-start">top-start</SlMenuItem>
+          <SlMenuItem value="top-end">top-end</SlMenuItem>
+          <SlMenuItem value="bottom">bottom</SlMenuItem>
+          <SlMenuItem value="bottom-start">bottom-start</SlMenuItem>
+          <SlMenuItem value="bottom-end">bottom-end</SlMenuItem>
+          <SlMenuItem value="right">right</SlMenuItem>
+          <SlMenuItem value="right-start">right-start</SlMenuItem>
+          <SlMenuItem value="right-end">right-end</SlMenuItem>
+          <SlMenuItem value="left">left</SlMenuItem>
+          <SlMenuItem value="left-start">left-start</SlMenuItem>
+          <SlMenuItem value="left-end">left-end</SlMenuItem>
+        </SlSelect>
+      </div>
+
+      <style>{css}</style>
+    </div>
+  );
+};
+```
+
 ### Distance
 
 Use the `distance` attribute to change the distance between the popup and its anchor. A positive value will move the popup further away and a negative value will move it closer.
@@ -241,6 +461,58 @@ Use the `distance` attribute to change the distance between the popup and its an
 
   distance.addEventListener('sl-change', () => (popup.distance = distance.value));
 </script>
+```
+
+```jsx react
+import { useState } from 'react';
+import { SlPopup, SlRange } from '@shoelace-style/shoelace/dist/react';
+
+const css = `
+  .popup-distance span[slot='anchor'] {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    border: dashed 2px var(--sl-color-neutral-600);
+    margin: 50px;
+  }
+
+  .popup-distance .box {
+    width: 100px;
+    height: 50px;
+    background: var(--sl-color-primary-600);
+    border-radius: var(--sl-border-radius-medium);
+  }
+
+  .popup-distance sl-range {
+    max-width: 260px;
+  }
+`;
+
+const App = () => {
+  const [distance, setDistance] = useState(0);
+
+  return (
+    <>
+      <div className="popup-distance">
+        <SlPopup placement="top" distance={distance} active>
+          <span slot="anchor" />
+          <div class="box" />
+        </SlPopup>
+
+        <SlRange
+          label="Distance"
+          min="-50"
+          max="50"
+          step="1"
+          value={distance}
+          onSlChange={event => setDistance(event.target.value)}
+        />
+      </div>
+
+      <style>{css}</style>
+    </>
+  );
+};
 ```
 
 ### Skidding
@@ -287,6 +559,58 @@ The `skidding` attribute is similar to `distance`, but instead allows you to off
 </script>
 ```
 
+```jsx react
+import { useState } from 'react';
+import { SlPopup, SlRange } from '@shoelace-style/shoelace/dist/react';
+
+const css = `
+  .popup-skidding span[slot='anchor'] {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    border: dashed 2px var(--sl-color-neutral-600);
+    margin: 50px;
+  }
+
+  .popup-skidding .box {
+    width: 100px;
+    height: 50px;
+    background: var(--sl-color-primary-600);
+    border-radius: var(--sl-border-radius-medium);
+  }
+
+  .popup-skidding sl-range {
+    max-width: 260px;
+  }
+`;
+
+const App = () => {
+  const [skidding, setSkidding] = useState(0);
+
+  return (
+    <>
+      <div className="popup-skidding">
+        <SlPopup placement="top" skidding={skidding} active>
+          <span slot="anchor"></span>
+          <div className="box"></div>
+        </SlPopup>
+
+        <SlRange
+          label="Skidding"
+          min="-50"
+          max="50"
+          step="1"
+          value={skidding}
+          onSlChange={event => setSkidding(event.target.value)}
+        />
+      </div>
+
+      <style>{css}</style>
+    </>
+  );
+};
+```
+
 ### Arrows
 
 Add an arrow to your popup with the `arrow` attribute. It's usually a good idea to set a `distance` to make room for the arrow. To adjust the arrow's color and size, use the `--arrow-color` and `--arrow-size` custom properties, respectively. You can also target the `arrow` part to add additional styles such as shadows and borders.
@@ -330,6 +654,54 @@ Add an arrow to your popup with the `arrow` attribute. It's usually a good idea 
 
   arrow.addEventListener('sl-change', () => (popup.arrow = arrow.checked));
 </script>
+```
+
+```jsx react
+import { useState } from 'react';
+import { SlPopup, SlSwitch } from '@shoelace-style/shoelace/dist/react';
+
+const css = `
+  .popup-arrow sl-popup {
+    --arrow-color: var(--sl-color-primary-600);
+  }
+
+  .popup-arrow span[slot='anchor'] {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    border: dashed 2px var(--sl-color-neutral-600);
+    margin: 50px;
+  }
+
+  .popup-arrow .box {
+    width: 100px;
+    height: 50px;
+    background: var(--sl-color-primary-600);
+    border-radius: var(--sl-border-radius-medium);
+  }
+`;
+
+const App = () => {
+  const [arrow, setArrow] = useState(true);
+
+  return (
+    <>
+      <div className="popup-arrow">
+        <SlPopup placement="top" arrow={arrow} distance="8" active>
+          <span slot="anchor" />
+          <div className="box" />
+        </SlPopup>
+
+        <br />
+        <SlSwitch checked={arrow} onSlChange={event => setArrow(event.target.checked)}>
+          Arrow
+        </SlSwitch>
+      </div>
+
+      <style>{css}</style>
+    </>
+  );
+};
 ```
 
 ### Positioning Strategy
@@ -391,6 +763,62 @@ Toggle the switch and scroll the container to see the difference.
 </script>
 ```
 
+```jsx react
+import { useState } from 'react';
+import { SlPopup, SlSwitch } from '@shoelace-style/shoelace/dist/react';
+
+const css = `
+  .popup-strategy .overflow {
+    position: relative;
+    height: 300px;
+    border: solid 2px var(--sl-color-neutral-200);
+    overflow: auto;
+  }
+
+  .popup-strategy span[slot='anchor'] {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    border: dashed 2px var(--sl-color-neutral-600);
+    margin: 150px 50px;
+  }
+
+  .popup-strategy .box {
+    width: 100px;
+    height: 50px;
+    background: var(--sl-color-primary-600);
+    border-radius: var(--sl-border-radius-medium);
+  }
+
+  .popup-strategy sl-switch {
+    margin-top: 1rem;
+  }
+`;
+
+const App = () => {
+  const [fixed, setFixed] = useState(true);
+
+  return (
+    <>
+      <div className="popup-strategy">
+        <div className="overflow">
+          <SlPopup placement="top" strategy={fixed ? 'fixed' : 'absolute'} active>
+            <span slot="anchor" />
+            <div className="box" />
+          </SlPopup>
+        </div>
+
+        <SlSwitch checked={fixed} onSlChange={event => setFixed(event.target.value)}>
+          Fixed
+        </SlSwitch>
+      </div>
+
+      <style>{css}</style>
+    </>
+  );
+};
+```
+
 ### Flip
 
 When the popup doesn't have enough room in its preferred placement, it can automatically flip to keep it in view. To enable this, use the `flip` attribute. By default, the popup will flip to the opposite placement, but you can configure preferred fallback placements using `flip-fallback-placement` and `flip-fallback-strategy`. Additional options are available to control the flip behavior's boundary and padding.
@@ -405,6 +833,9 @@ Scroll the container to see how the popup flips to prevent clipping.
       <div class="box"></div>
     </sl-popup>
   </div>
+
+  <br />
+  <sl-switch checked>Flip</sl-switch>
 </div>
 
 <style>
@@ -430,6 +861,67 @@ Scroll the container to see how the popup flips to prevent clipping.
     border-radius: var(--sl-border-radius-medium);
   }
 </style>
+
+<script>
+  const container = document.querySelector('.popup-flip');
+  const popup = container.querySelector('sl-popup');
+  const flip = container.querySelector('sl-switch');
+
+  flip.addEventListener('sl-change', () => (popup.flip = flip.checked));
+</script>
+```
+
+```jsx react
+import { useState } from 'react';
+import { SlPopup, SlSwitch } from '@shoelace-style/shoelace/dist/react';
+
+const css = `
+  .popup-flip .overflow {
+    position: relative;
+    height: 300px;
+    border: solid 2px var(--sl-color-neutral-200);
+    overflow: auto;
+  }
+
+  .popup-flip span[slot='anchor'] {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    border: dashed 2px var(--sl-color-neutral-600);
+    margin: 150px 50px;
+  }
+
+  .popup-flip .box {
+    width: 100px;
+    height: 50px;
+    background: var(--sl-color-primary-600);
+    border-radius: var(--sl-border-radius-medium);
+  }
+`;
+
+const App = () => {
+  const [flip, setFlip] = useState(true);
+
+  return (
+    <>
+      <div className="popup-flip">
+        <div className="overflow">
+          <SlPopup placement="top" flip={flip} active>
+            <span slot="anchor" />
+            <div className="box" />
+          </SlPopup>
+        </div>
+
+        <br />
+        <SlSwitch checked={flip} onSlChange={event => setFlip(event.target.checked)}>
+          Flip
+        </SlSwitch>
+      </div>
+
+      <style>{css}</style>
+    </>
+  );
+};
 ```
 
 ### Shift
@@ -482,6 +974,57 @@ Toggle the switch to see the difference.
 </script>
 ```
 
+```jsx react
+import { useState } from 'react';
+import { SlPopup, SlSwitch } from '@shoelace-style/shoelace/dist/react';
+
+const css = `
+  .popup-shift .overflow {
+    position: relative;
+    border: solid 2px var(--sl-color-neutral-200);
+    overflow: auto;
+  }
+
+  .popup-shift span[slot='anchor'] {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    border: dashed 2px var(--sl-color-neutral-600);
+    margin: 60px 0 0 10px;
+  }
+
+  .popup-shift .box {
+    width: 300px;
+    height: 50px;
+    background: var(--sl-color-primary-600);
+    border-radius: var(--sl-border-radius-medium);
+  }
+`;
+
+const App = () => {
+  const [shift, setShift] = useState(true);
+
+  return (
+    <>
+      <div className="popup-shift">
+        <div className="overflow">
+          <SlPopup placement="top" shift={shift} shift-padding="10" active>
+            <span slot="anchor" />
+            <div className="box" />
+          </SlPopup>
+        </div>
+
+        <SlSwitch checked={shift} onSlChange={event => setShift(event.target.checked)}>
+          Shift
+        </SlSwitch>
+      </div>
+
+      <style>{css}</style>
+    </>
+  );
+};
+```
+
 ### Auto-size
 
 Use the `auto-size` attribute to tell the popup to resize when necessary to prevent it from overflowing. You can use `autoSizeBoundary` and `auto-size-padding` to customize the behavior of this option.
@@ -498,6 +1041,9 @@ Scroll the container to see auto-size in action.
       <div class="box"></div>
     </sl-popup>
   </div>
+
+  <br />
+  <sl-switch checked>Auto-size</sl-switch>
 </div>
 
 <style>
@@ -528,6 +1074,72 @@ Scroll the container to see auto-size in action.
     border-radius: var(--sl-border-radius-medium);
   }
 </style>
+
+<script>
+  const container = document.querySelector('.popup-auto-size');
+  const popup = container.querySelector('sl-popup');
+  const autoSize = container.querySelector('sl-switch');
+
+  autoSize.addEventListener('sl-change', () => (popup.autoSize = autoSize.checked));
+</script>
+```
+
+```jsx react
+import { useState } from 'react';
+import { SlPopup, SlSwitch } from '@shoelace-style/shoelace/dist/react';
+
+const css = `
+  .popup-auto-size .overflow {
+    position: relative;
+    height: 300px;
+    border: solid 2px var(--sl-color-neutral-200);
+    overflow: auto;
+  }
+
+  .popup-auto-size span[slot='anchor'] {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    border: dashed 2px var(--sl-color-neutral-600);
+    margin: 100px 50px 250px 50px;
+  }
+
+  .popup-auto-size sl-popup::part(popup) {
+    width: 100px;
+    height: 200px;
+  }
+
+  .popup-auto-size .box {
+    width: 100%;
+    height: 100%;
+    background: var(--sl-color-primary-600);
+    border-radius: var(--sl-border-radius-medium);
+  }
+`;
+
+const App = () => {
+  const [autoSize, setAutoSize] = useState(true);
+
+  return (
+    <>
+      <div className="popup-auto-size">
+        <div className="overflow">
+          <SlPopup placement="bottom" auto-size={autoSize || null} auto-size-padding="10" active>
+            <span slot="anchor" />
+            <div className="box" />
+          </SlPopup>
+        </div>
+
+        <br />
+        <SlSwitch checked={autoSize} onSlChange={event => setAutoSize(event.target.checked)}>
+          Auto-size
+        </SlSwitch>
+      </div>
+
+      <style>{css}</style>
+    </>
+  );
+};
 ```
 
 [component-metadata:sl-popup]
