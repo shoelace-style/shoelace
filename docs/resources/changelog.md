@@ -27,7 +27,7 @@ To upgrade to this version, you will need to rework your radio controls by movin
 - Fixed a bug where menu items weren't always aligned correctly
 - Refactored `<sl-dropdown>` to use `<sl-popup>`
 - Refactored `<sl-tooltip>` to use `<sl-popup>` and added the `body` part
-- Revert disabled focus behavior in `<sl-tag-group>`, `<sl-menu>`, and `<sl-tree>` to be consistent with native form controls and menus [#845](https://github.com/shoelace-style/shoelace/issues/845)
+- Revert disabled focus behavior in `<sl-tab-group>`, `<sl-menu>`, and `<sl-tree>` to be consistent with native form controls and menus [#845](https://github.com/shoelace-style/shoelace/issues/845)
 
 ## 2.0.0-beta.79
 
