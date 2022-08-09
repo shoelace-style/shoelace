@@ -178,6 +178,7 @@ export default class SlRange extends LitElement {
     this.hasTooltip = false;
   }
 
+  @watch('hasTooltip', { waitUntilFirstUpdate: true })
   syncRange() {
     const percent = Math.max(0, (this.value - this.min) / (this.max - this.min));
 

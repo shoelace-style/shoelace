@@ -24,7 +24,8 @@ To upgrade to this version, you will need to rework your radio controls by movin
   - Removed the `invalid` attribute from `<sl-radio>` and `<sl-radio-button>`
   - Removed `setCustomValidity()` and `reportValidity()` from `<sl-radio>` and `<sl-radio-button>` (now available on the radio group)
 - Added the experimental `<sl-popup>` component
-- Fixed a bug where menu items weren't always aligned correctly
+- Fixed a bug in `<sl-menu-item>` where labels weren't always aligned correctly
+- Fixed a bug in `<sl-range>` that caused the tooltip to be positioned incorrectly when switching between LTR/RTL
 - Refactored `<sl-dropdown>` to use `<sl-popup>`
 - Refactored `<sl-tooltip>` to use `<sl-popup>` and added the `body` part
 - Revert disabled focus behavior in `<sl-tab-group>`, `<sl-menu>`, and `<sl-tree>` to be consistent with native form controls and menus [#845](https://github.com/shoelace-style/shoelace/issues/845)
