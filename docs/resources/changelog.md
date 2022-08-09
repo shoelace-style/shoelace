@@ -14,7 +14,7 @@ This release breaks radio buttons, which is something that needed to happen to s
 
 To upgrade to this version, you will need to rework your radio controls by moving `name` up to the radio group. And instead of setting `checked` to select a specific radio, you can set `value` on the radio group and the checked item will update automatically.
 
-- 🚨 BREAKING: improved accessibility of `<sl-radio-group>` and `<sl-radio>` so they announce properly in all screen readers
+- 🚨 BREAKING: improved accessibility of `<sl-radio-group>`, `<sl-radio>`, and `<sl-radio-button>` so they announce properly in screen readers
   - Added the `name` attribute to `<sl-radio-group>` and removed it from `<sl-radio>` and `<sl-radio-button>`
   - Added the `value` attribute to `<sl-radio-group>` (use this to control which radio is checked)
   - Added the `sl-change` event to `sl-radio-group`
