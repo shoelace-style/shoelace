@@ -66,7 +66,7 @@ export default class SlRange extends LitElement {
   /** The range's help text. If you need to display HTML, you can use the help-text slot instead. */
   @property({ attribute: 'help-text' }) helpText = '';
 
-  /** Disables the input. */
+  /** Disables the range. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
   /**
