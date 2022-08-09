@@ -17,6 +17,22 @@ export default css`
     --arrow-color: var(--sl-tooltip-background-color);
   }
 
+  .tooltip[placement^='top']::part(popup) {
+    transform-origin: bottom;
+  }
+
+  .tooltip[placement^='bottom']::part(popup) {
+    transform-origin: top;
+  }
+
+  .tooltip[placement^='left']::part(popup) {
+    transform-origin: right;
+  }
+
+  .tooltip[placement^='right']::part(popup) {
+    transform-origin: left;
+  }
+
   .tooltip__body {
     max-width: var(--max-width);
     border-radius: var(--sl-tooltip-border-radius);
@@ -29,21 +45,5 @@ export default css`
     padding: var(--sl-tooltip-padding);
     pointer-events: none;
     z-index: var(--sl-z-index-tooltip);
-  }
-
-  :host([placement^='top']) .tooltip-popup::part(popup) {
-    transform-origin: bottom;
-  }
-
-  :host([placement^='bottom']) .tooltip-popup::part(popup) {
-    transform-origin: top;
-  }
-
-  :host([placement^='left']) .tooltip-popup::part(popup) {
-    transform-origin: right;
-  }
-
-  :host([placement^='right']) .tooltip-popup::part(popup) {
-    transform-origin: left;
   }
 `;
