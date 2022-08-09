@@ -1,4 +1,3 @@
-import { autoUpdate, computePosition, flip, offset, shift, size } from '@floating-ui/dom';
 import { html, LitElement } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
@@ -9,16 +8,20 @@ import { getTabbableBoundary } from '../../internal/tabbable';
 import { watch } from '../../internal/watch';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
 import { LocalizeController } from '../../utilities/localize';
+import '../popup/popup';
 import styles from './dropdown.styles';
 import type SlButton from '../button/button';
 import type SlIconButton from '../icon-button/icon-button';
 import type SlMenuItem from '../menu-item/menu-item';
 import type SlMenu from '../menu/menu';
+import type SlPopup from '../popup/popup';
 import type { CSSResultGroup } from 'lit';
 
 /**
  * @since 2.0
  * @status stable
+ *
+ * @dependency sl-popup
  *
  * @slot - The dropdown's content.
  * @slot trigger - The dropdown's trigger, usually a `<sl-button>` element.
@@ -39,12 +42,11 @@ import type { CSSResultGroup } from 'lit';
 export default class SlDropdown extends LitElement {
   static styles: CSSResultGroup = styles;
 
+  @query('.dropdown') popup: SlPopup;
   @query('.dropdown__trigger') trigger: HTMLElement;
   @query('.dropdown__panel') panel: HTMLElement;
-  @query('.dropdown__positioner') positioner: HTMLElement;
 
   private readonly localize = new LocalizeController(this);
-  private positionerCleanup: ReturnType<typeof autoUpdate> | undefined;
 
   /** Indicates whether or not the dropdown is open. You can use this in lieu of the show/hide methods. */
   @property({ type: Boolean, reflect: true }) open = false;
@@ -109,8 +111,7 @@ export default class SlDropdown extends LitElement {
     // If the dropdown is visible on init, update its position
     if (this.open) {
       await this.updateComplete;
-      this.addOpenListeners();
-      this.startPositioner();
+      this.popup.reposition();
     }
   }
 
@@ -118,7 +119,6 @@ export default class SlDropdown extends LitElement {
     super.disconnectedCallback();
     this.removeOpenListeners();
     this.hide();
-    this.stopPositioner();
   }
 
   focusOnTrigger() {
@@ -195,14 +195,6 @@ export default class SlDropdown extends LitElement {
       this.hide();
       this.focusOnTrigger();
     }
-  }
-
-  @watch('distance')
-  @watch('hoist')
-  @watch('placement')
-  @watch('skidding')
-  handlePopoverOptionsChange() {
-    this.updatePositioner();
   }
 
   handleTriggerClick() {
@@ -340,7 +332,7 @@ export default class SlDropdown extends LitElement {
    * is activated.
    */
   reposition() {
-    this.updatePositioner();
+    this.popup.reposition();
   }
 
   addOpenListeners() {
@@ -372,10 +364,10 @@ export default class SlDropdown extends LitElement {
       this.addOpenListeners();
 
       await stopAnimations(this);
-      this.startPositioner();
       this.panel.hidden = false;
+      this.popup.active = true;
       const { keyframes, options } = getAnimation(this, 'dropdown.show', { dir: this.localize.dir() });
-      await animateTo(this.panel, keyframes, options);
+      await animateTo(this.popup.popup, keyframes, options);
 
       emit(this, 'sl-after-show');
     } else {
@@ -385,72 +377,32 @@ export default class SlDropdown extends LitElement {
 
       await stopAnimations(this);
       const { keyframes, options } = getAnimation(this, 'dropdown.hide', { dir: this.localize.dir() });
-      await animateTo(this.panel, keyframes, options);
+      await animateTo(this.popup.popup, keyframes, options);
       this.panel.hidden = true;
-      this.stopPositioner();
+      this.popup.active = false;
 
       emit(this, 'sl-after-hide');
     }
   }
 
-  private startPositioner() {
-    this.stopPositioner();
-    requestAnimationFrame(() => this.updatePositioner());
-    this.positionerCleanup = autoUpdate(this.trigger, this.positioner, this.updatePositioner.bind(this));
-  }
-
-  private updatePositioner() {
-    if (!this.open || !this.trigger || !this.positioner) {
-      return;
-    }
-
-    computePosition(this.trigger, this.positioner, {
-      placement: this.placement,
-      middleware: [
-        offset({ mainAxis: this.distance, crossAxis: this.skidding }),
-        flip(),
-        shift(),
-        size({
-          apply: ({ availableWidth, availableHeight }) => {
-            // Ensure the panel stays within the viewport when we have lots of menu items
-            Object.assign(this.panel.style, {
-              maxWidth: `${availableWidth}px`,
-              maxHeight: `${availableHeight}px`
-            });
-          }
-        })
-      ],
-      strategy: this.hoist ? 'fixed' : 'absolute'
-    }).then(({ x, y, placement }) => {
-      this.positioner.setAttribute('data-placement', placement);
-
-      Object.assign(this.positioner.style, {
-        position: this.hoist ? 'fixed' : 'absolute',
-        left: `${x}px`,
-        top: `${y}px`
-      });
-    });
-  }
-
-  private stopPositioner() {
-    if (this.positionerCleanup) {
-      this.positionerCleanup();
-      this.positionerCleanup = undefined;
-      this.positioner.removeAttribute('data-placement');
-    }
-  }
-
   render() {
     return html`
-      <div
+      <sl-popup
         part="base"
         id="dropdown"
+        placement=${this.placement}
+        distance=${this.distance}
+        skidding=${this.skidding}
+        strategy=${this.hoist ? 'fixed' : 'absolute'}
+        flip
+        shift
         class=${classMap({
           dropdown: true,
           'dropdown--open': this.open
         })}
       >
         <span
+          slot="anchor"
           part="trigger"
           class="dropdown__trigger"
           @click=${this.handleTriggerClick}
@@ -460,19 +412,15 @@ export default class SlDropdown extends LitElement {
           <slot name="trigger" @slotchange=${this.handleTriggerSlotChange}></slot>
         </span>
 
-        <!-- Position the panel with a wrapper since the popover makes use of translate. This let's us add animations
-        on the panel without interfering with the position. -->
-        <div class="dropdown__positioner">
-          <div
-            part="panel"
-            class="dropdown__panel"
-            aria-hidden=${this.open ? 'false' : 'true'}
-            aria-labelledby="dropdown"
-          >
-            <slot></slot>
-          </div>
+        <div
+          part="panel"
+          class="dropdown__panel"
+          aria-hidden=${this.open ? 'false' : 'true'}
+          aria-labelledby="dropdown"
+        >
+          <slot></slot>
         </div>
-      </div>
+      </sl-popup>
     `;
   }
 }
