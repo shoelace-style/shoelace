@@ -308,6 +308,8 @@ const App = () => {
 
 Use the `placement` attribute to tell the popup the preferred placement of the popup. Note that the actual position will vary to ensure the panel remains in the viewport if you're using positioning features such as `flip` and `shift`.
 
+Since placement is preferred when using `flip`, you can observe the popup's current placement when it's active by looking at the `data-current-placement` attribute. This attribute will update as the popup flips to find available space and it will be removed when the popup is deactivated.
+
 ```html preview
 <div class="popup-placement">
   <sl-popup placement="top" active>

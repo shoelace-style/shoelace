@@ -213,6 +213,7 @@ export default class SlPopup extends LitElement {
       if (this.cleanup) {
         this.cleanup();
         this.cleanup = undefined;
+        this.removeAttribute('data-current-placement');
         requestAnimationFrame(() => resolve());
       } else {
         resolve();
@@ -318,6 +319,8 @@ export default class SlPopup extends LitElement {
     }).then(({ x, y, middlewareData, placement }) => {
       const staticSide = { top: 'bottom', right: 'left', bottom: 'top', left: 'right' }[placement.split('-')[0]]!;
 
+      this.setAttribute('data-current-placement', placement);
+
       Object.assign(this.popup.style, {
         left: `${x}px`,
         top: `${y}px`
@@ -352,7 +355,6 @@ export default class SlPopup extends LitElement {
           'popup--fixed': this.strategy === 'fixed',
           'popup--has-arrow': this.arrow
         })}
-        data-placement=${this.placement}
       >
         <slot></slot>
         ${this.arrow ? html`<div part="arrow" class="popup__arrow" role="presentation"></div>` : ''}
