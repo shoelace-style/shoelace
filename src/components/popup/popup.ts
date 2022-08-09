@@ -242,12 +242,8 @@ export default class SlPopup extends LitElement {
 
   /** Recalculate and repositions the popup. */
   reposition() {
-    if (!this.anchor) {
-      throw new Error('Invalid anchor element: no child with slot="anchor" was found.');
-    }
-
-    // Nothing to do if the popup is inactive
-    if (!this.active) {
+    // Nothing to do if the popup is inactive or the anchor doesn't exist
+    if (!this.active || !this.anchor) {
       return;
     }
 
