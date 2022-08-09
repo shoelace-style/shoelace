@@ -124,13 +124,9 @@ export default class SlPopup extends LitElement {
    * default, the boundary includes overflow ancestors that will cause the element to be clipped. If needed, you can
    * change the boundary by passing a reference to one or more elements to this property.
    */
-  @property({
-    attribute: 'flip-boundary',
-    type: Object
-  })
-  flipBoundary: Element | Element[];
+  @property({ type: Object }) flipBoundary: Element | Element[];
 
-  /** The amount of padding, in pixels, when the flip behavior will occur. */
+  /** The amount of padding, in pixels, to exceed before the flip behavior will occur. */
   @property({
     attribute: 'flip-padding',
     type: Number
@@ -145,42 +141,31 @@ export default class SlPopup extends LitElement {
    * default, the boundary includes overflow ancestors that will cause the element to be clipped. If needed, you can
    * change the boundary by passing a reference to one or more elements to this property.
    */
-  @property({
-    attribute: 'shift-boundary',
-    type: Object
-  })
-  shiftBoundary: Element | Element[];
+  @property({ type: Object }) shiftBoundary: Element | Element[];
 
-  /** The amount of padding, in pixels, when the shift behavior will occur. */
+  /** The amount of padding, in pixels, to exceed before the shift behavior will occur. */
   @property({
     attribute: 'shift-padding',
     type: Number
   })
   shiftPadding = 0;
 
-  /**
-   * When set, this will cause the popup to be resized to prevent it from overflowing. This is used as a last resort
-   * and will only be attempted after flipping and shifting, if those options are enabled.
-   */
-  @property({ type: Boolean }) resize = false;
+  /** When set, this will cause the popup to automatically resize itself to prevent it from overflowing. */
+  @property({ attribute: 'auto-size', type: Boolean }) autoSize = false;
 
   /**
-   * The resize boundary describes clipping element(s) that overflow will be checked relative to when resizing. By
+   * The auto-size boundary describes clipping element(s) that overflow will be checked relative to when resizing. By
    * default, the boundary includes overflow ancestors that will cause the element to be clipped. If needed, you can
    * change the boundary by passing a reference to one or more elements to this property.
    */
-  @property({
-    attribute: 'resize-boundary',
-    type: Object
-  })
-  resizeBoundary: Element | Element[];
+  @property({ type: Object }) autoSizeBoundary: Element | Element[];
 
-  /** The amount of padding, in pixels, when the resize behavior will occur. */
+  /** The amount of padding, in pixels, to exceed before the auto-size behavior will occur. */
   @property({
-    attribute: 'resize-padding',
+    attribute: 'auto-size-padding',
     type: Number
   })
-  resizePadding = 0;
+  autoSizePadding = 0;
 
   async connectedCallback() {
     super.connectedCallback();
@@ -273,6 +258,26 @@ export default class SlPopup extends LitElement {
       offset({ mainAxis: this.distance, crossAxis: this.skidding })
     ];
 
+    // First, we adjust the size as needed
+    if (this.autoSize) {
+      middleware.push(
+        size({
+          boundary: this.autoSizeBoundary,
+          padding: this.autoSizePadding,
+          apply: ({ availableWidth, availableHeight }) => {
+            // Ensure the panel stays within the viewport when we have lots of menu items
+            Object.assign(this.popup.style, {
+              maxWidth: `${availableWidth}px`,
+              maxHeight: `${availableHeight}px`
+            });
+          }
+        })
+      );
+    } else {
+      // Unset max-width/max-height when we're no longer using this middleware
+      Object.assign(this.popup.style, { maxWidth: '', maxHeight: '' });
+    }
+
     // Then we flip, as needed
     if (this.flip) {
       middleware.push(
@@ -294,26 +299,6 @@ export default class SlPopup extends LitElement {
           padding: this.shiftPadding
         })
       );
-    }
-
-    // Then, we adjust the size as needed
-    if (this.resize) {
-      middleware.push(
-        size({
-          boundary: this.resizeBoundary,
-          padding: this.resizePadding,
-          apply: ({ availableWidth, availableHeight }) => {
-            // Ensure the panel stays within the viewport when we have lots of menu items
-            Object.assign(this.popup.style, {
-              maxWidth: `${availableWidth}px`,
-              maxHeight: `${availableHeight}px`
-            });
-          }
-        })
-      );
-    } else {
-      // Unset max-width/max-height when we're no longer using this middleware
-      Object.assign(this.popup.style, { maxWidth: '', maxHeight: '' });
     }
 
     // Finally, we add an arrow
