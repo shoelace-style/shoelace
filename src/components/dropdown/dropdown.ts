@@ -105,13 +105,13 @@ export default class SlDropdown extends LitElement {
     }
   }
 
-  async firstUpdated() {
+  firstUpdated() {
     this.panel.hidden = !this.open;
 
     // If the dropdown is visible on init, update its position
     if (this.open) {
-      await this.updateComplete;
-      this.popup.reposition();
+      this.addOpenListeners();
+      this.popup.active = true;
     }
   }
 
