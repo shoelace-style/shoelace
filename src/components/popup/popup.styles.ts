@@ -12,7 +12,6 @@ export default css`
   }
 
   .popup {
-    display: block;
     position: absolute;
     isolation: isolate;
   }
