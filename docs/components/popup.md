@@ -810,7 +810,7 @@ const App = () => {
           </SlPopup>
         </div>
 
-        <SlSwitch checked={fixed} onSlChange={event => setFixed(event.target.value)}>
+        <SlSwitch checked={fixed} onSlChange={event => setFixed(event.target.checked)}>
           Fixed
         </SlSwitch>
       </div>
@@ -1038,7 +1038,7 @@ Scroll the container to see the popup resize as its available space changes.
 ```html preview
 <div class="popup-auto-size">
   <div class="overflow">
-    <sl-popup placement="top" auto-size active>
+    <sl-popup placement="top" auto-size auto-size-padding="10" active>
       <span slot="anchor"></span>
       <div class="box"></div>
     </sl-popup>
