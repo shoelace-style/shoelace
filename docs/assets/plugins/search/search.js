@@ -300,9 +300,12 @@
 
     // Show the search panel slash is pressed outside of a form element
     document.addEventListener('keydown', event => {
+      const isSlash = event.key === '/';
+      const isCtrlK = (event.metaKey || event.ctrlKey) && event.key === 'k';
+
       if (
         !isShowing &&
-        event.key === '/' &&
+        (isSlash || isCtrlK) &&
         !event.composedPath().some(el => ['input', 'textarea'].includes(el?.tagName?.toLowerCase()))
       ) {
         event.preventDefault();
