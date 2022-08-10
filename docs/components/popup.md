@@ -194,7 +194,7 @@ const App = () => {
             type="number"
             name="skidding"
             label="Skidding"
-            value={distance}
+            value={skidding}
             onSlInput={event => setSkidding(event.target.value)}
           />
         </div>
