@@ -24,11 +24,8 @@ const translation: Translation = {
   scrollToEnd: 'Scroll to end',
   scrollToStart: 'Scroll to start',
   selectAColorFromTheScreen: 'Select a color from the screen',
-  serverError: 'A server error occurred while transferring the file',
   showPassword: 'Show password',
-  toggleColorFormat: 'Toggle color format',
-  transferAbort: 'The transfer has been canceled by the user',
-  transferError: 'An error occurred while transferring the file'
+  toggleColorFormat: 'Toggle color format'
 };
 
 registerTranslation(translation);

@@ -24,11 +24,8 @@ const translation: Translation = {
   scrollToEnd: 'Zum Ende scrollen',
   scrollToStart: 'Zum Anfang scrollen',
   selectAColorFromTheScreen: 'Wähle eine Farbe vom Bildschirm',
-  serverError: '',
   showPassword: 'Passwort anzeigen',
-  toggleColorFormat: 'Farbformat umschalten',
-  transferAbort: '',
-  transferError: ''
+  toggleColorFormat: 'Farbformat umschalten'
 };
 
 registerTranslation(translation);

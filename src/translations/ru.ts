@@ -24,11 +24,8 @@ const translation: Translation = {
   scrollToEnd: 'Пролистать до конца',
   scrollToStart: 'Пролистать к началу',
   selectAColorFromTheScreen: 'Выберите цвет на экране',
-  serverError: '',
   showPassword: 'Показать пароль',
-  toggleColorFormat: 'Переключить цветовую модель',
-  transferAbort: '',
-  transferError: ''
+  toggleColorFormat: 'Переключить цветовую модель'
 };
 
 registerTranslation(translation);

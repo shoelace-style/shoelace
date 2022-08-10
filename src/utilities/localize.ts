@@ -31,9 +31,6 @@ export interface Translation extends DefaultTranslation {
   scrollToEnd: string;
   scrollToStart: string;
   selectAColorFromTheScreen: string;
-  serverError: string;
   showPassword: string;
   toggleColorFormat: string;
-  transferAbort: string;
-  transferError: string;
 }

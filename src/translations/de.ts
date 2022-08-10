@@ -24,11 +24,8 @@ const translation: Translation = {
   scrollToEnd: 'Zum Ende scrollen',
   scrollToStart: 'Zum Anfang scrollen',
   selectAColorFromTheScreen: 'Wähle eine Farbe vom Bildschirm',
-  serverError: 'Es ist ein Server-Fehler beim Übertragen der Datei aufgetreten',
   showPassword: 'Passwort anzeigen',
-  toggleColorFormat: 'Farbformat umschalten',
-  transferAbort: 'Die Übertragung wurde vom Benutzer abgebrochen',
-  transferError: 'Es ist ein Fehler beim Übertragen der Datei aufgetreten'
+  toggleColorFormat: 'Farbformat umschalten'
 };
 
 registerTranslation(translation);

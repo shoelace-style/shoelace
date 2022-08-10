@@ -24,11 +24,8 @@ const translation: Translation = {
   scrollToEnd: 'Scroll naar einde',
   scrollToStart: 'Scroll naar begin',
   selectAColorFromTheScreen: 'Selecteer een kleur van het scherm',
-  serverError: '',
   showPassword: 'Laat wachtwoord zien',
-  toggleColorFormat: 'Wissel kleurnotatie',
-  transferAbort: '',
-  transferError: ''
+  toggleColorFormat: 'Wissel kleurnotatie'
 };
 
 registerTranslation(translation);

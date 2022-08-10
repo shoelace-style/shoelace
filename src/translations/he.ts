@@ -24,11 +24,8 @@ const translation: Translation = {
   scrollToEnd: 'גלול עד הסוף',
   scrollToStart: 'גלול להתחלה',
   selectAColorFromTheScreen: 'בחור צבע מהמסך',
-  serverError: '',
   showPassword: 'הראה סיסמה',
-  toggleColorFormat: 'החלף פורמט צבע',
-  transferAbort: '',
-  transferError: ''
+  toggleColorFormat: 'החלף פורמט צבע'
 };
 
 registerTranslation(translation);

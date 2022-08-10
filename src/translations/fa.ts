@@ -24,11 +24,8 @@ const translation: Translation = {
   scrollToEnd: 'اسکرول به انتها',
   scrollToStart: 'اسکرول به ابتدا',
   selectAColorFromTheScreen: 'انتخاب یک رنگ از صفحه نمایش',
-  serverError: '',
   showPassword: 'نمایش دادن رمز',
-  toggleColorFormat: 'تغییر فرمت رنگ',
-  transferAbort: '',
-  transferError: ''
+  toggleColorFormat: 'تغییر فرمت رنگ'
 };
 
 registerTranslation(translation);

@@ -24,11 +24,8 @@ const translation: Translation = {
   scrollToEnd: '最後にスクロールする',
   scrollToStart: '最初にスクロールする',
   selectAColorFromTheScreen: '画面から色を選択してください',
-  serverError: '',
   showPassword: 'パスワードを表示',
-  toggleColorFormat: '色のフォーマットを切り替える',
-  transferAbort: '',
-  transferError: ''
+  toggleColorFormat: '色のフォーマットを切り替える'
 };
 
 registerTranslation(translation);
