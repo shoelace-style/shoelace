@@ -7,7 +7,7 @@ import '../../components/progress-bar/progress-bar';
 import { emit } from '../../internal/event';
 import { LocalizeController } from '../../utilities/localize';
 import styles from './file-upload.styles';
-import { hasValidFileSize, hasValidFileType, HttpMethod } from './library';
+import { hasValidFileSize, hasValidFileType } from './library';
 import type { FileInfo } from './library';
 import { FormSubmitController } from '../../internal/form';
 
@@ -120,93 +120,6 @@ export default class SlFileUpload extends LitElement {
   /** Indicates if multiple files can be uploaded */
   @property({ type: Boolean, reflect: true }) multiple = false;
 
-  /** Specifies a URL where the files should be uploaded to */
-  @property() url?: string;
-
-  /** Specifies the method to be used for the file transfer request */
-  @property() method: HttpMethod = HttpMethod.POST;
-
-  /** Specifies headers to be used for the file transfer request */
-  @property() headers?: Record<string, string>;
-
-  /** Specifies whether or not cross-site Access-Control requests should be made using credentials such as cookies, authorization headers or TLS client certificates */
-  @property({ type: Boolean, reflect: true, attribute: 'with-credentials' }) withCredentials = false;
-
-  /** Indicates whether the files should be send as binary data. Per default files will be send as FormData. */
-  @property({ type: Boolean, reflect: true, attribute: 'binary-body' }) binaryBody = false;
-
-  updateTransferProgress(progressEvent: ProgressEvent, fileInfo: FileInfo) {
-    if (progressEvent.lengthComputable) {
-      fileInfo.progress = (progressEvent.loaded / progressEvent.total) * 100;
-      this.requestUpdate();
-    }
-  }
-
-  onTransferComplete(event: ProgressEvent, httpRequest: XMLHttpRequest, fileInfo: FileInfo) {
-    fileInfo.loading = false;
-    if (httpRequest.status === 200) {
-      emit(this, 'sl-load', {
-        detail: { response: httpRequest.response as unknown }
-      });
-    } else {
-      fileInfo.warning = this.localize.term('serverError') as string;
-      fileInfo.accepted = false;
-
-      emit(this, 'sl-error', { detail: event });
-    }
-    this.requestUpdate();
-  }
-
-  onTransferError(event: ProgressEvent, fileInfo: FileInfo) {
-    fileInfo.loading = false;
-    fileInfo.warning = this.localize.term('transferError') as string;
-    fileInfo.accepted = false;
-    this.requestUpdate();
-
-    emit(this, 'sl-error', { detail: event });
-  }
-
-  onTransferAbort(event: ProgressEvent, fileInfo: FileInfo) {
-    fileInfo.loading = false;
-    fileInfo.warning = this.localize.term('transferAbort') as string;
-    fileInfo.accepted = false;
-    this.requestUpdate();
-
-    emit(this, 'sl-abort', { detail: event });
-  }
-
-  uploadFile(fileInfo: FileInfo, url: string) {
-    fileInfo.loading = true;
-    fileInfo.progress = 0;
-
-    const xhr = new XMLHttpRequest();
-    fileInfo.xhr = xhr;
-    xhr.open(this.method, url);
-
-    xhr.upload.onprogress = event => this.updateTransferProgress(event, fileInfo);
-    xhr.upload.onload = event => this.onTransferComplete(event, xhr, fileInfo);
-    xhr.upload.onerror = event => this.onTransferError(event, fileInfo);
-    xhr.upload.onabort = event => this.onTransferAbort(event, fileInfo);
-
-    if (this.headers) {
-      Object.entries(this.headers).forEach(entry => xhr.setRequestHeader(entry[0], entry[1]));
-    }
-
-    if (this.withCredentials) {
-      xhr.withCredentials = true;
-    }
-
-    if (this.binaryBody) {
-      xhr.setRequestHeader('Content-Type', fileInfo.file.type);
-      xhr.send(fileInfo.file);
-    } else {
-      const formData = new FormData();
-      formData.append(fileInfo.file.name, fileInfo.file);
-      xhr.setRequestHeader('Content-Type', 'multipart/form-data');
-      xhr.send(formData);
-    }
-  }
-
   addFile(file: File) {
     if (this.maxFiles && this.files.length >= this.maxFiles) {
       this.warning = this.localize.term('maxFiles') as string;
@@ -227,11 +140,9 @@ export default class SlFileUpload extends LitElement {
       fileInfo.accepted = true;
     }
 
-    this.files = this.multiple ? [...this.files, fileInfo] : [fileInfo];
+    emit(this, 'sl-change', { detail: fileInfo });
 
-    if (this.url) {
-      this.uploadFile(fileInfo, this.url);
-    }
+    this.files = this.multiple ? [...this.files, fileInfo] : [fileInfo];
   }
 
   handleFiles(fileList: FileList | null) {
@@ -244,8 +155,6 @@ export default class SlFileUpload extends LitElement {
       this.warning = this.localize.term('noMultipleFiles') as string;
       return;
     }
-
-    emit(this, 'sl-change', { detail: fileList });
 
     Object.values(fileList).forEach(file => this.addFile(file));
   }
@@ -289,12 +198,7 @@ export default class SlFileUpload extends LitElement {
 
   handleFileRemove(index: number) {
     const fileInfo = this.files[index];
-    if (fileInfo.loading) {
-      fileInfo.xhr?.abort();
-      emit(this, 'sl-abort', { detail: { fileInfo } });
-    } else {
-      emit(this, 'sl-remove', { detail: { fileInfo } });
-    }
+    emit(this, 'sl-remove', { detail: { fileInfo } });
     this.files = this.files.filter((_, fileIndex) => fileIndex !== index);
   }
 

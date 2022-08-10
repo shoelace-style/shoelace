@@ -266,50 +266,30 @@ const App = () => {
 
 ### Upload Files
 
-Set the `url` attribute to upload the files to the specified URL.
+To upload a file, listen to the `sl-change` event and handle the received file.
 
 ```html preview
-<sl-file-upload url="http://localhost:8080"></sl-file-upload>
-```
+<sl-file-upload class="upload-file" multiple></sl-file-upload>
 
-```jsx react
-import { SlFileUpload } from '@shoelace-style/shoelace/dist/react';
-const App = () => <SlFileUpload url="http://localhost:8080"></SlFileUpload>;
-```
+<script type="module">
+  import { serialize } from '../dist/utilities/form.js';
 
-### Upload method
-
-Set the `method` attribute to set the transfer method.
-
-```html preview
-<sl-file-upload url="http://localhost:8080" method="PUT"></sl-file-upload>
-```
-
-```jsx react
-import { SlFileUpload } from '@shoelace-style/shoelace/dist/react';
-
-const App = () => <SlFileUpload url="http://localhost:8080" method="PUT"></SlFileUpload>;
-```
-
-### Upload headers
-
-Set the `headers` property to define specific headers to be used for the file transfer.
-
-```html preview
-<sl-file-upload class="dropzone" url="http://localhost:8080"></sl-file-upload>
-
-<script>
-  const dropzone = document.querySelector('.dropzone');
-  dropzone.headers = { 'My-Awesome-Header': 'header value' };
+  const fileUpload = document.querySelector('.upload-file');
+  
+  fileUpload.addEventListener('sl-change', event => {
+    event.preventDefault();
+    const fileInfo = event.detail;
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'http://localhost:8080');
+    xhr.setRequestHeader('Content-Type', fileInfo.file.type);
+    xhr.send(fileInfo.file);
+  });
 </script>
 ```
 
 ```jsx react
 import { SlFileUpload } from '@shoelace-style/shoelace/dist/react';
-
-const headers = { 'My-Awesome-Header': 'header value' };
-
-const App = () => <SlFileUpload url="http://localhost:8080" headers={headers}></SlFileUpload>;
+const App = () => <SlFileUpload url="http://localhost:8080"></SlFileUpload>;
 ```
 
 ### Custom Icon
