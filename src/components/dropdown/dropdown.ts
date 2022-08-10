@@ -396,6 +396,8 @@ export default class SlDropdown extends LitElement {
         strategy=${this.hoist ? 'fixed' : 'absolute'}
         flip
         shift
+        auto-size
+        auto-size-padding="10"
         class=${classMap({
           dropdown: true,
           'dropdown--open': this.open

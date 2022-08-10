@@ -14,6 +14,8 @@ export default css`
   .popup {
     position: absolute;
     isolation: isolate;
+    max-width: var(--auto-size-available-width, none);
+    max-height: var(--auto-size-available-height, none);
   }
 
   .popup--fixed {

@@ -33,11 +33,6 @@ export default css`
     cursor: pointer;
   }
 
-  .select__menu {
-    max-height: 50vh;
-    overflow: auto;
-  }
-
   .select__menu::part(base) {
     border: none;
   }

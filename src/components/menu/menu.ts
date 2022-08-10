@@ -16,14 +16,11 @@ export interface MenuSelectEventDetail {
  * @slot - The menu's content, including menu items, menu labels, and dividers.
  *
  * @event {{ item: SlMenuItem }} sl-select - Emitted when a menu item is selected.
- *
- * @csspart base - The component's internal wrapper.
  */
 @customElement('sl-menu')
 export default class SlMenu extends LitElement {
   static styles: CSSResultGroup = styles;
 
-  @query('.menu') menu: HTMLElement;
   @query('slot') defaultSlot: HTMLSlotElement;
 
   private typeToSelectString = '';
@@ -183,15 +180,12 @@ export default class SlMenu extends LitElement {
 
   render() {
     return html`
-      <div
-        part="base"
-        class="menu"
+      <slot
+        @slotchange=${this.handleSlotChange}
         @click=${this.handleClick}
         @keydown=${this.handleKeyDown}
         @mousedown=${this.handleMouseDown}
-      >
-        <slot @slotchange=${this.handleSlotChange}></slot>
-      </div>
+      ></slot>
     `;
   }
 }

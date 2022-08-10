@@ -21,8 +21,15 @@ import type { CSSResultGroup } from 'lit';
  *  maybe a border or box shadow.
  * @csspart popup - The popup's container. Useful for setting a background color, box shadow, etc.
  *
- * @cssproperty [--arrow-size=4px] - The size of the arrow. Note that an arrow won't be shown unless the `arrow` attribute is used.
+ * @cssproperty [--arrow-size=4px] - The size of the arrow. Note that an arrow won't be shown unless the `arrow`
+ *  attribute is used.
  * @cssproperty [--arrow-color=var(--sl-color-neutral-0)] - The color of the arrow.
+ * @cssproperty [--auto-size-available-width] - A read-only custom property that determines the amount of width the
+ *  popup can be before overflowing. Useful for positioning child elements that need to overflow. This property is only
+ *  available when using `auto-size`.
+ * @cssproperty [--auto-size-available-height] - A read-only custom property that determines the amount of height the
+ *  popup can be before overflowing. Useful for positioning child elements that need to overflow. This property is only
+ *  available when using `auto-size`.
  */
 @customElement('sl-popup')
 export default class SlPopup extends LitElement {
@@ -127,11 +134,7 @@ export default class SlPopup extends LitElement {
   @property({ type: Object }) flipBoundary: Element | Element[];
 
   /** The amount of padding, in pixels, to exceed before the flip behavior will occur. */
-  @property({
-    attribute: 'flip-padding',
-    type: Number
-  })
-  flipPadding = 0;
+  @property({ attribute: 'flip-padding', type: Number }) flipPadding = 0;
 
   /** Moves the popup along the axis to keep it in view when clipped. */
   @property({ type: Boolean }) shift = false;
@@ -144,11 +147,7 @@ export default class SlPopup extends LitElement {
   @property({ type: Object }) shiftBoundary: Element | Element[];
 
   /** The amount of padding, in pixels, to exceed before the shift behavior will occur. */
-  @property({
-    attribute: 'shift-padding',
-    type: Number
-  })
-  shiftPadding = 0;
+  @property({ attribute: 'shift-padding', type: Number }) shiftPadding = 0;
 
   /** When set, this will cause the popup to automatically resize itself to prevent it from overflowing. */
   @property({ attribute: 'auto-size', type: Boolean }) autoSize = false;
@@ -161,11 +160,7 @@ export default class SlPopup extends LitElement {
   @property({ type: Object }) autoSizeBoundary: Element | Element[];
 
   /** The amount of padding, in pixels, to exceed before the auto-size behavior will occur. */
-  @property({
-    attribute: 'auto-size-padding',
-    type: Number
-  })
-  autoSizePadding = 0;
+  @property({ attribute: 'auto-size-padding', type: Number }) autoSizePadding = 0;
 
   async connectedCallback() {
     super.connectedCallback();
@@ -214,6 +209,8 @@ export default class SlPopup extends LitElement {
         this.cleanup();
         this.cleanup = undefined;
         this.removeAttribute('data-current-placement');
+        this.style.removeProperty('--auto-size-available-width');
+        this.style.removeProperty('--auto-size-available-height');
         requestAnimationFrame(() => resolve());
       } else {
         resolve();
@@ -255,27 +252,7 @@ export default class SlPopup extends LitElement {
       offset({ mainAxis: this.distance, crossAxis: this.skidding })
     ];
 
-    // First, we adjust the size as needed
-    if (this.autoSize) {
-      middleware.push(
-        size({
-          boundary: this.autoSizeBoundary,
-          padding: this.autoSizePadding,
-          apply: ({ availableWidth, availableHeight }) => {
-            // Ensure the panel stays within the viewport when we have lots of menu items
-            Object.assign(this.popup.style, {
-              maxWidth: `${availableWidth}px`,
-              maxHeight: `${availableHeight}px`
-            });
-          }
-        })
-      );
-    } else {
-      // Unset max-width/max-height when we're no longer using this middleware
-      Object.assign(this.popup.style, { maxWidth: '', maxHeight: '' });
-    }
-
-    // Then we flip, as needed
+    // First we flip
     if (this.flip) {
       middleware.push(
         flip({
@@ -288,7 +265,7 @@ export default class SlPopup extends LitElement {
       );
     }
 
-    // Then we shift, as needed
+    // Then we shift
     if (this.shift) {
       middleware.push(
         shift({
@@ -296,6 +273,24 @@ export default class SlPopup extends LitElement {
           padding: this.shiftPadding
         })
       );
+    }
+
+    // Now we adjust the size as needed
+    if (this.autoSize) {
+      middleware.push(
+        size({
+          boundary: this.autoSizeBoundary,
+          padding: this.autoSizePadding,
+          apply: ({ availableWidth, availableHeight }) => {
+            this.style.setProperty('--auto-size-available-width', `${availableWidth}px`);
+            this.style.setProperty('--auto-size-available-height', `${availableHeight}px`);
+          }
+        })
+      );
+    } else {
+      // Cleanup styles if we're no longer using auto-size
+      this.style.removeProperty('--auto-size-available-width');
+      this.style.removeProperty('--auto-size-available-height');
     }
 
     // Finally, we add an arrow

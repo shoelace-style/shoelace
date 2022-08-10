@@ -38,12 +38,16 @@ export default css`
     font-weight: var(--sl-font-weight-normal);
     color: var(--color);
     box-shadow: var(--sl-shadow-large);
-    overflow: auto;
-    overscroll-behavior: none;
     pointer-events: none;
   }
 
   .dropdown--open .dropdown__panel {
     pointer-events: all;
+  }
+
+  /* When users slot a menu, make sure it conforms to the popup's auto-size */
+  ::slotted(sl-menu) {
+    max-width: var(--auto-size-available-width) !important;
+    max-height: var(--auto-size-available-height) !important;
   }
 `;
