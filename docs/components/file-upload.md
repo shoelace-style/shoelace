@@ -2,7 +2,7 @@
 
 [component-header:sl-file-upload]
 
-File Dropzone provides an area where files can be dragged and dropped onto from the Operating System to be uploaded or to be used for other tasks. It also provides a button to open a file dialog and select files from the file system. Per default the File Dropzone shows a list of all selected files below the dropzone.
+File Upload provides an area where files can be dragged and dropped onto from the Operating System to be uploaded or to be used for other tasks. It also provides a button to open a file dialog and select files from the file system. Per default the File Dropzone shows a list of all selected files below the dropzone.
 
 ```html preview
 <sl-file-upload closable multiple></sl-file-upload>
@@ -18,7 +18,7 @@ const App = () => <SlFileUpload closable multiple></SlFileUpload>;
 
 ### Disabled
 
-Set the `disabled` attribute to disable the dropzone.
+Set the `disabled` attribute to disable the element.
 
 ```html preview
 <sl-file-upload disabled></sl-file-upload>
@@ -136,7 +136,7 @@ const App = () => <SlFileUpload max-file-size={100}></SlFileUpload>;
 Set the `max-files` attribute to limit the number of files that can be added. Only works together with the `multiple` attribute.
 
 ```html preview
-<sl-file-upload max-files="2"></sl-file-upload>
+<sl-file-upload max-files="2" multiple></sl-file-upload>
 ```
 
 ```jsx react
@@ -286,8 +286,33 @@ To upload a file, listen to the `sl-change` event and handle the received file. 
 ```
 
 ```jsx react
-import { SlFileUpload } from '@shoelace-style/shoelace/dist/react';
-const App = () => <SlFileUpload url="http://localhost:8080"></SlFileUpload>;
+import { useRef } from 'react';
+import { SlFileUpload, SlButton } from '@shoelace-style/shoelace/dist/react';
+import { serialize } from '../dist/utilities/form.js';
+
+const App = () => {
+  const form = useRef(null);
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    const fileInfo = event.detail;
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'http://localhost:8080');
+    xhr.setRequestHeader('Content-Type', fileInfo.file.type);
+    xhr.send(fileInfo.file);
+  }
+
+  return (
+    <form onSubmit={handleSubmit} ref={form}>
+      <SlFileUpload name="sl-file-upload" multiple></SlFileUpload>
+      <br />
+      <input type="file" name="native-input" multiple></input>
+      <br />
+      <SlButton type="reset" variant="default">Reset</SlButton>
+      <SlButton type="submit" variant="primary">Submit</SlButton>
+    </form>
+  );
+};
 ```
 
 ### Upload Files and indicate loading
@@ -319,8 +344,40 @@ Set `loading` to `true` on the FileInfo object to add a loading indicator to the
 ```
 
 ```jsx react
-import { SlFileUpload } from '@shoelace-style/shoelace/dist/react';
-const App = () => <SlFileUpload url="http://localhost:8080"></SlFileUpload>;
+import { useRef } from 'react';
+import { SlFileUpload, SlButton } from '@shoelace-style/shoelace/dist/react';
+import { serialize } from '../dist/utilities/form.js';
+
+const App = () => {
+  const form = useRef(null);
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    const fileInfo = event.detail;
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'http://localhost:8080');
+    xhr.setRequestHeader('Content-Type', fileInfo.file.type);
+    xhr.send(fileInfo.file);
+
+    fileInfo.loading = true;
+
+    setTimeout(() => {
+      fileInfo.loading = false;
+      fileUpload.requestUpdate();
+    }, 3000)
+  }
+
+  return (
+    <form onSubmit={handleSubmit} ref={form}>
+      <SlFileUpload name="sl-file-upload" multiple></SlFileUpload>
+      <br />
+      <input type="file" name="native-input" multiple></input>
+      <br />
+      <SlButton type="reset" variant="default">Reset</SlButton>
+      <SlButton type="submit" variant="primary">Submit</SlButton>
+    </form>
+  );
+};
 ```
 
 ### Upload Files and handling Errors
@@ -357,8 +414,45 @@ To handle errors in a [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/
 ```
 
 ```jsx react
-import { SlFileUpload } from '@shoelace-style/shoelace/dist/react';
-const App = () => <SlFileUpload url="http://localhost:8080"></SlFileUpload>;
+import { useRef } from 'react';
+import { SlFileUpload, SlButton } from '@shoelace-style/shoelace/dist/react';
+import { serialize } from '../dist/utilities/form.js';
+
+const App = () => {
+  const form = useRef(null);
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    const fileInfo = event.detail;
+    const xhr = new XMLHttpRequest();
+
+    xhr.upload.onerror = event => {
+      console.error('error:', event)
+      fileInfo.loading = false;
+      fileInfo.warning = "Upload Failed";
+      fileInfo.accepted = false;
+
+      fileUpload.requestUpdate()
+    };
+
+    xhr.open('POST', 'http://localhost');
+    xhr.setRequestHeader('Content-Type', fileInfo.file.type);
+    xhr.send(fileInfo.file);
+
+    fileInfo.loading = true;
+  }
+
+  return (
+    <form onSubmit={handleSubmit} ref={form}>
+      <SlFileUpload name="sl-file-upload" multiple></SlFileUpload>
+      <br />
+      <input type="file" name="native-input" multiple></input>
+      <br />
+      <SlButton type="reset" variant="default">Reset</SlButton>
+      <SlButton type="submit" variant="primary">Submit</SlButton>
+    </form>
+  );
+};
 ```
 
 ### Upload Files and update progress
@@ -401,17 +495,60 @@ The [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpReq
 ```
 
 ```jsx react
-import { SlFileUpload } from '@shoelace-style/shoelace/dist/react';
-const App = () => <SlFileUpload url="http://localhost:8080"></SlFileUpload>;
+import { useRef } from 'react';
+import { SlFileUpload, SlButton } from '@shoelace-style/shoelace/dist/react';
+import { serialize } from '../dist/utilities/form.js';
+
+const App = () => {
+  const form = useRef(null);
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    const fileInfo = event.detail;
+    const xhr = new XMLHttpRequest();
+
+    xhr.upload.onprogress = event => {
+      if (event.lengthComputable) {
+        console.log('progress: ', (event.loaded / event.total) * 100);
+        fileInfo.progress = (event.loaded / event.total) * 100;
+        fileUpload.requestUpdate();
+      }
+    };
+
+    xhr.upload.onload = event => {
+      console.log('complete: ',event);
+      fileInfo.loading = false;
+      fileUpload.requestUpdate();
+    };
+
+    xhr.open('POST', 'http://localhost:8080/upload');
+    var formData = new FormData();
+    formData.append("file", fileInfo.file);
+    xhr.send(formData);
+
+    fileInfo.loading = true;
+  }
+
+  return (
+    <form onSubmit={handleSubmit} ref={form}>
+      <SlFileUpload name="sl-file-upload" multiple></SlFileUpload>
+      <br />
+      <input type="file" name="native-input" multiple></input>
+      <br />
+      <SlButton type="reset" variant="default">Reset</SlButton>
+      <SlButton type="submit" variant="primary">Submit</SlButton>
+    </form>
+  );
+};
 ```
 
-### Custom Icon
+### Custom Image
 
-Set the `icon` slot to customize the appearance of the icon within the dropzone.
+Set the `image` slot to customize the appearance of the image within the dropzone.
 
 ```html preview
 <sl-file-upload>
-  <sl-qr-code slot="icon" value="https://shoelace.style/"></sl-qr-code>
+  <sl-qr-code slot="image" value="https://shoelace.style/"></sl-qr-code>
 </sl-file-upload>
 ```
 
@@ -420,7 +557,7 @@ import { SlFileUpload, SlQrCode } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <SlFileUpload>
-    <SlQrCode slot="icon" value="https://shoelace.style/" />;
+    <SlQrCode slot="image" value="https://shoelace.style/" />;
   </SlFileUpload>
 );
 ```
@@ -431,10 +568,10 @@ Set the `content` slot to customize the appearance of the dropzone.
 
 ```html preview
 <sl-file-upload>
-  <sl-card slot="content" class="card-footer">
+  <sl-card slot="label" class="card-footer">
     This card is a dropzone. You can drag all sorts of things in it!
     <div slot="footer">
-      <sl-rating></sl-rating>
+      Footer
     </div>
   </sl-card>
 </sl-file-upload>
