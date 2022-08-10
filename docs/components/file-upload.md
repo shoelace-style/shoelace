@@ -147,7 +147,7 @@ const App = () => <SlFileUpload max-files={2} multiple></SlFileUpload>;
 
 ### Accepted File Types
 
-Set the `accepted` attribute to set the accepted MIME-Type of the files. This attribute is consistent with the native file input. Visit the [MDN documentation for the accept attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept) for more information.
+Set the `accept` attribute to set the accepted MIME-Type of the files. This attribute is consistent with the native file input. Visit the [MDN documentation for the accept attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept) for more information.
 
 ```html preview
 <sl-file-upload accept="image/*"></sl-file-upload>
