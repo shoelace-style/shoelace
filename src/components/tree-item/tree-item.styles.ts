@@ -81,10 +81,6 @@ export default css`
     cursor: not-allowed;
   }
 
-  :host(:not([aria-disabled='true'])) .tree-item__item:hover {
-    background-color: var(--sl-color-neutral-100);
-  }
-
   :host(:focus-visible) .tree-item__item {
     outline: var(--sl-focus-ring);
     outline-offset: var(--sl-focus-ring-offset);
