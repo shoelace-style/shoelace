@@ -89,7 +89,7 @@ export default class SlPopup extends LitElement {
    * The amount of padding between the arrow and the edges of the popup. If the popup has a border-radius, for example,
    * this will prevent it from overflowing the corners.
    */
-  @property({ type: Number }) arrowPadding = 10;
+  @property({ attribute: 'arrow-padding', type: Number }) arrowPadding = 10;
 
   /**
    * When set, placement of the popup will flip to the opposite site to keep it in view. You can use

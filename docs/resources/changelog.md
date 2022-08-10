@@ -14,6 +14,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Added read-only custom properties `--auto-size-available-width` and `--auto-size-available-height` to `<sl-popup>` to improve support for overflowing popup content
 - Fixed a bug where auto-size wasn't being applied to `<sl-dropdown>` and `<sl-select>`
 - Fixed a bug in `<sl-popup>` that caused auto-size to kick in before flip
+- Fixed a bug in `<sl-popup>` that prevented the `arrow-padding` attribute from working as expected
 - Removed the default hover effect in `<sl-tree-items>` to make selections more obvious
 
 ## 2.0.0-beta.80
