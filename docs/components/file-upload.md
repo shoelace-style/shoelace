@@ -5,13 +5,13 @@
 File Dropzone provides an area where files can be dragged and dropped onto from the Operating System to be uploaded or to be used for other tasks. It also provides a button to open a file dialog and select files from the file system. Per default the File Dropzone shows a list of all selected files below the dropzone.
 
 ```html preview
-<sl-file-upload closable max-files="5"></sl-file-upload>
+<sl-file-upload closable multiple></sl-file-upload>
 ```
 
 ```jsx react
 import { SlFileUpload } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => <SlFileUpload closable max-files={5}></SlFileUpload>;
+const App = () => <SlFileUpload closable multiple></SlFileUpload>;
 ```
 
 ## Examples
@@ -133,7 +133,7 @@ const App = () => <SlFileUpload max-file-size={100}></SlFileUpload>;
 
 ### Maximum Number of Files
 
-Set the `max-files` attribute to limit the number of files that can be added.
+Set the `max-files` attribute to limit the number of files that can be added. Only works together with the `multiple` attribute.
 
 ```html preview
 <sl-file-upload max-files="2"></sl-file-upload>
@@ -142,7 +142,7 @@ Set the `max-files` attribute to limit the number of files that can be added.
 ```jsx react
 import { SlFileUpload } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => <SlFileUpload max-files={2}></SlFileUpload>;
+const App = () => <SlFileUpload max-files={2} multiple></SlFileUpload>;
 ```
 
 ### Accepted File Types
@@ -157,6 +157,111 @@ Set the `accepted` attribute to set the accepted MIME-Type of the files. This at
 import { SlFileUpload } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => <SlFileUpload accept="image/*"></SlFileUpload>;
+```
+
+### Form Usage with FormData
+
+The FileUpload component can be used inside a form as a replacement for `<input type="file">`. The files can be accessed using FormData. See [Form Control documentation](../getting-started/form-controls.md) for more details. 
+
+```html preview
+<form class="file-upload">
+  <sl-file-upload name="sl-file-upload" multiple></sl-file-upload>
+  <br />
+  <input type="file" name="native-input" multiple></input>
+  <br />
+  <sl-button type="reset" variant="default">Reset</sl-button>
+  <sl-button type="submit" variant="primary">Submit</sl-button>
+</form>
+
+<script type="module">
+  const form = document.querySelector('.file-upload');
+  
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    const formData = new FormData(form);
+    console.log(formData.getAll('native-input'), formData.getAll('sl-file-upload'));
+  });
+</script>
+```
+
+```jsx react
+import { useRef } from 'react';
+import { SlFileUpload, SlButton } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => {
+  const form = useRef(null);
+  
+  function handleSubmit(event) {
+    event.preventDefault();
+    const formData = new FormData(form);
+    console.log(formData.getAll('native-input'), formData.getAll('sl-file-upload'));
+  }
+
+  return (
+    <form onSubmit={handleSubmit} ref={form}>
+      <SlFileUpload name="sl-file-upload" multiple></SlFileUpload>
+      <br />
+      <input type="file" name="native-input" multiple></input>
+      <br />
+      <SlButton type="reset" variant="default">Reset</SlButton>
+      <SlButton type="submit" variant="primary">Submit</SlButton>
+    </form>
+  );
+};
+```
+
+### Form Usage with JSON
+
+The FileUpload component can be used inside a form as a replacement for `<input type="file">`. The files can be serialized using JSON. See [Form Control documentation](../getting-started/form-controls.md) for more details. 
+
+```html preview
+<form class="file-upload-json">
+  <sl-file-upload name="sl-file-upload" multiple></sl-file-upload>
+  <br />
+  <input type="file" name="native-input" multiple></input>
+  <br />
+  <sl-button type="reset" variant="default">Reset</sl-button>
+  <sl-button type="submit" variant="primary">Submit</sl-button>
+</form>
+
+<script type="module">
+  import { serialize } from '../dist/utilities/form.js';
+
+  const form = document.querySelector('.file-upload-json');
+  
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    const data = serialize(form);
+    console.log(data);
+  });
+</script>
+```
+
+```jsx react
+import { useRef } from 'react';
+import { SlFileUpload, SlButton } from '@shoelace-style/shoelace/dist/react';
+import { serialize } from '../dist/utilities/form.js';
+
+const App = () => {
+  const form = useRef(null);
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    const data = serialize(form);
+    console.log(data);
+  }
+
+  return (
+    <form onSubmit={handleSubmit} ref={form}>
+      <SlFileUpload name="sl-file-upload" multiple></SlFileUpload>
+      <br />
+      <input type="file" name="native-input" multiple></input>
+      <br />
+      <SlButton type="reset" variant="default">Reset</SlButton>
+      <SlButton type="submit" variant="primary">Submit</SlButton>
+    </form>
+  );
+};
 ```
 
 ### Upload Files

@@ -1,7 +1,8 @@
-import { expect, fixture, html } from '@open-wc/testing';
+import { expect, fixture, html, oneEvent } from '@open-wc/testing';
 import sinon from 'sinon';
 import type SlFileUploadItem from '../file-upload-item/file-upload-item';
 import type SlFileUpload from './file-upload';
+import { serialize } from '../../utilities/form';
 
 describe('<sl-file-upload>', () => {
   let xhr: sinon.SinonFakeXMLHttpRequestStatic;
@@ -225,6 +226,72 @@ describe('<sl-file-upload>', () => {
     expect(el.files.length).to.equal(2);
   });
 
+  describe('when serializing', () => {
+    it('should serialize its name and an empty File with FormData per default', async () => {
+      const form = await fixture<HTMLFormElement>(html` <form><sl-file-upload name="a"></sl-file-upload></form> `);
+      const formData = new FormData(form);
+
+      expect(formData.get('a') instanceof File).to.be.true;
+    });
+
+    it('should serialize its name and file with FormData', async () => {
+      const form = await fixture<HTMLFormElement>(html` <form><sl-file-upload name="a"></sl-file-upload></form> `);
+      const el = form.querySelector<SlFileUpload>('sl-file-upload')!;
+      const dropzone = el.shadowRoot!.querySelector<HTMLElement>('#dropzone')!;
+
+      const file = new File([''], 'dummy.png', { type: 'image/png' });
+      const dataTransfer = new DataTransfer();
+      dataTransfer.items.add(file);
+      dropzone.dispatchEvent(new DragEvent('drop', { dataTransfer }));
+
+      await el.updateComplete;
+
+      const formData = new FormData(form);
+      expect(formData.get('a')).to.deep.equal(file);
+    });
+
+    it('should serialize its name and file with JSON', async () => {
+      const form = await fixture<HTMLFormElement>(html` <form><sl-file-upload name="a"></sl-file-upload></form> `);
+      const el = form.querySelector<SlFileUpload>('sl-file-upload')!;
+      const dropzone = el.shadowRoot!.querySelector<HTMLElement>('#dropzone')!;
+
+      const file = new File([''], 'dummy.png', { type: 'image/png' });
+      const dataTransfer = new DataTransfer();
+      dataTransfer.items.add(file);
+      dropzone.dispatchEvent(new DragEvent('drop', { dataTransfer }));
+
+      await el.updateComplete;
+
+      const json = serialize(form);
+      expect(json.a).to.deep.equal(file);
+    });
+  });
+
+  describe('when resetting a form', () => {
+    it('should reset the element to its initial value', async () => {
+      const form = await fixture<HTMLFormElement>(html`
+        <form>
+          <sl-file-upload name="a"></sl-file-upload>
+          <sl-button type="reset">Reset</sl-button>
+        </form>
+      `);
+      const button = form.querySelector('sl-button')!;
+      const el = form.querySelector<SlFileUpload>('sl-file-upload')!;
+      const file = new File([''], 'dummy.txt');
+      expect(el.files.length).to.equal(0);
+      el.files = [{ file }];
+
+      await el.updateComplete;
+      expect(el.files.length).to.equal(1);
+
+      setTimeout(() => button.click());
+      await oneEvent(form, 'reset');
+      await el.updateComplete;
+
+      expect(el.files.length).to.equal(0);
+    });
+  });
+
   it('should send a POST request when a url attribute is specified', async () => {
     const testUrl = 'http://testurl';
     expect(requests.length).to.equal(0);
@@ -308,9 +375,7 @@ describe('<sl-file-upload>', () => {
     const testUrl = 'http://testurl';
     expect(requests.length).to.equal(0);
 
-    const el = await fixture<SlFileUpload>(
-      html` <sl-file-upload url="${testUrl}" method="GET"> </sl-file-upload> `
-    );
+    const el = await fixture<SlFileUpload>(html` <sl-file-upload url="${testUrl}" method="GET"> </sl-file-upload> `);
     const dropzone = el.shadowRoot!.querySelector<HTMLElement>('#dropzone')!;
 
     const file = new File(['foo'], 'dummy.txt');
@@ -395,9 +460,7 @@ describe('<sl-file-upload>', () => {
     const testUrl = 'http://testurl';
     expect(requests.length).to.equal(0);
 
-    const el = await fixture<SlFileUpload>(
-      html` <sl-file-upload url="${testUrl}" binary-body> </sl-file-upload> `
-    );
+    const el = await fixture<SlFileUpload>(html` <sl-file-upload url="${testUrl}" binary-body> </sl-file-upload> `);
     const dropzone = el.shadowRoot!.querySelector<HTMLElement>('#dropzone')!;
 
     const file = new File(['foo'], 'dummy.txt', { type: 'text/plain' });

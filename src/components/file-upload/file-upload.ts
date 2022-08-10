@@ -9,6 +9,7 @@ import { LocalizeController } from '../../utilities/localize';
 import styles from './file-upload.styles';
 import { hasValidFileSize, hasValidFileType, HttpMethod } from './library';
 import type { FileInfo } from './library';
+import { FormSubmitController } from '../../internal/form';
 
 /**
  * @since 2.0
@@ -45,6 +46,17 @@ import type { FileInfo } from './library';
 export default class SlFileUpload extends LitElement {
   static styles = styles;
 
+  protected readonly formSubmitController = new FormSubmitController(this, {
+    value: (control: SlFileUpload) => {
+      if (control.files.length === 1) {
+        return control.files[0].file;
+      } else if (control.files.length > 1) {
+        return control.files.map(fileInfo => fileInfo.file);
+      }
+      return new File([''], '', { type: 'application/octet-stream' });
+    }
+  });
+
   private readonly localize = new LocalizeController(this);
 
   /** Internal property to show a warning in the dropzone */
@@ -56,6 +68,24 @@ export default class SlFileUpload extends LitElement {
   @query('#file-input') fileInput: HTMLInputElement;
 
   @property() files: FileInfo[] = [];
+
+  /** The input's name attribute. */
+  @property() name: string;
+
+  public get value(): string | File {
+    if (this.files.length > 0) {
+      return 'C:\\fakepath\\' + this.files[0].file.name;
+    }
+    return '';
+  }
+
+  public set value(file: string | File) {
+    if (file instanceof File) {
+      this.files = [{ file }];
+      return;
+    }
+    this.files = [];
+  }
 
   /** Disables the dropzone. */
   @property({ type: Boolean, reflect: true }) disabled = false;
@@ -85,7 +115,10 @@ export default class SlFileUpload extends LitElement {
   @property({ attribute: 'max-file-size' }) maxFileSize?: number;
 
   /** The maximum amount of files that are allowed. */
-  @property({ attribute: 'max-files' }) maxFiles = 1;
+  @property({ attribute: 'max-files' }) maxFiles: number;
+
+  /** Indicates if multiple files can be uploaded */
+  @property({ type: Boolean, reflect: true }) multiple = false;
 
   /** Specifies a URL where the files should be uploaded to */
   @property() url?: string;
@@ -101,10 +134,6 @@ export default class SlFileUpload extends LitElement {
 
   /** Indicates whether the files should be send as binary data. Per default files will be send as FormData. */
   @property({ type: Boolean, reflect: true, attribute: 'binary-body' }) binaryBody = false;
-
-  get multiple() {
-    return this.maxFiles > 1;
-  }
 
   updateTransferProgress(progressEvent: ProgressEvent, fileInfo: FileInfo) {
     if (progressEvent.lengthComputable) {
