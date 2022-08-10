@@ -10,6 +10,7 @@ import styles from './file-upload.styles';
 import { hasValidFileSize, hasValidFileType } from './library';
 import type { FileInfo } from './library';
 import { FormSubmitController } from '../../internal/form';
+import { ifDefined } from 'lit/directives/if-defined.js';
 
 /**
  * @since 2.0
@@ -140,9 +141,9 @@ export default class SlFileUpload extends LitElement {
       fileInfo.accepted = true;
     }
 
-    emit(this, 'sl-change', { detail: fileInfo });
-
     this.files = this.multiple ? [...this.files, fileInfo] : [fileInfo];
+
+    emit(this, 'sl-change', { detail: fileInfo });
   }
 
   handleFiles(fileList: FileList | null) {
@@ -280,7 +281,7 @@ export default class SlFileUpload extends LitElement {
                       ?warning=${!fileInfo.accepted}
                       ?closable=${fileInfo.accepted}
                       ?loading=${fileInfo.loading}
-                      progress=${fileInfo.progress}
+                      progress=${ifDefined(fileInfo.progress)}
                       @sl-hide=${(event: CustomEvent) => {
                         event.stopPropagation();
                         this.handleFileRemove(index);

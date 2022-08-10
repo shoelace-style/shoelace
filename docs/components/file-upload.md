@@ -266,14 +266,12 @@ const App = () => {
 
 ### Upload Files
 
-To upload a file, listen to the `sl-change` event and handle the received file.
+To upload a file, listen to the `sl-change` event and handle the received file. This example uses [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest), but the same could be achieved with axios or the fetch API.
 
 ```html preview
 <sl-file-upload class="upload-file" multiple></sl-file-upload>
 
 <script type="module">
-  import { serialize } from '../dist/utilities/form.js';
-
   const fileUpload = document.querySelector('.upload-file');
   
   fileUpload.addEventListener('sl-change', event => {
@@ -283,6 +281,121 @@ To upload a file, listen to the `sl-change` event and handle the received file.
     xhr.open('POST', 'http://localhost:8080');
     xhr.setRequestHeader('Content-Type', fileInfo.file.type);
     xhr.send(fileInfo.file);
+  });
+</script>
+```
+
+```jsx react
+import { SlFileUpload } from '@shoelace-style/shoelace/dist/react';
+const App = () => <SlFileUpload url="http://localhost:8080"></SlFileUpload>;
+```
+
+### Upload Files and indicate loading
+
+Set `loading` to `true` on the FileInfo object to add a loading indicator to the FileUploadItem.
+
+```html preview
+<sl-file-upload class="upload-file-loading" multiple></sl-file-upload>
+
+<script type="module">
+  const fileUpload = document.querySelector('.upload-file-loading');
+  
+  fileUpload.addEventListener('sl-change', async (event) => {
+    event.preventDefault();
+    const fileInfo = event.detail;
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'http://localhost:8080/upload/');
+    xhr.setRequestHeader('Content-Type', fileInfo.file.type);
+    xhr.send(fileInfo.file);
+    
+    fileInfo.loading = true;
+    
+    setTimeout(() => {
+        fileInfo.loading = false;
+        fileUpload.requestUpdate();
+    }, 3000)
+  });
+</script>
+```
+
+```jsx react
+import { SlFileUpload } from '@shoelace-style/shoelace/dist/react';
+const App = () => <SlFileUpload url="http://localhost:8080"></SlFileUpload>;
+```
+
+### Upload Files and handling Errors
+
+To handle errors in a [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) the `upload.onerror` callback can be used.
+
+```html preview
+<sl-file-upload class="upload-file-errors" multiple></sl-file-upload>
+
+<script type="module">
+  const fileUpload = document.querySelector('.upload-file-errors');
+  
+  fileUpload.addEventListener('sl-change', async (event) => {
+    event.preventDefault();
+    const fileInfo = event.detail;
+    const xhr = new XMLHttpRequest();
+    
+    xhr.upload.onerror = event => {
+      console.error('error:', event)
+      fileInfo.loading = false;
+      fileInfo.warning = "Upload Failed";
+      fileInfo.accepted = false;
+      
+      fileUpload.requestUpdate()
+    };
+    
+    xhr.open('POST', 'http://localhost');
+    xhr.setRequestHeader('Content-Type', fileInfo.file.type);
+    xhr.send(fileInfo.file);
+
+    fileInfo.loading = true;
+  });
+</script>
+```
+
+```jsx react
+import { SlFileUpload } from '@shoelace-style/shoelace/dist/react';
+const App = () => <SlFileUpload url="http://localhost:8080"></SlFileUpload>;
+```
+
+### Upload Files and update progress
+
+The [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) provides an `upload.onprogress` callback that can be used to change the `progress` attribute on the FileInfo object.
+
+```html preview
+<sl-file-upload class="upload-file-progress" multiple></sl-file-upload>
+
+<script type="module">
+  const fileUpload = document.querySelector('.upload-file-progress');
+  
+  fileUpload.addEventListener('sl-change', async (event) => {
+    event.preventDefault();
+    const fileInfo = event.detail;
+    const xhr = new XMLHttpRequest();
+    
+    xhr.upload.onprogress = event => {
+      if (event.lengthComputable) {
+        console.log('progress: ', (event.loaded / event.total) * 100);
+        fileInfo.progress = (event.loaded / event.total) * 100;
+        fileUpload.requestUpdate();
+      }
+    };
+    
+    xhr.upload.onload = event => {
+      console.log('complete: ',event);
+      fileInfo.loading = false;
+      fileUpload.requestUpdate();
+    };
+    
+    xhr.open('POST', 'http://localhost:8080/upload');
+    var formData = new FormData();
+    formData.append("file", fileInfo.file);
+    xhr.send(formData);
+
+    fileInfo.loading = true;
   });
 </script>
 ```
