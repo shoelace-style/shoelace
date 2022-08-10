@@ -1,5 +1,6 @@
 import { LitElement, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
+import { LocalizeController } from '../../utilities/localize';
 import styles from './spinner.styles';
 import type { CSSResultGroup } from 'lit';
 
@@ -18,9 +19,11 @@ import type { CSSResultGroup } from 'lit';
 export default class SlSpinner extends LitElement {
   static styles: CSSResultGroup = styles;
 
+  private readonly localize = new LocalizeController(this);
+
   render() {
     return html`
-      <svg part="base" class="spinner" role="status">
+      <svg part="base" class="spinner" role="progressbar" aria-valuetext=${this.localize.term('loading')}>
         <circle class="spinner__track"></circle>
         <circle class="spinner__indicator"></circle>
       </svg>

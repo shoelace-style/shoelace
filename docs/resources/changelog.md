@@ -15,6 +15,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug where auto-size wasn't being applied to `<sl-dropdown>` and `<sl-select>`
 - Fixed a bug in `<sl-popup>` that caused auto-size to kick in before flip
 - Fixed a bug in `<sl-popup>` that prevented the `arrow-padding` attribute from working as expected
+- Improved accessibility of `<sl-spinner>` so screen readers no longer skip over it
 - Removed the default hover effect in `<sl-tree-items>` to make selections more obvious
 
 ## 2.0.0-beta.80

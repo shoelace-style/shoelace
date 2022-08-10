@@ -11,6 +11,7 @@ const translation: Translation = {
   copy: 'Kopiuj',
   currentValue: 'Aktualna wartość',
   hidePassword: 'Ukryj hasło',
+  loading: 'Ładowanie',
   progress: 'Postęp',
   remove: 'Usunąć',
   resize: 'Zmień rozmiar',

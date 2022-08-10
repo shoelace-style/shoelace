@@ -11,6 +11,7 @@ const translation: Translation = {
   copy: 'کپی',
   currentValue: 'مقدار فعلی',
   hidePassword: 'پنهان کردن رمز',
+  loading: 'بارگذاری',
   progress: 'پیشرفت',
   remove: 'حذف',
   resize: 'تغییر اندازه',

@@ -18,6 +18,7 @@ export interface Translation extends DefaultTranslation {
   copy: string;
   currentValue: string;
   hidePassword: string;
+  loading: string;
   progress: string;
   remove: string;
   resize: string;
