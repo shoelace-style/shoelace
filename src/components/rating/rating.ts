@@ -37,6 +37,9 @@ export default class SlRating extends LitElement {
   @state() private hoverValue = 0;
   @state() private isHovering = false;
 
+  /** A label to describe the rating to assistive devices. */
+  @property() label = '';
+
   /** The current rating. */
   @property({ type: Number }) value = 0;
 
@@ -104,13 +107,13 @@ export default class SlRating extends LitElement {
       return;
     }
 
-    if ((isLtr && event.key === 'ArrowLeft') || (isRtl && event.key === 'ArrowRight')) {
+    if (event.key === 'ArrowDown' || (isLtr && event.key === 'ArrowLeft') || (isRtl && event.key === 'ArrowRight')) {
       const decrement = event.shiftKey ? 1 : this.precision;
       this.value = Math.max(0, this.value - decrement);
       event.preventDefault();
     }
 
-    if ((isLtr && event.key === 'ArrowRight') || (isRtl && event.key === 'ArrowLeft')) {
+    if (event.key === 'ArrowUp' || (isLtr && event.key === 'ArrowRight') || (isRtl && event.key === 'ArrowLeft')) {
       const increment = event.shiftKey ? 1 : this.precision;
       this.value = Math.min(this.max, this.value + increment);
       event.preventDefault();
@@ -189,6 +192,8 @@ export default class SlRating extends LitElement {
           'rating--disabled': this.disabled,
           'rating--rtl': isRtl
         })}
+        role="slider"
+        aria-label=${this.label}
         aria-disabled=${this.disabled ? 'true' : 'false'}
         aria-readonly=${this.readonly ? 'true' : 'false'}
         aria-valuenow=${this.value}

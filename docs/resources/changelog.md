@@ -12,9 +12,11 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 - 🚨 BREAKING: removed the `base` part from `<sl-menu>` and removed an unnecessary `<div>` that made styling more difficult
 - Added read-only custom properties `--auto-size-available-width` and `--auto-size-available-height` to `<sl-popup>` to improve support for overflowing popup content
+- Added `label` to `<sl-rating>` to improve accessibility for screen readers
 - Fixed a bug where auto-size wasn't being applied to `<sl-dropdown>` and `<sl-select>`
 - Fixed a bug in `<sl-popup>` that caused auto-size to kick in before flip
 - Fixed a bug in `<sl-popup>` that prevented the `arrow-padding` attribute from working as expected
+- Improved accessibility of `<sl-rating>` so keyboard nav works better and screen readers announce it properly
 - Improved accessibility of `<sl-spinner>` so screen readers no longer skip over it
 - Removed the default hover effect in `<sl-tree-items>` to make selections more obvious
 
