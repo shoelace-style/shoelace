@@ -18,7 +18,7 @@ const App = () => <SlRating label="Rating" />;
 
 ### Labels
 
-Ratings are commonly identified in context, so a visual label isn't typically necessary. However, you should always provide a label for assistive devices.
+Ratings are commonly identified contextually, so labels aren't displayed. However, you should always provide one for assistive devices using the `label` attribute.
 
 ```html preview
 <sl-rating label="Rate this component"></sl-rating>
