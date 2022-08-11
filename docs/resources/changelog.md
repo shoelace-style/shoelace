@@ -19,6 +19,9 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Improved accessibility of `<sl-rating>` so keyboard nav works better and screen readers announce it properly
 - Improved accessibility of `<sl-spinner>` so screen readers no longer skip over it
 - Removed the default hover effect in `<sl-tree-items>` to make selections more obvious
+- Updated Floating UI to 1.0.1
+- Updated esbuild to 0.15.1
+- Updated all other dependencies to latest versions
 
 ## 2.0.0-beta.80
 
