@@ -13,6 +13,17 @@ import '../icon/icon';
 import styles from './input.styles';
 import type { CSSResultGroup } from 'lit';
 
+// It's currently impossible to hide Firefox's built-in clear icon when using <input type="date|time">, so we need this
+// check to apply a clip-path to hide it. I know, I know...user agent sniffing is nasty but, if it fails, we only see a
+// redundant clear icon so nothing important is breaking. The benefits outweigh the costs for this one. See the
+// discussion at: https://github.com/shoelace-style/shoelace/pull/794
+//
+// Also note that we do the Chromium check first to prevent Chrome from logging a console notice as described here:
+// https://github.com/shoelace-style/shoelace/issues/855
+//
+const isChromium = navigator.userAgentData?.brands.some(b => b.brand.includes('Chromium'));
+const isFirefox = isChromium ? false : navigator.userAgent.includes('Firefox');
+
 /**
  * @since 2.0
  * @status stable
@@ -369,12 +380,7 @@ export default class SlInput extends LitElement {
               'input--empty': !this.value,
               'input--invalid': this.invalid,
               'input--no-spin-buttons': this.noSpinButtons,
-
-              // It's currently impossible to hide Firefox's built-in clear icon when using <input type="date|time">, so
-              // we need this check to apply a clip-path to hide it. I know, I know...user agent sniffing is nasty but
-              // if it fails, we only see a redundant clear icon so nothing important is breaking. The benefits outweigh
-              // the costs for this one. See the discussion at: https://github.com/shoelace-style/shoelace/pull/794
-              'input--is-firefox': navigator.userAgent.includes('Firefox')
+              'input--is-firefox': isFirefox
             })}
           >
             <span part="prefix" class="input__prefix">

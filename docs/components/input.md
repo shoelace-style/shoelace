@@ -5,7 +5,7 @@
 Inputs collect data from the user.
 
 ```html preview
-<sl-input></sl-input>
+<sl-input type="date" clearable></sl-input>
 ```
 
 ```jsx react

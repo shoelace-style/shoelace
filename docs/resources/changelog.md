@@ -18,6 +18,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug in `<sl-popup>` that prevented the `arrow-padding` attribute from working as expected
 - Improved accessibility of `<sl-rating>` so keyboard nav works better and screen readers announce it properly
 - Improved accessibility of `<sl-spinner>` so screen readers no longer skip over it
+- Removed a user agent sniffing notice that appeared in Chrome [#855](https://github.com/shoelace-style/shoelace/issues/855)
 - Removed the default hover effect in `<sl-tree-items>` to make selections more obvious
 - Updated Floating UI to 1.0.1
 - Updated esbuild to 0.15.1
