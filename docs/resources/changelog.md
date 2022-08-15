@@ -16,6 +16,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug where auto-size wasn't being applied to `<sl-dropdown>` and `<sl-select>`
 - Fixed a bug in `<sl-popup>` that caused auto-size to kick in before flip
 - Fixed a bug in `<sl-popup>` that prevented the `arrow-padding` attribute from working as expected
+- Fixed a bug in `<sl-tooltip>` that prevented the popup from appearing with the correct z-index [#854](https://github.com/shoelace-style/shoelace/issues/854)
 - Improved accessibility of `<sl-rating>` so keyboard nav works better and screen readers announce it properly
 - Improved accessibility of `<sl-spinner>` so screen readers no longer skip over it
 - Removed a user agent sniffing notice that appeared in Chrome [#855](https://github.com/shoelace-style/shoelace/issues/855)
