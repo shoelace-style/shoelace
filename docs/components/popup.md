@@ -333,6 +333,41 @@ By default, anchors are slotted into the popup using the `anchor` slot. If your 
 </style>
 ```
 
+```jsx react
+import { SlPopup } from '@shoelace-style/shoelace/dist/react';
+
+const css = `
+  #external-anchor {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    border: dashed 2px var(--sl-color-neutral-600);
+    margin: 50px 0 0 50px;
+  }
+
+  #external-anchor ~ sl-popup .box {
+    width: 100px;
+    height: 50px;
+    background: var(--sl-color-primary-600);
+    border-radius: var(--sl-border-radius-medium);
+  }
+`;
+
+const App = () => {
+  return (
+    <>
+      <span id="external-anchor" />
+
+      <SlPopup anchor="external-anchor" placement="top" active>
+        <div class="box" />
+      </SlPopup>
+
+      <style>{css}</style>
+    </>
+  );
+};
+```
+
 ### Placement
 
 Use the `placement` attribute to tell the popup the preferred placement of the popup. Note that the actual position will vary to ensure the panel remains in the viewport if you're using positioning features such as `flip` and `shift`.
