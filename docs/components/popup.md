@@ -219,7 +219,7 @@ const App = () => {
 
 ## Examples
 
-### Active
+### Activating
 
 Popups are inactive and hidden until the `active` attribute is applied. Removing the attribute will tear down all positioning logic and listeners, meaning you can have many idle popups on the page without affecting performance.
 
@@ -302,6 +302,35 @@ const App = () => {
     </>
   );
 };
+```
+
+### External Anchors
+
+By default, anchors are slotted into the popup using the `anchor` slot. If your anchor needs to live outside of the popup, you can pass the anchor's `id` to the `anchor` attribute. Alternatively, you can pass an element reference to the `anchor` property to achieve the same effect without using an `id`.
+
+```html preview
+<span id="external-anchor"></span>
+
+<sl-popup anchor="external-anchor" placement="top" active>
+  <div class="box"></div>
+</sl-popup>
+
+<style>
+  #external-anchor {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    border: dashed 2px var(--sl-color-neutral-600);
+    margin: 50px 0 0 50px;
+  }
+
+  #external-anchor ~ sl-popup .box {
+    width: 100px;
+    height: 50px;
+    background: var(--sl-color-primary-600);
+    border-radius: var(--sl-border-radius-medium);
+  }
+</style>
 ```
 
 ### Placement

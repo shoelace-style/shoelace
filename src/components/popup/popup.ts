@@ -14,7 +14,8 @@ import type { CSSResultGroup } from 'lit';
  *  operations in your listener or consider debouncing it.
  *
  * @slot - The popup's content.
- * @slot anchor - The element the popup will be anchored to.
+ * @slot anchor - The element the popup will be anchored to. If the anchor lives outside of the popup, you can use the
+ *  `anchor` attribute or property instead.
  *
  * @csspart arrow - The arrow's container. Avoid setting `top|bottom|left|right` properties, as these values are
  *  assigned dynamically as the popup moves. This is most useful for applying a background color to match the popup, and
@@ -39,8 +40,14 @@ export default class SlPopup extends LitElement {
   @query('.popup') public popup: HTMLElement;
   @query('.popup__arrow') private arrowEl: HTMLElement;
 
-  private anchor: HTMLElement | null;
+  private anchorEl: HTMLElement | null;
   private cleanup: ReturnType<typeof autoUpdate> | undefined;
+
+  /**
+   * The element the popup will be anchored to. If the anchor lives outside of the popup, you can provide its `id` or a
+   * reference to it here. If the anchor lives inside the popup, use the `anchor` slot instead.
+   */
+  @property() anchor: Element | string;
 
   /**
    * Activates the positioning logic and shows the popup. When this attribute is removed, the positioning logic is torn
@@ -174,19 +181,31 @@ export default class SlPopup extends LitElement {
     this.stop();
   }
 
-  async handleAnchorSlotChange() {
+  async handleAnchorChange() {
     await this.stop();
 
-    this.anchor = this.querySelector<HTMLElement>('[slot="anchor"]');
+    if (this.anchor && typeof this.anchor === 'string') {
+      // Locate the anchor by id
+      const root = this.getRootNode() as Document | ShadowRoot;
+      this.anchorEl = root.getElementById(this.anchor);
+    } else if (this.anchor instanceof HTMLElement) {
+      // Use the anchor's reference
+      this.anchorEl = this.anchor;
+    } else {
+      // Look for a slotted anchor
+      this.anchorEl = this.querySelector<HTMLElement>('[slot="anchor"]');
+    }
 
     // If the anchor is a <slot>, we'll use the first assigned element as the target since slots use `display: contents`
     // and positioning can't be calculated on them
-    if (this.anchor instanceof HTMLSlotElement) {
-      this.anchor = this.anchor.assignedElements({ flatten: true })[0] as HTMLElement;
+    if (this.anchorEl instanceof HTMLSlotElement) {
+      this.anchorEl = this.anchorEl.assignedElements({ flatten: true })[0] as HTMLElement;
     }
 
-    if (!this.anchor) {
-      throw new Error('Invalid anchor element: no child with slot="anchor" was found.');
+    if (!this.anchorEl) {
+      throw new Error(
+        'Invalid anchor element: no anchor could be found using the anchor slot or the anchor attribute.'
+      );
     }
 
     this.start();
@@ -194,11 +213,11 @@ export default class SlPopup extends LitElement {
 
   private start() {
     // We can't start the positioner without an anchor
-    if (!this.anchor) {
+    if (!this.anchorEl) {
       return;
     }
 
-    this.cleanup = autoUpdate(this.anchor, this.popup, () => {
+    this.cleanup = autoUpdate(this.anchorEl, this.popup, () => {
       this.reposition();
     });
   }
@@ -221,26 +240,31 @@ export default class SlPopup extends LitElement {
   async updated(changedProps: Map<string, unknown>) {
     super.updated(changedProps);
 
+    // Start or stop the positioner when active changes
     if (changedProps.has('active')) {
-      // Start or stop the positioner when active changes
       if (this.active) {
         this.start();
       } else {
         this.stop();
       }
-    } else {
-      // All other properties will trigger a reposition when active
-      if (this.active) {
-        await this.updateComplete;
-        this.reposition();
-      }
+    }
+
+    // Update the anchor when anchor changes
+    if (changedProps.has('anchor')) {
+      this.handleAnchorChange();
+    }
+
+    // All other properties will trigger a reposition when active
+    if (this.active) {
+      await this.updateComplete;
+      this.reposition();
     }
   }
 
   /** Recalculate and repositions the popup. */
   reposition() {
     // Nothing to do if the popup is inactive or the anchor doesn't exist
-    if (!this.active || !this.anchor) {
+    if (!this.active || !this.anchorEl) {
       return;
     }
 
@@ -303,7 +327,7 @@ export default class SlPopup extends LitElement {
       );
     }
 
-    computePosition(this.anchor, this.popup, {
+    computePosition(this.anchorEl, this.popup, {
       placement: this.placement,
       middleware,
       strategy: this.strategy
@@ -336,7 +360,7 @@ export default class SlPopup extends LitElement {
 
   render() {
     return html`
-      <slot name="anchor" @slotchange=${this.handleAnchorSlotChange}></slot>
+      <slot name="anchor" @slotchange=${this.handleAnchorChange}></slot>
 
       <div
         part="popup"

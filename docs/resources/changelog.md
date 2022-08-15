@@ -11,6 +11,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 ## Next
 
 - 🚨 BREAKING: removed the `base` part from `<sl-menu>` and removed an unnecessary `<div>` that made styling more difficult
+- Added the `anchor` property to `<sl-popup>` to support external anchors
 - Added read-only custom properties `--auto-size-available-width` and `--auto-size-available-height` to `<sl-popup>` to improve support for overflowing popup content
 - Added `label` to `<sl-rating>` to improve accessibility for screen readers
 - Fixed a bug where auto-size wasn't being applied to `<sl-dropdown>` and `<sl-select>`
