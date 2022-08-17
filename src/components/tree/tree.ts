@@ -8,6 +8,7 @@ import { LocalizeController } from '../../utilities/localize';
 import { isTreeItem } from '../tree-item/tree-item';
 import styles from './tree.styles';
 import type SlTreeItem from '../tree-item/tree-item';
+import type { CSSResultGroup } from 'lit';
 
 function syncCheckboxes(changedTreeItem: SlTreeItem) {
   function syncAncestors(treeItem: SlTreeItem) {
@@ -56,7 +57,7 @@ function syncCheckboxes(changedTreeItem: SlTreeItem) {
  */
 @customElement('sl-tree')
 export default class SlTree extends ShoelaceElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
 
   @query('slot:not([name])') defaultSlot: HTMLSlotElement;
   @query('slot[name=expand-icon]') expandedIconSlot: HTMLSlotElement;

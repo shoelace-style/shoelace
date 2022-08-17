@@ -13,7 +13,7 @@ import '../checkbox/checkbox';
 import '../icon/icon';
 import '../spinner/spinner';
 import styles from './tree-item.styles';
-import type { PropertyValueMap } from 'lit';
+import type { CSSResultGroup, PropertyValueMap } from 'lit';
 
 export function isTreeItem(element: Element) {
   return element && element.getAttribute('role') === 'treeitem';
@@ -49,7 +49,7 @@ export function isTreeItem(element: Element) {
  */
 @customElement('sl-tree-item')
 export default class SlTreeItem extends ShoelaceElement {
-  static styles = styles;
+  static styles: CSSResultGroup = styles;
 
   private readonly localize = new LocalizeController(this);
 
