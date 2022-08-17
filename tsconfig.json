@@ -28,7 +28,8 @@
     "useUnknownInCatchVariables": true,
     "baseUrl": ".",
     "types": [
-      "./node_modules/user-agent-data-types"
+      "mocha",
+      "user-agent-data-types"
     ]
   },
   "include": [
