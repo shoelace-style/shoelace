@@ -333,7 +333,7 @@ Use the `content` slot to create tooltips with HTML content. Tooltips are design
 import { SlButton, SlTooltip } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
-  <SlTooltip content="This is a tooltip">
+  <SlTooltip>
     <div slot="content">
       I'm not <strong>just</strong> a tooltip, I'm a <em>tooltip</em> with HTML!
     </div>
