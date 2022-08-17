@@ -20,7 +20,7 @@ export const hasValidExtension = (file: File, acceptedExtension: string): boolea
 
 export const hasValidBaseType = (file: File, acceptedBaseType: string): boolean => {
   acceptedBaseType = acceptedBaseType.replace('/*', '');
-  const fileBaseType = file.type.replace(/\/.*$/, '');
+  const fileBaseType = file.type.replace(/\/[a-z*]{0,20}$/, '');
   return acceptedBaseType === fileBaseType;
 };
 
