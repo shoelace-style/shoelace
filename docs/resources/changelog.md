@@ -14,6 +14,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Added the `anchor` property to `<sl-popup>` to support external anchors
 - Added read-only custom properties `--auto-size-available-width` and `--auto-size-available-height` to `<sl-popup>` to improve support for overflowing popup content
 - Added `label` to `<sl-rating>` to improve accessibility for screen readers
+- Added the `base__popup` and `base__arrow` parts to `<sl-tooltip>` [#858](https://github.com/shoelace-style/shoelace/issues/858)
 - Fixed a bug where auto-size wasn't being applied to `<sl-dropdown>` and `<sl-select>`
 - Fixed a bug in `<sl-popup>` that caused auto-size to kick in before flip
 - Fixed a bug in `<sl-popup>` that prevented the `arrow-padding` attribute from working as expected

@@ -1,5 +1,6 @@
 import { expect, fixture, html, waitUntil } from '@open-wc/testing';
 import sinon from 'sinon';
+import type SlPopup from '../popup/popup';
 import type SlTooltip from './tooltip';
 
 describe('<sl-tooltip>', () => {
@@ -145,5 +146,16 @@ describe('<sl-tooltip>', () => {
     await el.updateComplete;
 
     expect(body.hidden).to.be.false;
+  });
+
+  it('should not accept pointer events on the tooltip', async () => {
+    const el = await fixture<SlTooltip>(html`
+      <sl-tooltip content="This is a tooltip" open>
+        <sl-button>Hover Me</sl-button>
+      </sl-tooltip>
+    `);
+    const popup = el.shadowRoot!.querySelector<SlPopup>('sl-popup')!;
+
+    expect(getComputedStyle(popup.popup).pointerEvents).to.equal('none');
   });
 });

@@ -26,6 +26,8 @@ import type { CSSResultGroup } from 'lit';
  * @event sl-after-hide - Emitted after the tooltip has hidden and all animations are complete.
  *
  * @csspart base - The component's base wrapper, an `<sl-popup>` element.
+ * @csspart base__popup - The popup's `popup` part. Use this to target the tooltip's popup container.
+ * @csspart base__arrow - The popup's `arrow` part. Use this to target the tooltip's arrow.
  * @csspart body - The tooltip's body.
  *
  * @cssproperty --max-width - The maximum width of the tooltip.
@@ -269,6 +271,10 @@ export default class SlTooltip extends LitElement {
     return html`
       <sl-popup
         part="base"
+        exportparts="
+          popup:base__popup,
+          arrow:base__arrow
+        "
         class=${classMap({
           tooltip: true,
           'tooltip--open': this.open
