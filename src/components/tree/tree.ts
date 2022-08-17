@@ -40,11 +40,11 @@ function syncCheckboxes(changedTreeItem: SlTreeItem) {
  * @since 2.0
  * @status experimental
  *
- * @event {{ selection: this.selectedItems }} sl-selection-change - Emitted when an item gets selected or deselected
+ * @event {{ selection: TreeItem[] }} sl-selection-change - Emitted when an item gets selected or deselected
  *
  * @slot - The default slot.
- * @slot expanded-icon - The icon to show when the tree item is expanded.
- * @slot collapsed-icon - The icon to show when the tree item is collapsed.
+ * @slot expand-icon - The icon to show when the tree item is expanded.
+ * @slot collapse-icon - The icon to show when the tree item is collapsed.
  *
  * @csspart base - The component's internal wrapper.
  *
@@ -58,9 +58,9 @@ function syncCheckboxes(changedTreeItem: SlTreeItem) {
 export default class SlTree extends ShoelaceElement {
   static styles = styles;
 
-  @query('slot') defaultSlot: HTMLSlotElement;
-  @query('slot[name=expanded-icon]') expandedIconSlot: HTMLSlotElement;
-  @query('slot[name=collapsed-icon]') collapsedIconSlot: HTMLSlotElement;
+  @query('slot:not([name])') defaultSlot: HTMLSlotElement;
+  @query('slot[name=expand-icon]') expandedIconSlot: HTMLSlotElement;
+  @query('slot[name=collapse-icon]') collapsedIconSlot: HTMLSlotElement;
 
   /** Specifies the selection behavior of the Tree */
   @property() selection: 'single' | 'multiple' | 'leaf' = 'single';
@@ -69,34 +69,35 @@ export default class SlTree extends ShoelaceElement {
   // A collection of all the items in the tree, in the order they appear. The collection is live, meaning it is
   // automatically updated when the underlying document is changed.
   //
-  private treeItems: HTMLCollectionOf<SlTreeItem> = this.getElementsByTagName('sl-tree-item');
+  private treeItems: SlTreeItem[] = [];
   private lastFocusedItem: SlTreeItem;
   private readonly localize = new LocalizeController(this);
   private mutationObserver: MutationObserver;
 
-  connectedCallback(): void {
+  async connectedCallback() {
     super.connectedCallback();
     this.setAttribute('role', 'tree');
     this.setAttribute('tabindex', '0');
 
-    this.mutationObserver = new MutationObserver(this.handleTreeChanged);
-
     this.addEventListener('focusin', this.handleFocusIn);
     this.addEventListener('focusout', this.handleFocusOut);
+
+    await this.updateComplete;
+    this.mutationObserver = new MutationObserver(this.handleTreeChanged);
+    this.mutationObserver.observe(this, { childList: true, subtree: true });
   }
 
-  disconnectedCallback(): void {
+  disconnectedCallback() {
     super.disconnectedCallback();
 
     this.mutationObserver.disconnect();
-
     this.removeEventListener('focusin', this.handleFocusIn);
     this.removeEventListener('focusout', this.handleFocusOut);
   }
 
   // Generates a clone of the expand icon element to use for each tree item
-  private getExpandButtonIcon(status: 'expanded' | 'collapsed') {
-    const slot = status === 'expanded' ? this.expandedIconSlot : this.collapsedIconSlot;
+  private getExpandButtonIcon(status: 'expand' | 'collapse') {
+    const slot = status === 'expand' ? this.expandedIconSlot : this.collapsedIconSlot;
     const icon = slot.assignedElements({ flatten: true })[0] as HTMLElement;
 
     // Clone it, remove ids, and slot it
@@ -116,9 +117,9 @@ export default class SlTree extends ShoelaceElement {
   private initTreeItem = (item: SlTreeItem) => {
     item.selectable = this.selection === 'multiple';
 
-    ['expanded', 'collapsed']
+    ['expand', 'collapse']
       .filter(status => !!this.querySelector(`[slot="${status}-icon"]`))
-      .forEach((status: 'expanded' | 'collapsed') => {
+      .forEach((status: 'expand' | 'collapse') => {
         const existingIcon = item.querySelector(`[slot="${status}-icon"]`);
 
         if (existingIcon === null) {
@@ -132,12 +133,6 @@ export default class SlTree extends ShoelaceElement {
         }
       });
   };
-
-  protected firstUpdated(): void {
-    [...this.treeItems].forEach(this.initTreeItem);
-
-    this.mutationObserver.observe(this, { childList: true, subtree: true });
-  }
 
   handleTreeChanged = (mutations: MutationRecord[]) => {
     for (const mutation of mutations) {
@@ -289,10 +284,24 @@ export default class SlTree extends ShoelaceElement {
   handleClick(event: Event) {
     const target = event.target as HTMLElement;
     const treeItem = target.closest('sl-tree-item')!;
+    const isExpandButton = event
+      .composedPath()
+      .some((el: HTMLElement) => el?.classList?.contains('tree-item__expand-button'));
 
-    if (!treeItem.disabled) {
+    if (!treeItem || treeItem.disabled) {
+      return;
+    }
+
+    if (this.selection === 'multiple' && isExpandButton) {
+      treeItem.expanded = !treeItem.expanded;
+    } else {
       this.selectItem(treeItem);
     }
+  }
+
+  handleDefaultSlotChange() {
+    this.treeItems = [...this.querySelectorAll('sl-tree-item')];
+    [...this.treeItems].forEach(this.initTreeItem);
   }
 
   handleFocusOut = (event: FocusEvent) => {
@@ -327,9 +336,9 @@ export default class SlTree extends ShoelaceElement {
   render() {
     return html`
       <div part="base" class="tree" @click="${this.handleClick}" @keydown="${this.handleKeyDown}">
-        <slot></slot>
-        <slot name="expanded-icon" hidden aria-hidden="true"> </slot>
-        <slot name="collapsed-icon" hidden aria-hidden="true"> </slot>
+        <slot @slotchange=${this.handleDefaultSlotChange}></slot>
+        <slot name="expand-icon" hidden aria-hidden="true"> </slot>
+        <slot name="collapse-icon" hidden aria-hidden="true"> </slot>
       </div>
     `;
   }

@@ -10,7 +10,9 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
-- Improved single selection in `<sl-tree>` so the node expands/collapses when clicked
+- Fixed a bug in `<sl-tree>` where dynamically changing slotted items wouldn't update the tree properly
+- Improved single selection in `<sl-tree>` so nodes expand and collapse and receive selection when clicking on the label
+- Renamed `expanded-icon` and `collapsed-icon` slots to `expand-icon` and `collapse-icon` in the experimental `<sl-tree>` and `<sl-tree-item>` components
 - Improved RTL support for `<sl-image-comparer>`
 - Refactored components to extend from `ShoelaceElement` to make `dir` and `lang` reactive properties in all components
 

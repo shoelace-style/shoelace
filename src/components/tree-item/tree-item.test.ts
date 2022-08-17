@@ -49,19 +49,6 @@ describe('<sl-tree-item>', () => {
 
   describe('when the user clicks the expand button', () => {
     describe('and the item is collapsed', () => {
-      it('should expand the item', async () => {
-        // Arrange
-        const expandButton: HTMLElement = parentItem.shadowRoot!.querySelector('.tree-item__expand-button')!;
-
-        // Act
-        expandButton.click();
-        await parentItem.updateComplete;
-
-        // Assert
-        expect(parentItem).to.have.attribute('expanded');
-        expect(parentItem).to.have.attribute('aria-expanded', 'true');
-      });
-
       it('should emit sl-expand and sl-after-expand events', async () => {
         // Arrange
         const expandSpy = sinon.spy();
@@ -82,21 +69,6 @@ describe('<sl-tree-item>', () => {
     });
 
     describe('and the item is expanded', () => {
-      it('should collapse the item', async () => {
-        // Arrange
-        const expandButton: HTMLElement = parentItem.shadowRoot!.querySelector('.tree-item__expand-button')!;
-        parentItem.expanded = true;
-        await parentItem.updateComplete;
-
-        // Act
-        expandButton.click();
-        await parentItem.updateComplete;
-
-        // Assert
-        expect(parentItem).not.to.have.attribute('expanded');
-        expect(parentItem).to.have.attribute('aria-expanded', 'false');
-      });
-
       it('should emit sl-collapse and sl-after-collapse events', async () => {
         // Arrange
         const collapseSpy = sinon.spy();

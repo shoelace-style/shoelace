@@ -58,8 +58,8 @@ describe('<sl-tree>', () => {
     beforeEach(async () => {
       el = await fixture(html`
         <sl-tree>
-          <div slot="expanded-icon"></div>
-          <div slot="collapsed-icon"></div>
+          <div slot="expand-icon"></div>
+          <div slot="collapse-icon"></div>
 
           <sl-tree-item>Node 1</sl-tree-item>
           <sl-tree-item>Node 2</sl-tree-item>
@@ -76,8 +76,8 @@ describe('<sl-tree>', () => {
 
       // Assert
       treeItems.forEach(treeItem => {
-        expect(treeItem.querySelector('div[slot="expanded-icon"]')).to.be.ok;
-        expect(treeItem.querySelector('div[slot="collapsed-icon"]')).to.be.ok;
+        expect(treeItem.querySelector('div[slot="expand-icon"]')).to.be.ok;
+        expect(treeItem.querySelector('div[slot="collapse-icon"]')).to.be.ok;
       });
     });
   });
@@ -437,7 +437,7 @@ describe('<sl-tree>', () => {
         await el.updateComplete;
 
         // Assert
-        expect(node).not.to.have.attribute('selected');
+        expect(node).to.have.attribute('selected');
         expect(node).to.have.attribute('expanded');
       });
     });

@@ -185,15 +185,6 @@ export default class SlTreeItem extends ShoelaceElement {
     return !!parent && isTreeItem(parent);
   }
 
-  handleToggleExpand(event: Event) {
-    event.preventDefault();
-    event.stopImmediatePropagation();
-
-    if (!this.disabled) {
-      this.expanded = !this.expanded;
-    }
-  }
-
   handleChildrenSlotChange() {
     this.loading = false;
     this.isLeaf = this.getChildrenItems().length === 0;
@@ -238,7 +229,6 @@ export default class SlTreeItem extends ShoelaceElement {
               'tree-item__expand-button--visible': showExpandButton
             })}
             aria-hidden="true"
-            @click="${this.handleToggleExpand}"
           >
             ${when(this.loading, () => html` <sl-spinner></sl-spinner> `)}
             ${when(
