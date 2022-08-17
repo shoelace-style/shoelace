@@ -124,7 +124,7 @@ const App = () => {
 
   return (
     <>
-      <SlSelect label="Selection" value={value} onSlChange={event => setSelection(event.target.value)}>
+      <SlSelect label="Selection" value={selection} onSlChange={event => setSelection(event.target.value)}>
         <SlMenuItem value="single">single</SlMenuItem>
         <SlMenuItem value="multiple">multiple</SlMenuItem>
         <SlMenuItem value="leaf">leaf</SlMenuItem>
@@ -132,7 +132,7 @@ const App = () => {
 
       <br />
 
-      <SlTree class="tree-selectable">
+      <SlTree selection={selection}>
         <SlTreeItem>
           Item 1
           <SlTreeItem>
