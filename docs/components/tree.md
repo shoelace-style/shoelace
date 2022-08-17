@@ -73,11 +73,11 @@ const App = () => (
 
 ### Selection Modes
 
-Use the `selection` attribute to change the selection behavior of the tree.
+The `selection` attribute lets you change the selection behavior of the tree.
 
-- Set `single` to allow the selection of a single item (default).
-- Set `multiple` to allow the selection of multiple items.
-- Set `leaf` to allow the selection of a single leaf node. Clicking on a parent node will expand/collapse the node.
+- Use `single` to allow the selection of a single item (default).
+- Use `multiple` to allow the selection of multiple items.
+- Use `leaf` to only allow leaf nodes to be selected.
 
 ```html preview
 <sl-select id="selection-mode" value="single" label="Selection">

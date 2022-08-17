@@ -273,7 +273,7 @@ describe('<sl-tree>', () => {
           // Assert
           expect(el.selectedItems.length).to.eq(1);
           expect(el.children[2]).to.have.attribute('selected');
-          expect(el.children[2]).not.to.have.attribute('expanded');
+          expect(el.children[2]).to.have.attribute('expanded');
         });
       });
 
