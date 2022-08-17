@@ -1,10 +1,12 @@
 import { html, LitElement } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { drag } from '../../internal/drag';
 import { emit } from '../../internal/event';
 import { clamp } from '../../internal/math';
 import { watch } from '../../internal/watch';
+import { LocalizeController } from '../../utilities/localize';
 import '../icon/icon';
 import styles from './image-comparer.styles';
 import type { CSSResultGroup } from 'lit';
@@ -37,33 +39,40 @@ export default class SlImageComparer extends LitElement {
   @query('.image-comparer') base: HTMLElement;
   @query('.image-comparer__handle') handle: HTMLElement;
 
+  private readonly localize = new LocalizeController(this);
+
   /** The position of the divider as a percentage. */
   @property({ type: Number, reflect: true }) position = 50;
 
   handleDrag(event: PointerEvent) {
     const { width } = this.base.getBoundingClientRect();
+    const isRtl = this.localize.dir() === 'rtl';
 
     event.preventDefault();
 
     drag(this.base, {
       onMove: x => {
         this.position = parseFloat(clamp((x / width) * 100, 0, 100).toFixed(2));
+        if (isRtl) this.position = 100 - this.position;
       },
       initialEvent: event
     });
   }
 
   handleKeyDown(event: KeyboardEvent) {
+    const isLtr = this.localize.dir() === 'ltr';
+    const isRtl = this.localize.dir() === 'rtl';
+
     if (['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) {
       const incr = event.shiftKey ? 10 : 1;
       let newPosition = this.position;
 
       event.preventDefault();
 
-      if (event.key === 'ArrowLeft') {
+      if ((isLtr && event.key === 'ArrowLeft') || (isRtl && event.key === 'ArrowRight')) {
         newPosition -= incr;
       }
-      if (event.key === 'ArrowRight') {
+      if ((isLtr && event.key === 'ArrowRight') || (isRtl && event.key === 'ArrowLeft')) {
         newPosition += incr;
       }
       if (event.key === 'Home') {
@@ -84,8 +93,18 @@ export default class SlImageComparer extends LitElement {
   }
 
   render() {
+    const isRtl = this.localize.dir() === 'rtl';
+
     return html`
-      <div part="base" id="image-comparer" class="image-comparer" @keydown=${this.handleKeyDown}>
+      <div
+        part="base"
+        id="image-comparer"
+        class=${classMap({
+          'image-comparer': true,
+          'image-comparer--rtl': isRtl
+        })}
+        @keydown=${this.handleKeyDown}
+      >
         <div class="image-comparer__image">
           <div part="before" class="image-comparer__before">
             <slot name="before"></slot>
@@ -94,7 +113,9 @@ export default class SlImageComparer extends LitElement {
           <div
             part="after"
             class="image-comparer__after"
-            style=${styleMap({ clipPath: `inset(0 ${100 - this.position}% 0 0)` })}
+            style=${styleMap({
+              clipPath: isRtl ? `inset(0 0 0 ${100 - this.position}%)` : `inset(0 ${100 - this.position}% 0 0)`
+            })}
           >
             <slot name="after"></slot>
           </div>
@@ -103,7 +124,9 @@ export default class SlImageComparer extends LitElement {
         <div
           part="divider"
           class="image-comparer__divider"
-          style=${styleMap({ left: `${this.position}%` })}
+          style=${styleMap({
+            left: isRtl ? `${100 - this.position}%` : `${this.position}%`
+          })}
           @mousedown=${this.handleDrag}
           @touchstart=${this.handleDrag}
         >
