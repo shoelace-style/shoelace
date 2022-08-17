@@ -1,4 +1,4 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
@@ -6,6 +6,7 @@ import { live } from 'lit/directives/live.js';
 import { defaultValue } from '../../internal/default-value';
 import { emit } from '../../internal/event';
 import { FormSubmitController } from '../../internal/form';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { HasSlotController } from '../../internal/slot';
 import { watch } from '../../internal/watch';
 import { LocalizeController } from '../../utilities/localize';
@@ -56,7 +57,7 @@ const isFirefox = isChromium ? false : navigator.userAgent.includes('Firefox');
  * @csspart suffix - The input suffix container.
  */
 @customElement('sl-input')
-export default class SlInput extends LitElement {
+export default class SlInput extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
   @query('.input__control') input: HTMLInputElement;

@@ -1,6 +1,7 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property, queryAsync } from 'lit/decorators.js';
 import { emit } from '../../internal/event';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
 import styles from './animation.styles';
 import { animations } from './animations';
@@ -18,7 +19,7 @@ import type { CSSResultGroup } from 'lit';
  * multiple animation elements.
  */
 @customElement('sl-animation')
-export default class SlAnimation extends LitElement {
+export default class SlAnimation extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
   private animation?: Animation;

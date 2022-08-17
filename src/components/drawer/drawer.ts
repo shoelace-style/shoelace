@@ -1,4 +1,4 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
@@ -6,6 +6,7 @@ import { animateTo, stopAnimations } from '../../internal/animate';
 import { emit, waitForEvent } from '../../internal/event';
 import Modal from '../../internal/modal';
 import { lockBodyScrolling, unlockBodyScrolling } from '../../internal/scroll';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { HasSlotController } from '../../internal/slot';
 import { uppercaseFirstLetter } from '../../internal/string';
 import { watch } from '../../internal/watch';
@@ -65,7 +66,7 @@ import type { CSSResultGroup } from 'lit';
  * @animation drawer.overlay.hide - The animation to use when hiding the drawer's overlay.
  */
 @customElement('sl-drawer')
-export default class SlDrawer extends LitElement {
+export default class SlDrawer extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
   @query('.drawer') drawer: HTMLElement;
@@ -247,8 +248,8 @@ export default class SlDrawer extends LitElement {
     }
   }
 
+  /* eslint-disable lit-a11y/click-events-have-key-events */
   render() {
-    /* eslint-disable lit-a11y/click-events-have-key-events */
     return html`
       <div
         part="base"

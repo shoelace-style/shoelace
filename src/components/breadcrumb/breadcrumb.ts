@@ -1,5 +1,6 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { LocalizeController } from '../../utilities/localize';
 import '../icon/icon';
 import styles from './breadcrumb.styles';
@@ -18,7 +19,7 @@ import type { CSSResultGroup } from 'lit';
  * @csspart base - The component's internal wrapper.
  */
 @customElement('sl-breadcrumb')
-export default class SlBreadcrumb extends LitElement {
+export default class SlBreadcrumb extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
   @query('slot') defaultSlot: HTMLSlotElement;

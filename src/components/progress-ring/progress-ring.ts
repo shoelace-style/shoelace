@@ -1,5 +1,6 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { LocalizeController } from '../../utilities/localize';
 import styles from './progress-ring.styles';
 import type { CSSResultGroup } from 'lit';
@@ -20,7 +21,7 @@ import type { CSSResultGroup } from 'lit';
  * @cssproperty --indicator-color - The indicator color.
  */
 @customElement('sl-progress-ring')
-export default class SlProgressRing extends LitElement {
+export default class SlProgressRing extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
   private readonly localize = new LocalizeController(this);
 
@@ -33,9 +34,6 @@ export default class SlProgressRing extends LitElement {
 
   /** A custom label for the progress ring's aria label. */
   @property() label = '';
-
-  /** The locale to render the component in. */
-  @property() lang: string;
 
   updated(changedProps: Map<string, unknown>) {
     super.updated(changedProps);

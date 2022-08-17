@@ -1,9 +1,9 @@
-import { LitElement } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { html, literal } from 'lit/static-html.js';
 import { emit } from '../../internal/event';
+import ShoelaceElement from '../../internal/shoelace-element';
 import '../icon/icon';
 import styles from './icon-button.styles';
 import type { CSSResultGroup } from 'lit';
@@ -20,7 +20,7 @@ import type { CSSResultGroup } from 'lit';
  * @csspart base - The component's internal wrapper.
  */
 @customElement('sl-icon-button')
-export default class SlIconButton extends LitElement {
+export default class SlIconButton extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
   @state() private hasFocus = false;

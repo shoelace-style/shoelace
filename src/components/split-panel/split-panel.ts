@@ -1,9 +1,10 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { drag } from '../../internal/drag';
 import { emit } from '../../internal/event';
 import { clamp } from '../../internal/math';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
 import { LocalizeController } from '../../utilities/localize';
 import styles from './split-panel.styles';
@@ -31,7 +32,7 @@ import type { CSSResultGroup } from 'lit';
  * @cssproperty [--max=100%] - The maximum allowed size of the primary panel.
  */
 @customElement('sl-split-panel')
-export default class SlSplitPanel extends LitElement {
+export default class SlSplitPanel extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
   private cachedPositionInPixels: number;

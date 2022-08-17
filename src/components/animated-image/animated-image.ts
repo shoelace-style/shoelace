@@ -1,6 +1,7 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { emit } from '../../internal/event';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
 import '../icon/icon';
 import styles from './animated-image.styles';
@@ -23,7 +24,7 @@ import type { CSSResultGroup } from 'lit';
  * @cssproperty --icon-size - The size of the play/pause icons.
  */
 @customElement('sl-animated-image')
-export default class SlAnimatedImage extends LitElement {
+export default class SlAnimatedImage extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
   @state() frozenFrame: string;

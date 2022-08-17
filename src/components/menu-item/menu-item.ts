@@ -1,7 +1,8 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { emit } from '../../internal/event';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { getTextContent } from '../../internal/slot';
 import { watch } from '../../internal/watch';
 import '../icon/icon';
@@ -28,7 +29,7 @@ import type { CSSResultGroup } from 'lit';
  * @csspart suffix - The suffix container.
  */
 @customElement('sl-menu-item')
-export default class SlMenuItem extends LitElement {
+export default class SlMenuItem extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
   private cachedTextLabel: string;

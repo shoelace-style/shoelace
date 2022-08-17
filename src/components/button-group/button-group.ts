@@ -1,5 +1,6 @@
-import { LitElement, html } from 'lit';
+import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './button-group.styles';
 import type { CSSResultGroup } from 'lit';
 
@@ -12,7 +13,7 @@ import type { CSSResultGroup } from 'lit';
  * @csspart base - The component's internal wrapper.
  */
 @customElement('sl-button-group')
-export default class SlButtonGroup extends LitElement {
+export default class SlButtonGroup extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
   @query('slot') defaultSlot: HTMLSlotElement;

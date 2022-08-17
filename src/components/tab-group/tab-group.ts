@@ -1,8 +1,9 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { emit } from '../../internal/event';
 import { scrollIntoView } from '../../internal/scroll';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
 import { LocalizeController } from '../../utilities/localize';
 import '../icon-button/icon-button';
@@ -38,7 +39,7 @@ import type { CSSResultGroup } from 'lit';
  * @cssproperty --track-width - The width of the indicator's track (the line that separates tabs from panels).
  */
 @customElement('sl-tab-group')
-export default class SlTabGroup extends LitElement {
+export default class SlTabGroup extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
   private readonly localize = new LocalizeController(this);
 
@@ -66,9 +67,6 @@ export default class SlTabGroup extends LitElement {
 
   /** Disables the scroll arrows that appear when tabs overflow. */
   @property({ attribute: 'no-scroll-controls', type: Boolean }) noScrollControls = false;
-
-  /** The locale to render the component in. */
-  @property() lang: string;
 
   connectedCallback() {
     super.connectedCallback();

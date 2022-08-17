@@ -1,9 +1,10 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { animateTo, stopAnimations } from '../../internal/animate';
 import { emit, waitForEvent } from '../../internal/event';
 import { scrollIntoView } from '../../internal/scroll';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { getTabbableBoundary } from '../../internal/tabbable';
 import { watch } from '../../internal/watch';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
@@ -39,7 +40,7 @@ import type { CSSResultGroup } from 'lit';
  * @animation dropdown.hide - The animation to use when hiding the dropdown.
  */
 @customElement('sl-dropdown')
-export default class SlDropdown extends LitElement {
+export default class SlDropdown extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
   @query('.dropdown') popup: SlPopup;

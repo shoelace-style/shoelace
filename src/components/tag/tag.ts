@@ -1,7 +1,8 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { emit } from '../../internal/event';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { LocalizeController } from '../../utilities/localize';
 import '../icon-button/icon-button';
 import styles from './tag.styles';
@@ -23,7 +24,7 @@ import type { CSSResultGroup } from 'lit';
  * @csspart remove-button__base - The remove button's `base` part.
  */
 @customElement('sl-tag')
-export default class SlTag extends LitElement {
+export default class SlTag extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
   private readonly localize = new LocalizeController(this);
 

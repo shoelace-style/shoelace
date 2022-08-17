@@ -1,7 +1,8 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { HasSlotController } from '../../internal/slot';
 import styles from './breadcrumb-item.styles';
 import type { CSSResultGroup } from 'lit';
@@ -23,7 +24,7 @@ import type { CSSResultGroup } from 'lit';
  * @csspart separator - The container that wraps the separator slot.
  */
 @customElement('sl-breadcrumb-item')
-export default class SlBreadcrumbItem extends LitElement {
+export default class SlBreadcrumbItem extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
   private readonly hasSlotController = new HasSlotController(this, 'prefix', 'suffix');

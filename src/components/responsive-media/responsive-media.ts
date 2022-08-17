@@ -1,6 +1,7 @@
-import { LitElement, html } from 'lit';
+import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './responsive-media.styles';
 import type { CSSResultGroup } from 'lit';
 
@@ -11,7 +12,7 @@ import type { CSSResultGroup } from 'lit';
  * @slot - The element to receive the aspect ratio. Should be a replaced element, such as `<img>`, `<iframe>`, or `<video>`.
  */
 @customElement('sl-responsive-media')
-export default class SlResponsiveMedia extends LitElement {
+export default class SlResponsiveMedia extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
   /**

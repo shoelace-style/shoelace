@@ -1,4 +1,4 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
@@ -6,6 +6,7 @@ import { animateTo, stopAnimations } from '../../internal/animate';
 import { emit, waitForEvent } from '../../internal/event';
 import Modal from '../../internal/modal';
 import { lockBodyScrolling, unlockBodyScrolling } from '../../internal/scroll';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { HasSlotController } from '../../internal/slot';
 import { watch } from '../../internal/watch';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
@@ -57,7 +58,7 @@ import type { CSSResultGroup } from 'lit';
  * @animation dialog.overlay.hide - The animation to use when hiding the dialog's overlay.
  */
 @customElement('sl-dialog')
-export default class SlDialog extends LitElement {
+export default class SlDialog extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
   @query('.dialog') dialog: HTMLElement;

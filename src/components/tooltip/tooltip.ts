@@ -1,8 +1,9 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { animateTo, parseDuration, stopAnimations } from '../../internal/animate';
 import { emit, waitForEvent } from '../../internal/event';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
 import { LocalizeController } from '../../utilities/localize';
@@ -38,7 +39,7 @@ import type { CSSResultGroup } from 'lit';
  * @animation tooltip.hide - The animation to use when hiding the tooltip.
  */
 @customElement('sl-tooltip')
-export default class SlTooltip extends LitElement {
+export default class SlTooltip extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
   @query('slot:not([name])') defaultSlot: HTMLSlotElement;

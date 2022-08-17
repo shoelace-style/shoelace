@@ -1,7 +1,8 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { autoIncrement } from '../../internal/auto-increment';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
 import styles from './tab-panel.styles';
 import type { CSSResultGroup } from 'lit';
@@ -17,7 +18,7 @@ import type { CSSResultGroup } from 'lit';
  * @cssproperty --padding - The tab panel's padding.
  */
 @customElement('sl-tab-panel')
-export default class SlTabPanel extends LitElement {
+export default class SlTabPanel extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
   private readonly attrId = autoIncrement();

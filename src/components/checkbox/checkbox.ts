@@ -1,4 +1,4 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
@@ -6,6 +6,7 @@ import { live } from 'lit/directives/live.js';
 import { defaultValue } from '../../internal/default-value';
 import { emit } from '../../internal/event';
 import { FormSubmitController } from '../../internal/form';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
 import styles from './checkbox.styles';
 import type { CSSResultGroup } from 'lit';
@@ -27,7 +28,7 @@ import type { CSSResultGroup } from 'lit';
  * @csspart label - The checkbox label.
  */
 @customElement('sl-checkbox')
-export default class SlCheckbox extends LitElement {
+export default class SlCheckbox extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
   @query('input[type="checkbox"]') input: HTMLInputElement;

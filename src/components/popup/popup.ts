@@ -1,8 +1,9 @@
 import { arrow, autoUpdate, computePosition, flip, offset, shift, size } from '@floating-ui/dom';
-import { LitElement, html } from 'lit';
+import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { emit } from '../../internal/event';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './popup.styles';
 import type { CSSResultGroup } from 'lit';
 
@@ -33,7 +34,7 @@ import type { CSSResultGroup } from 'lit';
  *  available when using `auto-size`.
  */
 @customElement('sl-popup')
-export default class SlPopup extends LitElement {
+export default class SlPopup extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
   /** A reference to the internal popup container. Useful for animating and styling the popup with JavaScript. */

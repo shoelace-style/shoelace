@@ -1,10 +1,11 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { emit } from '../../internal/event';
 import { clamp } from '../../internal/math';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
 import { LocalizeController } from '../../utilities/localize';
 import '../icon/icon';
@@ -27,7 +28,7 @@ import type { CSSResultGroup } from 'lit';
  * @cssproperty --symbol-spacing - The spacing to use around symbols.
  */
 @customElement('sl-rating')
-export default class SlRating extends LitElement {
+export default class SlRating extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
   @query('.rating') rating: HTMLElement;

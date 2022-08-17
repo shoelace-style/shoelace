@@ -1,8 +1,9 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
 import { emit } from '../../internal/event';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
 import styles from './icon.styles';
 import { getIconLibrary, unwatchIcon, watchIcon } from './library';
@@ -21,7 +22,7 @@ let parser: DOMParser;
  * @csspart base - The component's internal wrapper.
  */
 @customElement('sl-icon')
-export default class SlIcon extends LitElement {
+export default class SlIcon extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
   @state() private svg = '';

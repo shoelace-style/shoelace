@@ -1,8 +1,9 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { styleMap } from 'lit/directives/style-map.js';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { LocalizeController } from '../../utilities/localize';
 import styles from './progress-bar.styles';
 import type { CSSResultGroup } from 'lit';
@@ -23,7 +24,7 @@ import type { CSSResultGroup } from 'lit';
  * @cssproperty --label-color - The label color.
  */
 @customElement('sl-progress-bar')
-export default class SlProgressBar extends LitElement {
+export default class SlProgressBar extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
   private readonly localize = new LocalizeController(this);
 
@@ -35,9 +36,6 @@ export default class SlProgressBar extends LitElement {
 
   /** A custom label for the progress bar's aria label. */
   @property() label = '';
-
-  /** The locale to render the component in. */
-  @property() lang: string;
 
   render() {
     return html`

@@ -1,4 +1,4 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
@@ -6,6 +6,7 @@ import { live } from 'lit/directives/live.js';
 import { defaultValue } from '../../internal/default-value';
 import { emit } from '../../internal/event';
 import { FormSubmitController } from '../../internal/form';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
 import styles from './switch.styles';
 import type { CSSResultGroup } from 'lit';
@@ -30,7 +31,7 @@ import type { CSSResultGroup } from 'lit';
  * @cssproperty --thumb-size - The size of the thumb.
  */
 @customElement('sl-switch')
-export default class SlSwitch extends LitElement {
+export default class SlSwitch extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
   @query('input[type="checkbox"]') input: HTMLInputElement;

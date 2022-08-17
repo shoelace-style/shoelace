@@ -1,7 +1,8 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { emit } from 'src/internal/event';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
 import styles from './radio.styles';
 import type { CSSResultGroup } from 'lit';
@@ -21,7 +22,7 @@ import type { CSSResultGroup } from 'lit';
  * @csspart label - The radio label.
  */
 @customElement('sl-radio')
-export default class SlRadio extends LitElement {
+export default class SlRadio extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
   @state() checked = false;

@@ -11,6 +11,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 ## Next
 
 - Improved RTL support for `<sl-image-comparer>`
+- Refactored components to extend from `ShoelaceElement` to make `dir` and `lang` reactive properties in all components
 
 ## 2.0.0-beta.81
 

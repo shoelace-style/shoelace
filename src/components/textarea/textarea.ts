@@ -1,4 +1,4 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
@@ -6,6 +6,7 @@ import { live } from 'lit/directives/live.js';
 import { defaultValue } from '../../internal/default-value';
 import { emit } from '../../internal/event';
 import { FormSubmitController } from '../../internal/form';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { HasSlotController } from '../../internal/slot';
 import { watch } from '../../internal/watch';
 import styles from './textarea.styles';
@@ -31,7 +32,7 @@ import type { CSSResultGroup } from 'lit';
  * @csspart textarea - The textarea control.
  */
 @customElement('sl-textarea')
-export default class SlTextarea extends LitElement {
+export default class SlTextarea extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
   @query('.textarea__control') input: HTMLTextAreaElement;
@@ -158,10 +159,9 @@ export default class SlTextarea extends LitElement {
     if (position) {
       if (typeof position.top === 'number') this.input.scrollTop = position.top;
       if (typeof position.left === 'number') this.input.scrollLeft = position.left;
-      return;
+      return undefined;
     }
 
-    // eslint-disable-next-line consistent-return
     return {
       top: this.input.scrollTop,
       left: this.input.scrollTop

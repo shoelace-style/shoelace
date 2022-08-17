@@ -1,5 +1,5 @@
 import Color from 'color';
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
@@ -10,6 +10,7 @@ import { drag } from '../../internal/drag';
 import { emit } from '../../internal/event';
 import { FormSubmitController } from '../../internal/form';
 import { clamp } from '../../internal/math';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
 import { LocalizeController } from '../../utilities/localize';
 import '../button-group/button-group';
@@ -82,7 +83,7 @@ declare const EyeDropper: EyeDropperConstructor;
  * @cssproperty --swatch-size - The size of each predefined color swatch.
  */
 @customElement('sl-color-picker')
-export default class SlColorPicker extends LitElement {
+export default class SlColorPicker extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
   @query('[part="input"]') input: SlInput;
@@ -179,9 +180,6 @@ export default class SlColorPicker extends LitElement {
     '#ccc',
     '#fff'
   ];
-
-  /** The locale to render the component in. */
-  @property() lang: string;
 
   connectedCallback() {
     super.connectedCallback();

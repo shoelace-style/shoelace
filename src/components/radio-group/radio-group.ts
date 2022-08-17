@@ -1,9 +1,10 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { emit } from 'src/internal/event';
 import { FormSubmitController } from 'src/internal/form';
 import { watch } from 'src/internal/watch';
+import ShoelaceElement from '../../internal/shoelace-element';
 import '../button-group/button-group';
 import styles from './radio-group.styles';
 import type SlRadioButton from '../radio-button/radio-button';
@@ -27,7 +28,7 @@ import type { CSSResultGroup } from 'lit';
  * @csspart button-group__base - The button group's `base` part.
  */
 @customElement('sl-radio-group')
-export default class SlRadioGroup extends LitElement {
+export default class SlRadioGroup extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
   protected readonly formSubmitController = new FormSubmitController(this, {

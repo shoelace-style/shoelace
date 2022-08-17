@@ -1,8 +1,9 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { animateTo, stopAnimations } from '../../internal/animate';
 import { emit, waitForEvent } from '../../internal/event';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { HasSlotController } from '../../internal/slot';
 import { watch } from '../../internal/watch';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
@@ -40,7 +41,7 @@ const toastStack = Object.assign(document.createElement('div'), { className: 'sl
  */
 
 @customElement('sl-alert')
-export default class SlAlert extends LitElement {
+export default class SlAlert extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
   private autoHideTimeout: number;

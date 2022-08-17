@@ -1,8 +1,9 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { autoIncrement } from '../../internal/auto-increment';
 import { emit } from '../../internal/event';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
 import { LocalizeController } from '../../utilities/localize';
 import '../icon-button/icon-button';
@@ -24,7 +25,7 @@ import type { CSSResultGroup } from 'lit';
  * @csspart close-button__base - The close button's `base` part.
  */
 @customElement('sl-tab')
-export default class SlTab extends LitElement {
+export default class SlTab extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
   private readonly localize = new LocalizeController(this);
 
@@ -44,9 +45,6 @@ export default class SlTab extends LitElement {
 
   /** Draws the tab in a disabled state. */
   @property({ type: Boolean, reflect: true }) disabled = false;
-
-  /** The locale to render the component in. */
-  @property() lang: string;
 
   connectedCallback() {
     super.connectedCallback();

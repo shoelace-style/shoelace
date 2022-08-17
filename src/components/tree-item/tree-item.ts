@@ -1,4 +1,4 @@
-import { LitElement, html } from 'lit';
+import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { live } from 'lit/directives/live.js';
@@ -6,6 +6,7 @@ import { when } from 'lit/directives/when.js';
 import { animateTo, shimKeyframesHeightAuto, stopAnimations } from 'src/internal/animate';
 import { getAnimation, setDefaultAnimation } from 'src/utilities/animation-registry';
 import { emit } from '../../internal/event';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
 import { LocalizeController } from '../../utilities/localize';
 import '../checkbox/checkbox';
@@ -47,7 +48,7 @@ export function isTreeItem(element: Element) {
  * @csspart children - The item's children container.
  */
 @customElement('sl-tree-item')
-export default class SlTreeItem extends LitElement {
+export default class SlTreeItem extends ShoelaceElement {
   static styles = styles;
 
   private readonly localize = new LocalizeController(this);

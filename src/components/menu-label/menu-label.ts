@@ -1,5 +1,6 @@
-import { LitElement, html } from 'lit';
+import { html } from 'lit';
 import { customElement } from 'lit/decorators.js';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './menu-label.styles';
 import type { CSSResultGroup } from 'lit';
 
@@ -12,7 +13,7 @@ import type { CSSResultGroup } from 'lit';
  * @csspart base - The component's internal wrapper.
  */
 @customElement('sl-menu-label')
-export default class SlMenuLabel extends LitElement {
+export default class SlMenuLabel extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
   render() {

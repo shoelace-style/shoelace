@@ -1,5 +1,5 @@
-import { LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { LocalizeController } from '../../utilities/localize';
 
 /**
@@ -7,14 +7,11 @@ import { LocalizeController } from '../../utilities/localize';
  * @status stable
  */
 @customElement('sl-format-number')
-export default class SlFormatNumber extends LitElement {
+export default class SlFormatNumber extends ShoelaceElement {
   private readonly localize = new LocalizeController(this);
 
   /** The number to format. */
   @property({ type: Number }) value = 0;
-
-  /** The locale to use when formatting the number. */
-  @property() lang: string;
 
   /** The formatting style to use. */
   @property() type: 'currency' | 'decimal' | 'percent' = 'decimal';

@@ -1,4 +1,4 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
@@ -6,6 +6,7 @@ import { live } from 'lit/directives/live.js';
 import { defaultValue } from '../../internal/default-value';
 import { emit } from '../../internal/event';
 import { FormSubmitController } from '../../internal/form';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { HasSlotController } from '../../internal/slot';
 import { watch } from '../../internal/watch';
 import { LocalizeController } from '../../utilities/localize';
@@ -39,7 +40,7 @@ import type { CSSResultGroup } from 'lit';
  * @cssproperty --track-active-offset - The point of origin of the active track.
  */
 @customElement('sl-range')
-export default class SlRange extends LitElement {
+export default class SlRange extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
   @query('.range__control') input: HTMLInputElement;

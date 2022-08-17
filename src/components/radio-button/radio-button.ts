@@ -1,9 +1,9 @@
-import { LitElement } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { html } from 'lit/static-html.js';
 import { emit } from '../../internal/event';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { HasSlotController } from '../../internal/slot';
 import { watch } from '../../internal/watch';
 import styles from './radio-button.styles';
@@ -27,7 +27,7 @@ import type { CSSResultGroup } from 'lit';
  * @csspart suffix - The suffix slot's container.
  */
 @customElement('sl-radio-button')
-export default class SlRadioButton extends LitElement {
+export default class SlRadioButton extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
   @query('.button') input: HTMLInputElement;

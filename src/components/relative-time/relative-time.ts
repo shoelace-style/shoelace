@@ -1,5 +1,6 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { LocalizeController } from '../../utilities/localize';
 
 interface UnitConfig {
@@ -22,7 +23,7 @@ const availableUnits: UnitConfig[] = [
  * @status stable
  */
 @customElement('sl-relative-time')
-export default class SlRelativeTime extends LitElement {
+export default class SlRelativeTime extends ShoelaceElement {
   private readonly localize = new LocalizeController(this);
   private updateTimeout: number;
 
@@ -32,9 +33,6 @@ export default class SlRelativeTime extends LitElement {
 
   /** The date from which to calculate time from. */
   @property() date: Date | string;
-
-  /** The locale to use when formatting the number. */
-  @property() lang: string;
 
   /** The formatting style to use. */
   @property() format: 'long' | 'short' | 'narrow' = 'long';
