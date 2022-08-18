@@ -1,8 +1,8 @@
 import { expect, fixture, html, oneEvent } from '@open-wc/testing';
 import sinon from 'sinon';
+import { serialize } from '../../utilities/form';
 import type SlFileUploadItem from '../file-upload-item/file-upload-item';
 import type SlFileUpload from './file-upload';
-import { serialize } from '../../utilities/form';
 
 describe('<sl-file-upload>', () => {
   let xhr: sinon.SinonFakeXMLHttpRequestStatic;

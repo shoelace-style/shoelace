@@ -1,16 +1,17 @@
+/* eslint-disable lit-a11y/click-events-have-key-events */
 import { html, LitElement, nothing } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import '../../components/icon-button/icon-button';
 import '../../components/icon/icon';
 import '../../components/progress-bar/progress-bar';
 import { emit } from '../../internal/event';
+import { FormSubmitController } from '../../internal/form';
 import { LocalizeController } from '../../utilities/localize';
 import styles from './file-upload.styles';
 import { hasValidFileSize, hasValidFileType } from './library';
 import type { FileInfo } from './library';
-import { FormSubmitController } from '../../internal/form';
-import { ifDefined } from 'lit/directives/if-defined.js';
 
 /**
  * @since 2.0
@@ -64,7 +65,7 @@ export default class SlFileUpload extends LitElement {
   @state() warning?: string;
 
   /** Indicates whether a file is currently dragged over the dropzone */
-  @state() isDragover: boolean = false;
+  @state() isDragover = false;
 
   @query('#file-input') fileInput: HTMLInputElement;
 
@@ -75,7 +76,7 @@ export default class SlFileUpload extends LitElement {
 
   public get value(): string | File {
     if (this.files.length > 0) {
-      return 'C:\\fakepath\\' + this.files[0].file.name;
+      return `C:\\fakepath\\${this.files[0].file.name}`;
     }
     return '';
   }

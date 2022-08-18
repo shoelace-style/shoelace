@@ -93,14 +93,14 @@ export class FormSubmitController implements ReactiveController {
       if (Array.isArray(value)) {
         (value as unknown[]).forEach(val => {
           if (val instanceof File) {
-            event.formData.append(name, val as File);
+            event.formData.append(name, val);
           } else {
             event.formData.append(name, (val as string | number | boolean).toString());
           }
         });
       } else {
         if (value instanceof File) {
-          event.formData.append(name, value as File);
+          event.formData.append(name, value);
         } else {
           event.formData.append(name, (value as string | number | boolean).toString());
         }

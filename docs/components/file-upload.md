@@ -86,9 +86,7 @@ Use the `button` slot to customize the button appearance.
 
 ```html preview
 <sl-file-upload>
-  <sl-button variant="danger" slot="button">
-    Custom Button
-  </sl-button>
+  <sl-button variant="danger" slot="button"> Custom Button </sl-button>
 </sl-file-upload>
 ```
 
@@ -161,7 +159,7 @@ const App = () => <SlFileUpload accept="image/*"></SlFileUpload>;
 
 ### Form Usage with FormData
 
-The FileUpload component can be used inside a form as a replacement for `<input type="file">`. The files can be accessed using FormData. See [Form Control documentation](../getting-started/form-controls.md) for more details. 
+The FileUpload component can be used inside a form as a replacement for `<input type="file">`. The files can be accessed using FormData. See [Form Control documentation](../getting-started/form-controls.md) for more details.
 
 ```html preview
 <form class="file-upload">
@@ -175,7 +173,7 @@ The FileUpload component can be used inside a form as a replacement for `<input 
 
 <script type="module">
   const form = document.querySelector('.file-upload');
-  
+
   form.addEventListener('submit', event => {
     event.preventDefault();
     const formData = new FormData(form);
@@ -190,7 +188,7 @@ import { SlFileUpload, SlButton } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => {
   const form = useRef(null);
-  
+
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(form);
@@ -203,8 +201,12 @@ const App = () => {
       <br />
       <input type="file" name="native-input" multiple></input>
       <br />
-      <SlButton type="reset" variant="default">Reset</SlButton>
-      <SlButton type="submit" variant="primary">Submit</SlButton>
+      <SlButton type="reset" variant="default">
+        Reset
+      </SlButton>
+      <SlButton type="submit" variant="primary">
+        Submit
+      </SlButton>
     </form>
   );
 };
@@ -212,7 +214,7 @@ const App = () => {
 
 ### Form Usage with JSON
 
-The FileUpload component can be used inside a form as a replacement for `<input type="file">`. The files can be serialized using JSON. See [Form Control documentation](../getting-started/form-controls.md) for more details. 
+The FileUpload component can be used inside a form as a replacement for `<input type="file">`. The files can be serialized using JSON. See [Form Control documentation](../getting-started/form-controls.md) for more details.
 
 ```html preview
 <form class="file-upload-json">
@@ -228,7 +230,7 @@ The FileUpload component can be used inside a form as a replacement for `<input 
   import { serialize } from '../dist/utilities/form.js';
 
   const form = document.querySelector('.file-upload-json');
-  
+
   form.addEventListener('submit', event => {
     event.preventDefault();
     const data = serialize(form);
@@ -257,8 +259,12 @@ const App = () => {
       <br />
       <input type="file" name="native-input" multiple></input>
       <br />
-      <SlButton type="reset" variant="default">Reset</SlButton>
-      <SlButton type="submit" variant="primary">Submit</SlButton>
+      <SlButton type="reset" variant="default">
+        Reset
+      </SlButton>
+      <SlButton type="submit" variant="primary">
+        Submit
+      </SlButton>
     </form>
   );
 };
@@ -273,7 +279,7 @@ To upload a file, listen to the `sl-change` event and handle the received file. 
 
 <script type="module">
   const fileUpload = document.querySelector('.upload-file');
-  
+
   fileUpload.addEventListener('sl-change', event => {
     event.preventDefault();
     const fileInfo = event.detail;
@@ -308,8 +314,12 @@ const App = () => {
       <br />
       <input type="file" name="native-input" multiple></input>
       <br />
-      <SlButton type="reset" variant="default">Reset</SlButton>
-      <SlButton type="submit" variant="primary">Submit</SlButton>
+      <SlButton type="reset" variant="default">
+        Reset
+      </SlButton>
+      <SlButton type="submit" variant="primary">
+        Submit
+      </SlButton>
     </form>
   );
 };
@@ -324,21 +334,21 @@ Set `loading` to `true` on the FileInfo object to add a loading indicator to the
 
 <script type="module">
   const fileUpload = document.querySelector('.upload-file-loading');
-  
-  fileUpload.addEventListener('sl-change', async (event) => {
+
+  fileUpload.addEventListener('sl-change', async event => {
     event.preventDefault();
     const fileInfo = event.detail;
     const xhr = new XMLHttpRequest();
     xhr.open('POST', 'http://localhost:8080/upload/');
     xhr.setRequestHeader('Content-Type', fileInfo.file.type);
     xhr.send(fileInfo.file);
-    
+
     fileInfo.loading = true;
-    
+
     setTimeout(() => {
-        fileInfo.loading = false;
-        fileUpload.requestUpdate();
-    }, 3000)
+      fileInfo.loading = false;
+      fileUpload.requestUpdate();
+    }, 3000);
   });
 </script>
 ```
@@ -364,7 +374,7 @@ const App = () => {
     setTimeout(() => {
       fileInfo.loading = false;
       fileUpload.requestUpdate();
-    }, 3000)
+    }, 3000);
   }
 
   return (
@@ -373,8 +383,12 @@ const App = () => {
       <br />
       <input type="file" name="native-input" multiple></input>
       <br />
-      <SlButton type="reset" variant="default">Reset</SlButton>
-      <SlButton type="submit" variant="primary">Submit</SlButton>
+      <SlButton type="reset" variant="default">
+        Reset
+      </SlButton>
+      <SlButton type="submit" variant="primary">
+        Submit
+      </SlButton>
     </form>
   );
 };
@@ -389,21 +403,21 @@ To handle errors in a [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/
 
 <script type="module">
   const fileUpload = document.querySelector('.upload-file-errors');
-  
-  fileUpload.addEventListener('sl-change', async (event) => {
+
+  fileUpload.addEventListener('sl-change', async event => {
     event.preventDefault();
     const fileInfo = event.detail;
     const xhr = new XMLHttpRequest();
-    
+
     xhr.upload.onerror = event => {
-      console.error('error:', event)
+      console.error('error:', event);
       fileInfo.loading = false;
-      fileInfo.warning = "Upload Failed";
+      fileInfo.warning = 'Upload Failed';
       fileInfo.accepted = false;
-      
-      fileUpload.requestUpdate()
+
+      fileUpload.requestUpdate();
     };
-    
+
     xhr.open('POST', 'http://localhost');
     xhr.setRequestHeader('Content-Type', fileInfo.file.type);
     xhr.send(fileInfo.file);
@@ -427,12 +441,12 @@ const App = () => {
     const xhr = new XMLHttpRequest();
 
     xhr.upload.onerror = event => {
-      console.error('error:', event)
+      console.error('error:', event);
       fileInfo.loading = false;
-      fileInfo.warning = "Upload Failed";
+      fileInfo.warning = 'Upload Failed';
       fileInfo.accepted = false;
 
-      fileUpload.requestUpdate()
+      fileUpload.requestUpdate();
     };
 
     xhr.open('POST', 'http://localhost');
@@ -448,8 +462,12 @@ const App = () => {
       <br />
       <input type="file" name="native-input" multiple></input>
       <br />
-      <SlButton type="reset" variant="default">Reset</SlButton>
-      <SlButton type="submit" variant="primary">Submit</SlButton>
+      <SlButton type="reset" variant="default">
+        Reset
+      </SlButton>
+      <SlButton type="submit" variant="primary">
+        Submit
+      </SlButton>
     </form>
   );
 };
@@ -464,12 +482,12 @@ The [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpReq
 
 <script type="module">
   const fileUpload = document.querySelector('.upload-file-progress');
-  
-  fileUpload.addEventListener('sl-change', async (event) => {
+
+  fileUpload.addEventListener('sl-change', async event => {
     event.preventDefault();
     const fileInfo = event.detail;
     const xhr = new XMLHttpRequest();
-    
+
     xhr.upload.onprogress = event => {
       if (event.lengthComputable) {
         console.log('progress: ', (event.loaded / event.total) * 100);
@@ -477,16 +495,16 @@ The [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpReq
         fileUpload.requestUpdate();
       }
     };
-    
+
     xhr.upload.onload = event => {
-      console.log('complete: ',event);
+      console.log('complete: ', event);
       fileInfo.loading = false;
       fileUpload.requestUpdate();
     };
-    
+
     xhr.open('POST', 'http://localhost:8080/upload');
     var formData = new FormData();
-    formData.append("file", fileInfo.file);
+    formData.append('file', fileInfo.file);
     xhr.send(formData);
 
     fileInfo.loading = true;
@@ -516,14 +534,14 @@ const App = () => {
     };
 
     xhr.upload.onload = event => {
-      console.log('complete: ',event);
+      console.log('complete: ', event);
       fileInfo.loading = false;
       fileUpload.requestUpdate();
     };
 
     xhr.open('POST', 'http://localhost:8080/upload');
     var formData = new FormData();
-    formData.append("file", fileInfo.file);
+    formData.append('file', fileInfo.file);
     xhr.send(formData);
 
     fileInfo.loading = true;
@@ -535,8 +553,12 @@ const App = () => {
       <br />
       <input type="file" name="native-input" multiple></input>
       <br />
-      <SlButton type="reset" variant="default">Reset</SlButton>
-      <SlButton type="submit" variant="primary">Submit</SlButton>
+      <SlButton type="reset" variant="default">
+        Reset
+      </SlButton>
+      <SlButton type="submit" variant="primary">
+        Submit
+      </SlButton>
     </form>
   );
 };
@@ -570,9 +592,7 @@ Set the `content` slot to customize the appearance of the dropzone.
 <sl-file-upload>
   <sl-card slot="label" class="card-footer">
     This card is a dropzone. You can drag all sorts of things in it!
-    <div slot="footer">
-      Footer
-    </div>
+    <div slot="footer">Footer</div>
   </sl-card>
 </sl-file-upload>
 
