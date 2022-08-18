@@ -110,7 +110,9 @@ export default class SlSplitPanel extends ShoelaceElement {
     }
 
     // Prevent text selection when dragging
-    event.preventDefault();
+    if (event.cancelable) {
+      event.preventDefault();
+    }
 
     drag(this, {
       onMove: (x, y) => {

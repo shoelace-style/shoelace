@@ -38,7 +38,7 @@ export function drag(container: HTMLElement, options?: Partial<DragOptions>) {
   document.addEventListener('pointerup', stop);
 
   // If an initial event is set, trigger the first drag immediately
-  if (options?.initialEvent) {
+  if (options?.initialEvent?.type === 'pointermove') {
     move(options.initialEvent);
   }
 }
