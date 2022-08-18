@@ -165,7 +165,7 @@ The FileUpload component can be used inside a form as a replacement for `<input 
 
 ```html preview
 <form class="file-upload">
-  <sl-file-upload name="sl-file-upload" multiple></sl-file-upload>
+  <sl-file-upload name="sl-file-upload" no-button multiple></sl-file-upload>
   <br />
   <input type="file" name="native-input" multiple></input>
   <br />
@@ -199,7 +199,7 @@ const App = () => {
 
   return (
     <form onSubmit={handleSubmit} ref={form}>
-      <SlFileUpload name="sl-file-upload" multiple></SlFileUpload>
+      <SlFileUpload name="sl-file-upload" no-button multiple></SlFileUpload>
       <br />
       <input type="file" name="native-input" multiple></input>
       <br />
@@ -216,7 +216,7 @@ The FileUpload component can be used inside a form as a replacement for `<input 
 
 ```html preview
 <form class="file-upload-json">
-  <sl-file-upload name="sl-file-upload" multiple></sl-file-upload>
+  <sl-file-upload name="sl-file-upload" no-button multiple></sl-file-upload>
   <br />
   <input type="file" name="native-input" multiple></input>
   <br />
@@ -253,7 +253,7 @@ const App = () => {
 
   return (
     <form onSubmit={handleSubmit} ref={form}>
-      <SlFileUpload name="sl-file-upload" multiple></SlFileUpload>
+      <SlFileUpload name="sl-file-upload" no-button multiple></SlFileUpload>
       <br />
       <input type="file" name="native-input" multiple></input>
       <br />
