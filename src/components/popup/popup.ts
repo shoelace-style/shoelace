@@ -330,10 +330,14 @@ export default class SlPopup extends ShoelaceElement {
           apply: ({ availableWidth, availableHeight }) => {
             if (this.autoSize === 'vertical' || this.autoSize === 'both') {
               this.style.setProperty('--auto-size-available-height', `${availableHeight}px`);
+            } else {
+              this.style.removeProperty('--auto-size-available-height');
             }
 
             if (this.autoSize === 'horizontal' || this.autoSize === 'both') {
               this.style.setProperty('--auto-size-available-width', `${availableWidth}px`);
+            } else {
+              this.style.removeProperty('--auto-size-available-width');
             }
           }
         })
