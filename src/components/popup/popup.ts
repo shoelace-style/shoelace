@@ -160,6 +160,9 @@ export default class SlPopup extends ShoelaceElement {
   /** When set, this will cause the popup to automatically resize itself to prevent it from overflowing. */
   @property({ attribute: 'auto-size', type: Boolean }) autoSize = false;
 
+  /** Syncs the popup's width or height to that of the anchor element. */
+  @property() sync: 'width' | 'height' | 'both';
+
   /**
    * The auto-size boundary describes clipping element(s) that overflow will be checked relative to when resizing. By
    * default, the boundary includes overflow ancestors that will cause the element to be clipped. If needed, you can
@@ -277,7 +280,25 @@ export default class SlPopup extends ShoelaceElement {
       offset({ mainAxis: this.distance, crossAxis: this.skidding })
     ];
 
-    // First we flip
+    // First we sync width/height
+    if (this.sync) {
+      middleware.push(
+        size({
+          apply: ({ rects }) => {
+            const syncWidth = this.sync === 'width' || this.sync === 'both';
+            const syncHeight = this.sync === 'height' || this.sync === 'both';
+            this.popup.style.width = syncWidth ? `${rects.reference.width}px` : '';
+            this.popup.style.height = syncHeight ? `${rects.reference.height}px` : '';
+          }
+        })
+      );
+    } else {
+      // Cleanup styles if we're not matching width/height
+      this.popup.style.width = '';
+      this.popup.style.height = '';
+    }
+
+    // Then we flip
     if (this.flip) {
       middleware.push(
         flip({

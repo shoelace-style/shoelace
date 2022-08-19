@@ -10,6 +10,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
+- Added the `sync` attribute to `<sl-popup>`
 - Fixed a bug in `<sl-tree>` where dynamically changing slotted items wouldn't update the tree properly
 - Fixed a bug in `<sl-split-panel>` that caused the panel to stack when clicking on the divider in mobile versions of Chrome [#862](https://github.com/shoelace-style/shoelace/issues/862)
 - Improved single selection in `<sl-tree>` so nodes expand and collapse and receive selection when clicking on the label

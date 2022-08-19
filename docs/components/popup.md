@@ -770,6 +770,112 @@ const App = () => {
 };
 ```
 
+### Syncing with the Anchor's Dimensions
+
+Use the `sync` attribute to make the popup the same width or height as the anchor element. This is useful for controls that need the popup to stay the same width or height as the trigger.
+
+```html preview
+<div class="popup-match">
+  <sl-popup placement="top" sync="width" active>
+    <span slot="anchor"></span>
+    <div class="box"></div>
+  </sl-popup>
+
+  <sl-select value="width" label="Sync">
+    <sl-menu-item value="width">Width</sl-menu-item>
+    <sl-menu-item value="height">Height</sl-menu-item>
+    <sl-menu-item value="both">Both</sl-menu-item>
+    <sl-menu-item value="">None</sl-menu-item>
+  </sl-select>
+</div>
+
+<style>
+  .popup-match span[slot='anchor'] {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    border: dashed 2px var(--sl-color-neutral-600);
+    margin: 50px;
+  }
+
+  .popup-match .box {
+    width: 100%;
+    height: 100%;
+    min-width: 50px;
+    min-height: 50px;
+    background: var(--sl-color-primary-600);
+    border-radius: var(--sl-border-radius-medium);
+  }
+
+  .popup-match sl-switch {
+    margin-top: 1rem;
+  }
+</style>
+
+<script>
+  const container = document.querySelector('.popup-match');
+  const popup = container.querySelector('sl-popup');
+  const fixed = container.querySelector('sl-switch');
+  const sync = container.querySelector('sl-select');
+
+  sync.addEventListener('sl-change', () => (popup.sync = sync.value));
+</script>
+```
+
+```jsx react
+import { useState } from 'react';
+import { SlPopup, SlSelect, SlMenuItem } from '@shoelace-style/shoelace/dist/react';
+
+const css = `
+  .popup-match span[slot='anchor'] {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    border: dashed 2px var(--sl-color-neutral-600);
+    margin: 50px;
+  }
+
+  .popup-match .box {
+    width: 100%;
+    height: 100%;
+    min-width: 50px;
+    min-height: 50px;
+    background: var(--sl-color-primary-600);
+    border-radius: var(--sl-border-radius-medium);
+  }
+
+  .popup-match sl-switch {
+    margin-top: 1rem;
+  }
+`;
+
+const App = () => {
+  const [sync, setSync] = useState('width');
+
+  return (
+    <>
+      <div class="popup-match">
+        <SlPopup placement="top" sync={sync} active>
+          <span slot="anchor" />
+          <div class="box" />
+        </SlPopup>
+
+        <SlSelect value={sync} label="Sync" onSlChange={event => setSync(event.target.value)}>
+          <SlMenuItem value="width">Width</SlMenuItem>
+          <SlMenuItem value="height">Height</SlMenuItem>
+          <SlMenuItem value="both">Both</SlMenuItem>
+          <SlMenuItem value="">None</SlMenuItem>
+        </SlSelect>
+
+        {sync}
+      </div>
+
+      <style>{css}</style>
+    </>
+  );
+};
+```
+
 ### Positioning Strategy
 
 By default, the popup is positioned using an absolute positioning strategy. However, if your anchor is fixed or exists within a container that has `overflow: auto|hidden`, the popup risks being clipped. To work around this, you can use a fixed positioning strategy by setting the `strategy` attribute to `fixed`.
