@@ -158,7 +158,7 @@ export default class SlPopup extends ShoelaceElement {
   @property({ attribute: 'shift-padding', type: Number }) shiftPadding = 0;
 
   /** When set, this will cause the popup to automatically resize itself to prevent it from overflowing. */
-  @property({ attribute: 'auto-size', type: Boolean }) autoSize = false;
+  @property({ attribute: 'auto-size' }) autoSize: 'horizontal' | 'vertical' | 'both';
 
   /** Syncs the popup's width or height to that of the anchor element. */
   @property() sync: 'width' | 'height' | 'both';
@@ -328,8 +328,13 @@ export default class SlPopup extends ShoelaceElement {
           boundary: this.autoSizeBoundary,
           padding: this.autoSizePadding,
           apply: ({ availableWidth, availableHeight }) => {
-            this.style.setProperty('--auto-size-available-width', `${availableWidth}px`);
-            this.style.setProperty('--auto-size-available-height', `${availableHeight}px`);
+            if (this.autoSize === 'vertical' || this.autoSize === 'both') {
+              this.style.setProperty('--auto-size-available-height', `${availableHeight}px`);
+            }
+
+            if (this.autoSize === 'horizontal' || this.autoSize === 'both') {
+              this.style.setProperty('--auto-size-available-width', `${availableWidth}px`);
+            }
           }
         })
       );

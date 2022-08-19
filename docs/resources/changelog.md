@@ -11,6 +11,8 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 ## Next
 
 - Added the `sync` attribute to `<sl-popup>`
+- Changed the `auto-size` attribute of the experimental `<sl-popup>` component so it accepts `horizontal`, `vertical`, and `both` instead of a boolean value
+- Fixed a bug in `<sl-dropdown>` that caused the panel to resize horizontally when the trigger is clipped by the viewport [#860](https://github.com/shoelace-style/shoelace/issues/860)
 - Fixed a bug in `<sl-tree>` where dynamically changing slotted items wouldn't update the tree properly
 - Fixed a bug in `<sl-split-panel>` that caused the panel to stack when clicking on the divider in mobile versions of Chrome [#862](https://github.com/shoelace-style/shoelace/issues/862)
 - Improved single selection in `<sl-tree>` so nodes expand and collapse and receive selection when clicking on the label

@@ -397,7 +397,7 @@ export default class SlDropdown extends ShoelaceElement {
         strategy=${this.hoist ? 'fixed' : 'absolute'}
         flip
         shift
-        auto-size
+        auto-size="vertical"
         auto-size-padding="10"
         class=${classMap({
           dropdown: true,

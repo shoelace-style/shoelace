@@ -1197,7 +1197,7 @@ const App = () => {
 
 ### Auto-size
 
-Use the `auto-size` attribute to tell the popup to resize when necessary to prevent it from getting clipped. You can use `autoSizeBoundary` and `auto-size-padding` to customize the behavior of this option. Auto-size works well with `flip`, but if you're using `auto-size-padding` make sure `flip-padding` is the same value.
+Use the `auto-size` attribute to tell the popup to resize when necessary to prevent it from getting clipped. Possible values are `horizontal`, `vertical`, and `both`. You can use `autoSizeBoundary` and `auto-size-padding` to customize the behavior of this option. Auto-size works well with `flip`, but if you're using `auto-size-padding` make sure `flip-padding` is the same value.
 
 When using auto-size, two read-only custom properties called `--auto-size-available-width` and `--auto-size-available-height` will be applied to the host element. These values determine the available space the popover has before clipping will occur. Since they cascade, you can use them to set a max-width/height on your popup's content and easily control its overflow.
 
@@ -1206,7 +1206,7 @@ Scroll the container to see the popup resize as its available space changes.
 ```html preview
 <div class="popup-auto-size">
   <div class="overflow">
-    <sl-popup placement="top" auto-size auto-size-padding="10" active>
+    <sl-popup placement="top" auto-size="both" auto-size-padding="10" active>
       <span slot="anchor"></span>
       <div class="box"></div>
     </sl-popup>
@@ -1298,7 +1298,7 @@ const App = () => {
     <>
       <div className="popup-auto-size">
         <div className="overflow">
-          <SlPopup placement="top" auto-size={autoSize || null} auto-size-padding="10" active>
+          <SlPopup placement="top" auto-size={autoSize ? 'both' || null} auto-size-padding="10" active>
             <span slot="anchor" />
             <div className="box" />
           </SlPopup>
