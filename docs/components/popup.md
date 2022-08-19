@@ -866,8 +866,6 @@ const App = () => {
           <SlMenuItem value="both">Both</SlMenuItem>
           <SlMenuItem value="">None</SlMenuItem>
         </SlSelect>
-
-        {sync}
       </div>
 
       <style>{css}</style>
