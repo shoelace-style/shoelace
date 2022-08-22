@@ -101,7 +101,7 @@ export default class SlPopup extends ShoelaceElement {
 
   /**
    * When set, placement of the popup will flip to the opposite site to keep it in view. You can use
-   * `flipFallbackPlacement` to further configure how the fallback placement is determined.
+   * `flipFallbackPlacements` to further configure how the fallback placement is determined.
    */
   @property({ type: Boolean }) flip = false;
 
@@ -111,7 +111,7 @@ export default class SlPopup extends ShoelaceElement {
    * fallback strategy will be used instead.
    * */
   @property({
-    attribute: 'flip-fallback-placement',
+    attribute: 'flip-fallback-placements',
     converter: {
       fromAttribute: (value: string) => {
         return value
@@ -124,15 +124,14 @@ export default class SlPopup extends ShoelaceElement {
       }
     }
   })
-  flipFallbackPlacement = '';
+  flipFallbackPlacements = '';
 
   /**
    * When neither the preferred placement nor the fallback placements fit, this value will be used to determine whether
    * the popup should be positioned as it was initially preferred or using the best available fit based on available
    * space.
    */
-  @property({ attribute: 'flip-fallback-strategy' }) flipFallbackStrategy: 'bestFit' | 'initialPlacement' =
-    'initialPlacement';
+  @property({ attribute: 'flip-fallback-strategy' }) flipFallbackStrategy: 'best-fit' | 'initial' = 'initial';
 
   /**
    * The flip boundary describes clipping element(s) that overflow will be checked relative to when flipping. By
@@ -304,7 +303,7 @@ export default class SlPopup extends ShoelaceElement {
         flip({
           boundary: this.flipBoundary,
           // @ts-expect-error - We're converting a string attribute to an array here
-          fallbackPlacement: this.flipFallbackPlacement,
+          fallbackPlacements: this.flipFallbackPlacements,
           fallbackStrategy: this.flipFallbackStrategy,
           padding: this.flipPadding
         })
