@@ -1140,8 +1140,7 @@ Scroll the container to see how the popup changes it's fallback placement to pre
 ```
 
 ```jsx react
-import { useState } from 'react';
-import { SlPopup, SlSwitch } from '@shoelace-style/shoelace/dist/react';
+import { SlPopup } from '@shoelace-style/shoelace/dist/react';
 
 const css = `
   .popup-flip-fallbacks .overflow {

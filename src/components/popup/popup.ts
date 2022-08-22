@@ -304,7 +304,7 @@ export default class SlPopup extends ShoelaceElement {
           boundary: this.flipBoundary,
           // @ts-expect-error - We're converting a string attribute to an array here
           fallbackPlacements: this.flipFallbackPlacements,
-          fallbackStrategy: this.flipFallbackStrategy,
+          fallbackStrategy: this.flipFallbackStrategy === 'best-fit' ? 'bestFit' : 'initialPlacement',
           padding: this.flipPadding
         })
       );
