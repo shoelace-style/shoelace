@@ -231,12 +231,24 @@ export default class SlDrawer extends ShoelaceElement {
         dir: this.localize.dir()
       });
       const overlayAnimation = getAnimation(this, 'drawer.overlay.hide', { dir: this.localize.dir() });
+
+      // Animate the overlay and the panel at the same time. Because animation durations might be different, we need to
+      // hide each one individually when the animation finishes, otherwise the first one that finishes will reappear
+      // unexpectedly. We'll unhide them after all animations have completed.
       await Promise.all([
-        animateTo(this.panel, panelAnimation.keyframes, panelAnimation.options),
-        animateTo(this.overlay, overlayAnimation.keyframes, overlayAnimation.options)
+        animateTo(this.overlay, overlayAnimation.keyframes, overlayAnimation.options).then(() => {
+          this.overlay.hidden = true;
+        }),
+        animateTo(this.panel, panelAnimation.keyframes, panelAnimation.options).then(() => {
+          this.panel.hidden = true;
+        })
       ]);
 
       this.drawer.hidden = true;
+
+      // Now that the dialog is hidden, restore the overlay and panel for next time
+      this.overlay.hidden = false;
+      this.panel.hidden = false;
 
       // Restore focus to the original trigger
       const trigger = this.originalTrigger;
