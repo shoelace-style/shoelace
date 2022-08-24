@@ -10,7 +10,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
-- Added the `sync` attribute to `<sl-popup>`
+- Added the `sync` and `arrow-placement` attributes to `<sl-popup>`
 - Changed the `auto-size` attribute of the experimental `<sl-popup>` component so it accepts `horizontal`, `vertical`, and `both` instead of a boolean value
 - Changed the `flip-fallback-placement` attribute of the experimental `<sl-popup>` component to `flip-fallback-placements`
 - Changed the `flip-fallback-strategy` in the experimental `<sl-popup>` component to accept `best-fit` and `initial` instead of `bestFit` and `initialPlacement`

@@ -681,50 +681,96 @@ const App = () => {
 
 Add an arrow to your popup with the `arrow` attribute. It's usually a good idea to set a `distance` to make room for the arrow. To adjust the arrow's color and size, use the `--arrow-color` and `--arrow-size` custom properties, respectively. You can also target the `arrow` part to add additional styles such as shadows and borders.
 
+By default, the arrow will be aligned as close to the center of the _anchor_ as possible, considering available space and `arrow-padding`. You can use the `arrow-placement` attribute to force the arrow to align to the start, end, or center of the _popup_ instead.
+
 ```html preview
 <div class="popup-arrow">
-  <sl-popup placement="top" arrow distance="8" active>
+  <sl-popup placement="top" arrow arrow-placement="anchor" distance="8" active>
     <span slot="anchor"></span>
     <div class="box"></div>
   </sl-popup>
 
-  <br />
-  <sl-switch checked>Arrow</sl-switch>
+  <div class="popup-arrow-options">
+    <sl-select label="Placement" name="placement" value="top" class="popup-overview-select">
+      <sl-menu-item value="top">top</sl-menu-item>
+      <sl-menu-item value="top-start">top-start</sl-menu-item>
+      <sl-menu-item value="top-end">top-end</sl-menu-item>
+      <sl-menu-item value="bottom">bottom</sl-menu-item>
+      <sl-menu-item value="bottom-start">bottom-start</sl-menu-item>
+      <sl-menu-item value="bottom-end">bottom-end</sl-menu-item>
+      <sl-menu-item value="right">right</sl-menu-item>
+      <sl-menu-item value="right-start">right-start</sl-menu-item>
+      <sl-menu-item value="right-end">right-end</sl-menu-item>
+      <sl-menu-item value="left">left</sl-menu-item>
+      <sl-menu-item value="left-start">left-start</sl-menu-item>
+      <sl-menu-item value="left-end">left-end</sl-menu-item>
+    </sl-select>
+
+    <sl-select label="Arrow Placement" name="arrow-placement" value="anchor">
+      <sl-menu-item value="anchor">anchor</sl-menu-item>
+      <sl-menu-item value="start">start</sl-menu-item>
+      <sl-menu-item value="end">end</sl-menu-item>
+      <sl-menu-item value="center">center</sl-menu-item>
+    </sl-select>
+  </div>
+
+  <div class="popup-arrow-options">
+    <sl-switch name="arrow" checked>Arrow</sl-switch>
+  </div>
+
+  <style>
+    .popup-arrow sl-popup {
+      --arrow-color: var(--sl-color-primary-600);
+    }
+
+    .popup-arrow span[slot='anchor'] {
+      display: inline-block;
+      width: 150px;
+      height: 150px;
+      border: dashed 2px var(--sl-color-neutral-600);
+      margin: 50px;
+    }
+
+    .popup-arrow .box {
+      width: 100px;
+      height: 50px;
+      background: var(--sl-color-primary-600);
+      border-radius: var(--sl-border-radius-medium);
+    }
+
+    .popup-arrow-options {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: end;
+      gap: 1rem;
+    }
+
+    .popup-arrow-options sl-select {
+      width: 160px;
+    }
+
+    .popup-arrow-options + .popup-arrow-options {
+      margin-top: 1rem;
+    }
+  </style>
+
+  <script>
+    const container = document.querySelector('.popup-arrow');
+    const popup = container.querySelector('sl-popup');
+    const placement = container.querySelector('[name="placement"]');
+    const arrowPlacement = container.querySelector('[name="arrow-placement"]');
+    const arrow = container.querySelector('[name="arrow"]');
+
+    placement.addEventListener('sl-change', () => (popup.placement = placement.value));
+    arrowPlacement.addEventListener('sl-change', () => (popup.arrowPlacement = arrowPlacement.value));
+    arrow.addEventListener('sl-change', () => (popup.arrow = arrow.checked));
+  </script>
 </div>
-
-<style>
-  .popup-arrow sl-popup {
-    --arrow-color: var(--sl-color-primary-600);
-  }
-
-  .popup-arrow span[slot='anchor'] {
-    display: inline-block;
-    width: 150px;
-    height: 150px;
-    border: dashed 2px var(--sl-color-neutral-600);
-    margin: 50px;
-  }
-
-  .popup-arrow .box {
-    width: 100px;
-    height: 50px;
-    background: var(--sl-color-primary-600);
-    border-radius: var(--sl-border-radius-medium);
-  }
-</style>
-
-<script>
-  const container = document.querySelector('.popup-arrow');
-  const popup = container.querySelector('sl-popup');
-  const arrow = container.querySelector('sl-switch');
-
-  arrow.addEventListener('sl-change', () => (popup.arrow = arrow.checked));
-</script>
 ```
 
 ```jsx react
 import { useState } from 'react';
-import { SlPopup, SlSwitch } from '@shoelace-style/shoelace/dist/react';
+import { SlPopup, SlSelect, SlMenuItem, SlSwitch } from '@shoelace-style/shoelace/dist/react';
 
 const css = `
   .popup-arrow sl-popup {
@@ -745,23 +791,76 @@ const css = `
     background: var(--sl-color-primary-600);
     border-radius: var(--sl-border-radius-medium);
   }
+
+  .popup-arrow-options {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    gap: 1rem;
+  }
+
+  .popup-arrow-options sl-select {
+    width: 160px;
+  }
+
+  .popup-arrow-options + .popup-arrow-options {
+    margin-top: 1rem;
+  }
 `;
 
 const App = () => {
+  const [placement, setPlacement] = useState('top');
+  const [arrowPlacement, setArrowPlacement] = useState('anchor');
   const [arrow, setArrow] = useState(true);
 
   return (
     <>
       <div className="popup-arrow">
-        <SlPopup placement="top" arrow={arrow} distance="8" active>
+        <SlPopup placement={placement} arrow={arrow || null} arrow-placement={arrowPlacement} distance="8" active>
           <span slot="anchor" />
           <div className="box" />
         </SlPopup>
 
-        <br />
-        <SlSwitch checked={arrow} onSlChange={event => setArrow(event.target.checked)}>
-          Arrow
-        </SlSwitch>
+        <div className="popup-arrow-options">
+          <SlSelect
+            label="Placement"
+            name="placement"
+            value={placement}
+            className="popup-overview-select"
+            onSlChange={event => setPlacement(event.target.value)}
+          >
+            <SlMenuItem value="top">top</SlMenuItem>
+            <SlMenuItem value="top-start">top-start</SlMenuItem>
+            <SlMenuItem value="top-end">top-end</SlMenuItem>
+            <SlMenuItem value="bottom">bottom</SlMenuItem>
+            <SlMenuItem value="bottom-start">bottom-start</SlMenuItem>
+            <SlMenuItem value="bottom-end">bottom-end</SlMenuItem>
+            <SlMenuItem value="right">right</SlMenuItem>
+            <SlMenuItem value="right-start">right-start</SlMenuItem>
+            <SlMenuItem value="right-end">right-end</SlMenuItem>
+            <SlMenuItem value="left">left</SlMenuItem>
+            <SlMenuItem value="left-start">left-start</SlMenuItem>
+            <SlMenuItem value="left-end">left-end</SlMenuItem>
+          </SlSelect>
+
+          <SlSelect
+            label="Arrow Placement"
+            name="arrow-placement"
+            value={arrowPlacement}
+            onSlChange={event => setArrowPlacement(event.target.value)}
+          >
+            <SlMenuItem value="anchor">anchor</SlMenuItem>
+            <SlMenuItem value="start">start</SlMenuItem>
+            <SlMenuItem value="end">end</SlMenuItem>
+            <SlMenuItem value="center">center</SlMenuItem>
+          </SlSelect>
+        </div>
+
+        <div className="popup-arrow-options">
+          <SlSwitch name="arrow" checked={arrow} onSlChange={event => setArrow(event.target.checked)}>
+            Arrow
+          </SlSwitch>
+        </div>
       </div>
 
       <style>{css}</style>

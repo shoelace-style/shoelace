@@ -94,6 +94,13 @@ export default class SlPopup extends ShoelaceElement {
   @property({ type: Boolean }) arrow = false;
 
   /**
+   * The placement of the arrow. The default is `anchor`, which will align the arrow as close to the center of the
+   * anchor as possible, considering available space and `arrow-padding`. A value of `start`, `end`, or `center` will
+   * align the arrow to the start, end, or center of the popover instead.
+   */
+  @property({ attribute: 'arrow-placement' }) arrowPlacement: 'start' | 'end' | 'center' | 'anchor' = 'anchor';
+
+  /**
    * The amount of padding between the arrow and the edges of the popup. If the popup has a border-radius, for example,
    * this will prevent it from overflowing the corners.
    */
@@ -372,14 +379,36 @@ export default class SlPopup extends ShoelaceElement {
       });
 
       if (this.arrow) {
-        const arrowX = middlewareData.arrow?.x;
-        const arrowY = middlewareData.arrow?.y;
+        const arrowX = middlewareData.arrow!.x;
+        const arrowY = middlewareData.arrow!.y;
+        let top = '';
+        let right = '';
+        let bottom = '';
+        let left = '';
+
+        if (this.arrowPlacement === 'start') {
+          // Start
+          left = typeof arrowX === 'number' ? `${this.arrowPadding}px` : '';
+          top = typeof arrowY === 'number' ? `${this.arrowPadding}px` : '';
+        } else if (this.arrowPlacement === 'end') {
+          // End
+          right = typeof arrowX === 'number' ? `${this.arrowPadding}px` : '';
+          bottom = typeof arrowY === 'number' ? `${this.arrowPadding}px` : '';
+        } else if (this.arrowPlacement === 'center') {
+          // Center
+          left = typeof arrowX === 'number' ? `calc(50% - var(--arrow-size))` : '';
+          top = typeof arrowY === 'number' ? `calc(50% - var(--arrow-size))` : '';
+        } else {
+          // Anchor (default)
+          left = typeof arrowX === 'number' ? `${arrowX}px` : '';
+          top = typeof arrowY === 'number' ? `${arrowY}px` : '';
+        }
 
         Object.assign(this.arrowEl.style, {
-          left: typeof arrowX === 'number' ? `${arrowX}px` : '',
-          top: typeof arrowY === 'number' ? `${arrowY}px` : '',
-          right: '',
-          bottom: '',
+          top,
+          right,
+          bottom,
+          left,
           [staticSide]: 'calc(var(--arrow-size) * -1)'
         });
       }
