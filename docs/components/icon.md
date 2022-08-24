@@ -336,17 +336,17 @@ Icons in this library are licensed under the [MIT License](https://github.com/ta
   import { registerIconLibrary } from '/dist/utilities/icon-library.js';
 
   registerIconLibrary('heroicons', {
-    resolver: name => `https://cdn.jsdelivr.net/npm/heroicons@0.4.2/outline/${name}.svg`
+    resolver: name => `https://cdn.jsdelivr.net/npm/heroicons@2.0.1/24/outline/${name}.svg`
   });
 </script>
 
 <div style="font-size: 24px;">
-  <sl-icon library="heroicons" name="chat"></sl-icon>
+  <sl-icon library="heroicons" name="chat-bubble-left"></sl-icon>
   <sl-icon library="heroicons" name="cloud"></sl-icon>
   <sl-icon library="heroicons" name="cog"></sl-icon>
   <sl-icon library="heroicons" name="document-text"></sl-icon>
   <sl-icon library="heroicons" name="gift"></sl-icon>
-  <sl-icon library="heroicons" name="volume-up"></sl-icon>
+  <sl-icon library="heroicons" name="speaker-wave"></sl-icon>
 </div>
 ```
 
