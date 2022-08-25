@@ -23,7 +23,7 @@ import type { CSSResultGroup } from 'lit';
  *  maybe a border or box shadow.
  * @csspart popup - The popup's container. Useful for setting a background color, box shadow, etc.
  *
- * @cssproperty [--arrow-size=4px] - The size of the arrow. Note that an arrow won't be shown unless the `arrow`
+ * @cssproperty [--arrow-size=6px] - The size of the arrow. Note that an arrow won't be shown unless the `arrow`
  *  attribute is used.
  * @cssproperty [--arrow-color=var(--sl-color-neutral-0)] - The color of the arrow.
  * @cssproperty [--auto-size-available-width] - A read-only custom property that determines the amount of width the
@@ -388,16 +388,16 @@ export default class SlPopup extends ShoelaceElement {
 
         if (this.arrowPlacement === 'start') {
           // Start
-          left = typeof arrowX === 'number' ? `${this.arrowPadding}px` : '';
-          top = typeof arrowY === 'number' ? `${this.arrowPadding}px` : '';
+          left = typeof arrowX === 'number' ? `calc(${this.arrowPadding}px - var(--arrow-padding-offset))` : '';
+          top = typeof arrowY === 'number' ? `calc(${this.arrowPadding}px - var(--arrow-padding-offset))` : '';
         } else if (this.arrowPlacement === 'end') {
           // End
-          right = typeof arrowX === 'number' ? `${this.arrowPadding}px` : '';
-          bottom = typeof arrowY === 'number' ? `${this.arrowPadding}px` : '';
+          right = typeof arrowX === 'number' ? `calc(${this.arrowPadding}px - var(--arrow-padding-offset))` : '';
+          bottom = typeof arrowY === 'number' ? `calc(${this.arrowPadding}px - var(--arrow-padding-offset))` : '';
         } else if (this.arrowPlacement === 'center') {
           // Center
-          left = typeof arrowX === 'number' ? `calc(50% - var(--arrow-size))` : '';
-          top = typeof arrowY === 'number' ? `calc(50% - var(--arrow-size))` : '';
+          left = typeof arrowX === 'number' ? `calc(50% - var(--arrow-size-diagonal))` : '';
+          top = typeof arrowY === 'number' ? `calc(50% - var(--arrow-size-diagonal))` : '';
         } else {
           // Anchor (default)
           left = typeof arrowX === 'number' ? `${arrowX}px` : '';
@@ -409,7 +409,7 @@ export default class SlPopup extends ShoelaceElement {
           right,
           bottom,
           left,
-          [staticSide]: 'calc(var(--arrow-size) * -1)'
+          [staticSide]: 'calc(var(--arrow-size-diagonal) * -1)'
         });
       }
     });
