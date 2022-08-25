@@ -1441,7 +1441,7 @@ Scroll the container to see the popup resize as its available space changes.
   const popup = container.querySelector('sl-popup');
   const autoSize = container.querySelector('sl-switch');
 
-  autoSize.addEventListener('sl-change', () => (popup.autoSize = autoSize.checked));
+  autoSize.addEventListener('sl-change', () => (popup.autoSize = autoSize.checked ? 'both' : ''));
 </script>
 ```
 
