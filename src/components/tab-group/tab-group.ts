@@ -174,11 +174,11 @@ export default class SlTabGroup extends ShoelaceElement {
 
     // Move focus left or right
     if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) {
-      const activeEl = document.activeElement;
+      const activeEl = this.tabs.find(t => t.matches(':focus'));
       const isRtl = this.localize.dir() === 'rtl';
 
       if (activeEl?.tagName.toLowerCase() === 'sl-tab') {
-        let index = this.tabs.indexOf(activeEl as SlTab);
+        let index = this.tabs.indexOf(activeEl);
 
         if (event.key === 'Home') {
           index = 0;
