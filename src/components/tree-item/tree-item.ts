@@ -34,8 +34,8 @@ export function isTreeItem(element: Element) {
  * @event sl-lazy-load - Emitted when a lazy item is selected. Use this event to asynchronously load data and append items to the tree before expanding.
  *
  * @slot - The default slot.
- * @slot expanded-icon - The icon to show when the item is expanded.
- * @slot collapsed-icon - The icon to show when the item is collapsed.
+ * @slot expand-icon - The icon to show when the item is expanded.
+ * @slot collapse-icon - The icon to show when the item is collapsed.
  *
  * @csspart base - The component's internal wrapper.
  * @csspart item - The item main container.
