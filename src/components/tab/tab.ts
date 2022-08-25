@@ -88,7 +88,7 @@ export default class SlTab extends ShoelaceElement {
           'tab--closable': this.closable,
           'tab--disabled': this.disabled
         })}
-        tabindex="0"
+        tabindex=${this.disabled ? '-1' : '0'}
       >
         <slot></slot>
         ${this.closable
