@@ -874,7 +874,7 @@ const App = () => {
 Use the `sync` attribute to make the popup the same width or height as the anchor element. This is useful for controls that need the popup to stay the same width or height as the trigger.
 
 ```html preview
-<div class="popup-match">
+<div class="popup-sync">
   <sl-popup placement="top" sync="width" active>
     <span slot="anchor"></span>
     <div class="box"></div>
@@ -889,7 +889,7 @@ Use the `sync` attribute to make the popup the same width or height as the ancho
 </div>
 
 <style>
-  .popup-match span[slot='anchor'] {
+  .popup-sync span[slot='anchor'] {
     display: inline-block;
     width: 150px;
     height: 150px;
@@ -897,7 +897,7 @@ Use the `sync` attribute to make the popup the same width or height as the ancho
     margin: 50px;
   }
 
-  .popup-match .box {
+  .popup-sync .box {
     width: 100%;
     height: 100%;
     min-width: 50px;
@@ -906,13 +906,13 @@ Use the `sync` attribute to make the popup the same width or height as the ancho
     border-radius: var(--sl-border-radius-medium);
   }
 
-  .popup-match sl-switch {
-    margin-top: 1rem;
+  .popup-sync sl-select {
+    width: 160px;
   }
 </style>
 
 <script>
-  const container = document.querySelector('.popup-match');
+  const container = document.querySelector('.popup-sync');
   const popup = container.querySelector('sl-popup');
   const fixed = container.querySelector('sl-switch');
   const sync = container.querySelector('sl-select');
@@ -926,7 +926,7 @@ import { useState } from 'react';
 import { SlPopup, SlSelect, SlMenuItem } from '@shoelace-style/shoelace/dist/react';
 
 const css = `
-  .popup-match span[slot='anchor'] {
+  .popup-sync span[slot='anchor'] {
     display: inline-block;
     width: 150px;
     height: 150px;
@@ -934,7 +934,7 @@ const css = `
     margin: 50px;
   }
 
-  .popup-match .box {
+  .popup-sync .box {
     width: 100%;
     height: 100%;
     min-width: 50px;
@@ -943,7 +943,7 @@ const css = `
     border-radius: var(--sl-border-radius-medium);
   }
 
-  .popup-match sl-switch {
+  .popup-sync sl-switch {
     margin-top: 1rem;
   }
 `;
@@ -953,7 +953,7 @@ const App = () => {
 
   return (
     <>
-      <div class="popup-match">
+      <div class="popup-sync">
         <SlPopup placement="top" sync={sync} active>
           <span slot="anchor" />
           <div class="box" />
