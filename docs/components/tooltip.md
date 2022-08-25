@@ -343,6 +343,26 @@ const App = () => (
 );
 ```
 
+### Setting a Maximum Width
+
+Use the `--max-width` custom property to change the width the tooltip can grow to before wrapping occurs.
+
+```html preview
+<sl-tooltip style="--max-width: 80px;" content="This tooltip will wrap after only 80 pixels.">
+  <sl-button>Hover me</sl-button>
+</sl-tooltip>
+```
+
+```jsx react
+import { SlButton, SlTooltip } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlTooltip style={{ '--max-width': '80px' }} content="This tooltip will wrap after only 80 pixels.">
+    <SlButton>Hover Me</SlButton>
+  </SlTooltip>
+);
+```
+
 ### Hoisting
 
 Tooltips will be clipped if they're inside a container that has `overflow: auto|hidden|scroll`. The `hoist` attribute forces the tooltip to use a fixed positioning strategy, allowing it to break out of the container. In this case, the tooltip will be positioned relative to its containing block, which is usually the viewport unless an ancestor uses a `transform`, `perspective`, or `filter`. [Refer to this page](https://developer.mozilla.org/en-US/docs/Web/CSS/position#fixed) for more details.
