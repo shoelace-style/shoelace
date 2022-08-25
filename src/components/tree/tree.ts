@@ -228,7 +228,7 @@ export default class SlTree extends ShoelaceElement {
 
     if (items.length > 0) {
       event.preventDefault();
-      const activeItemIndex = items.findIndex(item => document.activeElement === item);
+      const activeItemIndex = items.findIndex(item => item.matches(':focus'));
       const activeItem: SlTreeItem | undefined = items[activeItemIndex];
 
       const focusItemAt = (index: number) => {
