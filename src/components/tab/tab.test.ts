@@ -26,7 +26,7 @@ describe('<sl-tab>', () => {
     expect(el.disabled).to.equal(true);
     expect(el.getAttribute('aria-disabled')).to.equal('true');
     expect(base.getAttribute('class')).to.equal(' tab tab--disabled ');
-    expect(base.getAttribute('tabindex')).to.equal('0');
+    expect(base.getAttribute('tabindex')).to.equal('-1');
   });
 
   it('should set active tab by attribute', async () => {
