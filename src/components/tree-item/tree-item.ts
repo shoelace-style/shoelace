@@ -234,7 +234,7 @@ export default class SlTreeItem extends ShoelaceElement {
             ${when(
               showExpandButton,
               () => html`
-                <slot name="${this.expanded ? 'expanded-icon' : 'collapsed-icon'}">
+                <slot name="${this.expanded ? 'expand-icon' : 'collapse-icon'}">
                   <sl-icon
                     library="system"
                     name="${this.expanded ? 'chevron-down' : isRtl ? 'chevron-left' : 'chevron-right'}"

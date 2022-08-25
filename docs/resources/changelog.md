@@ -11,6 +11,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 ## Next
 
 - Fixed a bug in `<sl-popup>` that didn't account for the arrow's diagonal size
+- Fixed a bug in `<sl-tree-item>` that prevented custom expand/collapse icons from rendering
 
 ## 2.0.0-beta.82
 
