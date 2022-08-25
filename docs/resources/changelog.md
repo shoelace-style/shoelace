@@ -19,6 +19,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug in `<sl-split-panel>` that caused the panel to stack when clicking on the divider in mobile versions of Chrome [#862](https://github.com/shoelace-style/shoelace/issues/862)
 - Fixed a bug in `<sl-popup>` that prevented flip fallbacks from working as intended
 - Fixed a bug that caused concurrent animations to work incorrectly when the durations were different [#867](https://github.com/shoelace-style/shoelace/issues/867)
+- Fixed a bug in `<sl-color-picker>` that caused the trigger and color preview to ignore opacity on first render [#869](https://github.com/shoelace-style/shoelace/issues/869)
 - Improved single selection in `<sl-tree>` so nodes expand and collapse and receive selection when clicking on the label
 - Renamed `expanded-icon` and `collapsed-icon` slots to `expand-icon` and `collapse-icon` in the experimental `<sl-tree>` and `<sl-tree-item>` components
 - Improved RTL support for `<sl-image-comparer>`

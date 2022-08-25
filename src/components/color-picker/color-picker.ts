@@ -610,7 +610,7 @@ export default class SlColorPicker extends ShoelaceElement {
     }
 
     // Setting this.value will trigger the watcher which parses the new value. We want to bypass that behavior because
-    // we've already parsed the color here and conversion/rounding can lead to values changing slightly. WHen this
+    // we've already parsed the color here and conversion/rounding can lead to values changing slightly. When this
     // happens, dragging the grid handle becomes jumpy. After the next update, the usual behavior is restored.
     this.isSafeValue = true;
     this.value = this.inputValue;
@@ -642,7 +642,7 @@ export default class SlColorPicker extends ShoelaceElement {
     this.syncValues();
   }
 
-  @watch('opacity')
+  @watch('opacity', { waitUntilFirstUpdate: true })
   handleOpacityChange() {
     this.alpha = 100;
   }
@@ -658,7 +658,6 @@ export default class SlColorPicker extends ShoelaceElement {
       this.lightness = this.getLightness(this.brightness);
       this.alpha = 100;
     }
-
     if (!this.isSafeValue && oldValue !== undefined) {
       const newColor = this.parseColor(newValue);
 
