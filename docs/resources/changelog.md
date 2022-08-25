@@ -8,7 +8,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
-## Next
+## 2.0.0-beta.82
 
 - Added the `sync` and `arrow-placement` attributes to `<sl-popup>`
 - Changed the `auto-size` attribute of the experimental `<sl-popup>` component so it accepts `horizontal`, `vertical`, and `both` instead of a boolean value
