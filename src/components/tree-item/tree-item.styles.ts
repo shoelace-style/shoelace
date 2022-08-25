@@ -126,4 +126,16 @@ export default css`
     left: auto;
     right: 1em;
   }
+
+  .tree-item__expand-button--visible sl-icon {
+    transition: var(--sl-transition-medium) transform ease;
+  }
+
+  :host([expanded]) .tree-item__expand-button--visible sl-icon {
+    transform: rotate(90deg);
+  }
+
+  :host([expanded]) .tree-item--rtl .tree-item__expand-button--visible sl-icon {
+    transform: rotate(-90deg);
+  }
 `;

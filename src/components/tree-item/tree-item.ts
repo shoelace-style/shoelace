@@ -7,6 +7,7 @@ import { animateTo, shimKeyframesHeightAuto, stopAnimations } from 'src/internal
 import { getAnimation, setDefaultAnimation } from 'src/utilities/animation-registry';
 import { emit } from '../../internal/event';
 import ShoelaceElement from '../../internal/shoelace-element';
+import { HasSlotController } from '../../internal/slot';
 import { watch } from '../../internal/watch';
 import { LocalizeController } from '../../utilities/localize';
 import '../checkbox/checkbox';
@@ -34,8 +35,8 @@ export function isTreeItem(element: Element) {
  * @event sl-lazy-load - Emitted when a lazy item is selected. Use this event to asynchronously load data and append items to the tree before expanding.
  *
  * @slot - The default slot.
- * @slot expanded-icon - The icon to show when the item is expanded.
- * @slot collapsed-icon - The icon to show when the item is collapsed.
+ * @slot expand-icon - The icon to show when the item is expanded.
+ * @slot collapse-icon - The icon to show when the item is collapsed.
  *
  * @csspart base - The component's internal wrapper.
  * @csspart item - The item main container.
@@ -52,6 +53,7 @@ export default class SlTreeItem extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
   private readonly localize = new LocalizeController(this);
+  private readonly hasSlotController = new HasSlotController(this);
 
   @state() indeterminate = false;
   @state() isLeaf = false;
@@ -199,6 +201,8 @@ export default class SlTreeItem extends ShoelaceElement {
   render() {
     const isRtl = this.localize.dir() === 'rtl';
     const showExpandButton = !this.loading && (!this.isLeaf || this.lazy);
+    const showDefaultExpandButton =
+      showExpandButton && !(this.hasSlotController.test('expand-icon') && this.hasSlotController.test('collapse-icon'));
 
     return html`
       <div
@@ -232,15 +236,12 @@ export default class SlTreeItem extends ShoelaceElement {
           >
             ${when(this.loading, () => html` <sl-spinner></sl-spinner> `)}
             ${when(
-              showExpandButton,
-              () => html`
-                <slot name="${this.expanded ? 'expanded-icon' : 'collapsed-icon'}">
-                  <sl-icon
-                    library="system"
-                    name="${this.expanded ? 'chevron-down' : isRtl ? 'chevron-left' : 'chevron-right'}"
-                  ></sl-icon>
-                </slot>
-              `
+              showDefaultExpandButton,
+              () => html`<sl-icon library="system" name=${isRtl ? 'chevron-left' : 'chevron-right'}></sl-icon>`
+            )}
+            ${when(
+              showExpandButton && !showDefaultExpandButton,
+              () => html`<slot name="${this.expanded ? 'expand-icon' : 'collapse-icon'}"></slot> `
             )}
           </div>
 

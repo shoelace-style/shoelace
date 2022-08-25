@@ -60,8 +60,8 @@ export default class SlTree extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
   @query('slot:not([name])') defaultSlot: HTMLSlotElement;
-  @query('slot[name=expand-icon]') expandedIconSlot: HTMLSlotElement;
-  @query('slot[name=collapse-icon]') collapsedIconSlot: HTMLSlotElement;
+  @query('slot[name=expand-icon]') expandIconSlot: HTMLSlotElement;
+  @query('slot[name=collapse-icon]') collapseIconSlot: HTMLSlotElement;
 
   /** Specifies the selection behavior of the Tree */
   @property() selection: 'single' | 'multiple' | 'leaf' = 'single';
@@ -97,8 +97,8 @@ export default class SlTree extends ShoelaceElement {
   }
 
   // Generates a clone of the expand icon element to use for each tree item
-  private getExpandButtonIcon(status: 'expand' | 'collapse') {
-    const slot = status === 'expand' ? this.expandedIconSlot : this.collapsedIconSlot;
+  private getExpandButtonIcon(iconType: 'expand' | 'collapse') {
+    const slot = iconType === 'expand' ? this.expandIconSlot : this.collapseIconSlot;
     const icon = slot.assignedElements({ flatten: true })[0] as HTMLElement;
 
     // Clone it, remove ids, and slot it
@@ -106,8 +106,7 @@ export default class SlTree extends ShoelaceElement {
       const clone = icon.cloneNode(true) as HTMLElement;
       [clone, ...clone.querySelectorAll('[id]')].forEach(el => el.removeAttribute('id'));
       clone.setAttribute('data-default', '');
-      clone.slot = `${status}-icon`;
-
+      clone.slot = `${iconType}-icon`;
       return clone;
     }
 
@@ -119,16 +118,17 @@ export default class SlTree extends ShoelaceElement {
     item.selectable = this.selection === 'multiple';
 
     ['expand', 'collapse']
-      .filter(status => !!this.querySelector(`[slot="${status}-icon"]`))
-      .forEach((status: 'expand' | 'collapse') => {
-        const existingIcon = item.querySelector(`[slot="${status}-icon"]`);
+      .filter(iconType => !!this.querySelector(`[slot="${iconType}-icon"]`))
+      .forEach((iconType: 'expand' | 'collapse') => {
+        const existingIcon = item.querySelector(`[slot="${iconType}-icon"]`);
 
         if (existingIcon === null) {
           // No separator exists, add one
-          item.append(this.getExpandButtonIcon(status)!);
+          item.append(this.getExpandButtonIcon(iconType)!);
+          item.requestUpdate();
         } else if (existingIcon.hasAttribute('data-default')) {
           // A default separator exists, replace it
-          existingIcon.replaceWith(this.getExpandButtonIcon(status)!);
+          existingIcon.replaceWith(this.getExpandButtonIcon(iconType)!);
         } else {
           // The user provided a custom icon, leave it alone
         }
@@ -338,8 +338,8 @@ export default class SlTree extends ShoelaceElement {
     return html`
       <div part="base" class="tree" @click="${this.handleClick}" @keydown="${this.handleKeyDown}">
         <slot @slotchange=${this.handleDefaultSlotChange}></slot>
-        <slot name="expand-icon" hidden aria-hidden="true"> </slot>
-        <slot name="collapse-icon" hidden aria-hidden="true"> </slot>
+        <slot name="expand-icon" hidden aria-hidden="true"></slot>
+        <slot name="collapse-icon" hidden aria-hidden="true"></slot>
       </div>
     `;
   }
