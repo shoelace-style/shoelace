@@ -43,6 +43,22 @@ export default css`
     letter-spacing: var(--sl-letter-spacing-normal);
   }
 
+  .tree-item__default-toggle-button {
+    transition: var(--sl-transition-medium) transform ease;
+  }
+
+  :host([expanded]) .tree-item__default-toggle-button {
+    transform: rotate(90deg);
+  }
+
+  :host([expanded]) .tree-item--rtl .tree-item__default-toggle-button {
+    transform: rotate(-90deg);
+  }
+
+  .tree-item--rtl {
+    outline: dotted 1px tomato;
+  }
+
   .tree-item__checkbox::part(base) {
     display: flex;
     align-items: center;
