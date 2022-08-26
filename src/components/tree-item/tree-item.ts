@@ -43,6 +43,7 @@ export function isTreeItem(element: Element) {
  * @csspart item--expanded - Applied when the item is expanded.
  * @csspart item--indeterminate - Applied when the selection is indeterminate.
  * @csspart item--selected - Applied when the item is selected.
+ * @csspart toggle - The items's expand/collapse button
  * @csspart indentation - The item's indentation container.
  * @csspart label - The item's label.
  * @csspart children - The item's children container.
@@ -234,23 +235,25 @@ export default class SlTreeItem extends ShoelaceElement {
             ${when(
               showToggleButton,
               () => html`
-                <span class="tree-item__expand-icon">
-                  <slot name="expand-icon">
-                    <sl-icon
-                      class="tree-item__default-toggle-icon"
-                      library="system"
-                      name=${isRtl ? 'chevron-left' : 'chevron-right'}
-                    ></sl-icon>
-                  </slot>
-                </span>
-                <span class="tree-item__collapse-icon">
-                  <slot name="collapse-icon">
-                    <sl-icon
-                      class="tree-item__default-toggle-icon"
-                      library="system"
-                      name=${isRtl ? 'chevron-left' : 'chevron-right'}
-                    ></sl-icon>
-                  </slot>
+                <span part="toggle">
+                  <span class="tree-item__expand-icon">
+                    <slot name="expand-icon">
+                      <sl-icon
+                        class="tree-item__default-toggle-icon"
+                        library="system"
+                        name=${isRtl ? 'chevron-left' : 'chevron-right'}
+                      ></sl-icon>
+                    </slot>
+                  </span>
+                  <span class="tree-item__collapse-icon">
+                    <slot name="collapse-icon">
+                      <sl-icon
+                        class="tree-item__default-toggle-icon"
+                        library="system"
+                        name=${isRtl ? 'chevron-left' : 'chevron-right'}
+                      ></sl-icon>
+                    </slot>
+                  </span>
                 </span>
               `
             )}

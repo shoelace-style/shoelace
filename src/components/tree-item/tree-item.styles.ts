@@ -130,7 +130,9 @@ export default css`
   :host(:not([expanded])) .tree-item__expand-icon,
   :host([expanded]) .tree-item__collapse-icon {
     visibility: hidden;
+    position: absolute;
     max-width: 0;
+    max-height: 0;
     overflow: hidden;
   }
 

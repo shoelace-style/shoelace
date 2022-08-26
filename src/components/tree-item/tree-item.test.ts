@@ -32,14 +32,14 @@ describe('<sl-tree-item>', () => {
       expect(parentItem.isLeaf).to.be.false;
     });
 
-    it('should show the expand button', () => {
+    it('should show the toggle button', () => {
       // Arrange
-      const expandButton = parentItem.shadowRoot?.querySelector('.tree-item__expand-button');
+      const toggleButton = parentItem.shadowRoot?.querySelector('.tree-item__toggle-button');
 
       // Act
 
       // Assert
-      expect(expandButton?.childElementCount).to.be.greaterThan(0);
+      expect(toggleButton?.childElementCount).to.be.greaterThan(0);
     });
 
     it('should set the aria-expanded attribute', () => {
@@ -47,7 +47,7 @@ describe('<sl-tree-item>', () => {
     });
   });
 
-  describe('when the user clicks the expand button', () => {
+  describe('when the user clicks the toggle button', () => {
     describe('and the item is collapsed', () => {
       it('should emit sl-expand and sl-after-expand events', async () => {
         // Arrange
@@ -93,11 +93,11 @@ describe('<sl-tree-item>', () => {
       describe('and the item is disabled', () => {
         it('should not expand', async () => {
           // Arrange
-          const expandButton: HTMLElement = parentItem.shadowRoot!.querySelector('.tree-item__expand-button')!;
+          const toggleButton: HTMLElement = parentItem.shadowRoot!.querySelector('.tree-item__toggle-button')!;
           parentItem.disabled = true;
 
           // Act
-          expandButton.click();
+          toggleButton.click();
           await parentItem.updateComplete;
 
           // Assert
