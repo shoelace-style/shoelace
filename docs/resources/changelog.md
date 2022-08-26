@@ -10,6 +10,9 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
+This release removes the `<sl-responsive-media>` component. When this component was introduced, support for [`aspect-radio`](https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio)) wasn't great. These days, [the property is supported](https://caniuse.com/mdn-css_properties_aspect-ratio) by all of Shoelace's target browsers, making a dedicated component redundant.
+
+- 🚨 BREAKING: Removed `<sl-responsive-media>` (use the well-supported `aspect-ratio` CSS property instead)
 - Added an expand/collapse animation to `<sl-tree-item>`
 - Added `sl-lazy-change` event to `<sl-tree-item>`
 - Fixed a bug in `<sl-popup>` that didn't account for the arrow's diagonal size

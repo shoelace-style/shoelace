@@ -80,7 +80,6 @@
   - [Popup](/components/popup)
   - [Relative Time](/components/relative-time)
   - [Resize Observer](/components/resize-observer)
-  - [Responsive Media](/components/responsive-media)
   - [Visually Hidden](/components/visually-hidden)
 
 - Design Tokens
