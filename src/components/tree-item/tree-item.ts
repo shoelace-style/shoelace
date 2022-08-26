@@ -198,7 +198,7 @@ export default class SlTreeItem extends ShoelaceElement {
 
   render() {
     const isRtl = this.localize.dir() === 'rtl';
-    const showExpandButton = !this.loading && (!this.isLeaf || this.lazy);
+    const showToggleButton = !this.loading && (!this.isLeaf || this.lazy);
 
     return html`
       <div
@@ -225,21 +225,33 @@ export default class SlTreeItem extends ShoelaceElement {
 
           <div
             class=${classMap({
-              'tree-item__expand-button': true,
-              'tree-item__expand-button--visible': showExpandButton
+              'tree-item__toggle-button': true,
+              'tree-item__toggle-button--visible': showToggleButton
             })}
             aria-hidden="true"
           >
-            ${when(this.loading, () => html` <sl-spinner></sl-spinner> `)}
+            ${when(this.loading, () => html`<sl-spinner></sl-spinner>`)}
             ${when(
-              showExpandButton,
+              showToggleButton,
               () => html`
-                <slot name="${this.expanded ? 'expand-icon' : 'collapse-icon'}">
-                  <sl-icon
-                    library="system"
-                    name="${this.expanded ? 'chevron-down' : isRtl ? 'chevron-left' : 'chevron-right'}"
-                  ></sl-icon>
-                </slot>
+                <span class="tree-item__expand-icon">
+                  <slot name="expand-icon">
+                    <sl-icon
+                      class="tree-item__default-toggle-icon"
+                      library="system"
+                      name=${isRtl ? 'chevron-left' : 'chevron-right'}
+                    ></sl-icon>
+                  </slot>
+                </span>
+                <span class="tree-item__collapse-icon">
+                  <slot name="collapse-icon">
+                    <sl-icon
+                      class="tree-item__default-toggle-icon"
+                      library="system"
+                      name=${isRtl ? 'chevron-left' : 'chevron-right'}
+                    ></sl-icon>
+                  </slot>
+                </span>
               `
             )}
           </div>

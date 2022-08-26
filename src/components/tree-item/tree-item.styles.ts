@@ -33,7 +33,7 @@ export default css`
     pointer-events: none;
   }
 
-  .tree-item__expand-button,
+  .tree-item__toggle-button,
   .tree-item__checkbox,
   .tree-item__label {
     font-family: var(--sl-font-sans);
@@ -54,7 +54,7 @@ export default css`
     flex-shrink: 0;
   }
 
-  .tree-item__expand-button {
+  .tree-item__toggle-button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -66,7 +66,7 @@ export default css`
     cursor: pointer;
   }
 
-  .tree-item__expand-button--visible {
+  .tree-item__toggle-button--visible {
     cursor: pointer;
   }
 
@@ -93,7 +93,7 @@ export default css`
     border-inline-start-color: var(--sl-color-primary-600);
   }
 
-  :host(:not([aria-disabled='true'])) .tree-item__expand-button {
+  :host(:not([aria-disabled='true'])) .tree-item__toggle-button {
     color: var(--sl-color-neutral-600);
   }
 
@@ -125,5 +125,24 @@ export default css`
   .tree-item--rtl .tree-item__children::before {
     left: auto;
     right: 1em;
+  }
+
+  :host(:not([expanded])) .tree-item__expand-icon,
+  :host([expanded]) .tree-item__collapse-icon {
+    visibility: hidden;
+    max-width: 0;
+    overflow: hidden;
+  }
+
+  .tree-item__default-toggle-icon {
+    transition: var(--sl-transition-medium) transform ease;
+  }
+
+  :host([expanded]) .tree-item__default-toggle-icon {
+    transform: rotate(90deg);
+  }
+
+  :host([expanded]) .tree-item--rtl .tree-item__default-toggle-icon {
+    transform: rotate(-90deg);
   }
 `;
