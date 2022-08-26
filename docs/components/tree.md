@@ -289,14 +289,14 @@ const App = () => {
 };
 ```
 
-### Custom expanded/collapsed icons
+### Custom expand/collapse icons
 
 Use the `expand-icon` and `collapse-icon` slots to change the expand and collapse icons, respectively.
 
 ```html preview
 <sl-tree>
-  <sl-icon name="plus-square" slot="collapse-icon"></sl-icon>
-  <sl-icon name="dash-square" slot="expand-icon"></sl-icon>
+  <sl-icon name="plus-square" slot="expand-icon"></sl-icon>
+  <sl-icon name="dash-square" slot="collapse-icon"></sl-icon>
 
   <sl-tree-item>
     Deciduous
@@ -332,8 +332,8 @@ import { SlTree, SlTreeItem } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <SlTree>
-    <SlIcon name="plus-square" slot="collapse-icon"></SlIcon>
-    <SlIcon name="dash-square" slot="expand-icon"></SlIcon>
+    <SlIcon name="plus-square" slot="expand-icon"></SlIcon>
+    <SlIcon name="dash-square" slot="collapse-icon"></SlIcon>
 
     <SlTreeItem>
       Deciduous
@@ -372,40 +372,40 @@ Decorative icons can be used before labels to provide hints for each node.
 <sl-tree class="tree-with-icons">
   <sl-tree-item expanded>
     <sl-icon name="folder"></sl-icon>
-    Root
+    Documents
 
     <sl-tree-item>
       <sl-icon name="folder"> </sl-icon>
-      Folder 1
+      Photos
       <sl-tree-item>
-        <sl-icon name="files"></sl-icon>
-        File 1 - 1
-      </sl-tree-item>
-      <sl-tree-item disabled>
-        <sl-icon name="files"></sl-icon>
-        File 1 - 2
+        <sl-icon name="image"></sl-icon>
+        birds.jpg
       </sl-tree-item>
       <sl-tree-item>
-        <sl-icon name="files"></sl-icon>
-        File 1 - 3
+        <sl-icon name="image"></sl-icon>
+        kitten.jpg
+      </sl-tree-item>
+      <sl-tree-item>
+        <sl-icon name="image"></sl-icon>
+        puppy.jpg
       </sl-tree-item>
     </sl-tree-item>
 
     <sl-tree-item>
-      <sl-icon name="files"></sl-icon>
-      Folder 2
+      <sl-icon name="folder"></sl-icon>
+      Writing
       <sl-tree-item>
-        <sl-icon name="files"></sl-icon>
-        File 2 - 1
+        <sl-icon name="file"></sl-icon>
+        draft.txt
       </sl-tree-item>
       <sl-tree-item>
-        <sl-icon name="files"></sl-icon>
-        File 2 - 2
+        <sl-icon name="file-pdf"></sl-icon>
+        final.pdg
       </sl-tree-item>
-    </sl-tree-item>
-    <sl-tree-item>
-      <sl-icon name="files"></sl-icon>
-      File 1
+      <sl-tree-item>
+        <sl-icon name="file-bar-graph"></sl-icon>
+        sales.txt
+      </sl-tree-item>
     </sl-tree-item>
   </sl-tree-item>
 </sl-tree>
