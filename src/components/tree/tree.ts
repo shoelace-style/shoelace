@@ -287,7 +287,7 @@ export default class SlTree extends ShoelaceElement {
     const treeItem = target.closest('sl-tree-item')!;
     const isExpandButton = event
       .composedPath()
-      .some((el: HTMLElement) => el?.classList?.contains('tree-item__expand-button'));
+      .some((el: HTMLElement) => el?.classList?.contains('tree-item__toggle-button'));
 
     if (!treeItem || treeItem.disabled) {
       return;
