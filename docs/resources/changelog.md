@@ -10,10 +10,12 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
-- Added animation to `<sl-tree-item>` on expand and collapse
+- Added an expand/collapse animation to `<sl-tree-item>`
+- Added `sl-lazy-change` event to `<sl-tree-item>`
 - Fixed a bug in `<sl-popup>` that didn't account for the arrow's diagonal size
 - Fixed a bug in `<sl-tree-item>` that prevented custom expand/collapse icons from rendering
 - Fixed a bug in `<sl-tree-item>` where the `expand-icon` and `collapse-icon` slots were reversed
+- Fixed a bug in `<sl-tree-item>` that prevented the keyboard from working after lazy loading [#882](https://github.com/shoelace-style/shoelace/issues/882)
 
 ## 2.0.0-beta.82
 

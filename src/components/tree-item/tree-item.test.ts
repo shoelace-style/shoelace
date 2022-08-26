@@ -158,4 +158,22 @@ describe('<sl-tree-item>', () => {
       expect(leafItem.shadowRoot?.querySelector('.tree-item__item')?.part.contains('item--expanded')).to.be.true;
     });
   });
+
+  describe('when the item is lazy', () => {
+    it('should emit sl-lazy-change when the lazy attribute is added and removed', async () => {
+      // Arrange
+      const lazyChangeSpy = sinon.spy();
+
+      parentItem.addEventListener('sl-lazy-change', lazyChangeSpy);
+      parentItem.lazy = true;
+
+      // Act
+      await waitUntil(() => lazyChangeSpy.calledOnce);
+      parentItem.lazy = false;
+      await waitUntil(() => lazyChangeSpy.calledOnce);
+
+      // Assert
+      expect(lazyChangeSpy).to.have.been.calledTwice;
+    });
+  });
 });

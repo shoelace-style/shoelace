@@ -31,7 +31,10 @@ export function isTreeItem(element: Element) {
  * @event sl-after-expand - Emitted after the item expands and all animations are complete.
  * @event sl-collapse - Emitted when the item collapses.
  * @event sl-after-collapse - Emitted after the item collapses and all animations are complete.
- * @event sl-lazy-load - Emitted when a lazy item is selected. Use this event to asynchronously load data and append items to the tree before expanding.
+ * @event sl-lazy-change - Emitted when the item's lazy state changes.
+ * @event sl-lazy-load - Emitted when a lazy item is selected. Use this event to asynchronously load data and append
+ *  items to the tree before expanding. After appending new items, remove the `lazy` attribute to remove the loading
+ *  state and update the tree.
  *
  * @slot - The default slot.
  * @slot expand-icon - The icon to show when the item is expanded.
@@ -135,6 +138,11 @@ export default class SlTreeItem extends ShoelaceElement {
     } else {
       this.animateCollapse();
     }
+  }
+
+  @watch('lazy', { waitUntilFirstUpdate: true })
+  handleLazyChange() {
+    emit(this, 'sl-lazy-change');
   }
 
   private async animateExpand() {
