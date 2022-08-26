@@ -430,7 +430,7 @@ describe('<sl-tree>', () => {
         const node = el.children[2] as SlTreeItem;
         await node.updateComplete;
 
-        const expandButton: HTMLElement = node.shadowRoot!.querySelector('.tree-item__expand-button')!;
+        const expandButton: HTMLElement = node.shadowRoot!.querySelector('.tree-item__toggle-button')!;
 
         // Act
         expandButton.click();
