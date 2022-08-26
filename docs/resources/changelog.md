@@ -16,6 +16,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug in `<sl-tree-item>` that prevented custom expand/collapse icons from rendering
 - Fixed a bug in `<sl-tree-item>` where the `expand-icon` and `collapse-icon` slots were reversed
 - Fixed a bug in `<sl-tree-item>` that prevented the keyboard from working after lazy loading [#882](https://github.com/shoelace-style/shoelace/issues/882)
+- Upgraded the status of `<sl-animated-image>`, `<sl-popup>`, and `<sl-split-panel>` from experimental to stable
 
 ## 2.0.0-beta.82
 

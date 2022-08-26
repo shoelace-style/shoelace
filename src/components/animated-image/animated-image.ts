@@ -9,7 +9,7 @@ import type { CSSResultGroup } from 'lit';
 
 /**
  * @since 2.0
- * @status experimental
+ * @status stable
  *
  * @dependency sl-icon
  *

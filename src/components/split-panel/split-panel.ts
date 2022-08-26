@@ -12,7 +12,7 @@ import type { CSSResultGroup } from 'lit';
 
 /**
  * @since 2.0
- * @status experimental
+ * @status stable
  *
  * @event sl-reposition - Emitted when the divider's position changes.
  *
