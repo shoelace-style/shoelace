@@ -11,12 +11,7 @@
       const searchBox = document.createElement('div');
       searchBox.classList.add('search-box');
       searchBox.innerHTML = `
-        <sl-input
-          type="search"
-          placeholder="Search"
-          clearable
-          pill
-        >
+        <sl-input type="search" placeholder="Search" pill>
           <sl-icon slot="prefix" name="search"></sl-icon>
           <kbd slot="suffix" title="Press / to search">/</kbd>
         </sl-input>
