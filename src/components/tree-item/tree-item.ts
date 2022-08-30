@@ -16,7 +16,7 @@ import styles from './tree-item.styles';
 import type { CSSResultGroup, PropertyValueMap } from 'lit';
 
 export function isTreeItem(element: Element) {
-  return element && element.getAttribute('role') === 'treeitem';
+  return element && element?.getAttribute('role') === 'treeitem';
 }
 
 /**
