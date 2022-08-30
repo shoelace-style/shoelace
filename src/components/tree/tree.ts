@@ -332,7 +332,6 @@ export default class SlTree extends ShoelaceElement {
   };
 
   updateItems() {
-    console.log('update');
     this.treeItems = [...this.querySelectorAll('sl-tree-item')];
     [...this.treeItems].forEach(this.initTreeItem);
   }
