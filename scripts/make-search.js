@@ -15,7 +15,7 @@ console.log('Generating search index for documentation');
     const headings = [];
     const lines = markdown.split('\n');
 
-    lines.map(line => {
+    lines.forEach(line => {
       if (line.startsWith('#')) {
         const level = line.match(/^(#+)/)[0].length;
         const content = line.replace(/^#+/, '');
@@ -37,16 +37,16 @@ console.log('Generating search index for documentation');
       return '';
     }
 
-    headers.map(header => {
+    headers.forEach(header => {
       const tagName = header.match(/\[component-header:([a-z-]+)\]/)[1];
       const component = getAllComponents(metadata).find(component => component.tagName === tagName);
 
       if (component) {
         const fields = ['members', 'cssProperties', 'cssParts', 'slots', 'events'];
 
-        fields.map(field => {
+        fields.forEach(field => {
           if (component[field]) {
-            component[field].map(entry => {
+            component[field].forEach(entry => {
               if (entry.name) members.push(entry.name);
               if (entry.description) members.push(entry.description);
               if (entry.attribute) members.push(entry.attribute);
