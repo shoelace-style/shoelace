@@ -70,13 +70,18 @@ console.log('Generating search index for documentation');
     this.field('m', { boost: 2 }); // members (props, methods, events, etc.)
     this.field('c'); // content
 
-    files.map((file, index) => {
+    files.forEach((file, index) => {
       const relativePath = path.relative('./docs', file).replace(/\\/g, '/');
       const relativePathNoExtension = relativePath.split('.').slice(0, -1).join('.');
       const url = relativePath.replace(/\.md$/, '');
       const filename = path.basename(file);
       // Ignore certain directories and files
-      if (relativePath.startsWith('assets/') || relativePath.startsWith('dist/') || filename === '_sidebar.md') {
+      if (
+        relativePath.startsWith('assets/') ||
+        relativePath.startsWith('dist/') ||
+        filename === '_sidebar.md' ||
+        filename === '404.md'
+      ) {
         return false;
       }
 
