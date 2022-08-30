@@ -77,6 +77,7 @@ export default class SlTreeItem extends ShoelaceElement {
   @query('slot[name=children]') childrenSlot: HTMLSlotElement;
   @query('.tree-item__item') itemElement: HTMLDivElement;
   @query('.tree-item__children') childrenContainer: HTMLDivElement;
+  @query('.tree-item__expand-button slot') expandButtonSlot: HTMLSlotElement;
 
   connectedCallback(): void {
     super.connectedCallback();
@@ -127,6 +128,10 @@ export default class SlTreeItem extends ShoelaceElement {
 
   @watch('expanded', { waitUntilFirstUpdate: true })
   handleExpandAnimation() {
+    if (this.expandButtonSlot) {
+      this.expandButtonSlot.name = this.expanded ? 'collapse-icon' : 'expand-icon';
+    }
+
     if (this.expanded) {
       if (this.lazy) {
         this.loading = true;
@@ -213,6 +218,7 @@ export default class SlTreeItem extends ShoelaceElement {
         part="base"
         class="${classMap({
           'tree-item': true,
+          'tree-item--expanded': this.expanded,
           'tree-item--selected': this.selected,
           'tree-item--disabled': this.disabled,
           'tree-item--leaf': this.isLeaf,
@@ -241,8 +247,10 @@ export default class SlTreeItem extends ShoelaceElement {
             ${when(this.loading, () => html` <sl-spinner></sl-spinner> `)}
             ${when(
               showExpandButton,
+              // This slot's name changes from `expand-icon` to `collapse-icon` when the tree item is expanded, but we
+              // do that in the watch handler instead of here in the template because the transition breaks in Firefox.
               () => html`
-                <slot name="${this.expanded ? 'collapse-icon' : 'expand-icon'}">
+                <slot class="tree-item__expand-icon-slot" name="expand-icon">
                   <sl-icon
                     class="tree-item__default-toggle-button"
                     library="system"

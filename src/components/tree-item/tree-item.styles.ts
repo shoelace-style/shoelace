@@ -47,11 +47,11 @@ export default css`
     transition: var(--sl-transition-medium) transform ease;
   }
 
-  :host([expanded]) .tree-item__default-toggle-button {
+  .tree-item--expanded .tree-item__default-toggle-button {
     transform: rotate(90deg);
   }
 
-  :host([expanded]) .tree-item--rtl .tree-item__default-toggle-button {
+  .tree-item--expanded.tree-item--rtl .tree-item__default-toggle-button {
     transform: rotate(-90deg);
   }
 
