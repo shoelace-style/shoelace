@@ -1,10 +1,10 @@
 import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { emit } from 'src/internal/event';
-import { FormSubmitController } from 'src/internal/form';
-import { watch } from 'src/internal/watch';
+import { emit } from '../../internal/event';
+import { FormSubmitController } from '../../internal/form';
 import ShoelaceElement from '../../internal/shoelace-element';
+import { watch } from '../../internal/watch';
 import '../button-group/button-group';
 import styles from './radio-group.styles';
 import type SlRadioButton from '../radio-button/radio-button';

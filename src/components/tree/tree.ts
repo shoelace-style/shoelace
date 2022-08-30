@@ -1,9 +1,9 @@
 import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
-import { emit } from 'src/internal/event';
-import { clamp } from 'src/internal/math';
-import { watch } from 'src/internal/watch';
+import { emit } from '../../internal/event';
+import { clamp } from '../../internal/math';
 import ShoelaceElement from '../../internal/shoelace-element';
+import { watch } from '../../internal/watch';
 import { LocalizeController } from '../../utilities/localize';
 import { isTreeItem } from '../tree-item/tree-item';
 import styles from './tree.styles';
