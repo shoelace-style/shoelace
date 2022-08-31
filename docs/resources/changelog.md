@@ -15,6 +15,7 @@ This release removes the `<sl-responsive-media>` component. When this component 
 - 🚨 BREAKING: Removed `<sl-responsive-media>` (use the well-supported `aspect-ratio` CSS property instead)
 - Added an expand/collapse animation to `<sl-tree-item>`
 - Added `sl-lazy-change` event to `<sl-tree-item>`
+- Added `expand-button` css part to `<sl-tree-item>` [#890](https://github.com/shoelace-style/shoelace/issues/890)
 - Fixed a bug in `<sl-popup>` that didn't account for the arrow's diagonal size
 - Fixed a bug in `<sl-tree-item>` that prevented custom expand/collapse icons from rendering
 - Fixed a bug in `<sl-tree-item>` where the `expand-icon` and `collapse-icon` slots were reversed
