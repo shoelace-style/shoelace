@@ -55,10 +55,6 @@ export default css`
     transform: rotate(-90deg);
   }
 
-  .tree-item--rtl {
-    outline: dotted 1px tomato;
-  }
-
   .tree-item__checkbox::part(base) {
     display: flex;
     align-items: center;
