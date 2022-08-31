@@ -42,13 +42,13 @@ export default class SlCheckbox extends ShoelaceElement {
 
   @state() private hasFocus = false;
 
-  /** The checkbox's name attribute. */
+  /** Name of the HTML form control. Submitted with the form as part of a name/value pair. */
   @property() name: string;
 
-  /** The checkbox's value attribute. */
+  /** Value of the HTML form control. Primarily used to differentiate a list of related checkboxes that have the same name. */
   @property() value: string;
 
-  /** Disables the checkbox. */
+  /** Disables the checkbox (so the user can't check / uncheck it). */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Makes the checkbox a required field. */
@@ -57,7 +57,7 @@ export default class SlCheckbox extends ShoelaceElement {
   /** Draws the checkbox in a checked state. */
   @property({ type: Boolean, reflect: true }) checked = false;
 
-  /** Draws the checkbox in an indeterminate state. */
+  /** Draws the checkbox in an indeterminate state. Usually applies to a checkbox that represents "select all" or "select none" when the items to which it applies are a mix of selected and unselected. */
   @property({ type: Boolean, reflect: true }) indeterminate = false;
 
   /** This will be true when the control is in an invalid state. Validity is determined by the `required` prop. */
