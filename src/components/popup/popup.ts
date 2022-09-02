@@ -369,6 +369,13 @@ export default class SlPopup extends ShoelaceElement {
       middleware,
       strategy: this.strategy
     }).then(({ x, y, middlewareData, placement }) => {
+      //
+      // Even though we have our own localization utility, it uses different heuristics to determine RTL. Because of
+      // that, we'll use the same approach that Floating UI uses.
+      //
+      // Source: https://github.com/floating-ui/floating-ui/blob/cb3b6ab07f95275730d3e6e46c702f8d4908b55c/packages/dom/src/utils/getDocumentRect.ts#L31
+      //
+      const isRtl = getComputedStyle(this).direction === 'rtl';
       const staticSide = { top: 'bottom', right: 'left', bottom: 'top', left: 'right' }[placement.split('-')[0]]!;
 
       this.setAttribute('data-current-placement', placement);
@@ -388,11 +395,15 @@ export default class SlPopup extends ShoelaceElement {
 
         if (this.arrowPlacement === 'start') {
           // Start
-          left = typeof arrowX === 'number' ? `calc(${this.arrowPadding}px - var(--arrow-padding-offset))` : '';
+          const value = typeof arrowX === 'number' ? `calc(${this.arrowPadding}px - var(--arrow-padding-offset))` : '';
           top = typeof arrowY === 'number' ? `calc(${this.arrowPadding}px - var(--arrow-padding-offset))` : '';
+          right = isRtl ? value : '';
+          left = isRtl ? '' : value;
         } else if (this.arrowPlacement === 'end') {
           // End
-          right = typeof arrowX === 'number' ? `calc(${this.arrowPadding}px - var(--arrow-padding-offset))` : '';
+          const value = typeof arrowX === 'number' ? `calc(${this.arrowPadding}px - var(--arrow-padding-offset))` : '';
+          right = isRtl ? '' : value;
+          left = isRtl ? value : '';
           bottom = typeof arrowY === 'number' ? `calc(${this.arrowPadding}px - var(--arrow-padding-offset))` : '';
         } else if (this.arrowPlacement === 'center') {
           // Center
