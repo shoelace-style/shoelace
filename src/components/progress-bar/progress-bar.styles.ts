@@ -43,14 +43,30 @@ export default css`
     animation: indeterminate 2.5s infinite cubic-bezier(0.37, 0, 0.63, 1);
   }
 
+  .progress-bar--indeterminate.progress-bar--rtl .progress-bar__indicator {
+    animation-name: indeterminate-rtl;
+  }
+
   @keyframes indeterminate {
     0% {
-      inset-inline-start: -50%;
+      left: -50%;
       width: 50%;
     }
     75%,
     100% {
-      inset-inline-start: 100%;
+      left: 100%;
+      width: 50%;
+    }
+  }
+
+  @keyframes indeterminate-rtl {
+    0% {
+      right: -50%;
+      width: 50%;
+    }
+    75%,
+    100% {
+      right: 100%;
       width: 50%;
     }
   }
