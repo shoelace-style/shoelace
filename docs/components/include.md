@@ -33,10 +33,12 @@ If the request fails, the `sl-error` event will be emitted. In this case, `event
   const include = document.querySelector('sl-include');
 
   include.addEventListener('sl-load', () => {
+    if (e.eventPhase !== 2) return;
     console.log('Success');
   });
 
   include.addEventListener('sl-error', event => {
+    if (e.eventPhase !== 2) return;
     console.log('Error', event.detail.status);
   });
 </script>
