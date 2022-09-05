@@ -41,13 +41,13 @@ export function isTreeItem(element: Element) {
  * @slot collapse-icon - The icon to show when the item is collapsed.
  *
  * @csspart base - The component's internal wrapper.
- * @csspart expand-button - The item's expand button.
- * @csspart item - The item main container.
+ * @csspart item - The item's main container.
  * @csspart item--disabled - Applied when the item is disabled.
  * @csspart item--expanded - Applied when the item is expanded.
  * @csspart item--indeterminate - Applied when the selection is indeterminate.
  * @csspart item--selected - Applied when the item is selected.
  * @csspart indentation - The item's indentation container.
+ * @csspart expand-button - The item's expand button.
  * @csspart label - The item's label.
  * @csspart children - The item's children container.
  */
@@ -239,11 +239,11 @@ export default class SlTreeItem extends ShoelaceElement {
           <div class="tree-item__indentation" part="indentation"></div>
 
           <div
+            part="expand-button"
             class=${classMap({
               'tree-item__expand-button': true,
               'tree-item__expand-button--visible': showExpandButton
             })}
-            part="expand-button"
             aria-hidden="true"
           >
             ${when(this.loading, () => html` <sl-spinner></sl-spinner> `)}
