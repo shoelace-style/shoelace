@@ -41,6 +41,7 @@ export function isTreeItem(element: Element) {
  * @slot collapse-icon - The icon to show when the item is collapsed.
  *
  * @csspart base - The component's internal wrapper.
+ * @csspart expand-button - The item's expand button.
  * @csspart item - The item main container.
  * @csspart item--disabled - Applied when the item is disabled.
  * @csspart item--expanded - Applied when the item is expanded.
@@ -242,6 +243,7 @@ export default class SlTreeItem extends ShoelaceElement {
               'tree-item__expand-button': true,
               'tree-item__expand-button--visible': showExpandButton
             })}
+            part="expand-button"
             aria-hidden="true"
           >
             ${when(this.loading, () => html` <sl-spinner></sl-spinner> `)}
