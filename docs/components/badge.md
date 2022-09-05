@@ -132,9 +132,76 @@ const App = () => (
 );
 ```
 
+### Coachmarks
+
+Use the `coachmark` attribute to create a transparent, pulsing overlay to draw attention to something on the page. Use the `inverse` variant alongside the `coachmark` attribute to highlight darker items.
+
+```html preview
+<div class="badge-pulse">
+  <sl-badge variant="primary" coachmark></sl-badge>
+  <sl-badge variant="success" coachmark></sl-badge>
+  <sl-badge variant="neutral" coachmark></sl-badge>
+  <sl-badge variant="warning" coachmark></sl-badge>
+  <sl-badge variant="danger" coachmark></sl-badge>
+  <sl-badge variant="inverse" coachmark></sl-badge>
+</div>
+
+<style>
+  .badge-pulse sl-badge:not(:last-of-type) {
+    margin-right: 1rem;
+  }
+  .badge-pulse sl-badge[variant='inverse'] {
+    position: relative;
+  }
+  .badge-pulse sl-badge[variant='inverse']:before {
+    content: '';
+    position: absolute;
+    inset: -0.75rem;
+    background: var(--sl-color-neutral-600);
+    border-radius: var(--sl-border-radius-small);
+  }
+</style>
+```
+
+```jsx react
+import { SlBadge } from '@shoelace-style/shoelace/dist/react';
+
+const css = `
+  .badge-pulse sl-badge:not(:last-of-type) {
+    margin-right: 1rem;
+  }
+  .badge-pulse sl-badge[variant="inverse"] {
+    position: relative;
+  }
+  .badge-pulse sl-badge[variant="inverse"]:before {
+    content: '';
+    position: absolute;
+    inset: -0.75rem;
+    background: var(--sl-color-neutral-600);
+    border-radius: var(--sl-border-radius-small);
+  }
+`;
+
+const App = () => (
+  <>
+    <div className="badge-pulse">
+      <SlBadge variant="primary" coachmark></SlBadge>
+      <SlBadge variant="success" coachmark></SlBadge>
+      <SlBadge variant="neutral" coachmark></SlBadge>
+      <SlBadge variant="warning" coachmark></SlBadge>
+      <SlBadge variant="danger" coachmark></SlBadge>
+      <SlBadge variant="inverse" coachmark></SlBadge>
+    </div>
+
+    <style>{css}</style>
+  </>
+);
+```
+
 ### With Buttons
 
-One of the most common use cases for badges is attaching them to buttons. To make this easier, badges will be automatically positioned at the top-right when they're a child of a button.
+One of the most common use cases for badges is attaching them to buttons. To make this easier, badges will be automatically positioned at the top-right when they're a child of a button. If the badge is a coachmark, it's
+positioned in the center of the button.
 
 ```html preview
 <sl-button>
@@ -150,6 +217,16 @@ One of the most common use cases for badges is attaching them to buttons. To mak
 <sl-button style="margin-inline-start: 1rem;">
   Errors
   <sl-badge variant="danger" pill>6</sl-badge>
+</sl-button>
+
+<sl-button style="margin-inline-start: 1rem;">
+  Coachmark
+  <sl-badge variant="neutral" coachmark></sl-badge>
+</sl-button>
+
+<sl-button variant="primary" style="margin-inline-start: 1rem;">
+  Primary
+  <sl-badge variant="inverse" coachmark></sl-badge>
 </sl-button>
 ```
 
@@ -175,6 +252,16 @@ const App = () => (
       <SlBadge variant="danger" pill>
         6
       </SlBadge>
+    </SlButton>
+
+    <SlButton style={{ marginInlineStart: '1rem' }}>
+      Coachmark
+      <SlBadge variant="neutral" coachmark></SlBadge>
+    </SlButton>
+
+    <SlButton variant="primary" style={{ marginInlineStart: '1rem' }}>
+      Primary
+      <SlBadge variant="inverse" coachmark></SlBadge>
     </SlButton>
   </>
 );

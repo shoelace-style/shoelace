@@ -455,6 +455,11 @@ export default css`
     pointer-events: none;
   }
 
+  .button ::slotted(sl-badge[coachmark]) {
+    top: 50%;
+    right: 50%;
+  }
+
   .button--rtl ::slotted(sl-badge) {
     right: auto;
     left: 0;

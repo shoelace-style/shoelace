@@ -50,6 +50,11 @@ export default css`
     color: var(--sl-color-neutral-0);
   }
 
+  .badge--inverse {
+    background-color: var(--sl-color-neutral-0);
+    color: var(--sl-color-neutral-1000);
+  }
+
   /* Pill modifier */
   .badge--pill {
     border-radius: var(--sl-border-radius-pill);
@@ -58,6 +63,34 @@ export default css`
   /* Pulse modifier */
   .badge--pulse {
     animation: pulse 1.5s infinite;
+  }
+
+  /* Coachmark modifier; automatically gets 'pulse' and 'pill' modifiers */
+  .badge--coachmark {
+    background: transparent;
+    width: var(--sl-font-size-large, 1.25rem);
+    height: var(--sl-font-size-large, 1.25rem);
+    position: relative;
+    border-color: transparent;
+    --pulse-color: var(--sl-color-neutral-600);
+  }
+
+  .badge--coachmark:before,
+  .badge--coachmark:after {
+    content: '';
+    position: absolute;
+    border-radius: var(--sl-border-radius-pill);
+    opacity: 0.1;
+  }
+
+  .badge--coachmark:before {
+    inset: 3px;
+    border: 2px solid var(--pulse-color);
+  }
+
+  .badge--coachmark:after {
+    inset: 0;
+    border: 2px solid var(--pulse-color);
   }
 
   .badge--pulse.badge--primary {
@@ -78,6 +111,10 @@ export default css`
 
   .badge--pulse.badge--danger {
     --pulse-color: var(--sl-color-danger-600);
+  }
+
+  .badge--pulse.badge--inverse {
+    --pulse-color: var(--sl-color-neutral-0);
   }
 
   @keyframes pulse {

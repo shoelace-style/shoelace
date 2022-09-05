@@ -18,13 +18,17 @@ export default class SlBadge extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
   /** The badge's variant. */
-  @property({ reflect: true }) variant: 'primary' | 'success' | 'neutral' | 'warning' | 'danger' = 'primary';
+  @property({ reflect: true }) variant: 'primary' | 'success' | 'neutral' | 'warning' | 'danger' | 'inverse' =
+    'primary';
 
   /** Draws a pill-style badge with rounded edges. */
   @property({ type: Boolean, reflect: true }) pill = false;
 
   /** Makes the badge pulsate to draw attention. */
   @property({ type: Boolean, reflect: true }) pulse = false;
+
+  /** Creates a transparent pulsing ring to direct the user to something on screen. */
+  @property({ type: Boolean, reflect: true }) coachmark = false;
 
   render() {
     return html`
@@ -37,8 +41,10 @@ export default class SlBadge extends ShoelaceElement {
           'badge--neutral': this.variant === 'neutral',
           'badge--warning': this.variant === 'warning',
           'badge--danger': this.variant === 'danger',
+          'badge--inverse': this.variant === 'inverse',
           'badge--pill': this.pill,
-          'badge--pulse': this.pulse
+          'badge--pulse': this.pulse,
+          'badge--coachmark badge--pill badge--pulse': this.coachmark
         })}
         role="status"
       >

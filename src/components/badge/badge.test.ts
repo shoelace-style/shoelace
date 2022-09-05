@@ -56,6 +56,21 @@ describe('<sl-badge>', () => {
     });
   });
 
+  describe('when provided a coachmark parameter', () => {
+    before(async () => {
+      el = await fixture<SlBadge>(html` <sl-badge coachmark></sl-badge> `);
+    });
+
+    it('should pass accessibility tests', async () => {
+      await expect(el).to.be.accessible();
+    });
+
+    it('should append the pill, pulse, and coachmark classes to the classlist to render a coachmark', () => {
+      const part = el.shadowRoot!.querySelector('[part="base"]')!;
+      expect(part.classList.value.trim()).to.eq('badge badge--primary badge--coachmark badge--pill badge--pulse');
+    });
+  });
+
   ['primary', 'success', 'neutral', 'warning', 'danger'].forEach(variant => {
     describe(`when passed a variant attribute ${variant}`, () => {
       before(async () => {
