@@ -30,6 +30,7 @@ export default css`
     background: transparent;
     line-height: var(--sl-input-height-medium);
     vertical-align: middle;
+    margin: 0;
 
     background-image: linear-gradient(
       to right,

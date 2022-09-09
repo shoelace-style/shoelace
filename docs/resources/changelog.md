@@ -19,6 +19,7 @@ This release removes the `<sl-responsive-media>` component. When this component 
 - Fixed a bug in `<sl-popup>` that didn't account for the arrow's diagonal size
 - Fixed a bug in `<sl-popup>` that caused arrow placement to be incorrect with RTL
 - Fixed a bug in `<sl-progress-ring>` that caused the indeterminate animation to stop working in Safari [#891](https://github.com/shoelace-style/shoelace/issues/891)
+- Fixed a bug in `<sl-range>` that caused it to overflow a container at 100% width [#905](https://github.com/shoelace-style/shoelace/issues/905)
 - Fixed a bug in `<sl-tree-item>` that prevented custom expand/collapse icons from rendering
 - Fixed a bug in `<sl-tree-item>` where the `expand-icon` and `collapse-icon` slots were reversed
 - Fixed a bug in `<sl-tree-item>` that prevented the keyboard from working after lazy loading [#882](https://github.com/shoelace-style/shoelace/issues/882)
