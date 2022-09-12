@@ -149,7 +149,7 @@ export default css`
   .range__tooltip {
     position: absolute;
     z-index: var(--sl-z-index-tooltip);
-    left: 1px;
+    left: 0;
     border-radius: var(--sl-tooltip-border-radius);
     background-color: var(--sl-tooltip-background-color);
     font-family: var(--sl-tooltip-font-family);
