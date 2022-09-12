@@ -247,7 +247,11 @@ export default class SlRadioGroup extends ShoelaceElement {
           </label>
         </div>
         ${this.hasButtonGroup
-          ? html`<sl-button-group part="button-group">${defaultSlot}</sl-button-group>`
+          ? html`
+              <sl-button-group part="button-group" exportparts="base:button-group__base">
+                ${defaultSlot}
+              </sl-button-group>
+            `
           : defaultSlot}
       </fieldset>
     `;
