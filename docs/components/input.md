@@ -76,14 +76,14 @@ const App = () => <SlInput placeholder="Clearable" clearable />;
 
 ### Toggle Password
 
-Add the `toggle-password` attribute to add a toggle button that will show the password when activated.
+Add the `password-toggle` attribute to add a toggle button that will show the password when activated.
 
 ```html preview
-<sl-input type="password" placeholder="Password Toggle" size="small" toggle-password></sl-input>
+<sl-input type="password" placeholder="Password Toggle" size="small" password-toggle></sl-input>
 <br />
-<sl-input type="password" placeholder="Password Toggle" size="medium" toggle-password></sl-input>
+<sl-input type="password" placeholder="Password Toggle" size="medium" password-toggle></sl-input>
 <br />
-<sl-input type="password" placeholder="Password Toggle" size="large" toggle-password></sl-input>
+<sl-input type="password" placeholder="Password Toggle" size="large" password-toggle></sl-input>
 ```
 
 ```jsx react
@@ -91,11 +91,11 @@ import { SlInput } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <>
-    <SlInput type="password" placeholder="Password Toggle" size="small" toggle-password />
+    <SlInput type="password" placeholder="Password Toggle" size="small" password-toggle />
     <br />
-    <SlInput type="password" placeholder="Password Toggle" size="medium" toggle-password />
+    <SlInput type="password" placeholder="Password Toggle" size="medium" password-toggle />
     <br />
-    <SlInput type="password" placeholder="Password Toggle" size="large" toggle-password />
+    <SlInput type="password" placeholder="Password Toggle" size="large" password-toggle />
   </>
 );
 ```

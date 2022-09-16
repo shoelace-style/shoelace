@@ -67,7 +67,6 @@ export default class SlInput extends ShoelaceElement {
   private readonly localize = new LocalizeController(this);
 
   @state() private hasFocus = false;
-  @state() private isPasswordVisible = false;
 
   /** The input's type. */
   @property({ reflect: true }) type:
@@ -111,7 +110,10 @@ export default class SlInput extends ShoelaceElement {
   @property({ type: Boolean }) clearable = false;
 
   /** Adds a password toggle button to password inputs. */
-  @property({ attribute: 'toggle-password', type: Boolean }) togglePassword = false;
+  @property({ attribute: 'password-toggle', type: Boolean }) passwordToggle = false;
+
+  /** Determines whether or not the password is currently visible. Only applies to password inputs. */
+  @property({ attribute: 'password-visible', type: Boolean }) passwordVisible = false;
 
   /** Hides the browser's built-in increment/decrement spin buttons for number inputs. */
   @property({ attribute: 'no-spin-buttons', type: Boolean }) noSpinButtons = false;
@@ -324,7 +326,7 @@ export default class SlInput extends ShoelaceElement {
   }
 
   handlePasswordToggle() {
-    this.isPasswordVisible = !this.isPasswordVisible;
+    this.passwordVisible = !this.passwordVisible;
   }
 
   @watch('value', { waitUntilFirstUpdate: true })
@@ -392,7 +394,7 @@ export default class SlInput extends ShoelaceElement {
               part="input"
               id="input"
               class="input__control"
-              type=${this.type === 'password' && this.isPasswordVisible ? 'text' : this.type}
+              type=${this.type === 'password' && this.passwordVisible ? 'text' : this.type}
               name=${ifDefined(this.name)}
               ?disabled=${this.disabled}
               ?readonly=${this.readonly}
@@ -438,17 +440,17 @@ export default class SlInput extends ShoelaceElement {
                   </button>
                 `
               : ''}
-            ${this.togglePassword && !this.disabled
+            ${this.passwordToggle && !this.disabled
               ? html`
                   <button
                     part="password-toggle-button"
                     class="input__password-toggle"
                     type="button"
-                    aria-label=${this.localize.term(this.isPasswordVisible ? 'hidePassword' : 'showPassword')}
+                    aria-label=${this.localize.term(this.passwordVisible ? 'hidePassword' : 'showPassword')}
                     @click=${this.handlePasswordToggle}
                     tabindex="-1"
                   >
-                    ${this.isPasswordVisible
+                    ${this.passwordVisible
                       ? html`
                           <slot name="show-password-icon">
                             <sl-icon name="eye-slash" library="system"></sl-icon>
