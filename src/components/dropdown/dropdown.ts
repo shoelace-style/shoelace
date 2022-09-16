@@ -2,7 +2,7 @@ import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { animateTo, stopAnimations } from '../../internal/animate';
-import { emit, waitForEvent } from '../../internal/event';
+import { waitForEvent } from '../../internal/event';
 import { scrollIntoView } from '../../internal/scroll';
 import ShoelaceElement from '../../internal/shoelace-element';
 import { getTabbableBoundary } from '../../internal/tabbable';
@@ -361,7 +361,7 @@ export default class SlDropdown extends ShoelaceElement {
 
     if (this.open) {
       // Show
-      emit(this, 'sl-show');
+      this.emit('sl-show');
       this.addOpenListeners();
 
       await stopAnimations(this);
@@ -370,10 +370,10 @@ export default class SlDropdown extends ShoelaceElement {
       const { keyframes, options } = getAnimation(this, 'dropdown.show', { dir: this.localize.dir() });
       await animateTo(this.popup.popup, keyframes, options);
 
-      emit(this, 'sl-after-show');
+      this.emit('sl-after-show');
     } else {
       // Hide
-      emit(this, 'sl-hide');
+      this.emit('sl-hide');
       this.removeOpenListeners();
 
       await stopAnimations(this);
@@ -382,7 +382,7 @@ export default class SlDropdown extends ShoelaceElement {
       this.panel.hidden = true;
       this.popup.active = false;
 
-      emit(this, 'sl-after-hide');
+      this.emit('sl-after-hide');
     }
   }
 

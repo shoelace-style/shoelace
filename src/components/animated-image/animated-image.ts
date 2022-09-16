@@ -1,6 +1,5 @@
 import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
-import { emit } from '../../internal/event';
 import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
 import '../icon/icon';
@@ -54,13 +53,13 @@ export default class SlAnimatedImage extends ShoelaceElement {
     this.frozenFrame = canvas.toDataURL('image/gif');
 
     if (!this.isLoaded) {
-      emit(this, 'sl-load');
+      this.emit('sl-load');
       this.isLoaded = true;
     }
   }
 
   handleError() {
-    emit(this, 'sl-error');
+    this.emit('sl-error');
   }
 
   @watch('play', { waitUntilFirstUpdate: true })

@@ -4,7 +4,6 @@ import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
 import { defaultValue } from '../../internal/default-value';
-import { emit } from '../../internal/event';
 import { FormSubmitController } from '../../internal/form';
 import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
@@ -100,12 +99,12 @@ export default class SlCheckbox extends ShoelaceElement {
   handleClick() {
     this.checked = !this.checked;
     this.indeterminate = false;
-    emit(this, 'sl-change');
+    this.emit('sl-change');
   }
 
   handleBlur() {
     this.hasFocus = false;
-    emit(this, 'sl-blur');
+    this.emit('sl-blur');
   }
 
   @watch('disabled', { waitUntilFirstUpdate: true })
@@ -117,7 +116,7 @@ export default class SlCheckbox extends ShoelaceElement {
 
   handleFocus() {
     this.hasFocus = true;
-    emit(this, 'sl-focus');
+    this.emit('sl-focus');
   }
 
   @watch('checked', { waitUntilFirstUpdate: true })

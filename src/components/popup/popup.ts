@@ -2,7 +2,6 @@ import { arrow, autoUpdate, computePosition, flip, offset, shift, size } from '@
 import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { emit } from '../../internal/event';
 import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './popup.styles';
 import type { CSSResultGroup } from 'lit';
@@ -425,7 +424,7 @@ export default class SlPopup extends ShoelaceElement {
       }
     });
 
-    emit(this, 'sl-reposition');
+    this.emit('sl-reposition');
   }
 
   render() {

@@ -1,6 +1,5 @@
 import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
-import { emit } from '../../internal/event';
 import { clamp } from '../../internal/math';
 import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
@@ -188,7 +187,7 @@ export default class SlTree extends ShoelaceElement {
       selectedItem.expanded = !selectedItem.expanded;
     }
 
-    emit(this, 'sl-selection-change', { detail: { selection: this.selectedItems } });
+    this.emit('sl-selection-change', { detail: { selection: this.selectedItems } });
   }
 
   // Returns the list of tree items that are selected in the tree.

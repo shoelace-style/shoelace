@@ -7,7 +7,6 @@ import { live } from 'lit/directives/live.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { defaultValue } from '../../internal/default-value';
 import { drag } from '../../internal/drag';
-import { emit } from '../../internal/event';
 import { FormSubmitController } from '../../internal/form';
 import { clamp } from '../../internal/math';
 import ShoelaceElement from '../../internal/shoelace-element';
@@ -674,7 +673,7 @@ export default class SlColorPicker extends ShoelaceElement {
     }
 
     if (this.value !== this.lastValueEmitted) {
-      emit(this, 'sl-change');
+      this.emit('sl-change');
       this.lastValueEmitted = this.value;
     }
   }

@@ -1,6 +1,5 @@
 import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { emit } from '../../internal/event';
 import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
 import { LocalizeController } from '../../utilities/localize';
@@ -34,7 +33,7 @@ export default class {{ properCase tag }} extends ShoelaceElement {
   @watch('someProp')
   doSomething() {
     // Example event
-    emit(this, 'sl-event-name');
+    this.emit('sl-event-name');
   }
 
   render() {

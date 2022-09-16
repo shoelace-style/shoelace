@@ -3,7 +3,6 @@ import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { drag } from '../../internal/drag';
-import { emit } from '../../internal/event';
 import { clamp } from '../../internal/math';
 import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
@@ -90,7 +89,7 @@ export default class SlImageComparer extends ShoelaceElement {
 
   @watch('position', { waitUntilFirstUpdate: true })
   handlePositionChange() {
-    emit(this, 'sl-change');
+    this.emit('sl-change');
   }
 
   render() {

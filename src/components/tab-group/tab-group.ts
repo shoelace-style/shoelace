@@ -1,7 +1,6 @@
 import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { emit } from '../../internal/event';
 import { scrollIntoView } from '../../internal/scroll';
 import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
@@ -272,10 +271,10 @@ export default class SlTabGroup extends ShoelaceElement {
       // Emit events
       if (options.emitEvents) {
         if (previousTab) {
-          emit(this, 'sl-tab-hide', { detail: { name: previousTab.panel } });
+          this.emit('sl-tab-hide', { detail: { name: previousTab.panel } });
         }
 
-        emit(this, 'sl-tab-show', { detail: { name: this.activeTab.panel } });
+        this.emit('sl-tab-show', { detail: { name: this.activeTab.panel } });
       }
     }
   }

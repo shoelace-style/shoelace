@@ -1,6 +1,5 @@
 import { html } from 'lit';
 import { customElement, query } from 'lit/decorators.js';
-import { emit } from '../../internal/event';
 import ShoelaceElement from '../../internal/shoelace-element';
 import { getTextContent } from '../../internal/slot';
 import styles from './menu.styles';
@@ -107,7 +106,7 @@ export default class SlMenu extends ShoelaceElement {
     const item = target.closest('sl-menu-item');
 
     if (item?.disabled === false) {
-      emit(this, 'sl-select', { detail: { item } });
+      this.emit('sl-select', { detail: { item } });
     }
   }
 

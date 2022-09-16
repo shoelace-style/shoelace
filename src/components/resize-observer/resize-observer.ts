@@ -1,6 +1,5 @@
 import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { emit } from '../../internal/event';
 import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
 import styles from './resize-observer.styles';
@@ -27,7 +26,7 @@ export default class SlResizeObserver extends ShoelaceElement {
   connectedCallback() {
     super.connectedCallback();
     this.resizeObserver = new ResizeObserver((entries: ResizeObserverEntry[]) => {
-      emit(this, 'sl-resize', { detail: { entries } });
+      this.emit('sl-resize', { detail: { entries } });
     });
 
     if (!this.disabled) {

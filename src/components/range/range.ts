@@ -4,7 +4,6 @@ import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
 import { defaultValue } from '../../internal/default-value';
-import { emit } from '../../internal/event';
 import { FormSubmitController } from '../../internal/form';
 import ShoelaceElement from '../../internal/shoelace-element';
 import { HasSlotController } from '../../internal/slot';
@@ -135,7 +134,7 @@ export default class SlRange extends ShoelaceElement {
 
   handleInput() {
     this.value = parseFloat(this.input.value);
-    emit(this, 'sl-change');
+    this.emit('sl-change');
 
     this.syncRange();
   }
@@ -143,7 +142,7 @@ export default class SlRange extends ShoelaceElement {
   handleBlur() {
     this.hasFocus = false;
     this.hasTooltip = false;
-    emit(this, 'sl-blur');
+    this.emit('sl-blur');
   }
 
   @watch('value', { waitUntilFirstUpdate: true })
@@ -168,7 +167,7 @@ export default class SlRange extends ShoelaceElement {
   handleFocus() {
     this.hasFocus = true;
     this.hasTooltip = true;
-    emit(this, 'sl-focus');
+    this.emit('sl-focus');
   }
 
   handleThumbDragStart() {

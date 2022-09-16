@@ -4,7 +4,6 @@ import { classMap } from 'lit/directives/class-map.js';
 import { live } from 'lit/directives/live.js';
 import { when } from 'lit/directives/when.js';
 import { animateTo, shimKeyframesHeightAuto, stopAnimations } from '../../internal/animate';
-import { emit } from '../../internal/event';
 import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
@@ -137,7 +136,7 @@ export default class SlTreeItem extends ShoelaceElement {
       if (this.lazy) {
         this.loading = true;
 
-        emit(this, 'sl-lazy-load');
+        this.emit('sl-lazy-load');
       } else {
         this.animateExpand();
       }
@@ -148,11 +147,11 @@ export default class SlTreeItem extends ShoelaceElement {
 
   @watch('lazy', { waitUntilFirstUpdate: true })
   handleLazyChange() {
-    emit(this, 'sl-lazy-change');
+    this.emit('sl-lazy-change');
   }
 
   private async animateExpand() {
-    emit(this, 'sl-expand');
+    this.emit('sl-expand');
 
     await stopAnimations(this.childrenContainer);
     this.childrenContainer.hidden = false;
@@ -165,11 +164,11 @@ export default class SlTreeItem extends ShoelaceElement {
     );
     this.childrenContainer.style.height = 'auto';
 
-    emit(this, 'sl-after-expand');
+    this.emit('sl-after-expand');
   }
 
   private async animateCollapse() {
-    emit(this, 'sl-collapse');
+    this.emit('sl-collapse');
 
     await stopAnimations(this.childrenContainer);
 
@@ -181,7 +180,7 @@ export default class SlTreeItem extends ShoelaceElement {
     );
     this.childrenContainer.hidden = true;
 
-    emit(this, 'sl-after-collapse');
+    this.emit('sl-after-collapse');
   }
 
   // Gets all the nested tree items

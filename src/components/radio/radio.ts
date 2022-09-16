@@ -1,7 +1,6 @@
 import { html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { emit } from '../../internal/event';
 import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
 import styles from './radio.styles';
@@ -53,7 +52,7 @@ export default class SlRadio extends ShoelaceElement {
 
   private handleBlur() {
     this.hasFocus = false;
-    emit(this, 'sl-blur');
+    this.emit('sl-blur');
   }
 
   private handleClick() {
@@ -64,7 +63,7 @@ export default class SlRadio extends ShoelaceElement {
 
   private handleFocus() {
     this.hasFocus = true;
-    emit(this, 'sl-focus');
+    this.emit('sl-focus');
   }
 
   private addEventListeners() {

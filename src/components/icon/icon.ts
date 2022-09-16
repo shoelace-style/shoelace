@@ -2,7 +2,6 @@ import { html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
-import { emit } from '../../internal/event';
 import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
 import styles from './icon.styles';
@@ -96,17 +95,17 @@ export default class SlIcon extends ShoelaceElement {
           if (svgEl !== null) {
             library?.mutator?.(svgEl);
             this.svg = svgEl.outerHTML;
-            emit(this, 'sl-load');
+            this.emit('sl-load');
           } else {
             this.svg = '';
-            emit(this, 'sl-error');
+            this.emit('sl-error');
           }
         } else {
           this.svg = '';
-          emit(this, 'sl-error');
+          this.emit('sl-error');
         }
       } catch {
-        emit(this, 'sl-error');
+        this.emit('sl-error');
       }
     } else if (this.svg.length > 0) {
       // If we can't resolve a URL and an icon was previously set, remove it

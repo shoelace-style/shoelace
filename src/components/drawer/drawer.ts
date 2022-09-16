@@ -3,7 +3,7 @@ import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { animateTo, stopAnimations } from '../../internal/animate';
-import { emit, waitForEvent } from '../../internal/event';
+import { waitForEvent } from '../../internal/event';
 import Modal from '../../internal/modal';
 import { lockBodyScrolling, unlockBodyScrolling } from '../../internal/scroll';
 import ShoelaceElement from '../../internal/shoelace-element';
@@ -143,7 +143,7 @@ export default class SlDrawer extends ShoelaceElement {
   }
 
   private requestClose(source: 'close-button' | 'keyboard' | 'overlay') {
-    const slRequestClose = emit(this, 'sl-request-close', {
+    const slRequestClose = this.emit('sl-request-close', {
       cancelable: true,
       detail: { source }
     });
@@ -168,7 +168,7 @@ export default class SlDrawer extends ShoelaceElement {
   async handleOpenChange() {
     if (this.open) {
       // Show
-      emit(this, 'sl-show');
+      this.emit('sl-show');
       this.originalTrigger = document.activeElement as HTMLElement;
 
       // Lock body scrolling only if the drawer isn't contained
@@ -193,7 +193,7 @@ export default class SlDrawer extends ShoelaceElement {
 
       // Set initial focus
       requestAnimationFrame(() => {
-        const slInitialFocus = emit(this, 'sl-initial-focus', { cancelable: true });
+        const slInitialFocus = this.emit('sl-initial-focus', { cancelable: true });
 
         if (!slInitialFocus.defaultPrevented) {
           // Set focus to the autofocus target and restore the attribute
@@ -219,10 +219,10 @@ export default class SlDrawer extends ShoelaceElement {
         animateTo(this.overlay, overlayAnimation.keyframes, overlayAnimation.options)
       ]);
 
-      emit(this, 'sl-after-show');
+      this.emit('sl-after-show');
     } else {
       // Hide
-      emit(this, 'sl-hide');
+      this.emit('sl-hide');
       this.modal.deactivate();
       unlockBodyScrolling(this);
 
@@ -256,7 +256,7 @@ export default class SlDrawer extends ShoelaceElement {
         setTimeout(() => trigger.focus());
       }
 
-      emit(this, 'sl-after-hide');
+      this.emit('sl-after-hide');
     }
   }
 

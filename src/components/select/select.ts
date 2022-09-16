@@ -2,7 +2,6 @@ import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { defaultValue } from '../../internal/default-value';
-import { emit } from '../../internal/event';
 import { FormSubmitController } from '../../internal/form';
 import ShoelaceElement from '../../internal/shoelace-element';
 import { HasSlotController } from '../../internal/slot';
@@ -196,14 +195,14 @@ export default class SlSelect extends ShoelaceElement {
     // Don't blur if the control is open. We'll move focus back once it closes.
     if (!this.isOpen) {
       this.hasFocus = false;
-      emit(this, 'sl-blur');
+      this.emit('sl-blur');
     }
   }
 
   handleClearClick(event: MouseEvent) {
     event.stopPropagation();
     this.value = this.multiple ? [] : '';
-    emit(this, 'sl-clear');
+    this.emit('sl-clear');
     this.syncItemsFromValue();
   }
 
@@ -221,7 +220,7 @@ export default class SlSelect extends ShoelaceElement {
   handleFocus() {
     if (!this.hasFocus) {
       this.hasFocus = true;
-      emit(this, 'sl-focus');
+      this.emit('sl-focus');
     }
   }
 
@@ -365,7 +364,7 @@ export default class SlSelect extends ShoelaceElement {
     this.syncItemsFromValue();
     await this.updateComplete;
     this.invalid = !this.input.checkValidity();
-    emit(this, 'sl-change');
+    this.emit('sl-change');
   }
 
   resizeMenu() {

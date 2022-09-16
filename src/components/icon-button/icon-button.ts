@@ -2,7 +2,6 @@ import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { html, literal } from 'lit/static-html.js';
-import { emit } from '../../internal/event';
 import ShoelaceElement from '../../internal/shoelace-element';
 import '../icon/icon';
 import styles from './icon-button.styles';
@@ -71,12 +70,12 @@ export default class SlIconButton extends ShoelaceElement {
 
   handleBlur() {
     this.hasFocus = false;
-    emit(this, 'sl-blur');
+    this.emit('sl-blur');
   }
 
   handleFocus() {
     this.hasFocus = true;
-    emit(this, 'sl-focus');
+    this.emit('sl-focus');
   }
 
   handleClick(event: MouseEvent) {

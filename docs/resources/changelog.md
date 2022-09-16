@@ -28,6 +28,7 @@ This release removes the `<sl-responsive-media>` component. When this component 
 - Fixed a bug in `<sl-textarea>` that prevented the textarea from resizing automatically when setting the value programmatically [#912](https://github.com/shoelace-style/shoelace/discussions/912)
 - Fixed a handful of paths to prevent TypeScript from getting upset [#886](https://github.com/shoelace-style/shoelace/issues/886)
 - Fixed a bug in `<sl-radio-group>` where the `button-group__base` part was documented but not exposed [#909](https://github.com/shoelace-style/shoelace/discussions/909)
+- Refactored the internal event emitter to be part of `ShoelaceElement` to reduce imports and improve DX
 - Upgraded the status of `<sl-animated-image>`, `<sl-popup>`, and `<sl-split-panel>` from experimental to stable
 
 ## 2.0.0-beta.82

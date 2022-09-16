@@ -4,7 +4,6 @@ import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
 import { defaultValue } from '../../internal/default-value';
-import { emit } from '../../internal/event';
 import { FormSubmitController } from '../../internal/form';
 import ShoelaceElement from '../../internal/shoelace-element';
 import { HasSlotController } from '../../internal/slot';
@@ -188,14 +187,14 @@ export default class SlTextarea extends ShoelaceElement {
 
     if (this.value !== this.input.value) {
       this.value = this.input.value;
-      emit(this, 'sl-input');
+      this.emit('sl-input');
     }
 
     if (this.value !== this.input.value) {
       this.value = this.input.value;
       this.setTextareaHeight();
-      emit(this, 'sl-input');
-      emit(this, 'sl-change');
+      this.emit('sl-input');
+      this.emit('sl-change');
     }
   }
 
@@ -212,13 +211,13 @@ export default class SlTextarea extends ShoelaceElement {
 
   handleBlur() {
     this.hasFocus = false;
-    emit(this, 'sl-blur');
+    this.emit('sl-blur');
   }
 
   handleChange() {
     this.value = this.input.value;
     this.setTextareaHeight();
-    emit(this, 'sl-change');
+    this.emit('sl-change');
   }
 
   @watch('disabled', { waitUntilFirstUpdate: true })
@@ -230,12 +229,12 @@ export default class SlTextarea extends ShoelaceElement {
 
   handleFocus() {
     this.hasFocus = true;
-    emit(this, 'sl-focus');
+    this.emit('sl-focus');
   }
 
   handleInput() {
     this.value = this.input.value;
-    emit(this, 'sl-input');
+    this.emit('sl-input');
   }
 
   @watch('rows', { waitUntilFirstUpdate: true })

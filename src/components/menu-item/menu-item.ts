@@ -1,7 +1,6 @@
 import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { emit } from '../../internal/event';
 import ShoelaceElement from '../../internal/shoelace-element';
 import { getTextContent } from '../../internal/slot';
 import { watch } from '../../internal/watch';
@@ -76,7 +75,7 @@ export default class SlMenuItem extends ShoelaceElement {
 
     if (textLabel !== this.cachedTextLabel) {
       this.cachedTextLabel = textLabel;
-      emit(this, 'sl-label-change');
+      this.emit('sl-label-change');
     }
   }
 

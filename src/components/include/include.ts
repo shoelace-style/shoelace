@@ -1,6 +1,5 @@
 import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { emit } from '../../internal/event';
 import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
 import styles from './include.styles';
@@ -54,7 +53,7 @@ export default class SlInclude extends ShoelaceElement {
       }
 
       if (!file.ok) {
-        emit(this, 'sl-error', { detail: { status: file.status } });
+        this.emit('sl-error', { detail: { status: file.status } });
         return;
       }
 
@@ -64,9 +63,9 @@ export default class SlInclude extends ShoelaceElement {
         [...this.querySelectorAll('script')].forEach(script => this.executeScript(script));
       }
 
-      emit(this, 'sl-load');
+      this.emit('sl-load');
     } catch {
-      emit(this, 'sl-error', { detail: { status: -1 } });
+      this.emit('sl-error', { detail: { status: -1 } });
     }
   }
 

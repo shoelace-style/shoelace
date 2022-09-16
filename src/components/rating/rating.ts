@@ -3,7 +3,6 @@ import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-import { emit } from '../../internal/event';
 import { clamp } from '../../internal/math';
 import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
@@ -165,7 +164,7 @@ export default class SlRating extends ShoelaceElement {
 
   @watch('value', { waitUntilFirstUpdate: true })
   handleValueChange() {
-    emit(this, 'sl-change');
+    this.emit('sl-change');
   }
 
   roundToPrecision(numberToRound: number, precision = 0.5) {

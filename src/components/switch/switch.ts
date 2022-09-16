@@ -4,7 +4,6 @@ import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
 import { defaultValue } from '../../internal/default-value';
-import { emit } from '../../internal/event';
 import { FormSubmitController } from '../../internal/form';
 import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
@@ -99,7 +98,7 @@ export default class SlSwitch extends ShoelaceElement {
 
   handleBlur() {
     this.hasFocus = false;
-    emit(this, 'sl-blur');
+    this.emit('sl-blur');
   }
 
   @watch('checked', { waitUntilFirstUpdate: true })
@@ -110,7 +109,7 @@ export default class SlSwitch extends ShoelaceElement {
 
   handleClick() {
     this.checked = !this.checked;
-    emit(this, 'sl-change');
+    this.emit('sl-change');
   }
 
   @watch('disabled', { waitUntilFirstUpdate: true })
@@ -122,20 +121,20 @@ export default class SlSwitch extends ShoelaceElement {
 
   handleFocus() {
     this.hasFocus = true;
-    emit(this, 'sl-focus');
+    this.emit('sl-focus');
   }
 
   handleKeyDown(event: KeyboardEvent) {
     if (event.key === 'ArrowLeft') {
       event.preventDefault();
       this.checked = false;
-      emit(this, 'sl-change');
+      this.emit('sl-change');
     }
 
     if (event.key === 'ArrowRight') {
       event.preventDefault();
       this.checked = true;
-      emit(this, 'sl-change');
+      this.emit('sl-change');
     }
   }
 

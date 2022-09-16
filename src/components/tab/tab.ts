@@ -2,7 +2,6 @@ import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { autoIncrement } from '../../internal/auto-increment';
-import { emit } from '../../internal/event';
 import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
 import { LocalizeController } from '../../utilities/localize';
@@ -62,7 +61,7 @@ export default class SlTab extends ShoelaceElement {
   }
 
   handleCloseClick() {
-    emit(this, 'sl-close');
+    this.emit('sl-close');
   }
 
   @watch('active')

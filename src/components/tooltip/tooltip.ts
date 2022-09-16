@@ -2,7 +2,7 @@ import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { animateTo, parseDuration, stopAnimations } from '../../internal/animate';
-import { emit, waitForEvent } from '../../internal/event';
+import { waitForEvent } from '../../internal/event';
 import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
@@ -221,7 +221,7 @@ export default class SlTooltip extends ShoelaceElement {
       }
 
       // Show
-      emit(this, 'sl-show');
+      this.emit('sl-show');
 
       await stopAnimations(this.body);
       this.body.hidden = false;
@@ -229,10 +229,10 @@ export default class SlTooltip extends ShoelaceElement {
       const { keyframes, options } = getAnimation(this, 'tooltip.show', { dir: this.localize.dir() });
       await animateTo(this.popup.popup, keyframes, options);
 
-      emit(this, 'sl-after-show');
+      this.emit('sl-after-show');
     } else {
       // Hide
-      emit(this, 'sl-hide');
+      this.emit('sl-hide');
 
       await stopAnimations(this.body);
       const { keyframes, options } = getAnimation(this, 'tooltip.hide', { dir: this.localize.dir() });
@@ -240,7 +240,7 @@ export default class SlTooltip extends ShoelaceElement {
       this.popup.active = false;
       this.body.hidden = true;
 
-      emit(this, 'sl-after-hide');
+      this.emit('sl-after-hide');
     }
   }
 

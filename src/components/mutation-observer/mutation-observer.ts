@@ -1,6 +1,5 @@
 import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { emit } from '../../internal/event';
 import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
 import styles from './mutation-observer.styles';
@@ -76,7 +75,7 @@ export default class SlMutationObserver extends ShoelaceElement {
   }
 
   handleMutation(mutationList: MutationRecord[]) {
-    emit(this, 'sl-mutation', {
+    this.emit('sl-mutation', {
       detail: { mutationList }
     });
   }
