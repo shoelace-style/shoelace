@@ -235,7 +235,6 @@ export default class SlTextarea extends ShoelaceElement {
 
   handleInput() {
     this.value = this.input.value;
-    this.setTextareaHeight();
     emit(this, 'sl-input');
   }
 
@@ -247,6 +246,7 @@ export default class SlTextarea extends ShoelaceElement {
   @watch('value', { waitUntilFirstUpdate: true })
   handleValueChange() {
     this.invalid = !this.input.checkValidity();
+    this.updateComplete.then(() => this.setTextareaHeight());
   }
 
   setTextareaHeight() {
