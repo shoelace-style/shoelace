@@ -43,7 +43,7 @@ export default class SlProgressRing extends ShoelaceElement {
     // change, possibly because of a mix of pixel + unit-less values in the calc() function. It seems like a Safari bug,
     // but I couldn't pinpoint it so this works around the problem.
     //
-    if (changedProps.has('percentage')) {
+    if (changedProps.has('value')) {
       const radius = parseFloat(getComputedStyle(this.indicator).getPropertyValue('r'));
       const circumference = 2 * Math.PI * radius;
       const offset = circumference - (this.value / 100) * circumference;
