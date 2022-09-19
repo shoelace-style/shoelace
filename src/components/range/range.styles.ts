@@ -43,6 +43,18 @@ export default css`
     );
   }
 
+  .range--rtl .range__control {
+    background-image: linear-gradient(
+      to left,
+      var(--track-color-inactive) 0%,
+      var(--track-color-inactive) min(var(--percent), var(--track-active-offset)),
+      var(--track-color-active) min(var(--percent), var(--track-active-offset)),
+      var(--track-color-active) max(var(--percent), var(--track-active-offset)),
+      var(--track-color-inactive) max(var(--percent), var(--track-active-offset)),
+      var(--track-color-inactive) 100%
+    );
+  }
+
   /* Webkit */
   .range__control::-webkit-slider-runnable-track {
     width: 100%;

@@ -247,6 +247,7 @@ export default class SlRange extends ShoelaceElement {
               range: true,
               'range--disabled': this.disabled,
               'range--focused': this.hasFocus,
+              'range--rtl': this.localize.dir() === 'rtl',
               'range--tooltip-visible': this.hasTooltip,
               'range--tooltip-top': this.tooltip === 'top',
               'range--tooltip-bottom': this.tooltip === 'bottom'
