@@ -30,6 +30,7 @@ This release removes the `<sl-responsive-media>` component. When this component 
 - Fixed a bug in `<sl-radio-group>` where the `button-group__base` part was documented but not exposed [#909](https://github.com/shoelace-style/shoelace/discussions/909)
 - Fixed a bug in `<sl-range>` that caused the active track color to render on the wrong side in RTL [#916](https://github.com/shoelace-style/shoelace/issues/916)
 - Refactored the internal event emitter to be part of `ShoelaceElement` to reduce imports and improve DX
+- Downgraded Floating UI from 1.0.1 to 1.0.0 due to new logic that makes positioning much slower for certain components [#915](https://github.com/shoelace-style/shoelace/issues/915)
 - Upgraded the status of `<sl-animated-image>`, `<sl-popup>`, and `<sl-split-panel>` from experimental to stable
 
 ## 2.0.0-beta.82

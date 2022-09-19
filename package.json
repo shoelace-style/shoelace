@@ -52,7 +52,7 @@
     "node": ">=14.17.0"
   },
   "dependencies": {
-    "@floating-ui/dom": "^1.0.1",
+    "@floating-ui/dom": "^1.0.0",
     "@lit-labs/react": "^1.0.7",
     "@shoelace-style/animations": "^1.1.0",
     "@shoelace-style/localize": "^3.0.1",
