@@ -8,6 +8,10 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 _During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
 
+## Next
+
+- Increased the default padding for `<sl-badge>` so it's not as tight and scales better with font size
+
 ## 2.0.0-beta.83
 
 This release removes the `<sl-responsive-media>` component. When this component was introduced, support for [`aspect-radio`](https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio)) wasn't great. These days, [the property is supported](https://caniuse.com/mdn-css_properties_aspect-ratio) by all of Shoelace's target browsers, making a dedicated component redundant.

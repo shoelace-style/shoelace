@@ -19,7 +19,7 @@ export default css`
     border-radius: var(--sl-border-radius-small);
     border: solid 1px var(--sl-color-neutral-0);
     white-space: nowrap;
-    padding: 3px 6px;
+    padding: 0.35em 0.6em;
     user-select: none;
     cursor: inherit;
   }
