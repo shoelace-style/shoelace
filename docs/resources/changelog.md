@@ -10,7 +10,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
-- Increased the default padding for `<sl-badge>` so it's not as tight and scales better with font size
+- Improved `<sl-badge>` so it renders relative to the current font size and improved padding
 
 ## 2.0.0-beta.83
 

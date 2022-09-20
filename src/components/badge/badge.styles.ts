@@ -12,7 +12,7 @@ export default css`
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: var(--sl-font-size-x-small);
+    font-size: max(12px, 0.75em);
     font-weight: var(--sl-font-weight-semibold);
     letter-spacing: var(--sl-letter-spacing-normal);
     line-height: 1;
