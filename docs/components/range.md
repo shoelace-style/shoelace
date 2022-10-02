@@ -23,7 +23,7 @@ const App = () => <SlRange />;
 Use the `label` attribute to give the range an accessible label. For labels that contain HTML, use the `label` slot instead.
 
 ```html preview
-<sl-range label="Volume" min="0" max="100"></sl-input>
+<sl-range label="Volume" min="0" max="100"></sl-range>
 ```
 
 ```jsx react
@@ -42,7 +42,7 @@ Add descriptive help text to a range with the `help-text` attribute. For help te
   help-text="Controls the volume of the current song."
   min="0"
   max="100"
-></sl-input>
+></sl-range>
 ```
 
 ```jsx react
