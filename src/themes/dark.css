@@ -485,6 +485,9 @@
 
   --sl-input-help-text-color: var(--sl-color-neutral-500);
 
+  /* Error text */
+  --sl-input-error-text-color: var(--sl-color-warning-200);
+
   /* Toggles (checkboxes, radios, switches) */
   --sl-toggle-size: 1rem;
 

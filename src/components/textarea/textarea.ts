@@ -119,6 +119,8 @@ export default class SlTextarea extends ShoelaceElement {
   @defaultValue()
   defaultValue = '';
 
+  @state() protected validationMessage = '';
+
   connectedCallback() {
     super.connectedCallback();
     this.resizeObserver = new ResizeObserver(() => this.setTextareaHeight());
@@ -200,7 +202,17 @@ export default class SlTextarea extends ShoelaceElement {
 
   /** Checks for validity and shows the browser's validation message if the control is invalid. */
   reportValidity() {
-    return this.input.reportValidity();
+    this.invalid = !this.checkValidity()
+
+    this.validationMessage = this.input.validationMessage
+
+    this.requestUpdate()
+
+    return !this.invalid
+  }
+
+  checkValidity() {
+    return this.input.checkValidity()
   }
 
   /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
@@ -339,6 +351,8 @@ export default class SlTextarea extends ShoelaceElement {
         >
           <slot name="help-text">${this.helpText}</slot>
         </div>
+
+        ${this.invalid ? html`<div class="form-control__error-text">${this.validationMessage}</div>` : ''}
       </div>
     `;
   }

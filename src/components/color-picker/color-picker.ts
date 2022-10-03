@@ -180,6 +180,8 @@ export default class SlColorPicker extends ShoelaceElement {
     '#fff'
   ];
 
+  @state() protected validationMessage = '';
+
   connectedCallback() {
     super.connectedCallback();
 
@@ -247,7 +249,18 @@ export default class SlColorPicker extends ShoelaceElement {
         this.dropdown.show();
       });
     }
-    return this.input.reportValidity();
+
+    this.invalid = !this.checkValidity();
+
+    this.validationMessage = this.input.validationMessage;
+
+    this.requestUpdate();
+
+    return !this.invalid;
+  }
+
+  checkValidity() {
+    return this.input.checkValidity()
   }
 
   /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
@@ -924,6 +937,8 @@ export default class SlColorPicker extends ShoelaceElement {
         </button>
         ${colorPicker}
       </sl-dropdown>
+
+      ${this.invalid ? html`<div class="form-control__error-text">${this.validationMessage}</div>` : ''}
     `;
   }
 }

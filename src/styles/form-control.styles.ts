@@ -54,4 +54,9 @@ export default css`
   .form-control--has-help-text.form-control--large .form-control__help-text {
     font-size: var(--sl-input-help-text-font-size-large);
   }
+
+  .form-control__error-text {
+    font-size: var(--sl-input-help-text-font-size-medium);
+    color: var(--sl-input-error-text-color);
+  }
 `;

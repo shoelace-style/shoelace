@@ -66,6 +66,8 @@ export default class SlCheckbox extends ShoelaceElement {
   @defaultValue('checked')
   defaultChecked = false;
 
+  @state() protected validationMessage = '';
+
   firstUpdated() {
     this.invalid = !this.input.checkValidity();
   }
@@ -87,7 +89,17 @@ export default class SlCheckbox extends ShoelaceElement {
 
   /** Checks for validity and shows the browser's validation message if the control is invalid. */
   reportValidity() {
-    return this.input.reportValidity();
+    this.invalid = !this.checkValidity()
+
+    this.validationMessage = this.input.validationMessage
+
+    this.requestUpdate()
+
+    return !this.invalid
+  }
+
+  checkValidity() {
+    return this.input.checkValidity()
   }
 
   /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
@@ -186,6 +198,8 @@ export default class SlCheckbox extends ShoelaceElement {
           <slot></slot>
         </span>
       </label>
+
+      ${this.invalid ? html`<div class="checkbox__error-text">${this.validationMessage}</div>` : ''}
     `;
   }
 }

@@ -180,6 +180,8 @@ export default class SlInput extends ShoelaceElement {
   /** The input's inputmode attribute. */
   @property() inputmode: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
 
+  @state() protected validationMessage = '';
+
   /** Gets or sets the current value as a `Date` object. Only valid when `type` is `date`. */
   get valueAsDate() {
     return this.input?.valueAsDate ?? null;
@@ -252,7 +254,17 @@ export default class SlInput extends ShoelaceElement {
 
   /** Checks for validity and shows the browser's validation message if the control is invalid. */
   reportValidity() {
-    return this.input.reportValidity();
+    this.invalid = !this.checkValidity()
+
+    this.validationMessage = this.input.validationMessage
+
+    this.requestUpdate()
+
+    return !this.invalid
+  }
+
+  checkValidity() {
+    return this.input.checkValidity()
   }
 
   /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
@@ -478,6 +490,8 @@ export default class SlInput extends ShoelaceElement {
         >
           <slot name="help-text">${this.helpText}</slot>
         </div>
+
+        ${this.invalid ? html`<div class="form-control__error-text">${this.validationMessage}</div>` : ''}
       </div>
     `;
   }

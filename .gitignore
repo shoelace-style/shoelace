@@ -1,5 +1,6 @@
 .DS_Store
 .cache
+.idea
 docs/dist
 docs/search.json
 dist

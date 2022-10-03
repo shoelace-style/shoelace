@@ -104,4 +104,9 @@ export default css`
     content: var(--sl-input-required-content);
     margin-inline-start: var(--sl-input-required-content-offset);
   }
+
+  .checkbox__error-text {
+    font-size: var(--sl-input-help-text-font-size-medium);
+    color: var(--sl-input-error-text-color);
+  }
 `;
