@@ -37,12 +37,7 @@ const App = () => <SlRange label="Volume" min={0} max={100} />;
 Add descriptive help text to a range with the `help-text` attribute. For help texts that contain HTML, use the `help-text` slot instead.
 
 ```html preview
-<sl-range
-  label="Volume"
-  help-text="Controls the volume of the current song."
-  min="0"
-  max="100"
-></sl-range>
+<sl-range label="Volume" help-text="Controls the volume of the current song." min="0" max="100"></sl-range>
 ```
 
 ```jsx react
