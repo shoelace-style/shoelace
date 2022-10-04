@@ -260,7 +260,7 @@ export default class SlColorPicker extends ShoelaceElement {
   }
 
   checkValidity() {
-    return this.input.checkValidity()
+    return this.input.checkValidity();
   }
 
   /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */

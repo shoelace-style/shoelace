@@ -165,17 +165,17 @@ export default class SlSelect extends ShoelaceElement {
 
   /** Checks for validity and shows the browser's validation message if the control is invalid. */
   reportValidity() {
-    this.invalid = !this.checkValidity()
+    this.invalid = !this.checkValidity();
 
-    this.validationMessage = this.input.validationMessage
+    this.validationMessage = this.input.validationMessage;
 
-    this.requestUpdate()
+    this.requestUpdate();
 
-    return !this.invalid
+    return !this.invalid;
   }
 
   checkValidity() {
-    return this.input.checkValidity()
+    return this.input.checkValidity();
   }
 
   /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
