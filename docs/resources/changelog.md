@@ -11,6 +11,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 ## Next
 
 - Improved `<sl-badge>` so it renders relative to the current font size and improved padding
+- Added tests for `<sl-menu-item>` and `<sl-menu-label>` [#935](https://github.com/shoelace-style/shoelace/pull/935)
 
 ## 2.0.0-beta.83
 
