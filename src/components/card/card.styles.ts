@@ -47,6 +47,11 @@ export default css`
     display: none;
   }
 
+  .card:not(.card--has-image) .card__header {
+    border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+  }
+
   .card__body {
     padding: var(--padding);
   }
