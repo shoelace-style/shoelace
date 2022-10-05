@@ -11,6 +11,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 ## Next
 
 - Improved `<sl-badge>` so it renders relative to the current font size and improved padding
+- Fixed a bug in `<sl-card>` that prevented the border radius to apply correctly to the header [#934](https://github.com/shoelace-style/shoelace/pull/934)
 
 ## 2.0.0-beta.83
 
