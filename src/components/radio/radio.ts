@@ -17,6 +17,7 @@ import type { CSSResultGroup } from 'lit';
  *
  * @csspart base - The component's internal wrapper.
  * @csspart control - The radio control.
+ * @csspart control--checked - The radio control if radio is checked.
  * @csspart checked-icon - The container the wraps the checked icon.
  * @csspart label - The radio label.
  */
@@ -89,7 +90,7 @@ export default class SlRadio extends ShoelaceElement {
           'radio--focused': this.hasFocus
         })}
       >
-        <span part="control" class="radio__control">
+        <span part="${`control${this.checked ? ' control--checked' : ''}`}" class="radio__control">
           <svg part="checked-icon" class="radio__icon" viewBox="0 0 16 16">
             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
               <g fill="currentColor">

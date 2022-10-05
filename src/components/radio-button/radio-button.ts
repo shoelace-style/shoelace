@@ -21,6 +21,7 @@ import type { CSSResultGroup } from 'lit';
  *
  * @csspart base - The component's internal wrapper.
  * @csspart button - The internal button element.
+ * @csspart button--checked - The internal button element if checked
  * @csspart prefix - The prefix slot's container.
  * @csspart label - The button's label.
  * @csspart suffix - The suffix slot's container.
@@ -83,7 +84,7 @@ export default class SlRadioButton extends ShoelaceElement {
     return html`
       <div part="base" role="presentation">
         <button
-          part="button"
+          part="${`button${this.checked ? ' button--checked' : ''}`}"
           role="radio"
           aria-checked="${this.checked}"
           class=${classMap({
