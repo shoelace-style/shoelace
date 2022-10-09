@@ -65,6 +65,8 @@ export default class SlInput extends ShoelaceElement {
   private readonly hasSlotController = new HasSlotController(this, 'help-text', 'label');
   private readonly localize = new LocalizeController(this);
 
+  validationMessage = '';
+
   @state() private hasFocus = false;
 
   /** The input's type. */
@@ -179,8 +181,6 @@ export default class SlInput extends ShoelaceElement {
 
   /** The input's inputmode attribute. */
   @property() inputmode: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
-
-  @state() protected validationMessage = '';
 
   /** Gets or sets the current value as a `Date` object. Only valid when `type` is `date`. */
   get valueAsDate() {
