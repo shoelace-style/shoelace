@@ -57,7 +57,7 @@
     "@shoelace-style/animations": "^1.1.0",
     "@shoelace-style/localize": "^3.0.1",
     "color": "4.2",
-    "lit": "^2.2.8",
+    "lit": "^2.4.0",
     "qr-creator": "^1.0.0"
   },
   "devDependencies": {
