@@ -392,7 +392,6 @@
         return result.replace(/^ +| +$/gm, '');
       });
 
-
       // Handle [component-description] tags
       content = content.replace(/\[component-description:([a-z-]+)\]/g, (match, tag) => {
         const component = getComponent(metadata, tag);
