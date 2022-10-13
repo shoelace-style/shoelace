@@ -2,7 +2,7 @@
 
 [component-header:sl-alert]
 
-Alerts are used to display important messages inline or as toast notifications.
+[component-description:sl-alert]
 
 ```html preview
 <sl-alert open>
