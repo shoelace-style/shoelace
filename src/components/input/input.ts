@@ -340,7 +340,7 @@ export default class SlInput extends ShoelaceElement {
     const hasLabelSlot = this.hasSlotController.test('label');
     const hasHelpTextSlot = this.hasSlotController.test('help-text');
     const hasLabel = this.label ? true : !!hasLabelSlot;
-    const hasHiddenLabel = this.hiddenLabel && hasLabel ? true : false;
+    const hasHiddenLabel = this.hiddenLabel ? true : false;
     const hasHelpText = this.helpText ? true : !!hasHelpTextSlot;
     const hasClearIcon =
       this.clearable && !this.disabled && !this.readonly && (typeof this.value === 'number' || this.value.length > 0);
@@ -354,7 +354,7 @@ export default class SlInput extends ShoelaceElement {
           'form-control--medium': this.size === 'medium',
           'form-control--large': this.size === 'large',
           'form-control--has-label': hasLabel,
-          'form-control--has-hidden-label': hasLabel && hasHiddenLabel,
+          'form-control--has-hidden-label': hasHiddenLabel,
           'form-control--has-help-text': hasHelpText
         })}
       >
@@ -362,7 +362,7 @@ export default class SlInput extends ShoelaceElement {
           part="form-control-label"
           class="form-control__label"
           for="input"
-          aria-hidden=${hasHiddenLabel ? 'false' : 'true'}
+          aria-hidden=${hasLabel || hasHiddenLabel ? 'false' : 'true'}
         >
           <slot name="label">${this.label}</slot>
         </label>
