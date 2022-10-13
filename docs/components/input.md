@@ -32,6 +32,20 @@ import { SlIcon, SlInput } from '@shoelace-style/shoelace/dist/react';
 const App = () => <SlInput label="What is your name?" />;
 ```
 
+### Hidden Labels
+
+Use the `hidden-label` attribute to hide label from user in a screen reader friendly way.
+
+```html preview
+<sl-input label="What is your name?" hidden-label></sl-input>
+```
+
+```jsx react
+import { SlIcon, SlInput } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => <SlInput label="What is your name?" hidden-label />;
+```
+
 ### Help Text
 
 Add descriptive help text to an input with the `help-text` attribute. For help texts that contain HTML, use the `help-text` slot instead.

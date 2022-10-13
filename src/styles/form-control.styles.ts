@@ -16,6 +16,17 @@ export default css`
     margin-bottom: var(--sl-spacing-3x-small);
   }
 
+  .form-control--has-label.form-control--has-hidden-label .form-control__label {
+    border: 0;
+    clip; rect(1px, 1px, 1px, 1px);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
   .form-control--has-label.form-control--small .form-control__label {
     font-size: var(--sl-input-label-font-size-small);
   }

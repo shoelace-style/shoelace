@@ -102,6 +102,9 @@ export default class SlInput extends ShoelaceElement {
   /** The input's label. If you need to display HTML, you can use the `label` slot instead. */
   @property() label = '';
 
+  /** Draws a hidden label only relevant for screen readers. */
+  @property({ attribute: 'hidden-label', type: Boolean, reflect: true }) hiddenLabel = false;
+
   /** The input's help text. If you need to display HTML, you can use the `help-text` slot instead. */
   @property({ attribute: 'help-text' }) helpText = '';
 
@@ -337,6 +340,7 @@ export default class SlInput extends ShoelaceElement {
     const hasLabelSlot = this.hasSlotController.test('label');
     const hasHelpTextSlot = this.hasSlotController.test('help-text');
     const hasLabel = this.label ? true : !!hasLabelSlot;
+    const hasHiddenLabel = this.hiddenLabel ? true : false;
     const hasHelpText = this.helpText ? true : !!hasHelpTextSlot;
     const hasClearIcon =
       this.clearable && !this.disabled && !this.readonly && (typeof this.value === 'number' || this.value.length > 0);
@@ -350,6 +354,7 @@ export default class SlInput extends ShoelaceElement {
           'form-control--medium': this.size === 'medium',
           'form-control--large': this.size === 'large',
           'form-control--has-label': hasLabel,
+          'form-control--has-hidden-label': hasLabel && hasHiddenLabel,
           'form-control--has-help-text': hasHelpText
         })}
       >
@@ -357,7 +362,7 @@ export default class SlInput extends ShoelaceElement {
           part="form-control-label"
           class="form-control__label"
           for="input"
-          aria-hidden=${hasLabel ? 'false' : 'true'}
+          aria-hidden=${hasLabel && hasHiddenLabel ? 'false' : 'true'}
         >
           <slot name="label">${this.label}</slot>
         </label>
