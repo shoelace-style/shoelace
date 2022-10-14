@@ -1,4 +1,4 @@
-import { expect, fixture, html, waitUntil } from '@open-wc/testing';
+import { expect, fixture, html, waitUntil, aTimeout } from '@open-wc/testing';
 import sinon from 'sinon';
 import type SlMenuItem from './menu-item';
 
@@ -26,9 +26,11 @@ describe('<sl-menu-item>', () => {
     const el = await fixture<SlMenuItem>(html` <sl-menu-item>Test</sl-menu-item> `);
 
     el.checked = true;
-    setTimeout(() => expect(el.getAttribute('aria-checked')).to.equal('true'));
+    await aTimeout(100);
+    expect(el.getAttribute('aria-checked')).to.equal('true');
     el.disabled = true;
-    setTimeout(() => expect(el.getAttribute('aria-disabled')).to.equal('true'));
+    await aTimeout(100);
+    expect(el.getAttribute('aria-disabled')).to.equal('true');
   });
 
   it('get text label', async () => {
