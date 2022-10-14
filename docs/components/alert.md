@@ -2,8 +2,6 @@
 
 [component-header:sl-alert]
 
-[component-description:sl-alert]
-
 ```html preview
 <sl-alert open>
   <sl-icon slot="icon" name="info-circle"></sl-icon>

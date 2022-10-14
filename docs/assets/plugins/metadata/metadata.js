@@ -386,25 +386,10 @@
                 ${component.status}
               </sl-badge>
             </div>
-          </div>
-        `;
 
-        return result.replace(/^ +| +$/gm, '');
-      });
-
-      // Handle [component-description] tags
-      content = content.replace(/\[component-description:([a-z-]+)\]/g, (match, tag) => {
-        const component = getComponent(metadata, tag);
-        let result = '';
-
-        if (!component) {
-          console.error(`Component not found in metadata: ${tag}`);
-          return next(content);
-        }
-
-        result += `
-          <div class="component-description">
-              <p>${component.description}</p>
+            <div class="component-header__summary">
+              <p>${component.summary}</p>
+            </div>
           </div>
         `;
 
