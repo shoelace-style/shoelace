@@ -1,0 +1,74 @@
+import ShoelaceElement from '../../internal/shoelace-element';
+import '../dropdown/dropdown';
+import '../icon-button/icon-button';
+import '../icon/icon';
+import '../menu/menu';
+import '../tag/tag';
+import type SlDropdown from '../dropdown/dropdown';
+import type { MenuSelectEventDetail } from '../menu/menu';
+import type SlMenu from '../menu/menu';
+import type { TemplateResult, CSSResultGroup } from 'lit';
+export default class SlSelect extends ShoelaceElement {
+    static styles: CSSResultGroup;
+    dropdown: SlDropdown;
+    control: SlDropdown;
+    input: HTMLInputElement;
+    menu: SlMenu;
+    private readonly formSubmitController;
+    private readonly hasSlotController;
+    private readonly localize;
+    private menuItems;
+    private resizeObserver;
+    private hasFocus;
+    private isOpen;
+    private displayLabel;
+    private displayTags;
+    multiple: boolean;
+    maxTagsVisible: number;
+    disabled: boolean;
+    name: string;
+    placeholder: string;
+    size: 'small' | 'medium' | 'large';
+    hoist: boolean;
+    value: string | string[];
+    filled: boolean;
+    pill: boolean;
+    label: string;
+    placement: 'top' | 'bottom';
+    helpText: string;
+    required: boolean;
+    clearable: boolean;
+    invalid: boolean;
+    defaultValue: string;
+    connectedCallback(): void;
+    firstUpdated(): void;
+    disconnectedCallback(): void;
+    reportValidity(): boolean;
+    setCustomValidity(message: string): void;
+    getValueAsArray(): string[];
+    focus(options?: FocusOptions): void;
+    blur(): void;
+    handleBlur(): void;
+    handleClearClick(event: MouseEvent): void;
+    handleDisabledChange(): void;
+    handleFocus(): void;
+    handleKeyDown(event: KeyboardEvent): void;
+    handleLabelClick(): void;
+    handleMenuSelect(event: CustomEvent<MenuSelectEventDetail>): void;
+    handleMenuShow(): void;
+    handleMenuHide(): void;
+    handleMenuItemLabelChange(): void;
+    handleMultipleChange(): void;
+    handleMenuSlotChange(): Promise<void>;
+    handleTagInteraction(event: KeyboardEvent | MouseEvent): void;
+    handleValueChange(): Promise<void>;
+    resizeMenu(): void;
+    syncItemsFromValue(): void;
+    syncValueFromItems(): void;
+    render(): TemplateResult<1>;
+}
+declare global {
+    interface HTMLElementTagNameMap {
+        'sl-select': SlSelect;
+    }
+}
