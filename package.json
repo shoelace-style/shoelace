@@ -33,6 +33,7 @@
   "scripts": {
     "start": "node scripts/build.js --bundle --serve",
     "build": "node scripts/build.js --bundle --types --copydir \"docs/dist\"",
+    "prepare": "node scripts/build.js --bundle --types --copydir \"docs/dist\"",
     "verify": "npm run prettier:check && npm run lint && npm run build && npm run test",
     "prepublishOnly": "npm run verify",
     "prettier": "prettier --write --loglevel warn .",
