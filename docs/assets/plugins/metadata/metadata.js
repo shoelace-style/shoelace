@@ -374,7 +374,7 @@
         result += `
           <div class="component-header">
             <div class="component-header__tag">
-              <code>&lt;${component.tagName}&gt; | ${component.name}</code>
+              <code>&lt;${component.tagName}&gt; | ${component.title ?? component.name}</code>
             </div>
 
             <div class="component-header__info">
@@ -385,6 +385,10 @@
               <sl-badge variant="${badgeType}" pill style="text-transform: capitalize;">
                 ${component.status}
               </sl-badge>
+            </div>
+
+            <div class="component-header__summary">
+              <p>${component.summary}</p>
             </div>
           </div>
         `;
