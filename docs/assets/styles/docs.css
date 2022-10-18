@@ -534,7 +534,7 @@ kbd,
 
 /* Lead sentences that occur immediately after the header */
 .component-header + p,
-.component-description {
+.component-header p {
   font-size: var(--sl-font-size-large);
   line-height: 1.6;
 }
