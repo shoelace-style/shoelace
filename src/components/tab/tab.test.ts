@@ -3,6 +3,15 @@ import sinon from 'sinon';
 import type SlTab from './tab';
 
 describe('<sl-tab>', () => {
+  it('passes accessibility test', async () => {
+    const el = await fixture<SlTab>(html`
+      <sl-tab-group>
+        <sl-tab slot="nav">Test</sl-tab>
+      </sl-tab-group>
+    `);
+    expect(el).to.be.accessible();
+  });
+
   it('should render default tab', async () => {
     const el = await fixture<SlTab>(html` <sl-tab>Test</sl-tab> `);
 
