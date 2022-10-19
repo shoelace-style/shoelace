@@ -2,8 +2,6 @@
 
 [component-header:sl-input]
 
-Inputs collect data from the user.
-
 ```html preview
 <sl-input></sl-input>
 ```
