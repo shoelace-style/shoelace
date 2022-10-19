@@ -5,6 +5,8 @@ import styles from './menu-label.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Menu labels are used to describe a group of menu items.
+ *
  * @since 2.0
  * @status stable
  *
