@@ -7,6 +7,8 @@ import styles from './radio.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Radios allow the user to select a single option from a group.
+ *
  * @since 2.0
  * @status stable
  *
