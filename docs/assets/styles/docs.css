@@ -508,16 +508,18 @@ kbd,
 
 /* Component headers */
 .component-header {
-  border-bottom: solid 1px var(--sl-color-neutral-200);
-  padding-bottom: 2rem;
   margin-top: -1rem;
-  margin-bottom: 2rem;
 }
 
 .component-header__tag {
   border-bottom: none;
   padding: 0;
   margin: 0.75rem 0 0.25rem 0;
+}
+
+.component-header__summary {
+  border-top: solid 1px var(--sl-color-neutral-200);
+  margin-top: 2rem;
 }
 
 .markdown-section .component-header__tag code {
@@ -538,6 +540,7 @@ kbd,
   font-size: var(--sl-font-size-large);
   line-height: 1.6;
 }
+
 
 /* Repo buttons */
 .repo-button--sponsor sl-icon {
