@@ -2,8 +2,6 @@
 
 [component-header:sl-range]
 
-Ranges allow the user to select a single value within a given range using a slider.
-
 ```html preview
 <sl-range></sl-range>
 ```
