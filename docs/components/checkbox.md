@@ -2,8 +2,6 @@
 
 [component-header:sl-checkbox]
 
-Checkboxes allow the user to toggle an option on or off.
-
 ```html preview
 <sl-checkbox>Checkbox</sl-checkbox>
 ```
