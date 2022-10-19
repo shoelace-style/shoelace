@@ -6,6 +6,8 @@ import styles from './spinner.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Spinners are used to show the progress of an indeterminate operation.
+ *
  * @since 2.0
  * @status stable
  *
