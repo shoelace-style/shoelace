@@ -7,6 +7,8 @@ import styles from './card.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Cards can be used to group related subjects in a container.
+ *
  * @since 2.0
  * @status stable
  *

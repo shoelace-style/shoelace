@@ -2,8 +2,6 @@
 
 [component-header:sl-card]
 
-Cards can be used to group related subjects in a container.
-
 ```html preview
 <sl-card class="card-overview">
   <img
