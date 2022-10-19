@@ -3,7 +3,8 @@ import ShoelaceElement from '../../internal/shoelace-element';
 import { LocalizeController } from '../../utilities/localize';
 
 /**
-
+ * @summary Formats a number as a human readable bytes value.
+ *
  * @since 2.0
  * @status stable
  */
