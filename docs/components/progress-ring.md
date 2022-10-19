@@ -2,8 +2,6 @@
 
 [component-header:sl-progress-ring]
 
-Progress rings are used to show the progress of a determinate operation in a circular fashion.
-
 ```html preview
 <sl-progress-ring value="25"></sl-progress-ring>
 ```
