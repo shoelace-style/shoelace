@@ -28,14 +28,16 @@ setBasePath('https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dis
 You'll need to tell Vue to ignore Shoelace components. This is pretty easy because they all start with `sl-`.
 
 ```js
-import { createApp } from 'vue';
+import Vue from 'vue';
 import App from './App.vue';
 
-const app = createApp(App);
+Vue.config.ignoredElements = [/sl-/];
 
-app.config.compilerOptions.isCustomElement = tag => tag.startsWith('sl-');
+const app = new Vue({
+  render: h => h(App)
+});
 
-app.mount('#app');
+app.$mount('#app');
 ```
 
 Now you can start using Shoelace components in your app!
@@ -56,31 +58,32 @@ One caveat is there's currently [no support for v-model on custom elements](http
 
 ```html
 <!-- This doesn't work -->
-<sl-input v-model="name">
-  <!-- This works, but it's a bit longer -->
-  <sl-input :value="name" @input="name = $event.target.value"></sl-input
-></sl-input>
+<sl-input v-model="name"></sl-input>
+<!-- This works, but it's a bit longer -->
+<sl-input :value="name" @input="name = $event.target.value"></sl-input>
 ```
 
 If that's too verbose for your liking, you can use a custom directive instead. [This utility](https://www.npmjs.com/package/@shoelace-style/vue-sl-model) adds a custom directive that will work just like `v-model` but for Shoelace components. To install it, use this command.
 
 ```bash
-npm install @shoelace-style/vue-sl-model
+npm install @shoelace-style/vue-sl-model@1
 ```
 
 Next, import the directive and enable it like this.
 
 ```js
+import Vue from 'vue';
 import ShoelaceModelDirective from '@shoelace-style/vue-sl-model';
-import { createApp } from 'vue';
 import App from './App.vue';
 
-const app = createApp(App);
-app.use(ShoelaceModelDirective);
+Vue.use(ShoelaceModelDirective);
+Vue.config.ignoredElements = [/sl-/]
 
-app.config.compilerOptions.isCustomElement = tag => tag.startsWith('sl-');
+const app = new Vue({
+  render: h => h(App)
+});
 
-app.mount('#app');
+app.$mount('#app');
 ```
 
 Now you can use the `v-sl-model` directive to keep your data in sync!
@@ -89,4 +92,4 @@ Now you can use the `v-sl-model` directive to keep your data in sync!
 <sl-input v-sl-model="name"></sl-input>
 ```
 
-?> Are you using Shoelace with Vue? [Help us improve this page!](https://github.com/shoelace-style/shoelace/blob/next/docs/frameworks/vue.md)
+?> Are you using Shoelace with Vue? [Help us improve this page!](https://github.com/shoelace-style/shoelace/blob/next/docs/frameworks/vue-2.md)
