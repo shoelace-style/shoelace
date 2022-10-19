@@ -11,6 +11,8 @@ import styles from './button.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Buttons represent actions that are available to the user.
+ *
  * @since 2.0
  * @status stable
  *
