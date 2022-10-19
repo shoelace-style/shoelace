@@ -6,6 +6,8 @@ import styles from './skeleton.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Skeletons are used to show where content will eventually be drawn.
+ *
  * @since 2.0
  * @status stable
  *

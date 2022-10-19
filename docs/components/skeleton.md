@@ -2,8 +2,6 @@
 
 [component-header:sl-skeleton]
 
-Skeletons are used to show where content will eventually be drawn.
-
 These are simple containers for scaffolding layouts that mimic what users will see when content has finished loading. This prevents large areas of empty space during asynchronous operations.
 
 Skeletons try not to be opinionated, as there are endless possibilities for designing layouts. Therefore, you'll likely use more than one skeleton to create the effect you want. If you find yourself using them frequently, consider creating a template that renders them with the desired arrangement and styles.
