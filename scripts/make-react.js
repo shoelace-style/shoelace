@@ -38,12 +38,11 @@ components.map(component => {
     `
       import * as React from 'react';
       import { createComponent } from '@lit-labs/react';
-      import Component from '../../${importPath}';
 
       export default createComponent(
         React,
         '${component.tagName}',
-        Component,
+        window.customElements.get('${component.tagName}')!,
         {
           ${events}
         }
