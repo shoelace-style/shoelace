@@ -19,6 +19,8 @@ import type SlPopup from '../popup/popup';
 import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Dropdowns expose additional content that "drops down" in a panel.
+ *
  * @since 2.0
  * @status stable
  *
