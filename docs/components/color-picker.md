@@ -2,8 +2,6 @@
 
 [component-header:sl-color-picker]
 
-Color pickers allow the user to select a color.
-
 ```html preview
 <sl-color-picker label="Select a color"></sl-color-picker>
 ```
