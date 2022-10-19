@@ -2,8 +2,6 @@
 
 [component-header:sl-button-group]
 
-Button groups can be used to group related buttons into sections.
-
 ```html preview
 <sl-button-group>
   <sl-button>Left</sl-button>
