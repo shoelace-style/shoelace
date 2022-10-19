@@ -21,6 +21,8 @@ import type SlMenu from '../menu/menu';
 import type { TemplateResult, CSSResultGroup } from 'lit';
 
 /**
+ * @summary Selects allow you to choose one or more items from a dropdown menu.
+ *
  * @since 2.0
  * @status stable
  *
