@@ -2,8 +2,6 @@
 
 [component-header:sl-progress-bar]
 
-Progress bars are used to show the status of an ongoing operation.
-
 ```html preview
 <sl-progress-bar value="50"></sl-progress-bar>
 ```

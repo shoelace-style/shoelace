@@ -9,6 +9,8 @@ import styles from './progress-bar.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Progress bars are used to show the status of an ongoing operation.
+ *
  * @since 2.0
  * @status stable
  *
