@@ -12,6 +12,8 @@ import styles from './details.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Details show a brief summary and expand to show additional content.
+ *
  * @since 2.0
  * @status stable
  *
