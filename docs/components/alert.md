@@ -2,8 +2,6 @@
 
 [component-header:sl-alert]
 
-Alerts are used to display important messages inline or as toast notifications.
-
 ```html preview
 <sl-alert open>
   <sl-icon slot="icon" name="info-circle"></sl-icon>

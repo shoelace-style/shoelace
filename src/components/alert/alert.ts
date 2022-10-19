@@ -15,6 +15,9 @@ import type { CSSResultGroup } from 'lit';
 const toastStack = Object.assign(document.createElement('div'), { className: 'sl-toast-stack' });
 
 /**
+ * @title Alert
+ * @summary Alerts are used to display important messages inline or as toast notifications.
+ *
  * @since 2.0
  * @status stable
  *
