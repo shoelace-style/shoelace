@@ -518,6 +518,8 @@ kbd,
 }
 
 .component-header__summary {
+  font-size: var(--sl-font-size-large);
+  line-height: 1.6;
   border-top: solid 1px var(--sl-color-neutral-200);
   margin-top: 2rem;
 }
@@ -532,13 +534,6 @@ kbd,
 
 .component-header__info {
   margin-bottom: 0.5rem;
-}
-
-/* Lead sentences that occur immediately after the header */
-.component-header + p,
-.component-header p {
-  font-size: var(--sl-font-size-large);
-  line-height: 1.6;
 }
 
 /* Repo buttons */
