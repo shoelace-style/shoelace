@@ -12,6 +12,8 @@ import styles from './rating.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Ratings give users a way to quickly view and provide feedback.
+ *
  * @since 2.0
  * @status stable
  *
