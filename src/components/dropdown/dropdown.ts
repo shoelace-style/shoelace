@@ -344,8 +344,10 @@ export default class SlDropdown extends ShoelaceElement {
   }
 
   removeOpenListeners() {
-    this.panel.removeEventListener('sl-activate', this.handleMenuItemActivate);
-    this.panel.removeEventListener('sl-select', this.handlePanelSelect);
+    if (this.panel) {
+      this.panel.removeEventListener('sl-activate', this.handleMenuItemActivate);
+      this.panel.removeEventListener('sl-select', this.handlePanelSelect);
+    }
     document.removeEventListener('keydown', this.handleDocumentKeyDown);
     document.removeEventListener('mousedown', this.handleDocumentMouseDown);
   }
