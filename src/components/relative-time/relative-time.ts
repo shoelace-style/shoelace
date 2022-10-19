@@ -19,6 +19,8 @@ const availableUnits: UnitConfig[] = [
 ];
 
 /**
+ * @summary Outputs a localized time phrase relative to the current date and time.
+ *
  * @since 2.0
  * @status stable
  */

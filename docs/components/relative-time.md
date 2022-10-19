@@ -2,8 +2,6 @@
 
 [component-header:sl-relative-time]
 
-Outputs a localized time phrase relative to the current date and time.
-
 Localization is handled by the browser's [`Intl.RelativeTimeFormat` API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/RelativeTimeFormat). No language packs are required.
 
 ```html preview
