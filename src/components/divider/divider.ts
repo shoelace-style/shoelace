@@ -5,6 +5,8 @@ import styles from './divider.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Dividers are used to visually separate or group elements.
+ *
  * @since 2.0
  * @status stable
  *

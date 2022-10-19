@@ -2,8 +2,6 @@
 
 [component-header:sl-divider]
 
-Dividers are used to visually separate or group elements.
-
 ```html preview
 <sl-divider></sl-divider>
 ```
