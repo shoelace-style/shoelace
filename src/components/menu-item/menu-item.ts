@@ -9,6 +9,8 @@ import styles from './menu-item.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Menu items provide options for the user to pick from in a menu.
+ *
  * @since 2.0
  * @status stable
  *
