@@ -3,6 +3,8 @@ import ShoelaceElement from '../../internal/shoelace-element';
 import { LocalizeController } from '../../utilities/localize';
 
 /**
+ * @summary Formats a number using the specified locale and options.
+ *
  * @since 2.0
  * @status stable
  */
