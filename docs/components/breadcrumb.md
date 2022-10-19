@@ -2,8 +2,6 @@
 
 [component-header:sl-breadcrumb]
 
-Breadcrumbs provide a group of links so users can easily navigate a website's hierarchy.
-
 Breadcrumbs are usually placed before a page's main content with the current page shown last to indicate the user's position in the navigation.
 
 ```html preview

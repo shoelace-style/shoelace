@@ -8,6 +8,8 @@ import type SlBreadcrumbItem from '../breadcrumb-item/breadcrumb-item';
 import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Breadcrumbs provide a group of links so users can easily navigate a website's hierarchy.
+ *
  * @since 2.0
  * @status stable
  *
