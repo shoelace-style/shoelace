@@ -6,6 +6,8 @@ import styles from './mutation-observer.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary The Mutation Observer component offers a thin, declarative interface to the <a href="https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver" target="_blank" rel="noopener"><code>MutationObserver API</code></a>.
+ *
  * @since 2.0
  * @status stable
  *
