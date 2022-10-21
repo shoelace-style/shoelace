@@ -2,8 +2,6 @@
 
 [component-header:sl-tab-panel]
 
-Tab panels are used inside [tab groups](/components/tab-group) to display tabbed content.
-
 ```html preview
 <sl-tab-group>
   <sl-tab slot="nav" panel="general">General</sl-tab>
