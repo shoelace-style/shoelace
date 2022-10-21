@@ -7,7 +7,6 @@ import styles from './animated-image.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
- * @title AnimatedImage
  * @summary A component for displaying animated GIFs and WEBPs that play and pause on interaction.
  *
  * @since 2.0
