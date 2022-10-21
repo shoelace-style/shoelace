@@ -206,7 +206,7 @@ Footers can be used to display actions, summaries, or other relevant content.
 
   <div slot="footer">
     <sl-rating></sl-rating>
-    <sl-button slot="footer" variant="primary">Preview</sl-button>
+    <sl-button variant="primary">Preview</sl-button>
   </div>
 </sl-card>
 
