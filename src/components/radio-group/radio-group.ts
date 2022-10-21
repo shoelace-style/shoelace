@@ -11,6 +11,8 @@ import type SlRadio from '../radio/radio';
 import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Radio groups are used to group multiple <a href="/components/radio">radios</a> or <a href="/components/radio-button">radio buttons</a> so they function as a single form control.
+ *
  * @since 2.0
  * @status stable
  *
