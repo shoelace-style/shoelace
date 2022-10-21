@@ -8,7 +8,7 @@ import styles from './breadcrumb-item.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
- * @summary Breadcrumb Items are used inside <a href="/components/breadcrumb">breadcrumbs</a> to represent different links.
+ * @summary Breadcrumb Items are used inside [breadcrumbs](/components/breadcrumb) to represent different links.
  *
  * @since 2.0
  * @status stable
