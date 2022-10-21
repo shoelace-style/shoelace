@@ -2,8 +2,6 @@
 
 [component-header:sl-spinner]
 
-Spinners are used to show the progress of an indeterminate operation.
-
 ```html preview
 <sl-spinner></sl-spinner>
 ```

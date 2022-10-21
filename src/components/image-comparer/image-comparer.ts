@@ -12,6 +12,8 @@ import styles from './image-comparer.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Compare visual differences between similar photos with a sliding panel.
+ *
  * @since 2.0
  * @status stable
  *

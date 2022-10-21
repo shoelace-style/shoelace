@@ -6,6 +6,8 @@ import styles from './progress-ring.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Progress rings are used to show the progress of a determinate operation in a circular fashion.
+ *
  * @since 2.0
  * @status stable
  *

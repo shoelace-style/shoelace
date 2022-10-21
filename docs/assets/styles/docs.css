@@ -508,16 +508,20 @@ kbd,
 
 /* Component headers */
 .component-header {
-  border-bottom: solid 1px var(--sl-color-neutral-200);
-  padding-bottom: 2rem;
   margin-top: -1rem;
-  margin-bottom: 2rem;
 }
 
 .component-header__tag {
   border-bottom: none;
   padding: 0;
   margin: 0.75rem 0 0.25rem 0;
+}
+
+.component-header__summary {
+  font-size: var(--sl-font-size-large);
+  line-height: 1.6;
+  border-top: solid 1px var(--sl-color-neutral-200);
+  margin-top: 2rem;
 }
 
 .markdown-section .component-header__tag code {
@@ -530,13 +534,6 @@ kbd,
 
 .component-header__info {
   margin-bottom: 0.5rem;
-}
-
-/* Lead sentences that occur immediately after the header */
-.component-header + p,
-.component-header p {
-  font-size: var(--sl-font-size-large);
-  line-height: 1.6;
 }
 
 /* Repo buttons */

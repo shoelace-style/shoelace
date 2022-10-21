@@ -12,6 +12,8 @@ import styles from './textarea.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Textareas collect data from the user and allow multiple lines of text.
+ *
  * @since 2.0
  * @status stable
  *

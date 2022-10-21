@@ -2,8 +2,6 @@
 
 [component-header:sl-rating]
 
-Ratings give users a way to quickly view and provide feedback.
-
 ```html preview
 <sl-rating label="Rating"></sl-rating>
 ```

@@ -13,6 +13,8 @@ import styles from './range.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Ranges allow the user to select a single value within a given range using a slider.
+ *
  * @since 2.0
  * @status stable
  *

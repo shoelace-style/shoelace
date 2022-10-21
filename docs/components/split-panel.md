@@ -2,8 +2,6 @@
 
 [component-header:sl-split-panel]
 
-Split panels display two adjacent panels, allowing the user to reposition them.
-
 ```html preview
 <sl-split-panel>
   <div

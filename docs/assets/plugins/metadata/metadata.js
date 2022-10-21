@@ -388,7 +388,7 @@
             </div>
 
             <div class="component-header__summary">
-              <p>${component.summary}</p>
+              <p>${marked(component.summary)}</p>
             </div>
           </div>
         `;

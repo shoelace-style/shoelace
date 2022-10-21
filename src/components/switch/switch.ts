@@ -11,6 +11,8 @@ import styles from './switch.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Switches allow the user to toggle an option on or off.
+ *
  * @since 2.0
  * @status stable
  *

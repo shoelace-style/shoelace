@@ -2,8 +2,6 @@
 
 [component-header:sl-avatar]
 
-Avatars are used to represent a person or object.
-
 By default, a generic icon will be shown. You can personalize avatars by adding custom icons, initials, and images. You should always provide a `label` for assistive devices.
 
 ```html preview

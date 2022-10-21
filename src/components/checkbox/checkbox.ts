@@ -11,6 +11,8 @@ import styles from './checkbox.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Checkboxes allow the user to toggle an option on or off.
+ *
  * @since 2.0
  * @status stable
  *

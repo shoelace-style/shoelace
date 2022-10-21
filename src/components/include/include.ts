@@ -7,6 +7,8 @@ import { requestInclude } from './request';
 import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Includes give you the power to embed external HTML files into the page.
+ *
  * @since 2.0
  * @status stable
  *

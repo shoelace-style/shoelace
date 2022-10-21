@@ -2,8 +2,6 @@
 
 [component-header:sl-radio-button]
 
-Radios buttons allow the user to select a single option from a group using a button-like control.
-
 Radio buttons are designed to be used with [radio groups](/components/radio-group). When a radio button has focus, the arrow keys can be used to change the selected option just like standard radio controls.
 
 ```html preview

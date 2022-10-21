@@ -12,6 +12,8 @@ import type SlTab from '../tab/tab';
 import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Tab groups organize content into a container that shows one section at a time.
+ *
  * @since 2.0
  * @status stable
  *

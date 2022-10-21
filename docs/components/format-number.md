@@ -2,8 +2,6 @@
 
 [component-header:sl-format-number]
 
-Formats a number using the specified locale and options.
-
 Localization is handled by the browser's [`Intl.NumberFormat` API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat). No language packs are required.
 
 ```html preview

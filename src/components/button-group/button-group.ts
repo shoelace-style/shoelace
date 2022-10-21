@@ -5,6 +5,8 @@ import styles from './button-group.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Button groups can be used to group related buttons into sections.
+ *
  * @since 2.0
  * @status stable
  *

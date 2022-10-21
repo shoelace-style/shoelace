@@ -16,6 +16,8 @@ import styles from './dialog.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Dialogs, sometimes called "modals", appear above the page and require the user's immediate attention.
+ *
  * @since 2.0
  * @status stable
  *

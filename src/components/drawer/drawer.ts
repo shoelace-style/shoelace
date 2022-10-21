@@ -17,6 +17,8 @@ import styles from './drawer.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Drawers slide in from a container to expose additional options and information.
+ *
  * @since 2.0
  * @status stable
  *

@@ -10,6 +10,8 @@ export interface MenuSelectEventDetail {
 }
 
 /**
+ * @summary Menus provide a list of options for the user to choose from.
+ *
  * @since 2.0
  * @status stable
  *

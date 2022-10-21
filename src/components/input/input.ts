@@ -25,6 +25,8 @@ const isChromium = navigator.userAgentData?.brands.some(b => b.brand.includes('C
 const isFirefox = isChromium ? false : navigator.userAgent.includes('Firefox');
 
 /**
+ * @summary Inputs collect data from the user.
+ *
  * @since 2.0
  * @status stable
  *

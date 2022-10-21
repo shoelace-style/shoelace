@@ -7,6 +7,8 @@ import styles from './popup.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Popup is a utility that lets you declaratively anchor "popup" containers to another element.
+ *
  * @since 2.0
  * @status stable
  *

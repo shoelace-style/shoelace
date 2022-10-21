@@ -2,8 +2,6 @@
 
 [component-header:sl-tree-item]
 
-A tree item serves as a hierarchical node that lives inside a [tree](/components/tree).
-
 ```html preview
 <sl-tree>
   <sl-tree-item>

@@ -8,6 +8,8 @@ import styles from './icon-button.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Icons buttons are simple, icon-only buttons that can be used for actions and in toolbars.
+ *
  * @since 2.0
  * @status stable
  *

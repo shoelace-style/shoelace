@@ -36,6 +36,8 @@ interface EyeDropperInterface {
 declare const EyeDropper: EyeDropperConstructor;
 
 /**
+ * @summary Color pickers allow the user to select a color.
+ *
  * @since 2.0
  * @status stable
  *

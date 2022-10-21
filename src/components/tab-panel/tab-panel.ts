@@ -8,6 +8,8 @@ import styles from './tab-panel.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Tab panels are used inside [tab groups](/components/tab-group) to display tabbed content.
+ *
  * @since 2.0
  * @status stable
  *

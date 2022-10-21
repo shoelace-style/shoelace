@@ -19,6 +19,8 @@ export function isTreeItem(element: Element) {
 }
 
 /**
+ * @summary A tree item serves as a hierarchical node that lives inside a [tree](/components/tree).
+ *
  * @since 2.0
  * @status experimental
  *

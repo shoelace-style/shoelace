@@ -2,8 +2,6 @@
 
 [component-header:sl-include]
 
-Includes give you the power to embed external HTML files into the page.
-
 Included files are asynchronously requested using `window.fetch()`. Requests are cached, so the same file can be included multiple times, but only one request will be made.
 
 The included content will be inserted into the `<sl-include>` element's default slot so it can be easily accessed and styled through the light DOM.

@@ -6,6 +6,8 @@ import styles from './badge.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Badges are used to draw attention and display statuses or counts.
+ *
  * @since 2.0
  * @status stable
  *

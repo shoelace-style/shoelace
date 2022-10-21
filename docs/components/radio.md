@@ -2,8 +2,6 @@
 
 [component-header:sl-radio]
 
-Radios allow the user to select a single option from a group.
-
 Radios are designed to be used with [radio groups](/components/radio-group).
 
 ```html preview

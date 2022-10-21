@@ -2,8 +2,6 @@
 
 [component-header:sl-icon-button]
 
-Icons buttons are simple, icon-only buttons that can be used for actions and in toolbars.
-
 For a full list of icons that come bundled with Shoelace, refer to the [icon component](/components/icon).
 
 ```html preview

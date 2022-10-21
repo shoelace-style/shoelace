@@ -12,6 +12,8 @@ import type { CSSResultGroup } from 'lit';
 let parser: DOMParser;
 
 /**
+ * @summary Icons are symbols that can be used to represent various options within an application.
+ *
  * @since 2.0
  * @status stable
  *

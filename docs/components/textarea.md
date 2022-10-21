@@ -2,8 +2,6 @@
 
 [component-header:sl-textarea]
 
-Textareas collect data from the user and allow multiple lines of text.
-
 ```html preview
 <sl-textarea></sl-textarea>
 ```

@@ -8,6 +8,8 @@ import styles from './avatar.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Avatars are used to represent a person or object.
+ *
  * @since 2.0
  * @status stable
  *

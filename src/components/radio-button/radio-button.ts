@@ -9,6 +9,8 @@ import styles from './radio-button.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Radios buttons allow the user to select a single option from a group using a button-like control.
+ *
  * @since 2.0
  * @status stable
  *

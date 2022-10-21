@@ -7,6 +7,8 @@ import { animations } from './animations';
 import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Animate elements declaratively with nearly 100 baked-in presets, or roll your own with custom keyframes. Powered by the [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API).
+ *
  * @since 2.0
  * @status stable
  *

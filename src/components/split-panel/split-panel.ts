@@ -10,6 +10,8 @@ import styles from './split-panel.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Split panels display two adjacent panels, allowing the user to reposition them.
+ *
  * @since 2.0
  * @status stable
  *
