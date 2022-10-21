@@ -2,8 +2,6 @@
 
 [component-header:sl-tree]
 
-Trees allow you to display a hierarchical list of selectable [tree items](/components/tree-item). Items with children can be expanded and collapsed as desired by the user.
-
 ```html preview
 <sl-tree>
   <sl-tree-item>

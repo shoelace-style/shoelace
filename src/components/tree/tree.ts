@@ -37,6 +37,8 @@ function syncCheckboxes(changedTreeItem: SlTreeItem) {
 }
 
 /**
+ * @summary Trees allow you to display a hierarchical list of selectable <a href="/components/tree-item">tree items</a>. Items with children can be expanded and collapsed as desired by the user.
+ *
  * @since 2.0
  * @status experimental
  *
