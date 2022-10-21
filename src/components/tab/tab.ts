@@ -10,6 +10,8 @@ import styles from './tab.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Tabs are used inside <a href="/components/tab-group">tab groups</a> to represent and activate <a href="/components/tab-panel">tab panels</a>.
+ *
  * @since 2.0
  * @status stable
  *
