@@ -77,7 +77,7 @@ import ShoelaceModelDirective from '@shoelace-style/vue-sl-model';
 import App from './App.vue';
 
 Vue.use(ShoelaceModelDirective);
-Vue.config.ignoredElements = [/sl-/]
+Vue.config.ignoredElements = [/sl-/];
 
 const app = new Vue({
   render: h => h(App)
