@@ -86,7 +86,7 @@ const App = () => (
 
 ### Theme Buttons
 
-Theme buttons are supported through the button's `type` attribute.
+Theme buttons are supported through the button's `variant` attribute.
 
 ```html preview
 <sl-button-group>
