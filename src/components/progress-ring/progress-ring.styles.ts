@@ -10,6 +10,7 @@ export default css`
     --track-color: var(--sl-color-neutral-200);
     --indicator-width: var(--track-width);
     --indicator-color: var(--sl-color-primary-600);
+    --indicator-transition-duration: 0.35s;
 
     display: inline-flex;
   }
@@ -48,7 +49,8 @@ export default css`
     stroke: var(--indicator-color);
     stroke-width: var(--indicator-width);
     stroke-linecap: round;
-    transition: 0.35s stroke-dashoffset;
+    transition-property: stroke-dashoffset;
+    transition-duration: var(--indicator-transition-duration);
     stroke-dasharray: var(--circumference) var(--circumference);
     stroke-dashoffset: calc(var(--circumference) - var(--percentage) * var(--circumference));
   }

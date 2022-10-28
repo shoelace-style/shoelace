@@ -12,6 +12,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 - Added `button--checked` to `<sl-radio-button>` and `control--checked` to `<sl-radio>` to style just the checked state [#933](https://github.com/shoelace-style/shoelace/pull/933)
 - Added tests for `<sl-menu-item>` and `<sl-menu-label>` [#935](https://github.com/shoelace-style/shoelace/pull/935)
+- Added `--indicator-transition-duration` custom property to `<sl-progress-ring>` [#986](https://github.com/shoelace-style/shoelace/issues/986)
 - Fixed a bug in `<sl-card>` that prevented the border radius to apply correctly to the header [#934](https://github.com/shoelace-style/shoelace/pull/934)
 - Fixed a bug in `<sl-button-group>` where the inner border disappeared on focus [#980](https://github.com/shoelace-style/shoelace/pull/980)
 - Improved `<sl-badge>` to improve padding and render relative to the current font size

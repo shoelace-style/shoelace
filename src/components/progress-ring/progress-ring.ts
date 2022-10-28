@@ -21,6 +21,7 @@ import type { CSSResultGroup } from 'lit';
  * @cssproperty --track-color - The color of the track.
  * @cssproperty --indicator-width - The width of the indicator. Defaults to the track width.
  * @cssproperty --indicator-color - The indicator color.
+ * @cssproperty --indicator-transition-duration - The duration of the indicator's transition when the value changes.
  */
 @customElement('sl-progress-ring')
 export default class SlProgressRing extends ShoelaceElement {
