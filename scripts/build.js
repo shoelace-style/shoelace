@@ -9,6 +9,7 @@ import getPort, { portNumbers } from 'get-port';
 import { globby } from 'globby';
 import open from 'open';
 import copy from 'recursive-copy';
+import path from 'path';
 
 const { bundle, copydir, dir, serve, types } = commandLineArgs([
   { name: 'bundle', type: Boolean },
@@ -40,18 +41,6 @@ fs.mkdirSync(outdir, { recursive: true });
     console.error(chalk.red(err));
     process.exit(1);
   }
-
-  let onResolvePlugin = {
-    name: 'ghpages',
-    setup(build) {
-      let path = require('path');
-
-      // Redirect all paths starting with "assets/" to "./shoelace/assets/"
-      build.onResolve({ filter: /^assets\// }, args => {
-        return { path: path.join(args.resolveDir, 'shoelace', args.path) };
-      });
-    }
-  };
 
   const alwaysExternal = ['@lit-labs/react', 'react'];
   const buildResult = await esbuild
@@ -90,7 +79,7 @@ fs.mkdirSync(outdir, { recursive: true });
         ? alwaysExternal
         : [...alwaysExternal, '@floating-ui/dom', '@shoelace-style/animations', 'lit', 'qr-creator'],
       splitting: true,
-      plugins: [onResolvePlugin]
+      plugins: []
     })
     .catch(err => {
       console.error(chalk.red(err));
