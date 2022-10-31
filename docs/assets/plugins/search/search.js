@@ -99,7 +99,7 @@
     let map;
 
     // Load search data
-    fetch('../../../search.json')
+    fetch('./shoelace/search.json')
       .then(res => res.json())
       .then(data => {
         searchIndex = lunr.Index.load(data.searchIndex);
