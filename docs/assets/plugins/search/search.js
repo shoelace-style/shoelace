@@ -99,7 +99,7 @@
     let map;
 
     // Load search data
-    fetch('./shoelace/search.json')
+    fetch('https://teamshares.github.io/shoelace/search.json')
       .then(res => res.json())
       .then(data => {
         searchIndex = lunr.Index.load(data.searchIndex);
