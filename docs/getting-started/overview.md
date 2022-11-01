@@ -2,7 +2,7 @@
 <div class="splash-start">
 <img class="splash-logo" src="/shoelace/assets/images/wordmark.svg" alt="Shoelace">
 
-# <sl-visually-hidden>Shoelace:</sl-visually-hidden> A forward-thinking library of web components.
+# <sl-visually-hidden>Shoelace:</sl-visually-hidden> A forward-thinking library of web components, plus Teamshares overrrides.
 
 - Works with all frameworks 🧩
 - Works with CDNs 🚛
