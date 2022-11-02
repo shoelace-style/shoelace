@@ -9,7 +9,7 @@ describe('<sl-tab>', () => {
         <sl-tab slot="nav">Test</sl-tab>
       </sl-tab-group>
     `);
-    expect(el).to.be.accessible();
+    await expect(el).to.be.accessible();
   });
 
   it('should render default tab', async () => {
