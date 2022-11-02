@@ -2,7 +2,7 @@ import { registerTranslation } from '../utilities/localize';
 import type { Translation } from '../utilities/localize';
 
 const translation: Translation = {
-  $code: 'en',
+  $code: 'en-GB',
   $name: 'English (United Kingdom)',
   $dir: 'ltr',
 
