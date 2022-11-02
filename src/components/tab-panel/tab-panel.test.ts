@@ -4,7 +4,7 @@ import type SlTabPanel from './tab-panel';
 describe('<sl-tab-panel>', () => {
   it('passes accessibility test', async () => {
     const el = await fixture<SlTabPanel>(html` <sl-tab-panel>Test</sl-tab-panel> `);
-    expect(el).to.be.accessible();
+    await expect(el).to.be.accessible();
   });
 
   it('default properties', async () => {
