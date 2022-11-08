@@ -27,6 +27,25 @@ describe('<sl-icon-button>', () => {
     });
   });
 
+  describe('when styling the host element', () => {
+    it('renders the correct color and font size', async () => {
+      const el = await fixture<SlIconButton>(
+        html`
+          <sl-icon-button
+            library="system"
+            name="check-lg"
+            style="color: rgb(0, 136, 221); font-size: 2rem;"
+          ></sl-icon-button>
+        `
+      );
+      const icon = el.shadowRoot!.querySelector('sl-icon')!;
+      const styles = getComputedStyle(icon);
+
+      expect(styles.color).to.equal('rgb(0, 136, 221)');
+      expect(styles.fontSize).to.equal('32px');
+    });
+  });
+
   describe('when icon attributes are present', () => {
     it('renders an sl-icon from a library', async () => {
       const el = await fixture<SlIconButton>(
