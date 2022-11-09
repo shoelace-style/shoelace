@@ -274,7 +274,6 @@ export default class SlDrawer extends ShoelaceElement {
     }
   }
 
-  /* eslint-disable lit-a11y/click-events-have-key-events */
   render() {
     return html`
       <div
@@ -334,7 +333,6 @@ export default class SlDrawer extends ShoelaceElement {
         </div>
       </div>
     `;
-    /* eslint-enable lit-a11y/click-events-have-key-events */
   }
 }
 

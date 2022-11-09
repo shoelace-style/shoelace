@@ -252,7 +252,6 @@ export default class SlDialog extends ShoelaceElement {
   }
 
   render() {
-    /* eslint-disable lit-a11y/click-events-have-key-events */
     return html`
       <div
         part="base"
@@ -303,7 +302,6 @@ export default class SlDialog extends ShoelaceElement {
         </div>
       </div>
     `;
-    /* eslint-enable lit-a11y/click-events-have-key-events */
   }
 }
 

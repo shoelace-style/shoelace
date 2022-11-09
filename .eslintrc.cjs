@@ -105,6 +105,7 @@ module.exports = {
     curly: 'off',
     'default-param-last': 'error',
     eqeqeq: 'error',
+    'lit-a11y/click-events-have-key-events': 'off',
     'no-constructor-return': 'error',
     'no-empty-function': 'warn',
     'no-eval': 'error',
