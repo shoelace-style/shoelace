@@ -85,6 +85,10 @@ export default class SlRadioGroup extends ShoelaceElement {
     this.defaultValue = this.value;
   }
 
+  firstUpdated() {
+    this.invalid = !this.validity.valid;
+  }
+
   /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
   setCustomValidity(message = '') {
     this.customErrorMessage = message;
@@ -229,6 +233,7 @@ export default class SlRadioGroup extends ShoelaceElement {
   updateCheckedRadio() {
     const radios = this.getAllRadios();
     radios.forEach(radio => (radio.checked = radio.value === this.value));
+    this.invalid = !this.validity.valid;
   }
 
   render() {

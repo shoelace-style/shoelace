@@ -6,6 +6,31 @@ import type SlRadioGroup from './radio-group';
 
 describe('<sl-radio-group>', () => {
   describe('validation tests', () => {
+    it('should be invalid initially when required and no radio is checked', async () => {
+      const radioGroup = await fixture<SlRadioGroup>(html`
+        <sl-radio-group required>
+          <sl-radio value="1"></sl-radio>
+          <sl-radio value="2"></sl-radio>
+        </sl-radio-group>
+      `);
+
+      expect(radioGroup.invalid).to.be.true;
+    });
+
+    it('should become valid when an option is checked', async () => {
+      const radioGroup = await fixture<SlRadioGroup>(html`
+        <sl-radio-group required>
+          <sl-radio value="1"></sl-radio>
+          <sl-radio value="2"></sl-radio>
+        </sl-radio-group>
+      `);
+
+      radioGroup.value = '1';
+      await radioGroup.updateComplete;
+
+      expect(radioGroup.invalid).to.be.false;
+    });
+
     it(`should be valid when required and one radio is checked`, async () => {
       const el = await fixture<SlRadioGroup>(html`
         <sl-radio-group label="Select an option" value="1" required>
