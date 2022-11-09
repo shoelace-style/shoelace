@@ -319,7 +319,9 @@ export default class SlInput extends ShoelaceElement {
     // submitting to allow users to cancel the keydown event if they need to
     if (event.key === 'Enter' && !hasModifier) {
       setTimeout(() => {
-        if (!event.defaultPrevented) {
+        // isComposing is true when enter key is pressed while choosing the chinese/japanese/etc character
+        // so this check will prevent form submitting after choosing character by enter key pressing
+        if (!event.defaultPrevented && !event.isComposing) {
           this.formSubmitController.submit();
         }
       });
