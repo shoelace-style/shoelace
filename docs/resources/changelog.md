@@ -20,6 +20,8 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug that caused prefix/suffix animations in `<sl-input>` to wobble [#996](https://github.com/shoelace-style/shoelace/issues/996)
 - Fixed a bug in `<sl-icon>` that prevented color from being set on the host element [#999](https://github.com/shoelace-style/shoelace/issues/999)
 - Fixed a bug in `<sl-dropdown>` where the `keydown` event erroneously propagated to ancestors when pressing <kbd>Escape</kbd> [#990](https://github.com/shoelace-style/shoelace/issues/990)
+- Fixed a bug that prevented arrow keys from scrolling content within `<sl-dialog>` and `<sl-drawer>` [#925](https://github.com/shoelace-style/shoelace/issues/925)
+- Fixed a bug that prevented <kbd>Escape</kbd> from closing `<sl-dialog>` and `<sl-drawer>` in some cases
 - Improved `<sl-badge>` to improve padding and render relative to the current font size
 - Updated Lit to 2.4.1
 - Updated TypeScript to 4.8.4

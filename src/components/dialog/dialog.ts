@@ -90,6 +90,7 @@ export default class SlDialog extends ShoelaceElement {
 
   connectedCallback() {
     super.connectedCallback();
+    this.handleDocumentKeyDown = this.handleDocumentKeyDown.bind(this);
     this.modal = new Modal(this);
   }
 
@@ -97,6 +98,7 @@ export default class SlDialog extends ShoelaceElement {
     this.dialog.hidden = !this.open;
 
     if (this.open) {
+      this.addOpenListeners();
       this.modal.activate();
       lockBodyScrolling(this);
     }
@@ -142,8 +144,16 @@ export default class SlDialog extends ShoelaceElement {
     this.hide();
   }
 
-  handleKeyDown(event: KeyboardEvent) {
-    if (event.key === 'Escape') {
+  addOpenListeners() {
+    document.addEventListener('keydown', this.handleDocumentKeyDown);
+  }
+
+  removeOpenListeners() {
+    document.removeEventListener('keydown', this.handleDocumentKeyDown);
+  }
+
+  handleDocumentKeyDown(event: KeyboardEvent) {
+    if (this.open && event.key === 'Escape') {
       event.stopPropagation();
       this.requestClose('keyboard');
     }
@@ -154,6 +164,7 @@ export default class SlDialog extends ShoelaceElement {
     if (this.open) {
       // Show
       this.emit('sl-show');
+      this.addOpenListeners();
       this.originalTrigger = document.activeElement as HTMLElement;
       this.modal.activate();
 
@@ -203,6 +214,7 @@ export default class SlDialog extends ShoelaceElement {
     } else {
       // Hide
       this.emit('sl-hide');
+      this.removeOpenListeners();
       this.modal.deactivate();
 
       await Promise.all([stopAnimations(this.dialog), stopAnimations(this.overlay)]);
@@ -249,7 +261,6 @@ export default class SlDialog extends ShoelaceElement {
           'dialog--open': this.open,
           'dialog--has-footer': this.hasSlotController.test('footer')
         })}
-        @keydown=${this.handleKeyDown}
       >
         <div part="overlay" class="dialog__overlay" @click=${() => this.requestClose('overlay')} tabindex="-1"></div>
 

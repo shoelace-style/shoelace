@@ -107,6 +107,7 @@ export default class SlDrawer extends ShoelaceElement {
 
   connectedCallback() {
     super.connectedCallback();
+    this.handleDocumentKeyDown = this.handleDocumentKeyDown.bind(this);
     this.modal = new Modal(this);
   }
 
@@ -114,6 +115,7 @@ export default class SlDrawer extends ShoelaceElement {
     this.drawer.hidden = !this.open;
 
     if (this.open && !this.contained) {
+      this.addOpenListeners();
       this.modal.activate();
       lockBodyScrolling(this);
     }
@@ -159,8 +161,16 @@ export default class SlDrawer extends ShoelaceElement {
     this.hide();
   }
 
-  handleKeyDown(event: KeyboardEvent) {
-    if (event.key === 'Escape') {
+  addOpenListeners() {
+    document.addEventListener('keydown', this.handleDocumentKeyDown);
+  }
+
+  removeOpenListeners() {
+    document.removeEventListener('keydown', this.handleDocumentKeyDown);
+  }
+
+  handleDocumentKeyDown(event: KeyboardEvent) {
+    if (this.open && event.key === 'Escape') {
       event.stopPropagation();
       this.requestClose('keyboard');
     }
@@ -171,6 +181,7 @@ export default class SlDrawer extends ShoelaceElement {
     if (this.open) {
       // Show
       this.emit('sl-show');
+      this.addOpenListeners();
       this.originalTrigger = document.activeElement as HTMLElement;
 
       // Lock body scrolling only if the drawer isn't contained
@@ -225,6 +236,7 @@ export default class SlDrawer extends ShoelaceElement {
     } else {
       // Hide
       this.emit('sl-hide');
+      this.removeOpenListeners();
       this.modal.deactivate();
       unlockBodyScrolling(this);
 
@@ -279,7 +291,6 @@ export default class SlDrawer extends ShoelaceElement {
           'drawer--rtl': this.localize.dir() === 'rtl',
           'drawer--has-footer': this.hasSlotController.test('footer')
         })}
-        @keydown=${this.handleKeyDown}
       >
         <div part="overlay" class="drawer__overlay" @click=${() => this.requestClose('overlay')} tabindex="-1"></div>
 
