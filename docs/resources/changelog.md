@@ -22,6 +22,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug in `<sl-dropdown>` where the `keydown` event erroneously propagated to ancestors when pressing <kbd>Escape</kbd> [#990](https://github.com/shoelace-style/shoelace/issues/990)
 - Fixed a bug that prevented arrow keys from scrolling content within `<sl-dialog>` and `<sl-drawer>` [#925](https://github.com/shoelace-style/shoelace/issues/925)
 - Fixed a bug that prevented <kbd>Escape</kbd> from closing `<sl-dialog>` and `<sl-drawer>` in some cases
+- Fixed a bug that caused forms to submit unexpectedly when selecting certain characters [#988](https://github.com/shoelace-style/shoelace/pull/988)
 - Improved `<sl-badge>` to improve padding and render relative to the current font size
 - Updated Lit to 2.4.1
 - Updated TypeScript to 4.8.4
