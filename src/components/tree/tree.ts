@@ -71,7 +71,6 @@ export default class SlTree extends ShoelaceElement {
   // A collection of all the items in the tree, in the order they appear. The collection is live, meaning it is
   // automatically updated when the underlying document is changed.
   //
-  private treeItems: SlTreeItem[] = [];
   private lastFocusedItem: SlTreeItem;
   private readonly localize = new LocalizeController(this);
   private mutationObserver: MutationObserver;
@@ -83,7 +82,7 @@ export default class SlTree extends ShoelaceElement {
 
     this.addEventListener('focusin', this.handleFocusIn);
     this.addEventListener('focusout', this.handleFocusOut);
-    this.addEventListener('sl-lazy-change', this.updateItems);
+    this.addEventListener('sl-lazy-change', this.handleSlotChange);
 
     await this.updateComplete;
     this.mutationObserver = new MutationObserver(this.handleTreeChanged);
@@ -96,7 +95,7 @@ export default class SlTree extends ShoelaceElement {
     this.mutationObserver.disconnect();
     this.removeEventListener('focusin', this.handleFocusIn);
     this.removeEventListener('focusout', this.handleFocusOut);
-    this.removeEventListener('sl-lazy-change', this.updateItems);
+    this.removeEventListener('sl-lazy-change', this.handleSlotChange);
   }
 
   // Generates a clone of the expand icon element to use for each tree item
@@ -154,18 +153,22 @@ export default class SlTree extends ShoelaceElement {
 
   @watch('selection')
   handleSelectionChange() {
+    const items = this.getAllTreeItems();
+
     this.setAttribute('aria-multiselectable', this.selection === 'multiple' ? 'true' : 'false');
 
-    for (const item of this.treeItems) {
+    for (const item of items) {
       item.selectable = this.selection === 'multiple';
     }
   }
 
   syncTreeItems(selectedItem: SlTreeItem) {
+    const items = this.getAllTreeItems();
+
     if (this.selection === 'multiple') {
       syncCheckboxes(selectedItem);
     } else {
-      for (const item of this.treeItems) {
+      for (const item of items) {
         if (item !== selectedItem) {
           item.selected = false;
         }
@@ -194,15 +197,21 @@ export default class SlTree extends ShoelaceElement {
 
   // Returns the list of tree items that are selected in the tree.
   get selectedItems(): SlTreeItem[] {
-    const items = [...this.treeItems];
+    const items = this.getAllTreeItems();
     const isSelected = (item: SlTreeItem) => item.selected;
 
     return items.filter(isSelected);
   }
 
+  getAllTreeItems() {
+    return [...this.querySelectorAll<SlTreeItem>('sl-tree-item')];
+  }
+
   getFocusableItems() {
+    const items = this.getAllTreeItems();
     const collapsedItems = new Set();
-    return [...this.treeItems].filter(item => {
+
+    return items.filter(item => {
       // Exclude disabled elements
       if (item.disabled) return false;
 
@@ -317,7 +326,7 @@ export default class SlTree extends ShoelaceElement {
 
     // If the tree has been focused, move the focus to the last focused item
     if (event.target === this) {
-      this.focusItem(this.lastFocusedItem || this.treeItems[0]);
+      this.focusItem(this.lastFocusedItem || this.getAllTreeItems()[0]);
     }
 
     // If the target is a tree item, update the tabindex
@@ -332,15 +341,15 @@ export default class SlTree extends ShoelaceElement {
     }
   };
 
-  updateItems() {
-    this.treeItems = [...this.querySelectorAll('sl-tree-item')];
-    [...this.treeItems].forEach(this.initTreeItem);
+  handleSlotChange() {
+    const items = this.getAllTreeItems();
+    items.forEach(this.initTreeItem);
   }
 
   render() {
     return html`
       <div part="base" class="tree" @click=${this.handleClick} @keydown=${this.handleKeyDown}>
-        <slot @slotchange=${this.updateItems}></slot>
+        <slot @slotchange=${this.handleSlotChange}></slot>
         <slot name="expand-icon" hidden aria-hidden="true"> </slot>
         <slot name="collapse-icon" hidden aria-hidden="true"> </slot>
       </div>
