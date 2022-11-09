@@ -100,6 +100,7 @@ export default class SlDropdown extends ShoelaceElement {
     super.connectedCallback();
     this.handleMenuItemActivate = this.handleMenuItemActivate.bind(this);
     this.handlePanelSelect = this.handlePanelSelect.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleDocumentKeyDown = this.handleDocumentKeyDown.bind(this);
     this.handleDocumentMouseDown = this.handleDocumentMouseDown.bind(this);
 
@@ -139,14 +140,17 @@ export default class SlDropdown extends ShoelaceElement {
       | undefined;
   }
 
-  handleDocumentKeyDown(event: KeyboardEvent) {
-    // Close when escape is pressed
-    if (event.key === 'Escape') {
+  handleKeyDown(event: KeyboardEvent) {
+    // Close when escape is pressed inside an open dropdown. We need to listen on the panel itself and stop propagation
+    // in case any ancestors are also listening for this key.
+    if (this.open && event.key === 'Escape') {
+      event.stopPropagation();
       this.hide();
       this.focusOnTrigger();
-      return;
     }
+  }
 
+  handleDocumentKeyDown(event: KeyboardEvent) {
     // Handle tabbing
     if (event.key === 'Tab') {
       // Tabbing within an open menu should close the dropdown and refocus the trigger
@@ -341,6 +345,7 @@ export default class SlDropdown extends ShoelaceElement {
   addOpenListeners() {
     this.panel.addEventListener('sl-activate', this.handleMenuItemActivate);
     this.panel.addEventListener('sl-select', this.handlePanelSelect);
+    this.panel.addEventListener('keydown', this.handleKeyDown);
     document.addEventListener('keydown', this.handleDocumentKeyDown);
     document.addEventListener('mousedown', this.handleDocumentMouseDown);
   }
@@ -349,6 +354,7 @@ export default class SlDropdown extends ShoelaceElement {
     if (this.panel) {
       this.panel.removeEventListener('sl-activate', this.handleMenuItemActivate);
       this.panel.removeEventListener('sl-select', this.handlePanelSelect);
+      this.panel.removeEventListener('keydown', this.handleKeyDown);
     }
     document.removeEventListener('keydown', this.handleDocumentKeyDown);
     document.removeEventListener('mousedown', this.handleDocumentMouseDown);
