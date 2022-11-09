@@ -24,12 +24,12 @@ const App = () => (
 
 ## Examples
 
-### Showing the Label
+### Help Text
 
-You can show the fieldset and legend that wraps the radio group using the `fieldset` attribute. If you don't use this option, you should still provide a label so screen readers announce the control correctly.
+Add descriptive help text to a radio group with the `help-text` attribute. For help texts that contain HTML, use the `help-text` slot instead.
 
 ```html preview
-<sl-radio-group label="Select an option" name="a" value="1" fieldset>
+<sl-radio-group label="Select an option" help-text="Choose the most appropriate option." name="a" value="1">
   <sl-radio value="1">Option 1</sl-radio>
   <sl-radio value="2">Option 2</sl-radio>
   <sl-radio value="3">Option 3</sl-radio>
@@ -40,7 +40,7 @@ You can show the fieldset and legend that wraps the radio group using the `field
 import { SlRadio, SlRadioGroup } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
-  <SlRadioGroup label="Select an option" name="a" value="1" fieldset>
+  <SlRadioGroup label="Select an option" help-text="Choose the most appropriate option." name="a" value="1">
     <SlRadio value="1">Option 1</SlRadio>
     <SlRadio value="2">Option 2</SlRadio>
     <SlRadio value="3">Option 3</SlRadio>
@@ -53,7 +53,7 @@ const App = () => (
 [Radio buttons](/components/radio-button) offer an alternate way to display radio controls. In this case, an internal [button group](/components/button-group) is used to group the buttons into a single, cohesive control.
 
 ```html preview
-<sl-radio-group label="Select an option" name="a" value="1">
+<sl-radio-group label="Select an option" help-text="Select an option that makes you proud." name="a" value="1">
   <sl-radio-button value="1">Option 1</sl-radio-button>
   <sl-radio-button value="2">Option 2</sl-radio-button>
   <sl-radio-button value="3">Option 3</sl-radio-button>
@@ -154,7 +154,7 @@ const App = () => {
 };
 ```
 
-#### Custom Validity
+### Custom Validity
 
 Use the `setCustomValidity()` method to set a custom validation message. This will prevent the form from submitting and make the browser display the error message you provide. To clear the error, call this function with an empty string.
 

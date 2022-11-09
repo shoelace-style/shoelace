@@ -55,4 +55,8 @@ export default css`
   .form-control--has-help-text.form-control--large .form-control__help-text {
     font-size: var(--sl-input-help-text-font-size-large);
   }
+
+  .form-control--has-help-text.form-control--radio-group .form-control__help-text {
+    margin-top: var(--sl-spacing-2x-small);
+  }
 `;

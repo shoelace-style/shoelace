@@ -10,11 +10,14 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 
 ## Next
 
+- 🚨 BREAKING: Removed the `fieldset` property from `<sl-radio-group>` (use CSS parts if you want to keep the border) [#965](https://github.com/shoelace-style/shoelace/issues/965)
+- 🚨 BREAKING: Removed `base` and `label` parts from `<sl-radio-group>` (use `form-control` and `form-control__label` instead) [#965](https://github.com/shoelace-style/shoelace/issues/965)
 - Added `button--checked` to `<sl-radio-button>` and `control--checked` to `<sl-radio>` to style just the checked state [#933](https://github.com/shoelace-style/shoelace/pull/933)
 - Added tests for `<sl-menu-item>` and `<sl-menu-label>` [#935](https://github.com/shoelace-style/shoelace/pull/935)
 - Added translations for Turkish, English (United Kingdom) and German (Austria) [#989](https://github.com/shoelace-style/shoelace/pull/989)
 - Added `--indicator-transition-duration` custom property to `<sl-progress-ring>` [#986](https://github.com/shoelace-style/shoelace/issues/986)
 - Added the ability to cancel `sl-show` and `sl-hide` events in `<sl-details>` [#993](https://github.com/shoelace-style/shoelace/issues/993)
+- Added `focus()` and `blur()` methods to `<sl-radio-button>`
 - Fixed a bug in `<sl-card>` that prevented the border radius to apply correctly to the header [#934](https://github.com/shoelace-style/shoelace/pull/934)
 - Fixed a bug in `<sl-button-group>` where the inner border disappeared on focus [#980](https://github.com/shoelace-style/shoelace/pull/980)
 - Fixed a bug that caused prefix/suffix animations in `<sl-input>` to wobble [#996](https://github.com/shoelace-style/shoelace/issues/996)
