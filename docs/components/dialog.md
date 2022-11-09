@@ -5,12 +5,8 @@
 [component-header:sl-dialog]
 
 ```html preview
-<sl-dialog label="Please select" class="dialog-overview">
-  <sl-select>
-    <sl-menu-item value="1">Option 1</sl-menu-item>
-    <sl-menu-item value="2">Option 2</sl-menu-item>
-    <sl-menu-item value="3">Option 3</sl-menu-item>
-  </sl-select>
+<sl-dialog label="Dialog" class="dialog-overview">
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
   <sl-button slot="footer" variant="primary">Close</sl-button>
 </sl-dialog>
 
@@ -24,6 +20,28 @@
   openButton.addEventListener('click', () => dialog.show());
   closeButton.addEventListener('click', () => dialog.hide());
 </script>
+```
+
+```jsx react
+import { useState } from 'react';
+import { SlButton, SlDialog } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <SlDialog label="Dialog" open={open} onSlAfterHide={() => setOpen(false)}>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        <SlButton slot="footer" variant="primary" onClick={() => setOpen(false)}>
+          Close
+        </SlButton>
+      </SlDialog>
+
+      <SlButton onClick={() => setOpen(true)}>Open Dialog</SlButton>
+    </>
+  );
+};
 ```
 
 ## UX Tips
