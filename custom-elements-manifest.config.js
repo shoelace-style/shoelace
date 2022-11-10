@@ -1,12 +1,21 @@
 import fs from 'fs';
-import path from 'path';
 import { parse } from 'comment-parser';
 import { pascalCase } from 'pascal-case';
 
 const packageData = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
 const { name, description, version, author, homepage, license } = packageData;
 
-const noDash = string => string.replace(/^\s?-/, '').trim();
+function noDash(string) {
+  return string.replace(/^\s?-/, '').trim();
+}
+
+function replace(string, terms) {
+  terms.forEach(({ from, to }) => {
+    string = string?.replace(from, to);
+  });
+
+  return string;
+}
 
 export default {
   globs: ['src/components/**/*.ts'],
@@ -106,26 +115,38 @@ export default {
     },
     {
       name: 'shoelace-translate-module-paths',
-      analyzePhase({ ts, node, moduleDoc }) {
-        switch (node.kind) {
-          case ts.SyntaxKind.ClassDeclaration: {
-            //
-            // Module paths look like this:
-            //
-            //  src/components/button/button.ts
-            //
-            // But we want them to point to the dist file:
-            //
-            //  dist/components/button/button.js
-            //
-            const relativePath = path.relative('src', moduleDoc.path);
-            const dirname = path.dirname(relativePath);
-            const basename = path.basename(relativePath, path.extname(relativePath)) + '.js';
-            const distPath = path.join('dist', dirname, basename);
+      packageLinkPhase({ customElementsManifest }) {
+        customElementsManifest?.modules?.forEach(mod => {
+          //
+          // CEM paths look like this:
+          //
+          //  src/components/button/button.ts
+          //
+          // But we want them to look like this:
+          //
+          //  components/button/button.js
+          //
+          const terms = [
+            { from: /^src\//, to: '' }, // Strip the src/ prefix
+            { from: /\.(t|j)sx?$/, to: '.js' } // Convert .ts to .js
+          ];
 
-            moduleDoc.path = distPath;
+          mod.path = replace(mod.path, terms);
+
+          for (const ex of mod.exports ?? []) {
+            ex.declaration.module = replace(ex.declaration.module, terms);
           }
-        }
+
+          for (const dec of mod.declarations ?? []) {
+            if (dec.kind === 'class') {
+              for (const member of dec.members ?? []) {
+                if (member.inheritedFrom) {
+                  member.inheritedFrom.module = replace(member.inheritedFrom.module, terms);
+                }
+              }
+            }
+          }
+        });
       }
     }
   ]
