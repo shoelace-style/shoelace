@@ -262,27 +262,37 @@ const App = () => (
 
 ### Customizing Label Position
 
-Use parts to customize the label's position.
+Use [CSS parts](#css-parts) to customize the way form controls are drawn. This example uses CSS grid to position the label to the left of the control, but the possible orientations are nearly endless. The same technique works for inputs, textareas, radio groups, and similar form controls.
 
 ```html preview
-<sl-input class="label-on-left" label="Name"></sl-input><br />
-<sl-input class="label-on-left" label="Email" type="email"></sl-input>
+<sl-input class="label-on-left" label="Name" help-text="Enter your name""></sl-input>
+<sl-input class="label-on-left" label="Email" type="email" help-text="Enter your email"></sl-input>
+<sl-textarea class="label-on-left" label="Bio" help-text="Tell us something about yourself"></sl-textarea>
 
 <style>
+  .label-on-left {
+    --label-width: 60px;
+    --gap-width: 1rem;
+  }
+
+  .label-on-left + .label-on-left {
+    margin-top: var(--sl-spacing-medium);
+  }
+
   .label-on-left::part(form-control) {
-    display: flex;
+    display: grid;
+    grid: auto / var(--label-width) 1fr;
+    gap: var(--sl-spacing-3x-small) var(--gap-width);
     align-items: center;
-    gap: 1rem;
   }
 
   .label-on-left::part(form-control-label) {
-    flex: 0 0 auto;
-    width: 60px;
     text-align: right;
   }
 
-  .label-on-left::part(form-control-input) {
-    flex: 1 1 auto;
+  .label-on-left::part(form-control-help-text) {
+    grid-column: span 2;
+    padding-left: calc(var(--label-width) + var(--gap-width));
   }
 </style>
 ```
