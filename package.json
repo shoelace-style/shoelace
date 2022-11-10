@@ -42,7 +42,7 @@
     "ts-check": "tsc --noEmit --project ./tsconfig.json",
     "create": "plop --plopfile scripts/plop/plopfile.js",
     "test": "web-test-runner",
-    "test:component": "npm run test -- --group",
+    "test:component": "npm run test -- --watch --group",
     "test:watch": "web-test-runner --watch",
     "spellcheck": "cspell \"**/*.{js,ts,json,html,css,md}\" --no-progress",
     "list-outdated-dependencies": "npm-check-updates --format repo --peer",
