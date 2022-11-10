@@ -1,6 +1,5 @@
 import { html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { ifDefined } from 'lit/directives/if-defined.js';
 import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
 import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
@@ -19,8 +18,6 @@ let parser: DOMParser;
  *
  * @event sl-load - Emitted when the icon has loaded.
  * @event sl-error - Emitted when the icon fails to load due to an error.
- *
- * @csspart base - The component's internal wrapper.
  */
 @customElement('sl-icon')
 export default class SlIcon extends ShoelaceElement {
@@ -69,6 +66,21 @@ export default class SlIcon extends ShoelaceElement {
   /** @internal Fetches the icon and redraws it. Used to handle library registrations. */
   redraw() {
     this.setIcon();
+  }
+
+  @watch('label')
+  handleLabelChange() {
+    const hasLabel = typeof this.label === 'string' && this.label.length > 0;
+
+    if (hasLabel) {
+      this.setAttribute('role', 'img');
+      this.setAttribute('aria-label', this.label);
+      this.removeAttribute('aria-hidden');
+    } else {
+      this.removeAttribute('role');
+      this.removeAttribute('aria-label');
+      this.setAttribute('aria-hidden', 'true');
+    }
   }
 
   @watch('name')
@@ -120,17 +132,7 @@ export default class SlIcon extends ShoelaceElement {
   }
 
   render() {
-    const hasLabel = typeof this.label === 'string' && this.label.length > 0;
-
-    return html` <div
-      part="base"
-      class="icon"
-      role=${ifDefined(hasLabel ? 'img' : undefined)}
-      aria-label=${ifDefined(hasLabel ? this.label : undefined)}
-      aria-hidden=${ifDefined(hasLabel ? undefined : 'true')}
-    >
-      ${unsafeSVG(this.svg)}
-    </div>`;
+    return html` ${unsafeSVG(this.svg)} `;
   }
 }
 
