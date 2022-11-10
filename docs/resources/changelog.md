@@ -13,9 +13,12 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - 🚨 BREAKING: Removed the `fieldset` property from `<sl-radio-group>` (use CSS parts if you want to keep the border) [#965](https://github.com/shoelace-style/shoelace/issues/965)
 - 🚨 BREAKING: Removed `base` and `label` parts from `<sl-radio-group>` (use `form-control` and `form-control__label` instead) [#965](https://github.com/shoelace-style/shoelace/issues/965)
 - Added `button--checked` to `<sl-radio-button>` and `control--checked` to `<sl-radio>` to style just the checked state [#933](https://github.com/shoelace-style/shoelace/pull/933)
-- Added tests for `<sl-menu-item>` and `<sl-menu-label>` [#935](https://github.com/shoelace-style/shoelace/pull/935)
-- Added translations for Turkish, English (United Kingdom) and German (Austria) [#989](https://github.com/shoelace-style/shoelace/pull/989)
+- Added tests for `<sl-menu>`, `<sl-menu-item>`, `<sl-menu-label>`, `<sl-rating>`, `<sl-relative-time>`, `<sl-skeleton>`, `<sl-tab-panel>` and `<sl-tag>` [#935](https://github.com/shoelace-style/shoelace/pull/935)
+  [#949](https://github.com/shoelace-style/shoelace/pull/949) [#951](https://github.com/shoelace-style/shoelace/pull/951) [#953](https://github.com/shoelace-style/shoelace/pull/953)
+  [#956](https://github.com/shoelace-style/shoelace/pull/956) [#984](https://github.com/shoelace-style/shoelace/pull/984) [#991](https://github.com/shoelace-style/shoelace/pull/991)
+- Added translations for Hungarian, Turkish, English (United Kingdom) and German (Austria) [#982](https://github.com/shoelace-style/shoelace/pull/982) [#989](https://github.com/shoelace-style/shoelace/pull/989)
 - Added `--indicator-transition-duration` custom property to `<sl-progress-ring>` [#986](https://github.com/shoelace-style/shoelace/issues/986)
+- Added `--sl-input-required-content-color` custom property to all form controls [#948](https://github.com/shoelace-style/shoelace/pull/948)
 - Added the ability to cancel `sl-show` and `sl-hide` events in `<sl-details>` [#993](https://github.com/shoelace-style/shoelace/issues/993)
 - Added `focus()` and `blur()` methods to `<sl-radio-button>`
 - Fixed a bug in `<sl-card>` that prevented the border radius to apply correctly to the header [#934](https://github.com/shoelace-style/shoelace/pull/934)
@@ -29,6 +32,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug in `<sl-radio-group>` that prevented the `invalid` property from correctly reflecting validity sometimes [#992](https://github.com/shoelace-style/shoelace/issues/992)
 - Fixed a bug in `<sl-tree>` that prevented selections from working correctly on dynamically added tree items [#963](https://github.com/shoelace-style/shoelace/issues/963)
 - Improved `<sl-badge>` to improve padding and render relative to the current font size
+- Moved all component descriptions to `@summary` to get them within documentation tools [#962](https://github.com/shoelace-style/shoelace/pull/962)
 - Updated Lit to 2.4.1
 - Updated TypeScript to 4.8.4
 - Updated esbuild to 0.15.13
