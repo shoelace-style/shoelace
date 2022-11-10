@@ -1,10 +1,11 @@
 import fs from 'fs';
+import path from 'path';
 import { parse } from 'comment-parser';
 import { pascalCase } from 'pascal-case';
 
 const packageData = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
 const { name, description, version, author, homepage, license } = packageData;
-// eslint-disable-next-line func-style
+
 const noDash = string => string.replace(/^\s?-/, '').trim();
 
 export default {
@@ -86,7 +87,6 @@ export default {
         }
       }
     },
-
     {
       name: 'shoelace-react-event-names',
       analyzePhase({ ts, node, moduleDoc }) {
@@ -100,6 +100,30 @@ export default {
                 event.reactName = `on${pascalCase(event.name)}`;
               });
             }
+          }
+        }
+      }
+    },
+    {
+      name: 'shoelace-translate-module-paths',
+      analyzePhase({ ts, node, moduleDoc }) {
+        switch (node.kind) {
+          case ts.SyntaxKind.ClassDeclaration: {
+            //
+            // Module paths look like this:
+            //
+            //  src/components/button/button.ts
+            //
+            // But we want them to point to the dist file:
+            //
+            //  dist/components/button/button.js
+            //
+            const relativePath = path.relative('src', moduleDoc.path);
+            const dirname = path.dirname(relativePath);
+            const basename = path.basename(relativePath, path.extname(relativePath)) + '.js';
+            const distPath = path.join('dist', dirname, basename);
+
+            moduleDoc.path = distPath;
           }
         }
       }
