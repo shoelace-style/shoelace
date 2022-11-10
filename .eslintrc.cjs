@@ -150,7 +150,7 @@ module.exports = {
     'prefer-object-spread': 'warn',
     'prefer-rest-params': 'warn',
     'prefer-spread': 'warn',
-    'prefer-template': 'warn',
+    'prefer-template': 'off',
     'no-else-return': 'warn',
     'func-names': ['warn', 'never'],
     'one-var': ['warn', 'never'],
