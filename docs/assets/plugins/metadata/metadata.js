@@ -1,7 +1,7 @@
 (() => {
   const isDev = location.hostname === 'localhost';
   const isNext = location.hostname === 'next.shoelace.style';
-  const customElements = fetch('/shoelace/dist/custom-elements.json')
+  const customElements = fetch('/dist/custom-elements.json')
     .then(res => res.json())
     .catch(err => console.error(err));
 
