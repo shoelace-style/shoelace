@@ -13,12 +13,18 @@ export interface Translation extends DefaultTranslation {
   $name: string; // e.g. English, Español
   $dir: 'ltr' | 'rtl';
 
+  browseFiles: string;
   clearEntry: string;
   close: string;
   copy: string;
   currentValue: string;
+  dragDrop: string;
+  fileSizeExceeded: string;
+  fileTypeNotAccepted: string;
   hidePassword: string;
   loading: string;
+  maxFiles: string;
+  noMultipleFiles: string;
   progress: string;
   remove: string;
   resize: string;
