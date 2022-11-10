@@ -49,11 +49,6 @@ export default css`
     height: var(--sl-toggle-size);
   }
 
-  .checkbox__control .checkbox__icon svg {
-    width: 100%;
-    height: 100%;
-  }
-
   /* Hover */
   .checkbox:not(.checkbox--checked):not(.checkbox--disabled) .checkbox__control:hover {
     border-color: var(--sl-input-border-color-hover);

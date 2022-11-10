@@ -7,6 +7,7 @@ import { defaultValue } from '../../internal/default-value';
 import { FormSubmitController } from '../../internal/form';
 import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
+import '../icon/icon';
 import styles from './checkbox.styles';
 import type { CSSResultGroup } from 'lit';
 
@@ -16,6 +17,8 @@ import type { CSSResultGroup } from 'lit';
  * @since 2.0
  * @status stable
  *
+ * @dependency sl-icon
+ *
  * @slot - The checkbox's label.
  *
  * @event sl-blur - Emitted when the control loses focus.
@@ -24,8 +27,8 @@ import type { CSSResultGroup } from 'lit';
  *
  * @csspart base - The component's internal wrapper.
  * @csspart control - The checkbox control.
- * @csspart checked-icon - The container the wraps the checked icon.
- * @csspart indeterminate-icon - The container that wraps the indeterminate icon.
+ * @csspart checked-icon - The checked icon.
+ * @csspart indeterminate-icon - The indeterminate icon.
  * @csspart label - The checkbox label.
  */
 @customElement('sl-checkbox')
@@ -155,32 +158,9 @@ export default class SlCheckbox extends ShoelaceElement {
         />
 
         <span part="control" class="checkbox__control">
-          ${this.checked
-            ? html`
-                <svg part="checked-icon" class="checkbox__icon" viewBox="0 0 16 16">
-                  <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
-                    <g stroke="currentColor" stroke-width="2">
-                      <g transform="translate(3.428571, 3.428571)">
-                        <path d="M0,5.71428571 L3.42857143,9.14285714"></path>
-                        <path d="M9.14285714,0 L3.42857143,9.14285714"></path>
-                      </g>
-                    </g>
-                  </g>
-                </svg>
-              `
-            : ''}
+          ${this.checked ? html` <sl-icon part="checked-icon" library="system" name="check"></sl-icon> ` : ''}
           ${!this.checked && this.indeterminate
-            ? html`
-                <svg part="indeterminate-icon" class="checkbox__icon" viewBox="0 0 16 16">
-                  <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
-                    <g stroke="currentColor" stroke-width="2">
-                      <g transform="translate(2.285714, 6.857143)">
-                        <path d="M10.2857143,1.14285714 L1.14285714,1.14285714"></path>
-                      </g>
-                    </g>
-                  </g>
-                </svg>
-              `
+            ? html` <sl-icon part="indeterminate-icon" library="system" name="indeterminate"></sl-icon> `
             : ''}
         </span>
 

@@ -19,6 +19,8 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Added `--indicator-transition-duration` custom property to `<sl-progress-ring>` [#986](https://github.com/shoelace-style/shoelace/issues/986)
 - Added the ability to cancel `sl-show` and `sl-hide` events in `<sl-details>` [#993](https://github.com/shoelace-style/shoelace/issues/993)
 - Added `focus()` and `blur()` methods to `<sl-radio-button>`
+- Added the `handle-icon` part to `<sl-image-comparer>`
+- Added `caret`, `check`, `grip-vertical`, `indeterminate`, and `radio` icons to the system library and removed `check-lg` [#985](https://github.com/shoelace-style/shoelace/issues/985)
 - Fixed a bug in `<sl-card>` that prevented the border radius to apply correctly to the header [#934](https://github.com/shoelace-style/shoelace/pull/934)
 - Fixed a bug in `<sl-button-group>` where the inner border disappeared on focus [#980](https://github.com/shoelace-style/shoelace/pull/980)
 - Fixed a bug that caused prefix/suffix animations in `<sl-input>` to wobble [#996](https://github.com/shoelace-style/shoelace/issues/996)

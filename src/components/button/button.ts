@@ -6,6 +6,7 @@ import { FormSubmitController } from '../../internal/form';
 import ShoelaceElement from '../../internal/shoelace-element';
 import { HasSlotController } from '../../internal/slot';
 import { LocalizeController } from '../../utilities/localize';
+import '../icon/icon';
 import '../spinner/spinner';
 import styles from './button.styles';
 import type { CSSResultGroup } from 'lit';
@@ -16,6 +17,7 @@ import type { CSSResultGroup } from 'lit';
  * @since 2.0
  * @status stable
  *
+ * @dependency sl-icon
  * @dependency sl-spinner
  *
  * @event sl-blur - Emitted when the button loses focus.
@@ -29,7 +31,7 @@ import type { CSSResultGroup } from 'lit';
  * @csspart prefix - The prefix slot's container.
  * @csspart label - The button's label.
  * @csspart suffix - The suffix slot's container.
- * @csspart caret - The button's caret.
+ * @csspart caret - The button's caret icon.
  */
 @customElement('sl-button')
 export default class SlButton extends ShoelaceElement {
@@ -219,22 +221,7 @@ export default class SlButton extends ShoelaceElement {
           <slot name="suffix"></slot>
         </span>
         ${
-          this.caret
-            ? html`
-                <span part="caret" class="button__caret">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <polyline points="6 9 12 15 18 9"></polyline>
-                  </svg>
-                </span>
-              `
-            : ''
+          this.caret ? html` <sl-icon part="caret" class="button__caret" library="system" name="caret"></sl-icon> ` : ''
         }
         ${this.loading ? html`<sl-spinner></sl-spinner>` : ''}
       </${tag}>

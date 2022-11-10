@@ -33,7 +33,7 @@ describe('<sl-icon-button>', () => {
         html`
           <sl-icon-button
             library="system"
-            name="check-lg"
+            name="check"
             style="color: rgb(0, 136, 221); font-size: 2rem;"
           ></sl-icon-button>
         `
@@ -48,9 +48,7 @@ describe('<sl-icon-button>', () => {
 
   describe('when icon attributes are present', () => {
     it('renders an sl-icon from a library', async () => {
-      const el = await fixture<SlIconButton>(
-        html` <sl-icon-button library="system" name="check-lg"></sl-icon-button> `
-      );
+      const el = await fixture<SlIconButton>(html` <sl-icon-button library="system" name="check"></sl-icon-button> `);
       expect(el.shadowRoot?.querySelector('sl-icon')).to.exist;
     });
 

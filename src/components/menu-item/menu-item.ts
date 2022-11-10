@@ -24,7 +24,7 @@ import type { CSSResultGroup } from 'lit';
  * @slot suffix - Used to append an icon or similar element to the menu item.
  *
  * @csspart base - The component's internal wrapper.
- * @csspart checked-icon - The checkmark's container, only visible when the menu item is checked.
+ * @csspart checked-icon - The checked icon, which is only visible when the menu item is checked.
  * @csspart prefix - The prefix container.
  * @csspart label - The menu item label.
  * @csspart suffix - The suffix container.
@@ -93,7 +93,7 @@ export default class SlMenuItem extends ShoelaceElement {
         })}
       >
         <span part="checked-icon" class="menu-item__check">
-          <sl-icon name="check-lg" library="system" aria-hidden="true"></sl-icon>
+          <sl-icon name="check" library="system" aria-hidden="true"></sl-icon>
         </span>
 
         <span part="prefix" class="menu-item__prefix">
