@@ -319,8 +319,12 @@ export default class SlInput extends ShoelaceElement {
     // submitting to allow users to cancel the keydown event if they need to
     if (event.key === 'Enter' && !hasModifier) {
       setTimeout(() => {
-        // isComposing is true when enter key is pressed while choosing the chinese/japanese/etc character
-        // so this check will prevent form submitting after choosing character by enter key pressing
+        //
+        // When using an Input Method Editor (IME), pressing enter will cause the form to submit unexpectedly. One way
+        // to check for this is to look at event.isComposing, which will be true when the IME is open.
+        //
+        // See https://github.com/shoelace-style/shoelace/pull/988
+        //
         if (!event.defaultPrevented && !event.isComposing) {
           this.formSubmitController.submit();
         }
