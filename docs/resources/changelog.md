@@ -37,6 +37,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug in `<sl-tree>` that prevented selections from working correctly on dynamically added tree items [#963](https://github.com/shoelace-style/shoelace/issues/963)
 - Fixed module paths in `custom-elements.json` so they point to the dist file instead of the source file [#725](https://github.com/shoelace-style/shoelace/issues/725)
 - Improved `<sl-badge>` to improve padding and render relative to the current font size
+- Improved accessibility of `<sl-color-picker>` so it's usable in forced-colors mode
 - Moved all component descriptions to `@summary` to get them within documentation tools [#962](https://github.com/shoelace-style/shoelace/pull/962)
 - Updated Lit to 2.4.1
 - Updated Bootstrap Icons to 1.10.2
