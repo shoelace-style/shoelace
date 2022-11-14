@@ -117,11 +117,9 @@ body.site-search-visible {
 }
 
 @media (forced-colors: active) {
-  .site-search__results li[aria-selected='true'] a,
-  .site-search__results li[aria-selected='true'] a small,
-  .site-search__results li[aria-selected='true'] a sl-icon {
-    background-color: SelectedItem;
-    color: SelectedItemText;
+  .site-search__results li[aria-selected='true'] a {
+    outline: dashed 1px SelectedItem;
+    outline-offset: -1px;
   }
 }
 
