@@ -38,6 +38,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Improved `<sl-badge>` to improve padding and render relative to the current font size
 - Moved all component descriptions to `@summary` to get them within documentation tools [#962](https://github.com/shoelace-style/shoelace/pull/962)
 - Updated Lit to 2.4.1
+- Updated Bootstrap Icons to 1.10.2
 - Updated TypeScript to 4.8.4
 - Updated esbuild to 0.15.13
 - Updated all other dependencies to latest versions
