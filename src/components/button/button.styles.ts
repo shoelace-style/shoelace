@@ -300,6 +300,12 @@ export default css`
     color: var(--sl-color-neutral-0);
   }
 
+  @media (forced-colors: active) {
+    .button.button--outline.button--checked:not(.button--disabled) {
+      outline: solid 2px transparent;
+    }
+  }
+
   /*
    * Text buttons
    */

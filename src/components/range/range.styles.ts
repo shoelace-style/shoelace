@@ -211,4 +211,23 @@ export default css`
     border-right: var(--sl-tooltip-arrow-size) solid transparent;
     bottom: 100%;
   }
+
+  @media (forced-colors: active) {
+    .range__control,
+    .range__tooltip {
+      border: solid 1px transparent;
+    }
+
+    .range__control::-webkit-slider-thumb {
+      border: solid 1px transparent;
+    }
+
+    .range__control::-moz-range-thumb {
+      border: solid 1px transparent;
+    }
+
+    .range__tooltip:after {
+      display: none;
+    }
+  }
 `;

@@ -37,12 +37,6 @@ export default css`
     box-shadow: var(--sl-shadow-x-large);
   }
 
-  @media (forced-colors: active) {
-    .dialog__panel {
-      border: solid 1px var(--sl-color-neutral-0);
-    }
-  }
-
   .dialog__panel:focus {
     outline: none;
   }
@@ -110,5 +104,11 @@ export default css`
     bottom: 0;
     left: 0;
     background-color: var(--sl-overlay-background-color);
+  }
+
+  @media (forced-colors: active) {
+    .dialog__panel {
+      border: solid 1px var(--sl-color-neutral-0);
+    }
   }
 `;

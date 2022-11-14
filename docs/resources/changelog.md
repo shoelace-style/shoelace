@@ -37,7 +37,17 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Fixed a bug in `<sl-tree>` that prevented selections from working correctly on dynamically added tree items [#963](https://github.com/shoelace-style/shoelace/issues/963)
 - Fixed module paths in `custom-elements.json` so they point to the dist file instead of the source file [#725](https://github.com/shoelace-style/shoelace/issues/725)
 - Improved `<sl-badge>` to improve padding and render relative to the current font size
-- Improved accessibility of `<sl-color-picker>` so it's usable in forced-colors mode
+- Improved how many components display in forced-colors mode / Windows High Contrast mode
+  - Improved `<sl-color-picker>` so it's usable in forced-colors mode
+  - Improved `<sl-dialog>` and `<sl-drawer>` so the panel is more visible in forced-colors mode
+  - Improved `<sl-menu-item>` so selections are visible in forced-colors mode
+  - Improved `<sl-progress-bar>` so it's visible in forced-colors mode
+  - Improved `<sl-radio-button>` so checked states are visible in forced-colors mode
+  - Improved `<sl-range>` so the thumb, track, and tooltips are visible in forced-colors mode
+  - Improved `<sl-rating>` so icons are visible in forced-colors mode
+  - Improved `<sl-split-panel>` so the divider is visible in forced-colors mode
+  - Improved `<sl-tree-item>` so selected items are visible in forced-colors mode
+  - Improved `<sl-tab-group>` so tabs are cleaner and easier to understand in forced-colors mode
 - Moved all component descriptions to `@summary` to get them within documentation tools [#962](https://github.com/shoelace-style/shoelace/pull/962)
 - Updated Lit to 2.4.1
 - Updated Bootstrap Icons to 1.10.2

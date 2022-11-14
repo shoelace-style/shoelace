@@ -66,14 +66,6 @@ export default css`
     color: var(--sl-color-neutral-0);
   }
 
-  @media (forced-colors: active) {
-    :host(:hover:not([aria-disabled='true'])) .menu-item,
-    :host(:focus-visible:not(.sl-focus-invisible):not([aria-disabled='true'])) .menu-item {
-      outline: dashed 1px SelectedItem;
-      outline-offset: -1px;
-    }
-  }
-
   .menu-item .menu-item__check,
   .menu-item .menu-item__chevron {
     flex: 0 0 auto;
@@ -87,5 +79,13 @@ export default css`
   .menu-item--checked .menu-item__check,
   .menu-item--has-submenu .menu-item__chevron {
     visibility: visible;
+  }
+
+  @media (forced-colors: active) {
+    :host(:hover:not([aria-disabled='true'])) .menu-item,
+    :host(:focus-visible:not(.sl-focus-invisible):not([aria-disabled='true'])) .menu-item {
+      outline: dashed 1px SelectedItem;
+      outline-offset: -1px;
+    }
   }
 `;

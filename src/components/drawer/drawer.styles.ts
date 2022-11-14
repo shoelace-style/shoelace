@@ -50,12 +50,6 @@ export default css`
     outline: none;
   }
 
-  @media (forced-colors: active) {
-    .drawer__panel {
-      border: solid 1px var(--sl-color-neutral-0);
-    }
-  }
-
   .drawer--top .drawer__panel {
     top: 0;
     inset-inline-end: auto;
@@ -146,5 +140,11 @@ export default css`
 
   .drawer--contained .drawer__overlay {
     position: absolute;
+  }
+
+  @media (forced-colors: active) {
+    .drawer__panel {
+      border: solid 1px var(--sl-color-neutral-0);
+    }
   }
 `;
