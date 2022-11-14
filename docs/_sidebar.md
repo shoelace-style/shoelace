@@ -1,6 +1,7 @@
 - Getting Started
 
   - [Overview](/)
+  - [Teamshares](/getting-started/teamshares)
   - [Installation](/getting-started/installation)
   - [Usage](/getting-started/usage)
   - [Themes](/getting-started/themes)
