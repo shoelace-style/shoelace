@@ -116,6 +116,15 @@ body.site-search-visible {
   color: var(--sl-color-neutral-1000);
 }
 
+@media (forced-colors: active) {
+  .site-search__results li[aria-selected='true'] a,
+  .site-search__results li[aria-selected='true'] a small,
+  .site-search__results li[aria-selected='true'] a sl-icon {
+    background-color: SelectedItem;
+    color: SelectedItemText;
+  }
+}
+
 .site-search__results h3 {
   font-weight: var(--sl-font-weight-semibold);
   margin: 0;
