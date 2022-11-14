@@ -46,6 +46,12 @@ body.site-search-visible {
   margin: 10rem auto;
 }
 
+@media (forced-colors: active) {
+  .site-search__panel {
+    border: solid 1px var(--sl-color-neutral-0);
+  }
+}
+
 @media screen and (max-width: 900px) {
   .site-search__panel {
     max-width: 100%;
