@@ -19,7 +19,7 @@ const App = () => <SlAvatar label="User avatar" />;
 ### Images
 
 To use an image for the avatar, set the `image` and `label` attributes. This will take priority and be shown over initials and icons.
-To lazy load an image you can use the `loading` attribute and set it to `lazy`.
+Avatar images can be lazily loaded by setting the `loading` attribute to `lazy`.
 
 ```html preview
 <sl-avatar

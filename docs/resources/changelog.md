@@ -24,6 +24,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Added `focus()` and `blur()` methods to `<sl-radio-button>`
 - Added the `handle-icon` part to `<sl-image-comparer>`
 - Added `caret`, `check`, `grip-vertical`, `indeterminate`, and `radio` icons to the system library and removed `check-lg` [#985](https://github.com/shoelace-style/shoelace/issues/985)
+- Added the `loading` attribute to `<sl-avatar>` to allow lazy loading of image avatars [#1006](https://github.com/shoelace-style/shoelace/pull/1006)
 - Fixed a bug in `<sl-card>` that prevented the border radius to apply correctly to the header [#934](https://github.com/shoelace-style/shoelace/pull/934)
 - Fixed a bug in `<sl-button-group>` where the inner border disappeared on focus [#980](https://github.com/shoelace-style/shoelace/pull/980)
 - Fixed a bug that caused prefix/suffix animations in `<sl-input>` to wobble [#996](https://github.com/shoelace-style/shoelace/issues/996)
