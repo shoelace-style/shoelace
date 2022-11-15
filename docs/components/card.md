@@ -128,7 +128,6 @@ Headers can be used to display titles and more.
 <sl-card class="card-header">
   <div slot="header">
     Header Title
-
     <sl-icon-button name="gear" label="Settings"></sl-icon-button>
   </div>
 
