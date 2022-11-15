@@ -113,6 +113,10 @@ export default class SlButton extends ShoelaceElement {
   /** Used to override the form owner's `action` attribute. */
   @property({ attribute: 'formaction' }) formAction: string;
 
+  /** Used to override the form owner's `enctype` attribute.  */
+  @property({ attribute: 'formenctype' })
+  formEnctype: 'application/x-www-form-urlencoded' | 'multipart/form-data' | 'text/plain';
+
   /** Used to override the form owner's `method` attribute.  */
   @property({ attribute: 'formmethod' }) formMethod: 'post' | 'get';
 
