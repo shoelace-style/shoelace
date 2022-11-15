@@ -11,6 +11,12 @@
   "web-types": "dist/web-types.json",
   "type": "module",
   "types": "dist/shoelace.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/shoelace.d.ts",
+      "import": "./dist/shoelace.js"
+    }
+  },
   "files": [
     "dist"
   ],
