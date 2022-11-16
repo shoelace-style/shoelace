@@ -78,6 +78,7 @@
     "@web/test-runner-playwright": "^0.9.0",
     "bootstrap-icons": "^1.10.2",
     "browser-sync": "^2.27.10",
+    "cem-plugin-vs-code-custom-data-generator": "^1.1.0",
     "chalk": "^5.1.2",
     "command-line-args": "^5.2.1",
     "comment-parser": "^1.3.1",

@@ -1,9 +1,17 @@
 import fs from 'fs';
+import { generateCustomData } from 'cem-plugin-vs-code-custom-data-generator';
+import commandLineArgs from 'command-line-args';
 import { parse } from 'comment-parser';
 import { pascalCase } from 'pascal-case';
 
 const packageData = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
 const { name, description, version, author, homepage, license } = packageData;
+
+const { outdir } = commandLineArgs([
+  { name: 'litelement', type: String },
+  { name: 'analyze', defaultOption: true },
+  { name: 'outdir', type: String }
+]);
 
 function noDash(string) {
   return string.replace(/^\s?-/, '').trim();
@@ -148,6 +156,11 @@ export default {
           }
         });
       }
-    }
+    },
+    // Generate custom VS Code data
+    generateCustomData({
+      outdir,
+      cssFileName: null
+    })
   ]
 };
