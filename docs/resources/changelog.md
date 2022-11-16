@@ -6,7 +6,7 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 New versions of Shoelace are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.shoelace.style](https://next.shoelace.style).
 
-_During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
+?> During the beta period, these restrictions may be relaxed in the event of a mission-critical bug. 🐛
 
 ## Next
 
