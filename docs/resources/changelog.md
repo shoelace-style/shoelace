@@ -53,7 +53,7 @@ _During the beta period, these restrictions may be relaxed in the event of a mis
 - Updated Lit to 2.4.1
 - Updated Bootstrap Icons to 1.10.2
 - Updated TypeScript to 4.8.4
-- Updated esbuild to 0.15.13
+- Updated esbuild to 0.15.14
 - Updated all other dependencies to latest versions
 
 ## 2.0.0-beta.83
