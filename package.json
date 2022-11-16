@@ -5,8 +5,6 @@
   "homepage": "https://github.com/shoelace-style/shoelace",
   "author": "Cory LaViska",
   "license": "MIT",
-  "main": "dist/shoelace.js",
-  "module": "dist/shoelace.js",
   "customElements": "dist/custom-elements.json",
   "web-types": "dist/web-types.json",
   "type": "module",
