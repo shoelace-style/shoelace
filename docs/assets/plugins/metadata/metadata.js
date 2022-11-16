@@ -388,7 +388,7 @@
             </div>
 
             <div class="component-header__summary">
-              <p>${marked(component.summary)}</p>
+              ${component.summary ? `<p>${marked(component.summary)}</p>` : ''}
             </div>
           </div>
         `;

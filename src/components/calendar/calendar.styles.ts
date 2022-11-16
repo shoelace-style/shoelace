@@ -1,5 +1,4 @@
 import { css } from 'lit';
-import { focusVisibleSelector } from '../../internal/focus-visible';
 import componentStyles from '../../styles/component.styles';
 
 export default css`
@@ -81,7 +80,7 @@ export default css`
     border-bottom: solid var(--border-width) var(--border-color);
   }
 
-  .calendar__day${focusVisibleSelector} {
+  .calendar__day:focus-visible {
     outline: solid 2px var(--sl-color-primary-600);
     z-index: 1;
   }

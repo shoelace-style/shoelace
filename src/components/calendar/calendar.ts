@@ -1,9 +1,9 @@
-import { LitElement, html } from 'lit';
+import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { generateCalendarGrid, getAllDayNames, getMonthName, isSameDay } from '../../internal/calendar';
-import { emit } from '../../internal/event';
 import { partMap } from '../../internal/part-map';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { HasSlotController } from '../../internal/slot';
 import { watch } from '../../internal/watch';
 import { LocalizeController } from '../../utilities/localize';
@@ -16,6 +16,8 @@ export interface RenderDayOptions {
 }
 
 /**
+ * @summary A calendar prototype for Shoelace.
+ *
  * @since 2.0
  * @status experimental
  *
@@ -42,8 +44,8 @@ export interface RenderDayOptions {
  * @cssproperty --border-radius - The border radius of the calendar.
  */
 @customElement('sl-calendar')
-export default class SlCalendar extends LitElement {
-  static styles = styles;
+export default class SlCalendar extends ShoelaceElement {
+  static styles: CSSResultGroup = styles;
 
   private readonly localize = new LocalizeController(this);
   private readonly hasSlotController = new HasSlotController(this, 'prefix', 'suffix');
@@ -95,7 +97,7 @@ export default class SlCalendar extends LitElement {
   @watch('month')
   @watch('year')
   handleMonthChange() {
-    emit(this, 'sl-month-change');
+    this.emit(this, 'sl-month-change');
   }
 
   render() {
