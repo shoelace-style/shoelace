@@ -1,5 +1,4 @@
 import { css } from 'lit';
-import { focusVisibleSelector } from '../../internal/focus-visible';
 import componentStyles from '../../styles/component.styles';
 
 export default css`
@@ -31,7 +30,7 @@ export default css`
     border: solid var(--sl-panel-border-width) var(--sl-panel-border-color);
   }
 
-  .color-picker--inline${focusVisibleSelector} {
+  .color-picker--inline:focus-visible {
     outline: var(--sl-focus-ring);
     outline-offset: var(--sl-focus-ring-offset);
   }
@@ -44,6 +43,7 @@ export default css`
     border-top-left-radius: var(--sl-border-radius-medium);
     border-top-right-radius: var(--sl-border-radius-medium);
     cursor: crosshair;
+    forced-color-adjust: none;
   }
 
   .color-picker__grid-handle {
@@ -63,7 +63,7 @@ export default css`
     transform: scale(1.5);
   }
 
-  .color-picker__grid-handle${focusVisibleSelector} {
+  .color-picker__grid-handle:focus-visible {
     outline: var(--sl-focus-ring);
   }
 
@@ -82,6 +82,7 @@ export default css`
     height: var(--slider-height);
     border-radius: var(--sl-border-radius-pill);
     box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2);
+    forced-color-adjust: none;
   }
 
   .color-picker__slider:not(:last-of-type) {
@@ -99,7 +100,7 @@ export default css`
     margin-left: calc(var(--slider-handle-size) / -2);
   }
 
-  .color-picker__slider-handle${focusVisibleSelector} {
+  .color-picker__slider-handle:focus-visible {
     outline: var(--sl-focus-ring);
   }
 
@@ -138,6 +139,7 @@ export default css`
     background: none;
     margin-left: var(--sl-spacing-small);
     cursor: copy;
+    forced-color-adjust: none;
   }
 
   .color-picker__preview:before {
@@ -154,7 +156,7 @@ export default css`
     background-color: var(--preview-color);
   }
 
-  .color-picker__preview${focusVisibleSelector} {
+  .color-picker__preview:focus-visible {
     outline: var(--sl-focus-ring);
     outline-offset: var(--sl-focus-ring-offset);
   }
@@ -211,6 +213,7 @@ export default css`
     justify-items: center;
     border-top: solid 1px var(--sl-color-neutral-200);
     padding: var(--sl-spacing-small);
+    forced-color-adjust: none;
   }
 
   .color-picker__swatch {
@@ -231,7 +234,7 @@ export default css`
     cursor: pointer;
   }
 
-  .color-picker__swatch${focusVisibleSelector} {
+  .color-picker__swatch:focus-visible {
     outline: var(--sl-focus-ring);
     outline-offset: var(--sl-focus-ring-offset);
   }
@@ -278,6 +281,7 @@ export default css`
     background-color: transparent;
     border: none;
     cursor: pointer;
+    forced-color-adjust: none;
   }
 
   .color-dropdown__trigger.color-dropdown__trigger--small {
@@ -314,11 +318,11 @@ export default css`
     background-color: transparent;
   }
 
-  .color-dropdown__trigger${focusVisibleSelector} {
+  .color-dropdown__trigger:focus-visible {
     outline: none;
   }
 
-  .color-dropdown__trigger${focusVisibleSelector}:not(.color-dropdown__trigger--disabled) {
+  .color-dropdown__trigger:focus-visible:not(.color-dropdown__trigger--disabled) {
     outline: var(--sl-focus-ring);
     outline-offset: var(--sl-focus-ring-offset);
   }

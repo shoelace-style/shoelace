@@ -1,11 +1,14 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property, queryAsync } from 'lit/decorators.js';
-import { emit } from '../../internal/event';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
 import styles from './animation.styles';
 import { animations } from './animations';
+import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Animate elements declaratively with nearly 100 baked-in presets, or roll your own with custom keyframes. Powered by the [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API).
+ *
  * @since 2.0
  * @status stable
  *
@@ -17,8 +20,8 @@ import { animations } from './animations';
  * multiple animation elements.
  */
 @customElement('sl-animation')
-export default class SlAnimation extends LitElement {
-  static styles = styles;
+export default class SlAnimation extends ShoelaceElement {
+  static styles: CSSResultGroup = styles;
 
   private animation?: Animation;
   private hasStarted = false;
@@ -115,13 +118,13 @@ export default class SlAnimation extends LitElement {
   handleAnimationFinish() {
     this.play = false;
     this.hasStarted = false;
-    emit(this, 'sl-finish');
+    this.emit('sl-finish');
   }
 
   handleAnimationCancel() {
     this.play = false;
     this.hasStarted = false;
-    emit(this, 'sl-cancel');
+    this.emit('sl-cancel');
   }
 
   @watch('play')
@@ -129,7 +132,7 @@ export default class SlAnimation extends LitElement {
     if (this.animation) {
       if (this.play && !this.hasStarted) {
         this.hasStarted = true;
-        emit(this, 'sl-start');
+        this.emit('sl-start');
       }
 
       if (this.play) {
@@ -182,7 +185,7 @@ export default class SlAnimation extends LitElement {
 
     if (this.play) {
       this.hasStarted = true;
-      emit(this, 'sl-start');
+      this.emit('sl-start');
     } else {
       this.animation.pause();
     }

@@ -1,6 +1,6 @@
 import defaultLibrary from './library.default';
 import systemLibrary from './library.system';
-import type SlIcon from '../../components/icon/icon';
+import type SlIcon from '../icon/icon';
 
 export type IconLibraryResolver = (name: string) => string;
 export type IconLibraryMutator = (svg: SVGElement) => void;

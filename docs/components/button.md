@@ -2,8 +2,6 @@
 
 [component-header:sl-button]
 
-Buttons represent actions that are available to the user.
-
 ```html preview
 <sl-button>Button</sl-button>
 ```

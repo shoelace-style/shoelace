@@ -141,4 +141,10 @@ export default css`
   .drawer--contained .drawer__overlay {
     position: absolute;
   }
+
+  @media (forced-colors: active) {
+    .drawer__panel {
+      border: solid 1px var(--sl-color-neutral-0);
+    }
+  }
 `;

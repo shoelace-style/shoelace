@@ -188,4 +188,25 @@ describe('<sl-input>', () => {
       expect(form.reportValidity()).to.be.false;
     });
   });
+
+  describe('when type="number"', () => {
+    it('should be valid when the value is within the boundary of a step', async () => {
+      const el = await fixture<SlInput>(html` <sl-input type="number" step=".5" value="1.5"></sl-input> `);
+      expect(el.invalid).to.be.false;
+    });
+
+    it('should be invalid when the value is not within the boundary of a step', async () => {
+      const el = await fixture<SlInput>(html` <sl-input type="number" step=".5" value="1.25"></sl-input> `);
+      expect(el.invalid).to.be.true;
+    });
+
+    it('should update validity when step changes', async () => {
+      const el = await fixture<SlInput>(html` <sl-input type="number" step=".5" value="1.5"></sl-input> `);
+      expect(el.invalid).to.be.false;
+
+      el.step = 1;
+      await el.updateComplete;
+      expect(el.invalid).to.be.true;
+    });
+  });
 });

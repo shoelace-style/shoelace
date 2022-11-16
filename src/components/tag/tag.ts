@@ -1,12 +1,15 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import '../../components/icon-button/icon-button';
-import { emit } from '../../internal/event';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { LocalizeController } from '../../utilities/localize';
+import '../icon-button/icon-button';
 import styles from './tag.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Tags are used as labels to organize things or to indicate a selection.
+ *
  * @since 2.0
  * @status stable
  *
@@ -22,8 +25,8 @@ import styles from './tag.styles';
  * @csspart remove-button__base - The remove button's `base` part.
  */
 @customElement('sl-tag')
-export default class SlTag extends LitElement {
-  static styles = styles;
+export default class SlTag extends ShoelaceElement {
+  static styles: CSSResultGroup = styles;
   private readonly localize = new LocalizeController(this);
 
   /** The tag's variant. */
@@ -39,7 +42,7 @@ export default class SlTag extends LitElement {
   @property({ type: Boolean }) removable = false;
 
   handleRemoveClick() {
-    emit(this, 'sl-remove');
+    this.emit('sl-remove');
   }
 
   render() {

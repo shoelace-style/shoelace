@@ -2,8 +2,6 @@
 
 [component-header:sl-animated-image]
 
-A component for displaying animated GIFs and WEBPs that play and pause on interaction.
-
 ```html preview
 <sl-animated-image
   src="https://shoelace.style/assets/images/walk.gif"

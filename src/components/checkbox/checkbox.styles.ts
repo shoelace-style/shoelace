@@ -1,5 +1,4 @@
 import { css } from 'lit';
-import { focusVisibleSelector } from '../../internal/focus-visible';
 import componentStyles from '../../styles/component.styles';
 
 export default css`
@@ -50,11 +49,6 @@ export default css`
     height: var(--sl-toggle-size);
   }
 
-  .checkbox__control .checkbox__icon svg {
-    width: 100%;
-    height: 100%;
-  }
-
   /* Hover */
   .checkbox:not(.checkbox--checked):not(.checkbox--disabled) .checkbox__control:hover {
     border-color: var(--sl-input-border-color-hover);
@@ -62,9 +56,7 @@ export default css`
   }
 
   /* Focus */
-  .checkbox:not(.checkbox--checked):not(.checkbox--disabled)
-    .checkbox__input${focusVisibleSelector}
-    ~ .checkbox__control {
+  .checkbox:not(.checkbox--checked):not(.checkbox--disabled) .checkbox__input:focus-visible ~ .checkbox__control {
     outline: var(--sl-focus-ring);
     outline-offset: var(--sl-focus-ring-offset);
   }
@@ -84,10 +76,8 @@ export default css`
   }
 
   /* Checked/indeterminate + focus */
-  .checkbox.checkbox--checked:not(.checkbox--disabled) .checkbox__input${focusVisibleSelector} ~ .checkbox__control,
-  .checkbox.checkbox--indeterminate:not(.checkbox--disabled)
-    .checkbox__input${focusVisibleSelector}
-    ~ .checkbox__control {
+  .checkbox.checkbox--checked:not(.checkbox--disabled) .checkbox__input:focus-visible ~ .checkbox__control,
+  .checkbox.checkbox--indeterminate:not(.checkbox--disabled) .checkbox__input:focus-visible ~ .checkbox__control {
     outline: var(--sl-focus-ring);
     outline-offset: var(--sl-focus-ring-offset);
   }

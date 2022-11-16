@@ -14,6 +14,10 @@ export default css`
     display: block;
   }
 
+  .select::part(panel) {
+    overflow: hidden;
+  }
+
   .select__control {
     display: inline-flex;
     align-items: center;
@@ -29,18 +33,7 @@ export default css`
     cursor: pointer;
   }
 
-  .select__menu {
-    max-height: 50vh;
-    overflow: auto;
-  }
-
-  .select__menu::part(base) {
-    border: none;
-  }
-
   .select::part(panel) {
-    background: var(--sl-panel-background-color);
-    border: solid var(--sl-panel-border-width) var(--sl-panel-border-color);
     border-radius: var(--sl-border-radius-medium);
   }
 

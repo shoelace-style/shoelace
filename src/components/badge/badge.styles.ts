@@ -12,14 +12,14 @@ export default css`
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: var(--sl-font-size-x-small);
+    font-size: max(12px, 0.75em);
     font-weight: var(--sl-font-weight-semibold);
     letter-spacing: var(--sl-letter-spacing-normal);
     line-height: 1;
     border-radius: var(--sl-border-radius-small);
     border: solid 1px var(--sl-color-neutral-0);
     white-space: nowrap;
-    padding: 3px 6px;
+    padding: 0.35em 0.6em;
     user-select: none;
     cursor: inherit;
   }

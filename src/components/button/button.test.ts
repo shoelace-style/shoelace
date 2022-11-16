@@ -113,7 +113,7 @@ describe('<sl-button>', () => {
   describe('when submitting a form', () => {
     it('should submit when the button is inside the form', async () => {
       const form = await fixture<HTMLFormElement>(html`
-        <form action="" method="POST">
+        <form action="" method="post">
           <sl-button type="submit">Submit</sl-button>
         </form>
       `);
@@ -129,7 +129,7 @@ describe('<sl-button>', () => {
     it('should submit when the button is outside the form and has a form attribute', async () => {
       const el = await fixture(html`
         <div>
-          <form id="a" action="" method="POST"></form>
+          <form id="a" action="" method="post"></form>
           <sl-button type="submit" form="a">Submit</sl-button>
         </div>
       `);
@@ -145,7 +145,7 @@ describe('<sl-button>', () => {
 
     it('should override form attributes when formaction, formmethod, formnovalidate, and formtarget are used inside a form', async () => {
       const form = await fixture(html`
-        <form id="a" action="foo" method="POST" target="_self">
+        <form id="a" action="foo" method="post" target="_self">
           <sl-button type="submit" form="a" formaction="bar" formmethod="get" formtarget="_blank" formnovalidate>
             Submit
           </sl-button>
@@ -171,7 +171,7 @@ describe('<sl-button>', () => {
     it('should override form attributes when formaction, formmethod, formnovalidate, and formtarget are used outside a form', async () => {
       const el = await fixture(html`
         <div>
-          <form id="a" action="foo" method="POST" target="_self"></form>
+          <form id="a" action="foo" method="post" target="_self"></form>
           <sl-button type="submit" form="a" formaction="bar" formmethod="get" formtarget="_blank" formnovalidate>
             Submit
           </sl-button>

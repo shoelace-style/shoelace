@@ -65,6 +65,8 @@
   - [Tag](/components/tag)
   - [Textarea](/components/textarea)
   - [Tooltip](/components/tooltip)
+  - [Tree](/components/tree)
+  - [Tree Item](/components/tree-item)
   <!--plop:component-->
 
 - Utilities
@@ -76,9 +78,9 @@
   - [Format Number](/components/format-number)
   - [Include](/components/include)
   - [Mutation Observer](/components/mutation-observer)
+  - [Popup](/components/popup)
   - [Relative Time](/components/relative-time)
   - [Resize Observer](/components/resize-observer)
-  - [Responsive Media](/components/responsive-media)
   - [Visually Hidden](/components/visually-hidden)
 
 - Design Tokens

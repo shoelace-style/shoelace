@@ -2,7 +2,7 @@ import commandLineArgs from 'command-line-args';
 import fs from 'fs';
 import path from 'path';
 import chalk from 'chalk';
-import del from 'del';
+import { deleteSync } from 'del';
 import { pascalCase } from 'pascal-case';
 import prettier from 'prettier';
 import prettierConfig from '../prettier.config.cjs';
@@ -13,7 +13,7 @@ const { outdir } = commandLineArgs({ name: 'outdir', type: String });
 const reactDir = path.join('./src/react');
 
 // Clear build directory
-del.sync(reactDir);
+deleteSync(reactDir);
 fs.mkdirSync(reactDir, { recursive: true });
 
 // Fetch component metadata
@@ -29,7 +29,7 @@ components.map(component => {
   const tagWithoutPrefix = component.tagName.replace(/^sl-/, '');
   const componentDir = path.join(reactDir, tagWithoutPrefix);
   const componentFile = path.join(componentDir, 'index.ts');
-  const importPath = component.modulePath.replace(/^src\//, '').replace(/\.ts$/, '');
+  const importPath = component.path;
   const events = (component.events || []).map(event => `${event.reactName}: '${event.name}'`).join(',\n');
 
   fs.mkdirSync(componentDir, { recursive: true });

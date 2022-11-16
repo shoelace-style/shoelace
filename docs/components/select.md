@@ -2,8 +2,6 @@
 
 [component-header:sl-select]
 
-Selects allow you to choose one or more items from a dropdown menu.
-
 ```html preview
 <sl-select>
   <sl-menu-item value="option-1">Option 1</sl-menu-item>

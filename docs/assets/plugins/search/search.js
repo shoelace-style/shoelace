@@ -11,12 +11,7 @@
       const searchBox = document.createElement('div');
       searchBox.classList.add('search-box');
       searchBox.innerHTML = `
-        <sl-input
-          type="search"
-          placeholder="Search"
-          clearable
-          pill
-        >
+        <sl-input type="search" placeholder="Search" pill>
           <sl-icon slot="prefix" name="search"></sl-icon>
           <kbd slot="suffix" title="Press / to search">/</kbd>
         </sl-input>
@@ -300,9 +295,12 @@
 
     // Show the search panel slash is pressed outside of a form element
     document.addEventListener('keydown', event => {
+      const isSlash = event.key === '/';
+      const isCtrlK = (event.metaKey || event.ctrlKey) && event.key === 'k';
+
       if (
         !isShowing &&
-        event.key === '/' &&
+        (isSlash || isCtrlK) &&
         !event.composedPath().some(el => ['input', 'textarea'].includes(el?.tagName?.toLowerCase()))
       ) {
         event.preventDefault();

@@ -13,6 +13,7 @@ const translation: Translation = {
   nextMonth: 'Next Month',
   previousMonth: 'Previous Month',
   hidePassword: 'Hide password',
+  loading: 'Loading',
   progress: 'Progress',
   remove: 'Remove',
   resize: 'Resize',

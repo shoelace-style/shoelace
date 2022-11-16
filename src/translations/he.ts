@@ -11,6 +11,7 @@ const translation: Translation = {
   copy: 'העתק',
   currentValue: 'ערך נוכחי',
   hidePassword: 'הסתר סיסמא',
+  loading: 'טוען',
   progress: 'התקדמות',
   remove: 'לְהַסִיר',
   resize: 'שנה גודל',

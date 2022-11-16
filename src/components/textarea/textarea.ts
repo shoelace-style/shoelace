@@ -1,21 +1,24 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
 import { defaultValue } from '../../internal/default-value';
-import { emit } from '../../internal/event';
 import { FormSubmitController } from '../../internal/form';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { HasSlotController } from '../../internal/slot';
 import { watch } from '../../internal/watch';
 import styles from './textarea.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Textareas collect data from the user and allow multiple lines of text.
+ *
  * @since 2.0
  * @status stable
  *
- * @slot label - The textarea's label. Alternatively, you can use the label prop.
- * @slot help-text - Help text that describes how to use the input.
+ * @slot label - The textarea's label. Alternatively, you can use the `label` attribute.
+ * @slot help-text - Help text that describes how to use the input. Alternatively, you can use the `help-text` attribute.
  *
  * @event sl-change - Emitted when an alteration to the control's value is committed by the user.
  * @event sl-input - Emitted when the control receives input and its value changes.
@@ -30,8 +33,8 @@ import styles from './textarea.styles';
  * @csspart textarea - The textarea control.
  */
 @customElement('sl-textarea')
-export default class SlTextarea extends LitElement {
-  static styles = styles;
+export default class SlTextarea extends ShoelaceElement {
+  static styles: CSSResultGroup = styles;
 
   @query('.textarea__control') input: HTMLTextAreaElement;
 
@@ -54,10 +57,10 @@ export default class SlTextarea extends LitElement {
   /** Draws a filled textarea. */
   @property({ type: Boolean, reflect: true }) filled = false;
 
-  /** The textarea's label. Alternatively, you can use the label slot. */
+  /** The textarea's label. If you need to display HTML, you can use the `label` slot instead. */
   @property() label = '';
 
-  /** The textarea's help text. Alternatively, you can use the help-text slot. */
+  /** The textarea's help text. If you need to display HTML, you can use the `help-text` slot instead. */
   @property({ attribute: 'help-text' }) helpText = '';
 
   /** The textarea's placeholder text. */
@@ -157,10 +160,9 @@ export default class SlTextarea extends LitElement {
     if (position) {
       if (typeof position.top === 'number') this.input.scrollTop = position.top;
       if (typeof position.left === 'number') this.input.scrollLeft = position.left;
-      return;
+      return undefined;
     }
 
-    // eslint-disable-next-line consistent-return
     return {
       top: this.input.scrollTop,
       left: this.input.scrollTop
@@ -187,14 +189,14 @@ export default class SlTextarea extends LitElement {
 
     if (this.value !== this.input.value) {
       this.value = this.input.value;
-      emit(this, 'sl-input');
+      this.emit('sl-input');
     }
 
     if (this.value !== this.input.value) {
       this.value = this.input.value;
       this.setTextareaHeight();
-      emit(this, 'sl-input');
-      emit(this, 'sl-change');
+      this.emit('sl-input');
+      this.emit('sl-change');
     }
   }
 
@@ -211,13 +213,13 @@ export default class SlTextarea extends LitElement {
 
   handleBlur() {
     this.hasFocus = false;
-    emit(this, 'sl-blur');
+    this.emit('sl-blur');
   }
 
   handleChange() {
     this.value = this.input.value;
     this.setTextareaHeight();
-    emit(this, 'sl-change');
+    this.emit('sl-change');
   }
 
   @watch('disabled', { waitUntilFirstUpdate: true })
@@ -229,13 +231,12 @@ export default class SlTextarea extends LitElement {
 
   handleFocus() {
     this.hasFocus = true;
-    emit(this, 'sl-focus');
+    this.emit('sl-focus');
   }
 
   handleInput() {
     this.value = this.input.value;
-    this.setTextareaHeight();
-    emit(this, 'sl-input');
+    this.emit('sl-input');
   }
 
   @watch('rows', { waitUntilFirstUpdate: true })
@@ -246,6 +247,7 @@ export default class SlTextarea extends LitElement {
   @watch('value', { waitUntilFirstUpdate: true })
   handleValueChange() {
     this.invalid = !this.input.checkValidity();
+    this.updateComplete.then(() => this.setTextareaHeight());
   }
 
   setTextareaHeight() {

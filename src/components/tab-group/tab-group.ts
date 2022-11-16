@@ -1,16 +1,19 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import '../../components/icon-button/icon-button';
-import { emit } from '../../internal/event';
 import { scrollIntoView } from '../../internal/scroll';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
 import { LocalizeController } from '../../utilities/localize';
+import '../icon-button/icon-button';
 import styles from './tab-group.styles';
-import type SlTabPanel from '../../components/tab-panel/tab-panel';
-import type SlTab from '../../components/tab/tab';
+import type SlTabPanel from '../tab-panel/tab-panel';
+import type SlTab from '../tab/tab';
+import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Tab groups organize content into a container that shows one section at a time.
+ *
  * @since 2.0
  * @status stable
  *
@@ -37,8 +40,8 @@ import type SlTab from '../../components/tab/tab';
  * @cssproperty --track-width - The width of the indicator's track (the line that separates tabs from panels).
  */
 @customElement('sl-tab-group')
-export default class SlTabGroup extends LitElement {
-  static styles = styles;
+export default class SlTabGroup extends ShoelaceElement {
+  static styles: CSSResultGroup = styles;
   private readonly localize = new LocalizeController(this);
 
   @query('.tab-group') tabGroup: HTMLElement;
@@ -65,9 +68,6 @@ export default class SlTabGroup extends LitElement {
 
   /** Disables the scroll arrows that appear when tabs overflow. */
   @property({ attribute: 'no-scroll-controls', type: Boolean }) noScrollControls = false;
-
-  /** The locale to render the component in. */
-  @property() lang: string;
 
   connectedCallback() {
     super.connectedCallback();
@@ -121,11 +121,11 @@ export default class SlTabGroup extends LitElement {
     }
   }
 
-  getAllTabs(includeDisabled = false) {
+  getAllTabs(options: { includeDisabled: boolean } = { includeDisabled: true }) {
     const slot = this.shadowRoot!.querySelector<HTMLSlotElement>('slot[name="nav"]')!;
 
     return [...(slot.assignedElements() as SlTab[])].filter(el => {
-      return includeDisabled
+      return options.includeDisabled
         ? el.tagName.toLowerCase() === 'sl-tab'
         : el.tagName.toLowerCase() === 'sl-tab' && !el.disabled;
     });
@@ -175,11 +175,11 @@ export default class SlTabGroup extends LitElement {
 
     // Move focus left or right
     if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) {
-      const activeEl = document.activeElement;
+      const activeEl = this.tabs.find(t => t.matches(':focus'));
       const isRtl = this.localize.dir() === 'rtl';
 
       if (activeEl?.tagName.toLowerCase() === 'sl-tab') {
-        let index = this.tabs.indexOf(activeEl as SlTab);
+        let index = this.tabs.indexOf(activeEl);
 
         if (event.key === 'Home') {
           index = 0;
@@ -273,10 +273,10 @@ export default class SlTabGroup extends LitElement {
       // Emit events
       if (options.emitEvents) {
         if (previousTab) {
-          emit(this, 'sl-tab-hide', { detail: { name: previousTab.panel } });
+          this.emit('sl-tab-hide', { detail: { name: previousTab.panel } });
         }
 
-        emit(this, 'sl-tab-show', { detail: { name: this.activeTab.panel } });
+        this.emit('sl-tab-show', { detail: { name: this.activeTab.panel } });
       }
     }
   }
@@ -317,7 +317,7 @@ export default class SlTabGroup extends LitElement {
 
     // We can't used offsetLeft/offsetTop here due to a shadow parent issue where neither can getBoundingClientRect
     // because it provides invalid values for animating elements: https://bugs.chromium.org/p/chromium/issues/detail?id=920069
-    const allTabs = this.getAllTabs(true);
+    const allTabs = this.getAllTabs();
     const precedingTabs = allTabs.slice(0, allTabs.indexOf(currentTab));
     const offset = precedingTabs.reduce(
       (previous, current) => ({
@@ -357,7 +357,7 @@ export default class SlTabGroup extends LitElement {
 
   // This stores tabs and panels so we can refer to a cache instead of calling querySelectorAll() multiple times.
   syncTabsAndPanels() {
-    this.tabs = this.getAllTabs();
+    this.tabs = this.getAllTabs({ includeDisabled: false });
     this.panels = this.getAllPanels();
     this.syncIndicator();
   }

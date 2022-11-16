@@ -1,5 +1,4 @@
 import { css } from 'lit';
-import { focusVisibleSelector } from '../../internal/focus-visible';
 import componentStyles from '../../styles/component.styles';
 
 export default css`
@@ -69,15 +68,12 @@ export default css`
   }
 
   /* Focus */
-  .switch:not(.switch--checked):not(.switch--disabled) .switch__input${focusVisibleSelector} ~ .switch__control {
+  .switch:not(.switch--checked):not(.switch--disabled) .switch__input:focus-visible ~ .switch__control {
     background-color: var(--sl-color-neutral-400);
     border-color: var(--sl-color-neutral-400);
   }
 
-  .switch:not(.switch--checked):not(.switch--disabled)
-    .switch__input${focusVisibleSelector}
-    ~ .switch__control
-    .switch__thumb {
+  .switch:not(.switch--checked):not(.switch--disabled) .switch__input:focus-visible ~ .switch__control .switch__thumb {
     background-color: var(--sl-color-neutral-0);
     border-color: var(--sl-color-primary-600);
     outline: var(--sl-focus-ring);
@@ -108,15 +104,12 @@ export default css`
   }
 
   /* Checked + focus */
-  .switch.switch--checked:not(.switch--disabled) .switch__input${focusVisibleSelector} ~ .switch__control {
+  .switch.switch--checked:not(.switch--disabled) .switch__input:focus-visible ~ .switch__control {
     background-color: var(--sl-color-primary-600);
     border-color: var(--sl-color-primary-600);
   }
 
-  .switch.switch--checked:not(.switch--disabled)
-    .switch__input${focusVisibleSelector}
-    ~ .switch__control
-    .switch__thumb {
+  .switch.switch--checked:not(.switch--disabled) .switch__input:focus-visible ~ .switch__control .switch__thumb {
     background-color: var(--sl-color-neutral-0);
     border-color: var(--sl-color-primary-600);
     outline: var(--sl-focus-ring);

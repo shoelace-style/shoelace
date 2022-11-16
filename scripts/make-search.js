@@ -15,7 +15,7 @@ console.log('Generating search index for documentation');
     const headings = [];
     const lines = markdown.split('\n');
 
-    lines.map(line => {
+    lines.forEach(line => {
       if (line.startsWith('#')) {
         const level = line.match(/^(#+)/)[0].length;
         const content = line.replace(/^#+/, '');
@@ -37,16 +37,16 @@ console.log('Generating search index for documentation');
       return '';
     }
 
-    headers.map(header => {
+    headers.forEach(header => {
       const tagName = header.match(/\[component-header:([a-z-]+)\]/)[1];
       const component = getAllComponents(metadata).find(component => component.tagName === tagName);
 
       if (component) {
         const fields = ['members', 'cssProperties', 'cssParts', 'slots', 'events'];
 
-        fields.map(field => {
+        fields.forEach(field => {
           if (component[field]) {
-            component[field].map(entry => {
+            component[field].forEach(entry => {
               if (entry.name) members.push(entry.name);
               if (entry.description) members.push(entry.description);
               if (entry.attribute) members.push(entry.attribute);
@@ -70,13 +70,18 @@ console.log('Generating search index for documentation');
     this.field('m', { boost: 2 }); // members (props, methods, events, etc.)
     this.field('c'); // content
 
-    files.map((file, index) => {
+    files.forEach((file, index) => {
       const relativePath = path.relative('./docs', file).replace(/\\/g, '/');
       const relativePathNoExtension = relativePath.split('.').slice(0, -1).join('.');
       const url = relativePath.replace(/\.md$/, '');
       const filename = path.basename(file);
       // Ignore certain directories and files
-      if (relativePath.startsWith('assets/') || relativePath.startsWith('dist/') || filename === '_sidebar.md') {
+      if (
+        relativePath.startsWith('assets/') ||
+        relativePath.startsWith('dist/') ||
+        filename === '_sidebar.md' ||
+        filename === '404.md'
+      ) {
         return false;
       }
 
@@ -90,7 +95,11 @@ console.log('Generating search index for documentation');
         .join(' ');
       const members = getMembers(content);
 
-      this.add({ id: index, t: title, h: headings, m: members, c: content });
+      // Remove markdown code fields from search results. This seems to make search results a bit more accurate and
+      // reduces search.json from ~679 KB to ~455 KB.
+      const prunedContent = content.replace(/```(.*?)```/gs, '');
+
+      this.add({ id: index, t: title, h: headings, m: members, c: prunedContent });
 
       map[index] = { title, url };
     });

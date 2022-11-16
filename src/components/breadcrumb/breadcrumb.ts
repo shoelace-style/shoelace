@@ -1,11 +1,15 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
-import '../../components/icon/icon';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { LocalizeController } from '../../utilities/localize';
+import '../icon/icon';
 import styles from './breadcrumb.styles';
-import type SlBreadcrumbItem from '../../components/breadcrumb-item/breadcrumb-item';
+import type SlBreadcrumbItem from '../breadcrumb-item/breadcrumb-item';
+import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Breadcrumbs provide a group of links so users can easily navigate a website's hierarchy.
+ *
  * @since 2.0
  * @status stable
  *
@@ -17,8 +21,8 @@ import type SlBreadcrumbItem from '../../components/breadcrumb-item/breadcrumb-i
  * @csspart base - The component's internal wrapper.
  */
 @customElement('sl-breadcrumb')
-export default class SlBreadcrumb extends LitElement {
-  static styles = styles;
+export default class SlBreadcrumb extends ShoelaceElement {
+  static styles: CSSResultGroup = styles;
 
   @query('slot') defaultSlot: HTMLSlotElement;
   @query('slot[name="separator"]') separatorSlot: HTMLSlotElement;

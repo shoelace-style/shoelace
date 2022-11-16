@@ -2,8 +2,6 @@
 
 [component-header:sl-menu-item]
 
-Menu items provide options for the user to pick from in a menu.
-
 ```html preview
 <sl-menu style="max-width: 200px;">
   <sl-menu-item>Option 1</sl-menu-item>

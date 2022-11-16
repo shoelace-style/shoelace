@@ -4,8 +4,6 @@
 
 [component-header:sl-details]
 
-Details show a brief summary and expand to show additional content.
-
 ```html preview
 <sl-details summary="Toggle Me">
   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna

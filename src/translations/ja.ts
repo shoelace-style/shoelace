@@ -11,6 +11,7 @@ const translation: Translation = {
   copy: 'コピー',
   currentValue: '現在の価値',
   hidePassword: 'パスワードを隠す',
+  loading: '読み込み中',
   progress: '進行',
   remove: '削除',
   resize: 'サイズ変更',

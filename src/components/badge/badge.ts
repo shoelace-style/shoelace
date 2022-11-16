@@ -1,9 +1,13 @@
-import { LitElement, html } from 'lit';
+import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './badge.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Badges are used to draw attention and display statuses or counts.
+ *
  * @since 2.0
  * @status stable
  *
@@ -12,8 +16,8 @@ import styles from './badge.styles';
  * @csspart base - The component's internal wrapper.
  */
 @customElement('sl-badge')
-export default class SlBadge extends LitElement {
-  static styles = styles;
+export default class SlBadge extends ShoelaceElement {
+  static styles: CSSResultGroup = styles;
 
   /** The badge's variant. */
   @property({ reflect: true }) variant: 'primary' | 'success' | 'neutral' | 'warning' | 'danger' = 'primary';

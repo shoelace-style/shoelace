@@ -4,8 +4,18 @@ import { pascalCase } from 'pascal-case';
 
 const packageData = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
 const { name, description, version, author, homepage, license } = packageData;
-// eslint-disable-next-line func-style
-const noDash = string => string.replace(/^\s?-/, '').trim();
+
+function noDash(string) {
+  return string.replace(/^\s?-/, '').trim();
+}
+
+function replace(string, terms) {
+  terms.forEach(({ from, to }) => {
+    string = string?.replace(from, to);
+  });
+
+  return string;
+}
 
 export default {
   globs: ['src/components/**/*.ts'],
@@ -27,7 +37,7 @@ export default {
           case ts.SyntaxKind.ClassDeclaration: {
             const className = node.name.getText();
             const classDoc = moduleDoc?.declarations?.find(declaration => declaration.name === className);
-            const customTags = ['animation', 'dependency', 'since', 'status'];
+            const customTags = ['title', 'animation', 'dependency', 'since', 'status'];
             let customComments = '/**';
 
             node.jsDoc?.forEach(jsDoc => {
@@ -65,6 +75,7 @@ export default {
                 // Value-only metadata tags
                 case 'since':
                 case 'status':
+                case 'title':
                   classDoc[t.tag] = t.name;
                   break;
 
@@ -85,7 +96,6 @@ export default {
         }
       }
     },
-
     {
       name: 'shoelace-react-event-names',
       analyzePhase({ ts, node, moduleDoc }) {
@@ -101,6 +111,42 @@ export default {
             }
           }
         }
+      }
+    },
+    {
+      name: 'shoelace-translate-module-paths',
+      packageLinkPhase({ customElementsManifest }) {
+        customElementsManifest?.modules?.forEach(mod => {
+          //
+          // CEM paths look like this:
+          //
+          //  src/components/button/button.ts
+          //
+          // But we want them to look like this:
+          //
+          //  components/button/button.js
+          //
+          const terms = [
+            { from: /^src\//, to: '' }, // Strip the src/ prefix
+            { from: /\.(t|j)sx?$/, to: '.js' } // Convert .ts to .js
+          ];
+
+          mod.path = replace(mod.path, terms);
+
+          for (const ex of mod.exports ?? []) {
+            ex.declaration.module = replace(ex.declaration.module, terms);
+          }
+
+          for (const dec of mod.declarations ?? []) {
+            if (dec.kind === 'class') {
+              for (const member of dec.members ?? []) {
+                if (member.inheritedFrom) {
+                  member.inheritedFrom.module = replace(member.inheritedFrom.module, terms);
+                }
+              }
+            }
+          }
+        });
       }
     }
   ]

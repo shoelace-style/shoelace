@@ -20,6 +20,7 @@ export interface Translation extends DefaultTranslation {
   nextMonth: 'Next Month';
   previousMonth: 'Previous Month';
   hidePassword: string;
+  loading: string;
   progress: string;
   remove: string;
   resize: string;

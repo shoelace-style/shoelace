@@ -2,8 +2,6 @@
 
 [component-header:sl-include]
 
-Includes give you the power to embed external HTML files into the page.
-
 Included files are asynchronously requested using `window.fetch()`. Requests are cached, so the same file can be included multiple times, but only one request will be made.
 
 The included content will be inserted into the `<sl-include>` element's default slot so it can be easily accessed and styled through the light DOM.
@@ -32,12 +30,16 @@ If the request fails, the `sl-error` event will be emitted. In this case, `event
 <script>
   const include = document.querySelector('sl-include');
 
-  include.addEventListener('sl-load', () => {
-    console.log('Success');
+  include.addEventListener('sl-load', event => {
+    if (event.eventPhase === Event.AT_TARGET) {
+      console.log('Success');
+    }
   });
 
   include.addEventListener('sl-error', event => {
-    console.log('Error', event.detail.status);
+    if (event.eventPhase === Event.AT_TARGET) {
+      console.log('Error', event.detail.status);
+    }
   });
 </script>
 ```

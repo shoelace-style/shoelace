@@ -2,8 +2,6 @@
 
 [component-header:sl-progress-ring]
 
-Progress rings are used to show the progress of a determinate operation in a circular fashion.
-
 ```html preview
 <sl-progress-ring value="25"></sl-progress-ring>
 ```
@@ -30,18 +28,18 @@ import { SlProgressRing } from '@shoelace-style/shoelace/dist/react';
 const App = () => <SlProgressRing value="50" style={{ '--size': '200px' }} />;
 ```
 
-### Track Width
+### Track and Indicator Width
 
-Use the `--track-width` custom property to set the width of the progress ring's track.
+Use the `--track-width` and `--indicator-width` custom properties to set the width of the progress ring's track and indicator.
 
 ```html preview
-<sl-progress-ring value="50" style="--track-width: 10px;"></sl-progress-ring>
+<sl-progress-ring value="50" style="--track-width: 6px; --indicator-width: 12px;"></sl-progress-ring>
 ```
 
 ```jsx react
 import { SlProgressRing } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => <SlProgressRing value="50" style={{ '--track-width': '10px' }} />;
+const App = () => <SlProgressRing value="50" style={{ '--track-width': '6px', '--indicator-width': '12px' }} />;
 ```
 
 ### Colors

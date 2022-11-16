@@ -1,15 +1,18 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
 import { defaultValue } from '../../internal/default-value';
-import { emit } from '../../internal/event';
 import { FormSubmitController } from '../../internal/form';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
 import styles from './switch.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Switches allow the user to toggle an option on or off.
+ *
  * @since 2.0
  * @status stable
  *
@@ -29,8 +32,8 @@ import styles from './switch.styles';
  * @cssproperty --thumb-size - The size of the thumb.
  */
 @customElement('sl-switch')
-export default class SlSwitch extends LitElement {
-  static styles = styles;
+export default class SlSwitch extends ShoelaceElement {
+  static styles: CSSResultGroup = styles;
 
   @query('input[type="checkbox"]') input: HTMLInputElement;
 
@@ -97,7 +100,7 @@ export default class SlSwitch extends LitElement {
 
   handleBlur() {
     this.hasFocus = false;
-    emit(this, 'sl-blur');
+    this.emit('sl-blur');
   }
 
   @watch('checked', { waitUntilFirstUpdate: true })
@@ -108,7 +111,7 @@ export default class SlSwitch extends LitElement {
 
   handleClick() {
     this.checked = !this.checked;
-    emit(this, 'sl-change');
+    this.emit('sl-change');
   }
 
   @watch('disabled', { waitUntilFirstUpdate: true })
@@ -120,20 +123,20 @@ export default class SlSwitch extends LitElement {
 
   handleFocus() {
     this.hasFocus = true;
-    emit(this, 'sl-focus');
+    this.emit('sl-focus');
   }
 
   handleKeyDown(event: KeyboardEvent) {
     if (event.key === 'ArrowLeft') {
       event.preventDefault();
       this.checked = false;
-      emit(this, 'sl-change');
+      this.emit('sl-change');
     }
 
     if (event.key === 'ArrowRight') {
       event.preventDefault();
       this.checked = true;
-      emit(this, 'sl-change');
+      this.emit('sl-change');
     }
   }
 

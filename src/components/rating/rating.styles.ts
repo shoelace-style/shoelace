@@ -1,5 +1,4 @@
 import { css } from 'lit';
-import { focusVisibleSelector } from '../../internal/focus-visible';
 import componentStyles from '../../styles/component.styles';
 
 export default css`
@@ -25,7 +24,7 @@ export default css`
     outline: none;
   }
 
-  .rating${focusVisibleSelector} {
+  .rating:focus-visible {
     outline: var(--sl-focus-ring);
     outline-offset: var(--sl-focus-ring-offset);
   }
@@ -76,5 +75,12 @@ export default css`
 
   .rating--disabled .rating__symbols {
     cursor: not-allowed;
+  }
+
+  /* Forced colors mode */
+  @media (forced-colors: active) {
+    .rating__symbols--indicator {
+      color: SelectedItem;
+    }
   }
 `;

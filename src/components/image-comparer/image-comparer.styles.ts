@@ -1,5 +1,4 @@
 import { css } from 'lit';
-import { focusVisibleSelector } from '../../internal/focus-visible';
 import componentStyles from '../../styles/component.styles';
 
 export default css`
@@ -65,12 +64,12 @@ export default css`
     background-color: var(--sl-color-neutral-0);
     border-radius: var(--sl-border-radius-circle);
     font-size: calc(var(--handle-size) * 0.5);
-    color: var(--sl-color-neutral-600);
+    color: var(--sl-color-neutral-700);
     cursor: inherit;
     z-index: 10;
   }
 
-  .image-comparer__handle${focusVisibleSelector} {
+  .image-comparer__handle:focus-visible {
     outline: var(--sl-focus-ring);
     outline-offset: var(--sl-focus-ring-offset);
   }

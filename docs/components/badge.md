@@ -2,8 +2,6 @@
 
 [component-header:sl-badge]
 
-Badges are used to draw attention and display statuses or counts.
-
 ```html preview
 <sl-badge>Badge</sl-badge>
 ```

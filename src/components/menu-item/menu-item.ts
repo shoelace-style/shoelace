@@ -1,13 +1,16 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import '../../components/icon/icon';
-import { emit } from '../../internal/event';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { getTextContent } from '../../internal/slot';
 import { watch } from '../../internal/watch';
+import '../icon/icon';
 import styles from './menu-item.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Menu items provide options for the user to pick from in a menu.
+ *
  * @since 2.0
  * @status stable
  *
@@ -21,14 +24,14 @@ import styles from './menu-item.styles';
  * @slot suffix - Used to append an icon or similar element to the menu item.
  *
  * @csspart base - The component's internal wrapper.
- * @csspart checked-icon - The checkmark's container, only visible when the menu item is checked.
+ * @csspart checked-icon - The checked icon, which is only visible when the menu item is checked.
  * @csspart prefix - The prefix container.
  * @csspart label - The menu item label.
  * @csspart suffix - The suffix container.
  */
 @customElement('sl-menu-item')
-export default class SlMenuItem extends LitElement {
-  static styles = styles;
+export default class SlMenuItem extends ShoelaceElement {
+  static styles: CSSResultGroup = styles;
 
   private cachedTextLabel: string;
 
@@ -74,7 +77,7 @@ export default class SlMenuItem extends LitElement {
 
     if (textLabel !== this.cachedTextLabel) {
       this.cachedTextLabel = textLabel;
-      emit(this, 'sl-label-change');
+      this.emit('sl-label-change');
     }
   }
 
@@ -90,7 +93,7 @@ export default class SlMenuItem extends LitElement {
         })}
       >
         <span part="checked-icon" class="menu-item__check">
-          <sl-icon name="check-lg" library="system" aria-hidden="true"></sl-icon>
+          <sl-icon name="check" library="system" aria-hidden="true"></sl-icon>
         </span>
 
         <span part="prefix" class="menu-item__prefix">

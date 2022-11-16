@@ -2,8 +2,6 @@
 
 [component-header:sl-checkbox]
 
-Checkboxes allow the user to toggle an option on or off.
-
 ```html preview
 <sl-checkbox>Checkbox</sl-checkbox>
 ```
@@ -74,14 +72,17 @@ Use the `setCustomValidity()` method to set a custom validation message. This wi
   const form = document.querySelector('.custom-validity');
   const checkbox = form.querySelector('sl-checkbox');
   const errorMessage = `Don't forget to check me!`;
+
   // Set initial validity as soon as the element is defined
   customElements.whenDefined('sl-checkbox').then(() => {
     checkbox.setCustomValidity(errorMessage);
   });
+
   // Update validity on change
   checkbox.addEventListener('sl-change', () => {
     checkbox.setCustomValidity(checkbox.checked ? '' : errorMessage);
   });
+
   // Handle submit
   form.addEventListener('submit', event => {
     event.preventDefault();
@@ -93,19 +94,24 @@ Use the `setCustomValidity()` method to set a custom validation message. This wi
 ```jsx react
 import { useEffect, useRef } from 'react';
 import { SlButton, SlCheckbox } from '@shoelace-style/shoelace/dist/react';
+
 const App = () => {
   const checkbox = useRef(null);
   const errorMessage = `Don't forget to check me!`;
+
   function handleChange() {
     checkbox.current.setCustomValidity(checkbox.current.checked ? '' : errorMessage);
   }
+
   function handleSubmit(event) {
     event.preventDefault();
     alert('All fields are valid!');
   }
+
   useEffect(() => {
     checkbox.current.setCustomValidity(errorMessage);
   }, []);
+
   return (
     <form class="custom-validity" onSubmit={handleSubmit}>
       <SlCheckbox ref={checkbox} onSlChange={handleChange}>

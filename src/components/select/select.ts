@@ -1,26 +1,28 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import '../../components/dropdown/dropdown';
-import '../../components/icon-button/icon-button';
-import '../../components/icon/icon';
-import '../../components/menu/menu';
-import '../../components/tag/tag';
 import { defaultValue } from '../../internal/default-value';
-import { emit } from '../../internal/event';
 import { FormSubmitController } from '../../internal/form';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { HasSlotController } from '../../internal/slot';
 import { watch } from '../../internal/watch';
 import { LocalizeController } from '../../utilities/localize';
+import '../dropdown/dropdown';
+import '../icon-button/icon-button';
+import '../icon/icon';
+import '../menu/menu';
+import '../tag/tag';
 import styles from './select.styles';
-import type SlDropdown from '../../components/dropdown/dropdown';
-import type SlIconButton from '../../components/icon-button/icon-button';
-import type SlMenuItem from '../../components/menu-item/menu-item';
-import type { MenuSelectEventDetail } from '../../components/menu/menu';
-import type SlMenu from '../../components/menu/menu';
-import type { TemplateResult } from 'lit';
+import type SlDropdown from '../dropdown/dropdown';
+import type SlIconButton from '../icon-button/icon-button';
+import type SlMenuItem from '../menu-item/menu-item';
+import type { MenuSelectEventDetail } from '../menu/menu';
+import type SlMenu from '../menu/menu';
+import type { TemplateResult, CSSResultGroup } from 'lit';
 
 /**
+ * @summary Selects allow you to choose one or more items from a dropdown menu.
+ *
  * @since 2.0
  * @status stable
  *
@@ -34,8 +36,8 @@ import type { TemplateResult } from 'lit';
  * @slot prefix - Used to prepend an icon or similar element to the select.
  * @slot suffix - Used to append an icon or similar element to the select.
  * @slot clear-icon - An icon to use in lieu of the default clear icon.
- * @slot label - The select's label. Alternatively, you can use the label prop.
- * @slot help-text - Help text that describes how to use the select.
+ * @slot label - The select's label. Alternatively, you can use the `label` attribute.
+ * @slot help-text - Help text that describes how to use the select. Alternatively, you can use the `help-text` attribute.
  *
  * @event sl-clear - Emitted when the clear button is activated.
  * @event sl-change - Emitted when the control's value changes.
@@ -61,8 +63,8 @@ import type { TemplateResult } from 'lit';
  * @csspart tags - The container in which multi select options are rendered.
  */
 @customElement('sl-select')
-export default class SlSelect extends LitElement {
-  static styles = styles;
+export default class SlSelect extends ShoelaceElement {
+  static styles: CSSResultGroup = styles;
 
   @query('.select') dropdown: SlDropdown;
   @query('.select__control') control: SlDropdown;
@@ -117,7 +119,7 @@ export default class SlSelect extends LitElement {
   /** Draws a pill-style select with rounded edges. */
   @property({ type: Boolean, reflect: true }) pill = false;
 
-  /** The select's label. Alternatively, you can use the label slot. */
+  /** The select's label. If you need to display HTML, you can use the `label` slot instead. */
   @property() label = '';
 
   /**
@@ -126,7 +128,7 @@ export default class SlSelect extends LitElement {
    */
   @property() placement: 'top' | 'bottom' = 'bottom';
 
-  /** The select's help text. Alternatively, you can use the help-text slot. */
+  /** The select's help text. If you need to display HTML, you can use the `help-text` slot instead. */
   @property({ attribute: 'help-text' }) helpText = '';
 
   /** The select's required attribute. */
@@ -195,14 +197,14 @@ export default class SlSelect extends LitElement {
     // Don't blur if the control is open. We'll move focus back once it closes.
     if (!this.isOpen) {
       this.hasFocus = false;
-      emit(this, 'sl-blur');
+      this.emit('sl-blur');
     }
   }
 
   handleClearClick(event: MouseEvent) {
     event.stopPropagation();
     this.value = this.multiple ? [] : '';
-    emit(this, 'sl-clear');
+    this.emit('sl-clear');
     this.syncItemsFromValue();
   }
 
@@ -220,7 +222,7 @@ export default class SlSelect extends LitElement {
   handleFocus() {
     if (!this.hasFocus) {
       this.hasFocus = true;
-      emit(this, 'sl-focus');
+      this.emit('sl-focus');
     }
   }
 
@@ -364,7 +366,7 @@ export default class SlSelect extends LitElement {
     this.syncItemsFromValue();
     await this.updateComplete;
     this.invalid = !this.input.checkValidity();
-    emit(this, 'sl-change');
+    this.emit('sl-change');
   }
 
   resizeMenu() {

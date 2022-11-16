@@ -1,18 +1,22 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import '../../components/icon-button/icon-button';
 import { animateTo, stopAnimations } from '../../internal/animate';
-import { emit, waitForEvent } from '../../internal/event';
+import { waitForEvent } from '../../internal/event';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { HasSlotController } from '../../internal/slot';
 import { watch } from '../../internal/watch';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
 import { LocalizeController } from '../../utilities/localize';
+import '../icon-button/icon-button';
 import styles from './alert.styles';
+import type { CSSResultGroup } from 'lit';
 
 const toastStack = Object.assign(document.createElement('div'), { className: 'sl-toast-stack' });
 
 /**
+ * @summary Alerts are used to display important messages inline or as toast notifications.
+ *
  * @since 2.0
  * @status stable
  *
@@ -39,8 +43,8 @@ const toastStack = Object.assign(document.createElement('div'), { className: 'sl
  */
 
 @customElement('sl-alert')
-export default class SlAlert extends LitElement {
-  static styles = styles;
+export default class SlAlert extends ShoelaceElement {
+  static styles: CSSResultGroup = styles;
 
   private autoHideTimeout: number;
   private readonly hasSlotController = new HasSlotController(this, 'icon', 'suffix');
@@ -142,7 +146,7 @@ export default class SlAlert extends LitElement {
   async handleOpenChange() {
     if (this.open) {
       // Show
-      emit(this, 'sl-show');
+      this.emit('sl-show');
 
       if (this.duration < Infinity) {
         this.restartAutoHide();
@@ -153,10 +157,10 @@ export default class SlAlert extends LitElement {
       const { keyframes, options } = getAnimation(this, 'alert.show', { dir: this.localize.dir() });
       await animateTo(this.base, keyframes, options);
 
-      emit(this, 'sl-after-show');
+      this.emit('sl-after-show');
     } else {
       // Hide
-      emit(this, 'sl-hide');
+      this.emit('sl-hide');
 
       clearTimeout(this.autoHideTimeout);
 
@@ -165,7 +169,7 @@ export default class SlAlert extends LitElement {
       await animateTo(this.base, keyframes, options);
       this.base.hidden = true;
 
-      emit(this, 'sl-after-hide');
+      this.emit('sl-after-hide');
     }
   }
 

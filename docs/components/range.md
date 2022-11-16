@@ -2,8 +2,6 @@
 
 [component-header:sl-range]
 
-Ranges allow the user to select a single value within a given range using a slider.
-
 ```html preview
 <sl-range></sl-range>
 ```
@@ -23,7 +21,7 @@ const App = () => <SlRange />;
 Use the `label` attribute to give the range an accessible label. For labels that contain HTML, use the `label` slot instead.
 
 ```html preview
-<sl-range label="Volume" min="0" max="100"></sl-input>
+<sl-range label="Volume" min="0" max="100"></sl-range>
 ```
 
 ```jsx react
@@ -37,12 +35,7 @@ const App = () => <SlRange label="Volume" min={0} max={100} />;
 Add descriptive help text to a range with the `help-text` attribute. For help texts that contain HTML, use the `help-text` slot instead.
 
 ```html preview
-<sl-range
-  label="Volume"
-  help-text="Controls the volume of the current song."
-  min="0"
-  max="100"
-></sl-input>
+<sl-range label="Volume" help-text="Controls the volume of the current song." min="0" max="100"></sl-range>
 ```
 
 ```jsx react
@@ -128,6 +121,38 @@ const App = () => (
     style={{
       '--track-color-active': 'var(--sl-color-primary-600)',
       '--track-color-inactive': 'var(--sl-color-primary-200)'
+    }}
+  />
+);
+```
+
+### Custom Track Offset
+
+You can customize the initial offset of the active track using the `--track-active-offset` custom property.
+
+```html preview
+<sl-range
+  min="-100"
+  max="100"
+  style="
+  --track-color-active: var(--sl-color-primary-600);
+  --track-color-inactive: var(--sl-color-primary-100);
+  --track-active-offset: 50%;
+"
+></sl-range>
+```
+
+```jsx react
+import { SlRange } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlRange
+    min={-100}
+    max={100}
+    style={{
+      '--track-color-active': 'var(--sl-color-primary-600)',
+      '--track-color-inactive': 'var(--sl-color-primary-200)',
+      '--track-active-offset': '50%'
     }}
   />
 );

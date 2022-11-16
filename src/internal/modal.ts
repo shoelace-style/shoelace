@@ -52,10 +52,10 @@ export default class Modal {
   handleKeyDown(event: KeyboardEvent) {
     if (event.key === 'Tab' && event.shiftKey) {
       this.tabDirection = 'backward';
-    }
 
-    // Ensure focus remains trapped after they key is pressed
-    requestAnimationFrame(() => this.checkFocus());
+      // Ensure focus remains trapped after the key is pressed
+      requestAnimationFrame(() => this.checkFocus());
+    }
   }
 
   handleKeyUp() {

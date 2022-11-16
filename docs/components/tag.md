@@ -2,8 +2,6 @@
 
 [component-header:sl-tag]
 
-Tags are used as labels to organize things or to indicate a selection.
-
 ```html preview
 <sl-tag variant="primary">Primary</sl-tag>
 <sl-tag variant="success">Success</sl-tag>

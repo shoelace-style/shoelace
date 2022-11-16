@@ -8,17 +8,28 @@ export default css`
     display: inline-block;
   }
 
-  .dropdown {
-    position: relative;
+  .dropdown::part(popup) {
+    z-index: var(--sl-z-index-dropdown);
+  }
+
+  .dropdown[data-current-placement^='top']::part(popup) {
+    transform-origin: bottom;
+  }
+
+  .dropdown[data-current-placement^='bottom']::part(popup) {
+    transform-origin: top;
+  }
+
+  .dropdown[data-current-placement^='left']::part(popup) {
+    transform-origin: right;
+  }
+
+  .dropdown[data-current-placement^='right']::part(popup) {
+    transform-origin: left;
   }
 
   .dropdown__trigger {
     display: block;
-  }
-
-  .dropdown__positioner {
-    position: absolute;
-    z-index: var(--sl-z-index-dropdown);
   }
 
   .dropdown__panel {
@@ -27,8 +38,6 @@ export default css`
     font-weight: var(--sl-font-weight-normal);
     color: var(--color);
     box-shadow: var(--sl-shadow-large);
-    overflow: auto;
-    overscroll-behavior: none;
     pointer-events: none;
   }
 
@@ -36,19 +45,9 @@ export default css`
     pointer-events: all;
   }
 
-  .dropdown__positioner[data-placement^='top'] .dropdown__panel {
-    transform-origin: bottom;
-  }
-
-  .dropdown__positioner[data-placement^='bottom'] .dropdown__panel {
-    transform-origin: top;
-  }
-
-  .dropdown__positioner[data-placement^='left'] .dropdown__panel {
-    transform-origin: right;
-  }
-
-  .dropdown__positioner[data-placement^='right'] .dropdown__panel {
-    transform-origin: left;
+  /* When users slot a menu, make sure it conforms to the popup's auto-size */
+  ::slotted(sl-menu) {
+    max-width: var(--auto-size-available-width) !important;
+    max-height: var(--auto-size-available-height) !important;
   }
 `;

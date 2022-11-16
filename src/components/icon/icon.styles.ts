@@ -12,7 +12,6 @@ export default css`
     box-sizing: content-box !important;
   }
 
-  .icon,
   svg {
     display: block;
     height: 100%;

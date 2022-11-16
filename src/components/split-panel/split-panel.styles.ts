@@ -1,5 +1,4 @@
 import { css } from 'lit';
-import { focusVisibleSelector } from '../../internal/focus-visible';
 import componentStyles from '../../styles/component.styles';
 
 export default css`
@@ -34,7 +33,7 @@ export default css`
     outline: none;
   }
 
-  :host(:not([disabled])) .divider${focusVisibleSelector} {
+  :host(:not([disabled])) .divider:focus-visible {
     background-color: var(--sl-color-primary-600);
     color: var(--sl-color-neutral-0);
   }
@@ -72,5 +71,11 @@ export default css`
     width: 100%;
     top: calc(var(--divider-hit-area) / -2 + var(--divider-width) / 2);
     height: var(--divider-hit-area);
+  }
+
+  @media (forced-colors: active) {
+    .divider {
+      outline: solid 1px transparent;
+    }
   }
 `;

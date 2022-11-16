@@ -1,27 +1,31 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import '../../components/icon-button/icon-button';
 import { animateTo, stopAnimations } from '../../internal/animate';
-import { emit, waitForEvent } from '../../internal/event';
+import { waitForEvent } from '../../internal/event';
 import Modal from '../../internal/modal';
 import { lockBodyScrolling, unlockBodyScrolling } from '../../internal/scroll';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { HasSlotController } from '../../internal/slot';
 import { uppercaseFirstLetter } from '../../internal/string';
 import { watch } from '../../internal/watch';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
 import { LocalizeController } from '../../utilities/localize';
+import '../icon-button/icon-button';
 import styles from './drawer.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Drawers slide in from a container to expose additional options and information.
+ *
  * @since 2.0
  * @status stable
  *
  * @dependency sl-icon-button
  *
  * @slot - The drawer's content.
- * @slot label - The drawer's label. Alternatively, you can use the label prop.
+ * @slot label - The drawer's label. Alternatively, you can use the `label` attribute.
  * @slot footer - The drawer's footer, usually one or more buttons representing various options.
  *
  * @event sl-show - Emitted when the drawer opens.
@@ -64,8 +68,8 @@ import styles from './drawer.styles';
  * @animation drawer.overlay.hide - The animation to use when hiding the drawer's overlay.
  */
 @customElement('sl-drawer')
-export default class SlDrawer extends LitElement {
-  static styles = styles;
+export default class SlDrawer extends ShoelaceElement {
+  static styles: CSSResultGroup = styles;
 
   @query('.drawer') drawer: HTMLElement;
   @query('.drawer__panel') panel: HTMLElement;
@@ -81,7 +85,8 @@ export default class SlDrawer extends LitElement {
 
   /**
    * The drawer's label as displayed in the header. You should always include a relevant label even when using
-   * `no-header`, as it is required for proper accessibility.
+   * `no-header`, as it is required for proper accessibility. If you need to display HTML, you can use the `label` slot
+   * instead.
    */
   @property({ reflect: true }) label = '';
 
@@ -102,6 +107,7 @@ export default class SlDrawer extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
+    this.handleDocumentKeyDown = this.handleDocumentKeyDown.bind(this);
     this.modal = new Modal(this);
   }
 
@@ -109,6 +115,7 @@ export default class SlDrawer extends LitElement {
     this.drawer.hidden = !this.open;
 
     if (this.open && !this.contained) {
+      this.addOpenListeners();
       this.modal.activate();
       lockBodyScrolling(this);
     }
@@ -140,7 +147,7 @@ export default class SlDrawer extends LitElement {
   }
 
   private requestClose(source: 'close-button' | 'keyboard' | 'overlay') {
-    const slRequestClose = emit(this, 'sl-request-close', {
+    const slRequestClose = this.emit('sl-request-close', {
       cancelable: true,
       detail: { source }
     });
@@ -154,8 +161,16 @@ export default class SlDrawer extends LitElement {
     this.hide();
   }
 
-  handleKeyDown(event: KeyboardEvent) {
-    if (event.key === 'Escape') {
+  addOpenListeners() {
+    document.addEventListener('keydown', this.handleDocumentKeyDown);
+  }
+
+  removeOpenListeners() {
+    document.removeEventListener('keydown', this.handleDocumentKeyDown);
+  }
+
+  handleDocumentKeyDown(event: KeyboardEvent) {
+    if (this.open && event.key === 'Escape') {
       event.stopPropagation();
       this.requestClose('keyboard');
     }
@@ -165,7 +180,8 @@ export default class SlDrawer extends LitElement {
   async handleOpenChange() {
     if (this.open) {
       // Show
-      emit(this, 'sl-show');
+      this.emit('sl-show');
+      this.addOpenListeners();
       this.originalTrigger = document.activeElement as HTMLElement;
 
       // Lock body scrolling only if the drawer isn't contained
@@ -190,7 +206,7 @@ export default class SlDrawer extends LitElement {
 
       // Set initial focus
       requestAnimationFrame(() => {
-        const slInitialFocus = emit(this, 'sl-initial-focus', { cancelable: true });
+        const slInitialFocus = this.emit('sl-initial-focus', { cancelable: true });
 
         if (!slInitialFocus.defaultPrevented) {
           // Set focus to the autofocus target and restore the attribute
@@ -216,10 +232,11 @@ export default class SlDrawer extends LitElement {
         animateTo(this.overlay, overlayAnimation.keyframes, overlayAnimation.options)
       ]);
 
-      emit(this, 'sl-after-show');
+      this.emit('sl-after-show');
     } else {
       // Hide
-      emit(this, 'sl-hide');
+      this.emit('sl-hide');
+      this.removeOpenListeners();
       this.modal.deactivate();
       unlockBodyScrolling(this);
 
@@ -228,12 +245,24 @@ export default class SlDrawer extends LitElement {
         dir: this.localize.dir()
       });
       const overlayAnimation = getAnimation(this, 'drawer.overlay.hide', { dir: this.localize.dir() });
+
+      // Animate the overlay and the panel at the same time. Because animation durations might be different, we need to
+      // hide each one individually when the animation finishes, otherwise the first one that finishes will reappear
+      // unexpectedly. We'll unhide them after all animations have completed.
       await Promise.all([
-        animateTo(this.panel, panelAnimation.keyframes, panelAnimation.options),
-        animateTo(this.overlay, overlayAnimation.keyframes, overlayAnimation.options)
+        animateTo(this.overlay, overlayAnimation.keyframes, overlayAnimation.options).then(() => {
+          this.overlay.hidden = true;
+        }),
+        animateTo(this.panel, panelAnimation.keyframes, panelAnimation.options).then(() => {
+          this.panel.hidden = true;
+        })
       ]);
 
       this.drawer.hidden = true;
+
+      // Now that the dialog is hidden, restore the overlay and panel for next time
+      this.overlay.hidden = false;
+      this.panel.hidden = false;
 
       // Restore focus to the original trigger
       const trigger = this.originalTrigger;
@@ -241,12 +270,11 @@ export default class SlDrawer extends LitElement {
         setTimeout(() => trigger.focus());
       }
 
-      emit(this, 'sl-after-hide');
+      this.emit('sl-after-hide');
     }
   }
 
   render() {
-    /* eslint-disable lit-a11y/click-events-have-key-events */
     return html`
       <div
         part="base"
@@ -262,7 +290,6 @@ export default class SlDrawer extends LitElement {
           'drawer--rtl': this.localize.dir() === 'rtl',
           'drawer--has-footer': this.hasSlotController.test('footer')
         })}
-        @keydown=${this.handleKeyDown}
       >
         <div part="overlay" class="drawer__overlay" @click=${() => this.requestClose('overlay')} tabindex="-1"></div>
 
@@ -306,7 +333,6 @@ export default class SlDrawer extends LitElement {
         </div>
       </div>
     `;
-    /* eslint-enable lit-a11y/click-events-have-key-events */
   }
 }
 

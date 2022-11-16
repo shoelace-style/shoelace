@@ -105,4 +105,10 @@ export default css`
     left: 0;
     background-color: var(--sl-overlay-background-color);
   }
+
+  @media (forced-colors: active) {
+    .dialog__panel {
+      border: solid 1px var(--sl-color-neutral-0);
+    }
+  }
 `;

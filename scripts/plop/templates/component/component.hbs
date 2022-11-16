@@ -1,10 +1,14 @@
-import { LitElement, html } from 'lit';
+import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { emit } from '../../internal/event';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
+import { LocalizeController } from '../../utilities/localize';
 import styles from './{{ tagWithoutPrefix tag }}.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Short summary of the component's intended use.
+ * 
  * @since 2.0
  * @status experimental
  *
@@ -20,8 +24,10 @@ import styles from './{{ tagWithoutPrefix tag }}.styles';
  * @cssproperty --example - An example CSS custom property.
  */
 @customElement('{{ tag }}')
-export default class {{ properCase tag }} extends LitElement {
-  static styles = styles;
+export default class {{ properCase tag }} extends ShoelaceElement {
+  static styles: CSSResultGroup = styles;
+
+  private readonly localize = new LocalizeController(this);
 
   /** An example property. */
   @property() prop = 'example';
@@ -29,7 +35,7 @@ export default class {{ properCase tag }} extends LitElement {
   @watch('someProp')
   doSomething() {
     // Example event
-    emit(this, 'sl-event-name');
+    this.emit('sl-event-name');
   }
 
   render() {

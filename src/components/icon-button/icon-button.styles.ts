@@ -1,5 +1,4 @@
 import { css } from 'lit';
-import { focusVisibleSelector } from '../../internal/focus-visible';
 import componentStyles from '../../styles/component.styles';
 
 export default css`
@@ -7,6 +6,7 @@ export default css`
 
   :host {
     display: inline-block;
+    color: var(--sl-color-neutral-600);
   }
 
   .icon-button {
@@ -17,7 +17,7 @@ export default css`
     border: none;
     border-radius: var(--sl-border-radius-medium);
     font-size: inherit;
-    color: var(--sl-color-neutral-600);
+    color: inherit;
     padding: var(--sl-spacing-x-small);
     cursor: pointer;
     transition: var(--sl-transition-medium) color;
@@ -42,7 +42,7 @@ export default css`
     cursor: not-allowed;
   }
 
-  .icon-button${focusVisibleSelector} {
+  .icon-button:focus-visible {
     outline: var(--sl-focus-ring);
     outline-offset: var(--sl-focus-ring-offset);
   }

@@ -1,11 +1,14 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { emit } from '../../internal/event';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
 import styles from './include.styles';
 import { requestInclude } from './request';
+import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Includes give you the power to embed external HTML files into the page.
+ *
  * @since 2.0
  * @status stable
  *
@@ -13,8 +16,8 @@ import { requestInclude } from './request';
  * @event {{ status: number }} sl-error - Emitted when the included file fails to load due to an error.
  */
 @customElement('sl-include')
-export default class SlInclude extends LitElement {
-  static styles = styles;
+export default class SlInclude extends ShoelaceElement {
+  static styles: CSSResultGroup = styles;
 
   /**
    * The location of the HTML file to include.
@@ -52,7 +55,7 @@ export default class SlInclude extends LitElement {
       }
 
       if (!file.ok) {
-        emit(this, 'sl-error', { detail: { status: file.status } });
+        this.emit('sl-error', { detail: { status: file.status } });
         return;
       }
 
@@ -62,9 +65,9 @@ export default class SlInclude extends LitElement {
         [...this.querySelectorAll('script')].forEach(script => this.executeScript(script));
       }
 
-      emit(this, 'sl-load');
+      this.emit('sl-load');
     } catch {
-      emit(this, 'sl-error', { detail: { status: -1 } });
+      this.emit('sl-error', { detail: { status: -1 } });
     }
   }
 

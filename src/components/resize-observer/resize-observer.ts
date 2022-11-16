@@ -1,10 +1,13 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { emit } from '../../internal/event';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
 import styles from './resize-observer.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary The Resize Observer component offers a thin, declarative interface to the [`ResizeObserver API`](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver).
+ *
  * @since 2.0
  * @status stable
  *
@@ -13,8 +16,8 @@ import styles from './resize-observer.styles';
  * @event {{ entries: ResizeObserverEntry[] }} sl-resize - Emitted when the element is resized.
  */
 @customElement('sl-resize-observer')
-export default class SlResizeObserver extends LitElement {
-  static styles = styles;
+export default class SlResizeObserver extends ShoelaceElement {
+  static styles: CSSResultGroup = styles;
 
   private resizeObserver: ResizeObserver;
   private observedElements: HTMLElement[] = [];
@@ -25,7 +28,7 @@ export default class SlResizeObserver extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     this.resizeObserver = new ResizeObserver((entries: ResizeObserverEntry[]) => {
-      emit(this, 'sl-resize', { detail: { entries } });
+      this.emit('sl-resize', { detail: { entries } });
     });
 
     if (!this.disabled) {

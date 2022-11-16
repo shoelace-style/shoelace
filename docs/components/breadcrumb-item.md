@@ -2,8 +2,6 @@
 
 [component-header:sl-breadcrumb-item]
 
-Breadcrumb Items are used inside [breadcrumbs](/components/breadcrumb) to represent different links.
-
 ```html preview
 <sl-breadcrumb>
   <sl-breadcrumb-item>

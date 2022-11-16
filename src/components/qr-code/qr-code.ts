@@ -1,9 +1,11 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import QrCreator from 'qr-creator';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
 import styles from './qr-code.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
  * @since 2.0
@@ -12,8 +14,8 @@ import styles from './qr-code.styles';
  * @csspart base - The component's internal wrapper.
  */
 @customElement('sl-qr-code')
-export default class SlQrCode extends LitElement {
-  static styles = styles;
+export default class SlQrCode extends ShoelaceElement {
+  static styles: CSSResultGroup = styles;
 
   @query('canvas') canvas: HTMLElement;
 

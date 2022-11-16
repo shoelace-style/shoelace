@@ -1,11 +1,15 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import '../../components/icon/icon';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
+import '../icon/icon';
 import styles from './avatar.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Avatars are used to represent a person or object.
+ *
  * @since 2.0
  * @status stable
  *
@@ -21,8 +25,8 @@ import styles from './avatar.styles';
  * @cssproperty --size - The size of the avatar.
  */
 @customElement('sl-avatar')
-export default class SlAvatar extends LitElement {
-  static styles = styles;
+export default class SlAvatar extends ShoelaceElement {
+  static styles: CSSResultGroup = styles;
 
   @state() private hasError = false;
 
@@ -34,6 +38,9 @@ export default class SlAvatar extends LitElement {
 
   /** Initials to use as a fallback when no image is available (1-2 characters max recommended). */
   @property() initials = '';
+
+  /** Indicates how the browser should load the image. */
+  @property() loading: 'eager' | 'lazy' = 'eager';
 
   /** The shape of the avatar. */
   @property({ reflect: true }) shape: 'circle' | 'square' | 'rounded' = 'circle';
@@ -72,6 +79,7 @@ export default class SlAvatar extends LitElement {
                 part="image"
                 class="avatar__image"
                 src="${this.image}"
+                loading="${this.loading}"
                 alt=""
                 @error="${() => (this.hasError = true)}"
               />

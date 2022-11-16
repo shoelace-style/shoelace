@@ -48,7 +48,7 @@ describe('<sl-icon>', () => {
       const el = await fixture<SlIcon>(html` <sl-icon library="system"></sl-icon> `);
       const listener = oneEvent(el, 'sl-load') as Promise<CustomEvent>;
 
-      el.name = 'check-lg';
+      el.name = 'check';
       const ev = await listener;
       await elementUpdated(el);
 
@@ -57,17 +57,16 @@ describe('<sl-icon>', () => {
     });
 
     it('the icon is accessible', async () => {
-      const el = await fixture<SlIcon>(html` <sl-icon library="system" name="check-lg"></sl-icon> `);
+      const el = await fixture<SlIcon>(html` <sl-icon library="system" name="check"></sl-icon> `);
       await expect(el).to.be.accessible();
     });
 
     it('the icon has the correct default aria attributes', async () => {
-      const el = await fixture<SlIcon>(html` <sl-icon library="system" name="check-lg"></sl-icon> `);
-      const rootDiv = el.shadowRoot?.querySelector('div.icon');
+      const el = await fixture<SlIcon>(html` <sl-icon library="system" name="check"></sl-icon> `);
 
-      expect(rootDiv?.getAttribute('role')).to.be.null;
-      expect(rootDiv?.getAttribute('aria-label')).to.be.null;
-      expect(rootDiv?.getAttribute('aria-hidden')).to.equal('true');
+      expect(el.getAttribute('role')).to.be.null;
+      expect(el.getAttribute('aria-label')).to.be.null;
+      expect(el.getAttribute('aria-hidden')).to.equal('true');
     });
   });
 
@@ -75,11 +74,10 @@ describe('<sl-icon>', () => {
     it('the icon has the correct default aria attributes', async () => {
       const fakeLabel = 'a label';
       const el = await fixture<SlIcon>(html` <sl-icon label="${fakeLabel}" library="system" name="check"></sl-icon> `);
-      const rootDiv = el.shadowRoot?.querySelector('div.icon');
 
-      expect(rootDiv?.getAttribute('role')).to.equal('img');
-      expect(rootDiv?.getAttribute('aria-label')).to.equal(fakeLabel);
-      expect(rootDiv?.getAttribute('aria-hidden')).to.be.null;
+      expect(el.getAttribute('role')).to.equal('img');
+      expect(el.getAttribute('aria-label')).to.equal(fakeLabel);
+      expect(el.getAttribute('aria-hidden')).to.be.null;
     });
   });
 

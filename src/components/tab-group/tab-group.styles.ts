@@ -14,16 +14,15 @@ export default css`
 
   .tab-group {
     display: flex;
-    border: solid 1px transparent;
     border-radius: 0;
   }
 
-  .tab-group .tab-group__tabs {
+  .tab-group__tabs {
     display: flex;
     position: relative;
   }
 
-  .tab-group .tab-group__indicator {
+  .tab-group__indicator {
     position: absolute;
     transition: var(--sl-transition-fast) transform ease, var(--sl-transition-fast) width ease;
   }
@@ -31,6 +30,10 @@ export default css`
   .tab-group--has-scroll-controls .tab-group__nav-container {
     position: relative;
     padding: 0 var(--sl-spacing-x-large);
+  }
+
+  .tab-group__body {
+    overflow: auto;
   }
 
   .tab-group__scroll-button {
@@ -205,7 +208,7 @@ export default css`
   .tab-group--end .tab-group__tabs {
     flex: 0 0 auto;
     flex-direction: column;
-    border-right: solid var(--track-width) var(--track-color);
+    border-left: solid var(--track-width) var(--track-color);
   }
 
   .tab-group--end .tab-group__indicator {

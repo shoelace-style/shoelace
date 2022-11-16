@@ -2,8 +2,6 @@
 
 [component-header:sl-card]
 
-Cards can be used to group related subjects in a container.
-
 ```html preview
 <sl-card class="card-overview">
   <img
@@ -130,7 +128,6 @@ Headers can be used to display titles and more.
 <sl-card class="card-header">
   <div slot="header">
     Header Title
-
     <sl-icon-button name="gear" label="Settings"></sl-icon-button>
   </div>
 
@@ -206,7 +203,7 @@ Footers can be used to display actions, summaries, or other relevant content.
 
   <div slot="footer">
     <sl-rating></sl-rating>
-    <sl-button slot="footer" variant="primary">Preview</sl-button>
+    <sl-button variant="primary">Preview</sl-button>
   </div>
 </sl-card>
 

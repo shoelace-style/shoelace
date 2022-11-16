@@ -2,8 +2,6 @@
 
 [component-header:sl-avatar]
 
-Avatars are used to represent a person or object.
-
 By default, a generic icon will be shown. You can personalize avatars by adding custom icons, initials, and images. You should always provide a `label` for assistive devices.
 
 ```html preview
@@ -21,11 +19,17 @@ const App = () => <SlAvatar label="User avatar" />;
 ### Images
 
 To use an image for the avatar, set the `image` and `label` attributes. This will take priority and be shown over initials and icons.
+Avatar images can be lazily loaded by setting the `loading` attribute to `lazy`.
 
 ```html preview
 <sl-avatar
   image="https://images.unsplash.com/photo-1529778873920-4da4926a72c2?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80"
   label="Avatar of a gray tabby kitten looking down"
+></sl-avatar>
+<sl-avatar
+  image="https://images.unsplash.com/photo-1591871937573-74dbba515c4c?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80"
+  label="Avatar of a white and grey kitten on grey textile"
+  loading="lazy"
 ></sl-avatar>
 ```
 
@@ -36,6 +40,11 @@ const App = () => (
   <SlAvatar
     image="https://images.unsplash.com/photo-1529778873920-4da4926a72c2?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80"
     label="Avatar of a gray tabby kitten looking down"
+  />
+  <SlAvatar
+    image="https://images.unsplash.com/photo-1591871937573-74dbba515c4c?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80"
+    label="Avatar of a white and grey kitten on grey textile"
+    loading="lazy"
   />
 );
 ```

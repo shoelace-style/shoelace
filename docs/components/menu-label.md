@@ -2,8 +2,6 @@
 
 [component-header:sl-menu-label]
 
-Menu labels are used to describe a group of menu items.
-
 ```html preview
 <sl-menu style="max-width: 200px;">
   <sl-menu-label>Fruits</sl-menu-label>

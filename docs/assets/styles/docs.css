@@ -50,6 +50,8 @@ strong {
 }
 
 .sidebar-buttons {
+  display: flex;
+  justify-content: space-between;
   text-align: center;
   margin-top: 0;
 }
@@ -490,18 +492,36 @@ kbd,
   background-color: var(--sl-color-neutral-100);
 }
 
+/* Sponsorship callouts */
+.sponsor-callout {
+  background: var(--sl-color-warning-100);
+  border-left: solid 3px var(--sl-color-warning-300);
+  border-radius: var(--sl-border-radius-medium);
+  padding: 0.5rem 1.5rem;
+}
+
+@media screen and (max-width: 950px) {
+  .sponsor-callout__secondary-label {
+    display: none;
+  }
+}
+
 /* Component headers */
 .component-header {
-  border-bottom: solid 1px var(--sl-color-neutral-200);
-  padding-bottom: 2rem;
   margin-top: -1rem;
-  margin-bottom: 2rem;
 }
 
 .component-header__tag {
   border-bottom: none;
   padding: 0;
   margin: 0.75rem 0 0.25rem 0;
+}
+
+.component-header__summary {
+  font-size: var(--sl-font-size-large);
+  line-height: 1.6;
+  border-top: solid 1px var(--sl-color-neutral-200);
+  margin-top: 2rem;
 }
 
 .markdown-section .component-header__tag code {
@@ -514,12 +534,6 @@ kbd,
 
 .component-header__info {
   margin-bottom: 0.5rem;
-}
-
-/* Lead sentences that occur immediately after the header */
-.component-header + p {
-  font-size: var(--sl-font-size-large);
-  line-height: 1.6;
 }
 
 /* Repo buttons */

@@ -1,30 +1,44 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
-import '../../components/icon/icon';
 import { defaultValue } from '../../internal/default-value';
-import { emit } from '../../internal/event';
 import { FormSubmitController } from '../../internal/form';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { HasSlotController } from '../../internal/slot';
 import { watch } from '../../internal/watch';
 import { LocalizeController } from '../../utilities/localize';
+import '../icon/icon';
 import styles from './input.styles';
+import type { CSSResultGroup } from 'lit';
+
+// It's currently impossible to hide Firefox's built-in clear icon when using <input type="date|time">, so we need this
+// check to apply a clip-path to hide it. I know, I know...user agent sniffing is nasty but, if it fails, we only see a
+// redundant clear icon so nothing important is breaking. The benefits outweigh the costs for this one. See the
+// discussion at: https://github.com/shoelace-style/shoelace/pull/794
+//
+// Also note that we do the Chromium check first to prevent Chrome from logging a console notice as described here:
+// https://github.com/shoelace-style/shoelace/issues/855
+//
+const isChromium = navigator.userAgentData?.brands.some(b => b.brand.includes('Chromium'));
+const isFirefox = isChromium ? false : navigator.userAgent.includes('Firefox');
 
 /**
+ * @summary Inputs collect data from the user.
+ *
  * @since 2.0
  * @status stable
  *
  * @dependency sl-icon
  *
- * @slot label - The input's label. Alternatively, you can use the label prop.
+ * @slot label - The input's label. Alternatively, you can use the `label` attribute.
  * @slot prefix - Used to prepend an icon or similar element to the input.
  * @slot suffix - Used to append an icon or similar element to the input.
  * @slot clear-icon - An icon to use in lieu of the default clear icon.
  * @slot show-password-icon - An icon to use in lieu of the default show password icon.
  * @slot hide-password-icon - An icon to use in lieu of the default hide password icon.
- * @slot help-text - Help text that describes how to use the input. Alternatively, you can use the help-text prop.
+ * @slot help-text - Help text that describes how to use the input. Alternatively, you can use the `help-text` attribute.
  *
  * @event sl-change - Emitted when an alteration to the control's value is committed by the user.
  * @event sl-clear - Emitted when the clear button is activated.
@@ -44,8 +58,8 @@ import styles from './input.styles';
  * @csspart suffix - The input suffix container.
  */
 @customElement('sl-input')
-export default class SlInput extends LitElement {
-  static styles = styles;
+export default class SlInput extends ShoelaceElement {
+  static styles: CSSResultGroup = styles;
 
   @query('.input__control') input: HTMLInputElement;
 
@@ -54,7 +68,6 @@ export default class SlInput extends LitElement {
   private readonly localize = new LocalizeController(this);
 
   @state() private hasFocus = false;
-  @state() private isPasswordVisible = false;
 
   /** The input's type. */
   @property({ reflect: true }) type:
@@ -88,17 +101,20 @@ export default class SlInput extends LitElement {
   /** Draws a pill-style input with rounded edges. */
   @property({ type: Boolean, reflect: true }) pill = false;
 
-  /** The input's label. Alternatively, you can use the label slot. */
+  /** The input's label. If you need to display HTML, you can use the `label` slot instead. */
   @property() label = '';
 
-  /** The input's help text. Alternatively, you can use the help-text slot. */
+  /** The input's help text. If you need to display HTML, you can use the `help-text` slot instead. */
   @property({ attribute: 'help-text' }) helpText = '';
 
   /** Adds a clear button when the input is populated. */
   @property({ type: Boolean }) clearable = false;
 
   /** Adds a password toggle button to password inputs. */
-  @property({ attribute: 'toggle-password', type: Boolean }) togglePassword = false;
+  @property({ attribute: 'password-toggle', type: Boolean }) passwordToggle = false;
+
+  /** Determines whether or not the password is currently visible. Only applies to password inputs. */
+  @property({ attribute: 'password-visible', type: Boolean }) passwordVisible = false;
 
   /** Hides the browser's built-in increment/decrement spin buttons for number inputs. */
   @property({ attribute: 'no-spin-buttons', type: Boolean }) noSpinButtons = false;
@@ -124,8 +140,11 @@ export default class SlInput extends LitElement {
   /** The input's maximum value. */
   @property() max: number | string;
 
-  /** The input's step attribute. */
-  @property({ type: Number }) step: number;
+  /**
+   * Specifies the granularity that the value must adhere to, or the special value `any` which means no stepping is
+   * implied, allowing any numeric value.
+   */
+  @property() step: number | 'any';
 
   /** A pattern to validate input against. */
   @property() pattern: string;
@@ -228,8 +247,8 @@ export default class SlInput extends LitElement {
 
     if (this.value !== this.input.value) {
       this.value = this.input.value;
-      emit(this, 'sl-input');
-      emit(this, 'sl-change');
+      this.emit('sl-input');
+      this.emit('sl-change');
     }
   }
 
@@ -246,19 +265,19 @@ export default class SlInput extends LitElement {
 
   handleBlur() {
     this.hasFocus = false;
-    emit(this, 'sl-blur');
+    this.emit('sl-blur');
   }
 
   handleChange() {
     this.value = this.input.value;
-    emit(this, 'sl-change');
+    this.emit('sl-change');
   }
 
   handleClearClick(event: MouseEvent) {
     this.value = '';
-    emit(this, 'sl-clear');
-    emit(this, 'sl-input');
-    emit(this, 'sl-change');
+    this.emit('sl-clear');
+    this.emit('sl-input');
+    this.emit('sl-change');
     this.input.focus();
 
     event.stopPropagation();
@@ -271,14 +290,22 @@ export default class SlInput extends LitElement {
     this.invalid = !this.input.checkValidity();
   }
 
+  @watch('step', { waitUntilFirstUpdate: true })
+  handleStepChange() {
+    // If step changes, the value may become invalid so we need to recheck after the update. We set the new step
+    // imperatively so we don't have to wait for the next render to report the updated validity.
+    this.input.step = String(this.step);
+    this.invalid = !this.input.checkValidity();
+  }
+
   handleFocus() {
     this.hasFocus = true;
-    emit(this, 'sl-focus');
+    this.emit('sl-focus');
   }
 
   handleInput() {
     this.value = this.input.value;
-    emit(this, 'sl-input');
+    this.emit('sl-input');
   }
 
   handleInvalid() {
@@ -292,7 +319,13 @@ export default class SlInput extends LitElement {
     // submitting to allow users to cancel the keydown event if they need to
     if (event.key === 'Enter' && !hasModifier) {
       setTimeout(() => {
-        if (!event.defaultPrevented) {
+        //
+        // When using an Input Method Editor (IME), pressing enter will cause the form to submit unexpectedly. One way
+        // to check for this is to look at event.isComposing, which will be true when the IME is open.
+        //
+        // See https://github.com/shoelace-style/shoelace/pull/988
+        //
+        if (!event.defaultPrevented && !event.isComposing) {
           this.formSubmitController.submit();
         }
       });
@@ -300,7 +333,7 @@ export default class SlInput extends LitElement {
   }
 
   handlePasswordToggle() {
-    this.isPasswordVisible = !this.isPasswordVisible;
+    this.passwordVisible = !this.passwordVisible;
   }
 
   @watch('value', { waitUntilFirstUpdate: true })
@@ -357,12 +390,7 @@ export default class SlInput extends LitElement {
               'input--empty': !this.value,
               'input--invalid': this.invalid,
               'input--no-spin-buttons': this.noSpinButtons,
-
-              // It's currently impossible to hide Firefox's built-in clear icon when using <input type="date|time">, so
-              // we need this check to apply a clip-path to hide it. I know, I know...user agent sniffing is nasty but
-              // if it fails, we only see a redundant clear icon so nothing important is breaking. The benefits outweigh
-              // the costs for this one. See the discussion at: https://github.com/shoelace-style/shoelace/pull/794
-              'input--is-firefox': navigator.userAgent.includes('Firefox')
+              'input--is-firefox': isFirefox
             })}
           >
             <span part="prefix" class="input__prefix">
@@ -373,7 +401,7 @@ export default class SlInput extends LitElement {
               part="input"
               id="input"
               class="input__control"
-              type=${this.type === 'password' && this.isPasswordVisible ? 'text' : this.type}
+              type=${this.type === 'password' && this.passwordVisible ? 'text' : this.type}
               name=${ifDefined(this.name)}
               ?disabled=${this.disabled}
               ?readonly=${this.readonly}
@@ -383,7 +411,7 @@ export default class SlInput extends LitElement {
               maxlength=${ifDefined(this.maxlength)}
               min=${ifDefined(this.min)}
               max=${ifDefined(this.max)}
-              step=${ifDefined(this.step)}
+              step=${ifDefined(this.step as number)}
               .value=${live(this.value)}
               autocapitalize=${ifDefined(this.type === 'password' ? 'off' : this.autocapitalize)}
               autocomplete=${ifDefined(this.type === 'password' ? 'off' : this.autocomplete)}
@@ -419,17 +447,17 @@ export default class SlInput extends LitElement {
                   </button>
                 `
               : ''}
-            ${this.togglePassword && !this.disabled
+            ${this.passwordToggle && !this.disabled
               ? html`
                   <button
                     part="password-toggle-button"
                     class="input__password-toggle"
                     type="button"
-                    aria-label=${this.localize.term(this.isPasswordVisible ? 'hidePassword' : 'showPassword')}
+                    aria-label=${this.localize.term(this.passwordVisible ? 'hidePassword' : 'showPassword')}
                     @click=${this.handlePasswordToggle}
                     tabindex="-1"
                   >
-                    ${this.isPasswordVisible
+                    ${this.passwordVisible
                       ? html`
                           <slot name="show-password-icon">
                             <sl-icon name="eye-slash" library="system"></sl-icon>

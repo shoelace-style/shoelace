@@ -1,10 +1,14 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { HasSlotController } from '../../internal/slot';
 import styles from './card.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Cards can be used to group related subjects in a container.
+ *
  * @since 2.0
  * @status stable
  *
@@ -25,8 +29,8 @@ import styles from './card.styles';
  * @cssproperty --padding - The padding to use for card sections.*
  */
 @customElement('sl-card')
-export default class SlCard extends LitElement {
-  static styles = styles;
+export default class SlCard extends ShoelaceElement {
+  static styles: CSSResultGroup = styles;
 
   private readonly hasSlotController = new HasSlotController(this, 'footer', 'header', 'image');
 

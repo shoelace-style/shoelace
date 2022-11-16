@@ -1,16 +1,19 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-import '../../components/icon/icon';
-import { emit } from '../../internal/event';
 import { clamp } from '../../internal/math';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
 import { LocalizeController } from '../../utilities/localize';
+import '../icon/icon';
 import styles from './rating.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Ratings give users a way to quickly view and provide feedback.
+ *
  * @since 2.0
  * @status stable
  *
@@ -26,8 +29,8 @@ import styles from './rating.styles';
  * @cssproperty --symbol-spacing - The spacing to use around symbols.
  */
 @customElement('sl-rating')
-export default class SlRating extends LitElement {
-  static styles = styles;
+export default class SlRating extends ShoelaceElement {
+  static styles: CSSResultGroup = styles;
 
   @query('.rating') rating: HTMLElement;
 
@@ -35,6 +38,9 @@ export default class SlRating extends LitElement {
 
   @state() private hoverValue = 0;
   @state() private isHovering = false;
+
+  /** A label to describe the rating to assistive devices. */
+  @property() label = '';
 
   /** The current rating. */
   @property({ type: Number }) value = 0;
@@ -103,13 +109,13 @@ export default class SlRating extends LitElement {
       return;
     }
 
-    if ((isLtr && event.key === 'ArrowLeft') || (isRtl && event.key === 'ArrowRight')) {
+    if (event.key === 'ArrowDown' || (isLtr && event.key === 'ArrowLeft') || (isRtl && event.key === 'ArrowRight')) {
       const decrement = event.shiftKey ? 1 : this.precision;
       this.value = Math.max(0, this.value - decrement);
       event.preventDefault();
     }
 
-    if ((isLtr && event.key === 'ArrowRight') || (isRtl && event.key === 'ArrowLeft')) {
+    if (event.key === 'ArrowUp' || (isLtr && event.key === 'ArrowRight') || (isRtl && event.key === 'ArrowLeft')) {
       const increment = event.shiftKey ? 1 : this.precision;
       this.value = Math.min(this.max, this.value + increment);
       event.preventDefault();
@@ -160,7 +166,7 @@ export default class SlRating extends LitElement {
 
   @watch('value', { waitUntilFirstUpdate: true })
   handleValueChange() {
-    emit(this, 'sl-change');
+    this.emit('sl-change');
   }
 
   roundToPrecision(numberToRound: number, precision = 0.5) {
@@ -188,6 +194,8 @@ export default class SlRating extends LitElement {
           'rating--disabled': this.disabled,
           'rating--rtl': isRtl
         })}
+        role="slider"
+        aria-label=${this.label}
         aria-disabled=${this.disabled ? 'true' : 'false'}
         aria-readonly=${this.readonly ? 'true' : 'false'}
         aria-valuenow=${this.value}

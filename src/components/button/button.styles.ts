@@ -1,5 +1,4 @@
 import { css } from 'lit';
-import { focusVisibleSelector } from '../../internal/focus-visible';
 import componentStyles from '../../styles/component.styles';
 
 export default css`
@@ -39,7 +38,7 @@ export default css`
     outline: none;
   }
 
-  .button${focusVisibleSelector} {
+  .button:focus-visible {
     outline: var(--sl-focus-ring);
     outline-offset: var(--sl-focus-ring-offset);
   }
@@ -301,6 +300,12 @@ export default css`
     color: var(--sl-color-neutral-0);
   }
 
+  @media (forced-colors: active) {
+    .button.button--outline.button--checked:not(.button--disabled) {
+      outline: solid 2px transparent;
+    }
+  }
+
   /*
    * Text buttons
    */
@@ -317,7 +322,7 @@ export default css`
     color: var(--sl-color-primary-500);
   }
 
-  .button--text${focusVisibleSelector}:not(.button--disabled) {
+  .button--text:focus-visible:not(.button--disabled) {
     background-color: transparent;
     border-color: transparent;
     color: var(--sl-color-primary-500);
@@ -409,13 +414,7 @@ export default css`
   }
 
   .button--caret .button__caret {
-    display: flex;
-    align-items: center;
-  }
-
-  .button--caret .button__caret svg {
-    width: 1em;
-    height: 1em;
+    height: auto;
   }
 
   /*
@@ -559,7 +558,7 @@ export default css`
   }
 
   /* Add a visual separator between solid buttons */
-  :host(.sl-button-group__button:not(.sl-button-group__button--focus, .sl-button-group__button--first, [variant='default']):not(:hover, :active, :focus))
+  :host(.sl-button-group__button:not(.sl-button-group__button--first, .sl-button-group__button--radio, [variant='default']):not(:hover))
     .button:after {
     content: '';
     position: absolute;
@@ -575,7 +574,6 @@ export default css`
     z-index: 1;
   }
 
-  :host(.sl-button-group__button--focus),
   :host(.sl-button-group__button[checked]) {
     z-index: 2;
   }

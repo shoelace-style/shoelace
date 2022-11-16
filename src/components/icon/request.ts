@@ -1,4 +1,4 @@
-import { requestInclude } from '../../components/include/request';
+import { requestInclude } from '../include/request';
 
 type IconFile =
   | {

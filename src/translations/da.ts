@@ -11,6 +11,7 @@ const translation: Translation = {
   copy: 'Kopier',
   currentValue: 'Nuværende regerer',
   hidePassword: 'Skjul adgangskode',
+  loading: 'Indlæser',
   progress: 'Status',
   remove: 'Fjerne',
   resize: 'Tipas størrelse',

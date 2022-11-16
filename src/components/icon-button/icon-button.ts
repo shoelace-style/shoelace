@@ -1,13 +1,15 @@
-import { LitElement } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { html, literal } from 'lit/static-html.js';
-import '../../components/icon/icon';
-import { emit } from '../../internal/event';
+import ShoelaceElement from '../../internal/shoelace-element';
+import '../icon/icon';
 import styles from './icon-button.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Icons buttons are simple, icon-only buttons that can be used for actions and in toolbars.
+ *
  * @since 2.0
  * @status stable
  *
@@ -19,8 +21,8 @@ import styles from './icon-button.styles';
  * @csspart base - The component's internal wrapper.
  */
 @customElement('sl-icon-button')
-export default class SlIconButton extends LitElement {
-  static styles = styles;
+export default class SlIconButton extends ShoelaceElement {
+  static styles: CSSResultGroup = styles;
 
   @state() private hasFocus = false;
 
@@ -70,12 +72,12 @@ export default class SlIconButton extends LitElement {
 
   handleBlur() {
     this.hasFocus = false;
-    emit(this, 'sl-blur');
+    this.emit('sl-blur');
   }
 
   handleFocus() {
     this.hasFocus = true;
-    emit(this, 'sl-focus');
+    this.emit('sl-focus');
   }
 
   handleClick(event: MouseEvent) {

@@ -1,17 +1,23 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
 import { defaultValue } from '../../internal/default-value';
-import { emit } from '../../internal/event';
 import { FormSubmitController } from '../../internal/form';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
+import '../icon/icon';
 import styles from './checkbox.styles';
+import type { CSSResultGroup } from 'lit';
 
 /**
+ * @summary Checkboxes allow the user to toggle an option on or off.
+ *
  * @since 2.0
  * @status stable
+ *
+ * @dependency sl-icon
  *
  * @slot - The checkbox's label.
  *
@@ -21,13 +27,13 @@ import styles from './checkbox.styles';
  *
  * @csspart base - The component's internal wrapper.
  * @csspart control - The checkbox control.
- * @csspart checked-icon - The container the wraps the checked icon.
- * @csspart indeterminate-icon - The container that wraps the indeterminate icon.
+ * @csspart checked-icon - The checked icon.
+ * @csspart indeterminate-icon - The indeterminate icon.
  * @csspart label - The checkbox label.
  */
 @customElement('sl-checkbox')
-export default class SlCheckbox extends LitElement {
-  static styles = styles;
+export default class SlCheckbox extends ShoelaceElement {
+  static styles: CSSResultGroup = styles;
 
   @query('input[type="checkbox"]') input: HTMLInputElement;
 
@@ -40,13 +46,13 @@ export default class SlCheckbox extends LitElement {
 
   @state() private hasFocus = false;
 
-  /** The checkbox's name attribute. */
+  /** Name of the HTML form control. Submitted with the form as part of a name/value pair. */
   @property() name: string;
 
-  /** The checkbox's value attribute. */
+  /** Value of the HTML form control. Primarily used to differentiate a list of related checkboxes that have the same name. */
   @property() value: string;
 
-  /** Disables the checkbox. */
+  /** Disables the checkbox (so the user can't check / uncheck it). */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Makes the checkbox a required field. */
@@ -55,7 +61,7 @@ export default class SlCheckbox extends LitElement {
   /** Draws the checkbox in a checked state. */
   @property({ type: Boolean, reflect: true }) checked = false;
 
-  /** Draws the checkbox in an indeterminate state. */
+  /** Draws the checkbox in an indeterminate state. Usually applies to a checkbox that represents "select all" or "select none" when the items to which it applies are a mix of selected and unselected. */
   @property({ type: Boolean, reflect: true }) indeterminate = false;
 
   /** This will be true when the control is in an invalid state. Validity is determined by the `required` prop. */
@@ -98,12 +104,12 @@ export default class SlCheckbox extends LitElement {
   handleClick() {
     this.checked = !this.checked;
     this.indeterminate = false;
-    emit(this, 'sl-change');
+    this.emit('sl-change');
   }
 
   handleBlur() {
     this.hasFocus = false;
-    emit(this, 'sl-blur');
+    this.emit('sl-blur');
   }
 
   @watch('disabled', { waitUntilFirstUpdate: true })
@@ -115,7 +121,7 @@ export default class SlCheckbox extends LitElement {
 
   handleFocus() {
     this.hasFocus = true;
-    emit(this, 'sl-focus');
+    this.emit('sl-focus');
   }
 
   @watch('checked', { waitUntilFirstUpdate: true })
@@ -152,32 +158,9 @@ export default class SlCheckbox extends LitElement {
         />
 
         <span part="control" class="checkbox__control">
-          ${this.checked
-            ? html`
-                <svg part="checked-icon" class="checkbox__icon" viewBox="0 0 16 16">
-                  <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
-                    <g stroke="currentColor" stroke-width="2">
-                      <g transform="translate(3.428571, 3.428571)">
-                        <path d="M0,5.71428571 L3.42857143,9.14285714"></path>
-                        <path d="M9.14285714,0 L3.42857143,9.14285714"></path>
-                      </g>
-                    </g>
-                  </g>
-                </svg>
-              `
-            : ''}
+          ${this.checked ? html` <sl-icon part="checked-icon" library="system" name="check"></sl-icon> ` : ''}
           ${!this.checked && this.indeterminate
-            ? html`
-                <svg part="indeterminate-icon" class="checkbox__icon" viewBox="0 0 16 16">
-                  <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
-                    <g stroke="currentColor" stroke-width="2">
-                      <g transform="translate(2.285714, 6.857143)">
-                        <path d="M10.2857143,1.14285714 L1.14285714,1.14285714"></path>
-                      </g>
-                    </g>
-                  </g>
-                </svg>
-              `
+            ? html` <sl-icon part="indeterminate-icon" library="system" name="indeterminate"></sl-icon> `
             : ''}
         </span>
 

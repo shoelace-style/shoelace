@@ -2,8 +2,6 @@
 
 [component-header:sl-icon]
 
-Icons are symbols that can be used to represent various options within an application.
-
 Shoelace comes bundled with over 1,500 icons courtesy of the [Bootstrap Icons](https://icons.getbootstrap.com/) project. These icons are part of the `default` icon library. If you prefer, you can register [custom icon libraries](#icon-libraries) as well.
 
 ?> Depending on how you're loading Shoelace, you may need to copy icon assets and/or [set the base path](getting-started/installation#setting-the-base-path) so Shoelace knows where to load them from. Otherwise, icons may not appear and you'll see 404 Not Found errors in the dev console.
@@ -336,17 +334,17 @@ Icons in this library are licensed under the [MIT License](https://github.com/ta
   import { registerIconLibrary } from '/dist/utilities/icon-library.js';
 
   registerIconLibrary('heroicons', {
-    resolver: name => `https://cdn.jsdelivr.net/npm/heroicons@0.4.2/outline/${name}.svg`
+    resolver: name => `https://cdn.jsdelivr.net/npm/heroicons@2.0.1/24/outline/${name}.svg`
   });
 </script>
 
 <div style="font-size: 24px;">
-  <sl-icon library="heroicons" name="chat"></sl-icon>
+  <sl-icon library="heroicons" name="chat-bubble-left"></sl-icon>
   <sl-icon library="heroicons" name="cloud"></sl-icon>
   <sl-icon library="heroicons" name="cog"></sl-icon>
   <sl-icon library="heroicons" name="document-text"></sl-icon>
   <sl-icon library="heroicons" name="gift"></sl-icon>
-  <sl-icon library="heroicons" name="volume-up"></sl-icon>
+  <sl-icon library="heroicons" name="speaker-wave"></sl-icon>
 </div>
 ```
 

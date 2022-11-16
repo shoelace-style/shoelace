@@ -29,6 +29,7 @@ export { default as SlMenu } from './components/menu/menu';
 export { default as SlMenuItem } from './components/menu-item/menu-item';
 export { default as SlMenuLabel } from './components/menu-label/menu-label';
 export { default as SlMutationObserver } from './components/mutation-observer/mutation-observer';
+export { default as SlPopup } from './components/popup/popup';
 export { default as SlProgressBar } from './components/progress-bar/progress-bar';
 export { default as SlProgressRing } from './components/progress-ring/progress-ring';
 export { default as SlQrCode } from './components/qr-code/qr-code';
@@ -39,7 +40,6 @@ export { default as SlRange } from './components/range/range';
 export { default as SlRating } from './components/rating/rating';
 export { default as SlRelativeTime } from './components/relative-time/relative-time';
 export { default as SlResizeObserver } from './components/resize-observer/resize-observer';
-export { default as SlResponsiveMedia } from './components/responsive-media/responsive-media';
 export { default as SlSelect } from './components/select/select';
 export { default as SlSkeleton } from './components/skeleton/skeleton';
 export { default as SlSpinner } from './components/spinner/spinner';
@@ -51,6 +51,8 @@ export { default as SlTabPanel } from './components/tab-panel/tab-panel';
 export { default as SlTag } from './components/tag/tag';
 export { default as SlTextarea } from './components/textarea/textarea';
 export { default as SlTooltip } from './components/tooltip/tooltip';
+export { default as SlTree } from './components/tree/tree';
+export { default as SlTreeItem } from './components/tree-item/tree-item';
 export { default as SlVisuallyHidden } from './components/visually-hidden/visually-hidden';
 /* plop:component */
 

@@ -26,7 +26,11 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "useUnknownInCatchVariables": true,
-    "baseUrl": "."
+    "baseUrl": ".",
+    "types": [
+      "mocha",
+      "user-agent-data-types"
+    ]
   },
   "include": [
     "src"

@@ -1,6 +1,6 @@
 # Integrating with Laravel
 
-This page explains how to integrate Shoelace with a [Laravel](https://laravel.com) app using a local Webpack bundle.
+This page explains how to integrate Shoelace with a [Laravel 9](https://laravel.com) app using Vite. For additional details refer to the [Bundling Assets (Vite)](https://laravel.com/docs/9.x/vite) section in the official Laravel docs.
 
 ?> This is a community-maintained document. Please [ask the community](/resources/community) if you have questions about this integration. You can also [suggest improvements](https://github.com/shoelace-style/shoelace/blob/next/docs/tutorials/integrating-with-laravel.md) to make it better.
 
@@ -8,13 +8,12 @@ This page explains how to integrate Shoelace with a [Laravel](https://laravel.co
 
 This integration has been tested with the following:
 
-- Laravel >= 8
-- Node >= 14.17
-- Laravel Mix >= 6
+- Laravel 9.1
+- Vite 3.0
 
 ## Instructions
 
-These instructions assume an out of the box [Laravel 8+ install](https://laravel.com/docs/8.x/installation) that uses [Laravel Mix](https://laravel.com/docs/8.x/mix) to compile assets.
+These instructions assume a default [Laravel 9 install](https://laravel.com/docs/9.x/installation) that uses [Vite](https://vitejs.dev/) to bundle assets.
 Be sure to run `npm install` to install the default Laravel front-end dependencies before installing Shoelace.
 
 ### Install the Shoelace package
@@ -25,7 +24,7 @@ npm install @shoelace-style/shoelace
 
 ### Import the Default Theme
 
-Import Shoelace's default theme (stylesheet) in `/resources/css/app.css`:
+Import the Shoelace default theme (stylesheet) in `/resources/css/app.css`:
 
 ```css
 @import '/node_modules/@shoelace-style/shoelace/dist/themes/light.css';
@@ -33,14 +32,20 @@ Import Shoelace's default theme (stylesheet) in `/resources/css/app.css`:
 
 ### Import Your Shoelace Components
 
-Import each Shoelace component you plan to use in `/resources/js/bootstrap.js`. Since [Laravel Mix](https://laravel.com/docs/8.x/mix) uses Webpack, use the full path to each component -- as outlined in the [Cherry Picking instructions](https://shoelace.style/getting-started/installation?id=cherry-picking). You can find the full import statement for a component in the _Importing_ section of the component's documentation (use the _Bundler_ import). Your imports should look similar to:
+Import each Shoelace component you plan to use in `/resources/js/bootstrap.js`. Use the full path to each component (as outlined in the [Cherry Picking instructions](https://shoelace.style/getting-started/installation?id=cherry-picking)). You can find the full import statement for a component in the _Importing_ section of the component's documentation (use the _Bundler_ import). Your imports should look similar to:
 
 ```js
 import '@shoelace-style/shoelace/dist/components/button/button.js';
+import '@shoelace-style/shoelace/dist/components/icon/icon.js';
 import '@shoelace-style/shoelace/dist/components/dialog/dialog.js';
-import '@shoelace-style/shoelace/dist/components/drawer/drawer.js';
-import '@shoelace-style/shoelace/dist/components/menu/menu.js';
-import '@shoelace-style/shoelace/dist/components/menu-item/menu-item.js';
+```
+
+### Copy the Shoelace Static Assets (icons, images, etc.) to a Public Folder
+
+Since Vite has no way to copy arbitrary assets into your build (like webpack), you need to manually copy the Shoelace static assets to your project's public folder. Run this command from your project's root directory to copy the Shoelace static assets to the `./public/assets` folder:
+
+```sh
+cp -aR node_modules/@shoelace-style/shoelace/dist/assets/ ./public/assets
 ```
 
 ### Set the Base Path
@@ -52,66 +57,50 @@ import { setBasePath } from '@shoelace-style/shoelace/dist/utilities/base-path.j
 setBasePath('/');
 ```
 
-Here's an example `/resources/js/bootstrap.js` file, after importing and setting the base path and components.
+Example `/resources/js/bootstrap.js` file:
 
 ```js
 import { setBasePath } from '@shoelace-style/shoelace/dist/utilities/base-path.js';
-setBasePath('/assets');
+setBasePath('/');
 
 import '@shoelace-style/shoelace/dist/components/button/button.js';
+import '@shoelace-style/shoelace/dist/components/icon/icon.js';
 import '@shoelace-style/shoelace/dist/components/dialog/dialog.js';
-import '@shoelace-style/shoelace/dist/components/drawer/drawer.js';
-import '@shoelace-style/shoelace/dist/components/menu/menu.js';
-import '@shoelace-style/shoelace/dist/components/menu-item/menu-item.js';
 ```
 
-### Configure Laravel Mix
+### Verify Vite Entry Points
 
-[Laravel Mix](https://laravel.com/docs/8.x/mix) is a wrapper around Webpack that simplifies configuration. Mix is used by default for compiling front-end assets in Laravel.
-
-Modify `webpack.mix.js` to add Shoelace's assets to Webpack's build process:
+Laravel pre-configures the Vite entry points in `vite.config.js` as `resources/css/app.css` and `resources/js/app.js`. If you use a different location for your CSS and/or Javascript entry point, update this configuration to accordingly.
 
 ```js
-mix
-  .js('resources/js/app.js', 'public/js')
-  .postCss('resources/css/app.css', 'public/css', [])
-  .copy('node_modules/@shoelace-style/shoelace/dist/assets', 'public/assets');
-```
-
-Consider [extracting vendor libraries](https://laravel.com/docs/8.x/mix#vendor-extraction) to a separate file. This splits frequently updated vendor libraries (like Shoelace) from your front-end application code -- for better long-term caching.
-Here's an example `webpack.mix.js` file that compiles and splits your JS into `app.js` and `vendor.js` files, and builds an optimized CSS bundle using PostCSS.
-
-```js
-mix
-  .js('resources/js/app.js', 'public/js')
-  .postCss('resources/css/app.css', 'public/css', [])
-  .copy('node_modules/@shoelace-style/shoelace/dist/assets', 'public/assets')
-  .extract(); // extracts libraries in node_modules to vendor.js
+plugins: [
+        laravel({
+            input: ["resources/css/app.css", "resources/js/app.js"],
+            refresh: true,
+        }),
+    ],
 ```
 
 ### Compile Front-End Assets
 
-Run the [Laravel Mix](https://laravel.com/docs/8.x/mix) npm scripts to build your application's CSS and JavaScript code.
+Run the Vite development server or production build.
 
 ```bash
-## build a development bundle
+## run the Vite development bundle
 npm run dev
 
-## build a production bundle
-npm run prod
+## build a production bundle (with versioning)
+npm run build
 ```
 
 ### Include Front-End Assets in Your Layout File
 
-Most full-stack Laravel applications use [layouts](https://laravel.com/docs/8.x/blade#building-layouts) to define the basic structure of a page.
-After compiling your front-end assets (above), include them in your top-level layouts/templates. The following example uses the [Laravel asset helper](https://laravel.com/docs/8.x/helpers#method-asset) to generate a full URL.
+Add the `@vite()` Blade directive to the `<head>` of your application's root template.
 
 ```html
-<script defer src="{{ asset('js/manifest.js') }}"></script>
-<script defer src="{{ asset('js/vendor.js') }}"></script>
-<script defer src="{{ asset('/js/app.js') }}"></script>
-
-<link href="{{ asset('css/app.css') }}" rel="stylesheet" />
+<head>
+  ... @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
 ```
 
 Have fun using Shoelace components in your Laravel app!

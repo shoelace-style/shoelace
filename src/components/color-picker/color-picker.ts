@@ -1,26 +1,27 @@
 import Color from 'color';
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
 import { styleMap } from 'lit/directives/style-map.js';
-import '../../components/button-group/button-group';
-import '../../components/button/button';
-import '../../components/dropdown/dropdown';
-import '../../components/icon/icon';
-import '../../components/input/input';
-import '../../components/visually-hidden/visually-hidden';
 import { defaultValue } from '../../internal/default-value';
 import { drag } from '../../internal/drag';
-import { emit } from '../../internal/event';
 import { FormSubmitController } from '../../internal/form';
 import { clamp } from '../../internal/math';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
 import { LocalizeController } from '../../utilities/localize';
+import '../button-group/button-group';
+import '../button/button';
+import '../dropdown/dropdown';
+import '../icon/icon';
+import '../input/input';
+import '../visually-hidden/visually-hidden';
 import styles from './color-picker.styles';
-import type SlDropdown from '../../components/dropdown/dropdown';
-import type SlInput from '../../components/input/input';
+import type SlDropdown from '../dropdown/dropdown';
+import type SlInput from '../input/input';
+import type { CSSResultGroup } from 'lit';
 
 const hasEyeDropper = 'EyeDropper' in window;
 
@@ -35,6 +36,8 @@ interface EyeDropperInterface {
 declare const EyeDropper: EyeDropperConstructor;
 
 /**
+ * @summary Color pickers allow the user to select a color.
+ *
  * @since 2.0
  * @status stable
  *
@@ -44,7 +47,7 @@ declare const EyeDropper: EyeDropperConstructor;
  * @dependency sl-input
  * @dependency sl-visually-hidden
  *
- * @slot label - The color picker's label. Alternatively, you can use the label prop.
+ * @slot label - The color picker's label. Alternatively, you can use the `label` attribute.
  *
  * @event sl-change Emitted when the color picker's value changes.
  *
@@ -81,8 +84,8 @@ declare const EyeDropper: EyeDropperConstructor;
  * @cssproperty --swatch-size - The size of each predefined color swatch.
  */
 @customElement('sl-color-picker')
-export default class SlColorPicker extends LitElement {
-  static styles = styles;
+export default class SlColorPicker extends ShoelaceElement {
+  static styles: CSSResultGroup = styles;
 
   @query('[part="input"]') input: SlInput;
   @query('[part="preview"]') previewButton: HTMLButtonElement;
@@ -110,7 +113,10 @@ export default class SlColorPicker extends LitElement {
   @defaultValue()
   defaultValue = '';
 
-  /* The color picker's label. This will not be displayed, but it will be announced by assistive devices. */
+  /**
+   * The color picker's label. This will not be displayed, but it will be announced by assistive devices. If you need to
+   * display HTML, you can use the `label` slot` instead.
+   */
   @property() label = '';
 
   /**
@@ -175,9 +181,6 @@ export default class SlColorPicker extends LitElement {
     '#ccc',
     '#fff'
   ];
-
-  /** The locale to render the component in. */
-  @property() lang: string;
 
   connectedCallback() {
     super.connectedCallback();
@@ -391,12 +394,14 @@ export default class SlColorPicker extends LitElement {
     if (event.key === 'ArrowLeft') {
       event.preventDefault();
       this.saturation = clamp(this.saturation - increment, 0, 100);
+      this.lightness = this.getLightness(this.brightness);
       this.syncValues();
     }
 
     if (event.key === 'ArrowRight') {
       event.preventDefault();
       this.saturation = clamp(this.saturation + increment, 0, 100);
+      this.lightness = this.getLightness(this.brightness);
       this.syncValues();
     }
 
@@ -606,7 +611,7 @@ export default class SlColorPicker extends LitElement {
     }
 
     // Setting this.value will trigger the watcher which parses the new value. We want to bypass that behavior because
-    // we've already parsed the color here and conversion/rounding can lead to values changing slightly. WHen this
+    // we've already parsed the color here and conversion/rounding can lead to values changing slightly. When this
     // happens, dragging the grid handle becomes jumpy. After the next update, the usual behavior is restored.
     this.isSafeValue = true;
     this.value = this.inputValue;
@@ -638,7 +643,7 @@ export default class SlColorPicker extends LitElement {
     this.syncValues();
   }
 
-  @watch('opacity')
+  @watch('opacity', { waitUntilFirstUpdate: true })
   handleOpacityChange() {
     this.alpha = 100;
   }
@@ -654,7 +659,6 @@ export default class SlColorPicker extends LitElement {
       this.lightness = this.getLightness(this.brightness);
       this.alpha = 100;
     }
-
     if (!this.isSafeValue && oldValue !== undefined) {
       const newColor = this.parseColor(newValue);
 
@@ -671,7 +675,7 @@ export default class SlColorPicker extends LitElement {
     }
 
     if (this.value !== this.lastValueEmitted) {
-      emit(this, 'sl-change');
+      this.emit('sl-change');
       this.lastValueEmitted = this.value;
     }
   }

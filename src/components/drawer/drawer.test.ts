@@ -1,5 +1,6 @@
 // cspell:dictionaries lorem-ipsum
 import { expect, fixture, html, waitUntil } from '@open-wc/testing';
+import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
 import type SlDrawer from './drawer';
 
@@ -131,5 +132,17 @@ describe('<sl-drawer>', () => {
 
     expect(initialFocusHandler).to.have.been.calledOnce;
     expect(document.activeElement).to.equal(input);
+  });
+
+  it('should close when pressing Escape', async () => {
+    const el = await fixture<SlDrawer>(html` <sl-drawer open></sl-drawer> `);
+    const hideHandler = sinon.spy();
+
+    el.addEventListener('sl-hide', hideHandler);
+
+    await sendKeys({ press: 'Escape' });
+    await waitUntil(() => hideHandler.calledOnce);
+
+    expect(el.open).to.be.false;
   });
 });

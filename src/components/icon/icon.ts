@@ -1,27 +1,27 @@
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { ifDefined } from 'lit/directives/if-defined.js';
 import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
-import { emit } from '../../internal/event';
+import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
 import styles from './icon.styles';
 import { getIconLibrary, unwatchIcon, watchIcon } from './library';
 import { requestIcon } from './request';
+import type { CSSResultGroup } from 'lit';
 
 let parser: DOMParser;
 
 /**
+ * @summary Icons are symbols that can be used to represent various options within an application.
+ *
  * @since 2.0
  * @status stable
  *
  * @event sl-load - Emitted when the icon has loaded.
  * @event sl-error - Emitted when the icon fails to load due to an error.
- *
- * @csspart base - The component's internal wrapper.
  */
 @customElement('sl-icon')
-export default class SlIcon extends LitElement {
-  static styles = styles;
+export default class SlIcon extends ShoelaceElement {
+  static styles: CSSResultGroup = styles;
 
   @state() private svg = '';
 
@@ -68,6 +68,21 @@ export default class SlIcon extends LitElement {
     this.setIcon();
   }
 
+  @watch('label')
+  handleLabelChange() {
+    const hasLabel = typeof this.label === 'string' && this.label.length > 0;
+
+    if (hasLabel) {
+      this.setAttribute('role', 'img');
+      this.setAttribute('aria-label', this.label);
+      this.removeAttribute('aria-hidden');
+    } else {
+      this.removeAttribute('role');
+      this.removeAttribute('aria-label');
+      this.setAttribute('aria-hidden', 'true');
+    }
+  }
+
   @watch('name')
   @watch('src')
   @watch('library')
@@ -94,17 +109,17 @@ export default class SlIcon extends LitElement {
           if (svgEl !== null) {
             library?.mutator?.(svgEl);
             this.svg = svgEl.outerHTML;
-            emit(this, 'sl-load');
+            this.emit('sl-load');
           } else {
             this.svg = '';
-            emit(this, 'sl-error');
+            this.emit('sl-error');
           }
         } else {
           this.svg = '';
-          emit(this, 'sl-error');
+          this.emit('sl-error');
         }
       } catch {
-        emit(this, 'sl-error');
+        this.emit('sl-error');
       }
     } else if (this.svg.length > 0) {
       // If we can't resolve a URL and an icon was previously set, remove it
@@ -117,17 +132,7 @@ export default class SlIcon extends LitElement {
   }
 
   render() {
-    const hasLabel = typeof this.label === 'string' && this.label.length > 0;
-
-    return html` <div
-      part="base"
-      class="icon"
-      role=${ifDefined(hasLabel ? 'img' : undefined)}
-      aria-label=${ifDefined(hasLabel ? this.label : undefined)}
-      aria-hidden=${ifDefined(hasLabel ? undefined : 'true')}
-    >
-      ${unsafeSVG(this.svg)}
-    </div>`;
+    return html` ${unsafeSVG(this.svg)} `;
   }
 }
 

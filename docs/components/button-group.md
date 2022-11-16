@@ -2,8 +2,6 @@
 
 [component-header:sl-button-group]
 
-Button groups can be used to group related buttons into sections.
-
 ```html preview
 <sl-button-group>
   <sl-button>Left</sl-button>
@@ -88,7 +86,7 @@ const App = () => (
 
 ### Theme Buttons
 
-Theme buttons are supported through the button's `type` attribute.
+Theme buttons are supported through the button's `variant` attribute.
 
 ```html preview
 <sl-button-group>
