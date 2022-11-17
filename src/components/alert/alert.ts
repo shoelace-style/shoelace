@@ -50,7 +50,7 @@ export default class SlAlert extends ShoelaceElement {
   private readonly hasSlotController = new HasSlotController(this, 'icon', 'suffix');
   private readonly localize = new LocalizeController(this);
 
-  @query('[part="base"]') base: HTMLElement;
+  @query('[part~="base"]') base: HTMLElement;
 
   /** Indicates whether or not the alert is open. You can use this in lieu of the show/hide methods. */
   @property({ type: Boolean, reflect: true }) open = false;

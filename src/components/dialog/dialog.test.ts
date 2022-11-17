@@ -9,7 +9,7 @@ describe('<sl-dialog>', () => {
     const el = await fixture<SlDialog>(html`
       <sl-dialog open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sl-dialog>
     `);
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
     expect(base.hidden).to.be.false;
   });
@@ -18,7 +18,7 @@ describe('<sl-dialog>', () => {
     const el = await fixture<SlDialog>(
       html` <sl-dialog>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sl-dialog> `
     );
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
     expect(base.hidden).to.be.true;
   });
@@ -27,7 +27,7 @@ describe('<sl-dialog>', () => {
     const el = await fixture<SlDialog>(html`
       <sl-dialog>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sl-dialog>
     `);
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
     const showHandler = sinon.spy();
     const afterShowHandler = sinon.spy();
 
@@ -47,7 +47,7 @@ describe('<sl-dialog>', () => {
     const el = await fixture<SlDialog>(html`
       <sl-dialog open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sl-dialog>
     `);
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
     const hideHandler = sinon.spy();
     const afterHideHandler = sinon.spy();
 
@@ -67,7 +67,7 @@ describe('<sl-dialog>', () => {
     const el = await fixture<SlDialog>(html`
       <sl-dialog>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sl-dialog>
     `);
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
     const showHandler = sinon.spy();
     const afterShowHandler = sinon.spy();
 
@@ -87,7 +87,7 @@ describe('<sl-dialog>', () => {
     const el = await fixture<SlDialog>(html`
       <sl-dialog open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sl-dialog>
     `);
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
     const hideHandler = sinon.spy();
     const afterHideHandler = sinon.spy();
 
@@ -107,7 +107,7 @@ describe('<sl-dialog>', () => {
     const el = await fixture<SlDialog>(html`
       <sl-dialog open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sl-dialog>
     `);
-    const overlay = el.shadowRoot!.querySelector<HTMLElement>('[part="overlay"]')!;
+    const overlay = el.shadowRoot!.querySelector<HTMLElement>('[part~="overlay"]')!;
 
     el.addEventListener('sl-request-close', event => {
       event.preventDefault();

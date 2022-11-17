@@ -87,8 +87,8 @@ declare const EyeDropper: EyeDropperConstructor;
 export default class SlColorPicker extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
-  @query('[part="input"]') input: SlInput;
-  @query('[part="preview"]') previewButton: HTMLButtonElement;
+  @query('[part~="input"]') input: SlInput;
+  @query('[part~="preview"]') previewButton: HTMLButtonElement;
   @query('.color-dropdown') dropdown: SlDropdown;
 
   // @ts-expect-error -- Controller is currently unused

@@ -10,7 +10,7 @@ describe('<sl-tooltip>', () => {
         <sl-button>Hover Me</sl-button>
       </sl-tooltip>
     `);
-    const body = el.shadowRoot!.querySelector<HTMLElement>('[part="body"]')!;
+    const body = el.shadowRoot!.querySelector<HTMLElement>('[part~="body"]')!;
 
     expect(body.hidden).to.be.false;
   });
@@ -21,7 +21,7 @@ describe('<sl-tooltip>', () => {
         <sl-button>Hover Me</sl-button>
       </sl-tooltip>
     `);
-    const body = el.shadowRoot!.querySelector<HTMLElement>('[part="body"]')!;
+    const body = el.shadowRoot!.querySelector<HTMLElement>('[part~="body"]')!;
 
     expect(body.hidden).to.be.true;
   });
@@ -32,7 +32,7 @@ describe('<sl-tooltip>', () => {
         <sl-button>Hover Me</sl-button>
       </sl-tooltip>
     `);
-    const body = el.shadowRoot!.querySelector<HTMLElement>('[part="body"]')!;
+    const body = el.shadowRoot!.querySelector<HTMLElement>('[part~="body"]')!;
     const showHandler = sinon.spy();
     const afterShowHandler = sinon.spy();
 
@@ -54,7 +54,7 @@ describe('<sl-tooltip>', () => {
         <sl-button>Hover Me</sl-button>
       </sl-tooltip>
     `);
-    const body = el.shadowRoot!.querySelector<HTMLElement>('[part="body"]')!;
+    const body = el.shadowRoot!.querySelector<HTMLElement>('[part~="body"]')!;
     const hideHandler = sinon.spy();
     const afterHideHandler = sinon.spy();
 
@@ -76,7 +76,7 @@ describe('<sl-tooltip>', () => {
         <sl-button>Hover Me</sl-button>
       </sl-tooltip>
     `);
-    const body = el.shadowRoot!.querySelector<HTMLElement>('[part="body"]')!;
+    const body = el.shadowRoot!.querySelector<HTMLElement>('[part~="body"]')!;
     const showHandler = sinon.spy();
     const afterShowHandler = sinon.spy();
 
@@ -98,7 +98,7 @@ describe('<sl-tooltip>', () => {
         <sl-button>Hover Me</sl-button>
       </sl-tooltip>
     `);
-    const body = el.shadowRoot!.querySelector<HTMLElement>('[part="body"]')!;
+    const body = el.shadowRoot!.querySelector<HTMLElement>('[part~="body"]')!;
     const hideHandler = sinon.spy();
     const afterHideHandler = sinon.spy();
 
@@ -120,7 +120,7 @@ describe('<sl-tooltip>', () => {
         <sl-button>Hover Me</sl-button>
       </sl-tooltip>
     `);
-    const body = el.shadowRoot!.querySelector<HTMLElement>('[part="body"]')!;
+    const body = el.shadowRoot!.querySelector<HTMLElement>('[part~="body"]')!;
     const hideHandler = sinon.spy();
     const afterHideHandler = sinon.spy();
 
@@ -142,7 +142,7 @@ describe('<sl-tooltip>', () => {
         <sl-button>Hover Me</sl-button>
       </sl-tooltip>
     `);
-    const body = el.shadowRoot!.querySelector<HTMLElement>('[part="body"]')!;
+    const body = el.shadowRoot!.querySelector<HTMLElement>('[part~="body"]')!;
     await el.updateComplete;
 
     expect(body.hidden).to.be.false;
