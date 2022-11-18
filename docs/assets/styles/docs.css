@@ -198,7 +198,7 @@ strong {
 }
 
 .markdown-section {
-  max-width: 860px;
+  max-width: 1200px;
 }
 
 .anchor span {
@@ -424,7 +424,7 @@ kbd,
   border-bottom: solid 1px var(--sl-color-neutral-200);
   border-left: none;
   border-right: none;
-  padding: 0.75rem 0.5rem;
+  /* padding: 0.75rem 0.5rem; */
 }
 
 .markdown-section table .nowrap {

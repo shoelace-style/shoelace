@@ -59,7 +59,9 @@ fs.mkdirSync(outdir, { recursive: true });
         // Theme stylesheets
         ...(await globby('./src/themes/**/!(*.test).ts')),
         // React wrappers
-        ...(await globby('./src/react/**/*.ts'))
+        ...(await globby('./src/react/**/*.ts')),
+        // 3rd-party components
+        ...(await globby('./src/vendor/**/*.js'))
       ],
       outdir,
       chunkNames: 'chunks/[name].[hash]',

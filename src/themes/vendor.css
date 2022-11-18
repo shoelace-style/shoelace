@@ -1,0 +1,580 @@
+data-grid {
+  --padding: 0.25rem;
+  --padding-x: 0.5rem;
+  --padding-y: 0.25rem;
+  --padding-y-header: 0.75rem;
+  --padding-half: calc(var(--padding) / 2);
+  --color-rgb: var(--ts-color-primary-rgb);
+  --color: var(--ts-color-primary);
+  --highlight-color: #fffcee;
+  --header-background: var(--ts-color-gray-200);
+  --header-color: var(--ts-color-default);
+  --btn-background: var(--ts-color-white);
+  --btn-color: var(--color);
+  --body-color: var(--ts-color-text-default);
+  --icon-scale: 1;
+  --border-radius: 0.25rem;
+  --row-border-color: var(--ts-color-gray-300, #dee2e6);
+  --responsive-width: 60%;
+  --black: var(--ts-color-black, #000);
+  --white: var(--ts-color-white, #fff);
+  --gray: var(--ts-color-gray, #6c757d);
+  --gray-dark: var(--ts-color-gray-800, #343a40);
+  --gray-100: var(--ts-color-gray-100, #f8f9fa);
+  --gray-200: var(--ts-color-gray-200, #e9ecef);
+  --gray-300: var(--ts-color-gray-300, #dee2e6);
+  --gray-400: var(--ts-color-gray-400, #ced4da);
+  --gray-500: var(--ts-color-gray-500, #adb5bd);
+  --gray-600: var(--ts-color-gray-600, #6c757d);
+  --gray-700: var(--ts-color-gray-700, #495057);
+  --gray-800: var(--ts-color-gray-800, #343a40);
+  --gray-900: var(--ts-color-gray-900, #212529);
+  display: block;
+  contain: content;
+  background: var(--header-background);
+  min-height: 6rem
+}
+
+data-grid img {
+  border: none;
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle
+}
+
+data-grid [hidden] {
+  display: none
+}
+
+data-grid table {
+  display: table;
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 100%;
+  max-width: 100%;
+  white-space: normal
+}
+
+data-grid th,
+data-grid td {
+  empty-cells: show;
+  padding: var(--padding-y) var(--padding-x);
+  text-align: left
+}
+
+data-grid th[tabindex],
+data-grid td[tabindex] {
+  outline: none;
+  word-break: normal
+}
+
+data-grid th {
+  font-weight: bold;
+  padding: var(--padding-y-header) var(--padding-x)
+}
+
+data-grid th,
+data-grid td {
+  position: relative;
+  overflow: hidden;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap
+}
+
+data-grid table tbody tr {
+  position: relative;
+  cursor: pointer
+}
+
+data-grid table tbody tr.dg-expanded td {
+  white-space: normal
+}
+
+data-grid .dg-expand {
+  position: absolute;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  height: 100%
+}
+
+@media only screen and (max-width: 768px) {
+
+  data-grid[responsive] table,
+  data-grid[responsive] thead,
+  data-grid[responsive] tbody,
+  data-grid[responsive] tfoot,
+  data-grid[responsive] th,
+  data-grid[responsive] td,
+  data-grid[responsive] tr:not([hidden]) {
+    display: block
+  }
+
+  data-grid[responsive] thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px
+  }
+
+  data-grid[responsive] tbody tr {
+    padding: 0;
+    border: 1px solid var(--header-background)
+  }
+
+  data-grid[responsive] tbody td {
+    border: none;
+    border-bottom: 1px solid var(--row-border-color);
+    position: relative;
+    padding-left: calc(100% - var(--responsive-width))
+  }
+
+  data-grid[responsive] tbody td:last-child {
+    border: 0
+  }
+
+  data-grid[responsive] tbody td:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: var(--padding);
+    width: calc(100% - var(--responsive-width) - var(--padding)*4);
+    white-space: nowrap;
+    content: attr(data-name);
+    display: block;
+    font-weight: bold;
+    background-color: var(--header-background)
+  }
+}
+
+data-grid[sticky] table thead,
+data-grid[sticky] table tfoot {
+  z-index: 2;
+  position: -webkit-sticky;
+  position: sticky;
+  margin: 0;
+  border: 0
+}
+
+data-grid[sticky] table thead {
+  inset-block-start: -1px
+}
+
+data-grid[sticky] table tfoot {
+  inset-block-end: -1px
+}
+
+data-grid .dg-nav-icon,
+data-grid .dg-skip-icon {
+  width: 22px;
+  height: 22px;
+  box-sizing: border-box;
+  position: absolute;
+  display: block;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(var(--icon-scale, 1))
+}
+
+data-grid .dg-nav-icon:before,
+data-grid .dg-nav-icon:after,
+data-grid .dg-skip-icon:before,
+data-grid .dg-skip-icon:after {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute
+}
+
+data-grid .dg-nav-icon::before {
+  width: 0;
+  height: 10px;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 6px solid;
+  top: 6px;
+  left: 9px
+}
+
+data-grid .dg-skip-icon::before {
+  width: 3px;
+  height: 10px;
+  background: currentColor;
+  top: 6px;
+  left: 14px
+}
+
+data-grid .dg-skip-icon::after {
+  width: 0;
+  height: 10px;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 6px solid;
+  top: 6px;
+  left: 7px
+}
+
+data-grid .dg-rotate {
+  transform: rotate(-180deg)
+}
+
+data-grid button {
+  background-color: var(--white);
+  border: solid 1px var(--gray-100);
+  border-radius: var(--border-radius);
+  color: var(--color);
+  height: 2rem;
+  margin: 0 .2rem;
+  padding: 0 .5rem;
+  pointer-events: all;
+  text-align: center;
+  cursor: pointer
+}
+
+data-grid button:hover {
+  background-color: var(--gray-200);
+  border-color: var(--gray-300)
+}
+
+data-grid button:disabled:hover {
+  background-color: inherit;
+  border-color: inherit
+}
+
+data-grid input[type=checkbox] {
+  margin: 0
+}
+
+data-grid input:not([type=checkbox]),
+data-grid select {
+  background-color: #fff;
+  box-sizing: border-box;
+  border: solid 1px #f0f0f0;
+  border-radius: var(--border-radius);
+  height: 2rem;
+  margin: 0 .2rem;
+  padding: 0 var(--padding)
+}
+
+data-grid input:not([type=checkbox]):focus,
+data-grid select:focus,
+data-grid button:focus {
+  box-shadow: 0 0 0 var(--padding-half) rgba(var(--color-rgb), 0.25);
+  outline: 0
+}
+
+data-grid input:not([type=checkbox])[disabled],
+data-grid input:not([type=checkbox]):disabled,
+data-grid select[disabled],
+data-grid select:disabled,
+data-grid button[disabled],
+data-grid button:disabled {
+  opacity: .35;
+  pointer-events: none
+}
+
+data-grid thead tr,
+data-grid tfoot tr {
+  background-color: var(--header-background);
+  color: var(--header-color)
+}
+
+data-grid.dg-loading tbody {
+  opacity: .5;
+  transition: opacity .2s ease-in
+}
+
+data-grid thead tr:nth-child(2) th {
+  padding: 0;
+  background-color: var(--white)
+}
+
+data-grid thead tr:nth-child(2) th input {
+  width: 100%;
+  border-radius: 0;
+  margin: 0
+}
+
+data-grid tbody td input.dg-editable {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  margin: 0
+}
+
+data-grid tbody td input.dg-editable:hover {
+  box-shadow: 0 0 0 var(--padding-half) rgba(var(--color-rgb), 0.25)
+}
+
+data-grid:not([data-url]) tbody:before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  content: attr(data-empty);
+  transform: translate(-50%, -50%);
+  opacity: .5;
+  font-size: 2rem
+}
+
+data-grid tbody tr:nth-child(odd) {
+  background-color: var(--ts-color-white, #ffffff);
+  color: var(--ts-color-dark, #212529)
+}
+
+data-grid tbody tr:nth-child(even) {
+  background-color: var(--ts-color-light, #f8f9fa);
+  color: var(--ts-color-dark, #212529)
+}
+
+data-grid tbody tr {
+  border-bottom: solid 1px var(--row-border-color)
+}
+
+data-grid tbody tr:hover {
+  background-color: var(--highlight-color)
+}
+
+data-grid tbody tr:focus {
+  background-color: var(--highlight-color);
+  border-bottom-color: var(--highlight-color);
+  outline: none
+}
+
+data-grid tfoot td {
+  padding: var(--padding-y-header) var(--padding-x)
+}
+
+data-grid tfoot .dg-page-nav {
+  display: flex;
+  align-items: center
+}
+
+data-grid tfoot .dg-input-page {
+  width: 4rem
+}
+
+data-grid tfoot .dg-footer {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between
+}
+
+data-grid tfoot .dg-pagination {
+  display: flex;
+  text-align: center
+}
+
+data-grid tfoot .dg-pagination button {
+  position: relative;
+  width: 2rem
+}
+
+data-grid tfoot .dg-meta {
+  min-width: 160px;
+  text-align: right
+}
+
+data-grid [aria-sort] {
+  cursor: pointer;
+  padding-right: 1.5rem
+}
+
+data-grid [aria-sort=none]:after,
+data-grid [aria-sort=none]:before,
+data-grid [aria-sort=ascending]:before,
+data-grid [aria-sort=descending]:after {
+  right: .5rem;
+  top: calc(50% - .5rem);
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  border-color: rgba(0, 0, 0, 0);
+  border-width: .25rem;
+  margin-left: -0.25rem
+}
+
+data-grid [aria-sort=none]:before {
+  border-bottom-color: var(--ts-color-gray-400, #ced4da);
+  top: calc(50% - .6rem)
+}
+
+data-grid [aria-sort=none]:after {
+  border-top-color: var(--ts-color-gray-400, #ced4da);
+  bottom: calc(50% - .5rem);
+  top: auto
+}
+
+data-grid [aria-sort=ascending]:before {
+  border-bottom-color: var(--ts-color-dark, #212529)
+}
+
+data-grid [aria-sort=descending]:after {
+  border-top-color: var(--ts-color-dark, #212529);
+  bottom: calc(50% - .5rem);
+  top: auto
+}
+
+data-grid[dir=rtl] th,
+data-grid[dir=rtl] td {
+  text-align: right
+}
+
+data-grid[dir=rtl] [aria-sort] {
+  padding-left: 1rem;
+  padding-right: .5rem
+}
+
+data-grid[dir=rtl] [aria-sort=none]:after,
+data-grid[dir=rtl] [aria-sort=none]:before,
+data-grid[dir=rtl] [aria-sort=ascending]:before,
+data-grid[dir=rtl] [aria-sort=descending]:after {
+  left: .75rem;
+  right: auto
+}
+
+data-grid[dir=rtl] tfoot .dg-meta {
+  text-align: left
+}
+
+data-grid .dg-menu {
+  position: absolute;
+  z-index: 3;
+  background: var(--white);
+  list-style: none;
+  max-width: 150px;
+  margin: 0;
+  padding: var(--padding);
+  box-shadow: 0 0 1rem rgba(0, 0, 0, .25);
+  border-radius: var(--border-radius)
+}
+
+data-grid .dg-menu li {
+  margin: 0;
+  padding: 0
+}
+
+data-grid .dg-menu label {
+  display: flex;
+  align-items: center;
+  margin-bottom: .25em
+}
+
+data-grid .dg-menu input {
+  margin-right: .5em
+}
+
+data-grid .dg-selectable {
+  position: relative
+}
+
+data-grid .dg-selectable label {
+  margin: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+
+data-grid .dg-actions {
+  text-overflow: initial;
+  width: 100px;
+  text-align: right
+}
+
+data-grid .dg-actions button {
+  margin: 0
+}
+
+data-grid .dg-actions button+button {
+  margin-left: .5rem
+}
+
+data-grid .dg-actions .dg-actions-toggle {
+  display: none;
+  width: calc(100px - var(--padding-x)*2)
+}
+
+data-grid .dg-actions.dg-actions-1 {
+  width: 100%
+}
+
+data-grid .dg-actions.dg-actions-2 button {
+  width: calc(50% - .25rem)
+}
+
+data-grid .dg-actions.dg-actions-more button {
+  display: none
+}
+
+data-grid .dg-actions.dg-actions-more button.dg-actions-toggle {
+  display: inline-block
+}
+
+data-grid .dg-actions.dg-expand.dg-actions-more {
+  width: 100%
+}
+
+data-grid .dg-actions.dg-expand.dg-actions-more button {
+  display: inline-block
+}
+
+data-grid tr.dg-actionable {
+  cursor: pointer
+}
+
+data-grid tr.dg-actionable:hover td {
+  background-color: var(--highlight-color)
+}
+
+data-grid .dg-resizer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 6px;
+  z-index: 2;
+  cursor: col-resize;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none
+}
+
+data-grid .dg-resizer:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: var(--padding-y-header);
+  height: 1.5rem;
+  right: 0;
+  width: 2px;
+  background: var(--gray-400)
+}
+
+data-grid .dg-resizer:hover:before {
+  background: var(--color)
+}
+
+data-grid .dg-resizer.dg-resizer-active {
+  border-right: 1px dashed var(--color)
+}
+
+data-grid .dg-resizer.dg-resizer-active:before {
+  background: var(--color)
+}
+
+@media only screen and (max-width: 768px) {
+  data-grid tfoot .dg-meta {
+    display: none
+  }
+}

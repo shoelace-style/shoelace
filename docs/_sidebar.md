@@ -1,7 +1,7 @@
 - Getting Started
 
-  - [Overview](/)
   - [Teamshares](/getting-started/teamshares)
+  - [Overview](/)
   - [Installation](/getting-started/installation)
   - [Usage](/getting-started/usage)
   - [Themes](/getting-started/themes)
@@ -9,18 +9,9 @@
   - [Form Controls](/getting-started/form-controls)
   - [Localization](/getting-started/localization)
 
-- Frameworks
+- Vendor
 
-  - [React](/frameworks/react)
-  - [Vue](/frameworks/vue)
-  - [Angular](/frameworks/angular)
-
-- Resources
-
-  - [Community](/resources/community)
-  - [Accessibility](/resources/accessibility)
-  - [Contributing](/resources/contributing)
-  - [Changelog](/resources/changelog)
+  - [Data Grid](/vendor/data-grid.md)
 
 - Components
 
@@ -69,6 +60,16 @@
   - [Tree Item](/components/tree-item)
   <!--plop:component-->
 
+- Design Tokens
+
+  - [Typography](/tokens/typography)
+  - [Color](/tokens/color)
+  - [Spacing](/tokens/spacing)
+  - [Elevation](/tokens/elevation)
+  - [Border Radius](/tokens/border-radius)
+  - [Transition](/tokens/transition)
+  - [Z-index](/tokens/z-index)
+
 - Utilities
 
   - [Animated Image](/components/animated-image)
@@ -83,15 +84,18 @@
   - [Resize Observer](/components/resize-observer)
   - [Visually Hidden](/components/visually-hidden)
 
-- Design Tokens
+- Frameworks
 
-  - [Typography](/tokens/typography)
-  - [Color](/tokens/color)
-  - [Spacing](/tokens/spacing)
-  - [Elevation](/tokens/elevation)
-  - [Border Radius](/tokens/border-radius)
-  - [Transition](/tokens/transition)
-  - [Z-index](/tokens/z-index)
+  - [React](/frameworks/react)
+  - [Vue](/frameworks/vue)
+  - [Angular](/frameworks/angular)
+
+- Resources
+
+  - [Community](/resources/community)
+  - [Accessibility](/resources/accessibility)
+  - [Contributing](/resources/contributing)
+  - [Changelog](/resources/changelog)
 
 - Tutorials
 
