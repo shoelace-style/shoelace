@@ -478,7 +478,7 @@ Thank you for your help and patience with testing Shoelace. I promise, we're not
 - Improved a11y of the scroll buttons in `<sl-tab-group>`
 - Improved a11y of the close button in `<sl-tab>`
 - Improved a11y of `<sl-tab-panel>` by removing an invalid `aria-selected` attribute [#579](https://github.com/shoelace-style/shoelace/issues/579)
-- Improved a11y of `<sl-icon>` by not using a variation of the `name` attribute for labels (use the `label` prop instead)
+- Improved a11y of `<sl-icon>` by not using a variation of the `name` attribute for labels (use the `label` attribute instead)
 - Moved `role` from the shadow root to the host element in `<sl-menu>`
 - Removed redundant `role="menu"` in `<sl-dropdown>`
 - Slightly faster animations for showing and hiding `<sl-dropdown>`
@@ -540,7 +540,7 @@ This release is the second attempt at unbundling dependencies. This will be a br
 Shoelace doesn't have a lot of dependencies, but this release unbundles most of them so you can potentially save some extra kilobytes. This will be a breaking change only if your configuration _does not_ support bare module specifiers. CDN users and bundler users will be unaffected.
 
 - 🚨 BREAKING: renamed the `sl-clear` event to `sl-remove`, the `clear-button` part to `remove-button`, and the `clearable` property to `removable` in `<sl-tag>`
-- Added the `disabled` prop to `<sl-resize-observer>`
+- Added the `disabled` attribute to `<sl-resize-observer>`
 - Fixed a bug in `<sl-mutation-observer>` where setting `disabled` initially didn't work
 - Unbundled dependencies and configured external imports to be packaged with bare module specifiers
 

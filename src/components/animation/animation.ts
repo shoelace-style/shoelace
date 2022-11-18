@@ -32,8 +32,8 @@ export default class SlAnimation extends ShoelaceElement {
   @property() name = 'none';
 
   /**
-   * Plays the animation. When omitted, the animation will be paused. This prop will be automatically removed when the
-   * animation finishes or gets canceled.
+   * Plays the animation. When omitted, the animation will be paused. This attribute will be automatically removed when
+   * the animation finishes or gets canceled.
    */
   @property({ type: Boolean, reflect: true }) play = false;
 
