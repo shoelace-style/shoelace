@@ -26,7 +26,7 @@ describe('<sl-input>', () => {
     expect(el.passwordToggle).to.be.false;
     expect(el.passwordVisible).to.be.false;
     expect(el.noSpinButtons).to.be.false;
-    expect(el.placeholder).to.be.undefined;
+    expect(el.placeholder).to.equal('');
     expect(el.disabled).to.be.false;
     expect(el.readonly).to.be.false;
     expect(el.minlength).to.be.undefined;

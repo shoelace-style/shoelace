@@ -120,7 +120,7 @@ export default class SlInput extends ShoelaceElement {
   @property({ attribute: 'no-spin-buttons', type: Boolean }) noSpinButtons = false;
 
   /** The input's placeholder text. */
-  @property() placeholder: string;
+  @property() placeholder = '';
 
   /** Disables the input. */
   @property({ type: Boolean, reflect: true }) disabled = false;
