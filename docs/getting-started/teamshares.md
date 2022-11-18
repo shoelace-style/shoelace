@@ -1,6 +1,6 @@
-# Documentation test page
+# Teamshares Design System
 
-Here’s a page I made in Notion to test out how well it will export markdown.
+This is based on a page I made in Notion to test out how well it will export markdown. We can put whatever markdown we want to in here, including stuff that's currently in zeroheight.
 
 # This is a title.
 
