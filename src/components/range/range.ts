@@ -128,6 +128,24 @@ export default class SlRange extends ShoelaceElement {
     this.input.blur();
   }
 
+  /** Increments the value of the input by the value of the step attribute. */
+  stepUp() {
+    this.input.stepUp();
+    if (this.value !== Number(this.input.value)) {
+      this.value = Number(this.input.value);
+      this.emit('sl-change');
+    }
+  }
+
+  /** Decrements the value of the input by the value of the step attribute. */
+  stepDown() {
+    this.input.stepDown();
+    if (this.value !== Number(this.input.value)) {
+      this.value = Number(this.input.value);
+      this.emit('sl-change');
+    }
+  }
+
   /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
   setCustomValidity(message: string) {
     this.input.setCustomValidity(message);
