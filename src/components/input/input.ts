@@ -86,7 +86,7 @@ export default class SlInput extends ShoelaceElement {
   @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
 
   /** The input's name attribute. */
-  @property() name: string;
+  @property() name = '';
 
   /** The input's value attribute. */
   @property() value = '';
@@ -245,6 +245,33 @@ export default class SlInput extends ShoelaceElement {
   ) {
     this.input.setRangeText(replacement, start, end, selectMode);
 
+    if (this.value !== this.input.value) {
+      this.value = this.input.value;
+      this.emit('sl-input');
+      this.emit('sl-change');
+    }
+  }
+
+  /** Displays the browser picker for an input element (only works if the browser supports it for the input type). */
+  showPicker() {
+    if ('showPicker' in HTMLInputElement.prototype) {
+      this.input.showPicker();
+    }
+  }
+
+  /** Increments the value of a numeric input type by the value of the step attribute. */
+  stepUp() {
+    this.input.stepUp();
+    if (this.value !== this.input.value) {
+      this.value = this.input.value;
+      this.emit('sl-input');
+      this.emit('sl-change');
+    }
+  }
+
+  /** Decrements the value of a numeric input type by the value of the step attribute. */
+  stepDown() {
+    this.input.stepDown();
     if (this.value !== this.input.value) {
       this.value = this.input.value;
       this.emit('sl-input');
