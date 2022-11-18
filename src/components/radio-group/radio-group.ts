@@ -7,6 +7,7 @@ import { HasSlotController } from '../../internal/slot';
 import { watch } from '../../internal/watch';
 import '../button-group/button-group';
 import styles from './radio-group.styles';
+import type { ShoelaceFormControl } from '../../internal/shoelace-element';
 import type SlRadioButton from '../radio-button/radio-button';
 import type SlRadio from '../radio/radio';
 import type { CSSResultGroup } from 'lit';
@@ -32,11 +33,11 @@ import type { CSSResultGroup } from 'lit';
  * @csspart button-group__base - The button group's `base` part.
  */
 @customElement('sl-radio-group')
-export default class SlRadioGroup extends ShoelaceElement {
+export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
 
   protected readonly formSubmitController = new FormSubmitController(this, {
-    defaultValue: (control: SlRadioGroup) => control.defaultValue
+    defaultValue: control => control.defaultValue
   });
   private readonly hasSlotController = new HasSlotController(this, 'help-text', 'label');
 
@@ -46,7 +47,8 @@ export default class SlRadioGroup extends ShoelaceElement {
   @state() private hasButtonGroup = false;
   @state() private errorMessage = '';
   @state() private customErrorMessage = '';
-  @state() private defaultValue = '';
+  @state() defaultValue = '';
+  @state() invalid = false;
 
   /**
    * The radio group label. Required for proper accessibility. If you need to display HTML, you can use the `label` slot
@@ -62,12 +64,6 @@ export default class SlRadioGroup extends ShoelaceElement {
 
   /** The name assigned to the radio controls. */
   @property() name = 'option';
-
-  /**
-   * This will be true when the control is in an invalid state. Validity is determined by props such as `type`,
-   * `required`, `minlength`, `maxlength`, and `pattern` using the browser's constraint validation API.
-   */
-  @property({ type: Boolean, reflect: true }) invalid = false;
 
   /** Ensures a child radio is checked before allowing the containing form to submit. */
   @property({ type: Boolean, reflect: true }) required = false;
@@ -87,6 +83,11 @@ export default class SlRadioGroup extends ShoelaceElement {
 
   firstUpdated() {
     this.invalid = !this.validity.valid;
+  }
+
+  /** Checks for validity but does not show the browser's validation message. */
+  checkValidity() {
+    return this.validity.valid;
   }
 
   /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */

@@ -9,11 +9,9 @@
 //
 // Usage:
 //
-//  @property({ type: Boolean, reflect: true })
-//  checked = false;
+//  @property({ type: Boolean, reflect: true }) checked = false;
 //
-//  @defaultValue('checked')
-//  defaultChecked = false;
+//  @defaultValue('checked') defaultChecked = false;
 //
 
 import { defaultConverter } from 'lit';
