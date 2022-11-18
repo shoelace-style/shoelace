@@ -32,18 +32,18 @@ data-grid {
   display: block;
   contain: content;
   background: var(--header-background);
-  min-height: 6rem
+  min-height: 6rem;
 }
 
 data-grid img {
   border: none;
   height: auto;
   max-width: 100%;
-  vertical-align: middle
+  vertical-align: middle;
 }
 
 data-grid [hidden] {
-  display: none
+  display: none;
 }
 
 data-grid table {
@@ -52,25 +52,25 @@ data-grid table {
   table-layout: fixed;
   width: 100%;
   max-width: 100%;
-  white-space: normal
+  white-space: normal;
 }
 
 data-grid th,
 data-grid td {
   empty-cells: show;
   padding: var(--padding-y) var(--padding-x);
-  text-align: left
+  text-align: left;
 }
 
 data-grid th[tabindex],
 data-grid td[tabindex] {
   outline: none;
-  word-break: normal
+  word-break: normal;
 }
 
 data-grid th {
   font-weight: bold;
-  padding: var(--padding-y-header) var(--padding-x)
+  padding: var(--padding-y-header) var(--padding-x);
 }
 
 data-grid th,
@@ -79,16 +79,16 @@ data-grid td {
   overflow: hidden;
   text-align: left;
   text-overflow: ellipsis;
-  white-space: nowrap
+  white-space: nowrap;
 }
 
 data-grid table tbody tr {
   position: relative;
-  cursor: pointer
+  cursor: pointer;
 }
 
 data-grid table tbody tr.dg-expanded td {
-  white-space: normal
+  white-space: normal;
 }
 
 data-grid .dg-expand {
@@ -98,11 +98,10 @@ data-grid .dg-expand {
   align-items: center;
   justify-content: flex-end;
   width: 100%;
-  height: 100%
+  height: 100%;
 }
 
 @media only screen and (max-width: 768px) {
-
   data-grid[responsive] table,
   data-grid[responsive] thead,
   data-grid[responsive] tbody,
@@ -110,29 +109,29 @@ data-grid .dg-expand {
   data-grid[responsive] th,
   data-grid[responsive] td,
   data-grid[responsive] tr:not([hidden]) {
-    display: block
+    display: block;
   }
 
   data-grid[responsive] thead tr {
     position: absolute;
     top: -9999px;
-    left: -9999px
+    left: -9999px;
   }
 
   data-grid[responsive] tbody tr {
     padding: 0;
-    border: 1px solid var(--header-background)
+    border: 1px solid var(--header-background);
   }
 
   data-grid[responsive] tbody td {
     border: none;
     border-bottom: 1px solid var(--row-border-color);
     position: relative;
-    padding-left: calc(100% - var(--responsive-width))
+    padding-left: calc(100% - var(--responsive-width));
   }
 
   data-grid[responsive] tbody td:last-child {
-    border: 0
+    border: 0;
   }
 
   data-grid[responsive] tbody td:before {
@@ -140,12 +139,12 @@ data-grid .dg-expand {
     top: 0;
     left: 0;
     padding: var(--padding);
-    width: calc(100% - var(--responsive-width) - var(--padding)*4);
+    width: calc(100% - var(--responsive-width) - var(--padding) * 4);
     white-space: nowrap;
     content: attr(data-name);
     display: block;
     font-weight: bold;
-    background-color: var(--header-background)
+    background-color: var(--header-background);
   }
 }
 
@@ -155,15 +154,15 @@ data-grid[sticky] table tfoot {
   position: -webkit-sticky;
   position: sticky;
   margin: 0;
-  border: 0
+  border: 0;
 }
 
 data-grid[sticky] table thead {
-  inset-block-start: -1px
+  inset-block-start: -1px;
 }
 
 data-grid[sticky] table tfoot {
-  inset-block-end: -1px
+  inset-block-end: -1px;
 }
 
 data-grid .dg-nav-icon,
@@ -175,17 +174,17 @@ data-grid .dg-skip-icon {
   display: block;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(var(--icon-scale, 1))
+  transform: translate(-50%, -50%) scale(var(--icon-scale, 1));
 }
 
 data-grid .dg-nav-icon:before,
 data-grid .dg-nav-icon:after,
 data-grid .dg-skip-icon:before,
 data-grid .dg-skip-icon:after {
-  content: "";
+  content: '';
   display: block;
   box-sizing: border-box;
-  position: absolute
+  position: absolute;
 }
 
 data-grid .dg-nav-icon::before {
@@ -195,7 +194,7 @@ data-grid .dg-nav-icon::before {
   border-bottom: 5px solid transparent;
   border-left: 6px solid;
   top: 6px;
-  left: 9px
+  left: 9px;
 }
 
 data-grid .dg-skip-icon::before {
@@ -203,7 +202,7 @@ data-grid .dg-skip-icon::before {
   height: 10px;
   background: currentColor;
   top: 6px;
-  left: 14px
+  left: 14px;
 }
 
 data-grid .dg-skip-icon::after {
@@ -213,11 +212,11 @@ data-grid .dg-skip-icon::after {
   border-bottom: 5px solid transparent;
   border-left: 6px solid;
   top: 6px;
-  left: 7px
+  left: 7px;
 }
 
 data-grid .dg-rotate {
-  transform: rotate(-180deg)
+  transform: rotate(-180deg);
 }
 
 data-grid button {
@@ -226,75 +225,75 @@ data-grid button {
   border-radius: var(--border-radius);
   color: var(--color);
   height: 2rem;
-  margin: 0 .2rem;
-  padding: 0 .5rem;
+  margin: 0 0.2rem;
+  padding: 0 0.5rem;
   pointer-events: all;
   text-align: center;
-  cursor: pointer
+  cursor: pointer;
 }
 
 data-grid button:hover {
   background-color: var(--gray-200);
-  border-color: var(--gray-300)
+  border-color: var(--gray-300);
 }
 
 data-grid button:disabled:hover {
   background-color: inherit;
-  border-color: inherit
+  border-color: inherit;
 }
 
-data-grid input[type=checkbox] {
-  margin: 0
+data-grid input[type='checkbox'] {
+  margin: 0;
 }
 
-data-grid input:not([type=checkbox]),
+data-grid input:not([type='checkbox']),
 data-grid select {
   background-color: #fff;
   box-sizing: border-box;
   border: solid 1px #f0f0f0;
   border-radius: var(--border-radius);
   height: 2rem;
-  margin: 0 .2rem;
-  padding: 0 var(--padding)
+  margin: 0 0.2rem;
+  padding: 0 var(--padding);
 }
 
-data-grid input:not([type=checkbox]):focus,
+data-grid input:not([type='checkbox']):focus,
 data-grid select:focus,
 data-grid button:focus {
   box-shadow: 0 0 0 var(--padding-half) rgba(var(--color-rgb), 0.25);
-  outline: 0
+  outline: 0;
 }
 
-data-grid input:not([type=checkbox])[disabled],
-data-grid input:not([type=checkbox]):disabled,
+data-grid input:not([type='checkbox'])[disabled],
+data-grid input:not([type='checkbox']):disabled,
 data-grid select[disabled],
 data-grid select:disabled,
 data-grid button[disabled],
 data-grid button:disabled {
-  opacity: .35;
-  pointer-events: none
+  opacity: 0.35;
+  pointer-events: none;
 }
 
 data-grid thead tr,
 data-grid tfoot tr {
   background-color: var(--header-background);
-  color: var(--header-color)
+  color: var(--header-color);
 }
 
 data-grid.dg-loading tbody {
-  opacity: .5;
-  transition: opacity .2s ease-in
+  opacity: 0.5;
+  transition: opacity 0.2s ease-in;
 }
 
 data-grid thead tr:nth-child(2) th {
   padding: 0;
-  background-color: var(--white)
+  background-color: var(--white);
 }
 
 data-grid thead tr:nth-child(2) th input {
   width: 100%;
   border-radius: 0;
-  margin: 0
+  margin: 0;
 }
 
 data-grid tbody td input.dg-editable {
@@ -302,11 +301,11 @@ data-grid tbody td input.dg-editable {
   background: transparent;
   border: 0;
   border-radius: 0;
-  margin: 0
+  margin: 0;
 }
 
 data-grid tbody td input.dg-editable:hover {
-  box-shadow: 0 0 0 var(--padding-half) rgba(var(--color-rgb), 0.25)
+  box-shadow: 0 0 0 var(--padding-half) rgba(var(--color-rgb), 0.25);
 }
 
 data-grid:not([data-url]) tbody:before {
@@ -315,131 +314,131 @@ data-grid:not([data-url]) tbody:before {
   left: 50%;
   content: attr(data-empty);
   transform: translate(-50%, -50%);
-  opacity: .5;
-  font-size: 2rem
+  opacity: 0.5;
+  font-size: 2rem;
 }
 
 data-grid tbody tr:nth-child(odd) {
   background-color: var(--ts-color-white, #ffffff);
-  color: var(--ts-color-dark, #212529)
+  color: var(--ts-color-dark, #212529);
 }
 
 data-grid tbody tr:nth-child(even) {
   background-color: var(--ts-color-light, #f8f9fa);
-  color: var(--ts-color-dark, #212529)
+  color: var(--ts-color-dark, #212529);
 }
 
 data-grid tbody tr {
-  border-bottom: solid 1px var(--row-border-color)
+  border-bottom: solid 1px var(--row-border-color);
 }
 
 data-grid tbody tr:hover {
-  background-color: var(--highlight-color)
+  background-color: var(--highlight-color);
 }
 
 data-grid tbody tr:focus {
   background-color: var(--highlight-color);
   border-bottom-color: var(--highlight-color);
-  outline: none
+  outline: none;
 }
 
 data-grid tfoot td {
-  padding: var(--padding-y-header) var(--padding-x)
+  padding: var(--padding-y-header) var(--padding-x);
 }
 
 data-grid tfoot .dg-page-nav {
   display: flex;
-  align-items: center
+  align-items: center;
 }
 
 data-grid tfoot .dg-input-page {
-  width: 4rem
+  width: 4rem;
 }
 
 data-grid tfoot .dg-footer {
   display: flex;
   align-items: center;
   flex-direction: row;
-  justify-content: space-between
+  justify-content: space-between;
 }
 
 data-grid tfoot .dg-pagination {
   display: flex;
-  text-align: center
+  text-align: center;
 }
 
 data-grid tfoot .dg-pagination button {
   position: relative;
-  width: 2rem
+  width: 2rem;
 }
 
 data-grid tfoot .dg-meta {
   min-width: 160px;
-  text-align: right
+  text-align: right;
 }
 
 data-grid [aria-sort] {
   cursor: pointer;
-  padding-right: 1.5rem
+  padding-right: 1.5rem;
 }
 
-data-grid [aria-sort=none]:after,
-data-grid [aria-sort=none]:before,
-data-grid [aria-sort=ascending]:before,
-data-grid [aria-sort=descending]:after {
-  right: .5rem;
-  top: calc(50% - .5rem);
+data-grid [aria-sort='none']:after,
+data-grid [aria-sort='none']:before,
+data-grid [aria-sort='ascending']:before,
+data-grid [aria-sort='descending']:after {
+  right: 0.5rem;
+  top: calc(50% - 0.5rem);
   border: solid transparent;
-  content: " ";
+  content: ' ';
   height: 0;
   width: 0;
   position: absolute;
   border-color: rgba(0, 0, 0, 0);
-  border-width: .25rem;
-  margin-left: -0.25rem
+  border-width: 0.25rem;
+  margin-left: -0.25rem;
 }
 
-data-grid [aria-sort=none]:before {
+data-grid [aria-sort='none']:before {
   border-bottom-color: var(--ts-color-gray-400, #ced4da);
-  top: calc(50% - .6rem)
+  top: calc(50% - 0.6rem);
 }
 
-data-grid [aria-sort=none]:after {
+data-grid [aria-sort='none']:after {
   border-top-color: var(--ts-color-gray-400, #ced4da);
-  bottom: calc(50% - .5rem);
-  top: auto
+  bottom: calc(50% - 0.5rem);
+  top: auto;
 }
 
-data-grid [aria-sort=ascending]:before {
-  border-bottom-color: var(--ts-color-dark, #212529)
+data-grid [aria-sort='ascending']:before {
+  border-bottom-color: var(--ts-color-dark, #212529);
 }
 
-data-grid [aria-sort=descending]:after {
+data-grid [aria-sort='descending']:after {
   border-top-color: var(--ts-color-dark, #212529);
-  bottom: calc(50% - .5rem);
-  top: auto
+  bottom: calc(50% - 0.5rem);
+  top: auto;
 }
 
-data-grid[dir=rtl] th,
-data-grid[dir=rtl] td {
-  text-align: right
+data-grid[dir='rtl'] th,
+data-grid[dir='rtl'] td {
+  text-align: right;
 }
 
-data-grid[dir=rtl] [aria-sort] {
+data-grid[dir='rtl'] [aria-sort] {
   padding-left: 1rem;
-  padding-right: .5rem
+  padding-right: 0.5rem;
 }
 
-data-grid[dir=rtl] [aria-sort=none]:after,
-data-grid[dir=rtl] [aria-sort=none]:before,
-data-grid[dir=rtl] [aria-sort=ascending]:before,
-data-grid[dir=rtl] [aria-sort=descending]:after {
-  left: .75rem;
-  right: auto
+data-grid[dir='rtl'] [aria-sort='none']:after,
+data-grid[dir='rtl'] [aria-sort='none']:before,
+data-grid[dir='rtl'] [aria-sort='ascending']:before,
+data-grid[dir='rtl'] [aria-sort='descending']:after {
+  left: 0.75rem;
+  right: auto;
 }
 
-data-grid[dir=rtl] tfoot .dg-meta {
-  text-align: left
+data-grid[dir='rtl'] tfoot .dg-meta {
+  text-align: left;
 }
 
 data-grid .dg-menu {
@@ -450,27 +449,27 @@ data-grid .dg-menu {
   max-width: 150px;
   margin: 0;
   padding: var(--padding);
-  box-shadow: 0 0 1rem rgba(0, 0, 0, .25);
-  border-radius: var(--border-radius)
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.25);
+  border-radius: var(--border-radius);
 }
 
 data-grid .dg-menu li {
   margin: 0;
-  padding: 0
+  padding: 0;
 }
 
 data-grid .dg-menu label {
   display: flex;
   align-items: center;
-  margin-bottom: .25em
+  margin-bottom: 0.25em;
 }
 
 data-grid .dg-menu input {
-  margin-right: .5em
+  margin-right: 0.5em;
 }
 
 data-grid .dg-selectable {
-  position: relative
+  position: relative;
 }
 
 data-grid .dg-selectable label {
@@ -483,58 +482,58 @@ data-grid .dg-selectable label {
   cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: center
+  justify-content: center;
 }
 
 data-grid .dg-actions {
   text-overflow: initial;
   width: 100px;
-  text-align: right
+  text-align: right;
 }
 
 data-grid .dg-actions button {
-  margin: 0
+  margin: 0;
 }
 
-data-grid .dg-actions button+button {
-  margin-left: .5rem
+data-grid .dg-actions button + button {
+  margin-left: 0.5rem;
 }
 
 data-grid .dg-actions .dg-actions-toggle {
   display: none;
-  width: calc(100px - var(--padding-x)*2)
+  width: calc(100px - var(--padding-x) * 2);
 }
 
 data-grid .dg-actions.dg-actions-1 {
-  width: 100%
+  width: 100%;
 }
 
 data-grid .dg-actions.dg-actions-2 button {
-  width: calc(50% - .25rem)
+  width: calc(50% - 0.25rem);
 }
 
 data-grid .dg-actions.dg-actions-more button {
-  display: none
+  display: none;
 }
 
 data-grid .dg-actions.dg-actions-more button.dg-actions-toggle {
-  display: inline-block
+  display: inline-block;
 }
 
 data-grid .dg-actions.dg-expand.dg-actions-more {
-  width: 100%
+  width: 100%;
 }
 
 data-grid .dg-actions.dg-expand.dg-actions-more button {
-  display: inline-block
+  display: inline-block;
 }
 
 data-grid tr.dg-actionable {
-  cursor: pointer
+  cursor: pointer;
 }
 
 data-grid tr.dg-actionable:hover td {
-  background-color: var(--highlight-color)
+  background-color: var(--highlight-color);
 }
 
 data-grid .dg-resizer {
@@ -547,34 +546,34 @@ data-grid .dg-resizer {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  user-select: none
+  user-select: none;
 }
 
 data-grid .dg-resizer:before {
-  content: "";
+  content: '';
   display: block;
   position: absolute;
   top: var(--padding-y-header);
   height: 1.5rem;
   right: 0;
   width: 2px;
-  background: var(--gray-400)
+  background: var(--gray-400);
 }
 
 data-grid .dg-resizer:hover:before {
-  background: var(--color)
+  background: var(--color);
 }
 
 data-grid .dg-resizer.dg-resizer-active {
-  border-right: 1px dashed var(--color)
+  border-right: 1px dashed var(--color);
 }
 
 data-grid .dg-resizer.dg-resizer-active:before {
-  background: var(--color)
+  background: var(--color);
 }
 
 @media only screen and (max-width: 768px) {
   data-grid tfoot .dg-meta {
-    display: none
+    display: none;
   }
 }

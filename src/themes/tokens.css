@@ -199,10 +199,9 @@ sp-theme {
 :host,
 :root,
 sp-theme {
-  --ts-font-sans: Inter, Helvetica, Arial, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", sans-serif;
-  --ts-font-serif: "DM Serif Display", Georgia, Times, serif;
-  --ts-font-mono: "SFMono-Regular", Menlo, monospace;
+  --ts-font-sans: Inter, Helvetica, Arial, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --ts-font-serif: 'DM Serif Display', Georgia, Times, serif;
+  --ts-font-mono: 'SFMono-Regular', Menlo, monospace;
   --ts-font-body: var(--font-sans);
   --ts-font-display: var(--font-serif);
   /* font-size */
@@ -478,44 +477,44 @@ sl-alert::part(message) {
   /* 1.25rem * 20px */
 }
 
-sl-alert[variant=primary]::part(base) {
+sl-alert[variant='primary']::part(base) {
   background-color: var(--sl-color-primary-50);
   border: 1px solid var(--sl-color-primary-200);
 }
 
-sl-alert[variant=success]::part(base) {
+sl-alert[variant='success']::part(base) {
   background-color: var(--sl-color-success-100);
   border: 1px solid var(--sl-color-success-200);
 }
 
-sl-alert[variant=success]::part(icon) {
+sl-alert[variant='success']::part(icon) {
   color: var(--sl-color-success-700);
 }
 
-sl-alert[variant=neutral]::part(base) {
+sl-alert[variant='neutral']::part(base) {
   background-color: var(--sl-color-neutral-100);
   border: 1px solid var(--sl-color-neutral-300);
 }
 
-sl-alert[variant=neutral]::part(icon) {
+sl-alert[variant='neutral']::part(icon) {
   color: var(--sl-color-neutral-600);
 }
 
-sl-alert[variant=warning]::part(base) {
+sl-alert[variant='warning']::part(base) {
   background-color: var(--sl-color-warning-50);
   border: 1px solid var(--sl-color-warning-200);
 }
 
-sl-alert[variant=warning]::part(icon) {
+sl-alert[variant='warning']::part(icon) {
   color: var(--sl-color-warning-800);
 }
 
-sl-alert[variant=danger]::part(base) {
+sl-alert[variant='danger']::part(base) {
   background-color: var(--sl-color-danger-100);
   border: 1px solid var(--sl-color-danger-200);
 }
 
-sl-alert[variant=danger]::part(icon) {
+sl-alert[variant='danger']::part(icon) {
   color: var(--sl-color-danger-800);
 }
 
@@ -542,86 +541,86 @@ sl-theme {
 /** ********** **/
 /* Button custom colors */
 /** ********** **/
-sl-button[variant=primary]::part(base):hover {
+sl-button[variant='primary']::part(base):hover {
   background-color: var(--sl-color-primary-700);
   border-color: var(--sl-color-primary-600);
 }
 
-sl-button[variant=primary]::part(base):active {
+sl-button[variant='primary']::part(base):active {
   background-color: var(--sl-color-primary-800);
   border-color: var(--sl-color-primary-600);
 }
 
-sl-button[variant=default]::part(base) {
+sl-button[variant='default']::part(base) {
   background-color: var(--sl-color-neutral-100);
   border-color: var(--sl-color-neutral-300);
   color: var(--ts-color-text-default);
 }
 
-sl-button[variant=default]::part(base):hover {
+sl-button[variant='default']::part(base):hover {
   background-color: var(--sl-color-neutral-200);
   border-color: var(--sl-color-neutral-300);
   color: var(--ts-color-text-default);
 }
 
-sl-button[variant=default]::part(base):active {
+sl-button[variant='default']::part(base):active {
   background-color: var(--sl-color-neutral-300);
   border-color: var(--sl-color-neutral-300);
   color: var(--ts-color-text-default);
 }
 
-sl-button[variant=neutral]::part(base) {
+sl-button[variant='neutral']::part(base) {
   background-color: transparent;
   border-color: var(--sl-color-neutral-400);
   color: var(--ts-color-text-default);
 }
 
-sl-button[variant=neutral]::part(base):hover {
+sl-button[variant='neutral']::part(base):hover {
   background-color: var(--sl-color-neutral-200);
   border-color: var(--sl-color-neutral-400);
   color: var(--ts-color-text-default);
 }
 
-sl-button[variant=neutral]::part(base):active {
+sl-button[variant='neutral']::part(base):active {
   background-color: var(--sl-color-neutral-300);
   border-color: var(--sl-color-neutral-400);
   color: var(--ts-color-text-default);
 }
 
-sl-button[variant=warning]::part(base) {
+sl-button[variant='warning']::part(base) {
   background-color: var(--sl-color-warning-500);
   border-color: var(--sl-color-warning-500);
 }
 
-sl-button[variant=warning]::part(label),
-sl-button[variant=warning]::part(caret),
-sl-button[variant=warning]::part(prefix),
-sl-button[variant=warning]::part(suffix) {
+sl-button[variant='warning']::part(label),
+sl-button[variant='warning']::part(caret),
+sl-button[variant='warning']::part(prefix),
+sl-button[variant='warning']::part(suffix) {
   color: var(--ts-color-text-default);
 }
 
-sl-button[variant=warning]::part(base):hover {
+sl-button[variant='warning']::part(base):hover {
   background-color: var(--sl-color-warning-600);
   border-color: var(--sl-color-warning-500);
 }
 
-sl-button[variant=warning]::part(base):active {
+sl-button[variant='warning']::part(base):active {
   background-color: var(--sl-color-warning-600);
   border-color: var(--sl-color-warning-500);
   filter: brightness(0.95);
 }
 
-sl-button[variant=danger]::part(base) {
+sl-button[variant='danger']::part(base) {
   background-color: var(--sl-color-danger-700);
   border-color: var(--sl-color-danger-700);
 }
 
-sl-button[variant=danger]::part(base):hover {
+sl-button[variant='danger']::part(base):hover {
   background-color: var(--sl-color-danger-800);
   border-color: var(--sl-color-danger-700);
 }
 
-sl-button[variant=danger]::part(base):active {
+sl-button[variant='danger']::part(base):active {
   background-color: var(--sl-color-danger-900);
   border-color: var(--sl-color-danger-700);
 }
@@ -633,37 +632,37 @@ sl-button[outline]::part(base) {
 /** ********** **/
 /* Button custom font size + padding */
 /** ********** **/
-sl-button[size=medium]::part(base) {
+sl-button[size='medium']::part(base) {
   padding: 0 var(--sl-spacing-medium);
   /* 16px */
 }
 
-sl-button[size=medium]::part(label) {
+sl-button[size='medium']::part(label) {
   padding: 0 var(--sl-spacing-x-small);
   /* 8px */
 }
 
-sl-button[size=large]::part(base) {
+sl-button[size='large']::part(base) {
   padding: 0 20px;
 }
 
-sl-button[size=large]::part(label) {
+sl-button[size='large']::part(label) {
   padding: 0 var(--sl-spacing-small);
   /* 12px */
 }
 
-sl-button[size=medium]::part(caret),
-sl-button[size=medium]::part(prefix),
-sl-button[size=medium]::part(suffix) {
+sl-button[size='medium']::part(caret),
+sl-button[size='medium']::part(prefix),
+sl-button[size='medium']::part(suffix) {
   font-size: var(--ts-font-base);
   /* 16px */
 }
 
-sl-button[size=large]::part(caret),
-sl-button[size=large]::part(prefix),
-sl-button[size=large]::part(suffix),
-sl-button[size=medium][circle]::part(base),
-sl-button[size=large][circle]::part(base) {
+sl-button[size='large']::part(caret),
+sl-button[size='large']::part(prefix),
+sl-button[size='large']::part(suffix),
+sl-button[size='medium'][circle]::part(base),
+sl-button[size='large'][circle]::part(base) {
   font-size: var(--ts-font-xl);
   /* 20px */
 }
@@ -788,12 +787,12 @@ sl-dialog.small::part(body) {
     max-height: 90vh;
   }
 
-  sl-dialog.has-icon>div {
+  sl-dialog.has-icon > div {
     display: flex;
     flex-direction: column;
   }
 
-  sl-dialog.has-icon>div> :first-child {
+  sl-dialog.has-icon > div > :first-child {
     margin-bottom: var(--sl-spacing-medium);
     /* 16px */
   }
@@ -818,12 +817,12 @@ sl-dialog.small::part(body) {
     --header-spacing: 32px 0 16px 24px;
   }
 
-  sl-dialog.has-icon>div {
+  sl-dialog.has-icon > div {
     align-items: center;
     display: flex;
   }
 
-  sl-dialog.has-icon>div * {
+  sl-dialog.has-icon > div * {
     margin-right: var(--sl-spacing-medium);
     /* 16px */
   }
