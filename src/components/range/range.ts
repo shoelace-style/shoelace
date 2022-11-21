@@ -123,6 +123,24 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
     this.input.blur();
   }
 
+  /** Increments the value of the input by the value of the step attribute. */
+  stepUp() {
+    this.input.stepUp();
+    if (this.value !== Number(this.input.value)) {
+      this.value = Number(this.input.value);
+      this.emit('sl-change');
+    }
+  }
+
+  /** Decrements the value of the input by the value of the step attribute. */
+  stepDown() {
+    this.input.stepDown();
+    if (this.value !== Number(this.input.value)) {
+      this.value = Number(this.input.value);
+      this.emit('sl-change');
+    }
+  }
+
   /** Checks for validity but does not show the browser's validation message. */
   checkValidity() {
     return this.input.checkValidity();

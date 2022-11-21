@@ -32,6 +32,8 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Added `--sl-input-required-content-color` custom property to all form controls [#948](https://github.com/shoelace-style/shoelace/pull/948)
 - Added the ability to cancel `sl-show` and `sl-hide` events in `<sl-details>` [#993](https://github.com/shoelace-style/shoelace/issues/993)
 - Added `focus()` and `blur()` methods to `<sl-radio-button>`
+- Added `stepUp()` and `stepDown()` methods to `<sl-input>` and `<sl-range>` [#1013](https://github.com/shoelace-style/shoelace/pull/1013)
+- Added `showPicker()` method to `<sl-input>` [#1013](https://github.com/shoelace-style/shoelace/pull/1013)
 - Added the `handle-icon` part to `<sl-image-comparer>`
 - Added `caret`, `check`, `grip-vertical`, `indeterminate`, and `radio` icons to the system library and removed `check-lg` [#985](https://github.com/shoelace-style/shoelace/issues/985)
 - Added the `loading` attribute to `<sl-avatar>` to allow lazy loading of image avatars [#1006](https://github.com/shoelace-style/shoelace/pull/1006)

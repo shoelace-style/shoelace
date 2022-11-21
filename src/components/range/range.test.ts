@@ -1,4 +1,5 @@
-import { expect, fixture, html, oneEvent } from '@open-wc/testing';
+import { expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
+import sinon from 'sinon';
 import { serialize } from '../../utilities/form';
 import type SlRange from './range';
 
@@ -8,11 +9,65 @@ describe('<sl-range>', () => {
     await expect(el).to.be.accessible();
   });
 
+  it('default properties', async () => {
+    const el = await fixture<SlRange>(html` <sl-range></sl-range> `);
+
+    expect(el.name).to.equal('');
+    expect(el.value).to.equal(0);
+    expect(el.label).to.equal('');
+    expect(el.helpText).to.equal('');
+    expect(el.disabled).to.be.false;
+    expect(el.invalid).to.be.false;
+    expect(el.min).to.equal(0);
+    expect(el.max).to.equal(100);
+    expect(el.step).to.equal(1);
+    expect(el.tooltip).to.equal('top');
+    expect(el.defaultValue).to.equal(0);
+  });
+
   it('should be disabled with the disabled attribute', async () => {
     const el = await fixture<SlRange>(html` <sl-range disabled></sl-range> `);
     const input = el.shadowRoot!.querySelector<HTMLInputElement>('[part~="input"]')!;
 
     expect(input.disabled).to.be.true;
+  });
+
+  describe('step', () => {
+    it('should increment by step if stepUp() is called', async () => {
+      const el = await fixture<SlRange>(html` <sl-range step="2" value="2"></sl-range> `);
+
+      el.stepUp();
+      await el.updateComplete;
+      expect(el.value).to.equal(4);
+    });
+
+    it('should decrement by step if stepDown() is called', async () => {
+      const el = await fixture<SlRange>(html` <sl-range step="2" value="2"></sl-range> `);
+
+      el.stepDown();
+      await el.updateComplete;
+      expect(el.value).to.equal(0);
+    });
+
+    it('should fire sl-change if stepUp() is called', async () => {
+      const el = await fixture<SlRange>(html` <sl-range step="2" value="2"></sl-range> `);
+
+      const changeHandler = sinon.spy();
+      el.addEventListener('sl-change', changeHandler);
+      el.stepUp();
+      await waitUntil(() => changeHandler.calledOnce);
+      expect(changeHandler).to.have.been.calledOnce;
+    });
+
+    it('should fire sl-change if stepDown() is called', async () => {
+      const el = await fixture<SlRange>(html` <sl-range step="2" value="2"></sl-range> `);
+
+      const changeHandler = sinon.spy();
+      el.addEventListener('sl-change', changeHandler);
+      el.stepUp();
+      await waitUntil(() => changeHandler.calledOnce);
+      expect(changeHandler).to.have.been.calledOnce;
+    });
   });
 
   describe('when serializing', () => {
