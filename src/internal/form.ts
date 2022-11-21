@@ -234,7 +234,7 @@ export class FormSubmitController implements ReactiveController {
 
       // Pass form attributes through to the temporary button
       if (invoker) {
-        ['formaction', 'formmethod', 'formnovalidate', 'formtarget'].forEach(attr => {
+        ['formaction', 'formenctype', 'formmethod', 'formnovalidate', 'formtarget'].forEach(attr => {
           if (invoker.hasAttribute(attr)) {
             button.setAttribute(attr, invoker.getAttribute(attr)!);
           }

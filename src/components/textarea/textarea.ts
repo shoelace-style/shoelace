@@ -51,7 +51,7 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
   @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
 
   /** The textarea's name attribute. */
-  @property() name: string;
+  @property() name = '';
 
   /** The textarea's value attribute. */
   @property() value = '';
@@ -66,7 +66,7 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
   @property({ attribute: 'help-text' }) helpText = '';
 
   /** The textarea's placeholder text. */
-  @property() placeholder: string;
+  @property() placeholder = '';
 
   /** The number of rows to display by default. */
   @property({ type: Number }) rows = 4;
