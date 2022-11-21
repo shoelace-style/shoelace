@@ -10,6 +10,7 @@ import { HasSlotController } from '../../internal/slot';
 import { watch } from '../../internal/watch';
 import { LocalizeController } from '../../utilities/localize';
 import styles from './range.styles';
+import type { ShoelaceFormControl } from '../../internal/shoelace-element';
 import type { CSSResultGroup } from 'lit';
 
 /**
@@ -41,7 +42,7 @@ import type { CSSResultGroup } from 'lit';
  * @cssproperty --track-active-offset - The point of origin of the active track.
  */
 @customElement('sl-range')
-export default class SlRange extends ShoelaceElement {
+export default class SlRange extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
 
   @query('.range__control') input: HTMLInputElement;
@@ -55,6 +56,7 @@ export default class SlRange extends ShoelaceElement {
 
   @state() private hasFocus = false;
   @state() private hasTooltip = false;
+  @state() invalid = false;
 
   /** The input's name attribute. */
   @property() name = '';
@@ -70,12 +72,6 @@ export default class SlRange extends ShoelaceElement {
 
   /** Disables the range. */
   @property({ type: Boolean, reflect: true }) disabled = false;
-
-  /**
-   * This will be true when the control is in an invalid state. Validity in range inputs is determined by the message
-   * provided by the `setCustomValidity` method.
-   */
-  @property({ type: Boolean, reflect: true }) invalid = false;
 
   /** The input's min attribute. */
   @property({ type: Number }) min = 0;
@@ -93,8 +89,7 @@ export default class SlRange extends ShoelaceElement {
   @property({ attribute: false }) tooltipFormatter: (value: number) => string = (value: number) => value.toString();
 
   /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
-  @defaultValue()
-  defaultValue = 0;
+  @defaultValue() defaultValue = 0;
 
   connectedCallback() {
     super.connectedCallback();
@@ -126,6 +121,16 @@ export default class SlRange extends ShoelaceElement {
   /** Removes focus from the input. */
   blur() {
     this.input.blur();
+  }
+
+  /** Checks for validity but does not show the browser's validation message. */
+  checkValidity() {
+    return this.input.checkValidity();
+  }
+
+  /** Checks for validity and shows the browser's validation message if the control is invalid. */
+  reportValidity() {
+    return this.input.reportValidity();
   }
 
   /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */

@@ -12,7 +12,7 @@ describe('<sl-badge>', () => {
     it('should pass accessibility tests with a role of status on the base part.', async () => {
       await expect(el).to.be.accessible();
 
-      const part = el.shadowRoot!.querySelector('[part="base"]')!;
+      const part = el.shadowRoot!.querySelector('[part~="base"]')!;
       expect(part.getAttribute('role')).to.eq('status');
     });
 
@@ -21,7 +21,7 @@ describe('<sl-badge>', () => {
     });
 
     it('should default to square styling, with the primary color', () => {
-      const part = el.shadowRoot!.querySelector('[part="base"]')!;
+      const part = el.shadowRoot!.querySelector('[part~="base"]')!;
       expect(part.classList.value.trim()).to.eq('badge badge--primary');
     });
   });
@@ -36,7 +36,7 @@ describe('<sl-badge>', () => {
     });
 
     it('should append the pill class to the classlist to render a pill', () => {
-      const part = el.shadowRoot!.querySelector('[part="base"]')!;
+      const part = el.shadowRoot!.querySelector('[part~="base"]')!;
       expect(part.classList.value.trim()).to.eq('badge badge--primary badge--pill');
     });
   });
@@ -51,7 +51,7 @@ describe('<sl-badge>', () => {
     });
 
     it('should append the pulse class to the classlist to render a pulse', () => {
-      const part = el.shadowRoot!.querySelector('[part="base"]')!;
+      const part = el.shadowRoot!.querySelector('[part~="base"]')!;
       expect(part.classList.value.trim()).to.eq('badge badge--primary badge--pulse');
     });
   });
@@ -67,7 +67,7 @@ describe('<sl-badge>', () => {
       });
 
       it('should default to square styling, with the primary color', () => {
-        const part = el.shadowRoot!.querySelector('[part="base"]')!;
+        const part = el.shadowRoot!.querySelector('[part~="base"]')!;
         expect(part.classList.value.trim()).to.eq(`badge badge--${variant}`);
       });
     });

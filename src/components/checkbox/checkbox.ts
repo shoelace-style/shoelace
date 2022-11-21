@@ -9,6 +9,7 @@ import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
 import '../icon/icon';
 import styles from './checkbox.styles';
+import type { ShoelaceFormControl } from '../../internal/shoelace-element';
 import type { CSSResultGroup } from 'lit';
 
 /**
@@ -32,7 +33,7 @@ import type { CSSResultGroup } from 'lit';
  * @csspart label - The checkbox label.
  */
 @customElement('sl-checkbox')
-export default class SlCheckbox extends ShoelaceElement {
+export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
 
   @query('input[type="checkbox"]') input: HTMLInputElement;
@@ -45,6 +46,7 @@ export default class SlCheckbox extends ShoelaceElement {
   });
 
   @state() private hasFocus = false;
+  @state() invalid = false;
 
   /** Name of the HTML form control. Submitted with the form as part of a name/value pair. */
   @property() name: string;
@@ -64,12 +66,8 @@ export default class SlCheckbox extends ShoelaceElement {
   /** Draws the checkbox in an indeterminate state. Usually applies to a checkbox that represents "select all" or "select none" when the items to which it applies are a mix of selected and unselected. */
   @property({ type: Boolean, reflect: true }) indeterminate = false;
 
-  /** This will be true when the control is in an invalid state. Validity is determined by the `required` prop. */
-  @property({ type: Boolean, reflect: true }) invalid = false;
-
   /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
-  @defaultValue('checked')
-  defaultChecked = false;
+  @defaultValue('checked') defaultChecked = false;
 
   firstUpdated() {
     this.invalid = !this.input.checkValidity();
@@ -88,6 +86,11 @@ export default class SlCheckbox extends ShoelaceElement {
   /** Removes focus from the checkbox. */
   blur() {
     this.input.blur();
+  }
+
+  /** Checks for validity but does not show the browser's validation message. */
+  checkValidity() {
+    return this.input.checkValidity();
   }
 
   /** Checks for validity and shows the browser's validation message if the control is invalid. */
@@ -127,6 +130,8 @@ export default class SlCheckbox extends ShoelaceElement {
   @watch('checked', { waitUntilFirstUpdate: true })
   @watch('indeterminate', { waitUntilFirstUpdate: true })
   handleStateChange() {
+    this.input.checked = this.checked; // force a sync update
+    this.input.indeterminate = this.indeterminate; // force a sync update
     this.invalid = !this.input.checkValidity();
   }
 

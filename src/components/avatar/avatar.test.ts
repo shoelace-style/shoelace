@@ -15,7 +15,7 @@ describe('<sl-avatar>', () => {
     });
 
     it('should default to circle styling', () => {
-      const part = el.shadowRoot!.querySelector('[part="base"]')!;
+      const part = el.shadowRoot!.querySelector('[part~="base"]')!;
       expect(el.getAttribute('shape')).to.eq('circle');
       expect(part.classList.value.trim()).to.eq('avatar avatar--circle');
     });
@@ -40,13 +40,13 @@ describe('<sl-avatar>', () => {
     });
 
     it('renders "image" part, with src and a role of presentation', () => {
-      const part = el.shadowRoot!.querySelector('[part="image"]')!;
+      const part = el.shadowRoot!.querySelector('[part~="image"]')!;
 
       expect(part.getAttribute('src')).to.eq(image);
     });
 
     it('renders the label attribute in the "base" part', () => {
-      const part = el.shadowRoot!.querySelector('[part="base"]')!;
+      const part = el.shadowRoot!.querySelector('[part~="base"]')!;
 
       expect(part.getAttribute('aria-label')).to.eq(label);
     });
@@ -63,7 +63,7 @@ describe('<sl-avatar>', () => {
     });
 
     it('renders "initials" part, with initials as the text node', () => {
-      const part = el.shadowRoot!.querySelector<HTMLElement>('[part="initials"]')!;
+      const part = el.shadowRoot!.querySelector<HTMLElement>('[part~="initials"]')!;
 
       expect(part.innerText).to.eq(initials);
     });
@@ -80,7 +80,7 @@ describe('<sl-avatar>', () => {
       });
 
       it('appends the appropriate class on the "base" part', () => {
-        const part = el.shadowRoot!.querySelector('[part="base"]')!;
+        const part = el.shadowRoot!.querySelector('[part~="base"]')!;
 
         expect(el.getAttribute('shape')).to.eq(shape);
         expect(part.classList.value.trim()).to.eq(`avatar avatar--${shape}`);

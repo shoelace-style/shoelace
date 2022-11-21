@@ -12,7 +12,7 @@ describe('<sl-input>', () => {
 
   it('should be disabled with the disabled attribute', async () => {
     const el = await fixture<SlInput>(html` <sl-input disabled></sl-input> `);
-    const input = el.shadowRoot!.querySelector<HTMLInputElement>('[part="input"]')!;
+    const input = el.shadowRoot!.querySelector<HTMLInputElement>('[part~="input"]')!;
 
     expect(input.disabled).to.be.true;
   });
@@ -39,7 +39,7 @@ describe('<sl-input>', () => {
 
   it('should focus the input when clicking on the label', async () => {
     const el = await fixture<SlInput>(html` <sl-input label="Name"></sl-input> `);
-    const label = el.shadowRoot!.querySelector('[part="form-control-label"]')!;
+    const label = el.shadowRoot!.querySelector('[part~="form-control-label"]')!;
     const submitHandler = sinon.spy();
 
     el.addEventListener('sl-focus', submitHandler);
