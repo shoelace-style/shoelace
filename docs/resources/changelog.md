@@ -63,6 +63,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
   - Improved `<sl-split-panel>` so the divider is visible in forced-colors mode
   - Improved `<sl-tree-item>` so selected items are visible in forced-colors mode
   - Improved `<sl-tab-group>` so tabs are cleaner and easier to understand in forced-colors mode
+- Improved positioning of the menu in `<sl-select>` so you can customize the menu width [#1018](https://github.com/shoelace-style/shoelace/issues/1018)
 - Moved all component descriptions to `@summary` to get them within documentation tools [#962](https://github.com/shoelace-style/shoelace/pull/962)
 - Refactored form controls to use the `ShoelaceFormControl` interface to improve type safety and consistency
 - Updated Lit to 2.4.1

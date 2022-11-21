@@ -492,7 +492,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
           <sl-dropdown
             part="base"
             .hoist=${this.hoist}
-            .placement=${this.placement}
+            .placement=${this.placement === 'bottom' ? 'bottom-start' : 'top-start'}
             .stayOpenOnSelect=${this.multiple}
             .containingElement=${this as HTMLElement}
             ?disabled=${this.disabled}
