@@ -7,8 +7,8 @@ describe('<sl-skeleton>', () => {
 
     await expect(el).to.be.accessible();
 
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
-    const indicator = el.shadowRoot!.querySelector<HTMLElement>('[part="indicator"]')!;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
+    const indicator = el.shadowRoot!.querySelector<HTMLElement>('[part~="indicator"]')!;
 
     expect(base.getAttribute('class')).to.equal(' skeleton ');
     expect(base.getAttribute('aria-busy')).to.equal('true');
@@ -19,7 +19,7 @@ describe('<sl-skeleton>', () => {
   it('should set pulse effect by attribute', async () => {
     const el = await fixture<SlSkeleton>(html` <sl-skeleton effect="pulse"></sl-skeleton> `);
 
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
     expect(base.getAttribute('class')).to.equal(' skeleton skeleton--pulse ');
   });
@@ -27,7 +27,7 @@ describe('<sl-skeleton>', () => {
   it('should set sheen effect by attribute', async () => {
     const el = await fixture<SlSkeleton>(html` <sl-skeleton effect="sheen"></sl-skeleton> `);
 
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
     expect(base.getAttribute('class')).to.equal(' skeleton skeleton--sheen ');
   });

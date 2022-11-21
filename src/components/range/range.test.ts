@@ -27,7 +27,7 @@ describe('<sl-range>', () => {
 
   it('should be disabled with the disabled attribute', async () => {
     const el = await fixture<SlRange>(html` <sl-range disabled></sl-range> `);
-    const input = el.shadowRoot!.querySelector<HTMLInputElement>('[part="input"]')!;
+    const input = el.shadowRoot!.querySelector<HTMLInputElement>('[part~="input"]')!;
 
     expect(input.disabled).to.be.true;
   });

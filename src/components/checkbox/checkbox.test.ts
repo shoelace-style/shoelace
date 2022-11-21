@@ -205,14 +205,14 @@ describe('<sl-checkbox>', () => {
   describe('indeterminate', () => {
     it('should render indeterminate icon until checked', async () => {
       const el = await fixture<SlCheckbox>(html`<sl-checkbox indeterminate></sl-checkbox>`);
-      let indeterminateIcon = el.shadowRoot!.querySelector('[part="indeterminate-icon"]')!;
+      let indeterminateIcon = el.shadowRoot!.querySelector('[part~="indeterminate-icon"]')!;
 
       expect(indeterminateIcon).not.to.be.null;
 
       el.click();
       await el.updateComplete;
 
-      indeterminateIcon = el.shadowRoot!.querySelector('[part="indeterminate-icon"]')!;
+      indeterminateIcon = el.shadowRoot!.querySelector('[part~="indeterminate-icon"]')!;
 
       expect(indeterminateIcon).to.be.null;
     });

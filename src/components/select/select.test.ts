@@ -35,7 +35,7 @@ describe('<sl-select>', () => {
         <sl-menu-item value="option-3">Option 3</sl-menu-item>
       </sl-select>
     `);
-    const label = el.shadowRoot!.querySelector('[part="form-control-label"]')!;
+    const label = el.shadowRoot!.querySelector('[part~="form-control-label"]')!;
     const submitHandler = sinon.spy();
 
     el.addEventListener('sl-focus', submitHandler);
@@ -119,7 +119,7 @@ describe('<sl-select>', () => {
         <sl-menu-item value="option-3">Option 3</sl-menu-item>
       </sl-select>
     `);
-    const displayLabel = el.shadowRoot!.querySelector('[part="display-label"]')!;
+    const displayLabel = el.shadowRoot!.querySelector('[part~="display-label"]')!;
     const menuItem = el.querySelector('sl-menu-item')!;
 
     expect(displayLabel.textContent?.trim()).to.equal('Option 1');

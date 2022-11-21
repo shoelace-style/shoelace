@@ -14,12 +14,12 @@ describe('<sl-breadcrumb-item>', () => {
     });
 
     it('should hide the separator from screen readers', () => {
-      const separator = el.shadowRoot!.querySelector<HTMLSpanElement>('[part="separator"]');
+      const separator = el.shadowRoot!.querySelector<HTMLSpanElement>('[part~="separator"]');
       expect(separator).attribute('aria-hidden', 'true');
     });
 
     it('should render a HTMLButtonElement as the part "label", with a set type "button"', () => {
-      const button = el.shadowRoot!.querySelector<HTMLButtonElement>('[part="label"]');
+      const button = el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="label"]');
       expect(button).to.exist;
       expect(button).attribute('type', 'button');
     });
@@ -38,7 +38,7 @@ describe('<sl-breadcrumb-item>', () => {
       });
 
       it('should render a HTMLAnchorElement as the part "label", with the supplied href value', () => {
-        const hyperlink = el.shadowRoot!.querySelector<HTMLAnchorElement>('[part="label"]');
+        const hyperlink = el.shadowRoot!.querySelector<HTMLAnchorElement>('[part~="label"]');
         expect(hyperlink).attribute('href', 'https://jsonplaceholder.typicode.com/');
       });
     });
@@ -58,7 +58,7 @@ describe('<sl-breadcrumb-item>', () => {
         let hyperlink: HTMLAnchorElement | null;
 
         before(() => {
-          hyperlink = el.shadowRoot!.querySelector<HTMLAnchorElement>('[part="label"]');
+          hyperlink = el.shadowRoot!.querySelector<HTMLAnchorElement>('[part~="label"]');
         });
 
         it('should use the supplied href value, as the href attribute value', () => {
@@ -124,7 +124,7 @@ describe('<sl-breadcrumb-item>', () => {
     });
 
     it('should append class "breadcrumb-item--has-prefix" to "base" part', () => {
-      const part = el.shadowRoot!.querySelector('[part="base"]')!;
+      const part = el.shadowRoot!.querySelector('[part~="base"]')!;
       expect(part.classList.value.trim()).to.equal('breadcrumb-item breadcrumb-item--has-prefix');
     });
   });
@@ -151,7 +151,7 @@ describe('<sl-breadcrumb-item>', () => {
     });
 
     it('should append class "breadcrumb-item--has-suffix" to "base" part', () => {
-      const part = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+      const part = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
       expect(part.classList.value.trim()).to.equal('breadcrumb-item breadcrumb-item--has-suffix');
     });
   });

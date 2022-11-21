@@ -5,7 +5,7 @@ import type SlColorPicker from './color-picker';
 describe('<sl-color-picker>', () => {
   it('should emit change and show correct color when the value changes', async () => {
     const el = await fixture<SlColorPicker>(html` <sl-color-picker></sl-color-picker> `);
-    const trigger = el.shadowRoot!.querySelector<HTMLElement>('[part="trigger"]')!;
+    const trigger = el.shadowRoot!.querySelector<HTMLElement>('[part~="trigger"]')!;
     const changeHandler = sinon.spy();
     const color = 'rgb(255, 204, 0)';
 
@@ -41,15 +41,15 @@ describe('<sl-color-picker>', () => {
 
   it('should display a color when an initial value is provided', async () => {
     const el = await fixture<SlColorPicker>(html` <sl-color-picker value="#000"></sl-color-picker> `);
-    const trigger = el.shadowRoot!.querySelector<HTMLButtonElement>('[part="trigger"]');
+    const trigger = el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="trigger"]');
 
     expect(trigger?.style.color).to.equal('rgb(0, 0, 0)');
   });
 
   it('should display a color with opacity when an initial value with opacity is provided', async () => {
     const el = await fixture<SlColorPicker>(html` <sl-color-picker opacity value="#ff000050"></sl-color-picker> `);
-    const trigger = el.shadowRoot!.querySelector<HTMLButtonElement>('[part="trigger"]');
-    const previewButton = el.shadowRoot!.querySelector<HTMLButtonElement>('[part="preview"]');
+    const trigger = el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="trigger"]');
+    const previewButton = el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="preview"]');
     const previewColor = getComputedStyle(previewButton!).getPropertyValue('--preview-color');
 
     expect(trigger!.style.color).to.equal('rgba(255, 0, 0, 0.314)');

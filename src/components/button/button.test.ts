@@ -46,7 +46,7 @@ describe('<sl-button>', () => {
 
     it('should not have a caret present', async () => {
       const el = await fixture<SlButton>(html` <sl-button>Button Label</sl-button> `);
-      expect(el.shadowRoot?.querySelector('[part="caret"]')).not.to.exist;
+      expect(el.shadowRoot?.querySelector('[part~="caret"]')).not.to.exist;
     });
   });
 
@@ -98,7 +98,7 @@ describe('<sl-button>', () => {
   describe('when caret', () => {
     it('should have a caret present', async () => {
       const el = await fixture<SlButton>(html` <sl-button caret>Button Label</sl-button> `);
-      expect(el.shadowRoot!.querySelector('[part="caret"]')).to.exist;
+      expect(el.shadowRoot!.querySelector('[part~="caret"]')).to.exist;
     });
   });
 
