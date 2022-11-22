@@ -1,8 +1,8 @@
 {
-  "name": "@shoelace-style/shoelace",
-  "description": "A forward-thinking library of web components.",
-  "version": "2.0.0-beta.83",
-  "homepage": "https://github.com/shoelace-style/shoelace",
+  "name": "@teamshares/shoelace",
+  "description": "The Teamshares flavor of a forward-thinking library of web components.",
+  "version": "1.0.0-alpha",
+  "homepage": "https://github.com/teamshares/shoelace",
   "author": "Cory LaViska",
   "license": "MIT",
   "main": "dist/shoelace.js",
@@ -21,10 +21,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shoelace-style/shoelace.git"
+    "url": "git+https://github.com/teamshares/shoelace.git"
   },
   "bugs": {
-    "url": "https://github.com/shoelace-style/shoelace/issues"
+    "url": "https://github.com/teamshares/shoelace/issues"
   },
   "funding": {
     "type": "individual",
