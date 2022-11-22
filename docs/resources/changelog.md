@@ -21,6 +21,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
   - `data-valid` - indicates that the form control is valid
   - `data-user-invalid` - indicates the form control is invalid and the user has interacted with it
   - `data-user-valid` - indicates the form control is valid and the user has interacted with it
+- Added npm exports [#1020](https://github.com/shoelace-style/shoelace/pull/1020)
 - Added `checkValidity()` method to all form controls
 - Added `reportValidity()` method to `<sl-range>`
 - Added `button--checked` to `<sl-radio-button>` and `control--checked` to `<sl-radio>` to style just the checked state [#933](https://github.com/shoelace-style/shoelace/pull/933)

@@ -14,11 +14,11 @@
       "types": "./dist/shoelace.d.ts",
       "import": "./dist/shoelace.js"
     },
-    "./themes/*": "./dist/themes/*",
-    "./components/*": "./dist/components/*",
-    "./utilities/*": "./dist/utilities/*",
-    "./react/*": "./dist/react/*",
-    "./translations/*": "./dist/translations/*"
+    "./dist/themes/*": "./dist/themes/*",
+    "./dist/components/*": "./dist/components/*",
+    "./dist/utilities/*": "./dist/utilities/*",
+    "./dist/react/*": "./dist/react/*",
+    "./dist/translations/*": "./dist/translations/*"
   },
   "files": [
     "dist"
