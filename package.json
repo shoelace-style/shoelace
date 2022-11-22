@@ -13,7 +13,13 @@
     ".": {
       "types": "./dist/shoelace.d.ts",
       "import": "./dist/shoelace.js"
-    }
+    },
+    "./shoelace.js": "./dist/shoelace.js",
+    "./themes/*": "./dist/themes/*",
+    "./components/*": "./dist/components/*",
+    "./utilities/*": "./dist/utilities/*",
+    "./react/*": "./dist/react/*",
+    "./translations/*": "./dist/translations/*"
   },
   "files": [
     "dist"
