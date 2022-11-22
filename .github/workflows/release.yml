@@ -2,6 +2,7 @@
 name: Create GitHub Release
 
 on:
+  workflow_dispatch:
   push:
     tags:
       - "v1.*"
