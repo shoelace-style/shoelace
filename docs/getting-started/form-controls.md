@@ -159,9 +159,9 @@ Some input types will automatically trigger constraints, such as `email` and `ur
 
 ```html preview
 <form class="input-validation-type">
-  <sl-input variant="email" label="Email" placeholder="you@example.com" required></sl-input>
+  <sl-input type="email" label="Email" placeholder="you@example.com" required></sl-input>
   <br />
-  <sl-input variant="url" label="URL" placeholder="https://example.com/" required></sl-input>
+  <sl-input type="url" label="URL" placeholder="https://example.com/" required></sl-input>
   <br />
   <sl-button type="reset" variant="default">Reset</sl-button>
   <sl-button type="submit" variant="primary">Submit</sl-button>
@@ -187,9 +187,9 @@ const App = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <SlInput variant="email" label="Email" placeholder="you@example.com" required />
+      <SlInput type="email" label="Email" placeholder="you@example.com" required />
       <br />
-      <SlInput variant="url" label="URL" placeholder="https://example.com/" required />
+      <SlInput type="url" label="URL" placeholder="https://example.com/" required />
       <br />
       <SlButton type="submit" variant="primary">
         Submit

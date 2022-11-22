@@ -95,7 +95,7 @@ export default class SlDrawer extends ShoelaceElement {
 
   /**
    * By default, the drawer slides out of its containing block (usually the viewport). To make the drawer slide out of
-   * its parent element, set this prop and add `position: relative` to the parent.
+   * its parent element, set this attribute and add `position: relative` to the parent.
    */
   @property({ type: Boolean, reflect: true }) contained = false;
 

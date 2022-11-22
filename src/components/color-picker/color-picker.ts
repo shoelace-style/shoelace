@@ -19,6 +19,7 @@ import '../icon/icon';
 import '../input/input';
 import '../visually-hidden/visually-hidden';
 import styles from './color-picker.styles';
+import type { ShoelaceFormControl } from '../../internal/shoelace-element';
 import type SlDropdown from '../dropdown/dropdown';
 import type SlInput from '../input/input';
 import type { CSSResultGroup } from 'lit';
@@ -84,11 +85,11 @@ declare const EyeDropper: EyeDropperConstructor;
  * @cssproperty --swatch-size - The size of each predefined color swatch.
  */
 @customElement('sl-color-picker')
-export default class SlColorPicker extends ShoelaceElement {
+export default class SlColorPicker extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
 
-  @query('[part="input"]') input: SlInput;
-  @query('[part="preview"]') previewButton: HTMLButtonElement;
+  @query('[part~="input"]') input: SlInput;
+  @query('[part~="preview"]') previewButton: HTMLButtonElement;
   @query('.color-dropdown') dropdown: SlDropdown;
 
   // @ts-expect-error -- Controller is currently unused
@@ -105,13 +106,13 @@ export default class SlColorPicker extends ShoelaceElement {
   @state() private lightness = 100;
   @state() private brightness = 100;
   @state() private alpha = 100;
+  @state() invalid = false;
 
   /** The current color. */
   @property() value = '';
 
   /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
-  @defaultValue()
-  defaultValue = '';
+  @defaultValue() defaultValue = '';
 
   /**
    * The color picker's label. This will not be displayed, but it will be announced by assistive devices. If you need to
@@ -140,12 +141,6 @@ export default class SlColorPicker extends ShoelaceElement {
 
   /** Disables the color picker. */
   @property({ type: Boolean, reflect: true }) disabled = false;
-
-  /**
-   * This will be true when the control is in an invalid state. Validity is determined by the `setCustomValidity()`
-   * method using the browser's constraint validation API.
-   */
-  @property({ type: Boolean, reflect: true }) invalid = false;
 
   /**
    * Enable this option to prevent the panel from being clipped when the component is placed inside a container with
@@ -233,22 +228,20 @@ export default class SlColorPicker extends ShoelaceElement {
     return clamp(((((200 - this.saturation) * brightness) / 100) * 5) / 10, 0, 100);
   }
 
+  /** Checks for validity but does not show the browser's validation message. */
+  checkValidity() {
+    return this.input.checkValidity();
+  }
+
   /** Checks for validity and shows the browser's validation message if the control is invalid. */
   reportValidity() {
-    // If the input is invalid, show the dropdown so the browser can focus on it
     if (!this.inline && this.input.invalid) {
-      return new Promise<void>(resolve => {
-        this.dropdown.addEventListener(
-          'sl-after-show',
-          () => {
-            this.input.reportValidity();
-            resolve();
-          },
-          { once: true }
-        );
-        this.dropdown.show();
-      });
+      // If the input is inline and invalid, show the dropdown so the browser can focus on it
+      this.dropdown.show();
+      this.addEventListener('sl-after-show', () => this.input.reportValidity(), { once: true });
+      return this.checkValidity();
     }
+
     return this.input.reportValidity();
   }
 

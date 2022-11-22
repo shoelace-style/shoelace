@@ -15,7 +15,7 @@ describe('<sl-spinner>', () => {
 
     it('should have a role of "status".', () => {
       // https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions
-      const base = el.shadowRoot!.querySelector('[part="base"]')!;
+      const base = el.shadowRoot!.querySelector('[part~="base"]')!;
       expect(base).have.attribute('role', 'progressbar');
     });
   });

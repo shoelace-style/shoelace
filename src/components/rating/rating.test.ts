@@ -6,7 +6,7 @@ describe('<sl-rating>', () => {
     const el = await fixture<SlRating>(html` <sl-rating label="Test"></sl-rating> `);
     await expect(el).to.be.accessible();
 
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
     expect(base.getAttribute('role')).to.equal('slider');
     expect(base.getAttribute('aria-disabled')).to.equal('false');
@@ -20,7 +20,7 @@ describe('<sl-rating>', () => {
 
   it('should be readonly with the readonly attribute', async () => {
     const el = await fixture<SlRating>(html` <sl-rating label="Test" readonly></sl-rating> `);
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
     expect(base.getAttribute('aria-readonly')).to.equal('true');
     expect(base.getAttribute('class')).to.equal(' rating rating--readonly ');
@@ -28,7 +28,7 @@ describe('<sl-rating>', () => {
 
   it('should be disabled with the disabled attribute', async () => {
     const el = await fixture<SlRating>(html` <sl-rating label="Test" disabled></sl-rating> `);
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
     expect(base.getAttribute('aria-disabled')).to.equal('true');
     expect(base.getAttribute('class')).to.equal(' rating rating--disabled ');
@@ -36,14 +36,14 @@ describe('<sl-rating>', () => {
 
   it('should set max value by attribute', async () => {
     const el = await fixture<SlRating>(html` <sl-rating label="Test" max="12"></sl-rating> `);
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
     expect(base.getAttribute('aria-valuemax')).to.equal('12');
   });
 
   it('should set selected value by attribute', async () => {
     const el = await fixture<SlRating>(html` <sl-rating label="Test" value="3"></sl-rating> `);
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
     expect(base.getAttribute('aria-valuenow')).to.equal('3');
   });
@@ -52,7 +52,7 @@ describe('<sl-rating>', () => {
     it('should focus inner div', async () => {
       const el = await fixture<SlRating>(html` <sl-rating label="Test"></sl-rating> `);
 
-      const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+      const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
       el.focus();
       await el.updateComplete;
