@@ -15,5 +15,6 @@ jobs:
     steps:
       - uses: "marvinpinto/action-automatic-releases@v1.2.1"
         with:
+          automatic_release_tag: "latest"
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
