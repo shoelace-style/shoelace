@@ -67,6 +67,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Moved all component descriptions to `@summary` to get them within documentation tools [#962](https://github.com/shoelace-style/shoelace/pull/962)
 - Refactored form controls to use the `ShoelaceFormControl` interface to improve type safety and consistency
 - Updated Lit to 2.4.1
+- Updated `@shoelace-style/localize` t0 3.0.3 to support for extended language codes
 - Updated Bootstrap Icons to 1.10.2
 - Updated TypeScript to 4.8.4
 - Updated esbuild to 0.15.14
