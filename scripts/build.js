@@ -47,6 +47,9 @@ fs.mkdirSync(outdir, { recursive: true });
       format: 'esm',
       target: 'es2017',
       entryPoints: [
+        //
+        // NOTE: Entry points must be mapped in package.json > exports, otherwise users won't be able to import them!
+        //
         // The whole shebang
         './src/shoelace.ts',
         // Components
