@@ -8,7 +8,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ?> During the beta period, these restrictions may be relaxed in the event of a mission-critical bug. 🐛
 
-## Next
+## 2.0.0-beta.84
 
 - 🚨 BREAKING: Removed the `fieldset` property from `<sl-radio-group>` (use CSS parts if you want to keep the border) [#965](https://github.com/shoelace-style/shoelace/issues/965)
 - 🚨 BREAKING: Removed `base` and `label` parts from `<sl-radio-group>` (use `form-control` and `form-control__label` instead) [#965](https://github.com/shoelace-style/shoelace/issues/965)
