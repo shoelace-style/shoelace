@@ -96,7 +96,7 @@ export default class SlTreeItem extends ShoelaceElement {
     this.childrenContainer.hidden = !this.expanded;
     this.childrenContainer.style.height = this.expanded ? 'auto' : '0';
 
-    this.isLeaf = this.getChildrenItems().length === 0;
+    this.isLeaf = !this.lazy && this.getChildrenItems().length === 0;
     this.handleExpandedChange();
   }
 
@@ -202,7 +202,7 @@ export default class SlTreeItem extends ShoelaceElement {
 
   handleChildrenSlotChange() {
     this.loading = false;
-    this.isLeaf = this.getChildrenItems().length === 0;
+    this.isLeaf = !this.lazy && this.getChildrenItems().length === 0;
   }
 
   protected willUpdate(changedProperties: PropertyValueMap<SlTreeItem> | Map<PropertyKey, unknown>): void {
