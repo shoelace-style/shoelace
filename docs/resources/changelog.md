@@ -11,6 +11,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 ## Next
 
 - Fixed a bug that prevented `hoist` from working correctly in `<sl-dropdown>` after updating Floating UI [#1024](https://github.com/shoelace-style/shoelace/issues/1024)
+- Fixed a bug in `<sl-dropdown>` that caused containing dialogs, drawers, etc. to close when pressing <kbd>Escape</kbd> while focused [#1024](https://github.com/shoelace-style/shoelace/issues/1024)
 
 ## 2.0.0-beta.84
 

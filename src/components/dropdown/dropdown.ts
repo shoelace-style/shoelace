@@ -214,7 +214,8 @@ export default class SlDropdown extends ShoelaceElement {
 
   handleTriggerKeyDown(event: KeyboardEvent) {
     // Close when escape or tab is pressed
-    if (event.key === 'Escape') {
+    if (event.key === 'Escape' && this.open) {
+      event.stopPropagation();
       this.focusOnTrigger();
       this.hide();
       return;
