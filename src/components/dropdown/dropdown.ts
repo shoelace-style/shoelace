@@ -410,7 +410,6 @@ export default class SlDropdown extends ShoelaceElement {
         shift
         auto-size="vertical"
         auto-size-padding="10"
-        .autoSizeBoundary=${this.hoist ? document.body : undefined}
         class=${classMap({
           dropdown: true,
           'dropdown--open': this.open
