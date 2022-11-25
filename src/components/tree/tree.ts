@@ -177,6 +177,8 @@ export default class SlTree extends ShoelaceElement {
   }
 
   selectItem(selectedItem: SlTreeItem) {
+    const previousSelection = [...this.selectedItems];
+
     if (this.selection === 'multiple') {
       selectedItem.selected = !selectedItem.selected;
       if (selectedItem.lazy) {
@@ -192,7 +194,11 @@ export default class SlTree extends ShoelaceElement {
       selectedItem.expanded = !selectedItem.expanded;
     }
 
-    this.emit('sl-selection-change', { detail: { selection: this.selectedItems } });
+    const nextSelection = this.selectedItems;
+
+    if (nextSelection.some(item => !previousSelection.includes(item))) {
+      this.emit('sl-selection-change', { detail: { selection: nextSelection } });
+    }
   }
 
   // Returns the list of tree items that are selected in the tree.
