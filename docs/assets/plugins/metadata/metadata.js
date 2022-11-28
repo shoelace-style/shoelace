@@ -434,7 +434,7 @@
             To import this component from [the CDN](https://www.jsdelivr.com/package/npm/@shoelace-style/shoelace) using a script tag:
 
             \`\`\`html
-            <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@${metadata.package.version}/${component.path}"></script>
+            <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@${metadata.package.version}/dist/${component.path}"></script>
             \`\`\`
             </sl-tab-panel>
 
@@ -442,14 +442,14 @@
             To import this component from [the CDN](https://www.jsdelivr.com/package/npm/@shoelace-style/shoelace) using a JavaScript import:
 
             \`\`\`js
-            import 'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@${metadata.package.version}/${component.path}';
+            import 'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@${metadata.package.version}/dist/${component.path}';
             \`\`\`
             </sl-tab-panel>
 
             <sl-tab-panel name="bundler">\n
             To import this component using [a bundler](/getting-started/installation#bundling):
             \`\`\`js
-            import '@shoelace-style/shoelace/${component.path}';
+            import '@shoelace-style/shoelace/dist/${component.path}';
             \`\`\`
             </sl-tab-panel>
 

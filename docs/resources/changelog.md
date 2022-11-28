@@ -8,7 +8,14 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ?> During the beta period, these restrictions may be relaxed in the event of a mission-critical bug. 🐛
 
-## Next
+## 2.0.0-beta.85
+
+- Fixed a bug in `<sl-dropdown>` that caused containing dialogs, drawers, etc. to close when pressing <kbd>Escape</kbd> while focused [#1024](https://github.com/shoelace-style/shoelace/issues/1024)
+- Fixed a bug in `<sl-tree-item>` that allowed lazy nodes to be incorrectly selected [#1023](https://github.com/shoelace-style/shoelace/pull/1023)
+- Fixed a typing bug in `<sl-tree-item>` [#1026](https://github.com/shoelace-style/shoelace/pull/1026)
+- Updated Floating UI to 1.0.7 to fix a bug that prevented `hoist` from working correctly in `<sl-dropdown>` after a recent update [#1024](https://github.com/shoelace-style/shoelace/issues/1024)
+
+## 2.0.0-beta.84
 
 - 🚨 BREAKING: Removed the `fieldset` property from `<sl-radio-group>` (use CSS parts if you want to keep the border) [#965](https://github.com/shoelace-style/shoelace/issues/965)
 - 🚨 BREAKING: Removed `base` and `label` parts from `<sl-radio-group>` (use `form-control` and `form-control__label` instead) [#965](https://github.com/shoelace-style/shoelace/issues/965)
@@ -21,6 +28,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
   - `data-valid` - indicates that the form control is valid
   - `data-user-invalid` - indicates the form control is invalid and the user has interacted with it
   - `data-user-valid` - indicates the form control is valid and the user has interacted with it
+- Added npm exports [#1020](https://github.com/shoelace-style/shoelace/pull/1020)
 - Added `checkValidity()` method to all form controls
 - Added `reportValidity()` method to `<sl-range>`
 - Added `button--checked` to `<sl-radio-button>` and `control--checked` to `<sl-radio>` to style just the checked state [#933](https://github.com/shoelace-style/shoelace/pull/933)
