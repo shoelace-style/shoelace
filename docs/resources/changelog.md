@@ -13,6 +13,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a bug in `<sl-dropdown>` that caused containing dialogs, drawers, etc. to close when pressing <kbd>Escape</kbd> while focused [#1024](https://github.com/shoelace-style/shoelace/issues/1024)
 - Fixed a bug in `<sl-tree-item>` that allowed lazy nodes to be incorrectly selected [#1023](https://github.com/shoelace-style/shoelace/pull/1023)
 - Fixed a typing bug in `<sl-tree-item>` [#1026](https://github.com/shoelace-style/shoelace/pull/1026)
+- Fixed a bug in `<sl-tree-item>` where `sl-selection-change` was emitted when the selection didn't change [#1030](https://github.com/shoelace-style/shoelace/pull/1030)
 - Updated Floating UI to 1.0.7 to fix a bug that prevented `hoist` from working correctly in `<sl-dropdown>` after a recent update [#1024](https://github.com/shoelace-style/shoelace/issues/1024)
 
 ## 2.0.0-beta.84

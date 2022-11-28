@@ -120,15 +120,6 @@ fs.mkdirSync(outdir, { recursive: true });
         routes: {
           '/dist': './dist'
         }
-      },
-      socket: {
-        socketIoClientConfig: {
-          // Configure socketIO to retry forever when disconnected to enable the auto-reattach timeout below to work
-          reconnectionAttempts: Infinity,
-          reconnectionDelay: 500,
-          reconnectionDelayMax: 500,
-          timeout: 1000
-        }
       }
     };
 
