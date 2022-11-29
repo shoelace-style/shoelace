@@ -276,7 +276,7 @@ This convention can be relaxed when the developer experience is greatly improved
 
 ### Naming CSS Parts
 
-While CSS parts can be named [virtually anything](https://www.abeautifulsite.net/posts/valid-names-for-css-parts/), within Shoelace they must use the kebab-case convention and lowercase letters. Modifiers must be delimited by `--` like in BEM. This is useful for allowing users to target parts with various states, such as `my-part--focus`.
+While CSS parts can be named [virtually anything](https://www.abeautifulsite.net/posts/valid-names-for-css-parts/), within Shoelace they must use the kebab-case convention and lowercase letters. Additionally, [a BEM-inspired naming convention](https://www.abeautifulsite.net/posts/css-parts-inspired-by-bem/) is used to distinguish parts, subparts, and states.
 
 When composing elements, use `part` to export the host element and `exportparts` to export its parts.
 
