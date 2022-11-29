@@ -194,8 +194,6 @@ export default class SlAlert extends ShoelaceElement {
           'alert--danger': this.variant === 'danger'
         })}
         role="alert"
-        aria-live="assertive"
-        aria-atomic="true"
         aria-hidden=${this.open ? 'false' : 'true'}
         @mousemove=${this.handleMouseMove}
       >
@@ -203,7 +201,7 @@ export default class SlAlert extends ShoelaceElement {
           <slot name="icon"></slot>
         </span>
 
-        <span part="message" class="alert__message">
+        <span part="message" class="alert__message" aria-live="polite">
           <slot></slot>
         </span>
 
@@ -215,6 +213,7 @@ export default class SlAlert extends ShoelaceElement {
                 class="alert__close-button"
                 name="x"
                 library="system"
+                label=${this.localize.term('close')}
                 @click=${this.handleCloseClick}
               ></sl-icon-button>
             `
