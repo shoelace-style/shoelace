@@ -82,8 +82,10 @@ export default class SlButtonGroup extends ShoelaceElement {
 }
 
 function findButton(el: HTMLElement) {
-  const children = ['sl-button', 'sl-radio-button'];
-  return children.includes(el.tagName.toLowerCase()) ? el : el.querySelector(children.join(','));
+  const selector = 'sl-button, sl-radio-button';
+
+  // The button could be the target element or a child of it (e.g. a dropdown or tooltip anchor)
+  return el.closest(selector) ?? el.querySelector(selector);
 }
 
 declare global {
