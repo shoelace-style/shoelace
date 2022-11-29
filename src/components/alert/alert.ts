@@ -211,7 +211,7 @@ export default class SlAlert extends ShoelaceElement {
                 part="close-button"
                 exportparts="base:close-button__base"
                 class="alert__close-button"
-                name="x"
+                name="x-lg"
                 library="system"
                 label=${this.localize.term('close')}
                 @click=${this.handleCloseClick}
