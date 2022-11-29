@@ -43,6 +43,7 @@ import type { CSSResultGroup } from 'lit';
  * @csspart overlay - The overlay.
  * @csspart panel - The drawer panel (where the drawer and its content is rendered).
  * @csspart header - The drawer header.
+ * @csspart header-actions - Optional actions to add to the header. Works best with `<sl-icon-button>`.
  * @csspart title - The drawer title.
  * @csspart close-button - The close button.
  * @csspart close-button__base - The close button's `base` part.
@@ -310,15 +311,18 @@ export default class SlDrawer extends ShoelaceElement {
                     <!-- If there's no label, use an invisible character to prevent the header from collapsing -->
                     <slot name="label"> ${this.label.length > 0 ? this.label : String.fromCharCode(65279)} </slot>
                   </h2>
-                  <sl-icon-button
-                    part="close-button"
-                    exportparts="base:close-button__base"
-                    class="drawer__close"
-                    name="x"
-                    label=${this.localize.term('close')}
-                    library="system"
-                    @click=${() => this.requestClose('close-button')}
-                  ></sl-icon-button>
+                  <div part="header-actions" class="drawer__header-actions">
+                    <slot name="header-actions"></slot>
+                    <sl-icon-button
+                      part="close-button"
+                      exportparts="base:close-button__base"
+                      class="drawer__close"
+                      name="x-lg"
+                      label=${this.localize.term('close')}
+                      library="system"
+                      @click=${() => this.requestClose('close-button')}
+                    ></sl-icon-button>
+                  </div>
                 </header>
               `
             : ''}

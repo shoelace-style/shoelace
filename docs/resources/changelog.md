@@ -10,10 +10,12 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ## Next
 
+- Added `header-actions` slot to `<sl-dialog>` and `<sl-drawer>`
 - Fixed a bug in `<sl-tree-item>` where `sl-selection-change` was emitted when the selection didn't change [#1030](https://github.com/shoelace-style/shoelace/pull/1030)
 - Improved IntelliSense in VS Code, courtesy of [Burton's amazing CEM Analyzer plugin](https://github.com/break-stuff/cem-plugin-vs-code-custom-data-generator)
 - Improved accessibility of `<sl-alert>` so the alert is announced and the close button has a label
 - Removed unused aria attributes from `<sl-skeleton>`
+- Replaced the `x` icon in the system icon library with `x-lg` to improve icon consistency
 
 ## 2.0.0-beta.85
 

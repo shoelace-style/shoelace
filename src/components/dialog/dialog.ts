@@ -42,6 +42,7 @@ import type { CSSResultGroup } from 'lit';
  * @csspart overlay - The overlay.
  * @csspart panel - The dialog panel (where the dialog and its content is rendered).
  * @csspart header - The dialog header.
+ * @csspart header-actions - Optional actions to add to the header. Works best with `<sl-icon-button>`.
  * @csspart title - The dialog title.
  * @csspart close-button - The close button.
  * @csspart close-button__base - The close button's `base` part.
@@ -279,15 +280,18 @@ export default class SlDialog extends ShoelaceElement {
                   <h2 part="title" class="dialog__title" id="title">
                     <slot name="label"> ${this.label.length > 0 ? this.label : String.fromCharCode(65279)} </slot>
                   </h2>
-                  <sl-icon-button
-                    part="close-button"
-                    exportparts="base:close-button__base"
-                    class="dialog__close"
-                    name="x"
-                    label=${this.localize.term('close')}
-                    library="system"
-                    @click="${() => this.requestClose('close-button')}"
-                  ></sl-icon-button>
+                  <div part="header-actions" class="dialog__header-actions">
+                    <slot name="header-actions"></slot>
+                    <sl-icon-button
+                      part="close-button"
+                      exportparts="base:close-button__base"
+                      class="dialog__close"
+                      name="x-lg"
+                      label=${this.localize.term('close')}
+                      library="system"
+                      @click="${() => this.requestClose('close-button')}"
+                    ></sl-icon-button>
+                  </div>
                 </header>
               `
             : ''}

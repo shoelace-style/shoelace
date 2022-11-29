@@ -338,6 +338,54 @@ const App = () => {
 };
 ```
 
+### Header Actions
+
+The header shows a functional close button by default. You can use the `header-actions` slot to add additional [icon buttons](/components/icon-button) if needed.
+
+```html preview
+<sl-drawer label="Drawer" class="drawer-header-actions">
+  <sl-icon-button class="new-window" slot="header-actions" name="box-arrow-up-right"></sl-icon-button>
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  <sl-button slot="footer" variant="primary">Close</sl-button>
+</sl-drawer>
+
+<sl-button>Open Drawer</sl-button>
+
+<script>
+  const drawer = document.querySelector('.drawer-header-actions');
+  const openButton = drawer.nextElementSibling;
+  const closeButton = drawer.querySelector('sl-button[variant="primary"]');
+  const newWindowButton = drawer.querySelector('.new-window');
+
+  openButton.addEventListener('click', () => drawer.show());
+  closeButton.addEventListener('click', () => drawer.hide());
+  newWindowButton.addEventListener('click', () => window.open(location.href));
+</script>
+```
+
+```jsx react
+import { useState } from 'react';
+import { SlButton, SlDrawer, SlIconButton } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <SlDrawer label="Drawer" open={open} onSlAfterHide={() => setOpen(false)}>
+        <SlIconButton slot="header-actions" name="box-arrow-up-right" onClick={() => window.open(location.href)} />
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        <SlButton slot="footer" variant="primary" onClick={() => setOpen(false)}>
+          Close
+        </SlButton>
+      </SlDrawer>
+
+      <SlButton onClick={() => setOpen(true)}>Open Drawer</SlButton>
+    </>
+  );
+};
+```
+
 ### Preventing the Drawer from Closing
 
 By default, drawers will close when the user clicks the close button, clicks the overlay, or presses the <kbd>Escape</kbd> key. In most cases, the default behavior is the best behavior in terms of UX. However, there are situations where this may be undesirable, such as when data loss will occur.
