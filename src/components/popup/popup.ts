@@ -136,10 +136,10 @@ export default class SlPopup extends ShoelaceElement {
 
   /**
    * When neither the preferred placement nor the fallback placements fit, this value will be used to determine whether
-   * the popup should be positioned as it was initially preferred or using the best available fit based on available
-   * space.
+   * the popup should be positioned using the best available fit based on available space or as it was initially
+   * preferred.
    */
-  @property({ attribute: 'flip-fallback-strategy' }) flipFallbackStrategy: 'best-fit' | 'initial' = 'initial';
+  @property({ attribute: 'flip-fallback-strategy' }) flipFallbackStrategy: 'best-fit' | 'initial' = 'best-fit';
 
   /**
    * The flip boundary describes clipping element(s) that overflow will be checked relative to when flipping. By
