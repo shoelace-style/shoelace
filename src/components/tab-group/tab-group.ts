@@ -73,7 +73,6 @@ export default class SlTabGroup extends ShoelaceElement {
     super.connectedCallback();
 
     this.resizeObserver = new ResizeObserver(() => {
-      this.preventIndicatorTransition();
       this.repositionIndicator();
       this.updateScrollControls();
     });
@@ -342,17 +341,6 @@ export default class SlTabGroup extends ShoelaceElement {
         this.indicator.style.transform = `translateY(${offset.top}px)`;
         break;
     }
-  }
-
-  // In some orientations, when the component is resized, the indicator's position will change causing it to animate
-  // while you resize. Calling this method will prevent the transition from running on resize, which feels more natural.
-  preventIndicatorTransition() {
-    const transitionValue = this.indicator.style.transition;
-    this.indicator.style.transition = 'none';
-
-    requestAnimationFrame(() => {
-      this.indicator.style.transition = transitionValue;
-    });
   }
 
   // This stores tabs and panels so we can refer to a cache instead of calling querySelectorAll() multiple times.
