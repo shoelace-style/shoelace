@@ -285,8 +285,9 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
             <input
               part="input"
               id="input"
-              type="range"
               class="range__control"
+              title=${'' /* An empty title prevents browser validation tooltips from appearing on hover */}
+              type="range"
               name=${ifDefined(this.name)}
               ?disabled=${this.disabled}
               min=${ifDefined(this.min)}

@@ -150,6 +150,7 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
         <input
           class="checkbox__input"
           type="checkbox"
+          title=${'' /* An empty title prevents browser validation tooltips from appearing on hover */}
           name=${ifDefined(this.name)}
           value=${ifDefined(this.value)}
           .indeterminate=${live(this.indeterminate)}

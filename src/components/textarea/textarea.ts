@@ -310,6 +310,7 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
               part="textarea"
               id="input"
               class="textarea__control"
+              title=${'' /* An empty title prevents browser validation tooltips from appearing on hover */}
               name=${ifDefined(this.name)}
               .value=${live(this.value)}
               ?disabled=${this.disabled}

@@ -430,6 +430,7 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
               id="input"
               class="input__control"
               type=${this.type === 'password' && this.passwordVisible ? 'text' : this.type}
+              title=${'' /* An empty title prevents browser validation tooltips from appearing on hover */}
               name=${ifDefined(this.name)}
               ?disabled=${this.disabled}
               ?readonly=${this.readonly}

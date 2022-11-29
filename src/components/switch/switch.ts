@@ -157,6 +157,7 @@ export default class SlSwitch extends ShoelaceElement implements ShoelaceFormCon
         <input
           class="switch__input"
           type="checkbox"
+          title=${'' /* An empty title prevents browser validation tooltips from appearing on hover */}
           name=${ifDefined(this.name)}
           value=${ifDefined(this.value)}
           .checked=${live(this.checked)}

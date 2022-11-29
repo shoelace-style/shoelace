@@ -14,6 +14,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a bug in `<sl-tree-item>` where `sl-selection-change` was emitted when the selection didn't change [#1030](https://github.com/shoelace-style/shoelace/pull/1030)
 - Fixed a bug in `<sl-button-group>` that caused the border to render incorrectly when hovering over icons inside buttons [#1035](https://github.com/shoelace-style/shoelace/issues/1035)
 - Fixed an incorrect default for `flip-fallback-strategy` in `<sl-popup>` that caused the fallback strategy to be `initial` instead of `best-fit`, which is inconsistent with Floating UI's default [#1036](https://github.com/shoelace-style/shoelace/issues/1036)
+- Fixed a bug where browser validation tooltips would show up when hovering over form fields [#1037](https://github.com/shoelace-style/shoelace/issues/1037)
 - Improved IntelliSense in VS Code, courtesy of [Burton's amazing CEM Analyzer plugin](https://github.com/break-stuff/cem-plugin-vs-code-custom-data-generator)
 - Improved accessibility of `<sl-alert>` so the alert is announced and the close button has a label
 - Removed unused aria attributes from `<sl-skeleton>`

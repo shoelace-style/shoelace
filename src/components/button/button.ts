@@ -255,6 +255,7 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
         })}
         ?disabled=${ifDefined(isLink ? undefined : this.disabled)}
         type=${ifDefined(isLink ? undefined : this.type)}
+        title=${'' /* An empty title prevents browser validation tooltips from appearing on hover */}
         name=${ifDefined(isLink ? undefined : this.name)}
         value=${ifDefined(isLink ? undefined : this.value)}
         href=${ifDefined(isLink ? this.href : undefined)}
