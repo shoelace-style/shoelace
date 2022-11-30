@@ -1,7 +1,7 @@
 {
   "name": "@teamshares/shoelace",
   "description": "The Teamshares flavor of a forward-thinking library of web components.",
-  "version": "1.0.1-alpha",
+  "version": "1.0.1-alpha.1",
   "homepage": "https://github.com/teamshares/shoelace",
   "author": "Cory LaViska",
   "license": "MIT",
