@@ -56,6 +56,9 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
   /** The textarea's value attribute. */
   @property() value = '';
 
+  /** The textarea's title attribute. */
+  @property() title = '';
+
   /** Draws a filled textarea. */
   @property({ type: Boolean, reflect: true }) filled = false;
 
@@ -310,7 +313,7 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
               part="textarea"
               id="input"
               class="textarea__control"
-              title=${'' /* An empty title prevents browser validation tooltips from appearing on hover */}
+              title=${this.title}
               name=${ifDefined(this.name)}
               .value=${live(this.value)}
               ?disabled=${this.disabled}

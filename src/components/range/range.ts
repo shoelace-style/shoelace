@@ -58,11 +58,14 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
   @state() private hasTooltip = false;
   @state() invalid = false;
 
-  /** The input's name attribute. */
+  /** The range's name attribute. */
   @property() name = '';
 
-  /** The input's value attribute. */
+  /** The range's value attribute. */
   @property({ type: Number }) value = 0;
+
+  /** The range's title attribute. */
+  @property() title = '';
 
   /** The range's label. If you need to display HTML, you can use the `label` slot instead. */
   @property() label = '';
@@ -73,13 +76,13 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
   /** Disables the range. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
-  /** The input's min attribute. */
+  /** The range's min attribute. */
   @property({ type: Number }) min = 0;
 
-  /** The input's max attribute. */
+  /** The range's max attribute. */
   @property({ type: Number }) max = 100;
 
-  /** The input's step attribute. */
+  /** The range's step attribute. */
   @property({ type: Number }) step = 1;
 
   /** The preferred placement of the tooltip. */
@@ -286,7 +289,7 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
               part="input"
               id="input"
               class="range__control"
-              title=${'' /* An empty title prevents browser validation tooltips from appearing on hover */}
+              title=${this.title}
               type="range"
               name=${ifDefined(this.name)}
               ?disabled=${this.disabled}

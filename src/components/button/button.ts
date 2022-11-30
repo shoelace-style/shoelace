@@ -98,6 +98,9 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
   /** An optional value for the button. Ignored when `href` is set. */
   @property() value = '';
 
+  /** The button's title attribute. */
+  @property() title = '';
+
   /** When set, the underlying button will be rendered as an `<a>` with this `href` instead of a `<button>`. */
   @property() href = '';
 
@@ -255,7 +258,7 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
         })}
         ?disabled=${ifDefined(isLink ? undefined : this.disabled)}
         type=${ifDefined(isLink ? undefined : this.type)}
-        title=${'' /* An empty title prevents browser validation tooltips from appearing on hover */}
+        title=${this.title}
         name=${ifDefined(isLink ? undefined : this.name)}
         value=${ifDefined(isLink ? undefined : this.value)}
         href=${ifDefined(isLink ? this.href : undefined)}
