@@ -3,6 +3,30 @@ import { sendKeys } from '@web/test-runner-commands';
 import type SlSwitch from './switch';
 
 describe('<sl-switch>', () => {
+  it('should pass accessibility tests', async () => {
+    const el = await fixture<SlSwitch>(html` <sl-switch>Switch</sl-switch> `);
+    await expect(el).to.be.accessible();
+  });
+
+  it('default properties', async () => {
+    const el = await fixture<SlSwitch>(html` <sl-switch></sl-switch> `);
+
+    expect(el.name).to.equal('');
+    expect(el.value).to.be.undefined;
+    expect(el.title).to.equal('');
+    expect(el.disabled).to.be.false;
+    expect(el.required).to.be.false;
+    expect(el.checked).to.be.false;
+    expect(el.defaultChecked).to.be.false;
+  });
+
+  it('should have title if title attribute isset', async () => {
+    const el = await fixture<SlSwitch>(html` <sl-switch title="Test"></sl-switch> `);
+    const input = el.shadowRoot!.querySelector('input')!;
+
+    expect(input.title).to.equal('Test');
+  });
+
   it('should be disabled with the disabled attribute', async () => {
     const el = await fixture<SlSwitch>(html` <sl-switch disabled></sl-switch> `);
     const input = el.shadowRoot!.querySelector<HTMLInputElement>('input')!;

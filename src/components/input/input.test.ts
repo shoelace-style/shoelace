@@ -18,6 +18,7 @@ describe('<sl-input>', () => {
     expect(el.name).to.equal('');
     expect(el.value).to.equal('');
     expect(el.defaultValue).to.equal('');
+    expect(el.title).to.equal('');
     expect(el.filled).to.be.false;
     expect(el.pill).to.be.false;
     expect(el.label).to.equal('');
@@ -45,6 +46,13 @@ describe('<sl-input>', () => {
     expect(el.inputmode).to.be.undefined;
     expect(el.valueAsDate).to.be.null;
     expect(isNaN(el.valueAsNumber)).to.be.true;
+  });
+
+  it('should have title if title attribute isset', async () => {
+    const el = await fixture<SlInput>(html` <sl-input title="Test"></sl-input> `);
+    const input = el.shadowRoot!.querySelector<HTMLInputElement>('[part~="input"]')!;
+
+    expect(input.title).to.equal('Test');
   });
 
   it('should be disabled with the disabled attribute', async () => {
