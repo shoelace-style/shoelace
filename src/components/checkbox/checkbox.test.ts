@@ -4,6 +4,31 @@ import sinon from 'sinon';
 import type SlCheckbox from './checkbox';
 
 describe('<sl-checkbox>', () => {
+  it('should pass accessibility tests', async () => {
+    const el = await fixture<SlCheckbox>(html` <sl-checkbox>Checkbox</sl-checkbox> `);
+    await expect(el).to.be.accessible();
+  });
+
+  it('default properties', async () => {
+    const el = await fixture<SlCheckbox>(html` <sl-checkbox></sl-checkbox> `);
+
+    expect(el.name).to.equal('');
+    expect(el.value).to.be.undefined;
+    expect(el.title).to.equal('');
+    expect(el.disabled).to.be.false;
+    expect(el.required).to.be.false;
+    expect(el.checked).to.be.false;
+    expect(el.indeterminate).to.be.false;
+    expect(el.defaultChecked).to.be.false;
+  });
+
+  it('should have title if title attribute isset', async () => {
+    const el = await fixture<SlCheckbox>(html` <sl-checkbox title="Test"></sl-checkbox> `);
+    const input = el.shadowRoot!.querySelector('input')!;
+
+    expect(input.title).to.equal('Test');
+  });
+
   it('should be disabled with the disabled attribute', async () => {
     const el = await fixture<SlCheckbox>(html` <sl-checkbox disabled></sl-checkbox> `);
     const checkbox = el.shadowRoot!.querySelector('input')!;

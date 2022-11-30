@@ -49,10 +49,12 @@ export default class SlSwitch extends ShoelaceElement implements ShoelaceFormCon
   @state() invalid = false;
 
   /** The switch's name attribute. */
-  @property() name: string;
+  @property() name = '';
 
   /** The switch's value attribute. */
   @property() value: string;
+
+  @property() title = ''; // make reactive to pass through
 
   /** Disables the switch. */
   @property({ type: Boolean, reflect: true }) disabled = false;
@@ -157,8 +159,8 @@ export default class SlSwitch extends ShoelaceElement implements ShoelaceFormCon
         <input
           class="switch__input"
           type="checkbox"
-          title=${'' /* An empty title prevents browser validation tooltips from appearing on hover */}
-          name=${ifDefined(this.name)}
+          title=${this.title /* An empty title prevents browser validation tooltips from appearing on hover */}
+          name=${this.name}
           value=${ifDefined(this.value)}
           .checked=${live(this.checked)}
           .disabled=${this.disabled}

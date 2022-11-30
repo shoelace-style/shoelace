@@ -14,6 +14,7 @@ describe('<sl-range>', () => {
 
     expect(el.name).to.equal('');
     expect(el.value).to.equal(0);
+    expect(el.title).to.equal('');
     expect(el.label).to.equal('');
     expect(el.helpText).to.equal('');
     expect(el.disabled).to.be.false;
@@ -23,6 +24,13 @@ describe('<sl-range>', () => {
     expect(el.step).to.equal(1);
     expect(el.tooltip).to.equal('top');
     expect(el.defaultValue).to.equal(0);
+  });
+
+  it('should have title if title attribute isset', async () => {
+    const el = await fixture<SlRange>(html` <sl-range title="Test"></sl-range> `);
+    const input = el.shadowRoot!.querySelector('input')!;
+
+    expect(input.title).to.equal('Test');
   });
 
   it('should be disabled with the disabled attribute', async () => {

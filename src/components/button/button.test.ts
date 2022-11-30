@@ -23,6 +23,7 @@ describe('<sl-button>', () => {
     it('default values are set correctly', async () => {
       const el = await fixture<SlButton>(html` <sl-button>Button Label</sl-button> `);
 
+      expect(el.title).to.equal('');
       expect(el.variant).to.equal('default');
       expect(el.size).to.equal('medium');
       expect(el.disabled).to.equal(false);
@@ -86,6 +87,13 @@ describe('<sl-button>', () => {
       buttonLink.shadowRoot!.querySelector('a')!.click();
       expect(handleClick).not.to.have.been.called;
     });
+  });
+
+  it('should have title if title attribute isset', async () => {
+    const el = await fixture<SlButton>(html` <sl-button title="Test"></sl-button> `);
+    const button = el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="base"]')!;
+
+    expect(button.title).to.equal('Test');
   });
 
   describe('when loading', () => {
