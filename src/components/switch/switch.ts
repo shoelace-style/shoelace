@@ -47,14 +47,13 @@ export default class SlSwitch extends ShoelaceElement implements ShoelaceFormCon
 
   @state() private hasFocus = false;
   @state() invalid = false;
+  @property() title = ''; // make reactive to pass through
 
   /** The switch's name attribute. */
   @property() name = '';
 
   /** The switch's value attribute. */
   @property() value: string;
-
-  @property() title = ''; // make reactive to pass through
 
   /** Disables the switch. */
   @property({ type: Boolean, reflect: true }) disabled = false;

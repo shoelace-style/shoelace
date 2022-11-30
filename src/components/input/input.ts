@@ -70,6 +70,7 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
 
   @state() private hasFocus = false;
   @state() invalid = false;
+  @property() title = ''; // make reactive to pass through
 
   /** The input's type. */
   @property({ reflect: true }) type:
@@ -92,8 +93,6 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
 
   /** The input's value attribute. */
   @property() value = '';
-
-  @property() title = ''; // make reactive to pass through
 
   /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue() defaultValue = '';

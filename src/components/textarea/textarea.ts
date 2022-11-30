@@ -46,6 +46,7 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
 
   @state() private hasFocus = false;
   @state() invalid = false;
+  @property() title = ''; // make reactive to pass through
 
   /** The textarea's size. */
   @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
@@ -55,8 +56,6 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
 
   /** The textarea's value attribute. */
   @property() value = '';
-
-  @property() title = ''; // make reactive to pass through
 
   /** Draws a filled textarea. */
   @property({ type: Boolean, reflect: true }) filled = false;

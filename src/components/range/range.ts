@@ -57,14 +57,13 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
   @state() private hasFocus = false;
   @state() private hasTooltip = false;
   @state() invalid = false;
+  @property() title = ''; // make reactive to pass through
 
   /** The range's name attribute. */
   @property() name = '';
 
   /** The range's value attribute. */
   @property({ type: Number }) value = 0;
-
-  @property() title = ''; // make reactive to pass through
 
   /** The range's label. If you need to display HTML, you can use the `label` slot instead. */
   @property() label = '';

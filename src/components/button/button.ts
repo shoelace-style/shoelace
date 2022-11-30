@@ -60,6 +60,7 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
 
   @state() private hasFocus = false;
   @state() invalid = false;
+  @property() title = ''; // make reactive to pass through
 
   /** The button's variant. */
   @property({ reflect: true }) variant: 'default' | 'primary' | 'success' | 'neutral' | 'warning' | 'danger' | 'text' =
@@ -97,8 +98,6 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
 
   /** An optional value for the button. Ignored when `href` is set. */
   @property() value = '';
-
-  @property() title = ''; // make reactive to pass through
 
   /** When set, the underlying button will be rendered as an `<a>` with this `href` instead of a `<button>`. */
   @property() href = '';

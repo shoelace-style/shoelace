@@ -47,14 +47,13 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
 
   @state() private hasFocus = false;
   @state() invalid = false;
+  @property() title = ''; // make reactive to pass through
 
   /** Name of the HTML form control. Submitted with the form as part of a name/value pair. */
   @property() name = '';
 
   /** Value of the HTML form control. Primarily used to differentiate a list of related checkboxes that have the same name. */
   @property() value: string;
-
-  @property() title = ''; // make reactive to pass through
 
   /** Disables the checkbox (so the user can't check / uncheck it). */
   @property({ type: Boolean, reflect: true }) disabled = false;
