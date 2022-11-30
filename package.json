@@ -126,5 +126,8 @@
       "eslint --max-warnings 0 --cache --fix",
       "prettier --write"
     ]
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }
