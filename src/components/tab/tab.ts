@@ -97,7 +97,7 @@ export default class SlTab extends ShoelaceElement {
               <sl-icon-button
                 part="close-button"
                 exportparts="base:close-button__base"
-                name="x"
+                name="x-lg"
                 library="system"
                 label=${this.localize.term('close')}
                 class="tab__close-button"

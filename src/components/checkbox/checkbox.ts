@@ -7,7 +7,9 @@ import { defaultValue } from '../../internal/default-value';
 import { FormSubmitController } from '../../internal/form';
 import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
+import '../icon/icon';
 import styles from './checkbox.styles';
+import type { ShoelaceFormControl } from '../../internal/shoelace-element';
 import type { CSSResultGroup } from 'lit';
 
 /**
@@ -15,6 +17,8 @@ import type { CSSResultGroup } from 'lit';
  *
  * @since 2.0
  * @status stable
+ *
+ * @dependency sl-icon
  *
  * @slot - The checkbox's label.
  *
@@ -24,12 +28,12 @@ import type { CSSResultGroup } from 'lit';
  *
  * @csspart base - The component's internal wrapper.
  * @csspart control - The checkbox control.
- * @csspart checked-icon - The container the wraps the checked icon.
- * @csspart indeterminate-icon - The container that wraps the indeterminate icon.
+ * @csspart checked-icon - The checked icon.
+ * @csspart indeterminate-icon - The indeterminate icon.
  * @csspart label - The checkbox label.
  */
 @customElement('sl-checkbox')
-export default class SlCheckbox extends ShoelaceElement {
+export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
 
   @query('input[type="checkbox"]') input: HTMLInputElement;
@@ -42,6 +46,7 @@ export default class SlCheckbox extends ShoelaceElement {
   });
 
   @state() private hasFocus = false;
+  @state() invalid = false;
 
   /** Name of the HTML form control. Submitted with the form as part of a name/value pair. */
   @property() name: string;
@@ -61,12 +66,8 @@ export default class SlCheckbox extends ShoelaceElement {
   /** Draws the checkbox in an indeterminate state. Usually applies to a checkbox that represents "select all" or "select none" when the items to which it applies are a mix of selected and unselected. */
   @property({ type: Boolean, reflect: true }) indeterminate = false;
 
-  /** This will be true when the control is in an invalid state. Validity is determined by the `required` prop. */
-  @property({ type: Boolean, reflect: true }) invalid = false;
-
   /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
-  @defaultValue('checked')
-  defaultChecked = false;
+  @defaultValue('checked') defaultChecked = false;
 
   firstUpdated() {
     this.invalid = !this.input.checkValidity();
@@ -85,6 +86,11 @@ export default class SlCheckbox extends ShoelaceElement {
   /** Removes focus from the checkbox. */
   blur() {
     this.input.blur();
+  }
+
+  /** Checks for validity but does not show the browser's validation message. */
+  checkValidity() {
+    return this.input.checkValidity();
   }
 
   /** Checks for validity and shows the browser's validation message if the control is invalid. */
@@ -124,6 +130,8 @@ export default class SlCheckbox extends ShoelaceElement {
   @watch('checked', { waitUntilFirstUpdate: true })
   @watch('indeterminate', { waitUntilFirstUpdate: true })
   handleStateChange() {
+    this.input.checked = this.checked; // force a sync update
+    this.input.indeterminate = this.indeterminate; // force a sync update
     this.invalid = !this.input.checkValidity();
   }
 
@@ -142,6 +150,7 @@ export default class SlCheckbox extends ShoelaceElement {
         <input
           class="checkbox__input"
           type="checkbox"
+          title=${'' /* An empty title prevents browser validation tooltips from appearing on hover */}
           name=${ifDefined(this.name)}
           value=${ifDefined(this.value)}
           .indeterminate=${live(this.indeterminate)}
@@ -155,32 +164,9 @@ export default class SlCheckbox extends ShoelaceElement {
         />
 
         <span part="control" class="checkbox__control">
-          ${this.checked
-            ? html`
-                <svg part="checked-icon" class="checkbox__icon" viewBox="0 0 16 16">
-                  <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
-                    <g stroke="currentColor" stroke-width="2">
-                      <g transform="translate(3.428571, 3.428571)">
-                        <path d="M0,5.71428571 L3.42857143,9.14285714"></path>
-                        <path d="M9.14285714,0 L3.42857143,9.14285714"></path>
-                      </g>
-                    </g>
-                  </g>
-                </svg>
-              `
-            : ''}
+          ${this.checked ? html` <sl-icon part="checked-icon" library="system" name="check"></sl-icon> ` : ''}
           ${!this.checked && this.indeterminate
-            ? html`
-                <svg part="indeterminate-icon" class="checkbox__icon" viewBox="0 0 16 16">
-                  <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
-                    <g stroke="currentColor" stroke-width="2">
-                      <g transform="translate(2.285714, 6.857143)">
-                        <path d="M10.2857143,1.14285714 L1.14285714,1.14285714"></path>
-                      </g>
-                    </g>
-                  </g>
-                </svg>
-              `
+            ? html` <sl-icon part="indeterminate-icon" library="system" name="indeterminate"></sl-icon> `
             : ''}
         </span>
 

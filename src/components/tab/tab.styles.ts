@@ -54,11 +54,18 @@ export default css`
   }
 
   .tab__close-button {
-    font-size: var(--sl-font-size-large);
-    margin-inline-start: var(--sl-spacing-2x-small);
+    font-size: var(--sl-font-size-small);
+    margin-inline-start: var(--sl-spacing-small);
   }
 
   .tab__close-button::part(base) {
     padding: var(--sl-spacing-3x-small);
+  }
+
+  @media (forced-colors: active) {
+    .tab.tab--active:not(.tab--disabled) {
+      outline: solid 1px transparent;
+      outline-offset: -3px;
+    }
   }
 `;

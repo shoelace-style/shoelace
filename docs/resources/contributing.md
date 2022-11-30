@@ -276,7 +276,7 @@ This convention can be relaxed when the developer experience is greatly improved
 
 ### Naming CSS Parts
 
-While CSS parts can be named [virtually anything](https://www.abeautifulsite.net/posts/valid-names-for-css-parts/), within Shoelace they must use the kebab-case convention and lowercase letters. Modifiers must be delimited by `--` like in BEM. This is useful for allowing users to target parts with various states, such as `my-part--focus`.
+While CSS parts can be named [virtually anything](https://www.abeautifulsite.net/posts/valid-names-for-css-parts/), within Shoelace they must use the kebab-case convention and lowercase letters. Additionally, [a BEM-inspired naming convention](https://www.abeautifulsite.net/posts/css-parts-inspired-by-bem/) is used to distinguish parts, subparts, and states.
 
 When composing elements, use `part` to export the host element and `exportparts` to export its parts.
 
@@ -302,3 +302,13 @@ Form controls should support submission and validation through the following con
 - All form controls must have an `invalid` property that reflects their validity
 - All form controls should mirror their native validation attributes such as `required`, `pattern`, `minlength`, `maxlength`, etc. when possible
 - All form controls must be tested to work with the standard `<form>` element
+
+### System Icons
+
+Avoid inlining SVG icons inside of templates. If a component requires an icon, make sure `<sl-icon>` is a dependency of the component and use the [system library](/components/icon#customizing-the-system-library):
+
+```html
+<sl-icon library="system" name="..."></sl-icon>
+```
+
+This will render the icons instantly whereas the default library will fetch them from a remote source. If an icon isn't available in the system library, you will need to add it to `library.system.ts`. Using the system library ensures that all icons load instantly and are customizable by users who wish to provide a custom resolver for the system library.

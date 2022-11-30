@@ -79,7 +79,7 @@ export default class SlTag extends ShoelaceElement {
               <sl-icon-button
                 part="remove-button"
                 exportparts="base:remove-button__base"
-                name="x"
+                name="x-lg"
                 library="system"
                 label=${this.localize.term('remove')}
                 class="tag__remove"

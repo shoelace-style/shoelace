@@ -9,13 +9,13 @@ describe('<sl-tab>', () => {
         <sl-tab slot="nav">Test</sl-tab>
       </sl-tab-group>
     `);
-    expect(el).to.be.accessible();
+    await expect(el).to.be.accessible();
   });
 
   it('should render default tab', async () => {
     const el = await fixture<SlTab>(html` <sl-tab>Test</sl-tab> `);
 
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
     expect(el.getAttribute('role')).to.equal('tab');
     expect(el.getAttribute('aria-disabled')).to.equal('false');
@@ -30,7 +30,7 @@ describe('<sl-tab>', () => {
   it('should disable tab by attribute', async () => {
     const el = await fixture<SlTab>(html` <sl-tab disabled>Test</sl-tab> `);
 
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
     expect(el.disabled).to.equal(true);
     expect(el.getAttribute('aria-disabled')).to.equal('true');
@@ -41,7 +41,7 @@ describe('<sl-tab>', () => {
   it('should set active tab by attribute', async () => {
     const el = await fixture<SlTab>(html` <sl-tab active>Test</sl-tab> `);
 
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
     expect(el.active).to.equal(true);
     expect(el.getAttribute('aria-selected')).to.equal('true');
@@ -52,8 +52,8 @@ describe('<sl-tab>', () => {
   it('should set closable by attribute', async () => {
     const el = await fixture<SlTab>(html` <sl-tab closable>Test</sl-tab> `);
 
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
-    const closeButton = el.shadowRoot!.querySelector('[part="close-button"]');
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
+    const closeButton = el.shadowRoot!.querySelector('[part~="close-button"]');
 
     expect(el.closable).to.equal(true);
     expect(base.getAttribute('class')).to.equal(' tab tab--closable ');
@@ -64,7 +64,7 @@ describe('<sl-tab>', () => {
     it('should focus inner div', async () => {
       const el = await fixture<SlTab>(html` <sl-tab>Test</sl-tab> `);
 
-      const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+      const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
       el.focus();
       await el.updateComplete;
@@ -91,7 +91,7 @@ describe('<sl-tab>', () => {
     it('should emit close event when close button clicked', async () => {
       const el = await fixture<SlTab>(html` <sl-tab closable>Test</sl-tab> `);
 
-      const closeButton = el.shadowRoot!.querySelector<HTMLButtonElement>('[part="close-button"]')!;
+      const closeButton = el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="close-button"]')!;
       const spy = sinon.spy();
 
       el.addEventListener('sl-close', spy, { once: true });

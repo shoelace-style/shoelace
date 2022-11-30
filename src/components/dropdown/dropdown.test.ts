@@ -15,7 +15,7 @@ describe('<sl-dropdown>', () => {
         </sl-menu>
       </sl-dropdown>
     `);
-    const panel = el.shadowRoot!.querySelector<HTMLElement>('[part="panel"]')!;
+    const panel = el.shadowRoot!.querySelector<HTMLElement>('[part~="panel"]')!;
 
     expect(panel.hidden).to.be.false;
   });
@@ -31,7 +31,7 @@ describe('<sl-dropdown>', () => {
         </sl-menu>
       </sl-dropdown>
     `);
-    const panel = el.shadowRoot!.querySelector<HTMLElement>('[part="panel"]')!;
+    const panel = el.shadowRoot!.querySelector<HTMLElement>('[part~="panel"]')!;
 
     expect(panel.hidden).to.be.true;
   });
@@ -47,7 +47,7 @@ describe('<sl-dropdown>', () => {
         </sl-menu>
       </sl-dropdown>
     `);
-    const panel = el.shadowRoot!.querySelector<HTMLElement>('[part="panel"]')!;
+    const panel = el.shadowRoot!.querySelector<HTMLElement>('[part~="panel"]')!;
     const showHandler = sinon.spy();
     const afterShowHandler = sinon.spy();
 
@@ -74,7 +74,7 @@ describe('<sl-dropdown>', () => {
         </sl-menu>
       </sl-dropdown>
     `);
-    const panel = el.shadowRoot!.querySelector<HTMLElement>('[part="panel"]')!;
+    const panel = el.shadowRoot!.querySelector<HTMLElement>('[part~="panel"]')!;
     const hideHandler = sinon.spy();
     const afterHideHandler = sinon.spy();
 
@@ -101,7 +101,7 @@ describe('<sl-dropdown>', () => {
         </sl-menu>
       </sl-dropdown>
     `);
-    const panel = el.shadowRoot!.querySelector<HTMLElement>('[part="panel"]')!;
+    const panel = el.shadowRoot!.querySelector<HTMLElement>('[part~="panel"]')!;
     const showHandler = sinon.spy();
     const afterShowHandler = sinon.spy();
 
@@ -128,7 +128,7 @@ describe('<sl-dropdown>', () => {
         </sl-menu>
       </sl-dropdown>
     `);
-    const panel = el.shadowRoot!.querySelector<HTMLElement>('[part="panel"]')!;
+    const panel = el.shadowRoot!.querySelector<HTMLElement>('[part~="panel"]')!;
     const hideHandler = sinon.spy();
     const afterHideHandler = sinon.spy();
 
@@ -283,5 +283,28 @@ describe('<sl-dropdown>', () => {
     await el.updateComplete;
 
     expect(el.open).to.be.false;
+  });
+
+  it('should close and stop propagating the keydown event when Escape is pressed and the dropdown is open ', async () => {
+    const el = await fixture<SlDropdown>(html`
+      <sl-dropdown open>
+        <sl-button slot="trigger" caret>Toggle</sl-button>
+        <sl-menu>
+          <sl-menu-item>Dropdown Item 1</sl-menu-item>
+          <sl-menu-item>Dropdown Item 2</sl-menu-item>
+          <sl-menu-item>Dropdown Item 3</sl-menu-item>
+        </sl-menu>
+      </sl-dropdown>
+    `);
+    const firstMenuItem = el.querySelector('sl-menu-item')!;
+    const hideHandler = sinon.spy();
+
+    document.body.addEventListener('keydown', hideHandler);
+    firstMenuItem.focus();
+    await sendKeys({ press: 'Escape' });
+    await el.updateComplete;
+
+    expect(el.open).to.be.false;
+    expect(hideHandler).to.not.have.been.called;
   });
 });

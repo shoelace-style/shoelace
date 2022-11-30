@@ -11,7 +11,7 @@ export default css`
   }
 
   :host(:focus) {
-    outline: 0;
+    outline: none;
   }
 
   slot:not([name])::slotted(sl-icon) {
@@ -137,5 +137,11 @@ export default css`
   .tree-item--rtl .tree-item__children::before {
     left: auto;
     right: 1em;
+  }
+
+  @media (forced-colors: active) {
+    :host(:not([aria-disabled='true'])) .tree-item--selected .tree-item__item {
+      outline: dashed 1px SelectedItem;
+    }
   }
 `;

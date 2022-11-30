@@ -37,6 +37,13 @@ export default css`
     animation: pulse 2s ease-in-out 0.5s infinite;
   }
 
+  /* Forced colors mode */
+  @media (forced-colors: active) {
+    :host {
+      --color: GrayText;
+    }
+  }
+
   @keyframes sheen {
     0% {
       background-position: 200% 0;

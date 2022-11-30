@@ -300,6 +300,12 @@ export default css`
     color: var(--sl-color-neutral-0);
   }
 
+  @media (forced-colors: active) {
+    .button.button--outline.button--checked:not(.button--disabled) {
+      outline: solid 2px transparent;
+    }
+  }
+
   /*
    * Text buttons
    */
@@ -408,13 +414,7 @@ export default css`
   }
 
   .button--caret .button__caret {
-    display: flex;
-    align-items: center;
-  }
-
-  .button--caret .button__caret svg {
-    width: 1em;
-    height: 1em;
+    height: auto;
   }
 
   /*

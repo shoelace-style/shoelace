@@ -3,9 +3,11 @@ import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { FormSubmitController } from '../../internal/form';
 import ShoelaceElement from '../../internal/shoelace-element';
+import { HasSlotController } from '../../internal/slot';
 import { watch } from '../../internal/watch';
 import '../button-group/button-group';
 import styles from './radio-group.styles';
+import type { ShoelaceFormControl } from '../../internal/shoelace-element';
 import type SlRadioButton from '../radio-button/radio-button';
 import type SlRadio from '../radio/radio';
 import type { CSSResultGroup } from 'lit';
@@ -23,18 +25,21 @@ import type { CSSResultGroup } from 'lit';
  *
  * @event sl-change - Emitted when the radio group's selected value changes.
  *
- * @csspart base - The component's internal wrapper.
- * @csspart label - The radio group's label.
+ * @csspart form-control - The form control that wraps the label, input, and help-text.
+ * @csspart form-control-label - The label's wrapper.
+ * @csspart form-control-input - The input's wrapper.
+ * @csspart form-control-help-text - The help text's wrapper.
  * @csspart button-group - The button group that wraps radio buttons.
  * @csspart button-group__base - The button group's `base` part.
  */
 @customElement('sl-radio-group')
-export default class SlRadioGroup extends ShoelaceElement {
+export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
 
   protected readonly formSubmitController = new FormSubmitController(this, {
-    defaultValue: (control: SlRadioGroup) => control.defaultValue
+    defaultValue: control => control.defaultValue
   });
+  private readonly hasSlotController = new HasSlotController(this, 'help-text', 'label');
 
   @query('slot:not([name])') defaultSlot: HTMLSlotElement;
   @query('.radio-group__validation-input') input: HTMLInputElement;
@@ -42,7 +47,8 @@ export default class SlRadioGroup extends ShoelaceElement {
   @state() private hasButtonGroup = false;
   @state() private errorMessage = '';
   @state() private customErrorMessage = '';
-  @state() private defaultValue = '';
+  @state() defaultValue = '';
+  @state() invalid = false;
 
   /**
    * The radio group label. Required for proper accessibility. If you need to display HTML, you can use the `label` slot
@@ -50,20 +56,14 @@ export default class SlRadioGroup extends ShoelaceElement {
    */
   @property() label = '';
 
+  /** The input's help text. If you need to display HTML, you can use the `help-text` slot instead. */
+  @property({ attribute: 'help-text' }) helpText = '';
+
   /** The selected value of the control. */
   @property({ reflect: true }) value = '';
 
   /** The name assigned to the radio controls. */
   @property() name = 'option';
-
-  /**
-   * This will be true when the control is in an invalid state. Validity is determined by props such as `type`,
-   * `required`, `minlength`, `maxlength`, and `pattern` using the browser's constraint validation API.
-   */
-  @property({ type: Boolean, reflect: true }) invalid = false;
-
-  /** Shows the fieldset and legend that surrounds the radio group. */
-  @property({ type: Boolean, attribute: 'fieldset', reflect: true }) fieldset = false;
 
   /** Ensures a child radio is checked before allowing the containing form to submit. */
   @property({ type: Boolean, reflect: true }) required = false;
@@ -79,6 +79,15 @@ export default class SlRadioGroup extends ShoelaceElement {
   connectedCallback() {
     super.connectedCallback();
     this.defaultValue = this.value;
+  }
+
+  firstUpdated() {
+    this.invalid = !this.validity.valid;
+  }
+
+  /** Checks for validity but does not show the browser's validation message. */
+  checkValidity() {
+    return this.validity.valid;
   }
 
   /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
@@ -127,11 +136,11 @@ export default class SlRadioGroup extends ShoelaceElement {
     return !this.invalid;
   }
 
-  private getAllRadios() {
+  getAllRadios() {
     return [...this.querySelectorAll<SlRadio | SlRadioButton>('sl-radio, sl-radio-button')];
   }
 
-  private handleRadioClick(event: MouseEvent) {
+  handleRadioClick(event: MouseEvent) {
     const target = event.target as SlRadio | SlRadioButton;
 
     if (target.disabled) {
@@ -143,7 +152,7 @@ export default class SlRadioGroup extends ShoelaceElement {
     radios.forEach(radio => (radio.checked = radio === target));
   }
 
-  private handleKeyDown(event: KeyboardEvent) {
+  handleKeyDown(event: KeyboardEvent) {
     if (!['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' '].includes(event.key)) {
       return;
     }
@@ -180,7 +189,18 @@ export default class SlRadioGroup extends ShoelaceElement {
     event.preventDefault();
   }
 
-  private handleSlotChange() {
+  handleLabelClick() {
+    const radios = this.getAllRadios();
+    const checked = radios.find(radio => radio.checked);
+    const radioToFocus = checked || radios[0];
+
+    // Move focus to the checked radio (or the first one if none are checked) when clicking the label
+    if (radioToFocus) {
+      radioToFocus.focus();
+    }
+  }
+
+  handleSlotChange() {
     const radios = this.getAllRadios();
 
     radios.forEach(radio => (radio.checked = radio.value === this.value));
@@ -205,18 +225,24 @@ export default class SlRadioGroup extends ShoelaceElement {
     }
   }
 
-  private showNativeErrorMessage() {
+  showNativeErrorMessage() {
     this.input.hidden = false;
     this.input.reportValidity();
     setTimeout(() => (this.input.hidden = true), 10000);
   }
 
-  private updateCheckedRadio() {
+  updateCheckedRadio() {
     const radios = this.getAllRadios();
     radios.forEach(radio => (radio.checked = radio.value === this.value));
+    this.invalid = !this.validity.valid;
   }
 
   render() {
+    const hasLabelSlot = this.hasSlotController.test('label');
+    const hasHelpTextSlot = this.hasSlotController.test('help-text');
+    const hasLabel = this.label ? true : !!hasLabelSlot;
+    const hasHelpText = this.helpText ? true : !!hasHelpTextSlot;
+
     const defaultSlot = html`
       <slot
         @click=${this.handleRadioClick}
@@ -228,34 +254,63 @@ export default class SlRadioGroup extends ShoelaceElement {
 
     return html`
       <fieldset
-        part="base"
-        role="radiogroup"
-        aria-errormessage="radio-error-message"
-        aria-invalid="${this.invalid}"
+        part="form-control"
         class=${classMap({
-          'radio-group': true,
-          'radio-group--has-fieldset': this.fieldset,
-          'radio-group--required': this.required
+          'form-control': true,
+          'form-control--medium': true,
+          'form-control--radio-group': true,
+          'form-control--has-label': hasLabel,
+          'form-control--has-help-text': hasHelpText
         })}
+        role="radiogroup"
+        aria-labelledby="label"
+        aria-describedby="help-text"
+        aria-errormessage="error-message"
       >
-        <legend part="label" class="radio-group__label">
+        <label
+          part="form-control-label"
+          id="label"
+          class="form-control__label"
+          aria-hidden=${hasLabel ? 'false' : 'true'}
+          @click=${this.handleLabelClick}
+        >
           <slot name="label">${this.label}</slot>
-        </legend>
-        <div class="visually-hidden">
-          <div id="radio-error-message" aria-live="assertive">${this.errorMessage}</div>
-          <label class="radio-group__validation visually-hidden">
-            <input type="text" class="radio-group__validation-input" ?required=${this.required} tabindex="-1" hidden />
-          </label>
+        </label>
+
+        <div part="form-control-input" class="form-control-input">
+          <div class="visually-hidden">
+            <div id="error-message" aria-live="assertive">${this.errorMessage}</div>
+            <label class="radio-group__validation">
+              <input
+                type="text"
+                class="radio-group__validation-input"
+                ?required=${this.required}
+                tabindex="-1"
+                hidden
+              />
+            </label>
+          </div>
+
+          ${this.hasButtonGroup
+            ? html`
+                <sl-button-group part="button-group" exportparts="base:button-group__base">
+                  ${defaultSlot}
+                </sl-button-group>
+              `
+            : defaultSlot}
         </div>
-        ${this.hasButtonGroup
-          ? html`
-              <sl-button-group part="button-group" exportparts="base:button-group__base">
-                ${defaultSlot}
-              </sl-button-group>
-            `
-          : defaultSlot}
+
+        <div
+          part="form-control-help-text"
+          id="help-text"
+          class="form-control__help-text"
+          aria-hidden=${hasHelpText ? 'false' : 'true'}
+        >
+          <slot name="help-text">${this.helpText}</slot>
+        </div>
       </fieldset>
     `;
+    /* eslint-enable lit-a11y/click-events-have-key-events */
   }
 }
 

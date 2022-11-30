@@ -47,6 +47,18 @@ export default css`
     animation-name: indeterminate-rtl;
   }
 
+  @media (forced-colors: active) {
+    .progress-bar {
+      outline: solid 1px SelectedItem;
+      background-color: var(--sl-color-neutral-0);
+    }
+
+    .progress-bar__indicator {
+      outline: solid 1px SelectedItem;
+      background-color: SelectedItem;
+    }
+  }
+
   @keyframes indeterminate {
     0% {
       left: -50%;

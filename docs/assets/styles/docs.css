@@ -490,6 +490,7 @@ kbd,
 .markdown-section p.tip code,
 .markdown-section p.warn code {
   background-color: var(--sl-color-neutral-100);
+  white-space: nowrap;
 }
 
 /* Sponsorship callouts */

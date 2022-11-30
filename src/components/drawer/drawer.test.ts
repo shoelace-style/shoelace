@@ -1,5 +1,6 @@
 // cspell:dictionaries lorem-ipsum
 import { expect, fixture, html, waitUntil } from '@open-wc/testing';
+import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
 import type SlDrawer from './drawer';
 
@@ -8,7 +9,7 @@ describe('<sl-drawer>', () => {
     const el = await fixture<SlDrawer>(html`
       <sl-drawer open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sl-drawer>
     `);
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
     expect(base.hidden).to.be.false;
   });
@@ -17,7 +18,7 @@ describe('<sl-drawer>', () => {
     const el = await fixture<SlDrawer>(
       html` <sl-drawer>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sl-drawer> `
     );
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
     expect(base.hidden).to.be.true;
   });
@@ -26,7 +27,7 @@ describe('<sl-drawer>', () => {
     const el = await fixture<SlDrawer>(html`
       <sl-drawer>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sl-drawer>
     `);
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
     const showHandler = sinon.spy();
     const afterShowHandler = sinon.spy();
 
@@ -46,7 +47,7 @@ describe('<sl-drawer>', () => {
     const el = await fixture<SlDrawer>(html`
       <sl-drawer open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sl-drawer>
     `);
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
     const hideHandler = sinon.spy();
     const afterHideHandler = sinon.spy();
 
@@ -66,7 +67,7 @@ describe('<sl-drawer>', () => {
     const el = await fixture<SlDrawer>(html`
       <sl-drawer>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sl-drawer>
     `);
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
     const showHandler = sinon.spy();
     const afterShowHandler = sinon.spy();
 
@@ -86,7 +87,7 @@ describe('<sl-drawer>', () => {
     const el = await fixture<SlDrawer>(html`
       <sl-drawer open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sl-drawer>
     `);
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
     const hideHandler = sinon.spy();
     const afterHideHandler = sinon.spy();
 
@@ -106,7 +107,7 @@ describe('<sl-drawer>', () => {
     const el = await fixture<SlDrawer>(html`
       <sl-drawer open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sl-drawer>
     `);
-    const overlay = el.shadowRoot!.querySelector<HTMLElement>('[part="overlay"]')!;
+    const overlay = el.shadowRoot!.querySelector<HTMLElement>('[part~="overlay"]')!;
 
     el.addEventListener('sl-request-close', event => {
       event.preventDefault();
@@ -131,5 +132,17 @@ describe('<sl-drawer>', () => {
 
     expect(initialFocusHandler).to.have.been.calledOnce;
     expect(document.activeElement).to.equal(input);
+  });
+
+  it('should close when pressing Escape', async () => {
+    const el = await fixture<SlDrawer>(html` <sl-drawer open></sl-drawer> `);
+    const hideHandler = sinon.spy();
+
+    el.addEventListener('sl-hide', hideHandler);
+
+    await sendKeys({ press: 'Escape' });
+    await waitUntil(() => hideHandler.calledOnce);
+
+    expect(el.open).to.be.false;
   });
 });

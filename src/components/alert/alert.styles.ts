@@ -91,7 +91,7 @@ export default css`
     flex: 0 0 auto;
     display: flex;
     align-items: center;
-    font-size: var(--sl-font-size-large);
+    font-size: var(--sl-font-size-medium);
     padding-inline-end: var(--sl-spacing-medium);
   }
 `;

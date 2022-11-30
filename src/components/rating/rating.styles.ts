@@ -76,4 +76,11 @@ export default css`
   .rating--disabled .rating__symbols {
     cursor: not-allowed;
   }
+
+  /* Forced colors mode */
+  @media (forced-colors: active) {
+    .rating__symbols--indicator {
+      color: SelectedItem;
+    }
+  }
 `;

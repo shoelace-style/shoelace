@@ -37,7 +37,7 @@ const expectSelectHandlerToHaveBeenCalledOn = async (
   selectHandler: sinon.SinonSpy,
   expectedValue: string
 ): Promise<void> => {
-  await waitUntil(() => selectHandler.calledOnce);
+  await waitUntil(() => selectHandler.called);
   expect(selectHandler).to.have.been.calledOnce;
   const event = selectHandler.args[0][0] as CustomEvent;
   const detail = event.detail as Payload;

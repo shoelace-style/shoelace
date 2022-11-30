@@ -99,12 +99,21 @@ export default css`
     margin: 0;
   }
 
-  .drawer__close {
+  .drawer__header-actions {
+    flex-shrink: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: end;
+    gap: var(--sl-spacing-2x-small);
+    padding: 0 var(--header-spacing);
+  }
+
+  .drawer__header-actions sl-icon-button,
+  .drawer__header-actions ::slotted(sl-icon-button) {
     flex: 0 0 auto;
     display: flex;
     align-items: center;
-    font-size: var(--sl-font-size-x-large);
-    padding: 0 var(--header-spacing);
+    font-size: var(--sl-font-size-medium);
   }
 
   .drawer__body {
@@ -140,5 +149,11 @@ export default css`
 
   .drawer--contained .drawer__overlay {
     position: absolute;
+  }
+
+  @media (forced-colors: active) {
+    .drawer__panel {
+      border: solid 1px var(--sl-color-neutral-0);
+    }
   }
 `;

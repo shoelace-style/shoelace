@@ -126,6 +126,44 @@ describe('<sl-details>', () => {
     expect(body.hidden).to.be.true;
   });
 
+  it('should not open when preventing sl-show', async () => {
+    const el = await fixture<SlDetails>(html`
+      <sl-details>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat.
+      </sl-details>
+    `);
+    const showHandler = sinon.spy((event: CustomEvent) => event.preventDefault());
+
+    el.addEventListener('sl-show', showHandler);
+    el.open = true;
+
+    await waitUntil(() => showHandler.calledOnce);
+
+    expect(showHandler).to.have.been.calledOnce;
+    expect(el.open).to.be.false;
+  });
+
+  it('should not close when preventing sl-hide', async () => {
+    const el = await fixture<SlDetails>(html`
+      <sl-details open>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat.
+      </sl-details>
+    `);
+    const hideHandler = sinon.spy((event: CustomEvent) => event.preventDefault());
+
+    el.addEventListener('sl-hide', hideHandler);
+    el.open = false;
+
+    await waitUntil(() => hideHandler.calledOnce);
+
+    expect(hideHandler).to.have.been.calledOnce;
+    expect(el.open).to.be.true;
+  });
+
   it('should be the correct size after opening more than one instance', async () => {
     const el = await fixture<SlDetails>(html`
       <div>

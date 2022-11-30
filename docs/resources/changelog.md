@@ -6,16 +6,93 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 New versions of Shoelace are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.shoelace.style](https://next.shoelace.style).
 
-_During the beta period, these restrictions may be relaxed in the event of a mission-critical bug._ 🐛
+?> During the beta period, these restrictions may be relaxed in the event of a mission-critical bug. 🐛
 
 ## Next
 
+- Added `header-actions` slot to `<sl-dialog>` and `<sl-drawer>`
+- Fixed a bug in `<sl-tree-item>` where `sl-selection-change` was emitted when the selection didn't change [#1030](https://github.com/shoelace-style/shoelace/pull/1030)
+- Fixed a bug in `<sl-button-group>` that caused the border to render incorrectly when hovering over icons inside buttons [#1035](https://github.com/shoelace-style/shoelace/issues/1035)
+- Fixed an incorrect default for `flip-fallback-strategy` in `<sl-popup>` that caused the fallback strategy to be `initial` instead of `best-fit`, which is inconsistent with Floating UI's default [#1036](https://github.com/shoelace-style/shoelace/issues/1036)
+- Fixed a bug where browser validation tooltips would show up when hovering over form controls [#1037](https://github.com/shoelace-style/shoelace/issues/1037)
+- Fixed a bug in `<sl-tab-group>` that sometimes caused the active tab indicator to not animate
+- Improved IntelliSense in VS Code, courtesy of [Burton's amazing CEM Analyzer plugin](https://github.com/break-stuff/cem-plugin-vs-code-custom-data-generator)
+- Improved accessibility of `<sl-alert>` so the alert is announced and the close button has a label
+- Removed unused aria attributes from `<sl-skeleton>`
+- Replaced the `x` icon in the system icon library with `x-lg` to improve icon consistency
+
+## 2.0.0-beta.85
+
+- Fixed a bug in `<sl-dropdown>` that caused containing dialogs, drawers, etc. to close when pressing <kbd>Escape</kbd> while focused [#1024](https://github.com/shoelace-style/shoelace/issues/1024)
+- Fixed a bug in `<sl-tree-item>` that allowed lazy nodes to be incorrectly selected [#1023](https://github.com/shoelace-style/shoelace/pull/1023)
+- Fixed a typing bug in `<sl-tree-item>` [#1026](https://github.com/shoelace-style/shoelace/pull/1026)
+- Updated Floating UI to 1.0.7 to fix a bug that prevented `hoist` from working correctly in `<sl-dropdown>` after a recent update [#1024](https://github.com/shoelace-style/shoelace/issues/1024)
+
+## 2.0.0-beta.84
+
+- 🚨 BREAKING: Removed the `fieldset` property from `<sl-radio-group>` (use CSS parts if you want to keep the border) [#965](https://github.com/shoelace-style/shoelace/issues/965)
+- 🚨 BREAKING: Removed `base` and `label` parts from `<sl-radio-group>` (use `form-control` and `form-control__label` instead) [#965](https://github.com/shoelace-style/shoelace/issues/965)
+- 🚨 BREAKING: Removed the `base` part from `<sl-icon>` (style the host element directly instead)
+- 🚨 BREAKING: Removed the `invalid` attribute from form controls (use `[data-invalid]` to target it with CSS)
+- Added validation states to all form controls to allow styling based on various validation states [#1011](https://github.com/shoelace-style/shoelace/issues/1011)
+  - `data-required` - indicates that a value is required
+  - `data-optional` - indicates that a value is NOT required
+  - `data-invalid` - indicates that the form control is invalid
+  - `data-valid` - indicates that the form control is valid
+  - `data-user-invalid` - indicates the form control is invalid and the user has interacted with it
+  - `data-user-valid` - indicates the form control is valid and the user has interacted with it
+- Added npm exports [#1020](https://github.com/shoelace-style/shoelace/pull/1020)
+- Added `checkValidity()` method to all form controls
+- Added `reportValidity()` method to `<sl-range>`
 - Added `button--checked` to `<sl-radio-button>` and `control--checked` to `<sl-radio>` to style just the checked state [#933](https://github.com/shoelace-style/shoelace/pull/933)
-- Added tests for `<sl-menu-item>` and `<sl-menu-label>` [#935](https://github.com/shoelace-style/shoelace/pull/935)
+- Added tests for `<sl-menu>`, `<sl-menu-item>`, `<sl-menu-label>`, `<sl-rating>`, `<sl-relative-time>`, `<sl-skeleton>`, `<sl-tab-panel>` and `<sl-tag>` [#935](https://github.com/shoelace-style/shoelace/pull/935)
+  [#949](https://github.com/shoelace-style/shoelace/pull/949) [#951](https://github.com/shoelace-style/shoelace/pull/951) [#953](https://github.com/shoelace-style/shoelace/pull/953)
+  [#956](https://github.com/shoelace-style/shoelace/pull/956) [#984](https://github.com/shoelace-style/shoelace/pull/984) [#991](https://github.com/shoelace-style/shoelace/pull/991)
+- Added translations for Hungarian, Turkish, English (United Kingdom) and German (Austria) [#982](https://github.com/shoelace-style/shoelace/pull/982) [#989](https://github.com/shoelace-style/shoelace/pull/989)
 - Added `--indicator-transition-duration` custom property to `<sl-progress-ring>` [#986](https://github.com/shoelace-style/shoelace/issues/986)
+- Added `--sl-input-required-content-color` custom property to all form controls [#948](https://github.com/shoelace-style/shoelace/pull/948)
+- Added the ability to cancel `sl-show` and `sl-hide` events in `<sl-details>` [#993](https://github.com/shoelace-style/shoelace/issues/993)
+- Added `focus()` and `blur()` methods to `<sl-radio-button>`
+- Added `stepUp()` and `stepDown()` methods to `<sl-input>` and `<sl-range>` [#1013](https://github.com/shoelace-style/shoelace/pull/1013)
+- Added `showPicker()` method to `<sl-input>` [#1013](https://github.com/shoelace-style/shoelace/pull/1013)
+- Added the `handle-icon` part to `<sl-image-comparer>`
+- Added `caret`, `check`, `grip-vertical`, `indeterminate`, and `radio` icons to the system library and removed `check-lg` [#985](https://github.com/shoelace-style/shoelace/issues/985)
+- Added the `loading` attribute to `<sl-avatar>` to allow lazy loading of image avatars [#1006](https://github.com/shoelace-style/shoelace/pull/1006)
+- Added `formenctype` attribute to `<sl-button>` [#1009](https://github.com/shoelace-style/shoelace/pull/1009)
+- Added `exports` to `package.json` and removed the `main` and `module` properties [#1007](https://github.com/shoelace-style/shoelace/pull/1007)
 - Fixed a bug in `<sl-card>` that prevented the border radius to apply correctly to the header [#934](https://github.com/shoelace-style/shoelace/pull/934)
 - Fixed a bug in `<sl-button-group>` where the inner border disappeared on focus [#980](https://github.com/shoelace-style/shoelace/pull/980)
+- Fixed a bug that caused prefix/suffix animations in `<sl-input>` to wobble [#996](https://github.com/shoelace-style/shoelace/issues/996)
+- Fixed a bug in `<sl-icon>` that prevented color from being set on the host element [#999](https://github.com/shoelace-style/shoelace/issues/999)
+- Fixed a bug in `<sl-dropdown>` where the `keydown` event erroneously propagated to ancestors when pressing <kbd>Escape</kbd> [#990](https://github.com/shoelace-style/shoelace/issues/990)
+- Fixed a bug that prevented arrow keys from scrolling content within `<sl-dialog>` and `<sl-drawer>` [#925](https://github.com/shoelace-style/shoelace/issues/925)
+- Fixed a bug that prevented <kbd>Escape</kbd> from closing `<sl-dialog>` and `<sl-drawer>` in some cases
+- Fixed a bug that caused forms to submit unexpectedly when selecting certain characters [#988](https://github.com/shoelace-style/shoelace/pull/988)
+- Fixed a bug in `<sl-radio-group>` that prevented the `invalid` property from correctly reflecting validity sometimes [#992](https://github.com/shoelace-style/shoelace/issues/992)
+- Fixed a bug in `<sl-tree>` that prevented selections from working correctly on dynamically added tree items [#963](https://github.com/shoelace-style/shoelace/issues/963)
+- Fixed module paths in `custom-elements.json` so they point to the dist file instead of the source file [#725](https://github.com/shoelace-style/shoelace/issues/725)
+- Fixed an incorrect return value for `reportValidity()` in `<sl-color-picker>`
 - Improved `<sl-badge>` to improve padding and render relative to the current font size
+- Improved how many components display in forced-colors mode / Windows High Contrast mode
+  - Improved `<sl-color-picker>` so it's usable in forced-colors mode
+  - Improved `<sl-dialog>` and `<sl-drawer>` so the panel is more visible in forced-colors mode
+  - Improved `<sl-menu-item>` so selections are visible in forced-colors mode
+  - Improved `<sl-progress-bar>` so it's visible in forced-colors mode
+  - Improved `<sl-radio-button>` so checked states are visible in forced-colors mode
+  - Improved `<sl-range>` so the thumb, track, and tooltips are visible in forced-colors mode
+  - Improved `<sl-rating>` so icons are visible in forced-colors mode
+  - Improved `<sl-split-panel>` so the divider is visible in forced-colors mode
+  - Improved `<sl-tree-item>` so selected items are visible in forced-colors mode
+  - Improved `<sl-tab-group>` so tabs are cleaner and easier to understand in forced-colors mode
+- Improved positioning of the menu in `<sl-select>` so you can customize the menu width [#1018](https://github.com/shoelace-style/shoelace/issues/1018)
+- Moved all component descriptions to `@summary` to get them within documentation tools [#962](https://github.com/shoelace-style/shoelace/pull/962)
+- Refactored form controls to use the `ShoelaceFormControl` interface to improve type safety and consistency
+- Updated Lit to 2.4.1
+- Updated `@shoelace-style/localize` t0 3.0.3 to support for extended language codes
+- Updated Bootstrap Icons to 1.10.2
+- Updated TypeScript to 4.8.4
+- Updated esbuild to 0.15.14
+- Updated all other dependencies to latest versions
 
 ## 2.0.0-beta.83
 
@@ -427,7 +504,7 @@ Thank you for your help and patience with testing Shoelace. I promise, we're not
 - Improved a11y of the scroll buttons in `<sl-tab-group>`
 - Improved a11y of the close button in `<sl-tab>`
 - Improved a11y of `<sl-tab-panel>` by removing an invalid `aria-selected` attribute [#579](https://github.com/shoelace-style/shoelace/issues/579)
-- Improved a11y of `<sl-icon>` by not using a variation of the `name` attribute for labels (use the `label` prop instead)
+- Improved a11y of `<sl-icon>` by not using a variation of the `name` attribute for labels (use the `label` attribute instead)
 - Moved `role` from the shadow root to the host element in `<sl-menu>`
 - Removed redundant `role="menu"` in `<sl-dropdown>`
 - Slightly faster animations for showing and hiding `<sl-dropdown>`
@@ -489,7 +566,7 @@ This release is the second attempt at unbundling dependencies. This will be a br
 Shoelace doesn't have a lot of dependencies, but this release unbundles most of them so you can potentially save some extra kilobytes. This will be a breaking change only if your configuration _does not_ support bare module specifiers. CDN users and bundler users will be unaffected.
 
 - 🚨 BREAKING: renamed the `sl-clear` event to `sl-remove`, the `clear-button` part to `remove-button`, and the `clearable` property to `removable` in `<sl-tag>`
-- Added the `disabled` prop to `<sl-resize-observer>`
+- Added the `disabled` attribute to `<sl-resize-observer>`
 - Fixed a bug in `<sl-mutation-observer>` where setting `disabled` initially didn't work
 - Unbundled dependencies and configured external imports to be packaged with bare module specifiers
 

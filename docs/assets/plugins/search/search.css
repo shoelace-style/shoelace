@@ -178,3 +178,15 @@ body.site-search-visible {
     display: none;
   }
 }
+
+/* Forced colors mode */
+@media (forced-colors: active) {
+  .site-search__panel {
+    border: solid 1px var(--sl-color-neutral-0);
+  }
+
+  .site-search__results li[aria-selected='true'] a {
+    outline: dashed 1px SelectedItem;
+    outline-offset: -1px;
+  }
+}

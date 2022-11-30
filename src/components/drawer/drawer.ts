@@ -43,6 +43,7 @@ import type { CSSResultGroup } from 'lit';
  * @csspart overlay - The overlay.
  * @csspart panel - The drawer panel (where the drawer and its content is rendered).
  * @csspart header - The drawer header.
+ * @csspart header-actions - Optional actions to add to the header. Works best with `<sl-icon-button>`.
  * @csspart title - The drawer title.
  * @csspart close-button - The close button.
  * @csspart close-button__base - The close button's `base` part.
@@ -95,7 +96,7 @@ export default class SlDrawer extends ShoelaceElement {
 
   /**
    * By default, the drawer slides out of its containing block (usually the viewport). To make the drawer slide out of
-   * its parent element, set this prop and add `position: relative` to the parent.
+   * its parent element, set this attribute and add `position: relative` to the parent.
    */
   @property({ type: Boolean, reflect: true }) contained = false;
 
@@ -107,6 +108,7 @@ export default class SlDrawer extends ShoelaceElement {
 
   connectedCallback() {
     super.connectedCallback();
+    this.handleDocumentKeyDown = this.handleDocumentKeyDown.bind(this);
     this.modal = new Modal(this);
   }
 
@@ -114,6 +116,7 @@ export default class SlDrawer extends ShoelaceElement {
     this.drawer.hidden = !this.open;
 
     if (this.open && !this.contained) {
+      this.addOpenListeners();
       this.modal.activate();
       lockBodyScrolling(this);
     }
@@ -159,8 +162,16 @@ export default class SlDrawer extends ShoelaceElement {
     this.hide();
   }
 
-  handleKeyDown(event: KeyboardEvent) {
-    if (event.key === 'Escape') {
+  addOpenListeners() {
+    document.addEventListener('keydown', this.handleDocumentKeyDown);
+  }
+
+  removeOpenListeners() {
+    document.removeEventListener('keydown', this.handleDocumentKeyDown);
+  }
+
+  handleDocumentKeyDown(event: KeyboardEvent) {
+    if (this.open && event.key === 'Escape') {
       event.stopPropagation();
       this.requestClose('keyboard');
     }
@@ -171,6 +182,7 @@ export default class SlDrawer extends ShoelaceElement {
     if (this.open) {
       // Show
       this.emit('sl-show');
+      this.addOpenListeners();
       this.originalTrigger = document.activeElement as HTMLElement;
 
       // Lock body scrolling only if the drawer isn't contained
@@ -225,6 +237,7 @@ export default class SlDrawer extends ShoelaceElement {
     } else {
       // Hide
       this.emit('sl-hide');
+      this.removeOpenListeners();
       this.modal.deactivate();
       unlockBodyScrolling(this);
 
@@ -262,7 +275,6 @@ export default class SlDrawer extends ShoelaceElement {
     }
   }
 
-  /* eslint-disable lit-a11y/click-events-have-key-events */
   render() {
     return html`
       <div
@@ -279,7 +291,6 @@ export default class SlDrawer extends ShoelaceElement {
           'drawer--rtl': this.localize.dir() === 'rtl',
           'drawer--has-footer': this.hasSlotController.test('footer')
         })}
-        @keydown=${this.handleKeyDown}
       >
         <div part="overlay" class="drawer__overlay" @click=${() => this.requestClose('overlay')} tabindex="-1"></div>
 
@@ -300,15 +311,18 @@ export default class SlDrawer extends ShoelaceElement {
                     <!-- If there's no label, use an invisible character to prevent the header from collapsing -->
                     <slot name="label"> ${this.label.length > 0 ? this.label : String.fromCharCode(65279)} </slot>
                   </h2>
-                  <sl-icon-button
-                    part="close-button"
-                    exportparts="base:close-button__base"
-                    class="drawer__close"
-                    name="x"
-                    label=${this.localize.term('close')}
-                    library="system"
-                    @click=${() => this.requestClose('close-button')}
-                  ></sl-icon-button>
+                  <div part="header-actions" class="drawer__header-actions">
+                    <slot name="header-actions"></slot>
+                    <sl-icon-button
+                      part="close-button"
+                      exportparts="base:close-button__base"
+                      class="drawer__close"
+                      name="x-lg"
+                      label=${this.localize.term('close')}
+                      library="system"
+                      @click=${() => this.requestClose('close-button')}
+                    ></sl-icon-button>
+                  </div>
                 </header>
               `
             : ''}
@@ -323,7 +337,6 @@ export default class SlDrawer extends ShoelaceElement {
         </div>
       </div>
     `;
-    /* eslint-enable lit-a11y/click-events-have-key-events */
   }
 }
 

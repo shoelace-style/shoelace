@@ -14,7 +14,6 @@ export default css`
 
   .tab-group {
     display: flex;
-    border: solid 1px transparent;
     border-radius: 0;
   }
 

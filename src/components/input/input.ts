@@ -11,6 +11,7 @@ import { watch } from '../../internal/watch';
 import { LocalizeController } from '../../utilities/localize';
 import '../icon/icon';
 import styles from './input.styles';
+import type { ShoelaceFormControl } from '../../internal/shoelace-element';
 import type { CSSResultGroup } from 'lit';
 
 // It's currently impossible to hide Firefox's built-in clear icon when using <input type="date|time">, so we need this
@@ -58,7 +59,7 @@ const isFirefox = isChromium ? false : navigator.userAgent.includes('Firefox');
  * @csspart suffix - The input suffix container.
  */
 @customElement('sl-input')
-export default class SlInput extends ShoelaceElement {
+export default class SlInput extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
 
   @query('.input__control') input: HTMLInputElement;
@@ -68,6 +69,7 @@ export default class SlInput extends ShoelaceElement {
   private readonly localize = new LocalizeController(this);
 
   @state() private hasFocus = false;
+  @state() invalid = false;
 
   /** The input's type. */
   @property({ reflect: true }) type:
@@ -86,14 +88,13 @@ export default class SlInput extends ShoelaceElement {
   @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
 
   /** The input's name attribute. */
-  @property() name: string;
+  @property() name = '';
 
   /** The input's value attribute. */
   @property() value = '';
 
   /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
-  @defaultValue()
-  defaultValue = '';
+  @defaultValue() defaultValue = '';
 
   /** Draws a filled input. */
   @property({ type: Boolean, reflect: true }) filled = false;
@@ -120,7 +121,7 @@ export default class SlInput extends ShoelaceElement {
   @property({ attribute: 'no-spin-buttons', type: Boolean }) noSpinButtons = false;
 
   /** The input's placeholder text. */
-  @property() placeholder: string;
+  @property() placeholder = '';
 
   /** Disables the input. */
   @property({ type: Boolean, reflect: true }) disabled = false;
@@ -135,10 +136,10 @@ export default class SlInput extends ShoelaceElement {
   @property({ type: Number }) maxlength: number;
 
   /** The input's minimum value. */
-  @property() min: number | string;
+  @property() min: number;
 
   /** The input's maximum value. */
-  @property() max: number | string;
+  @property() max: number;
 
   /**
    * Specifies the granularity that the value must adhere to, or the special value `any` which means no stepping is
@@ -151,12 +152,6 @@ export default class SlInput extends ShoelaceElement {
 
   /** Makes the input a required field. */
   @property({ type: Boolean, reflect: true }) required = false;
-
-  /**
-   * This will be true when the control is in an invalid state. Validity is determined by props such as `type`,
-   * `required`, `minlength`, `maxlength`, and `pattern` using the browser's constraint validation API.
-   */
-  @property({ type: Boolean, reflect: true }) invalid = false;
 
   /** The input's autocapitalize attribute. */
   @property() autocapitalize: 'off' | 'none' | 'on' | 'sentences' | 'words' | 'characters';
@@ -252,6 +247,38 @@ export default class SlInput extends ShoelaceElement {
     }
   }
 
+  /** Displays the browser picker for an input element (only works if the browser supports it for the input type). */
+  showPicker() {
+    if ('showPicker' in HTMLInputElement.prototype) {
+      this.input.showPicker();
+    }
+  }
+
+  /** Increments the value of a numeric input type by the value of the step attribute. */
+  stepUp() {
+    this.input.stepUp();
+    if (this.value !== this.input.value) {
+      this.value = this.input.value;
+      this.emit('sl-input');
+      this.emit('sl-change');
+    }
+  }
+
+  /** Decrements the value of a numeric input type by the value of the step attribute. */
+  stepDown() {
+    this.input.stepDown();
+    if (this.value !== this.input.value) {
+      this.value = this.input.value;
+      this.emit('sl-input');
+      this.emit('sl-change');
+    }
+  }
+
+  /** Checks for validity but does not show the browser's validation message. */
+  checkValidity() {
+    return this.input.checkValidity();
+  }
+
   /** Checks for validity and shows the browser's validation message if the control is invalid. */
   reportValidity() {
     return this.input.reportValidity();
@@ -319,7 +346,13 @@ export default class SlInput extends ShoelaceElement {
     // submitting to allow users to cancel the keydown event if they need to
     if (event.key === 'Enter' && !hasModifier) {
       setTimeout(() => {
-        if (!event.defaultPrevented) {
+        //
+        // When using an Input Method Editor (IME), pressing enter will cause the form to submit unexpectedly. One way
+        // to check for this is to look at event.isComposing, which will be true when the IME is open.
+        //
+        // See https://github.com/shoelace-style/shoelace/pull/988
+        //
+        if (!event.defaultPrevented && !event.isComposing) {
           this.formSubmitController.submit();
         }
       });
@@ -332,6 +365,7 @@ export default class SlInput extends ShoelaceElement {
 
   @watch('value', { waitUntilFirstUpdate: true })
   handleValueChange() {
+    this.input.value = this.value; // force a sync update
     this.invalid = !this.input.checkValidity();
   }
 
@@ -396,6 +430,7 @@ export default class SlInput extends ShoelaceElement {
               id="input"
               class="input__control"
               type=${this.type === 'password' && this.passwordVisible ? 'text' : this.type}
+              title=${'' /* An empty title prevents browser validation tooltips from appearing on hover */}
               name=${ifDefined(this.name)}
               ?disabled=${this.disabled}
               ?readonly=${this.readonly}

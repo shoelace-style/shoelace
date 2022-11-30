@@ -10,9 +10,46 @@ describe('<sl-input>', () => {
     await expect(el).to.be.accessible();
   });
 
+  it('default properties', async () => {
+    const el = await fixture<SlInput>(html` <sl-input></sl-input> `);
+
+    expect(el.type).to.equal('text');
+    expect(el.size).to.equal('medium');
+    expect(el.name).to.equal('');
+    expect(el.value).to.equal('');
+    expect(el.defaultValue).to.equal('');
+    expect(el.filled).to.be.false;
+    expect(el.pill).to.be.false;
+    expect(el.label).to.equal('');
+    expect(el.helpText).to.equal('');
+    expect(el.clearable).to.be.false;
+    expect(el.passwordToggle).to.be.false;
+    expect(el.passwordVisible).to.be.false;
+    expect(el.noSpinButtons).to.be.false;
+    expect(el.placeholder).to.equal('');
+    expect(el.disabled).to.be.false;
+    expect(el.readonly).to.be.false;
+    expect(el.minlength).to.be.undefined;
+    expect(el.maxlength).to.be.undefined;
+    expect(el.min).to.be.undefined;
+    expect(el.max).to.be.undefined;
+    expect(el.step).to.be.undefined;
+    expect(el.pattern).to.be.undefined;
+    expect(el.required).to.be.false;
+    expect(el.autocapitalize).to.be.undefined;
+    expect(el.autocorrect).to.be.undefined;
+    expect(el.autocomplete).to.be.undefined;
+    expect(el.autofocus).to.be.undefined;
+    expect(el.enterkeyhint).to.be.undefined;
+    expect(el.spellcheck).to.be.undefined;
+    expect(el.inputmode).to.be.undefined;
+    expect(el.valueAsDate).to.be.null;
+    expect(isNaN(el.valueAsNumber)).to.be.true;
+  });
+
   it('should be disabled with the disabled attribute', async () => {
     const el = await fixture<SlInput>(html` <sl-input disabled></sl-input> `);
-    const input = el.shadowRoot!.querySelector<HTMLInputElement>('[part="input"]')!;
+    const input = el.shadowRoot!.querySelector<HTMLInputElement>('[part~="input"]')!;
 
     expect(input.disabled).to.be.true;
   });
@@ -39,7 +76,7 @@ describe('<sl-input>', () => {
 
   it('should focus the input when clicking on the label', async () => {
     const el = await fixture<SlInput>(html` <sl-input label="Name"></sl-input> `);
-    const label = el.shadowRoot!.querySelector('[part="form-control-label"]')!;
+    const label = el.shadowRoot!.querySelector('[part~="form-control-label"]')!;
     const submitHandler = sinon.spy();
 
     el.addEventListener('sl-focus', submitHandler);
@@ -207,6 +244,53 @@ describe('<sl-input>', () => {
       el.step = 1;
       await el.updateComplete;
       expect(el.invalid).to.be.true;
+    });
+
+    it('should increment by step if stepUp() is called', async () => {
+      const el = await fixture<SlInput>(html` <sl-input type="number" step="2" value="2"></sl-input> `);
+
+      el.stepUp();
+      await el.updateComplete;
+      expect(el.value).to.equal('4');
+    });
+
+    it('should decrement by step if stepDown() is called', async () => {
+      const el = await fixture<SlInput>(html` <sl-input type="number" step="2" value="2"></sl-input> `);
+
+      el.stepDown();
+      await el.updateComplete;
+      expect(el.value).to.equal('0');
+    });
+
+    it('should fire sl-input and sl-change if stepUp() is called', async () => {
+      const el = await fixture<SlInput>(html` <sl-input type="number" step="2" value="2"></sl-input> `);
+
+      const inputHandler = sinon.spy();
+      const changeHandler = sinon.spy();
+      el.addEventListener('sl-input', inputHandler);
+      el.addEventListener('sl-change', changeHandler);
+
+      el.stepUp();
+
+      await waitUntil(() => inputHandler.calledOnce);
+      await waitUntil(() => changeHandler.calledOnce);
+      expect(inputHandler).to.have.been.calledOnce;
+      expect(changeHandler).to.have.been.calledOnce;
+    });
+
+    it('should fire sl-input and sl-change if stepDown() is called', async () => {
+      const el = await fixture<SlInput>(html` <sl-input type="number" step="2" value="2"></sl-input> `);
+
+      const inputHandler = sinon.spy();
+      const changeHandler = sinon.spy();
+      el.addEventListener('sl-input', inputHandler);
+      el.addEventListener('sl-change', changeHandler);
+
+      el.stepUp();
+
+      await waitUntil(() => inputHandler.calledOnce);
+      await waitUntil(() => changeHandler.calledOnce);
+      expect(changeHandler).to.have.been.calledOnce;
     });
   });
 });

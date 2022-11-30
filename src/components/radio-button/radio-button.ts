@@ -57,9 +57,14 @@ export default class SlRadioButton extends ShoelaceElement {
     this.setAttribute('role', 'presentation');
   }
 
-  @watch('disabled', { waitUntilFirstUpdate: true })
-  handleDisabledChange() {
-    this.setAttribute('aria-disabled', this.disabled ? 'true' : 'false');
+  /** Sets focus on the button. */
+  focus(options?: FocusOptions) {
+    this.input.focus(options);
+  }
+
+  /** Removes focus from the button. */
+  blur() {
+    this.input.blur();
   }
 
   handleBlur() {
@@ -75,6 +80,11 @@ export default class SlRadioButton extends ShoelaceElement {
     }
 
     this.checked = true;
+  }
+
+  @watch('disabled', { waitUntilFirstUpdate: true })
+  handleDisabledChange() {
+    this.setAttribute('aria-disabled', this.disabled ? 'true' : 'false');
   }
 
   handleFocus() {

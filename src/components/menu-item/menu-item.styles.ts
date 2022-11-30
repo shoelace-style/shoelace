@@ -80,4 +80,12 @@ export default css`
   .menu-item--has-submenu .menu-item__chevron {
     visibility: visible;
   }
+
+  @media (forced-colors: active) {
+    :host(:hover:not([aria-disabled='true'])) .menu-item,
+    :host(:focus-visible:not(.sl-focus-invisible):not([aria-disabled='true'])) .menu-item {
+      outline: dashed 1px SelectedItem;
+      outline-offset: -1px;
+    }
+  }
 `;

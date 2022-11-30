@@ -21,7 +21,7 @@ describe('<sl-progress-ring>', () => {
       el = await fixture<SlProgressRing>(
         html`<sl-progress-ring title="Titled Progress Ring" value="25"></sl-progress-ring>`
       );
-      base = el.shadowRoot!.querySelector('[part="base"]')!;
+      base = el.shadowRoot!.querySelector('[part~="base"]')!;
     });
 
     it('should pass accessibility tests', async () => {

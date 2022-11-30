@@ -22,8 +22,8 @@ describe('<sl-progress-bar>', () => {
       el = await fixture<SlProgressBar>(
         html`<sl-progress-bar title="Titled Progress Ring" value="25"></sl-progress-bar>`
       );
-      base = el.shadowRoot!.querySelector('[part="base"]')!;
-      indicator = el.shadowRoot!.querySelector('[part="indicator"]')!;
+      base = el.shadowRoot!.querySelector('[part~="base"]')!;
+      indicator = el.shadowRoot!.querySelector('[part~="indicator"]')!;
     });
 
     it('should pass accessibility tests', async () => {
@@ -46,7 +46,7 @@ describe('<sl-progress-bar>', () => {
       el = await fixture<SlProgressBar>(
         html`<sl-progress-bar title="Titled Progress Ring" indeterminate></sl-progress-bar>`
       );
-      base = el.shadowRoot!.querySelector('[part="base"]')!;
+      base = el.shadowRoot!.querySelector('[part~="base"]')!;
     });
 
     it('should pass accessibility tests', async () => {

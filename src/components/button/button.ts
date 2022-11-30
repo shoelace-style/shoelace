@@ -5,9 +5,12 @@ import { html, literal } from 'lit/static-html.js';
 import { FormSubmitController } from '../../internal/form';
 import ShoelaceElement from '../../internal/shoelace-element';
 import { HasSlotController } from '../../internal/slot';
+import { watch } from '../../internal/watch';
 import { LocalizeController } from '../../utilities/localize';
+import '../icon/icon';
 import '../spinner/spinner';
 import styles from './button.styles';
+import type { ShoelaceFormControl } from '../../internal/shoelace-element';
 import type { CSSResultGroup } from 'lit';
 
 /**
@@ -16,6 +19,7 @@ import type { CSSResultGroup } from 'lit';
  * @since 2.0
  * @status stable
  *
+ * @dependency sl-icon
  * @dependency sl-spinner
  *
  * @event sl-blur - Emitted when the button loses focus.
@@ -29,16 +33,16 @@ import type { CSSResultGroup } from 'lit';
  * @csspart prefix - The prefix slot's container.
  * @csspart label - The button's label.
  * @csspart suffix - The suffix slot's container.
- * @csspart caret - The button's caret.
+ * @csspart caret - The button's caret icon.
  */
 @customElement('sl-button')
-export default class SlButton extends ShoelaceElement {
+export default class SlButton extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
 
   @query('.button') button: HTMLButtonElement | HTMLLinkElement;
 
   private readonly formSubmitController = new FormSubmitController(this, {
-    form: (input: HTMLInputElement) => {
+    form: input => {
       // Buttons support a form attribute that points to an arbitrary form, so if this attribute it set we need to query
       // the form from the same root using its id
       if (input.hasAttribute('form')) {
@@ -55,6 +59,7 @@ export default class SlButton extends ShoelaceElement {
   private readonly localize = new LocalizeController(this);
 
   @state() private hasFocus = false;
+  @state() invalid = false;
 
   /** The button's variant. */
   @property({ reflect: true }) variant: 'default' | 'primary' | 'success' | 'neutral' | 'warning' | 'danger' | 'text' =
@@ -88,16 +93,16 @@ export default class SlButton extends ShoelaceElement {
   @property() type: 'button' | 'submit' | 'reset' = 'button';
 
   /** An optional name for the button. Ignored when `href` is set. */
-  @property() name?: string;
+  @property() name = '';
 
   /** An optional value for the button. Ignored when `href` is set. */
-  @property() value?: string;
+  @property() value = '';
 
   /** When set, the underlying button will be rendered as an `<a>` with this `href` instead of a `<button>`. */
-  @property() href?: string;
+  @property() href = '';
 
   /** Tells the browser where to open the link. Only used when `href` is set. */
-  @property() target?: '_blank' | '_parent' | '_self' | '_top';
+  @property() target: '_blank' | '_parent' | '_self' | '_top';
 
   /** Tells the browser to download the linked file as this filename. Only used when `href` is set. */
   @property() download?: string;
@@ -111,6 +116,10 @@ export default class SlButton extends ShoelaceElement {
   /** Used to override the form owner's `action` attribute. */
   @property({ attribute: 'formaction' }) formAction: string;
 
+  /** Used to override the form owner's `enctype` attribute.  */
+  @property({ attribute: 'formenctype' })
+  formEnctype: 'application/x-www-form-urlencoded' | 'multipart/form-data' | 'text/plain';
+
   /** Used to override the form owner's `method` attribute.  */
   @property({ attribute: 'formmethod' }) formMethod: 'post' | 'get';
 
@@ -119,6 +128,12 @@ export default class SlButton extends ShoelaceElement {
 
   /** Used to override the form owner's `target` attribute. */
   @property({ attribute: 'formtarget' }) formTarget: '_self' | '_blank' | '_parent' | '_top' | string;
+
+  firstUpdated() {
+    if (this.isButton()) {
+      this.invalid = !(this.button as HTMLButtonElement).checkValidity();
+    }
+  }
 
   /** Simulates a click on the button. */
   click() {
@@ -133,6 +148,32 @@ export default class SlButton extends ShoelaceElement {
   /** Removes focus from the button. */
   blur() {
     this.button.blur();
+  }
+
+  /** Checks for validity but does not show the browser's validation message. */
+  checkValidity() {
+    if (this.isButton()) {
+      return (this.button as HTMLButtonElement).checkValidity();
+    }
+
+    return true;
+  }
+
+  /** Checks for validity and shows the browser's validation message if the control is invalid. */
+  reportValidity() {
+    if (this.isButton()) {
+      return (this.button as HTMLButtonElement).reportValidity();
+    }
+
+    return true;
+  }
+
+  /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
+  setCustomValidity(message: string) {
+    if (this.isButton()) {
+      (this.button as HTMLButtonElement).setCustomValidity(message);
+      this.invalid = !(this.button as HTMLButtonElement).checkValidity();
+    }
   }
 
   handleBlur() {
@@ -161,11 +202,29 @@ export default class SlButton extends ShoelaceElement {
     }
   }
 
+  @watch('disabled', { waitUntilFirstUpdate: true })
+  handleDisabledChange() {
+    // Disabled form controls are always valid, so we need to recheck validity when the state changes
+    if (this.isButton()) {
+      this.button.disabled = this.disabled;
+      this.invalid = !(this.button as HTMLButtonElement).checkValidity();
+    }
+  }
+
+  private isButton() {
+    return this.href ? false : true;
+  }
+
+  private isLink() {
+    return this.href ? true : false;
+  }
+
   render() {
-    const isLink = this.href ? true : false;
+    const isLink = this.isLink();
     const tag = isLink ? literal`a` : literal`button`;
 
-    /* eslint-disable lit/binding-positions, lit/no-invalid-html */
+    /* eslint-disable lit/no-invalid-html */
+    /* eslint-disable lit/binding-positions */
     return html`
       <${tag}
         part="base"
@@ -196,6 +255,7 @@ export default class SlButton extends ShoelaceElement {
         })}
         ?disabled=${ifDefined(isLink ? undefined : this.disabled)}
         type=${ifDefined(isLink ? undefined : this.type)}
+        title=${'' /* An empty title prevents browser validation tooltips from appearing on hover */}
         name=${ifDefined(isLink ? undefined : this.name)}
         value=${ifDefined(isLink ? undefined : this.value)}
         href=${ifDefined(isLink ? this.href : undefined)}
@@ -219,27 +279,13 @@ export default class SlButton extends ShoelaceElement {
           <slot name="suffix"></slot>
         </span>
         ${
-          this.caret
-            ? html`
-                <span part="caret" class="button__caret">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <polyline points="6 9 12 15 18 9"></polyline>
-                  </svg>
-                </span>
-              `
-            : ''
+          this.caret ? html` <sl-icon part="caret" class="button__caret" library="system" name="caret"></sl-icon> ` : ''
         }
         ${this.loading ? html`<sl-spinner></sl-spinner>` : ''}
       </${tag}>
     `;
-    /* eslint-enable lit/binding-positions, lit/no-invalid-html */
+    /* eslint-enable lit/no-invalid-html */
+    /* eslint-enable lit/binding-positions */
   }
 }
 

@@ -153,11 +153,11 @@ A clever way to use this method is to hide the `<body>` with `opacity: 0` and ad
 
 ### VS Code
 
-Shoelace ships with a file called `vscode.html-custom-data.json` that can be used to describe its components to Visual Studio Code. This enables code completion for Shoelace components (also known as "code hinting" or "IntelliSense"). To enable it, you need to tell VS Code where the file is.
+Shoelace ships with a file called `vscode.html-custom-data.json` that can be used to describe it's custom elements to Visual Studio Code. This enables code completion for Shoelace components (also known as "code hinting" or "IntelliSense"). To enable it, you need to tell VS Code where the file is.
 
 1. [Install Shoelace locally](/getting-started/installation#local-installation)
-2. Create a folder called `.vscode` at the root of your project
-3. Create a file inside the folder called `settings.json`
+2. If it doesn't already exist, create a folder called `.vscode` at the root of your project
+3. If it doesn't already exist, create a file inside that folder called `settings.json`
 4. Add the following to the file
 
 ```js

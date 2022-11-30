@@ -50,7 +50,7 @@ export default class SlAlert extends ShoelaceElement {
   private readonly hasSlotController = new HasSlotController(this, 'icon', 'suffix');
   private readonly localize = new LocalizeController(this);
 
-  @query('[part="base"]') base: HTMLElement;
+  @query('[part~="base"]') base: HTMLElement;
 
   /** Indicates whether or not the alert is open. You can use this in lieu of the show/hide methods. */
   @property({ type: Boolean, reflect: true }) open = false;
@@ -194,8 +194,6 @@ export default class SlAlert extends ShoelaceElement {
           'alert--danger': this.variant === 'danger'
         })}
         role="alert"
-        aria-live="assertive"
-        aria-atomic="true"
         aria-hidden=${this.open ? 'false' : 'true'}
         @mousemove=${this.handleMouseMove}
       >
@@ -203,7 +201,7 @@ export default class SlAlert extends ShoelaceElement {
           <slot name="icon"></slot>
         </span>
 
-        <span part="message" class="alert__message">
+        <span part="message" class="alert__message" aria-live="polite">
           <slot></slot>
         </span>
 
@@ -213,8 +211,9 @@ export default class SlAlert extends ShoelaceElement {
                 part="close-button"
                 exportparts="base:close-button__base"
                 class="alert__close-button"
-                name="x"
+                name="x-lg"
                 library="system"
+                label=${this.localize.term('close')}
                 @click=${this.handleCloseClick}
               ></sl-icon-button>
             `

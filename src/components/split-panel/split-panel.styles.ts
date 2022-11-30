@@ -72,4 +72,10 @@ export default css`
     top: calc(var(--divider-hit-area) / -2 + var(--divider-width) / 2);
     height: var(--divider-hit-area);
   }
+
+  @media (forced-colors: active) {
+    .divider {
+      outline: solid 1px transparent;
+    }
+  }
 `;

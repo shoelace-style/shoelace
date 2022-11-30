@@ -13,6 +13,7 @@ import '../icon/icon';
 import '../menu/menu';
 import '../tag/tag';
 import styles from './select.styles';
+import type { ShoelaceFormControl } from '../../internal/shoelace-element';
 import type SlDropdown from '../dropdown/dropdown';
 import type SlIconButton from '../icon-button/icon-button';
 import type SlMenuItem from '../menu-item/menu-item';
@@ -41,6 +42,7 @@ import type { TemplateResult, CSSResultGroup } from 'lit';
  *
  * @event sl-clear - Emitted when the clear button is activated.
  * @event sl-change - Emitted when the control's value changes.
+ * @event sl-input - Emitted when the control receives input.
  * @event sl-focus - Emitted when the control gains focus.
  * @event sl-blur - Emitted when the control loses focus.
  *
@@ -63,7 +65,7 @@ import type { TemplateResult, CSSResultGroup } from 'lit';
  * @csspart tags - The container in which multi select options are rendered.
  */
 @customElement('sl-select')
-export default class SlSelect extends ShoelaceElement {
+export default class SlSelect extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
 
   @query('.select') dropdown: SlDropdown;
@@ -82,6 +84,7 @@ export default class SlSelect extends ShoelaceElement {
   @state() private isOpen = false;
   @state() private displayLabel = '';
   @state() private displayTags: TemplateResult[] = [];
+  @state() invalid = false;
 
   /** Enables multi select. With this enabled, value will be an array. */
   @property({ type: Boolean, reflect: true }) multiple = false;
@@ -137,12 +140,8 @@ export default class SlSelect extends ShoelaceElement {
   /** Adds a clear button when the select is populated. */
   @property({ type: Boolean }) clearable = false;
 
-  /** This will be true when the control is in an invalid state. Validity is determined by the `required` prop. */
-  @property({ type: Boolean, reflect: true }) invalid = false;
-
   /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
-  @defaultValue()
-  defaultValue = '';
+  @defaultValue() defaultValue = '';
 
   connectedCallback() {
     super.connectedCallback();
@@ -161,6 +160,11 @@ export default class SlSelect extends ShoelaceElement {
   disconnectedCallback() {
     super.disconnectedCallback();
     this.resizeObserver.unobserve(this);
+  }
+
+  /** Checks for validity but does not show the browser's validation message. */
+  checkValidity() {
+    return this.input.checkValidity();
   }
 
   /** Checks for validity and shows the browser's validation message if the control is invalid. */
@@ -365,8 +369,11 @@ export default class SlSelect extends ShoelaceElement {
   async handleValueChange() {
     this.syncItemsFromValue();
     await this.updateComplete;
+
     this.invalid = !this.input.checkValidity();
+
     this.emit('sl-change');
+    this.emit('sl-input');
   }
 
   resizeMenu() {
@@ -485,7 +492,7 @@ export default class SlSelect extends ShoelaceElement {
           <sl-dropdown
             part="base"
             .hoist=${this.hoist}
-            .placement=${this.placement}
+            .placement=${this.placement === 'bottom' ? 'bottom-start' : 'top-start'}
             .stayOpenOnSelect=${this.multiple}
             .containingElement=${this as HTMLElement}
             ?disabled=${this.disabled}

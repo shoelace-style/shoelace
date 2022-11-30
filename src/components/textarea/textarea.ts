@@ -9,6 +9,7 @@ import ShoelaceElement from '../../internal/shoelace-element';
 import { HasSlotController } from '../../internal/slot';
 import { watch } from '../../internal/watch';
 import styles from './textarea.styles';
+import type { ShoelaceFormControl } from '../../internal/shoelace-element';
 import type { CSSResultGroup } from 'lit';
 
 /**
@@ -33,7 +34,7 @@ import type { CSSResultGroup } from 'lit';
  * @csspart textarea - The textarea control.
  */
 @customElement('sl-textarea')
-export default class SlTextarea extends ShoelaceElement {
+export default class SlTextarea extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
 
   @query('.textarea__control') input: HTMLTextAreaElement;
@@ -44,12 +45,13 @@ export default class SlTextarea extends ShoelaceElement {
   private resizeObserver: ResizeObserver;
 
   @state() private hasFocus = false;
+  @state() invalid = false;
 
   /** The textarea's size. */
   @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
 
   /** The textarea's name attribute. */
-  @property() name: string;
+  @property() name = '';
 
   /** The textarea's value attribute. */
   @property() value = '';
@@ -64,7 +66,7 @@ export default class SlTextarea extends ShoelaceElement {
   @property({ attribute: 'help-text' }) helpText = '';
 
   /** The textarea's placeholder text. */
-  @property() placeholder: string;
+  @property() placeholder = '';
 
   /** The number of rows to display by default. */
   @property({ type: Number }) rows = 4;
@@ -86,12 +88,6 @@ export default class SlTextarea extends ShoelaceElement {
 
   /** Makes the textarea a required field. */
   @property({ type: Boolean, reflect: true }) required = false;
-
-  /**
-   * This will be true when the control is in an invalid state. Validity is determined by props such as `type`,
-   * `required`, `minlength`, and `maxlength` using the browser's constraint validation API.
-   */
-  @property({ type: Boolean, reflect: true }) invalid = false;
 
   /** The textarea's autocapitalize attribute. */
   @property() autocapitalize: 'off' | 'none' | 'on' | 'sentences' | 'words' | 'characters';
@@ -118,8 +114,7 @@ export default class SlTextarea extends ShoelaceElement {
   @property() inputmode: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
 
   /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
-  @defaultValue()
-  defaultValue = '';
+  @defaultValue() defaultValue = '';
 
   connectedCallback() {
     super.connectedCallback();
@@ -200,6 +195,11 @@ export default class SlTextarea extends ShoelaceElement {
     }
   }
 
+  /** Checks for validity but does not show the browser's validation message. */
+  checkValidity() {
+    return this.input.checkValidity();
+  }
+
   /** Checks for validity and shows the browser's validation message if the control is invalid. */
   reportValidity() {
     return this.input.reportValidity();
@@ -246,6 +246,7 @@ export default class SlTextarea extends ShoelaceElement {
 
   @watch('value', { waitUntilFirstUpdate: true })
   handleValueChange() {
+    this.input.value = this.value; // force a sync update
     this.invalid = !this.input.checkValidity();
     this.updateComplete.then(() => this.setTextareaHeight());
   }
@@ -309,6 +310,7 @@ export default class SlTextarea extends ShoelaceElement {
               part="textarea"
               id="input"
               class="textarea__control"
+              title=${'' /* An empty title prevents browser validation tooltips from appearing on hover */}
               name=${ifDefined(this.name)}
               .value=${live(this.value)}
               ?disabled=${this.disabled}

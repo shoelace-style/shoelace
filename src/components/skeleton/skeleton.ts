@@ -34,8 +34,6 @@ export default class SlSkeleton extends ShoelaceElement {
           'skeleton--pulse': this.effect === 'pulse',
           'skeleton--sheen': this.effect === 'sheen'
         })}
-        aria-busy="true"
-        aria-live="polite"
       >
         <div part="indicator" class="skeleton__indicator"></div>
       </div>

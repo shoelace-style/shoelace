@@ -11,14 +11,14 @@ describe('<sl-textarea>', () => {
 
   it('should be disabled with the disabled attribute', async () => {
     const el = await fixture<SlTextarea>(html` <sl-textarea disabled></sl-textarea> `);
-    const textarea = el.shadowRoot!.querySelector<HTMLTextAreaElement>('[part="textarea"]')!;
+    const textarea = el.shadowRoot!.querySelector<HTMLTextAreaElement>('[part~="textarea"]')!;
 
     expect(textarea.disabled).to.be.true;
   });
 
   it('should focus the textarea when clicking on the label', async () => {
     const el = await fixture<SlTextarea>(html` <sl-textarea label="Name"></sl-textarea> `);
-    const label = el.shadowRoot!.querySelector('[part="form-control-label"]')!;
+    const label = el.shadowRoot!.querySelector('[part~="form-control-label"]')!;
     const submitHandler = sinon.spy();
 
     el.addEventListener('sl-focus', submitHandler);
