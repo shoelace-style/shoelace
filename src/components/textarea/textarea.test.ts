@@ -37,7 +37,7 @@ describe('<sl-textarea>', () => {
     expect(el.inputmode).to.be.undefined;
   });
 
-  it('should have title if title attribute isset', async () => {
+  it('should have title if title attribute is set', async () => {
     const el = await fixture<SlTextarea>(html` <sl-textarea title="Test"></sl-textarea> `);
     const textarea = el.shadowRoot!.querySelector('textarea')!;
 

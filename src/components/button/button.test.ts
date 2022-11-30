@@ -89,7 +89,7 @@ describe('<sl-button>', () => {
     });
   });
 
-  it('should have title if title attribute isset', async () => {
+  it('should have title if title attribute is set', async () => {
     const el = await fixture<SlButton>(html` <sl-button title="Test"></sl-button> `);
     const button = el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="base"]')!;
 

@@ -48,7 +48,7 @@ describe('<sl-input>', () => {
     expect(isNaN(el.valueAsNumber)).to.be.true;
   });
 
-  it('should have title if title attribute isset', async () => {
+  it('should have title if title attribute is set', async () => {
     const el = await fixture<SlInput>(html` <sl-input title="Test"></sl-input> `);
     const input = el.shadowRoot!.querySelector<HTMLInputElement>('[part~="input"]')!;
 

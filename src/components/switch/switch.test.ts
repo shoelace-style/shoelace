@@ -20,7 +20,7 @@ describe('<sl-switch>', () => {
     expect(el.defaultChecked).to.be.false;
   });
 
-  it('should have title if title attribute isset', async () => {
+  it('should have title if title attribute is set', async () => {
     const el = await fixture<SlSwitch>(html` <sl-switch title="Test"></sl-switch> `);
     const input = el.shadowRoot!.querySelector('input')!;
 

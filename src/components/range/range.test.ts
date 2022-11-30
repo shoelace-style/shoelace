@@ -26,7 +26,7 @@ describe('<sl-range>', () => {
     expect(el.defaultValue).to.equal(0);
   });
 
-  it('should have title if title attribute isset', async () => {
+  it('should have title if title attribute is set', async () => {
     const el = await fixture<SlRange>(html` <sl-range title="Test"></sl-range> `);
     const input = el.shadowRoot!.querySelector('input')!;
 
