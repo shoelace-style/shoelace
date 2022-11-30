@@ -22,7 +22,7 @@ describe('<sl-checkbox>', () => {
     expect(el.defaultChecked).to.be.false;
   });
 
-  it('should have title if title attribute isset', async () => {
+  it('should have title if title attribute is set', async () => {
     const el = await fixture<SlCheckbox>(html` <sl-checkbox title="Test"></sl-checkbox> `);
     const input = el.shadowRoot!.querySelector('input')!;
 
