@@ -54,8 +54,7 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
   /** Value of the HTML form control. Primarily used to differentiate a list of related checkboxes that have the same name. */
   @property() value: string;
 
-  /** Title of the HTML form control. */
-  @property() title = '';
+  @property() title = ''; // make reactive to pass through
 
   /** Disables the checkbox (so the user can't check / uncheck it). */
   @property({ type: Boolean, reflect: true }) disabled = false;
@@ -153,7 +152,7 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
         <input
           class="checkbox__input"
           type="checkbox"
-          title=${this.title}
+          title=${this.title /* An empty title prevents browser validation tooltips from appearing on hover */}
           name=${this.name}
           value=${ifDefined(this.value)}
           .indeterminate=${live(this.indeterminate)}

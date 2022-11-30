@@ -64,8 +64,7 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
   /** The range's value attribute. */
   @property({ type: Number }) value = 0;
 
-  /** The range's title attribute. */
-  @property() title = '';
+  @property() title = ''; // make reactive to pass through
 
   /** The range's label. If you need to display HTML, you can use the `label` slot instead. */
   @property() label = '';
@@ -289,7 +288,7 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
               part="input"
               id="input"
               class="range__control"
-              title=${this.title}
+              title=${this.title /* An empty title prevents browser validation tooltips from appearing on hover */}
               type="range"
               name=${ifDefined(this.name)}
               ?disabled=${this.disabled}

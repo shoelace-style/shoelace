@@ -93,8 +93,7 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
   /** The input's value attribute. */
   @property() value = '';
 
-  /** The input's title attribute. */
-  @property() title = '';
+  @property() title = ''; // make reactive to pass through
 
   /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue() defaultValue = '';
@@ -432,7 +431,7 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
               id="input"
               class="input__control"
               type=${this.type === 'password' && this.passwordVisible ? 'text' : this.type}
-              title=${this.title}
+              title=${this.title /* An empty title prevents browser validation tooltips from appearing on hover */}
               name=${ifDefined(this.name)}
               ?disabled=${this.disabled}
               ?readonly=${this.readonly}
