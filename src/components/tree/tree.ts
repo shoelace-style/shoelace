@@ -196,7 +196,10 @@ export default class SlTree extends ShoelaceElement {
 
     const nextSelection = this.selectedItems;
 
-    if (nextSelection.some(item => !previousSelection.includes(item))) {
+    if (
+      previousSelection.length !== nextSelection.length ||
+      nextSelection.some(item => !previousSelection.includes(item))
+    ) {
       this.emit('sl-selection-change', { detail: { selection: nextSelection } });
     }
   }
