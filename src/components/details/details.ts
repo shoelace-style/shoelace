@@ -21,7 +21,8 @@ import type { CSSResultGroup } from 'lit';
  *
  * @slot - The details' content.
  * @slot summary - The details' summary. Alternatively, you can use the `summary` attribute.
- * @slot summary-icon - The icon to show next to the summary.
+ * @slot expand-icon - The expand icon's `<slot>`.
+ * @slot collapse-icon - The collapse icon's `<slot>`.
  *
  * @event sl-show - Emitted when the details opens.
  * @event sl-after-show - Emitted after the details opens and all animations are complete.
@@ -31,7 +32,7 @@ import type { CSSResultGroup } from 'lit';
  * @csspart base - The component's internal wrapper.
  * @csspart header - The summary header.
  * @csspart summary - The details summary.
- * @csspart summary-icon - The summary icon's `<slot>` container.
+ * @csspart summary-icon - The container that houses the expand and collapse icons.
  * @csspart content - The details content.
  *
  * @animation details.show - The animation to use when showing details. You can use `height: auto` with this animation.
@@ -44,6 +45,7 @@ export default class SlDetails extends ShoelaceElement {
   @query('.details') details: HTMLElement;
   @query('.details__header') header: HTMLElement;
   @query('.details__body') body: HTMLElement;
+  @query('.details__expand-icon-slot') expandIconSlot: HTMLSlotElement;
 
   private readonly localize = new LocalizeController(this);
 
@@ -153,13 +155,16 @@ export default class SlDetails extends ShoelaceElement {
   }
 
   render() {
+    const isRtl = this.localize.dir() === 'rtl';
+
     return html`
       <div
         part="base"
         class=${classMap({
           details: true,
           'details--open': this.open,
-          'details--disabled': this.disabled
+          'details--disabled': this.disabled,
+          'details--rtl': isRtl
         })}
       >
         <header
@@ -176,9 +181,14 @@ export default class SlDetails extends ShoelaceElement {
         >
           <slot name="summary" part="summary" class="details__summary">${this.summary}</slot>
 
-          <slot name="summary-icon" part="summary-icon" class="details__summary-icon">
-            <sl-icon name="chevron-right" library="system"></sl-icon>
-          </slot>
+          <span part="summary-icon" class="details__summary-icon">
+            <slot name="expand-icon">
+              <sl-icon library="system" name=${isRtl ? 'chevron-left' : 'chevron-right'}></sl-icon>
+            </slot>
+            <slot name="collapse-icon">
+              <sl-icon library="system" name=${isRtl ? 'chevron-left' : 'chevron-right'}></sl-icon>
+            </slot>
+          </span>
         </header>
 
         <div class="details__body">
