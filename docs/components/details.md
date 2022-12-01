@@ -51,7 +51,7 @@ const App = () => (
 Use the `expand-icon` and `collapse-icon` slots to change the expand and collapse icons, respectively. To disable the animation, override the `rotate` property on the `summary-icon` part as shown below.
 
 ```html preview
-<sl-details summary="Toggle Me" class="custom-icon">
+<sl-details summary="Toggle Me" class="custom-icons">
   <sl-icon name="plus-square" slot="expand-icon"></sl-icon>
   <sl-icon name="dash-square" slot="collapse-icon"></sl-icon>
 
@@ -60,7 +60,7 @@ Use the `expand-icon` and `collapse-icon` slots to change the expand and collaps
 </sl-details>
 
 <style>
-  sl-details.custom-icon::part(summary-icon) {
+  sl-details.custom-icons::part(summary-icon) {
     /* Disable the expand/collapse animation */
     rotate: none;
   }
