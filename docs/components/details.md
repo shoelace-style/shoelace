@@ -46,6 +46,30 @@ const App = () => (
 );
 ```
 
+### Customizing the Summary Icon
+
+Use the `summary-icon` slot to change the summary icon. You can use `<sl-icon>` or your own SVG. By default, the icon will rotate 90º when the details opens and closes. If desired, you can style the `summary-icon` part to change the animation.
+
+```html preview
+<sl-details summary="Toggle Me">
+  <sl-icon slot="summary-icon" name="arrow-right"></sl-icon>
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+  aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+</sl-details>
+```
+
+```jsx react
+import { SlDetails, SlIcon } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlDetails summary="Toggle Me">
+    <SlIcon slot="summary-icon" name="arrow-right" />
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+  </SlDetails>
+);
+```
+
 ### Grouping Details
 
 Details are designed to function independently, but you can simulate a group or "accordion" where only one is shown at a time by listening for the `sl-show` event.

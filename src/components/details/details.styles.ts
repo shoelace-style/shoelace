@@ -56,11 +56,11 @@ export default css`
     flex: 0 0 auto;
     display: flex;
     align-items: center;
-    transition: var(--sl-transition-medium) transform ease;
+    transition: var(--sl-transition-medium) rotate ease;
   }
 
   .details--open .details__summary-icon {
-    transform: rotate(90deg);
+    rotate: 90deg;
   }
 
   .details__body {

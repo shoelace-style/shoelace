@@ -21,6 +21,7 @@ import type { CSSResultGroup } from 'lit';
  *
  * @slot - The details' content.
  * @slot summary - The details' summary. Alternatively, you can use the `summary` attribute.
+ * @slot summary-icon - The icon to show next to the summary.
  *
  * @event sl-show - Emitted when the details opens.
  * @event sl-after-show - Emitted after the details opens and all animations are complete.
@@ -173,13 +174,11 @@ export default class SlDetails extends ShoelaceElement {
           @click=${this.handleSummaryClick}
           @keydown=${this.handleSummaryKeyDown}
         >
-          <div part="summary" class="details__summary">
-            <slot name="summary">${this.summary}</slot>
-          </div>
+          <slot name="summary" part="summary" class="details__summary">${this.summary}</slot>
 
-          <span part="summary-icon" class="details__summary-icon">
+          <slot name="summary-icon" part="summary-icon" class="details__summary-icon">
             <sl-icon name="chevron-right" library="system"></sl-icon>
-          </span>
+          </slot>
         </header>
 
         <div class="details__body">
