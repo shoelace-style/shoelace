@@ -51,7 +51,6 @@ export default css`
   .dialog--open .dialog__panel {
     display: flex;
     opacity: 1;
-    transform: none;
   }
 
   .dialog__header {

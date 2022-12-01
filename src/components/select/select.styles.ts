@@ -147,11 +147,11 @@ export default css`
   .select__icon {
     flex: 0 0 auto;
     display: inline-flex;
-    transition: var(--sl-transition-medium) transform ease;
+    transition: var(--sl-transition-medium) rotate ease;
   }
 
   .select--open .select__icon {
-    transform: rotate(-180deg);
+    rotate: -180deg;
   }
 
   /* Placeholder */

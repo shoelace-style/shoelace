@@ -37,7 +37,7 @@ export default css`
     position: absolute;
     width: calc(var(--arrow-size-diagonal) * 2);
     height: calc(var(--arrow-size-diagonal) * 2);
-    transform: rotate(45deg);
+    rotate: 45deg;
     background: var(--arrow-color);
     z-index: -1;
   }

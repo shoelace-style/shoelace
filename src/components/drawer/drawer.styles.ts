@@ -41,7 +41,6 @@ export default css`
     max-height: 100%;
     background-color: var(--sl-panel-background-color);
     box-shadow: var(--sl-shadow-x-large);
-    transition: var(--sl-transition-medium) transform;
     overflow: auto;
     pointer-events: all;
   }

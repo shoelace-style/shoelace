@@ -451,14 +451,14 @@ export default css`
     position: absolute;
     top: 0;
     right: 0;
-    transform: translateY(-50%) translateX(50%);
+    translate: 50% -50%;
     pointer-events: none;
   }
 
   .button--rtl ::slotted(sl-badge) {
     right: auto;
     left: 0;
-    transform: translateY(-50%) translateX(-50%);
+    translate: -50% -50%;
   }
 
   /*

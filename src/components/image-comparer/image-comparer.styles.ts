@@ -49,7 +49,7 @@ export default css`
     width: var(--divider-width);
     height: 100%;
     background-color: var(--sl-color-neutral-0);
-    transform: translateX(calc(var(--divider-width) / -2));
+    translate: calc(var(--divider-width) / -2);
     cursor: ew-resize;
   }
 

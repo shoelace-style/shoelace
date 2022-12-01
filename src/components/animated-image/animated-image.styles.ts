@@ -43,7 +43,6 @@ export default css`
 
   :host([play]:hover) .animated-image__control-box {
     opacity: 1;
-    transform: scale(1);
   }
 
   :host([play]:not(:hover)) .animated-image__control-box {
