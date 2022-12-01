@@ -31,7 +31,7 @@ import type { CSSResultGroup } from 'lit';
  * @csspart base - The component's internal wrapper.
  * @csspart header - The summary header.
  * @csspart summary - The details summary.
- * @csspart summary-icon - The expand/collapse summary icon.
+ * @csspart summary-icon - The summary icon's `<slot>` container.
  * @csspart content - The details content.
  *
  * @animation details.show - The animation to use when showing details. You can use `height: auto` with this animation.
