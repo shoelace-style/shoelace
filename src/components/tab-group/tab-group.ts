@@ -331,14 +331,14 @@ export default class SlTabGroup extends ShoelaceElement {
       case 'bottom':
         this.indicator.style.width = `${width}px`;
         this.indicator.style.height = 'auto';
-        this.indicator.style.transform = isRtl ? `translateX(${-1 * offset.left}px)` : `translateX(${offset.left}px)`;
+        this.indicator.style.translate = isRtl ? `${-1 * offset.left}px` : `${offset.left}px`;
         break;
 
       case 'start':
       case 'end':
         this.indicator.style.width = 'auto';
         this.indicator.style.height = `${height}px`;
-        this.indicator.style.transform = `translateY(${offset.top}px)`;
+        this.indicator.style.translate = `${offset.top}px`;
         break;
     }
   }

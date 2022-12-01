@@ -232,10 +232,10 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
       // off depending on the size of the control, thumb, and tooltip dimensions.
       if (isRtl) {
         const x = `${inputWidth - percentAsWidth}px + ${percent} * ${thumbSize}`;
-        this.output.style.transform = `translateX(calc((${x} - ${tooltipWidth / 2}px - ${thumbSize} / 2)))`;
+        this.output.style.translate = `calc((${x} - ${tooltipWidth / 2}px - ${thumbSize} / 2))`;
       } else {
         const x = `${percentAsWidth}px - ${percent} * ${thumbSize}`;
-        this.output.style.transform = `translateX(calc(${x} - ${tooltipWidth / 2}px + ${thumbSize} / 2))`;
+        this.output.style.translate = `calc(${x} - ${tooltipWidth / 2}px + ${thumbSize} / 2)`;
       }
     }
   }

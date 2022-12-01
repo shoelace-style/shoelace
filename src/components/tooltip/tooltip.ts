@@ -302,16 +302,16 @@ export default class SlTooltip extends ShoelaceElement {
 
 setDefaultAnimation('tooltip.show', {
   keyframes: [
-    { opacity: 0, transform: 'scale(0.8)' },
-    { opacity: 1, transform: 'scale(1)' }
+    { opacity: 0, scale: 0.8 },
+    { opacity: 1, scale: 1 }
   ],
   options: { duration: 150, easing: 'ease' }
 });
 
 setDefaultAnimation('tooltip.hide', {
   keyframes: [
-    { opacity: 1, transform: 'scale(1)' },
-    { opacity: 0, transform: 'scale(0.8)' }
+    { opacity: 1, scale: 1 },
+    { opacity: 0, scale: 0.8 }
   ],
   options: { duration: 150, easing: 'ease' }
 });

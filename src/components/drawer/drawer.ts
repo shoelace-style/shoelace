@@ -343,16 +343,16 @@ export default class SlDrawer extends ShoelaceElement {
 // Top
 setDefaultAnimation('drawer.showTop', {
   keyframes: [
-    { opacity: 0, transform: 'translateY(-100%)' },
-    { opacity: 1, transform: 'translateY(0)' }
+    { opacity: 0, translate: '0 -100%' },
+    { opacity: 1, translate: '0 0' }
   ],
   options: { duration: 250, easing: 'ease' }
 });
 
 setDefaultAnimation('drawer.hideTop', {
   keyframes: [
-    { opacity: 1, transform: 'translateY(0)' },
-    { opacity: 0, transform: 'translateY(-100%)' }
+    { opacity: 1, translate: '0 0' },
+    { opacity: 0, translate: '0 -100%' }
   ],
   options: { duration: 250, easing: 'ease' }
 });
@@ -360,24 +360,24 @@ setDefaultAnimation('drawer.hideTop', {
 // End
 setDefaultAnimation('drawer.showEnd', {
   keyframes: [
-    { opacity: 0, transform: 'translateX(100%)' },
-    { opacity: 1, transform: 'translateX(0)' }
+    { opacity: 0, translate: '100%' },
+    { opacity: 1, translate: '0' }
   ],
   rtlKeyframes: [
-    { opacity: 0, transform: 'translateX(-100%)' },
-    { opacity: 1, transform: 'translateX(0)' }
+    { opacity: 0, translate: '-100%' },
+    { opacity: 1, translate: '0' }
   ],
   options: { duration: 250, easing: 'ease' }
 });
 
 setDefaultAnimation('drawer.hideEnd', {
   keyframes: [
-    { opacity: 1, transform: 'translateX(0)' },
-    { opacity: 0, transform: 'translateX(100%)' }
+    { opacity: 1, translate: '0' },
+    { opacity: 0, translate: '100%' }
   ],
   rtlKeyframes: [
-    { opacity: 1, transform: 'translateX(0)' },
-    { opacity: 0, transform: 'translateX(-100%)' }
+    { opacity: 1, translate: '0' },
+    { opacity: 0, translate: '-100%' }
   ],
   options: { duration: 250, easing: 'ease' }
 });
@@ -385,16 +385,16 @@ setDefaultAnimation('drawer.hideEnd', {
 // Bottom
 setDefaultAnimation('drawer.showBottom', {
   keyframes: [
-    { opacity: 0, transform: 'translateY(100%)' },
-    { opacity: 1, transform: 'translateY(0)' }
+    { opacity: 0, translate: '0 100%' },
+    { opacity: 1, translate: '0 0' }
   ],
   options: { duration: 250, easing: 'ease' }
 });
 
 setDefaultAnimation('drawer.hideBottom', {
   keyframes: [
-    { opacity: 1, transform: 'translateY(0)' },
-    { opacity: 0, transform: 'translateY(100%)' }
+    { opacity: 1, translate: '0 0' },
+    { opacity: 0, translate: '0 100%' }
   ],
   options: { duration: 250, easing: 'ease' }
 });
@@ -402,31 +402,31 @@ setDefaultAnimation('drawer.hideBottom', {
 // Start
 setDefaultAnimation('drawer.showStart', {
   keyframes: [
-    { opacity: 0, transform: 'translateX(-100%)' },
-    { opacity: 1, transform: 'translateX(0)' }
+    { opacity: 0, translate: '-100%' },
+    { opacity: 1, translate: '0' }
   ],
   rtlKeyframes: [
-    { opacity: 0, transform: 'translateX(100%)' },
-    { opacity: 1, transform: 'translateX(0)' }
+    { opacity: 0, translate: '100%' },
+    { opacity: 1, translate: '0' }
   ],
   options: { duration: 250, easing: 'ease' }
 });
 
 setDefaultAnimation('drawer.hideStart', {
   keyframes: [
-    { opacity: 1, transform: 'translateX(0)' },
-    { opacity: 0, transform: 'translateX(-100%)' }
+    { opacity: 1, translate: '0' },
+    { opacity: 0, translate: '-100%' }
   ],
   rtlKeyframes: [
-    { opacity: 1, transform: 'translateX(0)' },
-    { opacity: 0, transform: 'translateX(100%)' }
+    { opacity: 1, translate: '0' },
+    { opacity: 0, translate: '100%' }
   ],
   options: { duration: 250, easing: 'ease' }
 });
 
 // Deny close
 setDefaultAnimation('drawer.denyClose', {
-  keyframes: [{ transform: 'scale(1)' }, { transform: 'scale(1.01)' }, { transform: 'scale(1)' }],
+  keyframes: [{ scale: 1 }, { scale: 1.01 }, { scale: 1 }],
   options: { duration: 250 }
 });
 

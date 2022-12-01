@@ -441,16 +441,16 @@ export default class SlDropdown extends ShoelaceElement {
 
 setDefaultAnimation('dropdown.show', {
   keyframes: [
-    { opacity: 0, transform: 'scale(0.9)' },
-    { opacity: 1, transform: 'scale(1)' }
+    { opacity: 0, scale: 0.9 },
+    { opacity: 1, scale: 1 }
   ],
   options: { duration: 100, easing: 'ease' }
 });
 
 setDefaultAnimation('dropdown.hide', {
   keyframes: [
-    { opacity: 1, transform: 'scale(1)' },
-    { opacity: 0, transform: 'scale(0.9)' }
+    { opacity: 1, scale: 1 },
+    { opacity: 0, scale: 0.9 }
   ],
   options: { duration: 100, easing: 'ease' }
 });

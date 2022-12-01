@@ -225,16 +225,16 @@ export default class SlAlert extends ShoelaceElement {
 
 setDefaultAnimation('alert.show', {
   keyframes: [
-    { opacity: 0, transform: 'scale(0.8)' },
-    { opacity: 1, transform: 'scale(1)' }
+    { opacity: 0, scale: 0.8 },
+    { opacity: 1, scale: 1 }
   ],
   options: { duration: 250, easing: 'ease' }
 });
 
 setDefaultAnimation('alert.hide', {
   keyframes: [
-    { opacity: 1, transform: 'scale(1)' },
-    { opacity: 0, transform: 'scale(0.8)' }
+    { opacity: 1, scale: 1 },
+    { opacity: 0, scale: 0.8 }
   ],
   options: { duration: 250, easing: 'ease' }
 });
