@@ -130,10 +130,6 @@ export default class SlTreeItem extends ShoelaceElement {
 
   @watch('expanded', { waitUntilFirstUpdate: true })
   handleExpandAnimation() {
-    if (this.expandButtonSlot) {
-      this.expandButtonSlot.name = this.expanded ? 'collapse-icon' : 'expand-icon';
-    }
-
     if (this.expanded) {
       if (this.lazy) {
         this.loading = true;
@@ -215,6 +211,10 @@ export default class SlTreeItem extends ShoelaceElement {
     const isRtl = this.localize.dir() === 'rtl';
     const showExpandButton = !this.loading && (!this.isLeaf || this.lazy);
 
+    // Change the name of the expand/collapse icon slot based on the expanded state. Unfortunately, if we bake this into
+    // the template below, Firefox won't animate the icon. Updating it after render allows the transition to work.
+    this.updateComplete.then(() => (this.expandButtonSlot.name = this.expanded ? 'collapse-icon' : 'expand-icon'));
+
     return html`
       <div
         part="base"
@@ -250,8 +250,6 @@ export default class SlTreeItem extends ShoelaceElement {
             ${when(this.loading, () => html` <sl-spinner></sl-spinner> `)}
             ${when(
               showExpandButton,
-              // This slot's name changes from `expand-icon` to `collapse-icon` when the tree item is expanded, but we
-              // do that in the watch handler instead of here in the template because the transition breaks in Firefox.
               () => html`
                 <slot class="tree-item__expand-icon-slot" name="expand-icon">
                   <sl-icon
