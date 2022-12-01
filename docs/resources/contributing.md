@@ -230,6 +230,18 @@ A pattern has been established in `<sl-details>` and `<sl-tree-item>` for expand
 
 There should be a container element immediately surrounding both slots. The container should be animated with CSS by default and it should have a part so the user can override the animation or disable it. Please refer to the source and documentation for `<sl-details>` and/or `<sl-tree-item>` for details.
 
+### Fallback Content in Slots
+
+When providing fallback content inside of `<slot>` elements, avoid adding parts, e.g.:
+
+```html
+<slot name="icon">
+  <sl-icon part="close-icon"></sl-icon>
+</slot>
+```
+
+This creates confusion because the part will be documented, but it won't work when the user slots in their own content. The recommended way to customize this example is for the user to slot in their own content and target its styles with CSS as needed.
+
 ### Custom Events
 
 Components must only emit custom events, and all custom events must start with `sl-` as a namespace. For compatibility with frameworks that utilize DOM templates, custom events must have lowercase, kebab-style names. For example, use `sl-change` instead of `slChange`.
