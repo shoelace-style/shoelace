@@ -211,10 +211,6 @@ export default class SlTreeItem extends ShoelaceElement {
     const isRtl = this.localize.dir() === 'rtl';
     const showExpandButton = !this.loading && (!this.isLeaf || this.lazy);
 
-    // Change the name of the expand/collapse icon slot based on the expanded state. Unfortunately, if we bake this into
-    // the template below, Firefox won't animate the icon. Updating it after render allows the transition to work.
-    this.updateComplete.then(() => (this.expandButtonSlot.name = this.expanded ? 'collapse-icon' : 'expand-icon'));
-
     return html`
       <div
         part="base"
@@ -224,6 +220,7 @@ export default class SlTreeItem extends ShoelaceElement {
           'tree-item--selected': this.selected,
           'tree-item--disabled': this.disabled,
           'tree-item--leaf': this.isLeaf,
+          'tree-item--has-expand-button': showExpandButton,
           'tree-item--rtl': this.localize.dir() === 'rtl'
         })}"
       >
@@ -248,18 +245,12 @@ export default class SlTreeItem extends ShoelaceElement {
             aria-hidden="true"
           >
             ${when(this.loading, () => html` <sl-spinner></sl-spinner> `)}
-            ${when(
-              showExpandButton,
-              () => html`
-                <slot class="tree-item__expand-icon-slot" name="expand-icon">
-                  <sl-icon
-                    class="tree-item__default-toggle-button"
-                    library="system"
-                    name=${isRtl ? 'chevron-left' : 'chevron-right'}
-                  ></sl-icon>
-                </slot>
-              `
-            )}
+            <slot class="tree-item__expand-icon-slot" name="expand-icon">
+              <sl-icon library="system" name=${isRtl ? 'chevron-left' : 'chevron-right'}></sl-icon>
+            </slot>
+            <slot class="tree-item__expand-icon-slot" name="collapse-icon">
+              <sl-icon library="system" name=${isRtl ? 'chevron-left' : 'chevron-right'}></sl-icon>
+            </slot>
           </div>
 
           ${when(

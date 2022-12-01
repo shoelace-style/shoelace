@@ -289,10 +289,10 @@ const App = () => {
 
 ### Customizing the Expand and Collapse Icons
 
-Use the `expand-icon` and `collapse-icon` slots to change the expand and collapse icons, respectively.
+Use the `expand-icon` and `collapse-icon` slots to change the expand and collapse icons, respectively. To disable the animation, override the `rotate` property on the `expand-button` part as shown below.
 
 ```html preview
-<sl-tree>
+<sl-tree class="custom-icons">
   <sl-icon name="plus-square" slot="expand-icon"></sl-icon>
   <sl-icon name="dash-square" slot="collapse-icon"></sl-icon>
 
@@ -322,6 +322,13 @@ Use the `expand-icon` and `collapse-icon` slots to change the expand and collaps
     <sl-tree-item>Fern</sl-tree-item>
   </sl-tree-item>
 </sl-tree>
+
+<style>
+  .custom-icons sl-tree-item::part(expand-button) {
+    /* Disable the expand/collapse animation */
+    rotate: none;
+  }
+</style>
 ```
 
 <!-- prettier-ignore -->
