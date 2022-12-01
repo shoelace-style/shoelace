@@ -30,7 +30,7 @@ import type { CSSResultGroup } from 'lit';
  * @csspart after - The container that holds the "after" image.
  * @csspart divider - The divider that separates the images.
  * @csspart handle - The handle that the user drags to expose the after image.
- * @csspart handle-icon - The drag icon that appears inside the handle.
+ * @csspart handle-icon - The handle icon's `<slot>`.
  *
  * @cssproperty --divider-width - The width of the dividing line.
  * @cssproperty --handle-size - The size of the compare handle.
@@ -143,8 +143,8 @@ export default class SlImageComparer extends ShoelaceElement {
             aria-controls="image-comparer"
             tabindex="0"
           >
-            <slot name="handle-icon">
-              <sl-icon part="handle-icon" library="system" name="grip-vertical"></sl-icon>
+            <slot part="handle-icon" name="handle-icon">
+              <sl-icon library="system" name="grip-vertical"></sl-icon>
             </slot>
           </div>
         </div>

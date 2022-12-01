@@ -18,6 +18,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a bug where browser validation tooltips would show up when hovering over form controls [#1037](https://github.com/shoelace-style/shoelace/issues/1037)
 - Fixed a bug in `<sl-tab-group>` that sometimes caused the active tab indicator to not animate
 - Fixed a bug in `<sl-tree-item>` that caused the expand/collapse icon slot to be out of sync when the node is open initially
+- Fixed the mislabeled `handle-icon` slot in `<sl-image-comparer>` (it now points to the `<slot>`, not the slot's fallback content)
 - Improved IntelliSense in VS Code, courtesy of [Burton's amazing CEM Analyzer plugin](https://github.com/break-stuff/cem-plugin-vs-code-custom-data-generator)
 - Improved accessibility of `<sl-alert>` so the alert is announced and the close button has a label
 - Refactored all styles and animations to use `translate`, `rotate`, and `scale` instead of `transform`
