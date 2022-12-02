@@ -292,9 +292,16 @@ export default class SlTooltip extends ShoelaceElement {
       >
         <slot slot="anchor" aria-describedby="tooltip"></slot>
 
-        <div part="body" id="tooltip" class="tooltip__body" role="tooltip" aria-hidden=${this.open ? 'false' : 'true'}>
-          <slot name="content" aria-live=${this.open ? 'polite' : 'off'}> ${this.content} </slot>
-        </div>
+        <slot
+          name="content"
+          part="body"
+          id="tooltip"
+          class="tooltip__body"
+          role="tooltip"
+          aria-live=${this.open ? 'polite' : 'off'}
+        >
+          ${this.content}
+        </slot>
       </sl-popup>
     `;
   }

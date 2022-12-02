@@ -4,10 +4,14 @@ import buttonStyles from '../button/button.styles';
 export default css`
   ${buttonStyles}
 
-  label {
-    display: inline-block;
+  .button__prefix,
+  .button__suffix,
+  .button__label {
+    display: inline-flex;
     position: relative;
+    align-items: center;
   }
+
   /* We use a hidden input so constraint validation errors work, since they don't appear to show when used with buttons.
     We can't actually hide it, though, otherwise the messages will be suppressed by the browser. */
   .hidden-input {

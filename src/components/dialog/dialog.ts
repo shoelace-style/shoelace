@@ -296,9 +296,7 @@ export default class SlDialog extends ShoelaceElement {
               `
             : ''}
 
-          <div part="body" class="dialog__body">
-            <slot></slot>
-          </div>
+          <slot part="body" class="dialog__body"></slot>
 
           <footer part="footer" class="dialog__footer">
             <slot name="footer"></slot>

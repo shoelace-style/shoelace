@@ -10,6 +10,8 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ## Next
 
+- 🚨 BREAKING: removed the `handle-icon` part and slot from `<sl-image-comparer>` (use `handle` instead)
+- 🚨 BREAKING: removed the `handle` slot from `<sl-split-panel>` (use the `divider` slot instead)
 - Added `header-actions` slot to `<sl-dialog>` and `<sl-drawer>`
 - Added the `expand-icon` and `collapse-icon` slots to `<sl-details>` and refactored the icon animation [#1046](https://github.com/shoelace-style/shoelace/discussions/1046)
 - Fixed a bug in `<sl-tree-item>` where `sl-selection-change` was emitted when the selection didn't change [#1030](https://github.com/shoelace-style/shoelace/pull/1030)
@@ -22,6 +24,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Improved IntelliSense in VS Code, courtesy of [Burton's amazing CEM Analyzer plugin](https://github.com/break-stuff/cem-plugin-vs-code-custom-data-generator)
 - Improved accessibility of `<sl-alert>` so the alert is announced and the close button has a label
 - Refactored all styles and animations to use `translate`, `rotate`, and `scale` instead of `transform`
+- Removed slot wrappers from many components, allowing better control over user-applied styles
 - Removed unused aria attributes from `<sl-skeleton>`
 - Replaced the `x` icon in the system icon library with `x-lg` to improve icon consistency
 

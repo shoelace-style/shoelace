@@ -123,6 +123,7 @@ export default css`
   }
 
   .switch__label {
+    display: inline-block;
     line-height: var(--height);
     margin-inline-start: 0.5em;
     user-select: none;

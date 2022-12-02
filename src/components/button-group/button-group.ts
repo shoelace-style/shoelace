@@ -63,9 +63,9 @@ export default class SlButtonGroup extends ShoelaceElement {
   }
 
   render() {
-    // eslint-disable-next-line lit-a11y/mouse-events-have-key-events -- focusout & focusin support bubbling whereas focus & blur do not which is necessary here
+    // eslint-disable-next-line lit-a11y/mouse-events-have-key-events
     return html`
-      <div
+      <slot
         part="base"
         class="button-group"
         role="${this.disableRole ? 'presentation' : 'group'}"
@@ -74,9 +74,8 @@ export default class SlButtonGroup extends ShoelaceElement {
         @focusin=${this.handleFocus}
         @mouseover=${this.handleMouseOver}
         @mouseout=${this.handleMouseOut}
-      >
-        <slot @slotchange=${this.handleSlotChange} role="none"></slot>
-      </div>
+        @slotchange=${this.handleSlotChange}
+      ></slot>
     `;
   }
 }

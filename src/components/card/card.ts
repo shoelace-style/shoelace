@@ -45,21 +45,10 @@ export default class SlCard extends ShoelaceElement {
           'card--has-header': this.hasSlotController.test('header')
         })}
       >
-        <div part="image" class="card__image">
-          <slot name="image"></slot>
-        </div>
-
-        <div part="header" class="card__header">
-          <slot name="header"></slot>
-        </div>
-
-        <div part="body" class="card__body">
-          <slot></slot>
-        </div>
-
-        <div part="footer" class="card__footer">
-          <slot name="footer"></slot>
-        </div>
+        <slot name="image" part="image" class="card__image"></slot>
+        <slot name="header" part="header" class="card__header"></slot>
+        <slot part="body" class="card__body"></slot>
+        <slot name="footer" part="footer" class="card__footer"></slot>
       </div>
     `;
   }

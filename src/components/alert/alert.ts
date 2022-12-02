@@ -197,13 +197,9 @@ export default class SlAlert extends ShoelaceElement {
         aria-hidden=${this.open ? 'false' : 'true'}
         @mousemove=${this.handleMouseMove}
       >
-        <span part="icon" class="alert__icon">
-          <slot name="icon"></slot>
-        </span>
+        <slot name="icon" part="icon" class="alert__icon"></slot>
 
-        <span part="message" class="alert__message" aria-live="polite">
-          <slot></slot>
-        </span>
+        <slot part="message" class="alert__message" aria-live="polite"></slot>
 
         ${this.closable
           ? html`

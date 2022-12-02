@@ -70,9 +70,7 @@ export default class SlTag extends ShoelaceElement {
           'tag--removable': this.removable
         })}
       >
-        <span part="content" class="tag__content">
-          <slot></slot>
-        </span>
+        <slot part="content" class="tag__content"></slot>
 
         ${this.removable
           ? html`

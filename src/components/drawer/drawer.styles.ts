@@ -117,6 +117,7 @@ export default css`
 
   .drawer__body {
     flex: 1 1 auto;
+    display: block;
     padding: var(--body-spacing);
     overflow: auto;
     -webkit-overflow-scrolling: touch;

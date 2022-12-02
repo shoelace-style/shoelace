@@ -533,9 +533,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
               @focus=${this.handleFocus}
               @keydown=${this.handleKeyDown}
             >
-              <span part="prefix" class="select__prefix">
-                <slot name="prefix"></slot>
-              </span>
+              <slot name="prefix" part="prefix" class="select__prefix"></slot>
 
               <div part="display-label" class="select__label">
                 ${this.displayTags.length > 0
@@ -561,9 +559,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
                   `
                 : ''}
 
-              <span part="suffix" class="select__suffix">
-                <slot name="suffix"></slot>
-              </span>
+              <slot name="suffix" part="suffix" class="select__suffix"></slot>
 
               <span part="icon" class="select__icon" aria-hidden="true">
                 <sl-icon name="chevron-down" library="system"></sl-icon>
@@ -588,14 +584,15 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
           </sl-dropdown>
         </div>
 
-        <div
+        <slot
+          name="help-text"
           part="form-control-help-text"
           id="help-text"
           class="form-control__help-text"
           aria-hidden=${hasHelpText ? 'false' : 'true'}
         >
-          <slot name="help-text">${this.helpText}</slot>
-        </div>
+          ${this.helpText}
+        </slot>
       </div>
     `;
   }

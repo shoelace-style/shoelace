@@ -23,13 +23,14 @@ export default css`
   }
 
   .card__image {
+    display: flex;
     border-top-left-radius: var(--border-radius);
     border-top-right-radius: var(--border-radius);
     margin: calc(-1 * var(--border-width));
     overflow: hidden;
   }
 
-  .card__image ::slotted(img) {
+  .card__image::slotted(img) {
     display: block;
     width: 100%;
   }
@@ -39,6 +40,7 @@ export default css`
   }
 
   .card__header {
+    display: block;
     border-bottom: solid var(--border-width) var(--border-color);
     padding: calc(var(--padding) / 2) var(--padding);
   }
@@ -53,10 +55,12 @@ export default css`
   }
 
   .card__body {
+    display: block;
     padding: var(--padding);
   }
 
   .card--has-footer .card__footer {
+    display: block;
     border-top: solid var(--border-width) var(--border-color);
     padding: var(--padding);
   }

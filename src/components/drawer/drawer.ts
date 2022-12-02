@@ -327,9 +327,7 @@ export default class SlDrawer extends ShoelaceElement {
               `
             : ''}
 
-          <div part="body" class="drawer__body">
-            <slot></slot>
-          </div>
+          <slot part="body" class="drawer__body"></slot>
 
           <footer part="footer" class="drawer__footer">
             <slot name="footer"></slot>

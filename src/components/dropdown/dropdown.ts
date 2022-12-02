@@ -46,8 +46,8 @@ export default class SlDropdown extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
   @query('.dropdown') popup: SlPopup;
-  @query('.dropdown__trigger') trigger: HTMLElement;
-  @query('.dropdown__panel') panel: HTMLElement;
+  @query('.dropdown__trigger') trigger: HTMLSlotElement;
+  @query('.dropdown__panel') panel: HTMLSlotElement;
 
   private readonly localize = new LocalizeController(this);
 
@@ -126,16 +126,14 @@ export default class SlDropdown extends ShoelaceElement {
   }
 
   focusOnTrigger() {
-    const slot = this.trigger.querySelector('slot')!;
-    const trigger = slot.assignedElements({ flatten: true })[0] as HTMLElement | undefined;
+    const trigger = this.trigger.assignedElements({ flatten: true })[0] as HTMLElement | undefined;
     if (typeof trigger?.focus === 'function') {
       trigger.focus();
     }
   }
 
   getMenu() {
-    const slot = this.panel.querySelector('slot')!;
-    return slot.assignedElements({ flatten: true }).find(el => el.tagName.toLowerCase() === 'sl-menu') as
+    return this.panel.assignedElements({ flatten: true }).find(el => el.tagName.toLowerCase() === 'sl-menu') as
       | SlMenu
       | undefined;
   }
@@ -293,8 +291,7 @@ export default class SlDropdown extends ShoelaceElement {
   // To determine this, we assume the first tabbable element in the trigger slot is the "accessible trigger."
   //
   updateAccessibleTrigger() {
-    const slot = this.trigger.querySelector('slot')!;
-    const assignedElements = slot.assignedElements({ flatten: true }) as HTMLElement[];
+    const assignedElements = this.trigger.assignedElements({ flatten: true }) as HTMLElement[];
     const accessibleTrigger = assignedElements.find(el => getTabbableBoundary(el).start);
     let target: HTMLElement;
 
@@ -415,25 +412,23 @@ export default class SlDropdown extends ShoelaceElement {
           'dropdown--open': this.open
         })}
       >
-        <span
+        <slot
+          name="trigger"
           slot="anchor"
           part="trigger"
           class="dropdown__trigger"
           @click=${this.handleTriggerClick}
           @keydown=${this.handleTriggerKeyDown}
           @keyup=${this.handleTriggerKeyUp}
-        >
-          <slot name="trigger" @slotchange=${this.handleTriggerSlotChange}></slot>
-        </span>
+          @slotchange=${this.handleTriggerSlotChange}
+        ></slot>
 
-        <div
+        <slot
           part="panel"
           class="dropdown__panel"
           aria-hidden=${this.open ? 'false' : 'true'}
           aria-labelledby="dropdown"
-        >
-          <slot></slot>
-        </div>
+        ></slot>
       </sl-popup>
     `;
   }

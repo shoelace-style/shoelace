@@ -33,6 +33,7 @@ export default css`
   }
 
   .tab-group__body {
+    display: block;
     overflow: auto;
   }
 

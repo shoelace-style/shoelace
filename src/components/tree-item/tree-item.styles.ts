@@ -125,6 +125,7 @@ export default css`
   }
 
   .tree-item__children {
+    display: block;
     font-size: calc(1em + var(--indent-size, var(--sl-spacing-medium)));
   }
 

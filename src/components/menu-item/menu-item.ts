@@ -96,17 +96,11 @@ export default class SlMenuItem extends ShoelaceElement {
           <sl-icon name="check" library="system" aria-hidden="true"></sl-icon>
         </span>
 
-        <span part="prefix" class="menu-item__prefix">
-          <slot name="prefix"></slot>
-        </span>
+        <slot name="prefix" part="prefix" class="menu-item__prefix"></slot>
 
-        <span part="label" class="menu-item__label">
-          <slot @slotchange=${this.handleDefaultSlotChange}></slot>
-        </span>
+        <slot part="label" class="menu-item__label" @slotchange=${this.handleDefaultSlotChange}></slot>
 
-        <span part="suffix" class="menu-item__suffix">
-          <slot name="suffix"></slot>
-        </span>
+        <slot name="suffix" part="suffix" class="menu-item__suffix"></slot>
 
         <span class="menu-item__chevron">
           <sl-icon name="chevron-right" library="system" aria-hidden="true"></sl-icon>

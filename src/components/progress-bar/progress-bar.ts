@@ -56,13 +56,7 @@ export default class SlProgressBar extends ShoelaceElement {
         aria-valuenow=${this.indeterminate ? 0 : this.value}
       >
         <div part="indicator" class="progress-bar__indicator" style=${styleMap({ width: `${this.value}%` })}>
-          ${!this.indeterminate
-            ? html`
-                <span part="label" class="progress-bar__label">
-                  <slot></slot>
-                </span>
-              `
-            : ''}
+          ${!this.indeterminate ? html` <slot part="label" class="progress-bar__label"></slot> ` : ''}
         </div>
       </div>
     `;

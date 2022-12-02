@@ -24,7 +24,7 @@ import type { CSSResultGroup } from 'lit';
  *
  * @slot start - The start panel.
  * @slot end - The end panel.
- * @slot handle - An optional handle to render at the center of the divider.
+ * @slot divider - The divider. Useful for slotting in a custom icon that renders as a handle in the divider.
  *
  * @cssproperty [--divider-width=4px] - The width of the visible divider.
  * @cssproperty [--divider-hit-area=12px] - The invisible region around the divider where dragging can occur. This is
@@ -249,11 +249,10 @@ export default class SlSplitPanel extends ShoelaceElement {
     this.style[gridTemplateAlt] = '';
 
     return html`
-      <div part="panel start" class="start">
-        <slot name="start"></slot>
-      </div>
+      <slot name="start" part="panel start" class="start"></slot>
 
-      <div
+      <slot
+        name="divider"
         part="divider"
         class="divider"
         tabindex=${ifDefined(this.disabled ? undefined : '0')}
@@ -262,13 +261,9 @@ export default class SlSplitPanel extends ShoelaceElement {
         @keydown=${this.handleKeyDown}
         @mousedown=${this.handleDrag}
         @touchstart=${this.handleDrag}
-      >
-        <slot name="handle"></slot>
-      </div>
+      ></slot>
 
-      <div part="panel end" class="end">
-        <slot name="end"></slot>
-      </div>
+      <slot name="end" part="panel end" class="end"></slot>
     `;
   }
 }

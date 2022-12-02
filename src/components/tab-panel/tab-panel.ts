@@ -45,15 +45,13 @@ export default class SlTabPanel extends ShoelaceElement {
 
   render() {
     return html`
-      <div
+      <slot
         part="base"
         class=${classMap({
           'tab-panel': true,
           'tab-panel--active': this.active
         })}
-      >
-        <slot></slot>
-      </div>
+      ></slot>
     `;
   }
 }

@@ -42,6 +42,7 @@ export default css`
   }
 
   .dropdown--open .dropdown__panel {
+    display: block;
     pointer-events: all;
   }
 

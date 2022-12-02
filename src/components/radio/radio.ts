@@ -99,9 +99,7 @@ export default class SlRadio extends ShoelaceElement {
           ${this.checked ? html` <sl-icon part="checked-icon" library="system" name="radio"></sl-icon> ` : ''}
         </span>
 
-        <span part="label" class="radio__label">
-          <slot></slot>
-        </span>
+        <slot part="label" class="radio__label"></slot>
       </span>
     `;
   }

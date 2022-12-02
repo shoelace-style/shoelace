@@ -55,9 +55,7 @@ export default class SlBreadcrumbItem extends ShoelaceElement {
           'breadcrumb-item--has-suffix': this.hasSlotController.test('suffix')
         })}
       >
-        <span part="prefix" class="breadcrumb-item__prefix">
-          <slot name="prefix"></slot>
-        </span>
+        <slot name="prefix" part="prefix" class="breadcrumb-item__prefix"></slot>
 
         ${isLink
           ? html`
@@ -77,13 +75,9 @@ export default class SlBreadcrumbItem extends ShoelaceElement {
               </button>
             `}
 
-        <span part="suffix" class="breadcrumb-item__suffix">
-          <slot name="suffix"></slot>
-        </span>
+        <slot name="suffix" part="suffix" class="breadcrumb-item__suffix"></slot>
 
-        <span part="separator" class="breadcrumb-item__separator" aria-hidden="true">
-          <slot name="separator"></slot>
-        </span>
+        <slot name="separator" part="separator" class="breadcrumb-item__separator" aria-hidden="true"></slot>
       </div>
     `;
   }

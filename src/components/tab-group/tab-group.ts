@@ -45,7 +45,7 @@ export default class SlTabGroup extends ShoelaceElement {
   private readonly localize = new LocalizeController(this);
 
   @query('.tab-group') tabGroup: HTMLElement;
-  @query('.tab-group__body') body: HTMLElement;
+  @query('.tab-group__body') body: HTMLSlotElement;
   @query('.tab-group__nav') nav: HTMLElement;
   @query('.tab-group__indicator') indicator: HTMLElement;
 
@@ -131,8 +131,7 @@ export default class SlTabGroup extends ShoelaceElement {
   }
 
   getAllPanels() {
-    const slot = this.body.querySelector('slot')!;
-    return [...slot.assignedElements()].filter(el => el.tagName.toLowerCase() === 'sl-tab-panel') as [SlTabPanel];
+    return [...this.body.assignedElements()].filter(el => el.tagName.toLowerCase() === 'sl-tab-panel') as [SlTabPanel];
   }
 
   getActiveTab() {
@@ -405,9 +404,7 @@ export default class SlTabGroup extends ShoelaceElement {
             : ''}
         </div>
 
-        <div part="body" class="tab-group__body">
-          <slot @slotchange=${this.syncTabsAndPanels}></slot>
-        </div>
+        <slot part="body" class="tab-group__body" @slotchange=${this.syncTabsAndPanels}></slot>
       </div>
     `;
   }

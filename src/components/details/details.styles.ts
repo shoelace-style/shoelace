@@ -77,6 +77,7 @@ export default css`
   }
 
   .details__content {
+    display: block;
     padding: var(--sl-spacing-medium);
   }
 `;

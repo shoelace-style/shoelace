@@ -176,9 +176,7 @@ export default class SlSwitch extends ShoelaceElement implements ShoelaceFormCon
           <span part="thumb" class="switch__thumb"></span>
         </span>
 
-        <span part="label" class="switch__label">
-          <slot></slot>
-        </span>
+        <slot part="label" class="switch__label"></slot>
       </label>
     `;
   }

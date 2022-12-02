@@ -83,6 +83,7 @@ export default css`
 
   .alert__message {
     flex: 1 1 auto;
+    display: block;
     padding: var(--sl-spacing-large);
     overflow: hidden;
   }

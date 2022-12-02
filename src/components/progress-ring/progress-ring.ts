@@ -72,9 +72,7 @@ export default class SlProgressRing extends ShoelaceElement {
           <circle class="progress-ring__indicator" style="stroke-dashoffset: ${this.indicatorOffset}"></circle>
         </svg>
 
-        <span part="label" class="progress-ring__label">
-          <slot></slot>
-        </span>
+        <slot part="label" class="progress-ring__label"></slot>
       </div>
     `;
   }

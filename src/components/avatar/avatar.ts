@@ -67,11 +67,9 @@ export default class SlAvatar extends ShoelaceElement {
         ${this.initials
           ? html` <div part="initials" class="avatar__initials">${this.initials}</div> `
           : html`
-              <div part="icon" class="avatar__icon" aria-hidden="true">
-                <slot name="icon">
-                  <sl-icon name="person-fill" library="system"></sl-icon>
-                </slot>
-              </div>
+              <slot name="icon" part="icon" class="avatar__icon" aria-hidden="true">
+                <sl-icon name="person-fill" library="system"></sl-icon>
+              </slot>
             `}
         ${this.image && !this.hasError
           ? html`

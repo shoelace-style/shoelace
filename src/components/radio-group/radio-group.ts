@@ -300,14 +300,15 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
             : defaultSlot}
         </div>
 
-        <div
+        <slot
+          name="help-text"
           part="form-control-help-text"
           id="help-text"
           class="form-control__help-text"
           aria-hidden=${hasHelpText ? 'false' : 'true'}
         >
-          <slot name="help-text">${this.helpText}</slot>
-        </div>
+          ${this.helpText}
+        </slot>
       </fieldset>
     `;
     /* eslint-enable lit-a11y/click-events-have-key-events */

@@ -192,9 +192,7 @@ export default class SlDetails extends ShoelaceElement {
         </header>
 
         <div class="details__body">
-          <div part="content" id="content" class="details__content" role="region" aria-labelledby="header">
-            <slot></slot>
-          </div>
+          <slot part="content" id="content" class="details__content" role="region" aria-labelledby="header"></slot>
         </div>
       </div>
     `;

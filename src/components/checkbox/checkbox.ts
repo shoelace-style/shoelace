@@ -171,9 +171,7 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
             : ''}
         </span>
 
-        <span part="label" class="checkbox__label">
-          <slot></slot>
-        </span>
+        <slot part="label" class="checkbox__label"></slot>
       </label>
     `;
   }

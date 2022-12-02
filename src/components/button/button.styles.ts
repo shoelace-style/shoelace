@@ -61,7 +61,11 @@ export default css`
     pointer-events: none;
   }
 
-  .button__label ::slotted(sl-icon) {
+  .button__label {
+    display: inline-block;
+  }
+
+  .button__label::slotted(sl-icon) {
     vertical-align: -2px;
   }
 
@@ -574,6 +578,8 @@ export default css`
     z-index: 1;
   }
 
+  /* Focus and checked are always on top */
+  :host(.sl-button-group__button--focus),
   :host(.sl-button-group__button[checked]) {
     z-index: 2;
   }

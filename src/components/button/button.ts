@@ -270,15 +270,9 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
         @focus=${this.handleFocus}
         @click=${this.handleClick}
       >
-        <span part="prefix" class="button__prefix">
-          <slot name="prefix"></slot>
-        </span>
-        <span part="label" class="button__label">
-          <slot></slot>
-        </span>
-        <span part="suffix" class="button__suffix">
-          <slot name="suffix"></slot>
-        </span>
+        <slot name="prefix" part="prefix" class="button__prefix"></slot>
+        <slot part="label" class="button__label"></slot>
+        <slot name="suffix" part="suffix" class="button__suffix"></slot>
         ${
           this.caret ? html` <sl-icon part="caret" class="button__caret" library="system" name="caret"></sl-icon> ` : ''
         }
