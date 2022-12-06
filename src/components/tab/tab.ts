@@ -1,13 +1,14 @@
 import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { autoIncrement } from '../../internal/auto-increment';
 import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
 import { LocalizeController } from '../../utilities/localize';
 import '../icon-button/icon-button';
 import styles from './tab.styles';
 import type { CSSResultGroup } from 'lit';
+
+let id = 0;
 
 /**
  * @summary Tabs are used inside [tab groups](/components/tab-group) to represent and activate [tab panels](/components/tab-panel).
@@ -32,7 +33,7 @@ export default class SlTab extends ShoelaceElement {
 
   @query('.tab') tab: HTMLElement;
 
-  private readonly attrId = autoIncrement();
+  private readonly attrId = ++id;
   private readonly componentId = `sl-tab-${this.attrId}`;
 
   /** The name of the tab panel this tab is associated with. The panel must be located in the same tab group. */

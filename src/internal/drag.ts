@@ -11,6 +11,7 @@ interface DragOptions {
   initialEvent: PointerEvent;
 }
 
+/** Begins listening for dragging. */
 export function drag(container: HTMLElement, options?: Partial<DragOptions>) {
   function move(pointerEvent: PointerEvent) {
     const dims = container.getBoundingClientRect();
