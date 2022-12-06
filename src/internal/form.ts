@@ -148,7 +148,11 @@ export class FormSubmitController implements ReactiveController {
     const name = this.options.name(this.host);
     const value = this.options.value(this.host);
 
-    if (!disabled && typeof name === 'string' && typeof value !== 'undefined') {
+    // For buttons, we only submit the value if they were the submitter. This is currently done in doAction() by
+    // injecting the name/value on a temporary button, so we can just skip them here.
+    const isButton = this.host.tagName.toLowerCase() === 'sl-button';
+
+    if (!disabled && !isButton && typeof name === 'string' && typeof value !== 'undefined') {
       if (Array.isArray(value)) {
         (value as unknown[]).forEach(val => {
           event.formData.append(name, (val as string | number | boolean).toString());
@@ -232,8 +236,11 @@ export class FormSubmitController implements ReactiveController {
       button.style.overflow = 'hidden';
       button.style.whiteSpace = 'nowrap';
 
-      // Pass form attributes through to the temporary button
+      // Pass name, value, and form attributes through to the temporary button
       if (invoker) {
+        button.name = invoker.name;
+        button.value = invoker.value;
+
         ['formaction', 'formenctype', 'formmethod', 'formnovalidate', 'formtarget'].forEach(attr => {
           if (invoker.hasAttribute(attr)) {
             button.setAttribute(attr, invoker.getAttribute(attr)!);
