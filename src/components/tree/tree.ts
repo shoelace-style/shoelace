@@ -4,16 +4,15 @@ import { clamp } from '../../internal/math';
 import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
 import { LocalizeController } from '../../utilities/localize';
-import { isTreeItem } from '../tree-item/tree-item';
+import SlTreeItem from '../tree-item/tree-item';
 import styles from './tree.styles';
-import type SlTreeItem from '../tree-item/tree-item';
 import type { CSSResultGroup } from 'lit';
 
 function syncCheckboxes(changedTreeItem: SlTreeItem) {
   function syncAncestors(treeItem: SlTreeItem) {
     const parentItem: SlTreeItem | null = treeItem.parentElement as SlTreeItem;
 
-    if (isTreeItem(parentItem)) {
+    if (SlTreeItem.isTreeItem(parentItem)) {
       const children = parentItem.getChildrenItems({ includeDisabled: false });
       const allChecked = !!children.length && children.every(item => item.selected);
       const allUnchecked = children.every(item => !item.selected && !item.indeterminate);
@@ -143,8 +142,8 @@ export default class SlTree extends ShoelaceElement {
 
   handleTreeChanged = (mutations: MutationRecord[]) => {
     for (const mutation of mutations) {
-      const addedNodes: SlTreeItem[] = [...mutation.addedNodes].filter(isTreeItem) as SlTreeItem[];
-      const removedNodes = [...mutation.removedNodes].filter(isTreeItem) as SlTreeItem[];
+      const addedNodes: SlTreeItem[] = [...mutation.addedNodes].filter(SlTreeItem.isTreeItem) as SlTreeItem[];
+      const removedNodes = [...mutation.removedNodes].filter(SlTreeItem.isTreeItem) as SlTreeItem[];
 
       addedNodes.forEach(this.initTreeItem);
 
@@ -343,7 +342,7 @@ export default class SlTree extends ShoelaceElement {
     }
 
     // If the target is a tree item, update the tabindex
-    if (isTreeItem(target) && !target.disabled) {
+    if (SlTreeItem.isTreeItem(target) && !target.disabled) {
       if (this.lastFocusedItem) {
         this.lastFocusedItem.tabIndex = -1;
       }

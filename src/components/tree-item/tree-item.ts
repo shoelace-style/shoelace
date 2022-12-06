@@ -14,10 +14,6 @@ import '../spinner/spinner';
 import styles from './tree-item.styles';
 import type { CSSResultGroup, PropertyValueMap } from 'lit';
 
-export function isTreeItem(node: Node) {
-  return node instanceof Element && node.getAttribute('role') === 'treeitem';
-}
-
 /**
  * @summary A tree item serves as a hierarchical node that lives inside a [tree](/components/tree).
  *
@@ -55,6 +51,10 @@ export function isTreeItem(node: Node) {
 @customElement('sl-tree-item')
 export default class SlTreeItem extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
+
+  static isTreeItem(node: Node) {
+    return node instanceof Element && node.getAttribute('role') === 'treeitem';
+  }
 
   private readonly localize = new LocalizeController(this);
 
@@ -185,7 +185,7 @@ export default class SlTreeItem extends ShoelaceElement {
   getChildrenItems({ includeDisabled = true }: { includeDisabled?: boolean } = {}): SlTreeItem[] {
     return this.childrenSlot
       ? ([...this.childrenSlot.assignedElements({ flatten: true })].filter(
-          (item: SlTreeItem) => isTreeItem(item) && (includeDisabled || !item.disabled)
+          (item: SlTreeItem) => SlTreeItem.isTreeItem(item) && (includeDisabled || !item.disabled)
         ) as SlTreeItem[])
       : [];
   }
@@ -193,7 +193,7 @@ export default class SlTreeItem extends ShoelaceElement {
   // Checks whether the item is nested into an item
   private isNestedItem(): boolean {
     const parent = this.parentElement;
-    return !!parent && isTreeItem(parent);
+    return !!parent && SlTreeItem.isTreeItem(parent);
   }
 
   handleChildrenSlotChange() {
