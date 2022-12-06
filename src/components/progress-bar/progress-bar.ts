@@ -14,29 +14,29 @@ import type { CSSResultGroup } from 'lit';
  * @since 2.0
  * @status stable
  *
- * @slot - A label to show inside the indicator.
+ * @slot - A label to show inside the progress indicator.
  *
- * @csspart base - The component's internal wrapper.
- * @csspart indicator - The progress bar indicator.
- * @csspart label - The progress bar label.
+ * @csspart base - The component's base wrapper.
+ * @csspart indicator - The progress bar's indicator.
+ * @csspart label - The progress bar's label.
  *
  * @cssproperty --height - The progress bar's height.
- * @cssproperty --track-color - The track color.
- * @cssproperty --indicator-color - The indicator color.
- * @cssproperty --label-color - The label color.
+ * @cssproperty --track-color - The color of the track.
+ * @cssproperty --indicator-color - The color of the indicator.
+ * @cssproperty --label-color - The color of the label.
  */
 @customElement('sl-progress-bar')
 export default class SlProgressBar extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
   private readonly localize = new LocalizeController(this);
 
-  /** The current progress, 0 to 100. */
+  /** The current progress as a percentage, 0 to 100. */
   @property({ type: Number, reflect: true }) value = 0;
 
   /** When true, percentage is ignored, the label is hidden, and the progress bar is drawn in an indeterminate state. */
   @property({ type: Boolean, reflect: true }) indeterminate = false;
 
-  /** A custom label for the progress bar's aria label. */
+  /** A custom label for assistive devices. */
   @property() label = '';
 
   render() {

@@ -14,19 +14,19 @@ import type { CSSResultGroup } from 'lit';
  * @since 2.0
  * @status stable
  *
- * @slot - The button's label.
- * @slot prefix - Used to prepend an icon or similar element to the button.
- * @slot suffix - Used to append an icon or similar element to the button.
+ * @slot - The radio button's label.
+ * @slot prefix - A presentational prefix icon or similar element.
+ * @slot suffix - A presentational suffix icon or similar element.
  *
  * @event sl-blur - Emitted when the button loses focus.
  * @event sl-focus - Emitted when the button gains focus.
  *
- * @csspart base - The component's internal wrapper.
- * @csspart button - The internal button element.
- * @csspart button--checked - The internal button element if checked
- * @csspart prefix - The prefix slot's container.
- * @csspart label - The button's label.
- * @csspart suffix - The suffix slot's container.
+ * @csspart base - The component's base wrapper.
+ * @csspart button - The internal `<button>` element.
+ * @csspart button--checked - The internal button element when the radio button is checked.
+ * @csspart prefix - The container that wraps the prefix.
+ * @csspart label - The container that wraps the radio button's label.
+ * @csspart suffix - The container that wraps the suffix.
  */
 @customElement('sl-radio-button')
 export default class SlRadioButton extends ShoelaceElement {
@@ -40,16 +40,16 @@ export default class SlRadioButton extends ShoelaceElement {
   @state() protected hasFocus = false;
   @state() checked = false;
 
-  /** The radio's value attribute. */
+  /** The radio's value. When selected, the radio group will receive this value. */
   @property() value: string;
 
-  /** Disables the radio. */
+  /** Disables the radio button. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
-  /** The button's size. */
+  /** The radio button's size. */
   @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
 
-  /** Draws a pill-style button with rounded edges. */
+  /** Draws a pill-style radio button with rounded edges. */
   @property({ type: Boolean, reflect: true }) pill = false;
 
   connectedCallback(): void {
@@ -57,12 +57,12 @@ export default class SlRadioButton extends ShoelaceElement {
     this.setAttribute('role', 'presentation');
   }
 
-  /** Sets focus on the button. */
+  /** Sets focus on the radio button. */
   focus(options?: FocusOptions) {
     this.input.focus(options);
   }
 
-  /** Removes focus from the button. */
+  /** Removes focus from the radio button. */
   blur() {
     this.input.blur();
   }

@@ -10,10 +10,14 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ## Next
 
+- 🚨 BREAKING: changed the default value of `date` in `<sl-relative-time>` to the current date instead of the Unix epoch
 - 🚨 BREAKING: removed the `handle-icon` part and slot from `<sl-image-comparer>` (use `handle` instead)
 - 🚨 BREAKING: removed the `handle` slot from `<sl-split-panel>` (use the `divider` slot instead)
+- 🚨 BREAKING: removed the `--box-shadow` custom property from `<sl-alert>` (apply a box shadow to `::part(base)` instead)
+- 🚨 BREAKING: removed the `play-icon` and `pause-icon` parts (use the `play-icon` and `pause-icon` slots instead)
 - Added `header-actions` slot to `<sl-dialog>` and `<sl-drawer>`
 - Added the `expand-icon` and `collapse-icon` slots to `<sl-details>` and refactored the icon animation [#1046](https://github.com/shoelace-style/shoelace/discussions/1046)
+- Added the `play-icon` and `pause-icon` slots to `<sl-animated-image>` so you can customize the default icons
 - Fixed a bug in `<sl-tree-item>` where `sl-selection-change` was emitted when the selection didn't change [#1030](https://github.com/shoelace-style/shoelace/pull/1030)
 - Fixed a bug in `<sl-button-group>` that caused the border to render incorrectly when hovering over icons inside buttons [#1035](https://github.com/shoelace-style/shoelace/issues/1035)
 - Fixed an incorrect default for `flip-fallback-strategy` in `<sl-popup>` that caused the fallback strategy to be `initial` instead of `best-fit`, which is inconsistent with Floating UI's default [#1036](https://github.com/shoelace-style/shoelace/issues/1036)
@@ -24,6 +28,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed the border radius in `<sl-dropdown>` so it matches with nested `<sl-menu>` elements
 - Improved IntelliSense in VS Code, courtesy of [Burton's amazing CEM Analyzer plugin](https://github.com/break-stuff/cem-plugin-vs-code-custom-data-generator)
 - Improved accessibility of `<sl-alert>` so the alert is announced and the close button has a label
+- Improved accessibility of `<sl-progress-ring>` so slotted labels are announced along with visually hidden labels
 - Refactored all styles and animations to use `translate`, `rotate`, and `scale` instead of `transform`
 - Removed slot wrappers from many components, allowing better control over user-applied styles
 - Removed unused aria attributes from `<sl-skeleton>`

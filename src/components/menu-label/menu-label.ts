@@ -12,7 +12,7 @@ import type { CSSResultGroup } from 'lit';
  *
  * @slot - The menu label's content.
  *
- * @csspart base - The component's internal wrapper.
+ * @csspart base - The component's base wrapper.
  */
 @customElement('sl-menu-label')
 export default class SlMenuLabel extends ShoelaceElement {

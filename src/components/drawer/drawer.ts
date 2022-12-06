@@ -24,7 +24,7 @@ import type { CSSResultGroup } from 'lit';
  *
  * @dependency sl-icon-button
  *
- * @slot - The drawer's content.
+ * @slot - The drawer's main content.
  * @slot label - The drawer's label. Alternatively, you can use the `label` attribute.
  * @slot footer - The drawer's footer, usually one or more buttons representing various options.
  *
@@ -39,16 +39,16 @@ import type { CSSResultGroup } from 'lit';
  *   `event.preventDefault()` will keep the drawer open. Avoid using this unless closing the drawer will result in
  *   destructive behavior such as data loss.
  *
- * @csspart base - The component's internal wrapper.
- * @csspart overlay - The overlay.
- * @csspart panel - The drawer panel (where the drawer and its content is rendered).
- * @csspart header - The drawer header.
+ * @csspart base - The component's base wrapper.
+ * @csspart overlay - The overlay that covers the screen behind the drawer.
+ * @csspart panel - The drawer's panel (where the drawer and its content are rendered).
+ * @csspart header - The drawer's header. This element wraps the title and header actions.
  * @csspart header-actions - Optional actions to add to the header. Works best with `<sl-icon-button>`.
- * @csspart title - The drawer title.
- * @csspart close-button - The close button.
- * @csspart close-button__base - The close button's `base` part.
- * @csspart body - The drawer body.
- * @csspart footer - The drawer footer.
+ * @csspart title - The drawer's title.
+ * @csspart close-button - The close button, an `<sl-icon-button>`.
+ * @csspart close-button__base - The close button's exported `base` part.
+ * @csspart body - The drawer's body.
+ * @csspart footer - The drawer's footer.
  *
  * @cssproperty --size - The preferred size of the drawer. This will be applied to the drawer's width or height
  *   depending on its `placement`. Note that the drawer will shrink to accommodate smaller screens.
@@ -81,13 +81,15 @@ export default class SlDrawer extends ShoelaceElement {
   private modal: Modal;
   private originalTrigger: HTMLElement | null;
 
-  /** Indicates whether or not the drawer is open. You can use this in lieu of the show/hide methods. */
+  /**
+   * Indicates whether or not the drawer is open. You can toggle this attribute to show and hide the drawer, or you can
+   * use the `show()` and `hide()` methods and this attribute will reflect the drawer's open state.
+   */
   @property({ type: Boolean, reflect: true }) open = false;
 
   /**
    * The drawer's label as displayed in the header. You should always include a relevant label even when using
-   * `no-header`, as it is required for proper accessibility. If you need to display HTML, you can use the `label` slot
-   * instead.
+   * `no-header`, as it is required for proper accessibility. If you need to display HTML, use the `label` slot instead.
    */
   @property({ reflect: true }) label = '';
 

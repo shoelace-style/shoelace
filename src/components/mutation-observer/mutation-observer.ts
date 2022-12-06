@@ -11,7 +11,7 @@ import type { CSSResultGroup } from 'lit';
  * @since 2.0
  * @status stable
  *
- * @event sl-mutation - Emitted when a mutation occurs.
+ * @event {{ mutationList: MutationRecord[] }} sl-mutation - Emitted when a mutation occurs.
  *
  * @slot - The content to watch for mutations.
  */
@@ -23,7 +23,7 @@ export default class SlMutationObserver extends ShoelaceElement {
 
   /**
    * Watches for changes to attributes. To watch only specific attributes, separate them by a space, e.g.
-   * `class id title`. To watch all attributes, use `*`.
+   * `attr="class id title"`. To watch all attributes, use `*`.
    */
   @property({ reflect: true }) attr: string;
 

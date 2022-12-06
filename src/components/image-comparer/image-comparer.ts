@@ -25,9 +25,9 @@ import type { CSSResultGroup } from 'lit';
  *
  * @event sl-change - Emitted when the position changes.
  *
- * @csspart base - The component's internal wrapper.
- * @csspart before - The container that holds the "before" image.
- * @csspart after - The container that holds the "after" image.
+ * @csspart base - The component's base wrapper.
+ * @csspart before - The container that wraps the before image.
+ * @csspart after - The container that wraps the after image.
  * @csspart divider - The divider that separates the images.
  * @csspart handle - The handle that the user drags to expose the after image.
  *

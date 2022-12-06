@@ -4,7 +4,7 @@ Shoelace components are just regular HTML elements, or [custom elements](https:/
 
 If you're new to custom elements, often referred to as "web components," this section will familiarize you with how to use them.
 
-## Properties
+## Attributes & Properties
 
 Many components have properties that can be set using attributes. For example, buttons accept a `size` attribute that maps to the `size` property which dictates the button's size.
 
@@ -18,7 +18,7 @@ Some properties are boolean, so they only have true/false values. To activate a 
 <sl-button disabled>Click me</sl-button>
 ```
 
-In rare cases, a property may require an array, an object, or a function. For example, to customize the color picker's list of preset swatches, you set the `swatches` property to an array of colors. This can be done with JavaScript.
+In rare cases, a property may require an array, an object, or a function. For example, to customize the color picker's list of preset swatches, you set the `swatches` property to an array of colors. This must be done with JavaScript.
 
 ```html
 <sl-color-picker></sl-color-picker>

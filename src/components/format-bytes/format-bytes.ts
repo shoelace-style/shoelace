@@ -15,7 +15,7 @@ export default class SlFormatBytes extends ShoelaceElement {
   /** The number to format in bytes. */
   @property({ type: Number }) value = 0;
 
-  /** The unit to display. */
+  /** The type of unit to display. */
   @property() unit: 'byte' | 'bit' = 'byte';
 
   /** Determines how to display the result, e.g. "100 bytes", "100 b", or "100b". */

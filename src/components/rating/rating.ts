@@ -21,7 +21,7 @@ import type { CSSResultGroup } from 'lit';
  *
  * @event sl-change - Emitted when the rating's value changes.
  *
- * @csspart base - The component's internal wrapper.
+ * @csspart base - The component's base wrapper.
  *
  * @cssproperty --symbol-color - The inactive color for symbols.
  * @cssproperty --symbol-color-active - The active color for symbols.
@@ -39,7 +39,7 @@ export default class SlRating extends ShoelaceElement {
   @state() private hoverValue = 0;
   @state() private isHovering = false;
 
-  /** A label to describe the rating to assistive devices. */
+  /** A label that describes the rating to assistive devices. */
   @property() label = '';
 
   /** The current rating. */
@@ -48,7 +48,10 @@ export default class SlRating extends ShoelaceElement {
   /** The highest rating to show. */
   @property({ type: Number }) max = 5;
 
-  /** The minimum increment value allowed by the control. */
+  /**
+   * The precision at which the rating will increase and decrease. For example, to allow half-star ratings, set this
+   * attribute to `0.5`.
+   */
   @property({ type: Number }) precision = 1;
 
   /** Makes the rating readonly. */
@@ -57,7 +60,11 @@ export default class SlRating extends ShoelaceElement {
   /** Disables the rating. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
-  /** The name of the icon to display as the symbol. */
+  /**
+   * A function that customizes the symbol to be rendered. The first and only argument is the rating's current value.
+   * The function should return a string containing trusted HTML of the symbol to render at the specified value. Works
+   * well with `<sl-icon>` elements.
+   */
   @property() getSymbol: (value: number) => string = () => '<sl-icon name="star-fill" library="system"></sl-icon>';
 
   /** Sets focus on the rating. */

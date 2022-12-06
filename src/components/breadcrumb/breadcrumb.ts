@@ -14,11 +14,11 @@ import type { CSSResultGroup } from 'lit';
  * @status stable
  *
  * @slot - One or more breadcrumb items to display.
- * @slot separator - The separator to use between breadcrumb items.
+ * @slot separator - The separator to use between breadcrumb items. Works best with `<sl-icon>`.
  *
  * @dependency sl-icon
  *
- * @csspart base - The component's internal wrapper.
+ * @csspart base - The component's base wrapper.
  */
 @customElement('sl-breadcrumb')
 export default class SlBreadcrumb extends ShoelaceElement {
@@ -31,10 +31,10 @@ export default class SlBreadcrumb extends ShoelaceElement {
   private separatorDir = this.localize.dir();
 
   /**
-   * The label to use for the breadcrumb control. This will not be shown, but it will be announced by screen readers and
-   * other assistive devices.
+   * The label to use for the breadcrumb control. This will not be shown on the screen, but it will be announced by
+   * screen readers and other assistive devices to provide more context for users.
    */
-  @property() label = 'Breadcrumb';
+  @property() label = '';
 
   // Generates a clone of the separator element to use for each breadcrumb item
   private getSeparator() {

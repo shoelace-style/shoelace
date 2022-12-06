@@ -272,7 +272,7 @@ export default class SlPopup extends ShoelaceElement {
     }
   }
 
-  /** Recalculate and repositions the popup. */
+  /** Forces the popup to recalculate and reposition itself. */
   reposition() {
     // Nothing to do if the popup is inactive or the anchor doesn't exist
     if (!this.active || !this.anchorEl) {

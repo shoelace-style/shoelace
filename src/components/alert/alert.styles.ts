@@ -19,7 +19,6 @@ export default css`
     border: solid var(--sl-panel-border-width) var(--sl-panel-border-color);
     border-top-width: calc(var(--sl-panel-border-width) * 3);
     border-radius: var(--sl-border-radius-medium);
-    box-shadow: var(--box-shadow);
     font-family: var(--sl-font-sans);
     font-size: var(--sl-font-size-small);
     font-weight: var(--sl-font-weight-normal);

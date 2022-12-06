@@ -21,9 +21,9 @@ import type { CSSResultGroup } from 'lit';
  *
  * @event sl-close - Emitted when the tab is closable and the close button is activated.
  *
- * @csspart base - The component's internal wrapper.
- * @csspart close-button - The close button.
- * @csspart close-button__base - The close button's `base` part.
+ * @csspart base - The component's base wrapper.
+ * @csspart close-button - The close button, an `<sl-icon-button>`.
+ * @csspart close-button__base - The close button's exported `base` part.
  */
 @customElement('sl-tab')
 export default class SlTab extends ShoelaceElement {
@@ -35,16 +35,16 @@ export default class SlTab extends ShoelaceElement {
   private readonly attrId = autoIncrement();
   private readonly componentId = `sl-tab-${this.attrId}`;
 
-  /** The name of the tab panel the tab will control. The panel must be located in the same tab group. */
+  /** The name of the tab panel this tab is associated with. The panel must be located in the same tab group. */
   @property({ reflect: true }) panel = '';
 
   /** Draws the tab in an active state. */
   @property({ type: Boolean, reflect: true }) active = false;
 
-  /** Makes the tab closable and shows a close icon. */
+  /** Makes the tab closable and shows a close button. */
   @property({ type: Boolean }) closable = false;
 
-  /** Draws the tab in a disabled state. */
+  /** Disables the tab and prevents selection. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
   connectedCallback() {

@@ -15,7 +15,7 @@ import type { CSSResultGroup } from 'lit';
  *
  * @slot - The tab panel's content.
  *
- * @csspart base - The component's internal wrapper.
+ * @csspart base - The component's base wrapper.
  *
  * @cssproperty --padding - The tab panel's padding.
  */

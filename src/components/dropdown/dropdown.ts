@@ -26,7 +26,7 @@ import type { CSSResultGroup } from 'lit';
  *
  * @dependency sl-popup
  *
- * @slot - The dropdown's content.
+ * @slot - The dropdown's main content.
  * @slot trigger - The dropdown's trigger, usually a `<sl-button>` element.
  *
  * @event sl-show - Emitted when the dropdown opens.
@@ -34,7 +34,7 @@ import type { CSSResultGroup } from 'lit';
  * @event sl-hide - Emitted when the dropdown closes.
  * @event sl-after-hide - Emitted after the dropdown closes and all animations are complete.
  *
- * @csspart base - The component's internal wrapper.
+ * @csspart base - The component's base wrapper.
  * @csspart trigger - The container that wraps the trigger.
  * @csspart panel - The panel that gets shown when the dropdown is open.
  *
@@ -51,7 +51,10 @@ export default class SlDropdown extends ShoelaceElement {
 
   private readonly localize = new LocalizeController(this);
 
-  /** Indicates whether or not the dropdown is open. You can use this in lieu of the show/hide methods. */
+  /**
+   * Indicates whether or not the dropdown is open. You can toggle this attribute to show and hide the dropdown, or you
+   * can use the `show()` and `hide()` methods and this attribute will reflect the dropdown's open state.
+   */
   @property({ type: Boolean, reflect: true }) open = false;
 
   /**
@@ -77,11 +80,14 @@ export default class SlDropdown extends ShoelaceElement {
 
   /**
    * By default, the dropdown is closed when an item is selected. This attribute will keep it open instead. Useful for
-   * controls that allow multiple selections.
+   * dropdowns that allow for multiple interactions.
    */
   @property({ attribute: 'stay-open-on-select', type: Boolean, reflect: true }) stayOpenOnSelect = false;
 
-  /** The dropdown will close when the user interacts outside of this element (e.g. clicking). */
+  /**
+   * The dropdown will close when the user interacts outside of this element (e.g. clicking). Useful for composing other
+   * components that use a dropdown internally.
+   */
   @property({ attribute: false }) containingElement?: HTMLElement;
 
   /** The distance in pixels from which to offset the panel away from its trigger. */
@@ -92,7 +98,7 @@ export default class SlDropdown extends ShoelaceElement {
 
   /**
    * Enable this option to prevent the panel from being clipped when the component is placed inside a container with
-   * `overflow: auto|scroll`.
+   * `overflow: auto|scroll`. Hoisting uses a fixed positioning strategy that works in many, but not all, scenarios.
    */
   @property({ type: Boolean }) hoist = false;
 

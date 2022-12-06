@@ -48,13 +48,13 @@ declare const EyeDropper: EyeDropperConstructor;
  * @dependency sl-input
  * @dependency sl-visually-hidden
  *
- * @slot label - The color picker's label. Alternatively, you can use the `label` attribute.
+ * @slot label - The color picker's form label. Alternatively, you can use the `label` attribute.
  *
  * @event sl-change Emitted when the color picker's value changes.
  *
- * @csspart base - The component's internal wrapper.
+ * @csspart base - The component's base wrapper.
  * @csspart trigger - The color picker's dropdown trigger.
- * @csspart swatches - The container that holds swatches.
+ * @csspart swatches - The container that holds the swatches.
  * @csspart swatch - Each individual swatch.
  * @csspart grid - The color grid.
  * @csspart grid-handle - The color grid's handle.
@@ -65,17 +65,17 @@ declare const EyeDropper: EyeDropperConstructor;
  * @csspart preview - The preview color.
  * @csspart input - The text input.
  * @csspart eye-dropper-button - The eye dropper button.
- * @csspart eye-dropper-button__button - The eye dropper button's `button` part.
- * @csspart eye-dropper-button__prefix - The eye dropper button's `prefix` part.
- * @csspart eye-dropper-button__label - The eye dropper button's `label` part.
- * @csspart eye-dropper-button__button-suffix - The eye dropper button's `suffix` part.
- * @csspart eye-dropper-button__caret - The eye dropper button's `caret` part.
+ * @csspart eye-dropper-button__button - The eye dropper button's exported `button` part.
+ * @csspart eye-dropper-button__prefix - The eye dropper button's exported `prefix` part.
+ * @csspart eye-dropper-button__label - The eye dropper button's exported `label` part.
+ * @csspart eye-dropper-button__button-suffix - The eye dropper button's exported `suffix` part.
+ * @csspart eye-dropper-button__caret - The eye dropper button's exported `caret` part.
  * @csspart format-button - The format button.
- * @csspart format-button__button - The format button's `button` part.
- * @csspart format-button__prefix - The format button's `prefix` part.
- * @csspart format-button__label - The format button's `label` part.
- * @csspart format-button__button-suffix - The format button's `suffix` part.
- * @csspart format-button__caret - The format button's `caret` part.
+ * @csspart format-button__button - The format button's exported `button` part.
+ * @csspart format-button__prefix - The format button's exported `prefix` part.
+ * @csspart format-button__label - The format button's exported `label` part.
+ * @csspart format-button__button-suffix - The format button's exported `suffix` part.
+ * @csspart format-button__caret - The format button's exported `caret` part.
  *
  * @cssproperty --grid-width - The width of the color grid.
  * @cssproperty --grid-height - The height of the color grid.
@@ -108,10 +108,14 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
   @state() private alpha = 100;
   @state() invalid = false;
 
-  /** The current color. */
+  /**
+   * The current value of the color picker. The value's format will vary based the `format` attribute. To get the value
+   * in a specific format, use the `getFormattedValue()` method. The value is submitted as a name/value pair with form
+   * data.
+   */
   @property() value = '';
 
-  /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
+  /** The default value of the form control. Primarily used for resetting the form control. */
   @defaultValue() defaultValue = '';
 
   /**
@@ -121,22 +125,21 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
   @property() label = '';
 
   /**
-   * The format to use for the display value. If opacity is enabled, these will translate to HEXA, RGBA, and HSLA
-   * respectively. The color picker will always accept user input in any format (including CSS color names) and convert
-   * it to the desired format.
+   * The format to use. If opacity is enabled, these will translate to HEXA, RGBA, and HSLA respectively. The color
+   * picker will accept user input in any format (including CSS color names) and convert it to the desired format.
    */
   @property() format: 'hex' | 'rgb' | 'hsl' = 'hex';
 
-  /** Renders the color picker inline rather than inside a dropdown. */
+  /** Renders the color picker inline rather than in a dropdown. */
   @property({ type: Boolean, reflect: true }) inline = false;
 
   /** Determines the size of the color picker's trigger. This has no effect on inline color pickers. */
   @property() size: 'small' | 'medium' | 'large' = 'medium';
 
-  /** Removes the format toggle. */
+  /** Removes the button that lets users toggle between format.   */
   @property({ attribute: 'no-format-toggle', type: Boolean }) noFormatToggle = false;
 
-  /** The input's name attribute. */
+  /** The name of the form control, submitted as a name/value pair with form data. */
   @property() name = '';
 
   /** Disables the color picker. */
@@ -144,14 +147,14 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
 
   /**
    * Enable this option to prevent the panel from being clipped when the component is placed inside a container with
-   * `overflow: auto|scroll`.
+   * `overflow: auto|scroll`. Hoisting uses a fixed positioning strategy that works in many, but not all, scenarios.
    */
   @property({ type: Boolean }) hoist = false;
 
-  /** Whether to show the opacity slider. */
+  /** Shows the opacity slider. Enabling this will cause the formatted value to be HEXA, RGBA, or HSLA. */
   @property({ type: Boolean }) opacity = false;
 
-  /** By default, the value will be set in lowercase. Set this to true to set it in uppercase instead. */
+  /** By default, values are lowercase. With this attribute, values will be uppercase instead. */
   @property({ type: Boolean }) uppercase = false;
 
   /**

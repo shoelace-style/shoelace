@@ -28,29 +28,29 @@ export function isTreeItem(node: Node) {
  * @dependency sl-icon
  * @dependency sl-spinner
  *
- * @event sl-expand - Emitted when the item expands.
- * @event sl-after-expand - Emitted after the item expands and all animations are complete.
- * @event sl-collapse - Emitted when the item collapses.
- * @event sl-after-collapse - Emitted after the item collapses and all animations are complete.
- * @event sl-lazy-change - Emitted when the item's lazy state changes.
+ * @event sl-expand - Emitted when the tree item expands.
+ * @event sl-after-expand - Emitted after the tree item expands and all animations are complete.
+ * @event sl-collapse - Emitted when the tree item collapses.
+ * @event sl-after-collapse - Emitted after the tree item collapses and all animations are complete.
+ * @event sl-lazy-change - Emitted when the tree item's lazy state changes.
  * @event sl-lazy-load - Emitted when a lazy item is selected. Use this event to asynchronously load data and append
  *  items to the tree before expanding. After appending new items, remove the `lazy` attribute to remove the loading
  *  state and update the tree.
  *
  * @slot - The default slot.
- * @slot expand-icon - The icon to show when the item is expanded.
- * @slot collapse-icon - The icon to show when the item is collapsed.
+ * @slot expand-icon - The icon to show when the tree item is expanded.
+ * @slot collapse-icon - The icon to show when the tree item is collapsed.
  *
- * @csspart base - The component's internal wrapper.
- * @csspart item - The item's main container.
- * @csspart item--disabled - Applied when the item is disabled.
- * @csspart item--expanded - Applied when the item is expanded.
+ * @csspart base - The component's base wrapper.
+ * @csspart item - The tree item's container. This element wraps everything except slotted tree item children.
+ * @csspart item--disabled - Applied when the tree item is disabled.
+ * @csspart item--expanded - Applied when the tree item is expanded.
  * @csspart item--indeterminate - Applied when the selection is indeterminate.
- * @csspart item--selected - Applied when the item is selected.
- * @csspart indentation - The item's indentation container.
- * @csspart expand-button - The item's expand button.
- * @csspart label - The item's label.
- * @csspart children - The item's children container.
+ * @csspart item--selected - Applied when the tree item is selected.
+ * @csspart indentation - The tree item's indentation container.
+ * @csspart expand-button - The container that wraps the tree item's expand button and spinner.
+ * @csspart label - The tree item's label.
+ * @csspart children - The container that wraps the tree item's nested children.
  */
 @customElement('sl-tree-item')
 export default class SlTreeItem extends ShoelaceElement {

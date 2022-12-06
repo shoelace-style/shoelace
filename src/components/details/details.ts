@@ -19,20 +19,20 @@ import type { CSSResultGroup } from 'lit';
  *
  * @dependency sl-icon
  *
- * @slot - The details' content.
+ * @slot - The details' main content.
  * @slot summary - The details' summary. Alternatively, you can use the `summary` attribute.
- * @slot expand-icon - The expand icon's `<slot>`.
- * @slot collapse-icon - The collapse icon's `<slot>`.
+ * @slot expand-icon - Optional expand icon to use instead of the default. Works best with `<sl-icon>`.
+ * @slot collapse-icon - Optional collapse icon to use instead of the default. Works best with `<sl-icon>`.
  *
  * @event sl-show - Emitted when the details opens.
  * @event sl-after-show - Emitted after the details opens and all animations are complete.
  * @event sl-hide - Emitted when the details closes.
  * @event sl-after-hide - Emitted after the details closes and all animations are complete.
  *
- * @csspart base - The component's internal wrapper.
- * @csspart header - The summary header.
- * @csspart summary - The details summary.
- * @csspart summary-icon - The container that houses the expand and collapse icons.
+ * @csspart base - The component's base wrapper.
+ * @csspart header - The header that wraps both the summary and the expand/collapse icon.
+ * @csspart summary - The container that wraps the summary.
+ * @csspart summary-icon - The container that wraps the expand/collapse icons.
  * @csspart content - The details content.
  *
  * @animation details.show - The animation to use when showing details. You can use `height: auto` with this animation.
@@ -49,10 +49,13 @@ export default class SlDetails extends ShoelaceElement {
 
   private readonly localize = new LocalizeController(this);
 
-  /** Indicates whether or not the details is open. You can use this in lieu of the show/hide methods. */
+  /**
+   * Indicates whether or not the details is open. You can toggle this attribute to show and hide the details, or you
+   * can use the `show()` and `hide()` methods and this attribute will reflect the details' open state.
+   */
   @property({ type: Boolean, reflect: true }) open = false;
 
-  /** The summary to show in the details header. If you need to display HTML, use the `summary` slot instead. */
+  /** The summary to show in the header. If you need to display HTML, use the `summary` slot instead. */
   @property() summary: string;
 
   /** Disables the details so it can't be toggled. */

@@ -23,7 +23,7 @@ import type { CSSResultGroup } from 'lit';
  * @slot prefix - Used to prepend an icon or similar element to the menu item.
  * @slot suffix - Used to append an icon or similar element to the menu item.
  *
- * @csspart base - The component's internal wrapper.
+ * @csspart base - The component's base wrapper.
  * @csspart checked-icon - The checked icon, which is only visible when the menu item is checked.
  * @csspart prefix - The prefix container.
  * @csspart label - The menu item label.
