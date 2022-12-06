@@ -337,7 +337,7 @@ export default class SlTabGroup extends ShoelaceElement {
       case 'end':
         this.indicator.style.width = 'auto';
         this.indicator.style.height = `${height}px`;
-        this.indicator.style.translate = `${offset.top}px`;
+        this.indicator.style.translate = `0 ${offset.top}px`;
         break;
     }
   }
