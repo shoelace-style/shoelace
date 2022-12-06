@@ -8,7 +8,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ?> During the beta period, these restrictions may be relaxed in the event of a mission-critical bug. 🐛
 
-## Next
+## 2.0.0-beta.86
 
 - 🚨 BREAKING: changed the default value of `date` in `<sl-relative-time>` to the current date instead of the Unix epoch
 - 🚨 BREAKING: removed the `handle-icon` part and slot from `<sl-image-comparer>` (use `handle` instead)
