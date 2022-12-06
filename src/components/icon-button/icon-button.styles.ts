@@ -25,7 +25,7 @@ export default css`
   }
 
   .icon-button:hover:not(.icon-button--disabled),
-  .icon-button:focus:not(.icon-button--disabled) {
+  .icon-button:focus-visible:not(.icon-button--disabled) {
     color: var(--sl-color-primary-600);
   }
 
