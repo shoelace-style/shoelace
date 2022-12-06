@@ -97,14 +97,14 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
   @property() type: 'button' | 'submit' | 'reset' = 'button';
 
   /**
-   * The name of the button, submitted as a name/value pair with form data. This attribute is ignored when `href` is
-   * present.
+   * The name of the button, submitted as a name/value pair with form data, but only when this button is the submitter.
+   * This attribute is ignored when `href` is present.
    */
   @property() name = '';
 
   /**
-   * The value of the button, submitted as a pair with the button's name as part of the form data. This attribute is
-   * ignored when `href` is present.
+   * The value of the button, submitted as a pair with the button's name as part of the form data, but only when this
+   * button is the submitter. This attribute is ignored when `href` is present.
    */
   @property() value = '';
 
