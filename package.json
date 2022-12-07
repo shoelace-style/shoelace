@@ -17,6 +17,7 @@
     "./dist/themes/*": "./dist/themes/*",
     "./dist/components/*": "./dist/components/*",
     "./dist/utilities/*": "./dist/utilities/*",
+    "./dist/react": "./dist/react/index.js",
     "./dist/react/*": "./dist/react/*",
     "./dist/translations/*": "./dist/translations/*"
   },
