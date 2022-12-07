@@ -8,6 +8,13 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ?> During the beta period, these restrictions may be relaxed in the event of a mission-critical bug. 🐛
 
+## Next
+
+- Added the `sl-input` event to `<sl-checkbox>`, `<sl-color-picker>`, `<sl-radio>`, `<sl-range>`, and `<sl-switch>`
+- Fixed a bug in `<sl-input>` that caused the `sl-change` event to be incorrectly emitted when the value was set programmatically [#917](https://github.com/shoelace-style/shoelace/issues/917)
+- Fixed a bug in `<sl-color-picker>` that sometimes prevented the color from updating when clicking or tapping on the controls
+- Fixed a bug in `<sl-color-picker>` that prevented text from being entered in the color input
+
 ## 2.0.0-beta.86
 
 - 🚨 BREAKING: changed the default value of `date` in `<sl-relative-time>` to the current date instead of the Unix epoch

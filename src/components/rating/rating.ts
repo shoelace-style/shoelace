@@ -5,7 +5,6 @@ import { styleMap } from 'lit/directives/style-map.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { clamp } from '../../internal/math';
 import ShoelaceElement from '../../internal/shoelace-element';
-import { watch } from '../../internal/watch';
 import { LocalizeController } from '../../utilities/localize';
 import '../icon/icon';
 import styles from './rating.styles';
@@ -97,6 +96,7 @@ export default class SlRating extends ShoelaceElement {
 
   handleClick(event: MouseEvent) {
     this.setValue(this.getValueFromMousePosition(event));
+    this.emit('sl-change');
   }
 
   setValue(newValue: number) {
@@ -111,6 +111,7 @@ export default class SlRating extends ShoelaceElement {
   handleKeyDown(event: KeyboardEvent) {
     const isLtr = this.localize.dir() === 'ltr';
     const isRtl = this.localize.dir() === 'rtl';
+    const oldValue = this.value;
 
     if (this.disabled || this.readonly) {
       return;
@@ -136,6 +137,10 @@ export default class SlRating extends ShoelaceElement {
     if (event.key === 'End') {
       this.value = this.max;
       event.preventDefault();
+    }
+
+    if (this.value !== oldValue) {
+      this.emit('sl-change');
     }
   }
 
@@ -166,14 +171,10 @@ export default class SlRating extends ShoelaceElement {
   handleTouchEnd(event: TouchEvent) {
     this.isHovering = false;
     this.setValue(this.hoverValue);
+    this.emit('sl-change');
 
     // Prevent click on mobile devices
     event.preventDefault();
-  }
-
-  @watch('value', { waitUntilFirstUpdate: true })
-  handleValueChange() {
-    this.emit('sl-change');
   }
 
   roundToPrecision(numberToRound: number, precision = 0.5) {

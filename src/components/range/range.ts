@@ -22,9 +22,10 @@ import type { CSSResultGroup } from 'lit';
  * @slot label - The range's label. Alternatively, you can use the `label` attribute.
  * @slot help-text - Text that describes how to use the input. Alternatively, you can use the `help-text` attribute.
  *
- * @event sl-change - Emitted when the control's value changes.
  * @event sl-blur - Emitted when the control loses focus.
+ * @event sl-change - Emitted when an alteration to the control's value is committed by the user.
  * @event sl-focus - Emitted when the control gains focus.
+ * @event sl-input - Emitted when the control receives input.
  *
  * @csspart form-control - The form control that wraps the label, input, and help text.
  * @csspart form-control-label - The label's wrapper.
@@ -132,7 +133,6 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
     this.input.stepUp();
     if (this.value !== Number(this.input.value)) {
       this.value = Number(this.input.value);
-      this.emit('sl-change');
     }
   }
 
@@ -141,7 +141,6 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
     this.input.stepDown();
     if (this.value !== Number(this.input.value)) {
       this.value = Number(this.input.value);
-      this.emit('sl-change');
     }
   }
 
@@ -161,10 +160,13 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
     this.invalid = !this.input.checkValidity();
   }
 
+  handleChange() {
+    this.emit('sl-change');
+  }
+
   handleInput() {
     this.value = parseFloat(this.input.value);
-    this.emit('sl-change');
-
+    this.emit('sl-input');
     this.syncRange();
   }
 
@@ -299,6 +301,7 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
               step=${ifDefined(this.step)}
               .value=${live(this.value.toString())}
               aria-describedby="help-text"
+              @change=${this.handleChange}
               @input=${this.handleInput}
               @focus=${this.handleFocus}
               @blur=${this.handleBlur}

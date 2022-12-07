@@ -248,6 +248,10 @@ Components must only emit custom events, and all custom events must start with `
 
 This convention avoids the problem of browsers lowercasing attributes, causing some frameworks to be unable to listen to them. This problem isn't specific to one framework, but [Vue's documentation](https://vuejs.org/v2/guide/components-custom-events.html#Event-Names) provides a good explanation of the problem.
 
+### Change Events
+
+When change events are emitted by Shoelace components, they should be named `sl-change` and they should only be emitted as a result of user input. Programmatic changes, such as setting `el.value = '…'` _should not_ result in a change event being emitted. This is consistent with how native form controls work.
+
 ### CSS Custom Properties
 
 To expose custom properties as part of a component's API, scope them to the `:host` block.
